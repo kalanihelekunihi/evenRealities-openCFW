@@ -170,6 +170,15 @@ def analyze(image=IMAGE):
         or wide_strict != [(0x00571490, 0x00571CB0)]
     ):
         raise common.AuditError("whole-image branch classification changed")
+    external_entries = [
+        pair for pair in entries if not PHYSICAL[0] <= pair[0] < PHYSICAL[1]
+    ]
+    if external_entries != [
+        (0x00538716, 0x0056F4A0),
+        (0x0053A218, 0x0056F4A0),
+        (0x0053A356, 0x0056F92C),
+    ]:
+        raise common.AuditError("external PT entry topology changed")
 
     raw_matches = []
     exact_entries = []
@@ -226,6 +235,12 @@ def analyze(image=IMAGE):
             "indirect_body_calls": 1,
             "bounded_internal_dispatches": 1,
             "direct_bl_entry_sites": 30,
+            "external_direct_bl_entry_sites": len(external_entries),
+            "external_direct_bl_entries": [
+                {"callsite": f"0x{callsite:08X}",
+                 "target": f"0x{target:08X}"}
+                for callsite, target in external_entries
+            ],
             "stored_function_pointers": 66,
             "unaligned_pseudo_bl": 4,
             "external_strict_interior_ingress": 0,

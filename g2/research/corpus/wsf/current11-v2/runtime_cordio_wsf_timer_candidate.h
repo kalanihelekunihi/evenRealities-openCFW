@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-excluded clean-room ABI for the recovered G2 Cordio/Ambiq
  * FreeRTOS timer helpers.  This intentionally does not include the public

@@ -1,0 +1,14 @@
+kind	name	start	end	size	sha256	disposition	provider	license_status	evidence
+function	am_hal_mspi_enable	0x00425066	0x004250f0	138	3e8eafec68e5f33ec128fd64c1386692323e9b175993c267d6a2bb7ec3ac155c	exact_dual_profile_candidate	AmbiqSuite 5.1.0 lifecycle semantics	BSD-3-Clause	handle/configured guards, command queue initialization, state reset, enable bit, callers, and stock bytes
+function	am_hal_mspi_disable	0x004250f0	0x00425166	118	d99c52bed1418f48aab03ebc6fafc8faa36b93f3a980e0bbbacaa423aa7566bc	exact_dual_profile_candidate	AmbiqSuite 5.1.0 lifecycle semantics	BSD-3-Clause	enable/idempotence, busy refusal, CQ stop, XIP delay, state transition, callers, and stock bytes
+retained_data	lifecycle_alignment	0x00425166	0x0042516c	6	ca544611ca4f75265333352cf9e8b7c5d552af2e9fb157b6cbc6cd05b550b475	authenticated_data	stock firmware	firmware provenance	alignment and bounded literal bytes
+function	am_hal_mspi_deinitialize	0x0042516c	0x004251a4	56	17e2e38a57e5a1669a591cf61ad92ff4b5ca8a1747673512410737ac452d689b	exact_dual_profile_candidate	AmbiqSuite 5.1.0 lifecycle semantics	BSD-3-Clause	handle validation, conditional disable, init-bit clear, module clear, callers, and stock bytes
+caller	enable_callers	0x00420378,0x00420e5a	-	-	-	authenticated_callers	G2 bootloader MSPI services	firmware provenance	direct BLs
+caller	disable_callers	0x00420e10,0x0042518e	-	-	-	authenticated_callers	G2 bootloader MSPI services	firmware provenance	direct BLs including deinitialize
+caller	deinitialize_callers	0x0042031c,0x0042036c,0x004203a6	-	-	-	authenticated_callers	G2 bootloader MSPI setup and unwind	firmware provenance	direct BLs
+provider	cq_init	0x00423f28	0x00423f54	44	0786b7e1c83135b045d7768c57504655b37e6c45c143398505689ce984117911	source_owned_provider	G2 command queue initializer	GPL-3.0-or-later	enable call at 0x42509c
+provider	cq_disable	0x00423fac	0x00423fb8	12	8c21c4878a3125546a7201b39610d661f69d8da7e1cae81d3eb223fdf919fb0	source_owned_provider	G2 command queue disable	GPL-3.0-or-later	disable call at 0x425132
+provider	cq_term	0x00423f54	0x00423f8e	58	-	source_owned_provider	G2 command queue terminator	GPL-3.0-or-later	disable call at 0x42513c
+provider	delay_us	0x0041d1c0	0x0041d246	134	-	retained_provider	AmbiqSuite delay provider	firmware provenance	XIP-off delay call at 0x42515e
+successor	am_hal_mspi_control	0x004251c0	-	-	-	next_sequential_frontier	AmbiqSuite 5.1.0 am_hal_mspi_control	BSD-3-Clause	28 authenticated literal bytes at 0x4251a4 precede the next body
+hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project evidence gate	directed hardware testing is deferred by project direction; future CQ, DMA, XIP, interrupt, timing, lifecycle, and cold-boot evidence remains required

@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 
 #ifndef OPEN_CFW_BOOTLOADER_READ_IPSR
 static unsigned int open_cfw_bootloader_read_ipsr(void)

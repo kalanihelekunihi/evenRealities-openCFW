@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 
 #define OPEN_CFW_AMBIQ_GPU_PATCH_HOST_MODEL 1
 #include "../../components/shared/lvgl/runtime_ambiq_gpu_patch_accessors_candidate.h"

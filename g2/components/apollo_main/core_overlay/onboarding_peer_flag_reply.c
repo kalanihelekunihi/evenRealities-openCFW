@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Peer onboarding-flag reply matched to stock entry 0x0047E51C.
  */

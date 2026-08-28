@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room product BLE callback surface reconstructed from stock
  * 0x004B7478...0x004B75CD.

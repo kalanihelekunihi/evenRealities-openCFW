@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: MIT
+raw_vector	payload_entry	name	start	end	bytes	sha256	role	source_disposition
+0x465D	0x135C	shared_default_handler	0x135C	0x135E	2	575fc8fa9e92ffe7d57a6aef6f1168f39da04f07d6bcd5b5e17883bff7b33165	shared NMI/SVC/PendSV/SysTick/external-IRQ default target	typed startup behavior; provider or MIT clean-room source still required
+0x465F	0x135E	hardfault_halt_handler	0x135E	0x1366	8	76df2f1edb1a47699b952e59c124b1c2bc8f442272c16a4192c8adb94de54f3a	HardFault target calls the pinned halt loop at payload 0x7038	typed startup behavior; provider or MIT clean-room source still required
+0x4675	0x1374	reset_startup_handler	0x1374	0x13DC	104	db0963144ca483b44bfb640b4a31207f3d90b3cb1cfbc342d19f6217f47cfb2a	reset/startup target; bounded before the literal pool at 0x13DC	typed startup behavior; provider or MIT clean-room source still required

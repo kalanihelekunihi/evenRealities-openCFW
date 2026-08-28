@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* Clean-room reconstruction of the stock service_kvdb_als_scale.c object. */
 
 #include <stddef.h>

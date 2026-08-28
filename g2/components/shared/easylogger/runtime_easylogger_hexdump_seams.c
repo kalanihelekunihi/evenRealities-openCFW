@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-excluded clean-room recovery of the bounded library and G2
  * transport seams used by EasyLogger elog_hexdump in firmware 2.2.6.10.

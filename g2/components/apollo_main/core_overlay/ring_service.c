@@ -1,7 +1,7 @@
 /*
  * OpenCFW clean-room G2 Ring protocol service.
  *
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Recreated from authenticated linked-object behavior and ABI evidence.  No
  * vendor source text is included.

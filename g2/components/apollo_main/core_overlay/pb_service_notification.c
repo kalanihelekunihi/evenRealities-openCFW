@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only
+/* SPDX-License-Identifier: MIT
  * Clean-room implementation of the nine linked G2 pb_service_notification.c
  * entries. Diagnostic-only logging/assertions are omitted.
  */

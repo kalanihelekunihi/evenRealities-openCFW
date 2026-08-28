@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded BLE connection-mode control helpers matched to stock entries
  * 0x004780F8, 0x00478110, 0x00478160, 0x004781F4, and 0x00478252.

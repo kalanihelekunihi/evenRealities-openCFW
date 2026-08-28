@@ -1,26 +1,35 @@
 {
   "component_overrides": {
     "apollo_bootloader": {
-      "function": "Even Apollo510B bootloader with source-replaced EasyLogger formatting/copy helpers, littlefs v2.10.1 leaves including the max/min/alignment and 32-bit endian utility quartets, fallback npw2/ctz/popc bit-helper trio, tag validity/type1/type3/id/size/chunk and metadata-list open predicates, disk-version major/minor pair, allocator lookahead helper, and exact upstream AmbiqSuite 5.1.0 MSPI interrupt-clear leaf; recovered S200 redirect_init two-mutex initialization entry; recovered Arm EABI byte-fill and forward-copy primitives; recovered bounded byte-comparison, string-span, CRC-32, and SRAM-word helpers; recovered numeric, formatting, logging, substring, critical-context, runtime-gate, dispatcher, callback, object, event-flags, tagged-handle, semaphore, message-queue, bit-width, count-trailing-zeros, and floor-log2 wrappers through 0x004169FC; recovered Arm EABI byte-fill primitive; recovered Arm EABI forward-copy primitive; recovered bounded byte-comparison primitive; recovered reflected CRC-32 update primitive; recovered reject-set string-span primitive; recovered accept-set string-span primitive; recovered SRAM-word setter at 0x200270CC; recovered unsigned 64-bit divide-by-ten helper; recovered unsigned decimal digit-count helper; recovered signed-magnitude decimal digit-count helper; recovered hexadecimal digit-count helper; recovered wrapping decimal parser; recovered unsigned 64-bit decimal output helper; recovered unsigned 64-bit hexadecimal output helper; recovered nullable string-length helper; recovered null-output-aware repeated-character helper; recovered fixed-point float formatter; recovered bootloader logging formatter core; recovered bootloader variadic logging dispatch wrapper; recovered substring-search primitive; recovered critical-context predicate; recovered runtime-state gate acquisition wrapper; recovered runtime-state and SRAM-gate mapper; recovered runtime-state gate release wrapper; recovered critical-context value-dispatch wrapper; recovered address-identified runtime dispatcher at 0x004160FE; recovered address-identified retained-value wrapper at 0x004161C6; recovered address-identified validated runtime call wrapper at 0x004161CE; recovered address-identified guarded runtime action wrapper at 0x00416200; recovered address-identified two-phase runtime transfer wrapper at 0x0041623A; recovered address-identified masked runtime wait wrapper at 0x004162C4; recovered address-identified optional runtime notification wrapper at 0x00416378; recovered address-identified registered runtime callback adapter at 0x0041639A; recovered address-identified registered runtime object constructor at 0x004163B2; recovered TLSF v3.1 block-header primitive cluster through 0x00416AAA; recovered TLSF v3.1 physical-block and alignment helper cluster through 0x00416BCE; recovered TLSF v3.1 request-size and class-mapping helper cluster through 0x00416C4E; recovered TLSF v3.1 free-list selection and mutation helper cluster through 0x00416E04; recovered TLSF v3.1 allocation, split, coalescing, lookup, and preparation helper cluster through 0x0041711C; recovered TLSF v3.1 control, pool, allocation, and release entry cluster through 0x004172DA; recovered EasyLogger initialization, start, output/color/format/filter control, lock/unlock, tag-level reset, and tag-level query entries through 0x004176CE; recovered EasyLogger interrupt-gated filtered formatting and output entry through 0x00417AD0; recovered EasyLogger mutex, output, time, process-name, and thread-name boot-port entries through 0x0041A700; recovered EasyLogger channel-one driver and four-channel synchronous transfer transport through 0x0041F9B6; recovered boot delay wrappers and capped initializer-table ordering and dispatch services through 0x0041FA40; recovered guarded two-stage teardown and pin-state reconciliation entry through 0x0041FAD0; recovered guarded teardown, reset, hard-float derivation, configuration submission, and channel-four/five platform setup entry through 0x0041FA98; recovered two-bank pin-group configuration dispatcher through 0x0041FCF6; recovered TLSF pool initialization, allocator-handle publication, and diagnostic entry through 0x0041FDA8",
+      "function": "Even Apollo510B bootloader with source-replaced EasyLogger formatting/copy helpers, littlefs v2.10.1 leaves including the max/min/alignment and 32-bit endian utility quartets, fallback npw2/ctz/popc bit-helper trio, tag validity/type1/type3/id/size/chunk and metadata-list open predicates, disk-version major/minor pair, allocator lookahead helper, and exact upstream AmbiqSuite 5.1.0 MSPI interrupt-clear leaf; recovered S200 redirect_init two-mutex initialization entry; recovered Arm EABI byte-fill and forward-copy primitives; recovered bounded byte-comparison, string-span, CRC-32, and SRAM-word helpers; recovered numeric, formatting, logging, substring, critical-context, runtime-gate, dispatcher, callback, object, event-flags, tagged-handle, semaphore, message-queue, bit-width, count-trailing-zeros, and floor-log2 wrappers through 0x004169FC; recovered Arm EABI byte-fill primitive; recovered Arm EABI forward-copy primitive; recovered bounded byte-comparison primitive; recovered reflected CRC-32 update primitive; recovered reject-set string-span primitive; recovered accept-set string-span primitive; recovered SRAM-word setter at 0x200270CC; recovered unsigned 64-bit divide-by-ten helper; recovered unsigned decimal digit-count helper; recovered signed-magnitude decimal digit-count helper; recovered hexadecimal digit-count helper; recovered wrapping decimal parser; recovered unsigned 64-bit decimal output helper; recovered unsigned 64-bit hexadecimal output helper; recovered nullable string-length helper; recovered null-output-aware repeated-character helper; recovered fixed-point float formatter; recovered bootloader logging formatter core; recovered bootloader variadic logging dispatch wrapper; recovered substring-search primitive; recovered critical-context predicate; recovered runtime-state gate acquisition wrapper; recovered runtime-state and SRAM-gate mapper; recovered runtime-state gate release wrapper; recovered critical-context value-dispatch wrapper; recovered address-identified runtime dispatcher at 0x004160FE; recovered address-identified retained-value wrapper at 0x004161C6; recovered address-identified validated runtime call wrapper at 0x004161CE; recovered address-identified guarded runtime action wrapper at 0x00416200; recovered address-identified two-phase runtime transfer wrapper at 0x0041623A; recovered address-identified masked runtime wait wrapper at 0x004162C4; recovered address-identified optional runtime notification wrapper at 0x00416378; recovered address-identified registered runtime callback adapter at 0x0041639A; recovered address-identified registered runtime object constructor at 0x004163B2; recovered TLSF v3.1 block-header primitive cluster through 0x00416AAA; recovered TLSF v3.1 physical-block and alignment helper cluster through 0x00416BCE; recovered TLSF v3.1 request-size and class-mapping helper cluster through 0x00416C4E; recovered TLSF v3.1 free-list selection and mutation helper cluster through 0x00416E04; recovered TLSF v3.1 allocation, split, coalescing, lookup, and preparation helper cluster through 0x0041711C; recovered TLSF v3.1 control, pool, allocation, and release entry cluster through 0x004172DA; recovered EasyLogger initialization, start, output/color/format/filter control, lock/unlock, tag-level reset, and tag-level query entries through 0x004176CE; recovered EasyLogger interrupt-gated filtered formatting and output entry through 0x00417AD0; recovered EasyLogger mutex, output, time, process-name, and thread-name boot-port entries through 0x0041A700; recovered EasyLogger channel-one driver and four-channel synchronous transfer transport through 0x0041F9B6; recovered boot delay wrappers and capped initializer-table ordering and dispatch services through 0x0041FA40; recovered guarded two-stage teardown and pin-state reconciliation entry through 0x0041FAD0; recovered guarded teardown, reset, hard-float derivation, configuration submission, and channel-four/five platform setup entry through 0x0041FA98; recovered two-bank pin-group configuration dispatcher through 0x0041FCF6; recovered TLSF pool initialization, allocator-handle publication, and diagnostic entry through 0x0041FDA8; recovered NVIC enable/priority and MSPI interrupt-dispatch services through 0x0041FE28; recovered idempotent MSPI enable and disable controls through 0x0041FE62; recovered guarded event-flags initialization, acquire, and release services through 0x0041FF08; recovered paired event-lock/MSPI guard enter and exit wrappers through 0x0041FF34; recovered retained-configuration MSPI XIP request updater through 0x0041FF60; recovered longest consecutive-one run-length and center-selection helpers through 0x00420002; recovered exhaustive MSPI timing scan, pass-mask selection, and centered timing result through 0x004201BA; recovered automatic MSPI timing-selection and fallback wrapper through 0x00420254; recovered MX25U25643G low-level MSPI initialization through 0x00420476; recovered MX25U25643G public initialization and service setup through 0x0042052A; recovered MX25U25643G soft-reset sequence through 0x0042059E; recovered MX25U25643G JEDEC-ID command and packing entry through 0x004205F4; recovered MX25U25643G validated read-transfer wrapper through 0x0042069E; recovered MX25U25643G validated write-transfer wrapper through 0x0042074E; recovered MX25U25643G status-register reader through 0x004207A2; recovered MX25U25643G two-phase and fixed ready-poll wrappers through 0x00420800; recovered MX25U25643G address-mode register reader through 0x0042086C; recovered MX25U25643G guarded four-byte-mode entry sequence through 0x00420978; recovered MX25U25643G guarded sector-erase service through 0x00420ADA; recovered MX25U25643G page-splitting program service through 0x00420C14; recovered MSPI device disable, reconfiguration, enable, and pin-group service through 0x00420E8C; recovered MX25U25643G quad-mode template, reconfiguration, XIP, and control service through 0x00420F0C; recovered MX25U25643G serial-mode reconfiguration, XIP, and control service through 0x00420F6A; recovered MX25U25643G guarded blocking read service through 0x00420FF2; recovered LittleFS directory bootstrap service through 0x004211B0; recovered LittleFS format, mount, and directory-bootstrap orchestration service through 0x00421210; recovered LittleFS mount, recovery, readiness, and boot-counter initialization service through 0x004212D8; recovered LittleFS block-read callback through 0x00421310; recovered LittleFS block-program callback through 0x00421348 using authenticated reclaimed initializer body space; recovered LittleFS block-erase callback through 0x00421372 using authenticated reclaimed initializer body space; recovered LittleFS constant-success sync callback through 0x004213D8 using authenticated reclaimed initializer body space; recovered exact in-place address-index helpers through 0x004213E6; recovered mapped-memory selector, copy service, and odd-selector wrapper through 0x0042156E using authenticated reclaimed entry space; recovered exact in-place 32-bit population-count helper through 0x004215AE; recovered exact in-place two-word bitmap query and count helpers through 0x00421632; recovered exact in-place validated two-word bitmap update helper through 0x004216B2; recovered exact in-place bounded poll-delay helper through 0x004216D4; recovered exact in-place mode/configuration transaction service through 0x004217D2; recovered exact in-place dual-controller mode transaction service through 0x00421978; recovered exact in-place bitmap-client configuration and row mutation services through 0x00421B08; recovered exact in-place mode-one enable, disable, and poll-cleanup services through 0x00421BD2; recovered exact in-place mode-zero enable transaction through 0x00421CCE; recovered exact in-place mode-zero disable and poll-cleanup services through 0x00421D5E; recovered exact in-place row-four enable transaction through 0x00421E4A; recovered exact in-place row-four disable and poll-cleanup services through 0x00421EBA; recovered exact in-place row-five enable and disable services through 0x004220B2; recovered exact in-place row-six enable/disable and mode-family dispatcher services through 0x004222D2; recovered exact in-place mode enable/disable routing, all-row cleanup, and configuration copy services through 0x00422430; recovered exact in-place AmbiqSuite-compatible debug shutdown, power-reference, and trace-disable services through 0x00422574; recovered exact in-place constraint dispatch and optimized memchr services through 0x00422628; recovered exact in-place IAR-compatible double runtime services through 0x00422872; recovered exact in-place IAR thread-pointer leaf through 0x0042287C; recovered exact in-place IAR unsigned 64-bit divide/modulo runtime through 0x00422AAC; recovered exact in-place atomic snapshot, no-op, and retained-query wrappers through 0x00422AD2; recovered exact in-place four-instance initialization, register-transfer/lifecycle, register-clear, and status-mapping services through 0x00422DC6; recovered exact in-place guarded per-instance dual-descriptor initialization service through 0x00422E28; recovered exact in-place per-instance clock-divider selection and programming service through 0x00422EE2; recovered exact in-place interrupt-atomic per-instance configuration latch through 0x00422F4C; recovered exact in-place interrupt-atomic secondary per-instance configuration latch through 0x00422FA2; recovered exact in-place interrupt-atomic secondary per-instance configuration release through 0x00422FDE; recovered exact in-place per-instance register-quiesce and hardware-shutdown service through 0x0042308E; recovered exact in-place per-instance FIFO read/write and drain services at 0x004232C8 through 0x00423350; recovered exact in-place critical-section FIFO snapshot and pump adapters through 0x004233E0; recovered exact in-place type-checked mode dispatcher and mode-two/mode-three start helpers through 0x00423524; recovered exact in-place mode-zero and mode-one bounded wait wrappers through 0x004234D8; recovered exact in-place primary and secondary progress services through 0x004236CE; recovered exact in-place per-instance register OR, write, and query services through 0x00423764; recovered exact in-place per-instance interrupt and progress service dispatcher through 0x0042382C; recovered exact in-place bounded memory exchange and three-buffer rotation through 0x00423928; recovered exact in-place bounded rotate-to-front helper through 0x00423972; recovered exact in-place three-element comparator/exchange helper through 0x004239C2; recovered exact in-place Floyd max-heap sift helper through 0x00423A48; recovered exact in-place introspective qsort core and public wrapper through 0x00423D20; recovered exact in-place global hardware-control services through 0x00423E0C; recovered exact in-place hardware-control state mapper through 0x00423E40; recovered exact in-place global MSPI FIFO-write service through 0x00423E8A; recovered exact in-place global MSPI FIFO-read service through 0x00423F28; recovered exact in-place MSPI command-queue initializer through 0x00423F54; recovered exact in-place MSPI command-queue terminator through 0x00423F8E; recovered exact in-place MSPI command-queue enable/disable services through 0x00423FB8; retained authenticated official MSPI configuration, lifecycle, control, and transfer bodies from 0x00424120 through 0x00426536; recovered exact in-place AmbiqSuite 5.1.0 MSPI interrupt-service and power-control bodies through 0x00426BFE; source-routed Apollo510 HFRC2 UQ17.15 and integer divider services through 0x00426C58 using authenticated reclaimed NOP space",
       "provider": {
         "kind": "source_build",
         "path": "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
         "profiles": {
           "linux-clang": {
-            "size": 158588,
-            "sha256": "a64974dce84415f4031847e1f71b5397cd0c366a31b8786d6f6e311ff53bd7b2"
+            "size": 163824,
+            "sha256": "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635"
           },
           "apple-font-manager-record": {
-            "size": 158604,
-            "sha256": "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7"
+            "size": 163840,
+            "sha256": "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
           },
           "apple-product-rtos-record": {
-            "size": 158604,
-            "sha256": "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7"
+            "size": 163840,
+            "sha256": "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
           }
         },
-        "sha256": "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7",
-        "size": 158604
+        "sha256": "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0",
+        "size": 163840,
+        "source_owned_bytes": 27925,
+        "opaque_base_bytes": 119425,
+        "generated_patch_site_bytes": 16474,
+        "generated_alignment_bytes": 16,
+        "source_owned_cave_bytes": 468,
+        "source_owned_in_place_bytes": 12232,
+        "generated_isolated_alignment_bytes": 0,
+        "generated_relocated_alignment_bytes": 15,
+        "generated_stock_to_overlay_alignment_bytes": 1
       },
       "regions": [
         {
@@ -1469,9 +1478,39 @@
           "function": "Generated entry redirect and NOP fill replacing an authenticated EasyLogger output entry (output_4176ce)",
           "name": "bootloader_easylogger_output_4176ce_source_replacement",
           "output": "apollo510b/bootloader-easylogger-output-4176ce-source-replacement-0x004176ce.bin",
-          "size": 1026,
+          "size": 6,
           "target": "apollo510b_internal_mram",
           "target_address": 4290254
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 30420,
+          "function": "Compiled MIT Apollo510 HFRC2 UQ17.15 divider calculator in authenticated reclaimed NOP space",
+          "name": "bootloader_clkmgr_hfrc2_uq15_divider_source_cave",
+          "output": "apollo510b/bootloader-clkmgr-hfrc2-uq15-divider-source-cave-0x004176d4.bin",
+          "size": 88,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4290260
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 30508,
+          "function": "Compiled MIT Apollo510 HFRC integer divider calculator in authenticated reclaimed NOP space",
+          "name": "bootloader_clkmgr_hfrc_integer_divider_source_cave",
+          "output": "apollo510b/bootloader-clkmgr-hfrc-integer-divider-source-cave-0x0041772c.bin",
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4290348
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 30526,
+          "function": "Generated NOP fill after the clock-manager source caves within the EasyLogger output replacement span",
+          "name": "bootloader_easylogger_output_generated_fill_after_clkmgr_caves",
+          "output": "apollo510b/bootloader-easylogger-output-generated-fill-after-clkmgr-caves-0x0041773e.bin",
+          "size": 914,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4290366
         },
         {
           "address_status": "official_blob",
@@ -1856,12 +1895,1962 @@
         {
           "address_status": "official_blob",
           "file_offset": 64936,
-          "function": "Authenticated bootloader compatibility bytes retained after the source-replaced allocator initializer and before the AmbiqSuite MSPI interrupt-clear leaf",
-          "name": "bootloader_opaque_after_easylogger_transport",
-          "output": "apollo510b/bootloader-opaque-after-easylogger-transport-0x0041fda8.bin",
-          "size": 26462,
+          "function": "Authenticated allocator and diagnostic pointer literals retained before the IRQ-service cluster",
+          "name": "bootloader_allocator_literal_pool_0x0041fda8",
+          "output": "apollo510b/bootloader-allocator-literal-pool-0x0041fda8-0x0041fda8.bin",
+          "size": 24,
           "target": "apollo510b_internal_mram",
           "target_address": 4324776
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 64960,
+          "function": "Generated entry redirect and NOP fill replacing the complete NVIC interrupt-enable entry",
+          "name": "bootloader_nvic_enable_irq_41fdc0_source_replacement",
+          "output": "apollo510b/bootloader-nvic-enable-irq-41fdc0-source-replacement-0x0041fdc0.bin",
+          "size": 30,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4324800
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 64990,
+          "function": "Generated entry redirect and NOP fill replacing the complete NVIC/system-handler priority entry",
+          "name": "bootloader_nvic_set_priority_41fdde_source_replacement",
+          "output": "apollo510b/bootloader-nvic-set-priority-41fdde-source-replacement-0x0041fdde.bin",
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4324830
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65030,
+          "function": "Generated entry redirect and NOP fill replacing the complete MSPI status-clear-service interrupt wrapper",
+          "name": "bootloader_mspi_isr_41fe06_source_replacement",
+          "output": "apollo510b/bootloader-mspi-isr-41fe06-source-replacement-0x0041fe06.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4324870
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65064,
+          "function": "Generated entry redirect and NOP fill replacing the complete idempotent MSPI enable entry",
+          "name": "bootloader_mspi_enable_41fe28_source_replacement",
+          "output": "apollo510b/bootloader-mspi-enable-41fe28-source-replacement-0x0041fe28.bin",
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4324904
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65096,
+          "function": "Generated entry redirect and NOP fill replacing the complete MSPI disable entry",
+          "name": "bootloader_mspi_disable_41fe48_source_replacement",
+          "output": "apollo510b/bootloader-mspi-disable-41fe48-source-replacement-0x0041fe48.bin",
+          "size": 26,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4324936
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65122,
+          "function": "Generated entry redirect and NOP fill replacing the complete guarded event-flags service initializer",
+          "name": "bootloader_event_flags_init_41fe62_source_replacement",
+          "output": "apollo510b/bootloader-event-flags-init-41fe62-source-replacement-0x0041fe62.bin",
+          "size": 58,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4324962
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65180,
+          "function": "Generated entry redirect and NOP fill replacing the complete guarded event-flags acquire entry",
+          "name": "bootloader_event_flags_acquire_41fe9c_source_replacement",
+          "output": "apollo510b/bootloader-event-flags-acquire-41fe9c-source-replacement-0x0041fe9c.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4325020
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65236,
+          "function": "Generated entry redirect and NOP fill replacing the complete guarded event-flags release entry",
+          "name": "bootloader_event_flags_release_41fed4_source_replacement",
+          "output": "apollo510b/bootloader-event-flags-release-41fed4-source-replacement-0x0041fed4.bin",
+          "size": 52,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4325076
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65288,
+          "function": "Generated entry redirect and NOP fill replacing the complete paired event-lock and conditional MSPI-disable guard entry",
+          "name": "bootloader_mspi_guard_enter_41ff08_source_replacement",
+          "output": "apollo510b/bootloader-mspi-guard-enter-41ff08-source-replacement-0x0041ff08.bin",
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4325128
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65310,
+          "function": "Generated entry redirect and NOP fill replacing the complete conditional MSPI-enable and paired event-unlock guard exit",
+          "name": "bootloader_mspi_guard_exit_41ff1e_source_replacement",
+          "output": "apollo510b/bootloader-mspi-guard-exit-41ff1e-source-replacement-0x0041ff1e.bin",
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4325150
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65332,
+          "function": "Generated entry redirect and NOP fill replacing the complete MSPI XIP configuration-byte updater",
+          "name": "bootloader_mspi_xip_config_41ff34_source_replacement",
+          "output": "apollo510b/bootloader-mspi-xip-config-41ff34-source-replacement-0x0041ff34.bin",
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4325172
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65376,
+          "function": "Generated entry redirect and NOP fill replacing the complete longest consecutive-one run-length helper",
+          "name": "bootloader_longest_ones_run_41ff60_source_replacement",
+          "output": "apollo510b/bootloader-longest-ones-run-41ff60-source-replacement-0x0041ff60.bin",
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4325216
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65396,
+          "function": "Generated entry redirect and NOP fill replacing the complete longest consecutive-one run center-selection helper",
+          "name": "bootloader_longest_ones_center_41ff74_source_replacement",
+          "output": "apollo510b/bootloader-longest-ones-center-41ff74-source-replacement-0x0041ff74.bin",
+          "size": 142,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4325236
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65538,
+          "function": "Generated entry redirect and NOP fill replacing the complete exhaustive MSPI timing scan",
+          "name": "bootloader_mspi_timing_scan_420002_source_replacement",
+          "output": "apollo510b/bootloader-mspi-timing-scan-420002-source-replacement-0x00420002.bin",
+          "size": 440,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4325378
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 65978,
+          "function": "Generated entry redirect and NOP fill replacing the complete automatic MSPI timing selection entry",
+          "name": "bootloader_mspi_timing_auto_4201ba_source_replacement",
+          "output": "apollo510b/bootloader-mspi-timing-auto-4201ba-source-replacement-0x004201ba.bin",
+          "size": 154,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4325818
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 66132,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G low-level MSPI initializer",
+          "name": "bootloader_mspi_low_level_init_420254_source_replacement",
+          "output": "apollo510b/bootloader-mspi-low-level-init-420254-source-replacement-0x00420254.bin",
+          "size": 546,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4325972
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 66678,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G public initialization wrapper",
+          "name": "bootloader_mspi_driver_init_420476_source_replacement",
+          "output": "apollo510b/bootloader-mspi-driver-init-420476-source-replacement-0x00420476.bin",
+          "size": 180,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4326518
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 66858,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G soft-reset sequence",
+          "name": "bootloader_mspi_soft_reset_42052a_source_replacement",
+          "output": "apollo510b/bootloader-mspi-soft-reset-42052a-source-replacement-0x0042052a.bin",
+          "size": 116,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4326698
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 66974,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G JEDEC-ID reader",
+          "name": "bootloader_mspi_read_id_42059e_source_replacement",
+          "output": "apollo510b/bootloader-mspi-read-id-42059e-source-replacement-0x0042059e.bin",
+          "size": 86,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4326814
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 67060,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G read-transfer wrapper",
+          "name": "bootloader_mspi_read_transfer_4205f4_source_replacement",
+          "output": "apollo510b/bootloader-mspi-read-transfer-4205f4-source-replacement-0x004205f4.bin",
+          "size": 170,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4326900
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 67230,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G write-transfer wrapper",
+          "name": "bootloader_mspi_write_transfer_42069e_source_replacement",
+          "output": "apollo510b/bootloader-mspi-write-transfer-42069e-source-replacement-0x0042069e.bin",
+          "size": 176,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327070
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 67406,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G status-register reader",
+          "name": "bootloader_mspi_busy_status_42074e_source_replacement",
+          "output": "apollo510b/bootloader-mspi-busy-status-42074e-source-replacement-0x0042074e.bin",
+          "size": 84,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327246
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 67490,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G two-phase ready poll",
+          "name": "bootloader_mspi_wait_ready_4207a2_source_replacement",
+          "output": "apollo510b/bootloader-mspi-wait-ready-4207a2-source-replacement-0x004207a2.bin",
+          "size": 82,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327330
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 67572,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G fixed ready-poll wrapper",
+          "name": "bootloader_mspi_wait_ready_default_4207f4_source_replacement",
+          "output": "apollo510b/bootloader-mspi-wait-ready-default-4207f4-source-replacement-0x004207f4.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327412
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 67584,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G address-mode reader",
+          "name": "bootloader_mspi_4byte_mode_420800_source_replacement",
+          "output": "apollo510b/bootloader-mspi-4byte-mode-420800-source-replacement-0x00420800.bin",
+          "size": 108,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327424
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 67692,
+          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G four-byte-mode entry",
+          "name": "bootloader_mspi_enter_4byte_mode_literal_gap",
+          "output": "apollo510b/bootloader-mspi-enter-4byte-mode-literal-gap-0x0042086c.bin",
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327532
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 67728,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G four-byte-mode entry sequence",
+          "name": "bootloader_mspi_enter_4byte_mode_420890_source_replacement",
+          "output": "apollo510b/bootloader-mspi-enter-4byte-mode-420890-source-replacement-0x00420890.bin",
+          "size": 232,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327568
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 67960,
+          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G write-enable wrapper",
+          "name": "bootloader_mspi_write_enable_literal_gap",
+          "output": "apollo510b/bootloader-mspi-write-enable-literal-gap-0x00420978.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327800
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 67972,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G write-enable wrapper",
+          "name": "bootloader_mspi_write_enable_420984_source_replacement",
+          "output": "apollo510b/bootloader-mspi-write-enable-420984-source-replacement-0x00420984.bin",
+          "size": 58,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327812
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 68030,
+          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G write-disable wrapper",
+          "name": "bootloader_mspi_write_disable_literal_gap",
+          "output": "apollo510b/bootloader-mspi-write-disable-literal-gap-0x004209be.bin",
+          "size": 6,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327870
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 68036,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G write-disable wrapper",
+          "name": "bootloader_mspi_write_disable_4209c4_source_replacement",
+          "output": "apollo510b/bootloader-mspi-write-disable-4209c4-source-replacement-0x004209c4.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327876
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 68092,
+          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G sector-erase service",
+          "name": "bootloader_mspi_sector_erase_literal_gap",
+          "output": "apollo510b/bootloader-mspi-sector-erase-literal-gap-0x004209fc.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327932
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 68104,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G sector-erase service",
+          "name": "bootloader_mspi_sector_erase_420a08_source_replacement",
+          "output": "apollo510b/bootloader-mspi-sector-erase-420a08-source-replacement-0x00420a08.bin",
+          "size": 210,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4327944
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 68314,
+          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G page-program service",
+          "name": "bootloader_mspi_program_literal_gap",
+          "output": "apollo510b/bootloader-mspi-program-literal-gap-0x00420ada.bin",
+          "size": 50,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4328154
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 68364,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G page-program service",
+          "name": "bootloader_mspi_program_420b0c_source_replacement",
+          "output": "apollo510b/bootloader-mspi-program-420b0c-source-replacement-0x00420b0c.bin",
+          "size": 264,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4328204
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 68628,
+          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G QE service",
+          "name": "bootloader_mspi_quad_enable_literal_gap",
+          "output": "apollo510b/bootloader-mspi-quad-enable-literal-gap-0x00420c14.bin",
+          "size": 72,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4328468
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 68700,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G status-register-2 QE service",
+          "name": "bootloader_mspi_quad_enable_420c5c_source_replacement",
+          "output": "apollo510b/bootloader-mspi-quad-enable-420c5c-source-replacement-0x00420c5c.bin",
+          "size": 414,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4328540
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 69114,
+          "function": "Authenticated non-executable literal pool preceding the MSPI device reconfiguration service",
+          "name": "bootloader_mspi_device_reconfigure_literal_gap",
+          "output": "apollo510b/bootloader-mspi-device-reconfigure-literal-gap-0x00420dfa.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4328954
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 69128,
+          "function": "Generated entry redirect and NOP fill replacing the complete MSPI device reconfiguration service",
+          "name": "bootloader_mspi_device_reconfigure_420e08_source_replacement",
+          "output": "apollo510b/bootloader-mspi-device-reconfigure-420e08-source-replacement-0x00420e08.bin",
+          "size": 132,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4328968
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 69260,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G quad-mode selection service",
+          "name": "bootloader_mspi_set_quad_mode_420e8c_source_replacement",
+          "output": "apollo510b/bootloader-mspi-set-quad-mode-420e8c-source-replacement-0x00420e8c.bin",
+          "size": 128,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4329100
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 69388,
+          "function": "Authenticated non-executable literal pool preceding the MX25U25643G serial-mode service",
+          "name": "bootloader_mspi_set_serial_mode_literal_gap",
+          "output": "apollo510b/bootloader-mspi-set-serial-mode-literal-gap-0x00420f0c.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4329228
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 69392,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G serial-mode selection service",
+          "name": "bootloader_mspi_set_serial_mode_420f10_source_replacement",
+          "output": "apollo510b/bootloader-mspi-set-serial-mode-420f10-source-replacement-0x00420f10.bin",
+          "size": 90,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4329232
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 69482,
+          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G read service",
+          "name": "bootloader_mspi_read_literal_gap",
+          "output": "apollo510b/bootloader-mspi-read-literal-gap-0x00420f6a.bin",
+          "size": 6,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4329322
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 69488,
+          "function": "Generated entry redirect and NOP fill replacing the complete MX25U25643G guarded read service",
+          "name": "bootloader_mspi_read_420f70_source_replacement",
+          "output": "apollo510b/bootloader-mspi-read-420f70-source-replacement-0x00420f70.bin",
+          "size": 130,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4329328
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 69618,
+          "function": "Authenticated non-executable literal and alignment pool preceding the LittleFS directory bootstrap service",
+          "name": "bootloader_fs_directories_literal_pool",
+          "output": "apollo510b/bootloader-fs-directories-literal-pool-0x00420ff2.bin",
+          "size": 214,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4329458
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 69832,
+          "function": "Generated entry redirect and NOP fill replacing the complete LittleFS directory bootstrap service",
+          "name": "bootloader_check_and_create_directories_4210c8_source_replacement",
+          "output": "apollo510b/bootloader-check-and-create-directories-4210c8-source-replacement-0x004210c8.bin",
+          "size": 232,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4329672
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 70064,
+          "function": "Generated entry redirect and NOP fill replacing the complete LittleFS format and mount orchestration service",
+          "name": "bootloader_littlefs_format_4211b0_source_replacement",
+          "output": "apollo510b/bootloader-littlefs-format-4211b0-source-replacement-0x004211b0.bin",
+          "size": 96,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4329904
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 70160,
+          "function": "Generated entry redirect replacing the complete LittleFS mount, recovery, readiness, and boot-counter initialization service",
+          "name": "bootloader_littlefs_init_421210_source_replacement",
+          "output": "apollo510b/bootloader-littlefs-init-421210-source-replacement-0x00421210.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330000
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 70164,
+          "function": "Compiled clean-room G2 LittleFS block-program callback in authenticated reclaimed initializer body space",
+          "name": "bootloader_littlefs_program_421310_source_cave",
+          "output": "apollo510b/bootloader-littlefs-program-421310-source-cave-0x00421214.bin",
+          "size": 60,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330004
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 70224,
+          "function": "Compiled clean-room G2 LittleFS block-erase callback in authenticated reclaimed initializer body space",
+          "name": "bootloader_littlefs_erase_421348_source_cave",
+          "output": "apollo510b/bootloader-littlefs-erase-421348-source-cave-0x00421250.bin",
+          "size": 48,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330064
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 70272,
+          "function": "Compiled clean-room G2 LittleFS constant-success sync callback in authenticated reclaimed initializer body space",
+          "name": "bootloader_littlefs_sync_4213d4_source_cave",
+          "output": "apollo510b/bootloader-littlefs-sync-4213d4-source-cave-0x00421280.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330112
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 70276,
+          "function": "Generated NOP tail after the authenticated reclaimed-body LittleFS program, erase, and sync leaves",
+          "name": "bootloader_littlefs_init_421210_generated_tail",
+          "output": "apollo510b/bootloader-littlefs-init-421210-generated-tail-0x00421284.bin",
+          "size": 84,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330116
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 70360,
+          "function": "Generated entry redirect and NOP fill replacing the complete LittleFS block-read callback",
+          "name": "bootloader_littlefs_read_4212d8_source_replacement",
+          "output": "apollo510b/bootloader-littlefs-read-4212d8-source-replacement-0x004212d8.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330200
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 70416,
+          "function": "Generated entry redirect and NOP fill replacing the complete LittleFS block-program callback",
+          "name": "bootloader_littlefs_program_421310_source_replacement",
+          "output": "apollo510b/bootloader-littlefs-program-421310-source-replacement-0x00421310.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330256
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 70472,
+          "function": "Generated entry redirect and NOP fill replacing the complete LittleFS block-erase callback",
+          "name": "bootloader_littlefs_erase_421348_source_replacement",
+          "output": "apollo510b/bootloader-littlefs-erase-421348-source-replacement-0x00421348.bin",
+          "size": 42,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330312
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 70514,
+          "function": "Authenticated non-executable literal and alignment gap after the LittleFS block-erase callback",
+          "name": "bootloader_littlefs_erase_literal_gap",
+          "output": "apollo510b/bootloader-littlefs-erase-literal-gap-0x00421372.bin",
+          "size": 98,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330354
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 70612,
+          "function": "Generated entry redirect replacing the complete constant-success LittleFS sync callback",
+          "name": "bootloader_littlefs_sync_4213d4_source_replacement",
+          "output": "apollo510b/bootloader-littlefs-sync-4213d4-source-replacement-0x004213d4.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330452
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 70616,
+          "function": "Compiled clean-room G2 identity address-index helper at its authenticated stock address",
+          "name": "bootloader_address_identity_4213d8_source_in_place",
+          "output": "apollo510b/bootloader-address-identity-4213d8-source-in-place-0x004213d8.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330456
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 70618,
+          "function": "Compiled clean-room G2 thresholded address-index helper at its authenticated stock address",
+          "name": "bootloader_address_map_4213da_source_in_place",
+          "output": "apollo510b/bootloader-address-map-4213da-source-in-place-0x004213da.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330458
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 70630,
+          "function": "Generated entry redirect replacing the mapped-memory selector and copy service",
+          "name": "bootloader_memory_select_copy_4213e6_source_replacement",
+          "output": "apollo510b/bootloader-memory-select-copy-4213e6-source-replacement-0x004213e6.bin",
+          "size": 6,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330470
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 70636,
+          "function": "Compiled clean-room G2 mapped-memory selector and copy service in authenticated reclaimed entry space",
+          "name": "bootloader_memory_select_copy_4213e6_source_cave",
+          "output": "apollo510b/bootloader-memory-select-copy-4213e6-source-cave-0x004213ec.bin",
+          "size": 220,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330476
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 70856,
+          "function": "Compiled clean-room G2 odd-selector mapped-memory wrapper in authenticated reclaimed entry space",
+          "name": "bootloader_memory_select_odd_421548_source_cave",
+          "output": "apollo510b/bootloader-memory-select-odd-421548-source-cave-0x004214c8.bin",
+          "size": 30,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330696
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 70886,
+          "function": "Generated NOP tail after the mapped-memory selector and odd-selector wrapper caves",
+          "name": "bootloader_memory_select_copy_4213e6_generated_nop_tail",
+          "output": "apollo510b/bootloader-memory-select-copy-4213e6-generated-nop-tail-0x004214e6.bin",
+          "size": 98,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330726
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 70984,
+          "function": "Generated entry redirect and NOP fill replacing the odd-selector mapped-memory wrapper",
+          "name": "bootloader_memory_select_odd_421548_source_replacement",
+          "output": "apollo510b/bootloader-memory-select-odd-421548-source-replacement-0x00421548.bin",
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330824
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 71022,
+          "function": "Authenticated non-executable mapped-memory control, security, and window literal pool",
+          "name": "bootloader_memory_select_literal_pool",
+          "output": "apollo510b/bootloader-memory-select-literal-pool-0x0042156e.bin",
+          "size": 22,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330862
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 71044,
+          "function": "Compiled clean-room G2 32-bit population-count helper at its authenticated stock address",
+          "name": "bootloader_popcount_421584_source_in_place",
+          "output": "apollo510b/bootloader-popcount-421584-source-in-place-0x00421584.bin",
+          "size": 42,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330884
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 71086,
+          "function": "Compiled clean-room G2 two-word bitmap nonempty helper at its authenticated stock address",
+          "name": "bootloader_bitmap_any_4215ae_source_in_place",
+          "output": "apollo510b/bootloader-bitmap-any-4215ae-source-in-place-0x004215ae.bin",
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330926
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 71132,
+          "function": "Compiled clean-room G2 two-word bitmap membership helper at its authenticated stock address",
+          "name": "bootloader_bitmap_test_4215dc_source_in_place",
+          "output": "apollo510b/bootloader-bitmap-test-4215dc-source-in-place-0x004215dc.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4330972
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 71166,
+          "function": "Compiled clean-room G2 two-word bitmap population-count helper at its authenticated stock address",
+          "name": "bootloader_bitmap_count_4215fe_source_in_place",
+          "output": "apollo510b/bootloader-bitmap-count-4215fe-source-in-place-0x004215fe.bin",
+          "size": 52,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4331006
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 71218,
+          "function": "Compiled clean-room G2 validated two-word bitmap update helper at its authenticated stock address",
+          "name": "bootloader_bitmap_update_421632_source_in_place",
+          "output": "apollo510b/bootloader-bitmap-update-421632-source-in-place-0x00421632.bin",
+          "size": 128,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4331058
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 71346,
+          "function": "Compiled clean-room G2 bounded poll-delay helper at its authenticated stock address",
+          "name": "bootloader_poll_delay_4216b2_source_in_place",
+          "output": "apollo510b/bootloader-poll-delay-4216b2-source-in-place-0x004216b2.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4331186
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 71380,
+          "function": "Compiled clean-room G2 mode/configuration transaction service at its authenticated stock address",
+          "name": "bootloader_mode_service_4216d4_source_in_place",
+          "output": "apollo510b/bootloader-mode-service-4216d4-source-in-place-0x004216d4.bin",
+          "size": 254,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4331220
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 71634,
+          "function": "Compiled clean-room G2 dual-controller mode transaction service at its authenticated stock address",
+          "name": "bootloader_dual_mode_service_4217d2_source_in_place",
+          "output": "apollo510b/bootloader-dual-mode-service-4217d2-source-in-place-0x004217d2.bin",
+          "size": 422,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4331474
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 72056,
+          "function": "Compiled clean-room G2 bitmap-client configuration service at its authenticated stock address",
+          "name": "bootloader_bitmap_client_service_421978_source_in_place",
+          "output": "apollo510b/bootloader-bitmap-client-service-421978-source-in-place-0x00421978.bin",
+          "size": 184,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4331896
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 72240,
+          "function": "Compiled clean-room G2 bitmap row-zero set helper at its authenticated stock address",
+          "name": "bootloader_bitmap_row0_set_421a30_source_in_place",
+          "output": "apollo510b/bootloader-bitmap-row0-set-421a30-source-in-place-0x00421a30.bin",
+          "size": 50,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4332080
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 72290,
+          "function": "Compiled clean-room G2 bitmap row-zero clear helper at its authenticated stock address",
+          "name": "bootloader_bitmap_row0_clear_421a62_source_in_place",
+          "output": "apollo510b/bootloader-bitmap-row0-clear-421a62-source-in-place-0x00421a62.bin",
+          "size": 50,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4332130
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 72340,
+          "function": "Compiled clean-room G2 guarded bitmap row-one set helper at its authenticated stock address",
+          "name": "bootloader_bitmap_row1_set_421a94_source_in_place",
+          "output": "apollo510b/bootloader-bitmap-row1-set-421a94-source-in-place-0x00421a94.bin",
+          "size": 66,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4332180
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 72406,
+          "function": "Compiled clean-room G2 bitmap row-one clear helper at its authenticated stock address",
+          "name": "bootloader_bitmap_row1_clear_421ad6_source_in_place",
+          "output": "apollo510b/bootloader-bitmap-row1-clear-421ad6-source-in-place-0x00421ad6.bin",
+          "size": 50,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4332246
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 72456,
+          "function": "Compiled clean-room G2 mode-one enable helper at its authenticated stock address",
+          "name": "bootloader_mode1_enable_421b08_source_in_place",
+          "output": "apollo510b/bootloader-mode1-enable-421b08-source-in-place-0x00421b08.bin",
+          "size": 84,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4332296
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 72540,
+          "function": "Compiled clean-room G2 mode-one last-client disable helper at its authenticated stock address",
+          "name": "bootloader_mode1_disable_421b5c_source_in_place",
+          "output": "apollo510b/bootloader-mode1-disable-421b5c-source-in-place-0x00421b5c.bin",
+          "size": 72,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4332380
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 72612,
+          "function": "Compiled clean-room G2 mode-one poll and state cleanup helper at its authenticated stock address",
+          "name": "bootloader_mode1_poll_cleanup_421ba4_source_in_place",
+          "output": "apollo510b/bootloader-mode1-poll-cleanup-421ba4-source-in-place-0x00421ba4.bin",
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4332452
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 72658,
+          "function": "Compiled clean-room G2 mode-zero enable transaction at its authenticated stock address",
+          "name": "bootloader_mode0_enable_421bd2_source_in_place",
+          "output": "apollo510b/bootloader-mode0-enable-421bd2-source-in-place-0x00421bd2.bin",
+          "size": 252,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4332498
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 72910,
+          "function": "Compiled clean-room G2 mode-zero last-client disable helper at its authenticated stock address",
+          "name": "bootloader_mode0_disable_421cce_source_in_place",
+          "output": "apollo510b/bootloader-mode0-disable-421cce-source-in-place-0x00421cce.bin",
+          "size": 90,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4332750
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 73000,
+          "function": "Compiled clean-room G2 mode-zero poll and state cleanup helper at its authenticated stock address",
+          "name": "bootloader_mode0_poll_cleanup_421d28_source_in_place",
+          "output": "apollo510b/bootloader-mode0-poll-cleanup-421d28-source-in-place-0x00421d28.bin",
+          "size": 54,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4332840
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 73054,
+          "function": "Compiled clean-room G2 row-four enable transaction at its authenticated stock address",
+          "name": "bootloader_row4_enable_421d5e_source_in_place",
+          "output": "apollo510b/bootloader-row4-enable-421d5e-source-in-place-0x00421d5e.bin",
+          "size": 236,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4332894
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 73290,
+          "function": "Compiled clean-room G2 row-four last-client disable helper at its authenticated stock address",
+          "name": "bootloader_row4_disable_421e4a_source_in_place",
+          "output": "apollo510b/bootloader-row4-disable-421e4a-source-in-place-0x00421e4a.bin",
+          "size": 66,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4333130
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 73356,
+          "function": "Compiled clean-room G2 row-four poll and state cleanup helper at its authenticated stock address",
+          "name": "bootloader_row4_poll_cleanup_421e8c_source_in_place",
+          "output": "apollo510b/bootloader-row4-poll-cleanup-421e8c-source-in-place-0x00421e8c.bin",
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4333196
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 73402,
+          "function": "Compiled clean-room G2 row-five enable transaction at its authenticated stock address",
+          "name": "bootloader_row5_enable_421eba_source_in_place",
+          "output": "apollo510b/bootloader-row5-enable-421eba-source-in-place-0x00421eba.bin",
+          "size": 390,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4333242
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 73792,
+          "function": "Compiled clean-room G2 row-five final-client disable helper at its authenticated stock address",
+          "name": "bootloader_row5_disable_422040_source_in_place",
+          "output": "apollo510b/bootloader-row5-disable-422040-source-in-place-0x00422040.bin",
+          "size": 114,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4333632
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 73906,
+          "function": "Compiled clean-room G2 row-six enable transaction at its authenticated stock address",
+          "name": "bootloader_row6_enable_4220b2_source_in_place",
+          "output": "apollo510b/bootloader-row6-enable-4220b2-source-in-place-0x004220b2.bin",
+          "size": 348,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4333746
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 74254,
+          "function": "Authenticated row-six enable literal seam retained between exact source bodies",
+          "name": "bootloader_row6_enable_literal_seam",
+          "output": "apollo510b/bootloader-row6-enable-literal-seam-0x0042220e.bin",
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334094
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 74272,
+          "function": "Compiled clean-room G2 row-six final-client disable helper at its authenticated stock address",
+          "name": "bootloader_row6_disable_422220_source_in_place",
+          "output": "apollo510b/bootloader-row6-disable-422220-source-in-place-0x00422220.bin",
+          "size": 110,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334112
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 74382,
+          "function": "Authenticated row-six disable literal seam retained between exact source bodies",
+          "name": "bootloader_row6_disable_literal_seam",
+          "output": "apollo510b/bootloader-row6-disable-literal-seam-0x0042228e.bin",
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334222
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 74400,
+          "function": "Compiled clean-room G2 mode-family dispatcher at its authenticated stock address",
+          "name": "bootloader_mode_dispatch_4222a0_source_in_place",
+          "output": "apollo510b/bootloader-mode-dispatch-4222a0-source-in-place-0x004222a0.bin",
+          "size": 50,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334240
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 74450,
+          "function": "Authenticated padding and literal seam retained before exact mode routing bodies",
+          "name": "bootloader_mode_route_literal_seam",
+          "output": "apollo510b/bootloader-mode-route-literal-seam-0x004222d2.bin",
+          "size": 30,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334290
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 74480,
+          "function": "Compiled clean-room G2 seven-kind enable router at its authenticated stock address",
+          "name": "bootloader_mode_enable_route_4222f0_source_in_place",
+          "output": "apollo510b/bootloader-mode-enable-route-4222f0-source-in-place-0x004222f0.bin",
+          "size": 116,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334320
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 74596,
+          "function": "Compiled clean-room G2 seven-kind disable router at its authenticated stock address",
+          "name": "bootloader_mode_disable_route_422364_source_in_place",
+          "output": "apollo510b/bootloader-mode-disable-route-422364-source-in-place-0x00422364.bin",
+          "size": 116,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334436
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 74712,
+          "function": "Compiled clean-room G2 seven-row client cleanup helper at its authenticated stock address",
+          "name": "bootloader_mode_clear_all_4223d8_source_in_place",
+          "output": "apollo510b/bootloader-mode-clear-all-4223d8-source-in-place-0x004223d8.bin",
+          "size": 62,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334552
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 74774,
+          "function": "Compiled clean-room G2 fixed-size configuration copy helper at its authenticated stock address",
+          "name": "bootloader_mode_configuration_copy_422416_source_in_place",
+          "output": "apollo510b/bootloader-mode-configuration-copy-422416-source-in-place-0x00422416.bin",
+          "size": 26,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334614
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 74800,
+          "function": "Authenticated debug-service literal pool retained before exact source bodies",
+          "name": "bootloader_debug_services_literal_pool",
+          "output": "apollo510b/bootloader-debug-services-literal-pool-0x00422430.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334640
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 74856,
+          "function": "Compiled AmbiqSuite-compatible G2 debug shutdown service at its authenticated stock address",
+          "name": "bootloader_debug_disable_422468_source_in_place",
+          "output": "apollo510b/bootloader-debug-disable-422468-source-in-place-0x00422468.bin",
+          "size": 74,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334696
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 74930,
+          "function": "Compiled AmbiqSuite-compatible G2 debug power reference service at its authenticated stock address",
+          "name": "bootloader_debug_power_4224b2_source_in_place",
+          "output": "apollo510b/bootloader-debug-power-4224b2-source-in-place-0x004224b2.bin",
+          "size": 124,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334770
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75054,
+          "function": "Compiled AmbiqSuite-compatible G2 trace disable service at its authenticated stock address",
+          "name": "bootloader_debug_trace_disable_42252e_source_in_place",
+          "output": "apollo510b/bootloader-debug-trace-disable-42252e-source-in-place-0x0042252e.bin",
+          "size": 70,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334894
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 75124,
+          "function": "Authenticated debug trace literal pool retained before the constraint dispatcher",
+          "name": "bootloader_debug_trace_literal_pool",
+          "output": "apollo510b/bootloader-debug-trace-literal-pool-0x00422574.bin",
+          "size": 28,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334964
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75152,
+          "function": "Compiled clean-room G2 IAR-compatible constraint dispatcher at its authenticated stock address",
+          "name": "bootloader_constraint_dispatch_422590_source_in_place",
+          "output": "apollo510b/bootloader-constraint-dispatch-422590-source-in-place-0x00422590.bin",
+          "size": 28,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4334992
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 75180,
+          "function": "Authenticated constraint-handler pointer and diagnostic string retained before memchr",
+          "name": "bootloader_constraint_pool_and_message",
+          "output": "apollo510b/bootloader-constraint-pool-and-message-0x004225ac.bin",
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335020
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75216,
+          "function": "Compiled clean-room G2 optimized memchr at its authenticated stock address",
+          "name": "bootloader_memchr_4225d0_source_in_place",
+          "output": "apollo510b/bootloader-memchr-4225d0-source-in-place-0x004225d0.bin",
+          "size": 88,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335056
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75304,
+          "function": "Compiled clean-room G2 IAR-compatible double frexp wrapper at its authenticated stock address",
+          "name": "bootloader_double_frexp_422628_source_in_place",
+          "output": "apollo510b/bootloader-double-frexp-422628-source-in-place-0x00422628.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335144
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75316,
+          "function": "Compiled clean-room G2 IAR-compatible double normalization helper at its authenticated stock address",
+          "name": "bootloader_double_frexp_core_422634_source_in_place",
+          "output": "apollo510b/bootloader-double-frexp-core-422634-source-in-place-0x00422634.bin",
+          "size": 100,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335156
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75416,
+          "function": "Compiled clean-room G2 IAR-compatible double comparator at its authenticated stock address",
+          "name": "bootloader_double_compare_422698_source_in_place",
+          "output": "apollo510b/bootloader-double-compare-422698-source-in-place-0x00422698.bin",
+          "size": 52,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335256
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75468,
+          "function": "Compiled clean-room G2 IAR-compatible reverse double comparator at its authenticated stock address",
+          "name": "bootloader_double_compare_reverse_4226cc_source_in_place",
+          "output": "apollo510b/bootloader-double-compare-reverse-4226cc-source-in-place-0x004226cc.bin",
+          "size": 52,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335308
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75520,
+          "function": "Compiled clean-room G2 IAR-compatible double ldexp wrapper at its authenticated stock address",
+          "name": "bootloader_double_ldexp_422700_source_in_place",
+          "output": "apollo510b/bootloader-double-ldexp-422700-source-in-place-0x00422700.bin",
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335360
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 75538,
+          "function": "Authenticated two-byte alignment between the double ldexp wrapper and core",
+          "name": "bootloader_double_ldexp_alignment",
+          "output": "apollo510b/bootloader-double-ldexp-alignment-0x00422712.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335378
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75540,
+          "function": "Compiled clean-room G2 IAR-compatible double scaling core at its authenticated stock address",
+          "name": "bootloader_double_ldexp_core_422714_source_in_place",
+          "output": "apollo510b/bootloader-double-ldexp-core-422714-source-in-place-0x00422714.bin",
+          "size": 240,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335380
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75780,
+          "function": "Compiled G2 VFP double-to-signed conversion leaf at its authenticated stock address",
+          "name": "bootloader_double_to_i32_422804_source_in_place",
+          "output": "apollo510b/bootloader-double-to-i32-422804-source-in-place-0x00422804.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335620
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75794,
+          "function": "Compiled G2 VFP signed-to-double conversion leaf at its authenticated stock address",
+          "name": "bootloader_i32_to_double_422812_source_in_place",
+          "output": "apollo510b/bootloader-i32-to-double-422812-source-in-place-0x00422812.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335634
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75808,
+          "function": "Compiled G2 VFP double subtraction leaf at its authenticated stock address",
+          "name": "bootloader_double_subtract_422820_source_in_place",
+          "output": "apollo510b/bootloader-double-subtract-422820-source-in-place-0x00422820.bin",
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335648
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75826,
+          "function": "Compiled G2 VFP double division leaf at its authenticated stock address",
+          "name": "bootloader_double_divide_422832_source_in_place",
+          "output": "apollo510b/bootloader-double-divide-422832-source-in-place-0x00422832.bin",
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335666
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75844,
+          "function": "Compiled G2 VFP double-to-unsigned conversion leaf at its authenticated stock address",
+          "name": "bootloader_double_to_u32_422844_source_in_place",
+          "output": "apollo510b/bootloader-double-to-u32-422844-source-in-place-0x00422844.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335684
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75858,
+          "function": "Compiled G2 VFP unsigned-to-double conversion leaf at its authenticated stock address",
+          "name": "bootloader_u32_to_double_422852_source_in_place",
+          "output": "apollo510b/bootloader-u32-to-double-422852-source-in-place-0x00422852.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335698
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75872,
+          "function": "Compiled G2 VFP double multiplication leaf at its authenticated stock address",
+          "name": "bootloader_double_multiply_422860_source_in_place",
+          "output": "apollo510b/bootloader-double-multiply-422860-source-in-place-0x00422860.bin",
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335712
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 75890,
+          "function": "Authenticated two-byte alignment before the IAR thread-pointer leaf",
+          "name": "bootloader_double_runtime_trailing_alignment",
+          "output": "apollo510b/bootloader-double-runtime-trailing-alignment-0x00422872.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335730
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75892,
+          "function": "Compiled clean-room G2 IAR thread-pointer leaf and runtime anchor at their authenticated stock address",
+          "name": "bootloader_thread_pointer_422874_source_in_place",
+          "output": "apollo510b/bootloader-thread-pointer-422874-source-in-place-0x00422874.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335732
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 75900,
+          "function": "Compiled clean-room G2 IAR unsigned 64-bit divide/modulo runtime at its authenticated stock address",
+          "name": "bootloader_u64_divmod_42287c_source_in_place",
+          "output": "apollo510b/bootloader-u64-divmod-42287c-source-in-place-0x0042287c.bin",
+          "size": 560,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4335740
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 76460,
+          "function": "Compiled clean-room G2 interrupt-atomic three-word snapshot helper at its authenticated stock address",
+          "name": "bootloader_atomic_snapshot3_422aac_source_in_place",
+          "output": "apollo510b/bootloader-atomic-snapshot3-422aac-source-in-place-0x00422aac.bin",
+          "size": 28,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4336300
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 76488,
+          "function": "Compiled clean-room G2 no-operation runtime leaf at its authenticated stock address",
+          "name": "bootloader_noop_422ac8_source_in_place",
+          "output": "apollo510b/bootloader-noop-422ac8-source-in-place-0x00422ac8.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4336328
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 76490,
+          "function": "Compiled clean-room G2 retained-query wrapper at its authenticated stock address",
+          "name": "bootloader_retained_query_wrapper_422aca_source_in_place",
+          "output": "apollo510b/bootloader-retained-query-wrapper-422aca-source-in-place-0x00422aca.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4336330
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 76498,
+          "function": "Authenticated two-byte alignment before the four-instance hardware-service initializer",
+          "name": "bootloader_hw_instance_init_leading_alignment",
+          "output": "apollo510b/bootloader-hw-instance-init-leading-alignment-0x00422ad2.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4336338
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 76500,
+          "function": "Compiled clean-room G2 four-instance hardware-service initializer at its authenticated stock address",
+          "name": "bootloader_hw_instance_init_422ad4_source_in_place",
+          "output": "apollo510b/bootloader-hw-instance-init-422ad4-source-in-place-0x00422ad4.bin",
+          "size": 212,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4336340
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 76712,
+          "function": "Compiled clean-room G2 instance register-transfer and lifecycle service at its authenticated stock address",
+          "name": "bootloader_hw_instance_service_422ba8_source_in_place",
+          "output": "apollo510b/bootloader-hw-instance-service-422ba8-source-in-place-0x00422ba8.bin",
+          "size": 376,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4336552
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 77088,
+          "function": "Compiled clean-room G2 per-instance primary register-clear leaf at its authenticated stock address",
+          "name": "bootloader_hw_register_clear_422d20_source_in_place",
+          "output": "apollo510b/bootloader-hw-register-clear-422d20-source-in-place-0x00422d20.bin",
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4336928
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 77132,
+          "function": "Compiled clean-room G2 per-instance secondary register-clear leaf at its authenticated stock address",
+          "name": "bootloader_hw_register_clear_422d4c_source_in_place",
+          "output": "apollo510b/bootloader-hw-register-clear-422d4c-source-in-place-0x00422d4c.bin",
+          "size": 46,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4336972
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 77178,
+          "function": "Authenticated four-byte non-executable datum before the per-instance status mapper",
+          "name": "bootloader_hw_status_map_leading_datum",
+          "output": "apollo510b/bootloader-hw-status-map-leading-datum-0x00422d7a.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4337018
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 77182,
+          "function": "Compiled clean-room G2 per-instance status mapper at its authenticated stock address",
+          "name": "bootloader_hw_status_map_422d7e_source_in_place",
+          "output": "apollo510b/bootloader-hw-status-map-422d7e-source-in-place-0x00422d7e.bin",
+          "size": 72,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4337022
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 77254,
+          "function": "Compiled clean-room G2 per-instance dual-descriptor initializer at its authenticated stock address",
+          "name": "bootloader_hw_descriptor_init_422dc6_source_in_place",
+          "output": "apollo510b/bootloader-hw-descriptor-init-422dc6-source-in-place-0x00422dc6.bin",
+          "size": 98,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4337094
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 77352,
+          "function": "Compiled clean-room G2 per-instance clock-divider service at its authenticated stock address",
+          "name": "bootloader_hw_clock_divider_422e28_source_in_place",
+          "output": "apollo510b/bootloader-hw-clock-divider-422e28-source-in-place-0x00422e28.bin",
+          "size": 186,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4337192
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 77538,
+          "function": "Compiled clean-room G2 interrupt-atomic per-instance configuration latch at its authenticated stock address",
+          "name": "bootloader_hw_config_latch_422ee2_source_in_place",
+          "output": "apollo510b/bootloader-hw-config-latch-422ee2-source-in-place-0x00422ee2.bin",
+          "size": 106,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4337378
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 77644,
+          "function": "Compiled clean-room G2 interrupt-atomic secondary per-instance configuration latch at its authenticated stock address",
+          "name": "bootloader_hw_config_latch_secondary_422f4c_source_in_place",
+          "output": "apollo510b/bootloader-hw-config-latch-secondary-422f4c-source-in-place-0x00422f4c.bin",
+          "size": 86,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4337484
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 77730,
+          "function": "Compiled clean-room G2 interrupt-atomic secondary per-instance configuration release at its authenticated stock address",
+          "name": "bootloader_hw_config_release_secondary_422fa2_source_in_place",
+          "output": "apollo510b/bootloader-hw-config-release-secondary-422fa2-source-in-place-0x00422fa2.bin",
+          "size": 60,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4337570
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 77790,
+          "function": "Compiled clean-room G2 per-instance register-quiesce and hardware-shutdown service at its authenticated stock address",
+          "name": "bootloader_hw_shutdown_422fde_source_in_place",
+          "output": "apollo510b/bootloader-hw-shutdown-422fde-source-in-place-0x00422fde.bin",
+          "size": 176,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4337630
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 77966,
+          "function": "Authenticated retained per-instance hardware initializer between the source-owned shutdown and FIFO services",
+          "name": "bootloader_hw_initializer_42308e_opaque",
+          "output": "apollo510b/bootloader-hw-initializer-42308e-opaque-0x0042308e.bin",
+          "size": 570,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4337806
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 78536,
+          "function": "Compiled clean-room G2 per-instance FIFO read service at its authenticated stock address",
+          "name": "bootloader_hw_fifo_read_4232c8_source_in_place",
+          "output": "apollo510b/bootloader-hw-fifo-read-4232c8-source-in-place-0x004232c8.bin",
+          "size": 70,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338376
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 78606,
+          "function": "Compiled clean-room G2 per-instance FIFO write service at its authenticated stock address",
+          "name": "bootloader_hw_fifo_write_42330e_source_in_place",
+          "output": "apollo510b/bootloader-hw-fifo-write-42330e-source-in-place-0x0042330e.bin",
+          "size": 52,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338446
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 78658,
+          "function": "Compiled clean-room G2 per-instance FIFO drain wrapper at its authenticated stock address",
+          "name": "bootloader_hw_fifo_drain_423342_source_in_place",
+          "output": "apollo510b/bootloader-hw-fifo-drain-423342-source-in-place-0x00423342.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338498
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 78672,
+          "function": "Compiled clean-room G2 critical-section FIFO snapshot adapter at its authenticated stock address",
+          "name": "bootloader_hw_fifo_snapshot_423350_source_in_place",
+          "output": "apollo510b/bootloader-hw-fifo-snapshot-423350-source-in-place-0x00423350.bin",
+          "size": 64,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338512
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 78736,
+          "function": "Compiled clean-room G2 critical-section FIFO pump adapter at its authenticated stock address",
+          "name": "bootloader_hw_fifo_pump_423390_source_in_place",
+          "output": "apollo510b/bootloader-hw-fifo-pump-423390-source-in-place-0x00423390.bin",
+          "size": 80,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338576
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 78816,
+          "function": "Authenticated retained literal words between the FIFO adapters and mode dispatcher",
+          "name": "bootloader_hw_fifo_adapter_literal_words_4233e0_opaque",
+          "output": "apollo510b/bootloader-hw-fifo-adapter-literal-words-4233e0-opaque-0x004233e0.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338656
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 78824,
+          "function": "Compiled clean-room G2 per-instance mode dispatcher at its authenticated stock address",
+          "name": "bootloader_hw_mode_dispatch_4233e8_source_in_place",
+          "output": "apollo510b/bootloader-hw-mode-dispatch-4233e8-source-in-place-0x004233e8.bin",
+          "size": 72,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338664
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 78896,
+          "function": "Authenticated retained literal words between the mode dispatcher and source-owned wait wrappers",
+          "name": "bootloader_hw_mode_dispatch_literal_words_423430_opaque",
+          "output": "apollo510b/bootloader-hw-mode-dispatch-literal-words-423430-opaque-0x00423430.bin",
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338736
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 78916,
+          "function": "Compiled clean-room G2 mode-zero bounded wait wrapper at its authenticated stock address",
+          "name": "bootloader_hw_mode_zero_wait_423444_source_in_place",
+          "output": "apollo510b/bootloader-hw-mode-zero-wait-423444-source-in-place-0x00423444.bin",
+          "size": 74,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338756
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 78990,
+          "function": "Compiled clean-room G2 mode-one bounded wait wrapper at its authenticated stock address",
+          "name": "bootloader_hw_mode_one_wait_42348e_source_in_place",
+          "output": "apollo510b/bootloader-hw-mode-one-wait-42348e-source-in-place-0x0042348e.bin",
+          "size": 74,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338830
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 79064,
+          "function": "Compiled clean-room G2 mode-two latch and progress start helper at its authenticated stock address",
+          "name": "bootloader_hw_mode_two_start_4234d8_source_in_place",
+          "output": "apollo510b/bootloader-hw-mode-two-start-4234d8-source-in-place-0x004234d8.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338904
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 79098,
+          "function": "Compiled clean-room G2 mode-three latch and progress start helper at its authenticated stock address",
+          "name": "bootloader_hw_mode_three_start_4234fa_source_in_place",
+          "output": "apollo510b/bootloader-hw-mode-three-start-4234fa-source-in-place-0x004234fa.bin",
+          "size": 42,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338938
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 79140,
+          "function": "Compiled clean-room G2 primary progress service at its authenticated stock address",
+          "name": "bootloader_hw_primary_progress_423524_source_in_place",
+          "output": "apollo510b/bootloader-hw-primary-progress-423524-source-in-place-0x00423524.bin",
+          "size": 228,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4338980
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 79368,
+          "function": "Compiled clean-room G2 secondary progress service at its authenticated stock address",
+          "name": "bootloader_hw_secondary_progress_423608_source_in_place",
+          "output": "apollo510b/bootloader-hw-secondary-progress-423608-source-in-place-0x00423608.bin",
+          "size": 198,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4339208
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 79566,
+          "function": "Compiled clean-room G2 per-instance register OR service at its authenticated stock address",
+          "name": "bootloader_hw_register_or_4236ce_source_in_place",
+          "output": "apollo510b/bootloader-hw-register-or-4236ce-source-in-place-0x004236ce.bin",
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4339406
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 79610,
+          "function": "Authenticated retained alignment and literal word between register services",
+          "name": "bootloader_hw_register_or_literal_words_4236fa_opaque",
+          "output": "apollo510b/bootloader-hw-register-or-literal-words-4236fa-opaque-0x004236fa.bin",
+          "size": 6,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4339450
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 79616,
+          "function": "Compiled clean-room G2 per-instance register write service at its authenticated stock address",
+          "name": "bootloader_hw_register_write_423700_source_in_place",
+          "output": "apollo510b/bootloader-hw-register-write-423700-source-in-place-0x00423700.bin",
+          "size": 42,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4339456
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 79658,
+          "function": "Compiled clean-room G2 per-instance register query service at its authenticated stock address",
+          "name": "bootloader_hw_register_query_42372a_source_in_place",
+          "output": "apollo510b/bootloader-hw-register-query-42372a-source-in-place-0x0042372a.bin",
+          "size": 58,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4339498
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 79716,
+          "function": "Authenticated retained register and identity words before the service dispatcher",
+          "name": "bootloader_hw_service_dispatch_literal_words_423764_opaque",
+          "output": "apollo510b/bootloader-hw-service-dispatch-literal-words-423764-opaque-0x00423764.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4339556
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 79740,
+          "function": "Compiled clean-room G2 per-instance service dispatcher at its authenticated stock address",
+          "name": "bootloader_hw_service_dispatch_42377c_source_in_place",
+          "output": "apollo510b/bootloader-hw-service-dispatch-42377c-source-in-place-0x0042377c.bin",
+          "size": 176,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4339580
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 79916,
+          "function": "Authenticated retained literal and status words before the bounded memory-exchange helpers",
+          "name": "bootloader_memory_exchange_literal_words_42382c_opaque",
+          "output": "apollo510b/bootloader-memory-exchange-literal-words-42382c-opaque-0x0042382c.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4339756
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 79972,
+          "function": "Compiled clean-room G2 bounded two-buffer memory exchange at its authenticated stock address",
+          "name": "bootloader_memory_swap_423864_source_in_place",
+          "output": "apollo510b/bootloader-memory-swap-423864-source-in-place-0x00423864.bin",
+          "size": 86,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4339812
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 80058,
+          "function": "Compiled clean-room G2 bounded three-buffer memory rotation at its authenticated stock address",
+          "name": "bootloader_memory_rotate3_4238ba_source_in_place",
+          "output": "apollo510b/bootloader-memory-rotate3-4238ba-source-in-place-0x004238ba.bin",
+          "size": 110,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4339898
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 80168,
+          "function": "Compiled clean-room G2 bounded rotate-to-front helper at its authenticated stock address",
+          "name": "bootloader_memory_rotate_front_423928_source_in_place",
+          "output": "apollo510b/bootloader-memory-rotate-front-423928-source-in-place-0x00423928.bin",
+          "size": 74,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4340008
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 80242,
+          "function": "Compiled clean-room G2 three-element comparator/exchange helper at its authenticated stock address",
+          "name": "bootloader_memory_sort3_423972_source_in_place",
+          "output": "apollo510b/bootloader-memory-sort3-423972-source-in-place-0x00423972.bin",
+          "size": 80,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4340082
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 80322,
+          "function": "Compiled clean-room G2 Floyd max-heap sift helper at its authenticated stock address",
+          "name": "bootloader_memory_heap_sift_4239c2_source_in_place",
+          "output": "apollo510b/bootloader-memory-heap-sift-4239c2-source-in-place-0x004239c2.bin",
+          "size": 134,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4340162
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 80456,
+          "function": "Compiled clean-room G2 introspective qsort core at its authenticated stock address",
+          "name": "bootloader_memory_qsort_core_423a48_source_in_place",
+          "output": "apollo510b/bootloader-memory-qsort-core-423a48-source-in-place-0x00423a48.bin",
+          "size": 704,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4340296
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81160,
+          "function": "Compiled clean-room G2 public qsort wrapper at its authenticated stock address",
+          "name": "bootloader_memory_qsort_423d08_source_in_place",
+          "output": "apollo510b/bootloader-memory-qsort-423d08-source-in-place-0x00423d08.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341000
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81184,
+          "function": "Compiled clean-room G2 global hardware-control service at its authenticated stock address",
+          "name": "bootloader_hw_global_service_423d20_source_in_place",
+          "output": "apollo510b/bootloader-hw-global-service-423d20-source-in-place-0x00423d20.bin",
+          "size": 56,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341024
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81240,
+          "function": "Compiled clean-room G2 hardware-control initializer at its authenticated stock address",
+          "name": "bootloader_hw_control_initialize_423d58_source_in_place",
+          "output": "apollo510b/bootloader-hw-control-initialize-423d58-source-in-place-0x00423d58.bin",
+          "size": 34,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341080
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81274,
+          "function": "Compiled clean-room G2 hardware-control register query at its authenticated stock address",
+          "name": "bootloader_hw_control_query_423d7a_source_in_place",
+          "output": "apollo510b/bootloader-hw-control-query-423d7a-source-in-place-0x00423d7a.bin",
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341114
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 81306,
+          "function": "Authenticated retained hardware-control register literal and alignment bytes",
+          "name": "bootloader_hw_control_register_literal_423d9a_opaque",
+          "output": "apollo510b/bootloader-hw-control-register-literal-423d9a-opaque-0x00423d9a.bin",
+          "size": 6,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341146
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81312,
+          "function": "Compiled clean-room G2 indexed hardware-control register test at its authenticated stock address",
+          "name": "bootloader_hw_control_test_423da0_source_in_place",
+          "output": "apollo510b/bootloader-hw-control-test-423da0-source-in-place-0x00423da0.bin",
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341152
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81348,
+          "function": "Compiled clean-room G2 zero-index hardware-control test wrapper at its authenticated stock address",
+          "name": "bootloader_hw_control_test_zero_423dc4_source_in_place",
+          "output": "apollo510b/bootloader-hw-control-test-zero-423dc4-source-in-place-0x00423dc4.bin",
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341188
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 81358,
+          "function": "Authenticated retained alignment before the interrupt-atomic hardware-control service",
+          "name": "bootloader_hw_control_critical_alignment_423dce_opaque",
+          "output": "apollo510b/bootloader-hw-control-critical-alignment-423dce-opaque-0x00423dce.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341198
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81360,
+          "function": "Compiled clean-room G2 interrupt-atomic hardware-control service at its authenticated stock address",
+          "name": "bootloader_hw_control_critical_423dd0_source_in_place",
+          "output": "apollo510b/bootloader-hw-control-critical-423dd0-source-in-place-0x00423dd0.bin",
+          "size": 60,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341200
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 81420,
+          "function": "Authenticated retained SRAM literal words before the hardware-control state mapper",
+          "name": "bootloader_hw_control_sram_literals_423e0c_opaque",
+          "output": "apollo510b/bootloader-hw-control-sram-literals-423e0c-opaque-0x00423e0c.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341260
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81428,
+          "function": "Compiled clean-room G2 hardware-control state mapper at its authenticated stock address",
+          "name": "bootloader_hw_control_state_423e14_source_in_place",
+          "output": "apollo510b/bootloader-hw-control-state-423e14-source-in-place-0x00423e14.bin",
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341268
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81472,
+          "function": "Compiled clean-room G2 global MSPI FIFO-write service at its authenticated stock address",
+          "name": "bootloader_mspi_fifo_write_423e40_source_in_place",
+          "output": "apollo510b/bootloader-mspi-fifo-write-423e40-source-in-place-0x00423e40.bin",
+          "size": 74,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341312
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81546,
+          "function": "Compiled clean-room G2 global MSPI FIFO-read service at its authenticated stock address",
+          "name": "bootloader_mspi_fifo_read_423e8a_source_in_place",
+          "output": "apollo510b/bootloader-mspi-fifo-read-423e8a-source-in-place-0x00423e8a.bin",
+          "size": 158,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341386
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81704,
+          "function": "Compiled clean-room G2 MSPI command-queue initializer at its authenticated stock address",
+          "name": "bootloader_mspi_cq_init_423f28_source_in_place",
+          "output": "apollo510b/bootloader-mspi-cq-init-423f28-source-in-place-0x00423f28.bin",
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341544
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81748,
+          "function": "Compiled clean-room G2 MSPI command-queue terminator at its authenticated stock address",
+          "name": "bootloader_mspi_cq_term_423f54_source_in_place",
+          "output": "apollo510b/bootloader-mspi-cq-term-423f54-source-in-place-0x00423f54.bin",
+          "size": 58,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341588
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81806,
+          "function": "Compiled clean-room G2 MSPI command-queue enable service at its authenticated stock address",
+          "name": "bootloader_mspi_cq_enable_423f8e_source_in_place",
+          "output": "apollo510b/bootloader-mspi-cq-enable-423f8e-source-in-place-0x00423f8e.bin",
+          "size": 30,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341646
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81836,
+          "function": "Compiled clean-room G2 MSPI command-queue disable service at its authenticated stock address",
+          "name": "bootloader_mspi_cq_disable_423fac_source_in_place",
+          "output": "apollo510b/bootloader-mspi-cq-disable-423fac-source-in-place-0x00423fac.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341676
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81848,
+          "function": "Compiled AmbiqSuite-compatible G2 MSPI command-queue pause service at its authenticated stock address",
+          "name": "bootloader_mspi_cq_pause_423fb8_source_in_place",
+          "output": "apollo510b/bootloader-mspi-cq-pause-423fb8-source-in-place-0x00423fb8.bin",
+          "size": 134,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341688
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 81982,
+          "function": "Compiled AmbiqSuite-compatible G2 MSPI high-priority DMA programming service at its authenticated stock address",
+          "name": "bootloader_mspi_program_dma_42403e_source_in_place",
+          "output": "apollo510b/bootloader-mspi-program-dma-42403e-source-in-place-0x0042403e.bin",
+          "size": 108,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341822
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 82090,
+          "function": "Compiled AmbiqSuite-compatible G2 MSPI high-priority scheduler at its authenticated stock address",
+          "name": "bootloader_mspi_sched_hiprio_4240aa_source_in_place",
+          "output": "apollo510b/bootloader-mspi-sched-hiprio-4240aa-source-in-place-0x004240aa.bin",
+          "size": 118,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4341930
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 82208,
+          "function": "Authenticated retained official MSPI device-configuration and PIO-mixed bodies before the source-owned no-op callback",
+          "name": "bootloader_mspi_device_configure_424120_424976_official",
+          "output": "apollo510b/bootloader-mspi-device-configure-424120-424976-official-0x00424120.bin",
+          "size": 2134,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4342048
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 84342,
+          "function": "Compiled AmbiqSuite-compatible G2 MSPI no-op callback at its authenticated stock address",
+          "name": "bootloader_mspi_dummy_callback_424976_source_in_place",
+          "output": "apollo510b/bootloader-mspi-dummy-callback-424976-source-in-place-0x00424976.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4344182
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 84344,
+          "function": "Compiled AmbiqSuite-compatible G2 MSPI sequence-loopback callback at its authenticated stock address",
+          "name": "bootloader_mspi_seq_loopback_424978_source_in_place",
+          "output": "apollo510b/bootloader-mspi-seq-loopback-424978-source-in-place-0x00424978.bin",
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4344184
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 84380,
+          "function": "Authenticated retained MSPI0 base literal before the clock-generator control service",
+          "name": "bootloader_mspi0_base_literal_42499c_opaque",
+          "output": "apollo510b/bootloader-mspi0-base-literal-42499c-opaque-0x0042499c.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4344220
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 84384,
+          "function": "Compiled AmbiqSuite-compatible G2 MSPI clock-generator control service at its authenticated stock address",
+          "name": "bootloader_mspi_clkgen_ctrl_4249a0_source_in_place",
+          "output": "apollo510b/bootloader-mspi-clkgen-ctrl-4249a0-source-in-place-0x004249a0.bin",
+          "size": 120,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4344224
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 84504,
+          "function": "Compiled AmbiqSuite-compatible G2 MSPI XIP-off minimum-delay selector at its authenticated stock address",
+          "name": "bootloader_mspi_xip_off_delay_424a18_source_in_place",
+          "output": "apollo510b/bootloader-mspi-xip-off-delay-424a18-source-in-place-0x00424a18.bin",
+          "size": 66,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4344344
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 84570,
+          "function": "Authenticated subsequent bootloader compatibility bytes retained after the source-owned qsort runtime and before the AmbiqSuite MSPI interrupt-clear leaf",
+          "name": "bootloader_opaque_after_easylogger_transport",
+          "output": "apollo510b/bootloader-opaque-after-easylogger-transport-0x00424a5a.bin",
+          "size": 6828,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4344410
         },
         {
           "address_status": "generated_source_entry_replacement",
@@ -1874,14 +3863,74 @@
           "target_address": 4351238
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 91446,
-          "function": "Official Apollo bootloader bytes after the source-replaced AmbiqSuite MSPI interrupt-clear leaf",
-          "name": "bootloader_opaque_after_ambiq_mspi_interrupt_clear",
-          "output": "apollo510b/bootloader-opaque-0x00426536.bin",
-          "size": 57153,
+          "function": "Compiled AmbiqSuite 5.1.0-compatible MSPI interrupt-service dispatcher at its authenticated stock address",
+          "name": "bootloader_mspi_interrupt_service_426536_source_in_place",
+          "output": "apollo510b/bootloader-mspi-interrupt-service-426536-source-in-place-0x00426536.bin",
+          "size": 712,
           "target": "apollo510b_internal_mram",
           "target_address": 4351286
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 92158,
+          "function": "Authenticated non-executable MSPI interrupt-service literal pool retained before power control",
+          "name": "bootloader_mspi_interrupt_service_literal_pool_4267fe_opaque",
+          "output": "apollo510b/bootloader-mspi-interrupt-service-literal-pool-4267fe-opaque-0x004267fe.bin",
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4351998
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 92168,
+          "function": "Compiled AmbiqSuite 5.1.0-compatible MSPI power-control service at its authenticated stock address",
+          "name": "bootloader_mspi_power_control_426808_source_in_place",
+          "output": "apollo510b/bootloader-mspi-power-control-426808-source-in-place-0x00426808.bin",
+          "size": 1014,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4352008
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 93182,
+          "function": "Authenticated bootloader bytes before the source-routed clock-manager divider entries",
+          "name": "bootloader_opaque_before_clkmgr_divider_entries",
+          "output": "apollo510b/bootloader-opaque-before-clkmgr-divider-entries-0x00426bfe.bin",
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4353022
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 93220,
+          "function": "Generated entry redirect and NOP fill replacing the complete HFRC2 UQ17.15 divider body",
+          "name": "bootloader_clkmgr_hfrc2_uq15_divider_source_redirect",
+          "output": "apollo510b/bootloader-clkmgr-hfrc2-uq15-divider-source-redirect-0x00426c24.bin",
+          "size": 42,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4353060
+        },
+        {
+          "address_status": "generated_source_entry_replacement",
+          "file_offset": 93262,
+          "function": "Generated entry redirect and NOP fill replacing the complete HFRC integer divider body",
+          "name": "bootloader_clkmgr_hfrc_integer_divider_source_redirect",
+          "output": "apollo510b/bootloader-clkmgr-hfrc-integer-divider-source-redirect-0x00426c4e.bin",
+          "size": 10,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4353102
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 93272,
+          "function": "Authenticated retained bootloader bytes after the source-owned MSPI power-control body, beginning with its literal pool",
+          "name": "bootloader_opaque_after_mspi_power_control_426bfe",
+          "output": "apollo510b/bootloader-opaque-after-mspi-power-control-426bfe-0x00426c58.bin",
+          "size": 55327,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4353112
         },
         {
           "address_status": "generated_alignment",
@@ -3432,23 +5481,483 @@
           "size": 88,
           "target": "apollo510b_internal_mram",
           "target_address": 4418356
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 158604,
+          "function": "Compiled clean-room G2 NVIC interrupt-enable entry",
+          "name": "bootloader_nvic_enable_irq_41fdc0_source_leaf",
+          "output": "apollo510b/bootloader-nvic-enable-irq-41fdc0-source-leaf-0x00436b8c.bin",
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418444
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 158636,
+          "function": "Compiled clean-room G2 NVIC/system-handler priority entry",
+          "name": "bootloader_nvic_set_priority_41fdde_source_leaf",
+          "output": "apollo510b/bootloader-nvic-set-priority-41fdde-source-leaf-0x00436bac.bin",
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418476
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 158668,
+          "function": "Compiled clean-room G2 MSPI status-clear-service interrupt wrapper",
+          "name": "bootloader_mspi_isr_41fe06_source_leaf",
+          "output": "apollo510b/bootloader-mspi-isr-41fe06-source-leaf-0x00436bcc.bin",
+          "size": 48,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418508
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 158716,
+          "function": "Compiled clean-room idempotent G2 MSPI enable entry",
+          "name": "bootloader_mspi_enable_41fe28_source_leaf",
+          "output": "apollo510b/bootloader-mspi-enable-41fe28-source-leaf-0x00436bfc.bin",
+          "size": 40,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418556
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 158756,
+          "function": "Compiled clean-room G2 MSPI disable entry",
+          "name": "bootloader_mspi_disable_41fe48_source_leaf",
+          "output": "apollo510b/bootloader-mspi-disable-41fe48-source-leaf-0x00436c24.bin",
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418596
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 158788,
+          "function": "Compiled clean-room guarded G2 event-flags service initializer",
+          "name": "bootloader_event_flags_init_41fe62_source_leaf",
+          "output": "apollo510b/bootloader-event-flags-init-41fe62-source-leaf-0x00436c44.bin",
+          "size": 76,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418628
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 158864,
+          "function": "Compiled clean-room guarded G2 event-flags acquire entry",
+          "name": "bootloader_event_flags_acquire_41fe9c_source_leaf",
+          "output": "apollo510b/bootloader-event-flags-acquire-41fe9c-source-leaf-0x00436c90.bin",
+          "size": 68,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418704
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 158932,
+          "function": "Compiled clean-room guarded G2 event-flags release entry",
+          "name": "bootloader_event_flags_release_41fed4_source_leaf",
+          "output": "apollo510b/bootloader-event-flags-release-41fed4-source-leaf-0x00436cd4.bin",
+          "size": 64,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418772
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 158996,
+          "function": "Compiled clean-room paired G2 event-lock and conditional MSPI-disable guard entry",
+          "name": "bootloader_mspi_guard_enter_41ff08_source_leaf",
+          "output": "apollo510b/bootloader-mspi-guard-enter-41ff08-source-leaf-0x00436d14.bin",
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418836
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 159032,
+          "function": "Compiled clean-room conditional G2 MSPI-enable and paired event-unlock guard exit",
+          "name": "bootloader_mspi_guard_exit_41ff1e_source_leaf",
+          "output": "apollo510b/bootloader-mspi-guard-exit-41ff1e-source-leaf-0x00436d38.bin",
+          "size": 32,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418872
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 159064,
+          "function": "Compiled clean-room G2 MSPI XIP configuration-byte updater",
+          "name": "bootloader_mspi_xip_config_41ff34_source_leaf",
+          "output": "apollo510b/bootloader-mspi-xip-config-41ff34-source-leaf-0x00436d58.bin",
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418904
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 159100,
+          "function": "Compiled clean-room G2 longest consecutive-one run-length helper",
+          "name": "bootloader_longest_ones_run_41ff60_source_leaf",
+          "output": "apollo510b/bootloader-longest-ones-run-41ff60-source-leaf-0x00436d7c.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418940
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 159116,
+          "function": "Compiled clean-room G2 longest consecutive-one run center-selection helper",
+          "name": "bootloader_longest_ones_center_41ff74_source_leaf",
+          "output": "apollo510b/bootloader-longest-ones-center-41ff74-source-leaf-0x00436d8c.bin",
+          "size": 126,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4418956
+        },
+        {
+          "address_status": "generated_alignment",
+          "file_offset": 159242,
+          "function": "Generated two-byte alignment before the G2 MSPI timing scan",
+          "name": "bootloader_mspi_timing_scan_420002_alignment_padding",
+          "output": "apollo510b/bootloader-mspi-timing-scan-420002-alignment-padding-0x00436e0a.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4419082
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 159244,
+          "function": "Compiled clean-room G2 exhaustive MSPI timing scan and center-selection entry",
+          "name": "bootloader_mspi_timing_scan_420002_source_leaf",
+          "output": "apollo510b/bootloader-mspi-timing-scan-420002-source-leaf-0x00436e0c.bin",
+          "size": 420,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4419084
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 159664,
+          "function": "Compiled clean-room G2 automatic MSPI timing selection, active-configuration publication, and diagnostic fallback entry",
+          "name": "bootloader_mspi_timing_auto_4201ba_source_leaf",
+          "output": "apollo510b/bootloader-mspi-timing-auto-4201ba-source-leaf-0x00436fb0.bin",
+          "size": 172,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4419504
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 159836,
+          "function": "Compiled clean-room G2 MX25U25643G low-level MSPI initializer",
+          "name": "bootloader_mspi_low_level_init_420254_source_leaf",
+          "output": "apollo510b/bootloader-mspi-low-level-init-420254-source-leaf-0x0043705c.bin",
+          "size": 492,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4419676
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 160328,
+          "function": "Compiled clean-room G2 MX25U25643G public initialization wrapper",
+          "name": "bootloader_mspi_driver_init_420476_source_leaf",
+          "output": "apollo510b/bootloader-mspi-driver-init-420476-source-leaf-0x00437248.bin",
+          "size": 204,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4420168
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 160532,
+          "function": "Compiled clean-room G2 MX25U25643G soft-reset sequence",
+          "name": "bootloader_mspi_soft_reset_42052a_source_leaf",
+          "output": "apollo510b/bootloader-mspi-soft-reset-42052a-source-leaf-0x00437314.bin",
+          "size": 136,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4420372
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 160668,
+          "function": "Compiled clean-room G2 MX25U25643G JEDEC-ID reader",
+          "name": "bootloader_mspi_read_id_42059e_source_leaf",
+          "output": "apollo510b/bootloader-mspi-read-id-42059e-source-leaf-0x0043739c.bin",
+          "size": 100,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4420508
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 160768,
+          "function": "Compiled clean-room G2 MX25U25643G read-transfer wrapper",
+          "name": "bootloader_mspi_read_transfer_4205f4_source_leaf",
+          "output": "apollo510b/bootloader-mspi-read-transfer-4205f4-source-leaf-0x00437400.bin",
+          "size": 172,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4420608
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 160940,
+          "function": "Compiled clean-room G2 MX25U25643G write-transfer wrapper",
+          "name": "bootloader_mspi_write_transfer_42069e_source_leaf",
+          "output": "apollo510b/bootloader-mspi-write-transfer-42069e-source-leaf-0x004374ac.bin",
+          "size": 148,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4420780
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 161088,
+          "function": "Compiled clean-room G2 MX25U25643G status-register reader",
+          "name": "bootloader_mspi_busy_status_42074e_source_leaf",
+          "output": "apollo510b/bootloader-mspi-busy-status-42074e-source-leaf-0x00437540.bin",
+          "size": 88,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4420928
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 161176,
+          "function": "Compiled clean-room G2 MX25U25643G two-phase ready poll",
+          "name": "bootloader_mspi_wait_ready_4207a2_source_leaf",
+          "output": "apollo510b/bootloader-mspi-wait-ready-4207a2-source-leaf-0x00437598.bin",
+          "size": 88,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4421016
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 161264,
+          "function": "Compiled clean-room G2 MX25U25643G fixed ready-poll wrapper",
+          "name": "bootloader_mspi_wait_ready_default_4207f4_source_leaf",
+          "output": "apollo510b/bootloader-mspi-wait-ready-default-4207f4-source-leaf-0x004375f0.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4421104
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 161276,
+          "function": "Compiled clean-room G2 MX25U25643G address-mode reader",
+          "name": "bootloader_mspi_4byte_mode_420800_source_leaf",
+          "output": "apollo510b/bootloader-mspi-4byte-mode-420800-source-leaf-0x004375fc.bin",
+          "size": 124,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4421116
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 161400,
+          "function": "Compiled clean-room G2 MX25U25643G four-byte-mode entry sequence",
+          "name": "bootloader_mspi_enter_4byte_mode_420890_source_leaf",
+          "output": "apollo510b/bootloader-mspi-enter-4byte-mode-420890-source-leaf-0x00437678.bin",
+          "size": 220,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4421240
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 161620,
+          "function": "Compiled clean-room G2 MX25U25643G write-enable command wrapper",
+          "name": "bootloader_mspi_write_enable_420984_source_leaf",
+          "output": "apollo510b/bootloader-mspi-write-enable-420984-source-leaf-0x00437754.bin",
+          "size": 72,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4421460
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 161692,
+          "function": "Compiled clean-room G2 MX25U25643G write-disable command wrapper",
+          "name": "bootloader_mspi_write_disable_4209c4_source_leaf",
+          "output": "apollo510b/bootloader-mspi-write-disable-4209c4-source-leaf-0x0043779c.bin",
+          "size": 72,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4421532
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 161764,
+          "function": "Compiled clean-room G2 MX25U25643G guarded sector-erase service",
+          "name": "bootloader_mspi_sector_erase_420a08_source_leaf",
+          "output": "apollo510b/bootloader-mspi-sector-erase-420a08-source-leaf-0x004377e4.bin",
+          "size": 244,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4421604
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 162008,
+          "function": "Compiled clean-room G2 MX25U25643G guarded page-splitting program service",
+          "name": "bootloader_mspi_program_420b0c_source_leaf",
+          "output": "apollo510b/bootloader-mspi-program-420b0c-source-leaf-0x004378d8.bin",
+          "size": 256,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4421848
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 162264,
+          "function": "Compiled clean-room G2 MX25U25643G status-register-2 QE service",
+          "name": "bootloader_mspi_quad_enable_420c5c_source_leaf",
+          "output": "apollo510b/bootloader-mspi-quad-enable-420c5c-source-leaf-0x004379d8.bin",
+          "size": 364,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4422104
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 162628,
+          "function": "Compiled clean-room G2 MSPI disable, device-configure, enable, and pin-group service",
+          "name": "bootloader_mspi_device_reconfigure_420e08_source_leaf",
+          "output": "apollo510b/bootloader-mspi-device-reconfigure-420e08-source-leaf-0x00437b44.bin",
+          "size": 136,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4422468
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 162764,
+          "function": "Compiled clean-room G2 MX25U25643G quad-mode template, reconfiguration, XIP, and control service",
+          "name": "bootloader_mspi_set_quad_mode_420e8c_source_leaf",
+          "output": "apollo510b/bootloader-mspi-set-quad-mode-420e8c-source-leaf-0x00437bcc.bin",
+          "size": 152,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4422604
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 162916,
+          "function": "Compiled clean-room G2 MX25U25643G serial-mode reconfiguration, XIP, and control service",
+          "name": "bootloader_mspi_set_serial_mode_420f10_source_leaf",
+          "output": "apollo510b/bootloader-mspi-set-serial-mode-420f10-source-leaf-0x00437c64.bin",
+          "size": 124,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4422756
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 163040,
+          "function": "Compiled clean-room G2 MX25U25643G guarded blocking read service",
+          "name": "bootloader_mspi_read_420f70_source_leaf",
+          "output": "apollo510b/bootloader-mspi-read-420f70-source-leaf-0x00437ce0.bin",
+          "size": 152,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4422880
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 163192,
+          "function": "Compiled clean-room G2 LittleFS directory bootstrap service",
+          "name": "bootloader_check_and_create_directories_4210c8_source_leaf",
+          "output": "apollo510b/bootloader-check-and-create-directories-4210c8-source-leaf-0x00437d78.bin",
+          "size": 220,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4423032
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 163412,
+          "function": "Compiled clean-room G2 LittleFS format, mount, and directory-bootstrap orchestration service",
+          "name": "bootloader_littlefs_format_4211b0_source_leaf",
+          "output": "apollo510b/bootloader-littlefs-format-4211b0-source-leaf-0x00437e54.bin",
+          "size": 108,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4423252
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 163520,
+          "function": "Compiled clean-room G2 LittleFS mount, recovery, readiness, and boot-counter initialization service",
+          "name": "bootloader_littlefs_init_421210_source_leaf",
+          "output": "apollo510b/bootloader-littlefs-init-421210-source-leaf-0x00437ec0.bin",
+          "size": 260,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4423360
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 163780,
+          "function": "Compiled clean-room G2 LittleFS block-read callback",
+          "name": "bootloader_littlefs_read_4212d8_source_leaf",
+          "output": "apollo510b/bootloader-littlefs-read-4212d8-source-leaf-0x00437fc4.bin",
+          "size": 60,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4423620
         }
       ],
       "source_appended_boundary": 148599
     },
+    "codec": {
+      "regions": [
+        {
+          "name": "fwpk_metadata",
+          "function": "FWPK header and two-entry segment table",
+          "file_offset": 0,
+          "size": 48,
+          "address_status": "container_only",
+          "output": "codec/fwpk-metadata.bin"
+        },
+        {
+          "name": "codec_uart_boot_header",
+          "function": "NationalChip GX8002 UART-boot transfer header",
+          "file_offset": 48,
+          "size": 32,
+          "address_status": "controller_protocol_metadata",
+          "output": "codec/uart-boot-header.bin"
+        },
+        {
+          "name": "codec_uart_boot_stage_1",
+          "function": "NationalChip GX8002 UART-boot stage 1 loaded into codec IRAM",
+          "file_offset": 80,
+          "size": 10240,
+          "target": "gx8002_iram",
+          "target_address": 268435456,
+          "address_status": "confirmed_from_uart_boot_header_and_vectors",
+          "output": "codec/uart-boot-stage-1-0x10000000.bin"
+        },
+        {
+          "name": "codec_uart_boot_stage_2",
+          "function": "NationalChip GX8002 UART-boot stage 2 loaded into codec IRAM",
+          "file_offset": 10320,
+          "size": 27964,
+          "target": "gx8002_iram",
+          "target_address": 268445696,
+          "address_status": "confirmed_from_uart_boot_header_and_vectors",
+          "output": "codec/uart-boot-stage-2-0x10002800.bin"
+        },
+        {
+          "name": "codec_spi_nor_image_a",
+          "function": "NationalChip GX8002 primary BINH image written at codec SPI-NOR offset 0",
+          "file_offset": 38284,
+          "size": 193456,
+          "target": "gx8002_spi_nor",
+          "target_address": 0,
+          "address_status": "confirmed_from_binh_headers_and_apollo_dfu_command",
+          "output": "codec/spi-nor-image-a-0x00000000.bin"
+        },
+        {
+          "name": "codec_spi_nor_image_b",
+          "function": "NationalChip GX8002 backup BINH image at its codec SPI-NOR concatenation offset",
+          "file_offset": 231740,
+          "size": 94352,
+          "target": "gx8002_spi_nor",
+          "target_address": 193456,
+          "address_status": "confirmed_from_binh_headers_and_apollo_dfu_command",
+          "output": "codec/spi-nor-image-b-0x0002f3b0.bin"
+        }
+      ]
+    },
     "apollo_main": {
-      "function": "Even Apollo510B main firmware with maintained source overlays including Cordio security, system startup, display, sensor, health, and case policy",
+      "function": "Even Apollo510B main firmware with maintained source overlays including Cordio security, system startup, display, sensor, health, and case policy; source-owned complete product-test protocol; source-routed Apollo510 HFRC divider calculators",
       "provider": {
         "kind": "source_build",
         "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
         "profiles": {
           "linux-clang": {
-            "size": 3728356,
-            "sha256": "aee25953387faa833d06deabc059d72334af77027c089eba2f2af52aa57063c8"
+            "size": 3736060,
+            "sha256": "ea1541f17a52048209c96d112a99723c875ba0347125ed831f5da64170f1ba36"
           }
         },
-        "sha256": "dc578472f06af2d499b9cb771fc185df4f739a05de558098088b56da9a5e4ce0",
-        "size": 3952346
+        "sha256": "c82a0bcbb9451191b4778d1cf2b6ee48a6fa01b302d5e671a91f27630337987a",
+        "size": 3952454
       },
       "regions": [
         {
@@ -4522,12 +7031,32 @@
         {
           "address_status": "generated_source_entry_replacement",
           "file_offset": 54912,
-          "function": "Generated entry redirect and NOP fill replacing G2 OTA file-service routine _fileCmdParse",
+          "function": "Generated entry redirect replacing G2 OTA file-service routine _fileCmdParse while preserving its authenticated reclaimed tail",
           "name": "ota_service_14_source_replacement",
           "output": "apollo510b/main-source-entry-ota-service-14-0x00445660.bin",
-          "size": 5630,
+          "size": 4,
           "target": "apollo510b_internal_mram",
           "target_address": 4478560
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 54916,
+          "function": "Apache-2.0 Google liblc3 v1.1.3 LTPF text closure placed in the authenticated reclaimed _fileCmdParse tail",
+          "name": "liblc3_ltpf_source_text",
+          "output": "apollo510b/main-source-liblc3-ltpf-text-0x00445664.bin",
+          "size": 5596,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4478564
+        },
+        {
+          "address_status": "generated_alignment",
+          "file_offset": 60512,
+          "function": "Unused generated NOP fill remaining after the bounded liblc3 LTPF text closure",
+          "name": "liblc3_ltpf_text_cave_tail",
+          "output": "apollo510b/main-source-liblc3-ltpf-text-tail.bin",
+          "size": 30,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4484160
         },
         {
           "address_status": "official_blob",
@@ -21732,12 +24261,32 @@
         {
           "address_status": "generated_source_entry_replacement",
           "file_offset": 804452,
-          "function": "Generated guarded redirect replacing open_cfw_health_page_build_detail",
+          "function": "Generated guarded redirect replacing open_cfw_health_page_build_detail while preserving its authenticated reclaimed tail",
           "name": "ui_health_page_10_source_replacement",
           "output": "apollo510b/main-generated-ui-health-page-10-0x004fc644.bin",
-          "size": 4418,
+          "size": 4,
           "target": "apollo510b_internal_mram",
           "target_address": 5228100
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 804456,
+          "function": "Apache-2.0 Google liblc3 v1.1.3 LTPF dispatch and filter tables placed in the authenticated reclaimed health-detail tail",
+          "name": "liblc3_ltpf_source_rodata",
+          "output": "apollo510b/main-source-liblc3-ltpf-rodata-0x004fc648.bin",
+          "size": 1980,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5228104
+        },
+        {
+          "address_status": "generated_alignment",
+          "file_offset": 806436,
+          "function": "Unused generated NOP fill remaining after the bounded liblc3 LTPF table closure",
+          "name": "liblc3_ltpf_rodata_cave_tail",
+          "output": "apollo510b/main-source-liblc3-ltpf-rodata-tail.bin",
+          "size": 2434,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5230084
         },
         {
           "address_status": "official_blob",
@@ -30030,14 +32579,84 @@
           "target_address": 5697860
         },
         {
-          "address_status": "official_blob",
+          "address_status": "generated_padding",
           "file_offset": 1274264,
-          "function": "Official Apollo main bytes retained after Cordio SMP and before the authenticated codec-DFU service",
-          "name": "opaque_after_cordio_smp_act_before_service_codec_dfu",
-          "output": "apollo510b/main-official-after-cordio-smp-before-codec-dfu-0x0056f178.bin",
-          "size": 35844,
+          "function": "Generated erased padding around fixed-address PT source",
+          "name": "pt_protocol_in_place_generated_gap_0056f178",
+          "output": "apollo510b/main-pt-generated_gap_0056f178-0x0056f178.bin",
+          "size": 808,
           "target": "apollo510b_internal_mram",
           "target_address": 5697912
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 1275072,
+          "function": "Compiled MIT G2 PT provider section .pt_legacy_entry",
+          "name": "pt_protocol_in_place_source_pt-legacy-entry",
+          "output": "apollo510b/main-pt-source_pt-legacy-entry-0x0056f4a0.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5698720
+        },
+        {
+          "address_status": "generated_padding",
+          "file_offset": 1275076,
+          "function": "Generated erased padding around fixed-address PT source",
+          "name": "pt_protocol_in_place_generated_gap_0056f4a4",
+          "output": "apollo510b/main-pt-generated_gap_0056f4a4-0x0056f4a4.bin",
+          "size": 1160,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5698724
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 1276236,
+          "function": "Compiled MIT G2 PT provider section .pt_legacy_postprocess",
+          "name": "pt_protocol_in_place_source_pt-legacy-postprocess",
+          "output": "apollo510b/main-pt-source_pt-legacy-postprocess-0x0056f92c.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5699884
+        },
+        {
+          "address_status": "generated_padding",
+          "file_offset": 1276240,
+          "function": "Generated erased padding around fixed-address PT source",
+          "name": "pt_protocol_in_place_generated_gap_0056f930",
+          "output": "apollo510b/main-pt-generated_gap_0056f930-0x0056f930.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5699888
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 1276256,
+          "function": "Compiled MIT G2 PT provider section .text",
+          "name": "pt_protocol_in_place_source_text",
+          "output": "apollo510b/main-pt-source_text-0x0056f940.bin",
+          "size": 19004,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5699904
+        },
+        {
+          "address_status": "generated_padding",
+          "file_offset": 1295260,
+          "function": "Generated erased padding after in-place PT source",
+          "name": "pt_protocol_in_place_generated_gap_0057437c",
+          "output": "apollo510b/main-pt-generated_gap_0057437c-0x0057437c.bin",
+          "size": 14528,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5718908
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 1309788,
+          "function": "Official Apollo bytes retained after source-owned PT protocol and before the authenticated codec-DFU service",
+          "name": "opaque_after_pt_protocol_before_service_codec_dfu",
+          "output": "apollo510b/main-official-after-pt-before-codec-dfu-0x00577c3c.bin",
+          "size": 320,
+          "target": "apollo510b_internal_mram",
+          "target_address": 5733436
         },
         {
           "address_status": "generated_source_entry_replacement",
@@ -64658,6 +67277,36 @@
           "size": 22,
           "target": "apollo510b_internal_mram",
           "target_address": 8375972
+        },
+        {
+          "address_status": "generated_alignment",
+          "file_offset": 3952346,
+          "function": "Generated alignment before the clock-manager divider source leaves",
+          "name": "clkmgr_divider_overlay_alignment",
+          "output": "apollo510b/main-source-clkmgr-divider-alignment.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8375994
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 3952348,
+          "function": "Compiled MIT Apollo510 clock-manager leaf (open_cfw_clkmgr_hfrc2_uq15_divider)",
+          "name": "clkmgr_divider_hfrc2_uq15_divider_source_text",
+          "output": "apollo510b/main-source-clkmgr-hfrc2-uq15-divider-0x007fcebc.bin",
+          "size": 88,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8375996
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 3952436,
+          "function": "Compiled MIT Apollo510 clock-manager leaf (open_cfw_clkmgr_hfrc_integer_divider)",
+          "name": "clkmgr_divider_hfrc_integer_divider_source_text",
+          "output": "apollo510b/main-source-clkmgr-hfrc-integer-divider-0x007fcf14.bin",
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 8376084
         }
       ],
       "source_appended_boundary": 3523396
@@ -64668,12 +67317,12 @@
     "output_name": "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
     "profiles": {
       "linux-clang": {
-        "expected_size": 4516088,
-        "expected_sha256": "72935d6882098e5d65e30bdf6630214c5fb428bff20dbabca7e4988ba2aefc37"
+        "expected_size": 4529116,
+        "expected_sha256": "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"
       }
     },
-    "expected_size": 4740094,
-    "expected_sha256": "f76455fc72574e0c8357b14b7f0c422931ae65896eb642e61787d0df40cb8c7f"
+    "expected_size": 4745526,
+    "expected_sha256": "21e27d44618fea26bfc75a9915e426c8be2d8b1b95a9f646df16c7a4129e6f1f"
   },
   "schema_version": 1
 }

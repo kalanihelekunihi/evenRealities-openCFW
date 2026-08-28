@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * RTOS timer pended-callback ISR submission matched to stock entry
  * 0x0047EB4A.

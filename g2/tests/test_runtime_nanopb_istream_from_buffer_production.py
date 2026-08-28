@@ -143,14 +143,14 @@ APPLE_LEAF = {
     "size": 20,
     "sha256": "af3357e8178ab650d5476d0ad0fbfee0b44cdb288d9251da909b3ba7a1de92c4",
     "alignment": 4,
-    "offset": 124896,
+    "offset": 184744,
     "unrelocated_sha256": TEXT_PIN[1],
 }
 LINUX_LEAF = {
     "size": 22,
     "sha256": "59438f30232883560f65ad4e58ff97c05dcdffdb6287fffcb7c1b79487df436d",
     "alignment": 4,
-    "offset": 126720,
+    "offset": 186472,
     "unrelocated_sha256": (
         "6c23e37c9468d866db2e2cb6bf0ce8e103fb34df1078e740b4b8d5d799c257ff"
     ),
@@ -167,26 +167,26 @@ PROFILE_PATCH_PINS = {
 }
 APPLE_AGGREGATE = {
     "overlay": (
-        167_426,
-        "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
+        429_058,
+        "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
     ),
     "component": (
-        3_690_822,
-        "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+        3_952_454,
+        "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
     ),
 }
 LINUX_AGGREGATE = {
     "overlay": (
-        145_208,
-        "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
+        212_664,
+        "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
     ),
     "component": (
-        3_668_604,
-        "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
+        3_736_060,
+        "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
     ),
     "package": (
-        4_447_098,
-        "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e",
+        4_529_116,
+        "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
     ),
 }
 TARGET_FLAGS = (

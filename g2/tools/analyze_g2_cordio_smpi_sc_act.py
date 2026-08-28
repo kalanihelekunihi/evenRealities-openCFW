@@ -136,7 +136,7 @@ def production_report(linked: list[tuple[str, int, int, str]]) -> dict:
         "source_owned_bytes_added": 956,
         "stock_bytes_replaced": sum(end - start for _, start, end, _ in linked),
         "hardware_validation": (
-            "blocked by unavailable authorized G2/EM9305 initiator Secure Connections "
+            "deferred by project direction; future qualification requires authorized G2/EM9305 initiator Secure Connections "
             "pairing, numeric comparison, passkey/key-press, OOB, DH-key, encryption, "
             "retry, and interoperability physical evidence"
         ),

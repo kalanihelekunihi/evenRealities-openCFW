@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room behavioral reconstruction of the three-function G2 NVDB
  * advertising-magic helper immediately preceding service_nvdb_mac.c.

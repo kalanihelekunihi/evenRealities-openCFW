@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded source replacement for the G2 2.2.6.10 LVGL linked-list
  * initializer at 0x00482B00...0x00482B11.

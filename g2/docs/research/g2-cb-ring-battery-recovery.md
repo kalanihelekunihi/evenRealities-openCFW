@@ -24,7 +24,7 @@ reveal the private generating commit.
 ## Production routing
 
 `components/apollo_main/core_overlay/cb_ring_battery.c` now supplies five
-selector-isolated GPL-3.0-only clean-room leaves. Five guarded redirects replace
+selector-isolated MIT clean-room leaves. Five guarded redirects replace
 all 122 stock body bytes with 88 compiled Thumb bytes plus two alignment bytes;
 each leaf has one strict relocation, terminating at either the source-owned
 generic callback manager or the retained ring-battery consumer. The 30-byte

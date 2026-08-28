@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of the seven linked functions in G2's
  * app/gui/SystemAlert/systemAlert.c object.  EasyLogger calls are omitted as

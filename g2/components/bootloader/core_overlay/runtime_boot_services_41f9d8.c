@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of the authenticated G2 bootloader delay and
  * initializer-table service cluster.  Fixed ROM/SRAM seams are isolated so

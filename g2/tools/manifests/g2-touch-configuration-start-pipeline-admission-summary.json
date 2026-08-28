@@ -1,0 +1,39 @@
+{
+  "admitted_row_count": 3,
+  "analysis_mode": "offline authenticated target control/data flow, injected provider callbacks, host tokenized 32-bit pointer graph and Cortex-M0+ compile; no MMIO or hardware execution",
+  "component": "G2 touch configuration/start source admission batch 14",
+  "exclusions": "resident-region literal tables, 0x1B6C/0x1C54/0x2638, MMIO, EULA bodies, system handoff and halt remain unadmitted",
+  "integration": "isolated source candidates only; not production-routed",
+  "metrics": {
+    "admitted_functions": 3,
+    "admitted_instruction_bytes": 354,
+    "concrete_source_or_implementation_gap_after": 60,
+    "input_concrete_gap": 63,
+    "input_gap_instruction_bytes": 5632,
+    "mmio_admissions": 0,
+    "product_semantic_names_asserted": 0,
+    "resident_table_admissions": 0,
+    "residual_digest": "ec169645fbdc18a998a98958c072f3b23b14fd32149d1ed3c9002c43a65156d9",
+    "residual_gap_instruction_bytes": 5278,
+    "row_digest": "5a407f4bd82a9ad1ea45531c029c8b8c633602c244be1dfa7e55d76bbe26ba4c",
+    "typed_external_or_unavailable_functions": 12,
+    "typed_provider_admissions": 2,
+    "unimplemented_application_contracts_after": 48,
+    "unimplemented_application_contracts_before": 51
+  },
+  "remaining": {
+    "concrete_gap_instruction_bytes": 5278,
+    "concrete_source_or_implementation_functions": 60,
+    "note": "ten Em_EEPROM EULA rows, system handoff and halt remain external; resident 0xB41C/0xB4C4 loaders and ambiguous 0x1B6C/0x1C54/0x2638 boundaries remain unimplemented",
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_clean_room_application_contracts": 48
+  },
+  "residual_row_count": 60,
+  "schema_version": 1,
+  "source": {
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_configuration_start_pipeline.c",
+    "sha256": "cc3fe55df4dbaa00b3534225dd41ce5c335fee469578c15c073df59ace40b1e3",
+    "target_closure_object_bytes": 2292
+  }
+}

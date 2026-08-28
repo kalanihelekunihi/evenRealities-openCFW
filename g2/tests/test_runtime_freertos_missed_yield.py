@@ -77,9 +77,9 @@ TARGET_SHA256 = (
     "2b028e0c4aa84ce41bfe4b4164a397ae"
     "4d5ba9f177900cefb3b71c5d5d339ba9"
 )
-APPLE_OFFSET = 115_340
+APPLE_OFFSET = 175_188
 LINUX_OFFSET = 117_172
-APPLE_RUNTIME_ADDRESS = 0x007B05B0
+APPLE_RUNTIME_ADDRESS = 0x007BEF78
 
 TARGET_FLAGS = [
     "--target=thumbv7em-none-eabi",
@@ -663,7 +663,7 @@ class RuntimeFreeRTOSMissedYieldTests(unittest.TestCase):
                 "offset": APPLE_OFFSET,
                 "padding_before": 0,
                 "runtime_address": APPLE_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007B05B0",
+                "runtime_address_hex": "0x007BEF78",
                 "size": 14,
             },
         )
@@ -687,7 +687,7 @@ class RuntimeFreeRTOSMissedYieldTests(unittest.TestCase):
                 "function": FUNCTION,
                 "relocation_count": 0,
                 "runtime_address": APPLE_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007B05B0",
+                "runtime_address_hex": "0x007BEF78",
                 "section": f".text.{FUNCTION}",
                 "sha256": TARGET_SHA256,
                 "size": 14,
@@ -751,18 +751,18 @@ class RuntimeFreeRTOSMissedYieldTests(unittest.TestCase):
                 self.production["component"]["opaque_base_bytes"],
             ),
             (
-                167_426,
+                429_058,
                 (
-                    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
                 ),
-                945,
-                884,
-                3_690_822,
+                2_631,
+                2_374,
+                3_952_454,
                 (
-                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
                 ),
-                165_622,
-                3_401_548,
+                431_334,
+                3_111_914,
             ),
         )
 

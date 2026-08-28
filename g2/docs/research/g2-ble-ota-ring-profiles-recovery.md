@@ -106,7 +106,7 @@ contains this service. The Ring object therefore has no separate third-party
 version or commit to recover.
 
 `components/apollo_main/core_overlay/ble_ring_profile.c` independently
-implements all seven linked entries as GPL-3.0-only, selector-isolated C.
+implements all seven linked entries as MIT, selector-isolated C.
 Seven guarded redirects replace all 1,446 stock body bytes with 632 compiled
 Thumb bytes plus eight alignment bytes. Twenty-three strict relocations bind
 only the recovered Cordio discovery/ATT/WSF, connection-role, delayed-event,

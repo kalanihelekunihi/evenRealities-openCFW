@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Display/input setup helper replacements for the Even Realities G2
  * 2.2.6.10 Apollo510B application. Exact stock boundaries, the sole caller,

@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 #ifndef OPEN_CFW_RUNTIME_IAR_FORMAT_OUTPUT_H
 #define OPEN_CFW_RUNTIME_IAR_FORMAT_OUTPUT_H
 

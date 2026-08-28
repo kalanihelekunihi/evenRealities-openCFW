@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * G2 ABI adapters for the authenticated upstream LZ4 decompression closure.
  * The pristine BSD-2-Clause implementation is retained under third_party/lz4.

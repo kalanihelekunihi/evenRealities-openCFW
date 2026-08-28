@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacement for the G2 2.2.6.10 Apollo display transport IRQ owner
  * at 0x0058E860. The exact stock boundary, status policy, and state layout are

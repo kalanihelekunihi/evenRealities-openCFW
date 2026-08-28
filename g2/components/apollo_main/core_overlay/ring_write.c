@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacement for the G2 2.2.6.10 generic ring-write primitive at
  * 0x00530084. The exact stock boundary, ring layout, callers, and behavioral

@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-service-gesture-processor-function-map.tsv"
@@ -21,8 +22,8 @@ CL = ROOT / "tools/manifests/g2-service-gesture-processor-closure.tsv"
 PV = ROOT / "tools/manifests/g2-service-gesture-processor-provenance.tsv"
 PINS = {
     FM: "9cba1744560a8e25c60baae07d8b636af0fae55f19c03194e5049f255333e1c2",
-    CL: "716968c1639fc0f7aa34014d972e51391e235dc54aa065ece88555d21f972429",
-    PV: "9e9c9632bcb53acb6e7dfbc1bc832dbe4ccf067f8c9f4361edbd75c5a4d8e8ff",
+    CL: "4b08fa1051dac7b6ded30deccd9168519d9ab4ce3bbbd8e9487158ae10b83468",
+    PV: "bd7d38a01eb33a3b0f08e894d8b02fe282a151c1338e56906670179f3d3298f8",
 }
 RETAINED = 'platform\\input\\service_gesture_processor.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\platform\\input\\service_gesture_processor.c'
@@ -353,16 +354,7 @@ def analyze(image=IMAGE):
             raise c.AuditError("production gesture patch changed: " + name)
 
     build = json.loads(OVERLAY_REPORT.read_text())
-    if (
-        build["overlay"]["size"], build["overlay"]["sha256"],
-        build["component"]["size"], build["component"]["sha256"],
-    ) != (
-        332148,
-        "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544,
-        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-    ):
-        raise c.AuditError("production gesture build pins changed")
+    validate_apollo_main_artifacts(ROOT, c.AuditError, "gesture processor")
     built = {
         item.get("extraction", {}).get("function"): item
         for item in build.get("relocated_leaves", [])
@@ -404,16 +396,6 @@ def analyze(image=IMAGE):
             region.get("address_status"),
         ) != (pin[1], pin[0], "generated_source_entry_replacement"):
             raise c.AuditError("production gesture manifest replacement changed")
-    if (
-        main["provider"]["size"], main["provider"]["sha256"],
-        manifest["package"]["expected_size"], manifest["package"]["expected_sha256"],
-    ) != (
-        3855544,
-        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-        4634038,
-        "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-    ):
-        raise c.AuditError("production gesture manifest closure changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only zero-anchor linked-object closure",
@@ -432,10 +414,10 @@ def analyze(image=IMAGE):
             "stock_replaced_bytes": 1346,
             "strict_relocations": 53,
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
+            "hardware_validation": "deferred by project direction",
             "hardware_blocker": (
-                "No authorized physical G2 touch/proximity device or captured "
-                "gesture electrical/event/timing evidence is available."
+                "Authorized physical G2 touch/proximity device or captured "
+                "gesture electrical/event/timing evidence is required for future qualification."
             ),
         },
     }

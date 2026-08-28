@@ -248,11 +248,11 @@ class TinyFrameG2AtomicBoundaryCandidateTests(unittest.TestCase):
         main = manifest["component_overrides"]["apollo_main"]
         self.assertEqual(
             (main["provider"]["size"], main["provider"]["sha256"]),
-            (3704178, "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"),
+            (3952454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"),
         )
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4482672, "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"),
+            (4745526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"),
         )
         tinyframe_regions = [item for item in main["regions"]
                              if item["name"].startswith("apollo_tinyframe_")]

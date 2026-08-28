@@ -56,7 +56,7 @@ class SmpScStateMachineTest(unittest.TestCase):
         self.assertEqual(production["source_owned_bytes_added"], 3197)
         self.assertTrue(production["all_function_entries_routed"])
         self.assertTrue(production["all_dispatch_data_installed"])
-        self.assertEqual(production["hardware_validation"]["status"], "blocked")
+        self.assertEqual(production["hardware_validation"]["status"], "deferred by project direction")
 
 
 if __name__ == "__main__":

@@ -127,8 +127,8 @@ TARGET_UNDEFINED = [
 
 TARGET_PINS: dict[str, dict[str, object]] = {
     "apple-clang": {
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
-        "object": (3984, "31cb546015d03f291c2b8fd33ce5b8f588508d165f2dc34264a3371092c6a18a"),
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "object": (3984, "1e839de28ac102e8e87c804b238309f5c97c2d81974dec5c00fd18c9a40f7176"),
         "functions": TARGET_FUNCTIONS,
         "relocations": TARGET_RELOCATIONS,
         "undefined": TARGET_UNDEFINED,

@@ -36,7 +36,7 @@ class RuntimeCmsisTimerIsRunningTests(unittest.TestCase):
  def test_production_registration_is_atomic(self):
   config=json.loads((ROOT/"components/apollo_main/core_overlay/overlay.json").read_text());manifest=json.loads((ROOT/"manifests/g2-2.2.6.10-core-source.json").read_text())
   leaf=next(item for item in config["relocated_leaves"] if item["function"]=="open_cfw_cmsis_timer_is_running")
-  self.assertEqual(leaf["expected"]["sha256"],"e1e29f6fe4b3f60250931d498cd2e6834588c0b285ec1668aed38942f10d9163");self.assertEqual(leaf["toolchain_profiles"]["linux-clang"]["expected"]["sha256"],"72fbb0d69c325e55f87586ebb3de0a216962862883c675bc4c7a927caae3cfa2")
+  self.assertEqual(leaf["expected"]["sha256"],"8581df567ff213627c862263b15df54e96a97212642518b62f13e3904775a0a3");self.assertEqual(leaf["toolchain_profiles"]["linux-clang"]["expected"]["sha256"],"edf51330c2dd4d59992f0e427a8e4234bca96fcbcf02437097990b3838b406ee")
   self.assertEqual(sum(site["target_function"]==leaf["function"] for site in config["patch_sites"]),1);regions=manifest["component_overrides"]["apollo_main"]["regions"]
   self.assertEqual(sum(region["name"]=="apollo_cmsis_timer_is_running_source_leaf" for region in regions),1)
 

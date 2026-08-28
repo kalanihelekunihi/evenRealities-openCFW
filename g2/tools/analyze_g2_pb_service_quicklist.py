@@ -12,6 +12,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x00437FE0
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -24,7 +26,7 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "018faa96061d3156726c798ad4954f736ca5591c966bd8f101788270d2463b8a",
-    CLOSURE: "d27459e9d77fd9b7c62445a841c6ecd8463b36968ebf0f121b5dd1e423586bd0",
+    CLOSURE: "a051f7d243b85cece5f76e89fc6da32dc0f9ce52e5be825b05c1c375168572c3",
     PROVENANCE: "0f2d172c3901f2aa0ccc4502232527050bbd2dfbb9a57fbfd44398b20fd6d62f",
 }
 SOURCE_SIZE = 16280
@@ -282,21 +284,9 @@ def analyze(image_path: Path = IMAGE) -> dict:
         ) != expected:
             raise AuditError(f"production patch changed: {row['function']}")
     report = json.loads(REPORT.read_text())
-    if (report["overlay"]["size"], report["overlay"]["sha256"],
-            report["component"]["size"], report["component"]["sha256"]) != (
-        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-    ):
-        raise AuditError("production build pins changed")
+    validate_apollo_main_artifacts(ROOT, AuditError, "protobuf quicklist service")
     manifest = json.loads(MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
-    if (main["provider"].get("size"), main["provider"].get("sha256"),
-            manifest["package"].get("expected_size"),
-            manifest["package"].get("expected_sha256")) != (
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-    ):
-        raise AuditError("production manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}
     suffix_by_function = {
         name: suffix for name, _, _, _, suffix in FUNCTIONS
@@ -375,12 +365,12 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "retained_gap_pool_bytes": 280,
             "maximum_notification_items": 20,
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
+            "hardware_validation": "deferred by project direction",
             "hardware_blocker": (
                 "No authorized live G2 service 0x0c quicklist peer BLE, "
                 "persistent list load/save, response, or notification "
-                "workflow evidence is available; the authorized right temple "
-                "is nonresponsive and the left temple must remain stock."
+                "workflow evidence is required for future qualification; the authorized right temple "
+                "is not under test because qualification is deferred by project direction and the left temple must remain stock."
             ),
         },
     }

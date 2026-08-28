@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacements for the G2 2.2.6.10 formatting field-key encoder at
  * 0x00490D4A and descriptor adapter at 0x00490D66.

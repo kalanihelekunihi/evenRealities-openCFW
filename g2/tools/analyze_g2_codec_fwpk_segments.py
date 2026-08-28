@@ -14,6 +14,7 @@ CODEC = ROOT / "blobs/official/g2-2.2.6.10/firmware_codec.bin"
 APOLLO = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 MANIFEST = ROOT / "tools/manifests/g2-codec-fwpk-segment-map.tsv"
 DFU_FM = ROOT / "tools/manifests/g2-service-codec-dfu-function-map.tsv"
+CORE_SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 
 CODEC_SIZE = 326092
 CODEC_SHA256 = "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
@@ -284,6 +285,44 @@ def check_manifest():
         _need(got == [str(x) for x in want], "manifest row changed: %s" % want[0])
 
 
+def check_core_source_manifest():
+    """Bind the proven codec destinations to the community source profile."""
+    source_manifest = json.loads(CORE_SOURCE_MANIFEST.read_text(encoding="utf8"))
+    regions = source_manifest["component_overrides"]["codec"]["regions"]
+    actual = [
+        (
+            row["name"], row["file_offset"], row["size"],
+            row.get("target"), row.get("target_address"), row["address_status"],
+        )
+        for row in regions
+    ]
+    expected = [
+        ("fwpk_metadata", 0, 48, None, None, "container_only"),
+        ("codec_uart_boot_header", 48, 32, None, None,
+         "controller_protocol_metadata"),
+        ("codec_uart_boot_stage_1", 80, 10240, "gx8002_iram", 0x10000000,
+         "confirmed_from_uart_boot_header_and_vectors"),
+        ("codec_uart_boot_stage_2", 10320, 27964, "gx8002_iram", 0x10002800,
+         "confirmed_from_uart_boot_header_and_vectors"),
+        ("codec_spi_nor_image_a", 38284, 0x2F3B0, "gx8002_spi_nor", 0,
+         "confirmed_from_binh_headers_and_apollo_dfu_command"),
+        ("codec_spi_nor_image_b", 231740, 94352, "gx8002_spi_nor", 0x2F3B0,
+         "confirmed_from_binh_headers_and_apollo_dfu_command"),
+    ]
+    _need(actual == expected, "core-source codec destination map changed")
+    _need(sum(row[2] for row in actual) == CODEC_SIZE,
+          "core-source codec regions do not close at EOF")
+    _need(not any(row[5] == "unknown" for row in actual),
+          "core-source codec destination remains unresolved")
+    return {
+        "manifest": "manifests/g2-2.2.6.10-core-source.json",
+        "regions": len(actual),
+        "placed_regions": sum(row[4] is not None for row in actual),
+        "protocol_metadata_regions": sum(row[4] is None for row in actual),
+        "unresolved_regions": 0,
+    }
+
+
 def analyze():
     blob = CODEC.read_bytes()
     fwpk = parse_fwpk(blob)
@@ -291,6 +330,7 @@ def analyze():
     main = parse_main_image(blob[38284:])
     apollo = apollo_flash_command_evidence()
     check_manifest()
+    source_profile = check_core_source_manifest()
     return {
         "schema_version": 1,
         "analysis_mode": "read-only deterministic closure over hash-pinned blobs",
@@ -328,6 +368,7 @@ def analyze():
                                  "codec-side stage2 CLI remains proprietary NationalChip",
             "boot_stage1_baud": 230400, "boot_stage2_baud": 1500000,
             "flash_command": apollo},
+        "community_source_profile": source_profile,
         "production": {"production_routed": False,
                        "codec_image_ownership": "proprietary NationalChip boundary; "
                                                 "container/interface facts only, zero claimed source"},

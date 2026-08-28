@@ -37,8 +37,8 @@ class ZeroAnchorClosureTests(unittest.TestCase):
             "retained_literal_pool_bytes": 172,
             "strict_relocations": 85,
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
-            "hardware_blocker": "No authorized responsive G2 pair is available for dual-temple lifecycle, delayed-exit, translation, and rendered-display validation.",
+            "hardware_validation": "deferred by project direction",
+            "hardware_blocker": "An authorized responsive G2 pair is required for future dual-temple lifecycle, delayed-exit, translation, and rendered-display validation.",
         })
 
 

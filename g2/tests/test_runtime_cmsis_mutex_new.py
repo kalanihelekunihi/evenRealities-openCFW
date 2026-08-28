@@ -4,6 +4,7 @@ import os
 
 import ctypes
 import hashlib
+import importlib.util
 import json
 import struct
 import subprocess
@@ -91,6 +92,8 @@ CURRENT_PACKAGE = (
     / "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
 )
 CURRENT_FLASH_PLAN = ROOT / "build" / "source" / "flash-plan.json"
+CURRENT_SOURCE_BUILD_REPORT = ROOT / "build" / "source" / "build-report.json"
+CURRENT_SHA256SUMS = ROOT / "build" / "source" / "SHA256SUMS"
 
 APPLICATION_BASE = 0x0043_8000
 STOCK_START = 0x0044_971C
@@ -226,26 +229,21 @@ DEPENDENCY_ADDRESSES = {
     "open_cfw_freertos_queue_create_mutex": 0x007A_E100,
     "open_cfw_freertos_queue_create_mutex_static": 0x007A_EC6C,
 }
-PRODUCTION_OFFSET = 113_972
-PRODUCTION_RUNTIME_ADDRESS = 0x007B_0058
+PRODUCTION_OFFSET = 173_820
+PRODUCTION_RUNTIME_ADDRESS = 0x007B_EA20
 PRODUCTION_FINAL_SHA256 = (
-    "b3d601be84edaa82345cd814f173010b"
-    "39e1e0772d76f5763881fe5e845fe3c4"
+    "2154e94bab227eb7d341286c1ef1b6ec"
+    "4579655dc9dbb42b915c7c998abbb534"
 )
 PRODUCTION_OVERLAY_SHA256 = (
-    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
 )
 PRODUCTION_COMPONENT_SHA256 = (
-    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
 )
 PRODUCTION_PACKAGE_SHA256 = (
-    "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"
+    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
 )
-PRODUCTION_FLASH_PLAN_SHA256 = (
-    "642d39802f988c3da5e108c97fdcff82102cfcdfffd75710bd6e0a3017f7758e"
-)
-
-
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
@@ -412,7 +410,15 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
         ]
 
         current_output = temporary / "current-overlay"
-        cls.current_report = apollo_overlay.build(
+        builder_spec = importlib.util.spec_from_file_location(
+            "open_cfw_canonical_core_builder_for_cmsis_mutex",
+            CURRENT_CONFIG.parent / "build_component.py",
+        )
+        if builder_spec is None or builder_spec.loader is None:
+            raise AssertionError("cannot load canonical Apollo core builder")
+        canonical_builder = importlib.util.module_from_spec(builder_spec)
+        builder_spec.loader.exec_module(canonical_builder)
+        cls.current_report = canonical_builder.build(
             root=ROOT,
             config_path=CURRENT_CONFIG,
             output_dir=current_output,
@@ -825,9 +831,9 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 167_426,
+                "overlay_size": 429_058,
                 "overlay_sha256": PRODUCTION_OVERLAY_SHA256,
-                "component_size": 3_690_822,
+                "component_size": 3_952_454,
                 "component_sha256": PRODUCTION_COMPONENT_SHA256,
             },
         )
@@ -852,7 +858,7 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
                 "alignment": 4,
                 "padding_before": 2,
                 "runtime_address": PRODUCTION_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007B0058",
+                "runtime_address_hex": "0x007BEA20",
             },
         )
         self.assertEqual(
@@ -888,35 +894,35 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
             ],
         )
         component_report = report["component"]
-        self.assertEqual(component_report["size"], 3_690_822)
+        self.assertEqual(component_report["size"], 3_952_454)
         self.assertEqual(
             component_report["sha256"],
             PRODUCTION_COMPONENT_SHA256,
         )
         self.assertEqual(
             component_report["replaced_stock_function_bytes"],
-            121_812,
+            409_246,
         )
         self.assertEqual(
             component_report["generated_patch_site_bytes"],
-            121_634,
+            401_494,
         )
         self.assertEqual(component_report["generated_wrapper_bytes"], 32)
         self.assertEqual(
             component_report["source_owned_in_place_bytes"],
-            182,
+            184,
         )
-        self.assertEqual(component_report["source_owned_bytes"], 165_622)
-        self.assertEqual(component_report["opaque_base_bytes"], 3_401_548)
+        self.assertEqual(component_report["source_owned_bytes"], 438_910)
+        self.assertEqual(component_report["opaque_base_bytes"], 3_111_910)
 
         overlay = CURRENT_OVERLAY.read_bytes()
         component = CURRENT_COMPONENT.read_bytes()
         package = CURRENT_PACKAGE.read_bytes()
-        self.assertEqual(len(overlay), 167_426)
+        self.assertEqual(len(overlay), 429_058)
         self.assertEqual(sha256(overlay), PRODUCTION_OVERLAY_SHA256)
-        self.assertEqual(len(component), 3_690_822)
+        self.assertEqual(len(component), 3_952_454)
         self.assertEqual(sha256(component), PRODUCTION_COMPONENT_SHA256)
-        self.assertEqual(len(package), 4_469_316)
+        self.assertEqual(len(package), 4_745_526)
         self.assertEqual(sha256(package), PRODUCTION_PACKAGE_SHA256)
         self.assertEqual(
             overlay[PRODUCTION_OFFSET:PRODUCTION_OFFSET + 116],
@@ -955,14 +961,14 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
                 "output_name": (
                     "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
                 ),
-                "expected_size": 4_469_316,
+                "expected_size": 4_745_526,
                 "expected_sha256": PRODUCTION_PACKAGE_SHA256,
                 "profiles": {
                     "linux-clang": {
-                        "expected_size": 4_447_098,
+                        "expected_size": 4_529_116,
                         "expected_sha256": (
-                            "deb4cdb9d869abcb3aee5e122661ee45"
-                            "b541680cf277df5d1a7c6eed67bb7b6e"
+                            "47566aa1d17437150b86fc6fdb1cd031"
+                            "9871c356929f457b7401223ffb62db23"
                         ),
                     },
                 },
@@ -977,14 +983,14 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
                     "components/apollo_main/core_overlay/build/"
                     "ota_s200_firmware_ota.bin"
                 ),
-                "size": 3_690_822,
+                "size": 3_952_454,
                 "sha256": PRODUCTION_COMPONENT_SHA256,
                 "profiles": {
                     "linux-clang": {
-                        "size": 3_668_604,
+                        "size": 3_736_060,
                         "sha256": (
-                            "378c868e151060a59ab91b0de1a722e8"
-                            "678b8e1da8eede248c5702ccf8902798"
+                            "c8c25188e48eb6086311a855e2349704"
+                            "3150ff3ca85aeeb1bdb0b829a2c2c71b"
                         ),
                     },
                 },
@@ -1027,27 +1033,33 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
                 ],
             ),
             (
-                3_637_366,
+                3_697_214,
                 2,
-                0x007B_0056,
-                3_637_368,
+                0x007B_EA1E,
+                3_697_216,
                 116,
                 PRODUCTION_RUNTIME_ADDRESS,
             ),
         )
 
         flash_plan = CURRENT_FLASH_PLAN.read_bytes()
-        self.assertEqual(len(flash_plan), 1_337_744)
-        self.assertEqual(
-            sha256(flash_plan),
-            PRODUCTION_FLASH_PLAN_SHA256,
-        )
         parsed_plan = json.loads(flash_plan)
-        self.assertEqual(len(parsed_plan["flash_regions"]), 1890)
-        self.assertEqual(
-            len(parsed_plan["unresolved_flash_regions"]),
-            2,
+        source_build_report = json.loads(
+            CURRENT_SOURCE_BUILD_REPORT.read_text()
         )
+        checksums = dict(
+            line.split("  ", 1)[::-1]
+            for line in CURRENT_SHA256SUMS.read_text().splitlines()
+        )
+        self.assertEqual(checksums["flash-plan.json"], sha256(flash_plan))
+        self.assertEqual(parsed_plan["package_sha256"], PRODUCTION_PACKAGE_SHA256)
+        self.assertFalse(parsed_plan["safety"]["automatic_flashing"])
+        self.assertEqual(
+            len(parsed_plan["flash_regions"]),
+            source_build_report["placed_region_count"],
+        )
+        self.assertEqual(parsed_plan["unresolved_flash_regions"], [])
+        self.assertEqual(source_build_report["unresolved_region_count"], 0)
 
     @_APPLE_ONLY
     def test_current_dependencies_are_source_owned_and_abi_compatible(

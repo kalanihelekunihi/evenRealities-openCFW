@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Native lifecycle, flag-wait, dispatch, and diagnostic fixture for the BLE
  * message-transmit thread entry.

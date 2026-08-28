@@ -26,8 +26,8 @@ PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.eve
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 PINS = {
     FUNCTION_MAP: "e78344ad5842545cdf3e8ec99ae51a041c7358052181d134d88b11e003c9a7ea",
-    CLOSURE: "734e3fb293708bccda4784c5587e9ecbc09b28f2ad263679081850fcc3479a0d",
-    PROVENANCE: "b6becd5a41b49272a99679b03a9a44e5e221e6af36025841af8cf3a2e8920564",
+    CLOSURE: "59c3963337d91e780baffed72cb42aba74a39448d852f599e54c2c1a05c36bbf",
+    PROVENANCE: "ad079d824bf5c262256aa5fb06ae5e4939aac732223e6bd2fad5ada19c4dd14c",
 }
 SOURCE_SHA256 = "0944bbdaab2ce375dd72382da1c2d9f761335b2bba689e8d96c13366c435c667"
 FUNCTIONS = (
@@ -324,9 +324,9 @@ def analyze(image_path: Path = IMAGE) -> dict:
         ):
             raise AuditError(f"touch-DFU guarded redirect {index:02d} changed")
     expected_aggregate = {
-        "component_sha256": "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        "component_sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
         "component_size": 3_855_544,
-        "overlay_sha256": "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        "overlay_sha256": "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
         "overlay_size": 332_148,
     }
     if overlay["expected"] != expected_aggregate:
@@ -350,7 +350,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             manifest["package"]["expected_size"],
             manifest["package"]["expected_sha256"]) != (
             3_855_544, expected_aggregate["component_sha256"], 4_634_038,
-            "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
+            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"):
         raise AuditError("touch-DFU manifest/package pins changed")
     regions = main["regions"]
     body_regions = [item for item in regions
@@ -441,11 +441,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "generated_alignment_bytes": 38,
             "strict_relocations": 70,
             "guarded_redirects": 32,
-            "hardware_validation": "blocked_unavailable_physical_evidence",
+            "hardware_validation": "deferred by project direction",
             "hardware_blocker": (
-                "authorized right temple is nonresponsive; authorized left "
-                "temple must remain stock; no responsive authorized pair, "
-                "touch-controller fixture, or golden I2C/DFU capture is available"
+                "authorized right temple is not under test because qualification is deferred by project direction; authorized left "
+                "temple must remain stock; future qualification requires a responsive authorized pair, "
+                "touch-controller fixture, or golden I2C/DFU capture is required for future qualification"
             ),
         },
     }

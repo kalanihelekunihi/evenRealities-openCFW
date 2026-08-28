@@ -35,14 +35,20 @@ and committed under `tools/manifests/`:
 | `g2-box-ghidra-decomp.c` | `531c1c8e75ff25deea66d8f0a5fd30d44654a68508b529396b77898c1c247f57` |
 | `g2-box-ghidra-meta.tsv` | `3b0e3d3408d17f03ba2a557525eb3489d116562f4feda051649634c16b41255b` |
 
-Result: **428 discovered functions / 40,664 bytes**, 308 strings (exactly
-matching the independent platform-analyzer census), plus 7 supplemental
-RTOS entry rows the auto-analysis could not reach (no direct callers).
+Result: **428 Ghidra-discovered functions / 40,664 bytes**, 308 strings
+(exactly matching the independent platform-analyzer census), plus 7
+supplemental RTOS entries the auto-analysis could not reach (no direct
+callers). A device-free Thumb control-flow walk now bounds all seven entries:
+4,572 reachable instruction bytes, including 2,820 instruction bytes not
+covered by any Ghidra-discovered body.
 
 - Analyzer: `tools/analyze_g2_box_function_map.py` (read-only, deterministic)
 - Map: `tools/manifests/g2-box-function-map.tsv` (435 rows)
 - Summary: `tools/manifests/g2-box-function-map-summary.json`
-- Test: `tests/test_analyze_g2_box_function_map.py` (10 tests)
+- Recovered task bodies: `tools/manifests/g2-box-task-entry-bodies.tsv`
+- Task direct-callee map: `tools/manifests/g2-box-task-helper-map.tsv`
+- Tests: `tests/test_analyze_g2_box_function_map.py` and
+  `tests/test_analyze_g2_box_task_entries.py` (16 tests)
 
 ## Anchor reconciliation
 
@@ -61,23 +67,25 @@ Byte accounting reconciles to exactly 55,752 app bytes
 
 | category | functions | function bytes | combined bytes (incl. gaps) |
 |---|---:|---:|---:|
-| `upstream_cmsis_startup` | 14 | 292 | 484 |
-| `upstream_freertos_kernel` | 79 | 5,440 | 5,440 |
-| `upstream_stm32_hal` | 10 | 1,018 | 1,018 |
-| `first_party_g2` | 71 (+7 entry rows) | 16,994 | 29,706 |
-| `unresolved` | 261 | 16,920 | 19,104 |
+| `upstream_cmsis_startup` | 15 | 310 | 502 |
+| `upstream_freertos_kernel` | 86 | 5,814 | 5,814 |
+| `upstream_stm32_hal` | 15 | 1,324 | 1,324 |
+| `first_party_g2` | 97 (+7 entry rows) | 18,330 | 31,042 |
+| `unresolved` | 222 | 14,886 | 17,070 |
 
 FreeRTOS membership is proven two ways: direct references into the
 kernel statics block `[0x20000128, 0x200001A0)` (46 functions), and a
 banded call-graph closure (`[0x0800A800, 0x0800D100)`) from the pinned
 port/scheduler anchors that never crosses a G2-string-referencing
-function (79 total). Structurally verified names this increment:
+function (79 members), plus seven structurally exact CMSIS-RTOS2 wrappers
+called by the recovered entries (86 total). Structurally verified names:
 `vTaskSwitchContext` `0x0800C390`, `vPortStartFirstTask` `0x080000CC`,
 `uxListRemove` `0x0800BF2C` (exact list.c body), `xTaskCreate`
 `0x0800C9A8` (six-argument form, stack words → bytes), `pvPortMalloc`
 `0x0800B3E8`, `pxPortInitialiseStack` `0x0800B4C0` (exact
 `portINITIAL_XPSR`/return-address frame), `prvTimerTask` `0x0800B0FC`
-(timer-queue receive + command dispatch).
+(timer-queue receive + command dispatch), and `osDelay`,
+`osEventFlagsClear/Get/Set`, `osThreadTerminate`, and `osTimerStart/Stop`.
 
 **RTOS wrapper verdict: CMSIS-RTOS2.** The creation APIs called by
 `app_rtos_init` (`0x08006968`) use `isCurrentModePrivileged` and
@@ -89,7 +97,9 @@ platform audit's "wrapper undetermined" to proven CMSIS-RTOS2
 HAL membership stays deliberately conservative: the eight-function
 `HAL_UART_IRQHandler` cluster (962 B) and the two FLASH credential
 functions `HAL_FLASH_Unlock` `0x08004B6C` / `HAL_FLASH_OB_Unlock`
-`0x08004BF4` (56 B). CubeMX-style board init and the G2 OTA updater
+`0x08004BF4` (56 B), four structurally exact PWR/wakeup APIs, and one
+HAL-style peripheral initializer whose exact public symbol remains unknown.
+CubeMX-style board init and the G2 OTA updater
 embed HAL register operations but are first-party policy code.
 
 First-party includes 67 string-referencing functions, the log sink
@@ -101,12 +111,44 @@ channel writers, `app_rtos_init`, four descriptor-table consumers, and
 ten RTOS entry functions from the init literal pool (seven of them —
 `0x08009D70`, `0x0800B7EC`, `0x0800BB90`, `0x08006E1C`, `0x08007F2C`,
 `0x08007200`, `0x080082EC` — outside the discovered map; listed as
-zero-byte supplemental rows, bodies remain in `unresolved`).
+zero-byte supplemental rows to prevent overlapping byte counts). Their bodies
+are now bounded and hashed in the task-body manifest.
 
-The 261 unresolved functions are helper code without
+The 222 unresolved functions are helper code without
 kernel-statics/HAL/string/descriptor evidence (bit-bang chip drivers,
 protocol helpers, math, board init). Naming them is future work; none
 is claimed upstream.
+
+## Seven previously undiscovered RTOS entry bodies
+
+The recovery starts only from the authenticated pointer cells used by
+`app_rtos_init` at `0x08006968`. It follows direct Thumb branches, records but
+does not follow calls, rejects indirect control flow, and fails closed against
+the concatenated instruction-byte digest for every entry. No hardware or live
+device state is involved.
+
+| entry | role | instructions | bytes | newly mapped bytes | code spans |
+|---|---|---:|---:|---:|---|
+| `0x08009D70` | timer callback | 28 | 66 | 66 | `0x08009D70-0x08009DB2` |
+| `0x0800B7EC` | timer callback | 153 | 342 | 342 | `0x0800B7EC-0x0800B942` |
+| `0x0800BB90` | timer callback | 170 | 374 | 374 | two spans through `0x0800BD08` |
+| `0x08006E1C` | thread entry | 344 | 790 | 790 | `0x08006E1C-0x08007132` |
+| `0x08007F2C` | thread entry | 269 | 616 | 616 | `0x08007F2C-0x08008194` |
+| `0x08007200` | thread entry | 974 | 2,184 | 432 | four spans through `0x08007EE4` |
+| `0x080082EC` | thread entry | 93 | 200 | 200 | `0x080082EC-0x080083B4` |
+
+The split `0x08007200` thread crosses embedded literal/string pools, producing
+four executable islands rather than one monolithic range. The `0x0800BB90`
+callback has an unreachable two-byte branch island at `0x0800BC88`, excluded
+from its reachable-body digest.
+
+The recovered bodies call 59 distinct helpers. This increment resolves 39
+formerly unresolved direct helpers: the seven CMSIS-RTOS2 wrappers above,
+`NVIC_SystemReset`, five STM32G0 HAL functions, and 26 G2
+GPIO/charge/protocol/sensor policy adapters. All 59 direct task helpers now
+have an evidence-backed ownership category. The exact public symbol for the
+HAL peripheral initializer at `0x0800598C` remains unresolved and is stated as
+such in its evidence instead of being assigned a speculative API name.
 
 ## CRC verdict: no polynomial CRC exists in the case image
 
@@ -156,12 +198,12 @@ code-evidence only. No hardware was touched.
    toolchain-identical V10.3.1/V10.5.1 reference builds; the decomp.c
    corpus is now in place for that comparison).
 2. Exact STM32 HAL version (no static evidence).
-3. Task-name ↔ entry-function pairing (six create calls consume
+3. Semantic task-name ↔ entry-function pairing (six create calls consume
    descriptor-table names; the descriptor entry-function fields are
-   runtime-patched, so static pairing is partial).
-4. Boundaries/naming of the seven undiscovered entry bodies and the
-   261 unresolved helper functions (next: seed the seven entries as
-   functions on the lane and extend string/ADR-based naming).
+   runtime-patched, so static pairing remains partial). Entry boundaries are
+   now closed independently of those runtime names.
+4. Naming/ownership of the remaining unresolved functions. None is a direct
+   callee of a recovered task body.
 5. `device_specific_preserve` windows remain external and untouched;
    no function rows exist at that category, by design.
 
@@ -169,8 +211,9 @@ code-evidence only. No hardware was touched.
 
 ```
 cd g2 && PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 \
-  -m unittest -v tests.test_analyze_g2_box_function_map
-# 10 tests, OK
+  -m unittest -v tests.test_analyze_g2_box_function_map \
+  tests.test_analyze_g2_box_task_entries
+# 16 tests, OK
 
 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 \
   tools/analyze_g2_box_function_map.py --write-manifests

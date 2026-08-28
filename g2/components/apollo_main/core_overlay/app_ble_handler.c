@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room registered product BLE WSF handler reconstructed from stock
  * _bleCommHandler at 0x004B7D32...0x004B7E73.

@@ -113,12 +113,17 @@ and the full byte-exact corpus runs.
 
 The `linux-clang` pins were produced with Homebrew clang 22.1.8 targeting
 `thumbv7em-none-eabi` with the reviewed overlay flags. The current profile
-pins a 127,082-byte Apollo-main overlay, 3,650,478-byte component, and
-4,428,972-byte package with SHA-256 values
-`f24cf0e060530429679df9389571ffee397819dfa2c3abc00d26deb75a3e47ad`,
-`5fe58e3af2a0b7fed55c6b7c33afbd1ac5c887860721b04859e2d49d81be828c`,
+pins a 212,664-byte Apollo-main overlay, 3,736,060-byte component, and
+4,529,116-byte package with SHA-256 values
+`1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18`,
+`fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97`,
 and
-`22117e0cd7d0b827a8c31d22eb509edb30651fef6a6308838a8220ff80f6c702`.
+`f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef`.
+The same profile pins a 15,224-byte bootloader overlay and 163,824-byte
+bootloader provider with SHA-256 values
+`2dad91f7403219c30fee3130d62833c98561c8fb56387960f0654723ceed67ca`
+and
+`efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635`.
 Determinism is covered by `tests/test_toolchain_profiles.py`, including an
 end-to-end rebuild of the full `source` package.
 

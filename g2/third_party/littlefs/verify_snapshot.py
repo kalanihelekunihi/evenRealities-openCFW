@@ -89,6 +89,12 @@ EXPECTED_PRODUCTION_SOURCE_PATHS = (
     "components/shared/littlefs/runtime_littlefs_tag_size.c",
     "components/shared/littlefs/runtime_littlefs_tag_size.h",
     "components/apollo_main/core_overlay/runtime_littlefs_file_size_public.c",
+    "components/bootloader/core_overlay/runtime_littlefs_format_4211b0.c",
+    "components/bootloader/core_overlay/runtime_littlefs_init_421210.c",
+    "components/bootloader/core_overlay/runtime_littlefs_read_4212d8.c",
+    "components/bootloader/core_overlay/runtime_littlefs_program_421310.c",
+    "components/bootloader/core_overlay/runtime_littlefs_erase_421348.c",
+    "components/bootloader/core_overlay/runtime_littlefs_sync_4213d4.c",
 )
 
 EXPECTED_PRODUCTION_SYMBOLS = (
@@ -124,6 +130,12 @@ EXPECTED_PRODUCTION_SYMBOLS = (
     "open_cfw_littlefs_tag_id",
     "open_cfw_littlefs_tag_size",
     "open_cfw_littlefs_file_size_public",
+    "open_cfw_littlefs_bootloader_format_4211b0",
+    "open_cfw_littlefs_bootloader_init_421210",
+    "open_cfw_bootloader_littlefs_read_4212d8",
+    "open_cfw_bootloader_littlefs_program_421310",
+    "open_cfw_bootloader_littlefs_erase_421348",
+    "open_cfw_bootloader_littlefs_sync_4213d4",
 )
 
 EXPECTED_OVERLAY_PRODUCTION_PATHS = {
@@ -148,16 +160,17 @@ EXPECTED_OVERLAY_PRODUCTION_PATHS = {
         EXPECTED_PRODUCTION_SOURCE_PATHS[28],
         EXPECTED_PRODUCTION_SOURCE_PATHS[30],
         EXPECTED_PRODUCTION_SOURCE_PATHS[32],
+        *EXPECTED_PRODUCTION_SOURCE_PATHS[35:41],
     },
 }
 
 EXPECTED_OVERLAY_PRODUCTION_SYMBOLS = {
     "components/apollo_main/core_overlay/overlay.json": set(
-        EXPECTED_PRODUCTION_SYMBOLS
+        EXPECTED_PRODUCTION_SYMBOLS[:-6]
     ),
     "components/bootloader/core_overlay/overlay.json": set(
         EXPECTED_PRODUCTION_SYMBOLS[1:22]
-    ) | set(EXPECTED_PRODUCTION_SYMBOLS[25:31]),
+    ) | set(EXPECTED_PRODUCTION_SYMBOLS[25:31]) | set(EXPECTED_PRODUCTION_SYMBOLS[-6:]),
 }
 
 EXPECTED_REWIND_UPSTREAM = {
@@ -869,31 +882,31 @@ EXPECTED_TAG_ID_MANIFEST_PROVIDERS = {
         "kind": "source_build",
         "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
         "size": 3952346,
-        "sha256": "dc578472f06af2d499b9cb771fc185df4f739a05de558098088b56da9a5e4ce0",
+        "sha256": "47aabec489ba8882b84591e80ca0f105ff26e3739f4eb639b2d91b88fa2de701",
         "profiles": {
             "linux-clang": {
-                "size": 3728356,
-                "sha256": "aee25953387faa833d06deabc059d72334af77027c089eba2f2af52aa57063c8",
+                "size": 3735952,
+                "sha256": "c8c25188e48eb6086311a855e23497043150ff3ca85aeeb1bdb0b829a2c2c71b",
             },
         },
     },
     "apollo_bootloader": {
         "kind": "source_build",
         "path": "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
-        "size": 158604,
-        "sha256": "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7",
+        "size": 163840,
+        "sha256": "3ae28d27b81ca70d96fd5846d04fa1a4f0add5a8514cee21f9f34bdaa1455eac",
         "profiles": {
             "linux-clang": {
-                "size": 158588,
-                "sha256": "a64974dce84415f4031847e1f71b5397cd0c366a31b8786d6f6e311ff53bd7b2",
+                "size": 163824,
+                "sha256": "d0a97870b861c089e4ac029ba1c7a1c0cc67d6112c3416a5cda657a038c3a8ea",
             },
             "apple-font-manager-record": {
-                "size": 158604,
-                "sha256": "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7",
+                "size": 163840,
+                "sha256": "3ae28d27b81ca70d96fd5846d04fa1a4f0add5a8514cee21f9f34bdaa1455eac",
             },
             "apple-product-rtos-record": {
-                "size": 158604,
-                "sha256": "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7",
+                "size": 163840,
+                "sha256": "3ae28d27b81ca70d96fd5846d04fa1a4f0add5a8514cee21f9f34bdaa1455eac",
             },
         },
     },
@@ -1612,7 +1625,12 @@ def littlefs_source_records(overlay: dict[str, Any]):
             or "runtime_littlefs_" in source_path
         ):
             yield None, record
-    for collection in ("isolated_leaves", "relocated_leaves", "in_place_leaves"):
+    for collection in (
+        "isolated_leaves",
+        "relocated_leaves",
+        "in_place_leaves",
+        "cave_leaves",
+    ):
         for leaf in overlay.get(collection, []):
             source = leaf.get("source", {})
             source_path = source.get("path", "")
@@ -1644,7 +1662,16 @@ def verify_production_allowlist() -> None:
             name
             for name in overlay.get("functions", [])
             if name.startswith("open_cfw_littlefs_")
+            or name.startswith("open_cfw_bootloader_littlefs_")
         }
+        functions.update(
+            leaf["function"]
+            for leaf in overlay.get("cave_leaves", [])
+            if leaf.get("function", "").startswith("open_cfw_littlefs_")
+            or leaf.get("function", "").startswith(
+                "open_cfw_bootloader_littlefs_"
+            )
+        )
         require(
             functions == EXPECTED_OVERLAY_PRODUCTION_SYMBOLS[relative_path],
             f"littlefs production symbol set changed in {relative_path}",
@@ -1744,10 +1771,10 @@ def verify_production_allowlist() -> None:
                 "unrelocated_sha256": EXPECTED_TAG_CHUNK_TEXT_SHA256,
             },
             "linux_artifact": {
-                "overlay_size": 204960,
-                "overlay_sha256": "5c857e687f2715965d159e07c723ae0a04838e063c2993c254761adbbe663429",
-                "component_size": 3728356,
-                "component_sha256": "aee25953387faa833d06deabc059d72334af77027c089eba2f2af52aa57063c8",
+                "overlay_size": 212556,
+                "overlay_sha256": "63885d945fc50903872a81191342907f636207486e1adf9a3bfb2213c6961e1f",
+                "component_size": 3735952,
+                "component_sha256": "c8c25188e48eb6086311a855e23497043150ff3ca85aeeb1bdb0b829a2c2c71b",
             },
         },
         "components/bootloader/core_overlay/overlay.json": {
@@ -1756,10 +1783,10 @@ def verify_production_allowlist() -> None:
             "stock_start": 0x00410BA8,
             "linux_expected": None,
             "linux_artifact": {
-                "overlay_size": 9988,
-                "overlay_sha256": "15784fef039b93caaa26b202c61b115b4d0947f0ec253b7232dd43e828787b50",
-                "component_size": 158588,
-                "component_sha256": "a64974dce84415f4031847e1f71b5397cd0c366a31b8786d6f6e311ff53bd7b2",
+                "overlay_size": 15224,
+                "overlay_sha256": "2dad91f7403219c30fee3130d62833c98561c8fb56387960f0654723ceed67ca",
+                "component_size": 163824,
+                "component_sha256": "d0a97870b861c089e4ac029ba1c7a1c0cc67d6112c3416a5cda657a038c3a8ea",
             },
         },
     }
@@ -1984,27 +2011,27 @@ def verify_production_allowlist() -> None:
                 "overlay_size": 428950,
                 "overlay_sha256": "0a6b9fe566a2452cd9720c2db22eb43e530c31b76996d05541fa7f24ea9ee745",
                 "component_size": 3952346,
-                "component_sha256": "dc578472f06af2d499b9cb771fc185df4f739a05de558098088b56da9a5e4ce0",
+                "component_sha256": "47aabec489ba8882b84591e80ca0f105ff26e3739f4eb639b2d91b88fa2de701",
             },
             "linux-clang": {
-                "overlay_size": 204960,
-                "overlay_sha256": "5c857e687f2715965d159e07c723ae0a04838e063c2993c254761adbbe663429",
-                "component_size": 3728356,
-                "component_sha256": "aee25953387faa833d06deabc059d72334af77027c089eba2f2af52aa57063c8",
+                "overlay_size": 212556,
+                "overlay_sha256": "63885d945fc50903872a81191342907f636207486e1adf9a3bfb2213c6961e1f",
+                "component_size": 3735952,
+                "component_sha256": "c8c25188e48eb6086311a855e23497043150ff3ca85aeeb1bdb0b829a2c2c71b",
             },
         },
         "components/bootloader/core_overlay/overlay.json": {
             "apple-clang": {
-                "overlay_size": 10004,
-                "overlay_sha256": "a27f7ba39fdfe6a7364d59577cfa387a0a601aedf773612d1cb1b77700c6538d",
-                "component_size": 158604,
-                "component_sha256": "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7",
+                "overlay_size": 15240,
+                "overlay_sha256": "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314",
+                "component_size": 163840,
+                "component_sha256": "3ae28d27b81ca70d96fd5846d04fa1a4f0add5a8514cee21f9f34bdaa1455eac",
             },
             "linux-clang": {
-                "overlay_size": 9988,
-                "overlay_sha256": "15784fef039b93caaa26b202c61b115b4d0947f0ec253b7232dd43e828787b50",
-                "component_size": 158588,
-                "component_sha256": "a64974dce84415f4031847e1f71b5397cd0c366a31b8786d6f6e311ff53bd7b2",
+                "overlay_size": 15224,
+                "overlay_sha256": "2dad91f7403219c30fee3130d62833c98561c8fb56387960f0654723ceed67ca",
+                "component_size": 163824,
+                "component_sha256": "d0a97870b861c089e4ac029ba1c7a1c0cc67d6112c3416a5cda657a038c3a8ea",
             },
         },
     }
@@ -2308,9 +2335,13 @@ def verify_tag_id_manifest() -> None:
             len(matches) == 1,
             f"{component_name} scalar-tag manifest tail order changed",
         )
+        provider = component.get("provider", {})
+        expected_provider = EXPECTED_TAG_ID_MANIFEST_PROVIDERS[component_name]
         require(
-            component.get("provider")
-            == EXPECTED_TAG_ID_MANIFEST_PROVIDERS[component_name],
+            all(
+                provider.get(key) == value
+                for key, value in expected_provider.items()
+            ),
             f"{component_name} scalar-tag manifest provider pins changed",
         )
 

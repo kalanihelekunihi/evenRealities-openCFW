@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacement for the G2 2.2.6.10 LVGL linked-list custom-clear
  * routine at 0x00482C9A...0x00482CD7. The next node is captured before

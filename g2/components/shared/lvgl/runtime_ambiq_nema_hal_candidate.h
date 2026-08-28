@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 #ifndef OPEN_CFW_RUNTIME_AMBIQ_NEMA_HAL_CANDIDATE_H
 #define OPEN_CFW_RUNTIME_AMBIQ_NEMA_HAL_CANDIDATE_H
 

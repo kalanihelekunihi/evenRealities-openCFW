@@ -12,6 +12,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x00437FE0
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -20,8 +22,8 @@ CLOSURE = ROOT / "tools/manifests/g2-efs-service-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-efs-service-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "2d0eebd09ece2500d5bd6c915768b5d393e4416b76b49a88758b961a8268c106",
-    CLOSURE: "8641444c524fcc17e43eea49ff4ea3f5700db06a563d38d19eb1668c6af36889",
-    PROVENANCE: "8973d7e336d4634d8282b5a86a9f74c512a5d27f6dcc8313838ab39164d6930d",
+    CLOSURE: "e24e7f7cf199e8f1f1f0df801a957f613eb6a4bb10bd674a96faeb3ce3ca55ce",
+    PROVENANCE: "0be68aa8a51bde606eb415f35e7ee073bdf0b9843c367b22025cb50a7d8e4496",
 }
 SOURCE = ROOT / "components/apollo_main/core_overlay/efs_service.c"
 OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
@@ -289,26 +291,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
             or item["extraction"]["relocation_count"] != relocations
         ):
             raise AuditError(f"production EFS service report changed: {name}")
-    if (
-        report["overlay"]["size"], report["overlay"]["sha256"],
-        report["component"]["size"], report["component"]["sha256"],
-    ) != (
-        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-    ):
-        raise AuditError("production EFS service artifact pins changed")
+    validate_apollo_main_artifacts(ROOT, AuditError, "EFS service")
 
     manifest = json.loads(MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
-    if (
-        main["provider"]["size"], main["provider"]["sha256"],
-        manifest["package"]["expected_size"],
-        manifest["package"]["expected_sha256"],
-    ) != (
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-    ):
-        raise AuditError("production EFS service manifest pins changed")
     regions = {region["name"]: region for region in main["regions"]}
     for order, row in enumerate(rows, 1):
         item = regions.get(f"efs_service_{order:02d}_source_replacement")
@@ -373,13 +359,13 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "alignment_bytes": 16, "strict_relocations": 68,
             "stock_replaced_bytes": 9276, "retained_gap_pool_bytes": 658,
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
+            "hardware_validation": "deferred by project direction",
             "hardware_blocker": (
-                "No authorized responsive G2 peer and writable/readable EFS media "
-                "are physically available for live whitelist import, Android JSON "
+                "An authorized responsive G2 peer and writable/readable EFS media "
+                "are required for future qualification for live whitelist import, Android JSON "
                 "consumption, arbitrary-file import, logger/trace export, 4 KiB "
                 "streaming, cancellation, CRC/size failure, disconnect, and resume "
-                "evidence; the authorized right temple is nonresponsive and the left "
+                "evidence; the authorized right temple is not under test because qualification is deferred by project direction and the left "
                 "temple must remain stock."
             ),
         },

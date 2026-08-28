@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded littlefs directory-check, format, initialization, and read-callback
  * reimplementation matched to stock entries 0x00475FE8 through 0x004763EF.

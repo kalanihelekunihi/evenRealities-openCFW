@@ -12,6 +12,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x00437FE0
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -24,7 +26,7 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "43700fbb0f7015e30b1ed5b5e18eb57a862ad2ff3b565677ee0888cdba6706df",
-    CLOSURE: "47b2ff130fb3beb8a5d34032b4f9cb258ce0fccd6a477a04a184b7ab7b18a77f",
+    CLOSURE: "3bf789de22c654b6cc8c14bcf83a16e1709227f11568b707a32f19a1cf367926",
     PROVENANCE: "1658f580d2dac74213a387f7d7800c569e4c825a240cf8a8e02a7783366ee426",
 }
 SOURCE_SIZE = 8179
@@ -287,21 +289,9 @@ def analyze(image_path: Path = IMAGE) -> dict:
         ) != (address, size, digest, "b_w", function, ["apple-clang"]):
             raise AuditError(f"production patch changed: {name}")
     report = json.loads(REPORT.read_text())
-    if (report["overlay"]["size"], report["overlay"]["sha256"],
-            report["component"]["size"], report["component"]["sha256"]) != (
-        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-    ):
-        raise AuditError("production build pins changed")
+    validate_apollo_main_artifacts(ROOT, AuditError, "protobuf ring service")
     manifest = json.loads(MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
-    if (main["provider"].get("size"), main["provider"].get("sha256"),
-            manifest["package"].get("expected_size"),
-            manifest["package"].get("expected_sha256")) != (
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-    ):
-        raise AuditError("production manifest pins changed")
     region_names = {item["name"] for item in main["regions"]}
     required = {name.removeprefix("replace_") + "_source_replacement"
                 for name, *_ in PATCHES}
@@ -363,10 +353,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 1362,
             "retained_literal_pool_bytes": 150,
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
+            "hardware_validation": "deferred by project direction",
             "hardware_blocker": (
                 "No authorized physical paired-G2 BLE relay, live nanopb peer, "
-                "or ring-event evidence is available."
+                "or ring-event evidence is required for future qualification."
             ),
         },
     }

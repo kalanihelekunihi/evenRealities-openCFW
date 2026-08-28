@@ -18087,7 +18087,7 @@ strict relocated source leaves. Those leaves separately own fill, state
 initialization, registration, command processing, byte consumption, one
 receive iteration, and the task entry.
 
-The implementation is GPL-3.0-only clean-room G2 glue. It retains the stock
+The implementation is MIT clean-room G2 glue. It retains the stock
 FreeRTOS+CLI interpreter ABI at `0x005847FE`, the 128-byte call boundary, the
 22 setup-function order, and all 76 proprietary descriptors. The retained
 interpreter, setup functions, descriptors, and handlers remain outside this
@@ -20134,9 +20134,8 @@ A clean-room twelve-function C reconstruction compiles to 2,936 text bytes
 plus 16 alignment bytes with 68 strict relocations. Guarded redirects replace
 all 9,276 stock body bytes; the 658 authenticated alignment/literal bytes remain
 official compatibility data. Host behavior, Cortex-M55 selector, component,
-package, and flash-plan checks pass. Live EFS media validation is explicitly
-blocked because the authorized right temple is nonresponsive, the left temple
-must remain stock, and no authorized responsive peer/media pair is available.
+package, and flash-plan checks pass. Live EFS media validation is deferred by
+project direction; future qualification requires an authorized peer/media pair.
 
 ### OTA service analysis boundary
 
@@ -20194,7 +20193,7 @@ packets, 128-byte programming blocks, version-gated update behavior, 60
 exact-entry calls, and zero real strict-interior ingress are fail-closed. The
 23 raw entry-or-interior-like values are unrelated data windows; no aligned
 stored entry pointer survives. No authenticated historical source survives,
-but 32 clean-room GPL-3.0-only leaves now replace all 6,430 stock body bytes.
+but 32 clean-room MIT leaves now replace all 6,430 stock body bytes.
 They emit 3,134 Thumb text bytes plus 38 alignment bytes with 70 strict
 relocations; 32 guarded entry redirects retain the 574 authenticated
 object-local gap/pool bytes. Host behavior, selector compilation, component,
@@ -21224,10 +21223,9 @@ bytes with SHA-256 values
 and `427187931275f6eaa93bebc65f910fcabe71c0d6f8027be3811b43c7efd2eda8`.
 
 No image was signed or flashed. Live bilateral display, input, animation, and
-peer synchronization remain blocked by the nonresponsive authorized right
-temple, the stock-only authorized left temple, and the absence of a responsive
-authorized pair or golden UI trace. Firmware-wide functional completeness is
-not claimed.
+peer synchronization are deferred by project direction; future qualification
+requires an authorized pair or golden UI trace. Firmware-wide functional
+completeness is not claimed.
 
 ### ICM45608 clean-room production routing
 
@@ -21260,9 +21258,8 @@ and 4,383 placed regions.
 
 No known IMU software implementation gap remains after the exact extended
 AID/B2S path was admitted. This is not a hardware-validation claim. Hardware
-validation is blocked because the authorized right temple is
-nonresponsive, the authorized left temple must remain stock, and no calibrated
-motion rig or golden FIFO/eDMP trace is available. No flashing or signing was
+validation is deferred by project direction; future qualification requires a
+calibrated motion rig or golden FIFO/eDMP trace. No flashing or signing was
 performed.
 
 ## Ring service production routing
@@ -21285,11 +21282,10 @@ and `c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998`.
 The deployment plan is 2,879,088 bytes with SHA-256
 `80d2f655555786d495d9df72b85013dee8e0076554b0d2deb82159a5c876e292`.
 
-No hardware was used. The authorized right temple is nonresponsive, the
-authorized left must remain stock, and no responsive authorized pair or golden
-Ring transport capture is available. Physical transport, timing, and peer
-behavior remain explicitly hardware-blocked; `thread_ring.c` and wider
-firmware gaps remain open.
+No hardware was used. Physical transport, timing, and peer behavior are
+deferred by project direction; future qualification requires an authorized
+pair or golden Ring transport capture. `thread_ring.c` and wider firmware gaps
+remain open.
 
 ## Thread Ring production routing
 
@@ -21315,11 +21311,9 @@ The 2,879,088-byte flash plan hashes to
 `80d2f655555786d495d9df72b85013dee8e0076554b0d2deb82159a5c876e292`.
 
 No hardware was used. Physical WSF/ATT transport, peer timing/state, and
-reconnect behavior remain blocked because the authorized right temple is
-nonresponsive, the authorized left must remain stock, and no responsive
-authorized pair or golden Ring transport capture is available. This is an
-explicit physical-evidence blocker; Thread Ring has no known remaining software
-implementation gap.
+reconnect behavior are deferred by project direction; future qualification
+requires an authorized pair or golden Ring transport capture. Thread Ring has
+no known remaining software implementation gap.
 
 ## Sensor Hub production routing
 
@@ -21343,9 +21337,8 @@ The flash plan is 2,879,088 bytes with SHA-256
 `80d2f655555786d495d9df72b85013dee8e0076554b0d2deb82159a5c876e292`.
 
 No hardware was accessed. Live IMU/ALS sampling, timing, calibration, and
-display behavior remain blocked because the authorized right temple is
-nonresponsive, the authorized left must remain stock, and no responsive
-authorized sensor path or golden IMU/ALS trace is available. Sensor Hub has no
+display behavior are deferred by project direction; future qualification
+requires an authorized sensor path or golden IMU/ALS trace. Sensor Hub has no
 known remaining software implementation gap; wider firmware gaps remain.
 
 ## Codec UART lifecycle production routing
@@ -21482,8 +21475,8 @@ Host behavior covers box padding, page lifecycle, data dispatch, auto-exit
 throttling, reflash and IMU events, and UI-event routing. Canonical
 overlay/component/package identities are 225,396 / 3,748,792 / 4,527,286
 bytes and `29555fb7...c285` / `a6a78d0b...a8c5` / `3f09f5ee...a6d0`.
-No image was flashed. Physical display/timing/IMU/peer evidence is blocked by
-the nonresponsive authorized right temple while the left temple remains stock.
+No image was flashed. Physical display/timing/IMU/peer qualification is
+deferred by project direction.
 
 ## G2 SystemClose production routing
 
@@ -21500,8 +21493,7 @@ overlay/component/package identities are 228,222 / 3,751,618 / 4,530,112
 bytes and `ee0ced13...cda491` / `c6ac27de...fca42` /
 `7cd4e676...dc2c8`; the 2,503,413-byte plan has 3,589 placed regions. No
 image was signed or flashed. Physical display, shutdown/minimize, IMU, and
-peer-synchronization evidence is blocked by the nonresponsive authorized right
-temple while the left temple remains stock.
+peer-synchronization qualification is deferred by project direction.
 
 ## G2 EUS/ESS/EFS/NUS BLE-profile production routing
 
@@ -21544,9 +21536,8 @@ The flash plan is 2,018,179 bytes with 2,874 placed, two protected unresolved,
 and five container-only regions.
 
 No hardware was accessed. Live service-`0x0B` master/peer BLE behavior,
-transport timing, and conversate UI integration remain blocked by unavailable
-authorized evidence: the right temple is nonresponsive, the left must remain
-stock, and the recovery gate forbids another write without debugger evidence.
+transport timing, and conversate UI integration are deferred by project
+direction; future qualification requires authorized physical evidence.
 
 ## Current ring-battery state-service source increment
 
@@ -21940,7 +21931,7 @@ identities are `166292/3689688/4468182` bytes and
 `eb0e6c9ba54af38259f8450d503d7faba7283d52ea3d3de1113fd8fc3c8b53fb` /
 `0c1548c6f4b829acc62fcd332fb2c441f2774c4de1be253ea721a4de8eae57d4`.
 No hardware was used. On-device concurrency, role/display gating, transport,
-and visible behavior remain blocked by unavailable physical evidence.
+and visible behavior remain deferred by project direction.
 
 ## Protobuf Ring-service production routing
 
@@ -22067,14 +22058,13 @@ status synchronization. Canonical overlay/component/package identities are
 and `61f5fc2763bbd2b17e6e28f09bb13bdfc38a21a9e072a51c88dbec171fcbdde3`.
 
 No package was signed or flashed. Live MRAM/filesystem/XIP writes, bootloader
-installation, peer-visible status, power-loss, and rollback behavior remain
-blocked because no authorized responsive G2 peer and writable OTA target are
-physically available; the authorized right temple is nonresponsive and the
-left temple must remain stock.
+installation, peer-visible status, power-loss, and rollback behavior are
+deferred by project direction; future qualification requires an authorized G2
+peer and writable OTA target.
 
 ## G2 ALS production routing
 
-`als.c` is a GPL-3.0-only clean-room implementation derived from authenticated
+`als.c` is a MIT clean-room implementation derived from authenticated
 2.2.6.10 linked-object behavior and the TI OPT3007 SBOS864 register
 specification. Its 38 selector-isolated leaves contribute 2,216 text bytes and
 a 48-byte brightness-curve closure with 30 alignment bytes and 82 reviewed
@@ -22084,9 +22074,9 @@ stock function bytes; 374 literal/alignment bytes remain official.
 Behavioral host tests and the fail-closed analyzer pin sampling, conversion,
 adaptive-brightness, scaling, synchronization, timer, and lifecycle policy as
 well as exact overlay/component/package/deployment identities. No device was
-flashed. Live OPT3007 bus and calibrated-light behavior is blocked by the
-nonresponsive authorized right temple, the stock-only left temple, and absence
-of a golden sensor trace.
+flashed. Live OPT3007 bus and calibrated-light behavior is deferred by project
+direction; future qualification requires authorized physical evidence or a
+golden sensor trace.
 
 ## Ring connection-policy production routing
 

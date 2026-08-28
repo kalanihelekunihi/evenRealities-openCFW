@@ -1,0 +1,44 @@
+{
+  "admitted_row_count": 2,
+  "analysis_mode": "offline authenticated target control/data flow, host tokenized 32-bit pointer graph and Cortex-M0+ compile; no MMIO or hardware execution",
+  "component": "G2 touch application packet source admission batch 12",
+  "exclusions": "resident-region literal tables, 0x1B6C/0x1C54/0x2638, MMIO, EULA bodies, system handoff and halt remain unadmitted",
+  "integration": "isolated source candidates only; not production-routed",
+  "metrics": {
+    "admitted_functions": 2,
+    "admitted_instruction_bytes": 794,
+    "concrete_source_or_implementation_gap_after": 66,
+    "input_concrete_gap": 68,
+    "input_gap_instruction_bytes": 6984,
+    "internally_closed_admissions": 2,
+    "mmio_admissions": 0,
+    "product_semantic_names_asserted": 0,
+    "resident_table_admissions": 0,
+    "residual_digest": "9e650e64591ca094d595771141d08d792a80f912d3df13cd5f7a7b998e0bcede",
+    "residual_gap_instruction_bytes": 6190,
+    "row_digest": "f4be346e0ac2cdcab927ee591be95da813ec4e618d7d7a0e4b918f67c9779a69",
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_application_contracts_after": 54,
+    "unimplemented_application_contracts_before": 56
+  },
+  "remaining": {
+    "concrete_gap_instruction_bytes": 6190,
+    "concrete_source_or_implementation_functions": 66,
+    "note": "ten Em_EEPROM EULA rows, system handoff and halt remain external; resident 0xB41C loader and ambiguous 0x1B6C/0x1C54/0x2638 boundaries remain unimplemented",
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_clean_room_application_contracts": 54
+  },
+  "residual_row_count": 66,
+  "schema_version": 1,
+  "source": {
+    "dependencies": [
+      "components/shared/touch/runtime_touch_application_state_pipeline.c",
+      "components/shared/touch/runtime_touch_leaf_primitives.c",
+      "components/shared/touch/runtime_touch_record_primitives.c"
+    ],
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_application_packet_pipeline.c",
+    "sha256": "323765b2d7eafc8f90bf5f4291cfa135fbdb3cd972e2ca54f346fec3a2c99eca",
+    "target_closure_object_bytes": 11360
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "admitted_row_count": 3,
+  "analysis_mode": "offline authenticated flow, typed Apache/runtime seams, host and Cortex-M0+ compile; no hardware/MMIO execution",
+  "component": "G2 touch flash-row admission batch 19",
+  "exclusions": "all EULA bodies, resident tables/loaders, 0x1B6C/0x1C54/0x2638, system handoff and halt remain unadmitted",
+  "integration": "isolated source candidate only; not production-routed",
+  "metrics": {
+    "admitted_functions": 3,
+    "admitted_instruction_bytes": 172,
+    "concrete_source_or_implementation_gap_after": 47,
+    "input_concrete_gap": 50,
+    "input_gap_instruction_bytes": 4722,
+    "mmio_admissions": 0,
+    "resident_table_admissions": 0,
+    "residual_digest": "8d8cf5a618dc9d6b80d8b82c4c01905e1b9ec827057266244cf270f52f6cf023",
+    "residual_gap_instruction_bytes": 4550,
+    "row_digest": "92391760e1e1e88ee3e7f59b92fd72ea77086a067cb5e0dc3bd453a423e990eb",
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_application_contracts_after": 35,
+    "unimplemented_application_contracts_before": 38
+  },
+  "remaining": {
+    "concrete_gap_instruction_bytes": 4550,
+    "concrete_source_or_implementation_functions": 47,
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_clean_room_application_contracts": 35
+  },
+  "residual_row_count": 47,
+  "schema_version": 1,
+  "source": {
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_flash_row_adapters.c",
+    "sha256": "04ec6331c138e8156853a25a0b0547922f6aa211f2d79756f8a8b43956ada4ad",
+    "target_closure_object_bytes": 1384
+  }
+}

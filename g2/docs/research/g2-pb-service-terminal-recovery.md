@@ -1,7 +1,8 @@
 # G2 `pb_service_terminal.c` recovery
 
 Status: complete linked-object census, clean-room production C, fail-closed
-host/build/package qualification, and explicit unavailable-hardware blocker.
+host/build/package qualification, with live qualification deferred by project
+direction.
 Run addresses use `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -74,6 +75,9 @@ routing. The canonical package is 4,503,622 bytes with SHA-256
 `8e7028f3e7ffcecdbe44c1eede4ffa3bbbfa593d41ce10ed7f4630aff3d7247e`.
 
 The software functional gap is closed. Live service-`0x30` master/peer BLE
-and terminal-UI validation is explicitly blocked: no authorized responsive G2
-pair is available, the authorized right temple is nonresponsive, and the left
-temple must remain stock. This is not a hardware-completeness claim.
+and terminal-UI qualification is blocked by unavailable physical evidence. The earlier
+nonresponsive-fault inference is superseded: the charging case was
+accidentally bumped during lunch and caused that test disconnect, not a device
+or flashing fault. Future acceptance still requires authorized master/peer
+BLE and terminal-UI evidence. This is not a hardware-completeness claim and
+does not block the closed software route.

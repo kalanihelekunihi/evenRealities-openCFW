@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-excluded clean-room ABI model for three Ambiq GPU-patch
  * accessors.  The public package exposes only the functions' declarations and

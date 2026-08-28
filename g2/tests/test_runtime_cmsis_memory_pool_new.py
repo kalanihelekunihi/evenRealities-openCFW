@@ -154,12 +154,12 @@ class RuntimeCmsisMemoryPoolNewTests(unittest.TestCase):
         self.assertEqual(leaf["source"]["upstream_commit"], "d213f261b5be6bb29a7cce8b84071706b72f4d53")
         self.assertEqual(
             (leaf["expected"]["size"], leaf["expected"]["sha256"], leaf["expected"]["offset"]),
-            (254, "ff4675969e47e4558d41506f657230e7dda578b43b342a0831f830ac777ebe82", 132792),
+            (254, "41e35697d6cb9f7f68dc6e195edcf875babac822b612dda0c89bb9dbb26369a4", 192640),
         )
         linux = leaf["toolchain_profiles"]["linux-clang"]["expected"]
         self.assertEqual(
             (linux["size"], linux["sha256"], linux["offset"]),
-            (250, "fc11de9c673f30bef9ccbb880a4d4abd1de2ca27951f32cda68e10f190cb16eb", 134672),
+            (250, "e2f93a81b40bfec52c8ca9da51a08b3e5aa655b3b63ffe87330479977cf5fd80", 194424),
         )
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
@@ -171,15 +171,15 @@ class RuntimeCmsisMemoryPoolNewTests(unittest.TestCase):
         )
         self.assertEqual(
             (region["file_offset"], region["size"], region["target_address"]),
-            (3_656_188, 254, 8_079_836),
+            (3_716_036, 254, 8_139_684),
         )
         self.assertEqual(
             (main["provider"]["size"], main["provider"]["profiles"]["linux-clang"]["size"]),
-            (3_690_822, 3_668_604),
+            (3_952_346, 3_728_356),
         )
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_size"]),
-            (4_469_316, 4_447_098),
+            (4_745_418, 4_521_412),
         )
 
 

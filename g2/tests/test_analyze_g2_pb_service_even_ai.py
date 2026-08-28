@@ -72,7 +72,7 @@ class AnalyzeG2PbServiceEvenAiTests(unittest.TestCase):
         self.assertEqual(production["stock_replaced_bytes"], 8404)
         self.assertEqual(production["retained_gap_pool_bytes"], 552)
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertEqual(production["hardware_validation"], "deferred by project direction")
 
 
 if __name__ == "__main__":

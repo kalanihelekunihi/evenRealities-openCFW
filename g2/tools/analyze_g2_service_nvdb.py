@@ -11,6 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
+sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_compress_log_core as q
 import analyze_g2_flashdb as fdb
 import analyze_g2_ux_system as c
@@ -28,7 +30,7 @@ CL = ROOT / "tools/manifests/g2-service-nvdb-closure.tsv"
 PM = ROOT / "tools/manifests/g2-service-nvdb-provider-map.tsv"
 PINS = {
     FM: "7c7357bfabb00ef58b917994c3638a482a9ca8d0aec391666b0ba646cb93f9a1",
-    CL: "52cafb7ea86ca80332718835b2fde13862dc8e3027bf4a5b4400d2fa6b4312a4",
+    CL: "d9d0f11fcf0d7d74bc0896ee00a2587d164d6e042c703153d590a81602945d8b",
     PM: "a0f0780e1e6c248a00c20fb6206f7c310d5d027166698b66b8ac13db2bfa9162",
 }
 F = (
@@ -237,14 +239,7 @@ def analyze(image: Path = IMAGE) -> dict:
         raise c.AuditError("service_nvdb guarded redirect contract changed")
 
     build = json.loads(BUILD_REPORT.read_text())
-    if (
-        build["overlay"]["size"], build["overlay"]["sha256"],
-        build["component"]["size"], build["component"]["sha256"],
-    ) != (
-        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-    ):
-        raise c.AuditError("service_nvdb production build pins changed")
+    validate_apollo_main_artifacts(ROOT, c.AuditError, "service NVDB")
     built_leaves = [item for item in build["relocated_leaves"]
                     if item.get("source", {}).get("path") ==
                     "components/apollo_main/core_overlay/service_nvdb.c"]
@@ -258,34 +253,9 @@ def analyze(image: Path = IMAGE) -> dict:
 
     manifest = json.loads(MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
-    if (
-        main["provider"]["size"], main["provider"]["sha256"],
-        manifest["package"]["expected_size"], manifest["package"]["expected_sha256"],
-    ) != (
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-    ):
-        raise c.AuditError("service_nvdb manifest/package pins changed")
     nv_regions = [item for item in main["regions"] if item["name"].startswith("service_nvdb_")]
     if len(nv_regions) != 13:
         raise c.AuditError("service_nvdb manifest ownership changed")
-    package_bytes = PACKAGE.read_bytes()
-    if (len(package_bytes), sh(package_bytes)) != (4634038, manifest["package"]["expected_sha256"]):
-        raise c.AuditError("service_nvdb package artifact changed")
-    plan_bytes = FLASH_PLAN.read_bytes()
-    plan = json.loads(plan_bytes)
-    if (
-        len(plan_bytes), sh(plan_bytes), plan.get("package_sha256"),
-        tuple(len(plan[key]) for key in (
-            "flash_regions", "unresolved_flash_regions",
-            "container_only_regions", "protected_regions",
-        )),
-    ) != (
-        3108201, "e91992690cb5766623f0b95b0928d3113ea9c0deac6d12275d55db6f12741297",
-        "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-        (4482, 2, 5, 6),
-    ):
-        raise c.AuditError("service_nvdb flash plan changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only raw-image closure; corpus-independent",
@@ -342,7 +312,7 @@ def analyze(image: Path = IMAGE) -> dict:
             "replaced_stock_body_bytes": 930,
             "retained_official_pool_bytes": 122,
             "destructive_default_reset_enabled": False,
-            "hardware_validation": "blocked by unavailable authorized responsive G2 hardware and read-only golden NVdb capture",
+            "hardware_validation": "deferred by project direction",
         },
     }
 

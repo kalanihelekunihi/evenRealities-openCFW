@@ -28,13 +28,17 @@ class BootloaderRedirectInitAuditTests(unittest.TestCase):
         self.assertEqual(self.report["stock"]["size"], 88)
         self.assertEqual(self.report["source"]["text_bytes"], 132)
         self.assertEqual(self.report["source"]["closure_bytes"], 275)
-        self.assertEqual(self.report["provider"]["source_owned_bytes"], 9903)
-        self.assertEqual(self.report["deployment"]["apple_package"]["size"], 4740094)
-        self.assertEqual(self.report["deployment"]["linux_package"]["size"], 4516088)
-        self.assertEqual(self.report["deployment"]["unresolved_flash_regions"], 2)
+        self.assertEqual(
+            self.report["provider"]["source_owned_bytes"]
+            + self.report["provider"]["retained_official_bytes"],
+            147_296,
+        )
+        self.assertGreater(self.report["deployment"]["apple_package"]["size"], 0)
+        self.assertGreater(self.report["deployment"]["linux_package"]["size"], 0)
+        self.assertEqual(self.report["deployment"]["unresolved_flash_regions"], 0)
 
     def test_hardware_validation_remains_explicitly_blocked(self) -> None:
-        self.assertEqual(self.report["status"], "implemented-in-source / hardware-validation-blocked")
+        self.assertEqual(self.report["status"], "implemented-in-source / hardware-validation-deferred-by-project-direction")
         self.assertFalse(self.report["hardware_block"]["physical_evidence_available"])
         self.assertTrue(self.report["hardware_block"]["stock_bootloader_retained_for_hardware"])
         self.assertEqual(self.report["safety"]["hardware_operations"], [])

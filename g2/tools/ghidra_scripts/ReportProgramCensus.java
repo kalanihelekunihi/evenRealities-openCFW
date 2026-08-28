@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: MIT
 //
 // Report a one-line census of the current program so a harvest driver can
 // choose between candidate Ghidra projects deterministically.

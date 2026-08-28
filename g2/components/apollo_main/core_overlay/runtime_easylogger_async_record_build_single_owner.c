@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production corrected clean-room source for Apollo main's private G2
  * EasyLogger level-aware record builder at 0x00448D4E...0x00448DD1.

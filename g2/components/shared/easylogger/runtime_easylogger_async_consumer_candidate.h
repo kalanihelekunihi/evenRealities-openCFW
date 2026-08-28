@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-excluded clean-room candidate for the G2 EasyLogger downstream
  * callback setters and bounded fixed-record drain.

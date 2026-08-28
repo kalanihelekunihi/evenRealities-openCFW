@@ -56,23 +56,23 @@ PRODUCTION_LEAVES = (
     ("open_cfw_cordio_dm_adv_legacy_connect_failed", 356720, 38, 2, 2, "fd74e07473ad023a4a66955d71fd6073193760ef2fbbe29bc601c4606349511e"),
     ("open_cfw_cordio_dm_adv_legacy_initialize", 356760, 48, 2, 3, "1cb25828f054159d8a4b5db35b694e35d1a0910806cd61007c174e495cbe4f50"),
 )
-PRODUCTION_OVERLAY = (404_796, "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d")
-PRODUCTION_COMPONENT = (3_928_192, "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
-PRODUCTION_PACKAGE = (4_706_686, "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf")
-PRODUCTION_FLASH_PLAN = (4_071_097, "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
+PRODUCTION_OVERLAY = (429_058, "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd")
+PRODUCTION_COMPONENT = (3_952_454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb")
+PRODUCTION_PACKAGE = (4_745_526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934")
+PRODUCTION_FLASH_PLAN = (4_643_183, "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66")
 
 FUNCTIONS = [
     ("dmAdvConfig", 0x004B9A80, 0x004B9AC0, "f687db593110076bcf1e6a2512b05cc86e323cef21a59e98575065570003002a", [0x004B9D14]),
     ("dmAdvActConfig", 0x004B9AC0, 0x004B9D1A, "14f5b5f1cb3b9562c0d8747178ae5f5ba67472861828b12d022ae1278e9ea988", []),
     ("dmAdvActSetData", 0x004B9D24, 0x004B9E7A, "2ca537c902e749d9bf9ce4bc6a23acad52110516ade22eaae9b9195ed92176b6", []),
-    ("dmAdvActStart", 0x004B9E88, 0x004BA0E6, "2c7f58b67c890c19a5505eb562c47588888e5a86347d63e0913697df5acea8c5", []),
+    ("dmAdvActStart", 0x004B9E88, 0x004BA0E6, "2c7f58b67c890c19a5475eb562c47588888e5a86347d63e0913697df5acea8c5", []),
     ("dmAdvActStop", 0x004BA0F4, 0x004BA332, "24239117f14103d04e7f2b15e3cd8b1f2e243f794db39f4df872a064843ebf62", []),
     ("dmAdvActRemoveSet", 0x004BA33C, 0x004BA33E, "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8", []),
     ("dmAdvActClearSets", 0x004BA33E, 0x004BA340, "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8", []),
     ("dmAdvActSetRandAddr", 0x004BA340, 0x004BA342, "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8", []),
     ("dmAdvActTimeout", 0x004BA342, 0x004BA456, "d0e55f6bd6c174c05e60496ee00304cb4fa5ae324d496980813e23bdf2794fe5", []),
     ("dmAdvReset", 0x004BA45C, 0x004BA490, "5c30215302bedc9322e389ee8f3d26f4e120239a391a590e663f9a49b067cff2", []),
-    ("dmAdvHciHandler", 0x004BA4B0, 0x004BA6AC, "14ada43062d8d253493ede7d24e43e5a89740fcd706a551760338ad6c7e55054", []),
+    ("dmAdvHciHandler", 0x004BA4B0, 0x004BA6AC, "14ada43062d8d253493ede7d24e43e5a89740fcd706a551760338ad6c7e54754", []),
     ("dmAdvMsgHandler", 0x004BA6AC, 0x004BA6C0, "888e710987e18eb7ac608a7521af400e6bd8db864b21a3e790a150ea3f22116c", []),
     ("dmAdvStartDirected", 0x004BA6D4, 0x004BA848, "6b939a502d0a86ca1c10c1fae3f6f0a5a13eaa112076cd15c56c03b5b1cd570a", [0x00536AD6]),
     ("dmAdvStopDirected", 0x004BA864, 0x004BA9C8, "e010ef6ab44be58fae6ed5edbff56739d5df23458c094361c067f359b4844527", [0x00536AE2]),
@@ -302,7 +302,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
         "flash_regions", "unresolved_flash_regions", "container_only_regions",
         "protected_regions",
     ))
-    if flash_counts != (5863, 2, 5, 6):
+    if flash_counts != (6671, 0, 6, 6):
         raise AuditError("legacy advertising flash-plan region counts changed")
 
     linked_bytes = sum(end - start for _, start, end, _, _ in FUNCTIONS)

@@ -21,7 +21,7 @@ returns when the resulting address is null, and otherwise invokes the function
 word at offset zero with the argument word at offset four. Address-derived
 names avoid unsupported claims about the retained runtime object's type.
 
-`runtime_callback_41639a.c` is a 1,118-byte GPL-3.0-or-later clean-room
+`runtime_callback_41639a.c` is a 1,118-byte MIT clean-room
 implementation with SHA-256
 `15e3c18b56001b6936345c1f7516b4363a337e4e74440f615e34ff55931045fa`.
 Apple clang emits a 24-byte, two-byte-aligned unrelocated leaf with SHA-256

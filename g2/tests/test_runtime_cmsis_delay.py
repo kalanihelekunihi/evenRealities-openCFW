@@ -65,13 +65,13 @@ class RuntimeCmsisDelayTests(unittest.TestCase):
         config=json.loads(CONFIG.read_text())
         task=next(x for x in config["relocated_leaves"] if x["function"]=="open_cfw_freertos_task_delay")
         cmsis=next(x for x in config["relocated_leaves"] if x["function"]=="open_cfw_cmsis_delay")
-        self.assertEqual((task["expected"]["size"],task["expected"]["offset"],cmsis["expected"]["size"],cmsis["expected"]["offset"]),(70,135292,30,135364))
-        self.assertEqual((task["toolchain_profiles"]["linux-clang"]["expected"]["offset"],cmsis["toolchain_profiles"]["linux-clang"]["expected"]["offset"]),(137168,137240))
+        self.assertEqual((task["expected"]["size"],task["expected"]["offset"],cmsis["expected"]["size"],cmsis["expected"]["offset"]),(70,195140,30,195212))
+        self.assertEqual((task["toolchain_profiles"]["linux-clang"]["expected"]["offset"],cmsis["toolchain_profiles"]["linux-clang"]["expected"]["offset"]),(196920,196992))
         self.assertTrue(task["strict_relocation_contract"] and cmsis["strict_relocation_contract"])
         manifest=json.loads(MANIFEST.read_text());main=manifest["component_overrides"]["apollo_main"]
         region=next(x for x in main["regions"] if x["name"]=="apollo_cmsis_delay_source_leaf")
-        self.assertEqual((region["file_offset"],region["size"],region["target_address"]),(3658760,30,8082408))
-        self.assertEqual((manifest["package"]["expected_size"],manifest["package"]["expected_sha256"]),(4482672,"d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"))
+        self.assertEqual((region["file_offset"],region["size"],region["target_address"]),(3718608,30,8142256))
+        self.assertEqual((manifest["package"]["expected_size"],manifest["package"]["expected_sha256"]),(4745526,"4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"))
 
 
 if __name__ == "__main__": unittest.main()

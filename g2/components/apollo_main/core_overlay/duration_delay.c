@@ -85,7 +85,7 @@ void open_cfw_delay_cycles(unsigned int iterations)
 
 /*
  * This function is copied in place to 0x004807A0 by the overlay builder.
- * The explicit BL encoding at offset 0x4A therefore continues to target
+ * The named BL displacement at offset 0x4A therefore continues to target
  * 0x00000040, the source-generated three-cycle loop in Apollo510 ITCM.
  * Keeping the original placement also keeps both PC-relative literals and
  * the SDK's timing-overhead calibration exact.
@@ -122,12 +122,9 @@ void open_cfw_delay_us(unsigned int usec)
         "cmp r1, r0\n"
         "bhs 6f\n"
         "subs r0, r0, r1\n"
-        /*
-         * BL 0x00000040 when installed at 0x004807EA. The source-copy patch
-         * and exact-span hash prevent this placement-specific encoding from
-         * being installed anywhere else.
-         */
-        ".short 0xf77f, 0xf429\n"
+        /* BL 0x00000040 when installed at 0x004807EA. */
+        ".equ open_cfw_delay_cycle_target_delta, -0x4807aa\n"
+        "bl . + open_cfw_delay_cycle_target_delta\n"
         "6:\n"
         "pop {r0, pc}\n"
         ".p2align 2\n"
@@ -139,8 +136,8 @@ void open_cfw_delay_us(unsigned int usec)
 
 /*
  * Exact source copies of the adjacent application wrappers at 0x004910F4 and
- * 0x00491102. Their raw BL encodings are placement-specific, so these overlay
- * symbols exist only as builder inputs for exact in-place copy patches.
+ * 0x00491102. Their named BL displacements are placement-specific, so these
+ * overlay symbols exist only as builder inputs for exact in-place copy patches.
  */
 __attribute__((used, noinline, naked))
 void open_cfw_delay_ms(unsigned int milliseconds)
@@ -150,7 +147,8 @@ void open_cfw_delay_ms(unsigned int milliseconds)
         "push {r7, lr}\n"
         "mov.w r1, #1000\n"
         "muls r0, r1, r0\n"
-        ".short 0xf7ef, 0xfb50\n"
+        ".equ open_cfw_delay_ms_target_delta, -0x1095c\n"
+        "bl . + open_cfw_delay_ms_target_delta\n"
         "pop {r0, pc}\n"
     );
 }
@@ -161,7 +159,8 @@ void open_cfw_delay_us_passthrough(unsigned int microseconds)
     __asm volatile(
         ".syntax unified\n"
         "push {r7, lr}\n"
-        ".short 0xf7ef, 0xfb4c\n"
+        ".equ open_cfw_delay_us_target_delta, -0x10964\n"
+        "bl . + open_cfw_delay_us_target_delta\n"
         "pop {r0, pc}\n"
     );
 }

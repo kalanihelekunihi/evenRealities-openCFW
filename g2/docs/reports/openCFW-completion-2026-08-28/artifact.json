@@ -1,0 +1,37 @@
+{
+  "authoritative_audit": "g2/tools/analyze_g2_completion_readiness.py",
+  "commands": {
+    "check": "python3 g2/tools/generate_g2_completion_report.py --check",
+    "generate": "python3 g2/tools/generate_g2_completion_report.py"
+  },
+  "deterministic": true,
+  "files": {
+    "assessment-data.json": {
+      "sha256": "9e5ecd52a97298797a99e9da713e0dd8ade526a1d58a0747bec419be41fc456e",
+      "size": 24447
+    },
+    "report.html": {
+      "sha256": "d1d92a5f426d5d83c2a5b4e4ce66d3e4712b1fe58f6b5f6fb141cd98a25897ff",
+      "size": 19007
+    }
+  },
+  "gate_snapshot": {
+    "binary_redistribution_authority_resolved": false,
+    "byte_accounting_complete": true,
+    "classification_complete": true,
+    "hardware_blocker": "blocked by unavailable physical evidence",
+    "hardware_operations": [],
+    "hardware_validation": "blocked by unavailable physical evidence",
+    "project_license_policy_clean": true,
+    "release_authorized": false,
+    "source_complete": false,
+    "source_metadata_clean": true,
+    "source_ownership_quality_clean": true
+  },
+  "generator": "g2/tools/generate_g2_completion_report.py",
+  "hardware_operations": [],
+  "hardware_validation": "blocked by unavailable physical evidence",
+  "schema_version": 2,
+  "surface": "report",
+  "title": "G2 openCFW Completion Assessment"
+}

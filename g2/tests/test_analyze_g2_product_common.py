@@ -26,7 +26,13 @@ class ZeroAnchorClosureTests(unittest.TestCase):
 
     def test_evidence_and_production(self):
         self.assertEqual(self.r["evidence"], {'boundary_guards': True, 'pointer_cells': ['0x0058F4A4'], 'path_string_run_address': '0x006F5360', 'tag_strings': 6})
-        self.assertFalse(self.r["production"]["production_routed"])
+        self.assertEqual(self.r["production"], {
+            "external_stock_ingress_replaced": True,
+            "font_crc_source_routes": 2,
+            "production_routed": True,
+            "source_validator": "components/apollo_main/core_overlay/pt_protocol_board_leaf_candidates.c",
+            "stock_runtime_reachable": False,
+        })
 
 
 if __name__ == "__main__":

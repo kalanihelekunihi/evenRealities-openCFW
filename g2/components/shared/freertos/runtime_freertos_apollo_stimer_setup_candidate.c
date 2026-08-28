@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of the G2 Apollo510 vPortSetupTimerInterrupt
  * override at [0x0045643E,0x00456496). This is not a production input.

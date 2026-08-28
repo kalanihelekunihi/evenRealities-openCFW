@@ -12,6 +12,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x00437FE0
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -282,21 +284,9 @@ def analyze(image_path: Path = IMAGE) -> dict:
         ) != expected:
             raise AuditError(f"production patch changed: {row['function']}")
     report = json.loads(REPORT.read_text())
-    if (report["overlay"]["size"], report["overlay"]["sha256"],
-            report["component"]["size"], report["component"]["sha256"]) != (
-        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-    ):
-        raise AuditError("production build pins changed")
+    validate_apollo_main_artifacts(ROOT, AuditError, "protobuf Even AI service")
     manifest = json.loads(MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
-    if (main["provider"].get("size"), main["provider"].get("sha256"),
-            manifest["package"].get("expected_size"),
-            manifest["package"].get("expected_sha256")) != (
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-    ):
-        raise AuditError("production manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}
     for index, row in enumerate(rows, 1):
         region = region_by_name.get(f"pb_even_ai_{index:02d}_source_replacement")
@@ -390,11 +380,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 8404,
             "retained_gap_pool_bytes": 552,
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
+            "hardware_validation": "deferred by project direction",
             "hardware_blocker": (
                 "No authorized live G2 service 7 master/peer BLE and Even-AI "
-                "UI evidence is available; the authorized right temple is "
-                "nonresponsive and the left temple must remain stock."
+                "UI evidence is required for future qualification; the authorized right temple is "
+                "not under test because qualification is deferred by project direction and the left temple must remain stock."
             ),
         },
     }

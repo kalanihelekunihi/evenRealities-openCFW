@@ -113,14 +113,14 @@ class RuntimeCmsisSemaphoreAcquireTests(unittest.TestCase):
         leaf = next(item for item in config["relocated_leaves"] if item["function"] == "open_cfw_cmsis_semaphore_acquire")
         self.assertEqual(leaf["source"]["path"], SOURCE.relative_to(ROOT).as_posix())
         self.assertEqual(leaf["source"]["upstream_commit"], "d213f261b5be6bb29a7cce8b84071706b72f4d53")
-        self.assertEqual((leaf["expected"]["size"], leaf["expected"]["sha256"], leaf["expected"]["offset"]), (108, "b2507700dbaf383fe30cf380b81e6c0bf37ccd49af692aed38c77299eaa2e8cc", 133292))
+        self.assertEqual((leaf["expected"]["size"], leaf["expected"]["sha256"], leaf["expected"]["offset"]), (108, "b2507700dbaf383fe30cf380b81e6c0bf37ccd49af692aed38c77299eaa2e8cc", 193140))
         linux = leaf["toolchain_profiles"]["linux-clang"]["expected"]
-        self.assertEqual((linux["size"], linux["sha256"], linux["offset"]), (108, "97a333e6e5d71ea8ca1ab54bc909d12a338f7230a669420770ed6a4ebd5709b7", 135164))
+        self.assertEqual((linux["size"], linux["sha256"], linux["offset"]), (108, "97a333e6e5d71ea8ca1ab54bc909d12a338f7230a669420770ed6a4ebd5709b7", 194916))
         patch = next(item for item in config["patch_sites"] if item["target_function"] == "open_cfw_cmsis_semaphore_acquire")
         self.assertEqual(patch["runtime_address"], 0x0044994E)
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         region = next(item for item in manifest["component_overrides"]["apollo_main"]["regions"] if item["name"] == "apollo_cmsis_semaphore_acquire_source_leaf")
-        self.assertEqual((region["file_offset"], region["size"], region["target_address"]), (3656688, 108, 8080336))
+        self.assertEqual((region["file_offset"], region["size"], region["target_address"]), (3716536, 108, 8140184))
 
 
 if __name__ == "__main__":

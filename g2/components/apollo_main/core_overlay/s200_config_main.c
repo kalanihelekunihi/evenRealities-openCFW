@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room source replacement for product\s200\app\config\main.c in
  * G2 2.2.6.10. Diagnostics are intentionally omitted; LVGL interaction,

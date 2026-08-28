@@ -214,17 +214,17 @@ class RuntimeFreeRTOSQueueReceiveFromISRTests(unittest.TestCase):
             "open_cfw_freertos_queue_copy_data_from_queue": 0x00441F5E,
             "open_cfw_freertos_queue_receive_from_isr": 0x00441DA6,
         })
-        self.assertEqual((config["expected"]["overlay_size"], config["expected"]["component_size"]), (180782, 3704178))
-        self.assertEqual((config["toolchain_profiles"]["linux-clang"]["expected"]["overlay_size"], config["toolchain_profiles"]["linux-clang"]["expected"]["component_size"]), (145208, 3668604))
+        self.assertEqual((config["expected"]["overlay_size"], config["expected"]["component_size"]), (429058, 3952454))
+        self.assertEqual((config["toolchain_profiles"]["linux-clang"]["expected"]["overlay_size"], config["toolchain_profiles"]["linux-clang"]["expected"]["component_size"]), (212664, 3736060))
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
         regions = {item["name"]: item for item in main["regions"]}
         self.assertEqual((regions["apollo_freertos_queue_copy_data_from_queue_source_leaf"]["file_offset"], regions["apollo_freertos_queue_copy_data_from_queue_source_leaf"]["size"], regions["apollo_freertos_queue_copy_data_from_queue_source_leaf"]["target_address"]), (3656444, 34, 8080092))
         self.assertEqual((regions["apollo_freertos_queue_receive_from_isr_source_leaf"]["file_offset"], regions["apollo_freertos_queue_receive_from_isr_source_leaf"]["size"], regions["apollo_freertos_queue_receive_from_isr_source_leaf"]["target_address"]), (3656480, 208, 8080128))
-        self.assertEqual((main["provider"]["size"], main["provider"]["profiles"]["linux-clang"]["size"]), (3704178, 3668604))
-        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4482672, "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"))
-        self.assertEqual((manifest["package"]["profiles"]["linux-clang"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_sha256"]), (4447098, "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e"))
+        self.assertEqual((main["provider"]["size"], main["provider"]["profiles"]["linux-clang"]["size"]), (3952454, 3736060))
+        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4745526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"))
+        self.assertEqual((manifest["package"]["profiles"]["linux-clang"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_sha256"]), (4529116, "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"))
 
 
 if __name__ == "__main__":

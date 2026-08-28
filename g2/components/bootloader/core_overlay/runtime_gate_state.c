@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 
 #ifndef OPEN_CFW_BOOTLOADER_RUNTIME_STATE
 extern unsigned int open_cfw_bootloader_runtime_state_query(void);

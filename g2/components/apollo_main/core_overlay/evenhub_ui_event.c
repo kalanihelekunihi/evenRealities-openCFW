@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * EvenHub registry UI-event handler replacement for the Even Realities G2
  * 2.2.6.10 Apollo510B application. The reviewed registry row, complete stock

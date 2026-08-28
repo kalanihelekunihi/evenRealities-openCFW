@@ -148,7 +148,7 @@ def audit() -> dict[str, Any]:
     return {
         "component": "CmBacktrace fault path",
         "analysis_mode": "offline source/build audit; no hardware, signing, or flash operation",
-        "status": "implemented-in-source / hardware-validation-blocked",
+        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
         "software_gap_count": 0,
         "source": {
             "upstream_commit": "73714489f9d8af130aacb515586b397b604a5768",
@@ -168,12 +168,14 @@ def audit() -> dict[str, Any]:
         "production_registration": {
             "hardfault_vector_replaced": False,
             "stock_path_retained": True,
-            "reason": "authorized G2 fault-injection evidence unavailable",
+            "reason": "physical qualification deferred by project direction",
         },
         "hardware_block": {
+            "qualification_status": "deferred by project direction",
+            "qualification_reason": "deferred by project direction",
             "required_evidence": "authorized G2 deliberate fault-injection validating register capture, FreeRTOS task/stack bounds, logger output, and terminal behavior",
             "physical_evidence_available": False,
-            "authorized_right_temple_state": "nonresponsive/unavailable",
+            "authorized_right_temple_state": "not under test; qualification deferred by project direction",
             "left_temple_state": "stock; not accessed",
         },
     }
@@ -190,7 +192,7 @@ def main() -> int:
         print(f"CmBacktrace fault closure: {result['status']}")
         print(f"  target: {result['source']['target']}")
         print(f"  source exports: {len(result['source']['exports'])}")
-        print("  production HardFault vector: retained stock (physical validation unavailable)")
+        print("  production HardFault vector: retained stock (physical validation deferred by project direction)")
     return 0
 
 

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-excluded clean-room expression of lv_ambiq_gradient_create()
  * for G2's recovered LV_GRADIENT_MAX_STOPS == 2 caller contract. Exact public

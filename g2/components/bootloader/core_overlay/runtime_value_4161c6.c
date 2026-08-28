@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 
 #ifndef OPEN_CFW_BOOTLOADER_RUNTIME_VALUE_418B4E
 extern unsigned int open_cfw_bootloader_runtime_value_418b4e(void);

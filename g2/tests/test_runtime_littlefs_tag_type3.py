@@ -204,55 +204,55 @@ TARGET_TEXT_PIN = (
 
 PRODUCTION_PROFILES = {
     "apple-clang": {
-        "main_leaf": (124_588, 0x007B_29D0),
+        "main_leaf": (184_436, 0x007C_1398),
         "boot_leaf": (644, 0x0043_46FC),
         "main_patch": "e7f29abd00bf00bf",
         "boot_patch": "23f0acbd00bf00bf",
         "main_overlay": (
-            167_426,
-            "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
+            429_058,
+            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
         ),
         "main_component": (
-            3_690_822,
-            "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+            3_952_454,
+            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
         ),
         "boot_overlay": (
-            662,
-            "7cb3c17a03dda3b8576d8288ffa61df1332d89f1f24d6c5877bf0143e233902b",
+            15_240,
+            "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314",
         ),
         "boot_component": (
-            149_262,
-            "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267",
+            163_840,
+            "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0",
         ),
         "package": (
-            4_469_316,
-            "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d",
+            4_745_526,
+            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
         ),
     },
     "linux-clang": {
-        "main_leaf": (126_408, 0x007B_30EC),
+        "main_leaf": (186_160, 0x007C_1A54),
         "boot_leaf": (644, 0x0043_46FC),
         "main_patch": "e8f228b900bf00bf",
         "boot_patch": "23f0acbd00bf00bf",
         "main_overlay": (
-            145_208,
-            "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
+            212_664,
+            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
         ),
         "main_component": (
-            3_668_604,
-            "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
+            3_736_060,
+            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
         ),
         "boot_overlay": (
-            662,
-            "e4c743531f56c190b7e3129768d410480a2f3433a5b680c7bf432ef0b05a7021",
+            15_224,
+            "2dad91f7403219c30fee3130d62833c98561c8fb56387960f0654723ceed67ca",
         ),
         "boot_component": (
-            149_262,
-            "fc3d07c8a59e1c33f26965cdb1888114412c3ca671d6137f7c3166acc81c8d74",
+            163_824,
+            "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635",
         ),
         "package": (
-            4_447_098,
-            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e",
+            4_529_116,
+            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
         ),
     },
 }
@@ -660,7 +660,7 @@ class RuntimeLittlefsTagType3ProductionTests(unittest.TestCase):
                 main_regions, 3_647_982, 2, 0x007B_29CE, "generated_alignment",
             ),
             "apollo_littlefs_tag_type3_source_leaf": (
-                main_regions, 3_647_984, 6, 0x007B_29D0, "source_compiled",
+                main_regions, 3_647_984, 6, 0x007C_1398, "source_compiled",
             ),
             "bootloader_littlefs_tag_type3_source_replacement": (
                 boot_regions, 2_976, 8, BOOT_START,

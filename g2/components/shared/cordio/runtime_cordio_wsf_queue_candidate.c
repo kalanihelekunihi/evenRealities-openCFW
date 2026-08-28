@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-routed clean-room behavioral reconstruction of the six linked
  * G2 Cordio WSF intrusive-queue functions.

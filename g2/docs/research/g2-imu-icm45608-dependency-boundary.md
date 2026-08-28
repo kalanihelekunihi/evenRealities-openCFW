@@ -11,7 +11,7 @@ physical validation is separately blocked.
 ## Source and public evidence
 
 `components/apollo_main/core_overlay/imu_icm45608.c` is an OpenCFW clean-room
-implementation under GPL-3.0-only. The repository also carries an immutable,
+implementation under MIT. The repository also carries an immutable,
 BSD-3-Clause TDK InvenSense `motion.arduino.ICM45608` snapshot at tag `1.1.2`,
 commit `b79ae575f7f310e5ae2e1164096d1a858bb74662` (driver `1.1.0`): 52 upstream
 files / 594,177 bytes / aggregate SHA-256

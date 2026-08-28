@@ -1,0 +1,12 @@
+kind	name	start	end	size	sha256	disposition	provider	license_status	evidence
+retained_data	initialize_alignment_and_state_literal	0x00424aea	0x00424af0	6	-	authenticated_data	stock firmware plus AmbiqSuite g_MSPIState	firmware provenance / BSD-3-Clause	two zero alignment bytes followed by little-endian 0x2001caa0
+function	am_hal_mspi_configure	0x00424af0	0x00424bd4	228	7e844f8b690703208e8e932371914cc19506c0d8adf682bfe03a28e55357ad8c	exact_dual_profile_candidate	AmbiqSuite 5.1.0 semantics with reviewed target adapter	BSD-3-Clause	handle and enable validation, MMIO defaults, TCB state, SRAM classification, CQ capacity, configuration flags, literals, caller, and stock-byte closure
+caller	boot_mspi_configure	0x004202ee	0x004202f2	4	-	retained_caller	G2 bootloader MSPI setup	firmware provenance	direct BL reaches am_hal_mspi_configure
+literal	handle_magic	0x004251b0	0x004251b4	4	-	authenticated_literal	AmbiqSuite AM_HAL_MAGIC_MSPI	BSD-3-Clause	value 0x01bebebe including initialized prefix bit
+literal	g_mspi_state_base	0x004251ac	0x004251b0	4	-	authenticated_literal	AmbiqSuite g_MSPIState	BSD-3-Clause	value 0x2001caa0
+literal	ssram_end	0x004251b4	0x004251b8	4	-	authenticated_literal	Apollo510 SSRAM_BASEADDR	Apache-2.0	value 0x20080000
+abi	mspi_state_fields	0x00000000	0x000008d0	2256	-	authenticated_layout	AmbiqSuite 5.1.0 am_hal_mspi_state_t	BSD-3-Clause	configured +8, clock-on-D4 +9, device +0x0a, TCB size +0x14, TCB address +0x18, maximum pending +0x858, TCM flag +0x8c8
+mmio	mspi_configuration_defaults	0x40060080	0x400600a0	-	-	authenticated_layout	Apollo510 CMSIS MSPI registers	Apache-2.0	DEV0AXI +0x80 cleared, DEV0XIP +0x90 XIPEN0 cleared, DEV0SCRAMBLING +0x9c cleared per module stride 0x1000
+retained_data	device_config_literals	0x00424bd4	0x00424be4	16	94e6a862be3bc0ed1203d19a3a0273a063cd153d5048ee5914400fbe0dcd45e4	authenticated_literals	AmbiqSuite/CMSIS	BSD-3-Clause / Apache-2.0	magic, MSPI0 base, and pad masks consumed by successor
+successor	am_hal_mspi_device_configure	0x00424be4	0x00425066	1154	baf84c7a01d10528a6367c12651b215274674bbfe206d9d26edddda387d85658	next_sequential_frontier	AmbiqSuite 5.1.0 am_hal_mspi_device_configure	BSD-3-Clause	not yet admitted
+hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project evidence gate	directed hardware testing is deferred by project direction; future MMIO, TCB residency, command-queue capacity, clock-on-D4, and cold-boot evidence remains required

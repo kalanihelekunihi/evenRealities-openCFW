@@ -1,0 +1,476 @@
+{
+  "component": {
+    "sha256": "49999f8c0dcd171316011a8b7c5982127d678345e2b3dbc7a92adc36cfafedc0",
+    "size": 3523396
+  },
+  "hardware": {
+    "qualification_complete": false,
+    "validation": "deferred by project direction"
+  },
+  "ingress_sites": [
+    {
+      "authenticated_sha256": "267faa858eddf585c646efe4df6ce8542d4b7195fcf160f4e06aae2be5ed6027",
+      "authenticated_size": 4,
+      "evidence": "authenticated donor BL retained byte-for-byte",
+      "route": "stock_direct_call",
+      "runtime_address": 5474070,
+      "target_address": 5698720,
+      "target_function": "open_cfw_pt_protocol_legacy_entry"
+    },
+    {
+      "authenticated_sha256": "62465f14c927473c321cc2a74d6dd5053712946f5f33f80d10f20ea4840f67e3",
+      "authenticated_size": 4,
+      "evidence": "authenticated donor BL retained byte-for-byte",
+      "route": "source_uart_relocation",
+      "runtime_address": 5480984,
+      "target_address": 5698720,
+      "target_function": "open_cfw_pt_protocol_legacy_entry"
+    },
+    {
+      "authenticated_sha256": "420d937eec298e2ce5cd1e318f597363c60093ace0238a59a1c46a86a3b9d924",
+      "authenticated_size": 4,
+      "evidence": "authenticated donor BL retained byte-for-byte",
+      "route": "source_uart_relocation",
+      "runtime_address": 5481302,
+      "target_address": 5699884,
+      "target_function": "open_cfw_pt_protocol_legacy_postprocess"
+    }
+  ],
+  "nested_crc32": 144156610,
+  "patch_sites": [],
+  "placement": {
+    "capacity": 35524,
+    "interval_sha256": "09558ef840ac77f1d7b7412f04b4ddc12da49670f56860479e95ea5e0fb0a119",
+    "linked_end_exclusive": 5718908,
+    "linked_start": 5698720,
+    "loadable_size": 19012,
+    "padding_size": 16512,
+    "payload_sha256": "a1233d66f0957a2cf31ced9ace1c673a808e99be6bbb9b8ee699b25b74692ac0",
+    "runtime_end_exclusive": 5733436,
+    "runtime_start": 5697912,
+    "sections": {
+      ".pt_legacy_entry": {
+        "runtime_address": 5698720,
+        "sha256": "1cc7d498b6dcae63afa7c22f90f7fd03173cdd6368425db4ba4d5c63e464f516",
+        "size": 4
+      },
+      ".pt_legacy_postprocess": {
+        "runtime_address": 5699884,
+        "sha256": "b294e84540a58eb93765e33fd203f10408a6e685e2433b99d06d3ba0fc450f9d",
+        "size": 4
+      },
+      ".text": {
+        "runtime_address": 5699904,
+        "sha256": "e02adcb2cc1ccef09019653d37a1931a114602a95ddc4a43225beedd9ebffd0d",
+        "size": 19004
+      }
+    },
+    "writable_bytes": 0
+  },
+  "profile": "apple-clang",
+  "schema_version": 1,
+  "source": {
+    "files": [
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_procsr.c",
+        "sha256": "ed09484f671bef4cee3315709aaec6737686c44b330935e1156e6221e246ce0d",
+        "size": 7199
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_handlers_basic.c",
+        "sha256": "80cad4cbfe7edf39076455cc3b2f4f44cdadb6490dfdc2c6614c6d5d671d6758",
+        "size": 5594
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_handlers_config.c",
+        "sha256": "770af369dbb48828cc90f65eb75a9ddc2436c6e27578c2814fdc88688317b269",
+        "size": 9347
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_handlers_data.c",
+        "sha256": "635473be748be89762fbe42a781eb1588ba9221590302c3d95079b47bd09b7fa",
+        "size": 9697
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_handlers_display.c",
+        "sha256": "67cc2671a722a744476026861dcab07a4c03f18f55e70fcb2074ca6ebe3f5ef5",
+        "size": 5087
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_handlers_sensors.c",
+        "sha256": "a1b2e80bceb661aba86881be3fa7f16a36e8737005bd55616d8295502dd8f507",
+        "size": 5365
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_handlers_services.c",
+        "sha256": "b997a62e9f3964a931f6531a287fad7903235b237aa3509dc1f939c2b0ae08e7",
+        "size": 3743
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_handlers_audio.c",
+        "sha256": "10f11318a58910c1f0ab581ed8565ff9be30ca27dd3db9510db78b507ca4c963",
+        "size": 3347
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_handlers_transfer.c",
+        "sha256": "2ddbf391ed16c1d9122128030994b0a0758e267da7240c8b47a66fdef429232e",
+        "size": 7312
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_service.c",
+        "sha256": "1684b9e90857f2954096532af9ca06fa4d5805ce80b917d0cb4055c3b70ee3bb",
+        "size": 1838
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_platform_adapter.c",
+        "sha256": "81e87e4d88a4b455127c12196cffabf76c6d6fb9078c990819afdb5abc192148",
+        "size": 11854
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_production_entry.c",
+        "sha256": "451de10cf03daadea6c809cf2142c17c37767ec0acb4288aba03ddf4590a4232",
+        "size": 5548
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_board_backend.c",
+        "sha256": "949e95c0f8a5b654252c4da6a060f6f189d2c1fbb6ec25f0d1143132d525b082",
+        "size": 64726
+      },
+      {
+        "path": "components/apollo_main/core_overlay/pt_protocol_board_leaf_candidates.c",
+        "sha256": "ec809f443fe338542505a0fb1f307e376dd068e00e9099e6e126257d7be71848",
+        "size": 29905
+      }
+    ],
+    "translation_units": 14
+  },
+  "source_provider_routes": [
+    {
+      "field": "post_input_message_id3",
+      "stock_runtime_address": 5320870,
+      "table_slot_runtime_address": 5718380,
+      "target_function": "open_cfw_pt_board_post_input_message_id3",
+      "target_runtime_address": 5717064,
+      "target_thumb_pointer": 5717065
+    },
+    {
+      "field": "buzzer_start",
+      "stock_runtime_address": 5254280,
+      "table_slot_runtime_address": 5718412,
+      "target_function": "open_cfw_pt_board_buzzer_start",
+      "target_runtime_address": 5715740,
+      "target_thumb_pointer": 5715741
+    },
+    {
+      "field": "buzzer_stop",
+      "stock_runtime_address": 5254476,
+      "table_slot_runtime_address": 5718416,
+      "target_function": "open_cfw_pt_board_buzzer_stop",
+      "target_runtime_address": 5715788,
+      "target_thumb_pointer": 5715789
+    },
+    {
+      "field": "production_reset",
+      "stock_runtime_address": 5830992,
+      "table_slot_runtime_address": 5718436,
+      "target_function": "open_cfw_pt_board_production_reset",
+      "target_runtime_address": 5717324,
+      "target_thumb_pointer": 5717325
+    },
+    {
+      "field": "charger_test_disable",
+      "stock_runtime_address": 5318904,
+      "table_slot_runtime_address": 5718440,
+      "target_function": "open_cfw_pt_board_charger_test_disable",
+      "target_runtime_address": 5716012,
+      "target_thumb_pointer": 5716013
+    },
+    {
+      "field": "charger_test_enable",
+      "stock_runtime_address": 5319068,
+      "table_slot_runtime_address": 5718444,
+      "target_function": "open_cfw_pt_board_charger_test_enable",
+      "target_runtime_address": 5716048,
+      "target_thumb_pointer": 5716049
+    },
+    {
+      "field": "codec_platform_identifier",
+      "stock_runtime_address": 5431014,
+      "table_slot_runtime_address": 5718528,
+      "target_function": "open_cfw_pt_board_codec_platform_identifier",
+      "target_runtime_address": 5715728,
+      "target_thumb_pointer": 5715729
+    },
+    {
+      "field": "system_reset",
+      "stock_runtime_address": 4501678,
+      "table_slot_runtime_address": 5718672,
+      "target_function": "open_cfw_pt_board_system_reset",
+      "target_runtime_address": 5717356,
+      "target_thumb_pointer": 5717357
+    },
+    {
+      "field": "display_postprocess",
+      "stock_runtime_address": 5516620,
+      "table_slot_runtime_address": 5718680,
+      "target_function": "open_cfw_pt_board_display_postprocess",
+      "target_runtime_address": 5717364,
+      "target_thumb_pointer": 5717365
+    },
+    {
+      "field": "font_crc_check_0",
+      "stock_runtime_address": 5829766,
+      "table_slot_runtime_address": 5718684,
+      "target_function": "open_cfw_pt_board_font_crc_check_0",
+      "target_runtime_address": 5717732,
+      "target_thumb_pointer": 5717733
+    },
+    {
+      "field": "font_crc_check_1",
+      "stock_runtime_address": 5829776,
+      "table_slot_runtime_address": 5718688,
+      "target_function": "open_cfw_pt_board_font_crc_check_1",
+      "target_runtime_address": 5717744,
+      "target_thumb_pointer": 5717745
+    },
+    {
+      "field": "hardware_identifier_0",
+      "stock_runtime_address": 5319812,
+      "table_slot_runtime_address": 5718696,
+      "target_function": "open_cfw_pt_board_hardware_identifier_0",
+      "target_runtime_address": 5715800,
+      "target_thumb_pointer": 5715801
+    },
+    {
+      "field": "hardware_identifier_1",
+      "stock_runtime_address": 4653236,
+      "table_slot_runtime_address": 5718700,
+      "target_function": "open_cfw_pt_board_hardware_identifier_1",
+      "target_runtime_address": 5715836,
+      "target_thumb_pointer": 5715837
+    },
+    {
+      "field": "hardware_identifier_2",
+      "stock_runtime_address": 5319456,
+      "table_slot_runtime_address": 5718704,
+      "target_function": "open_cfw_pt_board_hardware_identifier_2",
+      "target_runtime_address": 5715936,
+      "target_thumb_pointer": 5715937
+    },
+    {
+      "field": "display_hardware_identifier",
+      "stock_runtime_address": 5021808,
+      "table_slot_runtime_address": 5718716,
+      "target_function": "open_cfw_pt_board_display_hardware_identifier",
+      "target_runtime_address": 5716480,
+      "target_thumb_pointer": 5716481
+    },
+    {
+      "field": "ambient_identifier_initialize",
+      "stock_runtime_address": 5830966,
+      "table_slot_runtime_address": 5718720,
+      "target_function": "open_cfw_pt_board_ambient_identifier_initialize",
+      "target_runtime_address": 5717092,
+      "target_thumb_pointer": 5717093
+    },
+    {
+      "field": "ambient_identifier_step_1",
+      "stock_runtime_address": 5830860,
+      "table_slot_runtime_address": 5718728,
+      "target_function": "open_cfw_pt_board_ambient_identifier_step_1",
+      "target_runtime_address": 5717136,
+      "target_thumb_pointer": 5717137
+    },
+    {
+      "field": "ambient_identifier_step_2",
+      "stock_runtime_address": 5830872,
+      "table_slot_runtime_address": 5718732,
+      "target_function": "open_cfw_pt_board_ambient_identifier_step_2",
+      "target_runtime_address": 5717148,
+      "target_thumb_pointer": 5717149
+    },
+    {
+      "field": "ambient_identifier_low",
+      "stock_runtime_address": 5830946,
+      "table_slot_runtime_address": 5718736,
+      "target_function": "open_cfw_pt_board_ambient_identifier_low",
+      "target_runtime_address": 5717160,
+      "target_thumb_pointer": 5717161
+    },
+    {
+      "field": "ambient_identifier_high",
+      "stock_runtime_address": 5830956,
+      "table_slot_runtime_address": 5718740,
+      "target_function": "open_cfw_pt_board_ambient_identifier_high",
+      "target_runtime_address": 5717172,
+      "target_thumb_pointer": 5717173
+    },
+    {
+      "field": "uart_sync_write",
+      "stock_runtime_address": 5511056,
+      "table_slot_runtime_address": 5718744,
+      "target_function": "open_cfw_pt_board_uart_sync_write",
+      "target_runtime_address": 5716084,
+      "target_thumb_pointer": 5716085
+    },
+    {
+      "field": "lens_sync_send",
+      "stock_runtime_address": 4608480,
+      "table_slot_runtime_address": 5718764,
+      "target_function": "open_cfw_pt_board_lens_sync_send",
+      "target_runtime_address": 5716700,
+      "target_thumb_pointer": 5716701
+    },
+    {
+      "field": "screen_show",
+      "stock_runtime_address": 4473324,
+      "table_slot_runtime_address": 5718776,
+      "target_function": "open_cfw_pt_board_screen_show",
+      "target_runtime_address": 5716552,
+      "target_thumb_pointer": 5716553
+    },
+    {
+      "field": "screen_hide",
+      "stock_runtime_address": 4473804,
+      "table_slot_runtime_address": 5718780,
+      "target_function": "open_cfw_pt_board_screen_hide",
+      "target_runtime_address": 5716688,
+      "target_thumb_pointer": 5716689
+    },
+    {
+      "field": "display_state",
+      "stock_runtime_address": 4469882,
+      "table_slot_runtime_address": 5718784,
+      "target_function": "open_cfw_pt_board_display_state",
+      "target_runtime_address": 5715720,
+      "target_thumb_pointer": 5715721
+    },
+    {
+      "field": "display_brightness",
+      "stock_runtime_address": 5022190,
+      "table_slot_runtime_address": 5718788,
+      "target_function": "open_cfw_pt_board_display_brightness",
+      "target_runtime_address": 5716520,
+      "target_thumb_pointer": 5716521
+    },
+    {
+      "field": "display_stage_1",
+      "stock_runtime_address": 4639108,
+      "table_slot_runtime_address": 5718792,
+      "target_function": "open_cfw_pt_board_display_stage_1",
+      "target_runtime_address": 5716388,
+      "target_thumb_pointer": 5716389
+    },
+    {
+      "field": "display_stage_2",
+      "stock_runtime_address": 4639196,
+      "table_slot_runtime_address": 5718796,
+      "target_function": "open_cfw_pt_board_display_stage_2",
+      "target_runtime_address": 5716440,
+      "target_thumb_pointer": 5716441
+    },
+    {
+      "field": "display_stage_3",
+      "stock_runtime_address": 4639146,
+      "table_slot_runtime_address": 5718800,
+      "target_function": "open_cfw_pt_board_display_stage_3",
+      "target_runtime_address": 5716468,
+      "target_thumb_pointer": 5716469
+    },
+    {
+      "field": "display_offset",
+      "stock_runtime_address": 5022282,
+      "table_slot_runtime_address": 5718804,
+      "target_function": "open_cfw_pt_board_display_offset",
+      "target_runtime_address": 5716536,
+      "target_thumb_pointer": 5716537
+    },
+    {
+      "field": "audio_status_get",
+      "stock_runtime_address": 5280654,
+      "table_slot_runtime_address": 5718808,
+      "target_function": "open_cfw_pt_board_audio_status_get",
+      "target_runtime_address": 5716104,
+      "target_thumb_pointer": 5716105
+    },
+    {
+      "field": "audio_path_format",
+      "stock_runtime_address": 5747538,
+      "table_slot_runtime_address": 5718816,
+      "target_function": "open_cfw_pt_board_audio_path_format",
+      "target_runtime_address": 5716908,
+      "target_thumb_pointer": 5716909
+    },
+    {
+      "field": "audio_channel_0_start",
+      "stock_runtime_address": 5830298,
+      "table_slot_runtime_address": 5718820,
+      "target_function": "open_cfw_pt_board_audio_channel_0_start",
+      "target_runtime_address": 5716144,
+      "target_thumb_pointer": 5716145
+    },
+    {
+      "field": "audio_channel_0_stop",
+      "stock_runtime_address": 5830576,
+      "table_slot_runtime_address": 5718824,
+      "target_function": "open_cfw_pt_board_audio_channel_0_stop",
+      "target_runtime_address": 5716280,
+      "target_thumb_pointer": 5716281
+    },
+    {
+      "field": "audio_channel_1_start",
+      "stock_runtime_address": 5830474,
+      "table_slot_runtime_address": 5718828,
+      "target_function": "open_cfw_pt_board_audio_channel_1_start",
+      "target_runtime_address": 5716212,
+      "target_thumb_pointer": 5716213
+    },
+    {
+      "field": "audio_channel_1_stop",
+      "stock_runtime_address": 5830662,
+      "table_slot_runtime_address": 5718832,
+      "target_function": "open_cfw_pt_board_audio_channel_1_stop",
+      "target_runtime_address": 5716328,
+      "target_thumb_pointer": 5716329
+    },
+    {
+      "field": "audio_codec_route",
+      "stock_runtime_address": 5481918,
+      "table_slot_runtime_address": 5718836,
+      "target_function": "open_cfw_pt_board_audio_codec_route",
+      "target_runtime_address": 5716128,
+      "target_thumb_pointer": 5716129
+    },
+    {
+      "field": "time_configure",
+      "stock_runtime_address": 4497918,
+      "table_slot_runtime_address": 5718872,
+      "target_function": "open_cfw_pt_board_time_configure",
+      "target_runtime_address": 5717012,
+      "target_thumb_pointer": 5717013
+    },
+    {
+      "field": "time_capture",
+      "stock_runtime_address": 4497818,
+      "table_slot_runtime_address": 5718876,
+      "target_function": "open_cfw_pt_board_time_capture",
+      "target_runtime_address": 5716952,
+      "target_thumb_pointer": 5716953
+    },
+    {
+      "field": "ambient_read",
+      "stock_runtime_address": 5830884,
+      "table_slot_runtime_address": 5718884,
+      "target_function": "open_cfw_pt_board_ambient_read",
+      "target_runtime_address": 5717184,
+      "target_thumb_pointer": 5717185
+    }
+  ],
+  "symbols": {
+    "open_cfw_pt_protocol_legacy_entry": 5698720,
+    "open_cfw_pt_protocol_legacy_postprocess": 5699884,
+    "open_cfw_pt_protocol_production_bootstrap": 5708940,
+    "open_cfw_pt_protocol_production_entry": 5709068,
+    "open_cfw_pt_protocol_production_postprocess": 5709152
+  }
+}

@@ -64,7 +64,7 @@ LITTLEFS_UTIL_SWAP_LEAF_SHA256 = (
     "7a8f0cc1ae130c65908d3dbd4e89f7c7bd898743a4ee62deced9203383df3d11"
 )
 BOOT_OVERLAY_SHA256 = (
-    "b6bad0449e744efc4009e6c095edf2299c4b5e5bfd714ace9a57fcc2f52bed2d"
+    "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314"
 )
 
 sys.path.insert(0, str(ROOT / "tools"))
@@ -497,7 +497,7 @@ class BootloaderIsolatedLeafTests(unittest.TestCase):
             built_overlay = (
                 output / "bootloader_core_overlay.bin"
             ).read_bytes()
-            self.assertEqual(len(built_overlay), 5820)
+            self.assertEqual(len(built_overlay), 15240)
             self.assertEqual(digest(built_overlay), BOOT_OVERLAY_SHA256)
             self.assertEqual(len(report["isolated_leaves"]), 6)
             leaf_reports = {

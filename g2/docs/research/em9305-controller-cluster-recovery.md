@@ -2,6 +2,14 @@
 
 Status date: 2026-08-13
 
+Current readiness supersession: the later
+[`em9305-slave-connection-boundary.md`](em9305-slave-connection-boundary.md)
+adds an MIT typed fail-closed integration seam for the first 3,126-byte
+cluster. The proprietary provenance and source-unavailable conclusions below
+remain unchanged; the new seam does not admit or relicense vendor source.
+The subsequent [`em9305-pawr-boundary.md`](em9305-pawr-boundary.md) applies
+the same readiness treatment to the second 1,804-byte cluster.
+
 ## Result
 
 The two largest high-confidence modern-controller residual segments from the

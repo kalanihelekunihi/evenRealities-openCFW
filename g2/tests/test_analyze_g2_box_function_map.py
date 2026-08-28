@@ -33,30 +33,30 @@ class BoxFunctionMapTests(unittest.TestCase):
         self.assertEqual(m["app_bytes_outside_discovered_functions"], 15088)
         self.assertEqual(m["category_counts"], {
             "generated_transport": 0,
-            "upstream_cmsis_startup": 14,
-            "upstream_freertos_kernel": 79,
-            "upstream_stm32_hal": 10,
-            "first_party_g2": 71,
+            "upstream_cmsis_startup": 15,
+            "upstream_freertos_kernel": 86,
+            "upstream_stm32_hal": 15,
+            "first_party_g2": 97,
             "device_specific_preserve": 0,
-            "unresolved": 261,
+            "unresolved": 222,
         })
         self.assertEqual(m["category_bytes"], {
             "generated_transport": 0,
-            "upstream_cmsis_startup": 292,
-            "upstream_freertos_kernel": 5440,
-            "upstream_stm32_hal": 1018,
-            "first_party_g2": 16994,
+            "upstream_cmsis_startup": 310,
+            "upstream_freertos_kernel": 5814,
+            "upstream_stm32_hal": 1324,
+            "first_party_g2": 18330,
             "device_specific_preserve": 0,
-            "unresolved": 16920,
+            "unresolved": 14886,
         })
         self.assertEqual(m["combined_category_bytes"], {
             "generated_transport": 0,
-            "upstream_cmsis_startup": 484,
-            "upstream_freertos_kernel": 5440,
-            "upstream_stm32_hal": 1018,
-            "first_party_g2": 29706,
+            "upstream_cmsis_startup": 502,
+            "upstream_freertos_kernel": 5814,
+            "upstream_stm32_hal": 1324,
+            "first_party_g2": 31042,
             "device_specific_preserve": 0,
-            "unresolved": 19104,
+            "unresolved": 17070,
         })
         self.assertEqual(sum(m["combined_category_bytes"].values()), 55752)
         self.assertEqual(sum(m["category_bytes"].values()), 40664)
@@ -100,6 +100,20 @@ class BoxFunctionMapTests(unittest.TestCase):
                       0x08005EFC, 0x08005EFE, 0x08005F42):
             self.assertEqual(self.rows[entry]["ownership_category"],
                              "upstream_stm32_hal")
+        explicit = {
+            0x08005094: "HAL_PWR_DisableWakeUpPin",
+            0x080050A8: "HAL_PWR_EnableWakeUpPin",
+            0x080050C4: "HAL_PWR_EnterSTANDBYMode",
+            0x080050E8: "HAL_PWR_EnterSLEEPMode",
+            0x0800598C: "stm32_hal_peripheral_init",
+        }
+        for entry, name in explicit.items():
+            self.assertEqual(self.rows[entry]["name"], name)
+            self.assertEqual(self.rows[entry]["ownership_category"],
+                             "upstream_stm32_hal")
+        self.assertEqual(self.rows[0x0800502C]["name"], "NVIC_SystemReset")
+        self.assertEqual(self.rows[0x0800502C]["ownership_category"],
+                         "upstream_cmsis_startup")
 
     def test_first_party_members(self):
         self.assertEqual(self.rows[0x08009170]["name"], "g2_log_printf")
@@ -124,11 +138,15 @@ class BoxFunctionMapTests(unittest.TestCase):
 
     def test_freertos_closure_membership(self):
         members = set(self.r["map"]["freertos_kernel_members"])
-        self.assertEqual(len(members), 79)
+        self.assertEqual(len(members), 86)
         for required in (0x0800C390, 0x0800CA78, 0x0800C9A8, 0x0800AA48,
                          0x0800A93C, 0x0800A836, 0x0800BF2C, 0x0800B0FC,
                          0x0800B3E8, 0x0800B4C0):
             self.assertIn(required, members)
+        for wrapper in (0x0800A7B0, 0x0800A7D2, 0x0800A816,
+                        0x0800A888, 0x0800AA24, 0x0800AAF0,
+                        0x0800AB26):
+            self.assertIn(wrapper, members)
         # String-referencing app code must never enter the kernel set.
         self.assertNotIn(0x08009170, members)
         self.assertNotIn(0x08001E94, members)
@@ -162,6 +180,16 @@ class BoxFunctionMapTests(unittest.TestCase):
             "first_party_g2", "device_specific_preserve", "unresolved",
         ])
         self.assertEqual(len(self.r["rows"]), 435)
+
+    def test_supplemental_task_cfg_summary(self):
+        m = self.r["map"]
+        self.assertEqual(m["supplemental_task_instruction_bytes"], 4572)
+        self.assertEqual(
+            m["supplemental_task_previously_unmapped_instruction_bytes"],
+            2820,
+        )
+        self.assertEqual(m["task_direct_helpers"], 59)
+        self.assertEqual(m["task_direct_helpers_unresolved"], 0)
 
 
 if __name__ == "__main__":

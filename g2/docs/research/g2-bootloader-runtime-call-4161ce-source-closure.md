@@ -11,7 +11,7 @@ when argument zero is null or argument one is outside the inclusive range
 address `0x0041806E` before returning zero. The address-derived name avoids
 assigning unsupported platform meaning to that retained call.
 
-`runtime_call_4161ce.c` is a 1,042-byte GPL-3.0-or-later clean-room
+`runtime_call_4161ce.c` is a 1,042-byte MIT clean-room
 implementation with SHA-256
 `4299722e909a534791cca21918dae909fe2ff2918e2f8406e63c91585505f298`.
 Apple clang emits a 44-byte leaf at overlay offset 3,310/runtime

@@ -41,7 +41,7 @@ class CordioSecApiClosureTests(unittest.TestCase):
             "placed_regions": 6193,
             "unresolved_regions": 2,
             "primitive_provider": "retained HCI/controller boundary",
-            "hardware_validation": "blocked_unavailable_authorized_physical_evidence",
+            "hardware_validation": "deferred by project direction",
         })
 
 

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacement for the G2 2.2.6.10 Apollo display submit operation-one
  * backend at 0x0058E49E. The exact stock boundary, polling state, and

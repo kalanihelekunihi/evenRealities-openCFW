@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of the G2 downstream EasyLogger callback setters
  * and at-most-256-record consumer drain. This candidate is deliberately not a

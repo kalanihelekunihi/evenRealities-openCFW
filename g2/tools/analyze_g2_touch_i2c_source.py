@@ -20,8 +20,8 @@ HEADER = ROOT / "components/shared/touch/runtime_touch_i2c_protocol.h"
 EVIDENCE_ANALYZER = ROOT / "tools/analyze_g2_touch_i2c_protocol.py"
 BLOB = ROOT / "blobs/official/g2-2.2.6.10/firmware_touch.bin"
 PINS = {
-    SOURCE: (7307, "863728a0011c1518930971068e8360b3ab7ce458fcd8eca879fdf767b61f2bb0"),
-    HEADER: (2787, "b1a4407b8c383295dac410bc6b54169261c5e867e272470f790f39fc578e2893"),
+    SOURCE: (7314, "e9cbb38deb85e593de051cdbe5a27c81b50eb22c944a7b6c8c9223c1c9fdd538"),
+    HEADER: (2838, "0eba5e33eb45e3c360409357cd811a963877378cae2080841d87de18e6f81d53"),
 }
 EXPORTS = {
     "open_cfw_touch_build_report", "open_cfw_touch_dispatch_event",
@@ -99,7 +99,8 @@ def audit() -> dict:
     return {
         "component": "G2 touch-controller I2C command/report protocol",
         "analysis_mode": "offline authenticated-evidence/source/build audit; no hardware, I2C, reset, signing, or flash operation",
-        "status": "implemented-in-source / hardware-validation-blocked",
+        "status": "implemented-in-source / hardware validation deferred by project direction",
+        "license": "MIT OR GPL-3.0-only",
         "software_gap_count": 0,
         "target": "thumbv6m-none-eabi / Cortex-M0+ / Thumb",
         "exports": sorted(EXPORTS),

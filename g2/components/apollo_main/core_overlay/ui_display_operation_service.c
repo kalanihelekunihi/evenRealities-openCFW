@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacement for the G2 2.2.6.10 Apollo display-operation service
  * routine at 0x0058E534. The exact stock boundary, state layout, and

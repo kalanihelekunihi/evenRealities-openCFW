@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 #include "../../components/shared/lvgl/runtime_ambiq_gpu_patch_shadow_blur_vg_candidate.h"
 #include <string.h>
 enum { OP_SNAPSHOT=1,OP_BIND,OP_BLEND,OP_CLIP,OP_COLOR,OP_RECT,OP_FILL_RULE,OP_VG_BLEND,OP_GRAD,OP_TYPE,OP_RADIAL,OP_CIRCLE };

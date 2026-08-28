@@ -20,7 +20,7 @@ body starts at `0x004169FC`.
 
 ## Source/build closure
 
-The three GPL-3.0-or-later clean-room sources are
+The three MIT clean-room sources are
 `runtime_bit_width_4169a4.c`, `runtime_ctz_4169e2.c`, and
 `runtime_log2_4169f2.c`. Apple clang 21 and Homebrew clang 22.1.8 both emit
 14, 14, and 10 bytes. Bit width is relocation-free; each adapter has one

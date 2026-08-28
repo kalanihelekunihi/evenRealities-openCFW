@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* Clean-room reconstruction of platform/service/charger/charger_common.c. */
 
 #include <stddef.h>

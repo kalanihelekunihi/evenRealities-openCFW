@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_compress_log_core as q
 import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-callback-facades-function-map.tsv"
@@ -227,11 +228,7 @@ def analyze(image: Path = IMAGE) -> dict:
             sum(patch["expected_size"] for patch in patches) != 380:
         raise c.AuditError("callback-facade redirect closure changed")
     build = json.loads((ROOT / "components/apollo_main/core_overlay/build/build-report.json").read_text())
-    if (build["overlay"]["size"], build["overlay"]["sha256"],
-            build["component"]["size"], build["component"]["sha256"]) != (
-            332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-            3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc"):
-        raise c.AuditError("callback-facade build pins changed")
+    validate_apollo_main_artifacts(ROOT, c.AuditError, "callback facades")
     built = [leaf for leaf in build["relocated_leaves"]
              if leaf.get("source", {}).get("path") == SOURCE_PATH]
     normalized = [{"function": leaf["extraction"]["function"],
@@ -253,12 +250,6 @@ def analyze(image: Path = IMAGE) -> dict:
     regions = [region for region in main["regions"] if region["name"] in region_names]
     if len(regions) != 25 or jsh(regions) != REGION_DIGEST:
         raise c.AuditError("callback-facade manifest regions changed")
-    if (main["provider"]["size"], main["provider"]["sha256"],
-            manifest["package"]["expected_size"],
-            manifest["package"]["expected_sha256"]) != (
-            3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-            4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
-        raise c.AuditError("callback-facade manifest closure changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only raw-image closure; corpus-independent",
@@ -284,7 +275,7 @@ def analyze(image: Path = IMAGE) -> dict:
             "strict_relocations": 10,
             "retained_literal_pool_bytes": 68,
             "software_functional_gap": False,
-            "hardware_validation": "not required for facade semantics",
+            "hardware_validation": "deferred by project direction",
         },
     }
 

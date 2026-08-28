@@ -41,6 +41,23 @@ Physical interval `[0x0058F1EC, 0x0058F4E4)` = 760 bytes (686 body + 74 pool/dat
 
 Four blocks in gap [0x58F1EC, 0x58F4E4). Identity: 6 path references in block 0x58F208 and 6 `[product_common]` log tags covering the font CRC validation routine. The following block at 0x58F4E4 carries references to `platform\product_test\production_mic_func.c` (a different retained path); the boundary between the two product-test objects is exact and guard-pinned.
 
+## Production source route
+
+The retained object is no longer reachable through the canonical PT provider.
+Its only two external callers (`0x0056FBC4` and `0x0056FBCE`) are inside the
+source-replaced PT interval. The production board call table instead points to
+`open_cfw_pt_board_font_crc_check_0` and
+`open_cfw_pt_board_font_crc_check_1`, which call the bounded semantic-C
+`open_cfw_pt_font_crc_validate` implementation.
+
+The source implementation pins the authenticated font bases `0x80100000` and
+`0x80700000`, the 32-MiB XIP window, 70-byte header, little-endian length and
+CRC fields at offsets `0x40` and `0x44`, payload offset `0x45`, 1-KiB reads,
+and resumable CRC-16/CCITT-FALSE seeded with `0xFFFF`. Host tests cover both
+font routes, a 1,025-byte multi-chunk image, invalid bases, zero length,
+overflow, and mismatch. The XIP lock/read behavior and external font payloads
+remain **deferred by project direction**.
+
 ## Verification
 
 ```

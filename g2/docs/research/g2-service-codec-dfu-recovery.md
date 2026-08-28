@@ -6,7 +6,7 @@ The retained first-party translation unit `platform\audio\service_codec_dfu.c` i
 
 The object contains 16 linked functions. Nine are retained-path anchors and seven adjacent pathless bodies were restored from source order, exact calls, literal ownership, and the enclosing IAR object boundary. Their 9,052 concatenated body bytes hash to `e0487b9129f918d6e4a0caf95fcc1e75f8ebac23db36fce2aa3f2dfe22ded98b`. Nine owned alignment and literal-pool gaps total 916 bytes and hash to `42cffa793dfdb3987491c96e1809a1d69723d6235df129643c157fc37e4a1ffc`.
 
-This remains clean-room behavior recovery rather than historical source recovery. Sixteen independently authored GPL-3.0-only C leaves now replace all 9,052 authenticated stock function bytes. They compile to 3,390 Thumb text bytes plus 24 bytes of generated alignment with 71 strict relocations. The 916 authenticated literal-pool and alignment bytes remain official data.
+This remains clean-room behavior recovery rather than historical source recovery. Sixteen independently authored MIT C leaves now replace all 9,052 authenticated stock function bytes. They compile to 3,390 Thumb text bytes plus 24 bytes of generated alignment with 71 strict relocations. The 916 authenticated literal-pool and alignment bytes remain official data.
 
 ## Function inventory
 
@@ -70,5 +70,5 @@ The analyzer authenticates the official image, all three evidence manifests, eve
 
 - The historical source-only function count is unknown because the vendor source file is unavailable; the linked 16-function callable inventory is complete.
 - `semantic_*` labels are clean-room descriptions, not recovered symbols.
-- Binary closure does not grant a license or justify copying vendor implementation text; the production implementation is independently authored GPL-3.0-only code.
+- Binary closure does not grant a license or justify copying vendor implementation text; the production implementation is independently authored MIT code.
 - Destructive live upgrade, UART timing, codec reboot, and post-flash boot behavior are explicitly blocked: the authorized right temple is nonresponsive, the authorized left temple must remain stock, and no responsive authorized pair or golden codec/UART capture is available.

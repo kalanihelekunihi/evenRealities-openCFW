@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 
 /*
  * Bootloader binding for the clean-room IAR logging formatter core shared

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of the downstream G2 EasyLogger CMSIS event
  * worker. This candidate deliberately remains outside production routing.

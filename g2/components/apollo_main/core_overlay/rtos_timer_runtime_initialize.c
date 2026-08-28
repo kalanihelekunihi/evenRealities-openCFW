@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * RTOS timer list/queue initialization matched to stock entry 0x0047EAB8.
  */

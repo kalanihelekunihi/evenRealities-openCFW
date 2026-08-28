@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacements for the G2 2.2.6.10 fixed four- and eight-byte
  * formatting append wrappers at 0x00490D36 and 0x00490D40.

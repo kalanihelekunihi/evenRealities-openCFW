@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacement for the unsigned 64-bit divide-by-ten helper used by
  * the G2 2.2.6.10 logging decimal routines at 0x00472C84.

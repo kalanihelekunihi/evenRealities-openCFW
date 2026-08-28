@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room production reconstruction of the G2 EUS, ESS, EFS, and NUS
  * Cordio application-profile adapters.  The implementation preserves the

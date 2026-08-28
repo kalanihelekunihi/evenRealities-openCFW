@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacements for the G2 2.2.6.10 formatting helper cluster:
  *   0x00483028...0x0048302F  bounded output-byte store

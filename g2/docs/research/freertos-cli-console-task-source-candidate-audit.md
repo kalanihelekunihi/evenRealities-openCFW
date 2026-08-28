@@ -11,7 +11,7 @@ are now recovered.  The original qualification source is
 `runtime_freertos_cli_console_task_candidate.c`.
 
 That original candidate remains **production-excluded**. A separately named
-GPL-3.0-only production implementation is now split across seven independently
+MIT production implementation is now split across seven independently
 placeable source leaves and replaces the complete stock task span. Production
 does not register the candidate source or symbol, and the authenticated
 FreeRTOS-Plus-CLI snapshot also remains excluded. The former standalone
@@ -262,7 +262,7 @@ is consumed only when the retained read returns exactly one. The old interior
 capacity patch and its appended two-byte leaf are absent from the resulting
 production configuration and manifest.
 
-The clean-room source is GPL-3.0-only G2 glue. The classic MIT
+The clean-room source is MIT G2 glue. The classic MIT
 FreeRTOS-Plus-CLI snapshot selected by openCFW remains a compatibility oracle,
 not proof of Even Realities' historical checkout, and is not linked into this
 production closure. Whole-image entry/interior scans and the focused

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Native host oracle for the ARM EABI signed and unsigned 64-bit
  * division/modulo cores.

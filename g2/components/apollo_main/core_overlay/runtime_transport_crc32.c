@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room re-expression of the Even Realities G2 2.2.6.10 first-party
  * transport CRC-32 finaliser at run 0x0058FCF0 (the standard reflected CRC-32,

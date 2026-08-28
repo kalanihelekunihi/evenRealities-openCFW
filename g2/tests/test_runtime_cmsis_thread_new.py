@@ -101,11 +101,11 @@ class RuntimeCmsisThreadNewTests(unittest.TestCase):
         leaf = leaves["open_cfw_cmsis_thread_new"]
         self.assertEqual(
             (leaf["expected"]["size"], leaf["expected"]["offset"], leaf["expected"]["sha256"]),
-            (168, 137092, "7c9116f267ecf91961fa93271bab29fae6b6fab22626aea69d9d3de5a74bbdcd"),
+            (168, 196940, "1d52aae3021ef42d596f1f900c9f4504e77670f7d0b05611573da212973be6ac"),
         )
         linux = leaf["toolchain_profiles"]["linux-clang"]["expected"]
         self.assertEqual((linux["size"], linux["offset"], linux["sha256"]),
-                         (166, 138972, "e62db8f5166ad5936efc1243de4b929b4cd95b769bab6ab2d0b88d5d5ad2c16e"))
+                         (166, 198724, "28c827ccf124ef6ceb052ae015696b1f278d251d81ee55e1b569345a7437198e"))
         self.assertTrue(leaf["strict_relocation_contract"])
         self.assertEqual(
             [(item["offset"], item["symbol"], item.get("target_address")) for item in leaf["relocations"]],
@@ -116,15 +116,15 @@ class RuntimeCmsisThreadNewTests(unittest.TestCase):
         self.assertEqual(
             (config["expected"]["overlay_size"], config["expected"]["overlay_sha256"],
              config["expected"]["component_size"], config["expected"]["component_sha256"]),
-            (180782, "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
-             3704178, "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"),
+            (429058, "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+             3952454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"),
         )
         linux_config = config["toolchain_profiles"]["linux-clang"]["expected"]
         self.assertEqual(
             (linux_config["overlay_size"], linux_config["overlay_sha256"],
              linux_config["component_size"], linux_config["component_sha256"]),
-            (145208, "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
-             3668604, "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798"),
+            (212664, "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+             3736060, "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97"),
         )
         manifest = json.loads(MANIFEST.read_text())
         regions = {item["name"]: item for item in manifest["component_overrides"]["apollo_main"]["regions"]}
@@ -133,7 +133,7 @@ class RuntimeCmsisThreadNewTests(unittest.TestCase):
              regions["apollo_cmsis_thread_new_alignment"]["size"],
              regions["apollo_cmsis_thread_new_source_leaf"]["file_offset"],
              regions["apollo_cmsis_thread_new_source_leaf"]["size"]),
-            (3660486, 2, 3660488, 168),
+            (3720334, 2, 3720336, 168),
         )
         replacement = regions["cmsis_thread_new_source_replacement"]
         self.assertEqual(
@@ -143,15 +143,15 @@ class RuntimeCmsisThreadNewTests(unittest.TestCase):
         )
         main = manifest["component_overrides"]["apollo_main"]["provider"]
         self.assertEqual((main["size"], main["sha256"]),
-                         (3704178, "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"))
+                         (3952454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"))
         self.assertEqual((main["profiles"]["linux-clang"]["size"],
                           main["profiles"]["linux-clang"]["sha256"]),
-                         (3668604, "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798"))
+                         (3736060, "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97"))
         self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-                         (4482672, "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"))
+                         (4745526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"))
         self.assertEqual((manifest["package"]["profiles"]["linux-clang"]["expected_size"],
                           manifest["package"]["profiles"]["linux-clang"]["expected_sha256"]),
-                         (4447098, "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e"))
+                         (4529116, "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"))
 
 
 if __name__ == "__main__": unittest.main()

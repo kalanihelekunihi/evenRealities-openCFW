@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: MIT
 //
 // Create missing Thumb functions at reviewed addresses, then emit
 // reproducible bounds, inbound references, and decompilation evidence.

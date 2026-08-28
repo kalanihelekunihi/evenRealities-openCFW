@@ -14,7 +14,7 @@ map to one only when the word at `0x200270D4` equals one, and to zero
 otherwise. Host tests pin all four outputs, both short circuits, call counts,
 and the exact single-caller topology.
 
-`runtime_gate_state.c` is a 728-byte GPL-3.0-or-later clean-room
+`runtime_gate_state.c` is a 728-byte MIT clean-room
 implementation with SHA-256
 `00a4c79c1c86741449d711f14ef8c9d3e77de043171374a7a943028c597448f9`.
 Apple clang emits a 36-byte, four-byte-aligned leaf at overlay offset

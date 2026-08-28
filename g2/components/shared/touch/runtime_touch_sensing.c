@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT OR GPL-3.0-only
  *
  * Clean-room G2 touch sensing, calibration, gesture, and ACT/ALR/WOT policy.
  * MSCLP register actions are explicit callbacks; this file has no direct

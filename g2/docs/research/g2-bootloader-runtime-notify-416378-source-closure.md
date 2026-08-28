@@ -14,7 +14,7 @@ successful no-op; a non-null argument is forwarded once to retained backend
 `0x00417FA8`, after which the wrapper returns zero. Address-derived names avoid
 unsupported claims about the retained platform object.
 
-`runtime_notify_416378.c` is an 891-byte GPL-3.0-or-later clean-room
+`runtime_notify_416378.c` is an 891-byte MIT clean-room
 implementation with SHA-256
 `b9b9c16d67f56a7e06631fc6f475f11109ef43fa0822138ca4ff4866bdd22af2`.
 Both reviewed compilers emit the same 28-byte, two-byte-aligned unrelocated

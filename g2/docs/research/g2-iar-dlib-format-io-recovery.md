@@ -248,7 +248,7 @@ dependency boundary makes recreation presently unjustifiable:
 ## Scanset-matcher clean-room candidate
 
 [`iar_dlib_scanset_matcher.c`](../../research/candidates/iar_dlib_scanset_matcher.c)
-is a host-compilable GPL-3.0-only behavioral recreation of the
+is a host-compilable MIT behavioral recreation of the
 `scanset_matcher` leaf, written from the recovered table-walk contract (not
 decompiler output).  It lives in `research/candidates/`, which is not
 covered by `research/MANIFEST.sha256` (the index lists corpus and readiness

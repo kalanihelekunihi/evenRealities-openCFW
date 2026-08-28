@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the four linked G2
  * pb_service_glasses_case.c entries. Diagnostic-only logging and assertion

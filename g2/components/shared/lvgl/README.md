@@ -6,7 +6,7 @@ LVGL subtree and the public binary-only GPU extension.
 
 `runtime_ambiq_gpu_patch_accessors_candidate.c` implements three relocation-
 free accessors recovered from the exact AmbiqSuite 5.1.0 `gpu_patch.a` DWARF
-and machine code. It is GPL-3.0-only clean-room code; it is not copied from,
+and machine code. It is MIT clean-room code; it is not copied from,
 linked as, or presented as the BSD-3-Clause archive implementation.
 
 `runtime_ambiq_gpu_patch_dashline_candidate.c` closes the exact dash/gap

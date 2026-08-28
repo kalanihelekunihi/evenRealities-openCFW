@@ -1945,30 +1945,30 @@
     "app_bytes_outside_discovered_functions": 15088,
     "category_bytes": {
       "device_specific_preserve": 0,
-      "first_party_g2": 16994,
+      "first_party_g2": 18330,
       "generated_transport": 0,
-      "unresolved": 16920,
-      "upstream_cmsis_startup": 292,
-      "upstream_freertos_kernel": 5440,
-      "upstream_stm32_hal": 1018
+      "unresolved": 14886,
+      "upstream_cmsis_startup": 310,
+      "upstream_freertos_kernel": 5814,
+      "upstream_stm32_hal": 1324
     },
     "category_counts": {
       "device_specific_preserve": 0,
-      "first_party_g2": 71,
+      "first_party_g2": 97,
       "generated_transport": 0,
-      "unresolved": 261,
-      "upstream_cmsis_startup": 14,
-      "upstream_freertos_kernel": 79,
-      "upstream_stm32_hal": 10
+      "unresolved": 222,
+      "upstream_cmsis_startup": 15,
+      "upstream_freertos_kernel": 86,
+      "upstream_stm32_hal": 15
     },
     "combined_category_bytes": {
       "device_specific_preserve": 0,
-      "first_party_g2": 29706,
+      "first_party_g2": 31042,
       "generated_transport": 0,
-      "unresolved": 19104,
-      "upstream_cmsis_startup": 484,
-      "upstream_freertos_kernel": 5440,
-      "upstream_stm32_hal": 1018
+      "unresolved": 17070,
+      "upstream_cmsis_startup": 502,
+      "upstream_freertos_kernel": 5814,
+      "upstream_stm32_hal": 1324
     },
     "discovered_function_bytes": 40664,
     "discovered_functions": 428,
@@ -1978,11 +1978,18 @@
       134217980,
       134217986,
       134251552,
+      134260656,
+      134260690,
+      134260758,
       134260790,
+      134260872,
       134260952,
       134260992,
       134261052,
+      134261284,
       134261320,
+      134261488,
+      134261542,
       134261680,
       134261768,
       134261892,
@@ -2063,7 +2070,11 @@
       "upstream_stm32_hal": 0
     },
     "gap_region_count": 276,
-    "supplemental_entry_rows": 7
+    "supplemental_entry_rows": 7,
+    "supplemental_task_instruction_bytes": 4572,
+    "supplemental_task_previously_unmapped_instruction_bytes": 2820,
+    "task_direct_helpers": 59,
+    "task_direct_helpers_unresolved": 0
   },
   "ownership_categories": [
     "generated_transport",
@@ -2080,11 +2091,1868 @@
     "rtos_wrapper_verdict": "CMSIS-RTOS2 (cmsis_os2) wrapper over the FreeRTOS kernel: create APIs use isCurrentModePrivileged and osThreadNew/osTimerNew-shaped signatures; kernel remains the V10 line per the pinned port evidence"
   },
   "row_count": 435,
+  "task_bodies": [
+    {
+      "calls": [
+        {
+          "site": 134245922,
+          "target": 134261488
+        },
+        {
+          "site": 134245932,
+          "target": 134261488
+        },
+        {
+          "site": 134245942,
+          "target": 134260758
+        },
+        {
+          "site": 134245956,
+          "target": 134260690
+        },
+        {
+          "site": 134245964,
+          "target": 134261488
+        },
+        {
+          "site": 134245978,
+          "target": 134260690
+        },
+        {
+          "site": 134245992,
+          "target": 134260690
+        },
+        {
+          "site": 134246002,
+          "target": 134245272
+        },
+        {
+          "site": 134246008,
+          "target": 134245248
+        },
+        {
+          "site": 134246018,
+          "target": 134261488
+        },
+        {
+          "site": 134246030,
+          "target": 134260690
+        },
+        {
+          "site": 134246034,
+          "target": 134219868
+        },
+        {
+          "site": 134246070,
+          "target": 134260690
+        },
+        {
+          "site": 134246092,
+          "target": 134244296
+        },
+        {
+          "site": 134246130,
+          "target": 134227780
+        },
+        {
+          "site": 134246158,
+          "target": 134227340
+        },
+        {
+          "site": 134246166,
+          "target": 134225556
+        },
+        {
+          "site": 134246206,
+          "target": 134260690
+        },
+        {
+          "site": 134246252,
+          "target": 134227780
+        },
+        {
+          "site": 134246292,
+          "target": 134227340
+        },
+        {
+          "site": 134246300,
+          "target": 134225556
+        },
+        {
+          "site": 134246308,
+          "target": 134232976
+        },
+        {
+          "site": 134246330,
+          "target": 134254960
+        },
+        {
+          "site": 134246336,
+          "target": 134254960
+        },
+        {
+          "site": 134246344,
+          "target": 134260690
+        },
+        {
+          "site": 134246360,
+          "target": 134254960
+        },
+        {
+          "site": 134246366,
+          "target": 134254960
+        },
+        {
+          "site": 134246374,
+          "target": 134257308
+        },
+        {
+          "site": 134246384,
+          "target": 134260690
+        },
+        {
+          "site": 134246400,
+          "target": 134254960
+        },
+        {
+          "site": 134246406,
+          "target": 134254960
+        },
+        {
+          "site": 134246414,
+          "target": 134257308
+        },
+        {
+          "site": 134246424,
+          "target": 134260690
+        },
+        {
+          "site": 134246428,
+          "target": 134238252
+        },
+        {
+          "site": 134246470,
+          "target": 134226932
+        },
+        {
+          "site": 134246496,
+          "target": 134260656
+        },
+        {
+          "site": 134246528,
+          "target": 134254960
+        },
+        {
+          "site": 134246534,
+          "target": 134254960
+        },
+        {
+          "site": 134246542,
+          "target": 134227136
+        },
+        {
+          "site": 134246568,
+          "target": 134260656
+        },
+        {
+          "site": 134246592,
+          "target": 134254960
+        },
+        {
+          "site": 134246598,
+          "target": 134254960
+        },
+        {
+          "site": 134246620,
+          "target": 134254960
+        },
+        {
+          "site": 134246626,
+          "target": 134254960
+        },
+        {
+          "site": 134246630,
+          "target": 134222564
+        },
+        {
+          "site": 134246636,
+          "target": 134261542
+        },
+        {
+          "site": 134246642,
+          "target": 134261542
+        },
+        {
+          "site": 134246650,
+          "target": 134260690
+        },
+        {
+          "site": 134246658,
+          "target": 134271316
+        },
+        {
+          "site": 134246676,
+          "target": 134260872
+        },
+        {
+          "site": 134246700,
+          "target": 134260656
+        }
+      ],
+      "direct_callees": [
+        134219868,
+        134222564,
+        134225556,
+        134226932,
+        134227136,
+        134227340,
+        134227780,
+        134232976,
+        134238252,
+        134244296,
+        134245248,
+        134245272,
+        134254960,
+        134257308,
+        134260656,
+        134260690,
+        134260758,
+        134260872,
+        134261488,
+        134261542,
+        134271316
+      ],
+      "entry": 134245916,
+      "guard_limit": 134246912,
+      "instruction_bytes": 790,
+      "instruction_count": 344,
+      "instruction_sha256": "5bc749b960d9ff1231136dab10fc0b200ccf96d600b2ff1ba7235fa7d3d206c2",
+      "name": "g2_thread_entry_1",
+      "previously_unmapped_instruction_bytes": 790,
+      "role": "thread_entry",
+      "spans": [
+        {
+          "bytes": 790,
+          "end": 134246706,
+          "start": 134245916
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "site": 134246944,
+          "target": 134218080
+        },
+        {
+          "site": 134246964,
+          "target": 134229176
+        },
+        {
+          "site": 134247028,
+          "target": 134254960
+        },
+        {
+          "site": 134247034,
+          "target": 134254960
+        },
+        {
+          "site": 134247044,
+          "target": 134231508
+        },
+        {
+          "site": 134247054,
+          "target": 134231508
+        },
+        {
+          "site": 134247060,
+          "target": 134229134
+        },
+        {
+          "site": 134247066,
+          "target": 134229040
+        },
+        {
+          "site": 134247072,
+          "target": 134238356
+        },
+        {
+          "site": 134247078,
+          "target": 134238376
+        },
+        {
+          "site": 134247088,
+          "target": 134238404
+        },
+        {
+          "site": 134247186,
+          "target": 134240652
+        },
+        {
+          "site": 134247200,
+          "target": 134254960
+        },
+        {
+          "site": 134247206,
+          "target": 134254960
+        },
+        {
+          "site": 134247216,
+          "target": 134231508
+        },
+        {
+          "site": 134247226,
+          "target": 134231508
+        },
+        {
+          "site": 134247232,
+          "target": 134229134
+        },
+        {
+          "site": 134247238,
+          "target": 134229040
+        },
+        {
+          "site": 134247244,
+          "target": 134238356
+        },
+        {
+          "site": 134247250,
+          "target": 134238376
+        },
+        {
+          "site": 134247264,
+          "target": 134238404
+        },
+        {
+          "site": 134247416,
+          "target": 134254960
+        },
+        {
+          "site": 134247422,
+          "target": 134254960
+        },
+        {
+          "site": 134247442,
+          "target": 134254960
+        },
+        {
+          "site": 134247448,
+          "target": 134254960
+        },
+        {
+          "site": 134247454,
+          "target": 134232576
+        },
+        {
+          "site": 134247464,
+          "target": 134222776
+        },
+        {
+          "site": 134247510,
+          "target": 134254960
+        },
+        {
+          "site": 134247516,
+          "target": 134254960
+        },
+        {
+          "site": 134247538,
+          "target": 134254960
+        },
+        {
+          "site": 134247544,
+          "target": 134254960
+        },
+        {
+          "site": 134247550,
+          "target": 134232576
+        },
+        {
+          "site": 134247732,
+          "target": 134257172
+        },
+        {
+          "site": 134247756,
+          "target": 134254960
+        },
+        {
+          "site": 134247762,
+          "target": 134254960
+        },
+        {
+          "site": 134247796,
+          "target": 134254960
+        },
+        {
+          "site": 134247802,
+          "target": 134254960
+        },
+        {
+          "site": 134247806,
+          "target": 134266512
+        },
+        {
+          "site": 134247818,
+          "target": 134254960
+        },
+        {
+          "site": 134247824,
+          "target": 134254960
+        },
+        {
+          "site": 134247828,
+          "target": 134266590
+        },
+        {
+          "site": 134247836,
+          "target": 134244560
+        },
+        {
+          "site": 134247844,
+          "target": 134254960
+        },
+        {
+          "site": 134247850,
+          "target": 134254960
+        },
+        {
+          "site": 134247854,
+          "target": 134266512
+        },
+        {
+          "site": 134247860,
+          "target": 134223220
+        },
+        {
+          "site": 134247878,
+          "target": 134254960
+        },
+        {
+          "site": 134247884,
+          "target": 134254960
+        },
+        {
+          "site": 134247890,
+          "target": 134225256
+        },
+        {
+          "site": 134247896,
+          "target": 134260656
+        },
+        {
+          "site": 134247900,
+          "target": 134232288
+        },
+        {
+          "site": 134248326,
+          "target": 134254960
+        },
+        {
+          "site": 134248332,
+          "target": 134254960
+        },
+        {
+          "site": 134248338,
+          "target": 134225256
+        },
+        {
+          "site": 134248362,
+          "target": 134222564
+        },
+        {
+          "site": 134248392,
+          "target": 134271316
+        },
+        {
+          "site": 134248400,
+          "target": 134260656
+        },
+        {
+          "site": 134248416,
+          "target": 134270516
+        },
+        {
+          "site": 134248462,
+          "target": 134222776
+        },
+        {
+          "site": 134248472,
+          "target": 134232636
+        },
+        {
+          "site": 134248482,
+          "target": 134232636
+        },
+        {
+          "site": 134248500,
+          "target": 134232672
+        },
+        {
+          "site": 134248510,
+          "target": 134232672
+        },
+        {
+          "site": 134248568,
+          "target": 134224100
+        },
+        {
+          "site": 134248608,
+          "target": 134245248
+        },
+        {
+          "site": 134248614,
+          "target": 134245272
+        },
+        {
+          "site": 134248632,
+          "target": 134254960
+        },
+        {
+          "site": 134248638,
+          "target": 134254960
+        },
+        {
+          "site": 134248692,
+          "target": 134254960
+        },
+        {
+          "site": 134248698,
+          "target": 134254960
+        },
+        {
+          "site": 134248758,
+          "target": 134254960
+        },
+        {
+          "site": 134248764,
+          "target": 134254960
+        },
+        {
+          "site": 134248880,
+          "target": 134265716
+        },
+        {
+          "site": 134248894,
+          "target": 134218080
+        },
+        {
+          "site": 134248920,
+          "target": 134254960
+        },
+        {
+          "site": 134248926,
+          "target": 134254960
+        },
+        {
+          "site": 134248946,
+          "target": 134218080
+        },
+        {
+          "site": 134248966,
+          "target": 134254960
+        },
+        {
+          "site": 134248972,
+          "target": 134254960
+        },
+        {
+          "site": 134248994,
+          "target": 134218080
+        },
+        {
+          "site": 134249028,
+          "target": 134257308
+        },
+        {
+          "site": 134249044,
+          "target": 134254960
+        },
+        {
+          "site": 134249050,
+          "target": 134254960
+        },
+        {
+          "site": 134249064,
+          "target": 134218080
+        },
+        {
+          "site": 134249096,
+          "target": 134257308
+        },
+        {
+          "site": 134249110,
+          "target": 134254960
+        },
+        {
+          "site": 134249116,
+          "target": 134254960
+        },
+        {
+          "site": 134249144,
+          "target": 134265716
+        },
+        {
+          "site": 134249206,
+          "target": 134254960
+        },
+        {
+          "site": 134249212,
+          "target": 134254960
+        },
+        {
+          "site": 134249218,
+          "target": 134260656
+        },
+        {
+          "site": 134249244,
+          "target": 134227340
+        },
+        {
+          "site": 134249258,
+          "target": 134225556
+        },
+        {
+          "site": 134249272,
+          "target": 134260758
+        },
+        {
+          "site": 134249286,
+          "target": 134260690
+        },
+        {
+          "site": 134250004,
+          "target": 134261488
+        },
+        {
+          "site": 134250020,
+          "target": 134260690
+        },
+        {
+          "site": 134250024,
+          "target": 134222776
+        },
+        {
+          "site": 134250044,
+          "target": 134258718
+        },
+        {
+          "site": 134250064,
+          "target": 134254960
+        },
+        {
+          "site": 134250070,
+          "target": 134254960
+        },
+        {
+          "site": 134250080,
+          "target": 134231508
+        },
+        {
+          "site": 134250090,
+          "target": 134231508
+        },
+        {
+          "site": 134250096,
+          "target": 134229134
+        },
+        {
+          "site": 134250102,
+          "target": 134229040
+        },
+        {
+          "site": 134250108,
+          "target": 134238356
+        },
+        {
+          "site": 134250114,
+          "target": 134238376
+        },
+        {
+          "site": 134250124,
+          "target": 134238404
+        },
+        {
+          "site": 134250142,
+          "target": 134261284
+        },
+        {
+          "site": 134250148,
+          "target": 134261284
+        },
+        {
+          "site": 134250154,
+          "target": 134261284
+        },
+        {
+          "site": 134250168,
+          "target": 134240652
+        },
+        {
+          "site": 134250174,
+          "target": 134238356
+        },
+        {
+          "site": 134250182,
+          "target": 134238376
+        },
+        {
+          "site": 134250190,
+          "target": 134238440
+        },
+        {
+          "site": 134250194,
+          "target": 134264320
+        },
+        {
+          "site": 134250198,
+          "target": 134246932
+        },
+        {
+          "site": 134250206,
+          "target": 134260656
+        }
+      ],
+      "direct_callees": [
+        134218080,
+        134222564,
+        134222776,
+        134223220,
+        134224100,
+        134225256,
+        134225556,
+        134227340,
+        134229040,
+        134229134,
+        134229176,
+        134231508,
+        134232288,
+        134232576,
+        134232636,
+        134232672,
+        134238356,
+        134238376,
+        134238404,
+        134238440,
+        134240652,
+        134244560,
+        134245248,
+        134245272,
+        134246932,
+        134254960,
+        134257172,
+        134257308,
+        134258718,
+        134260656,
+        134260690,
+        134260758,
+        134261284,
+        134261488,
+        134264320,
+        134265716,
+        134266512,
+        134266590,
+        134270516,
+        134271316
+      ],
+      "entry": 134246912,
+      "guard_limit": 134250284,
+      "instruction_bytes": 2184,
+      "instruction_count": 974,
+      "instruction_sha256": "48b30df1daa0fb53f4ab64f0d953c2a59fdc444c734e2be6dbb5bc34cbd3a61f",
+      "name": "g2_thread_entry_3",
+      "previously_unmapped_instruction_bytes": 432,
+      "role": "thread_entry",
+      "spans": [
+        {
+          "bytes": 652,
+          "end": 134247564,
+          "start": 134246912
+        },
+        {
+          "bytes": 344,
+          "end": 134247910,
+          "start": 134247566
+        },
+        {
+          "bytes": 976,
+          "end": 134249296,
+          "start": 134248320
+        },
+        {
+          "bytes": 212,
+          "end": 134250212,
+          "start": 134250000
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "site": 134250304,
+          "target": 134228584
+        },
+        {
+          "site": 134250312,
+          "target": 134218080
+        },
+        {
+          "site": 134250324,
+          "target": 134258672
+        },
+        {
+          "site": 134250332,
+          "target": 134258456
+        },
+        {
+          "site": 134250340,
+          "target": 134258718
+        },
+        {
+          "site": 134250352,
+          "target": 134258164
+        },
+        {
+          "site": 134250360,
+          "target": 134232520
+        },
+        {
+          "site": 134250368,
+          "target": 134232520
+        },
+        {
+          "site": 134250374,
+          "target": 134258364
+        },
+        {
+          "site": 134250414,
+          "target": 134254960
+        },
+        {
+          "site": 134250420,
+          "target": 134254960
+        },
+        {
+          "site": 134250538,
+          "target": 134254960
+        },
+        {
+          "site": 134250544,
+          "target": 134254960
+        },
+        {
+          "site": 134250576,
+          "target": 134254960
+        },
+        {
+          "site": 134250582,
+          "target": 134254960
+        },
+        {
+          "site": 134250590,
+          "target": 134232548
+        },
+        {
+          "site": 134250622,
+          "target": 134254960
+        },
+        {
+          "site": 134250628,
+          "target": 134254960
+        },
+        {
+          "site": 134250636,
+          "target": 134232548
+        },
+        {
+          "site": 134250660,
+          "target": 134258718
+        },
+        {
+          "site": 134250680,
+          "target": 134254960
+        },
+        {
+          "site": 134250686,
+          "target": 134254960
+        },
+        {
+          "site": 134250696,
+          "target": 134231508
+        },
+        {
+          "site": 134250706,
+          "target": 134231508
+        },
+        {
+          "site": 134250712,
+          "target": 134229134
+        },
+        {
+          "site": 134250718,
+          "target": 134229040
+        },
+        {
+          "site": 134250724,
+          "target": 134238356
+        },
+        {
+          "site": 134250730,
+          "target": 134238376
+        },
+        {
+          "site": 134250740,
+          "target": 134238404
+        },
+        {
+          "site": 134250766,
+          "target": 134222564
+        },
+        {
+          "site": 134250772,
+          "target": 134245248
+        },
+        {
+          "site": 134250788,
+          "target": 134254960
+        },
+        {
+          "site": 134250794,
+          "target": 134254960
+        },
+        {
+          "site": 134250814,
+          "target": 134222644
+        },
+        {
+          "site": 134250842,
+          "target": 134254960
+        },
+        {
+          "site": 134250848,
+          "target": 134254960
+        },
+        {
+          "site": 134250880,
+          "target": 134254960
+        },
+        {
+          "site": 134250886,
+          "target": 134254960
+        },
+        {
+          "site": 134250894,
+          "target": 134260656
+        }
+      ],
+      "direct_callees": [
+        134218080,
+        134222564,
+        134222644,
+        134228584,
+        134229040,
+        134229134,
+        134231508,
+        134232520,
+        134232548,
+        134238356,
+        134238376,
+        134238404,
+        134245248,
+        134254960,
+        134258164,
+        134258364,
+        134258456,
+        134258672,
+        134258718,
+        134260656
+      ],
+      "entry": 134250284,
+      "guard_limit": 134251244,
+      "instruction_bytes": 616,
+      "instruction_count": 269,
+      "instruction_sha256": "fa9446f10a6a07052b075c4f902d65af20799b46d9ec6f79e9dd3c0d1ec2292f",
+      "name": "g2_thread_entry_2",
+      "previously_unmapped_instruction_bytes": 616,
+      "role": "thread_entry",
+      "spans": [
+        {
+          "bytes": 616,
+          "end": 134250900,
+          "start": 134250284
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "site": 134251290,
+          "target": 134260656
+        },
+        {
+          "site": 134251346,
+          "target": 134224924
+        },
+        {
+          "site": 134251364,
+          "target": 134254960
+        },
+        {
+          "site": 134251370,
+          "target": 134254960
+        },
+        {
+          "site": 134251414,
+          "target": 134254960
+        },
+        {
+          "site": 134251420,
+          "target": 134254960
+        },
+        {
+          "site": 134251432,
+          "target": 134260656
+        }
+      ],
+      "direct_callees": [
+        134224924,
+        134254960,
+        134260656
+      ],
+      "entry": 134251244,
+      "guard_limit": 134251552,
+      "instruction_bytes": 200,
+      "instruction_count": 93,
+      "instruction_sha256": "70132a07ef998723788b75fbbb74b683d66c0404f611898cff51091a94e47a76",
+      "name": "g2_thread_entry_4",
+      "previously_unmapped_instruction_bytes": 200,
+      "role": "thread_entry",
+      "spans": [
+        {
+          "bytes": 200,
+          "end": 134251444,
+          "start": 134251244
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "site": 134258050,
+          "target": 134245248
+        },
+        {
+          "site": 134258056,
+          "target": 134245272
+        },
+        {
+          "site": 134258072,
+          "target": 134254960
+        },
+        {
+          "site": 134258078,
+          "target": 134254960
+        },
+        {
+          "site": 134258092,
+          "target": 134254960
+        }
+      ],
+      "direct_callees": [
+        134245248,
+        134245272,
+        134254960
+      ],
+      "entry": 134258032,
+      "guard_limit": 134258164,
+      "instruction_bytes": 66,
+      "instruction_count": 28,
+      "instruction_sha256": "81a7269653585774491fd60647f2638a1b81b20a6e05971ed2166b7ff2abd042",
+      "name": "g2_timer_callback_1",
+      "previously_unmapped_instruction_bytes": 66,
+      "role": "timer_callback",
+      "spans": [
+        {
+          "bytes": 66,
+          "end": 134258098,
+          "start": 134258032
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "site": 134264854,
+          "target": 134226932
+        },
+        {
+          "site": 134264866,
+          "target": 134227136
+        },
+        {
+          "site": 134264884,
+          "target": 134254960
+        },
+        {
+          "site": 134264890,
+          "target": 134254960
+        },
+        {
+          "site": 134264956,
+          "target": 134254960
+        },
+        {
+          "site": 134264962,
+          "target": 134254960
+        },
+        {
+          "site": 134264988,
+          "target": 134254960
+        },
+        {
+          "site": 134265010,
+          "target": 134254960
+        },
+        {
+          "site": 134265016,
+          "target": 134254960
+        },
+        {
+          "site": 134265034,
+          "target": 134271316
+        },
+        {
+          "site": 134265058,
+          "target": 134254960
+        },
+        {
+          "site": 134265076,
+          "target": 134254960
+        },
+        {
+          "site": 134265082,
+          "target": 134254960
+        },
+        {
+          "site": 134265100,
+          "target": 134254960
+        },
+        {
+          "site": 134265106,
+          "target": 134254960
+        },
+        {
+          "site": 134265110,
+          "target": 134238252
+        },
+        {
+          "site": 134265130,
+          "target": 134226932
+        },
+        {
+          "site": 134265148,
+          "target": 134227136
+        }
+      ],
+      "direct_callees": [
+        134226932,
+        134227136,
+        134238252,
+        134254960,
+        134271316
+      ],
+      "entry": 134264812,
+      "guard_limit": 134265412,
+      "instruction_bytes": 342,
+      "instruction_count": 153,
+      "instruction_sha256": "416ba65f58f649e802b918d655413efa75fa03fc7a3127fe330cb2b8e4226bce",
+      "name": "g2_timer_callback_4",
+      "previously_unmapped_instruction_bytes": 342,
+      "role": "timer_callback",
+      "spans": [
+        {
+          "bytes": 342,
+          "end": 134265154,
+          "start": 134264812
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "site": 134265860,
+          "target": 134254960
+        },
+        {
+          "site": 134265866,
+          "target": 134254960
+        },
+        {
+          "site": 134265880,
+          "target": 134254960
+        },
+        {
+          "site": 134265886,
+          "target": 134254960
+        },
+        {
+          "site": 134265920,
+          "target": 134254960
+        },
+        {
+          "site": 134265926,
+          "target": 134254960
+        },
+        {
+          "site": 134265946,
+          "target": 134254960
+        },
+        {
+          "site": 134265952,
+          "target": 134254960
+        },
+        {
+          "site": 134265974,
+          "target": 134232136
+        },
+        {
+          "site": 134266006,
+          "target": 134254960
+        },
+        {
+          "site": 134266012,
+          "target": 134254960
+        },
+        {
+          "site": 134266034,
+          "target": 134254960
+        },
+        {
+          "site": 134266040,
+          "target": 134254960
+        },
+        {
+          "site": 134266060,
+          "target": 134261542
+        },
+        {
+          "site": 134266066,
+          "target": 134232136
+        },
+        {
+          "site": 134266078,
+          "target": 134261488
+        },
+        {
+          "site": 134266110,
+          "target": 134260872
+        }
+      ],
+      "direct_callees": [
+        134232136,
+        134254960,
+        134260872,
+        134261488,
+        134261542
+      ],
+      "entry": 134265744,
+      "guard_limit": 134266484,
+      "instruction_bytes": 374,
+      "instruction_count": 170,
+      "instruction_sha256": "593d88b92adcfd73a350e395354d5ccbfdd8d0db10bb81c9d53fe60f882e1b07",
+      "name": "g2_timer_callback_5",
+      "previously_unmapped_instruction_bytes": 374,
+      "role": "timer_callback",
+      "spans": [
+        {
+          "bytes": 248,
+          "end": 134265992,
+          "start": 134265744
+        },
+        {
+          "bytes": 126,
+          "end": 134266120,
+          "start": 134265994
+        }
+      ]
+    }
+  ],
+  "task_helpers": [
+    {
+      "entry": 134218080,
+      "name": "__aeabi_uidiv",
+      "ownership_category": "upstream_cmsis_startup",
+      "task_caller_count": 2,
+      "task_callers": [
+        134246912,
+        134250284
+      ]
+    },
+    {
+      "entry": 134219868,
+      "name": "gls_rx_buffer_parse_dispatch",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134245916
+      ]
+    },
+    {
+      "entry": 134222564,
+      "name": "aging_led_status_clear",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 3,
+      "task_callers": [
+        134245916,
+        134246912,
+        134250284
+      ]
+    },
+    {
+      "entry": 134222644,
+      "name": "aging_sequence_start",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134250284
+      ]
+    },
+    {
+      "entry": 134222776,
+      "name": "idle_mode_exit",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134223220,
+      "name": "case_ota_execute",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134224100,
+      "name": "glasses_status_poll_dispatch",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134224924,
+      "name": "glasses_status_force_refresh",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134251244
+      ]
+    },
+    {
+      "entry": 134225256,
+      "name": "ota_result_inform_glasses",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134225556,
+      "name": "gls_frame_validate_dispatch",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 2,
+      "task_callers": [
+        134245916,
+        134246912
+      ]
+    },
+    {
+      "entry": 134226932,
+      "name": "aging_status_set_left",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 2,
+      "task_callers": [
+        134245916,
+        134264812
+      ]
+    },
+    {
+      "entry": 134227136,
+      "name": "aging_status_set_right",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 2,
+      "task_callers": [
+        134245916,
+        134264812
+      ]
+    },
+    {
+      "entry": 134227340,
+      "name": "gls_uart_transfer_controlled",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 2,
+      "task_callers": [
+        134245916,
+        134246912
+      ]
+    },
+    {
+      "entry": 134227780,
+      "name": "gls_uart_transfer_uncontrolled",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134245916
+      ]
+    },
+    {
+      "entry": 134228584,
+      "name": "pmic_boost_status_check",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134250284
+      ]
+    },
+    {
+      "entry": 134229040,
+      "name": "peripheral_mode_write_retry",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 2,
+      "task_callers": [
+        134246912,
+        134250284
+      ]
+    },
+    {
+      "entry": 134229134,
+      "name": "glasses_channel_command_pack",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 2,
+      "task_callers": [
+        134246912,
+        134250284
+      ]
+    },
+    {
+      "entry": 134229176,
+      "name": "case_periodic_policy_adapter",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134231508,
+      "name": "peripheral_transaction_guard",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 2,
+      "task_callers": [
+        134246912,
+        134250284
+      ]
+    },
+    {
+      "entry": 134232136,
+      "name": "glasses_charge_side_select",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134265744
+      ]
+    },
+    {
+      "entry": 134232288,
+      "name": "option_byte_bank_swap",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134232520,
+      "name": "left_channel_transaction_guard",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134250284
+      ]
+    },
+    {
+      "entry": 134232548,
+      "name": "right_channel_transaction_guard",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134250284
+      ]
+    },
+    {
+      "entry": 134232576,
+      "name": "glasses_charge_state_reset",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134232636,
+      "name": "left_glasses_state_reset",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134232672,
+      "name": "right_glasses_state_reset",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134232976,
+      "name": "peripheral_status_probe",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134245916
+      ]
+    },
+    {
+      "entry": 134238252,
+      "name": "NVIC_SystemReset",
+      "ownership_category": "upstream_cmsis_startup",
+      "task_caller_count": 2,
+      "task_callers": [
+        134245916,
+        134264812
+      ]
+    },
+    {
+      "entry": 134238356,
+      "name": "HAL_PWR_DisableWakeUpPin",
+      "ownership_category": "upstream_stm32_hal",
+      "task_caller_count": 2,
+      "task_callers": [
+        134246912,
+        134250284
+      ]
+    },
+    {
+      "entry": 134238376,
+      "name": "HAL_PWR_EnableWakeUpPin",
+      "ownership_category": "upstream_stm32_hal",
+      "task_caller_count": 2,
+      "task_callers": [
+        134246912,
+        134250284
+      ]
+    },
+    {
+      "entry": 134238404,
+      "name": "HAL_PWR_EnterSTANDBYMode",
+      "ownership_category": "upstream_stm32_hal",
+      "task_caller_count": 2,
+      "task_callers": [
+        134246912,
+        134250284
+      ]
+    },
+    {
+      "entry": 134238440,
+      "name": "HAL_PWR_EnterSLEEPMode",
+      "ownership_category": "upstream_stm32_hal",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134240652,
+      "name": "stm32_hal_peripheral_init",
+      "ownership_category": "upstream_stm32_hal",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134244296,
+      "name": "log_hex_buffer",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134245916
+      ]
+    },
+    {
+      "entry": 134244560,
+      "name": "case_command_build_fixed",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134245248,
+      "name": "case_gpio_pa6_write",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 4,
+      "task_callers": [
+        134245916,
+        134246912,
+        134250284,
+        134258032
+      ]
+    },
+    {
+      "entry": 134245272,
+      "name": "case_gpio_pa7_write",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 3,
+      "task_callers": [
+        134245916,
+        134246912,
+        134258032
+      ]
+    },
+    {
+      "entry": 134246932,
+      "name": "case_policy_iteration",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134254960,
+      "name": "g2_log_printf",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 7,
+      "task_callers": [
+        134245916,
+        134246912,
+        134250284,
+        134251244,
+        134258032,
+        134264812,
+        134265744
+      ]
+    },
+    {
+      "entry": 134257172,
+      "name": "dual_side_indicator_update",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134257308,
+      "name": "glasses_sides_reset",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 2,
+      "task_callers": [
+        134245916,
+        134246912
+      ]
+    },
+    {
+      "entry": 134258164,
+      "name": "peripheral_init_retry",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134250284
+      ]
+    },
+    {
+      "entry": 134258364,
+      "name": "bounded_percentage_convert",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134250284
+      ]
+    },
+    {
+      "entry": 134258456,
+      "name": "calibrated_sensor_value_convert",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134250284
+      ]
+    },
+    {
+      "entry": 134258672,
+      "name": "sensor_default_value_read",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134250284
+      ]
+    },
+    {
+      "entry": 134258718,
+      "name": "scaled_sensor_value_read",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 2,
+      "task_callers": [
+        134246912,
+        134250284
+      ]
+    },
+    {
+      "entry": 134260656,
+      "name": "osDelay",
+      "ownership_category": "upstream_freertos_kernel",
+      "task_caller_count": 4,
+      "task_callers": [
+        134245916,
+        134246912,
+        134250284,
+        134251244
+      ]
+    },
+    {
+      "entry": 134260690,
+      "name": "osEventFlagsClear",
+      "ownership_category": "upstream_freertos_kernel",
+      "task_caller_count": 2,
+      "task_callers": [
+        134245916,
+        134246912
+      ]
+    },
+    {
+      "entry": 134260758,
+      "name": "osEventFlagsGet",
+      "ownership_category": "upstream_freertos_kernel",
+      "task_caller_count": 2,
+      "task_callers": [
+        134245916,
+        134246912
+      ]
+    },
+    {
+      "entry": 134260872,
+      "name": "osEventFlagsSet",
+      "ownership_category": "upstream_freertos_kernel",
+      "task_caller_count": 2,
+      "task_callers": [
+        134245916,
+        134265744
+      ]
+    },
+    {
+      "entry": 134261284,
+      "name": "osThreadTerminate",
+      "ownership_category": "upstream_freertos_kernel",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134261488,
+      "name": "osTimerStart",
+      "ownership_category": "upstream_freertos_kernel",
+      "task_caller_count": 3,
+      "task_callers": [
+        134245916,
+        134246912,
+        134265744
+      ]
+    },
+    {
+      "entry": 134261542,
+      "name": "osTimerStop",
+      "ownership_category": "upstream_freertos_kernel",
+      "task_caller_count": 2,
+      "task_callers": [
+        134245916,
+        134265744
+      ]
+    },
+    {
+      "entry": 134264320,
+      "name": "board_peripheral_init",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134265716,
+      "name": "periodic_timer_restart",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134266512,
+      "name": "left_indicator_sequence",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134266590,
+      "name": "right_indicator_sequence",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134270516,
+      "name": "glasses_charge_control_policy",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 1,
+      "task_callers": [
+        134246912
+      ]
+    },
+    {
+      "entry": 134271316,
+      "name": "aging_indicator_apply",
+      "ownership_category": "first_party_g2",
+      "task_caller_count": 3,
+      "task_callers": [
+        134245916,
+        134246912,
+        134264812
+      ]
+    }
+  ],
   "unresolved": [
     "exact FreeRTOS point release within V10.x",
     "exact STM32 HAL version",
     "precise task-name to entry-function pairing (descriptor fn fields are runtime-patched; six create calls use descriptor-table names)",
-    "boundaries of the seven entry bodies outside the discovered map",
+    "semantic task-name pairing for the seven now-bounded entry bodies (descriptor names are runtime-patched)",
     "first-party policy function naming beyond the verified set"
   ]
 }

@@ -119,9 +119,9 @@ TARGET_SHA256 = (
     "8319202babe42ee571774682793c4c4c"
     "1a54c3a72826a92ba5c60273ba451c6a"
 )
-APPLE_OFFSET = 115_424
+APPLE_OFFSET = 175_272
 LINUX_OFFSET = 117_256
-APPLE_RUNTIME_ADDRESS = 0x007B_0604
+APPLE_RUNTIME_ADDRESS = 0x007B_EFCC
 LINUX_RUNTIME_ADDRESS = 0x007B_0D2C
 APPLE_REPLACEMENT = "5bf355b8" + "00bf" * 6
 APPLE_REPLACEMENT_SHA256 = (
@@ -862,7 +862,7 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                 "offset": APPLE_OFFSET,
                 "padding_before": 0,
                 "runtime_address": APPLE_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007B0604",
+                "runtime_address_hex": "0x007BEFCC",
                 "size": 18,
             },
         )
@@ -897,12 +897,12 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                167_426,
+                429_058,
                 (
-                    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
                 ),
-                945,
-                884,
+                2_631,
+                2_374,
             ),
         )
         component = self.production["component"]
@@ -920,15 +920,15 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                 )
             },
             {
-                "size": 3_690_822,
+                "size": 3_952_454,
                 "sha256": (
-                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
                 ),
-                "generated_patch_site_bytes": 121_634,
-                "replaced_stock_function_bytes": 121_812,
-                "source_owned_bytes": 165_622,
-                "source_owned_in_place_bytes": 182,
-                "opaque_base_bytes": 3_401_548,
+                "generated_patch_site_bytes": 409_066,
+                "replaced_stock_function_bytes": 409_246,
+                "source_owned_bytes": 431_334,
+                "source_owned_in_place_bytes": 184,
+                "opaque_base_bytes": 3_111_914,
             },
         )
 
@@ -942,15 +942,15 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                     "g2-openCFW-s200_v2.2.6.10-core-source."
                     "evenota.bin"
                 ),
-                "expected_size": 4_469_316,
+                "expected_size": 4_745_526,
                 "expected_sha256": (
-                    "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"
+                    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
                 ),
                 "profiles": {
                     "linux-clang": {
-                        "expected_size": 4_447_098,
+                        "expected_size": 4_529_116,
                         "expected_sha256": (
-                            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e"
+                            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"
                         ),
                     },
                 },

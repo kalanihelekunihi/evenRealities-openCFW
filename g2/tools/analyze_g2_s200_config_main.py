@@ -14,11 +14,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-s200-config-main-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-s200-config-main-closure.tsv"
-PINS = {FM: "494176c0fd0f6710220a021787c5b2133aa78dc36d12bf232e3122c68b97e992", CL: "6d7f796812c37988d3925b98d5d81fdcfc88e4ab45d72d4078bbbbf8525cf165"}
+PINS = {FM: "494176c0fd0f6710220a021787c5b2133aa78dc36d12bf232e3122c68b97e992", CL: "2a1033dea111f3f34171422a3ae2964836bdc6e996b2081cece85cf5a95cc113"}
 RETAINED = 'product\\s200\\app\\config\\main.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\app\\config\\main.c'
 PATH_RUN = 0x703acc
@@ -262,16 +263,7 @@ def analyze(image=IMAGE):
     ]
     if len(sites) != 6 or {item["runtime_address"] for item in sites} != starts:
         raise c.AuditError("production route changed")
-    if overlay["expected"] != {
-        "overlay_size": 428950,
-        "overlay_sha256": "0a6b9fe566a2452cd9720c2db22eb43e530c31b76996d05541fa7f24ea9ee745",
-        "component_size": 3952346,
-        "component_sha256": "dc578472f06af2d499b9cb771fc185df4f739a05de558098088b56da9a5e4ce0",
-    }:
-        raise c.AuditError("canonical artifact pins changed")
-    package = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
-    if package.stat().st_size != 4730840 or _sh(package.read_bytes()) != "d77d88162f777a6c9889d1813323a836d1dc140fe7488009fe485ed787d8fe70":
-        raise c.AuditError("package artifact changed")
+    validate_apollo_main_artifacts(ROOT, c.AuditError, "s200 config main")
     return {
         "schema_version": 2,
         "analysis_mode": "corrected linked-object closure plus production source routing",
@@ -279,7 +271,7 @@ def analyze(image=IMAGE):
         "surface": {"body_bytes": EXPECTED["body_bytes"], "direct_body_calls": EXPECTED["direct_body_calls"], "function_escapes": len(esc), "indirect_body_calls": len(ind), "internal_direct_body_calls": EXPECTED["internal_direct_body_calls"], "linked_functions": len(F), "outer_pool_bytes": EXPECTED["outer_pool_bytes"], "path_literal_references": EXPECTED["path_literal_references"], "physical_bytes": EXPECTED["physical_bytes"], "raw_path_referencing_functions": sum(1 for row in rows if int(row["path_reference_sites"]) > 0), "reachable_instructions": EXPECTED["reachable_instructions"]},
         "ingress": {"direct_b16_entry_sites": len(b16), "direct_bl_entry_sites": len(bl), "direct_bl_strict_interior_sites": len(bls), "direct_bw_entry_sites": len(bw), "stored_entry_pointer_words": len(stored)},
         "evidence": {"boundary_guards": True, "pointer_cells": ["0x%08X" % x for x in CELLS], "path_string_run_address": "0x%08X" % PATH_RUN, "tag_strings": len(TAGS)},
-        "production": {"production_routed": True, "source_functions": 6, "compiled_text_bytes": 584, "alignment_bytes": 4, "strict_relocations": 47, "replaced_stock_body_bytes": 1468, "hardware_validation": "blocked_unavailable_authorized_physical_evidence"},
+        "production": {"production_routed": True, "source_functions": 6, "compiled_text_bytes": 584, "alignment_bytes": 4, "strict_relocations": 47, "replaced_stock_body_bytes": 1468, "hardware_validation": "deferred by project direction"},
     }
 
 

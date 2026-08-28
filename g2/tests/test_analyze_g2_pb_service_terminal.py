@@ -74,7 +74,7 @@ class AnalyzeG2PbServiceTerminalTests(unittest.TestCase):
         self.assertEqual(production["stock_replaced_bytes"], 2554)
         self.assertEqual(production["retained_tail_bytes"], 246)
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertEqual(production["hardware_validation"], "deferred by project direction")
 
 
 if __name__ == "__main__":

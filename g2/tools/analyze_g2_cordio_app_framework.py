@@ -224,8 +224,8 @@ def _verify_snapshot() -> dict[str, Any]:
         "application_framework_source_routed_functions": 61,
         "application_framework_routed_stock_bytes": 29870,
         "software_validation": "host behavior tests plus isolated Cortex-M55 compilation and canonical image/package rebuild",
-        "hardware_validation": "blocked",
-        "hardware_blocker": "No authorized responsive right G2 is available; the authorized left temple must remain stock.",
+        "hardware_validation": "deferred by project direction",
+        "hardware_blocker": "An authorized responsive right G2 is required for future qualification; the authorized left temple must remain stock.",
         "legacy_master_slave_production_routed": True,
         "legacy_master_slave_routed_functions": 14,
         "legacy_master_slave_routed_stock_bytes": 1406,
@@ -417,9 +417,9 @@ def _production_evidence(
         "preexisting_app_database_routed": True,
         "remaining_anchored_functions": 0,
         "remaining_anchored_body_bytes": 0,
-        "hardware_validation": "blocked",
+        "hardware_validation": "deferred by project direction",
         "hardware_blocker": (
-            "No authorized responsive right G2 is available for live scanning, "
+            "An authorized responsive right G2 is required for future live scanning, "
             "advertising, connection, and controller-transition validation; the "
             "authorized left temple must remain stock."
         ),
@@ -465,7 +465,7 @@ def analyze(corpus: Path, image_path: Path = IMAGE) -> dict[str, Any]:
         "limitations": [
             "source-path anchors are lower bounds and do not cover every function in each translation unit",
             "the selected public commit is a semantic rebuild oracle, not the private G2 producing commit",
-            "live controller, peer, advertising, and discovery validation remains blocked by unavailable authorized responsive hardware",
+            "live controller, peer, advertising, and discovery validation remains deferred by project direction; future qualification requires authorized responsive hardware",
         ],
     }
 
@@ -488,7 +488,7 @@ def main() -> int:
         )
         print("exact historical G2 commit: unobservable")
         print(
-            "production routing: software closed; hardware validation blocked "
+            "production routing: software closed; hardware validation deferred "
             f"({report['production']['routed_functions']} distinct functions)"
         )
     return 0

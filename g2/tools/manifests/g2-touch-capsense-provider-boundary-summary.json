@@ -1,0 +1,51 @@
+{
+  "adapter": {
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_capsense_provider.c",
+    "sha256": "694ed1ab595ecaa9b1039fefcbd7de5e6eedcce75a9b139edfd76729fe6f3aa7",
+    "target_object_bytes": 908
+  },
+  "analysis_mode": "offline provider-family and call-topology resolution; no vendor body copied, no hardware or MMIO execution",
+  "component": "G2 touch CAPSENSE provider boundary admission batch 6",
+  "exclusions": "CAPSENSE vendor bodies are not copied or counted as open source; EULA Em_EEPROM, application/startup, legacy halt and DFU/system boundaries unchanged",
+  "integration": "isolated typed provider contract; not production-routed; absent provider fails closed",
+  "metrics": {
+    "boundary_functions": 55,
+    "component_sizes": [
+      50,
+      2,
+      1,
+      1,
+      1
+    ],
+    "concrete_source_functions": 0,
+    "external_dependency_entries": 23,
+    "mixed_provider_gap_after": 0,
+    "mixed_provider_gap_before": 55,
+    "provider_family_resolved": 55,
+    "row_digest": "eb837e2abd0e62d4628a22476d4db2588ba92dbca2bd27f8ecac3996733a65b4",
+    "semantic_source_gap_after_external_typing": 111,
+    "semantic_source_gap_before": 166,
+    "topology_digest": "10a3f07513133b78772f8ae288e92a84311ca3cc799a1e3c1c3ef8e57f8cb2ed",
+    "typed_external_functions": 55
+  },
+  "provider": {
+    "c_source_count": 15,
+    "c_source_inventory_digest": "46a460dc11956edb330d1c5950c4409af7fb06b79186eea2d1f74cd47143bb99",
+    "commit": "25fa1cd5abb4cc66981b04f8872d57d74e398976",
+    "license": "LicenseRef-Infineon-Cypress-EULA",
+    "license_sha256": "aed445dc4b6832c07501ddb0c937a7bc342bb630d54636fca2b8177ec5722de0",
+    "repository": "https://github.com/Infineon/capsense",
+    "tag": "release-v3.0.1",
+    "version": "3.0.1.4842",
+    "version_claim": "comparison/provider API pin only; shipped historical revision unresolved",
+    "version_xml_sha256": "6576ebac735442b8dd29bb3d172d48a81686ee9f0e135fdf0bcc19d6846501ba"
+  },
+  "remaining": {
+    "actionable_semantic_or_source_functions": 111,
+    "note": "typed external bytes/functions are not concrete OpenCFW source",
+    "typed_external_capsense_functions": 55
+  },
+  "row_count": 55,
+  "schema_version": 1
+}

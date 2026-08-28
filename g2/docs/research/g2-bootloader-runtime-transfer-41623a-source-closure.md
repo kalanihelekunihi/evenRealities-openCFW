@@ -17,7 +17,7 @@ requests PendSV by writing `0x10000000` to `SCB->ICSR` at `0xE000ED04` when
 the first call reports scheduling is required. Address-derived backend names
 avoid unsupported claims about the retained platform objects.
 
-`runtime_transfer_41623a.c` is a 2,408-byte GPL-3.0-or-later clean-room
+`runtime_transfer_41623a.c` is a 2,408-byte MIT clean-room
 implementation with SHA-256
 `5578c14de783782b6a622fe81f59d95ba20fefcd80aafe176d595d98371ab89c`.
 Apple clang emits a 128-byte, four-byte-aligned leaf with unrelocated SHA-256

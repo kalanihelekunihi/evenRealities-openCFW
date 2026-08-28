@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacements for the G2 2.2.6.10 Apollo display transport IRQ
  * special-transfer helpers at 0x0058DD30, 0x0058DD5C, 0x0058DD8A, and

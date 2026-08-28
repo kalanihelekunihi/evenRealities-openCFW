@@ -13,7 +13,7 @@ This closes semantic source recreation and production integration for all ten
 code units in the bounded runtime census without claiming an exact EWARM
 release or copying proprietary DLIB implementation source.
 
-The selector-isolated source is 2,625 bytes, GPL-3.0-only, and hashes to
+The selector-isolated source is 2,625 bytes, MIT, and hashes to
 `b5288643766f14f62a2452f445f58e0e3ec8e09c229f4f9c572b8dd1c5c0f59c`.
 Apple Clang 21 and Lorelei Linux Clang 22.1.8 emitted identical function
 sections:

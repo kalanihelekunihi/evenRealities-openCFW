@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded source replacements for the G2 2.2.6.10 LVGL theme traversal:
  *   0x00482FCE...0x00482FF1  parent-first theme callback chain

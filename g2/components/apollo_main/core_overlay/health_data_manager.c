@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of the G2 health-data storage policy recovered
  * from the authenticated 2.2.6.10 application.  Diagnostics are deliberately

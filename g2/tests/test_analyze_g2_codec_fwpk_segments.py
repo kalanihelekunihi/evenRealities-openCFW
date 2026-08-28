@@ -44,6 +44,9 @@ class CodecFwpkSegmentTests(unittest.TestCase):
   self.assertEqual(c["command_format"],"serialdown %d %d %d")
   self.assertEqual(c["flash_offset_argument"],0);self.assertEqual(c["chunk_argument"],0x2000)
   self.assertEqual(c["containing_object"],"service_codec_dfu.c")
+ def test_community_source_profile_has_no_unresolved_codec_destination(self):
+  p=self.r["community_source_profile"]
+  self.assertEqual((p["regions"],p["placed_regions"],p["protocol_metadata_regions"],p["unresolved_regions"]),(6,4,2,0))
  def test_proprietary_boundary(self):
   self.assertFalse(self.r["production"]["production_routed"])
   self.assertIn("proprietary",self.r["production"]["codec_image_ownership"])

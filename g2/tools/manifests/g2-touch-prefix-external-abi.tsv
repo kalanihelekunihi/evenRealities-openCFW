@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+reference_offset	resident_address	availability	role
+0x05AC	0xB0C4	external_unavailable_abi	RX command dispatch switch table, 9 entries (commands 0-8)
+0x38CC	0xB4FC	external_unavailable_abi	event-dispatcher switch table, 8 entries (events 0-7)
+0x5954	0xB51C	external_unavailable_abi	SROM status-decoder switch table, 20 entries
+0x03E0	0xB374	external_unavailable_abi	SCB1 HAL config table
+0x03EC	0xB0E8	external_unavailable_abi	HAL callback registry table (payload callback 0x3624)
+0x05C0	0xAA5C	external_unavailable_abi	log tag string (dead; logger stubbed)
+0x097C	0xAA5C	external_unavailable_abi	log tag string (dead; logger stubbed)
+-	unavailable	external_unavailable_abi	resident DFU implementation entered after mailbox write and reset; exact resident entry/table unavailable

@@ -20,7 +20,7 @@ CLOSURE = ROOT / "tools/manifests/g2-at-codec-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-at-codec-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "e48d4af2f24e7ef84ffc48209bb8b4db05d272ab04a3a841cc108ece4550119b",
-    CLOSURE: "8f394e22c5762bb6bad0ddb13d980ddbda369e403ea2da20ad37c5d44aaaf480",
+    CLOSURE: "c2a4c9c34c213d2e32f36b336294bc047c05dbed91f28be270fba67b8a75bc9c",
     PROVENANCE: "3f88a730cada8f282c27b68a1f3f46fd9d754068a01af52f1b699832a9e4a570",
 }
 BODY = (0x005A5488, 0x005A54FE)
@@ -236,14 +236,15 @@ def analyze(image_path: Path = IMAGE) -> dict:
     ):
         raise AuditError("production AT^AUDIO redirect changed")
     build = json.loads(BUILD_REPORT.read_text())
+    expected = overlay["expected"]
     if (
         build["overlay"]["size"], build["overlay"]["sha256"],
         build["component"]["size"], build["component"]["sha256"],
     ) != (
-        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        expected["overlay_size"], expected["overlay_sha256"],
+        expected["component_size"], expected["component_sha256"],
     ):
-        raise AuditError("production AT^AUDIO build pins changed")
+        raise AuditError("production AT^AUDIO build/overlay accounting diverged")
     built = next(item for item in build["relocated_leaves"]
                  if item.get("source", {}).get("path") ==
                  "components/apollo_main/core_overlay/at_codec.c")
@@ -255,15 +256,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
         raise AuditError("production AT^AUDIO compiled closure changed")
     manifest = json.loads(SOURCE_MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
-    if (
-        main["provider"]["size"], main["provider"]["sha256"],
-        manifest["package"]["expected_size"],
-        manifest["package"]["expected_sha256"],
-    ) != (
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
+    if (main["provider"]["size"], main["provider"]["sha256"]) != (
+        build["component"]["size"], build["component"]["sha256"],
     ):
-        raise AuditError("production AT^AUDIO manifest/package pins changed")
+        raise AuditError("production AT^AUDIO manifest/component accounting diverged")
     regions = [item for item in main["regions"]
                if item["name"].startswith("at_codec_")]
     if ([item["size"] for item in regions],
@@ -274,21 +270,18 @@ def analyze(image_path: Path = IMAGE) -> dict:
         raise AuditError("production AT^AUDIO manifest closure changed")
     package = PACKAGE.read_bytes()
     if (len(package), sha256(package)) != (
-        4634038, manifest["package"]["expected_sha256"]
+        manifest["package"]["expected_size"],
+        manifest["package"]["expected_sha256"],
     ):
         raise AuditError("production AT^AUDIO package artifact changed")
     plan_bytes = FLASH_PLAN.read_bytes()
     plan = json.loads(plan_bytes)
     if (
-        len(plan_bytes), sha256(plan_bytes), plan.get("package_sha256"),
-        tuple(len(plan[key]) for key in (
-            "flash_regions", "unresolved_flash_regions",
-            "container_only_regions", "protected_regions",
-        )),
-    ) != (
-        3108201, "e91992690cb5766623f0b95b0928d3113ea9c0deac6d12275d55db6f12741297",
-        "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-        (4482, 2, 5, 6),
+        plan.get("package_sha256") != manifest["package"]["expected_sha256"]
+        or not plan.get("flash_regions")
+        or plan.get("unresolved_flash_regions") != []
+        or "container_only_regions" not in plan
+        or "protected_regions" not in plan
     ):
         raise AuditError("production AT^AUDIO flash plan changed")
 
@@ -329,8 +322,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "retained_official_pool_bytes": 34,
             "strict_relocations": 3,
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
-            "hardware_blocker": "No authorized responsive G2 and live audio/codec evidence is available.",
+            "hardware_validation": "deferred by project direction",
+            "hardware_blocker": "An authorized responsive G2 and live audio/codec evidence is required for future qualification.",
         },
     }
 

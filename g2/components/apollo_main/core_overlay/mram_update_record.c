@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Apollo protected-MRAM record programmer matched to stock entry
  * 0x004799A8 (_updateOneRecordToNVM).

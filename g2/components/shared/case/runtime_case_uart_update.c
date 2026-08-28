@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room G2 charging-case UART and update protocol implementation.
  * The contract is recovered from the authenticated STM32G0 case image; no

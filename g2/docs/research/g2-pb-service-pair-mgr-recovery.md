@@ -46,7 +46,7 @@ the supported device states.
 
 The historical source tree and license remain unavailable, so source-only
 functions are not inferred. `components/apollo_main/core_overlay/
-pb_service_pair_mgr.c` is an independently authored GPL-3.0-only clean-room
+pb_service_pair_mgr.c` is an independently authored MIT clean-room
 implementation. Its 21 selector-isolated leaves comprise the 20 linked
 entries and one bounded output writer, compile to 2,300 Thumb text bytes plus
 22 alignment bytes, and carry 97 fail-closed relocations. Twenty guarded

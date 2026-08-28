@@ -2,6 +2,10 @@
 
 Date: 2026-08-23 (America/Chicago)
 
+> Historical record: the current hardware-qualification status is superseded by
+> [`hardware-validation-policy.md`](hardware-validation-policy.md). This report is
+> retained unchanged below as chronology, not as the present device-health premise.
+
 ## Authorized hardware
 
 - Glasses serial: `S211GBBC180304`

@@ -23,12 +23,12 @@ TARGET = {
     "open_cfw_cmsis_timer_new": (212, "76ab027748ff511b9e88b65ce73cd289c95a29c634cccf1698cbe8c1df67874e", [(14,10,"open_cfw_cmsis_irq_context"),(74,10,"open_cfw_freertos_heap4_malloc"),(112,49,"open_cfw_cmsis_timer_callback"),(116,50,"open_cfw_cmsis_timer_callback"),(130,10,"open_cfw_rtos_timer_static_create"),(140,49,"open_cfw_cmsis_timer_callback"),(144,50,"open_cfw_cmsis_timer_callback"),(160,10,"open_cfw_rtos_timer_dynamic_create"),(200,10,"open_cfw_freertos_heap4_free")]),
 }
 APPLE_LINKED = {
-    "open_cfw_cmsis_timer_callback": "9154e6d1e4447e52ee3d5a32b6fc1091e3a670f5df286dbbbf04989dac2fe9dd",
-    "open_cfw_cmsis_timer_new": "96334d98338228a2f2f3f7e7f7ae5a8cb03dd8e25bfb9d0312e56765ad59e1d4",
+    "open_cfw_cmsis_timer_callback": "a0c2169d14b0e0c8f3a9bd11711eae43db852e57d420a0c0a6843232a6416b8e",
+    "open_cfw_cmsis_timer_new": "f9107e9584ac0f4af45ee34e4c8eb43b9631e192ce7c1587784b7b0ec8170519",
 }
 LINUX_LINKED = {
-    "open_cfw_cmsis_timer_callback": "9698269134171d47145eb11523f028367c5930d1f5fd4b9777e6eff44b3ac853",
-    "open_cfw_cmsis_timer_new": "ba78ba7b90b28fc93c925e30dd94ccd1337be4c2e6c5d1eb3ff719d9b17991bc",
+    "open_cfw_cmsis_timer_callback": "40b2fab610e98db36449482de2c6f835ba02c219c4663031a31e4cbb3e237700",
+    "open_cfw_cmsis_timer_new": "25705469870f476a24123c7e317096e36c55915b12995711b607874f2772ddcb",
 }
 
 
@@ -122,20 +122,20 @@ class RuntimeCmsisTimerNewTests(unittest.TestCase):
                     ],
                     LINUX_LINKED[name],
                 )
-        self.assertEqual(config["expected"]["overlay_size"], 167_426)
-        self.assertEqual(config["expected"]["component_size"], 3_690_822)
+        self.assertEqual(config["expected"]["overlay_size"], 428_950)
+        self.assertEqual(config["expected"]["component_size"], 3_952_346)
         self.assertEqual(
             config["toolchain_profiles"]["linux-clang"]["expected"][
                 "overlay_size"
             ],
-            145_208,
+            204_960,
         )
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
-        self.assertEqual(main["provider"]["size"], 3_690_822)
+        self.assertEqual(main["provider"]["size"], 3_952_346)
         self.assertEqual(
-            main["provider"]["profiles"]["linux-clang"]["size"], 3_668_604
+            main["provider"]["profiles"]["linux-clang"]["size"], 3_728_356
         )
         regions = {item["name"]: item for item in main["regions"]}
         self.assertEqual(
@@ -143,14 +143,14 @@ class RuntimeCmsisTimerNewTests(unittest.TestCase):
                 regions["apollo_cmsis_timer_callback_source_leaf"]["file_offset"],
                 regions["apollo_cmsis_timer_new_source_leaf"]["file_offset"],
             ),
-            (3_655_952, 3_655_976),
+            (3_715_800, 3_715_824),
         )
         self.assertEqual(
             (
                 manifest["package"]["expected_size"],
                 manifest["package"]["profiles"]["linux-clang"]["expected_size"],
             ),
-            (4_469_316, 4_447_098),
+            (4_745_418, 4_521_412),
         )
 
 

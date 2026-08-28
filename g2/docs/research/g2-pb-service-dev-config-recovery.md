@@ -54,7 +54,7 @@ source-only functions are not inferred.
 ## Production closure
 
 `components/apollo_main/core_overlay/pb_service_dev_config.c` is an
-11,435-byte GPL-3.0-only clean-room implementation (SHA-256
+11,435-byte MIT clean-room implementation (SHA-256
 `46c79dbaad289491f195562aea10d3d8ba92684e7227e463b697a04f31b67bc4`).
 Five selector-isolated source functions compile to 998 Thumb text bytes plus
 four alignment bytes. Three guarded `B.W` redirects replace all 2,646 stock

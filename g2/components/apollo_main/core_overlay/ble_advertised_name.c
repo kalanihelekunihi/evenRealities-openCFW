@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Preserve the stock G2 advertised-name structure while replacing its final
  * six per-temple BLE-address characters with the final six characters of the

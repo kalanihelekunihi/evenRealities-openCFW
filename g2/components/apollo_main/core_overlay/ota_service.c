@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the G2 OTA file service.  This preserves the
  * recovered C0/C1/C2/C3 command ABI, the 0x70-byte transfer record, the

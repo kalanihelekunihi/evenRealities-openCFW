@@ -18,7 +18,7 @@ one, recomputes a wrap-safe remaining timeout from retained tick source
 exhaustion to `-2`. Address-derived names avoid unsupported claims about the
 retained platform objects.
 
-`runtime_wait_4162c4.c` is a 2,549-byte GPL-3.0-or-later clean-room
+`runtime_wait_4162c4.c` is a 2,549-byte MIT clean-room
 implementation with SHA-256
 `9f3aa5e7fe42a33b59888d9b7d8a43118df0ee868703e75cf6eedd769d0c6ed1`.
 Both reviewed compilers emit the same 178-byte, two-byte-aligned unrelocated

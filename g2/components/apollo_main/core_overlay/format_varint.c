@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacements for the G2 2.2.6.10 unsigned LEB128 encoder at
  * 0x00490C84 and the unsigned 64-bit prefix writer at 0x00490CE0. Their exact

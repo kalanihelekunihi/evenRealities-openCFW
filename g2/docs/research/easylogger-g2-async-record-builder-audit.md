@@ -371,7 +371,7 @@ explicitly:
 | exact stock compatibility | `components/apollo_main/core_overlay/runtime_easylogger_async_record_build_stock.c` | `32ab04ce6d5f92ff818826312a4dd3d2b8f28296a0891b2d66ed57f992e670a2` |
 | corrected single owner | `components/apollo_main/core_overlay/runtime_easylogger_async_record_build_single_owner.c` | `99186110989409fda677b4b02d84a66272990393cdb623410fe573749c4eb290` |
 
-Both are clean-room GPL-3.0-only G2 glue. Neither copies or compiles
+Both are clean-room MIT G2 glue. Neither copies or compiles
 upstream EasyLogger `elog_async.c`. Both use a private byte loop instead of
 claiming the G2 builder is authenticated upstream code.
 

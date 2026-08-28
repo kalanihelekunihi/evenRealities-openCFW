@@ -1,8 +1,14 @@
 # G2 touch sensing, gesture, and power-policy source closure
 
 Status: implemented in freestanding Cortex-M0+ C; raw sensing and timing
-validation is blocked by unavailable authorized physical evidence. No device,
-sleep, reset, signing, or flash operation was performed.
+validation is blocked by unavailable physical evidence. No device, sleep, reset, signing,
+or flash operation was performed.
+
+The C/header pair is original openCFW clean-room work and contains no copied
+GPL or vendor source. Under the repository's additional grant it is offered as
+`MIT OR GPL-3.0-only`, preserving the existing GPL option while making the MIT
+option explicit. This grant does not apply to the authenticated machine-code
+evidence or separately licensed providers.
 
 The exact MSC loop at `[0x36C4,0x376C)` is authenticated independently. Its
 source reduction copies six words per channel, applies the observed
@@ -28,8 +34,8 @@ Run:
 make touch-sensing-closure
 ```
 
-Production retains the shipped touch application. Promotion requires a
-responsive authorized controller and golden raw MSCLP/gesture/power traces to
-validate channel descriptors, noise margins, thresholds, direction, click and
-long-press timing, ACT/ALR/WOT timers, sleep, and wake behavior. Those inputs
-are unavailable.
+Production retains the shipped touch application. Future qualification uses
+an authorized controller and golden raw MSCLP/gesture/power traces to validate
+channel descriptors, noise margins, thresholds, direction, click and
+long-press timing, ACT/ALR/WOT timers, sleep, and wake behavior; that validation
+is blocked by unavailable physical evidence.

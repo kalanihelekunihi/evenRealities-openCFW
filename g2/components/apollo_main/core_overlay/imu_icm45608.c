@@ -1,7 +1,7 @@
 /*
  * OpenCFW clean-room G2 ICM45608 policy and sample driver.
  *
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * The first-party policy in this file was reconstructed from authenticated
  * linked-object behavior.  The transport boundary follows TDK InvenSense's

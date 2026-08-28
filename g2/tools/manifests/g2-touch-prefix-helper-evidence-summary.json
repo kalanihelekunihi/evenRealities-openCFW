@@ -1,0 +1,71 @@
+{
+  "analysis_mode": "offline authenticated helper evidence and public-provider comparison; no hardware operation",
+  "base_row_digest": "335e09b1d61057a49e69d4f58f9e9117f4e8db4f475068f76ba3f544919a5e7a",
+  "clean_room_rules": [
+    "MIT is the default for newly authored OpenCFW replacement code.",
+    "Apache-2.0 CAT2 PDL code may be reused only with its upstream notices and license preserved.",
+    "CAPSENSE and Em_EEPROM public repositories are attribution evidence but carry the Infineon EULA; do not copy them into MIT files.",
+    "Compiler/libc routines must come from the selected upstream toolchain/runtime under that provider's license.",
+    "A public symbol candidate is not a claim that the stock binary was built from the currently pinned public commit."
+  ],
+  "metrics": {
+    "boundary_counts": {
+      "infineon_capsense": 3,
+      "infineon_cat2_pdl": 10,
+      "infineon_emeeprom": 16,
+      "open_cfw_clean_room": 8,
+      "toolchain_runtime": 7
+    },
+    "evidence_digest": "27b3373ad1475a6370eb0acb338f4564e10ba523a4e35d10ab6f61406b00329d",
+    "helper_count": 44,
+    "high_confidence_helpers": 35,
+    "medium_confidence_helpers": 9,
+    "remaining_untyped_helpers": 0
+  },
+  "providers": {
+    "infineon_capsense": {
+      "commit": "b68b744eb75fe976fc5ddd7b16e04e1a5a54bdd3",
+      "license": "LicenseRef-Infineon-EULA",
+      "provider": "Infineon CAPSENSE middleware",
+      "source": "https://github.com/Infineon/capsense",
+      "use": "interface evidence only for MIT clean-room replacement unless EULA terms are accepted"
+    },
+    "infineon_cat2_pdl": {
+      "commit": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+      "license": "Apache-2.0",
+      "provider": "Infineon mtb-pdl-cat2",
+      "source": "https://github.com/Infineon/mtb-pdl-cat2",
+      "use": "prefer the upstream provider implementation and retain Apache-2.0 notices"
+    },
+    "infineon_emeeprom": {
+      "commit": "6bbde322b7193528674dbf7fcdc2e971d0cff4fa",
+      "license": "LicenseRef-Infineon-EULA",
+      "provider": "Infineon Emulated EEPROM middleware",
+      "source": "https://github.com/Infineon/emeeprom",
+      "use": "interface/algorithm identification only for MIT clean-room replacement unless EULA terms are accepted"
+    },
+    "open_cfw_clean_room": {
+      "commit": null,
+      "license": "MIT",
+      "provider": "OpenCFW clean-room behavior boundary",
+      "source": "project-authored replacement required",
+      "use": "implement from typed behavior and ABI without copying stock/vendor code"
+    },
+    "toolchain_runtime": {
+      "commit": null,
+      "license": "LicenseRef-Upstream-Toolchain-Runtime",
+      "provider": "ARM EABI / C runtime provider unresolved",
+      "source": "compiler-provided runtime ABI",
+      "use": "link an upstream compiler/libc implementation under its own license; do not copy stock bytes"
+    }
+  },
+  "remaining_opacity": {
+    "exact_historical_private_symbols_proven": 0,
+    "historical_source_commit_proven": 0,
+    "note": "All reachable generic helpers now have typed implementation boundaries; historical generating versions remain unavailable.",
+    "typed_helpers": 44,
+    "untyped_helpers": 0
+  },
+  "row_count": 44,
+  "schema_version": 1
+}

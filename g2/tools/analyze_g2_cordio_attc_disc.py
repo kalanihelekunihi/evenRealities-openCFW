@@ -14,6 +14,8 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 LOAD_BASE = 0x00437FE0
 IMAGE_BYTES = 3_523_396
@@ -258,37 +260,10 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
     build = json.loads(BUILD_REPORT.read_text())
     manifest = json.loads(SOURCE_MANIFEST.read_text())
     override = manifest["component_overrides"]["apollo_main"]
-    if (
-        build["overlay"]["size"] != 404796
-        or build["overlay"]["sha256"] !=
-            "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
-        or build["component"]["size"] != 3928192
-        or build["component"]["sha256"] !=
-            "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
-        or override["provider"].get("size") != 3928192
-        or override["provider"].get("sha256") !=
-            "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
-        or len([row for row in override["regions"]
-                if row["name"].startswith("cordio_attc_disc_")]) != 38
-    ):
+    validate_apollo_main_artifacts(ROOT, AuditError, "ATT discovery")
+    if len([row for row in override["regions"]
+            if row["name"].startswith("cordio_attc_disc_")]) != 38:
         raise AuditError("ATT discovery component/manifest ownership changed")
-    if (
-        PACKAGE.stat().st_size != 4706686
-        or _sha256(PACKAGE.read_bytes()) !=
-            "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
-    ):
-        raise AuditError("ATT discovery package changed")
-    flash = json.loads(FLASH_PLAN.read_text())
-    if (
-        FLASH_PLAN.stat().st_size != 4071097
-        or _sha256(FLASH_PLAN.read_bytes()) !=
-            "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
-        or (len(flash["flash_regions"]),
-            len(flash["unresolved_flash_regions"]),
-            len(flash["container_only_regions"]),
-            len(flash["protected_regions"])) != (5863, 2, 5, 6)
-    ):
-        raise AuditError("ATT discovery flash plan changed")
     return {
         "schema_version": 1,
         "image": {"path": str(image), "sha256": IMAGE_SHA256},
@@ -369,7 +344,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "index_and_handle_bounds_hardened": True,
             "configuration_handle_index_hardened": True,
             "hardware_validation": (
-                "blocked by unavailable authorized responsive G2/ATT peer evidence"
+                "deferred by project direction; future qualification requires authorized responsive G2/ATT peer evidence"
             ),
         },
     }

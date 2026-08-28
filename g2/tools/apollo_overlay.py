@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Compile, mini-link, and inject a source-owned Apollo510B openCFW overlay."""
 
 from __future__ import annotations
@@ -46,6 +47,7 @@ R_ARM_THM_MOVW_ABS_NC = 47
 R_ARM_THM_MOVT_ABS = 48
 R_ARM_THM_MOVW_PREL_NC = 49
 R_ARM_THM_MOVT_PREL = 50
+R_ARM_THM_JUMP11 = 102
 
 IN_PLACE_RELOCATION_TYPES = {
     "R_ARM_THM_CALL": R_ARM_THM_CALL,
@@ -55,6 +57,7 @@ IN_PLACE_RELOCATION_TYPES = {
     "R_ARM_THM_MOVT_ABS": R_ARM_THM_MOVT_ABS,
     "R_ARM_THM_MOVW_PREL_NC": R_ARM_THM_MOVW_PREL_NC,
     "R_ARM_THM_MOVT_PREL": R_ARM_THM_MOVT_PREL,
+    "R_ARM_THM_JUMP11": R_ARM_THM_JUMP11,
 }
 
 ABSOLUTE_MOVWT_TYPES = {
@@ -1664,6 +1667,8 @@ def extract_in_place_function_section(
         "symbol",
         "target_address",
         "target_expected_hex",
+        "target_expected_size",
+        "target_expected_sha256",
         "symbol_type",
     }
     reviewed_relocations: list[dict[str, Any]] = []
@@ -1720,31 +1725,57 @@ def extract_in_place_function_section(
             )
 
         target_expected_hex = relocation.get("target_expected_hex")
+        target_expected_size = relocation.get("target_expected_size")
+        target_expected_sha256 = relocation.get("target_expected_sha256")
         if relocation_name == "R_ARM_THM_PC8":
             if target_address & 3:
                 raise BuildError(
                     f"in-place leaf {function_name} relocation {index} "
                     "PC8 target must be word aligned"
                 )
-            if (
-                not isinstance(target_expected_hex, str)
-                or not re.fullmatch(r"[0-9a-fA-F]{8}", target_expected_hex)
+            if target_expected_hex is not None:
+                if target_expected_size is not None or target_expected_sha256 is not None:
+                    raise BuildError(
+                        f"in-place leaf {function_name} relocation {index} "
+                        "target_expected_hex cannot be combined with "
+                        "target_expected_size/target_expected_sha256"
+                    )
+                if (
+                    not isinstance(target_expected_hex, str)
+                    or not re.fullmatch(r"[0-9a-fA-F]{8}", target_expected_hex)
+                ):
+                    raise BuildError(
+                        f"in-place leaf {function_name} relocation {index} "
+                        "PC8 target requires exactly four expected literal bytes"
+                    )
+                target_expected_hex = target_expected_hex.lower()
+            elif (
+                target_expected_size != 4
+                or not isinstance(target_expected_sha256, str)
+                or not re.fullmatch(r"[0-9a-f]{64}", target_expected_sha256)
             ):
                 raise BuildError(
-                    f"in-place leaf {function_name} relocation {index} "
-                    "PC8 target requires exactly four expected literal bytes"
+                    f"in-place leaf {function_name} relocation {index} PC8 "
+                    "target requires four expected literal bytes or an exact "
+                    "size plus SHA-256 digest"
                 )
-            target_expected_hex = target_expected_hex.lower()
         elif relocation_name not in ABSOLUTE_MOVWT_TYPES:
             if target_address & 1:
                 raise BuildError(
                     f"in-place leaf {function_name} relocation {index} "
                     "Thumb target must be halfword aligned"
                 )
-        if relocation_name != "R_ARM_THM_PC8" and target_expected_hex is not None:
+        if relocation_name != "R_ARM_THM_PC8" and any(
+            value is not None
+            for value in (
+                target_expected_hex,
+                target_expected_size,
+                target_expected_sha256,
+            )
+        ):
             raise BuildError(
                 f"in-place leaf {function_name} relocation {index} "
-                "target_expected_hex is only valid for PC8 literals"
+                "target expectation fields are only valid for PC8 literals"
             )
 
         reviewed_offsets.append(offset)
@@ -1763,6 +1794,14 @@ def extract_in_place_function_section(
                 **(
                     {"target_expected_hex": target_expected_hex}
                     if target_expected_hex is not None
+                    else {}
+                ),
+                **(
+                    {
+                        "target_expected_size": target_expected_size,
+                        "target_expected_sha256": target_expected_sha256,
+                    }
+                    if target_expected_size is not None
                     else {}
                 ),
             }
@@ -2183,11 +2222,41 @@ def extract_in_place_function_section(
                     f"relocation at +0x{offset:X}"
                 )
         else:
-            if offset + 4 > len(leaf):
+            instruction_size = (
+                2 if relocation_name == "R_ARM_THM_JUMP11" else 4
+            )
+            if offset + instruction_size > len(leaf):
                 raise BuildError(
                     f"in-place leaf {function_name} branch relocation at "
                     f"+0x{offset:X} exceeds its section"
                 )
+            if relocation_name == "R_ARM_THM_JUMP11":
+                instruction = struct.unpack_from("<H", leaf, offset)[0]
+                if instruction != 0xE7FE:
+                    raise BuildError(
+                        f"in-place leaf {function_name} R_ARM_THM_JUMP11 at "
+                        f"+0x{offset:X} does not use the canonical `b.n .` "
+                        "REL placeholder"
+                    )
+                displacement = target_address - (site_address + 4)
+                if displacement < -2048 or displacement > 2046 or displacement & 1:
+                    raise BuildError(
+                        f"in-place leaf {function_name} R_ARM_THM_JUMP11 target "
+                        f"0x{target_address:08X} is outside its signed narrow "
+                        "branch range"
+                    )
+                struct.pack_into(
+                    "<H", leaf, offset, 0xE000 | ((displacement >> 1) & 0x7FF)
+                )
+                resolved_relocations.append(
+                    {
+                        **relocation,
+                        "runtime_address": site_address,
+                        "runtime_address_hex": f"0x{site_address:08X}",
+                        "target_address_hex": f"0x{target_address:08X}",
+                    }
+                )
+                continue
             link = relocation_name == "R_ARM_THM_CALL"
             canonical = encode_thumb_branch(0, 0, link=link)
             if bytes(leaf[offset:offset + 4]) != canonical:
@@ -4930,47 +4999,77 @@ def patch_component(
             )
         for relocation in relocations:
             target_expected_hex = relocation.get("target_expected_hex")
-            if target_expected_hex is None:
+            target_expected_size = relocation.get("target_expected_size")
+            target_expected_sha256 = relocation.get("target_expected_sha256")
+            if target_expected_hex is None and target_expected_size is None:
                 continue
             target_address = relocation.get("target_address")
             if not isinstance(target_address, int):
                 raise BuildError(
                     f"in-place leaf {function_name} literal target is invalid"
                 )
-            try:
-                expected_literal = bytes.fromhex(str(target_expected_hex))
-            except ValueError as error:
-                raise BuildError(
-                    f"in-place leaf {function_name} literal target bytes "
-                    "are invalid hexadecimal"
-                ) from error
-            if not expected_literal:
-                raise BuildError(
-                    f"in-place leaf {function_name} literal target bytes "
-                    "cannot be empty"
-                )
+            if target_expected_hex is not None:
+                try:
+                    expected_literal = bytes.fromhex(str(target_expected_hex))
+                except ValueError as error:
+                    raise BuildError(
+                        f"in-place leaf {function_name} literal target bytes "
+                        "are invalid hexadecimal"
+                    ) from error
+                if not expected_literal:
+                    raise BuildError(
+                        f"in-place leaf {function_name} literal target bytes "
+                        "cannot be empty"
+                    )
+                expected_length = len(expected_literal)
+                expectation_report = {"expected_hex": expected_literal.hex()}
+            else:
+                if (
+                    target_expected_size != 4
+                    or not isinstance(target_expected_sha256, str)
+                    or not re.fullmatch(r"[0-9a-f]{64}", target_expected_sha256)
+                ):
+                    raise BuildError(
+                        f"in-place leaf {function_name} literal target hash "
+                        "contract is invalid"
+                    )
+                expected_length = target_expected_size
+                expectation_report = {
+                    "expected_size": target_expected_size,
+                    "expected_sha256": target_expected_sha256,
+                }
             target_offset = (
                 preamble_bytes + target_address - run_base
             )
-            target_end = target_address + len(expected_literal)
+            target_end = target_address + expected_length
             if (
                 target_address < run_base
                 or target_offset < preamble_bytes
-                or target_offset + len(expected_literal) > len(base)
+                or target_offset + expected_length > len(base)
             ):
                 raise BuildError(
                     f"in-place leaf {function_name} literal target "
                     f"0x{target_address:08X} exceeds the stock Apollo payload"
                 )
             observed_literal = original[
-                target_offset:target_offset + len(expected_literal)
+                target_offset:target_offset + expected_length
             ]
-            if observed_literal != expected_literal:
+            if target_expected_hex is not None and observed_literal != expected_literal:
                 raise BuildError(
                     f"in-place leaf {function_name} literal target "
                     f"0x{target_address:08X}: expected "
                     f"{expected_literal.hex()}, observed "
                     f"{observed_literal.hex()}"
+                )
+            if (
+                target_expected_hex is None
+                and sha256(observed_literal) != target_expected_sha256
+            ):
+                raise BuildError(
+                    f"in-place leaf {function_name} literal target "
+                    f"0x{target_address:08X}: expected SHA-256 "
+                    f"{target_expected_sha256}, observed "
+                    f"{sha256(observed_literal)}"
                 )
             protected_literal_ranges.append(
                 (target_address, target_end, function_name)
@@ -4979,7 +5078,7 @@ def patch_component(
                 {
                     "runtime_address": target_address,
                     "runtime_address_hex": f"0x{target_address:08X}",
-                    "expected_hex": expected_literal.hex(),
+                    **expectation_report,
                 }
             )
 
@@ -5210,9 +5309,25 @@ def patch_component(
 
 def atomic_write(path: Path, data: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp")
-    temporary.write_bytes(data)
-    temporary.replace(path)
+    mode = path.stat().st_mode & 0o777 if path.exists() else 0o644
+    temporary: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="wb",
+            prefix=f".{path.name}.",
+            dir=path.parent,
+            delete=False,
+        ) as handle:
+            temporary = Path(handle.name)
+            handle.write(data)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.chmod(temporary, mode)
+        os.replace(temporary, path)
+        temporary = None
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def atomic_write_json(path: Path, value: Any) -> None:
@@ -5763,6 +5878,7 @@ def record_leaf_profile_pins(
     for config_key, kind in (
         ("isolated_leaves", "scalar"),
         ("in_place_leaves", "scalar"),
+        ("cave_leaves", "scalar"),
         ("relocated_leaves", "relocated"),
     ):
         reported = indexed(report.get(config_key, []))

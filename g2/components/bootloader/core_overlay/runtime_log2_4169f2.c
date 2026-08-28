@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 typedef __UINT32_TYPE__ open_cfw_bootloader_log2_word;
 
 #ifndef OPEN_CFW_BOOTLOADER_RUNTIME_BIT_WIDTH_4169A4

@@ -119,10 +119,10 @@ class IARRuntimeMathErrnoCandidateTests(unittest.TestCase):
         overlay = json.loads(OVERLAY.read_text(encoding="utf-8"))
         leaves = {item["function"]: item for item in overlay["relocated_leaves"]}
         offsets = {
-            "open_cfw_iar_domain_error": (130942, 132810),
-            "open_cfw_iar_sqrtf": (130962, 132830),
-            "open_cfw_iar_range_error": (130990, 132858),
-            "open_cfw_iar_errno_address": (131010, 132878),
+            "open_cfw_iar_domain_error": (190790, 192562),
+            "open_cfw_iar_sqrtf": (190810, 192582),
+            "open_cfw_iar_range_error": (190838, 192610),
+            "open_cfw_iar_errno_address": (190858, 192630),
         }
         for name, (apple_offset, linux_offset) in offsets.items():
             with self.subTest(name=name):
@@ -166,24 +166,24 @@ class IARRuntimeMathErrnoCandidateTests(unittest.TestCase):
         self.assertEqual(
             overlay["expected"],
             {
-                "overlay_size": 180782,
-                "overlay_sha256": "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
-                "component_size": 3704178,
-                "component_sha256": "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+                "overlay_size": 429058,
+                "overlay_sha256": "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+                "component_size": 3952454,
+                "component_sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
             },
         )
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4482672, "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"),
+            (4745526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"),
         )
         self.assertEqual(
             (
                 manifest["package"]["profiles"]["linux-clang"]["expected_size"],
                 manifest["package"]["profiles"]["linux-clang"]["expected_sha256"],
             ),
-            (4447098, "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e"),
+            (4529116, "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"),
         )
 
     @unittest.skipUnless(

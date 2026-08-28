@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the six linked G2
  * pb_service_conversate.c entries. Diagnostic-only EasyLogger and hexdump

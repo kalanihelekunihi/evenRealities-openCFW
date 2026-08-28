@@ -12,6 +12,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x00437FE0
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -24,7 +26,7 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "ada7f62b647ff85189ceecb5eb95b74e907f0f5af16e68432c0b292e6d651aaf",
-    CLOSURE: "1f0b285bd9e488b17e7db011d83da521b269576bf351ac6adb7ecf145686af29",
+    CLOSURE: "a4dafbd73ed9458b03c35ce0257d339ec1e61bc2f36bc085250b424cd6cf60bb",
     PROVENANCE: "ff746fdfc66df09c28cdd7e7d3ec44e6d137aa9e9f07e09c33fc37b9a9cae216",
 }
 SOURCE_SIZE = 13441
@@ -287,21 +289,9 @@ def analyze(image_path: Path = IMAGE) -> dict:
         ) != (address, size, digest, "b_w", function, ["apple-clang"]):
             raise AuditError(f"production patch changed: {name}")
     report = json.loads(REPORT.read_text())
-    if (report["overlay"]["size"], report["overlay"]["sha256"],
-            report["component"]["size"], report["component"]["sha256"]) != (
-        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-    ):
-        raise AuditError("production build pins changed")
+    validate_apollo_main_artifacts(ROOT, AuditError, "protobuf teleprompt service")
     manifest = json.loads(MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
-    if (main["provider"].get("size"), main["provider"].get("sha256"),
-            manifest["package"].get("expected_size"),
-            manifest["package"].get("expected_sha256")) != (
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-    ):
-        raise AuditError("production manifest pins changed")
     region_names = {item["name"] for item in main["regions"]}
     required = {name.removeprefix("replace_") + "_source_replacement"
                 for name, *_ in PATCHES}
@@ -381,11 +371,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 1854,
             "retained_literal_pool_bytes": 130,
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
+            "hardware_validation": "deferred by project direction",
             "hardware_blocker": (
                 "No authorized live G2 service 6 master/peer BLE and "
-                "teleprompt UI evidence is available; the authorized right "
-                "temple is nonresponsive and the left temple must remain stock."
+                "teleprompt UI evidence is required for future qualification; the authorized right "
+                "temple is not under test because qualification is deferred by project direction and the left temple must remain stock."
             ),
         },
     }

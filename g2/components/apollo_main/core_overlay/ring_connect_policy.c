@@ -1,7 +1,7 @@
 /*
  * OpenCFW clean-room G2 Ring connection policy.
  *
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * This implementation is derived from the authenticated public behavior and
  * ABI inventory of the linked G2 object.  It contains no vendor source text.

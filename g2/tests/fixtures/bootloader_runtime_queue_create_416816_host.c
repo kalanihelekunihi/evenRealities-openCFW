@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 #include <stdint.h>
 static uintptr_t critical_value,result_value,static_calls,dynamic_calls,observed_count,observed_size,observed_messages,observed_control,observed_kind;
 static uintptr_t critical(void){return critical_value;}

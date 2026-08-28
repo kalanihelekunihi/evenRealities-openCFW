@@ -66,16 +66,16 @@ class RuntimeCmsisMessageQueueGetTests(unittest.TestCase):
     def test_production_admits_final_message_queue_wrapper(self) -> None:
         config = json.loads(CONFIG.read_text())
         leaf = next(x for x in config["relocated_leaves"] if x["function"] == "open_cfw_cmsis_message_queue_get")
-        self.assertEqual((leaf["expected"]["size"], leaf["expected"]["offset"], leaf["expected"]["sha256"]), (132, 135160, "836d2d1b5ec73c9db04e9ca0742a9ad607203e71d7205ad449aebbc368c002ec"))
+        self.assertEqual((leaf["expected"]["size"], leaf["expected"]["offset"], leaf["expected"]["sha256"]), (132, 195008, "836d2d1b5ec73c9db04e9ca0742a9ad607203e71d7205ad449aebbc368c002ec"))
         linux = leaf["toolchain_profiles"]["linux-clang"]["expected"]
-        self.assertEqual((linux["size"], linux["offset"], linux["sha256"]), (132, 137036, "8053225658c68aa3b5f90a6bc35a455300611a9f775b112b726149796af7fbf7"))
+        self.assertEqual((linux["size"], linux["offset"], linux["sha256"]), (132, 196788, "8053225658c68aa3b5f90a6bc35a455300611a9f775b112b726149796af7fbf7"))
         patch = next(x for x in config["patch_sites"] if x["target_function"] == "open_cfw_cmsis_message_queue_get")
         self.assertEqual((patch["runtime_address"], patch["expected_size"]), (0x449B3C, 128))
         manifest = json.loads(MANIFEST.read_text())
         main = manifest["component_overrides"]["apollo_main"]
         region = next(x for x in main["regions"] if x["name"] == "apollo_cmsis_message_queue_get_source_leaf")
-        self.assertEqual((region["file_offset"], region["size"], region["target_address"]), (3658556, 132, 8082204))
-        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4482672, "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"))
+        self.assertEqual((region["file_offset"], region["size"], region["target_address"]), (3718404, 132, 8142052))
+        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4745526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"))
 
 
 if __name__ == "__main__": unittest.main()

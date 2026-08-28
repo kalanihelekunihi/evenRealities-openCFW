@@ -725,21 +725,25 @@ class EasyLoggerOutputCandidateTests(unittest.TestCase):
             json.dumps(manifest, sort_keys=True),
             MAKEFILE.read_text(encoding="utf-8"),
         ))
-        self.assertEqual(
-            overlay.get("functions", [])[612:615],
-            [
-                "open_cfw_g2_easylogger_async_record_build_single_owner",
-                "open_cfw_g2_easylogger_async_submit",
-                FUNCTION,
-            ],
-        )
+        functions = overlay.get("functions", [])
+        output_index = functions.index(FUNCTION)
+        self.assertEqual(functions[output_index - 2:output_index + 1], [
+            "open_cfw_g2_easylogger_async_record_build_single_owner",
+            "open_cfw_g2_easylogger_async_submit",
+            FUNCTION,
+        ])
         self.assertIn(SOURCE.name, production_text)
         leaves = {
             leaf["function"]: leaf
-            for leaf in overlay["relocated_leaves"][43:46]
+            for leaf in overlay["relocated_leaves"]
+            if leaf["function"] in {
+                "open_cfw_g2_easylogger_async_record_build_single_owner",
+                "open_cfw_g2_easylogger_async_submit",
+                FUNCTION,
+            }
         }
         self.assertTrue(leaves[FUNCTION]["strict_relocation_contract"])
-        self.assertEqual(leaves[FUNCTION]["expected"]["offset"], 118_916)
+        self.assertEqual(leaves[FUNCTION]["expected"]["offset"], 178_764)
         self.assertEqual(
             leaves[FUNCTION]["expected"]["closure_size"],
             1_778,
@@ -747,7 +751,8 @@ class EasyLoggerOutputCandidateTests(unittest.TestCase):
         self.assertEqual(len(leaves[FUNCTION]["relocations"]), 109)
         sites = {
             site["runtime_address"]: site
-            for site in overlay["patch_sites"][578:581]
+            for site in overlay["patch_sites"]
+            if site["runtime_address"] == START
         }
         self.assertEqual(sites[START]["target_function"], FUNCTION)
         self.assertEqual(sites[START]["expected_size"], STOCK_SIZE)
@@ -762,7 +767,7 @@ class EasyLoggerOutputCandidateTests(unittest.TestCase):
         )
         appended = next(
             region for region in regions
-            if region.get("target_address") == 0x007B_13A8
+            if region.get("name") == "apollo_easylogger_output_source_text"
         )
         self.assertEqual(appended["size"], 1_614)
         self.assertEqual(appended["address_status"], "source_compiled")

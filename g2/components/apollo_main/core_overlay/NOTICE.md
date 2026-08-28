@@ -949,7 +949,7 @@ and retain the observed null-to-0x34 result. The broader snapshot and the
 independently named research candidate remain excluded from production.
 
 `components/shared/freertos_cli/runtime_freertos_cli_console_*.c` and
-`runtime_freertos_cli_console.h` are GPL-3.0-only clean-room openCFW source for
+`runtime_freertos_cli_console.h` are MIT clean-room openCFW source for
 the recovered G2 console-task glue. They are not attributed to upstream
 FreeRTOS-Plus-CLI. Production retains the existing FreeRTOS+CLI interpreter
 ABI, 22 proprietary registration groups, 76 proprietary command descriptors,
@@ -1392,7 +1392,7 @@ seven live stock entries. Linux reproduction and hardware execution remain
 deferred.
 
 `components/apollo_main/core_overlay/candidates/iar_runtime_memory.S` is
-GPL-3.0-only clean-room openCFW source recreating the authenticated G2 IAR
+MIT clean-room openCFW source recreating the authenticated G2 IAR
 void-EABI public memcpy, aligned-entry memcpy, and memmove semantics. It does
 not contain or claim provenance from IAR library source. Three
 selector-isolated relocation-free sections replace the complete callable stock
@@ -1401,7 +1401,7 @@ Apple and Linux production artifacts are independently pinned; hardware timing
 remains deferred.
 
 `components/apollo_main/core_overlay/candidates/iar_runtime_math_errno.S` is
-GPL-3.0-only clean-room openCFW source recreating the bounded G2 hard-float
+MIT clean-room openCFW source recreating the bounded G2 hard-float
 `sqrtf`, EDOM/ERANGE setters, and errno-address semantics. It contains no IAR
 library source and makes no exact EWARM provenance claim. The candidate is
 target-qualified and installed by guarded stock redirects under independently
@@ -1487,14 +1487,14 @@ get-state wrapper. It calls source-owned IRQ/scheduler-state providers and the
 authenticated retained FreeRTOS V10.5.1 scheduler-start boundary; it does not
 claim ownership of the G2 scheduler globals or Apollo port integration.
 
-`at_tp.c` is an independently authored GPL-3.0-only clean-room reconstruction
+`at_tp.c` is an independently authored MIT clean-room reconstruction
 of the retained G2 `platform/service/eAT/at_tp.c` behavior. It uses only
 authenticated command behavior, retained literal addresses, and explicit
 output/touch-driver/CMSIS-delay ABI bindings; no historical vendor source or
 stock object bytes are included. Hardware validation remains blocked by
 unavailable authorized physical G2 touch-panel evidence.
 
-`at_buzzer.c` is an independently authored GPL-3.0-only clean-room
+`at_buzzer.c` is an independently authored MIT clean-room
 reconstruction of the retained G2 `platform/service/eAT/at_buzzer.c` command
 behavior. It contains no historical vendor source or stock object bytes. One
 strict-relocation Thumb leaf replaces the complete stock handler and pool while
@@ -1513,7 +1513,7 @@ retained-string interfaces. Physical touch/proximity electrical behavior,
 event timing, debounce, and gesture interpretation remain blocked by
 unavailable authorized G2 hardware evidence.
 
-`drv_cy8c4046fni.c` is an independently authored GPL-3.0-only clean-room
+`drv_cy8c4046fni.c` is an independently authored MIT clean-room
 reconstruction of the retained G2 `driver/touch/drv_cy8c4046fni.c` host-driver
 behavior. It contains no historical vendor source or stock executable bytes.
 Twenty-three strict-relocation Thumb leaves replace every executable stock
@@ -1546,7 +1546,7 @@ not a claim about Even's historical checkout. Physical OTA CCC, reset,
 disconnect, notification timing, and peer interoperability validation remains
 blocked by unavailable authorized G2/EM9305 evidence.
 
-`ble_ring_profile.c` is an independently authored GPL-3.0-only clean-room
+`ble_ring_profile.c` is an independently authored MIT clean-room
 reconstruction of the retained G2 `platform/ble/profiles/ring/profile_ring.c`
 behavior. It contains no historical private G2 source or stock executable
 bytes. All seven linked functions route to strict-relocation Thumb leaves;
@@ -1556,7 +1556,7 @@ Physical service discovery, delayed CCC timing, ATT RX/TX behavior, controller
 concurrency, and peer interoperability validation remains blocked by
 unavailable authorized G2/EM9305 evidence.
 
-`callback_facades.c` is an independently authored GPL-3.0-only clean-room
+`callback_facades.c` is an independently authored MIT clean-room
 reconstruction of the retained G2
 `platform/service/callback_mgr/cb_charge.c` and `cb_msg_notif.c` facade
 behavior. It contains no historical private G2 source or stock executable
@@ -1566,7 +1566,7 @@ diagnostic/type pools are retained; EasyLogger calls are omitted as
 non-controlling diagnostics. These pure facades perform no direct hardware
 operation.
 
-`callback_manager.c` is an independently authored GPL-3.0-only clean-room
+`callback_manager.c` is an independently authored MIT clean-room
 reconstruction of the retained G2
 `platform/service/callback_mgr/callback_manager.c` behavior. It contains no
 historical private G2 source or stock executable bytes. Eight strict-relocation
@@ -1575,7 +1575,7 @@ source-owned synchronized heap wrappers or redirected manager helpers. The
 118-byte stock diagnostic pool is retained; EasyLogger calls are omitted as
 non-controlling observability.
 
-`cb_ring_battery.c` is an independently authored GPL-3.0-only clean-room
+`cb_ring_battery.c` is an independently authored MIT clean-room
 reconstruction of the retained G2
 `platform/service/callback_mgr/cb_ring_battery.c` behavior. It contains no
 historical private G2 source or stock executable bytes. Five strict-relocation
@@ -1584,13 +1584,13 @@ source-owned callback manager or retained ring-battery consumer. The 30-byte
 stock type/diagnostic/path/literal pool is retained; EasyLogger calls are
 omitted as non-controlling observability.
 
-`ux_battery_sync.c` is an independently authored GPL-3.0-only clean-room
+`ux_battery_sync.c` is an independently authored MIT clean-room
 reconstruction of the retained G2 `app/ux/ux_battery_sync/ux_battery_sync.c`
 service-record callback. It contains no historical private G2 source or stock
 executable bytes. Its strict relocations bind only to bounded first-party
 providers; the 84-byte stock diagnostic/path/literal pool is retained.
 
-`service_ring_battery.c` is an independently authored GPL-3.0-only clean-room
+`service_ring_battery.c` is an independently authored MIT clean-room
 reconstruction of the retained G2
 `platform/service/ring_battery/service_ring_battery.c` behavior. It contains no
 historical private G2 source or stock executable bytes. Five strict-contract
@@ -1599,7 +1599,7 @@ the recovered local and peer service-record transports. The 44-byte stock
 diagnostic/path/literal pool is retained. EasyLogger diagnostics are omitted as
 non-controlling observability.
 
-`pb_service_ring.c` is an independently authored GPL-3.0-only clean-room
+`pb_service_ring.c` is an independently authored MIT clean-room
 reconstruction of the four linked entries from the retained G2
 `platform/protocols/pb_service_ring/pb_service_ring.c` object plus the bounded
 nanopb output callback required by the recovered encoder ABI. It contains no
@@ -1621,7 +1621,7 @@ EasyLogger diagnostics are omitted as non-controlling observability. Live
 service-`0x81` temple/case interoperability and physical case-state validation
 are blocked by unavailable authorized physical evidence.
 
-`pb_service_conversate.c` is an independently authored GPL-3.0-only clean-room
+`pb_service_conversate.c` is an independently authored MIT clean-room
 reconstruction of the six linked entries from the retained G2
 `platform/protocols/pb_service_conversate/pb_service_conversate.c` object plus
 bounded output-buffer and message-zero helpers required by the recovered ABI.
@@ -1632,7 +1632,7 @@ EasyLogger/hexdump diagnostics are omitted as non-controlling observability.
 Live service-`0x0B` master/peer BLE, timing, and conversate UI validation are
 blocked by unavailable authorized physical evidence.
 
-`pb_service_teleprompt.c` is an independently authored GPL-3.0-only clean-room
+`pb_service_teleprompt.c` is an independently authored MIT clean-room
 reconstruction of the seven linked entries from the retained G2
 `platform/protocols/pb_service_teleprompt/pb_service_teleprompt.c` object plus
 bounded output-buffer and message-zero helpers required by the recovered ABI.
@@ -1643,7 +1643,7 @@ Stock EasyLogger/hexdump diagnostics are omitted as non-controlling
 observability. Live service-6 master/peer BLE, timing, and teleprompt UI
 validation are blocked by unavailable authorized physical evidence.
 
-`pb_service_even_ai.c` is an independently authored GPL-3.0-only clean-room
+`pb_service_even_ai.c` is an independently authored MIT clean-room
 reconstruction of the 25 linked entries from the retained G2
 `platform/protocols/pb_service_even_ai/pb_service_even_ai.c` object plus the
 bounded output-buffer and message-zero helpers required by the recovered ABI.
@@ -1654,7 +1654,7 @@ pool bytes remain retained. Stock EasyLogger/hexdump/assert diagnostics are
 omitted as non-controlling observability. Live service-7 master/peer BLE and
 Even-AI UI validation are blocked by unavailable authorized physical evidence.
 
-`pb_service_onboarding.c` is an independently authored GPL-3.0-only clean-room
+`pb_service_onboarding.c` is an independently authored MIT clean-room
 reconstruction of the nine linked entries from the retained G2
 `platform/protocols/pb_service_onboarding/pb_service_onboarding.c` object plus
 bounded output-buffer, zero-fill, and common-encode helpers required by the
@@ -1679,7 +1679,7 @@ BLE, notification-control, whitelist-control, whitelist-check,
 app-not-whitelisted, and nanopb interoperability are blocked by unavailable
 authorized physical evidence.
 
-`pb_service_pair_mgr.c` is an independently authored GPL-3.0-only clean-room
+`pb_service_pair_mgr.c` is an independently authored MIT clean-room
 reconstruction of the 20 linked entries from the retained G2
 `platform/protocols/pb_service_dev_config/pb_service_pair_mgr.c` object plus a
 bounded output-buffer writer required by the recovered ABI. It contains no
@@ -1691,7 +1691,7 @@ Live service-`0x80` security-auth, pipe-role, ring-connect, BLE-parameter,
 disconnect, unpair, peer BLE, and nanopb interoperability are blocked by
 unavailable authorized responsive physical evidence.
 
-`pb_service_setting.c` is an independently authored GPL-3.0-only clean-room
+`pb_service_setting.c` is an independently authored MIT clean-room
 reconstruction of the eleven linked entries from the retained G2
 `platform/protocols/pb_service_setting/pb_service_setting.c` object plus
 bounded output-buffer and zero-fill helpers required by the recovered ABI. It
@@ -1716,7 +1716,7 @@ factory-reset, restart, heartbeat, clock-sync, persistence, audio-control, and
 nanopb interoperability are blocked by unavailable authorized physical
 evidence.
 
-`pb_service_quicklist.c` is an independently authored GPL-3.0-only clean-room
+`pb_service_quicklist.c` is an independently authored MIT clean-room
 reconstruction of the ten linked entries from the retained G2
 `platform/protocols/pb_service_quicklist/pb_service_quicklist.c` object plus
 bounded buffer-write, message-zero, and common-transport helpers required by
@@ -1732,7 +1732,7 @@ authorized physical evidence.
 
 `transport_protocol.c`, `ota_transport.c`, `efs_transport.c`,
 `efs_service.c`, and `ota_service.c` are independently authored
-GPL-3.0-only clean-room reconstructions of the authenticated G2-local packet
+MIT clean-room reconstructions of the authenticated G2-local packet
 transports and EFS/OTA file-service policy. They contain no historical private
 G2 source or stock executable bytes. Fifty-nine selector-isolated
 strict-relocation Thumb leaves replace 32,798 linked stock function bytes while
@@ -1751,7 +1751,7 @@ authenticated official literal/alignment bytes. Live CCC/RX/TX timing,
 controller concurrency, and dual-device interoperability are blocked by the
 absence of an authorized responsive G2/EM9305 peer and physical capture.
 
-`system_alert.c` is an independently authored GPL-3.0-only clean-room
+`system_alert.c` is an independently authored MIT clean-room
 reconstruction of the seven callable entries in the authenticated G2
 `app/gui/SystemAlert/systemAlert.c` object. It contains no historical private
 G2 source or stock executable bytes. Seven selector-isolated strict-relocation
@@ -1760,7 +1760,7 @@ and 170-byte official pool remain retained. Live display, event-timing, IMU,
 and paired-temple validation is blocked by unavailable authorized physical
 evidence.
 
-`system_close.c` is an independently authored GPL-3.0-only clean-room
+`system_close.c` is an independently authored MIT clean-room
 reconstruction of all twenty callable entries in the authenticated G2
 `app/gui/SystemClose/systemClose.c` object. It contains no historical private
 G2 source or stock executable bytes. Twenty selector-isolated strict-relocation
@@ -1781,7 +1781,7 @@ Live mounted-media mutation, persistence, corruption recovery, and concurrent
 CLI validation is blocked by unavailable authorized responsive G2 hardware
 and writable physical test media.
 
-`service_nvdb.c` is an independently authored GPL-3.0-only clean-room
+`service_nvdb.c` is an independently authored MIT clean-room
 reconstruction of all five callable entries in the authenticated G2 factory
 NVDB lifecycle object. Five strict-relocation Thumb leaves replace all 930
 callable stock bytes while 122 authenticated official pool/alignment bytes

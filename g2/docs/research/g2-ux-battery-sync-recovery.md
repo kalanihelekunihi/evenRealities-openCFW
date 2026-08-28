@@ -26,7 +26,7 @@ reveal the private generating commit.
 ## Production routing
 
 `components/apollo_main/core_overlay/ux_battery_sync.c` now supplies the
-GPL-3.0-only clean-room service-record callback. One guarded redirect replaces
+MIT clean-room service-record callback. One guarded redirect replaces
 the complete 836-byte stock body with 158 compiled Thumb bytes plus two bytes
 of alignment. Eleven strict relocations terminate at the bounded charger,
 ring-battery, and source-owned callback providers; the authenticated 84-byte

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacements for the non-floating helper cluster used by the G2
  * 2.2.6.10 application-wide logging formatter at 0x00473036.

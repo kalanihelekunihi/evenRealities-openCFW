@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 #ifndef OPEN_CFW_TLSF_COMPAT_STDDEF_H
 #define OPEN_CFW_TLSF_COMPAT_STDDEF_H
 

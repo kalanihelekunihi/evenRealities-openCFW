@@ -1,0 +1,9 @@
+kind	name	start	end	size	sha256	disposition	provider	license_status	evidence
+function	am_hal_mspi_initialize	0x00424a5a	0x00424aea	144	7708fb5a3bfd2f3f137722f96dc65a9a566da5c70470a014a565df98e2ed87dc	exact_dual_profile_candidate	AmbiqSuite 5.1.0 semantics with reviewed target adapter	BSD-3-Clause	module validation, handle validation, allocation guard, exact state initialization, caller, literal, and stock-byte closure
+caller	boot_mspi_initialize	0x0042029a	0x0042029e	4	-	retained_caller	G2 bootloader MSPI setup	firmware provenance	direct BL reaches am_hal_mspi_initialize
+literal	g_mspi_state_base	0x004251ac	0x004251b0	4	-	authenticated_literal	AmbiqSuite g_MSPIState	BSD-3-Clause	value 0x2001caa0 and stock PC-relative load resolve identically
+abi	mspi_state_stride	0x00000000	0x000008d0	2256	-	authenticated_layout	AmbiqSuite 5.1.0 am_hal_mspi_state_t	BSD-3-Clause	four states; prefix +0, module +4, clock frequency +0x0c, TCB +0x18, clock source +0x8c9, XIP-off delay +0x8cc
+retained_data	alignment	0x00424aea	0x00424aec	2	96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7	authenticated_alignment	stock firmware	firmware provenance	two zero bytes between function and state-base literal
+retained_data	g_mspi_state_base_literal	0x00424aec	0x00424af0	4	9b725a263fa8efdc9db13e5ad62b70166e989bcf42cb6020b325e954d34983eb	authenticated_literal	AmbiqSuite g_MSPIState	BSD-3-Clause	value 0x2001caa0
+successor	am_hal_mspi_configure	0x00424af0	0x00424bd4	228	7e844f8b690703208e8e932371914cc19506c0d8adf682bfe03a28e55357ad8c	next_sequential_frontier	AmbiqSuite 5.1.0 am_hal_mspi_configure	BSD-3-Clause	not yet admitted
+hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project evidence gate	directed hardware testing is deferred by project direction; future physical state allocation, SRAM, cold-boot, and subsequent MSPI operation evidence remains required

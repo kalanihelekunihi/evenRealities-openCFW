@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Print the reviewed toolchain-profile id that matches the given compiler.
 
 openCFW pins compiled overlays byte-for-byte, so a build must declare which

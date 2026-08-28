@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 #include <stdint.h>
 #include "../../components/bootloader/core_overlay/runtime_tlsf_block_primitives_4169fc.c"
 

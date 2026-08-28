@@ -131,6 +131,6 @@ def audit(kind: str) -> dict[str, Any]:
         "source_owned_bytes_added": 164 if kind == "slave" else 174,
         "stock_bytes_replaced": sum(route[1] for route in routes.values()),
         "hardware_validation": (
-            "blocked by unavailable authorized G2/EM9305 pairing evidence"
+            "deferred by project direction; future qualification requires authorized G2/EM9305 pairing evidence"
         ),
     }

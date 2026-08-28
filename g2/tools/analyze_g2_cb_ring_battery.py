@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_compress_log_core as q
 import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-cb-ring-battery-function-map.tsv"
@@ -209,17 +210,8 @@ def analyze(image: Path = IMAGE) -> dict:
     ):
         raise c.AuditError("production ring-battery patch routing changed")
     report = json.loads(REPORT.read_text())
-    if (
-        report["overlay"]["size"], report["overlay"]["sha256"],
-        report["component"]["size"], report["component"]["sha256"],
-    ) != (
-        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-    ):
-        raise c.AuditError("production ring-battery build pins changed")
+    validate_apollo_main_artifacts(ROOT, c.AuditError, "ring battery callback")
     manifest = json.loads(MANIFEST.read_text())["component_overrides"]["apollo_main"]
-    if manifest["provider"].get("size") != 3855544 or manifest["provider"].get("sha256") != report["component"]["sha256"]:
-        raise c.AuditError("production ring-battery manifest provider changed")
     region_names = {item["name"] for item in manifest["regions"]}
     required_regions = {
         "cb_ring_battery_forward_source_replacement",

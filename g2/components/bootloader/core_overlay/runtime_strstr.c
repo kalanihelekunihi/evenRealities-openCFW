@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 
 __attribute__((used, noinline))
 char *open_cfw_bootloader_strstr(

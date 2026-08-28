@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /*
  * Clean-room behavioral reconstruction of the three-function
  * service_kvdb_temperature_unit.c object in the official G2 image.

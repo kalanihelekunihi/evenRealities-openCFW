@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room product BLE message processor reconstructed from stock
  * bleProcMsg at 0x004B75CE...0x004B7D31.

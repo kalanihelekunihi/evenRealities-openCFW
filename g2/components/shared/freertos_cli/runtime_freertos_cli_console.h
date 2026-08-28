@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production clean-room reconstruction of the G2 FreeRTOS+CLI console task.
  * The implementation is split into independently placeable source leaves.

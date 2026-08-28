@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Apollo protected-MRAM record loader matched to stock entry
  * 0x004795DC (_CopyRecListFromNvmToRam).

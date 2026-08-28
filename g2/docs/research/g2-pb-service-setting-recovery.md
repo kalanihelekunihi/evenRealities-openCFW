@@ -1,8 +1,8 @@
 # G2 `pb_service_setting.c` recovery
 
 Status: software-closed and production-routed from independently authored,
-selector-isolated C; live service-9 validation is explicitly blocked by
-unavailable authorized responsive hardware. Run addresses use
+selector-isolated C; live service-9 qualification is deferred by project
+direction. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -52,7 +52,7 @@ tag 5 and use nested selectors 1 and 2 respectively.
 The retained source path has two literal references but no standard assertion
 record. Eleven retained diagnostic strings provide the exact source names.
 The historical source tree and license remain unavailable, so source-only
-functions are not inferred. The independently authored GPL-3.0-only
+functions are not inferred. The independently authored MIT
 `components/apollo_main/core_overlay/pb_service_setting.c` provides 13
 selector-isolated functions: the 11 recovered entries plus bounded buffer and
 zero helpers. They compile to 1,650 Thumb text bytes plus 14 alignment bytes;
@@ -67,6 +67,9 @@ arguments, monotonic notification magic, and both status selectors. The
 component, manifest, 4,510,208-byte package, 2,218,642-byte flash plan,
 complete-service ledger, and origin accounting are pinned. Live service-9
 peer BLE, full-status, recalibration, silent-mode, and nanopb interoperability
-validation remains blocked: the authorized right temple is nonresponsive and
-the left temple must remain stock. This is a hardware-evidence blocker, not a
-remaining setting software gap.
+qualification is blocked by unavailable physical evidence. The prior nonresponsive-fault
+inference is superseded: the charging case was accidentally bumped during
+lunch and caused the disconnect, rather than a device or flashing fault.
+Future acceptance still requires authorized peer BLE, recalibration,
+silent-mode, full-status, and nanopb interoperability evidence; none is a
+remaining setting software gap or a software-routing blocker.

@@ -1,7 +1,7 @@
 # G2 documentation
 
-Seven reference documents and 502 per-closure audits. This file says which to
-read for what.
+Reference documents and per-closure audits. This file says which to read for
+what.
 
 ## The reference documents
 
@@ -15,6 +15,10 @@ read for what.
 | [`transparent-source-ledger.md`](transparent-source-ledger.md) | the measured result of the above, regenerated from the build |
 | [`progress.md`](progress.md) | *how did we get here?* — running narrative of the reconstruction |
 | [`functional-capability-ledger.md`](functional-capability-ledger.md) | *what functional gaps remain?* — domain-organized gap ledger (protocol, security, platform, health, system, storage, sensors, hardware services, deployment) with per-row status and acceptance gates |
+| [`hardware-validation-policy.md`](hardware-validation-policy.md) | *why is physical qualification absent?* — hardware testing is deliberately deferred, and the earlier right-temple “nonresponsive” premise is superseded |
+| [`community-source-distribution.md`](community-source-distribution.md) | *how can the community receive and reproduce G2 openCFW without redistributed vendor bytes?* — deterministic bundle, local hydration, and extracted-tree smoke build |
+| [`release-licensing-and-redistribution.md`](release-licensing-and-redistribution.md) | *which licenses and redistribution authorities apply?* — live compiled-source inventory and the fail-closed stock-binary boundary |
+| [`../tools/analyze_g2_completion_readiness.py`](../tools/analyze_g2_completion_readiness.py) | *what remains before G2 is classified, source-complete, and releasable?* — one byte-conserving, six-component software-only gate (`make completion-readiness`) |
 
 The first four are **SHA-256 pinned** by
 `tests/test_runtime_nanopb_decode_svarint_production.py` and
@@ -54,8 +58,9 @@ reword history.
 
 ## Reading order
 
-New to the tree? [`../README.md`](../README.md) for what the G2 build is, then
-`source-coverage.md` for where it stands, then a family in `research/` for how a
+New to the tree? [`../README.md`](../README.md) for what the G2 build is. To
+share it, start with `community-source-distribution.md`; to audit what remains,
+continue with `source-coverage.md` and then a family in `research/` for how a
 particular claim was established.
 
 Chasing a specific function? `source-coverage.md` names its closure; the audit

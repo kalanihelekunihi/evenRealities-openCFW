@@ -19,7 +19,7 @@ returns exactly one. Mixed or invalid records return zero. Host tests pin all
 short circuits, defaults, bounds, selection cases, six-/seven-argument AAPCS
 ordering, output-pointer behavior, and return propagation.
 
-`runtime_dispatch_4160fe.c` is a 3,805-byte GPL-3.0-or-later clean-room
+`runtime_dispatch_4160fe.c` is a 3,805-byte MIT clean-room
 implementation with SHA-256
 `bab9266e01939a709741121492a9e3e8f3efd9439d5f4bfb43dd733862762fe5`.
 Apple clang emits a 166-byte leaf at overlay offset 3,140/runtime

@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 #include "runtime_ambiq_gpu_patch_shadow_blur_vg_candidate.h"
 #include <stdint.h>
 

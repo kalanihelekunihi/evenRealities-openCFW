@@ -13,11 +13,15 @@ class AnalyzeBootloaderMemcmpTests(unittest.TestCase):
     def test_fail_closed_audit(self) -> None:
         completed = subprocess.run(["python3", "tools/analyze_g2_bootloader_memcmp.py", "--json"], cwd=ROOT, check=True, capture_output=True, text=True)
         report = json.loads(completed.stdout)
-        self.assertEqual(report["status"], "implemented-in-source / hardware-validation-blocked")
+        self.assertEqual(report["status"], "implemented-in-source / hardware-validation-deferred-by-project-direction")
         self.assertEqual(report["software_gap_count"], 0)
         self.assertEqual(report["stock"]["whole_image_callers"], 6)
         self.assertEqual(report["source"]["size"], 28)
-        self.assertEqual(report["provider"]["retained_official_bytes"], 138057)
+        self.assertEqual(
+            report["provider"]["source_owned_bytes"]
+            + report["provider"]["retained_official_bytes"],
+            147_296,
+        )
         self.assertFalse(report["hardware_block"]["physical_evidence_available"])
 
 

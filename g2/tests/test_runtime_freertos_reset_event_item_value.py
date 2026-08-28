@@ -90,9 +90,9 @@ TARGET_SHA256 = (
     "04fee613f7c2fb46a3e6f5832f7ea618"
     "75543a30160757ffd63579b58f0c45c6"
 )
-APPLE_OFFSET = 115_356
+APPLE_OFFSET = 175_204
 LINUX_OFFSET = 117_188
-APPLE_RUNTIME_ADDRESS = 0x007B_05C0
+APPLE_RUNTIME_ADDRESS = 0x007B_EF88
 LINUX_RUNTIME_ADDRESS = 0x007B_0CE8
 APPLE_REPLACEMENT = "5af379bd" + "00bf" * 9
 APPLE_REPLACEMENT_SHA256 = (
@@ -720,7 +720,7 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 "offset": APPLE_OFFSET,
                 "padding_before": 2,
                 "runtime_address": APPLE_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007B05C0",
+                "runtime_address_hex": "0x007BEF88",
                 "size": 26,
             },
         )
@@ -734,7 +734,7 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
         overlay = (
             ROOT / self.production["overlay"]["artifact"]
         ).read_bytes()
-        self.assertEqual(overlay[115_354:115_356], b"\x00\x00")
+        self.assertEqual(overlay[115_354:175_204], b"\x00\x00")
         self.assertEqual(
             overlay[APPLE_OFFSET:APPLE_OFFSET + 26].hex(),
             TARGET_BYTES,
@@ -761,12 +761,12 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                167_426,
+                429_058,
                 (
-                    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
                 ),
-                945,
-                884,
+                2_631,
+                2_374,
             ),
         )
         self.assertEqual(
@@ -783,14 +783,14 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 self.production["component"]["opaque_base_bytes"],
             ),
             (
-                3_690_822,
+                3_952_454,
                 (
-                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
                 ),
-                121_634,
-                121_812,
-                165_622,
-                3_401_548,
+                409_066,
+                409_246,
+                431_334,
+                3_111_914,
             ),
         )
 
@@ -810,15 +810,15 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 )
             },
             {
-                "expected_size": 4_469_316,
+                "expected_size": 4_745_526,
                 "expected_sha256": (
-                    "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"
+                    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
                 ),
                 "profiles": {
                     "linux-clang": {
-                        "expected_size": 4_447_098,
+                        "expected_size": 4_529_116,
                         "expected_sha256": (
-                            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e"
+                            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"
                         ),
                     },
                 },
@@ -978,7 +978,7 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 (
                     "apollo_freertos_task_increment_mutex_held_count_"
                     "source_leaf"
-                ): (3_638_780, 24, 0x007B_05DC, "source_compiled"),
+                ): (3_638_780, 24, 0x007B_EFA4, "source_compiled"),
             },
         )
 

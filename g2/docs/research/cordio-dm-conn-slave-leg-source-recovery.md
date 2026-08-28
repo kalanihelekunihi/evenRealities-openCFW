@@ -40,7 +40,10 @@ fail-closed and pinned by `make cordio-dm-conn-slave-leg-closure`.
 
 Live directed-advertising, accepted/failed connection callbacks, retained
 table installation, BLE peer/controller timing, RF behavior, and paired-temple
-interoperation remain hardware-blocked: the only authorized right temple is
-nonresponsive and the left temple must remain stock. No hardware-dependent
+interoperation qualification is blocked by unavailable physical evidence. The earlier
+nonresponsive-fault inference is superseded: the charging case was
+accidentally bumped during lunch and caused that test disconnect, not a device
+or flashing fault. Future acceptance still requires authorized peer,
+controller-timing, RF, and paired-temple evidence. No hardware-dependent
 functional-completeness claim is made. The adjacent `dm_conn_slave.c`
 update/API unit is the next bounded software closure candidate.

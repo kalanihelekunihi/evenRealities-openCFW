@@ -5,7 +5,7 @@
 The G2 stock image now has exact boundaries and ingress closure for the two
 linked functions from the Ambiq Cordio FreeRTOS assert/trace port:
 `WsfTrace` and `WsfAssert`. Together they account for 208 authenticated code
-bytes. A GPL-3.0-only, production-excluded behavioral candidate and focused
+bytes. A MIT, production-excluded behavioral candidate and focused
 host/ARM tests cover both functions. No production overlay or manifest was
 changed.
 

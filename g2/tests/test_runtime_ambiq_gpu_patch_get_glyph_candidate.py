@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Qualify the production-excluded Ambiq GPU vector-glyph lookup candidate."""
 
 from __future__ import annotations
@@ -124,7 +125,7 @@ class AmbiqGpuPatchGetGlyphCandidateTests(unittest.TestCase):
 
     def test_candidate_is_independently_named_and_production_excluded(self) -> None:
         source = SOURCE.read_text()
-        self.assertIn("SPDX-License-Identifier: GPL-3.0-only", source)
+        self.assertIn("SPDX-License-Identifier: MIT", source)
         self.assertNotIn("\nlv_ambiq_get_glyph(", source)
         production = "\n".join(
             path.read_text(errors="replace")

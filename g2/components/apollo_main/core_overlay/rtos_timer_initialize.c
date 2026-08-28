@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Shared RTOS timer-object initialization matched to stock entry 0x0047E75A.
  */

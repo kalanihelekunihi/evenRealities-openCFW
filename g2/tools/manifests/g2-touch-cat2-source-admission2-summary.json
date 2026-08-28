@@ -1,0 +1,29 @@
+{
+  "adapter": {
+    "path": "components/shared/touch/runtime_touch_cat2_adapters.c",
+    "sha256": "0504c79d87d1c79d3a953699568c6b73e86c061696c60f490d8c83e9025cbb3d",
+    "target_object_bytes": 3332
+  },
+  "analysis_mode": "offline exact source-order/register/caller signature and Cortex-M0+ compile gate; no hardware or MMIO execution",
+  "component": "G2 touch CAT2 source admission batch 2",
+  "exclusions": "mixed CAPSENSE/CAT2, Em_EEPROM EULA, application/startup, and system/DFU batches unchanged",
+  "integration": "isolated Apache provider routes; not production-routed",
+  "metrics": {
+    "admitted_functions": 9,
+    "cat2_gap_after": 36,
+    "cat2_gap_before": 45,
+    "flash_functions": 7,
+    "gpio_functions": 1,
+    "row_digest": "fb1160f25a1f4a0fa843147aa879f8e8038756dc64742b8cf007940c087eacb9",
+    "scb_i2c_functions": 1,
+    "semantic_gap_after": 201,
+    "semantic_gap_before": 210,
+    "unsafe_batch_admissions": 0
+  },
+  "remaining": {
+    "cat2_candidates": 36,
+    "total_semantic_source_gap": 201
+  },
+  "row_count": 9,
+  "schema_version": 1
+}

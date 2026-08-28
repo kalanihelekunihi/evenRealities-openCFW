@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacement for the G2 2.2.6.10 Apollo event-side abort/reset
  * helper at 0x0058DFB2. Exact stock behavior is recorded in EVIDENCE.md.

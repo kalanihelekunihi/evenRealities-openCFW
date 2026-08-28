@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-excluded clean-room expression of lv_ambiq_dashline_create().
  * The exact public GCC body, exact stock IAR body, and all six Nema effects

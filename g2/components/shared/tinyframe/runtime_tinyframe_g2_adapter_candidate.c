@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-excluded G2 object/port adapter around the byte-authenticated
  * MightyPork/TinyFrame core. The upstream files remain unmodified.

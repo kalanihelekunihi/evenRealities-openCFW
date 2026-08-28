@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded BLE message-transmit allocation and enqueue core matched to stock
  * 0x0047564E...0x00475A37.

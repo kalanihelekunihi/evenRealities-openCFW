@@ -1,0 +1,75 @@
+# G2 bootloader post-MSPI source closure and frontier census
+
+The 57,153-byte bootloader suffix `[0x00426536,0x00434477)` is now covered by
+an exhaustive, byte-conserving 253-span ledger. The ledger does not equate an
+analysis gap with data and does not equate a body shared with Apollo main with
+licensed source. Every byte is instead assigned one of six explicit states:
+
+| State | Spans | Bytes |
+|---|---:|---:|
+| Production AmbiqSuite source | 2 | 1,726 |
+| Retained typed literal pools | 2 | 28 |
+| Exact Apollo-main source candidates | 58 | 4,550 |
+| Typed unresolved executable bodies | 124 | 19,534 |
+| Ambiguous control-flow envelope | 1 | 188 |
+| Non-entry mixed/data intervals | 66 | 31,127 |
+| **Total** | **253** | **57,153** |
+
+The authoritative partition is
+`tools/manifests/g2-bootloader-post-mspi-frontier.tsv`. “Non-entry mixed/data”
+means only that the conservative Thumb census found no function entry in that
+interval. It is deliberately not a claim that the interval contains no code.
+
+## Exact AmbiqSuite attribution
+
+The first two bodies after `am_hal_mspi_interrupt_clear` are the expected next
+public functions in the authenticated AmbiqSuite 5.1.0 `am_hal_mspi.c`
+translation unit:
+
+| Boot span | Bytes | Upstream function | Independent Apollo-main analogue |
+|---|---:|---|---|
+| `[0x00426536,0x004267fe)` | 712 | `am_hal_mspi_interrupt_service` | 692 identical bytes; 20 address-coupled bytes in 10 runs |
+| `[0x00426808,0x00426bfe)` | 1,014 | `am_hal_mspi_power_control` | 985 identical bytes; 29 address-coupled bytes in 15 runs |
+
+The boot interrupt service has one direct caller at `0x0041FE22`. Power control
+has three at `0x0041FE3E`, `0x0041FE54`, and `0x004202AC`. The independent main
+link places the corresponding same-size functions at `0x004C240E` and
+`0x004C26E0`. The small byte differences are confined to linked calls and
+address material; the control-flow and instruction bodies otherwise agree.
+
+`runtime_mspi_interrupt_power_426536.S` is licensed BSD-3-Clause consistently
+with the pinned upstream snapshot at commit
+`5efc0228528a8adce5eae0d226fac85d2551eb3b`. It is reviewable Thumb-2
+mnemonic assembly: executable instructions use no `.byte`, `.short`, or
+`.word` encoding directives. Named blocks document the handle ABI,
+high-priority/CQ callback paths, power-state dispatch, register ordering, and
+shutdown behavior from the upstream functions. Named external symbols preserve
+the provider ABI rather than hiding calls as instruction bytes.
+
+Apple Clang 21 and Homebrew LLVM/Clang 22 emit identical 712- and 1,014-byte
+unrelocated sections. Their strict eight- and twelve-call relocation contracts
+bind the authenticated providers, after which both sections match the stock
+bodies exactly. The two sections are installed in place, so all callers and
+PC-relative pool references retain their stock addresses.
+
+## Pools and remaining boundary
+
+The source admission intentionally excludes:
+
+- `[0x004267FE,0x00426808)`, the 10-byte interrupt-service pool and alignment;
+- `[0x00426BFE,0x00426C10)`, the 18-byte power-control pool and alignment.
+
+These bytes remain official compatibility data. The production provider
+contract currently coalesces the second pool into the following official
+region, while the finer frontier ledger preserves its exact typed ownership.
+The remaining `[0x00426C10,0x00434477)` queue is fully bounded by the ledger but
+is not production source-owned. Its 58 complete cross-image matches are a
+prioritized candidate queue, not an attribution or redistribution claim.
+
+The canonical boot provider stays byte-identical because both admissions are
+exact in-place replacements. Live accounting changes from 34,995 to 36,721
+source-owned bytes and from 112,301 to 110,575 retained official bytes; their
+147,296-byte conserved domain does not change.
+
+Hardware validation is blocked by unavailable physical evidence. This work performs no
+MMIO execution, device probing, flashing, signing, package assembly, or release.

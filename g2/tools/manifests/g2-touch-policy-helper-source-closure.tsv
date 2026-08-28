@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+stock_entry	evidence_name	source_export	closure	provider_contract	evidence_limit
+0x0268	touch_config_read_adapter	open_cfw_touch_policy_config_read	implemented	storage_ready + storage_read	256-byte logical bound and provider-status translation
+0x071C	saved_proximity_baseline_read	open_cfw_touch_policy_saved_baseline_read	implemented	none	magic/config-valid gate then u16 baseline read
+0x0738	touch_config_load_from_eeprom	open_cfw_touch_policy_config_load	implemented	storage_ready + storage_read	UNVE defaults, eight-byte read, magic validation; defaults retained on failure
+0x07FC	attention_release_timeout_rearm	open_cfw_touch_policy_attention_rearm	provider_contract_fail_closed	attention_release_timeout_rearm(delay_ms=200)	transaction is external; no GPIO or timing implementation in MIT candidate
+0x0BE8	timeout_default_1000_if_zero	open_cfw_touch_policy_timeout_default	implemented	none	zero becomes 1000; nonzero remains unchanged
+0x0BFC	gesture_policy_helper_0bfc	open_cfw_touch_policy_gesture_step	provider_contract_fail_closed	gesture_policy_step(observation,result)	exact private gesture sub-policy unavailable; no fallback semantics invented
+0x0D70	touch_gesture_state_machine	open_cfw_touch_policy_gesture_step	provider_contract_fail_closed	gesture_policy_step(observation,result)	shared typed gesture provider; exact stock state-machine ABI unavailable
+0x111C	proximity_baseline_update_adapter	open_cfw_touch_policy_baseline_update	provider_contract_fail_closed	baseline_update(saved,current)	provider result commits atomically; missing/error leaves state unchanged

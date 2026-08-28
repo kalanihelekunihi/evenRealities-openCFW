@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 
 unsigned int open_cfw_test_mcuctrl_control_registers[5];
 unsigned int open_cfw_test_mcuctrl_control_argument8_sequence[8];

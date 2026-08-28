@@ -17,7 +17,7 @@ The whole-image aligned Thumb `BL` scan finds exactly one direct caller at
 
 `runtime_guarded_teardown_41fa98.c` is 4,521 bytes, SHA-256
 `ad8f5eba68fce82f9e3d7807f2aed0ef207e76fff8840e7497429f9c06e960e9`,
-under GPL-3.0-or-later. It preserves the complete observable behavior:
+under MIT. It preserves the complete observable behavior:
 
 - return without side effects unless guard byte `0x20027198` equals exactly
   one;

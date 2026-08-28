@@ -25,7 +25,7 @@ version discriminator or reveals the private generating commit.
 ## Production closure
 
 `components/apollo_main/core_overlay/callback_facades.c` independently
-implements all ten linked entries as GPL-3.0-only, selector-isolated C. Ten
+implements all ten linked entries as MIT, selector-isolated C. Ten
 guarded redirects replace all 380 stock body bytes with 208 compiled Thumb
 bytes plus six alignment bytes. Ten strict relocations bind only the recovered
 generic callback-manager init, deinit, register, unregister, and notify

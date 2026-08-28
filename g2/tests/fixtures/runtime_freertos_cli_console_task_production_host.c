@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Native host seam for the production seven-leaf G2 CLI console task.
  * The candidate fixture remains the single implementation of the retained

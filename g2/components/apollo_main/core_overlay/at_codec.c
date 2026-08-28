@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 /* Clean-room reconstruction of platform/service/eAT/at_codec.c. */
 #include <stdint.h>
 

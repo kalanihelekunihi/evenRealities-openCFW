@@ -185,14 +185,14 @@ PRODUCTION_PINS = {
             "size": 216,
             "sha256": "ee7695d521943e9e85f026f000f8b9bf25517ffd96cf85a6e263ba129217a94e",
             "alignment": 4,
-            "offset": 117_984,
+            "offset": 177_832,
             "unrelocated_sha256": "ee7695d521943e9e85f026f000f8b9bf25517ffd96cf85a6e263ba129217a94e",
         },
         "open_cfw_freertos_queue_give_from_isr": {
             "size": 212,
             "sha256": "1dab465785d5495fa530b4e6ff4494bc57f31287fbf558cebe491bdb18206054",
             "alignment": 4,
-            "offset": 118_200,
+            "offset": 178_048,
             "unrelocated_sha256": "a96ce1e9c86adad777fc709a3cead4e943f8c35bb9118ba9922bac393e45a5ba",
         },
     },
@@ -201,14 +201,14 @@ PRODUCTION_PINS = {
             "size": 216,
             "sha256": "1e2768a9ba0c5008c152ef2718c08c93876445cdd9105ad346925609523e761a",
             "alignment": 4,
-            "offset": 119_844,
+            "offset": 179_596,
             "unrelocated_sha256": "1e2768a9ba0c5008c152ef2718c08c93876445cdd9105ad346925609523e761a",
         },
         "open_cfw_freertos_queue_give_from_isr": {
             "size": 212,
             "sha256": "1dab465785d5495fa530b4e6ff4494bc57f31287fbf558cebe491bdb18206054",
             "alignment": 4,
-            "offset": 120_060,
+            "offset": 179_812,
             "unrelocated_sha256": "a96ce1e9c86adad777fc709a3cead4e943f8c35bb9118ba9922bac393e45a5ba",
         },
     },
@@ -221,16 +221,16 @@ PRODUCTION_RELOCATION = {
 }
 PRODUCTION_AGGREGATES = {
     "apple-clang": {
-        "overlay_size": 167_426,
-        "overlay_sha256": "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
-        "component_size": 3_690_822,
-        "component_sha256": "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+        "overlay_size": 429_058,
+        "overlay_sha256": "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+        "component_size": 3_952_454,
+        "component_sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
     },
     "linux-clang": {
-        "overlay_size": 145_208,
-        "overlay_sha256": "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
-        "component_size": 3_668_604,
-        "component_sha256": "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
+        "overlay_size": 212_664,
+        "overlay_sha256": "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+        "component_size": 3_736_060,
+        "component_sha256": "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
     },
 }
 

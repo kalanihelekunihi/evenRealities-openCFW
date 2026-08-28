@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room BLE WSF task and resource initialization reconstructed from
  * stock 0x004D0A4C...0x004D0AF5.

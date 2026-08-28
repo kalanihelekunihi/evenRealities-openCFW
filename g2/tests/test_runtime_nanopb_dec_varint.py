@@ -208,7 +208,7 @@ class NanopbDecVarintTests(unittest.TestCase):
             item for item in overlay["relocated_leaves"]
             if item["function"] == "open_cfw_nanopb_dec_varint"
         )
-        self.assertEqual(leaf["expected"]["offset"], 125644)
+        self.assertEqual(leaf["expected"]["offset"], 185396)
         self.assertEqual(leaf["expected"]["closure_size"], 340)
         site = next(
             item for item in overlay["patch_sites"]

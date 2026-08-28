@@ -56,8 +56,8 @@ UNDEFINED = sorted({symbol for values in RELOCATIONS.values() for _, _, symbol i
 
 TARGET_PINS = {
     "apple-clang": {
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
-        "object": (2996, "e4b33afe75f57531cb822532de9a5d0ed099f2979d97df065ad6c993c52d6235"),
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "object": (2996, "3304cd98addda539f567274e63cd134656eec268781bd798d8a34443eeb0a93b"),
         "functions": {
             FUNCTIONS[0]: (24, "9339e1916f5f27fa52c49d5a809968ae5455940c478fe35951e1d28694c473a9"),
             FUNCTIONS[1]: (24, "9339e1916f5f27fa52c49d5a809968ae5455940c478fe35951e1d28694c473a9"),

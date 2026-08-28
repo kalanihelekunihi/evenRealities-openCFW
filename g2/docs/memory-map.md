@@ -150,9 +150,84 @@ The reviewed order is:
 | `0x0041FA98` | `0x0041FAD0` | 56 B | Source-replaced guarded boot teardown | Two fail-stop status stages, state clear, pin reconciliation, and guard clear |
 | `0x0041FAD0` | `0x0041FADC` | 12 B | Guarded-teardown literal pool | Official guard/configuration pointers retained |
 | `0x0041FADC` | `0x0041FCF6` | 538 B | Source-replaced pin-group dispatcher | Two banks, cumulative subtype groups, SRAM configuration words, and ordered pin configuration |
-| `0x0041FCF6` | `0x00426506` | 26,640 B | Even bootloader after pin-group dispatcher and before MSPI interrupt clear | Official compatibility bytes retained; includes remaining executable service gaps |
+| `0x0041FCF6` | `0x0041FD70` | 122 B | Pin/allocator literal pool | Authenticated retained non-executable data |
+| `0x0041FD70` | `0x0041FDA8` | 56 B | Source-replaced TLSF pool initializer | Pool clear, TLSF creation, handle publication, diagnostic record, and zero return |
+| `0x0041FDA8` | `0x0041FDC0` | 24 B | Allocator/IRQ literal pool | Authenticated retained non-executable data |
+| `0x0041FDC0` | `0x0041FDDE` | 30 B | Source-replaced NVIC interrupt-enable entry | Signed IRQ guard, bank derivation, and set-enable write |
+| `0x0041FDDE` | `0x0041FE06` | 40 B | Source-replaced NVIC priority entry | External IRQ and system-handler priority-byte selection |
+| `0x0041FE06` | `0x0041FE28` | 34 B | Source-replaced MSPI ISR wrapper | Status get, clear, and service through the retained HAL |
+| `0x0041FE28` | `0x0041FE48` | 32 B | Source-replaced MSPI enable | Idempotent active-state check and retained control call |
+| `0x0041FE48` | `0x0041FE62` | 26 B | Source-replaced MSPI disable | Retained control call and active-state clear |
+| `0x0041FE62` | `0x0041FE9C` | 58 B | Source-replaced event-flags service init | Idempotent static creation, handle publication, and failure diagnostic |
+| `0x0041FE9C` | `0x0041FED4` | 56 B | Source-replaced event-flags acquire | Null-handle guard, wait-forever acquire, and failure diagnostic |
+| `0x0041FED4` | `0x0041FF08` | 52 B | Source-replaced event-flags release | Null-handle guard, release, and failure diagnostic |
+| `0x0041FF08` | `0x0041FF1E` | 22 B | Source-replaced MSPI guard enter | Event lock followed by bypass-gated MSPI disable |
+| `0x0041FF1E` | `0x0041FF34` | 22 B | Source-replaced MSPI guard exit | Bypass-gated MSPI enable followed by event unlock |
+| `0x0041FF34` | `0x0041FF60` | 44 B | Source-replaced MSPI XIP-config updater | Low-byte selector mutates retained config byte five and submits control request 16 |
+| `0x0041FF60` | `0x0041FF74` | 20 B | Source-replaced longest consecutive-one run helper | Complete word-load and `value &= value << 1` loop |
+| `0x0041FF74` | `0x00420002` | 142 B | Source-replaced longest-one run center selector | Complete bit scan, first-longest selection, midpoint bias, and boundary adjustments |
+| `0x00420002` | `0x004201BA` | 440 B | Source-replaced exhaustive MSPI timing scan | 36 coarse rows × 32 fine delays, JEDEC-ID pass masks, first-longest row selection, centered result, and diagnostics |
+| `0x004201BA` | `0x00420254` | 154 B | Source-replaced automatic MSPI timing selection | Zeroed scan object, success publication, failure preservation, and retained diagnostics |
+| `0x00420254` | `0x00420476` | 546 B | Source-replaced low-level MSPI initializer | HAL setup, XIP/pin/interrupt configuration, cleanup, state publication, and diagnostics |
+| `0x00420476` | `0x0042052A` | 180 B | Source-replaced MX25U25643G public initializer | Low-level init, timing selection, JEDEC-ID read, final service setup, and diagnostics |
+| `0x0042052A` | `0x0042059E` | 116 B | Source-replaced MX25U25643G soft reset | Reset-enable/reset commands, ordered delays, and failure-only diagnostics |
+| `0x0042059E` | `0x004205F4` | 86 B | Source-replaced MX25U25643G JEDEC-ID reader | Command `0x9F`, three-byte receive, failure diagnostic, and big-endian identifier packing |
+| `0x004205F4` | `0x0042069E` | 170 B | Source-replaced MX25U25643G read-transfer wrapper | Handle/argument validation, 24-byte transfer descriptor, blocking HAL call, and failure diagnostic |
+| `0x0042069E` | `0x0042074E` | 176 B | Source-replaced MX25U25643G write-transfer wrapper | Address/length validation, exact write descriptor, blocking HAL call, and failure diagnostic |
+| `0x0042074E` | `0x004207A2` | 84 B | Source-replaced MX25U25643G busy-status reader | Command `0x05`, one-byte read, bit-7 decode, raw failure return, and diagnostic |
+| `0x004207A2` | `0x004207F4` | 82 B | Source-replaced MX25U25643G ready poll | 200 fast polls, caller-bounded context-aware slow phase, and timeout result |
+| `0x004207F4` | `0x00420800` | 12 B | Source-replaced MX25U25643G fixed ready-poll wrapper | Calls the two-phase poll with a 500-iteration slow bound |
+| `0x00420800` | `0x0042086C` | 108 B | Source-replaced MX25U25643G address-mode reader | Reads command `0x15`, preserves raw errors, decodes bit 5, and reports three-byte mode |
+| `0x0042086C` | `0x00420890` | 36 B | Retained MX25U25643G literal region | Authenticated non-executable compatibility data preceding enter-four-byte-mode |
+| `0x00420890` | `0x00420978` | 232 B | Source-replaced MX25U25643G enter-four-byte-mode service | Ready checks, write-enable, command `0xB7`, address-mode verification, write-disable, and exact status policy |
+| `0x00420978` | `0x00420984` | 12 B | Retained MX25U25643G literal region | Authenticated non-executable compatibility data preceding write-enable |
+| `0x00420984` | `0x004209BE` | 58 B | Source-replaced MX25U25643G write-enable wrapper | Command `0x06`, zeroed transfer fields, raw status, and failure-only diagnostic |
+| `0x004209BE` | `0x004209C4` | 6 B | Retained MX25U25643G literal/alignment region | Authenticated non-executable compatibility data preceding write-disable |
+| `0x004209C4` | `0x004209FC` | 56 B | Source-replaced MX25U25643G write-disable wrapper | Command `0x04`, zeroed transfer fields, raw status, and failure-only diagnostic |
+| `0x004209FC` | `0x00420A08` | 12 B | Retained MX25U25643G literal region | Authenticated non-executable compatibility data preceding sector erase |
+| `0x00420A08` | `0x00420ADA` | 210 B | Source-replaced MX25U25643G sector-erase service | 4-KiB validation, guarded serial-mode command `0x20`, ready polls, write-latch sequencing, cleanup, and exact status/diagnostic policy |
+| `0x00420ADA` | `0x00420B0C` | 50 B | Retained MX25U25643G literal/alignment region | Authenticated non-executable compatibility data preceding page program |
+| `0x00420B0C` | `0x00420C14` | 264 B | Source-replaced MX25U25643G page-program service | Handle/buffer/length validation, 256-byte page splitting, guarded command `0x02`, per-page ready/write-latch sequencing, cleanup, and exact status/diagnostic policy |
+| `0x00420C14` | `0x00420C5C` | 72 B | Retained MX25U25643G literal/alignment region | Authenticated non-executable compatibility data preceding QE configuration |
+| `0x00420C5C` | `0x00420DFA` | 414 B | Source-replaced MX25U25643G status-register-2 QE service | Fixed-handle check, QE/protection-bit policy, commands `0x05`/`0x01`, raw failures, verification, and exact diagnostics |
+| `0x00420DFA` | `0x00420E08` | 14 B | Retained MSPI device-reconfiguration literal pool | Authenticated non-executable compatibility data |
+| `0x00420E08` | `0x00420E8C` | 132 B | Source-replaced MSPI device-reconfiguration service | Disable, device configure, enable, published-instance/device pin-group selection, collapsed error status, and exact diagnostics |
+| `0x00420E8C` | `0x00420F0C` | 128 B | Source-replaced MX25U25643G quad-mode selector | Template clone, exact field overrides, reconfiguration, XIP enable, HAL request `0x18`, and diagnostics |
+| `0x00420F0C` | `0x00420F10` | 4 B | Authenticated literal pool | Non-executable compatibility data retained |
+| `0x00420F10` | `0x00420F6A` | 90 B | Source-replaced MX25U25643G serial-mode selector | Reconfiguration, XIP disable, HAL request `0x18` with mode byte zero, and diagnostics |
+| `0x00420F6A` | `0x00420F70` | 6 B | Authenticated successor gap | Non-executable literal/alignment bytes retained |
+| `0x00420F70` | `0x00420FF2` | 130 B | Source-replaced MX25U25643G guarded blocking read | Validation, guard, quad-mode selection, ready wait, exact read descriptor, blocking HAL transfer, and guard release |
+| `0x00420FF2` | `0x004210C8` | 214 B | Retained predecessor literal/alignment pool | Authenticated non-executable compatibility data preceding directory bootstrap |
+| `0x004210C8` | `0x004211B0` | 232 B | Source-replaced LittleFS directory bootstrap | Checks or creates `/firmware`, `/ota`, `/user`, and `/log` with exact open/mkdir/close and error policy |
+| `0x004211B0` | `0x00421210` | 96 B | Source-replaced LittleFS format/bootstrap service | Unmount, format, mount, directory bootstrap, diagnostics, and exact status mapping |
+| `0x00421210` | `0x004212D8` | 200 B | Source-replaced LittleFS initializer and boot-counter service | Mount/format retry, directory recovery, readiness publication, and persisted `boot_count` increment |
+| `0x004212D8` | `0x00421310` | 56 B | Source-replaced LittleFS block-read callback | Partition address mapping, guarded flash read, diagnostic, and `LFS_ERR_IO` mapping |
+| `0x00421310` | `0x00421348` | 56 B | Source-replaced LittleFS block-program callback | Entry redirects to a 60-byte fixed-address leaf in authenticated reclaimed initializer body space; partition address mapping, guarded page program, diagnostic, and `LFS_ERR_IO` mapping |
+| `0x00421348` | `0x00421372` | 42 B | Source-replaced LittleFS block-erase callback | Entry redirects to a 48-byte fixed-address leaf in authenticated reclaimed initializer body space; partition address mapping, guarded sector erase, diagnostic, and `LFS_ERR_IO` mapping |
+| `0x00421372` | `0x004213D4` | 98 B | Authenticated LittleFS callback literal/alignment gap | Official non-executable compatibility bytes retained |
+| `0x004213D4` | `0x004213D8` | 4 B | Source-replaced LittleFS sync callback | Redirects to the four-byte fixed source cave at `0x00421280` and returns zero |
+| `0x004213D8` | `0x004213DA` | 2 B | Exact in-place source identity helper | Apple/Linux C compilation reproduces the complete stock body |
+| `0x004213DA` | `0x004213E6` | 12 B | Exact in-place source thresholded address mapper | Values below `0x200` pass through; other values add `0x280` with 32-bit wrap |
+| `0x004213E6` | `0x004213EC` | 6 B | Mapped-memory selector entry replacement | Generated branch and alignment to the authenticated source cave |
+| `0x004213EC` | `0x004214C8` | 220 B | Mapped-memory selector/copy source cave | Compiled clean-room C with strict calls to the index helpers and copy provider |
+| `0x004214C8` | `0x004214E6` | 30 B | Odd-selector wrapper source cave | Compiled clean-room C with strict tail branch to the primary selector |
+| `0x004214E6` | `0x00421548` | 98 B | Mapped-memory selector generated tail | Authenticated generated NOP fill |
+| `0x00421548` | `0x0042156E` | 38 B | Odd-selector wrapper entry replacement | Generated backward branch and NOP fill |
+| `0x0042156E` | `0x00421584` | 22 B | Mapped-memory literal/alignment pool | Authenticated non-executable compatibility data retained |
+| `0x00421584` | `0x004215AE` | 42 B | Exact in-place source population-count helper | Apple/Linux C compilation reproduces the complete stock body |
+| `0x004215AE` | `0x004215DC` | 46 B | Exact in-place source bitmap nonempty helper | Tests the two words selected by the low selector byte |
+| `0x004215DC` | `0x004215FE` | 34 B | Exact in-place source bitmap membership helper | Tests one narrowed bit in the selected two-word row |
+| `0x004215FE` | `0x00421632` | 52 B | Exact in-place source bitmap population-count helper | Sums both words through the source-owned helper at `0x00421584` |
+| `0x00421632` | `0x004216B2` | 128 B | Exact in-place source bitmap update helper | Validates selector/bit, then sets or clears one bit in the two-word row |
+| `0x004216B2` | `0x004216D4` | 34 B | Exact in-place source bounded poll-delay helper | Delays by 10 and decrements while activity and remaining count are nonzero |
+| `0x004216D4` | `0x004217D2` | 254 B | Exact in-place source mode/configuration service | Query/default merge, critical section, bitmap-state policy, apply/disable fallback, copy and publication |
+| `0x004217D2` | `0x00426506` | 19,764 B | Even bootloader before MSPI interrupt clear | Official compatibility bytes retained; next authenticated executable body begins at `0x004217D2` |
 | `0x00426506` | `0x00426536` | 48 B | Source-replaced AmbiqSuite 5.1.0 `am_hal_mspi_interrupt_clear` | Generated redirect over the authenticated complete stock body |
-| `0x00426536` | `0x00434477` | 57,153 B | Remaining Even bootloader | Official compatibility bytes retained |
+| `0x00426536` | `0x004267FE` | 712 B | Source-owned AmbiqSuite 5.1.0 `am_hal_mspi_interrupt_service` | Reviewable BSD-3-Clause Thumb-2 mnemonics; exact after 8 named call relocations |
+| `0x004267FE` | `0x00426808` | 10 B | MSPI interrupt-service literal pool | Official compatibility data retained |
+| `0x00426808` | `0x00426BFE` | 1,014 B | Source-owned AmbiqSuite 5.1.0 `am_hal_mspi_power_control` | Reviewable BSD-3-Clause Thumb-2 mnemonics; exact after 12 named call relocations |
+| `0x00426BFE` | `0x00426C10` | 18 B | MSPI power-control literal pool | Official compatibility data retained |
+| `0x00426C10` | `0x00434477` | 55,399 B | Remaining classified bootloader frontier | 249-span typed executable/mixed/data ledger; official compatibility bytes retained |
 | `0x00434477` | `0x00434478` | 1 B | Bootloader source-overlay alignment | Generated zero byte |
 | `0x00434478` | `0x004344D2` | 90 B | Bootloader littlefs source overlay | Ten Clang-built exact upstream leaves |
 | `0x004344D2` | `0x0043450A` | 56 B | Bootloader littlefs v2.10.1 `lfs_npw2` | Mini-linked fallback body |
@@ -3804,3 +3879,807 @@ event-mask data at `0x0078D6DC..0x0078D6F4`.
 The maintained layer preserves the authenticated `hciCmdCb` at `0x20073A90`
 and external `hciCb` at `0x20073870`. All linked executable spans in the stock
 object are source-owned; the retained 14 bytes are alignment/literal data.
+
+## Bootloader MX25U25643G quad-mode selector
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Stock quad selector | `[0x00420E8C,0x00420F0C)` | 128 | Complete entry redirect and NOP fill |
+| Retained successor pool | `[0x00420F0C,0x00420F10)` | 4 | Authenticated non-executable literal |
+| Apple source leaf | `0x00437BCC` | 152 | Overlay offset 14,164 |
+| Linux source leaf | `0x00437BB4` | 152 | Overlay offset 14,140 |
+
+The Apple provider closes at `0x00437C64`, leaving `0x39C` bytes before the
+protected main-image boundary. The next retained executable service begins at
+`0x00420F10`; it remains a software frontier.
+
+## Bootloader MX25U25643G serial-mode selector
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Retained predecessor pool | `[0x00420F0C,0x00420F10)` | 4 | Authenticated non-executable literal |
+| Stock serial selector | `[0x00420F10,0x00420F6A)` | 90 | Complete entry redirect and NOP fill |
+| Retained successor gap | `[0x00420F6A,0x00420F70)` | 6 | Authenticated non-executable/alignment bytes |
+| Apple source leaf | `0x00437C64` | 124 | Overlay offset 14,316 |
+| Linux source leaf | `0x00437C4C` | 124 | Overlay offset 14,292 |
+
+The Apple provider closes at `0x00437CE0`, leaving `0x320` bytes before the
+protected main-image boundary. The next retained executable service begins at
+`0x00420F70`; it remains a software frontier.
+
+## Bootloader MX25U25643G guarded blocking read
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Retained predecessor gap | `[0x00420F6A,0x00420F70)` | 6 | Authenticated non-executable/alignment bytes |
+| Stock guarded read | `[0x00420F70,0x00420FF2)` | 130 | Complete entry redirect and NOP fill |
+| Retained successor pool | `[0x00420FF2,0x004210C8)` | 214 | Authenticated literal/alignment data |
+| Apple source leaf | `0x00437CE0` | 152 | Overlay offset 14,440 |
+| Linux source leaf | `0x00437CC8` | 152 | Overlay offset 14,416 |
+
+The Apple provider closes at `0x00437D78`, leaving `0x288` bytes before the
+protected main-image boundary. The next retained executable service begins at
+`0x004210C8`; it remains a software frontier.
+
+## Bootloader LittleFS directory bootstrap
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Retained predecessor pool | `[0x00420FF2,0x004210C8)` | 214 | Authenticated literal/alignment data |
+| Stock directory bootstrap | `[0x004210C8,0x004211B0)` | 232 | Complete entry redirect and NOP fill |
+| Retained successor initializer | `[0x004211B0,0x00421210)` | 96 | Authenticated executable software frontier |
+| Apple source leaf | `0x00437D78` | 220 | Overlay offset 14,592 |
+| Linux source leaf | `0x00437D60` | 224 | Overlay offset 14,568 |
+
+The Apple provider closes at `0x00437E54`, leaving `0x1AC` bytes before the
+protected main-image boundary. The next retained executable service begins at
+`0x004211B0`; it remains a software frontier.
+
+## Bootloader LittleFS format/bootstrap service
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Stock format/bootstrap | `[0x004211B0,0x00421210)` | 96 | Complete entry redirect and NOP fill |
+| Retained successor initializer | `[0x00421210,0x004212D8)` | 200 | Authenticated executable software frontier |
+| Apple source leaf | `0x00437E54` | 108 | Overlay offset 14,812 |
+| Linux source leaf | `0x00437E40` | 112 | Overlay offset 14,792 |
+
+The Apple provider closes at `0x00437EC0`, leaving `0x140` bytes before the
+protected main-image boundary. The next retained executable service begins at
+`0x00421210`; it remains a software frontier.
+
+## Bootloader LittleFS initializer and boot counter
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Stock initializer | `[0x00421210,0x004212D8)` | 200 | Complete entry redirect and NOP fill |
+| Retained successor read callback | `[0x004212D8,0x00421310)` | 56 | Authenticated executable software frontier |
+| Apple source leaf | `0x00437EC0` | 260 | Overlay offset 14,920 |
+| Linux source leaf | `0x00437EB0` | 260 | Overlay offset 14,904 |
+
+The Apple provider closes at `0x00437FC4`, leaving `0x3C` bytes before the
+protected main-image boundary. The next retained executable service begins at
+`0x004212D8`; it remains a software frontier. Physical mount, format,
+external-flash persistence, power-loss, and cold-boot evidence is unavailable.
+
+## Bootloader LittleFS block-read callback
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Stock read callback | `[0x004212D8,0x00421310)` | 56 | Complete entry redirect and NOP fill |
+| Source-replaced program callback | `[0x00421310,0x00421348)` | 56 | Redirects to fixed source cave `[0x00421214,0x00421250)` |
+| Source-replaced erase callback | `[0x00421348,0x00421372)` | 42 | Redirects to fixed source cave `[0x00421250,0x00421280)` |
+| Source-replaced sync callback | `[0x004213D4,0x004213D8)` | 4 | Redirects to fixed source cave `[0x00421280,0x00421284)` |
+| Exact in-place address helpers | `[0x004213D8,0x004213E6)` | 14 | Byte-identical Apple/Linux source compilations |
+| Apple source leaf | `0x00437FC4` | 60 | Overlay offset 15,180 |
+| Linux source leaf | `0x00437FB4` | 60 | Overlay offset 15,164 |
+
+The Apple provider closes exactly at the protected `0x00438000` main-image
+boundary and has no append headroom. Linux closes at `0x00437FF0` with 16
+bytes remaining. The program callback uses authenticated reclaimed body space;
+the next retained executable service begins at `0x004213E6`. Future source
+leaves must continue using reviewed cave placement rather than crossing the
+protected boundary. Live flash-read/program and filesystem evidence is
+unavailable.
+
+## Bootloader LittleFS block-program callback
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Stock program callback | `[0x00421310,0x00421348)` | 56 | Complete entry redirect and NOP fill |
+| Fixed source cave | `[0x00421214,0x00421250)` | 60 | Compiled program callback inside the authenticated initializer replacement tail |
+| Source-replaced erase callback | `[0x00421348,0x00421372)` | 42 | Redirects to fixed source cave `[0x00421250,0x00421280)` |
+
+The cave builder authenticates the original initializer and program spans,
+generates the initializer redirect/NOP tail, authenticates the exact 60-byte
+NOP subspan, and only then writes the fixed-address source leaf. The entry at
+`0x00421310` branches backward to `0x00421214`. No append bytes or protected
+main-image bytes are consumed.
+
+## Bootloader LittleFS block-erase callback
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Stock erase callback | `[0x00421348,0x00421372)` | 42 | Complete entry redirect and NOP fill |
+| Fixed source cave | `[0x00421250,0x00421280)` | 48 | Compiled erase callback immediately after the program cave |
+| Source-replaced sync callback | `[0x004213D4,0x004213D8)` | 4 | Redirects to fixed source cave `[0x00421280,0x00421284)` |
+| Exact in-place address helpers | `[0x004213D8,0x004213E6)` | 14 | Byte-identical Apple/Linux source compilations |
+
+The containing initializer tail now holds three separately pinned,
+non-overlapping cave leaves and retains 84 generated NOP bytes after them. The
+erase entry branches backward to `0x00421250`; append size and the protected
+main boundary are unchanged.
+
+## Bootloader LittleFS sync and address-index helpers
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Fixed sync source cave | `[0x00421280,0x00421284)` | 4 | Exact constant-success C callback |
+| Sync entry redirect | `[0x004213D4,0x004213D8)` | 4 | Complete authenticated B.W replacement |
+| Identity helper | `[0x004213D8,0x004213DA)` | 2 | Exact in-place source compilation |
+| Thresholded mapper | `[0x004213DA,0x004213E6)` | 12 | Exact in-place source compilation |
+| Retained successor | `0x004213E6` | — | Authenticated executable software frontier |
+
+The direct-leaf builder authenticates each original stock span and compiler
+digest before installing the exact source bytes and classifying them as
+source-owned. Because both helpers reproduce stock, provider and package bytes
+are unchanged; only the ownership map and flash-plan partition advance.
+
+## Bootloader mapped-memory selector and copy service
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Primary stock entry replacement | `[0x004213E6,0x004213EC)` | 6 | Branch and alignment into the primary source cave |
+| Primary source cave | `[0x004213EC,0x004214C8)` | 220 | Complete selector, bounds/security policy, address mapping, and copy dispatch |
+| Odd-selector source cave | `[0x004214C8,0x004214E6)` | 30 | Complete `1/3/5` wrapper and tail branch |
+| Primary generated tail | `[0x004214E6,0x00421548)` | 98 | Authenticated NOP fill |
+| Wrapper stock entry replacement | `[0x00421548,0x0042156E)` | 38 | Backward branch and NOP fill |
+| Retained literal/alignment pool | `[0x0042156E,0x00421584)` | 22 | Authenticated non-executable control/security and mapped-window constants |
+| Retained successor | `0x00421584` | — | Authenticated executable software frontier |
+
+Both reviewed toolchains emit identical 220-byte and 30-byte relocated cave
+bodies. The builder authenticates each stock body, generated-NOP cave subspan,
+fixed runtime address, compiler digest, and strict relocation before
+installation. The Apple provider remains bounded by the protected main-image
+boundary. Live register/security state and mapped-memory behavior remain
+blocked by unavailable authorized hardware evidence.
+
+## Bootloader 32-bit population-count helper
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Population-count helper | `[0x00421584,0x004215AE)` | 42 | Exact in-place Apple/Linux source compilation |
+| Sole direct caller | `0x0042161C` | 4 | Retained call from the two-word selector-table count helper |
+| Retained successor | `0x004215AE` | — | Authenticated executable software frontier |
+
+The direct-leaf builder authenticates the original span, both compiler
+digests, zero-relocation closure, and exact runtime address before classifying
+the byte-identical source body. Provider and package bytes are unchanged;
+only ownership and flash-plan partitioning advance.
+
+## Bootloader two-word bitmap helpers
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Nonempty helper | `[0x004215AE,0x004215DC)` | 46 | Exact in-place Apple/Linux source compilation |
+| Membership helper | `[0x004215DC,0x004215FE)` | 34 | Exact in-place Apple/Linux source compilation |
+| Population-count helper | `[0x004215FE,0x00421632)` | 52 | Exact in-place source compilation with one strict call to `0x00421584` |
+| Bitmap table root literal | `0x00422210` | 4 | Retained authenticated pointer to `0x20026E74` |
+| Retained successor | `0x00421632` | — | Authenticated executable software frontier |
+
+The table contract uses the low selector byte and two 32-bit words per row.
+The direct-leaf builder authenticates each complete stock span, compiler
+digest, runtime address, and the count leaf's sole `R_ARM_THM_CALL` before
+classifying all 132 bytes as source-owned. Provider and package bytes remain
+unchanged; only ownership and flash-plan partitioning advance. Live table
+ownership and concurrency remain blocked by unavailable authorized physical
+evidence.
+
+## Bootloader validated bitmap update helper
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Bitmap update helper | `[0x00421632,0x004216B2)` | 128 | Exact in-place Apple/Linux source compilation |
+| Shared bitmap table | `0x20026E74` | 56 B used | Seven two-word rows addressable by the validated mutator |
+| Retained successor | `0x004216B2` | — | Authenticated executable software frontier |
+
+The helper narrows inputs to bytes, rejects row `>=7` or bit `>=57` with
+status 6, and otherwise performs the exact set/clear read-modify-write and
+returns zero. The direct-leaf builder authenticates the complete stock span,
+both compiler digests, zero executable relocations, and the exact runtime
+address. Live ownership, concurrency, and atomicity remain blocked by
+unavailable authorized physical evidence.
+
+## Bootloader bounded poll-delay helper
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Poll-delay helper | `[0x004216B2,0x004216D4)` | 34 | Exact in-place Apple/Linux source compilation |
+| Retained delay dependency | `0x0041D1C0` | — | Strict `R_ARM_THM_CALL`, duration 10 |
+| Direct callers | `0x00421BB4`, `0x00421D38`, `0x00421E9C` | — | Authenticated retained call sites |
+| Retained successor | `0x004216D4` | — | Authenticated executable software frontier |
+
+The helper checks the 32-bit remaining counter and activity byte before each
+iteration, delays, then decrements. The direct-leaf builder authenticates the
+complete stock span, both compiler digests, the sole delay relocation, and the
+exact runtime address. Live timing and producer/consumer memory visibility
+remain blocked by unavailable authorized physical evidence.
+
+## Bootloader mode/configuration transaction service
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Mode transaction | `[0x004216D4,0x004217D2)` | 254 | Exact in-place Apple/Linux source compilation |
+| Default configuration | `0x00433F08` | 12 | Authenticated `0x0025B800,0,0` template |
+| Shared state cells | `0x20027030`, `0x20026FEC`, `0x2002719C`, `0x20027044`, `0x20000550` | — | Current, configuration, auxiliary and ready state |
+| Sole dispatcher caller | `0x004222B8` | 4 | Authenticated retained call site |
+| Retained successor | `0x004217D2` | — | Authenticated executable software frontier |
+
+Eight strict calls cover optional query, interrupt-state save, source-owned
+bitmap count, apply/disable fallback, and source-owned copy. The direct-leaf
+builder authenticates the complete stock span, both compiler digests, every
+relocation, and exact runtime address. Live interrupt timing, state ownership,
+and physical mode changes remain blocked by unavailable authorized evidence.
+
+## Bootloader dual-mode transaction service
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Dual-mode transaction | `[0x004217D2,0x00421978)` | 422 | Exact in-place Apple/Linux source compilation |
+| Default configuration | `0x00433F14` | 12 | Authenticated `0x00020000,0x000C49BA,0` template |
+| Shared configuration/current/ready | `0x20026FF8`, `0x20027034`, `0x20000551` | — | Published transaction state |
+| Sole dispatcher caller | `0x004222C0` | 4 | Authenticated retained call site |
+| Retained successor | `0x00421978` | — | Authenticated executable software frontier |
+
+Sixteen strict calls cover optional query, critical-state save, source-owned
+bitmap count and copy, both mode enable/disable families, and commit providers.
+The direct-leaf builder authenticates the complete stock span, both compiler
+digests, every relocation, and exact runtime address. The previous 19,764-byte
+retained region is therefore split into this 422-byte source body and a
+19,342-byte retained successor. Live interrupt timing, state ownership,
+controller/register behavior and physical mode changes remain blocked by
+unavailable authorized evidence.
+
+## Bootloader bitmap-client configuration and mutation services
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Configuration/query publisher | `[0x00421978,0x00421A30)` | 184 | Exact in-place Apple/Linux source compilation |
+| Row-zero set / clear | `[0x00421A30,0x00421A94)` | 100 | Two exact in-place helpers |
+| Guarded row-one set | `[0x00421A94,0x00421AD6)` | 66 | Exact in-place helper with controller requirement |
+| Row-one clear | `[0x00421AD6,0x00421B08)` | 50 | Exact in-place cleanup helper |
+| Controller table | `0x2000007C` | — | Controller seams at offsets 4, 12 and 16 |
+| Published state | `0x20027004`, `0x20027038`, `0x2002719A` | — | Configuration, current instance and ready byte |
+| Retained successor | `0x00421B08` | — | Authenticated executable software frontier |
+
+Sixteen strict calls cover query, critical-state save, source-owned bitmap
+count/test/update and source-owned copy. The previous 19,342-byte retained
+successor is split into five source bodies totaling 400 bytes and an
+18,942-byte retained successor. Live interrupt timing, bitmap/publication
+ownership, controller/register behavior and physical clients remain blocked
+by unavailable authorized evidence.
+
+## Bootloader mode-one enable, disable and cleanup services
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Mode-one enable | `[0x00421B08,0x00421B5C)` | 84 | Exact in-place Apple/Linux source compilation |
+| Mode-one disable | `[0x00421B5C,0x00421BA4)` | 72 | Exact in-place last-client control helper |
+| Poll/state cleanup | `[0x00421BA4,0x00421BD2)` | 46 | Exact in-place bounded cleanup helper |
+| Enable/disable words | `0x0043414C`, `0x00434150` | 4 each | Authenticated control values |
+| Active/state cells | `0x2002719B`, `0x20027040` | — | Poll and cleanup state |
+| Retained successor | `0x00421BD2` | — | Authenticated executable software frontier |
+
+Eleven strict calls cover source-owned bitmap test/update/nonempty and poll,
+critical-state save, and retained control. The previous 18,942-byte retained
+successor is split into three source bodies totaling 202 bytes and an
+18,740-byte retained successor. Live interrupt timing, state ownership,
+control/register behavior and physical mode-one effects remain blocked by
+unavailable authorized evidence.
+
+## Bootloader mode-zero enable service
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Mode-zero enable | `[0x00421BD2,0x00421CCE)` | 252 | Exact in-place Apple/Linux source compilation |
+| Controller table | `0x2000007C` | — | Mode byte and controller-pointer compatibility seam |
+| Row-two bitmap | source-owned helper row 2 | — | Low-byte-selected client ownership |
+| Active/state cells | `0x2002719B`, `0x20027040` | — | Timeout publication and bounded cleanup state |
+| Retained successor | `0x00421CCE` | — | Authenticated executable software frontier |
+
+Nine strict calls cover source-owned bitmap test/update and cleanup, two
+critical-state saves, and retained state-query/control providers. The previous
+18,740-byte retained successor is split into this 252-byte source body and an
+18,488-byte retained successor. Live interrupt timing, state ownership,
+controller/register behavior and physical mode-zero effects remain blocked by
+unavailable authorized evidence.
+
+## Bootloader row-four enable service
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Row-four enable | `[0x00421D5E,0x00421E4A)` | 236 | Exact in-place Apple/Linux source compilation |
+| Current/configuration | `0x20027030`, `0x20026FEC` | — | Retained apply inputs |
+| Ready/active/complete | `0x20000550`, `0x2002719C`, `0x2002719E` | — | Transaction state |
+| Published state | `0x20027044` | — | Timeout pointer |
+| Retained successor | `0x00421E4A` | — | Authenticated executable software frontier |
+
+Ten strict calls cover source-owned bitmap test/count/update and cleanup,
+critical-state save, and retained switch/apply providers. The previous
+18,344-byte retained successor is split into this 236-byte source body and an
+18,108-byte retained successor. Live interrupt timing, switch/apply behavior,
+state ownership and physical row-four effects remain blocked by unavailable
+authorized evidence.
+
+## Bootloader row-four disable and cleanup services
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Row-four disable | `[0x00421E4A,0x00421E8C)` | 66 | Exact in-place Apple/Linux source compilation |
+| Row-four poll cleanup | `[0x00421E8C,0x00421EBA)` | 46 | Exact in-place active/state cleanup helper |
+| Active/state cells | `0x2002719D`, `0x20027048` | — | Poll and publication state |
+| Retained successor | `0x00421EBA` | — | Authenticated executable software frontier |
+
+Seven strict calls cover source-owned bitmap test/update/nonempty and poll,
+critical-state save, and retained switch. The previous 18,108-byte retained
+successor is split into two source bodies totaling 112 bytes and a
+17,996-byte retained successor. Live interrupt timing, switch behavior, state
+ownership and physical row-four effects remain blocked by unavailable
+authorized evidence.
+
+## Bootloader row-five client services
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Row-five enable | `[0x00421EBA,0x00422040)` | 390 | Exact in-place Apple/Linux source compilation |
+| Row-five disable | `[0x00422040,0x004220B2)` | 114 | Exact in-place final-client cleanup helper |
+| Selector/ready cells | `0x20026FF8`, `0x20000551` | — | Mode selection and readiness |
+| Pending/active/state cells | `0x2002719F`, `0x2002719D`, `0x20027048` | — | Transaction and timeout publication state |
+| Retained successor | `0x004220B2` | — | Authenticated executable software frontier |
+
+Twenty-six strict calls cover source-owned bitmap, critical, selector-mode and
+cleanup services plus retained dual switch/commit/null-commit providers. The
+previous 17,996-byte retained successor is split into two source bodies
+totaling 504 bytes and a 17,492-byte retained successor. Live interrupt timing,
+retained provider behavior, state ownership and physical row-five effects
+remain blocked by unavailable authorized evidence.
+
+## Bootloader row-six services and mode-family dispatcher
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Row-six enable | `[0x004220B2,0x0042220E)` | 348 | Exact in-place Apple/Linux source compilation |
+| Enable literal seam | `[0x0042220E,0x00422220)` | 18 | Authenticated retained data |
+| Row-six disable | `[0x00422220,0x0042228E)` | 110 | Exact in-place final-client cleanup helper |
+| Disable literal seam | `[0x0042228E,0x004222A0)` | 18 | Authenticated retained data |
+| Mode-family dispatcher | `[0x004222A0,0x004222D2)` | 50 | Exact in-place kind-4/5/6 dispatcher |
+| Padding/literal seam | `[0x004222D2,0x004222F0)` | 30 | Authenticated retained non-executable bytes |
+| Retained executable successor | `0x004222F0` | — | Authenticated executable software frontier |
+
+Thirty-one strict calls cover maintained bitmap, critical, selector-mode and
+mode-family services plus retained handle lifecycle providers. The previous
+17,492-byte retained successor is split into 508 source bytes, 36 retained
+inter-body literal bytes and a 16,948-byte retained suffix. Live interrupt
+timing, retained provider behavior, state ownership and physical row-six
+effects remain blocked by unavailable authorized evidence.
+
+## Bootloader mode routes, all-row cleanup, and configuration copy
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Seven-kind enable router | `[0x004222F0,0x00422364)` | 116 | Exact in-place Apple/Linux source compilation |
+| Seven-kind disable router | `[0x00422364,0x004223D8)` | 116 | Exact in-place Apple/Linux source compilation |
+| Selective all-row cleanup | `[0x004223D8,0x00422416)` | 62 | Exact in-place bitmap-driven cleanup helper |
+| Fixed configuration copy | `[0x00422416,0x00422430)` | 26 | Exact in-place 20-byte copy helper |
+| Literal pool | `[0x00422430,0x00422468)` | 56 | Authenticated retained non-executable bytes |
+| Retained executable successor | `0x00422468` | — | Authenticated executable software frontier |
+
+Seventeen strict calls cover the maintained row-specific enable/disable
+services, bitmap query, reviewed disable-route alias and retained memcpy
+provider. The prior 16,948-byte retained suffix is split into 320 source bytes,
+a 56-byte retained literal pool and a 16,572-byte retained executable suffix.
+Live bitmap ownership, routed service behavior, concurrent cleanup and
+configuration persistence remain blocked by unavailable authorized evidence.
+
+## Bootloader Ambiq debug-domain services
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| General debug disable | `[0x00422468,0x004224B2)` | 74 | Exact in-place Apple/Linux source compilation |
+| Debug power ownership | `[0x004224B2,0x0042252E)` | 124 | Exact in-place reference-counted domain service |
+| Trace disable | `[0x0042252E,0x00422574)` | 70 | Exact in-place `DEMCR.TRCENA` release/poll service |
+| Literal pool | `[0x00422574,0x00422590)` | 28 | Authenticated retained non-executable bytes |
+| Retained executable successor | `0x00422590` | — | Authenticated executable software frontier |
+
+Nine strict calls cover critical-save, debug power query/enable/disable,
+register status polling and the two reviewed same-cluster aliases. The prior
+16,598-byte retained region is split into a 56-byte leading literal pool, 268
+source bytes, a 28-byte trailing literal pool, and a 16,246-byte retained
+suffix. Live debug power, MCUCTRL/DCB register effects, trace quiescence and
+timing remain blocked by unavailable authorized evidence.
+
+## Bootloader mode-zero disable and cleanup services
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Mode-zero disable | `[0x00421CCE,0x00421D28)` | 90 | Exact in-place Apple/Linux source compilation |
+| Mode-zero poll cleanup | `[0x00421D28,0x00421D5E)` | 54 | Exact in-place completion/state cleanup helper |
+| Active/completion cells | `0x2002719C`, `0x2002719E` | — | Poll and completion state |
+| Published state | `0x20027040`, `0x20027044` | — | Enable and cleanup state pointers |
+| Retained successor | `0x00421D5E` | — | Authenticated executable software frontier |
+
+Seven strict calls cover source-owned bitmap test/update/nonempty and poll,
+critical-state save, and retained control. The previous 18,488-byte retained
+successor is split into two source bodies totaling 144 bytes and an
+18,344-byte retained successor. Live interrupt timing, state ownership,
+controller/register behavior and physical mode-zero effects remain blocked by
+unavailable authorized evidence.
+## Bootloader constraint dispatcher and memchr
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Constraint dispatcher | `[0x00422590,0x004225AC)` | 28 | Exact in-place Apple/Linux source compilation |
+| Handler/message pool | `[0x004225AC,0x004225D0)` | 36 | Authenticated retained data |
+| Optimized `memchr` | `[0x004225D0,0x00422628)` | 88 | Exact in-place relocation-free source compilation |
+| Handler registration cell | `0x20027190` | — | Retained runtime binding |
+| Retained default handler | `0x00417C28` | — | Strict reviewed call target |
+| Retained executable successor | `0x00422628` | — | Authenticated executable software frontier |
+
+The prior retained suffix is split into 116 exact source bytes, a 36-byte
+retained pool, and a 16,094-byte retained suffix. Live handler registration,
+default-handler behavior, accessible-memory boundaries and physical fault
+qualification remain blocked by unavailable authorized evidence.
+## Bootloader double-runtime helpers
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| `frexp` wrapper/core | `[0x00422628,0x00422698)` | 112 | Exact in-place Apple/Linux source compilation |
+| Ordered comparators | `[0x00422698,0x00422700)` | 104 | Two exact flag-setting leaves |
+| `ldexp` wrapper | `[0x00422700,0x00422712)` | 18 | Exact soft-float wrapper |
+| Alignment | `[0x00422712,0x00422714)` | 2 | Authenticated retained data |
+| `ldexp` VFP core | `[0x00422714,0x00422804)` | 240 | Exact normalization/range helper |
+| VFP conversions/arithmetic | `[0x00422804,0x00422872)` | 110 | Seven exact leaves |
+| Retained range-error tail | `0x004275D2` | — | Strict reviewed jump target |
+| Retained executable successor | `0x00422874` | — | Authenticated executable software frontier |
+
+The prior 16,094-byte retained suffix is split into 584 source bytes, a
+two-byte retained alignment and a 15,508-byte retained suffix. Live VFP
+exception, range-error and caller-ABI qualification remains blocked by
+unavailable authorized evidence.
+## Bootloader IAR thread-pointer leaf
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Trailing double-runtime alignment | `[0x00422872,0x00422874)` | 2 | Authenticated retained data |
+| Thread-pointer body and anchor literal | `[0x00422874,0x0042287C)` | 8 | Exact in-place Apple/Linux source compilation |
+| Returned SRAM anchor | `0x20000518` | — | Authenticated runtime address |
+| Retained executable successor | `0x0042287C` | — | Authenticated executable software frontier |
+
+The prior 15,508-byte retained suffix is split into a two-byte alignment,
+eight source bytes and a 15,498-byte retained suffix. Physical SRAM-anchor
+lifecycle qualification remains blocked by unavailable authorized evidence.
+## Bootloader unsigned 64-bit divide/modulo runtime
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Unsigned 64-bit divmod | `[0x0042287C,0x00422AAC)` | 560 | Exact in-place Apple/Linux source compilation |
+| Retained divide-by-zero tail | `0x004275E8` | — | Strict reviewed jump target |
+| Direct callers | `0x0041F1D0`, `0x0041F1EA`, `0x00422E74` | — | Authenticated start-only ingress |
+| Retained executable successor | `0x00422AAC` | — | Authenticated executable software frontier |
+
+The prior 15,498-byte retained suffix is split into 560 source bytes and a
+14,938-byte retained suffix. Live divide-by-zero, register-return and caller
+ABI qualification remains blocked by unavailable authorized evidence.
+## Bootloader atomic snapshot and wrappers
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Atomic three-sample snapshot | `[0x00422AAC,0x00422AC8)` | 28 | Exact in-place Apple/Linux source compilation |
+| No-op leaf | `[0x00422AC8,0x00422ACA)` | 2 | Exact in-place source compilation |
+| Retained-query wrapper | `[0x00422ACA,0x00422AD2)` | 8 | Exact in-place source compilation |
+| Alignment | `[0x00422AD2,0x00422AD4)` | 2 | Authenticated retained data |
+| Retained query provider | `0x0041CDB8` | — | Strict reviewed call target |
+| Retained executable successor | `0x00422AD4` | — | Authenticated executable software frontier |
+
+The prior 14,938-byte retained suffix is split into 38 source bytes and a
+14,900-byte retained suffix. Live interrupt, volatile-sampling and retained-
+provider qualification remains blocked by unavailable authorized evidence.
+
+## Bootloader four-instance hardware-service initializer
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Leading alignment | `[0x00422AD2,0x00422AD4)` | 2 | Authenticated retained data |
+| Four-instance initializer | `[0x00422AD4,0x00422BA8)` | 212 | Exact in-place Apple/Linux source compilation |
+| Instance pool | `0x20024400` | `4 x 0x11C` | Authenticated SRAM base and stride |
+| Type/base literal pool | `0x004233E0`, `0x004233E4`, `0x00423430` | 12 | Authenticated retained data |
+| Direct caller | `0x0041F744` | — | Authenticated start-only ingress |
+| Retained executable successor | `0x00422BA8` | — | Authenticated executable software frontier |
+
+The prior 14,900-byte retained suffix is split into a two-byte alignment, 212
+source bytes and a 14,686-byte retained suffix. Live SRAM ownership,
+concurrency, peripheral effects and cold-boot lifecycle qualification remains
+blocked by unavailable authorized evidence.
+
+## Bootloader instance register-transfer and lifecycle service
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Register service | `[0x00422BA8,0x00422D20)` | 376 | Exact in-place Apple/Linux source compilation; five strict calls |
+| Revision threshold/register | `0x0016E361` / `0x4002000C` | — | Authenticated retained literals |
+| Clock register | `0x400201B0` | — | Revision-gated per-instance bit `0x00400000 << index` |
+| Register-bank base | `0x40039000` | `4 x 0x1000` stride | Authenticated MMIO layout |
+| Direct callers | `0x0041F66E`, `0x0041F86C`, `0x0041F912` | — | Authenticated start-only ingress |
+| Retained executable successor | `0x00422D20` | — | Authenticated executable software frontier |
+
+The prior 14,686-byte retained suffix is split into 376 source bytes and a
+14,310-byte retained suffix. Live MMIO/revision/clock/mode/resource/lifecycle
+qualification remains blocked by unavailable authorized evidence.
+
+## Bootloader per-instance register-clear leaves
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Primary clear | `[0x00422D20,0x00422D4C)` | 44 | Exact relocation-free Apple/Linux source compilation |
+| Secondary clear | `[0x00422D4C,0x00422D7A)` | 46 | Exact relocation-free Apple/Linux source compilation |
+| Retained datum | `[0x00422D7A,0x00422D7E)` | 4 | Authenticated non-executable data |
+| Register-bank base | `0x40039000` | `4 x 0x1000` stride | Authenticated MMIO layout |
+| Retained executable successor | `0x00422D7E` | — | Authenticated executable software frontier |
+
+The prior 14,310-byte retained suffix is split into 90 source bytes and a
+14,220-byte retained suffix. Live MMIO/bank/peripheral/cold-boot qualification
+remains blocked by unavailable authorized evidence.
+
+## Bootloader per-instance status mapper
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Retained datum | `[0x00422D7A,0x00422D7E)` | 4 | Authenticated non-executable data |
+| Status mapper | `[0x00422D7E,0x00422DC6)` | 72 | Exact relocation-free Apple/Linux source compilation |
+| Register-bank base | `0x40039000` | `4 x 0x1000` stride | Reads register offset `0x3C` |
+| Result pools | `0x00423768..0x00423778`, `0x0042382C` | 24 | Authenticated retained status literals |
+| Retained executable successor | `0x00422DC6` | — | Authenticated executable software frontier |
+
+The prior 14,220-byte retained suffix is split into a four-byte datum, 72
+source bytes, and a 14,144-byte retained suffix. Live MMIO/status/bank/timing
+qualification remains blocked by unavailable authorized responsive evidence.
+
+## Bootloader per-instance register services
+
+| Segment | Range | Bytes | State |
+|---|---:|---:|---|
+| Register OR | `[0x004236CE,0x004236FA)` | 44 | Exact relocation-free Apple/Linux source compilation |
+| Alignment and literal | `[0x004236FA,0x00423700)` | 6 | Authenticated retained data |
+| Register write | `[0x00423700,0x0042372A)` | 42 | Exact relocation-free Apple/Linux source compilation |
+| Register query | `[0x0042372A,0x00423764)` | 58 | Exact relocation-free Apple/Linux source compilation |
+| Register/literal table | `[0x00423764,0x0042377C)` | 24 | Authenticated retained data |
+| Retained executable successor | `0x0042377C` | — | Next executable body after the cluster |
+
+The source-owned services use the authenticated `0x40039000` register base,
+`0x1000` bank stride, instance type, and `+0x38/+0x3C/+0x40/+0x44` offsets.
+Live register/MMIO/concurrency/peripheral qualification remains blocked by
+unavailable authorized responsive evidence.
+
+## Bootloader per-instance service dispatcher
+
+| Segment | Range | Bytes | State |
+|---|---:|---:|---|
+| Service dispatcher | `[0x0042377C,0x0042382C)` | 176 | Exact Apple/Linux source compilation; six strict calls |
+| Literal/status table | `[0x0042382C,0x00423864)` | 56 | Authenticated retained data |
+| Retained executable successor | `0x00423864` | — | Next executable body after the cluster |
+
+The source-owned dispatcher preserves the authenticated active/inactive flag
+routing, register-relative progress, callback status/context, state cleanup,
+and progress latch. Live interrupt/register/callback/concurrency/MMIO
+qualification remains blocked by unavailable authorized responsive evidence.
+
+## Bootloader bounded memory-exchange helpers
+
+| Segment | Range | Bytes | State |
+|---|---:|---:|---|
+| Literal/status table | `[0x0042382C,0x00423864)` | 56 | Authenticated retained data |
+| Two-buffer exchange | `[0x00423864,0x004238BA)` | 86 | Exact Apple/Linux source compilation; three strict copy calls |
+| Three-buffer rotation | `[0x004238BA,0x00423928)` | 110 | Exact Apple/Linux source compilation; four strict copy calls |
+| Retained executable successor | `0x00423928` | — | Next executable body after the cluster |
+
+The helpers exchange directly below 64 bytes and use bounded 128-byte scratch
+chunks for larger elements. They are software-only; no hardware operation is
+required for their completed offline qualification.
+
+## Bootloader rotate-to-front helper
+
+| Segment | Range | Bytes | State |
+|---|---:|---:|---|
+| Rotate-to-front | `[0x00423928,0x00423972)` | 74 | Exact Apple/Linux source compilation; two copy and one overlap-safe move call |
+| Retained executable successor | `0x00423972` | — | Next executable body after the helper |
+
+The helper shifts the intervening span right and brings the last width-byte
+element to the front in bounded 128-byte chunks. It is software-only.
+
+## Bootloader three-element comparator/exchange helper
+
+| Segment | Range | Bytes | State |
+|---|---:|---:|---|
+| Comparator/exchange | `[0x00423972,0x004239C2)` | 80 | Exact Apple/Linux source compilation; two strict calls and one authenticated fixed tail branch |
+| Retained executable successor | `0x004239C2` | — | Next executable body after the helper |
+
+## Bootloader Floyd max-heap sift helper
+
+| Segment | Range | Bytes | State |
+|---|---:|---:|---|
+| Floyd max-heap sift | `[0x004239C2,0x00423A48)` | 134 | Exact Apple/Linux source compilation; two strict exchange calls |
+| Retained executable successor | `0x00423A48` | — | Next executable body after the helper |
+
+## Bootloader introspective qsort runtime
+
+| Segment | Range | Bytes | State |
+|---|---:|---:|---|
+| Introspective sort core | `[0x00423A48,0x00423D08)` | 704 | Exact Apple/Linux source compilation; sampled partition, heap fallback, insertion finish |
+| Public qsort wrapper | `[0x00423D08,0x00423D20)` | 24 | Exact Apple/Linux source compilation; fixed-address core call |
+| Retained executable successor | `0x00423D20` | — | Next executable body after the runtime |
+
+## Bootloader global hardware-control services
+
+| Segment | Range | Bytes | State |
+|---|---:|---:|---|
+| Global service | `[0x00423D20,0x00423D58)` | 56 | Exact Apple/Linux source compilation; register/debug calls |
+| Initializer | `[0x00423D58,0x00423D7A)` | 34 | Exact Apple/Linux source compilation; fixed sibling calls and delay |
+| Register query | `[0x00423D7A,0x00423D9A)` | 32 | Exact Apple/Linux source compilation |
+| Register literal/alignment | `[0x00423D9A,0x00423DA0)` | 6 | Authenticated retained data |
+| Indexed test and wrapper | `[0x00423DA0,0x00423DCE)` | 46 | Exact Apple/Linux source compilation |
+| Alignment | `[0x00423DCE,0x00423DD0)` | 2 | Authenticated retained alignment |
+| Interrupt-atomic control | `[0x00423DD0,0x00423E0C)` | 60 | Exact Apple/Linux source compilation |
+| SRAM literals | `[0x00423E0C,0x00423E14)` | 8 | Authenticated retained data |
+| Hardware-control state mapper | `[0x00423E14,0x00423E40)` | 44 | Exact Apple/Linux source compilation; state transition and flag mapping |
+| MSPI FIFO write | `[0x00423E40,0x00423E8A)` | 74 | Exact Apple/Linux source compilation; one retained status-check call |
+| MSPI FIFO read | `[0x00423E8A,0x00423F28)` | 158 | Exact Apple/Linux source compilation; word/remainder paths and two retained status-check calls |
+| MSPI command-queue init | `[0x00423F28,0x00423F54)` | 44 | Exact Apple/Linux source compilation; retained `am_hal_cmdq_init` seam |
+| MSPI command-queue term | `[0x00423F54,0x00423F8E)` | 58 | Exact Apple/Linux source compilation; force termination and handle clear |
+| MSPI command-queue enable | `[0x00423F8E,0x00423FAC)` | 30 | Exact Apple/Linux source compilation; source-owned clock route plus retained enable seam |
+| MSPI command-queue disable | `[0x00423FAC,0x00423FB8)` | 12 | Exact Apple/Linux source compilation; retained disable seam |
+| MSPI command-queue pause | `[0x00423FB8,0x0042403E)` | 134 | Exact Apple/Linux source compilation; bounded pause and DMA-idle checks |
+| MSPI high-priority DMA programming | `[0x0042403E,0x004240AA)` | 108 | Exact Apple/Linux source compilation; clock request and five ordered DMA-register writes |
+| Retained executable successor | `0x004240AA` | — | Next executable body, `sched_hiprio` |
+
+## Bootloader per-instance dual-descriptor initializer
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Descriptor initializer | `[0x00422DC6,0x00422E28)` | 98 | Exact Apple/Linux source compilation; two strict calls |
+| Instance descriptors | offsets `0x34`, `0x4C` | `2 x 24` | Optional pair-gated initialization |
+| Publication flags | offsets `0xDC`, `0xDD` | 2 | Cleared then independently set after initialization |
+| Retained constructor | `0x004275EA` | 24 | Strict reviewed call target |
+| Retained signature literal | `0x00423830` | 4 | `0x01EA9E06` low-25-bit header |
+| Retained executable successor | `0x00422E28` | — | Authenticated executable software frontier |
+
+The prior 14,144-byte retained suffix is split into 98 source bytes and a
+14,046-byte retained suffix. Live descriptor ownership, DMA/controller timing,
+buffer lifetime and interrupt qualification remains blocked by unavailable
+authorized responsive evidence.
+
+## Bootloader per-instance clock-divider service
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Clock-divider service | `[0x00422E28,0x00422EE2)` | 186 | Exact Apple/Linux source compilation; one strict call |
+| Register-bank base | `0x40039000` | `4 x 0x1000` stride | Mode at `0x30`; divider at `0x24`/`0x28` |
+| Reference pools | `0x004236FC`, `0x00423834..0x00423848` | 24 | 3/49.152/48/24/12/6 MHz |
+| Status pools | `0x00423838`, `0x0042384C` | 8 | Range/invalid-mode statuses |
+| Source-owned divmod | `0x0042287C` | — | Strict reviewed call target |
+| Retained executable successor | `0x00422EE2` | — | Authenticated executable software frontier |
+
+The prior 14,046-byte retained suffix is split into 186 source bytes and a
+13,860-byte retained suffix. Live clock selection, divider MMIO, peripheral
+rate and cold-boot qualification remains blocked by unavailable authorized
+responsive evidence.
+
+## Bootloader per-instance configuration latch
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Configuration latch | `[0x00422EE2,0x00422F4C)` | 106 | Exact Apple/Linux source compilation; one strict call |
+| Instance payload | offsets `0xA0..0xB8`, `0xD4` | 29 | Seven words plus one configuration byte |
+| Latch/runtime state | offsets `0x119`, `0xD8`, `0xDE` | 6 | Published latch plus cleared runtime state |
+| Retained critical provider | `0x0041B8EC` | — | Saves interrupt token; caller restores `PRIMASK` |
+| Retained busy status | `0x00423850` | 4 | `0x08000004` |
+| Retained executable successor | `0x00422F4C` | — | Authenticated executable software frontier |
+
+The prior 13,860-byte retained suffix is split into 106 source bytes and a
+13,754-byte retained suffix. Live interrupt atomicity, instance ownership,
+concurrency, downstream MMIO effects and cold-boot qualification remain
+blocked by unavailable authorized responsive evidence.
+
+## Bootloader secondary per-instance configuration latch
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Secondary configuration latch | `[0x00422F4C,0x00422FA2)` | 86 | Exact Apple/Linux source compilation; one strict call |
+| Instance payload | offsets `0x64..0x7C`, `0x98` | 29 | Seven words plus one configuration byte |
+| Latch/runtime state | offsets `0x11A`, `0x9C` | 5 | Published latch plus cleared runtime word |
+| Retained critical provider | `0x0041B8EC` | — | Saves interrupt token; caller restores `PRIMASK` |
+| Retained busy status | `0x00423854` | 4 | `0x08000005` |
+| Retained executable successor | `0x00422FA2` | — | Authenticated executable software frontier |
+
+The prior 13,754-byte retained suffix is split into 86 source bytes and a
+13,668-byte retained suffix. Live interrupt atomicity, secondary-instance
+ownership, concurrency, downstream MMIO effects and cold-boot qualification
+remain blocked by unavailable authorized responsive evidence.
+
+## Bootloader secondary configuration release
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Secondary release | `[0x00422FA2,0x00422FDE)` | 60 | Exact Apple/Linux source compilation; two strict calls |
+| Reset span | instance offsets `0x64..0x9F` | 60 | 56-byte retained memset plus explicit final word clear |
+| State gate | instance offset `0x11A` | 1 | Requires one, then clears before reset |
+| Retained critical provider | `0x0041B8EC` | — | Saves interrupt token; caller restores `PRIMASK` |
+| Retained memset | `0x0041560C` | — | Strict reviewed call target |
+| Retained executable successor | `0x00422FDE` | — | Authenticated executable software frontier |
+
+The prior 13,668-byte retained suffix is split into 60 source bytes and a
+13,608-byte retained suffix. Live interrupt atomicity, release/latch
+concurrency, retained memset ABI, SRAM/MMIO consumers and cold-boot
+qualification remain blocked by unavailable authorized responsive evidence.
+
+## Bootloader per-instance hardware shutdown
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Shutdown service | `[0x00422FDE,0x0042308E)` | 176 | Exact Apple/Linux source compilation; four strict calls |
+| Register-bank base | `0x40039000` | `4 x 0x1000` stride | Offset `0x30` bits 14/11/9; offset `0x18` bit 3 |
+| Delay numerator | `0x00423858` | 4 | `10000000` |
+| Source providers | `0x00422D4C`, `0x00422FA2` | — | Secondary register clear and release |
+| Retained providers | `0x0041D1C0`, `0x00423342` | — | Delay and hardware shutdown |
+| Retained executable successor | `0x0042308E` | — | Authenticated executable software frontier |
+
+The prior 13,608-byte retained suffix is split into 176 source bytes and a
+13,432-byte retained suffix. Live MMIO, clock/peripheral state, delay accuracy,
+concurrency, provider effects and cold-boot qualification remain blocked by
+unavailable authorized responsive evidence.
+
+## Bootloader primary and secondary progress services
+
+| Segment | Range | Bytes | State |
+|---|---:|---:|---|
+| Primary progress | `[0x00423524,0x00423608)` | 228 | Exact Apple/Linux source compilation; four strict calls |
+| Secondary progress | `[0x00423608,0x004236CE)` | 198 | Exact Apple/Linux source compilation; four strict calls |
+| Retained executable successor | `0x004236CE` | — | Next executable body after the cluster |
+
+Both services preserve the authenticated descriptor/FIFO selection, bounded
+count, progress mirror, completion/exhaustion callback and interrupt-token
+semantics. Live FIFO/descriptor/interrupt/DMA/callback/concurrency/MMIO
+qualification remains blocked by unavailable authorized responsive evidence.
+
+## Bootloader per-instance mode-dispatch services
+
+| Segment | Range | Bytes | State |
+|---|---:|---:|---|
+| Dispatcher | `[0x004233E8,0x00423430)` | 72 | Exact Apple/Linux source compilation; four strict routes |
+| Literal/register-base data | `[0x00423430,0x00423444)` | 20 | Authenticated retained data |
+| Mode-zero wait | `[0x00423444,0x0042348E)` | 74 | Exact Apple/Linux source compilation |
+| Mode-one wait | `[0x0042348E,0x004234D8)` | 74 | Exact Apple/Linux source compilation |
+| Mode-two start | `[0x004234D8,0x004234FA)` | 34 | Exact Apple/Linux source compilation |
+| Mode-three start | `[0x004234FA,0x00423524)` | 42 | Exact Apple/Linux source compilation |
+| Retained executable successor | `0x00423524` | — | Next executable body after the cluster |
+
+All 296 executable bytes in this cluster are source-compiled. Live latch,
+register, timer, interrupt, concurrency and peripheral qualification remains
+blocked by unavailable authorized responsive evidence.
+
+## Bootloader per-instance FIFO services
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Retained initializer | `[0x0042308E,0x004232C8)` | 570 | Earliest retained executable software frontier |
+| FIFO read | `[0x004232C8,0x0042330E)` | 70 | Exact relocation-free Apple/Linux source compilation |
+| FIFO write | `[0x0042330E,0x00423342)` | 52 | Exact relocation-free Apple/Linux source compilation |
+| FIFO drain | `[0x00423342,0x00423350)` | 14 | Exact Apple/Linux source compilation; strict read call |
+| FIFO snapshot adapter | `[0x00423350,0x00423390)` | 64 | Exact Apple/Linux source compilation; critical/read/consume calls |
+| FIFO pump adapter | `[0x00423390,0x004233E0)` | 80 | Exact Apple/Linux source compilation; critical/descriptor/write calls |
+| Register-bank base | `0x40039000` | `4 x 0x1000` stride | Status at `0x18`; data at `0x00` |
+| Retained data successor | `[0x004233E0,0x004233E8)` | 8 | Two authenticated literal words |
+
+The prior 13,432-byte retained suffix is split into a 570-byte retained body,
+280 source bytes, and a 12,582-byte retained suffix. Live FIFO flags/data,
+descriptor state, interrupt restoration, MMIO ordering, concurrency and peripheral qualification remain blocked by
+unavailable authorized responsive evidence.

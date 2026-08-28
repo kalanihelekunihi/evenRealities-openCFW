@@ -12,6 +12,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x00437FE0
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -265,8 +267,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         if site.get("expected_size") != int(row["stock_bytes"]) or site.get("expected_sha256") != row["stock_sha256"] or site.get("target_function") != row["function"] or site.get("branch") != "b_w" or site.get("profiles") != ["apple-clang"]:
             raise AuditError(f"production stock route changed: {row['function']}")
     build = json.loads(OVERLAY_REPORT.read_text())
-    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d", 3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc"):
-        raise AuditError("production health service build pins changed")
+    validate_apollo_main_artifacts(ROOT, AuditError, "protobuf health service")
     built = {item.get("extraction", {}).get("function"): item
              for item in build.get("relocated_leaves", [])
              if item.get("extraction", {}).get("function") in leaf_names}
@@ -279,8 +280,6 @@ def analyze(image_path: Path = IMAGE) -> dict:
     appended = [item for item in regions if item.get("address_status") == "source_compiled" and 8190468 <= item.get("target_address", 0) < 8191414]
     if len(generated) != 8 or sum(item["size"] for item in generated) != 3092 or len(appended) != 9 or sum(item["size"] for item in appended) != 940:
         raise AuditError("production health service manifest closure changed")
-    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc", 4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
-        raise AuditError("production health service package pins changed")
 
     return {
         "surface": {
@@ -315,10 +314,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "source_functions": 9, "compiled_text_bytes": 940,
             "alignment_bytes": 8, "stock_replaced_bytes": 3092,
             "strict_relocations": 20, "software_functional_gap": False,
-            "hardware_validation": "blocked",
+            "hardware_validation": "deferred by project direction",
             "hardware_blocker": (
                 "No authorized physical G2/EM9305 health-service evidence "
-                "is available in this workspace."
+                "is required for future qualification in this workspace."
             ),
         },
     }

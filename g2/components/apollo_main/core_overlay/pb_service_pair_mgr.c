@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the twenty linked G2 pair-manager protobuf
  * service entries. Diagnostic-only EasyLogger/assertion work is omitted. The

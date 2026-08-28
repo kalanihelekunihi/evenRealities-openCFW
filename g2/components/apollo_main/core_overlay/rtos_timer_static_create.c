@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Static-control-block RTOS timer creation matched to stock entry
  * 0x0047E712.

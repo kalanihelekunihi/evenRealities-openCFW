@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * EasyLogger tracepoint filename, directory, and persistent-state helpers
  * matched to stock entries 0x0047DDFE through 0x0047E069.

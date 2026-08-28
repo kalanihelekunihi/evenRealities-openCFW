@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the 25 linked G2 pb_service_even_ai.c
  * entries. Diagnostic-only EasyLogger, assertion, and hexdump calls are

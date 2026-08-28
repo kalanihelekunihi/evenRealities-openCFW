@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room Thumb-2 recreation of the compact IAR DLIB math/errno boundary
  * authenticated in the G2 2.2.6.10 Apollo-main image. The exact EWARM release

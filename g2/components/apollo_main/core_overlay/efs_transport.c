@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the G2 EFS packet transport.  The source
  * preserves the authenticated 0xAA header, C4/C5/C6 receive paths, 4 KiB

@@ -147,7 +147,13 @@
       "components/shared/littlefs/runtime_littlefs_tag_id.h",
       "components/shared/littlefs/runtime_littlefs_tag_size.c",
       "components/shared/littlefs/runtime_littlefs_tag_size.h",
-      "components/apollo_main/core_overlay/runtime_littlefs_file_size_public.c"
+      "components/apollo_main/core_overlay/runtime_littlefs_file_size_public.c",
+      "components/bootloader/core_overlay/runtime_littlefs_format_4211b0.c",
+      "components/bootloader/core_overlay/runtime_littlefs_init_421210.c",
+      "components/bootloader/core_overlay/runtime_littlefs_read_4212d8.c",
+      "components/bootloader/core_overlay/runtime_littlefs_program_421310.c",
+      "components/bootloader/core_overlay/runtime_littlefs_erase_421348.c",
+      "components/bootloader/core_overlay/runtime_littlefs_sync_4213d4.c"
     ],
     "allowed_production_symbols": [
       "open_cfw_littlefs_file_tell_private",
@@ -181,7 +187,13 @@
       "open_cfw_littlefs_tag_type3",
       "open_cfw_littlefs_tag_id",
       "open_cfw_littlefs_tag_size",
-      "open_cfw_littlefs_file_size_public"
+      "open_cfw_littlefs_file_size_public",
+      "open_cfw_littlefs_bootloader_format_4211b0",
+      "open_cfw_littlefs_bootloader_init_421210",
+      "open_cfw_bootloader_littlefs_read_4212d8",
+      "open_cfw_bootloader_littlefs_program_421310",
+      "open_cfw_bootloader_littlefs_erase_421348",
+      "open_cfw_bootloader_littlefs_sync_4213d4"
     ],
     "rewind_leaf": {
       "upstream_function": "lfs_file_rewind_",

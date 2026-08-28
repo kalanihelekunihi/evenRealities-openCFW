@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 /* Clean-room G2 sysenv KVDB lifecycle with destructive reset disabled. */
 #include <stddef.h>
 #include <stdint.h>

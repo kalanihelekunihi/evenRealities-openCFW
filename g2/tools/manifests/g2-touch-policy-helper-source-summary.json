@@ -1,0 +1,102 @@
+{
+  "analysis_mode": "offline source/build audit; no hardware, MMIO, sleep, reset, DFU, signing, or flash operation",
+  "boundaries": [
+    {
+      "closure": "implemented",
+      "evidence_limit": "256-byte logical bound and provider-status translation",
+      "evidence_name": "touch_config_read_adapter",
+      "provider_contract": "storage_ready + storage_read",
+      "source_export": "open_cfw_touch_policy_config_read",
+      "stock_entry": 616
+    },
+    {
+      "closure": "implemented",
+      "evidence_limit": "magic/config-valid gate then u16 baseline read",
+      "evidence_name": "saved_proximity_baseline_read",
+      "provider_contract": "none",
+      "source_export": "open_cfw_touch_policy_saved_baseline_read",
+      "stock_entry": 1820
+    },
+    {
+      "closure": "implemented",
+      "evidence_limit": "UNVE defaults, eight-byte read, magic validation; defaults retained on failure",
+      "evidence_name": "touch_config_load_from_eeprom",
+      "provider_contract": "storage_ready + storage_read",
+      "source_export": "open_cfw_touch_policy_config_load",
+      "stock_entry": 1848
+    },
+    {
+      "closure": "provider_contract_fail_closed",
+      "evidence_limit": "transaction is external; no GPIO or timing implementation in MIT candidate",
+      "evidence_name": "attention_release_timeout_rearm",
+      "provider_contract": "attention_release_timeout_rearm(delay_ms=200)",
+      "source_export": "open_cfw_touch_policy_attention_rearm",
+      "stock_entry": 2044
+    },
+    {
+      "closure": "implemented",
+      "evidence_limit": "zero becomes 1000; nonzero remains unchanged",
+      "evidence_name": "timeout_default_1000_if_zero",
+      "provider_contract": "none",
+      "source_export": "open_cfw_touch_policy_timeout_default",
+      "stock_entry": 3048
+    },
+    {
+      "closure": "provider_contract_fail_closed",
+      "evidence_limit": "exact private gesture sub-policy unavailable; no fallback semantics invented",
+      "evidence_name": "gesture_policy_helper_0bfc",
+      "provider_contract": "gesture_policy_step(observation,result)",
+      "source_export": "open_cfw_touch_policy_gesture_step",
+      "stock_entry": 3068
+    },
+    {
+      "closure": "provider_contract_fail_closed",
+      "evidence_limit": "shared typed gesture provider; exact stock state-machine ABI unavailable",
+      "evidence_name": "touch_gesture_state_machine",
+      "provider_contract": "gesture_policy_step(observation,result)",
+      "source_export": "open_cfw_touch_policy_gesture_step",
+      "stock_entry": 3440
+    },
+    {
+      "closure": "provider_contract_fail_closed",
+      "evidence_limit": "provider result commits atomically; missing/error leaves state unchanged",
+      "evidence_name": "proximity_baseline_update_adapter",
+      "provider_contract": "baseline_update(saved,current)",
+      "source_export": "open_cfw_touch_policy_baseline_update",
+      "stock_entry": 4380
+    }
+  ],
+  "component": "G2 touch application-policy helper boundaries",
+  "exports": [
+    "open_cfw_touch_policy_attention_rearm",
+    "open_cfw_touch_policy_baseline_update",
+    "open_cfw_touch_policy_config_load",
+    "open_cfw_touch_policy_config_read",
+    "open_cfw_touch_policy_defaults",
+    "open_cfw_touch_policy_gesture_step",
+    "open_cfw_touch_policy_saved_baseline_read",
+    "open_cfw_touch_policy_timeout_default"
+  ],
+  "header": "components/shared/touch/runtime_touch_policy_helpers.h",
+  "helper_evidence_digest": "27b3373ad1475a6370eb0acb338f4564e10ba523a4e35d10ab6f61406b00329d",
+  "integration": "isolated candidate; not production-routed by this tranche",
+  "license": "MIT",
+  "metrics": {
+    "direct_mmio_dependencies": 0,
+    "fail_closed_provider_boundaries": 4,
+    "implemented_boundaries": 4,
+    "infineon_eula_source_dependencies": 0,
+    "source_exports": 8,
+    "stock_boundaries": 8
+  },
+  "provider_policy": {
+    "infineon_capsense_and_emeeprom": "external providers only; no EULA source copied or compiled",
+    "invalid_provider_result": "OPEN_CFW_TOUCH_POLICY_INVALID_DATA; output/state unchanged",
+    "missing_callback": "OPEN_CFW_TOUCH_POLICY_UNAVAILABLE; output/state unchanged",
+    "provider_error": "OPEN_CFW_TOUCH_POLICY_PROVIDER_ERROR; output/state unchanged"
+  },
+  "schema_version": 1,
+  "source": "components/shared/touch/runtime_touch_policy_helpers.c",
+  "target": "thumbv6m-none-eabi / Cortex-M0+ / Thumb",
+  "target_object_bytes": 3212
+}

@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* Clean-room reconstruction of the pathless stock AT^NUS command handler. */
 
 #include <stdint.h>

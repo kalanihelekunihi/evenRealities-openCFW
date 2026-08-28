@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the G2 EFS import/export service.  It keeps
  * the recovered C4/C5/C6/C7 control ABI, 120-byte transfer record, bounded

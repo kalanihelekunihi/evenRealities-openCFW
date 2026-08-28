@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room behavioral reconstruction of the retained G2 2.2.6.10
  * platform/input/service_gesture_processor.c object.  Fixed provider, SRAM,

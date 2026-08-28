@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of the G2 generic callback manager.  The stock
  * EasyLogger branches are diagnostic-only and are deliberately omitted; the

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the twelve linked entries in G2's
  * kernel/FreeRTOS-Plus-CLI/prvCommand/prvCommand_filesystem.c object.

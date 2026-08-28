@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT OR GPL-3.0-only
  *
  * Clean-room device-side G2 touch I2C protocol. The command/report behavior
  * is reconstructed from authenticated PSoC 4000T machine code. Resident HAL,

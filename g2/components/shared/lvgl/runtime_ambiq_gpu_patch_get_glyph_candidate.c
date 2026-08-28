@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-excluded clean-room expression of lv_ambiq_get_glyph().
  * Layouts are public NemaVG font ABI facts and control flow is qualified by

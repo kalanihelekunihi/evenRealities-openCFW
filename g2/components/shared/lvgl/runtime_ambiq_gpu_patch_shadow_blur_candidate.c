@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-excluded clean-room expression of lv_ambiq_shadow_blur_corner().
  * The exact AmbiqSuite 5.1.0 object fixes the complete two-pass box-blur

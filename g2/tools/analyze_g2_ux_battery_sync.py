@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_compress_log_core as q
 import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-ux-battery-sync-function-map.tsv"
@@ -26,7 +27,7 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FM: "044811cba6e8cf0ec894c29026b527e121db60db790fb468323dbc06aa89da6f",
-    CL: "d6c48af920b4b89ba1cefc6cc910cdab9ab2cf5db2100793c42a5f60dac60c95",
+    CL: "f59cc27f982357569fd6ee2ee12abd8ce954ffe4735cd83e01db74ad8043f449",
     PM: "e7f0d4fcfae0ce36a2bf4ad061aeb6881ea6bff225e38252a68e24ac70fc5be6",
     PV: "2e5b288abad5fe930b9783208320505280f60d7ed42c39fd0c99439f20aed0aa",
 }
@@ -188,25 +189,9 @@ def analyze(image: Path = IMAGE) -> dict:
     ):
         raise c.AuditError("production battery-sync patch routing changed")
     report = json.loads(REPORT.read_text())
-    if (
-        report["overlay"]["size"], report["overlay"]["sha256"],
-        report["component"]["size"], report["component"]["sha256"],
-    ) != (
-        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-    ):
-        raise c.AuditError("production battery-sync build pins changed")
+    validate_apollo_main_artifacts(ROOT, c.AuditError, "battery sync")
     manifest = json.loads(MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
-    if (
-        main["provider"].get("size"), main["provider"].get("sha256"),
-        manifest["package"].get("expected_size"),
-        manifest["package"].get("expected_sha256"),
-    ) != (
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-    ):
-        raise c.AuditError("production battery-sync manifest pins changed")
     region_names = {item["name"] for item in main["regions"]}
     if not {
         "ux_battery_sync_handler_source_replacement",
@@ -265,8 +250,8 @@ def analyze(image: Path = IMAGE) -> dict:
             "retained_literal_pool_bytes": 84,
             "diagnostic_logging": "stock EasyLogger observability omitted; six-message dispatch preserved",
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
-            "hardware_blocker": "No authorized physical G2/peer battery-sync traffic, charger, or ring-state evidence is available.",
+            "hardware_validation": "deferred by project direction",
+            "hardware_blocker": "Authorized physical G2/peer battery-sync traffic, charger, or ring-state evidence is required for future qualification.",
         },
     }
 

@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 
 typedef void (*open_cfw_bootloader_log_handler_fn)(void *context);
 

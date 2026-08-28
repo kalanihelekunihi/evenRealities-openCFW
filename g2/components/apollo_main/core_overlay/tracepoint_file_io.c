@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * EasyLogger tracepoint file rotation, creation, append, write, commit, and
  * flush helpers matched to stock entries 0x0047E06A through 0x0047E231.

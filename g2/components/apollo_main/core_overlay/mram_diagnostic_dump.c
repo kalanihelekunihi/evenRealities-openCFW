@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Apollo MRAM record diagnostic dump matched to stock entry
  * 0x004789B0.

@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* Clean-room reconstruction of app/ux/ux_battery_sync/ux_battery_sync.c. */
 
 #include <stddef.h>

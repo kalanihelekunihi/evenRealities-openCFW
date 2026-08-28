@@ -54,9 +54,10 @@ class G2UxBatterySyncTests(unittest.TestCase):
              p["strict_relocations"], p["stock_replaced_bytes"],
              p["retained_literal_pool_bytes"],
              p["software_functional_gap"], p["hardware_validation"]),
-            (True, 1, 158, 2, 11, 836, 84, False, "blocked"),
+            (True, 1, 158, 2, 11, 836, 84, False,
+             "deferred by project direction"),
         )
-        self.assertIn("No authorized physical G2", p["hardware_blocker"])
+        self.assertIn("required for future qualification", p["hardware_blocker"])
 
 
 if __name__ == "__main__":

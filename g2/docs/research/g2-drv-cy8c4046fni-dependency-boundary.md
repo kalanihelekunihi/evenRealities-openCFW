@@ -85,7 +85,7 @@ documented above; if a future closure attributes it, this object's leading
 ## Production implementation
 
 `components/apollo_main/core_overlay/drv_cy8c4046fni.c` is an independently
-authored GPL-3.0-only behavioral reconstruction of all 23 executable entries.
+authored MIT behavioral reconstruction of all 23 executable entries.
 It provides the four HAL-I2C callback adapters, the five ops-table command
 veneers, threshold validation and private/public gesture configuration,
 callback installation, DFU/reset/initialization, touch-frame and difference

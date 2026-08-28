@@ -1,7 +1,8 @@
 # FreeRTOS Apollo STIMER setup source-candidate audit
 
 Status: production-excluded G2 clean-room candidate with authenticated
-AmbiqSuite constants; hardware timer validation remains mandatory
+AmbiqSuite constants; physical timer qualification is deferred by project
+direction and does not block software routing
 
 ## Result
 
@@ -53,8 +54,9 @@ This closes local opacity in scheduler timer setup without claiming it came
 from pristine FreeRTOS or Ambiq source. Production remains unchanged. The
 elapsed-tick/compare-A ISR dispatcher and tickless-idle path are now closed by
 companion dual-profile candidates. Their first-party power hooks remain
-explicit, and the combined timer closure still needs hardware timing/sleep
-validation.
+explicit. Future physical acceptance still requires authorized timing, tick,
+sleep/wake, and power-policy evidence, but that qualification is deferred by
+project direction and is not a prerequisite for software routing.
 
 Verification:
 

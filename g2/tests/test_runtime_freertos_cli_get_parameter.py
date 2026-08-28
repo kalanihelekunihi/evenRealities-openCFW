@@ -111,28 +111,28 @@ PROFILE_PINS = {
             1_140,
             "7aa0a8e045773df37ef2bb56666acc32c4a706ba5bebbe0dc736d7ff59dd1d05",
         ),
-        "production_offset": 123_200,
+        "production_offset": 183_048,
         "overlay": (
-            167_426,
-            "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
+            429_058,
+            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
         ),
         "component": (
-            3_690_822,
-            "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+            3_952_454,
+            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
         ),
         "package": (
-            4_469_316,
-            "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d",
+            4_745_526,
+            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
         ),
         "replacement_sha256": (
             "725846b2fb35bfa360ede03e42d542262fbc7f74a4aea101e6d8a9d2e2bc9bf6"
         ),
         "accounting": {
-            "generated_patch_site_bytes": 121_634,
-            "opaque_base_bytes": 3_401_548,
-            "replaced_stock_function_bytes": 121_812,
-            "source_owned_bytes": 165_622,
-            "source_owned_in_place_bytes": 182,
+            "generated_patch_site_bytes": 409_066,
+            "opaque_base_bytes": 3_111_914,
+            "replaced_stock_function_bytes": 409_246,
+            "source_owned_bytes": 431_334,
+            "source_owned_in_place_bytes": 184,
         },
     },
     "linux-clang": {
@@ -142,28 +142,28 @@ PROFILE_PINS = {
             1_120,
             "76a9d2f7de4d6c98902b84e1ad535f6bc643ae45a4676794e8e3345f41f5b263",
         ),
-        "production_offset": 125_024,
+        "production_offset": 184_776,
         "overlay": (
-            145_208,
-            "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
+            212_664,
+            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
         ),
         "component": (
-            3_668_604,
-            "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
+            3_736_060,
+            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
         ),
         "package": (
-            4_447_098,
-            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e",
+            4_529_116,
+            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
         ),
         "replacement_sha256": (
             "f5a86d3592c9b16fae073cfc5e9633dd5789985adb208cf02174be9aac6fc42e"
         ),
         "accounting": {
-            "generated_patch_site_bytes": 86_286,
-            "opaque_base_bytes": 3_436_896,
-            "replaced_stock_function_bytes": 86_468,
-            "source_owned_bytes": 126_644,
-            "source_owned_in_place_bytes": 182,
+            "generated_patch_site_bytes": 99_288,
+            "opaque_base_bytes": 3_423_892,
+            "replaced_stock_function_bytes": 99_468,
+            "source_owned_bytes": 205_144,
+            "source_owned_in_place_bytes": 184,
         },
     },
 }
@@ -640,7 +640,7 @@ class RuntimeFreeRTOSCLIGetParameterTests(unittest.TestCase):
                 3_646_593, 3, 0x007B_2461, "generated_alignment"
             ),
             "apollo_freertos_cli_get_parameter_source_leaf": (
-                3_646_596, 252, 0x007B_2464, "source_compiled"
+                3_646_596, 252, 0x007C_0E2C, "source_compiled"
             ),
         }
         for name, fields in expected.items():

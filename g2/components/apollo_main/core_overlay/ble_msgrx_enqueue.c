@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room BLE receive-record construction and enqueue reconstructed from
  * stock Thread_MsgRxFromBle at 0x0048F12C...0x0048F323.

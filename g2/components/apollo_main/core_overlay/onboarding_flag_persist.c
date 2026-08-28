@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Deferred onboarding-flag persistence matched to stock entry 0x0047E3E6.
  */

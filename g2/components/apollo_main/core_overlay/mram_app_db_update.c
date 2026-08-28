@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Apollo protected-MRAM record-database updater matched to stock
  * entry 0x00479B74 (_AppDbUpdateNVM).

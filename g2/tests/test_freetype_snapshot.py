@@ -21,9 +21,9 @@ EXPECTED_PROVENANCE_SIZE = 102377
 EXPECTED_PROVENANCE_SHA256 = (
     "2be8717625bceddee3aa95663186c0629247304c951c4790bc26cd372e3794bf"
 )
-EXPECTED_VERIFIER_SIZE = 23142
+EXPECTED_VERIFIER_SIZE = 25438
 EXPECTED_VERIFIER_SHA256 = (
-    "374788e4a400eed38efe3e4531faa8c467b329669d6b9298e0924c9c7753494c"
+    "517e54823d33c95a8d0007e07ff513d796183470a0286a7cca00d9ea93ed9709"
 )
 EXPECTED_RECORDS_SHA256 = (
     "62e233bc18e6ada5974c98d65dfc4faaf15058e39edbc435662337d60549ec32"
@@ -331,7 +331,7 @@ class FreeTypeSnapshotTests(unittest.TestCase):
                 self.assertNotEqual(result.returncode, 0, result.stdout)
                 self.assertIn("FreeType snapshot verification failed:", result.stdout)
 
-    def test_production_configs_do_not_link_the_snapshot(self) -> None:
+    def test_only_pinned_community_source_and_retained_abi_reference_snapshot(self) -> None:
         configured = list((ROOT / "manifests").glob("*.json"))
         configured.extend(
             path
@@ -345,7 +345,16 @@ class FreeTypeSnapshotTests(unittest.TestCase):
             for path in configured
             if "freetype" in path.read_text(encoding="utf-8").lower()
         ]
-        self.assertEqual(offenders, [])
+        self.assertEqual(
+            set(offenders),
+            {
+                "components/apollo_main/core_overlay/overlay.json",
+                "components/apollo_main/core_overlay/lvgl_font_manager.c",
+                "components/shared/freetype/runtime_freetype_truetype.c",
+                "components/shared/freetype/runtime_freetype_truetype.h",
+                "components/shared/freetype/source_admission.json",
+            },
+        )
 
 
 if __name__ == "__main__":

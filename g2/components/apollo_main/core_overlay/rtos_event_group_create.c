@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * RTOS static/dynamic event-group creation matched to stock entries
  * 0x0047EB94 and 0x0047EBD8.

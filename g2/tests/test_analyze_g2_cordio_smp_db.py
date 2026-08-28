@@ -61,7 +61,7 @@ class CordioSmpDbAuditTests(unittest.TestCase):
         self.assertEqual(production["compiled_leaf_bytes"], 698)
         self.assertEqual(production["source_owned_bytes_added"], 712)
         self.assertEqual(production["stock_bytes_replaced"], 2952)
-        self.assertIn("blocked", production["hardware_validation"])
+        self.assertIn("deferred by project direction", production["hardware_validation"])
 
 
 if __name__ == "__main__":

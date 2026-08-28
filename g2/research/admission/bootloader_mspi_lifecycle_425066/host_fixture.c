@@ -1,0 +1,7 @@
+/* SPDX-License-Identifier: BSD-3-Clause */
+#include "runtime_bootloader_mspi_lifecycle_candidate.h"
+static open_cfw_mspi_lifecycle_state s;static open_cfw_mspi_lifecycle_trace t;
+void open_cfw_test_lifecycle_reset(uint32_t prefix,uint32_t configured,uint32_t tcb,uint32_t cq,uint32_t hp,uint32_t xip,uint32_t delay,uint32_t disable_status){unsigned char*p=(unsigned char*)&s,*q=(unsigned char*)&t;unsigned i;for(i=0;i<sizeof(s);i++)p[i]=0;for(i=0;i<sizeof(t);i++)q[i]=0;s.prefix=prefix;s.module=2;s.configured=(uint8_t)configured;s.tcb_address=tcb;s.tcb_size=64;s.num_cq_entries=cq;s.num_hp_entries=hp;s.xip_enabled=(uint8_t)xip;s.xip_delay=delay;s.last_processed=s.num_hp_pending=s.block=s.num_transactions=s.pending_hp_transactions=s.num_unsolicited=0xa5a5a5a5U;s.hp=s.sequence=s.autonomous=0xa5U;t.cq_disable_status=disable_status;}
+uint32_t open_cfw_test_lifecycle_run(uint32_t op,uint32_t null_state){open_cfw_mspi_lifecycle_state*p=null_state?0:&s;if(op==0)return open_cfw_bootloader_mspi_enable_425066(p,&t);if(op==1)return open_cfw_bootloader_mspi_disable_4250f0(p,&t);if(op==2)return open_cfw_bootloader_mspi_deinitialize_42516c(p,&t);return 0xffffffffU;}
+uint32_t open_cfw_test_lifecycle_state(uint32_t n){uint32_t*p=(uint32_t*)&s;if(n<13U)return p[n];if(n==13)return s.configured;if(n==14)return s.hp;if(n==15)return s.sequence;if(n==16)return s.autonomous;return 0xffffffffU;}
+uint32_t open_cfw_test_lifecycle_trace(uint32_t n){uint32_t*p=(uint32_t*)&t;return n<7U?p[n]:0xffffffffU;}

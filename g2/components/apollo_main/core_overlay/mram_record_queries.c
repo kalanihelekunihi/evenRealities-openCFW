@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Apollo protected-MRAM record query helpers matched to stock entries
  * 0x0047A5D0, 0x0047A600, 0x0047A630, 0x0047A676, and 0x0047A6B4.

@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 #include "runtime_ambiq_nema_hal_candidate.h"
 
 #if UINTPTR_MAX == UINT32_MAX

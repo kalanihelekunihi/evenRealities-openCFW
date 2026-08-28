@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /*
  * Clean-room behavioral reconstruction of service_kvdb_setting.c in the
  * official G2 image. This candidate is intentionally not production-routed.

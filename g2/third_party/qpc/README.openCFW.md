@@ -4,7 +4,9 @@ This directory contains the exact public Quantum Leaps QP/C sources needed by
 the shipped EM9305 QK/QF/QEP cluster. They come from the official QP/C commit
 `416dcec8820b9cdb5827497e645d0d9375db53c6` (release 6.5.1). Each upstream
 file retains its GPL-3.0-or-later/commercial dual-license notice; openCFW uses
-the GPL-3.0-or-later option.
+the GPL-3.0-or-later option. The complete, canonical FSF GPL version 3 text from
+`https://www.gnu.org/licenses/gpl-3.0.txt` is retained in
+[`LICENSE`](LICENSE) and authenticated by `verify_snapshot.py`.
 
 The `ports/em9305` headers are openCFW configuration/ABI glue derived from the
 authenticated image: 16 active priorities, two event pools, no QF tick rates,

@@ -173,7 +173,7 @@ PROFILE_PINS = {
             "df9ef15fb16c78421f48396f0cceff2c"
         ),
         "offset": 124_612,
-        "runtime": 0x007B_29E8,
+        "runtime": 0x007C_13B0,
         "relocated_text": bytes.fromhex(
             "10b582b00c4669460822dcf4e4fc18b1d"
             "de900216160226002b010bd"
@@ -204,8 +204,8 @@ PROFILE_PINS = {
             "bfaf01f7496cce042c84c35708421508"
             "fbf2fa5acd9d9fcb209753901e09af10"
         ),
-        "offset": 126_432,
-        "runtime": 0x007B_3104,
+        "offset": 186_184,
+        "runtime": 0x007C_1A6C,
         "relocated_text": bytes.fromhex(
             "10b582b00c4669460822dcf456f900281"
             "cbfdde90012c4e9001202b010bd"

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded string-input scanner adapter matched to the stock wrapper at
  * 0x00475FC0 and its computed input callback at 0x00439BC6.

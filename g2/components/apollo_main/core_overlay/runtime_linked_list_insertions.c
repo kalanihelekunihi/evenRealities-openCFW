@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded source replacements for the G2 2.2.6.10 LVGL linked-list
  * insertion cluster at 0x00482B12...0x00482C0D:

@@ -18,6 +18,16 @@ EXPECTED_SOURCE_RECORDS_SHA256 = (
     "62e233bc18e6ada5974c98d65dfc4faaf15058e39edbc435662337d60549ec32"
 )
 EXPECTED_SOURCE_FILE_COUNT = 297
+EXPECTED_COMMUNITY_SOURCE_ADMISSION = {
+    ROOT / "components/shared/freetype/README.md":
+        "f13a833636894757cb27c4b119922060ce6b6987b41cd5413d40dd9f45e496ff",
+    ROOT / "components/shared/freetype/source_admission.json":
+        "7e5e8dfef0571a1362266be7f154d9ef45a275893c471295a09e10c6dd4ab35c",
+    ROOT / "components/shared/freetype/runtime_freetype_truetype.c":
+        "570781e86962ea7ed07bf9bce57c5e0edc21d724ad396b8958fdc65034bcb858",
+    ROOT / "components/shared/freetype/runtime_freetype_truetype.h":
+        "4bbbaed0c884f4e3ba0ca854e6a37061c8256b34858052c4835d9ecd8f3ee400",
+}
 EXPECTED_LICENSE = {
     "local_path": "LICENSE",
     "upstream_path": "docs/FTL.TXT",
@@ -285,8 +295,8 @@ EXPECTED_RETAINED_ABI_JSON_STRINGS = {
 }
 EXPECTED_RETAINED_ABI_SOURCE = {
     "path": ROOT / "components/apollo_main/core_overlay/lvgl_font_manager.c",
-    "size": 16940,
-    "sha256": "f11f98dd4c2eda815512e3e9b2e23ab7401b7cfdc439f272e69d59b684bbb080",
+    "size": 16931,
+    "sha256": "f903ee0b79df945ddcb63c8f723c68132f82d444618d995ab22121d97d591b97",
 }
 MAPPING_BIAS = 0x00437FE0
 MODULE_TABLE_ADDRESS = 0x0073EEF8
@@ -579,6 +589,13 @@ def json_strings(value: Any) -> list[str]:
 
 
 def verify_production_isolation() -> None:
+    for path, expected_hash in EXPECTED_COMMUNITY_SOURCE_ADMISSION.items():
+        require(path.is_file(), f"community-source admission missing: {path}")
+        require(
+            sha256(path.read_bytes()) == expected_hash,
+            f"community-source admission changed: {path}",
+        )
+
     production_json = list((ROOT / "manifests").glob("*.json"))
     production_json.extend(
         path
@@ -586,6 +603,8 @@ def verify_production_isolation() -> None:
         if "build" not in path.relative_to(ROOT / "components").parts
     )
     for path in production_json:
+        if path in EXPECTED_COMMUNITY_SOURCE_ADMISSION:
+            continue
         value = json.loads(path.read_text(encoding="utf-8"))
         freetype_strings = {
             item for item in json_strings(value) if "freetype" in item.lower()
@@ -617,7 +636,7 @@ def verify_production_isolation() -> None:
         and "build" not in path.relative_to(ROOT / "components").parts
     ]
     for path in production_sources:
-        if path == retained_source:
+        if path == retained_source or path in EXPECTED_COMMUNITY_SOURCE_ADMISSION:
             continue
         require(
             "freetype" not in path.read_text(encoding="utf-8").lower(),

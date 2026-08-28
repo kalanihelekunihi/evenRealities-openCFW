@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 
 typedef __UINTPTR_TYPE__ open_cfw_bootloader_word;
 

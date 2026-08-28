@@ -21,7 +21,7 @@ data; the source route does not consume or relabel it.
 
 `runtime_easylogger_transport_41b854.c` is 10,235 bytes, SHA-256
 `23a5180d3de5e45625f8323a226291d9f5ced532d7d73a320e57640794161d1c`,
-under GPL-3.0-or-later. It preserves the complete observable behavior:
+under MIT. It preserves the complete observable behavior:
 
 - the driver discards the incoming log level, moves the buffer and length to
   the downstream ABI, selects channel `1`, and returns the downstream status;

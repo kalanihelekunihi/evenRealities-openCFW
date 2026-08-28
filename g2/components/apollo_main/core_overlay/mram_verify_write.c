@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio protected-MRAM write verifier matched to stock
  * AppDbVerifyMramWrite at 0x0047B730.

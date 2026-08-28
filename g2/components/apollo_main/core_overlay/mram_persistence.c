@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Apollo MRAM persistence helpers matched to stock entries
  * 0x004787A4 and 0x00478860.

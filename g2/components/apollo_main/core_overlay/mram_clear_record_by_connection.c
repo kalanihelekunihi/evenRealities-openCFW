@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio pairing-record clearer matched to stock
  * AppDbClearRecordByConnId at 0x0047C8CC.

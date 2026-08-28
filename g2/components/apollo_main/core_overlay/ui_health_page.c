@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of app/gui/health/ui_health_page.c from the
  * authenticated G2 2.2.6.10 control-flow and data contract.  Diagnostic

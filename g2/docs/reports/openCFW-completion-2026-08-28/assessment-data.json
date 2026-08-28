@@ -1,0 +1,621 @@
+{
+  "aggregate": {
+    "buckets": {
+      "candidate_source_not_routed": 72234,
+      "generated_or_reconstructible": 418706,
+      "production_source": 466729,
+      "typed_retained_or_external": 3786805,
+      "unclassified": 0
+    },
+    "component_payload_bytes": 4744474,
+    "package_bytes": 4745418,
+    "package_envelope_bytes": 944,
+    "release_blocking_bytes": 3859039,
+    "source_incomplete_components": [
+      "apollo_main",
+      "apollo_bootloader",
+      "codec",
+      "ble_em9305",
+      "touch",
+      "case"
+    ],
+    "unclassified_components": []
+  },
+  "analysis_mode": "offline composed byte/source/license audit; no hardware, MMIO, reset, DFU, signing, flashing, or publishing operation",
+  "assessment_date": "2026-08-28",
+  "authoritative_audit": "tools/analyze_g2_completion_readiness.py",
+  "components": [
+    {
+      "buckets": {
+        "candidate_source_not_routed": 42786,
+        "generated_or_reconstructible": 401526,
+        "production_source": 438910,
+        "typed_retained_or_external": 3069124,
+        "unclassified": 0
+      },
+      "classification_complete": true,
+      "component": "Apollo main application",
+      "component_id": "apollo_main",
+      "details": {
+        "clkmgr_divider_candidate_bytes": 52,
+        "clkmgr_divider_candidate_functions": 2,
+        "clkmgr_divider_production_routed": false,
+        "nemavg_stroke_cap_candidate_bytes": 6614,
+        "nemavg_stroke_cap_candidate_functions": 3,
+        "nemavg_stroke_cap_production_routed": false,
+        "origin_buckets": {
+          "first_party_or_project_path_anchored": 319788,
+          "outside_trustworthy_function_envelopes": 2087198,
+          "third_party_path_anchored": 86364,
+          "unanchored_discovered_function": 618560
+        },
+        "provider_sha256": "47aabec489ba8882b84591e80ca0f105ff26e3739f4eb639b2d91b88fa2de701",
+        "pt_protocol_bound_commands": 66,
+        "pt_protocol_candidate_stock_body_bytes": 32866,
+        "pt_protocol_handler_surface_complete": true,
+        "pt_protocol_platform_backend_contract_complete": true,
+        "pt_protocol_platform_backend_production_bound": false,
+        "pt_protocol_production_routed": false,
+        "pt_protocol_provider_adapters_complete": true,
+        "pt_protocol_retained_provider_bindings_remaining": 0,
+        "pt_protocol_retained_provider_candidate_bindings": 36,
+        "pt_protocol_retained_provider_candidate_stock_body_bytes": 3254,
+        "pt_protocol_stock_abi_entry_complete": true,
+        "pt_protocol_target_undefined_symbols": 0
+      },
+      "hardware_blocker": "blocked by unavailable physical evidence",
+      "hardware_operations": [],
+      "hardware_validation": "blocked by unavailable physical evidence",
+      "production_routed": true,
+      "release_blocking_bytes": 3111910,
+      "size": 3952346,
+      "source_complete": false
+    },
+    {
+      "buckets": {
+        "candidate_source_not_routed": 52,
+        "generated_or_reconstructible": 16544,
+        "production_source": 27819,
+        "typed_retained_or_external": 119425,
+        "unclassified": 0
+      },
+      "classification_complete": true,
+      "component": "Apollo bootloader",
+      "component_id": "apollo_bootloader",
+      "details": {
+        "clkmgr_divider_candidate_bytes": 52,
+        "clkmgr_divider_candidate_functions": 2,
+        "clkmgr_divider_production_routed": false,
+        "provider_sha256": "3ae28d27b81ca70d96fd5846d04fa1a4f0add5a8514cee21f9f34bdaa1455eac",
+        "source_owned_in_place_bytes": 12232
+      },
+      "hardware_blocker": "blocked by unavailable physical evidence",
+      "hardware_operations": [],
+      "hardware_validation": "blocked by unavailable physical evidence",
+      "production_routed": true,
+      "release_blocking_bytes": 119477,
+      "size": 163840,
+      "source_complete": false
+    },
+    {
+      "buckets": {
+        "candidate_source_not_routed": 0,
+        "generated_or_reconstructible": 92,
+        "production_source": 0,
+        "typed_retained_or_external": 326000,
+        "unclassified": 0
+      },
+      "classification_complete": true,
+      "component": "GX8002 codec/DSP",
+      "component_id": "codec",
+      "details": {
+        "typed_external_spans": 11,
+        "unavailable_proprietary_bytes": 0
+      },
+      "hardware_blocker": "blocked by unavailable physical evidence",
+      "hardware_operations": [],
+      "hardware_validation": "blocked by unavailable physical evidence",
+      "production_routed": false,
+      "release_blocking_bytes": 326000,
+      "size": 326092,
+      "source_complete": false
+    },
+    {
+      "buckets": {
+        "candidate_source_not_routed": 0,
+        "generated_or_reconstructible": 0,
+        "production_source": 0,
+        "typed_retained_or_external": 211948,
+        "unclassified": 0
+      },
+      "classification_complete": true,
+      "component": "EM9305 BLE controller",
+      "component_id": "ble_em9305",
+      "details": {
+        "residual_readiness_bytes": {
+          "concrete_source_available": 1240,
+          "typed_unsupported_external_boundary": 8348,
+          "unavailable_proprietary_controller_code": 24070
+        },
+        "residual_scope_bytes": 33658,
+        "residual_unclassified_bytes": 0
+      },
+      "hardware_blocker": "blocked by unavailable physical evidence",
+      "hardware_operations": [],
+      "hardware_validation": "blocked by unavailable physical evidence",
+      "production_routed": false,
+      "release_blocking_bytes": 211948,
+      "size": 211948,
+      "source_complete": false
+    },
+    {
+      "buckets": {
+        "candidate_source_not_routed": 14510,
+        "generated_or_reconstructible": 512,
+        "production_source": 0,
+        "typed_retained_or_external": 19442,
+        "unclassified": 0
+      },
+      "classification_complete": true,
+      "component": "PSoC touch controller",
+      "component_id": "touch",
+      "details": {
+        "admission_batches": 18,
+        "authoritative_batch": 26,
+        "cumulative_candidate_instruction_bytes": 8524,
+        "reachable_unclassified_functions": 0,
+        "remaining_source_or_implementation_functions": 0,
+        "resident_abi_available": false,
+        "software_fwpk_package_complete": true,
+        "software_image_link_complete": true,
+        "source_image_raw_flash_bytes": 15560,
+        "source_image_translation_units": 31,
+        "source_image_undefined_symbols": 0,
+        "unimplemented_application_contracts": 0
+      },
+      "hardware_blocker": "blocked by unavailable physical evidence",
+      "hardware_operations": [],
+      "hardware_validation": "blocked by unavailable physical evidence",
+      "production_routed": false,
+      "release_blocking_bytes": 33952,
+      "size": 34464,
+      "source_complete": false
+    },
+    {
+      "buckets": {
+        "candidate_source_not_routed": 14886,
+        "generated_or_reconstructible": 32,
+        "production_source": 0,
+        "typed_retained_or_external": 40866,
+        "unclassified": 0
+      },
+      "classification_complete": true,
+      "component": "STM32 charging case",
+      "component_id": "case",
+      "details": {
+        "final_unclassified_bytes": 0,
+        "open_semantic_questions": [
+          "exact FreeRTOS point release within V10.x",
+          "exact STM32 HAL version",
+          "precise task-name to entry-function pairing (descriptor fn fields are runtime-patched; six create calls use descriptor-table names)",
+          "semantic task-name pairing for the seven now-bounded entry bodies (descriptor names are runtime-patched)",
+          "first-party policy function naming beyond the verified set"
+        ],
+        "ownership_categories": {
+          "device_specific_preserve": 0,
+          "first_party_g2": 31042,
+          "generated_transport": 0,
+          "unresolved": 17070,
+          "upstream_cmsis_startup": 502,
+          "upstream_freertos_kernel": 5814,
+          "upstream_stm32_hal": 1324
+        },
+        "physical_bucket_digest": "126efe6801410d0051201a4a0a7f04a3a0ddd917117cb305afad35772e907a89",
+        "prior_unresolved_bytes": 17070,
+        "pure_helper_candidate_bytes": 248,
+        "pure_helper_candidate_functions": 7,
+        "register_candidate_bytes": 14886,
+        "register_candidate_functions": 222,
+        "register_policy_candidate_bytes": 214,
+        "register_policy_candidate_functions": 8,
+        "register_primitive_candidate_bytes": 120,
+        "register_primitive_candidate_functions": 13,
+        "register_transform_candidate_bytes": 96,
+        "register_transform_candidate_functions": 5,
+        "semantic_leaf_candidate_bytes": 14208,
+        "semantic_leaf_candidate_functions": 189,
+        "software_even_package_complete": true,
+        "software_image_link_complete": true,
+        "source_image_raw_flash_bytes": 18916,
+        "source_image_translation_units": 8,
+        "source_image_undefined_symbols": 0,
+        "typed_unsupported_frontier_bytes": 2184
+      },
+      "hardware_blocker": "blocked by unavailable physical evidence",
+      "hardware_operations": [],
+      "hardware_validation": "blocked by unavailable physical evidence",
+      "production_routed": false,
+      "release_blocking_bytes": 55752,
+      "size": 55784,
+      "source_complete": false
+    }
+  ],
+  "definitions": {
+    "binary_redistribution_authority_resolved": "A durable redistribution grant is recorded for every packaged binary. Source licensing does not establish this grant.",
+    "candidate_source_not_routed": "Reviewed source candidate not used by the production provider.",
+    "classification_complete": "Every byte has a source, generated, candidate, or typed-boundary decision. This is independent of source completion.",
+    "generated_or_reconstructible": "Deterministic framing, patch, alignment, or format metadata; this does not imply recovered application behavior.",
+    "production_source": "Bytes emitted from maintained source and routed by the current production component build.",
+    "source_complete": "No component bytes still require retained or external firmware.",
+    "typed_retained_or_external": "A known retained, upstream, proprietary, or unsupported boundary; classification is not source ownership.",
+    "unclassified": "Bytes without a final source or boundary decision."
+  },
+  "gates": {
+    "binary_redistribution_authority_resolved": false,
+    "byte_accounting_complete": true,
+    "classification_complete": true,
+    "hardware_blocker": "blocked by unavailable physical evidence",
+    "hardware_operations": [],
+    "hardware_validation": "blocked by unavailable physical evidence",
+    "project_license_policy_clean": true,
+    "release_authorized": false,
+    "source_complete": false,
+    "source_metadata_clean": true,
+    "source_ownership_quality_clean": true
+  },
+  "generated_by": "tools/generate_g2_completion_report.py",
+  "hardware_operations": [],
+  "hardware_validation": "blocked by unavailable physical evidence",
+  "licensing": {
+    "binary_redistribution_authority": [
+      {
+        "component": "GX8002 codec/DSP",
+        "component_id": "codec",
+        "reason": "official Even/NationalChip-derived codec blob; no redistribution grant is recorded",
+        "redistribution_authority": "unresolved",
+        "source_availability": "binary-only-in-core-source-package"
+      },
+      {
+        "component": "EM9305 BLE controller",
+        "component_id": "ble_em9305",
+        "reason": "official Even/EM9305 patch blob; no redistribution grant is recorded",
+        "redistribution_authority": "unresolved",
+        "source_availability": "binary-only-in-core-source-package"
+      },
+      {
+        "component": "PSoC touch controller",
+        "component_id": "touch",
+        "reason": "official Even touch-controller blob; no redistribution grant is recorded",
+        "redistribution_authority": "unresolved",
+        "source_availability": "binary-only-in-core-source-package"
+      },
+      {
+        "component": "STM32 charging case",
+        "component_id": "case",
+        "reason": "official Even charging-case blob; no redistribution grant is recorded",
+        "redistribution_authority": "unresolved",
+        "source_availability": "binary-only-in-core-source-package"
+      },
+      {
+        "component": "Apollo bootloader",
+        "component_id": "apollo_bootloader",
+        "reason": "source overlay retains official Even bootloader bytes without a recorded redistribution grant",
+        "redistribution_authority": "unresolved",
+        "source_availability": "overlay-source-plus-retained-binary"
+      },
+      {
+        "component": "Apollo main application",
+        "component_id": "apollo_main",
+        "reason": "source overlay retains official Even application bytes without a recorded redistribution grant",
+        "redistribution_authority": "unresolved",
+        "source_availability": "overlay-source-plus-retained-binary"
+      }
+    ],
+    "separation_rule": "source availability and source license compliance do not establish permission to redistribute retained or binary-only firmware",
+    "source_classification_counts": {
+      "project-owned-or-adapted": 564,
+      "upstream-licensed": 192
+    },
+    "source_errors": 0,
+    "source_files": 756,
+    "source_license_counts": {
+      "Apache-2.0": 80,
+      "BSD-2-Clause": 2,
+      "BSD-3-Clause": 95,
+      "GPL-3.0-only": 1,
+      "ISC": 7,
+      "MIT": 544,
+      "Zlib": 27
+    },
+    "source_metadata_clean": true,
+    "unresolved_binary_authority": [
+      "codec",
+      "ble_em9305",
+      "touch",
+      "case",
+      "apollo_bootloader",
+      "apollo_main"
+    ]
+  },
+  "package": {
+    "component_payload_bytes": 4744474,
+    "conservation": {
+      "component_bucket_bytes": 4744474,
+      "component_buckets_plus_envelope_bytes": 4745418,
+      "matches_expected_package_size": true
+    },
+    "expected_sha256": "b0748df36cbcba58a0bf04ca4de4fa27887f8db0ddb87de61755d830c2ddae58",
+    "expected_size": 4745418,
+    "format": "EVENOTA",
+    "generated_envelope_bytes": 944
+  },
+  "project_license_policy": {
+    "apache_records_preserved": 80,
+    "bsd_records_preserved": 97,
+    "case_source_image_package_files": 5,
+    "case_source_image_project_mit_files": 7,
+    "case_source_image_support_files": 2,
+    "clean": true,
+    "community_controller_and_adapter_source_files": 106,
+    "community_project_mit_compatible_source_files": 103,
+    "community_touch_apache_source_files_preserved": 3,
+    "distributed_project_mit_normalization_targets": 883,
+    "overlay_records_pending_mit": 0,
+    "project_owned_gpl_records_pending_mit": 0,
+    "project_owned_normalization_targets": 460,
+    "project_owned_records_normalized_mit": 460,
+    "pt_protocol_project_mit_files": 28,
+    "touch_source_image_package_files": 6,
+    "touch_source_image_project_mit_files": 9,
+    "touch_source_image_support_files": 3,
+    "upstream_gpl_records_preserved": 1,
+    "zlib_records_preserved": 27
+  },
+  "schema_version": 2,
+  "source_inputs": [
+    {
+      "path": "manifests/g2-2.2.6.10.json",
+      "sha256": "1e6f7da11f63cf063098de2213a304e0a15fe99e9a932cdef9fedf32d2856c61",
+      "size": 9602
+    },
+    {
+      "path": "manifests/g2-2.2.6.10-core-source.json",
+      "sha256": "b9f79075bba42908c9969f1ddc328a1cbe63a75a9ac39d64bb4e3cf25150b3cb",
+      "size": 3234390
+    },
+    {
+      "path": "components/apollo_main/core_overlay/build/build-report.json",
+      "sha256": "81d7f12a26604699e9203a13bb9a712c35ccc68d162d1dea54297a2a5cc4e1cc",
+      "size": 17476619
+    },
+    {
+      "path": "components/bootloader/core_overlay/build/build-report.json",
+      "sha256": "356c6e54f46333a7e4b30e1429514600ae763185011ea50c72b65a507a553fa2",
+      "size": 1977292
+    },
+    {
+      "path": "tools/manifests/g2-apollo-origin-accounting.json",
+      "sha256": "d6e49a0d6598dbf5ffba26c4a4cd9d7bc922ccf174b4e958b3808648bfed00ab",
+      "size": 1128
+    },
+    {
+      "path": "tools/manifests/g2-touch-software-readiness-summary.json",
+      "sha256": "49aba2b079b5701306a86c1336c215b7cf65cf4e30647cd48b093153b93ae521",
+      "size": 6472
+    },
+    {
+      "path": "tools/manifests/g2-touch-current-source-readiness-summary.json",
+      "sha256": "52cc2eaecbff5adde23c8a4a7c12d6ffa18fc7074613f460ca0b981e71436c9f",
+      "size": 1089
+    },
+    {
+      "path": "tools/manifests/g2-touch-final-classification-summary.json",
+      "sha256": "bcdb2efd8848bf7ab056f1c52a1ef8a6c3cbcef96ccf67461b403f68bbaef698",
+      "size": 3980
+    },
+    {
+      "path": "tools/manifests/g2-box-function-map-summary.json",
+      "sha256": "01f5a680691853530a12bdacc03efcf6554f7f0966ee4a1b9cab0cc5787763af",
+      "size": 105706
+    },
+    {
+      "path": "tools/manifests/g2-case-register-primitives-admission-summary.json",
+      "sha256": "8641ca5807590f8f862cb0a38c8ffd58525a85832182028a88c7bedbd5438cf6",
+      "size": 1746
+    },
+    {
+      "path": "tools/manifests/g2-case-register-transforms-admission-summary.json",
+      "sha256": "2e14bd53a203e05515d2cb7d619d7022680047864942045d4ae77dd0a6ae9074",
+      "size": 1417
+    },
+    {
+      "path": "tools/manifests/g2-case-final-classification-summary.json",
+      "sha256": "7e6073418e114a14a098f62019441b806b1c2d9c6ffdb802f0896d113c46f3a1",
+      "size": 2082
+    },
+    {
+      "path": "tools/manifests/g2-production-raw-encoding-quality-summary.json",
+      "sha256": "7afe2c6dfafc4da4a770c18c4b8ab3cdc1600ce1d885d429f76869ccb9dbd3aa",
+      "size": 4202
+    },
+    {
+      "path": "tools/manifests/g2-project-license-normalization.tsv",
+      "sha256": "311df5af3977822bd5782469324e27008d78b58a5a5d8f67980a80c31797a0eb",
+      "size": 103450
+    },
+    {
+      "path": "tools/manifests/g2-project-license-normalization-summary.json",
+      "sha256": "d6af9cf64fce360e33161f8f68a6502e455a84674a00d3cdabcfd02d3fb4ff2b",
+      "size": 2113
+    },
+    {
+      "path": "tools/manifests/g2-project-mit-normalization-scope-paths.txt",
+      "sha256": "ac0eec0959a8f5484a19d6e4ad2ef6d10fccece00704aed4255e9f5af9e83c5f",
+      "size": 45464
+    },
+    {
+      "path": "tools/manifests/g2-project-mit-normalization-research-and-wrapper.txt",
+      "sha256": "802f3b8d819b67d85a6e856cc149972c6adcc41b73f690b4f2ad37a54c21111b",
+      "size": 1189
+    },
+    {
+      "path": "tools/manifests/gx8002-source-readiness.tsv",
+      "sha256": "d89d6c7b26d7e4453bc1bab436868d554a9f39ab52308931c0fb5ceea485b32e",
+      "size": 6051
+    },
+    {
+      "path": "tools/manifests/em9305-residual-provenance-map.tsv",
+      "sha256": "2ac24d2abf1f4a4fbce236a82f4591a38dfdb0a71c5ca5b2f8e88bcd9a722d36",
+      "size": 47936
+    },
+    {
+      "path": "components/apollo_main/core_overlay/overlay.json",
+      "sha256": "d9f37dfe5b02fbddc2cb2aead681344995cfb95adb4605ff5dde29a9f366b171",
+      "size": 5951725
+    },
+    {
+      "path": "components/bootloader/core_overlay/overlay.json",
+      "sha256": "f6dcf011c7d93a7db34b629155e28ac38e7dc6cfde16a12055ac87d3a0ad8297",
+      "size": 918750
+    },
+    {
+      "path": "tools/analyze_g2_completion_readiness.py",
+      "sha256": "35dcd97457a67758412f739438a37a63df8e4c66cea9ab562519c5aa939a2508",
+      "size": 43256
+    },
+    {
+      "path": "tools/analyze_g2_production_raw_encoding_quality.py",
+      "sha256": "45b4ad797e6b1d51ef8dc3d783c284e08287f1b46fd5913f7beb313e7c94f923",
+      "size": 11735
+    },
+    {
+      "path": "tools/analyze_g2_project_license_normalization.py",
+      "sha256": "1df885ca996f6a5dd47a62521bf96010a039df6a2f560a401e7f81eaed399463",
+      "size": 19412
+    },
+    {
+      "path": "tools/audit_g2_release_licensing.py",
+      "sha256": "08c5f070e2a74648b0e7f5a2807e1bd3ebe72dff72d068b344e2d9a211b85a66",
+      "size": 9325
+    },
+    {
+      "path": "tools/manifests/g2-touch-application-core-admission-summary.json",
+      "sha256": "a0529d9de9c8a7207c7eb40dd88cf7b1481dadd8e7655634849aaa8c61c17415",
+      "size": 1757
+    },
+    {
+      "path": "tools/manifests/g2-touch-application-packet-pipeline-admission-summary.json",
+      "sha256": "12f2b7d33e72a590d3d3e0ef8247baa2d1020944ffe450106cb43ee726d8fd43",
+      "size": 2140
+    },
+    {
+      "path": "tools/manifests/g2-touch-application-state-pipeline-admission-summary.json",
+      "sha256": "f4709b91c42fd4461828e108b57bfef44981bf8376a73b6df96d790b62133333",
+      "size": 2076
+    },
+    {
+      "path": "tools/manifests/g2-touch-clock-application-wrappers-admission-summary.json",
+      "sha256": "c58d39793f53b622cb0443a7e83da2e99b8d8672a1f61133a7386411fec47a45",
+      "size": 1813
+    },
+    {
+      "path": "tools/manifests/g2-touch-closed-record-pipeline-admission-summary.json",
+      "sha256": "249513254b7a06df0d5f5d6d712ca291563343d9e7d95831fffc56fa2386f52e",
+      "size": 2032
+    },
+    {
+      "path": "tools/manifests/g2-touch-configuration-bootstrap-admission-summary.json",
+      "sha256": "469a37e78b8e27dc7461e4bd508b2f7694ee1c190720b1b7486516d0113a8d97",
+      "size": 1663
+    },
+    {
+      "path": "tools/manifests/g2-touch-configuration-start-pipeline-admission-summary.json",
+      "sha256": "8fe3d4722497ebff8a75e729d71c743418b3f5cc8cacee08b2fbb1d86e5f8087",
+      "size": 1939
+    },
+    {
+      "path": "tools/manifests/g2-touch-deferred-work-admission-summary.json",
+      "sha256": "325d8b22c326ccfa41f9f84effe32f6cfaa1b282d981e146efd9637eba27ea03",
+      "size": 1607
+    },
+    {
+      "path": "tools/manifests/g2-touch-emeeprom-clean-room-admission-summary.json",
+      "sha256": "b7c8dec7c33daad3920467c01bcd017cef6f4c020a4c644ca803cb576cf39c58",
+      "size": 1812
+    },
+    {
+      "path": "tools/manifests/g2-touch-flash-row-admission-summary.json",
+      "sha256": "01452f835c00bf3a7c4ebaa5abf760348939daac73cbb285de451e3dd2df93b6",
+      "size": 1590
+    },
+    {
+      "path": "tools/manifests/g2-touch-leaf-primitives-admission-summary.json",
+      "sha256": "744949b33e6146612d368a41743e4273234a6d814822d06830a004ccb2691105",
+      "size": 1842
+    },
+    {
+      "path": "tools/manifests/g2-touch-platform-completion-admission-summary.json",
+      "sha256": "74cab16d448ce4a9fa8424781364a1f2a8c7a23ed06ba7f0e77489de14594764",
+      "size": 1995
+    },
+    {
+      "path": "tools/manifests/g2-touch-platform-wrappers-admission-summary.json",
+      "sha256": "def49a99731d5d48cec86c9c528cb1ec759693a87dde9ea7b3e5ccb1e513f0a6",
+      "size": 1777
+    },
+    {
+      "path": "tools/manifests/g2-touch-product-orchestration-admission-summary.json",
+      "sha256": "626b7d77e8b516e98fc39966ec0fb51241bd6663cdbe050d86063bcc8743229e",
+      "size": 1779
+    },
+    {
+      "path": "tools/manifests/g2-touch-record-primitives-admission-summary.json",
+      "sha256": "769de3b7923c35db17416d3ea42d6b0aef15820b4a8218447cdf2a23f94a60ed",
+      "size": 1887
+    },
+    {
+      "path": "tools/manifests/g2-touch-selection-update-pipeline-admission-summary.json",
+      "sha256": "ba1bca5b01b021822600657baae0948fab94a779c62be92415403a34c613a31f",
+      "size": 2068
+    },
+    {
+      "path": "tools/manifests/g2-touch-source-admission-summary.json",
+      "sha256": "de65922c0fc7143782110054c8d5be7572b4dbaeac906eec5110dd6d09a06d35",
+      "size": 2047
+    },
+    {
+      "path": "tools/manifests/g2-touch-startup-closed-admission-summary.json",
+      "sha256": "3801dc3dcb77231f0795bc3de86c1370686a78f42216f50b044cb4e569ce1f82",
+      "size": 1653
+    },
+    {
+      "path": "tools/manifests/g2-touch-storage-adapters-admission-summary.json",
+      "sha256": "821b31f91ae5fff81e0032db1f56a297bd1c7c870d0496b76892495c5ed601e2",
+      "size": 1900
+    },
+    {
+      "path": "tools/manifests/g2-touch-terminal-wrappers-admission-summary.json",
+      "sha256": "f22ad951fdc755e472de39ca454c95346d31c8c87841d004bda652720f2f1275",
+      "size": 1597
+    }
+  ],
+  "source_ownership_quality": {
+    "clean": true,
+    "production_routed_sources_with_directives": 2,
+    "quality_gate": "fail_closed_raw_instruction_transcription_not_source_owned",
+    "raw_instruction_transcription_bytes": 0,
+    "semantic_literal_bytes": 16,
+    "source_owned_bytes_currently_overstated": 0
+  },
+  "target": "Even Realities G2 s200_v2.2.6.10",
+  "touch_admission": {
+    "admission_batches": 18,
+    "authoritative_batch": 26,
+    "candidate_source_not_routed_bytes": 14510,
+    "cumulative_candidate_instruction_bytes": 8524,
+    "production_routed": false,
+    "remaining_application_contracts": 0,
+    "remaining_reachable_functions": 0,
+    "remaining_unclassified_bytes": 0
+  }
+}

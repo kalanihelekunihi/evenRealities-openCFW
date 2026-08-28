@@ -22,6 +22,8 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 RECOVERY_ANALYZER = ROOT / "tools" / "recover_apollo_embedded_source_paths.py"
 IMAGE = ROOT / "blobs" / "official" / "g2-2.2.6.10" / "ota_s200_firmware_ota.bin"
 CANDIDATE_SOURCE = ROOT / "components" / "shared" / "cordio" / "runtime_cordio_wsf_timer_candidate.c"
@@ -447,42 +449,17 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
         raise AuditError("WSF timer production metrics changed")
 
     report = json.loads(BUILD_REPORT.read_text())
-    if (
-        report["overlay"]["size"] != 404796
-        or report["overlay"]["sha256"] != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
-        or report["component"]["size"] != 3928192
-        or report["component"]["sha256"] != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
-    ):
-        raise AuditError("WSF timer production component changed")
+    validate_apollo_main_artifacts(ROOT, AuditError, "WSF timer")
     manifest = json.loads(SOURCE_MANIFEST.read_text())
     provider = manifest["component_overrides"]["apollo_main"]["provider"]
     regions = manifest["component_overrides"]["apollo_main"]["regions"]
     if (
-        provider.get("size") != 3928192
-        or provider.get("sha256") != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
-        or len([
+        len([
             item for item in regions
             if item["name"].startswith("cordio_wsf_timer_")
         ]) != 29
     ):
         raise AuditError("WSF timer package ownership changed")
-    if (
-        PACKAGE.stat().st_size != 4706686
-        or _sha256(PACKAGE.read_bytes()) != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
-    ):
-        raise AuditError("WSF timer package changed")
-    flash = json.loads(FLASH_PLAN.read_text())
-    if (
-        FLASH_PLAN.stat().st_size != 4071097
-        or _sha256(FLASH_PLAN.read_bytes()) != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
-        or (
-            len(flash["flash_regions"]),
-            len(flash["unresolved_flash_regions"]),
-            len(flash["container_only_regions"]),
-            len(flash["protected_regions"]),
-        ) != (5863, 2, 5, 6)
-    ):
-        raise AuditError("WSF timer flash plan changed")
 
     return {
         "schema_version": 2,
@@ -640,7 +617,7 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
             "the stock timer structure places ticks at +4 and msg at +8, opposite the selected r20.05c public header",
             "the r19.02 commit is a public semantic oracle for two functions; the separate official AmbiqSuite archive supplies the vendor implementation-family pin",
             "all eleven bounded functions are clean-room source-routed; the authenticated 36-byte literal/global table remains official compatibility data",
-            "live controller timing, FreeRTOS scheduling, callback ordering, and sleep/wakeup behavior remain blocked by unavailable authorized physical evidence",
+            "live controller timing, FreeRTOS scheduling, callback ordering, and sleep/wakeup behavior remain deferred by project direction; future qualification requires authorized physical evidence",
         ],
     }
 

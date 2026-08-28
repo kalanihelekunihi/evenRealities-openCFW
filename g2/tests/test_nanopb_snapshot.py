@@ -150,10 +150,10 @@ FIELD_DECODER_FIXTURE = ROOT / "tests/fixtures/runtime_nanopb_field_decoder_clus
 FIELD_DECODER_AUDIT = ROOT / "docs/research/nanopb-field-decoder-cluster-boundary-audit.md"
 FIELD_DECODER_ANALYZER = ROOT / "tools/analyze_g2_nanopb_field_decoder_cluster.py"
 PRODUCTION_OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
-EXPECTED_PROVENANCE_SIZE = 125493
-EXPECTED_PROVENANCE_SHA256 = "c1bbb7d80e38a1ab18e7c71c03b89a891090509949e45a4db0f3224a927a1a99"
-EXPECTED_VERIFIER_SIZE = 233514
-EXPECTED_VERIFIER_SHA256 = "8f24bbf9f4c8cf7d0c0b75bca804284f81d4222fa9feebb966b4e7aea599596e"
+EXPECTED_PROVENANCE_SIZE = 135337
+EXPECTED_PROVENANCE_SHA256 = "1ed69185777206c4776f6961906d0cfefdca433fd2009d2dd92f01148ba9ec83"
+EXPECTED_VERIFIER_SIZE = 232622
+EXPECTED_VERIFIER_SHA256 = "d3f6a5164416310b88524e207b11fb3bffb1bfb3d871209739fbdcadb8c5bcc6"
 EXPECTED_RECORDS_SHA256 = "bb36791b9ae9a6cff412516db0b93911240fff8e8109d56136ca76173ac3a3e0"
 EXPECTED_SOURCE_PATHS = [
     "LICENSE.txt",
@@ -452,8 +452,7 @@ def write_valid_production_registration(root: Path) -> None:
                     ),
                     "size": 1975,
                     "sha256": (
-                        "fefd8a899174fb9332c366df691dc2c8"
-                        "ec6f4792f3fd464b65dbb573ace8ee19"
+                        "1ebb54c28d7d8c29757e9852f4c79200466c5fbb5ceeb406a68244b484e4c8fe"
                     ),
                     "license": "Zlib",
                     "upstream_commit": (
@@ -464,14 +463,12 @@ def write_valid_production_registration(root: Path) -> None:
                 "expected": {
                     "size": 50,
                     "sha256": (
-                        "c9fc88c025ec843fa3ad3f77b4e1bfb8"
-                        "4126fd397a81d96c271646eb70632539"
+                        "c9fc88c025ec843fa3ad3f77b4e1bfb84126fd397a81d96c271646eb70632539"
                     ),
                     "alignment": 4,
                     "offset": 124496,
                     "unrelocated_sha256": (
-                        "798f8f7cbed57f6ba11dad46a6de9d25"
-                        "cb1f1710eb4fa904d79b6fe449952a04"
+                        "798f8f7cbed57f6ba11dad46a6de9d25cb1f1710eb4fa904d79b6fe449952a04"
                     ),
                 },
                 "relocations": [fixed32_call],
@@ -480,14 +477,12 @@ def write_valid_production_registration(root: Path) -> None:
                         "expected": {
                             "size": 50,
                             "sha256": (
-                                "53a1961d2df94674da6890611087ab865"
-                                "498084ced6a6f0c6850dcee23c7bf60"
+                                "53a1961d2df94674da6890611087ab865498084ced6a6f0c6850dcee23c7bf60"
                             ),
                             "alignment": 4,
-                            "offset": 126316,
+                            "offset": 186068,
                             "unrelocated_sha256": (
-                                "798f8f7cbed57f6ba11dad46a6de9d25"
-                                "cb1f1710eb4fa904d79b6fe449952a04"
+                                "798f8f7cbed57f6ba11dad46a6de9d25cb1f1710eb4fa904d79b6fe449952a04"
                             ),
                         },
                         "relocations": [fixed32_call],
@@ -507,8 +502,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x0048F4B8,
                         "expected_size": 246,
                         "expected_sha256": (
-                            "8583fa17383d72bbdcab6c2a7a20369d"
-                            "c0598d3ac3061feaf8a7b29dfa520150"
+                            "8583fa17383d72bbdcab6c2a7a20369dc0598d3ac3061feaf8a7b29dfa520150"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_decode_varint32_eof",
@@ -518,8 +512,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x0048F5AE,
                         "expected_size": 10,
                         "expected_sha256": (
-                            "48218a658cffd7aeddfb623c9d0e7bd0"
-                            "38ceb2a6898e9f8d08b10d5779f4f79b"
+                            "48218a658cffd7aeddfb623c9d0e7bd038ceb2a6898e9f8d08b10d5779f4f79b"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_decode_varint32",
@@ -529,8 +522,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x0048F64C,
                         "expected_size": 32,
                         "expected_sha256": (
-                            "03afe2d60436676fffba342c7b8c9504"
-                            "992fa903d7cba768396fd1de2c6c66cd"
+                            "03afe2d60436676fffba342c7b8c9504992fa903d7cba768396fd1de2c6c66cd"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_skip_string",
@@ -540,8 +532,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x0048F6A0,
                         "expected_size": 74,
                         "expected_sha256": (
-                            "36089daffbbc82abad65d97ae0fd64b58"
-                            "b8ad227ed585aa704611bc30369912d"
+                            "36089daffbbc82abad65d97ae0fd64b58b8ad227ed585aa704611bc30369912d"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_skip_field",
@@ -551,8 +542,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x0048F6EA,
                         "expected_size": 148,
                         "expected_sha256": (
-                            "1e970a9b198943e309550811010fc1ba"
-                            "4008d671d023abfc5c893b965fee2bc9"
+                            "1e970a9b198943e309550811010fc1ba4008d671d023abfc5c893b965fee2bc9"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_read_raw_value",
@@ -562,8 +552,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x0048F77E,
                         "expected_size": 76,
                         "expected_sha256": (
-                            "db925e0c532bac2f2e38f398c7b7d996"
-                            "69afe4d41e6690b08116e9f06ec7d88d"
+                            "db925e0c532bac2f2e38f398c7b7d99669afe4d41e6690b08116e9f06ec7d88d"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_make_string_substream",
@@ -573,8 +562,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x00490150,
                         "expected_size": 64,
                         "expected_sha256": (
-                            "80b24be422cf924f3ae1b79669312535d"
-                            "c0d5a56dd88be8a6b9e4ee5ff064048"
+                            "80b24be422cf924f3ae1b79669312535dc0d5a56dd88be8a6b9e4ee5ff064048"
                         ),
                         "branch": "b_w",
                         "target_function": (
@@ -586,8 +574,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x0048F49C,
                         "expected_size": 28,
                         "expected_sha256": (
-                            "852314bb8f86dcbd550deb0f51bc285b"
-                            "662e39c1b4fae66690c44a7bf4f7a674"
+                            "852314bb8f86dcbd550deb0f51bc285b662e39c1b4fae66690c44a7bf4f7a674"
                         ),
                         "branch": "b_w",
                         "target_function": (
@@ -599,8 +586,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x0048F3A4,
                         "expected_size": 26,
                         "expected_sha256": (
-                            "9d6c6690294b82bbafba82ec0f63a6bb"
-                            "5b78e4146543db3a30fac92469ace723"
+                            "9d6c6690294b82bbafba82ec0f63a6bb5b78e4146543db3a30fac92469ace723"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_buf_read",
@@ -610,8 +596,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x0048F3BE,
                         "expected_size": 150,
                         "expected_sha256": (
-                            "69aecb900c749fd98bd2d05e2229e9a3d"
-                            "6829bd36f3e393f624e3579a9b4af7f"
+                            "69aecb900c749fd98bd2d05e2229e9a3d6829bd36f3e393f624e3579a9b4af7f"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_read",
@@ -621,8 +606,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x0048F454,
                         "expected_size": 72,
                         "expected_sha256": (
-                            "15c8303c5c1dbf1b3f143142c6169026"
-                            "cb8bc56b37a6291dd0457b3664b67ae5"
+                            "15c8303c5c1dbf1b3f143142c6169026cb8bc56b37a6291dd0457b3664b67ae5"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_readbyte",
@@ -632,8 +616,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x00490190,
                         "expected_size": 28,
                         "expected_sha256": (
-                            "1ee27599a8ac5b8d2a0cbaac59986fb4"
-                            "9be7b24c348a960a216b8cbbecce5bf3"
+                            "1ee27599a8ac5b8d2a0cbaac59986fb49be7b24c348a960a216b8cbbecce5bf3"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_decode_fixed32",
@@ -643,8 +626,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x004901AC,
                         "expected_size": 32,
                         "expected_sha256": (
-                            "96228dfbdfe30665d79281ba0fd5ba3b3"
-                            "af38701396671cd20b77623ffd82d54"
+                            "96228dfbdfe30665d79281ba0fd5ba3b3af38701396671cd20b77623ffd82d54"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_decode_fixed64",
@@ -654,8 +636,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x004D9384,
                         "expected_size": 32,
                         "expected_sha256": (
-                            "cc5525b596a66b8ba09f2c055d96c08c"
-                            "8ce4a0679efb6f36ce042626a3dc4277"
+                            "cc5525b596a66b8ba09f2c055d96c08c8ce4a0679efb6f36ce042626a3dc4277"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_field_iter_begin",
@@ -665,8 +646,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x004D93A4,
                         "expected_size": 52,
                         "expected_sha256": (
-                            "fee54683c36fc5510dace567fdb198ab0"
-                            "1b619da62d24244e1ee7461b3f32026"
+                            "fee54683c36fc5510dace567fdb198ab01b619da62d24244e1ee7461b3f32026"
                         ),
                         "branch": "b_w",
                         "target_function": (
@@ -678,8 +658,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x004D93D8,
                         "expected_size": 32,
                         "expected_sha256": (
-                            "fd4a858244f26a7c27bc2b11fbfa49a2"
-                            "9ff434037e663491696b821876fc71f7"
+                            "fd4a858244f26a7c27bc2b11fbfa49a29ff434037e663491696b821876fc71f7"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_field_iter_next",
@@ -689,8 +668,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x004D93F8,
                         "expected_size": 118,
                         "expected_sha256": (
-                            "08bc6b102be2bef55978dc3504dda4d6"
-                            "e2d5ea42fe1c5dd213608c07754e8005"
+                            "08bc6b102be2bef55978dc3504dda4d6e2d5ea42fe1c5dd213608c07754e8005"
                         ),
                         "branch": "b_w",
                         "target_function": "open_cfw_nanopb_field_iter_find",
@@ -700,8 +678,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x004D946E,
                         "expected_size": 74,
                         "expected_sha256": (
-                            "6551f77748e3d2271292923b2939c0cf"
-                            "68782df4f731e76a441f30cf531f7bde"
+                            "6551f77748e3d2271292923b2939c0cf68782df4f731e76a441f30cf531f7bde"
                         ),
                         "branch": "b_w",
                         "target_function": (
@@ -713,8 +690,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x004D94BA,
                         "expected_size": 24,
                         "expected_sha256": (
-                            "1d71a0692ecf47bbf9b742cf2676484f"
-                            "20ce989b0d3750679a17df23e12a4827"
+                            "1d71a0692ecf47bbf9b742cf2676484f20ce989b0d3750679a17df23e12a4827"
                         ),
                         "branch": "b_w",
                         "target_function": (
@@ -728,8 +704,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x004D94D2,
                         "expected_size": 20,
                         "expected_sha256": (
-                            "f67d2e9c40793f2decfc532705dc3d47"
-                            "19f6d8212f7efef381dd9f42f417758e"
+                            "f67d2e9c40793f2decfc532705dc3d4719f6d8212f7efef381dd9f42f417758e"
                         ),
                         "branch": "b_w",
                         "target_function": (
@@ -741,8 +716,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x004D94E6,
                         "expected_size": 60,
                         "expected_sha256": (
-                            "1ec35a15769044d8effbad2c20328d0d"
-                            "a966cf4af14b9ba890b6d17850813d03"
+                            "1ec35a15769044d8effbad2c20328d0da966cf4af14b9ba890b6d17850813d03"
                         ),
                         "branch": "b_w",
                         "target_function": (
@@ -754,8 +728,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x0048FCE2,
                         "expected_size": 272,
                         "expected_sha256": (
-                            "0d0dd0be0ae68f84bb20e39f7c95f500"
-                            "656316563d95b6d5cc3e290d4b131728"
+                            "0d0dd0be0ae68f84bb20e39f7c95f500656316563d95b6d5cc3e290d4b131728"
                         ),
                         "branch": "b_w",
                         "target_function": (
@@ -767,8 +740,7 @@ def write_valid_production_registration(root: Path) -> None:
                         "runtime_address": 0x0048FDF2,
                         "expected_size": 166,
                         "expected_sha256": (
-                            "1409633f121586a45b076e247e2f1f33"
-                            "f6120be85044245f42ca777955bd34e4"
+                            "1409633f121586a45b076e247e2f1f33f6120be85044245f42ca777955bd34e4"
                         ),
                         "branch": "b_w",
                         "target_function": (
@@ -807,6 +779,59 @@ def write_valid_production_registration(root: Path) -> None:
 
 
 class NanopbSnapshotTests(unittest.TestCase):
+    def test_all_distributed_runtime_source_pins_are_exact_and_zlib(self) -> None:
+        provenance = json.loads(PROVENANCE.read_text(encoding="utf-8"))
+        records: dict[str, list[tuple[int, str]]] = {}
+
+        def collect(value: object) -> None:
+            if isinstance(value, dict):
+                local_source = value.get("local_source")
+                if (
+                    isinstance(local_source, str)
+                    and local_source.startswith(
+                        "components/shared/nanopb/runtime_nanopb_"
+                    )
+                    and local_source.endswith(".c")
+                ):
+                    records.setdefault(local_source, []).append(
+                        (
+                            value["local_source_size"],
+                            value["local_source_sha256"],
+                        )
+                    )
+                for item in value.get("local_sources", []):
+                    if not isinstance(item, dict):
+                        continue
+                    path = item.get("path")
+                    if (
+                        isinstance(path, str)
+                        and path.startswith(
+                            "components/shared/nanopb/runtime_nanopb_"
+                        )
+                        and path.endswith(".c")
+                    ):
+                        records.setdefault(path, []).append(
+                            (item["size"], item["sha256"])
+                        )
+                for child in value.values():
+                    collect(child)
+            elif isinstance(value, list):
+                for child in value:
+                    collect(child)
+
+        collect(provenance["selection"])
+        self.assertEqual(len(records), 27)
+        for relative, pins in sorted(records.items()):
+            with self.subTest(source=relative):
+                self.assertEqual(len(set(pins)), 1)
+                source = ROOT / relative
+                data = source.read_bytes()
+                self.assertEqual((len(data), sha256(data)), pins[0])
+                self.assertIn(
+                    "SPDX-License-Identifier: Zlib",
+                    data.decode("utf-8"),
+                )
+
     def test_skip_string_production_record_is_exact(self) -> None:
         selection = json.loads(PROVENANCE.read_text(encoding="utf-8"))["selection"]
         record = selection["production_skip_string_leaf"]
@@ -1207,10 +1232,10 @@ class NanopbSnapshotTests(unittest.TestCase):
             skip_production["local_source"],
             "components/shared/nanopb/runtime_nanopb_skip_varint.c",
         )
-        self.assertEqual(skip_production["local_source_size"], 1925)
+        self.assertEqual(skip_production["local_source_size"], 1961)
         self.assertEqual(
             skip_production["local_source_sha256"],
-            "89e53ebc01a2d28c4a94ac4a38313b8213788a23ed55bf767a9e8a5c6d961225",
+            "b65dd96a72842689954ca941c057d34d0287e018a7173e51f357c68d6f9ef9ad",
         )
         self.assertEqual(
             skip_production["local_header"],
@@ -1241,17 +1266,15 @@ class NanopbSnapshotTests(unittest.TestCase):
                 "upstream_definition_span": "pb_decode.c bytes [11223,11568)",
                 "upstream_definition_size": 345,
                 "upstream_definition_sha256": (
-                    "527e5ca208a04366c0911baf793af7dc"
-                    "7045fd73014eefc6e31ce3a8b6dc332f"
+                    "527e5ca208a04366c0911baf793af7dc7045fd73014eefc6e31ce3a8b6dc332f"
                 ),
                 "local_source": (
                     "components/shared/nanopb/"
                     "runtime_nanopb_close_string_substream.c"
                 ),
-                "local_source_size": 2061,
+                "local_source_size": 2097,
                 "local_source_sha256": (
-                    "736e7ec228f9282ba5b093fd482441e6"
-                    "e2017fff860d989dc3aadb2bdeff0fcb"
+                    "dc8152b0c1e97808730eafef655d568b7ece091559dc25dc2b02a4f62602cd94"
                 ),
                 "local_header": (
                     "components/shared/nanopb/"
@@ -1259,14 +1282,12 @@ class NanopbSnapshotTests(unittest.TestCase):
                 ),
                 "local_header_size": 2537,
                 "local_header_sha256": (
-                    "851af370162d79f4bd0be8b8bb9a5731"
-                    "d47cf02527078b9e278019340f2d65d4"
+                    "851af370162d79f4bd0be8b8bb9a5731d47cf02527078b9e278019340f2d65d4"
                 ),
                 "stock_span": "[0x0048F7CA,0x0048F7F4)",
                 "stock_size": 42,
                 "stock_sha256": (
-                    "439bbeecb6a0b8266dc3dcd913e987933"
-                    "52b6b346a7a58cdd44322c734621818"
+                    "439bbeecb6a0b8266dc3dcd913e98793352b6b346a7a58cdd44322c734621818"
                 ),
                 "stock_read_seam": "0x0048F3BE",
                 "configuration": "g2-config/pb_g2_options.h",
@@ -1290,30 +1311,26 @@ class NanopbSnapshotTests(unittest.TestCase):
                 "upstream_definition_span": "pb_decode.c bytes [43210,43828)",
                 "upstream_definition_size": 618,
                 "upstream_definition_sha256": (
-                    "1952ee1f743334c82f206c910392f63b"
-                    "2e7fdd702cbdd404dae04367aa8ae518"
+                    "1952ee1f743334c82f206c910392f63b2e7fdd702cbdd404dae04367aa8ae518"
                 ),
                 "local_source": (
                     "components/shared/nanopb/runtime_nanopb_decode_fixed32.c"
                 ),
-                "local_source_size": 1975,
+                "local_source_size": 2011,
                 "local_source_sha256": (
-                    "fefd8a899174fb9332c366df691dc2c8"
-                    "ec6f4792f3fd464b65dbb573ace8ee19"
+                    "1ebb54c28d7d8c29757e9852f4c79200466c5fbb5ceeb406a68244b484e4c8fe"
                 ),
                 "local_header": (
                     "components/shared/nanopb/runtime_nanopb_decode_fixed32.h"
                 ),
                 "local_header_size": 1750,
                 "local_header_sha256": (
-                    "738e4c7d4ea983b0ba967fa42cdcc61c"
-                    "b2e20837531bc6176b7f95a5fe8e2460"
+                    "738e4c7d4ea983b0ba967fa42cdcc61cb2e20837531bc6176b7f95a5fe8e2460"
                 ),
                 "stock_span": "[0x00490190,0x004901AC)",
                 "stock_size": 28,
                 "stock_sha256": (
-                    "1ee27599a8ac5b8d2a0cbaac59986fb4"
-                    "9be7b24c348a960a216b8cbbecce5bf3"
+                    "1ee27599a8ac5b8d2a0cbaac59986fb49be7b24c348a960a216b8cbbecce5bf3"
                 ),
                 "stock_read_seam": "0x0048F3BE",
                 "configuration": "g2-config/pb_g2_options.h",
@@ -1337,30 +1354,26 @@ class NanopbSnapshotTests(unittest.TestCase):
                 "upstream_definition_span": "pb_decode.c bytes [43854,44688)",
                 "upstream_definition_size": 834,
                 "upstream_definition_sha256": (
-                    "7f9da692a631280aa5b91a5d08440ac6"
-                    "8f5060a64814997dde8dcbdb2f0b4974"
+                    "7f9da692a631280aa5b91a5d08440ac68f5060a64814997dde8dcbdb2f0b4974"
                 ),
                 "local_source": (
                     "components/shared/nanopb/runtime_nanopb_decode_fixed64.c"
                 ),
-                "local_source_size": 2083,
+                "local_source_size": 2119,
                 "local_source_sha256": (
-                    "865fa587e7b783e83f24107e52bf3010"
-                    "053d0660b06dc0ac2e7f72bb8ad969bc"
+                    "a8b7fe49a1107080776bc0b753a77d55a861180c4090db270f4f9d04ef67cb63"
                 ),
                 "local_header": (
                     "components/shared/nanopb/runtime_nanopb_decode_fixed64.h"
                 ),
                 "local_header_size": 1726,
                 "local_header_sha256": (
-                    "6394df89057700817341e0550ae21033"
-                    "629d3a1ea458d5a68a6edc2b233cc6bd"
+                    "6394df89057700817341e0550ae21033629d3a1ea458d5a68a6edc2b233cc6bd"
                 ),
                 "stock_span": "[0x004901AC,0x004901CC)",
                 "stock_size": 32,
                 "stock_sha256": (
-                    "96228dfbdfe30665d79281ba0fd5ba3b3"
-                    "af38701396671cd20b77623ffd82d54"
+                    "96228dfbdfe30665d79281ba0fd5ba3b3af38701396671cd20b77623ffd82d54"
                 ),
                 "stock_read_seam": "0x0048F3BE",
                 "configuration": "g2-config/pb_g2_options.h",
@@ -1405,8 +1418,8 @@ class NanopbSnapshotTests(unittest.TestCase):
             ),
             (
                 "components/shared/nanopb/runtime_nanopb_read.c",
-                2944,
-                "e4f99df8121553d4cb6d6c2f94aa7ef1b1445efd200cee4d872dd75894d24089",
+                2980,
+                "b04d9b6d4576b28be4ac66bcdebc93dfb78cea54cc3781fe3839a5e09a451b69",
             ),
         )
         self.assertEqual(
@@ -1518,8 +1531,8 @@ class NanopbSnapshotTests(unittest.TestCase):
                 "upstream_definition_size": 298,
                 "upstream_definition_sha256": "df1caa71053163bdefaea7d6b19bdc72f10c63f09430003b88f10fb7dac3ff6e",
                 "local_source": "components/shared/nanopb/runtime_nanopb_decode_svarint.c",
-                "local_source_size": 1943,
-                "local_source_sha256": "f361cafc8813257e16fafb9ee986c88c632eb2c7edc604dcb02e27ec85a7df4d",
+                "local_source_size": 1979,
+                "local_source_sha256": "ba5af6eef7a0cac0a77dc20dc7cc89c4940f7bce696d8fa7ca462deb12132099",
                 "local_header": "components/shared/nanopb/runtime_nanopb_decode_svarint.h",
                 "local_header_size": 1789,
                 "local_header_sha256": "d1ca3c0520784c4837c9570416934c7884eeeba2eba2a42091cd040d5222e72c",
@@ -1557,8 +1570,8 @@ class NanopbSnapshotTests(unittest.TestCase):
             {
                 "size": 54,
                 "alignment": 4,
-                "offset": 124916,
-                "runtime_address": "0x007B2B18",
+                "offset": 184764,
+                "runtime_address": "0x007C14E0",
                 "unrelocated_sha256": "19e103f83ab8879d36eb1b0513bf541601e40bc82e69e0dc252308c0646d1286",
                 "relocated_sha256": "1b181a82adbbb72dc6fc09b1b70dd48f4c0eefdf25a8c4e71701710cb12dae3f",
                 "entry_patch_sha256": "e8c5601b86e9a38362fb292b0a8ba70250d2ccc3094d0c8c117b1c33f5bf11cc",
@@ -1582,24 +1595,20 @@ class NanopbSnapshotTests(unittest.TestCase):
                 ),
                 "object_size": 968,
                 "object_sha256": (
-                    "866820ef347453a3cbf2feed221eeab0"
-                    "b571a9b79b6988cc17d2861b1aeaced5"
+                    "866820ef347453a3cbf2feed221eeab0b571a9b79b6988cc17d2861b1aeaced5"
                 ),
                 "size": 50,
                 "alignment": 4,
-                "offset": 126744,
-                "runtime_address": "0x007B323C",
+                "offset": 186496,
+                "runtime_address": "0x007C1BA4",
                 "unrelocated_sha256": (
-                    "3617ea95d4a2cbabf3a1abb375e57232"
-                    "3fffcebfa68cb4e19874cb4a831d9662"
+                    "3617ea95d4a2cbabf3a1abb375e572323fffcebfa68cb4e19874cb4a831d9662"
                 ),
                 "relocated_sha256": (
-                    "63e4707f5fd537094855d38f6b4df857"
-                    "8b77644c131e180db2e682d32fbc1fab"
+                    "63e4707f5fd537094855d38f6b4df8578b77644c131e180db2e682d32fbc1fab"
                 ),
                 "entry_patch_sha256": (
-                    "e6bb4ee4baec73757a5f465cf99a32e7"
-                    "87fb25bd651b2b16e2e76fda4c6d18fd"
+                    "f8b98a0113ee5658769fd2310f0bc570196efffc5a8e4892b671cd4e2d756182"
                 ),
             },
         )
@@ -1636,7 +1645,7 @@ class NanopbSnapshotTests(unittest.TestCase):
             )
         )
         regions = manifest["component_overrides"]["apollo_main"]["regions"]
-        self.assertEqual(len(regions), 1818)
+        self.assertEqual(len(regions), 6125)
         by_name = {item["name"]: item for item in regions}
         entry = by_name["nanopb_decode_svarint_source_replacement"]
         self.assertEqual(
@@ -1646,9 +1655,9 @@ class NanopbSnapshotTests(unittest.TestCase):
         source = by_name["apollo_nanopb_decode_svarint_source_leaf"]
         self.assertEqual(
             (source["file_offset"], source["size"], source["target_address"], source["address_status"]),
-            (3648312, 54, 0x007B2B18, "source_compiled"),
+            (3708160, 54, 0x007C14E0, "source_compiled"),
         )
-        self.assertEqual((SVARINT_PRODUCTION_SOURCE.stat().st_size, SVARINT_PRODUCTION_HEADER.stat().st_size), (1943, 1789))
+        self.assertEqual((SVARINT_PRODUCTION_SOURCE.stat().st_size, SVARINT_PRODUCTION_HEADER.stat().st_size), (1979, 1789))
         self.assertTrue(SVARINT_PRODUCTION_AUDIT.is_file())
 
     def test_recovered_config_compiles_complete_runtime(self) -> None:

@@ -14,6 +14,8 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 LOAD_BASE = 0x00437FE0
 IMAGE_BYTES = 3_523_396
@@ -42,8 +44,8 @@ PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.eve
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 
 PINNED_INPUTS = {
-    ROOT / "components/shared/cordio/runtime_cordio_wsf_assert_trace_candidate.c": "6550117694d15172060094d177c12785cc4af2810af6fdda21a01157986d101a",
-    ROOT / "components/shared/cordio/runtime_cordio_wsf_assert_trace_candidate.h": "6e0a5a9f95889a32e24e3c56f0990e719bc34e232bfa6236c6d917907e420f42",
+    ROOT / "components/shared/cordio/runtime_cordio_wsf_assert_trace_candidate.c": "012ffe02e5b9b699359468d873a5d16e9c83031f749065c57214b3daa76ee2ca",
+    ROOT / "components/shared/cordio/runtime_cordio_wsf_assert_trace_candidate.h": "3bbae9d166f9705751a8e9bc4436d3a573d1c8ff32d8377cd0887a9fca8026b5",
     FUNCTION_MAP: "47df6f62617303f24bed39e7e0b13e7c35efb2eae86bae4e662d309350c96da9",
     PROVENANCE: "95f6c236f755e1e327c31b323b03cc7871986d46a2425a1f13f165dd3bca6c13",
     ROOT / "tools/manifests/readiness-cordio-wsf-assert-trace-best-size.tsv": "c1fb6888e072c7fe5ce81d9f6fae77b26db6ce5572a5e1ad45159ac5f8f0e584",
@@ -211,31 +213,9 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
     build = json.loads(BUILD_REPORT.read_text())
     manifest = json.loads(SOURCE_MANIFEST.read_text())
     override = manifest["component_overrides"]["apollo_main"]
-    if (
-        build["overlay"]["size"] != 404796
-        or build["overlay"]["sha256"] != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
-        or build["component"]["size"] != 3928192
-        or build["component"]["sha256"] != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
-        or override["provider"].get("size") != 3928192
-        or override["provider"].get("sha256") != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
-        or len([row for row in override["regions"] if row["name"].startswith("cordio_wsf_assert_trace_")]) != 4
-    ):
+    validate_apollo_main_artifacts(ROOT, AuditError, "WSF assert/trace")
+    if len([row for row in override["regions"] if row["name"].startswith("cordio_wsf_assert_trace_")]) != 4:
         raise AuditError("WSF assert/trace component/manifest changed")
-    if (
-        PACKAGE.stat().st_size != 4706686
-        or _sha256(PACKAGE.read_bytes()) != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
-    ):
-        raise AuditError("WSF assert/trace package changed")
-    flash = json.loads(FLASH_PLAN.read_text())
-    if (
-        FLASH_PLAN.stat().st_size != 4071097
-        or _sha256(FLASH_PLAN.read_bytes()) != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
-        or (
-            len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
-            len(flash["container_only_regions"]), len(flash["protected_regions"]),
-        ) != (5863, 2, 5, 6)
-    ):
-        raise AuditError("WSF assert/trace flash plan changed")
 
     return {
         "schema_version": 1,

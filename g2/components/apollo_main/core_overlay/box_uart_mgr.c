@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room source replacement for the G2 2.2.6.10 case-UART manager in
  * platform\device_mgr\box_uart_mgr.c.  The retained UART, device-manager,

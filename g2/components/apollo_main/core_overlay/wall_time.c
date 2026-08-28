@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Wall-clock seconds and validity helper matched to stock entry 0x0047DCB4.
  */

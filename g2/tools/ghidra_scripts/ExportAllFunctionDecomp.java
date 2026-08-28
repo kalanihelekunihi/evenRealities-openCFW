@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: MIT
 //
 // Export every defined function in the current program as decompilation
 // evidence, in a deterministic, machine-readable form.

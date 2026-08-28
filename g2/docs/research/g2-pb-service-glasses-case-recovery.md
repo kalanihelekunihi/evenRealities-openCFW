@@ -56,7 +56,7 @@ pool they provide all four references to the exact retained source path.
 
 ## Production closure
 
-The independently authored GPL-3.0-only source at
+The independently authored MIT source at
 `components/apollo_main/core_overlay/pb_service_glasses_case.c` contains the
 four linked entries plus the bounded nanopb output callback. Five
 selector-isolated Thumb leaves compile to 546 text bytes plus ten alignment

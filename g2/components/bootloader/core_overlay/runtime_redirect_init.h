@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  *
  * Recovered G2 S200 bootloader stream-redirection initialization ABI.
  */

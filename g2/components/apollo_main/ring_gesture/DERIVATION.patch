@@ -1,0 +1,129 @@
+--- upstream/patches/gesture_fwd.c
++++ components/apollo_main/ring_gesture/ring_gesture.c
+@@ -1,74 +1,69 @@
+-/* gesture_fwd.c — forward EvenHub long-press + ring release-long-press to the
+- * phone as SysEvents, replacing the built-in "End this feature?" force-quit
+- * dialog. (Faceclaw has its own quit + 10s keepalive, so losing the dialog is
+- * fine.)
++/*
++ * SPDX-License-Identifier: GPL-3.0-only
+  *
+- * Background (all confirmed on 2.2.4.34, see the g2-evenhub-input-event-map note):
+- *   - Input dispatcher FUN_004424a2 turns each gesture into a UI event code and
+- *     posts it via FUN_0045fc80(ctx, code, data).
+- *   - Long-press = subtype 3. In EvenHub the branch calls FUN_0046a644 (dialog).
+- *   - Ring release-long-press = subtype 0xe -> FUN_0045fc80(ctx, 0x4a, coords),
+- *     which the EvenHub UI handler drops (no 0x4a case). Subtype 0xe is SHARED
+- *     with a touchpad gesture, so we gate release forwarding on source==ring.
+- *   - The UI-event dispatch (FUN_0045fc80 -> FUN_004505a4 -> FUN_004509a0 ->
+- *     FUN_0045062c -> (*handler)()) is SYNCHRONOUS on the display thread, and the
+- *     stock EvenHub SysEvent sender FUN_004ff232 is called from that same handler
+- *     on that same thread. So we can build+send the SysEvent DIRECTLY here, from
+- *     FUN_004424a2, with no cross-thread race and no change to the UI handler.
++ * Even Realities G2 ring long-press forwarding for the blob-backed openCFW
++ * Apollo main application.
+  *
+- * Wire: FUN_004ff232(0,0,0, EventType, 0, 0) emits a g2.evenhub SysEvent
+- * (Cmd=OS_NOITY_EVENT_TO_APP_PACKET, DevEvent.SysEvent) with EventType = the 4th
+- * arg. We use the OsEventTypeList values Faceclaw already reserves:
+- * 9 = RING_LONG_PRESS_EVENT, 10 = RING_LONG_PRESS_RELEASE_EVENT (8 is IMU report).
+- * Both are gated to source==ring so press/release are symmetric (a touchpad
+- * long-press won't emit an unpaired press). EventSource stays 0 for these custom
+- * types, which is fine since we've already restricted them to the ring.
++ * Derived from jimrandomh/g2flash patches/gesture_fwd.c at commit
++ * 6d5c58598e047ca5980065a9ee7570ce2d172ca7. The firmware addresses below are
++ * specific to the reviewed G2 2.2.6.10 application.
+  */
+ 
+-typedef int  (*fc80_t)(void *ctx, int code, void *data);
+-typedef int *(*modelookup_t)(void *g);
+-typedef int  (*sysevt_t)(int, int, int, int, int, int);
++typedef int (*post_ui_event_fn)(void *context, int code, void *data);
++typedef int *(*foreground_mode_fn)(void *global_context);
++typedef int (*send_system_event_fn)(int, int, int, int, int, int);
+ 
+-#define FW_FC80   ((fc80_t)0x0045f8fdu)        /* FUN_0045f8fc  post UI event (Thumb) */
+-#define FW_MODE   ((modelookup_t)0x0045f8e7u)  /* FUN_0045f8e6  foreground mode ctx (Thumb) */
+-#define FW_SYSEVT ((sysevt_t)0x004da16bu)      /* FUN_004da16a  send EvenHub SysEvent (Thumb) */
++#define STOCK_POST_UI_EVENT \
++    ((post_ui_event_fn)0x0045F8FDU)
++#define STOCK_FOREGROUND_MODE \
++    ((foreground_mode_fn)0x0045F8E7U)
++#define STOCK_SEND_SYSTEM_EVENT \
++    ((send_system_event_fn)0x004DA16BU)
+ 
+-/* Foreground UI ctx pointer: FUN_00442d86 loads r5 = *(0x00443750) = 0x200744d0,
+- * then passes r5[0] as the ctx to FUN_0045f8fc / FUN_0045f8e6. */
+-#define UI_CTX   (*(void *volatile *)0x200744d0u)
+-/* Current input event record (sourced from the literal at 0x004444a4); byte 0 is the source:
+- * 0/1 = left/right temple touchpad, 4 = R1 ring. */
+-#define EVT_SRC  (*(volatile unsigned char *)0x2034dc30u)
++#define FOREGROUND_UI_CONTEXT (*(void *volatile *)0x200744D0U)
++#define CURRENT_INPUT_SOURCE (*(volatile unsigned char *)0x2034DC30U)
+ 
+-#define APP_EVENHUB 0xe0
+-#define ET_LONG     9    /* OsEventTypeList: RING_LONG_PRESS_EVENT */
+-#define ET_REL      10   /* OsEventTypeList: RING_LONG_PRESS_RELEASE_EVENT */
+-#define SRC_RING    4    /* input event source byte: R1 ring */
++#define EVENHUB_APPLICATION_ID 0xE0
++#define RING_LONG_PRESS_EVENT 9
++#define RING_LONG_PRESS_RELEASE_EVENT 10
++#define RING_INPUT_SOURCE 4
+ 
+-/* Replaces the subtype-3 EvenHub force-quit dialog call (bl FUN_0046a644). That
+- * branch already established app==0xe0 (EvenHub foreground); we additionally gate
+- * on source==ring so it pairs with the ring-only release below. A touchpad
+- * long-press in EvenHub now does nothing (dialog removed, no forward). */
++/*
++ * The patched call site is already inside the EvenHub long-press branch.
++ * Forward only ring-originated events; the touchpad shares the surrounding
++ * input subtype and must not produce a ring event.
++ */
++__attribute__((used, noinline))
+ void evenhub_longpress(void)
+ {
+-    if (EVT_SRC == SRC_RING)
+-        FW_SYSEVT(0, 0, 0, ET_LONG, 0, 0);
++    if (CURRENT_INPUT_SOURCE == RING_INPUT_SOURCE) {
++        STOCK_SEND_SYSTEM_EVENT(0, 0, 0, RING_LONG_PRESS_EVENT, 0, 0);
++    }
+ }
+ 
+-/* Wraps the subtype-0xe post (bl FUN_0045fc80(ctx, 0x4a, coords)). For a RING
+- * release-long-press while an EvenHub app is foreground, emit the release
+- * SysEvent and skip the (dropped-anyway) 0x4a post. Every other case — touchpad
+- * subtype-0xe, or ring release outside EvenHub — falls through to the original
+- * post so terminal/native/touchpad behavior is byte-for-byte unchanged. The
+- * return value is ignored by the caller. */
+-int ring_release(void *ctx, int code, void *data)
++/*
++ * The stock release path posts UI event 0x4a, which EvenHub drops. When the
++ * source is the ring and EvenHub is foreground, send the paired system event
++ * directly. All other inputs retain the original UI-event call.
++ */
++__attribute__((used, noinline))
++int ring_release(void *context, int code, void *data)
+ {
+-    if (EVT_SRC == SRC_RING) {                   /* ring */
+-        int *mode = FW_MODE(UI_CTX);
+-        if (mode && *mode == APP_EVENHUB) {      /* EvenHub foreground */
+-            FW_SYSEVT(0, 0, 0, ET_REL, 0, 0);
++    if (CURRENT_INPUT_SOURCE == RING_INPUT_SOURCE) {
++        int *foreground = STOCK_FOREGROUND_MODE(FOREGROUND_UI_CONTEXT);
++        if (foreground != (void *)0
++                && *foreground == EVENHUB_APPLICATION_ID) {
++            STOCK_SEND_SYSTEM_EVENT(
++                0,
++                0,
++                0,
++                RING_LONG_PRESS_RELEASE_EVENT,
++                0,
++                0
++            );
+             return 1;
+         }
+     }
+-    return FW_FC80(ctx, code, data);
++    return STOCK_POST_UI_EVENT(context, code, data);
+ }
++

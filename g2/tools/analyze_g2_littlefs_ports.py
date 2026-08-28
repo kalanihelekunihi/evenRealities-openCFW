@@ -236,8 +236,18 @@ IMAGES = {
             ),
             "write_transfer": Span(
                 0x0042069E,
-                0x0042074C,
-                "a2817c54710cd6882cc0ab01897bbdf427303abc906553b513545ea8fd1a2508",
+                0x0042074E,
+                "18bdd1fb9df8bf0b73bb5ed09e8f9ed218ba263f8f11caf97c98fc17af2aa20e",
+            ),
+            "busy_status": Span(
+                0x0042074E,
+                0x004207A2,
+                "33e47f7e0bf37502f2f2dd20196d15b67a1f3ef336cd48538ac99f6ceed0e6e5",
+            ),
+            "wait_ready": Span(
+                0x004207A2,
+                0x004207F4,
+                "b5d741edee4dcb847a20256e315ae4304b07a43e02ef189da8c6a36ff0f9e809",
             ),
             "wait_idle": Span(
                 0x004207F4,

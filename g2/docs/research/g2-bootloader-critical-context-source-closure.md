@@ -13,7 +13,7 @@ State `1` returns zero without reading masks. Other states return one when
 PRIMASK or BASEPRI is nonzero and zero otherwise. Host tests pin this ordering,
 including both short-circuit paths.
 
-`runtime_critical_context.c` is a 1,497-byte GPL-3.0-or-later clean-room
+`runtime_critical_context.c` is a 1,497-byte MIT clean-room
 implementation using explicit ARM system-register reads. Apple emits a
 46-byte leaf at offset 2,930/runtime `0x00434FEA`, with raw SHA-256
 `b0872e0e51a3e5cb6e1c00902e393341120ac4924520aeccad730b5dadf024df`

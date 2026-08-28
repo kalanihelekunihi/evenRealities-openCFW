@@ -282,7 +282,7 @@ APPLE_TARGETS = {
         "sha256": "689da8cc4cd4757e609cdf77b3675ff7330fb46ea9b1efc29f4d96772f066baa",
         "object_size": 1_064,
         "object_sha256": (
-            "87d01225878f1434d3f8f4c5bfc4b3abbd9a9f1a41188927ae1abf4ae0442d0d"
+            "c1132e92072ee465c713c9b9c219a27d2577e3b785593843939ece0f6117fc6d"
         ),
         "hex": (
             "70b580b1c26b1ab1036ca2fb0323a3b14af2a500c0f25f0080474ff0ff300021"
@@ -302,7 +302,7 @@ APPLE_TARGETS = {
         "sha256": "c4a89f560a07598f3af72a4ca0e3a6bda1f23bd86e6f777ecea690f6db67ecdd",
         "object_size": 1_144,
         "object_sha256": (
-            "d92bc00ca589372488ddd6d82d9844e57317e983180fe5d77e25f18bcfc70db6"
+            "d2cb4e4f7fc199bce1259be94a03bde381cfe6652a6314a54d235f0f548a6b23"
         ),
         "hex": (
             "2de9f04144f63828c2f20708d8f82020002a4bd0c56841f00041002d016050d0"

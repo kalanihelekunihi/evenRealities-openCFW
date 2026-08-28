@@ -11,7 +11,7 @@ and reconstruction strategy:
 | Application MCU | Ambiq Apollo510 (Cortex-M55) | Nordic nRF52840 (Cortex-M4F) |
 | Approach | byte-exact reconstruction of the stock image, then incremental source replacement | clean-room reimplementation of the observable firmware contract |
 | Reference version | `s200_v2.2.6.10` | `2.2.6.0009` |
-| Output | flashable `.evenota` package, byte-identical to reference | portable host build, freestanding Cortex-M4 objects, linked nRF52840 image |
+| Output | locally buildable hybrid `.evenota`; public stock-bearing binary release and hardware qualification remain blocked | portable host build, freestanding Cortex-M4 objects, linked nRF52840 image |
 
 They share a dependency registry, a verification philosophy, and a single build
 entry point. They do not share code.
@@ -20,9 +20,11 @@ entry point. They do not share code.
 
 **G2** is not yet a clean-room replacement firmware. It is a build boundary that
 reproduces the official image byte-for-byte, then replaces reconstructed regions
-with compiled source one closure at a time. Five non-Apollo components and most
-of the Apollo application remain opaque. Coverage is measured, not estimated —
-see [`g2/docs/source-coverage.md`](g2/docs/source-coverage.md).
+with compiled source one closure at a time. The checked-in completion assessment
+is the authoritative live classification of source-owned, retained, unresolved,
+and container-only bytes; prose milestone lists are historical context rather
+than a substitute for that machine-checked boundary. Coverage is measured, not
+estimated — see [`g2/docs/source-coverage.md`](g2/docs/source-coverage.md).
 
 **R1** is a clean-room C implementation derived from recovered protocol,
 behavioral, memory, and security-audit evidence. It is not reconstructed vendor
@@ -49,12 +51,12 @@ openCFW/
 │   ├── Makefile          profiles, snapshot verifiers, closure audits
 │   ├── blobs/            official OTA provenance (payloads not redistributed)
 │   ├── components/       compiled overlay sources, per component
-│   ├── docs/             reference documents + 502 per-closure audits
+│   ├── docs/             reference documents + per-closure audits
 │   ├── manifests/        region/flash layout pins per build profile
 │   ├── research/         evidence corpus: candidates, readiness, decompilation
-│   ├── tests/            746 test modules gating the above
+│   ├── tests/            regression modules gating the above
 │   ├── third_party/      vendored upstream snapshots (see third-party/README.md)
-│   └── tools/            4 entry points + 355 read-only analyzers
+│   └── tools/            build/release entry points + analyzers
 ├── r1/                   R1 firmware: clean-room implementation
 │   ├── Makefile          host, sanitizer, freestanding, verify, SDK-image
 │   ├── docs/             correlation/ boundaries/ closures/ reference/
@@ -103,6 +105,23 @@ says, then:
 ./make.sh g2-build
 ```
 
+To create the public, vendor-byte-free G2 community source archive instead:
+
+```sh
+./make.sh g2-community-source
+```
+
+The archive contains source, build recipes, manifests, and applicable license
+texts, but no official firmware or raw stock patch guards. A recipient supplies
+their own authenticated `s200_v2.2.6.10` package locally; the preparation tool
+validates all six payload identities before the software-only build. Run
+`./make.sh g2-community-smoke` to repeat that workflow in a fresh extracted
+tree without signing, flashing, or hardware access. See the
+[community distribution guide](g2/docs/community-source-distribution.md) and
+[release licensing inventory](g2/docs/release-licensing-and-redistribution.md).
+Public distribution of a generated stock-bearing firmware binary remains
+fail-closed until redistribution authority for all six payloads is documented.
+
 Full details, including the R1 vendor SDK fetch, are in
 [`docs/build.md`](docs/build.md).
 
@@ -115,6 +134,8 @@ Full details, including the R1 vendor SDK fetch, are in
 | [`docs/methodology.md`](docs/methodology.md) | evidence, attribution, and what "verified" means here |
 | [`third-party/README.md`](third-party/README.md) | dependency inventory and pinning policy |
 | [`g2/README.md`](g2/README.md) | G2 status, current source coverage, build profiles |
+| [`g2/docs/community-source-distribution.md`](g2/docs/community-source-distribution.md) | create, verify, hydrate, and smoke-test the vendor-byte-free G2 source archive |
+| [`g2/docs/release-licensing-and-redistribution.md`](g2/docs/release-licensing-and-redistribution.md) | live mixed-license source inventory and fail-closed binary authority boundary |
 | [`r1/README.md`](r1/README.md) | R1 status, implemented contract, open gaps |
 | [`r1/docs/README.md`](r1/docs/README.md) | R1 evidence provenance and remaining hardware work |
 | [`g2/tools/README.md`](g2/tools/README.md) | which G2 script to run, and what the 355 analyzers are |
@@ -125,9 +146,24 @@ Full details, including the R1 vendor SDK fetch, are in
 
 ## Licensing
 
-Vendored upstream code retains its own license; each dependency under
-`g2/third_party/` carries its upstream license text and a `PROVENANCE.json`
-recording the exact commit it was taken from. Per-component attribution for
-compiled overlays is in the `NOTICE.md` and `LICENSE-*` files under
-[`g2/components`](g2/components). Official Even Realities firmware payloads are
-vendor-proprietary and are not redistributed.
+openCFW-authored software and documentation without a more specific license are
+available under the [MIT License](LICENSE). The repository-wide
+[licensing boundary](NOTICE) also grants an MIT option for original
+openCFW-owned contributions that were previously marked GPL solely because they
+were aggregated with a GPL component. The current project-owned normalization
+census is complete; upstream-derived files retain their applicable terms.
+
+Vendored and adapted upstream code retains its upstream license; each dependency
+under `g2/third_party/` carries its applicable license text and a provenance
+record identifying its source. Files with an SPDX identifier or a component
+license remain under those stated terms. Per-component attribution for compiled
+overlays is in the `NOTICE.md` and `LICENSE-*` files under
+[`g2/components`](g2/components).
+
+Official Even Realities firmware payloads, retained proprietary compatibility
+bytes, and captured vendor artifacts are not covered by the root MIT grant and
+are not redistributed by this repository.
+
+The g2flash-derived gesture and patch sources and the upstream QP/C sources
+remain GPL-covered. Firmware binaries combining them with MIT components must
+be distributed in compliance with the applicable GPL terms.

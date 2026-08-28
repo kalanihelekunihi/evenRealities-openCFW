@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: GPL-3.0-only
+# SPDX-License-Identifier: MIT
 """Harvest per-function decompilation evidence from an analyzed Ghidra project.
 
 This is the ingest side of the transparent-source pipeline.  It runs headless

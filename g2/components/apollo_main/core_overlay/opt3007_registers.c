@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 /* Clean-room OPT3007 field map derived from TI SBOS864. */
 #include <stddef.h>
 #include <stdint.h>

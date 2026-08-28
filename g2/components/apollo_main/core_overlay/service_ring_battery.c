@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* Clean-room reconstruction of platform/service/ring_battery/service_ring_battery.c. */
 
 #include <stddef.h>

@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: MIT
+boundary	provider	source	commit	license	implementation_rule
+infineon_capsense	Infineon CAPSENSE middleware	https://github.com/Infineon/capsense	b68b744eb75fe976fc5ddd7b16e04e1a5a54bdd3	LicenseRef-Infineon-EULA	interface evidence only for MIT clean-room replacement unless EULA terms are accepted
+infineon_cat2_pdl	Infineon mtb-pdl-cat2	https://github.com/Infineon/mtb-pdl-cat2	35f1714623cfea682d5e285af80d50416b4c7bbc	Apache-2.0	prefer the upstream provider implementation and retain Apache-2.0 notices
+infineon_emeeprom	Infineon Emulated EEPROM middleware	https://github.com/Infineon/emeeprom	6bbde322b7193528674dbf7fcdc2e971d0cff4fa	LicenseRef-Infineon-EULA	interface/algorithm identification only for MIT clean-room replacement unless EULA terms are accepted
+open_cfw_clean_room	OpenCFW clean-room behavior boundary	project-authored replacement required	-	MIT	implement from typed behavior and ABI without copying stock/vendor code
+toolchain_runtime	ARM EABI / C runtime provider unresolved	compiler-provided runtime ABI	-	LicenseRef-Upstream-Toolchain-Runtime	link an upstream compiler/libc implementation under its own license; do not copy stock bytes

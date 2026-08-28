@@ -83,7 +83,7 @@ class G2ServiceKvdbTests(unittest.TestCase):
         )
         self.assertFalse(production["destructive_default_reset_enabled"])
         self.assertFalse(self.report["behavior"]["production_invalidate_magic_writes_zero"])
-        self.assertIn("blocked by unavailable", production["hardware_validation"])
+        self.assertIn("deferred by project direction", production["hardware_validation"])
 
 
 if __name__ == "__main__":

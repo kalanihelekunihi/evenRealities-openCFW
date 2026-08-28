@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 PYTHON ?= python3
 
 # Toolchain selection.  openCFW pins compiled overlays byte-for-byte per
@@ -21,6 +23,7 @@ RING_SOURCE_BUILD_DIR ?= build/ring-source
 SOURCE_BUILD_DIR ?= build/source
 RELEASE_BUILD_DIR ?= build/release
 SOURCE_PACKAGE := $(SOURCE_BUILD_DIR)/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin
+REFERENCE_PACKAGE := $(REFERENCE_BUILD_DIR)/package/g2-openCFW-s200_v2.2.6.10.evenota.bin
 RELEASE_PACKAGE := $(RELEASE_BUILD_DIR)/g2-openCFW-s200_v2.2.6.0-core-source.evenota.bin
 RELEASE_REPORT := $(RELEASE_BUILD_DIR)/g2-openCFW-s200_v2.2.6.0-core-source.json
 RING_COMPONENT_DIR := components/apollo_main/ring_gesture
@@ -52,7 +55,7 @@ AMBIQSUITE_ANCC_DIR := third_party/ambiqsuite-ancc-profile
 AMBIQSUITE_AMOTA_DIR := third_party/ambiqsuite-amota-profile
 AMBIQSUITE_CORDIO_APP_DIR := third_party/ambiqsuite-cordio-app-framework
 
-.PHONY: all build reference ring-source source source-release component ring-component core-component bootloader-component vendor-snapshots upstream-audits tlsf-snapshot easylogger-snapshot littlefs-snapshot freertos-snapshot freertos-g2-tcb-patch freertos-queue-receive-from-isr ambiqsuite-snapshot ambiqsuite-ancc-snapshot ambiqsuite-ancc-profile-closure cmsis-core-snapshot cmsis-freertos-snapshot cmsis-freertos-linked-census cmsis-freertos-core-leaves cmsis-freertos-count-leaves cmsis-freertos-message-queue-delete cmsis-freertos-thread-yield cmsis-freertos-kernel-state cmsis-freertos-kernel-lifecycle cmsis-freertos-mutex-delete cmsis-freertos-timer-running cmsis-freertos-sync-ops cmsis-freertos-sync-ops-candidate cmsis-freertos-timer-ops cmsis-freertos-timer-ops-candidate cmsis-freertos-event-flags cmsis-freertos-event-flags-candidate cmsis-freertos-timer-new cmsis-freertos-timer-new-candidate cmsis-freertos-memory-pool-new cmsis-freertos-memory-pool-new-candidate cmsis-freertos-semaphore-acquire cmsis-freertos-memory-pool-ops cmsis-freertos-message-queue-put cmsis-freertos-message-queue-get cmsis-freertos-delay cmsis-freertos-thread-set-priority cmsis-freertos-thread-terminate cmsis-freertos-thread-flags cmsis-freertos-thread-new cmsis-freertos-thread-yield-candidate cmsis-freertos-kernel-state-candidate cmsis-freertos-mutex-delete-candidate cmsis-freertos-timer-running-candidate lz4-snapshot freetype-snapshot flashdb-snapshot cmbacktrace-snapshot cmbacktrace-fault-closure nanopb-snapshot cordio-aggregate-closure cordio-gatt-profile-closure apollo-origin-accounting lvgl-display-port-closure third-party-dependency-closure lvgl-snapshot nemagfx-ambiq-provenance ambiq-gpu-patch-accessors-candidate ring-buffer-snapshot tinyframe-snapshot tinyframe-adapter-candidate ui-quicklist-page-closure ui-widget-news-page-closure ui-stock-page-closure research-corpus verify test inspect clean toolchain cjson-snapshot qpc-snapshot
+.PHONY: all build reference ring-source source source-release component ring-component ring-gesture-provenance core-component bootloader-component vendor-snapshots upstream-audits tlsf-snapshot easylogger-snapshot littlefs-snapshot freertos-snapshot freertos-g2-tcb-patch freertos-queue-receive-from-isr ambiqsuite-snapshot ambiqsuite-ancc-snapshot ambiqsuite-ancc-profile-closure cmsis-core-snapshot cmsis-freertos-snapshot cmsis-freertos-linked-census cmsis-freertos-core-leaves cmsis-freertos-count-leaves cmsis-freertos-message-queue-delete cmsis-freertos-thread-yield cmsis-freertos-kernel-state cmsis-freertos-kernel-lifecycle cmsis-freertos-mutex-delete cmsis-freertos-timer-running cmsis-freertos-sync-ops cmsis-freertos-sync-ops-candidate cmsis-freertos-timer-ops cmsis-freertos-timer-ops-candidate cmsis-freertos-event-flags cmsis-freertos-event-flags-candidate cmsis-freertos-timer-new cmsis-freertos-timer-new-candidate cmsis-freertos-memory-pool-new cmsis-freertos-memory-pool-new-candidate cmsis-freertos-semaphore-acquire cmsis-freertos-memory-pool-ops cmsis-freertos-message-queue-put cmsis-freertos-message-queue-get cmsis-freertos-delay cmsis-freertos-thread-set-priority cmsis-freertos-thread-terminate cmsis-freertos-thread-flags cmsis-freertos-thread-new cmsis-freertos-thread-yield-candidate cmsis-freertos-kernel-state-candidate cmsis-freertos-mutex-delete-candidate cmsis-freertos-timer-running-candidate lz4-snapshot freetype-snapshot freetype-truetype-source-closure flashdb-snapshot cmbacktrace-snapshot cmbacktrace-fault-closure nanopb-snapshot cordio-aggregate-closure cordio-gatt-profile-closure apollo-origin-accounting lvgl-display-port-closure third-party-dependency-closure lvgl-snapshot nemagfx-ambiq-provenance ambiq-gpu-patch-accessors-candidate ring-buffer-snapshot tinyframe-snapshot tinyframe-adapter-candidate ui-quicklist-page-closure ui-widget-news-page-closure ui-stock-page-closure research-corpus verify test inspect clean toolchain cjson-snapshot qpc-snapshot
 .PHONY: ble-transport-profiles-closure ble-peer-discovery-closure ble-central-closure ble-connect-params-closure ble-peripheral-closure transport-protocol-closure service-settings-closure tracepoint-settings-closure product-rtos-closure util-error-check-closure watchdog-closure freertos-task-get-info-closure freertos-scheduler-start-core-closure goodix-v170-source-overlap logger-settings-closure ambiqsuite-cordio-app-snapshot cordio-app-framework-lineage drv-gx8002b-closure drv-pdm-production-closure drv-pdm-closure drv-mx25u25643g-closure service-ancc-closure als-closure thread-ble-production-closure pt-protocol-closure service-db-api-closure ui-even-ai-closure service-time-closure thread-audio-closure compress-log-core-closure compress-log-port-closure file-runtime-closure service-algo-closure uart-sync-closure service-nvdb-closure production-mic-closure service-audio-manager-closure service-audio-closure service-kvdb-closure service-codec-host-closure service-codec-dfu-closure service-touch-dfu-closure ux-battery-sync-closure cb-ring-battery-closure callback-facades-closure callback-manager-closure silent-mode-closure onboarding-data-manager-closure onboarding-controller-closure onboarding-main-page-closure onboarding-stock-page-closure onboarding-news-page-closure lvgl-font-manager-closure box-uart-mgr-closure service-box-detect-closure common-list-container-closure common-text-container-closure evenhub-ui-closure evenhub-data-parser-closure sync-framework-closure sync-interface-api-closure display-thread-closure displaydrv-manager-closure ui-msg-notif-list-closure dashboard-main-screen-closure dashboard-watchface-layout4-closure dashboard-ext-closure dashboard-data-process-closure navigation-data-handler-closure navigation-ui-closure menu-page-closure ui-health-page-closure teleprompt-ui-closure service-em9305-dfu-closure conversate-tag-data-closure liblc3-source-closure
 .PHONY: transparent transparent-harvest transparent-db transparent-source transparent-image transparent-ledger transparent-test pb-service-quicklist-closure pb-service-pair-mgr-closure at-codec-closure box-uart-mgr-closure case-uart-update-closure touch-i2c-source-closure touch-sensing-closure iar-format-input-closure iar-format-output-closure
 .PHONY: cordio-wsf-timer-closure
@@ -70,7 +73,45 @@ AMBIQSUITE_CORDIO_APP_DIR := third_party/ambiqsuite-cordio-app-framework
 .PHONY: cordio-attc-main-closure
 .PHONY: cordio-attc-disc-closure
 .PHONY: cordio-l2c-runtime-closure cordio-dm-adv-closure cordio-dm-adv-leg-closure cordio-dm-conn-closure cordio-dm-conn-sm-closure cordio-dm-dev-closure cordio-dm-main-closure cordio-dm-phy-closure cordio-dm-conn-master-leg-closure cordio-dm-conn-slave-leg-closure cordio-dm-conn-slave-closure cordio-dm-conn-master-closure cordio-dm-priv-closure cordio-dm-dev-priv-closure cordio-hci-cmd-phy-closure cordio-hci-cmd-core-closure cordio-hci-tr-closure cordio-hci-core-ps-closure cordio-hci-evt-closure cordio-hci-driver-closure
-.PHONY: ambiqsuite-amota-snapshot ble-ota-ring-profiles-closure ring-service-closure service-input-manager-closure ui-calendar-page-closure ota-transport-closure efs-transport-closure efs-service-closure ota-service-closure evenhub-loading-page-closure dashboard-watchface-layout1-closure teleprompt-fsm-closure health-data-manager-closure drv-cy8c4046fni-closure evenhub-main-closure translate-closure translate-ui-closure teleprompt-controller-closure conversate-comm-data-closure conversate-controller-closure conversate-ui-main-page-closure service-universal-setting-closure common-image-container-closure dashboard-watchface-layout2-closure dashboard-watchface-layout3-closure thread-ring-closure sensor-hub-closure icm45608-snapshot fw-event-loop-closure ring-connect-policy-closure system-alert-closure system-close-closure freertos-cli-filesystem-closure pb-service-conversate-closure pb-service-teleprompt-closure pb-service-even-ai-closure pb-service-terminal-closure pb-service-translate-closure pb-service-dev-config-closure pb-service-health-closure pb-service-onboarding-closure pb-service-notification-closure pb-service-setting-closure pb-service-dev-setting-closure
+.PHONY: case-semantic-leaves case-source-image touch-source-image pt-protocol-source ambiqsuite-amota-snapshot ble-ota-ring-profiles-closure ring-service-closure service-input-manager-closure ui-calendar-page-closure ota-transport-closure efs-transport-closure efs-service-closure ota-service-closure evenhub-loading-page-closure dashboard-watchface-layout1-closure teleprompt-fsm-closure health-data-manager-closure drv-cy8c4046fni-closure evenhub-main-closure translate-closure translate-ui-closure teleprompt-controller-closure conversate-comm-data-closure conversate-controller-closure conversate-ui-main-page-closure service-universal-setting-closure common-image-container-closure dashboard-watchface-layout2-closure dashboard-watchface-layout3-closure thread-ring-closure sensor-hub-closure icm45608-snapshot fw-event-loop-closure ring-connect-policy-closure system-alert-closure system-close-closure freertos-cli-filesystem-closure pb-service-conversate-closure pb-service-teleprompt-closure pb-service-even-ai-closure pb-service-terminal-closure pb-service-translate-closure pb-service-dev-config-closure pb-service-health-closure pb-service-onboarding-closure pb-service-notification-closure pb-service-setting-closure pb-service-dev-setting-closure
+
+case-semantic-leaves:
+	$(PYTHON) tools/analyze_g2_case_semantic_leaves.py --write-manifests
+	$(PYTHON) tools/analyze_g2_case_pure_helpers.py --write-manifests
+	$(PYTHON) tools/analyze_g2_case_register_policies.py --write-manifests
+	$(PYTHON) tools/analyze_g2_case_final_classification.py --write-manifests
+	$(PYTHON) tools/extract_g2_case_final_decomp.py --write
+	$(PYTHON) -m unittest tests.test_runtime_case_semantic_leaves tests.test_analyze_g2_case_semantic_leaves tests.test_runtime_case_pure_helpers tests.test_analyze_g2_case_pure_helpers tests.test_runtime_case_register_policies tests.test_analyze_g2_case_register_policies tests.test_analyze_g2_case_final_classification tests.test_extract_g2_case_final_decomp
+
+case-source-image:
+	$(PYTHON) components/case/source_image/build_image.py --check
+	$(PYTHON) tools/analyze_g2_case_source_image.py --write-manifest
+	$(PYTHON) -m unittest tests.test_analyze_g2_case_source_image
+
+touch-source-image:
+	$(PYTHON) components/touch/source_image/build_image.py
+	$(PYTHON) tools/analyze_g2_touch_source_image.py --write-manifest
+	$(PYTHON) -m unittest tests.test_runtime_touch_unsigned_division tests.test_touch_source_image tests.test_analyze_g2_touch_source_image
+
+pt-protocol-source:
+	$(PYTHON) tools/analyze_g2_pt_protocol_source.py --write-manifest
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_extract_g2_pt_protocol_decomp \
+		tests.test_runtime_pt_protocol_core \
+		tests.test_runtime_pt_protocol_basic_handlers \
+		tests.test_runtime_pt_protocol_config_handlers \
+		tests.test_runtime_pt_protocol_data_handlers \
+		tests.test_runtime_pt_protocol_display_handlers \
+		tests.test_runtime_pt_protocol_sensor_handlers \
+		tests.test_runtime_pt_protocol_service_handlers \
+		tests.test_runtime_pt_protocol_audio_handlers \
+		tests.test_runtime_pt_protocol_transfer_handlers \
+		tests.test_runtime_pt_protocol_platform_adapter \
+		tests.test_runtime_pt_protocol_board_backend \
+		tests.test_runtime_pt_protocol_board_leaf_candidates \
+		tests.test_runtime_pt_protocol_production_entry \
+		tests.test_apollo_pt_protocol_provider \
+		tests.test_analyze_g2_pt_protocol_source
 
 all: build
 
@@ -80,7 +121,12 @@ toolchain:
 
 build: reference ring-source source
 
-ring-component:
+ring-gesture-provenance:
+	$(PYTHON) $(RING_COMPONENT_DIR)/verify_provenance.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_ring_gesture_provenance
+
+ring-component: ring-gesture-provenance
 	$(PYTHON) $(RING_COMPONENT_DIR)/build_component.py
 
 tlsf-snapshot:
@@ -238,6 +284,12 @@ lz4-snapshot:
 
 freetype-snapshot:
 	$(PYTHON) $(FREETYPE_DIR)/verify_snapshot.py
+
+freetype-truetype-source-closure: freetype-snapshot
+	$(PYTHON) research/candidates/freetype/analyze_truetype_candidate.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_freetype_truetype_candidate \
+		tests.test_runtime_target_provider_candidate
 
 flashdb-snapshot:
 	$(PYTHON) $(FLASHDB_DIR)/verify_snapshot.py
@@ -477,7 +529,120 @@ bootloader-numeric-closure: source
 		tests.test_runtime_bootloader_guarded_teardown_41fa98 \
 		tests.test_runtime_bootloader_pin_groups_41fadc \
 		tests.test_runtime_bootloader_allocator_init_41fd70 \
+		tests.test_runtime_bootloader_irq_services_41fdc0 \
+		tests.test_runtime_bootloader_mspi_control_41fe28 \
+		tests.test_runtime_bootloader_event_flags_service_41fe62 \
+		tests.test_runtime_bootloader_mspi_guard_41ff08 \
+		tests.test_runtime_bootloader_mspi_xip_config_41ff34 \
+		tests.test_runtime_bootloader_bit_run_helpers_41ff60 \
+		tests.test_runtime_bootloader_mspi_timing_scan_420002 \
+		tests.test_runtime_bootloader_mspi_timing_auto_4201ba \
+		tests.test_runtime_bootloader_mspi_low_level_init_420254 \
+		tests.test_runtime_bootloader_mspi_driver_init_420476 \
+		tests.test_runtime_bootloader_mspi_soft_reset_42052a \
+		tests.test_runtime_bootloader_mspi_read_id_42059e \
+		tests.test_runtime_bootloader_mspi_read_transfer_4205f4 \
+		tests.test_runtime_bootloader_mspi_write_transfer_42069e \
+		tests.test_runtime_bootloader_mspi_busy_status_42074e \
+		tests.test_runtime_bootloader_mspi_wait_ready_4207a2 \
+		tests.test_runtime_bootloader_mspi_4byte_mode_420800 \
+		tests.test_runtime_bootloader_mspi_enter_4byte_mode_420890 \
+		tests.test_runtime_bootloader_mspi_write_latch_420984 \
+		tests.test_runtime_bootloader_mspi_sector_erase_420a08 \
+		tests.test_runtime_bootloader_mspi_program_420b0c \
+		tests.test_runtime_bootloader_mspi_quad_enable_420c5c \
+		tests.test_runtime_bootloader_mspi_device_reconfigure_420e08 \
+		tests.test_runtime_bootloader_mspi_set_quad_mode_420e8c \
+		tests.test_runtime_bootloader_mspi_set_serial_mode_420f10 \
+		tests.test_runtime_bootloader_mspi_read_420f70 \
+		tests.test_runtime_bootloader_fs_directories_4210c8 \
+		tests.test_runtime_bootloader_littlefs_format_4211b0 \
+		tests.test_runtime_bootloader_littlefs_init_421210 \
+		tests.test_runtime_bootloader_littlefs_read_4212d8 \
+		tests.test_runtime_bootloader_littlefs_program_421310 \
+		tests.test_runtime_bootloader_littlefs_erase_421348 \
+		tests.test_runtime_bootloader_littlefs_sync_4213d4 \
+		tests.test_runtime_bootloader_address_map_4213d8 \
+		tests.test_runtime_bootloader_memory_select_copy_4213e6 \
+		tests.test_runtime_bootloader_popcount_421584 \
+		tests.test_runtime_bootloader_bitmap_helpers_4215ae \
+		tests.test_runtime_bootloader_bitmap_update_421632 \
+		tests.test_runtime_bootloader_poll_delay_4216b2 \
+		tests.test_runtime_bootloader_mode_service_4216d4 \
+		tests.test_runtime_bootloader_dual_mode_service_4217d2 \
+		tests.test_runtime_bootloader_bitmap_clients_421978 \
+		tests.test_runtime_bootloader_mode1_services_421b08 \
+		tests.test_runtime_bootloader_mode0_enable_421bd2 \
+		tests.test_runtime_bootloader_mode0_disable_421cce \
+		tests.test_runtime_bootloader_row4_enable_421d5e \
+		tests.test_runtime_bootloader_row4_disable_421e4a \
+		tests.test_runtime_bootloader_row5_services_421eba \
+		tests.test_runtime_bootloader_row6_services_4220b2 \
+		tests.test_runtime_bootloader_mode_routes_4222f0 \
+		tests.test_runtime_bootloader_debug_services_422468 \
+		tests.test_runtime_bootloader_constraint_memchr_422590 \
+		tests.test_runtime_bootloader_double_helpers_422628 \
+		tests.test_runtime_bootloader_thread_pointer_422874 \
+		tests.test_runtime_bootloader_u64_divmod_42287c \
+		tests.test_runtime_bootloader_atomic_wrappers_422aac \
+		tests.test_runtime_bootloader_hw_instance_init_422ad4 \
+		tests.test_runtime_bootloader_hw_instance_service_422ba8 \
+		tests.test_runtime_bootloader_hw_register_clear_422d20 \
+		tests.test_runtime_bootloader_hw_status_map_422d7e \
+		tests.test_runtime_bootloader_hw_descriptor_init_422dc6 \
+		tests.test_runtime_bootloader_hw_clock_divider_422e28 \
+		tests.test_runtime_bootloader_hw_config_latch_422ee2 \
+		tests.test_runtime_bootloader_hw_config_latch_secondary_422f4c \
+		tests.test_runtime_bootloader_hw_config_release_secondary_422fa2 \
+		tests.test_runtime_bootloader_hw_shutdown_422fde \
+		tests.test_runtime_bootloader_hw_fifo_4232c8 \
+		tests.test_runtime_bootloader_hw_fifo_adapters_423350 \
+		tests.test_runtime_bootloader_hw_mode_dispatch_4233e8 \
+		tests.test_runtime_bootloader_hw_mode_wait_423444 \
+		tests.test_runtime_bootloader_hw_progress_423524 \
+		tests.test_runtime_bootloader_hw_register_services_4236ce \
+		tests.test_runtime_bootloader_hw_service_dispatch_42377c \
+		tests.test_runtime_bootloader_memory_exchange_423864 \
+		tests.test_runtime_bootloader_memory_rotate_front_423928 \
+		tests.test_runtime_bootloader_memory_sort3_423972 \
+		tests.test_runtime_bootloader_memory_heap_sift_4239c2 \
+		tests.test_runtime_bootloader_memory_qsort_423a48 \
+		tests.test_runtime_bootloader_hw_control_services_423d20 \
+		tests.test_runtime_bootloader_hw_control_state_423e14 \
+		tests.test_analyze_g2_bootloader_mspi_fifo_write_423e40 \
+		tests.test_runtime_bootloader_mspi_fifo_read_423e8a \
+		tests.test_analyze_g2_bootloader_mspi_fifo_read_423e8a \
+		tests.test_analyze_g2_bootloader_mspi_cq_init_423f28 \
+		tests.test_runtime_bootloader_mspi_cq_term_423f54 \
+		tests.test_runtime_bootloader_mspi_cq_control_423f8e \
+		tests.test_analyze_g2_bootloader_mspi_cq_pause_423fb8 \
+		tests.test_analyze_g2_bootloader_mspi_program_dma_42403e \
+		tests.test_analyze_g2_bootloader_mspi_sched_hiprio_4240aa \
+		tests.test_analyze_g2_bootloader_mspi_device_configure_424120 \
+		tests.test_analyze_g2_bootloader_mspi_piomixed_configure_42488e \
+		tests.test_analyze_g2_bootloader_mspi_clkgen_ctrl_4249a0 \
+		tests.test_analyze_g2_bootloader_mspi_initialize_424a5a \
+		tests.test_analyze_g2_bootloader_mspi_configure_424af0 \
+		tests.test_analyze_g2_bootloader_mspi_device_configure_public_424be4 \
+		tests.test_analyze_g2_bootloader_mspi_lifecycle_425066 \
+		tests.test_analyze_g2_bootloader_mspi_control_4251c0 \
+		tests.test_analyze_g2_bootloader_mspi_transfer_interrupt_4262e0 \
 		tests.test_analyze_g2_bootloader_numeric
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_fifo_write_423e40.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_fifo_read_423e8a.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_cq_init_423f28.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_cq_pause_423fb8.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_program_dma_42403e.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_sched_hiprio_4240aa.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_device_configure_424120.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_piomixed_configure_42488e.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_clkgen_ctrl_4249a0.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_initialize_424a5a.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_configure_424af0.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_device_configure_public_424be4.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_lifecycle_425066.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_control_4251c0.py
+	$(PYTHON) tools/analyze_g2_bootloader_mspi_transfer_interrupt_4262e0.py
 	$(PYTHON) tools/analyze_g2_bootloader_numeric.py
 	$(PYTHON) tools/integrate_g2_bootloader_redirect_init_overlay.py verify
 
@@ -515,7 +680,80 @@ iar-format-output-closure: source
 		tests.test_runtime_iar_format_output \
 		tests.test_runtime_vsnprintf
 
-source-release: source
+.PHONY: release-license-audit release-license-gate
+.PHONY: community-distribution-gate community-source-bundle community-source-smoke
+.PHONY: completion-readiness completion-classification-gate completion-source-gate
+.PHONY: completion-source-ownership-gate completion-license-policy-gate
+.PHONY: completion-assessment completion-assessment-check
+.PHONY: nemavg-stroke-caps-candidate clkmgr-divider-candidate
+
+nemavg-stroke-caps-candidate:
+	$(PYTHON) tools/analyze_g2_nemavg_stroke_caps_candidate.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_nemavg_stroke_caps_candidate \
+		tests.test_runtime_nemavg_stroke_caps_candidate
+
+clkmgr-divider-candidate:
+	$(PYTHON) tools/analyze_g2_clkmgr_divider_candidate.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_clkmgr_divider_candidate \
+		tests.test_runtime_clkmgr_divider_candidate
+
+completion-readiness:
+	$(PYTHON) tools/analyze_g2_completion_readiness.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_completion_readiness
+
+completion-classification-gate:
+	$(PYTHON) tools/analyze_g2_completion_readiness.py --require-classified
+
+completion-source-gate:
+	$(PYTHON) tools/analyze_g2_completion_readiness.py --require-source-complete
+
+completion-source-ownership-gate:
+	$(PYTHON) tools/analyze_g2_completion_readiness.py --require-source-ownership-quality
+
+completion-license-policy-gate:
+	$(PYTHON) tools/analyze_g2_completion_readiness.py --require-project-license-policy
+
+completion-assessment:
+	$(PYTHON) tools/generate_g2_completion_report.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_generate_g2_completion_report
+
+completion-assessment-check:
+	$(PYTHON) tools/generate_g2_completion_report.py --check
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_generate_g2_completion_report
+
+release-license-audit:
+	$(PYTHON) tools/audit_g2_release_licensing.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_audit_g2_release_licensing \
+		tests.test_release_cfw
+
+release-license-gate:
+	$(PYTHON) tools/audit_g2_release_licensing.py --release-gate
+
+community-distribution-gate: completion-assessment-check \
+		completion-classification-gate \
+		completion-source-ownership-gate completion-license-policy-gate
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_audit_g2_release_licensing \
+		tests.test_community_distribution
+
+community-source-bundle: community-distribution-gate
+	$(PYTHON) tools/community_distribution.py create \
+		build/community/openCFW-g2-community-source.zip
+	$(PYTHON) tools/community_distribution.py verify \
+		build/community/openCFW-g2-community-source.zip
+
+community-source-smoke: community-source-bundle reference
+	$(PYTHON) tools/community_distribution.py smoke-build \
+		build/community/openCFW-g2-community-source.zip \
+		"$(REFERENCE_PACKAGE)"
+
+source-release: release-license-gate source
 	$(PYTHON) tools/release_cfw.py \
 		"$(SOURCE_PACKAGE)" \
 		"$(RELEASE_PACKAGE)" \

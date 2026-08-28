@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of the G2 system-monitor peer-reboot callback.
  * The authenticated stock control flow and provider addresses are documented

@@ -1,0 +1,40 @@
+{
+  "adapter": {
+    "path": "components/shared/touch/runtime_touch_cat2_adapters.c",
+    "sha256": "0504c79d87d1c79d3a953699568c6b73e86c061696c60f490d8c83e9025cbb3d",
+    "target_object_bytes": 3332
+  },
+  "admitted_row_count": 9,
+  "analysis_mode": "offline exact public/private symbol/location/register/caller signature and Cortex-M0+ compile gate; no hardware or MMIO execution",
+  "component": "G2 touch CAT2 source admission batch 5",
+  "exclusions": "legacy halt remains typed external; mixed CAPSENSE/CAT2, Em_EEPROM EULA, application/startup, and DFU/system batches unchanged",
+  "integration": "isolated Apache typed routes; MSCLP/SCB/SysPm/halt providers unavailable and fail-closed on host",
+  "metrics": {
+    "admitted_functions": 9,
+    "cat2_gap_after": 1,
+    "cat2_gap_before": 10,
+    "location_digest": "14bfe9e877a4691e238412e0a83956e586c896125561952815450c4719653356",
+    "msclp_functions": 2,
+    "row_digest": "6f50b021ebdaac1345b8cdcee3ee7ecb3e78ba8232f36d807d0a6d11b3aa898d",
+    "scb_i2c_private_functions": 6,
+    "semantic_gap_after": 166,
+    "semantic_gap_before": 175,
+    "syspm_functions": 1,
+    "typed_unavailable_functions": 1,
+    "unsafe_batch_admissions": 0
+  },
+  "provider_sources": {
+    "commit": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+    "drivers/include/cy_syslib.h": "6c6e35da19d618c752c767873e89ae6144877a1a4eacafe13b31cc0c0f8e7ca4",
+    "drivers/source/cy_msclp.c": "2613ec6fee3ac2ca6d8a42e483bb671f9ed63a58045b125ee6fe11f6f2d60f07",
+    "drivers/source/cy_scb_i2c.c": "9f3e77675ea3f02798107fe28def78b826b35d6d136785644d90ff10877f248b",
+    "drivers/source/cy_syspm.c": "be43e5aa704c99acca45850db68094977a274dcb1d4335fafca753269c5a93b8"
+  },
+  "remaining": {
+    "cat2_candidates": 1,
+    "total_semantic_source_gap": 166,
+    "typed_unavailable_entry": "0x7038"
+  },
+  "schema_version": 1,
+  "typed_unavailable_row_count": 1
+}

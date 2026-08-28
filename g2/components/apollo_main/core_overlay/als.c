@@ -1,7 +1,7 @@
 /*
  * OpenCFW clean-room G2 ambient-light policy driver.
  *
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Recreated from authenticated linked-object behavior and the public TI
  * OPT3007 SBOS864 register specification.  This file contains no historical

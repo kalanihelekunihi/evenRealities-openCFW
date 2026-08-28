@@ -1,0 +1,14 @@
+/* SPDX-License-Identifier: BSD-3-Clause */
+#ifndef OPEN_CFW_BOOTLOADER_MSPI_LIFECYCLE_425066_H
+#define OPEN_CFW_BOOTLOADER_MSPI_LIFECYCLE_425066_H
+#include <stdint.h>
+typedef struct open_cfw_mspi_lifecycle_state {uint32_t prefix,module,tcb_size,tcb_address,last_processed,num_cq_entries,num_hp_entries,num_hp_pending,block,num_transactions,pending_hp_transactions,num_unsolicited,xip_delay;uint8_t configured,hp,sequence,autonomous,xip_enabled;} open_cfw_mspi_lifecycle_state;
+typedef struct open_cfw_mspi_lifecycle_trace {uint32_t cq_init_calls,cq_disable_calls,cq_term_calls,delay_calls,delay_value,cq_setclear,cq_disable_status;} open_cfw_mspi_lifecycle_trace;
+#if defined(__arm__) || defined(__thumb__)
+void open_cfw_bootloader_mspi_enable_425066(void);void open_cfw_bootloader_mspi_disable_4250f0(void);void open_cfw_bootloader_mspi_deinitialize_42516c(void);
+#else
+uint32_t open_cfw_bootloader_mspi_enable_425066(open_cfw_mspi_lifecycle_state*,open_cfw_mspi_lifecycle_trace*);
+uint32_t open_cfw_bootloader_mspi_disable_4250f0(open_cfw_mspi_lifecycle_state*,open_cfw_mspi_lifecycle_trace*);
+uint32_t open_cfw_bootloader_mspi_deinitialize_42516c(open_cfw_mspi_lifecycle_state*,open_cfw_mspi_lifecycle_trace*);
+#endif
+#endif

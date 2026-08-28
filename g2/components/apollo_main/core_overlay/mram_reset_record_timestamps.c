@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio record timestamp-renumbering routine matched to stock
  * AppDbResetRecordTimestamps at 0x0047C164.

@@ -34,7 +34,7 @@ class TouchSensingSourceAuditTests(unittest.TestCase):
                          ["ACT->ALR", "ALR->WOT", "WOT->ACT", "WOT->ALR"])
         self.assertEqual(len(self.report["implemented_policy"]), 8)
 
-    def test_physical_validation_is_blocked(self) -> None:
+    def test_physical_validation_is_deferred(self) -> None:
         self.assertFalse(self.report["hardware_block"]["physical_evidence_available"])
         self.assertTrue(self.report["hardware_block"]["shipped_touch_application_retained"])
 

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-routed behavioral reconstruction of G2 WsfAssert/WsfTrace.
  * This deliberately preserves the stock unbounded formatting and double-

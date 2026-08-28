@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room functional recovery of product/s200/bootloader/config/redirect.c
  * redirect_init() from the authenticated G2 2.2.6.10 bootloader.  The body

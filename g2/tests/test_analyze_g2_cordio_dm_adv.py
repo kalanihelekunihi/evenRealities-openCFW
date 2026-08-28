@@ -50,7 +50,7 @@ class CordioDmAdvAuditTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 15)
         self.assertEqual(production["guarded_redirects"], 9)
         self.assertEqual(len(production["source_only_functions"]), 6)
-        self.assertIn("blocked", production["hardware_validation"])
+        self.assertIn("deferred by project direction", production["hardware_validation"])
 
 
 if __name__ == "__main__":

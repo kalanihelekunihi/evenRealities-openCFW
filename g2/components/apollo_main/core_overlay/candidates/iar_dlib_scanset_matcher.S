@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room Thumb-2 recreation of the IAR DLIB scanf %[...] scanset
  * membership matcher identified in the official Even Realities G2 2.2.6.10

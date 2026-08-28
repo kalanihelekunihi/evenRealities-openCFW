@@ -1,0 +1,72 @@
+{
+  "adapters": {
+    "application_contract": {
+      "license": "MIT",
+      "path": "components/shared/touch/runtime_touch_application_boundary.c",
+      "sha256": "5398983b1ed35db266e09fc5dfa7a2eb94c80ab9d63cdd2f26a5ebc2944cc183",
+      "target_object_bytes": 932
+    },
+    "critical": {
+      "license": "Apache-2.0",
+      "path": "components/shared/touch/runtime_touch_critical_adapters.S",
+      "sha256": "db0f414bf818e850544a1c2541db6a4e760b996f4147526f6525bd6658ee1654",
+      "target_object_bytes": 476
+    }
+  },
+  "analysis_mode": "offline exact instruction/source admission plus conservative call-topology contracts; no vendor body copied and no hardware or MMIO execution",
+  "component": "G2 touch application/startup source admission batch 7",
+  "contract_row_count": 97,
+  "exact_row_count": 2,
+  "exclusions": "CAPSENSE and Em_EEPROM EULA bodies remain external; application behavior and startup policy are not inferred from control-flow topology",
+  "integration": "isolated adapters and typed contracts; not production-routed; absent application provider fails closed",
+  "metrics": {
+    "actionable_semantic_source_before": 111,
+    "application_ambiguity_after": 0,
+    "application_ambiguity_before": 99,
+    "clean_room_contract_functions": 97,
+    "component_sizes": [
+      71,
+      5,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "concrete_implemented_contracts": 0,
+    "concrete_source_or_implementation_gap_after": 109,
+    "contract_row_digest": "17a55e2947ac8488b396119dffcc68d274b6944dd257a9db4f8386c30081f69c",
+    "exact_row_digest": "9d4c00849617cf694e43fdf0402f8c68bbcfef6aa12cbd90fe2891aea12975a2",
+    "exact_upstream_functions": 2,
+    "external_dependency_entries": 61,
+    "family_functions": 99,
+    "platform_startup_contracts": 46,
+    "topology_digest": "21257118b041a260fe9c8fbf6cd7fb0cc5e3027249acfa70ac0ff0c045ff84b8",
+    "touch_application_contracts": 51
+  },
+  "remaining": {
+    "clean_room_contracts_unimplemented": 97,
+    "concrete_source_or_implementation_functions": 109,
+    "note": "typed clean-room contracts are not implementations and are not counted as concrete OpenCFW source",
+    "other_typed_external_or_unavailable_functions": 12
+  },
+  "schema_version": 1,
+  "upstream": {
+    "commit": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/Infineon/mtb-pdl-cat2",
+    "source": "drivers/source/COMPONENT_CM0P/TOOLCHAIN_GCC_ARM/cy_syslib_gcc.S",
+    "source_file_sha256": "c566a2156931e4179b8adfd591eee9fe3bc88e90d325ec37f43fdb599dcae281"
+  }
+}

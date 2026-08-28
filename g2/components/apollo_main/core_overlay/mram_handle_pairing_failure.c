@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio pairing-failure handler matched to stock
  * AppDbHandlePairingFailure at 0x0047C568.

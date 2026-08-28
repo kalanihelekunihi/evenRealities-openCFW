@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: MIT
+kind	name	start_or_entry	end_exclusive	size	sha256	parent_function	role
+authenticated_code_region	i2c_slave_init	0x0378	0x03DA	98	14859a32e5cb14c433222df6ddf0e50eccc68a424161e9088db386d03f6da026	-	SCB1 I2C-slave init: HAL tables, RX/TX descriptors, SCB1 IRQ7 enable
+authenticated_code_region	i2c_irq_handler_and_cases	0x0400	0x05A0	416	d8911073cd4696cc8e93bf1d15bda36ec7fe5f654837b3421b49ac58ca088076	-	SCB1 IRQ handler: status demux, RX validation, 9-slot command dispatch, 7 case bodies
+authenticated_code_region	report_builder	0x0824	0x0960	316	2dfdebfc817b8de4a5cab6d0e046511c89edd817a8f5d51cc42575f352074128	-	periodic 16-byte report build, prox-baseline EEPROM save policy, attention assert
+authenticated_code_region	event_dispatcher	0x37C0	0x38CA	266	a23e3a5e51a9e09ff72ba298701931212de059c566c48432f7898e2bbcdb3cc5	-	generic device-event dispatcher, events 0-7, resident 8-entry table 0xB4FC
+authenticated_code_region	dfu_handoff_and_reset	0x4B14	0x4B44	48	56c6900e582fe22b2cbec6d71cde6979b68ba98e6dfe307ac2ed72ac9f3b3ebc	-	NVIC_SystemReset plus boot-mode mailbox writer (enter-DFU)
+authenticated_code_region	fifo_descriptors	0x67D8	0x680C	52	6e882eca8aa4db5aec28f48319a4de30227ea7dad2719436275ae8c9171dd1f7	-	RX/TX descriptor arm helpers and RX-position getter
+authenticated_code_region	power_mgmt	0x703A	0x70A4	106	57234a89b2cf1792dad138e8f0b00f84e85a19b229a6151ef94eebc9fd9d4ccf	-	CPUSS power-mode setter, sleep/deep-sleep WFI entries, SFLASH trim load
+authenticated_code_region	logger_stub	0x0BE0	0x0BE8	8	d5af164eb1253e2dc1faf4d9271ca5119221d2f156233a278dcbf632803173de	-	compiled-out logger: push args, return 0; all 38 call sites are no-ops
+authenticated_code_region	eeprom_config_module	0x0660	0x0780	288	0a97bda2b4b4f6eae1f6f23af5105a22dab792a1f79e35a00ac74a064db1d751	-	EEPROM-emulation config load/save with UNVE magic 0x45564E55
+authenticated_code_region	sensor_read_mux	0x02F4	0x0324	48	42770c5c2e8b77f3b992a3d049d3b706082280b7dfb7ab13ed15b0900312ef3d	-	per-channel sensor read multiplexer used by report and read-report command
+authenticated_code_region	msc_sensing_loop	0x36C4	0x376C	168	5cee0e3336b8a6e052adc77ba845ff2d03d1dd5c9f4926588d523217aa7a13bc	-	authenticated MSC sensing-loop span
+dispatch_case_entry	version_identity_query_case	0x0446	-	-	-	0x0400	executable case entry; not a standalone function claim
+dispatch_case_entry	read_saved_proximity_baseline_case	0x0466	-	-	-	0x0400	executable case entry; not a standalone function claim
+dispatch_case_entry	read_long_press_threshold_case	0x0480	-	-	-	0x0400	executable case entry; not a standalone function claim
+dispatch_case_entry	save_proximity_baseline_case	0x04A0	-	-	-	0x0400	executable case entry; not a standalone function claim
+dispatch_case_entry	write_gesture_configuration_case	0x04C8	-	-	-	0x0400	executable case entry; not a standalone function claim
+dispatch_case_entry	enter_dfu_case	0x052C	-	-	-	0x0400	executable case entry; not a standalone function claim
+dispatch_case_entry	read_current_sensor_report_case	0x054C	-	-	-	0x0400	executable case entry; not a standalone function claim

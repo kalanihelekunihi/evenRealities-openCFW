@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* Clean-room reconstruction of driver/chg/drv_bq27427.c. */
 
 #include <stddef.h>

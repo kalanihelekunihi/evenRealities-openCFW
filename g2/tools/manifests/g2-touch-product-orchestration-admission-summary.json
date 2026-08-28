@@ -1,0 +1,38 @@
+{
+  "admitted_row_count": 2,
+  "analysis_mode": "offline authenticated flow with injected providers and caller-owned register views; host and Cortex-M0+ compile; no hardware/MMIO execution",
+  "component": "G2 Touch product orchestration admission batch 24",
+  "exclusions": "only selected-runtime, resident-configuration, system-handoff, Infineon EULA provider, and halt boundaries remain",
+  "hardware_blocker": "deferred by project direction",
+  "hardware_validation": "deferred by project direction",
+  "integration": "isolated source candidate only; not production-routed",
+  "metrics": {
+    "admitted_functions": 2,
+    "admitted_instruction_bytes": 580,
+    "concrete_source_or_implementation_gap_after": 19,
+    "fixed_address_accesses": 0,
+    "input_concrete_gap": 21,
+    "input_gap_instruction_bytes": 3158,
+    "resident_body_admissions": 0,
+    "residual_digest": "11876839a374962a4580935d5b65ab7806d71aedf53e4a621e9e43386d772f5c",
+    "residual_gap_instruction_bytes": 2578,
+    "row_digest": "591bb90fb248d1f28ad4148896c5a4a7cb32943a09084fd668d1025f39a6de12",
+    "typed_external_or_unavailable_functions": 19,
+    "unimplemented_application_contracts_after": 0,
+    "unimplemented_application_contracts_before": 9
+  },
+  "remaining": {
+    "concrete_gap_instruction_bytes": 2578,
+    "concrete_source_or_implementation_functions": 19,
+    "typed_external_or_unavailable_functions": 19,
+    "unimplemented_clean_room_application_contracts": 0
+  },
+  "residual_row_count": 19,
+  "schema_version": 1,
+  "source": {
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_product_orchestration.c",
+    "sha256": "3456f3a24b6301823f822d4e82588ea8b660e31b2bb5833d1320605a8a182f61",
+    "target_closure_object_bytes": 2652
+  }
+}

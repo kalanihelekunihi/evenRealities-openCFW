@@ -1,0 +1,37 @@
+{
+  "admitted_row_count": 4,
+  "analysis_mode": "offline authenticated control/data flow, injected Apache provider seams, host and Cortex-M0+ compile; no hardware/MMIO execution",
+  "component": "G2 touch evidence-closed startup admission batch 18",
+  "exclusions": "all EULA bodies, resident tables/loaders, 0x1B6C/0x1C54/0x2638, system handoff and halt remain unadmitted",
+  "integration": "isolated source candidate only; not production-routed",
+  "metrics": {
+    "admitted_functions": 4,
+    "admitted_instruction_bytes": 150,
+    "concrete_source_or_implementation_gap_after": 50,
+    "input_concrete_gap": 54,
+    "input_gap_instruction_bytes": 4872,
+    "mmio_admissions": 0,
+    "resident_table_admissions": 0,
+    "residual_digest": "51e1ad6a29abf47e0661644fdcc80e2d1f91744dcdd925c78e202f7bed89b19f",
+    "residual_gap_instruction_bytes": 4722,
+    "row_digest": "d728a7b2595c31ae4cd684c5538e223a1605301e9b6719e6772c13d7eb2c507b",
+    "typed_external_or_unavailable_functions": 12,
+    "typed_provider_admissions": 2,
+    "unimplemented_application_contracts_after": 38,
+    "unimplemented_application_contracts_before": 42
+  },
+  "remaining": {
+    "concrete_gap_instruction_bytes": 4722,
+    "concrete_source_or_implementation_functions": 50,
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_clean_room_application_contracts": 38
+  },
+  "residual_row_count": 50,
+  "schema_version": 1,
+  "source": {
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_startup_closed.c",
+    "sha256": "056fc99dfb8a0108e314b64be74a114709afa2da704389328b50285b591af144",
+    "target_closure_object_bytes": 1420
+  }
+}

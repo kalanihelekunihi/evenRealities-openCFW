@@ -718,6 +718,73 @@ class ApolloOverlayInPlaceLeafTests(unittest.TestCase):
                 in_place_leaves=[(leaf, bad_literal)],
             )
 
+    def test_literal_guard_accepts_size_and_sha256_without_stock_bytes(self) -> None:
+        digest = hashlib.sha256(self.LITERAL_BYTES).hexdigest()
+        relocations = self._relocations()
+        relocations[0].pop("target_expected_hex")
+        relocations[0]["target_expected_size"] = len(self.LITERAL_BYTES)
+        relocations[0]["target_expected_sha256"] = digest
+        with tempfile.TemporaryDirectory() as directory:
+            temporary = Path(directory)
+            source = temporary / "fixed.S"
+            object_path = temporary / "fixed.o"
+            source.write_text(self._source(), encoding="utf-8")
+            self._compile(source, object_path)
+            _leaf, extraction = self._extract(
+                object_path,
+                relocations=relocations,
+            )
+        reviewed = extraction["relocations"][0]
+        self.assertNotIn("target_expected_hex", reviewed)
+        self.assertEqual(reviewed["target_expected_size"], len(self.LITERAL_BYTES))
+        self.assertEqual(reviewed["target_expected_sha256"], digest)
+
+        leaf = b"\x00\xbf\x70\x47"
+        base = self._base(
+            {
+                self.LEAF_ADDRESS: leaf,
+                self.LITERAL_ADDRESS: self.LITERAL_BYTES,
+            }
+        )
+        report = self._leaf_report(
+            function="fixed",
+            runtime_address=self.LEAF_ADDRESS,
+            leaf=leaf,
+            relocations=[
+                {
+                    "target_address": self.LITERAL_ADDRESS,
+                    "target_expected_size": len(self.LITERAL_BYTES),
+                    "target_expected_sha256": digest,
+                }
+            ],
+        )
+        _patched, details = apollo_overlay.patch_component(
+            base=base,
+            overlay=b"\x70\x47",
+            functions={"primary": {"offset": 0, "size": 2}},
+            config=self._patch_config(),
+            in_place_leaves=[(leaf, report)],
+        )
+        literal = details["patched_in_place_leaves"][0][
+            "literal_dependencies"
+        ][0]
+        self.assertNotIn("expected_hex", literal)
+        self.assertEqual(literal["expected_size"], len(self.LITERAL_BYTES))
+        self.assertEqual(literal["expected_sha256"], digest)
+
+        report["extraction"]["relocations"][0]["target_expected_sha256"] = "0" * 64
+        with self.assertRaisesRegex(
+            apollo_overlay.BuildError,
+            "literal target.*expected SHA-256",
+        ):
+            apollo_overlay.patch_component(
+                base=base,
+                overlay=b"\x70\x47",
+                functions={"primary": {"offset": 0, "size": 2}},
+                config=self._patch_config(),
+                in_place_leaves=[(leaf, report)],
+            )
+
     def test_patch_rejects_leaf_patch_and_literal_overlaps(self) -> None:
         first = b"\x00\xbf\x70\x47"
         second = b"\x70\x47\x00\xbf"

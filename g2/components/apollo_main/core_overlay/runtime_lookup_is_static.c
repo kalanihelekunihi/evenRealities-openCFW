@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded source replacement for the G2 2.2.6.10 leaf predicate at
  * 0x00482708...0x00482715. The stock helper reads only byte offset 8 of its

@@ -204,9 +204,9 @@ TARGETS = {
         "alignment": 4,
         "section_sha256": "c5b343d383bd3fa14d706f23ae1b7b46114583f2310e1ad77cad53635bd4276b",
         "object_size": 1_732,
-        "object_sha256": "826991c27dc3cf1cd674fac5fad81d94225e94d38ab15775ee7caa6eb2bfcb5a",
+        "object_sha256": "0c4e14f56eb91a6496532fa1614dccc56cb5ea458fe83ee3f92c0474793b8d3b",
         "helper_object_size": 960,
-        "helper_object_sha256": "6d95d3125054521d3366839e9c5011a215b6c36cfe2c89ea18542f1f396a1360",
+        "helper_object_sha256": "a684f6c86492fd2b825670a9117364ef120891e7e143ec39ec89930a2b37cf01",
         "helper_call_offset": 0x244,
     },
     "linux-clang": {
@@ -712,10 +712,10 @@ class FreeRTOSQueueSemaphoreTakeUpstreamCandidateTests(unittest.TestCase):
         self.assertIn("(__UINTPTR_TYPE__)0x00441C45U", production)
         manifest = json.loads(CORE_SOURCE_MANIFEST.read_text(encoding="utf-8"))
         provider = manifest["component_overrides"]["apollo_main"]["provider"]
-        self.assertEqual(provider["size"], 3_690_822)
+        self.assertEqual(provider["size"], 3_952_454)
         self.assertEqual(
             provider["sha256"],
-            "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
         )
         region = next(
             item for item in manifest["component_overrides"]["apollo_main"]["regions"]

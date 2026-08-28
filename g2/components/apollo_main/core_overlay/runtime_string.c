@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacement for the shared G2 2.2.6.10 Apollo string-length
  * primitive at 0x0044A43C. The exact stock boundary and reference inventory

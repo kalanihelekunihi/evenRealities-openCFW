@@ -25,7 +25,7 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 INPUT_PINS = {
     FUNCTION_MAP: "fa8a7a9eeaf4f386a9419ffeee5e876dccc188a076ac785f1685fd5637556e6a",
-    CLOSURE: "87d5dc817863e3707700420b3fc8de686a0c8676bee7c53b68fdbe9e0a92539d",
+    CLOSURE: "bf20528e4d08a59df563f672c7bb2898e0a143391ab9e038ebbaa040421327be",
     PROVIDER_MAP: "52bbdb1316e572fb2b3c6fe92bc9842087141207090af093f5fe253d743c99d7",
 }
 
@@ -391,9 +391,9 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
         report["component"]["sha256"],
     ) != (
         332_148,
-        "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+        "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
         3_855_544,
-        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
     ):
         raise AuditError("production transport build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -405,9 +405,9 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
         manifest["package"].get("expected_sha256"),
     ) != (
         3_855_544,
-        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
         4_634_038,
-        "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
+        "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
     ):
         raise AuditError("production transport manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}
@@ -540,12 +540,12 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
             "stock_replaced_bytes": BODY_BYTES,
             "retained_literal_pool_bytes": POOL_BYTES,
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
+            "hardware_validation": "deferred by project direction",
             "hardware_blocker": (
-                "No authorized responsive G2 peer is physically available "
+                "An authorized responsive G2 peer is required for future qualification "
                 "for live single/multipart framing, retransmission, timeout, "
                 "CRC-failure, and dual-glasses callback evidence; the "
-                "authorized right temple is nonresponsive and the left "
+                "authorized right temple is not under test because qualification is deferred by project direction and the left "
                 "temple must remain stock."
             ),
         },
@@ -553,7 +553,7 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
             "the exact private G2 source and producing commit remain unavailable",
             "five conservative current labels use behavior plus prior-G2 order because no current function-name string survives",
             "provider commits identify reusable upstream seams but cannot identify the private first-party transport revision",
-            "hardware traffic validation remains blocked by unavailable authorized responsive physical peer evidence",
+            "hardware traffic validation remains deferred by project direction; future qualification requires authorized responsive physical peer evidence",
         ],
     }
 

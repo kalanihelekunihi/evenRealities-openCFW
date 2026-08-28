@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "component": "google/liblc3",
+  "selected_ref": "refs/tags/v1.1.3",
+  "selected_commit": "96a3af0beb5487aca3b98a4b992a539a1f6d80d1",
+  "source_path": "g2/third_party/liblc3/src/ltpf.c",
+  "source_sha256": "810c6f862a649b9a27b33dc7c1e1c8f64a339b5a4aa6fef8027eafbcf8f7e80e",
+  "license": "Apache-2.0",
+  "source_symbols": [
+    "dot",
+    "correlate",
+    "interpolate",
+    "interpolate_corr",
+    "resample_x192k_12k8",
+    "resample_8k_12k8",
+    "resample_24k_12k8",
+    "resample_32k_12k8",
+    "resample_96k_12k8",
+    "lc3_ltpf_analyse"
+  ],
+  "exact_public_source_candidate": false,
+  "exact_private_checkout_proven": false,
+  "qualification": "Authenticated compatible public baseline and byte-exact private tables; function identities are positive, but the private generating checkout and compiler configuration are not proven.",
+  "production_routed": true,
+  "production_component": "g2/components/apollo_main/liblc3_ltpf",
+  "production_callsite": "0x0059145C",
+  "historical_individual_bodies_routed": false,
+  "production_profiles": {
+    "apple-clang": {"source_owned_bytes": 7576, "sha256": "8261449f203ff0a33a0b6f22eee57076216491b2a03f6c359b98b98aa6ba0d24"},
+    "linux-clang": {"source_owned_bytes": 7596, "sha256": "3ba3bb1a790b236ab82f59e965715e9730658058cfc20b7d6a7fb7ec8e75d8d3"}
+  }
+}

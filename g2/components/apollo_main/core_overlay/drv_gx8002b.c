@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 /* Clean-room reconstruction of driver/codec/drv_gx8002b.c. */
 #include <stdbool.h>
 #include <stddef.h>

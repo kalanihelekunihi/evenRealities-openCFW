@@ -361,7 +361,7 @@ EXIDX_BYTES = bytes.fromhex("0000000001000000")
 TARGET_PROFILES = {
     "apple-clang": {
         "compiler": "/usr/bin/clang",
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
         "object": (1_064, "aeef70e13e386f34dd78548a0dbfe211fb883ee2b1e5146f209e7bef78318832"),
         "function": (252, 4, "7b77ccc3441cb8e725fa8a97a8197e0f993a00456925c6eb0126e77fb00f9914"),
         "exidx": (8, "01acecb507abfe1a354aa8064f4af5d3f1acd019e37db3c11c97523b71c76e9d"),

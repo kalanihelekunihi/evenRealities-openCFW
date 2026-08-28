@@ -1,0 +1,42 @@
+{
+  "admitted_row_count": 8,
+  "analysis_mode": "offline authenticated boundary plus selected source policy; host and Cortex-M0+ compile; no hardware/MMIO execution",
+  "component": "G2 Touch selected platform completion admission batch 26",
+  "configuration_evidence": "deterministic safe defaults selected; board-specific tuning and resident-table equivalence require physical evidence",
+  "exclusions": "production routing, board-specific tuning, electrical/timing qualification, and on-device validation remain",
+  "hardware_blocker": "deferred by project direction",
+  "hardware_validation": "deferred by project direction",
+  "integration": "isolated source candidate only; not production-routed",
+  "metrics": {
+    "admitted_functions": 8,
+    "admitted_instruction_bytes": 942,
+    "concrete_source_or_implementation_gap_after": 0,
+    "fixed_address_accesses": 0,
+    "input_concrete_gap": 8,
+    "input_gap_instruction_bytes": 942,
+    "residual_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "residual_functions": 0,
+    "residual_gap_instruction_bytes": 0,
+    "row_digest": "a8f2887b04f0192c06d2d95ed69d20b0225e7694ab33bd0c861d189668cc8470",
+    "selected_halt_functions": 1,
+    "selected_runtime_functions": 4,
+    "source_owned_configuration_functions": 3,
+    "typed_external_or_unavailable_functions": 0,
+    "unimplemented_application_contracts_after": 0
+  },
+  "remaining": {
+    "concrete_gap_instruction_bytes": 0,
+    "concrete_source_or_implementation_functions": 0,
+    "typed_external_or_unavailable_functions": 0,
+    "unimplemented_clean_room_application_contracts": 0
+  },
+  "residual_row_count": 0,
+  "schema_version": 1,
+  "software_function_frontier_complete": true,
+  "source": {
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_platform_completion.c",
+    "sha256": "204e0f30500b1e70d2dbcf68b97c161e0116ab2d0fcb096a7658c615f6b0c00f",
+    "target_closure_object_bytes": 3364
+  }
+}

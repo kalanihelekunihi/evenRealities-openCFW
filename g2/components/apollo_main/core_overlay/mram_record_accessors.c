@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio application-database accessors matched to the stock
  * AppDbGetKey-style routine and adjacent peer-address helpers at

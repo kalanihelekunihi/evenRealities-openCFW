@@ -42,12 +42,12 @@ MODE2_SHA256 = "d2a627965efb0521d9d82b99c176462388495b7e199696bf1a3eafceb619a450
 PROFILE_PINS = {
     "apple-clang": {
         "overlay": (
-            180782,
-            "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
+            429058,
+            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
         ),
         "component": (
-            3704178,
-            "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+            3952454,
+            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
         ),
         "legacy": {
             "open_cfw_evenhub_mode2_decompress_legacy": {
@@ -60,23 +60,23 @@ PROFILE_PINS = {
             },
         },
         "active": {
-            "LZ4_decompress_safe": {"offset": 116224, "size": 1660},
-            "open_cfw_lz4_decompress_safe": {"offset": 117948, "size": 4},
+            "LZ4_decompress_safe": {"offset": 176072, "size": 1660},
+            "open_cfw_lz4_decompress_safe": {"offset": 177796, "size": 4},
             "open_cfw_evenhub_mode2_decompress": {
-                "offset": 117952,
+                "offset": 177800,
                 "size": 30,
             },
         },
-        "accounting": (167608, 123624, 123802, 3399558),
+        "accounting": (438910, 401494, 409246, 3111910),
     },
     "linux-clang": {
         "overlay": (
-            125278,
-            "a0a520069e497613b397af1d7327752201ced44c876d6925a7561ae45c91fa7c",
+            212664,
+            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
         ),
         "component": (
-            3648674,
-            "8c477d28a9f58feaf722bd1e00b9767a8ca745ba618515d46339271cd0288c1a",
+            3736060,
+            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
         ),
         "legacy": {
             "open_cfw_evenhub_mode2_decompress_legacy": {
@@ -89,14 +89,14 @@ PROFILE_PINS = {
             },
         },
         "active": {
-            "LZ4_decompress_safe": {"offset": 118052, "size": 1690},
-            "open_cfw_lz4_decompress_safe": {"offset": 119808, "size": 4},
+            "LZ4_decompress_safe": {"offset": 177804, "size": 1690},
+            "open_cfw_lz4_decompress_safe": {"offset": 179560, "size": 4},
             "open_cfw_evenhub_mode2_decompress": {
-                "offset": 119812,
+                "offset": 179564,
                 "size": 30,
             },
         },
-        "accounting": (123752, 106884, 107062, 3416298),
+        "accounting": (205144, 99288, 99468, 3423892),
     },
 }
 
@@ -527,12 +527,12 @@ class Lz4UpstreamProductionAdapterTests(unittest.TestCase):
             1724,
             0,
             64,
-            "46475de79c8b201f60a15a1e47e0f62a4191002d0bd1fc9fca65ed67916be2f2",
+            "49e4b188b9bed8f9fcabf49f06474a7388f1ef1f95676e08183e458fa7ae3d86",
         ) if profile == "apple-clang" else (
             1756,
             2,
             64,
-            "7d11b4e84417eb55c625f1ef064f19a07ed81bbf283ebbe87541a4159263f7d2",
+            "1a2ef05cfbe9f33fadd5c7f8404fc11a3affa54fcf0e9c58c686056f7d802b3b",
         )
         self.assertEqual(
             (
@@ -544,7 +544,8 @@ class Lz4UpstreamProductionAdapterTests(unittest.TestCase):
             decoder_expected,
         )
         self.assertEqual(
-            report["overlay"]["link"]["relocated_rodata_size"], 3260
+            report["overlay"]["link"]["relocated_rodata_size"],
+            6424 if profile == "apple-clang" else 2429,
         )
 
         config = json.loads(CONFIG.read_text(encoding="utf-8"))

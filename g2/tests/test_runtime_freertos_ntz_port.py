@@ -790,13 +790,13 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 180782,
+                "overlay_size": 429058,
                 "overlay_sha256": (
-                    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
                 ),
-                "component_size": 3704178,
+                "component_size": 3952454,
                 "component_sha256": (
-                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
                 ),
             },
         )
@@ -918,12 +918,12 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                 "patch_site_count": len(overlay["patched_sites"]),
             },
             {
-                "size": 180782,
+                "size": 429058,
                 "sha256": (
-                    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
                 ),
-                "function_count": 971,
-                "patch_site_count": 910,
+                "function_count": 2_631,
+                "patch_site_count": 2_374,
             },
         )
         self.assertTrue(set(STOCK).isdisjoint(overlay["functions"]))
@@ -938,16 +938,16 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                     Path(self.production_output)
                     / "ota_s200_firmware_ota.bin"
                 ).relative_to(ROOT).as_posix(),
-                "size": 3704178,
+                "size": 3952454,
                 "sha256": (
-                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
                 ),
-                "opaque_base_bytes": 3399558,
-                "source_owned_bytes": 167608,
-                "source_owned_in_place_bytes": 182,
+                "opaque_base_bytes": 3_111_914,
+                "source_owned_bytes": 431_334,
+                "source_owned_in_place_bytes": 184,
                 "generated_wrapper_bytes": 32,
-                "generated_patch_site_bytes": 123624,
-                "replaced_stock_function_bytes": 123802,
+                "generated_patch_site_bytes": 409_066,
+                "replaced_stock_function_bytes": 409_246,
             },
         )
         self.assertEqual(

@@ -60,7 +60,7 @@ Provenance: the retained path places the file under a vendored `kernel\FreeRTOS-
 ## Production source closure
 
 `components/apollo_main/core_overlay/freertos_cli_filesystem.c` is an
-independently authored GPL-3.0-only implementation of all twelve entries:
+independently authored MIT implementation of all twelve entries:
 `ls`, `cat`, `rm`, path normalization, `cd`, `mkdir`, `touch`, `pwd`, `mv`,
 streaming MD5, `df`, and the block-stat accumulator. Filesystem calls bind to
 the authenticated G2 littlefs adapter entries; the `df` geometry reads the

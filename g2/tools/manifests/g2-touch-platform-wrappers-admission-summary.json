@@ -1,0 +1,38 @@
+{
+  "admitted_row_count": 12,
+  "analysis_mode": "offline authenticated flow with injected providers; host and Cortex-M0+ compile; no hardware/MMIO execution",
+  "component": "G2 Touch platform wrapper admission batch 21",
+  "exclusions": "all EULA bodies, direct-MMIO clock transitions, product main loop, resident table loaders, pointer-table ABIs, system handoff, and halt remain unadmitted",
+  "hardware_blocker": "deferred by project direction",
+  "hardware_validation": "deferred by project direction",
+  "integration": "isolated source candidate only; not production-routed",
+  "metrics": {
+    "admitted_functions": 12,
+    "admitted_instruction_bytes": 298,
+    "concrete_source_or_implementation_gap_after": 31,
+    "input_concrete_gap": 43,
+    "input_gap_instruction_bytes": 4478,
+    "mmio_admissions": 0,
+    "resident_table_admissions": 0,
+    "residual_digest": "988eb3b5678eea013104d0dcaa75d4ee8c157f656d11dbfbd556f256ccde96f7",
+    "residual_gap_instruction_bytes": 4180,
+    "row_digest": "f9a115127e1dbdea2748b75e35c98c1130edf4474c0759beff2607782f691291",
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_application_contracts_after": 19,
+    "unimplemented_application_contracts_before": 31
+  },
+  "remaining": {
+    "concrete_gap_instruction_bytes": 4180,
+    "concrete_source_or_implementation_functions": 31,
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_clean_room_application_contracts": 19
+  },
+  "residual_row_count": 31,
+  "schema_version": 1,
+  "source": {
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_platform_wrappers.c",
+    "sha256": "20b561b07817df5a49eaafde9898e5af9b44eca1b2b7cbe015233c1323288863",
+    "target_closure_object_bytes": 2944
+  }
+}

@@ -230,7 +230,7 @@ def _production_report(functions: list[dict[str, Any]]) -> dict[str, Any]:
         "source_owned_bytes_added": 2170,
         "stock_bytes_replaced": sum(item["size"] for item in functions),
         "hardware_validation": (
-            "blocked by unavailable authorized G2/EM9305 pairing, reconnect, "
+            "deferred by project direction; future qualification requires authorized G2/EM9305 pairing, reconnect, "
             "LESC, and stale-AES-queue physical evidence"
         ),
     }

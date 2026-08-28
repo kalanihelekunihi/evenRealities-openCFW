@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Freestanding ARM EABI double helpers for Apollo510/Cortex-M55.  The
  * firmware ABI passes binary64 values through core-register pairs; these

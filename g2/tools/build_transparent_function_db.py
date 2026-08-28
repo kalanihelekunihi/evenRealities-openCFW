@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: GPL-3.0-only
+# SPDX-License-Identifier: MIT
 """Merge every G2 Ghidra artifact into one normalized function database.
 
 The G2 evidence corpus records the same functions in several independent

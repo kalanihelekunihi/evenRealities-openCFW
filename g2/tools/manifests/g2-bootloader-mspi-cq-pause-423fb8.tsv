@@ -1,0 +1,11 @@
+kind	name	start	end	size	sha256	disposition	provider	license_status	evidence
+function	mspi_cq_pause	0x00423fb8	0x0042403e	134	ff20411c8e4283f16d82cb8373e95004d648e4c03d151ba89bf43ff7d58a2794	exact_dual_profile_candidate	AmbiqSuite 5.1.0 semantics with reviewed target adapter	BSD-3-Clause	authenticated source identity, ABI, literals, calls, target relocations, and stock bytes close
+caller	sched_hiprio_call	0x004240d2	0x004240d6	4	-	retained_caller	Even/AmbiqSuite bootloader	redistribution authority unresolved	direct BL reaches mspi_cq_pause
+caller	blocking_transfer_call	0x00425c60	0x00425c64	4	-	retained_caller	Even/AmbiqSuite bootloader	redistribution authority unresolved	direct BL reaches mspi_cq_pause
+caller	nonblocking_transfer_call	0x00425cc8	0x00425ccc	4	-	retained_caller	Even/AmbiqSuite bootloader	redistribution authority unresolved	direct BL reaches mspi_cq_pause
+provider	am_hal_delay_us	0x0041d1c0	0x0041d21c	92	-	typed_retained_provider	AmbiqSuite 5.1.0 am_hal_utils.c	BSD-3-Clause source; official binary redistribution unresolved	call relocation at body offset 0x2a
+provider	am_hal_delay_us_status_check	0x0041d246	0x0041d28a	68	-	typed_retained_provider	AmbiqSuite 5.1.0 am_hal_utils.c	BSD-3-Clause source; official binary redistribution unresolved	call relocation at body offset 0x7c
+literal	pause_limit	0x00424bd4	0x00424bd8	4	-	authenticated_literal	AmbiqSuite AM_HAL_MSPI_MAX_PAUSE_DELAY	BSD-3-Clause	value 100000
+literal	mspi0_base	0x00424bd8	0x00424bdc	4	-	authenticated_literal	Apollo510 CMSIS MSPI0_BASE	Apache-2.0	value 0x40060000
+successor	program_dma	0x0042403e	0x004240aa	108	d075d73aba138735bc9229bcf8672cb6a1c2fadec21985d2159043534ad130e1	next_sequential_frontier	AmbiqSuite 5.1.0 program_dma	BSD-3-Clause	not admitted by Wave 7
+hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project policy	future CQ pause, timeout, DMA-idle, MMIO, concurrency, and cold-boot evidence remains required

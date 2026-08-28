@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the eleven linked G2 pb_service_setting.c
  * entries. Diagnostic-only logging is deliberately omitted. Message layout,

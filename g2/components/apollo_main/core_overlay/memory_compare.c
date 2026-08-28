@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded source reimplementation of the stock Apollo application memory
  * comparator at 0x004751C8...0x0047522F.

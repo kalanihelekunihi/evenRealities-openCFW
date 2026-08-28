@@ -222,46 +222,46 @@ SOURCE_SHA256 = (
     "d848b90a00da24db963c49dbff247231"
     "4b2a76c6cf269efef46e6cac56889986"
 )
-PRODUCTION_OVERLAY_SIZE = 167_426
+PRODUCTION_OVERLAY_SIZE = 429_058
 PRODUCTION_OVERLAY_SHA256 = (
-    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
 )
-PRODUCTION_COMPONENT_SIZE = 3_690_822
+PRODUCTION_COMPONENT_SIZE = 3_952_454
 PRODUCTION_COMPONENT_SHA256 = (
-    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
 )
 PRODUCTION_FUNCTIONS = {
     "open_cfw_freertos_heap4_init": {
-        "offset": 114_088,
+        "offset": 173_936,
         "size": 66,
         "padding_before": 0,
-        "runtime_address": 0x007B_00CC,
+        "runtime_address": 0x007B_EA94,
         "sha256": TARGET_FUNCTIONS["open_cfw_freertos_heap4_init"][1],
     },
     "open_cfw_freertos_heap4_insert_free_block": {
-        "offset": 114_156,
+        "offset": 174_004,
         "size": 118,
         "padding_before": 2,
-        "runtime_address": 0x007B_0110,
+        "runtime_address": 0x007B_EAD8,
         "sha256": TARGET_FUNCTIONS[
             "open_cfw_freertos_heap4_insert_free_block"
         ][1],
     },
     "open_cfw_freertos_heap4_malloc": {
-        "offset": 114_276,
+        "offset": 174_124,
         "size": 308,
         "padding_before": 2,
-        "runtime_address": 0x007B_0188,
+        "runtime_address": 0x007B_EB50,
         "sha256": (
             "89bc685c866987fca82d83b0cb397b49"
             "eb1e63ac6e380c3b9825ae2a1c057451"
         ),
     },
     "open_cfw_freertos_heap4_free": {
-        "offset": 114_584,
+        "offset": 174_432,
         "size": 114,
         "padding_before": 0,
-        "runtime_address": 0x007B_02BC,
+        "runtime_address": 0x007B_EC84,
         "sha256": (
             "146aa07eef93afc02e5caff75e7a569b"
             "f39e3da390383d91ccf45ae0f6b19f1c"
@@ -1242,12 +1242,12 @@ class RuntimeFreeRTOSHeap4Tests(unittest.TestCase):
             (len(self.current_component), sha256(self.current_component)),
             (PRODUCTION_COMPONENT_SIZE, PRODUCTION_COMPONENT_SHA256),
         )
-        self.assertEqual(component["replaced_stock_function_bytes"], 121_812)
-        self.assertEqual(component["generated_patch_site_bytes"], 121_634)
+        self.assertEqual(component["replaced_stock_function_bytes"], 409_246)
+        self.assertEqual(component["generated_patch_site_bytes"], 409_066)
         self.assertEqual(component["generated_wrapper_bytes"], 32)
-        self.assertEqual(component["source_owned_in_place_bytes"], 182)
-        self.assertEqual(component["source_owned_bytes"], 165_622)
-        self.assertEqual(component["opaque_base_bytes"], 3_401_548)
+        self.assertEqual(component["source_owned_in_place_bytes"], 184)
+        self.assertEqual(component["source_owned_bytes"], 431_334)
+        self.assertEqual(component["opaque_base_bytes"], 3_111_914)
 
         patches = [
             next(

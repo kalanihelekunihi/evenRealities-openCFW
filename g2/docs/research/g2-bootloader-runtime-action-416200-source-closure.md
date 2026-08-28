@@ -15,7 +15,7 @@ four. Otherwise it forwards the exact argument to retained action
 `0x00417F0A` and returns zero. Address-derived names avoid unsupported claims
 about the retained platform objects.
 
-`runtime_action_416200.c` is a 1,369-byte GPL-3.0-or-later clean-room
+`runtime_action_416200.c` is a 1,369-byte MIT clean-room
 implementation with SHA-256
 `9e3ea4bfddd8479be954e13c8d2a07b58c5c485dfcc35f77f2048aa20db04388`.
 Both reviewed compilers emit a 52-byte leaf with unrelocated SHA-256

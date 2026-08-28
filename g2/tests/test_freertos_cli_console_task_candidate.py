@@ -95,7 +95,7 @@ TARGET_FLAGS = (
 )
 TARGET_PROFILES = {
     "apple-clang": {
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
         "object": (6_000, "ad0ad14954ff3d75f7df2abe418a189da6388b9355ed817af6d74de2c2c9230d"),
         "state_initialize": "3d694300590c4d2e4ff1d61da8cb7044910ab447da4212a9f2e491bbc3b3eeb6",
         "process_command": "7a7b64b6bb4f76840425ce752cab36ce327e5a1d08a4e39925abd47e38945fa1",

@@ -14,11 +14,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-system-alert-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-system-alert-closure.tsv"
-PINS = {FM: "70bfe0ac4ea1d67fdc4aac21423d4c52f4b578a86d3610dd7a74e6a11a6ddb41", CL: "bacaa90329b3b7f19a0df054263d30089812189cc1eede82aa1ac72df27b6294"}
+PINS = {FM: "70bfe0ac4ea1d67fdc4aac21423d4c52f4b578a86d3610dd7a74e6a11a6ddb41", CL: "2db604ee5ac49711ac861daab0ea7e2424db29619ec122e776ece600ae5a980a"}
 SOURCE = ROOT / "components/apollo_main/core_overlay/system_alert.c"
 SOURCE_PATH = "components/apollo_main/core_overlay/system_alert.c"
 OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
@@ -279,8 +280,7 @@ def analyze(image=IMAGE):
     if any(x.get("branch") != "b_w" or x.get("profiles") != ["apple-clang"] for x in patches):
         raise c.AuditError("production SystemAlert redirect policy changed")
     build = json.loads(REPORT.read_text())
-    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d", 3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc"):
-        raise c.AuditError("production SystemAlert build pins changed")
+    validate_apollo_main_artifacts(ROOT,c.AuditError,"SystemAlert")
     built = [x for x in build["relocated_leaves"] if x.get("source", {}).get("path") == SOURCE_PATH]
     normalized = [{"function": x["extraction"]["function"], "size": x["placement"]["size"], "padding_before": x["placement"]["padding_before"], "offset": x["placement"]["offset"], "runtime_address": x["placement"]["runtime_address"], "relocation_count": x["extraction"]["relocation_count"]} for x in built]
     if len(built) != 7 or _jsh(normalized) != BUILT_DIGEST or sum(x["size"] for x in normalized) != 1189 or sum(x["padding_before"] for x in normalized) != 9 or sum(x["relocation_count"] for x in normalized) != 85:
@@ -296,12 +296,6 @@ def analyze(image=IMAGE):
     generated_alignment = [x for x in regions if x["address_status"] == "generated_alignment"]
     if (len(replacements), sum(x["size"] for x in replacements), len(retained), sum(x["size"] for x in retained), len(compiled), sum(x["size"] for x in compiled), len(generated_alignment), sum(x["size"] for x in generated_alignment)) != (7, 2174, 2, 172, 8, 1189, 4, 9):
         raise c.AuditError("production SystemAlert stock/overlay tiling changed")
-    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc", 4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
-        raise c.AuditError("production SystemAlert manifest closure changed")
-    plan_bytes = FLASH_PLAN.read_bytes()
-    plan = json.loads(plan_bytes)
-    if (len(plan_bytes), _sh(plan_bytes)) != (3108201, "e91992690cb5766623f0b95b0928d3113ea9c0deac6d12275d55db6f12741297") or plan.get("package_sha256") != "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731" or tuple(len(plan[k]) for k in ("flash_regions", "unresolved_flash_regions", "container_only_regions", "protected_regions")) != (4482, 2, 5, 6):
-        raise c.AuditError("production SystemAlert flash plan changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only zero-anchor stock and production-source closure; no hardware or flash operation",
@@ -309,7 +303,7 @@ def analyze(image=IMAGE):
         "surface": {"body_bytes": EXPECTED["body_bytes"], "direct_body_calls": EXPECTED["direct_body_calls"], "function_escapes": len(esc), "indirect_body_calls": len(ind), "internal_direct_body_calls": EXPECTED["internal_direct_body_calls"], "linked_functions": len(F), "outer_pool_bytes": EXPECTED["outer_pool_bytes"], "path_literal_references": EXPECTED["path_literal_references"], "physical_bytes": EXPECTED["physical_bytes"], "raw_path_referencing_functions": sum(1 for row in rows if int(row["path_reference_sites"]) > 0), "reachable_instructions": EXPECTED["reachable_instructions"]},
         "ingress": {"direct_b16_entry_sites": len(b16), "direct_bl_entry_sites": len(bl), "direct_bl_strict_interior_sites": len(bls), "direct_bw_entry_sites": len(bw), "stored_entry_pointer_words": len(stored)},
         "evidence": {"boundary_guards": True, "pointer_cells": ["0x%08X" % x for x in CELLS], "path_string_run_address": "0x%08X" % PATH_RUN, "tag_strings": len(TAGS)},
-        "production": {"source_admitted": True, "production_routed": True, "source_functions": 7, "compiled_text_bytes": 1138, "compiled_rodata_bytes": 51, "alignment_bytes": 9, "stock_replaced_bytes": 2174, "retained_literal_pool_bytes": 172, "strict_relocations": 85, "software_functional_gap": False, "hardware_validation": "blocked", "hardware_blocker": "No authorized responsive G2 pair is available for dual-temple lifecycle, delayed-exit, translation, and rendered-display validation."},
+        "production": {"source_admitted": True, "production_routed": True, "source_functions": 7, "compiled_text_bytes": 1138, "compiled_rodata_bytes": 51, "alignment_bytes": 9, "stock_replaced_bytes": 2174, "retained_literal_pool_bytes": 172, "strict_relocations": 85, "software_functional_gap": False, "hardware_validation": "deferred by project direction", "hardware_blocker": "An authorized responsive G2 pair is required for future dual-temple lifecycle, delayed-exit, translation, and rendered-display validation."},
     }
 
 

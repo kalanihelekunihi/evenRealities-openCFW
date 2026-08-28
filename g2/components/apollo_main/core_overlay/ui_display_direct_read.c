@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacement for the G2 2.2.6.10 Apollo direct display FIFO reader
  * at 0x0058E2D8. The exact stock boundary, MMIO layout, callers, and

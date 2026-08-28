@@ -1,0 +1,13 @@
+/* SPDX-License-Identifier: BSD-3-Clause */
+#ifndef OPEN_CFW_BOOTLOADER_MSPI_DEVICE_CONFIGURE_PUBLIC_424BE4_H
+#define OPEN_CFW_BOOTLOADER_MSPI_DEVICE_CONFIGURE_PUBLIC_424BE4_H
+#include <stdint.h>
+typedef struct open_cfw_mspi_public_state {uint32_t prefix,module;uint8_t configured,clock_on_d4,device,big_endian,clock_frequency,clock_source;uint32_t wait_timeout,tcb_address,xip_delay;} open_cfw_mspi_public_state;
+typedef struct open_cfw_mspi_public_config {uint8_t frequency,device,spi_mode,turnaround,address_size,instruction_size,write_latency,clock_on_d4,send_address,send_instruction,enable_write_latency,emulate_ddr,ce_latency;uint16_t read_instruction,write_instruction,dma_time_limit;uint8_t dma_boundary;} open_cfw_mspi_public_config;
+typedef struct open_cfw_mspi_public_trace {uint32_t clock_calls,clock_disable_module,clock_enable_module,clock_select,release_calls,request_calls,released_source,requested_source,device_config_calls,divisor,sdr250,high_speed_thresholds;uint32_t release_status,request_status;} open_cfw_mspi_public_trace;
+#if defined(__arm__) || defined(__thumb__)
+void open_cfw_bootloader_mspi_device_configure_public_424be4(void);
+#else
+uint32_t open_cfw_bootloader_mspi_device_configure_public_424be4(open_cfw_mspi_public_state *state,const open_cfw_mspi_public_config *config,open_cfw_mspi_public_trace *trace);
+#endif
+#endif

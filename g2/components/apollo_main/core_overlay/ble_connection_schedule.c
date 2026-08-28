@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded BLE connection-parameter update/scheduling reimplementation
  * matched to stock entry 0x00476CBC.

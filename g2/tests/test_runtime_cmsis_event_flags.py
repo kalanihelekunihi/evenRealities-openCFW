@@ -34,17 +34,17 @@ TARGET = {
 }
 
 APPLE_LINKED = {
-    "open_cfw_cmsis_event_flags_new": "187d0b091267aa2b491e5e48c1d12a0abb1124cb6ac9f40eec3ddf9da63e9d55",
-    "open_cfw_cmsis_event_flags_set": "1f924eb4e13e67f5612468160b61e42770ed347cbfb3bd5d525d7f2297f61741",
-    "open_cfw_cmsis_event_flags_clear": "22e682cc302bfe02efa6fccb9a75492960963cda661ea6c642a15469693bb3ef",
-    "open_cfw_cmsis_event_flags_wait": "c4d46bc0284d93d3f0864155acf50b223100646663926d309495d13665d1ed49",
+    "open_cfw_cmsis_event_flags_new": "9384df0fd67281679e892b0ff2d56ea93d5973a9f7ff2a84b4efb1c7aa2403ef",
+    "open_cfw_cmsis_event_flags_set": "cfafe4800b70542164196782e26393b1456f27a1616258226c8267d7bcc7bdbd",
+    "open_cfw_cmsis_event_flags_clear": "74a50cafe379d32e425861d1ece6e4fd617f3b10045ffd5c4c65ce2cb44c92b9",
+    "open_cfw_cmsis_event_flags_wait": "beebdf924c3402ae52381289c0189168b53fb9208a66d2eb65a7e5700ec98f46",
 }
 
 LINUX_LINKED = {
-    "open_cfw_cmsis_event_flags_new": "e29928336858bcb9b704a5cddd4723ff7f851d7ef923640c5623560b4cae1df4",
-    "open_cfw_cmsis_event_flags_set": "cc6b82eeff4fd16d50db44d9047303820a011945351ecc1e761b761167d6e28e",
-    "open_cfw_cmsis_event_flags_clear": "98f1b55e39fc03e729222ce4dccf805d47c1e8148b721c5a4a525d54b6ba96d2",
-    "open_cfw_cmsis_event_flags_wait": "b5bec791fd03419b45d7d82e7ffed33183c2f07c3495aea0048db364040e53af",
+    "open_cfw_cmsis_event_flags_new": "45d83f93d80793055b5aba49185d74d2969b979f7c2f3f9dfb1c9d551adb2074",
+    "open_cfw_cmsis_event_flags_set": "2df6d2df3cc983950e8086bef6e679ff9699089b6ff700aa392474086f7825e8",
+    "open_cfw_cmsis_event_flags_clear": "8049f2357fffa5cef2b08543bf9b257e069c1c625a931475d89c8dd47e6cd4c4",
+    "open_cfw_cmsis_event_flags_wait": "41a4c4a60035438042aa7e4fa81295dd7f91b6cc3e7048340578623da4381e90",
 }
 
 
@@ -159,8 +159,8 @@ class RuntimeCmsisEventFlagsTests(unittest.TestCase):
                 self.assertEqual(item["source"]["upstream_commit"], "d213f261b5be6bb29a7cce8b84071706b72f4d53")
                 self.assertEqual(item["expected"]["sha256"], APPLE_LINKED[name])
                 self.assertEqual(item["toolchain_profiles"]["linux-clang"]["expected"]["sha256"], LINUX_LINKED[name])
-        self.assertEqual(config["expected"]["component_size"], 3_690_822)
-        self.assertEqual(config["toolchain_profiles"]["linux-clang"]["expected"]["component_size"], 3_668_604)
+        self.assertEqual(config["expected"]["component_size"], 3_952_346)
+        self.assertEqual(config["toolchain_profiles"]["linux-clang"]["expected"]["component_size"], 3_728_356)
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]

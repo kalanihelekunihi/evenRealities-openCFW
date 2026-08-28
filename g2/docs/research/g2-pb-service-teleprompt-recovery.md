@@ -64,7 +64,7 @@ authored implementation.
 ## Production closure
 
 `components/apollo_main/core_overlay/pb_service_teleprompt.c` is a 13,441-byte
-GPL-3.0-only clean-room implementation with SHA-256
+MIT clean-room implementation with SHA-256
 `d1f308195a7076fe41043f0cea8b70a6b1d9250dabb962f6b05285120c616c68`.
 Its nine selector-isolated functions compile to 1,348 executable bytes with
 four generated alignment bytes and 39 strict relocations. All seven official

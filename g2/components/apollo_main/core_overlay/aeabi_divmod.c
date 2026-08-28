@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Division-free ARM EABI 64-bit signed and unsigned division/modulo
  * reimplementation matched to stock entries 0x0047CC1C and 0x0047CC60.

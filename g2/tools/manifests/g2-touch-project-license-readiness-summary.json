@@ -1,0 +1,58 @@
+{
+  "analysis_mode": "offline license/provenance/source-hash audit; no hardware or firmware operation",
+  "component": "G2 Touch project-source license readiness",
+  "decision": "MIT option supported for these contributor-owned clean-room pairs; GPL option retained; upstream/provider/evidence terms unchanged",
+  "metrics": {
+    "dual_licensed_project_components": 2,
+    "dual_licensed_project_files": 4,
+    "provider_license_changes": 0,
+    "row_digest": "109b55fe659802b7377f2f64a060d909699368daef9eed53523fbbb53788e094",
+    "upstream_or_gpl_derived_files_relicensed": 0
+  },
+  "notice": "NOTICE",
+  "rows": [
+    {
+      "component": "i2c",
+      "evidence": "project clean-room provenance marker plus exact source/header pins; no third-party source body admitted",
+      "files": [
+        {
+          "bytes": 7314,
+          "path": "components/shared/touch/runtime_touch_i2c_protocol.c",
+          "sha256": "e9cbb38deb85e593de051cdbe5a27c81b50eb22c944a7b6c8c9223c1c9fdd538"
+        },
+        {
+          "bytes": 2838,
+          "path": "components/shared/touch/runtime_touch_i2c_protocol.h",
+          "sha256": "0eba5e33eb45e3c360409357cd811a963877378cae2080841d87de18e6f81d53"
+        }
+      ],
+      "gpl_option_preserved": true,
+      "license": "MIT OR GPL-3.0-only",
+      "mit_basis": "repository additional grant for contributor-owned original work",
+      "provider_licenses_preserved": true,
+      "upstream_or_gpl_derived_material_relicensed": false
+    },
+    {
+      "component": "sensing",
+      "evidence": "project clean-room provenance marker plus exact source/header pins; no third-party source body admitted",
+      "files": [
+        {
+          "bytes": 4629,
+          "path": "components/shared/touch/runtime_touch_sensing.c",
+          "sha256": "30d7fd3e9c2c9d0a02b1ae4a5737cdf66a17d0f0aebab7b61531326373e9c811"
+        },
+        {
+          "bytes": 2461,
+          "path": "components/shared/touch/runtime_touch_sensing.h",
+          "sha256": "9fc6c523ba0fa7fa06aa6afb0a46385c326a246e1de4273732e4f8c9ca477f52"
+        }
+      ],
+      "gpl_option_preserved": true,
+      "license": "MIT OR GPL-3.0-only",
+      "mit_basis": "repository additional grant for contributor-owned original work",
+      "provider_licenses_preserved": true,
+      "upstream_or_gpl_derived_material_relicensed": false
+    }
+  ],
+  "schema_version": 1
+}

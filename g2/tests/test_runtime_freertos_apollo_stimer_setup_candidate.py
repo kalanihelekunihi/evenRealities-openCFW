@@ -78,8 +78,8 @@ UNDEFINED = [
 
 TARGET_PINS = {
     "apple-clang": {
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
-        "object": (1780, "ff492566a9d8c4ad3fc5c37db5f767c9fd1642c339834803221cac0155d25050"),
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "object": (1780, "b63afdf2e9f809e7e69f7a84eb5ead9c211c19e9d93a8506b698128ca0db66d9"),
     },
     "linux-clang": {
         "version": "Homebrew clang version 22.1.8",
@@ -92,7 +92,7 @@ LOCAL_PINS: dict[Path, tuple[int, str]] = {
     SOURCE: (2809, "eb02a736ba417aad921367ed25ae9038050387b46cab68a9f89ed99fb581b222"),
     HEADER: (730, "5a461abd1840778bbd9420ce6fa1740949a16e15af1e06b4dd3060866e90e6e0"),
     FIXTURE: (2847, "cf047a6ec48f801b88c8dcc04b87abfd75cd4d707508a6d5fbc35ed8e5ed8e95"),
-    AUDIT: (2682, "17fb93a0c4ded4de9fb9f917e064ac887663122e199a6ad093646c009fc50730"),
+    AUDIT: (2869, "327558d51f56837201a73993e91f13fea5d1cc6ff4c87b0c857a10bf4e548866"),
 }
 
 

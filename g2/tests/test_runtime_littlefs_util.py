@@ -290,28 +290,28 @@ EXPECTED_FUNCTION_OFFSETS = {
 }
 EXPECTED_AGGREGATE = {
     "main": {
-        "overlay_size": 167_426,
+        "overlay_size": 429_058,
         "overlay_sha256": (
-            "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
         ),
-        "component_size": 3_690_822,
+        "component_size": 3_952_454,
         "component_sha256": (
-            "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
         ),
-        "text_size": 109_592,
-        "rodata_size": 3_996,
+        "text_size": 163_862,
+        "rodata_size": 9_572,
         "isolated_text_size": 140,
-        "isolated_padding_size": 4,
-        "resolved_relocation_count": 906,
+        "isolated_padding_size": 6,
+        "resolved_relocation_count": 989,
     },
     "boot": {
-        "overlay_size": 662,
+        "overlay_size": 15_240,
         "overlay_sha256": (
-            "7cb3c17a03dda3b8576d8288ffa61df1332d89f1f24d6c5877bf0143e233902b"
+            "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314"
         ),
-        "component_size": 149_262,
+        "component_size": 163_840,
         "component_sha256": (
-            "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267"
+            "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
         ),
         "text_size": 204,
         "rodata_size": 0,

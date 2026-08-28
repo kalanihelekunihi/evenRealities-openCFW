@@ -12,6 +12,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x00437FE0
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -20,8 +22,8 @@ CLOSURE = ROOT / "tools/manifests/g2-at-buzzer-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-at-buzzer-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "4464ea24a5d714eeb07f294f021f0eea2afbf089b962a566fcc573c8202c25e5",
-    CLOSURE: "0bff9f1708946204e9b5f23b33b249b949be9664f7d9d684d5658881b1fd0e4b",
-    PROVENANCE: "9f91b75770fdbbbb75526ffdee8a96e2a35e905cabb286149f161ed2ba6daadf",
+    CLOSURE: "de675ea12c559e1cbf02d868f8658e95f3da1979de296fd602a32e5fa5a3185a",
+    PROVENANCE: "62f9d453c238d50ef475f8d1ee8490dbb4c8f0d677f7f5db878e5cd6fcb18c5b",
 }
 BODY = (0x005A4FD0, 0x005A53C6)
 BODY_SHA256 = "b2a6c3ec39cd168200cc68667e3939d0bf4067ea862115c5108b653b07d38d28"
@@ -294,16 +296,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         raise AuditError("production AT^BUZZER patch changed")
 
     build = json.loads(OVERLAY_REPORT.read_text())
-    if (
-        build["overlay"]["size"], build["overlay"]["sha256"],
-        build["component"]["size"], build["component"]["sha256"],
-    ) != (
-        332148,
-        "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544,
-        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-    ):
-        raise AuditError("production AT^BUZZER build pins changed")
+    validate_apollo_main_artifacts(ROOT, AuditError, "AT^BUZZER")
     built = [
         item for item in build.get("relocated_leaves", [])
         if item.get("extraction", {}).get("function")
@@ -332,16 +325,6 @@ def analyze(image_path: Path = IMAGE) -> dict:
             appended.get("file_offset"), appended.get("size"),
             appended.get("target_address"), appended.get("address_status"),
         ) != (3769316, 2740, 0x007D03C4, "source_compiled")
-        or (
-            main["provider"]["size"], main["provider"]["sha256"],
-            manifest["package"]["expected_size"],
-            manifest["package"]["expected_sha256"],
-        ) != (
-            3855544,
-            "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-            4634038,
-            "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-        )
     ):
         raise AuditError("production AT^BUZZER manifest closure changed")
 
@@ -387,10 +370,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 1208,
             "strict_relocations": 23,
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
+            "hardware_validation": "deferred by project direction",
             "hardware_blocker": (
                 "No authorized physical G2 buzzer/piezo device or captured "
-                "acoustic/frequency/duty/timing evidence is available."
+                "acoustic/frequency/duty/timing evidence is required for future qualification."
             ),
         },
     }

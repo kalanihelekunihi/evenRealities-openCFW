@@ -51,10 +51,10 @@ class PbServiceGlassesCaseCandidateTests(unittest.TestCase):
 
     def test_source_is_pinned(self) -> None:
         data = SOURCE.read_bytes()
-        self.assertEqual(len(data), 9319)
+        self.assertEqual(len(data), 9310)
         self.assertEqual(
             hashlib.sha256(data).hexdigest(),
-            "3d8695b1da919199cd5758a5288373a7c1e51e8151f5a66b9621f81dcf4f44d7",
+            "ea16057545663e50239f29b573cf5f09f25d4441d8ac92626d1919826b5dcb90",
         )
 
 

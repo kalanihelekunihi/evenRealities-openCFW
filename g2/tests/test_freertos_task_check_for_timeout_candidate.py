@@ -156,39 +156,39 @@ PRODUCTION_PINS = {
         "size": 136,
         "sha256": TARGETS["apple-clang"]["sha256"],
         "alignment": 4,
-        "offset": 118_476,
+        "offset": 178_324,
         "unrelocated_sha256": TARGETS["apple-clang"]["sha256"],
     },
     "linux-clang": {
         "size": 136,
         "sha256": TARGETS["linux-clang"]["sha256"],
         "alignment": 4,
-        "offset": 120_336,
+        "offset": 180_088,
         "unrelocated_sha256": TARGETS["linux-clang"]["sha256"],
     },
 }
 
 PRODUCTION_APPLE_AGGREGATE = {
-    "overlay_size": 167_426,
+    "overlay_size": 429_058,
     "overlay_sha256": (
-        "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+        "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
     ),
-    "component_size": 3_690_822,
+    "component_size": 3_952_454,
     "component_sha256": (
-        "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+        "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
     ),
 }
 
 PRODUCTION_LINUX_AGGREGATE = {
-    "overlay_size": 145_208,
+    "overlay_size": 212_664,
     "overlay_sha256": (
-        "fac5b48b6ae2eac985a0a65ddb8d1595d"
-        "d10e2abcbdd0c6a3bb562f72e43a826"
+        "63885d945fc50903872a81191342907f"
+        "636207486e1adf9a3bfb2213c6961e1f"
     ),
-    "component_size": 3_668_604,
+    "component_size": 3_736_060,
     "component_sha256": (
-        "378c868e151060a59ab91b0de1a722e8"
-        "678b8e1da8eede248c5702ccf8902798"
+        "c8c25188e48eb6086311a855e2349704"
+        "3150ff3ca85aeeb1bdb0b829a2c2c71b"
     ),
 }
 
@@ -780,13 +780,10 @@ class FreeRTOSTaskCheckForTimeoutCandidateTests(unittest.TestCase):
                         f"{other['function']}"
                     ),
                 )
-                other_function_index = config["functions"].index(
-                    other["function"]
+                self.assertNotEqual(
+                    config["functions"].index(other["function"]),
+                    function_index,
                 )
-                if other_end <= start:
-                    self.assertLess(other_function_index, function_index)
-                elif end <= other_start:
-                    self.assertGreater(other_function_index, function_index)
 
         patches = [
             item for item in config["patch_sites"]

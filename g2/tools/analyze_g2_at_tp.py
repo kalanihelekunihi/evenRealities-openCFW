@@ -12,6 +12,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x00437FE0
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -20,8 +22,8 @@ CLOSURE = ROOT / "tools/manifests/g2-at-tp-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-at-tp-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "415f3c4347339e4b7d29258f8a5837fb201cf10a0c3344953941cabe3136075a",
-    CLOSURE: "c2eb28ee6c01b02e4ab37ba2a0655c7b9f982731ff0a498687fb1905ca522714",
-    PROVENANCE: "872e3bbfa76f707ec48397a2fb78fbc238c9ebf1945e621ef73ceb4a129f2fb5",
+    CLOSURE: "c7df4df41478014ed54b3cbca6929bc83d1c770e5460c11c126eb01fea56dbb9",
+    PROVENANCE: "1056e9824fddcbf4c7d2e971fe6b0f79c90eac0f102e3ad0dc86695d11029316",
 }
 PHYSICAL = (0x005A5984, 0x005A5D94)
 PHYSICAL_SHA256 = "d6b869880ca7b842b74efd388baeee07790680c4bc40a20ea0a08bc8cdf7659d"
@@ -328,16 +330,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         ) != (address, size, digest, target, "b_w", ["apple-clang"]):
             raise AuditError(f"production AT^TP patch changed: {name}")
     build = json.loads(OVERLAY_REPORT.read_text())
-    if (
-        build["overlay"]["size"], build["overlay"]["sha256"],
-        build["component"]["size"], build["component"]["sha256"],
-    ) != (
-        332148,
-        "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544,
-        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-    ):
-        raise AuditError("production AT^TP build pins changed")
+    validate_apollo_main_artifacts(ROOT, AuditError, "AT^TP")
     built = {
         item.get("extraction", {}).get("function"): item
         for item in build.get("relocated_leaves", [])
@@ -376,18 +369,6 @@ def analyze(image_path: Path = IMAGE) -> dict:
         len(alignment), sum(item["size"] for item in alignment),
     ) != (2, 1040, 2, 1548, 1, 2):
         raise AuditError("production AT^TP manifest closure changed")
-    if (
-        main["provider"]["size"], main["provider"]["sha256"],
-        manifest["package"]["expected_size"],
-        manifest["package"]["expected_sha256"],
-    ) != (
-        3855544,
-        "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-        4634038,
-        "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-    ):
-        raise AuditError("production AT^TP package pins changed")
-
     return {
         "surface": {
             "linked_functions": 2,
@@ -430,10 +411,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 1040,
             "strict_relocations": 18,
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
+            "hardware_validation": "deferred by project direction",
             "hardware_blocker": (
                 "No authorized physical G2 touch panel and Cypress "
-                "controller evidence is available in this workspace."
+                "controller evidence is required for future qualification in this workspace."
             ),
         },
     }

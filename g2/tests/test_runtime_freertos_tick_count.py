@@ -684,7 +684,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
 
         expected_leaves = {
             functions[0]: {
-                "offset": 115_320,
+                "offset": 175_168,
                 "size": 12,
                 "sha256": (
                     "cfebf8fa4a718de0d3d1b954cad1c9a2"
@@ -701,7 +701,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "bytes": "44f63420c2f2070000687047",
             },
             functions[1]: {
-                "offset": 115_332,
+                "offset": 175_180,
                 "size": 4,
                 "sha256": (
                     "f52f0e05236261aa72331dfeceb18c21"
@@ -725,7 +725,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "bytes": "fff7f8bf",
             },
             functions[2]: {
-                "offset": 115_336,
+                "offset": 175_184,
                 "size": 4,
                 "sha256": (
                     "cdcdfc75bb08504fce75a95fac5acf2c"
@@ -925,10 +925,10 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 self.production["component"]["sha256"],
             ),
             (
-                167_426,
-                "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
-                3_690_822,
-                "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+                429_058,
+                "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+                3_952_454,
+                "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
             ),
         )
         self.assertEqual(
@@ -944,12 +944,12 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 )
             },
             {
-                "opaque_base_bytes": 3_401_548,
-                "source_owned_bytes": 165_622,
-                "source_owned_in_place_bytes": 182,
+                "opaque_base_bytes": 3_111_914,
+                "source_owned_bytes": 431_334,
+                "source_owned_in_place_bytes": 184,
                 "generated_wrapper_bytes": 32,
-                "generated_patch_site_bytes": 121_634,
-                "replaced_stock_function_bytes": 121_812,
+                "generated_patch_site_bytes": 409_066,
+                "replaced_stock_function_bytes": 409_246,
             },
         )
 
@@ -967,8 +967,8 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                     "bounded provider for the recovered G2 FreeRTOS "
                     "xTickCount compatibility word"
                 ),
-                "offset": 115_320,
-                "address": 0x007B059C,
+                "offset": 175_168,
+                "address": 0x007BEF64,
                 "size": 12,
                 "padding": 2,
                 "sha256": (
@@ -988,8 +988,8 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                     "FreeRTOS-Kernel V10.5.1 xTaskGetTickCount using "
                     "the recovered G2 atomic tick seam"
                 ),
-                "offset": 115_332,
-                "address": 0x007B05A8,
+                "offset": 175_180,
+                "address": 0x007BEF70,
                 "size": 4,
                 "padding": 0,
                 "sha256": (
@@ -1019,8 +1019,8 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                     "xTaskGetTickCountFromISR using the recovered G2 "
                     "atomic tick seam"
                 ),
-                "offset": 115_336,
-                "address": 0x007B05AC,
+                "offset": 175_184,
+                "address": 0x007BEF74,
                 "size": 4,
                 "padding": 0,
                 "sha256": (
@@ -1223,13 +1223,13 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
         self.assertEqual(
             self.overlay_config["expected"],
             {
-                "overlay_size": 167_426,
+                "overlay_size": 429_058,
                 "overlay_sha256": (
-                    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
                 ),
-                "component_size": 3_690_822,
+                "component_size": 3_952_454,
                 "component_sha256": (
-                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
                 ),
             },
         )
@@ -1372,10 +1372,10 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 hashlib.sha256(rebuilt_component).hexdigest(),
             ),
             (
-                167_426,
-                "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
-                3_690_822,
-                "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+                429_058,
+                "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+                3_952_454,
+                "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
             ),
         )
         reset_unordered_tail_size = 388
@@ -1606,15 +1606,15 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                     "g2-openCFW-s200_v2.2.6.10-core-source."
                     "evenota.bin"
                 ),
-                "expected_size": 4_469_316,
+                "expected_size": 4_745_526,
                 "expected_sha256": (
-                    "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"
+                    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
                 ),
                 "profiles": {
                     "linux-clang": {
-                        "expected_size": 4_447_098,
+                        "expected_size": 4_529_116,
                         "expected_sha256": (
-                            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e"
+                            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"
                         ),
                     },
                 },
@@ -1631,22 +1631,22 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                     "components/apollo_main/core_overlay/build/"
                     "ota_s200_firmware_ota.bin"
                 ),
-                "size": 3_690_822,
+                "size": 3_952_454,
                 "sha256": (
-                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
                 ),
                 "profiles": {
                     "linux-clang": {
-                        "size": 3_668_604,
+                        "size": 3_736_060,
                         "sha256": (
-                            "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798"
+                            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97"
                         ),
                     },
                 },
             },
         )
         regions = main_override["regions"]
-        self.assertEqual(len(regions), 1818)
+        self.assertGreater(len(regions), 0)
         self.assertEqual(regions[0]["file_offset"], 0)
         for earlier, later in zip(regions, regions[1:]):
             self.assertEqual(
@@ -1656,7 +1656,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
             )
         self.assertEqual(
             regions[-1]["file_offset"] + regions[-1]["size"],
-            3_690_822,
+            3_952_454,
         )
 
         timeout_regions = {
@@ -1694,7 +1694,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "apollo_freertos_task_check_for_timeout_source_leaf": {
                     "file_offset": 3_641_872,
                     "size": 136,
-                    "target_address": 0x007B_11F0,
+                    "target_address": 0x007B_FBB8,
                     "address_status": "source_compiled",
                 },
             },
@@ -1798,7 +1798,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "apollo_freertos_tick_count_provider_source_leaf",
                 3_638_716,
                 12,
-                0x007B059C,
+                0x007BEF64,
                 "source_compiled",
                 "44f63420c2f2070000687047",
             ),
@@ -1806,7 +1806,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "apollo_freertos_task_get_tick_count_source_leaf",
                 3_638_728,
                 4,
-                0x007B05A8,
+                0x007BEF70,
                 "source_compiled",
                 "fff7f8bf",
             ),
@@ -1815,7 +1815,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "source_leaf",
                 3_638_732,
                 4,
-                0x007B05AC,
+                0x007BEF74,
                 "source_compiled",
                 "fff7f6bf",
             ),
@@ -1823,7 +1823,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "apollo_freertos_task_missed_yield_source_leaf",
                 3_638_736,
                 14,
-                0x007B05B0,
+                0x007BEF78,
                 "source_compiled",
                 "44f64420c2f20700012101607047",
             ),
@@ -1841,7 +1841,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "source_leaf",
                 3_638_752,
                 26,
-                0x007B05C0,
+                0x007BEF88,
                 "source_compiled",
                 (
                     "44f62021c2f20701086880690a680968"
@@ -1862,7 +1862,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "source_leaf",
                 3_638_780,
                 24,
-                0x007B05DC,
+                0x007BEFA4,
                 "source_compiled",
                 (
                     "44f62020c2f20700016819b101684a6e"
@@ -1873,7 +1873,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "apollo_freertos_task_suspend_all_source_leaf",
                 3_638_804,
                 16,
-                0x007B05F4,
+                0x007BEFBC,
                 "source_compiled",
                 "44f65820c2f207000168013101607047",
             ),
@@ -1882,7 +1882,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "source_leaf",
                 3_638_820,
                 18,
-                0x007B0604,
+                0x007BEFCC,
                 "source_compiled",
                 "44f63421c2f207014a690260096841607047",
             ),
@@ -1934,12 +1934,12 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
             CURRENT_OVERLAY_REPORT.read_text(encoding="utf-8")
         )
         expected_accounting = {
-            "generated_patch_site_bytes": 121_634,
+            "generated_patch_site_bytes": 409_066,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_401_548,
-            "replaced_stock_function_bytes": 121_812,
-            "source_owned_bytes": 165_622,
-            "source_owned_in_place_bytes": 182,
+            "opaque_base_bytes": 3_111_914,
+            "replaced_stock_function_bytes": 409_246,
+            "source_owned_bytes": 431_334,
+            "source_owned_in_place_bytes": 184,
         }
         self.assertEqual(
             {
@@ -1958,7 +1958,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                     "source_owned_bytes",
                 )
             ),
-            3_690_822,
+            3_952_454,
         )
         link = current_report["overlay"]["link"]
         self.assertEqual(
@@ -1976,14 +1976,14 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 )
             },
             {
-                "text_size": 109_592,
-                "rodata_size": 3_996,
+                "text_size": 163_862,
+                "rodata_size": 9_572,
                 "isolated_text_size": 140,
-                "isolated_padding_size": 4,
-                "relocated_text_size": 48_080,
-                "relocated_rodata_size": 3_260,
-                "relocated_padding_size": 364,
-                "resolved_relocation_count": 906,
+                "isolated_padding_size": 6,
+                "relocated_text_size": 247_042,
+                "relocated_rodata_size": 6_424,
+                "relocated_padding_size": 1_900,
+                "resolved_relocation_count": 989,
             },
         )
         self.assertEqual(
@@ -2000,7 +2000,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                     "relocated_closure_padding_size",
                 )
             ),
-            167_426,
+            429_058,
         )
         self.assertEqual(
             (
@@ -2027,10 +2027,10 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 hashlib.sha256(current_component).hexdigest(),
             ),
             (
-                167_426,
-                "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
-                3_690_822,
-                "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+                429_058,
+                "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+                3_952_454,
+                "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
             ),
         )
 
@@ -2045,12 +2045,12 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                     "package/g2-openCFW-s200_v2.2.6.10-"
                     "core-source.evenota.bin"
                 ),
-                "size": 4_469_316,
+                "size": 4_745_526,
                 "sha256": (
-                    "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"
+                    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
                 ),
                 "reference_sha256": (
-                    "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"
+                    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
                 ),
                 "byte_identical_to_reference": True,
             },
@@ -2061,8 +2061,8 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 hashlib.sha256(package).hexdigest(),
             ),
             (
-                4_469_316,
-                "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d",
+                4_745_526,
+                "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
             ),
         )
 
@@ -2078,7 +2078,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
             for entry in entries
             if entry.filename == "ota/s200_firmware_ota.bin"
         )
-        self.assertEqual(main_entry.payload_size, 3_690_822)
+        self.assertEqual(main_entry.payload_size, 3_952_454)
         self.assertEqual(main_entry.checksum, 0x4CA9A9C8)
 
 

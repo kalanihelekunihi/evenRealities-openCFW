@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded source replacements for the G2 2.2.6.10 packed-color helpers:
  *   0x00482E4C...0x00482ED3  alpha-weighted three-lane mix

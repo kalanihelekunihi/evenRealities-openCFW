@@ -1,0 +1,165 @@
+{
+  "analysis_mode": "offline relocation/CFG/data-reference analysis; no hardware, MMIO, reset, DFU, signing, or flash operation",
+  "component": "G2 touch-controller relocated shipped payload",
+  "function_row_count": 286,
+  "identity": {
+    "blob": "blobs/official/g2-2.2.6.10/firmware_touch.bin",
+    "code_end": 30556,
+    "code_start": 192,
+    "payload_end": 34432,
+    "payload_start": 0,
+    "resident_external_start": 34432,
+    "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d"
+  },
+  "limitations": [
+    "CFG-decoded bytes are instruction candidates, not recovered source or behavior claims.",
+    "The 72-byte CFG/literal intersection remains explicitly ambiguous.",
+    "The 1,584 residual bytes may mix unreferenced data, padding, and unreachable or indirectly reachable code.",
+    "Only ten evidence-backed project-source candidates are counted as concrete source; typed external/provider functions are not.",
+    "Indirect calls without a shipped linked pointer remain unresolved."
+  ],
+  "linked_reference_rows": [
+    {
+      "availability": "shipped_payload_after_relocation",
+      "linked_address": 45252,
+      "payload_offset": 32196,
+      "reference_offset": 1452,
+      "role": "RX command dispatch switch table, 9 entries (commands 0-8)"
+    },
+    {
+      "availability": "shipped_payload_after_relocation",
+      "linked_address": 46332,
+      "payload_offset": 33276,
+      "reference_offset": 14540,
+      "role": "event-dispatcher switch table, 8 entries (events 0-7)"
+    },
+    {
+      "availability": "shipped_payload_after_relocation",
+      "linked_address": 46364,
+      "payload_offset": 33308,
+      "reference_offset": 22868,
+      "role": "SROM status-decoder switch table, 20 entries"
+    },
+    {
+      "availability": "shipped_payload_after_relocation",
+      "linked_address": 45940,
+      "payload_offset": 32884,
+      "reference_offset": 992,
+      "role": "SCB1 HAL config table"
+    },
+    {
+      "availability": "shipped_payload_after_relocation",
+      "linked_address": 45288,
+      "payload_offset": 32232,
+      "reference_offset": 1004,
+      "role": "HAL callback registry table (payload callback 0x3624)"
+    },
+    {
+      "availability": "shipped_payload_after_relocation",
+      "linked_address": 43612,
+      "payload_offset": 30556,
+      "reference_offset": 1472,
+      "role": "log tag string (dead; logger stubbed)"
+    },
+    {
+      "availability": "shipped_payload_after_relocation",
+      "linked_address": 43612,
+      "payload_offset": 30556,
+      "reference_offset": 2428,
+      "role": "log tag string (dead; logger stubbed)"
+    }
+  ],
+  "metrics": {
+    "code_partition": {
+      "cfg_instruction_candidate": 26892,
+      "cfg_literal_overlap_ambiguous": 72,
+      "referenced_literal_data": 1816,
+      "still_unclassified": 1584
+    },
+    "code_span_bytes": 30364,
+    "concrete_source_function_count": 10,
+    "entry_origins": {
+      "authenticated_evidence": 16,
+      "direct_bl_closure": 252,
+      "linked_flash_pointer": 15,
+      "relocated_vector": 3
+    },
+    "function_digest": "601c283cbcd191ef603f92b59f555c5ba1b78c4de72c0f75ebaa83182e50866c",
+    "function_dispositions": {
+      "external_eula_clean_room_required": 20,
+      "project_fail_closed_contract": 8,
+      "project_source_candidate": 10,
+      "semantic_source_unclassified": 223,
+      "typed_startup_source_required": 3,
+      "unsupported_intentional_noop": 1,
+      "upstream_apache_provider": 14,
+      "upstream_runtime_provider": 7
+    },
+    "function_entries": 286,
+    "linked_pointer_seed_entries": 15,
+    "literal_targets": 472,
+    "partition_digest": "0b9c47aa5bcb65d74cb4985342f39d54a192450e26b8dbdb07f200c215a25b75",
+    "prior_remainder_bytes": 24048,
+    "prior_remainder_partition": {
+      "new_cfg_instruction_candidate": 20580,
+      "new_cfg_literal_overlap_ambiguous": 68,
+      "new_referenced_literal_data": 1816,
+      "still_unclassified": 1584
+    },
+    "typed_external_functions_not_counted_as_source": 52
+  },
+  "partition_row_count": 4,
+  "relocation": {
+    "anchors": [
+      {
+        "kind": "version/log strings",
+        "linked_address": 43612,
+        "payload_offset": 30556
+      },
+      {
+        "kind": "nine-entry command jump table",
+        "linked_address": 45252,
+        "payload_offset": 32196
+      }
+    ],
+    "correction": "absolute linked vectors/tables must be rebased by 0x3300; they are not payload offsets or external resident bytes",
+    "linked_flash_base": 13056,
+    "payload_linked_end": 47488
+  },
+  "schema_version": 1,
+  "vector_rows": [
+    {
+      "bytes": 2,
+      "end": 4958,
+      "name": "shared_default_handler",
+      "payload_entry": 4956,
+      "raw_vector": 18013,
+      "role": "shared NMI/SVC/PendSV/SysTick/external-IRQ default target",
+      "sha256": "575fc8fa9e92ffe7d57a6aef6f1168f39da04f07d6bcd5b5e17883bff7b33165",
+      "source_disposition": "typed startup behavior; provider or MIT clean-room source still required",
+      "start": 4956
+    },
+    {
+      "bytes": 8,
+      "end": 4966,
+      "name": "hardfault_halt_handler",
+      "payload_entry": 4958,
+      "raw_vector": 18015,
+      "role": "HardFault target calls the pinned halt loop at payload 0x7038",
+      "sha256": "76df2f1edb1a47699b952e59c124b1c2bc8f442272c16a4192c8adb94de54f3a",
+      "source_disposition": "typed startup behavior; provider or MIT clean-room source still required",
+      "start": 4958
+    },
+    {
+      "bytes": 104,
+      "end": 5084,
+      "name": "reset_startup_handler",
+      "payload_entry": 4980,
+      "raw_vector": 18037,
+      "role": "reset/startup target; bounded before the literal pool at 0x13DC",
+      "sha256": "db0963144ca483b44bfb640b4a31207f3d90b3cb1cfbc342d19f6217f47cfb2a",
+      "source_disposition": "typed startup behavior; provider or MIT clean-room source still required",
+      "start": 4980
+    }
+  ]
+}

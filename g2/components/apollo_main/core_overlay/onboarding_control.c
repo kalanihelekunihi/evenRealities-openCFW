@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Protobuf onboarding control-state update matched to stock entry
  * 0x0047E2D0.

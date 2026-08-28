@@ -30,14 +30,14 @@ PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.eve
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 SOURCE_SHA256 = "d6fe9bb4a957495b0716a8e5e21d9dfbde904a1b6f8944790f08cf9e507a788b"
 HEADER_SHA256 = "207706e8411b2d3fb124e20354f24e438864eb88ef685568743295f4303d8cfb"
-OVERLAY_SIZE = 404_796
-OVERLAY_SHA256 = "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
-COMPONENT_SIZE = 3_928_192
-COMPONENT_SHA256 = "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
-PACKAGE_SIZE = 4_706_686
-PACKAGE_SHA256 = "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
-FLASH_PLAN_SIZE = 4_071_097
-FLASH_PLAN_SHA256 = "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+OVERLAY_SIZE = 429_058
+OVERLAY_SHA256 = "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+COMPONENT_SIZE = 3_952_454
+COMPONENT_SHA256 = "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+PACKAGE_SIZE = 4_745_526
+PACKAGE_SHA256 = "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
+FLASH_PLAN_SIZE = 4_643_183
+FLASH_PLAN_SHA256 = "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66"
 PRODUCTION_FUNCTIONS = [
     "open_cfw_cordio_dm_adv_control_block_initialize",
     "open_cfw_cordio_dm_adv_initialize",
@@ -228,7 +228,7 @@ def _verify_production() -> dict[str, Any]:
         or _sha256(FLASH_PLAN.read_bytes()) != FLASH_PLAN_SHA256
         or (len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
             len(flash["container_only_regions"]), len(flash["protected_regions"]))
-            != (5863, 2, 5, 6)
+            != (6671, 0, 6, 6)
     ):
         raise AuditError("common advertising flash plan changed")
     return {
@@ -251,7 +251,7 @@ def _verify_production() -> dict[str, Any]:
             "interval ordering and channel-map validation",
         ],
         "hardware_validation": (
-            "blocked by unavailable authorized responsive G2/EM9305 and BLE peer evidence"
+            "deferred by project direction; future qualification requires authorized responsive G2/EM9305 and BLE peer evidence"
         ),
     }
 

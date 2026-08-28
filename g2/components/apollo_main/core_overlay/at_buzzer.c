@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room behavioral reconstruction of the retained G2 2.2.6.10
  * platform/service/eAT/at_buzzer.c command handler.  The authenticated

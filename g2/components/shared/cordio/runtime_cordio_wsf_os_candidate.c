@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-routed clean-room behavioral reconstruction of the complete
  * G2 Cordio/Ambiq FreeRTOS WSF OS module.  The restricted upstream source is

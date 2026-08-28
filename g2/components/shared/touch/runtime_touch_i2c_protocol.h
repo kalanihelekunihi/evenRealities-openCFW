@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT OR GPL-3.0-only */
 #ifndef OPEN_CFW_RUNTIME_TOUCH_I2C_PROTOCOL_H
 #define OPEN_CFW_RUNTIME_TOUCH_I2C_PROTOCOL_H
 

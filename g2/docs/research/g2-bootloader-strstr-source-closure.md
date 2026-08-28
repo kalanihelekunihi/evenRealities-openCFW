@@ -17,7 +17,7 @@ filters. The preceding `[0x00415FDA,0x00415FFA)` bytes are logging literal
 data; the following two-byte infinite-loop and return stubs are distinct
 boundaries and are not absorbed by this closure.
 
-`runtime_strstr.c` is a 628-byte GPL-3.0-or-later clean-room implementation.
+`runtime_strstr.c` is a 628-byte MIT clean-room implementation.
 Tests cover empty inputs, first/middle/last matches, overlapping prefixes,
 missing needles, needles longer than the haystack, and freestanding Cortex-M55
 compilation. Both reviewed compilers emit the same relocation-free 46-byte

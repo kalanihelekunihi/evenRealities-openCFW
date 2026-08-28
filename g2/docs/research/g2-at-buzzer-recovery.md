@@ -58,7 +58,7 @@ No authenticated historical source or license is available.
 ## Production closure
 
 `components/apollo_main/core_overlay/at_buzzer.c` is an independently authored
-GPL-3.0-only implementation of the recovered command behavior. It uses retained
+MIT implementation of the recovered command behavior. It uses retained
 command and response strings, a bounded local parser, and five explicit ABI
 bindings: AT output at `0x00541430` plus the four buzzer-driver entries above.
 It preserves the stock four-byte prefix comparisons (including the accepted

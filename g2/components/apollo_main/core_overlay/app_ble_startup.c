@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room product BLE registration/startup leaves reconstructed from
  * stock 0x004B7E74...0x004B8121, excluding the interposed GPIO vector.

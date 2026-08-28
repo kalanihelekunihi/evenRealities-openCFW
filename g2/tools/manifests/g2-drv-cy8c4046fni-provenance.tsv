@@ -8,4 +8,4 @@ production_overlay	components/apollo_main/core_overlay/overlay.json	a4c7927efe62
 production_component	components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin	026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a	3,716,248-byte source-built Apollo component
 production_package	build/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin	03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783	4,494,742-byte deterministic complete firmware package
 diagnostic_qualification	stock EasyLogger calls intentionally omitted	nonfunctional-observability	Controller commands, state changes, return values, buffers, and timing providers remain implemented; omitted stock logs do not control hardware behavior
-hardware_evidence	unavailable	blocked	No authorized physical G2 touch controller or captured I2C/electrical/reset/DFU/timing evidence is available
+hardware_evidence	unavailable	blocked	Authorized physical G2 touch controller or captured I2C/electrical/reset/DFU/timing evidence is required for future qualification

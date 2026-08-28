@@ -1,5 +1,7 @@
 /*************************************************************************************************/
 /*
+ * SPDX-License-Identifier: Apache-2.0
+ *
  * Apache-2.0 Cordio HCI PHY command wrappers.
  *
  * Behavior and public ABI are from Packetcraft Cordio r20.05c

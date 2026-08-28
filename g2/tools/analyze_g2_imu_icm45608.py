@@ -416,9 +416,9 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (build["overlay"]["size"], build["overlay"]["sha256"],
             build["component"]["size"], build["component"]["sha256"]) != (
                 332_148,
-                "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
+                "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
                 3_855_544,
-                "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc"):
+                "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"):
         raise AuditError("IMU canonical component changed")
     built = [item for item in build["relocated_leaves"]
              if item.get("source", {}).get("path") == SOURCE_PATH]
@@ -478,14 +478,14 @@ def analyze(image_path: Path = IMAGE) -> dict:
             manifest["package"]["expected_size"],
             manifest["package"]["expected_sha256"]) != (
                 3_855_544,
-                "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+                "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
                 4_634_038,
-                "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
+                "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"):
         raise AuditError("IMU package identity changed")
     package = PACKAGE.read_bytes()
     if (len(package), sha256(package)) != (
             4_634_038,
-            "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
+            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"):
         raise AuditError("IMU package artifact changed")
     plan_bytes = FLASH_PLAN.read_bytes()
     plan = json.loads(plan_bytes)
@@ -494,15 +494,15 @@ def analyze(image_path: Path = IMAGE) -> dict:
                 "flash_regions", "unresolved_flash_regions",
                 "container_only_regions", "protected_regions"))) != (
                     3_108_201,
-                    "e91992690cb5766623f0b95b0928d3113ea9c0deac6d12275d55db6f12741297",
-                    "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-                    (4_482, 2, 5, 6)):
+                    "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66",
+                    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+                    (6671, 0, 6, 6)):
         raise AuditError("IMU deployment plan changed")
 
     blocker = (
-        "authorized right temple is nonresponsive; authorized left temple must "
-        "remain stock; no responsive authorized G2 ICM45608 path, calibrated "
-        "motion rig, or golden FIFO/EDMP trace is available"
+        "authorized right temple is not under test because qualification is deferred by project direction; authorized left temple must "
+        "remain stock; future qualification requires a responsive authorized G2 ICM45608 path, calibrated "
+        "motion rig, or golden FIFO/EDMP trace is required for future qualification"
     )
 
     return {
@@ -581,7 +581,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "source_owned_aid_b2s_configuration": True,
             "source_owned_aid_b2s_event_routing": True,
             "remaining_software_gap": None,
-            "hardware_validation": "blocked_unavailable_physical_evidence",
+            "hardware_validation": "deferred by project direction",
             "hardware_blocker": blocker,
         },
     }

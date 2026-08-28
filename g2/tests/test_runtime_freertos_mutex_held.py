@@ -78,9 +78,9 @@ TARGET_SHA256 = (
     "494b41afb48389988e2678920ae7e179"
     "6b41a3d568e5c01c35c12c48bf7b57bf"
 )
-APPLE_OFFSET = 115_384
+APPLE_OFFSET = 175_232
 LINUX_OFFSET = 117_216
-APPLE_RUNTIME_ADDRESS = 0x007B_05DC
+APPLE_RUNTIME_ADDRESS = 0x007B_EFA4
 LINUX_RUNTIME_ADDRESS = 0x007B_0D04
 APPLE_REPLACEMENT = "5af37cbd" + "00bf" * 9
 APPLE_REPLACEMENT_SHA256 = (
@@ -726,7 +726,7 @@ class RuntimeFreeRTOSMutexHeldTests(unittest.TestCase):
                 "offset": APPLE_OFFSET,
                 "padding_before": 2,
                 "runtime_address": APPLE_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007B05DC",
+                "runtime_address_hex": "0x007BEFA4",
                 "size": 24,
             },
         )
@@ -740,7 +740,7 @@ class RuntimeFreeRTOSMutexHeldTests(unittest.TestCase):
         overlay = (
             ROOT / self.production["overlay"]["artifact"]
         ).read_bytes()
-        self.assertEqual(overlay[115_382:115_384], b"\x00\x00")
+        self.assertEqual(overlay[115_382:175_232], b"\x00\x00")
         self.assertEqual(
             overlay[APPLE_OFFSET:APPLE_OFFSET + 24].hex(),
             TARGET_BYTES,
@@ -768,15 +768,15 @@ class RuntimeFreeRTOSMutexHeldTests(unittest.TestCase):
                 self.production["component"]["sha256"],
             ),
             (
-                167_426,
+                429_058,
                 (
-                    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
                 ),
-                945,
-                884,
-                3_690_822,
+                2_631,
+                2_374,
+                3_952_454,
                 (
-                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
                 ),
             ),
         )

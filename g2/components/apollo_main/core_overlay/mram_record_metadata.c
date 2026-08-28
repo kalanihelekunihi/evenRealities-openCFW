@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio application-database metadata accessors and writers matched
  * to the stock AppDb-style cluster at 0x0047B3AE...0x0047B4D3.

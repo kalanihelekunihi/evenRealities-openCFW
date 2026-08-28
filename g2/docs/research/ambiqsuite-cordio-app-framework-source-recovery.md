@@ -150,9 +150,12 @@ The source family, public origin, selected release, selected commit, and
 Packetcraft ancestor are closed. The historical private G2 commit remains
 binary-unobservable. Every bounded source-path anchor is production-routed.
 Live scanning, advertising, connection, controller transition, concurrency,
-and paired-temple validation is explicitly blocked: the authorized right G2 is
-nonresponsive and the left temple must remain stock. Hardware-dependent
-functional completeness is therefore not claimed.
+and paired-temple qualification is blocked by unavailable physical evidence. The earlier
+nonresponsive-fault inference is superseded because the charging case was
+accidentally bumped during lunch, causing that test disconnect; it was not a
+device or flashing fault. Future acceptance still requires authorized live
+peer/controller, concurrency, RF, and paired-temple evidence.
+Hardware-dependent functional completeness is therefore not claimed.
 
 Reproduce the audit with:
 

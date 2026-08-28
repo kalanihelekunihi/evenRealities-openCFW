@@ -64,7 +64,7 @@ class AnalyzeG2ServiceCodecHostTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 111)
         self.assertEqual(production["guarded_redirects"], 26)
         self.assertEqual(production["hardware_validation"],
-                         "blocked_unavailable_physical_evidence")
+                         "deferred by project direction")
 
 
 if __name__ == "__main__":

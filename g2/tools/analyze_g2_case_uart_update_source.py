@@ -19,8 +19,8 @@ SOURCE = ROOT / "components/shared/case/runtime_case_uart_update.c"
 HEADER = ROOT / "components/shared/case/runtime_case_uart_update.h"
 EVIDENCE_ANALYZER = ROOT / "tools/analyze_g2_box_stm32g0_platform.py"
 PINS = {
-    SOURCE: (8459, "fad8b4c42d52275ac4f04bc08119457dc3a37f56aa187011562b2f5019f5bbb2"),
-    HEADER: (3525, "91be2f845cdfb76661c73536210e2e98eabaa1f77a2fae1cb463d3f48b619676"),
+    SOURCE: (8450, "68d228d64ad2b4af9c871d61eb0226fcbf484a4d5de0ac701584e8231fa9781c"),
+    HEADER: (3560, "400e5bfe549977f02b4487d4a4651fa8a19b5baa03c5bad3fe12b7e8213a390a"),
 }
 EXPORTS = {
     "open_cfw_case_channel_send_retry",
@@ -104,7 +104,7 @@ def audit() -> dict:
     return {
         "component": "G2 charging-case UART/update protocol",
         "analysis_mode": "offline authenticated-evidence/source/build audit; no hardware, erase, program, bank swap, signing, or flash operation",
-        "status": "implemented-in-source / hardware-validation-blocked",
+        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
         "software_gap_count": 0,
         "target": "thumbv6m-none-eabi / Cortex-M0+ / Thumb",
         "exports": sorted(EXPORTS),

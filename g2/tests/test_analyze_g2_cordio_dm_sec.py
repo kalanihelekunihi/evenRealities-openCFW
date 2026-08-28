@@ -42,7 +42,7 @@ class CordioDmSecAuditTest(unittest.TestCase):
         self.assertEqual(report["production"]["source_owned_bytes_added"], 512)
         self.assertEqual(report["production"]["stock_bytes_replaced"], 462)
         self.assertEqual(len(report["production"]["dead_stripped_public_apis"]), 4)
-        self.assertIn("blocked", report["production"]["hardware_validation"])
+        self.assertIn("deferred by project direction", report["production"]["hardware_validation"])
 
 
 if __name__ == "__main__":

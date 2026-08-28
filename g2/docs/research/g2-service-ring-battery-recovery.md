@@ -22,7 +22,7 @@ private generating commit.
 
 ## Production closure
 
-All five linked functions now route to selector-isolated GPL-3.0-only
+All five linked functions now route to selector-isolated MIT
 clean-room C in `components/apollo_main/core_overlay/service_ring_battery.c`.
 Host contracts cover the cached state, 100-percent level clamp, Boolean charge
 normalization, both getters, the 12-byte service-record ABI, local update type

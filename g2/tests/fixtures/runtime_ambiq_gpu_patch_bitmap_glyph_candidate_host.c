@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 #include "../../components/shared/lvgl/runtime_ambiq_gpu_patch_bitmap_glyph_candidate.h"
 #include <string.h>
 enum{SRC=1,BIND,BLEND,CLIP,IDENT,TRANSLATE,ROTATE,COPY,INVERT,MUL,SETM,CONST,TEXCOLOR,RECT,QUAD,POP};struct R{uint32_t op;uint64_t a[7];float f[9];};static struct R r[64];static uint32_t n;static struct R*A(uint32_t o){r[n].op=o;return&r[n++];}

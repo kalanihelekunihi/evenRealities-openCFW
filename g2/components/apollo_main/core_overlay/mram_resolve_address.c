@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio application-database address resolver matched to stock
  * AppDbResolveAndConnectByAddr at 0x0047A8C4.

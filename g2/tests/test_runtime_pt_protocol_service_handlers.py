@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+from __future__ import annotations
+import os,subprocess,tempfile,unittest
+from pathlib import Path
+R=Path(__file__).resolve().parents[1];I=R/"components/apollo_main/core_overlay";S=[I/"pt_protocol_procsr.c",I/"pt_protocol_handlers_services.c"]
+class Tests(unittest.TestCase):
+ def test_compile(self):
+  cc=os.environ.get("OPENCFW_CLANG","/usr/bin/clang")
+  with tempfile.TemporaryDirectory() as d:
+   for s in S:
+    for t,f in (("h",["clang"]),("t",[cc,"--target=arm-none-eabi","-mcpu=cortex-m55","-mthumb","-ffreestanding","-fno-builtin"])):subprocess.run(f+["-std=c11","-Oz","-Wall","-Wextra","-Werror","-I",str(I),"-c",str(s),"-o",str(Path(d)/(s.stem+t+".o"))],check=True,capture_output=True,text=True)
+ def test_commands(self):
+  x=(I/"pt_protocol_handlers_services.c").read_text()
+  for c in (0x0B,0x11,0x24,0x31,0x3D,0x49):self.assertIn(f"{{0x{c:02X}U,",x)
+if __name__=="__main__":unittest.main()

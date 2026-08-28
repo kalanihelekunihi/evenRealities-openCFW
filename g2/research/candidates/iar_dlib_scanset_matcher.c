@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room behavioral recreation of the IAR DLIB %[...] scanset membership
  * matcher in the official Even Realities G2 2.2.6.10 Apollo-main image

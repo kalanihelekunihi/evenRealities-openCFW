@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_ux_system as c
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 import analyze_g2_dashboard_watchface_manager as d
 import recover_apollo_embedded_source_paths as t
 
@@ -25,7 +26,7 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FM: "1c3e5ed36c1382bc3adc62683ee8a26887f702a11c8b0be5fbfadbd0dce06bc0",
-    CL: "df2963d4eabc73ed4e4d1c89e0baea855efb9524bf58b22ea8f892ca85566a64",
+    CL: "9f7a02c1641aef2ffafbde435f32de8700fdd99950a053845086bd7a20409248",
     PM: "b9544563bc91ead78b1d39b6abd218b7cabf5880c8d09844249d2a24f1e7e4f1",
     PV: "a1cf5192e587eea8af8fa2e79e1fde2c12598d6112a78938ef48ebec2fcc0e95",
 }
@@ -158,20 +159,9 @@ def analyze(image: Path = IMAGE) -> dict:
         ) != (address, size, digest, "b_w", function, ["apple-clang"]):
             raise c.AuditError(f"production patch changed: {name}")
     report = json.loads(REPORT.read_text())
-    if (report["overlay"]["size"], report["overlay"]["sha256"],
-            report["component"]["size"], report["component"]["sha256"]) != (
-        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-    ):
-        raise c.AuditError("production build pins changed")
+    validate_apollo_main_artifacts(ROOT, c.AuditError, "ring battery service")
     manifest = json.loads(MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
-    if (main["provider"].get("size"), main["provider"].get("sha256"),
-            manifest["package"].get("expected_size"), manifest["package"].get("expected_sha256")) != (
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-    ):
-        raise c.AuditError("production manifest pins changed")
     region_names = {item["name"] for item in main["regions"]}
     required = {name.removeprefix("replace_") + "_source_replacement" for name, *_ in PATCHES}
     required |= {
@@ -210,8 +200,8 @@ def analyze(image: Path = IMAGE) -> dict:
                        "alignment_bytes": 4, "strict_relocations": 2,
                        "stock_replaced_bytes": 352, "retained_literal_pool_bytes": 44,
                        "diagnostic_logging": "stock EasyLogger observability omitted; cached-state and service-record behavior preserved",
-                       "software_functional_gap": False, "hardware_validation": "blocked",
-                       "hardware_blocker": "No authorized physical paired-G2 service-record transport or ring battery-state evidence is available."},
+                       "software_functional_gap": False, "hardware_validation": "deferred by project direction",
+                       "hardware_blocker": "Authorized physical paired-G2 service-record transport or ring battery-state evidence is required for future qualification."},
     }
 
 

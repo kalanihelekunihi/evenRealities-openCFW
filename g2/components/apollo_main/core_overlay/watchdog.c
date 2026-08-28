@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /*
  * Clean-room reconstruction of the G2 watchdog policy wrapper.
  *

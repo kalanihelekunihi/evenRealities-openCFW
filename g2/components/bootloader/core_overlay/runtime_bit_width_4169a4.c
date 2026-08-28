@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 typedef __UINT32_TYPE__ open_cfw_bootloader_bit_word;
 
 __attribute__((used, noinline))

@@ -1,0 +1,38 @@
+{
+  "admitted_row_count": 7,
+  "analysis_mode": "offline authenticated target control/data flow and Cortex-M0+ compile; argument-relative host buffers only, no MMIO or hardware execution",
+  "component": "G2 touch argument-relative record source admission batch 9",
+  "exclusions": "nested pointer graphs, literal tables, global state, MMIO, breakpoints, product semantic roles, EULA bodies, system handoff and halt remain unadmitted",
+  "integration": "isolated source candidates only; not production-routed",
+  "metrics": {
+    "admitted_functions": 7,
+    "admitted_instruction_bytes": 200,
+    "argument_relative_record_admissions": 7,
+    "concrete_source_or_implementation_gap_after": 86,
+    "input_concrete_gap": 93,
+    "input_gap_instruction_bytes": 8524,
+    "literal_or_mmio_admissions": 0,
+    "product_semantic_names_asserted": 0,
+    "residual_digest": "311cf2bea1866b7fb4451099958bee9007f231c58ecee847818019dce49a10de",
+    "residual_gap_instruction_bytes": 8324,
+    "row_digest": "d2a8c165513ee40a8df882dd64b00f53405f3394089e1d7ae93306682fee195f",
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_application_contracts_after": 74,
+    "unimplemented_application_contracts_before": 81
+  },
+  "remaining": {
+    "concrete_gap_instruction_bytes": 8324,
+    "concrete_source_or_implementation_functions": 86,
+    "note": "argument-relative functional transforms do not assert volatile/atomic memory semantics; residual providers/contracts remain non-source",
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_clean_room_application_contracts": 74
+  },
+  "residual_row_count": 86,
+  "schema_version": 1,
+  "source": {
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_record_primitives.c",
+    "sha256": "66541d33f3f1ecd60b877ccc1ca62cf96b2474bda1adc8fd8287f12cd7b62dd7",
+    "target_object_bytes": 2052
+  }
+}

@@ -150,13 +150,13 @@ PROFILES = {
         "alignment": 4,
         "overlay_name": "apollo_core_overlay.bin",
         "component_name": "ota_s200_firmware_ota.bin",
-        "overlay_size": 180782,
+        "overlay_size": 429058,
         "overlay_sha256": (
-            "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
         ),
-        "component_size": 3704178,
+        "component_size": 3952454,
         "component_sha256": (
-            "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
         ),
         "overlay_base": 0x00794324,
         "provider_offset": 108456,
@@ -179,7 +179,7 @@ PROFILES = {
             "95f4b7721a8d64ebb54c6ffd1ae2ece615d9a3d5b5dd8a377a1c8beabbb8a595"
         ),
         "historical_tail_size": 22,
-        "historical_tail_offset": 113732,
+        "historical_tail_offset": 173580,
         "later_lookahead_patch": {
             "offset": 602390,
             "size": 56,
@@ -353,8 +353,8 @@ PROFILES = {
             "size": 128,
         },
         "major": {
-            "offset": 113732,
-            "address": 0x007AFF68,
+            "offset": 173580,
+            "address": 0x007BE930,
             "sha256": (
                 "cffc852c2243f51e8a52543b4f2410b1"
                 "92e2365c25f161cfd12f69cae8544122"
@@ -363,8 +363,8 @@ PROFILES = {
             "padding_before": 0,
         },
         "minor": {
-            "offset": 113744,
-            "address": 0x007AFF74,
+            "offset": 173592,
+            "address": 0x007BE93C,
             "sha256": (
                 "e0494044bcf077ed5b67a33cf3eb526b"
                 "b9b8b6f31dcfefb5ce347a197b100012"
@@ -397,12 +397,12 @@ PROFILES = {
             },
         },
         "accounting": {
-            "generated_patch_site_bytes": 123624,
+            "generated_patch_site_bytes": 409_066,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3399558,
-            "replaced_stock_function_bytes": 123802,
-            "source_owned_bytes": 167608,
-            "source_owned_in_place_bytes": 182,
+            "opaque_base_bytes": 3_111_914,
+            "replaced_stock_function_bytes": 409_246,
+            "source_owned_bytes": 431_334,
+            "source_owned_in_place_bytes": 184,
         },
     },
     "boot": {
@@ -412,13 +412,13 @@ PROFILES = {
         "alignment": 2,
         "overlay_name": "bootloader_core_overlay.bin",
         "component_name": "ota_s200_bootloader.bin",
-        "overlay_size": 662,
+        "overlay_size": 15_240,
         "overlay_sha256": (
-            "7cb3c17a03dda3b8576d8288ffa61df1332d89f1f24d6c5877bf0143e233902b"
+            "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314"
         ),
-        "component_size": 149262,
+        "component_size": 163840,
         "component_sha256": (
-            "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267"
+            "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
         ),
         "overlay_base": 0x00434478,
         "provider_offset": 24,
@@ -492,13 +492,13 @@ PROFILES = {
             },
         },
         "accounting": {
-            "generated_alignment_bytes": 3,
+            "generated_alignment_bytes": 16,
             "generated_isolated_alignment_bytes": 0,
-            "generated_patch_site_bytes": 860,
-            "generated_relocated_alignment_bytes": 2,
+            "generated_patch_site_bytes": 16_528,
+            "generated_relocated_alignment_bytes": 15,
             "generated_stock_to_overlay_alignment_bytes": 1,
-            "opaque_base_bytes": 147739,
-            "source_owned_bytes": 660,
+            "opaque_base_bytes": 121_427,
+            "source_owned_bytes": 25_869,
         },
     },
 }

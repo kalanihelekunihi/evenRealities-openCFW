@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio application-database key writer matched to stock
  * AppDbSetKey at 0x0047AED4.

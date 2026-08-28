@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 
 #include "../../components/shared/lvgl/runtime_ambiq_gpu_patch_small_raster_candidate.h"
 

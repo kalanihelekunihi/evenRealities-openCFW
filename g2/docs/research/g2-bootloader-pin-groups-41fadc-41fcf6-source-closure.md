@@ -8,7 +8,7 @@ authenticated aligned Thumb scans identify exactly two callers at
 
 `runtime_pin_groups_41fadc.c` is 4,772 bytes, SHA-256
 `2608a97a8a2fc3e8e63e3eeae78dbec81646e4d650b407bbcb9ebae86e9fff86`,
-under GPL-3.0-or-later. It preserves the complete two-bank dispatch policy:
+under MIT. It preserves the complete two-bank dispatch policy:
 the low byte of subtype selects cumulative nine/pair/quad/common pin groups;
 each ordered pin call reads its authenticated word at `0x20000000+offset`
 and forwards it to pin-configure seam `0x0041D92D`; odd, unsupported, and

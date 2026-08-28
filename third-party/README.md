@@ -56,7 +56,6 @@ exact upstream commit and reconstructed offline from the Git object closure.
 | `cmsis-core` | `d23a6949` | Apache-2.0 | • | |
 | `cmsis-freertos` | v10.5.1 | Apache-2.0 | • | • |
 | `cordio` | `3656312d` (r20.05c) | Apache-2.0 | • | |
-| `cordio-profile-gatt` | see `SNAPSHOT.sha256` | Apache-2.0 | • | |
 | `cJSON` | `3c893567` (v1.7.12; proven interval v1.7.9–v1.7.12) | MIT | • | |
 | `easylogger` | `a596b264` | MIT | • | |
 | `flashdb` | `714d6159` (2.1.1) | Apache-2.0 | • | |
@@ -71,6 +70,7 @@ exact upstream commit and reconstructed offline from the Git object closure.
 | `nanopb` | `98bf4db6` (0.4.9) | Zlib | • | |
 | `npmx` | `e1aaec53` | BSD-3-Clause | • | |
 | `packetcraft-gatt-profile` | `3656312d` | Apache-2.0 | • | |
+| `qpc` | `416dcec8` (6.5.1) | GPL-3.0-or-later (GPL option selected) | • | |
 | `ring-buffer` | `190e30be` | MIT | • | |
 | `tinyframe` | `eb75483e` | MIT | • | |
 | `tlsf` | see `SNAPSHOT.sha256` | BSD-3-Clause | • | |

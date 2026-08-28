@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "component": "openCFW ring gesture overlay",
+  "license": "GPL-3.0-only",
+  "upstream": {
+    "repository": "https://github.com/jimrandomh/g2flash",
+    "local_clone_remote_observed": "ssh://git@ssh.github.com:443/jimrandomh/g2flash.git",
+    "selected_commit": "6d5c58598e047ca5980065a9ee7570ce2d172ca7",
+    "selected_path": "patches/gesture_fwd.c",
+    "evidence_capture_date": "2026-08-28",
+    "evidence_origin": "pre-existing local clone; no network access used",
+    "commit_signature_present": false,
+    "repository_account_control_authenticated": false,
+    "qualification": "The retained Git objects prove commit-to-tree-to-path-to-blob identity offline. The unsigned commit and local evidence do not independently authenticate GitHub account control."
+  },
+  "git_objects": {
+    "commit": {
+      "object_id": "6d5c58598e047ca5980065a9ee7570ce2d172ca7",
+      "payload_size": 281,
+      "tree": "5509f7a353824a92ea5f4cf33ed1646d543404b8",
+      "parents": [
+        "ad14c09c3da537095cc77bfb95b2919b8d506c4e"
+      ],
+      "author": "James Babcock <jimrandomh@gmail.com> 1784876188 -0700",
+      "committer": "James Babcock <jimrandomh@gmail.com> 1784876188 -0700",
+      "message": "Add extended CFW options for sleep/wake handling in faceclaw\n"
+    },
+    "root_tree": {
+      "object_id": "5509f7a353824a92ea5f4cf33ed1646d543404b8",
+      "entries": [
+        {"mode": "100644", "name": ".gitignore", "object_id": "6d018cfa0d1f8f5e5495d030f91270d341387d0d"},
+        {"mode": "100644", "name": "LICENSE", "object_id": "e72bfddabc15be5718a7cc061ac10e47741d8219"},
+        {"mode": "100644", "name": "README.md", "object_id": "639f1b77d1dd563e0e04c2af131413bbd2530486"},
+        {"mode": "100755", "name": "build_cfw.sh", "object_id": "3134c5b7f9869371254efc948623e219ed976153"},
+        {"mode": "40000", "name": "demos", "object_id": "b77d6f843c92630c4670cb047c0aeffde2778320"},
+        {"mode": "100644", "name": "g2flash.py", "object_id": "5ad184719d7a65c4983717fd92648f3a2a35b37a"},
+        {"mode": "40000", "name": "patches", "object_id": "a6dd12ff9d04000e752a0ef6d0624565c1feb4f8"},
+        {"mode": "100644", "name": "requirements.txt", "object_id": "317e2939e85d0b3d0aa48751fb294290553af388"}
+      ]
+    },
+    "patches_tree": {
+      "object_id": "a6dd12ff9d04000e752a0ef6d0624565c1feb4f8",
+      "entries": [
+        {"mode": "100644", "name": "apply_patches.py", "object_id": "eed183795b538968e03a82359be985a75f255073"},
+        {"mode": "100644", "name": "build.py", "object_id": "6defeae68da83bcfbdda1d97b1fba7aa1202f904"},
+        {"mode": "100644", "name": "cfw_patches.json", "object_id": "efbd805ae6832d9f2ba070c0e01bcebe02f579aa"},
+        {"mode": "100644", "name": "decompress.c", "object_id": "0a897e97f9b2bcac8b219afef8007b1a3a284d07"},
+        {"mode": "100644", "name": "gen_patches.py", "object_id": "0a3ac52e1e81ab70c63522e7b36b0ff8048278b2"},
+        {"mode": "100644", "name": "gesture_fwd.c", "object_id": "4997b81d4afa1ede5bd15c79957509f65ec75828"},
+        {"mode": "100644", "name": "patch_compress.py", "object_id": "4fad55fe2c880e2824fff5749852562934829c54"},
+        {"mode": "100644", "name": "patch_img_container_576.py", "object_id": "0655eefebb6a4569ed622d58bf53ab6a210a361b"},
+        {"mode": "100644", "name": "patches_main.c", "object_id": "64ccea95fa66fc9032e7896506c23f157b1c2b1d"},
+        {"mode": "100644", "name": "settings_ext.c", "object_id": "36eb96f85947260de2bcb844c12a40ca3591ca18"},
+        {"mode": "100644", "name": "zlib_glue.c", "object_id": "2eaebf193410dca50ec2d648a12ce85066793ab9"}
+      ]
+    }
+  },
+  "files": {
+    "upstream_source": {
+      "path": "upstream/gesture_fwd.c",
+      "upstream_path": "patches/gesture_fwd.c",
+      "size": 4029,
+      "sha256": "cae873922fc1dd64bb59dc80e41fe6dd3b44dea2d082648948dca2233bacfc69",
+      "git_blob_sha1": "4997b81d4afa1ede5bd15c79957509f65ec75828"
+    },
+    "checked_in_source": {
+      "path": "ring_gesture.c",
+      "size": 2264,
+      "sha256": "e7824afc0f4d3f567b6b6247df3c0198e2af18275644313da9b199fd3b33605f",
+      "git_blob_sha1": "b07ee5a4eab39bce6e9d4fc353099779093219b7",
+      "byte_identical_to_upstream": false
+    },
+    "derivation_diff": {
+      "path": "DERIVATION.patch",
+      "size": 6436,
+      "sha256": "423fce1e286dad2601158ce3d065d43e8f3a0d1de380e634170e2ffdecc29041",
+      "format": "canonical Python difflib unified diff of exact endpoint bytes"
+    },
+    "component_license": {
+      "path": "LICENSE",
+      "size": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "git_blob_sha1": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "upstream_size": 35148,
+      "upstream_sha256": "8b1ba204bb69a0ade2bfcf65ef294a920f6bb361b317dba43c7ef29d96332b9b",
+      "upstream_git_blob_sha1": "e72bfddabc15be5718a7cc061ac10e47741d8219",
+      "normalization": "one terminal LF added to the exact upstream blob"
+    },
+    "notice": {
+      "path": "NOTICE.md",
+      "size": 2000,
+      "sha256": "5b3b3e05629f583fcac05f04dcc8c722639cb7051329c9e2da553ad2bec5cf31"
+    }
+  },
+  "integration_claim": {
+    "overlay_metadata_path": "overlay.json",
+    "source_path": "components/apollo_main/ring_gesture/ring_gesture.c",
+    "license": "GPL-3.0-only",
+    "upstream": "https://github.com/jimrandomh/g2flash",
+    "upstream_commit": "6d5c58598e047ca5980065a9ee7570ce2d172ca7"
+  },
+  "offline_boundary": {
+    "network_required": false,
+    "hardware_required": false,
+    "upstream_blob_byte_identity_proven": true,
+    "checked_in_source_byte_identity_to_upstream": false,
+    "commit_path_blob_binding_proven": true,
+    "repository_owner_identity_proven": false
+  }
+}

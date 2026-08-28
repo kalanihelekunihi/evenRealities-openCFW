@@ -24,7 +24,7 @@ official non-executable bytes. The caller oracle scans every aligned Thumb
 
 `runtime_boot_services_41f9d8.c` is 6,978 bytes, SHA-256
 `99aa433811660dd98b1e927d99fdbdb3d2214ad7a88d30ed36803305873cf693`,
-under GPL-3.0-or-later. It preserves the complete observable contract:
+under MIT. It preserves the complete observable contract:
 
 - the millisecond wrapper performs wrapping 32-bit multiplication by 1,000
   before entering raw delay seam `0x0041D1C1`;

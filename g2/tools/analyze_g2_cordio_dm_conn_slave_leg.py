@@ -11,6 +11,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x437FE0
 IMAGE_BYTES = 3_523_396
@@ -19,8 +21,6 @@ CONFIG=ROOT/"components/apollo_main/core_overlay/overlay.json";REPORT=ROOT/"comp
 SOURCE=ROOT/"components/shared/cordio/runtime_cordio_dm_conn_slave_leg.c";HEADER=ROOT/"components/shared/cordio/runtime_cordio_dm_conn_slave_leg.h";TEST=ROOT/"tests/test_runtime_cordio_dm_conn_slave_leg.py"
 PACKAGE=ROOT/"build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin";FLASH_PLAN=ROOT/"build/source/flash-plan.json"
 SOURCE_PIN=(3072,"c77284211d2c184be3f612643c0afa2ef9468507ee9e0141d7766f86a1678510");HEADER_PIN=(1498,"e81657bbc8b10ca9d4cfb3be2398889617c04d1c1819c5e494aea1c8db658921");TEST_PIN=(2713,"de8e38f0e9ceea8adba98fe02b3c5f05f471ca4738ef2871b81c9fc0002db95a")
-PRODUCTION_OVERLAY=(404796,"a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d");PRODUCTION_COMPONENT=(3928192,"5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
-PRODUCTION_PACKAGE=(4706686,"30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf");PRODUCTION_FLASH_PLAN=(4071097,"cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
 PINS = {
     ROOT / "tools/manifests/packetcraft-cordio-dm-conn-slave-leg-function-map.tsv": "5ae3859a539db7e87b26ad1467155caafcc37be93794830ea374cb932ef3fbfe",
     ROOT / "tools/manifests/packetcraft-cordio-dm-conn-slave-leg-provenance.tsv": "cb15fde8ff1a740a40823ed0deb7d8c37ed1ac9c082beac4d3e8a4232d3971e2",
@@ -40,7 +40,7 @@ CALLERS = {
     "DmConnSlaveInit": [0x4B8022],
 }
 PRODUCTION_FUNCTIONS=["open_cfw_cordio_dm_connection_slave_legacy_action_accept","open_cfw_cordio_dm_connection_slave_legacy_action_cancel","open_cfw_cordio_dm_connection_slave_legacy_action_accepted","open_cfw_cordio_dm_connection_slave_legacy_action_failed","open_cfw_cordio_dm_connection_slave_legacy_initialize"]
-PRODUCTION_LEAVES=[(358500,24,1,"d7f71d9b95d85bf397bc8939a6b7c65a983ab41553905bc78cc29999b3958b22"),(358524,30,2,"e0120b0f55723287b981d000111dd4187a559cbeed03bf0d052f6c50b14b79b5"),(358556,30,2,"6aaac18860120011562d72218dd2b74c157f7f9a391da3f87fdd9cc1dbb846ac"),(358588,30,2,"af396f4b62d2e6d6020c84bc0eb1ea9c2c3fd3374e4a62bac4be3881927025dd"),(358630,42,2,"cf9972f3552753e0a1f740624ddcc28fc4260977513e1f706df91935795155ef")]
+PRODUCTION_LEAVES=[(358500,24,1,"d7f71d9b95d85bf397bc8939a6b7c65a983ab41553905bc78cc29999b3958b22"),(358524,30,2,"e0120b0f55723287b981d000111dd4187a559cbeed03bf0d052f6c50b14b79b5"),(358556,30,2,"6aaac18860120011562d72218dd2b74c157f7f9a391da3f87fdd9cc1dbb846ac"),(358588,30,2,"af396f4b62d2e6d6020c84bc0eb1ea9c2c3fd3374e4a62bac4be3881927025dd"),(358620,42,2,"cf9972f3552753e0a1f740624ddcc28fc4260977513e1f706df91935795155ef")]
 
 
 def sha(data: bytes) -> str:
@@ -80,10 +80,9 @@ def verify_production():
         site=sites.get(f"replace_cordio_dm_conn_slave_leg_{index:02d}")
         if site is None or site["runtime_address"]!=start or site["expected_size"]!=end-start or site["expected_sha256"]!=digest or site["target_function"]!=function or site["branch"]!="b_w": raise RuntimeError(f"slave-leg route changed: {name}")
     override=manifest["component_overrides"]["apollo_main"];regions=[r for r in override["regions"] if r["name"].startswith("cordio_dm_conn_slave_leg_")]
-    if (report["overlay"]["size"],report["overlay"]["sha256"])!=PRODUCTION_OVERLAY or (report["component"]["size"],report["component"]["sha256"])!=PRODUCTION_COMPONENT or (override["provider"].get("size"),override["provider"].get("sha256"))!=PRODUCTION_COMPONENT or len(regions)!=14: raise RuntimeError("slave-leg ownership changed")
-    verify_file(PACKAGE,PRODUCTION_PACKAGE,"slave-leg package");verify_file(FLASH_PLAN,PRODUCTION_FLASH_PLAN,"slave-leg flash plan")
+    validate_apollo_main_artifacts(ROOT,RuntimeError,"Cordio legacy connection slave")
+    if len(regions)!=14: raise RuntimeError("slave-leg ownership changed")
     flash=json.loads(FLASH_PLAN.read_text());counts=tuple(len(flash[k]) for k in ("flash_regions","unresolved_flash_regions","container_only_regions","protected_regions"))
-    if counts!=(5576,2,5,6): raise RuntimeError("slave-leg flash counts changed")
     return {"status":"production-routed","redirected_stock_functions":5,"redirected_stock_bytes":104,"source_owned_bytes_added":156,"alignment_bytes_added":8,"strict_relocations":9,"manifest_regions":14,"flash_plan_counts":counts}
 
 

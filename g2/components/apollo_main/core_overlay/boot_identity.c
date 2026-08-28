@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Boot reset-status and firmware-version helpers matched to stock entries
  * 0x0047DCEC and 0x0047DD08.

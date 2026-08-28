@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the thirteen linked G2
  * pb_service_terminal.c entries. Diagnostic-only EasyLogger calls are

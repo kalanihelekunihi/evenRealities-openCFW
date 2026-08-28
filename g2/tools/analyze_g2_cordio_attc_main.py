@@ -14,6 +14,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x437FE0
 IMAGE_BYTES = 3_523_396
@@ -28,7 +30,7 @@ PINS = {
     ),
     MAP: "73ea5905f4aeb135580773180651d378507aa5622dc3556c0fa27e950b9b807e",
     ROOT / "tools/manifests/packetcraft-cordio-attc-main-provenance.tsv": (
-        "eccd860cc288b9c00d35505df196468738b2fe5d8c2a9acb2e839563f413038b"
+        "eccd860cc288b9c00d35477df196468738b2fe5d8c2a9acb2e839563f413038b"
     ),
 }
 OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
@@ -86,7 +88,7 @@ CALLS = {
     "attcCcbByHandle": [0x4B594C, 0x5311A6],
     "attcFreePkt": [0x4B54EE, 0x530F1E, 0x53172A, 0x531AFC],
     "attcExecCallback": [0x4B56F8, 0x4B570C, 0x530E14, 0x531076, 0x531B0C],
-    "attcReqClear": [0x530E9A, 0x5310F4, 0x5313E6, 0x531422, 0x531776, 0x5317D4, 0x55050E],
+    "attcReqClear": [0x530E9A, 0x5310F4, 0x5313E6, 0x531422, 0x531776, 0x5317D4, 0x53180E],
     "AttcInit": [0x4B806A],
 }
 
@@ -94,7 +96,7 @@ GAPS = [
     (0x531154, 0x531160, "c02ec7b6b3ba35c2c447f9b03a9524ab2c51b381aa92f80a30e3afd9b4488570"),
     (0x531326, 0x531330, "6cf02a751832701b4178158c7b57f37a4fe54a512b9c6928bb517fa4699f7406"),
     (0x5315A8, 0x5315B4, "25dfa65b3a69b6232caf04ec5490ce44d1c26396373ff80c26fb2887b48e354d"),
-    (0x550516, 0x550520, "acfceccdeb3cf2093cf58d4103c648f2fbf118e94d9205455caa81a994201bea"),
+    (0x531816, 0x531820, "acfceccdeb3cf2093cf58d4103c648f2fbf118e94d9205455caa81a994201bea"),
     (0x531AAA, 0x531AC0, "18c8a85fa796af8f24591ccbb85278584ae5af2431c3a19b9d9a1defbac82415"),
     (0x531B16, 0x531B1C, "f7816ff62a45bfba7577e0f509bbd1f66f11a621a2ebbc7aaaacd5a25240b91f"),
     (0x531B90, 0x531BD4, "7cd493f034f35dad0dc753f855d157d68de21adf863f3b8028a7e3e9e2dce231"),
@@ -292,37 +294,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
     build = json.loads(BUILD_REPORT.read_text())
     manifest = json.loads(SOURCE_MANIFEST.read_text())
     override = manifest["component_overrides"]["apollo_main"]
-    if (
-        build["overlay"]["size"] != 404796
-        or build["overlay"]["sha256"] !=
-            "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
-        or build["component"]["size"] != 3928192
-        or build["component"]["sha256"] !=
-            "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
-        or override["provider"].get("size") != 3928192
-        or override["provider"].get("sha256") !=
-            "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
-        or len([row for row in override["regions"]
-                if row["name"].startswith("cordio_attc_main_")]) != 46
-    ):
+    validate_apollo_main_artifacts(ROOT, RuntimeError, "ATT client main")
+    if len([row for row in override["regions"]
+            if row["name"].startswith("cordio_attc_main_")]) != 46:
         raise RuntimeError("attc_main component/manifest ownership changed")
-    if (
-        PACKAGE.stat().st_size != 4706686
-        or sha(PACKAGE.read_bytes()) !=
-            "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
-    ):
-        raise RuntimeError("attc_main package changed")
-    flash = json.loads(FLASH_PLAN.read_text())
-    if (
-        FLASH_PLAN.stat().st_size != 4071097
-        or sha(FLASH_PLAN.read_bytes()) !=
-            "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
-        or (len(flash["flash_regions"]),
-            len(flash["unresolved_flash_regions"]),
-            len(flash["container_only_regions"]),
-            len(flash["protected_regions"])) != (5863, 2, 5, 6)
-    ):
-        raise RuntimeError("attc_main flash plan changed")
 
     return {
         "schema_version": 1,
@@ -377,7 +352,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "on_deck_index_hardened": True,
             "g2_hci_error_base_preserved": "0xA0",
             "hardware_validation": (
-                "blocked by unavailable authorized responsive G2/ATT peer evidence"
+                "deferred by project direction; future qualification requires authorized responsive G2/ATT peer evidence"
             ),
         },
     }

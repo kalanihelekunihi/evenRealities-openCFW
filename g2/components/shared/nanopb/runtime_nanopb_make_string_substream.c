@@ -1,4 +1,6 @@
 /*
+ * SPDX-License-Identifier: Zlib
+ *
  * Copyright (c) 2011 Petteri Aimonen <jpa at nanopb.mail.kapsi.fi>
  *
  * This software is provided 'as-is', without any express or implied warranty.

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Qualify the production-excluded Ambiq GPU two-pass shadow candidate."""
 
 from __future__ import annotations
@@ -161,7 +162,7 @@ class AmbiqGpuPatchShadowBlurCandidateTests(unittest.TestCase):
 
     def test_candidate_is_independent_documented_and_production_excluded(self) -> None:
         source = SOURCE.read_text()
-        self.assertIn("SPDX-License-Identifier: GPL-3.0-only", source)
+        self.assertIn("SPDX-License-Identifier: MIT", source)
         self.assertNotIn("void lv_ambiq_shadow_blur_corner(", source)
         self.assertIn("two-pass", AUDIT.read_text())
         production = "\n".join(

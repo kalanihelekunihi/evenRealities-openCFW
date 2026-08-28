@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* Clean-room reconstruction of driver/uled/display_preprocess.c. */
 
 #include <stddef.h>

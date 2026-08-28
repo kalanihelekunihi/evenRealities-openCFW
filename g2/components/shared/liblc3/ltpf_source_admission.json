@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "component": "google/liblc3-ltpf-source-provider",
+  "upstream_ref": "refs/tags/v1.1.3",
+  "upstream_commit": "96a3af0beb5487aca3b98a4b992a539a1f6d80d1",
+  "license": "Apache-2.0",
+  "upstream_source": "g2/third_party/liblc3/src/ltpf.c",
+  "provider_source": "g2/components/shared/liblc3/runtime_liblc3_ltpf_provider.c",
+  "provider_entry": "open_cfw_liblc3_ltpf_analyse_bounded",
+  "upstream_entry": "lc3_ltpf_analyse",
+  "target_profile": ["--target=arm-none-eabi", "-mcpu=cortex-m55", "-mthumb", "-mfloat-abi=hard", "-O2", "-ffast-math", "-fshort-enums", "-ffreestanding", "-fno-builtin", "-ffunction-sections", "-fdata-sections"],
+  "analysis_state_abi": {"size": 1160, "active": 0, "pitch": 4, "nc": 8, "hp50": 16, "x_12k8": 32, "x_6k4": 800, "tc": 1156},
+  "history_samples_by_srate": [9, 19, 29, 39, 59, 59, 119],
+  "dispatch_slots": ["8K", "16K", "24K", "32K", "48K", "48K_HR", "96K_HR"],
+  "allowed_external_relocations": {"ltpf_analysis": ["memmove", "sqrtf"], "provider": ["lc3_ltpf_analyse", "memset"], "production_overlay": []},
+  "object_size_budgets": {"ltpf_o": 20000, "provider_o": 4096},
+  "historical_non_corpus_boundaries": {
+    "0x00438400": "resample_16k_12k8 historical body extent not proven; never individually routed",
+    "0x00438604": "resample_48k_12k8 historical body extent not proven; never individually routed"
+  },
+  "source_provider_supports_all_dispatch_slots": true,
+  "individual_historical_body_routing": false,
+  "production_capable_source": true,
+  "overlay_routed": true,
+  "overlay_component": "g2/components/apollo_main/liblc3_ltpf",
+  "overlay_route": {"callsite": "0x0059145C", "target": "lc3_ltpf_analyse", "historical_individual_bodies_routed": false},
+  "reviewed_profiles": {
+    "apple-clang": {"source_owned_bytes": 7576, "sha256": "8261449f203ff0a33a0b6f22eee57076216491b2a03f6c359b98b98aa6ba0d24"},
+    "linux-clang": {"source_owned_bytes": 7596, "sha256": "3ba3bb1a790b236ab82f59e965715e9730658058cfc20b7d6a7fb7ec8e75d8d3"}
+  }
+}

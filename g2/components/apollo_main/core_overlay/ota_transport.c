@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the G2 OTA packet transport.  The source
  * preserves the authenticated 0xAA header, C0/C1/C2 receive paths, 4 KiB

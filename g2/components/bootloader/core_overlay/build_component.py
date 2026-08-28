@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Compile and inject the source-owned G2 bootloader core overlay.
 
 This builder performs local file and compiler operations only. It emits a raw
@@ -29,11 +30,13 @@ from apollo_overlay import (  # noqa: E402
     align_up,
     append_isolated_leaves,
     append_relocated_leaves,
+    compile_in_place_leaf,
     compile_isolated_leaf,
     compile_overlay,
     decode_thumb_branch,
     encode_thumb_b_w,
     record_leaf_profile_pins,
+    resolve_leaf_profile,
     resolve_below,
     resolve_toolchain_include_dirs,
     resolve_toolchain_profile,
@@ -123,6 +126,12 @@ def patch_bootloader(
     overlay: bytes,
     functions: dict[str, dict[str, int]],
     config: dict[str, Any],
+    cave_leaves: tuple[tuple[bytes, dict[str, Any]], ...] | list[
+        tuple[bytes, dict[str, Any]]
+    ] = (),
+    in_place_leaves: tuple[tuple[bytes, dict[str, Any]], ...] | list[
+        tuple[bytes, dict[str, Any]]
+    ] = (),
 ) -> tuple[bytes, dict[str, Any]]:
     run_base = int(config["run_base"])
     partition_end = int(config["partition_end_exclusive"])
@@ -176,6 +185,78 @@ def patch_bootloader(
         if previous[0] + previous[1] > current[0]:
             raise BuildError("bootloader source-entry patch spans overlap")
 
+    in_place_plans: list[dict[str, Any]] = []
+    in_place_ranges: list[tuple[int, int, str]] = []
+    for leaf, report in in_place_leaves:
+        extraction = report.get("extraction")
+        stock = report.get("stock")
+        if not leaf or not isinstance(extraction, dict) or not isinstance(stock, dict):
+            raise BuildError("bootloader in-place leaf report is incomplete")
+        function_name = extraction.get("function")
+        runtime_address = extraction.get("runtime_address")
+        if not isinstance(function_name, str) or not isinstance(runtime_address, int):
+            raise BuildError("bootloader in-place leaf identity is invalid")
+        end_exclusive = runtime_address + len(leaf)
+        offset = runtime_address - run_base
+        if runtime_address & 1 or len(leaf) & 1:
+            raise BuildError("bootloader in-place leaves must use even Thumb spans")
+        if offset < 0 or offset + len(leaf) > len(base):
+            raise BuildError(f"in-place leaf {function_name} exceeds stock image")
+        if stock.get("size") != len(leaf):
+            raise BuildError(f"in-place leaf {function_name} stock size differs")
+        if any(
+            offset < site_offset + site_size
+            and site_offset < offset + len(leaf)
+            for site_offset, site_size, _site in reviewed_sites
+        ):
+            raise BuildError(f"in-place leaf {function_name} overlaps a patch site")
+        for other_start, other_end, other_name in in_place_ranges:
+            if runtime_address < other_end and other_start < end_exclusive:
+                raise BuildError(
+                    f"in-place leaf {function_name} overlaps {other_name}"
+                )
+        observed = bytes(base[offset:offset + len(leaf)])
+        observed_digest = sha256(observed)
+        if observed_digest != stock.get("sha256"):
+            raise BuildError(
+                f"in-place leaf {function_name} stock SHA-256 differs"
+            )
+        patched[offset:offset + len(leaf)] = leaf
+        in_place_ranges.append((runtime_address, end_exclusive, function_name))
+        in_place_plans.append(
+            {
+                "name": f"{function_name}_source_in_place",
+                "function": function_name,
+                "region_kind": "in_place",
+                "runtime_address": runtime_address,
+                "runtime_address_hex": f"0x{runtime_address:08X}",
+                "end_exclusive": end_exclusive,
+                "end_exclusive_hex": f"0x{end_exclusive:08X}",
+                "file_offset": offset,
+                "expected_size": len(leaf),
+                "size": len(leaf),
+                "stock_sha256": observed_digest,
+                "replacement_sha256": sha256(leaf),
+                "replacement_hex": leaf.hex(),
+            }
+        )
+
+    cave_targets: dict[str, int] = {}
+    for leaf, report in cave_leaves:
+        extraction = report.get("extraction")
+        if not leaf or not isinstance(extraction, dict):
+            raise BuildError("bootloader cave leaf report is incomplete")
+        function_name = extraction.get("function")
+        runtime_address = extraction.get("runtime_address")
+        if (
+            not isinstance(function_name, str)
+            or not isinstance(runtime_address, int)
+            or function_name in cave_targets
+            or function_name in functions
+        ):
+            raise BuildError("bootloader cave leaf registration is ambiguous")
+        cave_targets[function_name] = runtime_address
+
     patched_sites: list[dict[str, Any]] = []
     for offset, size, site in reviewed_sites:
         if site.get("branch") != "b_w":
@@ -187,10 +268,14 @@ def patch_bootloader(
             raise BuildError(
                 f"{site['name']}: stock span SHA-256 differs from config"
             )
-        function = functions.get(site["target_function"])
-        if function is None:
-            raise BuildError(f"missing function {site['target_function']}")
-        target = overlay_address + int(function["offset"])
+        target_function = site["target_function"]
+        function = functions.get(target_function)
+        if function is not None:
+            target = overlay_address + int(function["offset"])
+        elif target_function in cave_targets:
+            target = cave_targets[target_function]
+        else:
+            raise BuildError(f"missing function {target_function}")
         redirect = encode_thumb_b_w(address, target)
         replacement = redirect + b"\x00\xbf" * ((size - 4) // 2)
         decoded = decode_thumb_branch(address, redirect, link=False)
@@ -208,9 +293,74 @@ def patch_bootloader(
                 "replacement_hex": replacement.hex(),
                 "branch": "b_w",
                 "displacement": target - (address + 4),
-                "target_function": site["target_function"],
+                "target_function": target_function,
                 "target_address": target,
                 "target_address_hex": f"0x{target:08X}",
+            }
+        )
+
+    cave_plans: list[dict[str, Any]] = []
+    cave_ranges: list[tuple[int, int, str]] = []
+    nop_halfword = b"\x00\xbf"
+    for leaf, report in cave_leaves:
+        extraction = report["extraction"]
+        stock = report.get("stock")
+        function_name = extraction["function"]
+        runtime_address = int(extraction["runtime_address"])
+        end_exclusive = runtime_address + len(leaf)
+        if not isinstance(stock, dict):
+            raise BuildError(f"cave leaf {function_name} lacks stock pins")
+        if stock.get("size") != len(leaf):
+            raise BuildError(
+                f"cave leaf {function_name} stock size differs from leaf size"
+            )
+        if runtime_address & 3 or len(leaf) & 1:
+            raise BuildError(
+                f"cave leaf {function_name} must use word-aligned even placement"
+            )
+        enclosing = [
+            site for site in patched_sites
+            if int(site["runtime_address"]) + 4 <= runtime_address
+            and end_exclusive <= (
+                int(site["runtime_address"]) + int(site["expected_size"])
+            )
+        ]
+        if len(enclosing) != 1:
+            raise BuildError(
+                f"cave leaf {function_name} must lie wholly within exactly one "
+                "authenticated source-entry NOP tail"
+            )
+        for other_start, other_end, other_name in cave_ranges:
+            if runtime_address < other_end and other_start < end_exclusive:
+                raise BuildError(
+                    f"cave leaf {function_name} overlaps cave leaf {other_name}"
+                )
+        offset = runtime_address - run_base
+        observed = bytes(patched[offset:offset + len(leaf)])
+        if observed != nop_halfword * (len(leaf) // 2):
+            raise BuildError(
+                f"cave leaf {function_name} placement is not generated NOP fill"
+            )
+        observed_digest = sha256(observed)
+        if observed_digest != stock.get("sha256"):
+            raise BuildError(
+                f"cave leaf {function_name} generated-NOP SHA-256 differs"
+            )
+        patched[offset:offset + len(leaf)] = leaf
+        cave_ranges.append((runtime_address, end_exclusive, function_name))
+        cave_plans.append(
+            {
+                "function": function_name,
+                "runtime_address": runtime_address,
+                "runtime_address_hex": f"0x{runtime_address:08X}",
+                "end_exclusive": end_exclusive,
+                "end_exclusive_hex": f"0x{end_exclusive:08X}",
+                "file_offset": offset,
+                "size": len(leaf),
+                "stock_sha256": observed_digest,
+                "replacement_sha256": sha256(leaf),
+                "replacement_hex": leaf.hex(),
+                "enclosing_patch_site": enclosing[0]["name"],
             }
         )
 
@@ -237,6 +387,10 @@ def patch_bootloader(
         "patched_sites": patched_sites,
         "vector": vector,
     }
+    if cave_plans:
+        details["patched_cave_leaves"] = cave_plans
+    if in_place_plans:
+        details["patched_in_place_leaves"] = in_place_plans
     return bytes(patched), details
 
 
@@ -250,7 +404,14 @@ def provider_regions(
 ) -> list[dict[str, Any]]:
     regions: list[dict[str, Any]] = []
     cursor = 0
-    sites = sorted(details["patched_sites"], key=lambda item: item["file_offset"])
+    sites = sorted(
+        details["patched_sites"] + details.get("patched_in_place_leaves", []),
+        key=lambda item: item["file_offset"],
+    )
+    caves = sorted(
+        details.get("patched_cave_leaves", []),
+        key=lambda item: item["file_offset"],
+    )
     for site in sites:
         offset = int(site["file_offset"])
         size = int(site["expected_size"])
@@ -266,15 +427,72 @@ def provider_regions(
                     "address_status": "official_blob",
                 }
             )
-        regions.append(
-            {
-                "name": f"{site['name']}_source_redirect",
-                "file_offset": offset,
-                "size": size,
-                "target_address": site["runtime_address"],
-                "address_status": "generated_source_entry_replacement",
-            }
-        )
+        if site.get("region_kind") == "in_place":
+            regions.append(
+                {
+                    "name": site["name"],
+                    "file_offset": offset,
+                    "size": size,
+                    "target_address": details["run_base"] + offset,
+                    "address_status": "source_compiled",
+                }
+            )
+            cursor = offset + size
+            continue
+        site_caves = [
+            cave for cave in caves
+            if offset <= int(cave["file_offset"])
+            and int(cave["file_offset"]) + int(cave["size"]) <= offset + size
+        ]
+        site_cursor = offset
+        for cave_index, cave in enumerate(site_caves):
+            cave_offset = int(cave["file_offset"])
+            cave_size = int(cave["size"])
+            if cave_offset < site_cursor:
+                raise BuildError("bootloader cave-leaf regions overlap")
+            if cave_offset > site_cursor:
+                regions.append(
+                    {
+                        "name": (
+                            f"{site['name']}_source_redirect"
+                            if cave_index == 0
+                            else (
+                                f"{site['name']}_source_redirect_"
+                                f"between_caves_{cave_index}"
+                            )
+                        ),
+                        "file_offset": site_cursor,
+                        "size": cave_offset - site_cursor,
+                        "target_address": details["run_base"] + site_cursor,
+                        "address_status": (
+                            "generated_source_entry_replacement"
+                        ),
+                    }
+                )
+            regions.append(
+                {
+                    "name": f"{cave['function']}_source_cave",
+                    "file_offset": cave_offset,
+                    "size": cave_size,
+                    "target_address": cave["runtime_address"],
+                    "address_status": "source_compiled",
+                }
+            )
+            site_cursor = cave_offset + cave_size
+        if site_cursor < offset + size:
+            regions.append(
+                {
+                    "name": (
+                        f"{site['name']}_source_redirect_after_caves"
+                        if site_caves
+                        else f"{site['name']}_source_redirect"
+                    ),
+                    "file_offset": site_cursor,
+                    "size": offset + size - site_cursor,
+                    "target_address": details["run_base"] + site_cursor,
+                    "address_status": "generated_source_entry_replacement",
+                }
+            )
         cursor = offset + size
     if cursor < base_size:
         regions.append(
@@ -434,6 +652,30 @@ def build(
         raise BuildError("every relocated leaf requires a function name")
     if len(set(relocated_function_names)) != len(relocated_function_names):
         raise BuildError("relocated leaf function names must be unique")
+    cave_leaf_configs = config.get("cave_leaves", [])
+    if (
+        not isinstance(cave_leaf_configs, list)
+        or any(not isinstance(item, dict) for item in cave_leaf_configs)
+    ):
+        raise BuildError("cave_leaves must be a list of records")
+    cave_function_names = [item.get("function") for item in cave_leaf_configs]
+    if any(not isinstance(name, str) for name in cave_function_names):
+        raise BuildError("every cave leaf requires a function name")
+    if len(set(cave_function_names)) != len(cave_function_names):
+        raise BuildError("cave leaf function names must be unique")
+    in_place_leaf_configs = config.get("in_place_leaves", [])
+    if (
+        not isinstance(in_place_leaf_configs, list)
+        or any(not isinstance(item, dict) for item in in_place_leaf_configs)
+    ):
+        raise BuildError("in_place_leaves must be a list of records")
+    in_place_function_names = [
+        item.get("function") for item in in_place_leaf_configs
+    ]
+    if any(not isinstance(name, str) for name in in_place_function_names):
+        raise BuildError("every in-place leaf requires a function name")
+    if len(set(in_place_function_names)) != len(in_place_function_names):
+        raise BuildError("in-place leaf function names must be unique")
     configured_functions = config.get("functions")
     if (
         not isinstance(configured_functions, dict)
@@ -469,6 +711,27 @@ def build(
             "bootloader functions cannot be both isolated and relocated "
             f"leaves: {sorted(ambiguous_appended_functions)}"
         )
+    ambiguous_cave_functions = set(cave_function_names) & (
+        set(configured_functions)
+        | set(isolated_function_names)
+        | set(relocated_function_names)
+    )
+    if ambiguous_cave_functions:
+        raise BuildError(
+            "cave leaves cannot also be overlay functions: "
+            f"{sorted(ambiguous_cave_functions)}"
+        )
+    ambiguous_in_place_functions = set(in_place_function_names) & (
+        set(configured_functions)
+        | set(isolated_function_names)
+        | set(relocated_function_names)
+        | set(cave_function_names)
+    )
+    if ambiguous_in_place_functions:
+        raise BuildError(
+            "in-place leaves cannot also be overlay or cave functions: "
+            f"{sorted(ambiguous_in_place_functions)}"
+        )
     primary_functions = set(configured_functions) - set(
         isolated_function_names
     ) - set(relocated_function_names)
@@ -495,14 +758,20 @@ def build(
         if isinstance(item.get("source"), dict)
         and isinstance(item["source"].get("path"), str)
     }
-    ambiguous_relocated_sources = (
-        primary_source_paths & relocated_source_paths
+    cave_source_paths = {
+        resolve_below(root, item["source"]["path"]).resolve()
+        for item in cave_leaf_configs
+        if isinstance(item.get("source"), dict)
+        and isinstance(item["source"].get("path"), str)
+    }
+    ambiguous_leaf_sources = primary_source_paths & (
+        relocated_source_paths | cave_source_paths
     )
-    if ambiguous_relocated_sources:
+    if ambiguous_leaf_sources:
         raise BuildError(
-            "relocated leaf source cannot enter the primary combined "
+            "relocated or cave leaf source cannot enter the primary combined "
             "translation unit: "
-            f"{sorted(str(path) for path in ambiguous_relocated_sources)}"
+            f"{sorted(str(path) for path in ambiguous_leaf_sources)}"
         )
     source_paths: list[Path] = []
     source_records: list[dict[str, Any]] = []
@@ -609,6 +878,91 @@ def build(
             toolchain_profile=resolved_profile,
             record=record_profile,
         )
+        cave_leaves: list[tuple[bytes, dict[str, Any]]] = []
+        in_place_leaves: list[tuple[bytes, dict[str, Any]]] = []
+        overlay_runtime_address = int(config["placement"]["runtime_address"])
+        for index, configured_cave in enumerate(cave_leaf_configs):
+            cave_config = resolve_leaf_profile(
+                configured_cave,
+                resolved_profile,
+                record=record_profile,
+            )
+            resolved_relocations: list[dict[str, Any]] = []
+            for relocation in cave_config.get("relocations", []):
+                if not isinstance(relocation, dict):
+                    raise BuildError("cave leaf relocation must be a record")
+                target_function = relocation.get("target_function")
+                if target_function is None:
+                    resolved_relocations.append(dict(relocation))
+                    continue
+                if not isinstance(target_function, str):
+                    raise BuildError(
+                        "cave leaf relocation target_function must be a name"
+                    )
+                target = functions.get(target_function)
+                if target is None:
+                    raise BuildError(
+                        f"cave leaf relocation target {target_function} is missing"
+                    )
+                if "target_address" in relocation:
+                    raise BuildError(
+                        "cave leaf relocation cannot combine target_function "
+                        "and target_address"
+                    )
+                resolved_relocations.append(
+                    {
+                        **relocation,
+                        "target_address": (
+                            overlay_runtime_address + int(target["offset"])
+                        ),
+                    }
+                )
+                resolved_relocations[-1].pop("target_function")
+            cave_config = {
+                **cave_config,
+                "relocations": resolved_relocations,
+                "toolchain_profiles": {},
+            }
+            cave_leaves.append(
+                compile_in_place_leaf(
+                    root=root,
+                    clang=clang,
+                    leaf_config=cave_config,
+                    object_path=temporary_root / f"cave-leaf-{index}.o",
+                    toolchain_profile=DEFAULT_TOOLCHAIN_PROFILE,
+                    record=record_profile,
+                    allowed_defined_relocation_targets=frozenset(
+                        relocation["symbol"]
+                        for relocation in resolved_relocations
+                        if isinstance(relocation.get("symbol"), str)
+                    ),
+                )
+            )
+        for index, configured_leaf in enumerate(in_place_leaf_configs):
+            leaf_config = resolve_leaf_profile(
+                configured_leaf,
+                resolved_profile,
+                record=record_profile,
+            )
+            leaf_config = {
+                **leaf_config,
+                "toolchain_profiles": {},
+            }
+            in_place_leaves.append(
+                compile_in_place_leaf(
+                    root=root,
+                    clang=clang,
+                    leaf_config=leaf_config,
+                    object_path=temporary_root / f"in-place-leaf-{index}.o",
+                    toolchain_profile=DEFAULT_TOOLCHAIN_PROFILE,
+                    record=record_profile,
+                    allowed_defined_relocation_targets=frozenset(
+                        relocation["symbol"]
+                        for relocation in leaf_config.get("relocations", [])
+                        if isinstance(relocation.get("symbol"), str)
+                    ),
+                )
+            )
 
     # The compiled function ABI (offsets/sizes within the overlay) is
     # toolchain-specific.  Under a non-canonical profile, verify against that
@@ -642,6 +996,8 @@ def build(
         overlay=overlay,
         functions=functions,
         config=config,
+        cave_leaves=cave_leaves,
+        in_place_leaves=in_place_leaves,
     )
     provider_digest = sha256(provider)
     if not record_profile:
@@ -685,6 +1041,34 @@ def build(
         int(report["placement"]["size"])
         for report in isolated_leaf_reports + relocated_leaf_reports
     )
+    patched_cave_leaves = details.get("patched_cave_leaves", [])
+    if len(patched_cave_leaves) != len(cave_leaves):
+        raise BuildError("cave leaf patch report count changed")
+    cave_leaf_reports: list[dict[str, Any]] = []
+    for (_leaf, compile_report), placement in zip(
+        cave_leaves, patched_cave_leaves
+    ):
+        if compile_report["extraction"]["function"] != placement["function"]:
+            raise BuildError("cave leaf patch report order changed")
+        cave_leaf_reports.append({**compile_report, "placement": placement})
+    source_owned_cave_bytes = sum(
+        int(report["placement"]["size"]) for report in cave_leaf_reports
+    )
+    source_owned_bytes += source_owned_cave_bytes
+    patched_in_place_leaves = details.get("patched_in_place_leaves", [])
+    if len(patched_in_place_leaves) != len(in_place_leaves):
+        raise BuildError("in-place leaf patch report count changed")
+    in_place_leaf_reports: list[dict[str, Any]] = []
+    for (_leaf, compile_report), placement in zip(
+        in_place_leaves, patched_in_place_leaves
+    ):
+        if compile_report["extraction"]["function"] != placement["function"]:
+            raise BuildError("in-place leaf patch report order changed")
+        in_place_leaf_reports.append({**compile_report, "placement": placement})
+    source_owned_in_place_bytes = sum(
+        int(report["placement"]["size"]) for report in in_place_leaf_reports
+    )
+    source_owned_bytes += source_owned_in_place_bytes
     provider_contract = {
         "schema_version": 1,
         "component": "apollo_bootloader",
@@ -740,10 +1124,11 @@ def build(
             "opaque_base_bytes": (
                 len(base)
                 - sum(site["expected_size"] for site in details["patched_sites"])
+                - source_owned_in_place_bytes
             ),
             "generated_patch_site_bytes": sum(
                 site["expected_size"] for site in details["patched_sites"]
-            ),
+            ) - source_owned_cave_bytes,
             "generated_alignment_bytes": (
                 details["padding_size"]
                 + generated_isolated_alignment_bytes
@@ -759,6 +1144,16 @@ def build(
                 generated_relocated_alignment_bytes
             ),
             "source_owned_bytes": source_owned_bytes,
+            **(
+                {"source_owned_cave_bytes": source_owned_cave_bytes}
+                if cave_leaf_reports
+                else {}
+            ),
+            **(
+                {"source_owned_in_place_bytes": source_owned_in_place_bytes}
+                if in_place_leaf_reports
+                else {}
+            ),
         },
         "provider_contract": provider_contract,
         "safety": {
@@ -772,6 +1167,10 @@ def build(
         report["isolated_leaves"] = isolated_leaf_reports
     if relocated_leaf_reports:
         report["relocated_leaves"] = relocated_leaf_reports
+    if cave_leaf_reports:
+        report["cave_leaves"] = cave_leaf_reports
+    if in_place_leaf_reports:
+        report["in_place_leaves"] = in_place_leaf_reports
     if len(source_records) == 1:
         report["source"] = source_records[0]
     atomic_write_json(output_dir / "build-report.json", report)

@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* Host behavior fixture for the clean-room charging-case protocol. */
 #include <stdint.h>
 #include <string.h>

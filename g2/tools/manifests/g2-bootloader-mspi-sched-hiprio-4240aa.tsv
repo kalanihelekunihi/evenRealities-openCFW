@@ -1,0 +1,11 @@
+kind	name	start	end	size	sha256	disposition	provider	license_status	evidence
+function	sched_hiprio	0x004240aa	0x00424120	118	dfbd51c61eba1ea51418a1faeaaa99df5aebb0ea900ed157a0c3a55a7b28d144	exact_dual_profile_candidate	AmbiqSuite 5.1.0 semantics with reviewed target adapter	BSD-3-Clause	authenticated source identity, state layout, literal, calls, target relocations, and stock bytes close
+caller	queue_transaction_call	0x00425f92	0x00425f96	4	-	retained_caller	AmbiqSuite 5.1.0 MSPI nonblocking transfer path	BSD-3-Clause	direct BL reaches sched_hiprio
+provider	critical_save	0x0041b8ec	0x0041b8f8	12	-	retained_provider	G2 PRIMASK critical-section entry	firmware provenance	target preserves authenticated direct BL and inline PRIMASK restore
+provider	command_queue_pause	0x00423fb8	0x0042403e	134	ff20411c8e4283f16d82cb8373e95004d648e4c03d151ba89bf43ff7d58a2794	source_owned_provider	AmbiqSuite 5.1.0 source-equivalent adapter	BSD-3-Clause	production target open_cfw_bootloader_mspi_cq_pause_423fb8 is exact-routed
+provider	program_dma	0x0042403e	0x004240aa	108	d075d73aba138735bc9229bcf8672cb6a1c2fadec21985d2159043534ad130e1	source_owned_provider	AmbiqSuite 5.1.0 source-equivalent adapter	BSD-3-Clause	production target open_cfw_bootloader_mspi_program_dma_42403e is exact-routed
+literal	mspi0_base	0x00424bd8	0x00424bdc	4	-	authenticated_literal	Apollo510 CMSIS MSPI0_BASE	Apache-2.0	value 0x40060000
+abi	state_fields	0x00000004	0x00000844	-	-	authenticated_layout	AmbiqSuite 5.1.0 am_hal_mspi_state_t	BSD-3-Clause	module +0x4, transaction interrupt +0x24, high-priority flag +0x83c, pending count +0x840
+abi	mspi_interrupt_registers	0x40060200	0x4006020c	-	-	authenticated_layout	Apollo510 CMSIS MSPI register block	Apache-2.0	INTEN +0x200, INTCLR +0x208, DMACMP bit 0x40
+successor	mspi_device_configure	0x00424120	0x0042488e	1902	3b95c5af6c3c2140cc4e1522a1f284ae31825e4e35ae6c2427e0edba41774818	next_sequential_frontier	AmbiqSuite 5.1.0 mspi_device_configure	BSD-3-Clause	not yet admitted
+hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project policy	future PRIMASK, CQ, DMA, MMIO, interrupt, concurrency, and cold-boot evidence remains required

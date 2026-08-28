@@ -112,23 +112,23 @@ UPSTREAM_FUNCTION_SHA256 = (
     "4c0d43181467f956076ad7906a9b5ec2"
 )
 
-PRODUCTION_OFFSET = 113_932
-PRODUCTION_ADDRESS = 0x007B_0030
+PRODUCTION_OFFSET = 173_780
+PRODUCTION_ADDRESS = 0x007B_E9F8
 PRODUCTION_BYTES_SHA256 = (
     "88edbdea558812d213013a8d319a09c6"
     "3dafa86ec91a7640f427c72c77552da1"
 )
-PRODUCTION_OVERLAY_SIZE = 167_426
+PRODUCTION_OVERLAY_SIZE = 429_058
 PRODUCTION_OVERLAY_SHA256 = (
-    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
 )
-PRODUCTION_COMPONENT_SIZE = 3_690_822
+PRODUCTION_COMPONENT_SIZE = 3_952_454
 PRODUCTION_COMPONENT_SHA256 = (
-    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
 )
-PACKAGE_SIZE = 4_469_316
+PACKAGE_SIZE = 4_745_526
 PACKAGE_SHA256 = (
-    "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"
+    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
 )
 
 
@@ -469,7 +469,7 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
                 "alignment": 4,
                 "padding_before": 0,
                 "runtime_address": PRODUCTION_ADDRESS,
-                "runtime_address_hex": "0x007B0030",
+                "runtime_address_hex": "0x007BE9F8",
             },
         )
         extraction = leaf["extraction"]
@@ -531,10 +531,10 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 121_634,
-                "opaque_base_bytes": 3_401_548,
-                "replaced_stock_function_bytes": 121_812,
-                "source_owned_bytes": 165_622,
+                "generated_patch_site_bytes": 409_066,
+                "opaque_base_bytes": 3_111_914,
+                "replaced_stock_function_bytes": 409_246,
+                "source_owned_bytes": 431_334,
             },
         )
 

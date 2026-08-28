@@ -1,0 +1,11 @@
+kind	name	start	end	size	sha256	disposition	provider	license_status	evidence
+function	program_dma	0x0042403e	0x004240aa	108	d075d73aba138735bc9229bcf8672cb6a1c2fadec21985d2159043534ad130e1	exact_dual_profile_candidate	AmbiqSuite 5.1.0 semantics with reviewed target adapter	BSD-3-Clause	authenticated source identity, ABI, literal, call, target relocation, and stock bytes close
+caller	sched_hiprio_call	0x0042410e	0x00424112	4	-	retained_caller	AmbiqSuite 5.1.0 sched_hiprio	BSD-3-Clause	direct BL reaches program_dma
+caller	interrupt_service_call	0x00426620	0x00426624	4	-	retained_caller	AmbiqSuite 5.1.0 am_hal_mspi_interrupt_service	BSD-3-Clause	direct BL reaches program_dma
+provider	clock_request	0x004222f0	0x004223ce	222	-	source_owned_provider	clean-room G2 mode/clock enable route	GPL-3.0-or-later	production target open_cfw_bootloader_mode_enable_route_4222f0 is already exact-routed
+literal	mspi0_base	0x00424bd8	0x00424bdc	4	-	authenticated_literal	Apollo510 CMSIS MSPI0_BASE	Apache-2.0	value 0x40060000
+abi	state_fields	0x00000004	0x00000858	-	-	authenticated_layout	AmbiqSuite 5.1.0 am_hal_mspi_state_t	BSD-3-Clause	module +0x4, max HP +0x848, last processed +0x850, transaction pointer +0x854
+abi	dma_entry	0x00000000	0x00000018	24	-	authenticated_layout	AmbiqSuite 5.1.0 am_hal_mspi_dma_entry_t	BSD-3-Clause	four register values followed by callback and context
+abi	mspi_registers	0x40060100	0x40060114	-	-	authenticated_layout	Apollo510 CMSIS MSPI register block	Apache-2.0	DMACFG +0x100, DMATARGADDR +0x108, DMADEVADDR +0x10c, DMATOTCOUNT +0x110
+successor	sched_hiprio	0x004240aa	0x00424120	118	dfbd51c61eba1ea51418a1faeaaa99df5aebb0ea900ed157a0c3a55a7b28d144	next_sequential_frontier	AmbiqSuite 5.1.0 sched_hiprio	BSD-3-Clause	not admitted by Wave 8
+hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project policy	future clock-request, DMA MMIO, queue indexing, concurrency, interrupt, and cold-boot evidence remains required

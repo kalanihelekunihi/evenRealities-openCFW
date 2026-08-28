@@ -205,10 +205,10 @@ LINUX_RELOCATED_SHA256 = (
     "8b77644c131e180db2e682d32fbc1fab"
 )
 LINUX_TARGET_ALIGNMENT = 4
-LINUX_RUNTIME = 0x007B_323C
+LINUX_RUNTIME = 0x007C_1BA4
 LINUX_PLACEMENT = LINUX_RUNTIME - OVERLAY_RUNTIME_ADDRESS
-APPLE_PLACEMENT = 124_916
-APPLE_RUNTIME = 0x007B_2B18
+APPLE_PLACEMENT = 184_764
+APPLE_RUNTIME = 0x007C_14E0
 APPLE_RELOCATED_SHA256 = (
     "1b181a82adbbb72dc6fc09b1b70dd48f"
     "4c0eefdf25a8c4e71701710cb12dae3f"
@@ -231,16 +231,16 @@ LINUX_PATCH_SHA256 = (
 )
 LINUX_AGGREGATE = {
     "overlay": (
-        145_208,
-        "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
+        212_664,
+        "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
     ),
     "component": (
-        3_668_604,
-        "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
+        3_736_060,
+        "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
     ),
     "package": (
-        4_447_098,
-        "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e",
+        4_529_116,
+        "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
     ),
 }
 
@@ -254,7 +254,7 @@ STAGED_CONSUMER_PINS = {
     ROOT / "components/apollo_main/core_overlay/EVIDENCE.md": "b989b422586b2860a33670eb7642c3721e1d96fa545bafcc2111b05a0c121b31",
     ROOT / "third_party/nanopb/README.openCFW.md": "bd70ff8d92c38cad8bde2a4356f7d56f9b02994239ff09453f2f435b44fdb672",
     ROOT / "docs/memory-map.md": "6087dd8bd48a764e15e623b56298c16e40992a6aa3cd445319bff308d078f859",
-    ROOT / "docs/source-coverage.md": "b3f377baeb0c386a3af36b8c26a00826e112d0e154c2489744b9b8e4bf868f56",
+    ROOT / "docs/source-coverage.md": "80d83ac187e1aa99d18e30350ea609f2ea7035801124ca22977b436a9bc119ee",
     ROOT / "docs/upstream-inventory.md": "f9ad283c729e6ae136ab6846d9d6134ff16e4280d3019f6deb2c3b83921c73e9",
     ROOT / "docs/linux-reproducible-build.md": "42a08943723dfb9c1a531601469a94dc15320286c44f0aa8c55d42c05c1156c3",
 }

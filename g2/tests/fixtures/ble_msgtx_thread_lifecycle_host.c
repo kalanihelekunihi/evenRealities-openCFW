@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Native state and backend fixture for BLE message-transmit setup and thread
  * lifecycle.

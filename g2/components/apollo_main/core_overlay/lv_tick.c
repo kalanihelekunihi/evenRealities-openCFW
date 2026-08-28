@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacements for the G2 2.2.6.10 LVGL tick increment, getter, and
  * wrap-safe elapsed-time helpers at 0x00473474...0x004734BB.

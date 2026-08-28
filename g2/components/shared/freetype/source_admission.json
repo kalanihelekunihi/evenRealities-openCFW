@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "component": "g2-freetype-truetype",
+  "license": "FTL",
+  "upstream": {
+    "version": "2.9.1",
+    "tag": "VER-2-9-1",
+    "commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+    "snapshot_verifier": "third_party/freetype/verify_snapshot.py"
+  },
+  "evidence": {
+    "analyzer": "research/candidates/freetype/analyze_truetype_candidate.py",
+    "class_callbacks": 13,
+    "private_helpers": 74,
+    "interpreter_functions": 161,
+    "admitted_functions": 248,
+    "admitted_bytes": 38828,
+    "unresolved_dispatch_targets": 0
+  },
+  "build": {
+    "community_source": true,
+    "cortex_m55_zero_unresolved": true,
+    "production_overlay": false,
+    "production_overlay_gate": "requires a pinned IAR-compatible code-generation/link-placement recipe and byte-exact or reviewed relocated-leaf qualification"
+  },
+  "policy": {
+    "FT_DEBUG_HOOK_TRUETYPE": "null-only; no community setter; TT_RunIns fallback"
+  }
+}

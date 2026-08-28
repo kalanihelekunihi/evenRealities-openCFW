@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio record timestamp-update wrapper matched to stock
  * AppDbUpdateRecordTimestamp at 0x0047C084.

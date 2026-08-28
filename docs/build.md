@@ -90,6 +90,8 @@ the overlay and component digests.
 Other useful G2 targets:
 
 ```sh
+./make.sh g2-community-source # vendor-byte-free deterministic source archive
+./make.sh g2-community-smoke  # hydrate/build in a fresh extracted archive
 make -C g2 vendor-snapshots   # authenticate every vendored upstream, offline
 make -C g2 upstream-audits    # read-only closure audits over the stock image
 make -C g2 verify             # build + upstream audits
@@ -97,6 +99,13 @@ make -C g2 test               # the full test suite
 make -C g2 inspect            # inspect the built source package
 make -C g2 clean
 ```
+
+The community targets do not redistribute the required official payload. The
+bundle contains source, recipes, manifests, and license texts; its local
+preparation step authenticates a recipient-supplied `s200_v2.2.6.10` package.
+The smoke target performs only filesystem/compiler work and never signs,
+flashes, resets, or contacts hardware. See
+[`../g2/docs/community-source-distribution.md`](../g2/docs/community-source-distribution.md).
 
 The Makefile also exposes roughly two hundred per-closure targets — one per
 subsystem under analysis (`make -C g2 lvgl-snapshot`,

@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /*************************************************************************************************/
 /* Clean-room G2 Cordio vendor reset sequence over authenticated public HCI command seams. */
 /*************************************************************************************************/

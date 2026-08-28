@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of the G2 FreeRTOS+CLI console task.  This
  * candidate is deliberately absent from every production overlay/manifest.

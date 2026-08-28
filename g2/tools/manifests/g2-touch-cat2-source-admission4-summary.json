@@ -1,0 +1,47 @@
+{
+  "adapter": {
+    "path": "components/shared/touch/runtime_touch_cat2_adapters.c",
+    "sha256": "0504c79d87d1c79d3a953699568c6b73e86c061696c60f490d8c83e9025cbb3d",
+    "target_object_bytes": 3332
+  },
+  "analysis_mode": "offline exact public symbol/location/register/caller signature and Cortex-M0+ compile gate; no hardware or MMIO execution",
+  "component": "G2 touch CAT2 source admission batch 4",
+  "exclusions": "remaining SCB/device/system entries plus mixed CAPSENSE/CAT2, Em_EEPROM EULA, application/startup, and system/DFU batches unchanged",
+  "integration": "isolated Apache typed routes; GPIO/SRSS/PERI MMIO providers unavailable and fail-closed on host",
+  "metrics": {
+    "admitted_functions": 19,
+    "cat2_gap_after": 10,
+    "cat2_gap_before": 29,
+    "gpio_inline_functions": 4,
+    "location_digest": "e9d5639ad89e99dea8e818128b0241ac783f018082f815e34c7deda694a1acec",
+    "row_digest": "8367deeecf6856157a281c1bf14e8ec646bf9d35e3b609aad1867e8b299a8b8c",
+    "semantic_gap_after": 175,
+    "semantic_gap_before": 194,
+    "sysclk_functions": 15,
+    "unsafe_batch_admissions": 0
+  },
+  "provider_sources": {
+    "commit": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+    "drivers/include/cy_gpio.h": "b97bb3ca2eeb92940a63a4bc065310cad2dad46f275646c514475f2ce05d08f0",
+    "drivers/include/cy_sysclk.h": "b23362eb4001ce5ccf648b2d7a9fe1c7af17568d102acfa309df679d363df574",
+    "drivers/source/cy_sysclk.c": "fa7d3221a4a52f4cae68d291237c57541448539db05ddf0ba653fd0a04c08594"
+  },
+  "remaining": {
+    "cat2_candidates": 10,
+    "total_semantic_source_gap": 175
+  },
+  "remaining_entries": [
+    "0x5CA0",
+    "0x5CD0",
+    "0x6044",
+    "0x60C4",
+    "0x6210",
+    "0x62B8",
+    "0x6448",
+    "0x64FC",
+    "0x7038",
+    "0x70B0"
+  ],
+  "row_count": 19,
+  "schema_version": 1
+}

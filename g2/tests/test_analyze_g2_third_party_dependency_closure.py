@@ -306,7 +306,7 @@ class ThirdPartyDependencyClosureTests(unittest.TestCase):
         self.assertEqual(report["cross_checks"]["sensor_hub_embedded_third_party_definitions"], 0)
         self.assertIsNone(report["cross_checks"]["sensor_hub_embedded_sensor_fusion_library"])
         self.assertTrue(report["cross_checks"]["sensor_hub_routed"])
-        self.assertEqual(report["cross_checks"]["sensor_hub_hardware_validation"], "blocked_unavailable_physical_evidence")
+        self.assertEqual(report["cross_checks"]["sensor_hub_hardware_validation"], "deferred by project direction")
         self.assertEqual(tuple(report["cross_checks"][f"fw_event_loop_{x}_calls"] for x in ("easylogger","cmsis_freertos","freertos_critical_port","bounded_first_party_indirect")), (80,20,4,1))
         self.assertEqual(report["cross_checks"]["fw_event_loop_restored_functions"], 1)
         self.assertEqual(report["cross_checks"]["fw_event_loop_embedded_third_party_definitions"], 0)

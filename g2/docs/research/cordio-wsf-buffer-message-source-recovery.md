@@ -133,7 +133,7 @@ SHA-256 `f961c25e…77e`. Its 21 inner checks authenticate the comparison ledger
 flags, shims, source identities, provider/include closure, and timings. It
 contains neither proprietary source nor object/disassembly caches.
 
-The buffer candidate is independently expressed GPL-3.0-only clean-room code;
+The buffer candidate is independently expressed MIT clean-room code;
 the message candidate uses the Apache-2.0 public route. Focused tests compile
 the buffer/message/queue closure for Cortex-M4 with `-Werror`, validate pool
 construction, first-fit fallback, marker transitions, failure handling,

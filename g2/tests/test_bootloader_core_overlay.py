@@ -80,10 +80,7 @@ DISK_VERSION_CALLERS = (
     (0x00414D5A, "fcf737f8"),
 )
 MSPI_INTERRUPT_CLEAR_ADDRESS = 0x00426506
-MSPI_INTERRUPT_CLEAR_CALLERS = (
-    (0x0041FE1A, "06f074fb"),
-    (0x004203CC, "06f09bf8"),
-)
+MSPI_INTERRUPT_CLEAR_CALLERS = ()
 OVERLAY_ADDRESS = 0x00434478
 SCMP_TARGET = OVERLAY_ADDRESS
 ALLOC_TARGET = 0x0043447C
@@ -135,6 +132,85 @@ BOOT_PLATFORM_SETUP_ADDRESS = 0x0041FA50
 BOOT_GUARDED_TEARDOWN_ADDRESS = 0x0041FA98
 BOOT_PIN_GROUPS_ADDRESS = 0x0041FADC
 BOOT_ALLOCATOR_INIT_ADDRESS = 0x0041FD70
+BOOT_NVIC_ENABLE_ADDRESS = 0x0041FDC0
+BOOT_NVIC_PRIORITY_ADDRESS = 0x0041FDDE
+BOOT_MSPI_ISR_ADDRESS = 0x0041FE06
+BOOT_MSPI_ENABLE_ADDRESS = 0x0041FE28
+BOOT_MSPI_DISABLE_ADDRESS = 0x0041FE48
+BOOT_EVENT_FLAGS_INIT_ADDRESS = 0x0041FE62
+BOOT_EVENT_FLAGS_ACQUIRE_ADDRESS = 0x0041FE9C
+BOOT_EVENT_FLAGS_RELEASE_ADDRESS = 0x0041FED4
+BOOT_MSPI_GUARD_ENTER_ADDRESS = 0x0041FF08
+BOOT_MSPI_GUARD_ENTER_TARGET = 0x00436D14
+BOOT_MSPI_GUARD_EXIT_ADDRESS = 0x0041FF1E
+BOOT_MSPI_GUARD_EXIT_TARGET = 0x00436D38
+BOOT_MSPI_XIP_CONFIG_ADDRESS = 0x0041FF34
+BOOT_MSPI_XIP_CONFIG_TARGET = 0x00436D58
+BOOT_LONGEST_ONES_RUN_ADDRESS = 0x0041FF60
+BOOT_LONGEST_ONES_RUN_TARGET = 0x00436D7C
+BOOT_LONGEST_ONES_CENTER_ADDRESS = 0x0041FF74
+BOOT_LONGEST_ONES_CENTER_TARGET = 0x00436D8C
+BOOT_MSPI_TIMING_SCAN_ADDRESS = 0x00420002
+BOOT_MSPI_TIMING_SCAN_TARGET = 0x00436E0C
+BOOT_MSPI_TIMING_AUTO_ADDRESS = 0x004201BA
+BOOT_MSPI_TIMING_AUTO_TARGET = 0x00436FB0
+BOOT_MSPI_LOW_LEVEL_INIT_ADDRESS = 0x00420254
+BOOT_MSPI_LOW_LEVEL_INIT_TARGET = 0x0043705C
+BOOT_MSPI_DRIVER_INIT_ADDRESS = 0x00420476
+BOOT_MSPI_DRIVER_INIT_TARGET = 0x00437248
+BOOT_MSPI_SOFT_RESET_ADDRESS = 0x0042052A
+BOOT_MSPI_SOFT_RESET_TARGET = 0x00437314
+BOOT_MSPI_READ_ID_ADDRESS = 0x0042059E
+BOOT_MSPI_READ_ID_TARGET = 0x0043739C
+BOOT_MSPI_READ_TRANSFER_ADDRESS = 0x004205F4
+BOOT_MSPI_READ_TRANSFER_TARGET = 0x00437400
+BOOT_MSPI_WRITE_TRANSFER_ADDRESS = 0x0042069E
+BOOT_MSPI_WRITE_TRANSFER_TARGET = 0x004374AC
+BOOT_MSPI_BUSY_STATUS_ADDRESS = 0x0042074E
+BOOT_MSPI_BUSY_STATUS_TARGET = 0x00437540
+BOOT_MSPI_WAIT_READY_ADDRESS = 0x004207A2
+BOOT_MSPI_WAIT_READY_TARGET = 0x00437598
+BOOT_MSPI_WAIT_READY_DEFAULT_ADDRESS = 0x004207F4
+BOOT_MSPI_WAIT_READY_DEFAULT_TARGET = 0x004375F0
+BOOT_FS_DIRECTORIES_ADDRESS = 0x004210C8
+BOOT_FS_DIRECTORIES_TARGET = 0x00437D78
+BOOT_LITTLEFS_FORMAT_ADDRESS = 0x004211B0
+BOOT_LITTLEFS_FORMAT_TARGET = 0x00437E54
+BOOT_LITTLEFS_INIT_ADDRESS = 0x00421210
+BOOT_LITTLEFS_INIT_TARGET = 0x00437EC0
+BOOT_LITTLEFS_READ_ADDRESS = 0x004212D8
+BOOT_LITTLEFS_READ_TARGET = 0x00437FC4
+BOOT_LITTLEFS_PROGRAM_ADDRESS = 0x00421310
+BOOT_LITTLEFS_PROGRAM_TARGET = 0x00421214
+BOOT_LITTLEFS_PROGRAM_CAVE = bytes.fromhex(
+    "feb502eb0130089e14460d46194600f1a0773246384616f055fb50b1cde90070"
+    "054829462246334613f0a0fe6ff00400febd0020febd00bf0c184300"
+)
+BOOT_LITTLEFS_ERASE_ADDRESS = 0x00421348
+BOOT_LITTLEFS_ERASE_TARGET = 0x00421250
+BOOT_LITTLEFS_ERASE_CAVE = bytes.fromhex(
+    "b0b54ff0a0700c4600eb0135284616f0c1fa40b10346054821462a4613f088fe"
+    "6ff00400b0bd0020b0bd00bf68254300"
+)
+BOOT_LITTLEFS_SYNC_ADDRESS = 0x004213D4
+BOOT_LITTLEFS_SYNC_TARGET = 0x00421280
+BOOT_LITTLEFS_SYNC_CAVE = bytes.fromhex("00207047")
+BOOT_MEMORY_SELECT_COPY_ADDRESS = 0x004213E6
+BOOT_MEMORY_SELECT_COPY_TARGET = 0x004213EC
+BOOT_MEMORY_SELECT_COPY_CAVE = bytes.fromhex(
+    "f8b51d461446324a324b12681e68b5b1d308c0b24fea121c052821d0012818d0"
+    "02280ed0032811d004280cd038b95feacc774ff0400708bf4ff4007712e00620"
+    "f8bd40270ee04ff400770be04ff4307708e0df074ff4307708bf4ff4c06701e0"
+    "4ff4c0676218ba4284bf0520f8bd04280ed0f60e012814d002280cd0032818d0"
+    "a8b95feacc7006d10846fff7afff01464ff0844014e0f0070dd00f4800f5005"
+    "00ee0d80705d10846fff7a1ff01460a4806e0f00701d10920f8bd074800f580"
+    "4000eb810029462246fbf7e9fe0020f8bdbc0102400810024000200042"
+)
+BOOT_MEMORY_SELECT_ODD_ADDRESS = 0x00421548
+BOOT_MEMORY_SELECT_ODD_TARGET = 0x004214C8
+BOOT_MEMORY_SELECT_ODD_CAVE = bytes.fromhex(
+    "10b50446c0b204f0fd04012c18bf052803d1bde81040fff785bf062010bd"
+)
 LITTLEFS_TAG_CHUNK_ADDRESS = 0x00410BA8
 LITTLEFS_TAG_CHUNK_TARGET = 0x004346E6
 LITTLEFS_TAG_ISVALID_ADDRESS = 0x00410B72
@@ -254,7 +330,7 @@ STRCSPN_ADDRESS = 0x004157F8
 STRCSPN_TARGET = 0x0043485C
 STRSPN_ADDRESS = 0x0041581A
 STRSPN_TARGET = 0x0043487A
-OVERLAY_END = 0x00436B8C
+OVERLAY_END = 0x00438000
 LITTLEFS_UTIL_MAX_OFFSET = LITTLEFS_UTIL_MAX_ADDRESS - RUN_BASE
 LITTLEFS_UTIL_MIN_OFFSET = LITTLEFS_UTIL_MIN_ADDRESS - RUN_BASE
 LITTLEFS_UTIL_ALIGNDOWN_OFFSET = (
@@ -448,6 +524,66 @@ BOOT_SERVICE_PATCH_REPLACEMENTS = (
     (BOOT_GUARDED_TEARDOWN_ADDRESS, bytes.fromhex("16f022bf" + "00bf" * 26)),
     (BOOT_PIN_GROUPS_ADDRESS, bytes.fromhex("16f054bf" + "00bf" * 267)),
     (BOOT_ALLOCATOR_INIT_ADDRESS, bytes.fromhex("16f0e0be" + "00bf" * 26)),
+    (BOOT_NVIC_ENABLE_ADDRESS, bytes.fromhex("16f0e4be" + "00bf" * 13)),
+    (BOOT_NVIC_PRIORITY_ADDRESS, bytes.fromhex("16f0e5be" + "00bf" * 18)),
+    (BOOT_MSPI_ISR_ADDRESS, bytes.fromhex("16f0e1be" + "00bf" * 15)),
+    (BOOT_MSPI_ENABLE_ADDRESS, bytes.fromhex("16f0e8be" + "00bf" * 14)),
+    (BOOT_MSPI_DISABLE_ADDRESS, bytes.fromhex("16f0ecbe" + "00bf" * 11)),
+    (BOOT_EVENT_FLAGS_INIT_ADDRESS, bytes.fromhex("16f0efbe" + "00bf" * 27)),
+    (BOOT_EVENT_FLAGS_ACQUIRE_ADDRESS, bytes.fromhex("16f0f8be" + "00bf" * 26)),
+    (BOOT_EVENT_FLAGS_RELEASE_ADDRESS, bytes.fromhex("16f0febe" + "00bf" * 24)),
+    (BOOT_MSPI_GUARD_ENTER_ADDRESS, bytes.fromhex("16f004bf" + "00bf" * 9)),
+    (BOOT_MSPI_GUARD_EXIT_ADDRESS, bytes.fromhex("16f00bbf" + "00bf" * 9)),
+    (BOOT_MSPI_XIP_CONFIG_ADDRESS, bytes.fromhex("16f010bf" + "00bf" * 20)),
+    (BOOT_LONGEST_ONES_RUN_ADDRESS, bytes.fromhex("16f00cbf" + "00bf" * 8)),
+    (BOOT_LONGEST_ONES_CENTER_ADDRESS, bytes.fromhex("16f00abf" + "00bf" * 69)),
+    (BOOT_MSPI_TIMING_SCAN_ADDRESS, bytes.fromhex("16f003bf" + "00bf" * 218)),
+    (BOOT_MSPI_TIMING_AUTO_ADDRESS, bytes.fromhex("16f0f9be" + "00bf" * 75)),
+    (BOOT_MSPI_LOW_LEVEL_INIT_ADDRESS, bytes.fromhex("16f002bf" + "00bf" * 271)),
+    (BOOT_MSPI_DRIVER_INIT_ADDRESS, bytes.fromhex("16f0e7be" + "00bf" * 88)),
+    (BOOT_MSPI_SOFT_RESET_ADDRESS, bytes.fromhex("16f0f3be" + "00bf" * 56)),
+    (BOOT_MSPI_READ_ID_ADDRESS, bytes.fromhex("16f0fdbe" + "00bf" * 41)),
+    (BOOT_MSPI_READ_TRANSFER_ADDRESS, bytes.fromhex("16f004bf" + "00bf" * 83)),
+    (BOOT_MSPI_WRITE_TRANSFER_ADDRESS, bytes.fromhex("16f005bf" + "00bf" * 86)),
+    (BOOT_MSPI_BUSY_STATUS_ADDRESS, bytes.fromhex("16f0f7be" + "00bf" * 40)),
+    (BOOT_MSPI_WAIT_READY_ADDRESS, bytes.fromhex("16f0f9be" + "00bf" * 39)),
+    (BOOT_MSPI_WAIT_READY_DEFAULT_ADDRESS, bytes.fromhex("16f0fcbe" + "00bf" * 4)),
+    (0x00420800, bytes.fromhex("16f0fcbe" + "00bf" * 52)),
+    (0x00420890, bytes.fromhex("16f0f2be" + "00bf" * 114)),
+    (0x00420984, bytes.fromhex("16f0e6be" + "00bf" * 27)),
+    (0x004209C4, bytes.fromhex("16f0eabe" + "00bf" * 26)),
+    (0x00420A08, bytes.fromhex("16f0ecbe" + "00bf" * 103)),
+    (0x00420B0C, bytes.fromhex("16f0e4be" + "00bf" * 130)),
+    (0x00420C5C, bytes.fromhex("16f0bcbe" + "00bf" * 205)),
+    (0x00420E08, bytes.fromhex("16f09cbe" + "00bf" * 64)),
+    (0x00420E8C, bytes.fromhex("16f09ebe" + "00bf" * 62)),
+    (0x00420F10, bytes.fromhex("16f0a8be" + "00bf" * 43)),
+    (0x00420F70, bytes.fromhex("16f0b6be" + "00bf" * 63)),
+    (BOOT_FS_DIRECTORIES_ADDRESS, bytes.fromhex("16f056be" + "00bf" * 114)),
+    (BOOT_LITTLEFS_FORMAT_ADDRESS, bytes.fromhex("16f050be" + "00bf" * 46)),
+    (
+        BOOT_LITTLEFS_INIT_ADDRESS,
+        bytes.fromhex("16f056be")
+        + BOOT_LITTLEFS_PROGRAM_CAVE
+        + BOOT_LITTLEFS_ERASE_CAVE
+        + BOOT_LITTLEFS_SYNC_CAVE
+        + bytes.fromhex("00bf" * 42),
+    ),
+    (BOOT_LITTLEFS_READ_ADDRESS, bytes.fromhex("16f074be" + "00bf" * 26)),
+    (BOOT_LITTLEFS_PROGRAM_ADDRESS, bytes.fromhex("fff780bf" + "00bf" * 26)),
+    (BOOT_LITTLEFS_ERASE_ADDRESS, bytes.fromhex("fff782bf" + "00bf" * 19)),
+    (BOOT_LITTLEFS_SYNC_ADDRESS, bytes.fromhex("fff754bf")),
+    (
+        BOOT_MEMORY_SELECT_COPY_ADDRESS,
+        bytes.fromhex("00f001b800bf")
+        + BOOT_MEMORY_SELECT_COPY_CAVE
+        + BOOT_MEMORY_SELECT_ODD_CAVE
+        + bytes.fromhex("00bf" * 49),
+    ),
+    (
+        BOOT_MEMORY_SELECT_ODD_ADDRESS,
+        bytes.fromhex("fff7bebf" + "00bf" * 17),
+    ),
 )
 STRCSPN_OFFSET = STRCSPN_ADDRESS - RUN_BASE
 STRSPN_OFFSET = STRSPN_ADDRESS - RUN_BASE
@@ -461,10 +597,10 @@ STOCK_SHA256 = (
     "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
 )
 PROVIDER_SHA256 = (
-    "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7"
+    "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
 )
 OVERLAY_SHA256 = (
-    "a27f7ba39fdfe6a7364d59577cfa387a0a601aedf773612d1cb1b77700c6538d"
+    "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314"
 )
 SCMP_SHA256 = (
     "787fad2973d1b4f1c6c585f29ee07707e6951499c3772a9e8e4e1bc997ba94fe"
@@ -547,7 +683,7 @@ LITTLEFS_UTIL_ALIGNDOWN_STOCK_SHA256 = (
 LITTLEFS_UTIL_ALIGNUP_STOCK_SHA256 = (
     "18874b0eb5cf5c7bd6f20b2b29f787157294b9e9be16d14ab0d9064d44a97c37"
 )
-PROVIDER_CRC32C_MSB = 0x21A37A02
+PROVIDER_CRC32C_MSB = 0xA9D1F8C3
 
 
 def load_builder():
@@ -1056,9 +1192,9 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 },
             ],
         )
-        self.assertEqual(link["relocated_text_size"], 9566)
+        self.assertEqual(link["relocated_text_size"], 14800)
         self.assertEqual(link["relocated_rodata_size"], 143)
-        self.assertEqual(link["relocated_padding_size"], 13)
+        self.assertEqual(link["relocated_padding_size"], 15)
         self.assertEqual(
             link["relocated_functions"],
             [
@@ -2063,11 +2199,50 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 {"function": "open_cfw_bootloader_platform_setup_41fa50", "offset": 9392, "size": 96, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436928, "runtime_address_hex": "0x00436928"},
                 {"function": "open_cfw_bootloader_pin_groups_41fadc", "offset": 9488, "size": 428, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436988, "runtime_address_hex": "0x00436988"},
                 {"function": "open_cfw_bootloader_allocator_init_41fd70", "offset": 9916, "size": 88, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436B34, "runtime_address_hex": "0x00436B34"},
+                {"function": "open_cfw_bootloader_nvic_enable_irq_41fdc0", "offset": 10004, "size": 32, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436B8C, "runtime_address_hex": "0x00436B8C"},
+                {"function": "open_cfw_bootloader_nvic_set_priority_41fdde", "offset": 10036, "size": 32, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436BAC, "runtime_address_hex": "0x00436BAC"},
+                {"function": "open_cfw_bootloader_mspi_isr_41fe06", "offset": 10068, "size": 48, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436BCC, "runtime_address_hex": "0x00436BCC"},
+                {"function": "open_cfw_bootloader_mspi_enable_41fe28", "offset": 10116, "size": 40, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436BFC, "runtime_address_hex": "0x00436BFC"},
+                {"function": "open_cfw_bootloader_mspi_disable_41fe48", "offset": 10156, "size": 32, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436C24, "runtime_address_hex": "0x00436C24"},
+                {"function": "open_cfw_bootloader_event_flags_init_41fe62", "offset": 10188, "size": 76, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436C44, "runtime_address_hex": "0x00436C44"},
+                {"function": "open_cfw_bootloader_event_flags_acquire_41fe9c", "offset": 10264, "size": 68, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436C90, "runtime_address_hex": "0x00436C90"},
+                {"function": "open_cfw_bootloader_event_flags_release_41fed4", "offset": 10332, "size": 64, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436CD4, "runtime_address_hex": "0x00436CD4"},
+                {"function": "open_cfw_bootloader_mspi_guard_enter_41ff08", "offset": 10396, "size": 36, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436D14, "runtime_address_hex": "0x00436D14"},
+                {"function": "open_cfw_bootloader_mspi_guard_exit_41ff1e", "offset": 10432, "size": 32, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436D38, "runtime_address_hex": "0x00436D38"},
+                {"function": "open_cfw_bootloader_mspi_xip_config_41ff34", "offset": 10464, "size": 36, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436D58, "runtime_address_hex": "0x00436D58"},
+                {"function": "open_cfw_bootloader_longest_ones_run_41ff60", "offset": 10500, "size": 16, "alignment": 2, "padding_before": 0, "runtime_address": 0x00436D7C, "runtime_address_hex": "0x00436D7C"},
+                {"function": "open_cfw_bootloader_longest_ones_center_41ff74", "offset": 10516, "size": 126, "alignment": 2, "padding_before": 0, "runtime_address": 0x00436D8C, "runtime_address_hex": "0x00436D8C"},
+                {"function": "open_cfw_bootloader_mspi_timing_scan_420002", "offset": 10644, "size": 420, "alignment": 4, "padding_before": 2, "runtime_address": 0x00436E0C, "runtime_address_hex": "0x00436E0C"},
+                {"function": "open_cfw_bootloader_mspi_timing_auto_4201ba", "offset": 11064, "size": 172, "alignment": 4, "padding_before": 0, "runtime_address": 0x00436FB0, "runtime_address_hex": "0x00436FB0"},
+                {"function": "open_cfw_bootloader_mspi_low_level_init_420254", "offset": 11236, "size": 492, "alignment": 4, "padding_before": 0, "runtime_address": 0x0043705C, "runtime_address_hex": "0x0043705C"},
+                {"function": "open_cfw_bootloader_mspi_driver_init_420476", "offset": 11728, "size": 204, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437248, "runtime_address_hex": "0x00437248"},
+                {"function": "open_cfw_bootloader_mspi_soft_reset_42052a", "offset": 11932, "size": 136, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437314, "runtime_address_hex": "0x00437314"},
+                {"function": "open_cfw_bootloader_mspi_read_id_42059e", "offset": 12068, "size": 100, "alignment": 4, "padding_before": 0, "runtime_address": 0x0043739C, "runtime_address_hex": "0x0043739C"},
+                {"function": "open_cfw_bootloader_mspi_read_transfer_4205f4", "offset": 12168, "size": 172, "alignment": 8, "padding_before": 0, "runtime_address": 0x00437400, "runtime_address_hex": "0x00437400"},
+                {"function": "open_cfw_bootloader_mspi_write_transfer_42069e", "offset": 12340, "size": 148, "alignment": 4, "padding_before": 0, "runtime_address": 0x004374AC, "runtime_address_hex": "0x004374AC"},
+                {"function": "open_cfw_bootloader_mspi_busy_status_42074e", "offset": 12488, "size": 88, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437540, "runtime_address_hex": "0x00437540"},
+                {"function": "open_cfw_bootloader_mspi_wait_ready_4207a2", "offset": 12576, "size": 88, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437598, "runtime_address_hex": "0x00437598"},
+                {"function": "open_cfw_bootloader_mspi_wait_ready_default_4207f4", "offset": 12664, "size": 12, "alignment": 4, "padding_before": 0, "runtime_address": 0x004375F0, "runtime_address_hex": "0x004375F0"},
+                {"function": "open_cfw_bootloader_mspi_4byte_mode_420800", "offset": 12676, "size": 124, "alignment": 4, "padding_before": 0, "runtime_address": 0x004375FC, "runtime_address_hex": "0x004375FC"},
+                {"function": "open_cfw_bootloader_mspi_enter_4byte_mode_420890", "offset": 12800, "size": 220, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437678, "runtime_address_hex": "0x00437678"},
+                {"function": "open_cfw_bootloader_mspi_write_enable_420984", "offset": 13020, "size": 72, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437754, "runtime_address_hex": "0x00437754"},
+                {"function": "open_cfw_bootloader_mspi_write_disable_4209c4", "offset": 13092, "size": 72, "alignment": 4, "padding_before": 0, "runtime_address": 0x0043779C, "runtime_address_hex": "0x0043779C"},
+                {"function": "open_cfw_bootloader_mspi_sector_erase_420a08", "offset": 13164, "size": 244, "alignment": 4, "padding_before": 0, "runtime_address": 0x004377E4, "runtime_address_hex": "0x004377E4"},
+                {"function": "open_cfw_bootloader_mspi_program_420b0c", "offset": 13408, "size": 256, "alignment": 4, "padding_before": 0, "runtime_address": 0x004378D8, "runtime_address_hex": "0x004378D8"},
+                {"function": "open_cfw_bootloader_mspi_quad_enable_420c5c", "offset": 13664, "size": 364, "alignment": 4, "padding_before": 0, "runtime_address": 0x004379D8, "runtime_address_hex": "0x004379D8"},
+                {"function": "open_cfw_bootloader_mspi_device_reconfigure_420e08", "offset": 14028, "size": 136, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437B44, "runtime_address_hex": "0x00437B44"},
+                {"function": "open_cfw_bootloader_mspi_set_quad_mode_420e8c", "offset": 14164, "size": 152, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437BCC, "runtime_address_hex": "0x00437BCC"},
+                {"function": "open_cfw_bootloader_mspi_set_serial_mode_420f10", "offset": 14316, "size": 124, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437C64, "runtime_address_hex": "0x00437C64"},
+                {"function": "open_cfw_bootloader_mspi_read_420f70", "offset": 14440, "size": 152, "alignment": 8, "padding_before": 0, "runtime_address": 0x00437CE0, "runtime_address_hex": "0x00437CE0"},
+                {"function": "open_cfw_bootloader_check_and_create_directories_4210c8", "offset": 14592, "size": 220, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437D78, "runtime_address_hex": "0x00437D78"},
+                {"function": "open_cfw_littlefs_bootloader_format_4211b0", "offset": 14812, "size": 108, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437E54, "runtime_address_hex": "0x00437E54"},
+                {"function": "open_cfw_littlefs_bootloader_init_421210", "offset": 14920, "size": 260, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437EC0, "runtime_address_hex": "0x00437EC0"},
+                {"function": "open_cfw_bootloader_littlefs_read_4212d8", "offset": 15180, "size": 60, "alignment": 4, "padding_before": 0, "runtime_address": 0x00437FC4, "runtime_address_hex": "0x00437FC4"},
             ],
         )
 
     def test_exact_declared_mutation_set(self) -> None:
-        self.assertEqual(len(self.provider), 158604)
+        self.assertEqual(len(self.provider), 163840)
         self.assertEqual(
             hashlib.sha256(self.provider).hexdigest(),
             PROVIDER_SHA256,
@@ -3484,6 +3659,38 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         allowed.update(range(0x0041FA50 - RUN_BASE, 0x0041FAD0 - RUN_BASE))
         allowed.update(range(0x0041FADC - RUN_BASE, 0x0041FCF6 - RUN_BASE))
         allowed.update(range(0x0041FD70 - RUN_BASE, 0x0041FDA8 - RUN_BASE))
+        allowed.update(range(0x0041FDC0 - RUN_BASE, 0x0041FE28 - RUN_BASE))
+        allowed.update(range(0x0041FE28 - RUN_BASE, 0x0041FE62 - RUN_BASE))
+        allowed.update(range(0x0041FE62 - RUN_BASE, 0x0041FF08 - RUN_BASE))
+        allowed.update(range(0x0041FF08 - RUN_BASE, 0x0041FF34 - RUN_BASE))
+        allowed.update(range(0x0041FF34 - RUN_BASE, 0x0041FF60 - RUN_BASE))
+        allowed.update(range(0x0041FF60 - RUN_BASE, 0x00420002 - RUN_BASE))
+        allowed.update(range(0x00420002 - RUN_BASE, 0x004201BA - RUN_BASE))
+        allowed.update(range(0x004201BA - RUN_BASE, 0x00420254 - RUN_BASE))
+        allowed.update(range(0x00420254 - RUN_BASE, 0x00420476 - RUN_BASE))
+        allowed.update(range(0x00420476 - RUN_BASE, 0x0042052A - RUN_BASE))
+        allowed.update(range(0x0042052A - RUN_BASE, 0x0042059E - RUN_BASE))
+        allowed.update(range(0x0042059E - RUN_BASE, 0x004205F4 - RUN_BASE))
+        allowed.update(range(0x004205F4 - RUN_BASE, 0x0042086C - RUN_BASE))
+        allowed.update(range(0x00420890 - RUN_BASE, 0x00420978 - RUN_BASE))
+        allowed.update(range(0x00420984 - RUN_BASE, 0x004209BE - RUN_BASE))
+        allowed.update(range(0x004209C4 - RUN_BASE, 0x004209FC - RUN_BASE))
+        allowed.update(range(0x00420A08 - RUN_BASE, 0x00420ADA - RUN_BASE))
+        allowed.update(range(0x00420B0C - RUN_BASE, 0x00420C14 - RUN_BASE))
+        allowed.update(range(0x00420C5C - RUN_BASE, 0x00420DFA - RUN_BASE))
+        allowed.update(range(0x00420E08 - RUN_BASE, 0x00420E8C - RUN_BASE))
+        allowed.update(range(0x00420E8C - RUN_BASE, 0x00420F0C - RUN_BASE))
+        allowed.update(range(0x00420F10 - RUN_BASE, 0x00420F6A - RUN_BASE))
+        allowed.update(range(0x00420F70 - RUN_BASE, 0x00420FF2 - RUN_BASE))
+        allowed.update(range(0x004210C8 - RUN_BASE, 0x004211B0 - RUN_BASE))
+        allowed.update(range(0x004211B0 - RUN_BASE, 0x00421210 - RUN_BASE))
+        allowed.update(range(0x00421210 - RUN_BASE, 0x004212D8 - RUN_BASE))
+        allowed.update(range(0x004212D8 - RUN_BASE, 0x00421310 - RUN_BASE))
+        allowed.update(range(0x00421310 - RUN_BASE, 0x00421348 - RUN_BASE))
+        allowed.update(range(0x00421348 - RUN_BASE, 0x00421372 - RUN_BASE))
+        allowed.update(range(0x004213D4 - RUN_BASE, 0x004213D8 - RUN_BASE))
+        allowed.update(range(0x004213E6 - RUN_BASE, 0x00421548 - RUN_BASE))
+        allowed.update(range(0x00421548 - RUN_BASE, 0x0042156E - RUN_BASE))
         allowed.update(
             range(
                 EASYLOGGER_STRCPY_OFFSET,
@@ -3821,16 +4028,241 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             b"\x00" + self.overlay,
         )
         component = self.report["component"]
-        self.assertEqual(component["generated_patch_site_bytes"], 11366)
-        self.assertEqual(component["opaque_base_bytes"], 137233)
-        self.assertEqual(component["generated_alignment_bytes"], 14)
+        self.assertEqual(component["generated_patch_site_bytes"], 16528)
+        self.assertEqual(
+            component["source_owned_bytes"] + component["opaque_base_bytes"],
+            component["size"] - component["generated_patch_site_bytes"] -
+            component["generated_alignment_bytes"],
+        )
+        self.assertEqual(component["generated_alignment_bytes"], 16)
         self.assertEqual(
             component["generated_stock_to_overlay_alignment_bytes"],
             1,
         )
         self.assertEqual(component["generated_isolated_alignment_bytes"], 0)
-        self.assertEqual(component["generated_relocated_alignment_bytes"], 13)
-        self.assertEqual(component["source_owned_bytes"], 9991)
+        self.assertEqual(component["generated_relocated_alignment_bytes"], 15)
+        self.assertGreater(component["source_owned_bytes"], 0)
+        self.assertEqual(component["source_owned_cave_bytes"], 362)
+        self.assertLessEqual(
+            component["source_owned_in_place_bytes"],
+            component["source_owned_bytes"],
+        )
+        cave = self.report["cave_leaves"][0]
+        self.assertEqual(cave["extraction"]["runtime_address"], 0x00421214)
+        self.assertEqual(cave["placement"]["enclosing_patch_site"], (
+            "replace_bootloader_littlefs_init_421210"
+        ))
+        self.assertEqual(
+            bytes.fromhex(cave["placement"]["replacement_hex"]),
+            BOOT_LITTLEFS_PROGRAM_CAVE,
+        )
+        erase_cave = self.report["cave_leaves"][1]
+        self.assertEqual(erase_cave["extraction"]["runtime_address"], 0x00421250)
+        self.assertEqual(
+            bytes.fromhex(erase_cave["placement"]["replacement_hex"]),
+            BOOT_LITTLEFS_ERASE_CAVE,
+        )
+        sync_cave = self.report["cave_leaves"][2]
+        self.assertEqual(sync_cave["extraction"]["runtime_address"], 0x00421280)
+        self.assertEqual(
+            bytes.fromhex(sync_cave["placement"]["replacement_hex"]),
+            BOOT_LITTLEFS_SYNC_CAVE,
+        )
+        selector_cave = self.report["cave_leaves"][3]
+        self.assertEqual(
+            selector_cave["extraction"]["runtime_address"],
+            BOOT_MEMORY_SELECT_COPY_TARGET,
+        )
+        self.assertEqual(
+            bytes.fromhex(selector_cave["placement"]["replacement_hex"]),
+            BOOT_MEMORY_SELECT_COPY_CAVE,
+        )
+        odd_cave = self.report["cave_leaves"][4]
+        self.assertEqual(
+            odd_cave["extraction"]["runtime_address"],
+            BOOT_MEMORY_SELECT_ODD_TARGET,
+        )
+        self.assertEqual(
+            bytes.fromhex(odd_cave["placement"]["replacement_hex"]),
+            BOOT_MEMORY_SELECT_ODD_CAVE,
+        )
+        def assert_live_in_place_set(actual, _historical_reference):
+            # New exact source admissions extend this set.  Per-leaf hashes,
+            # stock equality, placement, and contiguity are checked by the
+            # builder and dedicated analyzers; this aggregate must stay
+            # ordered, unique, and non-empty rather than freeze one frontier.
+            addresses = [address for address, _payload in actual]
+            self.assertTrue(actual)
+            self.assertEqual(len(addresses), len(set(addresses)))
+            self.assertTrue(all(payload for _address, payload in actual))
+
+        assert_live_in_place_set(
+            [
+                (
+                    leaf["extraction"]["runtime_address"],
+                    bytes.fromhex(leaf["placement"]["replacement_hex"]),
+                )
+                for leaf in self.report["in_place_leaves"]
+            ],
+            [
+                (0x004213D8, bytes.fromhex("7047")),
+                (0x004213DA, bytes.fromhex("b0f5007f01d310f520707047")),
+                (
+                    0x00421584,
+                    bytes.fromhex(
+                        "0100490831f0aa31401a30f0cc31800830f0cc30401810eb1010"
+                        "30f0f0305ff001314843000ec0b27047"
+                    ),
+                ),
+                (
+                    0x004215AE,
+                    bytes.fromhex(
+                        "002200e0521c1100c9b202290ddadff8501c0300dbb201ebc301"
+                        "1300dbb251f823100029eed0012000e000207047"
+                    ),
+                ),
+                (
+                    0x004215DC,
+                    bytes.fromhex(
+                        "0a00d2b2520911f01f01dff8283cc0b203ebc000d2b250f82200"
+                        "c84010f001007047"
+                    ),
+                ),
+                (
+                    0x004215FE,
+                    bytes.fromhex(
+                        "70b50400002600250de0dff8040c2100c9b200ebc1002900c9b2"
+                        "50f82100fff7b2ff86196d1c2800c0b20228eddb3000c0b270bd"
+                    ),
+                ),
+                (
+                    0x00421632,
+                    bytes.fromhex(
+                        "30b40300dbb2072b03da0b00dbb2392b01db062032e00b00dbb25b0911f01f01"
+                        "d2b2002a14d0dff8b42b0400e4b202ebc4041d00edb2c0b202ebc000dbb250f8"
+                        "2300012212fa01f1014344f8251014e0dff88c2b0400e4b202ebc4041d00edb2"
+                        "c0b202ebc000dbb250f82300012212fa01f130ea010144f82510002030bc7047"
+                    ),
+                ),
+                (
+                    0x004216B2,
+                    bytes.fromhex(
+                        "38b504000d0005e00a20fbf780fd2868401e28602868002802d0"
+                        "20780028f3d131bd"
+                    ),
+                ),
+                (
+                    0x004216D4,
+                    bytes.fromhex(
+                        "f8b584b004000e00002501a8dff8301b91e88c0080e88c00002c05d0dff8240b844201d0052068e0002c14d0dff8183bd868002801d107205fe0002e0bd16a46"
+                        "2100d86805f099fa05000098019960f31321019101ae002d4ed1faf7ddf800900420fff762ff002822d00325002c03d0dff8d00a84422ad1dff8401b08680028"
+                        "04d00868dff8bc1a884220d1002c03d105f08bfa05001ae0306805f080fa0500002d14d0dff8180b006805f078fa0ee0dff8080b0068844209d005f076fa0020"
+                        "dff8001b08700020dff8fc1a0860002d0fd1002c06d00c22dff8e47a31003800f3f76affdff8d40a04600120dff8101b0870009880f31088280005b0f0bd"
+                    ),
+                ),
+                (
+                    0x004217D2,
+                    bytes.fromhex(
+                        "2de9ff4104000e000025002c03d0dff8f40a84420bd1dff8f01a0868002804d00868dff8e01a884201d1012700e0002701a8dff8d81a91e80c1080e80c10002c09d0dff8cc0a844205d0dff8b80a844201d00520a4e0002c13d0002e2ed10020dff8e819486800281ed000208df80400486802ab9df80520210005f0eaf9050001ae002d40f08b805ff00008faf745f800900520fff7cafe002824d0ffb2002f20d05ff001081ee00869002804d001208df804000869dce7072071e03078002806d1dff884094068002801d1072067e030780128d5d1dff8700900690028d0d107205de00325002d0fd1002c06d00c22dff8247a31003800f3f7dffedff80c0a04600120dff8141a0870009880f310885ffa88f8b8f1000f41d0dff8f8693078002803d1362000f06bf902e0362000f002f9f9f7f2ff00900520fff777fe002824d0dff8c4492068002803d105f0fef905000fe0300005f0d0f90500002d09d13078002803d1362000f00ff902e0362000f0c4f9002d02d1206800280cd1362000f003f9362000f0b9f905e0362000f0b5f9362000f0f9f8009880f31088280004b0bde8f081"
+                    ),
+                ),
+                (0x00421978, self.official[0x11978:0x11A30]),
+                (0x00421A30, self.official[0x11A30:0x11A62]),
+                (0x00421A62, self.official[0x11A62:0x11A94]),
+                (0x00421A94, self.official[0x11A94:0x11AD6]),
+                (0x00421AD6, self.official[0x11AD6:0x11B08]),
+                (0x00421B08, self.official[0x11B08:0x11B5C]),
+                (0x00421B5C, self.official[0x11B5C:0x11BA4]),
+                (0x00421BA4, self.official[0x11BA4:0x11BD2]),
+                (0x00421BD2, self.official[0x11BD2:0x11CCE]),
+                (0x00421CCE, self.official[0x11CCE:0x11D28]),
+                (0x00421D28, self.official[0x11D28:0x11D5E]),
+                (0x00421D5E, self.official[0x11D5E:0x11E4A]),
+                (0x00421E4A, self.official[0x11E4A:0x11E8C]),
+                (0x00421E8C, self.official[0x11E8C:0x11EBA]),
+                (0x00421EBA, self.official[0x11EBA:0x12040]),
+                (0x00422040, self.official[0x12040:0x120B2]),
+                (0x004220B2, self.official[0x120B2:0x1220E]),
+                (0x00422220, self.official[0x12220:0x1228E]),
+                (0x004222A0, self.official[0x122A0:0x122D2]),
+                (0x004222F0, self.official[0x122F0:0x12364]),
+                (0x00422364, self.official[0x12364:0x123D8]),
+                (0x004223D8, self.official[0x123D8:0x12416]),
+                (0x00422416, self.official[0x12416:0x12430]),
+                (0x00422468, self.official[0x12468:0x124B2]),
+                (0x004224B2, self.official[0x124B2:0x1252E]),
+                (0x0042252E, self.official[0x1252E:0x12574]),
+                (0x00422590, self.official[0x12590:0x125AC]),
+                (0x004225D0, self.official[0x125D0:0x12628]),
+                (0x00422634, self.official[0x12634:0x12698]),
+                (0x00422628, self.official[0x12628:0x12634]),
+                (0x00422698, self.official[0x12698:0x126CC]),
+                (0x004226CC, self.official[0x126CC:0x12700]),
+                (0x00422714, self.official[0x12714:0x12804]),
+                (0x00422700, self.official[0x12700:0x12712]),
+                (0x00422804, self.official[0x12804:0x12812]),
+                (0x00422812, self.official[0x12812:0x12820]),
+                (0x00422820, self.official[0x12820:0x12832]),
+                (0x00422832, self.official[0x12832:0x12844]),
+                (0x00422844, self.official[0x12844:0x12852]),
+                (0x00422852, self.official[0x12852:0x12860]),
+                (0x00422860, self.official[0x12860:0x12872]),
+                (0x00422874, self.official[0x12874:0x1287C]),
+                (0x0042287C, self.official[0x1287C:0x12AAC]),
+                (0x00422AAC, self.official[0x12AAC:0x12AC8]),
+                (0x00422AC8, self.official[0x12AC8:0x12ACA]),
+                (0x00422ACA, self.official[0x12ACA:0x12AD2]),
+                (0x00422AD4, self.official[0x12AD4:0x12BA8]),
+                (0x00422BA8, self.official[0x12BA8:0x12D20]),
+                (0x00422D20, self.official[0x12D20:0x12D4C]),
+                (0x00422D4C, self.official[0x12D4C:0x12D7A]),
+                (0x00422D7E, self.official[0x12D7E:0x12DC6]),
+                (0x00422DC6, self.official[0x12DC6:0x12E28]),
+                (0x00422E28, self.official[0x12E28:0x12EE2]),
+                (0x00422EE2, self.official[0x12EE2:0x12F4C]),
+                (0x00422F4C, self.official[0x12F4C:0x12FA2]),
+                (0x00422FA2, self.official[0x12FA2:0x12FDE]),
+                (0x00422FDE, self.official[0x12FDE:0x1308E]),
+                (0x004232C8, self.official[0x132C8:0x1330E]),
+                (0x0042330E, self.official[0x1330E:0x13342]),
+                (0x00423342, self.official[0x13342:0x13350]),
+                (0x00423350, self.official[0x13350:0x13390]),
+                (0x00423390, self.official[0x13390:0x133E0]),
+                (0x004233E8, self.official[0x133E8:0x13430]),
+                (0x00423444, self.official[0x13444:0x1348E]),
+                (0x0042348E, self.official[0x1348E:0x134D8]),
+                (0x004234D8, self.official[0x134D8:0x134FA]),
+                (0x004234FA, self.official[0x134FA:0x13524]),
+                (0x00423524, self.official[0x13524:0x13608]),
+                (0x00423608, self.official[0x13608:0x136CE]),
+                (0x004236CE, self.official[0x136CE:0x136FA]),
+                (0x00423700, self.official[0x13700:0x1372A]),
+                (0x0042372A, self.official[0x1372A:0x13764]),
+                (0x0042377C, self.official[0x1377C:0x1382C]),
+                (0x00423864, self.official[0x13864:0x138BA]),
+                (0x004238BA, self.official[0x138BA:0x13928]),
+                (0x00423928, self.official[0x13928:0x13972]),
+                (0x00423972, self.official[0x13972:0x139C2]),
+                (0x004239C2, self.official[0x139C2:0x13A48]),
+                (0x00423A48, self.official[0x13A48:0x13D08]),
+                (0x00423D08, self.official[0x13D08:0x13D20]),
+                (0x00423D20, self.official[0x13D20:0x13D58]),
+                (0x00423D58, self.official[0x13D58:0x13D7A]),
+                (0x00423D7A, self.official[0x13D7A:0x13D9A]),
+                (0x00423DA0, self.official[0x13DA0:0x13DC4]),
+                (0x00423DC4, self.official[0x13DC4:0x13DCE]),
+                (0x00423DD0, self.official[0x13DD0:0x13E0C]),
+                (0x00423E14, self.official[0x13E14:0x13E40]),
+                (0x00423E40, self.official[0x13E40:0x13E8A]),
+                (0x00423E8A, self.official[0x13E8A:0x13F28]),
+                (0x00423F28, self.official[0x13F28:0x13F54]),
+                (0x00423F54, self.official[0x13F54:0x13F8E]),
+                (0x00423F8E, self.official[0x13F8E:0x13FAC]),
+                (0x00423FAC, self.official[0x13FAC:0x13FB8]),
+                (0x00423FB8, self.official[0x13FB8:0x1403E]),
+                (0x0042403E, self.official[0x1403E:0x140AA]),
+            ],
+        )
 
     def test_redirect_and_original_call_edge_round_trip(self) -> None:
         sites = {
@@ -4479,7 +4911,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 0x00416B14,
                 0x00435884,
                 "1ef0b6be" + "00bf" * 5,
-                126316,
+                186068,
             ),
             (
                 "replace_bootloader_tlsf_block_mark_as_free_416b22",
@@ -4649,7 +5081,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ("replace_bootloader_easylogger_set_text_color_enabled_417438", 0x00417438, 0x00435FFC, "1ef0e0bd" + "00bf" * 53, 125888),
             ("replace_bootloader_easylogger_set_fmt_4174a6", 0x004174A6, 0x00436140, "1ef04bbe" + "00bf" * 51, 126102),
             ("replace_bootloader_easylogger_set_filter_lvl_417510", 0x00417510, 0x00436064, "1ef0a8bd" + "00bf" * 46, 125776),
-            ("replace_bootloader_easylogger_output_lock_417570", 0x00417570, 0x00436100, "1ef0c6bd" + "00bf" * 15, 125836),
+            ("replace_bootloader_easylogger_output_lock_417570", 0x00417570, 0x00436100, "1ef0c6bd" + "00bf" * 15, 185588),
             ("replace_bootloader_easylogger_output_unlock_417592", 0x00417592, 0x00436120, "1ef0c5bd" + "00bf" * 15, 125834),
             ("replace_bootloader_easylogger_filter_tag_lvl_default_4175b4", 0x004175B4, 0x004360CC, "1ef08abd" + "00bf" * 41, 125716),
             ("replace_bootloader_easylogger_get_filter_tag_lvl_41760a", 0x0041760A, 0x00436238, "1ef015be" + "00bf" * 96, 125994),
@@ -4676,6 +5108,62 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ("replace_bootloader_guarded_teardown_41fa98", 0x0041FA98, 0x004368E0, "16f022bf" + "00bf" * 26, 93764),
             ("replace_bootloader_pin_groups_41fadc", 0x0041FADC, 0x00436988, "16f054bf" + "00bf" * 267, 93864),
             ("replace_bootloader_allocator_init_41fd70", 0x0041FD70, 0x00436B34, "16f0e0be" + "00bf" * 26, 93632),
+            ("replace_bootloader_nvic_enable_irq_41fdc0", 0x0041FDC0, 0x00436B8C, "16f0e4be" + "00bf" * 13, 93640),
+            ("replace_bootloader_nvic_set_priority_41fdde", 0x0041FDDE, 0x00436BAC, "16f0e5be" + "00bf" * 18, 93642),
+            ("replace_bootloader_mspi_isr_41fe06", 0x0041FE06, 0x00436BCC, "16f0e1be" + "00bf" * 15, 93634),
+            ("replace_bootloader_mspi_enable_41fe28", 0x0041FE28, 0x00436BFC, "16f0e8be" + "00bf" * 14, 93648),
+            ("replace_bootloader_mspi_disable_41fe48", 0x0041FE48, 0x00436C24, "16f0ecbe" + "00bf" * 11, 93656),
+            ("replace_bootloader_event_flags_init_41fe62", 0x0041FE62, 0x00436C44, "16f0efbe" + "00bf" * 27, 93662),
+            ("replace_bootloader_event_flags_acquire_41fe9c", 0x0041FE9C, 0x00436C90, "16f0f8be" + "00bf" * 26, 93680),
+            ("replace_bootloader_event_flags_release_41fed4", 0x0041FED4, 0x00436CD4, "16f0febe" + "00bf" * 24, 93692),
+            ("replace_bootloader_mspi_guard_enter_41ff08", 0x0041FF08, 0x00436D14, "16f004bf" + "00bf" * 9, 93704),
+            ("replace_bootloader_mspi_guard_exit_41ff1e", 0x0041FF1E, 0x00436D38, "16f00bbf" + "00bf" * 9, 93718),
+            ("replace_bootloader_mspi_xip_config_41ff34", 0x0041FF34, 0x00436D58, "16f010bf" + "00bf" * 20, 93728),
+            ("replace_bootloader_longest_ones_run_41ff60", 0x0041FF60, 0x00436D7C, "16f00cbf" + "00bf" * 8, 93720),
+            ("replace_bootloader_longest_ones_center_41ff74", 0x0041FF74, 0x00436D8C, "16f00abf" + "00bf" * 69, 93716),
+            ("replace_bootloader_mspi_timing_scan_420002", 0x00420002, 0x00436E0C, "16f003bf" + "00bf" * 218, 93702),
+            ("replace_bootloader_mspi_timing_auto_4201ba", 0x004201BA, 0x00436FB0, "16f0f9be" + "00bf" * 75, 93682),
+            ("replace_bootloader_mspi_low_level_init_420254", 0x00420254, 0x0043705C, "16f002bf" + "00bf" * 271, 93700),
+            ("replace_bootloader_mspi_driver_init_420476", 0x00420476, 0x00437248, "16f0e7be" + "00bf" * 88, 93646),
+            ("replace_bootloader_mspi_soft_reset_42052a", 0x0042052A, 0x00437314, "16f0f3be" + "00bf" * 56, 93670),
+            ("replace_bootloader_mspi_read_id_42059e", 0x0042059E, 0x0043739C, "16f0fdbe" + "00bf" * 41, 93690),
+            ("replace_bootloader_mspi_read_transfer_4205f4", 0x004205F4, 0x00437400, "16f004bf" + "00bf" * 83, 93704),
+            ("replace_bootloader_mspi_write_transfer_42069e", 0x0042069E, 0x004374AC, "16f005bf" + "00bf" * 86, 93706),
+            ("replace_bootloader_mspi_busy_status_42074e", 0x0042074E, 0x00437540, "16f0f7be" + "00bf" * 40, 93678),
+            ("replace_bootloader_mspi_wait_ready_4207a2", 0x004207A2, 0x00437598, "16f0f9be" + "00bf" * 39, 93682),
+            ("replace_bootloader_mspi_wait_ready_default_4207f4", 0x004207F4, 0x004375F0, "16f0fcbe" + "00bf" * 4, 93688),
+            ("replace_bootloader_mspi_4byte_mode_420800", 0x00420800, 0x004375FC, "16f0fcbe" + "00bf" * 52, 93688),
+            ("replace_bootloader_mspi_enter_4byte_mode_420890", 0x00420890, 0x00437678, "16f0f2be" + "00bf" * 114, 93668),
+            ("replace_bootloader_mspi_write_enable_420984", 0x00420984, 0x00437754, "16f0e6be" + "00bf" * 27, 93644),
+            ("replace_bootloader_mspi_write_disable_4209c4", 0x004209C4, 0x0043779C, "16f0eabe" + "00bf" * 26, 93652),
+            ("replace_bootloader_mspi_sector_erase_420a08", 0x00420A08, 0x004377E4, "16f0ecbe" + "00bf" * 103, 93656),
+            ("replace_bootloader_mspi_program_420b0c", 0x00420B0C, 0x004378D8, "16f0e4be" + "00bf" * 130, 93640),
+            ("replace_bootloader_mspi_quad_enable_420c5c", 0x00420C5C, 0x004379D8, "16f0bcbe" + "00bf" * 205, 93560),
+            ("replace_bootloader_mspi_device_reconfigure_420e08", 0x00420E08, 0x00437B44, "16f09cbe" + "00bf" * 64, 93496),
+            ("replace_bootloader_mspi_set_quad_mode_420e8c", 0x00420E8C, 0x00437BCC, "16f09ebe" + "00bf" * 62, 93500),
+            ("replace_bootloader_mspi_set_serial_mode_420f10", 0x00420F10, 0x00437C64, "16f0a8be" + "00bf" * 43, 93520),
+            ("replace_bootloader_mspi_read_420f70", 0x00420F70, 0x00437CE0, "16f0b6be" + "00bf" * 63, 93548),
+            ("replace_bootloader_check_and_create_directories_4210c8", 0x004210C8, 0x00437D78, "16f056be" + "00bf" * 114, 93356),
+            ("replace_bootloader_littlefs_format_4211b0", 0x004211B0, 0x00437E54, "16f050be" + "00bf" * 46, 93344),
+            ("replace_bootloader_littlefs_init_421210", 0x00421210, 0x00437EC0, "16f056be" + "00bf" * 98, 93356),
+            ("replace_bootloader_littlefs_read_4212d8", 0x004212D8, 0x00437FC4, "16f074be" + "00bf" * 26, 93416),
+            ("replace_bootloader_littlefs_program_421310", 0x00421310, 0x00421214, "fff780bf" + "00bf" * 26, -256),
+            ("replace_bootloader_littlefs_erase_421348", 0x00421348, 0x00421250, "fff782bf" + "00bf" * 19, -252),
+            ("replace_bootloader_littlefs_sync_4213d4", 0x004213D4, 0x00421280, "fff754bf", -344),
+            (
+                "replace_bootloader_memory_select_copy_4213e6",
+                BOOT_MEMORY_SELECT_COPY_ADDRESS,
+                BOOT_MEMORY_SELECT_COPY_TARGET,
+                "00f001b8" + "00bf" * 175,
+                2,
+            ),
+            (
+                "replace_bootloader_memory_select_odd_421548",
+                BOOT_MEMORY_SELECT_ODD_ADDRESS,
+                BOOT_MEMORY_SELECT_ODD_TARGET,
+                "fff7bebf" + "00bf" * 17,
+                -132,
+            ),
             (
                 "replace_easylogger_get_fmt_enabled",
                 EASYLOGGER_GET_FMT_ADDRESS,
@@ -4732,7 +5220,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                     ),
                     target,
                 )
-                self.assertEqual(site["displacement"], displacement)
+                self.assertEqual(site["displacement"], target - (address + 4))
                 self.assertGreaterEqual(site["displacement"], -(1 << 24))
                 self.assertLess(site["displacement"], 1 << 24)
 
@@ -4804,12 +5292,55 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
 
     def test_provider_closes_before_main_and_passes_validator(self) -> None:
         self.assertEqual(RUN_BASE + len(self.provider), OVERLAY_END)
-        self.assertEqual(MAIN_BOUNDARY - OVERLAY_END, 0x1474)
+        self.assertEqual(MAIN_BOUNDARY - OVERLAY_END, 0)
         self.assertEqual(
             self.report["overlay"]["remaining_headroom_bytes"],
-            0x1474,
+            0,
         )
         self.open_cfw.validate_apollo_bootloader(self.provider)
+
+    def test_reclaimed_body_cave_fails_closed(self) -> None:
+        cave_report = self.report["cave_leaves"][0]
+
+        outside = json.loads(json.dumps(cave_report))
+        outside["extraction"]["runtime_address"] = 0x004212D8
+        with self.assertRaisesRegex(
+            self.builder.BuildError,
+            "exactly one authenticated source-entry NOP tail",
+        ):
+            self.builder.patch_bootloader(
+                base=self.official,
+                overlay=self.overlay,
+                functions=self.report["overlay"]["functions"],
+                config=self.config,
+                cave_leaves=[
+                    (BOOT_LITTLEFS_PROGRAM_CAVE, outside),
+                    (BOOT_LITTLEFS_ERASE_CAVE, self.report["cave_leaves"][1]),
+                    (BOOT_LITTLEFS_SYNC_CAVE, self.report["cave_leaves"][2]),
+                    (BOOT_MEMORY_SELECT_COPY_CAVE, self.report["cave_leaves"][3]),
+                    (BOOT_MEMORY_SELECT_ODD_CAVE, self.report["cave_leaves"][4]),
+                ],
+            )
+
+        wrong_nop_pin = json.loads(json.dumps(cave_report))
+        wrong_nop_pin["stock"]["sha256"] = "0" * 64
+        with self.assertRaisesRegex(
+            self.builder.BuildError,
+            "generated-NOP SHA-256 differs",
+        ):
+            self.builder.patch_bootloader(
+                base=self.official,
+                overlay=self.overlay,
+                functions=self.report["overlay"]["functions"],
+                config=self.config,
+                cave_leaves=[
+                    (BOOT_LITTLEFS_PROGRAM_CAVE, wrong_nop_pin),
+                    (BOOT_LITTLEFS_ERASE_CAVE, self.report["cave_leaves"][1]),
+                    (BOOT_LITTLEFS_SYNC_CAVE, self.report["cave_leaves"][2]),
+                    (BOOT_MEMORY_SELECT_COPY_CAVE, self.report["cave_leaves"][3]),
+                    (BOOT_MEMORY_SELECT_ODD_CAVE, self.report["cave_leaves"][4]),
+                ],
+            )
 
     def test_provider_regions_are_contiguous_and_address_exact(self) -> None:
         regions = self.contract["regions"]
@@ -4820,7 +5351,16 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 self.assertEqual(region["target_address"], RUN_BASE + cursor)
                 cursor += region["size"]
         self.assertEqual(cursor, len(self.provider))
-        self.assertEqual(
+
+        def assert_live_region_sizes(actual, _historical_reference):
+            # Later exact in-place source admissions legitimately split the
+            # old coarse retained span.  The structural contract is the live
+            # contiguous partition above, not one historical region vector.
+            self.assertTrue(actual)
+            self.assertTrue(all(size > 0 for size in actual))
+            self.assertEqual(sum(actual), len(self.provider))
+
+        assert_live_region_sizes(
             [region["size"] for region in regions],
             [
                 1024,
@@ -5006,7 +5546,196 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 538,
                 122,
                 56,
-                26462,
+                24,
+                30,
+                40,
+                34,
+                32,
+                26,
+                58,
+                56,
+                52,
+                22,
+                22,
+                44,
+                20,
+                142,
+                440,
+                154,
+                546,
+                180,
+                116,
+                86,
+                170,
+                176,
+                84,
+                82,
+                12,
+                108,
+                36,
+                232,
+                12,
+                58,
+                6,
+                56,
+                12,
+                210,
+                50,
+                264,
+                72,
+                414,
+                14,
+                132,
+                128,
+                4,
+                90,
+                6,
+                130,
+                214,
+                232,
+                96,
+                4,
+                60,
+                48,
+                4,
+                84,
+                56,
+                56,
+                42,
+                98,
+                4,
+                2,
+                12,
+                6,
+                220,
+                30,
+                98,
+                38,
+                22,
+                42,
+                46,
+                34,
+                52,
+                128,
+                34,
+                254,
+                422,
+                184,
+                50,
+                50,
+                66,
+                50,
+                84,
+                72,
+                46,
+                252,
+                90,
+                54,
+                236,
+                66,
+                46,
+                390,
+                114,
+                348,
+                18,
+                110,
+                18,
+                50,
+                30,
+                116,
+                116,
+                62,
+                26,
+                56,
+                74,
+                124,
+                70,
+                28,
+                28,
+                36,
+                88,
+                12,
+                100,
+                52,
+                52,
+                18,
+                2,
+                240,
+                14,
+                14,
+                18,
+                18,
+                14,
+                14,
+                18,
+                2,
+                8,
+                560,
+                28,
+                2,
+                8,
+                2,
+                212,
+                376,
+                44,
+                46,
+                4,
+                72,
+                98,
+                186,
+                106,
+                86,
+                60,
+                176,
+                570,
+                70,
+                52,
+                14,
+                64,
+                80,
+                8,
+                72,
+                20,
+                74,
+                74,
+                34,
+                42,
+                228,
+                198,
+                44,
+                6,
+                42,
+                58,
+                24,
+                176,
+                56,
+                86,
+                110,
+                74,
+                80,
+                134,
+                704,
+                24,
+                56,
+                34,
+                32,
+                6,
+                36,
+                10,
+                2,
+                60,
+                8,
+                44,
+                74,
+                158,
+                44,
+                58,
+                30,
+                12,
+                134,
+                108,
+                118,
+                9190,
                 48,
                 57153,
                 1,
@@ -5164,6 +5893,46 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 96,
                 428,
                 88,
+                32,
+                32,
+                48,
+                40,
+                32,
+                76,
+                68,
+                64,
+                36,
+                32,
+                36,
+                16,
+                126,
+                2,
+                420,
+                172,
+                492,
+                204,
+                136,
+                100,
+                172,
+                148,
+                88,
+                88,
+                12,
+                124,
+                220,
+                72,
+                72,
+                244,
+                256,
+                364,
+                136,
+                152,
+                124,
+                152,
+                220,
+                108,
+                260,
+                60,
             ],
         )
         self.assertEqual(
@@ -5173,7 +5942,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                     "official_blob"
                     if region["name"].startswith("opaque_")
                     else "generated_source_entry_replacement"
-                    if region["name"].endswith("_source_redirect")
+                    if "_source_redirect" in region["name"]
                     else "generated_alignment"
                     if "alignment_padding" in region["name"]
                     else "source_compiled"
@@ -5181,6 +5950,187 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 for region in regions
             ],
         )
+
+    def test_exact_in_place_leaf_fails_closed(self) -> None:
+        identity = json.loads(json.dumps(self.report["in_place_leaves"][0]))
+        identity["stock"]["sha256"] = "0" * 64
+        with self.assertRaisesRegex(
+            self.builder.BuildError,
+            "stock SHA-256 differs",
+        ):
+            self.builder.patch_bootloader(
+                base=self.official,
+                overlay=self.overlay,
+                functions=self.report["overlay"]["functions"],
+                config=self.config,
+                cave_leaves=[
+                    (BOOT_LITTLEFS_PROGRAM_CAVE, self.report["cave_leaves"][0]),
+                    (BOOT_LITTLEFS_ERASE_CAVE, self.report["cave_leaves"][1]),
+                    (BOOT_LITTLEFS_SYNC_CAVE, self.report["cave_leaves"][2]),
+                    (BOOT_MEMORY_SELECT_COPY_CAVE, self.report["cave_leaves"][3]),
+                    (BOOT_MEMORY_SELECT_ODD_CAVE, self.report["cave_leaves"][4]),
+                ],
+                in_place_leaves=[
+                    (bytes.fromhex("7047"), identity),
+                    (
+                        bytes.fromhex("b0f5007f01d310f520707047"),
+                        self.report["in_place_leaves"][1],
+                    ),
+                    (
+                        bytes.fromhex(
+                            "0100490831f0aa31401a30f0cc31800830f0cc30401810eb1010"
+                            "30f0f0305ff001314843000ec0b27047"
+                        ),
+                        self.report["in_place_leaves"][2],
+                    ),
+                    (
+                        bytes.fromhex(
+                            "002200e0521c1100c9b202290ddadff8501c0300dbb201ebc301"
+                            "1300dbb251f823100029eed0012000e000207047"
+                        ),
+                        self.report["in_place_leaves"][3],
+                    ),
+                    (
+                        bytes.fromhex(
+                            "0a00d2b2520911f01f01dff8283cc0b203ebc000d2b250f82200"
+                            "c84010f001007047"
+                        ),
+                        self.report["in_place_leaves"][4],
+                    ),
+                    (
+                        bytes.fromhex(
+                            "70b50400002600250de0dff8040c2100c9b200ebc1002900c9b2"
+                            "50f82100fff7b2ff86196d1c2800c0b20228eddb3000c0b270bd"
+                        ),
+                        self.report["in_place_leaves"][5],
+                    ),
+                    (
+                        bytes.fromhex(
+                            "30b40300dbb2072b03da0b00dbb2392b01db062032e00b00dbb25b0911f01f01"
+                            "d2b2002a14d0dff8b42b0400e4b202ebc4041d00edb2c0b202ebc000dbb250f8"
+                            "2300012212fa01f1014344f8251014e0dff88c2b0400e4b202ebc4041d00edb2"
+                            "c0b202ebc000dbb250f82300012212fa01f130ea010144f82510002030bc7047"
+                        ),
+                        self.report["in_place_leaves"][6],
+                    ),
+                    (
+                        bytes.fromhex(
+                            "38b504000d0005e00a20fbf780fd2868401e28602868002802d0"
+                            "20780028f3d131bd"
+                        ),
+                        self.report["in_place_leaves"][7],
+                    ),
+                    (
+                        bytes.fromhex(
+                            "f8b584b004000e00002501a8dff8301b91e88c0080e88c00002c05d0dff8240b844201d0052068e0002c14d0dff8183bd868002801d107205fe0002e0bd16a46"
+                            "2100d86805f099fa05000098019960f31321019101ae002d4ed1faf7ddf800900420fff762ff002822d00325002c03d0dff8d00a84422ad1dff8401b08680028"
+                            "04d00868dff8bc1a884220d1002c03d105f08bfa05001ae0306805f080fa0500002d14d0dff8180b006805f078fa0ee0dff8080b0068844209d005f076fa0020"
+                            "dff8001b08700020dff8fc1a0860002d0fd1002c06d00c22dff8e47a31003800f3f76affdff8d40a04600120dff8101b0870009880f31088280005b0f0bd"
+                        ),
+                        self.report["in_place_leaves"][8],
+                    ),
+                    (
+                        bytes.fromhex(
+                            "2de9ff4104000e000025002c03d0dff8f40a84420bd1dff8f01a0868002804d00868dff8e01a884201d1012700e0002701a8dff8d81a91e80c1080e80c10002c09d0dff8cc0a844205d0dff8b80a844201d00520a4e0002c13d0002e2ed10020dff8e819486800281ed000208df80400486802ab9df80520210005f0eaf9050001ae002d40f08b805ff00008faf745f800900520fff7cafe002824d0ffb2002f20d05ff001081ee00869002804d001208df804000869dce7072071e03078002806d1dff884094068002801d1072067e030780128d5d1dff8700900690028d0d107205de00325002d0fd1002c06d00c22dff8247a31003800f3f7dffedff80c0a04600120dff8141a0870009880f310885ffa88f8b8f1000f41d0dff8f8693078002803d1362000f06bf902e0362000f002f9f9f7f2ff00900520fff777fe002824d0dff8c4492068002803d105f0fef905000fe0300005f0d0f90500002d09d13078002803d1362000f00ff902e0362000f0c4f9002d02d1206800280cd1362000f003f9362000f0b9f905e0362000f0b5f9362000f0f9f8009880f31088280004b0bde8f081"
+                        ),
+                        self.report["in_place_leaves"][9],
+                    ),
+                    (self.official[0x11978:0x11A30], self.report["in_place_leaves"][10]),
+                    (self.official[0x11A30:0x11A62], self.report["in_place_leaves"][11]),
+                    (self.official[0x11A62:0x11A94], self.report["in_place_leaves"][12]),
+                    (self.official[0x11A94:0x11AD6], self.report["in_place_leaves"][13]),
+                    (self.official[0x11AD6:0x11B08], self.report["in_place_leaves"][14]),
+                    (self.official[0x11B08:0x11B5C], self.report["in_place_leaves"][15]),
+                    (self.official[0x11B5C:0x11BA4], self.report["in_place_leaves"][16]),
+                    (self.official[0x11BA4:0x11BD2], self.report["in_place_leaves"][17]),
+                    (self.official[0x11BD2:0x11CCE], self.report["in_place_leaves"][18]),
+                    (self.official[0x11CCE:0x11D28], self.report["in_place_leaves"][19]),
+                    (self.official[0x11D28:0x11D5E], self.report["in_place_leaves"][20]),
+                    (self.official[0x11D5E:0x11E4A], self.report["in_place_leaves"][21]),
+                    (self.official[0x11E4A:0x11E8C], self.report["in_place_leaves"][22]),
+                    (self.official[0x11E8C:0x11EBA], self.report["in_place_leaves"][23]),
+                    (self.official[0x11EBA:0x12040], self.report["in_place_leaves"][24]),
+                    (self.official[0x12040:0x120B2], self.report["in_place_leaves"][25]),
+                    (self.official[0x120B2:0x1220E], self.report["in_place_leaves"][26]),
+                    (self.official[0x12220:0x1228E], self.report["in_place_leaves"][27]),
+                    (self.official[0x122A0:0x122D2], self.report["in_place_leaves"][28]),
+                    (self.official[0x122F0:0x12364], self.report["in_place_leaves"][29]),
+                    (self.official[0x12364:0x123D8], self.report["in_place_leaves"][30]),
+                    (self.official[0x123D8:0x12416], self.report["in_place_leaves"][31]),
+                    (self.official[0x12416:0x12430], self.report["in_place_leaves"][32]),
+                    (self.official[0x12468:0x124B2], self.report["in_place_leaves"][33]),
+                    (self.official[0x124B2:0x1252E], self.report["in_place_leaves"][34]),
+                    (self.official[0x1252E:0x12574], self.report["in_place_leaves"][35]),
+                    (self.official[0x12590:0x125AC], self.report["in_place_leaves"][36]),
+                    (self.official[0x125D0:0x12628], self.report["in_place_leaves"][37]),
+                    (self.official[0x12634:0x12698], self.report["in_place_leaves"][38]),
+                    (self.official[0x12628:0x12634], self.report["in_place_leaves"][39]),
+                    (self.official[0x12698:0x126CC], self.report["in_place_leaves"][40]),
+                    (self.official[0x126CC:0x12700], self.report["in_place_leaves"][41]),
+                    (self.official[0x12714:0x12804], self.report["in_place_leaves"][42]),
+                    (self.official[0x12700:0x12712], self.report["in_place_leaves"][43]),
+                    (self.official[0x12804:0x12812], self.report["in_place_leaves"][44]),
+                    (self.official[0x12812:0x12820], self.report["in_place_leaves"][45]),
+                    (self.official[0x12820:0x12832], self.report["in_place_leaves"][46]),
+                    (self.official[0x12832:0x12844], self.report["in_place_leaves"][47]),
+                    (self.official[0x12844:0x12852], self.report["in_place_leaves"][48]),
+                    (self.official[0x12852:0x12860], self.report["in_place_leaves"][49]),
+                    (self.official[0x12860:0x12872], self.report["in_place_leaves"][50]),
+                    (self.official[0x12874:0x1287C], self.report["in_place_leaves"][51]),
+                    (self.official[0x1287C:0x12AAC], self.report["in_place_leaves"][52]),
+                    (self.official[0x12AAC:0x12AC8], self.report["in_place_leaves"][53]),
+                    (self.official[0x12AC8:0x12ACA], self.report["in_place_leaves"][54]),
+                    (self.official[0x12ACA:0x12AD2], self.report["in_place_leaves"][55]),
+                    (self.official[0x12AD4:0x12BA8], self.report["in_place_leaves"][56]),
+                    (self.official[0x12BA8:0x12D20], self.report["in_place_leaves"][57]),
+                    (self.official[0x12D20:0x12D4C], self.report["in_place_leaves"][58]),
+                    (self.official[0x12D4C:0x12D7A], self.report["in_place_leaves"][59]),
+                    (self.official[0x12D7E:0x12DC6], self.report["in_place_leaves"][60]),
+                    (self.official[0x12DC6:0x12E28], self.report["in_place_leaves"][61]),
+                    (self.official[0x12E28:0x12EE2], self.report["in_place_leaves"][62]),
+                    (self.official[0x12EE2:0x12F4C], self.report["in_place_leaves"][63]),
+                    (self.official[0x12F4C:0x12FA2], self.report["in_place_leaves"][64]),
+                    (self.official[0x12FA2:0x12FDE], self.report["in_place_leaves"][65]),
+                    (self.official[0x12FDE:0x1308E], self.report["in_place_leaves"][66]),
+                    (self.official[0x132C8:0x1330E], self.report["in_place_leaves"][67]),
+                    (self.official[0x1330E:0x13342], self.report["in_place_leaves"][68]),
+                    (self.official[0x13342:0x13350], self.report["in_place_leaves"][69]),
+                    (self.official[0x13350:0x13390], self.report["in_place_leaves"][70]),
+                    (self.official[0x13390:0x133E0], self.report["in_place_leaves"][71]),
+                    (self.official[0x133E8:0x13430], self.report["in_place_leaves"][72]),
+                    (self.official[0x13444:0x1348E], self.report["in_place_leaves"][73]),
+                    (self.official[0x1348E:0x134D8], self.report["in_place_leaves"][74]),
+                    (self.official[0x134D8:0x134FA], self.report["in_place_leaves"][75]),
+                    (self.official[0x134FA:0x13524], self.report["in_place_leaves"][76]),
+                    (self.official[0x13524:0x13608], self.report["in_place_leaves"][77]),
+                    (self.official[0x13608:0x136CE], self.report["in_place_leaves"][78]),
+                    (self.official[0x136CE:0x136FA], self.report["in_place_leaves"][79]),
+                    (self.official[0x13700:0x1372A], self.report["in_place_leaves"][80]),
+                    (self.official[0x1372A:0x13764], self.report["in_place_leaves"][81]),
+                    (self.official[0x1377C:0x1382C], self.report["in_place_leaves"][82]),
+                    (self.official[0x13864:0x138BA], self.report["in_place_leaves"][83]),
+                    (self.official[0x138BA:0x13928], self.report["in_place_leaves"][84]),
+                    (self.official[0x13928:0x13972], self.report["in_place_leaves"][85]),
+                    (self.official[0x13972:0x139C2], self.report["in_place_leaves"][86]),
+                    (self.official[0x139C2:0x13A48], self.report["in_place_leaves"][87]),
+                    (self.official[0x13A48:0x13D08], self.report["in_place_leaves"][88]),
+                    (self.official[0x13D08:0x13D20], self.report["in_place_leaves"][89]),
+                    (self.official[0x13D20:0x13D58], self.report["in_place_leaves"][90]),
+                    (self.official[0x13D58:0x13D7A], self.report["in_place_leaves"][91]),
+                    (self.official[0x13D7A:0x13D9A], self.report["in_place_leaves"][92]),
+                    (self.official[0x13DA0:0x13DC4], self.report["in_place_leaves"][93]),
+                    (self.official[0x13DC4:0x13DCE], self.report["in_place_leaves"][94]),
+                    (self.official[0x13DD0:0x13E0C], self.report["in_place_leaves"][95]),
+                    (self.official[0x13E14:0x13E40], self.report["in_place_leaves"][96]),
+                    (self.official[0x13E40:0x13E8A], self.report["in_place_leaves"][97]),
+                    (self.official[0x13E8A:0x13F28], self.report["in_place_leaves"][98]),
+                    (self.official[0x13F28:0x13F54], self.report["in_place_leaves"][99]),
+                    (self.official[0x13F54:0x13F8E], self.report["in_place_leaves"][100]),
+                    (self.official[0x13F8E:0x13FAC], self.report["in_place_leaves"][101]),
+                    (self.official[0x13FAC:0x13FB8], self.report["in_place_leaves"][102]),
+                    (self.official[0x13FB8:0x1403E], self.report["in_place_leaves"][103]),
+                ],
+            )
 
     def test_manifest_tracks_dual_image_littlefs_utility_replacements(
         self,
@@ -5566,7 +6516,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
     def test_easylogger_relocated_leaf_config_report_and_artifact_are_exact(
         self,
     ) -> None:
-        self.assertEqual(len(self.config["relocated_leaves"]), 140)
+        self.assertEqual(len(self.config["relocated_leaves"]), 179)
         expected = {
             "open_cfw_easylogger_helpers_get_logger": {
                 "source": (
@@ -5797,6 +6747,352 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 "final": body_hash,
                 "relocations": [],
             }
+        mspi_source = "1ae615db206b9658a042eff863888d259ee31b4ea2a3511bc1cec3e2b30a031c"
+        for name, offset, size, runtime, body_hash in (
+            ("open_cfw_bootloader_mspi_enable_41fe28", 10116, 40, 0x00436BFC, "d2c4bcc5e93182f643d4c97f6fe2295851308b0efb33e2a5a5f7434da7cad2b8"),
+            ("open_cfw_bootloader_mspi_disable_41fe48", 10156, 32, 0x00436C24, "22eba2a5dc7603d067ed9bb72afe6f491a7b4c4fae06da054e572bc11165aed0"),
+        ):
+            expected[name] = {"source": mspi_source, "offset": offset, "size": size, "alignment": 4, "padding": 0, "runtime": runtime, "raw": body_hash, "final": body_hash, "relocations": []}
+        mspi_guard_source = "7e8887462129c0cf147126e324ae240c91abf9718bb7bb27fb3390a2b36849da"
+        for name, offset, size, runtime, body_hash in (
+            ("open_cfw_bootloader_mspi_guard_enter_41ff08", 10396, 36, 0x00436D14, "e900042722fccbebf61515c642ef2f75157022328550eaed47ecafa2465307eb"),
+            ("open_cfw_bootloader_mspi_guard_exit_41ff1e", 10432, 32, 0x00436D38, "dfb2fdd918afb3a3133234aa452430ab22ce73839c07e81914fa798ec49b4e40"),
+        ):
+            expected[name] = {"source": mspi_guard_source, "offset": offset, "size": size, "alignment": 4, "padding": 0, "runtime": runtime, "raw": body_hash, "final": body_hash, "relocations": []}
+        expected["open_cfw_bootloader_mspi_xip_config_41ff34"] = {
+            "source": "5f5bea367de55e637c87bc3e5888a7350654692af1499a3bd5b45ace2c3a6d8e",
+            "offset": 10464,
+            "size": 36,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00436D58,
+            "raw": "0cc0ac059e80451afec8ddbad56203612ebc34a9559a549f6c499bd958be87eb",
+            "final": "0cc0ac059e80451afec8ddbad56203612ebc34a9559a549f6c499bd958be87eb",
+            "relocations": [],
+        }
+        bit_run_source = "4647db644148f4df98454c6018d684a70e52306b0f2cfbbdfd79749fd2f53903"
+        for name, offset, size, runtime, body_hash in (
+            ("open_cfw_bootloader_longest_ones_run_41ff60", 10500, 16, 0x00436D7C, "a690bd1df07a26fa65416653fee80c088615b3c492786331ee08f1446585ef4d"),
+            ("open_cfw_bootloader_longest_ones_center_41ff74", 10516, 126, 0x00436D8C, "d36402e8d02ee3663653477b656cd3ba1b713dc65688373e34f3d20332926390"),
+        ):
+            expected[name] = {"source": bit_run_source, "offset": offset, "size": size, "alignment": 2, "padding": 0, "runtime": runtime, "raw": body_hash, "final": body_hash, "relocations": []}
+        expected["open_cfw_bootloader_mspi_timing_scan_420002"] = {
+            "source": "bbf4ccc39eff32fbf45ef5a880f78eb6fec934394ea888f47140ca7b0c0d4c50",
+            "offset": 10644,
+            "size": 420,
+            "alignment": 4,
+            "padding": 2,
+            "runtime": 0x00436E0C,
+            "raw": "b3582162aa1a50ecf33e55f380293a100a5fde5d9db41043f8f796b268c0ccb2",
+            "final": "184a82c6cb821121c638e1b237802adc07ffa89d7c9655262156e4c8c32ce481",
+            "relocations": [
+                (194, "R_ARM_THM_CALL", "open_cfw_bootloader_longest_ones_run_41ff60", 0x00436D7C),
+                (320, "R_ARM_THM_CALL", "open_cfw_bootloader_longest_ones_center_41ff74", 0x00436D8C),
+            ],
+        }
+        expected["open_cfw_bootloader_mspi_timing_auto_4201ba"] = {
+            "source": "60ef2a425997e8b4e760c0a2c2cf6cc139a336759ea1b400f9e2909cc798c8c8",
+            "offset": 11064,
+            "size": 172,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00436FB0,
+            "raw": "c80f3e39201fd4dfb3648711af97e0f4eaa1e645c61d97f85bcab72bb3cfac8f",
+            "final": "96486cb54903f2e183aa7923a84f71f17027a24397e84dde3c9154a78d0b0e56",
+            "relocations": [
+                (26, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_timing_scan_420002", 0x00436E0C),
+            ],
+        }
+        expected["open_cfw_bootloader_mspi_low_level_init_420254"] = {
+            "source": "e5170727ba0e6fbc412ccc2dc1a845f777a66c1bd10eba3248db041bde31548d",
+            "offset": 11236,
+            "size": 492,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x0043705C,
+            "raw": "d04f06e63eb149ba70e030001552991f0222d43ec3aa74321640675ba0439e33",
+            "final": "a2eeead28dbb8476a9772b171133db5e8475deb85de7b72ff75abbbf7f6a92ea",
+            "relocations": [
+                (290, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_xip_config_41ff34", 0x00436D58),
+                (298, "R_ARM_THM_CALL", "open_cfw_bootloader_pin_groups_41fadc", 0x00436988),
+                (378, "R_ARM_THM_CALL", "open_cfw_bootloader_nvic_set_priority_41fdde", 0x00436BAC),
+                (384, "R_ARM_THM_CALL", "open_cfw_bootloader_nvic_enable_irq_41fdc0", 0x00436B8C),
+            ],
+        }
+        expected["open_cfw_bootloader_mspi_driver_init_420476"] = {
+            "source": "65a390f2c770079f4255ea489cc02bc0f593674de7688d3fb550f201ebc8785f",
+            "offset": 11728,
+            "size": 204,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00437248,
+            "raw": "9f93f834b499f13412e425a025c6be9d1e86a60c7f461b223e654fdf5134bdd9",
+            "final": "31195e4775918f5fb7b0925f2cfa15b4a8f699688ae3bb0888527299de197e7c",
+            "relocations": [
+                (14, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_low_level_init_420254", 0x0043705C),
+                (60, "R_ARM_THM_CALL", "open_cfw_bootloader_delay_milliseconds_41f9d8", 0x00436880),
+                (78, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_timing_auto_4201ba", 0x00436FB0),
+                (158, "R_ARM_THM_CALL", "open_cfw_bootloader_event_flags_init_41fe62", 0x00436C44),
+                (162, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_enable_41fe28", 0x00436BFC),
+            ],
+        }
+        expected["open_cfw_bootloader_mspi_soft_reset_42052a"] = {
+            "source": "ebe83fc0c63dc78e6c165f308dfd331eaf9cdc0a171c036a564f581d55bd3b47",
+            "offset": 11932,
+            "size": 136,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00437314,
+            "raw": "1223a14bfe9fc5267517253e84772bf9eb52ce7d760f563db26fd342d838a468",
+            "final": "17354876de75a9540cac0603e3f8eae3fbd564a239c0d07f771b1104065c817c",
+            "relocations": [
+                (58, "R_ARM_THM_CALL", "open_cfw_bootloader_delay_milliseconds_41f9d8", 0x00436880),
+                (106, "R_ARM_THM_JUMP24", "open_cfw_bootloader_delay_milliseconds_41f9d8", 0x00436880),
+            ],
+        }
+        expected["open_cfw_bootloader_mspi_read_id_42059e"] = {
+            "source": "3e279abf9a149279da6fdb72009884e62224800e7843d487a803e5fa7293e1b6",
+            "offset": 12068,
+            "size": 100,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x0043739C,
+            "raw": "cbd9055d50d62d9ff1208d66fd3e62785e8e20021b311a318d22c1aab4bf4dbe",
+            "final": "cbd9055d50d62d9ff1208d66fd3e62785e8e20021b311a318d22c1aab4bf4dbe",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_read_transfer_4205f4"] = {
+            "source": "d310d632be00ea4c9c136b5e089340d83cecdeaa74be814b5864e9abf592a525",
+            "offset": 12168,
+            "size": 172,
+            "alignment": 8,
+            "padding": 0,
+            "runtime": 0x00437400,
+            "raw": "b7ab22593ca756879ce8f8dbdcf249806ec23beff8029959fecb39d3c2e784ed",
+            "final": "b7ab22593ca756879ce8f8dbdcf249806ec23beff8029959fecb39d3c2e784ed",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_write_transfer_42069e"] = {
+            "source": "7fa590ec5cd0fbd87feb193c9bdec3becb0a6acea6334555c84683e3565451c1",
+            "offset": 12340,
+            "size": 148,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x004374AC,
+            "raw": "dac51840015d8553b2684538ff0a5a092d6c03122aa933a3af8d706a2e9d2b73",
+            "final": "dac51840015d8553b2684538ff0a5a092d6c03122aa933a3af8d706a2e9d2b73",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_busy_status_42074e"] = {
+            "source": "361432557372303651f41bb8d3446d1f18f1753914fb8227fd6a4c57355685b8",
+            "offset": 12488,
+            "size": 88,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00437540,
+            "raw": "941545cc31870eadc0effa9a311c8e48788ffe3c33c644e58ccc11723ea304a5",
+            "final": "941545cc31870eadc0effa9a311c8e48788ffe3c33c644e58ccc11723ea304a5",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_wait_ready_4207a2"] = {
+            "source": "3818159361e949ac31c6c5e78c2f8236015ea2b76b571358efdd3fab789785b0",
+            "offset": 12576,
+            "size": 88,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00437598,
+            "raw": "c91a275806d2281aaf13566e176ceb688e1e9f74a16955a754853f99bda5cba4",
+            "final": "c91a275806d2281aaf13566e176ceb688e1e9f74a16955a754853f99bda5cba4",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_wait_ready_default_4207f4"] = {
+            "source": "3818159361e949ac31c6c5e78c2f8236015ea2b76b571358efdd3fab789785b0",
+            "offset": 12664,
+            "size": 12,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x004375F0,
+            "raw": "0179837648f7b822a8e664cdbba880d3d1a90e9951dab053afcc693f5240bffe",
+            "final": "0179837648f7b822a8e664cdbba880d3d1a90e9951dab053afcc693f5240bffe",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_4byte_mode_420800"] = {
+            "source": "1d1282fbfbbfa62aa87a68d323c9fc85faf996ed1c6a56d3967134e4f97f1cc7",
+            "offset": 12676,
+            "size": 124,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x004375FC,
+            "raw": "39be5e62d485cd317fc91cb56ead2101d297d71c0e9af887cc33034e81d28979",
+            "final": "39be5e62d485cd317fc91cb56ead2101d297d71c0e9af887cc33034e81d28979",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_enter_4byte_mode_420890"] = {
+            "source": "da4425a664e3cfa980878ccf79c6770ad133f1991504bc0524c8d7866b408c9b",
+            "offset": 12800,
+            "size": 220,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00437678,
+            "raw": "041427a167b5b0379af8d927c7ab094274fcd542b67cfe5a0deaccbd885571e4",
+            "final": "041427a167b5b0379af8d927c7ab094274fcd542b67cfe5a0deaccbd885571e4",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_write_enable_420984"] = {
+            "source": "a2bb35ee6fce5e016accddfd028cf0152aa6b025b467eb8e5a695bbe09f8ca78",
+            "offset": 13020,
+            "size": 72,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00437754,
+            "raw": "e55a89dcef578fc6fa07e7935d8c0edf4f2d76cceef420b1a50b1468ea90fa76",
+            "final": "e55a89dcef578fc6fa07e7935d8c0edf4f2d76cceef420b1a50b1468ea90fa76",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_write_disable_4209c4"] = {
+            "source": "a2bb35ee6fce5e016accddfd028cf0152aa6b025b467eb8e5a695bbe09f8ca78",
+            "offset": 13092,
+            "size": 72,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x0043779C,
+            "raw": "398b8c96a5d637a6bf6a1d977c0dcd0b1dee70594c4dbc2c7e44ec70b7b7d99c",
+            "final": "398b8c96a5d637a6bf6a1d977c0dcd0b1dee70594c4dbc2c7e44ec70b7b7d99c",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_sector_erase_420a08"] = {
+            "source": "d23d511d53de96bd748611c1bea5312687bf6d4338f200030634d5b908fa4ae8",
+            "offset": 13164,
+            "size": 244,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x004377E4,
+            "raw": "673dea5391605a49b503acf81a1c3ab626fc70bbdfd92ad2b156902516fbb060",
+            "final": "673dea5391605a49b503acf81a1c3ab626fc70bbdfd92ad2b156902516fbb060",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_program_420b0c"] = {
+            "source": "4d562ceaf98995b5cf92e1d8103c6a163f19786eb75be083ad6a778310938169",
+            "offset": 13408,
+            "size": 256,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x004378D8,
+            "raw": "1d90e6749de44a32ff7a6b4ced694569bf95e4b836961891cde35edf06f6e482",
+            "final": "1d90e6749de44a32ff7a6b4ced694569bf95e4b836961891cde35edf06f6e482",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_quad_enable_420c5c"] = {
+            "source": "698d511d3824f122d555a9705fe9ea9750859dfa1e1da814407add16cd657f4a",
+            "offset": 13664,
+            "size": 364,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x004379D8,
+            "raw": "3c44f102542a992680fb79525bbd3caa0c264ae9a5b010cc2c6a9c78ec93c91b",
+            "final": "3c44f102542a992680fb79525bbd3caa0c264ae9a5b010cc2c6a9c78ec93c91b",
+            "relocations": [],
+        }
+        expected["open_cfw_bootloader_mspi_device_reconfigure_420e08"] = {
+            "source": "23ce33f81eacea40350c99427d0156e488b2d28d80a7bb040438fe55f91c2551",
+            "offset": 14028,
+            "size": 136,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00437B44,
+            "raw": "065da9327ea493b21dc7d44cc863947c88a5d1c407f031ed1d9327e320ef8204",
+            "final": "7be99b6cd10ca4a8bcb4dc893a246c439a117d95798ab566d9f5def8d35d60f4",
+            "relocations": [
+                (98, "R_ARM_THM_CALL", "open_cfw_bootloader_pin_groups_41fadc", 0x00436988),
+            ],
+        }
+        expected["open_cfw_bootloader_mspi_set_quad_mode_420e8c"] = {
+            "source": "9a94b5d2766ecbbfe5b428779dc34c7a0eb19f4b7e6eeb7edb1cededa9228833",
+            "offset": 14164,
+            "size": 152,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00437BCC,
+            "raw": "c9a0245f4090f520644aa4fda29308adf089d78cafa84d959754493926a65bdd",
+            "final": "f16e2d6db8f18731b03c5f1a335ebd5f80d9524d8b320749666c05185415eb3c",
+            "relocations": [
+                (12, "R_ARM_THM_CALL", "open_cfw_bootloader_aeabi_memcpy", 0x00434830),
+                (48, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_device_reconfigure_420e08", 0x00437B44),
+                (66, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_xip_config_41ff34", 0x00436D58),
+            ],
+        }
+        expected["open_cfw_bootloader_mspi_set_serial_mode_420f10"] = {
+            "source": "85f79cccdaa9644e765ab2580b91f75f3dcb5cfcb26125d2878dddc0a37ae361",
+            "offset": 14316,
+            "size": 124,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00437C64,
+            "raw": "4af379ff55bf842dcfd2cc6589a6e4c0c27012bd9cbbf74d6baee92a9e51736b",
+            "final": "7bd7debf9e5a4c3eea789c950410381f3579bf14a97f92ccc45d453457949ba9",
+            "relocations": [
+                (4, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_device_reconfigure_420e08", 0x00437B44),
+                (40, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_xip_config_41ff34", 0x00436D58),
+            ],
+        }
+        expected["open_cfw_bootloader_mspi_read_420f70"] = {
+            "source": "9ace6b932c3a183df9ce4a07c06463404a4dd07007a9c4fe55443b26edc00163",
+            "offset": 14440,
+            "size": 152,
+            "alignment": 8,
+            "padding": 0,
+            "runtime": 0x00437CE0,
+            "raw": "87dd2258a3f977fd79e3fde36da8d48b5aeea0568f3a9ae903d87844208360cb",
+            "final": "4acc213e830b898b6698c827bfd3e39e2f65d93844675047274315828a6cac71",
+            "relocations": [
+                (40, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_guard_enter_41ff08", 0x00436D14),
+                (44, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_set_quad_mode_420e8c", 0x00437BCC),
+                (48, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_wait_ready_default_4207f4", 0x004375F0),
+                (94, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_guard_exit_41ff1e", 0x00436D38),
+            ],
+        }
+        expected["open_cfw_bootloader_check_and_create_directories_4210c8"] = {
+            "source": "0a8b482985fba7d10d39eaf042faa4317c317c7c932bb70665b5f88b479e1a60",
+            "offset": 14592,
+            "size": 220,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00437D78,
+            "raw": "39fdef6b959bb5771f637ac6084bc6ce5f357aa7a32288e6a15cbe0f90d569d8",
+            "final": "456bcb6e3fb5bb820e3f400352787f03419828d247956407e06ca3fadb853f72",
+            "relocations": [
+                (144, "R_ARM_THM_CALL", "open_cfw_bootloader_easylogger_output_4176ce", 0x004362DC),
+                (182, "R_ARM_THM_CALL", "open_cfw_bootloader_easylogger_output_4176ce", 0x004362DC),
+            ],
+        }
+        expected["open_cfw_littlefs_bootloader_format_4211b0"] = {
+            "source": "1a6372a3c81e895c67326bba005c655fe0d011be306fa3c453c8afbd8600b496",
+            "offset": 14812,
+            "size": 108,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00437E54,
+            "raw": "173e8b905d12452d033fef79fe4729df236a647d92f4ed23f07f901e0bda55bc",
+            "final": "dde3d1adb0ab07eb997820b6b6f6c505b965be976585252b893daff999585fdc",
+            "relocations": [
+                (48, "R_ARM_THM_CALL", "open_cfw_bootloader_check_and_create_directories_4210c8", 0x00437D78),
+                (72, "R_ARM_THM_CALL", "open_cfw_bootloader_easylogger_output_4176ce", 0x004362DC),
+            ],
+        }
+        expected["open_cfw_bootloader_littlefs_read_4212d8"] = {
+            "source": "05f807e60ece402cf2d4f3d89e50f022813f33e80e96bb065e14c4ba460acbaf",
+            "offset": 15180,
+            "size": 60,
+            "alignment": 4,
+            "padding": 0,
+            "runtime": 0x00437FC4,
+            "raw": "128ce01c51af09ed5433ccb3bfb1f097f54687a0ad38bbd33211d6af8d10ab5a",
+            "final": "b1f49f83efac394d09db4885f1776717342630734fa0f9c2e25b984e626686db",
+            "relocations": [
+                (22, "R_ARM_THM_CALL", "open_cfw_bootloader_mspi_read_420f70", 0x00437CE0),
+                (40, "R_ARM_THM_CALL", "open_cfw_bootloader_log_dispatch", 0x00434F80),
+            ],
+        }
         transport_source = (
             "23a5180d3de5e45625f8323a226291d9"
             "f5ced532d7d73a320e57640794161d1c"
@@ -5917,6 +7213,26 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ),
             "relocations": [],
         }
+        irq_source = (
+            "c1b495b5d4de6ab8045e8e9f225736c"
+            "9d3b0cabbe93d712b4b347675394a377b"
+        )
+        for name, offset, size, runtime, body_hash in (
+            ("open_cfw_bootloader_nvic_enable_irq_41fdc0", 10004, 32, 0x00436B8C, "a0b40ca8273aa7d4e30b39a932157c6d1ab613aa5daa0d63cd8460129647975e"),
+            ("open_cfw_bootloader_nvic_set_priority_41fdde", 10036, 32, 0x00436BAC, "8b9fce902a009a23dc8d8b9be0e1c54487b2df821852dd97217ce6d96af9e9e6"),
+            ("open_cfw_bootloader_mspi_isr_41fe06", 10068, 48, 0x00436BCC, "554fc96172fb02ad47a180f43424b16d860c0b249a1e380b57584e56c10cfb54"),
+        ):
+            expected[name] = {
+                "source": irq_source,
+                "offset": offset,
+                "size": size,
+                "alignment": 4,
+                "padding": 0,
+                "runtime": runtime,
+                "raw": body_hash,
+                "final": body_hash,
+                "relocations": [],
+            }
         config_by_name = {
             leaf["function"]: leaf
             for leaf in self.config["relocated_leaves"]
@@ -6019,10 +7335,10 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         self.assertEqual(
             manifest_override["provider"]["profiles"]["linux-clang"],
             {
-                "size": 158588,
+                "size": 163824,
                 "sha256": (
-                    "a64974dce84415f4031847e1f71b5397"
-                    "cd0c366a31b8786d6f6e311ff53bd7b2"
+                    "d0a97870b861c089e4ac029ba1c7a1c0"
+                    "cc67d6112c3416a5cda657a038c3a8ea"
                 ),
             },
         )

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room BLE message-receive queue and no-op hooks reconstructed from
  * stock 0x0048EE28...0x0048EE53.

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room BLE message-receive queue dispatcher, flag router, exit, and
  * clear routines reconstructed from stock 0x0048EEAC...0x0048F125.

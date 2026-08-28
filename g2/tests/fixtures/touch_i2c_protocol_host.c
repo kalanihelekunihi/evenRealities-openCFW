@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* Host behavior fixture for the clean-room touch-controller protocol. */
 #include <stdint.h>
 

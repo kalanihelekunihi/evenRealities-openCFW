@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio application-database resolving-list reload wrapper matched
  * to stock AppDbReloadResolvingList at 0x0047B4D4.

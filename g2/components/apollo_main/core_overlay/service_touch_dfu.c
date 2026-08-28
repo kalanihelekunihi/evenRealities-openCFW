@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 /* Clean-room reconstruction of platform/input/touchDFU/service_touch_dfu.c. */
 #include <stdbool.h>
 #include <stddef.h>

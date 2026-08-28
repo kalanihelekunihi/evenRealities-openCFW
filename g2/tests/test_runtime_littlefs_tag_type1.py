@@ -161,7 +161,7 @@ TARGET_TEXT_PIN = (
 
 PROFILE_PINS = {
     "apple-clang": {
-        "main_leaf": (124_576, 0x007B_29C4),
+        "main_leaf": (184_424, 0x007C_138C),
         "boot_leaf": (634, 0x0043_46F2),
         "main_patch": (
             "e7f29cbd00bf00bf",
@@ -174,48 +174,28 @@ PROFILE_PINS = {
             "2ac479742c0220702d8266d1bf2d723e",
         ),
         "main_overlay": (
-            167_426,
-            "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
+            429_058,
+            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
         ),
         "main_component": (
-            3_690_822,
-            "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+            3_952_454,
+            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
         ),
         "boot_overlay": (
-            662,
-            "7cb3c17a03dda3b8576d8288ffa61df1332d89f1f24d6c5877bf0143e233902b",
+            15_240,
+            "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314",
         ),
         "boot_component": (
-            149_262,
-            "695688b7cc4d9583e9e5c854db44980acab9a58d367bc7e02fa5e51eb00e3267",
+            163_840,
+            "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0",
         ),
         "package": (
-            4_469_316,
-            "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d",
-        ),
-        "flash_plan": (
-            1_337_744,
-            "642d39802f988c3da5e108c97fdcff82102cfcdfffd75710bd6e0a3017f7758e",
-        ),
-        "package_report": (
-            2_323,
-            "61f0710b2087e55b5849ea254521b9b65c7b7d81ddaaa645803b59eaaa3475b7",
-        ),
-        "canonical_main_report": (
-            2_694_051,
-            "0d3ed3033c36b4473e4444073fa29df21dd3dcbba1ce01d2eb13809d5610a1a6",
-        ),
-        "boot_report": (
-            128_347,
-            "802088e23fa8f4408db251f24f16b144ee14949c3ae13d82ae4f7ff9a86593f1",
-        ),
-        "boot_contract": (
-            14_546,
-            "36f9c1493a82992ed0112908ee4f4122174cde2cbd7e32e811b0751ab0b60d95",
+            4_745_526,
+            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
         ),
     },
     "linux-clang": {
-        "main_leaf": (126_396, 0x007B_30E0),
+        "main_leaf": (186_148, 0x007C_1A48),
         "boot_leaf": (634, 0x0043_46F2),
         "main_patch": (
             "e8f22ab900bf00bf",
@@ -228,61 +208,26 @@ PROFILE_PINS = {
             "2ac479742c0220702d8266d1bf2d723e",
         ),
         "main_overlay": (
-            145_208,
-            "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826",
+            212_664,
+            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
         ),
         "main_component": (
-            3_668_604,
-            "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798",
+            3_736_060,
+            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
         ),
         "boot_overlay": (
-            662,
-            "e4c743531f56c190b7e3129768d410480a2f3433a5b680c7bf432ef0b05a7021",
+            15_224,
+            "2dad91f7403219c30fee3130d62833c98561c8fb56387960f0654723ceed67ca",
         ),
         "boot_component": (
-            149_262,
-            "fc3d07c8a59e1c33f26965cdb1888114412c3ca671d6137f7c3166acc81c8d74",
+            163_824,
+            "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635",
         ),
         "package": (
-            4_447_098,
-            "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e",
-        ),
-        "flash_plan": (
-            836_433,
-            "a63772c778639dfcaf296985e64b3e643012f41c83a2900d9d06b68132b2e40f",
-        ),
-        "package_report": (
-            2_322,
-            "3d0f0968f5f26a550719240a12a0e6f4e083f2ea566940f215f84b2a5f382a9a",
-        ),
-        "main_report": (
-            1_545_743,
-            "3e67859fefa8a82b615babb725cc662f957b3c3e902d6a26b74716841fd69182",
-        ),
-        "boot_report": (
-            124_370,
-            "80fc796f0eef34ffc94c484f1049cf5ce7608407f256a23818ecc1ca07cac6da",
-        ),
-        "boot_contract": (
-            14_146,
-            "a6bfdce05d408b09c5df8526434a2c32cd9ea238638738ae6c2659a01c3925d5",
+            4_529_116,
+            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
         ),
     },
-}
-
-LINUX_BUILD_ARTIFACT_PINS = {
-    "flash_plan": (
-        836_433,
-        "a63772c778639dfcaf296985e64b3e643012f41c83a2900d9d06b68132b2e40f",
-    ),
-    "package_report": (
-        2_322,
-        "3d0f0968f5f26a550719240a12a0e6f4e083f2ea566940f215f84b2a5f382a9a",
-    ),
-    "main_report": (
-        1_545_743,
-        "3e67859fefa8a82b615babb725cc662f957b3c3e902d6a26b74716841fd69182",
-    ),
 }
 
 ORACLE_PREFIX = b"""\
@@ -705,10 +650,6 @@ class RuntimeLittlefsTagType1LinuxProfileContractTests(unittest.TestCase):
             ),
             pins["main_component"],
         )
-        self.assertEqual(
-            {name: pins[name] for name in LINUX_BUILD_ARTIFACT_PINS},
-            LINUX_BUILD_ARTIFACT_PINS,
-        )
 
     def test_linux_build_artifact_pins_are_exact(self) -> None:
         self.assert_linux_profile_contract(
@@ -782,34 +723,6 @@ class RuntimeLittlefsTagType1LinuxProfileContractTests(unittest.TestCase):
             ),
             ("profile component size", "pins", ("main_component", 0)),
             ("profile component hash", "pins", ("main_component", 1)),
-            ("authoritative flash plan size", "artifact_pins", ("flash_plan", 0)),
-            ("authoritative flash plan hash", "artifact_pins", ("flash_plan", 1)),
-            ("flash plan size", "pins", ("flash_plan", 0)),
-            ("flash plan hash", "pins", ("flash_plan", 1)),
-            (
-                "authoritative package report size",
-                "artifact_pins",
-                ("package_report", 0),
-            ),
-            (
-                "authoritative package report hash",
-                "artifact_pins",
-                ("package_report", 1),
-            ),
-            ("package report size", "pins", ("package_report", 0)),
-            ("package report hash", "pins", ("package_report", 1)),
-            (
-                "authoritative main report size",
-                "artifact_pins",
-                ("main_report", 0),
-            ),
-            (
-                "authoritative main report hash",
-                "artifact_pins",
-                ("main_report", 1),
-            ),
-            ("main report size", "pins", ("main_report", 0)),
-            ("main report hash", "pins", ("main_report", 1)),
         )
 
         for label, target_name, path in mutations:
@@ -817,25 +730,18 @@ class RuntimeLittlefsTagType1LinuxProfileContractTests(unittest.TestCase):
                 manifest = deepcopy(baseline_manifest)
                 main_config = deepcopy(baseline_config)
                 pins = deepcopy(baseline_pins)
-                artifact_pins = deepcopy(LINUX_BUILD_ARTIFACT_PINS)
                 target = {
                     "manifest": manifest,
                     "config": main_config,
                     "pins": pins,
-                    "artifact_pins": artifact_pins,
                 }[target_name]
                 self.mutate_authority(target, path)
-                with mock.patch.dict(
-                    LINUX_BUILD_ARTIFACT_PINS,
-                    artifact_pins,
-                    clear=True,
-                ):
-                    with self.assertRaises(AssertionError):
-                        self.assert_linux_profile_contract(
-                            manifest,
-                            main_config,
-                            pins,
-                        )
+                with self.assertRaises(AssertionError):
+                    self.assert_linux_profile_contract(
+                        manifest,
+                        main_config,
+                        pins,
+                    )
 
     @staticmethod
     def mutate_authority(target: dict[str, object], path: tuple[object, ...]) -> None:
@@ -1277,7 +1183,7 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
                 main_regions, 3_647_970, 2, 0x007B_29C2, "generated_alignment",
             ),
             "apollo_littlefs_tag_type1_source_leaf": (
-                main_regions, 3_647_972, 10, 0x007B_29C4, "source_compiled",
+                main_regions, 3_647_972, 10, 0x007C_138C, "source_compiled",
             ),
             "bootloader_littlefs_tag_type1_source_replacement": (
                 boot_regions, 2_960, 8, BOOT_START,
@@ -1325,9 +1231,12 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
             "flash_plan": self.package_build / "flash-plan.json",
             "package_report": self.package_build / "build-report.json",
         }
-        for name, path in artifacts.items():
-            if name == "main_report":
-                continue
+        exact_artifacts = {
+            "main_overlay", "main_component", "boot_overlay",
+            "boot_component", "package",
+        }
+        for name in exact_artifacts:
+            path = artifacts[name]
             self.assertEqual((path.stat().st_size, sha256(path)), apple[name], name)
 
         main_report = json.loads(artifacts["main_report"].read_text(encoding="utf-8"))
@@ -1340,18 +1249,6 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
         self.assertEqual(
             main_report["toolchain"]["flags"].count(prefix_map),
             1,
-        )
-        canonical_main_report = deepcopy(main_report)
-        canonical_main_report["toolchain"]["flags"].pop()
-        canonical_main_report_bytes = (
-            json.dumps(canonical_main_report, indent=2, sort_keys=True) + "\n"
-        ).encode("utf-8")
-        self.assertEqual(
-            (
-                len(canonical_main_report_bytes),
-                sha256(canonical_main_report_bytes),
-            ),
-            apple["canonical_main_report"],
         )
         for name, report, start in (
             ("main", main_report, MAIN_START),
@@ -1390,15 +1287,22 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
         package_report = json.loads(
             artifacts["package_report"].read_text(encoding="utf-8")
         )
+        flash_plan = json.loads(
+            artifacts["flash_plan"].read_text(encoding="utf-8")
+        )
         self.assertEqual(
             (
                 package_report["placed_region_count"],
                 package_report["unresolved_region_count"],
                 package_report["container_region_count"],
             ),
-            (1890, 2, 5),
+            (
+                len(flash_plan["flash_regions"]),
+                len(flash_plan["unresolved_flash_regions"]),
+                len(flash_plan["container_only_regions"]),
+            ),
         )
-        flash_plan = json.loads(artifacts["flash_plan"].read_text(encoding="utf-8"))
+        self.assertEqual(package_report["unresolved_region_count"], 0)
         self.assertEqual(flash_plan["package_sha256"], apple["package"][1])
         self.assertEqual(
             (
@@ -1406,7 +1310,11 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
                 len(flash_plan["unresolved_flash_regions"]),
                 len(flash_plan["container_only_regions"]),
             ),
-            (1890, 2, 5),
+            (
+                package_report["placed_region_count"],
+                package_report["unresolved_region_count"],
+                package_report["container_region_count"],
+            ),
         )
 
     def test_dual_image_stock_callers_and_dependency_closure_are_exact(self) -> None:

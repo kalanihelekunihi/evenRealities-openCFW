@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-excluded clean-room expressions of two small Ambiq GPU-patch
  * raster pipelines recovered from the exact AmbiqSuite 5.1.0 object.

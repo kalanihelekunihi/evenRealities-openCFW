@@ -47,7 +47,7 @@ Source-only historical inventory is therefore not inferred.
 ## Production closure
 
 `components/apollo_main/core_overlay/pb_service_translate.c` is a 9,294-byte,
-GPL-3.0-only clean-room implementation (SHA-256
+MIT clean-room implementation (SHA-256
 `1e6429d33df883ca498112850f6e38254798d82e88de86d2b2c450d9300d0095`).
 Seven selector-isolated source functions compile to 748 Thumb text bytes plus
 four alignment bytes. Four guarded `B.W` redirects replace all 1,324 stock

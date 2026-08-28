@@ -1,0 +1,243 @@
+{
+  "analysis_mode": "offline authenticated Thumb CFG recovery; no hardware, reset, DFU, signing, or flash operation",
+  "case_anchors": [
+    {
+      "entry": 1094,
+      "kind": "dispatch_case_entry",
+      "name": "version_identity_query_case",
+      "parent_function": 1024
+    },
+    {
+      "entry": 1126,
+      "kind": "dispatch_case_entry",
+      "name": "read_saved_proximity_baseline_case",
+      "parent_function": 1024
+    },
+    {
+      "entry": 1152,
+      "kind": "dispatch_case_entry",
+      "name": "read_long_press_threshold_case",
+      "parent_function": 1024
+    },
+    {
+      "entry": 1184,
+      "kind": "dispatch_case_entry",
+      "name": "save_proximity_baseline_case",
+      "parent_function": 1024
+    },
+    {
+      "entry": 1224,
+      "kind": "dispatch_case_entry",
+      "name": "write_gesture_configuration_case",
+      "parent_function": 1024
+    },
+    {
+      "entry": 1324,
+      "kind": "dispatch_case_entry",
+      "name": "enter_dfu_case",
+      "parent_function": 1024
+    },
+    {
+      "entry": 1356,
+      "kind": "dispatch_case_entry",
+      "name": "read_current_sensor_report_case",
+      "parent_function": 1024
+    }
+  ],
+  "identity": {
+    "blob": "blobs/official/g2-2.2.6.10/firmware_touch.bin",
+    "code_end": 30556,
+    "code_start": 192,
+    "payload_end": 34432,
+    "payload_start": 0,
+    "resident_external_start": 34432,
+    "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d"
+  },
+  "licensing": {
+    "analyzer_and_manifests": "MIT",
+    "historical_function_sources": "not inferred from this map; preserve identified upstream provider licenses",
+    "official_blob": "provenance evidence only; not relicensed",
+    "resident_abi": "unavailable; no source or license claim"
+  },
+  "limitations": [
+    "This tranche maps only vector/evidence/direct-call reachable entries, not every possible callable entry in code+pools.",
+    "Indirect call targets and resident table targets cannot be recovered from the shipped prefix alone.",
+    "Evidence-named behavior does not by itself establish historical source ownership or license.",
+    "No physical behavior, electrical timing, or release fitness is claimed."
+  ],
+  "method": {
+    "raw_halfword_bl_sweep_used_as_seed": false,
+    "resident_policy": "flash [0x8680,0x10000) and resident DFU/tables are external unavailable ABI",
+    "seed_policy": "authenticated vectors plus evidence-established function entries; recursive direct in-prefix BL closure",
+    "shared_tail_policy": "overlapping reachable suffix bytes retained per function and deduplicated in global coverage"
+  },
+  "metrics": {
+    "code_bytes_not_in_reachable_map": 24048,
+    "code_span_bytes": 30364,
+    "evidence_named_functions": 16,
+    "function_count": 63,
+    "function_instruction_bytes": 6620,
+    "indirect_call_sites": 9,
+    "indirect_jump_exits": 0,
+    "instruction_instances": 3171,
+    "maximum_owners_per_byte": 3,
+    "row_digest": "335e09b1d61057a49e69d4f58f9e9117f4e8db4f475068f76ba3f544919a5e7a",
+    "shared_instruction_bytes": 162,
+    "unique_instruction_bytes": 6316,
+    "unresolved_shipped_functions": 44,
+    "vector_seed_functions": 3
+  },
+  "resident_abi": [
+    {
+      "address": 45252,
+      "availability": "external_unavailable_abi",
+      "reference_offset": 1452,
+      "role": "RX command dispatch switch table, 9 entries (commands 0-8)"
+    },
+    {
+      "address": 46332,
+      "availability": "external_unavailable_abi",
+      "reference_offset": 14540,
+      "role": "event-dispatcher switch table, 8 entries (events 0-7)"
+    },
+    {
+      "address": 46364,
+      "availability": "external_unavailable_abi",
+      "reference_offset": 22868,
+      "role": "SROM status-decoder switch table, 20 entries"
+    },
+    {
+      "address": 45940,
+      "availability": "external_unavailable_abi",
+      "reference_offset": 992,
+      "role": "SCB1 HAL config table"
+    },
+    {
+      "address": 45288,
+      "availability": "external_unavailable_abi",
+      "reference_offset": 1004,
+      "role": "HAL callback registry table (payload callback 0x3624)"
+    },
+    {
+      "address": 43612,
+      "availability": "external_unavailable_abi",
+      "reference_offset": 1472,
+      "role": "log tag string (dead; logger stubbed)"
+    },
+    {
+      "address": 43612,
+      "availability": "external_unavailable_abi",
+      "reference_offset": 2428,
+      "role": "log tag string (dead; logger stubbed)"
+    },
+    {
+      "address": null,
+      "availability": "external_unavailable_abi",
+      "reference_offset": null,
+      "role": "resident DFU implementation entered after mailbox write and reset; exact resident entry/table unavailable"
+    }
+  ],
+  "row_count": 63,
+  "schema_version": 1,
+  "span_anchors": [
+    {
+      "end": 986,
+      "kind": "authenticated_code_region",
+      "name": "i2c_slave_init",
+      "role": "SCB1 I2C-slave init: HAL tables, RX/TX descriptors, SCB1 IRQ7 enable",
+      "sha256": "14859a32e5cb14c433222df6ddf0e50eccc68a424161e9088db386d03f6da026",
+      "size": 98,
+      "start": 888
+    },
+    {
+      "end": 1440,
+      "kind": "authenticated_code_region",
+      "name": "i2c_irq_handler_and_cases",
+      "role": "SCB1 IRQ handler: status demux, RX validation, 9-slot command dispatch, 7 case bodies",
+      "sha256": "d8911073cd4696cc8e93bf1d15bda36ec7fe5f654837b3421b49ac58ca088076",
+      "size": 416,
+      "start": 1024
+    },
+    {
+      "end": 2400,
+      "kind": "authenticated_code_region",
+      "name": "report_builder",
+      "role": "periodic 16-byte report build, prox-baseline EEPROM save policy, attention assert",
+      "sha256": "2dfdebfc817b8de4a5cab6d0e046511c89edd817a8f5d51cc42575f352074128",
+      "size": 316,
+      "start": 2084
+    },
+    {
+      "end": 14538,
+      "kind": "authenticated_code_region",
+      "name": "event_dispatcher",
+      "role": "generic device-event dispatcher, events 0-7, resident 8-entry table 0xB4FC",
+      "sha256": "a23e3a5e51a9e09ff72ba298701931212de059c566c48432f7898e2bbcdb3cc5",
+      "size": 266,
+      "start": 14272
+    },
+    {
+      "end": 19268,
+      "kind": "authenticated_code_region",
+      "name": "dfu_handoff_and_reset",
+      "role": "NVIC_SystemReset plus boot-mode mailbox writer (enter-DFU)",
+      "sha256": "56c6900e582fe22b2cbec6d71cde6979b68ba98e6dfe307ac2ed72ac9f3b3ebc",
+      "size": 48,
+      "start": 19220
+    },
+    {
+      "end": 26636,
+      "kind": "authenticated_code_region",
+      "name": "fifo_descriptors",
+      "role": "RX/TX descriptor arm helpers and RX-position getter",
+      "sha256": "6e882eca8aa4db5aec28f48319a4de30227ea7dad2719436275ae8c9171dd1f7",
+      "size": 52,
+      "start": 26584
+    },
+    {
+      "end": 28836,
+      "kind": "authenticated_code_region",
+      "name": "power_mgmt",
+      "role": "CPUSS power-mode setter, sleep/deep-sleep WFI entries, SFLASH trim load",
+      "sha256": "57234a89b2cf1792dad138e8f0b00f84e85a19b229a6151ef94eebc9fd9d4ccf",
+      "size": 106,
+      "start": 28730
+    },
+    {
+      "end": 3048,
+      "kind": "authenticated_code_region",
+      "name": "logger_stub",
+      "role": "compiled-out logger: push args, return 0; all 38 call sites are no-ops",
+      "sha256": "d5af164eb1253e2dc1faf4d9271ca5119221d2f156233a278dcbf632803173de",
+      "size": 8,
+      "start": 3040
+    },
+    {
+      "end": 1920,
+      "kind": "authenticated_code_region",
+      "name": "eeprom_config_module",
+      "role": "EEPROM-emulation config load/save with UNVE magic 0x45564E55",
+      "sha256": "0a97bda2b4b4f6eae1f6f23af5105a22dab792a1f79e35a00ac74a064db1d751",
+      "size": 288,
+      "start": 1632
+    },
+    {
+      "end": 804,
+      "kind": "authenticated_code_region",
+      "name": "sensor_read_mux",
+      "role": "per-channel sensor read multiplexer used by report and read-report command",
+      "sha256": "42770c5c2e8b77f3b992a3d049d3b706082280b7dfb7ab13ed15b0900312ef3d",
+      "size": 48,
+      "start": 756
+    },
+    {
+      "end": 14188,
+      "kind": "authenticated_code_region",
+      "name": "msc_sensing_loop",
+      "role": "authenticated MSC sensing-loop span",
+      "sha256": "5cee0e3336b8a6e052adc77ba845ff2d03d1dd5c9f4926588d523217aa7a13bc",
+      "size": 168,
+      "start": 14020
+    }
+  ]
+}

@@ -58,8 +58,8 @@ class AnalyzeG2AtTpTests(unittest.TestCase):
         self.assertEqual(production["stock_replaced_bytes"], 1040)
         self.assertEqual(production["strict_relocations"], 18)
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "blocked")
-        self.assertIn("No authorized physical G2 touch panel", production["hardware_blocker"])
+        self.assertEqual(production["hardware_validation"], "deferred by project direction")
+        self.assertIn("required for future qualification", production["hardware_blocker"])
 
 
 if __name__ == "__main__":

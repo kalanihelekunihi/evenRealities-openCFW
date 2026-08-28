@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded source replacement for the G2 2.2.6.10 LVGL RGB888 color-mix
  * routine at 0x00482DD8...0x00482E4B.

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  */
 
 unsigned int open_cfw_test_rtos_timer_service_loop_events[64];

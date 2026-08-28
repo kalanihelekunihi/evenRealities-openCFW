@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "elf_sha256": "ca8aa715b6c3fdf1bcd2e46c75305e9062fc89d30376d4659d6a786fc9365ab6",
+    "even_sha256": "5af2623dba3e4316f03a368510be02b2cfb5aace7331030110472b375d2b5fa8",
+    "raw_sha256": "68ba427f290f101efed6653f9664fe1b094e0a769d59cb15dc67d34246201229",
+    "source_inventory": [
+      {
+        "path": "components/shared/case/runtime_case_pure_helpers.c",
+        "sha256": "1750ca2a0baec320d478488c6973fe9b5c02e4d439284d9f3549058272ad1a32"
+      },
+      {
+        "path": "components/shared/case/runtime_case_register_policies.c",
+        "sha256": "5952682feb7dddf1e155fce2a9e198e5e8079ed87b8bf938c798d157055145e4"
+      },
+      {
+        "path": "components/shared/case/runtime_case_register_primitives.c",
+        "sha256": "5807d154e9401f8d8ce176ed24d675899c59abb97b00bcfcd78c4e0fec41270a"
+      },
+      {
+        "path": "components/shared/case/runtime_case_register_transforms.c",
+        "sha256": "963150b4aa2d544136ae541d788aaea52489cb917aa2ae5540b2ad4641fefa03"
+      },
+      {
+        "path": "components/shared/case/runtime_case_semantic_leaves.c",
+        "sha256": "01bddc77e1d356e8538b80bc0e188138b8e291dfa3cd364c9d74dfaf6d0b4403"
+      },
+      {
+        "path": "components/shared/case/runtime_case_uart_update.c",
+        "sha256": "68d228d64ad2b4af9c871d61eb0226fcbf484a4d5de0ac701584e8231fa9781c"
+      },
+      {
+        "path": "components/case/source_image/compiler_runtime.c",
+        "sha256": "4d04a6a2867eb4152381cb31d41fabb92a5d52d883bdc3653e4fa65d96743fb1"
+      },
+      {
+        "path": "components/case/source_image/startup.c",
+        "sha256": "8dbb183e8530cb6e21fe6eafa85ccc96d06f886dc029353f98630432c4fcffee"
+      },
+      {
+        "path": "components/case/source_image/linker.ld",
+        "sha256": "63c7824baef7b8254544d54de22e323621fee9e7e339100eb6e4e9393752e772"
+      }
+    ]
+  },
+  "component": "G2 charging-case source image admission",
+  "hardware_blocker": "deferred by project direction",
+  "hardware_operations": [],
+  "hardware_validation": "deferred by project direction",
+  "metrics": {
+    "covered_function_frontier": 222,
+    "elf_bytes": 101460,
+    "even_package_bytes": 18948,
+    "linked_open_cfw_globals": 223,
+    "raw_flash_bytes": 18916,
+    "source_translation_units": 8,
+    "undefined_symbols": 0
+  },
+  "physical_board_services_routed": false,
+  "production_routed": false,
+  "schema_version": 1,
+  "software_link_complete": true,
+  "software_package_complete": true
+}

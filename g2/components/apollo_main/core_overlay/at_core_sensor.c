@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room behavioral reconstruction of the pathless G2 2.2.6.10 eAT
  * core/sensor command cluster: the twelve registered handlers AT^INFO,

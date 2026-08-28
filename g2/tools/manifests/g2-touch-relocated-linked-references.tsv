@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: MIT
+reference_offset	linked_address	payload_offset	availability	role
+0x05AC	0xB0C4	0x7DC4	shipped_payload_after_relocation	RX command dispatch switch table, 9 entries (commands 0-8)
+0x38CC	0xB4FC	0x81FC	shipped_payload_after_relocation	event-dispatcher switch table, 8 entries (events 0-7)
+0x5954	0xB51C	0x821C	shipped_payload_after_relocation	SROM status-decoder switch table, 20 entries
+0x03E0	0xB374	0x8074	shipped_payload_after_relocation	SCB1 HAL config table
+0x03EC	0xB0E8	0x7DE8	shipped_payload_after_relocation	HAL callback registry table (payload callback 0x3624)
+0x05C0	0xAA5C	0x775C	shipped_payload_after_relocation	log tag string (dead; logger stubbed)
+0x097C	0xAA5C	0x775C	shipped_payload_after_relocation	log tag string (dead; logger stubbed)

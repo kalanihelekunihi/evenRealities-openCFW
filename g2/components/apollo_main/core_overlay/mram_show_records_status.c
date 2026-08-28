@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio protected-MRAM status reporter matched to stock
  * AppDbShowAllRecordsStatus at 0x0047BC30.

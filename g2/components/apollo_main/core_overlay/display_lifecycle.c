@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacements for the G2 2.2.6.10 forced display-driver lifecycle
  * routines at 0x00474100...0x004742F7 and 0x0047432C...0x00474473.

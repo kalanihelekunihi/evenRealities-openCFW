@@ -20,7 +20,7 @@ the guarded-teardown body.
 
 `runtime_platform_setup_41fa50.c` is 5,487 bytes, SHA-256
 `5126096f05bd4d66f7148fd564c7defdb9b4b49729d358f6a768579fcfe372d1`,
-under GPL-3.0-or-later. It preserves the authenticated sequence:
+under MIT. It preserves the authenticated sequence:
 
 - invoke the guarded teardown through patched stock entry `0x0041FA99`;
 - call the reset seam `0x0041C4B5`;

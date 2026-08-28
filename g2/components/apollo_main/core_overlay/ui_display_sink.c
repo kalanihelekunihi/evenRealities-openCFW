@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacement for the G2 2.2.6.10 Apollo four-channel asynchronous
  * display sink at 0x0055E7FA. The exact stock boundary, channel state, and

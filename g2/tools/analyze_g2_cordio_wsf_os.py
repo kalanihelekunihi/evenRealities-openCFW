@@ -15,6 +15,8 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs" / "official" / "g2-2.2.6.10" / "ota_s200_firmware_ota.bin"
 RECOVERY_ANALYZER = ROOT / "tools" / "recover_apollo_embedded_source_paths.py"
 LOAD_BASE = 0x00437FE0
@@ -346,41 +348,16 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
         }
 
     build = json.loads(BUILD_REPORT.read_text())
-    if (
-        build["overlay"]["size"] != 404796
-        or build["overlay"]["sha256"] != "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
-        or build["component"]["size"] != 3928192
-        or build["component"]["sha256"] != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
-    ):
-        raise AuditError("WSF OS/queue production component changed")
+    validate_apollo_main_artifacts(ROOT, AuditError, "WSF OS/queue")
     manifest = json.loads(SOURCE_MANIFEST.read_text())
     override = manifest["component_overrides"]["apollo_main"]
     provider = override["provider"]
     regions = override["regions"]
     if (
-        provider.get("size") != 3928192
-        or provider.get("sha256") != "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
-        or len([row for row in regions if row["name"].startswith("cordio_wsf_os_")]) != 29
+        len([row for row in regions if row["name"].startswith("cordio_wsf_os_")]) != 29
         or len([row for row in regions if row["name"].startswith("cordio_wsf_queue_")]) != 14
     ):
         raise AuditError("WSF OS/queue manifest ownership changed")
-    if (
-        PACKAGE.stat().st_size != 4706686
-        or _sha256(PACKAGE.read_bytes()) != "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
-    ):
-        raise AuditError("WSF OS/queue package changed")
-    flash = json.loads(FLASH_PLAN.read_text())
-    if (
-        FLASH_PLAN.stat().st_size != 4071097
-        or _sha256(FLASH_PLAN.read_bytes()) != "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
-        or (
-            len(flash["flash_regions"]),
-            len(flash["unresolved_flash_regions"]),
-            len(flash["container_only_regions"]),
-            len(flash["protected_regions"]),
-        ) != (5863, 2, 5, 6)
-    ):
-        raise AuditError("WSF OS/queue flash plan changed")
 
     os_functions = [item for item in functions if item["unit"] == "wsf_os"]
     queue_functions = [item for item in functions if item["unit"] == "wsf_queue"]
@@ -451,7 +428,7 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
             "the exact G2 definition site producing WSF_MAX_HANDLERS=10 is unavailable; a later official Ambiq source differs from R2.5.1 only by changing the guarded default from 9 to 10",
             "WsfQueueEmpty has no independently bounded linked stock body and is excluded from recovered-byte coverage",
             "all eighteen bounded functions are guarded-routed from maintained C; WsfQueueEmpty remains source-only because no independent stock body exists",
-            "live controller scheduling, ISR wake behavior, handler ordering, and sleep/wakeup remain blocked by unavailable authorized physical evidence",
+            "live controller scheduling, ISR wake behavior, handler ordering, and sleep/wakeup remain deferred by project direction; future qualification requires authorized physical evidence",
         ],
     }
 

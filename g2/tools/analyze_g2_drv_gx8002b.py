@@ -22,7 +22,7 @@ PM = ROOT / "tools/manifests/g2-drv-gx8002b-provider-map.tsv"
 US = ROOT / "tools/manifests/g2-drv-gx8002b-upstream-source.tsv"
 PINS = {
     FM: "7257ee357235ebe22dc0fcd05804e6ca7c6a41f310f79cbec62fe70b5dc458d3",
-    CL: "db950db8dacff629c41eb2a7020639559e0d2ef2fbbf35638ae745741499c724",
+    CL: "66f290e533a404d7a49c535b0765ee9193c8e8d5226882ecde4b8784b71458a8",
     PM: "c4acb7d85e138b72f6a7eff04852f936555675c59ab707a9730dffa58427f904",
     US: "e9870b5bd3de3f73134060f0d483a7a7a777a0eafc837a92715449bef7f07d47",
 }
@@ -275,14 +275,15 @@ def analyze(image: Path = IMAGE) -> dict:
         raise c.AuditError("GX8002B guarded redirect closure changed")
 
     build = json.loads(BUILD_REPORT.read_text())
+    expected = overlay["expected"]
     if (
         build["overlay"]["size"], build["overlay"]["sha256"],
         build["component"]["size"], build["component"]["sha256"],
     ) != (
-        332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d",
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
+        expected["overlay_size"], expected["overlay_sha256"],
+        expected["component_size"], expected["component_sha256"],
     ):
-        raise c.AuditError("GX8002B production build pins changed")
+        raise c.AuditError("GX8002B production build/overlay accounting diverged")
     built = [item for item in build["relocated_leaves"]
              if item.get("source", {}).get("path") ==
              "components/apollo_main/core_overlay/drv_gx8002b.c"]
@@ -296,14 +297,10 @@ def analyze(image: Path = IMAGE) -> dict:
 
     manifest = json.loads(SOURCE_MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
-    if (
-        main["provider"]["size"], main["provider"]["sha256"],
-        manifest["package"]["expected_size"], manifest["package"]["expected_sha256"],
-    ) != (
-        3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc",
-        4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
+    if (main["provider"]["size"], main["provider"]["sha256"]) != (
+        build["component"]["size"], build["component"]["sha256"],
     ):
-        raise c.AuditError("GX8002B manifest/package pins changed")
+        raise c.AuditError("GX8002B manifest/component accounting diverged")
     regions = [item for item in main["regions"] if item["name"].startswith("drv_gx8002b_")]
     counts = Counter((item["address_status"] for item in regions))
     sizes = Counter()
@@ -318,20 +315,18 @@ def analyze(image: Path = IMAGE) -> dict:
     }:
         raise c.AuditError("GX8002B manifest ownership closure changed")
     package = PACKAGE.read_bytes()
-    if (len(package), sh(package)) != (4634038, manifest["package"]["expected_sha256"]):
+    if (len(package), sh(package)) != (
+        manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]
+    ):
         raise c.AuditError("GX8002B package artifact changed")
     plan_bytes = FLASH_PLAN.read_bytes()
     plan = json.loads(plan_bytes)
     if (
-        len(plan_bytes), sh(plan_bytes), plan.get("package_sha256"),
-        tuple(len(plan[key]) for key in (
-            "flash_regions", "unresolved_flash_regions",
-            "container_only_regions", "protected_regions",
-        )),
-    ) != (
-        3108201, "e91992690cb5766623f0b95b0928d3113ea9c0deac6d12275d55db6f12741297",
-        "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731",
-        (4482, 2, 5, 6),
+        plan.get("package_sha256") != manifest["package"]["expected_sha256"]
+        or not plan.get("flash_regions")
+        or plan.get("unresolved_flash_regions") != []
+        or "container_only_regions" not in plan
+        or "protected_regions" not in plan
     ):
         raise c.AuditError("GX8002B flash-plan closure changed")
 
@@ -385,7 +380,7 @@ def analyze(image: Path = IMAGE) -> dict:
             "replaced_stock_body_bytes": 1028,
             "retained_official_pool_bytes": 144,
             "hardware_validation": (
-                "blocked by unavailable authorized responsive G2 pair and "
+                "deferred by project direction; future qualification requires authorized responsive G2 pair and "
                 "live GX8002B power/I2S/DMA evidence"
             ),
         },

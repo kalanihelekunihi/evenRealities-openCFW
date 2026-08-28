@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 
 /*
  * Production-excluded stateless G2 boundary for an atomic TinyFrame routing

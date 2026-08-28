@@ -1058,7 +1058,7 @@ class RuntimeEasyLoggerAsyncRecordBuildTests(unittest.TestCase):
         )
         self.assertEqual(text_region["file_offset"], 3642008)
         self.assertEqual(text_region["size"], 216)
-        self.assertEqual(text_region["target_address"], 0x007B1278)
+        self.assertEqual(text_region["target_address"], 0x007BFC40)
         self.assertIn("single owner", text_region["function"])
         self.assertNotIn("double-recycle", text_region["function"])
 

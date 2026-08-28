@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-freertos-plus-cli-filesystem-function-map.tsv"
@@ -23,7 +24,7 @@ OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
-PINS = {FM: "4687cfb65b7331807a36e84efd75d664b85f3c26f19ab3d66800e6dcc050d340", CL: "fa6e5ad0fd31f617348de7286badc40489f6a849ebcce7d1b69cf5360b435155"}
+PINS = {FM: "4687cfb65b7331807a36e84efd75d664b85f3c26f19ab3d66800e6dcc050d340", CL: "2dc522b1cc51d55f09f9e2cb80ea589b8724005e83d0f3c93657a980f39873dd"}
 SOURCE_PATH = "components/apollo_main/core_overlay/freertos_cli_filesystem.c"
 SOURCE_PIN = (22115, "e4817fff043dbefc84075153e31da9665af909cf5004c179602ab7ac98ec5313")
 LEAF_NAMES = (
@@ -278,8 +279,7 @@ def analyze(image=IMAGE):
     if any(x.get("branch") != "b_w" or x.get("profiles") != ["apple-clang"] for x in patches):
         raise c.AuditError("production FreeRTOS+CLI filesystem redirect policy changed")
     build = json.loads(REPORT.read_text())
-    if (build["overlay"]["size"], build["overlay"]["sha256"], build["component"]["size"], build["component"]["sha256"]) != (332148, "588a29c8d680068b6f27dd2cff831dcfd5aa71a91e4f9f97537d9bcb4a0d145d", 3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc"):
-        raise c.AuditError("production FreeRTOS+CLI filesystem build pins changed")
+    validate_apollo_main_artifacts(ROOT,c.AuditError,"FreeRTOS+CLI filesystem")
     built = [x for x in build["relocated_leaves"] if x.get("source", {}).get("path") == SOURCE_PATH]
     normalized = [{"function": x["extraction"]["function"], "size": x["placement"]["size"], "text_size": x["placement"].get("text_size", x["placement"]["size"]), "padding_before": x["placement"]["padding_before"], "offset": x["placement"]["offset"], "runtime_address": x["placement"]["runtime_address"], "relocation_count": x["extraction"]["relocation_count"]} for x in built]
     if len(built) != 12 or _jsh(normalized) != BUILT_DIGEST or sum(x["size"] for x in normalized) != 10570 or sum(x["text_size"] for x in normalized) != 9866 or sum(x["padding_before"] for x in normalized) != 20 or sum(x["relocation_count"] for x in normalized) != 179:
@@ -292,12 +292,6 @@ def analyze(image=IMAGE):
     counts = {key: (sum(x["address_status"] == key for x in regions), sum(x["size"] for x in regions if x["address_status"] == key)) for key in ("generated_source_entry_replacement", "official_blob", "source_compiled", "generated_alignment")}
     if counts != {"generated_source_entry_replacement": (12, 3200), "official_blob": (5, 56), "source_compiled": (22, 10570), "generated_alignment": (10, 20)}:
         raise c.AuditError("production FreeRTOS+CLI filesystem stock/overlay tiling changed")
-    if (main["provider"]["size"], main["provider"]["sha256"], manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]) != (3855544, "df6d3b4d5aeffa8e7341937d0d72e3425a6dacfc8fa964cf2b2cda9995079bdc", 4634038, "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731"):
-        raise c.AuditError("production FreeRTOS+CLI filesystem manifest closure changed")
-    plan_bytes = FLASH_PLAN.read_bytes()
-    plan = json.loads(plan_bytes)
-    if (len(plan_bytes), _sh(plan_bytes)) != (3108201, "e91992690cb5766623f0b95b0928d3113ea9c0deac6d12275d55db6f12741297") or plan.get("package_sha256") != "3953d7a537b11d75c7f589522ae7958bd7c4f59a15d35b98d92d5bec79b90731" or tuple(len(plan[k]) for k in ("flash_regions", "unresolved_flash_regions", "container_only_regions", "protected_regions")) != (4482, 2, 5, 6):
-        raise c.AuditError("production FreeRTOS+CLI filesystem flash plan changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only zero-anchor linked-object closure",
@@ -316,8 +310,8 @@ def analyze(image=IMAGE):
             "stock_replaced_bytes": 3200,
             "retained_literal_pool_bytes": 56,
             "software_functional_gap": False,
-            "hardware_validation": "blocked",
-            "hardware_blocker": "No authorized responsive G2 pair or captured littlefs media is physically available for live directory, file, rename, MD5, capacity, and block-stat behavior; the authorized right temple is nonresponsive and the left temple must remain stock.",
+            "hardware_validation": "deferred by project direction",
+            "hardware_blocker": "Future physical qualification requires an authorized G2 pair and captured littlefs media for live directory, file, rename, MD5, capacity, and block-stat behavior; hardware testing is deferred by project direction.",
         },
     }
 

@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 
 #include "runtime_numeric.h"
 #include "runtime_udiv10.h"

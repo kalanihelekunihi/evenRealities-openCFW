@@ -13,6 +13,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[1]
 FILES = {
+    "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
     "include/qassert.h": "dbd2a14e09e36ecbaaa74deee76d17dedbc770350a24ff7927aa8447987d0c54",
     "include/qep.h": "cdfb4eb5b8eefac500de5fa6c495c2bb82de7198791a92e45a51bd63a4849a4e",
     "include/qequeue.h": "71cdaa5b5ee6689e19bc0bff08ddd687a05e50dc689a09c3230d98f00f4678b3",
@@ -81,6 +82,13 @@ def verify() -> dict:
         source = (ROOT / relative).read_text()
         if "GNU General Public License" not in source or "version 3" not in source:
             raise SystemExit(f"QP/C license notice missing: {relative}")
+    license_text = (ROOT / "LICENSE").read_text()
+    if (
+        "GNU GENERAL PUBLIC LICENSE\n                       Version 3, 29 June 2007" not in license_text
+        or "Everyone is permitted to copy and distribute verbatim copies" not in license_text
+        or "END OF TERMS AND CONDITIONS" not in license_text
+    ):
+        raise SystemExit("QP/C GPL-3.0 license text changed")
     port = (ROOT / "ports/em9305/qf_port.h").read_text()
     for fact in ("QF_MAX_ACTIVE 16", "QF_MAX_EPOOL 2", "QF_MAX_TICK_RATE 0", "QF_EQUEUE_CTR_SIZE 1", "QF_MPOOL_SIZ_SIZE 2", "QF_MPOOL_CTR_SIZE 2"):
         if fact not in port:

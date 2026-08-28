@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room behavioral reconstruction of the G2 2.2.6.10 AT^TP command
  * module retained as platform/service/eAT/at_tp.c.  Provider bindings,

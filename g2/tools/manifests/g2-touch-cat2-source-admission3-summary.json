@@ -1,0 +1,34 @@
+{
+  "adapter": {
+    "path": "components/shared/touch/runtime_touch_cat2_adapters.c",
+    "sha256": "0504c79d87d1c79d3a953699568c6b73e86c061696c60f490d8c83e9025cbb3d",
+    "target_object_bytes": 3332
+  },
+  "analysis_mode": "offline exact public symbol/source-order/SCB register signature and Cortex-M0+ compile gate; no hardware or MMIO execution",
+  "component": "G2 touch CAT2 source admission batch 3",
+  "exclusions": "larger SCB I2C bodies plus mixed CAPSENSE/CAT2, Em_EEPROM EULA, application/startup, and system/DFU batches unchanged",
+  "integration": "isolated Apache typed routes; MMIO provider unavailable and fail-closed on host",
+  "metrics": {
+    "admitted_functions": 7,
+    "cat2_gap_after": 29,
+    "cat2_gap_before": 36,
+    "row_digest": "06c631b19f2ed0f3c0fe4781a7eed1fb5b5672eace69f9eedb5fb8512c4735f2",
+    "scb_inline_functions": 1,
+    "scb_source_functions": 6,
+    "semantic_gap_after": 194,
+    "semantic_gap_before": 201,
+    "source_order_digest": "da7ffc8e230b86f36b29db4ae9d8b9c4360c49ec03f4041566aeed0cf3c0f981",
+    "unsafe_batch_admissions": 0
+  },
+  "provider_sources": {
+    "commit": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+    "cy_scb_common.c_sha256": "e0cd9973c871649e30cab5e6f4124f1b5bef696eb693c3a796d2c5f08968d3c1",
+    "cy_scb_common.h_sha256": "3d23105304c9c7bb4a6fa43cc9947d1bb3d50275f9b7b1e383ca56d89feb2deb"
+  },
+  "remaining": {
+    "cat2_candidates": 29,
+    "total_semantic_source_gap": 194
+  },
+  "row_count": 7,
+  "schema_version": 1
+}

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Build, split, and validate the first blob-backed Even Realities G2 openCFW.
 
 The tool intentionally separates three address domains:
@@ -15,13 +16,18 @@ from __future__ import annotations
 
 import argparse
 import copy
+import fcntl
 import hashlib
 import json
 import os
 import shutil
+import stat
 import struct
 import sys
+import tempfile
+import threading
 import zlib
+from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
@@ -46,6 +52,73 @@ CASE_RUN_BASE = 0x08000000
 #: source-build provider and on the package.  Compiler-independent official
 #: blobs are never given profile overrides.
 DEFAULT_TOOLCHAIN_PROFILE = "apple-clang"
+
+REQUIRED_RELEASE_COMPONENTS = {
+    "codec": (1, 4, 3, "firmware/codec.bin"),
+    "ble_em9305": (2, 5, 3, "firmware/ble_em9305.bin"),
+    "touch": (3, 3, 3, "firmware/touch.bin"),
+    "case": (4, 6, 3, "firmware/box.bin"),
+    "apollo_bootloader": (5, 1, 3, "ota/s200_bootloader.bin"),
+    "apollo_main": (6, 0, 3, "ota/s200_firmware_ota.bin"),
+}
+RELEASE_ADDRESS_STATUSES = {
+    "confirmed_from_binh_headers_and_apollo_dfu_command",
+    "confirmed_from_preamble_and_bootloader_code",
+    "confirmed_from_record_table",
+    "confirmed_from_uart_boot_header_and_vectors",
+    "confirmed_from_vector_and_bootloader_code",
+    "confirmed_from_vector_and_ota_code",
+    "container_only",
+    "controller_protocol_metadata",
+    "generated_alignment",
+    "generated_padding",
+    "generated_source_data_replacement",
+    "generated_source_entry_replacement",
+    "generated_source_exact_load_image",
+    "generated_source_exact_replacement",
+    "generated_source_redirect",
+    "inferred_from_vector_table",
+    "official_blob",
+    "source_compiled",
+    "source_compiled_rodata",
+    "unknown",
+}
+NON_ADDRESSED_STATUSES = {
+    "container_only", "controller_protocol_metadata", "unknown",
+}
+REQUIRED_PROTECTED_REGIONS = {
+    (
+        "apollo510b_internal_mram", "ambiq_secure_bootloader",
+        0x00400000, 0x00410000,
+        "not_present_in_evenota_do_not_overwrite",
+    ),
+    (
+        "apollo510b_internal_mram", "update_flag",
+        0x007FE000, 0x007FE010,
+        "bootloader_owned_do_not_include_in_application_image",
+    ),
+    (
+        "case_stm32g0", "bank_1_serial_16",
+        0x0803F000, 0x0803F010,
+        "device_specific_preserve_before_case_bank_update",
+    ),
+    (
+        "case_stm32g0", "bank_1_serial_8",
+        0x0803F800, 0x0803F808,
+        "device_specific_preserve_before_case_bank_update",
+    ),
+    (
+        "case_stm32g0", "bank_2_serial_16",
+        0x0807F000, 0x0807F010,
+        "device_specific_preserve_before_case_bank_update",
+    ),
+    (
+        "case_stm32g0", "bank_2_serial_8",
+        0x0807F800, 0x0807F808,
+        "device_specific_preserve_before_case_bank_update",
+    ),
+}
+_OUTPUT_THREAD_LOCK = threading.Lock()
 
 
 def resolve_toolchain_profile_id(explicit: str | None) -> str:
@@ -228,6 +301,8 @@ def load_manifest(
         manifest = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
         raise OpenCFWError(f"cannot read manifest {path}: {error}") from error
+    if not isinstance(manifest, dict):
+        raise OpenCFWError(f"manifest {path} must contain a JSON object")
     if manifest.get("schema_version") != 1:
         raise OpenCFWError("only manifest schema version 1 is supported")
 
@@ -256,12 +331,48 @@ def project_root_for_manifest(manifest_path: Path) -> Path:
 
 
 def resolve_below(root: Path, relative: str) -> Path:
-    candidate = (root / relative).resolve()
+    try:
+        candidate = (root / relative).resolve()
+    except (OSError, RuntimeError) as error:
+        raise OpenCFWError(f"path cannot be resolved below openCFW: {relative}") \
+            from error
     try:
         candidate.relative_to(root.resolve())
     except ValueError as error:
         raise OpenCFWError(f"path escapes openCFW root: {relative}") from error
     return candidate
+
+
+def _read_regular_file(path: Path, role: str) -> bytes:
+    """Read one immutable input without following a final symlink."""
+    descriptor: int | None = None
+    try:
+        if not stat.S_ISREG(path.lstat().st_mode):
+            raise OpenCFWError(f"{role} is not a regular file")
+        descriptor = os.open(
+            path,
+            os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0),
+        )
+        if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+            raise OpenCFWError(f"{role} is not a regular file")
+        with os.fdopen(descriptor, "rb") as handle:
+            descriptor = None
+            return handle.read()
+    except OSError as error:
+        raise OpenCFWError(f"cannot read {role}: {error}") from error
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+
+
+def _read_regular_file_below(root: Path, relative: str, role: str) -> bytes:
+    """Read a contained regular file and reject symlinks in its relative path."""
+    resolved_root = root.resolve()
+    candidate = resolve_below(resolved_root, relative)
+    lexical = Path(os.path.abspath(resolved_root / relative))
+    if lexical != candidate:
+        raise OpenCFWError(f"{role} path contains a symlink: {relative}")
+    return _read_regular_file(candidate, role)
 
 
 def effective_component_regions(
@@ -349,11 +460,11 @@ def read_providers(
         provider_path = provider.get("path")
         if not isinstance(provider_path, str):
             raise OpenCFWError(f"{name}: provider path is missing")
-        path = resolve_below(project_root, provider_path)
-        try:
-            data = path.read_bytes()
-        except OSError as error:
-            raise OpenCFWError(f"{name}: cannot read {path}: {error}") from error
+        data = _read_regular_file_below(
+            project_root,
+            provider_path,
+            f"{name} provider",
+        )
         override = profile_pins(provider, toolchain_profile)
         if override is not None:
             expected_size = override.get("size")
@@ -587,6 +698,188 @@ def validate_region_partition(
         )
 
 
+def _release_pin(
+    record: dict[str, Any], size_key: str, sha_key: str, role: str
+) -> None:
+    size = record.get(size_key)
+    digest = record.get(sha_key)
+    if not isinstance(size, int) or size <= 0:
+        raise OpenCFWError(f"{role}: mandatory size pin is missing")
+    if (
+        not isinstance(digest, str)
+        or len(digest) != 64
+        or any(character not in "0123456789abcdef" for character in digest)
+    ):
+        raise OpenCFWError(f"{role}: mandatory SHA-256 pin is missing")
+
+
+def _release_output_path(value: Any, role: str) -> str:
+    if not isinstance(value, str) or not value:
+        raise OpenCFWError(f"{role}: output path is missing")
+    path = Path(value)
+    if (
+        path.is_absolute()
+        or value != path.as_posix()
+        or any(part in ("", ".", "..") for part in path.parts)
+    ):
+        raise OpenCFWError(f"{role}: output path is not a safe relative path")
+    return value
+
+
+def validate_release_manifest(
+    manifest: dict[str, Any],
+    *,
+    toolchain_profile: str,
+    record: bool = False,
+    payloads: dict[str, bytes] | None = None,
+) -> None:
+    """Enforce the complete six-controller public-release contract."""
+    package = manifest.get("package")
+    if not isinstance(package, dict):
+        raise OpenCFWError("release manifest package is missing")
+    _release_pin(package, "expected_size", "expected_sha256", "package")
+    _release_output_path(package.get("output_name"), "package")
+    package_profiles = package.get("profiles", {})
+    if not isinstance(package_profiles, dict):
+        raise OpenCFWError("package profiles must be an object")
+    for profile_id, pins in package_profiles.items():
+        if not isinstance(profile_id, str) or not isinstance(pins, dict):
+            raise OpenCFWError("package profile pins are invalid")
+        _release_pin(
+            pins, "expected_size", "expected_sha256",
+            f"package profile {profile_id}",
+        )
+    if toolchain_profile != DEFAULT_TOOLCHAIN_PROFILE:
+        selected = package_profiles.get(toolchain_profile)
+        if selected is None and not record:
+            raise OpenCFWError(
+                f"package profile {toolchain_profile!r} pins are mandatory"
+            )
+
+    components = manifest.get("components")
+    if not isinstance(components, list) or len(components) != 6:
+        raise OpenCFWError("release manifest requires exactly six components")
+    observed_identities: dict[str, tuple[int, int, int, str]] = {}
+    entry_ids: set[int] = set()
+    type_ids: set[int] = set()
+    package_filenames: set[str] = set()
+    all_outputs: set[str] = set()
+    for component in components:
+        if not isinstance(component, dict):
+            raise OpenCFWError("release component record is invalid")
+        name = component.get("name")
+        identity = (
+            component.get("entry_id"), component.get("type_id"),
+            component.get("storage_type"), component.get("package_filename"),
+        )
+        if not isinstance(name, str) or name in observed_identities:
+            raise OpenCFWError("release component names must be unique")
+        observed_identities[name] = identity
+        entry_id, type_id, _storage_type, package_filename = identity
+        if entry_id in entry_ids or type_id in type_ids:
+            raise OpenCFWError("release entry/type identities must be unique")
+        if package_filename in package_filenames:
+            raise OpenCFWError("release package filenames must be unique")
+        entry_ids.add(entry_id)
+        type_ids.add(type_id)
+        package_filenames.add(package_filename)
+        provider = component.get("provider")
+        if not isinstance(provider, dict):
+            raise OpenCFWError(f"{name}: release provider is missing")
+        _release_pin(provider, "size", "sha256", f"{name} provider")
+        profiles = provider.get("profiles", {})
+        if not isinstance(profiles, dict):
+            raise OpenCFWError(f"{name}: provider profiles must be an object")
+        for profile_id, pins in profiles.items():
+            if not isinstance(profile_id, str) or not isinstance(pins, dict):
+                raise OpenCFWError(f"{name}: provider profile pins are invalid")
+            _release_pin(
+                pins, "size", "sha256", f"{name} profile {profile_id}",
+            )
+        if (
+            toolchain_profile != DEFAULT_TOOLCHAIN_PROFILE
+            and provider.get("kind") == "source_build"
+            and toolchain_profile not in profiles
+            and not record
+        ):
+            raise OpenCFWError(
+                f"{name}: profile {toolchain_profile!r} pins are mandatory"
+            )
+
+        regions = component.get("regions")
+        if not isinstance(regions, list) or not regions:
+            raise OpenCFWError(f"{name}: release regions are missing")
+        for region in regions:
+            if not isinstance(region, dict):
+                raise OpenCFWError(f"{name}: release region is invalid")
+            status = region.get("address_status")
+            if status not in RELEASE_ADDRESS_STATUSES:
+                raise OpenCFWError(
+                    f"{name}/{region.get('name')}: address status is not allowed"
+                )
+            has_target = "target" in region or "target_address" in region
+            if ("target" in region) != ("target_address" in region):
+                raise OpenCFWError(
+                    f"{name}/{region.get('name')}: target contract is incomplete"
+                )
+            if status in NON_ADDRESSED_STATUSES and has_target:
+                raise OpenCFWError(
+                    f"{name}/{region.get('name')}: non-addressed region has a target"
+                )
+            if status not in NON_ADDRESSED_STATUSES and not has_target:
+                raise OpenCFWError(
+                    f"{name}/{region.get('name')}: addressed region lacks a target"
+                )
+            output = _release_output_path(
+                region.get("output"), f"{name}/{region.get('name')}"
+            )
+            if output in all_outputs:
+                raise OpenCFWError(
+                    f"release region output path is duplicated: {output}"
+                )
+            all_outputs.add(output)
+
+    if observed_identities != REQUIRED_RELEASE_COMPONENTS:
+        raise OpenCFWError("release component identities changed")
+
+    protected = manifest.get("protected_regions")
+    if not isinstance(protected, list):
+        raise OpenCFWError("release protected boundaries are missing")
+    try:
+        observed_protected = {
+            (
+                item["target"], item["name"], item["start"],
+                item["end_exclusive"], item["policy"],
+            )
+            for item in protected
+            if isinstance(item, dict)
+        }
+    except (KeyError, TypeError):
+        raise OpenCFWError("release protected boundary is invalid") from None
+    if (
+        len(observed_protected) != len(protected)
+        or observed_protected != REQUIRED_PROTECTED_REGIONS
+    ):
+        raise OpenCFWError("release protected boundaries changed")
+
+    if payloads is not None:
+        effective_outputs: set[str] = set()
+        for component in components:
+            data = payloads[component["name"]]
+            for region in effective_component_regions(
+                component, len(data), toolchain_profile
+            ):
+                output = _release_output_path(
+                    region.get("output"),
+                    f"{component['name']}/{region.get('name')}",
+                )
+                if output in effective_outputs:
+                    raise OpenCFWError(
+                        f"release region output path is duplicated: {output}"
+                    )
+                effective_outputs.add(output)
+
+
 def spans_overlap(start_a: int, end_a: int, start_b: int, end_b: int) -> bool:
     return start_a < end_b and start_b < end_a
 
@@ -672,11 +965,18 @@ def verify_manifest(
     toolchain_profile: str | None = None,
     record: bool = False,
     recorded_providers: dict[str, dict[str, Any]] | None = None,
+    strict_release: bool = False,
 ) -> tuple[dict[str, Any], Path, dict[str, bytes]]:
     toolchain_profile = resolve_toolchain_profile_id(toolchain_profile)
     manifest_path = manifest_path.resolve()
     manifest = load_manifest(manifest_path)
     project_root = project_root_for_manifest(manifest_path)
+    if strict_release:
+        validate_release_manifest(
+            manifest,
+            toolchain_profile=toolchain_profile,
+            record=record,
+        )
     payloads = read_providers(
         manifest,
         project_root,
@@ -684,6 +984,13 @@ def verify_manifest(
         record=record,
         recorded_providers=recorded_providers,
     )
+    if strict_release:
+        validate_release_manifest(
+            manifest,
+            toolchain_profile=toolchain_profile,
+            record=record,
+            payloads=payloads,
+        )
     validate_flash_layout(manifest)
     return manifest, project_root, payloads
 
@@ -829,9 +1136,25 @@ def validate_evenota_image(image: bytes, manifest: dict[str, Any]) -> None:
 
 def atomic_write(path: Path, data: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp")
-    temporary.write_bytes(data)
-    temporary.replace(path)
+    mode = path.stat().st_mode & 0o777 if path.exists() else 0o644
+    temporary: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="wb",
+            prefix=f".{path.name}.",
+            dir=path.parent,
+            delete=False,
+        ) as handle:
+            temporary = Path(handle.name)
+            handle.write(data)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.chmod(temporary, mode)
+        os.replace(temporary, path)
+        temporary = None
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def atomic_write_json(path: Path, value: Any) -> None:
@@ -852,16 +1175,83 @@ def clean_build_dir(project_root: Path, build_dir: Path) -> None:
         shutil.rmtree(resolved_build)
 
 
+def require_build_dir(project_root: Path, build_dir: Path) -> None:
+    resolved_root = project_root.resolve()
+    resolved_build = build_dir.resolve()
+    try:
+        relative = resolved_build.relative_to(resolved_root)
+    except ValueError as error:
+        raise OpenCFWError("build directory must remain below openCFW") from error
+    if not relative.parts or relative.parts[0] != "build":
+        raise OpenCFWError("output directory must remain below openCFW/build")
+
+
+@contextmanager
+def output_generation_lock(build_dir: Path):
+    build_dir.mkdir(parents=True, exist_ok=True)
+    lock_path = build_dir / ".open-cfw-publish.lock"
+    with _OUTPUT_THREAD_LOCK:
+        try:
+            if lock_path.exists() or lock_path.is_symlink():
+                if not stat.S_ISREG(lock_path.lstat().st_mode):
+                    raise OpenCFWError(
+                        "output generation lock is not a regular file"
+                    )
+            descriptor = os.open(
+                lock_path,
+                os.O_RDWR
+                | os.O_CREAT
+                | getattr(os, "O_NOFOLLOW", 0),
+                0o644,
+            )
+        except OSError as error:
+            raise OpenCFWError(f"cannot open output generation lock: {error}") \
+                from error
+        try:
+            if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+                raise OpenCFWError("output generation lock is not a regular file")
+            with os.fdopen(descriptor, "a+b") as handle:
+                descriptor = -1
+                fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+                try:
+                    yield
+                finally:
+                    fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+        finally:
+            if descriptor >= 0:
+                os.close(descriptor)
+
+
 def split_regions(
     manifest: dict[str, Any],
     payloads: dict[str, bytes],
     build_dir: Path,
     toolchain_profile: str = DEFAULT_TOOLCHAIN_PROFILE,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    flash_regions, unresolved_regions, container_regions, artifacts = (
+        plan_regions(manifest, payloads, toolchain_profile)
+    )
+    regions_root = build_dir / "regions"
+    for relative, payload in artifacts.items():
+        atomic_write(resolve_below(regions_root, relative), payload)
+    return flash_regions, unresolved_regions, container_regions
+
+
+def plan_regions(
+    manifest: dict[str, Any],
+    payloads: dict[str, bytes],
+    toolchain_profile: str = DEFAULT_TOOLCHAIN_PROFILE,
+) -> tuple[
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    dict[str, bytes],
+]:
+    """Return exact region records and bytes without touching the filesystem."""
     flash_regions: list[dict[str, Any]] = []
     unresolved_regions: list[dict[str, Any]] = []
     container_regions: list[dict[str, Any]] = []
-    regions_root = build_dir / "regions"
+    artifacts: dict[str, bytes] = {}
     for component in manifest["components"]:
         payload = payloads[component["name"]]
         for region in effective_component_regions(
@@ -870,8 +1260,13 @@ def split_regions(
             start = region["file_offset"]
             end = start + region["size"]
             region_data = payload[start:end]
-            output_path = resolve_below(regions_root, region["output"])
-            atomic_write(output_path, region_data)
+            output = _release_output_path(
+                region["output"],
+                f"{component['name']}/{region['name']}",
+            )
+            if output in artifacts:
+                raise OpenCFWError(f"duplicate region artifact: {output}")
+            artifacts[output] = region_data
             record: dict[str, Any] = {
                 "component": component["name"],
                 "region": region["name"],
@@ -879,7 +1274,7 @@ def split_regions(
                 "component_file_offset": start,
                 "size": len(region_data),
                 "sha256": sha256_bytes(region_data),
-                "artifact": str(output_path.relative_to(build_dir)),
+                "artifact": f"regions/{output}",
                 "address_status": region["address_status"],
             }
             if "target_address" in region:
@@ -910,7 +1305,7 @@ def split_regions(
                 unresolved_regions.append(record)
             else:
                 container_regions.append(record)
-    return flash_regions, unresolved_regions, container_regions
+    return flash_regions, unresolved_regions, container_regions, artifacts
 
 
 def package_entry_report(entries: Iterable[PackageEntry]) -> list[dict[str, Any]]:
@@ -930,17 +1325,221 @@ def package_entry_report(entries: Iterable[PackageEntry]) -> list[dict[str, Any]
     ]
 
 
-def write_sha256s(build_dir: Path) -> None:
-    paths = sorted(
-        path
-        for path in build_dir.rglob("*")
-        if path.is_file() and path.name != "SHA256SUMS"
-    )
-    lines = [
-        f"{sha256_file(path)}  {path.relative_to(build_dir)}"
-        for path in paths
-    ]
+def write_sha256s(
+    build_dir: Path, relative_paths: Iterable[str] | None = None
+) -> None:
+    build_dir = build_dir.resolve()
+    if relative_paths is None:
+        relative_names = sorted(
+            path.relative_to(build_dir).as_posix()
+            for path in build_dir.rglob("*")
+            if path.is_file()
+            and path.name not in ("SHA256SUMS", ".open-cfw-publish.lock")
+            and not path.name.startswith(".")
+        )
+    else:
+        relative_names = sorted(set(relative_paths))
+    lines = []
+    for relative in relative_names:
+        payload = _read_regular_file_below(
+            build_dir, relative, f"managed artifact {relative}"
+        )
+        lines.append(f"{sha256_bytes(payload)}  {relative}")
     atomic_write(build_dir / "SHA256SUMS", ("\n".join(lines) + "\n").encode())
+
+
+def parse_sha256s(build_dir: Path) -> dict[str, str]:
+    ledger_path = build_dir / "SHA256SUMS"
+    try:
+        lines = _read_regular_file(
+            ledger_path, "checksum ledger"
+        ).decode("utf-8").splitlines()
+    except UnicodeDecodeError as error:
+        raise OpenCFWError(f"cannot read checksum ledger: {error}") from error
+    if not lines:
+        raise OpenCFWError("checksum ledger is empty")
+    result: dict[str, str] = {}
+    for line in lines:
+        fields = line.split("  ", 1)
+        if len(fields) != 2:
+            raise OpenCFWError("checksum ledger line is malformed")
+        digest, relative = fields
+        if (
+            len(digest) != 64
+            or any(character not in "0123456789abcdef" for character in digest)
+            or relative in result
+            or relative == "SHA256SUMS"
+        ):
+            raise OpenCFWError("checksum ledger identity is invalid")
+        try:
+            payload = _read_regular_file_below(
+                build_dir, relative, f"checksum ledger artifact {relative}"
+            )
+        except OpenCFWError as error:
+            raise OpenCFWError(f"checksum ledger mismatch: {relative}") from error
+        if sha256_bytes(payload) != digest:
+            raise OpenCFWError(f"checksum ledger mismatch: {relative}")
+        result[relative] = digest
+    return result
+
+
+def effective_manifest_sha256(manifest: dict[str, Any]) -> str:
+    encoded = json.dumps(
+        manifest, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return sha256_bytes(encoded)
+
+
+def manifest_source_ledger(manifest_path: Path) -> list[dict[str, Any]]:
+    manifest_root = manifest_path.resolve().parent
+    records: list[dict[str, Any]] = []
+    loading: set[Path] = set()
+
+    def visit(path: Path) -> None:
+        path = path.resolve()
+        if path in loading:
+            raise OpenCFWError("manifest inheritance cycle in source ledger")
+        loading.add(path)
+        try:
+            payload = path.read_bytes()
+            value = json.loads(payload.decode("utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+            raise OpenCFWError(f"cannot ledger manifest source {path}: {error}") \
+                from error
+        extends = value.get("extends") if isinstance(value, dict) else None
+        if extends is not None:
+            if not isinstance(extends, str) or not extends:
+                raise OpenCFWError("manifest ledger extends path is invalid")
+            parent = (path.parent / extends).resolve()
+            try:
+                parent.relative_to(manifest_root)
+            except ValueError as error:
+                raise OpenCFWError(
+                    "manifest ledger extends path escapes manifests directory"
+                ) from error
+            visit(parent)
+        records.append({
+            "path": path.relative_to(manifest_root).as_posix(),
+            "size": len(payload),
+            "sha256": sha256_bytes(payload),
+        })
+        loading.remove(path)
+
+    visit(manifest_path)
+    return records
+
+
+def manifest_identity(
+    manifest_path: Path, manifest: dict[str, Any]
+) -> dict[str, Any]:
+    return {
+        "sha256": effective_manifest_sha256(manifest),
+        "sources": manifest_source_ledger(manifest_path),
+    }
+
+
+def make_flash_plan(
+    *,
+    manifest: dict[str, Any],
+    manifest_id: dict[str, Any],
+    toolchain_profile: str,
+    package_artifact: str,
+    package_sha256: str,
+    flash_regions: list[dict[str, Any]],
+    unresolved: list[dict[str, Any]],
+    container: list[dict[str, Any]],
+) -> dict[str, Any]:
+    return {
+        "schema_version": 1,
+        "target": manifest["target"],
+        "manifest_sha256": manifest_id["sha256"],
+        "manifest_sources": manifest_id["sources"],
+        "toolchain_profile": toolchain_profile,
+        "package_artifact": package_artifact,
+        "package_sha256": package_sha256,
+        "flash_regions": flash_regions,
+        "unresolved_flash_regions": unresolved,
+        "container_only_regions": container,
+        "protected_regions": [
+            {
+                **region,
+                "start_hex": hex_address(region["start"]),
+                "end_exclusive_hex": hex_address(region["end_exclusive"]),
+            }
+            for region in manifest.get("protected_regions", [])
+        ],
+        "safety": {
+            "automatic_flashing": False,
+            "notes": [
+                "This plan describes bytes and addresses; it does not authorize a write.",
+                "Back up per-device state before any direct-flash experiment.",
+                "Ordinary G2 application OTA is single-slot and has no proven rollback.",
+                "Never translate EVENOTA package offsets into controller addresses.",
+            ],
+        },
+    }
+
+
+def make_build_report(
+    *,
+    manifest: dict[str, Any],
+    manifest_path: Path,
+    project_root: Path,
+    manifest_id: dict[str, Any],
+    toolchain_profile: str,
+    payloads: dict[str, bytes],
+    package_artifact: str,
+    image: bytes,
+    expected_size: Any,
+    expected_sha256: Any,
+    entries: list[PackageEntry],
+    flash_regions: list[dict[str, Any]],
+    unresolved: list[dict[str, Any]],
+    container: list[dict[str, Any]],
+) -> dict[str, Any]:
+    package_sha256 = sha256_bytes(image)
+    reference_match: bool | None = (
+        package_sha256 == expected_sha256 and len(image) == expected_size
+        if expected_sha256 is not None and expected_size is not None
+        else None
+    )
+    return {
+        "schema_version": 1,
+        "target": manifest["target"],
+        "manifest": str(manifest_path.resolve().relative_to(project_root)),
+        "manifest_sha256": manifest_id["sha256"],
+        "manifest_sources": manifest_id["sources"],
+        "toolchain_profile": toolchain_profile,
+        "provider_mode": "+".join(
+            sorted(
+                {
+                    component["provider"]["kind"]
+                    for component in manifest["components"]
+                }
+            )
+        ),
+        "providers": [
+            {
+                "component": component["name"],
+                "kind": component["provider"]["kind"],
+                "path": component["provider"]["path"],
+                "size": len(payloads[component["name"]]),
+                "sha256": sha256_bytes(payloads[component["name"]]),
+            }
+            for component in manifest["components"]
+        ],
+        "package": {
+            "artifact": package_artifact,
+            "size": len(image),
+            "sha256": package_sha256,
+            "reference_sha256": expected_sha256,
+            "byte_identical_to_reference": reference_match,
+        },
+        "entries": package_entry_report(entries),
+        "placed_region_count": len(flash_regions),
+        "unresolved_region_count": len(unresolved),
+        "container_region_count": len(container),
+    }
 
 
 def record_manifest_profile_pins(
@@ -1006,6 +1605,309 @@ def record_manifest_profile_pins(
     )
 
 
+def _read_json_object(path: Path, role: str) -> dict[str, Any]:
+    try:
+        value = json.loads(_read_regular_file(path, role).decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise OpenCFWError(f"cannot read {role}: {error}") from error
+    if not isinstance(value, dict):
+        raise OpenCFWError(f"{role} must be a JSON object")
+    return value
+
+
+def verify_artifacts_with_lock_held(
+    manifest_path: Path,
+    build_dir: Path,
+    *,
+    toolchain_profile: str | None = None,
+) -> dict[str, Any]:
+    """Verify a generation while its ``output_generation_lock`` is held."""
+    profile = resolve_toolchain_profile_id(toolchain_profile)
+    manifest_path = manifest_path.resolve()
+    build_dir = build_dir.resolve()
+    manifest, project_root, payloads = verify_manifest(
+        manifest_path,
+        toolchain_profile=profile,
+        strict_release=True,
+    )
+    require_build_dir(project_root, build_dir)
+    identity = manifest_identity(manifest_path, manifest)
+    image, entries = assemble_evenota(manifest, payloads)
+    package_relative = f"package/{manifest['package']['output_name']}"
+    package_bytes = _read_regular_file_below(
+        build_dir, package_relative, "published package"
+    )
+    if package_bytes != image:
+        raise OpenCFWError("published package differs from manifest providers")
+    package_override = profile_pins(manifest["package"], profile)
+    expected = package_override or manifest["package"]
+    expected_size = expected.get("expected_size")
+    expected_sha256 = expected.get("expected_sha256")
+    if len(image) != expected_size or sha256_bytes(image) != expected_sha256:
+        raise OpenCFWError("published package differs from selected profile pins")
+
+    flash_regions, unresolved, container, region_payloads = plan_regions(
+        manifest, payloads, profile
+    )
+    for relative, payload in region_payloads.items():
+        observed = _read_regular_file_below(
+            build_dir,
+            f"regions/{relative}",
+            f"region artifact regions/{relative}",
+        )
+        if observed != payload:
+            raise OpenCFWError(f"region artifact differs: regions/{relative}")
+
+    expected_plan = make_flash_plan(
+        manifest=manifest,
+        manifest_id=identity,
+        toolchain_profile=profile,
+        package_artifact=package_relative,
+        package_sha256=sha256_bytes(image),
+        flash_regions=flash_regions,
+        unresolved=unresolved,
+        container=container,
+    )
+    actual_plan = _read_json_object(build_dir / "flash-plan.json", "flash plan")
+    if actual_plan != expected_plan:
+        raise OpenCFWError("published flash plan differs from verified regions")
+
+    expected_report = make_build_report(
+        manifest=manifest,
+        manifest_path=manifest_path,
+        project_root=project_root,
+        manifest_id=identity,
+        toolchain_profile=profile,
+        payloads=payloads,
+        package_artifact=package_relative,
+        image=image,
+        expected_size=expected_size,
+        expected_sha256=expected_sha256,
+        entries=entries,
+        flash_regions=flash_regions,
+        unresolved=unresolved,
+        container=container,
+    )
+    actual_report = _read_json_object(
+        build_dir / "build-report.json", "build report"
+    )
+    if actual_report != expected_report:
+        raise OpenCFWError(
+            "published build report differs from manifest/profile/providers"
+        )
+
+    ledger = parse_sha256s(build_dir)
+    expected_paths = {
+        package_relative,
+        "flash-plan.json",
+        "build-report.json",
+        *(f"regions/{relative}" for relative in region_payloads),
+    }
+    if set(ledger) != expected_paths:
+        raise OpenCFWError("checksum ledger artifact set differs")
+    return actual_report
+
+
+def verify_artifacts(
+    manifest_path: Path,
+    build_dir: Path,
+    *,
+    toolchain_profile: str | None = None,
+) -> dict[str, Any]:
+    """Verify one complete generation under its publication lock."""
+    resolved_manifest = manifest_path.resolve()
+    resolved_build_dir = build_dir.resolve()
+    require_build_dir(
+        project_root_for_manifest(resolved_manifest), resolved_build_dir
+    )
+    with output_generation_lock(resolved_build_dir):
+        return verify_artifacts_with_lock_held(
+            resolved_manifest,
+            resolved_build_dir,
+            toolchain_profile=toolchain_profile,
+        )
+
+
+def _authenticated_previous_managed_paths(build_dir: Path) -> set[str]:
+    """Return old managed paths only when their complete ledger is coherent."""
+    try:
+        ledger = parse_sha256s(build_dir)
+        report = _read_json_object(build_dir / "build-report.json", "build report")
+        plan = _read_json_object(build_dir / "flash-plan.json", "flash plan")
+        package = report["package"]
+        package_relative = package["artifact"]
+        if (
+            not isinstance(package, dict)
+            or not isinstance(package_relative, str)
+            or not package_relative.startswith("package/")
+            or plan.get("package_artifact") != package_relative
+            or plan.get("package_sha256") != package.get("sha256")
+        ):
+            return set()
+        package_payload = _read_regular_file_below(
+            build_dir, package_relative, "managed package artifact"
+        )
+        if (
+            len(package_payload) != int(package["size"])
+            or sha256_bytes(package_payload) != package["sha256"]
+        ):
+            return set()
+        regions: list[dict[str, Any]] = []
+        for key in (
+            "flash_regions", "unresolved_flash_regions",
+            "container_only_regions",
+        ):
+            value = plan.get(key)
+            if not isinstance(value, list):
+                return set()
+            regions.extend(value)
+        region_paths: set[str] = set()
+        for region in regions:
+            relative = region.get("artifact") if isinstance(region, dict) else None
+            if (
+                not isinstance(relative, str)
+                or not relative.startswith("regions/")
+                or relative in region_paths
+            ):
+                return set()
+            payload = _read_regular_file_below(
+                build_dir, relative, f"managed region artifact {relative}"
+            )
+            if (
+                len(payload) != int(region["size"])
+                or sha256_bytes(payload) != region["sha256"]
+            ):
+                return set()
+            region_paths.add(relative)
+        managed = {
+            "flash-plan.json", "build-report.json", package_relative,
+            *region_paths,
+        }
+        if set(ledger) != managed:
+            return set()
+        return managed
+    except (KeyError, TypeError, ValueError, OSError, OpenCFWError):
+        return set()
+
+
+def _capture_paths(
+    build_dir: Path, relative_paths: Iterable[str]
+) -> dict[str, tuple[bool, bytes]]:
+    result: dict[str, tuple[bool, bytes]] = {}
+    for relative in relative_paths:
+        path = resolve_below(build_dir, relative)
+        lexical = Path(os.path.abspath(build_dir.resolve() / relative))
+        if lexical != path:
+            raise OpenCFWError(
+                f"managed artifact path contains a symlink: {relative}"
+            )
+        try:
+            mode = path.lstat().st_mode
+        except FileNotFoundError:
+            result[relative] = (False, b"")
+            continue
+        if not stat.S_ISREG(mode):
+            raise OpenCFWError(f"managed artifact is not regular: {relative}")
+        result[relative] = (
+            True,
+            _read_regular_file(path, f"managed artifact {relative}"),
+        )
+    return result
+
+
+def _restore_paths(
+    build_dir: Path, previous: dict[str, tuple[bool, bytes]]
+) -> None:
+    marker_order = ("build-report.json", "SHA256SUMS")
+    for relative in marker_order:
+        resolve_below(build_dir, relative).unlink(missing_ok=True)
+    for relative, (existed, payload) in previous.items():
+        if relative in marker_order:
+            continue
+        path = resolve_below(build_dir, relative)
+        if existed:
+            atomic_write(path, payload)
+        else:
+            path.unlink(missing_ok=True)
+    for relative in marker_order:
+        existed, payload = previous.get(relative, (False, b""))
+        path = resolve_below(build_dir, relative)
+        if existed:
+            atomic_write(path, payload)
+        else:
+            path.unlink(missing_ok=True)
+    for relative, (existed, payload) in previous.items():
+        path = resolve_below(build_dir, relative)
+        if existed:
+            try:
+                matches = (
+                    _read_regular_file(path, f"restored artifact {relative}")
+                    == payload
+                )
+            except OpenCFWError:
+                matches = False
+        else:
+            matches = not path.exists() and not path.is_symlink()
+        if not matches:
+            resolve_below(build_dir, "SHA256SUMS").unlink(missing_ok=True)
+            raise OpenCFWError("artifact generation rollback failed")
+
+
+def publish_staged_generation(staging: Path, build_dir: Path) -> None:
+    """Publish one prevalidated managed generation, ledger last."""
+    new_ledger = parse_sha256s(staging)
+    new_managed = set(new_ledger)
+    with output_generation_lock(build_dir):
+        old_managed = _authenticated_previous_managed_paths(build_dir)
+        affected = old_managed | new_managed | {
+            "build-report.json", "SHA256SUMS",
+        }
+        previous = _capture_paths(build_dir, affected)
+        resolve_below(build_dir, "SHA256SUMS").unlink(missing_ok=True)
+        resolve_below(build_dir, "build-report.json").unlink(missing_ok=True)
+        try:
+            for relative in sorted(old_managed - new_managed):
+                resolve_below(build_dir, relative).unlink(missing_ok=True)
+            ordinary = sorted(
+                new_managed - {"build-report.json"}
+            )
+            for relative in ordinary:
+                atomic_write(
+                    resolve_below(build_dir, relative),
+                    _read_regular_file_below(
+                        staging, relative, f"staged managed artifact {relative}"
+                    ),
+                )
+            atomic_write(
+                build_dir / "build-report.json",
+                _read_regular_file(
+                    staging / "build-report.json", "staged build report"
+                ),
+            )
+            for relative, digest in new_ledger.items():
+                payload = _read_regular_file_below(
+                    build_dir, relative, f"published artifact {relative}"
+                )
+                if sha256_bytes(payload) != digest:
+                    raise OpenCFWError(
+                        f"published artifact readback changed: {relative}"
+                    )
+            atomic_write(
+                build_dir / "SHA256SUMS",
+                _read_regular_file(staging / "SHA256SUMS", "staged checksum ledger"),
+            )
+            if parse_sha256s(build_dir) != new_ledger:
+                raise OpenCFWError("published checksum ledger readback changed")
+        except Exception:
+            try:
+                _restore_paths(build_dir, previous)
+            except Exception as rollback_error:
+                (build_dir / "SHA256SUMS").unlink(missing_ok=True)
+                raise OpenCFWError("artifact generation rollback failed") \
+                    from rollback_error
+            raise
+
+
 def build(
     manifest_path: Path,
     build_dir: Path,
@@ -1022,13 +1924,11 @@ def build(
         toolchain_profile=toolchain_profile,
         record=record_profile,
         recorded_providers=recorded_providers,
+        strict_release=True,
     )
-    clean_build_dir(project_root, build_dir)
+    require_build_dir(project_root, build_dir)
     build_dir.mkdir(parents=True, exist_ok=True)
-
     image, entries = assemble_evenota(manifest, payloads)
-    package_path = build_dir / "package" / manifest["package"]["output_name"]
-    atomic_write(package_path, image)
     package_sha256 = sha256_bytes(image)
     package_override = profile_pins(manifest["package"], toolchain_profile)
     if package_override is not None:
@@ -1044,84 +1944,84 @@ def build(
             recorded_providers,
             {"expected_size": len(image), "expected_sha256": package_sha256},
         )
-        expected_size = len(image)
-        expected_sha256 = package_sha256
-    if expected_size is not None and len(image) != expected_size:
+        manifest, project_root, payloads = verify_manifest(
+            manifest_path,
+            toolchain_profile=toolchain_profile,
+            strict_release=True,
+        )
+        recorded_image, entries = assemble_evenota(manifest, payloads)
+        if recorded_image != image:
+            raise OpenCFWError("recorded manifest changed assembled package bytes")
+        package_override = profile_pins(manifest["package"], toolchain_profile)
+        if package_override is None:
+            raise OpenCFWError("recorded package profile pins are missing")
+        expected_size = package_override.get("expected_size")
+        expected_sha256 = package_override.get("expected_sha256")
+    if len(image) != expected_size:
         raise OpenCFWError(
             "assembly size differs from the pinned reference "
             f"(profile {toolchain_profile})"
         )
-    if expected_sha256 is not None and package_sha256 != expected_sha256:
+    if package_sha256 != expected_sha256:
         raise OpenCFWError(
             "assembly hash differs from the pinned reference "
-            f"(profile {toolchain_profile})"
+            f"(profile {toolchain_profile}): observed {package_sha256}"
         )
-    reference_match: bool | None = (
-        package_sha256 == expected_sha256 and len(image) == expected_size
-        if expected_sha256 is not None and expected_size is not None
-        else None
-    )
-
-    flash_regions, unresolved, container = split_regions(
-        manifest,
-        payloads,
-        build_dir,
-        toolchain_profile,
-    )
-    flash_plan = {
-        "schema_version": 1,
-        "target": manifest["target"],
-        "package_artifact": str(package_path.relative_to(build_dir)),
-        "package_sha256": package_sha256,
-        "flash_regions": flash_regions,
-        "unresolved_flash_regions": unresolved,
-        "container_only_regions": container,
-        "protected_regions": [
-            {
-                **region,
-                "start_hex": hex_address(region["start"]),
-                "end_exclusive_hex": hex_address(region["end_exclusive"]),
-            }
-            for region in manifest.get("protected_regions", [])
-        ],
-        "safety": {
-            "automatic_flashing": False,
-            "notes": [
-                "This plan describes bytes and addresses; it does not authorize a write.",
-                "Back up per-device state before any direct-flash experiment.",
-                "Ordinary G2 application OTA is single-slot and has no proven rollback.",
-                "Never translate EVENOTA package offsets into controller addresses.",
-            ],
-        },
-    }
-    atomic_write_json(build_dir / "flash-plan.json", flash_plan)
-
-    report = {
-        "schema_version": 1,
-        "target": manifest["target"],
-        "manifest": str(manifest_path.resolve().relative_to(project_root)),
-        "provider_mode": "+".join(
-            sorted(
-                {
-                    component["provider"]["kind"]
-                    for component in manifest["components"]
-                }
-            )
-        ),
-        "package": {
-            "artifact": str(package_path.relative_to(build_dir)),
-            "size": len(image),
-            "sha256": package_sha256,
-            "reference_sha256": expected_sha256,
-            "byte_identical_to_reference": reference_match,
-        },
-        "entries": package_entry_report(entries),
-        "placed_region_count": len(flash_regions),
-        "unresolved_region_count": len(unresolved),
-        "container_region_count": len(container),
-    }
-    atomic_write_json(build_dir / "build-report.json", report)
-    write_sha256s(build_dir)
+    identity = manifest_identity(manifest_path, manifest)
+    with tempfile.TemporaryDirectory(
+        prefix=".open-cfw-stage-", dir=build_dir
+    ) as temporary:
+        staging = Path(temporary)
+        package_relative = f"package/{manifest['package']['output_name']}"
+        atomic_write(resolve_below(staging, package_relative), image)
+        flash_regions, unresolved, container = split_regions(
+            manifest, payloads, staging, toolchain_profile
+        )
+        flash_plan = make_flash_plan(
+            manifest=manifest,
+            manifest_id=identity,
+            toolchain_profile=toolchain_profile,
+            package_artifact=package_relative,
+            package_sha256=package_sha256,
+            flash_regions=flash_regions,
+            unresolved=unresolved,
+            container=container,
+        )
+        atomic_write_json(staging / "flash-plan.json", flash_plan)
+        report = make_build_report(
+            manifest=manifest,
+            manifest_path=manifest_path,
+            project_root=project_root,
+            manifest_id=identity,
+            toolchain_profile=toolchain_profile,
+            payloads=payloads,
+            package_artifact=package_relative,
+            image=image,
+            expected_size=expected_size,
+            expected_sha256=expected_sha256,
+            entries=entries,
+            flash_regions=flash_regions,
+            unresolved=unresolved,
+            container=container,
+        )
+        atomic_write_json(staging / "build-report.json", report)
+        managed_paths = {
+            package_relative,
+            "flash-plan.json",
+            "build-report.json",
+            *(
+                item["artifact"]
+                for group in (flash_regions, unresolved, container)
+                for item in group
+            ),
+        }
+        write_sha256s(staging, managed_paths)
+        verify_artifacts(
+            manifest_path,
+            staging,
+            toolchain_profile=toolchain_profile,
+        )
+        publish_staged_generation(staging, build_dir)
     return report
 
 
@@ -1257,6 +2157,33 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
 
+    artifacts_parser = subparsers.add_parser(
+        "verify-artifacts",
+        help="validate a published package/regions/plan/report/checksum generation",
+        epilog=(
+            "Community smoke example: python3 g2/tools/open_cfw.py "
+            "verify-artifacts --manifest "
+            "g2/manifests/g2-2.2.6.10-core-source.json --output-dir "
+            "g2/build/source --toolchain-profile apple-clang"
+        ),
+    )
+    artifacts_parser.add_argument(
+        "--manifest", type=Path, default=default_manifest
+    )
+    artifacts_parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=Path(__file__).resolve().parent.parent / "build",
+    )
+    artifacts_parser.add_argument(
+        "--toolchain-profile",
+        default=profile_default,
+        help=(
+            "reviewed toolchain profile for the published generation "
+            f"(default {DEFAULT_TOOLCHAIN_PROFILE!r})"
+        ),
+    )
+
     build_parser = subparsers.add_parser(
         "build",
         help="assemble EVENOTA and address-split artifacts",
@@ -1304,6 +2231,7 @@ def main(argv: list[str] | None = None) -> int:
         manifest, _, payloads = verify_manifest(
             args.manifest,
             toolchain_profile=profile_id,
+            strict_release=True,
         )
         image, _ = assemble_evenota(manifest, payloads)
         package = manifest["package"]
@@ -1327,6 +2255,20 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"Verified {len(payloads)} providers [profile {profile_id}]; "
             f"deterministic package SHA-256 {sha256_bytes(image)}"
+        )
+        return 0
+
+    if args.command == "verify-artifacts":
+        profile_id = resolve_toolchain_profile_id(args.toolchain_profile)
+        report = verify_artifacts(
+            args.manifest,
+            args.output_dir,
+            toolchain_profile=profile_id,
+        )
+        print(
+            "Verified published openCFW artifacts "
+            f"[profile {profile_id}]; package SHA-256 "
+            f"{report['package']['sha256']}"
         )
         return 0
 

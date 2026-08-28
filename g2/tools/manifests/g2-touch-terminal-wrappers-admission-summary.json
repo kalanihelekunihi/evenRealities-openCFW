@@ -1,0 +1,36 @@
+{
+  "admitted_row_count": 4,
+  "analysis_mode": "offline authenticated flow with typed EULA provider seam; host and Cortex-M0+ compile; no hardware/MMIO execution",
+  "component": "G2 touch terminal wrapper admission batch 20",
+  "exclusions": "all EULA bodies, resident tables/loaders, 0x1B6C/0x1C54/0x2638, system handoff and halt remain unadmitted",
+  "integration": "isolated source candidate only; not production-routed",
+  "metrics": {
+    "admitted_functions": 4,
+    "admitted_instruction_bytes": 72,
+    "concrete_source_or_implementation_gap_after": 43,
+    "input_concrete_gap": 47,
+    "input_gap_instruction_bytes": 4550,
+    "mmio_admissions": 0,
+    "resident_table_admissions": 0,
+    "residual_digest": "4c807b2b8b0d2586d65fd2345ab963c6bd31c7fcb35db8d91705a2fc11638bf2",
+    "residual_gap_instruction_bytes": 4478,
+    "row_digest": "37fabb976d51eb880c82f93324c00f93d2369774bfe62407987d4a4517081655",
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_application_contracts_after": 31,
+    "unimplemented_application_contracts_before": 35
+  },
+  "remaining": {
+    "concrete_gap_instruction_bytes": 4478,
+    "concrete_source_or_implementation_functions": 43,
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_clean_room_application_contracts": 31
+  },
+  "residual_row_count": 43,
+  "schema_version": 1,
+  "source": {
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_terminal_wrappers.c",
+    "sha256": "2ba1ae9ba1ab9f3f0d78d170ac42439ef2c795ac70602cbd8994f2c05e070b16",
+    "target_closure_object_bytes": 1336
+  }
+}

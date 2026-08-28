@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: MIT
 //
 // Emit bounds, inbound references, and decompilation for every function
 // containing one of the supplied addresses.

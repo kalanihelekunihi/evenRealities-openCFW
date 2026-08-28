@@ -1,4 +1,5 @@
 /*************************************************************************************************/
+/* SPDX-License-Identifier: MIT */
 /*
  * Clean-room Ambiq Cordio HCI byte transport.
  *

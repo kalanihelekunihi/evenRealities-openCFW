@@ -11,7 +11,7 @@ range is pinned by `tools/analyze_g2_thread_ble_messages.py`.
 
 The transmit behaviors already have an independently authored, production-
 integrated implementation in `components/apollo_main/core_overlay`. Five new
-GPL-3.0-only files in that directory now provide an independently authored RX
+MIT files in that directory now provide an independently authored RX
 candidate covering all 13 recovered entry points. Its core queue, lifecycle,
 dispatch, and enqueue behavior passes a host harness and all sources compile
 for a freestanding Thumb target. The candidate is not yet production-routed:

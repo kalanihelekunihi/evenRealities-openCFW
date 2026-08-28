@@ -35,9 +35,11 @@ profiles from the official `s200_v2.2.6.10` compatibility inputs:
   RLE/LZ4 decompression, container-lookup, lifecycle, page/common/UI
   callbacks, and IMU policy layer.
 
-This is not yet a clean-room replacement firmware. The five non-Apollo
-components and almost all of the Apollo application remain opaque. The current
-source coverage is recorded precisely in
+The milestone list above is historical implementation chronology, not the live
+release boundary. This is not yet a clean-room replacement firmware. The
+checked-in completion assessment and its readiness gate are authoritative for
+the current source-owned, retained, unresolved, and container-only
+classification. Current source coverage is recorded precisely in
 [`docs/source-coverage.md`](docs/source-coverage.md), so later replacements can
 be measured rather than estimated. The upstream-first attribution queue and
 focused configuration gaps are tracked in
@@ -45,6 +47,16 @@ focused configuration gaps are tracked in
 The concise cross-domain status, percentage definitions, and current
 dependency-identification estimates are maintained in
 [`docs/progress.md`](docs/progress.md).
+The community-facing artifact is the deterministic, vendor-byte-free
+[source distribution](docs/community-source-distribution.md). Recipients hydrate
+it only from their own authenticated official package; the extracted-tree smoke
+gate rebuilds and verifies the current hybrid source-overlay profile without
+hardware access. That local build is neither public-binary-authorized nor
+hardware-qualified.
+The corresponding [licensing inventory](docs/release-licensing-and-redistribution.md)
+keeps original openCFW work under MIT where possible, retains upstream terms,
+and blocks public stock-bearing binaries until all six payload authorities are
+documented.
 The authenticated whole-image
 [`__FILE__` census](docs/research/apollo-embedded-source-path-census.md)
 maps 314 of 357 retained build paths to 1,760 functions in the 64-shard
@@ -2726,7 +2738,8 @@ entries. Ten strict leaves preserve the 41/1/1 stock caller topology and the
 hexdump literal pool.
 
 The main function is derived from authenticated EasyLogger under MIT; bounded
-formatters and the G2 transport adapter are clean-room GPL-3.0-only code.
+formatters and the G2 transport adapter are project-authored clean-room MIT
+code.
 Independent leaves use arithmetic uppercase conversion instead of sharing
 unowned digit-table rodata. The raw route leaves record byte `+0x0C`
 untouched and has no recycler, event-set, level-aware, or formatted-submit
@@ -2829,8 +2842,8 @@ flashed and no hardware was operated.
 ## Prior phase-local complete FreeRTOS+CLI console-task tranche
 
 Apollo main now redirects the complete 284-byte command-console task at
-`[0x00541600,0x0054171C)` to seven independently placed GPL-3.0-only
-clean-room source leaves. The production closure owns G2-specific fill,
+`[0x00541600,0x0054171C)` to seven independently placed MIT clean-room source
+leaves. The production closure owns G2-specific fill,
 state-initialization, ordered registration, command-processing, byte-consume,
 receive-once, and task-entry glue. It deliberately retains the stock
 `FreeRTOS_CLIProcessCommand` ABI and all 22 proprietary setup groups / 76

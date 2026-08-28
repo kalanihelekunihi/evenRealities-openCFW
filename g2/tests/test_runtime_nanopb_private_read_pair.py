@@ -226,13 +226,13 @@ OVERLAY_RUNTIME_BASE = 0x0079_4324
 PROFILE_PINS = {
     "apple-clang": {
         BUF_FUNCTION: {
-            "offset": 124_800,
+            "offset": 184_648,
             "relocated": "f312e087cf1fbecf19bd5fa0052d3a63ca91287c811de169aaf2a09322e0115e",
             "patch_prefix": "23f37ebb",
             "patch_sha256": "7b95b1a632ce6362c74c2a3f3ae2e9ef15f5abb6800d1dd8ca1dd4586b4f73ac",
         },
         BYTE_FUNCTION: {
-            "offset": 124_832,
+            "offset": 184_680,
             "relocated": "f3395a19a7406016e6b1f1daf14969dee91ccde4e9a98ba4eeaba0016e131871",
             "patch_prefix": "23f336bb",
             "patch_sha256": "ed8460907148368a780a57a2abab8bb48cc80a78b980c38b0097e1b81ce1967e",
@@ -240,13 +240,13 @@ PROFILE_PINS = {
     },
     "linux-clang": {
         BUF_FUNCTION: {
-            "offset": 126_624,
+            "offset": 186_376,
             "relocated": "a6b4d3a4e969f078683f1cde3a4043b70d8495d577f550ae35c6c2789ff470de",
             "patch_prefix": "23f30ebf",
             "patch_sha256": "db7d0da006d031b33b6858a4b829d68403c9039f66d2ac4db576b00bdef94bec",
         },
         BYTE_FUNCTION: {
-            "offset": 126_656,
+            "offset": 186_408,
             "relocated": "f3395a19a7406016e6b1f1daf14969dee91ccde4e9a98ba4eeaba0016e131871",
             "patch_prefix": "23f3c6be",
             "patch_sha256": "b571a49431ddbdd7c71059acf67da1227af1eecba58b09fafea45177eda87fd0",
@@ -606,8 +606,8 @@ class NanopbPrivateReadPairProductionTests(unittest.TestCase):
             {
                 "kind": "source_build",
                 "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
-                "size": 3_690_822,
-                "sha256": "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+                "size": 3_952_454,
+                "sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
             },
         )
         regions = {item["name"]: item for item in component["regions"]}
@@ -622,13 +622,13 @@ class NanopbPrivateReadPairProductionTests(unittest.TestCase):
                 3_648_194, 2, 0x007B_2AA2, "generated_alignment",
             ),
             "apollo_nanopb_buf_read_source_leaf": (
-                3_648_196, 30, 0x007B_2AA4, "source_compiled",
+                3_648_196, 30, 0x007C_146C, "source_compiled",
             ),
             "apollo_nanopb_readbyte_source_alignment": (
                 3_648_226, 2, 0x007B_2AC2, "generated_alignment",
             ),
             "apollo_nanopb_readbyte_source_leaf": (
-                3_648_228, 64, 0x007B_2AC4, "source_compiled",
+                3_648_228, 64, 0x007C_148C, "source_compiled",
             ),
         }
         for name, expected in expected_regions.items():
@@ -680,8 +680,8 @@ class NanopbPrivateReadPairProductionTests(unittest.TestCase):
             record["toolchain_profiles"]["apple-clang"],
             {
                 "buf_read": {
-                    "offset": 124_800,
-                    "runtime_address": "0x007B2AA4",
+                    "offset": 184_648,
+                    "runtime_address": "0x007C146C",
                     "size": 30,
                     "unrelocated_sha256": (
                         COMPILER_PROFILES["apple-clang"]["sections"][BUF_SECTION][1]
@@ -690,8 +690,8 @@ class NanopbPrivateReadPairProductionTests(unittest.TestCase):
                     "entry_patch_sha256": PROFILE_PINS["apple-clang"][BUF_FUNCTION]["patch_sha256"],
                 },
                 "pb_readbyte": {
-                    "offset": 124_832,
-                    "runtime_address": "0x007B2AC4",
+                    "offset": 184_680,
+                    "runtime_address": "0x007C148C",
                     "size": 64,
                     "unrelocated_sha256": (
                         COMPILER_PROFILES["apple-clang"]["sections"][BYTE_SECTION][1]

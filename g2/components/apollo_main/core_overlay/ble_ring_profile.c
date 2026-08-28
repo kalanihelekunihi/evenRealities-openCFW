@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room production reconstruction of G2's seven-function BLE Ring
  * profile.  The implementation preserves the recovered Cordio message,

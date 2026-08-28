@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded source replacement for the G2 2.2.6.10 runtime zero-fill adapter
  * at 0x004826FC...0x00482707. The stock adapter forwards

@@ -1,0 +1,53 @@
+openCFW licensing boundary
+==========================
+
+The root MIT License applies to openCFW-authored software and documentation
+that do not declare a different license.
+
+Additional MIT license grant
+----------------------------
+
+To the extent that copyright in a file is held by the openCFW contributors,
+the contributors offer that original contribution under the root MIT License.
+The completed G2 policy census records 729 of 729 project-authored distributed
+artifacts under MIT, including 460 content-addressed overlay targets. The five
+existing `MIT OR GPL` declarations also continue to permit MIT use. Their GPL
+option is not removed by this grant.
+
+This additional grant does not apply to material derived from another GPL
+work, including:
+
+- `g2/components/apollo_main/ring_gesture/ring_gesture.c`;
+- `g2/components/apollo_main/evenai_thumb/g2flash-evenai-thumb.patch`;
+- `g2/components/apollo_main/canvas480/g2flash-canvas480.patch`; or
+- the upstream QP/C headers and sources under `g2/third_party/qpc/include/`
+  and `g2/third_party/qpc/src/`.
+
+Those files remain under their stated upstream GPL terms. A combined firmware
+image containing GPL-covered code must satisfy the GPL terms applicable to the
+combined work; the additional MIT grant applies to the separable openCFW-owned
+contributions and does not weaken those obligations.
+
+It does not replace or override a license, copyright notice, provenance
+record, or redistribution restriction attached to an individual file,
+component, dependency, evidence artifact, or firmware payload. In particular:
+
+- Code under g2/third_party/ and other vendored dependency directories remains
+  under the upstream license shipped with that dependency.
+- Files with an SPDX-License-Identifier or an adjacent component license remain
+  under that stated license, including Apache-2.0, BSD, GPL, MIT, and Zlib
+  material, subject to the additional grant above for original openCFW-owned
+  contributions.
+- Official Even Realities firmware payloads, retained compatibility bytes,
+  extracted binary data, and other vendor-proprietary inputs are not licensed
+  under the root MIT License and are not redistributed by this repository.
+- Reverse-engineering evidence and captured vendor artifacts do not become
+  MIT-licensed merely because they are stored beside project-authored tooling.
+
+Component-level NOTICE, LICENSE, README.openCFW.md, PROVENANCE.json, and
+PROVENANCE.md files identify the applicable upstream terms and source boundary.
+When a component-level statement conflicts with the repository default, the
+more specific component or file statement controls.
+
+The openCFW name does not grant rights to third-party trademarks, product
+names, firmware signing keys, or proprietary services.

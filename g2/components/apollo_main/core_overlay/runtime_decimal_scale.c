@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded source replacement for the G2 2.2.6.10 decimal-scaling helper at
  * 0x0048262C. The exact stock boundary, two callers, non-negative exponent

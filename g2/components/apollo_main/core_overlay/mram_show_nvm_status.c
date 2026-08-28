@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio persistent-record reporter matched to stock
  * AppDbShowNvmStatus at 0x0047C2BC.

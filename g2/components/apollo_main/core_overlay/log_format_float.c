@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Source replacement for the bounded G2 2.2.6.10 logging float converter at
  * 0x00472EF6.

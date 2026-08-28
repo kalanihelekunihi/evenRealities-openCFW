@@ -12,7 +12,7 @@ returns `-1`. The success path calls the retained no-op compatibility hook at
 at `0x00418148`, and returns zero. Host tests pin every short circuit, error
 code, mutation, callback count, and hook/store/completion order.
 
-`runtime_gate_release.c` is a 1,464-byte GPL-3.0-or-later clean-room
+`runtime_gate_release.c` is a 1,464-byte MIT clean-room
 implementation with SHA-256
 `fad09dc4b325b04a0b1ddec21847565672a094ce18a2dfb03244a5598a0ef3ef`.
 Apple clang emits a 56-byte leaf at overlay offset 3,060/runtime

@@ -10,7 +10,7 @@ address-derived name deliberately avoids assigning unsupported meaning to the
 getter or its SRAM value. Host tests pin zero, one, an arbitrary word, and the
 full unsigned range endpoint, with exactly one retained call each.
 
-`runtime_value_4161c6.c` is a 425-byte GPL-3.0-or-later clean-room
+`runtime_value_4161c6.c` is a 425-byte MIT clean-room
 implementation with SHA-256
 `21e70612f2f997db633a6be6b7dcdac8e3ce428a72edd94de79f3334b1c931e4`.
 Apple clang emits a four-byte leaf at overlay offset 3,306/runtime

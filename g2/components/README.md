@@ -17,7 +17,7 @@ Planned component roots:
 | `case` | Charging case, STM32G0 | 32-byte EVEN wrapper plus raw Cortex-M0+ image | Confirmed |
 | `touch` | Touch controller | 32-byte FWPK wrapper plus raw Cortex-M image | Vector base inferred |
 | `ble_em9305` | Bluetooth controller | Record-table package with explicit record addresses | Confirmed per record |
-| `codec` | Audio codec/DSP | Two-segment FWPK package | Segment destinations unresolved |
+| `codec` | Audio codec/DSP | Two-segment FWPK package | Community source profile resolves the UART boot stages to GX8002 IRAM and the dual BINH image to codec SPI NOR; payload source remains a proprietary boundary |
 
 A future `components/<name>/` implementation should contain:
 
@@ -756,7 +756,7 @@ entries. Ten strict leaves preserve the 41/1/1 stock caller topology and the
 hexdump literal pool.
 
 The main function is derived from authenticated EasyLogger under MIT; bounded
-formatters and the G2 transport adapter are clean-room GPL-3.0-only code.
+formatters and the G2 transport adapter are clean-room MIT code.
 Independent leaves use arithmetic uppercase conversion instead of sharing
 unowned digit-table rodata. The raw route leaves record byte `+0x0C`
 untouched and has no recycler, event-set, level-aware, or formatted-submit
@@ -854,7 +854,7 @@ was offline; nothing was signed, flashed, booted, or run on G2 hardware.
 The shared FreeRTOS+CLI component now provides seven production source leaves
 for the recovered G2 console task: fill, state initialization, registration,
 command processing, byte consumption, one receive iteration, and the task
-entry. These files are clean-room GPL-3.0-only G2 glue. The complete stock
+entry. These files are clean-room MIT G2 glue. The complete stock
 task span `[0x00541600,0x0054171C)` redirects to the source entry and is
 NOP-filled; the sole initializer pointer to `0x00541601` remains unchanged.
 

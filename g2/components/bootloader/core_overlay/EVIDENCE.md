@@ -984,6 +984,98 @@ settled tag-ID increment is the preceding milestone. This promotion
 authorizes no signing, flashing, filesystem mutation, reset, boot, or
 hardware operation.
 
+## MX25U25643G JEDEC-ID closure through 0x004205F4
+
+The complete authenticated `[0x0042059E,0x004205F4)` entry routes to a
+relocation-free 100-byte clean-room leaf in both reviewed toolchains. Host
+tests pin command `0x9F`, receive length three, failure logging and output
+preservation, and big-endian three-byte packing. Apple/Linux overlay/provider
+identities are 12,168/160,768 and 12,148/160,748 bytes. Accounting is 12,153
+source-owned, 13,466 generated patch, 16 alignment, and 135,133 retained
+official bytes across 178 functions, 159 relocated leaves, and 176 patch
+sites. Packages are 4,742,346 / 4,518,336 bytes with 6,507 / 3,454 placed
+regions. No hardware operation occurred; physical JEDEC/MSPI/XIP/cold-boot
+evidence is unavailable and retained executable bodies from `0x004205F4`
+prevent a completeness claim. See
+`docs/research/g2-bootloader-mspi-read-id-42059e-4205f4-source-closure.md`.
+
+## MX25U25643G read-transfer closure through 0x0042069E
+
+The complete authenticated `[0x004205F4,0x0042069E)` entry routes to the same
+relocation-free 172-byte clean-room leaf under both reviewed compilers. Host
+tests pin all validation statuses, the exact 24-byte descriptor, timeout,
+HAL-status propagation, and failure diagnostics. Apple/Linux overlay/provider
+identities are 12,340/160,940 and 12,324/160,924 bytes. Accounting is 12,325
+source-owned, 13,636 generated patch, 16 canonical alignment, and 134,963
+retained official bytes across 179 functions, 160 relocated leaves, and 177
+patch sites. Packages are 4,742,518 / 4,518,512 bytes with 6,509 / 3,455
+placed regions. No hardware operation occurred; physical descriptor/HAL/MSPI/
+XIP/cold-boot evidence is unavailable and retained executable bodies from
+`0x0042069E` prevent a completeness claim. See
+`docs/research/g2-bootloader-mspi-read-transfer-4205f4-42069e-source-closure.md`.
+
+## MX25U25643G write-transfer closure through 0x0042074E
+
+The complete authenticated `[0x0042069E,0x0042074E)` entry routes to
+`open_cfw_bootloader_mspi_write_transfer_42069e`. Stock SHA-256 is
+`18bdd1fb9df8bf0b73bb5ed09e8f9ed218ba263f8f11caf97c98fc17af2aa20e`;
+the 5,396-byte clean-room source hashes to
+`7fa590ec5cd0fbd87feb193c9bdec3becb0a6acea6334555c84683e3565451c1`.
+Host and stock checks cover statuses, both bounds, null/zero acceptance, exact
+descriptor bytes, eight callers, HAL propagation, and failure-only logging.
+Both reviewed toolchains emit the same relocation-free 148-byte leaf,
+`dac51840015d8553b2684538ff0a5a092d6c03122aa933a3af8d706a2e9d2b73`.
+
+Canonical accounting is 12,473 source-owned, 13,812 generated patch, 16
+alignment, and 134,787 retained official bytes across 180 functions, 161
+relocated leaves, and 178 patch sites. Apple/Linux packages contain 6,511 /
+3,456 placed regions plus two unresolved physical regions. No hardware action
+occurred. Authorized responsive right-temple evidence is unavailable, the
+left temple must remain stock, and later executable bodies beginning at
+`0x0042074E` prevent a completeness claim. See
+`docs/research/g2-bootloader-mspi-write-transfer-42069e-42074e-source-closure.md`.
+
+## MX25U25643G busy-status closure through 0x004207A2
+
+The complete authenticated `[0x0042074E,0x004207A2)` entry routes to
+`open_cfw_bootloader_mspi_busy_status_42074e`. Stock SHA-256 is
+`33e47f7e0bf37502f2f2dd20196d15b67a1f3ef336cd48538ac99f6ceed0e6e5`;
+the 3,114-byte clean-room source hashes to
+`361432557372303651f41bb8d3446d1f18f1753914fb8227fd6a4c57355685b8`.
+Host and stock checks cover the zeroed scratch object, command `0x05`, exact
+one-byte read contract, two callers, raw failure status and diagnostic, and
+bit-7 Boolean return. The reviewed compilers emit relocation-free 88-byte
+leaves with profile-specific pinned hashes.
+
+Canonical accounting is 12,561 source-owned, 13,896 generated patch, 16
+alignment, and 134,703 retained official bytes across 181 functions, 162
+relocated leaves, and 179 patch sites. Apple/Linux packages contain 6,513 /
+3,457 placed regions plus two unresolved physical regions. No hardware action
+occurred. Authorized responsive right-temple evidence is unavailable, the
+left temple must remain stock, and later executable bodies beginning at
+`0x004207A2` prevent a completeness claim. See
+`docs/research/g2-bootloader-mspi-busy-status-42074e-4207a2-source-closure.md`.
+
+## MX25U25643G ready-poll closure through 0x00420800
+
+The complete authenticated `[0x004207A2,0x00420800)` cluster routes to
+`open_cfw_bootloader_mspi_wait_ready_4207a2` and
+`open_cfw_bootloader_mspi_wait_ready_default_4207f4`. Its 82- and 12-byte
+stock bodies and 3,531-byte clean-room source are hash-pinned. Host and stock
+checks cover the 200-poll fast phase, five-unit delay, caller-bounded
+context-aware phase, notification/delay selection, fixed bound 500,
+success/timeout returns, and all callers. Both reviewed compilers emit
+dependency-free 88- and 12-byte leaves.
+
+Canonical accounting is 12,661 source-owned, 13,990 generated patch, 16
+alignment, and 134,609 retained official bytes across 183 functions, 164
+relocated leaves, and 181 patch sites. Apple/Linux packages contain 6,517 /
+3,459 placed regions plus two unresolved physical regions. No hardware action
+occurred. Authorized responsive right-temple evidence is unavailable, the
+left temple must remain stock, and later executable bodies beginning at
+`0x00420800` prevent a completeness claim. See
+`docs/research/g2-bootloader-mspi-wait-ready-4207a2-420800-source-closure.md`.
+
 ## Preceding nanopb fixed64 bootloader exclusion witness
 
 The Apollo-main `pb_decode_fixed64` promotion has no authenticated bootloader
@@ -1134,6 +1226,247 @@ authorized responsive right-temple hardware; the left temple must remain
 stock. Later retained executable bodies prevent a firmware-wide completeness
 claim.
 
+## MX25U25643G public initializer closure through 0x0042052A
+
+The complete authenticated `[0x00420476,0x0042052A)` entry now routes to
+`open_cfw_bootloader_mspi_driver_init_420476`. Stock and host evidence pin
+low-level-init failure, exact delay and device/timing preparation, JEDEC-ID
+read and diagnostics, final-mode setup, event-flags initialization, MSPI
+enable, and both short-circuiting error returns.
+
+Both profiles emit a 204-byte leaf with five strict source-owned call
+relocations. Apple/Linux overlay/provider identities are 11,932/160,532 and
+11,912/160,512 bytes. Canonical accounting is 11,917 source-owned, 13,264
+generated patch, 16 alignment, and 135,335 retained official bytes across 176
+functions, 157 relocated leaves, and 174 patch sites. Unsigned packages are
+4,742,110 / 4,518,100 bytes. No hardware operation occurred. Live JEDEC, HAL,
+RTOS, interrupt, MSPI, external-flash, XIP, timing, and cold-boot evidence is
+blocked by unavailable authorized responsive right-temple hardware; the left
+temple must remain stock. Executable bodies after `0x0042052A` prevent a
+completeness claim.
+
+## MX25U25643G soft-reset closure through 0x0042059E
+
+The complete authenticated `[0x0042052A,0x0042059E)` entry now routes to a
+136-byte clean-room leaf in both profiles. Stock and host evidence pins reset
+enable `0x66`, reset `0x99`, 1/50-ms delays, failure-only logs, and continued
+execution after failures. Canonical accounting is 12,053 source-owned, 13,380
+generated patch, 16 alignment, and 135,219 retained official bytes across 177
+functions, 158 relocated leaves, and 175 patch sites. Apple/Linux packages are
+4,742,246 / 4,518,236 bytes. No hardware operation occurred; live reset,
+MSPI/XIP, external-flash, timing, and cold-boot evidence is blocked by
+unavailable authorized responsive hardware. Executable bodies after
+`0x0042059E` prevent a completeness claim.
+
+## Current allocator-initializer closure
+
+The provider now replaces the complete 56-byte TLSF pool initializer
+`[0x0041FD70,0x0041FDA8)`. Its 2,940-byte clean-room source hashes to
+`53dc0ff1c3c47d2afcb585f6753e4eaaa29ae9494c705e0f73ff5929dd487713`.
+Apple/Linux clang emit distinct relocation-free 88-byte bodies at offsets
+9,916 / 9,900, with SHA-256
+`1a588b40d59408de4b8f541890868a18a827a77c7333c958687ebeae21f30ddc`
+and `98ad36432a4e12f52535ab869d025cbbf03f57d63bdba9553541169b73a9e190`.
+
+Stock, caller, literal-pool, and host oracles pin the pool clear at
+`0x20081000` for `0x70800` bytes, retained TLSF create call, handle publication
+at `0x2002718C`, complete diagnostic record, zero return, and sole caller at
+`0x0041B89E`. Apple overlay/provider identities are 10,004 / 158,604 bytes
+with SHA-256
+`a27f7ba39fdfe6a7364d59577cfa387a0a601aedf773612d1cb1b77700c6538d`
+and `da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7`;
+Linux identities are 9,988 / 158,588 bytes with SHA-256
+`15784fef039b93caaa26b202c61b115b4d0947f0ec253b7232dd43e828787b50`
+and `a64974dce84415f4031847e1f71b5397cd0c366a31b8786d6f6e311ff53bd7b2`.
+Canonical accounting is 9,991 source-owned, 11,366 generated patch, 14
+alignment, and 137,233 retained official bytes across 159 functions, 140
+relocated leaves, and 157 patch sites.
+
+Unsigned Apple/Linux packages are 4,740,182 / 4,516,176 bytes with SHA-256
+`8041ac27ae80d9cb331d27363281d7dfb259024a4276e80783bcca4b3e7a04a2`
+and `7591a1ab14efac218d2610f2192f1b554c1f366ceb917ba911fc9059c8965bd6`.
+No hardware operation occurred. Live allocator, SRAM, logging, and cold-boot
+evidence remains blocked by unavailable authorized responsive right-temple
+hardware; the left temple must remain stock. Executable bodies after
+`0x0041FDA8` prevent a firmware-wide completeness claim.
+
+## Current IRQ-service closure
+
+The provider now replaces the three complete IRQ-service entries
+`[0x0041FDC0,0x0041FE28)`. The shared 3,518-byte clean-room source hashes to
+`c1b495b5d4de6ab8045e8e9f225736c9d3b0cabbe93d712b4b347675394a377b`.
+Both reviewed toolchains emit the same relocation-free 32-, 32-, and 48-byte
+NVIC-enable, priority, and MSPI-ISR leaves. Stock/caller/vector and host oracles
+pin signed IRQ gating, NVIC/SCB indexing, four-bit priority encoding, MSPI
+handle/status propagation, and status-get/clear/service order.
+
+Apple overlay/provider identities are 10,116 / 158,716 bytes with SHA-256
+`f8088800044634921e2446b45e7133e0a9d3232e5ce5ad78f31eb6990b1e32b8`
+and `1594aefde3a94be29dec7c4d3ab3ac20cf57e2a6f220f7eeca8609ffb222dede`;
+Linux identities are 10,100 / 158,700 bytes with SHA-256
+`ae413000d796c164e5bc06f197ff9bbf2543140d2ed6a50bfc62eecb225bb213`
+and `34259f9296124eed2b7cebc3488994087b3308fc26383d78f82fd9948e568eae`.
+Accounting is 10,103 source-owned, 11,470 generated patch, 14 alignment, and
+137,129 retained official bytes across 162 functions, 143 relocated leaves,
+and 160 patch sites. Unsigned packages are 4,740,294 / 4,516,288 bytes with
+SHA-256 `b2ce7f54b0d6fb58fe46c78d715f7498d9188dba826197225ad203db0bc64181`
+and `c8c34b6acf8ed5b356f61334121e5c6d3bfc8628302bd3af4398192c83403a88`.
+No hardware operation occurred. Live NVIC/MSPI/interrupt/cold-boot evidence is
+blocked by unavailable authorized responsive right-temple hardware; the left
+temple must remain stock. Executable bodies after `0x0041FE28` prevent a
+firmware-wide completeness claim.
+
+## Current MSPI-control closure
+
+The complete `[0x0041FE28,0x0041FE62)` enable/disable pair now routes to two
+relocation-free clean-room leaves. Host and stock evidence pins idempotence,
+handle/mode/flag arguments, state updates, and all callers. Apple/Linux
+overlay/provider identities are 10,180/158,780 and 10,164/158,764 bytes;
+accounting is 10,167 source-owned, 11,528 generated patch, 14 alignment, and
+137,071 retained official bytes across 164 functions, 145 relocated leaves,
+and 162 patch sites. Unsigned packages are 4,740,358 / 4,516,352 bytes. No
+hardware operation occurred. Live MSPI behavior is physically blocked and
+executable bodies after `0x0041FE62` prevent a completeness claim.
+
+## Event-flags service closure through 0x0041FF08
+
+The complete `[0x0041FE62,0x0041FF08)` init/acquire/release cluster now routes
+to three clean-room relocation-free leaves. Authenticated stock identities,
+all three direct callers, SRAM handle/configuration addresses, retained
+create/acquire/release calls, wait-forever semantics, and exact failure-only
+EasyLogger records are pinned by the host and stock-topology tests.
+
+The later MSPI guard and XIP-config entries are now source-owned as well.
+Apple/Linux overlay identities are 10,500 / 10,484 bytes; provider identities
+are 159,100 / 159,084 bytes. Canonical accounting is 10,487 source-owned,
+11,782 generated patch, 14 alignment, and 136,817 retained official bytes
+across 170 functions, 151 relocated leaves, and 168 patch sites. Unsigned
+packages are 4,740,678 / 4,516,672 bytes. No hardware operation occurred.
+Live RTOS contention, logger, and cold-boot evidence is blocked because no
+authorized responsive right temple is available and the left must remain
+stock. Executable bodies after `0x0041FF60` prevent a completeness claim.
+
+## Paired MSPI guard closure through 0x0041FF34
+
+The complete `[0x0041FF08,0x0041FF34)` guard pair now routes to two
+relocation-free clean-room leaves. The authenticated stock bodies are 22 bytes
+each with SHA-256 `02963ef6…0dc5` and `ecb3a585…dddd`. Stock scans pin three
+callers per entry and the shared `0x200271C5` bypass-byte literal. Host tests
+prove that enter always acquires before conditionally disabling MSPI, while
+exit conditionally enables MSPI before always releasing.
+
+Apple/Linux leaves are identically 36 / 32 bytes with SHA-256
+`e9000427…07eb` / `dfb2fdd9…e40`. With the later XIP-config entry included,
+the cumulative provider accounts for 10,487 source-owned, 11,782 generated
+patch, 14 alignment, and 136,817 retained
+official bytes. Both unsigned packages and flash plans reproduce; no hardware
+operation occurred. Live contention, MSPI timing, and cold-boot evidence is
+blocked because no authorized responsive right temple is available and the
+left must remain stock. Executable bodies after `0x0041FF60` prevent a
+completeness claim.
+
+## MSPI XIP-config closure through 0x0041FF60
+
+The complete authenticated `[0x0041FF34,0x0041FF60)` entry now routes to the
+relocation-free clean-room function
+`open_cfw_bootloader_mspi_xip_config_41ff34`. Its stock body is 44 bytes with
+SHA-256 `384a53a6…eabe76`; stock scans authenticate callers `0x004203B0`,
+`0x00420ED6`, and `0x00420F36`, configuration `0x2000023C`, handle word
+`0x200270DC`, and retained control entry `0x004251C0`. Host tests prove the
+low-byte selector, config-byte-five `8`/`0` mutation, write-before-call order,
+request 16, exact arguments, and ignored status.
+
+Both profiles emit the same 36-byte leaf with SHA-256 `0cc0ac05…87eb`.
+Canonical accounting is 10,487 source-owned, 11,782 generated patch, 14
+alignment, and 136,817 retained official bytes across 170 functions, 151
+relocated leaves, and 168 patch sites. Apple/Linux packages are 4,740,678 /
+4,516,672 bytes. No hardware operation occurred. Live XIP transition,
+external-flash timing, and cold-boot evidence is blocked because no authorized
+responsive right temple is available and the left must remain stock.
+Executable bodies after `0x0041FF60` prevent a completeness claim.
+
+## Bit-run helper closure through 0x00420002
+
+The complete authenticated `[0x0041FF60,0x00420002)` pair now routes to the
+relocation-free clean-room functions
+`open_cfw_bootloader_longest_ones_run_41ff60` and
+`open_cfw_bootloader_longest_ones_center_41ff74`. Their stock bodies are 20 /
+142 bytes with SHA-256 `93e9d3dc…c4ad2` / `3c89f5f4…679ed`; stock scans pin
+sole callers `0x004200BE` and `0x00420158`. Host tests prove the exact scalar
+contract across boundary patterns and 2,048 deterministic random words.
+
+Apple leaves are 16 / 126 bytes; Linux leaves are 16 / 110 bytes. Canonical
+accounting is 10,629 source-owned, 11,944 generated patch, 14 alignment, and
+136,655 retained official bytes across 172 functions, 153 relocated leaves,
+and 170 patch sites. Apple/Linux packages are 4,740,820 / 4,516,798 bytes. No
+hardware operation occurred. Live mask meaning, MSPI training/timing,
+external-flash, and cold-boot evidence is blocked because no authorized
+responsive right temple is available and the left must remain stock.
+Executable bodies after `0x00420002` prevent a completeness claim.
+
+## MSPI timing-scan closure through 0x004201BA
+
+The complete authenticated `[0x00420002,0x004201BA)` entry now routes to
+`open_cfw_bootloader_mspi_timing_scan_420002`. Its 440-byte stock body has
+SHA-256 `9618b6be…d6dcb6`; the retained caller is `0x004201CA`. Stock evidence
+also pins the 36-by-6 table at `0x20000244`, expected packed JEDEC ID
+`0x002539C2`, control/read seams at `0x004251C0` / `0x0042059E`, and helper
+calls to `0x0041FF60` / `0x0041FF74`.
+
+Host tests execute all 1,152 row/fine candidates and prove pass-mask
+construction, first-strictly-longer row selection, centered output, the
+all-failed edge case, and all three diagnostic records. Apple and Linux each
+emit a 420-byte leaf with exactly two strict `R_ARM_THM_CALL` relocations.
+Canonical accounting is 11,049 source-owned, 12,384 generated patch, 16
+alignment, and 136,215 retained official bytes across 173 functions, 154
+relocated leaves, and 171 patch sites. Apple/Linux packages are 4,741,242 /
+4,517,220 bytes. No hardware operation occurred. Electrical timing-window,
+external-flash, XIP, and cold-boot evidence remains blocked because no
+authorized responsive right temple is available and the left must remain
+stock. Executable bodies after `0x004201BA` prevent a completeness claim.
+
+## Automatic MSPI timing-selection closure through 0x00420254
+
+The complete authenticated `[0x004201BA,0x00420254)` entry now routes to
+`open_cfw_bootloader_mspi_timing_auto_4201ba`. Its 154-byte stock body has
+SHA-256 `a31a2497…f2b9b7`; the sole retained caller is `0x004204BA`. Stock
+evidence pins the zero-fill seam, the call to the source-owned exhaustive scan,
+both diagnostic calls, the active six-byte configuration at `0x2000023C`, and
+the success/failure record metadata.
+
+Host tests prove zero initialization, success publication, failure preservation,
+diagnostics, and preservation of the two adjacent bytes touched only by the
+stock compiler's widened copy. Apple emits a 172-byte leaf and Linux a 184-byte
+leaf; each has exactly one strict `R_ARM_THM_CALL` relocation to the timing scan.
+Canonical accounting is 11,221 source-owned, 12,538 generated patch, 16
+alignment, and 136,061 retained official bytes across 174 functions, 155
+relocated leaves, and 172 patch sites. Apple/Linux packages are 4,741,414 /
+4,517,404 bytes. No hardware operation occurred. Electrical timing-window,
+external-flash, XIP, and cold-boot evidence remains blocked because no
+authorized responsive right temple is available and the left must remain stock.
+Executable bodies after `0x00420254` prevent a completeness claim.
+
+## Low-level MSPI initializer closure through 0x00420476
+
+The complete authenticated `[0x00420254,0x00420476)` entry now routes to
+`open_cfw_bootloader_mspi_low_level_init_420254`. Its 546-byte stock body has
+SHA-256 `a3c3fab2…cb94`; the sole retained caller is `0x00420480`. Stock and
+host evidence pin the busy rejection, initialize/power/configure/device/enable
+sequence, default/custom device configuration, cleanup and error policy, TCB
+configuration, XIP/pin setup, interrupt mask `0x1A80`, IRQ 21/priority 4,
+state/output publication, and diagnostics.
+
+Apple and Linux each emit a 492-byte leaf with four strict source-owned call
+relocations. Overlay/provider identities are 11,728/160,328 and
+11,708/160,308 bytes. Canonical accounting is 11,713 source-owned, 13,084
+generated patch, 16 alignment, and 135,515 retained official bytes across 175
+functions, 156 relocated leaves, and 173 patch sites. Unsigned packages are
+4,741,906 / 4,517,896 bytes. No hardware operation occurred. Live HAL,
+interrupt, MSPI, external-flash, XIP, timing, and cold-boot evidence is blocked
+by unavailable authorized responsive right-temple hardware; the left temple
+must remain stock. Executable bodies after `0x00420476` prevent a completeness
+claim.
+
 ## Current pin-group dispatcher closure
 
 The production provider additionally replaces `[0x0041FADC,0x0041FCF6)`, a
@@ -1216,3 +1549,1013 @@ channel, pin/power, and cold-boot behavior remains blocked by unavailable
 authorized responsive right-temple hardware; the left temple must remain
 stock. Later retained executable bodies prevent a firmware-wide completeness
 claim.
+## MX25U25643G address-mode closure through 0x0042086C
+
+The authenticated 108-byte body reads command `0x15`, preserves raw transport
+errors, tests bit 5, and emits distinct read-failure and three-byte-mode
+diagnostics. It now routes to a relocation-free 124-byte leaf on both reviewed
+toolchains. Offline tests and exact routing are green; live MSPI, flash, and
+cold-boot evidence remains unavailable. See
+`docs/research/g2-bootloader-mspi-4byte-mode-420800-42086c-source-closure.md`.
+
+## MX25U25643G enter-four-byte-mode closure through 0x00420978
+
+The authenticated 232-byte body checks the fixed MSPI handle and ready state,
+write-enables the device, issues command `0xB7`, performs the stock ignored
+post-command ready poll, verifies address mode with the stock nonzero-success
+quirk, and write-disables the device. It now routes to a relocation-free
+220-byte leaf on both reviewed toolchains. Host evidence pins all branches,
+statuses, diagnostics, calls, and ordering; exact routing, manifest, package,
+and analyzer gates are green. The 36-byte predecessor literal region remains
+retained and authenticated.
+
+Canonical provider accounting is 13,005 source-owned, 14,330 generated patch,
+16 alignment, and 134,269 retained official bytes. The unsigned canonical
+package is 4,743,198 bytes with SHA-256
+`f7d74c7ae574671b3677c8b94500305482fd89180e17eaa367c9358caaff44e7`.
+No hardware operation occurred; live MSPI, status-register, external-flash,
+XIP, and cold-boot evidence remains unavailable. See
+`docs/research/g2-bootloader-mspi-enter-4byte-mode-420890-420978-source-closure.md`.
+
+## MX25U25643G write-latch closure through 0x004209FC
+
+The complete 58-byte write-enable and 56-byte write-disable wrappers submit
+commands `0x06` and `0x04` with otherwise zero transfer fields, return the raw
+transport result, and log only failures with their exact stock records. They
+now route to two relocation-free 72-byte leaves on both reviewed toolchains.
+Host evidence pins success/failure behavior, all seven callers, and the three
+surrounding retained literal pools; exact routing, manifest, package, and
+analyzer gates are green.
+
+Canonical provider accounting is 13,149 source-owned, 14,444 generated patch,
+16 alignment, and 134,155 retained official bytes. The unsigned canonical
+package is 4,743,342 bytes with SHA-256
+`f0fa1999e7992a0a20ea3897185447b060ae3510e38e2ba3560c8651a9f69d7c`.
+No hardware operation occurred; live write-latch, MSPI, external-flash, XIP,
+and cold-boot evidence remains unavailable. See
+`docs/research/g2-bootloader-mspi-write-latch-420984-4209fc-source-closure.md`.
+
+## MX25U25643G sector-erase closure through 0x00420ADA
+
+The complete authenticated 210-byte body validates the fixed handle, 4-KiB
+alignment, and 32-MiB address bound, then executes guarded serial-mode command
+`0x20` with ready-poll and write-latch sequencing. It now routes to a
+relocation-free 244-byte leaf on both reviewed toolchains. Host evidence pins
+every validation and failure stage, raw status propagation, exact diagnostics,
+unconditional guarded cleanup, the transfer tuple, the sole caller, and the
+preceding retained literal pool.
+
+Canonical provider accounting is 13,393 source-owned, 14,654 generated patch,
+16 alignment, and 133,945 retained official bytes. The unsigned canonical
+package is 4,743,586 bytes with SHA-256
+`9451c86c90a52643fa43cea465f2a82419a5d345b82f4b44e41ef02a5de39da0`.
+No hardware operation occurred; live erase, write-latch, MSPI, external-flash,
+XIP, and cold-boot evidence remains unavailable. See
+`docs/research/g2-bootloader-mspi-sector-erase-420a08-420ada-source-closure.md`.
+
+## MX25U25643G page-program closure through 0x00420C14
+
+The complete authenticated 264-byte body validates the fixed handle, buffer,
+length, and 32-MiB start bound, then divides command `0x02` writes across
+256-byte page boundaries with guarded serial-mode, ready-poll, and write-latch
+sequencing. It now routes to the same relocation-free 256-byte leaf on both
+reviewed toolchains. Host evidence pins every validation and failure stage,
+multi-page address/buffer/length advancement, raw status propagation, exact
+diagnostics, guarded cleanup, transfer tuples, the sole caller, and both
+surrounding retained pools.
+
+Canonical provider accounting is 13,649 source-owned, 14,918 generated patch,
+16 alignment, and 133,681 retained official bytes. The unsigned canonical
+package is 4,743,842 bytes with SHA-256
+`1f3191b816b1e30cb82cd06653f63514a2174eebd942b44b92cf43152c4769dd`.
+No hardware operation occurred; live page programming, write-latch, MSPI,
+external-flash, XIP, and cold-boot evidence remains unavailable. See
+`docs/research/g2-bootloader-mspi-program-420b0c-420c14-source-closure.md`.
+
+## MX25U25643G QE closure through 0x00420DFA
+
+The complete authenticated 414-byte body checks the fixed MSPI handle, reads
+status register 2 with command `0x05`, compares QE bit 6, and requires
+protection bits `0x3C` to be clear before accepting an unchanged state. When
+an update is needed, it write-enables, sets or clears QE, clears the protection
+bits, writes command `0x01`, and verifies the register. Both stock readiness
+results are deliberately ignored. It now routes to the same relocation-free
+364-byte leaf on both reviewed toolchains.
+
+Canonical provider accounting is 14,013 source-owned, 15,332 generated patch,
+16 alignment, and 133,267 retained official bytes. Apple/Linux overlay
+identities are 14,028 /
+`ed9269c05166de01a402d2a2be5a975ea36a35d4db0edd13ac879afb836f0407`
+and 14,012 /
+`de523ff3514355dfccc201ca23b6f06fe95b75671f1c71835e898808d635c974`;
+provider identities are 162,628 /
+`bd830dafab1c1e9de59e7abce980e7461f3d440b0e5121ab27735513903ffd10`
+and 162,612 /
+`5d6c596921690cadc11cd902d6c21dc988d48fd6e9675b481423187a6afe35ab`.
+The unsigned canonical package is 4,744,206 bytes with SHA-256
+`43022429372d51be6a9083eed987cb6fb0c38b1e4504e0fbe82e81c2f34d5971`.
+
+No hardware operation occurred; live QE/status-register/write-latch/MSPI/
+external-flash/XIP and cold-boot evidence remains unavailable. See
+`docs/research/g2-bootloader-mspi-quad-enable-420c5c-420dfa-source-closure.md`.
+
+## MSPI device-reconfiguration closure through 0x00420E8C
+
+The complete authenticated 132-byte body disables the active MSPI handle,
+applies the supplied device configuration, re-enables the controller, and
+reapplies pin-group configuration using the published instance and the
+configuration byte at offset `+8`. Every nonzero HAL result is diagnosed and
+collapsed to status `1`, matching stock behavior. Apple/Linux emit 136/128
+bytes with one strict relocation to the source-owned pin-group dispatcher.
+
+Canonical provider accounting is 14,149 source-owned, 15,464 generated patch,
+16 alignment, and 133,135 retained official bytes. Apple/Linux overlays are
+14,164 / 14,140 bytes; providers are 162,764 / 162,740 bytes. Unsigned packages
+are 4,744,342 / 4,520,328 bytes. No hardware operation occurred; live HAL,
+pinmux, MSPI, XIP, external-flash, and cold-boot evidence remains unavailable.
+See `docs/research/g2-bootloader-mspi-device-reconfigure-420e08-420e8c-source-closure.md`.
+
+## MX25U25643G quad-mode closure through 0x00420F0C
+
+The complete authenticated 128-byte body clones the 24-byte initialized-SRAM
+quad template, sets turnaround `8`, read command `0x006C`, device selector
+`0x10`, and turnaround-enable `1`, then runs the source-owned device
+reconfiguration service. Success enables source-owned XIP policy and submits
+HAL control request `0x18` with mode byte `0x10`; either failure is diagnosed
+with the exact stock logger identity. The three stock callers are
+`0x00420ACE`, `0x00420C08`, and `0x00420F9C`.
+
+Apple/Linux emit 152-byte leaves at overlay offsets 14,164/14,140, with three
+strict relocations to source-owned memcpy, device reconfiguration, and XIP
+configuration. Canonical provider accounting is 14,301 source-owned, 15,592
+generated patch, 16 alignment, and 133,007 retained official bytes. The
+Apple/Linux providers are 162,916/162,892 bytes; unsigned packages are
+4,744,494/4,520,480 bytes.
+
+No hardware operation occurred. Live initialized-SRAM, HAL, pinmux, MSPI,
+XIP, external-flash, and cold-boot evidence remains unavailable. See
+`docs/research/g2-bootloader-mspi-set-quad-mode-420e8c-420f0c-source-closure.md`.
+
+## MX25U25643G serial-mode closure through 0x00420F6A
+
+The complete authenticated 90-byte body at `[0x00420F10,0x00420F6A)` invokes
+the source-owned device-reconfiguration service with the initialized-SRAM
+serial template at `0x2000020C`. Success disables source-owned XIP policy and
+submits retained HAL control request `0x18` with mode byte `0`; either failure
+is diagnosed with the exact stock logger tag, file, line, and format identity.
+The four stock callers are `0x004204B6`, `0x004204BE`, `0x00420A4C`, and
+`0x00420B58`; completion is void.
+
+Apple/Linux emit 124-byte leaves at overlay offsets 14,316/14,292, each with
+strict relocations to source-owned device reconfiguration and XIP
+configuration. Canonical provider accounting is 14,425 source-owned, 15,682
+generated patch, 16 alignment, and 132,917 retained official bytes. The
+Apple/Linux providers are 163,040/163,016 bytes; unsigned packages are
+4,744,618/4,520,604 bytes.
+
+No hardware operation occurred. Live initialized-SRAM, HAL, pinmux, MSPI,
+XIP, external-flash, and cold-boot evidence remains unavailable. See
+`docs/research/g2-bootloader-mspi-set-serial-mode-420f10-420f6a-source-closure.md`.
+
+## MX25U25643G guarded read closure through 0x00420FF2
+
+The complete authenticated 130-byte body validates the published handle,
+buffer, nonzero length, and 32 MiB address limit; enters the source-owned
+transaction guard; selects source-owned quad mode; invokes the source-owned
+fixed ready wait; constructs the exact 24-byte `0x006C` read descriptor; and
+calls the retained Ambiq blocking-transfer boundary with timeout `1000000`.
+It always releases the guard after the transfer and returns the raw HAL status.
+The ready-wait result is intentionally ignored, matching stock. The direct
+littlefs caller is `0x004212EE`.
+
+Apple/Linux emit 152-byte leaves at overlay offsets 14,440/14,416, with four
+strict source-to-source relocations. Canonical provider accounting is 14,577
+source-owned, 15,812 generated patch, 16 alignment, and 132,787 retained
+official bytes. Apple/Linux providers are 163,192/163,168 bytes; unsigned
+packages are 4,744,770/4,520,756 bytes.
+
+No hardware operation occurred. Live HAL, pinmux, MSPI, external-flash read,
+XIP, littlefs, and cold-boot evidence remains unavailable. See
+`docs/research/g2-bootloader-mspi-read-420f70-420ff2-source-closure.md`.
+
+## LittleFS directory-bootstrap closure through 0x004211B0
+
+The complete authenticated 232-byte body checks `/firmware`, `/ota`, `/user`,
+and `/log` with the retained LittleFS directory-open ABI. Missing directories
+are created; `LFS_ERR_EXIST` and other mkdir errors are diagnosed and
+iteration continues; present directories are closed with the close result
+ignored; an unexpected open result is diagnosed and returns `-1`. Two stock
+initialization callers at `0x004211EC` and `0x00421252` are preserved.
+
+Apple/Linux emit 220/224-byte leaves at overlay offsets 14,592/14,568 with
+two strict relocations to source-owned EasyLogger. Canonical provider
+accounting is 14,797 source-owned, 16,044 generated patch, 16 alignment, and
+132,555 retained official bytes across 195 functions, 176 relocated leaves,
+and 193 patch sites. Apple/Linux providers are 163,412/163,392 bytes; unsigned
+packages are 4,744,990/4,520,980 bytes.
+
+No hardware operation occurred. Live LittleFS mount/directory mutation,
+external-flash persistence, power-loss, logging, and cold-boot evidence is
+blocked by unavailable authorized physical evidence. The successor entry at
+`0x004211B0` remains the software frontier; firmware-wide functional
+completeness is not claimed. See
+`docs/research/g2-bootloader-fs-directories-4210c8-4211b0-source-closure.md`.
+
+## LittleFS format/bootstrap closure through 0x00421210
+
+The complete authenticated 96-byte body calls retained public LittleFS
+unmount, format, and mount wrappers over the fixed filesystem/configuration
+objects. Unmount and format results are deliberately ignored. Mount failure
+or source-owned directory-bootstrap failure is diagnosed and mapped to `9`;
+success returns `0`. The stock caller at `0x0042126E` is preserved.
+
+Apple/Linux emit 108/112-byte leaves at overlay offsets 14,812/14,792 with
+two strict source-to-source relocations. Canonical provider accounting is
+14,905 source-owned, 16,140 generated patch, 16 alignment, and 132,459
+retained official bytes across 196 functions, 177 relocated leaves, and 194
+patch sites. Apple/Linux providers are 163,520/163,504 bytes; unsigned
+packages are 4,745,098/4,521,092 bytes.
+
+No hardware operation occurred. Live unmount/format/mount, external-flash
+erase/program/persistence, power-loss, diagnostics, and cold-boot evidence is
+blocked by unavailable authorized physical evidence. The successor entry at
+`0x00421210` remains the software frontier; firmware-wide functional
+completeness is not claimed. See
+`docs/research/g2-bootloader-littlefs-format-4211b0-421210-source-closure.md`.
+
+## LittleFS initializer/boot-counter closure through 0x004212D8
+
+The complete authenticated 200-byte body mounts the fixed LittleFS instance;
+on failure it formats and retries, logging and returning `9` if the retry also
+fails. It invokes the source-owned directory bootstrap, logs and calls the
+source-owned recovery-format service on directory failure, publishes the
+ready word, then opens `boot_count` with flags `0x103`, reads a four-byte value
+initialized to zero, increments it, rewinds, writes, closes, and logs the new
+count. Recovery and all file-operation statuses are intentionally ignored.
+The sole stock caller at `0x0041B8A6` is preserved.
+
+Apple/Linux emit 260-byte leaves at overlay offsets 14,920/14,904 with five
+strict source-to-source relocations. Canonical provider accounting is 15,165
+source-owned, 16,340 generated patch, 16 alignment, and 132,259 retained
+official bytes across 197 functions, 178 relocated leaves, and 195 patch
+sites. Apple/Linux providers are 163,780/163,764 bytes; unsigned packages are
+4,745,358/4,521,352 bytes.
+
+No hardware operation occurred. Live mount/format, directory mutation,
+external-flash persistence, power-loss, readiness, boot-counter, diagnostics,
+and cold-boot evidence is blocked by unavailable authorized physical
+evidence. The successor entry at `0x004212D8` remains the software frontier;
+firmware-wide functional completeness is not claimed. See
+`docs/research/g2-bootloader-littlefs-init-421210-4212d8-source-closure.md`.
+
+## LittleFS block-read closure through 0x00421310
+
+The complete authenticated 56-byte callback ignores the configuration
+pointer, computes the fixed-partition address with 32-bit arithmetic, and
+calls the source-owned guarded MX25U25643G reader. Success returns zero. Every
+nonzero device result is logged with block, offset, size, address, and status,
+then collapsed to `LFS_ERR_IO` (`-5`). The bootloader LittleFS configuration at
+`0x00431070` continues to point at the stock entry, which now redirects to the
+source leaf.
+
+Apple/Linux emit 60-byte leaves at overlay offsets 15,180/15,164 with strict
+relocations to the source-owned reader and logging dispatcher. Canonical
+provider accounting is 15,225 source-owned, 16,396 generated patch, 16
+alignment, and 132,203 retained official bytes across 198 functions, 179
+relocated leaves, and 196 patch sites. Apple/Linux providers are
+163,840/163,824 bytes; unsigned packages are 4,745,418/4,521,412 bytes.
+
+No hardware operation occurred. Live MSPI/NOR reads, filesystem reads,
+concurrency, diagnostics, and cold-boot evidence is blocked by unavailable
+authorized physical evidence. Apple closes exactly at the protected
+`0x00438000` boundary, so later source leaves require authenticated reclaimed
+body space. The successor entry at `0x00421310` remains the software frontier;
+firmware-wide functional completeness is not claimed. See
+`docs/research/g2-bootloader-littlefs-read-4212d8-421310-source-closure.md`.
+
+## LittleFS block-program closure through 0x00421348
+
+The complete authenticated 56-byte callback computes the fixed-partition
+address, calls the source-owned MX25U25643G program service, returns zero on
+success, and logs block, offset, size, address, and status before collapsing
+every failure to `LFS_ERR_IO` (`-5`). The configuration pointer at
+`0x00431078` remains the Thumb stock entry, now redirected to source.
+
+Apple/Linux emit 60-byte fixed-address leaves at
+`[0x00421214,0x00421250)` with strict relocations to the source-owned program
+driver and logger. The builder authenticates the containing initializer body,
+its generated NOP tail, cave placement, and cave digest before installation.
+Canonical accounting is 15,285 source-owned, 16,392 generated patch, 16
+alignment, and 132,147 retained official bytes across 199 routed functions,
+179 relocated leaves, one fixed cave, and 197 patch sites.
+
+No hardware operation occurred. Live MSPI/NOR programming, filesystem writes,
+persistence, power-loss, diagnostics, and cold-boot evidence is blocked by
+unavailable authorized physical evidence. The successor erase entry at
+`0x00421348` remains the software frontier; firmware-wide functional
+completeness is not claimed. See
+`docs/research/g2-bootloader-littlefs-program-421310-421348-source-closure.md`.
+
+## LittleFS block-erase closure through 0x00421372
+
+The complete authenticated 42-byte callback computes the fixed-partition
+sector address, calls the source-owned MX25U25643G erase service, and logs the
+block/address/status tuple before mapping failure to `LFS_ERR_IO`. Apple/Linux
+emit 48-byte fixed-address leaves at `[0x00421250,0x00421280)` with strict
+source-to-source relocations. It is a second authenticated cave in the
+initializer replacement tail.
+
+Canonical accounting is 15,333 source-owned, 16,386 generated patch, 16
+alignment, and 132,105 retained official bytes across 200 routed functions,
+179 relocated leaves, two fixed caves, and 198 patch sites. No hardware
+operation occurred. The sync entry at `0x004213D4` remains the software
+frontier; live erase and persistence evidence is blocked. See
+`docs/research/g2-bootloader-littlefs-erase-421348-421372-source-closure.md`.
+
+## LittleFS sync and address-index closure through 0x004213E6
+
+The constant-success sync callback now redirects to the four-byte compiled C
+leaf at `[0x00421280,0x00421284)`, the third authenticated initializer cave.
+The two adjacent address-index helpers compile directly at
+`[0x004213D8,0x004213E6)` and reproduce their complete stock bodies exactly.
+
+Canonical accounting is 15,351 source-owned, 16,386 generated patch, 16
+alignment, and 132,087 retained official bytes; 112 bytes are authenticated
+caves and 14 are exact in-place leaves. No hardware operation occurred. The
+next retained executable body begins at `0x004213E6`; physical filesystem and
+flash qualification remains blocked. See
+`docs/research/g2-bootloader-littlefs-sync-4213d4-4213d8-source-closure.md` and
+`docs/research/g2-bootloader-address-map-4213d8-4213e6-source-closure.md`.
+
+## Mapped-memory selector closure through 0x00421584
+
+`runtime_memory_select_copy_4213e6.c` implements the complete authenticated
+mapped-memory selector/copy service and odd-selector wrapper. The primary
+entry routes into a 220-byte cave and the wrapper into a 30-byte cave, both
+inside authenticated generated NOP space in the primary stock replacement.
+Strict relocations bind only to the exact in-place identity/threshold helpers,
+the retained authenticated copy provider, and the sibling source cave.
+
+The implementation preserves the six selector kinds, four mapped-memory
+roots, compact/full capacity choices, security gate, wrapped bounds check,
+status codes, exact copy length, and wrapper filter. Canonical accounting is
+15,601 source-owned, 16,528 generated patch, 16 alignment, and 131,695 retained
+official bytes. The 22-byte literal/alignment pool through `0x00421584` remains
+authenticated retained data. No hardware operation occurred; physical
+qualification remains blocked and firmware-wide completeness is not claimed.
+See `docs/research/g2-bootloader-memory-select-copy-4213e6-421584-source-closure.md`.
+
+## Population-count closure through 0x004215AE
+
+`runtime_popcount_421584.c` implements the complete authenticated 32-bit
+population-count helper at `[0x00421584,0x004215AE)`. Apple clang 21 and
+Homebrew clang 22.1.8 reproduce the same 42-byte, zero-relocation stock body
+at its exact address. Host tests cover boundary patterns and deterministic
+random values; the sole direct caller at `0x0042161C` is pinned.
+
+Canonical accounting is 15,643 source-owned, 16,528 generated patch, 16
+alignment, and 131,653 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x004215AE`; firmware-
+wide completeness is not claimed. See
+`docs/research/g2-bootloader-popcount-421584-4215ae-source-closure.md`.
+
+## Two-word bitmap-helper closure through 0x00421632
+
+`runtime_bitmap_helpers_4215ae.c` implements the complete authenticated
+nonempty, membership, and population-count helpers over the two-word table
+rooted at `0x20026E74`. Apple clang 21 and Homebrew clang 22.1.8 reproduce all
+132 installed stock bytes at their exact addresses. The count leaf has one
+strict call to the exact source-owned population-count helper; the other two
+leaves have no relocations. Host tests cover selector narrowing, both words,
+boundary bits, nonempty results, and combined count.
+
+Canonical accounting is 15,775 source-owned, 16,528 generated patch, 16
+alignment, and 131,521 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x00421632`; live
+table ownership and concurrency evidence is unavailable and firmware-wide
+completeness is not claimed. See
+`docs/research/g2-bootloader-bitmap-helpers-4215ae-421632-source-closure.md`.
+
+## Validated bitmap-update closure through 0x004216B2
+
+`runtime_bitmap_update_421632.c` implements the complete authenticated
+read-modify-write helper over the table at `0x20026E74`. It preserves the
+low-byte selector/bit/enable behavior, selector and bit bounds, status 6
+validation failure, two-word addressing, and set/clear semantics. Apple clang
+21 and Homebrew clang 22.1.8 reproduce the same 128-byte, zero-executable-
+relocation stock body at its exact address.
+
+Canonical accounting is 15,903 source-owned, 16,528 generated patch, 16
+alignment, and 131,393 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x004216B2`; live table
+ownership, concurrency and atomicity evidence is unavailable and firmware-wide
+completeness is not claimed. See
+`docs/research/g2-bootloader-bitmap-update-421632-4216b2-source-closure.md`.
+
+## Bounded poll-delay closure through 0x004216D4
+
+`runtime_poll_delay_4216b2.c` implements the complete authenticated volatile
+flag/counter polling loop. It preserves both short circuits, duration 10,
+delay-before-decrement ordering, and the current-iteration decrement after an
+asynchronous flag clear. Apple clang 21 and Homebrew clang 22.1.8 reproduce
+the same 34-byte installed body with one strict call to `0x0041D1C0`.
+
+Canonical accounting is 15,937 source-owned, 16,528 generated patch, 16
+alignment, and 131,359 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x004216D4`; live
+timing and memory-visibility evidence is unavailable and firmware-wide
+completeness is not claimed. See
+`docs/research/g2-bootloader-poll-delay-4216b2-4216d4-source-closure.md`.
+
+## Mode/configuration-service closure through 0x004217D2
+
+`runtime_mode_service_4216d4.c` implements the complete authenticated
+validation, optional query/default merge, critical section, bitmap-state
+policy, apply/disable fallback, state clearing, configuration copy and
+publication transaction. Apple clang 21 and Homebrew clang 22.1.8 reproduce
+the same 254-byte installed body with eight reviewed call relocations.
+
+Canonical accounting is 16,191 source-owned, 16,528 generated patch, 16
+alignment, and 131,105 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x004217D2`; live
+interrupt, register and physical mode evidence is unavailable and firmware-
+wide completeness is not claimed. See
+`docs/research/g2-bootloader-mode-service-4216d4-4217d2-source-closure.md`.
+
+## Dual-mode transaction closure through 0x00421978
+
+`runtime_dual_mode_service_4217d2.c` implements the complete authenticated
+dual-controller transaction at `[0x004217D2,0x00421978)`. Apple clang 21 and
+Homebrew clang 22.1.8 reproduce the same 422 installed bytes. Sixteen strict
+relocations bind query, critical-save, source-owned bitmap count and copy,
+mode-zero/mode-one enable and disable, and commit providers. Host tests cover
+validation, both controller paths, early failures, busy-state policy,
+successful commit/cleanup, and failure cleanup.
+
+Canonical accounting is 16,613 source-owned, 16,528 generated patch, 16
+alignment, and 130,683 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x00421978`; physical
+interrupt, controller/register, state and mode qualification remains blocked
+and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-dual-mode-service-4217d2-421978-source-closure.md`.
+
+## Bitmap-client service closure through 0x00421B08
+
+`runtime_bitmap_clients_421978.c` implements the authenticated controller-
+selected configuration publisher and four idempotent row-zero/row-one bitmap
+mutation helpers at `[0x00421978,0x00421B08)`. Apple clang 21 and Homebrew
+clang 22.1.8 reproduce all 400 installed bytes. Sixteen strict relocations
+bind query, critical-save, source-owned bitmap count/test/update and copy.
+
+Canonical accounting is 17,013 source-owned, 16,528 generated patch, 16
+alignment, and 130,283 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x00421B08`; physical
+interrupt, controller/register, bitmap/state and client qualification remains
+blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-bitmap-clients-421978-421b08-source-closure.md`.
+
+## Mode-one service closure through 0x00421BD2
+
+`runtime_mode1_services_421b08.c` implements authenticated mode-one enable,
+last-client disable and poll/state cleanup at `[0x00421B08,0x00421BD2)`.
+Apple clang 21 and Homebrew clang 22.1.8 reproduce all 202 installed bytes;
+11 strict relocations bind source-owned bitmap/poll helpers, critical-save and
+retained control.
+
+Canonical accounting is 17,215 source-owned, 16,528 generated patch, 16
+alignment, and 130,081 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x00421BD2`; physical
+interrupt, control/register, bitmap/state and mode qualification remains
+blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-mode1-services-421b08-421bd2-source-closure.md`.
+
+## Mode-zero enable closure through 0x00421CCE
+
+`runtime_mode0_enable_421bd2.c` implements the authenticated controller-
+guarded row-two client activation, state compatibility policy, control,
+publication and bounded cleanup transaction at `[0x00421BD2,0x00421CCE)`.
+Apple clang 21 and Homebrew clang 22.1.8 reproduce all 252 installed bytes;
+nine strict relocations bind source-owned bitmap/cleanup helpers,
+critical-save and retained state-query/control providers.
+
+Canonical accounting is 17,467 source-owned, 16,528 generated patch, 16
+alignment, and 129,829 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x00421CCE`; physical
+interrupt, controller/register, bitmap/state, polling and mode qualification
+remains blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-mode0-enable-421bd2-421cce-source-closure.md`.
+
+## Mode-zero disable and cleanup closure through 0x00421D5E
+
+`runtime_mode0_disable_421cce.c` implements authenticated idempotent row-two
+client disable, last-client control/state clearing, and active poll/completion
+cleanup at `[0x00421CCE,0x00421D5E)`. Apple clang 21 and Homebrew clang 22.1.8
+reproduce all 144 installed bytes; seven strict relocations bind source-owned
+bitmap/poll helpers, critical-save and retained control.
+
+Canonical accounting is 17,611 source-owned, 16,528 generated patch, 16
+alignment, and 129,685 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x00421D5E`; physical
+interrupt, controller/register, bitmap/state, polling and mode qualification
+remains blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-mode0-disable-421cce-421d5e-source-closure.md`.
+
+## Row-four enable closure through 0x00421E4A
+
+`runtime_row4_enable_421d5e.c` implements the authenticated row-four client
+activation, timeout refresh, readiness, first-client switch/configuration,
+rollback, publication and cleanup transaction at `[0x00421D5E,0x00421E4A)`.
+Apple clang 21 and Homebrew clang 22.1.8 reproduce all 236 installed bytes;
+ten strict relocations bind source-owned bitmap/cleanup helpers, critical-save
+and retained switch/apply providers.
+
+Canonical accounting is 17,847 source-owned, 16,528 generated patch, 16
+alignment, and 129,449 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x00421E4A`; physical
+interrupt, switch/apply, bitmap/state, polling and mode qualification remains
+blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-row4-enable-421d5e-421e4a-source-closure.md`.
+
+## Row-four disable and cleanup closure through 0x00421EBA
+
+`runtime_row4_disable_421e4a.c` implements authenticated idempotent row-four
+client disable, last-client switch-off and active poll/state cleanup at
+`[0x00421E4A,0x00421EBA)`. Apple clang 21 and Homebrew clang 22.1.8 reproduce
+all 112 installed bytes; seven strict relocations bind source-owned bitmap/
+poll helpers, critical-save and retained switch.
+
+Canonical accounting is 17,959 source-owned, 16,528 generated patch, 16
+alignment, and 129,337 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x00421EBA`; physical
+interrupt, switch, bitmap/state, polling and mode qualification remains
+blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-row4-disable-421e4a-421eba-source-closure.md`.
+
+## Row-five client-service closure through 0x004220B2
+
+`runtime_row5_services_421eba.c` implements authenticated row-five client
+enable/disable, timeout publication, selector-mode coordination, retained dual
+switch/commit rollback and last-client state cleanup at
+`[0x00421EBA,0x004220B2)`. Apple clang 21 and Homebrew clang 22.1.8 reproduce
+all 504 installed bytes; 26 strict relocations bind source-owned bitmap,
+critical, selector and cleanup helpers plus retained dual providers.
+
+Canonical accounting is 18,463 source-owned, 16,528 generated patch, 16
+alignment, and 128,833 retained official bytes. No hardware operation
+occurred. The next retained executable body begins at `0x004220B2`; physical
+interrupt, retained-provider, bitmap/state, selector-mode and timing
+qualification remains blocked and firmware-wide completeness is not claimed.
+See `docs/research/g2-bootloader-row5-services-421eba-4220b2-source-closure.md`.
+
+## Row-six and mode-dispatch closure through 0x004222D2
+
+`runtime_row6_services_4220b2.c` implements authenticated row-six client
+enable/disable, retained handle lifecycle and mode-family dispatch. Apple
+clang 21 and Homebrew clang 22.1.8 reproduce all 508 executable bytes at
+`[0x004220B2,0x004222D2)`; two intervening 18-byte literal seams remain
+separately retained data. Thirty-one strict relocations bind maintained
+bitmap, critical, selector and mode-family services plus retained providers.
+
+Canonical accounting is 18,971 source-owned, 16,528 generated patch, 16
+alignment, and 128,325 retained official bytes. No hardware operation
+occurred. The next executable body begins at `0x004222F0` after authenticated
+padding/literals; physical interrupt, retained-provider, bitmap/state,
+selector-mode and timing qualification remains blocked and firmware-wide
+completeness is not claimed. See
+`docs/research/g2-bootloader-row6-services-4220b2-4222d2-source-closure.md`.
+
+## Mode-routing and cleanup closure through 0x00422430
+
+`runtime_mode_routes_4222f0.c` implements authenticated seven-kind enable and
+disable routing, selective seven-row client cleanup, and fixed 20-byte
+configuration copy. Apple clang 21 and Homebrew clang 22.1.8 reproduce all 320
+executable bytes at `[0x004222F0,0x00422430)`; the adjacent 30-byte and 56-byte
+padding/literal pools remain separately retained data. Seventeen strict
+relocations bind maintained row services and bitmap query plus the reviewed
+disable-route alias and retained memcpy provider.
+
+Canonical accounting is 19,291 source-owned, 16,528 generated patch, 16
+alignment, and 128,005 retained official bytes. No hardware operation
+occurred. The next executable body begins at `0x00422468`; physical bitmap,
+service, concurrency and configuration-persistence qualification remains
+blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-mode-routes-4222f0-422430-source-closure.md`.
+
+## Ambiq debug-service closure through 0x00422574
+
+`runtime_debug_services_422468.c` implements the authenticated general debug
+shutdown, debug-domain power ownership and trace-disable bodies from the
+public AmbiqSuite SDK 5.1.0 behavior. Apple clang 21 and Homebrew clang 22.1.8
+reproduce all 268 executable bytes at `[0x00422468,0x00422574)`; adjacent
+literal pools remain separately retained data. Nine strict relocations bind
+critical state, retained power-domain services, register polling and reviewed
+same-cluster aliases.
+
+Canonical accounting is 19,559 source-owned, 16,528 generated patch, 16
+alignment, and 127,737 retained official bytes. No hardware operation
+occurred. The next executable body begins at `0x00422590`; physical debug
+power, MCUCTRL/DCB, trace and timing qualification remains blocked and
+firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-debug-services-422468-422574-source-closure.md`.
+## Constraint-dispatch and memchr closure through 0x00422628
+
+`runtime_constraint_memchr_422590.c` implements the authenticated constraint
+dispatcher and optimized `memchr`. Apple clang 21 and Homebrew clang 22.1.8
+reproduce the exact 28- and 88-byte bodies at
+`[0x00422590,0x00422628)`; the intervening 36-byte handler/message pool remains
+separately retained official data. One strict relocation binds the retained
+default constraint handler.
+
+Canonical accounting is 19,675 source-owned, 16,528 generated patch, 16
+alignment, and 127,621 retained official bytes. No hardware operation
+occurred. The next executable body begins at `0x00422628`; physical
+handler-cell, retained-handler and memory/fault qualification remains blocked
+and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-constraint-memchr-422590-422628-source-closure.md`.
+## Double-runtime closure through 0x00422872
+
+`runtime_double_helpers_422628.c` implements thirteen authenticated
+IAR-compatible binary64 helpers. Apple clang 21 and Homebrew clang 22.1.8
+reproduce all 584 executable bytes at `[0x00422628,0x00422872)`; the internal
+two-byte alignment remains separately retained data. Three strict relocations
+bind two wrapper/core edges and the retained range-error tail.
+
+Canonical accounting is 20,259 source-owned, 16,528 generated patch, 16
+alignment, and 127,037 retained official bytes. No hardware operation
+occurred. The next executable body begins at `0x00422874`; physical VFP,
+exception-state and ABI qualification remains blocked and firmware-wide
+completeness is not claimed. See
+`docs/research/g2-bootloader-double-helpers-422628-422872-source-closure.md`.
+## Thread-pointer closure through 0x0042287C
+
+`runtime_thread_pointer_422874.c` implements the authenticated eight-byte IAR
+thread-pointer body and its `0x20000518` anchor literal. Both reviewed
+compilers reproduce the complete leaf exactly without relocation. Canonical
+accounting is 20,267 source-owned, 16,528 generated patch, 16 alignment, and
+127,029 retained official bytes. No hardware operation occurred. The next
+executable body begins at `0x0042287C`; physical anchor qualification remains
+blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-thread-pointer-422874-42287c-source-closure.md`.
+## Unsigned 64-bit divmod closure through 0x00422AAC
+
+`runtime_u64_divmod_42287c.c` implements the complete authenticated 560-byte
+IAR-compatible quotient/remainder runtime. Both reviewed compilers reproduce
+the body exactly; one strict jump binds the retained divide-by-zero handler.
+Canonical accounting is 20,827 source-owned, 16,528 generated patch, 16
+alignment, and 126,469 retained official bytes. No hardware operation
+occurred. The next executable body begins at `0x00422AAC`; physical trap and
+register-ABI qualification remains blocked and firmware-wide completeness is
+not claimed. See
+`docs/research/g2-bootloader-u64-divmod-42287c-422aac-source-closure.md`.
+## Atomic snapshot and wrappers closure through 0x00422AD2
+
+`runtime_atomic_wrappers_422aac.c` implements the authenticated three-sample
+interrupt-atomic snapshot, no-op and retained-query wrapper. Both reviewed
+compilers reproduce all 38 bytes exactly; one strict call binds the retained
+query provider. Canonical accounting is 20,865 source-owned, 16,528 generated
+patch, 16 alignment, and 126,431 retained official bytes. No hardware
+operation occurred. The next executable body begins at `0x00422AD4`; physical
+interrupt/volatile/provider qualification remains blocked and firmware-wide
+completeness is not claimed. See
+`docs/research/g2-bootloader-atomic-wrappers-422aac-422ad2-source-closure.md`.
+
+## Four-instance hardware-service initializer closure through 0x00422BA8
+
+`runtime_hw_instance_init_422ad4.c` implements the complete authenticated
+212-byte initializer. Both reviewed compilers reproduce it exactly without
+relocation. Its sole caller, three retained pool words, predecessor alignment,
+four-slot host behavior and successor are pinned. Canonical accounting is
+21,077 source-owned, 16,528 generated patch, 16 alignment, and 126,219 retained
+official bytes. No hardware operation occurred. The next executable body
+begins at `0x00422BA8`; physical SRAM/pool/concurrency/cold-boot qualification
+remains explicitly blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-instance-init-422ad4-422ba8-source-closure.md`.
+
+## Instance register-service closure through 0x00422D20
+
+`runtime_hw_instance_service_422ba8.c` implements the complete authenticated
+376-byte service. Both reviewed compilers reproduce it exactly under five
+strict calls. Three callers, four MMIO/revision literals, all validation and
+action paths, four register banks, clock gating, mode routing and teardown
+order are pinned. Canonical accounting is 21,453 source-owned, 16,528 generated
+patch, 16 alignment, and 125,843 retained official bytes. No hardware operation
+occurred. The next executable body begins at `0x00422D20`; physical MMIO,
+clock, mode, resource and lifecycle qualification remains explicitly blocked,
+and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-instance-service-422ba8-422d20-source-closure.md`.
+
+## Per-instance register-clear closure through 0x00422D7A
+
+`runtime_hw_register_clear_422d20.c` implements the exact 44- and 46-byte
+register-clear leaves. Both reviewed compilers reproduce them without
+relocation; all four banks and exact bit preservation are host-tested.
+Canonical accounting is 21,543 source-owned, 16,528 generated patch, 16
+alignment, and 125,753 retained official bytes. No hardware operation occurred.
+A four-byte datum remains retained before the next executable body at
+`0x00422D7E`; physical MMIO/bank/peripheral qualification remains explicitly
+blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-register-clear-422d20-422d7a-source-closure.md`.
+
+## Per-instance status-map closure through 0x00422DC6
+
+`runtime_hw_status_map_422d7e.c` implements the authenticated 72-byte status
+mapper. Both reviewed compilers reproduce it exactly without relocation. Its
+six retained result literals, preceding datum, successor, four-bank host model,
+bit priority and fallback behavior are pinned. Canonical accounting is 21,615
+source-owned, 16,528 generated patch, 16 alignment, and 125,681 retained
+official bytes. No hardware operation occurred. The next executable body
+begins at `0x00422DC6`; physical MMIO/status/bank/timing qualification remains
+explicitly blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-status-map-422d7e-422dc6-source-closure.md`.
+
+## Dual-descriptor initializer closure through 0x00422E28
+
+`runtime_hw_descriptor_init_422dc6.c` implements the authenticated 98-byte
+guarded initializer. Both reviewed compilers reproduce it exactly under two
+strict calls to the retained 24-byte descriptor constructor. Its caller,
+signature literal, provider, successor, validation, pair gating, publication
+flags, descriptor contents and order are pinned. Canonical accounting is
+21,713 source-owned, 16,528 generated patch, 16 alignment, and 125,583 retained
+official bytes. No hardware operation occurred. The next executable body
+begins at `0x00422E28`; physical descriptor/DMA/buffer/timing qualification
+remains explicitly blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-descriptor-init-422dc6-422e28-source-closure.md`.
+
+## Per-instance clock-divider closure through 0x00422EE2
+
+`runtime_hw_clock_divider_422e28.c` implements the authenticated 186-byte
+service. Both reviewed compilers reproduce it exactly under one strict call to
+the source-owned divmod runtime. Its caller, reference/status pools, successor,
+six mode mappings, invalid/range paths, divider registers and achieved-rate
+calculation are pinned. Canonical accounting is 21,899 source-owned, 16,528
+generated patch, 16 alignment, and 125,397 retained official bytes. No
+hardware operation occurred. The next executable body begins at `0x00422EE2`;
+physical clock/MMIO/rate qualification remains explicitly blocked and firmware-
+wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-clock-divider-422e28-422ee2-source-closure.md`.
+
+## Per-instance configuration-latch closure through 0x00422F4C
+
+`runtime_hw_config_latch_422ee2.c` implements the authenticated 106-byte
+interrupt-atomic service. Both reviewed compilers reproduce it exactly under
+one strict retained critical-section call. Its caller, busy-status pool,
+provider, successor, exact payload copy, duplicate rejection and `PRIMASK`
+restoration are pinned. Canonical accounting is 22,005 source-owned, 16,528
+generated patch, 16 alignment, and 125,291 retained official bytes. No
+hardware operation occurred. The next executable body begins at `0x00422F4C`;
+physical interrupt/concurrency/SRAM/MMIO qualification remains explicitly
+blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-config-latch-422ee2-422f4c-source-closure.md`.
+
+## Secondary configuration-latch closure through 0x00422FA2
+
+`runtime_hw_config_latch_secondary_422f4c.c` implements the authenticated
+86-byte interrupt-atomic service. Both reviewed compilers reproduce it exactly
+under one strict retained critical-section call. Its caller, busy-status pool,
+provider, successor, exact payload copy, duplicate rejection and `PRIMASK`
+restoration are pinned. Canonical accounting is 22,091 source-owned, 16,528
+generated patch, 16 alignment, and 125,205 retained official bytes. No
+hardware operation occurred. The next executable body begins at `0x00422FA2`;
+physical interrupt/concurrency/SRAM/MMIO qualification remains explicitly
+blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-config-latch-secondary-422f4c-422fa2-source-closure.md`.
+
+## Secondary configuration-release closure through 0x00422FDE
+
+`runtime_hw_config_release_secondary_422fa2.c` implements the authenticated
+60-byte interrupt-atomic reset. Both reviewed compilers reproduce it exactly
+under strict retained critical-section and memset calls. Its caller, providers,
+successor, state gate, exact reset span and `PRIMASK` restoration are pinned.
+Canonical accounting is 22,151 source-owned, 16,528 generated patch, 16
+alignment, and 125,145 retained official bytes. No hardware operation occurred.
+The next executable body begins at `0x00422FDE`; physical interrupt,
+concurrency, SRAM/MMIO and provider qualification remains explicitly blocked
+and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-config-release-secondary-422fa2-422fde-source-closure.md`.
+
+## Per-instance hardware-shutdown closure through 0x0042308E
+
+`runtime_hw_shutdown_422fde.c` implements the authenticated 176-byte register-
+quiesce and shutdown service. Both reviewed compilers reproduce it exactly
+under four strict calls. Its caller, literals, providers, successor, all four
+banks, masks, delay, conditional clear, provider order and restore policy are
+pinned. Canonical accounting is 22,327 source-owned, 16,528 generated patch,
+16 alignment, and 124,969 retained official bytes. No hardware operation
+occurred. The next executable body begins at `0x0042308E`; physical
+MMIO/clock/delay/concurrency/provider qualification remains explicitly blocked
+and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-shutdown-422fde-42308e-source-closure.md`.
+
+## Per-instance FIFO closure at 0x004232C8 through 0x00423350
+
+`runtime_hw_fifo_4232c8.c` and `runtime_hw_fifo_drain_423342.c` implement the
+authenticated 70-byte read, 52-byte write and 14-byte drain bodies. Both
+reviewed compilers reproduce them exactly; the wrapper has one strict call to
+the source-owned reader. Bodies, bank literal, successor, polling, counts,
+error/empty/partial behavior and drain arguments are pinned. Canonical
+accounting is 22,463 source-owned, 16,528 generated patch, 16 alignment, and
+124,833 retained official bytes. No hardware operation occurred. The earliest
+retained executable body remains `0x0042308E`; physical FIFO/MMIO/concurrency
+qualification remains explicitly blocked and firmware-wide completeness is not
+claimed. See `docs/research/g2-bootloader-hw-fifo-4232c8-423350-source-closure.md`.
+
+## Critical-section FIFO adapters at 0x00423350 through 0x004233E0
+
+`runtime_hw_fifo_adapters_423350.c` implements the authenticated 64-byte FIFO
+snapshot and 80-byte FIFO pump bodies. Both reviewed compilers reproduce them
+exactly under six strict calls. Bodies, status literal, successor data, FIFO
+and descriptor interactions, termination behavior, bank selection and saved
+interrupt-token restoration are pinned. Canonical accounting is 22,607 source-
+owned, 16,528 generated patch, 16 alignment, and 124,689 retained official
+bytes. No hardware operation occurred. The earliest retained executable body
+remains `0x0042308E`; physical FIFO/MMIO/descriptor/interrupt/concurrency
+qualification remains explicitly blocked and firmware-wide completeness is not
+claimed. See `docs/research/g2-bootloader-hw-fifo-adapters-423350-4233e0-source-closure.md`.
+
+## Per-instance mode-dispatch closure through 0x00423524
+
+`runtime_hw_mode_dispatch_4233e8.c` and `runtime_hw_mode_wait_423444.c`
+implement all five executable bodies in the authenticated mode-dispatch cluster,
+296 bytes total. Both reviewed compilers reproduce them exactly under 14 strict
+calls. Type validation, all routes, independent latches, status clearing,
+progress gating, timeout policy, active-byte clearing and delays are pinned.
+Canonical accounting is 22,903 source-owned, 16,528 generated patch, 16
+alignment, and 124,393 retained official bytes. No hardware operation occurred.
+The earliest retained executable body remains `0x0042308E`; physical
+MMIO/timer/interrupt/concurrency/peripheral qualification remains explicitly
+blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-mode-dispatch-4233e8-423524-source-closure.md`.
+
+## Primary and secondary progress closure through 0x004236CE
+
+`runtime_hw_progress_423524.c` implements the authenticated 228-byte primary
+and 198-byte secondary transfer-progress services. Both reviewed compilers
+reproduce them exactly under eight strict calls. Descriptor/FIFO selection,
+bounded transfer counts, progress publication, exhaustion/completion callbacks,
+FIFO pump/snapshot behavior, active-state clearing and `PRIMASK` restoration
+are pinned. Canonical accounting is 23,329 source-owned, 16,528 generated
+patch, 16 alignment, and 123,967 retained official bytes. No hardware operation
+occurred. The earliest retained executable body remains `0x0042308E`; physical
+FIFO/descriptor/interrupt/DMA/callback/concurrency/MMIO qualification remains
+explicitly blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-progress-423524-4236ce-source-closure.md`.
+
+## Per-instance register-service closure through 0x00423764
+
+`runtime_hw_register_services_4236ce.c` implements three authenticated
+relocation-free register services totaling 144 bytes. Both reviewed compilers
+reproduce them exactly. Type validation, bank selection, OR/write/query
+register offsets, selector handling, and status-two rejection are pinned.
+Canonical accounting is 23,473 source-owned, 16,528 generated patch, 16
+alignment, and 123,823 retained official bytes. No hardware operation occurred.
+The earliest retained executable body remains `0x0042308E`; physical
+register/MMIO/concurrency/peripheral qualification remains explicitly blocked
+and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-register-services-4236ce-423764-source-closure.md`.
+
+## Per-instance service-dispatch closure through 0x0042382C
+
+`runtime_hw_service_dispatch_42377c.c` implements the authenticated 176-byte
+dispatcher. Both reviewed compilers reproduce it exactly under six strict
+calls. Type validation, active/inactive routing, register-relative progress,
+shutdown/clear paths, callback status/context, cleanup and latch publication
+are pinned. Canonical accounting is 23,649 source-owned, 16,528 generated
+patch, 16 alignment, and 123,647 retained official bytes. No hardware operation
+occurred. The earliest retained executable body remains `0x0042308E`; physical
+interrupt/register/callback/concurrency/MMIO qualification remains explicitly
+blocked and firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-service-dispatch-42377c-42382c-source-closure.md`.
+
+## Bounded memory-exchange closure through 0x00423928
+
+`runtime_memory_exchange_423864.c` implements the authenticated 86-byte
+two-buffer exchange and 110-byte three-buffer rotation. Both reviewed
+compilers reproduce them exactly under seven strict calls to the authenticated
+copy primitive. Zero, direct-byte, threshold, 128-byte and multi-chunk behavior
+are pinned. Canonical accounting is 23,845 source-owned, 16,528 generated
+patch, 16 alignment, and 123,451 retained official bytes. No hardware operation
+occurred. The earliest retained executable body remains `0x0042308E`; the next
+sequential executable frontier is `0x00423928`. Firmware-wide completeness is
+not claimed. See
+`docs/research/g2-bootloader-memory-exchange-423864-423928-source-closure.md`.
+
+## Rotate-to-front closure through 0x00423972
+
+`runtime_memory_rotate_front_423928.c` implements the authenticated 74-byte
+bounded rotate-to-front helper. Both reviewed compilers reproduce it exactly
+under two strict copy calls and one overlap-safe move call. Zero, first-element,
+threshold and multi-chunk behavior are pinned. Canonical accounting is 23,919
+source-owned, 16,528 generated patch, 16 alignment, and 123,377 retained
+official bytes. No hardware operation occurred. The earliest retained
+executable body remains `0x0042308E`; the next sequential executable frontier
+is `0x00423972`. Firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-memory-rotate-front-423928-423972-source-closure.md`.
+
+## Three-element comparator/exchange closure through 0x004239C2
+
+`runtime_memory_sort3_423972.c` implements the exact 80-byte three-comparison
+sorting network. Both reviewed compilers reproduce it, and all permutations,
+duplicates, comparison order, and target compilation are pinned. Canonical
+accounting is 23,999 source-owned and 123,297 retained official bytes. No
+hardware operation occurred. The sequential frontier is `0x004239C2` and
+firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-memory-sort3-423972-4239c2-source-closure.md`.
+
+## Floyd max-heap sift closure through 0x00423A48
+
+`runtime_memory_heap_sift_4239c2.c` implements the exact 134-byte Floyd
+max-heap sift helper under two strict calls to the source-owned exchange
+primitive. Both reviewed compilers reproduce it exactly; exclusive count,
+child selection, descent, upward repair, subtree isolation, no-op behavior and
+comparator order are pinned. Canonical accounting is 24,133 source-owned and
+123,163 retained official bytes across 291 functions and 88 exact in-place
+leaves. The byte-identical package remains unchanged; the 4,648,863-byte flash
+plan has 6,679 placed and zero unresolved regions. No hardware operation
+occurred. The sequential frontier is `0x00423A48`; firmware-wide completeness
+is not claimed. See
+`docs/research/g2-bootloader-memory-heap-sift-4239c2-423a48-source-closure.md`.
+
+## Introspective qsort closure through 0x00423D20
+
+`runtime_memory_qsort_423a48.c` implements the exact 704-byte introspective
+sort core and 24-byte public wrapper. Both reviewed compilers reproduce all
+728 bytes under 17 strict helper relocations and one authenticated fixed call.
+Whole-record sorting, duplicates, null/no-op behavior, randomized arrays, the
+33-element threshold and target compilation are pinned. Canonical accounting
+is 24,861 source-owned and 122,435 retained official bytes across 293 functions
+and 90 exact in-place leaves. The byte-identical package remains unchanged;
+the 4,650,270-byte flash plan has 6,681 placed and zero unresolved regions. No
+hardware operation occurred. The sequential frontier is `0x00423D20`;
+firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-memory-qsort-423a48-423d20-source-closure.md`.
+
+## Global hardware-control closure through 0x00423E0C
+
+`runtime_hw_control_services_423d20.c` implements six exact bodies totaling
+228 bytes. Both reviewed compilers reproduce them under seven strict provider
+calls and four fixed sibling calls. Register arguments, initialization status,
+delay, control-bit clearing, debug normalization, countdown/latch behavior and
+PRIMASK restoration are host-pinned. Canonical accounting is 25,089
+source-owned and 122,207 retained official bytes across 299 functions and 96
+exact in-place leaves. The byte-identical package remains unchanged; the
+4,656,017-byte flash plan has 6,689 placed and zero unresolved regions. No
+hardware operation occurred. Live qualification is explicitly blocked by
+unavailable authorized responsive hardware. The sequential executable frontier
+is `0x00423E14`; firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-control-services-423d20-423e0c-source-closure.md`.
+
+## Hardware-control state mapper through 0x00423E40
+
+`runtime_hw_control_state_423e14.c` implements the exact 44-byte body at
+`[0x00423E14,0x00423E40)`. Both reviewed compilers reproduce the relocation-free
+body, and five host tests pin every state/flag path plus the authenticated
+successor. Canonical accounting is 25,133 source-owned and 122,163 retained
+official bytes across 300 functions and 97 exact in-place leaves. The
+byte-identical package remains unchanged; the 4,657,431-byte flash plan has
+6,691 placed and zero unresolved regions. No hardware operation occurred.
+Live qualification is explicitly blocked by unavailable authorized responsive
+hardware. The sequential executable frontier is `0x00423E40`; firmware-wide
+completeness is not claimed. See
+`docs/research/g2-bootloader-hw-control-state-423e14-423e40-source-closure.md`.
+
+## MSPI FIFO, command-queue, and DMA-programming closure through 0x004240AA
+
+Eight exact target bodies totaling 618 bytes cover FIFO write/read,
+command-queue init/term/enable/disable/pause, and high-priority DMA programming
+at `[0x00423E40,0x004240AA)`. Both reviewed compilers match stock after ten
+typed call relocations. Host tests cover all software-visible validation,
+timeout, partial-word, handle, clock, queue-index, DMA-register-order, and
+provider-status paths. Canonical accounting is 25,751 source-owned and 121,545
+retained official bytes across 308 functions and 105 exact in-place leaves. The
+provider and unsigned package remain byte-identical; the 4,663,145-byte flash
+plan has SHA-256
+`910dc1ab8c79edd6d7a06ced0f54d7ae0f395e6c9262f5de50f30893831d6e53`
+with 6,699 placed and zero unresolved regions. No hardware operation occurred.
+Physical qualification is explicitly blocked by unavailable authorized
+responsive G2 evidence. The sequential frontier is `0x004240AA`; firmware-wide
+completeness is not claimed.
+
+## Post-MSPI interrupt and power closure through 0x00426BFE
+
+The exact AmbiqSuite 5.1.0 `am_hal_mspi_interrupt_service` and
+`am_hal_mspi_power_control` bodies at `[0x00426536,0x004267FE)` and
+`[0x00426808,0x00426BFE)` add 1,726 BSD-3-Clause source-owned bytes. Independent
+Apollo-main links preserve the same sizes and all but 20 and 29 address-coupled
+bytes respectively. `runtime_mspi_interrupt_power_426536.S` expresses every
+executable instruction as a reviewable Thumb-2 mnemonic, with semantic block
+comments and no raw instruction-encoding directives. Apple Clang 21 and
+Homebrew Clang 22 emit identical sections; strict eight- and twelve-call
+provider relocations produce both stock-exact bodies. The intervening 10-byte
+pool and following 18-byte pool remain typed official data. Canonical
+accounting is 36,721 source-owned
+and 110,575 retained official bytes; the 163,840-byte provider remains
+byte-identical with SHA-256
+`3ae28d27b81ca70d96fd5846d04fa1a4f0add5a8514cee21f9f34bdaa1455eac`.
+
+The complete `[0x00426536,0x00434477)` suffix now has an exhaustive 253-span
+function/mixed/data ledger with zero unclassified bytes. Fifty-eight exact
+Apollo-main matches totaling 4,550 bytes remain candidates rather than source
+claims. The pinned AmbiqSuite upstream commit is
+`5efc0228528a8adce5eae0d226fac85d2551eb3b`. Hardware validation is deferred
+by project direction; this admission
+performed no hardware operation, flashing, signing, packaging, or release.

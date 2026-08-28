@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the G2 product task-vote policy and the
  * application-owned FreeRTOS hooks at 0x0046D67C...0x0046D89F.

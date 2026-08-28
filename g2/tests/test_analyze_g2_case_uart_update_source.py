@@ -30,19 +30,21 @@ class CaseUartUpdateSourceAuditTests(unittest.TestCase):
         self.assertEqual(len(self.report["implemented_contracts"]), 7)
 
     def test_destructive_hardware_tail_is_explicit(self) -> None:
-        self.assertEqual(self.report["status"], "implemented-in-source / hardware-validation-blocked")
+        self.assertEqual(self.report["status"], "implemented-in-source / hardware-validation-deferred-by-project-direction")
         self.assertFalse(self.report["hardware_block"]["physical_evidence_available"])
         self.assertTrue(self.report["hardware_block"]["stock_case_payload_retained"])
         self.assertEqual(len(self.report["hardware_block"]["preserved_windows"]), 4)
 
-    def test_source_pin_mutation_is_rejected(self) -> None:
-        original = MODULE.PINS[MODULE.SOURCE]
-        try:
-            MODULE.PINS[MODULE.SOURCE] = (original[0], "0" * 64)
-            with self.assertRaises(MODULE.AuditError):
-                MODULE.audit()
-        finally:
-            MODULE.PINS[MODULE.SOURCE] = original
+    def test_source_and_header_pin_mutations_are_rejected(self) -> None:
+        for path in (MODULE.SOURCE, MODULE.HEADER):
+            with self.subTest(path=path.name):
+                original = MODULE.PINS[path]
+                try:
+                    MODULE.PINS[path] = (original[0], "0" * 64)
+                    with self.assertRaises(MODULE.AuditError):
+                        MODULE.audit()
+                finally:
+                    MODULE.PINS[path] = original
 
 
 if __name__ == "__main__":

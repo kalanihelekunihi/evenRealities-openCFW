@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of the G2 Apollo510 elapsed-tick dispatcher and
  * compare-A ISR at [0x004563B4,0x0045643E). Not a production input.

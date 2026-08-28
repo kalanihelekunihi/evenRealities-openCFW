@@ -1,0 +1,40 @@
+{
+  "admitted_row_count": 16,
+  "analysis_mode": "offline complete Thumb-body/register semantics and isolated Cortex-M0+ compile; no pointer, MMIO, hardware or production execution",
+  "component": "G2 touch call-free leaf primitive source admission batch 8",
+  "exclusions": "no product semantic names, pointer layouts, callback ABIs, EULA bodies, MMIO or system-handoff behavior admitted",
+  "integration": "isolated source candidates only; not production-routed",
+  "metrics": {
+    "admitted_functions": 16,
+    "admitted_instruction_bytes": 136,
+    "clean_room_instruction_exact_sources": 16,
+    "concrete_source_or_implementation_gap_after": 93,
+    "constant_return_functions": 6,
+    "input_concrete_gap": 109,
+    "pointer_or_mmio_admissions": 0,
+    "pure_arithmetic_functions": 4,
+    "register_passthrough_functions": 6,
+    "residual_digest": "63ac44df4dae71667fce6ae64c6737c3dd7650ec3072000f5b296b21d2211241",
+    "row_digest": "1802179e7a5b1a4e49b3cabc3d3d1bcc5a9e5f8de57605cb4b02d9961948c130",
+    "typed_external_eula_functions": 10,
+    "typed_system_handoff_functions": 1,
+    "typed_unavailable_halt_functions": 1,
+    "unimplemented_application_contracts_after": 81,
+    "unimplemented_application_contracts_before": 97,
+    "upstream_body_admissions": 0
+  },
+  "remaining": {
+    "concrete_source_or_implementation_functions": 93,
+    "note": "external/unavailable provider rows and unimplemented contracts remain non-source",
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_clean_room_application_contracts": 81
+  },
+  "residual_row_count": 93,
+  "schema_version": 1,
+  "source": {
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_leaf_primitives.c",
+    "sha256": "9f8e179b7482bc095327679fdae77f42a414953225673909c9546d7edbdf9053",
+    "target_object_bytes": 2336
+  }
+}

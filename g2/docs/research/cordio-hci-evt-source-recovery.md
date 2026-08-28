@@ -31,7 +31,7 @@ body hash ledger is
 ## Clean-room implementation and production routing
 
 The proprietary file is used only as an inventory and behavioral oracle. A
-separately authored GPL-3.0-only decoder now implements all 80 APIs from the
+separately authored MIT decoder now implements all 80 APIs from the
 Bluetooth HCI wire format and the public Cordio callback ABI. It bounds every
 read, rejects malformed lengths, accounts unknown events, preserves connection
 and CIS lifecycle callbacks, and covers command, advertising, privacy, PHY,

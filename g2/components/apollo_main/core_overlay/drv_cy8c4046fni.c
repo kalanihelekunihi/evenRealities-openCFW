@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room behavioral reconstruction of the retained G2 2.2.6.10
  * driver/touch/drv_cy8c4046fni.c host-side Cypress touch driver.

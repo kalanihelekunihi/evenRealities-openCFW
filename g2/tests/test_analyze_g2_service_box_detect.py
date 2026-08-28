@@ -10,4 +10,4 @@ class ServiceBoxDetectTests(unittest.TestCase):
   p=self.r['provider_boundary'];self.assertEqual(tuple(p[x] for x in ('easylogger_calls','iar_dlib_calls','cmsis_freertos_calls','first_party_calls')),(130,7,13,22));self.assertEqual(tuple(p['cmsis_freertos_seams'][x] for x in ('osTimerNew','osTimerStart','osTimerStop','osTimerIsRunning','osTimerDelete')),(2,2,6,1,2));self.assertIsNone(p['historical_box_detect_commit']);self.assertFalse(p['new_version_discriminator'])
  def test_claims(self):
   self.assertEqual(self.r['identity']['embedded_third_party_definitions'],[])
-  self.assertEqual(self.r['production'],{'production_routed':True,'source_functions':34,'compiled_text_bytes':1626,'alignment_bytes':36,'strict_relocations':77,'replaced_stock_body_bytes':3584,'hardware_validation':'blocked_unavailable_authorized_physical_evidence'})
+  self.assertEqual(self.r['production'],{'production_routed':True,'source_functions':34,'compiled_text_bytes':1626,'alignment_bytes':36,'strict_relocations':77,'replaced_stock_body_bytes':3584,'hardware_validation':'deferred by project direction'})

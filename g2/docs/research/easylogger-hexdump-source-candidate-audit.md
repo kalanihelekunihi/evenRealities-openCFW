@@ -304,7 +304,7 @@ patch interval set is disjoint. The hexdump literal pool beginning at
 `0x0043DC88` remains byte-identical.
 
 The production sources are the MIT upstream-derived
-`runtime_easylogger_hexdump.c/.h` pair and the GPL-3.0-only clean-room
+`runtime_easylogger_hexdump.c/.h` pair and the MIT clean-room
 `runtime_easylogger_hexdump_support.c/.h` pair. Their pins are:
 
 | File | Bytes | SHA-256 |

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Behavior and Cortex-M0+ build tests for the charging-case protocol."""
 
 from __future__ import annotations

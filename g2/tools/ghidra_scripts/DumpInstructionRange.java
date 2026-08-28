@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: MIT
 //
 // Emit exact instruction bytes and decoded text for a reviewed address range.
 // Usage:

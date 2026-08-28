@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded lens-status publication and state accessors matched to stock
  * entries 0x0047D818 through 0x0047D8FB.

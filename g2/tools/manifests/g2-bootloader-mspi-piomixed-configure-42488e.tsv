@@ -1,0 +1,10 @@
+kind	name	start	end	size	sha256	disposition	provider	license_status	evidence
+function	mspi_piomixed_configure	0x0042488e	0x00424976	232	e8323e8e0ac6f59465ce1d30087eb6f4a2e3de336c45bff3e6954325a2e32fee	exact_dual_profile_candidate	AmbiqSuite 5.1.0 semantics with reviewed target adapter	BSD-3-Clause	complete 26-mode PIO mixed-width mapping, state layout, MMIO effect, and stock bytes close
+function	mspi_dummy_callback	0x00424976	0x00424978	2	c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8	exact_dual_profile_candidate	AmbiqSuite 5.1.0 no-op callback	BSD-3-Clause	stored Thumb callback pointer at 0x00426c00 and exact return body close
+caller	piomixed_configure_call	0x004258b8	0x004258bc	4	-	retained_caller	AmbiqSuite 5.1.0 public device-configure path	BSD-3-Clause	direct BL reaches mspi_piomixed_configure
+stored_pointer	dummy_callback_pointer	0x00426c00	0x00426c04	4	-	retained_pointer	AmbiqSuite 5.1.0 callback table	BSD-3-Clause	value 0x00424977
+abi	state_fields	0x00000004	0x0000000c	-	-	authenticated_layout	AmbiqSuite 5.1.0 am_hal_mspi_state_t	BSD-3-Clause	module +0x4, piocfg +0xb
+abi	mspi_ctrl1	0x40060004	0x40060008	4	-	authenticated_layout	Apollo510 CMSIS MSPI register block	Apache-2.0	PIOMIXED occupies CTRL1 bits 0..3
+function	mspi_seq_loopback	0x00424978	0x0042499c	36	d151d9a6fc63e8f3e8c78e4a670c7a25b34d63318e67c8e423c8a2930bb000e2	exact_dual_profile_candidate	AmbiqSuite 5.1.0 sequence-loopback callback	BSD-3-Clause	state update, CQSETCLEAR write, literal reference, and exact return body close
+successor	mspi0_base_literal	0x0042499c	0x004249a0	4	-	retained_data	Apollo510 CMSIS MSPI0_BASE	Apache-2.0	value 0x40060000 before mspi_clkgen_ctrl
+hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project evidence gate	directed hardware testing is deferred by project direction; future PIO mixed-mode register, pad protocol, callback, and cold-boot evidence remains required

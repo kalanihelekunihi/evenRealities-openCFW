@@ -1,0 +1,179 @@
+{
+  "ambiguity_rows": [
+    {
+      "bytes": 32,
+      "end": 472,
+      "evidence": "CRT termination-call literal pool before next prologue",
+      "resolution": "referenced_literal_data_precedence",
+      "sha256": "fc38fa3c79b300cadb0d3f3c731c57963dfbaec98d41dc4bb1ce335c209c5a85",
+      "start": 440
+    },
+    {
+      "bytes": 28,
+      "end": 5112,
+      "evidence": "reset/startup literal pool before next prologue",
+      "resolution": "referenced_literal_data_precedence",
+      "sha256": "7402dd73720b886b87598e8f6c3ba1666a91c16a7c4990a37610a8b295f22119",
+      "start": 5084
+    },
+    {
+      "bytes": 4,
+      "end": 19268,
+      "evidence": "DFU/reset wrapper PC-relative SRAM literal",
+      "resolution": "referenced_literal_data_precedence",
+      "sha256": "2de44621c76edf2debbc2df62ccb52c5036b1919dca3af0c0a886cc48dbfaeba",
+      "start": 19264
+    },
+    {
+      "bytes": 8,
+      "end": 30420,
+      "evidence": "exit-wrapper literal pool before memset",
+      "resolution": "referenced_literal_data_precedence",
+      "sha256": "094181b4eaa9009858e1da60494461e1b44d172014148cdb5ff8271c0bca3718",
+      "start": 30412
+    }
+  ],
+  "analysis_mode": "offline CFG/caller/register/provider and byte-boundary analysis; no hardware, MMIO, reset, DFU, signing, or flash operation",
+  "batches": {
+    "application_startup_clean_room": {
+      "confidence": "low",
+      "license": "MIT-for-new-clean-room-code",
+      "provider": "OpenCFW behavior recovery required",
+      "rule": "entry < 0x2998; application/startup caller cluster; no public-provider identity asserted",
+      "status": "typed_application_or_startup_semantics_unresolved"
+    },
+    "capsense_cat2_mixed": {
+      "confidence": "low",
+      "license": "LicenseRef-Infineon-EULA-or-Apache-2.0",
+      "provider": "Infineon CAPSENSE or CAT2 PDL boundary unresolved",
+      "rule": "0x2998 <= entry < 0x4B14; mixed CapSense/MSCLP/PDL cluster bounded by established provider anchors",
+      "status": "typed_vendor_boundary_provider_unresolved"
+    },
+    "cat2_pdl": {
+      "confidence": "medium",
+      "license": "Apache-2.0",
+      "provider": "Infineon mtb-pdl-cat2 candidate cluster",
+      "rule": "0x58F0 <= entry < 0x73C0 inside SROM/GPIO/clock/SCB/system PDL cluster",
+      "status": "typed_upstream_provider_candidate"
+    },
+    "emeeprom_eula": {
+      "confidence": "medium",
+      "license": "LicenseRef-Infineon-EULA",
+      "provider": "Infineon Emulated EEPROM middleware",
+      "rule": "0x4B68 <= entry < 0x58F0 inside the checksum/read/write Em_EEPROM call cluster",
+      "status": "typed_external_eula_boundary"
+    },
+    "runtime": {
+      "confidence": "high",
+      "license": "LicenseRef-Upstream-Toolchain-Runtime",
+      "provider": "selected ARM EABI/C runtime",
+      "rule": "entry >= 0x73C0 and exact ABI/control-flow behavior listed in RUNTIME_EXACT",
+      "status": "exact_runtime_abi_candidate"
+    },
+    "system_handoff_mixed": {
+      "confidence": "low",
+      "license": "LicenseRef-Unresolved",
+      "provider": "system/DFU handoff support boundary unresolved",
+      "rule": "0x4B14 <= entry < 0x4B68 between reset/DFU and Em_EEPROM anchors",
+      "status": "typed_system_boundary_provider_unresolved"
+    }
+  },
+  "byte_row_count": 8,
+  "component": "G2 touch relocation-corrected semantic/provider batches",
+  "dispatch_rows": [
+    {
+      "entries": 9,
+      "role": "I2C command switch",
+      "table_offset": 32196,
+      "table_sha256": "f49934398dd5e7fc0e00417af9b3c8f01db4320a7618e07cef1a16cb46f6faa8",
+      "unique_targets": [
+        1038,
+        1094,
+        1126,
+        1152,
+        1184,
+        1224,
+        1324,
+        1356
+      ]
+    },
+    {
+      "entries": 8,
+      "role": "device-event switch",
+      "table_offset": 33276,
+      "table_sha256": "3d07788c90f8b8efe377f0cd406f9f27f0fd27b08f9ff418837ac079cf826071",
+      "unique_targets": [
+        14346,
+        14442,
+        14486,
+        14494,
+        14502,
+        14510,
+        14530
+      ]
+    },
+    {
+      "entries": 20,
+      "role": "SROM status switch",
+      "table_offset": 33308,
+      "table_sha256": "3cb9cdb99fd51c1e8c36b03eddfb53adbc1d29ff67fadb61f9510be5afb9bac7",
+      "unique_targets": [
+        22818,
+        22822,
+        22826,
+        22830,
+        22834,
+        22838,
+        22842,
+        22850
+      ]
+    }
+  ],
+  "metrics": {
+    "batch_counts": {
+      "application_startup_clean_room": 99,
+      "capsense_cat2_mixed": 55,
+      "cat2_pdl": 54,
+      "emeeprom_eula": 10,
+      "runtime": 4,
+      "system_handoff_mixed": 1
+    },
+    "byte_digest": "e8cd2af0475a22c070e04962a51977a370b12cc5ce6c86a271e686a10393df58",
+    "concrete_project_source_rows": 0,
+    "dispatch_case_entries": 23,
+    "exact_runtime_rows": 4,
+    "expanded_function_entries": 301,
+    "final_code_partition": {
+      "cfg_instruction_candidate": 27674,
+      "dispatch_case_instruction_candidate": 482,
+      "referenced_literal_data": 1964,
+      "residual_arch_nop_padding": 8,
+      "residual_legacy_nop_padding": 126,
+      "residual_return_tail": 4,
+      "residual_typed_data": 60,
+      "residual_zero_halfword_alignment_or_data": 46
+    },
+    "prior_1584_partition": {
+      "cfg_instruction_candidate": 782,
+      "dispatch_case_instruction_candidate": 482,
+      "referenced_literal_data": 76,
+      "residual_arch_nop_padding": 8,
+      "residual_legacy_nop_padding": 126,
+      "residual_return_tail": 4,
+      "residual_typed_data": 60,
+      "residual_zero_halfword_alignment_or_data": 46
+    },
+    "resolved_prior_ambiguous_bytes": 72,
+    "semantic_digest": "84fd01c5d0b8fe7ad0d1784e03c10f179ecdad90fcde2cf8cc863bd118b45864",
+    "semantic_rows": 223
+  },
+  "remaining_opacity": {
+    "byte_semantically_ambiguous": 46,
+    "byte_unclassified": 0,
+    "note": "All physical code-span bytes are typed; 46 zero bytes retain alignment-versus-data ambiguity and 223 functions still need behavior-level recovery or exact public signatures.",
+    "semantic_source_unclassified_entries": 223
+  },
+  "schema_version": 1,
+  "semantic_row_count": 223,
+  "source_rule": "No newly batched row is concrete project source. Apache/EULA/runtime labels are provider boundaries; mixed/private behavior remains typed external or unresolved."
+}

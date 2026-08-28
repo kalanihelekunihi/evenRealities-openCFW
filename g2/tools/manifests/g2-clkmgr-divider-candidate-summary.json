@@ -1,0 +1,184 @@
+{
+  "analysis_mode": "offline; no hardware, MMIO, signing, flashing, or publishing operation",
+  "candidate": {
+    "cross_toolchain_routed": true,
+    "functions": 2,
+    "invalid_input_policy": "fail closed with AM_HAL_STATUS_INVALID_ARG-compatible status 6 and no output mutation",
+    "license": "MIT",
+    "production_routed": true,
+    "raw_instruction_bytes": 0,
+    "semantic_c": true,
+    "software_blocker": null
+  },
+  "hardware_operations": [],
+  "hardware_validation": "deferred by project direction",
+  "production": {
+    "apollo_bootloader": {
+      "component_sha256": "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0",
+      "component_size": 163840,
+      "placement_kind": "authenticated_generated_nop_caves",
+      "records": [
+        {
+          "entry_replacement_hex": "f0f756bd00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
+          "function": "open_cfw_clkmgr_hfrc2_uq15_divider",
+          "relocations": 0,
+          "source_address": "0x004176D4",
+          "source_bytes": 88,
+          "source_sha256": "0113dce6f97c06a6bf0979cb237e245849e359377cee6ec44ab3e3b7bcf8b0e0",
+          "stock_bytes": 42,
+          "stock_entry": "0x00426C24"
+        },
+        {
+          "entry_replacement_hex": "f0f76dbd00bf00bf00bf",
+          "function": "open_cfw_clkmgr_hfrc_integer_divider",
+          "relocations": 0,
+          "source_address": "0x0041772C",
+          "source_bytes": 18,
+          "source_sha256": "ef3f0a171a8b56b19881704872749380f682216aa09bd656a34deabb60d4c5d3",
+          "stock_bytes": 10,
+          "stock_entry": "0x00426C4E"
+        }
+      ],
+      "toolchain_profile": "apple-clang"
+    },
+    "apollo_main": {
+      "component_sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+      "component_size": 3952454,
+      "placement_kind": "canonical_appended_overlay_leaves",
+      "records": [
+        {
+          "entry_replacement_hex": "29f3e7ba00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
+          "function": "open_cfw_clkmgr_hfrc2_uq15_divider",
+          "relocations": 0,
+          "source_address": "0x007FCEBC",
+          "source_bytes": 88,
+          "source_sha256": "0113dce6f97c06a6bf0979cb237e245849e359377cee6ec44ab3e3b7bcf8b0e0",
+          "stock_bytes": 42,
+          "stock_entry": "0x004D38EA"
+        },
+        {
+          "entry_replacement_hex": "29f3feba00bf00bf00bf",
+          "function": "open_cfw_clkmgr_hfrc_integer_divider",
+          "relocations": 0,
+          "source_address": "0x007FCF14",
+          "source_bytes": 18,
+          "source_sha256": "ef3f0a171a8b56b19881704872749380f682216aa09bd656a34deabb60d4c5d3",
+          "stock_bytes": 10,
+          "stock_entry": "0x004D3914"
+        }
+      ],
+      "toolchain_profile": "apple-clang"
+    },
+    "linux_clang": {
+      "apollo_bootloader": {
+        "component_sha256": "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635",
+        "component_size": 163824,
+        "placement_kind": "authenticated_generated_nop_caves",
+        "records": [
+          {
+            "entry_replacement_hex": "f0f756bd00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
+            "function": "open_cfw_clkmgr_hfrc2_uq15_divider",
+            "relocations": 0,
+            "source_address": "0x004176D4",
+            "source_bytes": 88,
+            "source_sha256": "0113dce6f97c06a6bf0979cb237e245849e359377cee6ec44ab3e3b7bcf8b0e0",
+            "stock_bytes": 42,
+            "stock_entry": "0x00426C24"
+          },
+          {
+            "entry_replacement_hex": "f0f76dbd00bf00bf00bf",
+            "function": "open_cfw_clkmgr_hfrc_integer_divider",
+            "relocations": 0,
+            "source_address": "0x0041772C",
+            "source_bytes": 18,
+            "source_sha256": "ef3f0a171a8b56b19881704872749380f682216aa09bd656a34deabb60d4c5d3",
+            "stock_bytes": 10,
+            "stock_entry": "0x00426C4E"
+          }
+        ],
+        "toolchain_profile": "linux-clang"
+      },
+      "apollo_main": {
+        "component_sha256": "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+        "component_size": 3736060,
+        "placement_kind": "canonical_appended_overlay_leaves",
+        "records": [
+          {
+            "entry_replacement_hex": "f2f26bbd00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
+            "function": "open_cfw_clkmgr_hfrc2_uq15_divider",
+            "relocations": 0,
+            "source_address": "0x007C63C4",
+            "source_bytes": 88,
+            "source_sha256": "0113dce6f97c06a6bf0979cb237e245849e359377cee6ec44ab3e3b7bcf8b0e0",
+            "stock_bytes": 42,
+            "stock_entry": "0x004D38EA"
+          },
+          {
+            "entry_replacement_hex": "f2f282bd00bf00bf00bf",
+            "function": "open_cfw_clkmgr_hfrc_integer_divider",
+            "relocations": 0,
+            "source_address": "0x007C641C",
+            "source_bytes": 18,
+            "source_sha256": "ef3f0a171a8b56b19881704872749380f682216aa09bd656a34deabb60d4c5d3",
+            "stock_bytes": 10,
+            "stock_entry": "0x004D3914"
+          }
+        ],
+        "toolchain_profile": "linux-clang"
+      },
+      "package": {
+        "manifest_providers_routed": 2,
+        "sha256": "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+        "size": 4529116
+      }
+    },
+    "package": {
+      "manifest_providers_routed": 2,
+      "sha256": "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+      "size": 4745526
+    }
+  },
+  "provider_evidence": {
+    "authenticated_upstream_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+    "exact_cross_image_machine_body": true,
+    "family": "AmbiqSuite Apollo510 clock manager",
+    "public_header_contract": "am_hal_clkmgr_clock_config",
+    "public_implementation_available": false
+  },
+  "schema_version": 1,
+  "status": "apollo-clkmgr-divider-production-routed",
+  "stock": {
+    "apollo_main_bytes": 52,
+    "bootloader_bytes": 52,
+    "cross_image_bytes": 104,
+    "functions_per_image": 2,
+    "records": [
+      {
+        "apollo_main_exact_match": "0x004D38EA",
+        "body_sha256": "5d56a93dc2746c295ee2b3507ab4e1be4dae68f057dff4f26b519616bfd486df",
+        "bootloader_direct_callers": [
+          "0x0042184C"
+        ],
+        "bootloader_end_exclusive": "0x00426C4E",
+        "bootloader_entry": "0x00426C24",
+        "bytes_per_image": 42,
+        "candidate_symbol": "open_cfw_clkmgr_hfrc2_uq15_divider",
+        "cross_image_bytes": 84,
+        "semantic_contract": "HFRC2 source prescale and UQ17.15 divider synthesis"
+      },
+      {
+        "apollo_main_exact_match": "0x004D3914",
+        "body_sha256": "15eabeb671434c5c1f485fd4600130400e24f0e1ce62364e4b684e1b6e17bfdf",
+        "bootloader_direct_callers": [
+          "0x00421718"
+        ],
+        "bootloader_end_exclusive": "0x00426C58",
+        "bootloader_entry": "0x00426C4E",
+        "bytes_per_image": 10,
+        "candidate_symbol": "open_cfw_clkmgr_hfrc_integer_divider",
+        "cross_image_bytes": 20,
+        "semantic_contract": "HFRC requested/source integer divider synthesis"
+      }
+    ]
+  }
+}

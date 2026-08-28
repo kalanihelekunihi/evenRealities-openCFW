@@ -60,8 +60,8 @@ class CordioApplicationFrameworkTests(unittest.TestCase):
         self.assertEqual(production["application_runtime_relocations"], 108)
         self.assertTrue(production["preexisting_app_database_routed"])
         self.assertEqual(production["remaining_anchored_functions"], 0)
-        self.assertEqual(production["hardware_validation"], "blocked")
-        self.assertIn("No authorized responsive right G2", production["hardware_blocker"])
+        self.assertEqual(production["hardware_validation"], "deferred by project direction")
+        self.assertIn("required for future qualification", production["hardware_blocker"])
 
 
 if __name__ == "__main__":

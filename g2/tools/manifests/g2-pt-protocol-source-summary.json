@@ -1,0 +1,988 @@
+{
+  "evidence": {
+    "command_handlers": 66,
+    "corpus_functions": 73,
+    "corpus_ledger_verified": true,
+    "corpus_sha256": "1ad1d5f642570530887920a913934b4cc804254ff9d806445687d47d6ef2aaa5",
+    "stock_function_body_bytes": 32866
+  },
+  "hardware": {
+    "qualification_complete": false,
+    "validation": "blocked by unavailable physical evidence"
+  },
+  "ownership": {
+    "license": "MIT",
+    "retained_vendor_data_bytes_embedded_in_source": 0,
+    "source_bytes": 212353,
+    "source_files": 28,
+    "source_sha256": "177bc14fca75cc6120cac5a884bc54766be55753956ee44299647696af6c10c2",
+    "stock_machine_code_bytes_in_source": 0
+  },
+  "schema_version": 1,
+  "software": {
+    "apollo510_undefined_symbols": 0,
+    "board_apollo_binding_available": true,
+    "board_callback_count": 83,
+    "board_calls_table_lifetime_contract": true,
+    "board_data_abis_and_extents_verified": true,
+    "board_data_binding_associations_verified": true,
+    "board_failure_semantics_exercised": true,
+    "board_function_abis_verified": true,
+    "board_function_binding_associations_verified": true,
+    "board_host_operations_exercised": 56,
+    "board_operations_implemented": 56,
+    "board_operations_remaining": 0,
+    "board_retained_provider_bindings_remaining": 27,
+    "board_retained_provider_candidate_bindings": 40,
+    "board_retained_provider_candidate_stock_body_bytes": 3402,
+    "board_retained_provider_candidates_production_routed": true,
+    "board_retained_provider_candidates_semantic_c": true,
+    "board_retained_providers_source_owned": false,
+    "board_retained_service_bindings": 40,
+    "board_second_order_abis_verified": true,
+    "board_second_order_callable_bindings": 59,
+    "board_second_order_callable_census": [
+      {
+        "abi": "void (*)(void *, uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_AMBIENT_ASSIGN",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5322108,
+        "target_function": null,
+        "thumb_pointer": 5322109
+      },
+      {
+        "abi": "uint32_t (*)(uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_AMBIENT_RAW_READ",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5322568,
+        "target_function": null,
+        "thumb_pointer": 5322569
+      },
+      {
+        "abi": "uint16_t (*)(void *)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_AMBIENT_SAMPLE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5322194,
+        "target_function": null,
+        "thumb_pointer": 5322195
+      },
+      {
+        "abi": "void (*)(uint32_t, uint32_t)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_AUDIO_CODEC_ROUTE",
+        "ownership": "source_owned",
+        "runtime_address": 4722444,
+        "target_function": "open_cfw_gpio_pinconfig",
+        "thumb_pointer": 4722445
+      },
+      {
+        "abi": "void (*)(uint8_t, uint16_t, char *, uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_AUDIO_PATH_FORMAT_PROVIDER",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5746572,
+        "target_function": null,
+        "thumb_pointer": 5746573
+      },
+      {
+        "abi": "void (*)(uint32_t, uint32_t, const void *)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_AUDIO_REGISTER",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5745528,
+        "target_function": null,
+        "thumb_pointer": 5745529
+      },
+      {
+        "abi": "void (*)(void *)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_AUDIO_RELEASE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5744934,
+        "target_function": null,
+        "thumb_pointer": 5744935
+      },
+      {
+        "abi": "int (*)(uint32_t, uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_AUDIO_REMOVE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5745872,
+        "target_function": null,
+        "thumb_pointer": 5745873
+      },
+      {
+        "abi": "void (*)(uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_AUDIO_UNREGISTER",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5747474,
+        "target_function": null,
+        "thumb_pointer": 5747475
+      },
+      {
+        "abi": "void (*)(uint32_t, uint8_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_BUZZER_APPLY",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5253116,
+        "target_function": null,
+        "thumb_pointer": 5253117
+      },
+      {
+        "abi": "void (*)(uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_BUZZER_DISABLE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5253130,
+        "target_function": null,
+        "thumb_pointer": 5253131
+      },
+      {
+        "abi": "void (*)(void)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_BUZZER_PREPARE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5253828,
+        "target_function": null,
+        "thumb_pointer": 5253829
+      },
+      {
+        "abi": "int32_t (*)(void *, uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_CHARGER_DISABLE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5632216,
+        "target_function": null,
+        "thumb_pointer": 5632217
+      },
+      {
+        "abi": "int32_t (*)(void *, uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_CHARGER_ENABLE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5632122,
+        "target_function": null,
+        "thumb_pointer": 5632123
+      },
+      {
+        "abi": "void *(*)(const void *, uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_CHARGER_OPEN",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5631984,
+        "target_function": null,
+        "thumb_pointer": 5631985
+      },
+      {
+        "abi": "int (*)(uint32_t, uint8_t)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_CODEC_ROUTE_SET",
+        "ownership": "source_owned",
+        "runtime_address": 4722646,
+        "target_function": "open_cfw_gpio_state_write",
+        "thumb_pointer": 4722647
+      },
+      {
+        "abi": "int (*)(uint32_t)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_DELAY_TICKS",
+        "ownership": "source_owned",
+        "runtime_address": 4494198,
+        "target_function": "open_cfw_cmsis_delay",
+        "thumb_pointer": 4494199
+      },
+      {
+        "abi": "void (*)(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_DISPLAY_APPLY",
+        "ownership": "source_owned",
+        "runtime_address": 4669542,
+        "target_function": "open_cfw_display_send_reflash",
+        "thumb_pointer": 4669543
+      },
+      {
+        "abi": "void (*)(void)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_COMMIT",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 4933326,
+        "target_function": null,
+        "thumb_pointer": 4933327
+      },
+      {
+        "abi": "int (*)(uint8_t, const uint8_t *)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_ONBOARDING",
+        "ownership": "source_owned",
+        "runtime_address": 4880416,
+        "target_function": "open_cfw_kvdb_onboarding_config_update_and_persist",
+        "thumb_pointer": 4880417
+      },
+      {
+        "abi": "void (*)(void)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_REFRESH",
+        "ownership": "source_owned",
+        "runtime_address": 5085828,
+        "target_function": "open_cfw_service_kvdb_invalidate_magic",
+        "thumb_pointer": 5085829
+      },
+      {
+        "abi": "int (*)(const void *)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_REMOVE",
+        "ownership": "source_owned",
+        "runtime_address": 4671884,
+        "target_function": "open_cfw_file_remove",
+        "thumb_pointer": 4671885
+      },
+      {
+        "abi": "void (*)(uint32_t, uint32_t, uint32_t, uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_SEND",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 4607030,
+        "target_function": null,
+        "thumb_pointer": 4607031
+      },
+      {
+        "abi": "void (*)(void)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_DISPLAY_REINITIALIZE",
+        "ownership": "source_owned",
+        "runtime_address": 4667422,
+        "target_function": "open_cfw_lv_display_lock",
+        "thumb_pointer": 4667423
+      },
+      {
+        "abi": "uint32_t (*)(void *, uint32_t)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_EVENT_FLAGS_SET",
+        "ownership": "source_owned",
+        "runtime_address": 4494820,
+        "target_function": "open_cfw_cmsis_event_flags_set",
+        "thumb_pointer": 4494821
+      },
+      {
+        "abi": "void (*)(void)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_FAIL_STOP",
+        "ownership": "source_owned",
+        "runtime_address": 6267044,
+        "target_function": "ulSetInterruptMask",
+        "thumb_pointer": 6267045
+      },
+      {
+        "abi": "void *(*)(uint32_t)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_FILE_HEAP_ALLOCATE",
+        "ownership": "source_owned",
+        "runtime_address": 4672722,
+        "target_function": "open_cfw_file_heap_allocate",
+        "thumb_pointer": 4672723
+      },
+      {
+        "abi": "void (*)(void)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_FONT_XIP_ACQUIRE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 4650590,
+        "target_function": null,
+        "thumb_pointer": 4650591
+      },
+      {
+        "abi": "void (*)(void)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_FONT_XIP_RELEASE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 4650612,
+        "target_function": null,
+        "thumb_pointer": 4650613
+      },
+      {
+        "abi": "void (*)(void)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_ACQUIRE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 4650590,
+        "target_function": null,
+        "thumb_pointer": 4650591
+      },
+      {
+        "abi": "void (*)(void)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_FINISH",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 4656784,
+        "target_function": null,
+        "thumb_pointer": 4656785
+      },
+      {
+        "abi": "int (*)(void)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_INITIALIZE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 4652600,
+        "target_function": null,
+        "thumb_pointer": 4652601
+      },
+      {
+        "abi": "void (*)(void)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_PREPARE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 4657000,
+        "target_function": null,
+        "thumb_pointer": 4657001
+      },
+      {
+        "abi": "int (*)(uint32_t *)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_READ",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 4653096,
+        "target_function": null,
+        "thumb_pointer": 4653097
+      },
+      {
+        "abi": "void (*)(void)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_RELEASE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 4650612,
+        "target_function": null,
+        "thumb_pointer": 4650613
+      },
+      {
+        "abi": "int32_t (*)(const void *, uint32_t, uint8_t *, uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_HARDWARE_IDENTIFIER_2_READ",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5635128,
+        "target_function": null,
+        "thumb_pointer": 5635129
+      },
+      {
+        "abi": "void (*)(uint32_t, uint32_t *)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_HARDWARE_IDENTIFIER_READ",
+        "ownership": "source_owned",
+        "runtime_address": 4722034,
+        "target_function": "open_cfw_mcuctrl_info_get",
+        "thumb_pointer": 4722035
+      },
+      {
+        "abi": "uint8_t (*)(void)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_LENS_SIDE",
+        "ownership": "source_owned",
+        "runtime_address": 4564328,
+        "target_function": "open_cfw_lens_side",
+        "thumb_pointer": 4564329
+      },
+      {
+        "abi": "void (*)(void *)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_LENS_SYNC_RELEASE",
+        "ownership": "source_owned",
+        "runtime_address": 4672790,
+        "target_function": "open_cfw_file_heap_free",
+        "thumb_pointer": 4672791
+      },
+      {
+        "abi": "int (*)(void *, uint32_t)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_MUTEX_ACQUIRE",
+        "ownership": "source_owned",
+        "runtime_address": 4495286,
+        "target_function": "open_cfw_cmsis_mutex_acquire",
+        "thumb_pointer": 4495287
+      },
+      {
+        "abi": "int (*)(void *)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_MUTEX_RELEASE",
+        "ownership": "source_owned",
+        "runtime_address": 4495388,
+        "target_function": "open_cfw_cmsis_mutex_release",
+        "thumb_pointer": 4495389
+      },
+      {
+        "abi": "void (*)(uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_PCM_ROUTE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5746988,
+        "target_function": null,
+        "thumb_pointer": 5746989
+      },
+      {
+        "abi": "int (*)(void *, const void *, uint32_t, uint32_t)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_QUEUE_SEND",
+        "ownership": "source_owned",
+        "runtime_address": 4496062,
+        "target_function": "open_cfw_cmsis_message_queue_put",
+        "thumb_pointer": 4496063
+      },
+      {
+        "abi": "void (*)(const void *)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_RTC_SET_TIME",
+        "ownership": "source_owned",
+        "runtime_address": 4714104,
+        "target_function": "open_cfw_rtc_time_set",
+        "thumb_pointer": 4714105
+      },
+      {
+        "abi": "uint32_t (*)(void *, uint32_t)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_THREAD_FLAGS_SET",
+        "ownership": "source_owned",
+        "runtime_address": 4493880,
+        "target_function": "open_cfw_cmsis_thread_flags_set",
+        "thumb_pointer": 4493881
+      },
+      {
+        "abi": "void (*)(void *)",
+        "category": "source_overlay_callable",
+        "macro": "OPEN_CFW_PT_TIME_READ",
+        "ownership": "source_owned",
+        "runtime_address": 4714256,
+        "target_function": "open_cfw_rtc_time_get",
+        "thumb_pointer": 4714257
+      },
+      {
+        "abi": "int (*)(const uint8_t *, uint32_t, uint32_t)",
+        "category": "retained_callable",
+        "macro": "OPEN_CFW_PT_UART_WRITE",
+        "ownership": "supported_retained_service_boundary",
+        "runtime_address": 5786776,
+        "target_function": null,
+        "thumb_pointer": 5786777
+      },
+      {
+        "abi": "void (*)(uint32_t)",
+        "category": "source_local_callable",
+        "macro": "OPEN_CFW_PT_CODEC_MIC_ENABLE",
+        "ownership": "source_owned",
+        "runtime_address": null,
+        "target_function": "open_cfw_pt_codec_mic_enable",
+        "thumb_pointer": null
+      },
+      {
+        "abi": "void (*)(void *, uintptr_t, uint32_t)",
+        "category": "source_local_callable",
+        "macro": "OPEN_CFW_PT_DISPLAY_BUFFER_WRITE",
+        "ownership": "source_owned",
+        "runtime_address": null,
+        "target_function": "open_cfw_pt_display_buffer_write",
+        "thumb_pointer": null
+      },
+      {
+        "abi": "uint8_t (*)(void)",
+        "category": "source_local_callable",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_STATE_0",
+        "ownership": "source_owned",
+        "runtime_address": null,
+        "target_function": "open_cfw_pt_display_postprocess_state_0",
+        "thumb_pointer": null
+      },
+      {
+        "abi": "uint8_t (*)(void)",
+        "category": "source_local_callable",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_STATE_1",
+        "ownership": "source_owned",
+        "runtime_address": null,
+        "target_function": "open_cfw_pt_display_postprocess_state_1",
+        "thumb_pointer": null
+      },
+      {
+        "abi": "uint8_t (*)(void)",
+        "category": "source_local_callable",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_STATE_2",
+        "ownership": "source_owned",
+        "runtime_address": null,
+        "target_function": "open_cfw_pt_display_postprocess_state_2",
+        "thumb_pointer": null
+      },
+      {
+        "abi": "void (*)(const void *)",
+        "category": "source_local_callable",
+        "macro": "OPEN_CFW_PT_INPUT_MESSAGE_SEND",
+        "ownership": "source_owned",
+        "runtime_address": null,
+        "target_function": "open_cfw_pt_input_message_send",
+        "thumb_pointer": null
+      },
+      {
+        "abi": "void *(*)(uint32_t)",
+        "category": "source_local_callable",
+        "macro": "OPEN_CFW_PT_LENS_SYNC_ALLOCATE",
+        "ownership": "source_owned",
+        "runtime_address": null,
+        "target_function": "open_cfw_pt_lens_sync_allocate",
+        "thumb_pointer": null
+      },
+      {
+        "abi": "void (*)(uint32_t)",
+        "category": "source_local_callable",
+        "macro": "OPEN_CFW_PT_PDM_MIC_ENABLE",
+        "ownership": "source_owned",
+        "runtime_address": null,
+        "target_function": "open_cfw_pt_pdm_mic_enable",
+        "thumb_pointer": null
+      },
+      {
+        "abi": "void (*)(uint32_t, void *)",
+        "category": "source_local_callable",
+        "macro": "OPEN_CFW_PT_SECONDS_TO_TIME",
+        "ownership": "source_owned",
+        "runtime_address": null,
+        "target_function": "open_cfw_pt_seconds_to_time",
+        "thumb_pointer": null
+      },
+      {
+        "abi": "void (*)(void)",
+        "category": "source_local_callable",
+        "macro": "OPEN_CFW_PT_SYSTEM_RESET_INNER",
+        "ownership": "source_owned",
+        "runtime_address": null,
+        "target_function": "open_cfw_pt_system_reset_inner",
+        "thumb_pointer": null
+      },
+      {
+        "abi": "void (*)(int32_t, void *)",
+        "category": "source_local_callable",
+        "macro": "OPEN_CFW_PT_TIME_OUTPUT",
+        "ownership": "source_owned",
+        "runtime_address": null,
+        "target_function": "open_cfw_pt_time_output",
+        "thumb_pointer": null
+      },
+      {
+        "abi": "int32_t (*)(const void *)",
+        "category": "source_local_callable",
+        "macro": "OPEN_CFW_PT_TIME_TO_SECONDS",
+        "ownership": "source_owned",
+        "runtime_address": null,
+        "target_function": "open_cfw_pt_time_to_seconds",
+        "thumb_pointer": null
+      }
+    ],
+    "board_second_order_callable_unique_addresses": 45,
+    "board_second_order_data_bindings": 43,
+    "board_second_order_data_categories": {
+      "external_xip_bound": 2,
+      "external_xip_data": 2,
+      "immutable_flash_data": 2,
+      "peripheral_mmio": 3,
+      "retained_callback_entry": 2,
+      "runtime_sram_data": 32
+    },
+    "board_second_order_data_census": [
+      {
+        "abi": "volatile uint32_t *",
+        "category": "peripheral_mmio",
+        "macro": "OPEN_CFW_PT_AMBIENT_INIT_REGISTER",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 1073808460
+      },
+      {
+        "abi": "volatile uint32_t *",
+        "category": "peripheral_mmio",
+        "macro": "OPEN_CFW_PT_AMBIENT_RESET_REGISTER",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 1073808488
+      },
+      {
+        "abi": "const volatile uint32_t *",
+        "category": "immutable_flash_data",
+        "macro": "OPEN_CFW_PT_AMBIENT_ROUTE_WORD",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 7925312
+      },
+      {
+        "abi": "volatile uint32_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_AUDIO_CAPTURE_ACTIVE",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537348240
+      },
+      {
+        "abi": "void *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_AUDIO_CODEC_BUFFER_0",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537946748
+      },
+      {
+        "abi": "void *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_AUDIO_CODEC_BUFFER_1",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537949376
+      },
+      {
+        "abi": "const uint8_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_AUDIO_PATH_TABLE",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537345032
+      },
+      {
+        "abi": "void *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_AUDIO_PDM_BUFFER",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537952004
+      },
+      {
+        "abi": "void *const volatile *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_AUDIO_QUEUE_LINK",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 536887204
+      },
+      {
+        "abi": "const void *",
+        "category": "retained_callback_entry",
+        "macro": "OPEN_CFW_PT_AUDIO_SINGLE_CALLBACK",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 5830113
+      },
+      {
+        "abi": "const uint8_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_AUDIO_STATUS_BASE",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537346920
+      },
+      {
+        "abi": "const void *",
+        "category": "retained_callback_entry",
+        "macro": "OPEN_CFW_PT_AUDIO_STEREO_CALLBACK",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 5829861
+      },
+      {
+        "abi": "void *const volatile *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_AUDIO_THREAD_LINK",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 536887200
+      },
+      {
+        "abi": "const volatile uint32_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_BUZZER_ROUTE_WORD",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 536872740
+      },
+      {
+        "abi": "const void *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_CHARGER_DEVICE",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537333624
+      },
+      {
+        "abi": "const volatile uint32_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_CODEC_IDENTIFIER_WORD",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537346596
+      },
+      {
+        "abi": "void *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_BUFFER",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537344864
+      },
+      {
+        "abi": "void *const volatile *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_MUTEX_LINK",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537347304
+      },
+      {
+        "abi": "const volatile uint32_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_ACTIVE",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537347296
+      },
+      {
+        "abi": "const volatile uint32_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_MODE",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537347292
+      },
+      {
+        "abi": "const void *",
+        "category": "immutable_flash_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_PATH",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 7795992
+      },
+      {
+        "abi": "const volatile uint32_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_PRIMARY",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537347288
+      },
+      {
+        "abi": "const volatile uint8_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_POSTPROCESS_READY",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537349932
+      },
+      {
+        "abi": "void *const volatile *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_QUEUE_LINK",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537347300
+      },
+      {
+        "abi": "volatile uint32_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_STAGE_1_WORD",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 536872524
+      },
+      {
+        "abi": "volatile uint32_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_STAGE_2_FIRST_WORD",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 536872528
+      },
+      {
+        "abi": "volatile uint32_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_STAGE_2_SECOND_WORD",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537347272
+      },
+      {
+        "abi": "volatile uint32_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_STAGE_3_WORD",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 536872520
+      },
+      {
+        "abi": "const uint8_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_DISPLAY_STATE",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537349932
+      },
+      {
+        "abi": "uint32_t address constant",
+        "category": "external_xip_data",
+        "macro": "OPEN_CFW_PT_FONT_0_BASE",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 2148532224
+      },
+      {
+        "abi": "uint32_t address constant",
+        "category": "external_xip_data",
+        "macro": "OPEN_CFW_PT_FONT_1_BASE",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 2154823680
+      },
+      {
+        "abi": "uint32_t address constant",
+        "category": "external_xip_bound",
+        "macro": "OPEN_CFW_PT_FONT_XIP_END",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 2181038080
+      },
+      {
+        "abi": "uint32_t address constant",
+        "category": "external_xip_bound",
+        "macro": "OPEN_CFW_PT_FONT_XIP_START",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 2147483648
+      },
+      {
+        "abi": "const volatile uint32_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_STATE",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537347396
+      },
+      {
+        "abi": "const void *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_HARDWARE_IDENTIFIER_2_DEVICE",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537346152
+      },
+      {
+        "abi": "void *const volatile *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_INPUT_QUEUE_LINK",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 536887448
+      },
+      {
+        "abi": "void *const volatile *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_INPUT_THREAD_LINK",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 536887444
+      },
+      {
+        "abi": "void *const volatile *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_LENS_SYNC_EVENT_LINK",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537348880
+      },
+      {
+        "abi": "void *const volatile *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_LENS_SYNC_QUEUE_LINK",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537348556
+      },
+      {
+        "abi": "volatile uint32_t *",
+        "category": "peripheral_mmio",
+        "macro": "OPEN_CFW_PT_SYSTEM_RESET_CONTROL",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 3758157068
+      },
+      {
+        "abi": "const uint8_t *const volatile *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_TIME_CONFIGURATION_LINK",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 536884988
+      },
+      {
+        "abi": "const volatile uint32_t *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_TIME_FORMAT_WORD",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537343724
+      },
+      {
+        "abi": "const struct open_cfw_pt_uled_operations *const volatile *",
+        "category": "runtime_sram_data",
+        "macro": "OPEN_CFW_PT_ULED_OPERATIONS_LINK",
+        "ownership": "supported_retained_external_abi",
+        "runtime_address": 537347376
+      }
+    ],
+    "board_second_order_data_source_owned": 0,
+    "board_second_order_data_unique_addresses": 42,
+    "board_second_order_retained_boundaries_deliberately_supported": true,
+    "board_second_order_retained_callable_bindings": 27,
+    "board_second_order_retained_callable_unique_addresses": 25,
+    "board_second_order_retained_data_bindings": 43,
+    "board_second_order_source_callable_bindings": 32,
+    "board_second_order_source_local_callable_bindings": 12,
+    "board_second_order_source_overlay_callable_bindings": 20,
+    "board_second_order_source_overlay_callable_unique_addresses": 20,
+    "board_service_bindings": 83,
+    "board_source_complete": false,
+    "board_source_routed_service_bindings": 43,
+    "board_stock_layout_data_bindings": 53,
+    "board_stock_layout_data_deliberately_supported": true,
+    "board_stock_layout_data_immutable_flash_bindings": 17,
+    "board_stock_layout_data_runtime_sram_bindings": 36,
+    "board_stock_layout_data_software_gap": false,
+    "board_stock_layout_data_source_owned": false,
+    "board_top_level_retained_provider_bindings_remaining": 0,
+    "bound_commands": 66,
+    "cortex_m0plus_undefined_symbols": 0,
+    "duplicate_commands": 0,
+    "external_entry_callsites": [
+      {
+        "callsite": "0x00538716",
+        "target": "0x0056F4A0"
+      },
+      {
+        "callsite": "0x0053A218",
+        "target": "0x0056F4A0"
+      },
+      {
+        "callsite": "0x0053A356",
+        "target": "0x0056F92C"
+      }
+    ],
+    "handler_surface_complete": true,
+    "missing_commands": 0,
+    "platform_backend_contract_complete": true,
+    "platform_backend_production_bound": true,
+    "production_bootstrap_complete": true,
+    "production_bootstrap_reachable": true,
+    "production_dispatcher_address": 5709068,
+    "production_in_place_capacity_bytes": 35524,
+    "production_in_place_end_exclusive": 5719812,
+    "production_in_place_interval_end_exclusive": 5733436,
+    "production_in_place_interval_start": 5697912,
+    "production_in_place_linked_start": 5698720,
+    "production_in_place_loadable_bytes": 19916,
+    "production_ingress_sites": [
+      {
+        "authenticated_sha256": "267faa858eddf585c646efe4df6ce8542d4b7195fcf160f4e06aae2be5ed6027",
+        "authenticated_size": 4,
+        "evidence": "authenticated donor BL retained byte-for-byte",
+        "route": "stock_direct_call",
+        "runtime_address": 5474070,
+        "target_address": 5698720,
+        "target_function": "open_cfw_pt_protocol_legacy_entry"
+      },
+      {
+        "authenticated_sha256": "62465f14c927473c321cc2a74d6dd5053712946f5f33f80d10f20ea4840f67e3",
+        "authenticated_size": 4,
+        "evidence": "authenticated donor BL retained byte-for-byte",
+        "route": "source_uart_relocation",
+        "runtime_address": 5480984,
+        "target_address": 5698720,
+        "target_function": "open_cfw_pt_protocol_legacy_entry"
+      },
+      {
+        "authenticated_sha256": "420d937eec298e2ce5cd1e318f597363c60093ace0238a59a1c46a86a3b9d924",
+        "authenticated_size": 4,
+        "evidence": "authenticated donor BL retained byte-for-byte",
+        "route": "source_uart_relocation",
+        "runtime_address": 5481302,
+        "target_address": 5699884,
+        "target_function": "open_cfw_pt_protocol_legacy_postprocess"
+      }
+    ],
+    "production_placement_complete": true,
+    "production_ram_binding_remaining_bytes": 0,
+    "production_routed": true,
+    "production_text_placement_free_bytes": 4314,
+    "production_text_placement_shortfall_bytes": 15560,
+    "provider_adapters_complete": true,
+    "provider_callback_count": 58,
+    "provider_operation_count": 56,
+    "stock_abi_entry_complete": true,
+    "target_bss_bytes": 0,
+    "target_data_bytes": 0,
+    "target_loadable_bytes": 19874,
+    "target_relocatable_sha256": "bf4e41c86071ce90ef9a6531574a4937ed2eb4a34cca5e6a1020b7fb45f902df",
+    "target_relocatable_size": 125120,
+    "target_rodata_bytes": 1162,
+    "target_text_bytes": 18712,
+    "target_undefined_symbols": 0,
+    "translation_units": 14
+  }
+}

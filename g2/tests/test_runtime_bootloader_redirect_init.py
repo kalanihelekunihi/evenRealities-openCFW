@@ -36,10 +36,10 @@ OVERLAY_ADDRESS = 0x00434478
 FUNCTION_OFFSET = 664
 FUNCTION_ADDRESS = OVERLAY_ADDRESS + FUNCTION_OFFSET
 OVERLAY_SHA256 = (
-    "a27f7ba39fdfe6a7364d59577cfa387a0a601aedf773612d1cb1b77700c6538d"
+    "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314"
 )
 PROVIDER_SHA256 = (
-    "da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7"
+    "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
 )
 
 
@@ -186,9 +186,9 @@ class BootloaderRedirectInitTests(unittest.TestCase):
         self.assertEqual(patch["replacement_hex"][8:], "00bf" * 42)
 
     def test_relocated_closure_and_provider_are_pinned(self) -> None:
-        self.assertEqual(len(self.overlay), 10004)
+        self.assertEqual(len(self.overlay), 15240)
         self.assertEqual(sha256(self.overlay), OVERLAY_SHA256)
-        self.assertEqual(len(self.provider), 158604)
+        self.assertEqual(len(self.provider), 163840)
         self.assertEqual(sha256(self.provider), PROVIDER_SHA256)
         function = self.report["overlay"]["functions"][
             "open_cfw_bootloader_redirect_init"

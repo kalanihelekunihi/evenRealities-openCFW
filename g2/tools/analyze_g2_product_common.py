@@ -16,6 +16,8 @@ import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
+PT_LEAF_SOURCE = ROOT / "components/apollo_main/core_overlay/pt_protocol_board_leaf_candidates.c"
+PT_BACKEND_SOURCE = ROOT / "components/apollo_main/core_overlay/pt_protocol_board_backend.c"
 FM = ROOT / "tools/manifests/g2-product-common-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-product-common-closure.tsv"
 PINS = {FM: "d3067c597fdc26238887bcd146d6ee3888498b6039025745d15639c12c1c3dea", CL: "72d45d341d5c401912cb0ba951ed5082367aec2ba5dc50ef7c95540fed5c2ac8"}
@@ -234,6 +236,40 @@ def analyze(image=IMAGE):
     overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
     if any(x.get("path", "").replace("\\", "/").split("/")[-1].lower() == 'product_common.c' for x in overlay["sources"]):
         raise c.AuditError("object entered production overlay")
+    leaf = PT_LEAF_SOURCE.read_text(encoding="utf-8")
+    required_leaf_markers = (
+        "uint8_t open_cfw_pt_font_crc_validate(uint32_t base)",
+        "UINT32_C(0x80100000)",
+        "UINT32_C(0x80700000)",
+        "OPEN_CFW_PT_FONT_CHUNK_BYTES = 0x400",
+        "uint16_t crc = UINT16_C(0xFFFF)",
+        "OPEN_CFW_PT_FONT_PAYLOAD_OFFSET = 0x45",
+    )
+    if (any(marker not in leaf for marker in required_leaf_markers) or
+            "0x0058F209" in leaf or "OPEN_CFW_PT_FONT_CRC_VALIDATE" in leaf):
+        raise c.AuditError("source-owned font CRC validator contract changed")
+    backend = PT_BACKEND_SOURCE.read_text(encoding="utf-8")
+    route_symbols = (
+        "open_cfw_pt_board_font_crc_check_0",
+        "open_cfw_pt_board_font_crc_check_1",
+    )
+    provider = overlay.get("post_link_providers", {}).get("pt_protocol", {})
+    profiles = provider.get("profiles", {}) if isinstance(provider, dict) else {}
+    routed = (
+        all(backend.count(symbol) == 1 for symbol in route_symbols) and
+        set(profiles) == {"apple-clang", "linux-clang"} and
+        all(int(record.get("payload_size", 0)) > 0 and
+            isinstance(record.get("payload_sha256"), str) and
+            isinstance(record.get("interval_sha256"), str)
+            for record in profiles.values())
+    )
+    external_ingress = [site for site, target in BL_ENTRY
+                        if not PHYS[0] <= site < PHYS[1]]
+    ingress_replaced = bool(external_ingress) and all(
+        0x0056F178 <= site < 0x00577C3C for site in external_ingress)
+    production_routed = bool(
+        routed and ingress_replaced
+    )
     return {
         "schema_version": 1,
         "analysis_mode": "read-only zero-anchor linked-object closure",
@@ -241,7 +277,13 @@ def analyze(image=IMAGE):
         "surface": {"body_bytes": EXPECTED["body_bytes"], "direct_body_calls": EXPECTED["direct_body_calls"], "function_escapes": len(esc), "indirect_body_calls": len(ind), "internal_direct_body_calls": EXPECTED["internal_direct_body_calls"], "linked_functions": len(F), "outer_pool_bytes": EXPECTED["outer_pool_bytes"], "path_literal_references": EXPECTED["path_literal_references"], "physical_bytes": EXPECTED["physical_bytes"], "raw_path_referencing_functions": sum(1 for row in rows if int(row["path_reference_sites"]) > 0), "reachable_instructions": EXPECTED["reachable_instructions"]},
         "ingress": {"direct_b16_entry_sites": len(b16), "direct_bl_entry_sites": len(bl), "direct_bl_strict_interior_sites": len(bls), "direct_bw_entry_sites": len(bw), "stored_entry_pointer_words": len(stored)},
         "evidence": {"boundary_guards": True, "pointer_cells": ["0x%08X" % x for x in CELLS], "path_string_run_address": "0x%08X" % PATH_RUN, "tag_strings": len(TAGS)},
-        "production": {"production_routed": False},
+        "production": {
+            "external_stock_ingress_replaced": ingress_replaced,
+            "font_crc_source_routes": len(route_symbols) if routed else 0,
+            "production_routed": production_routed,
+            "source_validator": str(PT_LEAF_SOURCE.relative_to(ROOT)),
+            "stock_runtime_reachable": not production_routed,
+        },
     }
 
 

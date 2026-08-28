@@ -30,7 +30,7 @@ class ZeroAnchorClosureTests(unittest.TestCase):
         self.assertTrue(production["production_routed"])
         self.assertTrue(production["source_admitted"])
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertEqual(production["hardware_validation"], "deferred by project direction")
         self.assertEqual((production["source_functions"], production["compiled_text_bytes"], production["compiled_rodata_bytes"], production["alignment_bytes"], production["strict_relocations"]), (12, 9866, 704, 20, 179))
 
 

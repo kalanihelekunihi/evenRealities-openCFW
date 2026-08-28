@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * RTOS auto-reload catch-up loop matched to stock entry 0x0047E812.
  */

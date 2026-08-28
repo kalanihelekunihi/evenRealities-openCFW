@@ -1,5 +1,7 @@
 /*************************************************************************************************/
 /*
+ * SPDX-License-Identifier: Apache-2.0
+ *
  * Packetcraft Apache-2.0 dual-chip HCI platform behavior adapted to the
  * authenticated G2 control-block ABI.  Ambiq proprietary source is not used.
  */

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-routed clean-room ABI for the G2 Cordio WSF assert and trace
  * functions.  The Ambiq files are proprietary source-family oracles only.

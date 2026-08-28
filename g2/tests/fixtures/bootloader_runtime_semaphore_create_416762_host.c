@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 #include <stdint.h>
 static uintptr_t critical_value, backend_result, release_result;
 static uintptr_t binary_static_calls, binary_dynamic_calls, count_static_calls, count_dynamic_calls, release_calls, delete_calls;

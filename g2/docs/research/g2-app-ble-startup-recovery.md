@@ -112,7 +112,7 @@ object extent and purpose.
 
 ## Clean-room candidate coverage
 
-Four independently authored GPL-3.0-only files now represent all twelve
+Four independently authored MIT files now represent all twelve
 product bodies, totaling 3,192 of 3,192 product code bytes (100%).
 `app_ble_callbacks.c` covers subsystem initialization, DM/ATT/CCC event-copy
 callbacks, and delayed startup. `app_ble_startup.c` covers handler/runtime

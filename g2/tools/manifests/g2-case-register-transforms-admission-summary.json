@@ -1,0 +1,32 @@
+{
+  "admitted_row_count": 5,
+  "analysis_mode": "offline authenticated instruction/source/build audit; caller-supplied register views; no hardware, MMIO, flash, reset, signing, or deployment operation",
+  "component": "G2 charging-case register transforms",
+  "hardware_note": "software-only admission; directed hardware work is outside the current project phase",
+  "hardware_operations": [],
+  "hardware_validation": "deferred by project direction",
+  "integration": "isolated source candidate only; platform MMIO adapter and image routing remain open",
+  "metrics": {
+    "admitted_functions": 5,
+    "admitted_instruction_bytes": 96,
+    "target_object_bytes": 1972,
+    "target_object_sha256": "34459f9bd2437f1b25dc00935e0914f3f490c587bbc3a29c596d3af0fe7494be",
+    "unclassified_bytes_after": 16854,
+    "unclassified_bytes_before": 16950
+  },
+  "production_routed": false,
+  "schema_version": 1,
+  "source": {
+    "exports": [
+      "open_cfw_case_control_word0_replace_field22",
+      "open_cfw_case_control_word5_replace_slot",
+      "open_cfw_case_control_word5_set",
+      "open_cfw_case_flash_control_update",
+      "open_cfw_case_sign_extend_u16"
+    ],
+    "license": "MIT",
+    "path": "components/shared/case/runtime_case_register_transforms.c",
+    "sha256": "963150b4aa2d544136ae541d788aaea52489cb917aa2ae5540b2ad4641fefa03",
+    "target": "thumbv6m-none-eabi / Cortex-M0+ / Thumb"
+  }
+}

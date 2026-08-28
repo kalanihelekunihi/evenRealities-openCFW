@@ -1,0 +1,57 @@
+{
+  "analysis_mode": "offline source/license/Cortex-M0+ compile gate; no hardware, MMIO, reset, DFU, signing, or flash operation",
+  "component": "G2 touch isolated source admission",
+  "integration": "isolated adapters; not production-routed",
+  "license_policy": "MIT clean-room runtime adapters; Apache-2.0 CAT2 provider and notices retained; no EULA/private/application source admission.",
+  "metrics": {
+    "admission_counts": {
+      "cat2_apache": 9,
+      "runtime_mit": 4
+    },
+    "admission_digest": "2e9179bdae38cb2d825c46f048fb7a03b992b64d010d178f9a91518d69d71218",
+    "admitted_functions": 13,
+    "cat2_candidates_admitted": 9,
+    "cat2_candidates_before": 54,
+    "cat2_candidates_remaining": 45,
+    "mixed_eula_application_admitted": 0,
+    "semantic_gap_after": 210,
+    "semantic_gap_before": 223
+  },
+  "remaining": {
+    "application_startup": 99,
+    "capsense_cat2_mixed": 55,
+    "cat2_provider_candidates": 45,
+    "emeeprom_eula": 10,
+    "system_handoff": 1,
+    "total": 210
+  },
+  "row_count": 13,
+  "schema_version": 1,
+  "source_files": {
+    "cat2_c": {
+      "bytes": 5909,
+      "path": "components/shared/touch/runtime_touch_cat2_adapters.c",
+      "sha256": "0504c79d87d1c79d3a953699568c6b73e86c061696c60f490d8c83e9025cbb3d"
+    },
+    "cat2_h": {
+      "bytes": 4758,
+      "path": "components/shared/touch/runtime_touch_cat2_adapters.h",
+      "sha256": "e0adabbe58c6c12c0575b61fcd95a0af930a9abffbe45c68028a06b40e3362f2"
+    },
+    "runtime_c": {
+      "bytes": 1440,
+      "path": "components/shared/touch/runtime_touch_runtime_adapters.c",
+      "sha256": "6fa70ed97d9caf73e5b4967b37198480306f0670764338171aee15ced66c1880"
+    },
+    "runtime_h": {
+      "bytes": 863,
+      "path": "components/shared/touch/runtime_touch_runtime_adapters.h",
+      "sha256": "e193f3eba64d1db6232ee59a28ab438e6d8eba7ca7fea2c94a09b73ddc7188f2"
+    }
+  },
+  "target": "ARM Cortex-M0+ freestanding Thumb",
+  "target_objects": {
+    "runtime_touch_cat2_adapters.c": 3332,
+    "runtime_touch_runtime_adapters.c": 1384
+  }
+}

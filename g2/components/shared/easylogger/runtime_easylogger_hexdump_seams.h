@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-excluded source seams for the authenticated G2 EasyLogger
  * hexdump candidate.  The formatter implements only the three formats used

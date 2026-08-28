@@ -134,18 +134,12 @@ CALLER_WIDTH_SHA256 = (
     "930e913432acd02e3f0d8e36ee5576908"
 )
 CURRENT_RETAINED_CALLERS = (
-    0x004722BA, 0x0048EF8C, 0x0049FDFC, 0x004A1334,
-    0x004A2428, 0x004BBEAE, 0x004BC89C, 0x004BCCAC,
-    0x004BE2C4, 0x004BE7E2, 0x004C4890, 0x005323E2,
-    0x005326B0, 0x005386DE, 0x0057AF7C, 0x0057C0CA,
-    0x0057C156, 0x0057C508, 0x00588626, 0x0058885A,
-    0x00588948, 0x00588A36, 0x00588B20, 0x00588BF6,
-    0x00588CD2, 0x0059F5AE, 0x0059F940, 0x005B1BBE,
-    0x005B210E,
+    0x0048EF8C, 0x0049FDFC, 0x004A1334,
+    0x004A2428, 0x005386DE, 0x0057AF7C,
 )
 CURRENT_RETAINED_CALLER_WIDTH_SHA256 = (
-    "1bf91062c55a70c5b00765e831ae15dc"
-    "995902995e7b5ed44f0f559e9c78aec5"
+    "777f2eb894b61d9ac4a7176ba9845d55"
+    "2e4f270dc1c1fc79416720b636438863"
 )
 
 UPSTREAM_PINS = {
@@ -229,7 +223,7 @@ APPLE_TARGET_PIN = {
         "1daa36a1c4a3ee011cff337c74bfad06"
         "f7eb3bc36a9b75f2d67881ff9f6bb547"
     ),
-    "runtime_address": 0x007B_1E90,
+    "runtime_address": 0x007C_0858,
     "text_size": 514,
     "text_alignment": 4,
     "text_sha256": (
@@ -344,10 +338,10 @@ RODATA_SYMBOLS = (
 )
 SOURCE_OWNED_TARGETS = {
     "apple-clang": {
-        "open_cfw_easylogger_helpers_get_logger": 0x007B_040C,
+        "open_cfw_easylogger_helpers_get_logger": 0x007B_EDD4,
         "open_cfw_easylogger_output_lock": 0x007A_E6C4,
         "open_cfw_easylogger_output_unlock": 0x007A_E6E8,
-        "open_cfw_easylogger_strcpy": 0x007B_0518,
+        "open_cfw_easylogger_strcpy": 0x007B_EEE0,
         "open_cfw_easylogger_hexdump_fill_source": 0x007B_209C,
         "open_cfw_easylogger_hexdump_format_header_source": 0x007B_20F0,
         "open_cfw_easylogger_hexdump_format_hex_source": 0x007B_22EC,
@@ -597,7 +591,7 @@ SEAM_RODATA_PINS = {
 SEAM_LAYOUT_PINS = {
     "apple-clang": {
         "production_tail": 0x007B_1E8E,
-        "candidate_start": 0x007B_1E90,
+        "candidate_start": 0x007C_0858,
         "end": 0x007B_243E,
         "growth": 1_456,
         "runtime": {
@@ -1540,9 +1534,9 @@ class EasyLoggerHexdumpCandidateTests(unittest.TestCase):
                 stored.append((BASE + offset, value))
         self.assertEqual(stored, [])
 
-        # Twelve official callers are now inside source-replaced production
-        # spans.  The other 29 stock call instructions remain byte-owned and
-        # their widths remain 27x16 plus 2x8.  Current generated overlay source
+        # Thirty-five official callers are now inside source-replaced production
+        # spans.  The other six stock call instructions remain byte-owned and
+        # their widths remain 5x16 plus 1x8.  Current generated overlay source
         # has no hexdump call, so there is no generated zero-width caller.
         overlay = json.loads(OVERLAY_CONFIG.read_text(encoding="utf-8"))
         replaced = set()
@@ -1562,11 +1556,11 @@ class EasyLoggerHexdumpCandidateTests(unittest.TestCase):
             tuple(record[0] for record in retained_records),
             CURRENT_RETAINED_CALLERS,
         )
-        self.assertEqual((len(replaced), len(retained_records)), (12, 29))
+        self.assertEqual((len(replaced), len(retained_records)), (35, 6))
         self.assertEqual(
             (sum(record[2] == 16 for record in retained_records),
              sum(record[2] == 8 for record in retained_records)),
-            (27, 2),
+            (5, 1),
         )
         self.assertEqual(
             sha256(",".join(

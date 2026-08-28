@@ -1,0 +1,14 @@
+/* SPDX-License-Identifier: BSD-3-Clause */
+#ifndef OPEN_CFW_BOOTLOADER_MSPI_TRANSFER_INTERRUPT_4262E0_H
+#define OPEN_CFW_BOOTLOADER_MSPI_TRANSFER_INTERRUPT_4262E0_H
+#include <stdint.h>
+typedef struct open_cfw_transfer_state {uint32_t prefix,module,num_cq,num_hp,wait_timeout,inten,intstat;uint8_t device,sequence,big_endian;} open_cfw_transfer_state;
+typedef struct open_cfw_transfer_request {uint32_t device_address,num_bytes;uint8_t direction,continue_transfer,send_instruction,send_address,turnaround,write_latency,dcx,scrambling;} open_cfw_transfer_request;
+typedef struct open_cfw_transfer_trace {uint32_t fifo_read_calls,fifo_write_calls,status_check_calls,intclr_writes,saved_inten,restored_inten,fifo_status,status_status;} open_cfw_transfer_trace;
+#if defined(__arm__) || defined(__thumb__)
+void open_cfw_bootloader_mspi_blocking_transfer_4262e0(void);void open_cfw_bootloader_mspi_interrupt_enable_426450(void);void open_cfw_bootloader_mspi_interrupt_disable_426484(void);void open_cfw_bootloader_mspi_interrupt_status_get_4264ba(void);
+#else
+uint32_t open_cfw_bootloader_mspi_blocking_transfer_4262e0(open_cfw_transfer_state*,const open_cfw_transfer_request*,uint32_t,open_cfw_transfer_trace*);
+uint32_t open_cfw_bootloader_mspi_interrupt_enable_426450(open_cfw_transfer_state*,uint32_t);uint32_t open_cfw_bootloader_mspi_interrupt_disable_426484(open_cfw_transfer_state*,uint32_t);uint32_t open_cfw_bootloader_mspi_interrupt_status_get_4264ba(open_cfw_transfer_state*,uint32_t*,uint32_t);
+#endif
+#endif

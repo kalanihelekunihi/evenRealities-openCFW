@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded source replacement for the G2 2.2.6.10 runtime byte-span emitter
  * at 0x00482684. The exact stock boundary, five callers, indirect callback

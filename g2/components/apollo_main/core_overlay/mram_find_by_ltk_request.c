@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded Cordio security-database lookup matched to the stock
  * AppDbFindByLtkReq-style routine at 0x0047ADD4.

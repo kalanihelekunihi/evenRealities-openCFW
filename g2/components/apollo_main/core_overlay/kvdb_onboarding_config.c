@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* Clean-room reconstruction of service_kvdb_onboarding_config.c. */
 
 #include <stddef.h>

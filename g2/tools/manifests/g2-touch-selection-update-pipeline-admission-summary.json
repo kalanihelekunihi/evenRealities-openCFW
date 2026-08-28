@@ -1,0 +1,43 @@
+{
+  "admitted_row_count": 3,
+  "analysis_mode": "offline authenticated target control/data flow, host tokenized 32-bit pointer graph and Cortex-M0+ compile; no MMIO or hardware execution",
+  "component": "G2 touch selection/update source admission batch 13",
+  "exclusions": "resident-region literal tables, 0x1B6C/0x1C54/0x2638, MMIO, EULA bodies, system handoff and halt remain unadmitted",
+  "integration": "isolated source candidates only; not production-routed",
+  "metrics": {
+    "admitted_functions": 3,
+    "admitted_instruction_bytes": 558,
+    "concrete_source_or_implementation_gap_after": 63,
+    "input_concrete_gap": 66,
+    "input_gap_instruction_bytes": 6190,
+    "internally_closed_admissions": 3,
+    "mmio_admissions": 0,
+    "product_semantic_names_asserted": 0,
+    "resident_table_admissions": 0,
+    "residual_digest": "13d3822f7038c45be1d4d4533cbf30e98dcd469e3c2c214ae0b83cbd4b04ea6f",
+    "residual_gap_instruction_bytes": 5632,
+    "row_digest": "49bc17c358b41d4d4cb8d61532c5a9358de12a2cf97ff6884b7603982b53576a",
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_application_contracts_after": 51,
+    "unimplemented_application_contracts_before": 54
+  },
+  "remaining": {
+    "concrete_gap_instruction_bytes": 5632,
+    "concrete_source_or_implementation_functions": 63,
+    "note": "ten Em_EEPROM EULA rows, system handoff and halt remain external; resident 0xB41C loader and ambiguous 0x1B6C/0x1C54/0x2638 boundaries remain unimplemented",
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_clean_room_application_contracts": 51
+  },
+  "residual_row_count": 63,
+  "schema_version": 1,
+  "source": {
+    "dependencies": [
+      "components/shared/touch/runtime_touch_application_state_pipeline.c",
+      "components/shared/touch/runtime_touch_leaf_primitives.c"
+    ],
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_selection_update_pipeline.c",
+    "sha256": "cd5b4a16ad420daa286ffcdb791e9018b42c1531047f75579f73b91d84ae1ee6",
+    "target_closure_object_bytes": 9172
+  }
+}

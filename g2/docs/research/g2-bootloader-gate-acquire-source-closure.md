@@ -15,7 +15,7 @@ retained runtime-state query at `0x00418B56`; a value other than one returns
 returns `-1`, while zero is atomically advanced to one and returns zero.
 Host tests pin each short circuit, call order, return code, and store effect.
 
-`runtime_gate_acquire.c` is a 969-byte GPL-3.0-or-later clean-room
+`runtime_gate_acquire.c` is a 969-byte MIT clean-room
 implementation with SHA-256
 `f3177d38d79fe95c61c5462efaf9dff04a88a4e86b68a06fadf193b943012ab6`.
 Apple clang emits a 48-byte leaf at overlay offset 2,976/runtime

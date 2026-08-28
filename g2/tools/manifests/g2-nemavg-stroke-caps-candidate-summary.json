@@ -1,0 +1,82 @@
+{
+  "analysis_mode": "offline; no hardware, MMIO, signing, flashing, or publishing operation",
+  "candidate": {
+    "functions": 3,
+    "license": "MIT",
+    "production_routed": false,
+    "raw_instruction_bytes": 0,
+    "semantic_c": true,
+    "software_blocker": "exact stock ABI/context binding and reviewed dual-profile placement proof remain unavailable"
+  },
+  "hardware_operations": [],
+  "hardware_validation": "deferred by project direction",
+  "provider_evidence": {
+    "exact_stock_generating_archive_proven": false,
+    "family": "Think Silicon NemaVG 1.1.8 co-packaged candidate",
+    "license": "LicenseRef-Think-Silicon-NemaSDK-Permissive",
+    "public_archive_sha256": "109840f6e0bbeb8618a1a853966cdf68cf169620bcc4075ed7a1c86ab0d3286f",
+    "public_artifact_commit": "b853fded7e545f005727e13bf2ce83018c7e242d",
+    "public_dwarf_lines": [
+      1853,
+      1888,
+      1924
+    ],
+    "public_dwarf_symbols": [
+      "draw_start_cap",
+      "draw_end_cap",
+      "draw_caps"
+    ]
+  },
+  "schema_version": 1,
+  "status": "nemavg-stroke-caps-clean-room-candidate-qualified",
+  "stock": {
+    "function_body_bytes": 6598,
+    "functions": 3,
+    "physical_bytes": 6614,
+    "records": [
+      {
+        "body_bytes": 1664,
+        "body_sha256": "549fd3c4e21f1074d6f2b04309e72283b3f85b575f41bd31fc4718f7a63e3382",
+        "end_exclusive": "0x0051BF74",
+        "entry": "0x0051B8F0",
+        "physical_bytes": 1668,
+        "production_routed": false,
+        "public_archive_dwarf_declaration_line": 1853,
+        "source_status": "clean-room-candidate",
+        "style_context_offsets": [
+          "0x2e0"
+        ],
+        "symbol": "draw_start_cap"
+      },
+      {
+        "body_bytes": 1636,
+        "body_sha256": "d022571f745517bf7494d69d79e5c1ba934faf8dc65c0cb6f465d4f36fb81d56",
+        "end_exclusive": "0x0051C5E4",
+        "entry": "0x0051BF7C",
+        "physical_bytes": 1640,
+        "production_routed": false,
+        "public_archive_dwarf_declaration_line": 1888,
+        "source_status": "clean-room-candidate",
+        "style_context_offsets": [
+          "0x2e1"
+        ],
+        "symbol": "draw_end_cap"
+      },
+      {
+        "body_bytes": 3298,
+        "body_sha256": "7487038aa5bf05ee5c13296625a2ddf2c7ea592f5dc975661b7f6e0c7a3c1c27",
+        "end_exclusive": "0x0051D2D6",
+        "entry": "0x0051C5EC",
+        "physical_bytes": 3306,
+        "production_routed": false,
+        "public_archive_dwarf_declaration_line": 1924,
+        "source_status": "clean-room-candidate",
+        "style_context_offsets": [
+          "0x2e0",
+          "0x2e1"
+        ],
+        "symbol": "draw_caps"
+      }
+    ]
+  }
+}

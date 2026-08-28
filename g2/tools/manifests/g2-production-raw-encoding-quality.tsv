@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: MIT
+component	source	routed_source_bytes	directive_bytes	raw_instruction_transcription_bytes	semantic_literal_bytes	byte_directive_bytes	short_or_hword_directive_bytes	word_directive_bytes	source_sha256	source_ownership_disposition	remediation
+apollo_main	components/apollo_main/core_overlay/duration_delay.c	120	12	0	12	0	0	12	3fbe50caa058994609e59b8e17871168c35c763fd4f5b1f7bee68779a9bd19ce	legitimate_typed_literal_data	retain the three typed literal constants; all branches are symbolic source assembly
+apollo_bootloader	components/bootloader/core_overlay/runtime_thread_pointer_422874.c	8	4	0	4	0	0	4	ccfa9da0a839f5774882f1130900153f7c3836b43f05f878418f1f2d1cbd9915	legitimate_typed_literal_data	retain the typed address literal; surrounding instructions are mnemonic assembly

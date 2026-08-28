@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room behavioral reconstruction of the five-function G2
  * service_nvdb_buzzer.c object.  The persistent record is twelve bytes:

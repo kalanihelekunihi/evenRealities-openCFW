@@ -339,20 +339,20 @@ TARGET_CLOSURE_SHA256 = (
     "682363db5f9393d204f3ca9b8a620fa0"
     "1c399d012381724213bf380336d8aa24"
 )
-PRODUCTION_OVERLAY_SIZE = 167_426
+PRODUCTION_OVERLAY_SIZE = 429_058
 PRODUCTION_OVERLAY_SHA256 = (
-    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
 )
-PRODUCTION_COMPONENT_SIZE = 3_690_822
+PRODUCTION_COMPONENT_SIZE = 3_952_454
 PRODUCTION_COMPONENT_SHA256 = (
-    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
 )
 PRODUCTION_LEAVES = {
     "open_cfw_easylogger_helpers_get_logger": {
-        "offset": 114_920,
+        "offset": 174_768,
         "size": 10,
         "padding_before": 2,
-        "runtime_address": 0x007B_040C,
+        "runtime_address": 0x007B_EDD4,
         "sha256": (
             "5970df921f43a013c1198a9d9a5fc1c1"
             "67e7d6b104aaefa8135d94630c3aea5b"
@@ -364,10 +364,10 @@ PRODUCTION_LEAVES = {
         "relocations": [],
     },
     "open_cfw_easylogger_helpers_assert_failed": {
-        "offset": 114_932,
+        "offset": 174_780,
         "size": 168,
         "padding_before": 2,
-        "runtime_address": 0x007B_0418,
+        "runtime_address": 0x007B_EDE0,
         "sha256": (
             "2437cde26a848cd283fbf7d67862f63f"
             "1bdd3262f6db17dc19ffb36ba51fa3bc"
@@ -379,10 +379,10 @@ PRODUCTION_LEAVES = {
         "relocations": [],
     },
     "open_cfw_easylogger_get_fmt_enabled": {
-        "offset": 115_100,
+        "offset": 174_948,
         "size": 38,
         "padding_before": 0,
-        "runtime_address": 0x007B_04C0,
+        "runtime_address": 0x007B_EE88,
         "sha256": (
             "93a04bebddcaabf397058f30793491388"
             "8c49cca4135c5dfd4b1177ebe7a0624"
@@ -395,21 +395,21 @@ PRODUCTION_LEAVES = {
                 0x0E,
                 0x007B_04CE,
                 "open_cfw_easylogger_helpers_assert_failed",
-                0x007B_0418,
+                0x007B_EDE0,
             ),
             (
                 0x12,
                 0x007B_04D2,
                 "open_cfw_easylogger_helpers_get_logger",
-                0x007B_040C,
+                0x007B_EDD4,
             ),
         ],
     },
     "open_cfw_easylogger_get_fmt_used_and_enabled_u32": {
-        "offset": 115_140,
+        "offset": 174_988,
         "size": 22,
         "padding_before": 2,
-        "runtime_address": 0x007B_04E8,
+        "runtime_address": 0x007B_EEB0,
         "sha256": (
             "353077e72b5c3fdb3534472dcb345e48"
             "23670d971233e94f4b3df3afc90e871e"
@@ -422,15 +422,15 @@ PRODUCTION_LEAVES = {
                 0x0A,
                 0x007B_04F2,
                 "open_cfw_easylogger_get_fmt_enabled",
-                0x007B_04C0,
+                0x007B_EE88,
             ),
         ],
     },
     "open_cfw_easylogger_get_fmt_used_and_enabled_ptr": {
-        "offset": 115_164,
+        "offset": 175_012,
         "size": 22,
         "padding_before": 2,
-        "runtime_address": 0x007B_0500,
+        "runtime_address": 0x007B_EEC8,
         "sha256": (
             "6c5f1c48b7e8fb80e64c9db3e096a92"
             "3894770b482c17a7a9b78af9f4c3ed56f"
@@ -443,15 +443,15 @@ PRODUCTION_LEAVES = {
                 0x0A,
                 0x007B_050A,
                 "open_cfw_easylogger_get_fmt_enabled",
-                0x007B_04C0,
+                0x007B_EE88,
             ),
         ],
     },
     "open_cfw_easylogger_strcpy": {
-        "offset": 115_188,
+        "offset": 175_036,
         "size": 130,
         "padding_before": 2,
-        "runtime_address": 0x007B_0518,
+        "runtime_address": 0x007B_EEE0,
         "sha256": (
             "28596bd394c2cec04862dd33abf23595"
             "b937e6b1908f9b77a36e4160d0697ff1"
@@ -464,13 +464,13 @@ PRODUCTION_LEAVES = {
                 0x62,
                 0x007B_057A,
                 "open_cfw_easylogger_helpers_assert_failed",
-                0x007B_0418,
+                0x007B_EDE0,
             ),
             (
                 0x6C,
                 0x007B_0584,
                 "open_cfw_easylogger_helpers_assert_failed",
-                0x007B_0418,
+                0x007B_EDE0,
             ),
         ],
     },
@@ -1216,12 +1216,12 @@ class RuntimeEasyLoggerHelpersMainTests(unittest.TestCase):
                 )
             },
             {
-                "replaced_stock_function_bytes": 121_812,
-                "generated_patch_site_bytes": 121_634,
+                "replaced_stock_function_bytes": 409_246,
+                "generated_patch_site_bytes": 409_066,
                 "generated_wrapper_bytes": 32,
-                "source_owned_in_place_bytes": 182,
-                "source_owned_bytes": 165_622,
-                "opaque_base_bytes": 3_401_548,
+                "source_owned_in_place_bytes": 184,
+                "source_owned_bytes": 431_334,
+                "opaque_base_bytes": 3_111_914,
             },
         )
 

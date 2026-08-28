@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room BLE WSF transmit-ready flow control reconstructed from stock
  * 0x004D0B36...0x004D0CDB.

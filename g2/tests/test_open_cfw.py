@@ -61,6 +61,43 @@ class OpenCFWTests(unittest.TestCase):
         with self.assertRaisesRegex(open_cfw.OpenCFWError, "nested CRC-32"):
             open_cfw.validate_apollo_main(bytes(corrupted))
 
+    def test_manifest_must_decode_to_an_object(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            manifest = Path(temporary) / "manifest.json"
+            manifest.write_text("[]", encoding="utf-8")
+            with self.assertRaisesRegex(
+                open_cfw.OpenCFWError, "must contain a JSON object"
+            ):
+                open_cfw.load_manifest(manifest)
+
+    def test_provider_must_be_a_regular_nonsymlink_file(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            provider = root / "provider.bin"
+            target = root / "target.bin"
+            target.write_bytes(b"provider")
+            provider.symlink_to(target.name)
+            manifest = {
+                "components": [
+                    {
+                        "name": "test_component",
+                        "entry_id": 1,
+                        "provider": {
+                            "kind": "official_blob",
+                            "path": "provider.bin",
+                            "size": len(target.read_bytes()),
+                            "sha256": open_cfw.sha256_bytes(target.read_bytes()),
+                        },
+                    }
+                ]
+            }
+            with self.assertRaisesRegex(open_cfw.OpenCFWError, "symlink"):
+                open_cfw.read_providers(manifest, root)
+            provider.unlink()
+            provider.mkdir()
+            with self.assertRaisesRegex(open_cfw.OpenCFWError, "not a regular file"):
+                open_cfw.read_providers(manifest, root)
+
     def test_build_emits_addressed_plan_and_unresolved_codec(self) -> None:
         build_parent = OPENCFW_ROOT / "build"
         build_parent.mkdir(exist_ok=True)

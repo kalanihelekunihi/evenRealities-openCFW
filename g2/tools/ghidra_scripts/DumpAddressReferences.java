@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: MIT
 //
 // Emit every Ghidra reference to one or more reviewed addresses.
 // Usage:

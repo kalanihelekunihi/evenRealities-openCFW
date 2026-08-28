@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 #ifndef OPEN_CFW_RUNTIME_CASE_UART_UPDATE_H
 #define OPEN_CFW_RUNTIME_CASE_UART_UPDATE_H
 

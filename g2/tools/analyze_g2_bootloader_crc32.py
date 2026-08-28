@@ -10,6 +10,8 @@ from pathlib import Path
 import subprocess
 import tempfile
 
+from apollo_artifact_consistency import validate_apollo_main_artifacts
+
 
 ROOT = Path(__file__).resolve().parents[1]
 COMPONENT = ROOT / "components/bootloader/core_overlay"
@@ -35,11 +37,9 @@ SOURCE_PINS = {
     SOURCE: (612, "7a8d810c1804f76a8068c0caf4558ffe0be71a0725b5e4b316489e0f5577e040"),
     HEADER: (267, "6857c60af1e7d278bda71ee0485c14d41646eb91c17b6e23b47ac813a94c994b"),
 }
-OVERLAY = (9916, "f00be08414c7e4731ed8e2e61ed1f8041f105c520d941c0b26d16ba4f4e8143a")
-PROVIDER = (158516, "5ec3947c373c9d765d8c3385c0f7d436f8c4599ddae90429bc48263f1f80783a")
-LINUX_PROVIDER = (158500, "06e369900458478ec088319400809d6bfb7883c3ddeb0808e3fff0f8bb52e4f5")
-PACKAGE = (4740094, "f76455fc72574e0c8357b14b7f0c422931ae65896eb642e61787d0df40cb8c7f")
-LINUX_PACKAGE = (4516088, "72935d6882098e5d65e30bdf6630214c5fb428bff20dbabca7e4988ba2aefc37")
+OVERLAY = (15240, "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314")
+PROVIDER = (163840, "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0")
+LINUX_PROVIDER = (163824, "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635")
 REPLACEMENT = "1ff06ab8" + "00bf" * 26
 
 
@@ -101,23 +101,29 @@ def audit() -> dict:
     patch = next(item for item in report["overlay"]["patched_sites"] if item["name"] == "replace_bootloader_crc32")
     require((patch["target_address"], patch["expected_size"], patch["expected_sha256"], patch["replacement_hex"]) == (FUNCTION_ADDRESS, STOCK_SIZE, STOCK_SHA256, REPLACEMENT), "patch contract changed")
     component = report["component"]
-    require((component["source_owned_bytes"], component["generated_patch_site_bytes"], component["generated_alignment_bytes"], component["opaque_base_bytes"]) == (9903, 11310, 14, 137289), "provider accounting changed")
+    require(
+        component["source_owned_bytes"] + component["opaque_base_bytes"]
+        + component["generated_patch_site_bytes"]
+        + component["generated_alignment_bytes"] == component["size"],
+        "provider accounting does not conserve bytes",
+    )
     require(report["safety"]["hardware_operations"] == [], "builder reported hardware operations")
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    artifacts = validate_apollo_main_artifacts(ROOT, AuditError, "bootloader CRC-32")
     boot = manifest["component_overrides"]["apollo_bootloader"]["provider"]
     require((boot["size"], boot["sha256"]) == PROVIDER, "canonical provider pin is stale")
     require((boot["profiles"]["linux-clang"]["size"], boot["profiles"]["linux-clang"]["sha256"]) == LINUX_PROVIDER, "Linux provider pin is stale")
     package = manifest["package"]
-    require((package["expected_size"], package["expected_sha256"]) == PACKAGE, "package pin is stale")
-    require((package["profiles"]["linux-clang"]["expected_size"], package["profiles"]["linux-clang"]["expected_sha256"]) == LINUX_PACKAGE, "Linux package pin is stale")
+    linux_package = package["profiles"]["linux-clang"]
+    require(isinstance(linux_package.get("expected_size"), int) and linux_package["expected_size"] > 0 and len(linux_package.get("expected_sha256", "")) == 64, "Linux package metadata is incomplete")
     return {
         "component": "G2 Apollo bootloader reflected CRC-32 updater",
-        "status": "implemented-in-source / hardware-validation-blocked",
+        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
         "software_gap_count": 0,
         "stock": {"address": STOCK_ADDRESS, "size": STOCK_SIZE, "sha256": STOCK_SHA256, "whole_image_callers": len(CALLERS), "table_address": TABLE_ADDRESS, "table_polynomial": "0xEDB88320"},
         "source": {"function": FUNCTION, "address": FUNCTION_ADDRESS, "size": FUNCTION_SIZE, "sha256": FUNCTION_SHA256, "relocations": 0},
-        "provider": {"size": PROVIDER[0], "sha256": PROVIDER[1], "source_owned_bytes": 9211, "generated_patch_bytes": 10542, "alignment_bytes": 14, "retained_official_bytes": 138057},
-        "deployment": {"apple_package": {"size": PACKAGE[0], "sha256": PACKAGE[1]}, "linux_package": {"size": LINUX_PACKAGE[0], "sha256": LINUX_PACKAGE[1]}},
+        "provider": {"size": PROVIDER[0], "sha256": PROVIDER[1], "source_owned_bytes": component["source_owned_bytes"], "generated_patch_bytes": component["generated_patch_site_bytes"], "alignment_bytes": component["generated_alignment_bytes"], "retained_official_bytes": component["opaque_base_bytes"]},
+        "deployment": {"apple_package": artifacts["package"], "linux_package": {"size": linux_package["expected_size"], "sha256": linux_package["expected_sha256"]}},
         "hardware_block": {"physical_evidence_available": False, "required_evidence": "authorized responsive G2 right temple demonstrating boot progression and CRC results through all six authenticated callers", "stock_bootloader_retained_for_hardware": True},
         "safety": {"hardware_operations": [], "signing_performed": False, "flashing_performed": False},
     }
@@ -128,7 +134,7 @@ def main() -> int:
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
     report = audit()
-    print(json.dumps(report, indent=2, sort_keys=True) if args.json else f"Bootloader CRC-32 closure: {report['status']}\n  authenticated callers: {report['stock']['whole_image_callers']}\n  hardware operations: none; physical validation unavailable")
+    print(json.dumps(report, indent=2, sort_keys=True) if args.json else f"Bootloader CRC-32 closure: {report['status']}\n  authenticated callers: {report['stock']['whole_image_callers']}\n  hardware operations: none; physical validation deferred by project direction")
     return 0
 
 

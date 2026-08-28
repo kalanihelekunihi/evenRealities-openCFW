@@ -32,7 +32,7 @@ closure and remain part of the bootloader software gap.
 ## Clean-room C and semantic tests
 
 `components/bootloader/core_overlay/runtime_redirect_init.c` is the bounded
-GPL-3.0-or-later clean-room implementation. Its source identity is 2,295 bytes
+MIT clean-room implementation. Its source identity is 2,295 bytes
 and SHA-256
 `9df4daeea0af317c1556361a15f1625d5b1e9d00b3c72ae9b753de4608c3294f`.
 The 1,982-byte ABI header hashes to

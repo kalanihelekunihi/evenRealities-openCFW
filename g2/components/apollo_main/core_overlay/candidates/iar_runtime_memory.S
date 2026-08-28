@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room Thumb-2 replacements for the void-EABI memory providers in the
  * authenticated G2 2.2.6.10 Apollo-main image.  These are intentionally not

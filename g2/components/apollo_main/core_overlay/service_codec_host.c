@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-only */
+/* SPDX-License-Identifier: MIT */
 /* Clean-room reconstruction of platform/audio/service_codec_host.c. */
 #include <stddef.h>
 #include <stdint.h>

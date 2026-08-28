@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production clean-room source recovery of Apollo main's G2-specific EasyLogger
  * asynchronous submission wrapper at 0x0044AA80...0x0044AA97 in firmware

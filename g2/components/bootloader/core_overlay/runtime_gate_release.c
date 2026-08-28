@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* SPDX-License-Identifier: MIT */
 
 #ifndef OPEN_CFW_BOOTLOADER_CRITICAL_CONTEXT
 extern unsigned int open_cfw_bootloader_critical_context(void);

@@ -1,0 +1,11 @@
+kind	name	start	end	size	sha256	disposition	provider	license_status	evidence
+retained_data	control_prefix_literal_pool	0x004251a4	0x004251c0	28	-	authenticated_noncode	G2 bootloader image	firmware provenance	bounded literal pool between deinitialize and control
+function	am_hal_mspi_control	0x004251c0	0x004262e0	4384	d936cfa583f4d53150c86b30217e2e08ed0698793f13735e365f5a7d0cce0d48	exact_dual_profile_source	AmbiqSuite-compatible G2 bootloader body	BSD-3-Clause	all 40 stock request ordinals, validation, register programming, and stock bytes
+companion	apollo_main_am_hal_mspi_control	0x004c0f78	0x004c2098	4384	a9676ac0717977a1d4be1a730ba02d5dfefc3da780721c8b3ccd3543ca80bf7c	authenticated_same_function	G2 Apollo-main image	firmware provenance	independently mapped MSPI control body with the same complete extent
+comparison	identical_bytes	-	-	4297	-	exact_pairwise_identity	bootloader and Apollo-main bodies	binary evidence	4297 of 4384 bytes are identical
+comparison	address_coupled_bytes	-	-	87	-	typed_branch_or_literal_variants	bootloader and Apollo-main link placements	binary evidence	53 bounded difference runs; exact whole-body hashes remain pinned
+caller	bootloader_direct_callers	0x0041ff5a,0x00420036,0x00420ee8,0x00420f48	-	4	-	authenticated_callers	G2 bootloader MSPI clients	firmware provenance	all direct BL callers to 0x004251c0
+provider	am_hal_mspi_control	-	-	168473	5a91ab0c67bda4bd61c7d436b94b5a7c81693b948a331d282ae10e88cc5bf85f	vendored_upstream_source	AmbiqSuite 5.1.0 am_hal_mspi.c	BSD-3-Clause	complete maintained upstream translation unit
+adapter	stock_request_ordinal_translation	-	-	2930	f84c982da08e189d5c1c1207e18c70d7b65bb36717139ce99da3cbaabd240fc3	qualified_source_adapter	openCFW Apollo510 stock ABI adapter	BSD-3-Clause	38 mapped requests; stock-only 10/11 fail closed
+semantic_model	all_stock_request_ordinals	0	40	40	-	host_executable_complete_dispatch	research admission candidate	BSD-3-Clause	requests 0 through 39, low-byte aliases, validation, register/state effects, queue lifecycle, and injected subordinate failures
+hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project evidence gate	directed hardware testing is deferred by project direction; future register, XIP, timing, FIFO, interrupt, flash-bus, and cold-boot evidence remains required

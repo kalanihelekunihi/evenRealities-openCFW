@@ -1,0 +1,39 @@
+{
+  "admitted_row_count": 4,
+  "analysis_mode": "offline authenticated control/data flow, injected EULA provider callbacks, host tests and Cortex-M0+ compile; no MMIO or hardware execution",
+  "component": "G2 touch storage adapter source admission batch 15",
+  "exclusions": "all Em_EEPROM provider bodies, resident tables, ambiguous application ABIs, MMIO, system handoff and halt remain unadmitted",
+  "integration": "isolated source candidates only; not production-routed",
+  "metrics": {
+    "admitted_functions": 4,
+    "admitted_instruction_bytes": 158,
+    "concrete_source_or_implementation_gap_after": 56,
+    "input_concrete_gap": 60,
+    "input_gap_instruction_bytes": 5278,
+    "mmio_admissions": 0,
+    "product_semantic_names_asserted": 0,
+    "resident_table_admissions": 0,
+    "residual_digest": "07740f41e331853c1e4d9046940dff38ac38c47906e03c657b55c6e0ebe03e4f",
+    "residual_gap_instruction_bytes": 5120,
+    "row_digest": "a666155803290d0602c84bcf42b07f58a74cb7e45140c59a1b787e961e68e406",
+    "typed_eula_provider_admissions": 3,
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_application_contracts_after": 44,
+    "unimplemented_application_contracts_before": 48
+  },
+  "remaining": {
+    "concrete_gap_instruction_bytes": 5120,
+    "concrete_source_or_implementation_functions": 56,
+    "note": "ten Em_EEPROM EULA provider bodies, system handoff and halt remain external; resident 0xB41C/0xB4C4 loaders and 0x1B6C/0x1C54/0x2638 remain unimplemented",
+    "typed_external_or_unavailable_functions": 12,
+    "unimplemented_clean_room_application_contracts": 44
+  },
+  "residual_row_count": 56,
+  "schema_version": 1,
+  "source": {
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_storage_adapters.c",
+    "sha256": "8f5d4fd5f0c587e5af729f475b5c0f62e641ab8462cdbf3623601e572fb2785e",
+    "target_closure_object_bytes": 1580
+  }
+}

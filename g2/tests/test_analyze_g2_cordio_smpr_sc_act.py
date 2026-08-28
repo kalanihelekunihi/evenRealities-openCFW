@@ -43,7 +43,7 @@ class SmprScActTest(unittest.TestCase):
         self.assertEqual(production["compiled_leaf_bytes"], 1006)
         self.assertEqual(production["source_owned_bytes_added"], 1030)
         self.assertEqual(production["stock_bytes_replaced"], 1162)
-        self.assertIn("blocked by unavailable authorized G2/EM9305", production["hardware_validation"])
+        self.assertIn("deferred by project direction", production["hardware_validation"])
 
 
 if __name__ == "__main__":

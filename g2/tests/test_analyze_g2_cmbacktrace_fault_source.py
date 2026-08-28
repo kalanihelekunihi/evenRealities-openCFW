@@ -56,9 +56,13 @@ class CmBacktraceFaultSourceTests(unittest.TestCase):
         )
 
     def test_hardware_validation_is_explicitly_blocked(self) -> None:
-        self.assertEqual(self.report["status"], "implemented-in-source / hardware-validation-blocked")
+        self.assertEqual(self.report["status"], "implemented-in-source / hardware-validation-deferred-by-project-direction")
         self.assertFalse(self.report["production_registration"]["hardfault_vector_replaced"])
         self.assertTrue(self.report["production_registration"]["stock_path_retained"])
+        self.assertEqual(
+            self.report["hardware_block"]["qualification_status"],
+            "deferred by project direction",
+        )
         self.assertFalse(self.report["hardware_block"]["physical_evidence_available"])
         self.assertIn("fault-injection", self.report["hardware_block"]["required_evidence"])
 

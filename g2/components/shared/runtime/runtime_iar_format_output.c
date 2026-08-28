@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room IAR DLIB printf-core ABI adapter. The stock wrappers own their
  * buffer/stream states and final termination; this adapter supplies only the

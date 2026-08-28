@@ -60,7 +60,7 @@ OVERLAY_RUNTIME_BASE = 0x00794324
 PROFILE_PINS = {
     "apple-clang": {
         "offset": 124640,
-        "runtime": 0x007B2A04,
+        "runtime": 0x007C13CC,
         "patch_prefix": "23f321bb",
         "patch_sha256": "c2c44419ee24c41c8d0e8bc7f04689bb7f1c18b1f7ec3d7304e04c37579938a1",
     },

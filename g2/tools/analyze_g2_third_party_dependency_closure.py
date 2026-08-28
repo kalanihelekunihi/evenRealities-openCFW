@@ -834,7 +834,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or sensor_hub["identity"]["embedded_third_party_definitions"]
         or not sensor_hub["production"]["production_routed"]
         or sensor_hub["production"]["source_functions"] != 31
-        or sensor_hub["production"]["hardware_validation"] != "blocked_unavailable_physical_evidence"
+        or sensor_hub["production"]["hardware_validation"] != "deferred by project direction"
     ):
         raise ClosureError("Sensor Hub reusable/provider boundary changed")
     event_loop_provider = fw_event_loop["provider_boundary"]
@@ -1782,7 +1782,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
             "sensor_hub_embedded_third_party_definitions": 0,
             "sensor_hub_embedded_sensor_fusion_library": None,
             "sensor_hub_routed": True,
-            "sensor_hub_hardware_validation": "blocked_unavailable_physical_evidence",
+            "sensor_hub_hardware_validation": "deferred by project direction",
             "fw_event_loop_easylogger_calls": 80,
             "fw_event_loop_cmsis_freertos_calls": 20,
             "fw_event_loop_freertos_critical_port_calls": 4,

@@ -23,10 +23,10 @@ PACKAGE_SHA256 = "d77d88162f777a6c9889d1813323a836d1dc140fe7488009fe485ed787d8fe
 FLASH_PLAN_SIZE = 4_299_871
 FLASH_PLAN_SHA256 = "6820a0dc5b6be70fdca78144fdb39d56a9f898b7b0b832c8d76b18cef33608f6"
 EXPECTED_OVERLAY = {
-    "overlay_size": 428_950,
-    "overlay_sha256": "0a6b9fe566a2452cd9720c2db22eb43e530c31b76996d05541fa7f24ea9ee745",
-    "component_size": 3_952_346,
-    "component_sha256": "dc578472f06af2d499b9cb771fc185df4f739a05de558098088b56da9a5e4ce0",
+    "overlay_size": 429_058,
+    "overlay_sha256": "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+    "component_size": 3_952_454,
+    "component_sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
 }
 FUNCTIONS = (
     ("open_cfw_cordio_sec_hci_callback", 0x00536234, 0x00536324, "da8ebedf91cd554eae5a19134ec01fd47b991e76d0e8666365b8e662dca7f89c"),
@@ -136,7 +136,7 @@ def analyze() -> dict:
             "placed_regions": 6_193,
             "unresolved_regions": 2,
             "primitive_provider": "retained HCI/controller boundary",
-            "hardware_validation": "blocked_unavailable_authorized_physical_evidence",
+            "hardware_validation": "deferred by project direction",
         },
     }
 

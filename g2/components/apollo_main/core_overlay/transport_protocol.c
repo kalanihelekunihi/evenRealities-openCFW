@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room implementation of the G2 local 0xAA multipart transport.
  * Diagnostic-only EasyLogger calls are intentionally omitted.  The wire

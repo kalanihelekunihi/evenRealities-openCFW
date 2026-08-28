@@ -1,0 +1,13 @@
+kind	name	start	end	size	sha256	disposition	provider	license_status	evidence
+retained_data	device_config_literals	0x00424bd4	0x00424be4	16	94e6a862be3bc0ed1203d19a3a0273a063cd153d5048ee5914400fbe0dcd45e4	authenticated_literals	AmbiqSuite/CMSIS	BSD-3-Clause / Apache-2.0	handle magic, MSPI0 base, and pad masks
+function	am_hal_mspi_device_configure	0x00424be4	0x00425066	1154	baf84c7a01d10528a6367c12651b215274674bbfe206d9d26edddda387d85658	exact_dual_profile_candidate	AmbiqSuite 5.1.0 semantics with reviewed target adapter	BSD-3-Clause	handle/configured validation, module restrictions, clock lifecycle, 23 frequency classes, register configuration, state update, calls, literals, and stock-byte closure
+caller	boot_low_level_configure	0x0042032e	0x00420332	4	-	retained_caller	G2 bootloader MSPI setup	firmware provenance	direct BL
+caller	boot_low_level_reconfigure	0x0042033e	0x00420342	4	-	retained_caller	G2 bootloader MSPI setup	firmware provenance	direct BL
+caller	flash_mode_reconfigure	0x00420e36	0x00420e3a	4	-	source_owned_caller	G2 bootloader flash mode service	GPL-3.0-or-later	direct BL
+provider	clkgen_control	0x004249a0	0x00424a18	120	86e27ef6ed8e0e1ba9c0f2ba553376ae57fcf0154bba95f37d1eb4a6ef7c3dd0	source_owned_provider	AmbiqSuite-compatible clock control	BSD-3-Clause	calls at 0x424c36, 0x424ca4, and 0x424d8e
+provider	device_pad_configure	0x00424120	0x0042488e	1902	3b95c5af6c3c2140cc4e1522a1f284ae31825e4e35ae6c2427e0edba41774818	source_owned_provider	AmbiqSuite-compatible device-mode configuration	BSD-3-Clause	call at 0x425012
+provider	xip_off_delay	0x00424a18	0x00424a5a	66	cee39c273a2725778729f4b8182d878ba06d55ec3a614cf1b2289990b6a4ceac	source_owned_provider	AmbiqSuite-compatible XIP delay selector	BSD-3-Clause	call at 0x425026
+provider	clock_release	0x00422364	-	-	-	source_owned_route	G2 clock lifecycle service	GPL-3.0-or-later	calls at 0x424c66 and 0x424d16
+provider	clock_request	0x004222f0	-	-	-	source_owned_route	G2 clock lifecycle service	GPL-3.0-or-later	calls at 0x424c7a and 0x424d2a
+successor	am_hal_mspi_enable	0x00425066	0x004250f0	138	3e8eafec68e5f33ec128fd64c1386692323e9b175993c267d6a2bb7ec3ac155c	next_sequential_frontier	AmbiqSuite 5.1.0 am_hal_mspi_enable	BSD-3-Clause	not yet admitted
+hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project evidence gate	directed hardware testing is deferred by project direction; future clock switching, flash modes, pad routing, timing, XIP, DMA thresholds, and cold-boot evidence remains required

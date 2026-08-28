@@ -63,7 +63,7 @@ class AnalyzeG2PbServiceQuicklistTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 26)
         self.assertEqual(production["maximum_notification_items"], 20)
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "blocked")
+        self.assertEqual(production["hardware_validation"], "deferred by project direction")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "name": "liblc3_ltpf",
+  "target": "apollo_main",
+  "firmware_version": "2.2.6.10",
+  "run_base": 4423680,
+  "preamble_bytes": 32,
+  "alignment": 4,
+  "base": {
+    "path": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "size": 3523396,
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+  },
+  "compile_source": "components/apollo_main/liblc3_ltpf/liblc3_ltpf_overlay.c",
+  "sources": [
+    {
+      "path": "components/apollo_main/liblc3_ltpf/liblc3_ltpf_overlay.c",
+      "size": 2390,
+      "sha256": "d0e51e059a9e965053f271902e29ee19ae527a312bd37cb763f9b7360eb138f3",
+      "license": "Apache-2.0",
+      "role": "bounded adapter and runtime closure"
+    },
+    {
+      "path": "third_party/liblc3/src/ltpf.c",
+      "size": 31944,
+      "sha256": "810c6f862a649b9a27b33dc7c1e1c8f64a339b5a4aa6fef8027eafbcf8f7e80e",
+      "license": "Apache-2.0",
+      "upstream": "https://github.com/google/liblc3",
+      "upstream_commit": "96a3af0beb5487aca3b98a4b992a539a1f6d80d1",
+      "role": "maintained LTPF implementation"
+    },
+    {
+      "path": "third_party/liblc3/LICENSE",
+      "size": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "license": "Apache-2.0",
+      "role": "retained normative license"
+    }
+  ],
+  "include_dirs": [
+    "components/shared/liblc3/target_compat",
+    "third_party/liblc3/include",
+    "third_party/liblc3/src"
+  ],
+  "toolchain_flags": [
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-mfloat-abi=hard",
+    "-O2",
+    "-ffast-math",
+    "-fshort-enums",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-fomit-frame-pointer",
+    "-fno-jump-tables",
+    "-mno-unaligned-access",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "patch_site": {
+    "name": "lc3_encode_ltpf_analysis",
+    "runtime_address": 5837916,
+    "expected_hex": "a7f6acfd",
+    "target_function": "lc3_ltpf_analyse"
+  },
+  "profiles": {
+    "apple-clang": {
+      "reviewed_version_prefix": "Apple clang version 21.0.0",
+      "overlay": {
+        "size": 7576,
+        "sha256": "8261449f203ff0a33a0b6f22eee57076216491b2a03f6c359b98b98aa6ba0d24"
+      },
+      "component": {
+        "size": 3530972,
+        "sha256": "65a533067ed99edacbb307e2fcab45526dfdf1c8f9261adde78d9246ba1764be"
+      }
+    },
+    "linux-clang": {
+      "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+      "overlay": {
+        "size": 7596,
+        "sha256": "3ba3bb1a790b236ab82f59e965715e9730658058cfc20b7d6a7fb7ec8e75d8d3"
+      },
+      "component": {
+        "size": 3530992,
+        "sha256": "314b16197a2bd9910ada8429a926eb9f9e6288e81696b3a740e5f847604b3904"
+      }
+    }
+  }
+}

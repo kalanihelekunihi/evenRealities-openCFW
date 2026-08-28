@@ -13,8 +13,8 @@ from typing import Any
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 PROVENANCE = HERE / "PROVENANCE.json"
-EXPECTED_PROVENANCE_SIZE = 125493
-EXPECTED_PROVENANCE_SHA256 = "8a75937b09ed3f3fa8af8fa285b4bdf1774216379a42c1f9b5f61efedd39106b"
+EXPECTED_PROVENANCE_SIZE = 135337
+EXPECTED_PROVENANCE_SHA256 = "1ed69185777206c4776f6961906d0cfefdca433fd2009d2dd92f01148ba9ec83"
 EXPECTED_APPLE_OVERLAY_PLACEMENT_DELTA = 59848
 EXPECTED_RECORDS_SHA256 = "bb36791b9ae9a6cff412516db0b93911240fff8e8109d56136ca76173ac3a3e0"
 EXPECTED_TAG_OBJECT = "b3056c326da0e6cf702fd13ae2fe63225caa0801"
@@ -34,8 +34,8 @@ EXPECTED_IMAGE_SIZE = 3_523_396
 EXPECTED_IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 EXPECTED_RUNTIME_SHA256 = "ff42ff15a4574a6485b8b3e16de986679f059f2358d5d354b29f713760f43ea2"
 EXPECTED_SKIP_SOURCE_PATH = "components/shared/nanopb/runtime_nanopb_skip_varint.c"
-EXPECTED_SKIP_SOURCE_SIZE = 1925
-EXPECTED_SKIP_SOURCE_SHA256 = "89e53ebc01a2d28c4a94ac4a38313b8213788a23ed55bf767a9e8a5c6d961225"
+EXPECTED_SKIP_SOURCE_SIZE = 1961
+EXPECTED_SKIP_SOURCE_SHA256 = "b65dd96a72842689954ca941c057d34d0287e018a7173e51f357c68d6f9ef9ad"
 EXPECTED_SKIP_HEADER_PATH = "components/shared/nanopb/runtime_nanopb_skip_varint.h"
 EXPECTED_SKIP_HEADER_SIZE = 2401
 EXPECTED_SKIP_HEADER_SHA256 = "30a8aea087894af29396746a31bbebfc9195e12ee4d66e79b4b637828eeab103"
@@ -45,8 +45,8 @@ EXPECTED_SKIP_UPSTREAM_SHA256 = "4c9c2629d6c8bf7e8e986a8cb54413d39a804ddb0e848c6
 EXPECTED_CLOSE_SOURCE_PATH = (
     "components/shared/nanopb/runtime_nanopb_close_string_substream.c"
 )
-EXPECTED_CLOSE_SOURCE_SIZE = 2061
-EXPECTED_CLOSE_SOURCE_SHA256 = "736e7ec228f9282ba5b093fd482441e6e2017fff860d989dc3aadb2bdeff0fcb"
+EXPECTED_CLOSE_SOURCE_SIZE = 2097
+EXPECTED_CLOSE_SOURCE_SHA256 = "dc8152b0c1e97808730eafef655d568b7ece091559dc25dc2b02a4f62602cd94"
 EXPECTED_CLOSE_HEADER_PATH = (
     "components/shared/nanopb/runtime_nanopb_close_string_substream.h"
 )
@@ -58,8 +58,8 @@ EXPECTED_CLOSE_UPSTREAM_SHA256 = "527e5ca208a04366c0911baf793af7dc7045fd73014eef
 EXPECTED_FIXED32_SOURCE_PATH = (
     "components/shared/nanopb/runtime_nanopb_decode_fixed32.c"
 )
-EXPECTED_FIXED32_SOURCE_SIZE = 1975
-EXPECTED_FIXED32_SOURCE_SHA256 = "fefd8a899174fb9332c366df691dc2c8ec6f4792f3fd464b65dbb573ace8ee19"
+EXPECTED_FIXED32_SOURCE_SIZE = 2011
+EXPECTED_FIXED32_SOURCE_SHA256 = "1ebb54c28d7d8c29757e9852f4c79200466c5fbb5ceeb406a68244b484e4c8fe"
 EXPECTED_FIXED32_HEADER_PATH = (
     "components/shared/nanopb/runtime_nanopb_decode_fixed32.h"
 )
@@ -71,8 +71,8 @@ EXPECTED_FIXED32_UPSTREAM_SHA256 = "1952ee1f743334c82f206c910392f63b2e7fdd702cbd
 EXPECTED_FIXED64_SOURCE_PATH = (
     "components/shared/nanopb/runtime_nanopb_decode_fixed64.c"
 )
-EXPECTED_FIXED64_SOURCE_SIZE = 2083
-EXPECTED_FIXED64_SOURCE_SHA256 = "865fa587e7b783e83f24107e52bf3010053d0660b06dc0ac2e7f72bb8ad969bc"
+EXPECTED_FIXED64_SOURCE_SIZE = 2119
+EXPECTED_FIXED64_SOURCE_SHA256 = "a8b7fe49a1107080776bc0b753a77d55a861180c4090db270f4f9d04ef67cb63"
 EXPECTED_FIXED64_HEADER_PATH = (
     "components/shared/nanopb/runtime_nanopb_decode_fixed64.h"
 )
@@ -82,8 +82,8 @@ EXPECTED_FIXED64_UPSTREAM_START = 43854
 EXPECTED_FIXED64_UPSTREAM_END = 44688
 EXPECTED_FIXED64_UPSTREAM_SHA256 = "7f9da692a631280aa5b91a5d08440ac68f5060a64814997dde8dcbdb2f0b4974"
 EXPECTED_READ_SOURCE_PATH = "components/shared/nanopb/runtime_nanopb_read.c"
-EXPECTED_READ_SOURCE_SIZE = 2944
-EXPECTED_READ_SOURCE_SHA256 = "e4f99df8121553d4cb6d6c2f94aa7ef1b1445efd200cee4d872dd75894d24089"
+EXPECTED_READ_SOURCE_SIZE = 2980
+EXPECTED_READ_SOURCE_SHA256 = "b04d9b6d4576b28be4ac66bcdebc93dfb78cea54cc3781fe3839a5e09a451b69"
 EXPECTED_READ_HEADER_PATH = "components/shared/nanopb/runtime_nanopb_read.h"
 EXPECTED_READ_HEADER_SIZE = 2032
 EXPECTED_READ_HEADER_SHA256 = "22203e33b8cd9e07b94d24477ffb8a6f096a9ea8393c5723071b5f12c3ec4296"
@@ -91,11 +91,11 @@ EXPECTED_READ_UPSTREAM_START = 3745
 EXPECTED_READ_UPSTREAM_END = 4559
 EXPECTED_READ_UPSTREAM_SHA256 = "3b69f6f4eb56a87c3f8a7f9ac30ac7573328c560047cbc5b2295daceef18fb1c"
 EXPECTED_BUF_SOURCE_PATH = "components/shared/nanopb/runtime_nanopb_buf_read.c"
-EXPECTED_BUF_SOURCE_SIZE = 1685
-EXPECTED_BUF_SOURCE_SHA256 = "d7e464755bb4eff09207d33f1eb6b98ea49b43a91291001652d867f27bcd1bec"
+EXPECTED_BUF_SOURCE_SIZE = 1721
+EXPECTED_BUF_SOURCE_SHA256 = "a8434d4df71d811f0fe9d75dc0928a40fc9da0a651e843a7d2fc0d6e213b7c23"
 EXPECTED_READBYTE_SOURCE_PATH = "components/shared/nanopb/runtime_nanopb_readbyte.c"
-EXPECTED_READBYTE_SOURCE_SIZE = 2065
-EXPECTED_READBYTE_SOURCE_SHA256 = "f0cfa08ee31a67544f225830a023c38dd2c2e2903bfe6466ddcfc0a9dfb4bdbb"
+EXPECTED_READBYTE_SOURCE_SIZE = 2101
+EXPECTED_READBYTE_SOURCE_SHA256 = "c039d544f651b0a41d9afc201e125ba1ecdd0be1b90492f1e72c57787954258e"
 EXPECTED_PRIVATE_HEADER_PATH = (
     "components/shared/nanopb/runtime_nanopb_private_read_pair.h"
 )
@@ -111,9 +111,9 @@ EXPECTED_PRIVATE_AUDIT_SHA256 = (
 EXPECTED_ISTREAM_SOURCE_PATH = (
     "components/shared/nanopb/runtime_nanopb_istream_from_buffer.c"
 )
-EXPECTED_ISTREAM_SOURCE_SIZE = 1741
+EXPECTED_ISTREAM_SOURCE_SIZE = 1777
 EXPECTED_ISTREAM_SOURCE_SHA256 = (
-    "f56a603644c5e9cd85781f8d3be2c69e85e458c48fa7ecd8633d6c6a9dbda3d9"
+    "ec131ca190a2348fabe114bff89d5d1fe36a36c4dc7158519a4d4aa7965a6814"
 )
 EXPECTED_ISTREAM_HEADER_PATH = (
     "components/shared/nanopb/runtime_nanopb_istream_from_buffer.h"
@@ -137,9 +137,9 @@ EXPECTED_ISTREAM_UPSTREAM_SHA256 = (
 EXPECTED_SVARINT_SOURCE_PATH = (
     "components/shared/nanopb/runtime_nanopb_decode_svarint.c"
 )
-EXPECTED_SVARINT_SOURCE_SIZE = 1943
+EXPECTED_SVARINT_SOURCE_SIZE = 1979
 EXPECTED_SVARINT_SOURCE_SHA256 = (
-    "f361cafc8813257e16fafb9ee986c88c632eb2c7edc604dcb02e27ec85a7df4d"
+    "ba5af6eef7a0cac0a77dc20dc7cc89c4940f7bce696d8fa7ca462deb12132099"
 )
 EXPECTED_SVARINT_HEADER_PATH = (
     "components/shared/nanopb/runtime_nanopb_decode_svarint.h"
@@ -163,9 +163,9 @@ EXPECTED_SVARINT_UPSTREAM_SHA256 = (
 EXPECTED_VARINT32_SOURCE_PATH = (
     "components/shared/nanopb/runtime_nanopb_decode_varint32.c"
 )
-EXPECTED_VARINT32_SOURCE_SIZE = 3642
+EXPECTED_VARINT32_SOURCE_SIZE = 3678
 EXPECTED_VARINT32_SOURCE_SHA256 = (
-    "6938f17fc8faefdc1006cc05f9b7959e80fba771749ca0d9e67716e9ed0d2e04"
+    "5035bdafde91897edcc11a9422eda38380487e3f2c14dc31c7988012109cbdf1"
 )
 EXPECTED_VARINT32_HEADER_PATH = (
     "components/shared/nanopb/runtime_nanopb_decode_varint32.h"
@@ -184,9 +184,9 @@ EXPECTED_VARINT32_AUDIT_SHA256 = (
 EXPECTED_SKIP_STRING_SOURCE_PATH = (
     "components/shared/nanopb/runtime_nanopb_skip_string.c"
 )
-EXPECTED_SKIP_STRING_SOURCE_SIZE = 1688
+EXPECTED_SKIP_STRING_SOURCE_SIZE = 1724
 EXPECTED_SKIP_STRING_SOURCE_SHA256 = (
-    "b1f492b0358e51ce89db622e4af13a7f1eef7ffce9fc81fd954609cdcd934876"
+    "75b4c25bb2f3c7e5b7d72e1dc4802f7b85c35e9d03b2e883889ca5e187218de0"
 )
 EXPECTED_SKIP_STRING_HEADER_PATH = (
     "components/shared/nanopb/runtime_nanopb_skip_string.h"
@@ -203,7 +203,7 @@ EXPECTED_SKIP_STRING_AUDIT_SHA256 = (
     "e1465b8f8fc220907f811df2c354e91a2e1a4e7149edeb4c56ffa7d94246e2ee"
 )
 EXPECTED_SKIP_STRING_RECORD_SHA256 = (
-    "81d86cfab165d8cc7735fca11da10d9ca149c1d7cb5f1118ca0b652a896fa6bc"
+    "2b4c0cf8073da3b1927f02d81c27ca705dbca6e08bdb65d539996d450d5d588d"
 )
 EXPECTED_SKIP_STRING_UPSTREAM_START = 8362
 EXPECTED_SKIP_STRING_UPSTREAM_END = 8661
@@ -213,9 +213,9 @@ EXPECTED_SKIP_STRING_UPSTREAM_SHA256 = (
 EXPECTED_SKIP_FIELD_SOURCE_PATH = (
     "components/shared/nanopb/runtime_nanopb_skip_field.c"
 )
-EXPECTED_SKIP_FIELD_SOURCE_SIZE = 2417
+EXPECTED_SKIP_FIELD_SOURCE_SIZE = 2453
 EXPECTED_SKIP_FIELD_SOURCE_SHA256 = (
-    "b0fbb6fc99f0a47a40e53662393a43c88b01d29d4b4457910b9f6be8063e7353"
+    "099a16d1baf68a40b3750101a120ca67d3b143cbea8b722f4e00ac245bf4e616"
 )
 EXPECTED_SKIP_FIELD_HEADER_PATH = (
     "components/shared/nanopb/runtime_nanopb_skip_field.h"
@@ -232,7 +232,7 @@ EXPECTED_SKIP_FIELD_AUDIT_SHA256 = (
     "9358ffec368cf8a9d27947ed554083f08bbe03d6b2c619090f82827fe6b31b86"
 )
 EXPECTED_SKIP_FIELD_RECORD_SHA256 = (
-    "fd8bca683f9595aefb0c75fc10fcfaf8b1a4c1f06e27ee875b398677b85be49b"
+    "d676303c63770d115d5c65ab0db889ef215957c84eef6ba21002ea72fbd5b130"
 )
 EXPECTED_SKIP_FIELD_UPSTREAM_START = 9043
 EXPECTED_SKIP_FIELD_UPSTREAM_END = 9458
@@ -242,9 +242,9 @@ EXPECTED_SKIP_FIELD_UPSTREAM_SHA256 = (
 EXPECTED_READ_RAW_SOURCE_PATH = (
     "components/shared/nanopb/runtime_nanopb_read_raw_value.c"
 )
-EXPECTED_READ_RAW_SOURCE_SIZE = 2762
+EXPECTED_READ_RAW_SOURCE_SIZE = 2798
 EXPECTED_READ_RAW_SOURCE_SHA256 = (
-    "e8d9e5da342086614ef842849bba068daf72bbca52a24a24293f3ec7ac6e20f5"
+    "27fff92cdb99b4147c13490f385db598bdaf4f8ee1214ed30f1c8856e89b1a51"
 )
 EXPECTED_READ_RAW_HEADER_PATH = (
     "components/shared/nanopb/runtime_nanopb_read_raw_value.h"
@@ -261,7 +261,7 @@ EXPECTED_READ_RAW_AUDIT_SHA256 = (
     "e962d5bcd0bdaf2f9a75f25372901502b4e0fde04766d850ffddb844c987fd31"
 )
 EXPECTED_READ_RAW_RECORD_SHA256 = (
-    "54aebe0dfcf6b1678638ee2c23f8e0835773829f01ac8de18e5499d62de5724e"
+    "d8d4ddcb9a5b58065a4e3a3e4d94289662df9a6fc731644d6425f215d574c6db"
 )
 EXPECTED_READ_RAW_UPSTREAM_START = 9612
 EXPECTED_READ_RAW_UPSTREAM_END = 10656
@@ -271,9 +271,9 @@ EXPECTED_READ_RAW_UPSTREAM_SHA256 = (
 EXPECTED_SUBSTREAM_SOURCE_PATH = (
     "components/shared/nanopb/runtime_nanopb_make_string_substream.c"
 )
-EXPECTED_SUBSTREAM_SOURCE_SIZE = 2734
+EXPECTED_SUBSTREAM_SOURCE_SIZE = 2770
 EXPECTED_SUBSTREAM_SOURCE_SHA256 = (
-    "85f543a33de5b543ac29a5422983eaf7cd06af4e236a2453a3f658020ecba15b"
+    "bc42fd538d19b77a7f3ac964dc8acf3adb2d7f72a074a647f4b0d150c690c503"
 )
 EXPECTED_SUBSTREAM_HEADER_PATH = (
     "components/shared/nanopb/runtime_nanopb_make_string_substream.h"
@@ -283,16 +283,16 @@ EXPECTED_SUBSTREAM_HEADER_SHA256 = (
     "92e7c1eb37799fd09b4682a0ee45ba496d8c37f08ce7047a7b62bc1a73b8cda7"
 )
 EXPECTED_SUBSTREAM_RECORD_SHA256 = (
-    "d5335ad11e404d4057d7e6ea60c5e0f14feba1c358c7f7ea42d7e376d61d7901"
+    "0af64f7f6d1b4cea06f58620bcb8c7c46ad0c082347df2c65233ccf6ac68c886"
 )
 EXPECTED_BOOL_RECORD_SHA256 = (
-    "f853425c92c2699a077acbba9703e3298a11a002780620fb12db2aa2206d5d80"
+    "0a3309657074e40bf87d5f942787ae8091cd16fe12e0d433a8faf6dbffb77763"
 )
 EXPECTED_BOOL_FILES = (
     (
         "components/shared/nanopb/runtime_nanopb_decode_bool.c",
-        1592,
-        "ac020d4746af6c6e68dbf10eb796475f3e39fbc63e253fa4320a265f508ca286",
+        1628,
+        "f29a7c01b7214e607d77de36f095e1bfa139a61d205d9656a4669980d48ba8fc",
     ),
     (
         "components/shared/nanopb/runtime_nanopb_decode_bool.h",
@@ -301,8 +301,8 @@ EXPECTED_BOOL_FILES = (
     ),
     (
         "components/shared/nanopb/runtime_nanopb_dec_bool.c",
-        1508,
-        "8f2c510bba9eb1fdec823b0855fb17ee08aad39bae6e863369a9877cdb700674",
+        1544,
+        "5bc559eb988721eec380fde0e82863e61c9cfe99f4d03c4a528892c419d4dacf",
     ),
     (
         "components/shared/nanopb/runtime_nanopb_dec_bool.h",
@@ -316,13 +316,13 @@ EXPECTED_BOOL_FILES = (
     ),
 )
 EXPECTED_DEC_VARINT_RECORD_SHA256 = (
-    "ecf86e436171934ee083b7907ed1ba2d847758ec13cf7c365713caf8072d4474"
+    "6fdc5f8d68034bb0b6f7e548ef252957ac049c2c66434341b3f3abae3c3560ae"
 )
 EXPECTED_DEC_VARINT_FILES = (
     (
         "components/shared/nanopb/runtime_nanopb_dec_varint.c",
-        4579,
-        "e5638a305dde899b62aa7965015eece645cd2e892fa37c31430ee84e02886092",
+        4615,
+        "92efa4f3a51c2d6d56b4d747f3e2ded486c6a9847833fa36bb815be41fbe685e",
     ),
     (
         "components/shared/nanopb/runtime_nanopb_dec_varint.h",
@@ -336,13 +336,13 @@ EXPECTED_DEC_VARINT_FILES = (
     ),
 )
 EXPECTED_DEC_BYTES_RECORD_SHA256 = (
-    "49a34c4ebea651de86c2c593e0ffb50c78b4ee5ea57b013a8b54fe19ed7b1ae0"
+    "cd3a288c16ad6634534c36e5fb0381438c6f4e6fe38fa52c4102766c602ca270"
 )
 EXPECTED_DEC_BYTES_FILES = (
     (
         "components/shared/nanopb/runtime_nanopb_dec_bytes.c",
-        3163,
-        "16156212768637a22587c72d3aec916e1b011c4deae4974c7cb73417e3d57ddc",
+        3199,
+        "d28caeb539886ab5662d20e3ee88275ab9a739588832b4d090f8506f162257cb",
     ),
     (
         "components/shared/nanopb/runtime_nanopb_dec_bytes.h",
@@ -356,13 +356,13 @@ EXPECTED_DEC_BYTES_FILES = (
     ),
 )
 EXPECTED_DEC_STRING_RECORD_SHA256 = (
-    "6fed6b83205bacefd2f29ec16abfe303d56aff36f4935b32e711385fdfe83811"
+    "4669b70e8d6d6030a2c6ac1791ed53d8ac797fb788e55a4bae41bcdadcf944c3"
 )
 EXPECTED_DEC_STRING_FILES = (
     (
         "components/shared/nanopb/runtime_nanopb_dec_string.c",
-        3110,
-        "6b023235be31a1917f1a3466e5b5ad1ed3294f91dc4fb3764f411b5c0278d20c",
+        3146,
+        "535dad64e4b891283b7657f39c0f39bc9633ae5bde3abd98cbefde3e06b2d979",
     ),
     (
         "components/shared/nanopb/runtime_nanopb_dec_string.h",
@@ -376,22 +376,22 @@ EXPECTED_DEC_STRING_FILES = (
     ),
 )
 EXPECTED_DEC_SUBMESSAGE_RECORD_SHA256 = (
-    "d2a7b0e2671f9111d48f27354ec29464df293b71563eb6a03d9692bb339e2fb5"
+    "5dfe68b2cb332e531776aaf8e15c528ff8e7cb9a7b7817b939a1fd3d73a0d78b"
 )
 EXPECTED_DEC_SUBMESSAGE_FILES = (
-    ("components/shared/nanopb/runtime_nanopb_dec_submessage.c", 3010,
-     "afcc411be858e82fff816b2354cae4698069e1ca3d277022f6ef4d64a00a2d87"),
+    ("components/shared/nanopb/runtime_nanopb_dec_submessage.c", 3506,
+     "0ab36b1c2e114e877ca9c95999b659d5c0cc3334a90de922e78b66c6dd53f403"),
     ("components/shared/nanopb/runtime_nanopb_dec_submessage.h", 1736,
      "4ab90681e293268fd0ad3798b3e4902fdb942bd59394ea48d374c409b9583234"),
     ("docs/research/nanopb-dec-submessage-source-audit.md", 4113,
      "7c3644bf04f4d89ac0984227d41cb42c2b67962fd045629cc364b19b023083bf"),
 )
 EXPECTED_DECODE_INNER_RECORD_SHA256 = (
-    "5df09327cd306a93122248bf63623abf3156bd3df2f168eb8e10e8e38d8920b8"
+    "b64639cae11364824413acb6bd11fe6b25117b10f6b5191fc8811600ffdcb2e8"
 )
 EXPECTED_DECODE_INNER_FILES = (
-    ("components/shared/nanopb/runtime_nanopb_decode_inner.c", 7049,
-     "791c5e45b5f3cf53bcb2f7a0bb8f2877dc112bd4c08c0c4603acca2da0d8f1b1"),
+    ("components/shared/nanopb/runtime_nanopb_decode_inner.c", 7545,
+     "db0961729ef4be2375d35e0e71909aebd58292557a3f2a22e02fba139ec01d19"),
     ("components/shared/nanopb/runtime_nanopb_decode_inner.h", 2308,
      "9058eb4bdabefcff3c1e79edbfbf6fe0e2111b2d8f78fcef3599d7a9ff7768d6"),
     ("docs/research/nanopb-decode-inner-source-audit.md", 4107,
@@ -400,11 +400,11 @@ EXPECTED_DECODE_INNER_FILES = (
      "2f1610679f1fc7d551c046b43caab4db92b73bdc3c356c0bc62fcd749f442534"),
 )
 EXPECTED_DECODE_TAG_RECORD_SHA256 = (
-    "2027a362529b8998dde81c5a9036085fa87d57a0dce61a5b4a8a89d0d8b98698"
+    "8f4e46339255813e90ac733215b32048ff0acec25945ed3f4d51ba029cf3084c"
 )
 EXPECTED_DECODE_TAG_FILES = (
-    ("components/shared/nanopb/runtime_nanopb_decode_tag.c", 1223,
-     "4975c11d7435c31fa236063e0b3304b5c425726deb660343fd9304c0ae91b20d"),
+    ("components/shared/nanopb/runtime_nanopb_decode_tag.c", 1719,
+     "d2a93f5832972a35070861290fd0e4641854d7317a2b4a6b835e9f077905909c"),
     ("components/shared/nanopb/runtime_nanopb_decode_tag.h", 1080,
      "95f5f45c357410df5a0a65ca56139107f86fe13f389b832da7708d743dcb1f3c"),
     ("docs/research/nanopb-decode-tag-source-audit.md", 2575,
@@ -413,20 +413,20 @@ EXPECTED_DECODE_TAG_FILES = (
      "d89e04abf3698c159689e333715c6374328a9d4cf41a3b04aa0eb0034d8be91e"),
 )
 EXPECTED_ITERATOR_FILES = (
-    ("components/shared/nanopb/runtime_nanopb_iterator_cluster.c", 13395,
-     "edcff9480ae181a22aba9eb28641257fe62fb9652c1268cd3ef1658e5a3690eb"),
+    ("components/shared/nanopb/runtime_nanopb_iterator_cluster.c", 14025,
+     "825238916fc945c521c2f1bce8042c7725c42b82c92b08271dbba529991fa06e"),
     ("components/shared/nanopb/runtime_nanopb_iterator_cluster.h", 2995,
      "f9664d9eb409a731dbf1a7c664ee91f10b58b3b0f818844eab5f77fbaac8f0b2"),
 )
 EXPECTED_ITERATOR_RECORD_SHA256 = (
-    "d1b5ddf81b549a4751a37d854866f5d08363ed5a3f2ce33923551507a767ec3e"
+    "18644bb902109e0072808d971d3055c19445e2071262d813ac66e3b48f911d19"
 )
 EXPECTED_DEFAULTS_RECORD_SHA256 = (
-    "fb5b0ee919aa415be75a78202552f1d9b6328c968a5ad012363ee9e2730466d2"
+    "1a2d094d5a0ea69c91b91c27af2b869905ce77b74ea612b11f18e5fb07d70859"
 )
 EXPECTED_DEFAULTS_FILES = (
-    ("components/shared/nanopb/runtime_nanopb_defaults_pair.c", 6284,
-     "76dc1344eb1187f8631e935613246724287c6b1e917efd795dabe17ec5d84491"),
+    ("components/shared/nanopb/runtime_nanopb_defaults_pair.c", 6894,
+     "fd5f03e33984a341d532f5eab0db952b3a5c11300a33851b53e33beb192eaaf4"),
     ("components/shared/nanopb/runtime_nanopb_defaults_pair.h", 867,
      "fd49a5df94ff89c5c0032f72c304f5efd4ec0bf4ecd5908742c6ef0810e51ab9"),
     ("docs/research/nanopb-field-default-source-audit.md", 4891,
@@ -439,11 +439,11 @@ EXPECTED_DEFAULTS_FILES = (
      "b2b497057181f108499ad625d4c292fc80856c075363ee90b7b4c5f1031de1ad"),
 )
 EXPECTED_DISPATCH_RECORD_SHA256 = (
-    "0b8d428a72cd0a117507991661e7db74147d101e2276db3a5947e27da1f78ce6"
+    "8cf6820724d05134ba4c682323242fc2f0d82583f6dc6ff027145d8cb2937e5c"
 )
 EXPECTED_DISPATCH_FILES = (
-    ("components/shared/nanopb/runtime_nanopb_dispatch_extension.c", 3804,
-     "b4a6620fdc79fdbb3b3891166d6248176b396cf18b7157cd3d300d66ee15de96"),
+    ("components/shared/nanopb/runtime_nanopb_dispatch_extension.c", 4499,
+     "610c8d8e64f87f67aeb9bd175800f3b43661a2bbe9f8d557aa76cc5b9e11ee67"),
     ("components/shared/nanopb/runtime_nanopb_dispatch_extension.h", 1560,
      "f6918d0d89b223e9ad33601de800931a73a0c9ad5ac66177ea83c435441c2ec8"),
     ("docs/research/nanopb-dispatch-extension-source-audit.md", 5498,
@@ -452,11 +452,11 @@ EXPECTED_DISPATCH_FILES = (
      "919bdfe79d539ba96543d7f0d51b722a22224fb4c8e0ad3afeae3e6b159652eb"),
 )
 EXPECTED_FIELD_DECODER_RECORD_SHA256 = (
-    "752a172f9b1be9b5aaa73a246b275a240c4e1312043eb7db58ea7083b047ac6a"
+    "f8fdc02fa9b67f231dc13ef58a64d8fdab464e293cf3ffac312ca7df49a047b4"
 )
 EXPECTED_FIELD_DECODER_FILES = (
-    ("components/shared/nanopb/runtime_nanopb_field_decoder_cluster.c", 14057,
-     "6c34245f6d3c305499ffb6be2bae69508fe6c6f4c4b79e8306d3b998f84c9901"),
+    ("components/shared/nanopb/runtime_nanopb_field_decoder_cluster.c", 14752,
+     "f22074cfc9c5a8ecea62c059d747414c391e7822c5868bbed08df3fa60197326"),
     ("components/shared/nanopb/runtime_nanopb_field_decoder_cluster.h", 888,
      "812560e152e879f3181bcb20a2b65b0a6c81673aa4bebe46ff3bb6c99de1a8ac"),
     ("tests/fixtures/runtime_nanopb_field_decoder_cluster_host.c", 9211,
@@ -559,8 +559,7 @@ def verify_istream_provenance(selection: dict[str, Any]) -> None:
             "stock_span": "[0x0048F49C,0x0048F4B8)",
             "stock_size": 28,
             "stock_sha256": (
-                "852314bb8f86dcbd550deb0f51bc285b"
-                "662e39c1b4fae66690c44a7bf4f7a674"
+                "852314bb8f86dcbd550deb0f51bc285b662e39c1b4fae66690c44a7bf4f7a674"
             ),
             "canonical_callback_identity": "0x0048F3A5",
             "manifest_regions": {
@@ -612,32 +611,26 @@ def verify_istream_provenance(selection: dict[str, Any]) -> None:
                 "size": 20, "alignment": 4, "offset": 184744,
                 "runtime_address": "0x007C14CC",
                 "unrelocated_sha256": (
-                    "d106ce1009ddcbd4d39a7c56edbcd51f"
-                    "50d4cfa6768f78d224ea988aa9a416d7"
+                    "d106ce1009ddcbd4d39a7c56edbcd51f50d4cfa6768f78d224ea988aa9a416d7"
                 ),
                 "relocated_sha256": (
-                    "af3357e8178ab650d5476d0ad0fbfee0"
-                    "b44cdb288d9251da909b3ba7a1de92c4"
+                    "af3357e8178ab650d5476d0ad0fbfee0b44cdb288d9251da909b3ba7a1de92c4"
                 ),
                 "entry_patch_sha256": (
-                    "e2e120080f18fdd443e08a5def120575"
-                    "a2eae21139a5276f3f8fbb53e1aea6dd"
+                    "e2e120080f18fdd443e08a5def120575a2eae21139a5276f3f8fbb53e1aea6dd"
                 ),
             },
             "linux-clang": {
                 "size": 22, "alignment": 4, "offset": 126720,
                 "runtime_address": "0x007B3224",
                 "unrelocated_sha256": (
-                    "6c23e37c9468d866db2e2cb6bf0ce8e"
-                    "103fb34df1078e740b4b8d5d799c257ff"
+                    "6c23e37c9468d866db2e2cb6bf0ce8e103fb34df1078e740b4b8d5d799c257ff"
                 ),
                 "relocated_sha256": (
-                    "59438f30232883560f65ad4e58ff97c0"
-                    "5dcdffdb6287fffcb7c1b79487df436d"
+                    "59438f30232883560f65ad4e58ff97c05dcdffdb6287fffcb7c1b79487df436d"
                 ),
                 "entry_patch_sha256": (
-                    "902daf1332ace8eae1d3f71e324ddbc0"
-                    "3ec2542d93530fa876f24228d40c86ed"
+                    "902daf1332ace8eae1d3f71e324ddbc03ec2542d93530fa876f24228d40c86ed"
                 ),
             },
         },
@@ -678,8 +671,7 @@ def verify_svarint_provenance(selection: dict[str, Any]) -> None:
             "stock_span": "[0x00490150,0x00490190)",
             "stock_size": 64,
             "stock_sha256": (
-                "80b24be422cf924f3ae1b79669312535d"
-                "c0d5a56dd88be8a6b9e4ee5ff064048"
+                "80b24be422cf924f3ae1b79669312535dc0d5a56dd88be8a6b9e4ee5ff064048"
             ),
             "source_dependency": "open_cfw_nanopb_decode_varint",
             "manifest_regions": {
@@ -722,24 +714,20 @@ def verify_svarint_provenance(selection: dict[str, Any]) -> None:
                 "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
                 "object_size": 972,
                 "object_sha256": (
-                    "ac61ef30926a714ee4338414dcdc0de3"
-                    "04d50b866f69a3f7c625b12c5d5a8435"
+                    "ac61ef30926a714ee4338414dcdc0de304d50b866f69a3f7c625b12c5d5a8435"
                 ),
                 "size": 54,
                 "alignment": 4,
                 "offset": 184764,
                 "runtime_address": "0x007C14E0",
                 "unrelocated_sha256": (
-                    "19e103f83ab8879d36eb1b0513bf5416"
-                    "01e40bc82e69e0dc252308c0646d1286"
+                    "19e103f83ab8879d36eb1b0513bf541601e40bc82e69e0dc252308c0646d1286"
                 ),
                 "relocated_sha256": (
-                    "1b181a82adbbb72dc6fc09b1b70dd48f"
-                    "4c0eefdf25a8c4e71701710cb12dae3f"
+                    "1b181a82adbbb72dc6fc09b1b70dd48f4c0eefdf25a8c4e71701710cb12dae3f"
                 ),
                 "entry_patch_sha256": (
-                    "e8c5601b86e9a38362fb292b0a8ba702"
-                    "50d2ccc3094d0c8c117b1c33f5bf11cc"
+                    "e8c5601b86e9a38362fb292b0a8ba70250d2ccc3094d0c8c117b1c33f5bf11cc"
                 ),
             },
             "linux-clang": {
@@ -749,24 +737,20 @@ def verify_svarint_provenance(selection: dict[str, Any]) -> None:
                 ),
                 "object_size": 968,
                 "object_sha256": (
-                    "866820ef347453a3cbf2feed221eeab0"
-                    "b571a9b79b6988cc17d2861b1aeaced5"
+                    "866820ef347453a3cbf2feed221eeab0b571a9b79b6988cc17d2861b1aeaced5"
                 ),
                 "size": 50,
                 "alignment": 4,
                 "offset": 186496,
                 "runtime_address": "0x007C1BA4",
                 "unrelocated_sha256": (
-                    "3617ea95d4a2cbabf3a1abb375e57232"
-                    "3fffcebfa68cb4e19874cb4a831d9662"
+                    "3617ea95d4a2cbabf3a1abb375e572323fffcebfa68cb4e19874cb4a831d9662"
                 ),
                 "relocated_sha256": (
-                    "63e4707f5fd537094855d38f6b4df857"
-                    "8b77644c131e180db2e682d32fbc1fab"
+                    "63e4707f5fd537094855d38f6b4df8578b77644c131e180db2e682d32fbc1fab"
                 ),
                 "entry_patch_sha256": (
-                    "f8b98a0113ee5658769fd2310f0bc570"
-                    "196efffc5a8e4892b671cd4e2d756182"
+                    "f8b98a0113ee5658769fd2310f0bc570196efffc5a8e4892b671cd4e2d756182"
                 ),
             }
         },
@@ -852,21 +836,18 @@ def verify_varint32_provenance(selection: dict[str, Any]) -> None:
             "upstream_definition_span": "pb_decode.c bytes [5762,7483)",
             "upstream_definition_size": 1721,
             "upstream_definition_sha256": (
-                "66833ae2defb892aa17162625ef107bda"
-                "03be44e73f0b120d48e6d2b52770e2c"
+                "66833ae2defb892aa17162625ef107bda03be44e73f0b120d48e6d2b52770e2c"
             ),
             "stock_span": "[0x0048F4B8,0x0048F5AE)",
             "stock_size": 246,
             "stock_sha256": (
-                "8583fa17383d72bbdcab6c2a7a20369d"
-                "c0598d3ac3061feaf8a7b29dfa520150"
+                "8583fa17383d72bbdcab6c2a7a20369dc0598d3ac3061feaf8a7b29dfa520150"
             ),
             "patch_region": {
                 "name": "replace_nanopb_decode_varint32_eof",
                 "runtime_address": "0x0048F4B8", "size": 246,
                 "stock_sha256": (
-                    "8583fa17383d72bbdcab6c2a7a20369d"
-                    "c0598d3ac3061feaf8a7b29dfa520150"
+                    "8583fa17383d72bbdcab6c2a7a20369dc0598d3ac3061feaf8a7b29dfa520150"
                 ),
             },
             "source_dependency_calls": [
@@ -896,21 +877,18 @@ def verify_varint32_provenance(selection: dict[str, Any]) -> None:
             "upstream_definition_span": "pb_decode.c bytes [7485,7617)",
             "upstream_definition_size": 132,
             "upstream_definition_sha256": (
-                "ef3f2bd19c12b07ca055ab63f8e82ea6"
-                "f4b34e67aefb277435092e7485834f0f"
+                "ef3f2bd19c12b07ca055ab63f8e82ea6f4b34e67aefb277435092e7485834f0f"
             ),
             "stock_span": "[0x0048F5AE,0x0048F5B8)",
             "stock_size": 10,
             "stock_sha256": (
-                "48218a658cffd7aeddfb623c9d0e7bd0"
-                "38ceb2a6898e9f8d08b10d5779f4f79b"
+                "48218a658cffd7aeddfb623c9d0e7bd038ceb2a6898e9f8d08b10d5779f4f79b"
             ),
             "patch_region": {
                 "name": "replace_nanopb_decode_varint32",
                 "runtime_address": "0x0048F5AE", "size": 10,
                 "stock_sha256": (
-                    "48218a658cffd7aeddfb623c9d0e7bd0"
-                    "38ceb2a6898e9f8d08b10d5779f4f79b"
+                    "48218a658cffd7aeddfb623c9d0e7bd038ceb2a6898e9f8d08b10d5779f4f79b"
                 ),
             },
             "source_dependency_calls": ["open_cfw_nanopb_decode_varint32_eof"],
@@ -979,8 +957,7 @@ def verify_varint32_provenance(selection: dict[str, Any]) -> None:
             "symbol": "open_cfw_nanopb_varint32_overflow_error",
             "contents": "varint overflow\0", "size": 16, "alignment": 1,
             "sha256": (
-                "e9b62825b028cfc32f718b48de14fcbc"
-                "783a9009279d2c88cf4394d54767141d"
+                "e9b62825b028cfc32f718b48de14fcbc783a9009279d2c88cf4394d54767141d"
             ),
         },
         "private pb_decode_varint32 literal closure changed",
@@ -994,38 +971,31 @@ def verify_varint32_provenance(selection: dict[str, Any]) -> None:
             "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
             "object_size": 1628,
             "object_sha256": (
-                "626893ac400caac8fa733f5740b272d21"
-                "8a1e32572fad4bfa636a4bce142c166"
+                "626893ac400caac8fa733f5740b272d218a1e32572fad4bfa636a4bce142c166"
             ),
             "text_size": 222, "text_alignment": 4, "text_offset": 124972,
             "text_runtime_address": "0x007B2B50",
             "text_unrelocated_sha256": (
-                "5296b608c55171bca9d5f4d162cf53d0"
-                "e6aa5f724e1cb82499a7311f2a6cc9ff"
+                "5296b608c55171bca9d5f4d162cf53d0e6aa5f724e1cb82499a7311f2a6cc9ff"
             ),
             "text_relocated_sha256": (
-                "36bb0167f4d3407b99ed2255cc9e77dd"
-                "60dc1e9070781a257bfea59abc408171"
+                "36bb0167f4d3407b99ed2255cc9e77dd60dc1e9070781a257bfea59abc408171"
             ),
             "closure_size": 238,
             "closure_sha256": (
-                "2c49567cfe23e36c504586218719c2e5"
-                "90163bec804353c8106680328d64a480"
+                "2c49567cfe23e36c504586218719c2e590163bec804353c8106680328d64a480"
             ),
             "leading_alignment_size": 2,
             "leading_alignment_sha256": (
-                "96a296d224f285c67bee93c30f8a30915"
-                "7f0daa35dc5b87e410b78630a09cfc7"
+                "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
             ),
             "rodata_size": 16, "rodata_alignment": 1,
             "rodata_offset": 125194, "rodata_runtime_address": "0x007B2C2E",
             "rodata_sha256": (
-                "e9b62825b028cfc32f718b48de14fcbc"
-                "783a9009279d2c88cf4394d54767141d"
+                "e9b62825b028cfc32f718b48de14fcbc783a9009279d2c88cf4394d54767141d"
             ),
             "entry_patch_sha256": (
-                "39cbc613617df123fca8a706d6d8664f"
-                "110ed5075f6586ade5947db3d7ea6450"
+                "39cbc613617df123fca8a706d6d8664f110ed5075f6586ade5947db3d7ea6450"
             ),
         },
         "private pb_decode_varint32 Apple object/placement changed",
@@ -1035,27 +1005,22 @@ def verify_varint32_provenance(selection: dict[str, Any]) -> None:
             "compiler": "Apple clang version 21.0.0 (clang-2100.3.27.1)",
             "object_size": 1628,
             "object_sha256": (
-                "626893ac400caac8fa733f5740b272d21"
-                "8a1e32572fad4bfa636a4bce142c166"
+                "626893ac400caac8fa733f5740b272d218a1e32572fad4bfa636a4bce142c166"
             ),
             "text_size": 10, "text_alignment": 4, "text_offset": 125212,
             "text_runtime_address": "0x007B2C40",
             "text_unrelocated_sha256": (
-                "e9ec8b612503f867aabf2467e3abfac4"
-                "4753c5576a247a00cbc4309e2a023f93"
+                "e9ec8b612503f867aabf2467e3abfac44753c5576a247a00cbc4309e2a023f93"
             ),
             "text_relocated_sha256": (
-                "1f0924d25c50933e7cd5aac05d718da6"
-                "d44b7a20d4af901fa833c555eca6ff1a"
+                "1f0924d25c50933e7cd5aac05d718da6d44b7a20d4af901fa833c555eca6ff1a"
             ),
             "leading_alignment_size": 2,
             "leading_alignment_sha256": (
-                "96a296d224f285c67bee93c30f8a30915"
-                "7f0daa35dc5b87e410b78630a09cfc7"
+                "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
             ),
             "entry_patch_sha256": (
-                "d9ece4c36d9d25d448b14b93d091760"
-                "14efb56468d4c4570be54a232522a04aa"
+                "d9ece4c36d9d25d448b14b93d09176014efb56468d4c4570be54a232522a04aa"
             ),
         },
         "public pb_decode_varint32 Apple object/placement changed",
@@ -1065,13 +1030,11 @@ def verify_varint32_provenance(selection: dict[str, Any]) -> None:
         "source_root": "/Users/kalani/Repo/SybilSightABCD/openCFW",
         "object_size": 1628,
         "object_sha256": (
-            "626893ac400caac8fa733f5740b272d21"
-            "8a1e32572fad4bfa636a4bce142c166"
+            "626893ac400caac8fa733f5740b272d218a1e32572fad4bfa636a4bce142c166"
         ),
         "leading_alignment_size": 2,
         "leading_alignment_sha256": (
-            "96a296d224f285c67bee93c30f8a30915"
-            "7f0daa35dc5b87e410b78630a09cfc7"
+            "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
         ),
         "exidx_result": (
             "CANTUNWIND with exactly one same-function R_ARM_PREL31 relocation; "
@@ -1079,8 +1042,7 @@ def verify_varint32_provenance(selection: dict[str, Any]) -> None:
         ),
         "exidx_size": 8,
         "exidx_sha256": (
-            "01acecb507abfe1a354aa8064f4af5d3"
-            "f1acd019e37db3c11c97523b71c76e9d"
+            "01acecb507abfe1a354aa8064f4af5d3f1acd019e37db3c11c97523b71c76e9d"
         ),
     }
     require(
@@ -1089,27 +1051,22 @@ def verify_varint32_provenance(selection: dict[str, Any]) -> None:
             "text_size": 222, "text_alignment": 4, "text_offset": 126796,
             "text_runtime_address": "0x007B3270",
             "text_unrelocated_sha256": (
-                "5296b608c55171bca9d5f4d162cf53d0"
-                "e6aa5f724e1cb82499a7311f2a6cc9ff"
+                "5296b608c55171bca9d5f4d162cf53d0e6aa5f724e1cb82499a7311f2a6cc9ff"
             ),
             "text_relocated_sha256": (
-                "36bb0167f4d3407b99ed2255cc9e77dd"
-                "60dc1e9070781a257bfea59abc408171"
+                "36bb0167f4d3407b99ed2255cc9e77dd60dc1e9070781a257bfea59abc408171"
             ),
             "closure_size": 238,
             "closure_sha256": (
-                "2c49567cfe23e36c504586218719c2e5"
-                "90163bec804353c8106680328d64a480"
+                "2c49567cfe23e36c504586218719c2e590163bec804353c8106680328d64a480"
             ),
             "rodata_size": 16, "rodata_alignment": 1,
             "rodata_offset": 127018, "rodata_runtime_address": "0x007B334E",
             "rodata_sha256": (
-                "e9b62825b028cfc32f718b48de14fcbc"
-                "783a9009279d2c88cf4394d54767141d"
+                "e9b62825b028cfc32f718b48de14fcbc783a9009279d2c88cf4394d54767141d"
             ),
             "entry_patch_sha256": (
-                "1f64403d69443c2467c739594a66bd4f"
-                "251ab9ad13cd55a2e6a42cb147788eba"
+                "1f64403d69443c2467c739594a66bd4f251ab9ad13cd55a2e6a42cb147788eba"
             ),
         },
         "private pb_decode_varint32 Linux object/placement changed",
@@ -1120,16 +1077,13 @@ def verify_varint32_provenance(selection: dict[str, Any]) -> None:
             "text_size": 10, "text_alignment": 4, "text_offset": 127036,
             "text_runtime_address": "0x007B3360",
             "text_unrelocated_sha256": (
-                "e9ec8b612503f867aabf2467e3abfac4"
-                "4753c5576a247a00cbc4309e2a023f93"
+                "e9ec8b612503f867aabf2467e3abfac44753c5576a247a00cbc4309e2a023f93"
             ),
             "text_relocated_sha256": (
-                "1f0924d25c50933e7cd5aac05d718da6"
-                "d44b7a20d4af901fa833c555eca6ff1a"
+                "1f0924d25c50933e7cd5aac05d718da6d44b7a20d4af901fa833c555eca6ff1a"
             ),
             "entry_patch_sha256": (
-                "7f1122db2b85b3c028dbe0c818caa26"
-                "e7fee00d0e772f9ae423e369ec1d49309"
+                "7f1122db2b85b3c028dbe0c818caa26e7fee00d0e772f9ae423e369ec1d49309"
             ),
         },
         "public pb_decode_varint32 Linux object/placement changed",
@@ -1689,15 +1643,13 @@ def verify_provenance() -> dict[str, Any]:
                 "components/shared/nanopb/"
                 "runtime_nanopb_decode_varint.c"
             ),
-            "local_source_size": 2224,
+            "local_source_size": 2260,
             "local_source_sha256": (
-                "b1de68b98ee043bd07d1e10706166a13b"
-                "13693534e382705bbad6866411fbe05"
+                "234f92e37ddf7ab7716c5975c26acdc8ec619ff309dd03fb421bd18aa09e35c2"
             ),
             "stock_span": "[0x0048F5B8,0x0048F628)",
             "stock_sha256": (
-                "f93d678981f92603982c9afc6c6f9976"
-                "ca14d1a7a7e0bfc949d3ff73f2791ff2"
+                "f93d678981f92603982c9afc6c6f9976ca14d1a7a7e0bfc949d3ff73f2791ff2"
             ),
             "source_backed_readbyte_entry": "0x0048F454",
             "configuration": "g2-config/pb_g2_options.h",
@@ -1732,8 +1684,7 @@ def verify_provenance() -> dict[str, Any]:
             "stock_span": "[0x0048F628,0x0048F64C)",
             "stock_size": 36,
             "stock_sha256": (
-                "fae83b1a62a07bb9c7a3d3f6c398bc13"
-                "433ebe1cd75d01945f83f30e6fcc9c5d"
+                "fae83b1a62a07bb9c7a3d3f6c398bc13433ebe1cd75d01945f83f30e6fcc9c5d"
             ),
             "stock_read_seam": "0x0048F3BE",
             "configuration": "g2-config/pb_g2_options.h",
@@ -1766,8 +1717,7 @@ def verify_provenance() -> dict[str, Any]:
             "stock_span": "[0x0048F7CA,0x0048F7F4)",
             "stock_size": 42,
             "stock_sha256": (
-                "439bbeecb6a0b8266dc3dcd913e987933"
-                "52b6b346a7a58cdd44322c734621818"
+                "439bbeecb6a0b8266dc3dcd913e98793352b6b346a7a58cdd44322c734621818"
             ),
             "stock_read_seam": "0x0048F3BE",
             "configuration": "g2-config/pb_g2_options.h",
@@ -1800,8 +1750,7 @@ def verify_provenance() -> dict[str, Any]:
             "stock_span": "[0x00490190,0x004901AC)",
             "stock_size": 28,
             "stock_sha256": (
-                "1ee27599a8ac5b8d2a0cbaac59986fb4"
-                "9be7b24c348a960a216b8cbbecce5bf3"
+                "1ee27599a8ac5b8d2a0cbaac59986fb49be7b24c348a960a216b8cbbecce5bf3"
             ),
             "stock_read_seam": "0x0048F3BE",
             "configuration": "g2-config/pb_g2_options.h",
@@ -1834,8 +1783,7 @@ def verify_provenance() -> dict[str, Any]:
             "stock_span": "[0x004901AC,0x004901CC)",
             "stock_size": 32,
             "stock_sha256": (
-                "96228dfbdfe30665d79281ba0fd5ba3b3"
-                "af38701396671cd20b77623ffd82d54"
+                "96228dfbdfe30665d79281ba0fd5ba3b3af38701396671cd20b77623ffd82d54"
             ),
             "stock_read_seam": "0x0048F3BE",
             "configuration": "g2-config/pb_g2_options.h",
@@ -1913,8 +1861,7 @@ def verify_provenance() -> dict[str, Any]:
             "stock_span": "[0x0048F3BE,0x0048F454)",
             "stock_size": 150,
             "stock_sha256": (
-                "69aecb900c749fd98bd2d05e2229e9a3"
-                "d6829bd36f3e393f624e3579a9b4af7f"
+                "69aecb900c749fd98bd2d05e2229e9a3d6829bd36f3e393f624e3579a9b4af7f"
             ),
             "configuration": "g2-config/pb_g2_options.h",
             "qualification": (
@@ -1992,8 +1939,7 @@ def verify_provenance() -> dict[str, Any]:
                 "target_address": "0x00787C70",
                 "size": 14,
                 "sha256": (
-                    "e167d4f2ec31a2197c7bc32affd9865a"
-                    "c8609d7dae984d0916e01f044fcc67b4"
+                    "e167d4f2ec31a2197c7bc32affd9865ac8609d7dae984d0916e01f044fcc67b4"
                 ),
             },
             {
@@ -2002,8 +1948,7 @@ def verify_provenance() -> dict[str, Any]:
                 "stock_span": "[0x0048F3A4,0x0048F3BE)",
                 "stock_size": 26,
                 "stock_sha256": (
-                    "9d6c6690294b82bbafba82ec0f63a6bb"
-                    "5b78e4146543db3a30fac92469ace723"
+                    "9d6c6690294b82bbafba82ec0f63a6bb5b78e4146543db3a30fac92469ace723"
                 ),
                 "target_address": "0x0048F3A5",
             },
@@ -2013,8 +1958,7 @@ def verify_provenance() -> dict[str, Any]:
                 "target_address": "0x0078B690",
                 "size": 9,
                 "sha256": (
-                    "3faaf40b4ee3e3b23823ed9851dc77bf"
-                    "6fc2d7c7c330240eeaed08bd9d084ec1"
+                    "3faaf40b4ee3e3b23823ed9851dc77bf6fc2d7c7c330240eeaed08bd9d084ec1"
                 ),
             },
         ],
@@ -2049,16 +1993,13 @@ def verify_provenance() -> dict[str, Any]:
                 "offset": 124640,
                 "runtime_address": "0x007B2A04",
                 "unrelocated_sha256": (
-                    "06def086733fd9801b712161943b0da64"
-                    "e3b2bdf82e6f5962ee9207c738c00b1"
+                    "06def086733fd9801b712161943b0da64e3b2bdf82e6f5962ee9207c738c00b1"
                 ),
                 "relocated_sha256": (
-                    "8b3de44a2cf7ca2e07715c913db0fa45"
-                    "4ef65cbc453366190b12736e455aa7a8"
+                    "8b3de44a2cf7ca2e07715c913db0fa454ef65cbc453366190b12736e455aa7a8"
                 ),
                 "entry_patch_sha256": (
-                    "c2c44419ee24c41c8d0e8bc7f04689b"
-                    "b7f1c18b1f7ec3d7304e04c37579938a1"
+                    "c2c44419ee24c41c8d0e8bc7f04689bb7f1c18b1f7ec3d7304e04c37579938a1"
                 ),
             },
             "linux-clang": {
@@ -2067,16 +2008,13 @@ def verify_provenance() -> dict[str, Any]:
                 "offset": 126464,
                 "runtime_address": "0x007B3124",
                 "unrelocated_sha256": (
-                    "06def086733fd9801b712161943b0da64"
-                    "e3b2bdf82e6f5962ee9207c738c00b1"
+                    "06def086733fd9801b712161943b0da64e3b2bdf82e6f5962ee9207c738c00b1"
                 ),
                 "relocated_sha256": (
-                    "8b3de44a2cf7ca2e07715c913db0fa45"
-                    "4ef65cbc453366190b12736e455aa7a8"
+                    "8b3de44a2cf7ca2e07715c913db0fa454ef65cbc453366190b12736e455aa7a8"
                 ),
                 "entry_patch_sha256": (
-                    "4dc433588344c12d1a0abfab8c5f1673"
-                    "c24f6702d8f285f67fb0fd8b8e6e3eab"
+                    "4dc433588344c12d1a0abfab8c5f1673c24f6702d8f285f67fb0fd8b8e6e3eab"
                 ),
             },
         },
@@ -2088,8 +2026,7 @@ def verify_provenance() -> dict[str, Any]:
             "found": False,
             "official_image_size": 148599,
             "official_image_sha256": (
-                "f89a4c4657537cec6bfc572bdb831886"
-                "6309b90a5d180c4307680d39824167b5"
+                "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
             ),
             "qualification": (
                 "No full stock pb_read provider body, private buf_read body, "
@@ -2165,16 +2102,13 @@ def verify_provenance() -> dict[str, Any]:
                 "runtime_address": "0x007B2AA4",
                 "size": 30,
                 "unrelocated_sha256": (
-                    "db26e5bd51f3d313907af94bfe545cc99"
-                    "62b867ed18285f2025c401e8613700a"
+                    "db26e5bd51f3d313907af94bfe545cc9962b867ed18285f2025c401e8613700a"
                 ),
                 "relocated_sha256": (
-                    "f312e087cf1fbecf19bd5fa0052d3a63"
-                    "ca91287c811de169aaf2a09322e0115e"
+                    "f312e087cf1fbecf19bd5fa0052d3a63ca91287c811de169aaf2a09322e0115e"
                 ),
                 "entry_patch_sha256": (
-                    "7b95b1a632ce6362c74c2a3f3ae2e9e"
-                    "f15f5abb6800d1dd8ca1dd4586b4f73ac"
+                    "7b95b1a632ce6362c74c2a3f3ae2e9ef15f5abb6800d1dd8ca1dd4586b4f73ac"
                 ),
             },
             "pb_readbyte": {
@@ -2182,16 +2116,13 @@ def verify_provenance() -> dict[str, Any]:
                 "runtime_address": "0x007B2AC4",
                 "size": 64,
                 "unrelocated_sha256": (
-                    "eda66d0ae6274a2078b6eceaefc0e773"
-                    "169d5e15b26bce650a8d48b818e4f2b8"
+                    "eda66d0ae6274a2078b6eceaefc0e773169d5e15b26bce650a8d48b818e4f2b8"
                 ),
                 "relocated_sha256": (
-                    "f3395a19a7406016e6b1f1daf14969de"
-                    "e91ccde4e9a98ba4eeaba0016e131871"
+                    "f3395a19a7406016e6b1f1daf14969dee91ccde4e9a98ba4eeaba0016e131871"
                 ),
                 "entry_patch_sha256": (
-                    "ed8460907148368a780a57a2abab8bb4"
-                    "8cc80a78b980c38b0097e1b81ce1967e"
+                    "ed8460907148368a780a57a2abab8bb48cc80a78b980c38b0097e1b81ce1967e"
                 ),
             },
         },
@@ -2205,16 +2136,13 @@ def verify_provenance() -> dict[str, Any]:
                 "runtime_address": "0x007B31C4",
                 "size": 30,
                 "unrelocated_sha256": (
-                    "db26e5bd51f3d313907af94bfe545cc99"
-                    "62b867ed18285f2025c401e8613700a"
+                    "db26e5bd51f3d313907af94bfe545cc9962b867ed18285f2025c401e8613700a"
                 ),
                 "relocated_sha256": (
-                    "a6b4d3a4e969f078683f1cde3a4043b7"
-                    "0d8495d577f550ae35c6c2789ff470de"
+                    "a6b4d3a4e969f078683f1cde3a4043b70d8495d577f550ae35c6c2789ff470de"
                 ),
                 "entry_patch_sha256": (
-                    "db7d0da006d031b33b6858a4b829d684"
-                    "03c9039f66d2ac4db576b00bdef94bec"
+                    "db7d0da006d031b33b6858a4b829d68403c9039f66d2ac4db576b00bdef94bec"
                 ),
             },
             "pb_readbyte": {
@@ -2222,16 +2150,13 @@ def verify_provenance() -> dict[str, Any]:
                 "runtime_address": "0x007B31E4",
                 "size": 64,
                 "unrelocated_sha256": (
-                    "eda66d0ae6274a2078b6eceaefc0e773"
-                    "169d5e15b26bce650a8d48b818e4f2b8"
+                    "eda66d0ae6274a2078b6eceaefc0e773169d5e15b26bce650a8d48b818e4f2b8"
                 ),
                 "relocated_sha256": (
-                    "f3395a19a7406016e6b1f1daf14969de"
-                    "e91ccde4e9a98ba4eeaba0016e131871"
+                    "f3395a19a7406016e6b1f1daf14969dee91ccde4e9a98ba4eeaba0016e131871"
                 ),
                 "entry_patch_sha256": (
-                    "b571a49431ddbdd7c71059acf67da1227"
-                    "af1eecba58b09fafea45177eda87fd0"
+                    "b571a49431ddbdd7c71059acf67da1227af1eecba58b09fafea45177eda87fd0"
                 ),
             },
         },
@@ -3010,10 +2935,9 @@ def verify_production_exclusion() -> None:
                 "components/shared/nanopb/"
                 "runtime_nanopb_decode_varint.c"
             ),
-            "size": 2224,
+            "size": 2260,
             "sha256": (
-                "b1de68b98ee043bd07d1e10706166a13b"
-                "13693534e382705bbad6866411fbe05"
+                "234f92e37ddf7ab7716c5975c26acdc8ec619ff309dd03fb421bd18aa09e35c2"
             ),
             "license": "Zlib",
             "origin": (
@@ -3094,8 +3018,7 @@ def verify_production_exclusion() -> None:
                 "section": ".rodata.str1.1",
                 "size": 16,
                 "sha256": (
-                    "e9b62825b028cfc32f718b48de14fcbc"
-                    "783a9009279d2c88cf4394d54767141d"
+                    "e9b62825b028cfc32f718b48de14fcbc783a9009279d2c88cf4394d54767141d"
                 ),
                 "alignment": 1,
                 "symbols": [{"name": ".L.str", "offset": 0, "size": 16}],
@@ -3106,10 +3029,10 @@ def verify_production_exclusion() -> None:
     source_path = ROOT / leaf["source"]["path"]
     require(source_path.is_file(), "bounded nanopb production source is missing")
     source = source_path.read_bytes()
-    require(len(source) == 2224, "bounded nanopb production source size changed")
+    require(len(source) == 2260, "bounded nanopb production source size changed")
     require(
         sha256(source)
-        == "b1de68b98ee043bd07d1e10706166a13b13693534e382705bbad6866411fbe05",
+        == "234f92e37ddf7ab7716c5975c26acdc8ec619ff309dd03fb421bd18aa09e35c2",
         "bounded nanopb production source bytes changed",
     )
 
@@ -3170,8 +3093,7 @@ def verify_production_exclusion() -> None:
             "alignment": 4,
             "offset": 184148,
             "unrelocated_sha256": (
-                "7e2f6a8b3dca56e4c2d0499a6d4f12a"
-                "d97dc4bc7f127ff6f4c31b8d379f0ba3b"
+                "7e2f6a8b3dca56e4c2d0499a6d4f12ad97dc4bc7f127ff6f4c31b8d379f0ba3b"
             ),
         },
         "pb_skip_varint canonical text contract changed",
@@ -3602,8 +3524,8 @@ def verify_production_exclusion() -> None:
 
     iterator_source = {
         "path": "components/shared/nanopb/runtime_nanopb_iterator_cluster.c",
-        "size": 13395,
-        "sha256": "edcff9480ae181a22aba9eb28641257fe62fb9652c1268cd3ef1658e5a3690eb",
+        "size": 14025,
+        "sha256": "825238916fc945c521c2f1bce8042c7725c42b82c92b08271dbba529991fa06e",
         "license": "Zlib",
         "origin": "altered production adaptation of authenticated nanopb 0.4.9 compact descriptor iterator cluster",
         "upstream": (
@@ -3696,8 +3618,8 @@ def verify_production_exclusion() -> None:
 
     defaults_source_common = {
         "path": "components/shared/nanopb/runtime_nanopb_defaults_pair.c",
-        "size": 6284,
-        "sha256": "76dc1344eb1187f8631e935613246724287c6b1e917efd795dabe17ec5d84491",
+        "size": 6894,
+        "sha256": "fd5f03e33984a341d532f5eab0db952b3a5c11300a33851b53e33beb192eaaf4",
         "license": "Zlib",
         "upstream": (
             "https://github.com/nanopb/nanopb/blob/"
@@ -3773,8 +3695,8 @@ def verify_production_exclusion() -> None:
 
     dispatch_source_common = {
         "path": "components/shared/nanopb/runtime_nanopb_dispatch_extension.c",
-        "size": 3804,
-        "sha256": "b4a6620fdc79fdbb3b3891166d6248176b396cf18b7157cd3d300d66ee15de96",
+        "size": 4499,
+        "sha256": "610c8d8e64f87f67aeb9bd175800f3b43661a2bbe9f8d557aa76cc5b9e11ee67",
         "license": "Zlib",
         "upstream": allowed_upstream_url,
         "upstream_commit": EXPECTED_COMMIT,
@@ -3940,8 +3862,7 @@ def verify_production_exclusion() -> None:
             "alignment": 4,
             "offset": 184292,
             "unrelocated_sha256": (
-                "5e6ee5f441e5ba91e0e0147b8453a311"
-                "86f3ce4bd0efc114edda60f00093a51e"
+                "5e6ee5f441e5ba91e0e0147b8453a31186f3ce4bd0efc114edda60f00093a51e"
             ),
         },
         "pb_close_string_substream canonical text contract changed",
@@ -3957,14 +3878,12 @@ def verify_production_exclusion() -> None:
                 "expected": {
                     "size": 36,
                     "sha256": (
-                        "230981d03cad6160f2cb07ec8179c8bb0"
-                        "3b562123df5319e3b339447fa5e8eaa"
+                        "230981d03cad6160f2cb07ec8179c8bb03b562123df5319e3b339447fa5e8eaa"
                     ),
                     "alignment": 4,
                     "offset": 186016,
                     "unrelocated_sha256": (
-                        "5e6ee5f441e5ba91e0e0147b8453a311"
-                        "86f3ce4bd0efc114edda60f00093a51e"
+                        "5e6ee5f441e5ba91e0e0147b8453a31186f3ce4bd0efc114edda60f00093a51e"
                     ),
                 },
                 "relocations": [close_call],
@@ -4016,14 +3935,12 @@ def verify_production_exclusion() -> None:
         == {
             "size": 50,
             "sha256": (
-                "65cd86293fd56b00206068dc1063abb83"
-                "8b0226f672b9dfc841cd5445295a0a3"
+                "65cd86293fd56b00206068dc1063abb838b0226f672b9dfc841cd5445295a0a3"
             ),
             "alignment": 4,
             "offset": 184344,
             "unrelocated_sha256": (
-                "798f8f7cbed57f6ba11dad46a6de9d25"
-                "cb1f1710eb4fa904d79b6fe449952a04"
+                "798f8f7cbed57f6ba11dad46a6de9d25cb1f1710eb4fa904d79b6fe449952a04"
             ),
         },
         "pb_decode_fixed32 canonical text contract changed",
@@ -4035,14 +3952,12 @@ def verify_production_exclusion() -> None:
         == {
             "size": 50,
             "sha256": (
-                "11a61606490ff9e8f3b7765132a579739"
-                "5c567893e2607f1231f35d04201058e"
+                "11a61606490ff9e8f3b7765132a5797395c567893e2607f1231f35d04201058e"
             ),
             "alignment": 4,
             "offset": 186068,
             "unrelocated_sha256": (
-                "798f8f7cbed57f6ba11dad46a6de9d25"
-                "cb1f1710eb4fa904d79b6fe449952a04"
+                "798f8f7cbed57f6ba11dad46a6de9d25cb1f1710eb4fa904d79b6fe449952a04"
             ),
         },
         "pb_decode_fixed32 Linux text contract changed",
@@ -4064,8 +3979,7 @@ def verify_production_exclusion() -> None:
             "runtime_address": 0x00490190,
             "expected_size": 28,
             "expected_sha256": (
-                "1ee27599a8ac5b8d2a0cbaac59986fb4"
-                "9be7b24c348a960a216b8cbbecce5bf3"
+                "1ee27599a8ac5b8d2a0cbaac59986fb49be7b24c348a960a216b8cbbecce5bf3"
             ),
             "branch": "b_w",
         },
@@ -4120,14 +4034,12 @@ def verify_production_exclusion() -> None:
         == {
             "size": 28,
             "sha256": (
-                "1a807b643995c339947925fd3bc95385b"
-                "0f201fe6c541aafd03548256f37cb0f"
+                "1a807b643995c339947925fd3bc95385b0f201fe6c541aafd03548256f37cb0f"
             ),
             "alignment": 4,
             "offset": 184460,
             "unrelocated_sha256": (
-                "c4cfb6fece88a057c874d8f2ffcce961"
-                "df9ef15fb16c78421f48396f0cceff2c"
+                "c4cfb6fece88a057c874d8f2ffcce961df9ef15fb16c78421f48396f0cceff2c"
             ),
         },
         "pb_decode_fixed64 canonical text contract changed",
@@ -4139,14 +4051,12 @@ def verify_production_exclusion() -> None:
         == {
             "size": 30,
             "sha256": (
-                "2cc26838da46672ae8cd5d9a4b8d5ee5"
-                "40d543993a04fc1e37a68c5ddded11c1"
+                "2cc26838da46672ae8cd5d9a4b8d5ee540d543993a04fc1e37a68c5ddded11c1"
             ),
             "alignment": 4,
             "offset": 186184,
             "unrelocated_sha256": (
-                "bfaf01f7496cce042c84c35708421508"
-                "fbf2fa5acd9d9fcb209753901e09af10"
+                "bfaf01f7496cce042c84c35708421508fbf2fa5acd9d9fcb209753901e09af10"
             ),
         },
         "pb_decode_fixed64 Linux text contract changed",
@@ -4168,8 +4078,7 @@ def verify_production_exclusion() -> None:
             "runtime_address": 0x004901AC,
             "expected_size": 32,
             "expected_sha256": (
-                "96228dfbdfe30665d79281ba0fd5ba3b3"
-                "af38701396671cd20b77623ffd82d54"
+                "96228dfbdfe30665d79281ba0fd5ba3b3af38701396671cd20b77623ffd82d54"
             ),
             "branch": "b_w",
         },
@@ -4221,14 +4130,12 @@ def verify_production_exclusion() -> None:
     expected_read = {
         "size": 158,
         "sha256": (
-            "8b3de44a2cf7ca2e07715c913db0fa45"
-            "4ef65cbc453366190b12736e455aa7a8"
+            "8b3de44a2cf7ca2e07715c913db0fa454ef65cbc453366190b12736e455aa7a8"
         ),
         "alignment": 4,
         "offset": 184488,
         "unrelocated_sha256": (
-            "06def086733fd9801b712161943b0da64"
-            "e3b2bdf82e6f5962ee9207c738c00b1"
+            "06def086733fd9801b712161943b0da64e3b2bdf82e6f5962ee9207c738c00b1"
         ),
     }
     require(
@@ -4256,8 +4163,7 @@ def verify_production_exclusion() -> None:
             "runtime_address": 0x0048F3BE,
             "expected_size": 150,
             "expected_sha256": (
-                "69aecb900c749fd98bd2d05e2229e9a3"
-                "d6829bd36f3e393f624e3579a9b4af7f"
+                "69aecb900c749fd98bd2d05e2229e9a3d6829bd36f3e393f624e3579a9b4af7f"
             ),
             "branch": "b_w",
             "target_function": "open_cfw_nanopb_read",
@@ -4402,14 +4308,12 @@ def verify_production_exclusion() -> None:
         == {
             "size": 20,
             "sha256": (
-                "af3357e8178ab650d5476d0ad0fbfee0"
-                "b44cdb288d9251da909b3ba7a1de92c4"
+                "af3357e8178ab650d5476d0ad0fbfee0b44cdb288d9251da909b3ba7a1de92c4"
             ),
             "alignment": 4,
             "offset": 184744,
             "unrelocated_sha256": (
-                "d106ce1009ddcbd4d39a7c56edbcd51f"
-                "50d4cfa6768f78d224ea988aa9a416d7"
+                "d106ce1009ddcbd4d39a7c56edbcd51f50d4cfa6768f78d224ea988aa9a416d7"
             ),
         },
         "pb_istream_from_buffer Apple text/relocation contract changed",
@@ -4421,14 +4325,12 @@ def verify_production_exclusion() -> None:
         == {
             "size": 22,
             "sha256": (
-                "59438f30232883560f65ad4e58ff97c0"
-                "5dcdffdb6287fffcb7c1b79487df436d"
+                "59438f30232883560f65ad4e58ff97c05dcdffdb6287fffcb7c1b79487df436d"
             ),
             "alignment": 4,
             "offset": 186472,
             "unrelocated_sha256": (
-                "6c23e37c9468d866db2e2cb6bf0ce8e"
-                "103fb34df1078e740b4b8d5d799c257ff"
+                "6c23e37c9468d866db2e2cb6bf0ce8e103fb34df1078e740b4b8d5d799c257ff"
             ),
         },
         "pb_istream_from_buffer Linux text/relocation contract changed",
@@ -4444,8 +4346,7 @@ def verify_production_exclusion() -> None:
             "runtime_address": 0x0048F49C,
             "expected_size": 28,
             "expected_sha256": (
-                "852314bb8f86dcbd550deb0f51bc285b"
-                "662e39c1b4fae66690c44a7bf4f7a674"
+                "852314bb8f86dcbd550deb0f51bc285b662e39c1b4fae66690c44a7bf4f7a674"
             ),
             "branch": "b_w",
             "target_function": "open_cfw_nanopb_istream_from_buffer",
@@ -4484,14 +4385,12 @@ def verify_production_exclusion() -> None:
         == {
             "size": 54,
             "sha256": (
-                "1b181a82adbbb72dc6fc09b1b70dd48f"
-                "4c0eefdf25a8c4e71701710cb12dae3f"
+                "1b181a82adbbb72dc6fc09b1b70dd48f4c0eefdf25a8c4e71701710cb12dae3f"
             ),
             "alignment": 4,
             "offset": 184764,
             "unrelocated_sha256": (
-                "19e103f83ab8879d36eb1b0513bf5416"
-                "01e40bc82e69e0dc252308c0646d1286"
+                "19e103f83ab8879d36eb1b0513bf541601e40bc82e69e0dc252308c0646d1286"
             ),
         },
         "pb_decode_svarint Apple text/relocation contract changed",
@@ -4507,14 +4406,12 @@ def verify_production_exclusion() -> None:
             "expected": {
                 "size": 50,
                 "sha256": (
-                    "63e4707f5fd537094855d38f6b4df857"
-                    "8b77644c131e180db2e682d32fbc1fab"
+                    "63e4707f5fd537094855d38f6b4df8578b77644c131e180db2e682d32fbc1fab"
                 ),
                 "alignment": 4,
                 "offset": 186496,
                 "unrelocated_sha256": (
-                    "3617ea95d4a2cbabf3a1abb375e57232"
-                    "3fffcebfa68cb4e19874cb4a831d9662"
+                    "3617ea95d4a2cbabf3a1abb375e572323fffcebfa68cb4e19874cb4a831d9662"
                 ),
             },
             "relocations": [svarint_call],
@@ -4532,8 +4429,7 @@ def verify_production_exclusion() -> None:
             "runtime_address": 0x00490150,
             "expected_size": 64,
             "expected_sha256": (
-                "80b24be422cf924f3ae1b79669312535d"
-                "c0d5a56dd88be8a6b9e4ee5ff064048"
+                "80b24be422cf924f3ae1b79669312535dc0d5a56dd88be8a6b9e4ee5ff064048"
             ),
             "branch": "b_w",
             "target_function": "open_cfw_nanopb_decode_svarint",

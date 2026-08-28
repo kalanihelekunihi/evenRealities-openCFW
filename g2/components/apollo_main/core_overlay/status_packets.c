@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded eight-byte status-packet reporters matched to stock entries
  * 0x0047CE90, 0x0047CED6, and 0x0047CF28.

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Exact source replacement for the G2 2.2.6.10 formatting span adapter at
  * 0x004910E8. The bounded caller, argument layout, and downstream ABI are
@@ -44,9 +44,9 @@ unsigned int open_cfw_format_span(void *output, const void *argument)
 #else
 
 /*
- * The raw BL is valid only after the builder copies these bytes to
- * 0x004910E8. The overlay symbol is a deterministic builder input and is not
- * linked as a callable runtime implementation.
+ * The named BL displacement is valid only after the builder copies these
+ * bytes to 0x004910E8. The overlay symbol is a deterministic builder input
+ * and is not linked as a callable runtime implementation.
  */
 __attribute__((used, noinline, naked))
 unsigned int open_cfw_format_span(void *output, const void *argument)
@@ -56,7 +56,8 @@ unsigned int open_cfw_format_span(void *output, const void *argument)
         "push {r7, lr}\n"
         "ldrh r2, [r1, #0x12]\n"
         "ldr r1, [r1, #0x1c]\n"
-        ".short 0xf7ff, 0xfe62\n"
+        ".equ open_cfw_format_span_writer_delta, -0x338\n"
+        "bl . + open_cfw_format_span_writer_delta\n"
         "pop {r1, pc}\n"
     );
 }

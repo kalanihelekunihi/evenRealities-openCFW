@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /* Host fixture for clean-room touch sensing and gesture policy. */
 #include <stdint.h>
 

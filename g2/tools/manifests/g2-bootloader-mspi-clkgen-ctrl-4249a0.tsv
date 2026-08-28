@@ -1,0 +1,9 @@
+kind	name	start	end	size	sha256	disposition	provider	license_status	evidence
+retained_data	mspi0_base_literal	0x0042499c	0x004249a0	4	-	authenticated_literal	Apollo510 CMSIS MSPI0_BASE	Apache-2.0	value 0x40060000
+function	mspi_clkgen_ctrl	0x004249a0	0x00424a18	120	86e27ef6ed8e0e1ba9c0f2ba553376ae57fcf0154bba95f37d1eb4a6ef7c3dd0	exact_dual_profile_candidate	AmbiqSuite 5.1.0 semantics with reviewed target adapter	BSD-3-Clause	critical-section, clock-field, delay, caller, literal, relocation, and stock-byte closure
+provider	critical_save	0x0041b8ec	0x0041b8f8	12	-	retained_provider	G2 PRIMASK critical-section entry	firmware provenance	direct BL at +0x0a and inline PRIMASK restore
+provider	delay_us	0x0041d1c0	0x0041d246	134	-	retained_provider	AmbiqSuite delay provider	firmware provenance	direct BL at +0x54 with 10 microseconds
+literal	clkgen_mspiioctrl	0x004251a8	0x004251ac	4	-	authenticated_literal	Apollo510 CLKGEN MSPIIOCLKCTRL	Apache-2.0	value 0x40004110
+function	mspi_get_xip_off_min_delay	0x00424a18	0x00424a5a	66	cee39c273a2725778729f4b8182d878ba06d55ec3a614cf1b2289990b6a4ceac	exact_dual_profile_candidate	AmbiqSuite 5.1.0 semantics with reviewed target adapter	BSD-3-Clause	all frequency classes and stock-byte closure
+successor	am_hal_mspi_initialize	0x00424a5a	0x00424aea	144	7708fb5a3bfd2f3f137722f96dc65a9a566da5c70470a014a565df98e2ed87dc	exact_dual_profile_source	AmbiqSuite 5.1.0 am_hal_mspi_initialize	BSD-3-Clause	admitted in the production overlay with exact Apple and Linux compiler output
+hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project evidence gate	directed hardware testing is deferred by project direction; future clock, timing, power-transition, and cold-boot evidence remains required

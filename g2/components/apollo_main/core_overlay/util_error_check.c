@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room G2 adapter for the Goodix GR551x SDK 1.7.0-derived
  * APP_errorFaultHandler at [0x00509B48,0x00509BFA).  The 43-row table and

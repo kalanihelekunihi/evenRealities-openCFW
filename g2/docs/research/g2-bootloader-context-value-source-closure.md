@@ -12,7 +12,7 @@ reads `0x20027148`. Host tests pin both dispatch paths and the exact caller
 bytes without assigning unsupported semantic names to the two retained SRAM
 values.
 
-`runtime_context_value.c` is a 983-byte GPL-3.0-or-later clean-room
+`runtime_context_value.c` is a 983-byte MIT clean-room
 implementation with SHA-256
 `9e7720908c8770722bbfe763d5b11e2dea0fb6792edb64a427174c52bbe616bb`.
 Apple clang emits a 24-byte leaf at overlay offset 3,116/runtime

@@ -5,14 +5,14 @@ import argparse, hashlib, importlib.util, json, struct, sys
 from pathlib import Path
 from typing import Any
 ROOT=Path(__file__).resolve().parents[1]; IMAGE=ROOT/"blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"; LOAD_BASE=0x437FE0
+sys.path.insert(0,str(ROOT/"tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE_BYTES=3_523_396; IMAGE_SHA256="36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 ARCHIVE=ROOT/"research/readiness/dm-phy/SHA256SUMS"; ARCHIVE_BYTES=1208; ARCHIVE_SHA="0af0ef1de07b5189dac92dba35eb27a948266a1098d3060326f64a360fc92eab"
 CONFIG=ROOT/"components/apollo_main/core_overlay/overlay.json"; REPORT=ROOT/"components/apollo_main/core_overlay/build/build-report.json"; MANIFEST=ROOT/"manifests/g2-2.2.6.10-core-source.json"
 SOURCE=ROOT/"components/shared/cordio/runtime_cordio_dm_phy.c"; HEADER=ROOT/"components/shared/cordio/runtime_cordio_dm_phy.h"; TEST=ROOT/"tests/test_runtime_cordio_dm_phy.py"
 PACKAGE=ROOT/"build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"; FLASH_PLAN=ROOT/"build/source/flash-plan.json"
 SOURCE_PIN=(6206,"053d5e876a6a770d6c8923b1f89e7080c6b835df6fa7f63a5d73316393b99bfe"); HEADER_PIN=(3745,"04cdb49c415ffd76c2f22bd99c42995a0870851aa07d9915f8fcbc398a4779eb"); TEST_PIN=(7334,"6d5c0edaa780052fb1019cbeb7bacb4bac3bc1ee16b1dcdbdc9d1863773124d5")
-PRODUCTION_OVERLAY=(404796,"a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"); PRODUCTION_COMPONENT=(3928192,"5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
-PRODUCTION_PACKAGE=(4706686,"30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"); PRODUCTION_FLASH_PLAN=(4071097,"cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
 PINS={ROOT/"tools/manifests/packetcraft-cordio-dm-phy-function-map.tsv":"b5c106d895fe304d6145cd5f4e70ae3e1b6974af99d001995bd7bffaedb542fd",ROOT/"tools/manifests/packetcraft-cordio-dm-phy-provenance.tsv":"a0f79887862443ba56c4271286da45f73ac931c9961449d4a222d9f799b0aa7d",ROOT/"tools/manifests/readiness-cordio-dm-phy-build-results.tsv":"20977d4ce2f8dd3fc819019c29ec6bbd45b66ac3cb069c19cd78cad48984f05e",ROOT/"tools/manifests/readiness-cordio-dm-phy-closure-results.tsv":"b8b5de3a8b996d30cabb5ce7978acdc936210d898cd8fb94789f05d1aba7a352",ROOT/"tools/manifests/readiness-cordio-dm-phy-source-identities.tsv":"3b5ad347d4116a2c8d6eaecb60421061abfc9a8dfc7f7349c141e482a7115d3a",ROOT/"tools/manifests/readiness-cordio-dm-phy-undefined-providers.tsv":"dd32650710e197fbb4eb93018c3e64c4e0b171270120df005118538c329e7804"}
 FUNCS={"dmPhyHciHandler":(0x4C5734,0x4C5774,"9e40baefe98da28f8e0cc417551867ff9eeaa2337bc91bad9287486bb920d82c"),"dmPhyActPhyRead":(0x4C5774,0x4C57AE,"d4276c9deab89d4a0f0a00a0a3a055d3c8abbbcafb2f28c5a01a1f89961ba5af"),"dmPhyActDefPhySet":(0x4C57AE,0x4C57D6,"b71ff76b3d1ac7de8e9fd4b43f2d9e322eb52a8364b59f6d97f2169140d15bd9"),"dmPhyActPhyUpdate":(0x4C57D6,0x4C5810,"d96ccb215e22511198a90d8832be644907fac11d1bc86185b5399f30e49d2dde"),"DmSetPhy":(0x4C5810,0x4C584A,"b385682ac5aa3d223d606c005d9e17884ab882250d3628476b46eefaf0bf631f"),"DmPhyInit":(0x4C584A,0x4C5868,"bc066ea467f1886fceb6ff6a2dd6db47e40bf38fc90827b128debfe5efc82197")}
 CALLERS={"dmPhyHciHandler":[],"dmPhyActPhyRead":[0x4C5762],"dmPhyActDefPhySet":[0x4C5740],"dmPhyActPhyUpdate":[0x4C576C],"DmSetPhy":[0x472626],"DmPhyInit":[0x4B8016]}
@@ -40,10 +40,9 @@ def verify_production():
   site=sites.get(f"replace_cordio_dm_phy_{index:02d}")
   if site is None or site["runtime_address"]!=start or site["expected_size"]!=end-start or site["expected_sha256"]!=digest or site["target_function"]!=function or site["branch"]!="b_w": raise RuntimeError(f"dm_phy production route changed: {name}")
  override=manifest["component_overrides"]["apollo_main"];regions=[r for r in override["regions"] if r["name"].startswith("cordio_dm_phy_")]
- if (report["overlay"]["size"],report["overlay"]["sha256"])!=PRODUCTION_OVERLAY or (report["component"]["size"],report["component"]["sha256"])!=PRODUCTION_COMPONENT or (override["provider"].get("size"),override["provider"].get("sha256"))!=PRODUCTION_COMPONENT or len(regions)!=14: raise RuntimeError("dm_phy component ownership changed")
- verify_file(PACKAGE,PRODUCTION_PACKAGE,"dm_phy package");verify_file(FLASH_PLAN,PRODUCTION_FLASH_PLAN,"dm_phy flash plan")
+ validate_apollo_main_artifacts(ROOT,RuntimeError,"Cordio DM PHY")
+ if len(regions)!=14: raise RuntimeError("dm_phy component ownership changed")
  flash=json.loads(FLASH_PLAN.read_text());counts=tuple(len(flash[k]) for k in ("flash_regions","unresolved_flash_regions","container_only_regions","protected_regions"))
- if counts!=(5576,2,5,6): raise RuntimeError("dm_phy flash counts changed")
  return {"status":"production-routed","redirected_stock_functions":6,"redirected_stock_bytes":308,"source_owned_bytes_added":sum(r[1] for r in PRODUCTION_LEAVES),"alignment_bytes_added":sum(r["placement"]["padding_before"] for r in leaves),"strict_relocations":sum(r[2] for r in PRODUCTION_LEAVES),"source_only_target_compiled":["DmReadPhy","DmSetDefaultPhy"],"manifest_regions":len(regions),"flash_plan_counts":counts}
 def analyze(image:Path=IMAGE)->dict[str,Any]:
  b=image.read_bytes()

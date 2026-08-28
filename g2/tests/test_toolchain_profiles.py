@@ -739,26 +739,26 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 180782,
+                "overlay_size": 429_058,
                 "overlay_sha256": (
-                    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
                 ),
-                "component_size": 3704178,
+                "component_size": 3_952_454,
                 "component_sha256": (
-                    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
                 ),
             },
         )
         self.assertEqual(
             config["toolchain_profiles"]["linux-clang"]["expected"],
             {
-                "overlay_size": 145208,
+                "overlay_size": 212_664,
                 "overlay_sha256": (
-                    "fac5b48b6ae2eac985a0a65ddb8d1595dd10e2abcbdd0c6a3bb562f72e43a826"
+                    "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18"
                 ),
-                "component_size": 3668604,
+                "component_size": 3_736_060,
                 "component_sha256": (
-                    "378c868e151060a59ab91b0de1a722e8678b8e1da8eede248c5702ccf8902798"
+                    "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97"
                 ),
             },
         )
@@ -768,15 +768,15 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
                 manifest["package"]["expected_sha256"],
             ),
             (
-                4482672,
-                "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d",
+                4_745_526,
+                "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
             ),
         )
         self.assertEqual(
             manifest["package"]["profiles"]["linux-clang"],
             {
-                "expected_size": 4447098,
-                "expected_sha256": "deb4cdb9d869abcb3aee5e122661ee45b541680cf277df5d1a7c6eed67bb7b6e",
+                "expected_size": 4_529_116,
+                "expected_sha256": "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
             },
         )
 
@@ -799,7 +799,7 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
         }
         self.assertEqual(
             [linux[name]["expected"]["offset"] for name in names],
-            [118052, 119808, 119812],
+            [177_804, 179_560, 179_564],
         )
         self.assertEqual(
             linux["LZ4_decompress_safe"]["closure"]["text_section"],
@@ -860,7 +860,7 @@ class NanopbVarint32LinuxProfileContractTests(unittest.TestCase):
                 "size": 222,
                 "sha256": "36bb0167f4d3407b99ed2255cc9e77dd60dc1e9070781a257bfea59abc408171",
                 "alignment": 4,
-                "offset": 126796,
+                "offset": 186_548,
                 "unrelocated_sha256": "5296b608c55171bca9d5f4d162cf53d0e6aa5f724e1cb82499a7311f2a6cc9ff",
                 "closure_size": 238,
                 "closure_sha256": "2c49567cfe23e36c504586218719c2e590163bec804353c8106680328d64a480",
@@ -874,7 +874,7 @@ class NanopbVarint32LinuxProfileContractTests(unittest.TestCase):
                 "size": 10,
                 "sha256": "1f0924d25c50933e7cd5aac05d718da6d44b7a20d4af901fa833c555eca6ff1a",
                 "alignment": 4,
-                "offset": 127036,
+                "offset": 186_788,
                 "unrelocated_sha256": "e9ec8b612503f867aabf2467e3abfac44753c5576a247a00cbc4309e2a023f93",
             },
         )

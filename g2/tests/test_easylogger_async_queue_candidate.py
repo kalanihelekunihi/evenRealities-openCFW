@@ -345,11 +345,11 @@ COMMON_RELOCATIONS = {
 
 TARGET_PINS = {
     "apple-clang": {
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
         "object": (
             7092,
-            "9a7e470a573493c46be3399bef5bb02b3"
-            "45c8990a0a875269de923d643788fed",
+            "4ed23d92e50e7d92d91e707cf7a682f3"
+            "2561c9dc531c53a4ec4de25be6ee6d36",
         ),
         "functions": {
             ADAPTER_FUNCTIONS[0]: (

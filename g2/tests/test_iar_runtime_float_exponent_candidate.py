@@ -151,10 +151,10 @@ class IARRuntimeFloatExponentCandidateTests(unittest.TestCase):
         overlay = json.loads(OVERLAY.read_text(encoding="utf-8"))
         leaves = {item["function"]: item for item in overlay["relocated_leaves"]}
         expected = {
-            "open_cfw_iar_frexpf_bits": (52, 142310, []),
+            "open_cfw_iar_frexpf_bits": (52, 202158, []),
             "open_cfw_iar_frexpf": (
                 20,
-                142362,
+                202210,
                 [
                     {
                         "offset": 8,
@@ -167,7 +167,7 @@ class IARRuntimeFloatExponentCandidateTests(unittest.TestCase):
             ),
             "open_cfw_iar_ldexpf": (
                 196,
-                142382,
+                202230,
                 [
                     {
                         "offset": 190,
@@ -216,10 +216,10 @@ class IARRuntimeFloatExponentCandidateTests(unittest.TestCase):
         self.assertEqual(
             overlay["expected"],
             {
-                "overlay_size": 180782,
-                "overlay_sha256": "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491",
-                "component_size": 3704178,
-                "component_sha256": "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459",
+                "overlay_size": 429058,
+                "overlay_sha256": "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+                "component_size": 3952454,
+                "component_sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
             },
         )
         filtered = self.apollo_overlay.filter_config_for_profile(overlay, "linux-clang")
@@ -231,7 +231,7 @@ class IARRuntimeFloatExponentCandidateTests(unittest.TestCase):
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4482672, "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"),
+            (4745526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"),
         )
 
     @unittest.skipUnless(

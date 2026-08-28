@@ -20,6 +20,10 @@ THIRD_PARTY_DIR := third-party
 .PHONY: all help \
         build test verify clean \
         g2 g2-build g2-test g2-verify g2-inspect g2-clean \
+        g2-community-source g2-community-smoke \
+        completion-readiness completion-classification-gate completion-source-gate \
+        completion-source-ownership-gate completion-license-policy-gate \
+        completion-assessment completion-assessment-check \
         r1 r1-build r1-test r1-sanitize r1-verify r1-arm r1-sim r1-clean \
         third-party third-party-vendored third-party-fetched
 
@@ -40,6 +44,15 @@ help:
 	@echo '  g2-test          G2 unit tests'
 	@echo '  g2-verify        G2 build + upstream audits'
 	@echo '  g2-inspect       inspect the built source package'
+	@echo '  g2-community-source  deterministic vendor-byte-free source archive'
+	@echo '  g2-community-smoke   rebuild source profile from a fresh archive'
+	@echo '  completion-readiness current six-component ownership/classification audit'
+	@echo '  completion-classification-gate  require every byte to be classified'
+	@echo '  completion-source-gate          require complete production source'
+	@echo '  completion-source-ownership-gate reject raw executable transcription as source'
+	@echo '  completion-license-policy-gate  require MIT for project-owned source records'
+	@echo '  completion-assessment           regenerate and test the public G2 assessment'
+	@echo '  completion-assessment-check     verify the public assessment is current'
 	@echo
 	@echo 'R1 (nRF52840 ring firmware):'
 	@echo '  r1-test          portable host tests'
@@ -76,6 +89,33 @@ g2-verify:
 
 g2-inspect:
 	$(MAKE) -C $(G2_DIR) inspect
+
+g2-community-source:
+	$(MAKE) -C $(G2_DIR) community-source-bundle
+
+g2-community-smoke:
+	$(MAKE) -C $(G2_DIR) community-source-smoke
+
+completion-readiness:
+	$(MAKE) -C $(G2_DIR) completion-readiness
+
+completion-classification-gate:
+	$(MAKE) -C $(G2_DIR) completion-classification-gate
+
+completion-source-gate:
+	$(MAKE) -C $(G2_DIR) completion-source-gate
+
+completion-source-ownership-gate:
+	$(MAKE) -C $(G2_DIR) completion-source-ownership-gate
+
+completion-license-policy-gate:
+	$(MAKE) -C $(G2_DIR) completion-license-policy-gate
+
+completion-assessment:
+	$(MAKE) -C $(G2_DIR) completion-assessment
+
+completion-assessment-check:
+	$(MAKE) -C $(G2_DIR) completion-assessment-check
 
 g2-clean:
 	$(MAKE) -C $(G2_DIR) clean

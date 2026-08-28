@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Behavior and target-build tests for touch-controller I2C source."""
 
 from __future__ import annotations

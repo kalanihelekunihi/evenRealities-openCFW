@@ -1,0 +1,8 @@
+# Source-authenticated dynamic interfaces whose concrete runtime target is configuration/object dependent
+interface	source_anchor	provider_class	license_status	disposition	wave14_additional_function_bytes
+SFNT_Service.load_sbit_image	cff_slot_load embedded bitmap branch	registered FreeType SFNT module	FTL	typed-source-provider-interface	0
+SFNT_Service.get_metrics	cff_slot_load horizontal/vertical metrics branches	registered FreeType SFNT module	FTL	typed-source-provider-interface	0
+CFF_Decoder_Funcs.init_prepare_parse	cff_slot_load decoder lifecycle	registered PSAux CFF decoder	FTL	typed-source-provider-interface	0
+CFF_Builder_Funcs.done	cff_slot_load successful build finalization	registered PSAux CFF builder	FTL	typed-source-provider-interface	0
+FT_Incremental_Funcs.get_free_glyph_data	cff_get_glyph_data/cff_free_glyph_data	optional client incremental provider	unavailable	typed-optional-external-interface	0
+FT_Incremental_Funcs.get_glyph_metrics	cff_slot_load optional metrics override	optional client incremental provider	unavailable	typed-optional-external-interface	0

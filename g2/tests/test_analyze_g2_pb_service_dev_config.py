@@ -75,8 +75,8 @@ class AnalyzeG2PbServiceDevConfigTests(unittest.TestCase):
         self.assertEqual(production["stock_replaced_bytes"], 2646)
         self.assertEqual(production["retained_gap_pool_bytes"], 286)
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "blocked")
-        self.assertIn("authorized right temple is nonresponsive",
+        self.assertEqual(production["hardware_validation"], "deferred by project direction")
+        self.assertIn("deferred by project direction",
                       production["hardware_blocker"])
 
 

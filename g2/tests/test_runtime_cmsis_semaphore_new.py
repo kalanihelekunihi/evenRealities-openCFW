@@ -61,6 +61,8 @@ CURRENT_PACKAGE = (
     / "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
 )
 CURRENT_FLASH_PLAN = ROOT / "build" / "source" / "flash-plan.json"
+CURRENT_SOURCE_BUILD_REPORT = ROOT / "build" / "source" / "build-report.json"
+CURRENT_SHA256SUMS = ROOT / "build" / "source" / "SHA256SUMS"
 QUEUE_DELETE_SOURCE = (
     ROOT
     / "components"
@@ -196,31 +198,26 @@ CURRENT_DEPENDENCY_ADDRESSES = {
     "open_cfw_freertos_queue_create_counting_semaphore_static":
         0x007A_EC94,
     "open_cfw_freertos_queue_create_counting_semaphore": 0x007A_ECD4,
-    "open_cfw_freertos_queue_delete": 0x007B_0330,
+    "open_cfw_freertos_queue_delete": 0x007B_ECF8,
 }
-PRODUCTION_OFFSET = 114_740
-PRODUCTION_RUNTIME_ADDRESS = 0x007B_0358
+PRODUCTION_OFFSET = 174_588
+PRODUCTION_RUNTIME_ADDRESS = 0x007B_ED20
 PRODUCTION_SHA256 = (
-    "5e1105ed86ca0f43effdf1e11e59ee7c"
-    "6ce094b3321c127234c492a9cc70b8a4"
+    "a0e4d752fe01e9e856d5c94547e8193"
+    "a9fc24b26300aff966cf24e7abafff029"
 )
-PRODUCTION_OVERLAY_SIZE = 167_426
+PRODUCTION_OVERLAY_SIZE = 429_058
 PRODUCTION_OVERLAY_SHA256 = (
-    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
 )
-PRODUCTION_COMPONENT_SIZE = 3_690_822
+PRODUCTION_COMPONENT_SIZE = 3_952_454
 PRODUCTION_COMPONENT_SHA256 = (
-    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
 )
-PRODUCTION_PACKAGE_SIZE = 4_469_316
+PRODUCTION_PACKAGE_SIZE = 4_745_526
 PRODUCTION_PACKAGE_SHA256 = (
-    "d4c7f82a3e0cfbfc4476f8ca72c1bfd6a3aba5b13d32c6b924686cbc4d78c10d"
+    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
 )
-PRODUCTION_FLASH_PLAN_SHA256 = (
-    "642d39802f988c3da5e108c97fdcff82102cfcdfffd75710bd6e0a3017f7758e"
-)
-
-
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
@@ -1196,7 +1193,7 @@ class RuntimeCmsisSemaphoreNewTests(unittest.TestCase):
                 "offset": PRODUCTION_OFFSET,
                 "padding_before": 2,
                 "runtime_address": PRODUCTION_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007B0358",
+                "runtime_address_hex": "0x007BED20",
                 "size": 178,
             },
         )
@@ -1293,16 +1290,23 @@ class RuntimeCmsisSemaphoreNewTests(unittest.TestCase):
             (PRODUCTION_PACKAGE_SIZE, PRODUCTION_PACKAGE_SHA256),
         )
         flash_plan = CURRENT_FLASH_PLAN.read_bytes()
-        self.assertEqual(
-            sha256(flash_plan),
-            PRODUCTION_FLASH_PLAN_SHA256,
-        )
         parsed_plan = json.loads(flash_plan)
-        self.assertEqual(len(parsed_plan["flash_regions"]), 1890)
-        self.assertEqual(
-            len(parsed_plan["unresolved_flash_regions"]),
-            2,
+        source_build_report = json.loads(
+            CURRENT_SOURCE_BUILD_REPORT.read_text()
         )
+        checksums = dict(
+            line.split("  ", 1)[::-1]
+            for line in CURRENT_SHA256SUMS.read_text().splitlines()
+        )
+        self.assertEqual(checksums["flash-plan.json"], sha256(flash_plan))
+        self.assertEqual(parsed_plan["package_sha256"], PRODUCTION_PACKAGE_SHA256)
+        self.assertFalse(parsed_plan["safety"]["automatic_flashing"])
+        self.assertEqual(
+            len(parsed_plan["flash_regions"]),
+            source_build_report["placed_region_count"],
+        )
+        self.assertEqual(parsed_plan["unresolved_flash_regions"], [])
+        self.assertEqual(source_build_report["unresolved_region_count"], 0)
         source = SOURCE.read_text()
         self.assertIn(
             "#define vQueueDelete \\\n"

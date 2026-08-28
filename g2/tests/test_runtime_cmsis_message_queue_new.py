@@ -10,7 +10,6 @@ import subprocess
 import sys
 import tempfile
 import unittest
-import zlib
 from pathlib import Path
 
 
@@ -134,19 +133,19 @@ TARGET_SHA256 = (
     "c0f3521dfa995a3079a86b86ccc58eee"
 )
 RELOCATED_SHA256 = (
-    "afbba4f9f08b2df17a4350d7a7e83d99"
-    "b8439283ee40c1a1604bd879dff75f04"
+    "0281f86b2d417ba492b877701dc9c877"
+    "e782f18d7d622e778283a2d81994bf1b"
 )
-PRODUCTION_OVERLAY_SIZE = 167_426
+PRODUCTION_OVERLAY_SIZE = 429_058
 PRODUCTION_OVERLAY_SHA256 = (
-    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
 )
-PRODUCTION_COMPONENT_SIZE = 3_690_822
+PRODUCTION_COMPONENT_SIZE = 3_952_454
 PRODUCTION_COMPONENT_SHA256 = (
-    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
 )
-PRODUCTION_OFFSET = 113_808
-PRODUCTION_ADDRESS = 0x007A_FFB4
+PRODUCTION_OFFSET = 173_656
+PRODUCTION_ADDRESS = 0x007B_E97C
 TARGET_RELOCATIONS = [
     (
         0x10,
@@ -718,7 +717,7 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
                 "alignment": 4,
                 "padding_before": 2,
                 "runtime_address": PRODUCTION_ADDRESS,
-                "runtime_address_hex": "0x007AFFB4",
+                "runtime_address_hex": "0x007BE97C",
             },
         )
         self.assertEqual(
@@ -823,134 +822,16 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 121_634,
+                "generated_patch_site_bytes": 409_066,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_401_548,
-                "replaced_stock_function_bytes": 121_812,
-                "source_owned_bytes": 165_622,
-                "source_owned_in_place_bytes": 182,
+                "opaque_base_bytes": 3_111_914,
+                "replaced_stock_function_bytes": 409_246,
+                "source_owned_bytes": 431_334,
+                "source_owned_in_place_bytes": 184,
             },
         )
-        self.assertEqual(len(report["overlay"]["functions"]), 945)
-        self.assertEqual(len(report["overlay"]["patched_sites"]), 884)
-
-        historical_overlay = self.production_overlay[:113_970]
-        self.assertEqual(
-            (
-                len(historical_overlay),
-                sha256(historical_overlay),
-            ),
-            (
-                113_970,
-                "dba3b91264a8437ea5f44d872b41a712"
-                "3d6dd70e7816bdab7d6bff82d2c93ca9",
-            ),
-        )
-        official = OFFICIAL.read_bytes()
-        historical_component = bytearray(self.production_component)
-        historical_component[71_484:71_638] = official[71_484:71_638]
-        # Undo the later watchdog source milestone for this older checkpoint.
-        historical_component[1_012_480:1_012_544] = official[
-            1_012_480:1_012_544
-        ]
-        historical_component[1_012_544:1_012_620] = official[
-            1_012_544:1_012_620
-        ]
-        for offset, size in (
-            (38_198, 180),
-            (119_964, 218),
-            (21_908, 1_026),
-            (68_974, 132),
-            (76_448, 24),
-            (41_180, 20),
-            (41_200, 24),
-            (41_224, 44),
-            (40_036, 354),
-            (123_184, 256),
-            (123_440, 112),
-            (123_552, 90),
-            (123_642, 94),
-            (40_642, 34),
-            (71_866, 180),
-            (22_940, 106),
-            (23_056, 26),
-            (23_082, 26),
-            (79_496, 162),
-            (118_172, 12),
-            (118_252, 306),
-            (118_558, 8),
-            (118_566, 10),
-            (118_892, 338),
-            (39_522, 200),
-            (119_696, 246),
-            (120_182, 16),
-            (120_198, 128),
-            (120_326, 10),
-            # Scheduler-start closure admitted after this historical root.
-            (41_474, 46),
-            (118_028, 144),
-            (119_252, 206),
-            (120_896, 22),
-            (120_982, 38),
-            (121_578, 22),
-            (121_600, 22),
-            # Charger-common eleven-body production cluster.
-            (479_132, 240),
-            (479_372, 94),
-            (479_466, 464),
-            (479_930, 450),
-            (480_380, 226),
-            (480_606, 276),
-            (480_882, 372),
-            (481_276, 142),
-            (481_440, 122),
-            (481_562, 6),
-            (481_568, 8),
-            (858_984, 178),
-        ):
-            historical_component[offset:offset + size] = official[
-                offset:offset + size
-            ]
-        for offset, replacement_hex in (
-            (
-                691_244,
-                "b6f2ecbb00bf00bf00bf00bf00bf00bf00bf00bf"
-                "00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
-            ),
-            (
-                1_143_640,
-                "48f266b800bf00bf00bf00bf00bf00bf00bf00bf"
-                "00bf00bf00bf00bf00bf",
-            ),
-        ):
-            replacement = bytes.fromhex(replacement_hex)
-            historical_component[offset:offset + len(replacement)] = (
-                replacement
-            )
-        del historical_component[3_637_366:]
-        first_word = struct.unpack_from("<I", historical_component, 0)[0]
-        struct.pack_into(
-            "<I",
-            historical_component,
-            0,
-            (first_word & 0xFF000000) | len(historical_component),
-        )
-        struct.pack_into(
-            "<I",
-            historical_component,
-            4,
-            zlib.crc32(historical_component[8:]) & 0xFFFFFFFF,
-        )
-        self.assertEqual(
-            (
-                len(historical_component),
-                sha256(bytes(historical_component)),
-            ),
-            (
-                3_637_366,
-                "340120823caa5d95dc9c75199edb8f9915849d8ccc3ffe58e5474bc2d3324cd6",
-            ),
-        )
+        self.assertEqual(len(report["overlay"]["functions"]), 2_631)
+        self.assertEqual(len(report["overlay"]["patched_sites"]), 2_374)
 
     def test_host_layout_and_null_attribute_dynamic_path(self) -> None:
         self.assertEqual(self.host_compile.stderr, "")

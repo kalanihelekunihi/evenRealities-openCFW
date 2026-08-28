@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded BLE transmit wrappers matched to stock entries from
  * 0x00475A38 through 0x00475ED3.

@@ -1,0 +1,38 @@
+{
+  "admitted_row_count": 11,
+  "analysis_mode": "offline authenticated boundary plus independent functional replacement; host and Cortex-M0+ compile; no hardware/MMIO execution",
+  "compatibility": "clean-room on-storage format; migration from Infineon extended-mode rows requires hardware/capture evidence",
+  "component": "G2 Touch MIT clean-room Em_EEPROM admission batch 25",
+  "exclusions": "selected runtime, resident configuration, system handoff/fault, and halt boundaries remain",
+  "hardware_blocker": "deferred by project direction",
+  "hardware_validation": "deferred by project direction",
+  "integration": "isolated source candidate only; not production-routed",
+  "metrics": {
+    "admitted_functions": 11,
+    "admitted_instruction_bytes": 1636,
+    "concrete_source_or_implementation_gap_after": 8,
+    "eula_source_copied": 0,
+    "fixed_address_accesses": 0,
+    "input_concrete_gap": 19,
+    "input_gap_instruction_bytes": 2578,
+    "residual_digest": "557df95170a09bb67249c69756313ae53ac3135ae8f8f87d38d1532ed9628df9",
+    "residual_gap_instruction_bytes": 942,
+    "row_digest": "f44258f1db2f70156cd2cb9ec07874acb0497224c271f952d2b2bd04efc45e00",
+    "typed_external_or_unavailable_functions": 8,
+    "unimplemented_application_contracts_after": 0
+  },
+  "remaining": {
+    "concrete_gap_instruction_bytes": 942,
+    "concrete_source_or_implementation_functions": 8,
+    "typed_external_or_unavailable_functions": 8,
+    "unimplemented_clean_room_application_contracts": 0
+  },
+  "residual_row_count": 8,
+  "schema_version": 1,
+  "source": {
+    "license": "MIT",
+    "path": "components/shared/touch/runtime_touch_emeeprom_clean_room.c",
+    "sha256": "699f35a2116389fb3603217d0455edcde4f16922589b9114fb2d866312543636",
+    "target_closure_object_bytes": 4904
+  }
+}

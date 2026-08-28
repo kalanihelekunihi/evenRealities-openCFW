@@ -16,14 +16,14 @@ PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.eve
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 HEADER = ROOT / "components/shared/cordio/runtime_cordio_l2c.h"
 
-OVERLAY_SIZE = 404_796
-OVERLAY_SHA256 = "a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d"
-COMPONENT_SIZE = 3_928_192
-COMPONENT_SHA256 = "5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73"
-PACKAGE_SIZE = 4_706_686
-PACKAGE_SHA256 = "30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf"
-FLASH_PLAN_SIZE = 4_071_097
-FLASH_PLAN_SHA256 = "cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d"
+OVERLAY_SIZE = 429_058
+OVERLAY_SHA256 = "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+COMPONENT_SIZE = 3_952_454
+COMPONENT_SHA256 = "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+PACKAGE_SIZE = 4_745_526
+PACKAGE_SHA256 = "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
+FLASH_PLAN_SIZE = 4_643_183
+FLASH_PLAN_SHA256 = "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66"
 HEADER_SHA256 = "3d070ea0bf7e79449425af83dbd14416a1ed606b8cb8044116be23523f21c3f3"
 
 
@@ -107,7 +107,7 @@ def validate(
         or sha(FLASH_PLAN.read_bytes()) != FLASH_PLAN_SHA256
         or (len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
             len(flash["container_only_regions"]), len(flash["protected_regions"]))
-            != (5863, 2, 5, 6)
+            != (6671, 0, 6, 6)
     ):
         raise RuntimeError("L2CAP flash plan changed")
     result = {
@@ -123,7 +123,7 @@ def validate(
         "guarded_redirects": len(functions) - len(copy_indexes),
         "exact_in_place_copies": len(copy_indexes),
         "hardware_validation": (
-            "blocked by unavailable authorized responsive G2/EM9305 "
+            "deferred by project direction; future qualification requires authorized responsive G2/EM9305 "
             "and ATT peer evidence"
         ),
     }

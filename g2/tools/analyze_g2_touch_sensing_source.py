@@ -21,8 +21,8 @@ SOURCE = ROOT / "components/shared/touch/runtime_touch_sensing.c"
 HEADER = ROOT / "components/shared/touch/runtime_touch_sensing.h"
 IDENTITY = ROOT / "tools/analyze_g2_touch_identity.py"
 PINS = {
-    SOURCE: (4622, "3d35cbdec47e292e341285e1fff90fb391ac884ede2e63752d9100eb34f8d5a7"),
-    HEADER: (2410, "6a8d776cabe95065c202c55fce90a2ff940da5784d51476bd45b25c744939dac"),
+    SOURCE: (4629, "30d7fd3e9c2c9d0a02b1ae4a5737cdf66a17d0f0aebab7b61531326373e9c811"),
+    HEADER: (2461, "9fc6c523ba0fa7fa06aa6afb0a46385c326a246e1de4273732e4f8c9ca477f52"),
 }
 MSC_SPAN = (0x36C4, 0x376C, "5cee0e3336b8a6e052adc77ba845ff2d03d1dd5c9f4926588d523217aa7a13bc")
 EXPORTS = {
@@ -95,7 +95,8 @@ def audit() -> dict:
     return {
         "component": "G2 touch sensing/gesture/calibration policy",
         "analysis_mode": "offline source/build audit; no hardware, sleep, reset, signing, or flash operation",
-        "status": "implemented-in-source / hardware-validation-blocked",
+        "status": "implemented-in-source / hardware validation deferred by project direction",
+        "license": "MIT OR GPL-3.0-only",
         "software_gap_count": 0,
         "target": "thumbv6m-none-eabi / Cortex-M0+ / Thumb",
         "exports": sorted(EXPORTS),

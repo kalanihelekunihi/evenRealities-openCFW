@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of the two authenticated G2 bootloader output
  * transport entries.  The implementation preserves the observed channel

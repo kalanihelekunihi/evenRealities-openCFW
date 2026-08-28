@@ -8,7 +8,7 @@ D:\01_workspace\s200_ap510b_iar_git\platform\threads\thread_ble_wsf.c
 
 in the authenticated G2 `s200_v2.2.6.10` OTA. The original product source has
 not been recovered and no vendor implementation was copied. Three new
-GPL-3.0-only files now implement the twelve-entry behavioral surface with
+MIT files now implement the twelve-entry behavioral surface with
 injectable provider and diagnostic seams. No production bytes are replaced.
 
 ## Result

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: GPL-3.0-only
+# SPDX-License-Identifier: MIT
 """Report what the transparent build actually established, byte by byte.
 
 The point of this ledger is to keep an honest boundary between three very
@@ -30,6 +30,34 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 def percent(part: int, whole: int) -> str:
     return f"{100.0 * part / whole:.1f}%" if whole else "n/a"
+
+
+def release_readiness_blockers(summary: dict[str, Any]) -> list[str]:
+    """Return strict source-release blockers represented by this ledger.
+
+    Transparent source representation is useful evidence, but it is not a
+    release criterion by itself.  A releasable zero-opacity image cannot hide
+    unknown behavior in a trap or re-encode proprietary data as a C array.
+    Every attempted unit must also compile and fit in the resulting image.
+    """
+    blockers = []
+    if summary["opaque_bytes"] != 0:
+        blockers.append(f"{summary['opaque_bytes']} opaque bytes remain")
+    if summary["trapped_bytes"] != 0:
+        blockers.append(f"{summary['trapped_bytes']} trap bytes remain")
+    if summary["declared_data_bytes"] != 0:
+        blockers.append(
+            f"{summary['declared_data_bytes']} vendor-derived declared-data bytes remain"
+        )
+    if summary["units_compiled"] != summary["units_total"]:
+        blockers.append(
+            f"only {summary['units_compiled']} of {summary['units_total']} source units compile"
+        )
+    if summary["units_placed"] != summary["units_total"]:
+        blockers.append(
+            f"only {summary['units_placed']} of {summary['units_total']} source units are placed"
+        )
+    return blockers
 
 
 def render(build_dir: Path) -> tuple[str, dict[str, Any]]:
@@ -191,6 +219,14 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         default=REPO_ROOT / "docs/transparent-source-ledger.md",
     )
+    parser.add_argument(
+        "--require-release-ready",
+        action="store_true",
+        help=(
+            "fail unless opacity, traps, vendor-derived declared data, compile "
+            "failures, and placement failures are all zero"
+        ),
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -202,6 +238,14 @@ def main(argv: list[str] | None = None) -> int:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(text, encoding="utf-8")
     print(json.dumps(summary, indent=2, sort_keys=True))
+    if args.require_release_ready:
+        blockers = release_readiness_blockers(summary)
+        if blockers:
+            print(
+                json.dumps({"release_ready": False, "blockers": blockers}, indent=2),
+                file=sys.stderr,
+            )
+            return 1
     return 0
 
 

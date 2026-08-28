@@ -1,0 +1,5 @@
+/* SPDX-License-Identifier: BSD-3-Clause */
+extern void open_cfw_bootloader_critical_save_41b8ec(void);
+extern void open_cfw_bootloader_retained_delay_us_41d1c0(void);
+__attribute__((used, naked, noinline)) void open_cfw_bootloader_mspi_clkgen_ctrl_4249a0(void) { __asm__ volatile(
+"push {r3, r4, r5, r6, r7, lr}\nmovs r4, r0\nmovs r6, r1\nmovs r7, r2\nmovs r5, r3\nbl open_cfw_bootloader_critical_save_41b8ec\nstr r0, [sp]\nuxtb r6, r6\ncmp r6, #0\nbeq 3f\nuxtb r7, r7\ncmp r7, #0\nbeq 2f\nldr.w r1, [pc, #0x7e8]\nldr r0, [r1]\nmovs r2, #0x1e\nmovs r3, #5\nmul r3, r3, r4\nlsls r2, r3\nbics r0, r2\nuxtb r5, r5\nlsls r5, r5, #1\nmovs r2, #5\nmul r2, r2, r4\nlsls r5, r2\norrs r5, r0\nstr r5, [r1]\n2:\nldr.w r1, [pc, #0x7c8]\nldr r2, [r1]\nmovs r3, #1\nmovs r0, #5\nmuls r4, r0, r4\nlsls.w r4, r3, r4\norrs r4, r2\nstr r4, [r1]\nmovs r0, #10\nbl open_cfw_bootloader_retained_delay_us_41d1c0\nb 4f\n3:\nldr.w r1, [pc, #0x7ac]\nldr r2, [r1]\nmovs r3, #1\nmovs r0, #5\nmuls r4, r0, r4\nlsls.w r4, r3, r4\nbics.w r4, r2, r4\nstr r4, [r1]\n4:\nldr r0, [sp]\nmsr primask, r0\npop {r0, r4, r5, r6, r7, pc}\n"); }

@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Deterministic host oracle for the retained G2 EasyLogger record allocator,
  * enqueue retry limit, recycler ownership, and diagnostic seams.

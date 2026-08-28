@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * EasyLogger tracepoint deferral state machine matched to stock entries
  * 0x0047DD62, 0x0047DD8A, 0x0047DD92, and 0x0047DDAC.

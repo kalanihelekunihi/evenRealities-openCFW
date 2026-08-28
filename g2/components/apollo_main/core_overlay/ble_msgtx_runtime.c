@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded BLE message-transmit lifecycle hooks matched to stock
  * 0x00475308...0x00475333.

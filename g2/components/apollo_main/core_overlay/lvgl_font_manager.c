@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room source replacement for the G2 LVGL font manager at
  * 0x0046CAE0...0x0046D587.  External font payload bytes are deliberately not

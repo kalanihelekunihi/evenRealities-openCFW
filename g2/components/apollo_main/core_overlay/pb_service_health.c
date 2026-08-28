@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room production implementation of the eight linked G2
  * pb_service_health.c entries. Diagnostic-only logging and assertions are

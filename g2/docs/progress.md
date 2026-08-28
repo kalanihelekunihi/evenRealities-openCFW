@@ -39,8 +39,7 @@ production-routes all 79 linked entries, replacing 6,718 stock bytes with
 relocations. The exact two-byte scan-timeout no-op is compiled in place; the
 other 78 entries use guarded branches. The adjacent driver implements all 16
 APIs and production-routes the nine hardware-independent entries. Its six
-radio-controller operations remain explicitly blocked on unavailable
-authorized responsive G2/EM9305 physical evidence, with stock retained for
+radio-controller operations remain explicitly blocked on future-required authorized responsive G2/EM9305 physical evidence, with stock retained for
 those live paths.
 
 The fail-closed aggregate [third-party dependency closure audit](research/third-party-dependency-closure-audit.md)
@@ -162,7 +161,7 @@ superseded by the aggregate closure below. See the
 timer functions are now production-routed: 11 guarded redirects replace all
 536 stock body bytes with 632 compiled bytes, 14 alignment bytes, and 29 strict
 relocations. The package and flash-plan gates pass; live scheduler/controller
-timing remains blocked by unavailable authorized responsive hardware.
+timing is deferred by project direction; future qualification requires authorized responsive hardware.
 
 The adjacent WSF OS/queue pass closes 12 OS functions / 532 bytes and six
 linked queue functions / 242 bytes. The stock task is exactly 64 bytes with
@@ -175,7 +174,7 @@ variant, but the exact G2 definition site is unavailable. Lorelei completed
 closure symbols and no raw/strict-normalized match. All 18 bounded functions
 are production-routed as 886 compiled bytes plus 14 alignment bytes under 41
 strict relocations. Live ISR/task scheduling, handler ordering, and sleep
-behavior remain hardware-blocked. See the [WSF OS/queue audit](research/cordio-wsf-os-queue-source-recovery.md).
+behavior remain hardware-deferred. See the [WSF OS/queue audit](research/cordio-wsf-os-queue-source-recovery.md).
 
 The next WSF buffer/message pass closes another ten functions / 556 bytes.
 Three buffer functions are bounded over 430 bytes; initialized-SRAM recovery
@@ -236,8 +235,7 @@ tests cover the complete state policy and G2's `connId == 0`
 false/`0x0E`/unaware/no-copy/no-op guards; all ten selectors compile
 independently. Vendor logging expansion is omitted without changing
 state-machine results. Live robust-caching, database-hash, service-changed,
-callback, peer, and controller behavior remains blocked by unavailable
-authorized responsive physical evidence. See the
+callback, peer, and controller behavior is deferred by project direction; future qualification requires authorized responsive physical evidence. See the
 [ATT CSF audit](research/cordio-atts-csf-source-recovery.md).
 
 The next public-host tranche closes the complete linked `smp_db.c` module:
@@ -266,7 +264,7 @@ Host tests cover allocation, initialization, read/write/range policy,
 change-only callbacks, security levels, clear/free, and product connection
 guards; all fourteen selectors compile independently. Live CCC persistence,
 peer, callback, security-level, and controller behavior remains blocked by
-unavailable authorized responsive physical evidence. See the
+future-required authorized responsive physical evidence. See the
 [ATT CCC audit](research/cordio-atts-ccc-source-recovery.md).
 
 The ATT server-write tranche is now production-routed: all four linked
@@ -280,8 +278,7 @@ implemented, host-tested, and independently ARM-compiled without claiming a
 stock redirect. The strict component, manifest, deterministic package, flash
 plan, host behavior, analyzer, and all five selector builds are green. Live
 write/prepare/execute traffic, deferred callback completion, ATT peer behavior,
-controller timing, and EM9305 interaction remain blocked by unavailable
-authorized responsive physical evidence. See the
+controller timing, and EM9305 interaction is deferred by project direction; future qualification requires authorized responsive physical evidence. See the
 [ATT write audit](research/cordio-atts-write-source-recovery.md).
 
 The common ATT server-processor tranche is now production-routed: all nine
@@ -295,7 +292,7 @@ the public source default. Host behavior, all nine isolated target builds,
 strict routing, component tiling, manifest, deterministic package, flash plan,
 and analyzer gates are green. Live discovery/read traffic, link security state,
 peer interoperability, controller timing, and EM9305 behavior remain blocked
-by unavailable authorized responsive physical evidence. See the
+by future-required authorized responsive physical evidence. See the
 [ATT processor audit](research/cordio-atts-proc-source-recovery.md).
 
 The ATT client-discovery tranche is also complete: fifteen common
@@ -347,7 +344,7 @@ overlay/component/package sizes are 347,282 / 3,870,678 / 4,649,172 bytes;
 the package SHA-256 is
 `777a059d84671ee04460d7c9cdb9af9ab93ce7eaaced0932b0c254f9f2a53e77`.
 Live ATT peer/controller, continuation, and buffer-lifetime validation remains
-blocked by unavailable authorized responsive G2/EM9305 physical evidence. No
+is deferred by project direction; future qualification requires authorized responsive G2/EM9305 physical evidence. No
 image was signed, flashed, or installed.
 
 The optional ATT client-read unit is now production-routed as well. Four
@@ -362,7 +359,7 @@ The canonical overlay/component/package sizes are 347,724 / 3,871,120 /
 4,649,614 bytes; the package SHA-256 is
 `a7d2627341cd8603e607a37c19d70ed42f7f5ba501fb6c76826664cb322de06d`.
 Live ATT peer/controller, negotiated-MTU, continuation, and buffer-lifetime
-validation remains blocked by unavailable authorized responsive G2/EM9305
+validation is deferred by project direction; future qualification requires authorized responsive G2/EM9305
 physical evidence. No image was signed, flashed, or installed.
 
 The mandatory ATT client PDU processor is now production-routed. All fifteen
@@ -377,7 +374,7 @@ overlay/component/package sizes are 353,336 / 3,876,732 / 4,655,226 bytes;
 the deterministic package SHA-256 is
 `b10166d4f1c1f91f348c3ee360afb2af1499df59715491a1256a1d0545f548bc`.
 Live ATT/EATT peer, controller, timer, flow-control, and buffer-lifetime
-validation remains blocked by unavailable authorized responsive G2/EM9305
+validation is deferred by project direction; future qualification requires authorized responsive G2/EM9305
 physical evidence. No image was signed, flashed, or installed.
 
 Optional ATT client signing is conclusively absent. `AttcInit` leaves the
@@ -402,7 +399,7 @@ compiled bytes plus 26 alignment bytes under 32 strict relocations. Host
 state-machine, HCI completion, callbacks, timers, private events, direct
 advertising, bounds, routing, package, and flash-plan gates pass. Live BLE
 peer/controller, RF, timing, and address-policy validation remains blocked by
-unavailable authorized responsive G2/EM9305 physical evidence. See the
+future-required authorized responsive G2/EM9305 physical evidence. See the
 [legacy advertising audit](research/cordio-dm-adv-leg-source-recovery.md).
 
 The common advertising producer tranche closes nine linked `dm_adv.c`
@@ -441,8 +438,7 @@ retained data. Exhaustive 40-transition host tests cover event masking,
 next-state-before-action order, and null/invalid CCB, action-set, and action
 pointer paths. Component, manifest, deterministic package, and flash-plan
 gates pass. Live controller completion, role-action timing, cancellation,
-disconnect, and paired-temple behavior remains blocked by unavailable
-authorized responsive G2/EM9305 physical evidence. See the
+disconnect, and paired-temple behavior is deferred by project direction; future qualification requires authorized responsive G2/EM9305 physical evidence. See the
 [DM state-machine audit](research/cordio-dm-conn-sm-source-recovery.md).
 
 The DM local-device tranche closes twelve linked functions / 626 code bytes
@@ -457,7 +453,7 @@ alignment bytes under nine strict relocations. Host reset/HCI/callback,
 privacy/CTE bridge, allocation, address, whitelist/filter and bounds tests,
 component, manifest, package, and flash-plan gates pass. Live controller
 reset/timing/address/filter/privacy and paired-temple validation remains
-blocked by unavailable authorized responsive G2/EM9305 evidence. See the
+is deferred by project direction; future qualification requires authorized responsive G2/EM9305 evidence. See the
 [DM local-device audit](research/cordio-dm-dev-source-recovery.md).
 
 The optional DM device-privacy tranche is now closed as a stock exclusion.
@@ -490,7 +486,7 @@ alignment bytes under two strict relocations. Host router/registration/data/
 privacy/address/event-size/PHY behavior, all selector builds, routing,
 manifest, deterministic package, and flash-plan gates pass. Live
 HCI/controller/peer/timing and paired-temple validation remains blocked by
-unavailable authorized responsive G2/EM9305 physical evidence.
+future-required authorized responsive G2/EM9305 physical evidence.
 See the [DM router audit](research/cordio-dm-main-source-recovery.md).
 
 The adjacent DM privacy tranche closes 21 linked `dm_priv.c` functions / 980
@@ -504,8 +500,7 @@ redirects replace all 980 stock body bytes with 1,688 compiled bytes plus 20
 alignment bytes under 25 strict relocations; the four dead-stripped APIs are
 source-only build products. Host behavior, exact routing, component, manifest,
 deterministic package, and flash-plan gates pass. Live controller privacy,
-address, RF/timing, and paired-temple validation remains blocked by unavailable
-authorized responsive G2/EM9305 physical evidence. See the
+address, RF/timing, and paired-temple validation is deferred by project direction; future qualification requires authorized responsive G2/EM9305 physical evidence. See the
 [DM privacy audit](research/cordio-dm-priv-source-recovery.md).
 
 The adjacent DM security tranche closes eight linked `dm_sec.c` functions /
@@ -533,8 +528,7 @@ bytes with 378 compiled Cortex-M55 bytes plus four alignment bytes under
 eleven strict relocations. Both dead-stripped public APIs target-compile.
 Host HCI/callback/command/init behavior, routing, manifest, deterministic
 package, and flash-plan gates pass. Live controller PHY negotiation,
-peer/RF/timing, and paired-temple validation remains blocked by unavailable
-authorized responsive G2/EM9305 physical evidence. See the
+peer/RF/timing, and paired-temple validation is deferred by project direction; future qualification requires authorized responsive G2/EM9305 physical evidence. See the
 [DM PHY audit](research/cordio-dm-phy-source-recovery.md).
 
 The slave-security tranche closes all three `dm_sec_slave.c` wrappers / 148
@@ -561,7 +555,7 @@ pointers, and zero interior ingress are fail-closed. See the
 All six definitions are now maintained and Cortex-M55 compiled. Five guarded
 redirects replace every linked body byte, and the component/package/flash-plan
 contract is pinned. Live controller/L2CAP/privacy/peer/RF and paired-temple
-behavior remains hardware-blocked by unavailable authorized responsive
+behavior remains hardware-deferred by future-required authorized responsive
 evidence.
 
 The legacy-master connection tranche closes all three
@@ -579,7 +573,7 @@ call, four registered pointers, and zero interior ingress are fail-closed.
 All functions are maintained in C and target-compiled; five guarded redirects
 replace every bounded body byte, and component/package/flash-plan ownership is
 pinned. Live controller, peer, RF, and paired-temple behavior remains blocked
-by unavailable authorized responsive hardware.
+by future-required authorized responsive hardware.
 See the [legacy-slave audit](research/cordio-dm-conn-slave-leg-source-recovery.md).
 
 The core slave-connection tranche closes five linked `dm_conn_slave.c`
@@ -593,7 +587,7 @@ All six definitions are now maintained and Cortex-M55 compiled. Five guarded
 redirects replace every linked body byte; host behavior, disjoint route
 namespaces, component tiling, deterministic package, and flash-plan pins are
 green. Live controller/L2CAP/peer/RF and paired-temple behavior remains
-hardware-blocked by unavailable authorized responsive evidence.
+hardware-deferred by future-required authorized responsive evidence.
 
 The L2CAP slave tranche closes six linked `l2c_slave.c` functions / 1,078
 code bytes in a complete 1,148-byte object; only `L2cDmSigReq` is
@@ -1417,7 +1411,7 @@ exact Packetcraft-r20 whole file. All twenty linked definitions are now
 production-routed from bounded C: 2,258 compiled bytes plus 18 alignment bytes
 replace all 2,662 stock body bytes. Six host-oracle groups and the canonical
 component/package build pass. Authorized G2/EM9305 pairing and interoperability
-evidence is unavailable, so physical validation remains explicitly blocked;
+qualification is deferred by project direction; future qualification requires that evidence, so physical validation is deferred by project direction;
 see `docs/research/cordio-smp-sc-act-source-recovery.md`.
 
 ## Current Cordio SMP legacy state-machine increment
@@ -1435,8 +1429,8 @@ Apache-2.0 Packetcraft r20.05--r20.05c behavior over r19/AmbiqSuite 2.x. The
 official R4.4.1 import is byte-identical later corroboration. Production now
 routes both initializers to 88 compiled bytes and installs all 705 dispatch
 bytes through 37 exact placements. Canonical component/package and offline
-host/Thumb/table gates pass; authorized G2/EM9305 legacy-pairing evidence is
-unavailable, so physical validation remains explicitly blocked. See
+host/Thumb/table gates pass; G2/EM9305 legacy-pairing qualification is deferred
+by project direction; future qualification requires authorized evidence. See
 `docs/research/cordio-smp-legacy-state-machines-source-recovery.md`.
 
 ## Current Cordio non-SMP exclusion increment
@@ -1507,8 +1501,7 @@ under 13 strict relocations; all eleven source-only getters target-compile.
 Host tests cover initialization, completed-buffer accounting and saturation,
 flow re-enable, RX queueing, timeout/event/ACL/ISO dispatch, callback absence,
 unknown types, and all getter offsets. `make cordio-hci-core-ps-closure` is
-green. Live controller/ISO/RF/timing validation remains blocked by unavailable
-authorized responsive G2/EM9305 evidence. See
+green. Live controller/ISO/RF/timing validation is deferred by project direction; future qualification requires authorized responsive G2/EM9305 evidence. See
 `docs/research/cordio-hci-core-ps-source-recovery.md`.
 
 ## Current Ambiq Cordio HCI transport increment
@@ -1532,7 +1525,7 @@ chunking, back-to-back packets, oversize/invalid/allocation/null failures, and
 atomic rejection-state reset. The maintained source copies no proprietary
 bytes. `make cordio-hci-tr-closure` verifies the source, Cortex-M55 build,
 routes, component, manifest, deterministic package, and flash plan. Live
-controller/RF/timing validation remains blocked by unavailable authorized
+controller/RF/timing validation is deferred by project direction; future qualification requires authorized
 responsive G2/EM9305 evidence. See
 `docs/research/cordio-hci-tr-source-recovery.md`.
 
@@ -1697,7 +1690,7 @@ relocations replace all 1,552 stock body bytes. Both dead-stripped zero-copy
 wrappers are implemented and target-compiled without inventing linked stock
 coverage. Host state-machine, selector, component, manifest, package, flash-
 plan, and deterministic verification gates are green; live ATT/EATT peer and
-controller validation is blocked by unavailable authorized responsive G2
+controller validation is deferred by project direction; future qualification requires authorized responsive G2
 evidence. See `docs/research/cordio-atts-ind-source-recovery.md`.
 
 ## Current Cordio ATT server-owner/dispatcher increment
@@ -1722,8 +1715,7 @@ replace all 2,710 stock body bytes. All four source-only public helpers are
 implemented and target-compiled. Hardened dispatch, CCB, timer, prepared-
 write, database-hash, group-mutation, initialization, component, manifest,
 package, flash-plan, and deterministic gates are green. Live ATT/EATT peer,
-controller, CMAC timing, and EM9305 behavior are blocked by unavailable
-authorized responsive evidence; see
+controller, CMAC timing, and EM9305 behavior is deferred by project direction; future qualification requires authorized responsive evidence; see
 `docs/research/cordio-atts-main-source-recovery.md`.
 
 ## Current Cordio common ATT server-processor increment
@@ -1825,7 +1817,7 @@ now owns all seven entries through guarded redirects: 2,786 compiled bytes
 plus eight alignment bytes under 44 strict relocations replace all 2,984 stock
 body bytes. Host and selector tests plus component, manifest, package, flash-
 plan, and deterministic verification are green. Live ATT peer/controller
-behavior is blocked by unavailable authorized responsive physical evidence;
+behavior is deferred by project direction; future qualification requires authorized responsive physical evidence;
 see `docs/research/cordio-atts-read-source-recovery.md`.
 
 ## Current Cordio ATT server-write increment
@@ -1847,7 +1839,7 @@ relocations, replacing all 1,220 stock body bytes. The source-only continuation
 API is also implemented and ARM-compiled without inventing stock coverage.
 Host, component, manifest, deterministic-package, flash-plan, and analyzer
 gates are green; physical peer/controller/EM9305 behavior is explicitly
-blocked by unavailable authorized responsive hardware. See
+is deferred by project direction; future qualification requires authorized responsive hardware. See
 `docs/research/cordio-atts-write-source-recovery.md`.
 
 ## Current G2 BLE WSF-thread increment
@@ -2712,7 +2704,7 @@ production-routed: two strict-relocation leaves total 28 source bytes, and two
 guarded redirects replace all 140 stock body bytes. The 32-byte diagnostic pool
 remains retained. Host behavior, Thumb compilation, analyzer routing, Apple
 component, and complete package gates pass. On-device enable/reset-cause timing
-is blocked by unavailable authorized hardware evidence. See
+is deferred by project direction; future qualification requires authorized hardware evidence. See
 `docs/research/g2-watchdog-recovery.md`. Its retained eAT buzzer consumer is
 closed below.
 
@@ -2735,8 +2727,8 @@ authored clean-room C is now production-routed as one 2,740-byte Thumb leaf
 with 23 strict provider relocations; a guarded redirect replaces the entire
 1,208-byte stock object. Host/parser, analyzer, component, ownership-map,
 package, and flash-plan gates are green. Audible output, pitch, frequency,
-duty cycle, beat timing, and stop behavior remain hardware-blocked because
-authorized physical G2 buzzer evidence is unavailable. See
+duty cycle, beat timing, and stop behavior remain hardware-deferred because
+physical G2 buzzer qualification is deferred by project direction; future qualification requires authorized evidence. See
 `docs/research/g2-at-buzzer-recovery.md`. The adjacent command-table entry is
 `AT^AUDIO` at `0x005A5488`; its retained `at_codec.c` handler is closed below.
 
@@ -2868,7 +2860,7 @@ text bytes plus ten alignment bytes; four guarded redirects replace all 1,360
 stock body bytes while retaining the 124-byte official pool. Host behavior,
 strict relocation, component, package, and deployment-plan gates are green.
 Live service-`0x81` temple/case exchange and physical case-state validation are
-explicitly blocked by unavailable authorized evidence. See
+is deferred by project direction; future qualification requires authorized evidence. See
 `docs/research/g2-pb-service-glasses-case-recovery.md`. The next bounded
 protobuf-service frontier was `pb_service_ring.c`, now closed below.
 
@@ -2886,7 +2878,7 @@ compiles to 594 text bytes plus four alignment bytes. Four guarded redirects
 replace all 1,362 stock body bytes and retain the 150-byte official pool. Host,
 analyzer, component, package, and deployment-plan gates are green. Paired-G2
 BLE relay and live nanopb/ring-event validation remain explicitly blocked by
-unavailable authorized physical evidence. See
+future-required authorized physical evidence. See
 `docs/research/g2-pb-service-ring-recovery.md`; conversate is the next retained
 protobuf-service frontier, now closed below.
 
@@ -2900,7 +2892,7 @@ command/tag envelopes over service `0x0B` are pinned with zero stored or
 strict-interior ingress. Eight clean-room source functions now compile to
 1,098 text bytes plus eight alignment bytes; 33 strict relocations and six
 guarded redirects replace all 1,776 stock body bytes. Software gates are green;
-live BLE/peer/UI validation is blocked by unavailable authorized hardware. See
+live BLE/peer/UI validation is deferred by project direction; future qualification requires authorized hardware. See
 `docs/research/g2-pb-service-conversate-recovery.md`; teleprompt is closed
 below.
 
@@ -2916,7 +2908,7 @@ zero real strict-interior ingress. Nine clean-room source functions compile to
 1,348 text bytes plus four alignment bytes; 39 strict relocations and seven
 guarded redirects replace all 1,854 stock body bytes while retaining the
 130-byte official tail. Software gates are green; live BLE/peer/UI validation
-is blocked by unavailable authorized hardware. See
+is deferred by project direction; future qualification requires authorized hardware. See
 `docs/research/g2-pb-service-teleprompt-recovery.md`; Even-AI is closed below.
 
 ## Current G2 Even-AI protobuf-service increment
@@ -2932,7 +2924,7 @@ clean-room production source supplies 27 functions, 2,832 compiled text bytes,
 36 alignment bytes, and 107 strict relocations. Twenty-five redirects replace
 all 8,404 stock body bytes while retaining the authenticated 552-byte gap/pool
 closure. Software gates are green; live paired-temple service-7 BLE and
-Even-AI UI validation is explicitly blocked by unavailable authorized
+Even-AI UI validation is is deferred by project direction; future qualification requires authorized
 responsive hardware. See `docs/research/g2-pb-service-even-ai-recovery.md`;
 terminal is closed below.
 
@@ -2952,7 +2944,7 @@ Historical source remains unavailable, but the independently authored
 thirteen whole-body redirects replace all 2,554 stock body bytes. Host tests
 exercise the complete RX/TX contract and the canonical 4,503,622-byte package
 is byte-pinned. Live service-`0x30` master/peer BLE and terminal-UI validation
-is explicitly blocked because the authorized right temple is nonresponsive
+is explicitly blocked because the authorized right temple is not under test because physical qualification is deferred by project direction
 and the left temple must remain stock. See
 `docs/research/g2-pb-service-terminal-recovery.md`; device configuration is
 closed below.
@@ -2996,7 +2988,7 @@ alignment bytes. Eleven guarded redirects replace all 3,466 stock bodies
 through 38 strict relocations while retaining the 334 official gap/pool bytes.
 Host, component, manifest, package, deployment, aggregate-service, and origin-
 accounting gates are green. Live service-9 behavior remains explicitly
-hardware-blocked; see `docs/research/g2-pb-service-setting-recovery.md`.
+hardware-deferred; see `docs/research/g2-pb-service-setting-recovery.md`.
 
 ## Current G2 onboarding protobuf-service increment
 
@@ -3013,7 +3005,7 @@ Historical source remains unavailable, but an independently authored
 bytes. Nine guarded redirects replace all 3,024 stock body bytes through 22
 strict relocations while retaining the 192 official gap/pool bytes. Host,
 component, manifest, package, and closure gates are green. Live service-`0x10`
-behavior remains explicitly hardware-blocked; see
+behavior remains explicitly hardware-deferred; see
 `docs/research/g2-pb-service-onboarding-recovery.md`. Notification is the next
 software frontier below.
 
@@ -3032,7 +3024,7 @@ bytes plus 16 alignment bytes. Nine guarded redirects replace all 3,318 stock
 body bytes through 34 strict relocations while retaining the 238 official
 gap/pool bytes. Host, component, manifest, package, deployment, complete-
 service-ledger, and origin-accounting gates are green. Live service-4 behavior
-is explicitly hardware-blocked; see
+is explicitly hardware-deferred; see
 `docs/research/g2-pb-service-notification-recovery.md`. Three protobuf-service
 software frontiers were identified there; device-setting is now production-
 routed below, leaving pair-manager.
@@ -3052,7 +3044,7 @@ guarded redirects replace all 3,432 stock body bytes through 30 strict
 relocations while retaining the 284 official gap/pool bytes. Host, component,
 manifest, package, deployment, aggregate-ledger, and origin-accounting gates
 are green. Live destructive reset, peer BLE, heartbeat, clock-sync, and
-persistence behavior remains explicitly hardware-blocked; see
+persistence behavior remains explicitly hardware-deferred; see
 `docs/research/g2-pb-service-dev-setting-recovery.md`.
 
 ## Current G2 quicklist protobuf-service increment
@@ -3071,7 +3063,7 @@ relocations while preserving the 280 official gap/pool bytes. The multi-item
 notification copy rejects counts above the twenty records that fit the
 workspace. Host, component, manifest, package, deployment, aggregate-ledger,
 and origin-accounting gates are green. Live service-`0x0C` peer BLE and
-persistent list workflows remain hardware-blocked. See
+persistent list workflows remain hardware-deferred. See
 `docs/research/g2-pb-service-quicklist-recovery.md`; pair-manager is now
 source-routed as described below, so the retained protobuf-service family has
 no remaining software implementation gap.
@@ -3094,8 +3086,8 @@ redirects replace all 6,564 stock body bytes while retaining the authenticated
 724-byte gap/pool. Host behavior, selector compilation, component, manifest,
 package, aggregate-ledger, frontier, and origin-accounting gates are green.
 Live security-auth, pipe-role, ring-connect, BLE-parameter, disconnect, and
-unpair workflows are explicitly hardware-blocked because no authorized
-responsive G2 pair-manager peer is physically available.
+unpair workflows are deferred by project direction; future qualification
+requires an authorized responsive G2 pair-manager peer.
 
 This closes every retained `pb_service_*` software path. The original
 119-function / 40,844-byte lower-bound census reconciles to 143 linked
@@ -3119,9 +3111,9 @@ now compiles to 2,936 text bytes plus 16 alignment bytes with 68 strict
 relocations. Guarded redirects replace all 9,276 stock body bytes while
 retaining the authenticated 658-byte compatibility gap/pool. Host behavior,
 Cortex-M55 selectors, component, package, and flash-plan gates pass. Historical
-source remains unavailable, and live EFS media behavior is hardware-blocked:
-the authorized right temple is nonresponsive, the left must remain stock, and
-no authorized responsive peer/media pair is available.
+source remains unavailable, and live EFS media behavior is hardware-deferred:
+the authorized right temple is not under test because physical qualification is deferred by project direction, the left must remain stock, and
+future qualification requires authorized responsive peer/media pair.
 
 The reproducible first-party census now partitions all 234 retained paths: 68
 closed and 166 open. Closed paths anchor 361 functions / 142,762 body bytes;
@@ -3227,10 +3219,294 @@ relocations. CRC/framing, FWPK loading, 32/128-byte transfer, version skip and
 force paths, cleanup, all selector builds, component/package/flash-plan, and
 origin-accounting gates pass. Live destructive touch programming, reset,
 version readback, I2C timing, and recovery are blocked because the authorized
-right temple is nonresponsive, the left must remain stock, and no authorized
-controller fixture or golden capture is available. See
+right temple is not under test because physical qualification is deferred by project direction, the left must remain stock, and future qualification requires authorized controller fixture or golden capture. See
 `docs/research/g2-service-touch-dfu-recovery.md`; wider firmware functional
 completeness is not claimed.
+
+## Current bootloader progress-service increment
+
+The 228-byte primary and 198-byte secondary progress services at
+`[0x00423524,0x004236CE)` are now exact maintained C under both reviewed target
+toolchains. Six focused tests cover authenticated bodies, descriptor/FIFO
+paths, progress mirrors, exhaustion/completion callbacks, pump/snapshot
+behavior, interrupt restoration and dual compilation.
+
+Canonical accounting is 23,329 source-owned, 16,528 generated patch, 16
+alignment, and 123,967 retained official bytes across 282 source-owned
+functions, five caves, 79 exact in-place leaves, and 201 patch sites. The
+4,640,329-byte flash plan has SHA-256
+`d9fe2b2028f168a1f3e54a1a26f0783c436173c319c143e0835b9bd5c0e7ca23`
+with 6,667 placed and zero unresolved regions; provider and byte-identical
+unsigned-package hashes
+remain unchanged.
+
+No hardware operation occurred. The earliest retained executable body remains
+at `0x0042308E`; live FIFO/descriptor/interrupt/DMA/callback/concurrency/MMIO
+qualification is is deferred by project direction; future qualification requires authorized responsive
+evidence, and firmware-wide functional completeness is not claimed.
+
+## Current bootloader register-service increment
+
+The 44-byte register-OR, 42-byte register-write, and 58-byte dual-register
+query services around `[0x004236CE,0x00423764)` are now exact maintained C under
+both reviewed target toolchains without relocations. Five focused tests cover
+authenticated bodies/literals, bank selection, bit preservation, writes,
+selectors, invalid types, and dual compilation.
+
+Canonical accounting is 23,473 source-owned, 16,528 generated patch, 16
+alignment, and 123,823 retained official bytes across 285 source-owned
+functions, five caves, 82 exact in-place leaves, and 201 patch sites. The
+4,643,183-byte flash plan has SHA-256
+`9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66`
+with 6,671 placed and zero unresolved regions; provider and byte-identical
+unsigned-package hashes remain unchanged.
+
+No hardware operation occurred. The earliest retained executable body remains
+at `0x0042308E`; live register/MMIO/concurrency/peripheral qualification is
+is deferred by project direction; future qualification requires authorized responsive evidence, and
+firmware-wide functional completeness is not claimed.
+
+## Prior bootloader service-dispatch increment
+
+The 176-byte per-instance service dispatcher at
+`[0x0042377C,0x0042382C)` is now exact maintained C under both reviewed target
+toolchains with six strict calls. Five focused tests cover authenticated pools,
+validation, active/inactive flag routing, progress mirroring, callback
+arguments, cleanup, and dual compilation.
+
+Canonical accounting is 23,649 source-owned, 16,528 generated patch, 16
+alignment, and 123,647 retained official bytes across 286 source-owned
+functions, five caves, 83 exact in-place leaves, and 201 patch sites. The
+4,644,623-byte flash plan has SHA-256
+`8151fe29dbd1b22c69b72c96d01fc363ffbcd5e469e219cd105fe3f7172af7bd`
+with 6,673 placed and zero unresolved regions; provider and byte-identical
+unsigned-package hashes remain unchanged.
+
+No hardware operation occurred. The earliest retained executable body remains
+at `0x0042308E`; live interrupt/register/callback/concurrency/MMIO
+qualification is is deferred by project direction; future qualification requires authorized responsive
+evidence, and firmware-wide functional completeness is not claimed.
+
+## Prior bootloader bounded memory-exchange increment
+
+The 86-byte two-buffer exchange and 110-byte three-buffer rotation at
+`[0x00423864,0x00423928)` are now exact maintained C under both reviewed target
+toolchains with seven strict copy calls. Four focused tests cover authenticated
+bodies/boundaries, zero length, direct-byte operation, the 64- and 128-byte
+thresholds, multi-chunk operation, untouched suffixes, and dual compilation.
+
+Canonical accounting is 23,845 source-owned, 16,528 generated patch, 16
+alignment, and 123,451 retained official bytes across 288 source-owned
+functions, five caves, 85 exact in-place leaves, and 201 patch sites. The
+4,646,731-byte flash plan has SHA-256
+`d6ddc3470a69ae4b00ea43ae4cd8f7a511048e3934f9694d3974a634d21ed26e`
+with 6,676 placed and zero unresolved regions; provider and byte-identical
+unsigned-package hashes remain unchanged.
+
+No hardware operation occurred. The earliest retained executable body remains
+at `0x0042308E`, and the sequential frontier is `0x00423928`; hardware-dependent
+qualification is deferred by project direction; future qualification requires authorized responsive evidence,
+and firmware-wide functional completeness is not claimed.
+
+## Prior bootloader rotate-to-front increment
+
+The 74-byte rotate-to-front helper at `[0x00423928,0x00423972)` is now exact
+maintained C under both reviewed target toolchains with two strict copy calls
+and one strict overlap-safe move call. Four focused tests cover authenticated
+boundaries, zero and first-element no-ops, threshold and multi-chunk widths,
+untouched suffixes, the original-width address rule, and dual compilation.
+
+Canonical accounting is 23,919 source-owned, 16,528 generated patch, 16
+alignment, and 123,377 retained official bytes across 289 source-owned
+functions, five caves, 86 exact in-place leaves, and 201 patch sites. The
+4,647,450-byte flash plan has SHA-256
+`99cd47d54664ac5e270fe43e987776719fb3753f53ca435fadd7e6d0fb83d0f3`
+with 6,677 placed and zero unresolved regions; provider and byte-identical
+unsigned-package hashes remain unchanged.
+
+No hardware operation occurred. The earliest retained executable body remains
+at `0x0042308E`, and the sequential frontier is `0x00423972`; hardware-dependent
+qualification is deferred by project direction; future qualification requires authorized responsive evidence,
+and firmware-wide functional completeness is not claimed.
+
+## Current bootloader three-element comparator/exchange increment
+
+The exact 80-byte helper at `[0x00423972,0x004239C2)` implements a
+three-comparison exchange network. Four focused tests cover every distinct
+permutation, duplicates, comparison order, successor authentication, and dual
+target compilation.
+
+Canonical accounting is 23,999 source-owned, 16,528 generated patch, 16
+alignment, and 123,297 retained official bytes across 290 source-owned
+functions, five caves, 87 exact in-place leaves, and 201 patch sites. The
+4,648,165-byte flash plan has SHA-256
+`17bc9a9a59b2902f8b25aa42a209f536c8e26be48ba051a17ab0b627a4a83606`
+with 6,678 placed and zero unresolved regions. No hardware operation occurred;
+the earliest retained executable remains `0x0042308E`, the sequential frontier
+is `0x004239C2`, and firmware-wide completeness is not claimed.
+
+## Current bootloader Floyd max-heap sift increment
+
+The exact 134-byte helper at `[0x004239C2,0x00423A48)` implements Floyd's
+max-heap descent and upward-repair algorithm. Seven focused tests cover the
+exclusive count boundary, both-child selection, multi-level descent, upward
+repair, subtree isolation, no-op behavior, comparator order, authenticated
+successor, and dual target compilation.
+
+Canonical accounting is 24,133 source-owned, 16,528 generated patch, 16
+alignment, and 123,163 retained official bytes across 291 source-owned
+functions, five caves, 88 exact in-place leaves, and 201 patch sites. The
+4,648,863-byte flash plan has SHA-256
+`34174d5c0e21d3fadf725d23a1d3a3942ee9de42428d69a32007e71647dd9cf2`
+with 6,679 placed and zero unresolved regions. No hardware operation occurred;
+the earliest retained executable remains `0x0042308E`, the sequential frontier
+is `0x00423A48`, and firmware-wide completeness is not claimed.
+
+## Current bootloader introspective qsort increment
+
+The exact 704-byte core and 24-byte wrapper at
+`[0x00423A48,0x00423D20)` implement sampled three-way introsort with heap-sort
+fallback and small-partition insertion. Six host tests cover identity,
+null/no-op behavior, whole-record movement, duplicates, deterministic arrays
+across the 33-element threshold, and dual target compilation.
+
+Canonical accounting is 24,861 source-owned, 16,528 generated patch, 16
+alignment, and 122,435 retained official bytes across 293 source-owned
+functions, five caves, 90 exact in-place leaves, and 201 patch sites. The
+4,650,270-byte flash plan has SHA-256
+`34f78e0fc343ebf1daee9a127dee83f548bc03226d8711e8b4774ed1b07eda0b`
+with 6,681 placed and zero unresolved regions. No hardware operation occurred;
+the earliest retained executable remains `0x0042308E`, the sequential frontier
+is `0x00423D20`, and firmware-wide completeness is not claimed.
+
+## Current bootloader global hardware-control increment
+
+Six exact bodies totaling 228 bytes in `[0x00423D20,0x00423E0C)` implement
+global initialization, register query/test, zero-index wrapping, control-bit
+clearing, status normalization, and interrupt-atomic countdown/latch handling.
+Six focused tests cover all software-visible paths and both target toolchains.
+
+Canonical accounting is 25,089 source-owned, 16,528 generated patch, 16
+alignment, and 122,207 retained official bytes across 299 source-owned
+functions, five caves, 96 exact in-place leaves, and 201 patch sites. The
+4,656,017-byte flash plan has SHA-256
+`15fdf5e7b3fb0e99f62ceb0195084a37bdbe1db8a65d66bd3649f7318d3e486f`
+with 6,689 placed and zero unresolved regions. No hardware operation occurred.
+Live register, timer, interrupt, debug, SRAM, MMIO, and cold-boot validation is
+deferred by project direction; future qualification requires authorized
+right-temple physical evidence.
+The earliest retained executable remains `0x0042308E`; after retained SRAM
+literals, the sequential executable frontier is `0x00423E14`. Firmware-wide
+completeness is not claimed.
+
+## Current bootloader hardware-control state-mapper increment
+
+The exact 44-byte body at `[0x00423E14,0x00423E40)` is now maintained source.
+Five focused tests pin state-one advancement and flag merging, state-two
+override behavior, all other state values, the authenticated successor, and
+both reviewed target compilers.
+
+Canonical accounting is 25,133 source-owned, 16,528 generated patch, 16
+alignment, and 122,163 retained official bytes across 300 source-owned
+functions, five caves, 97 exact in-place leaves, and 201 patch sites. The
+provider and 4,745,526-byte package remain byte-identical. The 4,657,431-byte
+flash plan has SHA-256
+`ce6175e68c69cecbd2de52dc71a30c7a9eb607c51c224380e88786d3761f85f6`
+with 6,691 placed and zero unresolved regions. No hardware operation occurred.
+Live state, SRAM, MMIO, timing, interrupt, and cold-boot validation is deferred
+by project direction; future qualification requires authorized right-temple
+physical evidence. The
+earliest retained executable remains `0x0042308E`; the sequential executable
+frontier is `0x00423E40`. Firmware-wide completeness is not claimed.
+
+## Current bootloader MSPI FIFO, command-queue, and DMA-programming increment
+
+Eight exact source-owned bodies now cover `[0x00423E40,0x004240AA)`: FIFO write
+(74 bytes), FIFO read (158), command-queue init (44), term (58), enable (30),
+disable (12), pause (134), and high-priority DMA programming (108). The typed host suites cover module bounds, FIFO addressing,
+partial words, both timeout paths, queue configuration, handle lifecycle,
+clock short-circuiting, CQ pause/designated-pause/DMA-idle behavior, provider
+status propagation, DMA ring selection and register ordering, and the upstream lack of extra private-helper validation.
+Both reviewed target profiles match every linked stock body exactly.
+
+Canonical accounting is 25,751 source-owned, 16,528 generated patch, 16
+alignment, and 121,545 retained official bytes across 308 source-owned
+functions, five caves, 105 exact in-place leaves, and 201 patch sites. The
+163,840-byte provider and 4,745,526-byte unsigned package remain byte-identical
+with SHA-256 `3ae28d27...55eac` and `3c8cdcdb...c785`. The 4,663,145-byte
+flash plan has SHA-256
+`910dc1ab8c79edd6d7a06ced0f54d7ae0f395e6c9262f5de50f30893831d6e53`
+with 6,699 placed, zero unresolved, six container-only, and six protected
+regions. No hardware operation occurred.
+
+Physical FIFO, command-queue, clock, timeout, DMA, register, SRAM, interrupt,
+and cold-boot qualification is deferred by project direction; the specified
+authorized evidence remains a future acceptance requirement.
+Firmware-wide completeness is not claimed: the earliest
+retained executable remains `0x0042308E`, and the sequential executable
+frontier is `0x004240AA` (`sched_hiprio`).
+
+## Current bootloader per-instance FIFO increment
+
+The 70-byte read, 52-byte write and 14-byte drain bodies at
+`[0x004232C8,0x00423350)` are exact maintained C under both reviewed target
+toolchains. Five focused tests cover polling, empty/error/partial behavior,
+counts, four-bank selection, drain arguments and dual compilation.
+
+Canonical accounting is 22,463 source-owned, 16,528 generated patch, 16
+alignment, and 124,833 retained official bytes across 273 source-owned
+functions, five caves, 70 exact in-place leaves, and 201 patch sites. The
+4,630,216-byte flash plan has SHA-256
+`e72497682bb30fa59d7389f82853b14aafe094568da5aa816ea50e060824f7ae`
+with 6,652 placed regions; provider and byte-identical unsigned-package hashes
+remain unchanged.
+
+No hardware operation occurred. The earliest retained executable body remains
+at `0x0042308E`; live FIFO/MMIO/concurrency/peripheral qualification is
+is deferred by project direction; future qualification requires authorized responsive evidence, and
+firmware-wide functional completeness is not claimed.
+
+## Current bootloader mode-dispatch increment
+
+All five executable bodies totaling 296 bytes in
+`[0x004233E8,0x00423524)` are now exact maintained C under both reviewed target
+toolchains; the intervening 20 bytes are authenticated literal/register data.
+Ten focused tests cover type validation, all routes, latches, status clearing,
+progress, delay, completion, timeouts and dual compilation.
+
+Canonical accounting is 22,903 source-owned, 16,528 generated patch, 16
+alignment, and 124,393 retained official bytes across 280 source-owned
+functions, five caves, 77 exact in-place leaves, and 201 patch sites. The
+4,636,680-byte flash plan has SHA-256
+`ba2f0360217b861d0dfbcdc5895e0d9ee5c6b1f5c4c2d98315756f5abf4e6574`
+with 6,661 placed regions; provider and byte-identical unsigned-package hashes
+remain unchanged.
+
+No hardware operation occurred. The earliest retained executable body remains
+at `0x0042308E`; live MMIO/timer/interrupt/concurrency/peripheral qualification
+is is deferred by project direction; future qualification requires authorized responsive evidence, and
+firmware-wide functional completeness is not claimed.
+
+## Current bootloader critical-section FIFO-adapter increment
+
+The 64-byte snapshot and 80-byte pump bodies at
+`[0x00423350,0x004233E0)` are exact maintained C under both reviewed target
+toolchains. Five focused tests cover authenticated boundaries, snapshot status
+mapping, descriptor-to-FIFO pumping, interrupt-token restoration and dual
+compilation.
+
+Canonical accounting is 22,607 source-owned, 16,528 generated patch, 16
+alignment, and 124,689 retained official bytes across 275 source-owned
+functions, five caves, 72 exact in-place leaves, and 201 patch sites. The
+4,631,646-byte flash plan has SHA-256
+`ebcb7763eb7de396f0ed208e61807dcda6bcebb62eb3288d90a4bd54e4a4cca0`
+with 6,654 placed regions; provider and byte-identical unsigned-package hashes
+remain unchanged.
+
+No hardware operation occurred. The earliest retained executable body remains
+at `0x0042308E`; live FIFO/MMIO/descriptor/interrupt/concurrency/peripheral
+qualification is is deferred by project direction; future qualification requires authorized responsive
+evidence, and firmware-wide functional completeness is not claimed.
 
 ## Bootloader pin-group dispatcher is production-routed (2026-08-26)
 
@@ -3249,9 +3525,404 @@ and `06e369900458478ec088319400809d6bfb7883c3ddeb0808e3fff0f8bb52e4f5`.
 The Apple/Linux packages are 4,740,094 / 4,516,088 bytes with 6,464 / 3,432
 placed regions and two unresolved boundaries each. Nothing was sent to
 hardware. Live pinmux/GPIO/electrical and cold-boot behavior remains blocked
-because no authorized responsive right temple is available and the left must
+because future qualification requires authorized responsive right temple and the left must
 remain stock. Retained spans after `0x0041FCF6` remain software gaps, so
 firmware-wide completeness is not claimed.
+
+## Bootloader MX25U25643G JEDEC-ID reader is production-routed (2026-08-27)
+
+The complete authenticated `[0x0042059E,0x004205F4)` reader now routes to
+maintained clean-room C. Stock and host tests pin command `0x9F`, three receive
+bytes, status/failure behavior, exact diagnostic metadata, output preservation,
+and identifier packing. Both reviewed profiles emit relocation-free 100-byte
+leaves; the timing scan and public initializer enter through the routed stock
+address.
+
+Apple/Linux overlay/provider identities are 12,168/160,768 and
+12,148/160,748 bytes. Canonical accounting is 12,153 source-owned, 13,466
+generated patch, 16 alignment, and 135,133 retained official bytes across 178
+functions, 159 relocated leaves, and 176 patch sites. Unsigned packages are
+4,742,346 / 4,518,336 bytes with 6,507 / 3,454 placed regions and two
+unresolved hardware regions each.
+
+Nothing was signed, flashed, installed, reset, booted, or sent to hardware.
+Live command acceptance, JEDEC byte order, MSPI/XIP/external-flash behavior,
+and cold boot validation is deferred by project direction; future qualification requires authorized responsive
+right-temple hardware; the left temple must remain stock. Executable bodies at
+and after `0x004205F4` remain software gaps, so functional completeness is not
+claimed.
+
+## Bootloader MX25U25643G read transfer is production-routed (2026-08-27)
+
+The complete authenticated `[0x004205F4,0x0042069E)` wrapper now routes to
+maintained clean-room C. Stock and host evidence pin handle/argument/address
+validation, the exact 24-byte Ambiq transfer descriptor, read direction,
+1,000,000-cycle timeout, raw HAL status, failure-only diagnostics, and five
+authenticated callers. Both compilers emit the same relocation-free 172-byte
+leaf; Linux adds four placement-alignment bytes.
+
+Apple/Linux overlay/provider identities are 12,340/160,940 and
+12,324/160,924 bytes. Canonical accounting is 12,325 source-owned, 13,636
+generated patch, 16 alignment, and 134,963 retained official bytes across 179
+functions, 160 relocated leaves, and 177 patch sites. Unsigned packages are
+4,742,518 / 4,518,512 bytes with 6,509 / 3,455 placed regions and two
+unresolved hardware regions each.
+
+Nothing was signed, flashed, installed, reset, booted, or sent to hardware.
+Live descriptor ABI, HAL timeout/status behavior, external-flash reads,
+JEDEC/MSPI/XIP behavior, and cold boot is deferred by project direction; future qualification requires authorized responsive right-temple evidence; the left temple must remain
+stock. Executable bodies at and after `0x0042069E` remain software gaps, so
+functional completeness is not claimed.
+
+## Current bootloader LittleFS block-erase increment
+
+The complete authenticated `[0x00421348,0x00421372)` callback now routes to a
+48-byte freestanding clean-room C leaf at `[0x00421250,0x00421280)`. Five
+focused tests pin the stock body, successor literal gap, configuration pointer,
+source-owned erase/logger calls, address wrap, forwarding, failure diagnostic,
+`LFS_ERR_IO` mapping, and Cortex-M55 compilation. The cave follows the program
+leaf inside the same authenticated generated initializer tail.
+
+Apple/Linux providers are 163,840 /
+`a4a1ff23a237f05a514a73c17d068c2fc27e6eb3f06c9a030387d277c0cde99f`
+and 163,824 /
+`528ea3ce26d7acdf93a79be2b3cfde38663b13f85ae1a37028a85fc27ddbde84`.
+Canonical accounting is 15,333 source-owned, 16,386 generated patch, 16
+alignment, and 132,105 retained official bytes across 200 routed functions,
+179 relocated leaves, two fixed caves, and 198 patch sites. Apple/Linux package
+SHA-256 values are
+`7b260362c3e5c2f3e9bb249a6a5dace696518a25bb2e65c8b2a2898dd9e471f5`
+and `718e66428467cbc01a225e118e047b323d160271809b37e20872208933f0b235`.
+The 4,566,262-byte flash plan SHA-256 is
+`703ac616c132c39f9d2670a9a376e32a6558653c5d475bb203c53eb5ffb63c82`.
+
+No hardware operation occurred. Live erase, allocation, persistence,
+power-loss, diagnostics, and cold-boot qualification is deferred by project direction; future qualification requires that evidence. The next
+opaque executable entry is the sync callback at `0x004213D4`; firmware-wide
+functional completeness is not claimed.
+
+## Current bootloader sync and address-index increment
+
+The authenticated constant-success LittleFS sync callback at
+`[0x004213D4,0x004213D8)` now redirects to an exact four-byte C leaf in the
+third reclaimed initializer cave. The adjacent identity and thresholded
+address-index helpers at `[0x004213D8,0x004213E6)` are compiled from C directly
+at their stock addresses and reproduce all 14 stock bytes exactly under both
+reviewed compiler profiles.
+
+Canonical accounting is 15,351 source-owned, 16,386 generated patch, 16
+alignment, and 132,087 retained official bytes, including 112 cave bytes and
+14 exact in-place bytes. Apple/Linux provider SHA-256 values are
+`a3b12625d63e769ab89d2bd9ea729e9b280ffa553f7c48a2e4b96974b60919e3`
+and `9e4494d967a6402ba329b05e664842404289ad9688ffa00aca7c0e5bf7908f9d`;
+package SHA-256 values are
+`1ad64997630cb2ebd2df43ae244bda8fda3008473f254adbebde8aa9d2045f5b`
+and `3aba526397878e500d0b3ccfdc38b2dd171573b6099fbdb97369fde0ee2c7f01`.
+The canonical flash plan is 4,569,828 bytes /
+`6570fe6cf7b172f99da733a26fe9964ea8c9f6985bfba2430359bd5fad874a4f`
+with 6,567 placed regions.
+
+No hardware operation occurred. Physical LittleFS persistence, power-loss,
+diagnostic, and cold-boot qualification is deferred by project direction; future qualification requires that evidence; the next retained
+executable body begins at `0x004213E6`, so functional completeness is not
+claimed.
+
+## Bootloader MX25U25643G write transfer is production-routed (2026-08-27)
+
+The complete authenticated `[0x0042069E,0x0042074E)` wrapper now routes to
+maintained clean-room C. Stock and host evidence pin null-handle status 2,
+address and 256-byte length ceilings with status 5, accepted zero-length/null
+buffer calls, the exact 24-byte write descriptor, 1,000,000-cycle timeout,
+raw HAL status, failure-only diagnostics, and eight authenticated callers.
+Apple clang 21 and Homebrew clang 22.1.8 emit the same relocation-free
+148-byte leaf.
+
+Apple/Linux overlay/provider identities are 12,488/161,088 and
+12,472/161,072 bytes. Canonical accounting is 12,473 source-owned, 13,812
+generated patch, 16 alignment, and 134,787 retained official bytes across 180
+functions, 161 relocated leaves, and 178 patch sites. Unsigned packages are
+4,742,666 / 4,518,660 bytes with 6,511 / 3,456 placed regions and two
+unresolved hardware regions each.
+
+Nothing was signed, flashed, installed, reset, booted, or sent to hardware.
+Live descriptor/HAL behavior, external-flash writes, write-enable/program/
+erase sequencing, JEDEC/MSPI/XIP behavior, and cold boot remain blocked by
+future-required authorized responsive right-temple evidence; the left temple must
+remain stock. Executable bodies at and after `0x0042074E` remain software
+gaps, so functional completeness is not claimed.
+
+## Bootloader MX25U25643G busy status is production-routed (2026-08-27)
+
+The complete authenticated `[0x0042074E,0x004207A2)` entry now routes to
+maintained clean-room C. Stock and host evidence pin the zeroed scratch bytes,
+command `0x05`, one-byte source-routed read, raw failure return and exact
+diagnostic, bit-7 Boolean result, and both authenticated callers. Apple clang
+21 and Homebrew clang 22.1.8 emit relocation-free 88-byte leaves with reviewed
+profile-specific hashes.
+
+Apple/Linux overlay/provider identities are 12,576/161,176 and
+12,560/161,160 bytes. Canonical accounting is 12,561 source-owned, 13,896
+generated patch, 16 alignment, and 134,703 retained official bytes across 181
+functions, 162 relocated leaves, and 179 patch sites. Unsigned packages are
+4,742,754 / 4,518,748 bytes with 6,513 / 3,457 placed regions and two
+unresolved hardware regions each.
+
+Nothing was signed, flashed, installed, reset, booted, or sent to hardware.
+Live status-register/HAL/RTOS behavior, external-flash/MSPI/XIP behavior, and
+cold boot is deferred by project direction; future qualification requires authorized responsive right-temple
+evidence; the left temple must remain stock. Executable bodies at and after
+`0x004207A2` remain software gaps, so functional completeness is not claimed.
+
+## Bootloader MX25U25643G ready polling is production-routed (2026-08-27)
+
+The complete authenticated `[0x004207A2,0x00420800)` two-function cluster now
+routes to maintained clean-room C. Host and stock evidence pin 200 fast polls
+with five-unit unsuccessful delays, the caller-bounded context-aware second
+phase, notification value 1 for context 2, 1,000-unit delays otherwise,
+success/timeout returns, the fixed bound 500, and every authenticated caller.
+Both reviewed compilers emit dependency-free 88- and 12-byte leaves.
+
+Apple/Linux overlay/provider identities are 12,676/161,276 and
+12,660/161,260 bytes. Canonical accounting is 12,661 source-owned, 13,990
+generated patch, 16 alignment, and 134,609 retained official bytes across 183
+functions, 164 relocated leaves, and 181 patch sites. Unsigned packages are
+4,742,854 / 4,518,848 bytes with 6,517 / 3,459 placed regions and two
+unresolved hardware regions each.
+
+Nothing was signed, flashed, installed, reset, booted, or sent to hardware.
+Live scheduler/delay/status-register behavior, external-flash/MSPI/XIP
+behavior, and cold boot is deferred by project direction; future qualification requires authorized responsive
+right-temple evidence; the left temple must remain stock. Executable bodies at
+and after `0x0042086C` remain software gaps, so functional completeness is not
+claimed.
+
+## Bootloader low-level MSPI initializer is production-routed (2026-08-27)
+
+The complete authenticated `[0x00420254,0x00420476)` entry now routes to
+maintained clean-room C. Host and stock tests pin its sole caller, busy-state
+guard, HAL initialize/power/controller/device/enable order, default/custom
+configuration, failure cleanup, source-owned XIP/pin/NVIC calls, interrupt
+mask `0x1A80`, IRQ 21/priority 4, state publication, output pointer, and exact
+diagnostics. Apple and Linux each emit a 492-byte leaf with four strict call
+relocations.
+
+Apple/Linux overlay/provider identities are 11,728/160,328 and
+11,708/160,308 bytes. Accounting is 11,713 source-owned, 13,084 generated
+patch, 16 alignment, and 135,515 retained official bytes across 175 functions,
+156 relocated leaves, and 173 patch sites. Unsigned Apple/Linux packages are
+4,741,906 / 4,517,896 bytes with SHA-256
+`b440e9852e9bd24f2747249953998eb578e68043a8f66f1a70e247cb3fb01c2a`
+and `8938298ab593c95da48cd0697fccbee38cf3a2a1033cb44ef275ec7495162e1f`;
+their flash plans contain 6,501 / 3,451 placed regions.
+
+Nothing was signed, flashed, installed, reset, booted, or sent to hardware.
+Live HAL, interrupt, MSPI, XIP, external-flash, timing, and cold-boot validation
+is deferred by project direction; future qualification requires authorized responsive right-temple evidence; the
+left temple must remain stock. Executable bodies after `0x00420476` remain
+software gaps, so firmware-wide completeness is not claimed.
+
+## Bootloader MX25U25643G public initializer is production-routed (2026-08-27)
+
+The complete authenticated `[0x00420476,0x0042052A)` entry now routes to
+maintained clean-room C. Host and stock gates pin initialization failure,
+10-ms delay, device/timing preparation, JEDEC-ID read and diagnostics, final
+mode selection, event-flags initialization, MSPI enable, and exact returns.
+Both profiles emit a 204-byte leaf with five strict source-owned calls.
+
+Apple/Linux overlay/provider identities are 11,932/160,532 and
+11,912/160,512 bytes. Accounting is 11,917 source-owned, 13,264 generated
+patch, 16 alignment, and 135,335 retained official bytes across 176 functions,
+157 relocated leaves, and 174 patch sites. Unsigned packages are 4,742,110 /
+4,518,100 bytes with 6,503 / 3,452 placed flash regions.
+
+Nothing was signed, flashed, installed, reset, booted, or sent to hardware.
+Live JEDEC, HAL, RTOS, interrupt, MSPI, XIP, external-flash, timing, and
+cold-boot validation is deferred by project direction; future qualification requires authorized responsive
+right-temple evidence; the left temple must remain stock. Executable bodies
+after `0x0042052A` remain software gaps, so firmware-wide completeness is not
+claimed.
+
+## Bootloader MX25U25643G soft reset is production-routed (2026-08-27)
+
+The complete authenticated `[0x0042052A,0x0042059E)` sequence now routes to
+maintained clean-room C. Host tests pin commands `0x66`/`0x99`, delays 1/50
+ms, failure-only logs, and the non-short-circuiting policy. Both profiles emit
+a 136-byte leaf with strict delay call/tail-jump relocations.
+
+Apple/Linux overlay/provider identities are 12,068/160,668 and
+12,048/160,648 bytes. Accounting is 12,053 source-owned, 13,380 generated
+patch, 16 alignment, and 135,219 retained official bytes across 177 functions,
+158 relocated leaves, and 175 patch sites. Unsigned packages are 4,742,246 /
+4,518,236 bytes with 6,505 / 3,453 placed flash regions.
+
+Nothing was signed, flashed, installed, reset, booted, or sent to hardware.
+Live reset, MSPI/XIP, external-flash, timing, and cold-boot validation is
+is deferred by project direction; future qualification requires authorized responsive right-temple evidence; the left
+temple must remain stock. Executable bodies after `0x0042059E` remain software
+gaps, so firmware-wide completeness is not claimed.
+
+## Bootloader MSPI controls are production-routed (2026-08-26)
+
+The complete `[0x0041FE28,0x0041FE62)` enable/disable pair now routes to
+maintained clean-room C. Host tests pin idempotence, retained control arguments,
+state updates, and all three callers; both profiles emit the same 40-/32-byte
+relocation-free leaves. With the later event-flags, guard, and XIP-config
+entries included, the current cumulative Apple/Linux overlay/provider
+identities are 10,500/159,100 and 10,484/159,084 bytes. Accounting is 10,487
+source-owned, 11,782 generated patch, 14 alignment, and 136,817 retained
+official bytes across 170 functions, 151 relocated leaves, and 168 patch sites.
+Unsigned packages are 4,740,678 / 4,516,672 bytes. Nothing was sent to hardware. Live
+MSPI/cold-boot behavior remains blocked, and executable bodies after
+`0x0041FE62` remain software gaps; completeness is not claimed.
+
+## Bootloader event-flags service cluster is production-routed (2026-08-27)
+
+The complete `[0x0041FE62,0x0041FF08)` event-flags init/acquire/release cluster
+now routes to maintained clean-room C. The 166 authenticated stock bytes are
+replaced by three relocation-free leaves totaling 208 bytes. Host tests pin
+idempotent creation, handle publication, null-handle guards, wait-forever
+acquisition, release status handling, and the exact failure-only EasyLogger
+records; stock scans pin all three direct callers and exact body hashes.
+
+The later MSPI guard and XIP-config entries are now source-owned as well.
+Apple overlay/provider identities are 10,500 / 159,100 bytes with SHA-256
+`28c298a0ab3273a8f5ade3e900268b80b879076a33dc12e504c73e42f623ba2c`
+and `d1c9554cea1418c933767ca98b93a928a978cd66ed4c7d562b918acd6e351407`.
+Linux identities are 10,484 / 159,084 bytes with SHA-256
+`65ecb970600c878cc4ed7916cff4c57057d7baf83ef4923630340f2e5492b3c1`
+and `21636af65f7eaa7b4e20c9e5d61902dfcaf20cd9ba13a6f6edf244bfa4d19fcd`.
+Accounting is 10,487 source-owned, 11,782 generated patch, 14 alignment, and
+136,817 retained official bytes across 170 functions, 151 relocated leaves,
+and 168 patch sites. Apple headroom is 4,740 bytes.
+
+Unsigned Apple/Linux packages are 4,740,678 / 4,516,672 bytes with SHA-256
+`81ae4b1c4f87e3d6348aa55426f6c7f3cc766aa079d94a96ec82f3ffddc76b2d`
+and `bb52277456ff2d69aaa34f4639734ab5d23bcea984f153ac19795b372955de71`.
+Their flash plans contain 6,490 / 3,446 placed regions, two unresolved address
+regions, five container-only regions, and six protected regions. Nothing was
+signed, flashed, installed, reset, booted, or sent to hardware. Live RTOS
+contention, logging, and cold-boot behavior is deferred by project direction; future qualification requires authorized responsive right-temple evidence; the left temple must remain
+stock. Executable bodies after `0x0041FF60` remain software gaps, so
+firmware-wide completeness is not claimed.
+
+## Bootloader paired MSPI guards are production-routed (2026-08-27)
+
+The complete `[0x0041FF08,0x0041FF34)` enter/exit guard pair now routes to
+maintained clean-room C. The two authenticated 22-byte stock wrappers are
+replaced by identical dual-profile 36- and 32-byte relocation-free leaves.
+Host tests pin the `0x200271C5` bypass byte, all six callers, both conditional
+paths, and exact acquire/disable versus enable/release ordering.
+
+With the later XIP-config entry included, Apple/Linux overlay/provider
+identities are 10,500/159,100 and 10,484/159,084 bytes. Accounting is 10,487
+source-owned, 11,782 generated patch, 14 alignment, and 136,817 retained
+official bytes across 170 functions, 151 relocated leaves, and 168 patch sites.
+Unsigned packages are 4,740,678 / 4,516,672 bytes; flash plans contain 6,490 /
+3,446 placed regions. Nothing was
+signed, flashed, installed, reset, booted, or sent to hardware. Live RTOS
+contention, MSPI timing, and cold boot is deferred by project direction; future qualification requires authorized
+responsive right-temple evidence; the left temple must remain stock.
+Executable bodies after `0x0041FF60` remain software gaps, so firmware-wide
+completeness is not claimed.
+
+## Bootloader MSPI timing scan is production-routed (2026-08-27)
+
+The complete authenticated `[0x00420002,0x004201BA)` timing-scan entry now
+routes to maintained clean-room C. It tests 36 coarse timing rows across all
+32 fine-delay values, submits retained control request 16, accepts only a
+zero-status read of packed JEDEC ID `0x002539C2`, records a pass mask per row,
+chooses the first strictly longest run, computes its center through the
+source-owned helper, emits the retained diagnostics, and returns the selected
+six-byte configuration. Host tests execute and verify all 1,152 candidates;
+stock scans pin the body, caller, table, ID, and retained call seams.
+
+Apple/Linux Clang each emit a 420-byte leaf. The Apple leaf is at offset
+10,644 with relocated SHA-256 `184a82c6…ce481`; Linux is at offset 10,612 with
+relocated SHA-256 `794f106a…4c733`. Each profile has exactly two authenticated
+`R_ARM_THM_CALL` relocations to the source-owned bit-run helpers. Apple/Linux
+overlay/provider identities are 11,064/159,664 and 11,032/159,632 bytes.
+Accounting is 11,049 source-owned, 12,384 generated patch, 16 alignment, and
+136,215 retained official bytes across 173 functions, 154 relocated leaves,
+and 171 patch sites.
+
+Unsigned Apple/Linux packages are 4,741,242 / 4,517,220 bytes with SHA-256
+`41ebb3212e1a8ee93e693ecd14e6eda4712310e84aaed53335a52d8bef6c9aaf`
+and `3b56e6a17a41d2c20933b1a58004b8460162a21fc63e861e10ca99eceaa54b1f`.
+Their flash plans contain 6,497 / 3,449 placed regions, two unresolved address
+regions, five container-only regions, and six protected regions. Nothing was
+signed, flashed, installed, reset, booted, or sent to hardware. Electrical
+timing-window, flash-identification, XIP, and cold-boot validation is blocked
+by future-required authorized responsive right-temple evidence; the left temple
+must remain stock. Executable bodies after `0x004201BA` remain software gaps,
+so firmware-wide completeness is not claimed.
+
+## Bootloader automatic MSPI timing selection is production-routed (2026-08-27)
+
+The complete authenticated `[0x004201BA,0x00420254)` entry now routes to
+maintained clean-room C. It zeroes a six-byte scan object, invokes the
+source-owned exhaustive timing scan, publishes exactly six meaningful bytes on
+success, preserves the active configuration on failure, and emits the retained
+success/fallback diagnostics. Host tests pin both branches and prove adjacent
+ABI padding is not overwritten.
+
+Apple/Linux emit 172/184-byte leaves with one strict call relocation to the
+timing scan. Their overlay/provider identities are 11,236/159,836 and
+11,216/159,816 bytes. Accounting is 11,221 source-owned, 12,538 generated
+patch, 16 alignment, and 136,061 retained official bytes across 174 functions,
+155 relocated leaves, and 172 patch sites.
+
+Unsigned Apple/Linux packages are 4,741,414 / 4,517,404 bytes with SHA-256
+`fb425a21a6ee30862b84c48edf504d211b5e2f079b3a62461bd96fefaad33164`
+and `dcce581c2f5697fce0bfb019cd2ea951f8fbbabacde0050b9a8159a5a63dece6`.
+Their flash plans contain 6,499 / 3,450 placed regions, two unresolved address
+regions, five container-only regions, and six protected regions. Nothing was
+signed, flashed, installed, reset, booted, or sent to hardware. Electrical
+timing-window, flash-identification, XIP, and cold-boot validation is blocked by
+future-required authorized responsive right-temple evidence; the left temple must
+remain stock. Executable bodies after `0x00420254` remain software gaps, so
+firmware-wide completeness is not claimed.
+
+## Bootloader bit-run helpers are production-routed (2026-08-27)
+
+The complete authenticated `[0x0041FF60,0x00420002)` pair now routes to
+maintained clean-room C. The 20-byte entry computes the longest consecutive-one
+run by repeated shifted intersection. The 142-byte entry preserves the exact
+first-longest selection, midpoint bias, parity, bit-one, bit-30, and terminal
+run adjustments. Host tests compare boundary cases and 2,048 deterministic
+random words; stock scans pin both bodies and their sole callers. Apple Clang
+emits 16/126-byte leaves and Linux Clang emits 16/110-byte leaves, all without
+runtime relocations.
+
+Apple/Linux overlay/provider identities are 10,642/159,242 and
+10,610/159,210 bytes. Accounting is 10,629 source-owned, 11,944 generated
+patch, 14 alignment, and 136,655 retained official bytes across 172 functions,
+153 relocated leaves, and 170 patch sites. Unsigned packages are 4,740,820 /
+4,516,798 bytes; flash plans contain 6,494 / 3,448 placed regions. Nothing was
+signed, flashed, installed, reset, booted, or sent to hardware. Live mask
+meaning, MSPI training/timing, external-flash, and cold boot are blocked by
+future-required authorized responsive right-temple evidence; the left temple must
+remain stock. Executable bodies after `0x00420002` remain software gaps, so
+firmware-wide completeness is not claimed.
+
+## Bootloader MSPI XIP configuration is production-routed (2026-08-27)
+
+The complete authenticated `[0x0041FF34,0x0041FF60)` entry now routes to
+maintained clean-room C. Host and stock-topology tests pin low-byte argument
+truncation, the selector-dependent `8`/`0` write to byte five of the retained
+configuration at `0x2000023C`, the write-before-control order, handle word
+`0x200270DC`, request `16`, ignored status, and all three callers. Apple and
+Linux Clang emit the same relocation-free 36-byte leaf.
+
+Apple/Linux overlay/provider identities are 10,500/159,100 and
+10,484/159,084 bytes. Accounting is 10,487 source-owned, 11,782 generated
+patch, 14 alignment, and 136,817 retained official bytes across 170 functions,
+151 relocated leaves, and 168 patch sites. Unsigned packages are 4,740,678 /
+4,516,672 bytes; flash plans contain 6,490 / 3,446 placed regions. Nothing was
+signed, flashed, installed, reset, booted, or sent to hardware. Live MSPI XIP,
+external-flash timing, and cold boot is deferred by project direction; future qualification requires authorized
+responsive right-temple evidence; the left temple must remain stock.
+Executable bodies after `0x0041FF60` remain software gaps, so firmware-wide
+completeness is not claimed.
 
 ## Cordio DM connection manager is production-routed
 
@@ -3268,7 +3939,7 @@ unresolved, five container-only, and six protected regions. Host behavior,
 bounds, stock closure, target compilation, routing, manifest, deterministic
 package, and flash-plan gates pass through `make cordio-dm-conn-closure`.
 Live controller, peer, RF, privacy, timing, idle-state, and paired-temple
-validation is blocked by unavailable authorized responsive G2/EM9305 physical
+validation is deferred by project direction; future qualification requires authorized responsive G2/EM9305 physical
 evidence. Nothing was signed, installed, or flashed, and wider firmware
 functional completeness is not claimed.
 
@@ -3292,8 +3963,7 @@ flashed, or installed.
 
 Live ATT/SMP/signaling exchange, peer/controller flow control, connection-update
 timing, and buffer lifetime cannot be validated because the authorized right
-temple is nonresponsive, the left temple must remain stock, and no responsive
-authorized G2/EM9305 pair or golden capture exists. The L2CAP software gap is
+temple is not under test because physical qualification is deferred by project direction, the left temple must remain stock, and future qualification requires a responsive authorized G2/EM9305 pair or golden capture exists. The L2CAP software gap is
 closed; wider firmware functional completeness is not claimed.
 
 The retained `terminal_pb_msg_handler.c` object is now completely bounded at
@@ -3347,9 +4017,9 @@ reset/identity initialization, FIFO and register acquisition, eDMP/GAF fusion,
 auxiliary magnetometer access, exact AID/B2S RAM-image loading and event
 publication, parsing, transforms, event policy, and CSV capture pass host and
 selector tests. No known IMU software implementation gap remains. Physical
-functional validation is blocked by the nonresponsive
-authorized right temple, the stock-only left temple, and unavailable calibrated
-motion/golden FIFO evidence.
+functional validation is deferred by project direction. Future qualification requires the
+authorized right temple, the stock-only left temple, and calibrated motion/golden
+FIFO evidence.
 
 The TinyFrame version boundary is now narrower than behavior-only comparison
 allowed. Ten retained `TF_Error` `__LINE__` arguments select the exact
@@ -3643,7 +4313,7 @@ The recorded Linux Clang 22.1.8 profile reproduces
 The platform ledger therefore moves this row to implemented-in-source while
 tracking live preemption, exception return, overflow, trace concurrency, and
 STIMER behavior as a separate hardware-dependent row. That row is blocked by
-unavailable authorized G2/probe evidence; it is not treated as validated.
+future-required authorized G2/probe evidence; it is not treated as validated.
 
 ## LVGL Ambiq subtree provenance and global ABI are closed
 
@@ -3910,7 +4580,7 @@ paths. All 13 selector-isolated leaves compile as C for Cortex-M55.
 The canonical component is 3,855,544 bytes (SHA-256 `df6d3b4d...`), and the
 unsigned EVENOTA package is 4,634,038 bytes (SHA-256 `3953d7a5...`). No image
 was signed, flashed, or installed. Live Apollo510 sleep, watchdog, tickless,
-reset, and fatal behavior remains explicitly blocked by unavailable authorized
+reset, and fatal behavior remains is deferred by project direction; future qualification requires authorized
 responsive hardware and trace evidence.
 
 ## G2 copied Goodix application-error utility is source-closed
@@ -4308,7 +4978,7 @@ The exact register map is now production-routed as one clean-room 224-byte
 scalar Cortex-M55 leaf with zero relocations. It replaces all 340 callable
 stock bytes while retaining the 20-byte official pool. Exact-output,
 null-safety, strict compile, component, package, and flash-plan gates pass.
-Live OPT3007 bus validation remains blocked by unavailable authorized
+Live OPT3007 bus validation is deferred by project direction; future qualification requires authorized
 responsive G2 hardware; the wider ALS driver is still a software gap.
 
 ## G2 codec UART-porting seam is object-closed
@@ -4373,8 +5043,7 @@ ISR, power, I2S lifecycle, RX-buffer/cache, callback, and reboot behavior.
 The canonical overlay/component/package sizes are 240,692 / 3,764,088 /
 4,542,582 bytes; the 2,588,615-byte flash plan has 3,715 placed, two unresolved,
 five container-only, and six protected regions. Live GX8002B rail, I2S, DMA,
-interrupt, and reboot evidence remains explicitly blocked by unavailable
-authorized responsive hardware. Wider firmware completeness is not claimed.
+interrupt, and reboot evidence remains is deferred by project direction; future qualification requires authorized responsive hardware. Wider firmware completeness is not claimed.
 
 The retained-path frontier is now 100 closed / 134 open, with 474 closed
 anchors, 254,212 complete-object body bytes, and 277,360 known physical bytes.
@@ -4657,7 +5326,7 @@ seven guarded redirects replace 1,384 callable stock bytes with 342 compiled
 bytes plus eight alignment bytes and 23 exact relocations. Destructive magic
 reset/invalidation is disabled; the host lifecycle oracle and canonical
 4,541,570-byte package pass. Golden-media and live persistence/recovery remain
-blocked by unavailable authorized physical evidence.
+is deferred by project direction; future qualification requires authorized physical evidence.
 
 The retained-path frontier is now 122 closed / 112 open, with 538 closed
 anchors, 299,774 complete-object body bytes, and 324,134 known physical bytes.
@@ -4922,8 +5591,9 @@ nineteen functions compile from five authenticated C files (4,002 compiled
 function bytes), and nineteen guarded redirects cover 2,798 stock bytes while
 retaining 272 compatibility bytes. The exact source/routing analyzer and all
 five host behavior fixture groups pass. Physical ULED/display, lock/timing,
-and power-transition validation is explicitly blocked because no responsive
-authorized G2 pair or golden display trace is available; nothing was signed,
+and power-transition validation is deferred by project direction; future
+qualification requires a responsive authorized G2 pair or golden display trace.
+Nothing was signed,
 flashed, or installed.
 
 The adjacent LVGL font-manager software boundary is production-closed as of
@@ -5127,8 +5797,8 @@ all recovered command IDs. Canonical overlay/component/package sizes are
 `7228edb650fe39bda63480691fe94ed59d0807ca5e30846d35ec08e134e08350`,
 and `c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998`.
 Live paired-G2 behavior remains blocked: the authorized right temple is
-nonresponsive, the left must remain stock, and no authorized responsive pair
-or golden Ring capture is available. `thread_ring.c` remains the Ring stack's
+not under test because physical qualification is deferred by project direction, the left must remain stock, and future qualification requires authorized responsive pair
+or golden Ring capture. `thread_ring.c` remains the Ring stack's
 software gap.
 
 `platform\input\service_input_manager.c` is now closed as ten functions /
@@ -5158,8 +5828,7 @@ selector-isolated clean-room functions now compile to 1,300 Thumb bytes plus
 two alignment bytes; three redirects and 14 strict relocations replace all
 2,004 stock body bytes while retaining the 288-byte official pool. Component,
 manifest, complete-package, frontier, and origin-accounting gates are green.
-Live OTA peer traffic and recovery evidence remains blocked by unavailable
-authorized responsive G2 hardware. The frontier
+Live OTA peer traffic and recovery evidence is deferred by project direction; future qualification requires authorized responsive G2 hardware. The frontier
 is now 161 closed / 73 open, with 1,015 closed anchors, 644,158 complete-object
 body bytes, and 698,294 known physical bytes. See
 `docs/research/g2-ota-transport-dependency-boundary.md`.
@@ -5174,7 +5843,7 @@ redirects and 15 strict relocations replace all 1,990 stock body bytes while
 retaining the authenticated 162-byte pool. Host behavior, target compilation,
 component, manifest, complete-package, frontier, and aggregate gates are
 green. Live EFS filesystem/media traffic, timeout, disconnect, and recovery
-evidence remains blocked by unavailable authorized responsive G2 hardware. The
+evidence is deferred by project direction; future qualification requires authorized responsive G2 hardware. The
 frontier is now 162 closed / 72 open, with 1,017 closed anchors, 646,148
 complete-object body bytes, and 700,446 known physical bytes. See
 `docs/research/g2-efs-transport-dependency-boundary.md`.
@@ -5279,8 +5948,8 @@ bytes, while the source entry calls both source hooks directly. Host lifecycle,
 queue, dispatch, delayed-event, touch/pair, record, and allocation-failure tests
 and every strict Cortex-M55 selector build pass. Canonical overlay/component/
 package sizes are 255,686 / 3,779,082 / 4,557,576 bytes. Physical peer behavior
-is blocked because the authorized right temple is nonresponsive, the left must
-remain stock, and no responsive authorized pair or golden capture is available;
+is deferred by project direction; future qualification requires a responsive
+authorized pair or golden capture while the left remains stock;
 there is no remaining known Thread Ring software implementation gap.
 
 `framework\fw_event_loop\fw_event_loop.c` is now closed as six functions /
@@ -5312,7 +5981,7 @@ literal pool remains authenticated official data. Host state-machine tests,
 all fifteen strict Cortex-M55 selectors, the dedicated analyzer, component,
 package, flash-plan, origin-accounting, and first-party-frontier gates pass.
 Live role switching, WSF timing, reconnect, and peer notification behavior are
-blocked by unavailable authorized responsive paired hardware.
+is deferred by project direction; future qualification requires authorized responsive paired hardware.
 
 `app\gui\SystemClose\systemClose.c` is now closed as twenty functions / 4,960
 body bytes / 5,368 physical bytes. Fifteen functions missed by Ghidra restore
@@ -5550,7 +6219,7 @@ overlay/component/package sizes are 255,686 / 3,779,082 / 4,557,576 bytes; the
 2,879,088-byte flash plan has 4,141 placed, two unresolved, five container-only,
 and six protected regions. Live sensor, timing, calibration, and display
 behavior is explicitly blocked because the authorized right temple is
-nonresponsive, the left must remain stock, and no responsive authorized sensor
+not under test because physical qualification is deferred by project direction, the left must remain stock, and future qualification requires a responsive authorized sensor
 path or golden IMU/ALS trace is available. Wider firmware gaps remain, so
 functional completeness is not claimed.
 
@@ -5647,7 +6316,7 @@ and 112-byte pool/data tail remain official. Host tests cover framing,
 checksum rejection, receive-slot rotation, lifecycle, response, and failure
 paths. Canonical overlay/component/package sizes are 332,666 / 3,856,062 /
 4,634,556 bytes. Live case-UART electrical and interoperability validation is
-blocked by unavailable authorized responsive temple/case evidence; no image
+is deferred by project direction; future qualification requires authorized responsive temple/case evidence; no image
 was signed or flashed.
 
 The zero-anchor `app\gui\EvenAI\even_ai.c` object is now closed as seven
@@ -5936,9 +6605,9 @@ The host oracle and freestanding Thumb closure tests pass, the analyzer pins
 all eight provider relocations and the redirect, and source package assembly
 and verification pass. Canonical Apollo accounting is 165,094 source-owned
 bytes, 121,098 generated patch-site bytes, 32 wrapper bytes, 182 in-place
-source bytes, and 3,402,084 opaque base bytes. No hardware was present,
-accessed, signed for, or flashed; device-dependent validation remains blocked
-by unavailable physical evidence.
+source bytes, and 3,402,084 opaque base bytes. No hardware operation was
+performed; device-dependent qualification is deferred by project direction and
+future qualification requires the specified physical evidence.
 
 ## FreeRTOS `vTaskGetInfo` closes the task/queue-private ledger row
 
@@ -5974,8 +6643,7 @@ Focused behavior, Thumb surface, 43-relocation, routing, component, manifest,
 and package tests pass. Canonical Apple overlay/component/package identities
 are `166090/3689486/4467980` bytes and
 `1120724b...43e8` / `18e578a6...d05f` / `a643e0fd...e11e9`.
-On-device paired-reboot/display/scheduler evidence remains blocked by
-unavailable authorized physical hardware.
+On-device paired-reboot/display/scheduler qualification is deferred by project direction; future qualification requires authorized physical hardware.
 
 ## G2 health mutex/common-event object is production-routed
 
@@ -5992,8 +6660,9 @@ Canonical Apple overlay/component/package identities are
 Accounting closes at 166,474 source-owned, 122,648 generated patch-site,
 122,826 replaced stock-function, and 3,400,534 opaque base bytes. No hardware
 operation was performed. On-device concurrency, role/display selection,
-transport delivery, and visible health behavior are explicitly blocked by
-unavailable physical evidence; this does not declare overall G2 completeness.
+transport delivery, and visible health behavior are deferred by project
+direction; future qualification requires the specified physical evidence. This
+does not declare overall G2 completeness.
 
 ## Cordio `dm_sec_lesc` security unit is production-routed
 
@@ -6009,7 +6678,7 @@ Canonical Apple overlay/component/package identities are
 `1f5c6afe...1cff` / `9ca58f6d...7ff2` / `eb2d45ac...2985`.
 No hardware operation was performed. Pairing/controller timing, pool pressure,
 disconnect races, and peer interoperability remain explicitly blocked by
-unavailable authorized G2/EM9305 physical evidence. The overall security and
+future-required authorized G2/EM9305 physical evidence. The overall security and
 firmware ledgers remain incomplete.
 
 ## Cordio `dm_sec` security core is production-routed
@@ -6025,8 +6694,7 @@ Canonical Apple overlay/component/package identities are
 `167088/3690484/4468978` bytes and `63a2dab6...81ca` /
 `1f4e39b3...6e19` / `edd49b59...1c5b`. No hardware operation was performed.
 Controller timing, allocation pressure, disconnect races, callback ordering,
-and legacy/LESC peer interoperability remain explicitly blocked by unavailable
-authorized G2/EM9305 evidence. `dm_sec_slave` and `dm_sec_master`, the broader
+and legacy/LESC peer interoperability remain is deferred by project direction; future qualification requires authorized G2/EM9305 evidence. `dm_sec_slave` and `dm_sec_master`, the broader
 security ledger, and the firmware as a whole remain incomplete.
 
 ## Cordio `dm_sec_slave` and `dm_sec_master` roles are production-routed
@@ -6042,8 +6710,7 @@ Canonical Apple overlay/component/package identities are
 `167426/3690822/4469316` bytes and `303539d4...e9b9` /
 `e6a69ad6...1fb4` / `39a4702c...d975`. No hardware operation was performed.
 Role-specific controller timing, message ownership, disconnect races, callback
-behavior, and peer interoperability remain explicitly blocked by unavailable
-authorized G2/EM9305 evidence. The broader SMP/application-policy/cryptographic
+behavior, and peer interoperability remain is deferred by project direction; future qualification requires authorized G2/EM9305 evidence. The broader SMP/application-policy/cryptographic
 security rows and the firmware as a whole remain incomplete.
 
 ## Cordio `smp_db` pairing database is production-routed
@@ -6060,7 +6727,7 @@ Canonical Apple overlay/component/package identities are
 `168138/3691534/4470028` bytes and `c58ed4eb...4a0e0` /
 `bafeba34...d1487` / `d563e568...6b4b`. No hardware operation was performed.
 WSF scheduling, controller disconnect races, repeated-attempt timing, and peer
-interoperability remain explicitly blocked by unavailable authorized physical
+interoperability remain is deferred by project direction; future qualification requires authorized physical
 evidence. The remaining SMP state/action units, application policy,
 cryptographic backend, and firmware as a whole remain incomplete.
 
@@ -6080,7 +6747,7 @@ Canonical Apple overlay/component/package identities are
 patch-site bytes, and 3,393,530 opaque base bytes. No hardware operation was
 performed. Controller timing, disconnect races, pairing/reconnect, peer
 interoperability, and stale-AES behavior remain explicitly blocked by
-unavailable authorized G2/EM9305 physical evidence; no completeness claim is
+future-required authorized G2/EM9305 physical evidence; no completeness claim is
 made.
 
 ## Cordio `smp_sc_main` is production-routed
@@ -6100,7 +6767,7 @@ Canonical Apple overlay/component/package identities are
 bytes (including 182 in place), 132,278 generated patch-site bytes, 32 wrapper
 bytes, and retains 3,390,904 opaque bytes. No hardware operation was performed.
 Public-key/DH-check/passkey/OOB/reconnect/repeated-attempt controller and peer
-validation is explicitly blocked by unavailable authorized G2/EM9305 physical
+validation is is deferred by project direction; future qualification requires authorized G2/EM9305 physical
 evidence. Remaining SMP action/state units and the firmware as a whole remain
 incomplete.
 
@@ -6119,7 +6786,7 @@ and `f2e2771d...6a43` / `a2c628bb...aafc` / `34e82939...8936`; the flash plan
 is 1,836,839 bytes with SHA-256 `d4c0b6b3...fe139`. No hardware was accessed or
 flashed. Live scheduler/transport timing, BLE delivery, phone/schema
 interoperability, and persisted device-data validation remain explicitly
-blocked by unavailable authorized G2/EM9305 physical evidence. Other health UI
+is deferred by project direction; future qualification requires authorized G2/EM9305 physical evidence. Other health UI
 and algorithm-provider rows, broader protobuf services, and the firmware as a
 whole remain incomplete.
 
@@ -6143,7 +6810,7 @@ overlay/component/package identities are `174816/3698212/4476706` bytes and
 No hardware was accessed, signed for, or flashed. Legacy and Secure
 Connections pairing, key distribution, timeout, cancellation, and
 repeated-attempt controller/peer behavior remain explicitly blocked by
-unavailable authorized G2/EM9305 physical evidence. The remaining Secure
+future-required authorized G2/EM9305 physical evidence. The remaining Secure
 Connections action/state units and the firmware as a whole remain incomplete.
 
 ## Health data manager is production-routed
@@ -6163,7 +6830,7 @@ alignment bytes. Canonical Apple overlay/component/package identities are
 with SHA-256 `bb761c34...60365`. No hardware was accessed or flashed. Live
 mutex scheduling, concurrent service traffic, persistence, schema/peer
 interoperability, and display/device-data behavior remain explicitly blocked
-by unavailable authorized G2/EM9305 physical evidence. The protobuf health
+by future-required authorized G2/EM9305 physical evidence. The protobuf health
 service, health UI, broader firmware ledger, and firmware as a whole remain
 incomplete.
 
@@ -6184,7 +6851,7 @@ and `212bd4fe...3460` / `6803b1a9...e65d` / `86901153...b7f2`; the
 flash plan is 1,946,868 bytes with SHA-256 `f06aee5a...fc42`. No hardware was
 accessed or flashed. Live Cypress-controller, proximity-baseline persistence,
 threshold write/readback, and physical gesture behavior remain explicitly
-blocked by unavailable authorized G2 touch-panel evidence. The firmware as a
+is deferred by project direction; future qualification requires authorized G2 touch-panel evidence. The firmware as a
 whole remains incomplete.
 
 ## Gesture-processing service is production-routed
@@ -6207,7 +6874,7 @@ replaced stock-function bytes, and 3,367,148 opaque base bytes.
 
 No hardware was accessed or flashed. Live touch/proximity electrical behavior,
 controller event delivery, debounce, timing, and physical gesture
-interpretation remain explicitly blocked by unavailable authorized G2
+interpretation remain is deferred by project direction; future qualification requires authorized G2
 evidence. The firmware as a whole remains incomplete.
 
 ## CY8C4046FNI host touch driver is production-routed
@@ -6232,7 +6899,7 @@ is 1,946,868 bytes with SHA-256 `f06aee5a...fc42`.
 
 No hardware was accessed or flashed. Physical I2C signaling, reset/DFU boot
 transitions, settling time, report timing, and CapSense behavior remain
-explicitly blocked by unavailable authorized G2 hardware and capture evidence.
+is deferred by project direction; future qualification requires authorized G2 hardware and capture evidence.
 The firmware as a whole remains incomplete.
 
 ## Packetcraft Cordio GATT profile is production-routed
@@ -6253,7 +6920,7 @@ SHA-256 `f06aee5a...fc42`.
 
 No hardware was accessed or flashed. Physical ATT discovery, CCCD state,
 indication delivery, controller timing, and peer interoperability remain
-explicitly blocked by unavailable authorized G2/EM9305 evidence. The firmware
+is deferred by project direction; future qualification requires authorized G2/EM9305 evidence. The firmware
 as a whole remains incomplete.
 
 ## G2 BLE OTA profile is production-routed
@@ -6278,14 +6945,13 @@ Canonical Apple overlay/component/package identities are
 to `f06aee5a...fc42`.
 
 No hardware was accessed or flashed. OTA CCC, reset, disconnect, notification
-timing, and peer interoperability remain explicitly blocked by unavailable
-authorized G2/EM9305 evidence. The broader firmware software ledger remains
+timing, and peer interoperability remain is deferred by project direction; future qualification requires authorized G2/EM9305 evidence. The broader firmware software ledger remains
 incomplete.
 
 ## G2 BLE Ring profile is production-routed
 
 All seven linked `profile_ring.c` functions now route to selector-isolated
-GPL-3.0-only clean-room C over the recovered control-block and message ABIs.
+MIT clean-room C over the recovered control-block and message ABIs.
 Host contracts exercise handler initialization, service discovery, 16-bit
 epoch cancellation, the 500/700/900 delayed CCC sequence, connect/close
 transitions, ATT RX forwarding, TX command and queue paths, allocation failure,
@@ -6305,14 +6971,14 @@ to `f06aee5a...fc42`.
 
 No hardware was accessed or flashed. Service discovery, delayed CCC timing,
 ATT handle behavior, controller concurrency, and peer interoperability remain
-explicitly blocked by unavailable authorized G2/EM9305 evidence. The OTA/Ring
+is deferred by project direction; future qualification requires authorized G2/EM9305 evidence. The OTA/Ring
 profile pair has no remaining software gap; the firmware as a whole remains
 incomplete.
 
 ## Charge and message callback facades are production-routed
 
 All ten linked entries from `cb_charge.c` and `cb_msg_notif.c` now route to
-selector-isolated GPL-3.0-only clean-room C. Host contracts cover both fixed
+selector-isolated MIT clean-room C. Host contracts cover both fixed
 callback lists and retained type identities, init/deinit, null-checked
 register/unregister, provider return propagation, and the notification in/out
 value word. The fail-closed analyzer pins ten strict relocations, ten complete
@@ -6334,7 +7000,7 @@ ledger remains incomplete.
 ## Generic callback manager is production-routed
 
 The shared eight-function `callback_manager.c` provider now compiles from
-selector-isolated GPL-3.0-only clean-room C. Host contracts cover allocation
+selector-isolated MIT clean-room C. Host contracts cover allocation
 failure, null validation, duplicate-success behavior, prepend order,
 head/interior removal, full deinitialization, and ordered two-argument callback
 dispatch. Eight guarded redirects replace 1,240 stock body bytes with 408
@@ -6353,7 +7019,7 @@ physical-evidence claim. The overall G2 ledger remains incomplete.
 ## Ring-battery callback facade is production-routed
 
 All five linked entries from `cb_ring_battery.c` now route to
-selector-isolated GPL-3.0-only clean-room C. Five guarded redirects replace all
+selector-isolated MIT clean-room C. Five guarded redirects replace all
 122 stock body bytes with 88 compiled Thumb bytes plus two alignment bytes;
 five strict relocations bind only to the source-owned generic callback manager
 and the retained ring-battery consumer. The authenticated 30-byte type,
@@ -6382,7 +7048,7 @@ opaque base bytes. Canonical overlay/component/package SHA-256 values are
 `a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
 `026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
 and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
-Physical peer/charger/ring validation remains blocked by unavailable authorized
+Physical peer/charger/ring validation is deferred by project direction; future qualification requires authorized
 hardware evidence; the wider firmware remains incomplete.
 
 ## Ring-battery state service is production-routed
@@ -6407,7 +7073,7 @@ explicitly unresolved physical-evidence regions, and hashes to
 `ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
 
 No hardware was accessed. Paired-device transport, callback timing, and live
-ring-state behavior remain blocked by unavailable authorized physical evidence.
+ring-state behavior is deferred by project direction; future qualification requires authorized physical evidence.
 The service object's software gap is closed; the wider ring stack and firmware
 remain incomplete.
 
@@ -6435,15 +7101,15 @@ unresolved protected regions, and five container-only regions; it hashes to
 Host tests cover buffer bounds, null/error statuses, decoding, command/event
 routing, MAC-count behavior, encoding, transport arguments, and relay dispatch.
 No hardware was accessed for this tranche. Paired-G2 relay, nanopb peer
-interoperability, and live Ring-event behavior are explicitly blocked by the
-unavailable physical evidence recorded in `hardware-validation-2026-08-23.md`.
+interoperability and live Ring-event qualification are deferred by project direction.
+The historical evidence state is recorded in `hardware-validation-2026-08-23.md`.
 The protobuf object's software gap is closed; the wider ring stack and firmware
 remain incomplete.
 
 ## Even-AI protobuf service is production-routed
 
 All 25 linked `pb_service_even_ai.c` entries and two bounded nanopb helpers now
-compile from selector-isolated GPL-3.0-only clean-room C. Twenty-five guarded
+compile from selector-isolated MIT clean-room C. Twenty-five guarded
 redirects replace 8,404 authenticated stock body bytes with 2,832 compiled
 Thumb bytes plus 36 alignment bytes. The 552 distributed official gap/literal
 pool bytes remain retained, and 107 strict relocations bind only to recovered
@@ -6461,13 +7127,13 @@ The 2,090,502-byte deployment plan had 2,984 placed regions, two unresolved
 physical-evidence regions, and five container-only regions; its SHA-256 is
 `eb05d1365e4b0481599d07a8a4b3afa94f529d8c1b57ff48c7093a7ba4392fca`.
 Live service-7 master/peer BLE and Even-AI UI validation remain explicitly
-blocked by unavailable authorized physical evidence. The wider firmware
+is deferred by project direction; future qualification requires authorized physical evidence. The wider firmware
 remains incomplete.
 
 ## Terminal protobuf service is production-routed
 
 All thirteen linked `pb_service_terminal.c` entries and two bounded memory
-helpers now compile from selector-isolated GPL-3.0-only clean-room C. Thirteen
+helpers now compile from selector-isolated MIT clean-room C. Thirteen
 guarded redirects replace all 2,554 authenticated stock body bytes with 1,368
 compiled Thumb bytes plus eight alignment bytes. The authenticated 246-byte
 literal tail remains official, and 23 strict relocations bind only to recovered
@@ -6484,14 +7150,14 @@ The 2,113,044-byte deployment plan has 3,017 placed regions, two unresolved
 physical-evidence regions, and five container-only regions; its SHA-256 is
 `98f581f8d06685b673b91bf2522d3dbbfb8ce318b99378e5e46608c33d833a1c`.
 Live service-`0x30` master/peer BLE and terminal-UI validation remains
-explicitly blocked because the authorized right temple is nonresponsive and
+explicitly blocked because the authorized right temple is not under test because physical qualification is deferred by project direction and
 the left temple must remain stock. The software gap is closed; the wider
 firmware remains incomplete.
 
 ## Translate protobuf service is production-routed
 
 All four linked `pb_service_translate.c` entries and three bounded shared
-helpers now compile from selector-isolated GPL-3.0-only clean-room C. Four
+helpers now compile from selector-isolated MIT clean-room C. Four
 guarded redirects replace all 1,324 authenticated stock body bytes with 748
 compiled Thumb bytes plus four alignment bytes. The authenticated 120-byte
 literal pool remains official, and 13 strict relocations bind only to recovered
@@ -6510,13 +7176,13 @@ physical-evidence regions, and five container-only regions; its SHA-256 is
 
 Live service-`0x05` master/peer BLE, replay timing, peer nanopb interoperability,
 and translation-UI validation remain explicitly blocked because the authorized
-right temple is nonresponsive and the left temple must remain stock. The
+right temple is not under test because physical qualification is deferred by project direction and the left temple must remain stock. The
 translate software gap is closed; the wider firmware remains incomplete.
 
 ## Device-config protobuf service is production-routed
 
 All three linked `pb_service_dev_config.c` entries and two bounded memory
-helpers now compile from selector-isolated GPL-3.0-only clean-room C. Three
+helpers now compile from selector-isolated MIT clean-room C. Three
 guarded redirects replace all 2,646 authenticated stock body bytes with 998
 compiled Thumb bytes plus four alignment bytes. The authenticated 286 bytes of
 distributed gap/literal data remain official, and 33 strict relocations bind
@@ -6537,7 +7203,7 @@ physical-evidence regions, and five container-only regions; its SHA-256 is
 
 Live service-`0x80` pairing, role, BLE-parameter, disconnect/unpair, restore,
 heartbeat, restart, time-sync, audio-control, and peer nanopb validation remain
-explicitly blocked because the authorized right temple is nonresponsive and
+explicitly blocked because the authorized right temple is not under test because physical qualification is deferred by project direction and
 the left temple must remain stock. The device-config software gap is closed;
 the wider firmware remains incomplete.
 
@@ -6549,14 +7215,14 @@ Its eight redirects contribute 3,092 ownership bytes, bringing the protobuf
 aggregate to 24,372 production-ownership bytes across nine routed services.
 The firmware image is unchanged by this evidence-only correction. The health
 software gap remains closed, while live service-`0x0E` BLE, peer/schema, and
-persisted-data validation remains explicitly blocked by unavailable authorized
+persisted-data validation remains is deferred by project direction; future qualification requires authorized
 physical evidence; six retained protobuf services still require software
 implementations.
 
 ## Onboarding protobuf service is production-routed
 
 All nine linked `pb_service_onboarding.c` entries and three bounded shared
-helpers now compile from selector-isolated GPL-3.0-only clean-room C. Nine
+helpers now compile from selector-isolated MIT clean-room C. Nine
 guarded redirects replace all 3,024 authenticated stock body bytes with 878
 compiled Thumb bytes plus eight alignment bytes. The authenticated 192 bytes
 of distributed alignment/literal data remain official, and 22 strict
@@ -6578,7 +7244,7 @@ physical-evidence regions, and five container-only regions; its SHA-256 is
 The protobuf aggregate now records 27,396 production-ownership bytes across
 ten routed services. Live service-`0x10` peer BLE, display-ready,
 onboarding-control, response, and notification validation remains explicitly
-blocked because the authorized right temple is nonresponsive and the left
+blocked because the authorized right temple is not under test because physical qualification is deferred by project direction and the left
 temple must remain stock. The onboarding software gap is closed; five retained
 protobuf services and the wider firmware remain incomplete.
 
@@ -6608,7 +7274,7 @@ physical-evidence regions, and five container-only regions; its SHA-256 is
 
 No package was signed or flashed. Live peer-visible OTA, writable-media,
 bootloader-installation, power-loss, and rollback behavior remains blocked:
-the only authorized right temple is nonresponsive and the left temple must
+the only authorized right temple is not under test because physical qualification is deferred by project direction and the left temple must
 remain stock. The OTA-service software gap is closed; wider firmware
 functional completeness is not claimed.
 
@@ -6630,8 +7296,7 @@ overlay/component/package sizes are 244,992 / 3,768,388 / 4,546,882 bytes; the
 flash plan is 2,642,970 bytes with 3,795 placed and two unresolved regions.
 
 No image was signed or flashed. Live UART3/GX8002 command, audio, DMIC, I2S,
-and event evidence remains blocked because the authorized right temple is
-nonresponsive, the left temple must remain stock, and no responsive authorized
+and event qualification is deferred by project direction; future qualification requires the authorized right temple; the left temple must remain stock, and future qualification requires a responsive authorized
 pair or golden codec/UART capture exists. This software gap is closed; wider
 firmware functional completeness is not claimed.
 
@@ -6653,9 +7318,9 @@ overlay/component/package sizes are 248,406 / 3,771,802 / 4,550,296 bytes; the
 flash plan has 3,840 placed and two unresolved evidence-only regions.
 
 No image was signed or flashed. Live destructive codec upgrade, UART timing,
-reboot, and post-flash boot evidence remains blocked because the authorized
-right temple is nonresponsive, the left temple must remain stock, and no
-responsive authorized pair or golden codec/UART capture exists. This software
+reboot and post-flash boot qualification is deferred by project direction;
+future qualification requires a responsive authorized pair or golden codec/UART
+capture while the left temple remains stock. This software
 gap is closed; wider firmware functional completeness is not claimed.
 
 ## Codec UART lifecycle is production-routed
@@ -6671,8 +7336,7 @@ idempotence, and state transitions.
 The canonical overlay/component/package sizes are 240,032 / 3,763,428 /
 4,541,922 bytes; the 2,567,304-byte flash plan has 3,683 placed, two unresolved,
 five container-only, and six protected regions. Live UART electrical behavior,
-callback timing, and GX8002B interoperability remain blocked by unavailable
-authorized responsive G2/codec hardware. Other codec-service and wider firmware
+callback timing, and GX8002B interoperability is deferred by project direction; future qualification requires authorized responsive G2/codec hardware. Other codec-service and wider firmware
 software gaps remain, so functional completeness is not claimed.
 
 ## AT^AUDIO control is production-routed
@@ -6686,7 +7350,7 @@ stock bytes while the 34-byte official pool remains.
 The canonical overlay/component/package sizes are 240,076 / 3,763,472 /
 4,541,966 bytes; the 2,568,527-byte flash plan has 3,685 placed, two unresolved,
 five container-only, and six protected regions. Audible and codec-power
-behavior remains blocked by unavailable authorized responsive G2/audio
+behavior is deferred by project direction; future qualification requires authorized responsive G2/audio
 hardware. Three larger codec-service objects and wider firmware gaps remain,
 so functional completeness is not claimed.
 
@@ -6704,7 +7368,7 @@ frontier all pass. Current overlay/component/package hashes are
 `e27208da3a7f963f6676bedfd039b589c283ce1be679c94317a80bb8061812b1`,
 and `b84e19844a7459929059111af9804203a76760bbb9f8a1093063e2bb758c4b44`.
 No image was flashed; physical timing and paired interoperability are blocked
-by unavailable authorized responsive G2/EM9305 evidence. Wider firmware
+by future-required authorized responsive G2/EM9305 evidence. Wider firmware
 functional completeness is not claimed.
 
 ## SystemAlert UI is production-routed
@@ -6719,7 +7383,7 @@ pass. The canonical overlay/component/package sizes are 225,396 / 3,748,792 /
 4,527,286 bytes; the flash plan is 2,464,744 bytes with 3,531 placed regions.
 
 No image was signed or flashed. Live display, timer, IMU, notification, and
-paired-temple behavior remains blocked by unavailable authorized physical
+paired-temple behavior is deferred by project direction; future qualification requires authorized physical
 evidence. The SystemAlert software gap is closed; wider firmware functional
 completeness is not claimed.
 
@@ -6737,8 +7401,9 @@ The canonical overlay/component/package sizes are 228,222 / 3,751,618 /
 4,530,112 bytes; the flash plan is 2,503,413 bytes with 3,589 placed, two
 unresolved, five container-only, and six protected regions. No image was
 signed or flashed. Live display, shutdown/minimize, IMU reflash, and paired
-synchronization evidence remains blocked because the authorized right temple
-is nonresponsive and the left temple must remain stock. The SystemClose
+synchronization qualification is deferred by project direction; future
+qualification requires the authorized right temple while the left remains stock.
+The SystemClose
 software gap is closed; wider firmware functional completeness is not claimed.
 
 ## FreeRTOS+CLI filesystem is production-routed
@@ -6754,8 +7419,7 @@ The canonical overlay/component/package sizes are 238,812 / 3,762,208 /
 unresolved, five container-only, and six protected regions. No image was
 signed or flashed. Live media mutation, persistence, corruption recovery,
 power-loss, and concurrent CLI behavior remains blocked because the authorized
-right temple is nonresponsive, the left temple must remain stock, and no
-authorized writable physical test medium is available. This software gap is
+right temple is not under test because physical qualification is deferred by project direction, the left temple must remain stock, and future qualification requires authorized writable physical test medium. This software gap is
 closed; wider firmware functional completeness is not claimed.
 
 ## Factory NVDB lifecycle is production-routed
@@ -6770,8 +7434,7 @@ magic fails closed and cannot invoke wholesale default reset.
 The canonical overlay/component/package sizes are 239,330 / 3,762,726 /
 4,541,220 bytes; the flash plan is 2,546,521 bytes with 3,652 placed, two
 unresolved, five container-only, and six protected regions. Physical
-persistence, recovery, and schema compatibility remain blocked by unavailable
-authorized responsive G2 hardware and a golden `NVdb` capture. Wider firmware
+persistence, recovery, and schema compatibility is deferred by project direction; future qualification requires authorized responsive G2 hardware and a golden `NVdb` capture. Wider firmware
 functional completeness is not claimed.
 
 ## ALS driver is production-routed
@@ -6790,9 +7453,37 @@ sizes are 257,980 / 3,781,376 / 4,559,870 bytes; the 2,943,327-byte flash plan
 has 4,239 placed, two unresolved, five container-only, and six protected
 regions. No image was signed or flashed. Live sensor-bus, calibrated-lux,
 display-response, and paired-temple evidence is blocked because the authorized
-right temple is nonresponsive, the left temple must remain stock, and no
+right temple is not under test because physical qualification is deferred by project direction, the left temple must remain stock, and no
 golden OPT3007 trace is available. Wider firmware functional completeness is
 not claimed.
+
+## Current bootloader MSPI device-reconfiguration increment
+
+The complete authenticated `[0x00420E08,0x00420E8C)` body now routes to
+clean-room compilable C. Host tests pin the exact disable, device-configure,
+enable, and source-owned pin-group sequence; handle/state cells; configuration
+offset `+8`; all failure diagnostics; and stock status collapse to `1`.
+
+Apple/Linux emit 136/128 bytes with one strict pin-group relocation. Their
+overlay identities are 14,164 /
+`afd9bcfa294f66ffb92c17c5d562a7c8e1cb6d95c6bf49ebd00cb8d315e26e5a`
+and 14,140 /
+`cda5772f628c68390b477329eea3ccba4e4138aa0d53f1dd3485ef3086a27881`;
+provider identities are 162,764 /
+`dc3e8e2fecad73b3db6550353ea12317b7a5a5fe2b1a0415871f8a510d0185b5`
+and 162,740 /
+`3a40fd8e34da6c07eef37c1018323db537a8f8ef3bbdd062637637ca6ceba155`.
+Canonical accounting is 14,149 source-owned, 15,464 generated patch, 16
+alignment, and 133,135 retained official bytes across 191 functions, 172
+relocated leaves, and 189 patch sites.
+
+Apple/Linux unsigned packages are 4,744,342 / 4,520,328 bytes with SHA-256
+`fd48ce7f025a78835fe08478da55b5146c359ca3ac050e092a98366c2c212a81` /
+`d02f9da0600b62b85c3867cd542ce769b8d72cbe1d15ccbb98b103ad5891c6a8`.
+No hardware operation occurred. Live HAL/pinmux/MSPI/XIP/external-flash and
+cold-boot qualification is deferred by project direction; future qualification
+requires an authorized responsive right temple while the left remains stock. The next executable entry at
+`0x00420E8C` remains a software gap, so completeness is not claimed.
 
 ## Health UI page is production-routed
 
@@ -6810,8 +7501,8 @@ overlay/component/package sizes are 330,776 / 3,854,172 / 4,632,666 bytes; the
 container-only, and six protected regions.
 
 No image was signed or flashed. Live paired display/input validation is
-blocked because the authorized right temple is nonresponsive, the left temple
-must remain stock, and no responsive authorized pair or golden health-page UI
+blocked because the authorized right temple is not under test because physical qualification is deferred by project direction, the left temple
+must remain stock, and future qualification requires a responsive authorized pair or golden health-page UI
 trace is available. The health-page software gap is closed; wider firmware
 functional completeness is not claimed.
 
@@ -6854,7 +7545,7 @@ and `ecc49cd5b184fce9a6a25f71532eba7d1ee33ee566b131ec1b97b0a9536287d9`;
 the package rebuild is byte-identical. No image was signed, flashed, or
 installed. Live scan, advertising, connection, controller, concurrency, and
 paired-temple validation remains blocked because the authorized right G2 is
-nonresponsive and the left must remain stock. This closes the bounded
+not under test because physical qualification is deferred by project direction and the left must remain stock. This closes the bounded
 framework software gap only; wider firmware completeness is not claimed.
 
 ## Touch-controller command/report protocol is source-complete
@@ -6896,8 +7587,8 @@ platform seams, the 786-byte stock fault body, and the historical exception-
 frame behavior.
 
 The production HardFault vector remains stock. Promotion requires deliberate
-fault injection on an authorized responsive G2; that evidence is unavailable
-because the right temple is nonresponsive and the left remains stock. No image
+fault injection on an authorized responsive G2; that qualification is deferred by project direction; future qualification requires
+the authorized right temple while the left remains stock. No image
 was signed, flashed, or installed. Wider firmware functional completeness is
 not claimed.
 
@@ -6921,8 +7612,8 @@ The canonical overlay/component/package sizes are 353,336 / 3,876,732 /
 five container-only, and six protected regions. The aggregate ATT/WSF gate
 passes 80 tests with one explicit unavailable-archive skip. No image was signed,
 flashed, or installed. Live ATT peer/controller/timer/discovery validation is
-blocked because the authorized right temple is nonresponsive, the left temple
-must remain stock, and no responsive authorized G2/EM9305 pair or golden trace
+blocked because the authorized right temple is not under test because physical qualification is deferred by project direction, the left temple
+must remain stock, and future qualification requires a responsive authorized G2/EM9305 pair or golden trace
 exists. These two software gaps are closed; wider firmware functional
 completeness is not claimed.
 
@@ -6943,8 +7634,7 @@ are 375,186 / 3,898,582 / 4,677,076 bytes with SHA-256 `8c05945a…a3c3`,
 `8dcb804c…8598`, and `e4579c12…b049`; the 3,937,595-byte flash plan hashes to
 `15a2fac0…e92` and contains 5,668 placed, two unresolved, five container-only,
 and six protected regions. No image was signed or flashed. Live controller
-ACL/event/ISO, reset timing, RF, and peer evidence remains blocked by
-unavailable authorized responsive G2/EM9305 hardware. The common-core software
+ACL/event/ISO, reset timing, RF, and peer qualification is deferred by project direction; future qualification requires authorized responsive G2/EM9305 hardware. The common-core software
 gap is closed; wider HCI and firmware functional completeness is not claimed.
 
 ## Cordio vendor reset/NVDS sequence is production-routed
@@ -6961,7 +7651,7 @@ Canonical overlay/component/package identities are 375,186 / 3,898,582 /
 `e4579c12…b049`. The 3,937,595-byte flash plan hashes to `15a2fac0…e92` and
 contains 5,668 placed, two unresolved, five container-only, and six protected
 regions. No image was signed or flashed. Live reset, address, NVDS, RF-power,
-timing, and controller evidence is blocked by unavailable authorized responsive
+timing, and controller evidence is deferred by project direction; future qualification requires authorized responsive
 G2/EM9305 hardware. This software slice is closed; wider HCI and firmware
 functional completeness is not claimed.
 
@@ -6983,7 +7673,7 @@ regions. Host semantics, freestanding target compilation, 11 exact engine
 relocations, full core redirect, manifest tiling, and complete image identity
 are gated by `make iar-format-output-closure`. No image was signed, flashed, or
 installed. Live writer, termination, stream, and float-rounding evidence is
-blocked because the authorized right temple is nonresponsive and the left must
+blocked because the authorized right temple is not under test because physical qualification is deferred by project direction and the left must
 remain stock. The formatted-output software gap is closed; wider firmware
 functional completeness is not claimed.
 
@@ -7009,7 +7699,7 @@ flash plan hashes to `e9432043…ee33` and contains 5,911 placed, two unresolved
 five container-only, and six protected regions. No image was signed, flashed,
 or installed. Live ANCS discovery, CCC, control-point actions, controller
 timing, product sync, and dual-temple behavior are blocked because the
-authorized right temple is nonresponsive and the left must remain stock. The
+authorized right temple is not under test because physical qualification is deferred by project direction and the left must remain stock. The
 ANCC software gap is closed; wider firmware functional completeness is not
 claimed.
 
@@ -7035,7 +7725,7 @@ are 421,196 / 3,944,592 / 4,723,086 bytes with SHA-256 `a065d198…629a`,
 `0f649619…4afe` and contains 5,948 placed, two unresolved, five container-only,
 and six protected regions. No image was signed, flashed, or installed. Live
 scan, advertising, connection, controller-transition, concurrency, and paired
-temple evidence is blocked because the authorized right G2 is nonresponsive
+temple evidence is blocked because the authorized right G2 is not under test because physical qualification is deferred by project direction
 and the left must remain stock. Framework and firmware completeness are not
 claimed.
 
@@ -7059,7 +7749,7 @@ and `c7c5e02c2e3ce6d1fc4fbed7fd7a06b0e01a47cf00e8dd4e040c098ca2755a86`.
 The package rebuild is byte-identical with 6,124 placed and two unresolved
 regions. No image was signed, flashed, or installed. Live case/box electrical,
 timer/concurrency, display, ring-reconnect, and state-machine validation is
-blocked by unavailable authorized hardware; wider firmware completeness is
+is deferred by project direction; future qualification requires authorized hardware; wider firmware completeness is
 not claimed.
 
 ## S200 product startup/main is production-routed (2026-08-26)
@@ -7082,7 +7772,7 @@ and `8c7bd2469ac367b6b2139798ae68d7d08cf49f79e17f8c6fc9fd0fd47cb02eba`.
 The pinned rebuild is byte-identical with 6,141 placed and two unresolved
 regions. No image was signed, flashed, or installed. Live startup,
 reset-controller, clock/power, LVGL, and task hand-off validation is blocked by
-unavailable authorized physical evidence; wider firmware completeness is not
+future-required authorized physical evidence; wider firmware completeness is not
 claimed.
 
 ## Cordio security API is production-routed (2026-08-26)
@@ -7098,17 +7788,17 @@ and completion behavior are implemented.
 All 20 isolated Cortex-M55 selectors and host behavior tests pass with
 `-Werror`. Production routing emits 1,952 text bytes plus 16 alignment bytes
 under 65 strict relocations. Canonical overlay/component/package identities are
-428,950 / 3,952,346 / 4,730,840 bytes with SHA-256
-`0a6b9fe566a2452cd9720c2db22eb43e530c31b76996d05541fa7f24ea9ee745`,
+429,058 / 3,952,454 / 4,730,840 bytes with SHA-256
+`0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd`,
 `dc578472f06af2d499b9cb771fc185df4f739a05de558098088b56da9a5e4ce0`,
 and `d77d88162f777a6c9889d1813323a836d1dc140fe7488009fe485ed787d8fe70`.
 The 4,299,871-byte flash plan hashes to
 `6820a0dc5b6be70fdca78144fdb39d56a9f898b7b0b832c8d76b18cef33608f6`;
 the package replay is byte-identical with 6,193 placed and two unresolved
 regions. No image was signed, flashed, or installed. Live controller,
-concurrency, timing, and paired-temple validation is explicitly blocked by
-unavailable responsive authorized right G2/EM9305 physical evidence; the left
-remains stock and firmware-wide completeness is not claimed.
+concurrency, timing, and paired-temple validation is deferred by project direction;
+future qualification requires authorized right G2/EM9305 physical evidence while
+the left remains stock. Firmware-wide completeness is not claimed.
 
 ## QP/C 6.5.1 source and license boundary is closed (2026-08-26)
 
@@ -7159,7 +7849,7 @@ layout/relocation graph, with profile-specific binary hashes.
 Host semantics, isolated builds, exact stock replacement, manifest ownership,
 and the fail-closed analyzer pass offline. Unsigned packages were regenerated;
 no image was signed, flashed, or installed. Live boot, mutex, failure-log, and IAR stream
-serialization evidence is blocked by unavailable authorized responsive
+serialization evidence is deferred by project direction; future qualification requires authorized responsive
 hardware; the larger bootloader remains a software gap and firmware-wide
 completeness is not claimed.
 
@@ -7201,8 +7891,9 @@ unsigned packages are fail-closed. After 98 bytes of authenticated transition
 data, the next body starts at `0x0041733C`.
 
 Software closure is complete for this runtime/TLSF tranche. Live boot,
-formatting/parsing/logging and caller-path evidence remains explicitly blocked
-by the absence of an authorized responsive G2 right temple. The logging
+formatting/parsing/logging and caller-path qualification is deferred by project
+direction; future qualification requires an authorized responsive G2 right
+temple. The logging
 literal pools remain authenticated data and the remaining 140,391 retained
 bootloader bytes include later executable software gaps;
 firmware-wide completeness is not claimed.
@@ -7235,8 +7926,7 @@ bytes, SHA-256
 `b092ca5279fb3dc2ea77ff0d935c1cd6ef8ec98b27b9ab98adbe5691a8f12489`,
 with 3,404 placed and the same two unresolved regions. No firmware was signed,
 flashed, installed, reset, or booted. Live logger, mutex, scheduler, transport,
-and exception-path validation remains explicitly blocked by unavailable
-authorized responsive G2 hardware; the remaining bootloader body is still a
+and exception-path validation remains is deferred by project direction; future qualification requires authorized responsive G2 hardware; the remaining bootloader body is still a
 software gap and functional completeness is not claimed.
 
 ## Bootloader EasyLogger port is production-routed (2026-08-26)
@@ -7262,8 +7952,7 @@ The unsigned Apple/Linux packages are 4,739,266 / 4,515,260 bytes with
 SHA-256 `f7350f9208368191553ac0c3da07a68af90d66578595b858ad62a519a6dbbc81`
 and `96c1a37d4a14af132f338de523115cf614f9ef5c72da337eeb8382f1c6ea4c45`.
 Nothing was signed, flashed, installed, reset, booted, or sent to a transport.
-Live mutex/scheduler/task-name behavior remains blocked because no authorized
-responsive right temple is available and the authorized left temple must stay
+Live mutex/scheduler/task-name behavior remains blocked because future qualification requires authorized responsive right temple and the authorized left temple must stay
 stock. The output driver/transport and later retained bootloader bodies remain
 software gaps, so firmware-wide functional completeness is not claimed.
 
@@ -7292,7 +7981,7 @@ and `d05b3c4af715097e470d33d6a7e78646d7136a80ec24d07a6ae79ba5fc0a548b`.
 Their flash plans contain 6,446 / 3,421 placed regions and two unresolved
 boundaries each. No signer, device, UART, debugger, transport, flasher, reset,
 or boot operation was accessed. Physical behavior remains blocked by the
-unavailable authorized responsive right temple while the left must remain
+future-required authorized responsive right temple while the left must remain
 stock. Later retained executable bootloader spans remain software gaps.
 
 ## Bootloader delay and initializer services are production-routed (2026-08-26)
@@ -7321,8 +8010,8 @@ and `e742a5b7775cf8aae0667e0a425a76a83c9032406a28bcd679bfb82529de8c92`.
 Their flash plans contain 6,456 / 3,427 placed regions and two unresolved
 boundaries each. `make source` passes. Nothing was signed, flashed, installed,
 reset, booted, or sent to hardware. Live timing, initializer side effects, and
-cold-boot behavior remain blocked because no authorized responsive right
-temple is available and the left must remain stock. Retained bootloader spans
+cold-boot behavior remain blocked because future qualification requires authorized responsive right
+temple and the left must remain stock. Retained bootloader spans
 after `0x0041FA40` remain software gaps, so firmware-wide completeness is not
 claimed.
 
@@ -7351,8 +8040,7 @@ and `f92667c2f10b51cbd49129924bd4bf10c77145dccdc460e18840d4ebeadf8a72`.
 Their flash plans contain 6,459 / 3,429 placed regions and two unresolved
 boundaries each. Nothing was signed, flashed, installed, reset, booted, or
 sent to hardware. Live teardown, fail-stop, pin, power-state, and cold-boot
-behavior remains blocked because no authorized responsive right temple is
-available and the left must remain stock. Retained bootloader spans around and
+behavior remains blocked because future qualification requires authorized responsive right temple and the left must remain stock. Retained bootloader spans around and
 after `0x0041FAD0` remain software gaps, so firmware-wide completeness is not
 claimed.
 
@@ -7381,7 +8069,1248 @@ and `8a447d867e6303ed6075ad83067c53350a1e189956d2dc8c7ae6e93b287c12ea`.
 Their flash plans contain 6,461 / 3,430 placed regions and two unresolved
 boundaries each. Nothing was signed, flashed, installed, reset, booted, or
 sent to hardware. Live reset, VFP callee, configuration/channel side effects,
-pin/power state, and cold-boot behavior remain blocked because no authorized
-responsive right temple is available and the left must remain stock. Retained
+pin/power state, and cold-boot behavior remain blocked because future qualification requires authorized responsive right temple and the left must remain stock. Retained
 bootloader spans after `0x0041FAD0` remain software gaps, so firmware-wide
 completeness is not claimed.
+
+## Bootloader allocator initialization is production-routed (2026-08-26)
+
+The complete allocator initializer `[0x0041FD70,0x0041FDA8)` now routes to
+maintained clean-room C. The 56-byte authenticated body has one caller at
+`0x0041B89E`; host tests pin the `0x20081000` / `0x70800` pool clear, retained
+TLSF creation, handle publication at `0x2002718C`, diagnostic call and
+arguments, zero return, and adjacent literal pools. Both reviewed Clang
+profiles emit relocation-free 88-byte leaves.
+
+Apple overlay/provider identities are 10,004 / 158,604 bytes with SHA-256
+`a27f7ba39fdfe6a7364d59577cfa387a0a601aedf773612d1cb1b77700c6538d`
+and `da312bd3b1a4105f75788107d147d5397edba0014c72d11584d5c9552c24cab7`;
+Linux identities are 9,988 / 158,588 bytes with SHA-256
+`15784fef039b93caaa26b202c61b115b4d0947f0ec253b7232dd43e828787b50`
+and `a64974dce84415f4031847e1f71b5397cd0c366a31b8786d6f6e311ff53bd7b2`.
+Canonical accounting is 9,991 source-owned, 11,366 generated patch, 14
+alignment, and 137,233 retained official bytes across 159 functions, 140
+relocated leaves, and 157 patch sites.
+
+Unsigned Apple/Linux packages are 4,740,182 / 4,516,176 bytes with SHA-256
+`8041ac27ae80d9cb331d27363281d7dfb259024a4276e80783bcca4b3e7a04a2`
+and `7591a1ab14efac218d2610f2192f1b554c1f366ceb917ba911fc9059c8965bd6`.
+Their flash plans contain 6,467 / 3,434 placed regions and two unresolved
+boundaries each. Nothing was signed, flashed, installed, reset, booted, or
+sent to hardware. Live allocator/SRAM/logging/cold-boot behavior remains
+blocked because future qualification requires authorized responsive right temple and the
+left must remain stock. Executable spans after `0x0041FDA8` remain software
+gaps, so firmware-wide completeness is not claimed.
+
+## Bootloader IRQ services are production-routed (2026-08-26)
+
+The three complete entries `[0x0041FDC0,0x0041FE28)` now route to maintained
+clean-room C: signed NVIC interrupt enable, external/system-handler priority,
+and the vector-referenced MSPI status-clear-service wrapper. The 104 stock
+bytes are replaced by 112 relocation-free Thumb bytes in both reviewed
+toolchains. Host tests pin index/mask arithmetic, negative IRQ behavior,
+priority encoding, MSPI handle/status propagation and call order; stock scans
+pin both callers and the vector-table ingress.
+
+Apple overlay/provider identities are 10,116 / 158,716 bytes with SHA-256
+`f8088800044634921e2446b45e7133e0a9d3232e5ce5ad78f31eb6990b1e32b8`
+and `1594aefde3a94be29dec7c4d3ab3ac20cf57e2a6f220f7eeca8609ffb222dede`;
+Linux identities are 10,100 / 158,700 bytes with SHA-256
+`ae413000d796c164e5bc06f197ff9bbf2543140d2ed6a50bfc62eecb225bb213`
+and `34259f9296124eed2b7cebc3488994087b3308fc26383d78f82fd9948e568eae`.
+Canonical accounting is 10,103 source-owned, 11,470 generated patch, 14
+alignment, and 137,129 retained official bytes across 162 functions, 143
+relocated leaves, and 160 patch sites.
+
+Unsigned Apple/Linux packages are 4,740,294 / 4,516,288 bytes with SHA-256
+`b2ce7f54b0d6fb58fe46c78d715f7498d9188dba826197225ad203db0bc64181`
+and `c8c34b6acf8ed5b356f61334121e5c6d3bfc8628302bd3af4398192c83403a88`.
+Their flash plans contain 6,474 / 3,438 placed regions and two unresolved
+boundaries each. Nothing was signed, flashed, installed, reset, booted, or
+sent to hardware. Live NVIC/MSPI/interrupt/cold-boot behavior remains blocked
+because future qualification requires authorized responsive right temple and the left must
+remain stock. Executable spans after `0x0041FE28` remain software gaps, so
+firmware-wide completeness is not claimed.
+## Current bootloader MX25U25643G address-mode increment
+
+The complete authenticated `[0x00420800,0x0042086C)` body now routes to
+clean-room compilable C. Host tests pin zero initialization, command `0x15`,
+bit-5 decoding, raw transport-error preservation, both diagnostics, and the
+sole caller. Apple/Linux leaves are 124 bytes; provider identities are
+161,400 / 161,384 bytes. Canonical accounting is 12,785 source-owned, 14,098
+generated patch, 16 alignment, and 134,501 retained official bytes across 184
+functions, 165 relocated leaves, and 182 patch sites. The Apple unsigned
+package is 4,742,978 bytes with 6,519 placed and two unresolved physical
+regions. No hardware operation occurred; live MSPI/external-flash/cold-boot
+qualification is deferred by project direction; future qualification requires that evidence, and executable bodies from `0x0042086C` remain
+software gaps.
+
+## Current bootloader MX25U25643G enter-four-byte-mode increment
+
+The complete authenticated `[0x00420890,0x00420978)` body now routes to
+clean-room compilable C. Host tests pin handle and busy mappings, raw
+write-enable/command/write-disable failures, command `0xB7`, the ignored
+post-command ready result, the permissive nonzero verification quirk, exact
+diagnostics, call order, and the sole caller. The preceding 36-byte literal
+region remains authenticated retained data. Apple/Linux leaves are 220 bytes;
+provider identities are 161,620 / 161,604 bytes with SHA-256
+`25b1d6a8b3bda1d7cd4b28dab6472d7820f800bc3690bb2306f2b5cbd661880e`
+and `e54af73c579e7f2749a696cf6d1eb34a7536d6b036f09730e63e03cea44ceee2`.
+Canonical accounting is 13,005 source-owned, 14,330 generated patch, 16
+alignment, and 134,269 retained official bytes across 185 functions, 166
+relocated leaves, and 183 patch sites. The Apple unsigned package is
+4,743,198 bytes with SHA-256
+`f7d74c7ae574671b3677c8b94500305482fd89180e17eaa367c9358caaff44e7`;
+its flash plan has 6,522 placed and two unresolved physical regions.
+
+No hardware operation occurred. Live MSPI/external-flash/XIP/write-latch and
+cold-boot qualification is deferred by project direction; future qualification
+requires an authorized responsive right temple while the left remains stock. The 12-byte pool at
+`[0x00420978,0x00420984)` remains retained data, and executable bodies starting
+at `0x00420984` remain software gaps, so firmware-wide completeness is not
+claimed.
+
+## Current bootloader MX25U25643G write-latch increment
+
+The complete authenticated write-enable `[0x00420984,0x004209BE)` and
+write-disable `[0x004209C4,0x004209FC)` bodies now route to clean-room
+compilable C. Host tests pin commands `0x06` and `0x04`, all-zero remaining
+transfer fields, raw return statuses, failure-only diagnostics, four enable
+callers, three disable callers, and the three surrounding retained literal
+pools. Both profiles emit two relocation-free 72-byte leaves.
+
+Apple/Linux overlay identities are 13,164 /
+`42a790b4fa16eaa0a0a200afeb13d14bd2ec5a8b065e15fb62aeeba628483500`
+and 13,148 /
+`ad68bad4bad5ac349fa87c3518d935d6fe9b1039cd295d97f508b1d52524412c`;
+provider identities are 161,764 /
+`c9d14e63c54b3813bb527691b429f287a8eebfcce83b3bc9a0df03c87df8237e`
+and 161,748 /
+`165152971c636da8bf7fb939b44093681017f7b797e84bc0d68d4a10e11ee70d`.
+Canonical accounting is 13,149 source-owned, 14,444 generated patch, 16
+alignment, and 134,155 retained official bytes across 187 functions, 168
+relocated leaves, and 185 patch sites. The Apple unsigned package is 4,743,342
+bytes with SHA-256
+`f0fa1999e7992a0a20ea3897185447b060ae3510e38e2ba3560c8651a9f69d7c`;
+its flash plan has 6,528 placed and two unresolved physical regions.
+
+No hardware operation occurred. Live write-latch/MSPI/external-flash/XIP and
+cold-boot qualification is deferred by project direction; future qualification
+requires an authorized responsive right temple while the left remains stock. The next executable function is
+sector erase at `0x00420A08`; it remains a software gap, so firmware-wide
+completeness is not claimed.
+
+## Current bootloader MX25U25643G sector-erase increment
+
+The complete authenticated `[0x00420A08,0x00420ADA)` body now routes to
+clean-room compilable C. Host tests pin handle, 4-KiB alignment, 32-MiB bound,
+guard and mode transitions, command `0x20`, ready/write-latch sequencing,
+every failure status and diagnostic, unconditional cleanup, and the sole
+caller. Both reviewed profiles emit relocation-free 244-byte leaves.
+
+Apple/Linux overlay identities are 13,408 /
+`936b166f4eec07cbb3fe5d988e80593354892caf7a875c7f972ffdb24bbfc4f3`
+and 13,392 /
+`fc0b9409eab2105fdfa6e22fad8f90660aff9f061452c8b5064e9f07333f9303`;
+provider identities are 162,008 /
+`873e843b1b2dcb5c96cdaf7e42f8705563ed5a1ca436811e0c3081415d3a9a1e`
+and 161,992 /
+`6510e26f2f627c2424dae20b13f856ef6ea3dcdf04223339f859364d259f1958`.
+Canonical accounting is 13,393 source-owned, 14,654 generated patch, 16
+alignment, and 133,945 retained official bytes across 188 functions, 169
+relocated leaves, and 186 patch sites. The Apple unsigned package is 4,743,586
+bytes with SHA-256
+`9451c86c90a52643fa43cea465f2a82419a5d345b82f4b44e41ef02a5de39da0`;
+its flash plan has 6,531 placed regions and two unresolved physical regions.
+
+No hardware operation occurred. Live erase/write-latch/MSPI/external-flash/XIP
+and cold-boot qualification is deferred by project direction; future qualification
+requires an authorized responsive right temple while the left remains stock. A 50-byte retained pool/gap
+precedes the program service at `0x00420B0C`, which remains a software gap, so
+firmware-wide completeness is not claimed.
+
+## Current bootloader MX25U25643G page-program increment
+
+The complete authenticated `[0x00420B0C,0x00420C14)` body now routes to
+clean-room compilable C. Host tests pin handle/buffer/length validation, the
+32-MiB bound, first-page and subsequent 256-byte chunk arithmetic, guarded
+mode changes, command `0x02`, per-page ready/write-latch sequencing, every
+failure status and diagnostic, later-page failures, cleanup, and the sole
+caller. Both reviewed profiles emit the same relocation-free 256-byte leaf.
+
+Apple/Linux overlay identities are 13,664 /
+`9b72a887df63cd94a36c45d73f8c1237e34db734b2c8dd91a4797110d3d8a395`
+and 13,648 /
+`ff1a490411cd440468370bc2b822ffd5a1673efbaad8ba504aa0a27afff379fa`;
+provider identities are 162,264 /
+`d02333f0a79d6d9d3fe5918330ffaa1365691dda1420fdad2165fb956b5cb7fb`
+and 162,248 /
+`5b7fd6cbdf5205c1292226e6eebe21cd2a8c0bff684dc9dfb4f9af114dd79b21`.
+Canonical accounting is 13,649 source-owned, 14,918 generated patch, 16
+alignment, and 133,681 retained official bytes across 189 functions, 170
+relocated leaves, and 187 patch sites. The Apple unsigned package is 4,743,842
+bytes with SHA-256
+`1f3191b816b1e30cb82cd06653f63514a2174eebd942b44b92cf43152c4769dd`;
+its flash plan has 6,534 placed regions and two unresolved physical regions.
+
+No hardware operation occurred. Live page-program/write-latch/MSPI/
+external-flash/XIP and cold-boot qualification is deferred by project direction;
+future qualification requires an authorized responsive right temple while the
+left remains stock. A 72-byte
+retained pool precedes the next executable function at `0x00420C5C`, which
+remains a software gap, so firmware-wide completeness is not claimed.
+
+## Current bootloader MX25U25643G QE increment
+
+The complete authenticated `[0x00420C5C,0x00420DFA)` body now routes to
+clean-room compilable C. Seven host tests pin the fixed-handle rejection,
+commands `0x05` and `0x01`, QE bit 6, protection mask `0x3C`, both deliberately
+ignored ready results, raw read/enable/write failures, verification mismatch,
+the low-byte non-Boolean request quirk, exact diagnostics, the sole caller,
+and the 14-byte successor pool. Both reviewed profiles emit the same
+relocation-free 364-byte leaf.
+
+Apple/Linux overlay identities are 14,028 /
+`ed9269c05166de01a402d2a2be5a975ea36a35d4db0edd13ac879afb836f0407`
+and 14,012 /
+`de523ff3514355dfccc201ca23b6f06fe95b75671f1c71835e898808d635c974`;
+provider identities are 162,628 /
+`bd830dafab1c1e9de59e7abce980e7461f3d440b0e5121ab27735513903ffd10`
+and 162,612 /
+`5d6c596921690cadc11cd902d6c21dc988d48fd6e9675b481423187a6afe35ab`.
+Canonical accounting is 14,013 source-owned, 15,332 generated patch, 16
+alignment, and 133,267 retained official bytes across 190 functions, 171
+relocated leaves, and 188 patch sites. The Apple unsigned package is 4,744,206
+bytes with SHA-256
+`43022429372d51be6a9083eed987cb6fb0c38b1e4504e0fbe82e81c2f34d5971`;
+its flash plan has 6,537 placed regions and two unresolved physical regions.
+
+No hardware operation occurred. Live QE/status-register/write-latch/MSPI/
+external-flash/XIP and cold-boot qualification is deferred by project direction;
+future qualification requires an authorized responsive right temple while the
+left remains stock. The 14-byte
+retained pool at `0x00420DFA` precedes the next executable function at
+`0x00420E08`, which remains a software gap, so firmware-wide completeness is
+not claimed.
+
+## Current authenticated bootloader frontier
+
+The subsequent MSPI device-reconfiguration entry
+`[0x00420E08,0x00420E8C)` is now source-routed and fully gated as documented
+in `research/g2-bootloader-mspi-device-reconfigure-420e08-420e8c-source-closure.md`.
+Current Apple/Linux overlays are 14,164 / 14,140 bytes and providers are
+162,764 / 162,740 bytes. Canonical accounting is 14,149 source-owned, 15,464
+generated patch, 16 alignment, and 133,135 retained official bytes. The next
+software frontier is the executable entry at `0x00420E8C`. Hardware-dependent
+validation remains is deferred by project direction; future qualification requires authorized physical
+evidence, and functional completeness is not claimed.
+
+## Current bootloader MX25U25643G quad-mode increment
+
+The complete authenticated `[0x00420E8C,0x00420F0C)` body now routes to
+clean-room compilable C. Five host tests pin the exact 24-byte template clone,
+the four field mutations, reconfiguration failure short-circuit, XIP enable,
+HAL control request `0x18`, mode byte `0x10`, both diagnostic records, void
+completion, three stock callers, and Cortex-M55 compilation. Both reviewed
+profiles emit 152-byte leaves with three strict source-to-source relocations.
+
+Apple/Linux overlay identities are 14,316 /
+`b45e00780fb3b625fadbac462836f7bc2f4850d761d3f488dee4c6d2e502f59f`
+and 14,292 /
+`328abf5c6e1c5d592e6198e24e1d24f1e7b379eac6f72f886906289f08e0a74a`;
+provider identities are 162,916 /
+`d2ebed1a9d3191ab184c9405993b21de4b7c4bd9be0662b4439e0be140871f8f`
+and 162,892 /
+`f9f5fe87e4a8b07245dd23d8e385f359b930eedcdcb71df9c48bfb95aee6db3d`.
+Canonical accounting is 14,301 source-owned, 15,592 generated patch, 16
+alignment, and 133,007 retained official bytes across 192 functions, 173
+relocated leaves, and 190 patch sites. The Apple unsigned package is 4,744,494
+bytes with SHA-256
+`caf999acbe2b7c172da62a3fbec502f4a82b9181c9e470cb07473e4c8639234f`;
+its flash plan has 6,542 placed regions and two unresolved physical regions.
+The Linux unsigned package is 4,520,480 bytes with SHA-256
+`bfde66dc0c3457995eeffe0c11b9a8aecb6b4a325407d9400171d5666ab10af2`.
+
+No hardware operation occurred. Live template initialization, HAL, pinmux,
+MSPI, XIP, external-flash, and cold-boot qualification is deferred by project
+direction; future qualification requires an authorized responsive right temple
+while the left remains stock.
+The four-byte `[0x00420F0C,0x00420F10)` literal pool remains retained; the
+next opaque executable entry begins at `0x00420F10`, so firmware-wide
+functional completeness is not claimed.
+
+## Current bootloader MX25U25643G serial-mode increment
+
+The complete authenticated `[0x00420F10,0x00420F6A)` body now routes to
+clean-room compilable C. Five focused tests pin its serial-configuration seam,
+reconfiguration failure short-circuit, XIP disable, HAL control request
+`0x18`, zero mode byte, exact diagnostic records, void completion, four stock
+callers, successor gap, and Cortex-M55 compilation. Both reviewed profiles
+emit 124-byte leaves with two strict source-to-source relocations.
+
+Apple/Linux overlay identities are 14,440 /
+`b238c479b5e41d1fccc07b42328636fb4cfa570b660bc44d919c6e6dda8988d2`
+and 14,416 /
+`e9db16d933b638422b1b798dbe9619c543d63622afe2acd5dbd61c89699b10de`;
+provider identities are 163,040 /
+`9afda4d9585fa153fdb38f6539069aa48e74100a20f015e72c883d7416318fae`
+and 163,016 /
+`a364ae072e1f76cfe71a7a5fc64bab1aa7732797cf4d29195f942d9f50d8d3ca`.
+Canonical accounting is 14,425 source-owned, 15,682 generated patch, 16
+alignment, and 132,917 retained official bytes across 193 functions, 174
+relocated leaves, and 191 patch sites. The Apple unsigned package is 4,744,618
+bytes with SHA-256
+`e436759ab14c5a967632d4c993a4313c28b00f384a4e78f54cac5e804ca5dad9`;
+its 4,554,031-byte flash plan has SHA-256
+`e78f9e19debe8e99202faf251eb278dd90f695d53973ff165d1933fd3163f07d`,
+6,545 placed regions, and two unresolved physical regions. The Linux unsigned
+package is 4,520,604 bytes with SHA-256
+`fa956f608b507d2429414d7cebd45f77f678953db8b3916a5975cc3e31196657`.
+
+The complete `make bootloader-numeric-closure` gate passes 322 tests plus
+snapshot, exact-routing, provider, analyzer, package, and flash-plan checks.
+No hardware operation occurred. Live initialized-SRAM, HAL, pinmux, MSPI,
+XIP, external-flash, and cold-boot qualification is deferred by project direction;
+future qualification requires an authorized responsive right temple while the
+left remains stock.
+The six-byte `[0x00420F6A,0x00420F70)` successor gap remains retained; the next
+opaque executable entry begins at `0x00420F70`, so firmware-wide functional
+completeness is not claimed.
+
+## Current bootloader MX25U25643G guarded-read increment
+
+The complete authenticated `[0x00420F70,0x00420FF2)` body now routes to
+clean-room compilable C. Five focused tests pin the authenticated body,
+predecessor gap, successor pool, direct littlefs caller, validation/status
+mapping, transaction ordering, ignored ready-wait result, exact 24-byte
+`0x006C` read descriptor, `1000000` timeout, raw HAL return, guard release,
+and Cortex-M55 compilation. Both reviewed profiles emit 152-byte leaves with
+four strict source-to-source relocations.
+
+Apple/Linux overlay identities are 14,592 /
+`b859abdddf191758b89dad26e6e4a4627da3cb4589db29d3da8dbf7d28ee82c6`
+and 14,568 /
+`589400cae19f47b61b388952a4c08e37f51948905bc5d7a45c314ee0d46ff045`;
+provider identities are 163,192 /
+`57b82aaa300029154900d1d817e565fd558a580fa6d76788cba2a8535379b37c`
+and 163,168 /
+`0a46478d1d7a03959f0809334f2ee1416d94983805270d093bd82d79e2edb9ae`.
+Canonical accounting is 14,577 source-owned, 15,812 generated patch, 16
+alignment, and 132,787 retained official bytes across 194 functions, 175
+relocated leaves, and 192 patch sites. The Apple unsigned package is 4,744,770
+bytes with SHA-256
+`1d362e7f70d55b026361669a2b4c600a7b80c5b6a2e7570b0d386c7975e9d410`;
+its 4,556,102-byte flash plan has SHA-256
+`543047ab613f26906de128a6748f1ca860103e176f23eb226990313e205f7fe9`,
+6,548 placed regions, and two unresolved physical regions. The Linux unsigned
+package is 4,520,756 bytes with SHA-256
+`8d4418b8a6e959d31ec10d5079a8ee5125950951555116029990c92ac405b0ac`.
+
+The complete `make bootloader-numeric-closure` gate passes 327 tests plus
+snapshot, littlefs-port, exact-routing, provider, analyzer, package, and
+flash-plan checks. No hardware operation occurred. Live HAL, pinmux, MSPI,
+XIP, external-flash read, littlefs, and cold-boot qualification is deferred by
+project direction; future qualification requires an authorized responsive right
+temple while the left remains stock. The 214-byte `[0x00420FF2,0x004210C8)`
+successor pool remains retained;
+the next opaque executable entry begins at `0x004210C8`, so firmware-wide
+functional completeness is not claimed.
+
+## Current bootloader LittleFS directory-bootstrap increment
+
+The complete authenticated `[0x004210C8,0x004211B0)` body now routes to
+clean-room compilable C. Five focused tests pin the predecessor pool,
+successor initializer, four path literals, both callers, fixed filesystem
+object, 52-byte directory handle, present/create/already-exists/nonfatal-mkdir
+branches, ignored close result, fatal unexpected-open result, early stop, and
+Cortex-M55 compilation. Apple/Linux emit 220/224-byte leaves with two strict
+relocations to their source-owned EasyLogger output leaves.
+
+Apple/Linux overlay identities are 14,812 /
+`b905e2c189923c066846c170cea5a7cc0846d46167e7776b365fa4847b341077`
+and 14,792 /
+`0771eb5b5e297b6d5cb2336cd5f9b3f0ad75ac40021f30621f5c73e79b01e341`;
+provider identities are 163,412 /
+`bc6a6219ba7e2122b85226f4e6410fd4c3d8d12a19669ad8088efd8f5db657ff`
+and 163,392 /
+`a6f58437a7ed56269d11aabb89df892f1478c10601b30e0594acf66d2a640cf8`.
+Canonical accounting is 14,797 source-owned, 16,044 generated patch, 16
+alignment, and 132,555 retained official bytes across 195 functions, 176
+relocated leaves, and 193 patch sites. The Apple unsigned package is 4,744,990
+bytes with SHA-256
+`c4ba624de37c01d582906ccb12e0f32754e26aa56e81cc07f64baeeb5611f4ff`;
+its 4,558,294-byte flash plan has SHA-256
+`dc4b362e725457613d19bb82bd2ea4280b4151ecc50617d98acce6b44eb130e8`,
+6,551 placed, two unresolved, five container-only, and six protected regions.
+The Linux unsigned package is 4,520,980 bytes with SHA-256
+`383530bba102ce67f95626d87344cba4bc2c382904d3ff76616ad51b67b2d35c`.
+
+The expanded `make bootloader-numeric-closure` gate passes 332 tests plus
+snapshot, littlefs-port, exact-routing, provider, analyzer, package, and
+flash-plan checks. No hardware operation occurred. Live mount,
+directory mutation, external-flash persistence, power-loss, logging, and
+cold-boot qualification is deferred by project direction; future qualification
+requires an authorized responsive right temple while the left remains stock. The next opaque executable
+entry begins at `0x004211B0`, so firmware-wide functional completeness is not
+claimed.
+
+## Current bootloader LittleFS format/bootstrap increment
+
+The complete authenticated `[0x004211B0,0x00421210)` body now routes to
+clean-room compilable C. Five focused tests pin the body, 200-byte successor,
+six direct calls, fixed filesystem/configuration objects, sole caller,
+unmount/format/mount/bootstrap sequencing, ignored unmount and format results,
+mount and directory failure diagnostics, status `9`, early stop, and
+Cortex-M55 compilation. Apple/Linux emit 108/112-byte leaves with two strict
+source-to-source relocations.
+
+Apple/Linux overlay identities are 14,920 /
+`360c37433d555f50a9bf117e9d7c029708e2a3ef1c996892fb846b657aaaa257`
+and 14,904 /
+`9576b3c3024ceda0269d2a947cc9fc7f460e0730af80f4a50d122fccfbd0602f`;
+provider identities are 163,520 /
+`52d2d2e27cbfff363d18010650dd7751bbdbfbc0acffef731e416df47835c270`
+and 163,504 /
+`59f841fe1197395dcebbc0c550d4080106da2984fdd477d2fd28dc09431210b8`.
+Canonical accounting is 14,905 source-owned, 16,140 generated patch, 16
+alignment, and 132,459 retained official bytes across 196 functions, 177
+relocated leaves, and 194 patch sites. The Apple unsigned package is 4,745,098
+bytes with SHA-256
+`d91b1a7aa58deb5e10499569fe12754b37bc589e9ab4df768c956cd1fc766d19`;
+its 4,559,746-byte flash plan has SHA-256
+`e6c01bac8cc86b4cb3f71c5a09eb3ff64b0e7563c8e7bef39903112e5f8723ad`,
+6,553 placed, two unresolved, five container-only, and six protected regions.
+The Linux unsigned package is 4,521,092 bytes with SHA-256
+`c0e06590e74ec97dc5b7474df610d0e557013e5a0d95ef5c1f0cc972eadb2a42`.
+
+The expanded `make bootloader-numeric-closure` gate passes 337 tests plus
+snapshot, littlefs-port, exact-routing, provider, analyzer, package, and
+flash-plan checks. No hardware operation occurred. Live unmount/format/mount,
+external-flash erase/program/persistence, power-loss, diagnostics, and
+cold-boot qualification is deferred by project direction; future qualification
+requires an authorized responsive right temple while the left remains stock. The next opaque executable
+entry begins at `0x00421210`, so firmware-wide functional completeness is not
+claimed.
+
+## Current bootloader LittleFS initializer/boot-counter increment
+
+The complete authenticated `[0x00421210,0x004212D8)` body now routes to
+clean-room compilable C. Six focused tests pin the 200-byte stock body, the
+56-byte successor callback, sole caller, call and literal identities, first
+mount success, format-and-retry behavior, second-mount failure mapping,
+directory-recovery behavior, readiness publication, ignored file-operation
+results, persisted `boot_count` increment, diagnostics, and Cortex-M55
+compilation. Apple and Linux both emit 260-byte leaves with five strict
+relocations to source-owned logging, directory-bootstrap, and recovery-format
+leaves.
+
+Apple/Linux overlay identities are 15,180 /
+`18ce465a9a646bddad5cd7c663c0f4dfeb7b76fd93d1ad1cc48510f3d8dcd8e4`
+and 15,164 /
+`cab5d1a63bea87ea7d6d07041240cd61859a84dbb192f68a51c653124c35f22a`;
+provider identities are 163,780 /
+`566895485d661ce696f4bcadd396f0f1f512fae92630f4f3c5315d67849bd5bd`
+and 163,764 /
+`52feb01f0dc3a68d7f0c7fb4ffadb19a247f17d151fc175f97afde5f5433d4d9`.
+Canonical accounting is 15,165 source-owned, 16,340 generated patch, 16
+alignment, and 132,259 retained official bytes across 197 functions, 178
+relocated leaves, and 195 patch sites. The Apple unsigned package is 4,745,358
+bytes with SHA-256
+`61a74ed44990d4fd5b2663b7fe0d68ffbef7a9f6afc3fb364854631ad6a0e15d`;
+its 4,561,240-byte flash plan has SHA-256
+`c17a375878bb05229f8cfad7b7c3c105633289f9c4309b08b3c95f00c56e9f79`,
+6,555 placed, two unresolved, five container-only, and six protected regions.
+The Linux unsigned package is 4,521,352 bytes with SHA-256
+`da9d13f90cbdd353104c81dfcba426eda994dff41aefb862bb9e5580322fd85f`.
+
+The expanded `make bootloader-numeric-closure` gate passes 343 tests plus
+snapshot, littlefs-port, exact-routing, provider, analyzer, package, and
+flash-plan checks. No hardware operation occurred. Live mount/format,
+directory mutation, readiness visibility, boot-counter persistence,
+external-flash behavior, power-loss, diagnostics, and cold-boot qualification is
+deferred by project direction; future qualification requires an authorized
+responsive right temple while the left remains stock. The next opaque executable
+entry begins at `0x004212D8`,
+so firmware-wide functional completeness is not claimed.
+
+## Current bootloader LittleFS block-read increment
+
+The complete authenticated `[0x004212D8,0x00421310)` callback now routes to
+freestanding clean-room C. Five focused tests pin the stock body, successor
+program callback, LittleFS configuration pointer, device-driver and logger
+calls, partition address calculation including 32-bit wrap, successful
+forwarding, full failure diagnostic tuple, `LFS_ERR_IO` mapping, and
+Cortex-M55 compilation. Both reviewed toolchains emit identical 60-byte raw
+leaves with two strict source-to-source relocations.
+
+Apple/Linux overlay identities are 15,240 /
+`d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314`
+and 15,224 /
+`2dad91f7403219c30fee3130d62833c98561c8fb56387960f0654723ceed67ca`;
+provider identities are 163,840 /
+`d98fa4fe7f8c01ebcc29219d7cd604a16eb702df85fbb04f1c15be9808c0cfdf`
+and 163,824 /
+`33dfd33af4e3018e2717da8e171ce59aa7772d3fabee933c2a24240bc59b5f36`.
+Canonical accounting is 15,225 source-owned, 16,396 generated patch, 16
+alignment, and 132,203 retained official bytes across 198 functions, 179
+relocated leaves, and 196 patch sites. The Apple unsigned package is 4,745,526
+bytes with SHA-256
+`41bb328e816ea68ad35b003ff63b3912a708bb72a987ec104047b79264b3a1e7`;
+its 4,562,636-byte flash plan has SHA-256
+`f54d4336bb011546efce564defe697e9de93b820821759ac767fd6853de3feac`,
+6,557 placed, two unresolved, five container-only, and six protected regions.
+The Linux unsigned package is 4,521,412 bytes with SHA-256
+`50fdf76b2bc0ced7be5a817962153281cdd5823e80d94a12fcc4b2368789d876`.
+
+The expanded `make bootloader-numeric-closure` gate passes 348 tests plus
+snapshot, littlefs-port, exact-routing, provider, analyzer, package, and
+flash-plan checks. No hardware operation occurred. Live MSPI/NOR reads,
+partition-range behavior, filesystem reads, concurrency, diagnostics, and
+cold-boot qualification is deferred by project direction; future qualification
+requires an authorized responsive right temple while the left remains stock. The Apple provider now ends
+exactly at `0x00438000`; future source closure must use authenticated reclaimed
+body space. The next opaque executable entry begins at `0x00421310`, so
+firmware-wide functional completeness is not claimed.
+
+## Current bootloader Ambiq debug-service increment
+
+The three-function, 268-byte cluster `[0x00422468,0x00422574)` is now
+maintained BSD-3-Clause C and reproduces the installed stock bodies exactly
+under both reviewed Cortex-M55 compilers. Its debug enable-count shutdown,
+debug-power ownership and `DEMCR.TRCENA` release behavior matches public
+AmbiqSuite SDK 5.1.0 `am_hal_debug.c`. Five focused tests cover nested/last
+users, prior-domain ownership, register clearing and polling, bodies, pools,
+callers, and dual-toolchain compilation. Nine strict calls are pinned.
+
+Canonical accounting is 19,559 source-owned, 16,528 generated patch, 16
+alignment, and 127,737 retained official bytes across 239 source-owned
+functions, five caves, 36 exact in-place leaves, and 201 patch sites. The
+4,601,055-byte flash plan has SHA-256
+`86eb2b27d03838ed63186d44aa8d1077aafd8767a5b381c36fadc1ce29ed66cf`
+with 6,611 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live debug-domain power, MCUCTRL/DCB effects,
+trace quiescence and timing is deferred by project direction; future qualification requires authorized evidence.
+After the authenticated 28-byte literal pool, the next executable body begins
+at `0x00422590`; firmware-wide functional completeness is not claimed.
+
+## Current bootloader mode-routing and all-row cleanup increment
+
+The four-function, 320-byte cluster `[0x004222F0,0x00422430)` is now
+maintained C and reproduces every installed stock byte under both reviewed
+Cortex-M55 compilers. Five focused tests cover all seven enable/disable routes,
+invalid kind and client-bit bounds, selective seven-row cleanup, fixed 20-byte
+configuration copy, null rejection, body/successor pins, and dual-toolchain
+compilation. Seventeen strict calls bind the maintained row services and bitmap
+query plus the reviewed route alias and retained memcpy provider.
+
+Canonical accounting is 19,291 source-owned, 16,528 generated patch, 16
+alignment, and 128,005 retained official bytes across 236 source-owned
+functions, five caves, 33 exact in-place leaves, and 201 patch sites. The
+4,598,235-byte flash plan has SHA-256
+`e1a4ef389dec567d8afe71061e5659cfba7a016e3ed2d5fbae7323b198115df4`
+with 6,607 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live bitmap ownership, routed service effects,
+cleanup concurrency, configuration persistence, and physical mode behavior
+is deferred by project direction; future qualification requires authorized evidence. After the authenticated
+56-byte literal pool, the next opaque executable body begins at `0x00422468`;
+firmware-wide functional completeness is not claimed.
+
+## Current bootloader row-five client-service increment
+
+The complete two-function, 504-byte cluster
+`[0x00421EBA,0x004220B2)` is now maintained C and reproduces both installed
+stock bodies exactly under both reviewed Cortex-M55 compilers. Seven focused
+tests cover existing-client timeout refresh, first-client selector enable and
+commit, both rollback paths, absent/nonfinal/final disable, literal/successor
+pins and dual-toolchain compilation. Twenty-six strict calls bind source-owned
+bitmap, critical, selector-mode and cleanup services plus retained dual
+switch/commit/null-commit providers.
+
+Canonical accounting is 18,463 source-owned, 16,528 generated patch, 16
+alignment, and 128,833 retained official bytes across 229 source-owned
+functions, five caves, 26 exact in-place leaves and 201 patch sites. The
+4,591,243-byte flash plan has SHA-256
+`442828e94f28cfddc078420b99a16ae9a8a8cb888a1dcc09885b95ff9fe1c93f`
+with 6,597 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live interrupt, retained dual-provider,
+bitmap/state, selector-mode and physical row-five behavior remains blocked by
+future-required authorized evidence. The next opaque executable body begins at
+`0x004220B2`; firmware-wide functional completeness is not claimed.
+
+## Current bootloader row-six and mode-dispatch increment
+
+The 348-byte row-six enable, 110-byte disable and 50-byte mode dispatcher in
+`[0x004220B2,0x004222D2)` are now maintained C and reproduce all installed
+executable bytes exactly under both reviewed Cortex-M55 compilers. The two
+18-byte literal seams remain retained official data. Seven focused tests cover
+first/existing clients, readiness and start rollback, absent/nonfinal/final
+disable, dispatcher routing, body/seam pins and dual-toolchain compilation.
+Thirty-one strict calls bind maintained bitmap, critical, selector-mode and
+mode-family services plus retained handle lifecycle providers.
+
+Canonical accounting is 18,971 source-owned, 16,528 generated patch, 16
+alignment, and 128,325 retained official bytes across 232 source-owned
+functions, five caves, 29 exact in-place leaves and 201 patch sites. The
+4,594,698-byte flash plan has SHA-256
+`462379978f2f8ef4a6299a88ea98370be2911f3fbfd0a0606af9c24551e0117f`
+with 6,602 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live interrupt, retained handle-provider,
+bitmap/state, selector-mode and physical row-six behavior remains blocked by
+future-required authorized evidence. After the authenticated padding/literal seam,
+the next executable body begins at `0x004222F0`; firmware-wide functional
+completeness is not claimed.
+
+## Current bootloader LittleFS block-program increment
+
+The complete authenticated `[0x00421310,0x00421348)` callback now routes to a
+60-byte freestanding clean-room C leaf at `[0x00421214,0x00421250)`. Five
+focused tests pin the stock body, successor erase callback, configuration
+pointer, source-owned driver/logger calls, 32-bit address wrap, forwarding,
+failure diagnostic tuple, `LFS_ERR_IO` mapping, and Cortex-M55 compilation.
+The fixed-address placement is confined to authenticated NOP fill in the
+already-replaced initializer body; negative tests reject an out-of-tail cave
+and a forged NOP digest.
+
+Apple/Linux provider identities are 163,840 /
+`ef42f8f927e07a2962e4a9c9436c6cf4df24dc6cf5206f09823f5ad42afba410`
+and 163,824 /
+`2d09f6ba1ed39fc2f7bf3c658d2ef884c2596d6d666455b22fba1b9638ee0004`.
+Canonical accounting is 15,285 source-owned, 16,392 generated patch, 16
+alignment, and 132,147 retained official bytes across 199 routed functions,
+179 relocated leaves, one fixed cave, and 197 patch sites. The Apple unsigned
+package is 4,745,526 bytes with SHA-256
+`ca6c0ac3fb5c1c7c4ef7b83cc184d671133a671cd9027310e3214e1fba2312c0`;
+its 4,564,800-byte flash plan has SHA-256
+`29dcb55776458fcd0a181850afba054754a3618242ca9052ce7bb22505837736`,
+6,560 placed, two unresolved, five container-only, and six protected regions.
+The Linux package is 4,521,412 bytes with SHA-256
+`0298e63de18eaaac5874c27da786fe3113e090d2e52550f253f1930156fba901`.
+
+No hardware operation occurred. Live MSPI/NOR programming, filesystem writes,
+persistence, power-loss, diagnostics, and cold-boot qualification is deferred by project direction; future qualification requires an authorized responsive right temple while the left remains stock. The next opaque executable entry begins at `0x00421348`; firmware-wide
+functional completeness is not claimed.
+
+## Current bootloader mapped-memory selector increment
+
+The authenticated primary selector `[0x004213E6,0x00421548)` and its
+odd-selector wrapper `[0x00421548,0x0042156E)` now route to 220-byte and
+30-byte clean-room C leaves placed inside the primary replacement span. Five
+focused tests pin the complete stock bodies, selector/capacity matrix,
+security-bit gating, 32-bit bounds behavior, exact mapped-memory roots,
+identity/threshold helper calls, copy forwarding, wrapper filtering, and both
+reviewed Cortex-M55 compilers.
+
+Apple/Linux providers are 163,840 /
+`8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0`
+and 163,824 /
+`efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635`.
+Canonical accounting is 15,601 source-owned, 16,528 generated patch, 16
+alignment, and 131,695 retained official bytes across 205 functions, five
+authenticated fixed-address caves, two exact in-place leaves, and 201 patch
+sites. Apple/Linux unsigned packages are 4,745,526 /
+`3c8cdcdb4bc56b1a76b5ddabe6eb1bc79810aa6a99cf35acaec6bd019179c785`
+and 4,521,412 /
+`9438fb68b25110b5c03309e868e5baa78e6989a88c3597d939ef7017ef28543e`.
+The 4,573,512-byte flash plan has SHA-256
+`e8f4afaf8b838eaa359360309d36ae5c36b664b28973fe011cc84c51a678a58c`
+and 6,572 placed regions.
+
+No hardware operation occurred. The retained 22-byte pool through
+`0x00421584` is authenticated non-executable data. Live register, security,
+mapped-memory, copy, concurrency, and cold-boot qualification is deferred by project direction; future qualification requires authorized physical evidence. The next opaque executable body
+begins at `0x00421584`; firmware-wide functional completeness is not claimed.
+
+## Current bootloader population-count increment
+
+The complete 42-byte helper `[0x00421584,0x004215AE)` is now maintained C and
+reproduces its stock body exactly under Apple clang 21 and Homebrew clang
+22.1.8. Three tests pin its sole direct caller, exercise boundary patterns and
+512 deterministic random words, and verify both Cortex-M55 compilations.
+
+Canonical accounting is 15,643 source-owned, 16,528 generated patch, 16
+alignment, and 131,653 retained official bytes across 206 source-owned
+functions, five caves, three exact in-place leaves, and 201 patch sites. The
+provider and unsigned-package hashes are unchanged. The 4,574,891-byte flash
+plan has SHA-256
+`23b0b3a47a662696d5f26f05be7b375dece06726b2f5c3352f62bb199f5c814b`
+with 6,574 placed regions.
+
+No hardware operation occurred. The next opaque executable body begins at
+`0x004215AE`; its table-backed behavior and physical register/memory effects
+remain open. Firmware-wide functional completeness is not claimed.
+
+## Current bootloader two-word bitmap-helper increment
+
+The complete three-helper cluster `[0x004215AE,0x00421632)` is now maintained
+C and reproduces all 132 stock bytes exactly under Apple clang 21 and Homebrew
+clang 22.1.8. Five focused tests pin the bodies, table root at `0x20026E74`,
+and popcount call; exercise nonempty, membership, selector narrowing, two-word
+layout, and count behavior; and verify both Cortex-M55 compilations. The count
+leaf's sole relocation is a strict call to the source-owned population-count
+helper at `0x00421584`.
+
+Canonical accounting is 15,775 source-owned, 16,528 generated patch, 16
+alignment, and 131,521 retained official bytes across 209 source-owned
+functions, five caves, six exact in-place leaves, and 201 patch sites. Provider
+and unsigned-package hashes remain unchanged. The 4,577,013-byte flash plan
+has SHA-256
+`b3d6202b548907ee00c12279378c888dca7907405684910171dcb6af7d53ae24`
+with 6,577 placed, two unresolved, five container-only, and six protected
+regions.
+
+No hardware operation occurred. Live table ownership, concurrent mutation,
+and downstream register/memory qualification is deferred by project direction; future qualification requires an authorized responsive right temple while the left remains stock. The next
+opaque executable body begins at `0x00421632`; firmware-wide functional
+completeness is not claimed.
+
+## Current bootloader validated bitmap-update increment
+
+The complete 128-byte helper `[0x00421632,0x004216B2)` is now maintained C
+and reproduces its stock body exactly under Apple clang 21 and Homebrew clang
+22.1.8. Five focused tests pin the body, table root and successor; exercise
+selector/bit validation, low-byte narrowing, both words, boundary bits,
+set/clear behavior, unrelated-bit preservation, and enable normalization; and
+verify both Cortex-M55 compilations. The installed leaf has no executable
+relocation.
+
+Canonical accounting is 15,903 source-owned, 16,528 generated patch, 16
+alignment, and 131,393 retained official bytes across 210 source-owned
+functions, five caves, seven exact in-place leaves, and 201 patch sites.
+Provider and unsigned-package hashes remain unchanged. The 4,577,708-byte
+flash plan has SHA-256
+`7ffaee3c38fba6872efdaf94580d199a4e4facc3d569766cb35e77777f9c2c23`
+with 6,578 placed regions.
+
+No hardware operation occurred. Live table ownership, concurrency, and
+read-modify-write atomicity qualification is deferred by project direction; future qualification requires an authorized responsive right temple while the left remains stock. The next
+opaque executable body begins at `0x004216B2`; firmware-wide functional
+completeness is not claimed.
+
+## Current bootloader bounded poll-delay increment
+
+The complete 34-byte helper `[0x004216B2,0x004216D4)` is now maintained C
+and reproduces its installed stock body exactly under Apple clang 21 and
+Homebrew clang 22.1.8. Five focused tests pin the body, retained delay call,
+successor and three callers; exercise both short circuits, counter exhaustion,
+and a flag change during delay; and verify both Cortex-M55 compilations. Its
+sole relocation binds the duration-10 call to `0x0041D1C0`.
+
+Canonical accounting is 15,937 source-owned, 16,528 generated patch, 16
+alignment, and 131,359 retained official bytes across 211 source-owned
+functions, five caves, eight exact in-place leaves, and 201 patch sites.
+Provider and unsigned-package hashes remain unchanged. The 4,578,404-byte
+flash plan has SHA-256
+`9fce38cd17a480199e97cc3b624b679b98d3d5111db06af281b2f2d96eb41a13`
+with 6,579 placed regions.
+
+No hardware operation occurred. Live delay timing, asynchronous flag updates,
+volatile-memory visibility, and caller integration qualification is deferred by project direction; future qualification requires an authorized responsive right temple while the left remains stock. The next opaque executable body begins at `0x004216D4`; firmware-wide
+functional completeness is not claimed.
+
+## Current bootloader mode/configuration-service increment
+
+The complete 254-byte service `[0x004216D4,0x004217D2)` is now maintained C
+and reproduces its installed stock body exactly under Apple clang 21 and
+Homebrew clang 22.1.8. Seven focused tests pin the body, default/literal seams,
+dispatcher caller and successor; exercise validation, query/default merge,
+early query failure, busy apply/fallback, idle disable/clear, publication and
+interrupt restore; and verify both Cortex-M55 compilations. Eight strict calls
+bind query, critical-save, source-owned bitmap count, apply/disable, fallback,
+and source-owned copy providers.
+
+Canonical accounting is 16,191 source-owned, 16,528 generated patch, 16
+alignment, and 131,105 retained official bytes across 212 source-owned
+functions, five caves, nine exact in-place leaves, and 201 patch sites.
+Provider and unsigned-package hashes remain unchanged. The 4,579,118-byte
+flash plan has SHA-256
+`a5193f45000c8cfcc122610a6e9cfe359931aacc005bb9b1d749d3f4c02300f0`
+with 6,580 placed regions.
+
+No hardware operation occurred. Live interrupt timing, controller/register
+behavior, shared-state ownership, and physical mode qualification is deferred by project direction; future qualification requires an authorized responsive right temple while the left remains stock. The next opaque executable body begins at `0x004217D2`; firmware-wide
+functional completeness is not claimed.
+
+## Current bootloader dual-mode transaction increment
+
+The complete 422-byte service `[0x004217D2,0x00421978)` is now maintained C
+and reproduces its installed stock body exactly under Apple clang 21 and
+Homebrew clang 22.1.8. Eight focused tests pin its body, literals, dispatcher
+caller and successor; exercise validation, both controller-query routes,
+early query failure, busy incompatibility, successful enable/commit/cleanup,
+and failure cleanup; and verify both Cortex-M55 compilations. Sixteen strict
+calls bind query, critical-save, source-owned bitmap count and copy, both mode
+enable/disable families, and commit providers.
+
+Canonical accounting is 16,613 source-owned, 16,528 generated patch, 16
+alignment, and 130,683 retained official bytes across 213 source-owned
+functions, five caves, ten exact in-place leaves, and 201 patch sites.
+Provider and unsigned-package hashes remain unchanged. The 4,579,844-byte
+flash plan has SHA-256
+`2a34cd666945adc7929451a5b56bc7432b0519a7419f4c47bc8c24da0a5aff1e`
+with 6,581 placed regions.
+
+No hardware operation occurred. Live interrupt timing, controller/register
+behavior, shared-state ownership and physical mode qualification is deferred by project direction; future qualification requires an authorized responsive right temple while the left remains stock. The next opaque executable body begins at `0x00421978`; firmware-wide
+functional completeness is not claimed.
+
+## Current bootloader bitmap-client service increment
+
+The complete five-function, 400-byte cluster
+`[0x00421978,0x00421B08)` is now maintained C and reproduces every installed
+stock body exactly under Apple clang 21 and Homebrew clang 22.1.8. Seven
+focused tests cover controller query/validation, busy and failure paths,
+publication, idempotent low-byte row-zero/row-one mutation, the guarded
+row-one set path, and both Cortex-M55 profiles. Sixteen strict calls bind
+query, critical-save, source-owned bitmap count/test/update and copy providers.
+
+Canonical accounting is 17,013 source-owned, 16,528 generated patch, 16
+alignment, and 130,283 retained official bytes across 218 source-owned
+functions, five caves, 15 exact in-place leaves, and 201 patch sites. Provider
+and unsigned-package hashes remain unchanged. The 4,583,419-byte flash plan
+has SHA-256
+`35e18ba118c505f5e13ad1f498e39a1d81b228128f594a03f761c5a557b6e270`
+with 6,586 placed regions.
+
+No hardware operation occurred. Live interrupt timing, controller/register
+behavior, shared bitmap/publication ownership, and physical client qualification
+are deferred by project direction; future qualification requires an authorized
+responsive right temple while the left remains stock. The next opaque body begins at
+`0x00421B08`; firmware-wide functional completeness is not claimed.
+
+## Current bootloader mode-one services increment
+
+The complete three-function, 202-byte cluster
+`[0x00421B08,0x00421BD2)` is now maintained C and reproduces every installed
+stock body exactly under both reviewed Cortex-M55 compilers. Five focused
+tests cover missing-controller and idempotent enable, last-client disable,
+poll cleanup, literal seams and dual-toolchain compilation. Eleven strict
+calls bind source-owned bitmap and poll helpers, critical-save and retained
+control.
+
+Canonical accounting is 17,215 source-owned, 16,528 generated patch, 16
+alignment, and 130,081 retained official bytes across 221 source-owned
+functions, five caves, 18 exact in-place leaves, and 201 patch sites. The
+4,585,553-byte flash plan has SHA-256
+`8a5e7cf810b4769885a52161425c6e7a8fd432295337936832f152f8217dabdd`
+with 6,589 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live interrupt, control/register, bitmap,
+polling and physical mode-one behavior is deferred by project direction; future qualification requires authorized evidence. The next opaque executable body begins at `0x00421BD2`;
+firmware-wide functional completeness is not claimed.
+
+## Current bootloader mode-zero enable increment
+
+The complete 252-byte service `[0x00421BD2,0x00421CCE)` is now maintained C
+and reproduces the installed stock body exactly under both reviewed Cortex-M55
+compilers. Six focused tests cover missing-controller status, idempotent client
+refresh and cleanup, idle-state control and publication, incompatible-state
+rejection, literal/successor pins and dual-toolchain compilation. Nine strict
+calls bind source-owned bitmap and cleanup helpers, critical-save, and retained
+state-query/control providers.
+
+Canonical accounting is 17,467 source-owned, 16,528 generated patch, 16
+alignment, and 129,829 retained official bytes across 222 source-owned
+functions, five caves, 19 exact in-place leaves, and 201 patch sites. The
+4,586,257-byte flash plan has SHA-256
+`a7a6aa289b102cc7ac7ca622fb20fca60774cc2ca884447b4a0ed3e499fdd875`
+with 6,590 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live interrupt, controller/register, bitmap,
+state, polling and physical mode-zero behavior is deferred by project direction; future qualification requires authorized evidence. The next opaque executable body begins at `0x00421CCE`;
+firmware-wide functional completeness is not claimed.
+
+## Current bootloader mode-zero disable and cleanup increment
+
+The complete two-function, 144-byte cluster
+`[0x00421CCE,0x00421D5E)` is now maintained C and reproduces both installed
+stock bodies exactly under both reviewed Cortex-M55 compilers. Five focused
+tests cover absent-client idempotence, last-client control/state clearing,
+inactive and active poll cleanup, literal/successor pins and dual-toolchain
+compilation. Seven strict calls bind source-owned bitmap/poll helpers,
+critical-save and retained control.
+
+Canonical accounting is 17,611 source-owned, 16,528 generated patch, 16
+alignment, and 129,685 retained official bytes across 224 source-owned
+functions, five caves, 21 exact in-place leaves, and 201 patch sites. The
+4,587,696-byte flash plan has SHA-256
+`c715ec177e33e23be701f1f2c24683c717a22beef84be5b49dd419926368ca43`
+with 6,592 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live interrupt, controller/register, bitmap,
+state, polling and physical mode-zero shutdown is deferred by project direction; future qualification requires authorized evidence. The next opaque executable body begins at `0x00421D5E`;
+firmware-wide functional completeness is not claimed.
+
+## Current bootloader row-four enable increment
+
+The complete 236-byte service `[0x00421D5E,0x00421E4A)` is now maintained C
+and reproduces the installed stock body exactly under both reviewed Cortex-M55
+compilers. Six focused tests cover existing-client timeout refresh, not-ready
+rejection, first-client switch/apply/activation, apply rollback, exact body and
+dual-toolchain compilation. Ten strict calls bind source-owned bitmap and
+cleanup helpers, critical-save and retained switch/apply providers.
+
+Canonical accounting is 17,847 source-owned, 16,528 generated patch, 16
+alignment, and 129,449 retained official bytes across 225 source-owned
+functions, five caves, 22 exact in-place leaves, and 201 patch sites. The
+4,588,397-byte flash plan has SHA-256
+`b286aa443bba236715be039559aad7af48f61923b1033dea577b256a68efc0ed`
+with 6,593 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live interrupt, switch/apply, bitmap/state,
+polling and physical row-four behavior is deferred by project direction; future qualification requires authorized evidence. The next opaque executable body begins at `0x00421E4A`;
+firmware-wide functional completeness is not claimed.
+
+## Current bootloader row-four disable and cleanup increment
+
+The complete two-function, 112-byte cluster
+`[0x00421E4A,0x00421EBA)` is now maintained C and reproduces both installed
+stock bodies exactly under both reviewed Cortex-M55 compilers. Five focused
+tests cover absent/nonfinal/last-client disable, inactive/active cleanup,
+literal/successor pins and dual-toolchain compilation. Seven strict calls bind
+source-owned bitmap/poll helpers, critical-save and retained switch.
+
+Canonical accounting is 17,959 source-owned, 16,528 generated patch, 16
+alignment, and 129,337 retained official bytes across 227 source-owned
+functions, five caves, 24 exact in-place leaves, and 201 patch sites. The
+4,589,830-byte flash plan has SHA-256
+`fc0579d838469b9ad02a69ca81a7bfeff40087aceb2a2401bd93d4d235ae6361`
+with 6,595 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live interrupt, switch, bitmap/state, polling
+and physical row-four shutdown is deferred by project direction; future qualification requires authorized
+evidence. The next opaque executable body begins at `0x00421EBA`;
+firmware-wide functional completeness is not claimed.
+## Current bootloader constraint-dispatch and memchr increment
+
+The 28-byte constraint dispatcher and 88-byte `memchr` at
+`[0x00422590,0x00422628)` are now maintained C and reproduce both installed
+stock bodies exactly under both reviewed Cortex-M55 compilers. Five focused
+tests pin the bodies, retained 36-byte handler/message pool, two direct callers
+and shared Apollo-main `memchr`; they exercise registered/default/null handler
+paths plus aligned, unaligned, empty and missed searches. One strict relocation
+binds the retained default constraint handler.
+
+Canonical accounting is 19,675 source-owned, 16,528 generated patch, 16
+alignment, and 127,621 retained official bytes across 241 source-owned
+functions, five caves, 38 exact in-place leaves, and 201 patch sites. The
+4,603,816-byte flash plan has SHA-256
+`208dc810d0959a9b957172d82f40a3ddaa4120652f05f915885862a31be73b56`
+with 6,615 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live handler-cell/default-handler behavior,
+memory accessibility and fault qualification is deferred by project direction; future qualification requires authorized evidence. The next executable body begins at `0x00422628`;
+firmware-wide functional completeness is not claimed.
+## Current bootloader double-runtime increment
+
+Thirteen compiler-runtime functions / 584 executable bytes at
+`[0x00422628,0x00422872)` now compile exactly under both reviewed Cortex-M55
+toolchains. They close `frexp`, binary64 normalization/comparison/scaling,
+signed and unsigned conversion, subtraction, division and multiplication.
+Five focused tests pin bodies, alignment, callers and eleven Apollo-main
+twins, exercise host semantics, and compile both profiles. Three strict
+relocations bind two internal wrapper/core edges and the retained range-error
+tail.
+
+Canonical accounting is 20,259 source-owned, 16,528 generated patch, 16
+alignment, and 127,037 retained official bytes across 254 source-owned
+functions, five caves, 51 exact in-place leaves, and 201 patch sites. The
+4,613,691-byte flash plan has SHA-256
+`3c5b51bb1895ab421f3fc9117b6ce34be0898b1bb59222b05aff12cee5bec4a6`
+with 6,629 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live VFP flags, retained range-error state and
+caller ABI qualification is deferred by project direction; future qualification requires authorized evidence.
+The next executable body begins at `0x00422874`; firmware-wide functional
+completeness is not claimed.
+## Current bootloader thread-pointer increment
+
+The eight-byte IAR-compatible thread-pointer/runtime-anchor leaf at
+`[0x00422874,0x0042287C)` is now exact maintained C under both reviewed
+toolchains. Three focused tests pin its literal, caller and successor, verify
+the host return value, and compile both profiles.
+
+Canonical accounting is 20,267 source-owned, 16,528 generated patch, 16
+alignment, and 127,029 retained official bytes across 255 source-owned
+functions, five caves, 52 exact in-place leaves, and 201 patch sites. The
+4,615,090-byte flash plan has SHA-256
+`b20ec5bf6f36bf5263858770e082a33890575642d11b27e69f418922da7b707e`
+with 6,631 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live SRAM-anchor lifecycle qualification is
+is deferred by project direction; future qualification requires authorized evidence. The next executable body begins
+at `0x0042287C`; firmware-wide functional completeness is not claimed.
+## Current bootloader unsigned 64-bit divmod increment
+
+The complete 560-byte IAR-compatible unsigned divide/modulo runtime at
+`[0x0042287C,0x00422AAC)` is now exact maintained C under both reviewed
+toolchains. Five focused tests cover fast, normalized, correction,
+smaller-dividend and zero-divisor paths, 500 deterministic differential cases,
+callers, successor and dual compilation. One strict tail relocation binds the
+retained divide-by-zero handler.
+
+Canonical accounting is 20,827 source-owned, 16,528 generated patch, 16
+alignment, and 126,469 retained official bytes across 256 source-owned
+functions, five caves, 53 exact in-place leaves, and 201 patch sites. The
+4,615,803-byte flash plan has SHA-256
+`41cbff6234a93834d9041c8303a23d4b4b2b36fb50be37c20800acb791a509bd`
+with 6,632 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live divide-by-zero and register-ABI
+qualification is deferred by project direction; future qualification requires authorized evidence. The next
+executable body begins at `0x00422AAC`; firmware-wide functional completeness
+is not claimed.
+
+## Current bootloader per-instance clock-divider increment
+
+The 186-byte clock-divider service at `[0x00422E28,0x00422EE2)` is exact
+maintained C under both reviewed target toolchains with one strict call to the
+source-owned unsigned 64-bit divmod runtime. Seven focused tests pin its binary
+seams and cover six reference modes, invalid/range failure, integer/fraction
+programming, achieved rate, every bank and dual compilation.
+
+Canonical accounting is 21,899 source-owned, 16,528 generated patch, 16
+alignment, and 125,397 retained official bytes across 266 source-owned
+functions, five caves, 63 exact in-place leaves, and 201 patch sites. The
+4,624,387-byte flash plan has SHA-256
+`bcfc9cba4e4f5e12fcb53c27a977f7c3b9d2a3a2df429d6cac2d4c86bc698788`
+with 6,644 placed regions; provider and byte-identical unsigned-package hashes
+remain unchanged.
+
+No hardware operation occurred. Live reference clocks, divider MMIO effects,
+rate accuracy and cold-boot qualification are is deferred by project direction; future qualification requires authorized responsive evidence. The next executable body begins at
+`0x00422EE2`; firmware-wide functional completeness is not claimed.
+## Current bootloader atomic/wrapper increment
+
+The 28-byte interrupt-atomic three-sample snapshot, two-byte no-op and
+eight-byte retained-query wrapper at `[0x00422AAC,0x00422AD2)` are exact
+maintained C under both reviewed toolchains. Three focused tests cover bodies,
+caller/provider, host behavior, successor alignment and dual compilation.
+
+Canonical accounting is 20,865 source-owned, 16,528 generated patch, 16
+alignment, and 126,431 retained official bytes across 259 source-owned
+functions, five caves, 56 exact in-place leaves, and 201 patch sites. The
+4,617,928-byte flash plan has SHA-256
+`d45be493c3f226ec9b567c576d08194a47f48b67c74b6d0845439f82a7b9965a`
+with 6,635 placed regions; provider and package hashes remain unchanged.
+
+No hardware operation occurred. Live interrupt/volatile/provider qualification
+is deferred by project direction; future qualification requires authorized evidence. The next executable body begins
+at `0x00422AD4`; firmware-wide functional completeness is not claimed.
+
+## Current bootloader hardware-instance initializer increment
+
+The complete 212-byte four-instance hardware-service initializer at
+`[0x00422AD4,0x00422BA8)` is exact maintained C under both reviewed Cortex-M55
+toolchains. Five focused tests cover every status path, all four `0x11C`-byte
+slots, authenticated field mutation and preservation, callsite/pool/boundary
+pins, and dual compilation.
+
+Canonical accounting is 21,077 source-owned, 16,528 generated patch, 16
+alignment, and 126,219 retained official bytes across 260 source-owned
+functions, five caves, 57 exact in-place leaves, and 201 patch sites. The
+4,619,359-byte flash plan has SHA-256
+`28bc8efdfe3ce66f76001c3c7dd58190ff5e945cabff97fa7558627cdbe629a7`
+with 6,637 placed regions; provider and unsigned-package hashes remain
+unchanged and the package is byte-identical to its reviewed reference.
+
+No hardware operation occurred. Live SRAM ownership, concurrent
+initialization, peripheral effects and cold-boot qualification are explicitly
+is deferred by project direction; future qualification requires authorized evidence. The next executable body begins
+at `0x00422BA8`; firmware-wide functional completeness is not claimed.
+
+## Current bootloader instance register-service increment
+
+The complete 376-byte instance register-transfer and lifecycle service at
+`[0x00422BA8,0x00422D20)` is exact maintained C under both reviewed target
+toolchains with five strict call relocations. Six focused tests cover all
+software-observable validation, action, transfer, register-bank, clock-gate,
+mode-route and teardown-order behavior.
+
+Canonical accounting is 21,453 source-owned, 16,528 generated patch, 16
+alignment, and 125,843 retained official bytes across 261 source-owned
+functions, five caves, 58 exact in-place leaves, and 201 patch sites. The
+4,620,102-byte flash plan has SHA-256
+`e5cbb6380db3f81e5dbb15d3e4ccfb7cefcb4e6fcf31d37b1407b8adb2746500`
+with 6,638 placed regions; provider and unsigned-package hashes remain
+unchanged and the package remains byte-identical.
+
+No hardware operation occurred. Live MMIO, revision, clock, mode, teardown,
+resource and cold-boot qualification is is deferred by project direction; future qualification requires authorized evidence. The next executable body begins at `0x00422D20`;
+firmware-wide functional completeness is not claimed.
+
+## Current bootloader per-instance register-clear increment
+
+The 44- and 46-byte register-clear leaves at
+`[0x00422D20,0x00422D7A)` are exact maintained C under both reviewed target
+toolchains. Four focused tests cover all four banks, exact masks/preservation,
+authenticated bodies/pools/boundaries, and dual compilation.
+
+Canonical accounting is 21,543 source-owned, 16,528 generated patch, 16
+alignment, and 125,753 retained official bytes across 263 source-owned
+functions, five caves, 60 exact in-place leaves, and 201 patch sites. The
+4,621,559-byte flash plan has SHA-256
+`d0bbd6e98171006d3dab51f657e739747995851acfb10da4d53c704177d87fb4`
+with 6,640 placed regions; provider and byte-identical package hashes remain
+unchanged.
+
+No hardware operation occurred. A four-byte datum remains retained through
+`0x00422D7E`; live MMIO/bank/peripheral/cold-boot qualification is explicitly
+is deferred by project direction; future qualification requires authorized evidence. The next executable body begins at
+`0x00422D7E`; firmware-wide functional completeness is not claimed.
+
+## Current bootloader per-instance status-map increment
+
+The 72-byte status mapper at `[0x00422D7E,0x00422DC6)` is exact maintained C
+under both reviewed target toolchains without relocation. Five focused tests
+pin the body, result pools, datum and successor and cover all four modeled
+banks, each argument/MMIO status bit, priority, fallback, and dual compilation.
+
+Canonical accounting is 21,615 source-owned, 16,528 generated patch, 16
+alignment, and 125,681 retained official bytes across 264 source-owned
+functions, five caves, 61 exact in-place leaves, and 201 patch sites. The
+4,622,934-byte flash plan has SHA-256
+`94d1d455c823fe27ccaffff91d44a7839c4b4b14396f5a71342849c6e1c78df9`
+with 6,642 placed regions; provider and byte-identical unsigned-package hashes
+remain unchanged.
+
+No hardware operation occurred. Live MMIO status, bank ownership, peripheral
+flags, controller timing and cold-boot qualification are explicitly blocked by
+future-required authorized responsive G2 evidence. The next executable body begins
+at `0x00422DC6`; firmware-wide functional completeness is not claimed.
+
+## Current bootloader dual-descriptor initializer increment
+
+The 98-byte guarded per-instance descriptor initializer at
+`[0x00422DC6,0x00422E28)` is exact maintained C under both reviewed target
+toolchains with two strict retained-constructor calls. Six focused tests pin
+the body/caller/literal/provider/successor and cover header validation, both
+optional argument-pair gates, flags, exact descriptor layouts, order and dual
+compilation.
+
+Canonical accounting is 21,713 source-owned, 16,528 generated patch, 16
+alignment, and 125,583 retained official bytes across 265 source-owned
+functions, five caves, 62 exact in-place leaves, and 201 patch sites. The
+4,623,670-byte flash plan has SHA-256
+`e15b1575d93968f623450c3ea1a021aff473beb74969b6b99ce452ebd6204590`
+with 6,643 placed regions; provider and byte-identical unsigned-package hashes
+remain unchanged.
+
+No hardware operation occurred. Live SRAM/MMIO descriptor ownership,
+DMA/controller timing, buffer lifetime, interrupt and cold-boot qualification
+are is deferred by project direction; future qualification requires authorized responsive evidence. The next
+executable body begins at `0x00422E28`; firmware-wide functional completeness
+is not claimed.
+
+## Current bootloader per-instance configuration-latch increment
+
+The 106-byte interrupt-atomic configuration latch at
+`[0x00422EE2,0x00422F4C)` is exact maintained C under both reviewed target
+toolchains with one strict call to the retained critical-section provider.
+Five focused tests pin its binary seams and cover exact first-latch copying and
+preservation, duplicate rejection, token restoration on both paths and dual
+compilation.
+
+Canonical accounting is 22,005 source-owned, 16,528 generated patch, 16
+alignment, and 125,291 retained official bytes across 267 source-owned
+functions, five caves, 64 exact in-place leaves, and 201 patch sites. The
+4,625,116-byte flash plan has SHA-256
+`0fdbc2c75564879fae344b05f343349cb88a34d23aaed73e530e3ada3daa8160`
+with 6,645 placed regions; provider and byte-identical unsigned-package hashes
+remain unchanged.
+
+No hardware operation occurred. Live interrupt atomicity, concurrency,
+instance ownership, downstream MMIO effects and cold-boot qualification are
+is deferred by project direction; future qualification requires authorized responsive evidence. The next
+executable body begins at `0x00422F4C`; firmware-wide functional completeness
+is not claimed.
+
+## Current bootloader secondary configuration-latch increment
+
+The 86-byte interrupt-atomic secondary configuration latch at
+`[0x00422F4C,0x00422FA2)` is exact maintained C under both reviewed target
+toolchains with one strict retained critical-section call. Five focused tests
+pin the binary seams and cover exact payload copying and preservation,
+duplicate rejection, token restoration on both paths and dual compilation.
+
+Canonical accounting is 22,091 source-owned, 16,528 generated patch, 16
+alignment, and 125,205 retained official bytes across 268 source-owned
+functions, five caves, 65 exact in-place leaves, and 201 patch sites. The
+4,625,886-byte flash plan has SHA-256
+`7b4d686e47a731844e2639c5b5546512fc8c5d22c56a526b1835745fe30e3a6c`
+with 6,646 placed regions; provider and byte-identical unsigned-package hashes
+remain unchanged.
+
+No hardware operation occurred. Live interrupt atomicity, concurrency,
+secondary-instance ownership, downstream MMIO effects and cold-boot
+qualification are is deferred by project direction; future qualification requires authorized responsive
+evidence. The next executable body begins at `0x00422FA2`; firmware-wide
+functional completeness is not claimed.
+
+## Current bootloader secondary configuration-release increment
+
+The 60-byte interrupt-atomic secondary release at
+`[0x00422FA2,0x00422FDE)` is exact maintained C under both reviewed target
+toolchains with strict critical-section and memset calls. Five focused tests
+pin its binary seams and cover the exact 60-byte runtime reset, noncanonical
+state rejection, provider arguments, token restoration and dual compilation.
+
+Canonical accounting is 22,151 source-owned, 16,528 generated patch, 16
+alignment, and 125,145 retained official bytes across 269 source-owned
+functions, five caves, 66 exact in-place leaves, and 201 patch sites. The
+4,626,654-byte flash plan has SHA-256
+`2fc61fd11765948d78562547efacb50ff87efcb3ebead62e911ee8a2730d0581`
+with 6,647 placed regions; provider and byte-identical unsigned-package hashes
+remain unchanged.
+
+No hardware operation occurred. Live interrupt atomicity, concurrent release,
+retained memset ABI, SRAM/MMIO consumers and cold-boot qualification are
+is deferred by project direction; future qualification requires authorized responsive evidence. The next
+executable body begins at `0x00422FDE`; firmware-wide functional completeness
+is not claimed.
+
+## Current bootloader per-instance hardware-shutdown increment
+
+The 176-byte register-quiesce and shutdown service at
+`[0x00422FDE,0x0042308E)` is exact maintained C under both reviewed target
+toolchains with four strict calls. Six focused tests pin its binary seams and
+cover all banks, conditional register masks, delay calculation, provider
+ordering, release/restore behavior and dual compilation.
+
+Canonical accounting is 22,327 source-owned, 16,528 generated patch, 16
+alignment, and 124,969 retained official bytes across 270 source-owned
+functions, five caves, 67 exact in-place leaves, and 201 patch sites. The
+4,627,385-byte flash plan has SHA-256
+`19065a0b5f07435bfe09e1257f50547952ddd21010f72a94a4920f89615d938f`
+with 6,648 placed regions; provider and byte-identical unsigned-package hashes
+remain unchanged.
+
+No hardware operation occurred. Live MMIO, clock/peripheral state, delay
+accuracy, concurrency, provider effects and cold-boot shutdown qualification
+are is deferred by project direction; future qualification requires authorized responsive evidence. The
+next executable body begins at `0x0042308E`; firmware-wide functional
+completeness is not claimed.
+
+## Community source profile closes GX8002 destination accounting
+
+The G2 community source manifest no longer labels either codec FWPK record as
+an unknown destination. The 32-byte UART boot header is retained as controller
+protocol metadata; its 10,240-byte and 27,964-byte bodies are placed at GX8002
+IRAM `0x10000000` and `0x10002800`. The 287,808-byte BINH record is split at
+its authenticated dual-image boundary into SPI-NOR offsets `0` and `0x2F3B0`.
+These placements are re-derived from the boot header, self-referential vectors,
+BINH headers, and Apollo `serialdown 0 <size> 8192` command.
+
+Two consecutive assembly runs retained the byte-identical 4,745,526-byte
+package SHA-256
+`3c8cdcdb4bc56b1a76b5ddabe6eb1bc79810aa6a99cf35acaec6bd019179c785`.
+The deterministic flash plan is 4,640,329 bytes with SHA-256
+`d9fe2b2028f168a1f3e54a1a26f0783c436173c319c143e0835b9bd5c0e7ca23`:
+6,667 placed regions, zero unresolved regions, six container-only records, and
+six protected regions. Seventeen focused codec tests, five KVDB tests, and two
+Apollo origin-accounting tests pass. No hardware operation occurred. The codec
+program bodies and KWS model remain explicitly proprietary source boundaries;
+address closure does not claim them as open source.

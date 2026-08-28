@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Freestanding formatted-input and floating parser used to replace the
  * retained IAR DLIB scanf/strtod cluster in the G2 firmware.  It deliberately

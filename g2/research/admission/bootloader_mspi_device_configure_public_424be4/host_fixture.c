@@ -1,0 +1,7 @@
+/* SPDX-License-Identifier: BSD-3-Clause */
+#include "runtime_bootloader_mspi_device_configure_public_candidate.h"
+static open_cfw_mspi_public_state s;static open_cfw_mspi_public_config c;static open_cfw_mspi_public_trace t;
+void open_cfw_test_public_device_reset(uint32_t module,uint32_t prefix,uint32_t configured,uint32_t clock_source,uint32_t tcb,uint32_t frequency,uint32_t device,uint32_t release_status,uint32_t request_status){unsigned char *p=(unsigned char*)&s,*q=(unsigned char*)&c,*r=(unsigned char*)&t;unsigned i;for(i=0;i<sizeof(s);i++)p[i]=0;for(i=0;i<sizeof(c);i++)q[i]=0;for(i=0;i<sizeof(t);i++)r[i]=0;s.module=module;s.prefix=prefix;s.configured=(uint8_t)configured;s.clock_source=(uint8_t)clock_source;s.tcb_address=tcb;s.xip_delay=99U;s.big_endian=1U;c.frequency=(uint8_t)frequency;c.device=(uint8_t)device;t.release_status=release_status;t.request_status=request_status;}
+uint32_t open_cfw_test_public_device_run(uint32_t null_state){return open_cfw_bootloader_mspi_device_configure_public_424be4(null_state?0:&s,&c,&t);}
+uint32_t open_cfw_test_public_device_state(uint32_t n){if(n==0)return s.clock_source;if(n==1)return s.device;if(n==2)return s.big_endian;if(n==3)return s.clock_frequency;if(n==4)return s.wait_timeout;if(n==5)return s.xip_delay;return 0xffffffffU;}
+uint32_t open_cfw_test_public_device_trace(uint32_t n){uint32_t *p=(uint32_t*)&t;return n<sizeof(t)/sizeof(uint32_t)?p[n]:0xffffffffU;}

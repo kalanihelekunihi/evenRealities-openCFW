@@ -72,7 +72,7 @@ class AnalyzeG2ServiceCodecDfuTests(unittest.TestCase):
         self.assertEqual(production["guarded_redirects"], 16)
         self.assertEqual(
             production["hardware_validation"],
-            "blocked_unavailable_physical_evidence",
+            "deferred by project direction",
         )
 
 

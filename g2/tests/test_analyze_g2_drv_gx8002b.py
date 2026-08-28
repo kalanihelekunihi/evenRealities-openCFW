@@ -76,7 +76,7 @@ class G2DrvGx8002bTests(unittest.TestCase):
             ),
             (608, 8, 34, 1028, 144),
         )
-        self.assertIn("blocked", production["hardware_validation"])
+        self.assertIn("deferred by project direction", production["hardware_validation"])
 
 
 if __name__ == "__main__":

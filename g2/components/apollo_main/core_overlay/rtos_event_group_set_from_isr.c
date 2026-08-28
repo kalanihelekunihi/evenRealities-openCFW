@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * RTOS event-group set-from-ISR submission wrapper matched to stock entry
  * 0x0047EE4A.

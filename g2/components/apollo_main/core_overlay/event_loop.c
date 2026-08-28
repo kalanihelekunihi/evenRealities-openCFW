@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Bounded CMSIS event-loop, delayed-callback, and timer reimplementation
  * matched to stock entries 0x004764E0 through 0x00476BEF.

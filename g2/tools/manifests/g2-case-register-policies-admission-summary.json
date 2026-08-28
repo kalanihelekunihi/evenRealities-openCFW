@@ -1,0 +1,50 @@
+{
+  "admitted_row_count": 8,
+  "analysis_mode": "offline authenticated official-image/corpus/source/build audit; caller-supplied register views; no hardware, MMIO, flash, reset, signing, routing, or deployment operation",
+  "component": "G2 charging-case register/state policy source slice",
+  "evidence": {
+    "authenticated_rows": 8,
+    "corpus": "research/corpus/case/ghidra/final-frontier/functions.jsonl",
+    "official_blob": "blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "official_blob_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+  },
+  "hardware_operations": [],
+  "hardware_validation": "deferred by project direction",
+  "integration": "isolated source candidate; production routing absent",
+  "metrics": {
+    "admitted_functions": 8,
+    "admitted_instruction_bytes": 214,
+    "authenticated_instruction_bytes": 214,
+    "embedded_mmio_addresses": 0,
+    "raw_instruction_transcription_bytes": 0,
+    "target_missing_symbols": 0,
+    "target_object_bytes": 2768,
+    "target_object_sha256": "442fe6aab1c2a199ca91b27599a9ebf27ddf0221073e8ca8daeb6fa9b6f0c5fe",
+    "unclassified_bytes_after": 2184,
+    "unclassified_bytes_before": 2398
+  },
+  "production_files_modified": [],
+  "production_routed": false,
+  "schema_version": 1,
+  "software_source_complete": true,
+  "source": {
+    "embedded_mmio_addresses": 0,
+    "exports": [
+      "open_cfw_case_clock_descriptor",
+      "open_cfw_case_flag27_set",
+      "open_cfw_case_flag30_set",
+      "open_cfw_case_flag31_set",
+      "open_cfw_case_gpio_policy_update",
+      "open_cfw_case_interrupt_enable",
+      "open_cfw_case_register_pair_commit",
+      "open_cfw_case_validate_magic_state"
+    ],
+    "header": "components/shared/case/runtime_case_register_policies.h",
+    "header_sha256": "c1296e62e18de816dce5f89d76f285bbc8b1bc960c59bdb1b098d6a6bb9df277",
+    "license": "MIT",
+    "path": "components/shared/case/runtime_case_register_policies.c",
+    "raw_instruction_transcription_bytes": 0,
+    "sha256": "5952682feb7dddf1e155fce2a9e198e5e8079ed87b8bf938c798d157055145e4",
+    "target": "thumbv6m-none-eabi / Cortex-M0+ / Thumb"
+  }
+}

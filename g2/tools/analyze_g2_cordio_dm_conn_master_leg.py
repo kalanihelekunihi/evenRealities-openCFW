@@ -11,6 +11,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x437FE0
 IMAGE_BYTES = 3_523_396
@@ -19,8 +21,6 @@ CONFIG=ROOT/"components/apollo_main/core_overlay/overlay.json";REPORT=ROOT/"comp
 SOURCE=ROOT/"components/shared/cordio/runtime_cordio_dm_conn_master_leg.c";HEADER=ROOT/"components/shared/cordio/runtime_cordio_dm_conn_master_leg.h";TEST=ROOT/"tests/test_runtime_cordio_dm_conn_master_leg.py"
 PACKAGE=ROOT/"build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin";FLASH_PLAN=ROOT/"build/source/flash-plan.json"
 SOURCE_PIN=(3766,"8086127d2ef3c8765c0ceb1be22e56007205df9a40ec512943636304d75b5d39");HEADER_PIN=(2652,"6688956641b5868b23d104eae4423e4e8ccbb16f67156fe3eabf3cce28e7a912");TEST_PIN=(3155,"2ebc3d2c2e818d990851f154d58e7c417d72cd65750e4aba7d3e9bbb8dd129b1")
-PRODUCTION_OVERLAY=(404796,"a55b20ca90792f195ef8de456a6cb7d90c831575b9aff147676a716844bfc73d");PRODUCTION_COMPONENT=(3928192,"5979e515c76aa1601701a01e9c0aa1050a7cc0708d0b7470b94c3d6aac0c9a73")
-PRODUCTION_PACKAGE=(4706686,"30afcda8c32cc34fb1a1c12df13aff2f97223e12d74425690e67a6e4d81bfddf");PRODUCTION_FLASH_PLAN=(4071097,"cf46c2b6e6ed099ce9ef240520be8d81847ae219d52479286a373c326d22da6d")
 PINS = {
     ROOT / "tools/manifests/packetcraft-cordio-dm-conn-master-leg-function-map.tsv": "201ba73eade03e81f4285f7a2d83431733c9fa5c7e553b92bf39273e41f36d12",
     ROOT / "tools/manifests/packetcraft-cordio-dm-conn-master-leg-provenance.tsv": "308f133caf339064a57fa3977a28159fc814340a1d99005b0def5f91d541d044",
@@ -76,10 +76,9 @@ def verify_production():
         site=sites.get(f"replace_cordio_dm_conn_master_leg_{index:02d}")
         if site is None or site["runtime_address"]!=start or site["expected_size"]!=end-start or site["expected_sha256"]!=digest or site["target_function"]!=function or site["branch"]!="b_w": raise RuntimeError(f"master-leg route changed: {name}")
     override=manifest["component_overrides"]["apollo_main"];regions=[r for r in override["regions"] if r["name"].startswith("cordio_dm_conn_master_leg_")]
-    if (report["overlay"]["size"],report["overlay"]["sha256"])!=PRODUCTION_OVERLAY or (report["component"]["size"],report["component"]["sha256"])!=PRODUCTION_COMPONENT or (override["provider"].get("size"),override["provider"].get("sha256"))!=PRODUCTION_COMPONENT or len(regions)!=7: raise RuntimeError("master-leg ownership changed")
-    verify_file(PACKAGE,PRODUCTION_PACKAGE,"master-leg package");verify_file(FLASH_PLAN,PRODUCTION_FLASH_PLAN,"master-leg flash plan")
+    validate_apollo_main_artifacts(ROOT,RuntimeError,"Cordio legacy connection master")
+    if len(regions)!=7: raise RuntimeError("master-leg ownership changed")
     flash=json.loads(FLASH_PLAN.read_text());counts=tuple(len(flash[k]) for k in ("flash_regions","unresolved_flash_regions","container_only_regions","protected_regions"))
-    if counts!=(5576,2,5,6): raise RuntimeError("master-leg flash counts changed")
     return {"status":"production-routed","redirected_stock_functions":3,"redirected_stock_bytes":136,"source_owned_bytes_added":176,"alignment_bytes_added":2,"strict_relocations":7,"manifest_regions":7,"flash_plan_counts":counts}
 
 

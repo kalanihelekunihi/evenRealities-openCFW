@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Clean-room reconstruction of the G2 downstream EasyLogger lock-free
  * fixed-record pool, allocator, recycler, and Michael-Scott queue operations.

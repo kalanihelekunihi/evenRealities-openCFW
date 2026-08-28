@@ -134,22 +134,22 @@ TARGET_RELOCATIONS = [
     (0x12, 30, "open_cfw_freertos_heap4_free"),
     (0x16, 10, "ulSetInterruptMask"),
 ]
-PRODUCTION_OFFSET = 114_700
-PRODUCTION_RUNTIME_ADDRESS = 0x007B_0330
+PRODUCTION_OFFSET = 174_548
+PRODUCTION_RUNTIME_ADDRESS = 0x007B_ECF8
 PRODUCTION_SHA256 = (
     "078c97be19fff941ddb8ea3685dc5137f"
     "7e4d7e69e25ffaa0bdf21c22df509f2"
 )
-PRODUCTION_OVERLAY_SIZE = 167_426
+PRODUCTION_OVERLAY_SIZE = 429_058
 PRODUCTION_OVERLAY_SHA256 = (
-    "800245ad7f4ba1044f01888fc0141f9f3304bc531773847ba9c0c29e62245491"
+    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
 )
-PRODUCTION_COMPONENT_SIZE = 3_690_822
+PRODUCTION_COMPONENT_SIZE = 3_952_454
 PRODUCTION_COMPONENT_SHA256 = (
-    "9ed3e77e10dd911ae34e9ba17f691f6988c592723b52a9676b8d414554a21459"
+    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
 )
 PRODUCTION_DEPENDENCIES = {
-    "open_cfw_freertos_heap4_free": 0x007B_02BC,
+    "open_cfw_freertos_heap4_free": 0x007B_EC84,
     "ulSetInterruptMask": 0x007A_FF08,
 }
 
@@ -813,7 +813,7 @@ class RuntimeFreeRTOSQueueDeleteTests(unittest.TestCase):
                 "offset": PRODUCTION_OFFSET,
                 "padding_before": 2,
                 "runtime_address": PRODUCTION_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007B0330",
+                "runtime_address_hex": "0x007BECF8",
                 "size": 38,
             },
         )

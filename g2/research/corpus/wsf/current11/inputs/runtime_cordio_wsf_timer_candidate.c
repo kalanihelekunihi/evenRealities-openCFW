@@ -1,5 +1,5 @@
 /*
- * SPDX-License-Identifier: GPL-3.0-only
+ * SPDX-License-Identifier: MIT
  *
  * Production-excluded clean-room reconstruction of eleven functions in the G2
  * Cordio/Ambiq FreeRTOS WSF timer port.  Packetcraft r19.02 commit

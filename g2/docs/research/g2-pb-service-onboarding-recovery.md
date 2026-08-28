@@ -48,7 +48,7 @@ are inferred.
 ## Production closure
 
 `components/apollo_main/core_overlay/pb_service_onboarding.c` is an
-independently authored GPL-3.0-only implementation containing the nine linked
+independently authored MIT implementation containing the nine linked
 entries plus bounded buffer-write, zero-fill, and common-encode helpers. Its
 12 selector-isolated functions compile to 878 Thumb bytes plus eight alignment
 bytes. Nine guarded `B.W` redirects replace all 3,024 stock body bytes; 22

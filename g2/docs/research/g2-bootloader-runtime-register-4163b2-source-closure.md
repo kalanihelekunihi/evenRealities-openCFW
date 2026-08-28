@@ -19,7 +19,7 @@ entry `0x0041639B`; static mode also forwards the storage base. A failed
 registration frees only a dynamically allocated record, after clearing its
 tag, through retained provider `0x00419830`.
 
-`runtime_register_4163b2.c` is a 5,261-byte GPL-3.0-or-later clean-room
+`runtime_register_4163b2.c` is a 5,261-byte MIT clean-room
 implementation with SHA-256
 `4673227907a6cf5757607fe2d577991fab914dc9e7823d4fcd9073a48cdecacf`.
 Apple clang emits a 180-byte, four-byte-aligned unrelocated leaf with SHA-256

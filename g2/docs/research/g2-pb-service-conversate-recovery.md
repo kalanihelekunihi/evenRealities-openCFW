@@ -55,7 +55,7 @@ encoders return 6 on null; the two prepared-note helpers have no pointer-null
 path.
 
 The historical source tree and license remain unavailable. The independently
-authored GPL-3.0-only
+authored MIT
 `components/apollo_main/core_overlay/pb_service_conversate.c` implements the
 six linked entries plus bounded buffer-write and message-zero helpers. Eight
 selector-isolated leaves produce 1,098 bytes of Thumb text plus eight alignment

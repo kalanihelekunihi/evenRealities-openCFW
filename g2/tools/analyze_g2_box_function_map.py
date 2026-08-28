@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Per-function attribution for the G2 charging-case (box) firmware.
 
 Consumes the deterministic Ghidra 12.1.2 export artifacts produced on the
@@ -46,6 +47,18 @@ import json
 import struct
 import sys
 from pathlib import Path
+
+from capstone import (
+    CS_ARCH_ARM,
+    CS_GRP_CALL,
+    CS_GRP_JUMP,
+    CS_GRP_RET,
+    CS_MODE_LITTLE_ENDIAN,
+    CS_MODE_MCLASS,
+    CS_MODE_THUMB,
+    Cs,
+)
+from capstone.arm import ARM_INS_CBNZ, ARM_INS_CBZ, ARM_OP_IMM
 
 G2_ROOT = Path(__file__).resolve().parents[1]
 BLOB_REL = "blobs/official/g2-2.2.6.10/firmware_box.bin"
@@ -109,6 +122,7 @@ EXPECTED_ANCHOR_SIZES = {
 
 # Structurally verified names (checked against decomp.c this increment).
 VERIFIED_NAMES = {
+    0x08000160: "__aeabi_uidiv",
     0x080000CC: "vPortStartFirstTask",
     0x0800C390: "vTaskSwitchContext",
     0x0800BF2C: "uxListRemove",
@@ -125,6 +139,7 @@ VERIFIED_NAMES = {
     0x08006968: "app_rtos_init",
     0x08004B6C: "HAL_FLASH_Unlock",
     0x08004BF4: "HAL_FLASH_OB_Unlock",
+    0x0800502C: "NVIC_SystemReset",
 }
 
 # CMSIS/startup + toolchain runtime (verified addresses only).
@@ -144,22 +159,77 @@ CMSIS_STARTUP = {
     0x080001EA: "__aeabi runtime helper",
     0x080001FC: "__aeabi runtime helper",
     0x08000210: "toolchain runtime block op",
+    0x0800502C: "CMSIS-Core NVIC_SystemReset: DSB, AIRCR VECTKEY + "
+                "SYSRESETREQ, DSB, terminal loop",
+}
+
+STM32_HAL_EXPLICIT = {
+    0x0800598C: ("stm32_hal_peripheral_init",
+                 "HAL handle state/error transitions, HAL tick timeout, "
+                 "instance-register configuration, and HAL status returns; "
+                 "exact public symbol remains unresolved"),
+    0x08005094: ("HAL_PWR_DisableWakeUpPin",
+                 "clears the selected EWUP bits in PWR_CR3"),
+    0x080050A8: ("HAL_PWR_EnableWakeUpPin",
+                 "programs PWR_CR4 polarity then sets PWR_CR3 EWUP bits"),
+    0x080050C4: ("HAL_PWR_EnterSTANDBYMode",
+                 "LPMS=standby, SCB SLEEPDEEP, WFI sequence"),
+    0x080050E8: ("HAL_PWR_EnterSLEEPMode",
+                 "LPMS regulator selection, WFI/WFE entry, SLEEPDEEP clear"),
 }
 
 # Task/timer entry functions from app_rtos_init literal cells
 # (DAT_08006A14..0x08006A3C, thumb-bit cleared).  Ghidra only discovers
 # the three that are otherwise reachable; all ten are G2 entry code.
 TASK_TIMER_ENTRIES = {
-    0x08009D70: "g2_rtos_entry_1",
-    0x0800BB4C: "g2_rtos_entry_2",
-    0x08009684: "g2_rtos_entry_3",
-    0x0800B7EC: "g2_rtos_entry_4",
-    0x0800BB90: "g2_rtos_entry_5",
-    0x0800AB70: "g2_rtos_entry_6",
-    0x08006E1C: "g2_rtos_entry_7",
-    0x08007F2C: "g2_rtos_entry_8",
-    0x08007200: "g2_rtos_entry_9",
-    0x080082EC: "g2_rtos_entry_10",
+    0x08009D70: "g2_timer_callback_1",
+    0x0800BB4C: "g2_timer_callback_2",
+    0x08009684: "g2_timer_callback_3",
+    0x0800B7EC: "g2_timer_callback_4",
+    0x0800BB90: "g2_timer_callback_5",
+    0x0800AB70: "g2_timer_callback_6",
+    0x08006E1C: "g2_thread_entry_1",
+    0x08007F2C: "g2_thread_entry_2",
+    0x08007200: "g2_thread_entry_3",
+    0x080082EC: "g2_thread_entry_4",
+}
+
+# The seven entries omitted by the original Ghidra auto-analysis.  Limits are
+# the next independently discovered function/entry and are only traversal
+# guards, not inferred body ends.  The control-flow walk below determines the
+# reachable instruction spans and fails closed against their authenticated
+# byte digests.
+SUPPLEMENTAL_TASK_LIMITS = {
+    0x08009D70: 0x08009DF4,
+    0x0800B7EC: 0x0800BA44,
+    0x0800BB90: 0x0800BE74,
+    0x08006E1C: 0x08007200,
+    0x08007F2C: 0x080082EC,
+    0x08007200: 0x08007F2C,
+    0x080082EC: 0x08008420,
+}
+
+SUPPLEMENTAL_TASK_EXPECTED = {
+    0x08009D70: (28, 66, "81a7269653585774491fd60647f2638a1b81b20a6e05971ed2166b7ff2abd042"),
+    0x0800B7EC: (153, 342, "416ba65f58f649e802b918d655413efa75fa03fc7a3127fe330cb2b8e4226bce"),
+    0x0800BB90: (170, 374, "593d88b92adcfd73a350e395354d5ccbfdd8d0db10bb81c9d53fe60f882e1b07"),
+    0x08006E1C: (344, 790, "5bc749b960d9ff1231136dab10fc0b200ccf96d600b2ff1ba7235fa7d3d206c2"),
+    0x08007F2C: (269, 616, "fa9446f10a6a07052b075c4f902d65af20799b46d9ec6f79e9dd3c0d1ec2292f"),
+    0x08007200: (974, 2184, "48b30df1daa0fb53f4ab64f0d953c2a59fdc444c734e2be6dbb5bc34cbd3a61f"),
+    0x080082EC: (93, 200, "70132a07ef998723788b75fbbb74b683d66c0404f611898cff51091a94e47a76"),
+}
+
+# Exact CMSIS-RTOS2 wrappers identified from their argument validation,
+# privilege/exception checks, and calls into the already classified FreeRTOS
+# primitives.  These are upstream wrapper bodies, not G2 policy.
+CMSIS_OS2_WRAPPERS = {
+    0x0800A7B0: ("osDelay", "nonzero ticks -> vTaskDelay; ISR rejected"),
+    0x0800A7D2: ("osEventFlagsClear", "24-bit flag validation; task/ISR clear paths"),
+    0x0800A816: ("osEventFlagsGet", "task/ISR event-group read paths"),
+    0x0800A888: ("osEventFlagsSet", "task/ISR event-group set and wake paths"),
+    0x0800AA24: ("osThreadTerminate", "task handle validation -> vTaskDelete"),
+    0x0800AAF0: ("osTimerStart", "timer command 4 with tick argument"),
+    0x0800AB26: ("osTimerStop", "active check then timer command 3"),
 }
 
 FIRST_PARTY_EXPLICIT = {
@@ -177,6 +247,78 @@ FIRST_PARTY_EXPLICIT = {
     0x0800856C: "descriptor-table consumer",
     0x08008BD8: "descriptor-table consumer",
     0x08009A9C: "descriptor-table consumer",
+    0x08006B80: "G2 board policy: GPIOA pin 6 output helper",
+    0x08006B98: "G2 board policy: GPIOA pin 7 output helper",
+    0x08003848: "G2 charge-side selection policy over PA6/PA7 helpers",
+    0x0800D154: "G2 aging-state indicator command sequence",
+    0x08002C30: "G2 retrying peripheral mode-write policy",
+    0x08002C8E: "G2 glasses-channel command packing policy",
+    0x08002CB8: "G2 periodic case-policy adapter",
+    0x080035D4: "G2 guarded peripheral transaction adapter",
+    0x080039C8: "G2 guarded left-channel transaction adapter",
+    0x080039E4: "G2 guarded right-channel transaction adapter",
+    0x0800085C: "G2 GLS receive-buffer parser and dispatcher",
+    0x08003A00: "G2 per-glasses charge-state reset policy",
+    0x08003A3C: "G2 left-glasses state reset",
+    0x08003A60: "G2 right-glasses state reset",
+    0x08003B90: "G2 one-byte peripheral status probe adapter",
+    0x080068D0: "G2 fixed-width case command builder",
+    0x08009A14: "G2 dual-side indicator-state command policy",
+    0x08009DF4: "G2 peripheral initialization retry adapter",
+    0x08009EBC: "G2 bounded percentage conversion adapter",
+    0x08009F18: "G2 calibrated sensor-value conversion policy",
+    0x08009FF0: "G2 sensor default-value adapter",
+    0x0800A01E: "G2 scaled sensor-value adapter",
+    0x0800B600: "G2 board peripheral initialization policy",
+    0x0800BB74: "G2 periodic timer restart adapter",
+    0x0800BE90: "G2 left-side indicator command sequence",
+    0x0800BEDE: "G2 right-side indicator command sequence",
+}
+
+FIRST_PARTY_SEMANTIC_NAMES = {
+    0x0800085C: "gls_rx_buffer_parse_dispatch",
+    0x080012E4: "aging_led_status_clear",
+    0x08001334: "aging_sequence_start",
+    0x080013B8: "idle_mode_exit",
+    0x08001574: "case_ota_execute",
+    0x080018E4: "glasses_status_poll_dispatch",
+    0x08001C1C: "glasses_status_force_refresh",
+    0x08001D68: "ota_result_inform_glasses",
+    0x080023F4: "aging_status_set_left",
+    0x080024C0: "aging_status_set_right",
+    0x0800258C: "gls_uart_transfer_controlled",
+    0x08002744: "gls_uart_transfer_uncontrolled",
+    0x08002A68: "pmic_boost_status_check",
+    0x08002C30: "peripheral_mode_write_retry",
+    0x08002C8E: "glasses_channel_command_pack",
+    0x08002CB8: "case_periodic_policy_adapter",
+    0x080035D4: "peripheral_transaction_guard",
+    0x08003848: "glasses_charge_side_select",
+    0x080038E0: "option_byte_bank_swap",
+    0x080039C8: "left_channel_transaction_guard",
+    0x080039E4: "right_channel_transaction_guard",
+    0x08003A00: "glasses_charge_state_reset",
+    0x08003A3C: "left_glasses_state_reset",
+    0x08003A60: "right_glasses_state_reset",
+    0x08003B90: "peripheral_status_probe",
+    0x080068D0: "case_command_build_fixed",
+    0x080067C8: "log_hex_buffer",
+    0x08006B80: "case_gpio_pa6_write",
+    0x08006B98: "case_gpio_pa7_write",
+    0x08007214: "case_policy_iteration",
+    0x08009A14: "dual_side_indicator_update",
+    0x08009A9C: "glasses_sides_reset",
+    0x08009DF4: "peripheral_init_retry",
+    0x08009EBC: "bounded_percentage_convert",
+    0x08009F18: "calibrated_sensor_value_convert",
+    0x08009FF0: "sensor_default_value_read",
+    0x0800A01E: "scaled_sensor_value_read",
+    0x0800B600: "board_peripheral_init",
+    0x0800BB74: "periodic_timer_restart",
+    0x0800BE90: "left_indicator_sequence",
+    0x0800BEDE: "right_indicator_sequence",
+    0x0800D154: "aging_indicator_apply",
+    0x0800CE34: "glasses_charge_control_policy",
 }
 
 KERNEL_STATICS = range(0x20000128, 0x200001A0)
@@ -193,10 +335,11 @@ def _sha(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
 
 
-def _verify_blob() -> None:
+def _verify_blob() -> bytes:
     data = BLOB.read_bytes()
     if _sha(data) != BLOB_SHA256:
         _fail("blob sha256 mismatch")
+    return data[WRAPPER:]
 
 
 def _verify_artifacts() -> dict:
@@ -246,6 +389,127 @@ def _load_strings() -> set:
     return out
 
 
+def _recover_supplemental_task_bodies(app: bytes, funcs: dict) -> list[dict]:
+    """Recover the seven unseeded RTOS entries by direct Thumb CFG walk.
+
+    BL/BLX destinations are recorded as callees but are not traversed.  Direct
+    conditional and unconditional branches inside the guarded entry window are
+    traversed; returns terminate a path.  The stock image is Cortex-M0+, so an
+    indirect computed jump would make this recovery ambiguous and is rejected.
+    """
+    decoder = Cs(
+        CS_ARCH_ARM,
+        CS_MODE_THUMB | CS_MODE_LITTLE_ENDIAN | CS_MODE_MCLASS,
+    )
+    decoder.detail = True
+    discovered_bytes = set()
+    for entry, f in funcs.items():
+        discovered_bytes.update(range(entry, entry + f["size"]))
+
+    bodies = []
+    for entry, limit in sorted(SUPPLEMENTAL_TASK_LIMITS.items()):
+        pending = [entry]
+        instructions = {}
+        call_sites = []
+        while pending:
+            address = pending.pop()
+            if address in instructions:
+                continue
+            if address & 1 or not (entry <= address < limit):
+                _fail(
+                    f"task entry {entry:#x} branch escaped guarded window "
+                    f"to {address:#x}"
+                )
+            offset = address - APP_BASE
+            insn = next(decoder.disasm(app[offset:offset + 4], address, count=1), None)
+            if insn is None:
+                _fail(f"task entry {entry:#x} failed to decode at {address:#x}")
+            instructions[address] = insn
+
+            direct_target = None
+            if (
+                insn.operands
+                and insn.operands[-1].type == ARM_OP_IMM
+                and (
+                    insn.group(CS_GRP_JUMP)
+                    or insn.id in (ARM_INS_CBZ, ARM_INS_CBNZ)
+                    or insn.group(CS_GRP_CALL)
+                )
+            ):
+                direct_target = insn.operands[-1].imm & ~1
+            is_call = insn.group(CS_GRP_CALL)
+            if is_call:
+                if direct_target is None:
+                    _fail(f"task entry {entry:#x} has indirect call at {address:#x}")
+                call_sites.append((address, direct_target))
+            is_return = (
+                insn.group(CS_GRP_RET)
+                or (insn.mnemonic == "pop" and "pc" in insn.op_str)
+                or (insn.mnemonic == "bx" and insn.op_str == "lr")
+            )
+            is_jump = (
+                insn.group(CS_GRP_JUMP)
+                or insn.id in (ARM_INS_CBZ, ARM_INS_CBNZ)
+            ) and not is_call
+            is_unconditional = insn.mnemonic in ("b", "b.w", "bx")
+            if is_jump:
+                if direct_target is None:
+                    if not is_return:
+                        _fail(
+                            f"task entry {entry:#x} has indirect jump at "
+                            f"{address:#x}"
+                        )
+                else:
+                    pending.append(direct_target)
+            if not is_return and not is_unconditional:
+                pending.append(address + insn.size)
+
+        ordered = sorted(instructions)
+        spans = []
+        for address in ordered:
+            end = address + instructions[address].size
+            if spans and address == spans[-1][1]:
+                spans[-1] = (spans[-1][0], end)
+            else:
+                spans.append((address, end))
+        instruction_blob = b"".join(
+            app[address - APP_BASE:address - APP_BASE + instructions[address].size]
+            for address in ordered
+        )
+        expected = SUPPLEMENTAL_TASK_EXPECTED[entry]
+        observed = (len(ordered), len(instruction_blob), _sha(instruction_blob))
+        if observed != expected:
+            _fail(
+                f"task entry {entry:#x} CFG drift: {observed!r} != {expected!r}"
+            )
+        recovered_only = sum(
+            1
+            for address in ordered
+            for byte in range(address, address + instructions[address].size)
+            if byte not in discovered_bytes
+        )
+        bodies.append({
+            "entry": entry,
+            "name": TASK_TIMER_ENTRIES[entry],
+            "role": "timer_callback" if entry >= 0x08009000 else "thread_entry",
+            "guard_limit": limit,
+            "instruction_count": len(ordered),
+            "instruction_bytes": len(instruction_blob),
+            "previously_unmapped_instruction_bytes": recovered_only,
+            "instruction_sha256": observed[2],
+            "spans": [
+                {"start": start, "end": end, "bytes": end - start}
+                for start, end in spans
+            ],
+            "calls": [
+                {"site": site, "target": target}
+                for site, target in sorted(call_sites)
+            ],
+            "direct_callees": sorted({target for _, target in call_sites}),
+        })
+    return bodies
+
+
 def _classify(funcs: dict, strings: set) -> dict:
     """Return {entry: (category, evidence)} for every discovered function."""
     def refs_g2_string(f):
@@ -288,6 +552,11 @@ def _classify(funcs: dict, strings: set) -> dict:
             cat[e] = ("upstream_freertos_kernel",
                       "kernel-statics reference and/or banded call-graph "
                       "closure from pinned port/scheduler anchors")
+    for e, (name, ev) in CMSIS_OS2_WRAPPERS.items():
+        if e not in funcs:
+            _fail(f"CMSIS-RTOS2 wrapper {name} missing at {e:#x}")
+        cat[e] = ("upstream_freertos_kernel",
+                  f"CMSIS-RTOS2 {name}: {ev}")
 
     # 3. HAL clusters
     uart = {0x08005F50}
@@ -320,6 +589,10 @@ def _classify(funcs: dict, strings: set) -> dict:
             cat[e] = ("upstream_stm32_hal",
                       "FLASH_KEYR/OPTKEYR credential literal user "
                       "(HAL_FLASH_Unlock/HAL_FLASH_OB_Unlock)")
+    for e, (name, ev) in STM32_HAL_EXPLICIT.items():
+        if e not in funcs:
+            _fail(f"STM32 HAL function {name} missing at {e:#x}")
+        cat[e] = ("upstream_stm32_hal", f"STM32G0 HAL {name}: {ev}")
 
     # 4. CMSIS startup + toolchain runtime
     for e, ev in CMSIS_STARTUP.items():
@@ -349,16 +622,24 @@ def _classify(funcs: dict, strings: set) -> dict:
 
 
 def analyze() -> dict:
-    _verify_blob()
+    app = _verify_blob()
     meta = _verify_artifacts()
     funcs = _load_functions()
     strings = _load_strings()
+    task_bodies = _recover_supplemental_task_bodies(app, funcs)
     cat = _classify(funcs, strings)
 
     rows = []
     for e in sorted(funcs):
-        name = ANCHORS.get(e, (None,))[0] or VERIFIED_NAMES.get(
-            e, f"FUN_{e:08x}")
+        name = (
+            ANCHORS.get(e, (None,))[0]
+            or VERIFIED_NAMES.get(e)
+            or CMSIS_OS2_WRAPPERS.get(e, (None,))[0]
+            or STM32_HAL_EXPLICIT.get(e, (None,))[0]
+            or FIRST_PARTY_SEMANTIC_NAMES.get(e)
+            or TASK_TIMER_ENTRIES.get(e)
+            or f"FUN_{e:08x}"
+        )
         c, ev = cat[e]
         rows.append({
             "entry": e, "size": funcs[e]["size"], "name": name,
@@ -366,15 +647,41 @@ def analyze() -> dict:
         })
     for e, name in sorted(TASK_TIMER_ENTRIES.items()):
         if e not in funcs:
+            body = next(body for body in task_bodies if body["entry"] == e)
             rows.append({
                 "entry": e, "size": 0, "name": name,
                 "ownership_category": "first_party_g2",
                 "evidence": "RTOS task/timer entry pointer from "
-                            "app_rtos_init literal pool; body outside the "
-                            "discovered map (no direct callers); bytes "
-                            "remain in unresolved accounting",
+                            "app_rtos_init literal pool; independently "
+                            f"bounded CFG has {body['instruction_bytes']} "
+                            "instruction bytes; zero here prevents overlap "
+                            "with gap/Ghidra accounting; see "
+                            "g2-box-task-entry-bodies.tsv",
                 "discovered": False,
             })
+
+    rows_by_entry = {row["entry"]: row for row in rows}
+    task_direct_callees = sorted({
+        target
+        for body in task_bodies
+        for target in body["direct_callees"]
+    })
+    task_helpers = []
+    for target in task_direct_callees:
+        if target not in rows_by_entry:
+            _fail(f"task direct callee {target:#x} absent from function map")
+        row = rows_by_entry[target]
+        callers = sorted(
+            body["entry"] for body in task_bodies
+            if target in body["direct_callees"]
+        )
+        task_helpers.append({
+            "entry": target,
+            "name": row["name"],
+            "ownership_category": row["ownership_category"],
+            "task_callers": callers,
+            "task_caller_count": len(callers),
+        })
 
     totals: dict[str, int] = {c: 0 for c in OWNERSHIP_CATEGORIES}
     counts: dict[str, int] = {c: 0 for c in OWNERSHIP_CATEGORIES}
@@ -440,6 +747,18 @@ def analyze() -> dict:
             "discovered_functions": len(funcs),
             "supplemental_entry_rows": sum(1 for r in rows
                                            if not r["discovered"]),
+            "supplemental_task_instruction_bytes": sum(
+                body["instruction_bytes"] for body in task_bodies
+            ),
+            "supplemental_task_previously_unmapped_instruction_bytes": sum(
+                body["previously_unmapped_instruction_bytes"]
+                for body in task_bodies
+            ),
+            "task_direct_helpers": len(task_helpers),
+            "task_direct_helpers_unresolved": sum(
+                row["ownership_category"] == "unresolved"
+                for row in task_helpers
+            ),
             "discovered_function_bytes": discovered_bytes,
             "app_bytes_outside_discovered_functions": app_tail,
             "category_counts": counts,
@@ -451,6 +770,8 @@ def analyze() -> dict:
         },
         "rows": rows,
         "gap_rows": gap_rows,
+        "task_bodies": task_bodies,
+        "task_helpers": task_helpers,
         "ownership_categories": OWNERSHIP_CATEGORIES,
         "resolutions": {
             "crc_verdict": "no polynomial CRC anywhere in the case image; "
@@ -480,8 +801,8 @@ def analyze() -> dict:
             "precise task-name to entry-function pairing (descriptor fn "
             "fields are runtime-patched; six create calls use "
             "descriptor-table names)",
-            "boundaries of the seven entry bodies outside the discovered "
-            "map",
+            "semantic task-name pairing for the seven now-bounded entry "
+            "bodies (descriptor names are runtime-patched)",
             "first-party policy function naming beyond the verified set",
         ],
     }
@@ -509,6 +830,43 @@ def _write_manifests(result: dict) -> list[str]:
     slim["row_count"] = len(result["rows"])
     js.write_text(json.dumps(slim, indent=2, sort_keys=True) + "\n")
     out.append(str(js.relative_to(G2_ROOT)))
+
+    tasks = MANIFEST_DIR / "g2-box-task-entry-bodies.tsv"
+    task_lines = [
+        "# G2 charging-case RTOS entries omitted by the original Ghidra map",
+        "# reachable instruction bytes are concatenated in address order for sha256",
+        "entry\tname\trole\tguard_limit\tinstructions\tinstruction_bytes\t"
+        "previously_unmapped_instruction_bytes\tinstruction_sha256\tspans",
+    ]
+    for body in result["task_bodies"]:
+        spans = ",".join(
+            f"0x{span['start']:08x}-0x{span['end']:08x}"
+            for span in body["spans"]
+        )
+        task_lines.append(
+            f"0x{body['entry']:08x}\t{body['name']}\t{body['role']}\t"
+            f"0x{body['guard_limit']:08x}\t{body['instruction_count']}\t"
+            f"{body['instruction_bytes']}\t"
+            f"{body['previously_unmapped_instruction_bytes']}\t"
+            f"{body['instruction_sha256']}\t{spans}"
+        )
+    tasks.write_text("\n".join(task_lines) + "\n")
+    out.append(str(tasks.relative_to(G2_ROOT)))
+
+    helpers = MANIFEST_DIR / "g2-box-task-helper-map.tsv"
+    helper_lines = [
+        "# Direct callees reached from the seven recovered task/timer entries",
+        "entry\tname\townership_category\ttask_caller_count\ttask_callers",
+    ]
+    for helper in result["task_helpers"]:
+        callers = ",".join(f"0x{x:08x}" for x in helper["task_callers"])
+        helper_lines.append(
+            f"0x{helper['entry']:08x}\t{helper['name']}\t"
+            f"{helper['ownership_category']}\t"
+            f"{helper['task_caller_count']}\t{callers}"
+        )
+    helpers.write_text("\n".join(helper_lines) + "\n")
+    out.append(str(helpers.relative_to(G2_ROOT)))
     return out
 
 
@@ -521,6 +879,13 @@ def main() -> int:
           f"{m['supplemental_entry_rows']} supplemental entry rows")
     print(f"discovered bytes: {m['discovered_function_bytes']} / "
           f"{result['identity']['app_bytes']} app bytes")
+    print("task CFGs       : "
+          f"{m['supplemental_task_instruction_bytes']} instruction bytes, "
+          f"{m['supplemental_task_previously_unmapped_instruction_bytes']} "
+          "previously unmapped")
+    print("task helpers    : "
+          f"{m['task_direct_helpers']} direct, "
+          f"{m['task_direct_helpers_unresolved']} unresolved")
     print("category counts/bytes:")
     for c in OWNERSHIP_CATEGORIES:
         if m["category_counts"][c]:
