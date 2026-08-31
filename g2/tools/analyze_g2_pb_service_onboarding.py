@@ -29,25 +29,25 @@ PINS = {
     CLOSURE: "93c2b4f62c82c37c0486ccda7702471293fa3eb77163bb8f29c321efdecde914",
     PROVENANCE: "75bdbf3cbe34e5ade08c1a8a407a4f459a0b35adf6a9517fe64b2452fa1ac186",
 }
-SOURCE_SIZE = 14758
-SOURCE_SHA256 = "81a578ee935776fdb798962859800dd835f3c063e3c94c701d058c2319a56a35"
+SOURCE_SIZE = 14749
+SOURCE_SHA256 = "54a4eca39f6d9974f5c7bbb38dbb0188c62c21bab7be7d483ce99fda96c37e2a"
 FUNCTIONS = (
-    ("open_cfw_pb_service_onboarding_buffer_write", 146, 263336, 0,
+    ("open_cfw_pb_service_onboarding_buffer_write", 146, 203488, 0,
      "buffer_write"),
-    ("open_cfw_pb_service_onboarding_zero", 88, 263484, 0, "zero"),
-    ("open_cfw_pb_onboarding_encode_and_send", 276, 263572, 6,
+    ("open_cfw_pb_service_onboarding_zero", 88, 203636, 0, "zero"),
+    ("open_cfw_pb_onboarding_encode_and_send", 276, 203724, 6,
      "common_encode"),
-    ("APP_PbRxOnboardingFrameDataProcess", 170, 263848, 9, "dispatch"),
-    ("PB_RxOnboardingConfig", 20, 264020, 1, "config_rx"),
-    ("APP_PbTxEncodeOnboardingConfig", 20, 264040, 1, "config_tx"),
-    ("APP_PbNotifyEncodeOnboardingConfig", 44, 264060, 1,
+    ("APP_PbRxOnboardingFrameDataProcess", 170, 204000, 9, "dispatch"),
+    ("PB_RxOnboardingConfig", 20, 204172, 1, "config_rx"),
+    ("APP_PbTxEncodeOnboardingConfig", 20, 204192, 1, "config_tx"),
+    ("APP_PbNotifyEncodeOnboardingConfig", 44, 204212, 1,
      "config_notify"),
-    ("PB_RxOnboardingHeartbeat", 10, 264104, 0, "heartbeat_rx"),
-    ("APP_PbTxEncodeOnboardingHeartbeat", 20, 264116, 1,
+    ("PB_RxOnboardingHeartbeat", 10, 204256, 0, "heartbeat_rx"),
+    ("APP_PbTxEncodeOnboardingHeartbeat", 20, 204268, 1,
      "heartbeat_tx"),
-    ("PB_RxOnboardingEvent", 20, 264136, 1, "event_rx"),
-    ("APP_PbTxEncodeOnboardingEvent", 20, 264156, 1, "event_tx"),
-    ("APP_PbNotifyEncodeOnboardingEvent", 44, 264176, 1,
+    ("PB_RxOnboardingEvent", 20, 204288, 1, "event_rx"),
+    ("APP_PbTxEncodeOnboardingEvent", 20, 204308, 1, "event_tx"),
+    ("APP_PbNotifyEncodeOnboardingEvent", 44, 204328, 1,
      "event_notify"),
 )
 PATCH_SUFFIXES = (
@@ -364,12 +364,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 3024,
             "retained_gap_pool_bytes": 192,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "No authorized live G2 service 0x10 peer BLE, display-ready, "
-                "onboarding-control, response, or notification workflow evidence "
-                "is required for future qualification; the authorized right temple is not under test because qualification is deferred by project direction "
-                "and the left temple must remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific service 0x10 onboarding fixture "
+                "or an authenticated golden BLE display-ready, onboarding-control, response, and notification capture"
             ),
         },
     }

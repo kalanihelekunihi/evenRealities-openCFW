@@ -72,8 +72,8 @@ TARGET_UNDEFINED = [
 ]
 TARGET_PINS = {
     "apple-clang": {
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
-        "object": (1364, "4fedef033dc94ab8a9862be504795421daafaa0bbc683526108e8dc4554d763f"),
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "object": (1364, "d57f7dc725ac289dd2ca8016a2face85a1646e4cf4a725cb9367e752ffbb3db8"),
         "function": (266, 4, "37bfb94e9294e10861e68f6e191e12db2be17cef97a412e15a2857fa32874c0b"),
         "relocations": [
             (66, 10, "open_cfw_retained_freertos_stack_overflow_hook"),

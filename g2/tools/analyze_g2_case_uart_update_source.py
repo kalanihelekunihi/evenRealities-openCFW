@@ -104,7 +104,7 @@ def audit() -> dict:
     return {
         "component": "G2 charging-case UART/update protocol",
         "analysis_mode": "offline authenticated-evidence/source/build audit; no hardware, erase, program, bank swap, signing, or flash operation",
-        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
+        "status": "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "software_gap_count": 0,
         "target": "thumbv6m-none-eabi / Cortex-M0+ / Thumb",
         "exports": sorted(EXPORTS),

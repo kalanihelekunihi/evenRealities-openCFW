@@ -1,5 +1,10 @@
 # G2 bootloader guarded-teardown source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete bootloader entry at `[0x0041FA98,0x0041FAD0)` is now replaced
 by maintained clean-room C. It is a first-party G2 compatibility service; no
 upstream identity is claimed.

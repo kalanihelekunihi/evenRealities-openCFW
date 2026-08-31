@@ -597,7 +597,7 @@ STOCK_SHA256 = (
     "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
 )
 PROVIDER_SHA256 = (
-    "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
+    "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad"
 )
 OVERLAY_SHA256 = (
     "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314"
@@ -683,7 +683,7 @@ LITTLEFS_UTIL_ALIGNDOWN_STOCK_SHA256 = (
 LITTLEFS_UTIL_ALIGNUP_STOCK_SHA256 = (
     "18874b0eb5cf5c7bd6f20b2b29f787157294b9e9be16d14ab0d9064d44a97c37"
 )
-PROVIDER_CRC32C_MSB = 0xA9D1F8C3
+PROVIDER_CRC32C_MSB = 0x954C9386
 
 
 def load_builder():
@@ -2257,7 +2257,9 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         ]
         self.assertEqual(
             changed,
-            list(
+            sorted(
+                (set(
+                    list(
                 range(
                     LITTLEFS_UTIL_MAX_OFFSET,
                     LITTLEFS_UTIL_ALIGNDOWN_OFFSET + 6,
@@ -3246,7 +3248,15 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                     MSPI_INTERRUPT_CLEAR_OFFSET + 45,
                     MSPI_INTERRUPT_CLEAR_OFFSET + 48,
                 )
-            ),
+            ))
+                - {30424, 30521}
+                | {30430, 30452, 30484, 30494}
+                | set(range(93220, 93238))
+                | set(range(93239, 93256))
+                | {93257}
+                | set(range(93259, 93268))
+                | set(range(93269, 93272))
+            )),
         )
         utility_stock_expectations = (
             (
@@ -3691,6 +3701,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         allowed.update(range(0x004213D4 - RUN_BASE, 0x004213D8 - RUN_BASE))
         allowed.update(range(0x004213E6 - RUN_BASE, 0x00421548 - RUN_BASE))
         allowed.update(range(0x00421548 - RUN_BASE, 0x0042156E - RUN_BASE))
+        allowed.update(range(0x00426C24 - RUN_BASE, 0x00426C58 - RUN_BASE))
         allowed.update(
             range(
                 EASYLOGGER_STRCPY_OFFSET,
@@ -4028,7 +4039,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             b"\x00" + self.overlay,
         )
         component = self.report["component"]
-        self.assertEqual(component["generated_patch_site_bytes"], 16528)
+        self.assertEqual(component["generated_patch_site_bytes"], 16474)
         self.assertEqual(
             component["source_owned_bytes"] + component["opaque_base_bytes"],
             component["size"] - component["generated_patch_site_bytes"] -
@@ -4042,7 +4053,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         self.assertEqual(component["generated_isolated_alignment_bytes"], 0)
         self.assertEqual(component["generated_relocated_alignment_bytes"], 15)
         self.assertGreater(component["source_owned_bytes"], 0)
-        self.assertEqual(component["source_owned_cave_bytes"], 362)
+        self.assertEqual(component["source_owned_cave_bytes"], 468)
         self.assertLessEqual(
             component["source_owned_in_place_bytes"],
             component["source_owned_bytes"],
@@ -5202,6 +5213,20 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 "00bf00bf00bf00bf00bf00bf",
                 57402,
             ),
+            (
+                "replace_bootloader_clkmgr_hfrc2_uq15_divider_426c24",
+                0x00426C24,
+                0x004176D4,
+                "f0f756bd" + "00bf" * 19,
+                -62804,
+            ),
+            (
+                "replace_bootloader_clkmgr_hfrc_integer_divider_426c4e",
+                0x00426C4E,
+                0x0041772C,
+                "f0f76dbd" + "00bf" * 3,
+                -62758,
+            ),
         )
         self.assertEqual(
             set(sites),
@@ -5319,6 +5344,14 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                     (BOOT_LITTLEFS_SYNC_CAVE, self.report["cave_leaves"][2]),
                     (BOOT_MEMORY_SELECT_COPY_CAVE, self.report["cave_leaves"][3]),
                     (BOOT_MEMORY_SELECT_ODD_CAVE, self.report["cave_leaves"][4]),
+                    (
+                        self.provider[0x76D4:0x772C],
+                        self.report["cave_leaves"][5],
+                    ),
+                    (
+                        self.provider[0x772C:0x773E],
+                        self.report["cave_leaves"][6],
+                    ),
                 ],
             )
 
@@ -5339,6 +5372,14 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                     (BOOT_LITTLEFS_SYNC_CAVE, self.report["cave_leaves"][2]),
                     (BOOT_MEMORY_SELECT_COPY_CAVE, self.report["cave_leaves"][3]),
                     (BOOT_MEMORY_SELECT_ODD_CAVE, self.report["cave_leaves"][4]),
+                    (
+                        self.provider[0x76D4:0x772C],
+                        self.report["cave_leaves"][5],
+                    ),
+                    (
+                        self.provider[0x772C:0x773E],
+                        self.report["cave_leaves"][6],
+                    ),
                 ],
             )
 
@@ -6747,20 +6788,20 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 "final": body_hash,
                 "relocations": [],
             }
-        mspi_source = "1ae615db206b9658a042eff863888d259ee31b4ea2a3511bc1cec3e2b30a031c"
+        mspi_source = "7459bae6e2dc0141de6566b6dd64211ef20a6b298af14512bf93f77a1cf9eb11"
         for name, offset, size, runtime, body_hash in (
             ("open_cfw_bootloader_mspi_enable_41fe28", 10116, 40, 0x00436BFC, "d2c4bcc5e93182f643d4c97f6fe2295851308b0efb33e2a5a5f7434da7cad2b8"),
             ("open_cfw_bootloader_mspi_disable_41fe48", 10156, 32, 0x00436C24, "22eba2a5dc7603d067ed9bb72afe6f491a7b4c4fae06da054e572bc11165aed0"),
         ):
             expected[name] = {"source": mspi_source, "offset": offset, "size": size, "alignment": 4, "padding": 0, "runtime": runtime, "raw": body_hash, "final": body_hash, "relocations": []}
-        mspi_guard_source = "7e8887462129c0cf147126e324ae240c91abf9718bb7bb27fb3390a2b36849da"
+        mspi_guard_source = "e9feb07272231b4150fec04f9d3fb12d7c6ebb226938e4d76257399bbf404869"
         for name, offset, size, runtime, body_hash in (
             ("open_cfw_bootloader_mspi_guard_enter_41ff08", 10396, 36, 0x00436D14, "e900042722fccbebf61515c642ef2f75157022328550eaed47ecafa2465307eb"),
             ("open_cfw_bootloader_mspi_guard_exit_41ff1e", 10432, 32, 0x00436D38, "dfb2fdd918afb3a3133234aa452430ab22ce73839c07e81914fa798ec49b4e40"),
         ):
             expected[name] = {"source": mspi_guard_source, "offset": offset, "size": size, "alignment": 4, "padding": 0, "runtime": runtime, "raw": body_hash, "final": body_hash, "relocations": []}
         expected["open_cfw_bootloader_mspi_xip_config_41ff34"] = {
-            "source": "5f5bea367de55e637c87bc3e5888a7350654692af1499a3bd5b45ace2c3a6d8e",
+            "source": "73e69e3a275065258caed88ba116c6e3c2ad472935dccb480e23d238920e437b",
             "offset": 10464,
             "size": 36,
             "alignment": 4,
@@ -6770,14 +6811,14 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "final": "0cc0ac059e80451afec8ddbad56203612ebc34a9559a549f6c499bd958be87eb",
             "relocations": [],
         }
-        bit_run_source = "4647db644148f4df98454c6018d684a70e52306b0f2cfbbdfd79749fd2f53903"
+        bit_run_source = "78a6b39e5f7a0913c83fa495b7e6ee75264254899f93875a313abd5dba59ee1b"
         for name, offset, size, runtime, body_hash in (
             ("open_cfw_bootloader_longest_ones_run_41ff60", 10500, 16, 0x00436D7C, "a690bd1df07a26fa65416653fee80c088615b3c492786331ee08f1446585ef4d"),
             ("open_cfw_bootloader_longest_ones_center_41ff74", 10516, 126, 0x00436D8C, "d36402e8d02ee3663653477b656cd3ba1b713dc65688373e34f3d20332926390"),
         ):
             expected[name] = {"source": bit_run_source, "offset": offset, "size": size, "alignment": 2, "padding": 0, "runtime": runtime, "raw": body_hash, "final": body_hash, "relocations": []}
         expected["open_cfw_bootloader_mspi_timing_scan_420002"] = {
-            "source": "bbf4ccc39eff32fbf45ef5a880f78eb6fec934394ea888f47140ca7b0c0d4c50",
+            "source": "35403ef68a408bf4e8ab208a7f7ec3fdb4765f9ba454b89f5b1a56db147b2c3c",
             "offset": 10644,
             "size": 420,
             "alignment": 4,
@@ -6791,7 +6832,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ],
         }
         expected["open_cfw_bootloader_mspi_timing_auto_4201ba"] = {
-            "source": "60ef2a425997e8b4e760c0a2c2cf6cc139a336759ea1b400f9e2909cc798c8c8",
+            "source": "bd0a0d9245fcc26114dfdc5be6185898fc7c62c05431c68dc0a0c1dd11caa9dd",
             "offset": 11064,
             "size": 172,
             "alignment": 4,
@@ -6804,7 +6845,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ],
         }
         expected["open_cfw_bootloader_mspi_low_level_init_420254"] = {
-            "source": "e5170727ba0e6fbc412ccc2dc1a845f777a66c1bd10eba3248db041bde31548d",
+            "source": "d6afeff8d32ee5c1f0d511740e111d99cc3e2e21ff9847b66cdf4b87324147d7",
             "offset": 11236,
             "size": 492,
             "alignment": 4,
@@ -6820,7 +6861,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ],
         }
         expected["open_cfw_bootloader_mspi_driver_init_420476"] = {
-            "source": "65a390f2c770079f4255ea489cc02bc0f593674de7688d3fb550f201ebc8785f",
+            "source": "0a0a8fe4c7d9625c91fcc19fbb7aaed83d6470d138741e2887c194b4e6cbe4ad",
             "offset": 11728,
             "size": 204,
             "alignment": 4,
@@ -6837,7 +6878,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ],
         }
         expected["open_cfw_bootloader_mspi_soft_reset_42052a"] = {
-            "source": "ebe83fc0c63dc78e6c165f308dfd331eaf9cdc0a171c036a564f581d55bd3b47",
+            "source": "1e25ba1e07b0b582a9df2bef19325765d0998f1a38a3cc15a21cbcd0ec3b4ef9",
             "offset": 11932,
             "size": 136,
             "alignment": 4,
@@ -6851,7 +6892,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ],
         }
         expected["open_cfw_bootloader_mspi_read_id_42059e"] = {
-            "source": "3e279abf9a149279da6fdb72009884e62224800e7843d487a803e5fa7293e1b6",
+            "source": "d7725f06f393795ffa3cdc07887daf65875047e07959bd757e8984e31fcc18c9",
             "offset": 12068,
             "size": 100,
             "alignment": 4,
@@ -6862,7 +6903,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_read_transfer_4205f4"] = {
-            "source": "d310d632be00ea4c9c136b5e089340d83cecdeaa74be814b5864e9abf592a525",
+            "source": "70d570ee5c9c0c195ddf684fa135e83d470684d9a1298734d00ceee371f6b8c2",
             "offset": 12168,
             "size": 172,
             "alignment": 8,
@@ -6873,7 +6914,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_write_transfer_42069e"] = {
-            "source": "7fa590ec5cd0fbd87feb193c9bdec3becb0a6acea6334555c84683e3565451c1",
+            "source": "4fe291cb0c11c85ffd9c2b3dc97e9d86849f24bd036713c23fbcac464b201a78",
             "offset": 12340,
             "size": 148,
             "alignment": 4,
@@ -6884,7 +6925,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_busy_status_42074e"] = {
-            "source": "361432557372303651f41bb8d3446d1f18f1753914fb8227fd6a4c57355685b8",
+            "source": "ae1061840c16ed7a35ed0814960698459d40bfb533b3b1adc7f21217cf382d93",
             "offset": 12488,
             "size": 88,
             "alignment": 4,
@@ -6895,7 +6936,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_wait_ready_4207a2"] = {
-            "source": "3818159361e949ac31c6c5e78c2f8236015ea2b76b571358efdd3fab789785b0",
+            "source": "08b4a49c305d814c4f5ac43c02facc19e5030897c7755bde0aa5169cbb63e78e",
             "offset": 12576,
             "size": 88,
             "alignment": 4,
@@ -6906,7 +6947,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_wait_ready_default_4207f4"] = {
-            "source": "3818159361e949ac31c6c5e78c2f8236015ea2b76b571358efdd3fab789785b0",
+            "source": "08b4a49c305d814c4f5ac43c02facc19e5030897c7755bde0aa5169cbb63e78e",
             "offset": 12664,
             "size": 12,
             "alignment": 4,
@@ -6917,7 +6958,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_4byte_mode_420800"] = {
-            "source": "1d1282fbfbbfa62aa87a68d323c9fc85faf996ed1c6a56d3967134e4f97f1cc7",
+            "source": "cb927c4771a3b81864b4a05e3cfdc5057f8a918446b47be7a4182384067b30be",
             "offset": 12676,
             "size": 124,
             "alignment": 4,
@@ -6928,7 +6969,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_enter_4byte_mode_420890"] = {
-            "source": "da4425a664e3cfa980878ccf79c6770ad133f1991504bc0524c8d7866b408c9b",
+            "source": "18c03c5d6435d5ea8d0c45851e8a9bd343a54a0ffa808f5506924017d6e1e752",
             "offset": 12800,
             "size": 220,
             "alignment": 4,
@@ -6939,7 +6980,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_write_enable_420984"] = {
-            "source": "a2bb35ee6fce5e016accddfd028cf0152aa6b025b467eb8e5a695bbe09f8ca78",
+            "source": "6c135633cddbc2b9a8d2e4577d4402e9122130d64126291dfe2b0e733565ad93",
             "offset": 13020,
             "size": 72,
             "alignment": 4,
@@ -6950,7 +6991,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_write_disable_4209c4"] = {
-            "source": "a2bb35ee6fce5e016accddfd028cf0152aa6b025b467eb8e5a695bbe09f8ca78",
+            "source": "6c135633cddbc2b9a8d2e4577d4402e9122130d64126291dfe2b0e733565ad93",
             "offset": 13092,
             "size": 72,
             "alignment": 4,
@@ -6961,7 +7002,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_sector_erase_420a08"] = {
-            "source": "d23d511d53de96bd748611c1bea5312687bf6d4338f200030634d5b908fa4ae8",
+            "source": "0d177222fa4ff74a72776ff592189387656180e16305bcaccc1406068a95f71f",
             "offset": 13164,
             "size": 244,
             "alignment": 4,
@@ -6972,7 +7013,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_program_420b0c"] = {
-            "source": "4d562ceaf98995b5cf92e1d8103c6a163f19786eb75be083ad6a778310938169",
+            "source": "e933a079f3ae9632695e56e9f1d31d312da49e75d64a237e1fd63cc842991541",
             "offset": 13408,
             "size": 256,
             "alignment": 4,
@@ -6983,7 +7024,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_quad_enable_420c5c"] = {
-            "source": "698d511d3824f122d555a9705fe9ea9750859dfa1e1da814407add16cd657f4a",
+            "source": "f9551f313271a3dd04368112ce957a71802a8032be5ca1d9efae2bec75cb928b",
             "offset": 13664,
             "size": 364,
             "alignment": 4,
@@ -6994,7 +7035,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         expected["open_cfw_bootloader_mspi_device_reconfigure_420e08"] = {
-            "source": "23ce33f81eacea40350c99427d0156e488b2d28d80a7bb040438fe55f91c2551",
+            "source": "2049bea8dd68e4c037ca8ecc6d148c9b09fbd25a68a08556e2b36c99bc9535b7",
             "offset": 14028,
             "size": 136,
             "alignment": 4,
@@ -7007,7 +7048,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ],
         }
         expected["open_cfw_bootloader_mspi_set_quad_mode_420e8c"] = {
-            "source": "9a94b5d2766ecbbfe5b428779dc34c7a0eb19f4b7e6eeb7edb1cededa9228833",
+            "source": "55b38c99261c56061d1e922402ab9215319610a09d1fb1e37f6e85c7b4892bf3",
             "offset": 14164,
             "size": 152,
             "alignment": 4,
@@ -7022,7 +7063,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ],
         }
         expected["open_cfw_bootloader_mspi_set_serial_mode_420f10"] = {
-            "source": "85f79cccdaa9644e765ab2580b91f75f3dcb5cfcb26125d2878dddc0a37ae361",
+            "source": "eaf1fe7e6541ab1955f40ae9af6b2c10a11450a60f5f5b7efa065073868f641d",
             "offset": 14316,
             "size": 124,
             "alignment": 4,
@@ -7036,7 +7077,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ],
         }
         expected["open_cfw_bootloader_mspi_read_420f70"] = {
-            "source": "9ace6b932c3a183df9ce4a07c06463404a4dd07007a9c4fe55443b26edc00163",
+            "source": "7a86ed8ad2af38d38e239d20eec2c30e5897ba74eae59d2a91b663be3b279710",
             "offset": 14440,
             "size": 152,
             "alignment": 8,
@@ -7052,7 +7093,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ],
         }
         expected["open_cfw_bootloader_check_and_create_directories_4210c8"] = {
-            "source": "0a8b482985fba7d10d39eaf042faa4317c317c7c932bb70665b5f88b479e1a60",
+            "source": "8b572cbbfcff5b3d06dc969b43ebaa570aab3cd7eda00546c76f336f6f23816f",
             "offset": 14592,
             "size": 220,
             "alignment": 4,
@@ -7066,7 +7107,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ],
         }
         expected["open_cfw_littlefs_bootloader_format_4211b0"] = {
-            "source": "1a6372a3c81e895c67326bba005c655fe0d011be306fa3c453c8afbd8600b496",
+            "source": "877623a8f426f1dd0553b48981c8593e3902038638c5f9f817fa516f2a74b318",
             "offset": 14812,
             "size": 108,
             "alignment": 4,
@@ -7080,7 +7121,7 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ],
         }
         expected["open_cfw_bootloader_littlefs_read_4212d8"] = {
-            "source": "05f807e60ece402cf2d4f3d89e50f022813f33e80e96bb065e14c4ba460acbaf",
+            "source": "3f9b9f0b592f0f8e68e18a3180119e1fdef41111d30afce8feed2dad99d95416",
             "offset": 15180,
             "size": 60,
             "alignment": 4,
@@ -7094,8 +7135,8 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             ],
         }
         transport_source = (
-            "23a5180d3de5e45625f8323a226291d9"
-            "f5ced532d7d73a320e57640794161d1c"
+            "a14552ce94a5b82b6aad55cb16b957ae"
+            "0d1d10d4c3a7aa7a16d39424c374e7c7"
         )
         for name, offset, size, runtime, body_hash in (
             ("open_cfw_bootloader_easylogger_driver_output_41b854", 9088, 16, 0x004367F8, "d1cc42fea93ac782c64485bf4d8ae24108ab6b8a7e9b189918395a5f547521a1"),
@@ -7113,8 +7154,8 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
                 "relocations": [],
             }
         boot_services_source = (
-            "99aa433811660dd98b1e927d99fdbdb3"
-            "d2214ad7a88d30ed36803305873cf693"
+            "8aaf9e580ef0b71593aafcc79d404520"
+            "9835e4c4592f874c7bd7413c8357de33"
         )
         for name, offset, size, alignment, runtime, body_hash in (
             ("open_cfw_bootloader_delay_milliseconds_41f9d8", 9224, 16, 4, 0x00436880, "44ebf4e1f372017ceaa6885948b4e02f8dc5ede3c18f547a9d8e1a54e9db33f5"),
@@ -7135,8 +7176,8 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             }
         expected["open_cfw_bootloader_guarded_teardown_41fa98"] = {
             "source": (
-                "ad8f5eba68fce82f9e3d7807f2aed0ef"
-                "207e76fff8840e7497429f9c06e960e9"
+                "3f6a492cc78f4fc360ffc142bc79ba1b"
+                "401a41dc3973c4aaf101e97a32e33c73"
             ),
             "offset": 9320,
             "size": 72,
@@ -7155,8 +7196,8 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         }
         expected["open_cfw_bootloader_platform_setup_41fa50"] = {
             "source": (
-                "5126096f05bd4d66f7148fd564c7defd"
-                "b9b4b49729d358f6a768579fcfe372d1"
+                "c9a9aaae2719d50b5f328df0b250ff1b"
+                "8c30bd7fe76ae689dbbfec1cb3e222c5"
             ),
             "offset": 9392,
             "size": 96,
@@ -7175,8 +7216,8 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         }
         expected["open_cfw_bootloader_pin_groups_41fadc"] = {
             "source": (
-                "2608a97a8a2fc3e8e63e3eeae78dbec8"
-                "1646e4d650b407bbcb9ebae86e9fff86"
+                "39bc85104e1c8835be599056698a8485"
+                "cada26da431de8b0d77e94f1645de61d"
             ),
             "offset": 9488,
             "size": 428,
@@ -7195,8 +7236,8 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         }
         expected["open_cfw_bootloader_allocator_init_41fd70"] = {
             "source": (
-                "53dc0ff1c3c47d2afcb585f6753e4eaa"
-                "a29ae9494c705e0f73ff5929dd487713"
+                "e7bcf90cf7758affc0922d2068ca9a51"
+                "0c8895f7726fdb997f586789c84897ab"
             ),
             "offset": 9916,
             "size": 88,
@@ -7214,8 +7255,8 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             "relocations": [],
         }
         irq_source = (
-            "c1b495b5d4de6ab8045e8e9f225736c"
-            "9d3b0cabbe93d712b4b347675394a377b"
+            "95668964b34c576633534426d55154df"
+            "97334344ac91376bfaa88815988458d9"
         )
         for name, offset, size, runtime, body_hash in (
             ("open_cfw_bootloader_nvic_enable_irq_41fdc0", 10004, 32, 0x00436B8C, "a0b40ca8273aa7d4e30b39a932157c6d1ab613aa5daa0d63cd8460129647975e"),
@@ -7337,8 +7378,8 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
             {
                 "size": 163824,
                 "sha256": (
-                    "d0a97870b861c089e4ac029ba1c7a1c0"
-                    "cc67d6112c3416a5cda657a038c3a8ea"
+                    "efef1a9b039548ab9332651921e8a786"
+                    "4ce8df205bfe22c9ae6e13c0c81cb635"
                 ),
             },
         )

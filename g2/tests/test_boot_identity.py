@@ -209,11 +209,11 @@ class BootIdentityTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "c61ddd0a30dfac196f7147ffb054c29ebbb66637d9de9e57d5466c4979886f7c",
+            "9e87c141cec78c124f82b831f95271771f6c8b65e4bdc57ae94e3744c4752556",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "edf4e44114ea595c8051aa6d54db945d0520720ef960e9dd8e03a00257c780ea",
+            "fd12f6b43bb316e389d605c47edebb46ea1c2050e21b4767c104ae06a15cea1f",
         )
 
 

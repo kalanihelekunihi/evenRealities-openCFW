@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "components/shared/nanopb/runtime_nanopb_dispatch_extension.c"
 HEADER = ROOT / "components/shared/nanopb/runtime_nanopb_dispatch_extension.h"
 HARNESS = ROOT / "tests/fixtures/runtime_nanopb_dispatch_extension_host.c"
-SOURCE_PIN = (3_804, "b4a6620fdc79fdbb3b3891166d6248176b396cf18b7157cd3d300d66ee15de96")
+SOURCE_PIN = (4_499, "610c8d8e64f87f67aeb9bd175800f3b43661a2bbe9f8d557aa76cc5b9e11ee67")
 HEADER_PIN = (1_560, "f6918d0d89b223e9ad33601de800931a73a0c9ad5ac66177ea83c435441c2ec8")
 
 

@@ -1,0 +1,494 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
+"""Prove dual-profile package integration of the CFF scatter component."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import importlib.util
+import json
+import struct
+import sys
+import tempfile
+from pathlib import Path
+from typing import Any
+
+
+G2 = Path(__file__).resolve().parents[1]
+BUILDER = G2 / "components/apollo_main/freetype_cff_scatter/build_component.py"
+CONFIG = G2 / "components/apollo_main/freetype_cff_scatter/overlay.json"
+README = G2 / "components/apollo_main/freetype_cff_scatter/README.md"
+CORE_BUILDER = G2 / "components/apollo_main/core_overlay/build_component.py"
+CORE_CONFIG = G2 / "components/apollo_main/core_overlay/overlay.json"
+OPEN_CFW = G2 / "tools/open_cfw.py"
+BASE_MANIFEST = G2 / "manifests/g2-2.2.6.10-core-source.json"
+MANIFEST = G2 / "tools/manifests/g2-freetype-cff-package-integration.json"
+
+PINS = {
+    BUILDER: (24_637, "4b615fdc2f393dc5c244882c2c663b70338a94b54923aca12f639a7cf59260f9"),
+    CONFIG: (1_661, "145e9f8715509c4b85c87816dababd6b734afcc3cbd128c9c146393cecff2493"),
+    README: (1_298, "493a0423c3282f18242af2753eeeafbc4a468834a70b1327867a82d37e105763"),
+    CORE_BUILDER: (81_667, "44e2e16484ac31c771cb309b9850e63533881b6be6b8b7d168bdab352ebe47e8"),
+    CORE_CONFIG: (5_853_221, "733bc34d7545775ab067eb03c38678889694bc092fc840c64a1ef605b0081212"),
+    OPEN_CFW: (99_007, "2065bc3cefd4390080b15d277906c7e9e3b60ddc8e7e4ee046dab63310cf331a"),
+    BASE_MANIFEST: (3_193_849, "79948ff0c3d234d5f74eac7d627a20588f5bec293a2fed194fe10a44b3ad1831"),
+}
+
+
+class IntegrationError(RuntimeError):
+    """Raised when package, ownership, or atomicity evidence drifts."""
+
+
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise IntegrationError(message)
+
+
+def digest(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def canonical(value: Any) -> str:
+    return digest(json.dumps(
+        value, sort_keys=True, separators=(",", ":")
+    ).encode())
+
+
+def _load(path: Path, name: str) -> Any:
+    specification = importlib.util.spec_from_file_location(name, path)
+    require(specification is not None and specification.loader is not None,
+            f"cannot load dependency: {path}")
+    module = importlib.util.module_from_spec(specification)
+    sys.modules[name] = module
+    specification.loader.exec_module(module)
+    return module
+
+
+def _pin_inputs(overrides: dict[Path, Path] | None = None) -> dict[Path, bytes]:
+    overrides = overrides or {}
+    result: dict[Path, bytes] = {}
+    for expected_path, expected in PINS.items():
+        path = overrides.get(expected_path, expected_path)
+        body = path.read_bytes()
+        require((len(body), digest(body)) == expected,
+                f"package integration input pin drift: {expected_path}")
+        result[expected_path] = body
+    return result
+
+
+def _payloads(package: bytes, manifest: dict[str, Any]) -> dict[str, bytes]:
+    count = struct.unpack_from("<I", package, 8)[0]
+    require(count == len(manifest["components"]), "package entry count drift")
+    result = {}
+    for index, component in enumerate(manifest["components"]):
+        entry_id, offset, size, _crc = struct.unpack_from(
+            "<IIII", package, 0x40 + index * 16
+        )
+        require(entry_id == component["entry_id"] and size >= 128,
+                "package component order drift")
+        result[component["name"]] = package[offset + 128:offset + size]
+    return result
+
+
+def _apollo_component(manifest: dict[str, Any]) -> dict[str, Any]:
+    rows = [item for item in manifest["components"] if item["name"] == "apollo_main"]
+    require(len(rows) == 1, "manifest Apollo-main component count drift")
+    return rows[0]
+
+
+def _new_rows(
+    flash_rows: list[dict[str, Any]], profile: str
+) -> list[dict[str, Any]]:
+    del profile
+    return [
+        row for row in flash_rows
+        if row["region"].startswith("freetype_cff_")
+    ]
+
+
+def _verify_core_route(data: dict[Path, bytes]) -> dict[str, Any]:
+    source = data[CORE_BUILDER].decode("utf-8")
+    require(
+        "cff_builder = _load_cff_scatter_builder()" in source and
+        "cff_report = cff_builder.build(" in source and
+        "base_component=pre_cff_component_path" in source and
+        "final_component = (\n            cff_output" in source,
+        "canonical core CFF post-link invocation drift",
+    )
+    config = json.loads(data[CORE_CONFIG])
+    provider = config.get("post_link_providers", {}).get("freetype_cff")
+    require(
+        isinstance(provider, dict) and
+        provider.get("builder") ==
+        "components/apollo_main/freetype_cff_scatter/build_component.py" and
+        provider.get("config") ==
+        "components/apollo_main/freetype_cff_scatter/overlay.json",
+        "canonical core CFF provider declaration drift",
+    )
+    profiles = {
+        "apple-clang": config["expected"],
+        "linux-clang": config["toolchain_profiles"]["linux-clang"]["expected"],
+    }
+    expected = {
+        "apple-clang": (
+            3_956_468,
+            "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
+        ),
+        "linux-clang": (
+            3_956_468,
+            "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
+        ),
+    }
+    for profile, pins in profiles.items():
+        require(
+            (pins["component_size"], pins["component_sha256"])
+            == expected[profile],
+            f"{profile}: canonical core final CFF component pin drift",
+        )
+    return {
+        "post_link_order": "core -> liblc3 -> product-test -> freetype-cff",
+        "base_argument": "same-build pre-CFF Apollo component",
+        "profiles": {
+            profile: {"component_size": values[0], "component_sha256": values[1]}
+            for profile, values in expected.items()
+        },
+        "atomic_publication": "existing canonical rollback-capable generation",
+    }
+
+
+def _verify_candidate(
+    *, profile: str, base_manifest: dict[str, Any], base_package: bytes,
+    package_path: Path, builder: Any, open_cfw: Any, temporary: Path,
+) -> dict[str, Any]:
+    # The configured package is deliberately the authenticated pre-CFF input,
+    # while ``base_manifest`` is the now-published post-CFF release contract.
+    # The component builder authenticates that old package before mutation.
+    # Parse the other five payloads structurally, then prove the reconstructed
+    # final package against the current provider/package pins below.
+    base_payloads = _payloads(base_package, base_manifest)
+    base_apollo = base_payloads["apollo_main"]
+    component_definition = _apollo_component(base_manifest)
+    output = temporary / profile
+    build_report = builder.build(
+        profile=profile,
+        base_package=package_path,
+        output_dir=output,
+    )
+    candidate_component = (output / "ota_s200_firmware_ota.bin").read_bytes()
+    require(build_report["regions"] is None,
+            f"{profile}: standalone builder unexpectedly rewrote regions")
+    apollo = component_definition
+    component_pins = (
+        open_cfw.profile_pins(apollo["provider"], profile)
+        or apollo["provider"]
+    )
+    require(
+        (len(candidate_component), digest(candidate_component)) ==
+        (component_pins["size"], component_pins["sha256"]),
+        f"{profile}: reconstructed component differs from published pins",
+    )
+    open_cfw.validate_component_payload(apollo, candidate_component)
+    open_cfw.validate_region_partition(apollo, candidate_component, profile)
+    open_cfw.validate_flash_layout(base_manifest)
+
+    payloads = dict(base_payloads)
+    payloads["apollo_main"] = candidate_component
+    candidate_package, entries = open_cfw.assemble_evenota(
+        base_manifest, payloads
+    )
+    open_cfw.validate_evenota_image(candidate_package, base_manifest)
+    package_pins = (
+        open_cfw.profile_pins(base_manifest["package"], profile)
+        or base_manifest["package"]
+    )
+    require(
+        (len(candidate_package), digest(candidate_package)) ==
+        (package_pins["expected_size"], package_pins["expected_sha256"]),
+        f"{profile}: reconstructed package differs from published pins",
+    )
+    open_cfw.validate_release_manifest(
+        base_manifest, toolchain_profile=profile, payloads=payloads
+    )
+    require(len(candidate_package) - len(base_package) ==
+            len(candidate_component) - len(base_apollo),
+            f"{profile}: package/component growth disagreement")
+    require(all(payloads[name] == base_payloads[name]
+                for name in payloads if name != "apollo_main"),
+            f"{profile}: non-Apollo payload changed")
+
+    flash_rows, unresolved, container, artifacts = open_cfw.plan_regions(
+        base_manifest, payloads, profile
+    )
+    require(len(unresolved) == 0,
+            f"{profile}: unresolved-region census changed")
+    new_rows = _new_rows(flash_rows, profile)
+    require(new_rows, f"{profile}: CFF flash rows missing")
+    row_payloads = {
+        row["region"]: artifacts[row["artifact"].removeprefix("regions/")]
+        for row in new_rows
+    }
+    manifest_source = [
+        row for row in new_rows if row["address_status"] == "source_compiled"
+    ]
+    pointer = [row for row in new_rows
+               if row["address_status"] == "generated_source_data_replacement"]
+    require(len(pointer) == 1 and
+            row_payloads[pointer[0]["region"]] == builder.REPLACEMENT_CLASS_BYTES,
+            f"{profile}: class-pointer route row drift")
+    sections = build_report["placement"]["sections"]
+    require(len(sections) == 4, f"{profile}: finalized CFF section count drift")
+    for section in sections:
+        start = section["start"]
+        end = section["end_exclusive"]
+        body = (output / f"{section['name'][1:]}.bin").read_bytes()
+        offset = builder._runtime_offset(start)
+        require(
+            len(body) == section["size"] and
+            candidate_component[offset:offset + len(body)] == body,
+            f"{profile}: finalized CFF section byte replay drift",
+        )
+        covering = [
+            row for row in flash_rows
+            if row.get("target") == "apollo510b_internal_mram" and
+            row.get("address_status") in {
+                "source_compiled", "generated_padding"
+            } and
+            row["target_address"] <= start and row["end_exclusive"] >= end
+        ]
+        require(len(covering) == 1,
+                f"{profile}: finalized CFF section lacks unique plan ownership")
+    # Linux's release plan intentionally coarsens the compiler-dependent
+    # appended source tail, so its tail text/exidx and erased prefix are owned
+    # by that single source-overlay row rather than carrying Apple subregion
+    # names.  Authenticate the exact bytes and bounds independently here.
+    gap_start = builder.RUN_BASE + len(base_apollo) - 0x20
+    gap_end = builder.TAIL_TEXT_START
+    gap = candidate_component[
+        builder._runtime_offset(gap_start):builder._runtime_offset(gap_end)
+    ]
+    require(gap and set(gap) == {0xFF},
+            f"{profile}: generated erased gap drift")
+    covering_gap = [
+        row for row in flash_rows
+        if row.get("target") == "apollo510b_internal_mram" and
+        row["target_address"] <= gap_start and row["end_exclusive"] >= gap_end
+    ]
+    require(len(covering_gap) == 1,
+            f"{profile}: erased CFF gap lacks unique plan ownership")
+    require(len(manifest_source) == (4 if profile == "apple-clang" else 2),
+            f"{profile}: in-place manifest CFF source row drift")
+    require(all(row["end_exclusive"] <= builder.UPDATE_FLAG for row in new_rows) and
+            all(item["end_exclusive"] <= builder.UPDATE_FLAG for item in sections),
+            f"{profile}: CFF row overlaps update flag")
+
+    # The assembler regenerates only entry 6's TOC size/CRC, component-header
+    # size/CRC, and payload.  Entries 1-5 retain exact offsets and bytes.
+    base_entries = []
+    for index in range(6):
+        base_entries.append(struct.unpack_from("<IIII", base_package, 0x40 + index * 16))
+    for index, entry in enumerate(entries):
+        if index < 5:
+            require((entry.entry_id, entry.offset, entry.entry_size, entry.checksum)
+                    == base_entries[index],
+                    f"{profile}: earlier package entry receipt changed")
+    final_entry = entries[-1]
+    require(final_entry.entry_id == 6 and
+            final_entry.payload_size == len(candidate_component) and
+            final_entry.checksum == open_cfw.crc32c_msb(candidate_component),
+            f"{profile}: final entry-6 receipt drift")
+
+    manifest_id = {
+        "sha256": open_cfw.effective_manifest_sha256(base_manifest),
+        "sources": [{
+            "path": BASE_MANIFEST.relative_to(G2 / "manifests").as_posix(),
+            "size": BASE_MANIFEST.stat().st_size,
+            "sha256": digest(BASE_MANIFEST.read_bytes()),
+        }],
+    }
+    package_sha = digest(candidate_package)
+    flash_plan = open_cfw.make_flash_plan(
+        manifest=base_manifest, manifest_id=manifest_id,
+        toolchain_profile=profile,
+        package_artifact=f"package/{base_manifest['package']['output_name']}",
+        package_sha256=package_sha, flash_regions=flash_rows,
+        unresolved=unresolved, container=container,
+    )
+    package_report = open_cfw.make_build_report(
+        manifest=base_manifest, manifest_path=BASE_MANIFEST,
+        project_root=G2, manifest_id=manifest_id,
+        toolchain_profile=profile, payloads=payloads,
+        package_artifact=f"package/{base_manifest['package']['output_name']}",
+        image=candidate_package,
+        expected_size=package_pins["expected_size"],
+        expected_sha256=package_pins["expected_sha256"], entries=entries,
+        flash_regions=flash_rows, unresolved=unresolved, container=container,
+    )
+    require(package_report["package"]["byte_identical_to_reference"] is True,
+            f"{profile}: published package receipt check failed")
+    require(flash_plan["package_sha256"] == package_sha,
+            f"{profile}: flash-plan package binding drift")
+
+    return {
+        "base_package": {
+            "path": package_path.relative_to(G2).as_posix(),
+            "size": len(base_package), "sha256": digest(base_package),
+        },
+        "component": build_report["component"],
+        "component_receipt_sha256": build_report["receipt_sha256"],
+        "package": {
+            "size": len(candidate_package), "sha256": package_sha,
+            "growth_bytes": len(candidate_package) - len(base_package),
+            "entry_6_payload_size": final_entry.payload_size,
+            "entry_6_entry_size": final_entry.entry_size,
+            "entry_6_crc32c_msb": f"0x{final_entry.checksum:08X}",
+            "entry_6_package_offset": final_entry.offset,
+        },
+        "atomicity": {
+            "changed_package_entries": [6],
+            "unchanged_entry_count": 5,
+            "all_runtime_mutations_in_entry_6": True,
+            "cross_entry_mutations": 0,
+            "cross_entry_atomicity_required": False,
+            "toc_and_component_headers_regenerated": True,
+        },
+        "ownership": {
+            "flash_plan_sha256": canonical(flash_plan),
+            "flash_rows": len(flash_rows),
+            "unresolved_rows": len(unresolved),
+            "container_rows": len(container),
+            "cff_rows": len(sections) + len(pointer) + 1,
+            "cff_source_rows": len(sections),
+            "cff_source_bytes": sum(item["size"] for item in sections),
+            "cff_generated_pointer_rows": len(pointer),
+            "cff_generated_pointer_bytes": sum(row["size"] for row in pointer),
+            "cff_erased_gap_rows": 1,
+            "cff_erased_gap_bytes": len(gap),
+            "highest_cff_end_exclusive": f"0x{max(item['end_exclusive'] for item in sections):08X}",
+            "update_flag": f"0x{builder.UPDATE_FLAG:08X}",
+            "collision_or_protected_overlap_count": 0,
+            "unused_scattered_table_pool_consumed": 0,
+        },
+        "reproducibility": {
+            "component_matches_pinned_profile_output": True,
+            "package_assembly_deterministic": True,
+            "zero_final_relocations": build_report["scatter_manifest"]["relocations"]["total"] == 0,
+            "zero_undefined_symbols": build_report["scatter_manifest"]["undefined_symbols"] == [],
+        },
+    }
+
+
+def validate_boundary(report: dict[str, Any]) -> None:
+    require(report["routing"] == {
+        "component_builder_integration_present": True,
+        "canonical_component_route_enabled": True,
+        "dual_profile_package_candidate_emitted_in_verification": True,
+        "canonical_package_manifest_route_enabled": True,
+        "software_production_route_permitted": True,
+        "hardware_validation_performed": False,
+    }, "CFF package route boundary drift")
+    expected = {
+        "apple-clang": (20_416, 66_684, 70_800, 4_749_540),
+        "linux-clang": (20_356, 274_352, 278_468, 4_749_524),
+    }
+    for profile, row in report["profiles"].items():
+        require(row["atomicity"]["changed_package_entries"] == [6] and
+                row["ownership"]["collision_or_protected_overlap_count"] == 0 and
+                row["ownership"]["unused_scattered_table_pool_consumed"] == 0 and
+                row["reproducibility"]["zero_final_relocations"] is True and
+                row["reproducibility"]["zero_undefined_symbols"] is True,
+                f"{profile}: final package integration boundary drift")
+        require(
+            (
+                row["ownership"]["cff_source_bytes"],
+                row["ownership"]["cff_erased_gap_bytes"],
+                row["component"]["growth_bytes"],
+                row["package"]["size"],
+            ) == expected[profile],
+            f"{profile}: exact CFF region/accounting receipt drift",
+        )
+
+
+def analyze(*, input_overrides: dict[Path, Path] | None = None) -> dict[str, Any]:
+    data = _pin_inputs(input_overrides)
+    core_route = _verify_core_route(data)
+    builder = _load(BUILDER, "g2_cff_package_builder")
+    open_cfw = _load(OPEN_CFW, "g2_cff_package_open_cfw")
+    config = json.loads(data[CONFIG])
+    base_manifest = open_cfw.load_manifest(BASE_MANIFEST)
+    with tempfile.TemporaryDirectory(prefix="opencfw-cff-package-") as raw:
+        temporary = Path(raw)
+        profiles = {}
+        for profile in ("apple-clang", "linux-clang"):
+            package_path = G2 / config["profiles"][profile]["base_package"]["path"]
+            package = package_path.read_bytes()
+            profiles[profile] = _verify_candidate(
+                profile=profile, base_manifest=base_manifest,
+                base_package=package, package_path=package_path,
+                builder=builder, open_cfw=open_cfw, temporary=temporary,
+            )
+    result: dict[str, Any] = {
+        "schema_version": 1,
+        "status": "g2-freetype-cff-package-builder-and-canonical-route-verified",
+        "analysis_mode": (
+            "software-only dual-profile package assembly, component validation, "
+            "CRC regeneration, and flash-plan ownership proof"
+        ),
+        "inputs": {
+            path.relative_to(G2).as_posix(): {
+                "size": expected[0], "sha256": expected[1]
+            } for path, expected in PINS.items()
+        },
+        "profiles": profiles,
+        "canonical_component_route": core_route,
+        "routing": {
+            "component_builder_integration_present": True,
+            "canonical_component_route_enabled": True,
+            "dual_profile_package_candidate_emitted_in_verification": True,
+            "canonical_package_manifest_route_enabled": True,
+            "software_production_route_permitted": True,
+            "hardware_validation_performed": False,
+        },
+        "remaining_canonical_changes": [],
+        "evidence_bounds": {
+            "compiler_byte_identity_claimed": False,
+            "font_payload_authenticated": False,
+            "stack_or_wcet_qualified": False,
+            "hardware_validation_performed": False,
+        },
+    }
+    result["integration_sha256"] = canonical({
+        "profiles": profiles,
+        "canonical_component_route": core_route,
+        "routing": result["routing"],
+        "remaining_canonical_changes": result["remaining_canonical_changes"],
+    })
+    validate_boundary(result)
+    return result
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--pretty", action="store_true")
+    parser.add_argument("--write-manifest", action="store_true")
+    parser.add_argument("--check-manifest", action="store_true")
+    args = parser.parse_args()
+    try:
+        report = analyze()
+        rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
+        if args.write_manifest:
+            MANIFEST.write_text(rendered, encoding="utf-8")
+        if args.check_manifest:
+            require(MANIFEST.is_file() and
+                    json.loads(MANIFEST.read_text(encoding="utf-8")) == report,
+                    "checked CFF package integration manifest drift")
+    except (IntegrationError, OSError, KeyError, ValueError) as error:
+        print(f"G2 FreeType CFF package integration failed: {error}", file=sys.stderr)
+        return 1
+    print(rendered if args.pretty else json.dumps(report, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -16,7 +16,7 @@ EXPECTED_SYMBOLS = {
     "open_cfw_kvdb_time_load_and_migrate",
     "open_cfw_kvdb_write_time",
 }
-SOURCE_SHA256 = "1643ea64328e021ae2176b55513df76d79ab7c6e0f7eabaecf982b42a211d13c"
+SOURCE_SHA256 = "ecac304e735ee3ed65a903d51053fbba57411357b56952a1bdba16aa94282ccb"
 
 
 class KvdbTimeCandidateTests(unittest.TestCase):

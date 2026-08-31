@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ctypes
+import copy
 import hashlib
 import importlib.util
 import itertools
@@ -176,19 +177,21 @@ LEAF_CONTRACTS = {
 PROFILE_PINS = {
     "apple-clang": {
         "compiler": "/usr/bin/clang",
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
         "placements": {
-            "fill": 183464,
-            "state_initialize": 183672,
-            "register_groups": 183700,
-            "process_command": 183796,
-            "consume_byte": 183864,
-            "poll_once": 183960,
-            "task": 184020,
+            "fill": 123616,
+            "state_initialize": 123824,
+            "register_groups": 123852,
+            "process_command": 123948,
+            "consume_byte": 124016,
+            "poll_once": 124112,
+            "task": 124172,
         },
-        "overlay": (429058, "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"),
-        "component": (3952454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"),
-        "package": (4745526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"),
+        "overlay": (360578, "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"),
+        "component": (3883974, "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"),
+        "core_overlay": (360578, "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"),
+        "core_component": (3883974, "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"),
+        "package": (4677046, "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"),
         "patch_hex": "71f216b9",
         "patch_sha256": "6d870ddaa7df559599d4977303a6d74259f0c6b27fc79c71ace7e07747a1cfc5",
         "relocated": {
@@ -224,17 +227,19 @@ PROFILE_PINS = {
         "compiler": "/home/linuxbrew/.linuxbrew/bin/clang",
         "version": "Homebrew clang version 22.1.8",
         "placements": {
-            "fill": 185188,
-            "state_initialize": 185396,
-            "register_groups": 185424,
-            "process_command": 185520,
-            "consume_byte": 185588,
-            "poll_once": 185684,
-            "task": 185744,
+            "fill": 125436,
+            "state_initialize": 125644,
+            "register_groups": 125672,
+            "process_command": 125768,
+            "consume_byte": 125836,
+            "poll_once": 125932,
+            "task": 125992,
         },
-        "overlay": (212664, "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18"),
-        "component": (3736060, "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97"),
-        "package": (4529116, "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"),
+        "overlay": (152912, "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20"),
+        "component": (3676308, "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7"),
+        "core_overlay": (145314, "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19"),
+        "core_component": (3668710, "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8"),
+        "package": (4469364, "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"),
         "patch_hex": "71f2a4bc",
         "patch_sha256": "a500c15f33dba7ea1c1b02c262fcf2d993336459df2d669deecc3387d769b27b",
         "relocated": {
@@ -269,15 +274,15 @@ PROFILE_PINS = {
 }
 
 LOCAL_PINS = {
-    HEADER: (5130, "9e95cd8dc897c4e297ed0d40cba41b67d6ea5c3b074e38936a8b8ee6221f8cb9"),
-    SOURCES["fill"]: (647, "ab462c7907249429fb42b1ec6a4bd10dfc45b3d229b00ea2566030d34f3f36eb"),
-    SOURCES["state_initialize"]: (729, "a732d6b330ba38b24f1d087e39ac04878151630fcd13a9d0535780330c6d6946"),
-    SOURCES["register_groups"]: (1733, "f450a90f191e7c38bb925ed7afe151f4a697a4ac6b46a93faa7e87135d1615d1"),
-    SOURCES["process_command"]: (1086, "56ce2bedc38adbc159cce94b5819b63e76cd8734783a91aafc264d37386daa7e"),
-    SOURCES["consume_byte"]: (1257, "fb0901dbea93c350c7d2d7428b02a0353c887299e881a91ea2bb4cae39d8bffd"),
-    SOURCES["poll_once"]: (1388, "2a91f15ef412cdc2bb8496302497fb74a7b656cf2be3eec5832fdc409aa1a125"),
-    SOURCES["task"]: (1472, "aff16ec008b73a0f732731220e1ec507220a283e2c4170bd6b100acefeeb5dae"),
-    FIXTURE: (740, "31fc702b3a2bdad5b3c7ca8f68ba108196f17b2be96e683b445107057faa4d69"),
+    HEADER: (5121, "5d92042a2c5d4791eeebc7c8e0206e9c82743485f52c128f8abd5be214af31ad"),
+    SOURCES["fill"]: (638, "82cd8b6ba2c8fd2e87e272c59285117b88312b499ae9717b5decea63f5cb89b1"),
+    SOURCES["state_initialize"]: (720, "ff5feea2bd2ca6331e66a90184592f7e822ce3f1f47a400dec155c42e6f21465"),
+    SOURCES["register_groups"]: (1724, "601777800318d7af80631fc7abdcdb309d8634a900247756d30d522482e7e69a"),
+    SOURCES["process_command"]: (1077, "9b32f5ece4fb6a77ddc098eefde814653ff000dc7e81469954ebee86abb09208"),
+    SOURCES["consume_byte"]: (1248, "b8cbebef42fb07744572434dfbbd8323bdd6b678b6040a923792fffba39e24db"),
+    SOURCES["poll_once"]: (1379, "1c3923355dd65cfaf5c40fe178ff2431bc646d95e5aed41c20ced59241593da2"),
+    SOURCES["task"]: (1463, "5d51552cc99f8ca3d94fa49cb88267830ea6282c5a863e903f1174265d5f0b17"),
+    FIXTURE: (731, "53ff8040ed03a9c32fbbec782e2d6e0a9b11606f918b236c37d147bf4b436eae"),
     candidate_contract.FIXTURE: candidate_contract.LOCAL_PINS[candidate_contract.FIXTURE],
 }
 
@@ -851,20 +856,29 @@ class RuntimeFreeRTOSCLIConsoleTaskProductionTests(unittest.TestCase):
         )
 
         output = Path(self.temporary.name) / "registered-overlay"
+        stage_config = copy.deepcopy(config)
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = Path(self.temporary.name) / "core-stage-overlay.json"
+        stage_config_path.write_text(
+            json.dumps(stage_config, indent=2) + "\n", encoding="utf-8"
+        )
         report = apollo_overlay.build(
             root=ROOT,
-            config_path=OVERLAY,
+            config_path=stage_config_path,
             output_dir=output,
             clang=self.clang,
             toolchain_profile=self.profile,
         )
         self.assertEqual(
             (report["overlay"]["size"], report["overlay"]["sha256"]),
-            self.pins["overlay"],
+            self.pins["core_overlay"],
         )
         self.assertEqual(
             (report["component"]["size"], report["component"]["sha256"]),
-            self.pins["component"],
+            self.pins["core_component"],
         )
         report_leaves = {
             item["extraction"]["function"]: item

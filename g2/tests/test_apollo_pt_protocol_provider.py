@@ -29,6 +29,8 @@ CORE_SPEC = importlib.util.spec_from_file_location(
 assert CORE_SPEC is not None and CORE_SPEC.loader is not None
 CORE_BUILDER = importlib.util.module_from_spec(CORE_SPEC)
 CORE_SPEC.loader.exec_module(CORE_BUILDER)
+from apollo_overlay import encode_thumb_branch  # noqa: E402
+
 CORE_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
 CONFIG = json.loads(CORE_CONFIG.read_text(encoding="utf-8"))
 OFFICIAL_EXPECTED = {
@@ -45,6 +47,40 @@ class ApolloPtProtocolProviderTest(unittest.TestCase):
         return BUILDER.build(
             base_path=base, output_dir=output, clang="/usr/bin/clang",
             **arguments)
+
+    @staticmethod
+    def routed_working_payload() -> tuple[bytes, int]:
+        payload = bytearray(OFFICIAL.read_bytes())
+        donor_size = len(payload)
+        leaf_runtime = (
+            BUILDER.RUN_BASE + donor_size
+            + BUILDER.SOURCE_UART_LEAF_EXPECTED["offset"]
+        )
+        leaf_offset = leaf_runtime - BUILDER.RUN_BASE
+        leaf_end = leaf_offset + BUILDER.SOURCE_UART_LEAF_EXPECTED["size"]
+        payload.extend(b"\0" * (leaf_end - len(payload)))
+        for address, _target, route in BUILDER.LEGACY_INGRESS:
+            if route == "source_uart_relocation":
+                offset = address - BUILDER.RUN_BASE
+                payload[offset:offset + 4] = BUILDER.THUMB_NOP_PAIR
+        entry_offset = BUILDER.SOURCE_UART_ENTRY_REDIRECT - BUILDER.RUN_BASE
+        payload[entry_offset:entry_offset + 4] = (
+            encode_thumb_branch(
+                BUILDER.SOURCE_UART_ENTRY_REDIRECT, leaf_runtime, link=False
+            )
+        )
+        for _symbol, _kind, target, relocation_offset, _type_id in (
+                BUILDER.SOURCE_UART_ROUTE_REQUIREMENTS):
+            address = leaf_runtime + relocation_offset
+            offset = address - BUILDER.RUN_BASE
+            payload[offset:offset + 4] = encode_thumb_branch(
+                address, target, link=True
+            )
+        flags = struct.unpack_from("<I", payload, 0)[0] >> 24
+        struct.pack_into("<I", payload, 0, flags << 24 | len(payload))
+        struct.pack_into("<I", payload, 4,
+                         zlib.crc32(payload[8:]) & 0xFFFFFFFF)
+        return bytes(payload), leaf_runtime
 
     def test_complete_provider_is_source_routed_and_in_place(self) -> None:
         with tempfile.TemporaryDirectory(prefix="g2-pt-provider-test-") as name:
@@ -98,6 +134,49 @@ class ApolloPtProtocolProviderTest(unittest.TestCase):
             self.assertEqual(route["target_thumb_pointer"],
                              route["target_runtime_address"] | 1)
 
+    def test_mixed_provider_license_census_is_exact_and_fail_closed(self) -> None:
+        config = json.loads(CORE_CONFIG.read_text(encoding="utf-8"))
+        records = BUILDER._source_license_records()
+        report = {
+            "source": {
+                "license": BUILDER.AGGREGATE_LICENSE,
+                "files": records,
+            }
+        }
+        CORE_BUILDER._verify_pt_provider_license_contract(config, report)
+        self.assertEqual(BUILDER.AGGREGATE_LICENSE, "MIT AND Apache-2.0")
+        self.assertEqual(len(records), 29)
+        self.assertEqual(
+            {license_id: sum(row["license"] == license_id for row in records)
+             for license_id in ("MIT", "Apache-2.0")},
+            {"MIT": 28, "Apache-2.0": 1},
+        )
+        self.assertEqual(
+            {row["path"] for row in records
+             if row["license"] == "Apache-2.0"},
+            {"components/apollo_main/core_overlay/pt_protocol_lc3_setup.c"},
+        )
+
+        mutations = []
+        changed = json.loads(json.dumps(report))
+        changed["source"]["license"] = "MIT"
+        mutations.append(changed)
+        changed = json.loads(json.dumps(report))
+        changed["source"]["files"][0]["license"] = "Apache-2.0"
+        mutations.append(changed)
+        changed = json.loads(json.dumps(report))
+        changed["source"]["files"][:2] = reversed(
+            changed["source"]["files"][:2]
+        )
+        mutations.append(changed)
+        for index, changed in enumerate(mutations):
+            with self.subTest(mutation=index), self.assertRaises(
+                CORE_BUILDER.BuildError
+            ):
+                CORE_BUILDER._verify_pt_provider_license_contract(
+                    config, changed
+                )
+
     def test_tampered_interval_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory(prefix="g2-pt-tamper-") as name:
             temporary = Path(name)
@@ -110,6 +189,47 @@ class ApolloPtProtocolProviderTest(unittest.TestCase):
             with self.assertRaisesRegex(BUILDER.BuildError,
                                         "stock interval changed"):
                 self.build(base, temporary / "output")
+
+    def test_provider_input_rejects_mismatched_nested_length(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="g2-pt-length-") as name:
+            temporary = Path(name)
+            payload = bytearray(OFFICIAL.read_bytes())
+            header = struct.unpack_from("<I", payload, 0)[0]
+            struct.pack_into(
+                "<I", payload, 0,
+                header & 0xFF000000 | ((len(payload) + 1) & 0x00FFFFFF),
+            )
+            base = temporary / "bad-length.bin"
+            base.write_bytes(payload)
+            with self.assertRaisesRegex(BUILDER.BuildError, "OTA length"):
+                self.build(
+                    base, temporary / "output",
+                    base_expected={
+                        "size": len(payload),
+                        "sha256": hashlib.sha256(payload).hexdigest(),
+                    },
+                )
+
+    def test_authenticated_donor_rejects_mismatched_nested_length(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="g2-pt-donor-length-") as name:
+            temporary = Path(name)
+            donor = bytearray(OFFICIAL.read_bytes())
+            header = struct.unpack_from("<I", donor, 0)[0]
+            struct.pack_into(
+                "<I", donor, 0,
+                header & 0xFF000000 | ((len(donor) + 1) & 0x00FFFFFF),
+            )
+            donor_path = temporary / "bad-donor-length.bin"
+            donor_path.write_bytes(donor)
+            with self.assertRaisesRegex(BUILDER.BuildError, "OTA length"):
+                self.build(
+                    OFFICIAL, temporary / "output",
+                    ingress_authentication_base_path=donor_path,
+                    ingress_authentication_base_expected={
+                        "size": len(donor),
+                        "sha256": hashlib.sha256(donor).hexdigest(),
+                    },
+                )
 
     def test_tampered_physical_ingress_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory(prefix="g2-pt-ingress-") as name:
@@ -156,17 +276,10 @@ class ApolloPtProtocolProviderTest(unittest.TestCase):
             ],
         }
 
-    def test_routed_uart_ingress_uses_authenticated_donor_and_receipt(self) -> None:
+    def test_routed_uart_ingress_authenticates_active_appended_calls(self) -> None:
         with tempfile.TemporaryDirectory(prefix="g2-pt-routed-") as name:
             temporary = Path(name)
-            payload = bytearray(OFFICIAL.read_bytes())
-            thumb_nop_pair = struct.pack("<HH", 0xBF00, 0xBF00)
-            for address, _target, route in BUILDER.LEGACY_INGRESS:
-                if route == "source_uart_relocation":
-                    offset = address - BUILDER.RUN_BASE
-                    payload[offset:offset + 4] = thumb_nop_pair
-            struct.pack_into(
-                "<I", payload, 4, zlib.crc32(payload[8:]) & 0xFFFFFFFF)
+            payload, leaf_runtime = self.routed_working_payload()
             working = temporary / "routed.bin"
             working.write_bytes(payload)
             report = self.build(
@@ -186,6 +299,38 @@ class ApolloPtProtocolProviderTest(unittest.TestCase):
             sum(site["route"] == "source_uart_relocation"
                 for site in report["ingress_sites"]),
             2,
+        )
+        routed = [
+            site for site in report["ingress_sites"]
+            if site["route"] == "source_uart_relocation"
+        ]
+        expected_addresses = [
+            leaf_runtime + relocation_offset
+            for _symbol, _kind, _target, relocation_offset, _type_id
+            in BUILDER.SOURCE_UART_ROUTE_REQUIREMENTS
+        ]
+        self.assertEqual(
+            [site["runtime_address"] for site in routed], expected_addresses
+        )
+        for site in routed:
+            offset = site["runtime_address"] - BUILDER.RUN_BASE
+            encoded = payload[offset:offset + 4]
+            self.assertEqual(
+                site["authenticated_sha256"],
+                hashlib.sha256(encoded).hexdigest(),
+            )
+            self.assertEqual(
+                BUILDER._decode_thumb_bl(site["runtime_address"], encoded),
+                site["target_address"],
+            )
+        entry_offset = BUILDER.SOURCE_UART_ENTRY_REDIRECT - BUILDER.RUN_BASE
+        self.assertEqual(
+            BUILDER._decode_thumb_branch(
+                BUILDER.SOURCE_UART_ENTRY_REDIRECT,
+                payload[entry_offset:entry_offset + 4],
+                link=False,
+            ),
+            leaf_runtime,
         )
 
     def test_routed_uart_ingress_requires_exact_donor_authentication(self) -> None:
@@ -223,6 +368,38 @@ class ApolloPtProtocolProviderTest(unittest.TestCase):
                     OFFICIAL, Path(name), source_uart_routed=True,
                     source_uart_route_receipt=receipt,
                 )
+
+    def test_route_receipt_rejects_noncanonical_shapes_and_types(self) -> None:
+        mutations = []
+        extra = self.route_receipt()
+        extra["extra"] = 1
+        mutations.append(extra)
+        nested_extra = self.route_receipt()
+        nested_extra["stage_overlay"]["extra"] = 1
+        mutations.append(nested_extra)
+        numeric_string = self.route_receipt()
+        numeric_string["relocations"][0]["offset"] = "88"
+        mutations.append(numeric_string)
+        boolean_integer = self.route_receipt()
+        boolean_integer["relocations"][0]["type_id"] = True
+        mutations.append(boolean_integer)
+        ignored_scalar = self.route_receipt()
+        ignored_scalar["relocations"].append("ignored")
+        mutations.append(ignored_scalar)
+        for index, receipt in enumerate(mutations):
+            with self.subTest(index=index), self.assertRaisesRegex(
+                    BUILDER.BuildError, "fields changed|relocation receipt"):
+                BUILDER._validate_source_uart_route_receipt(
+                    receipt, profile="apple-clang", routed=True
+                )
+        with self.assertRaisesRegex(BUILDER.BuildError, "must be boolean"):
+            BUILDER._validate_source_uart_route_receipt(
+                self.route_receipt(), profile="apple-clang", routed=1
+            )
+        with self.assertRaisesRegex(BUILDER.BuildError, "route/profile"):
+            BUILDER._validate_source_uart_route_receipt(
+                self.route_receipt(), profile="linux-clang", routed=True
+            )
 
     def test_core_stage_route_receipt_is_profile_exact(self) -> None:
         leaf = next(
@@ -293,16 +470,185 @@ class ApolloPtProtocolProviderTest(unittest.TestCase):
         BUILDER._validate_source_uart_route_receipt(
             receipt, profile="linux-clang", routed=False)
 
-    def test_routed_receipt_accepts_donor_identical_working_sites(self) -> None:
-        with tempfile.TemporaryDirectory(prefix="g2-pt-route-identical-") as name:
+    def test_routed_ingress_rejects_missing_active_appended_leaf(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="g2-pt-route-missing-") as name:
+            with self.assertRaisesRegex(
+                    BUILDER.BuildError, "retired PT source-UART ingress"):
+                self.build(
+                    OFFICIAL, Path(name), source_uart_routed=True,
+                    source_uart_route_receipt=self.route_receipt(),
+                )
+
+    def test_routed_ingress_rejects_tampered_active_calls(self) -> None:
+        for relocation_index in range(2):
+            with self.subTest(relocation_index=relocation_index), \
+                    tempfile.TemporaryDirectory(
+                        prefix="g2-pt-route-active-tamper-") as name:
+                temporary = Path(name)
+                payload, leaf_runtime = self.routed_working_payload()
+                changed = bytearray(payload)
+                relocation_offset = BUILDER.SOURCE_UART_ROUTE_REQUIREMENTS[
+                    relocation_index
+                ][3]
+                changed[leaf_runtime - BUILDER.RUN_BASE + relocation_offset] ^= 1
+                struct.pack_into(
+                    "<I", changed, 4, zlib.crc32(changed[8:]) & 0xFFFFFFFF
+                )
+                working = temporary / "tampered-active.bin"
+                working.write_bytes(changed)
+                with self.assertRaisesRegex(
+                        BUILDER.BuildError, "authenticated PT ingress branch"):
+                    self.build(
+                        working, temporary / "output",
+                        base_expected={
+                            "size": len(changed),
+                            "sha256": hashlib.sha256(changed).hexdigest(),
+                        },
+                        source_uart_routed=True,
+                        source_uart_route_receipt=self.route_receipt(),
+                    )
+
+    def test_routed_ingress_rejects_valid_bl_to_wrong_target(self) -> None:
+        with tempfile.TemporaryDirectory(
+                prefix="g2-pt-route-wrong-target-") as name:
+            temporary = Path(name)
+            payload, leaf_runtime = self.routed_working_payload()
+            changed = bytearray(payload)
+            _symbol, _kind, target, relocation_offset, _type_id = (
+                BUILDER.SOURCE_UART_ROUTE_REQUIREMENTS[0]
+            )
+            address = leaf_runtime + relocation_offset
+            offset = address - BUILDER.RUN_BASE
+            changed[offset:offset + 4] = encode_thumb_branch(
+                address, target + 2, link=True
+            )
+            struct.pack_into(
+                "<I", changed, 4, zlib.crc32(changed[8:]) & 0xFFFFFFFF
+            )
+            working = temporary / "wrong-target.bin"
+            working.write_bytes(changed)
+            with self.assertRaisesRegex(
+                    BUILDER.BuildError, "authenticated PT ingress branch"):
+                self.build(
+                    working, temporary / "output",
+                    base_expected={
+                        "size": len(changed),
+                        "sha256": hashlib.sha256(changed).hexdigest(),
+                    },
+                    source_uart_routed=True,
+                    source_uart_route_receipt=self.route_receipt(),
+                )
+
+    def test_routed_ingress_rejects_retired_non_nop_and_entry_drift(self) -> None:
+        for role in ("retired_0", "retired_1", "entry"):
+            with self.subTest(role=role), tempfile.TemporaryDirectory(
+                    prefix="g2-pt-route-structure-tamper-") as name:
+                temporary = Path(name)
+                payload, _leaf_runtime = self.routed_working_payload()
+                changed = bytearray(payload)
+                address = (
+                    BUILDER.LEGACY_INGRESS[1 + int(role[-1])][0]
+                    if role.startswith("retired") else
+                    BUILDER.SOURCE_UART_ENTRY_REDIRECT
+                )
+                if role == "entry":
+                    changed[
+                        address - BUILDER.RUN_BASE:address - BUILDER.RUN_BASE + 4
+                    ] = encode_thumb_branch(
+                        address, _leaf_runtime + 2, link=False
+                    )
+                else:
+                    changed[address - BUILDER.RUN_BASE] ^= 1
+                struct.pack_into(
+                    "<I", changed, 4, zlib.crc32(changed[8:]) & 0xFFFFFFFF
+                )
+                working = temporary / "tampered-structure.bin"
+                working.write_bytes(changed)
+                message = (
+                    "retired PT source-UART ingress"
+                    if role.startswith("retired")
+                    else "entry redirect differs"
+                )
+                with self.assertRaisesRegex(BUILDER.BuildError, message):
+                    self.build(
+                        working, temporary / "output",
+                        base_expected={
+                            "size": len(changed),
+                            "sha256": hashlib.sha256(changed).hexdigest(),
+                        },
+                        source_uart_routed=True,
+                        source_uart_route_receipt=self.route_receipt(),
+                    )
+
+    def test_routed_ingress_rejects_truncated_appended_leaf(self) -> None:
+        with tempfile.TemporaryDirectory(
+                prefix="g2-pt-route-truncated-") as name:
+            temporary = Path(name)
+            payload, leaf_runtime = self.routed_working_payload()
+            leaf_end = (
+                leaf_runtime - BUILDER.RUN_BASE
+                + BUILDER.SOURCE_UART_LEAF_EXPECTED["size"]
+            )
+            changed = bytearray(payload[:leaf_end - 1])
+            flags = struct.unpack_from("<I", changed, 0)[0] >> 24
+            struct.pack_into("<I", changed, 0, flags << 24 | len(changed))
+            struct.pack_into(
+                "<I", changed, 4, zlib.crc32(changed[8:]) & 0xFFFFFFFF
+            )
+            working = temporary / "truncated-leaf.bin"
+            working.write_bytes(changed)
+            with self.assertRaisesRegex(
+                    BUILDER.BuildError, "appended leaf.*outside"):
+                self.build(
+                    working, temporary / "output",
+                    base_expected={
+                        "size": len(changed),
+                        "sha256": hashlib.sha256(changed).hexdigest(),
+                    },
+                    source_uart_routed=True,
+                    source_uart_route_receipt=self.route_receipt(),
+                )
+
+    def test_linux_direct_ingress_remains_at_fixed_donor_sites(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="g2-pt-linux-ingress-") as name:
             report = self.build(
-                OFFICIAL, Path(name), source_uart_routed=True,
-                source_uart_route_receipt=self.route_receipt(),
+                OFFICIAL, Path(name), profile="linux-clang",
+                source_uart_routed=False,
+                source_uart_route_receipt=None,
             )
         self.assertEqual(
-            report["source_uart_route_receipt"]["mode"],
-            "source_overlay_relocation",
+            [site["runtime_address"] for site in report["ingress_sites"]],
+            [item[0] for item in BUILDER.LEGACY_INGRESS],
         )
+        self.assertTrue(all(
+            site["evidence"] ==
+            "authenticated donor BL retained byte-for-byte"
+            for site in report["ingress_sites"]
+        ))
+
+    def test_linux_rejects_each_changed_source_uart_donor_site(self) -> None:
+        for ingress_index in (1, 2):
+            with self.subTest(ingress_index=ingress_index), \
+                    tempfile.TemporaryDirectory(
+                        prefix="g2-pt-linux-ingress-tamper-") as name:
+                temporary = Path(name)
+                changed = bytearray(OFFICIAL.read_bytes())
+                address = BUILDER.LEGACY_INGRESS[ingress_index][0]
+                changed[address - BUILDER.RUN_BASE] ^= 1
+                struct.pack_into(
+                    "<I", changed, 4, zlib.crc32(changed[8:]) & 0xFFFFFFFF
+                )
+                working = temporary / "tampered-linux-ingress.bin"
+                working.write_bytes(changed)
+                with self.assertRaisesRegex(
+                        BUILDER.BuildError, "working ingress differs"):
+                    self.build(
+                        working, temporary / "output", profile="linux-clang",
+                        base_expected={
+                            "size": len(changed),
+                            "sha256": hashlib.sha256(changed).hexdigest(),
+                        },
+                    )
 
     def test_builder_has_no_raw_ingress_transcript(self) -> None:
         source = (COMPONENT / "build_component.py").read_text(encoding="utf-8")
@@ -370,11 +716,19 @@ class ApolloPtProtocolProviderTest(unittest.TestCase):
             def build(*, output_dir: Path, **_arguments):
                 output_dir.mkdir(parents=True, exist_ok=True)
                 (output_dir / "ota_s200_firmware_ota.bin").write_bytes(b"final")
-                return {"placement": {
-                    "loadable_size": profile["payload_size"],
-                    "payload_sha256": profile["payload_sha256"],
-                    "interval_sha256": profile["interval_sha256"],
-                }}
+                return {
+                    "source": {
+                        "license": BUILDER.AGGREGATE_LICENSE,
+                        "files": config["post_link_providers"]["pt_protocol"][
+                            "sources"
+                        ],
+                    },
+                    "placement": {
+                        "loadable_size": profile["payload_size"],
+                        "payload_sha256": profile["payload_sha256"],
+                        "interval_sha256": profile["interval_sha256"],
+                    },
+                }
 
         with tempfile.TemporaryDirectory(prefix="g2-core-transaction-") as name:
             output = Path(name) / "published"
@@ -386,8 +740,13 @@ class ApolloPtProtocolProviderTest(unittest.TestCase):
             }
             for relative, payload in sentinels.items():
                 (output / relative).write_bytes(payload)
+            stage_receipt = mock.Mock(
+                wraps=CORE_BUILDER._canonical_stage_pin_report)
             with (mock.patch.object(CORE_BUILDER, "overlay_build",
                                     side_effect=fake_overlay_build),
+                  mock.patch.object(CORE_BUILDER,
+                                    "_canonical_stage_pin_report",
+                                    stage_receipt),
                   mock.patch.object(CORE_BUILDER, "_load_liblc3_builder",
                                     return_value=FakeLc3),
                   mock.patch.object(CORE_BUILDER, "_load_pt_protocol_builder",
@@ -400,6 +759,7 @@ class ApolloPtProtocolProviderTest(unittest.TestCase):
                     CORE_BUILDER.build(
                         root=ROOT, config_path=CORE_CONFIG,
                         output_dir=output, clang="unused")
+            stage_receipt.assert_not_called()
             for relative, payload in sentinels.items():
                 self.assertEqual((output / relative).read_bytes(), payload)
 
@@ -423,6 +783,31 @@ class ApolloPtProtocolProviderTest(unittest.TestCase):
                     self.build(OFFICIAL, output)
             for relative, payload in sentinels.items():
                 self.assertEqual((output / relative).read_bytes(), payload)
+
+    def test_tool_identity_preserves_argv_zero_driver_symlink(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="g2-pt-driver-") as name:
+            temporary = Path(name)
+            generic = temporary / "lld"
+            generic.write_text(
+                "#!/bin/sh\n"
+                "if [ \"${0##*/}\" != ld.lld ]; then exit 1; fi\n"
+                "printf 'test ld.lld 1.0\\n'\n",
+                encoding="utf-8",
+            )
+            generic.chmod(0o755)
+            driver = temporary / "ld.lld"
+            driver.symlink_to(generic.name)
+
+            identity = BUILDER._executable_identity(
+                str(driver), role="test linker")
+
+            self.assertEqual(identity["invocation_path"], str(driver))
+            self.assertEqual(identity["resolved_path"], str(generic.resolve()))
+            self.assertEqual(identity["version"], "test ld.lld 1.0")
+            self.assertEqual(
+                BUILDER._executable_identity(str(driver), role="test linker"),
+                identity,
+            )
 
     def test_transactional_stage_directory_is_inside_repository(self) -> None:
         source = (ROOT / "components/apollo_main/core_overlay/build_component.py"

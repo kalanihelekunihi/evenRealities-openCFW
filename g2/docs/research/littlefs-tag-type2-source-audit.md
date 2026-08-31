@@ -217,7 +217,7 @@ instructions from remaining as a usable interior tail.
 | Profile | Leaf offset | Runtime | Padding before | Entry replacement | Replacement SHA-256 |
 |---|---:|---:|---:|---|---|
 | Apple Clang 21.0.0 | 124,548 | `0x007B29A8` | 2 | `e7f28abd00bf00bf` | `659991e787790e45f3c2b41575292709cf44eb4b6342c9f6ff4b735426d188df` |
-| Linux Clang 22.1.8 | 186,120 | `0x007C1A2C` | 2 | `f6f2ccbd00bf00bf` | `0b9c29815c5ce50b20403192b32d3530f2e1a69d14ec30e8ed44989b41c82bc5` |
+| Linux Clang 22.1.8 | 126,368 | `0x007B30C4` | 2 | `e8f218b900bf00bf` | `84c933a2887b7027c2904be21d89be5ef671b3ec83f7f7160974aa8fe17dbd4d` |
 
 Each branch decodes back to its profile's exact appended runtime address. The
 ten leaf bytes are identical before and after placement because there are no
@@ -232,7 +232,7 @@ source size / sha256        789 / c2ea0965e62aa126fb4b8e752526b8a926a9088739811c
 expected size / sha256      10 / 88be40d05d37142bf0bae8306026d8c405a4f8f441aabd87ee6731557d4149fd
 alignment                   4
 Apple offset                124548
-Linux offset                186120
+Linux offset                126368
 strict relocation contract  true
 relocations                 []
 ```

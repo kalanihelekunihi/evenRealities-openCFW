@@ -174,7 +174,7 @@ class NvdbMacCandidateTests(unittest.TestCase):
     def test_source_hash(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "7f9d10a4e413f99038ac32f8aedb47ec898ffe25f0720c89b1aff0d0dc891919",
+            "038b882d360fc155dbccdb911e9910779cdabf97b244e53c9baaa38f196943ac",
         )
 
 

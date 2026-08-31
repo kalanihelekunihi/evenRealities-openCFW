@@ -35,9 +35,9 @@ READ_ENTRY = 0x0048_F3BE
 CALLER = 0x0048_F89C
 
 SOURCE_PIN = (
-    1_975,
-    "fefd8a899174fb9332c366df691dc2c8"
-    "ec6f4792f3fd464b65dbb573ace8ee19",
+    2_011,
+    "1ebb54c28d7d8c29757e9852f4c79200"
+    "466c5fbb5ceeb406a68244b484e4c8fe",
 )
 HEADER_PIN = (
     1_750,
@@ -124,24 +124,32 @@ TARGET_TEXT_SHA256 = (
 PROFILE_PINS = {
     "apple-clang": {
         "compiler": "/usr/bin/clang",
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
-        "offset": 184_344,
-        "runtime": 0x007C_133C,
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "offset": 124_496,
+        "runtime": 0x007B_2974,
         "relocated": (
             "c9fc88c025ec843fa3ad3f77b4e1bfb8"
             "4126fd397a81d96c271646eb70632539"
         ),
         "overlay": (
-            429_058,
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+            360_578,
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+        ),
+        "core_stage_overlay": (
+            360_578,
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+        ),
+        "core_stage_component": (
+            3_883_974,
+            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
         ),
         "component": (
-            3_952_454,
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+            3_883_974,
+            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
         ),
         "package": (
-            4_745_526,
-            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+            4_677_046,
+            "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
         ),
         "patch": (
             "22f3f0bb" + "00bf" * 12,
@@ -152,23 +160,31 @@ PROFILE_PINS = {
     "linux-clang": {
         "compiler": "/home/linuxbrew/.linuxbrew/bin/clang",
         "version": "Homebrew clang version 22.1.8",
-        "offset": 186_068,
-        "runtime": 0x007C_19F8,
+        "offset": 126_316,
+        "runtime": 0x007B_3090,
         "relocated": (
             "53a1961d2df94674da6890611087ab865"
             "498084ced6a6f0c6850dcee23c7bf60"
         ),
         "overlay": (
-            212_664,
-            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+            152_912,
+            "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20",
+        ),
+        "core_stage_overlay": (
+            145_314,
+            "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19",
+        ),
+        "core_stage_component": (
+            3_668_710,
+            "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8",
         ),
         "component": (
-            3_736_060,
-            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+            3_676_308,
+            "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
         ),
         "package": (
-            4_529_116,
-            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+            4_469_364,
+            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
         ),
         "patch": (
             "22f37ebf" + "00bf" * 12,
@@ -458,6 +474,14 @@ class NanopbDecodeFixed32ProductionTests(unittest.TestCase):
             prefix="nanopb-fixed32-production-", dir=temporary_parent
         )
         temporary = Path(cls.temporary.name)
+        production_config = json.loads(OVERLAY.read_text(encoding="utf-8"))
+        production_config["expected"] = production_config["core_stage_expected"]
+        for profile in production_config["toolchain_profiles"].values():
+            profile["expected"] = profile["core_stage_expected"]
+        cls.production_config = temporary / "core-stage-overlay.json"
+        cls.production_config.write_text(
+            json.dumps(production_config, sort_keys=True), encoding="utf-8"
+        )
         provider = temporary / "provider.c"
         provider.write_text(HOST_PROVIDER, encoding="utf-8")
         library = temporary / (
@@ -748,7 +772,7 @@ class NanopbDecodeFixed32ProductionTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (975, 914, 406),
+            (2440, 2328, 1871),
         )
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaves = [
@@ -854,18 +878,18 @@ class NanopbDecodeFixed32ProductionTests(unittest.TestCase):
         output = Path(self.temporary.name) / "production-overlay"
         report = self.apollo_overlay.build(
             root=ROOT,
-            config_path=OVERLAY,
+            config_path=self.production_config,
             output_dir=output,
             clang=self.clang,
             toolchain_profile=self.profile,
         )
         self.assertEqual(
             (report["overlay"]["size"], report["overlay"]["sha256"]),
-            self.pins["overlay"],
+            self.pins["core_stage_overlay"],
         )
         self.assertEqual(
             (report["component"]["size"], report["component"]["sha256"]),
-            self.pins["component"],
+            self.pins["core_stage_component"],
         )
         extracted = next(
             item

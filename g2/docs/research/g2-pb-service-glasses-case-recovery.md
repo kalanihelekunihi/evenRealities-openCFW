@@ -1,5 +1,10 @@
 # G2 `pb_service_glasses_case.c` recovery
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Status: software-complete clean-room production replacement; physical
 glasses/case interoperability validation is explicitly blocked by unavailable
 authorized evidence. Run addresses use `run = file_offset + 0x00437FE0`.
@@ -74,9 +79,14 @@ builds, source identity, relocation topology, component replacements, retained
 pool, manifest regions, package, and aggregate protobuf ownership are all
 fail-closed.
 
-No authorized live service-`0x81` temple/case exchange or physical case-state
-evidence is available. The authorized right temple is application-dead, the
-left temple must remain stock, and the recovery gate forbids further writes.
-Battery/charging/lid/presence providers, BLE interoperability, notification
-sequencing, and physical state transitions therefore remain hardware-blocked;
-they are not claimed as validated or as overall firmware completeness.
+No directed live service-`0x81` temple/case exchange or physical case-state
+qualification was performed for this closure. The earlier
+"application-dead" premise was caused by the charging case being bumped and
+disconnecting the unattended run; it is superseded and is not evidence of a
+temple or firmware fault. Multiple successful flashes through
+`evenRealities-webflasher` are established separately. Battery, charging, lid,
+and presence providers, BLE interoperability, notification sequencing, and
+physical state transitions remain deferred under
+[`hardware-validation-policy.md`](../hardware-validation-policy.md); they are
+not claimed as physically validated or as proof of overall firmware
+completeness.

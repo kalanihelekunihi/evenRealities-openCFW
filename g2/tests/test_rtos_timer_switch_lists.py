@@ -187,11 +187,11 @@ class RtosTimerSwitchListsTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "f710440b1429c10b34f13cf563b4bc03e846d538427dd3abd27e84e42336b9b7",
+            "aa333cd863267000b7f71cbf4c950cae1412728cce0c9b48bb9894ee077668c9",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "4d43eea769f7459e5037b1668fc34b52461401e51afaf8aee2f995b8640f1e27",
+            "ec5baf5f3e0b4eb244b2b9ae9ec415d5631dd53ffe8f28a3d1baca422a985ac4",
         )
 
 

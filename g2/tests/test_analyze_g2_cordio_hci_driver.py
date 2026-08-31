@@ -65,7 +65,7 @@ class CordioHciDriverAuditTests(unittest.TestCase):
         self.assertFalse(lineage["historical_generating_commit_resolved"])
         production = self.report["production"]
         self.assertEqual(
-            production["status"], "software-complete-hardware-validation-deferred-by-project-direction"
+            production["status"], "software-complete-hardware-validation-blocked-by-unavailable-physical-evidence"
         )
         self.assertEqual(production["source_inventory_compiled"], 16)
         self.assertEqual(production["redirected_stock_functions"], 9)

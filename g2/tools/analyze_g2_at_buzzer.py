@@ -22,7 +22,7 @@ CLOSURE = ROOT / "tools/manifests/g2-at-buzzer-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-at-buzzer-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "4464ea24a5d714eeb07f294f021f0eea2afbf089b962a566fcc573c8202c25e5",
-    CLOSURE: "de675ea12c559e1cbf02d868f8658e95f3da1979de296fd602a32e5fa5a3185a",
+    CLOSURE: "f492d356af05bfceb82a60c30478ad8243c29b825c14974a77ed0f74e54f018f",
     PROVENANCE: "62f9d453c238d50ef475f8d1ee8490dbb4c8f0d677f7f5db878e5cd6fcb18c5b",
 }
 BODY = (0x005A4FD0, 0x005A53C6)
@@ -90,13 +90,13 @@ PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/at_buzzer.c"
 OVERLAY_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PRODUCTION_PIN = (
-    11707,
-    "9e0b37c03975f2f588300922507789599f63b162a77533aa6c40c7703601da7a",
+    11698,
+    "f57a4fd8fb264b7a08ffa1c02a8866ed0d2420f14d99d6dd2351cc7503cec74c",
 )
 PRODUCTION_LEAF_PIN = (
     2740,
-    "a54dbc400fbff8e82bbb69e26d682a1376af10f3cf7b6d6f4ee8de843a983acc",
-    245920,
+    "a3eeb877b669e96b2f0122ebdd399a5795a6f0a7bd7d3fd938f03375c5cd0305",
+    186072,
     "ad410f96ed64029c338fc5e522f952226d10676935ca991583c498ee9810efdf",
 )
 
@@ -315,6 +315,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
     regions = {item.get("name"): item for item in main["regions"]}
     generated = regions.get("at_buzzer_test_source_replacement")
     appended = regions.get("at_buzzer_test_source_text")
+    appended_runtime = built[0]["placement"]["runtime_address"]
     if (
         generated is None or appended is None
         or (
@@ -324,7 +325,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         or (
             appended.get("file_offset"), appended.get("size"),
             appended.get("target_address"), appended.get("address_status"),
-        ) != (3769316, 2740, 0x007D03C4, "source_compiled")
+        ) != (appended_runtime - BASE, 2740, appended_runtime, "source_compiled")
     ):
         raise AuditError("production AT^BUZZER manifest closure changed")
 
@@ -370,7 +371,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 1208,
             "strict_relocations": 23,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
                 "No authorized physical G2 buzzer/piezo device or captured "
                 "acoustic/frequency/duty/timing evidence is required for future qualification."

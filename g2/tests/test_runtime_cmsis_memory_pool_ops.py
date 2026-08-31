@@ -146,18 +146,18 @@ class RuntimeCmsisMemoryPoolOpsTests(unittest.TestCase):
         leaves = {item["function"]: item for item in config["relocated_leaves"] if item["function"] in names}
         self.assertEqual(set(leaves), names)
         apple = {
-            "open_cfw_cmsis_memory_pool_create_block": (28, "6581e2670d9d8b879a1e2b3d08c236301e29a3e234e93ae9d07838e62fbc1089", 193248),
-            "open_cfw_cmsis_memory_pool_alloc_block": (14, "5e4f31b882999b063cbf299ea839c111a0064f085f2950ac826b634ec4c6d75a", 193276),
-            "open_cfw_cmsis_memory_pool_free_block": (8, "27aa0f47deea05a316c7884bc0c03fc7213ef15943c97e602872743697375f32", 193292),
-            "open_cfw_cmsis_memory_pool_alloc": (144, "f279adc27f5f4ffb1874da6ab34f0e0270304162237716d13e9de04828fa1500", 193300),
-            "open_cfw_cmsis_memory_pool_free": (198, "9ce26a58d457353e36ff54087924f9ee105a9497e0f027ce93267dca4fe030a9", 193444),
+            "open_cfw_cmsis_memory_pool_create_block": (28, "6581e2670d9d8b879a1e2b3d08c236301e29a3e234e93ae9d07838e62fbc1089", 133400),
+            "open_cfw_cmsis_memory_pool_alloc_block": (14, "5e4f31b882999b063cbf299ea839c111a0064f085f2950ac826b634ec4c6d75a", 133428),
+            "open_cfw_cmsis_memory_pool_free_block": (8, "27aa0f47deea05a316c7884bc0c03fc7213ef15943c97e602872743697375f32", 133444),
+            "open_cfw_cmsis_memory_pool_alloc": (144, "f279adc27f5f4ffb1874da6ab34f0e0270304162237716d13e9de04828fa1500", 133452),
+            "open_cfw_cmsis_memory_pool_free": (198, "d32f164a973d081f1d5b2b0bcaf468427de3203abd0e091da8e9d128ed93fba6", 133596),
         }
         linux = {
-            "open_cfw_cmsis_memory_pool_create_block": (30, "f93336fe60fce969b06c6b8ec256c0f060211351a8b772f938058150c2dfb11c", 195024),
-            "open_cfw_cmsis_memory_pool_alloc_block": (14, "5e4f31b882999b063cbf299ea839c111a0064f085f2950ac826b634ec4c6d75a", 195056),
-            "open_cfw_cmsis_memory_pool_free_block": (8, "27aa0f47deea05a316c7884bc0c03fc7213ef15943c97e602872743697375f32", 195072),
-            "open_cfw_cmsis_memory_pool_alloc": (144, "ce6e8726f1faf4aec581f97ce9c60270dd615676c736c706373bd720f4ef15fa", 195080),
-            "open_cfw_cmsis_memory_pool_free": (198, "53e1a59ab4627f6ddfae7e47fabecbb2cc593d9c7eeb03958e852ea316c2ce78", 195224),
+            "open_cfw_cmsis_memory_pool_create_block": (30, "f93336fe60fce969b06c6b8ec256c0f060211351a8b772f938058150c2dfb11c", 135272),
+            "open_cfw_cmsis_memory_pool_alloc_block": (14, "5e4f31b882999b063cbf299ea839c111a0064f085f2950ac826b634ec4c6d75a", 135304),
+            "open_cfw_cmsis_memory_pool_free_block": (8, "27aa0f47deea05a316c7884bc0c03fc7213ef15943c97e602872743697375f32", 135320),
+            "open_cfw_cmsis_memory_pool_alloc": (144, "ce6e8726f1faf4aec581f97ce9c60270dd615676c736c706373bd720f4ef15fa", 135328),
+            "open_cfw_cmsis_memory_pool_free": (198, "89122db987d67267d9e8f8d4475062b408bf704e06da8de22aef366746e33f4d", 135472),
         }
         for function in names:
             leaf = leaves[function]
@@ -176,9 +176,9 @@ class RuntimeCmsisMemoryPoolOpsTests(unittest.TestCase):
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
         regions = {item["name"]: item for item in main["regions"]}
-        self.assertEqual((regions["apollo_cmsis_memory_pool_create_block_source_leaf"]["file_offset"], regions["apollo_cmsis_memory_pool_free_source_leaf"]["file_offset"]), (3716644, 3716840))
-        self.assertEqual((main["provider"]["size"], main["provider"]["profiles"]["linux-clang"]["size"]), (3952346, 3728356))
-        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_size"]), (4745418, 4521412))
+        self.assertEqual((regions["apollo_cmsis_memory_pool_create_block_source_leaf"]["file_offset"], regions["apollo_cmsis_memory_pool_free_source_leaf"]["file_offset"]), (3656796, 3656992))
+        self.assertEqual((main["provider"]["size"], main["provider"]["profiles"]["linux-clang"]["size"]), (3883974, 3676308))
+        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_size"]), (4677046, 4469364))
 
 
 if __name__ == "__main__":

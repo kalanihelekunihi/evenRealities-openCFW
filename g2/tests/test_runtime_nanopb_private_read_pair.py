@@ -131,12 +131,12 @@ UPSTREAM_DEFINITIONS = {
 
 LOCAL_PINS = {
     BUF_SOURCE: (
-        1_685,
-        "d7e464755bb4eff09207d33f1eb6b98ea49b43a91291001652d867f27bcd1bec",
+        1_721,
+        "a8434d4df71d811f0fe9d75dc0928a40fc9da0a651e843a7d2fc0d6e213b7c23",
     ),
     BYTE_SOURCE: (
-        2_065,
-        "f0cfa08ee31a67544f225830a023c38dd2c2e2903bfe6466ddcfc0a9dfb4bdbb",
+        2_101,
+        "c039d544f651b0a41d9afc201e125ba1ecdd0be1b90492f1e72c57787954258e",
     ),
     HEADER: (
         2_046,
@@ -174,7 +174,7 @@ APPLE_CLANG = "/usr/bin/clang"
 COMPILER_PROFILES = {
     "apple-clang": {
         "compiler": APPLE_CLANG,
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
         "objects": {
             BUF_FUNCTION: (
                 912,
@@ -226,13 +226,13 @@ OVERLAY_RUNTIME_BASE = 0x0079_4324
 PROFILE_PINS = {
     "apple-clang": {
         BUF_FUNCTION: {
-            "offset": 184_648,
+            "offset": 124_800,
             "relocated": "f312e087cf1fbecf19bd5fa0052d3a63ca91287c811de169aaf2a09322e0115e",
             "patch_prefix": "23f37ebb",
             "patch_sha256": "7b95b1a632ce6362c74c2a3f3ae2e9ef15f5abb6800d1dd8ca1dd4586b4f73ac",
         },
         BYTE_FUNCTION: {
-            "offset": 184_680,
+            "offset": 124_832,
             "relocated": "f3395a19a7406016e6b1f1daf14969dee91ccde4e9a98ba4eeaba0016e131871",
             "patch_prefix": "23f336bb",
             "patch_sha256": "ed8460907148368a780a57a2abab8bb48cc80a78b980c38b0097e1b81ce1967e",
@@ -240,13 +240,13 @@ PROFILE_PINS = {
     },
     "linux-clang": {
         BUF_FUNCTION: {
-            "offset": 186_376,
+            "offset": 126_624,
             "relocated": "a6b4d3a4e969f078683f1cde3a4043b70d8495d577f550ae35c6c2789ff470de",
             "patch_prefix": "23f30ebf",
             "patch_sha256": "db7d0da006d031b33b6858a4b829d68403c9039f66d2ac4db576b00bdef94bec",
         },
         BYTE_FUNCTION: {
-            "offset": 186_408,
+            "offset": 126_656,
             "relocated": "f3395a19a7406016e6b1f1daf14969dee91ccde4e9a98ba4eeaba0016e131871",
             "patch_prefix": "23f3c6be",
             "patch_sha256": "b571a49431ddbdd7c71059acf67da1227af1eecba58b09fafea45177eda87fd0",
@@ -469,7 +469,7 @@ class NanopbPrivateReadPairProductionTests(unittest.TestCase):
                 len(overlay["patch_sites"]),
                 len(overlay["relocated_leaves"]),
             ),
-            (975, 914, 406),
+            (2440, 2328, 1871),
         )
         self.assertEqual(overlay["functions"].count(BUF_FUNCTION), 1)
         self.assertEqual(overlay["functions"].count(BYTE_FUNCTION), 1)
@@ -606,8 +606,8 @@ class NanopbPrivateReadPairProductionTests(unittest.TestCase):
             {
                 "kind": "source_build",
                 "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
-                "size": 3_952_454,
-                "sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+                "size": 3_883_974,
+                "sha256": "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
             },
         )
         regions = {item["name"]: item for item in component["regions"]}
@@ -622,13 +622,13 @@ class NanopbPrivateReadPairProductionTests(unittest.TestCase):
                 3_648_194, 2, 0x007B_2AA2, "generated_alignment",
             ),
             "apollo_nanopb_buf_read_source_leaf": (
-                3_648_196, 30, 0x007C_146C, "source_compiled",
+                3_648_196, 30, 0x007B_2AA4, "source_compiled",
             ),
             "apollo_nanopb_readbyte_source_alignment": (
                 3_648_226, 2, 0x007B_2AC2, "generated_alignment",
             ),
             "apollo_nanopb_readbyte_source_leaf": (
-                3_648_228, 64, 0x007C_148C, "source_compiled",
+                3_648_228, 64, 0x007B_2AC4, "source_compiled",
             ),
         }
         for name, expected in expected_regions.items():
@@ -680,8 +680,8 @@ class NanopbPrivateReadPairProductionTests(unittest.TestCase):
             record["toolchain_profiles"]["apple-clang"],
             {
                 "buf_read": {
-                    "offset": 184_648,
-                    "runtime_address": "0x007C146C",
+                    "offset": 124_800,
+                    "runtime_address": "0x007B2AA4",
                     "size": 30,
                     "unrelocated_sha256": (
                         COMPILER_PROFILES["apple-clang"]["sections"][BUF_SECTION][1]
@@ -690,8 +690,8 @@ class NanopbPrivateReadPairProductionTests(unittest.TestCase):
                     "entry_patch_sha256": PROFILE_PINS["apple-clang"][BUF_FUNCTION]["patch_sha256"],
                 },
                 "pb_readbyte": {
-                    "offset": 184_680,
-                    "runtime_address": "0x007C148C",
+                    "offset": 124_832,
+                    "runtime_address": "0x007B2AC4",
                     "size": 64,
                     "unrelocated_sha256": (
                         COMPILER_PROFILES["apple-clang"]["sections"][BYTE_SECTION][1]

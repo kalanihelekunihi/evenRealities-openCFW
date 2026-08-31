@@ -55,7 +55,7 @@ class G2UxBatterySyncTests(unittest.TestCase):
              p["retained_literal_pool_bytes"],
              p["software_functional_gap"], p["hardware_validation"]),
             (True, 1, 158, 2, 11, 836, 84, False,
-             "deferred by project direction"),
+             "blocked by unavailable physical evidence"),
         )
         self.assertIn("required for future qualification", p["hardware_blocker"])
 

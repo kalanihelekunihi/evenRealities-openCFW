@@ -146,7 +146,7 @@ TARGET_FLAGS = (
     "-fno-ident",
 )
 APPLE_CLANG = "/usr/bin/clang"
-APPLE_CLANG_VERSION = "Apple clang version 21.0.0 (clang-2100.3.30.1)"
+APPLE_CLANG_VERSION = "Apple clang version 21.0.0 (clang-2100.3.33.1)"
 TARGET_OBJECT_PIN = (
     788,
     "42e5702fb7cb30ad327459f6b143207e"
@@ -161,7 +161,7 @@ TARGET_TEXT_PIN = (
 
 PROFILE_PINS = {
     "apple-clang": {
-        "main_leaf": (184_424, 0x007C_138C),
+        "main_leaf": (124_576, 0x007B_29C4),
         "boot_leaf": (634, 0x0043_46F2),
         "main_patch": (
             "e7f29cbd00bf00bf",
@@ -174,12 +174,12 @@ PROFILE_PINS = {
             "2ac479742c0220702d8266d1bf2d723e",
         ),
         "main_overlay": (
-            429_058,
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+            360_578,
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
         ),
         "main_component": (
-            3_952_454,
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+            3_883_974,
+            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
         ),
         "boot_overlay": (
             15_240,
@@ -187,15 +187,15 @@ PROFILE_PINS = {
         ),
         "boot_component": (
             163_840,
-            "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0",
+            "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
         ),
         "package": (
-            4_745_526,
-            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+            4_677_046,
+            "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
         ),
     },
     "linux-clang": {
-        "main_leaf": (186_148, 0x007C_1A48),
+        "main_leaf": (126_396, 0x007B_30E0),
         "boot_leaf": (634, 0x0043_46F2),
         "main_patch": (
             "e8f22ab900bf00bf",
@@ -208,12 +208,12 @@ PROFILE_PINS = {
             "2ac479742c0220702d8266d1bf2d723e",
         ),
         "main_overlay": (
-            212_664,
-            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+            152_912,
+            "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20",
         ),
         "main_component": (
-            3_736_060,
-            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+            3_676_308,
+            "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
         ),
         "boot_overlay": (
             15_224,
@@ -221,11 +221,11 @@ PROFILE_PINS = {
         ),
         "boot_component": (
             163_824,
-            "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635",
+            "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e",
         ),
         "package": (
-            4_529_116,
-            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+            4_469_364,
+            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
         ),
     },
 }
@@ -1183,7 +1183,7 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
                 main_regions, 3_647_970, 2, 0x007B_29C2, "generated_alignment",
             ),
             "apollo_littlefs_tag_type1_source_leaf": (
-                main_regions, 3_647_972, 10, 0x007C_138C, "source_compiled",
+                main_regions, 3_647_972, 10, 0x007B_29C4, "source_compiled",
             ),
             "bootloader_littlefs_tag_type1_source_replacement": (
                 boot_regions, 2_960, 8, BOOT_START,
@@ -1243,12 +1243,16 @@ class RuntimeLittlefsTagType1ProductionTests(unittest.TestCase):
         boot_report = json.loads(artifacts["boot_report"].read_text(encoding="utf-8"))
         reviewed_root = configs["main"]["toolchain"]["reviewed_source_root"]
         prefix_map = (
-            f"-ffile-prefix-map={self.shadow_root.resolve()}={reviewed_root}"
+            f"-ffile-prefix-map={reviewed_root}={reviewed_root}"
         )
         self.assertEqual(main_report["toolchain"]["flags"][-1], prefix_map)
         self.assertEqual(
             main_report["toolchain"]["flags"].count(prefix_map),
             1,
+        )
+        self.assertNotIn(
+            str(self.shadow_root.resolve()),
+            json.dumps(main_report, sort_keys=True),
         )
         for name, report, start in (
             ("main", main_report, MAIN_START),

@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "component": "google/liblc3-encoder-source-provider",
+  "upstream_ref": "refs/tags/v1.1.3",
+  "upstream_commit": "96a3af0beb5487aca3b98a4b992a539a1f6d80d1",
+  "license": "Apache-2.0",
+  "exact_generating_checkout_proven": false,
+  "provider_source": "g2/components/shared/liblc3/runtime_liblc3_encoder_provider.c",
+  "provider_source_sha256": "2ed3a5bd3853c874fe3b1515b4a66fb6d5d5768ae8bff949e76a75d6f018a63f",
+  "provider_header": "g2/components/shared/liblc3/runtime_liblc3_encoder_provider.h",
+  "provider_header_sha256": "9d70374750c89aa8db5e5c111b1980a6a8b2bf7d63ff066dcca3d285f7dfedf4",
+  "provider_entries": [
+    "open_cfw_liblc3_encoder_provider_plan",
+    "open_cfw_liblc3_encoder_provider_setup",
+    "open_cfw_liblc3_encoder_provider_encode",
+    "open_cfw_liblc3_encoder_provider_close"
+  ],
+  "upstream_encoder_sources": [
+    "src/attdet.c",
+    "src/bits.c",
+    "src/bwdet.c",
+    "src/energy.c",
+    "src/lc3.c",
+    "src/ltpf.c",
+    "src/mdct.c",
+    "src/sns.c",
+    "src/spec.c",
+    "src/tables.c",
+    "src/tns.c"
+  ],
+  "target_profile": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-mfloat-abi=hard",
+    "-std=c11",
+    "-O2",
+    "-ffast-math",
+    "-fshort-enums",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "g2_fixed_encoder_abi": {
+    "fixed_state_size": 1200,
+    "alignment": 8,
+    "dt": 0,
+    "sr": 1,
+    "sr_pcm": 2,
+    "attdet": 4,
+    "ltpf": 16,
+    "spec": 1176,
+    "xt_off": 1184,
+    "xs_off": 1188,
+    "xd_off": 1192,
+    "x": 1196
+  },
+  "bounded_provider_abi": {
+    "config_size": 24,
+    "plan_size": 28,
+    "provider_size_arm32": 64,
+    "pcm_capacity_unit": "bytes",
+    "output_capacity_unit": "bytes"
+  },
+  "g2_0x59_source_attribution": {
+    "functions": 41,
+    "official_opaque_bytes": 16128,
+    "high_confidence": 15,
+    "medium_confidence": 9,
+    "low_confidence": 17,
+    "investigation_required_non_liblc3_functions": 31,
+    "investigation_required_non_liblc3_bytes": 3440
+  },
+  "allowed_external_runtime_relocations": [
+    "__aeabi_memclr",
+    "__aeabi_memclr4",
+    "fabsf",
+    "floorf",
+    "fmaxf",
+    "fminf",
+    "memcpy",
+    "memmove",
+    "memset",
+    "roundf",
+    "sqrtf",
+    "truncf"
+  ],
+  "discarded_section_only_external_relocations": [
+    "__aeabi_uldivmod",
+    "lc3_plc_reset",
+    "lc3_plc_suspend",
+    "lc3_plc_synthesize"
+  ],
+  "object_size_budgets": {
+    "attdet.o": 3072,
+    "bits.o": 6144,
+    "bwdet.o": 4096,
+    "energy.o": 2048,
+    "lc3.o": 24576,
+    "ltpf.o": 20480,
+    "mdct.o": 12288,
+    "provider.o": 4096,
+    "sns.o": 24576,
+    "spec.o": 20480,
+    "tables.o": 110592,
+    "tns.o": 12288
+  },
+  "link_contract": {
+    "roots": [
+      "open_cfw_liblc3_encoder_provider_plan",
+      "open_cfw_liblc3_encoder_provider_setup",
+      "open_cfw_liblc3_encoder_provider_encode",
+      "open_cfw_liblc3_encoder_provider_close"
+    ],
+    "requires_gc_sections": true,
+    "decoder_sections_from_lc3_object_must_be_discarded": true,
+    "plc_source_in_encoder_route": false,
+    "canonical_cantunwind_rows_may_be_discarded": true,
+    "all_external_runtime_relocations_must_resolve": true,
+    "qualification_relocatable_object_budget": 190000
+  },
+  "production_capable_source": true,
+  "overlay_routed": false,
+  "build_component": {
+    "path": "g2/components/apollo_main/liblc3_encoder",
+    "build_only": true,
+    "placement_assigned": false,
+    "service_audio_routed": false,
+    "firmware_image_emitted": false
+  },
+  "software_integration_blockers": [
+    "the build-only Apollo component is qualified, but placement and authenticated ingress routing are not yet defined",
+    "the listed C-library, math, and compiler-runtime relocations need reviewed target providers",
+    "service_audio ownership and concurrency have not been routed to this provider",
+    "target stack and worst-case execution time have not been measured"
+  ],
+  "physical_evidence_blockers": [
+    "no authorized G2 hardware is available for cadence, microphone-path, BLE interoperability, or acoustic qualification"
+  ]
+}

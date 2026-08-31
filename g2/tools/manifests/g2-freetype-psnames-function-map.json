@@ -1,0 +1,344 @@
+{
+  "anchors": {
+    "freetype_commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+    "freetype_version": "2.9.1",
+    "ghidra": {
+      "bytes": 3270703,
+      "path": "research/corpus/apollo-main/ghidra/decomp/functions.jsonl",
+      "sha256": "9fd9c1c34e17abb977f2ccb32a931d9b96743db2db10707de19bf9ea6ae42662"
+    },
+    "image": {
+      "bytes": 3523396,
+      "load_base": "0x00437FE0",
+      "path": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+    },
+    "module_class": "0x00758A60",
+    "module_interface": "0x00764290",
+    "module_name_address": "0x0078E444",
+    "next_foreign_callable": "0x005D9950",
+    "next_foreign_provider": "SEGGER-RTT-6.18a"
+  },
+  "binary_overlay_ready": false,
+  "blockers": [
+    "original compiler/version/options, ABI details, and LTO state are not recovered",
+    "no authenticated stock callsite rewrite or target placement routes this source",
+    "no authenticated external font payload or face-path configuration was supplied",
+    "task stack and worst-case execution time are not qualified",
+    "no authorized physical G2 hardware rendering execution was performed"
+  ],
+  "compiler_byte_identity_claimed": false,
+  "confidence": {
+    "exact": {
+      "bytes": 0,
+      "functions": 0,
+      "reason": "no original-compiler byte identity proof"
+    },
+    "high": {
+      "bytes": 844,
+      "functions": 8
+    },
+    "mapped_total": {
+      "bytes": 1132,
+      "functions": 11
+    },
+    "medium": {
+      "bytes": 288,
+      "functions": 3
+    },
+    "unresolved_code": {
+      "bytes": 0,
+      "functions": 0,
+      "source_identities_complete": true
+    }
+  },
+  "hardware_operations": false,
+  "mapping_sha256": "5d90ec82eb56c6ade9a6931c6b7c03cfdefe19242f3d163e8299b752794ac114",
+  "movement": {
+    "initial_retained_census": {
+      "bytes": 1010,
+      "functions": 7
+    },
+    "newly_classified_physical": {
+      "bytes": 36,
+      "intervals": 1
+    },
+    "recovered_outside_ghidra_relation": {
+      "bytes": 122,
+      "functions": 4
+    }
+  },
+  "production_routed": false,
+  "read_only": true,
+  "records": {
+    "physical_classification": [
+      {
+        "body_sha256": "77d908f30b20762cb33ba71ee6947fe520ee61aa88d8cbbaf2ae992ef8145a3f",
+        "bytes": 36,
+        "callable_code": false,
+        "category": "literal-pointer-pool",
+        "end_exclusive": "0x005D9950",
+        "source_identity_claimed": false,
+        "start": "0x005D992C"
+      }
+    ],
+    "psnames": [
+      {
+        "body_sha256": "8d067ee5216fd4fdcc46089f3a5dffb723e0f3fae1c8f1e19461a9359a55b9f8",
+        "bytes": 192,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005D9580",
+        "evidence": [
+          "closed-source-census",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "authenticated-source-order"
+        ],
+        "mapping_origin": "closed-source-census",
+        "module": "pstables.h",
+        "start": "0x005D94C0",
+        "symbol": "ft_get_adobe_glyph_index"
+      },
+      {
+        "body_sha256": "faf8b61a03bed42c3d545f46758f004a3a7a07c03a1960c70c47d7786666a9b0",
+        "bytes": 242,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005D9672",
+        "evidence": [
+          "closed-source-census",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "authenticated-source-order",
+          "stock-interface-module-or-callback-pointer"
+        ],
+        "mapping_origin": "closed-source-census",
+        "module": "psmodule.c",
+        "pointer_references": [
+          "0x00764290"
+        ],
+        "start": "0x005D9580",
+        "symbol": "ps_unicode_value",
+        "thumb_pointer": "0x005D9581"
+      },
+      {
+        "body_sha256": "4e201d24f3034668ceb06bc6325811eea6ffe95790004757a6bdc9a894a1bad4",
+        "bytes": 68,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005D96B6",
+        "evidence": [
+          "qsort-callback-literal-and-semantic-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "authenticated-source-order",
+          "stock-interface-module-or-callback-pointer"
+        ],
+        "mapping_origin": "qsort-callback-literal-and-semantic-body",
+        "module": "psmodule.c",
+        "pointer_references": [
+          "0x005D993C"
+        ],
+        "start": "0x005D9672",
+        "symbol": "compare_uni_maps",
+        "thumb_pointer": "0x005D9673"
+      },
+      {
+        "body_sha256": "e1758dff9f97525f58ca4cf717599ae1d42cbec89342cd6311bf88f5f659050d",
+        "bytes": 66,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005D96F8",
+        "evidence": [
+          "closed-source-census",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "authenticated-source-order"
+        ],
+        "mapping_origin": "closed-source-census",
+        "module": "psmodule.c",
+        "start": "0x005D96B6",
+        "symbol": "ps_check_extra_glyph_name"
+      },
+      {
+        "body_sha256": "8731addd26688729ffae6fa3378eef94d1b1005a8d6f112c93045cb7298368f3",
+        "bytes": 30,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005D9716",
+        "evidence": [
+          "closed-source-census",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "authenticated-source-order"
+        ],
+        "mapping_origin": "closed-source-census",
+        "module": "psmodule.c",
+        "start": "0x005D96F8",
+        "symbol": "ps_check_extra_glyph_unicode"
+      },
+      {
+        "body_sha256": "80232ff343f3620e93edd64bf3d90a298351c10ef0c434b716e268baa1e1f5a5",
+        "bytes": 298,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005D9840",
+        "evidence": [
+          "closed-source-census",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "authenticated-source-order",
+          "stock-interface-module-or-callback-pointer"
+        ],
+        "mapping_origin": "closed-source-census",
+        "module": "psmodule.c",
+        "pointer_references": [
+          "0x00764294"
+        ],
+        "start": "0x005D9716",
+        "symbol": "ps_unicodes_init",
+        "thumb_pointer": "0x005D9717"
+      },
+      {
+        "body_sha256": "34afb7e5ecfb53f8bac91bba65d2dfbaa2b2689f70cdf85998e5510e0b4224da",
+        "bytes": 80,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005D9890",
+        "evidence": [
+          "closed-source-census",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "authenticated-source-order",
+          "stock-interface-module-or-callback-pointer"
+        ],
+        "mapping_origin": "closed-source-census",
+        "module": "psmodule.c",
+        "pointer_references": [
+          "0x00764298"
+        ],
+        "start": "0x005D9840",
+        "symbol": "ps_unicodes_char_index",
+        "thumb_pointer": "0x005D9841"
+      },
+      {
+        "body_sha256": "e628886921fcccc1dc6de8e10a1649e50615d2986e626e2f4c9bd6c0916c91d9",
+        "bytes": 102,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005D98F6",
+        "evidence": [
+          "closed-source-census",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "authenticated-source-order",
+          "stock-interface-module-or-callback-pointer"
+        ],
+        "mapping_origin": "closed-source-census",
+        "module": "psmodule.c",
+        "pointer_references": [
+          "0x0076429C"
+        ],
+        "start": "0x005D9890",
+        "symbol": "ps_unicodes_char_next",
+        "thumb_pointer": "0x005D9891"
+      },
+      {
+        "body_sha256": "3d4b1c4d348f2acab2e1650e10a8d36dffe666010853d63a5567a84accc2a788",
+        "bytes": 20,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005D990A",
+        "evidence": [
+          "pscmaps-interface-slot-4",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "authenticated-source-order",
+          "stock-interface-module-or-callback-pointer"
+        ],
+        "mapping_origin": "pscmaps-interface-slot-4",
+        "module": "psmodule.c",
+        "pointer_references": [
+          "0x007642A0"
+        ],
+        "start": "0x005D98F6",
+        "symbol": "ps_get_macintosh_name",
+        "thumb_pointer": "0x005D98F7"
+      },
+      {
+        "body_sha256": "1e638b05487fe18b865433b0d7aef16df7194c0bce663b3f81a359883233d31f",
+        "bytes": 24,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005D9922",
+        "evidence": [
+          "pscmaps-interface-slot-5",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "authenticated-source-order",
+          "stock-interface-module-or-callback-pointer"
+        ],
+        "mapping_origin": "pscmaps-interface-slot-5",
+        "module": "psmodule.c",
+        "pointer_references": [
+          "0x007642A4"
+        ],
+        "start": "0x005D990A",
+        "symbol": "ps_get_standard_strings",
+        "thumb_pointer": "0x005D990B"
+      },
+      {
+        "body_sha256": "6ef2d615a411eada228ba9c966f43bcc7f9685c1119d8ab43cdebac9e8f4e167",
+        "bytes": 10,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005D992C",
+        "evidence": [
+          "psnames-module-requester-slot",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "authenticated-source-order",
+          "stock-interface-module-or-callback-pointer"
+        ],
+        "mapping_origin": "psnames-module-requester-slot",
+        "module": "psmodule.c",
+        "pointer_references": [
+          "0x00758A80"
+        ],
+        "start": "0x005D9922",
+        "symbol": "psnames_get_service",
+        "thumb_pointer": "0x005D9923"
+      }
+    ]
+  },
+  "schema_version": 1,
+  "scope": {
+    "bytes": 1168,
+    "end_exclusive": "0x005D9950",
+    "ghidra_recognized": {
+      "bytes": 1010,
+      "functions": 7
+    },
+    "recovered_callable": {
+      "bytes": 122,
+      "functions": 4
+    },
+    "residual_physical": {
+      "bytes": 36,
+      "category_bytes": {
+        "literal-pointer-pool": 36
+      },
+      "intervals": 1,
+      "unclassified_bytes": 0,
+      "unresolved_callable_bytes": 0
+    },
+    "start": "0x005D94C0"
+  },
+  "selected_module": "psnames",
+  "status": "fail-closed-psnames-function-map"
+}

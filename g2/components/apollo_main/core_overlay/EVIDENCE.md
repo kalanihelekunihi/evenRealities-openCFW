@@ -19963,7 +19963,7 @@ The clean-room `watchdog.c` decision layer is now production-routed through two
 guarded redirects: 28 strict-relocation source bytes replace both 140-byte stock
 bodies, while the 32-byte diagnostic pool remains retained compatibility data.
 Host behavior, Thumb compilation, analyzer, component, and package gates pass.
-Physical watchdog/reset-cause validation is blocked by unavailable authorized
+Physical watchdog/reset-cause validation is blocked by unavailable physical evidence; future qualification requires authorized
 hardware evidence; no device or flash operation was performed.
 
 ### eAT buzzer-command analysis boundary
@@ -19986,7 +19986,7 @@ guarded `B.W` replacement covers the complete 1,208-byte stock object and pool;
 source plus generated replacement account for 3,948 ownership bytes. Host
 behavior, analyzer, component, manifest, package, and flash-plan gates pass.
 Audible output, frequency/pitch, duty-cycle, beat timing, predefined playback,
-and stop behavior remain blocked by unavailable authorized physical G2 buzzer
+and stop behavior remain blocked by unavailable physical evidence; future qualification requires authorized physical G2 buzzer
 evidence; no hardware or flash operation was performed.
 
 ### eAT audio-control analysis boundary
@@ -20034,7 +20034,7 @@ inventory is unavailable. The independently authored `at_tp.c` candidate is
 now production-routed through two strict leaves (1,548 compiled bytes plus two
 alignment bytes) and two guarded redirects that replace the complete 1,040-byte
 stock object. No hardware was accessed; live Cypress-controller and physical
-gesture validation is blocked by unavailable authorized G2/touch evidence.
+gesture validation is blocked by unavailable physical evidence; future qualification requires authorized G2/touch evidence.
 This completes the software boundary for all four retained eAT source paths.
 
 ### Pathless eAT core/sensor analysis boundary
@@ -20105,7 +20105,7 @@ alignment bytes; four guarded redirects replace all 1,324 stock body bytes,
 the 120-byte official pool is retained, and 13 strict relocations are pinned.
 Host, component, manifest, package, and deployment gates are green. Live
 service-`0x05` master/peer BLE and translation-UI validation are explicitly
-blocked by unavailable authorized responsive-hardware evidence.
+blocked by unavailable physical evidence; future qualification requires authorized responsive-hardware evidence.
 
 ### Glasses-case protobuf-service analysis boundary
 
@@ -20119,7 +20119,7 @@ to 546 bytes plus ten alignment bytes. Four guarded redirects replace all 1,360
 stock body bytes while retaining the 124-byte official pool; sixteen strict
 relocations, host behavior, component, package, and deployment-plan gates are
 green. Live temple/case BLE and physical case-state behavior remain explicitly
-blocked by unavailable authorized evidence.
+blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ### EFS service analysis boundary
 
@@ -20199,7 +20199,7 @@ relocations; 32 guarded entry redirects retain the 574 authenticated
 object-local gap/pool bytes. Host behavior, selector compilation, component,
 source-manifest, package, flash-plan, origin-accounting, and closure gates pass.
 Live destructive touch programming, reset/version readback, controller timing,
-post-flash verification, and recovery remain blocked by unavailable authorized
+post-flash verification, and recovery remain blocked by unavailable physical evidence; future qualification requires authorized
 physical evidence; no image was signed or flashed.
 
 ### GX8002 codec-DFU analysis boundary
@@ -20216,7 +20216,7 @@ data collision. Sixteen clean-room leaves now replace all 9,052 stock function
 bytes, compiling to 3,390 Thumb bytes plus 24 alignment bytes with 71 strict
 relocations; the 916 authenticated pool/gap bytes remain official. Host and
 production artifact gates pass. Live destructive GX8002 upgrade validation is
-blocked by unavailable authorized responsive hardware.
+blocked by unavailable physical evidence; future qualification requires authorized responsive hardware.
 
 ### Health protobuf-service analysis boundary
 
@@ -20315,7 +20315,7 @@ selector-isolated pair-manager leaves compile to 2,300 Thumb text bytes plus
 gap/pool. All 15 protobuf services now route all 47,644 linked body bytes
 through production C. Host, selector, component, manifest, package,
 aggregate-ledger, frontier, and origin-accounting gates are green. Live
-pair-manager peer workflows remain explicitly blocked by unavailable
+pair-manager peer workflows remain explicitly blocked by unavailable physical evidence; future qualification requires
 authorized responsive G2 physical evidence.
 
 ### Multipart, OTA, and EFS transport production closure
@@ -20347,7 +20347,7 @@ fragmentation, and transmit errors.
 
 All three host oracles, selector gates, component, manifest, complete package,
 frontier, and origin-accounting gates are green. Live peer traffic and OTA
-and EFS recovery qualification remain explicitly blocked by unavailable
+and EFS recovery qualification remain explicitly blocked by unavailable physical evidence; future qualification requires
 authorized responsive G2 physical evidence; no hardware was accessed or
 flashed.
 
@@ -20376,7 +20376,7 @@ are 205,714 / 3,729,110 / 4,507,604 bytes with SHA-256 values
 and `07b3e44039e7c1f33ff31552f5997992fa658006f432f50c57b1a58cc4893755`.
 No hardware was used; live service-`0x10` peer BLE, display readiness,
 onboarding-control, response, notification, and nanopb interoperability remain
-blocked by unavailable authorized responsive-device evidence.
+blocked by unavailable physical evidence; future qualification requires authorized responsive-device evidence.
 
 ### Notification protobuf-service production closure
 
@@ -20392,7 +20392,7 @@ compile to 1,326 bytes plus 16 alignment bytes. Nine guarded redirects replace
 all 3,318 stock body bytes through 34 strict relocations while retaining the
 238 official gap/pool bytes. Host, component, manifest, package, deployment,
 complete-service-ledger, and origin-accounting gates are green. Live service-4
-behavior remains blocked by unavailable authorized responsive-device evidence.
+behavior remains blocked by unavailable physical evidence; future qualification requires authorized responsive-device evidence.
 
 ### Setting protobuf-service production closure
 
@@ -20407,8 +20407,7 @@ selector-isolated clean-room functions compile to 1,650 bytes plus 14
 alignment bytes. Eleven guarded redirects replace all 3,466 stock bodies
 through 38 strict relocations while retaining 334 official gap/pool bytes.
 Host, component, manifest, package, deployment, complete-service-ledger, and
-origin-accounting gates are green. Live service-9 validation remains blocked
-by unavailable authorized responsive-device evidence.
+origin-accounting gates are green. Live service-9 validation remains blocked by unavailable physical evidence; future qualification requires authorized responsive-device evidence.
 
 ### Device-config protobuf-service production closure
 
@@ -20422,7 +20421,7 @@ zero. Five clean-room source functions compile to 998 bytes plus four
 alignment bytes; three redirects replace all 2,646 stock body bytes, 286
 official gap/pool bytes are retained, and 33 strict relocations are pinned.
 Host, component, manifest, package, and deployment gates are green. Live
-service-`0x80` configuration workflows remain hardware-blocked by unavailable
+service-`0x80` configuration workflows remain hardware-blocked by unavailable physical evidence; future qualification requires
 authorized responsive-device evidence.
 
 ### Conversate protobuf-service analysis boundary
@@ -20449,7 +20448,7 @@ to 594 text bytes plus four alignment bytes, and four guarded redirects replace
 all 1,362 stock body bytes. The 150-byte official alignment/literal tail is
 retained. Host behavior, relocation, component, package, and deployment-plan
 checks are green; paired-G2 BLE relay and live nanopb/ring-event validation are
-blocked by unavailable authorized physical evidence.
+blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 ### Teleprompt protobuf-service production routing
 
@@ -20466,7 +20465,7 @@ all 1,854 stock body bytes, and 39 strict relocations bind only to recovered
 nanopb, BLE, timing, role, message, and sibling-source interfaces. The
 130-byte official tail remains retained. Host behavior, component, manifest,
 package, and deployment-plan gates are green. Live service-6 master/peer BLE,
-timing, and teleprompt UI validation are blocked by unavailable authorized
+timing, and teleprompt UI validation is blocked by unavailable physical evidence; future qualification requires authorized
 physical evidence.
 
 ### Even-AI protobuf-service production routing
@@ -20484,7 +20483,7 @@ bytes, and 107 strict relocations bind only to the recovered nanopb, BLE,
 role/display, provider, and sibling-source interfaces. The 552 distributed
 official alignment/pool bytes remain retained. Host behavior, component,
 manifest, package, and deployment-plan gates are green. Live service-7
-master/peer BLE and Even-AI UI validation are blocked by unavailable
+master/peer BLE and Even-AI UI validation is blocked by unavailable physical evidence; future qualification requires
 authorized physical evidence.
 
 ## Apollo-main CMSIS-FreeRTOS core-leaf milestone
@@ -21223,44 +21222,35 @@ bytes with SHA-256 values
 and `427187931275f6eaa93bebc65f910fcabe71c0d6f8027be3811b43c7efd2eda8`.
 
 No image was signed or flashed. Live bilateral display, input, animation, and
-peer synchronization are deferred by project direction; future qualification
+peer synchronization are blocked by unavailable physical evidence; future qualification
 requires an authorized pair or golden UI trace. Firmware-wide functional
 completeness is not claimed.
 
-### ICM45608 clean-room production routing
+### ICM45608 authenticated-donor production boundary
 
-`imu_icm45608.c` now supplies 54 independently compiled Cortex-M55 leaves: all
-53 recovered first-party entries plus one Thumb delay-callback adapter. Fifty-
-two guarded redirects claim 11,672 stock body bytes. The two-byte stock no-op
-is unchanged and unreachable after its sole caller is replaced; 762 other
-alignment/literal bytes remain official compatibility data. The compiled IMU
-wrapper text is 8,610 bytes with 30 generated alignment bytes and 83 authenticated
-relocations.
+The public/canonical profile retains the complete stock `imu_icm45608.c`
+object at `[0x004A35B0,0x004A6644)` byte-for-byte: 53 linked functions,
+11,674 body bytes, 762 alignment/literal bytes, and complete-object SHA-256
+`d4946b892b0fcb6e45a3cb2f4dadd452e737712815577d6780c26ff7e1185e22`.
+Twenty-nine authenticated relocations from 11 source-owned caller functions
+still target 20 exact stock entries. No configured redirect overlaps the
+12,436-byte interval, so released functionality is preserved without a source
+ownership claim.
 
-Stock disassembly proves the 72-byte device layout, three-argument callbacks,
-FIFO callback offset 24, and six-argument retained I2C-provider ABI. The
-immutable BSD-3-Clause TDK tag-1.1.2 snapshot is the exact public baseline.
-The clean-room leaf now owns `0x81` identity validation, soft reset and
-RESET_DONE checking, FIFO/eDMP state initialization, FSYNC tag capture, and
-INT1 setup; opaque retained vendor initialization is absent. The exact public
-TDK path additionally owns FIFO/register acquisition, GAF decode, I2CM
-magnetometer access, extended AID/B2S image loading, APEX configuration, and
-AID/B2S event-state publication.
+The earlier clean-room/TDK route is retained only as repository-local research
+evidence. Its transitive closure reaches five headers with file-specific
+restricted notices and ten dense EDMP payload headers. None of those 15 files,
+the candidate, or the port is in the canonical compiler or public community
+bundle closure. Of the five payload sequences formerly selected by the route,
+only the calibration patch occurs in the official donor (once); all five have
+zero occurrences in the generated post-migration overlay. The root snapshot
+license is not represented as a whole-snapshot grant.
 
-The canonical overlay/component/package pins are
-`326460/78915b5c9fcc8200ac54a6e1e9a899c0223e3621e46f580c79b51286f9ef67d8`,
-`3849856/d5ca988001c5a906876e7a630c28cbedff436c2df4c8260fd86ed16aeea1e01c`,
-and
-`4628350/7e6abf1247754df84f6f729a9247de351a4b1bf1155703cf321078d31f89ba01`.
-The 3,041,934-byte flash plan has SHA-256
-`d53f44f4cbf38c8407c3d7386cb4218f15d038682071201dc81a3e0a09d9a717`
-and 4,383 placed regions.
-
-No known IMU software implementation gap remains after the exact extended
-AID/B2S path was admitted. This is not a hardware-validation claim. Hardware
-validation is deferred by project direction; future qualification requires a
-calibrated motion rig or golden FIFO/eDMP trace. No flashing or signing was
-performed.
+The analyzer pins the donor bytes, the 29 caller rows, zero patch overlap,
+compiler/bundle exclusion, and zero generated-overlay payload occurrences.
+Canonical artifact pins are intentionally deferred until the concurrent PT
+source hashes converge. Hardware validation is blocked by unavailable physical evidence.
+No flashing or signing was performed.
 
 ## Ring service production routing
 
@@ -21283,7 +21273,7 @@ The deployment plan is 2,879,088 bytes with SHA-256
 `80d2f655555786d495d9df72b85013dee8e0076554b0d2deb82159a5c876e292`.
 
 No hardware was used. Physical transport, timing, and peer behavior are
-deferred by project direction; future qualification requires an authorized
+blocked by unavailable physical evidence; future qualification requires an authorized
 pair or golden Ring transport capture. `thread_ring.c` and wider firmware gaps
 remain open.
 
@@ -21311,7 +21301,7 @@ The 2,879,088-byte flash plan hashes to
 `80d2f655555786d495d9df72b85013dee8e0076554b0d2deb82159a5c876e292`.
 
 No hardware was used. Physical WSF/ATT transport, peer timing/state, and
-reconnect behavior are deferred by project direction; future qualification
+reconnect behavior is blocked by unavailable physical evidence; future qualification
 requires an authorized pair or golden Ring transport capture. Thread Ring has
 no known remaining software implementation gap.
 
@@ -21337,7 +21327,7 @@ The flash plan is 2,879,088 bytes with SHA-256
 `80d2f655555786d495d9df72b85013dee8e0076554b0d2deb82159a5c876e292`.
 
 No hardware was accessed. Live IMU/ALS sampling, timing, calibration, and
-display behavior are deferred by project direction; future qualification
+display behavior is blocked by unavailable physical evidence; future qualification
 requires an authorized sensor path or golden IMU/ALS trace. Sensor Hub has no
 known remaining software implementation gap; wider firmware gaps remain.
 
@@ -21357,7 +21347,7 @@ component size 3,763,472 and SHA-256
 and package size 4,541,966 and SHA-256
 `c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998`.
 No package was signed or flashed. UART electrical behavior and GX8002B timing
-remain blocked by unavailable authorized responsive physical evidence.
+remain blocked by unavailable physical evidence; future qualification requires authorized responsive physical evidence.
 
 ## Cordio optional ATT server-read source replacement
 
@@ -21376,8 +21366,7 @@ the Apollo component is 3,867,880 bytes, SHA-256
 and the deterministic package is 4,646,374 bytes, SHA-256
 `9d12b035cc8b50985a07d281f51fbd0c1e0855ebf1f55994cd5317720e8bec4a`.
 No image was signed, flashed, or installed. Live ATT discovery, database-hash
-timing, peer/controller behavior, and EM9305 validation remain blocked by
-unavailable authorized responsive physical evidence.
+timing, peer/controller behavior, and EM9305 validation remain blocked by unavailable physical evidence; future qualification requires authorized responsive physical evidence.
 
 ## AT^AUDIO production routing
 
@@ -21406,7 +21395,7 @@ The canonical overlay/component/package identities are 239,680 / 3,763,076 /
 `7228edb650fe39bda63480691fe94ed59d0807ca5e30846d35ec08e134e08350`,
 and `c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998`.
 Read-only golden-media, persistence, recovery, and schema validation remain
-blocked by unavailable authorized responsive G2 hardware and `kvdb` evidence.
+blocked by unavailable physical evidence; future qualification requires authorized responsive G2 hardware and `kvdb` evidence.
 
 ## Current OPT3007 register-map production routing
 
@@ -21424,8 +21413,7 @@ and `c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998`.
 The flash plan is 2,562,590 bytes / SHA-256
 `80d2f655555786d495d9df72b85013dee8e0076554b0d2deb82159a5c876e292`
 with 3,676 placed, two unresolved, five container-only, and six protected
-regions. No image was signed or flashed. Live OPT3007 behavior remains blocked
-by unavailable authorized responsive G2 hardware and physical bus evidence.
+regions. No image was signed or flashed. Live OPT3007 behavior remains blocked by unavailable physical evidence; future qualification requires authorized responsive G2 hardware and physical bus evidence.
 
 ## Current factory NVDB lifecycle production routing
 
@@ -21460,7 +21448,7 @@ and block statistics. Canonical overlay/component/package identities are
 and `c146ea7977a5521aa1df24a1a285768d7e2396fab96f117315a5baa2dcb65998`.
 No image was signed or flashed. Live mounted-media, persistence, recovery,
 power-loss, and concurrency evidence remains blocked because no authorized
-responsive G2 target with writable test media is physically available.
+responsive G2 target with writable test media is authorized for future qualification.
 
 ## G2 SystemAlert production routing
 
@@ -21476,7 +21464,7 @@ throttling, reflash and IMU events, and UI-event routing. Canonical
 overlay/component/package identities are 225,396 / 3,748,792 / 4,527,286
 bytes and `29555fb7...c285` / `a6a78d0b...a8c5` / `3f09f5ee...a6d0`.
 No image was flashed. Physical display/timing/IMU/peer qualification is
-deferred by project direction.
+blocked by unavailable physical evidence.
 
 ## G2 SystemClose production routing
 
@@ -21493,7 +21481,7 @@ overlay/component/package identities are 228,222 / 3,751,618 / 4,530,112
 bytes and `ee0ced13...cda491` / `c6ac27de...fca42` /
 `7cd4e676...dc2c8`; the 2,503,413-byte plan has 3,589 placed regions. No
 image was signed or flashed. Physical display, shutdown/minimize, IMU, and
-peer-synchronization qualification is deferred by project direction.
+peer-synchronization qualification is blocked by unavailable physical evidence.
 
 ## G2 EUS/ESS/EFS/NUS BLE-profile production routing
 
@@ -21512,7 +21500,7 @@ and `87dd3f57f56f8ac138e5df6d96e5dd30ff97b8197e49b21392f04260fcd8f631` /
 `e27208da3a7f963f6676bedfd039b589c283ce1be679c94317a80bb8061812b1` /
 `b84e19844a7459929059111af9804203a76760bbb9f8a1093063e2bb758c4b44`.
 No image was signed or flashed. Physical controller timing and dual-device
-interoperability remain blocked by unavailable authorized responsive evidence.
+interoperability is blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.
 
 ## Current protobuf conversate-service production routing
 
@@ -21558,7 +21546,7 @@ and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
 The 1,985,178-byte flash plan hashes to
 `ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
 No hardware was used; paired-device delivery, callback timing, and live ring
-battery behavior remain blocked by unavailable authorized physical evidence.
+battery behavior is blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 ## Current ring-battery callback-facade production routing
 
@@ -21589,7 +21577,7 @@ record ingress are pinned. Current overlay/component/package hashes are
 `a4c7927efe625a95e3bd928e5bb75b32c057837577dd9b9bf0cc3a5c19a42183`,
 `026ba2cc0c5f4dd5ca052b630edd3bbbae8addd95b53f7bd0b16c0ebb40c316a`,
 and `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
-No hardware was accessed; paired-device validation is blocked by unavailable
+No hardware was accessed; paired-device validation is blocked by unavailable physical evidence; future qualification requires
 authorized physical evidence.
 
 ## Current generic callback-manager production routing
@@ -21706,7 +21694,7 @@ Canonical Apple overlay/component/package identities are
 `a417dede...c0e80` / `d7dda10b...aae`. The flash plan is 1,903,321 bytes and
 `fc4d840a...6314`. No hardware was accessed or flashed. ATT discovery, CCCD,
 indication delivery, controller timing, and peer interoperability remain
-blocked by unavailable authorized G2/EM9305 physical evidence.
+blocked by unavailable physical evidence; future qualification requires authorized G2/EM9305 physical evidence.
 
 ## G2 gesture-processing service source closure
 
@@ -21728,8 +21716,7 @@ the complete package is 4,493,456 bytes with SHA-256
 `03d4b3f7813ce41814ae821ccbdaa3a1f2802fe4a459cf20351487a18332e783`.
 
 No hardware was used. Physical touch/proximity electrical behavior, event
-delivery, debounce, timing, and gesture interpretation remain blocked by
-unavailable authorized G2 evidence.
+delivery, debounce, timing, and gesture interpretation remain blocked by unavailable physical evidence; future qualification requires authorized G2 evidence.
 
 ## G2 CY8C4046FNI host touch-driver source closure
 
@@ -21757,7 +21744,7 @@ the complete package is 4,493,456 bytes with SHA-256
 
 No hardware was used. Physical I2C signaling, electrical reset, controller
 boot/DFU transitions, settling/report timing, and CapSense behavior remain
-blocked by unavailable authorized G2 hardware and capture evidence.
+blocked by unavailable physical evidence; future qualification requires authorized G2 hardware and capture evidence.
 
 ## Current Cordio shared Secure Connections action production routing
 
@@ -21776,9 +21763,9 @@ the component is 3,700,488 bytes with SHA-256
 `18846b43a03a20429cb925bd6450889a2b5f6044af9bacc8f442ba9580bc3248`;
 and the complete package is 4,478,982 bytes with SHA-256
 `a8a86dfee3d0f23efd5c0fce3421ab07f82b9f7d3e17f4a7ae641709e7639bd8`.
-No device was signed, flashed, or accessed. Authorized G2/EM9305 Secure
-Connections, numeric-comparison, passkey/OOB, DH-key, cancellation, and peer
-interoperability evidence is unavailable, so hardware validation is blocked.
+No device was signed, flashed, or accessed. G2/EM9305 Secure Connections,
+numeric-comparison, passkey/OOB, DH-key, cancellation, and peer qualification is
+blocked by unavailable physical evidence and requires future authorized hardware evidence.
 
 ### Cordio SMP common actions are production-routed
 
@@ -21793,7 +21780,7 @@ stock route, and the exact two-byte halfword placement.
 Canonical Apple overlay/component/package sizes are
 174,816 / 3,698,212 / 4,476,706 bytes, with SHA-256
 `b732d58c...f6bf` / `125cfeb1...55f3` / `26bf3d84...5058`.
-Hardware pairing and peer behavior remains blocked by unavailable authorized
+Hardware pairing and peer behavior remains blocked by unavailable physical evidence; future qualification requires authorized
 G2/EM9305 physical evidence; the wider firmware is not declared complete.
 
 ## Cordio SMP-main production routing
@@ -21812,8 +21799,7 @@ the component is 3,693,704 bytes / SHA-256
 the package is 4,472,198 bytes / SHA-256
 `aa849dcd53f3d277b7694220b61f2aa7e314c18bb8ec31445d45f451fd5d9202`.
 No hardware was accessed. Pairing, reconnect, controller timing, disconnect
-races, peer interoperability, and stale-queue behavior remain blocked by
-unavailable authorized physical evidence.
+races, peer interoperability, and stale-queue behavior remain blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 ## Cordio SMP Secure Connections main production routing
 
@@ -21831,7 +21817,7 @@ the component is 3,696,434 bytes / SHA-256
 the package is 4,474,928 bytes / SHA-256
 `a79d1096c53049f8f38c4d565718476a4375e66b54c01dcdf510f43d8f33642a`.
 No hardware was accessed. Public-key, DH-check, passkey, OOB, reconnect, and
-repeated-attempt controller/peer behavior remains blocked by unavailable
+repeated-attempt controller/peer behavior remains blocked by unavailable physical evidence; future qualification requires
 authorized physical evidence.
 
 ## Cordio SMP pairing-database production route
@@ -21848,7 +21834,7 @@ nine specific records plus common fallback, failure-count expiry, exponential
 backoff/clamping, pairing-failure refresh, saturating service decrements, and
 timer restart. Diagnostic-only trace calls are omitted without changing state
 or externally visible results. Real WSF/controller concurrency and peer
-interoperability remain explicitly blocked by unavailable authorized physical
+interoperability remain explicitly blocked by unavailable physical evidence; future qualification requires authorized physical
 evidence.
 
 ## Cordio DM common advertising source replacement
@@ -21866,7 +21852,7 @@ The canonical overlay/component/package sizes are 357,394 / 3,880,790 /
 4,659,284 bytes. The 3,586,814-byte flash plan has 5,160 placed, two unresolved,
 five container-only, and six protected regions. No image was signed, flashed,
 or installed. Live advertising, peer/controller timing, address policy, and RF
-validation remains blocked by unavailable authorized responsive G2/EM9305
+validation remains blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305
 physical evidence.
 
 ## Cordio security-service source replacement
@@ -21880,8 +21866,8 @@ CMAC framing, and ECC byte order/completion while retaining HCI/controller
 providers as the cryptographic-primitive boundary. Host behavior, all isolated
 selectors, exact routing, component, manifest, flash-plan, and byte-identical
 package gates pass. Live controller/concurrency/timing and paired-temple
-validation is blocked by unavailable authorized responsive right G2/EM9305
-physical evidence; the left remains stock.
+qualification is blocked by unavailable physical evidence; future qualification requires
+authorized G2/EM9305 physical evidence.
 
 ## System-monitor peer-reboot callback production routing
 
@@ -21910,7 +21896,7 @@ Current Apple overlay/component/package identities are
 `18e578a6824ab184f35309489af07972a41a74da465bc5ecc07c182e2b42d05f`, and
 `a643e0fdf5d90b8f34b9fe5b3833d239e27bd28dd2d18f7bc6163182c99e11e9`.
 No package was signed or flashed. Paired-device reboot/display/scheduler
-validation is blocked by unavailable authorized physical evidence.
+validation is blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 ## Health mutex and common-event production routing
 
@@ -21931,7 +21917,7 @@ identities are `166292/3689688/4468182` bytes and
 `eb0e6c9ba54af38259f8450d503d7faba7283d52ea3d3de1113fd8fc3c8b53fb` /
 `0c1548c6f4b829acc62fcd332fb2c441f2774c4de1be253ea721a4de8eae57d4`.
 No hardware was used. On-device concurrency, role/display gating, transport,
-and visible behavior remain deferred by project direction.
+and visible behavior remain blocked by unavailable physical evidence.
 
 ## Protobuf Ring-service production routing
 
@@ -21955,8 +21941,7 @@ The 2,004,497-byte deployment plan hashes to
 `ef7a204c200024422defd2cb9e0064a5aa4278bb14533e4007bd0daf2db1e67f`.
 
 No hardware was accessed for this tranche. Live paired-G2 relay, nanopb peer
-interoperability, and physical Ring-event behavior are explicitly blocked by
-unavailable authorized physical evidence; no hardware-validation or wider
+interoperability, and physical Ring-event behavior are explicitly blocked by unavailable physical evidence; future qualification requires authorized physical evidence; no hardware-validation or wider
 firmware-completeness claim is made.
 
 ## Cordio DM LE Secure Connections production routing
@@ -21973,8 +21958,7 @@ Host behavior and target symbol gates plus the fail-closed stock/route analyzer
 cover the admission. Canonical Apple overlay/component/package identities are
 `166576/3689972/4468466` bytes and
 `1f5c6afe...1cff` / `9ca58f6d...7ff2` / `eb2d45ac...2985`.
-No hardware was used. Live controller and peer behavior is blocked by
-unavailable authorized physical evidence.
+No hardware was used. Live controller and peer behavior is blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 ## Cordio DM security-core production routing
 
@@ -21991,7 +21975,7 @@ analyzer cover admission. Canonical Apple overlay/component/package identities
 are `167088/3690484/4468978` bytes and `63a2dab6...81ca` /
 `1f4e39b3...6e19` / `edd49b59...1c5b`. No hardware was used. Controller timing,
 allocation pressure, disconnect races, callback ordering, and peer behavior are
-blocked by unavailable authorized physical evidence.
+blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 ## Cordio DM security-role production routing
 
@@ -22008,8 +21992,7 @@ component assembly, package assembly, and flash-plan generation cover admission.
 Canonical Apple overlay/component/package identities are
 `167426/3690822/4469316` bytes and `303539d4...e9b9` /
 `e6a69ad6...1fb4` / `39a4702c...d975`. No hardware was used. Controller timing,
-message ownership, disconnect races, and peer behavior remain blocked by
-unavailable authorized physical evidence.
+message ownership, disconnect races, and peer behavior remain blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 ## Current FreeRTOS scheduler-start core production routing
 
@@ -22036,7 +22019,7 @@ base bytes. Linux independently reproduces the recorded package size
 
 No package was signed or flashed and no hardware was accessed. Physical
 preemption, exception-return, stack-overflow, trace-concurrency, and STIMER
-timing evidence remains blocked by unavailable authorized hardware.
+timing evidence remains blocked by unavailable physical evidence; future qualification requires authorized hardware.
 
 ## G2 OTA file-service production routing
 
@@ -22059,7 +22042,7 @@ and `61f5fc2763bbd2b17e6e28f09bb13bdfc38a21a9e072a51c88dbec171fcbdde3`.
 
 No package was signed or flashed. Live MRAM/filesystem/XIP writes, bootloader
 installation, peer-visible status, power-loss, and rollback behavior are
-deferred by project direction; future qualification requires an authorized G2
+blocked by unavailable physical evidence; future qualification requires an authorized G2
 peer and writable OTA target.
 
 ## G2 ALS production routing
@@ -22094,7 +22077,7 @@ scope. The canonical overlay/component/package identities are 252,162 /
 3,775,558 / 4,554,052 bytes with SHA-256 values `ac98af84…a1d2b`,
 `85f42039…d510`, and `c1369b65…729bb`. The flash plan has 4,057 placed and two
 unresolved evidence-only regions. No hardware was used; paired-G2 Cordio/WSF
-timing and peer-visible behavior are blocked by unavailable authorized physical
+timing and peer-visible behavior are blocked by unavailable physical evidence; future qualification requires authorized physical
 evidence.
 
 ## Current FreeRTOS `vTaskGetInfo` production routing
@@ -22125,7 +22108,7 @@ watchdog feed, IAR `memset`, and Apollo510 5.1.0-lineage system sleep. Host test
 exercise vote lifecycle and capacity, interrupt restoration, current-task
 wrappers, sleep selection, watchdog hooks, and both fatal paths. The 36-byte
 stock literal/alignment pool remains official. Physical sleep/watchdog/reset
-validation is blocked by unavailable authorized responsive hardware; no image
+validation is blocked by unavailable physical evidence; future qualification requires authorized responsive hardware; no image
 was signed, flashed, or installed.
 
 ## G2 case-UART manager source replacement
@@ -22149,7 +22132,7 @@ Canonical Apple overlay/component/package identities are 332,666 / 3,856,062 /
 and `430bf420dc4ebcf49dcef43177e134bdb9046f3a93ebb244089552d37deb7933`.
 No image was signed or flashed. Live UART electrical characteristics, timing,
 callback concurrency, case-firmware interoperability, and product-test traffic
-are blocked by unavailable authorized responsive temple/case evidence.
+are blocked by unavailable physical evidence; future qualification requires authorized responsive temple/case evidence.
 
 ## Cordio/Ambiq FreeRTOS WSF timer source replacement
 
@@ -22167,8 +22150,7 @@ Canonical overlay/component/package identities are 333,312 / 3,856,708 /
 `0c830e013e883e3b8063f429b99332fb6f41ead126844e4eec2bd83374448fef`,
 and `f6e8743fd694437e5dd2c92d548456a2c7a2e7d17c2f6ff95262fdc5fdb0f18e`.
 No image was signed or flashed. Live controller scheduling, interrupt timing,
-callback ordering, drift, and sleep/wakeup behavior remain blocked by
-unavailable authorized responsive G2/EM9305 physical evidence.
+callback ordering, drift, and sleep/wakeup behavior remain blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305 physical evidence.
 
 ## Complete linked Cordio WSF runtime source replacement
 
@@ -22189,7 +22171,7 @@ and the deterministic package is 4,638,574 bytes, SHA-256
 The flash plan has 4,681 placed, two unresolved evidence-only, five
 container-only, and six protected regions. No image was signed, flashed, or
 installed. Live controller scheduling, ISR wakeups, callback ordering, drift,
-and sleep/wakeup remain blocked by unavailable authorized responsive hardware.
+and sleep/wakeup remain blocked by unavailable physical evidence; future qualification requires authorized responsive hardware.
 
 ## Cordio ATT client-supported-features source replacement
 
@@ -22206,8 +22188,7 @@ The current canonical overlay/component/package identities are the values
 above. `make cordio-atts-csf-closure`, `open_cfw verify`, and a second
 byte-identical package build are green. No image was signed, flashed, or
 installed. Live database-hash/service-changed exchange, robust-caching state,
-callback ordering, ATT peer interoperability, and EM9305 timing remain blocked
-by unavailable authorized responsive physical evidence.
+callback ordering, ATT peer interoperability, and EM9305 timing remain blocked by unavailable physical evidence; future qualification requires authorized responsive physical evidence.
 
 ## Cordio ATT client-characteristic-configuration source replacement
 
@@ -22224,7 +22205,7 @@ The current canonical identities are the values above. The CCC closure target,
 strict component build, manifest/package verification, and byte-identical
 rebuild are green. No image was signed, flashed, or installed. Live CCC
 read/write, persistence/reconnect, callback ordering, ATT peer interoperability,
-security-level interaction, and EM9305 timing remain blocked by unavailable
+security-level interaction, and EM9305 timing remain blocked by unavailable physical evidence; future qualification requires
 authorized responsive physical evidence.
 
 ## Cordio ATT server-write source replacement
@@ -22246,7 +22227,7 @@ and the deterministic package is 4,640,230 bytes, SHA-256
 `2907bd9ae153ce0ccca932ec8a96ca180ae545c6b3bb5bbb92bff3ec7430fd05`.
 No image was signed, flashed, or installed. Live ATT traffic, callback timing,
 peer interoperability, controller scheduling, and EM9305 behavior remain
-blocked by unavailable authorized responsive physical evidence.
+blocked by unavailable physical evidence; future qualification requires authorized responsive physical evidence.
 
 ## Cordio ATT client PDU-processor source replacement
 
@@ -22286,7 +22267,7 @@ the Apollo component is 3,870,678 bytes, SHA-256
 and the deterministic package is 4,649,172 bytes, SHA-256
 `777a059d84671ee04460d7c9cdb9af9ab93ce7eaaced0932b0c254f9f2a53e77`.
 No image was signed, flashed, or installed. Live ATT peer/controller,
-continuation, and buffer-lifetime behavior remains blocked by unavailable
+continuation, and buffer-lifetime behavior remains blocked by unavailable physical evidence; future qualification requires
 authorized responsive G2/EM9305 physical evidence.
 
 ## Cordio ATT client optional-read source replacement
@@ -22306,8 +22287,7 @@ the Apollo component is 3,871,120 bytes, SHA-256
 and the deterministic package is 4,649,614 bytes, SHA-256
 `a7d2627341cd8603e607a37c19d70ed42f7f5ba501fb6c76826664cb322de06d`.
 No image was signed, flashed, or installed. Live ATT peer/controller,
-negotiated-MTU, continuation, and buffer-lifetime behavior remains blocked by
-unavailable authorized responsive G2/EM9305 physical evidence.
+negotiated-MTU, continuation, and buffer-lifetime behavior remains blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305 physical evidence.
 
 ## Cordio common ATT server-processor source replacement
 
@@ -22325,7 +22305,7 @@ the Apollo component is 3,863,468 bytes, SHA-256
 and the deterministic package is 4,641,962 bytes, SHA-256
 `82097f8c735fc3ec9d162a1c8379e8b7ea2f8562b0b58eca297b222018e5b94c`.
 No image was signed, flashed, or installed. Live ATT peer/controller/security
-behavior and EM9305 timing remain blocked by unavailable authorized responsive
+behavior and EM9305 timing remain blocked by unavailable physical evidence; future qualification requires authorized responsive
 physical evidence.
 
 ## Cordio ATT indication/notification source replacement
@@ -22347,7 +22327,7 @@ and the deterministic package is 4,643,580 bytes, SHA-256
 `7adbd9a5bbd7dd8c96f476294b447b81063f38c66b9dc4439620792a97f4d6f1`.
 No image was signed, flashed, or installed. Live ATT/EATT peer exchange,
 controller scheduling and disconnect behavior, and zero-copy buffer lifetime
-remain blocked by unavailable authorized responsive physical evidence.
+remain blocked by unavailable physical evidence; future qualification requires authorized responsive physical evidence.
 
 ## Cordio ATT server owner/dispatcher source replacement
 
@@ -22368,7 +22348,7 @@ and the deterministic package is 4,649,026 bytes, SHA-256
 `dd4ae2bbee573322ec0976563b550c2dd462737344fe94ad4a12c24823951fd4`.
 No image was signed, flashed, or installed. Live ATT/EATT peer exchange,
 controller scheduling, asynchronous CMAC timing, and EM9305 validation remain
-blocked by unavailable authorized responsive physical evidence.
+blocked by unavailable physical evidence; future qualification requires authorized responsive physical evidence.
 
 ## Cordio ATT client core and discovery source replacement
 
@@ -22391,8 +22371,7 @@ The canonical overlay/component/package sizes are 353,336 / 3,876,732 /
 five container-only, and six protected regions. The 80-test aggregate ATT/WSF
 gate passes; one Ambiq archive-comparison test is skipped because the
 authenticated archives are unavailable. No image was signed, flashed, or
-installed. Live ATT peer/controller/timer/discovery validation is blocked by
-unavailable authorized responsive G2/EM9305 evidence.
+installed. Live ATT peer/controller/timer/discovery validation is blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305 evidence.
 
 ## Cordio L2CAP source replacement
 
@@ -22413,7 +22392,7 @@ The 3,501,390-byte flash plan has 5,040 placed, two unresolved, five
 container-only, and six protected regions. Five focused host/Cortex-M55,
 routing, package, and flash-plan tests pass. No image was signed, flashed, or
 installed. Live peer/controller signaling, flow, timing, and buffer-lifetime
-validation remains blocked by unavailable authorized responsive physical
+validation remains blocked by unavailable physical evidence; future qualification requires authorized responsive physical
 evidence.
 
 ## Cordio DM legacy-advertising source replacement
@@ -22430,7 +22409,7 @@ sizes are 357,394 / 3,880,790 / 4,659,284 bytes; the 3,586,814-byte flash plan
 has 5,160 placed, two unresolved, five container-only, and six protected
 regions. No image was signed, flashed, or installed. Live BLE advertising,
 peer/controller timing, address policy, RF behavior, and paired-temple
-interoperability remain blocked by unavailable authorized responsive
+interoperability is blocked by unavailable physical evidence; future qualification requires authorized responsive
 G2/EM9305 physical evidence.
 
 ## Cordio DM connection state-machine source replacement
@@ -22444,7 +22423,7 @@ next-state-before-action ordering, and null/invalid CCB, action-set, and action
 pointer paths. Selector compilation, exact routing, component, manifest,
 deterministic package, and flash-plan gates pass. No image was signed, flashed,
 or installed. Live controller completion, role-action timing, cancellation,
-disconnect, and paired-temple validation remains blocked by unavailable
+disconnect, and paired-temple validation remains blocked by unavailable physical evidence; future qualification requires
 authorized responsive G2/EM9305 physical evidence.
 
 ## Cordio DM local-device source replacement
@@ -22459,7 +22438,7 @@ failure, random address, whitelist/filter modes and bounds, and vendor init.
 Exact routing, component, manifest, deterministic package, and flash-plan
 gates pass. No image was signed, flashed, or installed. Live controller reset,
 event timing, address programming, filter/privacy behavior, and paired-temple
-validation remains blocked by unavailable authorized responsive G2/EM9305
+validation remains blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305
 physical evidence.
 
 ## Cordio DM main-router source replacement
@@ -22477,7 +22456,7 @@ and flash-plan gates pass. The canonical overlay/component/package sizes are
 357,938 / 3,881,334 / 4,659,828 bytes; the 3,618,112-byte flash plan has 5,204
 placed, two unresolved, five container-only, and six protected regions. No
 image was signed, flashed, or installed. Live HCI/controller/peer/timing and
-paired-temple validation remains blocked by unavailable authorized responsive
+paired-temple validation remains blocked by unavailable physical evidence; future qualification requires authorized responsive
 G2/EM9305 physical evidence.
 
 ## Cordio DM PHY source replacement
@@ -22494,5 +22473,5 @@ canonical overlay/component/package sizes are 358,320 / 3,881,716 / 4,660,210
 bytes; the 3,627,834-byte flash plan has 5,218 placed, two unresolved, five
 container-only, and six protected regions. No image was signed, flashed, or
 installed. Live controller PHY negotiation, peer/RF/timing, and paired-temple
-validation remains blocked by unavailable authorized responsive G2/EM9305
+validation remains blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305
 physical evidence.

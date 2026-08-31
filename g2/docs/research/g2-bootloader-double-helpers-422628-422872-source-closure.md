@@ -1,5 +1,10 @@
 # G2 bootloader double-runtime source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Thirteen authenticated IAR-compatible double-runtime bodies at
 `[0x00422628,0x00422872)` now compile from maintained MIT C at
 their exact stock addresses. The executable bodies total 584 bytes with

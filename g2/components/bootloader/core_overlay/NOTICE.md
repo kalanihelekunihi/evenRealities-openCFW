@@ -183,6 +183,20 @@ bytes. Type identity, bank selection and register offsets are G2 compatibility
 seams. Registration authorizes offline compilation and unsigned package
 assembly only; it authorizes no signing, flashing, reset, boot, register/MMIO
 access, service invocation, or other hardware operation.
+
+`runtime_mspi_device_configure_424120.c` and
+`runtime_mspi_device_configure_424120.h` are BSD-3-Clause structured ports of
+the AmbiqSuite 5.1.0-equivalent MSPI device-mode configuration behavior. The
+production build compiles the 284-byte service in place at `0x00424120`; it
+contains no raw instruction transcript. Registration authorizes offline
+compilation and unsigned package assembly only. It authorizes no signing,
+flashing, reset, boot, MMIO, pad, XIP, clock, or other hardware operation.
+`runtime_mspi_piomixed_configure_42488e.c` and its header are BSD-3-Clause
+structured ports of the AmbiqSuite 5.1.0-equivalent PIO-mixed configuration
+behavior. The 84-byte service is compiled in place at `0x0042488E` with no raw
+instruction transcript. Registration authorizes offline compilation and
+unsigned package assembly only; it authorizes no signing, flashing, reset,
+boot, PIO, MMIO, pad, XIP, clock, or other hardware operation.
 `runtime_hw_service_dispatch_42377c.c` is a MIT clean-room openCFW
 implementation of the authenticated per-instance service dispatcher at
 `[0x0042377C,0x0042382C)`. It incorporates no retained vendor implementation
@@ -303,6 +317,14 @@ retained shutdown-provider effects are G2 compatibility seams. Registration
 authorizes offline compilation and unsigned package assembly only; it
 authorizes no signing, flashing, reset, boot, MMIO/clock/peripheral access,
 service invocation, or other hardware operation.
+`runtime_hw_initializer_42308e.c` is a MIT clean-room openCFW implementation
+of the authenticated per-instance clock-route and register initializer at
+`[0x0042308E,0x004232C8)`. It incorporates no retained vendor implementation
+bytes. Chip revision, MMIO/register state, clock/peripheral behavior and
+provider side effects are G2 compatibility seams. Registration authorizes
+offline compilation and unsigned package assembly only; it authorizes no
+signing, flashing, reset, boot, MMIO/clock/peripheral access, service
+invocation, or other hardware operation.
 `runtime_hw_config_latch_secondary_422f4c.c` is a MIT clean-room
 openCFW implementation of the authenticated secondary per-instance
 configuration-latch service at `[0x00422F4C,0x00422FA2)`. It incorporates no
@@ -319,6 +341,30 @@ retained memset and downstream consumers are G2 compatibility seams.
 Registration authorizes offline compilation and unsigned package assembly
 only; it authorizes no signing, flashing, reset, boot, interrupt/SRAM/MMIO
 access, service invocation, or other hardware operation.
+
+The public G2 MSPI device-configure entry at `0x00424BE4` is supplied by
+structured BSD-3-Clause C. Its 672-byte dual-profile object is placed in situ
+with six reviewed call relocations; the unreachable 482-byte stock tail stays
+authenticated retained material. Hardware qualification is blocked by
+unavailable physical evidence.
+`runtime_mspi_initialize_424a5a.c` is a BSD-3-Clause AmbiqSuite-compatible
+openCFW implementation of the recovered G2 MSPI state initializer at
+`0x00424A5A`. It replaces an authenticated stock prefix with structured C;
+the unreachable stock tail and adjacent alignment/literal data remain retained
+and are not claimed as source. The state layout, magic value, status codes,
+clock-source sentinel, and XIP-off delay are G2 compatibility seams.
+Registration authorizes offline compilation and unsigned package assembly
+only; it authorizes no signing, flashing, reset, boot, SRAM/MMIO/clock access,
+initializer invocation, or other hardware operation.
+`runtime_mspi_configure_424af0.c` is a BSD-3-Clause AmbiqSuite-compatible
+openCFW implementation of the recovered G2 MSPI controller-configuration
+service at `0x00424AF0`. It replaces an authenticated stock prefix with
+structured C; its unreachable stock tail remains retained. The controller
+register offsets, state layout, TCB capacity calculation, clock-on-D4 field,
+and status values are G2 compatibility seams. Registration authorizes offline
+compilation and unsigned package assembly only; it authorizes no signing,
+flashing, reset, boot, SRAM/MMIO/clock access, service invocation, or other
+hardware operation.
 
 `runtime_mspi_interrupt_power_426536.S` is a BSD-3-Clause, reviewable Thumb-2
 mnemonic realization of the authenticated AmbiqSuite 5.1.0

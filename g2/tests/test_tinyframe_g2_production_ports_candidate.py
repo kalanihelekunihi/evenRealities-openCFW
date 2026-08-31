@@ -52,7 +52,7 @@ class TinyFrameG2ProductionPortsCandidateTests(unittest.TestCase):
     def test_source_and_transport_oracles_are_pinned(self):
         self.assertEqual(
             (SOURCE.stat().st_size, hashlib.sha256(SOURCE.read_bytes()).hexdigest()),
-            (2307, "cc61e0cc6db8d7b38bbd7b31360dc10d118d9ddbc0c3aae8af99b68b150b43c1"),
+            (2298, "c96a6d3beb02e8ff7c7ae07aeb6882835cf5113816929d7b7fc107672d4a72f9"),
         )
         self.assertEqual(
             (FIXTURE.stat().st_size, hashlib.sha256(FIXTURE.read_bytes()).hexdigest()),

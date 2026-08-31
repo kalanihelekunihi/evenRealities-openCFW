@@ -1,0 +1,184 @@
+{
+  "analysis_mode": "software-only dual-profile package assembly, component validation, CRC regeneration, and flash-plan ownership proof",
+  "canonical_component_route": {
+    "atomic_publication": "existing canonical rollback-capable generation",
+    "base_argument": "same-build pre-CFF Apollo component",
+    "post_link_order": "core -> liblc3 -> product-test -> freetype-cff",
+    "profiles": {
+      "apple-clang": {
+        "component_sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
+        "component_size": 3956468
+      },
+      "linux-clang": {
+        "component_sha256": "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
+        "component_size": 3956468
+      }
+    }
+  },
+  "evidence_bounds": {
+    "compiler_byte_identity_claimed": false,
+    "font_payload_authenticated": false,
+    "hardware_validation_performed": false,
+    "stack_or_wcet_qualified": false
+  },
+  "inputs": {
+    "components/apollo_main/core_overlay/build_component.py": {
+      "sha256": "44e2e16484ac31c771cb309b9850e63533881b6be6b8b7d168bdab352ebe47e8",
+      "size": 81667
+    },
+    "components/apollo_main/core_overlay/overlay.json": {
+      "sha256": "733bc34d7545775ab067eb03c38678889694bc092fc840c64a1ef605b0081212",
+      "size": 5853221
+    },
+    "components/apollo_main/freetype_cff_scatter/README.md": {
+      "sha256": "493a0423c3282f18242af2753eeeafbc4a468834a70b1327867a82d37e105763",
+      "size": 1298
+    },
+    "components/apollo_main/freetype_cff_scatter/build_component.py": {
+      "sha256": "4b615fdc2f393dc5c244882c2c663b70338a94b54923aca12f639a7cf59260f9",
+      "size": 24637
+    },
+    "components/apollo_main/freetype_cff_scatter/overlay.json": {
+      "sha256": "145e9f8715509c4b85c87816dababd6b734afcc3cbd128c9c146393cecff2493",
+      "size": 1661
+    },
+    "manifests/g2-2.2.6.10-core-source.json": {
+      "sha256": "79948ff0c3d234d5f74eac7d627a20588f5bec293a2fed194fe10a44b3ad1831",
+      "size": 3193849
+    },
+    "tools/open_cfw.py": {
+      "sha256": "2065bc3cefd4390080b15d277906c7e9e3b60ddc8e7e4ee046dab63310cf331a",
+      "size": 99007
+    }
+  },
+  "integration_sha256": "d9c8cf3c9a05af35922ae3e1b06eb14dc36ae59ba9005b7e83b20316c7f544e1",
+  "profiles": {
+    "apple-clang": {
+      "atomicity": {
+        "all_runtime_mutations_in_entry_6": true,
+        "changed_package_entries": [
+          6
+        ],
+        "cross_entry_atomicity_required": false,
+        "cross_entry_mutations": 0,
+        "toc_and_component_headers_regenerated": true,
+        "unchanged_entry_count": 5
+      },
+      "base_package": {
+        "path": "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "sha256": "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a",
+        "size": 4678740
+      },
+      "component": {
+        "growth_bytes": 70800,
+        "nested_crc32": "0x6996AEA7",
+        "runtime_end_exclusive": 8380116,
+        "runtime_start": 4423680,
+        "sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
+        "size": 3956468
+      },
+      "component_receipt_sha256": "0f9cb50467f4900ab6f650b934cba820a84115e85541a7f1a1fb06a027864063",
+      "ownership": {
+        "cff_erased_gap_bytes": 66684,
+        "cff_erased_gap_rows": 1,
+        "cff_generated_pointer_bytes": 4,
+        "cff_generated_pointer_rows": 1,
+        "cff_rows": 6,
+        "cff_source_bytes": 20416,
+        "cff_source_rows": 4,
+        "collision_or_protected_overlap_count": 0,
+        "container_rows": 6,
+        "flash_plan_sha256": "6dfda9822e7d56ae719f62f2f8ea64e8ac62aa9e5cb2ae11a3683f248f17e87f",
+        "flash_rows": 6607,
+        "highest_cff_end_exclusive": "0x007FDED4",
+        "unresolved_rows": 0,
+        "unused_scattered_table_pool_consumed": 0,
+        "update_flag": "0x007FE000"
+      },
+      "package": {
+        "entry_6_crc32c_msb": "0x0012B7B8",
+        "entry_6_entry_size": 3956596,
+        "entry_6_package_offset": 792944,
+        "entry_6_payload_size": 3956468,
+        "growth_bytes": 70800,
+        "sha256": "482756200d1b3c70685d7c1c29c422a5725436801e3600d7cf55fa3e16809128",
+        "size": 4749540
+      },
+      "reproducibility": {
+        "component_matches_pinned_profile_output": true,
+        "package_assembly_deterministic": true,
+        "zero_final_relocations": true,
+        "zero_undefined_symbols": true
+      }
+    },
+    "linux-clang": {
+      "atomicity": {
+        "all_runtime_mutations_in_entry_6": true,
+        "changed_package_entries": [
+          6
+        ],
+        "cross_entry_atomicity_required": false,
+        "cross_entry_mutations": 0,
+        "toc_and_component_headers_regenerated": true,
+        "unchanged_entry_count": 5
+      },
+      "base_package": {
+        "path": "build/postapply-package-linux/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "sha256": "f7260f93e2c87f2403e14f5a8e6ae1436233cce2990c386a1cde48d2e8133e31",
+        "size": 4471056
+      },
+      "component": {
+        "growth_bytes": 278468,
+        "nested_crc32": "0x13FC8AF1",
+        "runtime_end_exclusive": 8380116,
+        "runtime_start": 4423680,
+        "sha256": "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
+        "size": 3956468
+      },
+      "component_receipt_sha256": "1cb3547341f38edfe31906ff40e53ea93b76066ca3011745b6041b1899965280",
+      "ownership": {
+        "cff_erased_gap_bytes": 274352,
+        "cff_erased_gap_rows": 1,
+        "cff_generated_pointer_bytes": 4,
+        "cff_generated_pointer_rows": 1,
+        "cff_rows": 6,
+        "cff_source_bytes": 20356,
+        "cff_source_rows": 4,
+        "collision_or_protected_overlap_count": 0,
+        "container_rows": 6,
+        "flash_plan_sha256": "c12f104bd9feb85e041a12db7a61d1c63aa9e577acb2efc9eb6abd4b2bd23496",
+        "flash_rows": 3594,
+        "highest_cff_end_exclusive": "0x007FDED4",
+        "unresolved_rows": 0,
+        "unused_scattered_table_pool_consumed": 0,
+        "update_flag": "0x007FE000"
+      },
+      "package": {
+        "entry_6_crc32c_msb": "0xD90D86A3",
+        "entry_6_entry_size": 3956596,
+        "entry_6_package_offset": 792928,
+        "entry_6_payload_size": 3956468,
+        "growth_bytes": 278468,
+        "sha256": "d9386d30c0c6b1bd706b36c9ee095ad6e2e9ee9b5dacf9c58a52357c7620a362",
+        "size": 4749524
+      },
+      "reproducibility": {
+        "component_matches_pinned_profile_output": true,
+        "package_assembly_deterministic": true,
+        "zero_final_relocations": true,
+        "zero_undefined_symbols": true
+      }
+    }
+  },
+  "remaining_canonical_changes": [],
+  "routing": {
+    "canonical_component_route_enabled": true,
+    "canonical_package_manifest_route_enabled": true,
+    "component_builder_integration_present": true,
+    "dual_profile_package_candidate_emitted_in_verification": true,
+    "hardware_validation_performed": false,
+    "software_production_route_permitted": true
+  },
+  "schema_version": 1,
+  "status": "g2-freetype-cff-package-builder-and-canonical-route-verified"
+}

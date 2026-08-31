@@ -3,6 +3,14 @@
 Status: authenticated module-attribution triage for official G2 `2.2.6.10`
 Analysis mode: read-only; no signing, flashing, erase, or hardware operation
 
+> Historical-snapshot note: this census predates NemaVG stroke-cap source
+> admission. Its 0x51xxxx aggregate includes `draw_start_cap`, `draw_end_cap`,
+> and `draw_caps`. The 3,306-byte coordinator is now production-routed; the two
+> endpoint records remain stock-retained, unpatched candidates totaling 3,308
+> bytes. Retain the rows below as FreeType-negative/provider-triage evidence,
+> but use [the Wave-0 reconciliation](g2-wave0-readiness-ledger-reconciliation.md)
+> for current byte readiness.
+
 ## Result
 
 This census closes follow-up frontier 1 of the

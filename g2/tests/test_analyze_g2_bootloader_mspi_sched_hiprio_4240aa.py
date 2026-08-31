@@ -62,7 +62,7 @@ class BootloaderMspiSchedHiprioTests(unittest.TestCase):
         report = analyzer.audit()
         self.assertEqual(
             report["status"],
-            "production-routed-exact-dual-profile-source / hardware-validation-deferred-by-project-direction")
+            "production-routed-exact-dual-profile-source / hardware-validation-blocked-by-unavailable-physical-evidence")
         self.assertEqual((report["stock"]["start"], report["stock"]["end"],
                           report["stock"]["bytes"]),
                          (0x004240AA, 0x00424120, 118))
@@ -72,7 +72,7 @@ class BootloaderMspiSchedHiprioTests(unittest.TestCase):
         self.assertEqual(
             report["production"]["source_owned_bytes"]
             + report["production"]["retained_official_bytes"],
-            147296,
+            147350,
         )
         self.assertEqual(report["production"]["next_frontier"], 0x00424120)
         self.assertEqual(report["next_frontier"], {
@@ -80,7 +80,7 @@ class BootloaderMspiSchedHiprioTests(unittest.TestCase):
             "identity": "mspi_device_configure", "bytes": 1902,
         })
         self.assertEqual(report["hardware_validation"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
         self.assertEqual(report["hardware_operations"], [])
 
     def test_empty_queue_starts_dma_in_exact_effect_order(self) -> None:

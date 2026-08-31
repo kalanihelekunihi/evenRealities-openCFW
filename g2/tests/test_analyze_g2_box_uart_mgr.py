@@ -36,8 +36,8 @@ class ZeroAnchorClosureTests(unittest.TestCase):
             'guarded_redirects': 5,
             'routed_stock_bytes': 1296,
             'retained_compatibility_bytes': 114,
-            'package_size': 4634556,
-            'placed_flash_regions': 4495,
+            'package_size': 4677046,
+            'placed_flash_regions': 6586,
         })
 
 

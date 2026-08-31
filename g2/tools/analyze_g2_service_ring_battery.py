@@ -26,18 +26,18 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FM: "1c3e5ed36c1382bc3adc62683ee8a26887f702a11c8b0be5fbfadbd0dce06bc0",
-    CL: "9f7a02c1641aef2ffafbde435f32de8700fdd99950a053845086bd7a20409248",
+    CL: "8fbfa9e5b32b00af72acf2d4c9cbed5ddab3a5f1584799e1546ec36a0e6c9787",
     PM: "b9544563bc91ead78b1d39b6abd218b7cabf5880c8d09844249d2a24f1e7e4f1",
     PV: "a1cf5192e587eea8af8fa2e79e1fde2c12598d6112a78938ef48ebec2fcc0e95",
 }
-SOURCE_SIZE = 2978
-SOURCE_SHA256 = "6385dc5658e91c1bfc6adb80b6133843c8afc8c885185f0a72218706c2e46060"
+SOURCE_SIZE = 3013
+SOURCE_SHA256 = "9f860ae369df7234e8ee22a1033a94d3fb5d231c7c4d67986bac32a81e84dfe9"
 FUNCTIONS = (
-    ("open_cfw_ring_battery_update", 48, 253588, 1),
-    ("open_cfw_ring_battery_state_set", 26, 253636, 0),
-    ("open_cfw_ring_battery_level_get", 12, 253664, 0),
-    ("open_cfw_ring_battery_charging_get", 12, 253676, 0),
-    ("open_cfw_ring_battery_request_from_peer", 36, 253688, 1),
+    ("open_cfw_ring_battery_update", 48, 193740, 1),
+    ("open_cfw_ring_battery_state_set", 26, 193788, 0),
+    ("open_cfw_ring_battery_level_get", 12, 193816, 0),
+    ("open_cfw_ring_battery_charging_get", 12, 193828, 0),
+    ("open_cfw_ring_battery_request_from_peer", 36, 193840, 1),
 )
 PATCHES = (
     ("replace_ring_battery_update", 0x4FF8E4, 136, "df0945fd0d90e6d37c7889a53ae6b4f5391812efbf6fbc5c3fd7b06b347445d8", FUNCTIONS[0][0]),
@@ -200,7 +200,7 @@ def analyze(image: Path = IMAGE) -> dict:
                        "alignment_bytes": 4, "strict_relocations": 2,
                        "stock_replaced_bytes": 352, "retained_literal_pool_bytes": 44,
                        "diagnostic_logging": "stock EasyLogger observability omitted; cached-state and service-record behavior preserved",
-                       "software_functional_gap": False, "hardware_validation": "deferred by project direction",
+                       "software_functional_gap": False, "hardware_validation": "blocked by unavailable physical evidence",
                        "hardware_blocker": "Authorized physical paired-G2 service-record transport or ring battery-state evidence is required for future qualification."},
     }
 

@@ -9,6 +9,7 @@ import hashlib
 import json
 import os
 import shutil
+import stat
 import struct
 import subprocess
 import tempfile
@@ -32,12 +33,28 @@ SOURCES = tuple(SOURCE_ROOT / name for name in (
     "pt_protocol_handlers_transfer.c", "pt_protocol_service.c",
     "pt_protocol_platform_adapter.c", "pt_protocol_production_entry.c",
     "pt_protocol_board_backend.c", "pt_protocol_board_leaf_candidates.c",
+    "pt_protocol_lc3_setup.c",
 ))
+HEADERS = tuple(sorted(SOURCE_ROOT.glob("pt_protocol*.h")))
+PUBLIC_SOURCES = tuple(sorted((*SOURCES, *HEADERS)))
+AGGREGATE_LICENSE = "MIT AND Apache-2.0"
+APACHE_SOURCE = SOURCE_ROOT / "pt_protocol_lc3_setup.c"
+SOURCE_LICENSE_COUNTS = {"MIT": 28, "Apache-2.0": 1}
+APACHE_SOURCE_METADATA = {
+    "upstream": "Google/liblc3",
+    "upstream_commit": "96a3af0beb5487aca3b98a4b992a539a1f6d80d1",
+    "license_path": "third_party/liblc3/LICENSE",
+    "license_sha256": (
+        "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    ),
+}
 LEGACY_INGRESS = (
     (0x00538716, 0x0056F4A0, "stock_direct_call"),
     (0x0053A218, 0x0056F4A0, "source_uart_relocation"),
     (0x0053A356, 0x0056F92C, "source_uart_relocation"),
 )
+SOURCE_UART_ENTRY_REDIRECT = 0x0053A0B6
+THUMB_NOP_PAIR = struct.pack("<HH", 0xBF00, 0xBF00)
 SOURCE_UART_ROUTE_REQUIREMENTS = (
     ("open_cfw_retained_box_uart_product_test", "R_ARM_THM_CALL",
      0x0056F4A0, 88, 10),
@@ -46,12 +63,12 @@ SOURCE_UART_ROUTE_REQUIREMENTS = (
 )
 SOURCE_UART_LEAF_EXPECTED = {
     "size": 158,
-    "sha256": "8ee49d1869b320dca68aadc10d91f27cfa12205c48d038b969cf46746c159d4d",
+    "sha256": "bbf761493c78eae5911aa090a83bfd49204ddda7a1bce8c855757c35f80537ae",
     "unrelocated_sha256": (
         "0ad53c357754dc504d7cb6dcfd9a96fdee5cf5b63000d29c76fa6a35785597ad"
     ),
     "alignment": 4,
-    "offset": 332508,
+    "offset": 264028,
 }
 SOURCE_PROVIDER_ROUTES = (
     ("post_input_message_id3", 28, 0x005130A6,
@@ -133,8 +150,283 @@ class BuildError(RuntimeError):
     pass
 
 
+_COMPILER_INCLUDE_ENVIRONMENT = frozenset({
+    "CCC_OVERRIDE_OPTIONS",
+    "C_INCLUDE_PATH",
+    "CPLUS_INCLUDE_PATH",
+    "CPATH",
+    "INCLUDE",
+    "OBJC_INCLUDE_PATH",
+    "OBJCPLUS_INCLUDE_PATH",
+    "QA_OVERRIDE_GCC3_OPTIONS",
+    "SDKROOT",
+})
+
+
+def _hermetic_compiler_environment() -> dict[str, str]:
+    return {
+        key: value for key, value in os.environ.items()
+        if key not in _COMPILER_INCLUDE_ENVIRONMENT
+    }
+
+
 def sha256(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
+
+
+def _read_regular(path: Path, *, role: str) -> bytes:
+    """Read one identity-bearing file without following its final symlink."""
+    flags = os.O_RDONLY | getattr(os, "O_CLOEXEC", 0)
+    flags |= getattr(os, "O_NOFOLLOW", 0)
+    try:
+        descriptor = os.open(path, flags)
+    except OSError as error:
+        raise BuildError(f"{role} is not a safe regular file: {path}") from error
+    try:
+        before = os.fstat(descriptor)
+        if not stat.S_ISREG(before.st_mode):
+            raise BuildError(f"{role} is not a regular file: {path}")
+        chunks = []
+        while True:
+            chunk = os.read(descriptor, 1024 * 1024)
+            if not chunk:
+                break
+            chunks.append(chunk)
+        after = os.fstat(descriptor)
+        if (
+            before.st_dev,
+            before.st_ino,
+            before.st_size,
+            before.st_mtime_ns,
+        ) != (
+            after.st_dev,
+            after.st_ino,
+            after.st_size,
+            after.st_mtime_ns,
+        ):
+            raise BuildError(f"{role} changed while its identity was recorded")
+        payload = b"".join(chunks)
+        if len(payload) != before.st_size:
+            raise BuildError(f"{role} changed while its identity was recorded")
+        return payload
+    finally:
+        os.close(descriptor)
+
+
+def _resolve_tool_path(command: str, *, role: str) -> Path:
+    selected = shutil.which(command) if "/" not in command else command
+    if not selected:
+        raise BuildError(f"{role} is unavailable: {command}")
+    try:
+        path = Path(selected).resolve(strict=True)
+    except OSError as error:
+        raise BuildError(f"{role} cannot be resolved: {command}") from error
+    _read_regular(path, role=role)
+    return path
+
+
+def _tool_invocation_path(command: str, *, role: str) -> Path:
+    """Return an absolute driver path without resolving its final symlink.
+
+    LLVM's generic ``lld`` binary selects its driver from ``argv[0]``.  The
+    installed ``ld.lld`` is commonly a symlink to that binary, so invoking the
+    fully resolved payload changes behavior even though it hashes the correct
+    executable.  Keep the selected entry-point for execution while
+    ``_resolve_tool_path`` remains the canonical payload identity.
+    """
+    selected = shutil.which(command) if "/" not in command else command
+    if not selected:
+        raise BuildError(f"{role} is unavailable: {command}")
+    invocation = Path(os.path.abspath(selected))
+    try:
+        invocation.lstat()
+    except OSError as error:
+        raise BuildError(f"{role} cannot be resolved: {command}") from error
+    _resolve_tool_path(str(invocation), role=role)
+    return invocation
+
+
+def _version(path: Path, *, role: str, compiler: bool = False) -> str:
+    try:
+        completed = subprocess.run(
+            [
+                str(path),
+                *(["--no-default-config"] if compiler else []),
+                "--version",
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+            env=_hermetic_compiler_environment(),
+        )
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise BuildError(f"{role} version cannot be recorded") from error
+    value = (completed.stdout or completed.stderr).strip()
+    if not value:
+        raise BuildError(f"{role} version cannot be recorded")
+    return value.splitlines()[0].strip() if compiler else value
+
+
+def _executable_identity(
+    command: str, *, role: str, compiler: bool = False
+) -> dict[str, Any]:
+    invocation = _tool_invocation_path(command, role=role)
+    path = _resolve_tool_path(str(invocation), role=role)
+    before = _read_regular(path, role=role)
+    version = _version(invocation, role=role, compiler=compiler)
+    if _resolve_tool_path(str(invocation), role=role) != path:
+        raise BuildError(f"{role} entry point changed while its identity was recorded")
+    after = _read_regular(path, role=role)
+    if after != before:
+        raise BuildError(f"{role} changed while its identity was recorded")
+    return {
+        "invocation_path": str(invocation),
+        "resolved_path": str(path),
+        "size": len(before),
+        "sha256": sha256(before),
+        "version": version,
+    }
+
+
+def _compiler_resource_dir(clang: Path) -> Path:
+    try:
+        completed = subprocess.run(
+            [str(clang), "--no-default-config", "-print-resource-dir"],
+            check=True,
+            capture_output=True,
+            text=True,
+            env=_hermetic_compiler_environment(),
+        )
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise BuildError("compiler resource directory cannot be recorded") from error
+    raw = completed.stdout.strip()
+    if not raw or "\n" in raw:
+        raise BuildError("compiler resource directory cannot be recorded")
+    try:
+        resource_dir = Path(raw).resolve(strict=True)
+    except (OSError, RuntimeError) as error:
+        raise BuildError("compiler resource include directory is unsafe") from error
+    if not Path(raw).is_absolute() or not resource_dir.is_dir():
+        raise BuildError("compiler resource include directory is unsafe")
+    return resource_dir
+
+
+def _compiler_builtin_include_dir(
+    clang: Path, *, expected: Path | None = None,
+    resource_dir: Path | None = None,
+) -> Path:
+    resource_dir = resource_dir or _compiler_resource_dir(clang)
+    try:
+        include_dir = (resource_dir / "include").resolve(strict=True)
+        include_dir.relative_to(resource_dir)
+    except (OSError, ValueError, RuntimeError) as error:
+        raise BuildError("compiler resource include directory is unsafe") from error
+    if not include_dir.is_dir() or include_dir.is_symlink():
+        raise BuildError("compiler resource include directory is unsafe")
+    if expected is not None:
+        expected = Path(expected)
+        try:
+            expected_resolved = expected.resolve(strict=True)
+        except (OSError, RuntimeError) as error:
+            raise BuildError("recorded compiler resource include is unsafe") from error
+        if (
+            not expected.is_absolute()
+            or expected != expected_resolved
+            or expected_resolved != include_dir
+        ):
+            raise BuildError(
+                "compiler resource include differs from recorded toolchain identity"
+            )
+    return include_dir
+
+
+def _compiler_resource_headers(clang: Path) -> dict[str, Any]:
+    resource_dir = _compiler_resource_dir(clang)
+    include_dir = _compiler_builtin_include_dir(clang, resource_dir=resource_dir)
+    entries = []
+    for path in sorted(include_dir.rglob("*"), key=lambda item: item.as_posix()):
+        if path.is_symlink():
+            raise BuildError("compiler resource header closure contains a symlink")
+        if path.is_dir():
+            continue
+        payload = _read_regular(path, role="compiler resource header")
+        entries.append({
+            "path": path.relative_to(include_dir).as_posix(),
+            "size": len(payload),
+            "sha256": sha256(payload),
+        })
+    if not entries:
+        raise BuildError("compiler resource header closure is empty")
+    canonical = json.dumps(
+        entries, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return {
+        "resource_dir": str(resource_dir),
+        "entry_count": len(entries),
+        "total_size": sum(int(item["size"]) for item in entries),
+        "sha256": sha256(canonical),
+        "entries": entries,
+    }
+
+
+def _hermetic_compiler_arguments(
+    clang: Path, *, expected: Path | None = None
+) -> list[str]:
+    include_dir = _compiler_builtin_include_dir(clang, expected=expected)
+    return [
+        "--no-default-config",
+        "-nostdinc",
+        "-isystem",
+        str(include_dir),
+    ]
+
+
+def _toolchain_identity(clang: str, ld: str, nm: str) -> dict[str, Any]:
+    compiler = _executable_identity(
+        clang, role="compiler executable", compiler=True
+    )
+    linker = _executable_identity(ld, role="PT linker executable")
+    symbol_reader = _executable_identity(nm, role="PT nm executable")
+    resource_headers = _compiler_resource_headers(
+        Path(compiler["invocation_path"])
+    )
+    # Bind resource discovery to the same compiler inode/version recorded above.
+    if _executable_identity(
+        compiler["invocation_path"], role="compiler executable", compiler=True
+    ) != compiler:
+        raise BuildError("compiler executable changed during PT build")
+    return {
+        "schema_version": 2,
+        "executables": {
+            "compiler": compiler,
+            "pt_linker": linker,
+            "pt_nm": symbol_reader,
+        },
+        "compiler_resource_headers": resource_headers,
+    }
+
+
+def _recheck_toolchain_identity(identity: dict[str, Any]) -> None:
+    try:
+        executables = identity["executables"]
+        compiler = executables["compiler"]
+        observed = {
+            key: _executable_identity(
+                value["invocation_path"],
+                role=f"{key} executable",
+                compiler=key == "compiler",
+            )
+            for key, value in executables.items()
+        }
+        resource_headers = _compiler_resource_headers(
+            Path(compiler["invocation_path"])
+        )
+    except (KeyError, TypeError) as error:
+        raise BuildError("PT toolchain identity receipt changed") from error
+    if observed != executables or resource_headers != identity.get(
+        "compiler_resource_headers"
+    ):
+        raise BuildError("PT toolchain identity changed during build")
 
 
 def _tool(environment: str, *candidates: str) -> str:
@@ -142,15 +434,15 @@ def _tool(environment: str, *candidates: str) -> str:
     if configured:
         resolved = shutil.which(configured) if "/" not in configured else configured
         if resolved and Path(resolved).is_file():
-            return resolved
+            return str(_tool_invocation_path(resolved, role=environment))
     for candidate in candidates:
         resolved = shutil.which(candidate)
         if resolved:
-            return resolved
+            return str(_tool_invocation_path(resolved, role=environment))
     for candidate in candidates:
         homebrew = Path("/opt/homebrew/opt/llvm/bin") / candidate
         if homebrew.is_file():
-            return str(homebrew)
+            return str(_tool_invocation_path(str(homebrew), role=environment))
     raise BuildError(f"required tool unavailable: {environment}")
 
 
@@ -179,10 +471,16 @@ def _elf_sections(path: Path) -> dict[str, dict[str, int]]:
     return result
 
 
-def _decode_thumb_bl(instruction: int, encoded: bytes) -> int:
+def _decode_thumb_branch(
+        instruction: int, encoded: bytes, *, link: bool | None = None) -> int:
+    if len(encoded) != 4:
+        raise BuildError("generated PT callsite is not four bytes")
     first, second = struct.unpack("<HH", encoded)
-    if first & 0xF800 != 0xF000 or second & 0xD000 != 0xD000:
-        raise BuildError("generated PT callsite is not Thumb BL")
+    if first & 0xF800 != 0xF000 or second & 0x9000 != 0x9000:
+        raise BuildError("generated PT callsite is not Thumb B.W/BL")
+    observed_link = bool(second & 0x4000)
+    if link is not None and observed_link != link:
+        raise BuildError("generated PT callsite has the wrong Thumb branch kind")
     sign = (first >> 10) & 1
     j1, j2 = (second >> 13) & 1, (second >> 11) & 1
     immediate = ((sign << 24) | ((~(j1 ^ sign) & 1) << 23) |
@@ -193,10 +491,37 @@ def _decode_thumb_bl(instruction: int, encoded: bytes) -> int:
     return instruction + 4 + immediate
 
 
+def _decode_thumb_bl(instruction: int, encoded: bytes) -> int:
+    return _decode_thumb_branch(instruction, encoded, link=True)
+
+
+def _exact_fields(value: Any, fields: set[str], role: str) -> dict[str, Any]:
+    if not isinstance(value, dict) or set(value) != fields:
+        raise BuildError(f"{role} fields changed")
+    return value
+
+
+def _exact_slice(data: bytes, offset: int, size: int, role: str) -> bytes:
+    if (type(offset) is not int or type(size) is not int or offset < 0 or
+            size <= 0 or offset > len(data) - size):
+        raise BuildError(f"{role} is outside the authenticated component")
+    return bytes(data[offset:offset + size])
+
+
+def _validate_ota_payload(data: bytes, role: str) -> None:
+    if len(data) < 8 or len(data) > 0x00FFFFFF:
+        raise BuildError(f"{role} nested OTA length is invalid")
+    header = struct.unpack_from("<I", data, 0)[0]
+    if header >> 24 != 0x04 or header & 0x00FFFFFF != len(data):
+        raise BuildError(f"{role} nested OTA length is invalid")
+    if (struct.unpack_from("<I", data, 4)[0] !=
+            zlib.crc32(data[8:]) & 0xFFFFFFFF):
+        raise BuildError(f"{role} nested CRC-32 is invalid")
+
+
 def _build_input_snapshot() -> tuple[tuple[str, int, str], ...]:
     """Authenticate every source input before compilation and publication."""
-    paths = (Path(__file__).resolve(), *SOURCES,
-             *sorted(SOURCE_ROOT.glob("pt_protocol*.h")))
+    paths = (Path(__file__).resolve(), *PUBLIC_SOURCES)
     records = []
     for path in paths:
         data = path.read_bytes()
@@ -205,39 +530,82 @@ def _build_input_snapshot() -> tuple[tuple[str, int, str], ...]:
     return tuple(sorted(records))
 
 
+def _source_license_records() -> list[dict[str, Any]]:
+    """Describe every linked PT source/header under its exact source license."""
+    records = []
+    for path in PUBLIC_SOURCES:
+        license_id = "Apache-2.0" if path == APACHE_SOURCE else "MIT"
+        text = path.read_text(encoding="utf-8")
+        marker = f"SPDX-License-Identifier: {license_id}"
+        other = (
+            "SPDX-License-Identifier: MIT"
+            if license_id == "Apache-2.0"
+            else "SPDX-License-Identifier: Apache-2.0"
+        )
+        if text.count(marker) != 1 or other in text:
+            raise BuildError(f"PT source license boundary changed: {path.name}")
+        payload = text.encode("utf-8")
+        record = {
+            "path": str(path.relative_to(OPENCFW_ROOT)),
+            "size": len(payload),
+            "sha256": sha256(payload),
+            "license": license_id,
+        }
+        if path == APACHE_SOURCE:
+            record.update(APACHE_SOURCE_METADATA)
+        records.append(record)
+    counts = {
+        license_id: sum(
+            record["license"] == license_id for record in records
+        )
+        for license_id in SOURCE_LICENSE_COUNTS
+    }
+    if counts != SOURCE_LICENSE_COUNTS or len(records) != 29:
+        raise BuildError("PT source license census changed")
+    return records
+
+
 def _authenticated_component(
     path: Path, expected: dict[str, Any] | None, *, role: str
 ) -> bytes:
-    if not isinstance(expected, dict):
+    if (not isinstance(expected, dict) or
+            set(expected) != {"size", "sha256"}):
         raise BuildError(f"{role} requires an exact size/SHA-256 contract")
-    try:
-        expected_size = int(expected["size"])
-        expected_sha256 = expected["sha256"]
-    except (KeyError, TypeError, ValueError) as error:
-        raise BuildError(
-            f"{role} requires an exact size/SHA-256 contract"
-        ) from error
-    if (not isinstance(expected_sha256, str) or
+    expected_size = expected["size"]
+    expected_sha256 = expected["sha256"]
+    if (type(expected_size) is not int or expected_size <= 0 or
+            not isinstance(expected_sha256, str) or
             len(expected_sha256) != 64 or
             any(value not in "0123456789abcdef" for value in expected_sha256)):
         raise BuildError(f"{role} SHA-256 contract is invalid")
     data = path.read_bytes()
     if len(data) != expected_size or sha256(data) != expected_sha256:
         raise BuildError(f"{role} changed")
-    if (len(data) < 8 or
-            struct.unpack_from("<I", data, 4)[0] !=
-            zlib.crc32(data[8:]) & 0xFFFFFFFF):
-        raise BuildError(f"{role} nested CRC-32 is invalid")
+    _validate_ota_payload(data, role)
     return data
 
 
 def _validate_source_uart_route_receipt(
     receipt: dict[str, Any] | None, *, profile: str, routed: bool
 ) -> dict[str, Any] | None:
+    if type(routed) is not bool:
+        raise BuildError("PT source-UART routed state must be boolean")
     if receipt is None:
         if routed:
             raise BuildError("PT source-UART route receipt missing")
         return None
+    receipt = _exact_fields(
+        receipt,
+        {
+            "mode", "profile", "function", "strict_relocation_contract",
+            "profile_route_active", "stage_overlay", "leaf", "relocations",
+        },
+        "PT source-UART route receipt",
+    )
+    if profile not in {"apple-clang", "linux-clang"}:
+        raise BuildError("PT source-UART route profile changed")
+    if routed != (profile == "apple-clang"):
+        raise BuildError("PT source-UART route/profile selection changed")
     expected_mode = (
         "source_overlay_relocation" if routed else "authenticated_donor_direct"
     )
@@ -247,31 +615,48 @@ def _validate_source_uart_route_receipt(
             receipt.get("strict_relocation_contract") is not True or
             receipt.get("profile_route_active") is not routed):
         raise BuildError("PT source-UART route receipt changed")
-    stage_overlay = receipt.get("stage_overlay")
-    if not isinstance(stage_overlay, dict):
-        raise BuildError("PT source-UART stage identity missing")
-    try:
-        overlay_size = int(stage_overlay["size"])
-        overlay_sha256 = stage_overlay["sha256"]
-    except (KeyError, TypeError, ValueError) as error:
-        raise BuildError("PT source-UART stage identity changed") from error
-    if (overlay_size <= 0 or not isinstance(overlay_sha256, str) or
+    stage_overlay = _exact_fields(
+        receipt["stage_overlay"], {"size", "sha256"},
+        "PT source-UART stage identity",
+    )
+    overlay_size = stage_overlay["size"]
+    overlay_sha256 = stage_overlay["sha256"]
+    if (type(overlay_size) is not int or overlay_size <= 0 or
+            not isinstance(overlay_sha256, str) or
             len(overlay_sha256) != 64 or
             any(value not in "0123456789abcdef" for value in overlay_sha256)):
         raise BuildError("PT source-UART stage identity changed")
+    leaf = _exact_fields(
+        receipt["leaf"],
+        {"size", "sha256", "unrelocated_sha256", "alignment", "offset"},
+        "PT source-UART leaf identity",
+    )
+    if any(type(leaf[key]) is not type(expected) or leaf[key] != expected
+           for key, expected in SOURCE_UART_LEAF_EXPECTED.items()):
+        raise BuildError("PT source-UART leaf identity changed")
     relocations = receipt.get("relocations")
-    if not isinstance(relocations, list):
+    if not isinstance(relocations, list) or len(relocations) != len(
+            SOURCE_UART_ROUTE_REQUIREMENTS):
         raise BuildError("PT source-UART relocation receipt missing")
-    observed = tuple(sorted(
-        (item.get("symbol"), item.get("type"),
-         int(item.get("target_address", -1)), int(item.get("offset", -1)),
-         int(item.get("type_id", -1)))
-        for item in relocations if isinstance(item, dict)
-    ))
+    observed_records = []
+    for item in relocations:
+        item = _exact_fields(
+            item, {"symbol", "type", "target_address", "offset", "type_id"},
+            "PT source-UART relocation receipt",
+        )
+        if (not isinstance(item["symbol"], str) or
+                not isinstance(item["type"], str) or
+                any(type(item[key]) is not int for key in (
+                    "target_address", "offset", "type_id"
+                ))):
+            raise BuildError("PT source-UART relocation receipt changed")
+        observed_records.append((
+            item["symbol"], item["type"], item["target_address"],
+            item["offset"], item["type_id"],
+        ))
+    observed = tuple(sorted(observed_records))
     if observed != tuple(sorted(SOURCE_UART_ROUTE_REQUIREMENTS)):
         raise BuildError("PT source-UART relocation receipt changed")
-    if receipt.get("leaf") != SOURCE_UART_LEAF_EXPECTED:
-        raise BuildError("PT source-UART leaf identity changed")
     return receipt
 
 
@@ -281,17 +666,50 @@ def build(*, base_path: Path, output_dir: Path, clang: str,
           ingress_authentication_base_path: Path,
           ingress_authentication_base_expected: dict[str, Any],
           source_uart_routed: bool = False,
-          source_uart_route_receipt: dict[str, Any] | None = None
+          source_uart_route_receipt: dict[str, Any] | None = None,
+          record_toolchain_identity: bool = False,
+          expected_builtin_include_dir: Path | None = None,
           ) -> dict[str, Any]:
+    if type(source_uart_routed) is not bool:
+        raise BuildError("PT source-UART routed state must be boolean")
+    clang = str(_tool_invocation_path(clang, role="compiler executable"))
+    ld = _tool("OPENCFW_LLD", "ld.lld", "lld")
+    nm = _tool("OPENCFW_NM", "llvm-nm", "nm")
+    toolchain_identity = (
+        _toolchain_identity(clang, ld, nm)
+        if record_toolchain_identity else None
+    )
+    recorded_builtin_include = None
+    if toolchain_identity is not None:
+        recorded_builtin_include = (
+            Path(toolchain_identity["compiler_resource_headers"]["resource_dir"])
+            / "include"
+        )
+    if (
+        expected_builtin_include_dir is not None
+        and recorded_builtin_include is not None
+        and Path(expected_builtin_include_dir) != recorded_builtin_include
+    ):
+        raise BuildError("PT compiler resource identity differs from core recorder")
+    hermetic_arguments = _hermetic_compiler_arguments(
+        Path(clang),
+        expected=expected_builtin_include_dir or recorded_builtin_include,
+    )
     initial_inputs = _build_input_snapshot()
     base = base_path.read_bytes()
-    if base_expected is not None and (len(base) != int(base_expected["size"]) or
-            sha256(base) != base_expected["sha256"]):
-        raise BuildError("PT provider input component changed")
-    if (len(base) < 8 or
-            struct.unpack_from("<I", base, 4)[0] !=
-            zlib.crc32(base[8:]) & 0xFFFFFFFF):
-        raise BuildError("PT provider input nested CRC-32 is invalid")
+    if base_expected is not None:
+        base_expected = _exact_fields(
+            base_expected, {"size", "sha256"}, "PT provider input identity"
+        )
+        if (type(base_expected["size"]) is not int or
+                not isinstance(base_expected["sha256"], str) or
+                len(base_expected["sha256"]) != 64 or
+                any(value not in "0123456789abcdef"
+                    for value in base_expected["sha256"]) or
+                len(base) != base_expected["size"] or
+                sha256(base) != base_expected["sha256"]):
+            raise BuildError("PT provider input component changed")
+    _validate_ota_payload(base, "PT provider input")
     donor = _authenticated_component(
         ingress_authentication_base_path,
         ingress_authentication_base_expected,
@@ -305,12 +723,11 @@ def build(*, base_path: Path, output_dir: Path, clang: str,
         raise BuildError("PT interval is outside the Apollo component")
     if sha256(base[start_offset:end_offset]) != INTERVAL_SHA256:
         raise BuildError("PT stock interval changed before source replacement")
-    ld = _tool("OPENCFW_LLD", "ld.lld", "lld")
-    nm = _tool("OPENCFW_NM", "llvm-nm", "nm")
     with tempfile.TemporaryDirectory(prefix="g2-pt-provider-") as temporary_name:
         temporary = Path(temporary_name)
         objects = []
         flags = [
+            *hermetic_arguments,
             "--target=arm-none-eabi", "-mcpu=cortex-m55", "-mthumb",
             "-std=c11", "-Oz", "-ffreestanding", "-fno-builtin",
             "-ffunction-sections", "-fdata-sections", "-fno-unwind-tables",
@@ -320,8 +737,13 @@ def build(*, base_path: Path, output_dir: Path, clang: str,
         ]
         for source in SOURCES:
             output = temporary / (source.stem + ".o")
-            subprocess.run([clang, *flags, "-c", str(source), "-o", str(output)],
-                           check=True, capture_output=True, text=True)
+            subprocess.run(
+                [clang, *flags, "-c", str(source), "-o", str(output)],
+                check=True,
+                capture_output=True,
+                text=True,
+                env=_hermetic_compiler_environment(),
+            )
             objects.append(output)
         script = temporary / "pt.ld"
         script.write_text(
@@ -424,20 +846,13 @@ def build(*, base_path: Path, output_dir: Path, clang: str,
         payload_offset = section["address"] - RUN_BASE
         patched[payload_offset:payload_offset + len(data)] = data
     ingress_report = []
-    for address, target, route in LEGACY_INGRESS:
-        offset = address - RUN_BASE
-        authenticated = bytes(donor[offset:offset + 4])
-        working = bytes(base[offset:offset + 4])
+
+    def append_ingress(
+            address: int, target: int, route: str, authenticated: bytes,
+            evidence: str) -> None:
         if (len(authenticated) != 4 or
                 _decode_thumb_bl(address, authenticated) != target):
-            raise BuildError("authenticated PT donor ingress branch changed")
-        if route == "stock_direct_call" or not source_uart_routed:
-            if working != authenticated:
-                raise BuildError(
-                    "PT working ingress differs from authenticated donor")
-            evidence = "authenticated donor BL retained byte-for-byte"
-        else:
-            evidence = "authenticated core-stage relocation to legacy ABI"
+            raise BuildError("authenticated PT ingress branch changed")
         ingress_report.append({
             "runtime_address": address,
             "authenticated_size": len(authenticated),
@@ -449,6 +864,91 @@ def build(*, base_path: Path, output_dir: Path, clang: str,
                 if target == 0x0056F4A0 else
                 "open_cfw_pt_protocol_legacy_postprocess"),
         })
+
+    stock_address, stock_target, stock_route = LEGACY_INGRESS[0]
+    stock_offset = stock_address - RUN_BASE
+    stock_authenticated = _exact_slice(
+        donor, stock_offset, 4, "authenticated PT stock ingress"
+    )
+    stock_working = _exact_slice(
+        base, stock_offset, 4, "PT working stock ingress"
+    )
+    if stock_working != stock_authenticated:
+        raise BuildError("PT working ingress differs from authenticated donor")
+    append_ingress(
+        stock_address, stock_target, stock_route, stock_authenticated,
+        "authenticated donor BL retained byte-for-byte",
+    )
+
+    if source_uart_routed:
+        # The Apple core stage replaces the complete stock box-UART handler
+        # with one B.W entry redirect and NOP fill.  Its two live PT calls are
+        # therefore in the authenticated appended leaf, not at the retired
+        # donor addresses which now lie inside that NOP-filled span.
+        for address, _target, route in LEGACY_INGRESS[1:]:
+            if route != "source_uart_relocation":
+                raise BuildError("PT retired source-UART route contract changed")
+            offset = address - RUN_BASE
+            if _exact_slice(
+                    base, offset, 4, "retired PT source-UART ingress"
+            ) != THUMB_NOP_PAIR:
+                raise BuildError("retired PT source-UART ingress is not NOP fill")
+
+        leaf_runtime = (
+            RUN_BASE + len(donor) + SOURCE_UART_LEAF_EXPECTED["offset"]
+        )
+        leaf_offset = leaf_runtime - RUN_BASE
+        _exact_slice(
+            base, leaf_offset, SOURCE_UART_LEAF_EXPECTED["size"],
+            "PT source-UART appended leaf",
+        )
+        entry_offset = SOURCE_UART_ENTRY_REDIRECT - RUN_BASE
+        entry_branch = _exact_slice(
+            base, entry_offset, 4, "PT source-UART entry redirect"
+        )
+        if (
+            len(entry_branch) != 4
+            or _decode_thumb_branch(
+                SOURCE_UART_ENTRY_REDIRECT, entry_branch, link=False
+            ) != leaf_runtime
+        ):
+            raise BuildError(
+                "PT source-UART entry redirect differs from appended leaf"
+            )
+        for symbol, kind, target, relocation_offset, type_id in (
+                SOURCE_UART_ROUTE_REQUIREMENTS):
+            if kind != "R_ARM_THM_CALL" or type_id != 10:
+                raise BuildError("PT source-UART relocation kind changed")
+            if (type(relocation_offset) is not int or relocation_offset < 0 or
+                    relocation_offset >
+                    SOURCE_UART_LEAF_EXPECTED["size"] - 4):
+                raise BuildError("PT source-UART relocation offset is out of bounds")
+            address = leaf_runtime + relocation_offset
+            offset = address - RUN_BASE
+            working = _exact_slice(
+                base, offset, 4, "PT source-UART active ingress"
+            )
+            append_ingress(
+                address, target, "source_uart_relocation", working,
+                "authenticated core-stage relocation to legacy ABI",
+            )
+    else:
+        # Linux retains the stock handler, so its two source-UART routes remain
+        # byte-identical direct donor BL instructions at the fixed addresses.
+        for address, target, route in LEGACY_INGRESS[1:]:
+            offset = address - RUN_BASE
+            authenticated = _exact_slice(
+                donor, offset, 4, "authenticated PT donor ingress"
+            )
+            working = _exact_slice(
+                base, offset, 4, "PT working donor ingress"
+            )
+            if working != authenticated:
+                raise BuildError("PT working ingress differs from authenticated donor")
+            append_ingress(
+                address, target, route, authenticated,
+                "authenticated donor BL retained byte-for-byte",
+            )
     nested_crc32 = zlib.crc32(patched[8:]) & 0xFFFFFFFF
     struct.pack_into("<I", patched, 4, nested_crc32)
     loadable_size = len(source_payload)
@@ -456,10 +956,9 @@ def build(*, base_path: Path, output_dir: Path, clang: str,
         "schema_version": 1,
         "profile": profile,
         "source": {
+            "license": AGGREGATE_LICENSE,
             "translation_units": len(SOURCES),
-            "files": [{"path": str(path.relative_to(OPENCFW_ROOT)),
-                       "size": path.stat().st_size,
-                       "sha256": sha256(path.read_bytes())} for path in SOURCES],
+            "files": _source_license_records(),
         },
         "placement": {
             "runtime_start": INTERVAL_START, "runtime_end_exclusive": INTERVAL_END,
@@ -494,8 +993,12 @@ def build(*, base_path: Path, output_dir: Path, clang: str,
         "hardware": {"validation": "blocked by unavailable physical evidence",
                      "qualification_complete": False},
     }
+    if toolchain_identity is not None:
+        report["toolchain_identity"] = toolchain_identity
     if _build_input_snapshot() != initial_inputs:
         raise BuildError("PT build inputs changed during build")
+    if toolchain_identity is not None:
+        _recheck_toolchain_identity(toolchain_identity)
     output_dir.mkdir(parents=True, exist_ok=True)
     component_path = output_dir / "ota_s200_firmware_ota.bin"
     component_path.write_bytes(patched)

@@ -1,5 +1,10 @@
 # G2 display-driver manager recovery
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The twelve retained-path anchors / 2,438 bytes expand to nineteen functions /
 2,796 body bytes for `displaydrv_manager.c`. The complete physical object is
 `[0x00473952,0x00474550)`, 3,070 bytes. Seven restored routines complete the

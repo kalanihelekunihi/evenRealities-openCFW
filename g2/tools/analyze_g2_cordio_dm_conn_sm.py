@@ -32,11 +32,11 @@ FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 SOURCE_PIN = (3_950, "5d4698908c44e578d3da2d9eb09f07b7e0e60ce2ecb5deb9c67f96c2ac0bca1b")
 HEADER_PIN = (1_655, "8299ae5795d1fce5323c66c86fafc320b1ed166b8ce0546a198bfb0d8d497ad4")
 TEST_PIN = (6_313, "5e2e1c8ae8ae7011715b89aed920797b6ef2bccd3cc0933d6da833445866d6e2")
-PRODUCTION_LEAF = (356_808, 120, 2, "04a319bb05ef14e301ccaf375089b862a9ddf636220ae8b4f7b2c9b5f8624a74")
-PRODUCTION_OVERLAY = (429_058, "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd")
-PRODUCTION_COMPONENT = (3_952_454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb")
-PRODUCTION_PACKAGE = (4_745_526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934")
-PRODUCTION_FLASH_PLAN = (4_643_183, "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66")
+PRODUCTION_LEAF = (288328, 120, 2, "c79fbbc1083c7a8e935c1d2acb9a0d05f9a4ad918aa6b3003593e8f63bf8d817")
+PRODUCTION_OVERLAY = (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae")
+PRODUCTION_COMPONENT = (3_885_668, "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5")
+PRODUCTION_PACKAGE = (4_678_740, "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a")
+PRODUCTION_FLASH_PLAN = (4_595_610, "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127")
 PINNED_INPUTS = {
     ROOT / "tools/manifests/packetcraft-cordio-dm-conn-sm-function-map.tsv": "b0a42e95ba82522214623e7357945309ab3a5876e0ced618f30390db6e4cc0ff",
     ROOT / "tools/manifests/packetcraft-cordio-dm-conn-sm-provenance.tsv": "66ce42fad423210c94b002a83b7f9ffcba3f4d484e77771d1ee387d608744923",
@@ -191,7 +191,7 @@ def _verify_production() -> dict[str, Any]:
         "flash_regions", "unresolved_flash_regions",
         "container_only_regions", "protected_regions",
     ))
-    if counts != (6671, 0, 6, 6):
+    if counts != (6588, 0, 6, 6):
         raise AuditError("DM connection state-machine flash counts changed")
     return {
         "status": "production-routed",

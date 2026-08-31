@@ -26,8 +26,8 @@ class TouchEmEepromAdmissionTests(unittest.TestCase):
 
     def test_target_compile_and_hardware_policy(self):
         self.assertGreater(self.result["source"]["target_closure_object_bytes"], 0)
-        self.assertEqual(self.result["hardware_validation"], "deferred by project direction")
-        self.assertEqual(self.result["hardware_blocker"], "deferred by project direction")
+        self.assertEqual(self.result["hardware_validation"], "blocked by unavailable physical evidence")
+        self.assertEqual(self.result["hardware_blocker"], "blocked by unavailable physical evidence")
         self.assertNotIn("hardware_operations", self.result)
 
     def test_batch_writer_cannot_overwrite_final_current_summary(self):

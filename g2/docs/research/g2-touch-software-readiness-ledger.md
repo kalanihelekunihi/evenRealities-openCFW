@@ -6,6 +6,22 @@ which shipped bytes and reachable functions presently have project source,
 typed upstream/provider boundaries, intentional unsupported treatment, or no
 sufficient classification?
 
+> **Current Wave-0.5 correction.** This document begins with the historical
+> first-pass ledger below. The current exhaustive classifier retains one
+> 14,510-byte semantic stock-address candidate union, with pinned address and
+> content digests, but no longer labels that union blanket OpenCFW/MIT. The
+> machine-readable
+> `tools/manifests/g2-touch-final-source-candidate-provenance.tsv` partitions it
+> into non-overlapping source-route/license subrows. A translation unit's
+> presence in the nonproduction source image is recorded separately from body
+> or output identity; every subrow denies stock-address-to-linked-body proof,
+> production-ELF ownership, and stock-byte license authority. Apache CAT2
+> bodies that are merely identified upstream remain not linked as those
+> bodies, and Infineon EULA comparison source remains excluded. The current
+> physical bucket is still 14,510 bytes and completion still reports
+> `candidate_source_not_routed=14,510`; this is an accounting correction, not a
+> byte promotion or production-routing event.
+
 The result is **not software-complete**. It performs no MMIO, reset, DFU,
 signing, flash, or hardware operation and makes no hardware-validation claim.
 

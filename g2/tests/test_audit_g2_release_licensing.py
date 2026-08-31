@@ -5,12 +5,16 @@ from __future__ import annotations
 import copy
 import hashlib
 import importlib.util
+import os
+import stat
 import subprocess
 import sys
 import tempfile
 import unittest
 from collections import Counter
 from pathlib import Path
+from types import SimpleNamespace
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,10 +41,14 @@ class G2ReleaseLicensingAuditTests(unittest.TestCase):
         self.assertEqual(self.report["notice"], "NOTICE-CORE-SOURCE.md")
         notice = (ROOT / self.report["notice"]).read_text()
         self.assertIn("does not license or assert redistribution authority", notice)
-        self.assertIn("ISC:", notice)
+        self.assertIn("research-only InvenSense ICM45608 snapshot", notice)
+        self.assertNotIn("ISC", self.tool.LICENSE_TEXTS)
+        invensense_root_notice = (
+            ROOT / "third_party/invensense-icm45608/LICENSE"
+        )
+        self.assertTrue(invensense_root_notice.is_file())
         self.assertTrue(
-            self.tool.LICENSE_TEXTS["ISC"].is_file(),
-            "the InvenSense file-specific ISC grant must ship with the bundle",
+            invensense_root_notice.read_text().startswith("BSD 3-Clause License")
         )
         rows = {row["component"]: row for row in self.report["artifacts"]}
         self.assertEqual(
@@ -97,10 +105,34 @@ class G2ReleaseLicensingAuditTests(unittest.TestCase):
         inventory = (
             ROOT / "docs/release-licensing-and-redistribution.md"
         ).read_text(encoding="utf-8")
+        self.assertIn("Older per-closure provenance manifests", inventory)
+        self.assertIn("it is not a source-complete,", inventory)
+        self.assertIn("redistribution-authorized claim", inventory)
         self.assertIn(
-            f"the two overlays reference {len(rows)} unique,",
-            inventory,
+            f"inventory reference {len(rows)} unique, content-addressed",
+            inventory.replace("\n", " "),
         )
+        lc3_setup = next(
+            row for row in rows
+            if row["path"] ==
+            "components/apollo_main/core_overlay/pt_protocol_lc3_setup.c"
+        )
+        self.assertEqual(lc3_setup["license"], "Apache-2.0")
+        self.assertEqual(lc3_setup["classification"], "upstream-licensed")
+        self.assertEqual(lc3_setup["upstream"], "Google/liblc3")
+        self.assertEqual(
+            lc3_setup["upstream_commit"],
+            "96a3af0beb5487aca3b98a4b992a539a1f6d80d1",
+        )
+        self.assertEqual(
+            lc3_setup["license_evidence"], "g2/third_party/liblc3/LICENSE"
+        )
+        self.assertEqual(lc3_setup["errors"], [])
+        project_mit = next(
+            row for row in rows
+            if row["path"] == "components/shared/cordio/runtime_cordio_hci_tr.c"
+        )
+        self.assertEqual(project_mit["license_evidence"], "LICENSE")
         for license_id, count in Counter(row["license"] for row in rows).items():
             self.assertIn(f"| {license_id} | {count} |", inventory)
 
@@ -174,6 +206,207 @@ class G2ReleaseLicensingAuditTests(unittest.TestCase):
             )
             self.assertEqual(changed["status"], "unresolved")
             self.assertIn("grant/license artifact SHA-256 mismatch", changed["errors"][0])
+
+    def test_authority_grant_and_compliance_must_be_distinct_files(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="opencfw-authority-distinct-") as temporary:
+            root = Path(temporary)
+            evidence = root / "docs/release-authority/codec/evidence.txt"
+            evidence.parent.mkdir(parents=True)
+            evidence.write_bytes(b"grant and self-attested compliance\n")
+            digest = hashlib.sha256(evidence.read_bytes()).hexdigest()
+            record = {
+                "status": "authorized",
+                "reason": "invalid self-attested authority",
+                "evidence": {
+                    "grant_path": "docs/release-authority/codec/evidence.txt",
+                    "grant_sha256": digest,
+                    "terms": "binary redistribution for the named payload",
+                    "reference": "test-license-reference-distinct-1",
+                    "compliance_path": (
+                        "docs/release-authority/codec/evidence.txt"
+                    ),
+                    "compliance_sha256": digest,
+                },
+            }
+            result = self.tool.validate_binary_authority_record(
+                "codec", record, root=root
+            )
+            self.assertEqual(result["status"], "unresolved")
+            self.assertTrue(
+                any("must be distinct" in error for error in result["errors"])
+            )
+
+    def test_duplicate_source_identity_and_project_license_fail_closed(self) -> None:
+        records, conflicts = self.tool._source_records({
+            "sources": [
+                {
+                    "path": "components/example.c",
+                    "size": 1,
+                    "sha256": "1" * 64,
+                    "license": "MIT",
+                    "origin": "OpenCFW clean-room source",
+                },
+                {
+                    "path": "components/example.c",
+                    "size": 2,
+                    "sha256": "2" * 64,
+                    "license": "GPL-3.0-only",
+                    "origin": "OpenCFW clean-room source",
+                },
+            ]
+        })
+        self.assertEqual(set(records), {"components/example.c"})
+        self.assertEqual(
+            conflicts,
+            [
+                "duplicate source metadata conflict: components/example.c: sha256",
+                "duplicate source metadata conflict: components/example.c: size",
+                "duplicate source metadata conflict: components/example.c: license",
+            ],
+        )
+        self.assertEqual(
+            self.tool._classify_source(records["components/example.c"]),
+            "project-owned-or-adapted",
+        )
+        self.assertEqual(
+            self.tool._project_mit_policy_error(
+                "components/example.c",
+                records["components/example.c"]["license"],
+                {"components/example.c"},
+            ),
+            "project-owned source must use MIT",
+        )
+        self.assertEqual(
+            self.tool._license_text_payload_error("MIT", b"alternate terms\n"),
+            "license text identity changed: MIT",
+        )
+        self.assertIsNone(
+            self.tool._license_text_payload_error(
+                "MIT", (ROOT.parent / "LICENSE").read_bytes()
+            )
+        )
+
+    def test_licensing_json_rejects_linked_inputs(self) -> None:
+        with tempfile.TemporaryDirectory(
+            prefix="licensing-json-safe-", dir=ROOT / "tests"
+        ) as temporary:
+            directory = Path(temporary)
+            actual = directory / "actual.json"
+            actual.write_text('{"schema_version": 1}\n', encoding="utf-8")
+            linked = directory / "linked.json"
+            linked.symlink_to(actual)
+            with self.assertRaisesRegex(
+                self.tool.ReleaseAuthorityError, "opened safely"
+            ):
+                self.tool._safe_json(linked, label="linked licensing input")
+
+    def test_authority_evidence_rejects_links_and_descriptor_drift(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="opencfw-authority-safe-") as temporary:
+            root = Path(temporary)
+            authority = root / "docs/release-authority/codec"
+            authority.mkdir(parents=True)
+            grant = authority / "license.txt"
+            compliance = authority / "compliance.txt"
+            grant.write_bytes(b"grant\n")
+            compliance.write_bytes(b"compliance\n")
+
+            def record() -> dict:
+                return {
+                    "status": "authorized",
+                    "reason": "authenticated test grant",
+                    "evidence": {
+                        "grant_path": "docs/release-authority/codec/license.txt",
+                        "grant_sha256": hashlib.sha256(grant.read_bytes()).hexdigest(),
+                        "terms": "binary redistribution for the named payload",
+                        "reference": "test-license-reference-safe-1",
+                        "compliance_path": (
+                            "docs/release-authority/codec/compliance.txt"
+                        ),
+                        "compliance_sha256": hashlib.sha256(
+                            compliance.read_bytes()
+                        ).hexdigest(),
+                    },
+                }
+
+            hardlink = authority / "license-hardlink.txt"
+            os.link(grant, hardlink)
+            linked = self.tool.validate_binary_authority_record(
+                "codec", record(), root=root
+            )
+            self.assertEqual(linked["status"], "unresolved")
+            self.assertTrue(
+                any("independent regular file" in error for error in linked["errors"])
+            )
+            hardlink.unlink()
+
+            grant_payload = grant.read_bytes()
+            grant.unlink()
+            grant.symlink_to(compliance)
+            symlinked = self.tool.validate_binary_authority_record(
+                "codec", record(), root=root
+            )
+            self.assertEqual(symlinked["status"], "unresolved")
+            self.assertTrue(
+                any("opened safely" in error for error in symlinked["errors"])
+            )
+            grant.unlink()
+            grant.write_bytes(grant_payload)
+
+            real_authority = authority.with_name("codec-real")
+            authority.rename(real_authority)
+            authority.symlink_to(real_authority, target_is_directory=True)
+            ancestor = self.tool.validate_binary_authority_record(
+                "codec", {
+                    **record(),
+                    "evidence": {
+                        **record()["evidence"],
+                        "grant_sha256": hashlib.sha256(
+                            (real_authority / "license.txt").read_bytes()
+                        ).hexdigest(),
+                        "compliance_sha256": hashlib.sha256(
+                            (real_authority / "compliance.txt").read_bytes()
+                        ).hexdigest(),
+                    },
+                }, root=root
+            )
+            self.assertEqual(ancestor["status"], "unresolved")
+            self.assertTrue(
+                any("opened safely" in error for error in ancestor["errors"])
+            )
+            authority.unlink()
+            real_authority.rename(authority)
+
+            real_fstat = os.fstat
+            regular_calls = 0
+
+            def drifting_fstat(descriptor: int):
+                nonlocal regular_calls
+                result = real_fstat(descriptor)
+                if not stat.S_ISREG(result.st_mode):
+                    return result
+                regular_calls += 1
+                if regular_calls != 2:
+                    return result
+                return SimpleNamespace(
+                    st_dev=result.st_dev,
+                    st_ino=result.st_ino,
+                    st_mode=result.st_mode,
+                    st_nlink=result.st_nlink,
+                    st_size=result.st_size,
+                    st_mtime_ns=result.st_mtime_ns,
+                    st_ctime_ns=result.st_ctime_ns + 1,
+                )
+
+            with mock.patch.object(
+                self.tool.os, "fstat", side_effect=drifting_fstat
+            ):
+                drifting = self.tool.validate_binary_authority_record(
+                    "codec", record(), root=root
+                )
+            self.assertEqual(drifting["status"], "unresolved")
+            self.assertTrue(
+                any("changed during descriptor read" in error for error in drifting["errors"])
+            )
 
 
 if __name__ == "__main__":

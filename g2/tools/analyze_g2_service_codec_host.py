@@ -29,7 +29,7 @@ PINS = {
     CLOSURE: "a433a3c352f57dd1cec155539a506e42aeebcbba7e6e1d3e0a68fff777de6203",
     PROVENANCE: "e613cbb862ed07649833216743b431401952399e41c6ad1466191faa1c239b39",
 }
-SOURCE_SHA256 = "14d8da487b06bf9bf16c957c0e4ba9d76098204c05e1b603dc89c3593920ed35"
+SOURCE_SHA256 = "770aec4fc610a89bf47a28d820e97adbfbe8028304075553a456dc683f949b32"
 FUNCTIONS = (
     "open_cfw_codec_host_init", "open_cfw_codec_host_cleanup",
     "open_cfw_codec_host_magic_matches", "open_cfw_codec_host_pack_message",
@@ -48,10 +48,10 @@ FUNCTIONS = (
     "open_cfw_svc_i2s_output_control", "open_cfw_codec_get_voice_event",
 )
 SOURCE_OFFSETS = (
-    300540, 300568, 300572, 300620, 300860, 301376, 301432, 301628,
-    301676, 301820, 301880, 302152, 302404, 302656, 302916, 303188,
-    303464, 303740, 304252, 304292, 304332, 304372, 304416, 304456,
-    304496, 304536,
+    240692, 240720, 240724, 240780, 241020, 241536, 241592, 241788,
+    241836, 241980, 242040, 242312, 242564, 242816, 243076, 243348,
+    243624, 243900, 244412, 244452, 244492, 244532, 244576, 244616,
+    244656, 244696,
 )
 SOURCE_SIZES = (
     26, 4, 42, 240, 514, 54, 194, 46, 144, 60, 270, 252, 252,
@@ -266,7 +266,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         raise AuditError("GX8002 state/message literal changed")
 
     source = SOURCE.read_bytes()
-    if len(source) != 29_309 or sha256(source) != SOURCE_SHA256:
+    if len(source) != 29_300 or sha256(source) != SOURCE_SHA256:
         raise AuditError("codec-host production source changed")
     source_text = source.decode("utf-8")
     required_source_tokens = (
@@ -338,7 +338,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             len(gap_regions), sum(item["size"] for item in gap_regions),
             len(text_regions), sum(item["size"] for item in text_regions),
             len(align_regions), sum(item["size"] for item in align_regions)) != (
-            26, 7_318, 17, 1_314, 26, 4_262, 10, 30):
+            26, 7_318, 17, 1_314, 26, 4_262, 10, 38):
         raise AuditError("codec-host manifest ownership changed")
     package = PACKAGE.read_bytes()
     if (len(package), sha256(package)) != (
@@ -404,7 +404,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "exact_symbols": [name for _, name in EXACT_SYMBOLS],
             "source_inventory": "26-function clean-room production C",
             "historical_source_inventory": "unavailable",
-            "license": "GPL-3.0-only",
+            "license": "MIT",
         },
         "production": {
             "candidate": str(SOURCE.relative_to(ROOT)),
@@ -415,11 +415,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "generated_alignment_bytes": 38,
             "strict_relocations": 111,
             "guarded_redirects": 26,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "authorized right temple is not under test because qualification is deferred by project direction; authorized left "
-                "temple must remain stock; future qualification requires a responsive authorized pair or "
-                "golden codec/UART capture is required for future qualification"
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific codec/UART host fixture or an "
+                "authenticated golden codec/UART host capture"
             ),
         },
     }

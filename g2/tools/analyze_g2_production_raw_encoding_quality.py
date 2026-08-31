@@ -42,20 +42,8 @@ APOLLO_FUNCTIONS = {
 # They are intentionally absent from the public tree.  The digest-only records
 # preserve the audit trail without redistributing the transcription.
 REMOVED_TRANSCRIPTS = {
-    "components/bootloader/core_overlay/runtime_mspi_configure_424af0.c":
-        (1561, "ec17fa6c195b86a0b5cb7e8760b7af3be8cee47481ad837a391e4f53d090de04", 228),
     "components/bootloader/core_overlay/runtime_mspi_control_4251c0.c":
         (24638, "b46f494c5e4b35a64fa9a13c6d256c720f413a4aa29a57f0b9ffdcb636d5a696", 4384),
-    "components/bootloader/core_overlay/runtime_mspi_device_configure_424120.c":
-        (13020, "93c96cb310ed58bc5f06bb048a321bf3dd4943215bd466d357decff102b53e46", 1902),
-    "components/bootloader/core_overlay/runtime_mspi_device_configure_public_424be4.c":
-        (6904, "c8754d994052a0b582a8a1ff377653492488b492138c3ac579afd3d944726725", 1154),
-    "components/bootloader/core_overlay/runtime_mspi_initialize_424a5a.c":
-        (1071, "4a52d4f85a7179932b25814d9109e729d19744322f09787aa4ff61bb8bb6ce41", 144),
-    "components/bootloader/core_overlay/runtime_mspi_lifecycle_425066.c":
-        (2266, "d9f5ce663da4ca56241e345d636021d700b8e99011c36c135783284729e873c2", 312),
-    "components/bootloader/core_overlay/runtime_mspi_piomixed_configure_42488e.c":
-        (1814, "334adbc65bf4dc2e8c53442a5be2caca1808933cf8d9c62227ae326377d678c5", 232),
     "components/bootloader/core_overlay/runtime_mspi_transfer_interrupt_4262e0.c":
         (3798, "1b800153d9619810fa31a3186e003fbbf4902aadf3c95b36338bca2eaa630855", 546),
 }
@@ -195,8 +183,8 @@ def analyze() -> dict:
         "source_owned_bytes_currently_overstated": 0,
         "fully_raw_byte_body_bytes": 0,
         "public_raw_executable_transcript_files": 0,
-        "removed_public_transcript_files": 8,
-        "removed_public_transcript_executable_bytes": 8902,
+        "removed_public_transcript_files": 2,
+        "removed_public_transcript_executable_bytes": 4930,
     }, "production raw-encoding totals changed")
     return {
         "schema_version": 1,
@@ -218,7 +206,7 @@ def analyze() -> dict:
             }
             for path, record in sorted(REMOVED_TRANSCRIPTS.items())
         ],
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "production_files_modified": [],
         "metrics": metrics,
         "rows": rows,

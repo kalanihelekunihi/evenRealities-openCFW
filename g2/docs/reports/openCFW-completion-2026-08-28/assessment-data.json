@@ -1,16 +1,16 @@
 {
   "aggregate": {
     "buckets": {
-      "candidate_source_not_routed": 72234,
-      "generated_or_reconstructible": 418706,
-      "production_source": 466729,
-      "typed_retained_or_external": 3786805,
+      "candidate_source_not_routed": 30636,
+      "generated_or_reconstructible": 426474,
+      "production_source": 424703,
+      "typed_retained_or_external": 3795983,
       "unclassified": 0
     },
-    "component_payload_bytes": 4744474,
-    "package_bytes": 4745418,
+    "component_payload_bytes": 4677796,
+    "package_bytes": 4678740,
     "package_envelope_bytes": 944,
-    "release_blocking_bytes": 3859039,
+    "release_blocking_bytes": 3826619,
     "source_incomplete_components": [
       "apollo_main",
       "apollo_bootloader",
@@ -27,73 +27,145 @@
   "components": [
     {
       "buckets": {
-        "candidate_source_not_routed": 42786,
-        "generated_or_reconstructible": 401526,
-        "production_source": 438910,
-        "typed_retained_or_external": 3069124,
+        "candidate_source_not_routed": 0,
+        "generated_or_reconstructible": 409348,
+        "production_source": 394928,
+        "typed_retained_or_external": 3081392,
         "unclassified": 0
       },
       "classification_complete": true,
       "component": "Apollo main application",
       "component_id": "apollo_main",
       "details": {
-        "clkmgr_divider_candidate_bytes": 52,
-        "clkmgr_divider_candidate_functions": 2,
-        "clkmgr_divider_production_routed": false,
-        "nemavg_stroke_cap_candidate_bytes": 6614,
-        "nemavg_stroke_cap_candidate_functions": 3,
-        "nemavg_stroke_cap_production_routed": false,
+        "clkmgr_divider_production_routed": true,
+        "clkmgr_divider_source_functions": 2,
+        "clkmgr_divider_source_stock_bytes": 52,
+        "controlled_label_reconciliation_additive": false,
+        "controlled_label_reconciliation_bytes": 17800,
+        "nemavg_stroke_cap_candidate_bytes": 0,
+        "nemavg_stroke_cap_candidate_functions": 0,
+        "nemavg_stroke_cap_coordinator_production_routed": true,
+        "nemavg_stroke_cap_endpoint_stock_entries_unpatched": false,
+        "nemavg_stroke_cap_production_routed": true,
+        "nemavg_stroke_cap_retained_unpatched_functions": 0,
+        "nemavg_stroke_cap_retained_unpatched_stock_bytes": 0,
+        "nemavg_stroke_cap_source_routed_functions": 3,
+        "nemavg_stroke_cap_source_routed_stock_bytes": 6614,
         "origin_buckets": {
-          "first_party_or_project_path_anchored": 319788,
-          "outside_trustworthy_function_envelopes": 2087198,
+          "first_party_or_project_path_anchored": 291566,
+          "outside_trustworthy_function_envelopes": 2090160,
           "third_party_path_anchored": 86364,
-          "unanchored_discovered_function": 618560
+          "unanchored_discovered_function": 613302
         },
-        "provider_sha256": "47aabec489ba8882b84591e80ca0f105ff26e3739f4eb639b2d91b88fa2de701",
+        "overlapping_object_closure_evidence": {
+          "additive_to_disjoint_release_totals": false,
+          "bytes": 885418
+        },
+        "provider_sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
+        "pt_protocol_board_source_complete": false,
         "pt_protocol_bound_commands": 66,
         "pt_protocol_candidate_stock_body_bytes": 32866,
         "pt_protocol_handler_surface_complete": true,
         "pt_protocol_platform_backend_contract_complete": true,
-        "pt_protocol_platform_backend_production_bound": false,
-        "pt_protocol_production_routed": false,
+        "pt_protocol_platform_backend_production_bound": true,
+        "pt_protocol_production_bootstrap_complete": true,
+        "pt_protocol_production_placement_complete": true,
+        "pt_protocol_production_ram_binding_remaining_bytes": 0,
+        "pt_protocol_production_routed": true,
+        "pt_protocol_production_text_placement_free_bytes": 72740,
+        "pt_protocol_production_text_placement_shortfall_bytes": 0,
         "pt_protocol_provider_adapters_complete": true,
-        "pt_protocol_retained_provider_bindings_remaining": 0,
-        "pt_protocol_retained_provider_candidate_bindings": 36,
-        "pt_protocol_retained_provider_candidate_stock_body_bytes": 3254,
+        "pt_protocol_retained_provider_bindings_remaining": 13,
+        "pt_protocol_retained_provider_candidate_bindings": 40,
+        "pt_protocol_retained_provider_candidate_stock_body_bytes": 3402,
+        "pt_protocol_second_order_callable_bindings": 81,
+        "pt_protocol_second_order_data_bindings": 97,
+        "pt_protocol_second_order_data_categories": {
+          "external_xip_bound": 2,
+          "external_xip_data": 2,
+          "immutable_flash_data": 33,
+          "peripheral_mmio": 5,
+          "retained_callback_entry": 2,
+          "runtime_sram_data": 53
+        },
+        "pt_protocol_second_order_data_source_owned": 0,
+        "pt_protocol_second_order_data_unique_addresses": 94,
+        "pt_protocol_second_order_retained_boundaries_deliberately_supported": true,
+        "pt_protocol_second_order_retained_callable_bindings": 13,
+        "pt_protocol_second_order_retained_callable_unique_addresses": 13,
+        "pt_protocol_second_order_retained_data_bindings": 97,
+        "pt_protocol_second_order_source_callable_bindings": 68,
+        "pt_protocol_second_order_source_local_callable_bindings": 39,
+        "pt_protocol_second_order_source_overlay_callable_bindings": 29,
         "pt_protocol_stock_abi_entry_complete": true,
-        "pt_protocol_target_undefined_symbols": 0
+        "pt_protocol_stock_layout_data_bindings": 53,
+        "pt_protocol_stock_layout_data_deliberately_supported": true,
+        "pt_protocol_stock_layout_data_immutable_flash_bindings": 17,
+        "pt_protocol_stock_layout_data_runtime_sram_bindings": 36,
+        "pt_protocol_stock_layout_data_software_gap": false,
+        "pt_protocol_target_bss_bytes": 0,
+        "pt_protocol_target_loadable_bytes": 22643,
+        "pt_protocol_target_undefined_symbols": 0,
+        "pt_protocol_top_level_retained_provider_bindings_remaining": 4,
+        "release_readiness_partition": {
+          "candidate_source_not_routed": 0,
+          "typed_retained_or_external": 3081392
+        },
+        "unanchored_frontier_partition": {
+          "candidate_source_not_routed": 0,
+          "typed_retained_unanchored_without_candidate": 613302
+        }
       },
       "hardware_blocker": "blocked by unavailable physical evidence",
       "hardware_operations": [],
       "hardware_validation": "blocked by unavailable physical evidence",
       "production_routed": true,
-      "release_blocking_bytes": 3111910,
-      "size": 3952346,
+      "release_blocking_bytes": 3081392,
+      "size": 3885668,
       "source_complete": false
     },
     {
       "buckets": {
-        "candidate_source_not_routed": 52,
-        "generated_or_reconstructible": 16544,
-        "production_source": 27819,
-        "typed_retained_or_external": 119425,
+        "candidate_source_not_routed": 0,
+        "generated_or_reconstructible": 16490,
+        "production_source": 29775,
+        "typed_retained_or_external": 117575,
         "unclassified": 0
       },
       "classification_complete": true,
       "component": "Apollo bootloader",
       "component_id": "apollo_bootloader",
       "details": {
-        "clkmgr_divider_candidate_bytes": 52,
-        "clkmgr_divider_candidate_functions": 2,
-        "clkmgr_divider_production_routed": false,
-        "provider_sha256": "3ae28d27b81ca70d96fd5846d04fa1a4f0add5a8514cee21f9f34bdaa1455eac",
-        "source_owned_in_place_bytes": 12232
+        "clkmgr_divider_production_routed": true,
+        "clkmgr_divider_source_functions": 2,
+        "clkmgr_divider_source_stock_bytes": 52,
+        "provider_sha256": "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
+        "retained_complement": {
+          "bytes_by_address_status": {
+            "generated_alignment": 16,
+            "generated_source_entry_replacement": 16474,
+            "official_blob": 117575,
+            "source_compiled": 29775
+          },
+          "component_bytes": 163840,
+          "derivation": "disjoint current core-manifest file-offset intervals; no candidate or historical-frontier bytes are added",
+          "intervals": 593,
+          "intervals_by_address_status": {
+            "generated_alignment": 9,
+            "generated_source_entry_replacement": 206,
+            "official_blob": 67,
+            "source_compiled": 311
+          },
+          "retained_file_offset_set_sha256": "4c7c6b9150254adf1b3d51907bce1e9462cd2a2d067dd59f74a54897d06e1f0a",
+          "retained_official_bytes": 117575
+        },
+        "source_owned_in_place_bytes": 14082
       },
       "hardware_blocker": "blocked by unavailable physical evidence",
       "hardware_operations": [],
       "hardware_validation": "blocked by unavailable physical evidence",
       "production_routed": true,
-      "release_blocking_bytes": 119477,
+      "release_blocking_bytes": 117575,
       "size": 163840,
       "source_complete": false
     },
@@ -109,6 +181,19 @@
       "component": "GX8002 codec/DSP",
       "component_id": "codec",
       "details": {
+        "external_provider_claims_open_availability": false,
+        "external_provider_detail": {
+          "bytes": 326000,
+          "bytes_by_class": {
+            "opaque_executable": 190912,
+            "opaque_npu_commands": 9164,
+            "opaque_runtime_data": 5124,
+            "proprietary_model_data": 120800
+          },
+          "open_source_available": false,
+          "payload_redistribution_authority": "unresolved",
+          "provider_contract": "an external user-supplied provider must authenticate exact payload identity; the boundary does not claim open availability"
+        },
         "typed_external_spans": 11,
         "unavailable_proprietary_bytes": 0
       },
@@ -122,23 +207,57 @@
     },
     {
       "buckets": {
-        "candidate_source_not_routed": 0,
+        "candidate_source_not_routed": 1240,
         "generated_or_reconstructible": 0,
         "production_source": 0,
-        "typed_retained_or_external": 211948,
+        "typed_retained_or_external": 210708,
         "unclassified": 0
       },
       "classification_complete": true,
       "component": "EM9305 BLE controller",
       "component_id": "ble_em9305",
       "details": {
+        "candidate_production_routed": false,
+        "candidate_source_not_routed_bytes": 1240,
+        "completion_bucket_mapping": {
+          "buckets": {
+            "candidate_source_not_routed": 1240,
+            "generated_or_reconstructible": 0,
+            "production_source": 0,
+            "typed_retained_or_external": 210708,
+            "unclassified": 0
+          },
+          "candidate_production_routed": false,
+          "component_bytes": 211948,
+          "qualification": "the 1,240 reviewed MIT concrete-source bytes remain candidates until production routing; the 178,290 bytes outside the residual census remain in the typed retained component boundary",
+          "release_blocking_bytes": 211948
+        },
+        "final_source_readiness_receipts": {
+          "hardware_operations": [],
+          "ledger": {
+            "path": "em9305-final-source-readiness.tsv",
+            "sha256": "d63cdcd7a4bbaf6a30ef55eafa470561d205ac87f55656c424786bbbec775b15",
+            "size": 32977
+          },
+          "manifest_count": 2,
+          "residual_bytes": 33658,
+          "residual_span_count": 175,
+          "schema_version": 5,
+          "summary": {
+            "path": "em9305-final-source-readiness-summary.json",
+            "sha256": "ae70d87d4833ec98e5235813ada50564513fcbb7ecd2a02816411510bd088084",
+            "size": 5211
+          }
+        },
+        "hardware_operations": [],
         "residual_readiness_bytes": {
           "concrete_source_available": 1240,
           "typed_unsupported_external_boundary": 8348,
           "unavailable_proprietary_controller_code": 24070
         },
         "residual_scope_bytes": 33658,
-        "residual_unclassified_bytes": 0
+        "residual_unclassified_bytes": 0,
+        "typed_retained_or_external_bytes": 210708
       },
       "hardware_blocker": "blocked by unavailable physical evidence",
       "hardware_operations": [],
@@ -161,8 +280,115 @@
       "component_id": "touch",
       "details": {
         "admission_batches": 18,
+        "admission_chain_candidate_instruction_bytes": 8524,
         "authoritative_batch": 26,
-        "cumulative_candidate_instruction_bytes": 8524,
+        "candidate_provenance": {
+          "address_set_sha256": "ab7fbcdd8d7aa5d6a8f974f14a75eca3041689315410350d2337a309ff81277b",
+          "candidate_bytes": 14510,
+          "content_sha256": "36de6cf8b2b435167383990f4afe100f970959aa5607a36e233dc9a7812cac13",
+          "entry_claim_count": 178,
+          "eula_vendor_source_included": false,
+          "manifest": "g2-touch-final-source-candidate-provenance.tsv",
+          "nonproduction_source_image_elf_sha256": "dc7e904fd01be5fd2ea7262a2f094796c395bc35338fb78b3f6a71906a40c656",
+          "nonproduction_source_image_production_routed": false,
+          "overlapping_semantic_claim_bytes": 50,
+          "production_elf_ownership": false,
+          "row_digest": "3dcc238d48660b9b2964fa6644c8d88d63e7c829bb7d6c3f66042738615dfbe5",
+          "semantic_stock_address_candidates_only": true,
+          "stock_address_to_linked_output_identity_proven": false,
+          "stock_byte_redistribution_authority": "NOASSERTION",
+          "subrow_count": 6,
+          "subrow_overlap_bytes": 0
+        },
+        "candidate_provenance_manifest": "g2-touch-final-source-candidate-provenance.tsv",
+        "candidate_provenance_subrows": 6,
+        "cumulative_candidate_instruction_bytes": 13694,
+        "generation_receipt": {
+          "analysis_inputs": {
+            "aggregate_sha256": "314622feca33964631d7f7ee69168cd6659b91e598bc9f554f05b995e8abc31a",
+            "path_count": 69,
+            "path_sha256": {
+              "blobs/official/g2-2.2.6.10/firmware_touch.bin": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+              "components/shared/touch/runtime_touch_application_boundary.c": "5398983b1ed35db266e09fc5dfa7a2eb94c80ab9d63cdd2f26a5ebc2944cc183",
+              "components/shared/touch/runtime_touch_application_core.c": "4cb7326476acd23c8c9fa5100e643b3aa19e87a44e922afbc5ac99dac5f6f40c",
+              "components/shared/touch/runtime_touch_application_packet_pipeline.c": "323765b2d7eafc8f90bf5f4291cfa135fbdb3cd972e2ca54f346fec3a2c99eca",
+              "components/shared/touch/runtime_touch_application_state_pipeline.c": "fe505d30986c352072fdc0a9691f59607a8eb94ea2467ac5a10b39a2c79ccb7a",
+              "components/shared/touch/runtime_touch_capsense_provider.c": "694ed1ab595ecaa9b1039fefcbd7de5e6eedcce75a9b139edfd76729fe6f3aa7",
+              "components/shared/touch/runtime_touch_cat2_adapters.c": "0504c79d87d1c79d3a953699568c6b73e86c061696c60f490d8c83e9025cbb3d",
+              "components/shared/touch/runtime_touch_clock_application_wrappers.c": "1a3d243e50dfcef1dd9eb276bf72f5af5c67229994cb417bcf20e86109b80ee9",
+              "components/shared/touch/runtime_touch_closed_record_pipeline.c": "321e7cd9157736105dcfcff7db319a620af81cc6fc276009bfdc9845d27e8129",
+              "components/shared/touch/runtime_touch_configuration_bootstrap.c": "6ed8e0da52d3ad974752c7993364b84a04d9ee187eb6dd84684ae369c9a5baed",
+              "components/shared/touch/runtime_touch_configuration_start_pipeline.c": "cc3fe55df4dbaa00b3534225dd41ce5c335fee469578c15c073df59ace40b1e3",
+              "components/shared/touch/runtime_touch_critical_adapters.S": "db0f414bf818e850544a1c2541db6a4e760b996f4147526f6525bd6658ee1654",
+              "components/shared/touch/runtime_touch_deferred_work.c": "7417ef8e62e2a2e60e4397f81a29968e12f9fe7f1645c53166b810142042315f",
+              "components/shared/touch/runtime_touch_emeeprom_clean_room.c": "699f35a2116389fb3603217d0455edcde4f16922589b9114fb2d866312543636",
+              "components/shared/touch/runtime_touch_flash_row_adapters.c": "04ec6331c138e8156853a25a0b0547922f6aa211f2d79756f8a8b43956ada4ad",
+              "components/shared/touch/runtime_touch_i2c_protocol.c": "e9cbb38deb85e593de051cdbe5a27c81b50eb22c944a7b6c8c9223c1c9fdd538",
+              "components/shared/touch/runtime_touch_leaf_primitives.c": "9f8e179b7482bc095327679fdae77f42a414953225673909c9546d7edbdf9053",
+              "components/shared/touch/runtime_touch_memory_runtime.c": "44c91d39ade2f5ef9eb8cbe8ba3b5f8202e1c40da43a3c9d5f435b6cef20a5a7",
+              "components/shared/touch/runtime_touch_platform_completion.c": "204e0f30500b1e70d2dbcf68b97c161e0116ab2d0fcb096a7658c615f6b0c00f",
+              "components/shared/touch/runtime_touch_platform_wrappers.c": "20b561b07817df5a49eaafde9898e5af9b44eca1b2b7cbe015233c1323288863",
+              "components/shared/touch/runtime_touch_policy_helpers.c": "e702bc819ca9c62c027e36550d7ad21afcf9165c30682a495b1e047bf48b3178",
+              "components/shared/touch/runtime_touch_product_orchestration.c": "3456f3a24b6301823f822d4e82588ea8b660e31b2bb5833d1320605a8a182f61",
+              "components/shared/touch/runtime_touch_record_primitives.c": "66541d33f3f1ecd60b877ccc1ca62cf96b2474bda1adc8fd8287f12cd7b62dd7",
+              "components/shared/touch/runtime_touch_runtime_adapters.c": "6fa70ed97d9caf73e5b4967b37198480306f0670764338171aee15ced66c1880",
+              "components/shared/touch/runtime_touch_selection_update_pipeline.c": "cd5b4a16ad420daa286ffcdb791e9018b42c1531047f75579f73b91d84ae1ee6",
+              "components/shared/touch/runtime_touch_sensing.c": "30d7fd3e9c2c9d0a02b1ae4a5737cdf66a17d0f0aebab7b61531326373e9c811",
+              "components/shared/touch/runtime_touch_startup_closed.c": "056fc99dfb8a0108e314b64be74a114709afa2da704389328b50285b591af144",
+              "components/shared/touch/runtime_touch_storage_adapters.c": "8f5d4fd5f0c587e5af729f475b5c0f62e641ab8462cdbf3623601e572fb2785e",
+              "components/shared/touch/runtime_touch_terminal_wrappers.c": "2ba1ae9ba1ab9f3f0d78d170ac42439ef2c795ac70602cbd8994f2c05e070b16",
+              "components/shared/touch/runtime_touch_unsigned_division.c": "5eb4d3c982d2e8ed4c5ef3037d6a92794403c691aa2be17745c611c092b216e8",
+              "components/touch/source_image/build_image.py": "6c2eaecaa61494e7b63799fdd0b2ceb03a496aafadb8f221165db8f36b1b7861",
+              "components/touch/source_image/firmware_image.c": "a6e390d8e1f02f0eca43c373c587d30abedf13c454ea983ddaf1c7d7e0f4085a",
+              "components/touch/source_image/linker.ld": "0e368ca2e18804d96c7722d91bf17ae84b5677e6c625b1ab0ee1255c26b13849",
+              "components/touch/source_image/startup.c": "8d9aff33eeeb427013a7433828ce6e4e3570aeba02b595c573aa148421e42375",
+              "tools/analyze_g2_touch_final_frontier.py": "84dbc3c75a9d8f109af3e8014ca7fa9c85c375890424036c8ca908ab08b500f7",
+              "tools/analyze_g2_touch_identity.py": "7247ca60066265094caddced463d6377e75c0b6f8cb99ddc436b5adc0c31bcd0",
+              "tools/analyze_g2_touch_platform_completion_admission.py": "2ea584edd7906e8d6a12843d10695eebe85042c02a5d020982fcbb29cf0f7bc5",
+              "tools/analyze_g2_touch_prefix_function_map.py": "9baa2ab02208117c421543b358a5b228c7fd65897b39538d17b2856ed5aec965",
+              "tools/analyze_g2_touch_relocated_partition.py": "b9f9e71f817e38757171b69a33fdf8d3ef3039527ed63dc01857248a1de10e62",
+              "tools/analyze_g2_touch_relocated_semantics.py": "af87c3eea757918144551b2424567220080285d22a0d1f1c8abe4730a5fe465d",
+              "tools/analyze_g2_touch_software_readiness.py": "cf0698c55ec382740f69366b0d7a9b7b37841ca97973d151fe30130609cdb0e4",
+              "tools/analyze_g2_touch_source_image.py": "a183f8eda6ee538bc601d3e9d9176dd87541284606ed06984481bbdfbbff7821",
+              "tools/manifests/g2-touch-application-core-admission.tsv": "8ff7b3f21fe93850bcec5dce39e22215eb508a469fabe71acf6bdb0ffd910893",
+              "tools/manifests/g2-touch-application-packet-pipeline-admission.tsv": "7e45ac157bc1e2c2947f481ab14bb2e04f882b0f6a510c2f6858dd0053019036",
+              "tools/manifests/g2-touch-application-state-pipeline-admission.tsv": "d26089da6fd61f502b40e954c23e13e6f70a0398f5ac294b7b3b5d60b116b4c3",
+              "tools/manifests/g2-touch-application-upstream-admission.tsv": "f69f1e54820feb411c72d9b7be44f66ea5b62d57602068621ae12b5dda668810",
+              "tools/manifests/g2-touch-cat2-source-admission2.tsv": "383cd9883220e5b8fe9e3ba413d4aa4c1c515e461a8d40876159c0aec1fa5d34",
+              "tools/manifests/g2-touch-cat2-source-admission3.tsv": "0349d34fc5147fce8a11250d7dbfb4b6a92cb1337deab4191056c45aefb1f499",
+              "tools/manifests/g2-touch-cat2-source-admission4.tsv": "95f40313c92342e5e525e34a8b4d7ab7dda2900c4f9b4e10546558f7564a4677",
+              "tools/manifests/g2-touch-cat2-source-admission5.tsv": "436c405aa7dbdab10c00f2ac43ce13e50f1186d050a1ded5ed7b7cc6810a8523",
+              "tools/manifests/g2-touch-clock-application-wrappers-admission.tsv": "f630b7f703287bbbad88d26482eac8e90f071838d686682328dcc4b7e8697aaa",
+              "tools/manifests/g2-touch-closed-record-pipeline-admission.tsv": "a1e5b077f48e72c995f4859ab43b2b87e41273c860dfcb0ca4b9f2eb543efca8",
+              "tools/manifests/g2-touch-configuration-bootstrap-admission.tsv": "c1b0f9f77cf072dae99855b43986332976b9b7e78b014885b386397a4250d873",
+              "tools/manifests/g2-touch-configuration-start-pipeline-admission.tsv": "168d7e394232ff971037edb863e3c8a436ee5d3debdcca18a3a5c6473e81e239",
+              "tools/manifests/g2-touch-deferred-work-admission.tsv": "298d6f6ff479cb6866a5f4d32f800819744d8173ab8e468a29093470c6575b67",
+              "tools/manifests/g2-touch-emeeprom-clean-room-admission.tsv": "cef182c97d240d6526ab911831912c1d8eb6cbd238fbac4533bcefe8b14cdb26",
+              "tools/manifests/g2-touch-flash-row-admission.tsv": "63d9088710f0b00fa2ad6149ef11c18f6e5eb5082804e6847189ca893feb9361",
+              "tools/manifests/g2-touch-leaf-primitives-admission.tsv": "2048f4075ade5cb07aa6243822b57999d69876579664b2ee0c8ce419ff3f22a7",
+              "tools/manifests/g2-touch-platform-completion-admission.tsv": "486894e3b010a3872a4da453407c98ed47f44da0c6ecad0fef6c321f03adc2f6",
+              "tools/manifests/g2-touch-platform-wrappers-admission.tsv": "98854542a5b354818cf984a8da5cda1078873823bbb9b9e554d5736c7b14e939",
+              "tools/manifests/g2-touch-product-orchestration-admission.tsv": "d0bce71de88e5ef272775ed08b84cebc472066be737c5f549b44ca40978c368f",
+              "tools/manifests/g2-touch-record-primitives-admission.tsv": "22eb1fda42c6f71f705838b058328cf67a39e60d56ef1b992341660d07b017cf",
+              "tools/manifests/g2-touch-selection-update-pipeline-admission.tsv": "126189c09b9fb98538712cab283cfcd9eece6c7f740d31204f3596ed978fcbbe",
+              "tools/manifests/g2-touch-software-readiness-functions.tsv": "1395305ff616fb53276d99a74d2b22736fef33aa2320fb03c00a035e79983319",
+              "tools/manifests/g2-touch-source-admission.tsv": "b18ef6d5acd9c1cd286120a6ad6784d5da06e7855ba7a2978b60226da32a86ba",
+              "tools/manifests/g2-touch-source-image-summary.json": "92c1947a710b5e3d24f23c6e22a8585b8346715ca27429e011511d491ed3aea7",
+              "tools/manifests/g2-touch-startup-closed-admission.tsv": "0ec44612f8af5e7ca7e8949782fa8c6c8db165680f15c75e123799361517bca2",
+              "tools/manifests/g2-touch-storage-adapters-admission.tsv": "10ee12a0da2e0e0dede8eea315049d5203287d4360dfb7849dfe13f06509eabd",
+              "tools/manifests/g2-touch-terminal-wrappers-admission.tsv": "e1f83420698aaeb0b91726abb512aa170b06e8ca07cb7437c625ed2c396aa102"
+            }
+          },
+          "generation_receipt_sha256": "08273958361436eca0a774812de8ca917d6d724d2de836a9f745737d86467aa9",
+          "logical_manifest_count": 5,
+          "rendered_outputs": {
+            "g2-touch-current-source-readiness-summary.json:core": "f998f901678e0cf6765e59ac84c7b83fb1ee88a9416dada4671e91c04140b8d1",
+            "g2-touch-final-classification-summary.json:core": "0b3c426b9d3b9593c3c791329ed0f767937ce55789fc1d8f645fbd741e2c411f",
+            "g2-touch-final-frontier.tsv": "4884fb433ffc58292ebb2fc1c685d56a20d19128ca6aabb849b5a8f2a13a0d87",
+            "g2-touch-final-physical-byte-buckets.tsv": "38fc6439efa3fafaa9257c47c6570ece21f3cc6d49f687bd302e6064a2c51dda",
+            "g2-touch-final-source-candidate-provenance.tsv": "d1a9f838eb85cfc571b55836ae479d63b995aa5b02c5283dee02ace2e910be6b"
+          }
+        },
         "reachable_unclassified_functions": 0,
         "remaining_source_or_implementation_functions": 0,
         "resident_abi_available": false,
@@ -171,6 +397,14 @@
         "source_image_raw_flash_bytes": 15560,
         "source_image_translation_units": 31,
         "source_image_undefined_symbols": 0,
+        "typed_code_complement_bytes": 15854,
+        "typed_noncode_bytes": 3588,
+        "typed_noncode_partition": {
+          "config_and_tables": 1756,
+          "strings": 1640,
+          "vectors": 192
+        },
+        "typed_semantic_mask_digest": "2e5bfaafd2f03a36f8eba68b0160be284ba91f9e22d2e10b1f3ce8b2297ab5f2",
         "unimplemented_application_contracts": 0
       },
       "hardware_blocker": "blocked by unavailable physical evidence",
@@ -246,14 +480,97 @@
     "classification_complete": "Every byte has a source, generated, candidate, or typed-boundary decision. This is independent of source completion.",
     "generated_or_reconstructible": "Deterministic framing, patch, alignment, or format metadata; this does not imply recovered application behavior.",
     "production_source": "Bytes emitted from maintained source and routed by the current production component build.",
-    "source_complete": "No component bytes still require retained or external firmware.",
+    "source_complete": "Every required behavior byte is routed from maintained source: candidate, retained/external, and unclassified byte counts are all zero.",
     "typed_retained_or_external": "A known retained, upstream, proprietary, or unsupported boundary; classification is not source ownership.",
     "unclassified": "Bytes without a final source or boundary decision."
+  },
+  "dual_profile_ownership": {
+    "analyzer": "tools/analyze_g2_dual_profile_ownership.py",
+    "checked": true,
+    "classification_policy": "admitted component build reports are authoritative for source/generated/retained totals; flash-plan address_status rows remain an address map and require the checked profile reconciliation below",
+    "companion": "tools/manifests/g2-dual-profile-ownership.json",
+    "companion_schema_version": 3,
+    "companion_sha256": "b00b6aee969f176e4534ebabfa52acd89c8f1c2392752c6038702d2098e3fb83",
+    "limitation": "Exact aggregate source/generated/candidate/retained/container totals are checked for both profiles, but the Linux coarse spans do not provide a complete per-byte source-vs-generated-vs-retained mask.",
+    "per_byte_ownership_mask_complete": false,
+    "per_byte_ownership_policy": {
+      "all_profiles_mask_complete": false,
+      "linux_per_byte_ownership_mask_complete": false,
+      "qualification": "Linux aggregate buckets and typed-mixed spans are exact, but no Linux per-byte source/generated/retained ownership is fabricated",
+      "sole_current_authority_profile": "apple-clang"
+    },
+    "profiles": {
+      "apple-clang": {
+        "address_status_ownership_mode": "non_authoritative_requires_checked_reconciliation",
+        "aggregate_buckets": {
+          "candidate_source_not_routed": 30636,
+          "generated_or_reconstructible": 426474,
+          "production_source": 424703,
+          "typed_retained_or_external": 3795983,
+          "unclassified": 0
+        },
+        "bytes_requiring_address_label_reconciliation": 17800,
+        "component_payload_bytes": 4677796,
+        "flash_plan_sha256": "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127",
+        "internal_component_container_bytes": 300,
+        "outer_evenota_envelope_bytes": 944,
+        "package_report_sha256": "4d3945c95bd4ff7c8b1f8e6df4c59e5f15285c053ce37e78cfba4a830f368dcd",
+        "package_sha256": "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a",
+        "package_size": 4678740,
+        "per_byte_ownership_authority": "canonical Apple component builder/region mask",
+        "per_byte_ownership_mask_complete": true,
+        "physical_flash_bytes": 4677496,
+        "typed_mixed_profile_spans": []
+      },
+      "linux-clang": {
+        "address_status_ownership_mode": "non_authoritative_profile_coarse",
+        "aggregate_buckets": {
+          "candidate_source_not_routed": 30636,
+          "generated_or_reconstructible": 136046,
+          "production_source": 207141,
+          "typed_retained_or_external": 4096289,
+          "unclassified": 0
+        },
+        "bytes_requiring_address_label_reconciliation": 272466,
+        "component_payload_bytes": 4470112,
+        "flash_plan_sha256": "3915b8e5d4d04bbd1a540c6851534011b611445b75354add5cd5b24bd86e35ff",
+        "internal_component_container_bytes": 300,
+        "outer_evenota_envelope_bytes": 944,
+        "package_report_sha256": "62939ba9e07fecf90f0cfc927f053c238932e51255f19dfe04df90ba12d465f4",
+        "package_sha256": "f7260f93e2c87f2403e14f5a8e6ae1436233cce2990c386a1cde48d2e8133e31",
+        "package_size": 4471056,
+        "per_byte_ownership_authority": "aggregate totals plus explicit typed-mixed spans only",
+        "per_byte_ownership_mask_complete": false,
+        "physical_flash_bytes": 4469812,
+        "typed_mixed_profile_spans": [
+          {
+            "classification": "typed_mixed_profile_ownership",
+            "component": "apollo_bootloader",
+            "component_file_offset": 148599,
+            "end_exclusive": 163824,
+            "reason": "exact bytes and addresses; no complete per-byte source-vs-generated-vs-retained mask is claimed",
+            "size": 15225
+          },
+          {
+            "classification": "typed_mixed_profile_ownership",
+            "component": "apollo_main",
+            "component_file_offset": 0,
+            "end_exclusive": 3678000,
+            "reason": "exact bytes and addresses; no complete per-byte source-vs-generated-vs-retained mask is claimed",
+            "size": 3678000
+          }
+        ]
+      }
+    },
+    "sole_current_per_byte_ownership_authority_profile": "apple-clang",
+    "source_inputs_sha256": "00f38b0f6d9fd0b8d1fa1e66f73878f504bbc25e9047e766418c936b2f549e65",
+    "typed_mixed_boundary": "typed_mixed_profile_ownership"
   },
   "gates": {
     "binary_redistribution_authority_resolved": false,
     "byte_accounting_complete": true,
     "classification_complete": true,
+    "dual_profile_ownership_reconciliation": true,
     "hardware_blocker": "blocked by unavailable physical evidence",
     "hardware_operations": [],
     "hardware_validation": "blocked by unavailable physical evidence",
@@ -313,18 +630,17 @@
     ],
     "separation_rule": "source availability and source license compliance do not establish permission to redistribute retained or binary-only firmware",
     "source_classification_counts": {
-      "project-owned-or-adapted": 564,
-      "upstream-licensed": 192
+      "project-owned-or-adapted": 599,
+      "upstream-licensed": 185
     },
     "source_errors": 0,
-    "source_files": 756,
+    "source_files": 784,
     "source_license_counts": {
-      "Apache-2.0": 80,
+      "Apache-2.0": 81,
       "BSD-2-Clause": 2,
-      "BSD-3-Clause": 95,
+      "BSD-3-Clause": 99,
       "GPL-3.0-only": 1,
-      "ISC": 7,
-      "MIT": 544,
+      "MIT": 574,
       "Zlib": 27
     },
     "source_metadata_clean": true,
@@ -338,28 +654,31 @@
     ]
   },
   "package": {
-    "component_payload_bytes": 4744474,
+    "component_payload_bytes": 4677796,
     "conservation": {
-      "component_bucket_bytes": 4744474,
-      "component_buckets_plus_envelope_bytes": 4745418,
+      "component_bucket_bytes": 4677796,
+      "component_buckets_plus_envelope_bytes": 4678740,
       "matches_expected_package_size": true
     },
-    "expected_sha256": "b0748df36cbcba58a0bf04ca4de4fa27887f8db0ddb87de61755d830c2ddae58",
-    "expected_size": 4745418,
+    "expected_sha256": "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a",
+    "expected_size": 4678740,
     "format": "EVENOTA",
     "generated_envelope_bytes": 944
   },
   "project_license_policy": {
-    "apache_records_preserved": 80,
-    "bsd_records_preserved": 97,
+    "apache_records_preserved": 81,
+    "bsd_records_preserved": 101,
     "case_source_image_package_files": 5,
     "case_source_image_project_mit_files": 7,
     "case_source_image_support_files": 2,
     "clean": true,
-    "community_controller_and_adapter_source_files": 106,
-    "community_project_mit_compatible_source_files": 103,
+    "community_controller_and_adapter_source_files": 112,
+    "community_project_mit_compatible_source_files": 109,
     "community_touch_apache_source_files_preserved": 3,
-    "distributed_project_mit_normalization_targets": 883,
+    "distributed_project_mit_normalization_targets": 906,
+    "em9305_source_image_package_files": 3,
+    "em9305_source_image_project_mit_files": 6,
+    "em9305_source_image_support_files": 3,
     "overlay_records_pending_mit": 0,
     "project_owned_gpl_records_pending_mit": 0,
     "project_owned_normalization_targets": 460,
@@ -371,52 +690,462 @@
     "upstream_gpl_records_preserved": 1,
     "zlib_records_preserved": 27
   },
-  "schema_version": 2,
+  "schema_version": 3,
   "source_inputs": [
+    {
+      "path": "blobs/official/g2-2.2.6.10/firmware_touch.bin",
+      "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "size": 34464
+    },
+    {
+      "path": "build/canonical-observation/apple-a/build-report.json",
+      "sha256": "faa44244eb1abb457f7d6f71d7f901eacac49b6ce8b492cf4dc1174d6ff79953",
+      "size": 33680324
+    },
+    {
+      "path": "build/canonical-observation/apple-b/build-report.json",
+      "sha256": "fa5792332d24a2331f76846a1d1be4c45f263fa0464d00a5a94db654d961b58d",
+      "size": 33680324
+    },
+    {
+      "path": "build/canonical-observation/linux-a/build-report.json",
+      "sha256": "cdab5dd458526551e5bfa314d612c3363206c512cf91d73426440997a05e325e",
+      "size": 4397239
+    },
+    {
+      "path": "build/canonical-observation/linux-b/build-report.json",
+      "sha256": "c632bfad7ba9a3cecfc5442574252a1455368df8db08c3516824a63f5b2f6f45",
+      "size": 4397239
+    },
+    {
+      "path": "build/canonical-provider/linux-clang/apollo_bootloader/build-report.json",
+      "sha256": "d6369d491628d053be53eeef03f2ce78da47b35f8565e3fd4eea3635921e01f5",
+      "size": 2071485
+    },
+    {
+      "path": "build/postapply-package-apple/build-report.json",
+      "sha256": "4d3945c95bd4ff7c8b1f8e6df4c59e5f15285c053ce37e78cfba4a830f368dcd",
+      "size": 4317
+    },
+    {
+      "path": "build/postapply-package-apple/flash-plan.json",
+      "sha256": "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127",
+      "size": 4595610
+    },
+    {
+      "path": "build/postapply-package-linux/build-report.json",
+      "sha256": "62939ba9e07fecf90f0cfc927f053c238932e51255f19dfe04df90ba12d465f4",
+      "size": 4315
+    },
+    {
+      "path": "build/postapply-package-linux/flash-plan.json",
+      "sha256": "3915b8e5d4d04bbd1a540c6851534011b611445b75354add5cd5b24bd86e35ff",
+      "size": 2509940
+    },
+    {
+      "path": "components/apollo_main/core_overlay/build/build-report.json",
+      "sha256": "3cddcabf68eaf0e731499c18fe71b583e4775663db8f2438494f8fa7651971e3",
+      "size": 17630136
+    },
+    {
+      "path": "components/apollo_main/core_overlay/overlay.json",
+      "sha256": "ec03febcb2955d9c50c8a84a792de5a52991906cbcdf42e49d3c9099fd8bcfe0",
+      "size": 5852619
+    },
+    {
+      "path": "components/bootloader/core_overlay/build/build-report.json",
+      "sha256": "3adf11abee6f95645e4442c07451f54f03137f22545385b6c02d33c2b9fab447",
+      "size": 2086362
+    },
+    {
+      "path": "components/bootloader/core_overlay/overlay.json",
+      "sha256": "9814321669b385acc48329358f9c9ba5ae3ddb3f56735fc55a83f0c710529a40",
+      "size": 906589
+    },
+    {
+      "path": "components/em9305/source_image/README.md",
+      "sha256": "1b920ac6e6eacf88f6cab2198393289aa3cccd212b815c7270df89e39dcf44d6",
+      "size": 1033
+    },
+    {
+      "path": "components/em9305/source_image/build_image.py",
+      "sha256": "6e4759851683109a2060a736d146e300c7dc0a43aad589bdbb0bd45b49f9078f",
+      "size": 3294
+    },
+    {
+      "path": "components/em9305/source_image/record_package.py",
+      "sha256": "33c4be40013dfcfcc786dc569e3fd108a1b9845aba211458b252a9d527e85ee4",
+      "size": 5529
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_application_boundary.c",
+      "sha256": "5398983b1ed35db266e09fc5dfa7a2eb94c80ab9d63cdd2f26a5ebc2944cc183",
+      "size": 584
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_application_core.c",
+      "sha256": "4cb7326476acd23c8c9fa5100e643b3aa19e87a44e922afbc5ac99dac5f6f40c",
+      "size": 7620
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_application_packet_pipeline.c",
+      "sha256": "323765b2d7eafc8f90bf5f4291cfa135fbdb3cd972e2ca54f346fec3a2c99eca",
+      "size": 7187
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_application_state_pipeline.c",
+      "sha256": "fe505d30986c352072fdc0a9691f59607a8eb94ea2467ac5a10b39a2c79ccb7a",
+      "size": 9622
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_capsense_provider.c",
+      "sha256": "694ed1ab595ecaa9b1039fefcbd7de5e6eedcce75a9b139edfd76729fe6f3aa7",
+      "size": 503
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_cat2_adapters.c",
+      "sha256": "0504c79d87d1c79d3a953699568c6b73e86c061696c60f490d8c83e9025cbb3d",
+      "size": 5909
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_clock_application_wrappers.c",
+      "sha256": "1a3d243e50dfcef1dd9eb276bf72f5af5c67229994cb417bcf20e86109b80ee9",
+      "size": 5728
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_closed_record_pipeline.c",
+      "sha256": "321e7cd9157736105dcfcff7db319a620af81cc6fc276009bfdc9845d27e8129",
+      "size": 5461
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_configuration_bootstrap.c",
+      "sha256": "6ed8e0da52d3ad974752c7993364b84a04d9ee187eb6dd84684ae369c9a5baed",
+      "size": 2187
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_configuration_start_pipeline.c",
+      "sha256": "cc3fe55df4dbaa00b3534225dd41ce5c335fee469578c15c073df59ace40b1e3",
+      "size": 4381
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_critical_adapters.S",
+      "sha256": "db0f414bf818e850544a1c2541db6a4e760b996f4147526f6525bd6658ee1654",
+      "size": 732
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_deferred_work.c",
+      "sha256": "7417ef8e62e2a2e60e4397f81a29968e12f9fe7f1645c53166b810142042315f",
+      "size": 1091
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_emeeprom_clean_room.c",
+      "sha256": "699f35a2116389fb3603217d0455edcde4f16922589b9114fb2d866312543636",
+      "size": 12896
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_flash_row_adapters.c",
+      "sha256": "04ec6331c138e8156853a25a0b0547922f6aa211f2d79756f8a8b43956ada4ad",
+      "size": 1987
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_i2c_protocol.c",
+      "sha256": "e9cbb38deb85e593de051cdbe5a27c81b50eb22c944a7b6c8c9223c1c9fdd538",
+      "size": 7314
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_leaf_primitives.c",
+      "sha256": "9f8e179b7482bc095327679fdae77f42a414953225673909c9546d7edbdf9053",
+      "size": 1709
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_memory_runtime.c",
+      "sha256": "44c91d39ade2f5ef9eb8cbe8ba3b5f8202e1c40da43a3c9d5f435b6cef20a5a7",
+      "size": 1484
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_platform_completion.c",
+      "sha256": "204e0f30500b1e70d2dbcf68b97c161e0116ab2d0fcb096a7658c615f6b0c00f",
+      "size": 7400
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_platform_wrappers.c",
+      "sha256": "20b561b07817df5a49eaafde9898e5af9b44eca1b2b7cbe015233c1323288863",
+      "size": 4722
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_policy_helpers.c",
+      "sha256": "e702bc819ca9c62c027e36550d7ad21afcf9165c30682a495b1e047bf48b3178",
+      "size": 6092
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_product_orchestration.c",
+      "sha256": "3456f3a24b6301823f822d4e82588ea8b660e31b2bb5833d1320605a8a182f61",
+      "size": 7609
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_record_primitives.c",
+      "sha256": "66541d33f3f1ecd60b877ccc1ca62cf96b2474bda1adc8fd8287f12cd7b62dd7",
+      "size": 2928
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_runtime_adapters.c",
+      "sha256": "6fa70ed97d9caf73e5b4967b37198480306f0670764338171aee15ced66c1880",
+      "size": 1440
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_selection_update_pipeline.c",
+      "sha256": "cd5b4a16ad420daa286ffcdb791e9018b42c1531047f75579f73b91d84ae1ee6",
+      "size": 6955
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_sensing.c",
+      "sha256": "30d7fd3e9c2c9d0a02b1ae4a5737cdf66a17d0f0aebab7b61531326373e9c811",
+      "size": 4629
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_startup_closed.c",
+      "sha256": "056fc99dfb8a0108e314b64be74a114709afa2da704389328b50285b591af144",
+      "size": 1941
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_storage_adapters.c",
+      "sha256": "8f5d4fd5f0c587e5af729f475b5c0f62e641ab8462cdbf3623601e572fb2785e",
+      "size": 2066
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_terminal_wrappers.c",
+      "sha256": "2ba1ae9ba1ab9f3f0d78d170ac42439ef2c795ac70602cbd8994f2c05e070b16",
+      "size": 1355
+    },
+    {
+      "path": "components/shared/touch/runtime_touch_unsigned_division.c",
+      "sha256": "5eb4d3c982d2e8ed4c5ef3037d6a92794403c691aa2be17745c611c092b216e8",
+      "size": 1259
+    },
+    {
+      "path": "components/touch/source_image/build_image.py",
+      "sha256": "6c2eaecaa61494e7b63799fdd0b2ceb03a496aafadb8f221165db8f36b1b7861",
+      "size": 6990
+    },
+    {
+      "path": "components/touch/source_image/firmware_image.c",
+      "sha256": "a6e390d8e1f02f0eca43c373c587d30abedf13c454ea983ddaf1c7d7e0f4085a",
+      "size": 3684
+    },
+    {
+      "path": "components/touch/source_image/linker.ld",
+      "sha256": "0e368ca2e18804d96c7722d91bf17ae84b5677e6c625b1ab0ee1255c26b13849",
+      "size": 1235
+    },
+    {
+      "path": "components/touch/source_image/startup.c",
+      "sha256": "8d9aff33eeeb427013a7433828ce6e4e3570aeba02b595c573aa148421e42375",
+      "size": 2561
+    },
+    {
+      "path": "manifests/g2-2.2.6.10-core-source.json",
+      "sha256": "c49af789b37b7ee6f5ba0598464ef9eb2107acce73e68647e923bd73de223795",
+      "size": 3186925
+    },
     {
       "path": "manifests/g2-2.2.6.10.json",
       "sha256": "1e6f7da11f63cf063098de2213a304e0a15fe99e9a932cdef9fedf32d2856c61",
       "size": 9602
     },
     {
-      "path": "manifests/g2-2.2.6.10-core-source.json",
-      "sha256": "b9f79075bba42908c9969f1ddc328a1cbe63a75a9ac39d64bb4e3cf25150b3cb",
-      "size": 3234390
+      "path": "tools/analyze_em9305_controller_clusters.py",
+      "sha256": "23747b44e7c34882e5c7647410969e6dac2bdea46ba53b83742f1e227d9512bc",
+      "size": 18221
     },
     {
-      "path": "components/apollo_main/core_overlay/build/build-report.json",
-      "sha256": "81d7f12a26604699e9203a13bb9a712c35ccc68d162d1dea54297a2a5cc4e1cc",
-      "size": 17476619
+      "path": "tools/analyze_em9305_first_party_hooks_candidate.py",
+      "sha256": "2f4f8911654552c468743612c9e94394a630d237ecc6d3e5856f0e6254e12a9d",
+      "size": 11160
     },
     {
-      "path": "components/bootloader/core_overlay/build/build-report.json",
-      "sha256": "356c6e54f46333a7e4b30e1429514600ae763185011ea50c72b65a507a553fa2",
-      "size": 1977292
+      "path": "tools/analyze_em9305_master_connection_boundary.py",
+      "sha256": "eb785c22f182a76add5047973de08b8ed6808bb12295edbdc6ac8d76278a9013",
+      "size": 4396
+    },
+    {
+      "path": "tools/analyze_em9305_metaware_runtime_candidate.py",
+      "sha256": "bb9b62aa9e5d88b3f5f92cda58ad3dc56a8b74be69c8ef67a6ce4a8a08e3dd45",
+      "size": 12170
+    },
+    {
+      "path": "tools/analyze_em9305_pawr_boundary.py",
+      "sha256": "47029f23d99052ba60b63049e45840aaa14e4f897d96e16940a1888b7f786171",
+      "size": 5487
+    },
+    {
+      "path": "tools/analyze_em9305_qpc.py",
+      "sha256": "2fa48cdc53328f4411699a0e0222db8b54c9f8be2e1e0375668f77ae19de7ab0",
+      "size": 53254
+    },
+    {
+      "path": "tools/analyze_em9305_qpc_hook_provider_candidate.py",
+      "sha256": "8bbfbd5951abfde4b111286527f76afddacecbc9a09696a451985b924000dedf",
+      "size": 15855
+    },
+    {
+      "path": "tools/analyze_em9305_record_package.py",
+      "sha256": "2c4b9f94e35f9d312d44fefcd36fdc2ca19c98004449ec70dd0862d2fcc32b20",
+      "size": 6122
+    },
+    {
+      "path": "tools/analyze_em9305_sdk_discovery.py",
+      "sha256": "7b5fb53e6fec12b7ca2679dcd3c2891890df4d0bf69776885df10d349e5970df",
+      "size": 40597
+    },
+    {
+      "path": "tools/analyze_em9305_slave_connection_boundary.py",
+      "sha256": "dff3fc488240065af02ec7efe3a13173393d07539277274fea54d2e038ce0686",
+      "size": 7420
+    },
+    {
+      "path": "tools/analyze_em9305_source_readiness.py",
+      "sha256": "faf3cb03a201a00da2e819abdd040e2694a93ba1a3d1e875845c4760f6800b55",
+      "size": 41765
+    },
+    {
+      "path": "tools/analyze_em9305_unclassified_tail_candidate.py",
+      "sha256": "62395a1d4fe38bf6a8e7ae37932e869513b1c329218c826ce258aedf6ea84051",
+      "size": 17139
+    },
+    {
+      "path": "tools/analyze_g2_codec_fwpk_segments.py",
+      "sha256": "45dd23fdbf595e5fecd9785c05e9dec43dc643ea26c2aed57898f5bc76ed049e",
+      "size": 20279
+    },
+    {
+      "path": "tools/analyze_g2_codec_stage2_sections.py",
+      "sha256": "221a055eaccf487332cfb512ba0ef1d17adadd84ac0e5eb695e1fc7faedeeec2",
+      "size": 12195
+    },
+    {
+      "path": "tools/analyze_g2_completion_readiness.py",
+      "sha256": "28bbaba7ac5187dd12af70176269257fe9a5094ddfc21a532e64dafc36a34124",
+      "size": 82184
+    },
+    {
+      "path": "tools/analyze_g2_dual_profile_ownership.py",
+      "sha256": "8b17ba945b862d7c6ffa104614e0fd9ac3f6679a8c2c153d5595354e3c0f269e",
+      "size": 43248
+    },
+    {
+      "path": "tools/analyze_g2_production_raw_encoding_quality.py",
+      "sha256": "78c392262ae1b7062f98ad2b331600b92a5a60c1b4c055f58694a4815473d8ef",
+      "size": 10886
+    },
+    {
+      "path": "tools/analyze_g2_project_license_normalization.py",
+      "sha256": "33a628d982d5fdab099c1ba95811a7b2d380993aa3c0a5d532d414a87f9d2c3a",
+      "size": 29250
+    },
+    {
+      "path": "tools/analyze_g2_touch_final_frontier.py",
+      "sha256": "84dbc3c75a9d8f109af3e8014ca7fa9c85c375890424036c8ca908ab08b500f7",
+      "size": 57006
+    },
+    {
+      "path": "tools/analyze_g2_touch_identity.py",
+      "sha256": "7247ca60066265094caddced463d6377e75c0b6f8cb99ddc436b5adc0c31bcd0",
+      "size": 18434
+    },
+    {
+      "path": "tools/analyze_g2_touch_platform_completion_admission.py",
+      "sha256": "2ea584edd7906e8d6a12843d10695eebe85042c02a5d020982fcbb29cf0f7bc5",
+      "size": 10970
+    },
+    {
+      "path": "tools/analyze_g2_touch_prefix_function_map.py",
+      "sha256": "9baa2ab02208117c421543b358a5b228c7fd65897b39538d17b2856ed5aec965",
+      "size": 21545
+    },
+    {
+      "path": "tools/analyze_g2_touch_relocated_partition.py",
+      "sha256": "b9f9e71f817e38757171b69a33fdf8d3ef3039527ed63dc01857248a1de10e62",
+      "size": 21785
+    },
+    {
+      "path": "tools/analyze_g2_touch_relocated_semantics.py",
+      "sha256": "af87c3eea757918144551b2424567220080285d22a0d1f1c8abe4730a5fe465d",
+      "size": 21517
+    },
+    {
+      "path": "tools/analyze_g2_touch_software_readiness.py",
+      "sha256": "cf0698c55ec382740f69366b0d7a9b7b37841ca97973d151fe30130609cdb0e4",
+      "size": 22709
+    },
+    {
+      "path": "tools/analyze_g2_touch_source_image.py",
+      "sha256": "a183f8eda6ee538bc601d3e9d9176dd87541284606ed06984481bbdfbbff7821",
+      "size": 5722
+    },
+    {
+      "path": "tools/analyze_gx8002_source_readiness.py",
+      "sha256": "55abcf3998c5f678385fb700530aabb45f31d4866660c7219fa3286ae6c1f203",
+      "size": 36972
+    },
+    {
+      "path": "tools/apollo_overlay.py",
+      "sha256": "dd831e89425612d65311cb93727f857c60665cb01bba82a660e736f29b0684d3",
+      "size": 256712
+    },
+    {
+      "path": "tools/apply_g2_canonical_observations.py",
+      "sha256": "4763539709d28269c84148b9eed4026fe2010a07e73bc7631bc88d7484d3bf82",
+      "size": 172249
+    },
+    {
+      "path": "tools/audit_g2_release_licensing.py",
+      "sha256": "598a5d70af500cda87f1687ba6f27e257f25100b2b4ad0653f93cad0791a6625",
+      "size": 27688
+    },
+    {
+      "path": "tools/manifests/em9305-final-source-readiness-summary.json",
+      "sha256": "ae70d87d4833ec98e5235813ada50564513fcbb7ecd2a02816411510bd088084",
+      "size": 5211
+    },
+    {
+      "path": "tools/manifests/em9305-final-source-readiness.tsv",
+      "sha256": "d63cdcd7a4bbaf6a30ef55eafa470561d205ac87f55656c424786bbbec775b15",
+      "size": 32977
+    },
+    {
+      "path": "tools/manifests/em9305-record-package-summary.json",
+      "sha256": "947bd35ff79c88e3f7386a4966ab50173589223efc76f1ce1b6bbec42df03b19",
+      "size": 2606
+    },
+    {
+      "path": "tools/manifests/em9305-residual-provenance-map.tsv",
+      "sha256": "2ac24d2abf1f4a4fbce236a82f4591a38dfdb0a71c5ca5b2f8e88bcd9a722d36",
+      "size": 47936
     },
     {
       "path": "tools/manifests/g2-apollo-origin-accounting.json",
-      "sha256": "d6e49a0d6598dbf5ffba26c4a4cd9d7bc922ccf174b4e958b3808648bfed00ab",
-      "size": 1128
-    },
-    {
-      "path": "tools/manifests/g2-touch-software-readiness-summary.json",
-      "sha256": "49aba2b079b5701306a86c1336c215b7cf65cf4e30647cd48b093153b93ae521",
-      "size": 6472
-    },
-    {
-      "path": "tools/manifests/g2-touch-current-source-readiness-summary.json",
-      "sha256": "52cc2eaecbff5adde23c8a4a7c12d6ffa18fc7074613f460ca0b981e71436c9f",
-      "size": 1089
-    },
-    {
-      "path": "tools/manifests/g2-touch-final-classification-summary.json",
-      "sha256": "bcdb2efd8848bf7ab056f1c52a1ef8a6c3cbcef96ccf67461b403f68bbaef698",
-      "size": 3980
+      "sha256": "99e327e37ae2e14b44e4b73a9edb90e2d9add05c5feeb723938d10e9de21c702",
+      "size": 2747
     },
     {
       "path": "tools/manifests/g2-box-function-map-summary.json",
       "sha256": "01f5a680691853530a12bdacc03efcf6554f7f0966ee4a1b9cab0cc5787763af",
       "size": 105706
+    },
+    {
+      "path": "tools/manifests/g2-case-final-classification-summary.json",
+      "sha256": "7e6073418e114a14a098f62019441b806b1c2d9c6ffdb802f0896d113c46f3a1",
+      "size": 2082
+    },
+    {
+      "path": "tools/manifests/g2-case-pure-helpers-admission-summary.json",
+      "sha256": "1ee55bd6ac7f4920d4d7e2d52e6af324e6e06c5f072a737be0de5aedc6972447",
+      "size": 1008
+    },
+    {
+      "path": "tools/manifests/g2-case-register-policies-admission-summary.json",
+      "sha256": "9a1a464ad1acefcb53b11bcc6e6c7de307c70a24b568c24be320998121ef9c1c",
+      "size": 2154
     },
     {
       "path": "tools/manifests/g2-case-register-primitives-admission-summary.json",
@@ -429,14 +1158,39 @@
       "size": 1417
     },
     {
-      "path": "tools/manifests/g2-case-final-classification-summary.json",
-      "sha256": "7e6073418e114a14a098f62019441b806b1c2d9c6ffdb802f0896d113c46f3a1",
-      "size": 2082
+      "path": "tools/manifests/g2-case-semantic-leaves-admission-summary.json",
+      "sha256": "c04192e4fdefe7f4a35d77aa6ed9cb9bfc242729b47f049b890b319793db0139",
+      "size": 1489
+    },
+    {
+      "path": "tools/manifests/g2-case-source-image-summary.json",
+      "sha256": "8a8be2f3c382dc9af9736be4f6de64a54c7965aadf099c89106489691f7f48b8",
+      "size": 2490
+    },
+    {
+      "path": "tools/manifests/g2-clkmgr-divider-candidate-summary.json",
+      "sha256": "26c15b77473f72efe4d9bb427c318d66b885874bc1984714410a8e4a3dd870b3",
+      "size": 7275
+    },
+    {
+      "path": "tools/manifests/g2-dual-profile-ownership.json",
+      "sha256": "b00b6aee969f176e4534ebabfa52acd89c8f1c2392752c6038702d2098e3fb83",
+      "size": 14382
+    },
+    {
+      "path": "tools/manifests/g2-nemavg-stroke-caps-candidate-summary.json",
+      "sha256": "9de749f0afef1b090e41ca99d02b4710f7c1f68411266e209bf6b733048dfc00",
+      "size": 3554
     },
     {
       "path": "tools/manifests/g2-production-raw-encoding-quality-summary.json",
-      "sha256": "7afe2c6dfafc4da4a770c18c4b8ab3cdc1600ce1d885d429f76869ccb9dbd3aa",
-      "size": 4202
+      "sha256": "b23b944d0552ccbcbeee10eb225e26ec2ece69b5d5053cf9bfa868ea76370537",
+      "size": 2183
+    },
+    {
+      "path": "tools/manifests/g2-project-license-normalization-summary.json",
+      "sha256": "d6b1f641920c1b2171de9e8e81f330a7d21d34dba3a5cee1bf4e30ccc3e55dfa",
+      "size": 2616
     },
     {
       "path": "tools/manifests/g2-project-license-normalization.tsv",
@@ -444,59 +1198,19 @@
       "size": 103450
     },
     {
-      "path": "tools/manifests/g2-project-license-normalization-summary.json",
-      "sha256": "d6af9cf64fce360e33161f8f68a6502e455a84674a00d3cdabcfd02d3fb4ff2b",
-      "size": 2113
+      "path": "tools/manifests/g2-project-mit-normalization-research-and-wrapper.txt",
+      "sha256": "7df86a82452ecf03391155146a83961e07d77d3a0df866b784d3e6dc8d482544",
+      "size": 1362
     },
     {
       "path": "tools/manifests/g2-project-mit-normalization-scope-paths.txt",
-      "sha256": "ac0eec0959a8f5484a19d6e4ad2ef6d10fccece00704aed4255e9f5af9e83c5f",
-      "size": 45464
+      "sha256": "3e339541836cb9c76fdde931f5585803163849dcf14418d2905a0cde442815d3",
+      "size": 45537
     },
     {
-      "path": "tools/manifests/g2-project-mit-normalization-research-and-wrapper.txt",
-      "sha256": "802f3b8d819b67d85a6e856cc149972c6adcc41b73f690b4f2ad37a54c21111b",
-      "size": 1189
-    },
-    {
-      "path": "tools/manifests/gx8002-source-readiness.tsv",
-      "sha256": "d89d6c7b26d7e4453bc1bab436868d554a9f39ab52308931c0fb5ceea485b32e",
-      "size": 6051
-    },
-    {
-      "path": "tools/manifests/em9305-residual-provenance-map.tsv",
-      "sha256": "2ac24d2abf1f4a4fbce236a82f4591a38dfdb0a71c5ca5b2f8e88bcd9a722d36",
-      "size": 47936
-    },
-    {
-      "path": "components/apollo_main/core_overlay/overlay.json",
-      "sha256": "d9f37dfe5b02fbddc2cb2aead681344995cfb95adb4605ff5dde29a9f366b171",
-      "size": 5951725
-    },
-    {
-      "path": "components/bootloader/core_overlay/overlay.json",
-      "sha256": "f6dcf011c7d93a7db34b629155e28ac38e7dc6cfde16a12055ac87d3a0ad8297",
-      "size": 918750
-    },
-    {
-      "path": "tools/analyze_g2_completion_readiness.py",
-      "sha256": "35dcd97457a67758412f739438a37a63df8e4c66cea9ab562519c5aa939a2508",
-      "size": 43256
-    },
-    {
-      "path": "tools/analyze_g2_production_raw_encoding_quality.py",
-      "sha256": "45b4ad797e6b1d51ef8dc3d783c284e08287f1b46fd5913f7beb313e7c94f923",
-      "size": 11735
-    },
-    {
-      "path": "tools/analyze_g2_project_license_normalization.py",
-      "sha256": "1df885ca996f6a5dd47a62521bf96010a039df6a2f560a401e7f81eaed399463",
-      "size": 19412
-    },
-    {
-      "path": "tools/audit_g2_release_licensing.py",
-      "sha256": "08c5f070e2a74648b0e7f5a2807e1bd3ebe72dff72d068b344e2d9a211b85a66",
-      "size": 9325
+      "path": "tools/manifests/g2-pt-protocol-source-summary.json",
+      "sha256": "df530619c4c092f57b95555c99e7ce0fc1300463639964005a9b5bbd6a826406",
+      "size": 61997
     },
     {
       "path": "tools/manifests/g2-touch-application-core-admission-summary.json",
@@ -504,9 +1218,19 @@
       "size": 1757
     },
     {
+      "path": "tools/manifests/g2-touch-application-core-admission.tsv",
+      "sha256": "8ff7b3f21fe93850bcec5dce39e22215eb508a469fabe71acf6bdb0ffd910893",
+      "size": 2504
+    },
+    {
       "path": "tools/manifests/g2-touch-application-packet-pipeline-admission-summary.json",
       "sha256": "12f2b7d33e72a590d3d3e0ef8247baa2d1020944ffe450106cb43ee726d8fd43",
       "size": 2140
+    },
+    {
+      "path": "tools/manifests/g2-touch-application-packet-pipeline-admission.tsv",
+      "sha256": "7e45ac157bc1e2c2947f481ab14bb2e04f882b0f6a510c2f6858dd0053019036",
+      "size": 1237
     },
     {
       "path": "tools/manifests/g2-touch-application-state-pipeline-admission-summary.json",
@@ -514,9 +1238,44 @@
       "size": 2076
     },
     {
+      "path": "tools/manifests/g2-touch-application-state-pipeline-admission.tsv",
+      "sha256": "d26089da6fd61f502b40e954c23e13e6f70a0398f5ac294b7b3b5d60b116b4c3",
+      "size": 5624
+    },
+    {
+      "path": "tools/manifests/g2-touch-application-upstream-admission.tsv",
+      "sha256": "f69f1e54820feb411c72d9b7be44f66ea5b62d57602068621ae12b5dda668810",
+      "size": 1412
+    },
+    {
+      "path": "tools/manifests/g2-touch-cat2-source-admission2.tsv",
+      "sha256": "383cd9883220e5b8fe9e3ba413d4aa4c1c515e461a8d40876159c0aec1fa5d34",
+      "size": 2928
+    },
+    {
+      "path": "tools/manifests/g2-touch-cat2-source-admission3.tsv",
+      "sha256": "0349d34fc5147fce8a11250d7dbfb4b6a92cb1337deab4191056c45aefb1f499",
+      "size": 3328
+    },
+    {
+      "path": "tools/manifests/g2-touch-cat2-source-admission4.tsv",
+      "sha256": "95f40313c92342e5e525e34a8b4d7ab7dda2900c4f9b4e10546558f7564a4677",
+      "size": 8645
+    },
+    {
+      "path": "tools/manifests/g2-touch-cat2-source-admission5.tsv",
+      "sha256": "436c405aa7dbdab10c00f2ac43ce13e50f1186d050a1ded5ed7b7cc6810a8523",
+      "size": 4242
+    },
+    {
       "path": "tools/manifests/g2-touch-clock-application-wrappers-admission-summary.json",
       "sha256": "c58d39793f53b622cb0443a7e83da2e99b8d8672a1f61133a7386411fec47a45",
       "size": 1813
+    },
+    {
+      "path": "tools/manifests/g2-touch-clock-application-wrappers-admission.tsv",
+      "sha256": "f630b7f703287bbbad88d26482eac8e90f071838d686682328dcc4b7e8697aaa",
+      "size": 3484
     },
     {
       "path": "tools/manifests/g2-touch-closed-record-pipeline-admission-summary.json",
@@ -524,9 +1283,19 @@
       "size": 2032
     },
     {
+      "path": "tools/manifests/g2-touch-closed-record-pipeline-admission.tsv",
+      "sha256": "a1e5b077f48e72c995f4859ab43b2b87e41273c860dfcb0ca4b9f2eb543efca8",
+      "size": 3746
+    },
+    {
       "path": "tools/manifests/g2-touch-configuration-bootstrap-admission-summary.json",
       "sha256": "469a37e78b8e27dc7461e4bd508b2f7694ee1c190720b1b7486516d0113a8d97",
       "size": 1663
+    },
+    {
+      "path": "tools/manifests/g2-touch-configuration-bootstrap-admission.tsv",
+      "sha256": "c1b0f9f77cf072dae99855b43986332976b9b7e78b014885b386397a4250d873",
+      "size": 877
     },
     {
       "path": "tools/manifests/g2-touch-configuration-start-pipeline-admission-summary.json",
@@ -534,9 +1303,24 @@
       "size": 1939
     },
     {
+      "path": "tools/manifests/g2-touch-configuration-start-pipeline-admission.tsv",
+      "sha256": "168d7e394232ff971037edb863e3c8a436ee5d3debdcca18a3a5c6473e81e239",
+      "size": 1868
+    },
+    {
+      "path": "tools/manifests/g2-touch-current-source-readiness-summary.json",
+      "sha256": "fa56351c64a7d18b46752b6ce8a9d8651eddc6e1373a73b5347cd699d60292fd",
+      "size": 12779
+    },
+    {
       "path": "tools/manifests/g2-touch-deferred-work-admission-summary.json",
-      "sha256": "325d8b22c326ccfa41f9f84effe32f6cfaa1b282d981e146efd9637eba27ea03",
-      "size": 1607
+      "sha256": "0b3f78f3ec9ae97207d026bf73900a16c4f1f45fe4194bc6433d26e74b126471",
+      "size": 1705
+    },
+    {
+      "path": "tools/manifests/g2-touch-deferred-work-admission.tsv",
+      "sha256": "298d6f6ff479cb6866a5f4d32f800819744d8173ab8e468a29093470c6575b67",
+      "size": 814
     },
     {
       "path": "tools/manifests/g2-touch-emeeprom-clean-room-admission-summary.json",
@@ -544,9 +1328,29 @@
       "size": 1812
     },
     {
+      "path": "tools/manifests/g2-touch-emeeprom-clean-room-admission.tsv",
+      "sha256": "cef182c97d240d6526ab911831912c1d8eb6cbd238fbac4533bcefe8b14cdb26",
+      "size": 6191
+    },
+    {
+      "path": "tools/manifests/g2-touch-final-classification-summary.json",
+      "sha256": "87c81cd7bcc710e76d17cadeb97bb1f98b61d2894a29c1a6214035619ae4793c",
+      "size": 25143
+    },
+    {
+      "path": "tools/manifests/g2-touch-final-source-candidate-provenance.tsv",
+      "sha256": "d1a9f838eb85cfc571b55836ae479d63b995aa5b02c5283dee02ace2e910be6b",
+      "size": 6953
+    },
+    {
       "path": "tools/manifests/g2-touch-flash-row-admission-summary.json",
-      "sha256": "01452f835c00bf3a7c4ebaa5abf760348939daac73cbb285de451e3dd2df93b6",
-      "size": 1590
+      "sha256": "3775d61b0205ad50f8716683cbacf5c4d625b28441c7569b62c76c9ba71af4e2",
+      "size": 1688
+    },
+    {
+      "path": "tools/manifests/g2-touch-flash-row-admission.tsv",
+      "sha256": "63d9088710f0b00fa2ad6149ef11c18f6e5eb5082804e6847189ca893feb9361",
+      "size": 1832
     },
     {
       "path": "tools/manifests/g2-touch-leaf-primitives-admission-summary.json",
@@ -554,9 +1358,19 @@
       "size": 1842
     },
     {
+      "path": "tools/manifests/g2-touch-leaf-primitives-admission.tsv",
+      "sha256": "2048f4075ade5cb07aa6243822b57999d69876579664b2ee0c8ce419ff3f22a7",
+      "size": 6515
+    },
+    {
       "path": "tools/manifests/g2-touch-platform-completion-admission-summary.json",
       "sha256": "74cab16d448ce4a9fa8424781364a1f2a8c7a23ed06ba7f0e77489de14594764",
       "size": 1995
+    },
+    {
+      "path": "tools/manifests/g2-touch-platform-completion-admission.tsv",
+      "sha256": "486894e3b010a3872a4da453407c98ed47f44da0c6ecad0fef6c321f03adc2f6",
+      "size": 4499
     },
     {
       "path": "tools/manifests/g2-touch-platform-wrappers-admission-summary.json",
@@ -564,9 +1378,19 @@
       "size": 1777
     },
     {
+      "path": "tools/manifests/g2-touch-platform-wrappers-admission.tsv",
+      "sha256": "98854542a5b354818cf984a8da5cda1078873823bbb9b9e554d5736c7b14e939",
+      "size": 5906
+    },
+    {
       "path": "tools/manifests/g2-touch-product-orchestration-admission-summary.json",
       "sha256": "626b7d77e8b516e98fc39966ec0fb51241bd6663cdbe050d86063bcc8743229e",
       "size": 1779
+    },
+    {
+      "path": "tools/manifests/g2-touch-product-orchestration-admission.tsv",
+      "sha256": "d0bce71de88e5ef272775ed08b84cebc472066be737c5f549b44ca40978c368f",
+      "size": 1477
     },
     {
       "path": "tools/manifests/g2-touch-record-primitives-admission-summary.json",
@@ -574,9 +1398,29 @@
       "size": 1887
     },
     {
+      "path": "tools/manifests/g2-touch-record-primitives-admission.tsv",
+      "sha256": "22eb1fda42c6f71f705838b058328cf67a39e60d56ef1b992341660d07b017cf",
+      "size": 3059
+    },
+    {
       "path": "tools/manifests/g2-touch-selection-update-pipeline-admission-summary.json",
       "sha256": "ba1bca5b01b021822600657baae0948fab94a779c62be92415403a34c613a31f",
       "size": 2068
+    },
+    {
+      "path": "tools/manifests/g2-touch-selection-update-pipeline-admission.tsv",
+      "sha256": "126189c09b9fb98538712cab283cfcd9eece6c7f740d31204f3596ed978fcbbe",
+      "size": 1946
+    },
+    {
+      "path": "tools/manifests/g2-touch-software-readiness-functions.tsv",
+      "sha256": "1395305ff616fb53276d99a74d2b22736fef33aa2320fb03c00a035e79983319",
+      "size": 20574
+    },
+    {
+      "path": "tools/manifests/g2-touch-software-readiness-summary.json",
+      "sha256": "49aba2b079b5701306a86c1336c215b7cf65cf4e30647cd48b093153b93ae521",
+      "size": 6472
     },
     {
       "path": "tools/manifests/g2-touch-source-admission-summary.json",
@@ -584,9 +1428,24 @@
       "size": 2047
     },
     {
+      "path": "tools/manifests/g2-touch-source-admission.tsv",
+      "sha256": "b18ef6d5acd9c1cd286120a6ad6784d5da06e7855ba7a2978b60226da32a86ba",
+      "size": 3960
+    },
+    {
+      "path": "tools/manifests/g2-touch-source-image-summary.json",
+      "sha256": "92c1947a710b5e3d24f23c6e22a8585b8346715ca27429e011511d491ed3aea7",
+      "size": 6609
+    },
+    {
       "path": "tools/manifests/g2-touch-startup-closed-admission-summary.json",
-      "sha256": "3801dc3dcb77231f0795bc3de86c1370686a78f42216f50b044cb4e569ce1f82",
-      "size": 1653
+      "sha256": "1a0af74fa0420ab127f8cf1f015b8464b3d1ddbb6d7834e0ad9feb2f7ff8428d",
+      "size": 1751
+    },
+    {
+      "path": "tools/manifests/g2-touch-startup-closed-admission.tsv",
+      "sha256": "0ec44612f8af5e7ca7e8949782fa8c6c8db165680f15c75e123799361517bca2",
+      "size": 2480
     },
     {
       "path": "tools/manifests/g2-touch-storage-adapters-admission-summary.json",
@@ -594,9 +1453,29 @@
       "size": 1900
     },
     {
+      "path": "tools/manifests/g2-touch-storage-adapters-admission.tsv",
+      "sha256": "10ee12a0da2e0e0dede8eea315049d5203287d4360dfb7849dfe13f06509eabd",
+      "size": 2121
+    },
+    {
       "path": "tools/manifests/g2-touch-terminal-wrappers-admission-summary.json",
-      "sha256": "f22ad951fdc755e472de39ca454c95346d31c8c87841d004bda652720f2f1275",
-      "size": 1597
+      "sha256": "843c359dfbba0c4e27c7a057d465a627287109db68f03f38c5a9048226fc75de",
+      "size": 1695
+    },
+    {
+      "path": "tools/manifests/g2-touch-terminal-wrappers-admission.tsv",
+      "sha256": "e1f83420698aaeb0b91726abb512aa170b06e8ca07cb7437c625ed2c396aa102",
+      "size": 2285
+    },
+    {
+      "path": "tools/manifests/gx8002-source-readiness.tsv",
+      "sha256": "d89d6c7b26d7e4453bc1bab436868d554a9f39ab52308931c0fb5ceea485b32e",
+      "size": 6051
+    },
+    {
+      "path": "tools/open_cfw.py",
+      "sha256": "2065bc3cefd4390080b15d277906c7e9e3b60ddc8e7e4ee046dab63310cf331a",
+      "size": 99007
     }
   ],
   "source_ownership_quality": {
@@ -610,9 +1489,30 @@
   "target": "Even Realities G2 s200_v2.2.6.10",
   "touch_admission": {
     "admission_batches": 18,
+    "analysis_input_count": 69,
     "authoritative_batch": 26,
+    "candidate_provenance": {
+      "address_set_sha256": "ab7fbcdd8d7aa5d6a8f974f14a75eca3041689315410350d2337a309ff81277b",
+      "candidate_bytes": 14510,
+      "content_sha256": "36de6cf8b2b435167383990f4afe100f970959aa5607a36e233dc9a7812cac13",
+      "entry_claim_count": 178,
+      "eula_vendor_source_included": false,
+      "manifest": "g2-touch-final-source-candidate-provenance.tsv",
+      "nonproduction_source_image_elf_sha256": "dc7e904fd01be5fd2ea7262a2f094796c395bc35338fb78b3f6a71906a40c656",
+      "nonproduction_source_image_production_routed": false,
+      "overlapping_semantic_claim_bytes": 50,
+      "production_elf_ownership": false,
+      "row_digest": "3dcc238d48660b9b2964fa6644c8d88d63e7c829bb7d6c3f66042738615dfbe5",
+      "semantic_stock_address_candidates_only": true,
+      "stock_address_to_linked_output_identity_proven": false,
+      "stock_byte_redistribution_authority": "NOASSERTION",
+      "subrow_count": 6,
+      "subrow_overlap_bytes": 0
+    },
+    "candidate_provenance_manifest": "g2-touch-final-source-candidate-provenance.tsv",
     "candidate_source_not_routed_bytes": 14510,
-    "cumulative_candidate_instruction_bytes": 8524,
+    "cumulative_candidate_instruction_bytes": 13694,
+    "generation_receipt_sha256": "08273958361436eca0a774812de8ca917d6d724d2de836a9f745737d86467aa9",
     "production_routed": false,
     "remaining_application_contracts": 0,
     "remaining_reachable_functions": 0,

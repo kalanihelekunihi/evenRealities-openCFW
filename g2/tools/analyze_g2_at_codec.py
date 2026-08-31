@@ -20,7 +20,7 @@ CLOSURE = ROOT / "tools/manifests/g2-at-codec-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-at-codec-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "e48d4af2f24e7ef84ffc48209bb8b4db05d272ab04a3a841cc108ece4550119b",
-    CLOSURE: "c2a4c9c34c213d2e32f36b336294bc047c05dbed91f28be270fba67b8a75bc9c",
+    CLOSURE: "36a270bc161b71cec68475f122d42e2bf5d4971384302265fee87fbc5b4a18be",
     PROVENANCE: "3f88a730cada8f282c27b68a1f3f46fd9d754068a01af52f1b699832a9e4a570",
 }
 BODY = (0x005A5488, 0x005A54FE)
@@ -193,7 +193,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
 
     source = PRODUCTION_SOURCE.read_bytes()
     if (len(source), sha256(source)) != (
-        1186, "b276eedcad875fecd41e64f9bc60005c17aea09c234dd706b1c32ce7bf108431"
+        1177, "875672e04aa27f2771d2abcba5f48968f86d9784e947b1a660491046c7d7104a"
     ):
         raise AuditError("production AT^AUDIO source changed")
     text = source.decode("utf-8")
@@ -210,8 +210,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (
         leaf.get("function") != "open_cfw_at_codec_audio_control"
         or leaf.get("expected") != {
-            "alignment": 4, "offset": 299880,
-            "sha256": "45b3f6cbfbf226e46c6fda376d2eed84da7a2f7a0ee6fc3dfe70e8f0b2319125",
+            "alignment": 4, "offset": 240032,
+            "sha256": "04efadbe0a66881c755189a4e3932047a3996f5ec45271a6421e0cb54cdc87f8",
             "size": 44,
             "unrelocated_sha256": "3397c32638e65c1d14f3bf8aaf813436eefedfb74ebce6710f284871bedb8ec8",
         }
@@ -322,7 +322,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "retained_official_pool_bytes": 34,
             "strict_relocations": 3,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": "An authorized responsive G2 and live audio/codec evidence is required for future qualification.",
         },
     }

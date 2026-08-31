@@ -201,7 +201,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
         ):
             raise AuditError(f"WSF assert/trace production route {index} changed")
     compiled = sum(row["expected"]["size"] for row in leaves)
-    alignment = leaves[0]["expected"]["offset"] - 335208
+    alignment = leaves[0]["expected"]["offset"] - 266728
     alignment += (
         leaves[1]["expected"]["offset"] - leaves[0]["expected"]["offset"]
         - leaves[0]["expected"]["size"]

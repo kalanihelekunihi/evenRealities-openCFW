@@ -166,8 +166,10 @@ for the same layout and relocation graph.
 Host failure/success tests, isolated target builds, the fail-closed analyzer,
 provider/manifest ownership checks, and both compiler profiles pass offline.
 The neighboring IAR `FILE` wrappers remain outside this source boundary.
-Hardware execution is unverified and explicitly blocked by unavailable
-authorized responsive hardware. See
+Hardware execution is unverified and blocked by unavailable physical evidence. Future
+authorized G2 hardware with boot UART and debugger evidence must validate both
+mutex allocations, IAR stream serialization, failure logging, and boot
+continuation. See
 `docs/research/g2-bootloader-redirect-init-source-closure.md`.
 
 The corresponding unsigned Apple package is 4,735,214 bytes with SHA-256
@@ -188,8 +190,9 @@ emit the same relocation-free 12-byte leaf at `0x00434824`, SHA-256
 `57aa3a55299e81fefe7ae3b0807a149cf0d3d6c56adfcd6bf507f3850e6c229e`.
 The stock entry is replaced by a non-linking branch plus 49 NOPs. Host tests,
 target compilation, provider accounting, manifest ownership, and dual-package
-pins are fail-closed. Live boot validation remains blocked by unavailable
-authorized responsive hardware. See
+pins are fail-closed. Live boot validation is blocked by unavailable physical evidence;
+future authorized G2 hardware evidence must demonstrate boot progression
+through all byte-fill callers. See
 `docs/research/g2-bootloader-aeabi-memset-source-closure.md`.
 
 ## Current Arm EABI forward-copy increment
@@ -201,8 +204,9 @@ compilers emit the same relocation-free 16-byte leaf at `0x00434830`, SHA-256
 `d2d832a0c13fc4c0b9b47396bfb6d68fb7e07925ad0fa4eedc9c14c5b062590d`.
 The stock entry is replaced by a non-linking branch plus 81 NOPs. Host tests,
 target compilation, provider accounting, manifest ownership, and dual-package
-pins are fail-closed. Live boot validation remains blocked by unavailable
-authorized responsive hardware. See
+pins are fail-closed. Live boot validation is blocked by unavailable physical evidence;
+future authorized G2 hardware evidence must demonstrate boot progression
+through all forward-copy callers. See
 `docs/research/g2-bootloader-aeabi-memcpy-source-closure.md`.
 
 ## Current bounded byte-comparison increment
@@ -213,7 +217,8 @@ ingress are pinned. Both compilers emit the same relocation-free 28-byte leaf
 at `0x00434840`, SHA-256
 `27a66a6c870f14f8ff02ed06584fc60e5e6bb17274f13e4234314e5fcbb2ece1`.
 Host equality, difference-sign, prefix, and unaligned tests pass. Live boot
-validation remains blocked by unavailable authorized responsive hardware. See
+validation is blocked by unavailable physical evidence; future authorized G2 hardware
+evidence must demonstrate boot progression through all comparison callers. See
 `docs/research/g2-bootloader-memcmp-source-closure.md`.
 
 ## Current string-span increment
@@ -228,8 +233,10 @@ pointer ingress. Both reviewed compilers emit the same relocation-free leaves:
 and 28 bytes at `0x0043487A`, SHA-256
 `f955f2e0febe0b7b844837f389b4eb1e601e349bf6f9183426b2e16de8961d22`.
 Empty-set, first-match, no-match, prefix, and stop semantics pass on the host.
-Live boot validation remains blocked by unavailable authorized responsive
-hardware. See `docs/research/g2-bootloader-string-spans-source-closure.md`.
+Live boot validation is blocked by unavailable physical evidence; future authorized G2
+hardware evidence must demonstrate boot progression through all six
+authenticated string-span callers. See
+`docs/research/g2-bootloader-string-spans-source-closure.md`.
 
 ## Current reflected CRC-32 increment
 
@@ -238,8 +245,9 @@ to the clean-room bitwise `runtime_crc32.c` implementation. Six direct callers
 and the standard reflected `0xEDB88320` nibble-table polynomial are pinned.
 Apple clang emits a relocation-free 44-byte leaf at `0x00434898` after two
 alignment bytes. Host tests cover empty, standard, all-byte, embedded-NUL, and
-incremental updates. Live CRC/boot validation remains blocked by unavailable
-authorized responsive hardware. See
+incremental updates. Live CRC/boot validation is blocked by unavailable physical evidence;
+future authorized G2 hardware evidence must demonstrate boot progression and
+CRC results through all six authenticated callers. See
 `docs/research/g2-bootloader-crc32-source-closure.md`.
 
 ## Current SRAM-word setter increment
@@ -249,7 +257,9 @@ to `runtime_store_200270cc.c`. Its sole caller and the literal target
 `0x200270CC` are pinned without assigning an unsupported semantic label to the
 cell. Both reviewed compilers emit the same relocation-free 12-byte leaf at
 `0x004348C4`. Host tests cover complete-word stores. Live SRAM/boot validation
-remains blocked by unavailable authorized responsive hardware. See
+is blocked by unavailable physical evidence; future authorized G2 hardware evidence must
+show that the sole caller writes the expected value to SRAM `0x200270CC` and
+boot continues. See
 `docs/research/g2-bootloader-store-200270cc-source-closure.md`.
 
 ## Preceding numeric/runtime/event-flags/bit-helper increment
@@ -284,7 +294,9 @@ compiler profiles, exact stock redirects, provider ownership, and complete
 unsigned packages reproduce. At this milestone the aggregate was 83 routed functions,
 4,927 source bytes, 5,938 patch bytes, 12 alignment bytes, and 142,661
 retained official bytes. Live boot and formatter/parser caller-path validation
-remains blocked by unavailable authorized responsive hardware. The literal
+is blocked by unavailable physical evidence; future authorized G2 hardware evidence must
+demonstrate boot progression, numeric formatting/parsing, and runtime-gate
+behavior through the authenticated callers. The literal
 pool at `0x00415FDA`, the SRAM literal at `0x0041658C`, and the queue-wrapper
 literal pool `[0x0041699A,0x004169A4)` remain authenticated data; the next
 distinct executable complete body starts at `0x004169FC`. See
@@ -342,8 +354,9 @@ overlay and 155,524-byte provider. The retained transition data ends at
 remains a software gap.
 
 No image was signed, flashed, installed, reset, or booted. Live allocator and
-caller-path validation is explicitly blocked by unavailable authorized
-responsive G2 hardware evidence. See
+caller-path validation is blocked by unavailable physical evidence; future authorized G2
+hardware evidence must validate pool bounds, exhaustion, coalescing,
+reinsertion, and caller-path behavior. See
 `docs/research/g2-bootloader-tlsf-block-primitives-4169fc-416aaa-source-closure.md`.
 The succeeding topology tranche is documented in
 `docs/research/g2-bootloader-tlsf-block-topology-416aaa-416bce-source-closure.md`.
@@ -1030,8 +1043,8 @@ Canonical accounting is 12,473 source-owned, 13,812 generated patch, 16
 alignment, and 134,787 retained official bytes across 180 functions, 161
 relocated leaves, and 178 patch sites. Apple/Linux packages contain 6,511 /
 3,456 placed regions plus two unresolved physical regions. No hardware action
-occurred. Authorized responsive right-temple evidence is unavailable, the
-left temple must remain stock, and later executable bodies beginning at
+occurred. Authorized G2 hardware evidence is unavailable; qualification must
+preserve a stock recovery path, and later executable bodies beginning at
 `0x0042074E` prevent a completeness claim. See
 `docs/research/g2-bootloader-mspi-write-transfer-42069e-42074e-source-closure.md`.
 
@@ -1051,8 +1064,8 @@ Canonical accounting is 12,561 source-owned, 13,896 generated patch, 16
 alignment, and 134,703 retained official bytes across 181 functions, 162
 relocated leaves, and 179 patch sites. Apple/Linux packages contain 6,513 /
 3,457 placed regions plus two unresolved physical regions. No hardware action
-occurred. Authorized responsive right-temple evidence is unavailable, the
-left temple must remain stock, and later executable bodies beginning at
+occurred. Authorized G2 hardware evidence is unavailable; qualification must
+preserve a stock recovery path, and later executable bodies beginning at
 `0x004207A2` prevent a completeness claim. See
 `docs/research/g2-bootloader-mspi-busy-status-42074e-4207a2-source-closure.md`.
 
@@ -1071,8 +1084,8 @@ Canonical accounting is 12,661 source-owned, 13,990 generated patch, 16
 alignment, and 134,609 retained official bytes across 183 functions, 164
 relocated leaves, and 181 patch sites. Apple/Linux packages contain 6,517 /
 3,459 placed regions plus two unresolved physical regions. No hardware action
-occurred. Authorized responsive right-temple evidence is unavailable, the
-left temple must remain stock, and later executable bodies beginning at
+occurred. Authorized G2 hardware evidence is unavailable; qualification must
+preserve a stock recovery path, and later executable bodies beginning at
 `0x00420800` prevent a completeness claim. See
 `docs/research/g2-bootloader-mspi-wait-ready-4207a2-420800-source-closure.md`.
 
@@ -1159,9 +1172,9 @@ relocated leaves, 149 functions, and 147 patch sites.
 Behavioral, stock/caller, target-compile, exact-mutation, dual-profile,
 manifest, package, and flash-plan checks are offline. No signer, device,
 debugger, serial endpoint, flasher, reset, or boot operation was accessed.
-Live mutex/scheduler/transport/exception behavior remains blocked by
-unavailable authorized responsive right-temple hardware; the authorized left
-temple must remain stock. The remaining bootloader body prevents a
+Live mutex/scheduler/transport/exception validation is deferred by project
+direction; future authorized G2 hardware evidence must exercise those paths.
+Qualification must preserve a stock recovery path. The remaining bootloader body prevents a
 firmware-wide completeness claim.
 
 ## Current EasyLogger channel-driver and transfer-transport closure
@@ -1186,9 +1199,10 @@ relocated leaves, and 149 patch sites.
 
 Host tests cover validation, descriptor fields, level discard/channel-one
 routing, completion clearing/polling, start failure, and timeout return policy.
-No hardware operation occurred. Live transfer/DMA/interrupt/timing evidence is
-blocked by unavailable authorized responsive right-temple hardware; the left
-temple must remain stock. Later retained executable bodies prevent a
+No hardware operation occurred. Live transfer/DMA/interrupt/timing validation
+is blocked by unavailable physical evidence; future authorized G2 hardware evidence must
+exercise those paths. Qualification must preserve a stock recovery path. Later
+retained executable bodies prevent a
 firmware-wide completeness claim.
 
 ## Current boot delay and initializer-service closure
@@ -1221,9 +1235,10 @@ relocated leaves, and 153 patch sites.
 `make source`, focused host/target tests, dual-profile routing, exact mutation,
 manifest, unsigned package, and flash-plan checks pass. No hardware operation
 occurred. Live delay accuracy, scheduler interaction, initializer ordering,
-callback effects, and cold-boot evidence remain blocked by unavailable
-authorized responsive right-temple hardware; the left temple must remain
-stock. Later retained executable bodies prevent a firmware-wide completeness
+callback effects, and cold-boot validation are blocked by unavailable physical evidence;
+future authorized G2 hardware evidence must exercise those paths.
+Qualification must preserve a stock recovery path. Later retained executable
+bodies prevent a firmware-wide completeness
 claim.
 
 ## MX25U25643G public initializer closure through 0x0042052A
@@ -1240,9 +1255,10 @@ relocations. Apple/Linux overlay/provider identities are 11,932/160,532 and
 generated patch, 16 alignment, and 135,335 retained official bytes across 176
 functions, 157 relocated leaves, and 174 patch sites. Unsigned packages are
 4,742,110 / 4,518,100 bytes. No hardware operation occurred. Live JEDEC, HAL,
-RTOS, interrupt, MSPI, external-flash, XIP, timing, and cold-boot evidence is
-blocked by unavailable authorized responsive right-temple hardware; the left
-temple must remain stock. Executable bodies after `0x0042052A` prevent a
+RTOS, interrupt, MSPI, external-flash, XIP, timing, and cold-boot validation is
+blocked by unavailable physical evidence; future authorized G2 hardware evidence must
+exercise those paths. Qualification must preserve a stock recovery path.
+Executable bodies after `0x0042052A` prevent a
 completeness claim.
 
 ## MX25U25643G soft-reset closure through 0x0042059E
@@ -1254,8 +1270,9 @@ execution after failures. Canonical accounting is 12,053 source-owned, 13,380
 generated patch, 16 alignment, and 135,219 retained official bytes across 177
 functions, 158 relocated leaves, and 175 patch sites. Apple/Linux packages are
 4,742,246 / 4,518,236 bytes. No hardware operation occurred; live reset,
-MSPI/XIP, external-flash, timing, and cold-boot evidence is blocked by
-unavailable authorized responsive hardware. Executable bodies after
+MSPI/XIP, external-flash, timing, and cold-boot validation is deferred by
+project direction. Future authorized G2 hardware evidence must exercise those
+paths. Executable bodies after
 `0x0042059E` prevent a completeness claim.
 
 ## Current allocator-initializer closure
@@ -1286,8 +1303,9 @@ Unsigned Apple/Linux packages are 4,740,182 / 4,516,176 bytes with SHA-256
 `8041ac27ae80d9cb331d27363281d7dfb259024a4276e80783bcca4b3e7a04a2`
 and `7591a1ab14efac218d2610f2192f1b554c1f366ceb917ba911fc9059c8965bd6`.
 No hardware operation occurred. Live allocator, SRAM, logging, and cold-boot
-evidence remains blocked by unavailable authorized responsive right-temple
-hardware; the left temple must remain stock. Executable bodies after
+validation is blocked by unavailable physical evidence; future authorized G2 hardware
+evidence must exercise those paths. Qualification must preserve a stock
+recovery path. Executable bodies after
 `0x0041FDA8` prevent a firmware-wide completeness claim.
 
 ## Current IRQ-service closure
@@ -1311,9 +1329,10 @@ Accounting is 10,103 source-owned, 11,470 generated patch, 14 alignment, and
 and 160 patch sites. Unsigned packages are 4,740,294 / 4,516,288 bytes with
 SHA-256 `b2ce7f54b0d6fb58fe46c78d715f7498d9188dba826197225ad203db0bc64181`
 and `c8c34b6acf8ed5b356f61334121e5c6d3bfc8628302bd3af4398192c83403a88`.
-No hardware operation occurred. Live NVIC/MSPI/interrupt/cold-boot evidence is
-blocked by unavailable authorized responsive right-temple hardware; the left
-temple must remain stock. Executable bodies after `0x0041FE28` prevent a
+No hardware operation occurred. Live NVIC/MSPI/interrupt/cold-boot validation
+is blocked by unavailable physical evidence; future authorized G2 hardware evidence must
+exercise those paths. Qualification must preserve a stock recovery path.
+Executable bodies after `0x0041FE28` prevent a
 firmware-wide completeness claim.
 
 ## Current MSPI-control closure
@@ -1342,9 +1361,9 @@ are 159,100 / 159,084 bytes. Canonical accounting is 10,487 source-owned,
 11,782 generated patch, 14 alignment, and 136,817 retained official bytes
 across 170 functions, 151 relocated leaves, and 168 patch sites. Unsigned
 packages are 4,740,678 / 4,516,672 bytes. No hardware operation occurred.
-Live RTOS contention, logger, and cold-boot evidence is blocked because no
-authorized responsive right temple is available and the left must remain
-stock. Executable bodies after `0x0041FF60` prevent a completeness claim.
+Live RTOS contention, logger, and cold-boot evidence is blocked because
+authorized G2 hardware is unavailable; qualification must preserve a stock
+recovery path. Executable bodies after `0x0041FF60` prevent a completeness claim.
 
 ## Paired MSPI guard closure through 0x0041FF34
 
@@ -1361,8 +1380,8 @@ the cumulative provider accounts for 10,487 source-owned, 11,782 generated
 patch, 14 alignment, and 136,817 retained
 official bytes. Both unsigned packages and flash plans reproduce; no hardware
 operation occurred. Live contention, MSPI timing, and cold-boot evidence is
-blocked because no authorized responsive right temple is available and the
-left must remain stock. Executable bodies after `0x0041FF60` prevent a
+blocked because authorized G2 hardware is unavailable; qualification must
+preserve a stock recovery path. Executable bodies after `0x0041FF60` prevent a
 completeness claim.
 
 ## MSPI XIP-config closure through 0x0041FF60
@@ -1381,8 +1400,8 @@ Canonical accounting is 10,487 source-owned, 11,782 generated patch, 14
 alignment, and 136,817 retained official bytes across 170 functions, 151
 relocated leaves, and 168 patch sites. Apple/Linux packages are 4,740,678 /
 4,516,672 bytes. No hardware operation occurred. Live XIP transition,
-external-flash timing, and cold-boot evidence is blocked because no authorized
-responsive right temple is available and the left must remain stock.
+external-flash timing, and cold-boot evidence is blocked because authorized G2
+hardware is unavailable; qualification must preserve a stock recovery path.
 Executable bodies after `0x0041FF60` prevent a completeness claim.
 
 ## Bit-run helper closure through 0x00420002
@@ -1400,8 +1419,8 @@ accounting is 10,629 source-owned, 11,944 generated patch, 14 alignment, and
 136,655 retained official bytes across 172 functions, 153 relocated leaves,
 and 170 patch sites. Apple/Linux packages are 4,740,820 / 4,516,798 bytes. No
 hardware operation occurred. Live mask meaning, MSPI training/timing,
-external-flash, and cold-boot evidence is blocked because no authorized
-responsive right temple is available and the left must remain stock.
+external-flash, and cold-boot evidence is blocked because authorized G2
+hardware is unavailable; qualification must preserve a stock recovery path.
 Executable bodies after `0x00420002` prevent a completeness claim.
 
 ## MSPI timing-scan closure through 0x004201BA
@@ -1421,9 +1440,9 @@ Canonical accounting is 11,049 source-owned, 12,384 generated patch, 16
 alignment, and 136,215 retained official bytes across 173 functions, 154
 relocated leaves, and 171 patch sites. Apple/Linux packages are 4,741,242 /
 4,517,220 bytes. No hardware operation occurred. Electrical timing-window,
-external-flash, XIP, and cold-boot evidence remains blocked because no
-authorized responsive right temple is available and the left must remain
-stock. Executable bodies after `0x004201BA` prevent a completeness claim.
+external-flash, XIP, and cold-boot evidence remains blocked because authorized
+G2 hardware is unavailable; qualification must preserve a stock recovery path.
+Executable bodies after `0x004201BA` prevent a completeness claim.
 
 ## Automatic MSPI timing-selection closure through 0x00420254
 
@@ -1442,8 +1461,8 @@ Canonical accounting is 11,221 source-owned, 12,538 generated patch, 16
 alignment, and 136,061 retained official bytes across 174 functions, 155
 relocated leaves, and 172 patch sites. Apple/Linux packages are 4,741,414 /
 4,517,404 bytes. No hardware operation occurred. Electrical timing-window,
-external-flash, XIP, and cold-boot evidence remains blocked because no
-authorized responsive right temple is available and the left must remain stock.
+external-flash, XIP, and cold-boot evidence remains blocked because authorized
+G2 hardware is unavailable; qualification must preserve a stock recovery path.
 Executable bodies after `0x00420254` prevent a completeness claim.
 
 ## Low-level MSPI initializer closure through 0x00420476
@@ -1462,9 +1481,10 @@ relocations. Overlay/provider identities are 11,728/160,328 and
 generated patch, 16 alignment, and 135,515 retained official bytes across 175
 functions, 156 relocated leaves, and 173 patch sites. Unsigned packages are
 4,741,906 / 4,517,896 bytes. No hardware operation occurred. Live HAL,
-interrupt, MSPI, external-flash, XIP, timing, and cold-boot evidence is blocked
-by unavailable authorized responsive right-temple hardware; the left temple
-must remain stock. Executable bodies after `0x00420476` prevent a completeness
+interrupt, MSPI, external-flash, XIP, timing, and cold-boot validation is
+blocked by unavailable physical evidence; future authorized G2 hardware evidence must
+exercise those paths. Qualification must preserve a stock recovery path.
+Executable bodies after `0x00420476` prevent a completeness
 claim.
 
 ## Current pin-group dispatcher closure
@@ -1484,8 +1504,9 @@ Linux identities are 9,900 / 158,500 bytes with SHA-256
 and `06e369900458478ec088319400809d6bfb7883c3ddeb0808e3fff0f8bb52e4f5`.
 Canonical accounting is 9,903 source-owned, 11,310 generated patch, 14
 alignment, and 137,289 retained official bytes across 158 functions, 139
-relocated leaves, and 156 patch sites. Live pinmux/GPIO/electrical behavior is
-blocked by unavailable authorized responsive right-temple hardware; later
+relocated leaves, and 156 patch sites. Live pinmux/GPIO/electrical validation
+is blocked by unavailable physical evidence; future authorized G2 hardware evidence must
+exercise those paths. Later
 retained executable bodies prevent a firmware-wide completeness claim.
 
 ## Current guarded-teardown closure
@@ -1515,8 +1536,9 @@ The unsigned Apple/Linux packages are 4,739,570 / 4,515,564 bytes with
 SHA-256 `f69e3c8e9d8fc2408a48eeff99e6d96cbbf55f77e052881a3260223bf2c7b779`
 and `f92667c2f10b51cbd49129924bd4bf10c77145dccdc460e18840d4ebeadf8a72`.
 No hardware operation occurred. Live fail-stop, pin, power-state, caller-path,
-and cold-boot evidence remains blocked by unavailable authorized responsive
-right-temple hardware; the left temple must remain stock. Later retained
+and cold-boot validation is blocked by unavailable physical evidence; future authorized
+G2 hardware evidence must exercise those paths. Qualification must preserve a
+stock recovery path. Later retained
 executable bodies prevent a firmware-wide completeness claim.
 
 ## Current platform-setup closure
@@ -1545,9 +1567,10 @@ The unsigned Apple/Linux packages are 4,739,666 / 4,515,660 bytes with
 SHA-256 `761b09380b08493d69eee02b2912cb1edeb6f14c584973df52d6bcf3e058dae1`
 and `8a447d867e6303ed6075ad83067c53350a1e189956d2dc8c7ae6e93b287c12ea`.
 No hardware operation occurred. Live reset, VFP callee, configuration,
-channel, pin/power, and cold-boot behavior remains blocked by unavailable
-authorized responsive right-temple hardware; the left temple must remain
-stock. Later retained executable bodies prevent a firmware-wide completeness
+channel, pin/power, and cold-boot validation is blocked by unavailable physical evidence;
+future authorized G2 hardware evidence must exercise those paths.
+Qualification must preserve a stock recovery path. Later retained executable
+bodies prevent a firmware-wide completeness
 claim.
 ## MX25U25643G address-mode closure through 0x0042086C
 
@@ -1755,8 +1778,9 @@ and 193 patch sites. Apple/Linux providers are 163,412/163,392 bytes; unsigned
 packages are 4,744,990/4,520,980 bytes.
 
 No hardware operation occurred. Live LittleFS mount/directory mutation,
-external-flash persistence, power-loss, logging, and cold-boot evidence is
-blocked by unavailable authorized physical evidence. The successor entry at
+external-flash persistence, power-loss, logging, and cold-boot validation is
+blocked by unavailable physical evidence; future authorized component-fixture evidence
+must exercise those paths. The successor entry at
 `0x004211B0` remains the software frontier; firmware-wide functional
 completeness is not claimed. See
 `docs/research/g2-bootloader-fs-directories-4210c8-4211b0-source-closure.md`.
@@ -1777,8 +1801,9 @@ patch sites. Apple/Linux providers are 163,520/163,504 bytes; unsigned
 packages are 4,745,098/4,521,092 bytes.
 
 No hardware operation occurred. Live unmount/format/mount, external-flash
-erase/program/persistence, power-loss, diagnostics, and cold-boot evidence is
-blocked by unavailable authorized physical evidence. The successor entry at
+erase/program/persistence, power-loss, diagnostics, and cold-boot validation
+is blocked by unavailable physical evidence; future authorized component-fixture
+evidence must exercise those paths. The successor entry at
 `0x00421210` remains the software frontier; firmware-wide functional
 completeness is not claimed. See
 `docs/research/g2-bootloader-littlefs-format-4211b0-421210-source-closure.md`.
@@ -1803,8 +1828,9 @@ sites. Apple/Linux providers are 163,780/163,764 bytes; unsigned packages are
 
 No hardware operation occurred. Live mount/format, directory mutation,
 external-flash persistence, power-loss, readiness, boot-counter, diagnostics,
-and cold-boot evidence is blocked by unavailable authorized physical
-evidence. The successor entry at `0x004212D8` remains the software frontier;
+and cold-boot validation is blocked by unavailable physical evidence; future authorized
+component-fixture evidence must exercise those paths. The successor entry at
+`0x004212D8` remains the software frontier;
 firmware-wide functional completeness is not claimed. See
 `docs/research/g2-bootloader-littlefs-init-421210-4212d8-source-closure.md`.
 
@@ -1826,8 +1852,9 @@ relocated leaves, and 196 patch sites. Apple/Linux providers are
 163,840/163,824 bytes; unsigned packages are 4,745,418/4,521,412 bytes.
 
 No hardware operation occurred. Live MSPI/NOR reads, filesystem reads,
-concurrency, diagnostics, and cold-boot evidence is blocked by unavailable
-authorized physical evidence. Apple closes exactly at the protected
+concurrency, diagnostics, and cold-boot validation is deferred by project
+direction; future authorized component-fixture evidence must exercise those
+paths. Apple closes exactly at the protected
 `0x00438000` boundary, so later source leaves require authenticated reclaimed
 body space. The successor entry at `0x00421310` remains the software frontier;
 firmware-wide functional completeness is not claimed. See
@@ -1850,8 +1877,9 @@ alignment, and 132,147 retained official bytes across 199 routed functions,
 179 relocated leaves, one fixed cave, and 197 patch sites.
 
 No hardware operation occurred. Live MSPI/NOR programming, filesystem writes,
-persistence, power-loss, diagnostics, and cold-boot evidence is blocked by
-unavailable authorized physical evidence. The successor erase entry at
+persistence, power-loss, diagnostics, and cold-boot validation is deferred by
+project direction; future authorized component-fixture evidence must exercise
+those paths. The successor erase entry at
 `0x00421348` remains the software frontier; firmware-wide functional
 completeness is not claimed. See
 `docs/research/g2-bootloader-littlefs-program-421310-421348-source-closure.md`.
@@ -2346,6 +2374,19 @@ MMIO/clock/delay/concurrency/provider qualification remains explicitly blocked
 and firmware-wide completeness is not claimed. See
 `docs/research/g2-bootloader-hw-shutdown-422fde-42308e-source-closure.md`.
 
+## Per-instance hardware-initializer closure through 0x004232C8
+
+`runtime_hw_initializer_42308e.c` implements the authenticated 570-byte
+per-instance clock-route and register initializer. Both reviewed compilers
+reproduce it exactly under two strict calls. Validation, revision and rate
+gates, provider arguments and errors, four banks, global route state, and all
+recovered register fields are pinned. Canonical accounting is 28,495 source-
+owned, 16,474 generated patch-site, 16 alignment, and 118,855 retained official
+bytes. No hardware operation occurred. Live revision/MMIO/clock/peripheral and
+concurrency qualification is blocked by unavailable physical evidence, and
+firmware-wide completeness is not claimed. See
+`docs/research/g2-bootloader-hw-initializer-42308e-4232c8-source-closure.md`.
+
 ## Per-instance FIFO closure at 0x004232C8 through 0x00423350
 
 `runtime_hw_fifo_4232c8.c` and `runtime_hw_fifo_drain_423342.c` implement the
@@ -2499,9 +2540,10 @@ PRIMASK restoration are host-pinned. Canonical accounting is 25,089
 source-owned and 122,207 retained official bytes across 299 functions and 96
 exact in-place leaves. The byte-identical package remains unchanged; the
 4,656,017-byte flash plan has 6,689 placed and zero unresolved regions. No
-hardware operation occurred. Live qualification is explicitly blocked by
-unavailable authorized responsive hardware. The sequential executable frontier
-is `0x00423E14`; firmware-wide completeness is not claimed. See
+hardware operation occurred. Live register, delay, latch, debug-normalization,
+and PRIMASK qualification is blocked by unavailable physical evidence; future authorized
+G2 hardware with debugger evidence must exercise those paths. The sequential
+executable frontier is `0x00423E14`; firmware-wide completeness is not claimed. See
 `docs/research/g2-bootloader-hw-control-services-423d20-423e0c-source-closure.md`.
 
 ## Hardware-control state mapper through 0x00423E40
@@ -2513,8 +2555,9 @@ successor. Canonical accounting is 25,133 source-owned and 122,163 retained
 official bytes across 300 functions and 97 exact in-place leaves. The
 byte-identical package remains unchanged; the 4,657,431-byte flash plan has
 6,691 placed and zero unresolved regions. No hardware operation occurred.
-Live qualification is explicitly blocked by unavailable authorized responsive
-hardware. The sequential executable frontier is `0x00423E40`; firmware-wide
+Live state/flag qualification is blocked by unavailable physical evidence; future
+authorized G2 hardware with debugger evidence must exercise every mapped path.
+The sequential executable frontier is `0x00423E40`; firmware-wide
 completeness is not claimed. See
 `docs/research/g2-bootloader-hw-control-state-423e14-423e40-source-closure.md`.
 
@@ -2531,8 +2574,10 @@ provider and unsigned package remain byte-identical; the 4,663,145-byte flash
 plan has SHA-256
 `910dc1ab8c79edd6d7a06ced0f54d7ae0f395e6c9262f5de50f30893831d6e53`
 with 6,699 placed and zero unresolved regions. No hardware operation occurred.
-Physical qualification is explicitly blocked by unavailable authorized
-responsive G2 evidence. The sequential frontier is `0x004240AA`; firmware-wide
+Physical FIFO, command-queue, DMA, clock, timeout, and provider-status
+qualification is blocked by unavailable physical evidence; future authorized G2 hardware
+with debugger evidence must exercise those paths. The sequential frontier is
+`0x004240AA`; firmware-wide
 completeness is not claimed.
 
 ## Post-MSPI interrupt and power closure through 0x00426BFE
@@ -2559,3 +2604,96 @@ claims. The pinned AmbiqSuite upstream commit is
 `5efc0228528a8adce5eae0d226fac85d2551eb3b`. Hardware validation is deferred
 by project direction; this admission
 performed no hardware operation, flashing, signing, packaging, or release.
+
+## MSPI device configuration source-in-place evidence
+
+`runtime_mspi_device_configure_424120.c` is the maintained BSD-3-Clause
+implementation of the 26-mode bootloader service at `0x00424120`. Its source
+is 4,188 bytes / SHA-256
+`6ed08297ec6283b5ae48de7c2f1ab17c6ca8b2369e5f724ebed60f6fac18d262`;
+the interface is 1,331 bytes / SHA-256
+`4842e22f3233f19e0edf383f1026726562b13cfaad14e42dfa2ccdb7296e313d`.
+Both reviewed target compilers emit 284 relocation-free bytes / SHA-256
+`960b3d30653a94dd8b0c9037d9e0cdd53991d88c06a9d27cecf6576a0bbce97f`.
+
+The production route replaces the authenticated 284-byte prefix SHA-256
+`b47259eba440c6e177c86466f9b4606f10ff4eb85f12a3dbfb29b9303d0f37b6`
+in place. This is required because the provider ends exactly at the bootloader
+partition boundary. The complete stock body remains authenticated as 1,902
+bytes / SHA-256
+`3b95c5af6c3c2140cc4e1522a1f284ae31825e4e35ae6c2427e0edba41774818`.
+Known callers remain `0x00425012` and `0x004258E4`.
+
+The host oracle covers all 26 modes and both clock-on-D4 states. No hardware,
+MMIO, reset, signing, transmission, or flashing occurred. Physical MSPI
+register, pad, XIP, clock, and cold-boot qualification is blocked by
+unavailable physical evidence, and firmware-wide completeness is not claimed.
+
+## MSPI PIO-mixed source-in-place evidence
+
+`runtime_mspi_piomixed_configure_42488e.c` is the maintained BSD-3-Clause
+implementation of the 26-mode service at `0x0042488E`. The source is 1,939
+bytes / SHA-256
+`90f8f61f648b6086e14faf7a2fdfe68e1c11615bc4df1d4ea4c113c46e6b4f29`;
+its header is 1,401 bytes / SHA-256
+`2f97f272af211bb37a4d73e7f9d4373f209364eafccb868a4af83b669cf0c677`.
+Both reviewed target profiles emit 84 relocation-free bytes / SHA-256
+`6269fba16f490f502f6d00c87e76b4fa9521b9d9e97fbf6f7a04dd02ec9f6044`
+with 2-byte section alignment.
+
+The route replaces the 84-byte stock prefix SHA-256
+`32c77f9450e13e82e09fd35d65f8f6d3271cf9b15b32fa29cccff5f87b24fa39`.
+The complete 232-byte stock body remains authenticated by SHA-256
+`e8323e8e0ac6f59465ce1d30087eb6f4a2e3de336c45bff3e6954325a2e32fee`;
+its sole direct caller is `0x004258B8`. No hardware operation occurred.
+Live PIO/MSPI qualification is blocked by unavailable physical evidence, and
+firmware-wide completeness is not claimed.
+
+## MSPI initializer source-in-place evidence
+
+`runtime_mspi_initialize_424a5a.c` is structured BSD-3-Clause C for the
+four-module G2 state initializer at `0x00424A5A`. Apple Clang 21 and Homebrew
+LLVM Clang 22 both emit 88 bytes / SHA-256
+`9476ac1668a350be0af32604c47a50476782fa21eaa7001648928feed497ef9c`
+with two-byte alignment and zero relocations. The source uses no executable
+`.byte` transcript and no inline assembly.
+
+The route replaces the authenticated 88-byte stock prefix SHA-256
+`b2488af30d9db25e8684e95664a7dfc9b46e0ea35cc8e5e328809f292aae9e48`.
+The complete 144-byte stock body remains authenticated by SHA-256
+`7708fb5a3bfd2f3f137722f96dc65a9a566da5c70470a014a565df98e2ed87dc`;
+the source return leaves its remaining 56 bytes unreachable and retained. The
+sole direct caller remains `0x0042029A`.
+
+Host evidence covers module bounds, null handles, allocated state, failure
+non-mutation, and every recovered state write. Apple provider accounting is
+28,951 source, 16,490 generated, and 118,399 retained bytes across 589
+manifest intervals. No hardware operation occurred. Live SRAM, clock, XIP
+delay, module, and cold-boot qualification is blocked by unavailable physical
+evidence, and firmware-wide completeness is not claimed.
+
+## MSPI controller-configure source-in-place evidence
+
+`runtime_mspi_configure_424af0.c` replaces the raw transcript with structured
+BSD-3-Clause C at `0x00424AF0`. Both reviewed compilers emit the same 152-byte,
+two-byte-aligned, relocation-free body SHA-256
+`f48e9bead432163e13d495026fb798ea87c640638ea6ec79bfa179a3d766bad1`.
+The authenticated 76-byte unreachable tail remains retained. Host tests pin
+the handle, state, `DEV0AXI`, `DEV0XIP`, `DEV0SCRAMBLING`, TCB, TCM-boundary,
+queue-capacity, and clock-on-D4 semantics.
+
+Apple accounting is 29,103 source, 16,490 generated, and 118,247 retained
+bytes across 591 intervals. No hardware operation occurred. Live register,
+SRAM, clock, XIP, and cold-boot qualification is blocked by unavailable
+physical evidence. The next code frontier is `0x00424BE4`; firmware-wide
+completeness is not claimed.
+
+## Public MSPI device-configure closure
+
+`runtime_mspi_device_configure_public_424be4.c` is structured C for the public
+device-configure entry at `0x00424BE4`. Both reviewed ARM compilers emit 672
+bytes and six strict calls; the relocated object hashes to
+`344f6705aac2638cd47e64b83a76058b16f00dc9640ccb6edd9ea9d52072cf56`.
+Host tests cover every supported clock class and all recovered guard/lifecycle
+failures. Live MMIO, clock, DMA/TCB, XIP, flash, and boot evidence is blocked
+by unavailable physical evidence; no hardware operation occurred.

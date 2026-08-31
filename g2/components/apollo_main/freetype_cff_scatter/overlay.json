@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "component": "g2-apollo-main-freetype-cff-scatter",
+  "dependencies": {
+    "scatter_analyzer": {
+      "size": 25836,
+      "sha256": "ac99b9e6c14be45d05b13df19e4af7fca80aa15bf6ae2f4a5df4df179ba91bf1"
+    },
+    "scatter_manifest": {
+      "size": 21290,
+      "sha256": "0e0a5bbacb77196dfeff989b1f30ef64b812a3f2cfeee8ae490b853a07532eed"
+    }
+  },
+  "profiles": {
+    "apple-clang": {
+      "base_package": {
+        "path": "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "size": 4678740,
+        "sha256": "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a"
+      },
+      "base_component": {
+        "size": 3885668,
+        "sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
+        "runtime_end_exclusive": 8309316
+      },
+      "expected": {
+        "component": {
+          "size": 3956468,
+          "sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"
+        }
+      }
+    },
+    "linux-clang": {
+      "base_package": {
+        "path": "build/postapply-package-linux/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "size": 4471056,
+        "sha256": "f7260f93e2c87f2403e14f5a8e6ae1436233cce2990c386a1cde48d2e8133e31"
+      },
+      "base_component": {
+        "size": 3678000,
+        "sha256": "45d32718d333b61718d7ebeededf4692760608af01951b98501189f5e809eccd",
+        "runtime_end_exclusive": 8101648
+      },
+      "expected": {
+        "component": {
+          "size": 3956468,
+          "sha256": "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7"
+        }
+      }
+    }
+  }
+}

@@ -73,7 +73,8 @@ class BootloaderOpaqueFrontierTests(unittest.TestCase):
         self.assertEqual(
             report["census"],
             {
-                "earliest_complete_opaque_body_bytes": 570,
+                "earliest_complete_opaque_body_bytes": 0,
+                "earliest_body_source_owned_bytes": 570,
                 "post_mspi_parent_region_bytes": 57153,
                 "sequential_parent_region_bytes": 9190,
             },
@@ -160,7 +161,8 @@ class BootloaderOpaqueFrontierTests(unittest.TestCase):
         self.assertIn("SPDX-License-Identifier: MIT", header)
         self.assertIn("EXACT_PROVIDER_UNSUPPORTED", source + header)
         self.assertIn("source_owned_production\topenCFW clean-room exact in-place source\tGPL-3.0-or-later", census)
-        self.assertIn("Even first-party bootloader body\tredistribution authority unresolved", census)
+        self.assertIn("earliest_complete_opaque_body\t0x0042308e\t0x004232c8\t570", census)
+        self.assertIn("source_owned_production\topenCFW clean-room exact in-place source\tMIT", census)
         overlay = (ROOT / "components/bootloader/core_overlay/overlay.json").read_text(
             encoding="utf-8"
         )

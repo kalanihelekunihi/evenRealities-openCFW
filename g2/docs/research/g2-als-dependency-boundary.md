@@ -1,5 +1,10 @@
 # G2 ALS dependency boundary
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Status: software-complete and production-routed. Authenticated against G2
 2.2.6.10; live physical validation is blocked by unavailable evidence.
 

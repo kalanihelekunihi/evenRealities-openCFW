@@ -44,9 +44,12 @@ from apollo_overlay import (  # noqa: E402
     STT_SECTION,
     align_up,
     atomic_write,
+    compiler_builtin_include_dir,
     compiler_version,
     decode_thumb_bl,
     encode_thumb_branch,
+    hermetic_compiler_arguments,
+    hermetic_compiler_environment,
     parse_elf32,
     parse_elf32_symbols,
     sha256,
@@ -361,6 +364,7 @@ def build(
     base_expected_override: dict[str, Any] | None = None,
     expected_override: dict[str, Any] | None = None,
     placement_override: dict[str, Any] | None = None,
+    expected_builtin_include_dir: Path | None = None,
 ) -> dict[str, Any]:
     config = json.loads(config_path.read_text(encoding="utf-8"))
     if config.get("schema_version") != 1:
@@ -372,6 +376,10 @@ def build(
     toolchain = {"reviewed_version_prefix": active["reviewed_version_prefix"]}
     version = compiler_version(clang)
     validate_compiler_version(toolchain, version)
+    selected_builtin_include = compiler_builtin_include_dir(
+        clang, expected=expected_builtin_include_dir
+    )
+    hermetic_arguments = hermetic_compiler_arguments(selected_builtin_include)
 
     base_path = (
         base_path_override.resolve()
@@ -407,11 +415,22 @@ def build(
     include_dirs = [G2_ROOT / item for item in config["include_dirs"]]
     with tempfile.TemporaryDirectory(prefix="open-cfw-liblc3-ltpf-") as temporary:
         object_path = Path(temporary) / "liblc3_ltpf.o"
-        command = [clang, "--target=arm-none-eabi", *flags]
+        command = [
+            clang,
+            *hermetic_arguments,
+            "--target=arm-none-eabi",
+            *flags,
+        ]
         for include_dir in include_dirs:
             command.extend(("-I", str(include_dir)))
         command.extend(("-c", str(G2_ROOT / config["compile_source"]), "-o", str(object_path)))
-        completed = subprocess.run(command, capture_output=True, text=True, check=False)
+        completed = subprocess.run(
+            command,
+            capture_output=True,
+            text=True,
+            check=False,
+            env=hermetic_compiler_environment(),
+        )
         if completed.returncode:
             raise BuildError(completed.stderr.strip() or completed.stdout.strip())
         overlay, link_report = _extract_overlay(
@@ -490,10 +509,10 @@ def build(
     # changes both the nested payload length and its CRC-32; leaving the
     # inherited base header intact would produce an invalid, unflashable
     # provider even though the code and relocation closure were correct.
-    flags = struct.unpack_from("<I", component, 0)[0] >> 24
-    if flags != 0x04 or len(component) > 0x00FFFFFF:
+    ota_flags = struct.unpack_from("<I", component, 0)[0] >> 24
+    if ota_flags != 0x04 or len(component) > 0x00FFFFFF:
         raise BuildError("Apollo OTA preamble flags or final size changed")
-    struct.pack_into("<I", component, 0, flags << 24 | len(component))
+    struct.pack_into("<I", component, 0, ota_flags << 24 | len(component))
     struct.pack_into("<I", component, 4, zlib.crc32(component[8:]) & 0xFFFFFFFF)
 
     component_bytes = bytes(component)
@@ -506,7 +525,11 @@ def build(
         "schema_version": 1,
         "name": config["name"],
         "profile": profile,
-        "toolchain": {"executable": clang, "version": version, "flags": flags},
+        "toolchain": {
+            "executable": clang,
+            "version": version,
+            "flags": [*hermetic_arguments, *flags],
+        },
         "sources": source_records,
         "base": {"path": str(base_path), "size": len(base), "sha256": sha256(base)},
         "placement": {

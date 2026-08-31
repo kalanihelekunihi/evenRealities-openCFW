@@ -28,7 +28,7 @@ FILE_PINS = {
     CLUSTER_MAP: (3_383, "5f9c7aa69a12345da365491f09849277778e88abc4eb632600d23dcaf426209a"),
     CANDIDATE: (2_349, "85d4dbe53cc369469c041c5c7416705ff56671eb5a983d02d5fd5597de9f78b1"),
     HEADER: (1_767, "89b5f777bbfa9dc21dd93c564d104da14d89936e67ce5a7236f43f138c51e618"),
-    MANIFEST: (2_980, "dfc9f74b22a993598e7cfa88e9cc793a5796d8c93d5456cf403749e371c8b131"),
+    MANIFEST: (2_991, "635f8b1e7455714253e6dbcacd5148f449417e7a864b61e1b43cd1c96df22317"),
 }
 APP_BASE = 0x00302400
 APP_FILE_OFFSET = 0x424
@@ -131,7 +131,7 @@ def run_audit() -> dict[str, Any]:
         raise BoundaryError("slave-connection boundary manifest row-count drift")
     if manifest_rows[0]["disposition"] != "typed_unsupported_external_boundary":
         raise BoundaryError("slave-connection boundary disposition drift")
-    if manifest_rows[-1]["name"] != "deferred by project direction":
+    if manifest_rows[-1]["name"] != "blocked by unavailable physical evidence":
         raise BoundaryError("hardware qualification policy drift")
 
     return {
@@ -156,7 +156,7 @@ def run_audit() -> dict[str, Any]:
             "header": str(HEADER.relative_to(ROOT)),
             "production_routed": False,
         },
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
     }
 
 
@@ -170,7 +170,7 @@ def main() -> int:
     else:
         print("EM9305 slave connection: candidate-qualified-fail-closed")
         print("typed boundary: 1 span / 3126 bytes / 6 entries")
-        print("hardware validation: deferred by project direction")
+        print("hardware validation: blocked by unavailable physical evidence")
     return 0
 
 

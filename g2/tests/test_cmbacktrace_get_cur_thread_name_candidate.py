@@ -141,7 +141,7 @@ TARGET_FLAGS = (
 PROFILE_PINS = {
     "apple-clang": {
         "compiler": "/usr/bin/clang",
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
     },
     "linux-clang": {
         "compiler": "/home/linuxbrew/.linuxbrew/bin/clang",

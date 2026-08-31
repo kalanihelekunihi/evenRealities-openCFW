@@ -33,7 +33,7 @@ class CasePureHelperAdmissionTests(unittest.TestCase):
     def test_integration_stays_closed(self) -> None:
         self.assertFalse(self.report["production_routed"])
         self.assertEqual(self.report["hardware_validation"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
         self.assertEqual(self.report["hardware_operations"], [])
 
     def test_target_build_is_deterministic(self) -> None:

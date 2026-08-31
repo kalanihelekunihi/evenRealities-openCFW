@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ctypes
+import copy
 import hashlib
 import json
 import os
@@ -144,9 +145,18 @@ class RuntimeEasyLoggerHexdumpProductionTests(unittest.TestCase):
             prefix="open-cfw-hexdump-production-",
             dir=ROOT / "build",
         )
+        stage_config = copy.deepcopy(cls.config)
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = Path(cls.temporary.name) / "core-stage-overlay.json"
+        stage_config_path.write_text(
+            json.dumps(stage_config, indent=2) + "\n", encoding="utf-8"
+        )
         cls.report = apollo_overlay.build(
             root=ROOT,
-            config_path=CONFIG,
+            config_path=stage_config_path,
             output_dir=Path(cls.temporary.name),
             clang=cls.clang,
             toolchain_profile=cls.profile,

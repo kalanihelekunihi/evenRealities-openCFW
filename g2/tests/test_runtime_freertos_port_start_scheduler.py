@@ -66,8 +66,8 @@ UNDEFINED = [
 
 TARGET_PINS = {
     "apple-clang": {
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
-        "object": (1476, "e25055c8d089f9fadd723fc6602e2903b6732d205b72aec529fb190d52fcc52c"),
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "object": (1476, "8746f97b40ef270cd60acf2f2ff2f59209e024f8ef36c6c4334ec026696db985"),
     },
     "linux-clang": {
         "version": "Homebrew clang version 22.1.8",

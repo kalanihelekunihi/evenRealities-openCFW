@@ -1,5 +1,10 @@
 # G2 bootloader bit-run helper source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated helper pair `[0x0041FF60,0x00420002)` now routes to
 two production functions in `runtime_bit_run_helpers_41ff60.c`. The first
 loads one 32-bit word and repeatedly evaluates `value &= value << 1` until

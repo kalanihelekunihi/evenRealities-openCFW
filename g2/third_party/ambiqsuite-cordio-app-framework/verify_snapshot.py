@@ -18,6 +18,13 @@ EXPECTED = {
     "common/app_db.c": (33371, "2b7d3b4d35adf9783966215134c3a62cc9ae1016204f150c0a3a9bf9f58ee646", "15dc1a189a7715649588ecfdd4b8faf06a89616f"),
     "common/app_ui.c": (9951, "d02a478cf431b8a5693d5a833659d106190166609b6b805d9f6d766342f657ec", "de657c3e82fa6d806bb00cebb5b6a63f928d4588"),
 }
+EXPECTED_HARDWARE_POLICY = {
+    "hardware_validation": "blocked by unavailable physical evidence",
+    "hardware_blocker": (
+        "Hardware validation is intentionally blocked by unavailable physical evidence and "
+        "remains required for future qualification."
+    ),
+}
 
 
 def sha256(raw: bytes) -> str:
@@ -29,9 +36,18 @@ def git_blob(raw: bytes) -> str:
     return hashlib.sha1(header + raw, usedforsecurity=False).hexdigest()
 
 
+def _verify_hardware_policy(provenance: dict[str, object]) -> None:
+    boundary = provenance["g2_boundary"]
+    assert isinstance(boundary, dict)
+    assert {
+        key: boundary.get(key) for key in EXPECTED_HARDWARE_POLICY
+    } == EXPECTED_HARDWARE_POLICY
+
+
 def verify() -> dict[str, object]:
     provenance = json.loads((HERE / "PROVENANCE.json").read_text())
     upstream = provenance["upstream"]
+    _verify_hardware_policy(provenance)
     assert upstream["selected_commit"] == "de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f"
     assert upstream["selected_tree"] == "3a06dca6e2222fdc2058e9587596e22325a6f024"
     assert upstream["historical_g2_generating_commit"] is None

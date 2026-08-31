@@ -1,5 +1,10 @@
 # G2 bootloader LittleFS sync callback source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The authenticated callback `[0x004213D4,0x004213D8)` is production-routed to
 a four-byte freestanding C leaf at `[0x00421280,0x00421284)`. This is offline
 software closure only; live persistence qualification is blocked by unavailable

@@ -69,8 +69,9 @@ class AnalyzeG2EfsServiceTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 68)
         self.assertEqual(production["retained_gap_pool_bytes"], 658)
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "deferred by project direction")
-        self.assertIn("required for future qualification", production["hardware_blocker"])
+        self.assertEqual(production["hardware_validation"], "blocked by unavailable physical evidence")
+        self.assertIn("future qualification requires", production["hardware_blocker"])
+        self.assertIn("authenticated golden", production["hardware_blocker"])
 
 
 if __name__ == "__main__":

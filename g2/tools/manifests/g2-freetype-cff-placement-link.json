@@ -1,0 +1,1067 @@
+{
+  "analysis_mode": "software-only final link and read-only ownership census",
+  "blockers": [
+    {
+      "evidence": "the self-consistent generated plan describes a different, larger Apollo component and occupies the proposed append interval; a current canonical flash plan must be regenerated before placement",
+      "gate": "current canonical flash-plan ownership",
+      "status": "blocked-self-consistent-plan-overlaps-candidate"
+    },
+    {
+      "evidence": "the finalizer emits a fully relocated payload and exact guarded patch bytes, but no canonical image writer owns this conflicting interval",
+      "gate": "module-table patch application ownership",
+      "status": "blocked-contract-authenticated-but-not-applied"
+    },
+    {
+      "evidence": "static data/BSS is zero, but font-dependent allocator use and live rendering evidence are unavailable",
+      "gate": "dynamic memory, stack, WCET, font payload, and hardware",
+      "status": "blocked-unavailable-runtime-and-physical-evidence"
+    }
+  ],
+  "capacity": {
+    "authenticated_current_flash_interval": {
+      "authority": "canonical core artifact end plus package-protected update record",
+      "bytes": 71100,
+      "end_exclusive": 8380416,
+      "start": 8309316
+    },
+    "profiles": {
+      "apple-clang": {
+        "final_payload_bytes": 26794,
+        "fits": true,
+        "payload_end_exclusive": 8336110,
+        "remaining_bytes": 44306,
+        "static_ram_bytes": 0,
+        "static_ram_interval_required": false
+      },
+      "linux-clang": {
+        "final_payload_bytes": 26726,
+        "fits": true,
+        "payload_end_exclusive": 8336042,
+        "remaining_bytes": 44374,
+        "static_ram_bytes": 0,
+        "static_ram_interval_required": false
+      }
+    },
+    "static_ram": {
+      "bytes": 0,
+      "dynamic_heap_stack_qualified": false,
+      "placement_required": false
+    }
+  },
+  "census_sha256": "244f10e59714ec3e4eec53c0ea16cf3cfb0c2c10ce4608e21109cb6c5219a86a",
+  "deterministic_link": {
+    "inputs": {
+      "components/shared/freetype_cff/placement_census.ld": {
+        "bytes": 687,
+        "sha256": "aa41febbfd7b64dec7f0cb410e1622c335c8b8b1739b33e24884e80afeb56c33"
+      },
+      "components/shared/freetype_cff/placement_final.ld": {
+        "bytes": 819,
+        "sha256": "2fe73a924aca12b8bec81eedc05db13f0ca8dfc4ed45be5637a254ccf7adeff4"
+      },
+      "components/shared/freetype_cff/runtime_freetype_cff.c": {
+        "bytes": 4998,
+        "sha256": "98548455212e6254599766fd4475d8e68eb1b2aa3acd28722d83cb30bd5bb70c"
+      },
+      "components/shared/freetype_cff/runtime_freetype_cff_import_providers.c": {
+        "bytes": 4831,
+        "sha256": "6504404f0cf523184a966de2d8d7fa50a6b498aa3830457194585865e00b6538"
+      },
+      "third_party/freetype/src/cff/cff.c": {
+        "bytes": 1470,
+        "sha256": "4fb8b6e43985bc8fe518110b0631feaccc571c0d26055168b0f4e536ef9b70c1"
+      }
+    },
+    "mode": "build-only final payload; no firmware image, patch application, or hardware",
+    "profiles": {
+      "apple-clang": {
+        "compiler_version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "defined_global_symbols": [
+          "cff_cmap_encoding_class_rec",
+          "cff_cmap_unicode_class_rec",
+          "cff_driver_class",
+          "open_cfw_freetype_cff_get_darkening_parameters",
+          "open_cfw_freetype_cff_get_hinting_engine",
+          "open_cfw_freetype_cff_get_no_stem_darkening",
+          "open_cfw_freetype_cff_set_darkening_parameters",
+          "open_cfw_freetype_cff_set_hinting_engine",
+          "open_cfw_freetype_cff_set_no_stem_darkening"
+        ],
+        "finalized": {
+          "export_addresses": {
+            "cff_driver_class": 8331476,
+            "open_cfw_freetype_cff_get_darkening_parameters": 8329996,
+            "open_cfw_freetype_cff_get_hinting_engine": 8329708,
+            "open_cfw_freetype_cff_get_no_stem_darkening": 8329808,
+            "open_cfw_freetype_cff_set_darkening_parameters": 8329852,
+            "open_cfw_freetype_cff_set_hinting_engine": 8329656,
+            "open_cfw_freetype_cff_set_no_stem_darkening": 8329752
+          },
+          "interval_end_exclusive": 8380416,
+          "interval_start": 8309316,
+          "payload_end_exclusive": 8336110,
+          "relocations": {
+            "by_type": {},
+            "external": 0,
+            "external_by_symbol": {},
+            "internal": 0,
+            "records_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "total": 0
+          },
+          "remaining_bytes": 44306,
+          "sections": {
+            "arm_exidx": {
+              "address": 8331176,
+              "alignment": 4,
+              "sha256": "e541167feb052d68f9d04f84adee3039f0839ffcff06ad774ac0633179835f5e",
+              "size": 16
+            },
+            "bss": {
+              "address": 0,
+              "alignment": 1,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "size": 0
+            },
+            "data": {
+              "address": 0,
+              "alignment": 1,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "size": 0
+            },
+            "placement_prefix": {
+              "address": 8309316,
+              "alignment": 1,
+              "sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+              "size": 12
+            },
+            "rodata": {
+              "address": 8331192,
+              "alignment": 4,
+              "sha256": "aa1559325e6535ae611321ad8af61aa12a6de69a12bce0b344a071ae5409c24d",
+              "size": 4918
+            },
+            "text": {
+              "address": 8309328,
+              "alignment": 16,
+              "sha256": "814f3d9267f6dbb9616c892a04e420008b752eac55ce666af1af971a584d4332",
+              "size": 21846
+            }
+          },
+          "undefined_symbols": []
+        },
+        "flash_loadable_bytes": 26316,
+        "imports": [
+          "FT_CMap_New",
+          "FT_DivFix",
+          "FT_Get_Module",
+          "FT_Get_Module_Interface",
+          "FT_Matrix_Multiply_Scaled",
+          "FT_MulDiv",
+          "FT_Outline_Get_CBox",
+          "FT_Outline_Transform",
+          "FT_Outline_Translate",
+          "FT_Property_Get",
+          "FT_Property_Set",
+          "FT_Request_Metrics",
+          "FT_RoundFix",
+          "FT_Select_Metrics",
+          "FT_Stream_EnterFrame",
+          "FT_Stream_ExitFrame",
+          "FT_Stream_ExtractFrame",
+          "FT_Stream_GetUShort",
+          "FT_Stream_Pos",
+          "FT_Stream_Read",
+          "FT_Stream_ReadChar",
+          "FT_Stream_ReadFields",
+          "FT_Stream_ReadULong",
+          "FT_Stream_ReadUShort",
+          "FT_Stream_ReleaseFrame",
+          "FT_Stream_Seek",
+          "FT_Stream_Skip",
+          "FT_Vector_Transform_Scaled",
+          "ft_mem_alloc",
+          "ft_mem_free",
+          "ft_mem_realloc",
+          "ft_mem_strcpyn",
+          "ft_mem_strdup",
+          "ft_module_get_service",
+          "ft_service_list_lookup",
+          "ft_synthesize_vertical_metrics",
+          "memcmp",
+          "memcpy",
+          "memset",
+          "ps_property_get",
+          "ps_property_set",
+          "strcmp",
+          "strlen",
+          "strncmp",
+          "strstr"
+        ],
+        "objects": {
+          "cff": {
+            "sha256": "5acff3a4b172f9287846a7a1410c28da4fd32d72a873de0d63225e16695dd50f",
+            "size": 55500
+          },
+          "final_binary": {
+            "sha256": "09c131cce2987d9689fbacf652f5e07f3df2e570db208531b8c0e621a5c2f09e",
+            "size": 26794
+          },
+          "final_elf": {
+            "sha256": "ead031a051f15eea32cc33770c0f49f66583a8283bf7c2d49c8ffb5ab9dc930e",
+            "size": 86332
+          },
+          "import_providers": {
+            "sha256": "d8b9354ac033851e71ca1d488f058676326c6a0709001fa9cd60cc95df06d0bb",
+            "size": 4116
+          },
+          "policy": {
+            "sha256": "54d55bec118145e321051a800f797ab18143b4c46eb2dc2f42b26af25a2c68dd",
+            "size": 3792
+          },
+          "provider_closed_link": {
+            "sha256": "3ba07844981aee7bf33b6b3110c9878cb24202e0328689188a0706656b3e89ec",
+            "size": 41296
+          },
+          "relocatable_link": {
+            "sha256": "371e7af55006fae42b100ae535bed45ebf6b695c5fff2c6e5075b40bcd79f137",
+            "size": 39408
+          }
+        },
+        "provider_closure": {
+          "relocations": {
+            "by_type": {
+              "R_ARM_ABS32": 81,
+              "R_ARM_PREL31": 95,
+              "R_ARM_THM_CALL": 306,
+              "R_ARM_THM_JUMP24": 8,
+              "R_ARM_THM_MOVT_ABS": 67,
+              "R_ARM_THM_MOVW_ABS_NC": 67
+            },
+            "external": 212,
+            "external_by_symbol": {
+              "FT_CMap_New": 2,
+              "FT_DivFix": 21,
+              "FT_Get_Module": 10,
+              "FT_Get_Module_Interface": 3,
+              "FT_Matrix_Multiply_Scaled": 1,
+              "FT_MulDiv": 7,
+              "FT_Outline_Get_CBox": 1,
+              "FT_Outline_Transform": 1,
+              "FT_Outline_Translate": 1,
+              "FT_Request_Metrics": 1,
+              "FT_RoundFix": 4,
+              "FT_Select_Metrics": 1,
+              "FT_Stream_EnterFrame": 4,
+              "FT_Stream_ExitFrame": 4,
+              "FT_Stream_ExtractFrame": 4,
+              "FT_Stream_GetUShort": 1,
+              "FT_Stream_Read": 3,
+              "FT_Stream_ReadChar": 11,
+              "FT_Stream_ReadFields": 1,
+              "FT_Stream_ReadULong": 3,
+              "FT_Stream_ReadUShort": 15,
+              "FT_Stream_ReleaseFrame": 12,
+              "FT_Stream_Seek": 17,
+              "FT_Stream_Skip": 5,
+              "FT_Vector_Transform_Scaled": 1,
+              "ft_mem_alloc": 6,
+              "ft_mem_free": 37,
+              "ft_mem_realloc": 19,
+              "ft_mem_strcpyn": 1,
+              "ft_mem_strdup": 4,
+              "ft_module_get_service": 7,
+              "ft_service_list_lookup": 1,
+              "ft_synthesize_vertical_metrics": 1,
+              "ps_property_get": 1,
+              "ps_property_set": 1
+            },
+            "internal": 412,
+            "records_sha256": "4a164cde5cf54e8650a922abb36405e1556b5a2539f45806cf755836065748d8",
+            "total": 624
+          },
+          "remaining_imports": [
+            "FT_CMap_New",
+            "FT_DivFix",
+            "FT_Get_Module",
+            "FT_Get_Module_Interface",
+            "FT_Matrix_Multiply_Scaled",
+            "FT_MulDiv",
+            "FT_Outline_Get_CBox",
+            "FT_Outline_Transform",
+            "FT_Outline_Translate",
+            "FT_Request_Metrics",
+            "FT_RoundFix",
+            "FT_Select_Metrics",
+            "FT_Stream_EnterFrame",
+            "FT_Stream_ExitFrame",
+            "FT_Stream_ExtractFrame",
+            "FT_Stream_GetUShort",
+            "FT_Stream_Read",
+            "FT_Stream_ReadChar",
+            "FT_Stream_ReadFields",
+            "FT_Stream_ReadULong",
+            "FT_Stream_ReadUShort",
+            "FT_Stream_ReleaseFrame",
+            "FT_Stream_Seek",
+            "FT_Stream_Skip",
+            "FT_Vector_Transform_Scaled",
+            "ft_mem_alloc",
+            "ft_mem_free",
+            "ft_mem_realloc",
+            "ft_mem_strcpyn",
+            "ft_mem_strdup",
+            "ft_module_get_service",
+            "ft_service_list_lookup",
+            "ft_synthesize_vertical_metrics",
+            "ps_property_get",
+            "ps_property_set"
+          ],
+          "retained_original_relocations": 212,
+          "retained_symbols": [
+            "FT_CMap_New",
+            "FT_DivFix",
+            "FT_Get_Module",
+            "FT_Get_Module_Interface",
+            "FT_Matrix_Multiply_Scaled",
+            "FT_MulDiv",
+            "FT_Outline_Get_CBox",
+            "FT_Outline_Transform",
+            "FT_Outline_Translate",
+            "FT_Request_Metrics",
+            "FT_RoundFix",
+            "FT_Select_Metrics",
+            "FT_Stream_EnterFrame",
+            "FT_Stream_ExitFrame",
+            "FT_Stream_ExtractFrame",
+            "FT_Stream_GetUShort",
+            "FT_Stream_Read",
+            "FT_Stream_ReadChar",
+            "FT_Stream_ReadFields",
+            "FT_Stream_ReadULong",
+            "FT_Stream_ReadUShort",
+            "FT_Stream_ReleaseFrame",
+            "FT_Stream_Seek",
+            "FT_Stream_Skip",
+            "FT_Vector_Transform_Scaled",
+            "ft_mem_alloc",
+            "ft_mem_free",
+            "ft_mem_realloc",
+            "ft_mem_strcpyn",
+            "ft_mem_strdup",
+            "ft_module_get_service",
+            "ft_service_list_lookup",
+            "ft_synthesize_vertical_metrics",
+            "ps_property_get",
+            "ps_property_set"
+          ],
+          "source_owned_original_relocations": 43,
+          "source_owned_symbols": [
+            "FT_Property_Get",
+            "FT_Property_Set",
+            "FT_Stream_Pos",
+            "memcmp",
+            "memcpy",
+            "memset",
+            "strcmp",
+            "strlen",
+            "strncmp",
+            "strstr"
+          ]
+        },
+        "relocations": {
+          "by_type": {
+            "R_ARM_ABS32": 81,
+            "R_ARM_PREL31": 85,
+            "R_ARM_THM_CALL": 306,
+            "R_ARM_THM_JUMP24": 8,
+            "R_ARM_THM_MOVT_ABS": 65,
+            "R_ARM_THM_MOVW_ABS_NC": 65
+          },
+          "external": 255,
+          "external_by_symbol": {
+            "FT_CMap_New": 2,
+            "FT_DivFix": 21,
+            "FT_Get_Module": 10,
+            "FT_Get_Module_Interface": 3,
+            "FT_Matrix_Multiply_Scaled": 1,
+            "FT_MulDiv": 7,
+            "FT_Outline_Get_CBox": 1,
+            "FT_Outline_Transform": 1,
+            "FT_Outline_Translate": 1,
+            "FT_Property_Get": 3,
+            "FT_Property_Set": 3,
+            "FT_Request_Metrics": 1,
+            "FT_RoundFix": 4,
+            "FT_Select_Metrics": 1,
+            "FT_Stream_EnterFrame": 4,
+            "FT_Stream_ExitFrame": 4,
+            "FT_Stream_ExtractFrame": 4,
+            "FT_Stream_GetUShort": 1,
+            "FT_Stream_Pos": 4,
+            "FT_Stream_Read": 3,
+            "FT_Stream_ReadChar": 11,
+            "FT_Stream_ReadFields": 1,
+            "FT_Stream_ReadULong": 3,
+            "FT_Stream_ReadUShort": 15,
+            "FT_Stream_ReleaseFrame": 12,
+            "FT_Stream_Seek": 17,
+            "FT_Stream_Skip": 5,
+            "FT_Vector_Transform_Scaled": 1,
+            "ft_mem_alloc": 6,
+            "ft_mem_free": 37,
+            "ft_mem_realloc": 19,
+            "ft_mem_strcpyn": 1,
+            "ft_mem_strdup": 4,
+            "ft_module_get_service": 7,
+            "ft_service_list_lookup": 1,
+            "ft_synthesize_vertical_metrics": 1,
+            "memcmp": 2,
+            "memcpy": 5,
+            "memset": 16,
+            "ps_property_get": 1,
+            "ps_property_set": 1,
+            "strcmp": 3,
+            "strlen": 3,
+            "strncmp": 2,
+            "strstr": 2
+          },
+          "internal": 355,
+          "records_sha256": "2fb1c3b16163b2db9bf487be12417553f7060d4cdd2d6991e504d00e2714a830",
+          "total": 610
+        },
+        "required_aligned_flash_span": 26318,
+        "required_exports": [
+          "cff_driver_class",
+          "open_cfw_freetype_cff_get_darkening_parameters",
+          "open_cfw_freetype_cff_get_hinting_engine",
+          "open_cfw_freetype_cff_get_no_stem_darkening",
+          "open_cfw_freetype_cff_set_darkening_parameters",
+          "open_cfw_freetype_cff_set_hinting_engine",
+          "open_cfw_freetype_cff_set_no_stem_darkening"
+        ],
+        "sections": {
+          "arm_exidx": {
+            "address": 0,
+            "alignment": 4,
+            "sha256": "b11f3cda098bfde62fffde8fe80179a7a72e70cbc87def8508cac039c323aa03",
+            "size": 680
+          },
+          "bss": {
+            "address": 0,
+            "alignment": 1,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size": 0
+          },
+          "data": {
+            "address": 0,
+            "alignment": 1,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size": 0
+          },
+          "placement_prefix": {
+            "address": 0,
+            "alignment": 1,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size": 0
+          },
+          "rodata": {
+            "address": 0,
+            "alignment": 4,
+            "sha256": "1f1033782e8be775f3246bdc18a9410093ad651d4ae70b8f597a33e140783e8d",
+            "size": 4918
+          },
+          "text": {
+            "address": 0,
+            "alignment": 16,
+            "sha256": "b963d564052d1157d7c3ae142abcbe9b44aad9443963888f9b3036e3278d6a6c",
+            "size": 20718
+          }
+        },
+        "static_ram_bytes": 0,
+        "target_flags": [
+          "--target=arm-none-eabi",
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-O2",
+          "-fshort-enums",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fno-addrsig",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-DFT2_BUILD_LIBRARY",
+          "-DOPEN_CFW_FREETYPE_JMP_BUF_BYTES=128",
+          "-DOPEN_CFW_FREETYPE_JMP_BUF_ALIGNMENT=8"
+        ]
+      },
+      "linux-clang": {
+        "compiler_version": "Homebrew clang version 22.1.8",
+        "defined_global_symbols": [
+          "cff_cmap_encoding_class_rec",
+          "cff_cmap_unicode_class_rec",
+          "cff_driver_class",
+          "open_cfw_freetype_cff_get_darkening_parameters",
+          "open_cfw_freetype_cff_get_hinting_engine",
+          "open_cfw_freetype_cff_get_no_stem_darkening",
+          "open_cfw_freetype_cff_set_darkening_parameters",
+          "open_cfw_freetype_cff_set_hinting_engine",
+          "open_cfw_freetype_cff_set_no_stem_darkening"
+        ],
+        "finalized": {
+          "export_addresses": {
+            "cff_driver_class": 8331408,
+            "open_cfw_freetype_cff_get_darkening_parameters": 8329928,
+            "open_cfw_freetype_cff_get_hinting_engine": 8329640,
+            "open_cfw_freetype_cff_get_no_stem_darkening": 8329740,
+            "open_cfw_freetype_cff_set_darkening_parameters": 8329784,
+            "open_cfw_freetype_cff_set_hinting_engine": 8329588,
+            "open_cfw_freetype_cff_set_no_stem_darkening": 8329684
+          },
+          "interval_end_exclusive": 8380416,
+          "interval_start": 8309316,
+          "payload_end_exclusive": 8336042,
+          "relocations": {
+            "by_type": {},
+            "external": 0,
+            "external_by_symbol": {},
+            "internal": 0,
+            "records_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "total": 0
+          },
+          "remaining_bytes": 44374,
+          "sections": {
+            "arm_exidx": {
+              "address": 8331108,
+              "alignment": 4,
+              "sha256": "9a6bf00d6f8eade6f54fcb6d668a96551ef963f762f38751dac5ca55c8fd12a6",
+              "size": 16
+            },
+            "bss": {
+              "address": 0,
+              "alignment": 1,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "size": 0
+            },
+            "data": {
+              "address": 0,
+              "alignment": 1,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "size": 0
+            },
+            "placement_prefix": {
+              "address": 8309316,
+              "alignment": 1,
+              "sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+              "size": 12
+            },
+            "rodata": {
+              "address": 8331124,
+              "alignment": 4,
+              "sha256": "88dc08995595a2d8bc34e538ecc4ace4886007070917bbfcfbd28f868d5c1c90",
+              "size": 4918
+            },
+            "text": {
+              "address": 8309328,
+              "alignment": 16,
+              "sha256": "ab0ddd1f97f31e91781b767523aee75e170e017ac3458b936622f1d337ae5f39",
+              "size": 21778
+            }
+          },
+          "undefined_symbols": []
+        },
+        "flash_loadable_bytes": 26248,
+        "imports": [
+          "FT_CMap_New",
+          "FT_DivFix",
+          "FT_Get_Module",
+          "FT_Get_Module_Interface",
+          "FT_Matrix_Multiply_Scaled",
+          "FT_MulDiv",
+          "FT_Outline_Get_CBox",
+          "FT_Outline_Transform",
+          "FT_Outline_Translate",
+          "FT_Property_Get",
+          "FT_Property_Set",
+          "FT_Request_Metrics",
+          "FT_RoundFix",
+          "FT_Select_Metrics",
+          "FT_Stream_EnterFrame",
+          "FT_Stream_ExitFrame",
+          "FT_Stream_ExtractFrame",
+          "FT_Stream_GetUShort",
+          "FT_Stream_Pos",
+          "FT_Stream_Read",
+          "FT_Stream_ReadChar",
+          "FT_Stream_ReadFields",
+          "FT_Stream_ReadULong",
+          "FT_Stream_ReadUShort",
+          "FT_Stream_ReleaseFrame",
+          "FT_Stream_Seek",
+          "FT_Stream_Skip",
+          "FT_Vector_Transform_Scaled",
+          "ft_mem_alloc",
+          "ft_mem_free",
+          "ft_mem_realloc",
+          "ft_mem_strcpyn",
+          "ft_mem_strdup",
+          "ft_module_get_service",
+          "ft_service_list_lookup",
+          "ft_synthesize_vertical_metrics",
+          "memcmp",
+          "memcpy",
+          "memset",
+          "ps_property_get",
+          "ps_property_set",
+          "strcmp",
+          "strlen",
+          "strncmp",
+          "strstr"
+        ],
+        "objects": {
+          "cff": {
+            "sha256": "4d030b43efe4667122ef42b04d6b9e3ce7047dadcc213f73e75f813926106058",
+            "size": 55400
+          },
+          "final_binary": {
+            "sha256": "ec4c7c35dd797440bd41f4c19f21d8dacaab4c2826d24fe382a437e95d7c3f37",
+            "size": 26726
+          },
+          "final_elf": {
+            "sha256": "d0b676ee26865b749b71d1a84e85ea72eb44bcff345ebe8537ae206e54e4aed4",
+            "size": 86264
+          },
+          "import_providers": {
+            "sha256": "4bf1baea34ab70d310764eaec98a601e8d04568b4ecb088b120462b97d158240",
+            "size": 4100
+          },
+          "policy": {
+            "sha256": "5abfffc4198084b72bfaf7c7b417b14791c05639b34682763e0453baa8fec593",
+            "size": 3776
+          },
+          "provider_closed_link": {
+            "sha256": "8cdd35c0a5d4cdefa7073c0be118759de0bda70cfb684b0503784301da958d6c",
+            "size": 41212
+          },
+          "relocatable_link": {
+            "sha256": "49768aa0410f7a54c704c8cb722b8840cb090871bb2bce77e07410546d4d6c24",
+            "size": 39324
+          }
+        },
+        "provider_closure": {
+          "relocations": {
+            "by_type": {
+              "R_ARM_ABS32": 81,
+              "R_ARM_PREL31": 95,
+              "R_ARM_THM_CALL": 306,
+              "R_ARM_THM_JUMP24": 8,
+              "R_ARM_THM_MOVT_ABS": 66,
+              "R_ARM_THM_MOVW_ABS_NC": 66
+            },
+            "external": 212,
+            "external_by_symbol": {
+              "FT_CMap_New": 2,
+              "FT_DivFix": 21,
+              "FT_Get_Module": 10,
+              "FT_Get_Module_Interface": 3,
+              "FT_Matrix_Multiply_Scaled": 1,
+              "FT_MulDiv": 7,
+              "FT_Outline_Get_CBox": 1,
+              "FT_Outline_Transform": 1,
+              "FT_Outline_Translate": 1,
+              "FT_Request_Metrics": 1,
+              "FT_RoundFix": 4,
+              "FT_Select_Metrics": 1,
+              "FT_Stream_EnterFrame": 4,
+              "FT_Stream_ExitFrame": 4,
+              "FT_Stream_ExtractFrame": 4,
+              "FT_Stream_GetUShort": 1,
+              "FT_Stream_Read": 3,
+              "FT_Stream_ReadChar": 11,
+              "FT_Stream_ReadFields": 1,
+              "FT_Stream_ReadULong": 3,
+              "FT_Stream_ReadUShort": 15,
+              "FT_Stream_ReleaseFrame": 12,
+              "FT_Stream_Seek": 17,
+              "FT_Stream_Skip": 5,
+              "FT_Vector_Transform_Scaled": 1,
+              "ft_mem_alloc": 6,
+              "ft_mem_free": 37,
+              "ft_mem_realloc": 19,
+              "ft_mem_strcpyn": 1,
+              "ft_mem_strdup": 4,
+              "ft_module_get_service": 7,
+              "ft_service_list_lookup": 1,
+              "ft_synthesize_vertical_metrics": 1,
+              "ps_property_get": 1,
+              "ps_property_set": 1
+            },
+            "internal": 410,
+            "records_sha256": "beabb3bffaeac0d7308842fec489cca7697bc05f0d5454a5e8d507737ba20e91",
+            "total": 622
+          },
+          "remaining_imports": [
+            "FT_CMap_New",
+            "FT_DivFix",
+            "FT_Get_Module",
+            "FT_Get_Module_Interface",
+            "FT_Matrix_Multiply_Scaled",
+            "FT_MulDiv",
+            "FT_Outline_Get_CBox",
+            "FT_Outline_Transform",
+            "FT_Outline_Translate",
+            "FT_Request_Metrics",
+            "FT_RoundFix",
+            "FT_Select_Metrics",
+            "FT_Stream_EnterFrame",
+            "FT_Stream_ExitFrame",
+            "FT_Stream_ExtractFrame",
+            "FT_Stream_GetUShort",
+            "FT_Stream_Read",
+            "FT_Stream_ReadChar",
+            "FT_Stream_ReadFields",
+            "FT_Stream_ReadULong",
+            "FT_Stream_ReadUShort",
+            "FT_Stream_ReleaseFrame",
+            "FT_Stream_Seek",
+            "FT_Stream_Skip",
+            "FT_Vector_Transform_Scaled",
+            "ft_mem_alloc",
+            "ft_mem_free",
+            "ft_mem_realloc",
+            "ft_mem_strcpyn",
+            "ft_mem_strdup",
+            "ft_module_get_service",
+            "ft_service_list_lookup",
+            "ft_synthesize_vertical_metrics",
+            "ps_property_get",
+            "ps_property_set"
+          ],
+          "retained_original_relocations": 212,
+          "retained_symbols": [
+            "FT_CMap_New",
+            "FT_DivFix",
+            "FT_Get_Module",
+            "FT_Get_Module_Interface",
+            "FT_Matrix_Multiply_Scaled",
+            "FT_MulDiv",
+            "FT_Outline_Get_CBox",
+            "FT_Outline_Transform",
+            "FT_Outline_Translate",
+            "FT_Request_Metrics",
+            "FT_RoundFix",
+            "FT_Select_Metrics",
+            "FT_Stream_EnterFrame",
+            "FT_Stream_ExitFrame",
+            "FT_Stream_ExtractFrame",
+            "FT_Stream_GetUShort",
+            "FT_Stream_Read",
+            "FT_Stream_ReadChar",
+            "FT_Stream_ReadFields",
+            "FT_Stream_ReadULong",
+            "FT_Stream_ReadUShort",
+            "FT_Stream_ReleaseFrame",
+            "FT_Stream_Seek",
+            "FT_Stream_Skip",
+            "FT_Vector_Transform_Scaled",
+            "ft_mem_alloc",
+            "ft_mem_free",
+            "ft_mem_realloc",
+            "ft_mem_strcpyn",
+            "ft_mem_strdup",
+            "ft_module_get_service",
+            "ft_service_list_lookup",
+            "ft_synthesize_vertical_metrics",
+            "ps_property_get",
+            "ps_property_set"
+          ],
+          "source_owned_original_relocations": 43,
+          "source_owned_symbols": [
+            "FT_Property_Get",
+            "FT_Property_Set",
+            "FT_Stream_Pos",
+            "memcmp",
+            "memcpy",
+            "memset",
+            "strcmp",
+            "strlen",
+            "strncmp",
+            "strstr"
+          ]
+        },
+        "relocations": {
+          "by_type": {
+            "R_ARM_ABS32": 81,
+            "R_ARM_PREL31": 85,
+            "R_ARM_THM_CALL": 306,
+            "R_ARM_THM_JUMP24": 8,
+            "R_ARM_THM_MOVT_ABS": 64,
+            "R_ARM_THM_MOVW_ABS_NC": 64
+          },
+          "external": 255,
+          "external_by_symbol": {
+            "FT_CMap_New": 2,
+            "FT_DivFix": 21,
+            "FT_Get_Module": 10,
+            "FT_Get_Module_Interface": 3,
+            "FT_Matrix_Multiply_Scaled": 1,
+            "FT_MulDiv": 7,
+            "FT_Outline_Get_CBox": 1,
+            "FT_Outline_Transform": 1,
+            "FT_Outline_Translate": 1,
+            "FT_Property_Get": 3,
+            "FT_Property_Set": 3,
+            "FT_Request_Metrics": 1,
+            "FT_RoundFix": 4,
+            "FT_Select_Metrics": 1,
+            "FT_Stream_EnterFrame": 4,
+            "FT_Stream_ExitFrame": 4,
+            "FT_Stream_ExtractFrame": 4,
+            "FT_Stream_GetUShort": 1,
+            "FT_Stream_Pos": 4,
+            "FT_Stream_Read": 3,
+            "FT_Stream_ReadChar": 11,
+            "FT_Stream_ReadFields": 1,
+            "FT_Stream_ReadULong": 3,
+            "FT_Stream_ReadUShort": 15,
+            "FT_Stream_ReleaseFrame": 12,
+            "FT_Stream_Seek": 17,
+            "FT_Stream_Skip": 5,
+            "FT_Vector_Transform_Scaled": 1,
+            "ft_mem_alloc": 6,
+            "ft_mem_free": 37,
+            "ft_mem_realloc": 19,
+            "ft_mem_strcpyn": 1,
+            "ft_mem_strdup": 4,
+            "ft_module_get_service": 7,
+            "ft_service_list_lookup": 1,
+            "ft_synthesize_vertical_metrics": 1,
+            "memcmp": 2,
+            "memcpy": 5,
+            "memset": 16,
+            "ps_property_get": 1,
+            "ps_property_set": 1,
+            "strcmp": 3,
+            "strlen": 3,
+            "strncmp": 2,
+            "strstr": 2
+          },
+          "internal": 353,
+          "records_sha256": "048300b194ce7e416a184c7111501171f02e0db6e264431eb14eaacac3d744ae",
+          "total": 608
+        },
+        "required_aligned_flash_span": 26250,
+        "required_exports": [
+          "cff_driver_class",
+          "open_cfw_freetype_cff_get_darkening_parameters",
+          "open_cfw_freetype_cff_get_hinting_engine",
+          "open_cfw_freetype_cff_get_no_stem_darkening",
+          "open_cfw_freetype_cff_set_darkening_parameters",
+          "open_cfw_freetype_cff_set_hinting_engine",
+          "open_cfw_freetype_cff_set_no_stem_darkening"
+        ],
+        "sections": {
+          "arm_exidx": {
+            "address": 0,
+            "alignment": 4,
+            "sha256": "c9d998edeaea30809ebc6e6dfca9275b9fa6ca7cab6a722e7785076293b4c3a6",
+            "size": 680
+          },
+          "bss": {
+            "address": 0,
+            "alignment": 1,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size": 0
+          },
+          "data": {
+            "address": 0,
+            "alignment": 1,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size": 0
+          },
+          "placement_prefix": {
+            "address": 0,
+            "alignment": 1,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size": 0
+          },
+          "rodata": {
+            "address": 0,
+            "alignment": 4,
+            "sha256": "1f1033782e8be775f3246bdc18a9410093ad651d4ae70b8f597a33e140783e8d",
+            "size": 4918
+          },
+          "text": {
+            "address": 0,
+            "alignment": 16,
+            "sha256": "ed238b3be5570f8f6adc750f6b4bf5d699780eae48c65bfa0b10ca41c35252ce",
+            "size": 20650
+          }
+        },
+        "static_ram_bytes": 0,
+        "target_flags": [
+          "--target=arm-none-eabi",
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-mfloat-abi=hard",
+          "-std=c11",
+          "-O2",
+          "-fshort-enums",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fno-addrsig",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-DFT2_BUILD_LIBRARY",
+          "-DOPEN_CFW_FREETYPE_JMP_BUF_BYTES=128",
+          "-DOPEN_CFW_FREETYPE_JMP_BUF_ALIGNMENT=8"
+        ]
+      }
+    },
+    "schema_version": 1,
+    "status": "g2-freetype-cff-deterministic-final-link"
+  },
+  "evidence_bounds": {
+    "compiler_byte_identity_claimed": false,
+    "dynamic_heap_stack_or_wcet_qualified": false,
+    "font_payload_authenticated": false,
+    "hardware_validation_performed": false,
+    "production_placement_claimed": false,
+    "production_routing_claimed": false
+  },
+  "flash_plan": {
+    "blocker": "the self-consistent generated plan describes a different, larger Apollo component and occupies the proposed append interval; a current canonical flash plan must be regenerated before placement",
+    "bytes_before_update_record": 4422,
+    "candidate_interval_occupied_bytes": 66678,
+    "candidate_interval_overlap_regions": 477,
+    "canonical_core_artifact_bytes": 3885668,
+    "placement_authority": false,
+    "plan_apollo_regions": 6120,
+    "plan_matches_canonical_core_artifact": false,
+    "planned_apollo_component_bytes": 3952346,
+    "planned_apollo_end_exclusive": 8375994,
+    "profiles": {
+      "apple-clang": {
+        "available_after_planned_apollo_end": 4422,
+        "nonoverlapping_fit": false,
+        "required_payload_bytes": 26794,
+        "shortfall": 22372
+      },
+      "linux-clang": {
+        "available_after_planned_apollo_end": 4422,
+        "nonoverlapping_fit": false,
+        "required_payload_bytes": 26726,
+        "shortfall": 22304
+      }
+    },
+    "self_consistent_package_receipt": true
+  },
+  "imports": {
+    "authenticated_retained_bindings": {
+      "FT_CMap_New": "0x00526E5A",
+      "FT_DivFix": "0x00524754",
+      "FT_Get_Module": "0x005273B8",
+      "FT_Get_Module_Interface": "0x005273F2",
+      "FT_Matrix_Multiply_Scaled": "0x00524820",
+      "FT_MulDiv": "0x00524606",
+      "FT_Outline_Get_CBox": "0x00527ACE",
+      "FT_Outline_Transform": "0x00527BA0",
+      "FT_Outline_Translate": "0x00527B2E",
+      "FT_Request_Metrics": "0x00526B04",
+      "FT_RoundFix": "0x005244EE",
+      "FT_Select_Metrics": "0x00526A9C",
+      "FT_Stream_EnterFrame": "0x005289D0",
+      "FT_Stream_ExitFrame": "0x00528A66",
+      "FT_Stream_ExtractFrame": "0x00528992",
+      "FT_Stream_GetUShort": "0x00528AA0",
+      "FT_Stream_Read": "0x00528928",
+      "FT_Stream_ReadChar": "0x00528AFA",
+      "FT_Stream_ReadFields": "0x00528C14",
+      "FT_Stream_ReadULong": "0x00528BA8",
+      "FT_Stream_ReadUShort": "0x00528B4A",
+      "FT_Stream_ReleaseFrame": "0x005289B0",
+      "FT_Stream_Seek": "0x005288E0",
+      "FT_Stream_Skip": "0x00528914",
+      "FT_Vector_Transform_Scaled": "0x005248AE",
+      "ft_mem_alloc": "0x00529148",
+      "ft_mem_free": "0x00529256",
+      "ft_mem_realloc": "0x0052919C",
+      "ft_mem_strcpyn": "0x005292BC",
+      "ft_mem_strdup": "0x00529296",
+      "ft_module_get_service": "0x00527406",
+      "ft_service_list_lookup": "0x00524F44",
+      "ft_synthesize_vertical_metrics": "0x00526A02",
+      "ps_property_get": "0x00527FF2",
+      "ps_property_set": "0x00527F0A"
+    },
+    "authenticated_retained_count": 35,
+    "source_owned_bindings": [
+      "FT_Property_Get",
+      "FT_Property_Set",
+      "FT_Stream_Pos",
+      "memcmp",
+      "memcpy",
+      "memset",
+      "strcmp",
+      "strlen",
+      "strncmp",
+      "strstr"
+    ],
+    "source_owned_count": 10,
+    "total": 45,
+    "unresolved": [],
+    "unresolved_count": 0
+  },
+  "minimal_registration_consumer_contract": {
+    "cff_slot_address": "0x0073EF00",
+    "consumer_contract": "retain the authenticated LVGL FreeType create/delete path; replace only the default-module CFF class after all relocations and imports are bound",
+    "expected_stock_little_endian_hex": "74cb6d00",
+    "expected_stock_sha256": "33977ca52f87fcb24faa04e8c571c0d60e313d5fa173d0d9089c5e8c865ec2f3",
+    "guard_policy": "apply exactly one four-byte little-endian replacement only when the canonical component hash and stock pointer guard both match",
+    "profile_replacements": {
+      "apple-clang": {
+        "cff_driver_class_address": "0x007F20D4",
+        "inside_final_payload": true,
+        "replacement_little_endian_hex": "d4207f00",
+        "replacement_sha256": "2a19d83934b3174c08240ac9871217dc22c89554304247cb45a87f9cafa815f8"
+      },
+      "linux-clang": {
+        "cff_driver_class_address": "0x007F2090",
+        "inside_final_payload": true,
+        "replacement_little_endian_hex": "90207f00",
+        "replacement_sha256": "f9b92102efc8253e27dda3b852ba1fa6ac4e43a04ca0d95cb9135c71589c733d"
+      }
+    },
+    "required_pointer_patch_count": 1,
+    "required_replacement_symbol": "cff_driver_class",
+    "retained_lvgl_consumer_patch_count": 0,
+    "stock_cff_driver_class": "0x006DCB74",
+    "stock_default_module_table": "0x0073EEF8"
+  },
+  "routing": {
+    "all_255_external_relocations_owned": true,
+    "all_imports_bound": true,
+    "final_link_zero_relocations_and_undefined_symbols": true,
+    "firmware_image_emitted": false,
+    "flash_capacity_feasible": true,
+    "flash_plan_invariant_satisfied": false,
+    "module_table_patch_contract_authenticated": true,
+    "module_table_patch_implemented": false,
+    "production_route_feasible_now": false,
+    "relocation_replay_implemented": true,
+    "static_ram_capacity_feasible": true
+  },
+  "schema_version": 1,
+  "status": "g2-freetype-cff-final-link-closed-routing-blocked-flash-plan"
+}

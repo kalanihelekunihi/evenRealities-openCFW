@@ -11,4 +11,4 @@ provider	cq_disable	0x00423fac	0x00423fb8	12	8c21c4878a3125546a7201b39610d661f69
 provider	cq_term	0x00423f54	0x00423f8e	58	-	source_owned_provider	G2 command queue terminator	GPL-3.0-or-later	disable call at 0x42513c
 provider	delay_us	0x0041d1c0	0x0041d246	134	-	retained_provider	AmbiqSuite delay provider	firmware provenance	XIP-off delay call at 0x42515e
 successor	am_hal_mspi_control	0x004251c0	-	-	-	next_sequential_frontier	AmbiqSuite 5.1.0 am_hal_mspi_control	BSD-3-Clause	28 authenticated literal bytes at 0x4251a4 precede the next body
-hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project evidence gate	directed hardware testing is deferred by project direction; future CQ, DMA, XIP, interrupt, timing, lifecycle, and cold-boot evidence remains required
+hardware_validation	blocked by unavailable physical evidence	-	-	0	-	software_only	future authorized G2 qualification	project evidence gate	directed hardware testing is blocked by unavailable physical evidence; future CQ, DMA, XIP, interrupt, timing, lifecycle, and cold-boot evidence remains required

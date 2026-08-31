@@ -30,7 +30,7 @@ CL = ROOT / "tools/manifests/g2-service-nvdb-closure.tsv"
 PM = ROOT / "tools/manifests/g2-service-nvdb-provider-map.tsv"
 PINS = {
     FM: "7c7357bfabb00ef58b917994c3638a482a9ca8d0aec391666b0ba646cb93f9a1",
-    CL: "d9d0f11fcf0d7d74bc0896ee00a2587d164d6e042c703153d590a81602945d8b",
+    CL: "eb836f43fc8eacdfc529419af354df4ee09a11c5d25829e38ac051833657c8fd",
     PM: "a0f0780e1e6c248a00c20fb6206f7c310d5d027166698b66b8ac13db2bfa9162",
 }
 F = (
@@ -195,8 +195,8 @@ def analyze(image: Path = IMAGE) -> dict:
 
     source_bytes = SOURCE.read_bytes()
     if (len(source_bytes), sh(source_bytes)) != (
-        8604,
-        "7b9f364e5b77eed175a861f2fde21e33f81a458d77411a72ea8186d36fd90c52",
+        8595,
+        "f915b7fb32542c7c9c1e49b3e29b0beac075e59bda8e6ccef752df3a6922f0d7",
     ):
         raise c.AuditError("service_nvdb production source changed")
     source_text = source_bytes.decode("utf-8")
@@ -312,7 +312,7 @@ def analyze(image: Path = IMAGE) -> dict:
             "replaced_stock_body_bytes": 930,
             "retained_official_pool_bytes": 122,
             "destructive_default_reset_enabled": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
         },
     }
 

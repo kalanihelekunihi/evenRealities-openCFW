@@ -130,7 +130,7 @@ TARGET_FLAGS = (
     "-fno-ident",
 )
 APPLE_CLANG = "/usr/bin/clang"
-APPLE_CLANG_VERSION = "Apple clang version 21.0.0 (clang-2100.3.30.1)"
+APPLE_CLANG_VERSION = "Apple clang version 21.0.0 (clang-2100.3.33.1)"
 TARGET_OBJECT_PIN = (
     784,
     "517b3e244b391c21f714f21c54544b9c"
@@ -365,7 +365,7 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
         self.assertEqual(tag_chunk["relocations"], [])
 
         registrations = (
-            (MAIN_OVERLAY, MAIN_START, 184_408, 4, "relocated_leaves"),
+            (MAIN_OVERLAY, MAIN_START, 124_560, 4, "relocated_leaves"),
             (BOOT_OVERLAY, BOOT_START, 622, 2, "relocated_leaves"),
         )
         for path, stock_start, offset, alignment, collection in registrations:
@@ -375,13 +375,13 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
                 self.assertEqual(
                     config["toolchain_profiles"]["linux-clang"]["expected"],
                     {
-                        "overlay_size": 212_664,
+                        "overlay_size": 152_912,
                         "overlay_sha256": (
-                            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18"
+                            "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20"
                         ),
-                        "component_size": 3_736_060,
+                        "component_size": 3_676_308,
                         "component_sha256": (
-                            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97"
+                            "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7"
                         ),
                     },
                 )
@@ -395,7 +395,7 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
                         ),
                         "component_size": 163_824,
                         "component_sha256": (
-                            "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635"
+                            "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e"
                         ),
                     },
                 )
@@ -438,7 +438,7 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
                             "size": 6,
                             "sha256": TARGET_TEXT_PIN[1],
                             "alignment": 4,
-                            "offset": 186_132,
+                            "offset": 126_380,
                             "unrelocated_sha256": TARGET_TEXT_PIN[1],
                         },
                         "relocations": [],
@@ -472,22 +472,22 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
         boot = manifest["component_overrides"]["apollo_bootloader"]
         self.assertEqual(
             (main["provider"]["size"], main["provider"]["sha256"]),
-            (3_952_454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"),
+            (3_883_974, "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"),
         )
         self.assertEqual(
             (boot["provider"]["size"], boot["provider"]["sha256"]),
-            (163_840, "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"),
+            (163_840, "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad"),
         )
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4_745_526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"),
+            (4_677_046, "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"),
         )
         self.assertEqual(
             main["provider"]["profiles"]["linux-clang"],
             {
-                "size": 3_736_060,
+                "size": 3_676_308,
                 "sha256": (
-                    "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97"
+                    "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7"
                 ),
             },
         )
@@ -496,16 +496,16 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
             {
                 "size": 163_824,
                 "sha256": (
-                    "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635"
+                    "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e"
                 ),
             },
         )
         self.assertEqual(
             manifest["package"]["profiles"]["linux-clang"],
             {
-                "expected_size": 4_529_116,
+                "expected_size": 4_469_364,
                 "expected_sha256": (
-                    "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"
+                    "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"
                 ),
             },
         )
@@ -519,7 +519,7 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
                 3_647_954, 2, 0x007B_29B2, "generated_alignment"
             ),
             "apollo_littlefs_tag_chunk_source_leaf": (
-                3_647_956, 6, 0x007C_137C, "source_compiled"
+                3_647_956, 6, 0x007B_29B4, "source_compiled"
             ),
             "bootloader_littlefs_tag_chunk_source_replacement": (
                 2_984, 6, 0x0041_0BA8, "generated_source_entry_replacement"

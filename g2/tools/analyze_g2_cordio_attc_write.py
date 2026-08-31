@@ -44,7 +44,7 @@ CANDIDATE_FUNCTIONS = [
     "open_cfw_cordio_attc_process_prepare_write_response",
     "open_cfw_cordio_attc_write_command",
 ]
-CANDIDATE_METRICS = [(347136, 30, 0), (347168, 114, 2)]
+CANDIDATE_METRICS = [(278656, 30, 0), (278688, 114, 2)]
 
 
 def sha(data: bytes) -> str:
@@ -184,7 +184,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         ):
             raise RuntimeError(f"attc_write production route changed: {name}")
     compiled = sum(row["expected"]["size"] for row in leaves)
-    alignment = leaves[0]["expected"]["offset"] - 347136
+    alignment = leaves[0]["expected"]["offset"] - 278656
     alignment += sum(
         right["expected"]["offset"]
         - left["expected"]["offset"] - left["expected"]["size"]
@@ -247,7 +247,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "guarded_redirects": 2,
             "source_only_public_helpers": source_only,
             "hardware_validation": (
-                "deferred by project direction; future qualification requires authorized responsive G2/ATT peer evidence"
+                "blocked by unavailable physical evidence; future qualification requires authorized responsive G2/ATT peer evidence"
             ),
         },
     }

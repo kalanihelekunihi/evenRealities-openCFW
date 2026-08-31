@@ -296,7 +296,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "stock_bytes_replaced": 462,
             "dead_stripped_public_apis": SOURCE_ONLY,
             "hardware_validation": (
-                "deferred by project direction; future qualification requires authorized G2/EM9305 pairing evidence"
+                "blocked by unavailable physical evidence; future qualification requires authorized G2/EM9305 pairing evidence"
             ),
         },
     }

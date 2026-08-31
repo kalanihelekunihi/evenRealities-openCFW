@@ -185,7 +185,7 @@ class OnboardingProcessSyncTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "1a14dfebeac2c055633ecd9eb0d94e045062d39d2f53b1a4ed148109671a97bc",
+            "f723c627b09af84011f3a4ecb09a7ef15c2c25e33f1b9b3fffd18ae4a1df1a62",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),

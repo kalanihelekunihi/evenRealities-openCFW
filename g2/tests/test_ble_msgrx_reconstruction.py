@@ -11,11 +11,11 @@ ROOT = Path(__file__).resolve().parents[1]
 COMPONENT = ROOT / "components" / "apollo_main" / "core_overlay"
 FIXTURE = ROOT / "tests" / "fixtures"
 SOURCE_HASHES = {
-    "ble_msgrx_dispatch.c": "b9b7663b54d889ac123d12ad440358e807ea445c8e6b4abfae6fd0f6fbd25e26",
-    "ble_msgrx_enqueue.c": "a1f69270a03e1065790fa2fc9ff096fe97c359e11562f256d828af0ac71b2d74",
-    "ble_msgrx_lifecycle.c": "e3fcdd7561a6ef1a24dbd7c12e74bd3106ba3ffb1748ee927c67d232b4575bab",
-    "ble_msgrx_runtime.c": "c21a203a2ff0b853c4011a5d8f76a7969416f4184e55571e0cdbea9e59ebba26",
-    "ble_msgrx_thread.c": "f2780d00b5fff63cedc7948465fba5a0f78b7cec5d85d6e264cc89adb0da0267",
+    "ble_msgrx_dispatch.c": "0818eedfb8c06fc5b0e50b0b31628c8625d50b0572f334afd141bc240a6548a8",
+    "ble_msgrx_enqueue.c": "68c84b4e9569c54bd607933e143d62918a965aaf7f72de4eccbf7446793b27e2",
+    "ble_msgrx_lifecycle.c": "3bc0621c2224e53f1829dc9cca6e44f537fc7e6f751a3f2bd489dc7cd25c5111",
+    "ble_msgrx_runtime.c": "e71e8604fb2c7a0766cc92608381cc725deca14f98461529032efcff535b5fe4",
+    "ble_msgrx_thread.c": "2a6bee5cc4af8d5815e351dc36d0b0a497e73a2a91c5304015e72e8635c20f20",
 }
 
 

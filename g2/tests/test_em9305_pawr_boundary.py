@@ -77,7 +77,7 @@ class Em9305PawrBoundaryTests(unittest.TestCase):
         self.assertFalse(result["exact_source_available"])
         self.assertFalse(result["redistribution_authority_resolved"])
         self.assertFalse(result["candidate"]["production_routed"])
-        self.assertEqual(result["hardware_validation"], "deferred by project direction")
+        self.assertEqual(result["hardware_validation"], "blocked by unavailable physical evidence")
 
     def test_boundary_fails_closed_and_forwards_all_ids(self) -> None:
         invocation = Invocation((1, 2, 3, 4, 5, 6, 7, 8))

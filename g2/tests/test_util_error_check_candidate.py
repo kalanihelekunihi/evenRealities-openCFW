@@ -131,7 +131,7 @@ class UtilErrorCandidateTests(unittest.TestCase):
     def test_source_is_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "c79bad48288360b3c00d87ae6a9b1ae04f4781b04f6f655d3d0ccc785d0f7f08",
+            "1c3bc2b8f21bf3a24d1fe9bee568bd46c6902a508b12a4ff66968d570d94cb48",
         )
 
 

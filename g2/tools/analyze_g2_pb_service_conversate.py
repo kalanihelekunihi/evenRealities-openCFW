@@ -26,20 +26,20 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "8aa74eee0465950b21ff578add627df49e6b96b227beb7ce97167569955c4d31",
-    CLOSURE: "597a9e7c5ba7aab2c3901f75beb77079d4786387a58ebf7ec922896d3389b5a9",
+    CLOSURE: "bf4ec3ca8155afc1187b1107d5e5e8eef505494f971a67ff109ad5af4bcd098d",
     PROVENANCE: "d6e10558860b88b9af4a792496c0feb3a46fdfa93a5f3a6887e3f10b0a771a65",
 }
-SOURCE_SIZE = 12137
-SOURCE_SHA256 = "04ded321c0a5f25be9328fbe971512cf16f54657e9e91e6c56605e2d740d579c"
+SOURCE_SIZE = 12128
+SOURCE_SHA256 = "d3fcfef59f619fa1de38c34521db212690b6b5f0e2db142bb35ce1a83d29573f"
 FUNCTIONS = (
-    ("open_cfw_pb_service_conversate_buffer_write", 146, 254880, 0),
-    ("open_cfw_pb_service_conversate_zero", 88, 255028, 0),
-    ("APP_PbConversateRxFrameDataProcess", 112, 255116, 3),
-    ("APP_PbConversateTxEncodeNotify", 148, 255228, 6),
-    ("APP_PbConversateTxEncodePrepNoteListRequest", 132, 255376, 6),
-    ("APP_PbConversateTxEncodePrepNoteSelect", 150, 255508, 6),
-    ("APP_PbConversateTxEncodeCommResp", 134, 255660, 6),
-    ("APP_PbConversateTxEncodeTagTrackingData", 188, 255796, 6),
+    ("open_cfw_pb_service_conversate_buffer_write", 146, 195032, 0),
+    ("open_cfw_pb_service_conversate_zero", 88, 195180, 0),
+    ("APP_PbConversateRxFrameDataProcess", 112, 195268, 3),
+    ("APP_PbConversateTxEncodeNotify", 148, 195380, 6),
+    ("APP_PbConversateTxEncodePrepNoteListRequest", 132, 195528, 6),
+    ("APP_PbConversateTxEncodePrepNoteSelect", 150, 195660, 6),
+    ("APP_PbConversateTxEncodeCommResp", 134, 195812, 6),
+    ("APP_PbConversateTxEncodeTagTrackingData", 188, 195948, 6),
 )
 PATCHES = (
     ("replace_pb_conversate_rx", 0x005B1B4C, 478,
@@ -353,11 +353,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 1776,
             "retained_literal_pool_bytes": 128,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "No authorized live G2 service 0x0B master/peer BLE and "
-                "conversate UI evidence is required for future qualification; the authorized right "
-                "temple is not under test because qualification is deferred by project direction and the left temple must remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific service 0x0B conversate fixture "
+                "or an authenticated golden BLE/UI capture"
             ),
         },
     }

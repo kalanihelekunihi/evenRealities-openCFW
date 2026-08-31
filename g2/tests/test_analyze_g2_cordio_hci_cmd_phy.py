@@ -62,7 +62,7 @@ class CordioHciPhyCommandAuditTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 2)
         self.assertEqual(production["source_only_functions_compiled"], 2)
         self.assertEqual(production["manifest_regions"], 2)
-        self.assertEqual(production["flash_plan_counts"], (6671, 0, 6, 6))
+        self.assertEqual(production["flash_plan_counts"], (6588, 0, 6, 6))
 
 
 if __name__ == "__main__":

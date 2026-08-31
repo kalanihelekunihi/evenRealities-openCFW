@@ -1,5 +1,10 @@
 # G2 bootloader float and formatter source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 ## Authenticated boundary
 
 The stock fixed-point converter is `[0x00415AB6,0x00415BF6)` / 320 bytes,

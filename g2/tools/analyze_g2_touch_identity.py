@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Fail-closed identity and memory-map audit of the G2 touch-controller blob.
 
 Component: G2 touch controller (FWPK type 3, /firmware/touch.bin).

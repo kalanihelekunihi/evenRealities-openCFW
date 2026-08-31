@@ -1,0 +1,199 @@
+{
+  "archive": {
+    "deterministic_mode": "ar rcD",
+    "path": "build/verification/em9305-qpc-component/libem9305-qpc-component.a",
+    "sha256": "325847b15b61495044703d439f7245f4bad412cbf5256d3e6cd30111213f8ef0",
+    "size": 32026
+  },
+  "compiler": "arc-linux-gnu-gcc (GCC) 16.1.1 20260501 (Red Hat Cross 16.1.1-1)",
+  "flags": [
+    "-mcpu=em",
+    "-std=gnu99",
+    "-Os",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-fno-common",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Wno-array-bounds"
+  ],
+  "hardware_operations": [],
+  "hardware_validation": "blocked by unavailable physical evidence",
+  "install_placement_resolved": false,
+  "linked_object": {
+    "forbidden_runtime_imports": [],
+    "path": "build/verification/em9305-qpc-component/em9305-qpc-component.o",
+    "sha256": "c1aa5370945e41afcb29750174fd4531def9a887d37a0f620461eeabad587ad9",
+    "size": 21284,
+    "undefined_symbols": []
+  },
+  "port_translation_unit_count": 2,
+  "production_routed": false,
+  "qpc_translation_unit_count": 8,
+  "required_hardware_providers": [
+    "critical_entry",
+    "critical_exit",
+    "interrupt_disable",
+    "interrupt_enable",
+    "isr_context",
+    "PalUartResume",
+    "VoltMon_DoMeasurement"
+  ],
+  "schema_version": 1,
+  "software_link_complete": true,
+  "status": "arcv2-em-qpc-component-target-linked",
+  "target": "ARCv2 EM",
+  "translation_unit_count": 10,
+  "translation_units": [
+    {
+      "object_sha256": "f6e0a5f15881a1ee4787775d0d1c5f1399bfdb33af96176cd3611089fa640b36",
+      "object_size": 3696,
+      "source": "third_party/qpc/src/qf/qep_hsm.c",
+      "source_sha256": "aa5eba0513db3dc6ba134329f73620540c5e9157f7f0687314925d1abf135d3b",
+      "source_size": 24012,
+      "undefined_symbols_before_link": [
+        "Q_onAssert"
+      ]
+    },
+    {
+      "object_sha256": "91ef24e9cccf34d36a1e0189e17fe334957d594fd051f6af1f4b17732990fb1d",
+      "object_size": 2096,
+      "source": "third_party/qpc/src/qf/qf_act.c",
+      "source_sha256": "2c38d958b2a50029ac5000f6f636e5b244778f6138a93c873140b2d0e012f6e2",
+      "source_size": 6562,
+      "undefined_symbols_before_link": [
+        "Q_onAssert",
+        "open_cfw_em9305_qf_crit_entry",
+        "open_cfw_em9305_qf_crit_exit"
+      ]
+    },
+    {
+      "object_sha256": "9a9b6edbcc47d02836ac3d7479bbfc3b323bfa0eb57c5cb8267d3d5d7f63afe6",
+      "object_size": 4328,
+      "source": "third_party/qpc/src/qf/qf_actq.c",
+      "source_sha256": "a1cd93ab313c3a00237be6947be68ab35ab02a2cc53fe52047a328e29d916cbb",
+      "source_size": 19073,
+      "undefined_symbols_before_link": [
+        "QActive_ctor",
+        "QActive_start_",
+        "QF_active_",
+        "QF_gc",
+        "QF_tickX_",
+        "QK_activate_",
+        "QK_attr_",
+        "QK_sched_",
+        "Q_onAssert",
+        "open_cfw_em9305_qf_crit_entry",
+        "open_cfw_em9305_qf_crit_exit",
+        "open_cfw_em9305_qk_isr_context"
+      ]
+    },
+    {
+      "object_sha256": "ea127047e7636e6c618ac1494bc59d05bb80eb3c01c48587cb57058eb7ed8268",
+      "object_size": 3216,
+      "source": "third_party/qpc/src/qf/qf_dyn.c",
+      "source_sha256": "568523fcd3927eff0d6407deca20b3b1465020b423b8c179936aa7b051ef790b",
+      "source_size": 12648,
+      "undefined_symbols_before_link": [
+        "QMPool_get",
+        "QMPool_init",
+        "QMPool_put",
+        "Q_onAssert",
+        "__mulsi3",
+        "open_cfw_em9305_qf_crit_entry",
+        "open_cfw_em9305_qf_crit_exit"
+      ]
+    },
+    {
+      "object_sha256": "e74fb868c49656dceef0335028a85f6fb5d1182d579ebf1e6779343f3fa2b150",
+      "object_size": 2476,
+      "source": "third_party/qpc/src/qf/qf_mem.c",
+      "source_sha256": "0bd3bf03b04f7007063d4c9b054ea36b8382600f1196a56afc7cf5c0e7807f48",
+      "source_size": 11500,
+      "undefined_symbols_before_link": [
+        "QF_maxPool_",
+        "QF_pool_",
+        "Q_onAssert",
+        "__mulsi3",
+        "open_cfw_em9305_qf_crit_entry",
+        "open_cfw_em9305_qf_crit_exit"
+      ]
+    },
+    {
+      "object_sha256": "efbe13d9e82d2466b89e608d6a4407bca933d75ee1f706e69fd5e16ad6ed9c80",
+      "object_size": 1416,
+      "source": "third_party/qpc/src/qf/qf_qact.c",
+      "source_sha256": "5f2e2e455cd44d44cf7b07f488ce7af27998a552424b8fba391556452c90886c",
+      "source_size": 3060,
+      "undefined_symbols_before_link": [
+        "QActive_postLIFO_",
+        "QActive_post_",
+        "QActive_start_",
+        "QF_bzero",
+        "QHsm_ctor",
+        "QHsm_dispatch_",
+        "QHsm_init_"
+      ]
+    },
+    {
+      "object_sha256": "717f78c162b7abd6399f965424a30ba7b0ca4e1e4f90fa4594f21f2fa3648b36",
+      "object_size": 2216,
+      "source": "third_party/qpc/src/qf/qf_qeq.c",
+      "source_sha256": "861ef89f8cdb5025fda5dde3f36d090ef50094864a39b13611dd62655f02be10",
+      "source_size": 12164,
+      "undefined_symbols_before_link": [
+        "Q_onAssert",
+        "open_cfw_em9305_qf_crit_entry",
+        "open_cfw_em9305_qf_crit_exit"
+      ]
+    },
+    {
+      "object_sha256": "c201bae3420b137666102c17a9f7cbdd87cb692947d8f3bc936c220de20c94b6",
+      "object_size": 4304,
+      "source": "third_party/qpc/src/qk/qk.c",
+      "source_sha256": "f1b069a535260c1a23d66d3dfe3373259b5068fc94bccef078bd55bf2bdfed0a",
+      "source_size": 16219,
+      "undefined_symbols_before_link": [
+        "QActive_get_",
+        "QEQueue_init",
+        "QF_LOG2",
+        "QF_active_",
+        "QF_add_",
+        "QF_bzero",
+        "QF_gc",
+        "QF_maxPool_",
+        "QF_maxPubSignal_",
+        "QF_onCleanup",
+        "QF_onStartup",
+        "QF_subscrList_",
+        "QF_timeEvtHead_",
+        "QK_onIdle",
+        "Q_onAssert",
+        "open_cfw_em9305_qf_crit_entry",
+        "open_cfw_em9305_qf_crit_exit",
+        "open_cfw_em9305_qf_int_disable",
+        "open_cfw_em9305_qf_int_enable",
+        "open_cfw_em9305_qk_isr_context"
+      ]
+    },
+    {
+      "object_sha256": "5d89a96680ca595a53713ef264df92ed0adb4753b08f9630605d0075bff67e5e",
+      "object_size": 924,
+      "source": "components/shared/em9305/qpc_port/runtime_arc_gcc_helpers.c",
+      "source_sha256": "d0bda3cbc846099d982e14f065a1637c87d6cbc994ff986a1567c644d1c793cf",
+      "source_size": 588,
+      "undefined_symbols_before_link": []
+    },
+    {
+      "object_sha256": "2447181b4ae8ac8e37fe57e1be685c875ee1e0f128e757dfe75be5324dbb932b",
+      "object_size": 5404,
+      "source": "components/shared/em9305/qpc_port/runtime_qpc_port.c",
+      "source_sha256": "7ce889990a79180b84cc5c96aefeba5dbcba39d6b25bd7ab7591265c67e1b779",
+      "source_size": 5061,
+      "undefined_symbols_before_link": []
+    }
+  ]
+}

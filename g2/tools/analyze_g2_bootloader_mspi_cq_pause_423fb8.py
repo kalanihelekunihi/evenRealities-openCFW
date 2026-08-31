@@ -41,7 +41,7 @@ INPUT_PINS = {
     SOURCE: (3731, "72710cc8ea51529346089b1bd3423a4a8512ad1b4d665f5432e65f905a7bd406"),
     HEADER: (1481, "5edb1867347fb9f4ede3b2dfa97462bf95969944033ead74f9c25897620b549c"),
     FIXTURE: (3250, "763c95f302ab4b029098168887ba6a392e11b829ab195efa1fb8424b63830b1b"),
-    MANIFEST: (1985, "d270f41cbacc91ee6129448dad11d75bcabef04578033428a5d75d39209706a2"),
+    MANIFEST: (1996, "fcfa217a282361db7bc73456f0db071e8e18cc1a07eae95942229242a7f6c5c2"),
 }
 TARGET_FLAGS = (
     "-target", "arm-none-eabi", "-mcpu=cortex-m55", "-mthumb", "-Oz",
@@ -260,7 +260,7 @@ def audit() -> dict[str, Any]:
                        "next_frontier": successor["target_address"]},
         "next_frontier": {"start": 0x0042403E, "end": 0x004240AA,
                           "identity": "program_dma", "bytes": 108},
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_gate": {"required_future_evidence":
                           "authorized CQ pause/timeout, DMA-idle, MMIO, concurrency, and cold-boot qualification"},
         "hardware_operations": [],
@@ -278,7 +278,7 @@ def main() -> int:
     else:
         print("Bootloader mspi_cq_pause 0x423fb8: production-routed exact source")
         print("  current sequential frontier: 0x424120 (add_hp_transaction)")
-        print("  physical validation: deferred by project direction")
+        print("  physical validation: blocked by unavailable physical evidence")
     return 0
 
 

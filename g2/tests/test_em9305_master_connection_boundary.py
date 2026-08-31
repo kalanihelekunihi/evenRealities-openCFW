@@ -15,7 +15,7 @@ class Tests(unittest.TestCase):
  @classmethod
  def tearDownClass(cls):cls.t.cleanup()
  def test_audit(self):
-  r=self.a.run_audit();self.assertEqual((r["decision"]["bytes"],r["entry_count"]),(1564,3));self.assertFalse(r["exact_source_available"]);self.assertFalse(r["candidate"]["production_routed"]);self.assertEqual(r["hardware_validation"],"deferred by project direction")
+  r=self.a.run_audit();self.assertEqual((r["decision"]["bytes"],r["entry_count"]),(1564,3));self.assertFalse(r["exact_source_available"]);self.assertFalse(r["candidate"]["production_routed"]);self.assertEqual(r["hardware_validation"],"blocked by unavailable physical evidence")
  def test_fail_closed_and_forward(self):
   i=Invocation();p=Ports();self.assertEqual(self.f(None,0,ctypes.byref(i)),1);self.assertEqual(self.f(ctypes.byref(p),0,ctypes.byref(i)),2);calls=[]
   @PROVIDER

@@ -1,4 +1,5 @@
 #!/bin/sh
+# SPDX-License-Identifier: MIT
 # Run the unified openCFW build from anywhere:  ./make.sh [target...]
 set -eu
 

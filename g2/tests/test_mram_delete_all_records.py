@@ -252,11 +252,11 @@ class MramDeleteAllRecordsTests(unittest.TestCase):
     def test_sources_are_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "61bbcf35c0eb4114f14ea0b05f5c9143dd1e68e770c8e58276a0b94e887c1676",
+            "b4bba63529a4900499f9d446b7663c4df4ae28d520810ea03bbd602538e7cdd5",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "0b67c187aaf502766d7fab8066875490b1537e2e61a4c22a021943cfd6ea3ff4",
+            "ea0cb543f21337ba661c61a68a62623843a01d9eec34b0b189d2ad08b2881b1f",
         )
 
 

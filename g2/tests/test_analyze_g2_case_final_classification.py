@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 """Tests for exhaustive charging-case frontier classification."""
 
-import importlib.util, sys, unittest
+import importlib.util, json, sys, unittest
 from pathlib import Path
 from unittest import mock
 
@@ -63,7 +63,7 @@ class CaseFinalClassificationTests(unittest.TestCase):
         })
         self.assertFalse(self.result["production_routed"])
         self.assertEqual(self.result["hardware_validation"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
         self.assertEqual(self.result["hardware_operations"], [])
 
     def test_authenticated_blob_mutation_is_rejected(self):
@@ -75,6 +75,49 @@ class CaseFinalClassificationTests(unittest.TestCase):
             return data
         with mock.patch.object(Path, "read_bytes", changed):
             with self.assertRaises(M.AuditError): M.analyze()
+
+    def _assert_summary_mutation_rejected(self, mutate):
+        original = Path.read_text
+
+        def changed(path, *args, **kwargs):
+            data = original(path, *args, **kwargs)
+            if path == M.FUNCTION_SUMMARY:
+                summary = json.loads(data)
+                mutate(summary)
+                return json.dumps(summary)
+            return data
+
+        with mock.patch.object(Path, "read_text", changed):
+            with self.assertRaises(M.AuditError):
+                M.analyze()
+
+    def test_zero_length_gap_is_rejected_even_if_declared_total_is_preserved(self):
+        def mutate(summary):
+            gaps = [row for row in summary["gap_rows"]
+                    if row["ownership_category"] == "unresolved"]
+            removed = gaps[0]["bytes"]
+            gaps[0]["end"] = gaps[0]["start"]
+            gaps[0]["bytes"] = 0
+            gaps[1]["bytes"] += removed
+
+        self._assert_summary_mutation_rejected(mutate)
+
+    def test_overlapping_gap_intervals_are_rejected(self):
+        def mutate(summary):
+            gaps = [row for row in summary["gap_rows"]
+                    if row["ownership_category"] == "unresolved"]
+            gaps[1]["start"] = gaps[0]["start"]
+            gaps[1]["end"] = gaps[1]["start"] + gaps[1]["bytes"]
+
+        self._assert_summary_mutation_rejected(mutate)
+
+    def test_gap_extent_and_declared_size_must_agree(self):
+        def mutate(summary):
+            gap = next(row for row in summary["gap_rows"]
+                       if row["ownership_category"] == "unresolved")
+            gap["end"] -= 1
+
+        self._assert_summary_mutation_rejected(mutate)
 
 
 if __name__ == "__main__": unittest.main()

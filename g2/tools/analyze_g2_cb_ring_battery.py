@@ -31,8 +31,8 @@ PINS = {
     PM: "3eb7fbd3b29fcf655b8795c32dcf37c4eb473b4886380d94ae7ec69cbf618131",
     PV: "0a763c9f929aae87ed46d96ef62bddac7b733bdb7be80d06ee9e220117da742e",
 }
-SOURCE_SIZE = 3136
-SOURCE_SHA256 = "dfade488fa37a47b8c242916ea7f6a89334339c3ebe181c26d6cb3a9b359f294"
+SOURCE_SIZE = 3127
+SOURCE_SHA256 = "52fa505a193dbee9da5943b3bfd68972ff3403dca395b7068a39915668f08edd"
 PRODUCTION_FUNCTIONS = (
     "open_cfw_cb_ring_battery_forward", "open_cfw_cb_ring_battery_init",
     "open_cfw_cb_ring_battery_deinit", "open_cfw_cb_ring_battery_register",
@@ -182,7 +182,7 @@ def analyze(image: Path = IMAGE) -> dict:
     if set(leaves) != set(PRODUCTION_FUNCTIONS):
         raise c.AuditError("production ring-battery leaf inventory changed")
     expected_sizes = (4, 20, 12, 22, 30)
-    expected_offsets = (253336, 253340, 253360, 253372, 253396)
+    expected_offsets = (193488, 193492, 193512, 193524, 193548)
     if any(
         leaf["source"].get("path")
         != "components/apollo_main/core_overlay/cb_ring_battery.c"

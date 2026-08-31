@@ -310,6 +310,17 @@ source/generated/opaque status remains governed by the production manifest.
 See the [source-path census](research/apollo-embedded-source-path-census.md)
 and [recovery audit](research/apollo-embedded-source-path-recovery.md).
 
+Within the Apollo-main range, the NemaVG stroke-cap records now have an
+explicit mixed boundary. The `draw_caps` record has a 3,298-byte body at
+`[0x0051C5EC,0x0051D2D6)`, accounts for 3,306 physical stock bytes, and is
+production-routed to reviewed MIT source. The `draw_start_cap` and
+`draw_end_cap` records have bodies at `[0x0051B8F0,0x0051BF74)` and
+`[0x0051BF7C,0x0051C5E4)` and account for 1,668 and 1,640 physical bytes,
+respectively. Both endpoints remain stock-retained and unpatched. Their exact
+no-argument/global-context ABI, MVE/stack construction, and lower helper
+contracts remain explicit software gaps; physical GPU qualification is
+blocked by unavailable physical evidence.
+
 The focused Cordio timer recovery maps the complete code cluster
 `[0x0052A3FC,0x0052A614)` (536 bytes), its decoded literal table
 `[0x0052A614,0x0052A63C)`, and dispatcher `[0x0052B9D0,0x0052BAB8)`.
@@ -4042,7 +4053,7 @@ bodies. The builder authenticates each stock body, generated-NOP cave subspan,
 fixed runtime address, compiler digest, and strict relocation before
 installation. The Apple provider remains bounded by the protected main-image
 boundary. Live register/security state and mapped-memory behavior remain
-blocked by unavailable authorized hardware evidence.
+blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## Bootloader 32-bit population-count helper
 
@@ -4072,7 +4083,7 @@ The direct-leaf builder authenticates each complete stock span, compiler
 digest, runtime address, and the count leaf's sole `R_ARM_THM_CALL` before
 classifying all 132 bytes as source-owned. Provider and package bytes remain
 unchanged; only ownership and flash-plan partitioning advance. Live table
-ownership and concurrency remain blocked by unavailable authorized physical
+ownership and concurrency remain blocked by unavailable physical evidence; future qualification requires authorized physical
 evidence.
 
 ## Bootloader validated bitmap update helper
@@ -4087,8 +4098,7 @@ The helper narrows inputs to bytes, rejects row `>=7` or bit `>=57` with
 status 6, and otherwise performs the exact set/clear read-modify-write and
 returns zero. The direct-leaf builder authenticates the complete stock span,
 both compiler digests, zero executable relocations, and the exact runtime
-address. Live ownership, concurrency, and atomicity remain blocked by
-unavailable authorized physical evidence.
+address. Live ownership, concurrency, and atomicity remain blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 ## Bootloader bounded poll-delay helper
 
@@ -4103,7 +4113,7 @@ The helper checks the 32-bit remaining counter and activity byte before each
 iteration, delays, then decrements. The direct-leaf builder authenticates the
 complete stock span, both compiler digests, the sole delay relocation, and the
 exact runtime address. Live timing and producer/consumer memory visibility
-remain blocked by unavailable authorized physical evidence.
+remain blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 ## Bootloader mode/configuration transaction service
 
@@ -4119,7 +4129,7 @@ Eight strict calls cover optional query, interrupt-state save, source-owned
 bitmap count, apply/disable fallback, and source-owned copy. The direct-leaf
 builder authenticates the complete stock span, both compiler digests, every
 relocation, and exact runtime address. Live interrupt timing, state ownership,
-and physical mode changes remain blocked by unavailable authorized evidence.
+and physical mode changes remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader dual-mode transaction service
 
@@ -4137,8 +4147,7 @@ The direct-leaf builder authenticates the complete stock span, both compiler
 digests, every relocation, and exact runtime address. The previous 19,764-byte
 retained region is therefore split into this 422-byte source body and a
 19,342-byte retained successor. Live interrupt timing, state ownership,
-controller/register behavior and physical mode changes remain blocked by
-unavailable authorized evidence.
+controller/register behavior and physical mode changes remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader bitmap-client configuration and mutation services
 
@@ -4156,8 +4165,7 @@ Sixteen strict calls cover query, critical-state save, source-owned bitmap
 count/test/update and source-owned copy. The previous 19,342-byte retained
 successor is split into five source bodies totaling 400 bytes and an
 18,942-byte retained successor. Live interrupt timing, bitmap/publication
-ownership, controller/register behavior and physical clients remain blocked
-by unavailable authorized evidence.
+ownership, controller/register behavior and physical clients remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader mode-one enable, disable and cleanup services
 
@@ -4174,8 +4182,7 @@ Eleven strict calls cover source-owned bitmap test/update/nonempty and poll,
 critical-state save, and retained control. The previous 18,942-byte retained
 successor is split into three source bodies totaling 202 bytes and an
 18,740-byte retained successor. Live interrupt timing, state ownership,
-control/register behavior and physical mode-one effects remain blocked by
-unavailable authorized evidence.
+control/register behavior and physical mode-one effects remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader mode-zero enable service
 
@@ -4191,8 +4198,7 @@ Nine strict calls cover source-owned bitmap test/update and cleanup, two
 critical-state saves, and retained state-query/control providers. The previous
 18,740-byte retained successor is split into this 252-byte source body and an
 18,488-byte retained successor. Live interrupt timing, state ownership,
-controller/register behavior and physical mode-zero effects remain blocked by
-unavailable authorized evidence.
+controller/register behavior and physical mode-zero effects remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader row-four enable service
 
@@ -4208,8 +4214,7 @@ Ten strict calls cover source-owned bitmap test/count/update and cleanup,
 critical-state save, and retained switch/apply providers. The previous
 18,344-byte retained successor is split into this 236-byte source body and an
 18,108-byte retained successor. Live interrupt timing, switch/apply behavior,
-state ownership and physical row-four effects remain blocked by unavailable
-authorized evidence.
+state ownership and physical row-four effects remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader row-four disable and cleanup services
 
@@ -4224,8 +4229,7 @@ Seven strict calls cover source-owned bitmap test/update/nonempty and poll,
 critical-state save, and retained switch. The previous 18,108-byte retained
 successor is split into two source bodies totaling 112 bytes and a
 17,996-byte retained successor. Live interrupt timing, switch behavior, state
-ownership and physical row-four effects remain blocked by unavailable
-authorized evidence.
+ownership and physical row-four effects remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader row-five client services
 
@@ -4242,7 +4246,7 @@ cleanup services plus retained dual switch/commit/null-commit providers. The
 previous 17,996-byte retained successor is split into two source bodies
 totaling 504 bytes and a 17,492-byte retained successor. Live interrupt timing,
 retained provider behavior, state ownership and physical row-five effects
-remain blocked by unavailable authorized evidence.
+remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader row-six services and mode-family dispatcher
 
@@ -4261,7 +4265,7 @@ mode-family services plus retained handle lifecycle providers. The previous
 17,492-byte retained successor is split into 508 source bytes, 36 retained
 inter-body literal bytes and a 16,948-byte retained suffix. Live interrupt
 timing, retained provider behavior, state ownership and physical row-six
-effects remain blocked by unavailable authorized evidence.
+effects remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader mode routes, all-row cleanup, and configuration copy
 
@@ -4279,7 +4283,7 @@ services, bitmap query, reviewed disable-route alias and retained memcpy
 provider. The prior 16,948-byte retained suffix is split into 320 source bytes,
 a 56-byte retained literal pool and a 16,572-byte retained executable suffix.
 Live bitmap ownership, routed service behavior, concurrent cleanup and
-configuration persistence remain blocked by unavailable authorized evidence.
+configuration persistence remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader Ambiq debug-domain services
 
@@ -4296,7 +4300,7 @@ register status polling and the two reviewed same-cluster aliases. The prior
 16,598-byte retained region is split into a 56-byte leading literal pool, 268
 source bytes, a 28-byte trailing literal pool, and a 16,246-byte retained
 suffix. Live debug power, MCUCTRL/DCB register effects, trace quiescence and
-timing remain blocked by unavailable authorized evidence.
+timing remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader mode-zero disable and cleanup services
 
@@ -4312,8 +4316,7 @@ Seven strict calls cover source-owned bitmap test/update/nonempty and poll,
 critical-state save, and retained control. The previous 18,488-byte retained
 successor is split into two source bodies totaling 144 bytes and an
 18,344-byte retained successor. Live interrupt timing, state ownership,
-controller/register behavior and physical mode-zero effects remain blocked by
-unavailable authorized evidence.
+controller/register behavior and physical mode-zero effects remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 ## Bootloader constraint dispatcher and memchr
 
 | Segment | Range/address | Bytes | State |
@@ -4328,7 +4331,7 @@ unavailable authorized evidence.
 The prior retained suffix is split into 116 exact source bytes, a 36-byte
 retained pool, and a 16,094-byte retained suffix. Live handler registration,
 default-handler behavior, accessible-memory boundaries and physical fault
-qualification remain blocked by unavailable authorized evidence.
+qualification remain blocked by unavailable physical evidence; future qualification requires authorized evidence.
 ## Bootloader double-runtime helpers
 
 | Segment | Range/address | Bytes | State |
@@ -4344,8 +4347,7 @@ qualification remain blocked by unavailable authorized evidence.
 
 The prior 16,094-byte retained suffix is split into 584 source bytes, a
 two-byte retained alignment and a 15,508-byte retained suffix. Live VFP
-exception, range-error and caller-ABI qualification remains blocked by
-unavailable authorized evidence.
+exception, range-error and caller-ABI qualification remains blocked by unavailable physical evidence; future qualification requires authorized evidence.
 ## Bootloader IAR thread-pointer leaf
 
 | Segment | Range/address | Bytes | State |
@@ -4357,7 +4359,7 @@ unavailable authorized evidence.
 
 The prior 15,508-byte retained suffix is split into a two-byte alignment,
 eight source bytes and a 15,498-byte retained suffix. Physical SRAM-anchor
-lifecycle qualification remains blocked by unavailable authorized evidence.
+lifecycle qualification remains blocked by unavailable physical evidence; future qualification requires authorized evidence.
 ## Bootloader unsigned 64-bit divide/modulo runtime
 
 | Segment | Range/address | Bytes | State |
@@ -4369,7 +4371,7 @@ lifecycle qualification remains blocked by unavailable authorized evidence.
 
 The prior 15,498-byte retained suffix is split into 560 source bytes and a
 14,938-byte retained suffix. Live divide-by-zero, register-return and caller
-ABI qualification remains blocked by unavailable authorized evidence.
+ABI qualification remains blocked by unavailable physical evidence; future qualification requires authorized evidence.
 ## Bootloader atomic snapshot and wrappers
 
 | Segment | Range/address | Bytes | State |
@@ -4383,7 +4385,7 @@ ABI qualification remains blocked by unavailable authorized evidence.
 
 The prior 14,938-byte retained suffix is split into 38 source bytes and a
 14,900-byte retained suffix. Live interrupt, volatile-sampling and retained-
-provider qualification remains blocked by unavailable authorized evidence.
+provider qualification remains blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader four-instance hardware-service initializer
 
@@ -4399,7 +4401,7 @@ provider qualification remains blocked by unavailable authorized evidence.
 The prior 14,900-byte retained suffix is split into a two-byte alignment, 212
 source bytes and a 14,686-byte retained suffix. Live SRAM ownership,
 concurrency, peripheral effects and cold-boot lifecycle qualification remains
-blocked by unavailable authorized evidence.
+blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader instance register-transfer and lifecycle service
 
@@ -4414,7 +4416,7 @@ blocked by unavailable authorized evidence.
 
 The prior 14,686-byte retained suffix is split into 376 source bytes and a
 14,310-byte retained suffix. Live MMIO/revision/clock/mode/resource/lifecycle
-qualification remains blocked by unavailable authorized evidence.
+qualification remains blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader per-instance register-clear leaves
 
@@ -4428,7 +4430,7 @@ qualification remains blocked by unavailable authorized evidence.
 
 The prior 14,310-byte retained suffix is split into 90 source bytes and a
 14,220-byte retained suffix. Live MMIO/bank/peripheral/cold-boot qualification
-remains blocked by unavailable authorized evidence.
+remains blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## Bootloader per-instance status mapper
 
@@ -4442,7 +4444,7 @@ remains blocked by unavailable authorized evidence.
 
 The prior 14,220-byte retained suffix is split into a four-byte datum, 72
 source bytes, and a 14,144-byte retained suffix. Live MMIO/status/bank/timing
-qualification remains blocked by unavailable authorized responsive evidence.
+qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.
 
 ## Bootloader per-instance register services
 
@@ -4457,8 +4459,7 @@ qualification remains blocked by unavailable authorized responsive evidence.
 
 The source-owned services use the authenticated `0x40039000` register base,
 `0x1000` bank stride, instance type, and `+0x38/+0x3C/+0x40/+0x44` offsets.
-Live register/MMIO/concurrency/peripheral qualification remains blocked by
-unavailable authorized responsive evidence.
+Live register/MMIO/concurrency/peripheral qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.
 
 ## Bootloader per-instance service dispatcher
 
@@ -4471,7 +4472,7 @@ unavailable authorized responsive evidence.
 The source-owned dispatcher preserves the authenticated active/inactive flag
 routing, register-relative progress, callback status/context, state cleanup,
 and progress latch. Live interrupt/register/callback/concurrency/MMIO
-qualification remains blocked by unavailable authorized responsive evidence.
+qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.
 
 ## Bootloader bounded memory-exchange helpers
 
@@ -4554,8 +4555,7 @@ element to the front in bounded 128-byte chunks. It is software-only.
 
 The prior 14,144-byte retained suffix is split into 98 source bytes and a
 14,046-byte retained suffix. Live descriptor ownership, DMA/controller timing,
-buffer lifetime and interrupt qualification remains blocked by unavailable
-authorized responsive evidence.
+buffer lifetime and interrupt qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.
 
 ## Bootloader per-instance clock-divider service
 
@@ -4570,7 +4570,7 @@ authorized responsive evidence.
 
 The prior 14,046-byte retained suffix is split into 186 source bytes and a
 13,860-byte retained suffix. Live clock selection, divider MMIO, peripheral
-rate and cold-boot qualification remains blocked by unavailable authorized
+rate and cold-boot qualification remains blocked by unavailable physical evidence; future qualification requires authorized
 responsive evidence.
 
 ## Bootloader per-instance configuration latch
@@ -4587,7 +4587,7 @@ responsive evidence.
 The prior 13,860-byte retained suffix is split into 106 source bytes and a
 13,754-byte retained suffix. Live interrupt atomicity, instance ownership,
 concurrency, downstream MMIO effects and cold-boot qualification remain
-blocked by unavailable authorized responsive evidence.
+blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.
 
 ## Bootloader secondary per-instance configuration latch
 
@@ -4603,7 +4603,7 @@ blocked by unavailable authorized responsive evidence.
 The prior 13,754-byte retained suffix is split into 86 source bytes and a
 13,668-byte retained suffix. Live interrupt atomicity, secondary-instance
 ownership, concurrency, downstream MMIO effects and cold-boot qualification
-remain blocked by unavailable authorized responsive evidence.
+remain blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.
 
 ## Bootloader secondary configuration release
 
@@ -4619,7 +4619,7 @@ remain blocked by unavailable authorized responsive evidence.
 The prior 13,668-byte retained suffix is split into 60 source bytes and a
 13,608-byte retained suffix. Live interrupt atomicity, release/latch
 concurrency, retained memset ABI, SRAM/MMIO consumers and cold-boot
-qualification remain blocked by unavailable authorized responsive evidence.
+qualification remain blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.
 
 ## Bootloader per-instance hardware shutdown
 
@@ -4630,12 +4630,28 @@ qualification remain blocked by unavailable authorized responsive evidence.
 | Delay numerator | `0x00423858` | 4 | `10000000` |
 | Source providers | `0x00422D4C`, `0x00422FA2` | — | Secondary register clear and release |
 | Retained providers | `0x0041D1C0`, `0x00423342` | — | Delay and hardware shutdown |
-| Retained executable successor | `0x0042308E` | — | Authenticated executable software frontier |
+| Source-compiled successor | `0x0042308E` | — | Exact per-instance hardware initializer |
 
 The prior 13,608-byte retained suffix is split into 176 source bytes and a
 13,432-byte retained suffix. Live MMIO, clock/peripheral state, delay accuracy,
-concurrency, provider effects and cold-boot qualification remain blocked by
-unavailable authorized responsive evidence.
+concurrency, provider effects and cold-boot qualification remain blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.
+
+## Bootloader per-instance hardware initializer
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Hardware initializer | `[0x0042308E,0x004232C8)` | 570 | Exact Apple/Linux source compilation; two strict calls |
+| Instance identity | masked word at offset `0x00` | 4 | Must equal `0x01EA9E06` |
+| Register-bank base | `0x40039000` | `4 x 0x1000` stride | Programs offsets `0x2C`, `0x30`, and `0x34` |
+| Revision/global route | `0x4002000C`, `0x400201B0` | — | Revision-gated set/clear of `0x00400000 << index` |
+| Source providers | `0x004222F0`, `0x00422E28` | — | Mode route and clock divider |
+| Source-compiled successor | `0x004232C8` | — | FIFO read service |
+
+The earlier 570-byte opaque classification is superseded by exact-address
+source admission. Validation, threshold/revision policy, provider errors, and
+all recovered register fields are covered offline. Live MMIO, chip revision,
+clock/peripheral state and concurrency behavior is blocked by unavailable
+physical evidence.
 
 ## Bootloader primary and secondary progress services
 
@@ -4648,7 +4664,7 @@ unavailable authorized responsive evidence.
 Both services preserve the authenticated descriptor/FIFO selection, bounded
 count, progress mirror, completion/exhaustion callback and interrupt-token
 semantics. Live FIFO/descriptor/interrupt/DMA/callback/concurrency/MMIO
-qualification remains blocked by unavailable authorized responsive evidence.
+qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.
 
 ## Bootloader per-instance mode-dispatch services
 
@@ -4664,13 +4680,13 @@ qualification remains blocked by unavailable authorized responsive evidence.
 
 All 296 executable bytes in this cluster are source-compiled. Live latch,
 register, timer, interrupt, concurrency and peripheral qualification remains
-blocked by unavailable authorized responsive evidence.
+blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.
 
 ## Bootloader per-instance FIFO services
 
 | Segment | Range/address | Bytes | State |
 |---|---:|---:|---|
-| Retained initializer | `[0x0042308E,0x004232C8)` | 570 | Earliest retained executable software frontier |
+| Hardware initializer | `[0x0042308E,0x004232C8)` | 570 | Exact Apple/Linux source compilation; two strict calls |
 | FIFO read | `[0x004232C8,0x0042330E)` | 70 | Exact relocation-free Apple/Linux source compilation |
 | FIFO write | `[0x0042330E,0x00423342)` | 52 | Exact relocation-free Apple/Linux source compilation |
 | FIFO drain | `[0x00423342,0x00423350)` | 14 | Exact Apple/Linux source compilation; strict read call |
@@ -4679,7 +4695,6 @@ blocked by unavailable authorized responsive evidence.
 | Register-bank base | `0x40039000` | `4 x 0x1000` stride | Status at `0x18`; data at `0x00` |
 | Retained data successor | `[0x004233E0,0x004233E8)` | 8 | Two authenticated literal words |
 
-The prior 13,432-byte retained suffix is split into a 570-byte retained body,
-280 source bytes, and a 12,582-byte retained suffix. Live FIFO flags/data,
-descriptor state, interrupt restoration, MMIO ordering, concurrency and peripheral qualification remain blocked by
-unavailable authorized responsive evidence.
+The prior 13,432-byte retained suffix is split into 850 source bytes and a
+12,582-byte retained suffix. Live FIFO flags/data,
+descriptor state, interrupt restoration, MMIO ordering, concurrency and peripheral qualification remain blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.

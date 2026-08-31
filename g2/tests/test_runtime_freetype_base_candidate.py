@@ -24,6 +24,9 @@ CLUSTER_HEADER = COMPONENT / "runtime_freetype_base_cluster_candidate.h"
 TRUETYPE_COMPONENT = ROOT / "components" / "shared" / "freetype"
 TRUETYPE_SOURCE = TRUETYPE_COMPONENT / "runtime_freetype_truetype.c"
 TRUETYPE_HEADER = TRUETYPE_COMPONENT / "runtime_freetype_truetype.h"
+CFF_COMPONENT = ROOT / "components" / "shared" / "freetype_cff"
+CFF_SOURCE = CFF_COMPONENT / "runtime_freetype_cff.c"
+CFF_HEADER = CFF_COMPONENT / "runtime_freetype_cff.h"
 JUMP_SOURCE = COMPONENT / "runtime_freetype_jump_candidate.c"
 FIXTURE = ROOT / "tests" / "fixtures" / "runtime_freetype_base_candidate_host.c"
 SNAPSHOT = ROOT / "third_party" / "freetype"
@@ -50,6 +53,7 @@ TARGET_ADMISSION_SOURCES = FREETYPE_SOURCES + (
     SYSTEM_SOURCE,
     CLUSTER_SOURCE,
     TRUETYPE_SOURCE,
+    CFF_SOURCE,
     JUMP_SOURCE,
 )
 
@@ -207,10 +211,13 @@ class RuntimeFreeTypeBaseCandidateTests(unittest.TestCase):
             str(SNAPSHOT),
             "-I",
             str(COMPONENT),
+            "-I",
+            str(CFF_COMPONENT),
             str(SOURCE),
             str(SYSTEM_SOURCE),
             str(CLUSTER_SOURCE),
             str(TRUETYPE_SOURCE),
+            str(CFF_SOURCE),
             str(FIXTURE),
             *(str(path) for path in FREETYPE_SOURCES),
         ]
@@ -334,6 +341,48 @@ class RuntimeFreeTypeBaseCandidateTests(unittest.TestCase):
             ctypes.POINTER(ctypes.c_uint),
         ]
         cls.get_tt_interpreter.restype = ctypes.c_int
+        cls.set_cff_hinting_engine = (
+            cls.library.open_cfw_freetype_cff_set_hinting_engine
+        )
+        cls.set_cff_hinting_engine.argtypes = [ctypes.c_void_p, ctypes.c_uint]
+        cls.set_cff_hinting_engine.restype = ctypes.c_int
+        cls.get_cff_hinting_engine = (
+            cls.library.open_cfw_freetype_cff_get_hinting_engine
+        )
+        cls.get_cff_hinting_engine.argtypes = [
+            ctypes.c_void_p,
+            ctypes.POINTER(ctypes.c_uint),
+        ]
+        cls.get_cff_hinting_engine.restype = ctypes.c_int
+        cls.set_cff_no_stem_darkening = (
+            cls.library.open_cfw_freetype_cff_set_no_stem_darkening
+        )
+        cls.set_cff_no_stem_darkening.argtypes = [ctypes.c_void_p, ctypes.c_ubyte]
+        cls.set_cff_no_stem_darkening.restype = ctypes.c_int
+        cls.get_cff_no_stem_darkening = (
+            cls.library.open_cfw_freetype_cff_get_no_stem_darkening
+        )
+        cls.get_cff_no_stem_darkening.argtypes = [
+            ctypes.c_void_p,
+            ctypes.POINTER(ctypes.c_ubyte),
+        ]
+        cls.get_cff_no_stem_darkening.restype = ctypes.c_int
+        cls.set_cff_darkening_parameters = (
+            cls.library.open_cfw_freetype_cff_set_darkening_parameters
+        )
+        cls.set_cff_darkening_parameters.argtypes = [
+            ctypes.c_void_p,
+            ctypes.POINTER(ctypes.c_int),
+        ]
+        cls.set_cff_darkening_parameters.restype = ctypes.c_int
+        cls.get_cff_darkening_parameters = (
+            cls.library.open_cfw_freetype_cff_get_darkening_parameters
+        )
+        cls.get_cff_darkening_parameters.argtypes = [
+            ctypes.c_void_p,
+            ctypes.POINTER(ctypes.c_int),
+        ]
+        cls.get_cff_darkening_parameters.restype = ctypes.c_int
 
     @classmethod
     def tearDownClass(cls) -> None:
@@ -406,6 +455,88 @@ class RuntimeFreeTypeBaseCandidateTests(unittest.TestCase):
         )
         self.assertEqual(version.value, 35)
         self.assertEqual(self.set_tt_interpreter(library, 40), self.OK)
+        self.assertEqual(self.done(), self.OK)
+        self.assertEqual(self.live_blocks(), 0)
+
+    def test_cff_policy_adapter_is_strict_and_round_trips_properties(self) -> None:
+        self.reset(0)
+        self.assertEqual(self.init(), self.OK)
+        library = self.get_library()
+
+        engine = ctypes.c_uint(99)
+        self.assertEqual(
+            self.get_cff_hinting_engine(library, ctypes.byref(engine)), self.OK
+        )
+        self.assertEqual(engine.value, 1)
+        self.assertEqual(self.set_cff_hinting_engine(library, 1), self.OK)
+        self.assertNotEqual(self.set_cff_hinting_engine(library, 0), self.OK)
+        self.assertEqual(
+            self.get_cff_hinting_engine(library, ctypes.byref(engine)), self.OK
+        )
+        self.assertEqual(engine.value, 1)
+
+        disabled = ctypes.c_ubyte(0)
+        self.assertEqual(
+            self.get_cff_no_stem_darkening(library, ctypes.byref(disabled)),
+            self.OK,
+        )
+        self.assertEqual(disabled.value, 1)
+        self.assertEqual(self.set_cff_no_stem_darkening(library, 0), self.OK)
+        self.assertNotEqual(self.set_cff_no_stem_darkening(library, 2), self.OK)
+        self.assertEqual(
+            self.get_cff_no_stem_darkening(library, ctypes.byref(disabled)),
+            self.OK,
+        )
+        self.assertEqual(disabled.value, 0)
+
+        parameter_type = ctypes.c_int * 8
+        parameters = parameter_type()
+        self.assertEqual(
+            self.get_cff_darkening_parameters(library, parameters), self.OK
+        )
+        self.assertEqual(
+            list(parameters), [500, 400, 1000, 275, 1667, 275, 2333, 0]
+        )
+        selected = parameter_type(500, 300, 1000, 200, 1500, 100, 2000, 0)
+        self.assertEqual(
+            self.set_cff_darkening_parameters(library, selected), self.OK
+        )
+        self.assertEqual(
+            self.get_cff_darkening_parameters(library, parameters), self.OK
+        )
+        self.assertEqual(list(parameters), list(selected))
+        for invalid in (
+            parameter_type(-1, 0, 1000, 0, 1500, 0, 2000, 0),
+            parameter_type(1000, 0, 500, 0, 1500, 0, 2000, 0),
+            parameter_type(500, 501, 1000, 0, 1500, 0, 2000, 0),
+        ):
+            self.assertNotEqual(
+                self.set_cff_darkening_parameters(library, invalid), self.OK
+            )
+            self.assertEqual(
+                self.get_cff_darkening_parameters(library, parameters), self.OK
+            )
+            self.assertEqual(list(parameters), list(selected))
+
+        self.assertNotEqual(self.get_cff_hinting_engine(None, None), self.OK)
+        engine = ctypes.c_uint(99)
+        self.assertNotEqual(
+            self.get_cff_hinting_engine(None, ctypes.byref(engine)), self.OK
+        )
+        self.assertEqual(engine.value, 0)
+        self.assertNotEqual(self.set_cff_hinting_engine(None, 1), self.OK)
+        self.assertNotEqual(self.get_cff_no_stem_darkening(None, None), self.OK)
+        disabled = ctypes.c_ubyte(99)
+        self.assertNotEqual(
+            self.get_cff_no_stem_darkening(None, ctypes.byref(disabled)), self.OK
+        )
+        self.assertEqual(disabled.value, 0)
+        self.assertNotEqual(self.get_cff_darkening_parameters(None, None), self.OK)
+        parameters = parameter_type(*([99] * 8))
+        self.assertNotEqual(
+            self.get_cff_darkening_parameters(None, parameters), self.OK
+        )
+        self.assertEqual(list(parameters), [0] * 8)
         self.assertEqual(self.done(), self.OK)
         self.assertEqual(self.live_blocks(), 0)
 
@@ -556,6 +687,8 @@ class RuntimeFreeTypeBaseCandidateTests(unittest.TestCase):
                         str(SNAPSHOT),
                         "-I",
                         str(COMPONENT),
+                        "-I",
+                        str(CFF_COMPONENT),
                         "-c",
                         str(source),
                         "-o",
@@ -613,6 +746,8 @@ class RuntimeFreeTypeBaseCandidateTests(unittest.TestCase):
         self.assertIn("SPDX-License-Identifier: FTL", CLUSTER_SOURCE.read_text())
         self.assertIn("SPDX-License-Identifier: FTL", CLUSTER_HEADER.read_text())
         self.assertIn("SPDX-License-Identifier: FTL", TRUETYPE_HEADER.read_text())
+        self.assertIn("SPDX-License-Identifier: FTL", CFF_SOURCE.read_text())
+        self.assertIn("SPDX-License-Identifier: FTL", CFF_HEADER.read_text())
         self.assertIn("SPDX-License-Identifier: MIT", JUMP_SOURCE.read_text())
         documentation = (COMPONENT / "README.md").read_text()
         self.assertIn("zero unresolved symbols", documentation)

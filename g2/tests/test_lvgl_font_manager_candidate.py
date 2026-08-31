@@ -43,7 +43,7 @@ class G2LvglFontManagerCandidateTests(unittest.TestCase):
     def test_source_and_fixture_are_pinned(self) -> None:
         self.assertEqual(
             (SOURCE.stat().st_size, hashlib.sha256(SOURCE.read_bytes()).hexdigest()),
-            (16940, "f11f98dd4c2eda815512e3e9b2e23ab7401b7cfdc439f272e69d59b684bbb080"),
+            (16931, "f903ee0b79df945ddcb63c8f723c68132f82d444618d995ab22121d97d591b97"),
         )
         self.assertEqual(
             (FIXTURE.stat().st_size, hashlib.sha256(FIXTURE.read_bytes()).hexdigest()),

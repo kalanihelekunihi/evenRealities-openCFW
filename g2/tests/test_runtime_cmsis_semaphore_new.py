@@ -198,25 +198,28 @@ CURRENT_DEPENDENCY_ADDRESSES = {
     "open_cfw_freertos_queue_create_counting_semaphore_static":
         0x007A_EC94,
     "open_cfw_freertos_queue_create_counting_semaphore": 0x007A_ECD4,
-    "open_cfw_freertos_queue_delete": 0x007B_ECF8,
+    "open_cfw_freertos_queue_delete": 0x007B_0330,
 }
-PRODUCTION_OFFSET = 174_588
-PRODUCTION_RUNTIME_ADDRESS = 0x007B_ED20
+PRODUCTION_OFFSET = 114_740
+PRODUCTION_RUNTIME_ADDRESS = 0x007B_0358
 PRODUCTION_SHA256 = (
-    "a0e4d752fe01e9e856d5c94547e8193"
-    "a9fc24b26300aff966cf24e7abafff029"
+    "5e1105ed86ca0f43effdf1e11e59ee7"
+    "c6ce094b3321c127234c492a9cc70b8a4"
 )
-PRODUCTION_OVERLAY_SIZE = 429_058
+PRODUCTION_OVERLAY_SIZE = 360_578
 PRODUCTION_OVERLAY_SHA256 = (
-    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
 )
-PRODUCTION_COMPONENT_SIZE = 3_952_454
+PRODUCTION_COMPONENT_SIZE = 3_883_974
 PRODUCTION_COMPONENT_SHA256 = (
-    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
 )
-PRODUCTION_PACKAGE_SIZE = 4_745_526
+FINAL_COMPONENT_SHA256 = (
+    "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
+)
+PRODUCTION_PACKAGE_SIZE = 4_677_046
 PRODUCTION_PACKAGE_SHA256 = (
-    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
+    "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"
 )
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -403,10 +406,19 @@ class RuntimeCmsisSemaphoreNewTests(unittest.TestCase):
             int(text["offset"]):int(text["offset"]) + int(text["size"])
         ]
         cls.current_config = json.loads(CURRENT_CONFIG.read_text())
+        stage_config = json.loads(CURRENT_CONFIG.read_text())
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = temporary / "core-stage-overlay.json"
+        stage_config_path.write_text(
+            json.dumps(stage_config, indent=2) + "\n", encoding="utf-8"
+        )
         cls.current_output = temporary / "current-overlay"
         cls.current_report = apollo_overlay.build(
             root=ROOT,
-            config_path=CURRENT_CONFIG,
+            config_path=stage_config_path,
             output_dir=cls.current_output,
             clang=os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
         )
@@ -1175,7 +1187,7 @@ class RuntimeCmsisSemaphoreNewTests(unittest.TestCase):
                 "overlay_size": PRODUCTION_OVERLAY_SIZE,
                 "overlay_sha256": PRODUCTION_OVERLAY_SHA256,
                 "component_size": PRODUCTION_COMPONENT_SIZE,
-                "component_sha256": PRODUCTION_COMPONENT_SHA256,
+                "component_sha256": FINAL_COMPONENT_SHA256,
             },
         )
 
@@ -1193,7 +1205,7 @@ class RuntimeCmsisSemaphoreNewTests(unittest.TestCase):
                 "offset": PRODUCTION_OFFSET,
                 "padding_before": 2,
                 "runtime_address": PRODUCTION_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007BED20",
+                "runtime_address_hex": "0x007B0358",
                 "size": 178,
             },
         )

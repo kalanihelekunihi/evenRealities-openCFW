@@ -143,9 +143,9 @@ TARGET_PINS: dict[str, dict[str, object]] = {
 }
 
 LOCAL_PINS: dict[Path, tuple[int, str]] = {
-    SOURCE: (5968, "b1f848f8f181e1de4417ff3a21a6a39ddfa6aa2281617636f752a5149425fd4b"),
-    HEADER: (1412, "be7c2882d7b636b8aca304420f695ca0ac26b3103c11edd24c8ba783b314951f"),
-    FIXTURE: (5662, "52f56bdc52f9f0ab1ea5e2d5a33ec89700178fcda3bbef158bb63939e0e06e32"),
+    SOURCE: (5959, "fe46ec96d1925d045f9a880dcff52ce3cefb386d2bb4fe8c9666a06335c44117"),
+    HEADER: (1403, "bccc1e6cb397bda51c5f6273234ff35052289e5de0ac07769b01df6293282fa6"),
+    FIXTURE: (5653, "69e437d8f438b19157cfa53fcdcebc11ba59355c6af5ee3773bd65b768f2fa37"),
     AUDIT: (3175, "2be5e4f62e104f0c01b186a6f0dc74d5c8a76e7f3a57b014032a1fbee55cf681"),
 }
 

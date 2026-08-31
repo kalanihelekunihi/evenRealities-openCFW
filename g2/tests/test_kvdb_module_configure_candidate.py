@@ -19,7 +19,7 @@ EXPECTED_SYMBOLS = {
     "open_cfw_kvdb_read_menu_configuration",
     "open_cfw_kvdb_write_menu_configuration",
 }
-SOURCE_SHA256 = "9eb84180d0b211f168b64d8aaa5acc762e815236c17b7955ce432b94447ab1db"
+SOURCE_SHA256 = "a1922df8ab49d4b119cc8663d9b50a9264ae9b3136b23d11fe6968fd917a49a5"
 MAGIC = 0x5555AAAA
 
 

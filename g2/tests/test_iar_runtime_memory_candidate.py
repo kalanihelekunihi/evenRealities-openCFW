@@ -91,18 +91,18 @@ class IARRuntimeMemoryCandidateTests(unittest.TestCase):
         overlay = json.loads(OVERLAY.read_text(encoding="utf-8"))
         leaves = {item["function"]: item for item in overlay["relocated_leaves"]}
         offsets = {
-            "open_cfw_iar_memcpy_void": 190164,
-            "open_cfw_iar_memcpy_aligned_void": 190316,
-            "open_cfw_iar_memmove_void": 190468,
+            "open_cfw_iar_memcpy_void": 130316,
+            "open_cfw_iar_memcpy_aligned_void": 130468,
+            "open_cfw_iar_memmove_void": 130620,
         }
         for name, offset in offsets.items():
             with self.subTest(name=name):
                 self.assertEqual(leaves[name]["expected"]["offset"], offset)
                 self.assertEqual(leaves[name]["relocations"], [])
-                self.assertEqual(leaves[name]["source"]["size"], 6903)
+                self.assertEqual(leaves[name]["source"]["size"], 6894)
                 self.assertEqual(
                     leaves[name]["source"]["sha256"],
-                    "3afa1466d5bd4d57a81d6b31debbb077eee1cecab029eebfbeff690a7658841d",
+                    "b88a75c8a34f10b8b4ac403bb31a0c1c921f52d3cbb50c6287a8ab4c23844200",
                 )
                 self.assertIn("linux-clang", leaves[name]["toolchain_profiles"])
 
@@ -121,17 +121,17 @@ class IARRuntimeMemoryCandidateTests(unittest.TestCase):
         self.assertEqual(
             overlay["expected"],
             {
-                "overlay_size": 429058,
-                "overlay_sha256": "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
-                "component_size": 3952454,
-                "component_sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+                "overlay_size": 362272,
+                "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+                "component_size": 3885668,
+                "component_sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
             },
         )
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4745526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"),
+            (4678740, "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a"),
         )
 
     @unittest.skipUnless(

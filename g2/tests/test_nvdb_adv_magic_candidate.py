@@ -142,7 +142,7 @@ class NvdbAdvMagicCandidateTests(unittest.TestCase):
     def test_source_hash(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "6385cb384472a5789331ed22cc0068f20272c0c689ab241b90d589c13a692c21",
+            "13b80f2be2ddd4a9b78c80805eb99a8c091582df745155f5e29d815cbd4bb093",
         )
 
 

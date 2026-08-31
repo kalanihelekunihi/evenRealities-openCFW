@@ -24,9 +24,9 @@ OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
-PINS = {FM: "4687cfb65b7331807a36e84efd75d664b85f3c26f19ab3d66800e6dcc050d340", CL: "2dc522b1cc51d55f09f9e2cb80ea589b8724005e83d0f3c93657a980f39873dd"}
+PINS = {FM: "4687cfb65b7331807a36e84efd75d664b85f3c26f19ab3d66800e6dcc050d340", CL: "70217413b8752abef1ef2b405a778525971f07897011747f4879df8e338a78ff"}
 SOURCE_PATH = "components/apollo_main/core_overlay/freertos_cli_filesystem.c"
-SOURCE_PIN = (22115, "e4817fff043dbefc84075153e31da9665af909cf5004c179602ab7ac98ec5313")
+SOURCE_PIN = (22106, "6c80a375bce42595d995eaf947d51ba6fa71eb9afd7ea4b8ec79314395a50562")
 LEAF_NAMES = (
     "open_cfw_cli_fs_normalize_path", "open_cfw_cli_fs_ls",
     "open_cfw_cli_fs_cat", "open_cfw_cli_fs_rm", "open_cfw_cli_fs_cd",
@@ -34,10 +34,10 @@ LEAF_NAMES = (
     "open_cfw_cli_fs_pwd", "open_cfw_cli_fs_mv", "open_cfw_cli_fs_md5",
     "open_cfw_cli_fs_df", "open_cfw_cli_fs_block_stats_accumulate",
 )
-LEAF_DIGEST = "6c43cb84117894eecfb77406820fa27c4573cde7b132c656af0cc38389ec75bf"
+LEAF_DIGEST = "a5cc6cc4cd5a10bd326e9afa2f6dca89c594aca49026c67628bd6c158f85c4d2"
 PATCH_DIGEST = "c5551ed8d5b629b1878de1860aace37552e55b1cf99096bf21c29af67baa98ed"
-BUILT_DIGEST = "31de379333e50a3a742e5178c9adc2be7bea0b1c83883d031b82d0eb45144bc0"
-REGION_DIGEST = "cab8dd16560ad5b4e8798ea90114683510afca45989c349fe4735ac5582e8767"
+BUILT_DIGEST = "9b988a7d9c998910ec28aea5b40f704ade411bf110ff1ea95294b1661c4169b2"
+REGION_DIGEST = "308a8f94fda77fe675d8045ea97cd093be68b8cd370e1e471a8c8e51904935a7"
 RETAINED = 'kernel\\FreeRTOS-Plus-CLI\\prvCommand\\prvCommand_filesystem.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\kernel\\FreeRTOS-Plus-CLI\\prvCommand\\prvCommand_filesystem.c'
 PATH_RUN = 0x6de434
@@ -261,16 +261,16 @@ def analyze(image=IMAGE):
     leaves = [x for x in overlay["relocated_leaves"] if x.get("source", {}).get("path") == SOURCE_PATH]
     if tuple(x.get("function") for x in leaves) != LEAF_NAMES or not set(LEAF_NAMES) <= set(overlay["functions"]) or _jsh(leaves) != LEAF_DIGEST:
         raise c.AuditError("production FreeRTOS+CLI filesystem leaf inventory changed")
-    if any(x.get("profiles") != ["apple-clang"] or not x.get("strict_relocation_contract") or x.get("source", {}).get("license") != "GPL-3.0-only" for x in leaves):
+    if any(x.get("profiles") != ["apple-clang"] or not x.get("strict_relocation_contract") or x.get("source", {}).get("license") != "MIT" for x in leaves):
         raise c.AuditError("production FreeRTOS+CLI filesystem leaf policy changed")
     if sum(x["expected"]["size"] for x in leaves) != 9866 or sum(x["expected"].get("closure_size", x["expected"]["size"]) - x["expected"]["size"] for x in leaves) != 704 or sum(len(x["relocations"]) for x in leaves) != 179:
         raise c.AuditError("production FreeRTOS+CLI filesystem compiled census changed")
-    previous = 288070
+    previous = 228222
     alignment = 0
     for leaf in leaves:
         alignment += leaf["expected"]["offset"] - previous
         previous = leaf["expected"]["offset"] + leaf["expected"].get("closure_size", leaf["expected"]["size"])
-    if alignment != 20 or previous != 298660:
+    if alignment != 20 or previous != 238812:
         raise c.AuditError("production FreeRTOS+CLI filesystem placement changed")
     patches = [x for x in overlay["patch_sites"] if x.get("name", "").startswith("replace_freertos_cli_filesystem_")]
     stock_order = (LEAF_NAMES[1], LEAF_NAMES[2], LEAF_NAMES[3], LEAF_NAMES[0], *LEAF_NAMES[4:])
@@ -310,8 +310,8 @@ def analyze(image=IMAGE):
             "stock_replaced_bytes": 3200,
             "retained_literal_pool_bytes": 56,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
-            "hardware_blocker": "Future physical qualification requires an authorized G2 pair and captured littlefs media for live directory, file, rename, MD5, capacity, and block-stat behavior; hardware testing is deferred by project direction.",
+            "hardware_validation": "blocked by unavailable physical evidence",
+            "hardware_blocker": "Future physical qualification requires an authorized G2 pair and captured littlefs media for live directory, file, rename, MD5, capacity, and block-stat behavior; hardware testing is blocked by unavailable physical evidence.",
         },
     }
 

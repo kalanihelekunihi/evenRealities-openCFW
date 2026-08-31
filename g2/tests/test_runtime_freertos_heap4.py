@@ -222,46 +222,46 @@ SOURCE_SHA256 = (
     "d848b90a00da24db963c49dbff247231"
     "4b2a76c6cf269efef46e6cac56889986"
 )
-PRODUCTION_OVERLAY_SIZE = 429_058
+PRODUCTION_OVERLAY_SIZE = 360_578
 PRODUCTION_OVERLAY_SHA256 = (
-    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
 )
-PRODUCTION_COMPONENT_SIZE = 3_952_454
+PRODUCTION_COMPONENT_SIZE = 3_883_974
 PRODUCTION_COMPONENT_SHA256 = (
-    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
 )
 PRODUCTION_FUNCTIONS = {
     "open_cfw_freertos_heap4_init": {
-        "offset": 173_936,
+        "offset": 114_088,
         "size": 66,
         "padding_before": 0,
-        "runtime_address": 0x007B_EA94,
+        "runtime_address": 0x007B_00CC,
         "sha256": TARGET_FUNCTIONS["open_cfw_freertos_heap4_init"][1],
     },
     "open_cfw_freertos_heap4_insert_free_block": {
-        "offset": 174_004,
+        "offset": 114_156,
         "size": 118,
         "padding_before": 2,
-        "runtime_address": 0x007B_EAD8,
+        "runtime_address": 0x007B_0110,
         "sha256": TARGET_FUNCTIONS[
             "open_cfw_freertos_heap4_insert_free_block"
         ][1],
     },
     "open_cfw_freertos_heap4_malloc": {
-        "offset": 174_124,
+        "offset": 114_276,
         "size": 308,
         "padding_before": 2,
-        "runtime_address": 0x007B_EB50,
+        "runtime_address": 0x007B_0188,
         "sha256": (
             "89bc685c866987fca82d83b0cb397b49"
             "eb1e63ac6e380c3b9825ae2a1c057451"
         ),
     },
     "open_cfw_freertos_heap4_free": {
-        "offset": 174_432,
+        "offset": 114_584,
         "size": 114,
         "padding_before": 0,
-        "runtime_address": 0x007B_EC84,
+        "runtime_address": 0x007B_02BC,
         "sha256": (
             "146aa07eef93afc02e5caff75e7a569b"
             "f39e3da390383d91ccf45ae0f6b19f1c"
@@ -433,10 +433,18 @@ class RuntimeFreeRTOSHeap4Tests(unittest.TestCase):
             name: fields for name, fields in cls.symbols if name
         }
         cls.current_config = json.loads(CURRENT_CONFIG.read_text())
+        stage_config = json.loads(CURRENT_CONFIG.read_text())
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = temporary / "current-core-stage-overlay.json"
+        stage_config_path.write_text(json.dumps(stage_config), encoding="utf-8")
+        cls.current_config = stage_config
         cls.current_output = temporary / "current-overlay"
         cls.current_report = apollo_overlay.build(
             root=ROOT,
-            config_path=CURRENT_CONFIG,
+            config_path=stage_config_path,
             output_dir=cls.current_output,
             clang=os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
         )
@@ -1242,12 +1250,12 @@ class RuntimeFreeRTOSHeap4Tests(unittest.TestCase):
             (len(self.current_component), sha256(self.current_component)),
             (PRODUCTION_COMPONENT_SIZE, PRODUCTION_COMPONENT_SHA256),
         )
-        self.assertEqual(component["replaced_stock_function_bytes"], 409_246)
-        self.assertEqual(component["generated_patch_site_bytes"], 409_066)
+        self.assertEqual(component["replaced_stock_function_bytes"], 397_626)
+        self.assertEqual(component["generated_patch_site_bytes"], 397_446)
         self.assertEqual(component["generated_wrapper_bytes"], 32)
         self.assertEqual(component["source_owned_in_place_bytes"], 184)
-        self.assertEqual(component["source_owned_bytes"], 431_334)
-        self.assertEqual(component["opaque_base_bytes"], 3_111_914)
+        self.assertEqual(component["source_owned_bytes"], 362_962)
+        self.assertEqual(component["opaque_base_bytes"], 3_123_534)
 
         patches = [
             next(

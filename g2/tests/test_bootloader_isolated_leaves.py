@@ -523,7 +523,12 @@ class BootloaderIsolatedLeafTests(unittest.TestCase):
             )
             self.assertEqual(
                 leaf_report["toolchain"]["flags"],
-                leaf_config["toolchain"]["flags"],
+                [
+                    *apollo_overlay.hermetic_compiler_arguments(
+                        apollo_overlay.compiler_builtin_include_dir(self.clang)
+                    ),
+                    *leaf_config["toolchain"]["flags"],
+                ],
             )
             self.assertEqual(
                 leaf_report["toolchain"]["include_dirs"],

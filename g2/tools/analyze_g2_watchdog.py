@@ -19,7 +19,7 @@ FUNCTION_MAP = ROOT / "tools/manifests/g2-watchdog-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-watchdog-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-watchdog-provenance.tsv"
 SOURCE = ROOT / "components/apollo_main/core_overlay/watchdog.c"
-SOURCE_SHA256 = "9a129f76c1b6c03a43219f5afa606880f551a352ab984bbf062d7401cddd43eb"
+SOURCE_SHA256 = "018d37dcad7c22da15711cfaedeb7d5e31a832828e420d4e83cfe2c8f4e60ca0"
 PINS = {
     FUNCTION_MAP: "a9108d6865b4d6876721a6a3b698d059e08ec084a43780734aa827f0855b13a5",
     CLOSURE: "1b262f42bb068048d1f5267b8d7e932697ec3cdf244a019cae9fa3f501e649fa",

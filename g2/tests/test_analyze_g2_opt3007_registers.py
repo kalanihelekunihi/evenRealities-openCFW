@@ -11,5 +11,5 @@ class Opt3007RegistersTests(unittest.TestCase):
  def test_register_map(self):
   m=self.r["register_map"];self.assertEqual((m["descriptor_count"],m["descriptor_bytes"]),(19,57));self.assertEqual(m["descriptors"], [list(x) for x in self.m.DESCRIPTORS]);self.assertEqual(m["datasheet"],"TI SBOS864, August 2017");self.assertFalse(m["public_code_match"])
  def test_provider_and_routing(self):
-  self.assertEqual(self.r["provider_boundary"]["easylogger_calls"],5);self.assertFalse(self.r["provider_boundary"]["new_version_discriminator"]);self.assertTrue(self.r["production"]["production_routed"]);self.assertEqual((self.r["production"]["compiled_text_bytes"],self.r["production"]["strict_relocations"]),(224,0));self.assertIn("deferred by project direction",self.r["production"]["hardware_validation"])
+  self.assertEqual(self.r["provider_boundary"]["easylogger_calls"],5);self.assertFalse(self.r["provider_boundary"]["new_version_discriminator"]);self.assertTrue(self.r["production"]["production_routed"]);self.assertEqual((self.r["production"]["compiled_text_bytes"],self.r["production"]["strict_relocations"]),(224,0));self.assertIn("blocked by unavailable physical evidence",self.r["production"]["hardware_validation"])
 if __name__=="__main__":unittest.main()

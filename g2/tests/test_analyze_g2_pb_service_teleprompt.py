@@ -78,7 +78,7 @@ class AnalyzeG2PbServiceTelepromptTests(unittest.TestCase):
         self.assertEqual(production["stock_replaced_bytes"], 1854)
         self.assertEqual(production["retained_literal_pool_bytes"], 130)
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "deferred by project direction")
+        self.assertEqual(production["hardware_validation"], "blocked by unavailable physical evidence")
 
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@ PINS = {
     RESIDUAL: (47_936, "2ac24d2abf1f4a4fbce236a82f4591a38dfdb0a71c5ca5b2f8e88bcd9a722d36"),
     CANDIDATE: (1_766, "59856aa09f5b07c96ffac863ca4531b27493e83df3641804fcc62ac5ed802294"),
     HEADER: (1_558, "9749325de487ea513e6407ad0d47d3c596756ea2296c7df681352e364aa3b39d"),
-    MANIFEST: (2_040, "fb2b9b278d8f9c4e7157b482cc892a446c86df69a015eb0cfebeaa3bc256a6cc"),
+    MANIFEST: (2_051, "461c5aa0105d8cb772aed6d07326f3aec0bdcc3d7fb4dfc7d3e8b769b94fa1cb"),
 }
 APP_BASE = 0x00302400
 APP_FILE_OFFSET = 0x424
@@ -86,7 +86,7 @@ def run_audit() -> dict[str, Any]:
     manifest = list(csv.DictReader(inputs[MANIFEST].decode("ascii").splitlines(), delimiter="\t"))
     if len(manifest) != 8 or manifest[0]["disposition"] != "typed_unsupported_external_boundary":
         raise BoundaryError("PAwR manifest decision drift")
-    if manifest[-1]["name"] != "deferred by project direction":
+    if manifest[-1]["name"] != "blocked by unavailable physical evidence":
         raise BoundaryError("hardware qualification policy drift")
     return {
         "status": "candidate-qualified-fail-closed", "read_only": True,
@@ -100,7 +100,7 @@ def run_audit() -> dict[str, Any]:
         "candidate": {"source": str(CANDIDATE.relative_to(ROOT)),
                       "header": str(HEADER.relative_to(ROOT)),
                       "production_routed": False},
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
     }
 
 

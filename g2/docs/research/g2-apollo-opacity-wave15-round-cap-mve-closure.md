@@ -4,6 +4,16 @@ Status date: 2026-08-28
 Target: official G2 `s200_v2.2.6.10` Apollo-main image
 Mode: software-only, read-only
 
+> Historical accounting note: later public-DWARF correlation identifies this
+> root as NemaVG `draw_start_cap` and its sibling as `draw_end_cap`. They now
+> form a reviewed 3,308-byte semantic source candidate, but both stock endpoint
+> records remain retained and unpatched because their exact no-argument/global-
+> context ABI, MVE/stack construction, and lower helpers are not sufficiently
+> recovered. The historical `typed-external-provider-unavailable` label below
+> is superseded for readiness by
+> [the stroke-cap candidate audit](g2-nemavg-stroke-caps-source-candidate.md);
+> it is not a production-routing claim.
+
 ## Result
 
 Wave 15 closes the largest post-Wave-14 residual root at `0x0051B8F0` / 1,668
@@ -39,8 +49,8 @@ internal NemaVG symbol. The root is absent from the stock-resolved Nema symbols,
 and the available Apollo5 archive uses GCC and is not byte-identical to the IAR
 stock image.
 
-No maintained implementation source or applicable license is available in the
-checked-in evidence. The function is therefore a precise SHA-pinned
+At the time of this wave, no maintained implementation source or applicable
+license was available in the checked-in evidence. The function was therefore a precise SHA-pinned
 `typed-external-provider-unavailable` boundary. No replacement, production
 route, or hardware operation is performed.
 

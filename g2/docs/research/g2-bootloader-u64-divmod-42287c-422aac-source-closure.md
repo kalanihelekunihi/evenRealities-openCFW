@@ -1,5 +1,10 @@
 # G2 bootloader unsigned 64-bit divmod source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete 560-byte IAR-compatible unsigned 64-bit divide/modulo runtime at
 `[0x0042287C,0x00422AAC)` now compiles from maintained MIT C at
 its exact stock address. The installed body SHA-256 is

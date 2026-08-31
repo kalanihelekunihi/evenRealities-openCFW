@@ -60,10 +60,13 @@ class TouchStartupClosedAdmissionTests(unittest.TestCase):
                 self.assertEqual(h1, h2)
                 current = json.loads(next(
                     path for path in first if path.name ==
-                    "g2-touch-current-source-readiness-summary.json").read_text())
+                    "g2-touch-startup-closed-admission-summary.json").read_text())
                 self.assertEqual(current["authoritative_batch"], 18)
                 self.assertEqual(current["hardware_validation"],
-                                 "deferred by project direction")
+                                 "blocked by unavailable physical evidence")
+                self.assertNotIn(
+                    "g2-touch-current-source-readiness-summary.json", h1
+                )
         finally:
             M.MANIFEST_DIR = old
 

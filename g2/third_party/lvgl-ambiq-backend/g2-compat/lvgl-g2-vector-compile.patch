@@ -1,0 +1,43 @@
+diff --git a/src/draw/ambiq/lv_draw_ambiq_vector.c b/src/draw/ambiq/lv_draw_ambiq_vector.c
+--- a/src/draw/ambiq/lv_draw_ambiq_vector.c
++++ b/src/draw/ambiq/lv_draw_ambiq_vector.c
+@@ -386,7 +386,9 @@ static void lv_vector_paint_to_nema(NEMA_VG_PAINT_HANDLE vg_paint, NEMA_VG_GRA
+             // lv_matrix_transform_point(&dsc->matrix, &p1);
+             //lv_matrix_transform_point(&dsc->matrix, &p2);
+             //nema_mat3x3_invert(dsc->matrix.m);
+-            nema_mat3x3_mul_vec(dsc->matrix.m, &p2.x, &p2.y);
++            nema_matrix3x3_t matrix;
++            lv_memcpy(matrix, dsc->matrix.m, sizeof(matrix));
++            nema_mat3x3_mul_vec(matrix, &p2.x, &p2.y);
+ 
+             p2.x += dsc->gradient.x1;
+             p2.y += dsc->gradient.y1;            
+@@ -426,14 +428,15 @@ static void lv_vector_paint_to_nema(NEMA_VG_PAINT_HANDLE vg_paint, NEMA_VG_GRA
+ 
+         lv_vector_image_to_nema(vg_paint, &dsc->img_dsc);
++        lv_matrix_t matrix = dsc->matrix;
+         if(dsc->fill_units == LV_VECTOR_FILL_UNITS_OBJECT_BOUNDING_BOX) {
+ 
+             nema_vg_paint_lock_tran_to_path(vg_paint, 1);
+-            lv_matrix_translate(dsc->matrix.m, aabb_min_x, aabb_min_y);
++            lv_matrix_translate(&matrix, aabb_min_x, aabb_min_y);
+         }
+         else {
+             nema_vg_paint_lock_tran_to_path(vg_paint, 0);
+         }
+-        nema_vg_paint_set_tex_matrix(vg_paint, dsc->matrix.m);
++        nema_vg_paint_set_tex_matrix(vg_paint, matrix.m);
+ 
+     }
+     else
+@@ -596,7 +599,9 @@ static void lv_draw_ambiq_vector(lv_draw_task_t * t, const lv_draw_vector_dsc_t
+     lv_ambiq_get_path_aabb(unit->vg_path, &aabb_min_x, &aabb_min_y, &aabb_max_x, &aabb_max_y);
+ 
+     /*set path matrix*/
+-    nema_vg_path_set_matrix(unit->vg_path, dsc->matrix.m);
++    nema_matrix3x3_t matrix;
++    lv_memcpy(matrix, dsc->matrix.m, sizeof(matrix));
++    nema_vg_path_set_matrix(unit->vg_path, matrix);
+ 
+     /* fill  */
+     if(dsc->fill_dsc.opa != LV_OPA_TRANSP) {

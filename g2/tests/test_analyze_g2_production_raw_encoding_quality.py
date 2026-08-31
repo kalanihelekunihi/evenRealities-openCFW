@@ -33,8 +33,8 @@ class ProductionRawEncodingQualityTests(unittest.TestCase):
             "source_owned_bytes_currently_overstated": 0,
             "fully_raw_byte_body_bytes": 0,
             "public_raw_executable_transcript_files": 0,
-            "removed_public_transcript_files": 8,
-            "removed_public_transcript_executable_bytes": 8902,
+            "removed_public_transcript_files": 2,
+            "removed_public_transcript_executable_bytes": 4930,
         })
 
     def test_every_directive_byte_has_one_semantic_disposition(self) -> None:
@@ -75,14 +75,14 @@ class ProductionRawEncodingQualityTests(unittest.TestCase):
     def test_deleted_public_transcripts_are_digest_only_boundaries(self) -> None:
         self.assertTrue(self.result["public_source_scope_clean"])
         self.assertEqual(
-            len(self.result["removed_public_transcript_boundaries"]), 8)
+            len(self.result["removed_public_transcript_boundaries"]), 2)
         for row in self.result["removed_public_transcript_boundaries"]:
             self.assertFalse((ROOT / row["path"]).exists())
             self.assertIn("absent_from_public_source", row["disposition"])
 
     def test_audit_is_software_only_and_does_not_mutate_production(self) -> None:
         self.assertEqual(self.result["hardware_validation"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
         self.assertEqual(self.result["production_files_modified"], [])
         self.assertTrue(self.result["source_ownership_suitable"])
 

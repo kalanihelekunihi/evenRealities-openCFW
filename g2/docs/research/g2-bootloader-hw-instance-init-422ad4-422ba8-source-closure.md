@@ -1,5 +1,10 @@
 # G2 bootloader four-instance hardware-service initializer source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated 212-byte initializer at
 `[0x00422AD4,0x00422BA8)` now compiles from maintained MIT C at
 its exact stock address. Its SHA-256 is

@@ -1,5 +1,10 @@
 # G2 touch-controller DFU recovery
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 ## Result
 
 The retained first-party translation unit `platform\input\touchDFU\service_touch_dfu.c` is closed as a linked binary object in the official G2 2.2.6.10 OTA image. Its physical interval is `[0x0055FCB4,0x00561810)`: 7,004 bytes with SHA-256 `b53444478efe8eac988e311ee4a19f6ee07ab024779340847d77ba6845d5887b`.

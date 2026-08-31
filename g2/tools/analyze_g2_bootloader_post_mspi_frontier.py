@@ -290,7 +290,10 @@ def audit() -> dict:
         "bootloader_mspi_interrupt_service_426536_source_in_place": (0x00426536, 712, "source_compiled"),
         "bootloader_mspi_interrupt_service_literal_pool_4267fe_opaque": (0x004267FE, 10, "official_blob"),
         "bootloader_mspi_power_control_426808_source_in_place": (0x00426808, 1014, "source_compiled"),
-        "bootloader_opaque_after_mspi_power_control_426bfe": (0x00426BFE, 55_417, "official_blob"),
+        "bootloader_opaque_before_clkmgr_divider_entries": (0x00426BFE, 38, "official_blob"),
+        "bootloader_clkmgr_hfrc2_uq15_divider_source_redirect": (0x00426C24, 42, "generated_source_entry_replacement"),
+        "bootloader_clkmgr_hfrc_integer_divider_source_redirect": (0x00426C4E, 10, "generated_source_entry_replacement"),
+        "bootloader_opaque_after_mspi_power_control_426bfe": (0x00426C58, 55_327, "official_blob"),
     }
     for name, expected in expected_regions.items():
         item = by_name[name]
@@ -300,17 +303,17 @@ def audit() -> dict:
     report = json.loads(BUILD_REPORT.read_text())
     component = report["component"]
     require((component["size"], component["sha256"]) ==
-            (163_840, "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"),
+            (163_840, "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad"),
             "canonical boot provider identity changed")
     require((component["source_owned_bytes"], component["opaque_base_bytes"],
-             component["source_owned_in_place_bytes"]) == (27_819, 119_477, 12_232),
+             component["source_owned_in_place_bytes"]) == (27_925, 119_425, 12_232),
             "live source/official accounting changed")
-    require(component["source_owned_bytes"] + component["opaque_base_bytes"] == 147_296,
+    require(component["source_owned_bytes"] + component["opaque_base_bytes"] == 147_350,
             "boot source/official conservation changed")
 
     return {
         "component": "G2 Apollo bootloader post-MSPI frontier",
-        "status": "classification-complete / two exact production source admissions / hardware validation deferred by project direction",
+        "status": "classification-complete / two exact production source admissions / hardware validation blocked by unavailable physical evidence",
         "frontier": {"start": 0x00426536, "end_exclusive": 0x00434477, "bytes": 57_153},
         "classification": {
             "exhaustive": True, "unclassified_bytes": 0,
@@ -327,7 +330,7 @@ def audit() -> dict:
         },
         "profiles": profiles,
         "boot_component": component,
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_operations": [],
     }
 
@@ -341,7 +344,7 @@ def main() -> int:
         print(json.dumps(result, indent=2, sort_keys=True))
     else:
         print("Post-MSPI frontier: 57,153 bytes exhaustively classified; 1,726 bytes exact BSD source")
-        print("  hardware validation: deferred by project direction")
+        print("  hardware validation: blocked by unavailable physical evidence")
     return 0
 
 

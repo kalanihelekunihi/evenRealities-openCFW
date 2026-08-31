@@ -1,5 +1,10 @@
 # G2 bootloader numeric, formatter, dispatch, and string source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The aggregate identities below are the substring promotion checkpoint; the
 later critical-context promotion supersedes them. Current aggregate pins are
 in `g2-bootloader-critical-context-source-closure.md`.

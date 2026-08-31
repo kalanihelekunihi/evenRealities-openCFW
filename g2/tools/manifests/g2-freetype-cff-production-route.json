@@ -1,0 +1,244 @@
+{
+  "analysis_mode": "read-only; no build, signing, flash, or hardware operation",
+  "authenticated_component_route": {
+    "base_argument": "same-build pre-CFF Apollo component",
+    "builder": "components/apollo_main/freetype_cff_scatter/build_component.py",
+    "canonical_package": {
+      "apple_cff_region_rows": 6,
+      "highest_cff_end_exclusive": "0x007FDED4",
+      "linux_profile_replacement_rows": 5,
+      "manifest": "manifests/g2-2.2.6.10-core-source.json",
+      "profiles": {
+        "apple-clang": {
+          "sha256": "482756200d1b3c70685d7c1c29c422a5725436801e3600d7cf55fa3e16809128",
+          "size": 4749540
+        },
+        "linux-clang": {
+          "sha256": "d9386d30c0c6b1bd706b36c9ee095ad6e2e9ee9b5dacf9c58a52357c7620a362",
+          "size": 4749524
+        }
+      }
+    },
+    "canonical_package_manifest_route_enabled": true,
+    "config": "components/apollo_main/freetype_cff_scatter/overlay.json",
+    "guarded_stock_interval": {
+      "end_exclusive": "0x005B0114",
+      "sha256": "58b8b5e4c1b801d7ac4c6883dc8afeccd7cf370e3e9cccdf95f938e20b91358b",
+      "start": "0x005ABEF8"
+    },
+    "module_class_patch": {
+      "address": "0x0073EF00",
+      "expected_stock_little_endian_hex": "74cb6d00",
+      "replacement_address": "0x005AC014",
+      "replacement_little_endian_hex": "14c05a00",
+      "replacement_symbol": "cff_driver_class"
+    },
+    "post_link_order": "core -> liblc3 -> product-test -> freetype-cff",
+    "profiles": {
+      "apple-clang": {
+        "component": {
+          "sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
+          "size": 3956468
+        },
+        "loadable_bytes": 20416,
+        "relocations": 0,
+        "sections": [
+          {
+            "alignment": 4,
+            "bytes": 4918,
+            "end_exclusive": "0x005AD22E",
+            "legal_interval": "conditional-stock-cff-envelope",
+            "name": ".cff_stock_rodata",
+            "sha256": "af26a89e31bd570876eb6525feca32796170b4e1d126d30c7c9a475ca5c87761",
+            "start": "0x005ABEF8"
+          },
+          {
+            "alignment": 8,
+            "bytes": 11382,
+            "end_exclusive": "0x005AFEA6",
+            "legal_interval": "conditional-stock-cff-envelope",
+            "name": ".cff_stock_text",
+            "sha256": "875b144a03be6535cbda9d925aaec7db2a17f088376d2f300e0e38c2b154bd26",
+            "start": "0x005AD230"
+          },
+          {
+            "alignment": 8,
+            "bytes": 4100,
+            "end_exclusive": "0x007FDEC4",
+            "legal_interval": "directly-free-application-tail",
+            "name": ".cff_tail_text",
+            "sha256": "a27cfc1302153a5bc2f2e2253d7d3e9eb8dd75fdae0c66426c898bc46376ccb0",
+            "start": "0x007FCEC0"
+          },
+          {
+            "alignment": 4,
+            "bytes": 16,
+            "end_exclusive": "0x007FDED4",
+            "legal_interval": "directly-free-application-tail",
+            "name": ".cff_tail_exidx",
+            "sha256": "c7f38a59fd9b7e9eca1ba1e07f3de5b1c3b5f7eb5b6322638f42f668c62abd66",
+            "start": "0x007FDEC4"
+          }
+        ],
+        "undefined_symbols": 0
+      },
+      "linux-clang": {
+        "component": {
+          "sha256": "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
+          "size": 3956468
+        },
+        "loadable_bytes": 20356,
+        "relocations": 0,
+        "sections": [
+          {
+            "alignment": 4,
+            "bytes": 4918,
+            "end_exclusive": "0x005AD22E",
+            "legal_interval": "conditional-stock-cff-envelope",
+            "name": ".cff_stock_rodata",
+            "sha256": "5c2f3b649f62d1d86f3c900498f4ba679dc9b0eb3bb46cf184e27fa5ccb268a2",
+            "start": "0x005ABEF8"
+          },
+          {
+            "alignment": 8,
+            "bytes": 11322,
+            "end_exclusive": "0x005AFE6A",
+            "legal_interval": "conditional-stock-cff-envelope",
+            "name": ".cff_stock_text",
+            "sha256": "257e531397359a887481018b7679a280250714be8bc07b56003900969cf57ee4",
+            "start": "0x005AD230"
+          },
+          {
+            "alignment": 8,
+            "bytes": 4100,
+            "end_exclusive": "0x007FDEC4",
+            "legal_interval": "directly-free-application-tail",
+            "name": ".cff_tail_text",
+            "sha256": "632fe6b5d869358279803fa7bb07f6717b5c2ab5706fafd38ac40a30e873f2f1",
+            "start": "0x007FCEC0"
+          },
+          {
+            "alignment": 4,
+            "bytes": 16,
+            "end_exclusive": "0x007FDED4",
+            "legal_interval": "directly-free-application-tail",
+            "name": ".cff_tail_exidx",
+            "sha256": "c7f38a59fd9b7e9eca1ba1e07f3de5b1c3b5f7eb5b6322638f42f668c62abd66",
+            "start": "0x007FDEC4"
+          }
+        ],
+        "undefined_symbols": 0
+      }
+    },
+    "route_token_counts": {
+      "components/shared/freetype_cff": 3,
+      "open_cfw_freetype_cff_": 1,
+      "runtime_freetype_cff.c": 3,
+      "src/cff/cff.c": 3
+    }
+  },
+  "blockers": [
+    {
+      "evidence": "the six source-built policy exports are placed and retained, but stock defaults to Adobe and no authenticated first-party caller changes CFF policy",
+      "gate": "policy ownership",
+      "status": "blocked-no-authenticated-caller"
+    },
+    {
+      "evidence": "external XIP payloads and runtime-initialized configuration arrays are absent from the official main image, so font names, hashes, formats, and FreeType face paths remain unresolved",
+      "gate": "font payload and live rendering",
+      "status": "blocked-unavailable-physical-evidence"
+    }
+  ],
+  "census_sha256": "6459dbeb6a1c70babf9009b9984d1536f345100868d1bd6efa57e7ff6b0a7419",
+  "complete_map": {
+    "callable_bytes": 16718,
+    "functions": 101,
+    "mapping_sha256": "16761c056d968c5c4847c918d5a4d04a1a5a7fb883f125e833054f3762b7266e",
+    "physical_bytes": 16924,
+    "unresolved_callable_bytes": 0
+  },
+  "evidence_bounds": {
+    "canonical_package_publication_claimed": true,
+    "community_source_component_placement_claimed": true,
+    "community_source_component_routing_claimed": true,
+    "font_payload_identity_claimed": false,
+    "hardware_validation_performed": false,
+    "software_production_route_claimed": true,
+    "stock_retained_behavior_claimed": true
+  },
+  "inputs": {
+    "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin": {
+      "bytes": 3523396,
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+    },
+    "components/apollo_main/core_overlay/build_component.py": {
+      "bytes": 81667,
+      "sha256": "44e2e16484ac31c771cb309b9850e63533881b6be6b8b7d168bdab352ebe47e8"
+    },
+    "components/apollo_main/core_overlay/overlay.json": {
+      "bytes": 5853221,
+      "sha256": "733bc34d7545775ab067eb03c38678889694bc092fc840c64a1ef605b0081212"
+    },
+    "components/apollo_main/freetype_cff_scatter/build_component.py": {
+      "bytes": 24637,
+      "sha256": "4b615fdc2f393dc5c244882c2c663b70338a94b54923aca12f639a7cf59260f9"
+    },
+    "components/apollo_main/freetype_cff_scatter/overlay.json": {
+      "bytes": 1661,
+      "sha256": "145e9f8715509c4b85c87816dababd6b734afcc3cbd128c9c146393cecff2493"
+    },
+    "manifests/g2-2.2.6.10-core-source.json": {
+      "bytes": 3193849,
+      "sha256": "79948ff0c3d234d5f74eac7d627a20588f5bec293a2fed194fe10a44b3ad1831"
+    },
+    "research/corpus/apollo-main/ghidra/decomp/functions.jsonl": {
+      "bytes": 3270703,
+      "sha256": "9fd9c1c34e17abb977f2ccb32a931d9b96743db2db10707de19bf9ea6ae42662"
+    },
+    "tools/analyze_g2_freetype_cff_function_map.py": {
+      "bytes": 24098,
+      "sha256": "68f20cf54a36305d6c460d082c907d3d94efeff545238ff8b6f1189267322b70"
+    },
+    "tools/analyze_g2_lvgl_font_manager.py": {
+      "bytes": 8481,
+      "sha256": "c80cc920eb6da1ef1f175c62f87a6cdf6c6db0f1d4592690f9a03ef2228848a5"
+    },
+    "tools/freetype_g2_config_audit.py": {
+      "bytes": 25281,
+      "sha256": "49bfb2fe29472fe101c709a740d3cec847fcec66f94f1d26ef1367f5659f6278"
+    }
+  },
+  "production_consumer": {
+    "consumer_payload_status": "external XIP identity unavailable",
+    "retained_create": "0x004B1C9C",
+    "retained_delete": "0x004B1EF6",
+    "retained_initializer": "0x004B1B98",
+    "source_owned_component": "components/apollo_main/core_overlay/lvgl_font_manager.c",
+    "source_owned_guarded_redirects": 8
+  },
+  "route_state": {
+    "authenticated_policy_adapter_callsite": false,
+    "canonical_component_route_enabled": true,
+    "canonical_package_manifest_route_enabled": true,
+    "cff_policy_adapter_placed": true,
+    "direct_stock_ps_property_service_callers": [],
+    "external_cff_font_payload_authenticated": false,
+    "retained_lvgl_freetype_adapter_calls": 2,
+    "software_production_route_permitted": true,
+    "source_built_cff_driver_class_registered": true,
+    "source_built_cff_translation_unit_placed": true,
+    "source_owned_lvgl_font_manager_consumer_routed": true,
+    "stock_cff_module_registered": true
+  },
+  "schema_version": 1,
+  "status": "g2-freetype-cff-canonical-package-route-authenticated",
+  "stock_registration": {
+    "cff_driver_class": "0x006DCB74",
+    "cff_module_index": 2,
+    "default_module_table": "0x0073EEF8",
+    "default_module_table_sha256": "1b7abc38c0b16cf1e5bcff6f2a4de87fd30d38cade102b276a42ccfe1041e2b1",
+    "ft_add_default_modules": "0x005242FC",
+    "ft_add_module": "0x0052729C",
+    "ft_init_freetype": "0x0052431C"
+  }
+}

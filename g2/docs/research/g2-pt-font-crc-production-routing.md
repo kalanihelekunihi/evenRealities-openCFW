@@ -1,5 +1,10 @@
 # G2 PT font-CRC production routing
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The canonical G2 PT provider now owns the two font-integrity operations in
 semantic C. This closes the retained `platform\product_test\product_common.c`
 validator dependency that sat below the previously routed board wrappers.
@@ -23,6 +28,12 @@ validator dependency that sat below the previously routed board wrappers.
 
 ## Source implementation and evidence
 
+Hardware-policy correction: the earlier temple unresponsiveness came from the
+charging case being bumped during lunch and disconnecting the test, not from a
+firmware fault. The project has multiple successful firmware flashing attempts
+through `evenRealities-webflasher`, so flash transport is not a current blocker.
+Directed XIP/font hardware testing is blocked by unavailable physical evidence.
+
 `pt_protocol_board_leaf_candidates.c` implements the validator with bounded
 header and 1-KiB stack buffers, explicit overflow checks, XIP acquire/release,
 and a source-owned CRC update loop. It makes no call to retained validator
@@ -32,4 +43,4 @@ The host fixture covers valid one-byte and 1,025-byte images, both fixed font
 routes, invalid lower/upper bases, zero length, length overflow, and CRC
 mismatch. The Apple and reviewed Linux-Clang providers both link with zero
 writable image bytes. Live XIP arbitration, exact external font contents, and
-on-display consequences are **deferred by project direction**.
+on-display consequences are **blocked by unavailable physical evidence**.

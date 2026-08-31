@@ -195,9 +195,9 @@ class BleWsfReconstructionTests(unittest.TestCase):
 
     def test_source_hashes(self) -> None:
         expected = {
-            "ble_wsf_flow.c": "76b8aedfc41b8bc759663700aa4428162299b4b9a241fa4e0ed6e7697e9717c3",
-            "ble_wsf_lifecycle.c": "b64eca3f5494cbcdc54b0153c6b4cb159145ad36215e5c12e5e7010c7d314f02",
-            "ble_wsf_task.c": "7fdb4351d3f8628a94e2e7fbca9fb08836fa1d8b3c2039c44df4ba5deb58ac35",
+            "ble_wsf_flow.c": "b01d694d1d910379bbe5c5a5e4225914803b90135f5c809195e8d4be2a7045b7",
+            "ble_wsf_lifecycle.c": "2be38eb0cf8071454b8e0fffa122ff6f387e20a88de22a8faa2281e7124a5206",
+            "ble_wsf_task.c": "ce6642112664eae53a601f8168141f5054d31141174d0a4269f95ce8ea936bc8",
         }
         observed = {
             source.name: hashlib.sha256(source.read_bytes()).hexdigest()

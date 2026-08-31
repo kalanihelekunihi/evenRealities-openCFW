@@ -41,6 +41,8 @@ FREETYPE_CLUSTER = (
 FREETYPE_TRUETYPE = (
     ROOT / "components/shared/freetype/runtime_freetype_truetype.c"
 )
+FREETYPE_CFF_COMPONENT = ROOT / "components/shared/freetype_cff"
+FREETYPE_CFF = FREETYPE_CFF_COMPONENT / "runtime_freetype_cff.c"
 FREETYPE_JUMP = FREETYPE_COMPONENT / "runtime_freetype_jump_candidate.c"
 FREETYPE_SOURCES = tuple(
     FREETYPE / "src" / name
@@ -55,6 +57,7 @@ FREETYPE_SOURCES = tuple(
     FREETYPE_SYSTEM,
     FREETYPE_CLUSTER,
     FREETYPE_TRUETYPE,
+    FREETYPE_CFF,
     FREETYPE_JUMP,
 )
 
@@ -295,6 +298,7 @@ class RuntimeTargetProviderLinkTests(unittest.TestCase):
             "-I", str(FREETYPE / "include"),
             "-I", str(FREETYPE),
             "-I", str(FREETYPE_COMPONENT),
+            "-I", str(FREETYPE_CFF_COMPONENT),
         )
         for index, source in enumerate(LIBLC3_SOURCES):
             output = self.output / f"liblc3-{index}.bc"
@@ -341,6 +345,15 @@ class RuntimeTargetProviderLinkTests(unittest.TestCase):
         self.assertIn("open_cfw_aeabi_uldivmod", defined)
         self.assertIn("open_cfw_freetype_truetype_set_interpreter", defined)
         self.assertIn("open_cfw_freetype_truetype_get_interpreter", defined)
+        for symbol in (
+            "open_cfw_freetype_cff_set_hinting_engine",
+            "open_cfw_freetype_cff_get_hinting_engine",
+            "open_cfw_freetype_cff_set_no_stem_darkening",
+            "open_cfw_freetype_cff_get_no_stem_darkening",
+            "open_cfw_freetype_cff_set_darkening_parameters",
+            "open_cfw_freetype_cff_get_darkening_parameters",
+        ):
+            self.assertIn(symbol, defined)
         self.assertNotIn("FT_Gzip_Uncompress", defined)
 
     def test_provider_sources_emit_cortex_m55_arm_objects(self) -> None:

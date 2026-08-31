@@ -1,5 +1,11 @@
 # G2 first-party retained-path frontier census
 
+> Readiness accounting note: the 885,418 known physical bytes below are
+> overlapping complete-object evidence. They are not a disjoint firmware
+> bucket and must not be added to Apollo's origin, unanchored, retained, or
+> release-blocking totals. See the current
+> [Wave-0 reconciliation](g2-wave0-readiness-ledger-reconciliation.md).
+
 Status: reproducible lower-bound census over the authenticated 2.2.6.10 image
 and 7,370-function Ghidra corpus. This is analysis only and performs no device
 or flash operation.

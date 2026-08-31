@@ -87,7 +87,7 @@ class BootloaderMspiFifoReadBoundaryTests(unittest.TestCase):
             check=True, capture_output=True, text=True,
         )
         report = json.loads(completed.stdout)
-        self.assertEqual(report["status"], "implemented-in-source / hardware-validation-deferred-by-project-direction")
+        self.assertEqual(report["status"], "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence")
         self.assertEqual(report["identity"]["function"], "mspi_fifo_read")
         self.assertEqual(report["identity"]["provider"], "am_hal_delay_us_status_check")
         self.assertEqual(report["identity"]["license"], "BSD-3-Clause")
@@ -107,9 +107,9 @@ class BootloaderMspiFifoReadBoundaryTests(unittest.TestCase):
         self.assertEqual(
             report["production"]["source_owned_bytes"]
             + report["production"]["retained_official_bytes"],
-            147296,
+            147350,
         )
-        self.assertEqual(report["hardware_validation"], "deferred by project direction")
+        self.assertEqual(report["hardware_validation"], "blocked by unavailable physical evidence")
         self.assertEqual(report["hardware_operations"], [])
 
     def test_descriptor_pins_offsets_provider_chain_and_fail_closed_status(self) -> None:

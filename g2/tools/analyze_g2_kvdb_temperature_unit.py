@@ -211,7 +211,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         or set(leaves) != {target for *_, target in expected_patches.values()}
         or any(
             leaf["source"]["sha256"]
-            != "288f83e95b9526816845f197d0ca7c355a259a03348c0e2140346cb30a01e808"
+            != "78e384d60b7f18b27280d09d3e14701b7946b77e4eaf36af7b8c1e1d980bdb58"
             or leaf.get("profiles") != ["apple-clang"]
             for leaf in leaves.values()
         )

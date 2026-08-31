@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ctypes
+import copy
 import hashlib
 import json
 import os
@@ -38,10 +39,10 @@ END = 0x0048_F7F4
 READ_ENTRY = 0x0048_F3BE
 OVERLAY_RUNTIME_BASE = 0x0079_4324
 
-SOURCE_SIZE = 2_061
+SOURCE_SIZE = 2_097
 SOURCE_SHA256 = (
-    "736e7ec228f9282ba5b093fd482441e6"
-    "e2017fff860d989dc3aadb2bdeff0fcb"
+    "dc8152b0c1e97808730eafef655d568b"
+    "7ece091559dc25dc2b02a4f62602cd94"
 )
 HEADER_SIZE = 2_537
 HEADER_SHA256 = (
@@ -164,51 +165,67 @@ TARGET_FLAGS = [
 PROFILE_PINS = {
     "apple-clang": {
         "compiler": "/usr/bin/clang",
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
-        "offset": 184_292,
-        "runtime": 0x007C_1308,
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "offset": 124_444,
+        "runtime": 0x007B_2940,
         "relocated": (
             "c838be0dfb478fe7fa03d9d71069a200"
             "a6477eb5783b631d7d977cd501475438"
         ),
         "overlay": (
-            429_058,
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+            360_578,
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
         ),
         "component": (
-            3_952_454,
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+            3_883_974,
+            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
+        ),
+        "core_overlay": (
+            360_578,
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+        ),
+        "core_component": (
+            3_883_974,
+            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
         ),
         "package": (
-            4_745_526,
-            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+            4_677_046,
+            "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
         ),
         "patch": (
             "23f3b9b8" + "00bf" * 19,
-            "1b395a30b511a1732cec3791c0c0e1306"
-            "eac8b3a5c9fb2c1ce3f92e6eaca2255",
+            "1b395a30b511a1732cec3791c0c0e130"
+            "6eac8b3a5c9fb2c1ce3f92e6eaca2255",
         ),
     },
     "linux-clang": {
         "compiler": "/home/linuxbrew/.linuxbrew/bin/clang",
         "version": "Homebrew clang version 22.1.8",
-        "offset": 186_016,
-        "runtime": 0x007C_19C4,
+        "offset": 126_264,
+        "runtime": 0x007B_305C,
         "relocated": (
             "a90a09f0f98c5b4cf7d885af34c914a"
             "e5d492ac7352b5e359ba68ad482cb3044"
         ),
         "overlay": (
-            212_664,
-            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+            152_912,
+            "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20",
         ),
         "component": (
-            3_736_060,
-            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+            3_676_308,
+            "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
+        ),
+        "core_overlay": (
+            145_314,
+            "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19",
+        ),
+        "core_component": (
+            3_668_710,
+            "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8",
         ),
         "package": (
-            4_529_116,
-            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+            4_469_364,
+            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
         ),
         "patch": (
             "23f347bc" + "00bf" * 19,
@@ -1025,7 +1042,7 @@ class NanopbCloseStringSubstreamProductionTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (975, 914, 406),
+            (2_440, 2_328, 1_871),
         )
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaves = [
@@ -1113,20 +1130,29 @@ class NanopbCloseStringSubstreamProductionTests(unittest.TestCase):
         }])
 
         output = Path(self.temporary.name) / "production-overlay"
+        stage_config = copy.deepcopy(config)
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = Path(self.temporary.name) / "core-stage-overlay.json"
+        stage_config_path.write_text(
+            json.dumps(stage_config, indent=2) + "\n", encoding="utf-8"
+        )
         report = self.apollo_overlay.build(
             root=ROOT,
-            config_path=OVERLAY,
+            config_path=stage_config_path,
             output_dir=output,
             clang=self.clang,
             toolchain_profile=self.profile,
         )
         self.assertEqual(
             (report["overlay"]["size"], report["overlay"]["sha256"]),
-            self.pins["overlay"],
+            self.pins["core_overlay"],
         )
         self.assertEqual(
             (report["component"]["size"], report["component"]["sha256"]),
-            self.pins["component"],
+            self.pins["core_component"],
         )
         extracted = next(
             item for item in report["relocated_leaves"]
@@ -1241,7 +1267,7 @@ class NanopbCloseStringSubstreamProductionTests(unittest.TestCase):
             "file_offset": 3_647_876,
             "size": 16,
             "target": "apollo510b_internal_mram",
-            "target_address": 0x007C_132C,
+            "target_address": 0x007B_2964,
             "address_status": "source_compiled",
             "output": (
                 "apollo510b/main-source-littlefs-file-rewind-private-"

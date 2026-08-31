@@ -27,6 +27,10 @@ STATUSES = (
     "hardware-dependent",
     "proprietary-blocked",
 )
+STATUS_ALIASES = {
+    "authenticated donor retained / hardware-deferred": "proprietary-blocked",
+    "external-provider/proprietary-blocked": "proprietary-blocked",
+}
 
 
 def markdown_fields(line: str) -> list[str]:
@@ -45,6 +49,8 @@ def detailed_counts(text: str, domain: str) -> Counter[str]:
         if len(fields) < 2 or fields[1] == "Gap status":
             continue
         matches = [status for status in STATUSES if fields[1].startswith(status)]
+        if fields[1] in STATUS_ALIASES:
+            matches = [STATUS_ALIASES[fields[1]]]
         if len(matches) != 1:
             raise AssertionError(
                 f"{domain} capability has an uncounted status: {fields[1]!r}"

@@ -117,6 +117,15 @@ COMMON_FLAGS = [
     "-Wextra",
     "-Werror",
 ]
+HERMETIC_FLAG_PREFIX = [
+    "--no-default-config",
+    "-nostdinc",
+    "-isystem",
+    (
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/"
+        "XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+    ),
+]
 BOOT_FLAGS = [
     "-mcpu=cortex-m55",
     "-mthumb",
@@ -147,16 +156,20 @@ PROFILES = {
         "config": MAIN_CONFIG,
         "target": "thumbv7em-none-eabi",
         "flags": COMMON_FLAGS,
+        "reported_flags": [*HERMETIC_FLAG_PREFIX, *COMMON_FLAGS],
         "alignment": 4,
         "overlay_name": "apollo_core_overlay.bin",
         "component_name": "ota_s200_firmware_ota.bin",
-        "overlay_size": 429058,
+        "overlay_size": 360578,
         "overlay_sha256": (
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
         ),
-        "component_size": 3952454,
+        "component_size": 3883974,
         "component_sha256": (
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
+        ),
+        "expected_component_sha256": (
+            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
         ),
         "overlay_base": 0x00794324,
         "provider_offset": 108456,
@@ -176,10 +189,10 @@ PROFILES = {
             "2d689313cd12e5c8d5155c7b4ba3202"
         ),
         "current_layout_rollback_sha256": (
-            "95f4b7721a8d64ebb54c6ffd1ae2ece615d9a3d5b5dd8a377a1c8beabbb8a595"
+            "521e1eebd826864d51f30cea580478c957b38d04f60fa6d08d1ba5865cdfe958"
         ),
         "historical_tail_size": 22,
-        "historical_tail_offset": 173580,
+        "historical_tail_offset": 113732,
         "later_lookahead_patch": {
             "offset": 602390,
             "size": 56,
@@ -353,8 +366,8 @@ PROFILES = {
             "size": 128,
         },
         "major": {
-            "offset": 173580,
-            "address": 0x007BE930,
+            "offset": 113732,
+            "address": 0x007AFF68,
             "sha256": (
                 "cffc852c2243f51e8a52543b4f2410b1"
                 "92e2365c25f161cfd12f69cae8544122"
@@ -363,8 +376,8 @@ PROFILES = {
             "padding_before": 0,
         },
         "minor": {
-            "offset": 173592,
-            "address": 0x007BE93C,
+            "offset": 113744,
+            "address": 0x007AFF74,
             "sha256": (
                 "e0494044bcf077ed5b67a33cf3eb526b"
                 "b9b8b6f31dcfefb5ce347a197b100012"
@@ -397,11 +410,11 @@ PROFILES = {
             },
         },
         "accounting": {
-            "generated_patch_site_bytes": 409_066,
+            "generated_patch_site_bytes": 397_446,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_111_914,
-            "replaced_stock_function_bytes": 409_246,
-            "source_owned_bytes": 431_334,
+            "opaque_base_bytes": 3_123_534,
+            "replaced_stock_function_bytes": 397_626,
+            "source_owned_bytes": 362_962,
             "source_owned_in_place_bytes": 184,
         },
     },
@@ -409,6 +422,7 @@ PROFILES = {
         "config": BOOT_CONFIG,
         "target": "arm-none-eabi",
         "flags": BOOT_FLAGS,
+        "reported_flags": [*HERMETIC_FLAG_PREFIX, *BOOT_FLAGS],
         "alignment": 2,
         "overlay_name": "bootloader_core_overlay.bin",
         "component_name": "ota_s200_bootloader.bin",
@@ -418,7 +432,7 @@ PROFILES = {
         ),
         "component_size": 163840,
         "component_sha256": (
-            "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
+            "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad"
         ),
         "overlay_base": 0x00434478,
         "provider_offset": 24,
@@ -434,7 +448,7 @@ PROFILES = {
             "a2f2477f95c965da47d1e29c4d2d8247"
         ),
         "current_layout_rollback_sha256": (
-            "83660259f4bf9f5cb2aa12957f5b97048ae19402d81fba5f5ff07f77a39778c1"
+            "f6f1d6fde410f509081ac36d7bdf17184364713593e0f6abd03e9308d6563f59"
         ),
         "historical_tail_size": 20,
         "later_lookahead_patch": {
@@ -494,11 +508,11 @@ PROFILES = {
         "accounting": {
             "generated_alignment_bytes": 16,
             "generated_isolated_alignment_bytes": 0,
-            "generated_patch_site_bytes": 16_528,
+            "generated_patch_site_bytes": 16_474,
             "generated_relocated_alignment_bytes": 15,
             "generated_stock_to_overlay_alignment_bytes": 1,
-            "opaque_base_bytes": 121_427,
-            "source_owned_bytes": 25_869,
+            "opaque_base_bytes": 119_425,
+            "source_owned_bytes": 27_925,
         },
     },
 }
@@ -664,9 +678,19 @@ class RuntimeLittlefsDiskVersionPartsTests(unittest.TestCase):
             cls.objects[profile_name] = object_path
 
         cls.builds = {}
+        stage_config = json.loads(MAIN_CONFIG.read_text(encoding="utf-8"))
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = temporary / "main-stage-overlay.json"
+        stage_config_path.write_text(
+            json.dumps(stage_config, indent=2) + "\n",
+            encoding="utf-8",
+        )
         cls.builds["main"] = apollo_overlay.build(
             root=ROOT,
-            config_path=MAIN_CONFIG,
+            config_path=stage_config_path,
             output_dir=temporary / "main-build",
             clang=os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
         )
@@ -1086,7 +1110,10 @@ class RuntimeLittlefsDiskVersionPartsTests(unittest.TestCase):
                     "overlay_size": profile["overlay_size"],
                     "overlay_sha256": profile["overlay_sha256"],
                     "component_size": profile["component_size"],
-                    "component_sha256": profile["component_sha256"],
+                    "component_sha256": profile.get(
+                        "expected_component_sha256",
+                        profile["component_sha256"],
+                    ),
                 },
             )
 
@@ -1255,7 +1282,7 @@ class RuntimeLittlefsDiskVersionPartsTests(unittest.TestCase):
                 )
                 self.assertEqual(
                     leaf["toolchain"]["flags"],
-                    profile["flags"],
+                    profile["reported_flags"],
                 )
 
             old_size = profile["old_overlay_size"]

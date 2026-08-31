@@ -22,28 +22,28 @@ CLOSURE = ROOT / "tools/manifests/g2-efs-service-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-efs-service-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "2d0eebd09ece2500d5bd6c915768b5d393e4416b76b49a88758b961a8268c106",
-    CLOSURE: "e24e7f7cf199e8f1f1f0df801a957f613eb6a4bb10bd674a96faeb3ce3ca55ce",
+    CLOSURE: "4439eeeac75455f1b1c709b994627216e8e0b25c1173647a0e4a4b0b98497b36",
     PROVENANCE: "0be68aa8a51bde606eb415f35e7ee073bdf0b9843c367b22025cb50a7d8e4496",
 }
 SOURCE = ROOT / "components/apollo_main/core_overlay/efs_service.c"
 OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
-SOURCE_SIZE = 29572
-SOURCE_SHA256 = "3d55fce653ac9697366af64aec4167a0455e613bf00a3ab37d03d2bc7d3eee98"
+SOURCE_SIZE = 29563
+SOURCE_SHA256 = "df18380b86c20b027c8f5a1aae266d8e6f0c9b52705ed8c02cd5cadecf315959"
 PRODUCTION_LEAVES = (
-    ("_evenEfsReplyToAPP", 30, 276696, 1),
-    ("_fileCaculateCRC", 162, 276728, 6),
-    ("_efsFileCmdParse", 944, 276892, 20),
-    ("_efsFileRawDataParse", 464, 277836, 7),
-    ("_efsExportFileParse", 944, 278300, 23),
-    ("EFS_FrameDispatch", 82, 279244, 3),
-    ("EFS_NotifyStatus4", 46, 279328, 1),
-    ("EFS_NotifyStatus2", 46, 279376, 1),
-    ("EFS_NotifyStatus5", 46, 279424, 1),
-    ("EFS_TransferActive", 18, 279472, 0),
-    ("EFS_ServiceInit", 18, 279492, 1),
-    ("EFS_CancelExport", 136, 279512, 4),
+    ("_evenEfsReplyToAPP", 30, 216848, 1),
+    ("_fileCaculateCRC", 162, 216880, 6),
+    ("_efsFileCmdParse", 944, 217044, 20),
+    ("_efsFileRawDataParse", 464, 217988, 7),
+    ("_efsExportFileParse", 944, 218452, 23),
+    ("EFS_FrameDispatch", 82, 219396, 3),
+    ("EFS_NotifyStatus4", 46, 219480, 1),
+    ("EFS_NotifyStatus2", 46, 219528, 1),
+    ("EFS_NotifyStatus5", 46, 219576, 1),
+    ("EFS_TransferActive", 18, 219624, 0),
+    ("EFS_ServiceInit", 18, 219644, 1),
+    ("EFS_CancelExport", 136, 219664, 4),
 )
 PHYSICAL = (0x00456722, 0x00458DF0)
 PHYSICAL_SHA256 = "22a070bb00d0a5555c5a1867804a1fe89678350777c9f3e42258bc7953473175"
@@ -359,14 +359,13 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "alignment_bytes": 16, "strict_relocations": 68,
             "stock_replaced_bytes": 9276, "retained_gap_pool_bytes": 658,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "An authorized responsive G2 peer and writable/readable EFS media "
-                "are required for future qualification for live whitelist import, Android JSON "
-                "consumption, arbitrary-file import, logger/trace export, 4 KiB "
-                "streaming, cancellation, CRC/size failure, disconnect, and resume "
-                "evidence; the authorized right temple is not under test because qualification is deferred by project direction and the left "
-                "temple must remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification "
+                "requires an authorized G2 pair and either a component-specific writable/readable "
+                "EFS-media fixture or an authenticated golden EFS capture covering whitelist import, "
+                "Android JSON consumption, arbitrary-file import, logger/trace export, 4 KiB streaming, "
+                "cancellation, CRC/size failure, disconnect, and resume"
             ),
         },
     }

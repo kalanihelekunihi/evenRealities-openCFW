@@ -2,8 +2,9 @@
 
 Status: family, QP/C 6.5.1, compiler, portable bodies, QK SWI port, and complete
 cluster ownership proven. The exact official GPL-3.0-or-later portable sources
-and recovered EM9305 configuration are now maintained and host-compile clean;
-target replacement remains blocked by an unavailable reviewed ARC compiler.
+and recovered EM9305 configuration are maintained, ARCv2-EM compiled, and
+relocatably linked with an OpenCFW port. Target replacement remains blocked by
+unresolved install placement/redirect records and physical evidence.
 
 ## Result
 
@@ -402,6 +403,7 @@ python3 tools/compare_em9305_sdk_archive.py \
   --archive /path/to/lib_QPC.a --archive-kind qpc \
   --binutils-dir /path/to/arc-linux-gnu/bin --json
 python3 -m unittest tests.test_analyze_em9305_qpc
+make em9305-qpc-component
 ```
 
 Primary references:
@@ -421,7 +423,7 @@ Primary references:
    closure.
 3. Use the exact MetaWare T-2022.09 object fingerprint as the compiler baseline
    while reconstructing or cutting forward the vendor ARC libraries.
-4. Keep ARC CPU port, ROM calls, radio/WSF glue, startup, flash records, and
-   vendor customizations separate from portable QP source.
+4. Keep ROM calls, radio/WSF glue, flash records, and vendor customizations
+   separate from the now-target-linked portable QP/OpenCFW port component.
 5. Review the applicable historical QP license or commercial-license status
    before any source is linked into a controller image.

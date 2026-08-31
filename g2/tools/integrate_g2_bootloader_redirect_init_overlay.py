@@ -977,9 +977,9 @@ def new_region(contract_region: dict[str, Any]) -> dict[str, Any]:
             "bootloader_hw_shutdown_422fde_source_in_place",
             "Compiled clean-room G2 per-instance register-quiesce and hardware-shutdown service at its authenticated stock address",
         ),
-        "opaque_before_open_cfw_bootloader_hw_fifo_read_4232c8_source_in_place": (
-            "bootloader_hw_initializer_42308e_opaque",
-            "Authenticated retained per-instance hardware initializer between the source-owned shutdown and FIFO services",
+        "open_cfw_bootloader_hw_initializer_42308e_source_in_place": (
+            "bootloader_hw_initializer_42308e_source_in_place",
+            "Compiled clean-room G2 per-instance hardware initializer at its authenticated stock address",
         ),
         "open_cfw_bootloader_hw_fifo_read_4232c8_source_in_place": (
             "bootloader_hw_fifo_read_4232c8_source_in_place",
@@ -1169,6 +1169,10 @@ def new_region(contract_region: dict[str, Any]) -> dict[str, Any]:
             "bootloader_mspi_sched_hiprio_4240aa_source_in_place",
             "Compiled AmbiqSuite-compatible G2 MSPI high-priority scheduler at its authenticated stock address",
         ),
+        "opaque_before_open_cfw_bootloader_mspi_piomixed_configure_42488e_source_in_place": (
+            "bootloader_mspi_device_configure_unreachable_tail_42423c_42488e_official",
+            "Authenticated unreachable stock tail after the source-owned MSPI device-configuration return",
+        ),
         "open_cfw_bootloader_mspi_device_configure_424120_source_in_place": (
             "bootloader_mspi_device_configure_424120_source_in_place",
             "Compiled AmbiqSuite-compatible G2 MSPI device-mode configuration service at its authenticated stock address",
@@ -1217,17 +1221,25 @@ def new_region(contract_region: dict[str, Any]) -> dict[str, Any]:
             "bootloader_mspi_device_configure_public_424be4_source_in_place",
             "Compiled AmbiqSuite-compatible G2 public MSPI device-configuration service at its authenticated stock address",
         ),
+        "opaque_before_open_cfw_bootloader_mspi_enable_425066_source_in_place": (
+            "bootloader_mspi_device_configure_public_unreachable_tail_424e84_425066_official",
+            "Authenticated unreachable stock tail after the source-owned public MSPI device-configuration return",
+        ),
         "open_cfw_bootloader_mspi_enable_425066_source_in_place": (
             "bootloader_mspi_enable_425066_source_in_place",
             "Compiled AmbiqSuite-compatible G2 MSPI enable service at its authenticated stock address",
+        ),
+        "opaque_before_open_cfw_bootloader_mspi_disable_4250f0_source_in_place": (
+            "bootloader_mspi_enable_unreachable_tail_4250e6_4250f0_official",
+            "Authenticated unreachable stock tail after the source-owned MSPI enable return",
         ),
         "open_cfw_bootloader_mspi_disable_4250f0_source_in_place": (
             "bootloader_mspi_disable_4250f0_source_in_place",
             "Compiled AmbiqSuite-compatible G2 MSPI disable service at its authenticated stock address",
         ),
         "opaque_before_open_cfw_bootloader_mspi_deinitialize_42516c_source_in_place": (
-            "bootloader_mspi_lifecycle_alignment_425166_opaque",
-            "Authenticated alignment and lifecycle literal bytes before MSPI deinitialize",
+            "bootloader_mspi_disable_tail_and_lifecycle_alignment_425160_opaque",
+            "Authenticated unreachable disable tail plus alignment and lifecycle literal bytes before MSPI deinitialize",
         ),
         "open_cfw_bootloader_mspi_deinitialize_42516c_source_in_place": (
             "bootloader_mspi_deinitialize_42516c_source_in_place",
@@ -1286,8 +1298,8 @@ def new_region(contract_region: dict[str, Any]) -> dict[str, Any]:
             "Authenticated subsequent bootloader compatibility bytes retained after the source-owned qsort runtime and before the AmbiqSuite MSPI interrupt-clear leaf",
         ),
         "opaque_before_open_cfw_bootloader_mspi_dummy_callback_424976_source_in_place": (
-            "bootloader_mspi_device_configure_424120_424976_official",
-            "Authenticated retained official MSPI device-configuration and PIO-mixed bodies before the source-owned no-op callback",
+            "bootloader_mspi_piomixed_configure_unreachable_tail_4248e2_424976_official",
+            "Authenticated unreachable stock tail after the source-owned MSPI PIO-mixed configuration return",
         ),
         "open_cfw_bootloader_easylogger_driver_output_41b854_source_leaf": (
             "bootloader_easylogger_driver_output_41b854_source_leaf",

@@ -1,0 +1,52 @@
+{
+  "schema": "open-cfw-g2-freetype-pshinter-function-map-v1",
+  "analyzer": "tools/analyze_g2_freetype_pshinter_function_map.py",
+  "status": "fail-closed-pshinter-function-map",
+  "selected_module": "pshinter",
+  "selection": {
+    "pshinter": {"source_backed_functions": 67, "source_backed_bytes": 8480, "direct_callback_targets": 18},
+    "psaux": {"source_backed_functions": 57, "source_backed_bytes": 7114},
+    "psnames": {"source_backed_functions": 7, "source_backed_bytes": 1010},
+    "smooth-raster": {"source_backed_functions": 0, "source_backed_bytes": 0, "direct_callback_targets": 7}
+  },
+  "anchors": {
+    "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "ghidra_functions_sha256": "9fd9c1c34e17abb977f2ccb32a931d9b96743db2db10707de19bf9ea6ae42662",
+    "module_class": "0x00758A3C",
+    "module_name_address": "0x0078BCD8",
+    "module_interface": "0x0078BCE4",
+    "nested_function_table": "0x005D948C",
+    "freetype_commit": "86bc8a95056c97a810986434a3f268cbe67f2902"
+  },
+  "scope": {
+    "start": "0x005D70A4",
+    "end_exclusive": "0x005D94C0",
+    "bytes": 9244,
+    "ghidra_recognized_functions": 67,
+    "ghidra_recognized_body_bytes": 8480,
+    "residual_intervals": 2,
+    "residual_physical_bytes": 56,
+    "callable_code_bytes": 0,
+    "category_bytes": {"literal-constant-pool": 4, "function-pointer-table": 52},
+    "unclassified_bytes": 0
+  },
+  "confidence": {
+    "exact": {"functions": 0, "bytes": 0},
+    "high": {"functions": 18, "bytes": 1554},
+    "medium": {"functions": 61, "bytes": 7634},
+    "mapped_total": {"functions": 79, "bytes": 9188},
+    "unresolved_code": {"functions": 0, "bytes": 0, "source_identities_complete": true}
+  },
+  "movement": {
+    "retained_census_promoted_to_high": {"functions": 6, "bytes": 846},
+    "retained_census_medium": {"functions": 61, "bytes": 7634},
+    "recovered_direct_callbacks": {"functions": 12, "bytes": 708},
+    "new_beyond_closed_census": {"functions": 12, "bytes": 708}
+  },
+  "mapping_sha256": "3500e37b490b460e6bf8e5ab1b1e916c787ebafa40a972ff63693de293b1ce90",
+  "records_are_emitted_by_analyzer": true,
+  "compiler_byte_identity_claimed": false,
+  "binary_overlay_ready": false,
+  "production_routed": false,
+  "hardware_operations": false
+}

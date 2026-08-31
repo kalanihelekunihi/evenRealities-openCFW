@@ -1,5 +1,10 @@
 # IAR DLIB formatted-I/O bounded audit
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Scope: official G2 `2.2.6.10` Apollo-main image. Status: bounded audit
 complete for all twelve `iar-dlib` formatted-I/O cluster units. The
 production-reachable non-secure formatted-input and formatted-output routes
@@ -303,7 +308,7 @@ and an undefined name in `map_tsv`) that prevented its fail-closed checks
 from executing at all; every pin it now enforces is unchanged.
 
 Machine-readable output:
-[`tools/manifests/g2-iar-dlib-format-io-map.tsv`](../tools/manifests/g2-iar-dlib-format-io-map.tsv)
+[`tools/manifests/g2-iar-dlib-format-io-map.tsv`](../../tools/manifests/g2-iar-dlib-format-io-map.tsv)
 — per-unit span, size, digest, instruction/BLX census, ingress census,
 string references, and provider decision.
 

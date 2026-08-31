@@ -64,9 +64,9 @@ class TouchSourceImageTests(unittest.TestCase):
             "touch-source-image-summary.json").read_text())
         self.assertFalse(summary["production_routed"])
         self.assertEqual(summary["hardware_validation"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
         self.assertEqual(summary["hardware_blocker"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
 
 
 if __name__ == "__main__":

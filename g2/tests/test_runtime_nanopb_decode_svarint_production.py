@@ -102,9 +102,9 @@ CALLEE_STOCK_SHA256 = (
 )
 
 SOURCE_PIN = (
-    1_943,
-    "f361cafc8813257e16fafb9ee986c88c"
-    "632eb2c7edc604dcb02e27ec85a7df4d",
+    1_979,
+    "ba5af6eef7a0cac0a77dc20dc7cc89c"
+    "4940f7bce696d8fa7ca462deb12132099",
 )
 HEADER_PIN = (
     1_789,
@@ -112,9 +112,9 @@ HEADER_PIN = (
     "84eeeba2eba2a42091cd040d5222e72c",
 )
 PRODUCTION_VARINT_SOURCE_PIN = (
-    2_224,
-    "b1de68b98ee043bd07d1e10706166a13b"
-    "13693534e382705bbad6866411fbe05",
+    2_260,
+    "234f92e37ddf7ab7716c5975c26acdc8"
+    "ec619ff309dd03fb421bd18aa09e35c2",
 )
 PRODUCTION_VARINT_HEADER_PIN = (
     2_574,
@@ -138,12 +138,12 @@ CONFIG_PIN = (
     "f3aab5cd3c29d8de65c4db301c62899db",
 )
 PROVENANCE_PIN = (
-    125_493,
-    "c1bbb7d80e38a1ab18e7c71c03b89a891090509949e45a4db0f3224a927a1a99",
+    135_337,
+    "2ff90b1c90d77df983dd36b0f114011a9e635db99dd5d4e379e55407ea978e6a",
 )
 VERIFIER_PIN = (
-    233_514,
-    "8f24bbf9f4c8cf7d0c0b75bca804284f81d4222fa9feebb966b4e7aea599596e",
+    231_914,
+    "7019062b33c569462fcaed75046055f09e61ea011837242fe6d2bef19774bce2",
 )
 
 TARGET_FLAGS = (
@@ -166,7 +166,7 @@ TARGET_FLAGS = (
     "-fno-ident",
 )
 APPLE_CLANG = "/usr/bin/clang"
-APPLE_CLANG_VERSION = "Apple clang version 21.0.0 (clang-2100.3.30.1)"
+APPLE_CLANG_VERSION = "Apple clang version 21.0.0 (clang-2100.3.33.1)"
 LINUX_CLANG = "/home/linuxbrew/.linuxbrew/bin/clang"
 LINUX_CLANG_VERSION = "Homebrew clang version 22.1.8"
 LINUX_SOURCE_ROOT = Path("/Users/kalani/Repo/SybilSightABCD/openCFW")
@@ -205,10 +205,10 @@ LINUX_RELOCATED_SHA256 = (
     "8b77644c131e180db2e682d32fbc1fab"
 )
 LINUX_TARGET_ALIGNMENT = 4
-LINUX_RUNTIME = 0x007C_1BA4
+LINUX_RUNTIME = 0x007B_323C
 LINUX_PLACEMENT = LINUX_RUNTIME - OVERLAY_RUNTIME_ADDRESS
-APPLE_PLACEMENT = 184_764
-APPLE_RUNTIME = 0x007C_14E0
+APPLE_PLACEMENT = 124_916
+APPLE_RUNTIME = 0x007B_2B18
 APPLE_RELOCATED_SHA256 = (
     "1b181a82adbbb72dc6fc09b1b70dd48f"
     "4c0eefdf25a8c4e71701710cb12dae3f"
@@ -231,32 +231,32 @@ LINUX_PATCH_SHA256 = (
 )
 LINUX_AGGREGATE = {
     "overlay": (
-        212_664,
-        "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+        152_912,
+        "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20",
     ),
     "component": (
-        3_736_060,
-        "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+        3_676_308,
+        "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
     ),
     "package": (
-        4_529_116,
-        "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+        4_469_364,
+        "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
     ),
 }
 
 STAGED_CONSUMER_PINS = {
-    MANIFEST: "b5ce5592b4ba7c2e1d0c68edd4ecc1aee45141353356b284e3830659fad03d39",
-    PROVENANCE: "c1bbb7d80e38a1ab18e7c71c03b89a891090509949e45a4db0f3224a927a1a99",
+    MANIFEST: "aa9c0b71cab15191d05e071a2b88fa48e08235cc14542520b7ef20f96619a1dc",
+    PROVENANCE: "2ff90b1c90d77df983dd36b0f114011a9e635db99dd5d4e379e55407ea978e6a",
     AUDIT: "b483e5b1915f54e99e8aefd047ece54153aadc6df4af51cdc4ef1cf81cc983d0",
-    ROOT / "README.md": "3ed6f89765ba6d29c18e316f4d97aef91cc79105453a236e0987c077c055df6e",
-    ROOT / "components/README.md": "a56e17276ef67bd063ba193a55d3c8ec7e524f09bde184b2b8f9420f0f3ebbf9",
-    ROOT / "components/apollo_main/core_overlay/NOTICE.md": "139b2e7eeabb002c771d075d980f02e6bb5dd948b6cb9db7f12b97e64daf383a",
-    ROOT / "components/apollo_main/core_overlay/EVIDENCE.md": "b989b422586b2860a33670eb7642c3721e1d96fa545bafcc2111b05a0c121b31",
+    ROOT / "README.md": "53b077f05138e85c0bc0702ce3a2b83a1211027c34b37b404999f30ad90d46d1",
+    ROOT / "components/README.md": "13ef290eaab8a5e753fe4b5690ca3388e29dbea5aa7be6ad2ad5f085d45ad4a5",
+    ROOT / "components/apollo_main/core_overlay/NOTICE.md": "760703c1fe85c3a2a6302b7b2dd6091d92a7f876a320feca778462698da9173d",
+    ROOT / "components/apollo_main/core_overlay/EVIDENCE.md": "d7ed450d36ea1fa2db9c8d97afaf173fb23a82d8db93865e1e619bb82dbbaadc",
     ROOT / "third_party/nanopb/README.openCFW.md": "bd70ff8d92c38cad8bde2a4356f7d56f9b02994239ff09453f2f435b44fdb672",
-    ROOT / "docs/memory-map.md": "6087dd8bd48a764e15e623b56298c16e40992a6aa3cd445319bff308d078f859",
-    ROOT / "docs/source-coverage.md": "80d83ac187e1aa99d18e30350ea609f2ea7035801124ca22977b436a9bc119ee",
-    ROOT / "docs/upstream-inventory.md": "f9ad283c729e6ae136ab6846d9d6134ff16e4280d3019f6deb2c3b83921c73e9",
-    ROOT / "docs/linux-reproducible-build.md": "42a08943723dfb9c1a531601469a94dc15320286c44f0aa8c55d42c05c1156c3",
+    ROOT / "docs/memory-map.md": "36321d9578acb17c8e2051e5196b493a5e4775db2c2b70df6d802101082017d8",
+    ROOT / "docs/source-coverage.md": "42c8481fbd55d56db9e691429107a3bc4ba4f014539e826c1106618230379457",
+    ROOT / "docs/upstream-inventory.md": "0c8981e78a75f9ae252b63407cf92395845ba5140d6b27925e86bab603c0d76c",
+    ROOT / "docs/linux-reproducible-build.md": "dc65dbc0f7b382ed6f3b1e99ff51fe14ade1de61e3f328d018f7aa8a6b20c687",
 }
 
 
@@ -857,7 +857,7 @@ class NanopbDecodeSvarintProductionTests(unittest.TestCase):
                 len(overlay["patch_sites"]),
                 len(overlay["relocated_leaves"]),
             ),
-            (975, 914, 406),
+            (2440, 2328, 1871),
         )
 
         self.assertEqual(overlay["functions"].count(PRODUCTION_FUNCTION), 1)

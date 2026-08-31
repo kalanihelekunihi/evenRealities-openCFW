@@ -1,5 +1,10 @@
 # G2 bootloader MX25U25643G ready-poll source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated polling cluster `[0x004207A2,0x00420800)` now
 routes to maintained clean-room C. The 82-byte two-phase poll has SHA-256
 `b5d741edee4dcb847a20256e315ae4304b07a43e02ef189da8c6a36ff0f9e809`;

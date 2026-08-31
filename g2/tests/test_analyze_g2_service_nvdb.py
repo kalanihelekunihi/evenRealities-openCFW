@@ -70,7 +70,7 @@ class G2ServiceNvdbTests(unittest.TestCase):
             (514, 4, 11, 930, 122),
         )
         self.assertFalse(production["destructive_default_reset_enabled"])
-        self.assertIn("deferred by project direction", production["hardware_validation"])
+        self.assertIn("blocked by unavailable physical evidence", production["hardware_validation"])
 
 
 if __name__ == "__main__":

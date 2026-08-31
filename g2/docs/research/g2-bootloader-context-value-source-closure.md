@@ -1,5 +1,10 @@
 # G2 bootloader critical-context value-dispatch source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Status: software implemented and production-routed; physical validation blocked.
 
 The complete 22-byte entry `[0x004160E8,0x004160FE)` has SHA-256

@@ -38,8 +38,8 @@ LICENSE = AMBIQ_ROOT / "LICENSE"
 CMSIS_CORE = ROOT / "third_party/cmsis-core/CMSIS/Core/Include"
 
 FILE_PINS = {
-    PRODUCTION_SOURCE: (2466, "3594fe14cc673e58032785ab9f5fbacb0479db9d0187b7b49610734fdbe31f48"),
-    READ_SOURCE: (4381, "d82f43ac56e65dd0cd4072828a6566d3ec6cc34008572704f26d1d72f9efc274"),
+    PRODUCTION_SOURCE: (2453, "ac84e4c6682c40daa26cd6f97d4733db9da2ace466887c4c10dd8a753ec0bc60"),
+    READ_SOURCE: (4368, "cfd23d4bd17f71473ad47155f64e659ae6eea0f08be614a2534005725df32e8b"),
     CENSUS: (2401, "f5bc20c18c35157037b5f4ea1b2438686940f9b6f46316d459c554e469c41070"),
     BOUNDARY: (1757, "5ee3b81deb6b434ba0b446f741fb66ee9745b6b60d9c5c6b94dc3f6674944ecf"),
     HEADER: (2404, "b0af55fe72697e234fce3ca70c48006638630f0b2e24190b836d896ce4da433d"),
@@ -318,7 +318,7 @@ def audit() -> dict:
 
     return {
         "component": "G2 bootloader Ambiq MSPI FIFO-write frontier",
-        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
+        "status": "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "stock": {
             "start": ENTRY, "end": 0x00423E8A, "bytes": 74,
             "sha256": SPANS["mspi_fifo_write"][2],
@@ -358,7 +358,7 @@ def audit() -> dict:
             "source_owned_bytes": component["source_owned_bytes"],
             "retained_official_bytes": component["opaque_base_bytes"],
         },
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_gate": {
             "required_future_evidence": "authorized G2 qualification exercising all four MSPI instances, FIFO writes, timeout polling, and cold boot",
         },
@@ -376,7 +376,7 @@ def main() -> int:
         print(json.dumps(report, indent=2, sort_keys=True))
     else:
         print("Bootloader MSPI FIFO-write 0x423e40: implemented in exact source")
-        print("  physical validation: deferred by project direction")
+        print("  physical validation: blocked by unavailable physical evidence")
         print("  locally proven source closure: 0x423e40 through 0x423f28")
     return 0
 

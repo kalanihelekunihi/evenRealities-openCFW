@@ -1,5 +1,10 @@
 # G2 bootloader MX25U25643G enter-four-byte-mode source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated function `[0x00420890,0x00420978)` is now routed
 to compilable clean-room C as
 `open_cfw_bootloader_mspi_enter_4byte_mode_420890`. The 232-byte stock body

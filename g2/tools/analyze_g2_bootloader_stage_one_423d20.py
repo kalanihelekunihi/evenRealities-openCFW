@@ -217,7 +217,7 @@ def audit() -> dict:
         entry = production[address]
         require(entry.get("source", {}).get("path")
                 == "components/bootloader/core_overlay/runtime_hw_control_services_423d20.c"
-                and entry.get("source", {}).get("license") == "GPL-3.0-or-later",
+                and entry.get("source", {}).get("license") == "MIT",
                 f"production stage-one provenance changed: {address:#x}")
         require(entry.get("stock", {}).get("sha256") == expected_hash
                 and entry.get("expected", {}).get("sha256") == expected_hash,
@@ -261,7 +261,7 @@ def main() -> int:
     else:
         print("Bootloader stage-one 0x423d20: exact isolated source candidate")
         print("  normalized target bytes: exact under both profiles")
-        print("  equivalent exact GPL source is already production-routed")
+        print("  equivalent exact MIT source is already production-routed")
         print("  two retained providers remain redistribution blockers")
     return 0
 

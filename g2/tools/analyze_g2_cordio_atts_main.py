@@ -35,7 +35,7 @@ SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 CANDIDATE_SOURCE_PATH = "components/shared/cordio/runtime_cordio_atts_main.c"
-CANDIDATE_PREVIOUS_OVERLAY_SIZE = 344484
+CANDIDATE_PREVIOUS_OVERLAY_SIZE = 276004
 CANDIDATE_FUNCTIONS = [
     "open_cfw_cordio_atts_data_callback",
     "open_cfw_cordio_atts_connection_callback",
@@ -56,12 +56,12 @@ CANDIDATE_FUNCTIONS = [
     "open_cfw_cordio_atts_remove_group",
 ]
 CANDIDATE_LEAF_METRICS = [
-    (344484, 230, 3), (344716, 146, 9), (344864, 60, 2),
-    (344924, 14, 0), (344940, 62, 2), (345004, 38, 2),
-    (345044, 82, 2), (345128, 276, 3), (345404, 234, 5),
-    (345640, 128, 0), (345768, 38, 1), (345808, 36, 1),
-    (345844, 182, 0), (346028, 38, 1), (346076, 848, 5),
-    (346924, 110, 4), (347036, 100, 4),
+    (276004, 230, 3), (276236, 146, 9), (276384, 60, 2),
+    (276444, 14, 0), (276460, 62, 2), (276524, 38, 2),
+    (276564, 82, 2), (276648, 276, 3), (276924, 234, 5),
+    (277160, 128, 0), (277288, 38, 1), (277328, 36, 1),
+    (277364, 182, 0), (277548, 38, 1), (277596, 848, 5),
+    (278444, 110, 4), (278556, 100, 4),
 ]
 
 FUNCTIONS = {
@@ -440,7 +440,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "source_only_public_helpers": SOURCE_ONLY,
             "r44_data_length_guards_preserved": True,
             "hardware_validation": (
-                "deferred by project direction; future qualification requires authorized responsive G2/ATT peer evidence"
+                "blocked by unavailable physical evidence; future qualification requires authorized responsive G2/ATT peer evidence"
             ),
         },
     }

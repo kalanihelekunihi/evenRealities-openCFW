@@ -30,13 +30,13 @@ FUNCTION_ADDRESS = 0x00434840
 FUNCTION_SIZE = 28
 FUNCTION_SHA256 = "27a66a6c870f14f8ff02ed06584fc60e5e6bb17274f13e4234314e5fcbb2ece1"
 SOURCE_PINS = {
-    SOURCE: (530, "ad02b1bb52b3ed3d55c6559ed02d80642b3c64c9a5442b0c975efaa297dd8f1a"),
-    HEADER: (324, "287d7f8677012fd40ee5f564de47a339e29b7ae78969504b51ea791b03010f59"),
+    SOURCE: (517, "5037899a1cd678676c100e6a57870bd44bd0e03a47217625ee0957a20c043e35"),
+    HEADER: (311, "4d176fb468d6e0cb488ea1b648c71f77771bcf3872eb97be981e983374fc7876"),
 }
 CALLERS = (0x00410738, 0x00411D0A, 0x00411D1E, 0x00411D42, 0x00411D54, 0x0042DA9A)
 OVERLAY = (15240, "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314")
-PROVIDER = (163840, "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0")
-LINUX_PROVIDER = (163824, "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635")
+PROVIDER = (163840, "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad")
+LINUX_PROVIDER = (163824, "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e")
 
 
 class AuditError(RuntimeError):
@@ -111,13 +111,13 @@ def audit() -> dict:
     require(isinstance(linux_package.get("expected_size"), int) and linux_package["expected_size"] > 0 and len(linux_package.get("expected_sha256", "")) == 64, "Linux package metadata is incomplete")
     return {
         "component": "G2 Apollo bootloader bounded byte comparison",
-        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
+        "status": "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "software_gap_count": 0,
         "stock": {"address": STOCK_ADDRESS, "size": STOCK_SIZE, "sha256": STOCK_SHA256, "whole_image_callers": len(CALLERS)},
         "source": {"function": FUNCTION, "address": FUNCTION_ADDRESS, "size": FUNCTION_SIZE, "sha256": FUNCTION_SHA256, "relocations": 0},
         "provider": {"size": PROVIDER[0], "sha256": PROVIDER[1], "source_owned_bytes": component["source_owned_bytes"], "retained_official_bytes": component["opaque_base_bytes"]},
         "deployment": {"apple_package": artifacts["package"], "linux_package": {"size": linux_package["expected_size"], "sha256": linux_package["expected_sha256"]}},
-        "hardware_block": {"physical_evidence_available": False, "required_evidence": "authorized responsive G2 right temple demonstrating boot progression through all comparison callers", "stock_bootloader_retained_for_hardware": True},
+        "hardware_block": {"physical_evidence_available": False, "required_evidence": "authorized G2 hardware demonstrating boot progression through all comparison callers", "stock_bootloader_retained_for_hardware": True},
         "safety": {"hardware_operations": [], "signing_performed": False, "flashing_performed": False},
     }
 
@@ -127,7 +127,7 @@ def main() -> int:
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
     report = audit()
-    print(json.dumps(report, indent=2, sort_keys=True) if args.json else f"Bootloader byte-comparison closure: {report['status']}\n  authenticated callers: {report['stock']['whole_image_callers']}\n  hardware operations: none; physical validation deferred by project direction")
+    print(json.dumps(report, indent=2, sort_keys=True) if args.json else f"Bootloader byte-comparison closure: {report['status']}\n  authenticated callers: {report['stock']['whole_image_callers']}\n  hardware operations: none; physical validation blocked by unavailable physical evidence")
     return 0
 
 

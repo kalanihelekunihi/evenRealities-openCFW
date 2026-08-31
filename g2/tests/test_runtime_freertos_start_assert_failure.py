@@ -27,8 +27,8 @@ FLAGS = [
 ]
 PINS = {
     "apple-clang": {
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
-        "object": (1044, "65422d757176176709a3675043043f9b86e73a847ef031e3427a7c9fe38d27c1"),
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "object": (1044, "c280bcff8209f3da27a339a120bce56a996f1c90c8fccf7e9e379b832f6f3557"),
     },
     "linux-clang": {
         "version": "Homebrew clang version 22.1.8",

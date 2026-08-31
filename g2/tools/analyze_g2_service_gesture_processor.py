@@ -22,7 +22,7 @@ CL = ROOT / "tools/manifests/g2-service-gesture-processor-closure.tsv"
 PV = ROOT / "tools/manifests/g2-service-gesture-processor-provenance.tsv"
 PINS = {
     FM: "9cba1744560a8e25c60baae07d8b636af0fae55f19c03194e5049f255333e1c2",
-    CL: "4b08fa1051dac7b6ded30deccd9168519d9ab4ce3bbbd8e9487158ae10b83468",
+    CL: "781ba37e4979b5f5f659f176625fcae78d4dcaf59d6f7eeee1d6173adc15276e",
     PV: "bd7d38a01eb33a3b0f08e894d8b02fe282a151c1338e56906670179f3d3298f8",
 }
 RETAINED = 'platform\\input\\service_gesture_processor.c'
@@ -49,13 +49,13 @@ PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/service_gesture_
 OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
 OVERLAY_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
-PRODUCTION_SOURCE_PIN = (13061, "c69b64097eef2fc592c4be97a1d7a9b0bad9a701544ecc18510ad7aab6c7db4c")
+PRODUCTION_SOURCE_PIN = (13052, "da9cf1e010d0d736c3782d59204993cf074d3d82105412e5fd40d90b8b1d9cc5")
 LEAF_PINS = {
-    "open_cfw_gesture_production_click": (118, "37d9a63d355aa9c451ff34958cbc0471ba93b6f3d78eaed2beeeb3e89dd2d033", 248660, "1a927d88a6295264f535e25a76ff34d32c63f3ba34fb3976e737b90eceb722af", 6, 0),
-    "open_cfw_gesture_get_proximity": (12, "4b5de0babb48e1a66b99f96e9decf025811db259bf84ce9b218d4fae69632b4d", 248780, "4b5de0babb48e1a66b99f96e9decf025811db259bf84ce9b218d4fae69632b4d", 0, 2),
-    "open_cfw_gesture_event_name": (14, "06d8bd8223342f79f986e0e2f8cfa030d14cac1d49f1f88d7e1480429a3902fa", 248792, "06d8bd8223342f79f986e0e2f8cfa030d14cac1d49f1f88d7e1480429a3902fa", 0, 0),
-    "open_cfw_gesture_format_mask": (586, "08f7ac2057cf30be8389d8e2a8ede4de74ea02d4f282136e3e2557acecfe0c76", 248808, "08f7ac2057cf30be8389d8e2a8ede4de74ea02d4f282136e3e2557acecfe0c76", 0, 2),
-    "open_cfw_gesture_process": (878, "5afdb5889656dc6b8cf0a4fb4dbd8e9b9c102936a2d5d6c6416bbff95ab6da95", 249396, "bb6df8074642bd52fd73485f4350ac7afe2b8be99da7e4b09861b4f558e65397", 47, 2),
+    "open_cfw_gesture_production_click": (118, "8d5df040247142cdc8888e431baeb7edd824a01ac17a1043d60df20dda4ad933", 188812, "1a927d88a6295264f535e25a76ff34d32c63f3ba34fb3976e737b90eceb722af", 6, 0),
+    "open_cfw_gesture_get_proximity": (12, "4b5de0babb48e1a66b99f96e9decf025811db259bf84ce9b218d4fae69632b4d", 188932, "4b5de0babb48e1a66b99f96e9decf025811db259bf84ce9b218d4fae69632b4d", 0, 2),
+    "open_cfw_gesture_event_name": (14, "06d8bd8223342f79f986e0e2f8cfa030d14cac1d49f1f88d7e1480429a3902fa", 188944, "06d8bd8223342f79f986e0e2f8cfa030d14cac1d49f1f88d7e1480429a3902fa", 0, 0),
+    "open_cfw_gesture_format_mask": (586, "08f7ac2057cf30be8389d8e2a8ede4de74ea02d4f282136e3e2557acecfe0c76", 188960, "08f7ac2057cf30be8389d8e2a8ede4de74ea02d4f282136e3e2557acecfe0c76", 0, 2),
+    "open_cfw_gesture_process": (878, "1f8f5af41a31b17ee71a36c0927dfca419eefc864002efb06efbe186bc8be438", 189548, "bb6df8074642bd52fd73485f4350ac7afe2b8be99da7e4b09861b4f558e65397", 47, 2),
 }
 PATCH_PINS = {
     "replace_gesture_production_click": (0x00502D56, 88, "b9c55e0c9d939dbff58ce1aa4ad91209f714c6435f4ff654e9e869aa921c71a8", "open_cfw_gesture_production_click"),
@@ -375,11 +375,11 @@ def analyze(image=IMAGE):
     main = manifest["component_overrides"]["apollo_main"]
     regions = {item.get("name"): item for item in main["regions"]}
     source_regions = {
-        "gesture_production_click_source_text": (3772056, 118, 0x007D0E78),
-        "gesture_get_proximity_source_text": (3772176, 12, 0x007D0EF0),
-        "gesture_event_name_source_text": (3772188, 14, 0x007D0EFC),
-        "gesture_format_mask_source_text": (3772204, 586, 0x007D0F0C),
-        "gesture_process_source_text": (3772792, 878, 0x007D1158),
+        "gesture_production_click_source_text": (3712208, 118, 0x007C24B0),
+        "gesture_get_proximity_source_text": (3712328, 12, 0x007C2528),
+        "gesture_event_name_source_text": (3712340, 14, 0x007C2534),
+        "gesture_format_mask_source_text": (3712356, 586, 0x007C2544),
+        "gesture_process_source_text": (3712944, 878, 0x007C2790),
     }
     for name, pin in source_regions.items():
         region = regions.get(name, {})
@@ -414,7 +414,7 @@ def analyze(image=IMAGE):
             "stock_replaced_bytes": 1346,
             "strict_relocations": 53,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
                 "Authorized physical G2 touch/proximity device or captured "
                 "gesture electrical/event/timing evidence is required for future qualification."

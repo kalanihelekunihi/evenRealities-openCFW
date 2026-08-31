@@ -9,8 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_pair_mgr.c"
 FIXTURE = ROOT / "tests/fixtures/pb_service_pair_mgr_host.c"
-SOURCE_SIZE = 27574
-SOURCE_SHA256 = "917a17e5c161a4a55a46fe4bb14a5b9a7b613b5db8e31dd4ee18f8ba4e53b0fe"
+SOURCE_SIZE = 27565
+SOURCE_SHA256 = "f1d4fbadb79d34d8bacd62f7d94221236279637d55d6d7fc4401e96111ec5b3e"
 SELECTORS = {
     "BUFFER_WRITE": "open_cfw_pb_service_pair_mgr_buffer_write",
     "RX_SEC_AUTH": "PB_RxSecAuth",

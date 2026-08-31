@@ -48,7 +48,7 @@ class MspiSoftResetTests(unittest.TestCase):
         self.assertEqual((len(body), hashlib.sha256(body).hexdigest()),
                          (116, "ec592b1db3c6c381036d5c69d065056547b69d870025dd08aef11f34c2b350f0"))
         self.assertEqual((SOURCE.stat().st_size, hashlib.sha256(SOURCE.read_bytes()).hexdigest()),
-                         (3305, "ebe83fc0c63dc78e6c165f308dfd331eaf9cdc0a171c036a564f581d55bd3b47"))
+                         (3292, "1e25ba1e07b0b582a9df2bef19325765d0998f1a38a3cc15a21cbcd0ec3b4ef9"))
 
     def test_command_delay_order_and_failure_only_logs(self) -> None:
         self.lib.open_cfw_bootloader_mspi_soft_reset_42052a()

@@ -80,7 +80,7 @@ class TinyFrameG2AtomicBoundaryCandidateTests(unittest.TestCase):
     def test_candidate_sources_are_exact(self):
         self.assertEqual(
             (SOURCE.stat().st_size, hashlib.sha256(SOURCE.read_bytes()).hexdigest()),
-            (3349, "295efb659b32e34a53cffe7bcd879960371607c45f32b2c95fb737acf1e476c0"),
+            (3340, "11acd7b47e02e2a8d9e7b032b583360b4136bbe4b24f418b54b660077aa3544f"),
         )
         self.assertEqual(
             (FIXTURE.stat().st_size, hashlib.sha256(FIXTURE.read_bytes()).hexdigest()),
@@ -248,11 +248,11 @@ class TinyFrameG2AtomicBoundaryCandidateTests(unittest.TestCase):
         main = manifest["component_overrides"]["apollo_main"]
         self.assertEqual(
             (main["provider"]["size"], main["provider"]["sha256"]),
-            (3952454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"),
+            (3883974, "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"),
         )
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4745526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"),
+            (4677046, "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"),
         )
         tinyframe_regions = [item for item in main["regions"]
                              if item["name"].startswith("apollo_tinyframe_")]

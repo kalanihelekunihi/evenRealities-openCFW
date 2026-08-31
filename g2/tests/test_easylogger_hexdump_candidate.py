@@ -169,12 +169,12 @@ LOCAL_PINS = {
         "355cf432ed8e8b7cab866cf9a925a20033fce59db444962bd85c01ad9bdf47cf",
     ),
     SEAMS_SOURCE: (
-        8_795,
-        "f9fe880e4d1f09b1120dbdd751680fd378818a779abd999d07ba26888fc1259b",
+        8_786,
+        "daad40c99513fe86172d947bdaf1a92b04033af8efb52c115468dabff46ae8ad",
     ),
     SEAMS_HEADER: (
-        1_809,
-        "c788ff6f9dc2071ae648acb5da6d58f65af6989894fa5797bd93bb7853462599",
+        1_800,
+        "638370dd873268a70ddc4511787e4e114b5a13097ac0bf4576f563f56eb42570",
     ),
     CANDIDATE_FIXTURE: (
         17_574,
@@ -185,12 +185,12 @@ LOCAL_PINS = {
         "f6614ba626a763f0464490312dc560dbddf5269c2a7b8a054a6a247d646ff27d",
     ),
     SEAMS_FIXTURE: (
-        7_327,
-        "a31ca118032e952f4b30b75c4a5b8808d84f9efc6bbd10afb9a392b83ac52dbf",
+        7_318,
+        "60992b984cb79fb4d58cac7abc929599cca518784ba6c71a64ff63e5bbf22f69",
     ),
     AUDIT: (
-        20_266,
-        "dce76c6e86350dccdbf3111f3ccfdc8e6abf2ce5f1b00313e9f9dff2d005b552",
+        20_257,
+        "149abc499a34cf53e477548c8e7eb29d7b6746621d431b8ef3f6970072e8fabb",
     ),
 }
 

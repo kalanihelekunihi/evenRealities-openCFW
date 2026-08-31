@@ -1,5 +1,10 @@
 # G2 bootloader hardware-control state-mapper source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The executable body at `[0x00423E14,0x00423E40)` is source-closed by
 `runtime_hw_control_state_423e14.c`. The maintained source is 1,273 bytes with
 SHA-256 `21490e33954cd21c82d5e1f15980de3d6ddab65057bc1b0e0d5de8d5e234167c`.

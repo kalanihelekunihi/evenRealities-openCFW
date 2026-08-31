@@ -210,7 +210,7 @@ def production_report(
         "source_owned_bytes_added": 2_276,
         "stock_bytes_replaced": sum(end - start for _, start, end, _ in linked),
         "hardware_validation": (
-            "deferred by project direction; future qualification requires authorized G2/EM9305 Secure Connections "
+            "blocked by unavailable physical evidence; future qualification requires authorized G2/EM9305 Secure Connections "
             "pairing, numeric comparison, passkey/key-press, OOB, F4/G2/F5/F6, "
             "DH-key, cancellation, and interoperability physical evidence"
         ),

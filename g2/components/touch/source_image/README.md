@@ -18,5 +18,5 @@ python3 components/touch/source_image/build_image.py
 ```
 
 The summary explicitly reports `production_routed: false` and
-`hardware_validation: deferred by project direction` while this phase remains
+`hardware_validation: blocked by unavailable physical evidence` while this phase remains
 software-only. Board qualification is a separate pre-release activity.

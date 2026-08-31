@@ -32,12 +32,12 @@ FUNCTION_ADDRESS = 0x004348C4
 FUNCTION_SIZE = 12
 FUNCTION_SHA256 = "99c0589d704d517cb23105abaa50664dab79efb3911235140a2c3fe492283c31"
 SOURCE_PINS = {
-    SOURCE: (403, "a12a2a4a9e9f3f94a18b07748b3f361e4a68e52eab080381d8e5e14e36480a23"),
-    HEADER: (242, "819aad6ad493f7d849136714c83ad9ce253608c84409d81dc31fea81b810ea09"),
+    SOURCE: (390, "41c4545e6e897a973f9a4af860ac72780a3cdeffeb927f8ff2f8ce9521925d17"),
+    HEADER: (229, "cb7aef4233436d729ccd0790175fa2124b78c769479b0e73dfaddd0b1adbdf58"),
 }
 OVERLAY = (15240, "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314")
-PROVIDER = (163840, "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0")
-LINUX_PROVIDER = (163824, "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635")
+PROVIDER = (163840, "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad")
+LINUX_PROVIDER = (163824, "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e")
 
 
 class AuditError(RuntimeError):
@@ -112,13 +112,13 @@ def audit() -> dict:
     require(isinstance(linux_package.get("expected_size"), int) and linux_package["expected_size"] > 0 and len(linux_package.get("expected_sha256", "")) == 64, "Linux package metadata is incomplete")
     return {
         "component": "G2 Apollo bootloader SRAM-word setter",
-        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
+        "status": "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "software_gap_count": 0,
         "stock": {"address": STOCK_ADDRESS, "size": STOCK_SIZE, "sha256": STOCK_SHA256, "whole_image_callers": len(CALLERS), "sram_address": SRAM_ADDRESS},
         "source": {"function": FUNCTION, "address": FUNCTION_ADDRESS, "size": FUNCTION_SIZE, "sha256": FUNCTION_SHA256, "relocations": 0},
         "provider": {"size": PROVIDER[0], "sha256": PROVIDER[1], "source_owned_bytes": component["source_owned_bytes"], "generated_patch_bytes": component["generated_patch_site_bytes"], "alignment_bytes": component["generated_alignment_bytes"], "retained_official_bytes": component["opaque_base_bytes"]},
         "deployment": {"apple_package": artifacts["package"], "linux_package": {"size": linux_package["expected_size"], "sha256": linux_package["expected_sha256"]}},
-        "hardware_block": {"physical_evidence_available": False, "required_evidence": "authorized responsive G2 right temple showing the sole caller writes the expected value to SRAM 0x200270CC and boot continues", "stock_bootloader_retained_for_hardware": True},
+        "hardware_block": {"physical_evidence_available": False, "required_evidence": "authorized G2 hardware showing the sole caller writes the expected value to SRAM 0x200270CC and boot continues", "stock_bootloader_retained_for_hardware": True},
         "safety": {"hardware_operations": [], "signing_performed": False, "flashing_performed": False},
     }
 
@@ -128,7 +128,7 @@ def main() -> int:
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
     report = audit()
-    print(json.dumps(report, indent=2, sort_keys=True) if args.json else f"Bootloader SRAM setter closure: {report['status']}\n  authenticated callers: 1\n  hardware operations: none; physical validation deferred by project direction")
+    print(json.dumps(report, indent=2, sort_keys=True) if args.json else f"Bootloader SRAM setter closure: {report['status']}\n  authenticated callers: 1\n  hardware operations: none; physical validation blocked by unavailable physical evidence")
     return 0
 
 

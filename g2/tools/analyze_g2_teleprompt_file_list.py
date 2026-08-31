@@ -182,7 +182,12 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
         raise AuditError("unexpected stored file-list entry pointer")
 
     overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    if "teleprompt_file_list" in json.dumps(overlay).lower():
+    production_routes = [
+        site
+        for site in overlay.get("patch_sites", [])
+        if PHYSICAL[0] <= site.get("runtime_address", -1) < PHYSICAL[1]
+    ]
+    if production_routes:
         raise AuditError("file-list object unexpectedly became production-routed")
     counts = Counter(target for _, target in calls)
     return {

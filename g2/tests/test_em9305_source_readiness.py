@@ -3,13 +3,16 @@
 from __future__ import annotations
 
 import copy
+import csv
 import importlib.util
 import json
 import os
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import unittest
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,7 +54,11 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         result = self.result
         self.assertEqual(result["status"], "accounting-complete-source-incomplete")
         self.assertTrue(result["read_only"])
-        self.assertFalse(result["hardware_operations"])
+        self.assertEqual(result["hardware_validation"],
+                         "blocked by unavailable physical evidence")
+        self.assertEqual(result["hardware_operations"], [])
+        self.assertFalse(result["source_complete"])
+        self.assertFalse(result["release"])
         residual = result["residual"]
         self.assertEqual(residual["span_count"], 175)
         self.assertEqual(residual["bytes"], 33_658)
@@ -83,6 +90,38 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         self.assertEqual(sum(residual["readiness_segment_counts"].values()), 175)
         self.assertEqual(sum(residual["readiness_bytes"].values()), 33_658)
 
+    def test_completion_mapping_keeps_concrete_source_as_an_unrouted_candidate(self) -> None:
+        mapping = self.result["completion_bucket_mapping"]
+        self.assertEqual(mapping["component_bytes"], 211_948)
+        self.assertEqual(mapping["buckets"], {
+            "production_source": 0,
+            "generated_or_reconstructible": 0,
+            "candidate_source_not_routed": 1_240,
+            "typed_retained_or_external": 210_708,
+            "unclassified": 0,
+        })
+        self.assertFalse(mapping["candidate_production_routed"])
+        self.assertEqual(mapping["release_blocking_bytes"], 211_948)
+
+    def test_metaware_arc_target_compile_is_durable_but_not_routing(self) -> None:
+        audit = self.result["metaware_runtime_audit"]
+        self.assertFalse(audit["additive_to_residual_accounting"])
+        self.assertEqual(audit["status"], "candidate-qualified")
+        self.assertEqual(audit["candidate_source_bytes"], 980)
+        self.assertTrue(audit["arcv2_em_target_compiled"])
+        self.assertEqual(audit["arcv2_em_undefined_symbols"], [])
+        self.assertEqual(audit["arcv2_em_forbidden_runtime_imports"], [])
+        self.assertEqual(
+            audit["arcv2_em_build_receipt"],
+            "tools/manifests/em9305-arc-candidate-build-summary.json",
+        )
+        self.assertFalse(audit["candidate_production_routed"])
+        self.assertEqual(len(audit["remaining_software_blockers"]), 3)
+        self.assertEqual(
+            audit["hardware_validation"],
+            "blocked by unavailable physical evidence",
+        )
+
     def test_ledger_intervals_and_hashes_match_authenticated_rows(self) -> None:
         ledger = self.result["residual"]["ledger"]
         self.assertEqual(len(ledger), len(self.rows))
@@ -94,6 +133,146 @@ class Em9305SourceReadinessTests(unittest.TestCase):
             self.assertEqual(item["end"] - item["start"], item["size"])
             self.assertIn(item["readiness"], self.analyzer.READINESS_STATES)
 
+    def test_checked_final_manifests_are_current_and_schema_exact(self) -> None:
+        self.assertEqual(
+            self.analyzer.check_manifests(self.result),
+            [self.analyzer.FINAL_LEDGER, self.analyzer.FINAL_SUMMARY],
+        )
+        ledger_payload = self.analyzer.FINAL_LEDGER.read_bytes()
+        lines = ledger_payload.decode("utf-8").splitlines()
+        self.assertEqual(lines[0], "# SPDX-License-Identifier: MIT")
+        rows = list(csv.DictReader(lines[1:], delimiter="\t"))
+        self.assertEqual(len(rows), 175)
+        self.assertEqual(
+            set(rows[0]),
+            {
+                "start", "end", "size", "sha256", "readiness",
+                "decision", "decision_origin",
+            },
+        )
+        self.assertEqual(sum(int(row["size"]) for row in rows), 33_658)
+        self.assertTrue(all(row["decision"] and row["decision_origin"]
+                            for row in rows))
+
+        summary = json.loads(self.analyzer.FINAL_SUMMARY.read_text())
+        self.assertEqual(summary["schema_version"], 5)
+        self.assertEqual(summary["residual_span_count"], 175)
+        self.assertEqual(summary["residual_bytes"], 33_658)
+        self.assertEqual(summary["unclassified_spans"], 0)
+        self.assertEqual(summary["unclassified_bytes"], 0)
+        self.assertEqual(summary["ledger"], {
+            "path": "em9305-final-source-readiness.tsv",
+            "size": len(ledger_payload),
+            "sha256": self.analyzer.sha256(ledger_payload),
+        })
+
+    def test_final_summary_conserves_readiness_and_completion_buckets(self) -> None:
+        summary = json.loads(self.analyzer.FINAL_SUMMARY.read_text())
+        self.assertEqual(summary["readiness_segment_counts"], {
+            "concrete_source_available": 23,
+            "typed_unsupported_external_boundary": 25,
+            "unavailable_proprietary_controller_code": 127,
+        })
+        self.assertEqual(summary["readiness_bytes"], {
+            "concrete_source_available": 1_240,
+            "typed_unsupported_external_boundary": 8_348,
+            "unavailable_proprietary_controller_code": 24_070,
+        })
+        self.assertEqual(sum(summary["readiness_segment_counts"].values()), 175)
+        self.assertEqual(sum(summary["readiness_bytes"].values()), 33_658)
+        self.assertEqual(summary["completion_buckets"], {
+            "production_source": 0,
+            "generated_or_reconstructible": 0,
+            "candidate_source_not_routed": 1_240,
+            "typed_retained_or_external": 210_708,
+            "unclassified": 0,
+        })
+        self.assertEqual(sum(summary["completion_buckets"].values()), 211_948)
+
+    def test_final_summary_hardware_and_release_shape_is_fail_closed(self) -> None:
+        summary = json.loads(self.analyzer.FINAL_SUMMARY.read_text())
+        self.assertFalse(summary["source_complete"])
+        self.assertFalse(summary["release"])
+        self.assertFalse(summary["candidate_production_routed"])
+        self.assertEqual(summary["release_blocking_bytes"], 211_948)
+        self.assertEqual(
+            summary["hardware_validation"], "blocked by unavailable physical evidence",
+        )
+        self.assertEqual(summary["hardware_operations"], [])
+        self.assertEqual(
+            summary["metaware_runtime_audit"],
+            self.result["metaware_runtime_audit"],
+        )
+        self.assertEqual(
+            summary["qpc_supporting_audit"],
+            self.result["qpc_supporting_audit"],
+        )
+        self.assertEqual(
+            summary["qpc_hook_provider_audit"],
+            self.result["qpc_hook_provider_audit"],
+        )
+        self.assertEqual(
+            summary["deployment_package_audit"],
+            self.result["deployment_package_audit"],
+        )
+
+    def test_deployment_package_wrapper_is_closed_without_source_image_claim(self) -> None:
+        audit = self.result["deployment_package_audit"]
+        self.assertFalse(audit["additive_to_residual_accounting"])
+        self.assertEqual(
+            audit["status"],
+            "record-package-software-closed-source-image-incomplete",
+        )
+        self.assertEqual(audit["record_count"], 4)
+        self.assertEqual(audit["erase_sector_count"], 29)
+        self.assertTrue(audit["stock_roundtrip_byte_exact"])
+        self.assertTrue(audit["software_wrapper_complete"])
+        self.assertTrue(audit["software_package_complete"])
+        self.assertFalse(audit["source_records_complete"])
+        self.assertFalse(audit["source_image_complete"])
+        self.assertFalse(audit["production_routed"])
+        self.assertEqual(audit["hardware_operations"], [])
+        self.assertEqual(
+            audit["hardware_validation"],
+            "blocked by unavailable physical evidence",
+        )
+
+    def test_manifest_mutation_and_stale_result_are_rejected(self) -> None:
+        with tempfile.TemporaryDirectory(
+            prefix="em9305-final-manifest-test-"
+        ) as raw_temporary:
+            temporary = Path(raw_temporary)
+            ledger = temporary / self.analyzer.FINAL_LEDGER.name
+            summary = temporary / self.analyzer.FINAL_SUMMARY.name
+            with (
+                mock.patch.object(self.analyzer, "MANIFEST_DIR", temporary),
+                mock.patch.object(self.analyzer, "FINAL_LEDGER", ledger),
+                mock.patch.object(self.analyzer, "FINAL_SUMMARY", summary),
+            ):
+                self.analyzer.write_manifests(self.result)
+                self.analyzer.check_manifests(self.result)
+
+                ledger.write_bytes(ledger.read_bytes() + b"mutated\n")
+                with self.assertRaisesRegex(
+                    self.analyzer.ReadinessError, "manifest is stale"
+                ):
+                    self.analyzer.check_manifests(self.result)
+
+                self.analyzer.write_manifests(self.result)
+                summary.write_bytes(summary.read_bytes() + b" ")
+                with self.assertRaisesRegex(
+                    self.analyzer.ReadinessError, "manifest is stale"
+                ):
+                    self.analyzer.check_manifests(self.result)
+
+                self.analyzer.write_manifests(self.result)
+                altered = copy.deepcopy(self.result)
+                altered["residual"]["ledger"][0]["decision"] += "_stale"
+                with self.assertRaisesRegex(
+                    self.analyzer.ReadinessError, "manifest is stale"
+                ):
+                    self.analyzer.check_manifests(altered)
+
     def test_qpc_is_supporting_and_not_double_counted(self) -> None:
         qpc = self.result["qpc_supporting_audit"]
         self.assertFalse(qpc["additive_to_residual_accounting"])
@@ -103,6 +282,20 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         self.assertTrue(qpc["cluster_partition_complete"])
         self.assertEqual(qpc["hook_pointer_count"], 9)
         self.assertFalse(qpc["exact_vendor_checkout_proven"])
+        self.assertTrue(qpc["arcv2_em_target_linked"])
+        self.assertEqual(qpc["arcv2_em_translation_units"], 10)
+        self.assertEqual(qpc["arcv2_em_undefined_symbols"], [])
+        self.assertEqual(qpc["arcv2_em_forbidden_runtime_imports"], [])
+        self.assertEqual(
+            qpc["arcv2_em_linked_object_sha256"],
+            "c1aa5370945e41afcb29750174fd4531def9a887d37a0f620461eeabad587ad9",
+        )
+        self.assertFalse(qpc["install_placement_resolved"])
+        self.assertFalse(qpc["production_routed"])
+        self.assertEqual(
+            qpc["hardware_validation"],
+            "blocked by unavailable physical evidence",
+        )
 
     def test_named_hook_providers_narrow_two_typed_boundaries(self) -> None:
         ledger = {
@@ -124,6 +317,13 @@ class Em9305SourceReadinessTests(unittest.TestCase):
             ["PalUartResume", "VoltMon_DoMeasurement", "wsfOsRunIdleTasks"],
         )
         self.assertEqual(audit["unresolved_providers"], [])
+        self.assertEqual(audit["software_provider_gaps"], [])
+        self.assertTrue(audit["software_provider_source_available"])
+        self.assertEqual(
+            audit["hardware_dependent_providers"],
+            ["PalUartResume", "VoltMon_DoMeasurement"],
+        )
+        self.assertEqual(audit["wsf_idle_semantics"]["callback_capacity"], 3)
         self.assertFalse(audit["exact_provider_source_available"])
         self.assertFalse(audit["redistribution_authority_resolved"])
         self.assertFalse(audit["candidate_production_routed"])
@@ -149,7 +349,7 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         self.assertEqual((audit["bytes"], audit["entry_count"]), (1_564, 3))
         self.assertFalse(audit["exact_source_available"])
         self.assertEqual(
-            audit["hardware_validation"], "deferred by project direction",
+            audit["hardware_validation"], "blocked by unavailable physical evidence",
         )
 
     def test_largest_controller_residual_is_a_typed_boundary_not_source(self) -> None:
@@ -197,6 +397,19 @@ class Em9305SourceReadinessTests(unittest.TestCase):
                 self.hook_provider, self.slave_connection, self.pawr,
                 self.master_connection, self.qpc,
             )
+
+    def test_metaware_arc_target_compile_drift_fails_closed(self) -> None:
+        altered = copy.deepcopy(self.meta)
+        altered["candidate"]["arcv2_em_target_compiled"] = False
+        with self.assertRaisesRegex(
+            self.analyzer.ReadinessError, "MetaWare ARCv2 EM readiness evidence drift",
+        ):
+            result = self.analyzer.compose_reports(
+                self.rows, altered, self.first, self.tail,
+                self.hook_provider, self.slave_connection, self.pawr,
+                self.master_connection, self.qpc,
+            )
+            self.analyzer._manifest_payloads(result)
 
     def test_named_hook_provider_identity_mismatch_fails_closed(self) -> None:
         altered = copy.deepcopy(self.hook_provider)
@@ -263,6 +476,22 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         result = json.loads(completed.stdout)
         self.assertTrue(result["residual"]["accounting_complete"])
         self.assertFalse(result["release_gate"]["production_ready"])
+
+    def test_check_manifests_cli_is_read_only_and_current(self) -> None:
+        environment = os.environ.copy()
+        environment["PYTHONDONTWRITEBYTECODE"] = "1"
+        completed = subprocess.run(
+            [sys.executable, str(ANALYZER), "--check-manifests"], cwd=ROOT,
+            env=environment, check=True, capture_output=True, text=True,
+        )
+        self.assertIn(
+            "checked tools/manifests/em9305-final-source-readiness.tsv",
+            completed.stdout,
+        )
+        self.assertIn(
+            "checked tools/manifests/em9305-final-source-readiness-summary.json",
+            completed.stdout,
+        )
 
 
 if __name__ == "__main__":

@@ -1,0 +1,854 @@
+{
+  "cff_source_inventory": {
+    "bytes": 269028,
+    "files": 17,
+    "inventory_sha256": "507807d06cb6381f671d0083c501bedf14abb23f3f16730e953842fdfd2889c1",
+    "records": [
+      {
+        "git_blob_sha1": "1a755d5dadd9915cc2c5adf43a4a6cad374bb971",
+        "git_mode": "100644",
+        "local_path": "src/cff/cff.c",
+        "sha256": "4fb8b6e43985bc8fe518110b0631feaccc571c0d26055168b0f4e536ef9b70c1",
+        "size": 1470,
+        "upstream_path": "src/cff/cff.c"
+      },
+      {
+        "git_blob_sha1": "e45ae1127bf9f4724a859dc56a0a5eb7e636539e",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffcmap.c",
+        "sha256": "341757512521d2a509ae85a298a33e748c0f61fad8dbcbf175d44f379953b0d1",
+        "size": 7595,
+        "upstream_path": "src/cff/cffcmap.c"
+      },
+      {
+        "git_blob_sha1": "856a43dd1b9e9e131be0ceed455d70533fb822ba",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffcmap.h",
+        "sha256": "99fab97b5f01d68cbf85b1ffbaa6612a8f0765adeb6681609fb07e11d57cbe9e",
+        "size": 2864,
+        "upstream_path": "src/cff/cffcmap.h"
+      },
+      {
+        "git_blob_sha1": "df896848da4506fdec0853a2ec9ffae5138b2858",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffdrivr.c",
+        "sha256": "97b79d9ee982bce110ce9ac0b4aeeb7599e3a02e5b8d1cd80babffb8405bdbfb",
+        "size": 37713,
+        "upstream_path": "src/cff/cffdrivr.c"
+      },
+      {
+        "git_blob_sha1": "ad7c3ad70a8f6ae9bfe04906a7826d5bd76da9c6",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffdrivr.h",
+        "sha256": "fd3581a643fab5990857c5746b3f6606d070ad4b06f6fb4935669fad58212969",
+        "size": 1461,
+        "upstream_path": "src/cff/cffdrivr.h"
+      },
+      {
+        "git_blob_sha1": "b2e1bfaf9db09e1f89619e69d859584b258729fc",
+        "git_mode": "100644",
+        "local_path": "src/cff/cfferrs.h",
+        "sha256": "69a9de8d1624ef0787c50e9a061208e90cf71e8d91220d71f06adbbad4322631",
+        "size": 1881,
+        "upstream_path": "src/cff/cfferrs.h"
+      },
+      {
+        "git_blob_sha1": "c58471ce8611322289c8ebcffc97c09ed6a48a4c",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffgload.c",
+        "sha256": "f3ede2b81f654f0c95dc5cf67e8f6962ceb68aa4e6c096c4ab1b81b57c29cd8f",
+        "size": 24674,
+        "upstream_path": "src/cff/cffgload.c"
+      },
+      {
+        "git_blob_sha1": "803f3974fc71e764999a2719ad75dbd1ea9a3407",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffgload.h",
+        "sha256": "7a2e823f2d2dabc7751a05174504a328d027465dc668a5ccbdba514ccb04704b",
+        "size": 2244,
+        "upstream_path": "src/cff/cffgload.h"
+      },
+      {
+        "git_blob_sha1": "1c6fe5156673ed024cd0f10862722e98b7f7bad7",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffload.c",
+        "sha256": "f8ec69b219bfd0ced42da86e57448482d363d533934325fdeb287362f769b232",
+        "size": 75622,
+        "upstream_path": "src/cff/cffload.c"
+      },
+      {
+        "git_blob_sha1": "14d14e21122b406b207c196120be8b7cf3867abb",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffload.h",
+        "sha256": "7ef72fc9af62eda4f168937140b297d369d21f4aba254fda2cec16c7e5435b12",
+        "size": 4002,
+        "upstream_path": "src/cff/cffload.h"
+      },
+      {
+        "git_blob_sha1": "a2d7aec65ef9a8965af671bb464cd8f23990e276",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffobjs.c",
+        "sha256": "5f36ebf06afbacda76cab4b4913ced754112fe1c35deb96276bd8c8f0cd73d7a",
+        "size": 37857,
+        "upstream_path": "src/cff/cffobjs.c"
+      },
+      {
+        "git_blob_sha1": "616a25b3b5934d7b1e1ee93b00a9c5775aec667e",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffobjs.h",
+        "sha256": "88542f1620856747136b09ecc3d14a86d4f0c93804f6af2d178a154a0a64494b",
+        "size": 3071,
+        "upstream_path": "src/cff/cffobjs.h"
+      },
+      {
+        "git_blob_sha1": "b9611cf548a922a4bf3ee62db580159601ccee1d",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffparse.c",
+        "sha256": "c8818be29c81cafbdf6f395fea4918610701ac3168a67af8e6887c5145eef4fa",
+        "size": 46535,
+        "upstream_path": "src/cff/cffparse.c"
+      },
+      {
+        "git_blob_sha1": "8a8caeca4466ce0fa373668a8fea9d06a924812a",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffparse.h",
+        "sha256": "92b64b46744e62a246ee4011a7d7086cfe709afb6078449547f27560b425993a",
+        "size": 3938,
+        "upstream_path": "src/cff/cffparse.h"
+      },
+      {
+        "git_blob_sha1": "08b74c7cf20feea57ae0743f8161a4a1357ff246",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffpic.c",
+        "sha256": "83bae75d4e7bd8c8bf4b72f9773b60380528008e44810a4ed0280cfd41be209a",
+        "size": 5360,
+        "upstream_path": "src/cff/cffpic.c"
+      },
+      {
+        "git_blob_sha1": "8ba4203a8de234de5dfbff5201d551eef18614ca",
+        "git_mode": "100644",
+        "local_path": "src/cff/cffpic.h",
+        "sha256": "8c85321582629f75c44c885d79b78afcb1d2726cd75d1abb215c7bffb3c24154",
+        "size": 5267,
+        "upstream_path": "src/cff/cffpic.h"
+      },
+      {
+        "git_blob_sha1": "fec1ca20bde0e43f77ded9f98d8eeff9a0c856d7",
+        "git_mode": "100644",
+        "local_path": "src/cff/cfftoken.h",
+        "sha256": "5a201432251cad43af566c00bbcac031ad5501f164876b3e5717a540aba0c2cd",
+        "size": 7474,
+        "upstream_path": "src/cff/cfftoken.h"
+      }
+    ]
+  },
+  "evidence_bounds": {
+    "complete physical map does not authenticate placement or routing": true,
+    "hardware_operations": false,
+    "retained closures are source identities, not compiler byte identity": true,
+    "the earlier 47-body retained admission is a subset of the complete CFF map": true
+  },
+  "inputs": {
+    "research/admission/apollo_opacity_wave11/source_boundaries.tsv": {
+      "bytes": 12422,
+      "sha256": "d921788723eef345a04eb40b67724abba0e70aee5a268fa4dbaf87a57e2405b4"
+    },
+    "research/admission/apollo_opacity_wave14/source_boundaries.tsv": {
+      "bytes": 1695,
+      "sha256": "8cc4ae11e418c4ce8b7c19a962aa2ae404e3291034de740a0604a669899c13a6"
+    },
+    "third_party/freetype/LICENSE": {
+      "bytes": 6743,
+      "sha256": "08c135755dd589039470f1fdbb400daaabaaa50d0b366d19cebff4d22986baa1"
+    },
+    "third_party/freetype/PROVENANCE.json": {
+      "bytes": 102377,
+      "sha256": "2be8717625bceddee3aa95663186c0629247304c951c4790bc26cd372e3794bf"
+    },
+    "tools/analyze_g2_freetype_cff_function_map.py": {
+      "bytes": 24098,
+      "sha256": "68f20cf54a36305d6c460d082c907d3d94efeff545238ff8b6f1189267322b70"
+    },
+    "tools/manifests/g2-freetype-cff-function-map.json": {
+      "bytes": 70973,
+      "sha256": "f16b49ec344534f7cea59ce0a41350fb44ac7c2991baf884ba6b9bc96a2b2641"
+    }
+  },
+  "production": {
+    "authenticated_stock_policy_callsite_recovered": false,
+    "authenticated_target_placement": false,
+    "community_source": true,
+    "remaining_release_gates": [
+      "pinned IAR-compatible code generation, relocation, and placement",
+      "authenticated external CFF font payload and face-path configuration",
+      "task stack and worst-case execution-time qualification",
+      "authorized hardware rendering validation"
+    ],
+    "software_gates": [
+      "tests.test_runtime_freetype_cff",
+      "tests.test_runtime_freetype_base_candidate",
+      "tests.test_runtime_target_provider_candidate"
+    ],
+    "software_make_target": "freetype-cff-source-closure",
+    "stock_image_overlay_routed": false
+  },
+  "recovered_policy": {
+    "darkening_parameter_validation": "non-negative monotonic X; Y in [0,500]",
+    "default_and_only_admitted_hinting_engine": "Adobe",
+    "module_class": "cff_driver_class",
+    "module_class_run_address": "0x006DCB74",
+    "module_index": 2,
+    "old_engine": false
+  },
+  "retained_source_evidence": {
+    "base_support_bytes": 736,
+    "base_support_functions": 9,
+    "bytes": 12062,
+    "candidate_distinction": {
+      "existing_base_support_bytes": 736,
+      "existing_base_support_functions": 9,
+      "existing_candidate_scope": "two retained source-identity waves plus base support; not a complete CFF physical map",
+      "existing_cff_candidate_bytes": 11326,
+      "existing_cff_candidate_functions": 38,
+      "newly_mapped_cff_callable_bytes": 5392,
+      "newly_mapped_cff_functions": 63,
+      "this_scope": "complete stock CFF callable and physical envelope"
+    },
+    "cff_bytes": 11326,
+    "cff_functions": 38,
+    "complete_function_map": {
+      "high": {
+        "bytes": 16718,
+        "functions": 101
+      },
+      "mapped_total": {
+        "bytes": 16718,
+        "functions": 101
+      },
+      "medium": {
+        "bytes": 0,
+        "functions": 0
+      },
+      "unresolved_code": {
+        "bytes": 0,
+        "functions": 0,
+        "source_identities_complete": true
+      }
+    },
+    "complete_mapping_sha256": "16761c056d968c5c4847c918d5a4d04a1a5a7fb883f125e833054f3762b7266e",
+    "functions": 47,
+    "mapping_sha256": "76b90a748d6fb8b160b32bf4a94bbefe52b63583de8a0eb2fd564ac671776240",
+    "physical_envelope": {
+      "callable_bytes": 16718,
+      "envelope_end_exclusive": "0x005B0114",
+      "envelope_start": "0x005ABEF8",
+      "module": "cff",
+      "physical_bytes": 16924,
+      "residual_physical": {
+        "bytes": 206,
+        "category_bytes": {
+          "alignment-padding": 2,
+          "literal-pointer-data-pool": 204
+        },
+        "intervals": 13,
+        "unclassified_bytes": 0,
+        "unresolved_callable_bytes": 0
+      }
+    },
+    "records": [
+      {
+        "body_sha256": "98edc082f57d31ac54c8292c67299f05a2bd5cc62622c453e1bdcbfe8abe5e89",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005247C6",
+        "entry": "0x00524754",
+        "envelope_bytes": "114",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/base/ftcalc.c",
+        "symbol": "FT_DivFix",
+        "wave": 11
+      },
+      {
+        "body_sha256": "16f7326472c202dec0d28140d6e754c1163cad751a51be0f334d1b972675cac8",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005248AE",
+        "entry": "0x00524820",
+        "envelope_bytes": "142",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/base/ftcalc.c",
+        "symbol": "FT_Matrix_Multiply_Scaled",
+        "wave": 11
+      },
+      {
+        "body_sha256": "1a4b67e74101f50eab048e173a2ace7c6c30226af189ab20f9eeb9dfe8c36b43",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x00524902",
+        "entry": "0x005248AE",
+        "envelope_bytes": "84",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/base/ftcalc.c",
+        "symbol": "FT_Vector_Transform_Scaled",
+        "wave": 11
+      },
+      {
+        "body_sha256": "37c392f940a71ed71f282d5c6ce234594e69f75fcb33b2455858309e6216110b",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x00527466",
+        "entry": "0x00527406",
+        "envelope_bytes": "96",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/base/ftobjs.c",
+        "symbol": "ft_module_get_service",
+        "wave": 11
+      },
+      {
+        "body_sha256": "3766a917842247347877976f2624b55fc83469642a8cdca231b7d1ecf0b28f5f",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x00528936",
+        "entry": "0x00528928",
+        "envelope_bytes": "14",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/base/ftstream.c",
+        "symbol": "FT_Stream_Read",
+        "wave": 11
+      },
+      {
+        "body_sha256": "4a921db2b34388beed96125f1601b5f314160061357b4ca8c1cab562099f26af",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x00528992",
+        "entry": "0x00528936",
+        "envelope_bytes": "92",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/base/ftstream.c",
+        "symbol": "FT_Stream_ReadAt",
+        "wave": 11
+      },
+      {
+        "body_sha256": "0a31c23e4cf4550e1ced53d7be82b2497f1d9383bf25b1998818d4658a071a84",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x00528AC6",
+        "entry": "0x00528AA0",
+        "envelope_bytes": "38",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/base/ftstream.c",
+        "symbol": "FT_Stream_GetUShort",
+        "wave": 11
+      },
+      {
+        "body_sha256": "baafeb6a03f6e70cab589e25393bab2430a16aa488bcc237c421e96063e97ed3",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x00528B4A",
+        "entry": "0x00528AFA",
+        "envelope_bytes": "80",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/base/ftstream.c",
+        "symbol": "FT_Stream_ReadChar",
+        "wave": 11
+      },
+      {
+        "body_sha256": "ca2af823998bae4405f88fa4d21a21e1ace611d6f08a4dbf4b5e61d916251edc",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ACD72",
+        "entry": "0x005ACD08",
+        "envelope_bytes": "106",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffparse.c",
+        "symbol": "cff_parser_init",
+        "wave": 11
+      },
+      {
+        "body_sha256": "1a60bc8fe942e79e1d0f096042ea1f1e04930228c28e155350643754521a7098",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ACD86",
+        "entry": "0x005ACD72",
+        "envelope_bytes": "20",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffparse.c",
+        "symbol": "cff_parser_done",
+        "wave": 11
+      },
+      {
+        "body_sha256": "25cb4dc57b336bee5c60ee9fbab82c038ced9a96480cb36aaef1683227b5b8c0",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ACDFE",
+        "entry": "0x005ACD86",
+        "envelope_bytes": "120",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffparse.c",
+        "symbol": "cff_parse_integer",
+        "wave": 11
+      },
+      {
+        "body_sha256": "2edb08950d9984d6ac4813ee01036d04d3f9cb050ce9bc49cae161cc3efd437a",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AD080",
+        "entry": "0x005ACE10",
+        "envelope_bytes": "624",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffparse.c",
+        "symbol": "cff_parse_real",
+        "wave": 11
+      },
+      {
+        "body_sha256": "ab4ea8adb9d94b91cc9d9ec84b03c3c8e188cebffe6d1b4ff51a22fbaa9b6590",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AD0DA",
+        "entry": "0x005AD090",
+        "envelope_bytes": "74",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffparse.c",
+        "symbol": "cff_parse_num",
+        "wave": 11
+      },
+      {
+        "body_sha256": "6215506830fdccffb3b35ce312d17bb32d9c47139abe07e1d29d08db77f007aa",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AD150",
+        "entry": "0x005AD0DA",
+        "envelope_bytes": "118",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffparse.c",
+        "symbol": "do_fixed",
+        "wave": 11
+      },
+      {
+        "body_sha256": "68b47baecc997ac37055f3c95e534f9026d0c990b00467c97332593268bcd656",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AD15A",
+        "entry": "0x005AD150",
+        "envelope_bytes": "10",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffparse.c",
+        "symbol": "cff_parse_fixed",
+        "wave": 11
+      },
+      {
+        "body_sha256": "5a27a7a7ef8a0542160fb212179e81f434cabaa36b6d9fb66f900b291b67f067",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AD162",
+        "entry": "0x005AD15A",
+        "envelope_bytes": "8",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffparse.c",
+        "symbol": "cff_parse_fixed_scaled",
+        "wave": 11
+      },
+      {
+        "body_sha256": "7e5698a112eac806f7aa6ed0f14bc75e1a2ce37112d2ae9e56a58a73f460da14",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AD74A",
+        "entry": "0x005AD564",
+        "envelope_bytes": "486",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffparse.c",
+        "symbol": "cff_parser_run",
+        "wave": 11
+      },
+      {
+        "body_sha256": "b3c2fca6cd25038c6820295bbcbfb50ad36a3aa2b65c939a7aacd6058628593b",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AD7AC",
+        "entry": "0x005AD778",
+        "envelope_bytes": "52",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_index_read_offset",
+        "wave": 11
+      },
+      {
+        "body_sha256": "86fcade6ffad93f59f7ffea496afb81916e07e6ac8dd8e6336d966347cf95299",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AD8C0",
+        "entry": "0x005AD7AC",
+        "envelope_bytes": "276",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_index_init",
+        "wave": 11
+      },
+      {
+        "body_sha256": "c0654bf341ef3cfa1060b9c2678e932f1e976676191a13da62593611a823ef86",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AD8F6",
+        "entry": "0x005AD8C0",
+        "envelope_bytes": "54",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_index_done",
+        "wave": 11
+      },
+      {
+        "body_sha256": "8fcdafbf96f0dd4cafd97a38cdfcc23b5837cae3599b351f00dd05335bf59062",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AD9FE",
+        "entry": "0x005AD8F6",
+        "envelope_bytes": "264",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_index_load_offsets",
+        "wave": 11
+      },
+      {
+        "body_sha256": "37ac2582ea08b4664867df289fb5ab96531afa8ccd3658bda4fafe380674f34e",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ADB46",
+        "entry": "0x005AD9FE",
+        "envelope_bytes": "328",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_index_get_pointers",
+        "wave": 11
+      },
+      {
+        "body_sha256": "27d2c98d08fe9e0dbf1670763834e92ee3cd72b9231e447fbdf63547d94e869e",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ADC4E",
+        "entry": "0x005ADB46",
+        "envelope_bytes": "264",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_index_access_element",
+        "wave": 11
+      },
+      {
+        "body_sha256": "87ec8f48458fba9247b3c4d6f82430711f565db6936442fb6aabb8778f02476f",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ADC5E",
+        "entry": "0x005ADC4E",
+        "envelope_bytes": "16",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_index_forget_element",
+        "wave": 11
+      },
+      {
+        "body_sha256": "c0d94d581ba94a27631775de9aad1a0a46bfb3d1bf8cfe296a5364e50c3fad52",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ADCC6",
+        "entry": "0x005ADC5E",
+        "envelope_bytes": "104",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_index_get_name",
+        "wave": 11
+      },
+      {
+        "body_sha256": "4d7cef9bdd6f30c5e127dc76406b7b2fc32ed848dc4dde4ae80248499a8e06fa",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ADCDC",
+        "entry": "0x005ADCC6",
+        "envelope_bytes": "22",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_index_get_string",
+        "wave": 11
+      },
+      {
+        "body_sha256": "e58aa906a38d0c8cf2ede4a1614cd1dd22df74d0b99dc9c14af491c1190cad65",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ADD1A",
+        "entry": "0x005ADCDC",
+        "envelope_bytes": "62",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_index_get_sid_string",
+        "wave": 11
+      },
+      {
+        "body_sha256": "3cb702839cbc4cc2e55de0fcee766fd09b67de4bf40c9226744c6367a417b08f",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ADDB8",
+        "entry": "0x005ADD3C",
+        "envelope_bytes": "124",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "CFF_Load_FD_Select",
+        "wave": 11
+      },
+      {
+        "body_sha256": "783c8ff034d61bdfd6e5b579f6dcd10d845196db8c2fd24630d6f482b2aa4c20",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ADEA4",
+        "entry": "0x005ADE30",
+        "envelope_bytes": "116",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_charset_compute_cids",
+        "wave": 11
+      },
+      {
+        "body_sha256": "ba41a7ccb7ae1c617f4171fa4b8ff1b8f39759238b66ad607673f943c1215cec",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ADEB6",
+        "entry": "0x005ADEA4",
+        "envelope_bytes": "18",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_charset_cid_to_gindex",
+        "wave": 11
+      },
+      {
+        "body_sha256": "bb5bb636a3ea5fad6f60cf03c7ef29e135e4d9586da39dc7bbe4d910d8d9568d",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AE110",
+        "entry": "0x005ADEF0",
+        "envelope_bytes": "544",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_charset_load",
+        "wave": 11
+      },
+      {
+        "body_sha256": "1ab383484804f69954ab9f3109d8426d7c69a26334f098a6d7c412fab98f00d1",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AE188",
+        "entry": "0x005AE118",
+        "envelope_bytes": "112",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_vstore_done",
+        "wave": 11
+      },
+      {
+        "body_sha256": "3e523d0d28d8123bac6fb08ad608a092e3f31c1d2efab9d8b94ed701a7c389fc",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AE42C",
+        "entry": "0x005AE188",
+        "envelope_bytes": "676",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_vstore_load",
+        "wave": 11
+      },
+      {
+        "body_sha256": "54ccb41845a9c9c032c74f3126dddf97bc36de71dba4164d69fddfd444da8794",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AE43C",
+        "entry": "0x005AE42C",
+        "envelope_bytes": "16",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_blend_clear",
+        "wave": 11
+      },
+      {
+        "body_sha256": "ad473332ef7cf560b6b451fd09b2617b0a4aa18671ee838baaa5196329efa7ab",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AEA90",
+        "entry": "0x005AE818",
+        "envelope_bytes": "632",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_encoding_load",
+        "wave": 11
+      },
+      {
+        "body_sha256": "db504d715df3597d075204ed4bf38f45f7d926741ac76ba8eef994ce644f6c10",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AEBE6",
+        "entry": "0x005AEA90",
+        "envelope_bytes": "342",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_load_private_dict",
+        "wave": 11
+      },
+      {
+        "body_sha256": "bd417f0bb51e0395b3bc94808639abd864dbfafe3080034832c6332c12df96b3",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AEE28",
+        "entry": "0x005AEBF4",
+        "envelope_bytes": "564",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_subfont_load",
+        "wave": 11
+      },
+      {
+        "body_sha256": "6211cc5064cbb2563178720075048c8c4904f745f228cd67f873fa96148cef04",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AF2D8",
+        "entry": "0x005AEE7C",
+        "envelope_bytes": "1116",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_font_load",
+        "wave": 11
+      },
+      {
+        "body_sha256": "e75ae217b3ce9117e9243622c71491dfe0557bf685bc72b3208b5f4d512721af",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AF7CC",
+        "entry": "0x005AF7B4",
+        "envelope_bytes": "24",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffobjs.c",
+        "symbol": "cff_strcpy",
+        "wave": 11
+      },
+      {
+        "body_sha256": "6efe3a99eca76372e249a2d3e85a68792cb712d2078f98a33f55223ca1de66d1",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AF828",
+        "entry": "0x005AF7CC",
+        "envelope_bytes": "92",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffobjs.c",
+        "symbol": "remove_subset_prefix",
+        "wave": 11
+      },
+      {
+        "body_sha256": "cf781cc01689ff9415a1730a67aafacfa55817b205825170af96a39ba730f98f",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AF88C",
+        "entry": "0x005AF828",
+        "envelope_bytes": "100",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffobjs.c",
+        "symbol": "remove_style",
+        "wave": 11
+      },
+      {
+        "body_sha256": "448e9d7671c724fe85f75a59274450975c44b3a30837b0082f9b247cd2c5a35c",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005B0004",
+        "entry": "0x005AF88C",
+        "envelope_bytes": "1912",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffobjs.c",
+        "symbol": "cff_face_init",
+        "wave": 11
+      },
+      {
+        "body_sha256": "35e2e5cae3e559fc7aea7831171f94343efc0fdfb938b7fad7dfb5c0ff4af112",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x00526A4E",
+        "entry": "0x00526A02",
+        "envelope_bytes": "76",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/base/ftobjs.c",
+        "symbol": "ft_synthesize_vertical_metrics",
+        "wave": 14
+      },
+      {
+        "body_sha256": "6ffe6fc386618567cbed282e3d7df13f3e8b21f0458d2711e9d24698e82cb788",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AC634",
+        "entry": "0x005AC5F0",
+        "envelope_bytes": "68",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffgload.c",
+        "symbol": "cff_get_glyph_data",
+        "wave": 14
+      },
+      {
+        "body_sha256": "79f7db9efcb303abbe8136b6324383e32ee1f32f2f83d4bffb15bea67d96460a",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005AC66E",
+        "entry": "0x005AC634",
+        "envelope_bytes": "58",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffgload.c",
+        "symbol": "cff_free_glyph_data",
+        "wave": 14
+      },
+      {
+        "body_sha256": "ddcd9efb50d2ca9e8f65d7db6587a7ffba60e7f00497f1bd5c19cabd6bf395fa",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ACD02",
+        "entry": "0x005AC66E",
+        "envelope_bytes": "1684",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffgload.c",
+        "symbol": "cff_slot_load",
+        "wave": 14
+      },
+      {
+        "body_sha256": "5961e0b1f6286a660da573c479f1d49634f7ff2d7f2ed24716e6af605dc35217",
+        "disposition": "source-attributed-research-only",
+        "end_exclusive": "0x005ADE30",
+        "entry": "0x005ADDB8",
+        "envelope_bytes": "120",
+        "license_status": "FTL",
+        "provider_identity": "FreeType-2.9.1-VER-2-9-1",
+        "source_path": "g2/third_party/freetype/src/cff/cffload.c",
+        "symbol": "cff_fd_select_get",
+        "wave": 14
+      }
+    ]
+  },
+  "runtime": {
+    "apis": [
+      "open_cfw_freetype_cff_set_hinting_engine",
+      "open_cfw_freetype_cff_get_hinting_engine",
+      "open_cfw_freetype_cff_set_no_stem_darkening",
+      "open_cfw_freetype_cff_get_no_stem_darkening",
+      "open_cfw_freetype_cff_set_darkening_parameters",
+      "open_cfw_freetype_cff_get_darkening_parameters"
+    ],
+    "header": "components/shared/freetype_cff/runtime_freetype_cff.h",
+    "null_inputs_fail_closed": true,
+    "source": "components/shared/freetype_cff/runtime_freetype_cff.c"
+  },
+  "schema_version": 1,
+  "status": "g2-freetype-cff-community-source-admission",
+  "translation_units": {
+    "paths": [
+      "src/cff/cff.c"
+    ],
+    "short_enums": true,
+    "target": "arm-none-eabi/cortex-m55/thumb/hard-float",
+    "warnings_as_errors": true
+  },
+  "upstream": {
+    "commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+    "license": "FTL",
+    "tag": "VER-2-9-1",
+    "version": "2.9.1"
+  }
+}

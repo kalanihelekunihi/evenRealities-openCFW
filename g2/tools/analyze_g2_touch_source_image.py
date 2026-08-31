@@ -114,8 +114,8 @@ def analyze() -> dict:
             "software_package_complete": True,
             "physical_board_services_routed": False,
             "production_routed": False,
-            "hardware_validation": "deferred by project direction",
-            "hardware_blocker": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
+            "hardware_blocker": "blocked by unavailable physical evidence",
             "hardware_operations": [],
         }
 

@@ -31,16 +31,22 @@ class BootloaderRedirectInitAuditTests(unittest.TestCase):
         self.assertEqual(
             self.report["provider"]["source_owned_bytes"]
             + self.report["provider"]["retained_official_bytes"],
-            147_296,
+            147_350,
         )
         self.assertGreater(self.report["deployment"]["apple_package"]["size"], 0)
         self.assertGreater(self.report["deployment"]["linux_package"]["size"], 0)
         self.assertEqual(self.report["deployment"]["unresolved_flash_regions"], 0)
 
     def test_hardware_validation_remains_explicitly_blocked(self) -> None:
-        self.assertEqual(self.report["status"], "implemented-in-source / hardware-validation-deferred-by-project-direction")
+        self.assertEqual(self.report["status"], "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence")
         self.assertFalse(self.report["hardware_block"]["physical_evidence_available"])
         self.assertTrue(self.report["hardware_block"]["stock_bootloader_retained_for_hardware"])
+        self.assertEqual(
+            self.report["hardware_block"]["required_evidence"],
+            "authorized G2 hardware with boot UART and debugger visibility "
+            "validating both mutex allocations, IAR stream serialization, "
+            "failure logging, and boot continuation",
+        )
         self.assertEqual(self.report["safety"]["hardware_operations"], [])
 
     def test_source_pin_mutation_is_rejected(self) -> None:

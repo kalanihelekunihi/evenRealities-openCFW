@@ -143,8 +143,8 @@ EXIDX_SHA256 = (
 # source, object, overlay, component, and package builds completed.
 LOCAL_PINS: dict[Path, tuple[int, str] | None] = {
     SOURCE: (
-        1_925,
-        "89e53ebc01a2d28c4a94ac4a38313b8213788a23ed55bf767a9e8a5c6d961225",
+        1_961,
+        "b65dd96a72842689954ca941c057d34d0287e018a7173e51f357c68d6f9ef9ad",
     ),
     HEADER: (
         2_401,
@@ -154,7 +154,7 @@ LOCAL_PINS: dict[Path, tuple[int, str] | None] = {
 PROFILE_PINS: dict[str, dict[str, object]] = {
     "apple-clang": {
         "compiler": "/usr/bin/clang",
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
         "object": (
             932,
             "651b45c3291a106f6e930129db85af7bbcba416f9ccc260f87b4d5a417eb53d4",
@@ -165,23 +165,31 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
             "7e2f6a8b3dca56e4c2d0499a6d4f12ad97dc4bc7f127ff6f4c31b8d379f0ba3b",
         ),
         "relocation_offset": 18,
-        "placement": 184_148,
+        "placement": 124_300,
         "relocated_sha256": "d3a60ee83a801c7f7ae58b45d0a1e7b6d85fd920484f738ea5698b1196897df7",
         "patch": (
             "23f342b900bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
             "ec17aa0a8e01050d8b30f737e7ca83d4b8842da1d7d33f6b3b74fa199a4f4519",
         ),
         "overlay": (
-            429_058,
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+            360_578,
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+        ),
+        "core_stage_overlay": (
+            360_578,
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+        ),
+        "core_stage_component": (
+            3_883_974,
+            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
         ),
         "component": (
-            3_952_454,
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+            3_883_974,
+            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
         ),
         "package": (
-            4_745_526,
-            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+            4_677_046,
+            "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
         ),
     },
     "linux-clang": {
@@ -197,23 +205,31 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
             "7e2f6a8b3dca56e4c2d0499a6d4f12ad97dc4bc7f127ff6f4c31b8d379f0ba3b",
         ),
         "relocation_offset": 18,
-        "placement": 185_872,
+        "placement": 126_120,
         "relocated_sha256": "09b1b218b4b222b284b44d433b5ae257e70c13b9cab13e7d53ca9168e7bcf27c",
         "patch": (
             "23f3d0bc00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
             "f54c433a31f74f74b34709901da696d850b4dd2d0fb743b8166d49256c287303",
         ),
         "overlay": (
-            212_664,
-            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+            152_912,
+            "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20",
+        ),
+        "core_stage_overlay": (
+            145_314,
+            "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19",
+        ),
+        "core_stage_component": (
+            3_668_710,
+            "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8",
         ),
         "component": (
-            3_736_060,
-            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+            3_676_308,
+            "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
         ),
         "package": (
-            4_529_116,
-            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+            4_469_364,
+            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
         ),
     },
 }
@@ -613,6 +629,14 @@ class NanopbSkipVarintProductionTests(unittest.TestCase):
             dir=temporary_parent,
         )
         temporary = Path(cls.temporary.name)
+        production_config = json.loads(OVERLAY.read_text(encoding="utf-8"))
+        production_config["expected"] = production_config["core_stage_expected"]
+        for profile in production_config["toolchain_profiles"].values():
+            profile["expected"] = profile["core_stage_expected"]
+        cls.production_config = temporary / "core-stage-overlay.json"
+        cls.production_config.write_text(
+            json.dumps(production_config, sort_keys=True), encoding="utf-8"
+        )
         cls.objects = [temporary / "skip-a.o", temporary / "skip-b.o"]
         for output in cls.objects:
             subprocess.run(
@@ -1261,18 +1285,18 @@ class NanopbSkipVarintProductionTests(unittest.TestCase):
         output = Path(self.temporary.name) / "registered-overlay"
         report = self.apollo_overlay.build(
             root=ROOT,
-            config_path=OVERLAY,
+            config_path=self.production_config,
             output_dir=output,
             clang=self.clang,
             toolchain_profile=self.profile,
         )
         self.assertEqual(
             (report["overlay"]["size"], report["overlay"]["sha256"]),
-            self.pins["overlay"],
+            self.pins["core_stage_overlay"],
         )
         self.assertEqual(
             (report["component"]["size"], report["component"]["sha256"]),
-            self.pins["component"],
+            self.pins["core_stage_component"],
         )
         extracted = next(
             item for item in report["relocated_leaves"]

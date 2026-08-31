@@ -52,6 +52,17 @@ CASE_RUN_BASE = 0x08000000
 #: source-build provider and on the package.  Compiler-independent official
 #: blobs are never given profile overrides.
 DEFAULT_TOOLCHAIN_PROFILE = "apple-clang"
+DUAL_PROFILE_OWNERSHIP_PACKAGES = {
+    "apple-clang": "20bcd2816ac92e69a23afdf5e76d02b941ccbf6d8438970daeac51f9dfe7276d",
+    "linux-clang": "c2d02ec77e1029d767f6bdc581ca9041c64e0bdb9978739471db7f45fc3bc5ac",
+}
+DUAL_PROFILE_OWNERSHIP_MANIFESTS = {
+    "apple-clang": "46c9231e02ec88f4e32e85a25cd9b367b6857613af577d6d27a145be38a98946",
+    "linux-clang": "d1682bffa8c410605cc8198793f310e5ab66854bd18f7ae2dde40b1f77718875",
+}
+DUAL_PROFILE_OWNERSHIP_COMPONENTS = frozenset(
+    {"apollo_bootloader", "apollo_main"}
+)
 
 REQUIRED_RELEASE_COMPONENTS = {
     "codec": (1, 4, 3, "firmware/codec.bin"),
@@ -119,6 +130,10 @@ REQUIRED_PROTECTED_REGIONS = {
     ),
 }
 _OUTPUT_THREAD_LOCK = threading.Lock()
+G2_ROOT = Path(__file__).resolve().parents[1]
+PROFILE_RECORDING_MANIFESTS = frozenset({
+    (G2_ROOT / "manifests/g2-2.2.6.10-ring-source.json").resolve(),
+})
 
 
 def resolve_toolchain_profile_id(explicit: str | None) -> str:
@@ -394,6 +409,101 @@ def effective_component_regions(
 
     regions = component["regions"]
     boundary = component.get("source_appended_boundary")
+    replacements_by_profile = component.get("profile_region_replacements", {})
+    if not isinstance(replacements_by_profile, dict):
+        raise OpenCFWError(
+            f"{component['name']}: profile_region_replacements must be an object"
+        )
+    selected_replacements = replacements_by_profile.get(toolchain_profile, [])
+    if not isinstance(selected_replacements, list):
+        raise OpenCFWError(
+            f"{component['name']}: profile region replacements must be a list"
+        )
+    if selected_replacements:
+        if toolchain_profile == DEFAULT_TOOLCHAIN_PROFILE:
+            raise OpenCFWError(
+                f"{component['name']}: canonical profile cannot replace regions"
+            )
+        working = copy.deepcopy(regions)
+        previous_end = -1
+        for replacement in sorted(
+            selected_replacements,
+            key=lambda item: item.get("start", -1) if isinstance(item, dict) else -1,
+        ):
+            if not isinstance(replacement, dict):
+                raise OpenCFWError(
+                    f"{component['name']}: profile region replacement is invalid"
+                )
+            start = replacement.get("start")
+            end = replacement.get("end_exclusive")
+            replacement_regions = replacement.get("regions")
+            if (
+                not isinstance(start, int)
+                or not isinstance(end, int)
+                or start < 0
+                or end <= start
+                or start < previous_end
+                or not isinstance(boundary, int)
+                or end > boundary
+                or not isinstance(replacement_regions, list)
+                or not replacement_regions
+            ):
+                raise OpenCFWError(
+                    f"{component['name']}: profile region replacement span is invalid"
+                )
+            overlapping = []
+            for index, region in enumerate(working):
+                offset = region.get("file_offset")
+                size = region.get("size")
+                if not isinstance(offset, int) or not isinstance(size, int) or size <= 0:
+                    raise OpenCFWError(
+                        f"{component['name']}: base region span is invalid"
+                    )
+                if offset < end and offset + size > start:
+                    overlapping.append((index, region))
+            if not overlapping:
+                raise OpenCFWError(
+                    f"{component['name']}: profile replacement captures no base region"
+                )
+            cursor = start
+            for _index, region in overlapping:
+                if region.get("file_offset") != cursor:
+                    raise OpenCFWError(
+                        f"{component['name']}: profile replacement partially captures "
+                        "a base region"
+                    )
+                cursor += region.get("size", -1)
+            if cursor != end:
+                raise OpenCFWError(
+                    f"{component['name']}: profile replacement does not exactly tile "
+                    "base regions"
+                )
+            cursor = start
+            for region in replacement_regions:
+                if (
+                    not isinstance(region, dict)
+                    or region.get("file_offset") != cursor
+                    or not isinstance(region.get("size"), int)
+                    or region["size"] <= 0
+                ):
+                    raise OpenCFWError(
+                        f"{component['name']}: profile replacement regions have a gap "
+                        "or overlap"
+                    )
+                cursor += region["size"]
+            if cursor != end:
+                raise OpenCFWError(
+                    f"{component['name']}: profile replacement regions have wrong extent"
+                )
+            first = overlapping[0][0]
+            last = overlapping[-1][0]
+            working = (
+                working[:first]
+                + copy.deepcopy(replacement_regions)
+                + working[last + 1:]
+            )
+            previous_end = end
+        regions = working
     if toolchain_profile == DEFAULT_TOOLCHAIN_PROFILE or not isinstance(
         boundary, int
     ):
@@ -796,6 +906,20 @@ def validate_release_manifest(
             _release_pin(
                 pins, "size", "sha256", f"{name} profile {profile_id}",
             )
+        region_profiles = component.get("profile_region_replacements", {})
+        if not isinstance(region_profiles, dict):
+            raise OpenCFWError(
+                f"{name}: profile_region_replacements must be an object"
+            )
+        for profile_id in region_profiles:
+            if (
+                not isinstance(profile_id, str)
+                or profile_id == DEFAULT_TOOLCHAIN_PROFILE
+                or profile_id not in profiles
+            ):
+                raise OpenCFWError(
+                    f"{name}: profile region replacement names an invalid profile"
+                )
         if (
             toolchain_profile != DEFAULT_TOOLCHAIN_PROFILE
             and provider.get("kind") == "source_build"
@@ -866,9 +990,38 @@ def validate_release_manifest(
         effective_outputs: set[str] = set()
         for component in components:
             data = payloads[component["name"]]
+            effective_names: set[str] = set()
             for region in effective_component_regions(
                 component, len(data), toolchain_profile
             ):
+                region_name = region.get("name")
+                if not isinstance(region_name, str) or region_name in effective_names:
+                    raise OpenCFWError(
+                        f"{component['name']}: effective region names are not unique"
+                    )
+                effective_names.add(region_name)
+                status = region.get("address_status")
+                if status not in RELEASE_ADDRESS_STATUSES:
+                    raise OpenCFWError(
+                        f"{component['name']}/{region.get('name')}: "
+                        "effective address status is not allowed"
+                    )
+                has_target = "target" in region or "target_address" in region
+                if ("target" in region) != ("target_address" in region):
+                    raise OpenCFWError(
+                        f"{component['name']}/{region.get('name')}: "
+                        "effective target contract is incomplete"
+                    )
+                if status in NON_ADDRESSED_STATUSES and has_target:
+                    raise OpenCFWError(
+                        f"{component['name']}/{region.get('name')}: "
+                        "effective non-addressed region has a target"
+                    )
+                if status not in NON_ADDRESSED_STATUSES and not has_target:
+                    raise OpenCFWError(
+                        f"{component['name']}/{region.get('name')}: "
+                        "effective addressed region lacks a target"
+                    )
                 output = _release_output_path(
                     region.get("output"),
                     f"{component['name']}/{region.get('name')}",
@@ -1449,6 +1602,88 @@ def make_flash_plan(
     unresolved: list[dict[str, Any]],
     container: list[dict[str, Any]],
 ) -> dict[str, Any]:
+    source_build_components = [
+        component for component in manifest["components"]
+        if component.get("provider", {}).get("kind") == "source_build"
+    ]
+    source_build_names = {component.get("name") for component in source_build_components}
+    dual_profile_companion_applies = (
+        manifest.get("target") == "Even Realities G2"
+        and {component.get("name") for component in manifest["components"]}
+        == set(REQUIRED_RELEASE_COMPONENTS)
+        and source_build_names == set(DUAL_PROFILE_OWNERSHIP_COMPONENTS)
+        and package_sha256 == DUAL_PROFILE_OWNERSHIP_PACKAGES.get(toolchain_profile)
+        and manifest_id.get("sha256")
+        == DUAL_PROFILE_OWNERSHIP_MANIFESTS.get(toolchain_profile)
+    )
+    if not source_build_components:
+        ownership_mode = "authoritative_provider_origin_only"
+        ownership_companion = None
+        typed_mixed_profile_spans: list[dict[str, Any]] = []
+    elif (dual_profile_companion_applies
+          and toolchain_profile == DEFAULT_TOOLCHAIN_PROFILE):
+        ownership_mode = "non_authoritative_requires_checked_reconciliation"
+        ownership_companion = (
+            "tools/manifests/g2-dual-profile-ownership.json"
+        )
+        typed_mixed_profile_spans = []
+    else:
+        reconciled_noncanonical = (
+            dual_profile_companion_applies
+            and toolchain_profile != DEFAULT_TOOLCHAIN_PROFILE
+        )
+        ownership_mode = "non_authoritative_profile_coarse"
+        if toolchain_profile == DEFAULT_TOOLCHAIN_PROFILE:
+            ownership_mode = "non_authoritative_unreconciled_source_build"
+        elif not reconciled_noncanonical:
+            ownership_mode = "non_authoritative_profile_coarse_unreconciled"
+        ownership_companion = (
+            "tools/manifests/g2-dual-profile-ownership.json"
+            if reconciled_noncanonical else None
+        )
+        # Non-canonical profiles retain exact target addresses, region bytes,
+        # and artifact hashes.  Their source-build presentation rows below the
+        # appended tail inherit canonical region boundaries, however, and are
+        # therefore not a per-byte ownership map.  Publish the ambiguity as an
+        # explicit typed mixed boundary; the checked companion supplies exact
+        # aggregate source/generated/retained conservation from the admitted
+        # component build reports.
+        by_component: dict[str, list[dict[str, Any]]] = {}
+        for row in flash_regions + container:
+            by_component.setdefault(row["component"], []).append(row)
+        typed_mixed_profile_spans = []
+        for component in source_build_components:
+            name = component["name"]
+            rows = by_component.get(name, [])
+            if not rows:
+                raise OpenCFWError(
+                    f"{name}: source-build profile has no planned regions"
+                )
+            end = max(
+                row["component_file_offset"] + row["size"] for row in rows
+            )
+            start = 0
+            if name != "apollo_main":
+                boundary = component.get("source_appended_boundary")
+                if type(boundary) is int:
+                    start = boundary
+            if not 0 <= start <= end:
+                raise OpenCFWError(
+                    f"{name}: typed mixed profile boundary is invalid"
+                )
+            typed_mixed_profile_spans.append(
+                {
+                    "component": name,
+                    "component_file_offset": start,
+                    "end_exclusive": end,
+                    "size": end - start,
+                    "classification": "typed_mixed_profile_ownership",
+                    "reason": (
+                        "exact bytes and addresses; no complete per-byte "
+                        "source-vs-generated-vs-retained mask is claimed"
+                    ),
+                }
+            )
     return {
         "schema_version": 1,
         "target": manifest["target"],
@@ -1460,6 +1695,12 @@ def make_flash_plan(
         "flash_regions": flash_regions,
         "unresolved_flash_regions": unresolved,
         "container_only_regions": container,
+        "address_status_semantics": {
+            "address_and_artifact_mapping": "authoritative",
+            "ownership_labels": ownership_mode,
+            "authoritative_ownership_companion": ownership_companion,
+            "typed_mixed_profile_spans": typed_mixed_profile_spans,
+        },
         "protected_regions": [
             {
                 **region,
@@ -1542,6 +1783,28 @@ def make_build_report(
     }
 
 
+def validate_profile_recording_manifest(manifest_path: Path) -> Path:
+    """Allow direct pin recording only for the reviewed ring-only workflow."""
+    resolved_manifest = manifest_path.resolve()
+    if resolved_manifest not in PROFILE_RECORDING_MANIFESTS:
+        raise OpenCFWError(
+            "direct --record-profile is restricted to the reviewed ring-source "
+            "manifest; Apollo core-source pins require the independent "
+            "canonical observation/admission workflow"
+        )
+    try:
+        metadata = resolved_manifest.lstat()
+    except OSError as error:
+        raise OpenCFWError(
+            "profile-recording manifest cannot be inspected safely"
+        ) from error
+    if not stat.S_ISREG(metadata.st_mode) or metadata.st_nlink != 1:
+        raise OpenCFWError(
+            "profile-recording manifest must be an independent regular file"
+        )
+    return resolved_manifest
+
+
 def record_manifest_profile_pins(
     manifest_path: Path,
     profile_id: str,
@@ -1562,6 +1825,7 @@ def record_manifest_profile_pins(
             "cannot record the canonical apple-clang profile; its pins are "
             "the reviewed reference"
         )
+    manifest_path = validate_profile_recording_manifest(manifest_path)
     data = json.loads(manifest_path.read_text(encoding="utf-8"))
 
     package = data.setdefault("package", {})
@@ -1918,6 +2182,8 @@ def build(
     toolchain_profile = resolve_toolchain_profile_id(toolchain_profile)
     manifest_path = manifest_path.resolve()
     build_dir = build_dir.resolve()
+    if record_profile:
+        validate_profile_recording_manifest(manifest_path)
     recorded_providers: dict[str, dict[str, Any]] = {}
     manifest, project_root, payloads = verify_manifest(
         manifest_path,
@@ -2206,9 +2472,10 @@ def main(argv: list[str] | None = None) -> int:
         "--record-profile",
         action="store_true",
         help=(
-            "capture the observed source-build provider and package pins into "
-            "the manifest's profiles[<--toolchain-profile>] instead of "
-            "enforcing the reviewed ones"
+            "maintainer-only ring-source recorder: capture observed provider "
+            "and package pins into profiles[<--toolchain-profile>]; Apollo "
+            "core-source recording is rejected and requires independent "
+            "canonical observation/admission"
         ),
     )
 

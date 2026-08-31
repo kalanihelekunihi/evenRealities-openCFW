@@ -44,7 +44,7 @@ class SmpScActTest(unittest.TestCase):
         self.assertEqual(production["compiled_leaf_bytes"], 2258)
         self.assertEqual(production["source_owned_bytes_added"], 2276)
         self.assertEqual(production["stock_bytes_replaced"], 2662)
-        self.assertIn("deferred by project direction", production["hardware_validation"])
+        self.assertIn("blocked by unavailable physical evidence", production["hardware_validation"])
 
 
 if __name__ == "__main__":

@@ -1,5 +1,10 @@
 # G2 bootloader MX25U25643G read-transfer source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated 170-byte entry `[0x004205F4,0x0042069E)` now
 routes to `open_cfw_bootloader_mspi_read_transfer_4205f4` in maintained
 clean-room C. The stock SHA-256 is

@@ -1,0 +1,98 @@
+{
+  "compiler": "arc-linux-gnu-gcc (GCC) 16.1.1 20260501 (Red Hat Cross 16.1.1-1)",
+  "flags": [
+    "-mcpu=em",
+    "-Os",
+    "-std=c99",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "forbidden_runtime_imports": [],
+  "hardware_operations": [],
+  "hardware_validation": "blocked by unavailable physical evidence",
+  "production_routed": false,
+  "schema_version": 1,
+  "status": "arcv2-em-candidates-target-compiled",
+  "target": "ARCv2 EM",
+  "translation_unit_count": 8,
+  "translation_units": [
+    {
+      "object": "build/verification/em9305-arc/runtime_controller_master_connection_boundary.o",
+      "object_sha256": "b0828321506d6e53b950eea18705dc4725740f3cbd626e4ab1445c82ba906533",
+      "object_size": 988,
+      "source": "components/shared/em9305/runtime_controller_master_connection_boundary.c",
+      "source_sha256": "202c74333ef77d29dfcb3d5be1dd0cc6f412ffa94354490aa24282d6189de4f8",
+      "source_size": 787,
+      "undefined_symbols": []
+    },
+    {
+      "object": "build/verification/em9305-arc/runtime_controller_pawr_boundary.o",
+      "object_sha256": "17fa81e4cf789a61312a4a87615ccdeba3a4f3174e13a77ab0c0ba1f1cca707d",
+      "object_size": 2072,
+      "source": "components/shared/em9305/runtime_controller_pawr_boundary.c",
+      "source_sha256": "59856aa09f5b07c96ffac863ca4531b27493e83df3641804fcc62ac5ed802294",
+      "source_size": 1766,
+      "undefined_symbols": []
+    },
+    {
+      "object": "build/verification/em9305-arc/runtime_controller_slave_connection_boundary.o",
+      "object_sha256": "486bfaa1a50968aa621f9ec2a7f0853e737116ba9a1ffa737628cb3c756abfe4",
+      "object_size": 2348,
+      "source": "components/shared/em9305/runtime_controller_slave_connection_boundary.c",
+      "source_sha256": "85d4dbe53cc369469c041c5c7416705ff56671eb5a983d02d5fd5597de9f78b1",
+      "source_size": 2349,
+      "undefined_symbols": []
+    },
+    {
+      "object": "build/verification/em9305-arc/runtime_first_party_hooks_candidate.o",
+      "object_sha256": "3654fe21e2f265ac9d7c44ca85f48cf933ea6ed95493c60d8ea25b1298a3039d",
+      "object_size": 4436,
+      "source": "components/shared/em9305/runtime_first_party_hooks_candidate.c",
+      "source_sha256": "94211cfe468f2f789e0f6d2f895409416e5669672b00ffec6de08058f2b2ad6b",
+      "source_size": 7120,
+      "undefined_symbols": []
+    },
+    {
+      "object": "build/verification/em9305-arc/runtime_metaware_helpers_candidate.o",
+      "object_sha256": "152048592a6fafb6340c01cb9d3ef3da6c7a04d9876d2116f88986fec6fb780f",
+      "object_size": 3844,
+      "source": "components/shared/em9305/runtime_metaware_helpers_candidate.c",
+      "source_sha256": "397f65d39325f89f5406b67c522e9af9ca1ab53c5554b050a8de9b5056bbcfe4",
+      "source_size": 6472,
+      "undefined_symbols": []
+    },
+    {
+      "object": "build/verification/em9305-arc/runtime_qpc_hook_provider_candidate.o",
+      "object_sha256": "baa9696c9f99107cd2e1c2054eeee2b638c37c94c8bc6a9d1ed6d5a7e40182d8",
+      "object_size": 2228,
+      "source": "components/shared/em9305/runtime_qpc_hook_provider_candidate.c",
+      "source_sha256": "853865ae3bd704cc3a9153abbb43b5cbac5ddad84ff2fc4ae8505ac1272f9ac3",
+      "source_size": 2557,
+      "undefined_symbols": []
+    },
+    {
+      "object": "build/verification/em9305-arc/runtime_unclassified_tail_candidate.o",
+      "object_sha256": "375ce56351f22786b7751d4088da49417a1f8f27bf031044b2a9ae4dd9b55c0c",
+      "object_size": 5796,
+      "source": "components/shared/em9305/runtime_unclassified_tail_candidate.c",
+      "source_sha256": "e46f488e8cafcb3f9bc9d1344fad63347f6abe4f85aaa7b27682d563baea9770",
+      "source_size": 7914,
+      "undefined_symbols": []
+    },
+    {
+      "object": "build/verification/em9305-arc/runtime_wsf_idle_tasks.o",
+      "object_sha256": "81b8f8148e58352d39dbfa89f9af65080d597ff784e5fe3e8ebc692413f9529e",
+      "object_size": 1528,
+      "source": "components/shared/em9305/runtime_wsf_idle_tasks.c",
+      "source_sha256": "5a7458762180de765802774468dae715ce637bcd6e352c20b01698083b800071",
+      "source_size": 2098,
+      "undefined_symbols": []
+    }
+  ],
+  "undefined_symbols": []
+}

@@ -1,0 +1,755 @@
+{
+  "anchors": {
+    "freetype_commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+    "freetype_version": "2.9.1",
+    "ghidra": {
+      "bytes": 3270703,
+      "path": "research/corpus/apollo-main/ghidra/decomp/functions.jsonl",
+      "sha256": "9fd9c1c34e17abb977f2ccb32a931d9b96743db2db10707de19bf9ea6ae42662"
+    },
+    "image": {
+      "bytes": 3523396,
+      "load_base": "0x00437FE0",
+      "path": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+    },
+    "next_provider_start": "cordio-smp-sc-act@0x005E267C",
+    "outline_callback_table": "0x0077BEE4",
+    "previous_provider_end": "sfnt@0x005E1594",
+    "raster_callback_table": "0x0077BEFC"
+  },
+  "binary_overlay_ready": false,
+  "blockers": [
+    "original compiler/version/options, ABI details, and LTO state are not recovered",
+    "no authenticated stock callsite rewrite or target placement routes this source",
+    "no authenticated font payload or face-path configuration was supplied",
+    "task stack and worst-case execution time are not qualified",
+    "no authorized physical G2 hardware rendering execution was performed"
+  ],
+  "compiler_byte_identity_claimed": false,
+  "confidence": {
+    "exact": {
+      "bytes": 0,
+      "functions": 0,
+      "reason": "no original-compiler byte identity proof"
+    },
+    "high": {
+      "bytes": 804,
+      "functions": 16
+    },
+    "mapped_total": {
+      "bytes": 4310,
+      "functions": 29
+    },
+    "medium": {
+      "bytes": 3506,
+      "functions": 13
+    },
+    "unresolved_code": {
+      "bytes": 0,
+      "functions": 0,
+      "source_identities_complete": true
+    }
+  },
+  "hardware_operations": false,
+  "mapping_sha256": "603b60ba088a2d50816d017fa3c11287ef9d908a55592b5db56e3f8a6c299664",
+  "movement": {
+    "authenticated_complete_map": {
+      "bytes": 4310,
+      "functions": 29
+    },
+    "initial_retained_census": {
+      "bytes": 0,
+      "functions": 0
+    },
+    "newly_classified_physical": {
+      "bytes": 18,
+      "intervals": 2
+    }
+  },
+  "production_routed": false,
+  "read_only": true,
+  "records": {
+    "physical_classification": [
+      {
+        "body_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+        "bytes": 2,
+        "callable_code": false,
+        "category": "alignment-padding",
+        "end_exclusive": "0x005E2638",
+        "source_identity_claimed": false,
+        "start": "0x005E2636"
+      },
+      {
+        "body_sha256": "3a50ee46dc8cc511147a21734345b66668780791e2b06d86bc6ec9f955495043",
+        "bytes": 16,
+        "callable_code": false,
+        "category": "literal-constant-pool",
+        "end_exclusive": "0x005E2648",
+        "source_identity_claimed": false,
+        "start": "0x005E2638"
+      }
+    ],
+    "smooth": [
+      {
+        "body_sha256": "6f80fb6c2dfb1ffea30f732b05e5c1c48c25ce3452a1bc5b633cacee4b97e19d",
+        "bytes": 132,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E1618",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "start": "0x005E1594",
+        "symbol": "gray_record_cell"
+      },
+      {
+        "body_sha256": "c35dceb33d7400c99df14232df157bf02d34c95ed23cec0b5da9e2b079e0733d",
+        "bytes": 110,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E1686",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "start": "0x005E1618",
+        "symbol": "gray_set_cell"
+      },
+      {
+        "body_sha256": "af32d99e996305903c5bad33f50853a4a281272e0d913bbca359eb59c8b2caee",
+        "bytes": 316,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E17C2",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "start": "0x005E1686",
+        "symbol": "gray_render_scanline"
+      },
+      {
+        "body_sha256": "6fed3facb6f47cbc8310ed03634d2512ecfed7507b32c2cce9ee9050d5236d4d",
+        "bytes": 552,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E19EA",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "start": "0x005E17C2",
+        "symbol": "gray_render_line"
+      },
+      {
+        "body_sha256": "6d780e6da8168a241a21bcf63e329548b9156a68453d7482b15b765d6ebb3a52",
+        "bytes": 82,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E1A3C",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "start": "0x005E19EA",
+        "symbol": "gray_split_conic"
+      },
+      {
+        "body_sha256": "71f982562a27711f85052a7adafef430940625e429edbef50d81f34a0f3fba47",
+        "bytes": 272,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E1B4C",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "start": "0x005E1A3C",
+        "symbol": "gray_render_conic"
+      },
+      {
+        "body_sha256": "293bb3ef3410f9c97ac6d454c74ef6c0bf99bd69301135b12a5d7e71ab9d922a",
+        "bytes": 146,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E1BDE",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "start": "0x005E1B4C",
+        "symbol": "gray_split_cubic"
+      },
+      {
+        "body_sha256": "3b9da7e7787df1fa5431302cc8074b8284b63db5c961147dbc2df41c6f397197",
+        "bytes": 398,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E1D6C",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "start": "0x005E1BDE",
+        "symbol": "gray_render_cubic"
+      },
+      {
+        "body_sha256": "be5fe175c4204599d7f37373e4961728922449d24d9e23b7d4dc964c7ac7dcbc",
+        "bytes": 38,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E1D92",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftgrays.c",
+        "pointer_references": [
+          "0x0077BEE4"
+        ],
+        "start": "0x005E1D6C",
+        "symbol": "gray_move_to",
+        "thumb_pointer": "0x005E1D6D"
+      },
+      {
+        "body_sha256": "2a6014fa1924c7143cafa352c92d5f345fada73bb1ce90a042c78f38f14a901a",
+        "bytes": 22,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E1DA8",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftgrays.c",
+        "pointer_references": [
+          "0x0077BEE8"
+        ],
+        "start": "0x005E1D92",
+        "symbol": "gray_line_to",
+        "thumb_pointer": "0x005E1D93"
+      },
+      {
+        "body_sha256": "1a73db8cbbb643c506722c8dccde8995ffec4e0211f885ac72a435632c19e9b0",
+        "bytes": 18,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E1DBA",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftgrays.c",
+        "pointer_references": [
+          "0x0077BEEC"
+        ],
+        "start": "0x005E1DA8",
+        "symbol": "gray_conic_to",
+        "thumb_pointer": "0x005E1DA9"
+      },
+      {
+        "body_sha256": "4297787dee2d1c34a446980e83bbfdef8e83225126fb5e84e4e9e443f497ddf6",
+        "bytes": 20,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E1DCE",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftgrays.c",
+        "pointer_references": [
+          "0x0077BEF0"
+        ],
+        "start": "0x005E1DBA",
+        "symbol": "gray_cubic_to",
+        "thumb_pointer": "0x005E1DBB"
+      },
+      {
+        "body_sha256": "9a5681489dd2c41c2eb6d1a39d4f431ed8ac7867993fa445f09bd0b1e5d3ee18",
+        "bytes": 176,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E1E7E",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "start": "0x005E1DCE",
+        "symbol": "gray_hline"
+      },
+      {
+        "body_sha256": "8239e153ad6eee94e6695edff298f47f31018048b94e9be89f62ca01016a712f",
+        "bytes": 140,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E1F0A",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "start": "0x005E1E7E",
+        "symbol": "gray_sweep"
+      },
+      {
+        "body_sha256": "eedefeaa6ddddf381b200376286302e06f3820a56cd1bfb9aab1bb77f7520cd9",
+        "bytes": 58,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E1F44",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "start": "0x005E1F0A",
+        "symbol": "gray_convert_glyph_inner"
+      },
+      {
+        "body_sha256": "fcc1e17699692904d7c7b5de4e297bdd13b3b92da19ec170f98861f5ddaf64bb",
+        "bytes": 270,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E2052",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "start": "0x005E1F44",
+        "symbol": "gray_convert_glyph"
+      },
+      {
+        "body_sha256": "688ed0ddc1a53ef438f2b987cf1f39a5a5599163660fd4a438a4c435b648bbec",
+        "bytes": 466,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E2224",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "pointer_references": [
+          "0x0077BF0C"
+        ],
+        "start": "0x005E2052",
+        "symbol": "gray_raster_render",
+        "thumb_pointer": "0x005E2053"
+      },
+      {
+        "body_sha256": "e93a82cf32f529c515f1532d627d37d203ef054a8823801a5c5f9d7796dd1e15",
+        "bytes": 36,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E2248",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "pointer_references": [
+          "0x0077BF00"
+        ],
+        "start": "0x005E2224",
+        "symbol": "gray_raster_new",
+        "thumb_pointer": "0x005E2225"
+      },
+      {
+        "body_sha256": "3dafdf311cd0661c73dd77a020b5a0643a00270b09ec4acdae3d7eeb4dacfa4f",
+        "bytes": 14,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E2256",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftgrays.c",
+        "pointer_references": [
+          "0x0077BF10"
+        ],
+        "start": "0x005E2248",
+        "symbol": "gray_raster_done",
+        "thumb_pointer": "0x005E2249"
+      },
+      {
+        "body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "bytes": 2,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E2258",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftgrays.c",
+        "pointer_references": [
+          "0x0077BF04"
+        ],
+        "start": "0x005E2256",
+        "symbol": "gray_raster_reset",
+        "thumb_pointer": "0x005E2257"
+      },
+      {
+        "body_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+        "bytes": 4,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E225C",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftgrays.c",
+        "pointer_references": [
+          "0x0077BF08"
+        ],
+        "start": "0x005E2258",
+        "symbol": "gray_raster_set_mode",
+        "thumb_pointer": "0x005E2259"
+      },
+      {
+        "body_sha256": "831280637b9af853c4beda26040230f61a91f680bfce7a5b010f98b42ca557f9",
+        "bytes": 22,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E2272",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftsmooth.c",
+        "pointer_references": [
+          "0x00718DB4",
+          "0x00718DF0",
+          "0x00718E2C"
+        ],
+        "start": "0x005E225C",
+        "symbol": "ft_smooth_init",
+        "thumb_pointer": "0x005E225D"
+      },
+      {
+        "body_sha256": "f976f9f41815bb7f0ecd1e9a7952494b7afa57be5aa5aebb61f6d1462f7a2056",
+        "bytes": 16,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E2282",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftsmooth.c",
+        "pointer_references": [
+          "0x00718DD0",
+          "0x00718E0C",
+          "0x00718E48"
+        ],
+        "start": "0x005E2272",
+        "symbol": "ft_smooth_set_mode",
+        "thumb_pointer": "0x005E2273"
+      },
+      {
+        "body_sha256": "03640375dfa2f510cff48ab3b5fe0c647bbe895332a683b1c2697035858f952c",
+        "bytes": 54,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E22B8",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftsmooth.c",
+        "pointer_references": [
+          "0x00718DC8",
+          "0x00718E04",
+          "0x00718E40"
+        ],
+        "start": "0x005E2282",
+        "symbol": "ft_smooth_transform",
+        "thumb_pointer": "0x005E2283"
+      },
+      {
+        "body_sha256": "ba6342e15a272906ae87d4281da75bc49523f5f514439258020a855910ebcdec",
+        "bytes": 40,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E22E0",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftsmooth.c",
+        "pointer_references": [
+          "0x00718DCC",
+          "0x00718E08",
+          "0x00718E44"
+        ],
+        "start": "0x005E22B8",
+        "symbol": "ft_smooth_get_cbox",
+        "thumb_pointer": "0x005E22B9"
+      },
+      {
+        "body_sha256": "e64dfdce6ebad7fab3f98a88de615bb4de47c0380abf896246011242e0381604",
+        "bytes": 854,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "medium",
+        "end_exclusive": "0x005E2636",
+        "evidence": [
+          "pinned-ghidra-source-order",
+          "pinned-ghidra-whole-body",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "raster-render-call-graph"
+        ],
+        "mapping_origin": "pinned-ghidra-source-order",
+        "module": "ftsmooth.c",
+        "start": "0x005E22E0",
+        "symbol": "ft_smooth_render_generic"
+      },
+      {
+        "body_sha256": "92b9d5b71761a49a974bcf6716d7a1982b0cb06f27b5087f19e704741127a97a",
+        "bytes": 24,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E2660",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftsmooth.c",
+        "pointer_references": [
+          "0x00718DC4"
+        ],
+        "start": "0x005E2648",
+        "symbol": "ft_smooth_render",
+        "thumb_pointer": "0x005E2649"
+      },
+      {
+        "body_sha256": "e1820a351913746cd1815e8b912ecb02ed47e3a24b80bb212717ac04e555169f",
+        "bytes": 14,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E266E",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftsmooth.c",
+        "pointer_references": [
+          "0x00718E00"
+        ],
+        "start": "0x005E2660",
+        "symbol": "ft_smooth_render_lcd",
+        "thumb_pointer": "0x005E2661"
+      },
+      {
+        "body_sha256": "de247243e60840b1df805a0b2cf5f1f5d153e5afff759945b05c494a5b2eb66a",
+        "bytes": 14,
+        "compiler_byte_identity_claimed": false,
+        "confidence": "high",
+        "end_exclusive": "0x005E267C",
+        "evidence": [
+          "recovered-complete-body",
+          "complete-thumb-body-boundary",
+          "whole-body-sha256",
+          "exact-freetype-2.9.1-definition",
+          "single-object-source-order",
+          "stock-renderer-outline-or-raster-table-pointer"
+        ],
+        "mapping_origin": "recovered-complete-body",
+        "module": "ftsmooth.c",
+        "pointer_references": [
+          "0x00718E3C"
+        ],
+        "start": "0x005E266E",
+        "symbol": "ft_smooth_render_lcd_v",
+        "thumb_pointer": "0x005E266F"
+      }
+    ]
+  },
+  "renderer_classes": [
+    {
+      "class_address": "0x00718D9C",
+      "name": "smooth",
+      "raster_table": "0x0077BEFC",
+      "render_callback": "0x005E2648",
+      "required_mode": "FT_RENDER_MODE_NORMAL"
+    },
+    {
+      "class_address": "0x00718DD8",
+      "name": "smooth-lcd",
+      "raster_table": "0x0077BEFC",
+      "render_callback": "0x005E2660",
+      "required_mode": "FT_RENDER_MODE_LCD"
+    },
+    {
+      "class_address": "0x00718E14",
+      "name": "smooth-lcdv",
+      "raster_table": "0x0077BEFC",
+      "render_callback": "0x005E266E",
+      "required_mode": "FT_RENDER_MODE_LCD_V"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "bytes": 4328,
+    "end_exclusive": "0x005E267C",
+    "ghidra_recognized": {
+      "bytes": 4022,
+      "functions": 16
+    },
+    "recovered_callable": {
+      "bytes": 288,
+      "functions": 13
+    },
+    "residual_physical": {
+      "bytes": 18,
+      "category_bytes": {
+        "alignment-padding": 2,
+        "literal-constant-pool": 16
+      },
+      "intervals": 2,
+      "unclassified_bytes": 0,
+      "unresolved_callable_bytes": 0
+    },
+    "start": "0x005E1594"
+  },
+  "selected_module": "smooth-renderer-family",
+  "status": "fail-closed-smooth-function-map"
+}

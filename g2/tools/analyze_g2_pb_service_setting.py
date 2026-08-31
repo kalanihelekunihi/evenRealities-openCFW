@@ -27,29 +27,29 @@ MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "59f77f3102881d030c5cdfff4bd43da9f061545cd5d47c4ad30e4a751a4708b4",
     CLOSURE: "3f53fa20acbeadb61f4a660f5512a80abef3d5c3e3638cd86646c7fa1d42675b",
-    PROVENANCE: "67b02d52464f8dd30c597b0dc05a438a697396624773f56bb58fac9b9eaaf34b",
+    PROVENANCE: "a26ae3fea7773cac8052a2a16048d35ca316a36fd227b6b70ce67439f16690b9",
 }
-SOURCE_SIZE = 18393
-SOURCE_SHA256 = "203b260e1e12286734073e587507eaceaec351a307c7243c3beecabb8fe97abd"
+SOURCE_SIZE = 18384
+SOURCE_SHA256 = "faa899b9c966d073ef4e9740221a8e2940ee4baab874ddf63ae4ef5dec0b937f"
 FUNCTIONS = (
-    ("open_cfw_pb_service_setting_buffer_write", 146, 265564, 0,
+    ("open_cfw_pb_service_setting_buffer_write", 146, 205716, 0,
      "buffer_write"),
-    ("open_cfw_pb_service_setting_zero", 88, 265712, 0, "zero"),
-    ("setting_is_duplicate_message", 22, 265800, 0, "duplicate"),
-    ("setting_parse_data_package", 124, 265824, 3, "parse"),
-    ("setting_respond_to_app", 104, 265948, 4, "respond"),
-    ("setting_build_full_status_package", 418, 266052, 5, "build_status"),
-    ("setting_respond_with_local_data", 120, 266472, 4, "respond_local"),
-    ("setting_respond_to_app_serialize", 90, 266592, 4,
+    ("open_cfw_pb_service_setting_zero", 88, 205864, 0, "zero"),
+    ("setting_is_duplicate_message", 22, 205952, 0, "duplicate"),
+    ("setting_parse_data_package", 124, 205976, 3, "parse"),
+    ("setting_respond_to_app", 104, 206100, 4, "respond"),
+    ("setting_build_full_status_package", 418, 206204, 5, "build_status"),
+    ("setting_respond_with_local_data", 120, 206624, 4, "respond_local"),
+    ("setting_respond_to_app_serialize", 90, 206744, 4,
      "respond_serialize"),
-    ("setting_respond_with_local_data_serialize", 90, 266684, 4,
+    ("setting_respond_with_local_data_serialize", 90, 206836, 4,
      "respond_local_serialize"),
-    ("setting_notify_common", 252, 266776, 6, "notify_common"),
-    ("setting_notify_device_status_to_app", 50, 267028, 4,
+    ("setting_notify_common", 252, 206928, 6, "notify_common"),
+    ("setting_notify_device_status_to_app", 50, 207180, 4,
      "notify_status"),
-    ("setting_notify_recalibration_status_to_app", 76, 267080, 2,
+    ("setting_notify_recalibration_status_to_app", 76, 207232, 2,
      "notify_recalibration"),
-    ("notify_silent_mode_to_app", 70, 267156, 2, "notify_silent"),
+    ("notify_silent_mode_to_app", 70, 207308, 2, "notify_silent"),
 )
 PATCH_SUFFIXES = (
     "duplicate", "parse", "respond", "build_status", "respond_local",
@@ -379,12 +379,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 3466,
             "retained_gap_pool_bytes": 334,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "No authorized live G2 service 0x09 setting peer BLE, full-"
-                "status, recalibration-status, or silent-mode workflow "
-                "evidence is required for future qualification; the authorized right temple is "
-                "not under test because qualification is deferred by project direction and the left temple must remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific service 0x09 setting fixture or "
+                "an authenticated golden BLE full-status, recalibration-status, and silent-mode workflow capture"
             ),
         },
     }

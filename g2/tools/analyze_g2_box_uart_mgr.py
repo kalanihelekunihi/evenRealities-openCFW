@@ -20,13 +20,13 @@ FM = ROOT / "tools/manifests/g2-box-uart-mgr-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-box-uart-mgr-closure.tsv"
 SOURCE = ROOT / "components/apollo_main/core_overlay/box_uart_mgr.c"
 SOURCE_PATH = "components/apollo_main/core_overlay/box_uart_mgr.c"
-SOURCE_SHA256 = "d3515674bd76339aa697f66f4813ba21d04dda99ae9eae01546e6ae30680a548"
+SOURCE_SHA256 = "d7d419940733206f76e8d8661d261f3d0eb7435f2975315274c072b99e1f1ae2"
 OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
-PINS = {FM: "59b450ae9ad9341eef8350bdb74d425df7cb44d73845801e85603d9ede19005a", CL: "985ae815875c1e4222fbdd978eb1266f1e5053379de7ddcc00dab9710b69adf6"}
+PINS = {FM: "59b450ae9ad9341eef8350bdb74d425df7cb44d73845801e85603d9ede19005a", CL: "eb746be4c575f1214c91bed99e3cc8c573579106c7a4ab0ee645213346a13356"}
 RETAINED = 'platform\\device_mgr\\box_uart_mgr.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\platform\\device_mgr\\box_uart_mgr.c'
 PATH_RUN = 0x6f890c
@@ -291,10 +291,10 @@ def analyze(image=IMAGE):
 
     report = json.loads(BUILD_REPORT.read_text())
     if (
-        report["overlay"]["size"] != 332666
-        or report["overlay"]["sha256"] != "80f7aae90196045102d6f1f59be0b49d84b3ed58f017a8f5d56109a2788b8561"
-        or report["component"]["size"] != 3856062
-        or report["component"]["sha256"] != "96a369aa58d9570a0c6eeb5cde5fd5b309e827bd5f6dcf979eae88df971ccf3a"
+        report["overlay"]["size"] != 362272
+        or report["overlay"]["sha256"] != "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+        or report["component"]["size"] != 3885668
+        or report["component"]["sha256"] != "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5"
     ):
         raise c.AuditError("case-UART production component changed")
     report_leaves = [
@@ -310,26 +310,26 @@ def analyze(image=IMAGE):
     provider = manifest["component_overrides"]["apollo_main"]["provider"]
     regions = manifest["component_overrides"]["apollo_main"]["regions"]
     if (
-        provider.get("size") != 3856062
-        or provider.get("sha256") != "96a369aa58d9570a0c6eeb5cde5fd5b309e827bd5f6dcf979eae88df971ccf3a"
+        provider.get("size") != 3885668
+        or provider.get("sha256") != "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5"
         or len([item for item in regions if item["name"].startswith("box_uart_mgr_")]) != 12
     ):
         raise c.AuditError("case-UART package ownership manifest changed")
     if (
-        PACKAGE.stat().st_size != 4634556
-        or _sh(PACKAGE.read_bytes()) != "430bf420dc4ebcf49dcef43177e134bdb9046f3a93ebb244089552d37deb7933"
+        PACKAGE.stat().st_size != 4678740
+        or _sh(PACKAGE.read_bytes()) != "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a"
     ):
         raise c.AuditError("case-UART production package changed")
     flash = json.loads(FLASH_PLAN.read_text())
     if (
-        FLASH_PLAN.stat().st_size != 3116640
-        or _sh(FLASH_PLAN.read_bytes()) != "4c4ef626ec165aede17768250dce2a6b163bdd64cf9fb50b084b863e9eae3e40"
+        FLASH_PLAN.stat().st_size != 4586947
+        or _sh(FLASH_PLAN.read_bytes()) != "0180ded6475c22f46ec79dd4985c8194d73f67f9827100dc5c2358f204da8f55"
         or (
             len(flash["flash_regions"]),
             len(flash["unresolved_flash_regions"]),
             len(flash["container_only_regions"]),
             len(flash["protected_regions"]),
-        ) != (4495, 2, 5, 6)
+            ) != (6586, 0, 6, 6)
     ):
         raise c.AuditError("case-UART production flash plan changed")
     return {

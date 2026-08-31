@@ -15,7 +15,7 @@ class ServiceRingBatteryTests(unittest.TestCase):
   self.assertTrue(p["production_routed"])
   self.assertEqual((p["source_functions"],p["compiled_text_bytes"],p["alignment_bytes"],p["strict_relocations"],p["stock_replaced_bytes"],p["retained_literal_pool_bytes"]),(5,134,4,2,352,44))
   self.assertFalse(p["software_functional_gap"])
-  self.assertEqual(p["hardware_validation"],"deferred by project direction")
+  self.assertEqual(p["hardware_validation"],"blocked by unavailable physical evidence")
  def test_behavior(self):
   b=self.r["behavior"]
   self.assertEqual((b["state_address"],b["service_record_id"],b["update_message_id"],b["request_message_id"],b["message_bytes"]),(0x20074F3A,0x105,5,6,12))

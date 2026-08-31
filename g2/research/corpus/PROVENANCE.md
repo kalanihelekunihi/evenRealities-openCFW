@@ -7,9 +7,11 @@ single 12,684,322-byte bundle with SHA-256
 `8e721a0b4fe872081f92d49a5393422b323cd077ae66e8c1badc083c7b8c240b`.
 
 That bundle is no longer stored compressed, and the host name is no longer part
-of the layout. The evidence is unpacked and filed by subject. Nothing was
-rewritten: every file is byte-for-byte what the bundle contained, and the
-embedded `SHA256SUMS` manifests still authenticate it in place.
+of the layout. The evidence is unpacked and filed by subject. The original
+delivery manifests remain unchanged and continue to authenticate their
+delivered bytes. Five reviewed, header-only project-source mutations and later
+additions are recorded separately below; they do not rewrite those historical
+manifests.
 
 ## Original delivery roots
 
@@ -77,7 +79,7 @@ against the repository-level [`../MANIFEST.sha256`](../MANIFEST.sha256).
 
 ## Reviewed additions after the original delivery
 
-One, recorded 2026-08-13:
+Recorded 2026-08-13:
 
 1. **EM9305 controller-cluster recovery lane.** The lorelei GNU ARC cluster
    recovery returned `cluster-objects.json` (628,176 bytes, SHA-256
@@ -88,3 +90,61 @@ One, recorded 2026-08-13:
    produced it from the authenticated SDK ISO archive. The envelope verifies
    in place. `../MANIFEST.sha256` was re-indexed with
    `verify_research_corpus.py --write-manifest` for exactly these two paths.
+
+Recorded 2026-08-28:
+
+1. **Apollo PT-protocol semantic harvest.** Four files were added at
+   `apollo-main/ghidra/pt-protocol/`: `HARVEST.json`, `command-map.tsv`,
+   `functions.jsonl`, and their `SHA256SUMS` envelope. The deterministic
+   parser is [`../../tools/extract_g2_pt_protocol_decomp.py`](../../tools/extract_g2_pt_protocol_decomp.py),
+   and the reviewed function census is
+   `tools/manifests/g2-pt-protocol-function-map.tsv`. `HARVEST.json` pins the
+   source Ghidra log as SHA-256
+   `2186b9a5175b593d5b43f055034632080a3a92361cba3dd5b87cde7f157d3c13`.
+   That raw log is not retained in this repository, so the envelope
+   authenticates the reviewed harvest but does **not** establish an
+   independently replayable, end-to-end extraction chain.
+2. **Charging-case final-frontier harvest.** Four files were added at
+   `case/ghidra/final-frontier/`: `HARVEST.json`, `calls.tsv`,
+   `functions.jsonl`, and their `SHA256SUMS` envelope. The tracked extractor
+   [`../../tools/extract_g2_case_final_decomp.py`](../../tools/extract_g2_case_final_decomp.py)
+   deterministically consumes the tracked source
+   `tools/manifests/g2-box-ghidra-decomp.c` and reviewed frontier
+   `tools/manifests/g2-case-final-function-frontier.tsv`; their identities and
+   the 222-function/357-edge result are pinned by `HARVEST.json`.
+
+## Reviewed post-delivery mutations
+
+Five project-authored clean-room candidate sources received an SPDX-header-only
+`GPL-3.0-only` to `MIT` normalization. Their original and current SHA-256
+digests, plus the review reason, are pinned in the exact
+`REVIEWED_MUTATIONS` allowlist in
+[`../../tools/verify_research_corpus.py`](../../tools/verify_research_corpus.py):
+
+- `iar/math-errno/iar_runtime_math_errno.S`
+- `wsf/current11/inputs/runtime_cordio_wsf_timer_candidate.{c,h}`
+- `wsf/current11-v2/runtime_cordio_wsf_timer_candidate.{c,h}`
+
+The original delivery manifests were not changed. Any content transition other
+than those five exact old/new digest pairs fails verification.
+`wsf/current11-v2/runtime_cordio_wsf_timer_candidate.c` still contains the
+historical prose phrase “this GPL candidate”; the reviewed mutation is
+deliberately limited to its SPDX header and does not silently rewrite that
+captured provenance statement. That inconsistency needs an ownership/license
+review before this research candidate is redistributed.
+
+A 2026-08-29 audit also restored two accidental evidence edits to their
+authenticated delivered bytes: the raw `source-lanes/path-gap/events.jsonl`
+capture (including its captured historical license text) and the
+`emb_controller_iso` duration value in
+`em9305/sdk-comparison/round2/results.tsv`. The raw path-gap capture is not
+project-authored MIT source and is intentionally absent from the additional
+MIT-source census.
+
+## Redistribution boundary
+
+This research corpus includes vendor-binary-derived Ghidra output and raw
+diagnostic evidence. Its authenticated presence is not a redistribution-license
+grant. The public community source archive excludes `research/` and `corpus/`;
+these materials require a separate provenance, privacy, and license review
+before any broader publication.

@@ -9,8 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_quicklist.c"
 FIXTURE = ROOT / "tests/fixtures/pb_service_quicklist_host.c"
-SOURCE_SIZE = 16280
-SOURCE_SHA256 = "ce4f5063e971cbed8d36ebdb764f88472efc4d9a7d581f125c3dfff64756e908"
+SOURCE_SIZE = 16271
+SOURCE_SHA256 = "f64b59b3cd70b1f51b4e39a24aa1977c004917bfc442ede92134c4c71649d53b"
 SELECTORS = {
     "BUFFER_WRITE": "open_cfw_pb_service_quicklist_buffer_write",
     "ZERO": "open_cfw_pb_service_quicklist_zero",

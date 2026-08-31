@@ -1,0 +1,99 @@
+{
+  "schema": "open-cfw-g2-freetype-sfnt-function-map-v4",
+  "analyzer": "tools/analyze_g2_freetype_sfnt_function_map.py",
+  "status": "fail-closed-sfnt-function-map",
+  "selected_module": "sfnt",
+  "selection": {
+    "sfnt": {"source_backed_functions": 61, "source_backed_bytes": 16520, "direct_callback_slots": 31},
+    "psaux": {"source_backed_functions": 57, "source_backed_bytes": 7114},
+    "smooth": {"source_backed_functions": 0, "direct_callback_slots": 7},
+    "autofit": {"source_backed_functions": 0, "direct_callback_slots": 3}
+  },
+  "anchors": {
+    "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "ghidra_functions_sha256": "9fd9c1c34e17abb977f2ccb32a931d9b96743db2db10707de19bf9ea6ae42662",
+    "module_class": "0x0075A3F8",
+    "module_name_address": "0x0078E6A4",
+    "interface_table": "0x0069CA14",
+    "freetype_tag": "VER-2-9-1",
+    "freetype_commit": "86bc8a95056c97a810986434a3f268cbe67f2902"
+  },
+  "scope": {
+    "start": "0x005DA1E8",
+    "end_exclusive": "0x005E1594",
+    "bytes": 29612,
+    "ghidra_recognized_functions": 75,
+    "ghidra_recognized_body_bytes": 21238,
+    "residual_intervals": 10,
+    "residual_physical_bytes": 354,
+    "physical_classification_records": 18,
+    "physical_unclassified_bytes": 0,
+    "category_bytes": {
+      "literal-constant-pool": 328,
+      "function-pointer-table": 12,
+      "alignment-padding": 14
+    },
+    "formerly_unparsed_3274": {
+      "recovered_table_callback_code": 2374,
+      "recovered_private_helper_code": 604,
+      "literal_constant_pool": 272,
+      "function_pointer_table": 12,
+      "alignment_padding": 12,
+      "unclassified": 0
+    }
+  },
+  "confidence": {
+    "exact": {"functions": 0, "bytes": 0},
+    "high": {"functions": 75, "bytes": 13164},
+    "medium": {"functions": 61, "bytes": 16094},
+    "unresolved_known_candidates": {"functions": 0, "bytes": 0},
+    "unresolved_code": {
+      "pointer_referenced_entries": 0,
+      "private_helper_envelopes": 0,
+      "envelope_bytes": 0,
+      "source_identities_complete": true
+    },
+    "mapped_total": {"functions": 136, "bytes": 29258}
+  },
+  "movement": {
+    "new_beyond_closed_census": {"functions": 75, "bytes": 12738},
+    "resolved_table_pointer_frontier": {"functions": 38, "bytes": 2374},
+    "resolved_private_cmap_helpers": {"functions": 2, "bytes": 604},
+    "initial_high_table_callbacks": {"functions": 21, "bytes": 5638},
+    "new_medium_private_or_outside_census": {"functions": 10, "bytes": 3018},
+    "retained_census_promoted_to_high": {"functions": 10, "bytes": 3444},
+    "retained_census_medium": {"functions": 51, "bytes": 13076},
+    "recovered_named_candidates": {"functions": 3, "bytes": 1098},
+    "recovered_adjacent_cmap_callback": {"functions": 1, "bytes": 6},
+    "remaining_known_unresolved": {"functions": 0, "bytes": 0}
+  },
+  "table_pointer_resolution": {
+    "input_pointer_records": 38,
+    "distinct_targets": 38,
+    "alias_pointer_records": 0,
+    "resolved_high": {"functions": 38, "bytes": 2374},
+    "unresolved": {"functions": 0, "bytes": 0},
+    "pointer_alias_groups": [],
+    "identical_body_not_pointer_alias": ["tt_cmap12_init", "tt_cmap13_init"],
+    "shared_callback_alias_outside_frontier": {"symbol": "tt_cmap_init", "pointer_records": 5},
+    "records_are_emitted_by_analyzer": true
+  },
+  "private_helper_resolution": {
+    "input_candidates": 2,
+    "resolved_high": {"functions": 2, "bytes": 604},
+    "unresolved": {"functions": 0, "bytes": 0},
+    "records_are_emitted_by_analyzer": true
+  },
+  "recovered_records": [
+    {"symbol": "tt_face_load_bdf_props", "start": "0x005DC290", "end_exclusive": "0x005DC38A", "bytes": 250, "anchor": "direct-thumb-call"},
+    {"symbol": "tt_face_find_bdf_prop", "start": "0x005DC3C4", "end_exclusive": "0x005DC53C", "bytes": 376, "anchor": "stock-service-table"},
+    {"symbol": "tt_cmap_init", "start": "0x005DC53C", "end_exclusive": "0x005DC542", "bytes": 6, "anchor": "stock-cmap-class-tables"},
+    {"symbol": "tt_sbit_decoder_load_bit_aligned", "start": "0x005E0A70", "end_exclusive": "0x005E0C48", "bytes": 472, "anchor": "stock-sbit-loader-table"}
+  ],
+  "mapping_sha256": "b02e6fa7c7c3a4382f81ee8739dbf350780b343fe647f6a70de031ab06f2f60a",
+  "records_are_emitted_by_analyzer": true,
+  "compiler_byte_identity_claimed": false,
+  "binary_overlay_ready": false,
+  "production_routed": false,
+  "hardware_operations": false
+}

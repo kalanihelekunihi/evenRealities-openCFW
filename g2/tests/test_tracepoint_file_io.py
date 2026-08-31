@@ -369,11 +369,9 @@ class TracepointFileIOTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         expected = {
             SOURCE:
-                "831f9b3ef36a796a97129aa66e46f9b7"
-                "f1647db6ca7b6ad2ef23df5af802d86e",
+                "b0df208f0d6cb5b463695b319aaac0dc0b2a4500467a67ed94f5b78350a18cb7",
             FIXTURE:
-                "0a341acfe093bec711e2701c0d07f9b8"
-                "cd6f5f56559fdc66916ea32e463e185e",
+                "432b33daeba71a157f5f1d46f1df73781256b4ad39661df24858b8788a8659bb",
         }
         for path, digest in expected.items():
             self.assertEqual(

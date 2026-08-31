@@ -120,6 +120,15 @@ class OpenCFWTests(unittest.TestCase):
                 },
                 {"codec_stage_1", "codec_stage_2"},
             )
+            semantics = plan["address_status_semantics"]
+            self.assertEqual(
+                semantics["ownership_labels"],
+                "authoritative_provider_origin_only",
+            )
+            self.assertIsNone(
+                semantics["authoritative_ownership_companion"]
+            )
+            self.assertEqual(semantics["typed_mixed_profile_spans"], [])
 
 
 if __name__ == "__main__":

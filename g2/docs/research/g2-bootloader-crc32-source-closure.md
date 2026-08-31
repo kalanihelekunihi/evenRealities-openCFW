@@ -1,5 +1,10 @@
 # G2 bootloader reflected CRC-32 source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The authenticated 56-byte entry at `[0x004157C0,0x004157F8)` performs a
 three-argument incremental reflected CRC-32 update. Six whole-image direct
 callers are pinned. Its literal at `0x004157F4` names the 16-word nibble table

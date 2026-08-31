@@ -35,14 +35,14 @@ PINNED_INPUTS = {
     CLOSURE: "77c90fe45ef47c920512685a169af5f86d49c5929ca120d6630ff6b1b01e9eed",
 }
 PRODUCTION_FILES = {
-    SOURCE: (15_200, "90aa04c8db92a39a2fbac644c4e5579207dec732389ad9b7b4b2b3e7d803f825"),
+    SOURCE: (15_367, "971ae37f4b14362c37674febfc78775a56c4c6e1c91ace9365dabe5b5029d0e0"),
     HEADER: (1_210, "5d13125bd18a299d498849b1a7fe2d0ad2fa45b642ab8128db633165d65afed7"),
     RUNTIME_TEST: (9_278, "d038d921794079cb81001f138c3aee242d8e137653c16f7b2c5be214fd61f4f7"),
 }
-PRODUCTION_OVERLAY = (429_058, "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd")
-PRODUCTION_COMPONENT = (3_952_454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb")
-PRODUCTION_PACKAGE = (4_745_526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934")
-PRODUCTION_FLASH_PLAN = (4_643_183, "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66")
+PRODUCTION_OVERLAY = (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae")
+PRODUCTION_COMPONENT = (3_885_668, "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5")
+PRODUCTION_PACKAGE = (4_678_740, "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a")
+PRODUCTION_FLASH_PLAN = (4_595_610, "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127")
 CONFIG_LEAF_CONTRACT_SHA256 = "8c95bf0cc886cbbc4d3e495fd59b65ee7e80622bdce2e6713b0a09cbe54d7230"
 BUILD_LEAF_CONTRACT_SHA256 = "9f0bc892bd03908175e8297e63c302b1d6a62f0456f4166557eb1d3e00d088a7"
 ROUTE_CONTRACT_SHA256 = "ba3887f7781d10a832abb5b077fdfab0e46f02ddf4eae6071d6941932a938daf"
@@ -230,10 +230,10 @@ def verify_production() -> dict:
         "flash_regions", "unresolved_flash_regions",
         "container_only_regions", "protected_regions",
     ))
-    if counts != (6671, 0, 6, 6):
+    if counts != (6588, 0, 6, 6):
         raise AuditError("HCI driver flash-plan counts changed")
     return {
-        "status": "software-complete-hardware-validation-deferred-by-project-direction",
+        "status": "software-complete-hardware-validation-blocked-by-unavailable-physical-evidence",
         "source_inventory_compiled": 16,
         "redirected_stock_functions": 9,
         "redirected_stock_bytes": 368,

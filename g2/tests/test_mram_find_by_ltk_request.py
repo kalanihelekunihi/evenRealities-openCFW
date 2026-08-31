@@ -299,11 +299,11 @@ class MramFindByLtkRequestTests(unittest.TestCase):
     def test_sources_are_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "bfd7de15454c63daecd39cdbea4fa10503d5b2565c451ba601a4f13736bea856",
+            "1db203da025cc37c9cf9a4a3774164b55f4759690445d02d025d9681eab14801",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "7889a9478969f9428f91b8a8a2d34663b4c149c49a093317740c727c43bc9d53",
+            "1e38ac4420e105aad125a9af1f6bf0bd841f466abfbe37e4210edfdb3a7161d1",
         )
 
 

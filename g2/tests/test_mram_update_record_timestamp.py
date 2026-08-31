@@ -317,13 +317,11 @@ class MramUpdateRecordTimestampTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "faad378b6410f96079e359bd6e2a3c71"
-            "c5ecbca2cf81fdb92fddd046a60d04af",
+            "04cbbb6e75ef00fd665a73e451407586671f6ae6c037bb275677652385507736",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "594f41463f84ef92394d44107377382a"
-            "fdc6e4d32f30f8fbfcf08ea8de5b1283",
+            "aa1632a7ab22c1b0d9a55c164f264756848f426ae680d2b143b36c874625c4bf",
         )
 
 

@@ -13,5 +13,5 @@ class HealthDataManagerTests(unittest.TestCase):
   p=self.report["production"]
   self.assertTrue(p["production_routed"]);self.assertFalse(p["software_functional_gap"])
   self.assertEqual((p["source_functions"],p["compiled_text_bytes"],p["alignment_bytes"],p["stock_replaced_bytes"],p["strict_relocations"]),(10,1012,10,2644,15))
-  self.assertEqual(p["hardware_validation"],"deferred by project direction");self.assertIn("required for future qualification",p["hardware_blocker"])
+  self.assertEqual(p["hardware_validation"],"blocked by unavailable physical evidence");self.assertIn("required for future qualification",p["hardware_blocker"])
 if __name__=="__main__":unittest.main()

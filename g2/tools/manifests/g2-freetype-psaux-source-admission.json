@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "status": "g2-freetype-psaux-community-source-admission",
+  "upstream": {
+    "version": "2.9.1",
+    "tag": "VER-2-9-1",
+    "commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+    "license": "FTL",
+    "adobe_notice_and_patent_grant_retained": true
+  },
+  "mapped_callable_closure": {
+    "functions": 199,
+    "bytes": 29750,
+    "high": {"functions": 65, "bytes": 7020},
+    "medium": {"functions": 134, "bytes": 22730},
+    "foreign_callable": {"functions": 2, "bytes": 762},
+    "residual_noncode_bytes": 144,
+    "unresolved_callable_bytes": 0,
+    "mapping_sha256": "ba936457b31d9c8d94bbcabd0ad8e993103e1f423def30314c5ed81dbcf6cecb",
+    "compiler_byte_identity_claimed": false
+  },
+  "psaux_source_inventory": {
+    "files": 37,
+    "bytes": 625815,
+    "inventory_sha256": "3e5cd97d8ebad001edc947962591689cb86780b8174a20e164da00d4a03ee9e1"
+  },
+  "translation_unit": {
+    "path": "third_party/freetype/src/psaux/psaux.c",
+    "bytes": 1656,
+    "sha256": "f5c04077c995d5fe9692ab0bd310bbc8c295a03cbedd75928433a98db5a301fc",
+    "single_object_includes": [
+      "afmparse.c", "psauxmod.c", "psconv.c", "psobjs.c", "t1cmap.c",
+      "t1decode.c", "cffdecode.c", "psarrst.c", "psblues.c", "pserror.c",
+      "psfont.c", "psft.c", "pshints.c", "psintrp.c", "psread.c", "psstack.c"
+    ],
+    "target": "arm-none-eabi/cortex-m55/thumb/hard-float",
+    "warnings_as_errors": true
+  },
+  "production": {
+    "community_source": true,
+    "stock_image_overlay_routed": false,
+    "authenticated_target_placement": false,
+    "software_gate": "tests.test_freetype_psaux_source_admission",
+    "existing_full_candidate_link_gate": "tests.test_runtime_target_provider_candidate",
+    "remaining_release_gates": [
+      "pinned IAR-compatible code generation, relocation, and placement",
+      "authenticated PostScript font payload and face-path configuration",
+      "task stack and worst-case execution-time qualification",
+      "authorized hardware rendering validation"
+    ]
+  },
+  "evidence_bounds": {
+    "source and semantic identity are not compiler byte identity": true,
+    "interleaved Cordio callables remain foreign": true,
+    "hardware_operations": false
+  },
+  "inputs": {
+    "third_party/freetype/PROVENANCE.json": {
+      "bytes": 102377,
+      "sha256": "2be8717625bceddee3aa95663186c0629247304c951c4790bc26cd372e3794bf"
+    },
+    "third_party/freetype/LICENSE": {
+      "bytes": 6743,
+      "sha256": "08c135755dd589039470f1fdbb400daaabaaa50d0b366d19cebff4d22986baa1"
+    }
+  }
+}

@@ -182,11 +182,11 @@ class MramReloadResolvingListTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "329a524e1daadb7a7f65ca07cb3c49fdb1270e8cf40526be6da856fca4023e93",
+            "5e0fe12f4f0208b095e2039ebd3a8fd71c586894c6ddf6a70e617d4b66862a65",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "cd991e486b3559fc467bc21c9004d496d8a2f14f0ff336066d049112bd65ead5",
+            "94ec410cc9e8ef3a713e875f30b6ce1671d4b4c245ac2ec9353cdaaa9b01bbcc",
         )
 
 

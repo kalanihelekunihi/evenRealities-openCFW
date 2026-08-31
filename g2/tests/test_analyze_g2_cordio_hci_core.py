@@ -70,7 +70,7 @@ class CordioHciCoreAuditTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 50)
         self.assertEqual(production["source_only_functions_compiled"], 2)
         self.assertEqual(production["manifest_regions"], 57)
-        self.assertEqual(production["flash_plan_counts"], (5_864, 2, 5, 6))
+        self.assertEqual(production["flash_plan_counts"], (6_586, 0, 6, 6))
         self.assertTrue(production["transport_rejection_preserves_fragment"])
         self.assertTrue(production["partial_l2cap_header_hardened"])
         self.assertTrue(production["overlong_continuation_hardened"])

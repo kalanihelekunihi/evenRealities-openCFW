@@ -36,7 +36,7 @@ class DmSecSlaveTest(unittest.TestCase):
         self.assertEqual(report["production"]["compiled_leaf_bytes"], 160)
         self.assertEqual(report["production"]["source_owned_bytes_added"], 164)
         self.assertEqual(report["production"]["stock_bytes_replaced"], 148)
-        self.assertIn("deferred by project direction", report["production"]["hardware_validation"])
+        self.assertIn("blocked by unavailable physical evidence", report["production"]["hardware_validation"])
 
 
 if __name__ == "__main__":

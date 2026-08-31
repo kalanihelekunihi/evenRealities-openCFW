@@ -397,11 +397,11 @@ class TracepointDeferTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "dc4014fea7a2ae49c770caae114c6837b57ff24ea03746fd022378d86cd4b8d8",
+            "b6794465964ca752a18aeef4fed9d966a3e7d3e00b3821c19d2f71f9622b8c83",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "d4c1435f1c0189ca789e59fd7747330f28828fa1545a288bb0628697cc73b829",
+            "8b7ef0f8dd2723a58568f352d4463bd32784c24cbef0dfdc2445fc497737004c",
         )
 
 

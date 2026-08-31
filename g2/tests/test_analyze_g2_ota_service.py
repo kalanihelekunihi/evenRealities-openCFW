@@ -67,8 +67,9 @@ class AnalyzeG2OtaServiceTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 65)
         self.assertEqual(production["retained_gap_pool_bytes"], 982)
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "deferred by project direction")
-        self.assertIn("required for future qualification", production["hardware_blocker"])
+        self.assertEqual(production["hardware_validation"], "blocked by unavailable physical evidence")
+        self.assertIn("future qualification requires", production["hardware_blocker"])
+        self.assertIn("authenticated golden", production["hardware_blocker"])
 
 
 if __name__ == "__main__":

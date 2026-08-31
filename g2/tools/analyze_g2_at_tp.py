@@ -22,7 +22,7 @@ CLOSURE = ROOT / "tools/manifests/g2-at-tp-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-at-tp-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "415f3c4347339e4b7d29258f8a5837fb201cf10a0c3344953941cabe3136075a",
-    CLOSURE: "c7df4df41478014ed54b3cbca6929bc83d1c770e5460c11c126eb01fea56dbb9",
+    CLOSURE: "84954b9e0b5463cd832cf8d64f9c6aa0c03ac10ae754386d32687dfea3a55fae",
     PROVENANCE: "1056e9824fddcbf4c7d2e971fe6b0f79c90eac0f102e3ad0dc86695d11029316",
 }
 PHYSICAL = (0x005A5984, 0x005A5D94)
@@ -113,24 +113,24 @@ PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/at_tp.c"
 OVERLAY_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PRODUCTION_PIN = (
-    9164,
-    "b1865b7ae51a77ccb0ccce05a7b9832a89b6e167171bded7c4915d6afe08fa03",
+    9155,
+    "067e78c6d61b5fc4a7b63245e2fb1de9ca91cd5f008443ed6e481bde6fa29406",
 )
 PRODUCTION_LEAVES = (
     (
         "open_cfw_at_tp_print_gesture_cfg",
         "OPEN_CFW_AT_TP_PRINT_ONLY",
         20,
-        "cbbccfdbbe1952e9efbda793a6e362da9b336966a53cc09c76baa3da03c02dc5",
-        244372,
+        "50230ca357e1b9360db9c3f3f0d7d56da99ce9465d69cade7ce271a2616a82cb",
+        184524,
         1,
     ),
     (
         "open_cfw_at_tp_test",
         "OPEN_CFW_AT_TP_TEST_ONLY",
         1528,
-        "06a1401ca64afa1832144b7cd4fd200991c6a13c7c0a7bb47ba98dda23c1e29d",
-        244392,
+        "6f351a53aa7b2b95bd7242000caf2e5d54871c65e7599f7daf0c3f067dba89c0",
+        184544,
         17,
     ),
 )
@@ -411,7 +411,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 1040,
             "strict_relocations": 18,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
                 "No authorized physical G2 touch panel and Cypress "
                 "controller evidence is required for future qualification in this workspace."

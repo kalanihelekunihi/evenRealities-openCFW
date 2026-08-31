@@ -61,10 +61,10 @@ class PbServiceTranslateCandidateTests(unittest.TestCase):
 
     def test_source_is_pinned(self) -> None:
         data = SOURCE.read_bytes()
-        self.assertEqual(len(data), 9294)
+        self.assertEqual(len(data), 9285)
         self.assertEqual(
             hashlib.sha256(data).hexdigest(),
-            "1e6429d33df883ca498112850f6e38254798d82e88de86d2b2c450d9300d0095",
+            "939587d5af46481234ce3ad7debfa0809c7fc8ff905349a6fa055ea72bb55c83",
         )
 
 

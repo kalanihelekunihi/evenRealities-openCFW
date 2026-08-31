@@ -39,7 +39,7 @@ class ZeroAnchorClosureTests(unittest.TestCase):
                 "stock_replaced_bytes": 1346,
                 "strict_relocations": 53,
                 "software_functional_gap": False,
-                "hardware_validation": "deferred by project direction",
+                "hardware_validation": "blocked by unavailable physical evidence",
                 "hardware_blocker": (
                     "Authorized physical G2 touch/proximity device or captured "
                     "gesture electrical/event/timing evidence is required for future qualification."

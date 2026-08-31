@@ -24,7 +24,7 @@ you need to inspect a mismatch, inspect the failing artifact, not the gate.
 | C compiler (`cc`) | — | required | — |
 | Clang, reviewed release family | required | for `sanitize` / `arm-objects` | — |
 | Arm GNU toolchain | — | — | required |
-| Official G2 OTA payloads | required | — | — |
+| Official G2 OTA payloads | for stock-bearing build, hydration, and smoke targets | — | — |
 | Fetched Nordic SDK + sensor SDKs | — | — | required |
 
 G2 pins compiled overlays byte-for-byte per reviewed toolchain profile. On macOS
@@ -53,9 +53,13 @@ Linux specifics are in
 The official Even Realities OTA payloads are vendor-proprietary. Their origin
 and SHA-256 digests are recorded in
 [`../g2/blobs/official/g2-2.2.6.10/PROVENANCE.md`](../g2/blobs/official/g2-2.2.6.10/PROVENANCE.md).
-Place your own copies at the paths that file names — `g2/blobs/official/g2-2.2.6.10/`
-— before running any G2 target. The build verifies every payload's hash before
-using it.
+For a stock-bearing checkout build or the extracted-tree smoke target, place
+your own copies at the paths that file names —
+`g2/blobs/official/g2-2.2.6.10/`. The local hydration command instead accepts
+the exact official outer package at a caller-selected path and installs its six
+authenticated payloads into the extracted workspace. Source-bundle creation,
+toolchain inspection, and source-only audits do not require these payloads.
+Every target that uses a package or payload verifies its hash first.
 
 ### R1 vendor SDKs
 
@@ -74,8 +78,8 @@ variables the R1 build expects are listed in
 ./make.sh g2-build          # all three profiles
 ```
 
-Three profiles are produced, all verified byte-identical to their reviewed
-reference:
+Three profiles are produced, each verified byte-identical to its own reviewed
+profile identity:
 
 | Profile | Target | What it is |
 | --- | --- | --- |
@@ -90,7 +94,7 @@ the overlay and component digests.
 Other useful G2 targets:
 
 ```sh
-./make.sh g2-community-source # vendor-byte-free deterministic source archive
+./make.sh g2-community-source # official-payload-free deterministic source archive
 ./make.sh g2-community-smoke  # hydrate/build in a fresh extracted archive
 make -C g2 vendor-snapshots   # authenticate every vendored upstream, offline
 make -C g2 upstream-audits    # read-only closure audits over the stock image

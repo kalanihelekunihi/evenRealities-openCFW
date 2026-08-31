@@ -393,7 +393,7 @@ class RtcTimeSetTests(unittest.TestCase):
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "bd1b96f4bf41ca57c1e8f7447478a041855adec47801bdbb3f4afa47f486c908",
+            "3a1928569b8d723169598f3b1f6a37df82363ec9bf0bbf8acc357fcc1d74d1d2",
         )
 
 

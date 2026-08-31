@@ -24,7 +24,7 @@ EXPECTED_SYMBOLS = {
     "open_cfw_at_als_scale_read_handler",
     "open_cfw_at_brightness_read_handler",
 }
-SOURCE_SHA256 = "2be0e0f81c74d3ec60f2a44fbcac8f7aff6c3f80e155d66c3c130a698ac285b3"
+SOURCE_SHA256 = "1e2b06962bb8905ecb5bcc0d1a51321aa10c8d30c53bd9a28e8c1517d33eb52c"
 
 
 class AtCoreSensorCandidateTests(unittest.TestCase):

@@ -49,7 +49,7 @@ class CordioSmpMainAuditTests(unittest.TestCase):
         self.assertEqual(production["compiled_leaf_bytes"], 2146)
         self.assertEqual(production["source_owned_bytes_added"], 2170)
         self.assertEqual(production["stock_bytes_replaced"], 3076)
-        self.assertIn("deferred by project direction", production["hardware_validation"])
+        self.assertIn("blocked by unavailable physical evidence", production["hardware_validation"])
 
 
 if __name__ == "__main__":

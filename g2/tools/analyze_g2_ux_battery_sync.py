@@ -27,12 +27,12 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FM: "044811cba6e8cf0ec894c29026b527e121db60db790fb468323dbc06aa89da6f",
-    CL: "f59cc27f982357569fd6ee2ee12abd8ce954ffe4735cd83e01db74ad8043f449",
+    CL: "bbdab5f5f463edbca5678c3185f9d8b59ed3b534e0f3d7d2a83e69b489f4816c",
     PM: "e7f0d4fcfae0ce36a2bf4ad061aeb6881ea6bff225e38252a68e24ac70fc5be6",
     PV: "2e5b288abad5fe930b9783208320505280f60d7ed42c39fd0c99439f20aed0aa",
 }
-SOURCE_SIZE = 3686
-SOURCE_SHA256 = "f0a5be0735deb2547ef5cb202eceef8909ecdd21b5e012f94b880527a2da1724"
+SOURCE_SIZE = 3721
+SOURCE_SHA256 = "5114a13fb06d50f0d751bb3debe7f4dfcca1472445587b4b216ca736440190ae"
 PRODUCTION_FUNCTION = "open_cfw_ux_battery_sync_handler"
 F = ((0x5F958C, 0x5F98D0),)
 PHYS = (0x5F958C, 0x5F9924)
@@ -173,7 +173,7 @@ def analyze(image: Path = IMAGE) -> dict:
         or leaf.get("strict_relocation_contract") is not True
         or leaf.get("profiles") != ["apple-clang"]
         or (leaf["expected"].get("size"), leaf["expected"].get("offset"),
-            leaf["expected"].get("alignment")) != (158, 253428, 4)
+            leaf["expected"].get("alignment")) != (158, 193580, 4)
         or len(leaf["relocations"]) != 11
     ):
         raise c.AuditError("production battery-sync source/placement changed")
@@ -250,7 +250,7 @@ def analyze(image: Path = IMAGE) -> dict:
             "retained_literal_pool_bytes": 84,
             "diagnostic_logging": "stock EasyLogger observability omitted; six-message dispatch preserved",
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": "Authorized physical G2/peer battery-sync traffic, charger, or ring-state evidence is required for future qualification.",
         },
     }

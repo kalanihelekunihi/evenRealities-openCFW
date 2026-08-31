@@ -23,49 +23,49 @@ RUN_BASE = 0x00410000
 OVERLAY_ADDRESS = 0x00434478
 
 SOURCE_PINS = {
-    COMPONENT / "runtime_udiv10.c": (503, "07aad3a209f72364611a414d96ccd7ae90a2e77395bcc2a1c2ee0253c2d6a0d9"),
-    COMPONENT / "runtime_udiv10.h": (222, "6a2ae5ff4086de7ac2f367ab05929ffc5981e53e5808af7c9fcfa153837e7928"),
-    COMPONENT / "runtime_numeric.h": (1250, "ddff5b32fc2b166b9e7a4b25a06f7b7a4673c670149e4d5ec12deb390d9aad47"),
-    COMPONENT / "runtime_udec_digits.c": (405, "45e2280f132aa67416ae0db36957f1bef15e9680c15f242bdab27c0cb806647e"),
-    COMPONENT / "runtime_sdec_digits.c": (349, "7a17b01833b2ce6eb8b43ba72bd2c4c299e0c4f0217007be0bd7e8604c4ab6b8"),
-    COMPONENT / "runtime_hex_digits.c": (298, "bd5b8ee533f2c3be7a1975740e8d455cbc52e2de578358e3de9471fa77d7d182"),
-    COMPONENT / "runtime_parse_dec.c": (728, "4bc07532ba67ef07c32f1a061d468f77ff72caf9ee5797eb7116b256d84543ee"),
-    COMPONENT / "runtime_u64_to_dec.c": (710, "bde9a306740d5619bfd0d2aab99420fb408cdf80dfbce1f3152dd17ab2a13f06"),
-    COMPONENT / "runtime_u64_to_hex.c": (838, "488ce02ee663caa60ab9a12192bee035cc4bc6b5e0d0f4567d6e2151aebf5c39"),
-    COMPONENT / "runtime_nullable_strlen.c": (330, "59144871f6c479c5d853cc309d6ea688f9a07bb078585dd613571c44b29dcd99"),
-    COMPONENT / "runtime_repeat_char.c": (478, "deab8b51da6dbb862c58b6f0c8eb6a67706bb377e14139122a57f894ca068349"),
-    COMPONENT / "runtime_float_to_fixed.c": (3041, "b586dd014fed40e8f28118e4891cde433c318675c091299c40ef9cc18edeecd9"),
-    COMPONENT / "runtime_format_core.c": (1929, "0af8ccbef9697ad504b95c6597a5d665c70074b165240713f664e70fd7096203"),
-    COMPONENT / "runtime_log_dispatch.c": (1532, "c647d1f6c124a93fb72ab8e746b9ce3aba2a7a7084889d02e0861efafcdff0de"),
-    COMPONENT / "runtime_strstr.c": (628, "c9218f9997f81b48ac019c90c086038b47b0ac7dcae4839e3530f1c5e17f0cae"),
-    COMPONENT / "runtime_critical_context.c": (1497, "1e1227d79ee199ab5660817a4eda15c7397a0fb689b8a1f3d0636b27590dd4ab"),
-    COMPONENT / "runtime_gate_acquire.c": (969, "f3177d38d79fe95c61c5462efaf9dff04a88a4e86b68a06fadf193b943012ab6"),
-    COMPONENT / "runtime_gate_state.c": (728, "00a4c79c1c86741449d711f14ef8c9d3e77de043171374a7a943028c597448f9"),
-    COMPONENT / "runtime_gate_release.c": (1464, "fad09dc4b325b04a0b1ddec21847565672a094ce18a2dfb03244a5598a0ef3ef"),
-    COMPONENT / "runtime_context_value.c": (983, "9e7720908c8770722bbfe763d5b11e2dea0fb6792edb64a427174c52bbe616bb"),
-    COMPONENT / "runtime_dispatch_4160fe.c": (3805, "bab9266e01939a709741121492a9e3e8f3efd9439d5f4bfb43dd733862762fe5"),
-    COMPONENT / "runtime_value_4161c6.c": (425, "21e70612f2f997db633a6be6b7dcdac8e3ce428a72edd94de79f3334b1c931e4"),
-    COMPONENT / "runtime_call_4161ce.c": (1042, "4299722e909a534791cca21918dae909fe2ff2918e2f8406e63c91585505f298"),
-    COMPONENT / "runtime_action_416200.c": (1369, "9e3ea4bfddd8479be954e13c8d2a07b58c5c485dfcc35f77f2048aa20db04388"),
-    COMPONENT / "runtime_transfer_41623a.c": (2408, "5578c14de783782b6a622fe81f59d95ba20fefcd80aafe176d595d98371ab89c"),
-    COMPONENT / "runtime_wait_4162c4.c": (2549, "9f3aa5e7fe42a33b59888d9b7d8a43118df0ee868703e75cf6eedd769d0c6ed1"),
-    COMPONENT / "runtime_notify_416378.c": (891, "b9b9c16d67f56a7e06631fc6f475f11109ef43fa0822138ca4ff4866bdd22af2"),
-    COMPONENT / "runtime_callback_41639a.c": (1118, "15e3c18b56001b6936345c1f7516b4363a337e4e74440f615e34ff55931045fa"),
-    COMPONENT / "runtime_register_4163b2.c": (5261, "4673227907a6cf5757607fe2d577991fab914dc9e7823d4fcd9073a48cdecacf"),
-    COMPONENT / "runtime_submit_41649a.c": (1351, "1cd3bf346829a22dd833f6eafba2672495b94df90a4d2c5a411646e47df35ba9"),
-    COMPONENT / "runtime_create_4164da.c": (1814, "271b32292540b174c660ea5d1aa14a1ce92aebe2cb62c5f8e0ccad5c85b5ed75"),
-    COMPONENT / "runtime_flags_set_41652e.c": (2516, "47aa0baa9d9417c2357d464b6a6d8dd1b9311e6aa6a95eeac960eadd49175d5e"),
-    COMPONENT / "runtime_flags_wait_416590.c": (2160, "99a9025e6c8949a0a5dc52d881c0136b69a06fed2bb0782c7eb9495761044430"),
-    COMPONENT / "runtime_flags_create_416610.c": (2612, "fe126e7cd14dbffce8809906b723e324b7543cd1db8329e1d3d68b1f89e0b1a8"),
-    COMPONENT / "runtime_handle_acquire_4166aa.c": (2027, "f3445cc756e2991a6897ef1cb47dbd33157b9983b9b3dc3d1ca0fb7697838768"),
-    COMPONENT / "runtime_handle_release_416710.c": (1932, "559918804a1bc394c59e2ed61c0f65e51e446f30dd459b9e1386de1dbefc0ab2"),
-    COMPONENT / "runtime_semaphore_create_416762.c": (4581, "1150067ba20f65942949cebcab0657021ae3279493adcfeb07b26222398029c8"),
-    COMPONENT / "runtime_queue_create_416816.c": (2440, "ceacf23ac6bd690589771a195fc312426a377cc472020990dfc3b471aec10394"),
+    COMPONENT / "runtime_udiv10.c": (490, "80189f1f2ed14e3bbacdcbc77253cc44bad70b1ac7d14c1129974e90695f4374"),
+    COMPONENT / "runtime_udiv10.h": (209, "bd8e81b613aba24b256fa809113f68818dc7591fc08fae8f112f936397fb24a4"),
+    COMPONENT / "runtime_numeric.h": (1237, "58ac99135fc6ef73d07a8314bf195abda0d10b92b29ea3dd4f0a39362cfa990c"),
+    COMPONENT / "runtime_udec_digits.c": (392, "a5faf40aaf47afc7fc8b743a3bb05251e254142004d539039afa944eb05a0366"),
+    COMPONENT / "runtime_sdec_digits.c": (336, "867a2d899d11c6c1bde24fd68a4cc4199c7f39ffa684d2709d41a41d263b6215"),
+    COMPONENT / "runtime_hex_digits.c": (285, "e8453c60a03adcfcdea2092f874d2c28cd2144d055e57958b6e379354f6219d3"),
+    COMPONENT / "runtime_parse_dec.c": (715, "c5545325bb1986fec8538bbd2e67a380921365f834827f7571b40587c968cf43"),
+    COMPONENT / "runtime_u64_to_dec.c": (697, "31a3bd7bb817a99f0720d39c5d2e5f8fff95f5eadfb219da4a42ddf43b967a27"),
+    COMPONENT / "runtime_u64_to_hex.c": (825, "d4a9c96667a34ed4d4644459860c79e8e638a6f95e427792e0ba929ff3aa3f31"),
+    COMPONENT / "runtime_nullable_strlen.c": (317, "92d8a4013721f490d1d348b27b250ec7993dcdaa6dae82646fd650dc6b368113"),
+    COMPONENT / "runtime_repeat_char.c": (465, "5475128cecdaacbd9693cb12239a7133cf1b08cd1dc6ef8eaf02c1398ded5485"),
+    COMPONENT / "runtime_float_to_fixed.c": (3028, "a37a775793aff7bc3024a9498634815ed86d52a23a9b6e5e6aa6e0fa95ff2182"),
+    COMPONENT / "runtime_format_core.c": (1916, "f93e720789303ee75008321953554c562dde08fcfc824c2a458aa7167a8029ac"),
+    COMPONENT / "runtime_log_dispatch.c": (1519, "0cf9ced572759197ba245ef0c251dbed62a250f9cc69e2dcaad6c20f4f0c38b1"),
+    COMPONENT / "runtime_strstr.c": (615, "3a3817148d41d4df826ce6c8c8e2908fbd6e8071a418e690c9186bd8de3957a9"),
+    COMPONENT / "runtime_critical_context.c": (1484, "01dc0bd996f1437682c0f6547ac2828bd42f04e0365412a17287b8ec99c6f224"),
+    COMPONENT / "runtime_gate_acquire.c": (956, "e1772cc3fd65cbdc29ce101ad5c02f0e38d72395980bdc7a94432bb52e7f4730"),
+    COMPONENT / "runtime_gate_state.c": (715, "ebe538f0ceff659f20a73fda6bf12fa23b32f720b8d827f6f98904f658951623"),
+    COMPONENT / "runtime_gate_release.c": (1451, "30306bd42e16efca7f603f871a2f2149bda588f8ea8bf9d353a3b62aa2bc5528"),
+    COMPONENT / "runtime_context_value.c": (970, "b96ed3032f03e13afbe1deb43886be2d071ec8242acc31ebf4577c96f3b4433e"),
+    COMPONENT / "runtime_dispatch_4160fe.c": (3792, "5ee5fbcc484bf165e688ce157210eb7eedabaf8655771d9c746658b36eb854ac"),
+    COMPONENT / "runtime_value_4161c6.c": (412, "715de1bff3f3c53c67c5b503cb6e61f59f6fd91f4b193ef4a5ea91bd0d4f22ad"),
+    COMPONENT / "runtime_call_4161ce.c": (1029, "30745befb6a174f86f96ba240b0a1ad4eb0ac967a1b818acedde2def9b038b46"),
+    COMPONENT / "runtime_action_416200.c": (1356, "d427df242a8726df6f271f0333c7b328c14b69d6914c71fc89b49e8c1e9ed81d"),
+    COMPONENT / "runtime_transfer_41623a.c": (2395, "e5e778006829eb951b1f7cd995c040ddc5aea6e795a11439a497ac1f28b3d6b4"),
+    COMPONENT / "runtime_wait_4162c4.c": (2536, "a47e3a0d1bf0b3323a9f4a63ff598dcf83ed08077f4456c557d517e7303bd164"),
+    COMPONENT / "runtime_notify_416378.c": (878, "e987858ff43a555800a4583360ab8c1121df564363326fdb9dc16f4a7a6d8673"),
+    COMPONENT / "runtime_callback_41639a.c": (1105, "228a0fecf969eb476ec65f119ab1575648d61373a4f9ad5fbd3bdb5826370faa"),
+    COMPONENT / "runtime_register_4163b2.c": (5248, "28e122344ddbb8ce9e1b2dda465e0117993933f00047ecd15b605cb23ec22d83"),
+    COMPONENT / "runtime_submit_41649a.c": (1338, "86c7f0d9df469c60e64937c55f8dc1d749230b4623b23ca54926164f2ee48459"),
+    COMPONENT / "runtime_create_4164da.c": (1801, "467b65287f1dea816d134e5401069395a569d8e4941e7a68d885887ace2bb4bf"),
+    COMPONENT / "runtime_flags_set_41652e.c": (2503, "b868218c06735b503901ec8492c0863621fcc2e9595fd279ce0593561a1dbdfc"),
+    COMPONENT / "runtime_flags_wait_416590.c": (2147, "d64557b1e727c2c99b2d955dd4141fe6ade9c77665061a74a64c69fc1169e709"),
+    COMPONENT / "runtime_flags_create_416610.c": (2599, "12ffe3932a48a980294c2442b158ebeb77b52973d5c720a1ca3c4e778ced1320"),
+    COMPONENT / "runtime_handle_acquire_4166aa.c": (2014, "a78f49d1768e671dfa9f221832e9d3f372434ca156231bc591268b1ee5bb8a71"),
+    COMPONENT / "runtime_handle_release_416710.c": (1919, "ff86f7aa930fd90144f1c3ae6256e53db414d72298a1dd71b07dcec1ba76186a"),
+    COMPONENT / "runtime_semaphore_create_416762.c": (4568, "77bab200e50661f1dd125288fd931e27a383067226fa422904509a11c4b28c45"),
+    COMPONENT / "runtime_queue_create_416816.c": (2427, "7bf4e5ca19c22f8d5a6f98b0445be216e03053af21018d812452fc0917a34d5e"),
     COMPONENT / "runtime_queue_put_4168a2.c": (3260, "d33d40d3f9c1d8d75297905a2e2e18661b43a13dab1139251f49fefac653405b"),
     COMPONENT / "runtime_queue_get_416920.c": (3131, "3ea9adc8373e4d3d0650bd57591909ad8fc4e0505b09f7753657b234f04683ab"),
-    COMPONENT / "runtime_bit_width_4169a4.c": (388, "8830657b0b8856e07202bd08fc1f6406f655eafe12f44ea402f52dfcb7a1b319"),
-    COMPONENT / "runtime_ctz_4169e2.c": (627, "4f59436d5780217c16520d92ea89341fcb22697cf4f348efd0de18fd0151dc40"),
-    COMPONENT / "runtime_log2_4169f2.c": (609, "524e8381014d1fe8a8ed101416b716a99e3031f67482a870654a8b772e34f827"),
+    COMPONENT / "runtime_bit_width_4169a4.c": (375, "7f750060ca150bf319028f041096f75cc736e5ad487c625face3b1b6c69b8078"),
+    COMPONENT / "runtime_ctz_4169e2.c": (614, "888bb7f4bd039d602c55b2e9050e77b564b0ae0caa35e1a28daf49fbcb2081c8"),
+    COMPONENT / "runtime_log2_4169f2.c": (596, "2917947668a0b5660ed395620c84b1b3afd300c97e72926a16f79b62075389eb"),
     COMPONENT / "runtime_tlsf_block_primitives_4169fc.c": (3894, "0fc87c38ccc74010e44870362c4e43d50133b3c4f2001c7b1253e6ffa35400cc"),
     COMPONENT / "runtime_tlsf_block_topology_416aaa.c": (7601, "548353fa534c11a1c354c7d0e95f691ef2dd4634b4c421440814af17b91974e0"),
     COMPONENT / "runtime_tlsf_mapping_416bce.c": (3466, "4c7c107d4e9d1d2cf06e5a80fb497ed17195adeb9a9a3b4052fae42b8ddee2f2"),
@@ -76,8 +76,8 @@ SOURCE_PINS = {
     COMPONENT / "runtime_easylogger_output_4176ce.c": (30999, "60859f54b54e14e4a22c180d61ea76bd63b358d6896c4787d2d0f7d40816a500"),
     COMPONENT / "runtime_easylogger_lock_enabled_417b7c.c": (2981, "dde99764f5b84ceec45b30880708b2793443395deb715646c15fd14299c5c8af"),
     COMPONENT / "runtime_easylogger_port_41a648.c": (12540, "2d2196f1eed0c4d3e712e6ae8cffef60793dfdeecdb9327c24c9083b31f39677"),
-    COMPONENT / "runtime_easylogger_transport_41b854.c": (10235, "23a5180d3de5e45625f8323a226291d9f5ced532d7d73a320e57640794161d1c"),
-    ROOT / "components/apollo_main/core_overlay/log_format_core.c": (14516, "f9d1a3c94c0f97368ce712dcf136c7b50e94513a19b2c9051c39b88c0ce5a2df"),
+    COMPONENT / "runtime_easylogger_transport_41b854.c": (10222, "a14552ce94a5b82b6aad55cb16b957ae0d1d10d4c3a7aa7a16d39424c374e7c7"),
+    ROOT / "components/apollo_main/core_overlay/log_format_core.c": (14507, "645180463614d5c7213ca9be329b37963406d9dc370b6aa24bee80cd1669bf5c"),
 }
 
 FUNCTIONS = (
@@ -1276,8 +1276,8 @@ FUNCTIONS = (
 )
 
 OVERLAY = (15240, "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314")
-PROVIDER = (163840, "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0")
-LINUX_PROVIDER = (163824, "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635")
+PROVIDER = (163840, "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad")
+LINUX_PROVIDER = (163824, "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e")
 
 
 class AuditError(RuntimeError):
@@ -1375,13 +1375,13 @@ def audit() -> dict:
     require(isinstance(linux_package.get("expected_size"), int) and linux_package["expected_size"] > 0 and len(linux_package.get("expected_sha256", "")) == 64, "Linux package metadata is incomplete")
     return {
         "component": "G2 Apollo bootloader numeric and runtime-gate cluster",
-        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
+        "status": "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "software_gap_count": 0,
         "stock": {"function_count": len(FUNCTIONS), "direct_caller_count": sum(len(item["callers"]) for item in FUNCTIONS), "registered_pointer_ingress_count": sum(len(item.get("registered_ingress", ())) for item in FUNCTIONS)},
         "source": {"function_count": len(FUNCTIONS), "compiled_bytes": sum(item["size"] for item in FUNCTIONS), "relocation_count": sum(len(item["relocations"]) for item in FUNCTIONS)},
         "provider": {"size": PROVIDER[0], "sha256": PROVIDER[1], "source_owned_bytes": component["source_owned_bytes"], "generated_patch_bytes": component["generated_patch_site_bytes"], "alignment_bytes": component["generated_alignment_bytes"], "retained_official_bytes": component["opaque_base_bytes"]},
         "deployment": {"apple_package": artifacts["package"], "linux_package": {"size": linux_package["expected_size"], "sha256": linux_package["expected_sha256"]}},
-        "hardware_block": {"physical_evidence_available": False, "required_evidence": "authorized responsive G2 right temple demonstrating boot progression, numeric formatting/parsing, and runtime-gate behavior through the authenticated callers", "stock_bootloader_retained_for_hardware": True},
+        "hardware_block": {"physical_evidence_available": False, "required_evidence": "authorized G2 hardware demonstrating boot progression, numeric formatting/parsing, and runtime-gate behavior through the authenticated callers", "stock_bootloader_retained_for_hardware": True},
         "safety": {"hardware_operations": [], "signing_performed": False, "flashing_performed": False},
     }
 
@@ -1391,7 +1391,7 @@ def main() -> int:
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
     report = audit()
-    print(json.dumps(report, indent=2, sort_keys=True) if args.json else f"Bootloader numeric closure: {report['status']}\n  authenticated functions: {report['stock']['function_count']}\n  hardware operations: none; physical validation deferred by project direction")
+    print(json.dumps(report, indent=2, sort_keys=True) if args.json else f"Bootloader numeric closure: {report['status']}\n  authenticated functions: {report['stock']['function_count']}\n  hardware operations: none; physical validation blocked by unavailable physical evidence")
     return 0
 
 

@@ -38,6 +38,6 @@ class SmallRasterTests(unittest.TestCase):
   sys.path.insert(0,str(ROOT/'tools'));import apollo_overlay
   _,s=apollo_overlay.parse_elf32(self.target);texts={int(x['index']) for x in s if str(x['name']).startswith('.text.') and int(x['size'])};rels=[x for x in s if int(x['type'])==9 and int(x['size']) and int(x['info']) in texts];self.assertEqual(rels,[])
  def test_independent_documented_production_excluded(self):
-  t=SOURCE.read_text();self.assertIn('GPL-3.0-only',t);self.assertNotIn('void lv_ambiq_create_corner_mask(',t);self.assertIn('two non-required',AUDIT.read_text());production='\n'.join((ROOT/x).read_text(errors='replace') for x in ['components/apollo_main/core_overlay/overlay.json','manifests/g2-2.2.6.10-core-source.json']);self.assertNotIn('open_cfw_ambiq_gpu_create_corner_mask_candidate',production)
+  t=SOURCE.read_text();self.assertIn('SPDX-License-Identifier: MIT',t);self.assertNotIn('GPL-3.0-only',t);self.assertNotIn('void lv_ambiq_create_corner_mask(',t);self.assertIn('two non-required',AUDIT.read_text());production='\n'.join((ROOT/x).read_text(errors='replace') for x in ['components/apollo_main/core_overlay/overlay.json','manifests/g2-2.2.6.10-core-source.json']);self.assertNotIn('open_cfw_ambiq_gpu_create_corner_mask_candidate',production)
 
 if __name__=='__main__':unittest.main()

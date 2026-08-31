@@ -226,14 +226,14 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
     if set(leaves) != set(expected_routes) or set(patches) != set(expected_routes):
         raise AuditError("health production registration is incomplete")
     source_path = "components/apollo_main/core_overlay/health.c"
-    source_sha256 = "537f9332b6523cab520849db6406d1ba732b6d4ca551bdc908a005a7f7791196"
+    source_sha256 = "fb7080c23a9ac48748983fdf73fc1ee079be634e4ebf6645ad3510aba731e82a"
     for function, (start, size, stock_sha256, relocation_count) in expected_routes.items():
         leaf, patch = leaves[function], patches[function]
         if leaf.get("profiles") != ["apple-clang"]:
             raise AuditError(f"{function} production profile changed")
         if leaf.get("source", {}).get("path") != source_path:
             raise AuditError(f"{function} production source changed")
-        if leaf.get("source", {}).get("size") != 5694 or leaf.get("source", {}).get("sha256") != source_sha256:
+        if leaf.get("source", {}).get("size") != 5685 or leaf.get("source", {}).get("sha256") != source_sha256:
             raise AuditError(f"{function} production source identity changed")
         if len(leaf.get("relocations", [])) != relocation_count:
             raise AuditError(f"{function} relocation closure changed")

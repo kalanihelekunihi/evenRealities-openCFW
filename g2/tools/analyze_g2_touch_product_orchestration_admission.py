@@ -155,8 +155,8 @@ def analyze(*, enforce_expected=True):
                       "concrete_gap_instruction_bytes": metrics["residual_gap_instruction_bytes"],
                       "unimplemented_clean_room_application_contracts": metrics["unimplemented_application_contracts_after"],
                       "typed_external_or_unavailable_functions": 19},
-        "hardware_validation": "deferred by project direction",
-        "hardware_blocker": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "hardware_blocker": "blocked by unavailable physical evidence",
         "exclusions": "only selected-runtime, resident-configuration, system-handoff, Infineon EULA provider, and halt boundaries remain",
     }
 

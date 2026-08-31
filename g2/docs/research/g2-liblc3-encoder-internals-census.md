@@ -26,7 +26,9 @@ v1.1.3 snapshot at `third_party/liblc3`:
 - **8 out-of-scope dispatch observations** record where the graph reaches
   functions this census must not re-bucket: the `0x43xxxx` ltpf/bits
   cluster, `lc3_hr_setup_encoder` at `0x0059123A`, and `lc3_tns_analyze` at
-  `0x0059AA84` (both parent-bucketed `first-party` at medium confidence).
+  `0x0059AA84`. The parent census still labels the last two `first-party` at
+  medium confidence, but the complete 314-byte setup span is now independently
+  authenticated as the stock liblc3 primary by `analyze_g2_liblc3.py`.
 
 The scope and every byte total are re-derived from the parent census on
 every run: the 62/17,874 frontier and the 10/1,694 liblc3 bucket are
@@ -119,15 +121,19 @@ They are recorded for completeness; this census does not re-bucket them.
 | `0x00439B12` | `lc3_put_bits` slow path (bits.c) | no-evidence |
 | `0x004399E4` | `lc3_flush_bits` (bits.c) | no-evidence |
 | `0x00439710` | IAR `memmove` (not liblc3) | no-evidence |
-| `0x0059123A` | `lc3_hr_setup_encoder` (documented in the entry-map qualification) | first-party, medium |
+| `0x0059123A` | `lc3_hr_setup_encoder`; full 314-byte span independently authenticated by `analyze_g2_liblc3.py` | first-party, medium (stale parent label) |
 | `0x0059AA84` | `lc3_tns_analyze` (2,610 B; sixth analyze()-position callee) | first-party, medium |
 
 The ltpf.c and bits.c cores are linked in the early `0x43xxxx` island, not
 in the `0x59xxxx` cluster — link order does not group this codec into one
-range.  `0x0059123A` and `0x0059AA84` are parent-census `first-party`
-medium-confidence topology assignments that the liblc3 dispatch evidence
-contradicts; refining them is a parent-census change and is deliberately
-out of scope here.
+range. `0x0059AA84` remains a parent-census `first-party` medium-confidence
+topology assignment contradicted by the dispatch evidence. For `0x0059123A`,
+the independent stock guard now authenticates `[0x0059123A,0x00591374)` as
+314 bytes with SHA-256
+`04f7f722ef30afdfae612d0f6622cb4811918c8a8f4dc30b1ee99f95f42572c8`
+and binds the adjacent 22-byte wrapper's direct call to that entry. Refining
+the writer-owned parent census remains out of scope for this hand-authored
+record; its stale label is not an unresolved ownership ambiguity.
 
 ## Reconciliation
 

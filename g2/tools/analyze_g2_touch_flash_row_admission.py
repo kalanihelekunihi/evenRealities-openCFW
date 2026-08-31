@@ -163,7 +163,9 @@ def analyze(*, enforce_expected: bool = True) -> dict:
             require(metrics[key] == value,
                     f"flash-row {key} changed: {metrics[key]!r} != {value!r}")
     return {
-        "schema_version": 1, "component": "G2 touch flash-row admission batch 19",
+        "schema_version": 1, "authoritative_batch": 19,
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "component": "G2 touch flash-row admission batch 19",
         "analysis_mode": "offline authenticated flow, typed Apache/runtime seams, host and Cortex-M0+ compile; no hardware/MMIO execution",
         "metrics": metrics, "rows": rows, "residual_rows": residual_rows,
         "source": {"path": str(SOURCE.relative_to(ROOT)), "license": "MIT",

@@ -138,7 +138,9 @@ def analyze(*, enforce_expected: bool = True) -> dict:
             require(metrics[key] == expected,
                     f"deferred-work {key} changed: {metrics[key]!r} != {expected!r}")
     return {
-        "schema_version": 1, "component": "G2 touch deferred-work admission batch 17",
+        "schema_version": 1, "authoritative_batch": 17,
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "component": "G2 touch deferred-work admission batch 17",
         "analysis_mode": "offline authenticated control/data flow, injected critical/callback seams, host and Cortex-M0+ compile; no hardware/MMIO execution",
         "metrics": metrics, "rows": rows, "residual_rows": residual_rows,
         "source": {"path": str(SOURCE.relative_to(ROOT)), "license": "MIT",

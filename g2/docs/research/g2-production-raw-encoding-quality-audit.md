@@ -12,10 +12,22 @@ directives are 16 legitimate literal-data bytes: the three typed constants in
 (4 bytes). There are zero raw instruction bytes and zero `.byte` executable
 transcript files in the public component tree.
 
-Eight former bootloader MSPI files rendered 8,902 executable stock bytes as C
-`.byte` directives. All thirteen routes across their eight exact spans were
-removed, and the files themselves were deleted from the public tree. The
-functional provider retains the authenticated official bytes at those spans;
+Two former bootloader MSPI files rendered 4,930 executable stock bytes as C
+`.byte` directives. Their routes were removed, and the files themselves were
+deleted from the public tree. The former 1,902-byte device-configuration
+transcript is no longer in this deleted-file census because it was replaced by
+structured C and routed in place. The 232-byte PIO-mixed transcript was also
+replaced by structured C and routed in place. The 144-byte initializer
+transcript was replaced by an 88-byte structured-C return path routed in place;
+its authenticated unreachable tail remains retained. The 228-byte controller
+configuration transcript was replaced by a 152-byte structured-C return path;
+its unreachable tail also remains retained. The 1,154-byte public device-
+configuration transcript was replaced by a 672-byte structured-C return path
+with six symbolic calls; its unreachable tail also remains retained. The
+312-byte lifecycle transcript was replaced by 296 bytes of structured C across
+enable, disable, and deinitialize, with five strict symbolic calls; the two
+unreachable return tails and alignment bytes remain retained. The functional provider
+retains the authenticated official bytes at the other spans;
 the audit preserves only file sizes, SHA-256 digests, and boundary dispositions.
 The 38 former raw branch/call bytes are now mnemonic source: explicit symbolic
 relocations for the bootloader leaves and named placement-bound mnemonic calls

@@ -334,11 +334,11 @@ class MramResetRecordTimestampsTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "80e453a638f4e0965cfe0e9f8b7587b241746e4fc27d882200a57cdf3944a82c",
+            "34d3324e4a77ed26a9cb4c92228da5824c4068192e23507e6a275369ca8645a2",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "a7cffc2768543ac389773b8284c7ec3a162bdbe0fda84aef4a50c3e0f83ee01d",
+            "4e8a5f17e9e4e721cb54f4bd205aa7abb3467abd10238646aeb75d6d227fb7cc",
         )
 
 

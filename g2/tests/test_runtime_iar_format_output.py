@@ -24,15 +24,15 @@ MANIFEST = ROOT / "manifests" / "g2-2.2.6.10-core-source.json"
 PACKAGE = ROOT / "build" / "source" / "package" / "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
 FLASH_PLAN = ROOT / "build" / "source" / "flash-plan.json"
 PRODUCTION_LEAVES = {
-    "open_cfw_runtime_iar_vsnprintf_engine": (404_796, 3_512),
-    "open_cfw_runtime_iar_format_bridge": (408_308, 50),
-    "open_cfw_runtime_iar_vformat": (408_360, 84),
-    "open_cfw_runtime_iar_printf_core": (408_444, 14),
+    "open_cfw_runtime_iar_vsnprintf_engine": (336_316, 3_512),
+    "open_cfw_runtime_iar_format_bridge": (339_828, 50),
+    "open_cfw_runtime_iar_vformat": (339_880, 84),
+    "open_cfw_runtime_iar_printf_core": (339_964, 14),
 }
-OVERLAY_PIN = (408_458, "22a9e111e2b790489c50b0c631f87150b4d93a82b40539dae1509fd631248c18")
-COMPONENT_PIN = (3_931_854, "8e217faf212b5cf397b19ce0648c665b3f62233be67e418fba35abccc5672763")
-PACKAGE_PIN = (4_710_348, "fab299362ebbeff5b0e31923ea3aae7b6c20a3d87983a20ab964f13540ffbaee")
-FLASH_PLAN_PIN = (4_071_802, "fd12c956d57ff02be8fc82545f2ff189dd8f04babb52cfbe29dd1d84617d983d")
+OVERLAY_PIN = (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae")
+COMPONENT_PIN = (3_885_668, "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5")
+PACKAGE_PIN = (4_678_740, "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a")
+FLASH_PLAN_PIN = (4_595_610, "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127")
 TARGET_FLAGS = [
     "--target=thumbv7em-none-eabi", "-mthumb", "-O2", "-ffreestanding",
     "-fno-jump-tables", "-fomit-frame-pointer", "-fno-builtin",
@@ -249,7 +249,7 @@ class RuntimeIarFormatOutputTests(unittest.TestCase):
                 region["file_offset"], region["size"],
                 region["target_address"], region["address_status"],
             ),
-            (3_928_192, 3_662, 0x007F7060, "source_compiled"),
+            (3_859_712, 3_662, 0x007E64E0, "source_compiled"),
         )
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
@@ -274,7 +274,7 @@ class RuntimeIarFormatOutputTests(unittest.TestCase):
                     "container_only_regions", "protected_regions",
                 )
             ),
-            (5_864, 2, 5, 6),
+            (6_598, 0, 6, 6),
         )
 
 

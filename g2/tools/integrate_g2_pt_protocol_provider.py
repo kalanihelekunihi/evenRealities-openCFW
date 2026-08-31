@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Integrate the routed PT provider into the canonical G2 source manifest."""
+"""Retired legacy PT manifest integrator.
+
+Canonical G2 provider changes must be admitted from two independent Apple and
+Linux observations by ``apply_g2_canonical_observations.py``.  The former
+single-report writer remains only as a fail-closed compatibility entry point.
+"""
 
 # SPDX-License-Identifier: MIT
 
@@ -35,10 +40,30 @@ CLOCK_FUNCTIONS = (
     "open_cfw_clkmgr_hfrc2_uq15_divider",
     "open_cfw_clkmgr_hfrc_integer_divider",
 )
+PT_AGGREGATE_LICENSE = "MIT AND Apache-2.0"
+PT_APACHE_SOURCE = (
+    "components/apollo_main/core_overlay/pt_protocol_lc3_setup.c"
+)
+PT_SOURCE_LICENSE_COUNTS = {"MIT": 28, "Apache-2.0": 1}
+PT_APACHE_SOURCE_METADATA = {
+    "upstream": "Google/liblc3",
+    "upstream_commit": "96a3af0beb5487aca3b98a4b992a539a1f6d80d1",
+    "license_path": "third_party/liblc3/LICENSE",
+    "license_sha256": (
+        "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    ),
+}
 
 
 class IntegrationError(RuntimeError):
     pass
+
+
+RETIRED_MESSAGE = (
+    "legacy single-report PT integration is retired; use "
+    "tools/apply_g2_canonical_observations.py with two independent "
+    "observations for each supported toolchain"
+)
 
 
 def sha256(payload: bytes) -> str:
@@ -59,7 +84,57 @@ def _region(name: str, function: str, address: int, size: int,
     }
 
 
+def _validate_pt_license_contract(provider: dict[str, object]) -> None:
+    sources = provider.get("sources")
+    if provider.get("license") != PT_AGGREGATE_LICENSE or not isinstance(
+        sources, list
+    ) or len(sources) != 29:
+        raise IntegrationError("PT provider license contract changed")
+    paths: set[str] = set()
+    counts = {license_id: 0 for license_id in PT_SOURCE_LICENSE_COUNTS}
+    for record in sources:
+        if not isinstance(record, dict):
+            raise IntegrationError("PT source license record changed")
+        license_id = record.get("license")
+        expected_keys = {"path", "size", "sha256", "license"}
+        if license_id == "Apache-2.0":
+            expected_keys.update(PT_APACHE_SOURCE_METADATA)
+        if set(record) != expected_keys:
+            raise IntegrationError("PT source license record changed")
+        path = record["path"]
+        if (
+            not isinstance(path, str)
+            or path in paths
+            or type(record["size"]) is not int
+            or record["size"] <= 0
+            or not isinstance(record["sha256"], str)
+            or len(record["sha256"]) != 64
+            or any(value not in "0123456789abcdef" for value in record["sha256"])
+            or license_id not in counts
+        ):
+            raise IntegrationError("PT source license record changed")
+        paths.add(path)
+        counts[license_id] += 1
+    apache_paths = {
+        record["path"] for record in sources
+        if record["license"] == "Apache-2.0"
+    }
+    if (
+        counts != PT_SOURCE_LICENSE_COUNTS
+        or apache_paths != {PT_APACHE_SOURCE}
+        or any(
+            record.get(key) != value
+            for record in sources
+            if record["path"] == PT_APACHE_SOURCE
+            for key, value in PT_APACHE_SOURCE_METADATA.items()
+        )
+        or [record["path"] for record in sources] != sorted(paths)
+    ):
+        raise IntegrationError("PT source license census changed")
+
+
 def _pt_regions(provider: dict[str, object]) -> list[dict[str, object]]:
+    _validate_pt_license_contract(provider)
     placement = provider["placement"]
     sections = sorted(
         ((name, int(record["runtime_address"]), int(record["size"]))
@@ -79,7 +154,8 @@ def _pt_regions(provider: dict[str, object]) -> list[dict[str, object]]:
         label = name.removeprefix(".").replace("_", "-")
         result.append(_region(
             f"source_{label}",
-            f"Compiled MIT G2 PT provider section {name}",
+            "Compiled MIT AND Apache-2.0 aggregate G2 PT provider section "
+            f"{name}",
             address, size, "source_compiled"))
         cursor = address + size
     if cursor < INTERVAL_END:
@@ -149,6 +225,11 @@ def _sync_clock_regions(main: dict[str, object],
 
 
 def apply() -> dict[str, object]:
+    raise IntegrationError(RETIRED_MESSAGE)
+
+    # Historical implementation retained below for audit context.  It is
+    # deliberately unreachable because it cannot authenticate a complete
+    # cross-profile source generation.
     data = json.loads(MANIFEST.read_text(encoding="utf-8"))
     report = json.loads(BUILD_REPORT.read_text(encoding="utf-8"))
     component = report["component"]
@@ -241,6 +322,9 @@ def apply() -> dict[str, object]:
 
 
 def verify() -> dict[str, object]:
+    raise IntegrationError(RETIRED_MESSAGE)
+
+    # See apply(): the legacy verifier is coupled to the retired topology.
     data = json.loads(MANIFEST.read_text(encoding="utf-8"))
     report = json.loads(BUILD_REPORT.read_text(encoding="utf-8"))
     main = data["component_overrides"]["apollo_main"]

@@ -293,7 +293,7 @@ def analyze() -> dict:
         },
         "software_source_complete": True,
         "production_routed": False,
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_operations": [],
         "production_files_modified": [],
     }

@@ -57,7 +57,7 @@ class AnalyzeG2PbServiceSettingTests(unittest.TestCase):
         self.assertEqual(production["alignment_bytes"], 14)
         self.assertEqual(production["strict_relocations"], 38)
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "deferred by project direction")
+        self.assertEqual(production["hardware_validation"], "blocked by unavailable physical evidence")
 
 
 if __name__ == "__main__":

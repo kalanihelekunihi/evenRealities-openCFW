@@ -775,13 +775,13 @@ class RuntimeEasyLoggerAsyncRecordBuildTests(unittest.TestCase):
     def test_target_candidates_have_explicit_seams_only(self) -> None:
         self.assertEqual(
             hashlib.sha256(STOCK_SOURCE.read_bytes()).hexdigest(),
-            "3b525b47c24a3212d6da437c1b6b4c6e"
-            "87ecbb894a834bdc706a29dfcf25c18b",
+            "97a1ce16ff7b36c50d8565acf3b1b0e"
+            "f1ef208f61df9c4b0eec2443f7af93819",
         )
         self.assertEqual(
             hashlib.sha256(SINGLE_OWNER_SOURCE.read_bytes()).hexdigest(),
-            "3b9588c36deb0d8dce58db71077530c86"
-            "bb1f00f2ddeaca04f29e64946bf1b8f",
+            "ec6f80eb078ad78773da241397a0039af"
+            "f6123bf15d05b1c33ac99c85f0861d3",
         )
         expected_common = {
             "open_cfw_retained_easylogger_async_default_metadata",
@@ -1058,7 +1058,7 @@ class RuntimeEasyLoggerAsyncRecordBuildTests(unittest.TestCase):
         )
         self.assertEqual(text_region["file_offset"], 3642008)
         self.assertEqual(text_region["size"], 216)
-        self.assertEqual(text_region["target_address"], 0x007BFC40)
+        self.assertEqual(text_region["target_address"], 0x007B1278)
         self.assertIn("single owner", text_region["function"])
         self.assertNotIn("double-recycle", text_region["function"])
 

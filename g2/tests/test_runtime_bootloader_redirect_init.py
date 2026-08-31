@@ -39,7 +39,7 @@ OVERLAY_SHA256 = (
     "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314"
 )
 PROVIDER_SHA256 = (
-    "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
+    "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad"
 )
 
 
@@ -220,7 +220,7 @@ class BootloaderRedirectInitTests(unittest.TestCase):
         self.assertEqual(
             sha256(SOURCE.read_bytes()), source_entry["source"]["sha256"]
         )
-        self.assertIn("GPL-3.0-or-later", SOURCE.read_text(encoding="utf-8"))
+        self.assertIn("SPDX-License-Identifier: MIT", SOURCE.read_text(encoding="utf-8"))
         self.assertIn("0x2002712CU", HEADER.read_text(encoding="utf-8"))
         self.assertFalse(self.report["safety"]["flashing_performed"])
         self.assertEqual(self.report["safety"]["hardware_operations"], [])

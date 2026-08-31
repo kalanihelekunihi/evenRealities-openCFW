@@ -481,11 +481,11 @@ class MramResolveAddressTests(unittest.TestCase):
     def test_sources_are_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "ca1c9dd34f276a24c9d2bcd39b9ee1ee706d88e9a29e17c676dc940e20594761",
+            "61af7a68e722a8f64ce71c950bfcef16ec08a801457becc51917f7c8ac5e9050",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "25c87c424c0703d3b2cf5ca60bc90a9bdaed538a17af3d3cb751ec164024af69",
+            "94370db39be5053ba2f9af81113acc892680c2f99bc837698c1b54f1eb0cee41",
         )
 
 

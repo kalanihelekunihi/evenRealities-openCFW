@@ -151,10 +151,10 @@ class IARRuntimeFloatExponentCandidateTests(unittest.TestCase):
         overlay = json.loads(OVERLAY.read_text(encoding="utf-8"))
         leaves = {item["function"]: item for item in overlay["relocated_leaves"]}
         expected = {
-            "open_cfw_iar_frexpf_bits": (52, 202158, []),
+            "open_cfw_iar_frexpf_bits": (52, 142310, []),
             "open_cfw_iar_frexpf": (
                 20,
-                202210,
+                142362,
                 [
                     {
                         "offset": 8,
@@ -167,7 +167,7 @@ class IARRuntimeFloatExponentCandidateTests(unittest.TestCase):
             ),
             "open_cfw_iar_ldexpf": (
                 196,
-                202230,
+                142382,
                 [
                     {
                         "offset": 190,
@@ -185,10 +185,10 @@ class IARRuntimeFloatExponentCandidateTests(unittest.TestCase):
                 self.assertEqual(leaf["profiles"], ["apple-clang"])
                 self.assertEqual((leaf["expected"]["size"], leaf["expected"]["offset"]), (size, offset))
                 self.assertEqual(leaf["relocations"], relocations)
-                self.assertEqual(leaf["source"]["size"], 4022)
+                self.assertEqual(leaf["source"]["size"], 4013)
                 self.assertEqual(
                     leaf["source"]["sha256"],
-                    "3189bb3a834e8a95caff6a004ee0ab10f7541f5c2af17f715606526ca5aa51a9",
+                    "eeb8a73ab1b8e3aed9f092fe5c4d4e968380d9adb0d4da1cc4634c8f7754e073",
                 )
 
         patches = {item["name"]: item for item in overlay["patch_sites"]}
@@ -216,10 +216,10 @@ class IARRuntimeFloatExponentCandidateTests(unittest.TestCase):
         self.assertEqual(
             overlay["expected"],
             {
-                "overlay_size": 429058,
-                "overlay_sha256": "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
-                "component_size": 3952454,
-                "component_sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+                "overlay_size": 362272,
+                "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+                "component_size": 3885668,
+                "component_sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
             },
         )
         filtered = self.apollo_overlay.filter_config_for_profile(overlay, "linux-clang")

@@ -178,11 +178,11 @@ class RtosTimerExpireTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "94e1f1361cda2c5bfed2323719a9b19bb9478f53211238cd03cfd7b917edffbd",
+            "429bbabf139978ae2bc6ca1c705575c7c552eb4606925b1a7be6fb9116e8848b",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "31e36384949f65d0a79bcb3018885e908bff2755952461e47d36af2536af2f64",
+            "cc063793d03f0aa9c56cf6dc0545980b843c7ad0e5502fa207491455abbefd07",
         )
 
 

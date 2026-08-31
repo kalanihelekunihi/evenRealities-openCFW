@@ -19,7 +19,7 @@ from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-s200-config-main-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-s200-config-main-closure.tsv"
-PINS = {FM: "494176c0fd0f6710220a021787c5b2133aa78dc36d12bf232e3122c68b97e992", CL: "2a1033dea111f3f34171422a3ae2964836bdc6e996b2081cece85cf5a95cc113"}
+PINS = {FM: "494176c0fd0f6710220a021787c5b2133aa78dc36d12bf232e3122c68b97e992", CL: "2ad2f8879a0753072f33521b4064428006548840a4a3bffaad2a4f2cf5e3f929"}
 RETAINED = 'product\\s200\\app\\config\\main.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\app\\config\\main.c'
 PATH_RUN = 0x703acc
@@ -236,7 +236,7 @@ def analyze(image=IMAGE):
     overlay = json.loads(overlay_path.read_text())
     source = ROOT / "components/apollo_main/core_overlay/s200_config_main.c"
     source_sha = _sh(source.read_bytes())
-    if source_sha != "37596a50b604d9a0508d99fad72006a9be334c510eb2e5480bf1e5c5abcc59fc":
+    if source_sha != "4af4f9c8207096521ef645ca907dcb35c41adf496b0b20602b7e570032f4ad9c":
         raise c.AuditError("source changed")
     leaves = [
         item for item in overlay["relocated_leaves"]
@@ -267,11 +267,11 @@ def analyze(image=IMAGE):
     return {
         "schema_version": 2,
         "analysis_mode": "corrected linked-object closure plus production source routing",
-        "identity": {"disposition": "implemented-in-source; hardware-blocked", "ghidra_discovered_functions": 6, "image_sha256": c.IMAGE_SHA256, "path_anchored_functions": 0, "retained_path": RETAINED, "retained_product_path": FULL_PATH},
+        "identity": {"disposition": "implemented-in-source; hardware-deferred", "ghidra_discovered_functions": 6, "image_sha256": c.IMAGE_SHA256, "path_anchored_functions": 0, "retained_path": RETAINED, "retained_product_path": FULL_PATH},
         "surface": {"body_bytes": EXPECTED["body_bytes"], "direct_body_calls": EXPECTED["direct_body_calls"], "function_escapes": len(esc), "indirect_body_calls": len(ind), "internal_direct_body_calls": EXPECTED["internal_direct_body_calls"], "linked_functions": len(F), "outer_pool_bytes": EXPECTED["outer_pool_bytes"], "path_literal_references": EXPECTED["path_literal_references"], "physical_bytes": EXPECTED["physical_bytes"], "raw_path_referencing_functions": sum(1 for row in rows if int(row["path_reference_sites"]) > 0), "reachable_instructions": EXPECTED["reachable_instructions"]},
         "ingress": {"direct_b16_entry_sites": len(b16), "direct_bl_entry_sites": len(bl), "direct_bl_strict_interior_sites": len(bls), "direct_bw_entry_sites": len(bw), "stored_entry_pointer_words": len(stored)},
         "evidence": {"boundary_guards": True, "pointer_cells": ["0x%08X" % x for x in CELLS], "path_string_run_address": "0x%08X" % PATH_RUN, "tag_strings": len(TAGS)},
-        "production": {"production_routed": True, "source_functions": 6, "compiled_text_bytes": 584, "alignment_bytes": 4, "strict_relocations": 47, "replaced_stock_body_bytes": 1468, "hardware_validation": "deferred by project direction"},
+        "production": {"production_routed": True, "source_functions": 6, "compiled_text_bytes": 584, "alignment_bytes": 4, "strict_relocations": 47, "replaced_stock_body_bytes": 1468, "hardware_validation": "blocked by unavailable physical evidence"},
     }
 
 

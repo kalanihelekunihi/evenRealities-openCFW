@@ -18,16 +18,16 @@ MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 ROUTES = (
     ("open_cfw_bootloader_mspi_cq_init_423f28", 0x00423F28, 0x00423F54,
      "8e2e5409620c3c1b334d8c3ede2ea19b20a31471e40a0c8b0c88f6550a7e9b05",
-     "GPL-3.0-or-later"),
+     "MIT"),
     ("open_cfw_bootloader_mspi_cq_term_423f54", 0x00423F54, 0x00423F8E,
      "07a7e8e54305fbecb7f891cd4e843881b73a33186ba1750b147e0647d0041807",
-     "GPL-3.0-or-later"),
+     "MIT"),
     ("open_cfw_bootloader_mspi_cq_enable_423f8e", 0x00423F8E, 0x00423FAC,
      "b846c512f60e83e86f69d04322eb6ce0d5936f143ad86475967c6be67545ab65",
-     "GPL-3.0-or-later"),
+     "MIT"),
     ("open_cfw_bootloader_mspi_cq_disable_423fac", 0x00423FAC, 0x00423FB8,
      "8c21c4878a3125546a7201b39610d661f69d8da7e1cae81d3eb223fdf919fb0a",
-     "GPL-3.0-or-later"),
+     "MIT"),
     ("open_cfw_bootloader_mspi_cq_pause_423fb8", 0x00423FB8, 0x0042403E,
      "ff20411c8e4283f16d82cb8373e95004d648e4c03d151ba89bf43ff7d58a2794",
      "BSD-3-Clause"),
@@ -112,13 +112,13 @@ class BootloaderMspiCqProductionReconciliationTests(unittest.TestCase):
         self.assertEqual(
             (selected[7]["target_address"], selected[7]["size"],
              selected[7]["address_status"]),
-            (0x00424120, 9190, "official_blob"),
+            (0x00424120, 2134, "official_blob"),
         )
-        self.assertEqual(self.report["component"]["source_owned_bytes"], 25869)
-        self.assertEqual(self.report["component"]["opaque_base_bytes"], 121427)
-        residual = OFFICIAL.read_bytes()[0x14120:0x16506]
+        self.assertEqual(self.report["component"]["source_owned_bytes"], 28495)
+        self.assertEqual(self.report["component"]["opaque_base_bytes"], 118855)
+        residual = OFFICIAL.read_bytes()[0x14120:0x14976]
         self.assertEqual(hashlib.sha256(residual).hexdigest(),
-                         "fc2983e5f8dc3fff4bb4c1df407539aba19244b55b7f5c92fb68e1d196274bdb")
+                         "6a465822be10c9f260a05332f6352822803fc263ce1a1f722826fcefc9e8b9ad")
 
     def test_upstream_snapshot_preserves_bsd_license_and_provider_abi(self) -> None:
         provenance = json.loads((

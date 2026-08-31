@@ -432,13 +432,43 @@ def run_audit() -> dict[str, Any]:
         "bytes": totals["typed_unsupported_external_boundary"]["bytes"] +
                  totals["unavailable_proprietary_codec_firmware"]["bytes"],
     }
+    external_detail = {
+        "opaque_executable": sum(
+            row["size"] for row in normalized
+            if row["readiness"] == "typed_unsupported_external_boundary"
+            and row["byte_class"] == "opaque_executable"
+        ),
+        "opaque_runtime_data": sum(
+            row["size"] for row in normalized
+            if row["readiness"] == "typed_unsupported_external_boundary"
+            and row["byte_class"] == "opaque_runtime_data"
+        ),
+        "opaque_npu_commands": sum(
+            row["size"] for row in normalized
+            if row["readiness"] == "typed_unsupported_external_boundary"
+            and row["byte_class"] == "opaque_npu_commands"
+        ),
+        "proprietary_model_data": sum(
+            row["size"] for row in normalized
+            if row["readiness"] == "typed_unsupported_external_boundary"
+            and row["byte_class"] == "proprietary_model_data"
+        ),
+    }
+    require(external_detail == {
+        "opaque_executable": 190_912,
+        "opaque_runtime_data": 5_124,
+        "opaque_npu_commands": 9_164,
+        "proprietary_model_data": 120_800,
+    }, "typed external-provider detail changed")
+    require(sum(external_detail.values()) == blocking["bytes"],
+            "typed external-provider detail does not conserve")
     return {
         "schema_version": 1,
         "status": "candidate-qualified-fail-closed",
         "component": "GX8002 codec/DSP firmware",
         "read_only": True,
         "hardware_operations": False,
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "blob": {"path": "blobs/official/g2-2.2.6.10/firmware_codec.bin",
                  "size": BLOB_SIZE, "sha256": BLOB_SHA256},
         "partition": {"spans": len(rows), "bytes": cursor, "contiguous": True,
@@ -447,6 +477,16 @@ def run_audit() -> dict[str, Any]:
         "source_owned_bytes": 0,
         "format_reconstructible": totals["reconstructible_mit_format_metadata"],
         "blocking_residual": blocking,
+        "external_provider_detail": {
+            "bytes_by_class": external_detail,
+            "bytes": sum(external_detail.values()),
+            "open_source_available": False,
+            "payload_redistribution_authority": "unresolved",
+            "provider_contract": (
+                "an external user-supplied provider must authenticate exact "
+                "payload identity; the boundary does not claim open availability"
+            ),
+        },
         "selected_cluster": {
             "name": "image_a_kws_weights",
             "start": WEIGHT_START,

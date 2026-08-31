@@ -1,5 +1,10 @@
 # G2 sensor_hub dependency boundary
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The five retained-path anchors (across two path cells, 0x004A6EDC and
 0x004A73E8) expand to thirty-one functions / 4,026 body bytes in
 `[0x004A6644,0x004A777C)`, a 4,408-byte physical object with 382 noncode bytes
@@ -23,7 +28,7 @@ from this object alone. The table handlers are the HUB_*Handler functions.
 
 All 254 external calls terminate at admitted EasyLogger (130), admitted LVGL
 label/layout primitives (69, seam identical to previously closed GUI objects),
-closed first-party providers (36: imu_icm45608, als, ota_service,
+closed providers (36: retained-donor imu_icm45608 plus source-owned als, ota_service,
 service_settings, rtos, nvdb_product_mode, thread_manager,
 nvdb_sensor_caldata), exact CMSIS-FreeRTOS v10.5.1 wrappers (9:
 osKernelGetTickCount, osThreadNew/osThreadTerminate, osTimerNew/Start/Stop,
@@ -35,8 +40,9 @@ FreeRTOS kernel call exists.
 
 No sensor-fusion or vendor driver library body (amb/Invensense/Bosch
 candidates) is embedded in this object. All IMU register, FIFO, and mode work
-is delegated to the already closed `imu_icm45608.c` driver object (25 call
-edges) and ALS work to the closed `als.c` object (3 edges); the calibration
+is delegated to the dependency-closed, authenticated-donor
+`imu_icm45608.c` driver object (25 call edges) and ALS work to the closed
+`als.c` object (3 edges); the calibration
 matrix is loaded from the closed `service_nvdb_sensor_caldata.c` provider.
 This is recorded as negative provenance evidence: sensor_hub.c is policy and
 message routing only.

@@ -1,5 +1,10 @@
 # G2 bootloader row-six services and dispatcher source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Three authenticated executable bodies at `[0x004220B2,0x004222D2)` now
 compile from maintained clean-room C at their exact stock addresses. Apple
 clang 21 and Homebrew clang 22.1.8 reproduce all 508 executable bytes exactly;

@@ -148,7 +148,7 @@ def audit() -> dict[str, Any]:
     return {
         "component": "CmBacktrace fault path",
         "analysis_mode": "offline source/build audit; no hardware, signing, or flash operation",
-        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
+        "status": "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "software_gap_count": 0,
         "source": {
             "upstream_commit": "73714489f9d8af130aacb515586b397b604a5768",
@@ -168,15 +168,14 @@ def audit() -> dict[str, Any]:
         "production_registration": {
             "hardfault_vector_replaced": False,
             "stock_path_retained": True,
-            "reason": "physical qualification deferred by project direction",
+            "reason": "physical qualification blocked by unavailable physical evidence",
         },
         "hardware_block": {
-            "qualification_status": "deferred by project direction",
-            "qualification_reason": "deferred by project direction",
-            "required_evidence": "authorized G2 deliberate fault-injection validating register capture, FreeRTOS task/stack bounds, logger output, and terminal behavior",
+            "qualification_status": "blocked by unavailable physical evidence",
+            "qualification_reason": "blocked by unavailable physical evidence",
+            "required_evidence": "future qualification requires authorized G2 hardware and either a component-specific fault-injection fixture or an authenticated golden fault capture validating register capture, FreeRTOS task/stack bounds, logger output, and terminal behavior",
             "physical_evidence_available": False,
-            "authorized_right_temple_state": "not under test; qualification deferred by project direction",
-            "left_temple_state": "stock; not accessed",
+            "qualification_scope": "hardware validation blocked by unavailable physical evidence; no side-specific device-health premise",
         },
     }
 
@@ -192,7 +191,7 @@ def main() -> int:
         print(f"CmBacktrace fault closure: {result['status']}")
         print(f"  target: {result['source']['target']}")
         print(f"  source exports: {len(result['source']['exports'])}")
-        print("  production HardFault vector: retained stock (physical validation deferred by project direction)")
+        print("  production HardFault vector: retained stock (physical validation blocked by unavailable physical evidence)")
     return 0
 
 

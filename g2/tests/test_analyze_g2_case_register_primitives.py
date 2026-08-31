@@ -61,7 +61,7 @@ class CaseRegisterPrimitiveAdmissionTests(unittest.TestCase):
     def test_hardware_validation_is_deferred_by_direction(self) -> None:
         self.assertEqual(
             self.result["hardware_validation"],
-            "deferred by project direction",
+            "blocked by unavailable physical evidence",
         )
 
     def test_manifest_matches_analyzer_rows(self) -> None:

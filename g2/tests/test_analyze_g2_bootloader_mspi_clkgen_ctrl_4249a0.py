@@ -10,7 +10,7 @@ class Tests(unittest.TestCase):
  def tearDownClass(c):c.t.cleanup()
  def v(s,a,i=0):return s.x.open_cfw_test_clkgen_value(a,i)
  def test_audit(s):
-  r=analyzer.audit();s.assertTrue(r["production"]["routed"]);s.assertEqual(r["production"]["source_owned_bytes"]+r["production"]["retained_official_bytes"],147296);s.assertEqual(r["production"]["next_frontier"],0x424A5A);s.assertEqual(r["hardware_validation"],"deferred by project direction")
+  r=analyzer.audit();s.assertTrue(r["production"]["routed"]);s.assertEqual(r["production"]["source_owned_bytes"]+r["production"]["retained_official_bytes"],147350);s.assertEqual(r["production"]["next_frontier"],0x424A5A);s.assertEqual(r["hardware_validation"],"blocked by unavailable physical evidence")
  def test_enable_configure_and_delay(s):
   s.x.open_cfw_test_clkgen_reset(0xffffffff,0xa5);s.x.open_cfw_test_clkgen_run(2,1,1,3);mask=0x1f<<10;configured=(0xffffffff&~mask)|(7<<10);s.assertEqual([s.v(i) for i in (0,1,2,3,5,6)],[configured,1,0xa5,2,1,10]);s.assertEqual([s.v(4,i) for i in range(2)],[(0xffffffff&~(0x1e<<10))|(6<<10),configured])
  def test_disable_clears_only_enable(s):

@@ -1,5 +1,10 @@
 # G2 bootloader MX25U25643G sector-erase source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated sector-erase function `[0x00420A08,0x00420ADA)`
 is now routed to compilable clean-room C. The 210-byte stock body has SHA-256
 `0a0a96db9e3a1c6fcbdfcebd96db6f16e22c780940889677a16ebc880d0dd899`.

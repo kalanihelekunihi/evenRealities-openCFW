@@ -43,6 +43,25 @@ open_cfw_em9305_tail_external_spans[OPEN_CFW_EM9305_TAIL_EXTERNAL_COUNT] = {
       "278b6770d19d7768fdf7a3e399aba046127b8a6ddc9f2ee0822dfdc1fb5ee4a5" }
 };
 
+static const struct open_cfw_em9305_tail_external_evidence *const
+open_cfw_em9305_tail_external_spans_by_id[OPEN_CFW_EM9305_TAIL_EXTERNAL_COUNT] = {
+    &open_cfw_em9305_tail_external_spans[0],
+    &open_cfw_em9305_tail_external_spans[1],
+    &open_cfw_em9305_tail_external_spans[2],
+    &open_cfw_em9305_tail_external_spans[3],
+    &open_cfw_em9305_tail_external_spans[4],
+    &open_cfw_em9305_tail_external_spans[5],
+    &open_cfw_em9305_tail_external_spans[6],
+    &open_cfw_em9305_tail_external_spans[7],
+    &open_cfw_em9305_tail_external_spans[8],
+    &open_cfw_em9305_tail_external_spans[9],
+    &open_cfw_em9305_tail_external_spans[10],
+    &open_cfw_em9305_tail_external_spans[11],
+    &open_cfw_em9305_tail_external_spans[12],
+    &open_cfw_em9305_tail_external_spans[13],
+    &open_cfw_em9305_tail_external_spans[14]
+};
+
 const struct open_cfw_em9305_tail_external_evidence *
 open_cfw_em9305_tail_external_evidence(
     enum open_cfw_em9305_tail_external_id id
@@ -51,7 +70,7 @@ open_cfw_em9305_tail_external_evidence(
     if ((unsigned int)id >= OPEN_CFW_EM9305_TAIL_EXTERNAL_COUNT) {
         return 0;
     }
-    return &open_cfw_em9305_tail_external_spans[(unsigned int)id];
+    return open_cfw_em9305_tail_external_spans_by_id[(unsigned int)id];
 }
 
 enum open_cfw_em9305_tail_status open_cfw_em9305_tail_external_candidate(

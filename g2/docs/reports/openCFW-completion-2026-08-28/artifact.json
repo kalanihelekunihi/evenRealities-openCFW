@@ -5,20 +5,26 @@
     "generate": "python3 g2/tools/generate_g2_completion_report.py"
   },
   "deterministic": true,
+  "dual_profile_ownership": {
+    "checked": true,
+    "companion": "tools/manifests/g2-dual-profile-ownership.json",
+    "companion_sha256": "b00b6aee969f176e4534ebabfa52acd89c8f1c2392752c6038702d2098e3fb83"
+  },
   "files": {
     "assessment-data.json": {
-      "sha256": "9e5ecd52a97298797a99e9da713e0dd8ade526a1d58a0747bec419be41fc456e",
-      "size": 24447
+      "sha256": "3eb3041d9c3a38012d88f8ed3ef74fe683a6bfcbc55bdc8c3225d1fae6556fa4",
+      "size": 69227
     },
     "report.html": {
-      "sha256": "d1d92a5f426d5d83c2a5b4e4ce66d3e4712b1fe58f6b5f6fb141cd98a25897ff",
-      "size": 19007
+      "sha256": "65fa8d27c2aa0c5807c9c197575428132caf3128eac70ea4f7afb9cba5846efc",
+      "size": 42575
     }
   },
   "gate_snapshot": {
     "binary_redistribution_authority_resolved": false,
     "byte_accounting_complete": true,
     "classification_complete": true,
+    "dual_profile_ownership_reconciliation": true,
     "hardware_blocker": "blocked by unavailable physical evidence",
     "hardware_operations": [],
     "hardware_validation": "blocked by unavailable physical evidence",
@@ -31,7 +37,7 @@
   "generator": "g2/tools/generate_g2_completion_report.py",
   "hardware_operations": [],
   "hardware_validation": "blocked by unavailable physical evidence",
-  "schema_version": 2,
+  "schema_version": 3,
   "surface": "report",
   "title": "G2 openCFW Completion Assessment"
 }

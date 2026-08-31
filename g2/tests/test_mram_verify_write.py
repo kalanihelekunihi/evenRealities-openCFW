@@ -430,11 +430,11 @@ class MramVerifyWriteTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "58173eeb43aa84f29b4a6b2e452c5808e3e23b5c076819fbfa56d7f344663699",
+            "dc98294631ecbb197a0e9fbb5e22af984b715d7ada10006277b75aad8dc93784",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "6c142c280bb090ec8880cbe3420c6065bd78279570ba1ab7eabeb8f250b1a827",
+            "0d6b4ced73cc96e76ec7c3dd87c4a209f66ae39ff02b7fc5850d0ef2ea966c12",
         )
 
 

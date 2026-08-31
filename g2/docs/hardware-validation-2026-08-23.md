@@ -2,9 +2,15 @@
 
 Date: 2026-08-23 (America/Chicago)
 
-> Historical record: the current hardware-qualification status is superseded by
-> [`hardware-validation-policy.md`](hardware-validation-policy.md). This report is
-> retained unchanged below as chronology, not as the present device-health premise.
+> Corrected historical record: the apparent temple-application unresponsiveness
+> came from the charging case being bumped during lunch, interrupting the
+> connection midway; it was not a temple fault or a failed flash. The project
+> has multiple successful firmware flashing attempts through
+> `evenRealities-webflasher`, so flash transport is not a current blocker.
+> Directed hardware testing is blocked by unavailable physical evidence. The older
+> observations and recovery proposals below are retained only as chronology,
+> not as the present device-health premise or authorization for a hardware test.
+> See [`hardware-validation-policy.md`](hardware-validation-policy.md).
 
 ## Authorized hardware
 
@@ -39,18 +45,18 @@ The deterministic release command produced:
 This artifact passed structural validation and the available offline tests. It
 is not hardware-qualified.
 
-Post-failure comparison against stock established that the Cortex-M vector
-table, initial stack pointer (`0x2007FB00`), and reset handler (`0x005E4233`)
-are unchanged. The candidate nevertheless changes 145,986 bytes in the common
-stock-sized portion of Apollo main. Its exact build report recorded 1,118 patch
-sites; the retained flash plan independently exposes at least 135 low-level
-runtime entry replacements (FreeRTOS, CMSIS-RTOS, RTOS utilities, IAR
-memory/runtime, scheduler, kernel, and watchdog code). The current source tree
-has since advanced to 1,131 sites and is not hash-bound to the flashed payload;
-the qualifier rejects using that newer metadata as if it described the older
-artifact. This breadth, rather than the package header or vector table, is the
-leading no-boot hypothesis. It remains a hypothesis until the right temple can
-be observed under a debugger.
+The comparison originally performed after the interrupted run established that
+the Cortex-M vector table, initial stack pointer (`0x2007FB00`), and reset
+handler (`0x005E4233`) were unchanged. The candidate nevertheless changes
+145,986 bytes in the common stock-sized portion of Apollo main. Its exact build
+report recorded 1,118 patch sites; the retained flash plan independently
+exposes at least 135 low-level runtime entry replacements (FreeRTOS,
+CMSIS-RTOS, RTOS utilities, IAR memory/runtime, scheduler, kernel, and watchdog
+code). The current source tree has since advanced to 1,131 sites and is not
+hash-bound to that historical payload; the qualifier rejects using newer
+metadata as if it described the older artifact. The breadth remains a reason
+to qualify future candidates in stages, but the interrupted charging-case
+connection supplies no evidence that any one replacement prevented boot.
 
 ## Staged qualification artifacts
 
@@ -70,30 +76,37 @@ Two narrower `2.2.6.0` rungs now prevent another full-overlay-first test:
    It contains one pinned 412-byte C function and one four-byte BL hook for the
    advertised-name suffix, with no critical-runtime patches. Its vector table
    matches stock and it is offline-eligible only after the stock-code control
-   boots on the recovered right temple.
+   boots on an explicitly authorized temple during the future qualification
+   phase.
 3. Earliest critical hook:
    `g2/build/hardware-validation/g2-openCFW-s200_v2.2.6.0-name-memcpy-hook.evenota.bin`,
    SHA-256
    `c0cff1069a6ed9eaa2be61acb532ed2c66125393468e2a2bb983cec766e9a174`.
    It adds only the source-built public IAR `memcpy` provider to rung 2: two
    total patch sites, one critical-runtime site, 564 appended source bytes,
-   and a stock-identical vector table. This is the first focused boot-failure
-   discriminator and must be attempted only after rungs 1 and 2 boot.
+   and a stock-identical vector table. This is the first focused compatibility
+   discriminator and may be attempted only after rungs 1 and 2 boot during the
+   future qualification phase.
 
 The unchanged startup enters `0x005CE01E`, which immediately delays, calls
 `0x005BF0BC`, and only then reaches the first startup log. Function
 `0x005BF0BC` calls public `memcpy` at `0x00439BE4` to populate and execute an
 initializer table. The flashed full image redirected that call to the
 source-built provider, making `memcpy` the earliest observed nontrivial source
-replacement on this boot path. This does not prove it caused the failure, but
-it makes rung 3 the highest-value single-hook test.
+replacement on this boot path. This does not establish a firmware fault; it
+only makes rung 3 a high-value single-hook acceptance check when directed
+hardware qualification resumes.
 
 `tools/qualify_hardware_candidate.py` enforces these offline gates and always
 rejects a full-source image as a first-stage candidate. The full source image
-remains the target, but it must be reached by bisecting hardware-qualified
-hook groups rather than installing all 1,131 sites at once.
+remains the target, but the future hardware-qualification phase must reach it
+through staged hook groups rather than installing all 1,131 sites at once.
 
-## Hardware result
+## Superseded hardware observation
+
+The interpretation below predates the corrected charging-case disconnect
+account. It must not be promoted into current device status or used to infer a
+firmware-induced temple failure.
 
 The stock case application/product-test route rejected the right-temple START
 at the zero-byte boundary. A subsequent exact-address BLE full-package install
@@ -167,23 +180,23 @@ If those checks fail, recovery requires manufacturer service or physical
 debug access beyond the connected stock case. Preserve the left temple on
 stock `2.2.6.10` and do not use another nearby G2 as a substitute.
 
-## Current protobuf Ring-service evidence block
+## Superseded protobuf Ring-service evidence block
 
 The production-routed `pb_service_ring.c` software tranche has not been
 validated on either authorized temple. Its offline host, target-link,
 component, package, and deployment-plan gates are green, but live validation
 requires a booting source-divergent temple, a paired Ring peer, observable BLE
-service-`0x91` relay traffic, and known nanopb event vectors. The right temple
-is application-dead after the earlier full-image experiment, the left temple
-must remain on stock, and the recovery gate above prohibits another write.
-No authorized live Ring peer or captured physical event evidence is available.
+service-`0x91` relay traffic, and known nanopb event vectors. The earlier
+handoff treated the right temple as application-dead and prohibited another
+write. That device-health premise is superseded by the corrected charging-case
+disconnect account. No directed replacement validation has been run.
 
 Accordingly, paired-G2 relay, nanopb interoperability, and physical Ring-event
-behavior are explicitly blocked by unavailable physical evidence. This block
-does not weaken the software closure and must not be reported as hardware
+qualification are blocked by unavailable physical evidence. This future gate does not
+weaken the software closure and must not be reported as completed hardware
 validation or overall firmware completeness.
 
-## Current protobuf glasses-case-service evidence block
+## Superseded protobuf glasses-case-service evidence block
 
 The production-routed `pb_service_glasses_case.c` software tranche has passed
 its host RX/TX/notify oracle, target selector builds, strict-relocation audit,
@@ -192,14 +205,14 @@ requires a booting source-divergent temple, the authorized case, a live BLE
 service-`0x81` peer exchange, and independently observed battery, charging,
 lid, presence, error, and notification-sequence transitions.
 
-That evidence cannot be collected now: the authorized right temple is
-application-dead, the left temple must remain on stock `2.2.6.10`, and the
-recovery gate prohibits another write without debugger evidence. No equivalent
-authorized temple/case capture exists. Service interoperability and physical
-case-state behavior are therefore explicitly blocked by unavailable physical
-evidence, not validated, and do not establish overall firmware completeness.
+The earlier handoff said that evidence could not be collected because it
+treated the right temple as application-dead and prohibited another write.
+That premise is superseded by the corrected charging-case disconnect account.
+Service interoperability and physical case-state qualification are deferred by
+project direction, are not yet validated, and do not establish overall firmware
+completeness.
 
-## Current protobuf conversate-service evidence block
+## Superseded protobuf conversate-service evidence block
 
 The production-routed `pb_service_conversate.c` software tranche passes its
 host buffer/RX/replay/envelope/role/transport oracle, all eight target selector
@@ -208,14 +221,13 @@ gates. Physical validation requires a booting source-divergent authorized
 temple, its paired peer, live BLE service-`0x0B` traffic, timing around the
 3,000-ms replay boundary, and observable conversate UI state transitions.
 
-That evidence is unavailable: the authorized right temple is application-dead,
-the left temple must remain on stock `2.2.6.10`, and the recovery gate forbids
-another write without read-only debugger evidence. No equivalent authorized
-peer capture exists. Master/peer transport, BLE timing, and UI integration are
-therefore explicitly blocked by unavailable physical evidence, not validated,
-and do not establish overall firmware completeness.
+The earlier handoff called that evidence unavailable because it treated the
+right temple as application-dead and prohibited another write. That premise is
+superseded by the corrected charging-case disconnect account. Master/peer
+transport, BLE timing, and UI integration are blocked by unavailable physical evidence,
+are not yet validated, and do not establish overall firmware completeness.
 
-## Current protobuf teleprompt-service evidence block
+## Superseded protobuf teleprompt-service evidence block
 
 The production-routed `pb_service_teleprompt.c` software tranche passes its
 host buffer/RX/replay/six-envelope/role/transport oracle, all nine target
@@ -225,10 +237,9 @@ source-divergent authorized temple, its paired peer, live BLE service-6
 traffic, timing around the 3,000-ms replay boundary, and observable teleprompt
 file-selection, page-request, status, and scroll-synchronization transitions.
 
-That evidence is unavailable: the authorized right temple is
-application-dead, the left temple must remain on stock `2.2.6.10`, and the
-recovery gate forbids another write without read-only debugger evidence. No
-equivalent authorized peer capture exists. Master/peer transport, nanopb
-interoperability, BLE timing, and teleprompt UI integration are therefore
-explicitly blocked by unavailable physical evidence, not validated, and do
-not establish overall firmware completeness.
+The earlier handoff called that evidence unavailable because it treated the
+right temple as application-dead and prohibited another write. That premise is
+superseded by the corrected charging-case disconnect account. Master/peer
+transport, nanopb interoperability, BLE timing, and teleprompt UI integration
+are blocked by unavailable physical evidence, are not yet validated, and do not establish
+overall firmware completeness.

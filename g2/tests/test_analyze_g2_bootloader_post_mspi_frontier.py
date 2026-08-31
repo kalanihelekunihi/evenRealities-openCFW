@@ -90,9 +90,9 @@ class PostMspiFrontierTests(unittest.TestCase):
 
     def test_live_boot_accounting_conserves_the_stock_owned_domain(self) -> None:
         component = self.result["boot_component"]
-        self.assertEqual(component["source_owned_bytes"], 27_819)
-        self.assertEqual(component["opaque_base_bytes"], 119_477)
-        self.assertEqual(component["source_owned_bytes"] + component["opaque_base_bytes"], 147_296)
+        self.assertEqual(component["source_owned_bytes"], 27_925)
+        self.assertEqual(component["opaque_base_bytes"], 119_425)
+        self.assertEqual(component["source_owned_bytes"] + component["opaque_base_bytes"], 147_350)
 
     def test_cli_is_machine_readable_and_software_only(self) -> None:
         environment = os.environ.copy()
@@ -106,7 +106,7 @@ class PostMspiFrontierTests(unittest.TestCase):
             text=True,
         )
         result = json.loads(completed.stdout)
-        self.assertEqual(result["hardware_validation"], "deferred by project direction")
+        self.assertEqual(result["hardware_validation"], "blocked by unavailable physical evidence")
         self.assertEqual(result["hardware_operations"], [])
         self.assertNotIn("flashing", result)
 

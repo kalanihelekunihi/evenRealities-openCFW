@@ -21,6 +21,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 OPENCFW_ROOT = Path(__file__).resolve().parent.parent
@@ -199,26 +200,69 @@ class CompilerSourcePrefixFlagsTests(unittest.TestCase):
                 )
 
     def test_rejects_response_file_flags(self) -> None:
-        with self.assertRaisesRegex(
-            apollo_overlay.BuildError,
-            r"^toolchain\.flags cannot use response files$",
+        for helper in (
+            apollo_overlay.compiler_source_prefix_flags,
+            apollo_overlay.compiler_source_prefix_report_flags,
         ):
-            apollo_overlay.compiler_source_prefix_flags(
-                Path("/actual/worktree/openCFW"),
-                {"flags": ["@compiler-flags.rsp"]},
-            )
+            with self.subTest(helper=helper.__name__), self.assertRaisesRegex(
+                apollo_overlay.BuildError,
+                r"^toolchain\.flags cannot use response files$",
+            ):
+                helper(
+                    Path("/actual/worktree/openCFW"),
+                    {"flags": ["@compiler-flags.rsp"]},
+                )
 
     def test_maps_actual_source_root_to_reviewed_source_root(self) -> None:
-        self.assertEqual(
-            apollo_overlay.compiler_source_prefix_flags(
-                Path("/actual/worktree/openCFW"),
-                {"reviewed_source_root": "/reviewed/openCFW", "flags": []},
-            ),
-            [
-                "-ffile-prefix-map=/actual/worktree/openCFW="
-                "/reviewed/openCFW"
-            ],
+        toolchain = {
+            "reviewed_source_root": "/reviewed/openCFW",
+            "flags": [],
+        }
+        for actual_root in (
+            Path("/actual/worktree-a/openCFW"),
+            Path("/different/worktree-b/openCFW"),
+        ):
+            with self.subTest(actual_root=actual_root):
+                self.assertEqual(
+                    apollo_overlay.compiler_source_prefix_flags(
+                        actual_root,
+                        toolchain,
+                    ),
+                    [
+                        f"-ffile-prefix-map={actual_root.resolve()}="
+                        "/reviewed/openCFW"
+                    ],
+                )
+                self.assertEqual(
+                    apollo_overlay.compiler_source_prefix_report_flags(
+                        actual_root,
+                        toolchain,
+                    ),
+                    [
+                        "-ffile-prefix-map=/reviewed/openCFW="
+                        "/reviewed/openCFW"
+                    ],
+                )
+
+    def test_report_view_is_root_independent_and_discloses_no_active_path(
+        self,
+    ) -> None:
+        toolchain = {
+            "reviewed_source_root": "/reviewed/openCFW",
+            "flags": ["-O2"],
+        }
+        roots = (
+            Path("/private/tmp/build-a/openCFW"),
+            Path("/workspace/build-b/openCFW"),
         )
+        reports = [
+            apollo_overlay.compiler_source_prefix_report_flags(root, toolchain)
+            for root in roots
+        ]
+        self.assertEqual(reports[0], reports[1])
+        encoded = json.dumps(reports, sort_keys=True)
+        for root in roots:
+            self.assertNotIn(str(root.resolve()), encoded)
 
     def test_omits_map_when_root_is_equal_or_unreviewed(self) -> None:
         self.assertEqual(
@@ -256,17 +300,28 @@ class CompilerSourcePrefixFlagsTests(unittest.TestCase):
             )
 
     def test_rejects_hand_authored_file_prefix_map(self) -> None:
-        with self.assertRaisesRegex(
-            apollo_overlay.BuildError,
-            "toolchain.flags cannot set -ffile-prefix-map",
+        for helper in (
+            apollo_overlay.compiler_source_prefix_flags,
+            apollo_overlay.compiler_source_prefix_report_flags,
         ):
-            apollo_overlay.compiler_source_prefix_flags(
-                Path("/actual/worktree/openCFW"),
-                {
-                    "reviewed_source_root": "/reviewed/openCFW",
-                    "flags": ["-ffile-prefix-map=/somewhere=/reviewed/openCFW"],
-                },
-            )
+            for flags in (
+                ["-ffile-prefix-map=/somewhere=/reviewed/openCFW"],
+                ["-ffile-prefix-map", "/somewhere=/reviewed/openCFW"],
+            ):
+                with (
+                    self.subTest(helper=helper.__name__, flags=flags),
+                    self.assertRaisesRegex(
+                        apollo_overlay.BuildError,
+                        "toolchain.flags cannot set -ffile-prefix-map",
+                    ),
+                ):
+                    helper(
+                        Path("/actual/worktree/openCFW"),
+                        {
+                            "reviewed_source_root": "/reviewed/openCFW",
+                            "flags": flags,
+                        },
+                    )
 
 
 class ResolveLeafProfileRecordTests(unittest.TestCase):
@@ -694,6 +749,60 @@ class OpenCfwProfileHelperTests(unittest.TestCase):
             else:
                 os.environ["OPENCFW_TOOLCHAIN_PROFILE"] = saved
 
+    def test_direct_profile_recording_is_limited_to_ring_manifest(self) -> None:
+        self.assertEqual(
+            open_cfw.PROFILE_RECORDING_MANIFESTS,
+            frozenset({RING_MANIFEST.resolve()}),
+        )
+        with self.assertRaisesRegex(
+            open_cfw.OpenCFWError,
+            "canonical observation/admission workflow",
+        ):
+            open_cfw.record_manifest_profile_pins(
+                CORE_MANIFEST,
+                "linux-clang",
+                {},
+                {"expected_size": 1, "expected_sha256": "0" * 64},
+            )
+
+    def test_direct_profile_recording_rejects_hardlinked_manifest(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="open-cfw-record-manifest-") as raw:
+            root = Path(raw)
+            original = root / "ring.json"
+            linked = root / "ring-hardlink.json"
+            original.write_text("{}", encoding="utf-8")
+            os.link(original, linked)
+            saved = open_cfw.PROFILE_RECORDING_MANIFESTS
+            try:
+                open_cfw.PROFILE_RECORDING_MANIFESTS = frozenset({original.resolve()})
+                with self.assertRaisesRegex(
+                    open_cfw.OpenCFWError,
+                    "independent regular file",
+                ):
+                    open_cfw.record_manifest_profile_pins(
+                        original,
+                        "linux-clang",
+                        {},
+                        {"expected_size": 1, "expected_sha256": "0" * 64},
+                    )
+            finally:
+                open_cfw.PROFILE_RECORDING_MANIFESTS = saved
+
+    def test_core_profile_recording_fails_before_provider_reads(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="open-cfw-record-output-") as raw:
+            with mock.patch.object(open_cfw, "verify_manifest") as verify:
+                with self.assertRaisesRegex(
+                    open_cfw.OpenCFWError,
+                    "canonical observation/admission workflow",
+                ):
+                    open_cfw.build(
+                        CORE_MANIFEST,
+                        Path(raw) / "build/output",
+                        toolchain_profile="linux-clang",
+                        record_profile=True,
+                    )
+                verify.assert_not_called()
+
 
 class DetectToolchainTests(unittest.TestCase):
     @staticmethod
@@ -726,8 +835,14 @@ class DetectToolchainTests(unittest.TestCase):
                 detect_toolchain.detect(homebrew, RING_CONFIG), "linux-clang"
             )
             unknown = self._fake_clang(tmp, "gcc (GCC) 16.1.1")
-            with self.assertRaises(SystemExit):
+            with self.assertRaises(SystemExit) as raised:
                 detect_toolchain.detect(unknown, RING_CONFIG)
+            guidance = str(raised.exception)
+            self.assertIn("core-canonical-observation", guidance)
+            self.assertIn("core-canonical-admission", guidance)
+            self.assertIn("do not use direct --record-profile", guidance)
+            self.assertIn("component-specific recorders", guidance)
+            self.assertIn("ring-source --record-profile", guidance)
 
 
 class CoreLz4ProfilePinTests(unittest.TestCase):
@@ -739,26 +854,26 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 429_058,
+                "overlay_size": 360_578,
                 "overlay_sha256": (
-                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+                    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
                 ),
-                "component_size": 3_952_454,
+                "component_size": 3_883_974,
                 "component_sha256": (
-                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+                    "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
                 ),
             },
         )
         self.assertEqual(
             config["toolchain_profiles"]["linux-clang"]["expected"],
             {
-                "overlay_size": 212_664,
+                "overlay_size": 152_912,
                 "overlay_sha256": (
-                    "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18"
+                    "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20"
                 ),
-                "component_size": 3_736_060,
+                "component_size": 3_676_308,
                 "component_sha256": (
-                    "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97"
+                    "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7"
                 ),
             },
         )
@@ -768,15 +883,15 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
                 manifest["package"]["expected_sha256"],
             ),
             (
-                4_745_526,
-                "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+                4_677_046,
+                "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
             ),
         )
         self.assertEqual(
             manifest["package"]["profiles"]["linux-clang"],
             {
-                "expected_size": 4_529_116,
-                "expected_sha256": "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+                "expected_size": 4_469_364,
+                "expected_sha256": "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
             },
         )
 
@@ -799,7 +914,7 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
         }
         self.assertEqual(
             [linux[name]["expected"]["offset"] for name in names],
-            [177_804, 179_560, 179_564],
+            [118_052, 119_808, 119_812],
         )
         self.assertEqual(
             linux["LZ4_decompress_safe"]["closure"]["text_section"],
@@ -860,7 +975,7 @@ class NanopbVarint32LinuxProfileContractTests(unittest.TestCase):
                 "size": 222,
                 "sha256": "36bb0167f4d3407b99ed2255cc9e77dd60dc1e9070781a257bfea59abc408171",
                 "alignment": 4,
-                "offset": 186_548,
+                "offset": 126_796,
                 "unrelocated_sha256": "5296b608c55171bca9d5f4d162cf53d0e6aa5f724e1cb82499a7311f2a6cc9ff",
                 "closure_size": 238,
                 "closure_sha256": "2c49567cfe23e36c504586218719c2e590163bec804353c8106680328d64a480",
@@ -874,7 +989,7 @@ class NanopbVarint32LinuxProfileContractTests(unittest.TestCase):
                 "size": 10,
                 "sha256": "1f0924d25c50933e7cd5aac05d718da6d44b7a20d4af901fa833c555eca6ff1a",
                 "alignment": 4,
-                "offset": 186_788,
+                "offset": 127_036,
                 "unrelocated_sha256": "e9ec8b612503f867aabf2467e3abfac44753c5576a247a00cbc4309e2a023f93",
             },
         )

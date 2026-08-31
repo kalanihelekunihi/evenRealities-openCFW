@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # openCFW -- unified entry point for the G2 and R1 firmware targets.
 #
 # Each target keeps its own build system; this Makefile is the front door that
@@ -20,10 +21,13 @@ THIRD_PARTY_DIR := third-party
 .PHONY: all help \
         build test verify clean \
         g2 g2-build g2-test g2-verify g2-inspect g2-clean \
-        g2-community-source g2-community-smoke \
+        g2-community-source g2-community-smoke g2-community-preflight \
+        g2-core-canonical-observation g2-core-canonical-admission \
+        g2-core-canonical-apply g2-core-canonical-test \
         completion-readiness completion-classification-gate completion-source-gate \
         completion-source-ownership-gate completion-license-policy-gate \
         completion-assessment completion-assessment-check \
+        dual-profile-ownership dual-profile-ownership-write \
         r1 r1-build r1-test r1-sanitize r1-verify r1-arm r1-sim r1-clean \
         third-party third-party-vendored third-party-fetched
 
@@ -44,8 +48,13 @@ help:
 	@echo '  g2-test          G2 unit tests'
 	@echo '  g2-verify        G2 build + upstream audits'
 	@echo '  g2-inspect       inspect the built source package'
-	@echo '  g2-community-source  deterministic vendor-byte-free source archive'
+	@echo '  g2-community-source  deterministic official-payload-free source archive'
 	@echo '  g2-community-smoke   rebuild source profile from a fresh archive'
+	@echo '  g2-community-preflight verify local G2 software-build dependencies'
+	@echo '  g2-core-canonical-observation  record one isolated core observation'
+	@echo '  g2-core-canonical-admission    verify four observations without writes'
+	@echo '  g2-core-canonical-apply        transactionally admit a verified generation'
+	@echo '  g2-core-canonical-test  canonical observation/admission contract tests'
 	@echo '  completion-readiness current six-component ownership/classification audit'
 	@echo '  completion-classification-gate  require every byte to be classified'
 	@echo '  completion-source-gate          require complete production source'
@@ -53,6 +62,8 @@ help:
 	@echo '  completion-license-policy-gate  require MIT for project-owned source records'
 	@echo '  completion-assessment           regenerate and test the public G2 assessment'
 	@echo '  completion-assessment-check     verify the public assessment is current'
+	@echo '  dual-profile-ownership          verify checked Apple/Linux ownership accounting'
+	@echo '  dual-profile-ownership-write    maintainer-only checked companion refresh'
 	@echo
 	@echo 'R1 (nRF52840 ring firmware):'
 	@echo '  r1-test          portable host tests'
@@ -96,6 +107,21 @@ g2-community-source:
 g2-community-smoke:
 	$(MAKE) -C $(G2_DIR) community-source-smoke
 
+g2-community-preflight:
+	$(MAKE) -C $(G2_DIR) community-local-preflight
+
+g2-core-canonical-observation:
+	$(MAKE) -C $(G2_DIR) core-canonical-observation
+
+g2-core-canonical-admission:
+	$(MAKE) -C $(G2_DIR) core-canonical-admission
+
+g2-core-canonical-apply:
+	$(MAKE) -C $(G2_DIR) core-canonical-apply
+
+g2-core-canonical-test:
+	$(MAKE) -C $(G2_DIR) core-canonical-test
+
 completion-readiness:
 	$(MAKE) -C $(G2_DIR) completion-readiness
 
@@ -116,6 +142,12 @@ completion-assessment:
 
 completion-assessment-check:
 	$(MAKE) -C $(G2_DIR) completion-assessment-check
+
+dual-profile-ownership:
+	$(MAKE) -C $(G2_DIR) dual-profile-ownership
+
+dual-profile-ownership-write:
+	$(MAKE) -C $(G2_DIR) dual-profile-ownership-write
 
 g2-clean:
 	$(MAKE) -C $(G2_DIR) clean

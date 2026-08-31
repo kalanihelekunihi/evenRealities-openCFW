@@ -3,6 +3,14 @@
 Status: software-only, research admission; no hardware operation or production
 routing.
 
+> Historical accounting note: later public-DWARF correlation identifies the
+> 3,306-byte root at `0x0051C5EC` as NemaVG `draw_caps`. That coordinator is now
+> production-routed to reviewed MIT source; its two endpoint providers remain
+> stock-retained and unpatched over 3,308 bytes. The wave totals and the other
+> typed terminal boundaries below remain provenance history, not the current
+> release-readiness mask. See
+> [the stroke-cap candidate audit](g2-nemavg-stroke-caps-source-candidate.md).
+
 ## Complete actionable closure
 
 Wave 5 ended at 1,395 unclassified functions / 172,308 official opaque
@@ -43,9 +51,9 @@ Apollo5 archive is GCC generated and explicitly not byte-identical to the
 IAR-generated stock, so it cannot authenticate these exact bodies. Every row
 also has an explicit FreeType-negative census record.
 
-There is consequently no exact maintained implementation that can honestly be
-admitted for this batch. No provider, upstream function identity, or license is
-claimed. All seven rows remain SHA-pinned
+At the time of this wave there was consequently no exact maintained
+implementation that could honestly be admitted for this batch. No provider,
+upstream function identity, or license was claimed. All seven rows were SHA-pinned
 `typed-external-provider-unavailable` boundaries. Assigning MIT or the Think
 Silicon notice without source identity would fabricate provenance.
 

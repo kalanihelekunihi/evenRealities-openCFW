@@ -1,15 +1,15 @@
 {
   "analysis_mode": "offline source/overlay quality audit; no build, hardware, MMIO, reset, flashing, signing, or production mutation",
   "classification_complete": true,
-  "hardware_validation": "deferred by project direction",
+  "hardware_validation": "blocked by unavailable physical evidence",
   "metrics": {
     "directive_bytes": 16,
     "fully_raw_byte_body_bytes": 0,
     "production_routed_sources_with_directives": 2,
     "public_raw_executable_transcript_files": 0,
     "raw_instruction_transcription_bytes": 0,
-    "removed_public_transcript_executable_bytes": 8902,
-    "removed_public_transcript_files": 8,
+    "removed_public_transcript_executable_bytes": 4930,
+    "removed_public_transcript_files": 2,
     "routed_source_bytes_in_affected_sources": 128,
     "semantic_literal_bytes": 16,
     "source_owned_bytes_currently_overstated": 0
@@ -19,53 +19,11 @@
   "quality_gate": "fail_closed_raw_instruction_transcription_not_source_owned",
   "removed_public_transcript_boundaries": [
     {
-      "deleted_source_sha256": "ec17fa6c195b86a0b5cb7e8760b7af3be8cee47481ad837a391e4f53d090de04",
-      "deleted_source_text_bytes": 1561,
-      "disposition": "absent_from_public_source_and_production_routing; authenticated official bytes retained",
-      "path": "components/bootloader/core_overlay/runtime_mspi_configure_424af0.c",
-      "retained_official_executable_bytes": 228
-    },
-    {
       "deleted_source_sha256": "b46f494c5e4b35a64fa9a13c6d256c720f413a4aa29a57f0b9ffdcb636d5a696",
       "deleted_source_text_bytes": 24638,
       "disposition": "absent_from_public_source_and_production_routing; authenticated official bytes retained",
       "path": "components/bootloader/core_overlay/runtime_mspi_control_4251c0.c",
       "retained_official_executable_bytes": 4384
-    },
-    {
-      "deleted_source_sha256": "93c96cb310ed58bc5f06bb048a321bf3dd4943215bd466d357decff102b53e46",
-      "deleted_source_text_bytes": 13020,
-      "disposition": "absent_from_public_source_and_production_routing; authenticated official bytes retained",
-      "path": "components/bootloader/core_overlay/runtime_mspi_device_configure_424120.c",
-      "retained_official_executable_bytes": 1902
-    },
-    {
-      "deleted_source_sha256": "c8754d994052a0b582a8a1ff377653492488b492138c3ac579afd3d944726725",
-      "deleted_source_text_bytes": 6904,
-      "disposition": "absent_from_public_source_and_production_routing; authenticated official bytes retained",
-      "path": "components/bootloader/core_overlay/runtime_mspi_device_configure_public_424be4.c",
-      "retained_official_executable_bytes": 1154
-    },
-    {
-      "deleted_source_sha256": "4a52d4f85a7179932b25814d9109e729d19744322f09787aa4ff61bb8bb6ce41",
-      "deleted_source_text_bytes": 1071,
-      "disposition": "absent_from_public_source_and_production_routing; authenticated official bytes retained",
-      "path": "components/bootloader/core_overlay/runtime_mspi_initialize_424a5a.c",
-      "retained_official_executable_bytes": 144
-    },
-    {
-      "deleted_source_sha256": "d9f5ce663da4ca56241e345d636021d700b8e99011c36c135783284729e873c2",
-      "deleted_source_text_bytes": 2266,
-      "disposition": "absent_from_public_source_and_production_routing; authenticated official bytes retained",
-      "path": "components/bootloader/core_overlay/runtime_mspi_lifecycle_425066.c",
-      "retained_official_executable_bytes": 312
-    },
-    {
-      "deleted_source_sha256": "334adbc65bf4dc2e8c53442a5be2caca1808933cf8d9c62227ae326377d678c5",
-      "deleted_source_text_bytes": 1814,
-      "disposition": "absent_from_public_source_and_production_routing; authenticated official bytes retained",
-      "path": "components/bootloader/core_overlay/runtime_mspi_piomixed_configure_42488e.c",
-      "retained_official_executable_bytes": 232
     },
     {
       "deleted_source_sha256": "1b800153d9619810fa31a3186e003fbbf4902aadf3c95b36338bca2eaa630855",

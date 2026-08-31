@@ -26,17 +26,17 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "43700fbb0f7015e30b1ed5b5e18eb57a862ad2ff3b565677ee0888cdba6706df",
-    CLOSURE: "3bf789de22c654b6cc8c14bcf83a16e1709227f11568b707a32f19a1cf367926",
+    CLOSURE: "580d33f2f86823b9f59332c49b2802008f91b0f4f810e1a9520d58b9b7b79d8e",
     PROVENANCE: "1658f580d2dac74213a387f7d7800c569e4c825a240cf8a8e02a7783366ee426",
 }
-SOURCE_SIZE = 8179
-SOURCE_SHA256 = "270772d136060be649f684e05e3de604bd89bd8ea6e0a4599ee550077c5c19cb"
+SOURCE_SIZE = 8170
+SOURCE_SHA256 = "182a9e4764c23e7491ad9b77842daded6b0e4fad468deeb16cfcf40eabbd5d98"
 FUNCTIONS = (
-    ("open_cfw_pb_service_ring_buffer_write", 146, 253724, 0),
-    ("APP_PbRxRingFrameDataProcess", 128, 253872, 4),
-    ("PB_RxRingEvent", 10, 254000, 0),
-    ("APP_PbTxEncodeRingEvent", 284, 254012, 4),
-    ("RingDataRelay_common_data_handler", 26, 254296, 1),
+    ("open_cfw_pb_service_ring_buffer_write", 146, 193876, 0),
+    ("APP_PbRxRingFrameDataProcess", 128, 194024, 4),
+    ("PB_RxRingEvent", 10, 194152, 0),
+    ("APP_PbTxEncodeRingEvent", 284, 194164, 4),
+    ("RingDataRelay_common_data_handler", 26, 194448, 1),
 )
 PATCHES = (
     ("replace_pb_ring_rx_frame", 0x005CE1DC, 498,
@@ -353,7 +353,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 1362,
             "retained_literal_pool_bytes": 150,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
                 "No authorized physical paired-G2 BLE relay, live nanopb peer, "
                 "or ring-event evidence is required for future qualification."

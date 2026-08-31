@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "components/apollo_main/core_overlay/charger_common.c"
 FIXTURE = ROOT / "tests/fixtures"
-SOURCE_SHA256 = "1c3b2d7fa0da4e3e4aed565c1e8585638c5dcb0e3ba7a36e0f9335956d7c12ab"
+SOURCE_SHA256 = "e1ef461fd86a8476a7c240cba1b46ba4d5210f8f2464cac0f4d4de82ea3009ac"
 EXPECTED_SYMBOLS = {
     "open_cfw_charger_compare_and_update_is_charging",
     "open_cfw_charger_compare_and_update_soc",

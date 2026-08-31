@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import json
+import copy
 import sys
 import tempfile
 import unittest
@@ -19,6 +20,17 @@ import analyze_g2_clkmgr_divider_candidate as analyzer  # noqa: E402
 
 
 class ClockManagerDividerAdmissionTests(unittest.TestCase):
+    def test_linux_boot_report_uses_the_canonical_admission_provider(self) -> None:
+        self.assertEqual(
+            analyzer.BOOT_LINUX_REPORT,
+            ROOT
+            / "build/canonical-provider/linux-clang/apollo_bootloader/build-report.json",
+        )
+        self.assertNotIn(
+            "build-linux-clock-record",
+            analyzer.BOOT_LINUX_REPORT.as_posix(),
+        )
+
     def test_authenticated_mapping_and_candidate(self) -> None:
         report = analyzer.run_audit()
         self.assertEqual(report["stock"]["functions_per_image"], 2)
@@ -29,7 +41,27 @@ class ClockManagerDividerAdmissionTests(unittest.TestCase):
         self.assertEqual(report["candidate"]["raw_instruction_bytes"], 0)
         self.assertTrue(report["candidate"]["production_routed"])
         self.assertEqual(report["hardware_validation"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
+        self.assertEqual(
+            (
+                report["production"]["package"]["size"],
+                report["production"]["package"]["sha256"],
+            ),
+            (
+                4_677_046,
+                "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
+            ),
+        )
+        self.assertEqual(
+            (
+                report["production"]["linux_clang"]["package"]["size"],
+                report["production"]["linux_clang"]["package"]["sha256"],
+            ),
+            (
+                4_469_364,
+                "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
+            ),
+        )
 
     def test_checked_in_summary_matches_live_audit(self) -> None:
         self.assertEqual(json.loads(analyzer.SUMMARY.read_text()),
@@ -44,6 +76,36 @@ class ClockManagerDividerAdmissionTests(unittest.TestCase):
             with mock.patch.object(analyzer, "PINS", pins):
                 with self.assertRaises(analyzer.AuditError):
                     analyzer.authenticate(changed)
+
+    def test_stale_package_identity_in_summary_fails_closed(self) -> None:
+        stored = json.loads(analyzer.SUMMARY.read_text(encoding="utf-8"))
+        stale = copy.deepcopy(stored)
+        stale["production"]["package"]["sha256"] = "0" * 64
+        with tempfile.TemporaryDirectory(
+            prefix="open-cfw-clkmgr-summary-"
+        ) as temporary:
+            receipt = Path(temporary) / "summary.json"
+            receipt.write_text(
+                json.dumps(stale, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(analyzer.AuditError, "summary is stale"):
+                analyzer.require_summary_current(stored, receipt)
+            receipt.write_text(
+                json.dumps(stored, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            analyzer.require_summary_current(stored, receipt)
+
+    def test_make_target_regenerates_summary_before_tests(self) -> None:
+        makefile = (ROOT / "Makefile").read_text(encoding="utf-8")
+        recipe = makefile.split("clkmgr-divider-candidate:", 1)[1].split(
+            "\n\n", 1
+        )[0]
+        self.assertIn(
+            "tools/analyze_g2_clkmgr_divider_candidate.py --write-manifest",
+            recipe,
+        )
 
 
 if __name__ == "__main__":

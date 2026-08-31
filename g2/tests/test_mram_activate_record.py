@@ -329,11 +329,11 @@ class MramActivateRecordTests(unittest.TestCase):
     def test_source_and_fixture_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "087ed219233f2dcf77ae105e047c4ecc135a0dfa035e064f3d1c293339b04112",
+            "757e896aabc1b640efdf4292c506d356d857e62a3e92404242343bcd13704336",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "c1315d24ce060bb1ead9890a2970210d5f14a36d68a3a0bf32a8451ab91ad132",
+            "3a93b6a3290e5ed84c73c668cd6e47ce34869adc53154f28afda799c9cd223cf",
         )
 
 

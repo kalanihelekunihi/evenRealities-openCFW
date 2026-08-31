@@ -16,7 +16,7 @@ class AnalyzeBootloaderAeabiMemcpyTests(unittest.TestCase):
             cwd=ROOT, check=True, capture_output=True, text=True,
         )
         report = json.loads(completed.stdout)
-        self.assertEqual(report["status"], "implemented-in-source / hardware-validation-deferred-by-project-direction")
+        self.assertEqual(report["status"], "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence")
         self.assertEqual(report["software_gap_count"], 0)
         self.assertEqual(report["stock"]["whole_image_callers"], 33)
         self.assertEqual(report["source"]["size"], 16)
@@ -24,9 +24,14 @@ class AnalyzeBootloaderAeabiMemcpyTests(unittest.TestCase):
         self.assertEqual(
             report["provider"]["source_owned_bytes"]
             + report["provider"]["retained_official_bytes"],
-            147_296,
+            147_350,
         )
         self.assertFalse(report["hardware_block"]["physical_evidence_available"])
+        self.assertEqual(
+            report["hardware_block"]["required_evidence"],
+            "authorized G2 hardware demonstrating boot progression through "
+            "all forward-copy callers",
+        )
 
 
 if __name__ == "__main__":

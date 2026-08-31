@@ -26,10 +26,10 @@ PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.eve
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 PINS = {
     FUNCTION_MAP: "e78344ad5842545cdf3e8ec99ae51a041c7358052181d134d88b11e003c9a7ea",
-    CLOSURE: "59c3963337d91e780baffed72cb42aba74a39448d852f599e54c2c1a05c36bbf",
-    PROVENANCE: "ad079d824bf5c262256aa5fb06ae5e4939aac732223e6bd2fad5ada19c4dd14c",
+    CLOSURE: "41f7e802624bf8b55d33072c0c565b396f912d35d1af07143919c1a42af34e49",
+    PROVENANCE: "fcd5cb0020b02ef2fefef59a113e2f6828069b34c81f7e47de5a054178671e2e",
 }
-SOURCE_SHA256 = "0944bbdaab2ce375dd72382da1c2d9f761335b2bba689e8d96c13366c435c667"
+SOURCE_SHA256 = "044a4c7014659e0d8e02d164f96fac9baf0275ebc025b7684ad373e972f7b517"
 FUNCTIONS = (
     "open_cfw_touch_frame_read_u16", "open_cfw_touch_frame_write_u16",
     "open_cfw_touch_frame_payload", "open_cfw_touch_frame_terminator",
@@ -66,11 +66,11 @@ PATCH_FUNCTIONS = (
     "open_cfw_touch_format_version", "open_cfw_touch_is_upgrade_needed",
     "open_cfw_touch_log_current_version", "open_cfw_touch_update_firmware_check",
 )
-SOURCE_OFFSETS = (308248, 308268, 308280, 308288, 308300, 308312, 308332,
-    308344, 308352, 308364, 308408, 308776, 308792, 308808, 308820,
-    308836, 308968, 309076, 309292, 309388, 309516, 309600, 309716,
-    309792, 309812, 310060, 310092, 310300, 310796, 311168, 311176,
-    311224)
+SOURCE_OFFSETS = (248408, 248428, 248440, 248448, 248460, 248472, 248492,
+    248504, 248512, 248524, 248568, 248936, 248952, 248968, 248980,
+    248996, 249128, 249236, 249452, 249548, 249676, 249760, 249876,
+    249952, 249972, 250220, 250252, 250460, 250956, 251328, 251336,
+    251384)
 SOURCE_SIZES = (18, 12, 8, 10, 10, 20, 10, 8, 12, 42, 366, 14, 16,
     12, 16, 130, 106, 208, 96, 128, 82, 116, 76, 18, 246, 30, 208,
     496, 372, 8, 46, 194)
@@ -271,7 +271,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         raise AuditError("touch-DFU package/state literal changed")
 
     source = SOURCE.read_bytes()
-    if len(source) != 26_522 or sha256(source) != SOURCE_SHA256:
+    if len(source) != 26_513 or sha256(source) != SOURCE_SHA256:
         raise AuditError("touch-DFU production source changed")
     source_text = source.decode("utf-8")
     required_source_tokens = (
@@ -304,7 +304,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if any(item.get("profiles") != ["apple-clang"]
            or item.get("source", {}).get("sha256") != SOURCE_SHA256
            or item.get("strict_relocation_contract") is not True
-           or item.get("source", {}).get("license") != "GPL-3.0-only"
+           or item.get("source", {}).get("license") != "MIT"
            for item in leaves):
         raise AuditError("touch-DFU source/relocation authentication changed")
     patches = [item for item in overlay["patch_sites"]
@@ -324,17 +324,17 @@ def analyze(image_path: Path = IMAGE) -> dict:
         ):
             raise AuditError(f"touch-DFU guarded redirect {index:02d} changed")
     expected_aggregate = {
-        "component_sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
-        "component_size": 3_855_544,
-        "overlay_sha256": "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
-        "overlay_size": 332_148,
+        "component_sha256": "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
+        "component_size": 3_883_974,
+        "overlay_sha256": "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+        "overlay_size": 360_578,
     }
     if overlay["expected"] != expected_aggregate:
         raise AuditError("touch-DFU aggregate overlay pins changed")
     build = json.loads(BUILD_REPORT.read_text())
     if (build["overlay"]["size"], build["overlay"]["sha256"],
             build["component"]["size"], build["component"]["sha256"]) != (
-            332_148, expected_aggregate["overlay_sha256"], 3_855_544,
+            360_578, expected_aggregate["overlay_sha256"], 3_883_974,
             expected_aggregate["component_sha256"]):
         raise AuditError("touch-DFU build artifact changed")
     built = [item for item in build["relocated_leaves"]
@@ -349,8 +349,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (main["provider"]["size"], main["provider"]["sha256"],
             manifest["package"]["expected_size"],
             manifest["package"]["expected_sha256"]) != (
-            3_855_544, expected_aggregate["component_sha256"], 4_634_038,
-            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"):
+            3_883_974, expected_aggregate["component_sha256"], 4_677_046,
+            "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"):
         raise AuditError("touch-DFU manifest/package pins changed")
     regions = main["regions"]
     body_regions = [item for item in regions
@@ -372,13 +372,13 @@ def analyze(image_path: Path = IMAGE) -> dict:
         raise AuditError("touch-DFU manifest ownership changed")
     package = PACKAGE.read_bytes()
     if (len(package), sha256(package)) != (
-            4_634_038, manifest["package"]["expected_sha256"]):
+            4_677_046, manifest["package"]["expected_sha256"]):
         raise AuditError("touch-DFU package artifact changed")
     flash_plan = json.loads(FLASH_PLAN.read_text())
     if (len(flash_plan["flash_regions"]),
             len(flash_plan["unresolved_flash_regions"]),
             flash_plan["package_sha256"]) != (
-            4_482, 2, manifest["package"]["expected_sha256"]):
+            6_586, 0, manifest["package"]["expected_sha256"]):
         raise AuditError("touch-DFU flash-plan closure changed")
 
     return {
@@ -430,7 +430,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "exact_symbols": [name for _, name in EXACT_SYMBOLS],
             "source_inventory": "32-function clean-room production C",
             "historical_source_inventory": "unavailable",
-            "license": "GPL-3.0-only",
+            "license": "MIT",
         },
         "production": {
             "candidate": str(SOURCE.relative_to(ROOT)),
@@ -441,11 +441,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "generated_alignment_bytes": 38,
             "strict_relocations": 70,
             "guarded_redirects": 32,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "authorized right temple is not under test because qualification is deferred by project direction; authorized left "
-                "temple must remain stock; future qualification requires a responsive authorized pair, "
-                "touch-controller fixture, or golden I2C/DFU capture is required for future qualification"
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific touch-controller/I2C DFU fixture "
+                "or an authenticated golden I2C/DFU capture"
             ),
         },
     }

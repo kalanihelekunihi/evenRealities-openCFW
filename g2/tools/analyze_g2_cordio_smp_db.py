@@ -188,7 +188,7 @@ def _production_report() -> dict[str, Any]:
         "compiled_leaf_bytes": sum(item[1] for item in PRODUCTION_ROUTES.values()),
         "source_owned_bytes_added": 712,
         "stock_bytes_replaced": sum(item[1] for item in stock.values()),
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
     }
 
 

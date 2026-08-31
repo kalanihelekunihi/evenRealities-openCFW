@@ -33,7 +33,7 @@ byte-identical across the interval. The snapshot is **production-excluded** by
 explicit decision, so its remaining gap is a compiler/ABI readiness matrix and
 a production-overlay admission decision, not identity or function opacity. See
 [`g2-json-parser-source-candidate-audit.md`](g2-json-parser-source-candidate-audit.md)
-and [`../third_party/cJSON/README.openCFW.md`](../third_party/cJSON/README.openCFW.md).
+and [`third_party/cJSON/README.openCFW.md`](../../third_party/cJSON/README.openCFW.md).
 
 The newest family correction is a copied Goodix diagnostic helper hidden under
 the first-party path `utils\assert\util_error_check.c`. Its complete handler

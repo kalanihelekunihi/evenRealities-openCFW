@@ -153,7 +153,7 @@ class NvdbBuzzerCandidateTests(unittest.TestCase):
     def test_source_hash(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "c4ed1b989c5e7ab019bd00fa9e57ee6ed166afe24caef7f1d37700efefe9656b",
+            "0d76cc6e1dee081a938cb02e20b8a877e086c1239306307da2c4e052d2dca421",
         )
 
 

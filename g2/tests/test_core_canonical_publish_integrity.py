@@ -103,7 +103,7 @@ class CoreCanonicalPublishIntegrityTests(unittest.TestCase):
                     "^canonical build inputs changed during build$",
                 ):
                     BUILDER._publish_canonical_outputs(
-                        root=G2_ROOT,
+                        root=output,
                         config_path=CONFIG_PATH,
                         config={},
                         input_snapshot={"stable": (6, "expected")},
@@ -148,7 +148,7 @@ class CoreCanonicalPublishIntegrityTests(unittest.TestCase):
                     "^canonical existing generation identity changed$",
                 ):
                     BUILDER._publish_canonical_outputs(
-                        root=G2_ROOT,
+                        root=output,
                         config_path=CONFIG_PATH,
                         config={},
                         input_snapshot=expected_snapshot,
@@ -182,14 +182,16 @@ class CoreCanonicalPublishIntegrityTests(unittest.TestCase):
                 encoding="utf-8",
             )
             expected_snapshot = {"stable": (6, "expected")}
-            real_atomic_write = BUILDER.atomic_write
+            real_atomic_write = BUILDER._atomic_write_canonical
             publication_order: list[str] = []
 
-            def recording_atomic_write(path: Path, payload: bytes) -> None:
+            def recording_atomic_write(
+                directory_fd: int, path: Path, payload: bytes
+            ) -> None:
                 if path in (overlay_path, component_path):
                     self.assertFalse(report_path.exists())
                 publication_order.append(path.name)
-                real_atomic_write(path, payload)
+                real_atomic_write(directory_fd, path, payload)
 
             with (
                 mock.patch.object(
@@ -198,11 +200,13 @@ class CoreCanonicalPublishIntegrityTests(unittest.TestCase):
                     return_value=expected_snapshot,
                 ),
                 mock.patch.object(
-                    BUILDER, "atomic_write", side_effect=recording_atomic_write
+                    BUILDER,
+                    "_atomic_write_canonical",
+                    side_effect=recording_atomic_write,
                 ),
             ):
                 BUILDER._publish_canonical_outputs(
-                    root=G2_ROOT,
+                    root=output,
                     config_path=CONFIG_PATH,
                     config={},
                     input_snapshot=expected_snapshot,
@@ -260,7 +264,7 @@ class CoreCanonicalPublishIntegrityTests(unittest.TestCase):
                     "^canonical build inputs changed during build$",
                 ):
                     BUILDER._publish_canonical_outputs(
-                        root=G2_ROOT,
+                        root=output,
                         config_path=CONFIG_PATH,
                         config={},
                         input_snapshot=expected_snapshot,
@@ -319,7 +323,7 @@ class CoreCanonicalPublishIntegrityTests(unittest.TestCase):
                 generation, (overlay, component) = item
                 barrier.wait()
                 BUILDER._publish_canonical_outputs(
-                    root=G2_ROOT,
+                    root=output,
                     config_path=CONFIG_PATH,
                     config={},
                     input_snapshot=expected_snapshot,

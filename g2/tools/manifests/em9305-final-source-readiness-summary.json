@@ -1,0 +1,133 @@
+{
+  "candidate_production_routed": false,
+  "completion_buckets": {
+    "candidate_source_not_routed": 1240,
+    "generated_or_reconstructible": 0,
+    "production_source": 0,
+    "typed_retained_or_external": 210708,
+    "unclassified": 0
+  },
+  "component_bytes": 211948,
+  "deployment_package_audit": {
+    "additive_to_residual_accounting": false,
+    "authenticated_stock_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "authenticated_stock_size": 211948,
+    "build_receipt": "tools/manifests/em9305-record-package-summary.json",
+    "erase_sector_count": 29,
+    "hardware_operations": [],
+    "hardware_validation": "blocked by unavailable physical evidence",
+    "production_routed": false,
+    "record_count": 4,
+    "remaining_software_blockers": [
+      "provide production source and linked bytes for all four EM9305 records",
+      "resolve target placement and redirects for qualified ARC candidates and the target-linked QP/C component",
+      "replace the retained proprietary controller record with redistributable compilable source"
+    ],
+    "software_package_complete": true,
+    "software_wrapper_complete": true,
+    "source_image_complete": false,
+    "source_records_complete": false,
+    "status": "record-package-software-closed-source-image-incomplete",
+    "stock_roundtrip_byte_exact": true
+  },
+  "hardware_operations": [],
+  "hardware_validation": "blocked by unavailable physical evidence",
+  "ledger": {
+    "path": "em9305-final-source-readiness.tsv",
+    "sha256": "d63cdcd7a4bbaf6a30ef55eafa470561d205ac87f55656c424786bbbec775b15",
+    "size": 32977
+  },
+  "metaware_runtime_audit": {
+    "additive_to_residual_accounting": false,
+    "arcv2_em_build_receipt": "tools/manifests/em9305-arc-candidate-build-summary.json",
+    "arcv2_em_forbidden_runtime_imports": [],
+    "arcv2_em_target_compiled": true,
+    "arcv2_em_undefined_symbols": [],
+    "candidate_production_routed": false,
+    "candidate_source_bytes": 980,
+    "hardware_validation": "blocked by unavailable physical evidence",
+    "remaining_software_blockers": [
+      "recover and pin the exact MetaWare ARC EABI symbol names and multiword register return conventions",
+      "authenticate redirect sites, target placement, and all interior-entry callers before production routing",
+      "decide whether the stock stack guard must preserve brk_s exactly or route through an OpenCFW fatal policy"
+    ],
+    "status": "candidate-qualified"
+  },
+  "qpc_hook_provider_audit": {
+    "additive_to_residual_accounting": false,
+    "candidate_production_routed": false,
+    "exact_provider_source_available": false,
+    "hardware_dependent_providers": [
+      "PalUartResume",
+      "VoltMon_DoMeasurement"
+    ],
+    "hardware_validation": "blocked by unavailable physical evidence",
+    "named_providers": [
+      "PalUartResume",
+      "VoltMon_DoMeasurement",
+      "wsfOsRunIdleTasks"
+    ],
+    "redistribution_authority_resolved": false,
+    "software_provider_gaps": [],
+    "software_provider_source_available": true,
+    "status": "candidate-qualified-one-software-two-hardware",
+    "unresolved_providers": [],
+    "wsf_idle_semantics": {
+      "callback_capacity": 3,
+      "callback_count_offset": 12,
+      "clean_room_header": "components/shared/em9305/runtime_wsf_idle_tasks.h",
+      "clean_room_source": "components/shared/em9305/runtime_wsf_idle_tasks.c",
+      "pending_offset": 13,
+      "production_routed": false,
+      "result": "ordered_nonnull_callback_bit0_or",
+      "stock_bytes": 58,
+      "stock_entry": 3358076
+    }
+  },
+  "qpc_supporting_audit": {
+    "additive_to_residual_accounting": false,
+    "arcv2_em_build_receipt": "tools/manifests/em9305-qpc-component-build-summary.json",
+    "arcv2_em_forbidden_runtime_imports": [],
+    "arcv2_em_linked_object_sha256": "c1aa5370945e41afcb29750174fd4531def9a887d37a0f620461eeabad587ad9",
+    "arcv2_em_target_linked": true,
+    "arcv2_em_translation_units": 10,
+    "arcv2_em_undefined_symbols": [],
+    "cluster_partition_complete": true,
+    "exact_vendor_checkout_proven": false,
+    "hardware_validation": "blocked by unavailable physical evidence",
+    "hook_pointer_count": 9,
+    "install_placement_resolved": false,
+    "portable_function_bytes": 2450,
+    "portable_function_count": 22,
+    "production_routed": false,
+    "required_hardware_providers": [
+      "critical_entry",
+      "critical_exit",
+      "interrupt_disable",
+      "interrupt_enable",
+      "isr_context",
+      "PalUartResume",
+      "VoltMon_DoMeasurement"
+    ],
+    "selected_release_tag": "v6.5.1"
+  },
+  "readiness_bytes": {
+    "concrete_source_available": 1240,
+    "typed_unsupported_external_boundary": 8348,
+    "unavailable_proprietary_controller_code": 24070
+  },
+  "readiness_segment_counts": {
+    "concrete_source_available": 23,
+    "typed_unsupported_external_boundary": 25,
+    "unavailable_proprietary_controller_code": 127
+  },
+  "release": false,
+  "release_blocking_bytes": 211948,
+  "residual_bytes": 33658,
+  "residual_span_count": 175,
+  "schema_version": 5,
+  "source_complete": false,
+  "status": "accounting-complete-source-incomplete",
+  "unclassified_bytes": 0,
+  "unclassified_spans": 0
+}

@@ -119,9 +119,9 @@ TARGET_SHA256 = (
     "8319202babe42ee571774682793c4c4c"
     "1a54c3a72826a92ba5c60273ba451c6a"
 )
-APPLE_OFFSET = 175_272
+APPLE_OFFSET = 115_424
 LINUX_OFFSET = 117_256
-APPLE_RUNTIME_ADDRESS = 0x007B_EFCC
+APPLE_RUNTIME_ADDRESS = 0x007B_0604
 LINUX_RUNTIME_ADDRESS = 0x007B_0D2C
 APPLE_REPLACEMENT = "5bf355b8" + "00bf" * 6
 APPLE_REPLACEMENT_SHA256 = (
@@ -250,7 +250,10 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
             os.environ.get("OPENCFW_TOOLCHAIN_PROFILE") or "apple-clang"
         ) == "apple-clang":
             build_config = copy.deepcopy(cls.config)
-            build_config["expected"] = {}
+            build_config["expected"] = build_config["core_stage_expected"]
+            for profile in build_config.get("toolchain_profiles", {}).values():
+                if "core_stage_expected" in profile:
+                    profile["expected"] = profile["core_stage_expected"]
             unpinned_config = temporary / "overlay-unpinned-final.json"
             unpinned_config.write_text(
                 json.dumps(build_config, indent=2) + "\n",
@@ -862,7 +865,7 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                 "offset": APPLE_OFFSET,
                 "padding_before": 0,
                 "runtime_address": APPLE_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007BEFCC",
+                "runtime_address_hex": "0x007B0604",
                 "size": 18,
             },
         )
@@ -897,12 +900,12 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                429_058,
+                360_578,
                 (
-                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+                    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
                 ),
-                2_631,
-                2_374,
+                2_436,
+                2_324,
             ),
         )
         component = self.production["component"]
@@ -920,15 +923,15 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                 )
             },
             {
-                "size": 3_952_454,
+                "size": 3_883_974,
                 "sha256": (
-                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+                    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
                 ),
-                "generated_patch_site_bytes": 409_066,
-                "replaced_stock_function_bytes": 409_246,
-                "source_owned_bytes": 431_334,
+                "generated_patch_site_bytes": 397_446,
+                "replaced_stock_function_bytes": 397_626,
+                "source_owned_bytes": 362_962,
                 "source_owned_in_place_bytes": 184,
-                "opaque_base_bytes": 3_111_914,
+                "opaque_base_bytes": 3_123_534,
             },
         )
 
@@ -942,15 +945,15 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                     "g2-openCFW-s200_v2.2.6.10-core-source."
                     "evenota.bin"
                 ),
-                "expected_size": 4_745_526,
+                "expected_size": 4_677_046,
                 "expected_sha256": (
-                    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
+                    "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"
                 ),
                 "profiles": {
                     "linux-clang": {
-                        "expected_size": 4_529_116,
+                        "expected_size": 4_469_364,
                         "expected_sha256": (
-                            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"
+                            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"
                         ),
                     },
                 },

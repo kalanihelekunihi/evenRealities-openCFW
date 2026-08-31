@@ -47,7 +47,7 @@ class G2ProductRtosCandidateTests(unittest.TestCase):
     def test_source_and_fixture_are_pinned(self) -> None:
         self.assertEqual(
             (SOURCE.stat().st_size, hashlib.sha256(SOURCE.read_bytes()).hexdigest()),
-            (10417, "4dc4706ec021bb1d0cf0b0c3f9b0960ce934f94f810b0a753bdd50863d5083fb"),
+            (10408, "f342cf43b40021b278b76fd6d7bb89778caab5c67ea326b2c0867e69d75d476b"),
         )
         self.assertEqual(
             (FIXTURE.stat().st_size, hashlib.sha256(FIXTURE.read_bytes()).hexdigest()),

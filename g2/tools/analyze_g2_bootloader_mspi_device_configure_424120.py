@@ -17,10 +17,9 @@ import apollo_overlay
 
 ROOT = Path(__file__).resolve().parents[1]
 OFFICIAL = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin"
-SOURCE = ROOT / "research/admission/bootloader_mspi_device_configure_424120/runtime_bootloader_mspi_device_configure_candidate.c"
-HEADER = SOURCE.with_suffix(".h")
-FIXTURE = SOURCE.parent / "host_fixture.c"
-REMOVED_TRANSCRIPT = ROOT / "components/bootloader/core_overlay/runtime_mspi_device_configure_424120.c"
+SOURCE = ROOT / "components/bootloader/core_overlay/runtime_mspi_device_configure_424120.c"
+HEADER = ROOT / "components/bootloader/core_overlay/runtime_mspi_device_configure_424120.h"
+FIXTURE = ROOT / "tests/fixtures/bootloader_runtime_mspi_device_configure_host.c"
 BOUNDARY = ROOT / "tools/manifests/g2-bootloader-mspi-device-configure-424120.tsv"
 PROVENANCE = ROOT / "third_party/ambiqsuite-apollo510/PROVENANCE.json"
 UPSTREAM = ROOT / "third_party/ambiqsuite-apollo510/mcu/apollo510/hal/mcu/am_hal_mspi.c"
@@ -32,18 +31,20 @@ RUN_BASE = 0x00410000
 ENTRY = 0x00424120
 END = 0x0042488E
 STOCK_SHA = "3b95c5af6c3c2140cc4e1522a1f284ae31825e4e35ae6c2427e0edba41774818"
+TARGET_SIZE = 284
+TARGET_SHA = "960b3d30653a94dd8b0c9037d9e0cdd53991d88c06a9d27cecf6576a0bbce97f"
 CALLERS = (0x00425012, 0x004258E4)
 INPUT_PINS = {
-    SOURCE: (15600, "414a5dd811bab8f9f3971e8e77d1552234e3687aaf5a3b159ae8ec9bed06ed47"),
-    HEADER: (1140, "ce3a4d13d293314415576d73a05c1bac40c9536361a6cca827dfc5bb24e980a7"),
-    FIXTURE: (2491, "64da1fb91f7c95dd0990f206ca2c41e6f3658c18373fa9bffabab7117278dbf9"),
-    BOUNDARY: (1699, "84f474b441c72371fd6f81e215536033b7772b2a9b47d1f61b0cf2a8fa41d1e1"),
+    SOURCE: (4188, "6ed08297ec6283b5ae48de7c2f1ab17c6ca8b2369e5f724ebed60f6fac18d262"),
+    HEADER: (1331, "4842e22f3233f19e0edf383f1026726562b13cfaad14e42dfa2ccdb7296e313d"),
+    FIXTURE: (2962, "7941270dc51fade28ed7a9f08c36055625a98bd524e517f921c0e33356454a05"),
+    BOUNDARY: (1721, "569278d08f1d64adfb23082cb1161b61eff6bdb61dfe0b0404c0042dcec3cd75"),
 }
 FLAGS = (
     "-target", "arm-none-eabi", "-mcpu=cortex-m55", "-mthumb", "-Oz",
     "-ffreestanding", "-fno-builtin", "-ffunction-sections",
     "-fdata-sections", "-fno-unwind-tables", "-fno-asynchronous-unwind-tables",
-    "-Wall", "-Wextra", "-Werror", "-fno-ident",
+    "-fno-jump-tables", "-Wall", "-Wextra", "-Werror", "-fno-ident",
 )
 PROFILES = {
     "apple-clang": (Path("/usr/bin/clang"), "Apple clang version 21.0.0"),
@@ -94,7 +95,7 @@ def extract_body(path: Path) -> tuple[bytes, int]:
     return body, relocation_count
 
 
-def compile_profiles(stock: bytes) -> dict[str, dict[str, Any]]:
+def compile_profiles() -> dict[str, dict[str, Any]]:
     reports: dict[str, dict[str, Any]] = {}
     with tempfile.TemporaryDirectory(prefix="open-cfw-device-config-audit-") as raw:
         for profile, (compiler, version_prefix) in PROFILES.items():
@@ -107,7 +108,8 @@ def compile_profiles(stock: bytes) -> dict[str, dict[str, Any]]:
             subprocess.run([str(compiler), *FLAGS, "-c", str(SOURCE), "-o", str(output)],
                            check=True, capture_output=True, text=True)
             body, relocation_count = extract_body(output)
-            require(body == stock, f"{profile} target body is not exact stock")
+            require((len(body), digest(body)) == (TARGET_SIZE, TARGET_SHA),
+                    f"{profile} structured target body changed")
             require(relocation_count == 0, f"{profile} unexpectedly emitted relocations")
             reports[profile] = {
                 "version": version, "body_size": len(body),
@@ -117,8 +119,6 @@ def compile_profiles(stock: bytes) -> dict[str, dict[str, Any]]:
 
 
 def audit() -> dict[str, Any]:
-    require(not REMOVED_TRANSCRIPT.exists(),
-            "raw executable transcript returned to public component source")
     for path, expected in INPUT_PINS.items():
         payload = path.read_bytes()
         require((len(payload), digest(payload)) == expected,
@@ -148,30 +148,45 @@ def audit() -> dict[str, Any]:
                   "AM_HAL_MSPI_FLASH_SERIAL_CE0", "AM_HAL_MSPI_FLASH_HEX_DDR_CE1",
                   "AM_HAL_MSPI_FLASH_OCTAL_CE0_1_8_8", "MSPI0_PADOUTEN_OUTEN_HEX"):
         require(token in upstream, f"upstream identity token changed: {token}")
-    profiles = compile_profiles(stock)
+    source_text = SOURCE.read_text(encoding="utf-8")
+    require(".byte" not in source_text and "__asm__" not in source_text,
+            "structured production source regressed to raw executable encoding")
+    profiles = compile_profiles()
 
     overlay = json.loads(OVERLAY.read_text(encoding="utf-8"))
-    require(all(row["function"] != "open_cfw_bootloader_mspi_device_configure_424120"
-                for row in overlay["in_place_leaves"]),
-            "deleted transcript remains production-routed")
+    routed = [row for row in overlay["in_place_leaves"]
+              if row["function"] == "open_cfw_bootloader_mspi_device_configure_424120"]
+    require(len(routed) == 1, "structured device configure is not uniquely routed")
+    routed_leaf = routed[0]
+    require((routed_leaf["runtime_address"], routed_leaf["expected"]["size"],
+             routed_leaf["expected"]["sha256"]) ==
+            (ENTRY, TARGET_SIZE, TARGET_SHA),
+            "production device-configure route changed")
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     regions = manifest["component_overrides"]["apollo_bootloader"]["regions"]
     by_name = {row["name"]: row for row in regions}
-    retained = by_name["bootloader_mspi_device_configure_424120_424976_official"]
+    source_region = by_name["bootloader_mspi_device_configure_424120_source_in_place"]
+    require((source_region["target_address"], source_region["size"],
+             source_region["address_status"]) ==
+            (ENTRY, TARGET_SIZE, "source_compiled"),
+            "source-owned device-configure boundary changed")
+    retained = by_name[
+        "bootloader_mspi_device_configure_tail_42423c_and_piomixed_42488e_official"]
     require((retained["target_address"], retained["size"],
-             retained["address_status"]) == (ENTRY, 2134, "official_blob"),
-            "retained official device-configure boundary changed")
+             retained["address_status"]) ==
+            (ENTRY + TARGET_SIZE, 1850, "official_blob"),
+            "retained unreachable tail and successor boundary changed")
     with tempfile.TemporaryDirectory(prefix="open-cfw-device-config-component-") as raw:
         subprocess.run(["python3", str(BUILDER), "--output-dir", raw], cwd=ROOT,
                        check=True, capture_output=True, text=True)
         report = json.loads((Path(raw) / "build-report.json").read_text(encoding="utf-8"))
     component = report["component"]
-    require(component["source_owned_bytes"] + component["opaque_base_bytes"] == 147296,
+    require(component["source_owned_bytes"] + component["opaque_base_bytes"] == 147350,
             "production device-configure byte conservation changed")
     require(component["source_owned_in_place_bytes"] <= component["source_owned_bytes"],
             "production device-configure in-place accounting changed")
     return {
-        "status": "candidate-exact-dual-profile / production-retained-official-boundary / hardware-validation-deferred-by-project-direction",
+        "status": "structured-source-dual-profile / production-source-in-place / hardware-validation-blocked-by-unavailable-physical-evidence",
         "stock": {"start": ENTRY, "end": END, "bytes": len(stock), "sha256": STOCK_SHA},
         "identity": {"function": "mspi_device_configure",
                      "upstream_commit": provenance["upstream"]["selected_commit"],
@@ -183,17 +198,19 @@ def audit() -> dict[str, Any]:
                 "pad_output_offset": 0x44, "device_config_offset": 0x84,
                 "device_xip_offset": 0x90},
         "profiles": profiles,
-        "production": {"routed": False,
+        "production": {"routed": True,
+                       "compiled_bytes": TARGET_SIZE,
+                       "compiled_sha256": TARGET_SHA,
                        "source_owned_bytes": component["source_owned_bytes"],
                        "retained_official_bytes": component["opaque_base_bytes"],
-                       "boundary_status": "official_blob",
+                       "boundary_status": "source_compiled",
                        "next_frontier": END},
         "next_frontier": {"start": END, "end": 0x00424976,
                           "identity": "mspi_piomixed_configure", "bytes": 232,
                           "status": "official_blob"},
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_gate": {"blocking_condition":
-                          "directed hardware testing is deferred by project direction",
+                          "directed hardware testing is blocked by unavailable physical evidence",
                           "required_future_evidence":
                           "authorized all-mode MSPI register, pad, XIP, clock-on-D4, and cold-boot qualification"},
         "hardware_operations": [],
@@ -208,9 +225,9 @@ def main() -> int:
     if args.json:
         print(json.dumps(report, indent=2, sort_keys=True))
     else:
-        print("Bootloader mspi_device_configure 0x424120: exact candidate; retained official production boundary")
+        print("Bootloader mspi_device_configure 0x424120: structured source routed in place")
         print("  next sequential frontier: 0x42488e (mspi_piomixed_configure)")
-        print("  physical validation: deferred by project direction")
+        print("  physical validation: blocked by unavailable physical evidence")
     return 0
 
 

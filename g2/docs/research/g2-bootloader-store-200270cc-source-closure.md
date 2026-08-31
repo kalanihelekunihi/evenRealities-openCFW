@@ -1,5 +1,10 @@
 # G2 bootloader SRAM-word setter source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The authenticated eight-byte entry at `[0x0041583C,0x00415844)` loads the
 single literal `0x200270CC`, stores its `r0` argument as one complete 32-bit
 word, and returns. Its sole whole-image direct caller is `0x0041FABA`, which

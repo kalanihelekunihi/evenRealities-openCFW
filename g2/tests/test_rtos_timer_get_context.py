@@ -142,11 +142,11 @@ class RtosTimerGetContextTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "a2ea8e6c91758062994d31a5afde7c1267e77cda19bc4e24dd74f8856937231c",
+            "e620bf88641d9d4bcb74857b535cb32d6db0522fa139535fa0c57a6599031ccc",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "2096fee9e7a0c28349620c7e0bd7ab7bd52cb6af4f5d9a92cc4e9a0d13c6abeb",
+            "7130cae3ae777a4f96754e260bd46f075c2681179db4a6ef93cf97170cf606b1",
         )
 
 

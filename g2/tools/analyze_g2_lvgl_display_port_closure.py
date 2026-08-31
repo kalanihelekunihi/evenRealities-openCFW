@@ -36,10 +36,10 @@ FUNCTIONS = {
 }
 PATH_ANCHORED_ENTRIES = {0x0047366C, 0x00473782, 0x0047381E, 0x0047386A, 0x004738A8}
 SOURCE_PINS = {
-    "components/apollo_main/core_overlay/lv_buffer_sync.c": "17e928a90438ce1cb2ad054d31b3e04a40b895ba34f9eb46ea91284719335b50",
-    "components/apollo_main/core_overlay/lv_display_sync.c": "e1f0a5a6b8fa832411d65aa4c749045073a1ce3c504617b0eaab7f714093a187",
-    "components/apollo_main/core_overlay/lv_display_setup.c": "ebc991365d85978cb349c5103a1893ecfdbc29134b5d4616a1dc8631d18bdcfd",
-    "components/apollo_main/core_overlay/lv_display_lock.c": "b9aee4af20e82e73b809cdb44f871aaa7aa44858726a785201ca1228e4e76743",
+    "components/apollo_main/core_overlay/lv_buffer_sync.c": "03cab317fa9de8e71cba8bc207d2712e76c1af1e7de41b5d3d138cc1eabef1c5",
+    "components/apollo_main/core_overlay/lv_display_sync.c": "9be2a2b934199dd455b5b8b00119eb0b687bcbcc8493d956dd8be07ab21480c7",
+    "components/apollo_main/core_overlay/lv_display_setup.c": "2a22218b901a8dba707d05e5c6db2e9c1ce4d4ba94116b36a75056cf6de01c82",
+    "components/apollo_main/core_overlay/lv_display_lock.c": "cf93aca0e218d49c93590e86e136b68780a64b36785cce3fcf869c50acce0e2c",
 }
 EXPECTED_DISPLAY_PORT_BYTES = 638
 

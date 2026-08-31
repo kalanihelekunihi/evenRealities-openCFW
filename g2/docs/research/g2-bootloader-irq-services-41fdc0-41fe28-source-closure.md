@@ -1,5 +1,10 @@
 # G2 bootloader IRQ-service cluster source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Three complete entries at `[0x0041FDC0,0x0041FE28)` now route to maintained
 clean-room C in `runtime_irq_services_41fdc0.c`:
 

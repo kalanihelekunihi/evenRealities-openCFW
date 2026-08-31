@@ -20,7 +20,8 @@ SOURCE_MAP_ANALYZER = ROOT / "tools/analyze_g2_cordio_source_map.py"
 PROFILE_BOUNDARY_ANALYZER = ROOT / "tools/analyze_g2_ble_transport_profiles.py"
 OTA_RING_ANALYZER = ROOT / "tools/analyze_g2_ble_ota_ring_profiles.py"
 APP_FRAMEWORK_ANALYZER = ROOT / "tools/analyze_g2_cordio_app_framework.py"
-EXPECTED_MODULE_AUDITS = 69
+EXPECTED_MODULE_AUDITS = 70
+EXPECTED_CANDIDATE_AUDITS = 17
 EXPECTED_FUNCTION_MAPS = 69
 EXPECTED_PROVENANCE_MANIFESTS = 71
 
@@ -132,7 +133,24 @@ def analyze_report(source_map: dict[str, Any], app_framework: dict[str, Any] | N
             "legacy_master_slave_objects": {
                 "aggregate": {"linked_functions": 14, "physical_bytes": 1406, "stored_callbacks": 2}
             },
-            "production": {"production_routed": False},
+            "production": {
+                "source_admitted": True,
+                "production_routed": True,
+                "status": "software_closed_hardware_deferred",
+                "legacy_master_slave_routed": True,
+                "routed_functions": 61,
+                "routed_anchored_functions": 50,
+                "routed_anchored_body_bytes": 29110,
+                "routed_stock_bytes": 29870,
+                "legacy_ownership_bytes": 948,
+                "legacy_relocations": 29,
+                "application_runtime_ownership_bytes": 4460,
+                "application_runtime_relocations": 108,
+                "preexisting_app_database_routed": True,
+                "remaining_anchored_functions": 0,
+                "remaining_anchored_body_bytes": 0,
+                "hardware_validation": "blocked by unavailable physical evidence",
+            },
         }
     if app_framework["lineage"] != {
         **app_framework["lineage"],
@@ -149,8 +167,27 @@ def analyze_report(source_map: dict[str, Any], app_framework: dict[str, Any] | N
         raise ClosureError("Cordio application-framework anchor census changed")
     if app_framework["legacy_master_slave_objects"]["aggregate"]["linked_functions"] != 14:
         raise ClosureError("Cordio legacy application-object census changed")
-    if app_framework["production"]["production_routed"]:
-        raise ClosureError("Cordio application source oracle unexpectedly entered production")
+    production = app_framework["production"]
+    expected_production = {
+        "source_admitted": True,
+        "production_routed": True,
+        "status": "software_closed_hardware_deferred",
+        "legacy_master_slave_routed": True,
+        "routed_functions": 61,
+        "routed_anchored_functions": 50,
+        "routed_anchored_body_bytes": 29110,
+        "routed_stock_bytes": 29870,
+        "legacy_ownership_bytes": 948,
+        "legacy_relocations": 29,
+        "application_runtime_ownership_bytes": 4460,
+        "application_runtime_relocations": 108,
+        "preexisting_app_database_routed": True,
+        "remaining_anchored_functions": 0,
+        "remaining_anchored_body_bytes": 0,
+        "hardware_validation": "blocked by unavailable physical evidence",
+    }
+    if any(production.get(key) != value for key, value in expected_production.items()):
+        raise ClosureError("Cordio application production closure changed")
     if profile_boundary["aggregate"] != {
         "modules": 4,
         "linked_functions": 25,
@@ -194,7 +231,7 @@ def analyze_report(source_map: dict[str, Any], app_framework: dict[str, Any] | N
             "focused_test": str(test.relative_to(ROOT)),
         })
 
-    analyzer_names = {
+    all_analyzer_names = {
         path.stem.removeprefix("analyze_g2_cordio_")
         for path in (ROOT / "tools").glob("analyze_g2_cordio_*.py")
         if path.stem not in {
@@ -202,6 +239,11 @@ def analyze_report(source_map: dict[str, Any], app_framework: dict[str, Any] | N
             "analyze_g2_cordio_version", "analyze_g2_cordio_ll_sea_census",
         }
     }
+    candidate_analyzer_names = {
+        name for name in all_analyzer_names if name.startswith("ll_sea_")
+    }
+    shared_helper_names = {"l2c_production"}
+    analyzer_names = all_analyzer_names - candidate_analyzer_names - shared_helper_names
     tests = {
         path.stem.removeprefix("test_analyze_g2_cordio_")
         for path in (ROOT / "tests").glob("test_analyze_g2_cordio_*.py")
@@ -210,11 +252,27 @@ def analyze_report(source_map: dict[str, Any], app_framework: dict[str, Any] | N
             "test_analyze_g2_cordio_version", "test_analyze_g2_cordio_ll_sea_census",
         }
     }
+    candidate_tests = {
+        path.stem.removeprefix("test_g2_cordio_")
+        for path in (ROOT / "tests").glob("test_g2_cordio_*.py")
+    }
     if len(analyzer_names) != EXPECTED_MODULE_AUDITS or tests != analyzer_names:
         raise ClosureError(
             f"focused analyzer/test inventory changed: analyzers={len(analyzer_names)} "
             f"tests={len(tests)} symmetric_difference={sorted(analyzer_names ^ tests)!r}"
         )
+    if (
+        len(candidate_analyzer_names) != EXPECTED_CANDIDATE_AUDITS
+        or candidate_tests != candidate_analyzer_names
+    ):
+        raise ClosureError(
+            "Cordio candidate analyzer/test inventory changed: "
+            f"analyzers={len(candidate_analyzer_names)} "
+            f"tests={len(candidate_tests)} "
+            f"symmetric_difference={sorted(candidate_analyzer_names ^ candidate_tests)!r}"
+        )
+    if shared_helper_names != {"l2c_production"}:
+        raise ClosureError("Cordio shared production-helper inventory changed")
 
     manifests = ROOT / "tools/manifests"
     function_maps = list(manifests.glob("*cordio*function-map.tsv"))
@@ -238,6 +296,9 @@ def analyze_report(source_map: dict[str, Any], app_framework: dict[str, Any] | N
         "module_evidence_census": {
             "focused_module_analyzers": len(analyzer_names),
             "matching_analyzer_tests": len(tests),
+            "candidate_analyzers": len(candidate_analyzer_names),
+            "matching_candidate_tests": len(candidate_tests),
+            "shared_production_helpers": len(shared_helper_names),
             "function_maps": len(function_maps),
             "provenance_manifests": len(provenance),
         },
@@ -249,7 +310,6 @@ def analyze_report(source_map: dict[str, Any], app_framework: dict[str, Any] | N
             "unclassified_focused_module_audits": 0,
             "remaining": [
                 "exact private mixed-tree checkout and original Ambiq port commits",
-                "production admission/placement of clean-room or selected public sources",
                 "target concurrency, controller, and hardware validation",
             ],
         },
@@ -269,6 +329,11 @@ def analyze_report(source_map: dict[str, Any], app_framework: dict[str, Any] | N
             "source_identification_closed": True,
             "exact_source_text_identity": False,
             "historical_g2_generating_commit": None,
+            "production_routed": True,
+            "software_status": "software_closed_hardware_deferred",
+            "routed_functions": 61,
+            "routed_stock_bytes": 29870,
+            "remaining_anchored_functions": 0,
             "qualification": "selected public source is a semantic rebuild oracle; G2 adds MRAM, privacy, pairing, connection, diagnostics, and UI policy",
         },
         "copied_profile_source_admission": {

@@ -180,14 +180,14 @@ PRODUCTION_SECTION = ".text." + PRODUCTION_FUNCTION
 PRODUCTION_EXIDX_SECTION = ".ARM.exidx" + PRODUCTION_SECTION
 PRODUCTION_EXIDX = bytes.fromhex("0000000001000000")
 OVERLAY_RUNTIME_ADDRESS = 0x0079_4324
-BASE_FUNCTION_COUNT = 948
-BASE_RELOCATED_COUNT = 379
-BASE_PATCH_COUNT = 887
+BASE_FUNCTION_COUNT = 2439
+BASE_RELOCATED_COUNT = 1870
+BASE_PATCH_COUNT = 2327
 APPLE_CLANG = "/usr/bin/clang"
 COMPILER_PROFILES = {
     "apple-clang": {
         "compiler": APPLE_CLANG,
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
         "object": (
             1044,
             "f059f1c161bb602413d0505e51f6253283bf589622159c0fe4ee4202153e2b72",
@@ -240,7 +240,7 @@ PRODUCTION_TARGET_FLAGS = (
 )
 PROJECTED_PRODUCTION_PROFILES = {
     "apple-clang": {
-        "offset": 185_072,
+        "offset": 125_224,
         "relocated_sha256": (
             "3b1a0dbe465d562770e02d5afe04357087a6bfee22342a0f6844986a0161f547"
         ),
@@ -249,7 +249,7 @@ PROJECTED_PRODUCTION_PROFILES = {
         ),
     },
     "linux-clang": {
-        "offset": 186_800,
+        "offset": 127_048,
         "relocated_sha256": (
             "3b1a0dbe465d562770e02d5afe04357087a6bfee22342a0f6844986a0161f547"
         ),
@@ -262,7 +262,7 @@ PRODUCTION_BUILD_PROFILES = {
     "apple-clang": {
         "boot_component": (
             163_840,
-            "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0",
+            "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
         ),
         "main_component": (
             3_952_454,
@@ -278,7 +278,7 @@ PRODUCTION_BUILD_PROFILES = {
     "linux-clang": {
         "boot_component": (
             163_824,
-            "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635",
+            "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e",
         ),
         "main_component": (
             3_736_060,
@@ -297,8 +297,8 @@ PRODUCTION_BUILD_PROFILES = {
 # them only after two independent deterministic production compilations.
 PRODUCTION_LOCAL_PINS: dict[Path, tuple[int, str] | None] = {
     PRODUCTION_SOURCE: (
-        1688,
-        "b1f492b0358e51ce89db622e4af13a7f1eef7ffce9fc81fd954609cdcd934876",
+        1724,
+        "75b4c25bb2f3c7e5b7d72e1dc4802f7b85c35e9d03b2e883889ca5e187218de0",
     ),
     PRODUCTION_HEADER: (
         1732,
@@ -1540,9 +1540,23 @@ class NanopbSkipStringProductionContractTests(StableUnittestIdentityCase):
             dir=build_root,
         ) as temporary:
             output = Path(temporary)
+            stage_config = copy.deepcopy(config)
+            stage_config["expected"] = stage_config["core_stage_expected"]
+            for profile_record in stage_config.get(
+                "toolchain_profiles", {}
+            ).values():
+                if "core_stage_expected" in profile_record:
+                    profile_record["expected"] = profile_record[
+                        "core_stage_expected"
+                    ]
+            stage_config_path = output / "core-stage-overlay.json"
+            stage_config_path.write_text(
+                json.dumps(stage_config, indent=2) + "\n",
+                encoding="utf-8",
+            )
             report = apollo_overlay.build(
                 root=ROOT,
-                config_path=OVERLAY,
+                config_path=stage_config_path,
                 output_dir=output,
                 clang=clang,
                 toolchain_profile=profile,
@@ -1691,6 +1705,14 @@ class NanopbSkipStringProductionMutationTests(StableUnittestIdentityCase):
 
         cls.apollo_overlay = apollo_overlay
         cls.baseline = json.loads(OVERLAY.read_text(encoding="utf-8"))
+        cls.baseline["expected"] = cls.baseline["core_stage_expected"]
+        for profile_record in cls.baseline.get(
+            "toolchain_profiles", {}
+        ).values():
+            if "core_stage_expected" in profile_record:
+                profile_record["expected"] = profile_record[
+                    "core_stage_expected"
+                ]
         cls.clang = os.environ.get("OPENCFW_CLANG", APPLE_CLANG)
         version = subprocess.run(
             [cls.clang, "--version"],

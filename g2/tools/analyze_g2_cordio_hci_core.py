@@ -37,10 +37,10 @@ PRODUCTION_FILES = {
     HEADER: (1_509, "27ed4d0537f084535c2ccf9c31caec48d02043d1b13d4ad48bb71ce391775fe8"),
     RUNTIME_TEST: (5_144, "fb1122cb2caa9bfc40a0766cc85acf236de25dbe6680fce0f5275c80f13bed06"),
 }
-PRODUCTION_OVERLAY = (429_058, "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd")
-PRODUCTION_COMPONENT = (3_952_454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb")
-PRODUCTION_PACKAGE = (4_745_526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934")
-PRODUCTION_FLASH_PLAN = (4_643_183, "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66")
+PRODUCTION_OVERLAY = (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae")
+PRODUCTION_COMPONENT = (3_885_668, "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5")
+PRODUCTION_PACKAGE = (4_678_740, "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a")
+PRODUCTION_FLASH_PLAN = (4_595_610, "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127")
 
 MODULE_START = 0x0052A67C
 MODULE_END = 0x0052AE38
@@ -250,7 +250,7 @@ def verify_production() -> dict:
         "flash_regions", "unresolved_flash_regions",
         "container_only_regions", "protected_regions",
     ))
-    if counts != (6671, 0, 6, 6):
+    if counts != (6588, 0, 6, 6):
         raise AuditError("HCI core flash-plan counts changed")
     return {
         "status": "production-routed",

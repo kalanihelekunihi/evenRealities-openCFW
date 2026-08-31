@@ -26,21 +26,21 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "ada7f62b647ff85189ceecb5eb95b74e907f0f5af16e68432c0b292e6d651aaf",
-    CLOSURE: "a4dafbd73ed9458b03c35ce0257d339ec1e61bc2f36bc085250b424cd6cf60bb",
+    CLOSURE: "639d35fed7c082a6b0fda0e05cadc76e89b25c169c926b30f97171b22e507bc1",
     PROVENANCE: "ff746fdfc66df09c28cdd7e7d3ec44e6d137aa9e9f07e09c33fc37b9a9cae216",
 }
-SOURCE_SIZE = 13441
-SOURCE_SHA256 = "d1f308195a7076fe41043f0cea8b70a6b1d9250dabb962f6b05285120c616c68"
+SOURCE_SIZE = 13432
+SOURCE_SHA256 = "403c917e094485afa896a3559bc5fcd8e32dfa234fc5534e168c400fda54fc74"
 FUNCTIONS = (
-    ("open_cfw_pb_service_teleprompt_buffer_write", 146, 255984, 0),
-    ("open_cfw_pb_service_teleprompt_zero", 88, 256132, 0),
-    ("APP_PbRxTelepromptFrameDataProcess", 112, 256220, 3),
-    ("APP_PbTelepromptTxEncodeCommResp", 126, 256332, 6),
-    ("APP_PbTxEncodeStatusNotify", 136, 256460, 6),
-    ("APP_PbTxEncodeFileListRequest", 136, 256596, 6),
-    ("APP_PbTxEncodeFileSelect", 288, 256732, 6),
-    ("APP_PbTxEncodePageDataRequest", 136, 257020, 6),
-    ("APP_PbTxEncodeScrollSync", 180, 257156, 6),
+    ("open_cfw_pb_service_teleprompt_buffer_write", 146, 196136, 0),
+    ("open_cfw_pb_service_teleprompt_zero", 88, 196284, 0),
+    ("APP_PbRxTelepromptFrameDataProcess", 112, 196372, 3),
+    ("APP_PbTelepromptTxEncodeCommResp", 126, 196484, 6),
+    ("APP_PbTxEncodeStatusNotify", 136, 196612, 6),
+    ("APP_PbTxEncodeFileListRequest", 136, 196748, 6),
+    ("APP_PbTxEncodeFileSelect", 288, 196884, 6),
+    ("APP_PbTxEncodePageDataRequest", 136, 197172, 6),
+    ("APP_PbTxEncodeScrollSync", 180, 197308, 6),
 )
 PATCHES = (
     ("replace_pb_teleprompt_rx", 0x005885B4, 478,
@@ -371,11 +371,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 1854,
             "retained_literal_pool_bytes": 130,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "No authorized live G2 service 6 master/peer BLE and "
-                "teleprompt UI evidence is required for future qualification; the authorized right "
-                "temple is not under test because qualification is deferred by project direction and the left temple must remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific service 6 teleprompt fixture "
+                "or an authenticated golden BLE/UI capture"
             ),
         },
     }

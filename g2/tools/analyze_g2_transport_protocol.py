@@ -25,7 +25,7 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 INPUT_PINS = {
     FUNCTION_MAP: "fa8a7a9eeaf4f386a9419ffeee5e876dccc188a076ac785f1685fd5637556e6a",
-    CLOSURE: "bf20528e4d08a59df563f672c7bb2898e0a143391ab9e038ebbaa040421327be",
+    CLOSURE: "13370ad32078e89512abfddd6031e1131b47db627d561a5008445c277fea7e80",
     PROVIDER_MAP: "52bbdb1316e572fb2b3c6fe92bc9842087141207090af093f5fe253d743c99d7",
 }
 
@@ -89,22 +89,22 @@ CRC_PROVIDER = 0x0049_ACD4
 RECOVERED_FUNCTION = (0x004B_8C6C, 0x004B_8DA2)
 RECOVERED_RETURN = (0x004B_8DA0, bytes.fromhex("f0bd"))
 
-SOURCE_SIZE = 24_280
-SOURCE_SHA256 = "8a3b31bff575a92b4e160ce993d487a9fe3b3428e75e425e86b35dbea79911bd"
+SOURCE_SIZE = 24_271
+SOURCE_SHA256 = "4c1e33269733524ecb9024cb34f13f07b8a7ef1e8cadb418d495705a4ae481b9"
 PRODUCTION_FUNCTIONS = (
-    ("TPL_Init", 138, 271_568, 1),
-    ("_getOrCreateContext", 468, 271_708, 2),
-    ("_rxNextPacketTimeout", 106, 272_176, 3),
-    ("open_cfw_tpl_context_free", 72, 272_284, 4),
-    ("open_cfw_tpl_context_mark_packet", 34, 272_356, 0),
-    ("open_cfw_tpl_context_packet_seen", 18, 272_392, 0),
-    ("open_cfw_tpl_schedule_rx_timeout", 56, 272_412, 4),
-    ("_rxSyncEventCallback", 2, 272_468, 0),
-    ("_tplReponse", 64, 272_472, 0),
-    ("TPL_RxPacketTimeoutHandler", 194, 272_536, 2),
-    ("open_cfw_tpl_reset_receive_contexts", 92, 272_732, 7),
-    ("TPL_ReceivePacket", 612, 272_824, 27),
-    ("TPL_SendPacket", 682, 273_436, 5),
+    ("TPL_Init", 138, 211_720, 1),
+    ("_getOrCreateContext", 468, 211_860, 2),
+    ("_rxNextPacketTimeout", 106, 212_328, 3),
+    ("open_cfw_tpl_context_free", 72, 212_436, 4),
+    ("open_cfw_tpl_context_mark_packet", 34, 212_508, 0),
+    ("open_cfw_tpl_context_packet_seen", 18, 212_544, 0),
+    ("open_cfw_tpl_schedule_rx_timeout", 56, 212_564, 4),
+    ("_rxSyncEventCallback", 2, 212_620, 0),
+    ("_tplReponse", 64, 212_624, 0),
+    ("TPL_RxPacketTimeoutHandler", 194, 212_688, 2),
+    ("open_cfw_tpl_reset_receive_contexts", 92, 212_884, 7),
+    ("TPL_ReceivePacket", 612, 212_976, 27),
+    ("TPL_SendPacket", 682, 213_588, 5),
 )
 PRODUCTION_TARGETS = {
     "tpl_context_free_004b8ba2": "open_cfw_tpl_context_free",
@@ -390,10 +390,10 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
         report["component"]["size"],
         report["component"]["sha256"],
     ) != (
-        332_148,
-        "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
-        3_855_544,
-        "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+        360_578,
+        "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+        3_883_974,
+        "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
     ):
         raise AuditError("production transport build pins changed")
     manifest = json.loads(MANIFEST.read_text())
@@ -404,10 +404,10 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
         manifest["package"].get("expected_size"),
         manifest["package"].get("expected_sha256"),
     ) != (
-        3_855_544,
-        "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
-        4_634_038,
-        "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+        3_883_974,
+        "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
+        4_677_046,
+        "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
     ):
         raise AuditError("production transport manifest pins changed")
     region_by_name = {item["name"]: item for item in main["regions"]}
@@ -540,20 +540,19 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
             "stock_replaced_bytes": BODY_BYTES,
             "retained_literal_pool_bytes": POOL_BYTES,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "An authorized responsive G2 peer is required for future qualification "
-                "for live single/multipart framing, retransmission, timeout, "
-                "CRC-failure, and dual-glasses callback evidence; the "
-                "authorized right temple is not under test because qualification is deferred by project direction and the left "
-                "temple must remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific transport-peer fixture or an "
+                "authenticated golden capture covering single/multipart framing, retransmission, timeout, "
+                "CRC failure, and dual-glasses callbacks"
             ),
         },
         "limitations": [
             "the exact private G2 source and producing commit remain unavailable",
             "five conservative current labels use behavior plus prior-G2 order because no current function-name string survives",
             "provider commits identify reusable upstream seams but cannot identify the private first-party transport revision",
-            "hardware traffic validation remains deferred by project direction; future qualification requires authorized responsive physical peer evidence",
+            "hardware traffic validation remains blocked by unavailable physical evidence; future qualification requires an authorized G2 pair and either a component-specific transport-peer fixture or an authenticated golden capture",
         ],
     }
 

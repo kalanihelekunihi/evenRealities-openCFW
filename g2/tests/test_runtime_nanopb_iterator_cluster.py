@@ -14,8 +14,8 @@ SOURCE = ROOT / "components/shared/nanopb/runtime_nanopb_iterator_cluster.c"
 HEADER = ROOT / "components/shared/nanopb/runtime_nanopb_iterator_cluster.h"
 INCLUDE = SOURCE.parent
 
-SOURCE_SIZE = 13_395
-SOURCE_SHA256 = "edcff9480ae181a22aba9eb28641257fe62fb9652c1268cd3ef1658e5a3690eb"
+SOURCE_SIZE = 14025
+SOURCE_SHA256 = "825238916fc945c521c2f1bce8042c7725c42b82c92b08271dbba529991fa06e"
 HEADER_SIZE = 2_995
 HEADER_SHA256 = "f9664d9eb409a731dbf1a7c664ee91f10b58b3b0f818844eab5f77fbaac8f0b2"
 APPLE_OBJECT_SIZE = 4_564

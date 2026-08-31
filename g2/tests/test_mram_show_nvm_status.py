@@ -339,11 +339,11 @@ class MramShowNvmStatusTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "8c142d35113401dd7f416960c9c3950e7b9a000f24f17445a8a29ca9a218f1db",
+            "0b4671ded7d8d28207666abea057bf09f1ba5ae8fd9405c1b1a84002659c3bd6",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "efa3d500fdd87e4502d7a8181c729fe121e6c6d6234c826759d6a97db7b96a50",
+            "741d482a781216dc49fe93b4ab97fef96aca71f46c735b63569169d740acf87c",
         )
 
 

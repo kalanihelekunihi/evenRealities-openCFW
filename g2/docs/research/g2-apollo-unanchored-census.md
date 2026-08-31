@@ -1,5 +1,15 @@
 # G2 Apollo unanchored-function provenance census
 
+> Historical-detail note: the function rows below remain authenticated
+> provenance evidence, but their old aggregate frontier is superseded for
+> release readiness by the current
+> [Wave-0 reconciliation](g2-wave0-readiness-ledger-reconciliation.md).
+> The live builder-owned opaque base is 3,081,392 bytes; its current
+> unanchored-function mask is 613,302 typed retained bytes with zero candidate
+> bytes. All three NemaVG stroke-cap records, totaling 6,614 stock bytes, are
+> source-routed. The 885,418-byte complete-object evidence
+> is overlapping corroboration, not an additive bucket.
+
 Status: authenticated provider-family triage map for official G2 `2.2.6.10`
 Analysis mode: read-only; no signing, flashing, erase, or hardware operation
 
@@ -21,11 +31,11 @@ confidence levels:
   `investigation required`: 38 with mutually inconsistent call evidence and
   1,873 with no corroborating evidence.
 
-The unanchored set and its byte total are re-derived from the authenticated
-image, the 64-shard Lorelei corpus, and the checked-in manifests on every
-run — nothing is hardcoded from this report.  The census reconciles exactly
-with the [origin accounting](../source-coverage.md): the per-function
-official-byte attribution sums to the accounting's
+The historical unanchored set and its byte total are re-derived from the
+authenticated image, the 64-shard Lorelei corpus, and its pinned flash-plan
+snapshot on every run — nothing is hardcoded from this report. The census
+reconciles exactly with that snapshot's origin accounting: the per-function
+official-byte attribution sums to the then-current
 `unanchored_discovered_function` bucket of **675,636 bytes** with zero drift,
 and the 8 rejected envelopes are the same 8 entries
 (`0x0047CC60`, `0x0048949C`, `0x00509708`, `0x00513E2E`, `0x00514F3C`,
@@ -182,12 +192,15 @@ python3 tools/analyze_g2_apollo_unanchored_census.py \
   --write-manifests tools/manifests
 ```
 
-The analyzer authenticates the official image
+The historical analyzer authenticates the official image
 (`36c5b0e4…78a27863`), the corpus `SHA256SUMS`
 (`3ff8aa90…a0aa832f`), and the canonical flash plan
 (`97230c89…1d9e`), and fails closed on any drift in the 5,610-function set,
 the 675,636-byte reconciliation, the 8 oversized envelopes, the manifest
-census, or the curated documented spans.
+census, or the curated documented spans. Those generated rows remain useful
+provider-family evidence, but the current release-readiness mask and its
+complete three-function NemaVG routing are owned by
+`tools/manifests/g2-apollo-origin-accounting.json`.
 
 Machine-readable output:
 

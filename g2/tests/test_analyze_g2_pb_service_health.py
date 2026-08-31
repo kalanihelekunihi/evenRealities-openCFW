@@ -67,7 +67,7 @@ class AnalyzeG2PbServiceHealthTests(unittest.TestCase):
             ),
             (9, 940, 8, 3092, 20),
         )
-        self.assertEqual(production["hardware_validation"], "deferred by project direction")
+        self.assertEqual(production["hardware_validation"], "blocked by unavailable physical evidence")
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ PINS={ROOT/'tools/manifests/packetcraft-cordio-l2c-master-function-map.tsv':'c00
 SOURCE=ROOT/'components/shared/cordio/runtime_cordio_l2c_master.c'
 SOURCE_SHA='a23f0afd51e158e6c27119bb6688477df1dd9a498f63f5c7a4245bbed52847db'
 PRODUCTION_FUNCTIONS=['open_cfw_cordio_l2c_master_receive_signaling_packet','open_cfw_cordio_l2c_master_initialize','open_cfw_cordio_l2c_connection_update_response']
-PRODUCTION_METRICS=[(353900,210,3),(354112,20,0),(354132,56,2)]
+PRODUCTION_METRICS=[(285420,210,3),(285632,20,0),(285652,56,2)]
 F={'l2cMasterRxSignalingPkt':(0x536FBC,0x5371FE,'02e5f34c1e77998116f93ee16041cbb95156c198530345aad39954315fb23d7c'),'L2cMasterInit':(0x537200,0x537208,'ba04b13c8945ffa29186bcf41a112e3e9d17f8e8246a6632fd89748b7c94c0cc'),'L2cDmConnUpdateRsp':(0x537230,0x537278,'25fdad45770fddd5f782df33745ca172a975d5c17c6ac68920e7fb0648854c4d')}
 CALLS={'l2cMasterRxSignalingPkt':[],'L2cMasterInit':[0x4B8050],'L2cDmConnUpdateRsp':[0x5371E6,0x55BC88]}
 def sha(x):return hashlib.sha256(x).hexdigest()

@@ -60,17 +60,17 @@ SYMBOLS = (
     (0x0076F6F4, "PB_RxHealthMultHighlight", 374),
     (0x00757A7C, "APP_PbTxEncodeHealthMultHighlight", 398),
 )
-PRODUCTION_PIN = (12366, "2a5faf89b2fc881b8ae2a19a28f1a2ba780fb7776939c5a560879f1c8791b6d6")
+PRODUCTION_PIN = (12357, "e66df409c7cf62ff50563a6cade81c7ebc2c0759094e611b92660c46765cb795")
 PRODUCTION_LEAVES = (
-    ("open_cfw_pb_service_health_buffer_write", "OPEN_CFW_PB_HEALTH_BUFFER_WRITE_ONLY", 154, "71d648ce7fbfe3eb8bcfe0a8ec96ea07f901bedff55b5f8cda47426181d8da76", 243424),
-    ("PB_RxHealthSingleData", "OPEN_CFW_PB_HEALTH_RX_SINGLE_ONLY", 24, "fcf1eadf5f4cae6df209d800556053f4afa7938e9d648f1fbf1ab6ce55fd367d", 243580),
-    ("APP_PbTxEncodeHealthSingleData", "OPEN_CFW_PB_HEALTH_TX_SINGLE_ONLY", 204, "24699770a105c5391f0fabd4e123b77adf72f7141be3071cae80b7f8c12b6998", 243604),
-    ("PB_RxHealthMultData", "OPEN_CFW_PB_HEALTH_RX_MULTIPLE_ONLY", 24, "a859f96aa5044a913132468af5bcdec05b1481a9451b6ab18f170a64627f4df4", 243808),
-    ("APP_PbTxEncodeHealthMultData", "OPEN_CFW_PB_HEALTH_TX_MULTIPLE_ONLY", 138, "065695a56049fe570ee0aaeeeffe9dff575e25f7cb1ca3a99f6f5a264a881dfc", 243832),
-    ("PB_RxHealthSingleHighlight", "OPEN_CFW_PB_HEALTH_RX_SINGLE_HIGHLIGHT_ONLY", 24, "a99320f11b41dbdaec7856ac72713c7164dc8d655d56ae6aec251011a4bb7577", 243972),
-    ("APP_PbTxEncodeHealthSingleHighlight", "OPEN_CFW_PB_HEALTH_TX_SINGLE_HIGHLIGHT_ONLY", 138, "5ef15f8136af16cb5d85d1f10c8b73f4e4c58c9707f9fae3bddbdf8aaada0eb1", 243996),
-    ("PB_RxHealthMultHighlight", "OPEN_CFW_PB_HEALTH_RX_MULTIPLE_HIGHLIGHTS_ONLY", 24, "d236fdddab28b4e00659c89de08e5f78aa65271e64d642bcc4257f8cf726fdb2", 244136),
-    ("APP_PbTxEncodeHealthMultHighlight", "OPEN_CFW_PB_HEALTH_TX_MULTIPLE_HIGHLIGHTS_ONLY", 210, "3b2e84fbf1957833fe68495e1970fb9f8bf95b99f0c3bffaaf63a8adfc1946d7", 244160),
+    ("open_cfw_pb_service_health_buffer_write", "OPEN_CFW_PB_HEALTH_BUFFER_WRITE_ONLY", 154, "71d648ce7fbfe3eb8bcfe0a8ec96ea07f901bedff55b5f8cda47426181d8da76", 183576),
+    ("PB_RxHealthSingleData", "OPEN_CFW_PB_HEALTH_RX_SINGLE_ONLY", 24, "fcf1eadf5f4cae6df209d800556053f4afa7938e9d648f1fbf1ab6ce55fd367d", 183732),
+    ("APP_PbTxEncodeHealthSingleData", "OPEN_CFW_PB_HEALTH_TX_SINGLE_ONLY", 204, "11d08387e157b0c6137f49373b0898cc1065c7c7703ca501535a7ed37e8adb06", 183756),
+    ("PB_RxHealthMultData", "OPEN_CFW_PB_HEALTH_RX_MULTIPLE_ONLY", 24, "a859f96aa5044a913132468af5bcdec05b1481a9451b6ab18f170a64627f4df4", 183960),
+    ("APP_PbTxEncodeHealthMultData", "OPEN_CFW_PB_HEALTH_TX_MULTIPLE_ONLY", 138, "d62197781dfe7c99758e15d6aec1eb9f4da07f64c90a5336ddac3a6679137076", 183984),
+    ("PB_RxHealthSingleHighlight", "OPEN_CFW_PB_HEALTH_RX_SINGLE_HIGHLIGHT_ONLY", 24, "a99320f11b41dbdaec7856ac72713c7164dc8d655d56ae6aec251011a4bb7577", 184124),
+    ("APP_PbTxEncodeHealthSingleHighlight", "OPEN_CFW_PB_HEALTH_TX_SINGLE_HIGHLIGHT_ONLY", 138, "33c85e5cf1d82fcfedadfa170dcccdce9a4fb8885ba7d259d5dadb90c82e65e7", 184148),
+    ("PB_RxHealthMultHighlight", "OPEN_CFW_PB_HEALTH_RX_MULTIPLE_HIGHLIGHTS_ONLY", 24, "d236fdddab28b4e00659c89de08e5f78aa65271e64d642bcc4257f8cf726fdb2", 184288),
+    ("APP_PbTxEncodeHealthMultHighlight", "OPEN_CFW_PB_HEALTH_TX_MULTIPLE_HIGHLIGHTS_ONLY", 210, "02d06d366a322d251788963ca6800ded03cff72d2cd32db62a46aee56819b3ca", 184312),
 )
 
 
@@ -277,7 +277,14 @@ def analyze(image_path: Path = IMAGE) -> dict:
     main = manifest["component_overrides"]["apollo_main"]
     regions = main["regions"]
     generated = [item for item in regions if item.get("address_status") == "generated_source_entry_replacement" and item.get("target_address") in stock_by_start]
-    appended = [item for item in regions if item.get("address_status") == "source_compiled" and 8190468 <= item.get("target_address", 0) < 8191414]
+    built_addresses = {
+        item["placement"]["runtime_address"] for item in built.values()
+    }
+    appended = [
+        item for item in regions
+        if item.get("address_status") == "source_compiled"
+        and item.get("target_address") in built_addresses
+    ]
     if len(generated) != 8 or sum(item["size"] for item in generated) != 3092 or len(appended) != 9 or sum(item["size"] for item in appended) != 940:
         raise AuditError("production health service manifest closure changed")
 
@@ -314,7 +321,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "source_functions": 9, "compiled_text_bytes": 940,
             "alignment_bytes": 8, "stock_replaced_bytes": 3092,
             "strict_relocations": 20, "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
                 "No authorized physical G2/EM9305 health-service evidence "
                 "is required for future qualification in this workspace."

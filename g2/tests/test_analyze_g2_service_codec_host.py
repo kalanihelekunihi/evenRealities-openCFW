@@ -53,7 +53,7 @@ class AnalyzeG2ServiceCodecHostTests(unittest.TestCase):
         self.assertEqual(lineage["source_inventory"],
                          "26-function clean-room production C")
         self.assertEqual(lineage["historical_source_inventory"], "unavailable")
-        self.assertEqual(lineage["license"], "GPL-3.0-only")
+        self.assertEqual(lineage["license"], "MIT")
         production = self.report["production"]
         self.assertEqual(production["candidate"],
                          "components/apollo_main/core_overlay/service_codec_host.c")
@@ -64,7 +64,7 @@ class AnalyzeG2ServiceCodecHostTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 111)
         self.assertEqual(production["guarded_redirects"], 26)
         self.assertEqual(production["hardware_validation"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
 
 
 if __name__ == "__main__":

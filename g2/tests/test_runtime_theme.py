@@ -648,13 +648,13 @@ class RuntimeThemeTests(unittest.TestCase):
     def test_source_and_fixture_hashes_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "9a9b7580339ac10d4c663d2c318d415a"
-            "e623549bfe996344cd38534ab1466df5",
+            "9c97d115672ddca0d578fb4b88b336b0"
+            "1f00923ecc458597a798b08c171e058a",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "54c6c652dcec0071855c7ad530dafb503"
-            "7dc0fafaf95587bf5d9238a9aae9e0b",
+            "00811f274d0890390a8f12835157daa5"
+            "db62b4f4692d7fd2c7a0b7b368aee469",
         )
 
 

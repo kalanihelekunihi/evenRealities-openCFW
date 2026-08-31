@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "name": "liblc3_service_audio_minimal_suffix_pack",
+  "target": "apollo_main",
+  "firmware_version": "2.2.6.10",
+  "mode": "exact-suffix-pack-capacity-proof-routing-blocked",
+  "evidence": {
+    "capacity_experiment": {
+      "path": "components/apollo_main/liblc3_encoder/service_audio_capacity_experiment.json",
+      "size": 3656,
+      "sha256": "daab69c12426e9dcd9713ae2233cd21e9fedc5b15dfa6d6ea926824e91e51ac9"
+    },
+    "capacity_rebalancing_proposal": {
+      "path": "components/apollo_main/liblc3_encoder/capacity_rebalancing_proposal.json",
+      "size": 8697,
+      "sha256": "b8c7576a191340566b202405c77651a569146386cae2f879b935c360ab5de7b4"
+    }
+  },
+  "address_model": {
+    "apple_best_order_shortfall": 9152,
+    "protected_update_start": 8380416
+  },
+  "service_audio_entries": {
+    "open_cfw_liblc3_service_audio_stock_encode": 5744960,
+    "open_cfw_liblc3_service_audio_stock_setup": 5744934
+  },
+  "adapter_state": {
+    "contexts": [
+      537946748,
+      537949376,
+      537952004,
+      537954632
+    ],
+    "slot_bytes": 2628,
+    "context_end_exclusive": 537957260
+  },
+  "required_runtime_imports": [
+    "__aeabi_memclr",
+    "__aeabi_memclr4",
+    "fabsf",
+    "floorf",
+    "fmaxf",
+    "fminf",
+    "memcpy",
+    "memmove",
+    "memset",
+    "sqrtf",
+    "truncf"
+  ],
+  "expected": {
+    "apple_capacity_report_sha256": "e832d755be5f3b02dde8613511a1f87a0377767120ac050fa37e91eb07d2c16d",
+    "suffix_count": 84,
+    "suffix_start": 8300064,
+    "suffix_span": 9252,
+    "suffix_payload_bytes": 9174,
+    "suffix_internal_padding": 78,
+    "used_host_count": 7,
+    "used_host_span": 9242,
+    "used_host_payload": 9174,
+    "used_host_alignment_padding": 68,
+    "all_host_tail_capacity": 61320,
+    "preexisting_host_tail_branch_targets": 10,
+    "preexisting_host_tail_byte_window_pointer_targets": 104,
+    "preexisting_host_tail_aligned_pointer_targets": 24,
+    "placement_records_sha256": "fc797c985f1ed0b4e2cb88765dfe253e28111009adbcc2415828e184b83206ac",
+    "relocation_count": 288,
+    "relocation_records_sha256": "a9ef708024e3dfb55f38edfdde717e057fbd3ceb68dd84c8f374e87dd5394664",
+    "rebased_payloads_sha256": "7f4cb20f254bd828036015bffecdd12aae8adf6634600112e50bc22b2460e46a",
+    "new_component_size": 3876416,
+    "new_component_sha256": "b3dc1d99cc8ce6b4c989e456379d613eb44aaa0fc20e0f0438c0831e3b67096b",
+    "new_core_end_exclusive": 8300064,
+    "lc3_section_order": [
+      "table_rodata",
+      "rodata",
+      "text"
+    ],
+    "lc3_end_exclusive": 8380320,
+    "margin_before_update_record": 96,
+    "ingress": {
+      "exact_entry_branch_count": 127,
+      "stock_entry_redirect_count": 84,
+      "suffix_internal_branch_count": 43,
+      "raw_pointer_count": 0,
+      "records_sha256": "0f044bc7809f4fca3678ec814e785413be37f3932adb4e33f681fad0ace160d1"
+    }
+  },
+  "routing": {
+    "production_placement": false,
+    "service_audio_routed": false,
+    "firmware_image_emitted": false,
+    "hardware_operations": false
+  }
+}

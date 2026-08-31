@@ -1,0 +1,75 @@
+{
+  "authenticated_stock": {
+    "path": "blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+    "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "size": 211948
+  },
+  "component": "G2 EM9305 record-table package",
+  "container": {
+    "erase_sector_count": 29,
+    "erase_sector_table_sha256": "2c6e30cad70fd9817ce14dd1de8beb8cf6405a9b67db3adc0c9426c18d2935f0",
+    "magic_hex": "00020404",
+    "metadata_bytes": 124,
+    "payload_bytes": 211824,
+    "record_count": 4,
+    "records": [
+      {
+        "index": 0,
+        "sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+        "size": 224,
+        "target_address": 3145728
+      },
+      {
+        "index": 1,
+        "sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+        "size": 656,
+        "target_address": 3146752
+      },
+      {
+        "index": 2,
+        "sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f",
+        "size": 56,
+        "target_address": 3153920
+      },
+      {
+        "index": 3,
+        "sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+        "size": 210888,
+        "target_address": 3154944
+      }
+    ]
+  },
+  "hardware_blocker": "blocked by unavailable physical evidence",
+  "hardware_operations": [],
+  "hardware_validation": "blocked by unavailable physical evidence",
+  "production_routed": false,
+  "remaining_software_blockers": [
+    "provide production source and linked bytes for all four EM9305 records",
+    "resolve target placement and redirects for qualified ARC candidates and the target-linked QP/C component",
+    "replace the retained proprietary controller record with redistributable compilable source"
+  ],
+  "schema_version": 1,
+  "software_package_complete": true,
+  "software_wrapper_complete": true,
+  "source_image_complete": false,
+  "source_inventory": [
+    {
+      "path": "components/em9305/source_image/record_package.py",
+      "sha256": "33c4be40013dfcfcc786dc569e3fd108a1b9845aba211458b252a9d527e85ee4",
+      "size": 5529
+    },
+    {
+      "path": "components/em9305/source_image/build_image.py",
+      "sha256": "6e4759851683109a2060a736d146e300c7dc0a43aad589bdbb0bd45b49f9078f",
+      "size": 3294
+    },
+    {
+      "path": "components/em9305/source_image/README.md",
+      "sha256": "1b920ac6e6eacf88f6cab2198393289aa3cccd212b815c7270df89e39dcf44d6",
+      "size": 1033
+    }
+  ],
+  "source_records_complete": false,
+  "status": "record-package-software-closed-source-image-incomplete",
+  "stock_roundtrip_byte_exact": true
+}

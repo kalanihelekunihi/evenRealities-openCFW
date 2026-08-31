@@ -30,7 +30,7 @@ CL = ROOT / "tools/manifests/g2-service-kvdb-closure.tsv"
 PM = ROOT / "tools/manifests/g2-service-kvdb-provider-map.tsv"
 PINS = {
     FM: "2cc29379bc966b452a0e375f3804319a5298f1fff18c3b925e2d4077937f3bc9",
-    CL: "a0257e067027c018c7251700f137fee96c2f3858c99e53773cb2b249dd686ffa",
+    CL: "5b1610cf3699525d986af4830aca0d9b0a4a284f2bc02b4567c1d3d0e09dca0e",
     PM: "7217ea96f6e58671d1e1aeb536c8ea289edc959af7b530fa2d2e40f22c2725e2",
 }
 F = (
@@ -242,8 +242,8 @@ def analyze(image: Path = IMAGE) -> dict:
 
     source_bytes = SOURCE.read_bytes()
     if (len(source_bytes), sh(source_bytes)) != (
-        6878,
-        "d2e017f9d97427fa46f2c93d45718ec21f9c24186490c36e3d19b5a363e73340",
+        6869,
+        "d486020818140ce26d477cde1f8a593d0bc7067548b844c5134a5e6c9d023f50",
     ):
         raise c.AuditError("service_kvdb production source changed")
     source_text = source_bytes.decode("utf-8")
@@ -364,7 +364,7 @@ def analyze(image: Path = IMAGE) -> dict:
             "retained_official_pool_bytes": 156,
             "destructive_default_reset_enabled": False,
             "hardware_validation": (
-                "deferred by project direction; future qualification requires authorized responsive G2 pair and "
+                "blocked by unavailable physical evidence; future qualification requires authorized responsive G2 pair and "
                 "known-good removable sysenv media evidence"
             ),
         },

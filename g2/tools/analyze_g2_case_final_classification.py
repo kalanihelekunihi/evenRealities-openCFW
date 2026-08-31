@@ -135,14 +135,37 @@ def analyze():
     gaps = [r for r in summary["gap_rows"] if r["ownership_category"] == "unresolved"]
     require(len(gaps) == 229 and sum(r["bytes"] for r in gaps) == 2184,
             "unresolved gap baseline changed")
-    gap_rows = []
+    normalized_gaps = []
     for row in gaps:
-        start, end = int(row["start"]), int(row["end"])
+        start, end, declared_bytes = (
+            int(row["start"]), int(row["end"]), int(row["bytes"])
+        )
+        require(
+            APP_BASE <= start < end <= APP_BASE + len(app),
+            f"invalid unresolved gap extent at {start:#x}",
+        )
+        require(
+            end - start == declared_bytes,
+            f"unresolved gap byte count changed at {start:#x}",
+        )
+        normalized_gaps.append((start, end, row))
+    normalized_gaps.sort(key=lambda item: (item[0], item[1]))
+    for previous, current in zip(normalized_gaps, normalized_gaps[1:]):
+        require(
+            previous[1] <= current[0],
+            f"unresolved gap intervals overlap at {current[0]:#x}",
+        )
+    gap_rows = []
+    for start, end, row in normalized_gaps:
         data = app[start - APP_BASE:end - APP_BASE]
+        require(len(data) == int(row["bytes"]),
+                f"unresolved gap escaped app at {start:#x}")
         category, reason = _gap_classification(data)
         gap_rows.append({"start": start, "end": end, "bytes": len(data),
                          "content_sha256": sha256(data), "classification": category,
                          "missing_fact_or_reason": reason})
+    require(sum(row["bytes"] for row in gap_rows) == 2184,
+            "classified gap bytes do not conserve the unresolved baseline")
 
     universe = set(range(len(blob))); generated = set(range(WRAPPER))
     typed = universe - generated - candidate_addresses
@@ -180,8 +203,8 @@ def analyze():
                     "whole_blob_bytes": len(blob), "whole_blob_bucket_bytes": buckets,
                     "gap_classification_counts": dict(sorted(Counter(r["classification"] for r in gap_rows).items())),
                     "physical_bucket_digest": sha256(json.dumps(physical_rows, sort_keys=True, separators=(",", ":")).encode())},
-        "hardware_validation": "deferred by project direction",
-        "hardware_blocker": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "hardware_blocker": "blocked by unavailable physical evidence",
         "hardware_operations": [],
         "production_routed": False,
         "classification_note": "Typed unsupported ownership closes opacity only; it is not source completeness, production routing, or redistribution permission."}

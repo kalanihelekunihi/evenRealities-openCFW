@@ -46,14 +46,14 @@ DIRECT_CALLEE_EDGES = [
 ]
 DIRECT_CALLEE_DIGEST = "c8c4d730f16159fb0d4e06a5686ff1603d0fee71cc8dc8ee1b46d64bfcaa2a35"
 PRODUCTION_FILES = {
-    SOURCE: (2_227, "5790c2981f0527a888542574fd4bc86ea5ba26245d3f7283272c4c846fa0a757"),
+    SOURCE: (2_269, "ea43415a24402e4383ca21af3c9e0e6dbac325a1788adef4e66c48a7ef45bcf0"),
     HEADER: (374, "92bc7bda278a68118d97d0c7444792e2db57e0f9f631256c09dc6c5ed6825c3c"),
     RUNTIME_TEST: (4_677, "353ede19e86f21ec58e750dc8bebf4bf50daa8130dee5f72927413414cb5a0fd"),
 }
-PRODUCTION_OVERLAY = (429_058, "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd")
-PRODUCTION_COMPONENT = (3_952_454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb")
-PRODUCTION_PACKAGE = (4_745_526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934")
-PRODUCTION_FLASH_PLAN = (4_643_183, "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66")
+PRODUCTION_OVERLAY = (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae")
+PRODUCTION_COMPONENT = (3_885_668, "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5")
+PRODUCTION_PACKAGE = (4_678_740, "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a")
+PRODUCTION_FLASH_PLAN = (4_595_610, "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127")
 
 
 class AuditError(RuntimeError):
@@ -175,7 +175,7 @@ def verify_production() -> dict:
         "flash_regions", "unresolved_flash_regions",
         "container_only_regions", "protected_regions",
     ))
-    if counts != (6671, 0, 6, 6):
+    if counts != (6588, 0, 6, 6):
         raise AuditError("HCI PHY flash-plan counts changed")
     return {
         "status": "production-routed",

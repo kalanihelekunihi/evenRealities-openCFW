@@ -196,6 +196,8 @@ def analyze(*, enforce_expected: bool = True) -> dict:
                     f"startup-closed {key} changed: {metrics[key]!r} != {expected!r}")
     return {
         "schema_version": 1,
+        "authoritative_batch": 18,
+        "hardware_validation": "blocked by unavailable physical evidence",
         "component": "G2 touch evidence-closed startup admission batch 18",
         "analysis_mode": "offline authenticated control/data flow, injected Apache provider seams, host and Cortex-M0+ compile; no hardware/MMIO execution",
         "metrics": metrics, "rows": rows, "residual_rows": residual_rows,

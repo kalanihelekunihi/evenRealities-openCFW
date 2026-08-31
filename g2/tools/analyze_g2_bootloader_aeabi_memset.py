@@ -31,8 +31,8 @@ FUNCTION_ADDRESS = 0x00434824
 FUNCTION_SIZE = 12
 FUNCTION_SHA256 = "57aa3a55299e81fefe7ae3b0807a149cf0d3d6c56adfcd6bf507f3850e6c229e"
 SOURCE_PINS = {
-    SOURCE: (522, "d2e8eb19cc43bd75995bc75f2a404768612376c1d990a80ab2e8121998183c22"),
-    HEADER: (338, "20da14c2a8ff377971c731003ab011ac7bf46ba6a3f9d0619a570457ba65ce49"),
+    SOURCE: (509, "0fabe7f50ea44e4cb08d9e87a8e61d2af63d75d0da2952935e93339d73660b97"),
+    HEADER: (325, "a7929079464da0f5d19bc8124fde3879392414648d975e1b27fb8ff59f93dc0a"),
 }
 CALLERS = (
     0x00410538, 0x00410E68, 0x004110B6, 0x004112D8, 0x004116A8,
@@ -41,8 +41,8 @@ CALLERS = (
     0x0041CE62, 0x0041FD7E, 0x00422FC6, 0x00426C1C, 0x0042DE66,
 )
 OVERLAY = (15240, "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314")
-PROVIDER = (163840, "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0")
-LINUX_PROVIDER = (163824, "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635")
+PROVIDER = (163840, "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad")
+LINUX_PROVIDER = (163824, "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e")
 
 
 class AuditError(RuntimeError):
@@ -142,13 +142,13 @@ def audit() -> dict:
 
     return {
         "component": "G2 Apollo bootloader Arm EABI byte-fill",
-        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
+        "status": "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "software_gap_count": 0,
         "stock": {"address": STOCK_ADDRESS, "size": STOCK_SIZE, "sha256": STOCK_SHA256, "whole_image_callers": len(CALLERS)},
         "source": {"function": FUNCTION, "address": FUNCTION_ADDRESS, "size": FUNCTION_SIZE, "sha256": FUNCTION_SHA256, "relocations": 0},
         "provider": {"size": PROVIDER[0], "sha256": PROVIDER[1], "source_owned_bytes": component["source_owned_bytes"], "retained_official_bytes": component["opaque_base_bytes"]},
         "deployment": {"apple_package": artifacts["package"], "linux_package": {"size": linux_package["expected_size"], "sha256": linux_package["expected_sha256"]}},
-        "hardware_block": {"physical_evidence_available": False, "required_evidence": "authorized responsive G2 right temple demonstrating boot progression through all byte-fill callers", "stock_bootloader_retained_for_hardware": True},
+        "hardware_block": {"physical_evidence_available": False, "required_evidence": "authorized G2 hardware demonstrating boot progression through all byte-fill callers", "stock_bootloader_retained_for_hardware": True},
         "safety": {"hardware_operations": [], "signing_performed": False, "flashing_performed": False},
     }
 
@@ -163,7 +163,7 @@ def main() -> int:
     else:
         print(f"Bootloader byte-fill closure: {report['status']}")
         print(f"  authenticated callers: {report['stock']['whole_image_callers']}")
-        print("  hardware operations: none; physical validation deferred by project direction")
+        print("  hardware operations: none; physical validation blocked by unavailable physical evidence")
     return 0
 
 

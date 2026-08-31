@@ -111,8 +111,8 @@ def build(output: Path) -> dict:
         "software_link_complete": True,
         "software_package_complete": True,
         "production_routed": False,
-        "hardware_validation": "deferred by project direction",
-        "hardware_blocker": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "hardware_blocker": "blocked by unavailable physical evidence",
         "evidence_locked_contracts": [
             "exact board interrupt ownership", "GPIO/timer routing",
             "dual-bank updater handoff", "preserved identity copy-forward",

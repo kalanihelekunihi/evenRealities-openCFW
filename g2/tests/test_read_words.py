@@ -273,7 +273,7 @@ class ReadWordsTests(unittest.TestCase):
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "6faaddf37687e42dc30ff99bacfbf5f691b3b89db95464ba3e9b96af6b614105",
+            "aad9c5d7f4eb308b52cf7bb6d2c30ae81494df508c2781f2b333d84a1e9f7113",
         )
 
 

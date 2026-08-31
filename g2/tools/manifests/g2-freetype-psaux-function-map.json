@@ -1,0 +1,48 @@
+{
+  "schema": "open-cfw-g2-freetype-psaux-function-map-v1",
+  "analyzer": "tools/analyze_g2_freetype_psaux_function_map.py",
+  "status": "fail-closed-psaux-function-map",
+  "selected_module": "psaux",
+  "anchors": {
+    "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "ghidra_functions_sha256": "9fd9c1c34e17abb977f2ccb32a931d9b96743db2db10707de19bf9ea6ae42662",
+    "module_class": "0x00758A18",
+    "module_name_address": "0x0078E424",
+    "module_interface": "0x00741F70",
+    "freetype_commit": "86bc8a95056c97a810986434a3f268cbe67f2902"
+  },
+  "scope": {
+    "start": "0x005CF8E4",
+    "end_exclusive": "0x005D70A4",
+    "bytes": 30656,
+    "ghidra_recognized_functions": 175,
+    "ghidra_recognized_body_bytes": 28996,
+    "psaux_functions": 199,
+    "psaux_callable_bytes": 29750,
+    "foreign_callable_functions": 2,
+    "foreign_callable_bytes": 762,
+    "residual_intervals": 12,
+    "residual_physical_bytes": 144,
+    "unclassified_bytes": 0,
+    "unresolved_callable_bytes": 0
+  },
+  "confidence": {
+    "exact": {"functions": 0, "bytes": 0},
+    "high": {"functions": 65, "bytes": 7020},
+    "medium": {"functions": 134, "bytes": 22730},
+    "mapped_total": {"functions": 199, "bytes": 29750},
+    "unresolved_code": {"functions": 0, "bytes": 0, "source_identities_complete": true}
+  },
+  "movement": {
+    "initial_retained_census": {"functions": 57, "bytes": 7114},
+    "additional_authenticated_ghidra_source": {"functions": 116, "bytes": 21120},
+    "recovered_outside_ghidra_relation": {"functions": 26, "bytes": 1516},
+    "corrected_prior_source_identities": {"functions": 3, "bytes": 348}
+  },
+  "mapping_sha256": "ba936457b31d9c8d94bbcabd0ad8e993103e1f423def30314c5ed81dbcf6cecb",
+  "records_are_emitted_by_analyzer": true,
+  "compiler_byte_identity_claimed": false,
+  "binary_overlay_ready": false,
+  "production_routed": false,
+  "hardware_operations": false
+}

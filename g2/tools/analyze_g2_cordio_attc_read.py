@@ -52,8 +52,8 @@ CANDIDATE_FUNCTIONS = [
     "open_cfw_cordio_attc_read_by_type_request",
 ]
 CANDIDATE_METRICS = [
-    (347284, 136, 0), (347420, 40, 0),
-    (347460, 140, 2), (347600, 124, 2),
+    (278804, 136, 0), (278940, 40, 0),
+    (278980, 140, 2), (279120, 124, 2),
 ]
 
 
@@ -199,7 +199,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         ):
             raise RuntimeError(f"attc_read production route changed: {name}")
     compiled = sum(row["expected"]["size"] for row in leaves)
-    alignment = leaves[0]["expected"]["offset"] - 347282
+    alignment = leaves[0]["expected"]["offset"] - 278802
     alignment += sum(
         right["expected"]["offset"]
         - left["expected"]["offset"] - left["expected"]["size"]
@@ -264,7 +264,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "source_only_public_helpers": source_only,
             "truncated_pair_guard": True,
             "hardware_validation": (
-                "deferred by project direction; future qualification requires authorized responsive G2/ATT peer evidence"
+                "blocked by unavailable physical evidence; future qualification requires authorized responsive G2/ATT peer evidence"
             ),
         },
     }

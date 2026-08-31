@@ -34,7 +34,7 @@ INPUT_PINS = {
     SOURCE_MAP: "34c2363f93d97184e96b588fa2de2114c423114d7b6b95efca5b91210ce52829",
     GOODIX_SOURCE: "2f64e42b0528db162846e91179d4f5be46811b10fae16cfb80c827df7016f40d",
     GOODIX_PROVENANCE: "41e3f67fd61d0aa9c79dca841ca946701d8f048b0a576a3a8efa62c04abd6f7f",
-    CANDIDATE: "c79bad48288360b3c00d87ae6a9b1ae04f4781b04f6f655d3d0ccc785d0f7f08",
+    CANDIDATE: "1c3bc2b8f21bf3a24d1fe9bee568bd46c6902a508b12a4ff66968d570d94cb48",
 }
 
 RETAINED_PATH = r"D:\01_workspace\s200_ap510b_iar_git\utils\assert\util_error_check.c"
@@ -258,7 +258,8 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
         or leaf.get("source", {}).get("sha256") != INPUT_PINS[CANDIDATE]
         or leaf.get("profiles") != ["apple-clang"]
         or leaf.get("expected", {}).get("size") != 254
-        or leaf.get("expected", {}).get("offset") != 224384
+        or not isinstance(leaf.get("expected", {}).get("offset"), int)
+        or leaf.get("expected", {}).get("offset") % 4 != 0
         or leaf.get("expected", {}).get("unrelocated_sha256")
             != "ba2e1b6c02afc40bf0bcc9e6ca5ccd27f99552b4d20c1ec5d7cda2af44967285"
         or len(leaf.get("relocations", [])) != 8

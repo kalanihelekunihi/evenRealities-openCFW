@@ -197,8 +197,8 @@ class OnboardingWearStatusTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "9e68ea72309db0e8f40db7b167ee0b3c"
-            "deef7d4a27813508fd6d8b31b2b447c9",
+            "6c10dd2b52f2d7fed25dc957b6d912b7"
+            "2f050d35aef669d8861836ea250c8225",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),

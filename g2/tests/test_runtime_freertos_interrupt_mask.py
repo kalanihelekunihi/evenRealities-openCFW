@@ -79,10 +79,10 @@ OFFICIAL_APPLICATION_SHA256 = (
     "e13cc18928528d84d999b6bcc0ba9701"
 )
 GENERATED_COMPONENT_SHA256 = (
-    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
 )
 GENERATED_APPLICATION_SHA256 = (
-    "d748332b76d8dbfd6d4a7dcc64180fd71b51fe2ceeda9a35e533b591a7ca1620"
+    "62b36554bcd3484deb4eb8594482571101c042b8350285c610c963796b693724"
 )
 
 SET_BYTES = bytes.fromhex(
@@ -153,12 +153,12 @@ OFFICIAL_TOPOLOGY = {
 }
 GENERATED_TOPOLOGY = {
     "set": {
-        "count": 82,
+        "count": 79,
         "address_sha256": (
-            "e2987ebcdbf2aeab80fd2310439c3fd03d9b463cbd40ecbf050b4f4000330ea6"
+            "4629c69e51b0d2257bf71c3819b60fd453da9c004b2a45e7558927cc68424233"
         ),
         "encoding_sha256": (
-            "82b5be2e7b58a773a26d5e10a2a04a2ec6f18346faff5ff23af589db8cc698b5"
+            "ecdde0e259d95e7dc925cd65de224e3e921fea2e8a197c2660e229b2b46dc317"
         ),
     },
     "clear": {
@@ -239,9 +239,20 @@ class RuntimeFreeRTOSInterruptMaskTests(unittest.TestCase):
             cls.sections,
         )
 
+        production_config = json.loads(CONFIG.read_text(encoding="utf-8"))
+        production_config["expected"] = dict(
+            production_config["core_stage_expected"]
+        )
+        for profile in production_config["toolchain_profiles"].values():
+            profile["expected"] = dict(profile["core_stage_expected"])
+        production_config_path = temporary / "production-core-stage.json"
+        production_config_path.write_text(
+            json.dumps(production_config, indent=2) + "\n",
+            encoding="utf-8",
+        )
         cls.report = apollo_overlay.build(
             root=ROOT,
-            config_path=CONFIG,
+            config_path=production_config_path,
             output_dir=temporary / "component",
             clang=os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
         )
@@ -632,7 +643,14 @@ class RuntimeFreeRTOSInterruptMaskTests(unittest.TestCase):
         topology = self.topologies["generated"]
         self.assertEqual(topology["set"], GENERATED_TOPOLOGY["set"])
         self.assertEqual(topology["clear"], GENERATED_TOPOLOGY["clear"])
-        self.assertEqual(topology["wide_jumps"], [])
+        self.assertEqual(
+            topology["wide_jumps"],
+            [
+                (0x007D_2016, SET_START, bytes.fromhex("28f645b8")),
+                (0x007D_2364, SET_START, bytes.fromhex("27f69ebe")),
+                (0x007D_4C6A, SET_START, bytes.fromhex("25f61bba")),
+            ],
+        )
         self.assertEqual(topology["interior"], [])
         self.assertEqual(topology["narrow"], [])
         self.assertEqual(
@@ -722,13 +740,13 @@ class RuntimeFreeRTOSInterruptMaskTests(unittest.TestCase):
         self.assertEqual(
             self.config["expected"],
             {
-                "overlay_size": 429058,
+                "overlay_size": 360578,
                 "overlay_sha256": (
-                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+                    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
                 ),
-                "component_size": 3952454,
+                "component_size": 3883974,
                 "component_sha256": (
-                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+                    "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
                 ),
             },
         )
@@ -855,8 +873,8 @@ class RuntimeFreeRTOSInterruptMaskTests(unittest.TestCase):
             self.report["component"]["sha256"],
             GENERATED_COMPONENT_SHA256,
         )
-        self.assertEqual(self.report["component"]["size"], 3_952_454)
-        self.assertEqual(self.report["overlay"]["size"], 429_058)
+        self.assertEqual(self.report["component"]["size"], 3_883_974)
+        self.assertEqual(self.report["overlay"]["size"], 360_578)
         self.assertEqual(
             self.report["overlay"]["sha256"],
             self.config["expected"]["overlay_sha256"],

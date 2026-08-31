@@ -23,7 +23,7 @@ class G2AlsTests(unittest.TestCase):
         p=self.report["production"]
         self.assertTrue(p["production_routed"])
         self.assertEqual((p["source_functions"],p["compiled_text_bytes"],p["compiled_rodata_bytes"],p["generated_alignment_bytes"],p["guarded_redirects"],p["ownership_bytes"],p["retained_compatibility_bytes"],p["strict_relocations"]),(38,2216,48,30,38,3858,374,82))
-        self.assertEqual(p["hardware_validation"],"deferred by project direction")
-        self.assertIn("deferred by project direction",p["hardware_blocker"])
+        self.assertEqual(p["hardware_validation"],"blocked by unavailable physical evidence")
+        self.assertIn("blocked by unavailable physical evidence",p["hardware_blocker"])
 
 if __name__=="__main__":unittest.main()

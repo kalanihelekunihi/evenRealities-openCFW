@@ -1,5 +1,10 @@
 # G2 bootloader introspective qsort source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The introspective sort core at `[0x00423A48,0x00423D08)` is 704 bytes with
 SHA-256
 `9c13dd0e980154026e6c64019ce90997dcbd5abafb79aabbbf7d3def82215bb8`.

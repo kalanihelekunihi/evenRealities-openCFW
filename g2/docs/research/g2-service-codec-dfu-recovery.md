@@ -1,5 +1,10 @@
 # G2 GX8002 codec-DFU recovery
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 ## Result
 
 The retained first-party translation unit `platform\audio\service_codec_dfu.c` is closed as a linked binary object in the official G2 2.2.6.10 OTA image. Its physical interval is `[0x00577D7C,0x0057A46C)`: 9,968 bytes with SHA-256 `7586756c943d9c607ac92eab4e075d8d0fed0cea38fcf2bb7664122d1f216a35`.

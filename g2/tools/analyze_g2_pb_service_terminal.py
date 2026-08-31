@@ -29,24 +29,24 @@ PINS = {
     CLOSURE: "efcb8e562d1aed8083d8ebbbfd91d8cfa1cfc58a87d4f642890ad3f154522830",
     PROVENANCE: "71e10f399312df13bbc70a383f5d69adcc6bf02bcf482129178b01ae1e4aa95b",
 }
-SOURCE_SIZE = 14861
-SOURCE_SHA256 = "b6feacf5bb491f28e1a3718dbf29ee2c5f5038e94ee9eabfb1f584eb5a2cb123"
+SOURCE_SIZE = 14852
+SOURCE_SHA256 = "d045ebff68a95c0539974477ea50405505fe9e4635e3dab82ec96a2431e36027"
 FUNCTIONS = (
-    ("open_cfw_pb_service_terminal_buffer_write", 146, 260204, 0),
-    ("open_cfw_pb_service_terminal_zero", 88, 260352, 0),
-    ("open_cfw_pb_terminal_encode_and_send", 358, 260440, 7),
-    ("APP_PbTerminalRxFrameDataProcess", 112, 260800, 3),
-    ("APP_PbTerminalTxEncodeCommResp", 36, 260912, 1),
-    ("APP_PbTerminalTxEncodeStatusReply", 48, 260948, 1),
-    ("APP_PbTerminalTxEncodeVoiceInput", 48, 260996, 1),
-    ("APP_PbTerminalTxEncodeQueryReply", 48, 261044, 1),
-    ("APP_PbTerminalTxEncodeAgentInterrupt", 48, 261092, 1),
-    ("APP_PbTerminalTxEncodeSessionSwitchRequest", 84, 261140, 1),
-    ("APP_PbTerminalTxEncodeNewSessionRequest", 62, 261224, 1),
-    ("APP_PbTerminalTxEncodeNewSessionCancel", 48, 261288, 1),
-    ("APP_PbTerminalTxEncodeDisplayStateNotify", 104, 261336, 2),
-    ("APP_PbTerminalTxEncodeListFocus", 62, 261440, 1),
-    ("APP_PbTerminalTxEncodeOverlayFocus", 76, 261504, 2),
+    ("open_cfw_pb_service_terminal_buffer_write", 146, 200356, 0),
+    ("open_cfw_pb_service_terminal_zero", 88, 200504, 0),
+    ("open_cfw_pb_terminal_encode_and_send", 358, 200592, 7),
+    ("APP_PbTerminalRxFrameDataProcess", 112, 200952, 3),
+    ("APP_PbTerminalTxEncodeCommResp", 36, 201064, 1),
+    ("APP_PbTerminalTxEncodeStatusReply", 48, 201100, 1),
+    ("APP_PbTerminalTxEncodeVoiceInput", 48, 201148, 1),
+    ("APP_PbTerminalTxEncodeQueryReply", 48, 201196, 1),
+    ("APP_PbTerminalTxEncodeAgentInterrupt", 48, 201244, 1),
+    ("APP_PbTerminalTxEncodeSessionSwitchRequest", 84, 201292, 1),
+    ("APP_PbTerminalTxEncodeNewSessionRequest", 62, 201376, 1),
+    ("APP_PbTerminalTxEncodeNewSessionCancel", 48, 201440, 1),
+    ("APP_PbTerminalTxEncodeDisplayStateNotify", 104, 201488, 2),
+    ("APP_PbTerminalTxEncodeListFocus", 62, 201592, 1),
+    ("APP_PbTerminalTxEncodeOverlayFocus", 76, 201656, 2),
 )
 PATCH_SUFFIXES = (
     "encode", "rx", "comm_resp", "status_reply", "voice_input",
@@ -383,11 +383,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 2554,
             "retained_tail_bytes": 246,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "No authorized live G2 service 0x30 master/peer BLE and terminal "
-                "UI evidence is required for future qualification; the authorized right temple is "
-                "not under test because qualification is deferred by project direction and the left temple must remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific service 0x30 terminal fixture "
+                "or an authenticated golden BLE/UI capture"
             ),
         },
     }

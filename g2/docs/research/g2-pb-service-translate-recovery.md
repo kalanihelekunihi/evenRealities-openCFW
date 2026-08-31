@@ -1,5 +1,10 @@
 # G2 `pb_service_translate.c` recovery
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Status: software-complete and production-routed from clean-room C; live
 master/peer BLE and translation-UI validation is explicitly blocked by
 unavailable authorized responsive G2 hardware evidence. Run addresses use

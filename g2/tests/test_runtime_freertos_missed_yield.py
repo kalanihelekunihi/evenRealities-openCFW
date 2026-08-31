@@ -77,9 +77,9 @@ TARGET_SHA256 = (
     "2b028e0c4aa84ce41bfe4b4164a397ae"
     "4d5ba9f177900cefb3b71c5d5d339ba9"
 )
-APPLE_OFFSET = 175_188
+APPLE_OFFSET = 115_340
 LINUX_OFFSET = 117_172
-APPLE_RUNTIME_ADDRESS = 0x007BEF78
+APPLE_RUNTIME_ADDRESS = 0x007B05B0
 
 TARGET_FLAGS = [
     "--target=thumbv7em-none-eabi",
@@ -191,7 +191,10 @@ class RuntimeFreeRTOSMissedYieldTests(unittest.TestCase):
             # Build the otherwise-identical production graph with only those
             # two aggregate pins omitted.
             build_config = copy.deepcopy(cls.config)
-            build_config["expected"] = {}
+            build_config["expected"] = build_config["core_stage_expected"]
+            for profile in build_config.get("toolchain_profiles", {}).values():
+                if "core_stage_expected" in profile:
+                    profile["expected"] = profile["core_stage_expected"]
             unpinned_config = temporary / "overlay-unpinned-final.json"
             unpinned_config.write_text(
                 json.dumps(build_config, indent=2) + "\n",
@@ -663,7 +666,7 @@ class RuntimeFreeRTOSMissedYieldTests(unittest.TestCase):
                 "offset": APPLE_OFFSET,
                 "padding_before": 0,
                 "runtime_address": APPLE_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007BEF78",
+                "runtime_address_hex": "0x007B05B0",
                 "size": 14,
             },
         )
@@ -687,7 +690,7 @@ class RuntimeFreeRTOSMissedYieldTests(unittest.TestCase):
                 "function": FUNCTION,
                 "relocation_count": 0,
                 "runtime_address": APPLE_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007BEF78",
+                "runtime_address_hex": "0x007B05B0",
                 "section": f".text.{FUNCTION}",
                 "sha256": TARGET_SHA256,
                 "size": 14,
@@ -751,18 +754,18 @@ class RuntimeFreeRTOSMissedYieldTests(unittest.TestCase):
                 self.production["component"]["opaque_base_bytes"],
             ),
             (
-                429_058,
+                360_578,
                 (
-                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+                    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
                 ),
-                2_631,
-                2_374,
-                3_952_454,
+                2_436,
+                2_324,
+                3_883_974,
                 (
-                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+                    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
                 ),
-                431_334,
-                3_111_914,
+                362_962,
+                3_123_534,
             ),
         )
 

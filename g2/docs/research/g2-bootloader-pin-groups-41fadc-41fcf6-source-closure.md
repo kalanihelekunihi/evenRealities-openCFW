@@ -1,5 +1,10 @@
 # G2 bootloader pin-group dispatcher source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete bootloader entry at `[0x0041FADC,0x0041FCF6)` is now replaced
 by maintained clean-room C. The 538-byte stock body hashes to
 `5fa7352e1bdc3dffcdda275c9fe7102d92c41fbc2a6384e407f6a68e920a35ce`;

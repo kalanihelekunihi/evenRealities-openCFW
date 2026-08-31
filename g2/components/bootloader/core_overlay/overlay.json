@@ -18717,6 +18717,69 @@
       }
     },
     {
+      "function": "open_cfw_bootloader_hw_initializer_42308e",
+      "runtime_address": 4337806,
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_hw_initializer_42308e.c",
+        "size": 10733,
+        "sha256": "8b096ec91c3092619b432c77f9c52f76ea76e230d65e2538af26fa3ce880fa91",
+        "license": "MIT",
+        "origin": "clean-room G2 bootloader per-instance hardware initializer",
+        "evidence": "docs/research/g2-bootloader-hw-initializer-42308e-4232c8-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 570,
+        "sha256": "80102228cb6a9eb99cd5bf229d5ca450331b2521a39e23e4e0671f7f928dbc46",
+        "unrelocated_sha256": "f08bff0cbc423ffc9408db313992c97fb4f181dadf7479f12820f8257e9a7826"
+      },
+      "stock": {
+        "size": 570,
+        "sha256": "80102228cb6a9eb99cd5bf229d5ca450331b2521a39e23e4e0671f7f928dbc46"
+      },
+      "relocations": [
+        {
+          "offset": 228,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_bootloader_mode_route_4222f0",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4334320
+        },
+        {
+          "offset": 282,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_bootloader_hw_clock_divider_422e28",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4337192
+        }
+      ],
+      "allow_discarded_alloc_sections": true,
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
       "function": "open_cfw_bootloader_hw_fifo_read_4232c8",
       "runtime_address": 4338376,
       "source": {
@@ -21717,6 +21780,326 @@
           "reviewed_version_prefix": "Homebrew clang version 22.1.8"
         }
       }
+    },
+    {
+      "function": "open_cfw_bootloader_mspi_device_configure_424120",
+      "runtime_address": 4342048,
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_mspi_device_configure_424120.c",
+        "size": 4188,
+        "sha256": "6ed08297ec6283b5ae48de7c2f1ab17c6ca8b2369e5f724ebed60f6fac18d262",
+        "license": "BSD-3-Clause",
+        "origin": "structured AmbiqSuite 5.1.0-equivalent G2 MSPI device-mode configuration",
+        "evidence": "docs/research/g2-bootloader-mspi-device-configure-424120-42488e-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fno-jump-tables",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 284,
+        "sha256": "960b3d30653a94dd8b0c9037d9e0cdd53991d88c06a9d27cecf6576a0bbce97f",
+        "unrelocated_sha256": "960b3d30653a94dd8b0c9037d9e0cdd53991d88c06a9d27cecf6576a0bbce97f"
+      },
+      "stock": {
+        "size": 284,
+        "sha256": "b47259eba440c6e177c86466f9b4606f10ff4eb85f12a3dbfb29b9303d0f37b6"
+      },
+      "relocations": [],
+      "allow_discarded_alloc_sections": true,
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_mspi_piomixed_configure_42488e",
+      "runtime_address": 4343950,
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_mspi_piomixed_configure_42488e.c",
+        "size": 1939,
+        "sha256": "90f8f61f648b6086e14faf7a2fdfe68e1c11615bc4df1d4ea4c113c46e6b4f29",
+        "license": "BSD-3-Clause",
+        "origin": "structured AmbiqSuite 5.1.0-equivalent G2 MSPI PIO-mixed configuration",
+        "evidence": "docs/research/g2-bootloader-mspi-piomixed-configure-42488e-424976-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fno-jump-tables",
+          "-mpure-code",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 84,
+        "sha256": "6269fba16f490f502f6d00c87e76b4fa9521b9d9e97fbf6f7a04dd02ec9f6044",
+        "unrelocated_sha256": "6269fba16f490f502f6d00c87e76b4fa9521b9d9e97fbf6f7a04dd02ec9f6044"
+      },
+      "stock": {
+        "size": 84,
+        "sha256": "32c77f9450e13e82e09fd35d65f8f6d3271cf9b15b32fa29cccff5f87b24fa39"
+      },
+      "relocations": [],
+      "allow_discarded_alloc_sections": true,
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_mspi_initialize_424a5a",
+      "runtime_address": 4344410,
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_mspi_initialize_424a5a.c",
+        "size": 2665,
+        "sha256": "81f8c83c3457fd3985c9a09fb2340e27ce6ec082af15be44c4e519fe174468be",
+        "license": "BSD-3-Clause",
+        "origin": "structured AmbiqSuite 5.1.0-equivalent G2 MSPI state initializer",
+        "evidence": "docs/research/g2-bootloader-mspi-initialize-424a5a-424aea-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fno-jump-tables",
+          "-fno-vectorize",
+          "-fno-slp-vectorize",
+          "-mpure-code",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 88,
+        "sha256": "9476ac1668a350be0af32604c47a50476782fa21eaa7001648928feed497ef9c",
+        "unrelocated_sha256": "9476ac1668a350be0af32604c47a50476782fa21eaa7001648928feed497ef9c"
+      },
+      "stock": {
+        "size": 88,
+        "sha256": "b2488af30d9db25e8684e95664a7dfc9b46e0ea35cc8e5e328809f292aae9e48"
+      },
+      "relocations": [],
+      "allow_discarded_alloc_sections": true,
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_mspi_configure_424af0",
+      "runtime_address": 4344560,
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_mspi_configure_424af0.c",
+        "size": 3980,
+        "sha256": "f05aebfb3914e67a37a692216df76b57842a49e2851dfdac12cefa1c66c827ec",
+        "license": "BSD-3-Clause",
+        "origin": "structured AmbiqSuite 5.1.0-equivalent G2 MSPI controller configuration",
+        "evidence": "docs/research/g2-bootloader-mspi-configure-424af0-424bd4-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fno-jump-tables",
+          "-fno-vectorize",
+          "-fno-slp-vectorize",
+          "-mpure-code",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 152,
+        "sha256": "f48e9bead432163e13d495026fb798ea87c640638ea6ec79bfa179a3d766bad1",
+        "unrelocated_sha256": "f48e9bead432163e13d495026fb798ea87c640638ea6ec79bfa179a3d766bad1"
+      },
+      "stock": {
+        "size": 152,
+        "sha256": "2b81ab47153b316f2a0d1803cdf2a36eda6c7d4aa57125c878f6d8d032836862"
+      },
+      "relocations": [],
+      "allow_discarded_alloc_sections": true,
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_mspi_device_configure_public_424be4",
+      "runtime_address": 4344804,
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_mspi_device_configure_public_424be4.c",
+        "size": 9044,
+        "sha256": "61d15896c3ab37265ba83b1de3b1312a7e7dd58ca847f7f991e840ebdd6f89c0",
+        "license": "BSD-3-Clause",
+        "origin": "structured AmbiqSuite 5.1.0-equivalent G2 public MSPI device configuration",
+        "evidence": "docs/research/g2-bootloader-mspi-device-configure-public-424be4-425066-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55", "-mthumb", "-Oz", "-ffreestanding",
+          "-fno-builtin", "-ffunction-sections", "-fdata-sections",
+          "-fno-unwind-tables", "-fno-asynchronous-unwind-tables",
+          "-fno-jump-tables", "-fno-vectorize", "-fno-slp-vectorize",
+          "-mpure-code", "-Wall", "-Wextra", "-Werror", "-fno-ident"
+        ]
+      },
+      "strict_relocation_contract": true,
+      "expected": {
+        "size": 672,
+        "sha256": "344f6705aac2638cd47e64b83a76058b16f00dc9640ccb6edd9ea9d52072cf56",
+        "unrelocated_sha256": "7dcafb51bf0566d580cd6de6f1d90e473d78da82db97bd6e12f15be0da2d9658"
+      },
+      "stock": {
+        "size": 672,
+        "sha256": "6bab21c83cc97181377b3cdc7a318e3a959326eb97946eae14e0278571365a94"
+      },
+      "relocations": [
+        {"offset": 74, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_mspi_clkgen_ctrl_4249a0", "symbol_type": "STT_NOTYPE", "target_address": 4344224},
+        {"offset": 164, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_clock_release_422364", "symbol_type": "STT_NOTYPE", "target_address": 4334436},
+        {"offset": 174, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_clock_request_4222f0", "symbol_type": "STT_NOTYPE", "target_address": 4334320},
+        {"offset": 210, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_mspi_clkgen_ctrl_4249a0", "symbol_type": "STT_NOTYPE", "target_address": 4344224},
+        {"offset": 648, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_mspi_device_configure_424120", "symbol_type": "STT_NOTYPE", "target_address": 4342048},
+        {"offset": 666, "type": "R_ARM_THM_CALL", "symbol": "open_cfw_bootloader_mspi_xip_off_delay_424a18", "symbol_type": "STT_NOTYPE", "target_address": 4344344}
+      ],
+      "allow_discarded_alloc_sections": true,
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8"
+        }
+      }
+    },
+    {
+      "function": "open_cfw_bootloader_mspi_enable_425066",
+      "runtime_address": 4345958,
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_mspi_lifecycle_425066.c",
+        "size": 6019,
+        "sha256": "7d5deeda0f882a5cf824f94d0e91be41e6c5bd0f7b645c081e8b7d08041e8807",
+        "license": "BSD-3-Clause",
+        "origin": "structured AmbiqSuite 5.1.0-equivalent G2 MSPI enable service",
+        "evidence": "docs/research/g2-bootloader-mspi-lifecycle-425066-4251a4-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi", "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": ["-mcpu=cortex-m55","-mthumb","-Oz","-ffreestanding","-fno-builtin","-ffunction-sections","-fdata-sections","-fno-unwind-tables","-fno-asynchronous-unwind-tables","-fno-jump-tables","-fno-vectorize","-fno-slp-vectorize","-mpure-code","-Wall","-Wextra","-Werror","-fno-ident"]
+      },
+      "strict_relocation_contract": true,
+      "expected": {"size":128,"sha256":"c876636f4730b39f87086fb8139b51776718a9d893416679d4ec5b5f479495c4","unrelocated_sha256":"48e3ad6232bc4611f275c1b2e02f56fcccb5afa95a049eb2d6f6a85446ceee48"},
+      "stock": {"size":128,"sha256":"0549294ff15355c56fef6dfa0ad086c96f46a26045e92ce4168008983082f13d"},
+      "relocations": [{"offset":46,"type":"R_ARM_THM_CALL","symbol":"open_cfw_bootloader_mspi_cq_init_423f28","symbol_type":"STT_NOTYPE","target_address":4341544}],
+      "allow_discarded_alloc_sections": true,
+      "toolchain_profiles": {"linux-clang":{"reviewed_version_prefix":"Homebrew clang version 22.1.8"}}
+    },
+    {
+      "function": "open_cfw_bootloader_mspi_disable_4250f0",
+      "runtime_address": 4346096,
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_mspi_lifecycle_425066.c",
+        "size": 6019,
+        "sha256": "7d5deeda0f882a5cf824f94d0e91be41e6c5bd0f7b645c081e8b7d08041e8807",
+        "license": "BSD-3-Clause",
+        "origin": "structured AmbiqSuite 5.1.0-equivalent G2 MSPI disable service",
+        "evidence": "docs/research/g2-bootloader-mspi-lifecycle-425066-4251a4-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi", "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": ["-mcpu=cortex-m55","-mthumb","-Oz","-ffreestanding","-fno-builtin","-ffunction-sections","-fdata-sections","-fno-unwind-tables","-fno-asynchronous-unwind-tables","-fno-jump-tables","-fno-vectorize","-fno-slp-vectorize","-mpure-code","-Wall","-Wextra","-Werror","-fno-ident"]
+      },
+      "strict_relocation_contract": true,
+      "expected": {"size":112,"sha256":"f446afa834abdde425a837d4d7e20dd8fcbd1ec0fd8b0cc6d155a419d86aec49","unrelocated_sha256":"d691afe79b669a61d3d71ea8ca375f48848c99261ac81af229f0849bb5d36a7f"},
+      "stock": {"size":112,"sha256":"18922b0a184b20c27df740fad3ce431257959aa8e78671d0f8777590a58a9f9c"},
+      "relocations": [
+        {"offset":60,"type":"R_ARM_THM_CALL","symbol":"open_cfw_bootloader_mspi_cq_disable_423fac","symbol_type":"STT_NOTYPE","target_address":4341676},
+        {"offset":70,"type":"R_ARM_THM_CALL","symbol":"open_cfw_bootloader_mspi_cq_term_423f54","symbol_type":"STT_NOTYPE","target_address":4341588},
+        {"offset":106,"type":"R_ARM_THM_CALL","symbol":"open_cfw_bootloader_delay_us_41d1c0","symbol_type":"STT_NOTYPE","target_address":4313536}
+      ],
+      "allow_discarded_alloc_sections": true,
+      "toolchain_profiles": {"linux-clang":{"reviewed_version_prefix":"Homebrew clang version 22.1.8"}}
+    },
+    {
+      "function": "open_cfw_bootloader_mspi_deinitialize_42516c",
+      "runtime_address": 4346220,
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_mspi_lifecycle_425066.c",
+        "size": 6019,
+        "sha256": "7d5deeda0f882a5cf824f94d0e91be41e6c5bd0f7b645c081e8b7d08041e8807",
+        "license": "BSD-3-Clause",
+        "origin": "structured AmbiqSuite 5.1.0-equivalent G2 MSPI deinitialize service",
+        "evidence": "docs/research/g2-bootloader-mspi-lifecycle-425066-4251a4-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi", "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": ["-mcpu=cortex-m55","-mthumb","-Oz","-ffreestanding","-fno-builtin","-ffunction-sections","-fdata-sections","-fno-unwind-tables","-fno-asynchronous-unwind-tables","-fno-jump-tables","-fno-vectorize","-fno-slp-vectorize","-mpure-code","-Wall","-Wextra","-Werror","-fno-ident"]
+      },
+      "strict_relocation_contract": true,
+      "expected": {"size":56,"sha256":"2b647746b8f49c15a6b428c66e1e23a77b991bc324f3a94847573d5dc2f833fc","unrelocated_sha256":"efb6f9ca3e303b73d14e3d46abce0f02e36f8748d272a79f94e7029d983805e6"},
+      "stock": {"size":56,"sha256":"17e2e38a57e5a1669a591cf61ad92ff4b5ca8a1747673512410737ac452d689b"},
+      "relocations": [{"offset":30,"type":"R_ARM_THM_CALL","symbol":"open_cfw_bootloader_mspi_disable_4250f0","symbol_type":"STT_FUNC","target_address":4346096}],
+      "allow_discarded_alloc_sections": true,
+      "toolchain_profiles": {"linux-clang":{"reviewed_version_prefix":"Homebrew clang version 22.1.8"}}
     }
   ],
   "cave_leaves": [
@@ -24626,7 +25009,7 @@
     "overlay_size": 15240,
     "overlay_sha256": "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314",
     "component_size": 163840,
-    "component_sha256": "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
+    "component_sha256": "ce19a1a4423dbb5a892d144bf52dac4fdccaac956614775a8b02c685dca7042e"
   },
   "toolchain_profiles": {
     "linux-clang": {
@@ -24635,7 +25018,7 @@
         "overlay_size": 15224,
         "overlay_sha256": "2dad91f7403219c30fee3130d62833c98561c8fb56387960f0654723ceed67ca",
         "component_size": 163824,
-        "component_sha256": "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635"
+        "component_sha256": "a5f9492da37c7f96ad2998a281f83c60e8308f40f42970386260524626a0d2aa"
       }
     }
   },

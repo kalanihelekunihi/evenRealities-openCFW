@@ -34,12 +34,15 @@ residual census.
 
 ## Composed inputs
 
-The ledger composes nine independent evidence lanes:
+The ledger composes ten independent evidence lanes:
 
 1. The existing residual-provenance map supplies the closed 175-span / 33,658-byte
    accounting scope and the 130-span proprietary controller/vendor class.
 2. The MetaWare candidate promotes its two authenticated islands / 980 bytes
-   to `concrete_source_available`.
+   to `concrete_source_available`. A checked GCC 16.1.1 ARCv2-EM build receipt
+   covers all eight maintained candidate translation units with zero undefined
+   symbols and zero forbidden runtime imports. The proof is non-additive and
+   remains explicitly separate from production routing.
 3. The exhaustive residual-tail candidate promotes 21 spans / 260 bytes to
    concrete source and assigns 15 spans / 630 bytes to typed unsupported
    external boundaries.
@@ -48,13 +51,18 @@ The ledger composes nine independent evidence lanes:
    application behavior is not, so the ledger does not overstate source
    completeness.
 5. The QP/C audit authenticates the nine-entry hook table, release lineage,
-   and complete QP/C cluster partition.
+   and complete QP/C cluster partition. A reviewed GCC 16.1.1 ARCv2-EM build
+   now compiles the eight portable units plus two OpenCFW port units and links
+   a deterministic relocatable component with zero undefined symbols and zero
+   forbidden runtime imports. This closes the compiler and software-link gap,
+   but not install placement, redirect ownership, or production routing.
 6. The named QP/C hook-provider audit authenticates `PalUartResume` and
    `wsfOsRunIdleTasks` as exact identities in the pinned EM/Packetcraft
-   controller/PML archives. It narrows two existing typed boundaries without
-   promoting their 24 bytes to concrete source: exact source redistribution
-   authority is unresolved. The second idle edge is identified as
-   `VoltMon_DoMeasurement(0)`, and the final edge is an exact no-op chain.
+   controller/PML archives. The software-only WSF routine now has reviewed MIT
+   source for its three-callback layout and one-bit activity reduction. The
+   hook's retained 24-byte shell remains a typed boundary because
+   `PalUartResume` and `VoltMon_DoMeasurement(0)` depend on unavailable physical
+   platform evidence; the final edge is an exact no-op chain.
 7. The slave-connection boundary converts the largest remaining 3,126-byte
    controller residual from an undifferentiated unavailable retention to one
    typed fail-closed boundary with six authenticated entry identities. This is
@@ -68,6 +76,12 @@ The ledger composes nine independent evidence lanes:
    residual into three exact prologue/xref-delimited entries. Archive names are
    recorded only as probable correlations; address-derived IDs remain the
    enforceable contract until stronger source evidence exists.
+10. The deployment-package audit authenticates the four-record stock container,
+    124-byte metadata, 211,824-byte payload, 29 erase-sector IDs, canonical
+    offsets, nonoverlapping target intervals, and zero alignment padding. The
+    MIT parser/builder round-trips the 211,948-byte package byte-for-byte. This
+    closes container generation only: source records, candidate/QP/C placement,
+    production routing, and controller replacement remain open.
 
 The QP/C audit is supporting rather than additive. Its 22 portable functions
 and 2,450 bytes overlap a separately defined application cluster, not the
@@ -89,11 +103,15 @@ conditions changes:
 - an overlay range or hash mismatch;
 - a missing or extra overlay span;
 - QP/C cluster completeness or nine-entry hook table;
-- either named provider's unique archive/object/address/normalized-body match;
+- each named provider's unique archive/object/address/normalized-body match;
+- the WSF clean-room source identity, three-entry capacity, state offsets, and
+  ARCv2-EM compile receipt;
 - either named hook span's exact interval or stock hash;
 - either controller boundary's segment/function/NOP tiling or stock hash;
 - readiness counts `23 + 25 + 127`; or
 - readiness bytes `1,240 + 8,348 + 24,070`.
+- the exact EM9305 package receipt, four-record/29-sector shape, byte-exact
+  rebuild, and fail-closed source-image/production/hardware policy.
 
 Tests explicitly delete one tail decision, corrupt one MetaWare hash, corrupt
 a named hook-provider hash, and mark the QP/C cluster incomplete. Each
@@ -103,12 +121,16 @@ mutation fails before the gate can claim zero unclassified bytes.
 
 ```sh
 python3 tools/analyze_em9305_source_readiness.py --json
+make em9305-arc-candidates
+make em9305-qpc-component
+make em9305-record-package
 python3 tools/analyze_em9305_qpc_hook_provider_candidate.py --json
 python3 tools/analyze_em9305_slave_connection_boundary.py --json
 python3 tools/analyze_em9305_pawr_boundary.py --json
 python3 tools/analyze_em9305_master_connection_boundary.py --json
 python3 -m unittest -v tests.test_em9305_source_readiness
 python3 -m unittest -v tests.test_em9305_qpc_hook_provider_candidate
+python3 -m unittest -v tests.test_em9305_wsf_idle_tasks
 python3 -m unittest -v tests.test_em9305_slave_connection_boundary
 python3 -m unittest -v tests.test_em9305_pawr_boundary
 python3 -m unittest -v tests.test_em9305_master_connection_boundary
@@ -124,18 +146,21 @@ opacity remains material:
 
 1. Provide independently derived behavior for the 25 typed boundary spans,
    including the first-party startup/MyApp paths and tail provider islands.
-   For the resume/idle hook pair, the remaining work is exact source,
-   redistribution authority, and ABI/state contracts for the three named
-   archive providers.
+   For the resume/idle hook pair, the software-only WSF provider is implemented;
+   the remaining provider work is hardware-specific UART resume and voltage
+   measurement plus exact placement and ABI integration.
 2. Replace or lawfully source the 24,070 unavailable controller/vendor bytes,
    plus the 6,494 typed controller-cluster bytes whose exact behavior is still
    unavailable.
-3. Bind the 1,240 concrete-source bytes to exact ARC ABI, RAM, MMIO, and
-   interior-entry contracts.
+3. Bind the 1,240 target-compilable concrete-source bytes to exact ARC ABI,
+   RAM, MMIO, and interior-entry contracts.
 4. Complete link placement, callback registration, and startup ordering.
-5. Keep the production gate blocked until every residual span is concrete
+5. Supply all four source-built record payloads to the deterministic package
+   wrapper; the wrapper cannot turn retained stock records into source.
+6. Keep the production gate blocked until every residual span is concrete
    source or an intentionally excluded optional feature with a reviewed
    public contract.
 
-This ledger is isolated evidence tooling. It changes no Makefile, overlay,
-package manifest, production ledger, or firmware image.
+This ledger is evidence tooling and records the non-production ARC component
+receipt. It changes no overlay, package manifest, production route, or device
+firmware image.

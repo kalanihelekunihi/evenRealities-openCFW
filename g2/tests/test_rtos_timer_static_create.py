@@ -198,11 +198,11 @@ class RtosTimerStaticCreateTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "9b362834bf089d62fa9a0d634751d8f37c779ce1f57fccb30ad0de1de0fb77f4",
+            "29bb97daab6e1a055787f62b860a9052626a0605591077df3dc42f8d3b6cdc0d",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "60f18bb80d54df7e8dd90df8d6e805c791747268f2d4436a21181ec86c891a36",
+            "902b38208d0efe84fd579c1b245b0f6bf2feac13d32db3a9896f1a4853a2b37c",
         )
 
 

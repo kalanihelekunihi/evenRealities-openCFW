@@ -120,11 +120,11 @@ class EfsCrc32cMsbTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "b88d5ca2f7825bb8d5dc180840b4c81af96033b66d912f0cf89ab33a2111c4c6",
+            "6275934dc59d8fc11acf36234960eb27f87be272ead3f6ac48ad66a85e9f22e3",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "4dd9dc8e008331a21a2f41792fe9953336e8882403dfe8a2e6ed2bb9dd29c8ee",
+            "f22b61ea8ac6d2662ee4b676a987bbbb985d1bb1f12baca727ef702198db171a",
         )
 
 

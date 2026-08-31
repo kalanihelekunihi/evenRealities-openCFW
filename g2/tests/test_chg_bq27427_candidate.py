@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "components/apollo_main/core_overlay/chg_bq27427.c"
 FIXTURE = ROOT / "tests/fixtures"
-SOURCE_SHA256 = "c435642a5f377b8265d9311c1e73f69a5b9ffc1f47a1e0d0e68e47179bbd34ee"
+SOURCE_SHA256 = "2e8389a849a07af5a1d59467da0a3fa0a30dcb29c63be736a4f1db6a78412dc9"
 EXPECTED_SYMBOLS = {
     "open_cfw_bq27427_apply_settings",
     "open_cfw_bq27427_change_chemistry_profile",

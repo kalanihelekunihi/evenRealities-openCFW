@@ -451,11 +451,11 @@ class MramClearRecordByConnectionTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "413a5788e04dc584f859f36b408053eaafed505173843efdac59193da65dcd86",
+            "87279db964555d49a02f0dc20e51caad58f387206f514752712d21482a2e5d7b",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "f89ef24388b8df7efa8bb6191642b84e2bd5c79c7e76a6000cdd98acfb92473f",
+            "a48fdc6672d22409143dd97578f7e77f02b3f618c45532bcc8c42cdb4a2a489f",
         )
 
 

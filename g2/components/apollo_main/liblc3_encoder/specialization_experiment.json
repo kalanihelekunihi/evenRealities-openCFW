@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "name": "liblc3_encoder_specialization_experiment",
+  "target": "apollo_main",
+  "mode": "build-only-unplaced-specialization-experiment",
+  "baseline_component": {
+    "path": "components/apollo_main/liblc3_encoder/component.json",
+    "sha256": "b85cbcbcb7f065ad702246e5e605a2c1619d1b33677851ab0236bdcf8b85ecc2",
+    "profile": "apple-clang",
+    "aligned_span": 128752
+  },
+  "authenticated_placement": {
+    "current_core_end_exclusive": 8309316,
+    "protected_update_record_start": 8380416,
+    "headroom": 71100
+  },
+  "immutable_table_policy": {
+    "enabled_variant": "non_hr_only",
+    "builder": {
+      "path": "components/apollo_main/liblc3_encoder/build_specialization_experiment.py",
+      "sha256": "5f28cc3a5cc01ac6f4399104d35d5d7caac0e230b64f0d6e465c6594dbd7f869"
+    },
+    "linker_script": {
+      "path": "components/apollo_main/liblc3_encoder/data_policy_linker.ld",
+      "sha256": "281fb21953edffd0a32c8af4c75be72b5355082ebea58b779e7bda533827ab66"
+    },
+    "production_module": {
+      "path": "components/apollo_main/liblc3_encoder/specialized_xip.py",
+      "sha256": "5fdae5e9c4fa6911f8c1de64de9ae20d220551d41ac74549d4e230ca36307a9d"
+    },
+    "reviewed_objcopy_version_prefix": "llvm-objcopy, compatible with GNU objcopy",
+    "qualification_finalizer": {
+      "synthetic": true,
+      "synthetic_text_start": 6291456,
+      "synthetic_runtime_bindings": {
+        "__aeabi_memclr": 5242881,
+        "__aeabi_memclr4": 5243137,
+        "fabsf": 5243393,
+        "floorf": 5243649,
+        "fmaxf": 5243905,
+        "fminf": 5244161,
+        "memcpy": 5244417,
+        "memmove": 5244673,
+        "memset": 5244929,
+        "sqrtf": 5245185,
+        "truncf": 5245441
+      },
+      "runtime_bindings_authenticated_for_stock": false,
+      "production_placement": false
+    }
+  },
+  "service_audio_configuration": {
+    "contexts": [
+      537946748,
+      537949376,
+      537952004,
+      537954632
+    ],
+    "slot_bytes": 2628,
+    "header_bytes": 28,
+    "encoder_storage_bytes": 2600,
+    "pointer_evidence": {
+      "table_address": 5830784,
+      "table_size": 16,
+      "table_sha256": "fffba463d4f37a1a2f9f2afa67dedf142206dbf5459bf50f7923918aad8c6410",
+      "fourth_context_literal_cells": [
+        5568928,
+        5747684
+      ],
+      "fourth_context_literal_sha256": "071bc54c2e6b3852d6f8f6f80fa3e7a74f1c5189d9452bc0ca3ac25bac3820f6",
+      "next_allocation_literal_cell": 5809064,
+      "next_allocation_start": 537957260
+    },
+    "decompilation_evidence": {
+      "path": "research/corpus/apollo-main/ghidra/decomp/bundles/apollo-decomp-11.c",
+      "start_marker": "/* FUN 0x0057a926",
+      "end_marker": "/* FUN 0x0057ab78",
+      "slice_bytes": 3974,
+      "slice_sha256": "df80e1508e75c4ec16712ab3c757b573d16b139eb1a7bc91a8035be1437d7139"
+    },
+    "field_offsets": {
+      "pcm_format": 0,
+      "frame_us": 4,
+      "sample_rate_hz": 8,
+      "channels_or_stride": 12,
+      "channel_offset": 16,
+      "bitrate_bps": 20,
+      "encoder": 24,
+      "storage": 28
+    },
+    "known": {
+      "hrmode": false,
+      "pcm_sample_rate_hz_argument": 0,
+      "pcm_sample_rate_normalizes_to_encoded_rate": true
+    },
+    "runtime_unproven": [
+      "pcm_format",
+      "frame_us",
+      "sample_rate_hz",
+      "channels_or_stride",
+      "channel_offset",
+      "bitrate_bps"
+    ],
+    "initialization": "runtime-provided; statically unproven"
+  },
+  "variants": {
+    "non_hr_only": {
+      "compile_defines": [
+        "-DLC3_PLUS_HR=0"
+      ],
+      "evidence_admitted": true,
+      "behavior_contract": "Preserve every non-HR duration, 8/16/24/32/48 kHz rate, bitrate, stride, and all four PCM formats accepted by the baseline provider.",
+      "expected": {
+        "linked_object": {
+          "size": 116268,
+          "sha256": "bc548b0578f87d43c38def5fb727533a73d7e2f31105e5e8bd0d0a1fef336b7d"
+        },
+        "artifacts": {
+          "text": {
+            "size": 40880,
+            "sha256": "157bf32443aef805d98c730b8ff2cff59cef773c53dc54e2146e42718b4f1c99"
+          },
+          "rodata": {
+            "size": 60316,
+            "sha256": "9ad7f0d2de1c6468fcd36dc447699f4df7fd86988e87e4df4200f893d5879f59"
+          },
+          "table_rodata": {
+            "size": 404,
+            "sha256": "c4c45a0ea2a6895b34d21adc0a20928de754948d66e8270883ddb3a9a5e8372a"
+          }
+        },
+        "roots": {
+          "open_cfw_liblc3_encoder_provider_close": {
+            "offset": 36732,
+            "size": 14
+          },
+          "open_cfw_liblc3_encoder_provider_encode": {
+            "offset": 36748,
+            "size": 474
+          },
+          "open_cfw_liblc3_encoder_provider_plan": {
+            "offset": 37224,
+            "size": 234
+          },
+          "open_cfw_liblc3_encoder_provider_setup": {
+            "offset": 37588,
+            "size": 256
+          }
+        },
+        "retained_imports": [
+          "__aeabi_memclr",
+          "__aeabi_memclr4",
+          "fabsf",
+          "floorf",
+          "fmaxf",
+          "fminf",
+          "memcpy",
+          "memmove",
+          "memset",
+          "sqrtf",
+          "truncf"
+        ],
+        "global_function_count": 34,
+        "relocations": {
+          "total": 484,
+          "by_type": {
+            "R_ARM_ABS32": 152,
+            "R_ARM_THM_CALL": 187,
+            "R_ARM_THM_JUMP24": 5,
+            "R_ARM_THM_MOVT_ABS": 70,
+            "R_ARM_THM_MOVW_ABS_NC": 70
+          },
+          "by_section": {
+            ".lc3_table_rodata": 78,
+            ".rodata": 74,
+            ".text": 332
+          },
+          "external_by_symbol": {
+            "__aeabi_memclr": 1,
+            "__aeabi_memclr4": 1,
+            "fabsf": 38,
+            "floorf": 8,
+            "fmaxf": 42,
+            "fminf": 1,
+            "memcpy": 4,
+            "memmove": 4,
+            "memset": 1,
+            "sqrtf": 10,
+            "truncf": 1
+          },
+          "records_sha256": "67c667b4c13a3fe1d1bd7c9342cd0cfce80f07989344d1444affde97b994d43e"
+        }
+      },
+      "expected_table_policy": {
+        "classification": "logically-immutable-relocated-pointer-tables",
+        "conversion": "authenticated-post-link-SHF_WRITE-clear",
+        "pre_policy_object": {
+          "size": 116560,
+          "sha256": "ac1f8d7e8e0f81e12b6b47b05dd6659d468a41181ab926c239237449a7326767"
+        },
+        "post_policy_object": {
+          "size": 116268,
+          "sha256": "bc548b0578f87d43c38def5fb727533a73d7e2f31105e5e8bd0d0a1fef336b7d"
+        },
+        "pre_policy_allocated_writable_sections": [
+          ".lc3_table_rodata"
+        ],
+        "post_policy_allocated_writable_sections": [],
+        "runtime_copy_bytes": 0,
+        "runtime_writable_bytes": 0,
+        "table_symbols": {
+          "lc3_band_lim": {
+            "offset": 0,
+            "size": 112
+          },
+          "lc3_fft_twiddles_bf2": {
+            "offset": 112,
+            "size": 60
+          },
+          "lc3_fft_twiddles_bf3": {
+            "offset": 172,
+            "size": 8
+          },
+          "lc3_mdct_rot": {
+            "offset": 180,
+            "size": 112
+          },
+          "lc3_mdct_win": {
+            "offset": 292,
+            "size": 112
+          }
+        },
+        "relocations": {
+          "total": 484,
+          "by_type": {
+            "R_ARM_ABS32": 152,
+            "R_ARM_THM_CALL": 187,
+            "R_ARM_THM_JUMP24": 5,
+            "R_ARM_THM_MOVT_ABS": 70,
+            "R_ARM_THM_MOVW_ABS_NC": 70
+          },
+          "by_section": {
+            ".lc3_table_rodata": 78,
+            ".rodata": 74,
+            ".text": 332
+          },
+          "external_by_symbol": {
+            "__aeabi_memclr": 1,
+            "__aeabi_memclr4": 1,
+            "fabsf": 38,
+            "floorf": 8,
+            "fmaxf": 42,
+            "fminf": 1,
+            "memcpy": 4,
+            "memmove": 4,
+            "memset": 1,
+            "sqrtf": 10,
+            "truncf": 1
+          },
+          "records_sha256": "67c667b4c13a3fe1d1bd7c9342cd0cfce80f07989344d1444affde97b994d43e",
+          "table_initializers": {
+            "count": 78,
+            "type": "R_ARM_ABS32",
+            "target_section": ".rodata",
+            "records_sha256": "700c85d030e454f9516441044bf163afe5f9838ab8fa642cd1b20295e29179d4"
+          },
+          "table_code_references": {
+            "count": 12,
+            "by_type": {
+              "R_ARM_THM_MOVT_ABS": 6,
+              "R_ARM_THM_MOVW_ABS_NC": 6
+            },
+            "records_sha256": "e371bc2f714d92af189a81b6f6a649b4ceae189494165744feafa14c8033b330"
+          }
+        }
+      },
+      "expected_qualification_finalization": {
+        "mode": "synthetic-address-finalizer-qualification",
+        "layout": {
+          "text": {
+            "start": 6291456,
+            "end_exclusive": 6332336,
+            "size": 40880,
+            "alignment": 16
+          },
+          "rodata": {
+            "start": 6332336,
+            "end_exclusive": 6392652,
+            "size": 60316,
+            "alignment": 16
+          },
+          "table_rodata": {
+            "start": 6392656,
+            "end_exclusive": 6393060,
+            "size": 404,
+            "alignment": 8
+          },
+          "span": 101604,
+          "synthetic": true,
+          "production_placement": false
+        },
+        "runtime_bindings": {
+          "__aeabi_memclr": 5242881,
+          "__aeabi_memclr4": 5243137,
+          "fabsf": 5243393,
+          "floorf": 5243649,
+          "fmaxf": 5243905,
+          "fminf": 5244161,
+          "memcpy": 5244417,
+          "memmove": 5244673,
+          "memset": 5244929,
+          "sqrtf": 5245185,
+          "truncf": 5245441
+        },
+        "runtime_bindings_authenticated_for_stock": false,
+        "production_placement": false,
+        "service_audio_routed": false,
+        "firmware_image_emitted": false,
+        "final_elf": {
+          "size": 177340,
+          "sha256": "1a55458f8ed490070d53d24f0f4b8e6a91574fb91600f4e1a9ed89ae95250e37"
+        },
+        "xip_artifacts": {
+          "text": {
+            "size": 40880,
+            "sha256": "4e615d6b8135601d018aa7049fbce54c3e3cd7316d669f2f8d11964f7d85a3de"
+          },
+          "rodata": {
+            "size": 60316,
+            "sha256": "c32eaf770bd02ae87da71270a61ce33f7f5805f2b8035f715937e2c9827e083a"
+          },
+          "table_rodata": {
+            "size": 404,
+            "sha256": "7a45677ec32a00f9e572fa1da79b45b2fd00933f1228f1e9252709b3c0e78c89"
+          }
+        },
+        "relocation_application": {
+          "input_relocations": 484,
+          "input_table_initializers": 78,
+          "input_table_code_references": 12,
+          "output_relocations": 0,
+          "all_input_relocations_applied": true,
+          "table_initializers_verified_word_for_word": true,
+          "xip_emission_after_validation": true
+        }
+      }
+    },
+    "standard_duration_only_counterfactual": {
+      "compile_defines": [
+        "-DLC3_PLUS_HR=0",
+        "-DLC3_PLUS=0"
+      ],
+      "evidence_admitted": false,
+      "rejection": "The runtime frame_us fields are unproven; disabling LC3_PLUS removes valid 2.5 ms and 5 ms behavior.",
+      "expected": {
+        "linked_object": {
+          "size": 105384,
+          "sha256": "cd0c0e290ffe3abb6217d1a1d9f93f6f5aadc2f198d22a34a904ab127548145e"
+        },
+        "artifacts": {
+          "text": {
+            "size": 40768,
+            "sha256": "8ce2aa01529ab2232ccfd309e53173e6a4c7aff9edf18c973e2792ded64343dc"
+          },
+          "rodata": {
+            "size": 50988,
+            "sha256": "677ed7f9e254f7e0e12a8721cb26cd8ddfe6a3bc9479983b1746ad30793253ab"
+          },
+          "data": {
+            "size": 404,
+            "sha256": "42b0b0ee173ecc57f40ce377eaf9a7dd7e7aef43eccb618887aa326c65a8e069"
+          }
+        },
+        "roots": {
+          "open_cfw_liblc3_encoder_provider_close": {
+            "offset": 36620,
+            "size": 14
+          },
+          "open_cfw_liblc3_encoder_provider_encode": {
+            "offset": 36636,
+            "size": 474
+          },
+          "open_cfw_liblc3_encoder_provider_plan": {
+            "offset": 37112,
+            "size": 234
+          },
+          "open_cfw_liblc3_encoder_provider_setup": {
+            "offset": 37476,
+            "size": 256
+          }
+        },
+        "retained_imports": [
+          "__aeabi_memclr",
+          "__aeabi_memclr4",
+          "fabsf",
+          "floorf",
+          "fmaxf",
+          "fminf",
+          "memcpy",
+          "memmove",
+          "memset",
+          "sqrtf",
+          "truncf"
+        ],
+        "global_function_count": 34,
+        "relocations": {
+          "total": 443,
+          "by_type": {
+            "R_ARM_ABS32": 111,
+            "R_ARM_THM_CALL": 187,
+            "R_ARM_THM_JUMP24": 5,
+            "R_ARM_THM_MOVT_ABS": 70,
+            "R_ARM_THM_MOVW_ABS_NC": 70
+          },
+          "by_section": {
+            ".data": 55,
+            ".rodata": 56,
+            ".text": 332
+          },
+          "external_by_symbol": {
+            "__aeabi_memclr": 1,
+            "__aeabi_memclr4": 1,
+            "fabsf": 38,
+            "floorf": 8,
+            "fmaxf": 42,
+            "fminf": 1,
+            "memcpy": 4,
+            "memmove": 4,
+            "memset": 1,
+            "sqrtf": 10,
+            "truncf": 1
+          },
+          "records_sha256": "b3212738d64fbea286479f5c8fe55be546ffbd3102d8cf82b9f5d5971221b05b"
+        }
+      }
+    }
+  },
+  "dimensions": {
+    "high_resolution_sample_rates": "safely removed because every authenticated service/provider route fixes hrmode=false",
+    "non_hr_sample_rates": "not specialized because runtime sample_rate_hz is unproven",
+    "frame_durations": "not specialized because runtime frame_us is unproven",
+    "bitrate": "not specialized because runtime bitrate_bps is unproven and encoder tables are shared",
+    "pcm_formats": "not specialized because runtime pcm_format is unproven and all four loaders remain reachable"
+  },
+  "routing": {
+    "placement_assigned": false,
+    "service_audio_routed": false,
+    "firmware_image_emitted": false,
+    "hardware_operations": false
+  }
+}

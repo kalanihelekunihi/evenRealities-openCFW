@@ -83,9 +83,11 @@ class Em9305QpcHookProviderCandidateTests(unittest.TestCase):
         if hasattr(cls, "temporary"):
             cls.temporary.cleanup()
 
-    def test_audit_authenticates_named_providers_without_admitting_source(self) -> None:
+    def test_audit_admits_wsf_source_and_keeps_hardware_providers_blocked(self) -> None:
         result = self.analyzer.run_audit()
-        self.assertEqual(result["status"], "candidate-qualified-named-fail-closed")
+        self.assertEqual(
+            result["status"], "candidate-qualified-one-software-two-hardware",
+        )
         self.assertTrue(result["read_only"])
         self.assertFalse(result["hardware_operations"])
         self.assertEqual(result["license"], "MIT")
@@ -93,10 +95,19 @@ class Em9305QpcHookProviderCandidateTests(unittest.TestCase):
             set(result["providers"]),
             {"PalUartResume", "wsfOsRunIdleTasks", "VoltMon_DoMeasurement"},
         )
-        self.assertTrue(all(
-            item["redistribution_authority"] == "unresolved"
-            for item in result["providers"].values()
-        ))
+        self.assertEqual(
+            result["providers"]["wsfOsRunIdleTasks"]["redistribution_authority"],
+            "clean-room-mit",
+        )
+        self.assertTrue(
+            result["providers"]["wsfOsRunIdleTasks"]["clean_room_source_available"],
+        )
+        self.assertEqual(
+            result["hardware_dependent_providers"],
+            ["PalUartResume", "VoltMon_DoMeasurement"],
+        )
+        self.assertEqual(result["software_provider_gaps"], [])
+        self.assertEqual(result["wsf_idle_semantics"]["callback_capacity"], 3)
         self.assertEqual(result["unresolved_providers"], [])
         self.assertEqual(
             {item["decision"] for item in result["decisions"].values()},
@@ -106,7 +117,7 @@ class Em9305QpcHookProviderCandidateTests(unittest.TestCase):
             result["semantic_noop"]["behavior"], "return_without_state_change",
         )
         self.assertFalse(result["candidate"]["production_routed"])
-        self.assertEqual(result["hardware_validation"], "deferred by project direction")
+        self.assertEqual(result["hardware_validation"], "blocked by unavailable physical evidence")
 
     def test_resume_boundary_fails_closed_and_normalizes_provider_status(self) -> None:
         self.assertEqual(self.resume(None), MISSING)
@@ -152,7 +163,7 @@ class Em9305QpcHookProviderCandidateTests(unittest.TestCase):
         self.assertEqual(self.idle(ctypes.byref(ports)), OK)
         self.assertEqual(events, [("wsf", 0x55), ("voltmon", 0)])
 
-    def test_idle_boundary_stops_at_first_failed_provider(self) -> None:
+    def test_idle_boundary_ignores_provider_returns_like_stock_hook(self) -> None:
         events: list[str] = []
 
         @STEP
@@ -166,8 +177,8 @@ class Em9305QpcHookProviderCandidateTests(unittest.TestCase):
             return 0
 
         ports = Ports(None, first, first, final)
-        self.assertEqual(self.idle(ctypes.byref(ports)), FAILED)
-        self.assertEqual(events, ["first"])
+        self.assertEqual(self.idle(ctypes.byref(ports)), OK)
+        self.assertEqual(events, ["first", "final"])
 
     def test_archive_mapping_drift_fails_closed(self) -> None:
         original = self.analyzer.json.loads
@@ -214,7 +225,9 @@ class Em9305QpcHookProviderCandidateTests(unittest.TestCase):
             env=environment, check=True, capture_output=True, text=True,
         )
         result = json.loads(completed.stdout)
-        self.assertEqual(result["status"], "candidate-qualified-named-fail-closed")
+        self.assertEqual(
+            result["status"], "candidate-qualified-one-software-two-hardware",
+        )
 
 
 if __name__ == "__main__":

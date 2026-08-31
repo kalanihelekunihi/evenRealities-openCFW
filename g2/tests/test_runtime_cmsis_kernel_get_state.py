@@ -82,8 +82,8 @@ class RuntimeCmsisKernelGetStateTests(unittest.TestCase):
         config = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
         manifest = json.loads((ROOT / "manifests/g2-2.2.6.10-core-source.json").read_text())
         leaf = next(item for item in config["relocated_leaves"] if item["function"] == "open_cfw_cmsis_kernel_get_state")
-        self.assertEqual(leaf["expected"]["sha256"], "840508e94f3fa9bf8788d16d77f74568dc3a711a6c25fae4ea5ba328de3140a8")
-        self.assertEqual(leaf["toolchain_profiles"]["linux-clang"]["expected"]["sha256"], "85f05be9048a6829f788327f0dd7b39cef7366cf07c56bac63ed20116b1a5fc2")
+        self.assertEqual(leaf["expected"]["sha256"], "7b4328e12ec4d911c8ae88820c2bf73f661ab233bd144ef57e478037809a7ff7")
+        self.assertEqual(leaf["toolchain_profiles"]["linux-clang"]["expected"]["sha256"], "b0cd0bb92000f35609928d234c561af59ddfee0d4036641e2674a35c93563b2f")
         self.assertEqual(sum(site["target_function"] == leaf["function"] for site in config["patch_sites"]), 1)
         regions = manifest["component_overrides"]["apollo_main"]["regions"]
         self.assertEqual(sum(region["name"] == "apollo_cmsis_kernel_get_state_source_leaf" for region in regions), 1)

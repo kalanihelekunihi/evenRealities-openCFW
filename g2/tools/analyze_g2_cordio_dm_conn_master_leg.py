@@ -36,7 +36,7 @@ CALLERS = {
     "DmConnMasterInit": [0x4B801E],
 }
 PRODUCTION_FUNCTIONS=["open_cfw_cordio_dm_connection_master_legacy_open","open_cfw_cordio_dm_connection_master_legacy_action_open","open_cfw_cordio_dm_connection_master_legacy_initialize"]
-PRODUCTION_LEAVES=[(358320,118,4,"46fc5443dbee05de32ebddaab25a87e3cd82dbd4f45d9d4880716f8587d55e9e"),(358440,20,1,"9767510ca1300835c89614bf670300e58a5bc69ad52443072ff444629539cea6"),(358460,38,2,"f5cc0be544866194a969bf5ed7c703e060086315313beded64a293fe66de7cb3")]
+PRODUCTION_LEAVES=[(289840,118,4,"1d128879d3e35c9379c22e8b42ce5b43d28b099f0c00a5f1ba7c53a04b820132"),(289960,20,1,"9767510ca1300835c89614bf670300e58a5bc69ad52443072ff444629539cea6"),(289980,38,2,"b0189a41477af1879c4a592fa32f35c96fb026791899c4524856d7c03349adb9")]
 
 
 def sha(data: bytes) -> str:

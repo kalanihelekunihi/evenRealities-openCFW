@@ -59,10 +59,10 @@ class PbServiceConversateCandidateTests(unittest.TestCase):
 
     def test_source_is_pinned(self) -> None:
         data = SOURCE.read_bytes()
-        self.assertEqual(len(data), 12137)
+        self.assertEqual(len(data), 12128)
         self.assertEqual(
             hashlib.sha256(data).hexdigest(),
-            "04ded321c0a5f25be9328fbe971512cf16f54657e9e91e6c56605e2d740d579c",
+            "d3fcfef59f619fa1de38c34521db212690b6b5f0e2db142bb35ce1a83d29573f",
         )
 
 

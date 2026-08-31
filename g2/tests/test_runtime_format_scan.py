@@ -25,23 +25,23 @@ PACKAGE = ROOT / "build" / "source" / "package" / "g2-openCFW-s200_v2.2.6.10-cor
 FLASH_PLAN = ROOT / "build" / "source" / "flash-plan.json"
 
 PRODUCTION_LEAVES = {
-    "__aeabi_dadd": (399_292, 18),
-    "__aeabi_dmul": (399_312, 18),
-    "__aeabi_ddiv": (399_332, 18),
-    "__aeabi_ui2d": (399_352, 14),
-    "__aeabi_d2f": (399_368, 14),
-    "open_cfw_runtime_strtod_bounded": (399_388, 2_696),
-    "open_cfw_runtime_strtod": (402_084, 10),
-    "open_cfw_runtime_scanset_match": (402_096, 126),
-    "open_cfw_runtime_vsscanf": (402_224, 2_530),
-    "open_cfw_runtime_sscanf": (404_756, 28),
-    "open_cfw_runtime_iar_scanf_core": (404_784, 12),
+    "__aeabi_dadd": (330_812, 18),
+    "__aeabi_dmul": (330_832, 18),
+    "__aeabi_ddiv": (330_852, 18),
+    "__aeabi_ui2d": (330_872, 14),
+    "__aeabi_d2f": (330_888, 14),
+    "open_cfw_runtime_strtod_bounded": (330_908, 2_696),
+    "open_cfw_runtime_strtod": (333_604, 10),
+    "open_cfw_runtime_scanset_match": (333_616, 126),
+    "open_cfw_runtime_vsscanf": (333_744, 2_530),
+    "open_cfw_runtime_sscanf": (336_276, 28),
+    "open_cfw_runtime_iar_scanf_core": (336_304, 12),
 }
 
-OVERLAY_PIN = (408_458, "22a9e111e2b790489c50b0c631f87150b4d93a82b40539dae1509fd631248c18")
-COMPONENT_PIN = (3_931_854, "8e217faf212b5cf397b19ce0648c665b3f62233be67e418fba35abccc5672763")
-PACKAGE_PIN = (4_710_348, "fab299362ebbeff5b0e31923ea3aae7b6c20a3d87983a20ab964f13540ffbaee")
-FLASH_PLAN_PIN = (4_071_802, "fd12c956d57ff02be8fc82545f2ff189dd8f04babb52cfbe29dd1d84617d983d")
+OVERLAY_PIN = (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae")
+COMPONENT_PIN = (3_885_668, "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5")
+PACKAGE_PIN = (4_678_740, "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a")
+FLASH_PLAN_PIN = (4_595_610, "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127")
 
 
 class RuntimeFormatScanTests(unittest.TestCase):
@@ -179,8 +179,8 @@ class RuntimeFormatScanTests(unittest.TestCase):
             (source["path"], source["size"], source["sha256"]),
             (
                 "components/shared/runtime/runtime_format_scan.c",
-                20_960,
-                "792e95d3ef22974f228a6b81edd9a9f4b92a39ab0dc7e47328394745c7a88765",
+                20_951,
+                "624de0a792b351a87e0e6c3373ea8c8026093850b782e31ece32158f1c164a5f",
             ),
         )
         patch = next(
@@ -230,7 +230,7 @@ class RuntimeFormatScanTests(unittest.TestCase):
         region = next(item for item in main["regions"] if item["name"] == "iar_format_input_source_closure")
         self.assertEqual(
             (region["file_offset"], region["size"], region["target_address"], region["address_status"]),
-            (3_922_688, 5_504, 0x007F5AE0, "source_compiled"),
+            (3_854_208, 5_504, 0x007E4F60, "source_compiled"),
         )
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
@@ -250,7 +250,7 @@ class RuntimeFormatScanTests(unittest.TestCase):
                     "container_only_regions", "protected_regions",
                 )
             ),
-            (5_864, 2, 5, 6),
+            (6_598, 0, 6, 6),
         )
 
 

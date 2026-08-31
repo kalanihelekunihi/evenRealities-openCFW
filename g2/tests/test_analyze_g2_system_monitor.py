@@ -32,7 +32,7 @@ class ZeroAnchorClosureTests(unittest.TestCase):
                 'function': 'open_cfw_system_monitor_common_data_handler',
                 'production_routed': True,
                 'relocations': 43,
-                'source_sha256': '1dbf2c2ecbf62932293bebae39ce9482153d05f651de7b8419989a0ae0cbc46a',
+                'source_sha256': 'e7b64a4b410cb705340f5a6dc8c677f00134ef90b551df840536432c37481c97',
                 'stock_body_bytes_replaced': 510,
             },
         )

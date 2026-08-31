@@ -617,7 +617,7 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
             "the stock timer structure places ticks at +4 and msg at +8, opposite the selected r20.05c public header",
             "the r19.02 commit is a public semantic oracle for two functions; the separate official AmbiqSuite archive supplies the vendor implementation-family pin",
             "all eleven bounded functions are clean-room source-routed; the authenticated 36-byte literal/global table remains official compatibility data",
-            "live controller timing, FreeRTOS scheduling, callback ordering, and sleep/wakeup behavior remain deferred by project direction; future qualification requires authorized physical evidence",
+            "live controller timing, FreeRTOS scheduling, callback ordering, and sleep/wakeup behavior remain blocked by unavailable physical evidence; future qualification requires authorized physical evidence",
         ],
     }
 

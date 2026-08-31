@@ -1,19 +1,21 @@
 from __future__ import annotations
 import ctypes,subprocess,sys,tempfile,unittest
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[1];SOURCE=ROOT/"research/admission/bootloader_mspi_device_configure_public_424be4/runtime_bootloader_mspi_device_configure_public_candidate.c";FIXTURE=SOURCE.parent/"host_fixture.c";sys.path.insert(0,str(ROOT/"tools"));import analyze_g2_bootloader_mspi_device_configure_public_424be4 as analyzer
+ROOT=Path(__file__).resolve().parents[1];SOURCE=ROOT/"components/bootloader/core_overlay/runtime_mspi_device_configure_public_424be4.c";FIXTURE=ROOT/"tests/fixtures/bootloader_runtime_mspi_device_configure_public_host.c";sys.path.insert(0,str(ROOT/"tools"));import analyze_g2_bootloader_mspi_device_configure_public_424be4 as analyzer
 H={3,5,7,9,11,13,15,17,19,21,23}
 class Tests(unittest.TestCase):
  @classmethod
  def setUpClass(c):
-  c.t=tempfile.TemporaryDirectory();o=Path(c.t.name)/("x.dylib" if sys.platform=="darwin" else "x.so");cmd=["/usr/bin/clang","-std=c11","-O2","-Wall","-Wextra","-Werror",str(SOURCE),str(FIXTURE)]+(["-dynamiclib"] if sys.platform=="darwin" else ["-shared","-fPIC"]);subprocess.run([*cmd,"-o",str(o)],check=True,capture_output=True,text=True);c.x=ctypes.CDLL(str(o));c.x.open_cfw_test_public_device_reset.argtypes=[ctypes.c_uint32]*9;c.x.open_cfw_test_public_device_run.argtypes=[ctypes.c_uint32];c.x.open_cfw_test_public_device_run.restype=ctypes.c_uint32;c.x.open_cfw_test_public_device_state.argtypes=[ctypes.c_uint32];c.x.open_cfw_test_public_device_state.restype=ctypes.c_uint32;c.x.open_cfw_test_public_device_trace.argtypes=[ctypes.c_uint32];c.x.open_cfw_test_public_device_trace.restype=ctypes.c_uint32
+  c.t=tempfile.TemporaryDirectory();o=Path(c.t.name)/("x.dylib" if sys.platform=="darwin" else "x.so");cmd=["/usr/bin/clang","-std=c11","-O2","-Wall","-Wextra","-Werror",str(FIXTURE)]+(["-dynamiclib"] if sys.platform=="darwin" else ["-shared","-fPIC"]);subprocess.run([*cmd,"-o",str(o)],check=True,capture_output=True,text=True);c.x=ctypes.CDLL(str(o));c.x.open_cfw_test_public_device_reset.argtypes=[ctypes.c_uint32]*9;c.x.open_cfw_test_public_device_run.argtypes=[ctypes.c_uint32];c.x.open_cfw_test_public_device_run.restype=ctypes.c_uint32;c.x.open_cfw_test_public_device_state.argtypes=[ctypes.c_uint32];c.x.open_cfw_test_public_device_state.restype=ctypes.c_uint32;c.x.open_cfw_test_public_device_trace.argtypes=[ctypes.c_uint32];c.x.open_cfw_test_public_device_trace.restype=ctypes.c_uint32
  @classmethod
  def tearDownClass(c):c.t.cleanup()
  def reset(s,m=0,p=0x01bebebe,cfg=1,src=99,tcb=1,f=14,d=4,rel=0,req=0):s.x.open_cfw_test_public_device_reset(m,p,cfg,src,tcb,f,d,rel,req)
  def st(s,n):return s.x.open_cfw_test_public_device_state(n)
  def tr(s,n):return s.x.open_cfw_test_public_device_trace(n)
  def test_audit(s):
-    r=analyzer.audit();s.assertFalse(r["production"]["routed"]);s.assertEqual(r["production"]["boundary_status"],"official_blob");s.assertEqual(r["production"]["source_owned_bytes"]+r["production"]["retained_official_bytes"],147296);s.assertEqual(r["production"]["next_frontier"],0x425066);s.assertEqual(r["hardware_validation"],"deferred by project direction");s.assertEqual(r["hardware_operations"],[])
+    r=analyzer.audit();s.assertTrue(r["production"]["routed"]);s.assertEqual(r["production"]["boundary_status"],"source_compiled");s.assertEqual(r["production"]["compiled_bytes"],672);s.assertEqual(r["production"]["source_owned_bytes"]+r["production"]["retained_official_bytes"],147350);s.assertEqual(r["production"]["next_frontier"],0x424E84);s.assertEqual(r["next_code_frontier"],{"start":0x425066,"end":0x4250F0,"identity":"am_hal_mspi_enable","bytes":138,"status":"official_blob"});s.assertEqual(r["hardware_validation"],"blocked by unavailable physical evidence");s.assertEqual(r["hardware_operations"],[])
+ def test_structured_source_has_no_raw_encoding(s):
+  text=SOURCE.read_text();s.assertNotIn(".byte",text);s.assertNotIn("__asm__",text)
  def test_all_23_frequency_classes(s):
   for f in range(1,24):
    with s.subTest(f=f):

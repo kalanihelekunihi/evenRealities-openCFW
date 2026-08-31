@@ -395,11 +395,11 @@ class MramAllocateRecordTests(unittest.TestCase):
     def test_source_and_fixture_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "68ce49559b76a86ba3218a0146044af897ce4dc3eed4ce51d0eda29dfcf236dd",
+            "68e6cdd04a58c2b64b63909d4100bbd69d8a1c76ca5af2fe22f41fe800791c48",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "7967e6c1fe37d7f1d64016618da7afaeb2668138d7d5152d72180c3da8c898c4",
+            "06b584b42b731f4142e57f62a87a98f79c38c6242086e48dec41d54580e08fda",
         )
 
 

@@ -153,7 +153,7 @@ class G2AdvertisedNamePatchTests(unittest.TestCase):
             == "open_cfw_copy_advertised_name_pair_suffix"
         )
         source = leaf["source"]
-        self.assertEqual(source["license"], "GPL-3.0-only")
+        self.assertEqual(source["license"], "MIT")
         self.assertEqual(
             source["sha256"],
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),

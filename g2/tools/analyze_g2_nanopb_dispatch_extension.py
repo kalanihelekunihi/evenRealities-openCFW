@@ -17,8 +17,8 @@ import analyze_g2_nanopb_skip_field as shared
 DEFAULT_IMAGE = shared.DEFAULT_IMAGE
 UPSTREAM = shared.UPSTREAM
 LOCAL_SOURCE = shared.ROOT / "components/shared/nanopb/runtime_nanopb_dispatch_extension.c"
-LOCAL_SOURCE_SIZE = 3_804
-LOCAL_SOURCE_SHA256 = "b4a6620fdc79fdbb3b3891166d6248176b396cf18b7157cd3d300d66ee15de96"
+LOCAL_SOURCE_SIZE = 4_499
+LOCAL_SOURCE_SHA256 = "610c8d8e64f87f67aeb9bd175800f3b43661a2bbe9f8d557aa76cc5b9e11ee67"
 LOCAL_HEADER = shared.ROOT / "components/shared/nanopb/runtime_nanopb_dispatch_extension.h"
 LOCAL_HEADER_SIZE = 1_560
 LOCAL_HEADER_SHA256 = "f6918d0d89b223e9ad33601de800931a73a0c9ad5ac66177ea83c435441c2ec8"

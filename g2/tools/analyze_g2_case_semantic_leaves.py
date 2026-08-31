@@ -975,7 +975,7 @@ def analyze() -> dict[str, object]:
         "software_source_complete_scope": "the 189 admitted semantic leaves only",
         "case_image_source_complete": False,
         "production_routed": False,
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_operations": [],
     }
 

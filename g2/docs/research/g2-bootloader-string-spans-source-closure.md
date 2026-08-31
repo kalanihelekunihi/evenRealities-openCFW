@@ -1,5 +1,10 @@
 # G2 bootloader string-span source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The authenticated G2 2.2.6.10 bootloader contains adjacent `strcspn`- and
 `strspn`-equivalent entries at `0x004157F8` and `0x0041581A`. Each stock span
 is 34 bytes and has three whole-image direct callers. Clean-room freestanding C

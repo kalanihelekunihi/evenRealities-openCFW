@@ -65,7 +65,7 @@ class CordioHciTransportAuditTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 6)
         self.assertEqual(production["source_only_functions_compiled"], 1)
         self.assertEqual(production["manifest_regions"], 6)
-        self.assertEqual(production["flash_plan_counts"], (6671, 0, 6, 6))
+        self.assertEqual(production["flash_plan_counts"], (6588, 0, 6, 6))
         self.assertTrue(production["failure_state_reset_hardened"])
 
 

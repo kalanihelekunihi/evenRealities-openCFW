@@ -299,7 +299,7 @@ class NanopbRawSubstreamAuditTests(unittest.TestCase):
     def test_production_source_and_registration_are_exact(self) -> None:
         self.assertEqual(
             (PRODUCTION.stat().st_size, file_sha256(PRODUCTION)),
-            (2_762, "e8d9e5da342086614ef842849bba068daf72bbca52a24a24293f3ec7ac6e20f5"),
+            (2_798, "27fff92cdb99b4147c13490f385db598bdaf4f8ee1214ed30f1c8856e89b1a51"),
         )
         self.assertEqual(
             (PRODUCTION_HEADER.stat().st_size, file_sha256(PRODUCTION_HEADER)),

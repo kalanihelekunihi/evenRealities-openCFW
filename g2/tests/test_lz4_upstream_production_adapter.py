@@ -35,19 +35,19 @@ LEGACY_MODE2 = (
 UPSTREAM = ROOT / "third_party" / "lz4" / "lz4.c"
 CONFIG = ROOT / "components" / "apollo_main" / "core_overlay" / "overlay.json"
 
-ADAPTER_SHA256 = "83e49a1aeda2d8737db7adfcdce86237602946ea2f883506771468d59ab7151f"
+ADAPTER_SHA256 = "e4328b38d4261affd7d61499d7c000736673c134cf8794a7eef4a2625734430b"
 SAFE_SHA256 = "90a54a1f68a806a1795bd044856908235426b3c0f67be605fb94d3d5344a747f"
 MODE2_SHA256 = "d2a627965efb0521d9d82b99c176462388495b7e199696bf1a3eafceb619a450"
 
 PROFILE_PINS = {
     "apple-clang": {
         "overlay": (
-            429058,
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+            362272,
+            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
         ),
         "component": (
-            3952454,
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+            3883974,
+            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
         ),
         "legacy": {
             "open_cfw_evenhub_mode2_decompress_legacy": {
@@ -60,23 +60,23 @@ PROFILE_PINS = {
             },
         },
         "active": {
-            "LZ4_decompress_safe": {"offset": 176072, "size": 1660},
-            "open_cfw_lz4_decompress_safe": {"offset": 177796, "size": 4},
+            "LZ4_decompress_safe": {"offset": 116224, "size": 1660},
+            "open_cfw_lz4_decompress_safe": {"offset": 117948, "size": 4},
             "open_cfw_evenhub_mode2_decompress": {
-                "offset": 177800,
+                "offset": 117952,
                 "size": 30,
             },
         },
-        "accounting": (438910, 401494, 409246, 3111910),
+        "accounting": (362962, 397446, 397626, 3123534),
     },
     "linux-clang": {
         "overlay": (
-            212664,
-            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+            145314,
+            "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19",
         ),
         "component": (
-            3736060,
-            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+            3668710,
+            "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8",
         ),
         "legacy": {
             "open_cfw_evenhub_mode2_decompress_legacy": {
@@ -89,14 +89,14 @@ PROFILE_PINS = {
             },
         },
         "active": {
-            "LZ4_decompress_safe": {"offset": 177804, "size": 1690},
-            "open_cfw_lz4_decompress_safe": {"offset": 179560, "size": 4},
+            "LZ4_decompress_safe": {"offset": 118052, "size": 1690},
+            "open_cfw_lz4_decompress_safe": {"offset": 119808, "size": 4},
             "open_cfw_evenhub_mode2_decompress": {
-                "offset": 179564,
+                "offset": 119812,
                 "size": 30,
             },
         },
-        "accounting": (205144, 99288, 99468, 3423892),
+        "accounting": (145498, 99340, 99520, 3423840),
     },
 }
 
@@ -485,9 +485,27 @@ class Lz4UpstreamProductionAdapterTests(unittest.TestCase):
             tempfile.mkdtemp(dir=build_root, prefix="_test-lz4-production-")
         )
         try:
+            build_config = json.loads(CONFIG.read_text(encoding="utf-8"))
+            core_stage_expected = (
+                build_config["core_stage_expected"]
+                if profile == "apple-clang"
+                else build_config["toolchain_profiles"][profile][
+                    "core_stage_expected"
+                ]
+            )
+            build_config["expected"] = core_stage_expected
+            if profile != "apple-clang":
+                build_config["toolchain_profiles"][profile]["expected"] = (
+                    core_stage_expected
+                )
+            build_config_path = directory / "overlay.json"
+            build_config_path.write_text(
+                json.dumps(build_config),
+                encoding="utf-8",
+            )
             report = self.apollo_overlay.build(
                 root=ROOT,
-                config_path=CONFIG,
+                config_path=build_config_path,
                 output_dir=directory,
                 clang=self.clang,
                 toolchain_profile=profile,
@@ -527,12 +545,12 @@ class Lz4UpstreamProductionAdapterTests(unittest.TestCase):
             1724,
             0,
             64,
-            "49e4b188b9bed8f9fcabf49f06474a7388f1ef1f95676e08183e458fa7ae3d86",
+            "46475de79c8b201f60a15a1e47e0f62a4191002d0bd1fc9fca65ed67916be2f2",
         ) if profile == "apple-clang" else (
             1756,
             2,
             64,
-            "1a2ef05cfbe9f33fadd5c7f8404fc11a3affa54fcf0e9c58c686056f7d802b3b",
+            "7d11b4e84417eb55c625f1ef064f19a07ed81bbf283ebbe87541a4159263f7d2",
         )
         self.assertEqual(
             (

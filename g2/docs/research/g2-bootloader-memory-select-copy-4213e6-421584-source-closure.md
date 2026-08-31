@@ -1,5 +1,10 @@
 # G2 bootloader mapped-memory selector source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The authenticated mapped-memory service and its odd-selector wrapper at
 `[0x004213E6,0x0042156E)` now route to maintained freestanding C placed wholly
 inside their own generated replacement space. The following 22-byte

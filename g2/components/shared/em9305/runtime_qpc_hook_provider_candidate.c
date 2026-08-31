@@ -1,8 +1,9 @@
 /* SPDX-License-Identifier: MIT */
 /*
  * Clean-room, fail-closed adapter for two authenticated EM9305 QP/C hooks.
- * Callback return values belong to this adapter contract, not to the stock ARC
- * ABI. Exact provider source and redistribution authority remain separate gates.
+ * The idle hook preserves the stock unconditional call sequence: the activity
+ * bit returned by wsfOsRunIdleTasks is not an error status, and the voltage
+ * measurement result is not consumed by the stock caller.
  */
 
 #include "runtime_qpc_hook_provider_candidate.h"
@@ -16,7 +17,7 @@ open_cfw_em9305_qpc_hook_provider_evidence[4] = {
     {0x00311620U, 0x00311634U,
      OPEN_CFW_EM9305_HOOK_MODEL_NAMED_ARCHIVE_PROVIDER,
      "fbb0316db14f6fc107f338a4cbf5852049003c2def1230d9f5e117e7a0a2abe4",
-     "wsfOsRunIdleTasks", "exact SDK archive; redistribution authority unresolved"},
+     "wsfOsRunIdleTasks", "clean-room MIT source available; production route pending"},
     {0x003100ECU, 0x003100F0U,
      OPEN_CFW_EM9305_HOOK_MODEL_NAMED_ARCHIVE_PROVIDER,
      "f64115f823d5675ed59321d1edd7c76faddd893e7ed7914dec00cb156a6a8a04",
@@ -53,10 +54,8 @@ int32_t open_cfw_em9305_qk_idle_named_boundary(
         ports->volt_mon_do_measurement == 0) {
         return OPEN_CFW_EM9305_HOOK_PROVIDER_MISSING;
     }
-    if (ports->wsf_os_run_idle_tasks(ports->context) != 0 ||
-        ports->volt_mon_do_measurement(ports->context, 0U) != 0) {
-        return OPEN_CFW_EM9305_HOOK_PROVIDER_FAILED;
-    }
+    (void)ports->wsf_os_run_idle_tasks(ports->context);
+    (void)ports->volt_mon_do_measurement(ports->context, 0U);
     /* The final authenticated call chain terminates in a four-byte no-op. */
     return OPEN_CFW_EM9305_HOOK_PROVIDER_OK;
 }

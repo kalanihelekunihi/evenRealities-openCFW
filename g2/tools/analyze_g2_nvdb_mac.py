@@ -315,7 +315,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         or set(leaves) != {t for *_, t in expected_patches.values()}
         or any(
             l["source"]["sha256"]
-            != "7f9d10a4e413f99038ac32f8aedb47ec898ffe25f0720c89b1aff0d0dc891919"
+            != "038b882d360fc155dbccdb911e9910779cdabf97b244e53c9baaa38f196943ac"
             or l.get("profiles") != ["apple-clang"]
             or device_ids_binding not in l["toolchain"]["flags"]
             for l in leaves.values()

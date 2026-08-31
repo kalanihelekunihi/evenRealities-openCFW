@@ -393,11 +393,11 @@ class TracepointStorageTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         expected = {
             SOURCE:
-                "35a95dd68538fa456fc932cb9166614f"
-                "303e6797ef4a328ee00463076cee9945",
+                "e40c930de098fa04626e4d1c0cea13e"
+                "92a0acefe9706e72908a1a5f9cf201abd",
             FIXTURE:
-                "12a20358d9486cd5141c30fec443009a0"
-                "22dc03265c4919114b6b595cf3cb1f0",
+                "a9bf4d0b81d718ce52e2fc658146e741"
+                "56f6944dc0030a7c917abe913919df0c",
         }
         for path, digest in expected.items():
             self.assertEqual(

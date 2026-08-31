@@ -26,26 +26,26 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "089228c6fa53e296dd6384441b97b7016b886d2a918da2b6d93174aeff6e13be",
-    CLOSURE: "e096d3cd45aac82a2f4289b10b63a17ccc605b6a832f7034c1c1a8a4f80f94f4",
-    PROVENANCE: "b9821581cacebb933823382d712c4ba120cf29b0890b5329872900e868b42b1d",
+    CLOSURE: "93536f87a64015b049355f184b9d3a7c9fdc281f6d05759e058619b198a9588f",
+    PROVENANCE: "ef011ff773039208ecbadc3a93c50ee5c1c3a38dfef7ea0f3248b512de689a6d",
 }
-SOURCE_SIZE = 15562
-SOURCE_SHA256 = "bfb6a066ccb43b91f0d026cbc26078ecead559297d7289bacd52a389f5193215"
+SOURCE_SIZE = 15553
+SOURCE_SHA256 = "eb006e7d29ca56b031faa28d3aad5425d7ca463219e855fd9a7d827f7cd5b850"
 FUNCTIONS = (
-    ("open_cfw_pb_service_dev_setting_buffer_write", 148, 267228, 0,
+    ("open_cfw_pb_service_dev_setting_buffer_write", 148, 207380, 0,
      "buffer_write"),
-    ("open_cfw_pb_service_dev_setting_transmit", 212, 267376, 5,
+    ("open_cfw_pb_service_dev_setting_transmit", 212, 207528, 5,
      "transmit"),
-    ("PB_RxRestoreFactory", 140, 267588, 14, "rx_restore"),
-    ("PB_TxEncodeRestoreFactory", 52, 267728, 1, "tx_restore"),
-    ("PB_RxQuickRestart", 18, 267780, 1, "rx_restart"),
-    ("PB_TxEncodeQuickRestart", 52, 267800, 1, "tx_restart"),
-    ("PB_RxBaseConnHeartBeat", 20, 267852, 1, "rx_heartbeat"),
-    ("PB_TxEncodeBaseConnHeartBeat", 52, 267872, 1, "tx_heartbeat"),
-    ("PB_RxTimeSyncInfo", 84, 267924, 3, "rx_time"),
-    ("PB_TxEncodeTimeSyncInfo", 84, 268008, 2, "tx_time"),
-    ("PB_RxAudControl", 10, 268092, 0, "rx_audio"),
-    ("PB_TxEncodeAudControl", 62, 268104, 1, "tx_audio"),
+    ("PB_RxRestoreFactory", 140, 207740, 14, "rx_restore"),
+    ("PB_TxEncodeRestoreFactory", 52, 207880, 1, "tx_restore"),
+    ("PB_RxQuickRestart", 18, 207932, 1, "rx_restart"),
+    ("PB_TxEncodeQuickRestart", 52, 207952, 1, "tx_restart"),
+    ("PB_RxBaseConnHeartBeat", 20, 208004, 1, "rx_heartbeat"),
+    ("PB_TxEncodeBaseConnHeartBeat", 52, 208024, 1, "tx_heartbeat"),
+    ("PB_RxTimeSyncInfo", 84, 208076, 3, "rx_time"),
+    ("PB_TxEncodeTimeSyncInfo", 84, 208160, 2, "tx_time"),
+    ("PB_RxAudControl", 10, 208244, 0, "rx_audio"),
+    ("PB_TxEncodeAudControl", 62, 208256, 1, "tx_audio"),
 )
 PATCH_SUFFIXES = (
     "rx_restore", "tx_restore", "rx_restart", "tx_restart",
@@ -352,13 +352,12 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 3432,
             "retained_gap_pool_bytes": 284,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "No authorized live G2 service 0x80 device-setting peer BLE, "
-                "factory-reset, quick-restart, base-heartbeat, clock-sync, "
-                "persistence, or audio-control workflow evidence is required for future qualification; "
-                "the authorized right temple is not under test because qualification is deferred by project direction and the left "
-                "temple must remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific service 0x80 device-setting fixture "
+                "or an authenticated golden BLE factory-reset, quick-restart, base-heartbeat, clock-sync, "
+                "persistence, and audio-control workflow capture"
             ),
         },
     }

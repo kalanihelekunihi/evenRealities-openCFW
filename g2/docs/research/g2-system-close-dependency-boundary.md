@@ -1,5 +1,10 @@
 # G2 SystemClose dependency boundary
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Status: complete stock-object/provider closure and production source routing
 over G2 2.2.6.10. No device or flash operation is performed.
 

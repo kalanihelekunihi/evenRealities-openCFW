@@ -11,12 +11,13 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
-import analyze_g2_clkmgr_divider_candidate as analyzer  # noqa: E402
+import verify_g2_clkmgr_divider_public as verifier  # noqa: E402
 SOURCE = ROOT / "components/shared/ambiq/runtime_clkmgr_divider_candidate.c"
 HEADER = SOURCE.with_suffix(".h")
 FIXTURE = ROOT / "tests/fixtures/runtime_clkmgr_divider_candidate_host.c"
@@ -60,27 +61,32 @@ class ClockManagerDividerCandidateTests(unittest.TestCase):
         self.assertIn("open_cfw_clkmgr_hfrc2_uq15_divider", combined)
         self.assertIn("open_cfw_clkmgr_hfrc_integer_divider", combined)
 
-    def test_dual_image_production_route_and_package(self) -> None:
-        report = analyzer.run_audit()
+    def test_public_dual_image_route_contract(self) -> None:
+        report = verifier.verify()
         self.assertEqual(
-            report["status"], "apollo-clkmgr-divider-production-routed")
-        self.assertTrue(report["candidate"]["production_routed"])
-        self.assertTrue(report["candidate"]["cross_toolchain_routed"])
-        self.assertIsNone(report["candidate"]["software_blocker"])
-        self.assertEqual(
-            set(report["production"]),
-            {"apollo_main", "apollo_bootloader", "package", "linux_clang"},
-        )
-        for image in ("apollo_main", "apollo_bootloader"):
-            records = report["production"][image]["records"]
-            self.assertEqual(len(records), 2)
-            self.assertTrue(all(item["relocations"] == 0 for item in records))
-            linux_records = report["production"]["linux_clang"][image]["records"]
-            self.assertEqual(len(linux_records), 2)
+            report["status"], "public-clock-divider-source-and-route-verified")
+        self.assertEqual(report["functions"], 2)
+        self.assertEqual(report["profiles_declared"],
+                         ["apple-clang", "linux-clang"])
+        self.assertTrue(report[
+            "private_admission_artifacts_required_for_receipt_reproduction"])
+        self.assertFalse(report["private_admission_receipt_reproduced"])
         self.assertEqual(
             report["hardware_validation"],
-            "deferred by project direction",
+            "blocked by unavailable physical evidence",
         )
+        self.assertEqual(report["hardware_operations"], [])
+
+    def test_public_verifier_rejects_source_identity_drift(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="open-cfw-clkmgr-public-") as tmp:
+            changed = Path(tmp) / "runtime_clkmgr_divider_candidate.c"
+            changed.write_bytes(verifier.SOURCE.read_bytes() + b"\n")
+            with mock.patch.object(verifier, "SOURCE", changed):
+                with self.assertRaisesRegex(
+                    verifier.VerificationError,
+                    "source identity changed",
+                ):
+                    verifier.verify()
 
 
 if __name__ == "__main__":

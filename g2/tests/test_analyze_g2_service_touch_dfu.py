@@ -57,7 +57,7 @@ class AnalyzeG2ServiceTouchDfuTests(unittest.TestCase):
         self.assertEqual(lineage["source_inventory"],
                          "32-function clean-room production C")
         self.assertEqual(lineage["historical_source_inventory"], "unavailable")
-        self.assertEqual(lineage["license"], "GPL-3.0-only")
+        self.assertEqual(lineage["license"], "MIT")
         production = self.report["production"]
         self.assertTrue(production["candidate"].endswith("service_touch_dfu.c"))
         self.assertTrue(production["production_routed"])
@@ -67,7 +67,8 @@ class AnalyzeG2ServiceTouchDfuTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 70)
         self.assertEqual(production["guarded_redirects"], 32)
         self.assertEqual(production["hardware_validation"],
-                         "blocked_unavailable_physical_evidence")
+                         "blocked by unavailable physical evidence")
+        self.assertIn("authenticated golden", production["hardware_blocker"])
 
 
 if __name__ == "__main__":

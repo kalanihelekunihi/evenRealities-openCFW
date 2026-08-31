@@ -29,17 +29,17 @@ PINS = {
     CLOSURE: "875f75f22cf1aa450b95d16e1c396498774f2fdfb22882a91f2b5dfc30e9620f",
     PROVENANCE: "e5abf11b1bef210cd5bd9f593423646c296d5f79a83fc592af2821ab2c98ace7",
 }
-SOURCE_SIZE = 9294
-SOURCE_SHA256 = "1e6429d33df883ca498112850f6e38254798d82e88de86d2b2c450d9300d0095"
+SOURCE_SIZE = 9285
+SOURCE_SHA256 = "939587d5af46481234ce3ad7debfa0809c7fc8ff905349a6fa055ea72bb55c83"
 FUNCTIONS = (
-    ("open_cfw_pb_service_translate_buffer_write", 146, 261580, 0,
+    ("open_cfw_pb_service_translate_buffer_write", 146, 201732, 0,
      "buffer_write"),
-    ("open_cfw_pb_service_translate_zero", 88, 261728, 0, "zero"),
-    ("open_cfw_pb_translate_encode_and_send", 264, 261816, 7, "encode"),
-    ("APP_PbTranslateRxFrameDataProcess", 108, 262080, 3, "rx"),
-    ("APP_PbTranslateTxEncodeNotify", 52, 262188, 1, "notify"),
-    ("APP_PbTranslateTxEncodeCommResp", 38, 262240, 1, "comm_resp"),
-    ("APP_PbTranslateTxEncodeModeSwitch", 52, 262280, 1, "mode_switch"),
+    ("open_cfw_pb_service_translate_zero", 88, 201880, 0, "zero"),
+    ("open_cfw_pb_translate_encode_and_send", 264, 201968, 7, "encode"),
+    ("APP_PbTranslateRxFrameDataProcess", 108, 202232, 3, "rx"),
+    ("APP_PbTranslateTxEncodeNotify", 52, 202340, 1, "notify"),
+    ("APP_PbTranslateTxEncodeCommResp", 38, 202392, 1, "comm_resp"),
+    ("APP_PbTranslateTxEncodeModeSwitch", 52, 202432, 1, "mode_switch"),
 )
 PATCH_SUFFIXES = ("rx", "notify", "comm_resp", "mode_switch")
 PHYSICAL = (0x0059F53C, 0x0059FAE0)
@@ -331,11 +331,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 1324,
             "retained_pool_bytes": 120,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "No authorized live G2 service 0x05 master/peer BLE and "
-                "translation UI evidence is required for future qualification; the authorized right "
-                "temple is not under test because qualification is deferred by project direction and the left temple must remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific service 0x05 translation fixture "
+                "or an authenticated golden BLE/UI capture"
             ),
         },
     }

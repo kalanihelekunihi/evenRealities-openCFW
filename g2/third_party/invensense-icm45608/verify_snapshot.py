@@ -15,6 +15,25 @@ EXPECTED_TAG = "1.1.2"
 EXPECTED_FILE_COUNT = 52
 EXPECTED_TOTAL_BYTES = 594_177
 EXPECTED_AGGREGATE = "cc6088eed9f14a02af419a29856064ab62e4b79e2860a135e1d84ba22e1c9570"
+RESTRICTED_NOTICE_FILES = (
+    "src/imu/inv_imu_edmp_defs.h",
+    "src/imu/inv_imu_edmp_patches_defs.h",
+    "src/imu/inv_imu_edmp_patch_key_offsets.h",
+    "src/imu/inv_imu_edmp_calmag_defs.h",
+    "src/imu/inv_imu_edmp_all_quat_patch_key_offsets.h",
+)
+DENSE_PAYLOAD_FILES = (
+    "src/imu/edmp_prgm_ram_dispatch.h",
+    "src/imu/edmp_prgm_ram_dispatch_over_gaf.h",
+    "src/imu/edmp_prgm_ram_patch_calmag.h",
+    "src/imu/edmp_prgm_ram_selftest.h",
+    "src/imu/edmp_ram_aid_image.h",
+    "src/imu/edmp_ram_aid_over_gaf_image.h",
+    "src/imu/edmp_ram_all_quat_image.h",
+    "src/imu/edmp_ram_b2s_image.h",
+    "src/imu/edmp_ram_b2s_over_gaf_image.h",
+    "src/imu/edmp_ram_mrm_image.h",
+)
 EXPECTED_PINS = {
     "LICENSE": (1503, "68bed9c72222b77b8744add292f524000661c6537d960adeaf740722b0b2637f"),
     "src/imu/inv_imu_driver.c": (22499, "5c376ad072ed547c8e76666921174263f0301dc06cd711adac8aeb862bea056c"),
@@ -61,7 +80,16 @@ def main() -> int:
     upstream = provenance["upstream"]
     selection = provenance["selection"]
     require(provenance["schema_version"] == 1, "schema changed")
-    require(provenance["license"] == "BSD-3-Clause", "license changed")
+    require(provenance["license"] == "mixed-file-specific", "license changed")
+    license_summary = provenance["license_summary"]
+    require(license_summary == {
+        "root_license": "BSD-3-Clause",
+        "restricted_notice_files": 5,
+        "dense_payload_files": 10,
+        "release_status": (
+            "repository-local research evidence; excluded from public/compiler closure"
+        ),
+    }, "mixed-terms inventory changed")
     require(upstream["repository"] == EXPECTED_REPOSITORY, "repository changed")
     require(upstream["tag"] == EXPECTED_TAG, "tag changed")
     require(upstream["commit"] == EXPECTED_COMMIT, "commit changed")
@@ -96,6 +124,13 @@ def main() -> int:
         require(marker in extended, f"extended-feature marker missing: {marker}")
     license_text = (HERE / "LICENSE").read_text(encoding="utf-8")
     require("BSD 3-Clause License" in license_text, "BSD license marker missing")
+    for name in RESTRICTED_NOTICE_FILES:
+        text = (HERE / name).read_text(encoding="utf-8", errors="replace")
+        require("strictly prohibited" in text,
+                f"restricted file notice changed: {name}")
+    require(len(DENSE_PAYLOAD_FILES) == 10, "dense-payload inventory changed")
+    for name in DENSE_PAYLOAD_FILES:
+        require((HERE / name).is_file(), f"dense payload missing: {name}")
     print("TDK ICM45608 1.1.2 snapshot: PASS")
     print(f"files={len(files)} bytes={total} aggregate={tree_digest}")
     return 0

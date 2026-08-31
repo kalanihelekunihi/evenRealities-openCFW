@@ -31,17 +31,17 @@ LOCAL_WASM_LINKER = (
     ROOT
     / "build"
     / "toolchains"
-    / "lld-22.1.8"
+    / "lld-23.1.0"
     / "bin"
     / "wasm-ld"
 )
 WASM_OBJECT_SIZE = 145930
 WASM_OBJECT_SHA256 = (
-    "e150362cd78aa23e5399515540106ab000bd870e02054225e3b5cb4707a56000"
+    "d192923b3956053c98d10105df19922be37ea153a9941f003f583702dfd516c9"
 )
-WASM_MODULE_SIZE = 9018
+WASM_MODULE_SIZE = 9008
 WASM_MODULE_SHA256 = (
-    "198e6d5bae33d502605ac1696f764a4bd0cf1c7653433315c79afa862228c3eb"
+    "11bd1b0dbab90c5ca463c01d5be52b9795bb0b2eda0915fecbdd7315c97e02b9"
 )
 OFFICIAL = (
     ROOT
@@ -104,7 +104,7 @@ INTEGRATED_LOCAL_FUNCTIONS = {
 }
 INTEGRATED_INPUT_HASHES = {
     "components/apollo_main/core_overlay/runtime_tlsf.c": (
-        "ca6eedb79a8975474b9e158179786c3e0bb958afade130ecf8e276b5555f1ca2"
+        "12ac5787711713de2610b71fe3d9875cc383717ce7ecd9ce5af16bf5709d76cf"
     ),
     "third_party/tlsf/tlsf.c": (
         "2a0f8cfc9cfe6114ccdc6cf22339059440b16f1149b5107bead4ae4c3a0d50e2"
@@ -113,22 +113,22 @@ INTEGRATED_INPUT_HASHES = {
         "f7f73c48810ba60203095667c226e5a600a6ea0f69afba48efff6efbaa628d4f"
     ),
     "components/apollo_main/core_overlay/tlsf_compat/assert.h": (
-        "798db1564e14c14caa4b03b4c8efa874e96055cb49e238b5a4026a1d656924ef"
+        "4696db77e62a7c0a61aa6d07a4b0cb2fcd778c8f77d80646fb31307390185f7e"
     ),
     "components/apollo_main/core_overlay/tlsf_compat/limits.h": (
-        "7df46c357072588c805781ea5cc2c6126348667e1e7ba377a1c3a2bcb5b648ca"
+        "cb33bcc2beb04eede00b4c7e939f0b2ad8a2b2ffd9133f2e8176392b1bab9387"
     ),
     "components/apollo_main/core_overlay/tlsf_compat/stddef.h": (
-        "dfe4c45cb39bd92ed9a76623c78e6c9849627ad35139819c4c9d83fc90da410f"
+        "1103494bc89f20fbe6bd95a9312c47af11ba2fb40a246e74efdeea8166e607a5"
     ),
     "components/apollo_main/core_overlay/tlsf_compat/stdio.h": (
-        "0c4cfde236cb8aea29854aae71558ab2636824428ba48a4d295ce86cf7af345a"
+        "f765dcabcb6215fed307e4a0665180ae497e86eeb432ee21cf3276289cf97101"
     ),
     "components/apollo_main/core_overlay/tlsf_compat/stdlib.h": (
-        "51b0802d10419a971c531d2ffd4c7cf850d3a94d7d929827fa57147c7cc951c0"
+        "de648e00e3a88a69cbf327d7d8d52bdfaa9e9d19711c177c9e028c456bd8a496"
     ),
     "components/apollo_main/core_overlay/tlsf_compat/string.h": (
-        "26cfee2fb222dc2bb1d13ed631bc5a540f9d45b2ce96f48323a7cb5c92064938"
+        "b5b51f6f3baddace8e5fb9964f813e5754dfdf28499c4a4db5660c521d76b868"
     ),
 }
 STOCK_PUBLIC_REDIRECTS = {
@@ -304,10 +304,20 @@ class RuntimeTlsfTests(unittest.TestCase):
             prefix="test-runtime-tlsf-integrated-",
             dir=build_root,
         )
+        integrated_root = Path(cls.integrated_temporary.name)
+        stage_config = json.loads(
+            (COMPONENT_ROOT / "overlay.json").read_text(encoding="utf-8")
+        )
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = integrated_root / "core-stage-overlay.json"
+        stage_config_path.write_text(json.dumps(stage_config), encoding="utf-8")
         cls.integrated_report = apollo_overlay.build(
             root=ROOT,
-            config_path=COMPONENT_ROOT / "overlay.json",
-            output_dir=Path(cls.integrated_temporary.name),
+            config_path=stage_config_path,
+            output_dir=integrated_root,
             clang=os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
         )
 
@@ -955,7 +965,10 @@ class RuntimeTlsfTests(unittest.TestCase):
                 )
         self.assertEqual(
             config["toolchain"]["include_dirs"],
-            ["components/apollo_main/core_overlay/tlsf_compat"],
+            [
+                "components/apollo_main/core_overlay/tlsf_compat",
+                "third_party/cJSON/g2-compat",
+            ],
         )
         integrated_names = (
             PUBLIC_FUNCTIONS
@@ -995,14 +1008,14 @@ class RuntimeTlsfTests(unittest.TestCase):
                 )
 
         overlay = self.integrated_report["overlay"]
-        self.assertEqual(overlay["size"], 429058)
+        self.assertEqual(overlay["size"], 360578)
         self.assertEqual(
             overlay["sha256"],
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
         )
-        self.assertEqual(overlay["overlay_end_exclusive"], 0x007BC964)
-        self.assertEqual(len(overlay["functions"]), 2_631)
-        self.assertEqual(len(overlay["patched_sites"]), 2_374)
+        self.assertEqual(overlay["overlay_end_exclusive"], 0x007EC3A6)
+        self.assertEqual(len(overlay["functions"]), 2_436)
+        self.assertEqual(len(overlay["patched_sites"]), 2_324)
         self.assertEqual(overlay["link"]["text_size"], 109592)
         self.assertEqual(overlay["link"]["rodata_size"], 3996)
         self.assertEqual(
@@ -1017,7 +1030,7 @@ class RuntimeTlsfTests(unittest.TestCase):
             overlay["functions"]["block_remove"],
             {"offset": 109372, "size": 220},
         )
-        self.assertEqual(len(self.integrated_report["sources"]), 295)
+        self.assertEqual(len(self.integrated_report["sources"]), 296)
         isolated_leaves = self.integrated_report["isolated_leaves"]
         self.assertEqual(
             {
@@ -1044,16 +1057,16 @@ class RuntimeTlsfTests(unittest.TestCase):
             140,
         )
         component = self.integrated_report["component"]
-        self.assertEqual(component["size"], 3952454)
+        self.assertEqual(component["size"], 3883974)
         self.assertEqual(
             component["sha256"],
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
         )
-        self.assertEqual(component["generated_patch_site_bytes"], 409_066)
-        self.assertEqual(component["replaced_stock_function_bytes"], 409_246)
+        self.assertEqual(component["generated_patch_site_bytes"], 397_446)
+        self.assertEqual(component["replaced_stock_function_bytes"], 397_626)
         self.assertEqual(component["source_owned_in_place_bytes"], 184)
-        self.assertEqual(component["source_owned_bytes"], 431_334)
-        self.assertEqual(component["opaque_base_bytes"], 3_111_914)
+        self.assertEqual(component["source_owned_bytes"], 362_962)
+        self.assertEqual(component["opaque_base_bytes"], 3_123_534)
         built_sites = {
             site["runtime_address"]: site
             for site in overlay["patched_sites"]
@@ -1099,7 +1112,7 @@ class RuntimeTlsfTests(unittest.TestCase):
         if linker is None:
             self.skipTest(
                 "wasm-ld is unavailable; set OPENCFW_WASM_LD to a compatible "
-                "LLD 22.1.8 executable"
+                "LLD 23.1.0 executable"
             )
         linker_version = subprocess.run(
             [str(linker), "--version"],
@@ -1107,7 +1120,7 @@ class RuntimeTlsfTests(unittest.TestCase):
             capture_output=True,
             text=True,
         ).stdout.strip()
-        self.assertIn("LLD 22.1.8", linker_version)
+        self.assertIn("LLD 23.1.0", linker_version)
         temporary = Path(self.temporary.name)
         wasm_object = temporary / "runtime_tlsf_wasm.o"
         wasm_module = temporary / "runtime_tlsf.wasm"

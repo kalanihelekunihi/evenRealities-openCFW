@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "component": "g2-freetype-smooth",
+  "license": "FTL",
+  "upstream": {
+    "version": "2.9.1",
+    "tag": "VER-2-9-1",
+    "commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+    "snapshot_verifier": "third_party/freetype/verify_snapshot.py"
+  },
+  "mapped_evidence": {
+    "analyzer": "tools/analyze_g2_freetype_smooth_function_map.py",
+    "mapping_sha256": "603b60ba088a2d50816d017fa3c11287ef9d908a55592b5db56e3f8a6c299664",
+    "functions": 29,
+    "bytes": 4310,
+    "high_functions": 16,
+    "high_bytes": 804,
+    "medium_functions": 13,
+    "medium_bytes": 3506,
+    "unresolved_callable_bytes": 0
+  },
+  "source_inventory": {
+    "smooth_files": 8,
+    "smooth_source_bytes": 88859,
+    "inventory_sha256": "c9a85d138aa31faa688e241ac7ffd70d8c8943eaf315f79b1c5419646fd20e08"
+  },
+  "renderers": [
+    {
+      "name": "smooth",
+      "required_mode": "FT_RENDER_MODE_NORMAL"
+    },
+    {
+      "name": "smooth-lcd",
+      "required_mode": "FT_RENDER_MODE_LCD"
+    },
+    {
+      "name": "smooth-lcdv",
+      "required_mode": "FT_RENDER_MODE_LCD_V"
+    }
+  ],
+  "build": {
+    "community_source": true,
+    "translation_unit": "third_party/freetype/src/smooth/smooth.c",
+    "cortex_m55_compile_gate": "tests.test_freetype_smooth_source_admission",
+    "full_candidate_link_gate": "tests.test_runtime_target_provider_candidate",
+    "production_overlay": false,
+    "authenticated_target_placement": false,
+    "production_overlay_gate": "requires pinned IAR-compatible code generation, relocation and target placement plus font payload, stack and WCET qualification"
+  },
+  "hardware_validation": {
+    "performed": false,
+    "blocker": "no authorized physical G2 hardware or authenticated external outline font payload was supplied to this software-only tranche"
+  }
+}

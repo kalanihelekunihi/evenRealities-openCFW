@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import hashlib
 import json
 import struct
@@ -405,6 +406,125 @@ class ReleaseCFWTests(unittest.TestCase):
             "redistribution authority is unresolved",
         ):
             release_cfw.assert_redistribution_authorized()
+
+
+class PublicReleaseStaticContractTests(unittest.TestCase):
+    @staticmethod
+    def _make_prerequisites(makefile: str, target: str) -> set[str]:
+        logical = makefile.replace("\\\n\t", " ").replace("\\\n", " ")
+        declaration = next(
+            line for line in logical.splitlines()
+            if line.startswith(f"{target}:")
+        )
+        return set(declaration.split(":", 1)[1].split())
+
+    def test_make_release_requires_community_and_authority_gates(self) -> None:
+        makefile = (OPENCFW_ROOT / "Makefile").read_text(encoding="utf-8")
+        prerequisites = self._make_prerequisites(makefile, "source-release")
+        self.assertTrue({
+            "community-distribution-gate",
+            "release-license-gate",
+            "source",
+        }.issubset(prerequisites))
+
+    def test_community_gate_requires_checked_canonical_and_ownership_chain(self) -> None:
+        makefile = (OPENCFW_ROOT / "Makefile").read_text(encoding="utf-8")
+        community = self._make_prerequisites(
+            makefile, "community-distribution-gate"
+        )
+        self.assertTrue({
+            "completion-assessment-check",
+            "completion-classification-gate",
+            "completion-source-ownership-gate",
+            "completion-license-policy-gate",
+            "core-canonical-test",
+            "dual-profile-ownership",
+        }.issubset(community))
+        self.assertIn(
+            "dual-profile-ownership",
+            self._make_prerequisites(makefile, "completion-assessment-check"),
+        )
+        self.assertNotIn("dual-profile-ownership-write", community)
+
+        dual_recipe = makefile.split("\ndual-profile-ownership:\n", 1)[1].split(
+            "\n\ndual-profile-ownership-write:\n", 1
+        )[0]
+        self.assertIn("analyze_g2_dual_profile_ownership.py", dual_recipe)
+        self.assertNotIn("--write-companion", dual_recipe)
+
+        source = (OPENCFW_ROOT / "tools/community_distribution.py").read_text(
+            encoding="utf-8"
+        )
+        module = ast.parse(source)
+        create = next(
+            node for node in module.body
+            if isinstance(node, ast.FunctionDef) and node.name == "create_bundle"
+        )
+        calls = [
+            node.func.id
+            for statement in create.body
+            for node in ast.walk(statement)
+            if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+        ]
+        self.assertEqual(calls[0], "_require_completion_assessment_current")
+        self.assertLess(
+            calls.index("_require_completion_assessment_current"),
+            calls.index("_capture_selected_records"),
+        )
+
+        assessment_source = (
+            OPENCFW_ROOT / "tools/generate_g2_completion_report.py"
+        ).read_text(encoding="utf-8")
+        assessment_module = ast.parse(assessment_source)
+        self.assertTrue(
+            any(
+                isinstance(node, ast.Import)
+                and any(
+                    alias.name == "analyze_g2_dual_profile_ownership"
+                    and alias.asname == "dual_ownership"
+                    for alias in node.names
+                )
+                for node in assessment_module.body
+            )
+        )
+        self.assertTrue(
+            any(
+                isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Attribute)
+                and isinstance(node.func.value, ast.Name)
+                and node.func.value.id == "dual_ownership"
+                and node.func.attr == "analyze"
+                and not node.args
+                and not node.keywords
+                for node in ast.walk(assessment_module)
+            )
+        )
+
+    def test_release_cli_checks_authority_before_transform_or_write(self) -> None:
+        source = (OPENCFW_ROOT / "tools/release_cfw.py").read_text(
+            encoding="utf-8"
+        )
+        module = ast.parse(source)
+        main = next(
+            node for node in module.body
+            if isinstance(node, ast.FunctionDef) and node.name == "main"
+        )
+        calls: list[tuple[str, int]] = []
+        for node in ast.walk(main):
+            if not isinstance(node, ast.Call):
+                continue
+            function = node.func
+            if isinstance(function, ast.Name):
+                calls.append((function.id, node.lineno))
+        authorization = min(
+            line for name, line in calls
+            if name == "assert_redistribution_authorized"
+        )
+        transform = min(line for name, line in calls if name == "transform")
+        writes = [line for name, line in calls if name == "_atomic_write"]
+        self.assertTrue(writes)
+        self.assertLess(authorization, transform)
+        self.assertLess(authorization, min(writes))
 
 
 if __name__ == "__main__":

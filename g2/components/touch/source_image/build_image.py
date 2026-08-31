@@ -158,8 +158,8 @@ def build(output: Path, clang: str | None = None,
         "source_inventory": source_inventory,
         "software_link_complete": True,
         "production_routed": False,
-        "hardware_validation": "deferred by project direction",
-        "hardware_blocker": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "hardware_blocker": "blocked by unavailable physical evidence",
     }
     (output / "touch-source-image-summary.json").write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n")

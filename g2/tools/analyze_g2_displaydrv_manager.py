@@ -35,11 +35,11 @@ ROUTES=[
  ("replace_display_deinitialize_force","open_cfw_display_deinitialize_force"),
 ]
 SOURCES={
- "components/apollo_main/core_overlay/display_thread_init.c":"2745d39c43fbe428c74fa1e3967c19720e9667d3952dda994d7a31fe8ccb2890",
- "components/apollo_main/core_overlay/display_runtime.c":"02ef39a7409146fdd5a82e2c8351d88b50ab05cec63a20b5388009dcd8b1d1a4",
- "components/apollo_main/core_overlay/display_manager_thread.c":"45d15ef9d2c79b9e054b2de8616ff12aa6c2b020744ba87dbfbf112001000a1b",
- "components/apollo_main/core_overlay/display_queue_senders.c":"e691c15144fe53cb2c90085963de661d9e787741e9084eafb6af2e6a05540402",
- "components/apollo_main/core_overlay/display_lifecycle.c":"5bbd9f251128ac8843e1a1cf768bfbb5b24a1ceb918146a3162792b300d6a150",
+ "components/apollo_main/core_overlay/display_thread_init.c":"00f07bb6e27608257d27b4712112e06359c88ff1b3808124d5caf67497bafb15",
+ "components/apollo_main/core_overlay/display_runtime.c":"a00a2b5cdf294275721acf567312b3a75bbce42ca3861b847d233772be15f046",
+ "components/apollo_main/core_overlay/display_manager_thread.c":"3d198f983ffffe17a1ce9dcaa3c06042d068277d4c84846cdd885dec0f9adead",
+ "components/apollo_main/core_overlay/display_queue_senders.c":"2d785865ba14c4b939c455e3d27772a7e935bc675b405357b80063b73d6d9a2f",
+ "components/apollo_main/core_overlay/display_lifecycle.c":"17804ceaee55d54e204c0fd8c2ac889d1fbbc9340116d9084489ac94bbc56337",
 }
 def sh(x):return hashlib.sha256(x).hexdigest()
 def cstring(b,a):

@@ -95,7 +95,7 @@ def audit() -> dict:
     return {
         "component": "G2 touch sensing/gesture/calibration policy",
         "analysis_mode": "offline source/build audit; no hardware, sleep, reset, signing, or flash operation",
-        "status": "implemented-in-source / hardware validation deferred by project direction",
+        "status": "implemented-in-source / hardware validation blocked by unavailable physical evidence",
         "license": "MIT OR GPL-3.0-only",
         "software_gap_count": 0,
         "target": "thumbv6m-none-eabi / Cortex-M0+ / Thumb",

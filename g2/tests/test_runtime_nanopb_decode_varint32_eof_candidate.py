@@ -105,7 +105,7 @@ ERROR_SYMBOL = "open_cfw_nanopb_varint32_overflow_error"
 SECTION = ".text." + FUNCTION
 RODATA_SECTION = ".rodata." + ERROR_SYMBOL
 APPLE_CLANG = "/usr/bin/clang"
-APPLE_VERSION = "Apple clang version 21.0.0 (clang-2100.3.30.1)"
+APPLE_VERSION = "Apple clang version 21.0.0 (clang-2100.3.33.1)"
 OBJECT_PIN = (
     1328,
     "1e83fc04ec39e95c96189dbca42b902dd3bfaead5f08068eb33edc4b6aad54a6",

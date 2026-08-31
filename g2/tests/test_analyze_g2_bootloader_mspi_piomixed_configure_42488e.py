@@ -9,8 +9,8 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "research/admission/bootloader_mspi_piomixed_configure_42488e/runtime_bootloader_mspi_piomixed_configure_candidate.c"
-FIXTURE = SOURCE.parent / "host_fixture.c"
+SOURCE = ROOT / "components/bootloader/core_overlay/runtime_mspi_piomixed_configure_42488e.c"
+FIXTURE = ROOT / "tests/fixtures/bootloader_runtime_mspi_piomixed_configure_host.c"
 sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_bootloader_mspi_piomixed_configure_42488e as analyzer
 
@@ -21,7 +21,7 @@ class BootloaderMspiPioMixedTests(unittest.TestCase):
         cls.tmp = tempfile.TemporaryDirectory(prefix="open-cfw-piomixed-host-")
         output = Path(cls.tmp.name) / ("piomixed.dylib" if sys.platform == "darwin" else "piomixed.so")
         command = ["/usr/bin/clang", "-std=c11", "-O2", "-Wall", "-Wextra",
-                   "-Werror", str(SOURCE), str(FIXTURE)]
+                   "-Werror", str(FIXTURE)]
         command += ["-dynamiclib"] if sys.platform == "darwin" else ["-shared", "-fPIC"]
         subprocess.run([*command, "-o", str(output)], check=True,
                        capture_output=True, text=True)
@@ -40,11 +40,12 @@ class BootloaderMspiPioMixedTests(unittest.TestCase):
     def test_analyzer_closes_both_functions_and_hardware_block(self) -> None:
         report = analyzer.audit()
         self.assertEqual(report["status"],
-                         "piomixed-candidate-exact-retained-official / callbacks-production-source / hardware-validation-deferred-by-project-direction")
-        self.assertFalse(report["production"]["routed"])
-        self.assertEqual(report["production"]["boundary_status"], "official_blob")
+                         "piomixed-structured-source-dual-profile / callbacks-production-source / hardware-validation-blocked-by-unavailable-physical-evidence")
+        self.assertTrue(report["production"]["routed"])
+        self.assertEqual(report["production"]["boundary_status"], "source_compiled")
+        self.assertEqual(report["production"]["compiled_bytes"], 84)
         self.assertEqual(report["production"]["source_owned_bytes"] +
-                         report["production"]["retained_official_bytes"], 147296)
+                         report["production"]["retained_official_bytes"], 147350)
         self.assertEqual(report["production"]["next_frontier"],
                          0x0042499C)
         self.assertEqual(report["next_frontier"], {
@@ -52,7 +53,12 @@ class BootloaderMspiPioMixedTests(unittest.TestCase):
             "identity": "mspi0_base_literal", "bytes": 4,
         })
         self.assertEqual(report["hardware_validation"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
+
+    def test_production_source_uses_structured_c_not_raw_encoding(self) -> None:
+        text = SOURCE.read_text(encoding="utf-8")
+        self.assertNotIn(".byte", text)
+        self.assertNotIn("__asm__", text)
 
     def test_all_modes_map_to_exact_pio_mixed_values(self) -> None:
         expected = [0] * 12 + [1, 1, 3, 3, 5, 5, 7, 7, 0, 0, 9, 9, 11, 11]

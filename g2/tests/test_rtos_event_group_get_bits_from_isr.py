@@ -125,11 +125,11 @@ class RtosEventGroupGetBitsFromIsrTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "6afc615fe8e6f10766a1f9b09e01d555ad8516952d35c73a511efc44866500e1",
+            "de036691352fe45f8caf37cb39b2756f4fb6adeac6351604370ec5f242a1da87",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "9b84d0f91211a18f90d855b36f45e58083ecbaa8a24ef3cb1a46837668a93e00",
+            "b3edbb0757b9cfb43bb21698074bfa68fc426c7f04886a08cca1115a53594077",
         )
 
 

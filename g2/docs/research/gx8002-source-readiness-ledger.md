@@ -31,6 +31,11 @@ redistributed. Blocking content remains 326,000 bytes: the typed boundaries
 make all 326,000 bytes explicit and safely injectable, but do not turn them into
 open source.
 
+The current external-provider detail is exactly 190,912 executable bytes,
+5,124 runtime-data bytes, 9,164 NPU-command bytes, and 120,800 proprietary-model
+bytes. These are authenticated provider categories, not open-source availability
+claims; every category remains externally supplied and release-blocking.
+
 ## Selected cluster: KWS weights
 
 The existing stage-two closure independently proves:

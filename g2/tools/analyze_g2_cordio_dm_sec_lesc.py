@@ -129,7 +129,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
         "abi":{"dm_cb":0x20073B78,"oob_random_pointer":0x200744F8,"local_ecc_key":0x200726D0,"local_ecc_key_bytes":96},
         "lineage":{"selected_source_interval":"Packetcraft r20.05 through r20.05c / AmbiqSuite R4.4.1","selected_blob":"a8790951d69484687728d74669888931a9aa2971","selected_sha256":"a8bd51525ec11fa7f5ea8c2aee5c76ed8885aa191cb76fcfcb54ddf72e886e8d","historical_generating_commit_resolved":False,"license":"Apache-2.0"},
         "readiness":{"archive":str(READINESS_MANIFEST),"archive_sha256":READINESS_SHA256,"compiler_profiles":2,"source_functions_built":11,"provider_seams":18,"valid_non_vacuous_closure_profiles":2,"linked_unresolved_symbols":0},
-        "production":{"candidate":source_path,"source_sha256":source_sha256,"production_routed":True,"live_functions":len(routes),"compiled_leaf_bytes":278,"source_owned_bytes_added":284,"stock_bytes_replaced":222,"dead_stripped_public_apis":SOURCE_ONLY,"hardware_validation":"deferred by project direction"},
+        "production":{"candidate":source_path,"source_sha256":source_sha256,"production_routed":True,"live_functions":len(routes),"compiled_leaf_bytes":278,"source_owned_bytes_added":284,"stock_bytes_replaced":222,"dead_stripped_public_apis":SOURCE_ONLY,"hardware_validation":"blocked by unavailable physical evidence"},
     }
 
 def main() -> int:

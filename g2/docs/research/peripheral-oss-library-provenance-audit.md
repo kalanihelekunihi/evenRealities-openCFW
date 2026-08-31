@@ -208,11 +208,14 @@ Ghidra/Rizin analysis misaligns some legal six-byte long-immediate forms.
 The complete evidence is in the
 [ARCompact audit](em9305-qpc-arcompact-audit.md).
 
-QP/C 6.5.1 is the selected upstream release, but source integration still
-requires review of that historical release's GPL/commercial terms. The SDK
+QP/C 6.5.1 is the selected upstream release and its selected upstream source
+license is now represented in an ARCv2-EM target-linked non-production
+component. Production
+integration still requires preserving its applicable license conditions across the delivered
+controller work and resolving install placement. The SDK
 oracle has no repository-level license metadata, even though individual files
 contain their own notices. Before source enters an EM9305 image, openCFW must
-preserve applicable notices and review the GPL effect on the linked controller
+preserve applicable notices and review the reciprocal-license effect on the linked controller
 image or obtain a commercial license. A version match is not a license grant
 for the existing binary or proprietary vendor glue.
 

@@ -16,7 +16,7 @@ EXPECTED_SYMBOLS = {
     "open_cfw_kvdb_terminal_mode_load_and_migrate",
     "open_cfw_kvdb_write_terminal_mode",
 }
-SOURCE_SHA256 = "33caff3263530ce7e7db7c59caa9b470f019fdccd1fdd720e2b495f2a1e97bfb"
+SOURCE_SHA256 = "816832d6cb61ad41520b612ea580e9fe5dd9a9fdde829d673dec93f184757f94"
 
 
 class KvdbTerminalModeCandidateTests(unittest.TestCase):

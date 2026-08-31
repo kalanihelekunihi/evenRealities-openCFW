@@ -18,7 +18,7 @@ EXPECTED_SYMBOLS = {
     "open_cfw_kvdb_onboarding_config_set_indexed",
     "open_cfw_kvdb_onboarding_config_update_and_persist",
 }
-SOURCE_SHA256 = "f8c3154fe326878b2f89908555238ddc190a6cecc6c874aeed342624b24d561e"
+SOURCE_SHA256 = "42c5d8032ee0c0bb8a723496d4dd5555f49d624f99196de565f17a00664db653"
 
 
 class KvdbOnboardingConfigCandidateTests(unittest.TestCase):

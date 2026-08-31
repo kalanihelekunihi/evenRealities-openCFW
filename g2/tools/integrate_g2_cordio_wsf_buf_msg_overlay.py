@@ -1484,8 +1484,10 @@ MODULES = {
         "whole_translation_unit": True,
         "flag": "-DOPEN_CFW_HCI_DRIVER_PRODUCTION=1",
         # Radio boot/shutdown and the BLEIF transfer handler remain stock in
-        # the deliverable until authorized right-temple execution can validate
-        # the physical controller, IRQ, and blocking read/write bridge.
+        # the deliverable while hardware validation is deferred by project
+        # direction. Future qualification requires authorized G2 hardware and
+        # either a component-specific controller/IRQ fixture or an authenticated
+        # golden capture of the blocking read/write bridge.
         "selectors": (
             ("ERROR", "error_check", 0x004B47AE, 0x004B47CC),
             ("WRITE", "hciDrvWrite", 0x004B4A02, 0x004B4A7C),

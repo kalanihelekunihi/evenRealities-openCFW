@@ -1,5 +1,10 @@
 # G2 bootloader TLSF block-header primitive source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Status: implemented in production source; offline verification green; physical boot and heap validation blocked by unavailable authorized hardware evidence.
 
 ## Boundary and provenance

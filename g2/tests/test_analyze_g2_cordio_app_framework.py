@@ -48,7 +48,7 @@ class CordioApplicationFrameworkTests(unittest.TestCase):
         self.assertFalse(report["lineage"]["exact_source_text_identity"])
         production = report["production"]
         self.assertTrue(production["production_routed"])
-        self.assertEqual(production["status"], "software_closed_hardware_blocked")
+        self.assertEqual(production["status"], "software_closed_hardware_deferred")
         self.assertTrue(production["legacy_master_slave_routed"])
         self.assertEqual(production["routed_functions"], 61)
         self.assertEqual(production["routed_anchored_functions"], 50)
@@ -60,8 +60,21 @@ class CordioApplicationFrameworkTests(unittest.TestCase):
         self.assertEqual(production["application_runtime_relocations"], 108)
         self.assertTrue(production["preexisting_app_database_routed"])
         self.assertEqual(production["remaining_anchored_functions"], 0)
-        self.assertEqual(production["hardware_validation"], "deferred by project direction")
+        self.assertEqual(production["hardware_validation"], "blocked by unavailable physical evidence")
         self.assertIn("required for future qualification", production["hardware_blocker"])
+
+    def test_snapshot_hardware_policy_fails_closed(self) -> None:
+        verifier = self.analyzer._load(
+            "ambiqsuite_cordio_app_snapshot_policy_test",
+            self.analyzer.SNAPSHOT_VERIFIER,
+        )
+        provenance = {
+            "g2_boundary": dict(verifier.EXPECTED_HARDWARE_POLICY),
+        }
+        verifier._verify_hardware_policy(provenance)
+        provenance["g2_boundary"]["hardware_validation"] = "blocked"
+        with self.assertRaises(AssertionError):
+            verifier._verify_hardware_policy(provenance)
 
 
 if __name__ == "__main__":

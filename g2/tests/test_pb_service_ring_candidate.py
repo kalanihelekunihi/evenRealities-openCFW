@@ -48,10 +48,10 @@ class PbServiceRingCandidateTests(unittest.TestCase):
 
     def test_source_is_pinned(self) -> None:
         data = SOURCE.read_bytes()
-        self.assertEqual(len(data), 8179)
+        self.assertEqual(len(data), 8170)
         self.assertEqual(
             hashlib.sha256(data).hexdigest(),
-            "270772d136060be649f684e05e3de604bd89bd8ea6e0a4599ee550077c5c19cb",
+            "182a9e4764c23e7491ad9b77842daded6b0e4fad468deeb16cfcf40eabbd5d98",
         )
 
 

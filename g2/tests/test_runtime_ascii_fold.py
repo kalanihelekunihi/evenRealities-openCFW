@@ -246,8 +246,7 @@ class RuntimeAsciiFoldTests(unittest.TestCase):
             self.assertNotIn(token, source)
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "84c357e2b2ee87cf1b1d220ef397d8913"
-            "08f6dc62629c138e16ae225726a0eea",
+            "ee9a7ea3f57d5c14e830795de436f5ed68b1993c67ad8e54de19ec006dbaeb7b",
         )
 
 

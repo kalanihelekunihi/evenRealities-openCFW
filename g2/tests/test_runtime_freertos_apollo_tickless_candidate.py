@@ -89,8 +89,8 @@ UNDEFINED = [
 
 TARGET_PINS = {
     "apple-clang": {
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
-        "object": (2260, "d48efce527610f422d19a33e43f89e37b0f26811d18002e7025a18b8e3ed00c4"),
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "object": (2260, "bb03a54bc62c8e878d53f0dcc77ad09a0d4e7506aadd199f78468184a06a634e"),
     },
     "linux-clang": {
         "version": "Homebrew clang version 22.1.8",
@@ -100,9 +100,9 @@ TARGET_PINS = {
 
 FUNCTION_PIN = (192, 4, "253c0ab060d9ed9eee8c73e89e028b17c5eb61b810410fe00a106b0d51ab265b")
 LOCAL_PINS: dict[Path, tuple[int, str]] = {
-    SOURCE: (4463, "324c6e43793113bef6b562f43bfed6e47bbd2a837bff1e6acce1aa038152cf46"),
-    HEADER: (808, "1683cb8288c9e489337c615421399a9b532cad44eb698adc7d595b542ad60d3c"),
-    FIXTURE: (3939, "4aa097e5f1f91242efe40300e6586aab2d2405c641b4e4e456857713e3ca6499"),
+    SOURCE: (4454, "06018953707d1c278ed80d599f7b38078bc7dd3cac4982d448910301c7a7ce62"),
+    HEADER: (799, "aea556ecdfc36c6e428b38afe7785906fd2158f6edd874c471f8e50ee4597ce7"),
+    FIXTURE: (3930, "b816fc5d221e6c77920ff389c7c4bbdfe1a9b03cf60a93b40a1935553a9aa9ee"),
     AUDIT: (2598, "c9d298b62c7f6ea7dab46b98849e7878b9660ff08b88bd8a8bd7cc14835c060c"),
 }
 

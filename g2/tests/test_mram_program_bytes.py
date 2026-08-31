@@ -172,11 +172,11 @@ class MramProgramBytesTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "7eccb6fee7b71f0737d0e6b9c39e2e73541e78cf62f49ad2746129d5a77c9e5a",
+            "ad454bf74cbef1c60ee0056e048b23cffed92c3547281fde8e9d91243645af29",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "ad505d3e0781ef7fda5a7404e138c1274a813d5653508838d95d4559dc533ffd",
+            "e719330de2828d03c411cca77f339bc4ab553a4657ead8c5ef1c754649b70817",
         )
 
 

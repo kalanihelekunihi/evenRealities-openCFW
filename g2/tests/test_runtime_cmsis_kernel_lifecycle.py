@@ -143,19 +143,19 @@ class RuntimeCmsisKernelLifecycleTests(unittest.TestCase):
         start = leaves["open_cfw_cmsis_kernel_start"]
         self.assertEqual(
             (initialize["expected"]["size"], initialize["expected"]["offset"], initialize["expected"]["sha256"]),
-            (50, 197108, "eec1c560ef83b9740cfd0acb121693c6b7454ed5df3e973c44d9cdeeefc1734d"),
+            (50, 137260, "2da493da67483c1f6fdb77b7958fcb79d531948b24d77ab8f7d7a31967a4c1ab"),
         )
         self.assertEqual(
             (start["expected"]["size"], start["expected"]["offset"], start["expected"]["sha256"]),
-            (56, 197160, "1d04344191e1c68ad1c13b53b9f57c247bc50c16a1050e2953267502cc4b44f4"),
+            (56, 137312, "e6b14852638048830f9777c1ada618148fc0c7a0e9ff69859a48cebb67eadf60"),
         )
         self.assertEqual(
             (initialize["toolchain_profiles"]["linux-clang"]["expected"]["offset"],
              initialize["toolchain_profiles"]["linux-clang"]["expected"]["sha256"],
              start["toolchain_profiles"]["linux-clang"]["expected"]["offset"],
              start["toolchain_profiles"]["linux-clang"]["expected"]["sha256"]),
-            (198892, "2808957c4878382f4602c5e4012c49cf342e8281b7933e6f589f32e1c4266658",
-             198944, "0e0d936eaa1a3b76296230394f682d2609c619a85f7d02b6e5e026ad57e64333"),
+            (139140, "7c915db88585f25e0f03db84a3ed7aa950c7b9de1862d71fadf50cb7c8651e70",
+             139192, "7f61a7b8b6cb04c286cd3ddf7baef6c3bfa9d64a886053b3966353b29aac0f15"),
         )
         self.assertEqual(start["relocations"][-1]["target_address"], 0x454CEC)
         self.assertEqual(
@@ -169,9 +169,9 @@ class RuntimeCmsisKernelLifecycleTests(unittest.TestCase):
             "cmsis_kernel_initialize_source_replacement": (69724, 48, 0x44903C),
             "cmsis_kernel_get_state_source_replacement": (69772, 40, 0x44906C),
             "cmsis_kernel_start_source_replacement": (69812, 56, 0x449094),
-            "apollo_cmsis_kernel_initialize_source_leaf": (3720504, 50, 0x7C4518),
-            "apollo_cmsis_kernel_start_alignment": (3720554, 2, 0x7C454A),
-            "apollo_cmsis_kernel_start_source_leaf": (3720556, 56, 0x7C454C),
+            "apollo_cmsis_kernel_initialize_source_leaf": (3660656, 50, 0x7B5B50),
+            "apollo_cmsis_kernel_start_alignment": (3660706, 2, 0x7B5B82),
+            "apollo_cmsis_kernel_start_source_leaf": (3660708, 56, 0x7B5B84),
         }
         self.assertEqual(
             {name: (regions[name]["file_offset"], regions[name]["size"], regions[name]["target_address"]) for name in expected},
@@ -180,8 +180,8 @@ class RuntimeCmsisKernelLifecycleTests(unittest.TestCase):
         self.assertEqual(
             (config["expected"]["overlay_size"], config["expected"]["overlay_sha256"],
              config["expected"]["component_size"], config["expected"]["component_sha256"]),
-            (429058, "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
-             3952454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"),
+            (360578, "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+             3883974, "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"),
         )
 
 

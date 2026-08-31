@@ -26,27 +26,27 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "018faa96061d3156726c798ad4954f736ca5591c966bd8f101788270d2463b8a",
-    CLOSURE: "a051f7d243b85cece5f76e89fc6da32dc0f9ce52e5be825b05c1c375168572c3",
-    PROVENANCE: "0f2d172c3901f2aa0ccc4502232527050bbd2dfbb9a57fbfd44398b20fd6d62f",
+    CLOSURE: "04cc2b1fb122d3fdbb80ba6bc53d115511953cb87dbc4f9eb88a3083b463337e",
+    PROVENANCE: "3d7315af638a3b36fd740ef64859716481e9fffdf01814499d47040bb890c43e",
 }
-SOURCE_SIZE = 16280
-SOURCE_SHA256 = "ce4f5063e971cbed8d36ebdb764f88472efc4d9a7d581f125c3dfff64756e908"
+SOURCE_SIZE = 16271
+SOURCE_SHA256 = "f64b59b3cd70b1f51b4e39a24aa1977c004917bfc442ede92134c4c71649d53b"
 FUNCTIONS = (
-    ("open_cfw_pb_service_quicklist_buffer_write", 166, 268168, 0,
+    ("open_cfw_pb_service_quicklist_buffer_write", 166, 208320, 0,
      "buffer_write"),
-    ("open_cfw_pb_service_quicklist_zero", 26, 268336, 0, "zero"),
-    ("open_cfw_pb_service_quicklist_transmit", 98, 268364, 5, "transmit"),
-    ("APP_DecodePbRxQuicklistData", 40, 268464, 2, "decode_data"),
-    ("PB_RxQuicklistItem", 10, 268504, 0, "rx_item"),
-    ("APP_PbTxEncodeQuicklistItem", 106, 268516, 2, "tx_item"),
-    ("PB_RxQuicklistMultItems", 10, 268624, 0, "rx_multi"),
-    ("APP_PbTxEncodeQuicklistMultItems", 72, 268636, 2, "tx_multi"),
-    ("APP_PbNotifyEncodeQuicklistMultItems", 188, 268708, 2,
+    ("open_cfw_pb_service_quicklist_zero", 26, 208488, 0, "zero"),
+    ("open_cfw_pb_service_quicklist_transmit", 98, 208516, 5, "transmit"),
+    ("APP_DecodePbRxQuicklistData", 40, 208616, 2, "decode_data"),
+    ("PB_RxQuicklistItem", 10, 208656, 0, "rx_item"),
+    ("APP_PbTxEncodeQuicklistItem", 106, 208668, 2, "tx_item"),
+    ("PB_RxQuicklistMultItems", 10, 208776, 0, "rx_multi"),
+    ("APP_PbTxEncodeQuicklistMultItems", 72, 208788, 2, "tx_multi"),
+    ("APP_PbNotifyEncodeQuicklistMultItems", 188, 208860, 2,
      "notify_multi"),
-    ("PB_RxQuicklistEvent", 10, 268896, 0, "rx_event"),
-    ("APP_PbTxEncodeQuicklistEvent", 76, 268908, 2, "tx_event"),
-    ("APP_PbNotifyEncodeQuicklistEvent", 86, 268984, 2, "notify_event"),
-    ("APP_PbRxQuicklistFrameDataProcess", 172, 269072, 9, "rx_frame"),
+    ("PB_RxQuicklistEvent", 10, 209048, 0, "rx_event"),
+    ("APP_PbTxEncodeQuicklistEvent", 76, 209060, 2, "tx_event"),
+    ("APP_PbNotifyEncodeQuicklistEvent", 86, 209136, 2, "notify_event"),
+    ("APP_PbRxQuicklistFrameDataProcess", 172, 209224, 9, "rx_frame"),
 )
 PHYSICAL = (0x0055894C, 0x005597F0)
 PHYSICAL_SHA256 = "50654068015e5cced557275529f0ebf3cfe2b16e9d34c86e2071607ac9fb5a18"
@@ -365,12 +365,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "retained_gap_pool_bytes": 280,
             "maximum_notification_items": 20,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "No authorized live G2 service 0x0c quicklist peer BLE, "
-                "persistent list load/save, response, or notification "
-                "workflow evidence is required for future qualification; the authorized right temple "
-                "is not under test because qualification is deferred by project direction and the left temple must remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific service 0x0C quicklist fixture "
+                "or an authenticated golden BLE persistent-list, response, and notification workflow capture"
             ),
         },
     }

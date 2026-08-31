@@ -42,8 +42,8 @@ PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.eve
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 
 PINNED_INPUTS = {
-    ROOT / "components/shared/cordio/runtime_cordio_wsf_buf_candidate.c": "37f7b6ecc6e9fd498b36d350eef9f67f156ed174601ed915315a415f9f2ca96c",
-    ROOT / "components/shared/cordio/runtime_cordio_wsf_buf_candidate.h": "18eca9f376dfd791d79be5b00906f72746dec77bf99df9365aaa9464043a37d6",
+    ROOT / "components/shared/cordio/runtime_cordio_wsf_buf_candidate.c": "293a6a08c7babaef099c34d63400a2cfea6aef5dd6febd31deefbeadfb32c124",
+    ROOT / "components/shared/cordio/runtime_cordio_wsf_buf_candidate.h": "d8bc569994a9ac212d59a1cf75309e71710282aa330b17a86adaefc287cde146",
     ROOT / "components/shared/cordio/runtime_cordio_wsf_msg_candidate.c": "d402234e563dcdb7b60835c958be5d56783600a538ed56183b23491b46b021da",
     ROOT / "components/shared/cordio/runtime_cordio_wsf_msg_candidate.h": "c6690996e70d66a7d62dec7c43b1a80854e05ed950974100f33fc99dacfded63",
     BUF_MAP: "b2dbe31dd1e118fa82aba44fd043f6ec0276ea5cd8d42e1c39cc0ded522b4e74",
@@ -250,12 +250,12 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
         (
             "buffer", "runtime_cordio_wsf_buf_candidate.c",
             "replace_cordio_wsf_buf_", _rows(BUF_MAP),
-            BUF_PRODUCTION_FUNCTIONS, 333312, (582, 0, 5),
+            BUF_PRODUCTION_FUNCTIONS, 264832, (582, 0, 5),
         ),
         (
             "message", "runtime_cordio_wsf_msg_candidate.c",
             "replace_cordio_wsf_msg_", _rows(MSG_MAP),
-            MSG_PRODUCTION_FUNCTIONS, 333894, (114, 12, 8),
+            MSG_PRODUCTION_FUNCTIONS, 265414, (114, 12, 8),
         ),
     ):
         source_path = f"components/shared/cordio/{source_name}"

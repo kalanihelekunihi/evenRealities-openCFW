@@ -16,21 +16,27 @@ import analyze_em9305_first_party_hooks_candidate as first_party
 
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin"
+OBJDUMP = ROOT / "research/corpus/em9305/size-delta/opencfw-em9305-application-objdump.txt"
 ARCHIVE_REPORT = ROOT / "research/corpus/em9305/sdk-comparison/batch16/reports/emb_controller.json"
 PML_REPORT = ROOT / "research/corpus/em9305/sdk-comparison/round2/reports/pml_di03.json"
 CORDIO_PROVENANCE = ROOT / "third_party/cordio/PROVENANCE.json"
 CANDIDATE = ROOT / "components/shared/em9305/runtime_qpc_hook_provider_candidate.c"
 HEADER = CANDIDATE.with_suffix(".h")
+WSF_CANDIDATE = ROOT / "components/shared/em9305/runtime_wsf_idle_tasks.c"
+WSF_HEADER = WSF_CANDIDATE.with_suffix(".h")
 MANIFEST = ROOT / "tools/manifests/em9305-qpc-hook-provider-closure.tsv"
 
 FILE_PINS = {
     IMAGE: (211_948, "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"),
+    OBJDUMP: (3_463_728, "13d1e9c7c0d2c2d3db9436d21ec6d90a39622446cb8ab96de5c2c01ba752916f"),
     ARCHIVE_REPORT: (1_810_118, "dfe669a3370e3e8417c45e1619f62c4225a9598c90156ea7649b4d9aad84a525"),
     PML_REPORT: (55_705, "99f23bae581422185362e6f11ed0afa0fd923a0d6c4f4f9e1582b43400650d4f"),
     CORDIO_PROVENANCE: (20_246, "1fffca2937f4ec8f0937f947e0d6e0c14110ea36c561826be21b67d0c7bab07a"),
-    CANDIDATE: (2_570, "6935755ea92cef192519bdc53fa0e1dcd10467d3cb6205807bff42a75ff5a5ad"),
+    CANDIDATE: (2_557, "853865ae3bd704cc3a9153abbb43b5cbac5ddad84ff2fc4ae8505ac1272f9ac3"),
     HEADER: (1_537, "6b2be8187a7a6a80f00affa53b8f8cf4c52045eb6abaeed9965b72ed49bd1690"),
-    MANIFEST: (2_233, "1f2185d2dcb279c7a48835358d7652ca398504aa764ddc1dd5d384a5a87ffea0"),
+    WSF_CANDIDATE: (2_098, "5a7458762180de765802774468dae715ce637bcd6e352c20b01698083b800071"),
+    WSF_HEADER: (1_214, "75183c81061def9f3de7b8286dd2697219d4b31b3e3cc83e9c9cc46ccf4062c4"),
+    MANIFEST: (2_283, "92ad6acc7171c1cd60f00d6cc7f19bfbb821eac50b177afa4b6eeb4013f6083a"),
 }
 APP_BASE = 0x00302400
 APP_FILE_OFFSET = 0x424
@@ -56,6 +62,21 @@ PROVIDERS = {
         "normalized": "443757dcaf3311b35cca73daca2609311c98ddd0df3aaa921ae24709434fa88d",
     },
 }
+WSF_BODY_HEX = (
+    "e8c2cb45800060600d8ded7015e82c8d0fe9b1404a2600100410002405e840782"
+    "c8dc0be057ee571f10f449002f0cd7044264f10edade140c8c6"
+)
+WSF_OBJDUMP_MARKERS = (
+    "333d7e:\t45cb 0080 6060      \tmov_s\tr13,0x806060",
+    "333d84:\t8d0d                \tldb_s\tr0,[r13,0xd]",
+    "333d8a:\t8d2c                \tldb_s\tr1,[r13,0xc]",
+    "333d94:\t1004 2400           \tld.ab\tr0,[r16,4]",
+    "333d9a:\t7840                \tjl_s\t[r0]",
+    "333d9e:\tbec0                \tbmsk_s\tr14,r14,0",
+    "333da0:\t7e05                \tor_s\tr14,r14,r0",
+    "333dac:\t2644 104f           \tand\tr15,r14,0x1",
+    "333db0:\taded                \tstb_s\tr15,[r13,0xd]",
+)
 VOLTMON = {
     "address": 0x00313AE4, "size": 104,
     "sha256": "5607dec62c9b662938b071e0d5f2deb0ac728650d4939d3b60b070b7af39a88e",
@@ -96,6 +117,8 @@ def run_audit() -> dict[str, Any]:
     image = inputs[IMAGE]
     source = inputs[CANDIDATE].decode("utf-8")
     header = inputs[HEADER].decode("utf-8")
+    wsf_source = inputs[WSF_CANDIDATE].decode("utf-8")
+    wsf_header = inputs[WSF_HEADER].decode("utf-8")
     combined = source + "\n" + header
     if combined.count("SPDX-License-Identifier: MIT") != 2:
         raise CandidateError("clean-room boundary must retain both MIT declarations")
@@ -110,6 +133,24 @@ def run_audit() -> dict[str, Any]:
                    "VoltMon_DoMeasurement"):
         if marker not in combined:
             raise CandidateError(f"candidate boundary marker drift: {marker}")
+    wsf_combined = wsf_source + "\n" + wsf_header
+    if wsf_combined.count("SPDX-License-Identifier: MIT") != 2:
+        raise CandidateError("WSF idle candidate must retain both MIT declarations")
+    for marker in (
+        "OPEN_CFW_EM9305_WSF_IDLE_TASK_CAPACITY = 3",
+        "open_cfw_em9305_wsf_idle_state_init",
+        "open_cfw_em9305_wsf_idle_register",
+        "open_cfw_em9305_wsf_idle_request",
+        "open_cfw_em9305_wsf_os_run_idle_tasks",
+        "active |= callback() & 1U",
+        "state->pending = (uint8_t)(active & 1U)",
+    ):
+        if marker not in wsf_combined:
+            raise CandidateError(f"WSF idle candidate marker drift: {marker}")
+    objdump = inputs[OBJDUMP].decode("ascii")
+    for marker in WSF_OBJDUMP_MARKERS:
+        if marker not in objdump:
+            raise CandidateError(f"WSF idle stock semantic marker drift: {marker}")
 
     first = first_party.run_audit()
     if first["status"] != "candidate-qualified-fail-closed":
@@ -157,11 +198,17 @@ def run_audit() -> dict[str, Any]:
         body = installed_slice(image, expected["address"], expected["size"])
         if digest(body) != expected["sha256"]:
             raise CandidateError(f"stock provider body drift: {name}")
+        if name == "wsfOsRunIdleTasks" and body.hex() != WSF_BODY_HEX:
+            raise CandidateError("stock WSF idle body bytes drift")
         provider_results[name] = {
             "address": expected["address"], "bytes": expected["size"],
             "sha256": expected["sha256"], "archive_object": expected["object"],
             "normalized_sha256": expected["normalized"],
-            "redistribution_authority": "unresolved",
+            "redistribution_authority": (
+                "clean-room-mit" if name == "wsfOsRunIdleTasks" else "unresolved"
+            ),
+            "clean_room_source_available": name == "wsfOsRunIdleTasks",
+            "hardware_dependent": name != "wsfOsRunIdleTasks",
         }
 
     pml_report = json.loads(inputs[PML_REPORT])
@@ -203,6 +250,8 @@ def run_audit() -> dict[str, Any]:
         "sha256": VOLTMON["sha256"], "archive_object": VOLTMON["object"],
         "normalized_sha256": VOLTMON["normalized"],
         "redistribution_authority": "unresolved",
+        "clean_room_source_available": False,
+        "hardware_dependent": True,
     }
     edge_results = {}
     for address, (size, expected_hex, expected_sha) in IDLE_EDGES.items():
@@ -226,13 +275,15 @@ def run_audit() -> dict[str, Any]:
     if (
         row_by_name["VoltMon_DoMeasurement"]["disposition"]
         != "exact_sdk_archive_identity_via_two_veneers"
+        or row_by_name["wsfOsRunIdleTasks"]["disposition"]
+        != "clean_room_source_candidate"
         or row_by_name["idle_final_noop"]["disposition"] != "exact_noop_target"
     ):
         raise CandidateError("idle provider manifest decision drift")
-    if rows[-1]["name"] != "deferred by project direction":
+    if rows[-1]["name"] != "blocked by unavailable physical evidence":
         raise CandidateError("hardware qualification policy drift")
     return {
-        "status": "candidate-qualified-named-fail-closed",
+        "status": "candidate-qualified-one-software-two-hardware",
         "read_only": True,
         "hardware_operations": False,
         "license": "MIT",
@@ -240,6 +291,21 @@ def run_audit() -> dict[str, Any]:
         "providers": provider_results,
         "idle_provider_edges": edge_results,
         "unresolved_providers": [],
+        "software_provider_gaps": [],
+        "hardware_dependent_providers": [
+            "PalUartResume", "VoltMon_DoMeasurement",
+        ],
+        "wsf_idle_semantics": {
+            "stock_entry": 0x00333D7C,
+            "stock_bytes": 58,
+            "callback_capacity": 3,
+            "callback_count_offset": 12,
+            "pending_offset": 13,
+            "result": "ordered_nonnull_callback_bit0_or",
+            "clean_room_source": str(WSF_CANDIDATE.relative_to(ROOT)),
+            "clean_room_header": str(WSF_HEADER.relative_to(ROOT)),
+            "production_routed": False,
+        },
         "semantic_noop": {
             "entry": 0x00310728, "argument": 16,
             "target": 0x003101E8, "bytes": 4,
@@ -254,7 +320,7 @@ def run_audit() -> dict[str, Any]:
             "header": str(HEADER.relative_to(ROOT)),
             "production_routed": False,
         },
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
     }
 
 
@@ -266,9 +332,10 @@ def main() -> int:
     if args.json:
         print(json.dumps(result, indent=2, sort_keys=True))
     else:
-        print("EM9305 QP/C hook providers: candidate-qualified-named-fail-closed")
-        print("named providers: PalUartResume, wsfOsRunIdleTasks, VoltMon_DoMeasurement")
-        print("hardware validation: deferred by project direction")
+        print("EM9305 QP/C hook providers: candidate-qualified-one-software-two-hardware")
+        print("software provider: wsfOsRunIdleTasks")
+        print("hardware providers: PalUartResume, VoltMon_DoMeasurement")
+        print("hardware validation: blocked by unavailable physical evidence")
     return 0
 
 

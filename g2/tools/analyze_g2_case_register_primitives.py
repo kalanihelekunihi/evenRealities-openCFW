@@ -167,7 +167,7 @@ def analyze() -> dict:
         "rows": rows,
         "integration": "isolated source candidate only; platform MMIO adapter and image routing remain open",
         "production_routed": False,
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_operations": [],
         "hardware_note": "software-only admission; directed hardware work is outside the current project phase",
     }

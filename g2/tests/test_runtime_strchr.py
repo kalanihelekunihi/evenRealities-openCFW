@@ -260,8 +260,8 @@ class RuntimeStrchrTests(unittest.TestCase):
         self.assertNotIn("text == ", source)
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "77d106622b9bfa7465a6d8f2c6e25bff"
-            "f0ea7abe80241a35f9149b39fcb26186",
+            "b4257a957df2c91f485b4735ef52393f"
+            "0768f4f7185e45e16038a1029297cba1",
         )
 
 

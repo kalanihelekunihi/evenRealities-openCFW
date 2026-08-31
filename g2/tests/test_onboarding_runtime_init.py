@@ -159,7 +159,7 @@ class OnboardingRuntimeInitTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "c321aff8f277460c636ce8a63b3bb29816afda1ebeb27656be00d8b015fd295a",
+            "5f3b35a1fe2b69769f1bc00b7e6cac580a5699b924968400e402cdd3cd895e48",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),

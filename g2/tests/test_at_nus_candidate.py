@@ -13,7 +13,7 @@ FIXTURE = ROOT / "tests/fixtures"
 EXPECTED_SYMBOLS = {
     "open_cfw_at_nus_handler",
 }
-SOURCE_SHA256 = "b80576c1aea40353475d331686bb5ec2b5915bc1acf911b73e6fee4a12cc87ae"
+SOURCE_SHA256 = "0b297201dcd6d12b51000a7e8092bb7cbb99501157898a9d8908b0a4cd757fe0"
 
 
 class AtNusCandidateTests(unittest.TestCase):

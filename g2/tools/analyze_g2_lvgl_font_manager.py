@@ -23,7 +23,7 @@ ROUTES=[
  ("replace_lvgl_font_manager_08","open_cfw_font_manager_xip_name"),
 ]
 SOURCE="components/apollo_main/core_overlay/lvgl_font_manager.c"
-SOURCE_SHA256="f11f98dd4c2eda815512e3e9b2e23ab7401b7cfdc439f272e69d59b684bbb080"
+SOURCE_SHA256="f903ee0b79df945ddcb63c8f723c68132f82d444618d995ab22121d97d591b97"
 def sh(x):return hashlib.sha256(x).hexdigest()
 def cstring(b,a):
  o=a-c.BASE;e=b.find(b'\0',o)

@@ -82,8 +82,8 @@ UPSTREAM_DEFINITION = (
 )
 LOCAL_PINS = {
     SOURCE: (
-        1741,
-        "f56a603644c5e9cd85781f8d3be2c69e85e458c48fa7ecd8633d6c6a9dbda3d9",
+        1777,
+        "ec131ca190a2348fabe114bff89d5d1fe36a36c4dc7158519a4d4aa7965a6814",
     ),
     HEADER: (
         1290,
@@ -119,7 +119,7 @@ IDENTITY_RELOCATIONS = [
 ]
 SECTION = ".text." + FUNCTION
 APPLE_CLANG = "/usr/bin/clang"
-APPLE_VERSION = "Apple clang version 21.0.0 (clang-2100.3.30.1)"
+APPLE_VERSION = "Apple clang version 21.0.0 (clang-2100.3.33.1)"
 LINUX_CLANG = "/home/linuxbrew/.linuxbrew/bin/clang"
 LINUX_VERSION_PREFIX = "Homebrew clang version 22.1.8"
 OBJECT_PIN = (
@@ -143,14 +143,14 @@ APPLE_LEAF = {
     "size": 20,
     "sha256": "af3357e8178ab650d5476d0ad0fbfee0b44cdb288d9251da909b3ba7a1de92c4",
     "alignment": 4,
-    "offset": 184744,
+    "offset": 124896,
     "unrelocated_sha256": TEXT_PIN[1],
 }
 LINUX_LEAF = {
     "size": 22,
     "sha256": "59438f30232883560f65ad4e58ff97c05dcdffdb6287fffcb7c1b79487df436d",
     "alignment": 4,
-    "offset": 186472,
+    "offset": 126720,
     "unrelocated_sha256": (
         "6c23e37c9468d866db2e2cb6bf0ce8e103fb34df1078e740b4b8d5d799c257ff"
     ),
@@ -167,26 +167,34 @@ PROFILE_PATCH_PINS = {
 }
 APPLE_AGGREGATE = {
     "overlay": (
-        429_058,
-        "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+        360_578,
+        "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
     ),
     "component": (
-        3_952_454,
-        "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+        3_883_974,
+        "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
     ),
 }
 LINUX_AGGREGATE = {
     "overlay": (
-        212_664,
-        "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+        152_912,
+        "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20",
     ),
     "component": (
-        3_736_060,
-        "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+        3_676_308,
+        "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
+    ),
+    "core_overlay": (
+        145_314,
+        "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19",
+    ),
+    "core_component": (
+        3_668_710,
+        "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8",
     ),
     "package": (
-        4_529_116,
-        "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+        4_469_364,
+        "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
     ),
 }
 TARGET_FLAGS = (
@@ -320,9 +328,20 @@ class NanopbIstreamFromBufferProductionTests(unittest.TestCase):
         cls.apollo_overlay = apollo_overlay
         cls.package = OFFICIAL.read_bytes()
         cls.application = cls.package[PACKAGE_PREAMBLE:]
+        production_config = json.loads(OVERLAY.read_text(encoding="utf-8"))
+        production_config["expected"] = dict(
+            production_config["core_stage_expected"]
+        )
+        for profile in production_config["toolchain_profiles"].values():
+            profile["expected"] = dict(profile["core_stage_expected"])
+        production_config_path = temporary / "production-core-stage.json"
+        production_config_path.write_text(
+            json.dumps(production_config, indent=2) + "\n",
+            encoding="utf-8",
+        )
         cls.component_report = apollo_overlay.build(
             root=ROOT,
-            config_path=OVERLAY,
+            config_path=production_config_path,
             output_dir=temporary / "component-build",
             clang=cls.clang,
             toolchain_profile=cls.profile,
@@ -388,7 +407,7 @@ class NanopbIstreamFromBufferProductionTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (975, 914, 406),
+            (2440, 2328, 1871),
         )
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaves = [
@@ -636,11 +655,11 @@ class NanopbIstreamFromBufferProductionTests(unittest.TestCase):
         )
         self.assertEqual(
             (report["overlay"]["size"], report["overlay"]["sha256"]),
-            aggregate["overlay"],
+            aggregate.get("core_overlay", aggregate["overlay"]),
         )
         self.assertEqual(
             (report["component"]["size"], report["component"]["sha256"]),
-            aggregate["component"],
+            aggregate.get("core_component", aggregate["component"]),
         )
         constructor = next(
             item for item in report["relocated_leaves"]
@@ -780,7 +799,22 @@ class NanopbIstreamFromBufferProductionTests(unittest.TestCase):
             )
             if target == CONSTRUCTOR[0]:
                 callers.append(address)
-        source_replaced_stock_sites = (0x0048_FBD0, 0x0048_FE1C)
+        source_replaced_stock_sites = {
+            0x0048_FBD0,
+            0x0048_FE1C,
+            0x0049_B252,
+            0x004A_7988,
+            0x004D_6C58,
+            0x004D_84A2,
+            0x004E_3280,
+            0x0051_0AC4,
+            0x0055_8A06,
+            0x0058_8632,
+            0x0059_F5BA,
+            0x005B_1BCA,
+            0x005C_E294,
+            0x005C_E9EC,
+        }
         self.assertEqual(
             callers,
             [

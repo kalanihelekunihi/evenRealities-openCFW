@@ -55,8 +55,10 @@ extern void open_cfw_hci_driver_queue_add(open_cfw_hci_driver_queue_t *queue,
 extern void open_cfw_hci_driver_queue_remove(open_cfw_hci_driver_queue_t *queue,
                                              uint32_t items, uint32_t count);
 
-/* These four providers are the explicit physical BLEIF boundary.  Their C ABI
- * is complete, but production substitution requires right-temple evidence. */
+/* These providers are the explicit physical BLEIF boundary.  Their C ABI is
+ * complete.  Hardware qualification is blocked by unavailable physical evidence; future
+ * production substitution requires authorized G2 hardware plus a controller
+ * fixture or authenticated golden capture. */
 extern uint32_t open_cfw_hci_driver_hal_boot(bool cold_boot, uint8_t address[6]);
 extern void open_cfw_hci_driver_hal_shutdown(void);
 extern bool open_cfw_hci_driver_hal_irq_pending(void);

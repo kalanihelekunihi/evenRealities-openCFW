@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from copy import deepcopy
+import hashlib
+import json
 from pathlib import Path
 import sys
 import unittest
@@ -68,6 +71,95 @@ class G2CompletionReadinessTests(unittest.TestCase):
                 baseline + progress["cumulative_candidate_instruction_bytes"],
             )
 
+    def test_touch_candidate_provenance_is_disjoint_mixed_license_evidence(
+            self) -> None:
+        touch = self.report["components"]["touch"]
+        rows = analyzer._touch_candidate_provenance_rows()
+        provenance = touch["details"]["candidate_provenance"]
+        self.assertEqual(
+            [row["category"] for row in rows],
+            list(analyzer.TOUCH_CANDIDATE_ROUTE_ORDER),
+        )
+        self.assertEqual(len(rows), 6)
+        self.assertEqual(sum(row["bytes"] for row in rows), 14_510)
+        self.assertEqual(provenance["candidate_bytes"], 14_510)
+        self.assertEqual(provenance["subrow_count"], len(rows))
+        self.assertEqual(provenance["subrow_overlap_bytes"], 0)
+        self.assertEqual(provenance["row_digest"], hashlib.sha256(json.dumps(
+            rows, sort_keys=True, separators=(",", ":")
+        ).encode()).hexdigest())
+        self.assertEqual(
+            provenance["manifest"],
+            "g2-touch-final-source-candidate-provenance.tsv",
+        )
+        self.assertTrue(provenance["semantic_stock_address_candidates_only"])
+        self.assertFalse(provenance["production_elf_ownership"])
+        self.assertFalse(
+            provenance["stock_address_to_linked_output_identity_proven"])
+        self.assertEqual(
+            provenance["stock_byte_redistribution_authority"], "NOASSERTION")
+        self.assertFalse(provenance["eula_vendor_source_included"])
+        self.assertFalse(
+            provenance["nonproduction_source_image_production_routed"])
+        self.assertEqual(
+            touch["buckets"]["candidate_source_not_routed"],
+            provenance["candidate_bytes"],
+        )
+
+    def test_touch_candidate_provenance_rows_fail_closed(self) -> None:
+        rows = analyzer._touch_candidate_provenance_rows()
+        with self.assertRaisesRegex(
+                analyzer.AuditError, "category order or membership"):
+            analyzer._validate_touch_candidate_provenance_rows(rows[:-1])
+        overclaimed = deepcopy(rows)
+        overclaimed[0]["production_elf_ownership"] = True
+        with self.assertRaisesRegex(
+                analyzer.AuditError, "overclaims stock-address ownership"):
+            analyzer._validate_touch_candidate_provenance_rows(overclaimed)
+        unlicensed = deepcopy(rows)
+        non_overlap = next(
+            row for row in unlicensed
+            if row["category"] != analyzer.TOUCH_CANDIDATE_OVERLAP_CATEGORY
+        )
+        non_overlap["source_route_license"] = "NOASSERTION"
+        with self.assertRaisesRegex(
+                analyzer.AuditError, "non-overlap candidate mixes"):
+            analyzer._validate_touch_candidate_provenance_rows(unlicensed)
+
+    def test_touch_generation_receipt_binds_every_analysis_input(self) -> None:
+        current = analyzer._read(analyzer.TOUCH_CURRENT)
+        final = analyzer._read(analyzer.TOUCH_FINAL)
+        receipt = analyzer._touch_generation_receipt(current, final)
+        inputs = receipt["analysis_inputs"]
+        self.assertEqual(inputs["path_count"], 69)
+        self.assertEqual(len(inputs["path_sha256"]), 69)
+        self.assertEqual(
+            inputs["aggregate_sha256"],
+            "314622feca33964631d7f7ee69168cd6659b91e598bc9f554f05b995e8abc31a",
+        )
+        self.assertEqual(receipt["logical_manifest_count"], 5)
+        self.assertEqual(set(receipt["rendered_outputs"]), {
+            "g2-touch-current-source-readiness-summary.json:core",
+            "g2-touch-final-classification-summary.json:core",
+            "g2-touch-final-frontier.tsv",
+            "g2-touch-final-physical-byte-buckets.tsv",
+            "g2-touch-final-source-candidate-provenance.tsv",
+        })
+        self.assertEqual(
+            self.report["components"]["touch"]["details"]
+            ["generation_receipt"],
+            receipt,
+        )
+
+    def test_touch_generation_receipt_disagreement_fails_closed(self) -> None:
+        current = analyzer._read(analyzer.TOUCH_CURRENT)
+        final = analyzer._read(analyzer.TOUCH_FINAL)
+        changed = deepcopy(final)
+        changed["generation_receipt"]["analysis_inputs"]["path_count"] = 68
+        with self.assertRaisesRegex(
+                analyzer.AuditError, "generation receipts disagree"):
+            analyzer._touch_generation_receipt(current, changed)
+
     def test_licensing_and_hardware_policy_remain_honest(self) -> None:
         self.assertTrue(self.report["gates"]["source_metadata_clean"])
         unresolved = self.report["licensing"]["unresolved_binary_authority"]
@@ -103,11 +195,11 @@ class G2CompletionReadinessTests(unittest.TestCase):
         self.assertEqual(policy["project_owned_gpl_records_pending_mit"], 0)
         self.assertEqual(policy["overlay_records_pending_mit"], 0)
         self.assertEqual(
-            policy["distributed_project_mit_normalization_targets"], 884)
+            policy["distributed_project_mit_normalization_targets"], 906)
         self.assertEqual(
-            policy["community_controller_and_adapter_source_files"], 107)
+            policy["community_controller_and_adapter_source_files"], 112)
         self.assertEqual(
-            policy["community_project_mit_compatible_source_files"], 104)
+            policy["community_project_mit_compatible_source_files"], 109)
         self.assertEqual(
             policy["community_touch_apache_source_files_preserved"], 3)
         self.assertEqual(policy["touch_source_image_project_mit_files"], 9)
@@ -116,6 +208,9 @@ class G2CompletionReadinessTests(unittest.TestCase):
         self.assertEqual(policy["case_source_image_project_mit_files"], 7)
         self.assertEqual(policy["case_source_image_package_files"], 5)
         self.assertEqual(policy["case_source_image_support_files"], 2)
+        self.assertEqual(policy["em9305_source_image_project_mit_files"], 6)
+        self.assertEqual(policy["em9305_source_image_package_files"], 3)
+        self.assertEqual(policy["em9305_source_image_support_files"], 3)
         self.assertEqual(policy["pt_protocol_project_mit_files"], 28)
         self.assertEqual(policy["upstream_gpl_records_preserved"], 1)
 
@@ -161,13 +256,13 @@ class G2CompletionReadinessTests(unittest.TestCase):
         self.assertTrue(details["pt_protocol_handler_surface_complete"])
         self.assertEqual(details["pt_protocol_candidate_stock_body_bytes"],
                          32866)
-        self.assertEqual(details["pt_protocol_target_loadable_bytes"], 20303)
+        self.assertEqual(details["pt_protocol_target_loadable_bytes"], 22643)
         self.assertEqual(details["pt_protocol_target_bss_bytes"], 0)
         self.assertEqual(
-            details["pt_protocol_production_text_placement_free_bytes"], 4314)
+            details["pt_protocol_production_text_placement_free_bytes"], 72740)
         self.assertEqual(
             details["pt_protocol_production_text_placement_shortfall_bytes"],
-            15989,
+            0,
         )
         self.assertEqual(
             details["pt_protocol_production_ram_binding_remaining_bytes"], 0)
@@ -181,25 +276,52 @@ class G2CompletionReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             details["pt_protocol_top_level_retained_provider_bindings_remaining"],
-            0,
+            4,
         )
         self.assertEqual(
-            details["pt_protocol_retained_provider_bindings_remaining"], 23)
+            details["pt_protocol_retained_provider_bindings_remaining"], 13)
         self.assertFalse(details["pt_protocol_board_source_complete"])
         self.assertEqual(
-            details["pt_protocol_second_order_callable_bindings"], 60)
+            details["pt_protocol_second_order_callable_bindings"], 81)
         self.assertEqual(
             details["pt_protocol_second_order_source_overlay_callable_bindings"],
-            21,
+            29,
         )
         self.assertEqual(
             details["pt_protocol_second_order_source_local_callable_bindings"],
-            16,
+            39,
         )
         self.assertEqual(
-            details["pt_protocol_second_order_retained_callable_bindings"], 23)
+            details["pt_protocol_second_order_source_callable_bindings"], 68)
         self.assertEqual(
-            details["pt_protocol_second_order_data_bindings"], 46)
+            details["pt_protocol_second_order_retained_callable_bindings"], 13)
+        self.assertEqual(
+            details[
+                "pt_protocol_second_order_retained_callable_unique_addresses"],
+            13,
+        )
+        self.assertEqual(
+            details["pt_protocol_second_order_data_bindings"], 97)
+        self.assertEqual(
+            details["pt_protocol_second_order_data_unique_addresses"], 94)
+        self.assertEqual(
+            details["pt_protocol_second_order_data_source_owned"], 0)
+        self.assertEqual(
+            details["pt_protocol_second_order_retained_data_bindings"], 97)
+        self.assertEqual(
+            details["pt_protocol_second_order_data_categories"],
+            {
+                "external_xip_bound": 2,
+                "external_xip_data": 2,
+                "immutable_flash_data": 33,
+                "peripheral_mmio": 5,
+                "retained_callback_entry": 2,
+                "runtime_sram_data": 53,
+            },
+        )
+        self.assertTrue(details[
+            "pt_protocol_second_order_retained_boundaries_deliberately_supported"
+        ])
         self.assertEqual(details["pt_protocol_stock_layout_data_bindings"], 53)
         self.assertEqual(
             details[
@@ -218,27 +340,108 @@ class G2CompletionReadinessTests(unittest.TestCase):
         self.assertTrue(details["pt_protocol_platform_backend_production_bound"])
         self.assertTrue(details["pt_protocol_production_routed"])
         self.assertEqual(
-            main["buckets"]["candidate_source_not_routed"], 6614)
+            main["buckets"]["candidate_source_not_routed"], 0)
 
     def test_nemavg_stroke_cap_source_progress_is_reflected(self) -> None:
         main = self.report["components"]["apollo_main"]
         details = main["details"]
-        self.assertEqual(details["nemavg_stroke_cap_candidate_functions"], 3)
-        self.assertEqual(details["nemavg_stroke_cap_candidate_bytes"], 6614)
-        self.assertFalse(details["nemavg_stroke_cap_production_routed"])
-        self.assertGreaterEqual(
-            main["buckets"]["candidate_source_not_routed"], 6614)
+        self.assertEqual(details["nemavg_stroke_cap_candidate_functions"], 0)
+        self.assertEqual(details["nemavg_stroke_cap_candidate_bytes"], 0)
+        self.assertEqual(
+            details["nemavg_stroke_cap_source_routed_functions"], 3)
+        self.assertEqual(
+            details["nemavg_stroke_cap_source_routed_stock_bytes"], 6614)
+        self.assertEqual(
+            details["nemavg_stroke_cap_retained_unpatched_functions"], 0)
+        self.assertEqual(
+            details["nemavg_stroke_cap_retained_unpatched_stock_bytes"], 0)
+        self.assertTrue(details["nemavg_stroke_cap_production_routed"])
+        self.assertFalse(
+            details["nemavg_stroke_cap_endpoint_stock_entries_unpatched"])
+        self.assertEqual(
+            main["buckets"]["candidate_source_not_routed"], 0)
 
     def test_clock_manager_divider_source_progress_is_reflected(self) -> None:
         main = self.report["components"]["apollo_main"]
         boot = self.report["components"]["apollo_bootloader"]
         for component in (main, boot):
             details = component["details"]
-            self.assertEqual(details["clkmgr_divider_candidate_functions"], 2)
-            self.assertEqual(details["clkmgr_divider_candidate_bytes"], 52)
+            self.assertEqual(details["clkmgr_divider_source_functions"], 2)
+            self.assertEqual(details["clkmgr_divider_source_stock_bytes"], 52)
             self.assertTrue(details["clkmgr_divider_production_routed"])
+            self.assertNotIn("clkmgr_divider_candidate_bytes", details)
         self.assertEqual(
             boot["buckets"]["candidate_source_not_routed"], 0)
+
+    def test_apollo_boundaries_are_disjoint_and_current(self) -> None:
+        main = self.report["components"]["apollo_main"]
+        details = main["details"]
+        self.assertEqual(main["release_blocking_bytes"], 3_081_392)
+        self.assertEqual(details["release_readiness_partition"], {
+            "candidate_source_not_routed": 0,
+            "typed_retained_or_external": 3_081_392,
+        })
+        self.assertEqual(details["unanchored_frontier_partition"], {
+            "candidate_source_not_routed": 0,
+            "typed_retained_unanchored_without_candidate": 613_302,
+        })
+        self.assertEqual(details["controlled_label_reconciliation_bytes"], 17_800)
+        self.assertFalse(details["controlled_label_reconciliation_additive"])
+        self.assertEqual(details["overlapping_object_closure_evidence"], {
+            "bytes": 885_418,
+            "additive_to_disjoint_release_totals": False,
+        })
+
+        boot = self.report["components"]["apollo_bootloader"]
+        complement = boot["details"]["retained_complement"]
+        self.assertEqual(complement["component_bytes"], 163_840)
+        self.assertEqual(complement["intervals"], 593)
+        self.assertEqual(complement["retained_official_bytes"], 117_575)
+        self.assertEqual(
+            complement["retained_official_bytes"],
+            boot["buckets"]["typed_retained_or_external"],
+        )
+
+    def test_external_component_detail_is_not_overclaimed(self) -> None:
+        codec = self.report["components"]["codec"]
+        detail = codec["details"]["external_provider_detail"]
+        self.assertEqual(detail["bytes_by_class"], {
+            "opaque_executable": 190_912,
+            "opaque_runtime_data": 5_124,
+            "opaque_npu_commands": 9_164,
+            "proprietary_model_data": 120_800,
+        })
+        self.assertEqual(detail["bytes"], 326_000)
+        self.assertFalse(detail["open_source_available"])
+        self.assertFalse(codec["details"]
+                         ["external_provider_claims_open_availability"])
+
+        em = self.report["components"]["ble_em9305"]
+        self.assertEqual(em["buckets"]["candidate_source_not_routed"], 1_240)
+        self.assertEqual(em["buckets"]["typed_retained_or_external"], 210_708)
+        self.assertFalse(em["details"]["candidate_production_routed"])
+        receipts = em["details"]["final_source_readiness_receipts"]
+        self.assertEqual(receipts["manifest_count"], 2)
+        self.assertEqual(receipts["residual_span_count"], 175)
+        self.assertEqual(receipts["residual_bytes"], 33_658)
+        self.assertEqual(receipts["hardware_operations"], [])
+        self.assertEqual(em["details"]["hardware_operations"], [])
+        self.assertEqual(
+            receipts["ledger"]["sha256"],
+            analyzer.EM9305_FINAL_LEDGER_SHA256,
+        )
+        self.assertEqual(
+            receipts["summary"]["sha256"],
+            analyzer.EM9305_FINAL_SUMMARY_SHA256,
+        )
+
+        touch = self.report["components"]["touch"]
+        self.assertEqual(touch["details"]["typed_code_complement_bytes"], 15_854)
+        self.assertEqual(touch["details"]["typed_noncode_partition"], {
+            "vectors": 192,
+            "strings": 1_640,
+            "config_and_tables": 1_756,
+        })
 
     def test_touch_source_image_link_gate_is_reflected(self) -> None:
         details = self.report["components"]["touch"]["details"]

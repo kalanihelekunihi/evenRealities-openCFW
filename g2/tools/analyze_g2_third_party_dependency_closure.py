@@ -403,6 +403,14 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         raise ClosureError("AmbiqSuite Cordio application-framework stock boundary changed")
     if app_framework["exact_source_text_identity"] or app_framework["historical_g2_generating_commit"] is not None:
         raise ClosureError("AmbiqSuite Cordio application-framework provenance overclaim")
+    if (
+        not app_framework["production_routed"]
+        or app_framework["software_status"] != "software_closed_hardware_deferred"
+        or app_framework["routed_functions"] != 61
+        or app_framework["routed_stock_bytes"] != 29870
+        or app_framework["remaining_anchored_functions"] != 0
+    ):
+        raise ClosureError("AmbiqSuite Cordio application-framework production closure changed")
     if ancc["surface"]["source_derived_stock_functions"] != 12:
         raise ClosureError("AmbiqSuite copied ANCC-profile source closure changed")
     if amota["aggregate"]["ambiq_skeleton_derived_stock_functions"] != 4:
@@ -834,7 +842,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or sensor_hub["identity"]["embedded_third_party_definitions"]
         or not sensor_hub["production"]["production_routed"]
         or sensor_hub["production"]["source_functions"] != 31
-        or sensor_hub["production"]["hardware_validation"] != "deferred by project direction"
+        or sensor_hub["production"]["hardware_validation"] != "blocked by unavailable physical evidence"
     ):
         raise ClosureError("Sensor Hub reusable/provider boundary changed")
     event_loop_provider = fw_event_loop["provider_boundary"]
@@ -1458,7 +1466,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
     if freetype["allocator"]["lifecycle"]["FT_Done_FreeType"]["stock_entry_recoverable"]:
         raise ClosureError("FreeType destructor topology changed; ledger requires review")
     third_party_bytes = accounting["opaque_origin_lower_bounds"]["third_party_path_anchored"]
-    if third_party_bytes != 122_876:
+    if third_party_bytes != 86_364:
         raise ClosureError("third-party path-anchored byte census changed")
 
     selected = sum(row["selected_source_commit"] is not None for row in rows)
@@ -1483,6 +1491,9 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
             "ambiqsuite_cordio_application_framework_paths": 9,
             "ambiqsuite_cordio_application_framework_anchored_functions": 50,
             "ambiqsuite_cordio_application_framework_anchored_bytes": 29110,
+            "ambiqsuite_cordio_application_framework_production_routed": True,
+            "ambiqsuite_cordio_application_framework_routed_functions": 61,
+            "ambiqsuite_cordio_application_framework_routed_stock_bytes": 29870,
             "ambiqsuite_copied_ancc_profile_source_derived_functions": 12,
             "ambiqsuite_amota_profile_skeleton_derived_functions": 4,
             "ambiqsuite_apollo510_stock_sleep_wfi_count": 2,
@@ -1782,7 +1793,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
             "sensor_hub_embedded_third_party_definitions": 0,
             "sensor_hub_embedded_sensor_fusion_library": None,
             "sensor_hub_routed": True,
-            "sensor_hub_hardware_validation": "deferred by project direction",
+            "sensor_hub_hardware_validation": "blocked by unavailable physical evidence",
             "fw_event_loop_easylogger_calls": 80,
             "fw_event_loop_cmsis_freertos_calls": 20,
             "fw_event_loop_freertos_critical_port_calls": 4,

@@ -287,11 +287,11 @@ class RtosEventGroupWaitTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "31c6a7c259ef577cd3bb4f21ef29120238486375936aa9ff9da523f466dc670a",
+            "fe9bef7f143774efc74e34d8d54102175f89d141631f2447aa32a4f715555ee4",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "8ee76fc93a761c38fd43a9bd03ef22b184b4bdcb5b048a60d2bf98f695e49146",
+            "8fc4f25f47175d5cfe2152bca41c35b493dbd45db4f314fead80a9b2e2a2fb97",
         )
 
 

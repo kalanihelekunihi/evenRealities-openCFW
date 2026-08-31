@@ -16,7 +16,7 @@ EXPECTED_SYMBOLS = {
     "open_cfw_kvdb_temperature_unit_load_and_migrate",
     "open_cfw_kvdb_write_temperature_unit",
 }
-SOURCE_SHA256 = "288f83e95b9526816845f197d0ca7c355a259a03348c0e2140346cb30a01e808"
+SOURCE_SHA256 = "78e384d60b7f18b27280d09d3e14701b7946b77e4eaf36af7b8c1e1d980bdb58"
 
 
 class KvdbTemperatureUnitCandidateTests(unittest.TestCase):

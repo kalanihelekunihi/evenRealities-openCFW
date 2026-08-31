@@ -16,7 +16,7 @@ EXPECTED_SYMBOLS = {
     "open_cfw_kvdb_als_scale_load_and_migrate",
     "open_cfw_kvdb_write_als_scale",
 }
-SOURCE_SHA256 = "626119a5b2298aa233d22294cfd6121b6c5dad45a2bacacb84cb0124899649d4"
+SOURCE_SHA256 = "0db26600540b8f3e8d244204329acb431ab2ad01a73da322f1f2f9d0fba548c2"
 
 
 class KvdbAlsScaleCandidateTests(unittest.TestCase):

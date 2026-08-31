@@ -2,9 +2,9 @@
 
 - Retained path: `product\s200\app\config\main.c`
 - Product path: `D:\01_workspace\s200_ap510b_iar_git\product\s200\app\config\main.c`
-- Disposition: **implemented-in-source; hardware-blocked**
+- Disposition: **implemented-in-source; hardware-deferred**
 - Image: `blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin` (sha256 `36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863`)
-- Closure manifest: `tools/manifests/g2-s200-config-main-closure.tsv` (sha256 `6d7f796812c37988d3925b98d5d81fdcfc88e4ab45d72d4078bbbbf8525cf165`)
+- Closure manifest: `tools/manifests/g2-s200-config-main-closure.tsv` (sha256 `2ad2f8879a0753072f33521b4064428006548840a4a3bffaad2a4f2cf5e3f929`)
 - Function map: `tools/manifests/g2-s200-config-main-function-map.tsv` (sha256 `494176c0fd0f6710220a021787c5b2133aa78dc36d12bf232e3122c68b97e992`)
 - Audit: `tools/analyze_g2_s200_config_main.py`; test: `tests/test_analyze_g2_s200_config_main.py`
 

@@ -449,11 +449,11 @@ class MramHandlePairingFailureTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "9c83774ec0a97d964aaa117771dfda4fa9ddc549399071436b1b36baf4faac7e",
+            "64b71edfafd134817f49af4833245eaa2d8a505f1ec080dfcc934c3031877c4a",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "45e97818d55b541fe71612eae36c3ba7c588a9acfc1e29c886822ddb5faa3201",
+            "31eceffd6a4115fecba478333d44f6b8d0031c52837e478d33bbd6075bfb1dfe",
         )
 
 

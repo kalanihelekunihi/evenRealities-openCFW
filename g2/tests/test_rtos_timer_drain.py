@@ -372,11 +372,11 @@ class RtosTimerDrainTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "bb8582927cf796d6e88805e2385cd81412c43c4dfb36959bc6f18c761bebd3f0",
+            "3c7df1adc8f82363e3ead549a6f076ec27abfade0f227b8e4bc37e447f1528e9",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "ba99b9951c8cb8618f0b46603804b2528448ed02ca5890cba890175388eb12a3",
+            "42d50780eba5f4118b74e5cf0d865a9e488b8f7c4ea2e902638cf4164f4cc96f",
         )
 
 

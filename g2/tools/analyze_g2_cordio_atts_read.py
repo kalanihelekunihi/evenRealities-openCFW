@@ -35,7 +35,7 @@ SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 CANDIDATE_SOURCE_PATH = "components/shared/cordio/runtime_cordio_atts_read.c"
-CANDIDATE_PREVIOUS_OVERLAY_SIZE = 341690
+CANDIDATE_PREVIOUS_OVERLAY_SIZE = 273210
 CANDIDATE_FUNCTIONS = [
     "open_cfw_cordio_atts_find_uuid_in_range",
     "open_cfw_cordio_atts_find_service_group_end",
@@ -46,9 +46,9 @@ CANDIDATE_FUNCTIONS = [
     "open_cfw_cordio_atts_process_read_group_type_request",
 ]
 CANDIDATE_LEAF_METRICS = [
-    (341692, 142, 1), (341836, 154, 2), (341992, 326, 5),
-    (342320, 452, 9), (342772, 740, 9), (343512, 376, 6),
-    (343888, 596, 12),
+    (273212, 142, 1), (273356, 154, 2), (273512, 326, 5),
+    (273840, 452, 9), (274292, 740, 9), (275032, 376, 6),
+    (275408, 596, 12),
 ]
 
 FUNCTIONS = {
@@ -317,7 +317,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "guarded_redirects": 7,
             "subtraction_safe_fit_checks": 3,
             "hardware_validation": (
-                "deferred by project direction; future qualification requires authorized responsive G2/ATT peer evidence"
+                "blocked by unavailable physical evidence; future qualification requires authorized responsive G2/ATT peer evidence"
             ),
         },
     }

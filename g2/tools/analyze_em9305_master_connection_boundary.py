@@ -15,7 +15,7 @@ OBJDUMP:(3463728,"13d1e9c7c0d2c2d3db9436d21ec6d90a39622446cb8ab96de5c2c01ba75291
 RESIDUAL:(47936,"2ac24d2abf1f4a4fbce236a82f4591a38dfdb0a71c5ca5b2f8e88bcd9a722d36"),
 CANDIDATE:(787,"202c74333ef77d29dfcb3d5be1dd0cc6f412ffa94354490aa24282d6189de4f8"),
 HEADER:(1191,"186b4d7910d3939f52c30bdeaf8b2ea70622f0cb003be205ef4f2754bd962902"),
-MANIFEST:(1625,"2b6237418c5034b0e778ee7c383ff3bd9ceffdfa50c1f67abd829906dc676d29")}
+MANIFEST:(1636,"a56d3efd9121e1fb2266f09877d8d2bdf63b161d065c8ecdfe31be2fd0969e0f")}
 START,END=0x31DFD0,0x31E5EC; SHA="3a7f6643a63279e0867a3ca07b8b3fa9c1e73ece8ca7fdc04b9eaabde38dc079"
 ENTRIES=((0x31DFD0,0x31E458,"541461772f74fba15389824540d274572e6740f3ef9c43f542bbe90e91422af2"),
 (0x31E458,0x31E4A0,"f52862be21f2c761518a800a3c8907c36c8d4a0e389d1dcde6361152f54ca0dd"),
@@ -46,8 +46,8 @@ def run_audit()->dict[str,Any]:
  rows=list(csv.DictReader(data[RESIDUAL].decode().splitlines(),delimiter="\t")); row=[r for r in rows if int(r["start"],16)==START]
  if len(row)!=1 or (int(row[0]["end"],16),int(row[0]["size"]),row[0]["sha256"],row[0]["ownership_category"])!=(END,END-START,SHA,"proprietary_modern_controller_source_unavailable"): raise BoundaryError("residual row drift")
  manifest=list(csv.DictReader(data[MANIFEST].decode().splitlines(),delimiter="\t"))
- if len(manifest)!=6 or manifest[-1]["name"]!="deferred by project direction": raise BoundaryError("manifest drift")
- return {"status":"candidate-qualified-fail-closed","read_only":True,"hardware_operations":False,"license":"MIT","decision":{"start":START,"end_exclusive":END,"bytes":END-START,"sha256":SHA,"readiness":"typed_unsupported_external_boundary","decision":"three_entry_master_connection_boundary"},"entries":decisions,"entry_count":3,"source_correlations":["probable lctrMstConnEndOp","probable lctrMstConnExecute","probable lctrMstConnExecuteSm"],"exact_source_available":False,"redistribution_authority_resolved":False,"candidate":{"production_routed":False},"hardware_validation":"deferred by project direction"}
+ if len(manifest)!=6 or manifest[-1]["name"]!="blocked by unavailable physical evidence": raise BoundaryError("manifest drift")
+ return {"status":"candidate-qualified-fail-closed","read_only":True,"hardware_operations":False,"license":"MIT","decision":{"start":START,"end_exclusive":END,"bytes":END-START,"sha256":SHA,"readiness":"typed_unsupported_external_boundary","decision":"three_entry_master_connection_boundary"},"entries":decisions,"entry_count":3,"source_correlations":["probable lctrMstConnEndOp","probable lctrMstConnExecute","probable lctrMstConnExecuteSm"],"exact_source_available":False,"redistribution_authority_resolved":False,"candidate":{"production_routed":False},"hardware_validation":"blocked by unavailable physical evidence"}
 def main()->int:
  a=argparse.ArgumentParser(description=__doc__);a.add_argument("--json",action="store_true");r=run_audit();print(json.dumps(r,indent=2,sort_keys=True) if a.parse_args().json else "EM9305 master connection: candidate-qualified-fail-closed");return 0
 if __name__=="__main__":raise SystemExit(main())

@@ -286,7 +286,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
     )
     candidate = "components/apollo_main/core_overlay/nvdb_sys_dt.c"
-    candidate_sha256 = "a18152b8a7e769142bb21795cb724ef29df2c8ea18176050d12d8606189516c7"
+    candidate_sha256 = "c6cf42cb277417fd0cf7bdf62d50167a194c983295a73599a6617477cbf2f8b0"
     expected_patches = {
         "replace_nvdb_sys_dt_default_initialize": (
             0x004AEE28, 22,

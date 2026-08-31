@@ -185,11 +185,11 @@ class StatusPacketTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "468f8eb73551418cacf7d3a97c14113e93300e7f2feb389a47320001ba1b3d1b",
+            "54bfbaba22c346a282e90194d065d0b6921479a9eeff58e757b541f4d7351f78",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "2591527cd1bac9f2f8d8b185a0ff0cf69ce5f2bf9f98a0dd9fc218de89eab73c",
+            "75f3f5737b7256158aed216a25f155199acb8299cc35806874a4d25fb9d0412d",
         )
 
 

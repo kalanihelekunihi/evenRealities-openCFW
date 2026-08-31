@@ -47,7 +47,7 @@ class AnalyzeG2UledDisplayPreprocessTests(unittest.TestCase):
         self.assertTrue(production["production_routed"])
         self.assertEqual(
             production["candidate_sha256"],
-            "2ded39fb95b869de5361340416b85d598194de8c7e7d90f57eefbbde8044b98b",
+            "b288dba986ff1cabc8a8625eee2dc5d35ed21ac2c8c770c68c890590c02f66fd",
         )
         self.assertEqual(production["ownership_bytes"], 584)
         self.assertEqual(production["retained_stock_noncode_bytes"], 64)

@@ -120,30 +120,36 @@ TARGET_TEXT_RELOCATION_OFFSETS = [14, 36, 46, 54, 62, 70]
 PROFILE_PINS = {
     "apple-clang": {
         "version_prefix": "Apple clang version 21.0.0",
-        "placement": 184_204,
+        "placement": 124_356,
         "relocated_sha256": (
             "22d2909d84e02d0216a71168fdac379a"
             "576317c22dd5de6f527fb595c4668b52"
         ),
         "overlay": (
-            429_058,
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+            360_578,
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
         ),
         "component": (
-            3_952_454,
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+            3_883_974,
+            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
+        ),
+        "core_component": (
+            3_883_974,
+            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
         ),
         "component_accounting": {
-            "generated_patch_site_bytes": 409_066,
+            "generated_patch_site_bytes": 397_446,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_111_914,
-            "replaced_stock_function_bytes": 409_246,
-            "source_owned_bytes": 431_334,
+            "opaque_base_bytes": 3_123_534,
+            "replaced_stock_function_bytes": 397_626,
+            "replaced_stock_data_bytes": 2_200,
+            "source_owned_bytes": 362_962,
             "source_owned_in_place_bytes": 184,
+            "source_owned_in_place_data_bytes": 2_200,
         },
         "package": (
-            4_745_526,
-            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+            4_677_046,
+            "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
         ),
         "replacement_prefix": "5df32cb9",
         "replacement_sha256": (
@@ -153,30 +159,35 @@ PROFILE_PINS = {
     },
     "linux-clang": {
         "version_prefix": "Homebrew clang version 22.1.8",
-        "placement": 185_928,
+        "placement": 126_176,
         "relocated_sha256": (
             "dd4a36cadf6346d513ec039724a2a5830"
             "9f443d31aad4e50858c5a64d95c04f6"
         ),
         "overlay": (
-            212_664,
-            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+            145_314,
+            "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19",
         ),
         "component": (
-            3_736_060,
-            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+            3_676_308,
+            "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
+        ),
+        "core_component": (
+            3_668_710,
+            "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8",
         ),
         "component_accounting": {
-            "generated_patch_site_bytes": 99_288,
+            "generated_patch_site_bytes": 99_340,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_423_892,
-            "replaced_stock_function_bytes": 99_468,
-            "source_owned_bytes": 205_144,
+            "opaque_base_bytes": 3_423_840,
+            "replaced_stock_function_bytes": 99_520,
+            "replaced_stock_data_bytes": 0,
+            "source_owned_bytes": 145_498,
             "source_owned_in_place_bytes": 184,
         },
         "package": (
-            4_529_116,
-            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+            4_469_364,
+            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
         ),
         "replacement_prefix": "5df3babc",
         "replacement_sha256": (
@@ -946,9 +957,24 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
             dir=ROOT / "build",
         )
         cls.production_output = Path(cls.production_temporary.name)
+        production_config = json.loads(
+            OVERLAY_CONFIG.read_text(encoding="utf-8")
+        )
+        production_config["expected"] = dict(
+            production_config["core_stage_expected"]
+        )
+        for profile in production_config["toolchain_profiles"].values():
+            profile["expected"] = dict(profile["core_stage_expected"])
+        production_config_path = (
+            cls.production_output / "production-core-stage.json"
+        )
+        production_config_path.write_text(
+            json.dumps(production_config, indent=2) + "\n",
+            encoding="utf-8",
+        )
         cls.production_report = apollo_overlay.build(
             root=ROOT,
-            config_path=OVERLAY_CONFIG,
+            config_path=production_config_path,
             output_dir=cls.production_output,
             clang=cls.clang,
             toolchain_profile=cls.profile,
@@ -1042,7 +1068,7 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
         ]
         self.assertEqual(len(leaves), 1)
         self.assertEqual(config["functions"].count(FUNCTION), 1)
-        self.assertEqual(config["functions"].index(FUNCTION), 644)
+        self.assertEqual(config["functions"].index(FUNCTION), 659)
         leaf = leaves[0]
         self.assertTrue(leaf["strict_relocation_contract"])
         self.assertEqual(
@@ -1113,9 +1139,9 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
                 )
 
             aggregate = (
-                config["expected"]
+                config["core_stage_expected"]
                 if profile == "apple-clang"
-                else config["toolchain_profiles"][profile]["expected"]
+                else config["toolchain_profiles"][profile]["core_stage_expected"]
             )
             self.assertEqual(
                 (aggregate["overlay_size"], aggregate["overlay_sha256"]),
@@ -1126,7 +1152,7 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
                     aggregate["component_size"],
                     aggregate["component_sha256"],
                 ),
-                pins["component"],
+                pins["core_component"],
             )
 
             replacement = (
@@ -1189,7 +1215,7 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
         )
         self.assertEqual(
             (report["component"]["size"], report["component"]["sha256"]),
-            pins["component"],
+            pins["core_component"],
         )
         for key, value in pins["component_accounting"].items():
             self.assertEqual(report["component"][key], value, key)
@@ -1386,7 +1412,7 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
             },
         )
         tail = by_name["apollo_freertos_task_lists_initialize_source_leaf"]
-        self.assertIs(tail, regions[-493])
+        self.assertIs(tail, regions[-2685])
         self.assertEqual(
             tail,
             {

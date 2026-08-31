@@ -16,7 +16,7 @@ EXPECTED_SYMBOLS = {
     "open_cfw_kvdb_universal_setting_load_and_migrate",
     "open_cfw_kvdb_write_universal_setting",
 }
-SOURCE_SHA256 = "1399f2936a27bb0a3643c139b62b8fb77a4aca70d0d6802a7988e14b87a0f1a0"
+SOURCE_SHA256 = "ee467c94b90891288d3cb5d6aff222891ed6f017545408875ea5c96d6070531a"
 
 
 class KvdbUniversalSettingCandidateTests(unittest.TestCase):

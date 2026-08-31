@@ -11,5 +11,5 @@ class SystemCloseTests(unittest.TestCase):
  def test_provider_boundary(self):
   p=self.r['provider_boundary'];self.assertEqual((p['easylogger_calls'],p['lvgl_calls'],p['iar_dlib_calls'],p['first_party_calls']),(130,99,5,37));self.assertEqual(p['direct_cmsis_freertos_calls'],0);self.assertEqual(p['lvgl_commit'],'344c7c318047b7348e1be8572a9fd4260c251cfa');self.assertIsNone(p['historical_system_close_commit']);self.assertFalse(p['new_version_discriminator'])
  def test_first_party_ui_policy(self):
-  self.assertEqual(self.r['identity']['embedded_third_party_definitions'],[]);self.assertTrue(all(self.r['behavior'].values()));self.assertTrue(self.r['production']['production_routed']);self.assertTrue(self.r['production']['source_admitted']);self.assertFalse(self.r['production']['software_functional_gap']);self.assertEqual(self.r['production']['hardware_validation'],'deferred by project direction')
+  self.assertEqual(self.r['identity']['embedded_third_party_definitions'],[]);self.assertTrue(all(self.r['behavior'].values()));self.assertTrue(self.r['production']['production_routed']);self.assertTrue(self.r['production']['source_admitted']);self.assertFalse(self.r['production']['software_functional_gap']);self.assertEqual(self.r['production']['hardware_validation'],'blocked by unavailable physical evidence')
 if __name__=='__main__':unittest.main()

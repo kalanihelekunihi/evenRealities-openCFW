@@ -47,9 +47,9 @@ CANDIDATE_FUNCTIONS = [
     "open_cfw_cordio_atts_process_read_multiple_variable_request",
 ]
 CANDIDATE_LEAF_METRICS = [
-    (338340, 144, 2), (338484, 34, 1), (338520, 98, 0),
-    (338620, 176, 0), (338796, 108, 1), (338904, 150, 6),
-    (339056, 358, 7), (339416, 270, 5), (339688, 384, 6),
+    (269860, 144, 2), (270004, 34, 1), (270040, 98, 0),
+    (270140, 176, 0), (270316, 108, 1), (270424, 150, 6),
+    (270576, 358, 7), (270936, 270, 5), (271208, 384, 6),
 ]
 
 FUNCTIONS = {
@@ -305,7 +305,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "strict_relocations": relocations,
             "guarded_redirects": 9,
             "g2_behavior_delta": "peer MTU floor is authenticated product value 247",
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
         },
     }
 

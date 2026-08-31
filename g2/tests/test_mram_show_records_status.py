@@ -478,13 +478,13 @@ class MramShowRecordsStatusTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "83746bfa55e43ee7e2dab8fd079d7e7d"
-            "96b2c4a51b0aaf24c490eb0256e5050a",
+            "af225c944ca3260f9abfba275e689613"
+            "333af87df24d00e32d21bcb509370dc3",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "0e7d10191ac39529a7fa12b1d70400474"
-            "bf0990f47fc27b93177158dc6c072df",
+            "778ae95de6f95917bf35535662cfd205"
+            "edb8b13cb2d11bc83f8e59d5cc5ab4ce",
         )
 
 

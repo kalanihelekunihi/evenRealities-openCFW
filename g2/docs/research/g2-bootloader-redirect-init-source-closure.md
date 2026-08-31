@@ -1,5 +1,10 @@
 # G2 bootloader `redirect_init` source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Status: production-integrated software closure; offline build and host semantics
 validated; physical boot/stream validation blocked by unavailable authorized
 responsive hardware

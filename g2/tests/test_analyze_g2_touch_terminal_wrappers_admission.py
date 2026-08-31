@@ -31,9 +31,11 @@ class TouchTerminalAdmissionTests(unittest.TestCase):
             with tempfile.TemporaryDirectory() as raw:
                 M.MANIFEST_DIR = Path(raw); paths = M.write_manifests(self.result)
                 current = json.loads(next(p for p in paths if p.name ==
-                    "g2-touch-current-source-readiness-summary.json").read_text())
+                    "g2-touch-terminal-wrappers-admission-summary.json").read_text())
                 self.assertEqual(current["authoritative_batch"], 20)
-                self.assertEqual(current["hardware_validation"], "deferred by project direction")
+                self.assertEqual(current["hardware_validation"], "blocked by unavailable physical evidence")
+                self.assertNotIn("g2-touch-current-source-readiness-summary.json",
+                                 {p.name for p in paths})
         finally: M.MANIFEST_DIR = old
 
 

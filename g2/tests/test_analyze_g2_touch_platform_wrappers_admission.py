@@ -48,11 +48,11 @@ class TouchPlatformWrapperAdmissionTests(unittest.TestCase):
         self.assertIn("isolated source candidate", self.result["integration"])
         self.assertEqual(
             self.result["hardware_validation"],
-            "deferred by project direction",
+            "blocked by unavailable physical evidence",
         )
         self.assertEqual(
             self.result["hardware_blocker"],
-            "deferred by project direction",
+            "blocked by unavailable physical evidence",
         )
 
     def test_manifests_match(self) -> None:

@@ -8,4 +8,4 @@ abi	state_fields	0x00000004	0x00000858	-	-	authenticated_layout	AmbiqSuite 5.1.0
 abi	dma_entry	0x00000000	0x00000018	24	-	authenticated_layout	AmbiqSuite 5.1.0 am_hal_mspi_dma_entry_t	BSD-3-Clause	four register values followed by callback and context
 abi	mspi_registers	0x40060100	0x40060114	-	-	authenticated_layout	Apollo510 CMSIS MSPI register block	Apache-2.0	DMACFG +0x100, DMATARGADDR +0x108, DMADEVADDR +0x10c, DMATOTCOUNT +0x110
 successor	sched_hiprio	0x004240aa	0x00424120	118	dfbd51c61eba1ea51418a1faeaaa99df5aebb0ea900ed157a0c3a55a7b28d144	next_sequential_frontier	AmbiqSuite 5.1.0 sched_hiprio	BSD-3-Clause	not admitted by Wave 8
-hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project policy	future clock-request, DMA MMIO, queue indexing, concurrency, interrupt, and cold-boot evidence remains required
+hardware_validation	blocked by unavailable physical evidence	-	-	0	-	software_only	future authorized G2 qualification	project policy	future clock-request, DMA MMIO, queue indexing, concurrency, interrupt, and cold-boot evidence remains required

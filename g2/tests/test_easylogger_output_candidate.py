@@ -743,7 +743,7 @@ class EasyLoggerOutputCandidateTests(unittest.TestCase):
             }
         }
         self.assertTrue(leaves[FUNCTION]["strict_relocation_contract"])
-        self.assertEqual(leaves[FUNCTION]["expected"]["offset"], 178_764)
+        self.assertEqual(leaves[FUNCTION]["expected"]["offset"], 118_916)
         self.assertEqual(
             leaves[FUNCTION]["expected"]["closure_size"],
             1_778,

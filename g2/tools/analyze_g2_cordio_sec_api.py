@@ -18,15 +18,15 @@ BASE = 0x00437FE0
 IMAGE_SIZE = 3_523_396
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 SOURCE_SHA256 = "fdfe93f8ec34dad9deea2ce5e4f5571bf53672cda202b87a2a04a3c60832634e"
-PACKAGE_SIZE = 4_730_840
-PACKAGE_SHA256 = "d77d88162f777a6c9889d1813323a836d1dc140fe7488009fe485ed787d8fe70"
-FLASH_PLAN_SIZE = 4_299_871
-FLASH_PLAN_SHA256 = "6820a0dc5b6be70fdca78144fdb39d56a9f898b7b0b832c8d76b18cef33608f6"
+PACKAGE_SIZE = 4_678_740
+PACKAGE_SHA256 = "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a"
+FLASH_PLAN_SIZE = 4_595_610
+FLASH_PLAN_SHA256 = "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127"
 EXPECTED_OVERLAY = {
-    "overlay_size": 429_058,
-    "overlay_sha256": "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
-    "component_size": 3_952_454,
-    "component_sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+    "overlay_size": 362_272,
+    "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+    "component_size": 3_885_668,
+    "component_sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
 }
 FUNCTIONS = (
     ("open_cfw_cordio_sec_hci_callback", 0x00536234, 0x00536324, "da8ebedf91cd554eae5a19134ec01fd47b991e76d0e8666365b8e662dca7f89c"),
@@ -113,7 +113,7 @@ def analyze() -> dict:
     }
     if any(package_report["package"].get(k) != v for k, v in expected_report.items()):
         raise AuditError("package replay changed")
-    if package_report.get("placed_region_count") != 6_193 or package_report.get("unresolved_region_count") != 2:
+    if package_report.get("placed_region_count") != 6_586 or package_report.get("unresolved_region_count") != 0:
         raise AuditError("package region census changed")
     return {
         "schema_version": 1,
@@ -122,7 +122,7 @@ def analyze() -> dict:
             "release": "r20.05c",
             "commit": "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6",
             "license": "Apache-2.0",
-            "disposition": "implemented-in-source; hardware-blocked",
+            "disposition": "implemented-in-source; hardware-validation-deferred",
             "first_party_even_backend": False,
         },
         "stock": {"functions": 20, "body_bytes": 1_392, "retained_gap_bytes": 46, "physical_bytes": 1_438},
@@ -133,10 +133,10 @@ def analyze() -> dict:
             "alignment_bytes": 16,
             "strict_relocations": 65,
             "package_byte_identical": True,
-            "placed_regions": 6_193,
-            "unresolved_regions": 2,
+            "placed_regions": 6_586,
+            "unresolved_regions": 0,
             "primitive_provider": "retained HCI/controller boundary",
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
         },
     }
 

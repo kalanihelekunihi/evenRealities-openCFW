@@ -437,8 +437,7 @@ class DelayStatusTests(unittest.TestCase):
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "c508af7e88237d2395bb3b069b02f0d2"
-            "7d563f3f5d2ac688bd4b43383f7b6887",
+            "3b04eaf9aa0d9571c2312a1317b8207f254362906244b2f36e1cdf668f3b45e8",
         )
 
 

@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "name": "liblc3_service_audio_production_order_replay",
+  "target": "apollo_main",
+  "firmware_version": "2.2.6.10",
+  "mode": "production-order-replay-proven-image-routing-blocked",
+  "sources": {
+    "runtime": {
+      "path": "components/shared/liblc3/runtime_liblc3_target_runtime.c",
+      "size": 3856,
+      "sha256": "e02ea0fe1e1ba1a462665802bd2abf2ce623fa69f8e61735d134075473d17a72"
+    },
+    "runtime_header": {
+      "path": "components/shared/liblc3/runtime_liblc3_target_runtime.h",
+      "size": 710,
+      "sha256": "11343811a31222718254ff421d2862c6d764ba131c90cca874730605f71ed331"
+    },
+    "replay_builder": {
+      "path": "components/apollo_main/liblc3_encoder/build_service_audio_production_replay.py",
+      "size": 20009,
+      "sha256": "e6f2bc1ad9b0dfa57592c169a9c8255031f7abad1989806861bfc1666872e61c"
+    },
+    "suffix_analyzer": {
+      "path": "tools/analyze_g2_liblc3_service_audio_suffix_pack.py",
+      "size": 26683,
+      "sha256": "1dced08b6f44d07f7b9902589e675a793996a136938eab1ee29cf41f45e8f763"
+    },
+    "route_builder": {
+      "path": "components/apollo_main/liblc3_encoder/build_service_audio_route_experiment.py",
+      "size": 16214,
+      "sha256": "f717937494d828995fd6e9a7c21fd3162b41e75377883029a3b755351da151e9"
+    },
+    "xip_finalizer": {
+      "path": "components/apollo_main/liblc3_encoder/specialized_xip.py",
+      "size": 25234,
+      "sha256": "5fdae5e9c4fa6911f8c1de64de9ae20d220551d41ac74549d4e230ca36307a9d"
+    }
+  },
+  "evidence": {
+    "suffix_pack": {
+      "path": "components/apollo_main/liblc3_encoder/service_audio_suffix_pack_proposal.json",
+      "size": 3016,
+      "sha256": "dbec7607153e8fc048cd03efb0bb89e5a6007965cad6836a64a382aab0f4f76f"
+    },
+    "capacity_experiment": {
+      "path": "components/apollo_main/liblc3_encoder/service_audio_capacity_experiment.json",
+      "size": 3656,
+      "sha256": "daab69c12426e9dcd9713ae2233cd21e9fedc5b15dfa6d6ea926824e91e51ac9"
+    }
+  },
+  "target_profile": [
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-mfloat-abi=hard",
+    "-std=c11",
+    "-Oz",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-fshort-enums",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "service_audio_entries": {
+    "open_cfw_liblc3_service_audio_stock_encode": 5744960,
+    "open_cfw_liblc3_service_audio_stock_setup": 5744934
+  },
+  "profiles": {
+    "apple-clang": {
+      "tools": {
+        "clang": "/usr/bin/clang",
+        "lld": "/opt/homebrew/bin/ld.lld",
+        "objcopy": "/opt/homebrew/opt/llvm@22/bin/llvm-objcopy"
+      },
+      "expected_report_sha256": "bfd15afbbb89881462facee37939a00e9d7b40da7b8e53bf18bc24182b91997c"
+    },
+    "linux-clang": {
+      "tools": {
+        "clang": "/opt/homebrew/opt/llvm@22/bin/clang",
+        "lld": "/opt/homebrew/bin/ld.lld",
+        "objcopy": "/opt/homebrew/opt/llvm@22/bin/llvm-objcopy"
+      },
+      "expected_report_sha256": "d18cfd2720e77c59ba780a866a683e7fee33f4c5e073ecedfa38a6adeee03b67"
+    }
+  },
+  "routing": {
+    "production_placement": false,
+    "service_audio_routed": false,
+    "firmware_image_emitted": false,
+    "hardware_operations": false
+  }
+}

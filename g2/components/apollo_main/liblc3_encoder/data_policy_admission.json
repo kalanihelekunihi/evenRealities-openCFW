@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "name": "liblc3_encoder_data_policy_admission",
+  "target": "apollo_main",
+  "firmware_version": "2.2.6.10",
+  "mode": "immutable-xip-policy-unplaced-unrouted",
+  "expected": {
+    "status": "liblc3-encoder-immutable-xip-data-policy",
+    "source": {
+      "linker_path": "components/apollo_main/liblc3_encoder/data_policy_linker.ld",
+      "linker_sha256": "281fb21953edffd0a32c8af4c75be72b5355082ebea58b779e7bda533827ab66",
+      "tables_source_sha256": "8f325e60f185472eaef727a6dc7adb23a322f7dea2f2b607784e097adfa5c828",
+      "tables_header_sha256": "c6ca665cac2b4e55ed83fd63a934840f74ea26ef3dbb4e558524616624b66e41",
+      "provider_sha256": "2ed3a5bd3853c874fe3b1515b4a66fb6d5d5768ae8bff949e76a75d6f018a63f",
+      "specialization_manifest_sha256": "71ae67ce02a59736de9d42a4e602e41f2fa757d4e9f8b3dc1849a7e25053c767",
+      "license": "MIT-policy-Apache-2.0-upstream"
+    },
+    "baseline": {
+      "specialized_data_size": 404,
+      "specialized_data_sha256": "c4c45a0ea2a6895b34d21adc0a20928de754948d66e8270883ddb3a9a5e8372a",
+      "specialized_data_relocations": 78
+    },
+    "mutability": {
+      "source_sha256": {
+        "energy.c": "bee68f82d47ce860f7bebae0a12b2a98c54242248af72cd8e41426317c4d8f2e",
+        "mdct.c": "57eddd5597c5a5b3ec547eb32e517ec7a2c0fda186aac98cf38bf65959fa7ca3",
+        "sns.c": "2eada2a454df085ac9451cde4fd8c01136d8d958758f406327105cac1ecc511b",
+        "tables.c": "8f325e60f185472eaef727a6dc7adb23a322f7dea2f2b607784e097adfa5c828"
+      },
+      "reference_counts": {
+        "lc3_band_lim": 3,
+        "lc3_fft_twiddles_bf2": 2,
+        "lc3_fft_twiddles_bf3": 2,
+        "lc3_mdct_rot": 3,
+        "lc3_mdct_win": 3
+      },
+      "retained_behavior": "read-only-indexed-pointer-loads",
+      "runtime_initializer_present": false
+    },
+    "policy": {
+      "classification": "logically-immutable-relocated-pointer-tables",
+      "output_section": ".lc3_table_rodata",
+      "output_flags": [
+        "SHF_ALLOC"
+      ],
+      "load_run_policy": "same-address-read-only-XIP",
+      "runtime_copy_bytes": 0,
+      "runtime_initialization": false,
+      "final_build_time_relocation_required": true,
+      "final_table_address_required": true,
+      "final_rodata_address_required": true,
+      "new_relocation_or_symbol_ingress_forbidden": true,
+      "production_routed": false,
+      "firmware_image_emitted": false
+    },
+    "composition": {
+      "table_flash_bytes": 404,
+      "table_runtime_writable_bytes": 0,
+      "adapter_state_count": 4,
+      "adapter_state_bytes_each": 2628,
+      "adapter_state_runtime_writable_bytes": 10512,
+      "combined_runtime_writable_bytes": 10512,
+      "additional_runtime_writable_bytes": 0,
+      "stock_context_total_bytes": 10512,
+      "adapter_state_deficit_over_stock_bytes": 0,
+      "writable_placement_assigned": true,
+      "writable_placement_scope": "authenticated-stock-context-slots"
+    },
+    "routing": {
+      "placement_assigned": false,
+      "service_audio_routed": false,
+      "firmware_image_emitted": false,
+      "hardware_operations": false,
+      "remaining_prerequisites": [
+        "The final placer must assign text, rodata, and aligned table XIP addresses and apply every internal and runtime relocation.",
+        "The final closure must reject any new write reference or external symbol ingress to the five table objects.",
+        "The four compact service adapter states fit the authenticated stock slots; call-site routing must initialize them before use."
+      ]
+    },
+    "common_initialization": {
+      "runtime_copy_bytes": 0,
+      "runtime_writable_bytes": 0,
+      "relocation_count": 78,
+      "relocation_type": "R_ARM_ABS32",
+      "relocation_target": ".rodata",
+      "relocation_offsets": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        28,
+        32,
+        36,
+        40,
+        44,
+        56,
+        60,
+        64,
+        68,
+        72,
+        84,
+        88,
+        92,
+        96,
+        100,
+        112,
+        116,
+        120,
+        124,
+        128,
+        132,
+        136,
+        140,
+        148,
+        152,
+        160,
+        172,
+        176,
+        180,
+        184,
+        188,
+        192,
+        196,
+        200,
+        204,
+        208,
+        212,
+        216,
+        220,
+        224,
+        228,
+        232,
+        236,
+        240,
+        244,
+        248,
+        252,
+        264,
+        268,
+        272,
+        276,
+        280,
+        284,
+        292,
+        296,
+        300,
+        304,
+        308,
+        320,
+        324,
+        328,
+        332,
+        336,
+        348,
+        352,
+        356,
+        360,
+        364,
+        376,
+        380,
+        384,
+        388,
+        392
+      ],
+      "relocation_records_sha256": "e47150cbdfca56d7575ed556bffcf46e2f5e54795a7499d62ec4f51e28a0373a",
+      "synthetic_rodata_base": 6291456,
+      "synthetic_relocated_sha256": "e4be491719ee3382e1487e4f119edd7e464d46b6a0c8c3cdc790b46bbfc7a6d7",
+      "final_relocation_required": true
+    },
+    "profiles": {
+      "apple-clang": {
+        "compiler_version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "pre_policy_object": {
+          "size": 116560,
+          "sha256": "ac1f8d7e8e0f81e12b6b47b05dd6659d468a41181ab926c239237449a7326767",
+          "table_flags": [
+            "SHF_ALLOC",
+            "SHF_WRITE"
+          ]
+        },
+        "post_policy_object": {
+          "size": 116268,
+          "sha256": "bc548b0578f87d43c38def5fb727533a73d7e2f31105e5e8bd0d0a1fef336b7d",
+          "allocated_writable_sections": [],
+          "retained_imports": [
+            "__aeabi_memclr",
+            "__aeabi_memclr4",
+            "fabsf",
+            "floorf",
+            "fmaxf",
+            "fminf",
+            "memcpy",
+            "memmove",
+            "memset",
+            "sqrtf",
+            "truncf"
+          ]
+        },
+        "sections": {
+          "text": {
+            "size": 40880,
+            "sha256": "157bf32443aef805d98c730b8ff2cff59cef773c53dc54e2146e42718b4f1c99"
+          },
+          "rodata": {
+            "size": 60316,
+            "sha256": "9ad7f0d2de1c6468fcd36dc447699f4df7fd86988e87e4df4200f893d5879f59"
+          },
+          "table_rodata": {
+            "size": 404,
+            "alignment": 8,
+            "flags": [
+              "SHF_ALLOC"
+            ],
+            "sha256": "c4c45a0ea2a6895b34d21adc0a20928de754948d66e8270883ddb3a9a5e8372a"
+          }
+        },
+        "table_symbols": {
+          "lc3_band_lim": {
+            "offset": 0,
+            "size": 112
+          },
+          "lc3_fft_twiddles_bf2": {
+            "offset": 112,
+            "size": 60
+          },
+          "lc3_fft_twiddles_bf3": {
+            "offset": 172,
+            "size": 8
+          },
+          "lc3_mdct_rot": {
+            "offset": 180,
+            "size": 112
+          },
+          "lc3_mdct_win": {
+            "offset": 292,
+            "size": 112
+          }
+        },
+        "text_references": {
+          "count": 12,
+          "by_symbol": {
+            "lc3_band_lim": 4,
+            "lc3_fft_twiddles_bf2": 2,
+            "lc3_fft_twiddles_bf3": 2,
+            "lc3_mdct_rot": 2,
+            "lc3_mdct_win": 2
+          },
+          "records_sha256": "d92f7ac46c12cccb9a2b3b7f2b962325cd0ddce57f21efe5b3ccd6ea43977391"
+        },
+        "all_relocations_sha256": "7a91c0330d5172a437935c17fb723dbf9e9272b6c7a1b6d73158c34377afd74b"
+      },
+      "linux-clang": {
+        "compiler_version": "Homebrew clang version 22.1.8",
+        "pre_policy_object": {
+          "size": 117728,
+          "sha256": "2ecc5b6d399663d484c2274b8c60706c16211e207e871c4fc6ae38edbadddd08",
+          "table_flags": [
+            "SHF_ALLOC",
+            "SHF_WRITE"
+          ]
+        },
+        "post_policy_object": {
+          "size": 117436,
+          "sha256": "7806bcb4959759e5377d892ff1ccfeda6c6947876b31cb92e2dc5e65aa99615e",
+          "allocated_writable_sections": [],
+          "retained_imports": [
+            "__aeabi_memclr",
+            "__aeabi_memclr4",
+            "fabsf",
+            "floorf",
+            "fmaxf",
+            "fminf",
+            "memcpy",
+            "memmove",
+            "memset",
+            "sqrtf",
+            "truncf"
+          ]
+        },
+        "sections": {
+          "text": {
+            "size": 42016,
+            "sha256": "121657b5ae16986d4ba37a917d6c255d49c9b5a5d5d2ce20dd2d17d173f497e2"
+          },
+          "rodata": {
+            "size": 60316,
+            "sha256": "9ad7f0d2de1c6468fcd36dc447699f4df7fd86988e87e4df4200f893d5879f59"
+          },
+          "table_rodata": {
+            "size": 404,
+            "alignment": 8,
+            "flags": [
+              "SHF_ALLOC"
+            ],
+            "sha256": "c4c45a0ea2a6895b34d21adc0a20928de754948d66e8270883ddb3a9a5e8372a"
+          }
+        },
+        "table_symbols": {
+          "lc3_band_lim": {
+            "offset": 0,
+            "size": 112
+          },
+          "lc3_fft_twiddles_bf2": {
+            "offset": 112,
+            "size": 60
+          },
+          "lc3_fft_twiddles_bf3": {
+            "offset": 172,
+            "size": 8
+          },
+          "lc3_mdct_rot": {
+            "offset": 180,
+            "size": 112
+          },
+          "lc3_mdct_win": {
+            "offset": 292,
+            "size": 112
+          }
+        },
+        "text_references": {
+          "count": 12,
+          "by_symbol": {
+            "lc3_band_lim": 4,
+            "lc3_fft_twiddles_bf2": 2,
+            "lc3_fft_twiddles_bf3": 2,
+            "lc3_mdct_rot": 2,
+            "lc3_mdct_win": 2
+          },
+          "records_sha256": "0d4133d465bd45250abbadf8bd827f1991692cfb46d9ef52d5f7f333d7da7511"
+        },
+        "all_relocations_sha256": "324a8c16a6f649a0beaa301add956d8d871bb60c3cc9d0e7b4625650fc711b32"
+      }
+    }
+  }
+}

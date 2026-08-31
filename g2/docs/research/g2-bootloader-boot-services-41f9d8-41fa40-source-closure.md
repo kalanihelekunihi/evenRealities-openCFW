@@ -1,5 +1,10 @@
 # G2 bootloader delay and initializer-service source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The four complete bootloader service entries at
 `[0x0041F9D8,0x0041FA40)` are now replaced by maintained clean-room C. They
 provide the millisecond and raw delay wrappers, initializer-record priority

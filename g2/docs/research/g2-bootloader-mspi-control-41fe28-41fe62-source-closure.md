@@ -1,5 +1,10 @@
 # G2 bootloader MSPI control source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete enable/disable pair `[0x0041FE28,0x0041FE62)` now routes to
 maintained clean-room C. The 32-byte enable body (SHA-256
 `e192108a57e6cd824fb7b17e9e1fa3d39dd77e8dbea29cd967959f433f05a7f7`)

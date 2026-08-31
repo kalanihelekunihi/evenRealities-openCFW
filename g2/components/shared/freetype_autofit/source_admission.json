@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "component": "g2-freetype-autofit",
+  "license": "FTL",
+  "upstream": {
+    "version": "2.9.1",
+    "tag": "VER-2-9-1",
+    "commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+    "snapshot_verifier": "third_party/freetype/verify_snapshot.py"
+  },
+  "mapped_evidence": {
+    "analyzer": "tools/analyze_g2_freetype_autofit_function_map.py",
+    "mapping_sha256": "30eec5b242a28dbd664acc91022479edc70836b264b0bcfb97f72999fca18dd4",
+    "functions": 87,
+    "bytes": 23612,
+    "high_functions": 29,
+    "high_bytes": 3270,
+    "medium_functions": 58,
+    "medium_bytes": 20342,
+    "unresolved_callable_bytes": 0,
+    "unclassified_physical_bytes": 0
+  },
+  "source_inventory": {
+    "autofit_files": 37,
+    "autofit_source_bytes": 650482,
+    "inventory_sha256": "12275283b95378cb5d8695e420b4a39776915ea84d0fd6591deb11653bd0c205"
+  },
+  "build": {
+    "community_source": true,
+    "translation_unit": "third_party/freetype/src/autofit/autofit.c",
+    "cortex_m55_compile_gate": "tests.test_freetype_autofit_source_admission",
+    "full_candidate_link_gate": "tests.test_runtime_target_provider_candidate",
+    "strict_warning_compatibility_exception": "-Wno-cast-function-type-mismatch for the authenticated FreeType 2.9.1 dummy writing-system callback cast",
+    "production_overlay": false,
+    "authenticated_target_placement": false,
+    "production_overlay_gate": "requires pinned IAR-compatible code generation, relocation and target placement plus font payload, stack and WCET qualification"
+  },
+  "hardware_validation": {
+    "performed": false,
+    "blocker": "no authorized physical G2 hardware or authenticated external font payload was supplied to this software-only tranche"
+  }
+}

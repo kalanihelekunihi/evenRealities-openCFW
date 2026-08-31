@@ -460,8 +460,7 @@ class McuctrlControlTests(unittest.TestCase):
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "b4a8529e0a37891a6f647717e1086d00"
-            "ed812c2528110a9de92b88b9eacd9683",
+            "b9843ec45933d1fb7c02330c853224b49640adcf12eac3df3306c18413f453bd",
         )
 
 

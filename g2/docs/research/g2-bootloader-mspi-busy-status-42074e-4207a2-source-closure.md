@@ -1,5 +1,10 @@
 # G2 bootloader MX25U25643G busy-status source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated 84-byte entry `[0x0042074E,0x004207A2)` now
 routes to `open_cfw_bootloader_mspi_busy_status_42074e` in maintained
 clean-room C. The stock SHA-256 is

@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "name": "liblc3_service_audio_adapter_admission",
+  "target": "apollo_main",
+  "firmware_version": "2.2.6.10",
+  "mode": "software-boundary-admitted-stock-slot-state-unrouted",
+  "expected": {
+    "source": {
+      "header": {
+        "path": "components/shared/liblc3/runtime_liblc3_service_audio_adapter.h",
+        "sha256": "36d8689349765cc58047fd8580b51dc20de47776c253e7e524724c84f950e543",
+        "size": 4210
+      },
+      "implementation": {
+        "path": "components/shared/liblc3/runtime_liblc3_service_audio_adapter.c",
+        "sha256": "f54b4be6ccb9487f88e4d5283695ea1d61db1696e8043cee2c19b2f57a6e8b13",
+        "size": 27419
+      },
+      "license": "MIT",
+      "provider_header_sha256": "9d70374750c89aa8db5e5c111b1980a6a8b2bf7d63ff066dcca3d285f7dfedf4",
+      "provider_implementation_sha256": "2ed3a5bd3853c874fe3b1515b4a66fb6d5d5768ae8bff949e76a75d6f018a63f"
+    },
+    "evidence_sha256": "5534ec75a2b5f5e43f33d2912edb5b8e50b0ab9235a97288f5cf04c10e560e53",
+    "abi": {
+      "adapter_state_alignment": 4,
+      "adapter_state_arm32_bytes": 2628,
+      "bitrate_offset_arm32": 24,
+      "channel_offset_arm32": 20,
+      "channels_offset_arm32": 16,
+      "config_word_offset_arm32": 12,
+      "control_header_bytes": 28,
+      "encoder_storage_bytes": 2600,
+      "four_context_delta_bytes": 0,
+      "generation_offset_arm32": 8,
+      "maximum_encoder_alignment_prefix_bytes": 4,
+      "minimum_encoder_capacity_bytes": 2596,
+      "owner_offset_arm32": 4,
+      "per_context_delta_bytes": 0,
+      "service_config_bytes": 24,
+      "service_plan_bytes": 20,
+      "stock_address_phases_mod8": [
+        0,
+        4
+      ],
+      "stock_slot_bytes": 2628,
+      "storage_offset_arm32": 28
+    },
+    "behavior": {
+      "configuration_encoding_lossless_for_provider_admitted_values": true,
+      "encoder_reinitialized_during_encode": false,
+      "encoder_storage_retained_on_close": true,
+      "interleaved_frame_multiple_required": true,
+      "minimum_encoded_frame_bytes": 20,
+      "owner_token_required_for_encode_and_close": true,
+      "partial_output_bytes_reported_on_provider_failure": true,
+      "plan_query_rederives_without_encoder_reinitialization": true,
+      "pcm_sample_rate_argument": 0,
+      "pcm_width_bytes": [
+        2,
+        4,
+        3,
+        4
+      ],
+      "provider_failure_invalidates_lifetime": true,
+      "selected_channel_offset_and_stride_preserved": true,
+      "single_executor_busy_fails_closed": true,
+      "transient_provider_view_rederived_per_operation": true
+    },
+    "stock_slot_placement": {
+      "contexts": [
+        {
+          "encoder_capacity_bytes": 2600,
+          "encoder_prefix_bytes": 0,
+          "encoder_start": 537946776,
+          "index": 0,
+          "state_bytes": 2628,
+          "state_end_exclusive": 537949376,
+          "state_start": 537946748,
+          "storage_bytes": 2600,
+          "storage_end_exclusive": 537949376,
+          "storage_start": 537946776
+        },
+        {
+          "encoder_capacity_bytes": 2596,
+          "encoder_prefix_bytes": 4,
+          "encoder_start": 537949408,
+          "index": 1,
+          "state_bytes": 2628,
+          "state_end_exclusive": 537952004,
+          "state_start": 537949376,
+          "storage_bytes": 2600,
+          "storage_end_exclusive": 537952004,
+          "storage_start": 537949404
+        },
+        {
+          "encoder_capacity_bytes": 2600,
+          "encoder_prefix_bytes": 0,
+          "encoder_start": 537952032,
+          "index": 2,
+          "state_bytes": 2628,
+          "state_end_exclusive": 537954632,
+          "state_start": 537952004,
+          "storage_bytes": 2600,
+          "storage_end_exclusive": 537954632,
+          "storage_start": 537952032
+        },
+        {
+          "encoder_capacity_bytes": 2596,
+          "encoder_prefix_bytes": 4,
+          "encoder_start": 537954664,
+          "index": 3,
+          "state_bytes": 2628,
+          "state_end_exclusive": 537957260,
+          "state_start": 537954632,
+          "storage_bytes": 2600,
+          "storage_end_exclusive": 537957260,
+          "storage_start": 537954660
+        }
+      ],
+      "encoder_storage_eight_byte_aligned": true,
+      "end_exclusive": 537957260,
+      "extra_writable_bytes_required": 0,
+      "first_start": 537946748,
+      "minimum_encoder_capacity_bytes": 2596,
+      "nonoverlapping": true,
+      "placement_kind": "authenticated-existing-stock-slots",
+      "total_state_bytes": 10512
+    },
+    "target_flags": [
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-mfloat-abi=hard",
+      "-std=c11",
+      "-O2",
+      "-ffast-math",
+      "-fshort-enums",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "target_roots": [
+      "open_cfw_liblc3_service_audio_state_init",
+      "open_cfw_liblc3_service_audio_open",
+      "open_cfw_liblc3_service_audio_encode",
+      "open_cfw_liblc3_service_audio_close"
+    ],
+    "provider_imports": [
+      "open_cfw_liblc3_encoder_provider_close",
+      "open_cfw_liblc3_encoder_provider_encode",
+      "open_cfw_liblc3_encoder_provider_plan",
+      "open_cfw_liblc3_encoder_provider_setup"
+    ],
+    "runtime_import_allowlist": [
+      "__aeabi_memclr",
+      "__aeabi_memclr4",
+      "fabsf",
+      "floorf",
+      "fmaxf",
+      "fminf",
+      "memcpy",
+      "memmove",
+      "memset",
+      "roundf",
+      "sqrtf",
+      "truncf"
+    ],
+    "profiles": {
+      "apple-clang": {
+        "adapter_object": {
+          "data_size": 0,
+          "defined_entries": [
+            "open_cfw_liblc3_service_audio_close",
+            "open_cfw_liblc3_service_audio_encode",
+            "open_cfw_liblc3_service_audio_open",
+            "open_cfw_liblc3_service_audio_state_init"
+          ],
+          "relocations": {
+            "by_type": {
+              "R_ARM_PREL31": 9,
+              "R_ARM_THM_CALL": 15,
+              "R_ARM_THM_MOVT_ABS": 2,
+              "R_ARM_THM_MOVW_ABS_NC": 2
+            },
+            "count": 28,
+            "external_by_symbol": {
+              "open_cfw_liblc3_encoder_provider_close": 2,
+              "open_cfw_liblc3_encoder_provider_encode": 1,
+              "open_cfw_liblc3_encoder_provider_plan": 2,
+              "open_cfw_liblc3_encoder_provider_setup": 1
+            },
+            "records_sha256": "116d6bb9cca9aa9e7d06aa226774916eee1b6feb1ee7a803b76a65dabcededc4"
+          },
+          "rodata_size": 18,
+          "sha256": "9ad5ccb401ef7e17b6d522ad7fe7671901945efdca8a6d528727fb817e2b02b5",
+          "size": 7072,
+          "text_sections": {
+            "open_cfw_liblc3_service_audio_close": 186,
+            "open_cfw_liblc3_service_audio_encode": 626,
+            "open_cfw_liblc3_service_audio_is_open": 200,
+            "open_cfw_liblc3_service_audio_open": 684,
+            "open_cfw_liblc3_service_audio_open_seal": 178,
+            "open_cfw_liblc3_service_audio_provider_view": 416,
+            "open_cfw_liblc3_service_audio_query_plan": 16,
+            "open_cfw_liblc3_service_audio_snapshot": 272,
+            "open_cfw_liblc3_service_audio_state_init": 272
+          },
+          "text_size": 2850,
+          "undefined_provider_entries": [
+            "open_cfw_liblc3_encoder_provider_close",
+            "open_cfw_liblc3_encoder_provider_encode",
+            "open_cfw_liblc3_encoder_provider_plan",
+            "open_cfw_liblc3_encoder_provider_setup"
+          ]
+        },
+        "compiler_version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "retained_encoder_link": {
+          "defined_adapter_entries": [
+            "open_cfw_liblc3_service_audio_close",
+            "open_cfw_liblc3_service_audio_encode",
+            "open_cfw_liblc3_service_audio_open",
+            "open_cfw_liblc3_service_audio_state_init"
+          ],
+          "sha256": "7374bd7f371728b51e692192b2ecba901c740784fe77213b72286296b29a5295",
+          "size": 185248,
+          "undefined_runtime_imports": [
+            "__aeabi_memclr",
+            "__aeabi_memclr4",
+            "fabsf",
+            "floorf",
+            "fmaxf",
+            "fminf",
+            "memcpy",
+            "memmove",
+            "memset",
+            "roundf",
+            "sqrtf",
+            "truncf"
+          ]
+        }
+      },
+      "linux-clang": {
+        "adapter_object": {
+          "data_size": 0,
+          "defined_entries": [
+            "open_cfw_liblc3_service_audio_close",
+            "open_cfw_liblc3_service_audio_encode",
+            "open_cfw_liblc3_service_audio_open",
+            "open_cfw_liblc3_service_audio_state_init"
+          ],
+          "relocations": {
+            "by_type": {
+              "R_ARM_PREL31": 9,
+              "R_ARM_THM_CALL": 15,
+              "R_ARM_THM_MOVT_ABS": 2,
+              "R_ARM_THM_MOVW_ABS_NC": 2
+            },
+            "count": 28,
+            "external_by_symbol": {
+              "open_cfw_liblc3_encoder_provider_close": 2,
+              "open_cfw_liblc3_encoder_provider_encode": 1,
+              "open_cfw_liblc3_encoder_provider_plan": 2,
+              "open_cfw_liblc3_encoder_provider_setup": 1
+            },
+            "records_sha256": "0d80378273e8e8c83fdac7b9b1ef0c5cded99da32ebba02ddbdba25fb407a863"
+          },
+          "rodata_size": 18,
+          "sha256": "42495f5e72f3796866e39ebc3eac0dfe5959dd51811af8ec259588e0942dcb94",
+          "size": 7016,
+          "text_sections": {
+            "open_cfw_liblc3_service_audio_close": 186,
+            "open_cfw_liblc3_service_audio_encode": 626,
+            "open_cfw_liblc3_service_audio_is_open": 200,
+            "open_cfw_liblc3_service_audio_open": 664,
+            "open_cfw_liblc3_service_audio_open_seal": 174,
+            "open_cfw_liblc3_service_audio_provider_view": 400,
+            "open_cfw_liblc3_service_audio_query_plan": 16,
+            "open_cfw_liblc3_service_audio_snapshot": 272,
+            "open_cfw_liblc3_service_audio_state_init": 272
+          },
+          "text_size": 2810,
+          "undefined_provider_entries": [
+            "open_cfw_liblc3_encoder_provider_close",
+            "open_cfw_liblc3_encoder_provider_encode",
+            "open_cfw_liblc3_encoder_provider_plan",
+            "open_cfw_liblc3_encoder_provider_setup"
+          ]
+        },
+        "compiler_version": "Homebrew clang version 22.1.8",
+        "retained_encoder_link": {
+          "defined_adapter_entries": [
+            "open_cfw_liblc3_service_audio_close",
+            "open_cfw_liblc3_service_audio_encode",
+            "open_cfw_liblc3_service_audio_open",
+            "open_cfw_liblc3_service_audio_state_init"
+          ],
+          "sha256": "b19de3e9d625a0e04015541992ffd59d2842ed934f5fa97694cea5241dfb747a",
+          "size": 186092,
+          "undefined_runtime_imports": [
+            "__aeabi_memclr",
+            "__aeabi_memclr4",
+            "fabsf",
+            "floorf",
+            "fmaxf",
+            "fminf",
+            "memcpy",
+            "memmove",
+            "memset",
+            "roundf",
+            "sqrtf",
+            "truncf"
+          ]
+        }
+      }
+    },
+    "routing": {
+      "direct_stock_abi_compatible": false,
+      "firmware_image_emitted": false,
+      "placement_assigned": true,
+      "placement_scope": "writable-adapter-state-only",
+      "remaining_software_prerequisites": [
+        "The separately admitted stock-ABI shim must be placed and its two authenticated entry tail branches applied.",
+        "The stock header contents require the shim's guarded one-way transition to compact adapter control before first use.",
+        "Final production text/rodata placement, runtime bindings, relocation replay, and firmware patch emission remain unassigned."
+      ],
+      "service_audio_routed": false,
+      "software_boundary_implemented": true,
+      "stock_contexts_fit_adapter_state": true,
+      "stock_slot_placement_proven": true
+    },
+    "hardware_operations": false
+  }
+}

@@ -19,14 +19,14 @@ from apollo_artifact_consistency import validate_apollo_main_artifacts
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-system-alert-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-system-alert-closure.tsv"
-PINS = {FM: "70bfe0ac4ea1d67fdc4aac21423d4c52f4b578a86d3610dd7a74e6a11a6ddb41", CL: "2db604ee5ac49711ac861daab0ea7e2424db29619ec122e776ece600ae5a980a"}
+PINS = {FM: "70bfe0ac4ea1d67fdc4aac21423d4c52f4b578a86d3610dd7a74e6a11a6ddb41", CL: "c59f0ac046ed2a5be63e29e67b24acdfb892f132f16472824100ea37206f4d1b"}
 SOURCE = ROOT / "components/apollo_main/core_overlay/system_alert.c"
 SOURCE_PATH = "components/apollo_main/core_overlay/system_alert.c"
 OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
-SOURCE_PIN = (19702, "3167ebe3288500e56002e82daed3652f37c1af534922b71ee777c8fa3ca8fe97")
+SOURCE_PIN = (19693, "9f94e517abcef761812b93f43ec0a64acd1a6e733d1f1fbff4927c85210edcc8")
 LEAF_NAMES = (
     "open_cfw_system_alert_set_box_padding",
     "open_cfw_system_alert_common_data_handler",
@@ -36,10 +36,10 @@ LEAF_NAMES = (
     "open_cfw_system_alert_reflash_event_handler",
     "open_cfw_system_alert_ui_event_handler",
 )
-LEAF_DIGEST = "892fd5eb8d2dff2da201106b84c4f27b780a1bde15a90f01e08783213cb3d418"
+LEAF_DIGEST = "dbc6a5d37554fb05d34257db61ce26cbb4ac40005264c0b38ace5779dd7f5a68"
 PATCH_DIGEST = "1438650fbe6295315d0429def79c3d4eae2fcb31dafc5a57ff2e1a22830108ca"
-BUILT_DIGEST = "b23c947ce5e224e7c98ac729022d2fc6f7a0e1b3814408c8e00aebf073d12363"
-REGION_DIGEST = "e97d2de4bd6b0da5aaccf624a94471c1077ddfe9af5c01f003b4186ce5e5d489"
+BUILT_DIGEST = "0dafcad8ff47cb1a94052b1793cd37169c1cd8caf804fa8cc6d0d7d1265a1e93"
+REGION_DIGEST = "ff843c92d0d94b5c499defa50e0d334d34bfbeba69ac8e0338083f30c95f7da6"
 RETAINED = 'app\\gui\\SystemAlert\\systemAlert.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\app\\gui\\SystemAlert\\systemAlert.c'
 PATH_RUN = 0x6fd85c
@@ -263,16 +263,16 @@ def analyze(image=IMAGE):
     leaves = [x for x in overlay["relocated_leaves"] if x.get("source", {}).get("path") == SOURCE_PATH]
     if tuple(x.get("function") for x in leaves) != LEAF_NAMES or not set(LEAF_NAMES) <= set(overlay["functions"]):
         raise c.AuditError("production SystemAlert leaf inventory changed")
-    if _jsh(leaves) != LEAF_DIGEST or any(x.get("profiles") != ["apple-clang"] or not x.get("strict_relocation_contract") or x.get("source", {}).get("license") != "GPL-3.0-only" for x in leaves):
+    if _jsh(leaves) != LEAF_DIGEST or any(x.get("profiles") != ["apple-clang"] or not x.get("strict_relocation_contract") or x.get("source", {}).get("license") != "MIT" for x in leaves):
         raise c.AuditError("production SystemAlert leaf closure changed")
     if sum(x["expected"]["size"] for x in leaves) != 1138 or sum(x["expected"].get("closure_size", x["expected"]["size"]) for x in leaves) != 1189 or sum(len(x["relocations"]) for x in leaves) != 85:
         raise c.AuditError("production SystemAlert compiled census changed")
-    previous = 284046
+    previous = 224198
     alignment = 0
     for leaf in leaves:
         alignment += leaf["expected"]["offset"] - previous
         previous = leaf["expected"]["offset"] + leaf["expected"].get("closure_size", leaf["expected"]["size"])
-    if alignment != 9 or previous != 285244:
+    if alignment != 9 or previous != 225396:
         raise c.AuditError("production SystemAlert placement changed")
     patches = [x for x in overlay["patch_sites"] if x.get("target_function") in set(LEAF_NAMES)]
     if len(patches) != 7 or _jsh(patches) != PATCH_DIGEST or sum(x["expected_size"] for x in patches) != 2174 or {x["target_function"] for x in patches} != set(LEAF_NAMES):
@@ -303,7 +303,7 @@ def analyze(image=IMAGE):
         "surface": {"body_bytes": EXPECTED["body_bytes"], "direct_body_calls": EXPECTED["direct_body_calls"], "function_escapes": len(esc), "indirect_body_calls": len(ind), "internal_direct_body_calls": EXPECTED["internal_direct_body_calls"], "linked_functions": len(F), "outer_pool_bytes": EXPECTED["outer_pool_bytes"], "path_literal_references": EXPECTED["path_literal_references"], "physical_bytes": EXPECTED["physical_bytes"], "raw_path_referencing_functions": sum(1 for row in rows if int(row["path_reference_sites"]) > 0), "reachable_instructions": EXPECTED["reachable_instructions"]},
         "ingress": {"direct_b16_entry_sites": len(b16), "direct_bl_entry_sites": len(bl), "direct_bl_strict_interior_sites": len(bls), "direct_bw_entry_sites": len(bw), "stored_entry_pointer_words": len(stored)},
         "evidence": {"boundary_guards": True, "pointer_cells": ["0x%08X" % x for x in CELLS], "path_string_run_address": "0x%08X" % PATH_RUN, "tag_strings": len(TAGS)},
-        "production": {"source_admitted": True, "production_routed": True, "source_functions": 7, "compiled_text_bytes": 1138, "compiled_rodata_bytes": 51, "alignment_bytes": 9, "stock_replaced_bytes": 2174, "retained_literal_pool_bytes": 172, "strict_relocations": 85, "software_functional_gap": False, "hardware_validation": "deferred by project direction", "hardware_blocker": "An authorized responsive G2 pair is required for future dual-temple lifecycle, delayed-exit, translation, and rendered-display validation."},
+        "production": {"source_admitted": True, "production_routed": True, "source_functions": 7, "compiled_text_bytes": 1138, "compiled_rodata_bytes": 51, "alignment_bytes": 9, "stock_replaced_bytes": 2174, "retained_literal_pool_bytes": 172, "strict_relocations": 85, "software_functional_gap": False, "hardware_validation": "blocked by unavailable physical evidence", "hardware_blocker": "An authorized responsive G2 pair is required for future dual-temple lifecycle, delayed-exit, translation, and rendered-display validation."},
     }
 
 

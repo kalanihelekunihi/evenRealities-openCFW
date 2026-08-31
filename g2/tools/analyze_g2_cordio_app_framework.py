@@ -44,7 +44,8 @@ EXPECTED_ALL_ANCHORS_SHA256 = "d00e4ff2b560f970cf23e00d80bf6701581574d14939f5d69
 INPUT_SHA256 = {
     FUNCTION_MAP: "f892ac72319a4782ec807bb3f11454c16a607d3690fe80ec4eddef39c132e341",
     PROVENANCE_MAP: "4ca74385c8ad620516b9e44b21251a6737d06b2af9b41dc650896b079315acd8",
-    SNAPSHOT_PROVENANCE: "e88154139eed3c2996a96b1e1721ee09eacee1896114c3db1566c94353b327e7",
+    SNAPSHOT_VERIFIER: "ee0e84d507ed7807aa95055ef9e68f95a40c70dd771d9513a13757cc0e074e70",
+    SNAPSHOT_PROVENANCE: "0ce8d2c3ddbb8a47dcd642a3e8b779f7ade5c3a2afad043987f5979f5ec051e0",
     RUNTIME_LEGACY: "ed2d19f1d75bbf8e13991e11c843067959ae3b148a169f570707f864ea31849d",
     RUNTIME_CORE: "d7ac345ead56cae35e06638dd0eddc0b52aaffb63508b3c637eb8909e4bddd79",
     RUNTIME_MASTER: "a90f00c23de582e566b48302829535f1dd51c76c0d068e6bae0693b655b66ef1",
@@ -224,8 +225,8 @@ def _verify_snapshot() -> dict[str, Any]:
         "application_framework_source_routed_functions": 61,
         "application_framework_routed_stock_bytes": 29870,
         "software_validation": "host behavior tests plus isolated Cortex-M55 compilation and canonical image/package rebuild",
-        "hardware_validation": "deferred by project direction",
-        "hardware_blocker": "An authorized responsive right G2 is required for future qualification; the authorized left temple must remain stock.",
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "hardware_blocker": "Hardware validation is intentionally blocked by unavailable physical evidence and remains required for future qualification.",
         "legacy_master_slave_production_routed": True,
         "legacy_master_slave_routed_functions": 14,
         "legacy_master_slave_routed_stock_bytes": 1406,
@@ -403,7 +404,7 @@ def _production_evidence(
     return {
         "source_admitted": True,
         "production_routed": True,
-        "status": "software_closed_hardware_blocked",
+        "status": "software_closed_hardware_deferred",
         "legacy_master_slave_routed": True,
         "routed_functions": 61,
         "routed_anchored_functions": 50,
@@ -417,11 +418,10 @@ def _production_evidence(
         "preexisting_app_database_routed": True,
         "remaining_anchored_functions": 0,
         "remaining_anchored_body_bytes": 0,
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_blocker": (
-            "An authorized responsive right G2 is required for future live scanning, "
-            "advertising, connection, and controller-transition validation; the "
-            "authorized left temple must remain stock."
+            "Hardware validation is intentionally blocked by unavailable physical evidence and "
+            "remains required for future qualification."
         ),
     }
 
@@ -465,7 +465,7 @@ def analyze(corpus: Path, image_path: Path = IMAGE) -> dict[str, Any]:
         "limitations": [
             "source-path anchors are lower bounds and do not cover every function in each translation unit",
             "the selected public commit is a semantic rebuild oracle, not the private G2 producing commit",
-            "live controller, peer, advertising, and discovery validation remains deferred by project direction; future qualification requires authorized responsive hardware",
+            "live controller, peer, advertising, and discovery validation remains blocked by unavailable physical evidence; future qualification requires authorized responsive hardware",
         ],
     }
 

@@ -22,45 +22,45 @@ CLOSURE = ROOT / "tools/manifests/g2-ota-service-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-ota-service-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "14854f14615287a4cd95aac16c18f92bcd3da582f1a3bbb86698f4374963631d",
-    CLOSURE: "f7ac49aa06469a790ea580efef88fb5b4d3f7568924fbfc62c5b3b3e1264246b",
+    CLOSURE: "024454153c2f0df214ad8b9eeff89de64a8eb685566d07632cd5f8799261d4ef",
     PROVENANCE: "1c32ca41264759e8f629cdd4300cc67487afc70b4ffc358f3ed79c7d3fccef01",
 }
 SOURCE = ROOT / "components/apollo_main/core_overlay/ota_service.c"
 OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
-SOURCE_SIZE = 25_024
-SOURCE_SHA256 = "1b501a572c77e3b3105a10db4ead5100ff9a8d0f4c19f031d9067ed79731424b"
+SOURCE_SIZE = 25_015
+SOURCE_SHA256 = "87b90aa0793add8647af2c99014a61bcb56fd93c545b1352db8bf67bfafc2dea"
 PRODUCTION_LEAVES = (
-    ("open_cfw_ota_flash_erase", 28, 279648, 1),
-    ("open_cfw_ota_flash_read", 130, 279676, 1),
-    ("open_cfw_ota_flash_write", 42, 279808, 2),
-    ("open_cfw_ota_status_sync", 80, 279852, 1),
-    ("OtaSelectFlashOps", 22, 279932, 0),
-    ("OtaFileSize", 14, 279956, 1),
-    ("OtaEraseRange", 42, 279972, 1),
-    ("_evenOtaSetFwAddr", 106, 280016, 2),
-    ("_verifyFlashContent", 174, 280124, 1),
-    ("OtaBufferedFlashWrite", 66, 280300, 2),
-    ("OtaCommitDescriptor", 72, 280368, 1),
-    ("_evenOtaReplyToAPP", 44, 280440, 1),
-    ("_RPC_SystemOtaStatusSync", 4, 280484, 1),
-    ("OtaParseHexAddress", 100, 280488, 0),
-    ("_evenOtaBootloaderWriteFile2MRAM", 202, 280588, 9),
-    ("_otaFsHealthProbe", 4, 280792, 1),
-    ("_otaFsHealthCheckAndHeal", 40, 280796, 3),
-    ("_fileCmdParse", 576, 280836, 9),
-    ("_fileRawDataParse", 420, 281412, 7),
-    ("OTA_FileCaculateCRC", 156, 281832, 6),
-    ("_exportFileParse", 456, 281988, 6),
-    ("OTA_FrameDispatch", 92, 282444, 3),
-    ("OTA_ResetExportState", 52, 282536, 1),
-    ("OTA_NotifyStatus4", 32, 282588, 1),
-    ("OTA_NotifyStatus3", 32, 282620, 1),
-    ("OTA_NotifyStatus5", 32, 282652, 1),
-    ("OTA_CancelExport", 64, 282684, 2),
-    ("OTA_TransferActive", 36, 282748, 0),
-    ("OTA_SetInterface", 12, 282784, 0),
+    ("open_cfw_ota_flash_erase", 28, 219800, 1),
+    ("open_cfw_ota_flash_read", 130, 219828, 1),
+    ("open_cfw_ota_flash_write", 42, 219960, 2),
+    ("open_cfw_ota_status_sync", 80, 220004, 1),
+    ("OtaSelectFlashOps", 22, 220084, 0),
+    ("OtaFileSize", 14, 220108, 1),
+    ("OtaEraseRange", 42, 220124, 1),
+    ("_evenOtaSetFwAddr", 106, 220168, 2),
+    ("_verifyFlashContent", 174, 220276, 1),
+    ("OtaBufferedFlashWrite", 66, 220452, 2),
+    ("OtaCommitDescriptor", 72, 220520, 1),
+    ("_evenOtaReplyToAPP", 44, 220592, 1),
+    ("_RPC_SystemOtaStatusSync", 4, 220636, 1),
+    ("OtaParseHexAddress", 100, 220640, 0),
+    ("_evenOtaBootloaderWriteFile2MRAM", 202, 220740, 9),
+    ("_otaFsHealthProbe", 4, 220944, 1),
+    ("_otaFsHealthCheckAndHeal", 40, 220948, 3),
+    ("_fileCmdParse", 576, 220988, 9),
+    ("_fileRawDataParse", 420, 221564, 7),
+    ("OTA_FileCaculateCRC", 156, 221984, 6),
+    ("_exportFileParse", 456, 222140, 6),
+    ("OTA_FrameDispatch", 92, 222596, 3),
+    ("OTA_ResetExportState", 52, 222688, 1),
+    ("OTA_NotifyStatus4", 32, 222740, 1),
+    ("OTA_NotifyStatus3", 32, 222772, 1),
+    ("OTA_NotifyStatus5", 32, 222804, 1),
+    ("OTA_CancelExport", 64, 222836, 2),
+    ("OTA_TransferActive", 36, 222900, 0),
+    ("OTA_SetInterface", 12, 222936, 0),
 )
 PATCH_TARGETS = tuple(name for name, *_ in PRODUCTION_LEAVES[4:])
 PHYSICAL = (0x004448F4, 0x004488EC)
@@ -321,8 +321,9 @@ def analyze(image_path: Path = IMAGE) -> dict:
     regions = {region["name"]: region for region in main["regions"]}
     for order, row in enumerate(rows, 1):
         item = regions.get(f"ota_service_{order:02d}_source_replacement")
+        replacement_size = 4 if row["name"] == "_fileCmdParse" else int(row["size"])
         expected = (
-            int(row["entry"], 0), int(row["size"]),
+            int(row["entry"], 0), replacement_size,
             "generated_source_entry_replacement",
         )
         if not item or (
@@ -330,6 +331,19 @@ def analyze(image_path: Path = IMAGE) -> dict:
             item.get("address_status"),
         ) != expected:
             raise AuditError(f"production OTA stock region changed: {row['name']}")
+    reclaimed_tail = {
+        "liblc3_ltpf_source_text": (0x00445664, 5596, "source_compiled"),
+        "liblc3_ltpf_text_cave_tail": (0x00446C40, 30, "generated_alignment"),
+    }
+    for name, expected in reclaimed_tail.items():
+        item = regions.get(name)
+        if not item or (
+            item.get("target_address"), item.get("size"),
+            item.get("address_status"),
+        ) != expected:
+            raise AuditError(f"production OTA reclaimed tail changed: {name}")
+    if 4 + sum(item[1] for item in reclaimed_tail.values()) != 5630:
+        raise AuditError("production OTA reclaimed tail tiling changed")
     service_regions = [region for region in main["regions"]
                        if region["name"].startswith("ota_service_")]
     if sum(region["size"] for region in service_regions
@@ -392,13 +406,12 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 15_394,
             "retained_gap_pool_bytes": 982,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "An authorized responsive G2 peer and writable OTA target are required "
-                "for future qualification of live MRAM, filesystem, XIP-flash, "
-                "bootloader, export, cancellation, CRC failure, power-loss, and "
-                "rollback evidence; the authorized right temple is not under test because qualification is deferred by project direction "
-                "and the left temple must remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification "
+                "requires an authorized G2 pair and either a component-specific writable OTA-target "
+                "fixture or an authenticated golden OTA capture covering MRAM, filesystem, XIP-flash, "
+                "bootloader, export, cancellation, CRC failure, power loss, and rollback"
             ),
         },
     }

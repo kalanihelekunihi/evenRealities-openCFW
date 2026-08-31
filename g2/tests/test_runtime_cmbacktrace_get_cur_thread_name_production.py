@@ -66,52 +66,68 @@ TARGET_FLAGS = candidate_contract.TARGET_FLAGS
 PROFILE_PINS = {
     "apple-clang": {
         "compiler": "/usr/bin/clang",
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
-        "adapter_offset": 183_444,
-        "adapter_runtime": 0x007C_0FB8,
-        "get_offset": 183_460,
-        "get_runtime": 0x007C_0FC8,
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+        "adapter_offset": 123_596,
+        "adapter_runtime": 0x007B_25F0,
+        "get_offset": 123_612,
+        "get_runtime": 0x007B_2600,
         "patch_hex": "1ef283bd00bf00bf",
         "patch_sha256": (
             "dbdba3b98e92adbd3518efb8e13509c"
             "0fd3ac0a8497cff70f6886c0901274ed0"
         ),
-        "overlay": (
-            429_058,
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+        "final_overlay": (
+            360_578,
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
         ),
-        "component": (
-            3_952_454,
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+        "core_overlay": (
+            360_578,
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+        ),
+        "final_component": (
+            3_883_974,
+            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
+        ),
+        "core_component": (
+            3_883_974,
+            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
         ),
         "package": (
-            4_745_526,
-            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+            4_677_046,
+            "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
         ),
     },
     "linux-clang": {
         "compiler": "/home/linuxbrew/.linuxbrew/bin/clang",
         "version": "Homebrew clang version 22.1.8",
-        "adapter_offset": 185_168,
-        "adapter_runtime": 0x007C_1674,
-        "get_offset": 185_184,
-        "get_runtime": 0x007C_1684,
+        "adapter_offset": 125_416,
+        "adapter_runtime": 0x007B_2D0C,
+        "get_offset": 125_432,
+        "get_runtime": 0x007B_2D1C,
         "patch_hex": "1ff211b900bf00bf",
         "patch_sha256": (
             "7faa6dcd6eb772b5368352c1f72af3d5"
             "06efa4c0bdbfa7a8135b4810f09f41d1"
         ),
-        "overlay": (
-            212_664,
-            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+        "final_overlay": (
+            152_912,
+            "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20",
         ),
-        "component": (
-            3_736_060,
-            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+        "core_overlay": (
+            145_314,
+            "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19",
+        ),
+        "final_component": (
+            3_676_308,
+            "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
+        ),
+        "core_component": (
+            3_668_710,
+            "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8",
         ),
         "package": (
-            4_529_116,
-            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+            4_469_364,
+            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
         ),
     },
 }
@@ -560,17 +576,26 @@ const char *vTaskName(void);
             self.assertEqual(get_expected["sha256"], "cdcdfc75bb08504fce75a95fac5acf2c8f9502c9eecc7c886198f721cf321b0b")
             self.assertEqual(
                 (aggregate["overlay_size"], aggregate["overlay_sha256"]),
-                pins["overlay"],
+                pins["final_overlay"],
             )
             self.assertEqual(
                 (aggregate["component_size"], aggregate["component_sha256"]),
-                pins["component"],
+                pins["final_component"],
             )
 
+        stage_config = json.loads(OVERLAY.read_text(encoding="utf-8"))
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = Path(self.temporary.name) / "core-stage-overlay.json"
+        stage_config_path.write_text(
+            json.dumps(stage_config, indent=2) + "\n", encoding="utf-8"
+        )
         output = Path(self.temporary.name) / "component"
         report = apollo_overlay.build(
             root=ROOT,
-            config_path=OVERLAY,
+            config_path=stage_config_path,
             output_dir=output,
             clang=self.clang,
             toolchain_profile=self.profile,
@@ -578,11 +603,11 @@ const char *vTaskName(void);
         pins = PROFILE_PINS[self.profile]
         self.assertEqual(
             (report["overlay"]["size"], report["overlay"]["sha256"]),
-            pins["overlay"],
+            pins["core_overlay"],
         )
         self.assertEqual(
             (report["component"]["size"], report["component"]["sha256"]),
-            pins["component"],
+            pins["core_component"],
         )
         by_function = {
             item["extraction"]["function"]: item
@@ -716,14 +741,14 @@ const char *vTaskName(void);
         provider = component["provider"]
         self.assertEqual(
             (provider["size"], provider["sha256"]),
-            PROFILE_PINS["apple-clang"]["component"],
+            PROFILE_PINS["apple-clang"]["final_component"],
         )
         self.assertEqual(
             (
                 provider["profiles"]["linux-clang"]["size"],
                 provider["profiles"]["linux-clang"]["sha256"],
             ),
-            PROFILE_PINS["linux-clang"]["component"],
+            PROFILE_PINS["linux-clang"]["final_component"],
         )
         regions = component["regions"]
         self.assertGreater(len(regions), 0)
@@ -771,8 +796,8 @@ const char *vTaskName(void);
         for path, tokens in {
             NOTICE: ("CmBacktrace", "MIT", "73714489f9d8af130aacb515586b397b604a5768"),
             EVIDENCE: ("0x00593AF6", "0x007B25F4", "null-to-0x34"),
-            AUDIT: ("Production promotion", "stock entry", "0x007C1688"),
-            ROOT / "docs/memory-map.md": ("0x007B25F4", "0x007C0FCC", "CmBacktrace"),
+            AUDIT: ("Production promotion", "stock entry", "0x007B2D1C"),
+            ROOT / "docs/memory-map.md": ("0x007B25F0", "0x007B2D0C", "CmBacktrace"),
             ROOT / "docs/source-coverage.md": ("0x00593AF6", "123,763", "CmBacktrace"),
             ROOT / "docs/upstream-inventory.md": ("CmBacktrace", "production", "73714489"),
             ROOT / "components/README.md": ("CmBacktrace", "123,620", "125,440"),

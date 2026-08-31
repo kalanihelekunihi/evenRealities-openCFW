@@ -239,7 +239,7 @@ TARGET_PROFILES = {
     },
 }
 APPLE_CLANG = "/usr/bin/clang"
-APPLE_CLANG_VERSION = "Apple clang version 21.0.0 (clang-2100.3.30.1)"
+APPLE_CLANG_VERSION = "Apple clang version 21.0.0 (clang-2100.3.33.1)"
 TARGET_TEXT = bytes.fromhex("c0f389207047")
 TARGET_TEXT_PIN = (
     6,
@@ -252,17 +252,17 @@ TARGET_TEXT_PIN = (
 # and complete redirects are deterministic before those aggregate builds.
 PRODUCTION_PROFILES = {
     "apple-clang": {
-        "main_leaf": (184_444, 0x007C_13A0),
+        "main_leaf": (124_596, 0x007B_29D8),
         "boot_leaf": (650, 0x0043_4702),
         "main_patch": "e7f292bd00bf00bf",
         "boot_patch": "23f0a3bd00bf00bf",
-        "main_overlay_size": 429_058,
+        "main_overlay_size": 360_578,
         "main_overlay_sha256": (
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
         ),
-        "main_component_size": 3_952_454,
+        "main_component_size": 3_883_974,
         "main_component_sha256": (
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
         ),
         "boot_overlay_size": 15_240,
         "boot_overlay_sha256": (
@@ -271,26 +271,26 @@ PRODUCTION_PROFILES = {
         ),
         "boot_component_size": 163_840,
         "boot_component_sha256": (
-            "3ae28d27b81ca70d96fd5846d04fa1a4"
-            "f0add5a8514cee21f9f34bdaa1455eac"
+            "8f24989979719b4c9f1273624240ba70"
+            "2a99decf735d099bfee1afcda16159e0"
         ),
-        "package_size": 4_745_526,
+        "package_size": 4_677_046,
         "package_sha256": (
-            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
+            "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"
         ),
     },
     "linux-clang": {
-        "main_leaf": (186_168, 0x007C_1A5C),
+        "main_leaf": (126_416, 0x007B_30F4),
         "boot_leaf": (650, 0x0043_4702),
         "main_patch": "e8f220b900bf00bf",
         "boot_patch": "23f0a3bd00bf00bf",
-        "main_overlay_size": 212_664,
+        "main_overlay_size": 152_912,
         "main_overlay_sha256": (
-            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18"
+            "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20"
         ),
-        "main_component_size": 3_736_060,
+        "main_component_size": 3_676_308,
         "main_component_sha256": (
-            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97"
+            "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7"
         ),
         "boot_overlay_size": 15_224,
         "boot_overlay_sha256": (
@@ -299,12 +299,12 @@ PRODUCTION_PROFILES = {
         ),
         "boot_component_size": 163_824,
         "boot_component_sha256": (
-            "d0a97870b861c089e4ac029ba1c7a1c0"
-            "cc67d6112c3416a5cda657a038c3a8ea"
+            "efef1a9b039548ab9332651921e8a786"
+            "4ce8df205bfe22c9ae6e13c0c81cb635"
         ),
-        "package_size": 4_529_116,
+        "package_size": 4_469_364,
         "package_sha256": (
-            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"
+            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"
         ),
     },
 }
@@ -793,7 +793,7 @@ class RuntimeLittlefsTagIdProductionTests(unittest.TestCase):
                 main_regions,
                 3_647_992,
                 6,
-                0x007C_13A0,
+                0x007B_29D8,
                 "source_compiled",
             ),
             "bootloader_littlefs_tag_id_source_replacement": (

@@ -1,0 +1,84 @@
+{
+  "evidence_bounds": {
+    "hardware_operations": false,
+    "residual physical bytes are alignment and literal data": true,
+    "source and semantic identity are not compiler byte identity": true
+  },
+  "inputs": {
+    "third_party/freetype/LICENSE": {
+      "bytes": 6743,
+      "sha256": "08c135755dd589039470f1fdbb400daaabaaa50d0b366d19cebff4d22986baa1"
+    },
+    "third_party/freetype/PROVENANCE.json": {
+      "bytes": 102377,
+      "sha256": "2be8717625bceddee3aa95663186c0629247304c951c4790bc26cd372e3794bf"
+    }
+  },
+  "mapped_callable_closure": {
+    "bytes": 4310,
+    "compiler_byte_identity_claimed": false,
+    "functions": 29,
+    "high": {
+      "bytes": 804,
+      "functions": 16
+    },
+    "mapping_sha256": "603b60ba088a2d50816d017fa3c11287ef9d908a55592b5db56e3f8a6c299664",
+    "medium": {
+      "bytes": 3506,
+      "functions": 13
+    },
+    "unresolved_callable_bytes": 0
+  },
+  "production": {
+    "authenticated_target_placement": false,
+    "community_source": true,
+    "existing_full_candidate_link_gate": "tests.test_runtime_target_provider_candidate",
+    "remaining_release_gates": [
+      "pinned IAR-compatible code generation, relocation, and placement",
+      "authenticated font payload and face-path configuration",
+      "task stack and worst-case execution-time qualification",
+      "authorized hardware rendering validation"
+    ],
+    "software_gate": "tests.test_freetype_smooth_source_admission",
+    "stock_image_overlay_routed": false
+  },
+  "renderer_semantics": [
+    {
+      "name": "smooth",
+      "required_mode": "FT_RENDER_MODE_NORMAL"
+    },
+    {
+      "name": "smooth-lcd",
+      "required_mode": "FT_RENDER_MODE_LCD"
+    },
+    {
+      "name": "smooth-lcdv",
+      "required_mode": "FT_RENDER_MODE_LCD_V"
+    }
+  ],
+  "schema_version": 1,
+  "smooth_source_inventory": {
+    "bytes": 88859,
+    "files": 8,
+    "inventory_sha256": "c9a85d138aa31faa688e241ac7ffd70d8c8943eaf315f79b1c5419646fd20e08"
+  },
+  "status": "g2-freetype-smooth-community-source-admission",
+  "translation_unit": {
+    "bytes": 1385,
+    "path": "third_party/freetype/src/smooth/smooth.c",
+    "sha256": "41af657ea23f99e693dfa8973b759e738b77107d190b17677f4977fd90debcf5",
+    "single_object_includes": [
+      "ftgrays.c",
+      "ftsmooth.c",
+      "ftspic.c"
+    ],
+    "target": "arm-none-eabi/cortex-m55/thumb/hard-float",
+    "warnings_as_errors": true
+  },
+  "upstream": {
+    "commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+    "license": "FTL",
+    "tag": "VER-2-9-1",
+    "version": "2.9.1"
+  }
+}

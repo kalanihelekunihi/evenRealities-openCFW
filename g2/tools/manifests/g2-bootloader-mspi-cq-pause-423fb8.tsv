@@ -8,4 +8,4 @@ provider	am_hal_delay_us_status_check	0x0041d246	0x0041d28a	68	-	typed_retained_
 literal	pause_limit	0x00424bd4	0x00424bd8	4	-	authenticated_literal	AmbiqSuite AM_HAL_MSPI_MAX_PAUSE_DELAY	BSD-3-Clause	value 100000
 literal	mspi0_base	0x00424bd8	0x00424bdc	4	-	authenticated_literal	Apollo510 CMSIS MSPI0_BASE	Apache-2.0	value 0x40060000
 successor	program_dma	0x0042403e	0x004240aa	108	d075d73aba138735bc9229bcf8672cb6a1c2fadec21985d2159043534ad130e1	next_sequential_frontier	AmbiqSuite 5.1.0 program_dma	BSD-3-Clause	not admitted by Wave 7
-hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project policy	future CQ pause, timeout, DMA-idle, MMIO, concurrency, and cold-boot evidence remains required
+hardware_validation	blocked by unavailable physical evidence	-	-	0	-	software_only	future authorized G2 qualification	project policy	future CQ pause, timeout, DMA-idle, MMIO, concurrency, and cold-boot evidence remains required

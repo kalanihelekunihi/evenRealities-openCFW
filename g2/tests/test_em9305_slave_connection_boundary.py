@@ -107,7 +107,7 @@ class Em9305SlaveConnectionBoundaryTests(unittest.TestCase):
         self.assertFalse(result["exact_source_available"])
         self.assertFalse(result["redistribution_authority_resolved"])
         self.assertFalse(result["candidate"]["production_routed"])
-        self.assertEqual(result["hardware_validation"], "deferred by project direction")
+        self.assertEqual(result["hardware_validation"], "blocked by unavailable physical evidence")
 
     def test_evidence_descriptors_cover_six_function_bodies(self) -> None:
         array_type = Evidence * 6

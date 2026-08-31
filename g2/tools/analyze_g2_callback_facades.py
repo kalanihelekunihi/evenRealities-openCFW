@@ -29,7 +29,7 @@ PINS = {
 }
 SOURCE = ROOT / "components/apollo_main/core_overlay/callback_facades.c"
 SOURCE_PATH = "components/apollo_main/core_overlay/callback_facades.c"
-SOURCE_PIN = (4945, "f490db10bf1e9bf7b476f486f4c9df7732d024efa95bcab080064e05c82e707e")
+SOURCE_PIN = (4936, "bf72af23a2b7d6ce22fac7f9c11eca909133e6ef541b75e122fa61dfdbdfb9c5")
 LEAF_NAMES = (
     "open_cfw_cb_charge_init", "open_cfw_cb_charge_deinit",
     "open_cfw_cb_charge_register", "open_cfw_cb_charge_unregister",
@@ -37,10 +37,10 @@ LEAF_NAMES = (
     "open_cfw_cb_msg_deinit", "open_cfw_cb_msg_register",
     "open_cfw_cb_msg_unregister", "open_cfw_cb_msg_notify",
 )
-LEAF_DIGEST = "78d7673889b2f3d25d51c1537ba9b3a4cb6f0e040013004a86ab503d3f73997c"
+LEAF_DIGEST = "ce47ce4a560f9c4046d1982d5d9fec7f1431efabda1bbdb93248d991ba209324"
 PATCH_DIGEST = "f383e040a7e15e42df5431ad688455c6cce2440f81f4908261eaaab46fb87ae8"
-BUILT_DIGEST = "54a7d1615730171ebce2bec262be2e41881217a58ab1cfac3100727f431115a9"
-REGION_DIGEST = "11d57436b937614b9412391409bb1816d5c3b4d4e69a68782e848404c33af19f"
+BUILT_DIGEST = "3a3f4a5d64b24c179cebab0d9a046555efa65dda940fd3c63de88a1291ad5199"
+REGION_DIGEST = "f24da68c16f4a3d1d9f29199baf1f4c3f25e707a57bd3dd32d43c5aed6556da3"
 EASY = {0x43CE9E, 0x43D0CE, 0x43D574}
 CALLBACK = {0x510108, 0x5101AE, 0x510240, 0x5103C4, 0x5105BC}
 TARGET_COUNTS = {
@@ -209,18 +209,18 @@ def analyze(image: Path = IMAGE) -> dict:
         raise c.AuditError("callback-facade leaf closure changed")
     if any(leaf.get("profiles") != ["apple-clang"] or
            not leaf.get("strict_relocation_contract") or
-           leaf.get("source", {}).get("license") != "GPL-3.0-only"
+           leaf.get("source", {}).get("license") != "MIT"
            for leaf in leaves):
         raise c.AuditError("callback-facade leaf policy changed")
     if sum(leaf["expected"]["size"] for leaf in leaves) != 208 or \
             sum(len(leaf["relocations"]) for leaf in leaves) != 10:
         raise c.AuditError("callback-facade compiled census changed")
-    previous = 252700
+    previous = 192852
     alignment = 0
     for leaf in leaves:
         alignment += leaf["expected"]["offset"] - previous
         previous = leaf["expected"]["offset"] + leaf["expected"]["size"]
-    if alignment != 6 or previous != 252914:
+    if alignment != 6 or previous != 193066:
         raise c.AuditError("callback-facade placement changed")
     patches = [patch for patch in overlay["patch_sites"]
                if patch.get("target_function") in set(LEAF_NAMES)]
@@ -275,7 +275,7 @@ def analyze(image: Path = IMAGE) -> dict:
             "strict_relocations": 10,
             "retained_literal_pool_bytes": 68,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
         },
     }
 

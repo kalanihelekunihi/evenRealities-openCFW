@@ -24,10 +24,10 @@ SOURCE_MAP = ROOT / "tools/manifests/ambiqsuite-apollo510-rtos-provider-source.t
 OVERLAY_CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
 PRODUCTION_SOURCE = ROOT / "components/apollo_main/core_overlay/product_rtos.c"
 PRODUCTION_SOURCE_PATH = "components/apollo_main/core_overlay/product_rtos.c"
-PRODUCTION_SOURCE_SHA256 = "4dc4706ec021bb1d0cf0b0c3f9b0960ce934f94f810b0a753bdd50863d5083fb"
+PRODUCTION_SOURCE_SHA256 = "f342cf43b40021b278b76fd6d7bb89778caab5c67ea326b2c0867e69d75d476b"
 INPUT_PINS = {
     FUNCTION_MAP: "148ef17fb8e47f5978c28889574b463103974e397117c9257ce645c5cf3b472d",
-    CLOSURE: "13371b7694ebac5b15530c9d797fdac21726ec55f1ae9ee7b4d4e01416bc70e2",
+    CLOSURE: "c76363a6efc74b718c08b063808852b6b612775ccd9610713b76564bdbe05ad1",
     PROVIDER_MAP: "5e4bc1ef78b636a3940062fcfda435cef3a8afe1977c143c5be9b2da61d6d560",
     SOURCE_MAP: "b139ffa4b34e8a96d0a93ecf5589c5805965be8abc238523a491c979c6f51666",
 }
@@ -316,7 +316,7 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
         - source_leaves[index]["expected"]["size"]
         for index in range(len(source_leaves) - 1)
     )
-    alignment += source_leaves[0]["expected"]["offset"] - 331690
+    alignment += source_leaves[0]["expected"]["offset"] - 263210
     strict_relocations = sum(len(leaf["relocations"]) for leaf in source_leaves)
     if (compiled_text, alignment, strict_relocations, routed_bytes) != (444, 14, 19, 512):
         raise AuditError("product RTOS production metrics changed")

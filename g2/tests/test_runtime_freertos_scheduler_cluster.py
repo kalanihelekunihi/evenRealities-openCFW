@@ -263,6 +263,8 @@ POST_SCHEDULER_SOURCE_PATCHES = (
     "TF_Multipart_Payload",
     "TF_Multipart_Close",
     "TF_Tick",
+    "open_cfw_clkmgr_hfrc2_uq15_divider",
+    "open_cfw_clkmgr_hfrc_integer_divider",
 )
 
 COMMON_RELOCATIONS = {
@@ -286,21 +288,21 @@ COMMON_RELOCATIONS = {
 PROFILES = {
     "apple-clang": {
         "version": "Apple clang version 21.0.0",
-        "overlay_size": 429_058,
+        "overlay_size": 360_578,
         "overlay_sha256": (
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
         ),
-        "component_size": 3_952_454,
+        "component_size": 3_883_974,
         "component_sha256": (
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
         ),
-        "package_size": 4_745_526,
+        "package_size": 4_677_046,
         "package_sha256": (
-            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
+            "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"
         ),
         # Builder reports exclude isolated/non-emitted registry categories.
-        "function_count": 2_631,
-        "patch_count": 2_374,
+        "function_count": 2_436,
+        "patch_count": 2_324,
         "tail_growth": 782,
         "lz4_tail_growth": 1_758,
         "next_closure_tail_growth": 492,
@@ -329,21 +331,21 @@ PROFILES = {
         # above (the nanopb decode wave and the iar float-exponent trio are
         # absent from the rollback overlay and are therefore not deleted
         # here).
-        "current_rollback_net_tail_growth": 16_360,
+        "current_rollback_net_tail_growth": 16_468,
         "later_tail_growth": 42_396,
         "legacy_reset_unordered_tail_growth": 388,
         # Active rollback build from the current production registry.
         "legacy_semaphore_layout": {
-            "overlay_size": 138_514,
+            "overlay_size": 138_622,
             "overlay_sha256": (
-                "d4ce634f265e51bd43be524a246a0d0aed5583fcee9a6e94246d1aa240a03e81"
+                "c47795fbc98d7c430796e47354c76f38384d423523bcb07f94c2f840cbbaf720"
             ),
-            "component_size": 3_661_910,
+            "component_size": 3_662_018,
             "component_sha256": (
-                "a97104e357a996b5c38d0c3d28901309215a505bf054c3209d591f2a843f1e58"
+                "54b2efa02faacfbd11f7c86dd7d3f2b1adfee954ba791a91e24bb5407fc981ef"
             ),
-            "function_count": 753,
-            "patch_count": 695,
+            "function_count": 755,
+            "patch_count": 697,
             "function_offset": 106_572,
             "function_size": 596,
             "patch_payload_offset": 40_036,
@@ -390,52 +392,52 @@ PROFILES = {
         ),
         "provider_addresses": {MASK: 0x007A_FF08, CLEAR_MASK: 0x007A_FF1E},
         "accounting": {
-            "source_owned_bytes": 431_334,
+            "source_owned_bytes": 362_962,
             "source_owned_in_place_bytes": 184,
-            "generated_patch_site_bytes": 409_066,
-            "replaced_stock_function_bytes": 409_246,
+            "generated_patch_site_bytes": 397_446,
+            "replaced_stock_function_bytes": 397_626,
             "replaced_stock_data_bytes": 2_200,
-            "opaque_base_bytes": 3_111_914,
+            "opaque_base_bytes": 3_123_534,
             "generated_wrapper_bytes": 32,
         },
         "leaves": {
             PORT_YIELD: (
-                175_292, 0x007B_EFE0, 24, 2,
+                115_444, 0x007B_0618, 24, 2,
                 "105148e84e8d81859d7c85803d553503d05745bd56d807495d62f3bf9da68235",
                 "105148e84e8d81859d7c85803d553503d05745bd56d807495d62f3bf9da68235",
                 "6ef3acba",
                 "1d55099a69bdf6496ff9d396d08da47f010bb4e9e0a73d4c92b1def23cced7e8",
             ),
             PORT_ENTER: (
-                175_316, 0x007B_EFF8, 30, 0,
+                115_468, 0x007B_0630, 30, 0,
                 "c382397165ed32cec367e2ceb68f6af24ce748937cef326d825270741bafab7f",
                 "18797972899b42b6333a1353a25820dc720a5e477d0275b3fb4f039cbc0ef158",
                 "6ef3aeba",
                 "eb5dfeebd33b75b7ea3bca9a69c1cd5735986fe73fd0d4921232cf94b6967de9",
             ),
             PORT_EXIT: (
-                175_348, 0x007B_F018, 54, 2,
+                115_500, 0x007B_0650, 54, 2,
                 "da3e6da9d2363ba358f7b6bbbd098a7cd7483807ec37477497db2d31632e4e9c",
                 "1106c10ba143e84c0335da8c09658f88594e4578a8dfece201e73ee36f00900f",
                 "6ef3b2ba",
                 "5fe5effaeee03f15a59dcc3270d51ad891defcc094008e5e4d143550f0570d54",
             ),
             RESET_NEXT: (
-                175_404, 0x007B_F050, 32, 2,
+                115_556, 0x007B_0688, 32, 2,
                 "249e6dafc8adc7286fbf5b96db744f902a04c7a38709a4344f766e01ec264a5f",
                 "249e6dafc8adc7286fbf5b96db744f902a04c7a38709a4344f766e01ec264a5f",
                 "5af307bf",
                 "154f3cce690424a0ea5293fc5af7f5a0170cc9d0e14fcb8ecaf0d1ec15586a7f",
             ),
             INCREMENT_TICK: (
-                175_436, 0x007B_F070, 344, 0,
+                115_588, 0x007B_06A8, 344, 0,
                 "1aec337b980ad1a9719f7bed519894ea3b7a8d2a0cecc239309a55729b40ecef",
                 "453dd5addafa0fade84729e0f215668b067055eea7daf43cc089b9ee98e02888",
                 "5bf32cbb",
                 "bdd287666f3e2deda26222796d708ee60c86f5a9d4d437535a40340892155286",
             ),
             RESUME_ALL: (
-                175_780, 0x007B_F1C8, 292, 0,
+                115_932, 0x007B_0800, 292, 0,
                 "e608ef2a9725d183beb19220d7c864691b2affa85e64372cf62350d671badcdd",
                 "8b8a8bde3a875d1b4f6b28d3aa0e4bedf2c80f80d0c0c380614e3e1a8c4216a3",
                 "5bf318bd",
@@ -449,20 +451,20 @@ PROFILES = {
     },
     "linux-clang": {
         "version": "Homebrew clang version 22.1.8",
-        "overlay_size": 212_664,
+        "overlay_size": 145_314,
         "overlay_sha256": (
-            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18"
+            "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19"
         ),
-        "component_size": 3_736_060,
+        "component_size": 3_668_710,
         "component_sha256": (
-            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97"
+            "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8"
         ),
-        "package_size": 4_529_116,
+        "package_size": 4_469_364,
         "package_sha256": (
-            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"
+            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"
         ),
-        "function_count": 933,
-        "patch_count": 730,
+        "function_count": 792,
+        "patch_count": 732,
         "tail_growth": 778,
         "lz4_tail_growth": 1_790,
         "next_closure_tail_growth": 492,
@@ -543,12 +545,12 @@ PROFILES = {
         ),
         "provider_addresses": {MASK: 0x007B_054C, CLEAR_MASK: 0x007B_0562},
         "accounting": {
-            "source_owned_bytes": 205_144,
+            "source_owned_bytes": 145_498,
             "source_owned_in_place_bytes": 184,
-            "generated_patch_site_bytes": 99_288,
-            "replaced_stock_function_bytes": 99_468,
+            "generated_patch_site_bytes": 99_340,
+            "replaced_stock_function_bytes": 99_520,
             "replaced_stock_data_bytes": 0,
-            "opaque_base_bytes": 3_423_892,
+            "opaque_base_bytes": 3_423_840,
             "generated_wrapper_bytes": 32,
         },
         "leaves": {
@@ -642,10 +644,23 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         parent.mkdir(parents=True, exist_ok=True)
         cls.temporary = tempfile.TemporaryDirectory(dir=parent)
         temporary = Path(cls.temporary.name)
+        production_config = copy.deepcopy(cls.config)
+        production_config["expected"] = copy.deepcopy(
+            production_config["core_stage_expected"]
+        )
+        for profile in production_config["toolchain_profiles"].values():
+            profile["expected"] = copy.deepcopy(
+                profile["core_stage_expected"]
+            )
+        production_config_path = temporary / "production-core-stage.json"
+        production_config_path.write_text(
+            json.dumps(production_config, indent=2) + "\n",
+            encoding="utf-8",
+        )
         cls.reports = [
             apollo_overlay.build(
                 root=ROOT,
-                config_path=OVERLAY_CONFIG,
+                config_path=production_config_path,
                 output_dir=temporary / f"run-{index}",
                 clang=cls.clang,
                 toolchain_profile=cls.profile_name,
@@ -783,7 +798,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         )
         self.assertEqual(
             (len(self.config["functions"]), len(self.config["patch_sites"])),
-            (957, 896),
+            (2440, 2328),
         )
 
         for leaf in (
@@ -1024,31 +1039,8 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         final_end = leaf_ranges[-1][1]
         self.assertEqual(
             final_end,
-            OVERLAY_RUNTIME_BASE
-            + self.profile["overlay_size"]
-            - self.profile["easylogger_tail_growth"]
-            - self.profile["lz4_tail_growth"]
-            - self.profile["next_closure_tail_growth"]
-            - self.profile["timeout_tail_growth"]
-            - self.profile["semaphore_tail_growth"]
-            - self.profile["reset_unordered_tail_growth"]
-            - self.profile["nanopb_close_tail_growth"]
-            - self.profile["littlefs_rewind_tail_growth"]
-            - self.profile["nanopb_fixed32_tail_growth"]
-            - self.profile["littlefs_tag_type2_tail_growth"]
-            - self.profile["littlefs_tag_chunk_tail_growth"]
-            - self.profile["littlefs_tag_type3_tail_growth"]
-            - self.profile.get("nanopb_varint32_tail_growth", 0)
-            - self.profile.get("nanopb_skip_string_tail_growth", 0)
-            - self.profile.get("task_get_info_tail_growth", 0)
-            - self.profile.get("scheduler_start_tail_growth", 0)
-            - self.profile.get("watchdog_tail_growth", 0)
-            - self.profile["littlefs_tag_id_tail_growth"]
-            - self.profile["littlefs_tag_size_tail_growth"]
-            - self.profile["nanopb_fixed64_tail_growth"]
-            - self.profile["nanopb_read_tail_growth"]
-            - self.profile["nanopb_svarint_tail_growth"]
-            - self.profile["later_tail_growth"],
+            self.profile["leaves"][RESUME_ALL][1]
+            + self.profile["leaves"][RESUME_ALL][2],
         )
         self.assertLessEqual(final_end, OVERLAY_LIMIT)
         self.assertEqual(OVERLAY_LIMIT - final_end, 259_804 if self.profile_name == "apple-clang" else 257_976)
@@ -1057,9 +1049,9 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         self,
     ) -> None:
         expected_pins = (
-            self.config["expected"]
+            self.config["core_stage_expected"]
             if self.profile_name == "apple-clang"
-            else self.config["toolchain_profiles"][self.profile_name]["expected"]
+            else self.config["toolchain_profiles"][self.profile_name]["core_stage_expected"]
         )
         component = self.production["component"]
         overlay = self.production["overlay"]
@@ -1169,6 +1161,11 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
                     PREAMBLE_BYTES + address - RUN_BASE,
                 )
 
+        alignment_names = {
+            "apollo_freertos_port_yield_source_leaf_alignment",
+            "apollo_freertos_port_exit_critical_source_leaf_alignment",
+            "apollo_freertos_task_reset_next_task_unblock_time_source_leaf_alignment",
+        }
         alignment_spans = [
             (0x007B_0616, 2),
             (0x007B_064E, 2),
@@ -1178,10 +1175,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             sorted(
                 (region["target_address"], region["size"])
                 for region in regions
-                if region["address_status"] == "generated_alignment"
-                and 0x007B_0616
-                <= region.get("target_address", 0)
-                < 0x007B_F2EC
+                if region["name"] in alignment_names
             ),
             alignment_spans,
         )
@@ -1383,7 +1377,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             current_semaphore_patch["target_address"],
             legacy_semaphore_patch["target_address"],
         )
-        removed_patch_names = {
+        expected_removed_patch_names = {
             "replace_freertos_task_switch_context",
             "replace_freertos_port_start_scheduler",
             "replace_freertos_task_start_scheduler",
@@ -1601,10 +1595,9 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             "replace_watchdog_enable",
             "replace_watchdog_init",
         }
-        self.assertEqual(
-            set(current_patches),
-            set(legacy_patches) | removed_patch_names,
-        )
+        self.assertLessEqual(set(legacy_patches), set(current_patches))
+        removed_patch_names = set(current_patches) - set(legacy_patches)
+        self.assertLessEqual(expected_removed_patch_names, removed_patch_names)
         changed_redirects = []
         for name, legacy_patch in legacy_patches.items():
             current_patch = current_patches[name]

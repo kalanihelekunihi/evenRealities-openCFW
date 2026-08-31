@@ -115,7 +115,7 @@ def analyze(*, enforce_expected=True):
         "integration": "isolated source candidate only; not production-routed",
         "compatibility": "clean-room on-storage format; migration from Infineon extended-mode rows requires hardware/capture evidence",
         "remaining": {"concrete_source_or_implementation_functions": len(residual_rows), "concrete_gap_instruction_bytes": metrics["residual_gap_instruction_bytes"], "unimplemented_clean_room_application_contracts": 0, "typed_external_or_unavailable_functions": len(residual_rows)},
-        "hardware_validation": "deferred by project direction", "hardware_blocker": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence", "hardware_blocker": "blocked by unavailable physical evidence",
         "exclusions": "selected runtime, resident configuration, system handoff/fault, and halt boundaries remain"}
 
 

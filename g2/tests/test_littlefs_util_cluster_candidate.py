@@ -60,7 +60,7 @@ UPSTREAM_SOURCE_SHA256 = (
     "81a209e8551754d13b24fc0a2b6707fb3b2475e14feba00bf0df722b98a31398"
 )
 UPSTREAM_PROVENANCE_SHA256 = (
-    "0310f237b95ca3b155ebd6699faa3b0e944fa6e6d4fd4f6ac19029f4a1ee9c62"
+    "8d8b17dfdd485f83334df11333729e426c9b7d0ef41dade2502cf2870e1d2a94"
 )
 REWIND_SOURCE_PATH = (
     "components/apollo_main/core_overlay/"
@@ -89,16 +89,16 @@ REWIND_STOCK_PIN = (
 REWIND_PROFILE_PINS = {
     "apple-clang": (
         16,
-        184_328,
-        "0x007C132C",
-        "fd12059acac5e1ecf57d23f2064622ad38f269a75d0f6f4a17d72bcabf40100b",
+        124_480,
+        "0x007B2964",
+        "1c2e2b1fded0de515345b90fe34de51a9c0f08a02a5ad983c1120481c51c5783",
         "46e8bab056ad39ced45edb5da2612f6470674ab5a428df7f08822f6c2d9e184b",
     ),
     "linux-clang": (
         16,
-        186_052,
-        "0x007C19E8",
-        "741669f767e0aa5b9a663f7bae6e5b44e01259efdc15135719394874c917ee62",
+        126_300,
+        "0x007B3080",
+        "9731cbf3ff15be31186591ed148d009ae8985cb18bdfca3ba365aeb0897e3fd1",
         "46e8bab056ad39ced45edb5da2612f6470674ab5a428df7f08822f6c2d9e184b",
     ),
 }

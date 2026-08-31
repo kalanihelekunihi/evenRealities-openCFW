@@ -1,5 +1,10 @@
 # G2 bootloader EasyLogger port source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The eleven callable EasyLogger boot-port entries in
 `[0x0041A648,0x0041A700)` are replaced by maintained freestanding C. The
 intervening 22-byte interval `[0x0041A6DA,0x0041A6F0)` is authenticated

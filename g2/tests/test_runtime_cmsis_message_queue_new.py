@@ -133,19 +133,22 @@ TARGET_SHA256 = (
     "c0f3521dfa995a3079a86b86ccc58eee"
 )
 RELOCATED_SHA256 = (
-    "0281f86b2d417ba492b877701dc9c877"
-    "e782f18d7d622e778283a2d81994bf1b"
+    "afbba4f9f08b2df17a4350d7a7e83d9"
+    "9b8439283ee40c1a1604bd879dff75f04"
 )
-PRODUCTION_OVERLAY_SIZE = 429_058
+PRODUCTION_OVERLAY_SIZE = 360_578
 PRODUCTION_OVERLAY_SHA256 = (
-    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
 )
-PRODUCTION_COMPONENT_SIZE = 3_952_454
-PRODUCTION_COMPONENT_SHA256 = (
-    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+PRODUCTION_COMPONENT_SIZE = 3_883_974
+PRODUCTION_FINAL_COMPONENT_SHA256 = (
+    "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
 )
-PRODUCTION_OFFSET = 173_656
-PRODUCTION_ADDRESS = 0x007B_E97C
+PRODUCTION_CORE_STAGE_COMPONENT_SHA256 = (
+    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
+)
+PRODUCTION_OFFSET = 113_808
+PRODUCTION_ADDRESS = 0x007A_FFB4
 TARGET_RELOCATIONS = [
     (
         0x10,
@@ -316,10 +319,22 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
             int(text["offset"]):int(text["offset"]) + int(text["size"])
         ]
 
+        production_config = json.loads(
+            PRODUCTION_CONFIG.read_text(encoding="utf-8")
+        )
+        production_config["expected"] = production_config[
+            "core_stage_expected"
+        ]
+        for profile in production_config["toolchain_profiles"].values():
+            profile["expected"] = profile["core_stage_expected"]
+        projected_config = temporary / "core-stage-overlay.json"
+        projected_config.write_text(
+            json.dumps(production_config, sort_keys=True), encoding="utf-8"
+        )
         production_output = temporary / "production"
         cls.production_report = apollo_overlay.build(
             root=ROOT,
-            config_path=PRODUCTION_CONFIG,
+            config_path=projected_config,
             output_dir=production_output,
             clang=os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
         )
@@ -683,7 +698,7 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
                 "overlay_size": PRODUCTION_OVERLAY_SIZE,
                 "overlay_sha256": PRODUCTION_OVERLAY_SHA256,
                 "component_size": PRODUCTION_COMPONENT_SIZE,
-                "component_sha256": PRODUCTION_COMPONENT_SHA256,
+                "component_sha256": PRODUCTION_FINAL_COMPONENT_SHA256,
             },
         )
 
@@ -700,7 +715,10 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
                 len(self.production_component),
                 sha256(self.production_component),
             ),
-            (PRODUCTION_COMPONENT_SIZE, PRODUCTION_COMPONENT_SHA256),
+            (
+                PRODUCTION_COMPONENT_SIZE,
+                PRODUCTION_CORE_STAGE_COMPONENT_SHA256,
+            ),
         )
         leaf_reports = [
             item
@@ -717,7 +735,7 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
                 "alignment": 4,
                 "padding_before": 2,
                 "runtime_address": PRODUCTION_ADDRESS,
-                "runtime_address_hex": "0x007BE97C",
+                "runtime_address_hex": "0x007AFFB4",
             },
         )
         self.assertEqual(
@@ -822,16 +840,16 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 409_066,
+                "generated_patch_site_bytes": 397_446,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_111_914,
-                "replaced_stock_function_bytes": 409_246,
-                "source_owned_bytes": 431_334,
+                "opaque_base_bytes": 3_123_534,
+                "replaced_stock_function_bytes": 397_626,
+                "source_owned_bytes": 362_962,
                 "source_owned_in_place_bytes": 184,
             },
         )
-        self.assertEqual(len(report["overlay"]["functions"]), 2_631)
-        self.assertEqual(len(report["overlay"]["patched_sites"]), 2_374)
+        self.assertEqual(len(report["overlay"]["functions"]), 2_436)
+        self.assertEqual(len(report["overlay"]["patched_sites"]), 2_324)
 
     def test_host_layout_and_null_attribute_dynamic_path(self) -> None:
         self.assertEqual(self.host_compile.stderr, "")

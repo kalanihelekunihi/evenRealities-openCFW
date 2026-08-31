@@ -18,7 +18,7 @@ HARNESS = ROOT / "tests/fixtures/runtime_nanopb_field_decoder_cluster_host.c"
 HEADER = INCLUDE / "runtime_nanopb_field_decoder_cluster.h"
 ANALYZER = ROOT / "tools/analyze_g2_nanopb_field_decoder_cluster.py"
 PINS = {
-    SOURCE: (14_057, "6c34245f6d3c305499ffb6be2bae69508fe6c6f4c4b79e8306d3b998f84c9901"),
+    SOURCE: (14_752, "f22074cfc9c5a8ecea62c059d747414c391e7822c5868bbed08df3fa60197326"),
     HEADER: (888, "812560e152e879f3181bcb20a2b65b0a6c81673aa4bebe46ff3bb6c99de1a8ac"),
     HARNESS: (9_211, "c3fee7a4ff21332c33629d63fb003c45de8b37cdbb026dc2f8a78ea57d9d2682"),
 }

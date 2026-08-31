@@ -21,7 +21,7 @@ class CordioSecApiClosureTests(unittest.TestCase):
             "release": "r20.05c",
             "commit": "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6",
             "license": "Apache-2.0",
-            "disposition": "implemented-in-source; hardware-blocked",
+            "disposition": "implemented-in-source; hardware-validation-deferred",
             "first_party_even_backend": False,
         })
 
@@ -38,10 +38,10 @@ class CordioSecApiClosureTests(unittest.TestCase):
             "alignment_bytes": 16,
             "strict_relocations": 65,
             "package_byte_identical": True,
-            "placed_regions": 6193,
-            "unresolved_regions": 2,
+            "placed_regions": 6588,
+            "unresolved_regions": 0,
             "primitive_provider": "retained HCI/controller boundary",
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
         })
 
 

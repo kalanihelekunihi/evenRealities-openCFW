@@ -32,12 +32,8 @@ corner-mask arc and even-width L8/L4 two-pass conversion exports.
 `runtime_ambiq_gpu_patch_shadow_blur_vg_candidate.c` closes the non-required
 radial VG shadow path, including exact texture-zero and clip restoration.
 
-Run `make ambiq-gpu-patch-accessors-candidate`. See the
-[source-candidate audit](../../../docs/research/ambiq-gpu-patch-accessor-source-candidate-audit.md)
-and [dash-line audit](../../../docs/research/ambiq-gpu-patch-dashline-source-candidate-audit.md)
-plus the [glyph audit](../../../docs/research/ambiq-gpu-patch-get-glyph-source-candidate-audit.md)
-and [gradient audit](../../../docs/research/ambiq-gpu-patch-gradient-source-candidate-audit.md)
-and [shadow-blur audit](../../../docs/research/ambiq-gpu-patch-shadow-blur-source-candidate-audit.md)
-plus the [small-raster audit](../../../docs/research/ambiq-gpu-patch-small-raster-source-candidate-audit.md)
-and [VG-shadow audit](../../../docs/research/ambiq-gpu-patch-shadow-blur-vg-source-candidate-audit.md)
-for the evidence and production gates.
+Run `make ambiq-gpu-patch-accessors-candidate`. The full checkout records the
+evidence and production gates in the seven
+`g2/docs/research/ambiq-gpu-patch-*-source-candidate-audit.md` chronology files.
+Research chronology is intentionally excluded from the official-payload-free
+community archive; the candidate source and its software tests remain included.

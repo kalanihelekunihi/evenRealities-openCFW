@@ -1,15 +1,37 @@
 {
   "analysis_mode": "offline; no hardware, MMIO, signing, flashing, or publishing operation",
   "candidate": {
+    "authenticated_stock_endpoint_abi": "no arguments; global context through 0x20074F04",
+    "context_pointer_cell": "0x20074F04",
+    "draw_caps_no_argument_abi_authenticated": true,
+    "dual_profile_leaf_pins_authenticated": true,
+    "endpoint_candidate_abi": "no arguments; global context through 0x20074F04",
+    "endpoint_candidate_exact_stock_abi": true,
+    "endpoint_stock_entries_unpatched": false,
+    "error_state_offsets": [
+      "0x114",
+      "0x118"
+    ],
     "functions": 3,
     "license": "MIT",
-    "production_routed": false,
+    "production_routed": true,
+    "production_routed_functions": 3,
+    "production_routed_physical_bytes": 6614,
+    "production_source": {
+      "path": "components/apollo_main/core_overlay/runtime_nemavg_stroke_cap_endpoints.c",
+      "sha256": "33c9292bb52e276982e9b6c4c51bc02d9381eec98f50f223c876c7f691a986a4",
+      "size": 15166
+    },
     "raw_instruction_bytes": 0,
+    "remaining_candidate_functions": 0,
+    "remaining_candidate_physical_bytes": 0,
+    "retained_endpoint_dispatch_sequence_authenticated": true,
+    "retained_endpoint_relocations_authenticated": true,
     "semantic_c": true,
-    "software_blocker": "exact stock ABI/context binding and reviewed dual-profile placement proof remain unavailable"
+    "software_blocker": null
   },
   "hardware_operations": [],
-  "hardware_validation": "deferred by project direction",
+  "hardware_validation": "blocked by unavailable physical evidence",
   "provider_evidence": {
     "exact_stock_generating_archive_proven": false,
     "family": "Think Silicon NemaVG 1.1.8 co-packaged candidate",
@@ -28,7 +50,7 @@
     ]
   },
   "schema_version": 1,
-  "status": "nemavg-stroke-caps-clean-room-candidate-qualified",
+  "status": "nemavg-stroke-caps-production-source-routed",
   "stock": {
     "function_body_bytes": 6598,
     "functions": 3,
@@ -40,9 +62,9 @@
         "end_exclusive": "0x0051BF74",
         "entry": "0x0051B8F0",
         "physical_bytes": 1668,
-        "production_routed": false,
+        "production_routed": true,
         "public_archive_dwarf_declaration_line": 1853,
-        "source_status": "clean-room-candidate",
+        "source_status": "production-source",
         "style_context_offsets": [
           "0x2e0"
         ],
@@ -54,9 +76,9 @@
         "end_exclusive": "0x0051C5E4",
         "entry": "0x0051BF7C",
         "physical_bytes": 1640,
-        "production_routed": false,
+        "production_routed": true,
         "public_archive_dwarf_declaration_line": 1888,
-        "source_status": "clean-room-candidate",
+        "source_status": "production-source",
         "style_context_offsets": [
           "0x2e1"
         ],
@@ -68,9 +90,9 @@
         "end_exclusive": "0x0051D2D6",
         "entry": "0x0051C5EC",
         "physical_bytes": 3306,
-        "production_routed": false,
+        "production_routed": true,
         "public_archive_dwarf_declaration_line": 1924,
-        "source_status": "clean-room-candidate",
+        "source_status": "production-source",
         "style_context_offsets": [
           "0x2e0",
           "0x2e1"

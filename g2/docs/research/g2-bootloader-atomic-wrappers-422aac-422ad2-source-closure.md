@@ -1,5 +1,10 @@
 # G2 bootloader atomic and wrapper source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Three authenticated low-level runtime bodies at
 `[0x00422AAC,0x00422AD2)` now compile from maintained MIT C at
 their exact stock addresses. The 28-byte snapshot helper has SHA-256

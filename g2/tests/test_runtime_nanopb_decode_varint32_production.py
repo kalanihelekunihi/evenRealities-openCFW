@@ -78,8 +78,8 @@ OFFICIAL_PAIR_REGION_NAME = (
 PRIVATE_LEAF_ONLY = "OPENCFW_NANOPB_VARINT32_PRIVATE_LEAF_ONLY"
 PUBLIC_LEAF_ONLY = "OPENCFW_NANOPB_VARINT32_PUBLIC_LEAF_ONLY"
 PROSPECTIVE_SOURCE_PIN = (
-    3_642,
-    "6938f17fc8faefdc1006cc05f9b7959e80fba771749ca0d9e67716e9ed0d2e04",
+    3_678,
+    "5035bdafde91897edcc11a9422eda38380487e3f2c14dc31c7988012109cbdf1",
 )
 PROSPECTIVE_HEADER_PIN = (
     1_543,
@@ -90,7 +90,7 @@ PROSPECTIVE_APPLE_PINS = {
         "size": 222,
         "sha256": "36bb0167f4d3407b99ed2255cc9e77dd60dc1e9070781a257bfea59abc408171",
         "alignment": 4,
-        "offset": 184_820,
+        "offset": 124_972,
         "unrelocated_sha256": "5296b608c55171bca9d5f4d162cf53d0e6aa5f724e1cb82499a7311f2a6cc9ff",
         "closure_size": 238,
         "closure_sha256": "2c49567cfe23e36c504586218719c2e590163bec804353c8106680328d64a480",
@@ -100,7 +100,7 @@ PROSPECTIVE_APPLE_PINS = {
         "size": 10,
         "sha256": "1f0924d25c50933e7cd5aac05d718da6d44b7a20d4af901fa833c555eca6ff1a",
         "alignment": 4,
-        "offset": 185_060,
+        "offset": 125_212,
         "unrelocated_sha256": "e9ec8b612503f867aabf2467e3abfac44753c5576a247a00cbc4309e2a023f93",
     },
 }
@@ -109,7 +109,7 @@ PROSPECTIVE_LINUX_PINS = {
         "size": 222,
         "sha256": "36bb0167f4d3407b99ed2255cc9e77dd60dc1e9070781a257bfea59abc408171",
         "alignment": 4,
-        "offset": 186_548,
+        "offset": 126_796,
         "unrelocated_sha256": "5296b608c55171bca9d5f4d162cf53d0e6aa5f724e1cb82499a7311f2a6cc9ff",
         "closure_size": 238,
         "closure_sha256": "2c49567cfe23e36c504586218719c2e590163bec804353c8106680328d64a480",
@@ -119,19 +119,36 @@ PROSPECTIVE_LINUX_PINS = {
         "size": 10,
         "sha256": "1f0924d25c50933e7cd5aac05d718da6d44b7a20d4af901fa833c555eca6ff1a",
         "alignment": 4,
-        "offset": 186_788,
+        "offset": 127_036,
         "unrelocated_sha256": "e9ec8b612503f867aabf2467e3abfac44753c5576a247a00cbc4309e2a023f93",
     },
 }
 APPLE_AGGREGATE_PINS = {
-    "overlay": (429_058, "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"),
-    "component": (3_952_454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"),
-    "package": (4_745_526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"),
+    "overlay": (360_578, "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"),
+    "component": (3_883_974, "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"),
+    "package": (4_677_046, "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"),
 }
 LINUX_AGGREGATE_PINS = {
-    "overlay": (212_664, "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18"),
-    "component": (3_736_060, "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97"),
-    "package": (4_529_116, "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"),
+    "overlay": (152_912, "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20"),
+    "component": (3_676_308, "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7"),
+    "package": (4_469_364, "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"),
+}
+APPLE_CORE_STAGE_PINS = {
+    "overlay": APPLE_AGGREGATE_PINS["overlay"],
+    "component": (
+        3_883_974,
+        "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
+    ),
+}
+LINUX_CORE_STAGE_PINS = {
+    "overlay": (
+        145_314,
+        "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19",
+    ),
+    "component": (
+        3_668_710,
+        "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8",
+    ),
 }
 
 PACKAGE_PREAMBLE = 32
@@ -277,7 +294,7 @@ TARGET_FLAGS = (
     "-fno-ident",
 )
 REVIEWED_COMPILERS = {
-    "Apple clang version 21.0.0 (clang-2100.3.30.1)": "/usr/bin/clang",
+    "Apple clang version 21.0.0 (clang-2100.3.33.1)": "/usr/bin/clang",
     "Homebrew clang version 22.1.8": "/home/linuxbrew/.linuxbrew/bin/clang",
 }
 
@@ -291,7 +308,7 @@ FILE_PINS = {
     AUDIT: (8_938, "be0511c1dd4162585aa0478c5242c25e0d34d08ea6331d297c67636f784a8893"),
 }
 PROFILE_PINS = {
-    "Apple clang version 21.0.0 (clang-2100.3.30.1)": {
+    "Apple clang version 21.0.0 (clang-2100.3.33.1)": {
         "object": (1_628, "626893ac400caac8fa733f5740b272d218a1e32572fad4bfa636a4bce142c166"),
         "private_text": (222, "5296b608c55171bca9d5f4d162cf53d0e6aa5f724e1cb82499a7311f2a6cc9ff", 4),
         "public_text": (10, "e9ec8b612503f867aabf2467e3abfac44753c5576a247a00cbc4309e2a023f93", 4),
@@ -343,6 +360,8 @@ ACTIVE_PRODUCTION_SURFACES = (
     ROOT / "docs/source-coverage.md",
     ROOT / "docs/upstream-inventory.md",
     ROOT / "manifests/g2-2.2.6.10-core-source.json",
+    ROOT / "manifests/g2-2.2.6.10-minimal-name-hook.json",
+    ROOT / "manifests/g2-2.2.6.10-name-memcpy-hook.json",
     ROOT / "manifests/g2-2.2.6.10-release-pins.json",
     ROOT / "manifests/g2-2.2.6.10-ring-source.json",
     ROOT / "manifests/g2-2.2.6.10.json",
@@ -376,6 +395,34 @@ def sha256(value: bytes | Path) -> str:
     if isinstance(value, Path):
         value = value.read_bytes()
     return hashlib.sha256(value).hexdigest()
+
+
+def is_generated_production_surface_scan_artifact(relative: Path) -> bool:
+    """Identify only retained canonical observations and build work records."""
+    if not relative.parts:
+        return False
+    if (
+        relative.parts[0].startswith(".tmp-")
+        and relative.name in {"build-report.json", "config.json", "core-stage.json"}
+    ):
+        return True
+    if (
+        len(relative.parts) >= 5
+        and relative.parts[:3]
+        == ("components", "apollo_main", "core_overlay")
+        and (
+            relative.parts[3] == "build"
+            or relative.parts[3].startswith("build-")
+        )
+        and relative.name == "build-report.json"
+    ):
+        return True
+    return (
+        relative.parts[0] == "manifests"
+        and len(relative.parts) == 2
+        and relative.name.startswith(".")
+        and relative.suffix == ".json"
+    )
 
 
 def wide_branch_target(
@@ -714,7 +761,7 @@ def production_topology_fixture() -> tuple[dict, list[dict]]:
             "target": "apollo510b_internal_mram",
             "target_address": 8_072_014,
             "address_status": "generated_alignment",
-            "output": "apollo510b/main-source-nanopb-decode-varint32-eof-alignment-0x007b2b4e.bin",
+            "output": "apollo510b/main-source-nanopb-decode-varint32-eof-alignment-0x007c1516.bin",
         },
         {
             "name": "apollo_nanopb_decode_varint32_eof_source_leaf",
@@ -734,7 +781,7 @@ def production_topology_fixture() -> tuple[dict, list[dict]]:
             "target": "apollo510b_internal_mram",
             "target_address": 8_072_238,
             "address_status": "source_compiled",
-            "output": "apollo510b/main-source-nanopb-varint32-overflow-0x007b2c2e.bin",
+            "output": "apollo510b/main-source-nanopb-varint32-overflow-0x007c15f6.bin",
         },
         {
             "name": "apollo_nanopb_decode_varint32_source_alignment",
@@ -744,7 +791,7 @@ def production_topology_fixture() -> tuple[dict, list[dict]]:
             "target": "apollo510b_internal_mram",
             "target_address": 8_072_254,
             "address_status": "generated_alignment",
-            "output": "apollo510b/main-source-nanopb-decode-varint32-alignment-0x007b2c3e.bin",
+            "output": "apollo510b/main-source-nanopb-decode-varint32-alignment-0x007c1606.bin",
         },
         {
             "name": "apollo_nanopb_decode_varint32_source_leaf",
@@ -1277,7 +1324,13 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             ROOT / "components/bootloader/core_overlay/overlay.json",
             ROOT / "components/apollo_main/ring_gesture/overlay.json",
         )
-        manifests = tuple(sorted((ROOT / "manifests").glob("*.json")))
+        manifests = tuple(
+            path
+            for path in sorted((ROOT / "manifests").glob("*.json"))
+            if not is_generated_production_surface_scan_artifact(
+                path.relative_to(ROOT)
+            )
+        )
         package_recipes = (
             ROOT / "Makefile",
             ROOT / "make.sh",
@@ -1307,6 +1360,32 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
         )
         self.assertTrue(set(coverage_claims).issubset(ACTIVE_PRODUCTION_SURFACES))
 
+        for generated in (
+            Path(".tmp-canonical-observations/apple/build-report.json"),
+            Path(".tmp-open-cfw-apollo-canonical/control/core-stage.json"),
+            Path("components/apollo_main/core_overlay/build/build-report.json"),
+            Path(
+                "components/apollo_main/core_overlay/"
+                "build-linux-record/build-report.json"
+            ),
+            Path("manifests/.canonical-work.json"),
+        ):
+            self.assertTrue(
+                is_generated_production_surface_scan_artifact(generated),
+                generated,
+            )
+        for production_surface in (
+            Path("components/.tmp-source/config.json"),
+            Path("components/apollo_main/core_overlay/build-report.json"),
+            Path("components/apollo_main/core_overlay/build-notes.md"),
+            Path("manifests/g2-.tmp-review.json"),
+            Path("manifests/g2-build-report.json"),
+        ):
+            self.assertFalse(
+                is_generated_production_surface_scan_artifact(production_surface),
+                production_surface,
+            )
+
         neighboring_leaf_tokens = (
             "open_cfw_nanopb_istream_from_buffer",
             "open_cfw_nanopb_decode_svarint",
@@ -1320,6 +1399,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             relative = path.relative_to(ROOT)
             if (
                 "build" in relative.parts or
+                is_generated_production_surface_scan_artifact(relative) or
                 relative.parts[0] == "tests" or
                 relative.parts[:2] == ("docs", "research") or
                 relative.parts[:2] == ("docs", "superpowers") or
@@ -1395,26 +1475,26 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             (
                 "apollo_nanopb_decode_varint32_eof_source_alignment",
                 3_648_366, 0x007B_2B4E, 2, "generated_alignment",
-                "apollo510b/main-source-nanopb-decode-varint32-eof-alignment-0x007b2b4e.bin",
+                "apollo510b/main-source-nanopb-decode-varint32-eof-alignment-0x007c1516.bin",
             ),
             (
                 "apollo_nanopb_decode_varint32_eof_source_leaf",
-                3_648_368, 0x007C_1518, 222, "source_compiled",
+                3_648_368, 0x007B_2B50, 222, "source_compiled",
                 "apollo510b/main-source-nanopb-decode-varint32-eof-0x007c1518.bin",
             ),
             (
                 "apollo_nanopb_decode_varint32_overflow_rodata",
                 3_648_590, 0x007B_2C2E, 16, "source_compiled",
-                "apollo510b/main-source-nanopb-varint32-overflow-0x007b2c2e.bin",
+                "apollo510b/main-source-nanopb-varint32-overflow-0x007c15f6.bin",
             ),
             (
                 "apollo_nanopb_decode_varint32_source_alignment",
                 3_648_606, 0x007B_2C3E, 2, "generated_alignment",
-                "apollo510b/main-source-nanopb-decode-varint32-alignment-0x007b2c3e.bin",
+                "apollo510b/main-source-nanopb-decode-varint32-alignment-0x007c1606.bin",
             ),
             (
                 "apollo_nanopb_decode_varint32_source_leaf",
-                3_648_608, 0x007C_1608, 10, "source_compiled",
+                3_648_608, 0x007B_2C40, 10, "source_compiled",
                 "apollo510b/main-source-nanopb-decode-varint32-0x007c1608.bin",
             ),
         )
@@ -1474,7 +1554,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             (boot["provider"]["size"], boot["provider"]["sha256"]),
             (
                 163_840,
-                "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0",
+                "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
             ),
         )
 
@@ -1513,6 +1593,10 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             LINUX_AGGREGATE_PINS if profile == "linux-clang"
             else APPLE_AGGREGATE_PINS
         )
+        core_stage_pins = (
+            LINUX_CORE_STAGE_PINS if profile == "linux-clang"
+            else APPLE_CORE_STAGE_PINS
+        )
 
         build_root = ROOT / "build"
         build_root.mkdir(parents=True, exist_ok=True)
@@ -1520,10 +1604,27 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             prefix="open-cfw-varint32-real-control-", dir=build_root
         ) as temporary:
             temporary_path = Path(temporary)
+            build_config = json.loads(OVERLAY.read_text(encoding="utf-8"))
+            core_stage_expected = (
+                build_config["core_stage_expected"]
+                if profile is None
+                else build_config["toolchain_profiles"][profile][
+                    "core_stage_expected"
+                ]
+            )
+            build_config["expected"] = core_stage_expected
+            if profile is not None:
+                build_config["toolchain_profiles"][profile]["expected"] = (
+                    core_stage_expected
+                )
+            direct_config_path = temporary_path / "direct-overlay.json"
+            direct_config_path.write_text(
+                json.dumps(build_config), encoding="utf-8"
+            )
             reports = [
                 apollo_overlay.build(
                     root=ROOT,
-                    config_path=OVERLAY,
+                    config_path=direct_config_path,
                     output_dir=temporary_path / f"current-build-{index}",
                     clang=clang,
                     toolchain_profile=profile,
@@ -1577,7 +1678,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
                     self.assertEqual(linked[field], report["placement"][field])
             self.assertEqual(
                 (len(current_overlay_bytes), sha256(current_overlay_bytes)),
-                aggregate_pins["overlay"],
+                core_stage_pins["overlay"],
             )
             component_path = ROOT / current_report["component"]["artifact"]
             second_component_path = ROOT / reports[1]["component"]["artifact"]
@@ -1586,7 +1687,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             )
             self.assertEqual(
                 (component_path.stat().st_size, sha256(component_path)),
-                aggregate_pins["component"],
+                core_stage_pins["component"],
             )
             production_config, projected_regions = production_topology_fixture()
             validate_atomic_production_topology(production_config, projected_regions)
@@ -1598,16 +1699,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
                 CORE_MANIFEST.read_text(encoding="utf-8")
             )
             apollo = projected_manifest["component_overrides"]["apollo_main"]
-            apollo["provider"].update({
-                "path": current_report["component"]["artifact"],
-                "size": APPLE_AGGREGATE_PINS["component"][0],
-                "sha256": APPLE_AGGREGATE_PINS["component"][1],
-            })
             apollo["regions"] = projected_regions
-            projected_manifest["package"].update({
-                "expected_size": APPLE_AGGREGATE_PINS["package"][0],
-                "expected_sha256": APPLE_AGGREGATE_PINS["package"][1],
-            })
             manifest_directory = ROOT / "manifests"
             with tempfile.NamedTemporaryFile(
                 "w", suffix=".json", prefix="task4-varint32-",
@@ -1697,11 +1789,23 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             if version == "Homebrew clang version 22.1.8"
             else None
         )
-        aggregate_pins = (
-            LINUX_AGGREGATE_PINS if profile == "linux-clang"
-            else APPLE_AGGREGATE_PINS
+        core_stage_pins = (
+            LINUX_CORE_STAGE_PINS if profile == "linux-clang"
+            else APPLE_CORE_STAGE_PINS
         )
         baseline = json.loads(OVERLAY.read_text(encoding="utf-8"))
+        core_stage_expected = (
+            baseline["core_stage_expected"]
+            if profile is None
+            else baseline["toolchain_profiles"][profile][
+                "core_stage_expected"
+            ]
+        )
+        baseline["expected"] = core_stage_expected
+        if profile is not None:
+            baseline["toolchain_profiles"][profile]["expected"] = (
+                core_stage_expected
+            )
         baseline_regions = json.loads(
             CORE_MANIFEST.read_text(encoding="utf-8")
         )["component_overrides"]["apollo_main"]["regions"]
@@ -1766,7 +1870,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             control = guarded_build(copy.deepcopy(baseline), "control")
             self.assertEqual(
                 (control["overlay"]["size"], control["overlay"]["sha256"]),
-                aggregate_pins["overlay"],
+                core_stage_pins["overlay"],
             )
 
             def unrelated_leaf_preserver(label: str) -> dict:
@@ -2375,7 +2479,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
         self.assertEqual(
             REVIEWED_COMPILERS,
             {
-                "Apple clang version 21.0.0 (clang-2100.3.30.1)": "/usr/bin/clang",
+                "Apple clang version 21.0.0 (clang-2100.3.33.1)": "/usr/bin/clang",
                 "Homebrew clang version 22.1.8": "/home/linuxbrew/.linuxbrew/bin/clang",
             },
         )

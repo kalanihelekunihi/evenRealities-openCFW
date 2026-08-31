@@ -2,10 +2,14 @@
 
 SPDX-License-Identifier: Apache-2.0
 
-This directory contains a production-excluded boundary around the authenticated,
-unmodified Google liblc3 v1.1.3 snapshot in `third_party/liblc3`. It admits one
-mono encoder at a time with caller-owned storage and explicit PCM/output bounds.
-It does not allocate memory, route an overlay entry, or perform hardware I/O.
+This directory contains both the original production-excluded encoder candidate
+and a production-capable bounded source provider around the authenticated,
+unmodified Google liblc3 v1.1.3 snapshot in `third_party/liblc3`. The provider
+admits one mono encoder at a time with caller-owned storage, byte-exact PCM and
+output bounds, alias checks, and a sealed normalized plan. It does not allocate
+memory, route an overlay entry, or perform hardware I/O. Its fail-closed source,
+ABI, compile, relocation, and placement contract is recorded in
+`encoder_source_admission.json`; production routing remains false.
 
 This directory also contains a production-capable, bounded LTPF analysis
 provider. It validates the complete 1160-byte analysis-state ABI, duration and
@@ -52,23 +56,42 @@ needs reviewed providers for:
 - `memcpy`, `memmove`, and `memset` (or the compiler's corresponding Arm EABI
   lowering);
 - `fabsf`, `floorf`, `fmaxf`, `fminf`, `roundf`, `sqrtf`, and `truncf`; and
-- compiler-runtime `__aeabi_memclr`, `__aeabi_memclr4`, and `__aeabi_uldivmod`
-  if the selected optimization/link profile leaves those references external.
+- compiler-runtime `__aeabi_memclr` and `__aeabi_memclr4` for the retained
+  encoder closure. `__aeabi_uldivmod` occurs only in sections discarded by the
+  section-GC qualification link.
 
-Those are link-provider seams, not opaque liblc3 algorithms. Remaining admission
-gates are a pinned production toolchain/link recipe, section placement and
-budget review, WCET/stack measurement for the G2 audio cadence, the recovered
-`service_audio.c` ownership/lifetime integration, and interoperability/device
-qualification. The latter tests are intentionally outside this software-only
-candidate.
+Those are link-provider seams, not opaque liblc3 algorithms. The specialized
+service-audio replay now supplies ten of the exact retained seams from
+`runtime_liblc3_target_runtime.[ch]` and binds `sqrtf` to the authenticated
+source-owned core leaf. Both target profiles finish with zero imports and zero
+relocations; this does not install the providers into a stock image. Remaining
+admission gates are atomic package placement/integrity application, WCET/stack
+measurement for the G2 audio cadence, recovered `service_audio.c` final patch
+application, and interoperability/device qualification. The stock
+ownership/lifetime adaptation and exact two-entry ABI transition are now
+implemented in
+`runtime_liblc3_service_audio_adapter.[ch]` and
+`runtime_liblc3_service_audio_stock_shim.[ch]`; the latter accepts only the four
+authenticated context addresses and only transitions a valid 24-byte stock
+header whose cached encoder pointer remains zero. The latter tests are
+intentionally outside this software-only candidate.
 
 Run the isolated qualification with:
 
 ```sh
 cd g2
 python3 -m unittest -v tests.test_runtime_liblc3_encoder_candidate
+python3 -m unittest -v tests.test_runtime_liblc3_encoder_provider
 python3 -m unittest -v tests.test_runtime_liblc3_ltpf_provider
+python3 -m unittest -v tests.test_runtime_liblc3_service_audio_adapter
+python3 -m unittest -v tests.test_runtime_liblc3_service_audio_stock_shim
 ```
+
+The complete encoder source closure has a deterministic build-only integration
+at `components/apollo_main/liblc3_encoder`. It emits unplaced text, read-only
+table, writable table, and relocation-bearing object artifacts while enforcing
+the exact retained runtime-import allowlist. It does not emit firmware or route
+the recovered audio service.
 
 The bounded LTPF analysis route is admitted independently at
 `components/apollo_main/liblc3_ltpf`. It closes the analysis-only `memmove`

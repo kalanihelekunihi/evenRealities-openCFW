@@ -710,7 +710,7 @@ class SarcStateTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "51da9eb678b1a9bf4232ba50cc1d8eefa168cba0200729d669c6b378f4bf0211",
+            "382d2ea73abdcf7b8a947d031a665009c02e779c9cd7c9349c54fb8ed48d17c9",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),

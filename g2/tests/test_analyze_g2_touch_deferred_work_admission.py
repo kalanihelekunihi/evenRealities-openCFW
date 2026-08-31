@@ -56,10 +56,13 @@ class TouchDeferredWorkAdmissionTests(unittest.TestCase):
                       for path in second}
                 self.assertEqual(h1, h2)
                 current = next(path for path in first if path.name ==
-                               "g2-touch-current-source-readiness-summary.json")
+                               "g2-touch-deferred-work-admission-summary.json")
                 self.assertIn('"authoritative_batch": 17', current.read_text())
-                self.assertIn('"hardware_validation": "deferred by project direction"',
+                self.assertIn('"hardware_validation": "blocked by unavailable physical evidence"',
                               current.read_text())
+                self.assertNotIn(
+                    "g2-touch-current-source-readiness-summary.json", h1
+                )
         finally:
             M.MANIFEST_DIR = old
 

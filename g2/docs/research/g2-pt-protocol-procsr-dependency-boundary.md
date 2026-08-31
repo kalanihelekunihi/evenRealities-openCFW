@@ -8,12 +8,16 @@ operation was performed.
 
 The current source tree implements and host-exercises all 56 typed board
 operations, including invalid arguments, an unsupported operation, a null
-context, and a missing required provider. All fourteen product-test translation
-units link with zero undefined symbols for both Apollo510/Cortex-M55 and
-Cortex-M0+. The production call table is borrowed rather than copied; its public
-contract requires the caller to keep it valid and immutable for the lifetime of
-the board and derived platform backend. The production initializer satisfies
-that contract with static storage.
+context, and a missing required provider. The 15 product-test C translation
+units and 14 headers comprise 29 source files: 28 MIT files plus the separately
+attributed Apache-2.0 Google/liblc3 encoder-setup adaptation. Both the
+Apollo510/Cortex-M55 and Cortex-M0+ links have zero undefined symbols. The
+analyzer link contains 21,466 text bytes and 1,177 read-only-data bytes, 22,643
+loadable bytes total; the bounded in-place provider is 22,696 loadable bytes.
+The production call table is borrowed rather than copied; its public contract
+requires the caller to keep it valid and immutable for the lifetime of the
+board and derived platform backend. The production initializer satisfies that
+contract with static storage.
 
 The top-level production table is fail-closed at field granularity: all 83
 field/address/function-ABI associations are pinned, with 43 classified as
@@ -22,7 +26,7 @@ further 53 field/address/type/minimum-extent associations deliberately support
 the authenticated stock data ABI: 17 immutable-flash constants and 36
 runtime-SRAM state/buffer bindings. Their address space, field, type, and extent
 partition is fail-closed, and no stock machine code or retained vendor data byte
-is embedded in the MIT source.
+is embedded in the mixed-license source surface.
 
 The 40 semantic-C leaves cover 3,402 authenticated stock body bytes:
 display-state/staging/identifier/brightness/offset, codec-identifier,
@@ -33,18 +37,44 @@ lens synchronization, and seven ambient-sensor
 initialize/configure/sample/reset leaves. Their host behavior and both target
 links are gated, and the canonical provider routes the top-level leaf table.
 
-That top-level routing is not complete source ownership. The leaves themselves
-contain 57 fixed callable bindings at 55 unique entries. Eighteen are redirected
-to admitted source-overlay providers; 39 bindings at 37 unique entries remain
-supported retained callable boundaries. The leaves also contain 33 separately
-classified fixed data/address dependencies: 23 runtime-SRAM bindings, two
-immutable-flash values, two retained callback entries, two external-XIP data
-bases, two XIP range bounds, and two peripheral-MMIO registers. None is hidden
-inside the 53 top-level data count. The analyzer pins every macro name, cast ABI,
-address, ownership class, and category, and reports source completeness false
-while these second-order retained boundaries remain. Physical policy, sensor,
-display, audio, persistence, and timing qualification is deferred by project
-direction.
+That top-level routing is not complete source ownership. The leaves expose 81
+second-order callable bindings: 29 fixed entries redirected to admitted
+source-overlay providers, 39 source-local callables, and 13 deliberately
+retained service boundaries. The 42 fixed callable entries are all unique. The
+leaves also expose 97 fixed data/address bindings at 94 unique addresses: 53
+runtime-SRAM bindings, 33 immutable-flash values, four peripheral-MMIO
+registers, two retained callback entries, two external-XIP data bases, and two
+XIP range bounds. None is hidden inside the 53 top-level data count. The
+analyzer pins every macro name, cast ABI, address, ownership class, and
+category, and reports source completeness false while these second-order
+retained boundaries remain.
+
+The source-local LC3 encoder setup closes the former retained callable without
+weakening its stock evidence. The stock primary span
+`[0x0059123A,0x00591374)` is authenticated as 314 bytes, and the adjacent
+22-byte public wrapper at `0x00591374` is authenticated to call that primary at
+`0x00591382`. The four stock LC3 contexts at `0x20106A7C`, `0x201074C0`,
+`0x20107F04`, and `0x20108948` occur at consecutive `0xA44` strides. The next
+address, `0x2010938C`, is an unrelated byte-state global/allocation boundary,
+not a fifth context; its position another `0xA44` later proves the fourth
+slot's extent. Subtracting the authenticated `0x1C` header leaves exactly 2,600
+bytes of storage in each context slot. Every supported duration, codec-rate, and PCM-rate
+configuration is exhaustively host-tested, including the default PCM-rate
+path. The bounded entry computes the required geometry and rejects an oversize
+or invalid configuration before writing. The actual runtime-provided
+configuration values remain statically unproven, but this is a functional
+qualification question rather than a remaining memory-safety gap.
+
+The three high-level buzzer dependencies are now source-local semantic C. They
+preserve the authenticated sequence exactly: update PWM then start it; stop PWM
+and optionally restore pin `0x91`; and stop the linked timer, restore the pin,
+then clear the script and two activity flags. This replaces three retained
+high-level calls with the three lower PWM calls, one source-routed CMSIS timer
+stop, and five pinned data ABIs. The EasyLogger trace entry at `0x0043CE9E`
+remains retained deliberately: its flags and variadic call shape are observable,
+and routing those calls through the unrelated input-failure formatter would not
+be exact behavior. Physical policy, sensor, display, audio, persistence, and
+timing qualification is blocked by unavailable physical evidence.
 
 The largest remaining retained first-party path,
 `platform\product_test\pt_protocol_procsr.c`, is now closed as 73 functions /
@@ -91,5 +121,5 @@ This closes the reusable utility question for the historical production
 protocol object. The current clean-room policy and 56-operation backend are
 described above; its remaining source-completeness blockers are the explicitly
 retained second-order callable and data boundaries. Physical qualification is
-deferred by project direction and does not change those software ownership
+blocked by unavailable physical evidence and does not change those software ownership
 gates.

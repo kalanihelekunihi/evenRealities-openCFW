@@ -13,8 +13,8 @@ HEADER = ROOT / "components/shared/nanopb/runtime_nanopb_defaults_pair.h"
 HARNESS = ROOT / "tests/fixtures/runtime_nanopb_defaults_pair_host.c"
 
 SOURCE_PIN = (
-    6284,
-    "76dc1344eb1187f8631e935613246724287c6b1e917efd795dabe17ec5d84491",
+    6894,
+    "fd5f03e33984a341d532f5eab0db952b3a5c11300a33851b53e33beb192eaaf4",
 )
 HEADER_PIN = (
     867,

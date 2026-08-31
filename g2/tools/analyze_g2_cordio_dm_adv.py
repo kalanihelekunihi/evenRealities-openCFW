@@ -30,14 +30,14 @@ PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.eve
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 SOURCE_SHA256 = "d6fe9bb4a957495b0716a8e5e21d9dfbde904a1b6f8944790f08cf9e507a788b"
 HEADER_SHA256 = "207706e8411b2d3fb124e20354f24e438864eb88ef685568743295f4303d8cfb"
-OVERLAY_SIZE = 429_058
-OVERLAY_SHA256 = "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
-COMPONENT_SIZE = 3_952_454
-COMPONENT_SHA256 = "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
-PACKAGE_SIZE = 4_745_526
-PACKAGE_SHA256 = "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
-FLASH_PLAN_SIZE = 4_643_183
-FLASH_PLAN_SHA256 = "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66"
+OVERLAY_SIZE = 362_272
+OVERLAY_SHA256 = "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+COMPONENT_SIZE = 3_885_668
+COMPONENT_SHA256 = "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5"
+PACKAGE_SIZE = 4_678_740
+PACKAGE_SHA256 = "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a"
+FLASH_PLAN_SIZE = 4_595_610
+FLASH_PLAN_SHA256 = "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127"
 PRODUCTION_FUNCTIONS = [
     "open_cfw_cordio_dm_adv_control_block_initialize",
     "open_cfw_cordio_dm_adv_initialize",
@@ -50,9 +50,9 @@ PRODUCTION_FUNCTIONS = [
     "open_cfw_cordio_dm_adv_set_address_type",
 ]
 PRODUCTION_METRICS = [
-    (354692, 70, 0), (354764, 40, 2), (354812, 160, 1),
-    (354972, 90, 2), (355064, 142, 2), (355208, 160, 2),
-    (355372, 384, 2), (355756, 50, 2), (355808, 26, 2),
+    (286212, 70, 0), (286284, 40, 2), (286332, 160, 1),
+    (286492, 90, 2), (286584, 142, 2), (286728, 160, 2),
+    (286892, 384, 2), (287276, 50, 2), (287328, 26, 2),
 ]
 PINNED_INPUTS = {
     ROOT / "tools/manifests/packetcraft-cordio-dm-adv-function-map.tsv": "54e908660de2c61d9852efab17af3f0e8c34ed1a149d2f22c4962e5fb84cea38",
@@ -228,7 +228,7 @@ def _verify_production() -> dict[str, Any]:
         or _sha256(FLASH_PLAN.read_bytes()) != FLASH_PLAN_SHA256
         or (len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
             len(flash["container_only_regions"]), len(flash["protected_regions"]))
-            != (6671, 0, 6, 6)
+            != (6588, 0, 6, 6)
     ):
         raise AuditError("common advertising flash plan changed")
     return {
@@ -251,7 +251,7 @@ def _verify_production() -> dict[str, Any]:
             "interval ordering and channel-map validation",
         ],
         "hardware_validation": (
-            "deferred by project direction; future qualification requires authorized responsive G2/EM9305 and BLE peer evidence"
+            "blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305 and BLE peer evidence"
         ),
     }
 

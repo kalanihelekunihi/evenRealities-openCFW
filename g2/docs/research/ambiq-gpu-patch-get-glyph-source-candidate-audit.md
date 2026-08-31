@@ -45,3 +45,10 @@ classification policy, malformed-input policy review, and integration tests
 against real vector-font assets. The candidate does not claim textual identity
 with unavailable source.
 
+For the recovered Ambiq LVGL backend, no such policy selection is needed. The
+atomic link audit roots every external function in all 15 exact backend
+objects, retains all 96 directly required Nema/GPU symbols, and proves that
+`lv_ambiq_get_glyph` is unreferenced. Section GC therefore removes both that
+archive section and its `utf8_codepoint_size` relocation. The glyph candidate
+remains production-excluded; the active backend has no admitted dependency on
+it.

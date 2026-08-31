@@ -25,8 +25,8 @@ MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 
 PINS = {
-    SOURCE: (2295, "9df4daeea0af317c1556361a15f1625d5b1e9d00b3c72ae9b753de4608c3294f"),
-    HEADER: (1982, "d59de5e4176f72b95aa93c3e497de815bc29ac1ea816d2e3b8512d4349125414"),
+    SOURCE: (2282, "6901fc3f82d82fdfd4d0f24a7e1bf20e79d9f5f800f98492bf057a843404c417"),
+    HEADER: (1969, "01aff14b29d32f5a9e2bd700afdc4fbde1fdf4abb4699aa6578c94ef835ea44f"),
 }
 STOCK_ADDRESS = 0x00415590
 STOCK_SIZE = 88
@@ -41,7 +41,7 @@ RODATA_SHA256 = "617e0aef0ca7b9cc2d64b76394bd2203cf40de647d25e4caafe628433a0c30a
 OVERLAY_SIZE = 15240
 OVERLAY_SHA256 = "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314"
 PROVIDER_SIZE = 163840
-PROVIDER_SHA256 = "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
+PROVIDER_SHA256 = "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad"
 
 
 class AuditError(RuntimeError):
@@ -144,7 +144,7 @@ def audit() -> dict:
 
     return {
         "component": "G2 Apollo bootloader redirect_init",
-        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
+        "status": "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "software_gap_count": 0,
         "stock": {"address": STOCK_ADDRESS, "size": STOCK_SIZE, "sha256": STOCK_SHA256},
         "source": {"function": FUNCTION, "address": FUNCTION_ADDRESS, "text_bytes": FUNCTION_SIZE, "closure_bytes": CLOSURE_SIZE},
@@ -156,7 +156,7 @@ def audit() -> dict:
         },
         "hardware_block": {
             "physical_evidence_available": False,
-            "required_evidence": "authorized responsive G2 right temple with boot UART and debugger visibility validating both mutex allocations, IAR stream serialization, failure logging, and boot continuation",
+            "required_evidence": "authorized G2 hardware with boot UART and debugger visibility validating both mutex allocations, IAR stream serialization, failure logging, and boot continuation",
             "stock_bootloader_retained_for_hardware": True,
         },
         "safety": {"hardware_operations": [], "signing_performed": False, "flashing_performed": False},
@@ -173,7 +173,7 @@ def main() -> int:
     else:
         print(f"Bootloader redirect-init closure: {report['status']}")
         print(f"  source closure: {report['source']['closure_bytes']} bytes")
-        print("  hardware operations: none; physical validation deferred by project direction")
+        print("  hardware operations: none; physical validation blocked by unavailable physical evidence")
     return 0
 
 

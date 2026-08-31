@@ -660,11 +660,11 @@ class MramAppDbUpdateTests(unittest.TestCase):
     def test_source_and_fixture_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "a0142e99b64d48e5f441c3937b42a46c8a5e2e6fa99d28ebd61be9f0b140d221",
+            "d54f0950c3da9af9b02c452fc128c1f63306930ecdd13f49d0e36dea08818b80",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "bfa4519c7b4ce07fbbc3dcc34f677f0748b387cd6747922b79066d1de94ab354",
+            "0bb3714476325ca5d7db75fb4113bde842e2703d7c61307b1f8b03d4ca6db9ef",
         )
 
 

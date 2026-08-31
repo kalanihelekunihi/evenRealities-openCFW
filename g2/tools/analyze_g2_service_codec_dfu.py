@@ -29,7 +29,7 @@ PINS = {
     CLOSURE: "7354a97269a6fb61a1b62724ab651fee8a59df4162b8d0a5a0dcb51f26b16748",
     PROVENANCE: "739e47f57063644aae9e383d96e5251f0cb45e866a62694b6a75c3499a94ee4c",
 }
-SOURCE_SHA256 = "ac3aa72814144d563791eac2b712d461cd51f784265ab1e9221262ec8d0f22ec"
+SOURCE_SHA256 = "66cc9fe843f775518c97e7db525f7a731545777762fa4d1fc0e5524b9d84c700"
 FUNCTIONS = (
     "open_cfw_dfu_release_package", "open_cfw_dfu_load_package",
     "open_cfw_dfu_format_version", "open_cfw_dfu_parse_version_bytes",
@@ -46,8 +46,8 @@ PATCH_FUNCTIONS = (
     *FUNCTIONS[2:],
 )
 SOURCE_OFFSETS = (
-    304832, 304876, 305452, 305824, 305884, 306092, 306120, 306124,
-    306128, 306156, 306304, 306468, 306844, 307148, 307996, 308136,
+    244992, 245036, 245612, 245984, 246044, 246252, 246280, 246284,
+    246288, 246316, 246464, 246628, 247004, 247308, 248156, 248296,
 )
 SOURCE_SIZES = (
     44, 576, 372, 46, 208, 26, 4, 4, 26, 148, 164, 370, 304, 848,
@@ -236,7 +236,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         raise AuditError("codec-DFU package/state literal changed")
 
     source = SOURCE.read_bytes()
-    if len(source) != 23_248 or sha256(source) != SOURCE_SHA256:
+    if len(source) != 23_239 or sha256(source) != SOURCE_SHA256:
         raise AuditError("codec-DFU production source changed")
     source_text = source.decode("utf-8")
     required_source_tokens = (
@@ -366,7 +366,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "exact_symbols": [name for _, name in EXACT_SYMBOLS],
             "source_inventory": "16-function clean-room production C",
             "historical_source_inventory": "unavailable",
-            "license": "GPL-3.0-only",
+            "license": "MIT",
         },
         "production": {
             "candidate": str(SOURCE.relative_to(ROOT)),
@@ -377,11 +377,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "generated_alignment_bytes": 24,
             "strict_relocations": 71,
             "guarded_redirects": 16,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "authorized right temple is not under test because qualification is deferred by project direction; authorized left "
-                "temple must remain stock; future qualification requires a responsive authorized pair or "
-                "golden codec/UART capture is required for future qualification"
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific codec/UART DFU fixture or an "
+                "authenticated golden codec/UART DFU capture"
             ),
         },
     }

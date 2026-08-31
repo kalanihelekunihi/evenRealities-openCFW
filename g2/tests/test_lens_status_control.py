@@ -268,7 +268,7 @@ class LensStatusControlTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "e467ddd8d7b4b845e083250c6e28fe12f0fabab88113d9b998356b3c86e2c4b0",
+            "ce094bbbc618e2c43f27fc4b7516edd3f148f6c25bcfb4c21dd68f3b115eb4f2",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),

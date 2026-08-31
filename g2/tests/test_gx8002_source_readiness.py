@@ -81,6 +81,19 @@ class GX8002SourceReadinessTests(unittest.TestCase):
             "unavailable_proprietary_codec_firmware": {"spans": 0, "bytes": 0},
         })
         self.assertEqual(self.report["blocking_residual"], {"spans": 11, "bytes": 326000})
+        detail = self.report["external_provider_detail"]
+        self.assertEqual(detail["bytes_by_class"], {
+            "opaque_executable": 190_912,
+            "opaque_runtime_data": 5_124,
+            "opaque_npu_commands": 9_164,
+            "proprietary_model_data": 120_800,
+        })
+        self.assertEqual(detail["bytes"], 326_000)
+        self.assertFalse(detail["open_source_available"])
+        self.assertEqual(detail["payload_redistribution_authority"],
+                         "unresolved")
+        self.assertIn("does not claim open availability",
+                      detail["provider_contract"])
 
     def test_selected_cluster_and_redistribution_are_fail_closed(self):
         selected = self.report["selected_cluster"]
@@ -91,7 +104,7 @@ class GX8002SourceReadinessTests(unittest.TestCase):
         self.assertEqual(selected["payload_redistribution_authority"], "unresolved")
         self.assertFalse(selected["production_routed"])
         self.assertFalse(self.report["production"]["production_routed"])
-        self.assertEqual(self.report["hardware_validation"], "deferred by project direction")
+        self.assertEqual(self.report["hardware_validation"], "blocked by unavailable physical evidence")
 
     def test_provider_loads_only_exact_authenticated_model(self):
         destination = (ctypes.c_uint8 * WEIGHT_SIZE)()

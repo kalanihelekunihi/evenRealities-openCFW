@@ -23,6 +23,7 @@ OBJDUMP = ROOT / "research/corpus/em9305/size-delta/opencfw-em9305-application-o
 PROVENANCE = ROOT / "tools/manifests/em9305-residual-provenance-map.tsv"
 CANDIDATE = ROOT / "components/shared/em9305/runtime_metaware_helpers_candidate.c"
 HEADER = CANDIDATE.with_suffix(".h")
+ARC_BUILD_SUMMARY = ROOT / "tools/manifests/em9305-arc-candidate-build-summary.json"
 
 FILE_PINS = {
     IMAGE: (
@@ -172,6 +173,36 @@ def run_audit() -> dict[str, Any]:
     if re.search(r"%(?!=)", implementation):
         raise CandidateError("clean-room division candidate may not use C remainder")
 
+    arc_build = json.loads(ARC_BUILD_SUMMARY.read_text(encoding="utf-8"))
+    if (
+        arc_build.get("status") != "arcv2-em-candidates-target-compiled"
+        or arc_build.get("target") != "ARCv2 EM"
+        or not str(arc_build.get("compiler", "")).startswith(
+            "arc-linux-gnu-gcc (GCC) 16.1.1"
+        )
+        or arc_build.get("translation_unit_count") != 8
+        or arc_build.get("undefined_symbols") != []
+        or arc_build.get("forbidden_runtime_imports") != []
+        or arc_build.get("hardware_operations") != []
+        or arc_build.get("production_routed") is not False
+    ):
+        raise CandidateError("ARCv2 EM candidate-build receipt changed")
+    arc_rows = {
+        row.get("source"): row
+        for row in arc_build.get("translation_units", [])
+        if isinstance(row, dict)
+    }
+    for candidate_source in sorted(CANDIDATE.parent.glob("*.c")):
+        relative = str(candidate_source.relative_to(ROOT))
+        row = arc_rows.get(relative)
+        if (
+            row is None
+            or row.get("source_size") != candidate_source.stat().st_size
+            or row.get("source_sha256") != sha256(candidate_source.read_bytes())
+            or row.get("undefined_symbols") != []
+        ):
+            raise CandidateError(f"ARCv2 EM source receipt changed: {relative}")
+
     island_results: dict[str, Any] = {}
     total = 0
     for start, facts in ISLANDS.items():
@@ -255,11 +286,14 @@ def run_audit() -> dict[str, Any]:
             "header": str(HEADER.relative_to(ROOT)),
             "symbols": list(REQUIRED_SYMBOLS),
             "uses_c_division_or_remainder": False,
+            "arcv2_em_target_compiled": True,
+            "arcv2_em_undefined_symbols": [],
+            "arcv2_em_forbidden_runtime_imports": [],
+            "arcv2_em_build_receipt": str(ARC_BUILD_SUMMARY.relative_to(ROOT)),
             "production_routed": False,
         },
         "integration_blockers": [
             "recover and pin the exact MetaWare ARC EABI symbol names and multiword register return conventions",
-            "compile with an ARCv2 EM toolchain and prove that helper bodies do not recursively import division or memory runtimes",
             "authenticate redirect sites, target placement, and all interior-entry callers before production routing",
             "decide whether the stock stack guard must preserve brk_s exactly or route through an OpenCFW fatal policy",
         ],

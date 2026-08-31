@@ -69,6 +69,53 @@ class ApolloOverlayToolchainTests(unittest.TestCase):
                 "Apple clang version 21.0.0",
             )
 
+    def test_compiler_builtin_headers_are_the_only_system_include_root(self) -> None:
+        clang = self._arm_clang()
+        builtin = apollo_overlay.compiler_builtin_include_dir(clang)
+        arguments = apollo_overlay.hermetic_compiler_arguments(builtin)
+        self.assertEqual(
+            arguments,
+            ["--no-default-config", "-nostdinc", "-isystem", str(builtin)],
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            ambient = Path(directory)
+            (ambient / "stdint.h").write_text(
+                '#error "ambient header entered hermetic compile"\n',
+                encoding="utf-8",
+            )
+            with mock.patch.dict(
+                os.environ,
+                {
+                    "CPATH": str(ambient),
+                    "C_INCLUDE_PATH": str(ambient),
+                    "SDKROOT": str(ambient),
+                    "CCC_OVERRIDE_OPTIONS": "^--sysroot=/usr/local+",
+                },
+            ):
+                environment = apollo_overlay.hermetic_compiler_environment()
+                for key in apollo_overlay._COMPILER_INCLUDE_ENVIRONMENT:
+                    self.assertNotIn(key, environment)
+                completed = subprocess.run(
+                    [
+                        clang,
+                        *arguments,
+                        "--target=arm-none-eabi",
+                        "-E",
+                        "-v",
+                        "-x",
+                        "c",
+                        "/dev/null",
+                    ],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    env=environment,
+                )
+        search = completed.stderr.split("#include <...> search starts here:", 1)[1]
+        search = search.split("End of search list.", 1)[0]
+        self.assertIn(str(builtin), search)
+        self.assertNotIn("/usr/local/include", search)
+
     def test_compile_overlay_passes_absolute_include_arguments_in_order(
         self,
     ) -> None:
@@ -78,6 +125,8 @@ class ApolloOverlayToolchainTests(unittest.TestCase):
             second = root / "second"
             first.mkdir()
             second.mkdir()
+            builtin = root / "builtin"
+            builtin.mkdir()
             source = root / "probe.c"
             object_path = root / "probe.o"
             config = {
@@ -123,12 +172,17 @@ class ApolloOverlayToolchainTests(unittest.TestCase):
                     object_path=object_path,
                     config=config,
                     include_dirs=[first, second],
+                    builtin_include_dir=builtin,
                 )
 
             self.assertEqual(
                 run.call_args.args[0],
                 [
                     "/toolchain/clang",
+                    "--no-default-config",
+                    "-nostdinc",
+                    "-isystem",
+                    str(builtin),
                     "--target=thumbv7em-none-eabi",
                     "-mthumb",
                     "-O2",
@@ -202,6 +256,11 @@ class ApolloOverlayToolchainTests(unittest.TestCase):
             try:
                 os.chdir(caller)
                 with (
+                    mock.patch.object(
+                        apollo_overlay,
+                        "compiler_builtin_include_dir",
+                        return_value=headers,
+                    ),
                     mock.patch.object(
                         apollo_overlay,
                         "compile_overlay",
@@ -530,6 +589,11 @@ probe_table:
             )
 
             with (
+                mock.patch.object(
+                    apollo_overlay,
+                    "compiler_builtin_include_dir",
+                    return_value=root,
+                ),
                 mock.patch.object(
                     apollo_overlay,
                     "compile_overlay",

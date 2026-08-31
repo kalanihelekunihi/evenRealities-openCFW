@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ctypes
+import copy
 import hashlib
 import json
 import os
@@ -211,7 +212,7 @@ LOCAL_PINS: dict[Path, tuple[int, str] | None] = {
 OBJECT_PINS: dict[str, dict[str, object]] = {
     "apple-clang": {
         "compiler": "/usr/bin/clang",
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
         "object": {
             "messages_waiting": (
                 852,
@@ -269,8 +270,8 @@ OBJECT_PINS: dict[str, dict[str, object]] = {
 PROFILE_PINS: dict[str, dict[str, object]] = {
     "apple-clang": {
         "placements": {
-            "messages_waiting": 184060,
-            "messages_waiting_from_isr": 184112,
+            "messages_waiting": 124212,
+            "messages_waiting_from_isr": 124264,
         },
         "relocated_sha256": {
             "messages_waiting": "fd95750405881458902725fe3e29d72367bcfe3a723a05588c74337b55202f04",
@@ -286,14 +287,16 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
                 "bd3b32c736e57005c1cbe65a2725fb66ed5389227686ff7961793f699364e68c",
             ),
         },
-        "overlay": (429058, "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"),
-        "component": (3952454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"),
-        "package": (4745526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"),
+        "overlay": (360578, "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"),
+        "component": (3883974, "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"),
+        "core_overlay": (360578, "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"),
+        "core_component": (3883974, "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"),
+        "package": (4677046, "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"),
     },
     "linux-clang": {
         "placements": {
-            "messages_waiting": 185784,
-            "messages_waiting_from_isr": 185836,
+            "messages_waiting": 126032,
+            "messages_waiting_from_isr": 126084,
         },
         "relocated_sha256": {
             "messages_waiting": "fd95750405881458902725fe3e29d72367bcfe3a723a05588c74337b55202f04",
@@ -309,9 +312,11 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
                 "2ef6ffe002ec6b197643da1304921bbc422dc9beb124b23343f16bf187e303a1",
             ),
         },
-        "overlay": (212664, "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18"),
-        "component": (3736060, "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97"),
-        "package": (4529116, "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"),
+        "overlay": (152912, "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20"),
+        "component": (3676308, "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7"),
+        "core_overlay": (145314, "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19"),
+        "core_component": (3668710, "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8"),
+        "package": (4469364, "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"),
     },
 }
 
@@ -1307,17 +1312,26 @@ class RuntimeFreeRTOSQueueMessagesWaitingProductionTests(unittest.TestCase):
 
         pins = PROFILE_PINS[self.profile]
         output = Path(self.temporary.name) / "registered-overlay"
+        stage_config = copy.deepcopy(config)
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = Path(self.temporary.name) / "core-stage-overlay.json"
+        stage_config_path.write_text(
+            json.dumps(stage_config, indent=2) + "\n", encoding="utf-8"
+        )
         report = self.apollo_overlay.build(
             root=ROOT,
-            config_path=OVERLAY,
+            config_path=stage_config_path,
             output_dir=output,
             clang=self.clang,
             toolchain_profile=self.profile,
         )
-        overlay_pin = required_pin(pins["overlay"], f"PROFILE_PINS[{self.profile}].overlay")
+        overlay_pin = required_pin(pins["core_overlay"], f"PROFILE_PINS[{self.profile}].core_overlay")
         component_pin = required_pin(
-            pins["component"],
-            f"PROFILE_PINS[{self.profile}].component",
+            pins["core_component"],
+            f"PROFILE_PINS[{self.profile}].core_component",
         )
         self.assertEqual(
             (report["overlay"]["size"], report["overlay"]["sha256"]),

@@ -225,10 +225,11 @@ def load_config(path: Path) -> dict[str, Any]:
 
 def compiler_version(clang: str) -> str:
     completed = subprocess.run(
-        [clang, "--version"],
+        [clang, "--no-default-config", "--version"],
         check=False,
         capture_output=True,
         text=True,
+        env=hermetic_compiler_environment(),
     )
     if completed.returncode:
         raise BuildError(
@@ -238,6 +239,91 @@ def compiler_version(clang: str) -> str:
     if not first_line:
         raise BuildError(f"compiler {clang} returned no version")
     return first_line[0].strip()
+
+
+_COMPILER_INCLUDE_ENVIRONMENT = frozenset({
+    "CCC_OVERRIDE_OPTIONS",
+    "C_INCLUDE_PATH",
+    "CPLUS_INCLUDE_PATH",
+    "CPATH",
+    "INCLUDE",
+    "OBJC_INCLUDE_PATH",
+    "OBJCPLUS_INCLUDE_PATH",
+    "QA_OVERRIDE_GCC3_OPTIONS",
+    "SDKROOT",
+})
+
+
+def hermetic_compiler_environment() -> dict[str, str]:
+    """Return an environment that cannot inject ambient compiler headers."""
+
+    return {
+        key: value for key, value in os.environ.items()
+        if key not in _COMPILER_INCLUDE_ENVIRONMENT
+    }
+
+
+def compiler_builtin_include_dir(
+    clang: str, *, expected: Path | None = None
+) -> Path:
+    """Resolve Clang's builtin include root and optionally bind it to a receipt."""
+
+    try:
+        completed = subprocess.run(
+            [clang, "--no-default-config", "-print-resource-dir"],
+            check=True,
+            capture_output=True,
+            text=True,
+            env=hermetic_compiler_environment(),
+        )
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise BuildError("compiler builtin include directory cannot be resolved") \
+            from error
+    raw = completed.stdout.strip()
+    if not raw or "\n" in raw or not Path(raw).is_absolute():
+        raise BuildError("compiler builtin include directory is unsafe")
+    try:
+        resource_dir = Path(raw).resolve(strict=True)
+        include_dir = (resource_dir / "include").resolve(strict=True)
+        include_dir.relative_to(resource_dir)
+    except (OSError, ValueError, RuntimeError) as error:
+        raise BuildError("compiler builtin include directory is unsafe") from error
+    if not resource_dir.is_dir() or not include_dir.is_dir():
+        raise BuildError("compiler builtin include directory is unsafe")
+    if expected is not None:
+        expected = Path(expected)
+        try:
+            expected_resolved = expected.resolve(strict=True)
+        except (OSError, RuntimeError) as error:
+            raise BuildError("recorded compiler builtin include directory is unsafe") \
+                from error
+        if (
+            not expected.is_absolute()
+            or expected != expected_resolved
+            or expected_resolved != include_dir
+        ):
+            raise BuildError(
+                "compiler builtin include directory differs from recorded identity"
+            )
+    return include_dir
+
+
+def hermetic_compiler_arguments(include_dir: Path) -> list[str]:
+    """Disable every implicit include root and admit one resolved builtin root."""
+
+    include_dir = Path(include_dir)
+    try:
+        resolved = include_dir.resolve(strict=True)
+    except (OSError, RuntimeError) as error:
+        raise BuildError("compiler builtin include directory is unsafe") from error
+    if not include_dir.is_absolute() or include_dir != resolved or not resolved.is_dir():
+        raise BuildError("compiler builtin include directory is unsafe")
+    return [
+        "--no-default-config",
+        "-nostdinc",
+        "-isystem",
+        str(resolved),
+    ]
 
 
 def validate_compiler_version(
@@ -267,11 +353,8 @@ def validate_compiler_version(
         )
 
 
-def compiler_source_prefix_flags(
-    root: Path,
-    toolchain: dict[str, Any],
-) -> list[str]:
-    """Map the active openCFW root to its reviewed profile spelling."""
+def _reviewed_source_root(toolchain: dict[str, Any]) -> str | None:
+    """Validate the structured source-prefix contract and return its root."""
 
     flags = toolchain.get("flags", [])
     if not isinstance(flags, list):
@@ -282,12 +365,16 @@ def compiler_source_prefix_flags(
         )
     if any(flag.startswith("@") for flag in flags):
         raise BuildError("toolchain.flags cannot use response files")
-    if any(flag.startswith("-ffile-prefix-map=") for flag in flags):
+    if any(
+        flag == "-ffile-prefix-map"
+        or flag.startswith("-ffile-prefix-map=")
+        for flag in flags
+    ):
         raise BuildError("toolchain.flags cannot set -ffile-prefix-map")
 
     reviewed_root = toolchain.get("reviewed_source_root")
     if reviewed_root is None:
-        return []
+        return None
     if not isinstance(reviewed_root, str):
         raise BuildError(
             "toolchain.reviewed_source_root must be an absolute path string"
@@ -296,11 +383,45 @@ def compiler_source_prefix_flags(
         raise BuildError(
             "toolchain.reviewed_source_root must be an absolute path"
         )
+    return reviewed_root
+
+
+def compiler_source_prefix_flags(
+    root: Path,
+    toolchain: dict[str, Any],
+) -> list[str]:
+    """Map the active openCFW root to its reviewed profile spelling."""
+
+    reviewed_root = _reviewed_source_root(toolchain)
+    if reviewed_root is None:
+        return []
 
     actual_root = str(root.resolve())
     if actual_root == reviewed_root:
         return []
     return [f"-ffile-prefix-map={actual_root}={reviewed_root}"]
+
+
+def compiler_source_prefix_report_flags(
+    root: Path,
+    toolchain: dict[str, Any],
+) -> list[str]:
+    """Return the deterministic report view of source-prefix mapping.
+
+    Compiler argv must name the physical input root so Clang can rewrite it.
+    A serialized build report instead describes the resulting canonical path
+    domain.  Reconstructing this identity map from the reviewed profile root
+    keeps reports independent of temporary/workspace locations without
+    parsing or redacting arbitrary compiler flags.
+    """
+
+    # Resolve the supplied root to preserve the same path-validation surface
+    # as the invocation view.  Its physical spelling must never be serialized.
+    Path(root).resolve()
+    reviewed_root = _reviewed_source_root(toolchain)
+    if reviewed_root is None:
+        return []
+    return [f"-ffile-prefix-map={reviewed_root}={reviewed_root}"]
 
 
 #: The canonical, reviewed macOS toolchain profile.  Its pins are the
@@ -1271,6 +1392,7 @@ def compile_overlay(
     config: dict[str, Any],
     include_dirs: list[Path] | tuple[Path, ...] = (),
     expected_functions: set[str] | None = None,
+    builtin_include_dir: Path | None = None,
 ) -> tuple[bytes, dict[str, dict[str, int]], str, dict[str, Any]]:
     version = compiler_version(clang)
     validate_compiler_version(config["toolchain"], version)
@@ -1279,8 +1401,14 @@ def compile_overlay(
         if not include_dir.is_absolute():
             raise BuildError("compiler include directories must be absolute")
         include_arguments.extend(("-I", str(include_dir)))
+    selected_builtin_include = (
+        compiler_builtin_include_dir(clang)
+        if builtin_include_dir is None else builtin_include_dir
+    )
+    hermetic_arguments = hermetic_compiler_arguments(selected_builtin_include)
     command = [
         clang,
+        *hermetic_arguments,
         f"--target={config['toolchain']['target']}",
         *config["toolchain"]["flags"],
         *include_arguments,
@@ -1294,6 +1422,7 @@ def compile_overlay(
         check=False,
         capture_output=True,
         text=True,
+        env=hermetic_compiler_environment(),
     )
     if completed.returncode:
         raise BuildError(
@@ -1441,6 +1570,7 @@ def compile_isolated_leaf(
     object_path: Path,
     toolchain_profile: str | None = None,
     record: bool = False,
+    builtin_include_dir: Path | None = None,
 ) -> tuple[bytes, dict[str, Any]]:
     """Compile an authenticated upstream TU and retain one reviewed leaf."""
 
@@ -1510,8 +1640,14 @@ def compile_isolated_leaf(
     )
     version = compiler_version(clang)
     validate_compiler_version(toolchain, version)
+    selected_builtin_include = (
+        compiler_builtin_include_dir(clang)
+        if builtin_include_dir is None else builtin_include_dir
+    )
+    hermetic_arguments = hermetic_compiler_arguments(selected_builtin_include)
     command = [
         clang,
+        *hermetic_arguments,
         f"--target={target}",
         *flags,
     ]
@@ -1523,6 +1659,7 @@ def compile_isolated_leaf(
         check=False,
         capture_output=True,
         text=True,
+        env=hermetic_compiler_environment(),
     )
     if completed.returncode:
         raise BuildError(
@@ -1578,7 +1715,7 @@ def compile_isolated_leaf(
         "executable": clang,
         "version": version,
         "target": target,
-        "flags": flags,
+        "flags": [*hermetic_arguments, *flags],
     }
     if normalized_include_dirs is not None:
         toolchain_record["include_dirs"] = normalized_include_dirs
@@ -1606,6 +1743,7 @@ def extract_in_place_function_section(
     allow_local_function: bool = False,
     allow_local_relocation_targets: bool = False,
     allow_bound_static_data: bool = False,
+    allow_self_relocation: bool = False,
     allow_halfword_placement: bool = False,
     allow_discarded_alloc_sections: bool = False,
 ) -> tuple[bytes, dict[str, Any]]:
@@ -1641,6 +1779,11 @@ def extract_in_place_function_section(
         raise BuildError(
             f"in-place leaf {function_name} "
             "allow_bound_static_data must be boolean"
+        )
+    if not isinstance(allow_self_relocation, bool):
+        raise BuildError(
+            f"in-place leaf {function_name} allow_self_relocation must be "
+            "boolean"
         )
     if (
         not isinstance(runtime_address, int)
@@ -1820,6 +1963,30 @@ def extract_in_place_function_section(
         reviewed_relocations,
         context=f"in-place leaf {function_name}",
     )
+    reviewed_self_relocations = [
+        item for item in reviewed_relocations if item["symbol"] == function_name
+    ]
+    if reviewed_self_relocations:
+        if not allow_self_relocation:
+            raise BuildError(
+                f"in-place leaf {function_name} self relocation requires "
+                "allow_self_relocation"
+            )
+        if not strict_relocation_contract or any(
+            item["type"] != "R_ARM_THM_CALL"
+            or item["target_address"] != runtime_address
+            or item.get("symbol_type") != "STT_FUNC"
+            for item in reviewed_self_relocations
+        ):
+            raise BuildError(
+                f"in-place leaf {function_name} self relocation must be an "
+                "exact strict STT_FUNC call to its selected runtime entry"
+            )
+    elif allow_self_relocation:
+        raise BuildError(
+            f"in-place leaf {function_name} enables allow_self_relocation "
+            "without a reviewed self relocation"
+        )
 
     data, sections = parse_elf32(object_path)
     section_name = f".text.{function_name}"
@@ -1958,6 +2125,18 @@ def extract_in_place_function_section(
             )
             is_reviewed_defined_sibling = False
             relocation_symbol_name = str(relocation_symbol["name"])
+            is_reviewed_self_relocation = (
+                allow_self_relocation
+                and relocation_name == "R_ARM_THM_CALL"
+                and relocation_symbol_name == function_name
+                and int(relocation_symbol["binding"]) == STB_GLOBAL
+                and int(relocation_symbol["visibility"]) == 0
+                and int(relocation_symbol["type"]) == STT_FUNC
+                and int(relocation_symbol["section_index"]) == section_index
+                and bool(int(relocation_symbol["value"]) & 1)
+                and (int(relocation_symbol["value"]) & ~1) == 0
+                and int(relocation_symbol["size"]) == section_size
+            )
             if (
                 not is_global_undefined
                 and relocation_symbol_name
@@ -2022,12 +2201,14 @@ def extract_in_place_function_section(
             if (
                 not is_global_undefined
                 and not is_reviewed_defined_sibling
+                and not is_reviewed_self_relocation
                 and not is_reviewed_bound_static_data
             ):
                 raise BuildError(
                     f"in-place leaf {function_name} relocation at "
                     f"+0x{offset:X} must reference a global undefined symbol, "
-                    "an explicitly selected whole global sibling function, or "
+                    "an explicitly selected whole global sibling function, "
+                    "an opted-in whole global self function, or "
                     "an opted-in reviewed bound static data object; "
                     f"observed {relocation_symbol['name']!r}"
                 )
@@ -3282,6 +3463,7 @@ def compile_relocated_closure_leaf(
     runtime_address: int,
     record: bool = False,
     allowed_defined_relocation_targets: frozenset[str] = frozenset(),
+    builtin_include_dir: Path | None = None,
 ) -> tuple[bytes, dict[str, Any]]:
     """Compile and authenticate one closure-aware relocated leaf."""
 
@@ -3413,7 +3595,12 @@ def compile_relocated_closure_leaf(
     )
     version = compiler_version(clang)
     validate_compiler_version(toolchain, version)
-    command = [clang, f"--target={target}", *flags]
+    selected_builtin_include = (
+        compiler_builtin_include_dir(clang)
+        if builtin_include_dir is None else builtin_include_dir
+    )
+    hermetic_arguments = hermetic_compiler_arguments(selected_builtin_include)
+    command = [clang, *hermetic_arguments, f"--target={target}", *flags]
     for include_dir in include_dirs:
         command.extend(("-I", str(include_dir)))
     command.extend(("-c", str(source_path), "-o", str(object_path)))
@@ -3422,6 +3609,7 @@ def compile_relocated_closure_leaf(
         check=False,
         capture_output=True,
         text=True,
+        env=hermetic_compiler_environment(),
     )
     if completed.returncode:
         raise BuildError(
@@ -3473,7 +3661,7 @@ def compile_relocated_closure_leaf(
         "executable": clang,
         "version": version,
         "target": target,
-        "flags": flags,
+        "flags": [*hermetic_arguments, *flags],
     }
     if normalized_include_dirs is not None:
         toolchain_record["include_dirs"] = normalized_include_dirs
@@ -3505,6 +3693,7 @@ def compile_in_place_leaf(
     enforce_stock_fit: bool = True,
     allowed_defined_relocation_targets: frozenset[str] = frozenset(),
     thumb_prel_symbols: frozenset[str] = frozenset(),
+    builtin_include_dir: Path | None = None,
 ) -> tuple[bytes, dict[str, Any]]:
     """Compile and resolve an authenticated leaf for one fixed stock address."""
 
@@ -3638,8 +3827,14 @@ def compile_in_place_leaf(
     )
     version = compiler_version(clang)
     validate_compiler_version(toolchain, version)
+    selected_builtin_include = (
+        compiler_builtin_include_dir(clang)
+        if builtin_include_dir is None else builtin_include_dir
+    )
+    hermetic_arguments = hermetic_compiler_arguments(selected_builtin_include)
     command = [
         clang,
+        *hermetic_arguments,
         f"--target={target}",
         *flags,
     ]
@@ -3651,6 +3846,7 @@ def compile_in_place_leaf(
         check=False,
         capture_output=True,
         text=True,
+        env=hermetic_compiler_environment(),
     )
     if completed.returncode:
         raise BuildError(
@@ -3676,6 +3872,10 @@ def compile_in_place_leaf(
         ),
         allow_bound_static_data=leaf_config.get(
             "allow_bound_static_data",
+            False,
+        ),
+        allow_self_relocation=leaf_config.get(
+            "allow_self_relocation",
             False,
         ),
         allow_halfword_placement=leaf_config.get(
@@ -3718,7 +3918,7 @@ def compile_in_place_leaf(
         "executable": clang,
         "version": version,
         "target": target,
-        "flags": flags,
+        "flags": [*hermetic_arguments, *flags],
     }
     if normalized_include_dirs is not None:
         toolchain_record["include_dirs"] = normalized_include_dirs
@@ -3810,6 +4010,7 @@ def compile_in_place_data_group(
     object_path: Path,
     toolchain_profile: str | None = None,
     record: bool = False,
+    builtin_include_dir: Path | None = None,
 ) -> tuple[bytes, dict[str, Any]]:
     """Compile one relocation-free C const object for scattered in-place use."""
 
@@ -3853,11 +4054,22 @@ def compile_in_place_data_group(
     )
     version = compiler_version(clang)
     validate_compiler_version(toolchain, version)
-    command = [clang, f"--target={target}", *flags]
+    selected_builtin_include = (
+        compiler_builtin_include_dir(clang)
+        if builtin_include_dir is None else builtin_include_dir
+    )
+    hermetic_arguments = hermetic_compiler_arguments(selected_builtin_include)
+    command = [clang, *hermetic_arguments, f"--target={target}", *flags]
     for include_dir in include_dirs:
         command.extend(("-I", str(include_dir)))
     command.extend(("-c", str(source_path), "-o", str(object_path)))
-    completed = subprocess.run(command, check=False, capture_output=True, text=True)
+    completed = subprocess.run(
+        command,
+        check=False,
+        capture_output=True,
+        text=True,
+        env=hermetic_compiler_environment(),
+    )
     if completed.returncode:
         raise BuildError(
             f"in-place data {symbol_name} compilation failed:\n"
@@ -3968,7 +4180,7 @@ def compile_in_place_data_group(
         "executable": clang,
         "version": version,
         "target": target,
-        "flags": flags,
+        "flags": [*hermetic_arguments, *flags],
     }
     if normalized_include_dirs is not None:
         toolchain_record["include_dirs"] = normalized_include_dirs
@@ -4004,6 +4216,7 @@ def append_relocated_leaves(
     object_root: Path,
     toolchain_profile: str | None = None,
     record: bool = False,
+    builtin_include_dir: Path | None = None,
 ) -> tuple[
     bytes,
     dict[str, dict[str, int]],
@@ -4077,6 +4290,10 @@ def append_relocated_leaves(
         expected_unrelocated_sha256 = expected.get(
             "unrelocated_sha256"
         )
+        reserved_padding_before = leaf_config.get(
+            "reserved_padding_before",
+            0,
+        )
         if (
             not isinstance(expected_size, int)
             or expected_size < 1
@@ -4093,6 +4310,24 @@ def append_relocated_leaves(
 
         runtime_end = overlay_runtime_address + len(combined)
         padding = align_up(runtime_end, expected_alignment) - runtime_end
+        if (
+            not isinstance(reserved_padding_before, int)
+            or isinstance(reserved_padding_before, bool)
+            or reserved_padding_before < 0
+            or reserved_padding_before > 0x100000
+        ):
+            raise BuildError(
+                f"relocated leaf {function_name} reserved_padding_before "
+                "must be an integer from zero through 1 MiB"
+            )
+        if reserved_padding_before and (
+            reserved_padding_before % expected_alignment
+        ):
+            raise BuildError(
+                f"relocated leaf {function_name} reserved_padding_before "
+                "must preserve its reviewed alignment"
+            )
+        padding += reserved_padding_before
         offset = len(combined) + padding
         if not record and expected_offset is not None and (
             not isinstance(expected_offset, int)
@@ -4245,6 +4480,7 @@ def append_relocated_leaves(
                 allowed_defined_relocation_targets=frozenset(
                     selected_defined_sibling_targets
                 ),
+                builtin_include_dir=builtin_include_dir,
             )
         else:
             resolved_configs: list[dict[str, Any]] = []
@@ -4310,23 +4546,37 @@ def append_relocated_leaves(
                                 f"{relocation_index} must bind its exact symbol "
                                 "to the same target_function name"
                             )
-                        target = combined_functions.get(target_function)
-                        if target is None:
-                            raise BuildError(
-                                f"relocated leaf {function_name} relocation "
-                                f"{relocation_index} targets unavailable prior "
-                                f"overlay function {target_function!r}"
+                        if target_function == function_name:
+                            if (
+                                relocation_type != "R_ARM_THM_CALL"
+                                or leaf_config.get("allow_self_relocation")
+                                is not True
+                            ):
+                                raise BuildError(
+                                    f"relocated leaf {function_name} selected "
+                                    "self relocation requires an opted-in "
+                                    "R_ARM_THM_CALL"
+                                )
+                            resolved_target_address = runtime_address
+                        else:
+                            target = combined_functions.get(target_function)
+                            if target is None:
+                                raise BuildError(
+                                    f"relocated leaf {function_name} relocation "
+                                    f"{relocation_index} targets unavailable prior "
+                                    f"overlay function {target_function!r}"
+                                )
+                            resolved_target_address = (
+                                overlay_runtime_address + int(target["offset"])
                             )
-                        resolved_target_address = (
-                            overlay_runtime_address + int(target["offset"])
-                        )
                         if relocation_type in PREL_MOVWT_TYPES and (
-                            relocation.get("symbol_type") not in (None, "STT_FUNC")
+                            relocation.get("symbol_type")
+                            not in (None, "STT_FUNC", "STT_NOTYPE")
                         ):
                             raise BuildError(
                                 f"relocated leaf {function_name} PREL function "
-                                f"relocation {relocation_index} must use "
-                                "symbol_type STT_FUNC"
+                                f"relocation {relocation_index} has an invalid "
+                                "strict symbol type"
                             )
                         if relocation_type in PREL_MOVWT_TYPES:
                             thumb_prel_symbols.add(target_function)
@@ -4388,6 +4638,10 @@ def append_relocated_leaves(
                     "allow_bound_static_data",
                     False,
                 ),
+                "allow_self_relocation": leaf_config.get(
+                    "allow_self_relocation",
+                    False,
+                ),
                 "allow_discarded_alloc_sections": leaf_config.get(
                     "allow_discarded_alloc_sections",
                     False,
@@ -4404,6 +4658,7 @@ def append_relocated_leaves(
                     selected_defined_sibling_targets
                 ),
                 thumb_prel_symbols=frozenset(thumb_prel_symbols),
+                builtin_include_dir=builtin_include_dir,
             )
         extraction = report.get("extraction")
         if not isinstance(extraction, dict):
@@ -5345,7 +5600,17 @@ def build(
     clang: str,
     toolchain_profile: str | None = None,
     record_profile: bool = False,
+    observe_unpinned: bool = False,
+    expected_builtin_include_dir: Path | None = None,
 ) -> dict[str, Any]:
+    if record_profile and observe_unpinned:
+        raise BuildError(
+            "record_profile and observe_unpinned are mutually exclusive"
+        )
+    selected_builtin_include = compiler_builtin_include_dir(
+        clang, expected=expected_builtin_include_dir
+    )
+    hermetic_arguments = hermetic_compiler_arguments(selected_builtin_include)
     config = load_config(config_path)
     if toolchain_profile is None:
         toolchain_profile = os.environ.get("OPENCFW_TOOLCHAIN_PROFILE")
@@ -5356,10 +5621,21 @@ def build(
             record=record_profile,
         )
     )
+    # Canonical observation retains the selected, reviewed toolchain identity
+    # while deliberately omitting only byte pins.  This internal mode is not
+    # exposed by the standalone CLI; ordinary builds keep every existing
+    # fail-closed expectation.
+    if observe_unpinned:
+        effective_expected = {}
+    record_leaf_observations = record_profile or observe_unpinned
     primary_toolchain = dict(effective_toolchain)
     primary_flags = list(effective_toolchain["flags"])
     primary_flags.extend(
         compiler_source_prefix_flags(root, effective_toolchain)
+    )
+    primary_report_flags = list(effective_toolchain["flags"])
+    primary_report_flags.extend(
+        compiler_source_prefix_report_flags(root, effective_toolchain)
     )
     primary_toolchain["flags"] = primary_flags
     config = {
@@ -5568,6 +5844,7 @@ def build(
             config=config,
             include_dirs=include_dirs,
             expected_functions=primary_functions,
+            builtin_include_dir=selected_builtin_include,
         )
         isolated_leaves = []
         for index, leaf_config in enumerate(isolated_leaf_configs):
@@ -5578,7 +5855,8 @@ def build(
                     leaf_config=leaf_config,
                     object_path=temporary_root / f"isolated-leaf-{index}.o",
                     toolchain_profile=resolved_profile,
-                    record=record_profile,
+                    record=record_leaf_observations,
+                    builtin_include_dir=selected_builtin_include,
                 )
             )
         (
@@ -5618,7 +5896,8 @@ def build(
                 leaf_configs=relocated_leaf_configs,
                 object_root=temporary_root,
                 toolchain_profile=resolved_profile,
-                record=record_profile,
+                record=record_leaf_observations,
+                builtin_include_dir=selected_builtin_include,
             )
         in_place_leaves = []
         for index, leaf_config in enumerate(in_place_leaf_configs):
@@ -5629,7 +5908,8 @@ def build(
                     leaf_config=leaf_config,
                     object_path=temporary_root / f"in-place-leaf-{index}.o",
                     toolchain_profile=resolved_profile,
-                    record=record_profile,
+                    record=record_leaf_observations,
+                    builtin_include_dir=selected_builtin_include,
                 )
             )
         in_place_data = []
@@ -5641,7 +5921,8 @@ def build(
                     group_config=data_config,
                     object_path=temporary_root / f"in-place-data-{index}.o",
                     toolchain_profile=resolved_profile,
-                    record=record_profile,
+                    record=record_leaf_observations,
+                    builtin_include_dir=selected_builtin_include,
                 )
             )
     overlay_digest = sha256(overlay)
@@ -5688,7 +5969,7 @@ def build(
         "version": version,
         "profile": resolved_profile,
         "target": config["toolchain"]["target"],
-        "flags": config["toolchain"]["flags"],
+        "flags": [*hermetic_arguments, *primary_report_flags],
     }
     if normalized_include_dirs is not None:
         toolchain_report["include_dirs"] = normalized_include_dirs

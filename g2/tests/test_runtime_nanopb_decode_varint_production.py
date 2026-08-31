@@ -53,8 +53,8 @@ ERROR = b"varint overflow\0"
 
 LOCAL_PINS = {
     SOURCE: (
-        2_224,
-        "b1de68b98ee043bd07d1e10706166a13b13693534e382705bbad6866411fbe05",
+        2_260,
+        "234f92e37ddf7ab7716c5975c26acdc8ec619ff309dd03fb421bd18aa09e35c2",
     ),
     HEADER: (
         2_574,
@@ -70,10 +70,10 @@ TARGET_FLAGS = candidate_contract.TARGET_FLAGS
 PROFILE_PINS = {
     "apple-clang": {
         "compiler": "/usr/bin/clang",
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
         "object": (
             1_244,
-            "a9ca66e33c070766fee3c3438dfcaf09efbaaca5daa40ffc53b1b7254f31407b",
+            "073592fc3cff043f8df7956ca1c1f9ffd21afb5cbb8dafe9aa6da01826eb405e",
         ),
         "text_size": 128,
         "text_sha256": (
@@ -85,7 +85,7 @@ PROFILE_PINS = {
             (108, 49, ".L.str"),
             (112, 50, ".L.str"),
         ],
-        "runtime": 0x007C_0F28,
+        "runtime": 0x007B_2560,
         "relocated_sha256": (
             "b518bc546a90560c6f2f4dc4add6af92"
             "83e05e20cc0eef00edf7a906c2bb600a"
@@ -95,15 +95,23 @@ PROFILE_PINS = {
             "b6ed59b005b5a023ad7be561ee5f1327"
         ),
         "overlay": (
-            429_058,
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+            360_578,
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+        ),
+        "core_stage_overlay": (
+            360_578,
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+        ),
+        "core_stage_component": (
+            3_883_974,
+            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
         ),
         "component": (
-            3_952_454,
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+            3_883_974,
+            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
         ),
-        "predecessor_target": 0x007C_1608,
-        "skip_string_target": 0x007C_1614,
+        "predecessor_target": 0x007B_2C40,
+        "skip_string_target": 0x007B_2C4C,
     },
     "linux-clang": {
         "compiler": "/home/linuxbrew/.linuxbrew/bin/clang",
@@ -132,15 +140,23 @@ PROFILE_PINS = {
             "7f4c375c3ef43524d6e2681036778083"
         ),
         "overlay": (
-            212_664,
-            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+            152_912,
+            "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20",
+        ),
+        "core_stage_overlay": (
+            145_314,
+            "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19",
+        ),
+        "core_stage_component": (
+            3_668_710,
+            "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8",
         ),
         "component": (
-            3_736_060,
-            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+            3_676_308,
+            "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
         ),
-        "predecessor_target": 0x007C_1CC8,
-        "skip_string_target": 0x007C_1CD4,
+        "predecessor_target": 0x007B_3360,
+        "skip_string_target": 0x007B_336C,
     },
 }
 
@@ -193,6 +209,18 @@ class NanopbDecodeVarintProductionTests(unittest.TestCase):
             dir=ROOT / "build",
         )
         temporary = Path(cls.temporary.name)
+        production_config = json.loads(
+            OVERLAY_CONFIG.read_text(encoding="utf-8")
+        )
+        production_config["expected"] = production_config[
+            "core_stage_expected"
+        ]
+        for profile in production_config["toolchain_profiles"].values():
+            profile["expected"] = profile["core_stage_expected"]
+        cls.production_config = temporary / "core-stage-overlay.json"
+        cls.production_config.write_text(
+            json.dumps(production_config, sort_keys=True), encoding="utf-8"
+        )
         cls.objects = [temporary / "production-a.o", temporary / "production-b.o"]
         for output in cls.objects:
             subprocess.run(
@@ -447,18 +475,18 @@ class NanopbDecodeVarintProductionTests(unittest.TestCase):
         output = Path(self.temporary.name) / "component"
         report = apollo_overlay.build(
             root=ROOT,
-            config_path=OVERLAY_CONFIG,
+            config_path=self.production_config,
             output_dir=output,
             clang=self.clang,
             toolchain_profile=self.profile,
         )
         self.assertEqual(
             (report["overlay"]["size"], report["overlay"]["sha256"]),
-            self.pins["overlay"],
+            self.pins["core_stage_overlay"],
         )
         self.assertEqual(
             (report["component"]["size"], report["component"]["sha256"]),
-            self.pins["component"],
+            self.pins["core_stage_component"],
         )
         extracted = next(
             item["extraction"] for item in report["relocated_leaves"]
@@ -668,15 +696,15 @@ class NanopbDecodeVarintProductionTests(unittest.TestCase):
         self.assertEqual(
             (package["expected_size"], package["expected_sha256"]),
             (
-                4_745_526,
-                "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+                4_677_046,
+                "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
             ),
         )
         self.assertEqual(
             package["profiles"]["linux-clang"],
             {
-                "expected_size": 4_529_116,
-                "expected_sha256": "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+                "expected_size": 4_469_364,
+                "expected_sha256": "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
             },
         )
         for path, tokens in {

@@ -88,7 +88,7 @@ class MspiDriverInitTests(unittest.TestCase):
             self.assertEqual(thumb_bl_target(blob, site), target)
         self.assertEqual(int.from_bytes(blob[0x10C40:0x10C44], "little"), 0x200270D8)
         self.assertEqual((SOURCE.stat().st_size, hashlib.sha256(SOURCE.read_bytes()).hexdigest()),
-                         (5602, "65a390f2c770079f4255ea489cc02bc0f593674de7688d3fb550f201ebc8785f"))
+                         (5589, "0a0a8fe4c7d9625c91fcc19fbb7aaed83d6470d138741e2887c194b4e6cbe4ad"))
 
     def test_success_order_identifier_and_logs(self) -> None:
         self.lib.open_cfw_driver_init_fixture_identifier(0x00123456)

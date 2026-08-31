@@ -306,11 +306,11 @@ class MramClearRecordByMacTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "b10b4c971e336bc4bee55eb8fa8dec4cfb32da3191b3a5b59faf6f5bcd4aee4f",
+            "16d595dec87281d0defdb7236188623cb587e153721b0c431a762cce410ba56f",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "c70b1021e1550c17e3e3d69cc8fb959865846cb768681fb61143fb99b3f63419",
+            "8c2dc51fa5643498c52a1175dd1fd1915808e17b782b8dc2b93bd751ba236be7",
         )
 
 

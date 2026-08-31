@@ -1,5 +1,10 @@
 # G2 bootloader EasyLogger transport source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete level-dropping EasyLogger driver at
 `[0x0041B854,0x0041B862)` and its complete four-channel transfer routine at
 `[0x0041F918,0x0041F9B6)` are replaced by maintained clean-room C. These are

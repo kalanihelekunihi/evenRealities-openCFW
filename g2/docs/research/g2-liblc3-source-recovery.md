@@ -19,7 +19,13 @@ calls four public entries from [Google liblc3](https://github.com/google/liblc3)
 
 The complete five-edge caller set hashes to
 `36909f9489dab1c8f1ef70c8e1e6734fd037f6bded774d1235c2065cc37857b6`.
-The wrappers lead into the expected shared LC3/LC3plus helpers, and the
+The 22-byte `lc3_setup_encoder` wrapper is SHA-256
+`98ecf298571e96939bfefd863c514116a4e5ccf638b8023c395a465175da635d`
+and its direct call at `0x00591382` targets the full primary setup span
+`[0x0059123A,0x00591374)`. That primary is independently authenticated as
+exactly 314 bytes, SHA-256
+`04f7f722ef30afdfae612d0f6622cb4811918c8a8f4dc30b1ee99f95f42572c8`.
+The other wrappers lead into the expected shared LC3/LC3plus helpers, and the
 536-byte `lc3_encode` entry has 192 decoded instructions, 18 direct internal
 calls, and one format-loader indirect call. This is linked codec code, not an
 API-name resemblance in first-party code.
@@ -72,8 +78,9 @@ Machine-readable stock evidence is split between:
   unresolved exact-checkout status.
 
 `tools/analyze_g2_liblc3.py` authenticates those records against the official
-image and admitted snapshot. Run `make liblc3-source-closure` for the focused
-verification contract.
+image and admitted snapshot, independently binds the complete 314-byte primary
+setup span, and verifies its relationship to the 22-byte public wrapper. Run
+`make liblc3-source-closure` for the focused verification contract.
 
 ## OpenCFW boundary
 
@@ -83,6 +90,17 @@ IAR/build-profile decision, Apollo510 floating-point and performance testing,
 G2 audio-buffer ownership/integration, and interoperability validation against
 known-good LC3 peers. Those are target and hardware gates, not unresolved
 family, version, or public-source gaps.
+
+The narrower PT encoder-setup adaptation is separately production-routed under
+Apache-2.0. Its four fixed contexts occur at consecutive `0xA44` strides; the
+next address, another `0xA44` later, is an unrelated byte-state/allocation
+boundary rather than a fifth context. This authenticates a `0x1C`-byte header
+and 2,600 bytes of storage for each context.
+All supported duration/rate configurations are exhaustively host-tested, and a
+bounded entry rejects oversize geometries before writing. The runtime-provided
+configuration values remain statically unproven, but the authenticated slot
+capacity and fail-closed bound remove the former memory-safety gap. Hardware
+validation remains blocked by unavailable physical evidence.
 
 The adjacent `service_audio.c` translation unit remains first-party recovery
 work. Its direct codec edges can now terminate at this admitted source rather

@@ -68,10 +68,10 @@ class HealthDataManagerCandidateTests(unittest.TestCase):
 
     def test_source_is_pinned(self) -> None:
         data = SOURCE.read_bytes()
-        self.assertEqual(len(data), 15863)
+        self.assertEqual(len(data), 15854)
         self.assertEqual(
             hashlib.sha256(data).hexdigest(),
-            "42df69101ab924e6b9e6f2710d618ab9a5e57c8154d3b135eeffdfadf195c5fd",
+            "dc725113b1d7b985dfd0f958a884848e5757d934d9edd32e64547e836861962b",
         )
 
 

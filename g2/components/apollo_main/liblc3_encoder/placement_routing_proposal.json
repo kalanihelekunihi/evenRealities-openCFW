@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "name": "liblc3_encoder_placement_routing_proposal",
+  "target": "apollo_main",
+  "firmware_version": "2.2.6.10",
+  "mode": "fail-closed-blocked-proposal",
+  "evidence": {
+    "official_component": {
+      "path": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "size": 3523396,
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "run_base": 4423680,
+      "preamble_bytes": 32,
+      "runtime_end_exclusive": 7947044
+    },
+    "encoder_component": {
+      "path": "components/apollo_main/liblc3_encoder/component.json",
+      "sha256": "b85cbcbcb7f065ad702246e5e605a2c1619d1b33677851ab0236bdcf8b85ecc2",
+      "mode": "build-only-unplaced-relocatable",
+      "profile": "apple-clang",
+      "linked_object": {
+        "size": 145264,
+        "sha256": "5143ab77e2496cdd13de674affc22ed030a1a65e2027c4c916da72fd944cb820"
+      },
+      "sections": {
+        "text": {
+          "size": 43248,
+          "alignment": 16,
+          "sha256": "05ae1d3713f04782702a6574c59b57edf555e4aa711ecd55ac025343eac5688b"
+        },
+        "rodata": {
+          "size": 85088,
+          "alignment": 16,
+          "sha256": "607f0246aa2b873a97b7a465bb1adbad63bfe3ede19a650eee1128d21651c8a3"
+        },
+        "data": {
+          "size": 404,
+          "alignment": 8,
+          "sha256": "3b0364c5376ebca0b3e789f1c56a66137472fa1f1f32788903bd6d3a3fe8f7be"
+        }
+      },
+      "relocations": {
+        "total": 567,
+        "internal": 400,
+        "external": 167,
+        "records_sha256": "2a6ed912715590da4b85b65cfb0804b0988cfc357d6db5211230f0583a4a47aa"
+      },
+      "retained_imports": [
+        "__aeabi_memclr",
+        "__aeabi_memclr4",
+        "fabsf",
+        "floorf",
+        "fmaxf",
+        "fminf",
+        "memcpy",
+        "memmove",
+        "memset",
+        "roundf",
+        "sqrtf",
+        "truncf"
+      ]
+    },
+    "core_overlay": {
+      "path": "components/apollo_main/core_overlay/overlay.json",
+      "run_base": 4423680,
+      "preamble_bytes": 32,
+      "current_profile": "apple-clang",
+      "current_component": {
+        "size": 3885668,
+        "sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
+        "runtime_end_exclusive": 8309316
+      },
+      "current_overlay": {
+        "size": 362272,
+        "sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+      },
+      "protected_update_record": {
+        "start": 8380416,
+        "end_exclusive": 8380432
+      },
+      "append_headroom": {
+        "start": 8309316,
+        "end_exclusive": 8380416,
+        "bytes": 71100
+      },
+      "pt_protocol_reserved": {
+        "start": 5697912,
+        "end_exclusive": 5733436,
+        "capacity": 35524,
+        "loadable_bytes": 22696,
+        "reserved_padding_bytes": 12828
+      },
+      "liblc3_ltpf": {
+        "config": "components/apollo_main/liblc3_ltpf/overlay.json",
+        "patch_site": 5837916,
+        "patched_target": 4478564,
+        "payload_size": 7576,
+        "payload_sha256": "5861f72d7bb2bd1be590fc7fb3f660a075b229f7f92f80079d3262c93b6cda98",
+        "sections": {
+          "text": {
+            "start": 4478564,
+            "capacity": 5626,
+            "used": 5596,
+            "unused_but_reserved": 30
+          },
+          "rodata": {
+            "start": 5228104,
+            "capacity": 4414,
+            "used": 1980,
+            "unused_but_reserved": 2434
+          }
+        }
+      }
+    },
+    "service_audio": {
+      "object_start": 5744896,
+      "object_end_exclusive": 5747780,
+      "object_size": 2884,
+      "object_sha256": "01864fb4fc778a70c3c50b7999c8a43b86d4f8763479e8cf5e47d7a529207193",
+      "call_sites": [
+        {
+          "caller": "service_audio_lc3_encoder_setup",
+          "address": 5744952,
+          "expected_hex": "16f01cfd",
+          "expected_sha256": "012904419dda6de9a9712f82d8187af6ffd90f4c3683c8c364dcd1d40c1d8a59",
+          "stock_symbol": "lc3_setup_encoder",
+          "stock_target": 5837684
+        },
+        {
+          "caller": "SVC_Lc3EncodeMono",
+          "address": 5745090,
+          "expected_hex": "16f04ffa",
+          "expected_sha256": "5fd1c5faab6d621433fda432f72108793ec3682147bd9f9800deecb22931db07",
+          "stock_symbol": "lc3_frame_samples",
+          "stock_target": 5836388
+        },
+        {
+          "caller": "SVC_Lc3EncodeMono",
+          "address": 5745100,
+          "expected_hex": "16f0d4fa",
+          "expected_sha256": "942ad6af4a142e04a82775eb1a80ce75492fd0c490e09d64d3013d923fd6b1d4",
+          "stock_symbol": "lc3_frame_bytes",
+          "stock_target": 5836664
+        },
+        {
+          "caller": "SVC_Lc3EncodeMono",
+          "address": 5745310,
+          "expected_hex": "16f069fc",
+          "expected_sha256": "470e468c1eefcddac5529b5fb0b656792260e626f54d9172202c60bbd0941c03",
+          "stock_symbol": "lc3_setup_encoder",
+          "stock_target": 5837684
+        },
+        {
+          "caller": "SVC_Lc3EncodeMono",
+          "address": 5745428,
+          "expected_hex": "16f039fc",
+          "expected_sha256": "9572e42ee87dcd7d323efe75eca6b7738edf670752d446caa3b596b4457858b5",
+          "stock_symbol": "lc3_encode",
+          "stock_target": 5837706
+        }
+      ],
+      "provider_entries": [
+        "open_cfw_liblc3_encoder_provider_plan",
+        "open_cfw_liblc3_encoder_provider_setup",
+        "open_cfw_liblc3_encoder_provider_encode",
+        "open_cfw_liblc3_encoder_provider_close"
+      ],
+      "direct_patch_mapping": null,
+      "reason": "The five stock ABI calls do not map one-for-one to the bounded provider ABI; service-owned provider/config/storage lifetime adaptation is absent."
+    }
+  },
+  "candidate_layout": {
+    "basis": "optimistic append-only layout after the current Apple core component",
+    "text_start": 8309328,
+    "text_end_exclusive": 8352576,
+    "rodata_start": 8352576,
+    "rodata_end_exclusive": 8437664,
+    "data_start": 8437664,
+    "data_end_exclusive": 8438068,
+    "span_from_current_end": 128752,
+    "overflow_past_update_record": 57652,
+    "text_rodata_overflow_without_data": 57248,
+    "branch_encoding": "Thumb-2 BL",
+    "branch_range_bytes": 16777216,
+    "all_stock_sites_can_reach_candidate_text": true,
+    "placement_authorized": false
+  },
+  "capacity_proof": {
+    "current_append_headroom": 71100,
+    "required_aligned_span": 128752,
+    "append_only_shortfall": 57652,
+    "existing_provider_unused_but_reserved": {
+      "pt_protocol": 12828,
+      "liblc3_ltpf": 2464
+    },
+    "optimistic_no_move_capacity_including_all_reserved_slack": 86392,
+    "optimistic_no_move_shortfall": 42360,
+    "liblc3_ltpf_total_capacity_reclaim_requires_removal": 10040,
+    "optimistic_capacity_including_pt_slack_and_removed_liblc3_ltpf": 93968,
+    "optimistic_shortfall_even_after_liblc3_ltpf_removal": 34784,
+    "unauthenticated_gap_capacity": 0
+  },
+  "relocation_contract": {
+    "final_section_addresses_assigned": false,
+    "runtime_import_bindings": {},
+    "all_567_relocations_must_be_applied_after_final_placement": true,
+    "all_12_import_symbols_must_have_authenticated_abi_compatible_targets": true,
+    "writable_data_runtime_policy_proven": false,
+    "raw_section_bins_are_not_loadable": true
+  },
+  "ltpf_reconciliation": {
+    "full_encoder_contains_upstream_ltpf_analysis": true,
+    "existing_overlay_patch_remains_inside_stock_lc3_encode": true,
+    "existing_caves_must_remain_reserved_without_an_explicit_supersession_plan": true,
+    "removing_existing_liblc3_ltpf_alone_cannot_close_capacity_shortfall": true,
+    "supersession_authorized": false
+  },
+  "outcome": {
+    "production_routing_feasible_without_moving_other_components": false,
+    "software_blocked": true,
+    "hardware_operations": false,
+    "blockers": [
+      "The current append interval is 57,652 bytes smaller than the aligned encoder image.",
+      "Even reclaiming all existing liblc3_ltpf capacity and all reserved PT padding leaves a 34,784-byte aggregate shortfall.",
+      "No authenticated addresses or ABI contracts bind the 12 retained runtime imports used by 167 relocations.",
+      "The 404-byte SHF_WRITE pointer-table section has no authenticated load/run policy.",
+      "The recovered service_audio stock ABI has no bounded-provider adapter or direct one-for-one patch mapping.",
+      "The complete 567-relocation final link and OTA integration layer does not yet exist."
+    ]
+  }
+}

@@ -58,7 +58,7 @@ PINS = {
     LTPF_ADMISSION: (2_013, "b90e801d1900212793ae0e17c27f8bda257e04d6c9376526e7781fa1f73e61dd"),
     OVERLAY_SOURCE: (2_390, "d0e51e059a9e965053f271902e29ee19ae527a312bd37cb763f9b7360eb138f3"),
     OVERLAY_CONFIG: (2_767, "1b351b8d55f01867916875e0b9241dc7f8cd4025f35fd5f962e029c1f12874bd"),
-    OVERLAY_BUILDER: (23_575, "972045063944d06b1916ebe93222b818a167dc8701ef10f89f2e2d337d22a439"),
+    OVERLAY_BUILDER: (24_201, "2b9ba1000e0018d1b9cf0283d477e4d34f68d3bd53d4eb49418538917681554f"),
 }
 
 STATIC_SELECTED = {ROOT, 0x00438770, 0x004387B0, 0x00438924, 0x00438EF0, 0x00439710}
@@ -341,7 +341,7 @@ def run_audit() -> dict[str, Any]:
         "production_capable_source":{"available":True,"provider_entry":"open_cfw_liblc3_ltpf_analyse_bounded","dispatch_slots":7,"historical_individual_bodies_routed":False},
         "production_routed":True,
         "production_route":{"callsite":"0x0059145C","profiles":expected_profiles,"unresolved_runtime_symbols":0,"historical_individual_bodies_routed":False},
-        "production_blocker":"no software placement/link blocker for the bounded LTPF analysis route; device qualification is deferred by project direction",
+        "production_blocker":"no software placement/link blocker for the bounded LTPF analysis route; device qualification is blocked by unavailable physical evidence",
         "read_only":True,"hardware_operations":False,
     }
 

@@ -105,7 +105,9 @@ def analyze(*, enforce_expected=True):
         "residual_digest": sha256(json.dumps(residual_rows, sort_keys=True, separators=(",", ":")).encode())}
     if enforce_expected:
         for key, value in EXPECTED.items(): require(metrics[key] == value, f"terminal {key} changed: {metrics[key]!r} != {value!r}")
-    return {"schema_version": 1, "component": "G2 touch terminal wrapper admission batch 20",
+    return {"schema_version": 1, "authoritative_batch": 20,
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "component": "G2 touch terminal wrapper admission batch 20",
         "analysis_mode": "offline authenticated flow with typed EULA provider seam; host and Cortex-M0+ compile; no hardware/MMIO execution",
         "metrics": metrics, "rows": rows, "residual_rows": residual_rows,
         "source": {"path": str(SOURCE.relative_to(ROOT)), "license": "MIT", "sha256": sha256(SOURCE.read_bytes()), "target_closure_object_bytes": target_bytes},

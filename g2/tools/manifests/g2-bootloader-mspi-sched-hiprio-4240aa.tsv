@@ -8,4 +8,4 @@ literal	mspi0_base	0x00424bd8	0x00424bdc	4	-	authenticated_literal	Apollo510 CMS
 abi	state_fields	0x00000004	0x00000844	-	-	authenticated_layout	AmbiqSuite 5.1.0 am_hal_mspi_state_t	BSD-3-Clause	module +0x4, transaction interrupt +0x24, high-priority flag +0x83c, pending count +0x840
 abi	mspi_interrupt_registers	0x40060200	0x4006020c	-	-	authenticated_layout	Apollo510 CMSIS MSPI register block	Apache-2.0	INTEN +0x200, INTCLR +0x208, DMACMP bit 0x40
 successor	mspi_device_configure	0x00424120	0x0042488e	1902	3b95c5af6c3c2140cc4e1522a1f284ae31825e4e35ae6c2427e0edba41774818	next_sequential_frontier	AmbiqSuite 5.1.0 mspi_device_configure	BSD-3-Clause	not yet admitted
-hardware_validation	deferred by project direction	-	-	0	-	software_only	future authorized G2 qualification	project policy	future PRIMASK, CQ, DMA, MMIO, interrupt, concurrency, and cold-boot evidence remains required
+hardware_validation	blocked by unavailable physical evidence	-	-	0	-	software_only	future authorized G2 qualification	project policy	future PRIMASK, CQ, DMA, MMIO, interrupt, concurrency, and cold-boot evidence remains required

@@ -103,7 +103,7 @@ class BootloaderMspiCqInitBoundaryTests(unittest.TestCase):
         report = json.loads(completed.stdout)
         self.assertEqual(
             report["status"],
-            "implemented-in-source / hardware-validation-deferred-by-project-direction",
+            "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         )
         self.assertEqual(report["identity"]["function"], "mspi_cq_init")
         self.assertEqual(report["identity"]["provider"], "am_hal_cmdq_init")
@@ -117,7 +117,7 @@ class BootloaderMspiCqInitBoundaryTests(unittest.TestCase):
         self.assertEqual(
             report["production"]["source_owned_bytes"]
             + report["production"]["retained_official_bytes"],
-            147296,
+            147350,
         )
         self.assertEqual(report["production"]["next_frontier"], 0x00423F54)
         self.assertEqual(report["production"]["local_successor"], {
@@ -128,7 +128,7 @@ class BootloaderMspiCqInitBoundaryTests(unittest.TestCase):
         self.assertTrue(report["production"]["next_identity"])
         self.assertEqual(
             report["hardware_validation"],
-            "deferred by project direction",
+            "blocked by unavailable physical evidence",
         )
         self.assertIn("authorized G2 qualification", report["hardware_gate"]["required_future_evidence"])
         self.assertEqual(report["hardware_operations"], [])

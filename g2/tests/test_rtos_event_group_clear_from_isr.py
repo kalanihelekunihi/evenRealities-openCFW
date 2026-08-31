@@ -130,11 +130,11 @@ class RtosEventGroupClearFromIsrTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "1e858111aff7b7bd87a8fa985c2c84d05963a861b0d271f5be5a9191aeb44787",
+            "10a423c747bdb127a421a86d2c3851c62da489cb0308dcbc6645bca9219cda3e",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "5b6300847f484a0ed5623d845ae318c12d858c24e02ce7ae0c44d3d30e95b0df",
+            "1741971c4713d1b932ec28b569093d7891e634fa1d719438ac2dd54d84caa756",
         )
 
 

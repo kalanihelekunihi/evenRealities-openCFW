@@ -11,10 +11,10 @@
     "software_blocker": null
   },
   "hardware_operations": [],
-  "hardware_validation": "deferred by project direction",
+  "hardware_validation": "blocked by unavailable physical evidence",
   "production": {
     "apollo_bootloader": {
-      "component_sha256": "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0",
+      "component_sha256": "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
       "component_size": 163840,
       "placement_kind": "authenticated_generated_nop_caves",
       "records": [
@@ -42,25 +42,25 @@
       "toolchain_profile": "apple-clang"
     },
     "apollo_main": {
-      "component_sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
-      "component_size": 3952454,
+      "component_sha256": "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
+      "component_size": 3883974,
       "placement_kind": "canonical_appended_overlay_leaves",
       "records": [
         {
-          "entry_replacement_hex": "29f3e7ba00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
+          "entry_replacement_hex": "18f327bd00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
           "function": "open_cfw_clkmgr_hfrc2_uq15_divider",
           "relocations": 0,
-          "source_address": "0x007FCEBC",
+          "source_address": "0x007EC33C",
           "source_bytes": 88,
           "source_sha256": "0113dce6f97c06a6bf0979cb237e245849e359377cee6ec44ab3e3b7bcf8b0e0",
           "stock_bytes": 42,
           "stock_entry": "0x004D38EA"
         },
         {
-          "entry_replacement_hex": "29f3feba00bf00bf00bf",
+          "entry_replacement_hex": "18f33ebd00bf00bf00bf",
           "function": "open_cfw_clkmgr_hfrc_integer_divider",
           "relocations": 0,
-          "source_address": "0x007FCF14",
+          "source_address": "0x007EC394",
           "source_bytes": 18,
           "source_sha256": "ef3f0a171a8b56b19881704872749380f682216aa09bd656a34deabb60d4c5d3",
           "stock_bytes": 10,
@@ -71,7 +71,7 @@
     },
     "linux_clang": {
       "apollo_bootloader": {
-        "component_sha256": "efef1a9b039548ab9332651921e8a7864ce8df205bfe22c9ae6e13c0c81cb635",
+        "component_sha256": "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e",
         "component_size": 163824,
         "placement_kind": "authenticated_generated_nop_caves",
         "records": [
@@ -99,25 +99,25 @@
         "toolchain_profile": "linux-clang"
       },
       "apollo_main": {
-        "component_sha256": "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
-        "component_size": 3736060,
+        "component_sha256": "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
+        "component_size": 3676308,
         "placement_kind": "canonical_appended_overlay_leaves",
         "records": [
           {
-            "entry_replacement_hex": "f2f26bbd00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
+            "entry_replacement_hex": "e4f2b7b800bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
             "function": "open_cfw_clkmgr_hfrc2_uq15_divider",
             "relocations": 0,
-            "source_address": "0x007C63C4",
+            "source_address": "0x007B7A5C",
             "source_bytes": 88,
             "source_sha256": "0113dce6f97c06a6bf0979cb237e245849e359377cee6ec44ab3e3b7bcf8b0e0",
             "stock_bytes": 42,
             "stock_entry": "0x004D38EA"
           },
           {
-            "entry_replacement_hex": "f2f282bd00bf00bf00bf",
+            "entry_replacement_hex": "e4f2ceb800bf00bf00bf",
             "function": "open_cfw_clkmgr_hfrc_integer_divider",
             "relocations": 0,
-            "source_address": "0x007C641C",
+            "source_address": "0x007B7AB4",
             "source_bytes": 18,
             "source_sha256": "ef3f0a171a8b56b19881704872749380f682216aa09bd656a34deabb60d4c5d3",
             "stock_bytes": 10,
@@ -128,14 +128,14 @@
       },
       "package": {
         "manifest_providers_routed": 2,
-        "sha256": "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
-        "size": 4529116
+        "sha256": "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
+        "size": 4469364
       }
     },
     "package": {
       "manifest_providers_routed": 2,
-      "sha256": "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
-      "size": 4745526
+      "sha256": "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
+      "size": 4677046
     }
   },
   "provider_evidence": {

@@ -14,6 +14,10 @@ except ImportError:
 ROOT=Path(__file__).resolve().parents[1]
 COMPONENT=ROOT/"components/apollo_main/core_overlay"
 CORPUS=ROOT/"research/corpus/apollo-main/ghidra/pt-protocol"
+AUTHENTICATED_DECOMP_INDEX=(
+ ROOT/"research/corpus/apollo-main/ghidra/decomp/functions.jsonl")
+AUTHENTICATED_DECOMP_BUNDLE=(
+ ROOT/"research/corpus/apollo-main/ghidra/decomp/bundles/apollo-decomp-02.c")
 OUTPUT=ROOT/"tools/manifests/g2-pt-protocol-source-summary.json"
 CORE_CONFIG=COMPONENT/"overlay.json"
 PT_BUILDER=ROOT/"components/apollo_main/pt_protocol/build_component.py"
@@ -26,7 +30,9 @@ SOURCES=[COMPONENT/name for name in (
  "pt_protocol_handlers_services.c","pt_protocol_handlers_audio.c",
  "pt_protocol_handlers_transfer.c","pt_protocol_service.c",
  "pt_protocol_platform_adapter.c","pt_protocol_production_entry.c",
- "pt_protocol_board_backend.c","pt_protocol_board_leaf_candidates.c")]
+ "pt_protocol_board_backend.c","pt_protocol_board_leaf_candidates.c",
+ "pt_protocol_lc3_setup.c")]
+LC3_SETUP_SOURCE=COMPONENT/"pt_protocol_lc3_setup.c"
 HANDLERS=[p for p in SOURCES if "handlers_" in p.name]
 HEADERS=sorted(COMPONENT.glob("pt_protocol*.h"))
 STOCK_BODY_BYTES=32866
@@ -34,6 +40,83 @@ CORPUS_DIGESTS={
  "HARVEST.json":"acd2966b7aaad1c036c4b96f513b3fafd10057850b31926010567d30de041eec",
  "command-map.tsv":"c4e15781296be7ec8309589c16ada131045e91af25fb4f20df2f3083fe5cb4af",
  "functions.jsonl":"1ad1d5f642570530887920a913934b4cc804254ff9d806445687d47d6ef2aaa5",
+}
+OFFICIAL_COMPONENT_SIZE=3523396
+OFFICIAL_COMPONENT_SHA256=(
+ "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863")
+OFFICIAL_RUN_BASE=0x00438000
+OFFICIAL_PREAMBLE_BYTES=32
+AUTHENTICATED_DECOMP_INDEX_SHA256=(
+ "9fd9c1c34e17abb977f2ccb32a931d9b96743db2db10707de19bf9ea6ae42662")
+LENS_SYNC_TRANSPORT_ABI=(
+ "int32_t (*)(uint16_t, const void *, uint32_t, uint32_t, uint8_t, "
+ "uint8_t, uint32_t)")
+LENS_SYNC_TRANSPORT_EVIDENCE={
+ "stock_wrapper_runtime_address":0x00464C36,
+ "stock_wrapper_size":132,
+ "stock_wrapper_sha256":(
+  "dcd1d05418ab3f4e6a90d23398f03b8cba1ed7632e480ac7563a358179009753"),
+ "stock_transport_runtime_address":0x00464772,
+ "stock_transport_thumb_pointer":0x00464773,
+ "stock_transport_size":956,
+ "stock_transport_sha256":(
+  "6cb194e4428db0c9c66747ffaa0c77daf605f07c1e4face23c68287d681f34aa"),
+ "stock_wrapper_transport_callsite":0x00464CB2,
+ "stock_trailing_arguments":[5,2,0],
+ "stock_wrapper_signature":(
+  "void FUN_00464c36(undefined2 param_1,undefined4 param_2,undefined2 "
+  "param_3,undefined4 param_4);"),
+ "stock_transport_signature":(
+  "undefined4 FUN_00464772(undefined2 param_1,int param_2,uint param_3,"
+  "undefined4 param_4,undefined1 param_5,byte param_6,undefined4 param_7);"),
+ "stock_wrapper_decompilation_sha256":(
+  "41d3c036d53486c1e128740012f81b5157683f0e4f67f321932a100d59b541aa"),
+ "stock_wrapper_call_expression":(
+  "FUN_00464772(param_1,param_2,param_3,param_4,5,2,0);"),
+}
+LC3_SETUP_ABI="void *(*)(int, int, int, void *)"
+LC3_SETUP_BOUNDED_ABI="void *(*)(int, int, int, void *, size_t)"
+LC3_SETUP_EVIDENCE={
+ "stock_primary_runtime_address":0x0059123A,
+ "stock_primary_size":314,
+ "stock_primary_sha256":(
+  "04f7f722ef30afdfae612d0f6622cb4811918c8a8f4dc30b1ee99f95f42572c8"),
+ "stock_runtime_address":0x00591374,
+ "stock_thumb_pointer":0x00591375,
+ "stock_size":22,
+ "stock_sha256":(
+  "98ecf298571e96939bfefd863c514116a4e5ccf638b8023c395a465175da635d"),
+ "stock_wrapper_primary_callsite":0x00591382,
+ "stock_service_setup_runtime_address":0x0057A926,
+ "stock_service_setup_size":26,
+ "stock_service_setup_sha256":(
+  "043e57c0075b4e4c1043d93fe1c9cb7fb3abe91ba6ed24af5160a198f7eb3851"),
+ "stock_service_setup_callsites":[0x0054F4B6,0x0058F7A2,0x0058F7A8,0x0058F85E],
+ "fixed_context_starts":[
+  0x20106A7C,0x201074C0,0x20107F04,0x20108948],
+ "next_allocation_start":0x2010938C,
+ "fixed_context_slot_bytes":0xA44,
+ "fixed_context_header_bytes":0x1C,
+ "fixed_context_storage_bytes":2600,
+ "stock_context_pointer_table_runtime_address":0x0058F880,
+ "stock_context_pointer_table_size":16,
+ "stock_context_pointer_table_sha256":(
+  "fffba463d4f37a1a2f9f2afa67dedf142206dbf5459bf50f7923918aad8c6410"),
+ "stock_next_context_literal_cells":[0x0054F9A0,0x0057B3E4],
+ "stock_next_slot_literal_cell":0x0058A3A8,
+ "configuration_initialization":"runtime-provided; statically unproven",
+ "configuration_safety":"computed size must fit authenticated 2600-byte storage",
+ "upstream":"Google/liblc3",
+ "upstream_source":"third_party/liblc3/src/lc3.c",
+ "upstream_commit":"96a3af0beb5487aca3b98a4b992a539a1f6d80d1",
+ "upstream_license":"Apache-2.0",
+ "upstream_license_path":"third_party/liblc3/LICENSE",
+ "adapted_source":"components/apollo_main/core_overlay/pt_protocol_lc3_setup.c",
+ "upstream_copyright":"Copyright 2022 Google LLC",
+ "upstream_license_sha256":(
+  "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"),
+ "production_source_routed":True,
+ "routing":"source_local_authenticated_layout",
 }
 BOARD_OPERATIONS={
  "OPEN_CFW_PT_OP_SET_BOX_DETECTED","OPEN_CFW_PT_OP_CODEC_DELAY",
@@ -92,11 +175,7 @@ BOARD_SOURCE_OVERLAY_TARGETS={
  0x0045A568:"open_cfw_lens_side",
  0x004A7820:"open_cfw_kvdb_onboarding_config_update_and_persist",
  0x0046D584:"open_cfw_font_manager_xip_name",
- 0x004A5B90:"open_cfw_imu_get_latest_complete_sample",
- 0x004A6456:"open_cfw_imu_read_who_am_i",
- 0x004A64C8:"open_cfw_mag_read_who_am_i",
  0x005135E0:"open_cfw_opt3007_assign_register_map",
- 0x004A5D38:"open_cfw_imu_get_orientation_vector",
  0x004A6BCE:"open_cfw_sensor_hub_calibration_init",
  0x005099F8:"open_cfw_nvdb_sensor_caldata_ag_read",
  0x004AFC10:"open_cfw_nvdb_sys_dt_reset_aging",
@@ -119,6 +198,10 @@ BOARD_SOURCE_OVERLAY_TARGETS={
  0x0058FA6C:"open_cfw_nvdb_buzzer_update",
 }
 BOARD_RETAINED_PROVIDERS={
+ 0x004A5B90:"imu_get_latest_complete_sample",
+ 0x004A5D38:"imu_get_orientation_vector",
+ 0x004A6456:"imu_read_who_am_i",
+ 0x004A64C8:"mag_read_who_am_i",
  0x00502C88:"DRV_BuzzerStart",
  0x00502D4C:"DRV_BuzzerStop",
  0x005130A6:"input_msg_send_id3",
@@ -208,31 +291,34 @@ BOARD_LEAF_CANDIDATES={
 # hidden behind the source-owned top-level leaf count.  Thumb callable values
 # retain bit zero here; ownership is resolved against the even overlay entry.
 BOARD_LEAF_CALLABLE_BINDINGS={
- "OPEN_CFW_PT_DISPLAY_POSTPROCESS_SEND":("void (*)(uint32_t, uint32_t, uint32_t, uint32_t)",0x00464C37),
+ "OPEN_CFW_PT_INPUT_LOG_FAILURE":("unsigned int (*)(const char *, ...)",0x004733EF),
+ "OPEN_CFW_PT_AUDIO_STRUCTURED_LOG":("void (*)(uint32_t, const char *, const char *, const char *, uint32_t, const char *, ...)",0x0043D575),
+ "OPEN_CFW_PT_AUDIO_TRACE_LOG":(
+  "void (*)(uint32_t, const char *, ...)",0x0043CE9F),
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_REFRESH":("void (*)(void)",0x004D9A85),
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_ONBOARDING":("int (*)(uint8_t, const uint8_t *)",0x004A7821),
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_REMOVE":("int (*)(const void *)",0x0047498D),
  "OPEN_CFW_PT_MRAM_DELETE_ALL_RECORDS":("void (*)(void)",0x0047ACF9),
  "OPEN_CFW_PT_PRIVACY_CLEAR":("void (*)(void)",0x004D28B1),
- "OPEN_CFW_PT_BUZZER_PREPARE":("void (*)(void)",0x00502AC5),
- "OPEN_CFW_PT_BUZZER_APPLY":("void (*)(uint32_t, uint8_t)",0x005027FD),
- "OPEN_CFW_PT_BUZZER_DISABLE":("void (*)(uint32_t)",0x0050280B),
+ "OPEN_CFW_PT_BUZZER_PWM_UPDATE":(
+  "void (*)(uint32_t, uint8_t)",0x00502791),
+ "OPEN_CFW_PT_BUZZER_PWM_START":("void (*)(void)",0x0050276F),
+ "OPEN_CFW_PT_BUZZER_PWM_STOP":("void (*)(void)",0x0050277F),
+ "OPEN_CFW_PT_BUZZER_TIMER_STOP":("int (*)(void *)",0x004494D9),
  "OPEN_CFW_PT_HARDWARE_IDENTIFIER_READ":("void (*)(uint32_t, uint32_t *)",0x00480D73),
- "OPEN_CFW_PT_HARDWARE_IDENTIFIER_2_READ":("int32_t (*)(const void *, uint32_t, uint8_t *, uint32_t)",0x0055FC39),
  "OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_INITIALIZE":("int (*)(void)",0x0046FE39),
  "OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_PREPARE":("void (*)(void)",0x00470F69),
  "OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_READ":("int (*)(uint32_t *)",0x00470029),
  "OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_FINISH":("void (*)(void)",0x00470E91),
  "OPEN_CFW_PT_MSPI_CONTROL":("int32_t (*)(void *, uint32_t, uint32_t)",0x004C26E1),
- "OPEN_CFW_PT_CHARGER_OPEN":("void *(*)(const void *, uint32_t)",0x0055EFF1),
- "OPEN_CFW_PT_CHARGER_DISABLE":("int32_t (*)(void *, uint32_t)",0x0055F0D9),
- "OPEN_CFW_PT_CHARGER_ENABLE":("int32_t (*)(void *, uint32_t)",0x0055F07B),
- "OPEN_CFW_PT_UART_WRITE":("int (*)(const uint8_t *, uint32_t, uint32_t)",0x00584C99),
+ "OPEN_CFW_PT_UART_TICK_GET":("uint32_t (*)(void)",0x004490CD),
+ "OPEN_CFW_PT_UART_SEMAPHORE_ACQUIRE":("int (*)(void *, uint32_t)",0x0044994F),
+ "OPEN_CFW_PT_UART_DELAY_US":("void (*)(uint32_t)",0x00491103),
  "OPEN_CFW_PT_CODEC_ROUTE_SET":("int (*)(uint32_t, uint8_t)",0x00480FD7),
  "OPEN_CFW_PT_PCM_ROUTE":("void (*)(uint32_t)",0x0057B12D),
- "OPEN_CFW_PT_AUDIO_RELEASE":("void (*)(void *)",0x0057A927),
  "OPEN_CFW_PT_DISPLAY_REINITIALIZE":("void (*)(void)",0x0047381F),
  "OPEN_CFW_PT_DISPLAY_APPLY":("void (*)(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)",0x00474067),
+ "OPEN_CFW_PT_LENS_SYNC_TRANSPORT":(LENS_SYNC_TRANSPORT_ABI,0x00464773),
  "OPEN_CFW_PT_MUTEX_ACQUIRE":("int (*)(void *, uint32_t)",0x004497B7),
  "OPEN_CFW_PT_MUTEX_RELEASE":("int (*)(void *)",0x0044981D),
  "OPEN_CFW_PT_QUEUE_SEND":("int (*)(void *, const void *, uint32_t, uint32_t)",0x00449ABF),
@@ -251,6 +337,30 @@ BOARD_LEAF_CALLABLE_BINDINGS={
  "OPEN_CFW_PT_DELAY_TICKS":("int (*)(uint32_t)",0x00449377),
 }
 BOARD_LEAF_LOCAL_SOURCE_CALLABLES={
+ "OPEN_CFW_PT_LC3_SETUP_ENCODER":(
+  LC3_SETUP_BOUNDED_ABI,"open_cfw_pt_lc3_setup_encoder_bounded"),
+ "OPEN_CFW_PT_AUDIO_LOG_FILTER":(
+  "uint32_t (*)(void)","open_cfw_pt_audio_log_filter"),
+ "OPEN_CFW_PT_DISPLAY_POSTPROCESS_SEND":(
+  "void (*)(uint32_t, uint32_t, uint32_t, uint32_t)",
+  "open_cfw_pt_display_postprocess_send"),
+ "OPEN_CFW_PT_UART_WRITE":(
+  "int (*)(const uint8_t *, uint32_t, uint32_t)",
+  "open_cfw_pt_uart_write"),
+ "OPEN_CFW_PT_BUZZER_APPLY":(
+  "void (*)(uint32_t, uint8_t)","open_cfw_pt_buzzer_apply"),
+ "OPEN_CFW_PT_BUZZER_DISABLE":(
+  "void (*)(uint32_t)","open_cfw_pt_buzzer_disable"),
+ "OPEN_CFW_PT_BUZZER_PREPARE":(
+  "void (*)(void)","open_cfw_pt_buzzer_prepare"),
+ "OPEN_CFW_PT_AUDIO_ENCODER_SETUP":(
+  "void (*)(void *)","open_cfw_pt_audio_encoder_setup"),
+ "OPEN_CFW_PT_UART_TRANSFER_ABORT":(
+  "void (*)(void)","open_cfw_pt_uart_transfer_abort"),
+ "OPEN_CFW_PT_UART_TRANSFER_START":(
+  "void (*)(const void *, uint32_t)","open_cfw_pt_uart_transfer_start"),
+ "OPEN_CFW_PT_UART_STATUS_GET":(
+  "int (*)(void *, uint32_t *)","open_cfw_pt_uart_status_get"),
  "OPEN_CFW_PT_SYSTEM_RESET_INNER":(
   "void (*)(void)","open_cfw_pt_system_reset_inner"),
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_STATE_0":(
@@ -264,9 +374,9 @@ BOARD_LEAF_LOCAL_SOURCE_CALLABLES={
  "OPEN_CFW_PT_TIME_TO_SECONDS":(
   "int32_t (*)(const void *)","open_cfw_pt_time_to_seconds"),
  "OPEN_CFW_PT_TIME_OUTPUT":(
-  "void (*)(int32_t, void *)","open_cfw_pt_time_output"),
+  "void (*)(uint32_t, void *)","open_cfw_pt_time_output"),
  "OPEN_CFW_PT_DISPLAY_BUFFER_WRITE":(
-  "void (*)(void *, uintptr_t, uint32_t)",
+  "uint32_t (*)(void *, uintptr_t, uint32_t)",
   "open_cfw_pt_display_buffer_write"),
  "OPEN_CFW_PT_LENS_SYNC_ALLOCATE":(
   "void *(*)(uint32_t)","open_cfw_pt_lens_sync_allocate"),
@@ -280,12 +390,12 @@ BOARD_LEAF_LOCAL_SOURCE_CALLABLES={
   "void (*)(uint8_t, uint16_t, char *, uint32_t)",
   "open_cfw_pt_audio_path_format_provider"),
  "OPEN_CFW_PT_AUDIO_REGISTER":(
-  "void (*)(uint32_t, uint32_t, const void *)",
+  "int (*)(uint32_t, uint8_t, const void *)",
   "open_cfw_pt_audio_register"),
  "OPEN_CFW_PT_AUDIO_REMOVE":(
-  "int (*)(uint32_t, uint32_t)","open_cfw_pt_audio_remove"),
+  "int (*)(uint32_t, uint8_t)","open_cfw_pt_audio_remove"),
  "OPEN_CFW_PT_AUDIO_UNREGISTER":(
-  "void (*)(uint32_t)","open_cfw_pt_audio_unregister"),
+  "void (*)(uint8_t)","open_cfw_pt_audio_unregister"),
  "OPEN_CFW_PT_AMBIENT_ASSIGN":(
   "void (*)(void *, uint32_t)","open_cfw_pt_ambient_assign"),
  "OPEN_CFW_PT_AMBIENT_SAMPLE":(
@@ -302,8 +412,19 @@ BOARD_LEAF_LOCAL_SOURCE_CALLABLES={
   "void (*)(void)","open_cfw_pt_font_xip_release"),
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_COMMIT":(
   "void (*)(void)","open_cfw_pt_display_postprocess_commit"),
+ "OPEN_CFW_PT_CHARGER_OPEN":(
+  "void *(*)(const void *, uint8_t)","open_cfw_pt_charger_open"),
+ "OPEN_CFW_PT_CHARGER_DISABLE":(
+  "int32_t (*)(void *, uint32_t)","open_cfw_pt_charger_disable"),
+ "OPEN_CFW_PT_CHARGER_ENABLE":(
+  "int32_t (*)(void *, uint32_t)","open_cfw_pt_charger_enable"),
+ "OPEN_CFW_PT_HARDWARE_IDENTIFIER_2_READ":(
+  "int32_t (*)(const void *, uint32_t, uint8_t *, uint32_t)",
+  "open_cfw_pt_hardware_identifier_2_read"),
 }
 BOARD_LEAF_SOURCE_OVERLAY_TARGETS={
+ "OPEN_CFW_PT_INPUT_LOG_FAILURE":"open_cfw_log_format_dispatch",
+ "OPEN_CFW_PT_AUDIO_STRUCTURED_LOG":"open_cfw_easylogger_output",
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_REFRESH":"open_cfw_service_kvdb_invalidate_magic",
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_ONBOARDING":"open_cfw_kvdb_onboarding_config_update_and_persist",
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_REMOVE":"open_cfw_file_remove",
@@ -327,12 +448,73 @@ BOARD_LEAF_SOURCE_OVERLAY_TARGETS={
  "OPEN_CFW_PT_LENS_SIDE":"open_cfw_lens_side",
  "OPEN_CFW_PT_AUDIO_CODEC_ROUTE":"open_cfw_gpio_pinconfig",
  "OPEN_CFW_PT_DELAY_TICKS":"open_cfw_cmsis_delay",
+ "OPEN_CFW_PT_UART_TICK_GET":"open_cfw_cmsis_kernel_get_tick_count",
+ "OPEN_CFW_PT_UART_SEMAPHORE_ACQUIRE":"open_cfw_cmsis_semaphore_acquire",
+ "OPEN_CFW_PT_UART_DELAY_US":"open_cfw_delay_us_passthrough",
+ "OPEN_CFW_PT_BUZZER_TIMER_STOP":"open_cfw_cmsis_timer_stop",
 }
 
 # Fixed data is a separate supported ABI from the 53 top-level board-table
 # entries.  Pinning the cast, address, and category prevents the leaf layer from
 # silently acquiring a new SRAM, XIP, callback, or MMIO dependency.
 BOARD_LEAF_DATA_BINDINGS={
+ "OPEN_CFW_PT_AUDIO_LOG_FILTER_WORD":(
+  "const volatile uint8_t *",0x20004543,"runtime_sram_data"),
+ "OPEN_CFW_PT_AUDIO_LOG_FILE":("const char *",0x00706FEC,"immutable_flash_data"),
+ "OPEN_CFW_PT_AUDIO_LOG_FUNCTION":("const char *",0x007899D0,"immutable_flash_data"),
+ "OPEN_CFW_PT_AUDIO_LOG_MESSAGE":("const char *",0x007667B0,"immutable_flash_data"),
+ "OPEN_CFW_PT_AUDIO_LOG_TAG":("const char *",0x007899A0,"immutable_flash_data"),
+ "OPEN_CFW_PT_AUDIO_TRACE_MESSAGE":("const char *",0x007451A0,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_LOG_TAG":(
+  "const char *",0x0078BE1C,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_LOG_FILE":(
+  "const char *",0x007053C4,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_FUNCTION":(
+  "const char *",0x00782E34,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_INVALID_MESSAGE":(
+  "const char *",0x0074D82C,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_INVALID_TRACE":(
+  "const char *",0x0072CE6C,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_OCCUPIED_MESSAGE":(
+  "const char *",0x006FCB6C,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_OCCUPIED_TRACE":(
+  "const char *",0x006E9AF0,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_SUCCESS_MESSAGE":(
+  "const char *",0x0074D854,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_SUCCESS_TRACE":(
+  "const char *",0x00737C34,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_FUNCTION":(
+  "const char *",0x0077B314,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_EMPTY_MESSAGE":(
+  "const char *",0x0077B32C,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_EMPTY_TRACE":(
+  "const char *",0x007591B0,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_MISMATCH_MESSAGE":(
+  "const char *",0x00742A9C,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_MISMATCH_TRACE":(
+  "const char *",0x00722628,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_SUCCESS_MESSAGE":(
+  "const char *",0x00770BD8,"immutable_flash_data"),
+ "OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_SUCCESS_TRACE":(
+  "const char *",0x0074D87C,"immutable_flash_data"),
+ "OPEN_CFW_PT_FONT_LOG_TAG":("const char *",0x00785CD0,"immutable_flash_data"),
+ "OPEN_CFW_PT_FONT_LOG_FILE":("const char *",0x0070258C,"immutable_flash_data"),
+ "OPEN_CFW_PT_FONT_ACQUIRE_FUNCTION":("const char *",0x00776EA4,"immutable_flash_data"),
+ "OPEN_CFW_PT_FONT_ACQUIRE_MESSAGE":("const char *",0x00753E28,"immutable_flash_data"),
+ "OPEN_CFW_PT_FONT_ACQUIRE_TRACE":("const char *",0x00729114,"immutable_flash_data"),
+ "OPEN_CFW_PT_FONT_RELEASE_FUNCTION":("const char *",0x00776EBC,"immutable_flash_data"),
+ "OPEN_CFW_PT_FONT_RELEASE_MESSAGE":("const char *",0x00749A74,"immutable_flash_data"),
+ "OPEN_CFW_PT_FONT_RELEASE_TRACE":("const char *",0x00729148,"immutable_flash_data"),
+ "OPEN_CFW_PT_INPUT_QUEUE_FAILURE_FORMAT":("const char *",0x00739E54,"immutable_flash_data"),
+ "OPEN_CFW_PT_UART_INITIALIZED":("const volatile uint8_t *",0x20074FC9,"runtime_sram_data"),
+ "OPEN_CFW_PT_UART_DEVICE_LINK":("void *const volatile *",0x20074610,"runtime_sram_data"),
+ "OPEN_CFW_PT_UART_MUTEX_LINK":("void *const volatile *",0x20074620,"runtime_sram_data"),
+ "OPEN_CFW_PT_UART_SEMAPHORE_LINK":("void *const volatile *",0x2007461C,"runtime_sram_data"),
+ "OPEN_CFW_PT_UART_ERROR_FLAG":("volatile uint8_t *",0x20074FCA,"runtime_sram_data"),
+ "OPEN_CFW_PT_UART_TX_BUFFER":("uint8_t *",0x20379DA0,"runtime_sram_data"),
+ "OPEN_CFW_PT_UART_CACHE_CLEAN_REGISTER":("volatile uint32_t *",0xE000EF68,"peripheral_mmio"),
+ "OPEN_CFW_PT_UART_REGISTER_BASE":(
+  "volatile uint32_t *",0x40039000,"peripheral_mmio"),
  "OPEN_CFW_PT_SYSTEM_RESET_CONTROL":("volatile uint32_t *",0xE000ED0C,"peripheral_mmio"),
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_PATH":("const void *",0x0076F518,"immutable_flash_data"),
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_READY":("const volatile uint8_t *",0x20074F2C,"runtime_sram_data"),
@@ -346,6 +528,16 @@ BOARD_LEAF_DATA_BINDINGS={
  "OPEN_CFW_PT_DISPLAY_STATE":("const uint8_t *",0x20074F2C,"runtime_sram_data"),
  "OPEN_CFW_PT_CODEC_IDENTIFIER_WORD":("const volatile uint32_t *",0x20074224,"runtime_sram_data"),
  "OPEN_CFW_PT_BUZZER_ROUTE_WORD":("const volatile uint32_t *",0x20000724,"runtime_sram_data"),
+ "OPEN_CFW_PT_BUZZER_PIN_CONFIGURATION":(
+  "const volatile uint32_t *",0x0078EE48,"immutable_flash_data"),
+ "OPEN_CFW_PT_BUZZER_TIMER_LINK":(
+  "void *const volatile *",0x20074504,"runtime_sram_data"),
+ "OPEN_CFW_PT_BUZZER_SCRIPT_STATE":(
+  "volatile uint32_t *",0x20074500,"runtime_sram_data"),
+ "OPEN_CFW_PT_BUZZER_ACTIVE_FLAG":(
+  "volatile uint8_t *",0x20074FB5,"runtime_sram_data"),
+ "OPEN_CFW_PT_BUZZER_PENDING_FLAG":(
+  "volatile uint8_t *",0x20074FB4,"runtime_sram_data"),
  "OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_STATE":("const volatile uint32_t *",0x20074544,"runtime_sram_data"),
  "OPEN_CFW_PT_HARDWARE_IDENTIFIER_2_DEVICE":("const void *",0x20074068,"runtime_sram_data"),
  "OPEN_CFW_PT_CHARGER_DEVICE":("const void *",0x20070F78,"runtime_sram_data"),
@@ -363,7 +555,7 @@ BOARD_LEAF_DATA_BINDINGS={
  "OPEN_CFW_PT_ULED_OPERATIONS_LINK":("const struct open_cfw_pt_uled_operations *const volatile *",0x20074530,"runtime_sram_data"),
  "OPEN_CFW_PT_DISPLAY_MUTEX_LINK":("void *const volatile *",0x200744E8,"runtime_sram_data"),
  "OPEN_CFW_PT_DISPLAY_QUEUE_LINK":("void *const volatile *",0x200744E4,"runtime_sram_data"),
- "OPEN_CFW_PT_DISPLAY_BUFFER":("void *",0x20073B60,"runtime_sram_data"),
+ "OPEN_CFW_PT_DISPLAY_BUFFER":("open_cfw_pt_display_buffer_descriptor *",0x20073B60,"runtime_sram_data"),
  "OPEN_CFW_PT_LENS_SYNC_QUEUE_LINK":("void *const volatile *",0x200749CC,"runtime_sram_data"),
  "OPEN_CFW_PT_LENS_SYNC_EVENT_LINK":("void *const volatile *",0x20074B10,"runtime_sram_data"),
  "OPEN_CFW_PT_AUDIO_PATH_TABLE":("const uint8_t *",0x20073C08,"runtime_sram_data"),
@@ -547,6 +739,22 @@ BOARD_IMMUTABLE_FLASH_DATA_FIELDS={
 BOARD_RUNTIME_SRAM_DATA_FIELDS=set(BOARD_DATA_BINDINGS)-BOARD_IMMUTABLE_FLASH_DATA_FIELDS
 
 def sha(data:bytes)->str:return hashlib.sha256(data).hexdigest()
+def component_slice(data:bytes,start:int,size:int)->bytes:
+ offset=OFFICIAL_PREAMBLE_BYTES+start-OFFICIAL_RUN_BASE
+ if offset<0 or offset+size>len(data):
+  raise RuntimeError(f"PT authenticated component slice is out of range: {start:#x}")
+ return data[offset:offset+size]
+def decode_thumb_bl(address:int,encoded:bytes)->int|None:
+ if len(encoded)!=4:return None
+ first,second=struct.unpack("<HH",encoded)
+ if first&0xF800!=0xF000 or second&0xD000!=0xD000:return None
+ sign=(first>>10)&1
+ i1=1^((second>>13)&1)^sign
+ i2=1^((second>>11)&1)^sign
+ immediate=((sign<<24)|(i1<<23)|(i2<<22)|
+            ((first&0x3FF)<<12)|((second&0x7FF)<<1))
+ if immediate&(1<<24):immediate-=1<<25
+ return address+4+immediate
 def elf_section_totals(path:Path)->dict[str,int]:
  data=path.read_bytes()
  if len(data)<52 or data[:6]!=b"\x7fELF\x01\x01":
@@ -577,7 +785,50 @@ def elf_section_totals(path:Path)->dict[str,int]:
  totals["loadable_start"]=min((start for start,_ in loadable_ranges),default=0)
  totals["loadable_end_exclusive"]=max((end for _,end in loadable_ranges),default=0)
  return totals
+def elf_virtual_range(path:Path,start:int,end:int)->bytes:
+ data=path.read_bytes()
+ if end<start or len(data)<52 or data[:6]!=b"\x7fELF\x01\x01":
+  raise RuntimeError("PT target byte gate requires ELF32 little-endian")
+ section_offset=struct.unpack_from("<I",data,0x20)[0]
+ entry_size,count=struct.unpack_from("<HH",data,0x2E)[:2]
+ if entry_size!=40 or count<1:
+  raise RuntimeError("PT target byte gate section table changed")
+ for index in range(count):
+  section=struct.unpack_from(
+   "<IIIIIIIIII",data,section_offset+index*entry_size)
+  section_type,address,offset,size=section[1],section[3],section[4],section[5]
+  if section_type!=8 and address<=start and end<=address+size:
+   begin=offset+start-address
+   return data[begin:begin+end-start]
+ raise RuntimeError(f"PT target byte range is not loadable: {start:#x}..{end:#x}")
 def normalized_c_type(value:str)->str:return " ".join(value.split())
+def validate_lc3_license_boundary(apache_source:str,mit_leaf_source:str)->None:
+ required=(
+  "SPDX-License-Identifier: Apache-2.0",
+  LC3_SETUP_EVIDENCE["upstream_copyright"],
+  LC3_SETUP_EVIDENCE["upstream_source"],
+  LC3_SETUP_EVIDENCE["upstream_commit"],
+  LC3_SETUP_EVIDENCE["upstream_license_path"],
+  "open_cfw_pt_lc3_setup_encoder",
+ )
+ if (apache_source.count(required[0])!=1 or
+     any(marker not in apache_source for marker in required[1:]) or
+     "SPDX-License-Identifier: MIT" in apache_source or
+     mit_leaf_source.count("SPDX-License-Identifier: MIT")!=1 or
+     "SPDX-License-Identifier: Apache-2.0" in mit_leaf_source or
+     re.search(
+      r"^[A-Za-z_][^\n]*\bopen_cfw_pt_lc3_setup_encoder\s*\([^;{}]*\)\s*\{",
+      mit_leaf_source,re.M) is not None):
+  raise RuntimeError("PT LC3 source license/provenance boundary changed")
+def authenticated_decomp_block(text:str,address:int)->str:
+ marker=f"/* FUN 0x{address:08x} "
+ try:
+  start=text.index(marker)
+  end=text.index("\n/* FUN 0x",start+1)
+ except ValueError as exc:
+  raise RuntimeError(
+   f"authenticated decompilation block missing: {address:#010x}") from exc
+ return text[start:end]
 def require_tool(environment:str,*names:str)->str:
  configured=os.environ.get(environment)
  if configured:
@@ -602,7 +853,7 @@ def verify_corpus()->tuple[list[dict[str,str]],list[dict]]:
   command=int(row["command"],0);item=by_command.get(command)
   if item is None or item["stock_start"]!=row["handler_stock_start"] or item["decompilation_sha256"]!=row["decompilation_sha256"]:raise RuntimeError(f"PT corpus command row changed: 0x{command:02X}")
  return commands,functions
-def analyze()->dict:
+def analyze(*,enforce_canonical_pin:bool=True)->dict:
  rows,functions=verify_corpus()
  stock_boundary=stock_pt.analyze()
  external_entries=stock_boundary["surface"]["external_direct_bl_entries"]
@@ -621,9 +872,138 @@ def analyze()->dict:
  owned=SOURCES+HEADERS
  for path in owned:
   text=path.read_text()
-  if "SPDX-License-Identifier: MIT" not in text:raise RuntimeError(f"PT source license marker changed: {path.name}")
+  expected_spdx=("Apache-2.0" if path==LC3_SETUP_SOURCE else "MIT")
+  if (text.count(f"SPDX-License-Identifier: {expected_spdx}")!=1 or
+      (path==LC3_SETUP_SOURCE and "SPDX-License-Identifier: MIT" in text) or
+      (path!=LC3_SETUP_SOURCE and
+       "SPDX-License-Identifier: Apache-2.0" in text)):
+   raise RuntimeError(f"PT source license marker changed: {path.name}")
   if re.search(r"\.(?:byte|short|hword|word|inst)\b|__asm\b|(?<![0-9A-Fa-f])[0-9A-Fa-f]{256,}(?![0-9A-Fa-f])",text):raise RuntimeError(f"PT source contains a raw executable encoding: {path.name}")
  owned_digest=sha(b"".join(path.name.encode()+b"\0"+path.read_bytes() for path in owned))
+ official=OFFICIAL_COMPONENT.read_bytes()
+ if (len(official)!=OFFICIAL_COMPONENT_SIZE or
+     sha(official)!=OFFICIAL_COMPONENT_SHA256):
+  raise RuntimeError("PT authenticated official component changed")
+ lens_wrapper=component_slice(
+  official,LENS_SYNC_TRANSPORT_EVIDENCE["stock_wrapper_runtime_address"],
+  LENS_SYNC_TRANSPORT_EVIDENCE["stock_wrapper_size"])
+ lens_transport=component_slice(
+ official,LENS_SYNC_TRANSPORT_EVIDENCE["stock_transport_runtime_address"],
+  LENS_SYNC_TRANSPORT_EVIDENCE["stock_transport_size"])
+ decomp_index_bytes=AUTHENTICATED_DECOMP_INDEX.read_bytes()
+ if sha(decomp_index_bytes)!=AUTHENTICATED_DECOMP_INDEX_SHA256:
+  raise RuntimeError("PT authenticated decompilation index changed")
+ decomp_records={item["entry"]:item for item in (
+  json.loads(line) for line in decomp_index_bytes.decode().splitlines())}
+ lens_wrapper_record=decomp_records.get("00464c36")
+ lens_transport_record=decomp_records.get("00464772")
+ lens_wrapper_decomp=authenticated_decomp_block(
+  AUTHENTICATED_DECOMP_BUNDLE.read_text(),
+  LENS_SYNC_TRANSPORT_EVIDENCE["stock_wrapper_runtime_address"])
+ lens_callsite=LENS_SYNC_TRANSPORT_EVIDENCE[
+  "stock_wrapper_transport_callsite"]
+ lens_sync_transport_authenticated=(
+  sha(lens_wrapper)==LENS_SYNC_TRANSPORT_EVIDENCE["stock_wrapper_sha256"] and
+  sha(lens_transport)==LENS_SYNC_TRANSPORT_EVIDENCE[
+   "stock_transport_sha256"] and
+  decode_thumb_bl(lens_callsite,component_slice(official,lens_callsite,4))==
+   LENS_SYNC_TRANSPORT_EVIDENCE["stock_transport_runtime_address"] and
+  lens_wrapper_record is not None and lens_transport_record is not None and
+  lens_wrapper_record["body_bytes"]==
+   LENS_SYNC_TRANSPORT_EVIDENCE["stock_wrapper_size"] and
+  lens_wrapper_record["body_sha256"]==
+   LENS_SYNC_TRANSPORT_EVIDENCE["stock_wrapper_sha256"] and
+  lens_wrapper_record["signature"]==
+   LENS_SYNC_TRANSPORT_EVIDENCE["stock_wrapper_signature"] and
+  lens_wrapper_record["callees"]==[
+   "0043ce9e","0043d0ce","0043d574","00464772"] and
+  lens_transport_record["body_bytes"]==
+   LENS_SYNC_TRANSPORT_EVIDENCE["stock_transport_size"] and
+  lens_transport_record["body_sha256"]==
+   LENS_SYNC_TRANSPORT_EVIDENCE["stock_transport_sha256"] and
+  lens_transport_record["signature"]==
+   LENS_SYNC_TRANSPORT_EVIDENCE["stock_transport_signature"] and
+  sha(lens_wrapper_decomp.encode())==LENS_SYNC_TRANSPORT_EVIDENCE[
+   "stock_wrapper_decompilation_sha256"] and
+  LENS_SYNC_TRANSPORT_EVIDENCE["stock_wrapper_call_expression"] in
+   lens_wrapper_decomp)
+ if not lens_sync_transport_authenticated:
+  raise RuntimeError("PT stock postprocess lens-sync transport evidence changed")
+ lc3_primary=component_slice(
+  official,LC3_SETUP_EVIDENCE["stock_primary_runtime_address"],
+  LC3_SETUP_EVIDENCE["stock_primary_size"])
+ lc3_setup=component_slice(
+  official,LC3_SETUP_EVIDENCE["stock_runtime_address"],
+  LC3_SETUP_EVIDENCE["stock_size"])
+ lc3_service_setup=component_slice(
+  official,LC3_SETUP_EVIDENCE["stock_service_setup_runtime_address"],
+  LC3_SETUP_EVIDENCE["stock_service_setup_size"])
+ lc3_context_table=component_slice(
+  official,LC3_SETUP_EVIDENCE["stock_context_pointer_table_runtime_address"],
+  LC3_SETUP_EVIDENCE["stock_context_pointer_table_size"])
+ lc3_primary_record=decomp_records.get("0059123a")
+ lc3_wrapper_record=decomp_records.get("00591374")
+ lc3_service_record=decomp_records.get("0057a926")
+ lc3_context_values=struct.unpack("<IIII",lc3_context_table)
+ fixed_context_starts=LC3_SETUP_EVIDENCE["fixed_context_starts"]
+ lc3_slot_layout_authenticated=(
+  sha(lc3_context_table)==LC3_SETUP_EVIDENCE[
+   "stock_context_pointer_table_sha256"] and
+  list(lc3_context_values[index] for index in (0,1,3))==
+   fixed_context_starts[:3] and
+  all(struct.unpack("<I",component_slice(official,address,4))[0]==
+      fixed_context_starts[3]
+      for address in LC3_SETUP_EVIDENCE["stock_next_context_literal_cells"]) and
+  struct.unpack("<I",component_slice(
+   official,LC3_SETUP_EVIDENCE["stock_next_slot_literal_cell"],4))[0]==
+   LC3_SETUP_EVIDENCE["next_allocation_start"] and
+  all(right-left==LC3_SETUP_EVIDENCE["fixed_context_slot_bytes"]
+      for left,right in zip(
+       fixed_context_starts,
+       fixed_context_starts[1:]+[LC3_SETUP_EVIDENCE["next_allocation_start"]])) and
+  LC3_SETUP_EVIDENCE["fixed_context_slot_bytes"]-
+   LC3_SETUP_EVIDENCE["fixed_context_header_bytes"]==
+   LC3_SETUP_EVIDENCE["fixed_context_storage_bytes"])
+ lc3_license=ROOT/"third_party/liblc3/LICENSE"
+ lc3_adaptation=LC3_SETUP_SOURCE.read_text()
+ lc3_setup_boundary_authenticated=(
+  sha(lc3_primary)==LC3_SETUP_EVIDENCE["stock_primary_sha256"] and
+  sha(lc3_setup)==LC3_SETUP_EVIDENCE["stock_sha256"] and
+  sha(lc3_service_setup)==LC3_SETUP_EVIDENCE[
+   "stock_service_setup_sha256"] and
+  decode_thumb_bl(
+   LC3_SETUP_EVIDENCE["stock_wrapper_primary_callsite"],component_slice(
+    official,LC3_SETUP_EVIDENCE["stock_wrapper_primary_callsite"],4))==
+   LC3_SETUP_EVIDENCE["stock_primary_runtime_address"] and
+  all(decode_thumb_bl(callsite,component_slice(official,callsite,4))==
+      LC3_SETUP_EVIDENCE["stock_service_setup_runtime_address"]
+      for callsite in LC3_SETUP_EVIDENCE["stock_service_setup_callsites"]) and
+  lc3_primary_record is not None and lc3_wrapper_record is not None and
+  lc3_service_record is not None and
+  lc3_primary_record["body_bytes"]==LC3_SETUP_EVIDENCE[
+   "stock_primary_size"] and
+  lc3_primary_record["body_sha256"]==LC3_SETUP_EVIDENCE[
+   "stock_primary_sha256"] and
+  lc3_primary_record["callees"]==[
+   "00439c04","0048949c","004d4ccc","00590d3c","00590d74"] and
+  lc3_wrapper_record["body_bytes"]==LC3_SETUP_EVIDENCE["stock_size"] and
+  lc3_wrapper_record["body_sha256"]==LC3_SETUP_EVIDENCE["stock_sha256"] and
+  lc3_wrapper_record["callees"]==["0059123a"] and
+  lc3_service_record["body_bytes"]==LC3_SETUP_EVIDENCE[
+   "stock_service_setup_size"] and
+  lc3_service_record["body_sha256"]==LC3_SETUP_EVIDENCE[
+   "stock_service_setup_sha256"] and
+  lc3_service_record["callees"]==["00591374"] and
+  lc3_slot_layout_authenticated and
+  sha(lc3_license.read_bytes())==LC3_SETUP_EVIDENCE[
+   "upstream_license_sha256"] and
+  lc3_adaptation.count("SPDX-License-Identifier: Apache-2.0")==1 and
+  LC3_SETUP_EVIDENCE["upstream_copyright"] in lc3_adaptation and
+  LC3_SETUP_EVIDENCE["upstream_source"] in lc3_adaptation and
+  LC3_SETUP_EVIDENCE["upstream_commit"] in lc3_adaptation and
+  LC3_SETUP_EVIDENCE["upstream_license_path"] in lc3_adaptation)
+ if not lc3_setup_boundary_authenticated:
+  raise RuntimeError("PT retained Apache liblc3 setup boundary changed")
  adapter_header=(COMPONENT/"pt_protocol_platform_adapter.h").read_text()
  adapter_source=(COMPONENT/"pt_protocol_platform_adapter.c").read_text()
  board_source=(COMPONENT/"pt_protocol_board_backend.c").read_text()
@@ -729,6 +1109,7 @@ def analyze()->dict:
   raise RuntimeError("PT board source/retained field classification changed")
  leaf_source=(COMPONENT/"pt_protocol_board_leaf_candidates.c").read_text()
  leaf_header=(COMPONENT/"pt_protocol_board_leaf_candidates.h").read_text()
+ validate_lc3_license_boundary(lc3_adaptation,leaf_source)
  leaf_blocks={name:body for name,body in re.findall(
   r"(?ms)^#ifndef\s+(OPEN_CFW_PT_[A-Z0-9_]+)\s*$\n"
   r"^#define\s+\1\s+(.*?)^#endif\s*$",leaf_source)}
@@ -757,12 +1138,68 @@ def analyze()->dict:
   body=leaf_blocks.get(macro)
   if body is None or body.strip().replace("\\\n", " ").strip()!=symbol:
    raise RuntimeError(f"PT board local source binding changed: {macro}")
+  provider_source=(lc3_adaptation if symbol.startswith(
+   "open_cfw_pt_lc3_") else leaf_source)
   if (len(re.findall(
       rf"(?m)^[A-Za-z_][^\n]*\b{re.escape(symbol)}\s*\([^;{{}}]*\)\s*\{{",
-      leaf_source))!=1 or symbol not in leaf_header):
+      provider_source))!=1 or symbol not in leaf_header):
    raise RuntimeError(f"PT board local source provider changed: {symbol}")
- if (len({address&~1 for _,address in leaf_callable_bindings.values()})!=41 or
-     len({address for _,address,_ in leaf_data_bindings.values()})!=50 or
+ postprocess_send=re.search(
+  r"void\s+open_cfw_pt_display_postprocess_send\s*\([^)]*\)\s*\{(.*?)\n\}",
+  leaf_source,re.S)
+ if (postprocess_send is None or
+     "OPEN_CFW_PT_LENS_SYNC_TRANSPORT" not in postprocess_send.group(1) or
+     "fourth, 5U, 2U, 0U" not in postprocess_send.group(1) or
+     "OPEN_CFW_PT_DISPLAY_APPLY" in postprocess_send.group(1)):
+  raise RuntimeError("PT display postprocess lens-sync semantics changed")
+ uart_cache_source_pattern=(
+  r"OPEN_CFW_PT_UART_CACHE_DSB\(\);\s*while\s*\([^)]*\)\s*\{\s*"
+  r"\*OPEN_CFW_PT_UART_CACHE_CLEAN_REGISTER\s*=.*?\}\s*"
+  r"OPEN_CFW_PT_UART_CACHE_DSB\(\);\s*"
+  r"OPEN_CFW_PT_UART_CACHE_ISB\(\);")
+ if re.search(uart_cache_source_pattern,leaf_source,re.S) is None:
+  raise RuntimeError("PT UART cache-maintenance source sequence changed")
+ lc3_source=re.search(
+  r"void\s*\*\s*open_cfw_pt_lc3_setup_encoder\s*\([^)]*\)\s*\{(.*?)\n\}",
+  lc3_adaptation,re.S)
+ lc3_bounded_source=re.search(
+  r"void\s*\*\s*open_cfw_pt_lc3_setup_encoder_bounded\s*\([^)]*\)\s*\{(.*?)\n\}",
+  lc3_adaptation,re.S)
+ lc3_fixed_wrapper=re.search(
+  r"void\s+open_cfw_pt_audio_encoder_setup\s*\([^)]*\)\s*\{(.*?)\n\}",
+  leaf_source,re.S)
+ if (lc3_source is None or
+     "case 2500U" not in lc3_source.group(1) or
+     "case 10000U" not in lc3_source.group(1) or
+     "case 48000U" not in lc3_source.group(1) or
+     "pcm_sample_rate_hz <= 0" not in lc3_source.group(1) or
+     "pcm_samples_4m = 192U" not in lc3_source.group(1) or
+     "bytes[0] = (uint8_t)duration_index" not in lc3_source.group(1) or
+     "bytes[1] = (uint8_t)codec_rate_index" not in lc3_source.group(1) or
+     "bytes[2] = (uint8_t)pcm_rate_index" not in lc3_source.group(1) or
+     "0x4A0U / sizeof(uint32_t)" not in lc3_source.group(1) or
+     "0x4A8U / sizeof(uint32_t)" not in lc3_source.group(1) or
+     "codec_rate_index > pcm_rate_index" not in lc3_source.group(1) or
+     "(uintptr_t)storage & (sizeof(uint32_t) - 1U)" not in
+      lc3_source.group(1) or
+     "words[0] =" in lc3_source.group(1) or
+     "pcm_samples_4m = 160U" in lc3_source.group(1) or
+     lc3_bounded_source is None or
+     "required > storage_capacity" not in lc3_bounded_source.group(1) or
+     "open_cfw_pt_lc3_encoder_size" not in lc3_bounded_source.group(1) or
+     lc3_fixed_wrapper is None or
+     "OPEN_CFW_PT_AUDIO_CODEC_STORAGE_BYTES" not in
+      lc3_fixed_wrapper.group(1) or
+     "OPEN_CFW_PT_AUDIO_CODEC_SLOT_BYTES UINT32_C(0xA44)" not in
+      leaf_source or
+     "OPEN_CFW_PT_AUDIO_CODEC_HEADER_BYTES UINT32_C(0x1C)" not in
+      leaf_source or
+     re.search(
+      r"^[A-Za-z_][^\n]*\bopen_cfw_pt_lc3_setup_encoder\s*\([^;{}]*\)\s*\{",
+      leaf_source,re.M) is not None):
+  raise RuntimeError("PT Apache LC3 encoder setup semantics changed")
+ if (len({address&~1 for _,address in leaf_callable_bindings.values()})!=42 or
+     len({address for _,address,_ in leaf_data_bindings.values()})!=94 or
      set(address for _,address,_ in leaf_data_bindings.values())&
      set(address for _,address,_ in BOARD_DATA_BINDINGS.values())):
   raise RuntimeError("PT board leaf fixed dependency uniqueness changed")
@@ -780,6 +1217,10 @@ def analyze()->dict:
  overlay=json.loads((COMPONENT/"overlay.json").read_text())
  all_routed={item.get("runtime_address"):item.get("target_function")
   for item in overlay["patch_sites"]}
+ if (all_routed.get(
+      LENS_SYNC_TRANSPORT_EVIDENCE["stock_transport_runtime_address"])
+      is not None):
+  raise RuntimeError("PT retained lens-sync boundary unexpectedly routed")
  leaf_source_routes={name:all_routed.get(address&~1)
   for name,(_,address) in leaf_callable_bindings.items()
   if all_routed.get(address&~1) is not None}
@@ -908,6 +1349,41 @@ def analyze()->dict:
   symbol_addresses={name:int(address,16) for address,kind,name in
    (line.split() for line in symbols.splitlines() if len(line.split())==3)}
   dispatcher_address=symbol_addresses["open_cfw_pt_protocol_production_entry"]
+  uart_start=symbol_addresses["open_cfw_pt_uart_write"]
+  uart_end=min(address for address in symbol_addresses.values()
+               if address>uart_start)
+  uart_machine=elf_virtual_range(placed,uart_start,uart_end)
+  dsb_encoding=b"\xbf\xf3\x4f\x8f"
+  isb_encoding=b"\xbf\xf3\x6f\x8f"
+  dmb_encoding=b"\xbf\xf3\x5f\x8f"
+  dsb_offsets=[index for index in range(len(uart_machine)-3)
+               if uart_machine[index:index+4]==dsb_encoding]
+  isb_offsets=[index for index in range(len(uart_machine)-3)
+               if uart_machine[index:index+4]==isb_encoding]
+  dmb_offsets=[index for index in range(len(uart_machine)-3)
+               if uart_machine[index:index+4]==dmb_encoding]
+  uart_cache_maintenance_verified=(
+   len(dsb_offsets)==2 and len(isb_offsets)==1 and not dmb_offsets and
+   dsb_offsets[0]<dsb_offsets[1] and
+   dsb_offsets[1]<isb_offsets[0]<=dsb_offsets[1]+32 and
+   struct.pack("<I",0xE000EF68) in uart_machine)
+  if not uart_cache_maintenance_verified:
+   raise RuntimeError(
+    "PT target UART cache maintenance is not DSB/DCCMVAC/DSB/ISB: "
+    f"dsb={dsb_offsets}, isb={isb_offsets}, dmb={dmb_offsets}, "
+    f"dccmvac={struct.pack('<I',0xE000EF68) in uart_machine}")
+  uart_cache_evidence={
+   "function":"open_cfw_pt_uart_write",
+   "function_runtime_address":uart_start,
+   "function_size":uart_end-uart_start,
+   "function_sha256":sha(uart_machine),
+   "dccmvac_register":0xE000EF68,
+   "dsb_runtime_addresses":[uart_start+offset for offset in dsb_offsets],
+   "isb_runtime_addresses":[uart_start+offset for offset in isb_offsets],
+   "dmb_runtime_addresses":[uart_start+offset for offset in dmb_offsets],
+   "required_sequence":"DSB; DCCMVAC loop; DSB; ISB",
+   "target_bytes_verified":True,
+  }
   placement_interval_start=0x0056F178
   placement_start=placement_sections["loadable_start"]
   placement_end=placement_sections["loadable_end_exclusive"]
@@ -949,7 +1425,8 @@ def analyze()->dict:
   "payload_sha256":pt_provider["placement"]["payload_sha256"],
   "interval_sha256":pt_provider["placement"]["interval_sha256"],
  }
- if pt_profile!=live_pt_profile:
+ canonical_apple_profile_matches=pt_profile==live_pt_profile
+ if enforce_canonical_pin and not canonical_apple_profile_matches:
   raise RuntimeError("PT canonical Apple profile pin changed")
  if "linux-clang" not in (core_config.get("post_link_providers",{})
                            .get("pt_protocol",{}).get("profiles",{})):
@@ -959,7 +1436,15 @@ def analyze()->dict:
   int(core_config["preamble_bytes"]))
  placement_free=max(0,0x007FE000-overlay_end)
  placement_shortfall=max(0,target_sections["loadable"]-placement_free)
- report={"schema_version":1,"evidence":{"corpus_functions":len(functions),"command_handlers":len(rows),"stock_function_body_bytes":STOCK_BODY_BYTES,"corpus_sha256":CORPUS_DIGESTS["functions.jsonl"],"corpus_ledger_verified":True},"ownership":{"license":"MIT","source_files":len(owned),"source_bytes":sum(path.stat().st_size for path in owned),"source_sha256":owned_digest,"stock_machine_code_bytes_in_source":0,"retained_vendor_data_bytes_embedded_in_source":0},"software":{"translation_units":len(SOURCES),"bound_commands":len(found),"duplicate_commands":0,"missing_commands":0,"target_undefined_symbols":0,"apollo510_undefined_symbols":profiles["apollo510"]["undefined_symbols"],"cortex_m0plus_undefined_symbols":profiles["cortex_m0plus"]["undefined_symbols"],"target_relocatable_size":linked_size,"target_relocatable_sha256":linked_sha,"target_text_bytes":target_sections["text"],"target_rodata_bytes":target_sections["rodata"],"target_data_bytes":target_sections["data"],"target_bss_bytes":target_sections["bss"],"target_loadable_bytes":target_sections["loadable"],"production_text_placement_free_bytes":placement_free,"production_text_placement_shortfall_bytes":placement_shortfall,"production_in_place_interval_start":placement_interval_start,"production_in_place_interval_end_exclusive":0x00577C3C,"production_in_place_linked_start":placement_start,"production_in_place_capacity_bytes":placement_capacity,"production_in_place_loadable_bytes":placement_sections["loadable"],"production_in_place_end_exclusive":placement_end,"production_dispatcher_address":dispatcher_address,"external_entry_callsites":external_entries,"production_ingress_sites":pt_provider.get("ingress_sites",[]),"production_ram_binding_remaining_bytes":target_sections["bss"],"production_placement_complete":placement_complete,"handler_surface_complete":True,"provider_operation_count":len(operations),"provider_callback_count":58,"provider_adapters_complete":True,"platform_backend_contract_complete":True,"stock_abi_entry_complete":True,"production_bootstrap_complete":True,"production_bootstrap_reachable":True,"board_calls_table_lifetime_contract":True,"board_operations_implemented":len(board_operations),"board_operations_remaining":len(operations-board_operations),"board_host_operations_exercised":len(host_operations),"board_failure_semantics_exercised":True,"board_callback_count":len(board_callbacks),"board_service_bindings":len(board_addresses),"board_function_binding_associations_verified":True,"board_function_abis_verified":True,"board_source_routed_service_bindings":len(source_fields),"board_retained_service_bindings":len(retained_fields),"board_retained_provider_candidate_bindings":len(leaf_candidate_fields),"board_retained_provider_bindings_remaining":len(retained_fields-leaf_candidate_fields),"board_retained_provider_candidate_stock_body_bytes":sum(size for _,size in BOARD_LEAF_CANDIDATES.values()),"board_retained_provider_candidates_semantic_c":True,"board_retained_provider_candidates_production_routed":production_routed,"board_retained_providers_source_owned":False,"board_stock_layout_data_bindings":len(data_bindings),"board_data_binding_associations_verified":True,"board_data_abis_and_extents_verified":True,"board_stock_layout_data_immutable_flash_bindings":len(BOARD_IMMUTABLE_FLASH_DATA_FIELDS),"board_stock_layout_data_runtime_sram_bindings":len(BOARD_RUNTIME_SRAM_DATA_FIELDS),"board_stock_layout_data_deliberately_supported":True,"board_stock_layout_data_software_gap":False,"board_stock_layout_data_source_owned":False,"board_apollo_binding_available":True,"platform_backend_production_bound":platform_backend_production_bound,"production_routed":production_routed},"hardware":{"validation":"blocked by unavailable physical evidence","qualification_complete":False}}
+ report={"schema_version":1,"evidence":{"corpus_functions":len(functions),"command_handlers":len(rows),"stock_function_body_bytes":STOCK_BODY_BYTES,"corpus_sha256":CORPUS_DIGESTS["functions.jsonl"],"corpus_ledger_verified":True},"ownership":{"license":"mixed","licenses":{"MIT":"OpenCFW PT protocol and G2 wiring","Apache-2.0":"Google/liblc3 encoder-setup adaptation"},"source_files":len(owned),"source_bytes":sum(path.stat().st_size for path in owned),"source_sha256":owned_digest,"stock_machine_code_bytes_in_source":0,"retained_vendor_data_bytes_embedded_in_source":0},"software":{"translation_units":len(SOURCES),"bound_commands":len(found),"duplicate_commands":0,"missing_commands":0,"target_undefined_symbols":0,"apollo510_undefined_symbols":profiles["apollo510"]["undefined_symbols"],"cortex_m0plus_undefined_symbols":profiles["cortex_m0plus"]["undefined_symbols"],"target_relocatable_size":linked_size,"target_relocatable_sha256":linked_sha,"target_text_bytes":target_sections["text"],"target_rodata_bytes":target_sections["rodata"],"target_data_bytes":target_sections["data"],"target_bss_bytes":target_sections["bss"],"target_loadable_bytes":target_sections["loadable"],"production_text_placement_free_bytes":placement_free,"production_text_placement_shortfall_bytes":placement_shortfall,"production_in_place_interval_start":placement_interval_start,"production_in_place_interval_end_exclusive":0x00577C3C,"production_in_place_linked_start":placement_start,"production_in_place_capacity_bytes":placement_capacity,"production_in_place_loadable_bytes":placement_sections["loadable"],"production_in_place_end_exclusive":placement_end,"production_dispatcher_address":dispatcher_address,"external_entry_callsites":external_entries,"production_ingress_sites":pt_provider.get("ingress_sites",[]),"production_ram_binding_remaining_bytes":target_sections["bss"],"production_placement_complete":placement_complete,"handler_surface_complete":True,"provider_operation_count":len(operations),"provider_callback_count":58,"provider_adapters_complete":True,"platform_backend_contract_complete":True,"stock_abi_entry_complete":True,"production_bootstrap_complete":True,"production_bootstrap_reachable":True,"board_calls_table_lifetime_contract":True,"board_operations_implemented":len(board_operations),"board_operations_remaining":len(operations-board_operations),"board_host_operations_exercised":len(host_operations),"board_failure_semantics_exercised":True,"board_callback_count":len(board_callbacks),"board_service_bindings":len(board_addresses),"board_function_binding_associations_verified":True,"board_function_abis_verified":True,"board_source_routed_service_bindings":len(source_fields),"board_retained_service_bindings":len(retained_fields),"board_retained_provider_candidate_bindings":len(leaf_candidate_fields),"board_retained_provider_bindings_remaining":len(retained_fields-leaf_candidate_fields),"board_retained_provider_candidate_stock_body_bytes":sum(size for _,size in BOARD_LEAF_CANDIDATES.values()),"board_retained_provider_candidates_semantic_c":True,"board_retained_provider_candidates_production_routed":production_routed,"board_retained_providers_source_owned":False,"board_stock_layout_data_bindings":len(data_bindings),"board_data_binding_associations_verified":True,"board_data_abis_and_extents_verified":True,"board_stock_layout_data_immutable_flash_bindings":len(BOARD_IMMUTABLE_FLASH_DATA_FIELDS),"board_stock_layout_data_runtime_sram_bindings":len(BOARD_RUNTIME_SRAM_DATA_FIELDS),"board_stock_layout_data_deliberately_supported":True,"board_stock_layout_data_software_gap":False,"board_stock_layout_data_source_owned":False,"board_apollo_binding_available":True,"platform_backend_production_bound":platform_backend_production_bound,"production_routed":production_routed},"hardware":{"validation":"blocked by unavailable physical evidence","qualification_complete":False}}
+ report["evidence"].update({
+ "official_component_sha256":OFFICIAL_COMPONENT_SHA256,
+ "postprocess_lens_sync_transport":dict(LENS_SYNC_TRANSPORT_EVIDENCE,
+   abi=LENS_SYNC_TRANSPORT_ABI,authenticated=True,
+   authenticated_decomp_index_sha256=AUTHENTICATED_DECOMP_INDEX_SHA256),
+  "lc3_setup_boundary":dict(LC3_SETUP_EVIDENCE,abi=LC3_SETUP_ABI,
+   authenticated=True),
+ })
  report["software"].update({
   "board_top_level_retained_provider_bindings_remaining":
    len(retained_fields-leaf_candidate_fields),
@@ -967,7 +1452,22 @@ def analyze()->dict:
    len(leaf_retained_callable_bindings),
   "board_retained_providers_source_owned":False,
   "board_source_complete":False,
-  "board_second_order_abis_verified":True,
+  "board_second_order_abis_verified":False,
+  "board_second_order_binding_inventory_verified":True,
+  "board_postprocess_lens_sync_transport_abi_and_address_authenticated":
+   lens_sync_transport_authenticated,
+  "board_postprocess_lens_sync_transport_evidence":
+   report["evidence"]["postprocess_lens_sync_transport"],
+  "board_uart_cache_maintenance_target_verified":
+   uart_cache_maintenance_verified,
+  "board_uart_cache_maintenance_evidence":uart_cache_evidence,
+  "board_lc3_setup_boundary_authenticated":lc3_setup_boundary_authenticated,
+  "board_lc3_setup_license":LC3_SETUP_EVIDENCE["upstream_license"],
+  "board_lc3_setup_source_routed":True,
+  "board_lc3_setup_fail_closed":True,
+  "board_lc3_setup_pending_software_gates":[],
+  "canonical_apple_profile_matches":canonical_apple_profile_matches,
+  "canonical_pin_enforced":enforce_canonical_pin,
   "board_second_order_callable_bindings":(
    len(leaf_callable_bindings)+len(BOARD_LEAF_LOCAL_SOURCE_CALLABLES)),
   "board_second_order_callable_census":leaf_callable_census,
@@ -1000,7 +1500,7 @@ def analyze()->dict:
  }
  return report
 def main()->int:
- ap=argparse.ArgumentParser();ap.add_argument("--write-manifest",action="store_true");a=ap.parse_args();r=analyze();
+ ap=argparse.ArgumentParser();ap.add_argument("--write-manifest",action="store_true");ap.add_argument("--allow-stale-canonical-pin",action="store_true");a=ap.parse_args();r=analyze(enforce_canonical_pin=not a.allow_stale_canonical_pin);
  if a.write_manifest:OUTPUT.write_text(json.dumps(r,indent=2,sort_keys=True)+"\n")
  print(json.dumps(r,indent=2,sort_keys=True));return 0
 if __name__=="__main__":raise SystemExit(main())

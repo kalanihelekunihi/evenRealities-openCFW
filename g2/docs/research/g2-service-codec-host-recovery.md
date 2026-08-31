@@ -1,5 +1,10 @@
 # G2 GX8002 codec-host recovery
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 ## Result
 
 The retained first-party translation unit `platform\audio\service_codec_host.c` is closed as a linked binary object in the official G2 2.2.6.10 OTA image. Its physical interval is `[0x0057BA88,0x0057DC40)`: 8,632 bytes with SHA-256 `83a042c43132baea06c3377689d7bc90b789fabc4bea39f25a4a4fe66cac261a`.

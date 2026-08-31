@@ -73,11 +73,11 @@ class BootloaderMspiCqPauseTests(unittest.TestCase):
         self.assertEqual(
             report["production"]["source_owned_bytes"]
             + report["production"]["retained_official_bytes"],
-            147296,
+            147350,
         )
         self.assertEqual(report["production"]["next_frontier"], 0x0042403E)
         self.assertEqual(report["hardware_validation"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
         self.assertEqual(report["hardware_operations"], [])
 
     def test_disabled_queue_skips_poll_delay_and_checks_dma(self) -> None:

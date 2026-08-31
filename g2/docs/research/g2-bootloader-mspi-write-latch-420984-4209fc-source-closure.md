@@ -1,5 +1,10 @@
 # G2 bootloader MX25U25643G write-latch source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated write-enable and write-disable functions are now
 routed to compilable clean-room C. The write-enable body
 `[0x00420984,0x004209BE)` is 58 bytes with SHA-256

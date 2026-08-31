@@ -42,7 +42,7 @@ class BootloaderMspiControlTests(unittest.TestCase):
         self.assertEqual(
             self.result["production"]["source_owned_bytes"]
             + self.result["production"]["retained_official_bytes"],
-            147296,
+            147350,
         )
 
     def test_independent_main_body_cross_check_is_exact(self) -> None:
@@ -59,7 +59,7 @@ class BootloaderMspiControlTests(unittest.TestCase):
     def test_literal_pool_and_hardware_policy_remain_honest(self) -> None:
         self.assertEqual(self.result["production"]["boundary_status"], "official_blob")
         self.assertEqual(self.result["semantic_model"]["valid_stock_requests"], 40)
-        self.assertEqual(self.result["hardware_validation"], "deferred by project direction")
+        self.assertEqual(self.result["hardware_validation"], "blocked by unavailable physical evidence")
         self.assertEqual(self.result["hardware_operations"], [])
 
     def reset(self) -> None:

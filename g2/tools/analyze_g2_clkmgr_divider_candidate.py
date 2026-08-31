@@ -39,13 +39,13 @@ BOOT_REPORT = ROOT / "components/bootloader/core_overlay/build/build-report.json
 SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
 MAIN_LINUX_REPORT = (
-    ROOT / "components/apollo_main/core_overlay/build-linux-clock-record/build-report.json"
+    ROOT / ".tmp-postapply-core-linux/build-report.json"
 )
 BOOT_LINUX_REPORT = (
-    ROOT / "components/bootloader/core_overlay/build-linux-clock-record/build-report.json"
+    ROOT / "build/canonical-provider/linux-clang/apollo_bootloader/build-report.json"
 )
 LINUX_PACKAGE = (
-    ROOT / "build/source-linux-clock-record/package/"
+    ROOT / "build/postapply-package-linux/package/"
     "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
 )
 
@@ -348,9 +348,28 @@ def run_audit() -> dict[str, Any]:
             "software_blocker": None,
         },
         "production": production,
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_operations": [],
     }
+
+
+def require_summary_current(report: dict[str, Any], path: Path | None = None) -> None:
+    """Require the checked receipt to equal the authenticated live audit."""
+    summary_path = SUMMARY if path is None else path
+    try:
+        stored_bytes = summary_path.read_bytes()
+        stored = json.loads(stored_bytes.decode("utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise AuditError("clock-manager summary is absent or invalid") from error
+    expected_bytes = (
+        json.dumps(report, indent=2, sort_keys=True) + "\n"
+    ).encode("utf-8")
+    if (
+        not isinstance(stored, dict)
+        or stored != report
+        or stored_bytes != expected_bytes
+    ):
+        raise AuditError("clock-manager summary is stale")
 
 
 def main() -> int:
@@ -364,6 +383,7 @@ def main() -> int:
         SUMMARY.write_text(rendered, encoding="utf-8")
         print(f"wrote {SUMMARY}")
     else:
+        require_summary_current(report)
         print(rendered if args.pretty else json.dumps(report, sort_keys=True))
     return 0
 

@@ -40,11 +40,11 @@ class TouchApplicationCoreAdmissionTests(unittest.TestCase):
         self.assertGreater(self.result["source"]["target_closure_object_bytes"], 0)
         self.assertEqual(
             self.result["hardware_validation"],
-            "deferred by project direction",
+            "blocked by unavailable physical evidence",
         )
         self.assertEqual(
             self.result["hardware_blocker"],
-            "deferred by project direction",
+            "blocked by unavailable physical evidence",
         )
         self.assertIn("not production-routed", self.result["integration"])
 

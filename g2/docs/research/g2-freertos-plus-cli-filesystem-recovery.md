@@ -1,5 +1,10 @@
 # G2 kernel\FreeRTOS-Plus-CLI\prvCommand\prvCommand_filesystem.c zero-anchor recovery
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 - Retained path: `kernel\FreeRTOS-Plus-CLI\prvCommand\prvCommand_filesystem.c`
 - Product path: `D:\01_workspace\s200_ap510b_iar_git\kernel\FreeRTOS-Plus-CLI\prvCommand\prvCommand_filesystem.c`
 - Disposition: **linked-unanchored** (code present; zero Ghidra-anchored/discovered functions)

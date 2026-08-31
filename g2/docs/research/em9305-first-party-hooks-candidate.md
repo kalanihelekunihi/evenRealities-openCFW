@@ -49,14 +49,16 @@ The idle hook has one fully bounded shell:
 3. call `0x00310728` with `r0 = 0` in the delay slot;
 4. return.
 
-The candidate verifies all three providers before the first call, then
-preserves this order and stops on a provider failure. A subsequent authenticated
-SDK archive comparison narrows the first callee to `wsfOsRunIdleTasks`, the
+The initial generic candidate verifies all three providers before the first
+call. A subsequent authenticated SDK archive comparison narrows the first
+callee to `wsfOsRunIdleTasks`, the
 second to `VoltMon_DoMeasurement(0)`, and the resume target to
-`PalUartResume`; the final idle edge is an exact no-op chain. See
-`em9305-qpc-hook-provider-closure.md`. Exact source/redistribution authority
-for the named providers is still unavailable, so the complete shell remains
-ineligible for production.
+`PalUartResume`; the final idle edge is an exact no-op chain. The named adapter
+preserves the stock unconditional call sequence and treats the WSF return as
+an activity bit rather than an error. See
+`em9305-qpc-hook-provider-closure.md`. Clean-room MIT source is now available
+for WSF idle tasks, while the hardware-specific UART and voltage-monitor
+providers keep the complete shell ineligible for production.
 
 ## Evidence and reproduction
 
@@ -88,9 +90,9 @@ tail delegation, and validates idle preflight/order/failure behavior.
 
 1. Recover independently reviewable behavior and exact ARC ABIs for the four
    provider-required first-party clusters.
-2. Recover redistribution-safe exact source and ABI/state contracts for named
-   providers `wsfOsRunIdleTasks` and `VoltMon_DoMeasurement` before production
-   binding.
+2. Bind the clean-room `wsfOsRunIdleTasks` provider to exact ARC state and
+   placement contracts; implement `VoltMon_DoMeasurement` only from authorized
+   physical platform evidence.
 3. Recover redistribution-safe exact source and ABI semantics for named resume
    target `PalUartResume` at `0x00310798`, including its argument, return,
    power-state, and ordering contracts.

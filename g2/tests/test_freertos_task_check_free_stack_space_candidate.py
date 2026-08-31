@@ -98,14 +98,14 @@ PRODUCTION_PINS = {
         "size": 62,
         "sha256": TARGET_FUNCTION_SHA256,
         "alignment": 4,
-            "offset": 178_260,
+            "offset": 118_412,
         "unrelocated_sha256": TARGET_FUNCTION_SHA256,
     },
     "linux-clang": {
         "size": 62,
         "sha256": TARGET_FUNCTION_SHA256,
         "alignment": 4,
-        "offset": 180_024,
+        "offset": 120_272,
         "unrelocated_sha256": TARGET_FUNCTION_SHA256,
     },
 }

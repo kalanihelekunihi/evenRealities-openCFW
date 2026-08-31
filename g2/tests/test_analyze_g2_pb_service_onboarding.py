@@ -63,8 +63,8 @@ class AnalyzeG2PbServiceOnboardingTests(unittest.TestCase):
         self.assertEqual(production["stock_replaced_bytes"], 3024)
         self.assertEqual(production["retained_gap_pool_bytes"], 192)
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "deferred by project direction")
-        self.assertIn("deferred by project direction",
+        self.assertEqual(production["hardware_validation"], "blocked by unavailable physical evidence")
+        self.assertIn("blocked by unavailable physical evidence",
                       production["hardware_blocker"])
 
 

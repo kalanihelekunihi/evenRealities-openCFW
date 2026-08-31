@@ -9,8 +9,8 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "research/admission/bootloader_mspi_initialize_424a5a/runtime_bootloader_mspi_initialize_candidate.c"
-FIXTURE = SOURCE.parent / "host_fixture.c"
+SOURCE = ROOT / "components/bootloader/core_overlay/runtime_mspi_initialize_424a5a.c"
+FIXTURE = ROOT / "tests/fixtures/bootloader_runtime_mspi_initialize_host.c"
 sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_bootloader_mspi_initialize_424a5a as analyzer
 
@@ -21,7 +21,7 @@ class BootloaderMspiInitializeTests(unittest.TestCase):
         cls.tmp = tempfile.TemporaryDirectory(prefix="open-cfw-mspi-initialize-host-")
         output = Path(cls.tmp.name) / ("initialize.dylib" if sys.platform == "darwin" else "initialize.so")
         command = ["/usr/bin/clang", "-std=c11", "-O2", "-Wall", "-Wextra",
-                   "-Werror", str(SOURCE), str(FIXTURE)]
+                   "-Werror", str(FIXTURE)]
         command += ["-dynamiclib"] if sys.platform == "darwin" else ["-shared", "-fPIC"]
         subprocess.run([*command, "-o", str(output)], check=True,
                        capture_output=True, text=True)
@@ -44,24 +44,30 @@ class BootloaderMspiInitializeTests(unittest.TestCase):
     def read(self, module: int, offset: int, width: int = 4) -> int:
         return self.loaded.open_cfw_test_mspi_initialize_read(module, offset, width)
 
-    def test_audit_is_exact_and_fail_closed(self) -> None:
+    def test_audit_is_structured_source_and_fail_closed(self) -> None:
         report = analyzer.audit()
         self.assertEqual(report["stock"]["sha256"], analyzer.STOCK_SHA)
         self.assertEqual(report["callers"], [0x0042029A])
-        self.assertFalse(report["production"]["routed"])
-        self.assertEqual(report["production"]["boundary_status"], "official_blob")
+        self.assertTrue(report["production"]["routed"])
+        self.assertEqual(report["production"]["boundary_status"], "source_compiled")
+        self.assertEqual(report["production"]["compiled_bytes"], 88)
         self.assertEqual(report["production"]["source_owned_bytes"] +
-                         report["production"]["retained_official_bytes"], 147296)
+                         report["production"]["retained_official_bytes"], 147350)
         self.assertEqual(report["production"]["next_frontier"],
-                         0x00424AEA)
+                         0x00424AB2)
         self.assertEqual(report["next_code_frontier"], {
             "start": 0x00424AF0, "end": 0x00424BD4,
             "identity": "am_hal_mspi_configure", "bytes": 228,
             "status": "official_blob",
         })
         self.assertEqual(report["hardware_validation"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
         self.assertEqual(report["hardware_operations"], [])
+
+    def test_production_source_uses_structured_c_not_raw_encoding(self) -> None:
+        text = SOURCE.read_text(encoding="utf-8")
+        self.assertNotIn(".byte", text)
+        self.assertNotIn("__asm__", text)
 
     def test_success_initializes_exact_state_fields(self) -> None:
         self.loaded.open_cfw_test_mspi_initialize_reset(0xA5, 2, 0xA4001234)

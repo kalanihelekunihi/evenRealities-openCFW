@@ -1,17 +1,19 @@
 from __future__ import annotations
 import ctypes,subprocess,sys,tempfile,unittest
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[1];SOURCE=ROOT/"research/admission/bootloader_mspi_lifecycle_425066/runtime_bootloader_mspi_lifecycle_candidate.c";FIXTURE=SOURCE.parent/"host_fixture.c";sys.path.insert(0,str(ROOT/"tools"));import analyze_g2_bootloader_mspi_lifecycle_425066 as analyzer
+ROOT=Path(__file__).resolve().parents[1];SOURCE=ROOT/"components/bootloader/core_overlay/runtime_mspi_lifecycle_425066.c";FIXTURE=ROOT/"tests/fixtures/bootloader_runtime_mspi_lifecycle_host.c";sys.path.insert(0,str(ROOT/"tools"));import analyze_g2_bootloader_mspi_lifecycle_425066 as analyzer
 class Tests(unittest.TestCase):
  @classmethod
  def setUpClass(c):
-  c.t=tempfile.TemporaryDirectory();o=Path(c.t.name)/("x.dylib" if sys.platform=="darwin" else "x.so");cmd=["/usr/bin/clang","-std=c11","-O2","-Wall","-Wextra","-Werror",str(SOURCE),str(FIXTURE)]+(["-dynamiclib"] if sys.platform=="darwin" else ["-shared","-fPIC"]);subprocess.run([*cmd,"-o",str(o)],check=True,capture_output=True,text=True);c.x=ctypes.CDLL(str(o));c.x.open_cfw_test_lifecycle_reset.argtypes=[ctypes.c_uint32]*8;c.x.open_cfw_test_lifecycle_run.argtypes=[ctypes.c_uint32]*2;c.x.open_cfw_test_lifecycle_run.restype=ctypes.c_uint32;c.x.open_cfw_test_lifecycle_state.argtypes=[ctypes.c_uint32];c.x.open_cfw_test_lifecycle_state.restype=ctypes.c_uint32;c.x.open_cfw_test_lifecycle_trace.argtypes=[ctypes.c_uint32];c.x.open_cfw_test_lifecycle_trace.restype=ctypes.c_uint32
+  c.t=tempfile.TemporaryDirectory();o=Path(c.t.name)/("x.dylib" if sys.platform=="darwin" else "x.so");cmd=["/usr/bin/clang","-std=c11","-O2","-Wall","-Wextra","-Werror",str(FIXTURE)]+(["-dynamiclib"] if sys.platform=="darwin" else ["-shared","-fPIC"]);subprocess.run([*cmd,"-o",str(o)],check=True,capture_output=True,text=True);c.x=ctypes.CDLL(str(o));c.x.open_cfw_test_lifecycle_reset.argtypes=[ctypes.c_uint32]*8;c.x.open_cfw_test_lifecycle_run.argtypes=[ctypes.c_uint32]*2;c.x.open_cfw_test_lifecycle_run.restype=ctypes.c_uint32;c.x.open_cfw_test_lifecycle_state.argtypes=[ctypes.c_uint32];c.x.open_cfw_test_lifecycle_state.restype=ctypes.c_uint32;c.x.open_cfw_test_lifecycle_trace.argtypes=[ctypes.c_uint32];c.x.open_cfw_test_lifecycle_trace.restype=ctypes.c_uint32
  @classmethod
  def tearDownClass(c):c.t.cleanup()
  def reset(s,p=0x01bebebe,cfg=1,tcb=0x20070000,cq=0,hp=0,xip=0,delay=8,status=0):s.x.open_cfw_test_lifecycle_reset(p,cfg,tcb,cq,hp,xip,delay,status)
  def st(s,n):return s.x.open_cfw_test_lifecycle_state(n)
  def tr(s,n):return s.x.open_cfw_test_lifecycle_trace(n)
- def test_audit(s):r=analyzer.audit();s.assertFalse(r["production"]["routed"]);s.assertEqual(r["production"]["boundary_status"],"official_blob");s.assertEqual(r["production"]["source_owned_bytes"]+r["production"]["retained_official_bytes"],147296);s.assertGreaterEqual(r["production"]["next_frontier"],0x4251A4);s.assertEqual(r["hardware_validation"],"deferred by project direction");s.assertEqual(r["hardware_operations"],[])
+ def test_audit(s):r=analyzer.audit();s.assertTrue(r["production"]["routed"]);s.assertEqual(r["production"]["boundary_status"],"source_compiled");s.assertEqual(r["production"]["compiled_bytes"],296);s.assertEqual(r["production"]["source_owned_bytes"]+r["production"]["retained_official_bytes"],147350);s.assertEqual(r["production"]["next_frontier"],0x4250E6);s.assertEqual(r["successor"]["start"],0x4251C0);s.assertEqual(r["hardware_validation"],"blocked by unavailable physical evidence");s.assertEqual(r["hardware_operations"],[])
+ def test_production_source_is_structured_c(s):
+  text=SOURCE.read_text(encoding="utf-8");s.assertNotIn(".byte",text);s.assertNotIn("__asm__",text);s.assertIn("open_cfw_bootloader_mspi_enable_425066",text);s.assertIn("open_cfw_bootloader_mspi_disable_4250f0",text);s.assertIn("open_cfw_bootloader_mspi_deinitialize_42516c",text)
  def test_enable_with_tcb_resets_queue_state(s):
   s.reset();s.assertEqual(s.x.open_cfw_test_lifecycle_run(0,0),0);s.assertEqual(s.st(0),0x03bebebe);s.assertEqual([s.st(i) for i in range(4,12)],[0,0,0,0,0,0,0,0]);s.assertEqual((s.st(14),s.st(15),s.st(16),s.tr(0),s.tr(5)),(0,0,1,1,0x00400080))
  def test_enable_without_tcb_preserves_queue_state(s):

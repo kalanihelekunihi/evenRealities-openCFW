@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "name": "liblc3_service_audio_whole_address_capacity_experiment",
+  "target": "apollo_main",
+  "mode": "whole-address-capacity-qualified-unplaced",
+  "sources": {
+    "builder": {
+      "path": "components/apollo_main/liblc3_encoder/build_service_audio_capacity_experiment.py",
+      "sha256": "9bb7f9ce83b8b42db8db2136faa22b1991fdea8810b8bc7a9b677a1064d8a773"
+    },
+    "route_builder": {
+      "path": "components/apollo_main/liblc3_encoder/build_service_audio_route_experiment.py",
+      "sha256": "f717937494d828995fd6e9a7c21fd3162b41e75377883029a3b755351da151e9"
+    },
+    "finalizer": {
+      "path": "components/apollo_main/liblc3_encoder/specialized_xip.py",
+      "sha256": "5fdae5e9c4fa6911f8c1de64de9ae20d220551d41ac74549d4e230ca36307a9d"
+    },
+    "aeabi_memcpy": {
+      "path": "components/shared/liblc3/runtime_liblc3_aeabi_memcpy.c",
+      "sha256": "0a5d38bda033e86ecd5554ca212e4684c765ab989705c1b756a65fbd3a888205"
+    }
+  },
+  "route_config": {
+    "path": "components/apollo_main/liblc3_encoder/service_audio_route_experiment.json",
+    "sha256": "6ca242a0c32b88feb7dc8b38c85e8365143272edea103fb827ec623bf60eb53f"
+  },
+  "package_evidence": {
+    "flash_plan": {
+      "path": "build/source/flash-plan.json",
+      "size": 4595610,
+      "sha256": "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127"
+    },
+    "build_report": {
+      "path": "build/source/build-report.json",
+      "size": 4317,
+      "sha256": "4d3945c95bd4ff7c8b1f8e6df4c59e5f15285c053ce37e78cfba4a830f368dcd"
+    },
+    "core_config": {
+      "path": "components/apollo_main/core_overlay/overlay.json",
+      "size": 5853221,
+      "sha256": "733bc34d7545775ab067eb03c38678889694bc092fc840c64a1ef605b0081212"
+    },
+    "core_report": {
+      "path": "components/apollo_main/core_overlay/build/build-report.json",
+      "size": 17630136,
+      "sha256": "3cddcabf68eaf0e731499c18fe71b583e4775663db8f2438494f8fa7651971e3"
+    },
+    "capacity_proposal": {
+      "path": "components/apollo_main/liblc3_encoder/capacity_rebalancing_proposal.json",
+      "size": 8697,
+      "sha256": "b8c7576a191340566b202405c77651a569146386cae2f879b935c360ab5de7b4"
+    }
+  },
+  "address_contract": {
+    "run_base": 4423680,
+    "current_core_end_exclusive": 8309316,
+    "protected_update_record_start": 8380416,
+    "append_headroom": 71100,
+    "component_region_count": 5995,
+    "component_runtime_bytes": 3885636,
+    "generated_padding_bytes": 12828,
+    "generated_alignment_bytes": 4332,
+    "largest_generated_padding_interval": 10844,
+    "largest_generated_alignment_interval": 2434,
+    "conditional_repack_savings": 30676
+  },
+  "required_runtime_imports": [
+    "__aeabi_memclr",
+    "__aeabi_memclr4",
+    "fabsf",
+    "floorf",
+    "fmaxf",
+    "fminf",
+    "memcpy",
+    "memmove",
+    "memset",
+    "sqrtf",
+    "truncf"
+  ],
+  "profiles": {
+    "apple-clang": {
+      "tools": {
+        "clang": "/usr/bin/clang",
+        "lld": "/opt/homebrew/bin/ld.lld",
+        "objcopy": "/opt/homebrew/opt/llvm@22/bin/llvm-objcopy"
+      },
+      "expected_report_sha256": "e832d755be5f3b02dde8613511a1f87a0377767120ac050fa37e91eb07d2c16d"
+    },
+    "linux-clang": {
+      "tools": {
+        "clang": "/opt/homebrew/opt/llvm@22/bin/clang",
+        "lld": "/opt/homebrew/bin/ld.lld",
+        "objcopy": "/opt/homebrew/opt/llvm@22/bin/llvm-objcopy"
+      },
+      "expected_report_sha256": "0d24251d8c48d6d674451cdecbf98f70d3bed06e5cd4968c9ba6f6adf419424e"
+    }
+  },
+  "routing": {
+    "production_placement": false,
+    "service_audio_routed": false,
+    "firmware_image_emitted": false,
+    "hardware_operations": false
+  }
+}

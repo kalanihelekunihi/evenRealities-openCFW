@@ -11,5 +11,5 @@ class FwEventLoopTests(unittest.TestCase):
  def test_dependency_boundary(self):
   p=self.r['provider_boundary'];self.assertEqual((p['easylogger_calls'],p['cmsis_freertos_calls'],p['freertos_critical_port_calls'],p['bounded_first_party_indirect_calls']),(80,20,4,1));self.assertEqual(p['cmsis_freertos_commit'],'d213f261b5be6bb29a7cce8b84071706b72f4d53');self.assertEqual(p['freertos_kernel_commit'],'def7d2df2b0506d3d249334974f51e427c17a41c');self.assertFalse(p['new_version_discriminator']);self.assertIsNone(p['historical_fw_event_loop_commit'])
  def test_production_source_route(self):
-  self.assertEqual(self.r['identity']['embedded_third_party_definitions'],[]);self.assertEqual(self.r['production'],{'production_routed':True,'source_routed_functions':6,'source_sha256':'e1ac9d2f18f411d712b771a3b698c89de9a340843bc26294e629e14b6e915ccc'});self.assertTrue(all(self.r['behavior'].values()))
+  self.assertEqual(self.r['identity']['embedded_third_party_definitions'],[]);self.assertEqual(self.r['production'],{'production_routed':True,'source_routed_functions':6,'source_sha256':'768f13c0159628012fe292b0b34944a939b64d0c83dbc60ea24a02a4510ea119'});self.assertTrue(all(self.r['behavior'].values()))
 if __name__=='__main__':unittest.main()

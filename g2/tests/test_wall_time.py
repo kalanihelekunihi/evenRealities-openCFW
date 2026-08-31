@@ -146,11 +146,11 @@ class WallTimeTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "6ced809d1b5630a700226fe885342e75048dd3af167fc95ff5ec7048fa914a58",
+            "935b9df00b5918816bb5fcb76452edfd9e163558b38f4fcc2e7bb8499af1d30a",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "f6ecb28fa7fe4404292eac52098e1ef1897bee48c09a4a99d8378498d50689bd",
+            "6342648f1ed466b7e3db2d23ca2676e36db34796c047977bb2257e938384ece8",
         )
 
 

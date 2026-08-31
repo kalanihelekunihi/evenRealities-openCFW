@@ -30,7 +30,7 @@ ota	production_alignment_bytes	8
 ota	production_stock_replaced_bytes	620
 ota	production_strict_relocations	17
 ota	software_functional_gap	false
-ota	hardware_validation	deferred by project direction
+ota	hardware_validation	blocked by unavailable physical evidence
 ota	hardware_evidence_required	closure-specific live acceptance evidence documented by the analyzer and reference audit
 ota	hardware_blocker	Authorized physical G2/EM9305 peer or captured OTA CCC/reset/disconnect/notification timing evidence is required for future qualification
 ring	retained_path	platform\ble\profiles\ring\profile_ring.c
@@ -62,6 +62,6 @@ ring	production_alignment_bytes	8
 ring	production_stock_replaced_bytes	1446
 ring	production_strict_relocations	23
 ring	software_functional_gap	false
-ring	hardware_validation	deferred by project direction
+ring	hardware_validation	blocked by unavailable physical evidence
 ring	hardware_evidence_required	closure-specific live acceptance evidence documented by the analyzer and reference audit
 ring	hardware_blocker	Authorized physical G2/EM9305 peer or captured Ring discovery/CCC/RX/TX timing evidence is required for future qualification

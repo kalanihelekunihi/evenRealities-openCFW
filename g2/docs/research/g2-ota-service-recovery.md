@@ -1,5 +1,10 @@
 # G2 OTA service recovery
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 ## Result
 
 The retained first-party translation unit `platform\protocols\ota_service\ota_service.c` is closed as a linked binary object in the official G2 2.2.6.10 OTA image. Its physical interval is `[0x004448F4,0x004488EC)`: 16,376 bytes with SHA-256 `b58c8256ffee83bc9af1e920be4ba419f46e19695823a71dc8dc21c16be21acd`.

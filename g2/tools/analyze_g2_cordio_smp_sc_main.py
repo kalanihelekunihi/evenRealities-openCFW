@@ -215,7 +215,7 @@ def production_report(linked: list[tuple[str, int, int, str]]) -> dict[str, Any]
         "source_owned_bytes_added": 2730,
         "stock_bytes_replaced": sum(end - start for _, start, end, _ in linked),
         "hardware_validation": (
-            "deferred by project direction; future qualification requires authorized G2/EM9305 public-key, DH-check, "
+            "blocked by unavailable physical evidence; future qualification requires authorized G2/EM9305 public-key, DH-check, "
             "passkey, OOB, reconnect, and repeated-attempt physical evidence"
         ),
     }

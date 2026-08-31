@@ -94,9 +94,9 @@ class TouchSoftwareReadinessTests(unittest.TestCase):
         self.assertEqual(audits["policy_helpers"]["exports"], 8)
         self.assertEqual(audits["i2c"]["license"], "MIT OR GPL-3.0-only")
         self.assertEqual(audits["sensing"]["license"], "MIT OR GPL-3.0-only")
-        self.assertIn("hardware validation deferred by project direction",
+        self.assertIn("hardware validation blocked by unavailable physical evidence",
                       audits["i2c"]["status"])
-        self.assertIn("hardware validation deferred by project direction",
+        self.assertIn("hardware validation blocked by unavailable physical evidence",
                       audits["sensing"]["status"])
 
     def test_upstream_and_eula_provider_boundaries_are_explicit(self):

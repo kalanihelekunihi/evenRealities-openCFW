@@ -67,7 +67,7 @@ class CordioHciCommandAuditTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 106)
         self.assertEqual(production["source_only_functions_compiled"], 22)
         self.assertEqual(production["manifest_regions"], 91)
-        self.assertEqual(production["flash_plan_counts"], (5_864, 2, 5, 6))
+        self.assertEqual(production["flash_plan_counts"], (6_586, 0, 6, 6))
         self.assertEqual(production["remaining_unrouted_linked_functions"], 0)
         self.assertEqual(production["remaining_source_only_functions"], 0)
         self.assertTrue(production["full_command_layer_complete"])

@@ -69,8 +69,12 @@ def detect(clang: str, registry: Path) -> str:
         if version.startswith(prefix):
             return profile_id
     raise SystemExit(
-        f"detect_toolchain: no reviewed profile matches {version!r}; record "
-        f"one with `open_cfw`/`apollo_overlay` --record-profile"
+        f"detect_toolchain: no reviewed profile matches {version!r}; for the "
+        "Apollo core, produce two independent `make "
+        "core-canonical-observation` runs per reviewed Apple/Linux profile "
+        "and verify them with `make core-canonical-admission` (do not use "
+        "direct --record-profile); component-specific recorders such as the "
+        "ring-source --record-profile workflow remain separate"
     )
 
 

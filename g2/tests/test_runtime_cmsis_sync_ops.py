@@ -329,18 +329,18 @@ class RuntimeCmsisSyncOpsTests(unittest.TestCase):
         )
         expected = {
             "open_cfw_cmsis_mutex_acquire": (
-                "bfc87b7e4a95d7b265d81eddc03d89a6e4cc4052982eff5ff786360e7c9ff4a1",
-                "932948962def396e1400fdeb9b2ef1136a0d0192a4317f527a990276d57ef37e",
+                "1898593b47eef4430805ae34429ad799bc19e070c07c64f0890dc4e980155072",
+                "9e097264a67111a898867576ccf40005965181d03a221ca763332307a31018b1",
                 "apollo_cmsis_mutex_acquire_source_leaf",
             ),
             "open_cfw_cmsis_mutex_release": (
-                "5e9a3f3fd88c0f312460d01f66bf4a538d12dbf29bd1dbf4ef965da6065a85b8",
-                "dffdf9b597ac04a1b8a7077ae4b01768ded168469ee8ec09fd2d516bef308de0",
+                "b48ae412fc3edb835176ef8aeb1c9f1c99efde11a893c9f6e700c4fde658411a",
+                "d5ab7e80f295f67aaa415d01b3248dcb817a6b95afc54caa1d1f095e2a9ed2c0",
                 "apollo_cmsis_mutex_release_source_leaf",
             ),
             "open_cfw_cmsis_semaphore_release": (
-                "24ea1eb79a6592da1017624c46c3b51062619099a1e0f715f3a0d31d4fd5cd07",
-                "819ac2d388226f988c03ae3bcafe4b46e455fa4d02fc2a5eca5af2349ccd7c7c",
+                "1f18b8d57714ef8d580a7559f3ca15d4da02dc8f33dbca83ce67f7a846aa2536",
+                "fc151862225929c018bdea5682db8b94522ef9a897a7e7089fafc03369f4da75",
                 "apollo_cmsis_semaphore_release_source_leaf",
             ),
         }

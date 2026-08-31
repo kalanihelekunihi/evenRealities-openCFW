@@ -1,0 +1,223 @@
+--- a/src/draw/ambiq/lv_draw_ambiq.c
++++ b/src/draw/ambiq/lv_draw_ambiq.c
+@@ -7,6 +7,7 @@
+  *      INCLUDES
+  *********************/
+ #include "../lv_draw_private.h"
++#include "../lv_draw_image_private.h"
+ #if LV_USE_DRAW_AMBIQ
+ 
+ #include "../../core/lv_refr.h"
+@@ -91,7 +92,7 @@
+     draw_ambiq_unit->nema_context_lock_count = 0;
+ 
+ #ifdef LV_USE_AMBIQ_VG
+-    lv_draw_ambiq_vector_font_init(draw_ambiq_unit);
++    lv_draw_ambiq_vector_font_init((lv_draw_unit_t *)draw_ambiq_unit);
+ #endif
+ 
+ #if LV_USE_OS
+@@ -192,6 +193,6 @@
+ 
+     switch(task->type) {
+-        case LV_DRAW_TASK_TYPE_FILL:
++        case LV_DRAW_TASK_TYPE_FILL: {
+             lv_draw_fill_dsc_t * draw_dsc_fill = task->draw_dsc;
+ 
+             if(draw_dsc_fill->grad.dir == LV_GRAD_DIR_RADIAL ||
+@@ -207,7 +208,8 @@
+ 
+             task->preference_score = 10;
+             task->preferred_draw_unit_id = DRAW_UNIT_ID_AMBIQ;
+-            break;
++            break;
++        }
+         case LV_DRAW_TASK_TYPE_BORDER:
+             task->preference_score = 10;
+             task->preferred_draw_unit_id = DRAW_UNIT_ID_AMBIQ;
+@@ -215,7 +217,7 @@
+             task->preferred_draw_unit_id = DRAW_UNIT_ID_AMBIQ;
+             break;
+         case LV_DRAW_TASK_TYPE_TRIANGLE:
+-            //return 0;
++        {   //return 0;
+             lv_draw_triangle_dsc_t * draw_dsc_tri = task->draw_dsc;
+ 
+             if(draw_dsc_tri->grad.dir == LV_GRAD_DIR_RADIAL ||
+@@ -231,7 +233,8 @@
+             }
+             task->preference_score = 10;
+             task->preferred_draw_unit_id = DRAW_UNIT_ID_AMBIQ;
+-            break;              
++            break;
++        }
+         case LV_DRAW_TASK_TYPE_LINE:
+             task->preference_score = 10;
+             task->preferred_draw_unit_id = DRAW_UNIT_ID_AMBIQ;
+@@ -247,7 +250,7 @@
+             task->preferred_draw_unit_id = DRAW_UNIT_ID_AMBIQ;
+             break;
+ 
+-        case LV_DRAW_TASK_TYPE_IMAGE:
++        case LV_DRAW_TASK_TYPE_IMAGE: {
+             lv_draw_image_dsc_t * draw_dsc_image = task->draw_dsc;
+ 
+             nema_tex_format_t nema_cf = lv_ambiq_color_format_map_src(draw_dsc_image->header.cf);
+@@ -266,7 +269,8 @@
+ 
+             task->preference_score = 10;
+             task->preferred_draw_unit_id = DRAW_UNIT_ID_AMBIQ;          
+-            break;
++            break;
++        }
+ 
+         case LV_DRAW_TASK_TYPE_LABEL:
+             task->preference_score = 10;
+--- a/src/draw/ambiq/lv_draw_ambiq_arc.c
++++ b/src/draw/ambiq/lv_draw_ambiq_arc.c
+@@ -97,7 +97,7 @@
+     int32_t center_y = dsc->center.y - layer->buf_area.y1;
+ 
+     lv_image_decoder_dsc_t decoder_dsc;
+-    lv_draw_buf_t *bg_img = NULL;
++    const lv_draw_buf_t * bg_img = NULL;
+     if(dsc->img_src)
+     {
+         lv_result_t res = lv_draw_ambiq_decode_image(dsc->img_src, false, &decoder_dsc, false);
+--- a/src/draw/ambiq/lv_draw_ambiq_buffer.c
++++ b/src/draw/ambiq/lv_draw_ambiq_buffer.c
+@@ -138,7 +138,7 @@
+     {
+         if(!lv_area_intersect(&a_clipped, a, &buf_area)) 
+         {
+-            return LV_RESULT_INVALID;
++            return;
+         }
+     }
+ 
+--- a/src/draw/ambiq/lv_draw_ambiq_fill.c
++++ b/src/draw/ambiq/lv_draw_ambiq_fill.c
+@@ -66,7 +66,7 @@
+         blending_mode = NEMA_BL_SIMPLE;
+     }
+ 
+-    if((grad_dir == LV_GRAD_DIR_NONE)) {
++    if(grad_dir == LV_GRAD_DIR_NONE) {
+         lv_ambiq_set_blend_fill(draw_ambiq_unit, blending_mode);
+         nema_set_raster_color(bg_color);
+         if(rout == 0)
+--- a/src/draw/ambiq/lv_draw_ambiq_letter.c
++++ b/src/draw/ambiq/lv_draw_ambiq_letter.c
+@@ -198,7 +198,7 @@
+             case LV_FONT_GLYPH_FORMAT_A1_ALIGNED:
+             case LV_FONT_GLYPH_FORMAT_A2_ALIGNED:
+             case LV_FONT_GLYPH_FORMAT_A4_ALIGNED:
+-            case LV_FONT_GLYPH_FORMAT_A8_ALIGNED:
++            case LV_FONT_GLYPH_FORMAT_A8_ALIGNED: {
+ 
+                     const lv_font_t * font = glyph_draw_dsc->g->resolved_font;
+                     lv_font_fmt_txt_dsc_t * fdsc = (lv_font_fmt_txt_dsc_t *)font->dsc;
+@@ -260,6 +260,7 @@
+                             &raster_coords, LV_FONT_GLYPH_FORMAT_A8, color, true, false); 
+                         cpu_gpu_sync = true;  
+                     }
++                }
+                     break;
+  
+ 
+--- a/src/draw/ambiq/lv_draw_ambiq_private.c
++++ b/src/draw/ambiq/lv_draw_ambiq_private.c
+@@ -526,6 +526,8 @@
+                                       stencil_buffer_in_nema_format);
+ 
+ #endif
++
++    return LV_RESULT_OK;
+ }
+ 
+ lv_result_t lv_draw_ambiq_common_end(bool sync)
+@@ -549,11 +551,11 @@
+ 	// Check error
+ 	uint32_t err = nema_get_error();
+ 	if (err != NEMA_ERR_NO_ERROR) {
+-		LV_LOG_ERROR("NemaGFX error 0x%lx, %s\r\n", err, nema_raster_error_interpret(err));
++		LV_LOG_ERROR("NemaGFX error 0x%lx, %s\r\n", (unsigned long)err, nema_raster_error_interpret(err));
+ 	}
+ 	err = nema_vg_get_error();
+ 	if (err != NEMA_VG_ERR_NO_ERROR) {
+-		LV_LOG_ERROR("NemaVG error: 0x%lx, %s\r\n", err, nema_vg_error_interpret(err));
++		LV_LOG_ERROR("NemaVG error: 0x%lx, %s\r\n", (unsigned long)err, nema_vg_error_interpret(err));
+ 	}
+ 
+     return LV_RESULT_OK;
+@@ -563,7 +565,7 @@
+ uint32_t lv_draw_ambiq_bind_image_texture(const lv_draw_buf_t * decoded, uint32_t color_rgba, uint32_t tex_wrap_mode)
+ {
+     uint32_t blend_op_internal = 0;
+-    lv_image_header_t*  header = &decoded->header; 
++    const lv_image_header_t * header = &decoded->header; 
+     uint32_t lut_size = 0;
+     nema_tex_format_t nema_cf = lv_ambiq_color_format_map_src(header->cf);
+ 
+@@ -654,7 +656,7 @@
+ 
+ uint32_t lv_draw_ambiq_bind_mask_texture(const lv_draw_buf_t * mask_image, bool multiply)
+ {
+-    lv_image_header_t*  header = &mask_image->header; 
++    const lv_image_header_t * header = &mask_image->header; 
+     nema_tex_format_t nema_cf = lv_ambiq_color_format_map_src(header->cf);
+ 
+     LV_ASSERT((nema_cf == NEMA_A8) || (nema_cf == NEMA_L8) );
+@@ -708,17 +710,17 @@
+ 
+     /*The whole image is not available, we can't draw it with GPU*/
+     if(decoder_dsc->decoded == NULL) {
+-        lv_image_decoder_close(&decoder_dsc);
++        lv_image_decoder_close(decoder_dsc);
+         LV_LOG_WARN("Ambiq GPU needs to load the whole image to GPU accessible RAM.\n");
+-        return;
++        return LV_RESULT_INVALID;
+     }
+ 
+-    lv_image_header_t*  header = &decoder_dsc->decoded->header;   
++    const lv_image_header_t * header = &decoder_dsc->decoded->header;   
+ 
+     nema_tex_format_t nema_cf = lv_ambiq_color_format_map_src(header->cf);
+     if(nema_cf == COLOR_FORMAT_INVALID)
+     {
+-        lv_image_decoder_close(&decoder_dsc);
++        lv_image_decoder_close(decoder_dsc);
+         LV_LOG_WARN("GPU failed, not supported color format!");
+         return LV_RESULT_INVALID;
+     }
+@@ -726,7 +728,7 @@
+     if( is_mask && (header->cf != LV_COLOR_FORMAT_A8 && header->cf != LV_COLOR_FORMAT_L8))
+     {
+         LV_LOG_WARN("The mask image is not A8/L8 format. We will ignore it.");
+-        lv_image_decoder_close(&decoder_dsc);
++        lv_image_decoder_close(decoder_dsc);
+         return LV_RESULT_INVALID;
+     }
+ 
+--- a/src/draw/ambiq/lv_draw_ambiq_triangle.c
++++ b/src/draw/ambiq/lv_draw_ambiq_triangle.c
+@@ -80,7 +80,7 @@
+         blending_mode = NEMA_BL_SIMPLE;
+     }
+ 
+-    if((grad_dir == LV_GRAD_DIR_NONE)) {
++    if(grad_dir == LV_GRAD_DIR_NONE) {
+         lv_ambiq_set_blend_fill(draw_ambiq_unit, blending_mode);
+         nema_set_raster_color(bg_color);
+         nema_raster_triangle_f(p0_x, p0_y, p1_x, p1_y, p2_x, p2_y);
+--- a/src/draw/ambiq/lv_draw_ambiq_private.h
++++ b/src/draw/ambiq/lv_draw_ambiq_private.h
+@@ -61,6 +61,8 @@
+ #endif
+ 
+ #include "gpu_patch.h"
++#include "lvgl_ambiq_nema_compat.h"
++#include "lvgl_ambiq_sw_mask_compat.h"
+ 
+ /*********************
+  *      DEFINES

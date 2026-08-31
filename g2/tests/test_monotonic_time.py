@@ -172,11 +172,11 @@ class MonotonicTimeTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "0135fccd34e034e1ee4c0dffacac51ea12531b8c8bc6f6431a4d8f979e8a8baf",
+            "b8932134c8152fc4007f4917d81fcb8fa84fe24973cc8a8d8987b3f218b7303d",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "3b0a04409ce9611cd6a1b4e913f43fc6fc38ce292dc0016f540e7ac5c97ac8c1",
+            "9df042d187ccd73f614f041352ac95e3d6404d02ece35970346eb20c66d4ca61",
         )
 
 

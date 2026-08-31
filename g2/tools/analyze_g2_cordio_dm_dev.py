@@ -32,10 +32,10 @@ FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 SOURCE_PIN = (11_755, "aba3e1be6bbd843d7d49692e2ea22e37a7fa55d58d369f6415a51e8e98ac5062")
 HEADER_PIN = (4_452, "10c1374e093315b717aec521dd8d62a7ee3ec242871edd3759ab9007e1f59cc5")
 TEST_PIN = (9_537, "3e5dd0e1ef9aabfcd493bd3a7d5df9370daba869cdc2a0704824420e26b19239")
-PRODUCTION_OVERLAY = (429_058, "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd")
-PRODUCTION_COMPONENT = (3_952_454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb")
-PRODUCTION_PACKAGE = (4_745_526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934")
-PRODUCTION_FLASH_PLAN = (4_643_183, "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66")
+PRODUCTION_OVERLAY = (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae")
+PRODUCTION_COMPONENT = (3_885_668, "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5")
+PRODUCTION_PACKAGE = (4_678_740, "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a")
+PRODUCTION_FLASH_PLAN = (4_595_610, "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127")
 PINNED_INPUTS = {
     ROOT / "tools/manifests/packetcraft-cordio-dm-dev-function-map.tsv": "44575e5f2bcb2b596191e0b7c0fce142690f289de727b306cedec57530022ccd",
     ROOT / "tools/manifests/packetcraft-cordio-dm-dev-provenance.tsv": "53d3afab77b0f8ed03c9d8b19316bcd4dbb9d0e55a722f853ae2e6ade81a292e",
@@ -139,18 +139,18 @@ PRODUCTION_FUNCTIONS = [
     "open_cfw_cordio_dm_device_vendor_initialize",
 ]
 PRODUCTION_LEAVES = [
-    (356_928, 66, 1, "c57325d40d0e4189b2228d370d561de05306806130593484ee5d26e1beba1e6f"),
-    (356_996, 30, 0, "f29b428639c837b4dac691ccdd34402fc6624659a6139005507965f666aef00d"),
-    (357_028, 26, 0, "0dcf0f2d50c12dcf1b1ffa255b05aa1a838f0402aadc0fa0e638a20077ec4800"),
-    (357_056, 26, 0, "4f55739148208d2321b14c36863b1951750eddad0f4e5a6838b13a0ef44d3bd7"),
-    (357_084, 26, 0, "c7cb9737c80f4131847926e732080bbacdb16f86f08b4c65616a8f494535dfd3"),
-    (357_112, 48, 4, "b7fb728f6abc31f6ce3abdd0d264767c34ae4b273932daa759b93b21ee8fc8be"),
-    (357_160, 18, 1, "362d44fe18a091403fa543941d5d9749a965782f0e286dd23cfe6b276c625acf"),
-    (357_180, 72, 0, "7ad40eee9a1f882d0052e844a57d0e238520831dcd1efd6f880f79c3cd7c54cc"),
-    (357_252, 50, 0, "3ec24a643d6f422efbc4d6ef63cad843e03027272fc2dc89270764cc9e387103"),
-    (357_304, 42, 2, "87981d780ede1fac29642d4913d740fa77ee30fe21cf1775d6011a22f428761b"),
-    (357_348, 42, 1, "2fe591f3fedb17ac66f9b3acec85ea3c9be83f5cf55c5fb3d0a760c5d51d0e44"),
-    (357_392, 2, 0, "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"),
+    (288448, 66, 1, "7d1566bfc16ee35fc055491794eecb686c41edbc3ae12f5530aa9693428d000b"),
+    (288516, 30, 0, "f29b428639c837b4dac691ccdd34402fc6624659a6139005507965f666aef00d"),
+    (288548, 26, 0, "0dcf0f2d50c12dcf1b1ffa255b05aa1a838f0402aadc0fa0e638a20077ec4800"),
+    (288576, 26, 0, "4f55739148208d2321b14c36863b1951750eddad0f4e5a6838b13a0ef44d3bd7"),
+    (288604, 26, 0, "c7cb9737c80f4131847926e732080bbacdb16f86f08b4c65616a8f494535dfd3"),
+    (288632, 48, 4, "b7fb728f6abc31f6ce3abdd0d264767c34ae4b273932daa759b93b21ee8fc8be"),
+    (288680, 18, 1, "362d44fe18a091403fa543941d5d9749a965782f0e286dd23cfe6b276c625acf"),
+    (288700, 72, 0, "7ad40eee9a1f882d0052e844a57d0e238520831dcd1efd6f880f79c3cd7c54cc"),
+    (288772, 50, 0, "3ec24a643d6f422efbc4d6ef63cad843e03027272fc2dc89270764cc9e387103"),
+    (288824, 42, 2, "87981d780ede1fac29642d4913d740fa77ee30fe21cf1775d6011a22f428761b"),
+    (288868, 42, 1, "f27e6071ae16c2a5a8119157e83cf4c46fd8823f45a95ea567cc20e18d8a6e2b"),
+    (288912, 2, 0, "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"),
 ]
 
 
@@ -240,7 +240,7 @@ def _verify_production() -> dict[str, Any]:
         "flash_regions", "unresolved_flash_regions",
         "container_only_regions", "protected_regions",
     ))
-    if counts != (6671, 0, 6, 6):
+    if counts != (6588, 0, 6, 6):
         raise AuditError("DM device flash counts changed")
     return {
         "status": "production-routed",

@@ -1,5 +1,10 @@
 # G2 bootloader global hardware-control service source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Six executable bodies totaling 228 bytes are source-closed in
 `[0x00423D20,0x00423E0C)`: global service (56), initializer (34), register
 query (32), indexed register test (36), zero-index wrapper (10), and

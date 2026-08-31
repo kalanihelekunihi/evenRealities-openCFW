@@ -26,5 +26,5 @@ class NvdbProductModeCandidateTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    o=Path(d)/'p.o';subprocess.run(['clang','-target','thumbv7em-none-eabi','-mthumb','-O2','-ffreestanding','-fno-builtin','-fropi','-Wall','-Wextra','-Werror','-c',str(SRC),'-o',str(o)],check=True,cwd=ROOT)
    out=subprocess.run(['nm',str(o)],check=True,capture_output=True,text=True).stdout;got={p[2] for l in out.splitlines() if len(p:=l.split())==3 and p[1]=='T'};s.assertEqual(got,SYMS)
-  s.assertEqual(hashlib.sha256(SRC.read_bytes()).hexdigest(),'443764591c25b14678180a5dfb6777c627f3ae4a805ef4adcf5e86347812c91d')
+  s.assertEqual(hashlib.sha256(SRC.read_bytes()).hexdigest(),'f02df8296dce95390a54141341cc546668361f3b8acc28b28746976952ecf05e')
 if __name__=='__main__':unittest.main()

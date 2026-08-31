@@ -1,6 +1,6 @@
 # EM9305 MetaWare runtime-islands clean-room candidate
 
-Status: software-only candidate; not production-routed
+Status: ARCv2-EM target-compiled software candidate; not production-routed
 
 License: MIT
 
@@ -66,6 +66,14 @@ The last policy must still be confirmed against the exact MetaWare ARC EABI
 return contract before production admission. It is explicitly tested so any
 future correction is deliberate.
 
+All eight maintained EM9305 candidate translation units have also been
+compiled for ARCv2 EM with GCC 16.1.1 using freestanding, no-builtins,
+section-per-function/data flags. Their checked build receipt records zero
+undefined symbols and zero division, shift, multiply, or memory-runtime
+imports. This closes the target-compilation and recursive-runtime-import gap;
+it does not establish exact MetaWare EABI compatibility, link placement,
+interior-entry routing, or production firmware ownership.
+
 ## Reproduction
 
 The read-only analyzer authenticates the official EM9305 image, complete GNU
@@ -76,6 +84,14 @@ or remainder:
 
 ```sh
 python3 tools/analyze_em9305_metaware_runtime_candidate.py --json
+```
+
+With `arc-linux-gnu-gcc` and `arc-linux-gnu-nm` on `PATH` (or supplied through
+`OPENCFW_ARC_GCC` and `OPENCFW_ARC_NM`), the target proof and checked readiness
+receipts are reproduced by:
+
+```sh
+make em9305-arc-candidates
 ```
 
 The focused host suite covers:
@@ -98,15 +114,12 @@ python3 -m unittest -v tests.test_em9305_metaware_runtime_candidate
 
 1. Recover and pin the exact MetaWare ARC EABI helper symbol names, argument
    register pairs, return register pairs, and any remainder side channel.
-2. Compile with an ARCv2 EM-compatible toolchain and prove that the generated
-   object has no recursive division, shift, `memcpy`, `memmove`, or `memset`
-   imports. The present host proof is necessary but not sufficient.
-3. Split or route all interior entry points explicitly. Replacing only the
+2. Split or route all interior entry points explicitly. Replacing only the
    two outer residual ranges would break callers that target the eight inner
    entries directly.
-4. Authenticate every redirect, relocation, target placement, and caller ABI
+3. Authenticate every redirect, relocation, target placement, and caller ABI
    before adding the candidate to an EM9305 component.
-5. Decide whether the production stack guard must retain an exact `brk_s`
+4. Decide whether the production stack guard must retain an exact `brk_s`
    trap or use a reviewed OpenCFW fatal-policy hook.
 
 No hardware test is required for this candidate stage. Hardware qualification

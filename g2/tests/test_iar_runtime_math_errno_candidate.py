@@ -119,10 +119,10 @@ class IARRuntimeMathErrnoCandidateTests(unittest.TestCase):
         overlay = json.loads(OVERLAY.read_text(encoding="utf-8"))
         leaves = {item["function"]: item for item in overlay["relocated_leaves"]}
         offsets = {
-            "open_cfw_iar_domain_error": (190790, 192562),
-            "open_cfw_iar_sqrtf": (190810, 192582),
-            "open_cfw_iar_range_error": (190838, 192610),
-            "open_cfw_iar_errno_address": (190858, 192630),
+            "open_cfw_iar_domain_error": (130942, 132810),
+            "open_cfw_iar_sqrtf": (130962, 132830),
+            "open_cfw_iar_range_error": (130990, 132858),
+            "open_cfw_iar_errno_address": (131010, 132878),
         }
         for name, (apple_offset, linux_offset) in offsets.items():
             with self.subTest(name=name):
@@ -132,10 +132,10 @@ class IARRuntimeMathErrnoCandidateTests(unittest.TestCase):
                     leaf["toolchain_profiles"]["linux-clang"]["expected"]["offset"],
                     linux_offset,
                 )
-                self.assertEqual(leaf["source"]["size"], 2625)
+                self.assertEqual(leaf["source"]["size"], 2616)
                 self.assertEqual(
                     leaf["source"]["sha256"],
-                    "b5288643766f14f62a2452f445f58e0e3ec8e09c229f4f9c572b8dd1c5c0f59c",
+                    "0e14db2d2748135ad18d285ce06964030d396a5f961d1a40cd7e34a7b4a65762",
                 )
 
         self.assertEqual(
@@ -166,24 +166,24 @@ class IARRuntimeMathErrnoCandidateTests(unittest.TestCase):
         self.assertEqual(
             overlay["expected"],
             {
-                "overlay_size": 429058,
-                "overlay_sha256": "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
-                "component_size": 3952454,
-                "component_sha256": "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+                "overlay_size": 362272,
+                "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+                "component_size": 3885668,
+                "component_sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
             },
         )
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4745526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"),
+            (4678740, "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a"),
         )
         self.assertEqual(
             (
                 manifest["package"]["profiles"]["linux-clang"]["expected_size"],
                 manifest["package"]["profiles"]["linux-clang"]["expected_sha256"],
             ),
-            (4529116, "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"),
+            (4469364, "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"),
         )
 
     @unittest.skipUnless(

@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "components/apollo_main/core_overlay/uled_display_preprocess.c"
 FIXTURE = ROOT / "tests/fixtures"
 EXPECTED_SYMBOLS = {"open_cfw_uled_buffer_sync_to_fb"}
-SOURCE_SHA256 = "2ded39fb95b869de5361340416b85d598194de8c7e7d90f57eefbbde8044b98b"
+SOURCE_SHA256 = "b288dba986ff1cabc8a8625eee2dc5d35ed21ac2c8c770c68c890590c02f66fd"
 
 
 class UledDisplayPreprocessCandidateTests(unittest.TestCase):

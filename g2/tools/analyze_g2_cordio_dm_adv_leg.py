@@ -38,28 +38,28 @@ PRODUCTION_PINS = {
     PRODUCTION_TEST: (12_435, "fcfb8307ff77036a4fc29cdd936c25c6180ef95ac21c4a961ac0caab3bf0d1ac"),
 }
 PRODUCTION_LEAVES = (
-    ("open_cfw_cordio_dm_adv_legacy_configure_parameters", 355836, 94, 2, 2, "3f4818f7ab2b59d911baa003b46ea9db42aa5161e594c808a4b2d983e6e15a04"),
-    ("open_cfw_cordio_dm_adv_legacy_action_configure", 355932, 46, 2, 1, "dbcc68eada1ad2c1aa0bb03fdc5c77c43e39bfabae8df0a2dacfe73704fc1249"),
-    ("open_cfw_cordio_dm_adv_legacy_action_set_data", 355980, 52, 2, 2, "70d4b77ec35f3d45929ab51ae9f5633695722715ba928b777e898b9a008f15df"),
-    ("open_cfw_cordio_dm_adv_legacy_action_start", 356032, 56, 0, 1, "b16bf2203038cf75e6a30172f2773370feeb59e285d2fda7e5fa255b2656ddb3"),
-    ("open_cfw_cordio_dm_adv_legacy_action_stop", 356088, 40, 0, 1, "823804fbc7679c704ace6e4be8d2f0dfe7aa74b08f1f228b429f1405557be4cd"),
-    ("open_cfw_cordio_dm_adv_legacy_action_remove_set", 356128, 2, 0, 0, "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"),
-    ("open_cfw_cordio_dm_adv_legacy_action_clear_sets", 356132, 2, 2, 0, "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"),
-    ("open_cfw_cordio_dm_adv_legacy_action_set_random_address", 356136, 2, 2, 0, "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"),
-    ("open_cfw_cordio_dm_adv_legacy_action_timeout", 356140, 26, 2, 1, "7a9bee8004c34f860451a3ea2078f3904e80daf64d2742a9b78abd4fc059e0ad"),
-    ("open_cfw_cordio_dm_adv_legacy_reset", 356168, 70, 2, 2, "29ea49ca4bec4d2eb375c5ae60d7e79551085bdbad5dc72ecc3345624680073b"),
-    ("open_cfw_cordio_dm_adv_legacy_hci_handler", 356240, 226, 2, 5, "5f7dd79f7b122e9a0d253316c582685b46dbc6ff15ab5c8eb3e7fee446dbd679"),
-    ("open_cfw_cordio_dm_adv_legacy_message_handler", 356468, 72, 2, 8, "e3b7cf8787e9a20ac170be8b672611ee203261a21bfeeb31551d6f4242d499e6"),
-    ("open_cfw_cordio_dm_adv_legacy_start_directed", 356540, 90, 0, 1, "7dcec22b87c98cc02988b1ada0ee8c9da5778fde3a0510fe4685d04667552747"),
-    ("open_cfw_cordio_dm_adv_legacy_stop_directed", 356632, 46, 2, 1, "cc8bb1920a3360fb78d159e7818ee7aeca08925ee73e23f603bc9f83eeeb4b75"),
-    ("open_cfw_cordio_dm_adv_legacy_connected", 356680, 38, 2, 2, "1750b237bde5251305fa839b6d9c6ff4ba7f2264194b26054edf7ec09cee0bd0"),
-    ("open_cfw_cordio_dm_adv_legacy_connect_failed", 356720, 38, 2, 2, "fd74e07473ad023a4a66955d71fd6073193760ef2fbbe29bc601c4606349511e"),
-    ("open_cfw_cordio_dm_adv_legacy_initialize", 356760, 48, 2, 3, "1cb25828f054159d8a4b5db35b694e35d1a0910806cd61007c174e495cbe4f50"),
+    ("open_cfw_cordio_dm_adv_legacy_configure_parameters", 287356, 94, 2, 2, "3ee184b97d261f207ec7cccc8ce465d600c6e718eb0d3339d05b554c0822291a"),
+    ("open_cfw_cordio_dm_adv_legacy_action_configure", 287452, 46, 2, 1, "dbcc68eada1ad2c1aa0bb03fdc5c77c43e39bfabae8df0a2dacfe73704fc1249"),
+    ("open_cfw_cordio_dm_adv_legacy_action_set_data", 287500, 52, 2, 2, "b8fc9fd018571927f4b4277f8c3e51c74bf69379c3eda6f2aea06dae330a03c9"),
+    ("open_cfw_cordio_dm_adv_legacy_action_start", 287552, 56, 0, 1, "6fa1dacd6a619079e1e0b10fe688a822c431948617cb39b4fb5c524e037df990"),
+    ("open_cfw_cordio_dm_adv_legacy_action_stop", 287608, 40, 0, 1, "f29ca6019b331cf39a60b866321627dddc85fac3bc02963bcd7adde55cdc054b"),
+    ("open_cfw_cordio_dm_adv_legacy_action_remove_set", 287648, 2, 0, 0, "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"),
+    ("open_cfw_cordio_dm_adv_legacy_action_clear_sets", 287652, 2, 2, 0, "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"),
+    ("open_cfw_cordio_dm_adv_legacy_action_set_random_address", 287656, 2, 2, 0, "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"),
+    ("open_cfw_cordio_dm_adv_legacy_action_timeout", 287660, 26, 2, 1, "ea1f00acf965e99bb8daa7e98da20131051ede0832d780b83e0e75760ab4f725"),
+    ("open_cfw_cordio_dm_adv_legacy_reset", 287688, 70, 2, 2, "1d60e9ef298dcaed85714675152beb8872a346e7b5297d6c3f23e4db31877f30"),
+    ("open_cfw_cordio_dm_adv_legacy_hci_handler", 287760, 226, 2, 5, "d706c2801a5882fcc9165a6668f05d9e7e247b9725814fb76a94eca86c6ac588"),
+    ("open_cfw_cordio_dm_adv_legacy_message_handler", 287988, 72, 2, 8, "e3b7cf8787e9a20ac170be8b672611ee203261a21bfeeb31551d6f4242d499e6"),
+    ("open_cfw_cordio_dm_adv_legacy_start_directed", 288060, 90, 0, 1, "e52f1a8568c3bef4308e3e7284b8d230372427a0699aaf9ddc6019575c04d0c2"),
+    ("open_cfw_cordio_dm_adv_legacy_stop_directed", 288152, 46, 2, 1, "5838b59e969908ef578ef48c96af5590b025b084d58c67d3e9b1fb2d35f443fc"),
+    ("open_cfw_cordio_dm_adv_legacy_connected", 288200, 38, 2, 2, "e984d8b83059e28b7ccda5844222fbb9cd66c2e887d8eb63afe139aacb75d130"),
+    ("open_cfw_cordio_dm_adv_legacy_connect_failed", 288240, 38, 2, 2, "7685bd84b60bd180fe04fb58f980fc7f1dac58d063e58824cc79ecb12c69928b"),
+    ("open_cfw_cordio_dm_adv_legacy_initialize", 288280, 48, 2, 3, "1cb25828f054159d8a4b5db35b694e35d1a0910806cd61007c174e495cbe4f50"),
 )
-PRODUCTION_OVERLAY = (429_058, "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd")
-PRODUCTION_COMPONENT = (3_952_454, "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb")
-PRODUCTION_PACKAGE = (4_745_526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934")
-PRODUCTION_FLASH_PLAN = (4_643_183, "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66")
+PRODUCTION_OVERLAY = (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae")
+PRODUCTION_COMPONENT = (3_885_668, "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5")
+PRODUCTION_PACKAGE = (4_678_740, "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a")
+PRODUCTION_FLASH_PLAN = (4_595_610, "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127")
 
 FUNCTIONS = [
     ("dmAdvConfig", 0x004B9A80, 0x004B9AC0, "f687db593110076bcf1e6a2512b05cc86e323cef21a59e98575065570003002a", [0x004B9D14]),
@@ -302,7 +302,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
         "flash_regions", "unresolved_flash_regions", "container_only_regions",
         "protected_regions",
     ))
-    if flash_counts != (6671, 0, 6, 6):
+    if flash_counts != (6588, 0, 6, 6):
         raise AuditError("legacy advertising flash-plan region counts changed")
 
     linked_bytes = sum(end - start for _, start, end, _, _ in FUNCTIONS)

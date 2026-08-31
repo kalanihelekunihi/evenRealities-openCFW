@@ -121,11 +121,11 @@ class MramDumpAllRecordsTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "7f7a5fa4fc680972e23332c4dd7aa95de60ab6c24d1bf1e63c452ae5b2fadb60",
+            "c9d3b003356269f75a07b805cb3c02f759f77df835563b57b8ffc533b84de402",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "5930be763ab264020cdb8cedca80e826baaa9e2f849afbcdfa53784db257bbf9",
+            "06a5f200258efb4c32415604ffde6fdba55f77a2f26ea9ca16351ace0cce57b1",
         )
 
 

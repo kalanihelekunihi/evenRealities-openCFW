@@ -19,6 +19,10 @@ EXPECTED_SOURCE_RECORDS_SHA256 = (
 )
 EXPECTED_SOURCE_FILE_COUNT = 297
 EXPECTED_COMMUNITY_SOURCE_ADMISSION = {
+    ROOT / "manifests/g2-2.2.6.10-core-source.json":
+        "79948ff0c3d234d5f74eac7d627a20588f5bec293a2fed194fe10a44b3ad1831",
+    ROOT / "components/apollo_main/core_overlay/build_component.py":
+        "44e2e16484ac31c771cb309b9850e63533881b6be6b8b7d168bdab352ebe47e8",
     ROOT / "components/shared/freetype/README.md":
         "f13a833636894757cb27c4b119922060ce6b6987b41cd5413d40dd9f45e496ff",
     ROOT / "components/shared/freetype/source_admission.json":
@@ -27,6 +31,68 @@ EXPECTED_COMMUNITY_SOURCE_ADMISSION = {
         "570781e86962ea7ed07bf9bce57c5e0edc21d724ad396b8958fdc65034bcb858",
     ROOT / "components/shared/freetype/runtime_freetype_truetype.h":
         "4bbbaed0c884f4e3ba0ca854e6a37061c8256b34858052c4835d9ecd8f3ee400",
+    ROOT / "components/shared/freetype_cff/README.md":
+        "f2de0419f01c08a7c20a48ce28f52a129ad4cf6517231841e0145a44d0b791c8",
+    ROOT / "components/shared/freetype_cff/source_admission.json":
+        "cc8dc43ea6f4b38d32e605225f589a557858938a94e33e5f7c3aa3f4f4ba48ef",
+    ROOT / "components/shared/freetype_cff/build_placement_census.py":
+        "26f492728632e8838d59a93a1758540e9d9b8b97b8fa26fc287f8694b8f37aaf",
+    ROOT / "components/shared/freetype_cff/placement_census.ld":
+        "aa41febbfd7b64dec7f0cb410e1622c335c8b8b1739b33e24884e80afeb56c33",
+    ROOT / "components/shared/freetype_cff/placement_final.ld":
+        "2fe73a924aca12b8bec81eedc05db13f0ca8dfc4ed45be5637a254ccf7adeff4",
+    ROOT / "components/shared/freetype_cff/runtime_freetype_cff_import_providers.c":
+        "6504404f0cf523184a966de2d8d7fa50a6b498aa3830457194585865e00b6538",
+    ROOT / "components/shared/freetype_cff/runtime_freetype_cff.c":
+        "98548455212e6254599766fd4475d8e68eb1b2aa3acd28722d83cb30bd5bb70c",
+    ROOT / "components/shared/freetype_cff/runtime_freetype_cff.h":
+        "70c55cd4428bcf6b024efa5931b85cb3638a8b152fefeda5520e0a3d490710b8",
+    ROOT / "components/apollo_main/freetype_cff_scatter/README.md":
+        "493a0423c3282f18242af2753eeeafbc4a468834a70b1327867a82d37e105763",
+    ROOT / "components/apollo_main/freetype_cff_scatter/build_component.py":
+        "4b615fdc2f393dc5c244882c2c663b70338a94b54923aca12f639a7cf59260f9",
+    ROOT / "components/apollo_main/freetype_cff_scatter/overlay.json":
+        "145e9f8715509c4b85c87816dababd6b734afcc3cbd128c9c146393cecff2493",
+    ROOT / "components/shared/freetype_base/README.md":
+        "4af883b31f56b61d9b27a08cc77acd4b79f276441a912fd289ea350f272eeeaa",
+    ROOT / "components/shared/freetype_base/runtime_freetype_base.c":
+        "f16f79a42f20c6706660adc3d956db9af877cc4365e63bb7277c2d05efa27176",
+    ROOT / "components/shared/freetype_base/runtime_freetype_base.h":
+        "71dd5e637197345230078597a8380abc9230161a94bf094c2dcf55e524d22dce",
+    ROOT / "components/shared/freetype_base/runtime_freetype_base_face.c":
+        "ab790a83d763d4797ab2c3faa6d7e2d656d1404d68bfae968902baf07f6c40f7",
+    ROOT / "components/shared/freetype_base/runtime_freetype_base_face.h":
+        "32b39956ab89fe69321e77131e8632212ef33dfd04a9cc82efae2a1477f1ab67",
+    ROOT / "components/shared/freetype_base/source_admission.json":
+        "1b0ef09408cb85f6aaa881f03a25b5ee9e07d6fc8fac3fe200fd59ca1ebc47e6",
+    ROOT / "components/shared/freetype_sfnt/README.md":
+        "c85d3fdeadea1d40faca9bda69b8adf68241847f651100943547e9cd0870918c",
+    ROOT / "components/shared/freetype_sfnt/source_admission.json":
+        "5b54834747f968744456fb39ca2ff963e83b054cc806641a84160145cc609bfc",
+    ROOT / "components/shared/freetype_pshinter/README.md":
+        "bf4751e7b49ceae90c065f2ee9f9f76352d549a9bfaf85592babc1af90bfb229",
+    ROOT / "components/shared/freetype_pshinter/source_admission.json":
+        "eda69ddb23c8a330941778d46a16999556858b085927b17200707c333bfa44a7",
+    ROOT / "components/shared/freetype_psaux/README.md":
+        "67c8e05ff4e755a3229cf08c31121d579a206286146156e420cd14a33d0b9618",
+    ROOT / "components/shared/freetype_psaux/source_admission.json":
+        "bcb4ef28fcf770ee7eb5f052798acc5462b8cf6f5ac1e1bc454f938bf8bede33",
+    ROOT / "components/shared/freetype_psnames/README.md":
+        "c68ade12b8f9e8cb20a48417d7594ed0a2e80bfc0a9019321cb9929d68a061a0",
+    ROOT / "components/shared/freetype_psnames/source_admission.json":
+        "674cacdff18c3801f35f8e4a3f6dcf191207bb4df5c335bf9553efa0d5f2bb53",
+    ROOT / "components/shared/freetype_smooth/README.md":
+        "7a4738328596a68c888d864221c432572dad43e3caec7c060a5e6704376aa740",
+    ROOT / "components/shared/freetype_smooth/source_admission.json":
+        "862f01d70d9f296a00cac900bb7ca396ea30fa8d1628b21bb1729daf252450f1",
+    ROOT / "components/shared/freetype_autofit/README.md":
+        "cb125f32cc071b32dd22cec9b6496390ba8965b623377dc237496df3c4ae9a0d",
+    ROOT / "components/shared/freetype_autofit/source_admission.json":
+        "35c3d8b1175308d68a2d3f58f3358e43d54dea46ec0b25bd53fd496c8982ad2a",
+    ROOT / "components/shared/freetype_truetype_map/README.md":
+        "2f7322f69c8e2ac6b652497ab98b619cc1165d6022e4eb3b28a42b6f0b4dc38b",
+    ROOT / "components/shared/freetype_truetype_map/source_admission.json":
+        "0748a9886d65d1798ac0b580bff75f0fc35f8f49398b6598fc928a3b239ec9c6",
 }
 EXPECTED_LICENSE = {
     "local_path": "LICENSE",
@@ -289,7 +355,11 @@ EXPECTED_RETAINED_ABI_JSON_PATH = (
     ROOT / "components/apollo_main/core_overlay/overlay.json"
 )
 EXPECTED_RETAINED_ABI_JSON_STRINGS = {
+    "FreeType 2.9.1",
     "clean-room G2 LVGL font-chain and XIP-header manager over retained LVGL/FreeType/media ABIs",
+    "components/apollo_main/freetype_cff_scatter/build_component.py",
+    "components/apollo_main/freetype_cff_scatter/overlay.json",
+    "freetype_cff",
     "open_cfw_retained_font_manager_freetype_create",
     "open_cfw_retained_font_manager_freetype_delete",
 }
@@ -588,6 +658,15 @@ def json_strings(value: Any) -> list[str]:
     return []
 
 
+def generated_build_path(path: Path, root: Path) -> bool:
+    """Identify overlay build outputs without broad substring matching."""
+    relative = path.relative_to(root)
+    return any(
+        part == "build" or part.startswith("build-")
+        for part in relative.parts[:-1]
+    )
+
+
 def verify_production_isolation() -> None:
     for path, expected_hash in EXPECTED_COMMUNITY_SOURCE_ADMISSION.items():
         require(path.is_file(), f"community-source admission missing: {path}")
@@ -600,7 +679,7 @@ def verify_production_isolation() -> None:
     production_json.extend(
         path
         for path in (ROOT / "components").glob("**/*.json")
-        if "build" not in path.relative_to(ROOT / "components").parts
+        if not generated_build_path(path, ROOT / "components")
     )
     for path in production_json:
         if path in EXPECTED_COMMUNITY_SOURCE_ADMISSION:
@@ -633,7 +712,7 @@ def verify_production_isolation() -> None:
         for path in (ROOT / "components").glob("**/*")
         if path.is_file()
         and path.suffix in source_suffixes
-        and "build" not in path.relative_to(ROOT / "components").parts
+        and not generated_build_path(path, ROOT / "components")
     ]
     for path in production_sources:
         if path == retained_source or path in EXPECTED_COMMUNITY_SOURCE_ADMISSION:

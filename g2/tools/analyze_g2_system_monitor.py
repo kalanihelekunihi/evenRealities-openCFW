@@ -247,7 +247,7 @@ def analyze(image=IMAGE):
     patch = patches[0]
     if leaf.get("source", {}).get("path") != "components/apollo_main/core_overlay/system_monitor.c":
         raise c.AuditError("production source changed")
-    if leaf.get("source", {}).get("sha256") != "1dbf2c2ecbf62932293bebae39ce9482153d05f651de7b8419989a0ae0cbc46a":
+    if leaf.get("source", {}).get("sha256") != "e7b64a4b410cb705340f5a6dc8c677f00134ef90b551df840536432c37481c97":
         raise c.AuditError("production source hash changed")
     if len(leaf.get("relocations", [])) != 43:
         raise c.AuditError("production relocation closure changed")

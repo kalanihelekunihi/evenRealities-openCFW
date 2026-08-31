@@ -162,8 +162,8 @@ class OnboardingPeerFlagTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "45dd5b794f2b81b0d9cc1076a8d6f123"
-            "9273cf3941876cac921ed2e66d138761",
+            "24ad637e0ddb291e4b5d938334e31458b"
+            "14bc31d51c6ca7437af8fa708c61fbf",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),

@@ -71,10 +71,10 @@ class PbServiceOnboardingCandidateTests(unittest.TestCase):
 
     def test_source_is_pinned(self) -> None:
         data = SOURCE.read_bytes()
-        self.assertEqual(len(data), 14758)
+        self.assertEqual(len(data), 14749)
         self.assertEqual(
             hashlib.sha256(data).hexdigest(),
-            "81a578ee935776fdb798962859800dd835f3c063e3c94c701d058c2319a56a35",
+            "54a4eca39f6d9974f5c7bbb38dbb0188c62c21bab7be7d483ce99fda96c37e2a",
         )
 
 

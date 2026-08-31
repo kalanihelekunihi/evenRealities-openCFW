@@ -11,24 +11,33 @@ This mechanical normalization must preserve genuine upstream licensing. The
 only genuine upstream GPL source is `ring_gesture.c` from g2flash. The thin
 OpenCFW LZ4 ABI wrapper is project-authored and is therefore an MIT target;
 the separately retained LZ4 implementation remains BSD-2-Clause. The current
-inventory also has 80 Apache-2.0 records, 97 BSD records, seven ISC records,
+inventory also has 81 Apache-2.0 records, 98 BSD records, no ISC records,
 and 27 Zlib records;
 the audit holds those upstream/provider records outside the MIT rewrite set.
 In particular, reviewed AmbiqSuite realizations that carry
 authenticated BSD provenance remain BSD rather than being relabeled MIT.
 
 The overlay inventory is not the complete public source bundle. The broader
-exact distributed-source census now contains 834 distinct project-authored
-files. It combines the original 729-file scope (720 component/tool/test paths,
-eight research artifacts, and the OpenCFW LZ4 ABI wrapper) with 97 reviewed
-community controller/build-adapter paths; one case source occurs in both
-sets. Every path has an SPDX expression permitting MIT. The one authenticated
-upstream GPL source is excluded from this target set. This includes project
+exact distributed-source census now contains 906 distinct project-authored
+files. The 901 G2-internal paths have an SPDX expression permitting MIT. The
+four root community policies (`CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`,
+`SECURITY.md`, and `SUPPORT.md`) instead inherit MIT through the exact root
+`LICENSE`; the analyzer pins every policy's name, size, SHA-256, the root
+license identity, and the aggregate policy-census digest. It accepts no other
+parent-level path. The one authenticated upstream GPL source is excluded from
+this target set. This includes project
 tests, fixtures, tools, Java research utilities, machine-readable source
 records, the Touch/Case/GX8002/EM9305 community controller sources, and the
-canonical Apollo-core and liblc3 build adapters. Five `MIT OR GPL` files
+canonical Apollo-core and liblc3 build adapters. Four (4) `MIT OR GPL` files
 already permit MIT and are recorded separately rather than treated as
 blockers.
+
+The G2-internal census includes the four public community-archive entrypoints:
+`g2/community/Makefile`, `g2/community/make.sh`,
+`g2/docs/community-archive-README.md`, and
+`g2/tests/test_community_markdown_link_closure.py`. These are project-authored
+MIT material and are audited directly rather than inferred from the generated
+archive.
 
 The census also covers all six files in the open Touch source-image package,
 its project-authored proof analyzer, and both focused source-image tests. The
@@ -36,8 +45,13 @@ package README and linker script are included alongside its C, header, and
 Python build sources, so documentation or link-policy license regressions fail
 closed rather than falling outside the source audit.
 
-The community controller closure is exhaustive over 100 C, header, assembly,
-and Python files: 97 project-authored MIT-compatible paths plus three retained
+The census separately covers the three-file EM9305 record-package wrapper and
+its analyzer and two tests. These six MIT paths close deterministic container
+generation and admission without treating the unavailable controller record
+sources as project-owned or source-complete.
+
+The community controller closure is exhaustive over 112 C, header, assembly,
+and Python files: 109 project-authored MIT-compatible paths plus 3 retained
 Apache-2.0 Touch adaptations (`runtime_touch_cat2_adapters.c/.h` and
 `runtime_touch_critical_adapters.S`). The Apache files remain outside the MIT
 rewrite set and retain their upstream-compatible provider terms.
@@ -54,6 +68,7 @@ Artifacts:
 - `tools/manifests/g2-project-license-normalization-summary.json`
 - `tools/manifests/g2-project-mit-normalization-community-controllers.txt`
 - `tools/manifests/g2-project-mit-normalization-touch-source-image.txt`
+- `tools/manifests/g2-project-mit-normalization-em9305-source-image.txt`
 - `tests/test_analyze_g2_project_license_normalization.py`
 
 This is a software-only provenance audit. Hardware validation remains deferred

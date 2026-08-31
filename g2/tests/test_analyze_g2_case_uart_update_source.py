@@ -30,7 +30,7 @@ class CaseUartUpdateSourceAuditTests(unittest.TestCase):
         self.assertEqual(len(self.report["implemented_contracts"]), 7)
 
     def test_destructive_hardware_tail_is_explicit(self) -> None:
-        self.assertEqual(self.report["status"], "implemented-in-source / hardware-validation-deferred-by-project-direction")
+        self.assertEqual(self.report["status"], "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence")
         self.assertFalse(self.report["hardware_block"]["physical_evidence_available"])
         self.assertTrue(self.report["hardware_block"]["stock_case_payload_retained"])
         self.assertEqual(len(self.report["hardware_block"]["preserved_windows"]), 4)

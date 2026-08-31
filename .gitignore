@@ -44,6 +44,14 @@ tmp*/
 *.rej
 *.log
 
+# G2-local canonical-observation/toolchain scratch and hydration state.  These
+# paths can contain authenticated donor firmware and must never enter a future
+# source export or commit.
+/g2/.tmp-*
+/g2/**/.tmp-*
+/g2/.open-cfw-local-hydration.json
+/g2/**/.open-cfw-canonical*.lock
+
 # Recorded (non-canonical) manifest and overlay variants, replayed for
 # compiler-profile experiments. The verifiers classify these as generated
 # output; the canonical manifests/overlays alongside them are tracked.

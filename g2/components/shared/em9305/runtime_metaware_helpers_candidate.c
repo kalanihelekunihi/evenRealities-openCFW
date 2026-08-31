@@ -15,6 +15,58 @@ struct open_cfw_em9305_udivmod_result {
     uint64_t remainder;
 };
 
+union open_cfw_em9305_u64_words {
+    uint64_t value;
+    struct {
+        uint32_t low;
+        uint32_t high;
+    } words;
+};
+
+static uint64_t open_cfw_em9305_shift_left64_words(
+    uint64_t value,
+    uint32_t count
+)
+{
+    union open_cfw_em9305_u64_words input = { value };
+    union open_cfw_em9305_u64_words output = { 0u };
+
+    count &= 63u;
+    if (count == 0u) {
+        return value;
+    }
+    if (count < 32u) {
+        output.words.low = input.words.low << count;
+        output.words.high = (input.words.high << count) |
+            (input.words.low >> (32u - count));
+    } else {
+        output.words.high = input.words.low << (count - 32u);
+    }
+    return output.value;
+}
+
+static uint64_t open_cfw_em9305_shift_right64_words(
+    uint64_t value,
+    uint32_t count
+)
+{
+    union open_cfw_em9305_u64_words input = { value };
+    union open_cfw_em9305_u64_words output = { 0u };
+
+    count &= 63u;
+    if (count == 0u) {
+        return value;
+    }
+    if (count < 32u) {
+        output.words.low = (input.words.low >> count) |
+            (input.words.high << (32u - count));
+        output.words.high = input.words.high >> count;
+    } else {
+        output.words.low = input.words.high >> (count - 32u);
+    }
+    return output.value;
+}
+
 static struct open_cfw_em9305_udivmod_result
 open_cfw_em9305_udivmod64(uint64_t dividend, uint64_t divisor)
 {
@@ -29,13 +81,21 @@ open_cfw_em9305_udivmod64(uint64_t dividend, uint64_t divisor)
 
     for (bit = 64u; bit != 0u; --bit) {
         uint32_t shift = bit - 1u;
-        uint64_t incoming = (dividend >> shift) & 1u;
-        uint64_t high = result.remainder >> 63;
+        uint64_t incoming = open_cfw_em9305_shift_right64_words(
+            dividend, shift
+        ) & 1u;
+        uint64_t high = open_cfw_em9305_shift_right64_words(
+            result.remainder, 63u
+        );
 
-        result.remainder = (result.remainder << 1) | incoming;
+        result.remainder = open_cfw_em9305_shift_left64_words(
+            result.remainder, 1u
+        ) | incoming;
         if (high != 0u || result.remainder >= divisor) {
             result.remainder -= divisor;
-            result.quotient |= UINT64_C(1) << shift;
+            result.quotient |= open_cfw_em9305_shift_left64_words(
+                UINT64_C(1), shift
+            );
         }
     }
     return result;
@@ -131,7 +191,7 @@ int64_t open_cfw_em9305_metaware_sdiv64_candidate(
     uint32_t negative = (uint32_t)((dividend < 0) != (divisor < 0));
 
     if (negative != 0u) {
-        if (quotient == (UINT64_C(1) << 63)) {
+        if (quotient == UINT64_C(0x8000000000000000)) {
             return INT64_MIN;
         }
         if (quotient <= (uint64_t)INT64_MAX) {
@@ -140,7 +200,7 @@ int64_t open_cfw_em9305_metaware_sdiv64_candidate(
         /* The stock divide-by-zero quotient is all ones. */
         return 1;
     }
-    if (quotient == (UINT64_C(1) << 63)) {
+    if (quotient == UINT64_C(0x8000000000000000)) {
         return INT64_MIN;
     }
     if (quotient > (uint64_t)INT64_MAX) {
@@ -154,7 +214,7 @@ uint64_t open_cfw_em9305_metaware_shift_left64_candidate(
     uint32_t count
 )
 {
-    return value << (count & 63u);
+    return open_cfw_em9305_shift_left64_words(value, count);
 }
 
 uint64_t open_cfw_em9305_metaware_shift_right64_candidate(
@@ -162,7 +222,7 @@ uint64_t open_cfw_em9305_metaware_shift_right64_candidate(
     uint32_t count
 )
 {
-    return value >> (count & 63u);
+    return open_cfw_em9305_shift_right64_words(value, count);
 }
 
 uint32_t open_cfw_em9305_metaware_stack_pointer_in_bounds(

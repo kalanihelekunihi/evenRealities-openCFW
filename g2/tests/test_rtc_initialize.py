@@ -142,7 +142,7 @@ class RtcInitializeTests(unittest.TestCase):
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "9fc7bbbbf384f779c0b880955546ee0f8de4572c0fe32a0f0a87e3ce76e138ba",
+            "b4a0682a2cf44673847c1677dddd17ab2c4638b95572b3b38787bc597b2dbb09",
         )
 
 

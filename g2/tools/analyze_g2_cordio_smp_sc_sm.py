@@ -383,7 +383,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "all_function_entries_routed": True,
             "all_dispatch_data_installed": True,
             "hardware_validation": {
-                "status": "blocked",
+                "status": "blocked by unavailable physical evidence",
                 "reason": (
                     "authorized physical G2/EM9305 pairing and controller "
                     "evidence is unavailable"

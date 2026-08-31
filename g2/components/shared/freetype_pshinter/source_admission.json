@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "component": "g2-freetype-pshinter",
+  "license": "FTL",
+  "upstream": {
+    "version": "2.9.1",
+    "tag": "VER-2-9-1",
+    "commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+    "snapshot_verifier": "third_party/freetype/verify_snapshot.py"
+  },
+  "mapped_evidence": {
+    "analyzer": "tools/analyze_g2_freetype_pshinter_function_map.py",
+    "mapping_sha256": "3500e37b490b460e6bf8e5ab1b1e916c787ebafa40a972ff63693de293b1ce90",
+    "functions": 79,
+    "bytes": 9188,
+    "high_functions": 18,
+    "high_bytes": 1554,
+    "medium_functions": 61,
+    "medium_bytes": 7634,
+    "unresolved_callable_bytes": 0
+  },
+  "source_inventory": {
+    "pshinter_files": 12,
+    "pshinter_source_bytes": 147127,
+    "inventory_sha256": "7001cfa7703fbb1dd13930c9383be836f1743485007e4236b274fa9a6763dc07"
+  },
+  "build": {
+    "community_source": true,
+    "translation_unit": "third_party/freetype/src/pshinter/pshinter.c",
+    "cortex_m55_compile_gate": "tests.test_freetype_pshinter_source_admission",
+    "full_candidate_link_gate": "tests.test_runtime_target_provider_candidate",
+    "production_overlay": false,
+    "authenticated_target_placement": false,
+    "production_overlay_gate": "requires pinned IAR-compatible code generation, relocation and target placement plus font payload, stack and WCET qualification"
+  },
+  "hardware_validation": {
+    "performed": false,
+    "blocker": "no authorized physical G2 hardware or authenticated external font payload was supplied to this software-only tranche"
+  }
+}

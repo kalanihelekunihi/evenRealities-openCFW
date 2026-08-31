@@ -44,7 +44,7 @@ INPUT_PINS = {
     HEADER: (1675, "e35cb68ca61f8f7585f24715120d2b3c61ba91b6f244039110d46cd50241b0b0"),
     FIXTURE: (4737, "811726b83d4093c8b650003169ee7e10fc8ab1f115fa00bc879a3c812f99c7b2"),
     PRODUCTION: (1767, "19aa8b8b678fdd733e45d04d53fa4738e38576e8c530e507279f935cf4c44af7"),
-    BOUNDARY: (2215, "e4fc434ad51ce7b0ec3c4990836c165c57a668a95eed98123efd8920c57fc375"),
+    BOUNDARY: (2226, "ef075c1eeefc40ba01f319c00aba2d60f4395f89344d2c4ee45958b73814fed2"),
 }
 FLAGS = (
     "-target", "arm-none-eabi", "-mcpu=cortex-m55", "-mthumb", "-Oz",
@@ -185,7 +185,7 @@ def audit() -> dict[str, Any]:
     regions = manifest["component_overrides"]["apollo_bootloader"]["regions"]
     by_name = {row["name"]: row for row in regions}
     source_name = "bootloader_mspi_sched_hiprio_4240aa_source_in_place"
-    successor_name = "bootloader_mspi_device_configure_424120_source_in_place"
+    successor_name = "bootloader_mspi_device_configure_424120_424976_official"
     require(source_name in by_name, "scheduler production region disappeared")
     require(successor_name in by_name, "device-configure successor disappeared")
     source_region = by_name[source_name]
@@ -196,8 +196,8 @@ def audit() -> dict[str, Any]:
     require(
         (successor["target_address"], successor["size"],
          successor["address_status"])
-        == (END, 1902, "source_compiled"),
-        "device-configure local successor ownership changed",
+        == (END, 2134, "official_blob"),
+        "device-configure retained-successor ownership changed",
     )
     with tempfile.TemporaryDirectory(prefix="open-cfw-sched-hiprio-component-") as raw:
         subprocess.run(["python3", str(BUILDER), "--output-dir", raw], cwd=ROOT,
@@ -218,7 +218,7 @@ def audit() -> dict[str, Any]:
     require((built["extraction"]["sha256"], built["placement"]["stock_sha256"])
             == (STOCK_SHA, STOCK_SHA), "production sched_hiprio placement changed")
     return {
-        "status": "production-routed-exact-dual-profile-source / hardware-validation-deferred-by-project-direction",
+        "status": "production-routed-exact-dual-profile-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "stock": {"start": ENTRY, "end": END, "bytes": len(stock), "sha256": STOCK_SHA},
         "identity": {"function": "sched_hiprio",
                      "upstream_commit": provenance["upstream"]["selected_commit"],
@@ -237,9 +237,9 @@ def audit() -> dict[str, Any]:
                        "next_frontier": successor["target_address"]},
         "next_frontier": {"start": END, "end": 0x0042488E,
                           "identity": "mspi_device_configure", "bytes": 1902},
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_gate": {"blocking_condition":
-                          "directed hardware testing is deferred by project direction",
+                          "directed hardware testing is blocked by unavailable physical evidence",
                           "required_future_evidence":
                           "authorized PRIMASK, command-queue, DMA, MMIO, interrupt, concurrency, and cold-boot qualification"},
         "hardware_operations": [],
@@ -256,7 +256,7 @@ def main() -> int:
     else:
         print("Bootloader sched_hiprio 0x4240aa: production-routed exact source")
         print("  next sequential frontier: 0x424120 (mspi_device_configure)")
-        print("  physical validation: deferred by project direction")
+        print("  physical validation: blocked by unavailable physical evidence")
     return 0
 
 

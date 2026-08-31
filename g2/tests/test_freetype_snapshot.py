@@ -21,9 +21,9 @@ EXPECTED_PROVENANCE_SIZE = 102377
 EXPECTED_PROVENANCE_SHA256 = (
     "2be8717625bceddee3aa95663186c0629247304c951c4790bc26cd372e3794bf"
 )
-EXPECTED_VERIFIER_SIZE = 25438
+EXPECTED_VERIFIER_SIZE = 30601
 EXPECTED_VERIFIER_SHA256 = (
-    "517e54823d33c95a8d0007e07ff513d796183470a0286a7cca00d9ea93ed9709"
+    "f3f40ace30832bafe1614facfa1e300ec4801390fa2fee3f425edbaf10304b38"
 )
 EXPECTED_RECORDS_SHA256 = (
     "62e233bc18e6ada5974c98d65dfc4faaf15058e39edbc435662337d60549ec32"
@@ -37,6 +37,14 @@ def digest(data: bytes) -> str:
 def canonical_digest(value: object) -> str:
     data = json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return digest(data)
+
+
+def generated_build_path(path: Path, root: Path) -> bool:
+    relative = path.relative_to(root)
+    return any(
+        part == "build" or part.startswith("build-")
+        for part in relative.parts[:-1]
+    )
 
 
 class FreeTypeSnapshotTests(unittest.TestCase):
@@ -338,7 +346,7 @@ class FreeTypeSnapshotTests(unittest.TestCase):
             for path in (ROOT / "components").glob("**/*")
             if path.is_file()
             and path.suffix in {".json", ".c", ".h", ".py", ".s", ".S", ".ld", ".lds", ".mk"}
-            and "build" not in path.relative_to(ROOT / "components").parts
+            and not generated_build_path(path, ROOT / "components")
         )
         offenders = [
             path.relative_to(ROOT).as_posix()
@@ -353,7 +361,55 @@ class FreeTypeSnapshotTests(unittest.TestCase):
                 "components/shared/freetype/runtime_freetype_truetype.c",
                 "components/shared/freetype/runtime_freetype_truetype.h",
                 "components/shared/freetype/source_admission.json",
+                "components/shared/freetype_cff/runtime_freetype_cff.c",
+                "components/shared/freetype_cff/runtime_freetype_cff.h",
+                "components/shared/freetype_cff/runtime_freetype_cff_import_providers.c",
+                "components/shared/freetype_cff/build_placement_census.py",
+                "components/shared/freetype_cff/placement_census.ld",
+                "components/shared/freetype_cff/source_admission.json",
+                "components/shared/freetype_base/runtime_freetype_base.c",
+                "components/shared/freetype_base/runtime_freetype_base.h",
+                "components/shared/freetype_base/runtime_freetype_base_face.c",
+                "components/shared/freetype_base/runtime_freetype_base_face.h",
+                "components/shared/freetype_base/source_admission.json",
+                "components/shared/freetype_sfnt/source_admission.json",
+                "components/shared/freetype_pshinter/source_admission.json",
+                "components/shared/freetype_psaux/source_admission.json",
+                "components/shared/freetype_psnames/source_admission.json",
+                "components/shared/freetype_smooth/source_admission.json",
+                "components/shared/freetype_autofit/source_admission.json",
+                "components/shared/freetype_truetype_map/source_admission.json",
             },
+        )
+
+    def test_generated_build_path_exclusion_is_narrow(self) -> None:
+        components = ROOT / "components"
+        self.assertTrue(
+            generated_build_path(components / "x" / "build" / "report.json", components)
+        )
+        self.assertTrue(
+            generated_build_path(
+                components / "x" / "build-clock-record" / "report.json",
+                components,
+            )
+        )
+        self.assertFalse(
+            generated_build_path(
+                components / "x" / "builder" / "production.json",
+                components,
+            )
+        )
+        self.assertFalse(
+            generated_build_path(
+                components / "x" / "buildrecord" / "production.json",
+                components,
+            )
+        )
+        self.assertFalse(
+            generated_build_path(
+                components / "x" / "build-provider.c",
+                components,
+            )
         )
 
 

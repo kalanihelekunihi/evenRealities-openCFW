@@ -134,22 +134,25 @@ TARGET_RELOCATIONS = [
     (0x12, 30, "open_cfw_freertos_heap4_free"),
     (0x16, 10, "ulSetInterruptMask"),
 ]
-PRODUCTION_OFFSET = 174_548
-PRODUCTION_RUNTIME_ADDRESS = 0x007B_ECF8
+PRODUCTION_OFFSET = 114_700
+PRODUCTION_RUNTIME_ADDRESS = 0x007B_0330
 PRODUCTION_SHA256 = (
     "078c97be19fff941ddb8ea3685dc5137f"
     "7e4d7e69e25ffaa0bdf21c22df509f2"
 )
-PRODUCTION_OVERLAY_SIZE = 429_058
+PRODUCTION_OVERLAY_SIZE = 360_578
 PRODUCTION_OVERLAY_SHA256 = (
-    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
 )
-PRODUCTION_COMPONENT_SIZE = 3_952_454
+PRODUCTION_COMPONENT_SIZE = 3_883_974
 PRODUCTION_COMPONENT_SHA256 = (
-    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
+)
+FINAL_COMPONENT_SHA256 = (
+    "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
 )
 PRODUCTION_DEPENDENCIES = {
-    "open_cfw_freertos_heap4_free": 0x007B_EC84,
+    "open_cfw_freertos_heap4_free": 0x007B_02BC,
     "ulSetInterruptMask": 0x007A_FF08,
 }
 
@@ -324,10 +327,19 @@ class RuntimeFreeRTOSQueueDeleteTests(unittest.TestCase):
             int(text["offset"]):int(text["offset"]) + int(text["size"])
         ]
         cls.current_config = json.loads(CURRENT_CONFIG.read_text())
+        stage_config = json.loads(CURRENT_CONFIG.read_text())
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = temporary / "core-stage-overlay.json"
+        stage_config_path.write_text(
+            json.dumps(stage_config, indent=2) + "\n", encoding="utf-8"
+        )
         cls.current_output = temporary / "current-overlay"
         cls.current_report = apollo_overlay.build(
             root=ROOT,
-            config_path=CURRENT_CONFIG,
+            config_path=stage_config_path,
             output_dir=cls.current_output,
             clang=os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
         )
@@ -797,7 +809,7 @@ class RuntimeFreeRTOSQueueDeleteTests(unittest.TestCase):
                 "overlay_size": PRODUCTION_OVERLAY_SIZE,
                 "overlay_sha256": PRODUCTION_OVERLAY_SHA256,
                 "component_size": PRODUCTION_COMPONENT_SIZE,
-                "component_sha256": PRODUCTION_COMPONENT_SHA256,
+                "component_sha256": FINAL_COMPONENT_SHA256,
             },
         )
 
@@ -813,7 +825,7 @@ class RuntimeFreeRTOSQueueDeleteTests(unittest.TestCase):
                 "offset": PRODUCTION_OFFSET,
                 "padding_before": 2,
                 "runtime_address": PRODUCTION_RUNTIME_ADDRESS,
-                "runtime_address_hex": "0x007BECF8",
+                "runtime_address_hex": "0x007B0330",
                 "size": 38,
             },
         )

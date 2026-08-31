@@ -43,7 +43,7 @@ APPLE_CLANG_VERSION = "Apple clang version 21.0.0 (clang-2100.3.27.1)"
 APPLE_OBJECT_SHA256 = (
     "fafc2e4ec4081c523f87f1eda3ff87d9cc207119ec4f4ca77910bb08ccae0f0d"
 )
-SOURCE_PIN = (2944, "e4f99df8121553d4cb6d6c2f94aa7ef1b1445efd200cee4d872dd75894d24089")
+SOURCE_PIN = (2980, "b04d9b6d4576b28be4ac66bcdebc93dfb78cea54cc3781fe3839a5e09a451b69")
 HEADER_PIN = (2032, "22203e33b8cd9e07b94d24477ffb8a6f096a9ea8393c5723071b5f12c3ec4296")
 BOOT_PIN = (148599, "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5")
 END_OF_STREAM = (0x00787C70, b"end-of-stream\0")
@@ -60,7 +60,7 @@ OVERLAY_RUNTIME_BASE = 0x00794324
 PROFILE_PINS = {
     "apple-clang": {
         "offset": 124640,
-        "runtime": 0x007C13CC,
+        "runtime": 0x007B2A04,
         "patch_prefix": "23f321bb",
         "patch_sha256": "c2c44419ee24c41c8d0e8bc7f04689bb7f1c18b1f7ec3d7304e04c37579938a1",
     },

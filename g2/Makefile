@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: MIT
 
 PYTHON ?= python3
+OPENCFW_MAKE ?= make
+export OPENCFW_MAKE
 
 # Toolchain selection.  openCFW pins compiled overlays byte-for-byte per
 # reviewed toolchain profile.  On macOS this resolves to the reviewed Apple
@@ -30,6 +32,12 @@ RING_COMPONENT_DIR := components/apollo_main/ring_gesture
 RING_COMPONENT_BUILD_DIR := $(RING_COMPONENT_DIR)/build
 CORE_COMPONENT_DIR := components/apollo_main/core_overlay
 CORE_COMPONENT_BUILD_DIR := $(CORE_COMPONENT_DIR)/build
+CORE_CANONICAL_OBSERVATION_DIR ?= build/canonical-observation/$(OPENCFW_TOOLCHAIN_PROFILE)
+CORE_CANONICAL_APPLE_A ?=
+CORE_CANONICAL_APPLE_B ?=
+CORE_CANONICAL_LINUX_A ?=
+CORE_CANONICAL_LINUX_B ?=
+CORE_CANONICAL_PROFILE_PROVIDER_ARGS ?=
 BOOT_COMPONENT_DIR := components/bootloader/core_overlay
 BOOT_COMPONENT_BUILD_DIR := $(BOOT_COMPONENT_DIR)/build
 TLSF_DIR := third_party/tlsf
@@ -65,6 +73,8 @@ AMBIQSUITE_CORDIO_APP_DIR := third_party/ambiqsuite-cordio-app-framework
 .PHONY: cordio-atts-write-closure
 .PHONY: cordio-atts-proc-closure
 .PHONY: cordio-atts-ind-closure
+.PHONY: freetype-cff-source-closure freetype-base-source-closure freetype-sfnt-source-closure freetype-pshinter-source-closure freetype-psaux-source-closure freetype-psnames-source-closure freetype-smooth-source-closure freetype-autofit-source-closure
+.PHONY: liblc3-encoder-source-readiness lvgl-ambiq-backend-readiness
 .PHONY: cordio-atts-read-closure
 .PHONY: cordio-atts-main-closure
 .PHONY: cordio-attc-write-closure
@@ -73,7 +83,7 @@ AMBIQSUITE_CORDIO_APP_DIR := third_party/ambiqsuite-cordio-app-framework
 .PHONY: cordio-attc-main-closure
 .PHONY: cordio-attc-disc-closure
 .PHONY: cordio-l2c-runtime-closure cordio-dm-adv-closure cordio-dm-adv-leg-closure cordio-dm-conn-closure cordio-dm-conn-sm-closure cordio-dm-dev-closure cordio-dm-main-closure cordio-dm-phy-closure cordio-dm-conn-master-leg-closure cordio-dm-conn-slave-leg-closure cordio-dm-conn-slave-closure cordio-dm-conn-master-closure cordio-dm-priv-closure cordio-dm-dev-priv-closure cordio-hci-cmd-phy-closure cordio-hci-cmd-core-closure cordio-hci-tr-closure cordio-hci-core-ps-closure cordio-hci-evt-closure cordio-hci-driver-closure
-.PHONY: case-semantic-leaves case-source-image touch-source-image pt-protocol-source ambiqsuite-amota-snapshot ble-ota-ring-profiles-closure ring-service-closure service-input-manager-closure ui-calendar-page-closure ota-transport-closure efs-transport-closure efs-service-closure ota-service-closure evenhub-loading-page-closure dashboard-watchface-layout1-closure teleprompt-fsm-closure health-data-manager-closure drv-cy8c4046fni-closure evenhub-main-closure translate-closure translate-ui-closure teleprompt-controller-closure conversate-comm-data-closure conversate-controller-closure conversate-ui-main-page-closure service-universal-setting-closure common-image-container-closure dashboard-watchface-layout2-closure dashboard-watchface-layout3-closure thread-ring-closure sensor-hub-closure icm45608-snapshot fw-event-loop-closure ring-connect-policy-closure system-alert-closure system-close-closure freertos-cli-filesystem-closure pb-service-conversate-closure pb-service-teleprompt-closure pb-service-even-ai-closure pb-service-terminal-closure pb-service-translate-closure pb-service-dev-config-closure pb-service-health-closure pb-service-onboarding-closure pb-service-notification-closure pb-service-setting-closure pb-service-dev-setting-closure
+.PHONY: case-semantic-leaves case-source-image touch-source-image pt-protocol-source em9305-arc-candidates em9305-qpc-component em9305-record-package ambiqsuite-amota-snapshot ble-ota-ring-profiles-closure ring-service-closure service-input-manager-closure ui-calendar-page-closure ota-transport-closure efs-transport-closure efs-service-closure ota-service-closure evenhub-loading-page-closure dashboard-watchface-layout1-closure teleprompt-fsm-closure health-data-manager-closure drv-cy8c4046fni-closure evenhub-main-closure translate-closure translate-ui-closure teleprompt-controller-closure conversate-comm-data-closure conversate-controller-closure conversate-ui-main-page-closure service-universal-setting-closure common-image-container-closure dashboard-watchface-layout2-closure dashboard-watchface-layout3-closure thread-ring-closure sensor-hub-closure icm45608-snapshot fw-event-loop-closure ring-connect-policy-closure system-alert-closure system-close-closure freertos-cli-filesystem-closure pb-service-conversate-closure pb-service-teleprompt-closure pb-service-even-ai-closure pb-service-terminal-closure pb-service-translate-closure pb-service-dev-config-closure pb-service-health-closure pb-service-onboarding-closure pb-service-notification-closure pb-service-setting-closure pb-service-dev-setting-closure
 
 case-semantic-leaves:
 	$(PYTHON) tools/analyze_g2_case_semantic_leaves.py --write-manifests
@@ -112,6 +122,34 @@ pt-protocol-source:
 		tests.test_runtime_pt_protocol_production_entry \
 		tests.test_apollo_pt_protocol_provider \
 		tests.test_analyze_g2_pt_protocol_source
+
+em9305-arc-candidates:
+	$(PYTHON) tools/build_em9305_arc_candidates.py \
+		--output-dir build/verification/em9305-arc \
+		--write-summary tools/manifests/em9305-arc-candidate-build-summary.json
+	$(PYTHON) tools/analyze_em9305_metaware_runtime_candidate.py
+	$(PYTHON) tools/analyze_em9305_source_readiness.py --write-manifests
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_em9305_metaware_runtime_candidate \
+		tests.test_em9305_source_readiness
+
+em9305-qpc-component:
+	$(PYTHON) tools/build_em9305_qpc_component.py \
+		--output-dir build/verification/em9305-qpc-component \
+		--write-summary tools/manifests/em9305-qpc-component-build-summary.json
+	$(PYTHON) tools/analyze_em9305_source_readiness.py --write-manifests
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_qpc_snapshot \
+		tests.test_em9305_qpc_port \
+		tests.test_em9305_source_readiness
+
+em9305-record-package:
+	$(PYTHON) tools/analyze_em9305_record_package.py --write-manifest
+	$(PYTHON) tools/analyze_em9305_source_readiness.py --write-manifests
+	$(PYTHON) -m unittest \
+		tests.test_em9305_record_package \
+		tests.test_analyze_em9305_record_package \
+		tests.test_em9305_source_readiness
 
 all: build
 
@@ -287,8 +325,85 @@ freetype-snapshot:
 
 freetype-truetype-source-closure: freetype-snapshot
 	$(PYTHON) research/candidates/freetype/analyze_truetype_candidate.py
+	$(PYTHON) tools/analyze_g2_freetype_truetype_function_map.py
+	$(PYTHON) tools/analyze_g2_freetype_truetype_source_admission.py --check-manifest
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_runtime_freetype_truetype_candidate \
+		tests.test_freetype_truetype_map_source_admission \
+		tests.test_runtime_target_provider_candidate
+
+freetype-cff-source-closure: freetype-snapshot
+	$(PYTHON) tools/analyze_g2_freetype_cff_function_map.py
+	$(PYTHON) tools/analyze_g2_freetype_cff_source_admission.py --check-manifest
+	$(PYTHON) tools/analyze_g2_freetype_cff_production_route.py
+	$(PYTHON) tools/analyze_g2_freetype_cff_placement_link.py
+	$(PYTHON) tools/analyze_g2_freetype_cff_capacity_solver.py --check-manifest
+	$(PYTHON) tools/analyze_g2_freetype_cff_size_optimization.py --check-manifest
+	$(PYTHON) tools/analyze_g2_freetype_cff_scatter_link.py --check-manifest
+	$(PYTHON) tools/analyze_g2_freetype_cff_package_integration.py --check-manifest
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_freetype_cff \
+		tests.test_freetype_cff_placement_link \
+		tests.test_freetype_cff_capacity_solver \
+		tests.test_freetype_cff_size_optimization \
+		tests.test_freetype_cff_scatter_link \
+		tests.test_freetype_cff_package_integration \
+		tests.test_runtime_freetype_base_candidate \
+		tests.test_runtime_target_provider_candidate \
+		tests.test_freetype_snapshot
+
+freetype-base-source-closure: freetype-snapshot
+	$(PYTHON) tools/analyze_g2_freetype_base_function_map.py
+	$(PYTHON) tools/analyze_g2_freetype_base_source_admission.py --check-manifest
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_freetype_base_admission \
+		tests.test_freetype_snapshot
+
+freetype-sfnt-source-closure: freetype-snapshot
+	$(PYTHON) tools/analyze_g2_freetype_sfnt_function_map.py
+	$(PYTHON) tools/analyze_g2_freetype_sfnt_source_admission.py --check-manifest
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_freetype_sfnt_function_map \
+		tests.test_freetype_sfnt_source_admission \
+		tests.test_runtime_target_provider_candidate
+
+freetype-pshinter-source-closure: freetype-snapshot
+	$(PYTHON) tools/analyze_g2_freetype_pshinter_function_map.py
+	$(PYTHON) tools/analyze_g2_freetype_pshinter_source_admission.py --check-manifest
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_freetype_pshinter_function_map \
+		tests.test_freetype_pshinter_source_admission \
+		tests.test_runtime_target_provider_candidate
+
+freetype-psaux-source-closure: freetype-snapshot
+	$(PYTHON) tools/analyze_g2_freetype_psaux_function_map.py
+	$(PYTHON) tools/analyze_g2_freetype_psaux_source_admission.py --check-manifest
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_freetype_psaux_function_map \
+		tests.test_freetype_psaux_source_admission \
+		tests.test_runtime_target_provider_candidate
+
+freetype-psnames-source-closure: freetype-snapshot
+	$(PYTHON) tools/analyze_g2_freetype_psnames_function_map.py
+	$(PYTHON) tools/analyze_g2_freetype_psnames_source_admission.py --check-manifest
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_freetype_psnames_function_map \
+		tests.test_freetype_psnames_source_admission \
+		tests.test_runtime_target_provider_candidate
+
+freetype-smooth-source-closure: freetype-snapshot
+	$(PYTHON) tools/analyze_g2_freetype_smooth_function_map.py
+	$(PYTHON) tools/analyze_g2_freetype_smooth_source_admission.py --check-manifest
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_freetype_smooth_function_map \
+		tests.test_freetype_smooth_source_admission \
+		tests.test_runtime_target_provider_candidate
+
+freetype-autofit-source-closure: freetype-snapshot
+	$(PYTHON) tools/analyze_g2_freetype_autofit_function_map.py
+	$(PYTHON) tools/analyze_g2_freetype_autofit_source_admission.py --check-manifest
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_freetype_autofit_source_admission \
 		tests.test_runtime_target_provider_candidate
 
 flashdb-snapshot:
@@ -595,6 +710,7 @@ bootloader-numeric-closure: source
 		tests.test_runtime_bootloader_hw_config_latch_secondary_422f4c \
 		tests.test_runtime_bootloader_hw_config_release_secondary_422fa2 \
 		tests.test_runtime_bootloader_hw_shutdown_422fde \
+		tests.test_runtime_bootloader_hw_initializer_42308e \
 		tests.test_runtime_bootloader_hw_fifo_4232c8 \
 		tests.test_runtime_bootloader_hw_fifo_adapters_423350 \
 		tests.test_runtime_bootloader_hw_mode_dispatch_4233e8 \
@@ -682,9 +798,12 @@ iar-format-output-closure: source
 
 .PHONY: release-license-audit release-license-gate
 .PHONY: community-distribution-gate community-source-bundle community-source-smoke
+.PHONY: community-local-preflight community-local-build
+.PHONY: core-canonical-observation core-canonical-admission core-canonical-apply core-canonical-test
 .PHONY: completion-readiness completion-classification-gate completion-source-gate
 .PHONY: completion-source-ownership-gate completion-license-policy-gate
 .PHONY: completion-assessment completion-assessment-check
+.PHONY: dual-profile-ownership dual-profile-ownership-write
 .PHONY: nemavg-stroke-caps-candidate clkmgr-divider-candidate
 
 nemavg-stroke-caps-candidate:
@@ -694,7 +813,7 @@ nemavg-stroke-caps-candidate:
 		tests.test_runtime_nemavg_stroke_caps_candidate
 
 clkmgr-divider-candidate:
-	$(PYTHON) tools/analyze_g2_clkmgr_divider_candidate.py
+	$(PYTHON) tools/analyze_g2_clkmgr_divider_candidate.py --write-manifest
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_clkmgr_divider_candidate \
 		tests.test_runtime_clkmgr_divider_candidate
@@ -716,12 +835,12 @@ completion-source-ownership-gate:
 completion-license-policy-gate:
 	$(PYTHON) tools/analyze_g2_completion_readiness.py --require-project-license-policy
 
-completion-assessment:
+completion-assessment: dual-profile-ownership
 	$(PYTHON) tools/generate_g2_completion_report.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_generate_g2_completion_report
 
-completion-assessment-check:
+completion-assessment-check: dual-profile-ownership
 	$(PYTHON) tools/generate_g2_completion_report.py --check
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_generate_g2_completion_report
@@ -735,12 +854,81 @@ release-license-audit:
 release-license-gate:
 	$(PYTHON) tools/audit_g2_release_licensing.py --release-gate
 
+core-canonical-observation:
+	$(PYTHON) $(CORE_COMPONENT_DIR)/build_component.py \
+		--record-canonical \
+		--clang "$(OPENCFW_CLANG)" \
+		--toolchain-profile "$(OPENCFW_TOOLCHAIN_PROFILE)" \
+		--output-dir "$(CORE_CANONICAL_OBSERVATION_DIR)"
+
+core-canonical-admission:
+	@test -n "$(CORE_CANONICAL_APPLE_A)" -a -n "$(CORE_CANONICAL_APPLE_B)" \
+		-a -n "$(CORE_CANONICAL_LINUX_A)" -a -n "$(CORE_CANONICAL_LINUX_B)" || { \
+		echo 'set CORE_CANONICAL_{APPLE,LINUX}_{A,B} to four independent build-report.json paths' >&2; \
+		exit 2; \
+	}
+	$(PYTHON) tools/apply_g2_canonical_observations.py \
+		--apple-observation "$(CORE_CANONICAL_APPLE_A)" "$(CORE_CANONICAL_APPLE_B)" \
+		--linux-observation "$(CORE_CANONICAL_LINUX_A)" "$(CORE_CANONICAL_LINUX_B)" \
+		$(CORE_CANONICAL_PROFILE_PROVIDER_ARGS)
+
+core-canonical-apply:
+	@test -n "$(CORE_CANONICAL_APPLE_A)" -a -n "$(CORE_CANONICAL_APPLE_B)" \
+		-a -n "$(CORE_CANONICAL_LINUX_A)" -a -n "$(CORE_CANONICAL_LINUX_B)" || { \
+		echo 'set CORE_CANONICAL_{APPLE,LINUX}_{A,B} to four independent build-report.json paths' >&2; \
+		exit 2; \
+	}
+	$(PYTHON) tools/apply_g2_canonical_observations.py \
+		--apple-observation "$(CORE_CANONICAL_APPLE_A)" "$(CORE_CANONICAL_APPLE_B)" \
+		--linux-observation "$(CORE_CANONICAL_LINUX_A)" "$(CORE_CANONICAL_LINUX_B)" \
+		$(CORE_CANONICAL_PROFILE_PROVIDER_ARGS) --apply
+
+core-canonical-test:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_apply_g2_canonical_observations \
+		tests.test_apply_g2_canonical_observations_cff \
+		tests.test_core_canonical_recorder_security
+
 community-distribution-gate: completion-assessment-check \
 		completion-classification-gate \
-		completion-source-ownership-gate completion-license-policy-gate
+		completion-source-ownership-gate completion-license-policy-gate \
+		core-canonical-test dual-profile-ownership
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_audit_g2_release_licensing \
-		tests.test_community_distribution
+		tests.test_community_distribution \
+		tests.test_community_markdown_link_closure
+
+community-local-preflight:
+	$(PYTHON) tools/community_distribution.py preflight-local \
+		--clang "$(OPENCFW_CLANG)" \
+		--toolchain-profile "$(OPENCFW_TOOLCHAIN_PROFILE)" \
+		--make "$(OPENCFW_MAKE)"
+
+community-local-build: community-local-preflight
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_case_source_image \
+		tests.test_analyze_em9305_record_package \
+		tests.test_em9305_record_package \
+		tests.test_runtime_nemavg_stroke_caps_candidate \
+		tests.test_runtime_clkmgr_divider_candidate \
+		tests.test_apply_g2_canonical_observations \
+		tests.test_core_canonical_recorder_security
+	$(PYTHON) components/bootloader/core_overlay/build_component.py \
+		--clang "$(OPENCFW_CLANG)" \
+		--toolchain-profile "$(OPENCFW_TOOLCHAIN_PROFILE)"
+	$(PYTHON) components/apollo_main/core_overlay/build_component.py \
+		--clang "$(OPENCFW_CLANG)" \
+		--toolchain-profile "$(OPENCFW_TOOLCHAIN_PROFILE)"
+	$(PYTHON) tools/open_cfw.py build \
+		--manifest manifests/g2-2.2.6.10-core-source.json \
+		--output-dir build/source \
+		--toolchain-profile "$(OPENCFW_TOOLCHAIN_PROFILE)"
+	$(PYTHON) tools/open_cfw.py verify \
+		--manifest manifests/g2-2.2.6.10-core-source.json
+	$(PYTHON) tools/open_cfw.py verify-artifacts \
+		--manifest manifests/g2-2.2.6.10-core-source.json \
+		--output-dir build/source \
+		--toolchain-profile "$(OPENCFW_TOOLCHAIN_PROFILE)"
 
 community-source-bundle: community-distribution-gate
 	$(PYTHON) tools/community_distribution.py create \
@@ -751,9 +939,12 @@ community-source-bundle: community-distribution-gate
 community-source-smoke: community-source-bundle reference
 	$(PYTHON) tools/community_distribution.py smoke-build \
 		build/community/openCFW-g2-community-source.zip \
-		"$(REFERENCE_PACKAGE)"
+		"$(REFERENCE_PACKAGE)" \
+		--clang "$(OPENCFW_CLANG)" \
+		--toolchain-profile "$(OPENCFW_TOOLCHAIN_PROFILE)" \
+		--make "$(OPENCFW_MAKE)"
 
-source-release: release-license-gate source
+source-release: community-distribution-gate release-license-gate source
 	$(PYTHON) tools/release_cfw.py \
 		"$(SOURCE_PACKAGE)" \
 		"$(RELEASE_PACKAGE)" \
@@ -1713,6 +1904,60 @@ liblc3-source-closure:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_liblc3
 
+liblc3-encoder-source-readiness: liblc3-source-closure
+	$(PYTHON) tools/analyze_g2_liblc3_encoder_source_admission.py
+	$(PYTHON) tools/analyze_g2_liblc3_encoder_placement.py
+	$(PYTHON) tools/analyze_g2_liblc3_encoder_specialization.py
+	$(PYTHON) tools/analyze_g2_liblc3_encoder_capacity.py
+	$(PYTHON) tools/analyze_g2_liblc3_encoder_suffix_contracts.py
+	$(PYTHON) tools/analyze_g2_liblc3_service_audio_adapter.py
+	$(PYTHON) tools/analyze_g2_liblc3_service_audio_route.py
+	$(PYTHON) tools/analyze_g2_liblc3_service_audio_capacity.py
+	$(PYTHON) tools/analyze_g2_liblc3_service_audio_suffix_pack.py
+	$(PYTHON) tools/analyze_g2_liblc3_encoder_data_policy.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_liblc3_encoder_source_admission \
+		tests.test_runtime_liblc3_encoder_provider \
+		tests.test_apollo_liblc3_encoder_component \
+		tests.test_analyze_g2_liblc3_encoder_placement \
+		tests.test_apollo_liblc3_encoder_specialization \
+		tests.test_apollo_liblc3_specialized_xip \
+		tests.test_analyze_g2_liblc3_encoder_capacity \
+		tests.test_analyze_g2_liblc3_encoder_suffix_contracts \
+		tests.test_runtime_liblc3_service_audio_adapter \
+		tests.test_runtime_liblc3_service_audio_stock_shim \
+		tests.test_analyze_g2_liblc3_service_audio_adapter \
+		tests.test_analyze_g2_liblc3_service_audio_route \
+		tests.test_analyze_g2_liblc3_service_audio_capacity \
+		tests.test_analyze_g2_liblc3_service_audio_suffix_pack \
+		tests.test_analyze_g2_liblc3_encoder_data_policy
+
+lvgl-ambiq-backend-readiness:
+	$(PYTHON) tools/build_g2_lvgl_ambiq_backend.py
+	$(PYTHON) tools/audit_g2_lvgl_nema_link.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_build_g2_lvgl_ambiq_backend \
+		tests.test_runtime_lvgl_ambiq_sw_mask_cache_free \
+		tests.test_runtime_lvgl_ambiq_nema_buffer_helpers \
+		tests.test_runtime_lvgl_ambiq_apollo_hal_provider \
+		tests.test_runtime_lvgl_ambiq_freertos_queue_provider \
+		tests.test_runtime_lvgl_ambiq_lvgl_core_provider \
+		tests.test_runtime_lvgl_ambiq_lvgl_stateless_provider \
+		tests.test_runtime_lvgl_ambiq_target_runtime_provider \
+		tests.test_runtime_lvgl_ambiq_math_provider \
+		tests.test_runtime_lvgl_ambiq_math_dp_provider \
+		tests.test_runtime_lvgl_ambiq_lvgl_heap_array_provider \
+		tests.test_runtime_lvgl_ambiq_lvgl_draw_buf_lifecycle_provider \
+		tests.test_runtime_lvgl_ambiq_lvgl_draw_buf_shape_provider \
+		tests.test_runtime_lvgl_ambiq_lvgl_font_fmt_provider \
+		tests.test_runtime_lvgl_ambiq_lvgl_global_storage_provider \
+		tests.test_runtime_lvgl_ambiq_lvgl_vector_destroy_provider \
+		tests.test_runtime_lvgl_ambiq_lvgl_draw_unit_provider \
+		tests.test_runtime_lvgl_ambiq_lvgl_draw_dispatch_provider \
+		tests.test_runtime_lvgl_ambiq_lvgl_freetype_event_provider \
+		tests.test_runtime_lvgl_ambiq_lvgl_mutex_provider \
+		tests.test_audit_g2_lvgl_nema_link
+
 service-audio-closure:
 	$(PYTHON) tools/analyze_g2_service_audio.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
@@ -2072,6 +2317,17 @@ transparent: transparent-ledger
 transparent-test:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_transparent_source_pipeline
+
+dual-profile-ownership:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/analyze_g2_dual_profile_ownership.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_dual_profile_ownership
+
+dual-profile-ownership-write:
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) \
+		tools/analyze_g2_dual_profile_ownership.py --write-companion
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_dual_profile_ownership
 
 verify: ring-component bootloader-component core-component upstream-audits research-corpus
 	$(PYTHON) tools/open_cfw.py verify --manifest "$(REFERENCE_MANIFEST)"

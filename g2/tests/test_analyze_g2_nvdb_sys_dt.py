@@ -58,7 +58,7 @@ class AnalyzeG2NvdbSysDtTests(unittest.TestCase):
         )
         self.assertEqual(
             production["candidate_sha256"],
-            "a18152b8a7e769142bb21795cb724ef29df2c8ea18176050d12d8606189516c7",
+            "c6cf42cb277417fd0cf7bdf62d50167a194c983295a73599a6617477cbf2f8b0",
         )
         self.assertEqual(
             production["relocated_leaves"],

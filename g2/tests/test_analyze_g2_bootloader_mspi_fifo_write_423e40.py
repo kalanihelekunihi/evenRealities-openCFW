@@ -111,7 +111,7 @@ class BootloaderMspiFifoWriteBoundaryTests(unittest.TestCase):
         report = json.loads(completed.stdout)
         self.assertEqual(
             report["status"],
-            "implemented-in-source / hardware-validation-deferred-by-project-direction",
+            "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         )
         self.assertEqual(report["identity"]["function"], "mspi_fifo_write")
         self.assertEqual(report["identity"]["provider"], "am_hal_delay_us_status_check")
@@ -125,7 +125,7 @@ class BootloaderMspiFifoWriteBoundaryTests(unittest.TestCase):
         self.assertEqual(
             report["production"]["source_owned_bytes"]
             + report["production"]["retained_official_bytes"],
-            147296,
+            147350,
         )
         self.assertEqual(report["production"]["next_frontier"], 0x00423F28)
         self.assertEqual(report["production"]["local_successor"], {
@@ -133,7 +133,7 @@ class BootloaderMspiFifoWriteBoundaryTests(unittest.TestCase):
             "end": 0x00423F28,
             "address_status": "source_compiled",
         })
-        self.assertEqual(report["hardware_validation"], "deferred by project direction")
+        self.assertEqual(report["hardware_validation"], "blocked by unavailable physical evidence")
         self.assertIn("authorized G2 qualification", report["hardware_gate"]["required_future_evidence"])
         self.assertEqual(report["hardware_operations"], [])
 

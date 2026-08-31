@@ -8,8 +8,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "components/apollo_main/core_overlay/pb_service_dev_setting.c"
 FIXTURE = ROOT / "tests/fixtures/pb_service_dev_setting_host.c"
-SOURCE_SIZE = 15562
-SOURCE_SHA256 = "bfb6a066ccb43b91f0d026cbc26078ecead559297d7289bacd52a389f5193215"
+SOURCE_SIZE = 15553
+SOURCE_SHA256 = "eb006e7d29ca56b031faa28d3aad5425d7ca463219e855fd9a7d827f7cd5b850"
 SELECTORS = (
     "BUFFER_WRITE", "TRANSMIT", "RX_RESTORE", "TX_RESTORE", "RX_RESTART",
     "TX_RESTART", "RX_HEARTBEAT", "TX_HEARTBEAT", "RX_TIME", "TX_TIME",

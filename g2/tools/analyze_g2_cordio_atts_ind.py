@@ -51,11 +51,11 @@ CANDIDATE_FUNCTIONS = [
     "open_cfw_cordio_atts_handle_value_notification",
 ]
 CANDIDATE_LEAF_METRICS = [
-    (340072, 182, 0), (340256, 128, 0), (340384, 26, 1),
-    (340412, 190, 11), (340604, 154, 6), (340760, 164, 6),
-    (340924, 116, 7), (341040, 32, 2), (341072, 318, 11),
-    (341392, 110, 5), (341504, 122, 0), (341628, 30, 1),
-    (341660, 30, 1),
+    (271592, 182, 0), (271776, 128, 0), (271904, 26, 1),
+    (271932, 190, 11), (272124, 154, 6), (272280, 164, 6),
+    (272444, 116, 7), (272560, 32, 2), (272592, 318, 11),
+    (272912, 110, 5), (273024, 122, 0), (273148, 30, 1),
+    (273180, 30, 1),
 ]
 
 FUNCTIONS = {
@@ -395,7 +395,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
                 "timeout message decodes and looks up without a retained transition",
             ],
             "hardware_validation": (
-                "deferred by project direction; future qualification requires authorized responsive G2/ATT peer evidence"
+                "blocked by unavailable physical evidence; future qualification requires authorized responsive G2/ATT peer evidence"
             ),
         },
     }

@@ -66,7 +66,7 @@ class BootloaderAeabiMemsetTests(unittest.TestCase):
     def test_source_is_c_and_freestanding_target_compiles(self) -> None:
         text = SOURCE.read_text(encoding="utf-8")
         self.assertIn("while (count != 0U)", text)
-        self.assertIn("GPL-3.0-or-later", text)
+        self.assertIn("SPDX-License-Identifier: MIT", text)
         output = Path(self.temporary.name) / "memset-arm.o"
         subprocess.run(
             [

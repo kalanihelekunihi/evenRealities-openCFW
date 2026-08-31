@@ -34,7 +34,7 @@ LICENSE = AMBIQ_ROOT / "LICENSE"
 CMSIS_CORE = ROOT / "third_party/cmsis-core/CMSIS/Core/Include"
 
 FILE_PINS = {
-    PRODUCTION_SOURCE: (2021, "3112ebd6442131e09ae6d37d4b51f095033905e26aed05be5122a71af619b448"),
+    PRODUCTION_SOURCE: (2008, "d68e1093114e63752193d244e24b181c8e3576c0fe8a6636374374569bb9b359"),
     CENSUS: (3109, "11ae9a31756438f29e42e48d4fae6d4b17c74dba4e2bf673827d5a7c81ac142b"),
     BOUNDARY: (2650, "a812f9bc8fec12c115107b0aa394582700f2f120cd989e26272beb2528fa403b"),
     HEADER: (1911, "eee01d2102b78f8c15cbbffa6c50b66dd0f9484c65ab66f353d1871061ee5066"),
@@ -283,7 +283,7 @@ def audit() -> dict:
     )
 
     return {
-        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
+        "status": "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "identity": {
             "function": "mspi_cq_init", "provider": "am_hal_cmdq_init",
             "upstream_commit": provenance["upstream"]["selected_commit"],
@@ -313,7 +313,7 @@ def audit() -> dict:
                        },
                        "source_owned_bytes": component["source_owned_bytes"],
                        "retained_official_bytes": component["opaque_base_bytes"]},
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_gate": {
             "required_future_evidence": "authorized G2 qualification exercising command-queue initialization, all MSPI interfaces, retained handle publication, and cold boot",
         },
@@ -331,7 +331,7 @@ def main() -> int:
         print(json.dumps(report, indent=2, sort_keys=True))
     else:
         print("Bootloader MSPI CQ-init 0x423f28: implemented in exact source")
-        print("  physical validation: deferred by project direction")
+        print("  physical validation: blocked by unavailable physical evidence")
         print("  exact local successor: 0x423f54 (CQ term, source-owned)")
     return 0
 

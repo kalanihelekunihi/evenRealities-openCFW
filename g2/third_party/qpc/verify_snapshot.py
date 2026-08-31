@@ -94,11 +94,15 @@ def verify() -> dict:
         if fact not in port:
             raise SystemExit(f"QP/C EM9305 port configuration changed: {fact}")
     compile_sources("/usr/bin/clang")
-    arc_compiler = os.environ.get("OPENCFW_ARC_GCC") or shutil.which("arc-elf32-gcc")
+    arc_compiler = (
+        os.environ.get("OPENCFW_ARC_GCC")
+        or shutil.which("arc-linux-gnu-gcc")
+        or shutil.which("arc-elf32-gcc")
+    )
     target = "blocked_unavailable_reviewed_arc_compiler"
     if arc_compiler:
         compile_sources(arc_compiler, arc=True)
-        target = "arc_objects_compiled_not_integrated"
+        target = "arc_objects_compiled_component_link_receipt_separate"
     return {"files": len(FILES), "portable_sources": len(SOURCES), "version": "6.5.1", "host_compile": "pass", "arc_target": target, "production_routed": False}
 
 

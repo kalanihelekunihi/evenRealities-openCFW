@@ -110,11 +110,11 @@ class BootloaderStageTwoCandidateTests(unittest.TestCase):
         )
         self.assertEqual(
             report["functions"]["stage_two_status"],
-            "exact-MIT-candidate / equivalent-GPL-production-source-routed",
+            "exact-MIT-candidate / equivalent-MIT-production-source-routed",
         )
         self.assertEqual(
             report["functions"]["stage_two_mode_flags"],
-            "exact-MIT-candidate / equivalent-GPL-production-source-routed",
+            "exact-MIT-candidate / equivalent-MIT-production-source-routed",
         )
         self.assertEqual(
             report["providers"]["unresolved_license_or_source"], ["critical_save"]

@@ -69,10 +69,10 @@ class ApolloCoreOverlayTests(unittest.TestCase):
     def test_overlay_and_complete_component_are_pinned(self) -> None:
         overlay = self.component_report["overlay"]
         component = self.component_report["component"]
-        self.assertEqual(overlay["size"], 429058)
+        self.assertEqual(overlay["size"], 362272)
         self.assertEqual(
             overlay["sha256"],
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
         )
         expected_legacy_functions = {
                 "evenhub_longpress": {"offset": 0, "size": 54},
@@ -2718,25 +2718,25 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     separators=(",", ":"),
                 ).encode("utf-8")
             ).hexdigest(),
-            "8248c77084923167d208b9c18b2a9b672607b162e584b312c0f9413a49592a17",
+            "61466cccb7208ece32524a2150f6dd9148656e82db175e22ed16cee1b821e18f",
         )
-        self.assertEqual(overlay["link"]["text_size"], 163862)
-        self.assertEqual(overlay["link"]["rodata_size"], 9572)
-        self.assertEqual(overlay["link"]["resolved_relocation_count"], 989)
-        self.assertEqual(len(overlay["functions"]), 2631)
-        self.assertEqual(len(overlay["patched_sites"]), 2375)
-        self.assertEqual(component["replaced_stock_function_bytes"], 409246)
-        self.assertEqual(component["generated_patch_site_bytes"], 401494)
+        self.assertEqual(overlay["link"]["text_size"], 109592)
+        self.assertEqual(overlay["link"]["rodata_size"], 3996)
+        self.assertEqual(overlay["link"]["resolved_relocation_count"], 906)
+        self.assertEqual(len(overlay["functions"]), 2436)
+        self.assertEqual(len(overlay["patched_sites"]), 2325)
+        self.assertEqual(component["replaced_stock_function_bytes"], 400932)
+        self.assertEqual(component["generated_patch_site_bytes"], 406008)
         self.assertEqual(component["generated_wrapper_bytes"], 32)
         self.assertEqual(component["source_owned_in_place_bytes"], 184)
         self.assertEqual(component["source_owned_in_place_data_bytes"], 2200)
         self.assertEqual(component["replaced_stock_data_bytes"], 2200)
-        self.assertEqual(component["source_owned_bytes"], 438910)
-        self.assertEqual(component["opaque_base_bytes"], 3111910)
-        self.assertEqual(component["size"], 3952454)
+        self.assertEqual(component["source_owned_bytes"], 393288)
+        self.assertEqual(component["opaque_base_bytes"], 3084700)
+        self.assertEqual(component["size"], 3885668)
         self.assertEqual(
             component["sha256"],
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+            "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
         )
 
     def test_freertos_semaphore_take_upstream_pair_is_source_closed(self) -> None:
@@ -2782,21 +2782,21 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             "7bc1adb794188c36fe0693ef4dcf0e45"
             "b83cb32ba523142ecb72e703d65979e2",
         )
-        self.assertEqual(helper["placement"]["offset"], 180544)
+        self.assertEqual(helper["placement"]["offset"], 120696)
         self.assertEqual(helper["placement"]["size"], 18)
-        self.assertEqual(take["placement"]["offset"], 180564)
+        self.assertEqual(take["placement"]["offset"], 120716)
         self.assertEqual(take["placement"]["size"], 602)
         self.assertEqual(helper["extraction"]["relocations"], [])
         self.assertEqual(
             take["extraction"]["relocations"],
             [{
                 "offset": 580,
-                "runtime_address": 0x007C06BC,
-                "runtime_address_hex": "0x007C06BC",
+                "runtime_address": 0x007B1CF4,
+                "runtime_address_hex": "0x007B1CF4",
                 "symbol": helper_name,
                 "symbol_type": "STT_NOTYPE",
-                "target_address": 0x007C0464,
-                "target_address_hex": "0x007C0464",
+                "target_address": 0x007B1A9C,
+                "target_address_hex": "0x007B1A9C",
                 "target_function": helper_name,
                 "type": "R_ARM_THM_CALL",
                 "type_id": 10,
@@ -2816,7 +2816,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 replacement[:4],
                 link=False,
             ),
-            0x007C0478,
+            0x007B1AB0,
         )
         self.assertEqual(replacement[4:], b"\x00\xBF" * 175)
 
@@ -2992,7 +2992,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "223758f605ee22220e5a534db4675545c"
                     "c43a1f1fc5f24051c3c7c3cc92d556c"
                 ),
-                "offset": 181168,
+                "offset": 121320,
                 "size": 172,
                 "sha256": (
                     "689da8cc4cd4757e609cdf77b3675ff73"
@@ -3000,7 +3000,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 ),
                 "patch": "replace_freertos_queue_generic_reset",
                 "stock": (0x00441516, 180),
-                "target": 0x007C06D4,
+                "target": 0x007B1D0C,
             },
             "open_cfw_freertos_task_remove_from_unordered_event_list": {
                 "path": (
@@ -3012,7 +3012,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "3656a2e24d63a2dd92743fde085be59f"
                     "f4c830afb357535b38dbd4a4dc39f77c"
                 ),
-                "offset": 181340,
+                "offset": 121492,
                 "size": 214,
                 "sha256": (
                     "c4a89f560a07598f3af72a4ca0e3a6b"
@@ -3022,7 +3022,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "replace_freertos_task_remove_from_unordered_event_list"
                 ),
                 "stock": (0x0045547C, 218),
-                "target": 0x007C0780,
+                "target": 0x007B1DB8,
             },
         }
         selected = [
@@ -3379,8 +3379,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             leaf["placement"],
             {
                 "alignment": 4,
-                "offset": 173436,
-                "padding_before": 2,
+                "offset": 113588,
+                "padding_before": 0,
                 "size": 48,
             },
         )
@@ -3401,7 +3401,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         function = overlay_report["functions"][
             "am_hal_mspi_interrupt_clear"
         ]
-        self.assertEqual(function, {"offset": 173436, "size": 48})
+        self.assertEqual(function, {"offset": 113588, "size": 48})
         overlay = (
             OPENCFW_ROOT / overlay_report["artifact"]
         ).read_bytes()
@@ -3487,7 +3487,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 leaf["placement"]["padding_before"]
                 for leaf in report["isolated_leaves"]
             ),
-            6,
+            4,
         )
 
         expected = {
@@ -3497,7 +3497,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "f6bd0708e653c8e8880e33e298f9dc8"
                     "ede1305c9386ea4ca5ff554d4022dc323"
                 ),
-                "offset": 173484,
+                "offset": 113636,
                 "discarded_function": "vClearInterruptMask",
                 "site_name": "replace_freertos_ul_set_interrupt_mask",
                 "runtime_address": 0x005FA0A4,
@@ -3509,7 +3509,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "97532a7902b38e1551198dd647d0fcdc3"
                     "a6f19315b6491058a813c7643e0028a"
                 ),
-                "offset": 173506,
+                "offset": 113658,
                 "discarded_function": "ulSetInterruptMask",
                 "site_name": "replace_freertos_v_clear_interrupt_mask",
                 "runtime_address": 0x005FA0BA,
@@ -3737,7 +3737,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             leaf["placement"],
             {
                 "alignment": 4,
-                "offset": 173520,
+                "offset": 113672,
                 "padding_before": 0,
                 "size": 44,
             },
@@ -3746,7 +3746,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         overlay = (
             OPENCFW_ROOT / overlay_report["artifact"]
         ).read_bytes()
-        body = overlay[173520:173564]
+        body = overlay[113672:113716]
         self.assertEqual(
             hashlib.sha256(body).hexdigest(),
             "6161db6d0867e47749654ae90b560ae49"
@@ -3781,13 +3781,13 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "expected_size": 30,
                 "payload_offset": 602274,
                 "runtime_address": 0x004CB082,
-                "target_address": 0x007BE8F4,
+                "target_address": 0x007AFF2C,
                 "target_function": "open_cfw_littlefs_mlist_isopen",
             },
         )
         self.assertEqual(
             replacement,
-            bytes.fromhex("f3f237bc") + bytes.fromhex("00bf") * 13,
+            bytes.fromhex("e4f253bf") + bytes.fromhex("00bf") * 13,
         )
         self.assertEqual(
             apollo_overlay.decode_thumb_branch(
@@ -3826,7 +3826,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         }
         expectations = {
             "open_cfw_littlefs_util_fromle32": (
-                173564,
+                113716,
                 2,
                 0,
                 (
@@ -3838,7 +3838,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 34,
             ),
             "open_cfw_littlefs_util_tole32": (
-                173568,
+                113720,
                 2,
                 2,
                 (
@@ -3850,7 +3850,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 8,
             ),
             "open_cfw_littlefs_util_frombe32": (
-                173572,
+                113724,
                 4,
                 2,
                 (
@@ -3862,7 +3862,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 34,
             ),
             "open_cfw_littlefs_util_tobe32": (
-                173576,
+                113728,
                 4,
                 0,
                 (
@@ -3942,8 +3942,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "function": "open_cfw_easylogger_set_output_enabled",
                 "body": (106784, 152),
                 "body_sha256":
-                    "f6db0426d0746d9658eb9fe768ca7142"
-                    "d5f65dd87a180c2eba96d1e6cfa69688",
+                    "ce7b7b11a0c135247a6d5c49f490dbd"
+                    "c09eb2cce733847d24dc7395041663229",
                 "callers": (0x0043D1AA, 0x0043D20C),
             },
             "replace_easylogger_set_text_color_enabled": {
@@ -3955,8 +3955,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "open_cfw_easylogger_set_text_color_enabled",
                 "body": (106936, 152),
                 "body_sha256":
-                    "d0dcac3547a13c4ec90223630e76dc35"
-                    "47970689c643620f67a60747ffc48442",
+                    "7a1b5baa183b9144efd47a3c9335216e"
+                    "5aeb61342495c13e346557314b27143e",
                 "callers": (0x0043D180,),
             },
             "replace_easylogger_set_format": {
@@ -3967,8 +3967,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "function": "open_cfw_easylogger_set_format",
                 "body": (107088, 160),
                 "body_sha256":
-                    "52f869174ce6fdfae4c5af8dc6c9abe1"
-                    "5f6dc9c456fc3c0c8fe0d8f2c23ff855",
+                    "7cae99b8b72e14d18330f2bcdbca342f"
+                    "c42f321b9fde2bb12d3478574b9ff441",
                 "callers": (
                     0x005BFA00,
                     0x005BFA08,
@@ -3986,8 +3986,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "function": "open_cfw_easylogger_set_filter_level",
                 "body": (107248, 152),
                 "body_sha256":
-                    "31cb3e5e0f10c0131d102db47986cf8"
-                    "bebb737b07627150ee5ad860ea351685c",
+                    "822cfe9f0ffc644ad36a69baff956c42"
+                    "9c0ed7f9b5b57355c64519df703455c2",
                 "callers": (
                     0x0043D186,
                     0x00459684,
@@ -4074,8 +4074,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "function": "open_cfw_easylogger_get_filter_tag_level",
                 "body": (107708, 284),
                 "body_sha256":
-                    "36b0bf2b481b06688df7c92f268880a8"
-                    "5ea2fec2301d17b97411a228cf52a70c",
+                    "f8fc315cc10a3d75a26fd643d3bd0611"
+                    "b2750fb381970ae52306c09d1c39334f",
                 "callers": (0x0043D600,),
             },
             "replace_easylogger_output_lock_enabled": {
@@ -4397,42 +4397,42 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 {
                     "alignment": 8,
                     "name": ".rodata",
-                    "offset": 163864,
-                    "size": 7128,
+                    "offset": 109592,
+                    "size": 1560,
                 },
                 {
                     "alignment": 4,
                     "name": ".rodata.cst16",
-                    "offset": 170992,
+                    "offset": 111152,
                     "size": 16,
                 },
                 {
                     "alignment": 1,
                     "name": ".rodata.str1.1",
-                    "offset": 171008,
-                    "size": 2414,
+                    "offset": 111168,
+                    "size": 2408,
                 },
                 {
                     "alignment": 2,
                     "name": ".rodata.cst8",
-                    "offset": 173422,
+                    "offset": 113576,
                     "size": 8,
                 },
                 {
                     "alignment": 1,
                     "name": ".rodata.cst4",
-                    "offset": 173430,
+                    "offset": 113584,
                     "size": 4,
                 },
             ],
         )
         section_hashes = (
-            "53d3a85d953ff38fdf741d035ecb4e03"
-            "0b41d27f54c6326e081225ecced3d304",
+            "a0ce05db53a0a976d8e2e61c7bb5ff60"
+            "97f09c372a3fdd0e1a3afe9969ecba61",
             "d2c5643601bfd52fc7a7ac17e1714216"
             "251059e6bcff358ea72c40c427b9b3bb",
-            "e8792725ca033fbf723eac2a5c492239"
-            "a81ca2e418acb0533a8bdccc8aa83eae",
+            "0fc60120c46efc8fb5d9ea05066c4ee9"
+            "aae6e80efaf746bd7e549f266b5cb19a",
             "dd7ee6eef507a502f9e1c859b8462f27"
             "3c779591a37ed189ffe88db2ca68a21e",
             "dd7a4d7b0746ef1ed2d658b2b459b12"
@@ -4449,13 +4449,13 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 hashlib.sha256(data).hexdigest(),
                 expected_hash,
             )
-        strings = overlay[171008:173422]
+        strings = overlay[111168:113576]
         self.assertEqual(hashlib.sha256(strings).hexdigest(), section_hashes[2])
 
         config = apollo_overlay.load_config(
             COMPONENT_ROOT / "overlay.json"
         )
-        self.assertEqual(len(config["sources"]), 304)
+        self.assertEqual(len(config["sources"]), 296)
 
     def test_upstream_list_and_littlefs_leaf_increment_is_pinned(
         self,
@@ -4795,33 +4795,33 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (2635, 2378, 1923),
+            (2441, 2329, 1872),
         )
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 429058,
+                "overlay_size": 362272,
                 "overlay_sha256": (
-                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+                    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
                 ),
-                "component_size": 3952454,
+                "component_size": 3885668,
                 "component_sha256": (
-                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+                    "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5"
                 ),
             },
         )
         self.assertEqual(
             config["toolchain_profiles"]["linux-clang"]["expected"],
             {
-                "overlay_size": 212664,
+                "overlay_size": 152912,
                 "overlay_sha256": (
-                    "63885d945fc50903872a81191342907f"
-                    "636207486e1adf9a3bfb2213c6961e1f"
+                    "e045351065be7c01ff3bc4666940e0b5"
+                    "36c2b114df0681169bd37031139d7c20"
                 ),
-                "component_size": 3736060,
+                "component_size": 3676308,
                 "component_sha256": (
-                    "c8c25188e48eb6086311a855e2349704"
-                    "3150ff3ca85aeeb1bdb0b829a2c2c71b"
+                    "dc726a1c6187357c6c9a6b39152957bf"
+                    "3772fa06bc30d8bdd6db662af7c3dee7"
                 ),
             },
         )
@@ -4867,11 +4867,11 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         apple_expected = {
             "size": 16,
             "sha256": (
-                "fd12059acac5e1ecf57d23f2064622ad"
-                "38f269a75d0f6f4a17d72bcabf40100b"
+                "1c2e2b1fded0de515345b90fe34de51a"
+                "9c0f08a02a5ad983c1120481c51c5783"
             ),
             "alignment": 4,
-            "offset": 184328,
+            "offset": 124480,
             "unrelocated_sha256": (
                 "46e8bab056ad39ced45edb5da2612f64"
                 "70674ab5a428df7f08822f6c2d9e184b"
@@ -4880,11 +4880,11 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         linux_expected = {
             "size": 16,
             "sha256": (
-                "741669f767e0aa5b9a663f7bae6e5b44"
-                "e01259efdc15135719394874c917ee62"
+                "9731cbf3ff15be31186591ed148d009ae"
+                "8985cb18bdfca3ba365aeb0897e3fd1"
             ),
             "alignment": 4,
-            "offset": 186052,
+            "offset": 126300,
             "unrelocated_sha256": apple_expected["unrelocated_sha256"],
         }
         self.assertTrue(leaf["strict_relocation_contract"])
@@ -4898,8 +4898,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "relocations": [relocation],
             },
         )
-        self.assertEqual(0x00794324 + apple_expected["offset"], 0x007C132C)
-        self.assertEqual(0x00794324 + linux_expected["offset"], 0x007C19E8)
+        self.assertEqual(0x00794324 + apple_expected["offset"], 0x007B2964)
+        self.assertEqual(0x00794324 + linux_expected["offset"], 0x007B3080)
         self.assertEqual(
             [
                 patch
@@ -4927,9 +4927,9 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         self.assertEqual(
             extracted["placement"],
             {
-                "offset": 184328,
-                "runtime_address": 0x007C132C,
-                "runtime_address_hex": "0x007C132C",
+                "offset": 124480,
+                "runtime_address": 0x007B2964,
+                "runtime_address_hex": "0x007B2964",
                 "size": 16,
                 "alignment": 4,
                 "padding_before": 0,
@@ -4969,9 +4969,9 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         self.assertEqual(
             (replacement.hex(), hashlib.sha256(replacement).hexdigest()),
             (
-                "f2f264bf" + "00bf" * 7,
-                "bb7571ff6f08f9808b9e4157938c2c53"
-                "09a7f055d63c975aa5b3bf0dd38e2e55",
+                "e4f280ba" + "00bf" * 7,
+                "d6d0947d5f648f4acdab371be5d051e3"
+                "c89ad1f2e44b88da2ce0600e7b2f3751",
             ),
         )
 
@@ -4999,6 +4999,18 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 else site["expected_size"]
             )
             component[offset:offset + length] = base[offset:offset + length]
+        canonical_stages = self.component_report["canonical_stages"]
+        liblc3_sections = canonical_stages["liblc3_ltpf"]["placement"][
+            "sections"
+        ]
+        for section in liblc3_sections.values():
+            start = section["file_offset"]
+            end = start + section["capacity"]
+            component[start:end] = base[start:end]
+        pt_placement = canonical_stages["pt_protocol"]["placement"]
+        pt_start = 32 + pt_placement["runtime_start"] - 0x00438000
+        pt_end = pt_start + pt_placement["capacity"]
+        component[pt_start:pt_end] = base[pt_start:pt_end]
         self.assertEqual(bytes(component[:len(base)]), base)
 
     def test_entry_replacements_are_nonlinking_branches_with_nop_fill(self) -> None:
@@ -20709,49 +20721,49 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 {
                     "section": ".rel.text",
                     "site": 42110,
-                    "symbol": ".L.str.50",
+                    "symbol": ".L.str.49",
                     "type": 49,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42114,
-                    "symbol": ".L.str.50",
+                    "symbol": ".L.str.49",
                     "type": 50,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42122,
-                    "symbol": ".L.str.51",
+                    "symbol": ".L.str.50",
                     "type": 49,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42126,
-                    "symbol": ".L.str.51",
+                    "symbol": ".L.str.50",
                     "type": 50,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42140,
-                    "symbol": ".L.str.52",
+                    "symbol": ".L.str.51",
                     "type": 49,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42144,
-                    "symbol": ".L.str.52",
+                    "symbol": ".L.str.51",
                     "type": 50,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42152,
-                    "symbol": ".L.str.53",
+                    "symbol": ".L.str.52",
                     "type": 49,
                 },
                 {
                     "section": ".rel.text",
                     "site": 42156,
-                    "symbol": ".L.str.53",
+                    "symbol": ".L.str.52",
                     "type": 50,
                 },
                 {
@@ -32384,8 +32396,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     / "test_mram_show_records_status.py"
                 ).read_bytes()
             ).hexdigest(),
-            "e992c06bad49489762fd99c1bdcaab16"
-            "a61aa54399892f3bf55b9cb7ef4b5e96",
+            "db20b9b5ba74d2e26d20b91bc5ee4cb7"
+            "48336b9b3a85b68575f6ab7b51b54ded",
         )
 
     def test_mram_update_record_timestamp_is_pinned_to_stock_span(
@@ -32611,8 +32623,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     / "test_mram_update_record_timestamp.py"
                 ).read_bytes()
             ).hexdigest(),
-            "ccb3babc1e3a88acc00d76e0d71f8fe3"
-            "fe5e46260094e8eece40f492a3adfb09",
+            "61abfc3bc2bda945836ea4b0a920820b"
+            "349b726d8ea57a4bb8a1e4c537a0f50f",
         )
 
     def test_mram_reset_record_timestamps_is_pinned_to_stock_span(
@@ -32833,8 +32845,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     / "test_mram_reset_record_timestamps.py"
                 ).read_bytes()
             ).hexdigest(),
-            "bdaf129342e0d853af4244e75ebe0933"
-            "67b327efb4e8fc8b261bcc859a4d6794",
+            "85db635318952db077735743d54236b1"
+            "883278de6544b10fad205d525f40acce",
         )
 
     def test_mram_show_nvm_status_is_pinned_to_stock_span(self) -> None:
@@ -33069,8 +33081,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     / "test_mram_show_nvm_status.py"
                 ).read_bytes()
             ).hexdigest(),
-            "77ebe7527607253abb242d3e960da3168"
-            "95f0bb2e8a0ed2840fde057dcad5196",
+            "2336be4941227475a545ceeb6fa78519"
+            "44750ff7318934760ddb6631d9cb17b9",
         )
 
     def test_mram_handle_pairing_failure_is_pinned_to_stock_span(
@@ -33307,8 +33319,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     / "test_mram_handle_pairing_failure.py"
                 ).read_bytes()
             ).hexdigest(),
-            "de605afa0f72675e59a7ab4faad736e2"
-            "a3b79054a40ed9b63fb5496f97c0a2d2",
+            "9dce7f57577dbc7ab9f467ad4cdb0165"
+            "4780ff0b9ffbeddf91d5dad51296b466",
         )
 
     def test_mram_clear_record_by_connection_is_pinned_to_stock_span(
@@ -33533,8 +33545,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     / "test_mram_clear_record_by_connection.py"
                 ).read_bytes()
             ).hexdigest(),
-            "33774ab439af7feb3c2a9afa255de0f7"
-            "dbfffa07a6364c1baac32c61588799dd",
+            "3dacb971ea9add5135aa1eb4025e375b"
+            "f1f90262e26973bf05be43ade03e5a93",
         )
 
     def test_mram_dump_all_records_is_pinned_to_stock_span(self) -> None:
@@ -33752,8 +33764,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     / "test_mram_dump_all_records.py"
                 ).read_bytes()
             ).hexdigest(),
-            "aa346cecd993110a17a837bacc6e5ea7"
-            "a2bc755c00b0b2510e585e9640c6bc3f",
+            "9d749a0602ce2b48b8c458e5f062c03a"
+            "9c7e746af52edecd5a27f9c0bab8395e",
         )
 
     def test_efs_crc_and_mram_program_helpers_are_pinned(
@@ -34028,11 +34040,11 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "e719330de2828d03c411cca77f339bc4"
                 "ab553a4657ead8c5ef1c754649b70817",
             OPENCFW_ROOT / "tests" / "test_efs_crc32c_msb.py":
-                "b13e5bf9ae6b1d7e1660e51e494fb04948"
-                "fb44b4eafaad7d2ac4cf867123d824",
+                "4e324da57fe5bb5e9b82a594ff690ea4458"
+                "dc69ae6b0550171258196968e41b9",
             OPENCFW_ROOT / "tests" / "test_mram_program_bytes.py":
-                "1efaa23600cb077a9c96e167d45719d47"
-                "4930fa443e2c7b3d76a5fec8b95afbe",
+                "ac8ee7cb09d6aa8c2136d4b078baa7f4"
+                "dbfa4f2f64e897bc443d4cfe498b2fc9",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -34337,8 +34349,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "9e9eec3da396f214345b3193cc55d6d92"
                 "a2eb7d5de3c9695c74d11dfd8c5134b",
             OPENCFW_ROOT / "tests" / "test_aeabi_divmod.py":
-                "7f185fbc611d600d7f37d6f1ff94a13b"
-                "8d0099e1c4cbb5a53a632b52fd3f059a",
+                "24b963323948f331951cf5d39f20b6762"
+                "2b7f3af44d4735c296ae10914e43902",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -34645,8 +34657,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "75f3f5737b7256158aed216a25f15519"
                 "9acb8299cc35806874a4d25fb9d0412d",
             OPENCFW_ROOT / "tests" / "test_status_packets.py":
-                "4f0fca4af91a3de5abee59d624840fa2"
-                "3b5adf973fae9d077a3e36c1da226c12",
+                "52a0c42366a42dd741a2f01d7c047988"
+                "9411ee8befffd5e648e3b72c812bed86",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -34947,8 +34959,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "15aa606cd63333dee60dfe55fdd820dd0"
                 "7721d95ce09a085958c58491352e90b",
             OPENCFW_ROOT / "tests" / "test_lens_status_control.py":
-                "ff3a4900bb2dad653f678e72d6d825ef"
-                "452d14ad42353679d3c73217ab94bc80",
+                "358581f6d8125945bd71697806fcd0ec"
+                "a9388602e424ef0628a470cdfefbc514",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -35159,8 +35171,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             "open_cfw_sarc_report_persist": (
                 {"offset": 79260, "size": 426},
-                "e56af40589f9555f7b5c17de19d5463b"
-                "f124ee9c578ae503eb887900ee4ac6e1",
+                "a7ef501559ff44d3649e571b89a4c955"
+                "50e9a94d7560f42a08aedf371a4f3131",
             ),
         }
         functions = self.component_report["overlay"]["functions"]
@@ -35225,8 +35237,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "74191c6409531f484e5d60564f68f5d3"
                 "d3db71941abf17ab0ba12d37ec0aeb80",
             OPENCFW_ROOT / "tests" / "test_sarc_state.py":
-                "7b9b14f2d119566ad5a6f25f56daef6ec"
-                "5a92b80fffd134d2e1bbe28afe95764",
+                "76d33bf537f1578c13b21fca857f414a883"
+                "2347665e76a6819428b57882332fc",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -35431,8 +35443,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "9df042d187ccd73f614f041352ac95e3"
                 "d6404d02ece35970346eb20c66d4ca61",
             OPENCFW_ROOT / "tests" / "test_monotonic_time.py":
-                "a8df99dbb6d3fd262726d73a46385a79"
-                "8142ea12ec5d3b0bd7addf9b85ef9b4a",
+                "ad099b3960ddd9cf3c95660a6d5c2f0a"
+                "f60256a0bac16ca080da19bd5126d366",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -35676,8 +35688,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "6342648f1ed466b7e3db2d23ca2676e3"
                 "6db34796c047977bb2257e938384ece8",
             OPENCFW_ROOT / "tests" / "test_wall_time.py":
-                "0587d6235230525c26e5764e7b2a5a6d"
-                "8796ee6f2bb6e1184e07476071a360a5",
+                "d7f1feed79413188b91da19bff911236"
+                "e0ed42a4a94c80fef20c05c1076bc9cc",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -35886,8 +35898,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             "open_cfw_firmware_version_code": (
                 {"offset": 79924, "size": 174},
-                "c116e4a517089a603fab72e98444bbf5"
-                "eff6ec811fbc577feee8e55e319f4c0a",
+                "a53973906163e4289904fe682d1fc10ef"
+                "8eb34a83179b413574b36f062c33c84",
             ),
         }
         functions = self.component_report["overlay"]["functions"]
@@ -35930,8 +35942,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "fd12f6b43bb316e389d605c47edebb46"
                 "ea1c2050e21b4767c104ae06a15cea1f",
             OPENCFW_ROOT / "tests" / "test_boot_identity.py":
-                "093084ced2612c332cc0aa67d076ed55"
-                "18f544814cbe8f5595d325203503df08",
+                "67f5abbbcfab2181b9e61a16afd86765"
+                "3d615c25b010a4786abc2a1027fc9019",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -36285,8 +36297,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "8b7ef0f8dd2723a58568f352d4463bd3"
                 "2784c24cbef0dfdc2445fc497737004c",
             OPENCFW_ROOT / "tests" / "test_tracepoint_defer.py":
-                "e52fdc3eef1beb22bcc28a3a18bab4f70"
-                "619f3f093fa1443a365142923767e81",
+                "b93eee2c594a2d0d65fa327d14ffbc359"
+                "6114058da034a4ee83f6f9441c03852",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -36556,8 +36568,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             "open_cfw_tracepoint_path_format": (
                 {"offset": 80604, "size": 22},
-                "889bf7a21d84d7ffa1ffb2ad6dd6d995"
-                "d905cf2e338014df6498e9b07c51983b",
+                "0bb5972a3bc7b1b9ca435c56431000db1"
+                "9cc1fc88e45bd7ed1cd2001cdd54309",
             ),
             "open_cfw_tracepoint_path_parse": (
                 {"offset": 80628, "size": 116},
@@ -36566,28 +36578,28 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             "open_cfw_tracepoint_file_size": (
                 {"offset": 80744, "size": 64},
-                "7029fa2f29bdebbc7173aaa773a3c624"
-                "da73499b9031af7b8f180072c7eda296",
+                "3b1a932fd9608f9396cd0fb2f8bab4d3"
+                "e886811668f997939b6d24ea30322c5b",
             ),
             "open_cfw_tracepoint_directory_scan": (
                 {"offset": 80808, "size": 120},
-                "7ef652766f445efb90a677deb3daf63a6"
-                "5d9aec078d684327189957199d627af",
+                "9ea4682ab20573b243a3c7e1773e4e6e"
+                "f6578afbb930a0504616629331167527",
             ),
             "open_cfw_tracepoint_state_persist": (
                 {"offset": 80928, "size": 116},
-                "98f6fb5e04dd139be6a2b707cce5f49"
-                "f0cea60575492f6b25d531d9a0659f290",
+                "3f54f2f8cb2b380a8611c08f69e0575d"
+                "a3fd10e76f955f020bd7863feb5fe5c4",
             ),
             "open_cfw_tracepoint_state_load": (
                 {"offset": 81044, "size": 116},
-                "5ebd52740518fc98e5d485eaa396311c"
-                "098b5da49ff9bdb4c3b444c502c2fc3f",
+                "5ca9f0b5a8dbc9a137e92013bd664a052"
+                "c6a67570a14f542bb3165d1902e4d80",
             ),
             "open_cfw_tracepoint_storage_initialize": (
                 {"offset": 81160, "size": 138},
-                "2a0d2b2394e9952db6582605aa4bfe43"
-                "a20fb9cf0562bfb0ffa435560448b28a",
+                "3b9ec902adf17c486d163dc7c0ff5970"
+                "f4ecc648361b28e7431d440d56ac56fc",
             ),
         }
         functions = self.component_report["overlay"]["functions"]
@@ -36651,8 +36663,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "a9bf4d0b81d718ce52e2fc658146e7415"
                 "6f6944dc0030a7c917abe913919df0c",
             OPENCFW_ROOT / "tests" / "test_tracepoint_storage.py":
-                "275733838b39401c0000b64e4afbe0dc"
-                "5adaacf2c6e3ed6ceb83e18445a4f4f6",
+                "9a6cd99f600fbc93dcbc6736baaad211"
+                "22ef8bf06ced4f77c1c4888c7770fc01",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -36922,13 +36934,13 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             "open_cfw_tracepoint_active_create": (
                 {"offset": 81392, "size": 142},
-                "9497135a7ca9304886bd7d82af87b3b6"
-                "823196ca5a742bb79e4953a1ce03b988",
+                "96c7c924d0512ddd8abf65cfa737c8c3"
+                "aea80cc5fc7f5dda4af99d086d63dbc8",
             ),
             "open_cfw_tracepoint_active_open": (
                 {"offset": 81536, "size": 62},
-                "2033965636021687c8031d22374ace02"
-                "998abf0e135abf709fc6f3bdb20087a4",
+                "572fa264d8db6c7e33b0803d83834edc"
+                "d9f58ec74457201d79fcc186351ff696",
             ),
             "open_cfw_tracepoint_write": (
                 {"offset": 81600, "size": 118},
@@ -37007,8 +37019,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "432b33daeba71a157f5f1d46f1df7378"
                 "1256b4ad39661df24858b8788a8659bb",
             OPENCFW_ROOT / "tests" / "test_tracepoint_file_io.py":
-                "bd8af9a4d0f0b7c2604d4faa6ea48fa2"
-                "8cb1d5e94d6e7ae37b7e33c97eba6649",
+                "efad0adb419ce5af22a6e63d75b89b1df"
+                "f7d7879a610352eefd6d6cf211287e3",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -37162,8 +37174,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         ]
         self.assertEqual(
             hashlib.sha256(compiled).hexdigest(),
-            "fdd1f05976bb3b5917d83c8c9d6b9c4"
-            "282b9b2e8a7fcc3fe2f71a4c7d5501fff",
+            "4c2ff67966a45f05212894c556dc386f"
+            "bc427ff6a7e24d9a0901cbe5f80a9fa2",
         )
         self.assertEqual(
             apollo_overlay.decode_thumb_branch(
@@ -37403,8 +37415,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "0b5e4e41bd53d15e4927e31e928a75b31"
                 "ea887c584922a7df93f5c9f193c3de8",
             OPENCFW_ROOT / "tests" / "test_onboarding_control.py":
-                "f323096da8572b40403f1f132888f257"
-                "be2633d8a5fb1a8ca7f5c92ebbe09ddb",
+                "98aab5daf8a813474200ab4472edf02b"
+                "34679c7eae973be155202b2ad7b5d51f",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -37629,8 +37641,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "b65ff5cc7600a97c8a390d0cb07546af"
                 "fe482965811769229a4e6085443c5d59",
             OPENCFW_ROOT / "tests" / "test_onboarding_wear_status.py":
-                "63b3ddcd42ea311c01dcd41d0f05183d"
-                "913cf445b20b94f400ed08995a716c9c",
+                "6e17f21e338e2df76c2cb793f7732d01"
+                "7af53b332b08ae9cbcc151b400d8ebc4",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -37842,8 +37854,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "1b81637e6541d9c4248fb197b80bfec5"
                 "91790d64d683ca0bcca6be030bfa5f51",
             OPENCFW_ROOT / "tests" / "test_onboarding_flag_persist.py":
-                "0327d180af62eef9b2fbe9aa42e0bd6f"
-                "ab9710b01a8228e41ff50800f846b980",
+                "26083d84c987d4fa00ab170c26806ea6"
+                "cb8596c34e89975c463823a06d349c32",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -38078,8 +38090,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "fe9e5b4e2ad10daaf25d572b52bda5b"
                 "f20357909e2a4b4ac345c287ec654d7ae",
             OPENCFW_ROOT / "tests" / "test_onboarding_flag_update.py":
-                "3fc693e2040a0ab30e7c62e955d800ea"
-                "3ce043866b1c02ba0548bf8bed0e2ff1",
+                "453894bc0e251b22d7a3705767805e18"
+                "9ac0271ac768d3dc1ed78c23f306d944",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -38308,8 +38320,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "cc313876debb303f7ef4df6c5f4e752c"
                 "de323771febe947843bcb779207485ea",
             OPENCFW_ROOT / "tests" / "test_onboarding_peer_flag.py":
-                "52b385eb6d18ca159cb5fe481182c1d7"
-                "151c069e1be87761d9c290c616003d77",
+                "343adc6d9b6c8d7cd3d85939b221d519"
+                "ae5aacd42c3510ea763af445fa9ee554",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -38517,8 +38529,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             OPENCFW_ROOT
             / "tests"
             / "test_onboarding_peer_flag_reply.py":
-                "99d2e5d2e05700957f9148e8ccdf0f575"
-                "2b7c416301311d2ca08dfc153540209",
+                "85e2d5c8967a22f2192d7417ae85d77f25"
+                "8eef4ac592395f116520540e92196b",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -38750,8 +38762,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "14c492cd869e46efc12564d4d80d9aa5"
                 "66c8ae6eb9c7871dd110f93a239df93c",
             OPENCFW_ROOT / "tests" / "test_onboarding_process_sync.py":
-                "98eab4b207505ec73387c32fb0ad589f"
-                "85657c3bbacb8c391ca0a75423fad33d",
+                "304e568a43546445d2be6ef6b696e507"
+                "f9d52a539847725ef183bb168b2afae9",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -39004,8 +39016,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "21a1f2345a199c2050c4bdf74221a8ff"
                 "86316f908f287051f94e153bdc13041f",
             OPENCFW_ROOT / "tests" / "test_onboarding_runtime_init.py":
-                "c5277fd4f9132d9726564dc0b5556896a"
-                "f0d2589d0f742e1709193272d76afa3",
+                "2aa36a6fd3fb541d84325ff2a2a5e9234"
+                "bf9d792973ded64bcb07bb5438e2f3b",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -39236,8 +39248,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "1f67e8755d066fc6a977b1d6dacb6b0da"
                 "0721d674e9ba6e9bf67582b4731b7ce",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_dynamic_create.py":
-                "a18d22233679b26e21fa32f6605ba46e7"
-                "0ecd0b6845a298ddb219b29774543ea",
+                "fd88456866fc552b0fbdc17665b83fe9e"
+                "fd1bd0004223ba4f383fdba07d3e0d4",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -39469,8 +39481,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "902b38208d0efe84fd579c1b245b0f6b"
                 "f2feac13d32db3a9896f1a4853a2b37c",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_static_create.py":
-                "5847a6a5c386e7e2945984516ce81a490"
-                "48eb856b0a385755b00f308090b65b0",
+                "fdfb61cf06538a4ea70a2b45cb9d93108"
+                "0cfea00d6e00fccf0a7b3a4beee5fba",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -39716,8 +39728,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "a0f27416c5c352f9b7e2e07fb600444a0"
                 "f764ab62837bc0ba2973a3688d24f3f",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_initialize.py":
-                "5ec62ea55edf9a3d0a4c5117ff5fba0b3"
-                "6e537db3b4263e5fb15c9f1e8f18f85",
+                "1dbd4a0d818434832bcec563c193b0bb2"
+                "dd31bc448fd97db0ab67fbaeb1850bf",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -39993,8 +40005,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "36a088f14bf3bebd160ca3f453e91875a2"
                 "b89f10dc143fc8406146eb62ff0cad",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_command.py":
-                "bd0bcf70088aa26c0bac93a1eee48a8dd"
-                "de2676e2031aaa3836a469d6946033e",
+                "04c2674d274946de9c7eb9b59d26b4300"
+                "e759b367f8b800b281fd95600ed8d2c",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -40214,8 +40226,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "3c31afc0d882e27f83f0cd5edffb2204"
                 "0d636a66ccb95791600c9645896b121d",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_reload.py":
-                "c13f36128997208239bb201e1847a9b1"
-                "07fb1a3b7f2e606a1ed8addd2868b3b5",
+                "938b62a925e0653bf406b9217eb3d3eb"
+                "54363ae0390411255e481db5f4ced093",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -40463,8 +40475,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "cc063793d03f0aa9c56cf6dc0545980b8"
                 "43c7ad0e5502fa207491455abbefd07",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_expire.py":
-                "54a1cf4fc729531280e9ed94479eac58d"
-                "f0ff458ae26d4c6b9bd6c6e8b0f5157",
+                "59408833d1ae2d2a24b6ab65d7627d42"
+                "d651f1346f2096e5e1c583f65d8dbebe",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -40716,8 +40728,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "cc4978477539c8c4d51cbfbd3078136a"
                 "86562d672ededc7ac96bdb93ad872843",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_service_loop.py":
-                "c5548163be689c0f3e60281d4c670502"
-                "b2ed2d015f4213f23120efb5ccb0dc02",
+                "898b0cc4129b0f52c7b2abcbf2f3acc4"
+                "3c82167a3589cd4e23352a5f5cd249da",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -40996,8 +41008,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "ddd49faa7399493081146ebb785431b23"
                 "3fd7bb12ea27c0e73ec113e87c13294",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_wait_or_expire.py":
-                "99ec40b54c16aa08ac5a99135ba805e4"
-                "52e613b986347b6569623d7b527d25d5",
+                "e5e63fbdc39e7ba78aa01932978bb281"
+                "816ccd0a0e903b51245406d670e11ba1",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -41195,8 +41207,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "6ee191b325aa42c63ff0eb22444089e3"
                 "58f2ebbfe5190ccedfabea08a65c4e00",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_query.py":
-                "a4efa1a356179a1643d6121b494cf5cf1"
-                "2c1961d370a7bf6dd89b9913721830c",
+                "96781e22788e3992e8be0b7cbc720f103"
+                "3e6e661a6044539e43ba1687d338c7a",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -41455,8 +41467,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "467e3abd422ae5c55b30ea96662be42b15"
                 "26bec218dbf75396870a6c9c846871",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_sample.py":
-                "fd829e73e214b732a45e3203dba4f2a93"
-                "6f53869d65613d17dbe2f788762685a",
+                "c5bb6dee052c33a5488f08087bc8ec962"
+                "f36c2c5fe4600a4205c5dc2d21b72fd",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -41698,8 +41710,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "657d35826ace0fb4aa5b2be2e379b8271"
                 "3ba01aee7293ee91539ceea8ec36bc7",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_insert.py":
-                "ce668f189335a1ca8677b4a24b9cd2f2"
-                "9c52ab2fd6ac4027574dd35c7ddc5cfd",
+                "eebbbba65b9c89232c1802d4828f59520"
+                "0cbaf6a81e7e7a529ced8250dfa0780",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -41976,8 +41988,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "42d50780eba5f4118b74e5cf0d865a9e4"
                 "88b8f7c4ea2e902638cf4164f4cc96f",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_drain.py":
-                "556106bbf300a49382703f83e574add57"
-                "506570bc906ddd992d40b81e68d9c0e",
+                "953451122405dc704f23462ff88192221"
+                "861a38db79b32dfc1377e4c9f50a408",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -42200,8 +42212,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "ec5baf5f3e0b4eb244b2b9ae9ec415d5"
                 "631dd53ffe8f28a3d1baca422a985ac4",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_switch_lists.py":
-                "d61d1e74759ee3ffbd8b6ecb8edb28c2"
-                "78f5c1823cf93ffe046a9b0a4cf9aafa",
+                "f78df6914ed986b0574bf5af2bfed6860"
+                "45bd9dd0e421cbac60d61f670db8947",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -42492,8 +42504,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             OPENCFW_ROOT
             / "tests"
             / "test_rtos_timer_runtime_initialize.py":
-                "7a7090727d46b5601b567885a04410d7a"
-                "87879362d4229a85f7907d5d5c31628",
+                "db30c637c8d3ab17a6da29cc689110fc"
+                "f8a63a01d2c4b8b114296f272fcac16a",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -42750,8 +42762,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             OPENCFW_ROOT
             / "tests"
             / "test_rtos_timer_is_active.py":
-                "c998fe8bdd51cfdad3d782c68f41800c3"
-                "1136ac6ce948044c4429352dacca934",
+                "64fe47b456297d2315abf6c9a27dfbed"
+                "b90e3bd91509a6b0abfaabfc125732f9",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -42991,8 +43003,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "7130cae3ae777a4f96754e260bd46f07"
                 "5c2681179db4a6ef93cf97170cf606b1",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_get_context.py":
-                "9b9e3d0311fd05b9418498f232c3898f4"
-                "fba5119b859069f0c6eed8745ecd88e",
+                "bcf8afdaecd1e85966c57fd7841535015"
+                "235637cdf226a49348c39b324d26213",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -43235,8 +43247,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "d0bcbc594ed2a9b90c316d331fe93e94"
                 "91d2be2a8f986be26d3d23cd50eed728",
             OPENCFW_ROOT / "tests" / "test_rtos_timer_pend_from_isr.py":
-                "478c1a23face2c5e40eafd463105afb6"
-                "50c6bdb472ca28a2d391d42f5420792c",
+                "1d59242fd39f3ac38edea06561dffbaa"
+                "21ef6c9f33f173ef9cd839dc3723b749",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -43525,8 +43537,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "b94bc55d6863a380226ef6b1bb3025e6"
                 "437df2d24ce8e5a1283e8babbdfe7889",
             OPENCFW_ROOT / "tests" / "test_rtos_event_group_create.py":
-                "b339d85c934a3def9415a04e86633d6b"
-                "88d8528ce7f4d6d247d26f4a49dc9e29",
+                "5124c1a0607de21bce34a142339e95dc"
+                "84104b1602ef603434c544ca693c9909",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -43843,8 +43855,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "8fc4f25f47175d5cfe2152bca41c35b4"
                 "93dbd45db4f314fead80a9b2e2a2fb97",
             OPENCFW_ROOT / "tests" / "test_rtos_event_group_wait.py":
-                "70d09dedfb6a3cd3f872302452c07da8b"
-                "a4a2ca84a0a0dc0e30db53dd65f810c",
+                "409c9c85f02ade118cbfa2a38830e692"
+                "73ab6412b6b493d37ce9c9f170fa91d8",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -44058,8 +44070,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             OPENCFW_ROOT
             / "tests"
             / "test_rtos_event_group_test_wait_condition.py":
-                "6a5b4e17c62e5960e8b50de645b68937"
-                "5bdb4e5b4c46bdb40157330b82ac08a5",
+                "36190bfda957d51c51e22d65aded42e1"
+                "8edc94ae8b9787b2f3836958286d7fe6",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -44351,8 +44363,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             OPENCFW_ROOT
             / "tests"
             / "test_rtos_event_group_set_from_isr.py":
-                "75bebff314a2b2b08bcdca4899bdb562"
-                "6e8dc5fde0314edc5c1701c558e054b1",
+                "187584329b621972757e9113d3c97799"
+                "dfd974100888e9d51c125dcdf304b7bb",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -44625,8 +44637,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "b4a0682a2cf44673847c1677dddd17ab"
                 "2c4638b95572b3b38787bc597b2dbb09",
             OPENCFW_ROOT / "tests" / "test_rtc_initialize.py":
-                "afad55f3879b6d819c2e13b0de63bbf5"
-                "cd4014bfe06df1d291a06040b9584fbd",
+                "a16fd8b5bd31a51f99cbaaa4d1343f61"
+                "f811606f61b11332f108d450a8285c48",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -44930,8 +44942,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         ]
         self.assertEqual(
             hashlib.sha256(compiled).hexdigest(),
-            "de6842d7fdf471c7f68dca3d6a23313"
-            "f1645fe42062317de5309404f55ed3887",
+            "7a87138175e3dc5ece5c7c6eed973eee"
+            "da02b0bff226abd6590bb489b6a19d68",
         )
         self.assertEqual(
             [
@@ -44975,8 +44987,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "3a1928569b8d723169598f3b1f6a37df"
                 "82363ec9bf0bbf8acc357fcc1d74d1d2",
             OPENCFW_ROOT / "tests" / "test_rtc_time_set.py":
-                "db0a76ae396ba1b7fb8835cc840d58c4"
-                "4e274b751a3eefe63220ccd9da25b2eb",
+                "7b8fe7618a553f5a6273cf5d0571c3f0"
+                "a54d971f40f59c823f4677edc1f28ba7",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -45517,8 +45529,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         ]
         self.assertEqual(
             hashlib.sha256(compiled).hexdigest(),
-            "2cfef198155387d0c39913423303f0d86"
-            "cd4ec273af97f7ae09c711ab427ac34",
+            "0f8a9c8cc63961c2da6c51b0ac2b4e1"
+            "e29da4a10dad726fab0d37fb227f6cc9c",
         )
         self.assertEqual(
             [
@@ -45545,10 +45557,10 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 ),
             ],
         )
-        self.assertEqual(overlay.find(stock_table), 164540)
-        self.assertEqual(overlay.rfind(stock_table), 164540)
+        self.assertEqual(overlay.find(stock_table), 110268)
+        self.assertEqual(overlay.rfind(stock_table), 110268)
         self.assertEqual(
-            hashlib.sha256(overlay[164540:165084]).hexdigest(),
+            hashlib.sha256(overlay[110268:110812]).hexdigest(),
             "6883e99ca3d6bcc6ab1914d77fe857be"
             "7af7f67189c2bf81159b94345cede9e0",
         )
@@ -53949,8 +53961,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "3b04eaf9aa0d9571c2312a1317b8207f"
                 "254362906244b2f36e1cdf668f3b45e8",
             OPENCFW_ROOT / "tests" / "test_delay_status.py":
-                "410ab1ad2045aae0cc64f1b7310d33bd"
-                "bf29129f5c333fc6b1d9a59601eaa152",
+                "9ca12f8b5bda7e3bc07264da0874b00"
+                "a46b6fd6232d0fc0109408c54c2d228a4",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -54090,8 +54102,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "aad9c5d7f4eb308b52cf7bb6d2c30ae81"
                 "494df508c2781f2b333d84a1e9f7113",
             OPENCFW_ROOT / "tests" / "test_read_words.py":
-                "e5d2e29a998e10a0c275557ac4906aace"
-                "2d9210130da7b215c674d49349c8583",
+                "022374cb5b26cd48880052da357db6b3a"
+                "0a0d9a7801ae7e9b3bf09ba0b784287",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -54151,8 +54163,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         ]
         self.assertEqual(
             hashlib.sha256(compiled).hexdigest(),
-            "aff2af480485e176dd3ad36aacf0a305"
-            "4354cd70bc503197c08b36aad8d6e6ce",
+            "91ee77bbda9aa2ea8360fd47b8d5209c"
+            "ede3b68f3ab5fb708fee105029fb1338",
         )
         relocations = self.component_report["overlay"]["link"][
             "resolved_relocations"
@@ -54399,8 +54411,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "b9843ec45933d1fb7c02330c853224b4"
                 "9640adcf12eac3df3306c18413f453bd",
             OPENCFW_ROOT / "tests" / "test_mcuctrl_control.py":
-                "f8011a15122fe3ea91677a35579ad34b"
-                "4be5f14f4bf3a8440c2c2fe0c090dc76",
+                "fdb0c8f87b6b19984aab67e061ac5172"
+                "261ea3f8f08b7e68e6acf57d1657e5a7",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -55001,8 +55013,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "b4257a957df2c91f485b4735ef52393f"
                 "0768f4f7185e45e16038a1029297cba1",
             OPENCFW_ROOT / "tests" / "test_runtime_strchr.py":
-                "d666d35a04a6b7bba94778c2512bd2f85"
-                "956beb65f3c5cac6b7d5dfa6ae392a1",
+                "5c7c1ccc0b90fb5d91e3c139b2f59291b"
+                "5aedaf11f4b2a5479c41224e1602971",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -55124,8 +55136,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "ee9a7ea3f57d5c14e830795de436f5ed6"
                 "8b1993c67ad8e54de19ec006dbaeb7b",
             OPENCFW_ROOT / "tests" / "test_runtime_ascii_fold.py":
-                "bb3287171e71a62365ef0666a75fa3f5"
-                "9448bad771bc782eccef43ebb04b7a27",
+                "27e344191f46b9aeae177f9dfdf18a0a"
+                "405c3dd7157ddebac58085e9151a8ff4",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -56076,8 +56088,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "85a7205513862d3e87cac10457108958",
                 95156,
                 66,
-                "1440f85f1a928818eb225f803dda544f"
-                "4e2398eb642895c7d0fd18cf6437c3fc",
+                "fea4520ba63ec980e3bd3426ad7818b75"
+                "e5f293422a2ee752d18e1d17f00ea4a",
             ),
             "open_cfw_runtime_linked_list_init": (
                 "replace_runtime_linked_list_init",
@@ -56450,8 +56462,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "ad332e34312c105fd20cc25801e26352",
                 97520,
                 732,
-                "042997939f62400df60e616c5b1f42b9"
-                "4efe00bfb598a6e390568ee000d88ead",
+                "00a6e9ed43384b5948832cc736fad10ef"
+                "b310d4ec249905744a2a840b8c661a7",
             ),
             "open_cfw_runtime_etoa": (
                 "replace_runtime_etoa",
@@ -56505,8 +56517,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "9fc179049f9fbc1191e36a59c6ad35b",
                 100552,
                 86,
-                "663dc586101818c49481381f46572654"
-                "9eaaf8ed9bfe6990d21c908d67e547b8",
+                "ab78587e48291d373cc077a0f0c4c1b2"
+                "9b14383ed18a05ffd621a5ad34da995f",
             ),
             "open_cfw_runtime_heap_generic_allocate": (
                 "replace_runtime_heap_generic_allocate",
@@ -57223,8 +57235,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "9afdef2109765c5b8aba1b88ae190705"
                 "320d8ad22aee06684ae938517bb5c839",
             OPENCFW_ROOT / "tests" / "test_rtos_event_group_clear.py":
-                "81e3eef1b57007d14af9d92348ca6d1e"
-                "ced7a94ae16722fc1d8cef82fd65d6da",
+                "0a87a70bbd809afdb03a9695b93f8afbc"
+                "73fd7301468a1c3ecea3ce79261e0db",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -57478,8 +57490,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             OPENCFW_ROOT
             / "tests"
             / "test_rtos_event_group_clear_from_isr.py":
-                "47094d291b7d6700a1df9343962da0eb0"
-                "558ad7190747909c4654b327e4d9215",
+                "72bced0adadbce3fa867abbf258e75bfe"
+                "2635319cdddafe9a1c3ab8d9f3dce14",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -57715,8 +57727,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             OPENCFW_ROOT
             / "tests"
             / "test_rtos_event_group_get_bits_from_isr.py":
-                "39348df5b2e34390f7285f8efe77168b"
-                "73b1a20dbd961df4f86cf47e00ad5799",
+                "c6a07f2b2318ee333718323c3d1cd928"
+                "afbc5e2f73845c1a67573c50285901ad",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -57972,8 +57984,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 "5cf37e102f7048a8643d2b2d5cae5e8c"
                 "0efb11621e35428cf98c36c244d5ca64",
             OPENCFW_ROOT / "tests" / "test_rtos_event_group_set.py":
-                "0c3faad4772175e12c206e6539951e6b"
-                "bf9e60756c6f4fb21517b066611e78e2",
+                "546b30b6f4a6102559cb79f52b2925da"
+                "eb06860dd1c1113f412ae91edc65d3dd",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -58226,8 +58238,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             OPENCFW_ROOT
             / "tests"
             / "test_rtos_event_group_set_callback.py":
-                "2e0dfc2240bfa409500ca6b83927936f"
-                "4b73ffa9ee9ec2180e0d445c038367bd",
+                "5c8861accab6bd7099a57dc57932f766d"
+                "1bbbaa4172fcf71c9787c2a9b894af8",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -58410,8 +58422,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             OPENCFW_ROOT
             / "tests"
             / "test_rtos_event_group_clear_callback.py":
-                "76b2254aa4173df62f0dfa5dd177bae7"
-                "908dcecbef38999b0b3d48425cd7c95c",
+                "b4b48292d0f01d51482ad0d3bc0a1c8d"
+                "fb03c43953838a5a5ccdfefd7f42b3c4",
         }
         for path, digest in pinned_files.items():
             self.assertEqual(
@@ -71803,8 +71815,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             (
                 "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
-                4_745_526,
-                "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+                4_678_740,
+                "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a",
             ),
         )
         self.assertEqual(len(self.image), package["expected_size"])
@@ -71825,13 +71837,13 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 main["source_appended_boundary"],
             ),
             (
-                3_952_454,
-                "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+                3_885_668,
+                "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
                 3_523_396,
             ),
         )
         regions = main["regions"]
-        self.assertEqual(len(regions), 6_125)
+        self.assertEqual(len(regions), 5_996)
         cursor = 0
         for region in regions:
             self.assertEqual(region["file_offset"], cursor)
@@ -71852,18 +71864,44 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             hashlib.sha256(
                 json.dumps(projection, separators=(",", ":")).encode()
             ).hexdigest(),
-            "373898a7dcff07076e779a55c92902da2218d98f43b40dfbb5968a66da2e3776",
+            "5167fa700ca2861de19fa2b52b1a5046137f3d48713294078bfcdbb542c5388b",
         )
 
-        plan_bytes = (OPENCFW_ROOT / "build/source/flash-plan.json").read_bytes()
+        flash_regions, unresolved, container, _ = open_cfw.plan_regions(
+            self.manifest,
+            self.payloads,
+            _ACTIVE_PROFILE,
+        )
+        plan = open_cfw.make_flash_plan(
+            manifest=self.manifest,
+            manifest_id=open_cfw.manifest_identity(
+                SOURCE_MANIFEST_PATH,
+                self.manifest,
+            ),
+            toolchain_profile=_ACTIVE_PROFILE,
+            package_artifact=f"package/{package['output_name']}",
+            package_sha256=hashlib.sha256(self.image).hexdigest(),
+            flash_regions=flash_regions,
+            unresolved=unresolved,
+            container=container,
+        )
+        plan_bytes = (
+            json.dumps(plan, indent=2, sort_keys=True) + "\n"
+        ).encode()
         self.assertEqual(
             (len(plan_bytes), hashlib.sha256(plan_bytes).hexdigest()),
             (
-                4_673_249,
-                "72d44af2a0dbb8b3f4f507b63de578cb502819e36b35b4430780f3181cc45818",
+                4_595_610,
+                "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127",
             ),
         )
-        plan = json.loads(plan_bytes)
+        # Shared build/source output may be retained from an earlier build and
+        # is deliberately not test evidence.  The authenticated manifest and
+        # verified payloads above are the complete inputs to this in-memory plan.
+        manifest_source_paths = {
+            source["path"] for source in plan["manifest_sources"]
+        }
+        self.assertNotIn("build/source/flash-plan.json", manifest_source_paths)
         self.assertEqual(plan["package_sha256"], package["expected_sha256"])
         self.assertEqual(
             tuple(
@@ -71875,7 +71913,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "protected_regions",
                 )
             ),
-            (6_713, 0, 6, 6),
+            (6_588, 0, 6, 6),
         )
 
 

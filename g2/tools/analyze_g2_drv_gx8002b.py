@@ -22,7 +22,7 @@ PM = ROOT / "tools/manifests/g2-drv-gx8002b-provider-map.tsv"
 US = ROOT / "tools/manifests/g2-drv-gx8002b-upstream-source.tsv"
 PINS = {
     FM: "7257ee357235ebe22dc0fcd05804e6ca7c6a41f310f79cbec62fe70b5dc458d3",
-    CL: "66f290e533a404d7a49c535b0765ee9193c8e8d5226882ecde4b8784b71458a8",
+    CL: "00562d3da3b193019e44102a82f9857b0a7e52b4afecb897b6dbb5389defc239",
     PM: "c4acb7d85e138b72f6a7eff04852f936555675c59ab707a9730dffa58427f904",
     US: "e9870b5bd3de3f73134060f0d483a7a7a777a0eafc837a92715449bef7f07d47",
 }
@@ -197,8 +197,8 @@ def analyze(image: Path = IMAGE) -> dict:
 
     source = SOURCE.read_bytes()
     if (len(source), sh(source)) != (
-        11607,
-        "51af012da5f5e3d1b39852687215df8fafe100a9c0a9b9cfebc99b72ac09325a",
+        11598,
+        "23203c4396fa270469e712a6b82757dc88114cf48febad6fd8f53f7aef6feadc",
     ):
         raise c.AuditError("GX8002B production source changed")
     source_text = source.decode("utf-8")
@@ -219,8 +219,8 @@ def analyze(image: Path = IMAGE) -> dict:
                 "components/apollo_main/core_overlay/drv_gx8002b.c"]
     expected_sizes = (34, 42, 36, 60, 60, 48, 12, 136, 82, 58, 4, 36)
     expected_offsets = (
-        299924, 299960, 300004, 300040, 300100, 300160,
-        300208, 300220, 300356, 300440, 300500, 300504,
+        240076, 240112, 240156, 240192, 240252, 240312,
+        240360, 240372, 240508, 240592, 240652, 240656,
     )
     expected_relocations = (0, 0, 0, 4, 5, 3, 0, 10, 5, 2, 1, 4)
     if tuple(item.get("function") for item in selected) != PRODUCTION_NAMES:
@@ -239,7 +239,7 @@ def analyze(image: Path = IMAGE) -> dict:
         ) != (
             size, offset, 4, relocations, True, ["apple-clang"],
             "components/apollo_main/core_overlay/drv_gx8002b.c",
-            11607, sh(source),
+            11598, sh(source),
         ):
             raise c.AuditError(f"GX8002B production leaf changed: {item.get('function')}")
     sibling_bindings = {
@@ -380,7 +380,7 @@ def analyze(image: Path = IMAGE) -> dict:
             "replaced_stock_body_bytes": 1028,
             "retained_official_pool_bytes": 144,
             "hardware_validation": (
-                "deferred by project direction; future qualification requires authorized responsive G2 pair and "
+                "blocked by unavailable physical evidence; future qualification requires authorized responsive G2 pair and "
                 "live GX8002B power/I2S/DMA evidence"
             ),
         },

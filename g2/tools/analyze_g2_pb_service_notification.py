@@ -27,28 +27,28 @@ MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "ca96883bab42fed8afd3f30efde0392ee7ee5f0e7fdeb98f1bca38653885289f",
     CLOSURE: "d9a1b20365e43d8d87281635186cee65d665a34dddf422e02828676daa444254",
-    PROVENANCE: "0815221acf1a5d38397f6db41eb896f291f5bc90c415ebcc29b1088373dafb93",
+    PROVENANCE: "2bb1ecff2498d5df1ddb675b0834b95d7a372e4ee687bbb6fefe528eba244e13",
 }
-SOURCE_SIZE = 11668
-SOURCE_SHA256 = "e99566f9d7cf6c3fd00c4c0cad332600a7e2a6f6c85f55101c409780fb8e31bc"
+SOURCE_SIZE = 11659
+SOURCE_SHA256 = "4e6646d644c07852efcdb637cba5ba97aeceb4cf7a00eff25cd9df6cc71f58b1"
 FUNCTIONS = (
-    ("open_cfw_pb_service_notification_buffer_write", 146, 264220, 0,
+    ("open_cfw_pb_service_notification_buffer_write", 146, 204372, 0,
      "buffer_write"),
-    ("open_cfw_pb_service_notification_zero", 88, 264368, 0, "zero"),
-    ("open_cfw_pb_notification_encode_and_send", 258, 264456, 6,
+    ("open_cfw_pb_service_notification_zero", 88, 204520, 0, "zero"),
+    ("open_cfw_pb_notification_encode_and_send", 258, 204608, 6,
      "common_encode"),
-    ("PB_RxNotifCtrl", 48, 264716, 4, "control_rx"),
-    ("APP_PbTxEncodeNotifCtrl", 10, 264764, 1, "control_tx"),
-    ("APP_PbTxEncodeNotifCommResp", 10, 264776, 1, "comm_response"),
-    ("APP_PbTxEncodeNotifAppIDNotInWhitelist", 520, 264788, 9,
+    ("PB_RxNotifCtrl", 48, 204868, 4, "control_rx"),
+    ("APP_PbTxEncodeNotifCtrl", 10, 204916, 1, "control_tx"),
+    ("APP_PbTxEncodeNotifCommResp", 10, 204928, 1, "comm_response"),
+    ("APP_PbTxEncodeNotifAppIDNotInWhitelist", 520, 204940, 9,
      "app_not_whitelisted"),
-    ("PB_RxNotifWhitelistCtrl", 26, 265308, 1, "whitelist_control_rx"),
-    ("APP_PbTxEncodeNotifWhitelistCtrl", 10, 265336, 1,
+    ("PB_RxNotifWhitelistCtrl", 26, 205460, 1, "whitelist_control_rx"),
+    ("APP_PbTxEncodeNotifWhitelistCtrl", 10, 205488, 1,
      "whitelist_control_tx"),
-    ("PB_RxNotifWhitelistChk", 10, 265348, 0, "whitelist_check_rx"),
-    ("APP_PbTxEncodeNotifWhitelistChk", 10, 265360, 1,
+    ("PB_RxNotifWhitelistChk", 10, 205500, 0, "whitelist_check_rx"),
+    ("APP_PbTxEncodeNotifWhitelistChk", 10, 205512, 1,
      "whitelist_check_tx"),
-    ("APP_PbRxNotificationFrameDataProcess", 190, 265372, 10,
+    ("APP_PbRxNotificationFrameDataProcess", 190, 205524, 10,
      "dispatch"),
 )
 PATCH_SUFFIXES = (
@@ -371,13 +371,12 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 3318,
             "retained_gap_pool_bytes": 238,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "No authorized live G2 service 0x04 peer BLE, notification-"
-                "control, whitelist-control, whitelist-check, or app-not-"
-                "whitelisted workflow evidence is required for future qualification; the authorized "
-                "right temple is not under test because qualification is deferred by project direction and the left temple must "
-                "remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific service 0x04 notification fixture "
+                "or an authenticated golden BLE notification-control, whitelist-control, whitelist-check, "
+                "and app-not-whitelisted workflow capture"
             ),
         },
     }

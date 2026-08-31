@@ -1,5 +1,10 @@
 # G2 bootloader unsigned divide-by-ten source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The authenticated 188-byte entry at `[0x00415844,0x00415900)` is an unsigned
 64-bit divide-by-ten helper with direct callers at `0x00415912` and
 `0x004159B4`. Its shift/add/correction sequence is the division-free identity

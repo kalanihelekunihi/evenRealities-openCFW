@@ -6,6 +6,12 @@ original license; focused disassembly recovers only G2 configuration, ABI,
 port hooks, and proprietary glue. A family-level match is not assigned a
 specific revision until discriminating binary evidence supports it.
 
+The current completion assessment reports zero unclassified bytes, but it does
+not report source completion: typed retained/external and unavailable-source
+boundaries remain. Historical “opaque” counts below are contemporaneous builder
+ownership labels; they map to those classified retained/external boundaries and
+must not be read as current unclassified-byte counts.
+
 The current cross-family identity and functional-gap ordering is in
 [`research/third-party-utility-gap-priority.md`](research/third-party-utility-gap-priority.md).
 The machine-readable origin/version/commit disposition and aggregate closure
@@ -21,44 +27,44 @@ checks are in the
 | TLSF | v3.1 source-equivalent range ending at `deff9ab509341f264addbd3c8ada533678591905` | Already vendored and source-integrated |
 | littlefs | v2.10.1 source-equivalent release, commit `0494ce7169f06a734a7bd7585f49a9fa91fa7318` | Core is authenticated and vendored; both images source-integrate the scalar/alignment quartet, exact `LFS_NO_INTRINSICS` fallback-bitops trio, endian-conversion quartet, and sixteen private dual-image leaves including `lfs_alloc_lookahead`, `lfs_tag_chunk`, `lfs_tag_isvalid`, `lfs_tag_type1`, `lfs_tag_type3`, `lfs_tag_id`, and `lfs_tag_size`, while Apollo main also owns `lfs_file_tell_`, `lfs_file_rewind_`, `lfs_file_size_`, and the relocation-free `lfs_tag_type2` scalar helper. The current `lfs_tag_size` promotion passes five focused tests and has closed cross-profile and aggregate build pins; the bounded read-only G2 block port remains gated on an external-flash capture |
 | LVGL | G2 uses a hybrid LVGL 9.3.0-development vendor fork: official core history is compatible from `60d976c466e8…` through selected ceiling `344c7c318047…`, while the Ambiq backend is exact subtree `1e774257…` at canonical commit `5be8e0ae…` (byte-identical replay `67fd93e2…`) | The production-excluded official snapshot verifies 65 mapped translation units, 252 headers, MIT license, signed commit, 107 trees, and all blobs offline. Ambiq commits `d4dcd26…`/`925470dd…` explain and wire the 32-byte handler ABI. The recovered config reproduces G2 `lv_global_t==0x1EC`, every internal offset, the Nema backend/VG enables, 100 x 1,024-byte command-list geometry, and retained-context GPU power policy. Production stays fail-closed on stock-IAR/GPU-patch/HAL admission, hardware, display/FreeType system/assets, managers, and Even integration—not on an unexplained ABI or dependency identity. See the [snapshot README](../third_party/lvgl/README.openCFW.md), [Ambiq source/ABI audit](research/lvgl-ambiq-source-abi-recovery-audit.md), and [Nema dependency audit](research/nemagfx-ambiq-g2-provenance-audit.md) |
-| NemaGFX / NemaVG / Ambiq GPU patch | AmbiqSuite 5.1.0 revision `release_sdk5p1p0-634f7c117b`; NemaGFX 1.4.12; NemaVG 1.1.8 | Exact 50-file public subtree tree `e690768a…` at reproduction commit `b853fded…`; Apollo5 archive first public at `c6f54a95…`; GPU-patch archive/header first public at `e3eec7f3…`. Stock independently forces the NemaGFX 1.4.12 floor. All 11 patch exports / 4,232 exact section bytes and all 18 stock bare-metal HAL functions / 614 bytes are source-qualified. Public HAL ancestry begins on the package lineage at `4e7d4276…`, but the public files are Zephyr ports rather than stock-generating source. The original IAR/private HAL commits, atomic integration, production admission, and hardware validation remain. |
+| NemaGFX / NemaVG / Ambiq GPU patch | AmbiqSuite 5.1.0 revision `release_sdk5p1p0-634f7c117b`; NemaGFX 1.4.12; NemaVG 1.1.8 | Exact 50-file public subtree tree `e690768a…` at reproduction commit `b853fded…`; Apollo5 archive first public at `c6f54a95…`; GPU-patch archive/header first public at `e3eec7f3…`. Stock independently forces the NemaGFX 1.4.12 floor. All 11 patch exports / 4,232 exact section bytes and all 18 stock bare-metal HAL functions / 614 bytes are source-qualified. The no-argument/global-context `draw_start_cap`, `draw_end_cap`, and `draw_caps` entries are all production-routed over 6,614 stock bytes; zero stroke-cap endpoint bytes remain retained or candidate-only. Public HAL ancestry begins on the package lineage at `4e7d4276…`, but the public files are Zephyr ports rather than stock-generating source. The original IAR/private HAL commits, remaining internal Nema source, bare-metal HAL binding, and authorized hardware validation remain explicit boundaries. |
 | Google liblc3 | Tagged v1.1.3 baseline, commit `96a3af0beb5487aca3b98a4b992a539a1f6d80d1`; stock-compatible public interval `bb85f7d…1de85e2`, with `9f1e206…` excluded | A byte-identical 38-file Apache-2.0 snapshot is admitted. Four public entries and five `service_audio.c` calls authenticate the linked encoder; SNS `FLT_MAX` supplies the lower bound and the byte-0/1/2 encoder layout supplies the upper bound. The exact producing checkout is unobservable because the post-v1.1.3 compatible delta affects a dead-stripped misspelled API. Target build/performance, buffer integration, and interoperability remain gated. See the [snapshot README](../third_party/liblc3/README.openCFW.md) and [source recovery](research/g2-liblc3-source-recovery.md). |
 | FreeType | **2.9.1**, official annotated tag object `ad55868d889b6ba8d2aed846b4b4b460f8a83e42`, peeled commit `86bc8a95056c97a810986434a3f268cbe67f2902` | The unchanged FTL and 297 byte-exact source files are authenticated offline; a recovered header pins the ten-module G2 order, and focused audits prove v40/minimal TrueType, substantive GX variation services, the `am_ftsystem.c` allocator and constructor seams, plus exact `FT_Done_Face` at `[0x00526814,0x0052687E)` and its caller closure. Whole-image branch/pointer evidence shows the conventional `FT_Done_FreeType` topology is absent, so no entry may be assigned safely and this is not a remaining linked-function gap. Remaining unknowns are other configuration toggles, exact IAR compiler/linker details, and external font asset identities, payloads, and runtime arrays. The snapshot remains production-excluded pending explicit source-configuration and promotion review. See the [snapshot audit](research/freetype-2.9.1-snapshot-audit.md) and [binary recovery audit](research/freetype-recovery-audit.md) |
 | FlashDB | 2.1.1 (armink), lightweight tag/commit `2.1.1` / `714d6159e7e6afb267a3953756abca445c350e61` | The selected 14-file Apache-2.0 KVDB/FAL snapshot is byte-exact to the official tag and verified offline; this is an openCFW compatibility selection, not proof that Even used the checkout unchanged. The analyzer authenticates the 1-bit write granularity, 4-KiB sectors, 64-entry caches, short-enum `0x8AC` object ABI, partitions, callbacks, and `sysenv@kvdb` / `factory@NVdb` bindings. All 21 default values are recovered, including zero-initialized `kvbooCount`; its persisted read/increment/write lifecycle and eleven record migrations are bounded. A production-excluded port matches upstream partition reads, preserves the shared CMSIS mutex, maps every nonzero MX25 result to `-1`, and denies write/erase. Production admission still waits for a golden capture, non-destructive mount policy, and schema semantics. See the [snapshot README](../third_party/flashdb/README.openCFW.md), [configuration audit](research/flashdb-configuration-recovery-audit.md), [system-KVDB recovery](research/g2-service-kvdb-recovery.md), and [read-only port audit](research/flashdb-readonly-port-source-candidate-audit.md) |
 | EasyLogger | `2.2.99` source-equivalent core from `cd93d9c768415f4b7279f2d3ef2366ce15ea087c` through vendored `a596b2642e27af3a2dbdeb0e5f04a6b5b673ef24`; no upstream tag | Main control/filter/output/hexdump paths and the shared four-helper quartet are source-integrated. The bootloader production-routes its ten-entry control cluster, complete 115-caller interrupt-gated `elog_output`, output-lock-enable transition, all eleven mutex/time/task-info boot-port entries, and the G2-specific channel-one driver/four-channel descriptor transport under dual-profile pins. `elog_async_api.c` is proven downstream G2 code; its clean-room queue/worker implementation remains production-excluded. Live concurrency, DMA/interrupt completion, and hardware stress remain explicit physical-evidence boundaries. |
-| G2 bootloader delay and initializer services | No separate upstream dependency; first-party Even compatibility boundary | Four complete entries / 102 stock executable bytes at `[0x0041F9D8,0x0041FA40)` are production-routed to 96 relocation-free clean-room Thumb bytes. The delay seams, initializer table and scratch addresses, sort ABI, stored comparator pointer, 256-record cap, and callback dispatch are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live timing, callback effects, and cold-boot validation are blocked by unavailable authorized responsive hardware. See the [source closure](research/g2-bootloader-boot-services-41f9d8-41fa40-source-closure.md). |
-| G2 bootloader guarded teardown | No separate upstream dependency; first-party Even compatibility boundary | The complete 56-byte entry at `[0x0041FA98,0x0041FAD0)` is production-routed to one 72-byte relocation-free clean-room leaf. Exact guard/state addresses, two status stages, fail-stop policy, pin-28 configuration, sole caller, and literal pool are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live pin/power/cold-boot validation is blocked by unavailable authorized responsive hardware. See the [source closure](research/g2-bootloader-guarded-teardown-41fa98-41fad0-source-closure.md). |
-| G2 bootloader platform setup | No separate upstream dependency; first-party Even compatibility boundary | The complete 72-byte entry at `[0x0041FA50,0x0041FA98)` is production-routed to one 96-byte relocation-free clean-room leaf. Guarded teardown, reset/mode calls, hard-float `25.0f` derive ABI, 20-byte stock configuration copy/submit, channels four/five, and the sole caller are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live configuration/channel/cold-boot validation is blocked by unavailable authorized responsive hardware. See the [source closure](research/g2-bootloader-platform-setup-41fa50-41fa98-source-closure.md). |
-| G2 bootloader pin-group dispatcher | No separate upstream dependency; first-party Even compatibility boundary | The complete 538-byte entry at `[0x0041FADC,0x0041FCF6)` is production-routed to one 428-byte relocation-free clean-room leaf. Two-bank subtype fall-through, 30 SRAM configuration-word references, ordered pin numbers, no-op cases, and both callers are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live pinmux/GPIO/electrical validation is blocked by unavailable authorized responsive hardware. See the [source closure](research/g2-bootloader-pin-groups-41fadc-41fcf6-source-closure.md). |
-| G2 bootloader allocator initializer | No separate upstream dependency; first-party Even compatibility boundary using the retained TLSF v3.1 provider | The complete 56-byte entry at `[0x0041FD70,0x0041FDA8)` is production-routed to one 88-byte relocation-free clean-room leaf. Pool clear/size/address, TLSF create call, handle publication, diagnostic record, return, sole caller, and adjacent literals are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live allocator/SRAM/logging/cold-boot validation is blocked by unavailable authorized responsive hardware. See the [source closure](research/g2-bootloader-allocator-init-41fd70-41fda8-source-closure.md). |
-| G2 bootloader IRQ services | CMSIS-compatible NVIC semantics plus retained AmbiqSuite 5.1.0 MSPI HAL seams; clean-room first-party wrappers | Three complete entries / 104 bytes at `[0x0041FDC0,0x0041FE28)` are production-routed to 112 relocation-free clean-room Thumb bytes. Signed IRQ gating, register/index arithmetic, external/system priority choice, MSPI handle/status/order, two direct callers, and vector ingress are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live NVIC/MSPI validation is blocked by unavailable authorized responsive hardware. See the [source closure](research/g2-bootloader-irq-services-41fdc0-41fe28-source-closure.md). |
-| G2 bootloader MSPI controls | Retained AmbiqSuite 5.1.0 MSPI control seam; clean-room first-party wrappers | The complete 58-byte enable/disable pair `[0x0041FE28,0x0041FE62)` is routed to 64 relocation-free Thumb bytes. Active-state idempotence, handle/mode/flag arguments, state updates, and all callers are authenticated; live MSPI validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-control-41fe28-41fe62-source-closure.md). |
-| G2 bootloader event-flags service | CMSIS-compatible retained create/acquire/release and EasyLogger seams; clean-room first-party wrappers | The complete 166-byte init/acquire/release cluster `[0x0041FE62,0x0041FF08)` is routed to 208 relocation-free Thumb bytes. Handle/config addresses, null guards, wait-forever timeout, error policy, exact diagnostics, and all callers are authenticated; live RTOS/contention/cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-event-flags-service-41fe62-41ff08-source-closure.md). |
-| G2 bootloader MSPI guards | Retained event-flags and MSPI control seams; clean-room first-party paired wrappers | The complete 44-byte pair `[0x0041FF08,0x0041FF34)` is routed to 68 relocation-free Thumb bytes. The `0x200271C5` bypass byte, six direct callers, conditional MSPI transitions, and acquire/disable versus enable/release order are authenticated; live contention/MSPI/cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-guard-41ff08-41ff34-source-closure.md). |
-| G2 bootloader MSPI XIP configuration | Retained MSPI handle/configuration and control seam; clean-room first-party updater | The complete 44-byte entry `[0x0041FF34,0x0041FF60)` is routed to a 36-byte relocation-free Thumb leaf. The selector-dependent write to config byte five, request 16, handle/config addresses, ignored status, and three callers are authenticated; live XIP/external-flash/cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-xip-config-41ff34-41ff60-source-closure.md). |
-| G2 bootloader bit-run helpers | Clean-room first-party scalar reconstruction | The complete 162-byte pair `[0x0041FF60,0x00420002)` is routed to relocation-free run-length and center-selection leaves. Stock bodies/callers and exact behavior across boundary plus deterministic random words are pinned; live training-mask meaning, timing, and cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-bit-run-helpers-41ff60-420002-source-closure.md). |
-| G2 bootloader MSPI timing scan | Retained AmbiqSuite-compatible MSPI control/read-ID seams plus clean-room first-party scan | The complete 440-byte entry `[0x00420002,0x004201BA)` is routed to a 420-byte strict-relocation leaf. Stock seams, all 1,152 candidates, pass-mask construction, first-longest row selection, center helper, result bytes, and diagnostics are pinned; live signal-integrity, external-flash, XIP, and cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-timing-scan-420002-4201ba-source-closure.md). |
-| G2 bootloader automatic MSPI timing selection | Clean-room first-party wrapper over the source-owned exhaustive scan and retained EasyLogger seam | The complete 154-byte entry `[0x004201BA,0x00420254)` is routed to a strict one-relocation leaf. Zero initialization, six-byte success publication, failure preservation, both diagnostic branches, and adjacent-byte safety are pinned; live signal-integrity, external-flash, XIP, and cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-timing-auto-4201ba-420254-source-closure.md). |
-| G2 bootloader low-level MSPI initializer | Clean-room first-party orchestration over retained Ambiq-compatible HAL/EasyLogger seams and source-owned XIP, pin-group, and NVIC helpers | The complete 546-byte entry `[0x00420254,0x00420476)` is routed to a four-relocation 492-byte leaf. Busy-state rejection, HAL order, default/custom configuration, cleanup, TCB/pin/interrupt settings, publication, and diagnostics are pinned; live HAL/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-low-level-init-420254-420476-source-closure.md). |
-| G2 bootloader MX25U25643G public initializer | Clean-room first-party orchestration over retained device/JEDEC helpers and source-owned MSPI services | The complete 180-byte entry `[0x00420476,0x0042052A)` is routed to a five-relocation 204-byte leaf. Initialization failure, delay, timing selection, JEDEC-ID logging, final mode/service setup, and return policy are pinned; live JEDEC/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-driver-init-420476-42052a-source-closure.md). |
-| G2 bootloader MX25U25643G soft reset | Clean-room first-party command sequencing over retained command/logger seams and source-owned delay | The complete 116-byte entry `[0x0042052A,0x0042059E)` is routed to a 136-byte leaf. Reset-enable/reset commands, delays, failure-only diagnostics, and continuation policy are pinned; live reset/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-soft-reset-42052a-42059e-source-closure.md). |
-| G2 bootloader MX25U25643G JEDEC-ID reader | Clean-room first-party command, error, and byte-packing implementation over retained transaction/logger seams | The complete 86-byte entry `[0x0042059E,0x004205F4)` is routed to a relocation-free 100-byte leaf. Command `0x9F`, three-byte receive, failure output preservation, diagnostics, and big-endian packing are pinned; live JEDEC/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-read-id-42059e-4205f4-source-closure.md). |
-| G2 bootloader MX25U25643G read-transfer wrapper | Clean-room first-party validation and descriptor orchestration over retained Ambiq blocking-transfer and source-routed logging seams | The complete 170-byte entry `[0x004205F4,0x0042069E)` is routed to a relocation-free 172-byte leaf. Status mapping, 25-bit address bound, exact 24-byte descriptor, timeout, five callers, HAL status, and failure diagnostics are pinned; live HAL/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-read-transfer-4205f4-42069e-source-closure.md). |
-| G2 bootloader MX25U25643G write-transfer wrapper | Clean-room first-party validation and descriptor orchestration over retained Ambiq blocking-transfer and source-routed logging seams | The complete 176-byte entry `[0x0042069E,0x0042074E)` is routed to a relocation-free 148-byte leaf. Status mapping, address and 256-byte length ceilings, exact 24-byte write descriptor, timeout, eight callers, HAL status, and failure diagnostics are pinned; live HAL/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-write-transfer-42069e-42074e-source-closure.md). |
-| G2 bootloader MX25U25643G busy-status reader | Clean-room first-party status-register orchestration over the source-routed read-transfer and logging seams | The complete 84-byte entry `[0x0042074E,0x004207A2)` is routed to a relocation-free 88-byte leaf under both profiles. Command `0x05`, zeroed scratch bytes, one-byte transfer, raw failure status and diagnostic, bit-7 Boolean result, and both callers are pinned; live HAL/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-busy-status-42074e-4207a2-source-closure.md). |
-| G2 bootloader MX25U25643G ready polling | Clean-room first-party two-phase polling over source-routed context, notification, delay, and status seams | The complete 94-byte cluster `[0x004207A2,0x00420800)` is routed to dependency-free 88- and 12-byte leaves. The 200-poll fast phase, five-unit backoff, caller-bounded context-aware phase, fixed bound 500, return policy, and all callers are pinned; live RTOS/timing/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable authorized hardware. See the [source closure](research/g2-bootloader-mspi-wait-ready-4207a2-420800-source-closure.md). |
-| G2 bootloader MX25U25643G address-mode reading | Clean-room first-party command `0x15` register read and bit-5 decoder | The complete 108-byte body `[0x00420800,0x0042086C)` routes to a relocation-free 124-byte leaf on both reviewed toolchains. Raw transport errors, the sole caller, and both diagnostics are pinned; live MSPI/external-flash/cold-boot validation is hardware-blocked. See the [source closure](research/g2-bootloader-mspi-4byte-mode-420800-42086c-source-closure.md). |
-| G2 bootloader MX25U25643G enter-four-byte-mode | Clean-room first-party `0xB7` command state machine over source-routed ready-poll, address-mode, and retained write-latch seams | The complete 232-byte body `[0x00420890,0x00420978)` routes to a relocation-free 220-byte leaf on both reviewed toolchains. Handle/busy mappings, raw error propagation, command, ignored post-command poll, permissive verification quirk, write-disable, sole caller, and diagnostics are pinned; live MSPI/external-flash/XIP/cold-boot validation is hardware-blocked. See the [source closure](research/g2-bootloader-mspi-enter-4byte-mode-420890-420978-source-closure.md). |
-| G2 bootloader MX25U25643G write-latch commands | Clean-room first-party command `0x06` / `0x04` wrappers over the source-routed write-transfer seam | The complete 58-byte write-enable and 56-byte write-disable bodies route to relocation-free 72-byte leaves on both reviewed toolchains. All seven callers, zeroed transfer fields, raw statuses, and exact failure-only diagnostics are pinned; three surrounding literal pools remain authenticated retained data, and live MSPI/external-flash/XIP/cold-boot validation is hardware-blocked. See the [source closure](research/g2-bootloader-mspi-write-latch-420984-4209fc-source-closure.md). |
-| G2 bootloader MX25U25643G sector erase | Clean-room first-party guarded command `0x20` service over source-routed ready-poll, write-latch, transfer, guard, and mode seams | The complete 210-byte body `[0x00420A08,0x00420ADA)` routes to a relocation-free 244-byte leaf on both reviewed toolchains. Handle, 4-KiB alignment, 32-MiB bound, all failure mappings, diagnostic arguments, cleanup order, transfer tuple, and sole caller are pinned; live erase/MSPI/external-flash/XIP/cold-boot validation is hardware-blocked. See the [source closure](research/g2-bootloader-mspi-sector-erase-420a08-420ada-source-closure.md). |
-| G2 bootloader MX25U25643G page program | Clean-room first-party guarded command `0x02` service over source-routed ready-poll, write-latch, transfer, guard, and mode seams | The complete 264-byte body `[0x00420B0C,0x00420C14)` routes to the same relocation-free 256-byte leaf on both reviewed toolchains. Handle/buffer/length validation, 32-MiB bound, 256-byte page splitting, address/buffer advancement, all failure mappings, diagnostics, cleanup, transfer tuples, and sole caller are pinned; live programming/MSPI/external-flash/XIP/cold-boot validation is hardware-blocked. See the [source closure](research/g2-bootloader-mspi-program-420b0c-420c14-source-closure.md). |
-| G2 bootloader MX25U25643G QE configuration | Clean-room first-party status-register-2 read/update/verify service over source-routed ready, write-enable, and transfer seams | The complete 414-byte body `[0x00420C5C,0x00420DFA)` routes to the same relocation-free 364-byte leaf on both reviewed toolchains. Fixed-handle rejection, commands `0x05`/`0x01`, QE bit 6, protection mask `0x3C`, ignored waits, raw failures, verification, diagnostics, non-Boolean low-byte behavior, and sole caller are pinned; live QE/MSPI/external-flash/XIP/cold-boot validation is hardware-blocked. See the [source closure](research/g2-bootloader-mspi-quad-enable-420c5c-420dfa-source-closure.md). |
+| G2 bootloader delay and initializer services | No separate upstream dependency; first-party Even compatibility boundary | Four complete entries / 102 stock executable bytes at `[0x0041F9D8,0x0041FA40)` are production-routed to 96 relocation-free clean-room Thumb bytes. The delay seams, initializer table and scratch addresses, sort ABI, stored comparator pointer, 256-record cap, and callback dispatch are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live timing, callback effects, and cold-boot validation are blocked by unavailable physical evidence; future qualification requires authorized responsive hardware. See the [source closure](research/g2-bootloader-boot-services-41f9d8-41fa40-source-closure.md). |
+| G2 bootloader guarded teardown | No separate upstream dependency; first-party Even compatibility boundary | The complete 56-byte entry at `[0x0041FA98,0x0041FAD0)` is production-routed to one 72-byte relocation-free clean-room leaf. Exact guard/state addresses, two status stages, fail-stop policy, pin-28 configuration, sole caller, and literal pool are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live pin/power/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized responsive hardware. See the [source closure](research/g2-bootloader-guarded-teardown-41fa98-41fad0-source-closure.md). |
+| G2 bootloader platform setup | No separate upstream dependency; first-party Even compatibility boundary | The complete 72-byte entry at `[0x0041FA50,0x0041FA98)` is production-routed to one 96-byte relocation-free clean-room leaf. Guarded teardown, reset/mode calls, hard-float `25.0f` derive ABI, 20-byte stock configuration copy/submit, channels four/five, and the sole caller are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live configuration/channel/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized responsive hardware. See the [source closure](research/g2-bootloader-platform-setup-41fa50-41fa98-source-closure.md). |
+| G2 bootloader pin-group dispatcher | No separate upstream dependency; first-party Even compatibility boundary | The complete 538-byte entry at `[0x0041FADC,0x0041FCF6)` is production-routed to one 428-byte relocation-free clean-room leaf. Two-bank subtype fall-through, 30 SRAM configuration-word references, ordered pin numbers, no-op cases, and both callers are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live pinmux/GPIO/electrical validation is blocked by unavailable physical evidence; future qualification requires authorized responsive hardware. See the [source closure](research/g2-bootloader-pin-groups-41fadc-41fcf6-source-closure.md). |
+| G2 bootloader allocator initializer | No separate upstream dependency; first-party Even compatibility boundary using the retained TLSF v3.1 provider | The complete 56-byte entry at `[0x0041FD70,0x0041FDA8)` is production-routed to one 88-byte relocation-free clean-room leaf. Pool clear/size/address, TLSF create call, handle publication, diagnostic record, return, sole caller, and adjacent literals are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live allocator/SRAM/logging/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized responsive hardware. See the [source closure](research/g2-bootloader-allocator-init-41fd70-41fda8-source-closure.md). |
+| G2 bootloader IRQ services | CMSIS-compatible NVIC semantics plus retained AmbiqSuite 5.1.0 MSPI HAL seams; clean-room first-party wrappers | Three complete entries / 104 bytes at `[0x0041FDC0,0x0041FE28)` are production-routed to 112 relocation-free clean-room Thumb bytes. Signed IRQ gating, register/index arithmetic, external/system priority choice, MSPI handle/status/order, two direct callers, and vector ingress are authenticated. Host, Cortex-M55, dual-profile, routing, package, and flash-plan gates pass; live NVIC/MSPI validation is blocked by unavailable physical evidence; future qualification requires authorized responsive hardware. See the [source closure](research/g2-bootloader-irq-services-41fdc0-41fe28-source-closure.md). |
+| G2 bootloader MSPI controls | Retained AmbiqSuite 5.1.0 MSPI control seam; clean-room first-party wrappers | The complete 58-byte enable/disable pair `[0x0041FE28,0x0041FE62)` is routed to 64 relocation-free Thumb bytes. Active-state idempotence, handle/mode/flag arguments, state updates, and all callers are authenticated; live MSPI validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-control-41fe28-41fe62-source-closure.md). |
+| G2 bootloader event-flags service | CMSIS-compatible retained create/acquire/release and EasyLogger seams; clean-room first-party wrappers | The complete 166-byte init/acquire/release cluster `[0x0041FE62,0x0041FF08)` is routed to 208 relocation-free Thumb bytes. Handle/config addresses, null guards, wait-forever timeout, error policy, exact diagnostics, and all callers are authenticated; live RTOS/contention/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-event-flags-service-41fe62-41ff08-source-closure.md). |
+| G2 bootloader MSPI guards | Retained event-flags and MSPI control seams; clean-room first-party paired wrappers | The complete 44-byte pair `[0x0041FF08,0x0041FF34)` is routed to 68 relocation-free Thumb bytes. The `0x200271C5` bypass byte, six direct callers, conditional MSPI transitions, and acquire/disable versus enable/release order are authenticated; live contention/MSPI/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-guard-41ff08-41ff34-source-closure.md). |
+| G2 bootloader MSPI XIP configuration | Retained MSPI handle/configuration and control seam; clean-room first-party updater | The complete 44-byte entry `[0x0041FF34,0x0041FF60)` is routed to a 36-byte relocation-free Thumb leaf. The selector-dependent write to config byte five, request 16, handle/config addresses, ignored status, and three callers are authenticated; live XIP/external-flash/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-xip-config-41ff34-41ff60-source-closure.md). |
+| G2 bootloader bit-run helpers | Clean-room first-party scalar reconstruction | The complete 162-byte pair `[0x0041FF60,0x00420002)` is routed to relocation-free run-length and center-selection leaves. Stock bodies/callers and exact behavior across boundary plus deterministic random words are pinned; live training-mask meaning, timing, and cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-bit-run-helpers-41ff60-420002-source-closure.md). |
+| G2 bootloader MSPI timing scan | Retained AmbiqSuite-compatible MSPI control/read-ID seams plus clean-room first-party scan | The complete 440-byte entry `[0x00420002,0x004201BA)` is routed to a 420-byte strict-relocation leaf. Stock seams, all 1,152 candidates, pass-mask construction, first-longest row selection, center helper, result bytes, and diagnostics are pinned; live signal-integrity, external-flash, XIP, and cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-timing-scan-420002-4201ba-source-closure.md). |
+| G2 bootloader automatic MSPI timing selection | Clean-room first-party wrapper over the source-owned exhaustive scan and retained EasyLogger seam | The complete 154-byte entry `[0x004201BA,0x00420254)` is routed to a strict one-relocation leaf. Zero initialization, six-byte success publication, failure preservation, both diagnostic branches, and adjacent-byte safety are pinned; live signal-integrity, external-flash, XIP, and cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-timing-auto-4201ba-420254-source-closure.md). |
+| G2 bootloader low-level MSPI initializer | Clean-room first-party orchestration over retained Ambiq-compatible HAL/EasyLogger seams and source-owned XIP, pin-group, and NVIC helpers | The complete 546-byte entry `[0x00420254,0x00420476)` is routed to a four-relocation 492-byte leaf. Busy-state rejection, HAL order, default/custom configuration, cleanup, TCB/pin/interrupt settings, publication, and diagnostics are pinned; live HAL/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-low-level-init-420254-420476-source-closure.md). |
+| G2 bootloader MX25U25643G public initializer | Clean-room first-party orchestration over retained device/JEDEC helpers and source-owned MSPI services | The complete 180-byte entry `[0x00420476,0x0042052A)` is routed to a five-relocation 204-byte leaf. Initialization failure, delay, timing selection, JEDEC-ID logging, final mode/service setup, and return policy are pinned; live JEDEC/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-driver-init-420476-42052a-source-closure.md). |
+| G2 bootloader MX25U25643G soft reset | Clean-room first-party command sequencing over retained command/logger seams and source-owned delay | The complete 116-byte entry `[0x0042052A,0x0042059E)` is routed to a 136-byte leaf. Reset-enable/reset commands, delays, failure-only diagnostics, and continuation policy are pinned; live reset/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-soft-reset-42052a-42059e-source-closure.md). |
+| G2 bootloader MX25U25643G JEDEC-ID reader | Clean-room first-party command, error, and byte-packing implementation over retained transaction/logger seams | The complete 86-byte entry `[0x0042059E,0x004205F4)` is routed to a relocation-free 100-byte leaf. Command `0x9F`, three-byte receive, failure output preservation, diagnostics, and big-endian packing are pinned; live JEDEC/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-read-id-42059e-4205f4-source-closure.md). |
+| G2 bootloader MX25U25643G read-transfer wrapper | Clean-room first-party validation and descriptor orchestration over retained Ambiq blocking-transfer and source-routed logging seams | The complete 170-byte entry `[0x004205F4,0x0042069E)` is routed to a relocation-free 172-byte leaf. Status mapping, 25-bit address bound, exact 24-byte descriptor, timeout, five callers, HAL status, and failure diagnostics are pinned; live HAL/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-read-transfer-4205f4-42069e-source-closure.md). |
+| G2 bootloader MX25U25643G write-transfer wrapper | Clean-room first-party validation and descriptor orchestration over retained Ambiq blocking-transfer and source-routed logging seams | The complete 176-byte entry `[0x0042069E,0x0042074E)` is routed to a relocation-free 148-byte leaf. Status mapping, address and 256-byte length ceilings, exact 24-byte write descriptor, timeout, eight callers, HAL status, and failure diagnostics are pinned; live HAL/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-write-transfer-42069e-42074e-source-closure.md). |
+| G2 bootloader MX25U25643G busy-status reader | Clean-room first-party status-register orchestration over the source-routed read-transfer and logging seams | The complete 84-byte entry `[0x0042074E,0x004207A2)` is routed to a relocation-free 88-byte leaf under both profiles. Command `0x05`, zeroed scratch bytes, one-byte transfer, raw failure status and diagnostic, bit-7 Boolean result, and both callers are pinned; live HAL/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-busy-status-42074e-4207a2-source-closure.md). |
+| G2 bootloader MX25U25643G ready polling | Clean-room first-party two-phase polling over source-routed context, notification, delay, and status seams | The complete 94-byte cluster `[0x004207A2,0x00420800)` is routed to dependency-free 88- and 12-byte leaves. The 200-poll fast phase, five-unit backoff, caller-bounded context-aware phase, fixed bound 500, return policy, and all callers are pinned; live RTOS/timing/MSPI/XIP/external-flash/cold-boot validation is blocked by unavailable physical evidence; future qualification requires authorized hardware. See the [source closure](research/g2-bootloader-mspi-wait-ready-4207a2-420800-source-closure.md). |
+| G2 bootloader MX25U25643G address-mode reading | Clean-room first-party command `0x15` register read and bit-5 decoder | The complete 108-byte body `[0x00420800,0x0042086C)` routes to a relocation-free 124-byte leaf on both reviewed toolchains. Raw transport errors, the sole caller, and both diagnostics are pinned; live MSPI/external-flash/cold-boot validation is blocked by unavailable physical evidence and requires future authorized hardware evidence. See the [source closure](research/g2-bootloader-mspi-4byte-mode-420800-42086c-source-closure.md). |
+| G2 bootloader MX25U25643G enter-four-byte-mode | Clean-room first-party `0xB7` command state machine over source-routed ready-poll, address-mode, and retained write-latch seams | The complete 232-byte body `[0x00420890,0x00420978)` routes to a relocation-free 220-byte leaf on both reviewed toolchains. Handle/busy mappings, raw error propagation, command, ignored post-command poll, permissive verification quirk, write-disable, sole caller, and diagnostics are pinned; live MSPI/external-flash/XIP/cold-boot validation is blocked by unavailable physical evidence and requires future authorized hardware evidence. See the [source closure](research/g2-bootloader-mspi-enter-4byte-mode-420890-420978-source-closure.md). |
+| G2 bootloader MX25U25643G write-latch commands | Clean-room first-party command `0x06` / `0x04` wrappers over the source-routed write-transfer seam | The complete 58-byte write-enable and 56-byte write-disable bodies route to relocation-free 72-byte leaves on both reviewed toolchains. All seven callers, zeroed transfer fields, raw statuses, and exact failure-only diagnostics are pinned; three surrounding literal pools remain authenticated retained data, and live MSPI/external-flash/XIP/cold-boot validation is blocked by unavailable physical evidence and requires future authorized hardware evidence. See the [source closure](research/g2-bootloader-mspi-write-latch-420984-4209fc-source-closure.md). |
+| G2 bootloader MX25U25643G sector erase | Clean-room first-party guarded command `0x20` service over source-routed ready-poll, write-latch, transfer, guard, and mode seams | The complete 210-byte body `[0x00420A08,0x00420ADA)` routes to a relocation-free 244-byte leaf on both reviewed toolchains. Handle, 4-KiB alignment, 32-MiB bound, all failure mappings, diagnostic arguments, cleanup order, transfer tuple, and sole caller are pinned; live erase/MSPI/external-flash/XIP/cold-boot validation is blocked by unavailable physical evidence and requires future authorized hardware evidence. See the [source closure](research/g2-bootloader-mspi-sector-erase-420a08-420ada-source-closure.md). |
+| G2 bootloader MX25U25643G page program | Clean-room first-party guarded command `0x02` service over source-routed ready-poll, write-latch, transfer, guard, and mode seams | The complete 264-byte body `[0x00420B0C,0x00420C14)` routes to the same relocation-free 256-byte leaf on both reviewed toolchains. Handle/buffer/length validation, 32-MiB bound, 256-byte page splitting, address/buffer advancement, all failure mappings, diagnostics, cleanup, transfer tuples, and sole caller are pinned; live programming/MSPI/external-flash/XIP/cold-boot validation is blocked by unavailable physical evidence and requires future authorized hardware evidence. See the [source closure](research/g2-bootloader-mspi-program-420b0c-420c14-source-closure.md). |
+| G2 bootloader MX25U25643G QE configuration | Clean-room first-party status-register-2 read/update/verify service over source-routed ready, write-enable, and transfer seams | The complete 414-byte body `[0x00420C5C,0x00420DFA)` routes to the same relocation-free 364-byte leaf on both reviewed toolchains. Fixed-handle rejection, commands `0x05`/`0x01`, QE bit 6, protection mask `0x3C`, ignored waits, raw failures, verification, diagnostics, non-Boolean low-byte behavior, and sole caller are pinned; live QE/MSPI/external-flash/XIP/cold-boot validation is blocked by unavailable physical evidence and requires future authorized hardware evidence. See the [source closure](research/g2-bootloader-mspi-quad-enable-420c5c-420dfa-source-closure.md). |
 | mpaland/printf | `d3b984684bb8a8bdc48cc7a1abecb93ce59bbe3e` | All linked reverse-output, integer, float, exponential, string, variadic-core, public-wrapper, and G2 `%PV`/`%pV` extension behavior is production source-owned. Only the binary-unobservable historical checkout remains; there is no linked functional gap. |
 | AmbiqSuite | 5.1.0-lineage Apollo510 source at public replay commit `5efc0228528a8adce5eae0d226fac85d2551eb3b`, with CMSIS Core pinned at `d23a6949a0331ca96853bcd98b0fdcc4db47184c` | The licensed Apollo510/CMSIS MSPI closure is vendored; both production overlays retain the exact-upstream interrupt-clear leaf. The complete stock system-sleep body adds a decisive version proof: its two WFI operations match 5.1.0 and exclude 5.0.0. Independent I2S and PDM consumers map 24 public HAL APIs to the same replay; the PDM source is pinned to Git blob `23a440bf…`. The stock build predates the public import, so the private pre-release generating commit remains unavailable; see the [product RTOS recovery](research/g2-product-rtos-recovery.md) and [PDM recovery](research/g2-drv-pdm-production-recovery.md) |
-| AmbiqSuite ANCC profile | 2.2.0-4.5.0 implementation-equivalent ANCS client; selected 2.5.1 public import `de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f` | Exact BSD-licensed 17-definition source/header admitted as the oracle. G2's 21-function object retains 12 Ambiq-derived bodies and adds nine bounded message/sync/whitelist adapters; all 21 entries are now production-routed from maintained C with the exact SRAM ABI and hardened fragmented parser. The source-identical interval still prevents recovery of one private producing commit. Live ANCS/controller/dual-temple validation is blocked by unavailable authorized responsive hardware. See the [ANCC source recovery](research/ambiqsuite-ancc-profile-source-recovery.md) |
+| AmbiqSuite ANCC profile | 2.2.0-4.5.0 implementation-equivalent ANCS client; selected 2.5.1 public import `de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f` | Exact BSD-licensed 17-definition source/header admitted as the oracle. G2's 21-function object retains 12 Ambiq-derived bodies and adds nine bounded message/sync/whitelist adapters; all 21 entries are now production-routed from maintained C with the exact SRAM ABI and hardened fragmented parser. The source-identical interval still prevents recovery of one private producing commit. Live ANCS/controller/dual-temple validation is blocked by unavailable physical evidence; future qualification requires authorized responsive hardware. See the [ANCC source recovery](research/ambiqsuite-ancc-profile-source-recovery.md) |
 | AmbiqSuite AMOTA profile | 2.2.0-2.5.1 stable application skeleton; selected 2.5.1 public import `de5c6ba3044f4ef0f0c907c3f83fbbaa5795262f` | Exact BSD-licensed 2.5.1 application/API oracle admitted. G2 OTA retains the CCC, A0/A1 event, initializer, and handler skeleton across four functions while three actions are product-local. The binary cannot select one changed release file or private commit. See the [OTA/Ring recovery](research/g2-ble-ota-ring-profiles-recovery.md) |
 | Goodix GR551x application-error utility | SDK 1.7.0 byte-exact `components/libraries/app_error/app_error.c` snapshot, blob `d5027735dd01b0948a7315d9c595356fcb91f59b`; first located incompatible version 2.0.1 | G2's `utils/assert` handler and 43-row table are copied/adapted source. Selected earliest public carrier `854c43e0b96a24051ffce4c06ff629255aa56c59` is not claimed as an official release or Even checkout. The utility is source-closed, production-excluded, and does not imply a linked Goodix BLE stack. See the [Goodix utility recovery](research/g2-util-error-check-goodix-recovery.md) and [provenance](../third_party/goodix-gr551x-app-error/PROVENANCE.json) |
-| G2 EUS/ESS/EFS/NUS profile boundary | No separate upstream dependency | Four contiguous first-party Cordio adapters are authenticated across 25 linked functions / 2,698 body bytes / 3,000 physical bytes and are production-routed from clean-room C. AmbiqSuite has no matching profiles and Nordic `ble_nus_*` does not match the G2 NUS API. Physical peer validation is blocked by unavailable authorized responsive evidence. See the [profile recovery](research/g2-ble-transport-profiles-recovery.md) |
+| G2 EUS/ESS/EFS/NUS profile boundary | No separate upstream dependency | Four contiguous first-party Cordio adapters are authenticated across 25 linked functions / 2,698 body bytes / 3,000 physical bytes and are production-routed from clean-room C. AmbiqSuite has no matching profiles and Nordic `ble_nus_*` does not match the G2 NUS API. Physical peer validation is blocked by unavailable physical evidence; future qualification requires authorized responsive evidence. See the [profile recovery](research/g2-ble-transport-profiles-recovery.md) |
 | CmBacktrace | armink CmBacktrace, compatible with unmodified upstream interval `4abadfa0…73714489` on the untagged post-1.4.1 line advertising `1.4.2`; no exact vendor commit is proven | FreeRTOS, stack dumping, IAR `.out`, depths 32/16, name limit 40, M33-class effective behavior, exact init arguments, and the 39-entry message table are recovered. Upstream `55e7b69` and later are excluded because G2 lacks its stacked-xPSR fix. A production-excluded seven-file **MIT** snapshot selects `73714489` as an explicit openCFW compatibility choice and verifies its commit, six tree objects, and blobs offline; see the [snapshot README](../third_party/cmbacktrace/README.openCFW.md) and [version/configuration audit](research/cmbacktrace-version-recovery-audit.md) |
 | AndersKaloer/Ring-Buffer | Dynamic-buffer source-equivalent interval `cda00e1efb815bad5100757f0d10d117f633ced6`…`190e30bebcec22d7311fd941179d70b4f439c441`; selected compatibility commit `190e30b` | Exact assertion, 16-byte ABI, seven-function control flow, overwrite-oldest policy, all boundaries, and direct callers are authenticated. All seven live entries are production-integrated as 248 source bytes plus four alignment bytes; Linux replay remains pending. See the [snapshot README](../third_party/ring-buffer/README.openCFW.md) and [lineage audit](research/ring-buffer-lineage-recovery-audit.md) |
 | TinyFrame | Exact core blobs introduced by `eb75483e035916ef9f3e9fce0d2ae389cb09785f`; historical checkout interval ends at core-identical `a29167a69f052975b0e0134a73b4d31d03afa8fa` | The MIT snapshot, license, recovered G2 config, `-fshort-enums` ABI, pristine `0x7158` core, and `0x7160` magic-extended layout are authenticated offline and compile-tested for Cortex-M55. All 31 linked functions / 2,994 code bytes and the 124-byte non-executable pool are accounted for. The separate adapter closes the one-instance role census and bookended layout without modifying upstream. Production atomically routes eight public entries over a 14-function live graph, uses source-owned `heap_4`, retains the authenticated first-party sync wrapper at `0x00541790`, and selects no-op diagnostics. Placement, ownership, and Apple/Linux roots are pinned; only hardware golden frames remain. See the [snapshot README](../third_party/tinyframe/README.openCFW.md), [send/version audit](research/tinyframe-send-version-recovery-audit.md), and [source-admission audit](research/tinyframe-source-admission-boundary-audit.md) |
@@ -75,8 +81,8 @@ mpaland/printf, AmbiqSuite 5.1.0 / CMSIS, the AmbiqSuite ANCC and AMOTA clients,
 the copied Goodix GR551x 1.7.0 application-error helper, the generic `ringBuffer`,
 DaveGamble cJSON v1.7.9–v1.7.12 (snapshot admitted at ceiling tag v1.7.12,
 production-excluded), and
-CmBacktrace. The remaining opaque bytes are first-party Even code
-(`platform`/`app`/`framework`/`driver`/`product`/`service`, including the
+CmBacktrace. The remaining source-unavailable retained/external bytes include
+first-party Even code (`platform`/`app`/`framework`/`driver`/`product`/`service`, including the
 proprietary `fw_event_loop`, audio DSP, and application services). The formerly
 speculative cryptographic-backend boundary is now identified as Packetcraft
 Cordio r20.05c `sec_api`; its 20 service functions are production-routed from
@@ -556,7 +562,7 @@ Final accounting is 6,931 source-owned bytes, 8,208 generated patch bytes,
 official bytes. The
 following EasyLogger executable bodies from `0x0041733C` remain an explicit
 software gap after 98 authenticated transition-data bytes, and physical
-boot/stream validation is blocked by unavailable authorized
+boot/stream validation is blocked by unavailable physical evidence; future qualification requires authorized
 responsive hardware.
 Focused evidence is recorded in
 `docs/research/littlefs-file-tell-source-boundary-audit.md`,
@@ -1214,8 +1220,8 @@ and timeout/cleanup transitions, independently excluding r19. See the
 | TinyFrame | Receive and send clusters establish the post-2.3.0 MIT lineage. Ten retained `TF_Error` line arguments select the exact `TinyFrame.c`/`.h` blobs introduced by `eb75483e` as the minimum-patch core baseline; repository head `a29167a` is core-identical and changes only demo content, so the historical checkout remains bounded to `eb75483e…a29167a`. Config: SOF `0x01`, 2-byte big-endian ID/LEN/TYPE and CRC-16/ARC, 1024-byte TX buffer, no mutex with per-instance soft lock, request IDs `(next++ & 0x7FFF) | peer_bit`, responses preserve full IDs. Header CRC covers `SOF || ID || LEN || TYPE`; zero-length frames omit DATA_CKSUM. All 31 linked functions / 2,994 code bytes plus the 124-byte non-executable pool are accounted for; thirteen unused upstream APIs are dead-stripped. One instance at `0x200749C4` is selected by role: master is peer bit 1, slave peer bit 0, and application code retains no field dereference. The G2 adapter implements `magic | pristine core | magic` and is host/target checked. Production now atomically redirects eight public entries over the exact dual-profile 14-function live graph, uses source-owned `heap_4`, retains the authenticated sync wrapper at `0x00541790`, and selects explicit no-op logging. Only the lower hardware provider remains opaque; placement/routing/ownership accounting is complete and hardware frames remain. A sweep of all 113 public upstream forks found no G2 magic/config match. See the [send/version audit](research/tinyframe-send-version-recovery-audit.md), [source-admission audit](research/tinyframe-source-admission-boundary-audit.md), and [receive audit](research/tinyframe-wire-format-recovery-audit.md) |
 | FreeRTOS-Plus-CLI | The reusable MIT interpreter is the classic V1.0.4-compatible core. A production-excluded snapshot selects `43defa56`/tree `12448758`, verifies the exact CRLF C/H/history/license files through compatible ceiling `1309654d`, and carries a clean 1,077-byte patch containing only G2's blank-input suppression delta `[0x005848CA,0x005848F4)`. The independently named production parameter accessor source-integrates `[0x005848FC,0x00584960)`. Separately, seven MIT clean-room leaves replace the complete G2 console task `[0x00541600,0x0054171C)` while retaining the stock interpreter ABI, 22 setup groups, and 76 proprietary descriptors. The source task preserves the 127-byte safe payload and requires receive count exactly one; it supersedes the old two-byte capacity leaf. Snapshot and candidates remain excluded, and the selected commit is not an exact vendor-provenance claim. Recovered ABI: 16-byte descriptor, 8-byte list node, dynamic registration, 128-byte interpreter boundary, expected parameter counts -1..3, and highest parameter index 11. Vendor commands/handlers and unresolved static-allocation policy remain separate. See the [snapshot README](../third_party/freertos-plus-cli/README.openCFW.md), [source recovery audit](research/freertos-plus-cli-source-recovery-audit.md), [accessor promotion audit](research/freertos-cli-get-parameter-source-candidate-audit.md), and [console-task audit](research/freertos-cli-console-task-source-candidate-audit.md) |
 | nanopb | Runtime at `0x0048F000`–`0x00491400` is compatible with pristine upstream **0.4.7–0.4.9.1**. The authenticated 0.4.9 snapshot verifies tag/commit/tree/blobs/Zlib offline. Thirty-five bounded altered production functions now include private `pb_decode_inner`, public `pb_decode_tag`, the nine-leaf `pb_common.c` iterator closure, and the paired private defaults routines; pristine translation units remain unregistered. The defaults pair fully redirects 438 stock bytes to 414 source bytes and retains only `decode_field` as a fixed executable seam. Apple object, placement, redirect, aggregate, and ownership pins are complete, while Linux/Clang 22 reproduction remains pending. Even schemas/generated messages remain separate first-party inputs. See the [iterator audit](research/nanopb-iterator-cluster-source-audit.md) and [defaults audits](research/nanopb-message-defaults-source-audit.md). Remaining: close extension and field-dispatch families; exact Linux reproduction; vendor point-release evidence; and first-party schema glue. |
-| IAR DLIB/compiler runtime | The retained `s200_ap510b_iar_git` paths prove the IAR project family, but the image contains no IAR/ICCARM/EWARM/DLIB version string. Lorelei Ghidra plus local Rizin split 35 early-island targets into neighboring application/DSP code and six confirmed retained runtime units: `__aeabi_memmove`, VFP `sqrtf`, `__aeabi_memcpy`, EDOM/ERANGE setters, and an errno-address accessor. Signed/unsigned 64-bit division cores and wrappers plus `frexpf`, its binary32 helper, and `ldexpf` are source-recreated. Three authenticated application banners date the build to `Jul  6 2026`. Formal Cortex-M55 support gives a practical EWARM 9.20+ floor; Ambiq's later Apollo510 reference environment makes 9.60.2 the leading compatibility candidate, while official filename rules and retained literal pools narrow likely archive families to `m7M_tl{v|s}.a`, `rt7M_tl.a`, and `dl7M_tl{n|f}.a`. All thirteen bounded runtime code units have qualified clean-room source. The production-reachable formatted-input graph is source-owned through 11 strict Cortex-M55 leaves and a guarded 2,778-byte core redirect. The formatted-output graph is source-owned through four strict leaves and a guarded 3,256-byte core redirect, including `%a/%A`, IAR `q`/`L`, `%n`, and recursive descriptors. Every exact wrapper passes `secure=0`; both adapters reject nonzero mode, so unimplemented Annex-K semantics have no production ingress. Exact release and option variants remain unproven; no matching archives are installed locally or on Lorelei. See the [runtime census](research/iar-dlib-runtime-census.md), [formatted-input closure](research/g2-iar-format-input-source-closure.md), [formatted-output closure](research/g2-iar-format-output-source-closure.md), and [formatted-I/O audit](research/g2-iar-dlib-format-io-recovery.md). Remaining work is provenance-only archive comparison, Linux replay, and hardware execution evidence blocked by unavailable authorized responsive hardware. |
-| EM9305 QP/C | EM Microelectronic documents the EM9305 RTEF as QP/C ported to ARC with minor customizations. QP/C is pinned to **v6.5.1**, official commit `416dcec8820b9cdb5827497e645d0d9375db53c6`: authenticated `qep.h` in a third-party EM9305 SDK v4.2 oracle records version 6.5.1 and release code `0x8E7055B4`. The oracle is commit `e4412bc98d4e76d441d1226ca3696e53cfae5f54`, tree `f5cb9ba00df71c2612d6d64cf39e05615a2feb64`; it is not an authoritative EM repository or proof of the exact private vendor checkout. Independently, stock bodies bound ancestry to v6.3.6 `5550cca87dedf72d45250ad01e9cdeee8c4140ba` through v6.6.0+ `a280d203c0f55753b18dd9fc76104936729e471a`, excluding v6.7.0. The authenticated SDK `lib_QPC.a` proves 36 exact stock functions, including all 22 portable bodies / 2,450 bytes, the 332-byte QK SWI/restore port, `BSP_Init`, and stock-default hooks; three internal hooks are explicitly vendor-modified. All 3,052 cluster bytes are now source/archive identified, divided into 26 enforced non-portable/alignment segments plus the portable bodies; no anonymous executable byte remains and semantic reversal is approximately 80–90%. Recovered configuration includes `QF_MAX_TICK_RATE=0`, `QF_MAX_ACTIVE=16`, `QF_MAX_EPOOL=2`, event/queue/pool widths, 36-byte `QActive`, 8-byte `QK_attr_`, disabled Q-SPY, the ARC saved-status critical-section ABI, and the `ILINK` idle race sentinel. The exact official 6.5.1 portable source/header subset is now vendored under its GPL-3.0-or-later option with a recovered EM9305 ABI port; eight translation units compile cleanly on the host and are enforced by `make qpc-snapshot`. All controller bytes remain stock-retained because no reviewed ARC compiler/link/record pipeline is available. See the [snapshot README](../third_party/qpc/README.openCFW.md), [ARCompact audit](research/em9305-qpc-arcompact-audit.md), and [SDK archive match audit](research/em9305-sdk-archive-match-audit.md). Remaining: ARC target integration, exact private vendor hooks/port, physical scheduling/radio validation, and authoritative licensed Packetcraft/EM controller source provenance. |
+| IAR DLIB/compiler runtime | The retained `s200_ap510b_iar_git` paths prove the IAR project family, but the image contains no IAR/ICCARM/EWARM/DLIB version string. Lorelei Ghidra plus local Rizin split 35 early-island targets into neighboring application/DSP code and six confirmed retained runtime units: `__aeabi_memmove`, VFP `sqrtf`, `__aeabi_memcpy`, EDOM/ERANGE setters, and an errno-address accessor. Signed/unsigned 64-bit division cores and wrappers plus `frexpf`, its binary32 helper, and `ldexpf` are source-recreated. Three authenticated application banners date the build to `Jul  6 2026`. Formal Cortex-M55 support gives a practical EWARM 9.20+ floor; Ambiq's later Apollo510 reference environment makes 9.60.2 the leading compatibility candidate, while official filename rules and retained literal pools narrow likely archive families to `m7M_tl{v|s}.a`, `rt7M_tl.a`, and `dl7M_tl{n|f}.a`. All thirteen bounded runtime code units have qualified clean-room source. The production-reachable formatted-input graph is source-owned through 11 strict Cortex-M55 leaves and a guarded 2,778-byte core redirect. The formatted-output graph is source-owned through four strict leaves and a guarded 3,256-byte core redirect, including `%a/%A`, IAR `q`/`L`, `%n`, and recursive descriptors. Every exact wrapper passes `secure=0`; both adapters reject nonzero mode, so unimplemented Annex-K semantics have no production ingress. Exact release and option variants remain unproven; no matching archives are installed locally or on Lorelei. See the [runtime census](research/iar-dlib-runtime-census.md), [formatted-input closure](research/g2-iar-format-input-source-closure.md), [formatted-output closure](research/g2-iar-format-output-source-closure.md), and [formatted-I/O audit](research/g2-iar-dlib-format-io-recovery.md). Remaining work is provenance-only archive comparison, Linux replay, and hardware execution evidence blocked by unavailable physical evidence; future qualification requires authorized responsive hardware. |
+| EM9305 QP/C | EM Microelectronic documents the EM9305 RTEF as QP/C ported to ARC with minor customizations. QP/C is pinned to **v6.5.1**, official commit `416dcec8820b9cdb5827497e645d0d9375db53c6`: authenticated `qep.h` in a third-party EM9305 SDK v4.2 oracle records version 6.5.1 and release code `0x8E7055B4`. The oracle is commit `e4412bc98d4e76d441d1226ca3696e53cfae5f54`, tree `f5cb9ba00df71c2612d6d64cf39e05615a2feb64`; it is not an authoritative EM repository or proof of the exact private vendor checkout. Independently, stock bodies bound ancestry to v6.3.6 `5550cca87dedf72d45250ad01e9cdeee8c4140ba` through v6.6.0+ `a280d203c0f55753b18dd9fc76104936729e471a`, excluding v6.7.0. The authenticated SDK `lib_QPC.a` proves 36 exact stock functions, including all 22 portable bodies / 2,450 bytes, the 332-byte QK SWI/restore port, `BSP_Init`, and stock-default hooks; three internal hooks are explicitly vendor-modified. All 3,052 cluster bytes are source/archive identified, divided into 26 enforced non-portable/alignment segments plus the portable bodies; no anonymous executable byte remains. Recovered configuration includes `QF_MAX_TICK_RATE=0`, `QF_MAX_ACTIVE=16`, `QF_MAX_EPOOL=2`, event/queue/pool widths, disabled Q-SPY, and the ARC saved-status critical-section ABI. The exact official portable subset is vendored under its selected upstream license. Eight portable units plus two project port units now compile with reviewed GCC 16.1.1 for ARCv2 EM and deterministically link into a closed relocatable component, enforced by `make em9305-qpc-component`. All controller bytes remain stock-retained because install placement, redirect records, and the proprietary vendor/controller composition are unresolved. See the [snapshot README](../third_party/qpc/README.openCFW.md), [ARCompact audit](research/em9305-qpc-arcompact-audit.md), and [SDK archive match audit](research/em9305-sdk-archive-match-audit.md). Remaining: install/production routing, exact private vendor hooks, physical scheduling/radio validation blocked by unavailable physical evidence, and authoritative licensed Packetcraft/EM controller source provenance. |
 | EM9305 vendor SDK libraries | Six authenticated relocation-bearing SDK v4.2 archives prove **98 exact stock functions / 7,172 bytes** across QP/C, PML, sleep manager, sleep timer, protocol timer, and unitimer; 92 globally unique normalized fingerprints cover 7,146 bytes. Archive `.comment` sections pin Synopsys MetaWare ARC Compiler **T-2022.09 build 004**, LLVM 14.0.6, EM-Micro ARCv2 EM, `-Os`. Exact archive identities are `lib_QPC.a` blob `26fc11bf…`, `lib_pml.a` `45c88f15…`, `lib_sleep_manager.a` `05af021a…`, `lib_sleep_timer.a` `3713f176…`, `lib_prot_timer.a` `cf8f1f22…`, and `lib_unitimer.a` `07ed4df5…`; full SHA-256 values are enforced by the analyzer. The former 280-byte anonymous pre-QP span is protocol-timer code, the 516-byte idle path is vendor-configured `SLEEP_MANAGER_GoToSleep`, and adjacent `SLEEP_MANAGER_RCCAL_Callback` is exact. These are binary-library provenance findings, not a claim that source or redistribution rights are available. All matched spans remain authenticated cut-forward stock pending source/license recovery. See the [SDK archive match audit](research/em9305-sdk-archive-match-audit.md). Remaining: locate corresponding licensed vendor source, recover build/link configuration, and compare modified bodies; the WSF/radio/application census continues in the following row. |
 | EM9305 Packetcraft/EM Bleu and expanded SDK census | Two discovery rounds authenticate 48 archives. The first 2,180 records deduplicate to 1,146 functions / 132,610 bytes; the second 8,542 records collapse to 1,201 functions, of which only 67 / 13,078 bytes are globally new. An 8-byte replay adds 124 boundary/xref-qualified functions / 2,106 bytes. Strict and NOP-aware exact-neighbor link order identify 202 placements / 11,934 bytes: 50 exact, 59 low-compared, 42 relocation-only, 38 same-size modified, and 13 singleton size-delta functions. Vector ABI resolution adds four interrupt-handler placements / 760 bytes, including three exact bodies / 574 bytes and one modified radio-TX body. Authenticated EM-system archive order adds six exact four-byte prefix leaves / 24 bytes. Combined with six enforced archives, **1,494 functions / 157,122 bytes (74.504950% of the application)** are exact in 875 intervals; function provenance is identified for 167,684 bytes (79.513296%). The residual ledger classifies 9,546 vector/alignment/post-text-data bytes and leaves 33,658 bytes as unresolved code or mixed content. `lib_emb_controller.a` blob `6a1a8e3d…` supplies 1,055 address-body fingerprints, while `lib_emb_controller_iso.a` adds ISO/BIG and link-order evidence. The profile is Bluetooth 5.4 (`BT_VER=13`, Packetcraft `LL_VER_NUM=28992`), but the non-ISO header is not a complete final-link configuration claim. Packetcraft's official public `stacks` repository ends at older r20.05c `3656312d…` / `LL_VER_NUM=1366`; the exact 2024 snapshot is authenticated only through third-party SDK blobs with proprietary notices. All bytes remain cut-forward. See the [expanded census](research/em9305-expanded-sdk-archive-census.md), [link-order ledger](research/em9305-sdk-link-order-recovery.md), and [residual census](research/em9305-residual-segment-census.md). Remaining: authoritative licensed Packetcraft/EM source and classification/recreation of the 33,658-byte unresolved code-or-mixed queue. |
 
@@ -3141,7 +3147,7 @@ authored `system_close.c`: 4,960 replaced stock function bytes become 2,804
 compiled Thumb text bytes plus 22 alignment bytes with 118 strict relocations.
 The 408-byte official alignment/literal remainder stays stock-carried. The
 software boundary is closed; live display, transition, IMU-reflash, and peer
-behavior remains blocked by unavailable authorized physical evidence.
+behavior remains blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 ## G2 SystemAlert source ownership
 
@@ -3163,7 +3169,7 @@ read-only data and 20 alignment bytes. Its reusable storage edges terminate at
 the already bounded littlefs provider; no matching upstream source-generating
 commit was recovered. The retained 56 official bytes are object-local gaps and
 alignment, not an opaque executable implementation. Live writable-media
-validation remains blocked by unavailable authorized physical evidence.
+validation remains blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 ## G2 factory NVDB lifecycle source ownership
 
@@ -3198,8 +3204,7 @@ The case-side proprietary protocol surface is now independently reimplemented
 as freestanding Cortex-M0+ C from authenticated machine behavior. It does not
 claim an upstream source identity. The source owns the frame and image sums,
 bounded parser, update-offer/chunk decoding, retry loop, and callback-only
-dual-bank state machine. Destructive production admission remains blocked by
-unavailable authorized case hardware and serial-window backup evidence.
+dual-bank state machine. Destructive production admission remains blocked by unavailable physical evidence; future qualification requires authorized case hardware and serial-window backup evidence.
 
 ## CmBacktrace fault-path source closure
 
@@ -3249,7 +3254,7 @@ identities for the retained MSPI control boundary; it does not supply this
 product wrapper. The initialized-SRAM template clone, field overrides,
 reconfiguration/XIP ordering, request `0x18`, mode byte, failure diagnostics,
 and void completion are authenticated G2 behavior. Physical qualification
-remains blocked by unavailable authorized hardware evidence.
+remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader row-six services and mode-family dispatcher
 
@@ -3261,7 +3266,7 @@ Low-byte bitmap indexing, selector client `0x35`, first-client handle creation,
 configuration/start/finalize, ordered rollback, last-client stop/destroy and
 kind-`4..6` dispatch are authenticated G2 product behavior. Physical
 interrupt, retained-provider, timing, bitmap/state ownership and mode
-qualification remains blocked by unavailable authorized hardware evidence.
+qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader MX25U25643G serial-mode selector
 
@@ -3271,7 +3276,7 @@ identity for the retained MSPI control boundary; it does not supply this
 product wrapper. The initialized-SRAM serial configuration, reconfiguration
 and XIP ordering, request `0x18`, zero mode byte, failure diagnostics, and void
 completion are authenticated G2 behavior. Physical qualification remains
-blocked by unavailable authorized hardware evidence.
+blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader primary and secondary progress services
 
@@ -3281,7 +3286,7 @@ source for both authenticated transfer-progress bodies totaling 426 bytes at
 Descriptor/FIFO selection, bounded progress, completion/exhaustion callbacks,
 pump/snapshot behavior and interrupt-token restoration are authenticated G2
 behavior. Physical FIFO/descriptor/interrupt/DMA/callback/concurrency/MMIO and
-cold-boot qualification remains blocked by unavailable authorized responsive
+cold-boot qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive
 hardware evidence.
 
 ## G2 bootloader per-instance register services
@@ -3292,7 +3297,7 @@ bytes around `[0x004236CE,0x00423764)`. No external upstream source is
 incorporated. Type validation, bank selection, bitwise update, direct write,
 and dual-register query behavior are authenticated G2 behavior. Physical
 register/MMIO/concurrency/peripheral and cold-boot qualification remains
-blocked by unavailable authorized responsive hardware evidence.
+blocked by unavailable physical evidence; future qualification requires authorized responsive hardware evidence.
 
 ## G2 bootloader per-instance service dispatcher
 
@@ -3301,8 +3306,7 @@ GPL-3.0-or-later source for the exact 176-byte dispatcher at
 `[0x0042377C,0x0042382C)`. No external upstream source is incorporated. Active
 and inactive flag routing, progress publication, callback dispatch and cleanup
 are authenticated G2 behavior. Physical interrupt/register/callback/
-concurrency/MMIO and cold-boot qualification remains blocked by unavailable
-authorized responsive hardware evidence.
+concurrency/MMIO and cold-boot qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive hardware evidence.
 
 ## G2 bootloader hardware-control state mapper
 
@@ -3310,8 +3314,7 @@ authorized responsive hardware evidence.
 GPL-3.0-or-later source for the exact 44-byte body at
 `[0x00423E14,0x00423E40)`. No external upstream source is incorporated.
 State-one advancement, state-two override, default flag mapping, and context
-mutation are closed offline; physical qualification is explicitly blocked by
-unavailable authorized responsive hardware evidence.
+mutation are closed offline; physical qualification is explicitly blocked by unavailable physical evidence; future qualification requires authorized responsive hardware evidence.
 
 ## G2 bootloader MSPI FIFO, command-queue, and DMA-programming services
 
@@ -3324,7 +3327,7 @@ closed against the BSD-3-Clause AmbiqSuite 5.1.0 MSPI/CMDQ sources at commit
 `5efc0228528a8adce5eae0d226fac85d2551eb3b`; no upstream implementation text
 is incorporated into the clean-room files. Retained status-check and CMDQ
 providers remain explicit compatibility boundaries. Physical qualification is
-blocked by unavailable authorized responsive G2 evidence.
+blocked by unavailable physical evidence; future qualification requires authorized responsive G2 evidence.
 
 `runtime_mspi_cq_pause_423fb8.c` and
 `runtime_mspi_program_dma_42403e.c` are BSD-3-Clause source-equivalent adapters
@@ -3333,7 +3336,7 @@ commit. Their two exact bodies add 242 source-owned bytes at
 `[0x00423FB8,0x004240AA)`. Dual-toolchain linked-byte checks, callers,
 relocations, queue-index semantics, timeout behavior, and DMA-register order
 are closed offline; physical clock, DMA/MMIO, concurrency, interrupt, and
-cold-boot qualification is blocked by unavailable authorized evidence.
+cold-boot qualification is blocked by unavailable physical evidence; future qualification requires authorized evidence.
 
 ## G2 bootloader bounded memory-exchange helpers
 
@@ -3379,8 +3382,7 @@ behavior are closed offline.
 GPL-3.0-or-later source for six exact bodies totaling 228 bytes in
 `[0x00423D20,0x00423E0C)`. No external upstream source is incorporated.
 Register, timer, interrupt, debug, SRAM, and MMIO behavior is authenticated at
-the software seam; physical qualification is explicitly blocked by unavailable
-authorized responsive hardware evidence.
+the software seam; physical qualification is explicitly blocked by unavailable physical evidence; future qualification requires authorized responsive hardware evidence.
 
 ## G2 bootloader secondary configuration release
 
@@ -3389,7 +3391,7 @@ for the exact 60-byte body at `[0x00422FA2,0x00422FDE)`. No external upstream
 source is incorporated. Critical-section entry/restoration, state gating,
 retained memset binding and exact secondary runtime reset span are
 authenticated G2 behavior. Physical interrupt/concurrency/SRAM/MMIO/provider
-and cold-boot qualification remains blocked by unavailable authorized
+and cold-boot qualification remains blocked by unavailable physical evidence; future qualification requires authorized
 responsive hardware evidence.
 
 ## G2 bootloader per-instance hardware shutdown
@@ -3399,7 +3401,7 @@ responsive hardware evidence.
 incorporated. Four-bank register quiescence, delay policy, conditional
 secondary clear, shutdown/release ordering and enable-mask restoration are
 authenticated G2 behavior. Physical MMIO/clock/delay/concurrency/provider and
-cold-boot qualification remains blocked by unavailable authorized responsive
+cold-boot qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive
 hardware evidence.
 
 ## G2 bootloader per-instance FIFO services
@@ -3416,8 +3418,7 @@ executable bodies in `[0x004233E8,0x00423524)`. No external upstream source is
 incorporated.
 Four-bank polling, low-byte data movement, `0xF00` read-error mapping, count
 publication and drain arguments are authenticated G2 behavior. Physical
-FIFO/MMIO/concurrency/peripheral qualification remains blocked by unavailable
-authorized responsive hardware evidence.
+FIFO/MMIO/concurrency/peripheral qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive hardware evidence.
 
 ## G2 bootloader secondary per-instance configuration latch
 
@@ -3426,7 +3427,7 @@ for the exact 86-byte body at `[0x00422F4C,0x00422FA2)`. No external upstream
 source is incorporated. Critical-section entry/restoration, duplicate status,
 secondary payload layout, latch publication and runtime-state clearing are
 authenticated G2 behavior. Physical interrupt/concurrency/SRAM/MMIO and
-cold-boot qualification remains blocked by unavailable authorized responsive
+cold-boot qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive
 hardware evidence.
 
 ## G2 bootloader per-instance configuration-latch service
@@ -3436,7 +3437,7 @@ exact 106-byte body at `[0x00422EE2,0x00422F4C)`. No external upstream source
 is incorporated. Critical-section entry/restoration, duplicate status,
 configuration payload layout, latch publication and runtime-state clearing are
 authenticated G2 behavior. Physical interrupt/concurrency/SRAM/MMIO and
-cold-boot qualification remains blocked by unavailable authorized responsive
+cold-boot qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive
 hardware evidence.
 
 ## G2 bootloader per-instance status mapper
@@ -3446,7 +3447,7 @@ hardware evidence.
 incorporated. Four-bank register-offset `0x3C` selection, argument/MMIO flag
 combination, ordered bit mapping, retained status literals and fallback return
 are authenticated G2 behavior. Physical MMIO/status/bank/timing qualification
-remains blocked by unavailable authorized responsive hardware evidence.
+remains blocked by unavailable physical evidence; future qualification requires authorized responsive hardware evidence.
 
 ## G2 bootloader per-instance dual-descriptor initializer
 
@@ -3455,8 +3456,7 @@ exact 98-byte body at `[0x00422DC6,0x00422E28)`. No external upstream source
 is incorporated. Header validation, two optional pair gates, publication flags,
 two 24-byte descriptor layouts, retained-constructor calls and return statuses
 are authenticated G2 behavior. Physical descriptor ownership, DMA/controller
-timing, buffer lifetime and interrupt qualification remains blocked by
-unavailable authorized responsive hardware evidence.
+timing, buffer lifetime and interrupt qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive hardware evidence.
 
 ## G2 bootloader per-instance clock-divider service
 
@@ -3465,8 +3465,7 @@ exact 186-byte body at `[0x00422E28,0x00422EE2)`. No external upstream source
 is incorporated. Six reference-clock mappings, invalid/range statuses,
 fixed-point divider derivation, per-instance register writes, achieved-rate
 calculation and the source-owned divmod binding are authenticated G2 behavior.
-Physical clock/MMIO/rate qualification remains blocked by unavailable
-authorized responsive hardware evidence.
+Physical clock/MMIO/rate qualification remains blocked by unavailable physical evidence; future qualification requires authorized responsive hardware evidence.
 
 ## G2 bootloader instance register-transfer and lifecycle service
 
@@ -3475,7 +3474,7 @@ the exact 376-byte body at `[0x00422BA8,0x00422D20)`. No external upstream
 source is incorporated. Header/action validation, low-byte transfer policy,
 four register banks, revision-gated clock bit, mode routing, teardown/resource
 order and statuses are authenticated G2 behavior. Physical MMIO, clock, mode,
-resource and lifecycle qualification remains blocked by unavailable authorized
+resource and lifecycle qualification remains blocked by unavailable physical evidence; future qualification requires authorized
 hardware evidence.
 
 ## G2 bootloader per-instance register-clear leaves
@@ -3484,8 +3483,7 @@ hardware evidence.
 exact leaves totaling 90 bytes at `[0x00422D20,0x00422D7A)`. No external
 upstream source is incorporated. The four-bank `0x1000` stride and exact masks
 at register offsets `0x04`, `0x48`, and `0x50` are authenticated G2 behavior.
-Physical MMIO/bank/peripheral qualification remains blocked by unavailable
-authorized hardware evidence.
+Physical MMIO/bank/peripheral qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader MX25U25643G guarded blocking read
 
@@ -3495,7 +3493,7 @@ descriptor identities for the retained blocking-transfer boundary; it does
 not supply this product wrapper. The validation/status mapping, source-owned
 guard/quad/wait ordering, ignored wait result, descriptor fields, timeout, and
 raw HAL return are authenticated G2 behavior. Physical qualification remains
-blocked by unavailable authorized hardware evidence.
+blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader LittleFS directory bootstrap
 
@@ -3506,7 +3504,7 @@ open, mkdir, and close wrappers at `0x00415288`, `0x0041527E`, and
 `/ota`, `/user`, and `/log` paths. The open/create/close status policy and
 diagnostics are authenticated G2 behavior rather than upstream littlefs
 implementation text. Physical mount, mutation, persistence, power-loss, and
-cold-boot qualification remain blocked by unavailable authorized hardware
+cold-boot qualification remain blocked by unavailable physical evidence; future qualification requires authorized hardware
 evidence.
 
 ## G2 bootloader row-five client services
@@ -3518,15 +3516,14 @@ refresh/publication, readiness, selector client `0x36`, first-client dual
 switch/commit, rollback, last-client null-commit/release, critical ordering
 and status mapping are authenticated G2 product behavior. Physical interrupt,
 retained-provider, timing, bitmap/state ownership and mode qualification
-remains blocked by unavailable authorized hardware evidence.
+remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 `runtime_memory_select_copy_4213e6.c` is first-party clean-room source for the
 mapped-memory selector/copy service and odd-selector wrapper at
 `[0x004213E6,0x0042156E)`. It incorporates no external upstream source. The
 mapped-memory windows, control/security register gates, capacity matrix,
 status mapping, and retained byte-copy provider are authenticated G2 product
-behavior. Physical register/memory qualification remains blocked by
-unavailable authorized hardware evidence.
+behavior. Physical register/memory qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader mode routes, all-row cleanup, and configuration copy
 
@@ -3537,7 +3534,7 @@ cleanup, fixed destination `0x20007C00`, 20-byte copy length, and status mapping
 are authenticated G2 product behavior. Both reviewed Cortex-M55 compilers
 reproduce all 320 installed bytes. Physical bitmap ownership, routed service
 effects, concurrent cleanup, configuration persistence, and cold-boot
-qualification remain blocked by unavailable authorized hardware evidence.
+qualification remain blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader Ambiq debug-domain services
 
@@ -3550,7 +3547,7 @@ BSD-3-Clause). Debug-count shutdown, prior power-domain ownership,
 `MCUCTRL->DBGCTRL` clearing, `DCB->DEMCR.TRCENA` release and the 10-microsecond
 poll match the source and authenticated stock. Both reviewed compilers
 reproduce all 268 installed bytes. Physical power/register/trace and timing
-qualification remain blocked by unavailable authorized hardware evidence.
+qualification remain blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader bitmap-client services
 
@@ -3561,7 +3558,7 @@ incorporated. Controller selection and validation, row-six busy policy,
 publication cells, low-byte selection, interrupt ordering, guarded row-one
 activation, cleanup and status mapping are authenticated G2 product behavior.
 Physical interrupt, controller/register, bitmap ownership and client behavior
-qualification remains blocked by unavailable authorized hardware evidence.
+qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader mode-one services
 
@@ -3571,8 +3568,7 @@ exact mode-one enable, last-client disable and poll/state cleanup cluster at
 incorporated. Controller availability, control-word transformation, bitmap
 row policy, critical ordering, active/state clearing and status mapping are
 authenticated G2 product behavior. Physical interrupt, control/register,
-bitmap ownership, polling and mode qualification remains blocked by
-unavailable authorized hardware evidence.
+bitmap ownership, polling and mode qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader mode-zero enable transaction
 
@@ -3583,7 +3579,7 @@ incorporated. Controller selection, low-byte bitmap indexing, timeout refresh,
 state compatibility, critical-section ordering, control requests, active/state
 publication, cleanup and status mapping are authenticated G2 product behavior.
 Physical interrupt, controller/register, timing, bitmap/state ownership and
-mode qualification remains blocked by unavailable authorized hardware
+mode qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware
 evidence.
 
 ## G2 bootloader mode-zero disable and cleanup
@@ -3595,7 +3591,7 @@ external upstream implementation is incorporated. Bitmap policy, low-byte
 selection, critical-section ordering, control request, active/completion/state
 cells, polling and status mapping are authenticated G2 product behavior.
 Physical interrupt, controller/register, timing, bitmap/state ownership and
-mode qualification remains blocked by unavailable authorized hardware
+mode qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware
 evidence.
 
 ## G2 bootloader row-four enable transaction
@@ -3606,8 +3602,7 @@ upstream implementation is incorporated. Low-byte bitmap indexing, timeout
 refresh, readiness, first-client switch/configuration, rollback, critical
 ordering, active/completion/state publication, cleanup and status mapping are
 authenticated G2 product behavior. Physical interrupt, switch/apply, timing,
-bitmap/state ownership and mode qualification remains blocked by unavailable
-authorized hardware evidence.
+bitmap/state ownership and mode qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader row-four disable and cleanup
 
@@ -3617,7 +3612,7 @@ state cleanup pair at `[0x00421E4A,0x00421EBA)`. No external upstream
 implementation is incorporated. Bitmap policy, low-byte selection, critical
 ordering, active/state cells, polling and status mapping are authenticated G2
 product behavior. Physical interrupt, switch, timing, bitmap/state ownership
-and mode qualification remains blocked by unavailable authorized hardware
+and mode qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware
 evidence.
 
 `runtime_popcount_421584.c` is first-party clean-room source for the exact
@@ -3632,8 +3627,7 @@ exact nonempty, membership, and count helpers at
 incorporated. The table root at `0x20026E74`, low-byte selector behavior,
 two-word row layout, bit-index narrowing, and popcount binding are authenticated
 G2 product behavior. Their contracts are independently tested on the host;
-physical table ownership and concurrency qualification remains blocked by
-unavailable authorized hardware evidence.
+physical table ownership and concurrency qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 `runtime_bitmap_update_421632.c` is first-party clean-room source for the
 exact validated bitmap mutator at `[0x00421632,0x004216B2)`. No external
@@ -3641,7 +3635,7 @@ upstream implementation is incorporated. The table root at `0x20026E74`,
 low-byte input narrowing, row/bit validation, status mapping, and set/clear
 read-modify-write contract are authenticated G2 product behavior. Its contract
 is independently tested on the host; physical ownership, concurrency, and
-atomicity qualification remains blocked by unavailable authorized hardware
+atomicity qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware
 evidence.
 
 `runtime_poll_delay_4216b2.c` is first-party clean-room source for the exact
@@ -3650,7 +3644,7 @@ bounded volatile flag/counter polling helper at
 incorporated. The retained delay provider, duration 10, loop conditions and
 decrement ordering are authenticated G2 product behavior. Its contract is
 independently tested on the host; physical timing, memory visibility and
-caller integration remain blocked by unavailable authorized hardware
+caller integration remain blocked by unavailable physical evidence; future qualification requires authorized hardware
 evidence.
 
 `runtime_mode_service_4216d4.c` is first-party clean-room source for the exact
@@ -3659,8 +3653,7 @@ upstream implementation is incorporated. The instance/controller seams,
 default/query merge, bitmap-state policy, critical-section ordering,
 apply/disable fallback, shared state and status mapping are authenticated G2
 product behavior. Its transaction is independently tested on the host;
-physical interrupt, register, timing and mode qualification remains blocked by
-unavailable authorized hardware evidence.
+physical interrupt, register, timing and mode qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader LittleFS block-program callback
 
@@ -3672,7 +3665,7 @@ device-status-to-`LFS_ERR_IO` collapse are authenticated G2 product behavior.
 The leaf uses strictly authenticated reclaimed initializer body space because
 the Apple append boundary is full. Physical MSPI/NOR programming, filesystem
 writes, persistence, power-loss, diagnostics, and cold-boot qualification
-remain blocked by unavailable authorized hardware evidence.
+remain blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader LittleFS block-erase callback
 
@@ -3682,7 +3675,7 @@ callback contract; fixed partition mapping, source-owned MX25U25643G erase,
 diagnostic, and status collapse are authenticated G2 behavior. The leaf uses a
 second authenticated initializer-tail cave. Physical erase, filesystem
 allocation, persistence, power-loss, diagnostics, and cold-boot qualification
-remain blocked by unavailable authorized hardware evidence.
+remain blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader LittleFS sync and address-index helpers
 
@@ -3702,8 +3695,7 @@ configuration objects, then through the source-owned directory bootstrap.
 Ignored unmount/format results, mount/directory failure mapping, diagnostics,
 and status `9` are authenticated G2 product behavior rather than upstream
 littlefs implementation text. Physical format/mount, flash mutation,
-persistence, power-loss, and cold-boot qualification remain blocked by
-unavailable authorized hardware evidence.
+persistence, power-loss, and cold-boot qualification remain blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader LittleFS initializer and boot counter
 
@@ -3716,7 +3708,7 @@ recovery services. Mount retry and status mapping, readiness publication,
 diagnostics are authenticated G2 product behavior rather than upstream
 littlefs implementation text. Physical mount/format, flash mutation and
 persistence, power-loss, readiness, boot-counter, and cold-boot qualification
-remain blocked by unavailable authorized hardware evidence.
+remain blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader LittleFS block-read callback
 
@@ -3728,7 +3720,7 @@ device-status-to-`LFS_ERR_IO` collapse are authenticated G2 product behavior.
 The Apple provider consumes the final 60 bytes before the protected main-image
 boundary, so later callbacks need authenticated reclaimed-body placement.
 Physical MSPI/NOR reads, filesystem content, concurrency, diagnostics, and
-cold-boot qualification remain blocked by unavailable authorized hardware
+cold-boot qualification remain blocked by unavailable physical evidence; future qualification requires authorized hardware
 evidence.
 
 ## G2 bootloader dual-mode transaction
@@ -3740,8 +3732,7 @@ instances, local default, controller-query selection, bitmap-state policy,
 critical-section ordering, mode enable/disable and commit seams, shared state,
 cleanup and status mapping are authenticated G2 product behavior. Its
 transaction is independently tested on the host; physical interrupt,
-controller/register, timing and mode qualification remains blocked by
-unavailable authorized hardware evidence.
+controller/register, timing and mode qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 ## G2 bootloader constraint dispatcher and memchr
 
 `runtime_constraint_memchr_422590.c` is first-party clean-room source for the
@@ -3751,8 +3742,7 @@ Apollo-main IAR DLIB body at `0x004D40E0`; this is binary identity evidence,
 not an imported implementation. Constraint handler selection, error `0x22`,
 registration cell `0x20027190`, retained default handler, low-byte needle and
 word-scanning behavior are authenticated G2 behavior. Physical handler,
-memory-access and fault qualification remains blocked by unavailable
-authorized hardware evidence.
+memory-access and fault qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 ## G2 bootloader double runtime
 
 `runtime_double_helpers_422628.c` is first-party clean-room source for thirteen
@@ -3762,14 +3752,14 @@ IAR DLIB counterparts; this is binary-identity evidence, not imported source.
 Binary64 normalization, comparison flags, scaling, FPSCR preservation,
 conversion and arithmetic behavior are authenticated G2 behavior. Physical
 VFP flags, retained range-error effects and caller-ABI qualification remains
-blocked by unavailable authorized hardware evidence.
+blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 ## G2 bootloader thread-pointer runtime leaf
 
 `runtime_thread_pointer_422874.c` is first-party clean-room source for the
 exact body/literal at `[0x00422874,0x0042287C)`. No external upstream source is
 incorporated. The returned `0x20000518` SRAM anchor and sole caller are
 authenticated G2 behavior. Physical anchor ownership and lifecycle
-qualification remains blocked by unavailable authorized hardware evidence.
+qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 ## G2 bootloader unsigned 64-bit divmod runtime
 
 `runtime_u64_divmod_42287c.c` is first-party clean-room source for the exact
@@ -3777,15 +3767,14 @@ qualification remains blocked by unavailable authorized hardware evidence.
 incorporated. Digit fast paths, normalized division, quotient correction,
 four-register quotient/remainder return and retained zero-divisor handling are
 authenticated G2 behavior. Physical trap and caller-ABI qualification remains
-blocked by unavailable authorized hardware evidence.
+blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 ## G2 bootloader atomic snapshot and retained-query wrappers
 
 `runtime_atomic_wrappers_422aac.c` is first-party clean-room source for three
 exact bodies totaling 38 bytes at `[0x00422AAC,0x00422AD2)`. No external
 upstream source is incorporated. `PRIMASK` ordering, three volatile samples,
 no-op behavior and the retained provider binding are authenticated G2
-behavior. Physical interrupt/volatile/provider qualification remains blocked
-by unavailable authorized hardware evidence.
+behavior. Physical interrupt/volatile/provider qualification remains blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
 ## G2 bootloader four-instance hardware-service initializer
 
@@ -3795,4 +3784,4 @@ is incorporated. Index/output validation, compatible-handle rejection,
 `0x11C` stride, `0x20024400` pool, header/index/state initialization and all
 four status values are authenticated G2 behavior. Physical SRAM ownership,
 concurrency, peripheral effects and cold-boot lifecycle qualification remains
-blocked by unavailable authorized hardware evidence.
+blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.

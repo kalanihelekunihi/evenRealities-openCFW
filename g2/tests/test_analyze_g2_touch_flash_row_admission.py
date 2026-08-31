@@ -55,10 +55,13 @@ class TouchFlashRowAdmissionTests(unittest.TestCase):
                 h2 = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in second}
                 self.assertEqual(h1, h2)
                 current = json.loads(next(p for p in first if p.name ==
-                    "g2-touch-current-source-readiness-summary.json").read_text())
+                    "g2-touch-flash-row-admission-summary.json").read_text())
                 self.assertEqual(current["authoritative_batch"], 19)
                 self.assertEqual(current["hardware_validation"],
-                                 "deferred by project direction")
+                                 "blocked by unavailable physical evidence")
+                self.assertNotIn(
+                    "g2-touch-current-source-readiness-summary.json", h1
+                )
         finally:
             M.MANIFEST_DIR = old
 

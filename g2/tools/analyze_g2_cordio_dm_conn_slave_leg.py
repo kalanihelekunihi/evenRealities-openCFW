@@ -40,7 +40,7 @@ CALLERS = {
     "DmConnSlaveInit": [0x4B8022],
 }
 PRODUCTION_FUNCTIONS=["open_cfw_cordio_dm_connection_slave_legacy_action_accept","open_cfw_cordio_dm_connection_slave_legacy_action_cancel","open_cfw_cordio_dm_connection_slave_legacy_action_accepted","open_cfw_cordio_dm_connection_slave_legacy_action_failed","open_cfw_cordio_dm_connection_slave_legacy_initialize"]
-PRODUCTION_LEAVES=[(358500,24,1,"d7f71d9b95d85bf397bc8939a6b7c65a983ab41553905bc78cc29999b3958b22"),(358524,30,2,"e0120b0f55723287b981d000111dd4187a559cbeed03bf0d052f6c50b14b79b5"),(358556,30,2,"6aaac18860120011562d72218dd2b74c157f7f9a391da3f87fdd9cc1dbb846ac"),(358588,30,2,"af396f4b62d2e6d6020c84bc0eb1ea9c2c3fd3374e4a62bac4be3881927025dd"),(358620,42,2,"cf9972f3552753e0a1f740624ddcc28fc4260977513e1f706df91935795155ef")]
+PRODUCTION_LEAVES=[(290020,24,1,"e47951bcf779541bf90850cf0f78dcf54bd68b392571fcaf5c2a77d8fbb48301"),(290044,30,2,"204d4784283800fa63828277d5a3e151030a03618648517a6a11e178249b7a38"),(290076,30,2,"1f01f2023536cc510ff97582debe15003589dffb735f3875c27f855390aa7c3c"),(290108,30,2,"1f611e69b2d23be4c767280bee7bbacdfb6b7281c6dc057be42e3deba9f358e4"),(290140,42,2,"1611ed46ff3abd9e71e2f5fe671d770a7b7634cefebc785a85f72d919661f6c2")]
 
 
 def sha(data: bytes) -> str:

@@ -1,5 +1,10 @@
 # G2 platform\product_test\product_common.c zero-anchor recovery
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 - Retained path: `platform\product_test\product_common.c`
 - Product path: `D:\01_workspace\s200_ap510b_iar_git\platform\product_test\product_common.c`
 - Disposition: **linked-unanchored** (code present; zero Ghidra-anchored/discovered functions)
@@ -43,6 +48,12 @@ Four blocks in gap [0x58F1EC, 0x58F4E4). Identity: 6 path references in block 0x
 
 ## Production source route
 
+Hardware-policy correction: the earlier temple unresponsiveness came from the
+charging case being bumped during lunch and disconnecting the test, not from a
+firmware fault. The project has multiple successful firmware flashing attempts
+through `evenRealities-webflasher`, so flash transport is not a current blocker.
+Directed XIP/font hardware testing is blocked by unavailable physical evidence.
+
 The retained object is no longer reachable through the canonical PT provider.
 Its only two external callers (`0x0056FBC4` and `0x0056FBCE`) are inside the
 source-replaced PT interval. The production board call table instead points to
@@ -56,7 +67,7 @@ CRC fields at offsets `0x40` and `0x44`, payload offset `0x45`, 1-KiB reads,
 and resumable CRC-16/CCITT-FALSE seeded with `0xFFFF`. Host tests cover both
 font routes, a 1,025-byte multi-chunk image, invalid bases, zero length,
 overflow, and mismatch. The XIP lock/read behavior and external font payloads
-remain **deferred by project direction**.
+remain **blocked by unavailable physical evidence**.
 
 ## Verification
 

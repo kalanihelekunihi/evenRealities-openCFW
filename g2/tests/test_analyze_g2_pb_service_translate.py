@@ -62,8 +62,8 @@ class AnalyzeG2PbServiceTranslateTests(unittest.TestCase):
         self.assertEqual(production["stock_replaced_bytes"], 1324)
         self.assertEqual(production["retained_pool_bytes"], 120)
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "deferred by project direction")
-        self.assertIn("deferred by project direction",
+        self.assertEqual(production["hardware_validation"], "blocked by unavailable physical evidence")
+        self.assertIn("blocked by unavailable physical evidence",
                       production["hardware_blocker"])
 
 

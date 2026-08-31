@@ -1,5 +1,10 @@
 # G2 bootloader bounded byte-comparison source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Status: implemented in production source; physical boot validation blocked by unavailable authorized responsive hardware.
 
 The authenticated bootloader range `[0x00415758,0x004157C0)` is 104 bytes with SHA-256 `33e09969a8e4f7ca9290ef4678d252c217a5d031eb362f8d6c5ad656424d4154`. It implements the standard three-argument bounded byte-comparison contract and has exactly six direct Thumb callers at `0x00410738`, `0x00411D0A`, `0x00411D1E`, `0x00411D42`, `0x00411D54`, and `0x0042DA9A`; no strict-interior or stored-pointer ingress is present.

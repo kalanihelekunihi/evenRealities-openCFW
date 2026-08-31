@@ -1,5 +1,10 @@
 # G2 bootloader bitmap-update source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated helper at `[0x00421632,0x004216B2)` now compiles
 from maintained clean-room C at its exact stock address. Apple clang 21 and
 Homebrew clang 22.1.8 reproduce all 128 stock bytes exactly with no executable

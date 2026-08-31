@@ -220,7 +220,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
     )
     candidate = "components/apollo_main/core_overlay/uled_display_preprocess.c"
-    candidate_sha256 = "2ded39fb95b869de5361340416b85d598194de8c7e7d90f57eefbbde8044b98b"
+    candidate_sha256 = "b288dba986ff1cabc8a8625eee2dc5d35ed21ac2c8c770c68c890590c02f66fd"
     expected_patches = {
         "replace_buffer_sync_to_fb": (
             0x0046C73C, 584, BODY_SHA256,

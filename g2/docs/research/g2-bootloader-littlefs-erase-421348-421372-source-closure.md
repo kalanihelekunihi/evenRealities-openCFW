@@ -1,5 +1,10 @@
 # G2 bootloader LittleFS erase callback source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The authenticated callback `[0x00421348,0x00421372)` is implemented as
 freestanding C and production-routed to a second fixed-address leaf in
 authenticated reclaimed initializer body space. This is offline software

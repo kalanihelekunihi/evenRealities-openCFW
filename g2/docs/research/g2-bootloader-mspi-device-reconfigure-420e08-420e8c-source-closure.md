@@ -1,5 +1,10 @@
 # G2 bootloader MSPI device-reconfiguration source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 ## Result
 
 The complete authenticated 132-byte entry `[0x00420E08,0x00420E8C)` now

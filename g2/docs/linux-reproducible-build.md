@@ -52,34 +52,271 @@ Override either axis explicitly:
 
 Detection fails closed: a compiler that matches no reviewed profile's
 `reviewed_version_prefix` is rejected rather than silently guessed, because its
-bytes cannot reproduce any recorded pin.
+bytes cannot reproduce any recorded pin. Its diagnostic directs Apollo-core
+maintainers to the canonical observation/admission workflow below; direct
+`--record-profile` is code-enforced for the separately reviewed ring-source
+manifest only; the packager rejects Apollo core-source recording and directs
+maintainers to the admission workflow below.
 
-## Recording a new profile
+## Recording reviewed pins
 
-When a new reviewed compiler is introduced, record its pins once and commit
-them. Recording never touches the canonical Apple pins.
+The small ring-source profile retains its component-local recorder. It does
+not authorize recording or applying Apollo core-source pins:
 
 ```sh
-# 1) Overlay/component pins for each compiled component:
 python3 tools/apollo_overlay.py \
   --config components/apollo_main/ring_gesture/overlay.json \
   --output-dir components/apollo_main/ring_gesture/build \
   --clang "$OPENCFW_CLANG" \
   --toolchain-profile <id> --record-profile
 
-# 2) Package + source-build provider pins for the profile:
 python3 tools/open_cfw.py build \
   --manifest manifests/g2-2.2.6.10-ring-source.json \
   --output-dir build/ring-source \
   --toolchain-profile <id> --record-profile
 ```
 
-`--record-profile` compiles with the current compiler, skips the reviewed pin
-check, writes the observed pins into `toolchain_profiles[<id>]` /
-`profiles[<id>]` (using the compiler's exact `--version` string as the reviewed
-family), and preserves the hand-authored key order so the diff is a clean
-append. Review the diff, then a normal build under `<id>` must reproduce those
-pins exactly and fails closed on any drift.
+For this ring-only flow, `--record-profile` compiles with the current compiler,
+skips the reviewed pin check, and writes the observed pins into the selected
+profile. Review the diff, then a normal ring build under `<id>` must reproduce
+those pins exactly and fails closed on any drift.
+
+Apollo core-source pin changes use a stricter admission path. Keep one source
+generation unchanged while producing two independent `--record-canonical`
+builds under `apple-clang` and two under `linux-clang`.
+
+Before the Apple runs, follow
+[Isolate the reviewed Apple compiler](community-source-distribution.md#isolate-the-reviewed-apple-compiler)
+in the same shell. Strict admission must use the resulting
+`$APPLE_CLANG_REVIEW`: a byte-identical, isolated, single-link regular-file copy
+of the selected Apple clang with an exact copy of the compiler-derived builtin
+resource `include` closure. The verifier in that procedure checks the compiler
+SHA-256, the recorder-compatible resource-header closure SHA-256/count/size,
+all copied-file link counts, and the copied driver's `-print-resource-dir`
+result. Review those hashes before recording, and do not move or modify the
+review tree until admission finishes. Its absolute path is local receipt
+evidence and is not committed as a machine-specific config pin.
+
+The review tree is below `build/` and outside the enumerated firmware source
+closure. It only isolates filesystem identities; it does not authorize source,
+compiler-version, builtin-header, or artifact drift. The four observations and
+strict admission must still reproduce current reviewed pins. With the verified
+variables from that procedure still set, record the four builds:
+
+```sh
+make core-canonical-observation \
+  OPENCFW_CLANG="$APPLE_CLANG_REVIEW" \
+  OPENCFW_TOOLCHAIN_PROFILE=apple-clang \
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation/apple-a
+make core-canonical-observation \
+  OPENCFW_CLANG="$APPLE_CLANG_REVIEW" \
+  OPENCFW_TOOLCHAIN_PROFILE=apple-clang \
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation/apple-b
+make core-canonical-observation \
+  OPENCFW_CLANG=/path/to/reviewed/linux-clang \
+  OPENCFW_TOOLCHAIN_PROFILE=linux-clang \
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation/linux-a
+make core-canonical-observation \
+  OPENCFW_CLANG=/path/to/reviewed/linux-clang \
+  OPENCFW_TOOLCHAIN_PROFILE=linux-clang \
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation/linux-b
+```
+
+The four output directories must use distinct non-symlink paths below the G2
+root; `/tmp` and other external trees are rejected. They must contain separately
+generated reports and artifacts; copied or hardlinked runs fail admission. Each
+report records the reviewed compiler identity, source-input closure, core stage, liblc3 and PT
+intermediate stages, and final overlay/component artifacts. Apple and Linux
+must report the exact same source-input closure and distinct reviewed compiler
+identities. Distinct report/artifact inodes prove separately supplied artifact
+generations and byte reproducibility; they are not cryptographic attestation
+that two executions occurred. Maintainers or CI remain responsible for
+actually running all four builds.
+
+Canonical compilation uses `-nostdinc`, excluding ambient host include
+directories. Only reviewed repository include paths and the explicit Clang
+builtin resource include directory are admitted, and each receipt binds the
+exact builtin-header closure used by the core, liblc3, and PT stages.
+
+The admission tool deliberately does not auto-migrate reviewed core-stage,
+per-leaf, relocation/closure, in-place-data, compiler-identity, or liblc3 pins.
+It authenticates the matching stage/intermediate evidence and requires those
+values to equal the current reviewed config; drift stops for a separate
+evidence review. Only artifact-proven final, PT, provider, package, and manifest
+fields may change here. This future-review boundary is an authorization rule,
+not an unclassified or opaque firmware segment.
+
+Because the live shared provider path normally contains the Apple bootloader,
+prepare and explicitly identify the pinned Linux provider:
+
+```sh
+python3 components/bootloader/core_overlay/build_component.py \
+  --clang /path/to/reviewed/linux-clang \
+  --toolchain-profile linux-clang \
+  --output-dir build/canonical-provider/linux-clang/apollo_bootloader
+
+LINUX_BOOT_PROVIDER=build/canonical-provider/linux-clang/apollo_bootloader/ota_s200_bootloader.bin
+make core-canonical-admission \
+  CORE_CANONICAL_APPLE_A=build/canonical-observation/apple-a/build-report.json \
+  CORE_CANONICAL_APPLE_B=build/canonical-observation/apple-b/build-report.json \
+  CORE_CANONICAL_LINUX_A=build/canonical-observation/linux-a/build-report.json \
+  CORE_CANONICAL_LINUX_B=build/canonical-observation/linux-b/build-report.json \
+  CORE_CANONICAL_PROFILE_PROVIDER_ARGS="--profile-provider linux-clang apollo_bootloader $LINUX_BOOT_PROVIDER"
+```
+
+Admission is no-write by default. It validates the proposed config, manifest,
+and Apple provider generation and reports the verified source and profile
+identities. After reviewing all four receipts and that result, repeat it with
+`make core-canonical-apply` to request serialized, fail-closed transactional
+publication. It replaces the admitted Apple Apollo provider, matching overlay,
+and normalized build-report commit marker first, then the config, and finally
+the manifest as the public commit record. A caught write or readback failure
+rolls all five paths back. The transaction is not filesystem-atomic across
+process death; an interrupted run instead fails closed as a detectable
+non-admitted mixed generation that a rerun can recover. Manual Apple-generation
+staging is neither required nor part of the workflow. Do not use direct
+`--record-profile` commands for the core overlay or core-source manifest. Run
+normal pinned Apple and Linux builds afterward to prove the admitted
+generation. Observation, admission, and verification are local, software-only
+operations: they do not access the network, sign an image, flash firmware, or
+operate hardware.
+
+### Rebuild post-apply dual-profile evidence
+
+After `core-canonical-apply` succeeds, rebuild the admitted Apple and Linux
+Apollo-main providers into the exact paths consumed by the ownership analyzer.
+Use the same isolated Apple compiler and reviewed Linux compiler that produced
+the admitted observations:
+
+```sh
+python3 components/apollo_main/core_overlay/build_component.py \
+  --clang "$APPLE_CLANG_REVIEW" \
+  --toolchain-profile apple-clang \
+  --output-dir components/apollo_main/core_overlay/build
+python3 components/apollo_main/core_overlay/build_component.py \
+  --clang /path/to/reviewed/linux-clang \
+  --toolchain-profile linux-clang \
+  --output-dir .tmp-postapply-core-linux
+```
+
+The live core-source manifest points at the Apple providers. Create the Linux
+scratch manifest below by changing only the `apollo_bootloader` and
+`apollo_main` provider path strings to the analyzer-required Linux paths. The
+script fails if either original path has drifted, proves that reversing those
+two substitutions recovers the original semantic JSON tree, and verifies the
+written tree before any package command consumes it:
+
+```sh
+python3 - manifests/g2-2.2.6.10-core-source.json \
+  manifests/.tmp-g2-linux-postapply.json <<'PY'
+from __future__ import annotations
+
+import copy
+import json
+import os
+from pathlib import Path
+import sys
+
+
+source, destination = map(Path, sys.argv[1:])
+if source.is_symlink() or not source.is_file():
+    raise SystemExit("core-source manifest is not a regular file")
+if destination.parent.resolve() != source.parent.resolve():
+    raise SystemExit("scratch manifest must stay beside the source manifest")
+if destination.is_symlink():
+    raise SystemExit("scratch manifest must not be a symlink")
+original = json.loads(source.read_text(encoding="utf-8"))
+candidate = copy.deepcopy(original)
+updates = {
+    "apollo_bootloader": (
+        "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
+        "build/canonical-provider/linux-clang/apollo_bootloader/"
+        "ota_s200_bootloader.bin",
+    ),
+    "apollo_main": (
+        "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
+        ".tmp-postapply-core-linux/ota_s200_firmware_ota.bin",
+    ),
+}
+overrides = candidate.get("component_overrides")
+if not isinstance(overrides, dict):
+    raise SystemExit("core-source component_overrides object is missing")
+selected = {name: overrides.get(name) for name in updates}
+if set(selected) != set(updates) or not all(
+    isinstance(component, dict) for component in selected.values()
+):
+    raise SystemExit("Apollo provider set changed")
+for name, (old_path, new_path) in updates.items():
+    provider = selected[name].get("provider")
+    if not isinstance(provider, dict) or provider.get("path") != old_path:
+        raise SystemExit(f"{name}: current provider path changed")
+    provider["path"] = new_path
+audit = copy.deepcopy(candidate)
+audit_rows = audit["component_overrides"]
+for name, (old_path, _new_path) in updates.items():
+    audit_rows[name]["provider"]["path"] = old_path
+if audit != original:
+    raise SystemExit("scratch manifest changed a field other than two paths")
+payload = json.dumps(candidate, indent=2, sort_keys=True) + "\n"
+temporary = destination.with_name(destination.name + ".write")
+if temporary.exists() or temporary.is_symlink():
+    raise SystemExit(f"refusing existing temporary output: {temporary}")
+temporary.write_text(payload, encoding="utf-8")
+os.replace(temporary, destination)
+if json.loads(destination.read_text(encoding="utf-8")) != candidate:
+    raise SystemExit("scratch manifest readback changed")
+PY
+```
+
+Build, verify the six current providers and deterministic package, and then
+verify the complete generated artifact set for each profile:
+
+```sh
+python3 tools/open_cfw.py build \
+  --manifest manifests/g2-2.2.6.10-core-source.json \
+  --output-dir build/postapply-package-apple \
+  --toolchain-profile apple-clang
+python3 tools/open_cfw.py verify \
+  --manifest manifests/g2-2.2.6.10-core-source.json \
+  --toolchain-profile apple-clang
+python3 tools/open_cfw.py verify-artifacts \
+  --manifest manifests/g2-2.2.6.10-core-source.json \
+  --output-dir build/postapply-package-apple \
+  --toolchain-profile apple-clang
+
+python3 tools/open_cfw.py build \
+  --manifest manifests/.tmp-g2-linux-postapply.json \
+  --output-dir build/postapply-package-linux \
+  --toolchain-profile linux-clang
+python3 tools/open_cfw.py verify \
+  --manifest manifests/.tmp-g2-linux-postapply.json \
+  --toolchain-profile linux-clang
+python3 tools/open_cfw.py verify-artifacts \
+  --manifest manifests/.tmp-g2-linux-postapply.json \
+  --output-dir build/postapply-package-linux \
+  --toolchain-profile linux-clang
+```
+
+Only after all six commands succeed may a maintainer refresh the checked
+ownership receipt explicitly:
+
+```sh
+make dual-profile-ownership-write
+```
+
+That target authenticates the four canonical observations, both boot
+providers, all six package providers for each profile, and the current source
+closure before atomically replacing the companion and verifying its readback.
+The ordinary `make dual-profile-ownership` target is the public, read-only
+gate. No release or community-distribution gate invokes the write target
+implicitly, and a missing or stale companion fails closed.
+
+The scratch manifest, `.tmp-postapply-core-linux/`, the four canonical receipt
+trees under `build/canonical-observation/{apple-a,apple-b,linux-a,linux-b}/`,
+and both `build/postapply-package-*` directories are ignored, private local
+evidence. They are not Git inputs or community-archive members. This entire
+sequence is deterministic and software-only: it performs no network access,
+signing, flashing, or hardware operation.
 
 ## What reproduces on Linux today
 
@@ -113,12 +350,12 @@ and the full byte-exact corpus runs.
 
 The `linux-clang` pins were produced with Homebrew clang 22.1.8 targeting
 `thumbv7em-none-eabi` with the reviewed overlay flags. The current profile
-pins a 212,664-byte Apollo-main overlay, 3,736,060-byte component, and
-4,529,116-byte package with SHA-256 values
-`1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18`,
-`fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97`,
+pins a 152,912-byte Apollo-main overlay, 3,676,308-byte component, and
+4,469,364-byte package with SHA-256 values
+`e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20`,
+`dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7`,
 and
-`f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef`.
+`79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e`.
 The same profile pins a 15,224-byte bootloader overlay and 163,824-byte
 bootloader provider with SHA-256 values
 `2dad91f7403219c30fee3130d62833c98561c8fb56387960f0654723ceed67ca`

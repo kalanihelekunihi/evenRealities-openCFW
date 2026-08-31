@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "name": "liblc3_encoder",
+  "target": "apollo_main",
+  "mode": "build-only-unplaced-relocatable",
+  "admission": {
+    "path": "components/shared/liblc3/encoder_source_admission.json",
+    "sha256": "7a86198686a044c74681a748c9f344f56fd3e77779853d5bd58be1af2d044d7d"
+  },
+  "linker_script": {
+    "path": "components/apollo_main/liblc3_encoder/linker.ld",
+    "sha256": "6d525217462c4ae0f7a4e4a3dd38a9191e91d703736e6f14cd2928c094706ed3"
+  },
+  "include_dirs": [
+    "components/shared/liblc3/target_compat",
+    "third_party/liblc3/include",
+    "third_party/liblc3/src",
+    "components/shared/liblc3"
+  ],
+  "roots": [
+    "open_cfw_liblc3_encoder_provider_plan",
+    "open_cfw_liblc3_encoder_provider_setup",
+    "open_cfw_liblc3_encoder_provider_encode",
+    "open_cfw_liblc3_encoder_provider_close"
+  ],
+  "profiles": {
+    "apple-clang": {
+      "reviewed_compiler_version_prefix": "Apple clang version 21.0.0",
+      "reviewed_linker_version_prefix": "Homebrew LLD 23.1.0",
+      "expected": {
+        "linked_object": {
+          "size": 145264,
+          "sha256": "5143ab77e2496cdd13de674affc22ed030a1a65e2027c4c916da72fd944cb820"
+        },
+        "artifacts": {
+          "text": {
+            "size": 43248,
+            "sha256": "05ae1d3713f04782702a6574c59b57edf555e4aa711ecd55ac025343eac5688b"
+          },
+          "rodata": {
+            "size": 85088,
+            "sha256": "607f0246aa2b873a97b7a465bb1adbad63bfe3ede19a650eee1128d21651c8a3"
+          },
+          "data": {
+            "size": 404,
+            "sha256": "3b0364c5376ebca0b3e789f1c56a66137472fa1f1f32788903bd6d3a3fe8f7be"
+          }
+        },
+        "roots": {
+          "open_cfw_liblc3_encoder_provider_close": {
+            "offset": 39100,
+            "size": 14
+          },
+          "open_cfw_liblc3_encoder_provider_encode": {
+            "offset": 39116,
+            "size": 474
+          },
+          "open_cfw_liblc3_encoder_provider_plan": {
+            "offset": 39592,
+            "size": 234
+          },
+          "open_cfw_liblc3_encoder_provider_setup": {
+            "offset": 39956,
+            "size": 256
+          }
+        },
+        "retained_imports": [
+          "__aeabi_memclr",
+          "__aeabi_memclr4",
+          "fabsf",
+          "floorf",
+          "fmaxf",
+          "fminf",
+          "memcpy",
+          "memmove",
+          "memset",
+          "roundf",
+          "sqrtf",
+          "truncf"
+        ],
+        "global_function_count": 35,
+        "relocations": {
+          "total": 567,
+          "by_type": {
+            "R_ARM_ABS32": 170,
+            "R_ARM_THM_CALL": 244,
+            "R_ARM_THM_JUMP24": 5,
+            "R_ARM_THM_MOVT_ABS": 74,
+            "R_ARM_THM_MOVW_ABS_NC": 74
+          },
+          "by_section": {
+            ".data": 92,
+            ".rodata": 78,
+            ".text": 397
+          },
+          "external_by_symbol": {
+            "__aeabi_memclr": 1,
+            "__aeabi_memclr4": 1,
+            "fabsf": 94,
+            "floorf": 8,
+            "fmaxf": 42,
+            "fminf": 1,
+            "memcpy": 4,
+            "memmove": 4,
+            "memset": 1,
+            "roundf": 1,
+            "sqrtf": 9,
+            "truncf": 1
+          },
+          "records_sha256": "2a6ed912715590da4b85b65cfb0804b0988cfc357d6db5211230f0583a4a47aa"
+        }
+      }
+    }
+  },
+  "placement": null,
+  "stock_patch_sites": [],
+  "service_audio_routed": false,
+  "hardware_operations": false
+}

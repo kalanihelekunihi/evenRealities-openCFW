@@ -1,5 +1,10 @@
 # G2 bootloader MX25U25643G soft-reset source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated 116-byte entry `[0x0042052A,0x0042059E)` now
 routes to `open_cfw_bootloader_mspi_soft_reset_42052a` in maintained clean-room
 C. The stock SHA-256 is

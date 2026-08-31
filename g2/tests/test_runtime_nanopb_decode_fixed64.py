@@ -86,9 +86,9 @@ READ_BODY_SHA256 = (
 )
 
 SOURCE_PIN = (
-    2_083,
-    "865fa587e7b783e83f24107e52bf3010"
-    "053d0660b06dc0ac2e7f72bb8ad969bc",
+    2_119,
+    "a8b7fe49a1107080776bc0b753a77d55"
+    "a861180c4090db270f4f9d04ef67cb63",
 )
 HEADER_PIN = (
     1_726,
@@ -158,7 +158,7 @@ OVERLAY_RUNTIME_BASE = 0x0079_4324
 PROFILE_PINS = {
     "apple-clang": {
         "compiler": "/usr/bin/clang",
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
         "object": (
             936,
             "fc8f839b98f4a6da48fa022a5c35c22"
@@ -173,7 +173,7 @@ PROFILE_PINS = {
             "df9ef15fb16c78421f48396f0cceff2c"
         ),
         "offset": 124_612,
-        "runtime": 0x007C_13B0,
+        "runtime": 0x007B_29E8,
         "relocated_text": bytes.fromhex(
             "10b582b00c4669460822dcf4e4fc18b1d"
             "de900216160226002b010bd"
@@ -204,8 +204,8 @@ PROFILE_PINS = {
             "bfaf01f7496cce042c84c35708421508"
             "fbf2fa5acd9d9fcb209753901e09af10"
         ),
-        "offset": 186_184,
-        "runtime": 0x007C_1A6C,
+        "offset": 126_432,
+        "runtime": 0x007B_3104,
         "relocated_text": bytes.fromhex(
             "10b582b00c4669460822dcf456f900281"
             "cbfdde90012c4e9001202b010bd"
@@ -993,7 +993,7 @@ class NanopbDecodeFixed64ProductionTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (975, 914, 406),
+            (2440, 2328, 1871),
         )
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaves = [

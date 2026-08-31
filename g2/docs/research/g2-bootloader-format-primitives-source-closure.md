@@ -1,5 +1,10 @@
 # G2 bootloader format-primitives source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The authenticated stock region `[0x004159A0,0x00415AB6)` contains four
 complete formatter primitives: unsigned 64-bit decimal output, unsigned
 64-bit hexadecimal output, nullable string length, and null-output-aware

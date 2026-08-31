@@ -1,5 +1,10 @@
 # G2 bootloader MX25U25643G address-mode source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated function `[0x00420800,0x0042086C)` is now routed
 to compilable clean-room C as `open_cfw_bootloader_mspi_4byte_mode_420800`.
 The 108-byte stock body has SHA-256

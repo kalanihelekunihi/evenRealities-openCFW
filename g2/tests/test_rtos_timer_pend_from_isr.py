@@ -190,11 +190,11 @@ class RtosTimerPendFromIsrTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "becd3988f170e13536fc036fb0678cac9633d18fa1faf6ed55cf0fb1634d7645",
+            "0b50b8d5a4f48c3c8008aa5e2422d3de9c517b04ac82b2b96c78f565c16e78e9",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "333d9d06863819e4a8df05be706429aec1174eb3a3c06d4f1329be03218a7ba0",
+            "d0bcbc594ed2a9b90c316d331fe93e9491d2be2a8f986be26d3d23cd50eed728",
         )
 
 

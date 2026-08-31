@@ -26,17 +26,17 @@ REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PINS = {
     FUNCTION_MAP: "9a4b8121f28d1b0692a6ce7416b8f33946246b39b64ae66cf8acd03d5013d5fe",
-    CLOSURE: "f2622f912f0581658b67830678f839fd03d5872f32f0dc9cfd4beca236540d70",
+    CLOSURE: "419e712b538c25809dcdc1e82027ad5bc8b87114ee925f03463589e75a9ee75b",
     PROVENANCE: "1b21a58be7a2b305c720a7cef16cba829cadd893f28a7bf5075ed001de375713",
 }
 SOURCE_SIZE = 9310
 SOURCE_SHA256 = "ea16057545663e50239f29b573cf5f09f25d4441d8ac92626d1919826b5dcb90"
 FUNCTIONS = (
-    ("open_cfw_pb_service_glasses_case_buffer_write", 146, 254324, 0),
-    ("PB_RxGlassesCaseInfo", 10, 254472, 0),
-    ("APP_PbTxEncodeGlassesCaseInfo", 146, 254484, 8),
-    ("APP_PbNotifyEncodeGlassesCaseInfo", 142, 254632, 4),
-    ("APP_PbRxGlassesCaseFrameDataProcess", 102, 254776, 4),
+    ("open_cfw_pb_service_glasses_case_buffer_write", 146, 194476, 0),
+    ("PB_RxGlassesCaseInfo", 10, 194624, 0),
+    ("APP_PbTxEncodeGlassesCaseInfo", 146, 194636, 8),
+    ("APP_PbNotifyEncodeGlassesCaseInfo", 142, 194784, 4),
+    ("APP_PbRxGlassesCaseFrameDataProcess", 102, 194928, 4),
 )
 PATCHES = (
     ("replace_pb_case_rx_frame", 0x00510A0C, 498,
@@ -336,11 +336,11 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "stock_replaced_bytes": 1360,
             "retained_literal_pool_bytes": 124,
             "software_functional_gap": False,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (
-                "No authorized live glasses-case/temple BLE service 0x81 exchange "
-                "or physical case-state evidence is required for future qualification; the authorized right "
-                "temple is not under test because qualification is deferred by project direction and the left temple must remain stock."
+                "hardware validation is blocked by unavailable physical evidence; future qualification requires "
+                "an authorized G2 pair and either a component-specific glasses-case service 0x81 fixture "
+                "or an authenticated golden BLE/case-state capture"
             ),
         },
     }

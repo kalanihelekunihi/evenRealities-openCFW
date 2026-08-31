@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "components/apollo_main/core_overlay/chg_bq25180.c"
 FIXTURE = ROOT / "tests/fixtures"
-SOURCE_SHA256 = "0291aa058fd90a957b97fd0066e2d49bf16676b761662a32bdb5d717be74067b"
+SOURCE_SHA256 = "2edddc05bdf6a68b6347d3a44a118939992643cf8d5a73cdfa8b4681882f2cbd"
 EXPECTED_SYMBOLS = {
     "open_cfw_bq25180_hardware_init",
     "open_cfw_bq25180_read_device_id",

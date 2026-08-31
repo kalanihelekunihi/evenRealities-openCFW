@@ -55,7 +55,7 @@ class AnalyzeG2AtCodecTests(unittest.TestCase):
                           production["strict_relocations"]), (162, 44, 118, 34, 3))
         self.assertTrue(production["source_inventory_available"])
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "deferred by project direction")
+        self.assertEqual(production["hardware_validation"], "blocked by unavailable physical evidence")
 
 
 if __name__ == "__main__":

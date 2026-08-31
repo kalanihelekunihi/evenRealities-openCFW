@@ -57,10 +57,10 @@ CANDIDATE_FUNCTIONS = [
     "open_cfw_cordio_attc_indication_confirm",
 ]
 CANDIDATE_METRICS = [
-    (347724,48,0),(347772,66,2),(347840,238,0),(348080,2,0),
-    (348084,6,0),(348092,2,0),(348096,84,0),(348180,570,14),
-    (348752,160,2),(348912,182,9),(349096,50,2),(349148,50,2),
-    (349200,114,2),(349316,50,2),(349368,72,3),
+    (279244,48,0),(279292,66,2),(279360,238,0),(279600,2,0),
+    (279604,6,0),(279612,2,0),(279616,84,0),(279700,570,14),
+    (280272,160,2),(280432,182,9),(280616,50,2),(280668,50,2),
+    (280720,114,2),(280836,50,2),(280888,72,3),
 ]
 
 CALLS = {
@@ -293,7 +293,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         ):
             raise RuntimeError(f"attc_proc production route changed: {name}")
     compiled = sum(row["expected"]["size"] for row in leaves)
-    alignment = leaves[0]["expected"]["offset"] - 347724
+    alignment = leaves[0]["expected"]["offset"] - 279244
     alignment += sum(
         right["expected"]["offset"] - left["expected"]["offset"] - left["expected"]["size"]
         for left, right in zip(leaves, leaves[1:])
@@ -358,7 +358,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "strict_relocations": relocations, "guarded_redirects": 13,
             "exact_in_place_copies": 2, "source_only_public_helpers": source_only,
             "method_table_bounds_defect_remediated": True,
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
         },
     }
 

@@ -1,5 +1,10 @@
 # G2 bootloader thread-pointer source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The authenticated eight-byte IAR-compatible runtime leaf at
 `[0x00422874,0x0042287C)` now compiles from maintained MIT C at
 its exact stock address. Its instruction body loads the adjacent source-owned

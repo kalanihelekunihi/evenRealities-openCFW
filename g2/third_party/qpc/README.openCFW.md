@@ -17,8 +17,11 @@ hardware implementation.
 
 `verify_snapshot.py` pins every imported file, checks release/license/config
 facts, and compiles all eight portable translation units with the host C
-compiler. An ARC target compiler is not installed on the current host, so the
-snapshot is not yet admitted as an EM9305 package replacement. The official
-controller blob remains the package provider until a reviewed ARC toolchain
-can compile/link it and authorized hardware can validate scheduling,
-interrupt, and radio timing.
+compiler. The reviewed GCC 16.1.1 ARCv2-EM toolchain now also compiles those
+eight units plus two OpenCFW port units and links them into a deterministic
+relocatable ARC component with no undefined symbols or runtime imports; the
+checked receipt is
+`tools/manifests/em9305-qpc-component-build-summary.json`. The official
+controller blob remains the package provider until placement/redirect records
+are authenticated and authorized hardware validates scheduling, interrupt,
+UART, voltage-monitor, and radio timing.

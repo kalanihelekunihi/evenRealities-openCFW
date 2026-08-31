@@ -1,5 +1,10 @@
 # G2 bootloader TLSF physical-block and alignment source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 ## Result
 
 The eight complete authenticated entries at `[0x00416AAA,0x00416BCE)` now route to compilable freestanding C in `components/bootloader/core_overlay/runtime_tlsf_block_topology_416aaa.c`. The 7,601-byte source file has SHA-256 `548353fa534c11a1c354c7d0e95f691ef2dd4634b4c421440814af17b91974e0` and is a bounded BSD-3-Clause adaptation of Matthew Conte TLSF v3.1 for the recovered G2 ILP32 block layout.

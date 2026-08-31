@@ -58,7 +58,7 @@ class AnalyzeG2ServiceCodecDfuTests(unittest.TestCase):
             "16-function clean-room production C",
         )
         self.assertEqual(lineage["historical_source_inventory"], "unavailable")
-        self.assertEqual(lineage["license"], "GPL-3.0-only")
+        self.assertEqual(lineage["license"], "MIT")
         production = self.report["production"]
         self.assertEqual(
             production["candidate"],
@@ -72,7 +72,7 @@ class AnalyzeG2ServiceCodecDfuTests(unittest.TestCase):
         self.assertEqual(production["guarded_redirects"], 16)
         self.assertEqual(
             production["hardware_validation"],
-            "deferred by project direction",
+            "blocked by unavailable physical evidence",
         )
 
 

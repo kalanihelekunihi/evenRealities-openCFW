@@ -120,19 +120,19 @@ class RuntimeCmsisMessageQueuePutTests(unittest.TestCase):
     def test_production_overlay_and_manifest_admit_message_queue_put(self) -> None:
         config = json.loads(CONFIG.read_text(encoding="utf-8"))
         leaf = next(item for item in config["relocated_leaves"] if item["function"] == "open_cfw_cmsis_message_queue_put")
-        self.assertEqual((leaf["expected"]["size"], leaf["expected"]["sha256"], leaf["expected"]["offset"]), (144, "25767cec50bb3b537c6d006eee89ce33a5fc325a116f9ba9aee3ccd806ae3b1b", 194132))
+        self.assertEqual((leaf["expected"]["size"], leaf["expected"]["sha256"], leaf["expected"]["offset"]), (144, "6001c89b532ca414f008b6dbb7bb56d353eb470cce938e1bbddc68aee56577df", 134284))
         linux = leaf["toolchain_profiles"]["linux-clang"]["expected"]
-        self.assertEqual((linux["size"], linux["sha256"], linux["offset"]), (144, "caf2c2d237c123a3f21d2c749bb5f54f6172e6a67a20ebec6d8a0245302dfe4e", 195912))
+        self.assertEqual((linux["size"], linux["sha256"], linux["offset"]), (144, "b21783a89755996684ed2a5ef1bb5cf14e6e7d848f47072efb462751db5b2de7", 136160))
         patch = next(item for item in config["patch_sites"] if item["target_function"] == "open_cfw_cmsis_message_queue_put")
         self.assertEqual((patch["runtime_address"], patch["expected_size"]), (0x00449ABE, 126))
-        self.assertEqual((config["expected"]["overlay_size"], config["expected"]["component_size"]), (429058, 3952454))
-        self.assertEqual((config["toolchain_profiles"]["linux-clang"]["expected"]["overlay_size"], config["toolchain_profiles"]["linux-clang"]["expected"]["component_size"]), (212664, 3736060))
+        self.assertEqual((config["expected"]["overlay_size"], config["expected"]["component_size"]), (360578, 3883974))
+        self.assertEqual((config["toolchain_profiles"]["linux-clang"]["expected"]["overlay_size"], config["toolchain_profiles"]["linux-clang"]["expected"]["component_size"]), (152912, 3676308))
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
         region = next(item for item in main["regions"] if item["name"] == "apollo_cmsis_message_queue_put_source_leaf")
-        self.assertEqual((region["file_offset"], region["size"], region["target_address"]), (3717528, 144, 8141176))
-        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4745526, "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"))
-        self.assertEqual((manifest["package"]["profiles"]["linux-clang"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_sha256"]), (4529116, "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef"))
+        self.assertEqual((region["file_offset"], region["size"], region["target_address"]), (3657680, 144, 8081328))
+        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]), (4677046, "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"))
+        self.assertEqual((manifest["package"]["profiles"]["linux-clang"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_sha256"]), (4469364, "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"))
 
 
 if __name__ == "__main__":

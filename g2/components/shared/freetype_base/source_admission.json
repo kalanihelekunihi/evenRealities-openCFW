@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "component": "g2-freetype-base",
+  "license": "FTL",
+  "upstream": {
+    "version": "2.9.1",
+    "tag": "VER-2-9-1",
+    "commit": "86bc8a95056c97a810986434a3f268cbe67f2902"
+  },
+  "retained_evidence": {
+    "existing_candidate_functions": 90,
+    "existing_candidate_bytes": 9736,
+    "complete_map_functions": 182,
+    "complete_map_callable_bytes": 20442,
+    "complete_map_physical_bytes": 20676,
+    "physical_residue_bytes": 234,
+    "unresolved_callable_bytes": 0,
+    "mapping_sha256": "c08117e7b02c8340e293f532f0d21473113aea17c7d6191b39422c1f01c990e3"
+  },
+  "source_inventory": {
+    "selected_base_files": 21,
+    "selected_base_source_bytes": 429079
+  },
+  "build": {
+    "community_source": true,
+    "software_gate": "tests.test_runtime_freetype_base_admission",
+    "production_overlay": false,
+    "authenticated_stock_initializer_sequence_recovered": true,
+    "authenticated_stock_teardown_entry_recovered": false,
+    "authenticated_target_placement": false,
+    "target_compile": {
+      "translation_units": [
+        "src/base/ftbase.c",
+        "src/base/ftinit.c",
+        "src/base/ftbitmap.c"
+      ],
+      "target": "arm-none-eabi/cortex-m55/thumb/hard-float",
+      "warnings_as_errors": true,
+      "short_enums": true
+    },
+    "production_overlay_gate": "requires pinned IAR-compatible code generation, relocation and target placement plus font payload, stack and WCET qualification"
+  },
+  "policy": {
+    "initialization": "caller-owned allocator ports -> FT_New_Library -> exact ten default modules",
+    "face_open": "upstream autodetect, TrueType-only, or CFF-only",
+    "teardown": "community source uses FT_Done_Library; no exact stock FT_Done_FreeType entry is assigned"
+  },
+  "hardware_validation": {
+    "performed": false,
+    "blocker": "no authorized physical G2 hardware or authenticated external font payload was supplied to this software-only tranche"
+  }
+}

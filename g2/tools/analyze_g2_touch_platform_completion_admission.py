@@ -83,7 +83,7 @@ def analyze(*, enforce_expected=True):
         "software_function_frontier_complete": True, "integration": "isolated source candidate only; not production-routed",
         "configuration_evidence": "deterministic safe defaults selected; board-specific tuning and resident-table equivalence require physical evidence",
         "remaining": {"concrete_source_or_implementation_functions": 0, "concrete_gap_instruction_bytes": 0, "unimplemented_clean_room_application_contracts": 0, "typed_external_or_unavailable_functions": 0},
-        "hardware_validation": "deferred by project direction", "hardware_blocker": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence", "hardware_blocker": "blocked by unavailable physical evidence",
         "exclusions": "production routing, board-specific tuning, electrical/timing qualification, and on-device validation remain"}
 
 

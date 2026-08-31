@@ -111,7 +111,7 @@ TARGET_FLAGS = (
     "-fno-ident",
 )
 APPLE_CLANG = "/usr/bin/clang"
-APPLE_CLANG_VERSION = "Apple clang version 21.0.0 (clang-2100.3.30.1)"
+APPLE_CLANG_VERSION = "Apple clang version 21.0.0 (clang-2100.3.33.1)"
 TARGET_OBJECT_PIN = (
     788,
     "8114a6a47e5e5f65517bc62afdfca88"
@@ -125,31 +125,35 @@ TARGET_TEXT_PIN = (
 )
 
 APPLE_OVERLAY_PIN = (
-    429_058,
-    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+    360_578,
+    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
 )
 APPLE_COMPONENT_PIN = (
-    3_952_454,
-    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+    3_883_974,
+    "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
+)
+APPLE_STAGE_COMPONENT_PIN = (
+    3_883_974,
+    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
 )
 LINUX_OVERLAY_PIN = (
-    212_664,
-    "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+    152_912,
+    "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20",
 )
 LINUX_COMPONENT_PIN = (
-    3_736_060,
-    "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+    3_676_308,
+    "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
 )
 APPLE_PACKAGE_PIN = (
-    4_745_526,
-    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+    4_677_046,
+    "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
 )
 LINUX_PACKAGE_PIN = (
-    4_529_116,
-    "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+    4_469_364,
+    "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
 )
-APPLE_LEAF = (184_396, 0x007C_1370)
-LINUX_LEAF = (186_120, 0x007C_1A2C)
+APPLE_LEAF = (124_548, 0x007B_29A8)
+LINUX_LEAF = (126_368, 0x007B_30C4)
 APPLE_PATCH = bytes.fromhex("e7f28abd00bf00bf")
 APPLE_PATCH_SHA256 = (
     "659991e787790e45f3c2b41575292709"
@@ -316,9 +320,19 @@ class RuntimeLittlefsTagType2ProductionTests(unittest.TestCase):
         import apollo_overlay
 
         cls.apollo_overlay = apollo_overlay
+        stage_config = json.loads(OVERLAY.read_text(encoding="utf-8"))
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = temporary / "main-stage-overlay.json"
+        stage_config_path.write_text(
+            json.dumps(stage_config, indent=2) + "\n",
+            encoding="utf-8",
+        )
         cls.production = apollo_overlay.build(
             root=ROOT,
-            config_path=OVERLAY,
+            config_path=stage_config_path,
             output_dir=temporary / "production",
             clang=APPLE_CLANG,
             toolchain_profile="apple-clang",
@@ -477,7 +491,7 @@ class RuntimeLittlefsTagType2ProductionTests(unittest.TestCase):
         )
         self.assertEqual(
             (component_path.stat().st_size, sha256(component_path)),
-            APPLE_COMPONENT_PIN,
+            APPLE_STAGE_COMPONENT_PIN,
         )
         self.assertEqual(
             self.production["overlay"]["functions"][FUNCTION],
@@ -504,12 +518,12 @@ class RuntimeLittlefsTagType2ProductionTests(unittest.TestCase):
                 )
             },
             {
-                "source_owned_bytes": 431_334,
+                "source_owned_bytes": 362_962,
                 "source_owned_in_place_bytes": 184,
-                "generated_patch_site_bytes": 409_066,
+                "generated_patch_site_bytes": 397_446,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_111_914,
-                "replaced_stock_function_bytes": 409_246,
+                "opaque_base_bytes": 3_123_534,
+                "replaced_stock_function_bytes": 397_626,
             },
         )
 
@@ -550,58 +564,7 @@ class RuntimeLittlefsTagType2ProductionTests(unittest.TestCase):
                 for key in ("file_offset", "size", "target_address", "address_status")
             },
             {
-                "file_offset": (
-                    APPLE_COMPONENT_PIN[0]
-                    - 28  # later watchdog source leaves
-                    - 54  # nanopb signed-varint source leaf
-                    - TARGET_TEXT_PIN[0]
-                    - 2  # tag_chunk alignment
-                    - 6  # tag_chunk source leaf
-                    - 2  # tag_isvalid alignment
-                    - 6  # tag_isvalid source leaf
-                    - 2  # tag_type1 alignment
-                    - 10  # tag_type1 source leaf
-                    - 2  # tag_type3 alignment
-                    - 6  # tag_type3 source leaf
-                    - 2  # tag_id alignment
-                    - 6  # tag_id source leaf
-                    - 2  # tag_size alignment
-                    - 6  # tag_size source leaf
-                    - 2  # nanopb fixed64 alignment
-                    - 28  # nanopb fixed64 source leaf
-                    - 158  # nanopb pb_read source leaf
-                    - 2  # nanopb private buf_read alignment
-                    - 30  # nanopb private buf_read source leaf
-                    - 2  # nanopb private readbyte alignment
-                    - 64  # nanopb private readbyte source leaf
-                    - 20  # nanopb stream-constructor source leaf
-                    - 2  # nanopb private varint32 alignment
-                    - 222  # nanopb private varint32 source leaf
-                    - 16  # nanopb private varint32 rodata
-                    - 2  # nanopb public varint32 alignment
-                    - 10  # nanopb public varint32 source leaf
-                    - 2  # nanopb skip-string alignment
-                    - 34  # nanopb skip-string source leaf
-                    - 20_969  # all later admissions through the universal-setting KVDB triplet
-                    - 206  # terminal-mode KVDB triplet (leaves, rodata, alignment)
-                    - 212  # onboarding-config KVDB sextet (leaves, rodata, alignment)
-                    - 376  # ring KVDB triplet (leaves, rodata, alignment)
-                    - 21  # AT^NUS handler leaf (leaf, alignment)
-                    - 666  # eAT core/sensor cluster (twelve leaves, alignment)
-                    - 2_814  # module-configuration KVDB sextet (leaves, rodata, alignment)
-                    - 170  # buzzer NVDB quintet (leaves, alignment)
-                    - 198  # product-mode NVDB sextet (leaves, alignment)
-                    - 254  # MAC NVDB triplet (leaves, alignment)
-                    - 142  # advertising-magic NVDB triplet (leaves, alignment)
-                    - 4_396  # system-data NVDB thirteen-leaf cluster (leaves, rodata, alignment)
-                    - 274  # ULED display-preprocess leaf (leaf, rodata, alignment)
-                    - 1_568  # charger-common eleven-leaf cluster (leaves, alignment)
-                    - 2_378  # BQ25180 22-leaf charger-driver cluster (leaves, alignment)
-                    - 4_634  # BQ27427 33-leaf fuel-gauge cluster (leaves, rodata, alignment)
-                    - 254  # Goodix-derived error-handler leaf
-                    - 122  # FreeRTOS task-info leaf and alignment
-                    - 500  # scheduler-start closure leaves and alignment
-                ),
+                "file_offset": 3_647_944,
                 "size": TARGET_TEXT_PIN[0],
                 "target_address": APPLE_LEAF[1],
                 "address_status": "source_compiled",

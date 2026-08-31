@@ -42,7 +42,7 @@ class CaseRegisterTransformAdmissionTests(unittest.TestCase):
         self.assertEqual(self.result["hardware_operations"], [])
         self.assertEqual(
             self.result["hardware_validation"],
-            "deferred by project direction",
+            "blocked by unavailable physical evidence",
         )
         self.assertEqual(self.result["source"]["license"], "MIT")
         self.assertTrue(all(row["license"] == "MIT"

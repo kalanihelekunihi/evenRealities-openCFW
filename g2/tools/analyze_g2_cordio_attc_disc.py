@@ -57,10 +57,10 @@ CANDIDATE_FUNCTIONS = [
     "open_cfw_cordio_attc_resume_configuration",
 ]
 CANDIDATE_METRICS = [
-    (351712,190,1),(351904,60,0),(351964,166,2),(352132,120,1),
-    (352252,222,2),(352476,200,1),(352676,178,2),(352856,132,2),
-    (352988,48,1),(353036,94,0),(353132,68,1),(353200,90,2),
-    (353292,16,1),(353308,22,1),(353332,4,1),
+    (283232,190,1),(283424,60,0),(283484,166,2),(283652,120,1),
+    (283772,222,2),(283996,200,1),(284196,178,2),(284376,132,2),
+    (284508,48,1),(284556,94,0),(284652,68,1),(284720,90,2),
+    (284812,16,1),(284828,22,1),(284852,4,1),
 ]
 
 FUNCTIONS = [
@@ -248,7 +248,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
         ):
             raise AuditError(f"ATT discovery production route changed: {name}")
     compiled = sum(row["expected"]["size"] for row in leaves)
-    alignment = leaves[0]["expected"]["offset"] - 351710
+    alignment = leaves[0]["expected"]["offset"] - 283230
     alignment += sum(
         right["expected"]["offset"] - left["expected"]["offset"]
         - left["expected"]["size"]
@@ -344,7 +344,7 @@ def analyze(image: Path = IMAGE) -> dict[str, Any]:
             "index_and_handle_bounds_hardened": True,
             "configuration_handle_index_hardened": True,
             "hardware_validation": (
-                "deferred by project direction; future qualification requires authorized responsive G2/ATT peer evidence"
+                "blocked by unavailable physical evidence; future qualification requires authorized responsive G2/ATT peer evidence"
             ),
         },
     }

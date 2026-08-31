@@ -10,7 +10,7 @@ PINS={ROOT/'tools/manifests/packetcraft-cordio-l2c-slave-function-map.tsv':'214f
 SOURCE=ROOT/'components/shared/cordio/runtime_cordio_l2c_slave.c'
 SOURCE_SHA='5c42b0e55ce979d1c2c9d3294c98cb36854fd18c0519a33d3cda28637bfdf1c4'
 PRODUCTION_FUNCTIONS=['open_cfw_cordio_l2c_slave_request_timeout','open_cfw_cordio_l2c_slave_receive_signaling_packet','open_cfw_cordio_l2c_slave_initialize','open_cfw_cordio_l2c_connection_update_request','open_cfw_cordio_l2c_slave_handler_initialize','open_cfw_cordio_l2c_slave_handler']
-PRODUCTION_METRICS=[(354188,46,2),(354236,188,5),(354424,42,0),(354468,182,4),(354652,18,0),(354672,20,1)]
+PRODUCTION_METRICS=[(285708,46,2),(285756,188,5),(285944,42,0),(285988,182,4),(286172,18,0),(286192,20,1)]
 F={
 'l2cSlaveReqTimeout':(0x536B40,0x536C52,'6a92ad3b7511c9cf56fde9b6c92642aa343da2f5a77dd3f66d49cca183aae63f'),
 'l2cSlaveRxSignalingPkt':(0x536C5C,0x536E76,'dae4e51ce13fe94e7fa40c5d37fee245625df51fb4cfe5d5ec9734b5530bb9f1'),

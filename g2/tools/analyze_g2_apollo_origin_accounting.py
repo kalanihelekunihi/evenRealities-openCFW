@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import struct
 import sys
 from pathlib import Path
 from typing import Any
@@ -14,16 +15,27 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 PATH_ANALYZER = ROOT / "tools/analyze_apollo_embedded_source_paths.py"
-DEFAULT_PLAN = ROOT / "build/source/flash-plan.json"
+FIRST_PARTY_FRONTIER_ANALYZER = ROOT / "tools/analyze_g2_first_party_frontier.py"
+DEFAULT_PLAN = ROOT / "build/postapply-package-apple/flash-plan.json"
 DEFAULT_COMPONENT_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "tools/manifests/g2-apollo-origin-accounting.json"
-PLAN_SHA256 = "75c8531a7bb8f69d69770607f29a8550dc1d6a47b4b33007aa0dc5b763c7ba95"
+NEMAVG_STROKE_CAPS = ROOT / "tools/manifests/g2-nemavg-stroke-caps-candidate-summary.json"
+PLAN_SHA256 = "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127"
 MAX_TRUSTWORTHY_FUNCTION_ENVELOPE = 16_384
 EXPECTED_FUNCTIONS = 7_370
 EXPECTED_REJECTED_ENVELOPES = 8
-EXPECTED_MANIFEST_OFFICIAL_BYTES = 3_087_520
-EXPECTED_METADATA_GAP_BYTES = 11_186
-EXPECTED_METADATA_GAP_SITES = 76
+EXPECTED_MANIFEST_OFFICIAL_BYTES = 3_099_192
+EXPECTED_METADATA_GAP_BYTES = 17_800
+EXPECTED_METADATA_GAP_SITES = 79
+EXPECTED_NEMAVG_CANDIDATE_BYTES = 6_614
+EXPECTED_NEMAVG_ROUTED_BYTES = 6_614
+EXPECTED_NEMAVG_RETAINED_ENDPOINT_BYTES = 0
+EXPECTED_NEMAVG_RECORDS = {
+    "0x0051B8F0": ("draw_start_cap", 1_668, True),
+    "0x0051BF7C": ("draw_end_cap", 1_640, True),
+    "0x0051C5EC": ("draw_caps", 3_306, True),
+}
+EXPECTED_FIRST_PARTY_OBJECT_EVIDENCE_BYTES = 885_418
 
 
 class AccountingError(RuntimeError):
@@ -59,6 +71,12 @@ def _clear_and_count(mask: bytearray, start: int, end: int, base: int) -> int:
     overlap = sum(mask[first:last])
     mask[first:last] = b"\0" * (last - first)
     return overlap
+
+
+def _address_set_digest(addresses: set[int]) -> str:
+    return hashlib.sha256(b"".join(
+        struct.pack("<I", address) for address in sorted(addresses)
+    )).hexdigest()
 
 
 def analyze(plan_path: Path, component_report_path: Path, corpus: Path) -> dict[str, Any]:
@@ -202,6 +220,99 @@ def analyze(plan_path: Path, component_report_path: Path, corpus: Path) -> dict[
     if sum(dependency_bytes.values()) != buckets["third_party_path_anchored"]:
         raise AccountingError("third-party family buckets do not reconcile")
 
+    # Authenticate the complete NemaVG stroke-cap route.  All three historical
+    # stock intervals must be absent from the retained mask after the exact-ABI
+    # endpoint leaves and coordinator have been admitted.  Keep the complete
+    # historical stock identity as non-additive evidence.
+    nemavg = json.loads(NEMAVG_STROKE_CAPS.read_text(encoding="utf-8"))
+    records = nemavg.get("stock", {}).get("records")
+    if (not isinstance(records, list) or len(records) != 3 or
+            nemavg.get("candidate", {}).get("production_routed") is not True or
+            nemavg.get("candidate", {}).get("endpoint_stock_entries_unpatched") is not False or
+            nemavg.get("candidate", {}).get("endpoint_candidate_exact_stock_abi") is not True or
+            nemavg.get("candidate", {}).get("production_routed_functions") != 3 or
+            nemavg.get("candidate", {}).get("production_routed_physical_bytes") !=
+            EXPECTED_NEMAVG_ROUTED_BYTES or
+            nemavg.get("candidate", {}).get("remaining_candidate_functions") != 0 or
+            nemavg.get("candidate", {}).get("remaining_candidate_physical_bytes") !=
+            EXPECTED_NEMAVG_RETAINED_ENDPOINT_BYTES):
+        raise AccountingError("NemaVG production-route evidence changed")
+    candidate_addresses: set[int] = set()
+    routed_addresses: set[int] = set()
+    retained_endpoint_addresses: set[int] = set()
+    for record in records:
+        entry_text = record.get("entry")
+        expected_record = EXPECTED_NEMAVG_RECORDS.get(entry_text)
+        if expected_record is None:
+            raise AccountingError("NemaVG stock record identity changed")
+        expected_symbol, expected_bytes, expected_routed = expected_record
+        if (record.get("symbol") != expected_symbol or
+                record.get("physical_bytes") != expected_bytes or
+                record.get("production_routed") is not expected_routed):
+            raise AccountingError("NemaVG stock record contract changed")
+        start = int(record["entry"], 16)
+        physical_bytes = int(record["physical_bytes"])
+        if int(record["end_exclusive"], 16) != start + physical_bytes:
+            raise AccountingError("NemaVG stock record extent changed")
+        addresses = set(range(start, start + physical_bytes))
+        if candidate_addresses & addresses:
+            raise AccountingError("NemaVG candidate physical intervals overlap")
+        candidate_addresses |= addresses
+        if expected_routed:
+            routed_addresses |= addresses
+        else:
+            retained_endpoint_addresses |= addresses
+    if len(candidate_addresses) != EXPECTED_NEMAVG_CANDIDATE_BYTES:
+        raise AccountingError("NemaVG candidate byte count changed")
+    if (len(routed_addresses) != EXPECTED_NEMAVG_ROUTED_BYTES or
+            len(retained_endpoint_addresses) !=
+            EXPECTED_NEMAVG_RETAINED_ENDPOINT_BYTES or
+            routed_addresses | retained_endpoint_addresses != candidate_addresses):
+        raise AccountingError("NemaVG routed/retained stock partition changed")
+    for address in routed_addresses:
+        index = address - base
+        if not (0 <= index < image_size and not official[index] and unanchored[index]):
+            raise AccountingError(
+                "NemaVG source route did not leave the retained stock mask"
+            )
+    for address in retained_endpoint_addresses:
+        index = address - base
+        if not (0 <= index < image_size and official[index] and unanchored[index]):
+            raise AccountingError(
+                "NemaVG endpoint stock did not remain retained and unanchored"
+            )
+    image = path_module.DEFAULT_IMAGE.read_bytes()
+    candidate_content = bytes(image[address - base]
+                              for address in sorted(candidate_addresses))
+    routed_content = bytes(image[address - base]
+                           for address in sorted(routed_addresses))
+    retained_endpoint_content = bytes(
+        image[address - base] for address in sorted(retained_endpoint_addresses)
+    )
+
+    frontier_module = _load(FIRST_PARTY_FRONTIER_ANALYZER)
+    frontier = frontier_module.analyze(corpus_root=corpus)
+    object_evidence_bytes = int(
+        frontier["surface"]["closed_manifest_physical_bytes_known"]
+    )
+    if object_evidence_bytes != EXPECTED_FIRST_PARTY_OBJECT_EVIDENCE_BYTES:
+        raise AccountingError("first-party object evidence changed")
+
+    release_readiness_partition = {
+        "candidate_source_not_routed": 0,
+        "typed_retained_or_external": true_opaque_bytes,
+    }
+    unanchored_frontier_partition = {
+        "candidate_source_not_routed": 0,
+        "typed_retained_unanchored_without_candidate":
+            buckets["unanchored_discovered_function"],
+    }
+    if sum(release_readiness_partition.values()) != true_opaque_bytes:
+        raise AccountingError("Apollo release-readiness partition does not conserve")
+    if (sum(unanchored_frontier_partition.values()) !=
+            buckets["unanchored_discovered_function"]):
+        raise AccountingError("Apollo unanchored frontier does not conserve")
+
     expected = json.loads(MANIFEST.read_text())
     actual_counts = {
         "component_opaque_base_bytes": true_opaque_bytes,
@@ -209,6 +320,22 @@ def analyze(plan_path: Path, component_report_path: Path, corpus: Path) -> dict[
         "controlled_bytes_mislabeled_official_blob": metadata_gap_bytes,
         "origin_buckets": buckets,
         "third_party_family_bytes": dependency_bytes,
+        "release_readiness_partition": release_readiness_partition,
+        "unanchored_frontier_partition": unanchored_frontier_partition,
+        "candidate_stock_address_set_sha256": _address_set_digest(candidate_addresses),
+        "candidate_stock_content_sha256": hashlib.sha256(candidate_content).hexdigest(),
+        "production_routed_stock_address_set_sha256":
+            _address_set_digest(routed_addresses),
+        "production_routed_stock_content_sha256":
+            hashlib.sha256(routed_content).hexdigest(),
+        "retained_endpoint_stock_address_set_sha256":
+            _address_set_digest(retained_endpoint_addresses),
+        "retained_endpoint_stock_content_sha256":
+            hashlib.sha256(retained_endpoint_content).hexdigest(),
+        "overlapping_object_closure_evidence": {
+            "bytes": object_evidence_bytes,
+            "additive_to_disjoint_release_totals": False,
+        },
     }
     if actual_counts != expected["expected_counts"]:
         raise AccountingError(
@@ -237,7 +364,7 @@ def analyze(plan_path: Path, component_report_path: Path, corpus: Path) -> dict[
         }
 
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "analysis_mode": "read-only; no signing, flashing, erase, or hardware operation",
         "inputs": {
             "flash_plan": str(plan_path), "flash_plan_sha256": PLAN_SHA256,
@@ -258,6 +385,33 @@ def analyze(plan_path: Path, component_report_path: Path, corpus: Path) -> dict[
             "qualification": "companion accounting corrects classification only; emitted bytes and flash addresses are unchanged",
         },
         "opaque_origin_lower_bounds": buckets,
+        "release_readiness_partition": release_readiness_partition,
+        "unanchored_frontier_partition": {
+            **unanchored_frontier_partition,
+            "stock_address_set_sha256": _address_set_digest(candidate_addresses),
+            "stock_content_sha256": hashlib.sha256(candidate_content).hexdigest(),
+            "production_routed_stock_address_set_sha256":
+                _address_set_digest(routed_addresses),
+            "production_routed_stock_content_sha256":
+                hashlib.sha256(routed_content).hexdigest(),
+            "retained_endpoint_stock_address_set_sha256":
+                _address_set_digest(retained_endpoint_addresses),
+            "retained_endpoint_stock_content_sha256":
+                hashlib.sha256(retained_endpoint_content).hexdigest(),
+            "qualification": (
+                "all three NemaVG stroke-cap stock intervals (6,614 bytes) are "
+                "production-routed source and excluded from the retained mask; "
+                "no endpoint interval remains retained or candidate-only"
+            ),
+        },
+        "overlapping_object_closure_evidence": {
+            "bytes": object_evidence_bytes,
+            "additive_to_disjoint_release_totals": False,
+            "qualification": (
+                "complete-object physical evidence overlaps the authoritative "
+                "origin/readiness masks and must never be added to them"
+            ),
+        },
         "third_party_path_anchored_bytes_by_family": dependency_bytes,
         "ghidra_envelopes": {
             "accepted": accepted,

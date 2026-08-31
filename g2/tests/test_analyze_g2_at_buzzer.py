@@ -66,7 +66,7 @@ class AnalyzeG2AtBuzzerTests(unittest.TestCase):
         self.assertEqual(production["stock_replaced_bytes"], 1208)
         self.assertEqual(production["strict_relocations"], 23)
         self.assertFalse(production["software_functional_gap"])
-        self.assertEqual(production["hardware_validation"], "deferred by project direction")
+        self.assertEqual(production["hardware_validation"], "blocked by unavailable physical evidence")
         self.assertIn("required for future qualification", production["hardware_blocker"])
 
 

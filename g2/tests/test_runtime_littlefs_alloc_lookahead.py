@@ -180,26 +180,26 @@ PRODUCTION = {
         "config": MAIN_CONFIG,
         "overlay_name": "apollo_core_overlay.bin",
         "component_name": "ota_s200_firmware_ota.bin",
-        "overlay_size": 429_058,
+        "overlay_size": 360_578,
         "overlay_sha256": (
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
         ),
-        "component_size": 3_952_454,
+        "component_size": 3_883_974,
         "component_sha256": (
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
         ),
-        "leaf_offset": 173_604,
-        "leaf_address": 0x007B_E948,
+        "leaf_offset": 113_756,
+        "leaf_address": 0x007A_FF80,
         "padding_before": 2,
         "patch_address": MAIN_START,
         "patch_offset_key": "payload_offset",
         "patch_offset": MAIN_START - MAIN_BASE + 32,
         "accounting": {
-            "generated_patch_site_bytes": 409_066,
+            "generated_patch_site_bytes": 397_446,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_111_914,
-            "replaced_stock_function_bytes": 409_246,
-            "source_owned_bytes": 431_334,
+            "opaque_base_bytes": 3_123_534,
+            "replaced_stock_function_bytes": 397_626,
+            "source_owned_bytes": 362_962,
             "source_owned_in_place_bytes": 184,
         },
     },
@@ -213,7 +213,7 @@ PRODUCTION = {
         ),
         "component_size": 163_840,
         "component_sha256": (
-            "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
+            "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad"
         ),
         "leaf_offset": 302,
         "leaf_address": 0x0043_45A6,
@@ -224,11 +224,11 @@ PRODUCTION = {
         "accounting": {
             "generated_alignment_bytes": 16,
             "generated_isolated_alignment_bytes": 0,
-            "generated_patch_site_bytes": 16_528,
+            "generated_patch_site_bytes": 16_474,
             "generated_relocated_alignment_bytes": 15,
             "generated_stock_to_overlay_alignment_bytes": 1,
-            "opaque_base_bytes": 121_427,
-            "source_owned_bytes": 25_869,
+            "opaque_base_bytes": 119_425,
+            "source_owned_bytes": 27_925,
         },
     },
 }
@@ -483,10 +483,20 @@ class RuntimeLittlefsAllocLookaheadTests(unittest.TestCase):
             }
 
         cls.production_builds: dict[str, dict[str, object]] = {}
+        stage_config = json.loads(MAIN_CONFIG.read_text(encoding="utf-8"))
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = temporary / "main-stage-overlay.json"
+        stage_config_path.write_text(
+            json.dumps(stage_config, indent=2) + "\n",
+            encoding="utf-8",
+        )
         main_output = temporary / "main-build"
         cls.production_builds["main"] = apollo_overlay.build(
             root=ROOT,
-            config_path=MAIN_CONFIG,
+            config_path=stage_config_path,
             output_dir=main_output,
             clang=os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
         )

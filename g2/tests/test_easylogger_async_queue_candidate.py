@@ -209,19 +209,19 @@ FUNCTIONS = ADAPTER_FUNCTIONS + QUEUE_FUNCTIONS
 
 LOCAL_PINS = {
     SOURCE: (
-        15_829,
-        "a5235faec1db1790a925c4e072973413"
-        "6f8f23eed18076463bb7dda4f14d9a4b",
+        15_820,
+        "637124575c3037855ae1e2bcba772961"
+        "0276ae8d1ca0e87a838d3f4af51e05ee",
     ),
     HEADER: (
-        9_666,
-        "e4eed08bf55e7e589d5562cc664a4f7d"
-        "536ab335d274d23b8d9e9f371f21e2d3",
+        9_657,
+        "4005075b369e3293160537a8870e7999"
+        "7c18823ff1dd15f8d631e7b7a1a0044d",
     ),
     FIXTURE: (
-        22_603,
-        "1813704e7bd023a0efad882a66686db3"
-        "f0448c54b33d3bcbabff8b94e4fcb77c",
+        22_594,
+        "c53aebf2dd7f743f0ed8b435ed3f81d4"
+        "a29853fc4f88e63f2c17b677deb9c650",
     ),
     AUDIT: (
         20_022,

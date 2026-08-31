@@ -20,6 +20,11 @@ MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
 PACKAGE_ROOT = ROOT / "build/source/package"
 RECORDER = "apple-health-record"
 BASE_ADDRESS = 0x00437FE0
+COMPONENT_FUNCTION_DESCRIPTION = (
+    "Even Apollo510B main firmware with maintained source overlays including "
+    "clean-room Sensor Hub and ALS/OPT3007, the retained authenticated stock "
+    "ICM45608 donor object, and complete health-page lifecycle/rendering routing"
+)
 
 SELECTORS = (
     ("INDICATOR", "open_cfw_health_page_update_indicator", 0x004FB1FA, 0x004FB290),
@@ -381,9 +386,7 @@ def sync_manifest() -> None:
     provider["size"] = provider_path.stat().st_size
     provider["sha256"] = sha(provider_path.read_bytes())
     manifest["component_overrides"]["apollo_main"]["function"] = (
-        "Even Apollo510B main firmware with maintained source overlays including "
-        "clean-room Sensor Hub, ALS/OPT3007, TDK ICM45608, and complete health-page "
-        "lifecycle/rendering routing"
+        COMPONENT_FUNCTION_DESCRIPTION
     )
     regions = manifest["component_overrides"]["apollo_main"]["regions"]
     regions = [item for item in regions if not item["name"].startswith("ui_health_page_")]

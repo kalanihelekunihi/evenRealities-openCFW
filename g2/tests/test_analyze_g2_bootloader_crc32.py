@@ -13,7 +13,7 @@ class AnalyzeBootloaderCrc32Tests(unittest.TestCase):
     def test_fail_closed_audit(self) -> None:
         completed = subprocess.run(["python3", "tools/analyze_g2_bootloader_crc32.py", "--json"], cwd=ROOT, check=True, capture_output=True, text=True)
         report = json.loads(completed.stdout)
-        self.assertEqual(report["status"], "implemented-in-source / hardware-validation-deferred-by-project-direction")
+        self.assertEqual(report["status"], "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence")
         self.assertEqual(report["software_gap_count"], 0)
         self.assertEqual(report["stock"]["whole_image_callers"], 6)
         self.assertEqual(report["stock"]["table_polynomial"], "0xEDB88320")
@@ -22,9 +22,14 @@ class AnalyzeBootloaderCrc32Tests(unittest.TestCase):
         self.assertEqual(
             report["provider"]["source_owned_bytes"]
             + report["provider"]["retained_official_bytes"],
-            147_296,
+            147_350,
         )
         self.assertFalse(report["hardware_block"]["physical_evidence_available"])
+        self.assertEqual(
+            report["hardware_block"]["required_evidence"],
+            "authorized G2 hardware demonstrating boot progression and CRC "
+            "results through all six authenticated callers",
+        )
 
 
 if __name__ == "__main__":

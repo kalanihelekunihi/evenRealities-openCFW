@@ -106,7 +106,7 @@ PRODUCTION_FLAGS = (
 PROFILE_PINS = {
     "apple-clang": {
         "compiler": "/usr/bin/clang",
-        "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+        "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
         "production_object": (
             1_140,
             "7aa0a8e045773df37ef2bb56666acc32c4a706ba5bebbe0dc736d7ff59dd1d05",

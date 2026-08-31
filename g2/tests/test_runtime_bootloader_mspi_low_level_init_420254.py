@@ -101,7 +101,7 @@ class MspiLowLevelInitTests(unittest.TestCase):
                               (0x10C20, 0x200F4C00), (0x10C28, 0x20000224)):
             self.assertEqual(int.from_bytes(blob[offset:offset + 4], "little"), value)
         self.assertEqual((SOURCE.stat().st_size, hashlib.sha256(SOURCE.read_bytes()).hexdigest()),
-                         (10627, "e5170727ba0e6fbc412ccc2dc1a845f777a66c1bd10eba3248db041bde31548d"))
+                         (10614, "d6afeff8d32ee5c1f0d511740e111d99cc3e2e21ff9847b66cdf4b87324147d7"))
 
     def test_success_order_default_configuration_and_publication(self) -> None:
         result, output = self.invoke()

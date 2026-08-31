@@ -1,5 +1,10 @@
 # G2 IAR formatted-input source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Status: software-complete for the production-reachable non-secure string-input
 route; on-device validation blocked by unavailable authorized responsive G2
 hardware. This result does **not** close formatted output or claim Annex-K

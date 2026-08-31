@@ -61,6 +61,19 @@ open_cfw_em9305_first_party_evidence[OPEN_CFW_EM9305_FIRST_PARTY_SPAN_COUNT] = {
     }
 };
 
+static const struct open_cfw_em9305_span_evidence *const
+open_cfw_em9305_first_party_evidence_by_id[
+    OPEN_CFW_EM9305_FIRST_PARTY_SPAN_COUNT
+] = {
+    &open_cfw_em9305_first_party_evidence[0],
+    &open_cfw_em9305_first_party_evidence[1],
+    &open_cfw_em9305_first_party_evidence[2],
+    &open_cfw_em9305_first_party_evidence[3],
+    &open_cfw_em9305_first_party_evidence[4],
+    &open_cfw_em9305_first_party_evidence[5],
+    &open_cfw_em9305_first_party_evidence[6]
+};
+
 static enum open_cfw_em9305_candidate_status open_cfw_em9305_call_opaque(
     const struct open_cfw_em9305_first_party_providers *providers,
     open_cfw_em9305_opaque_span_provider_t provider,
@@ -89,7 +102,7 @@ open_cfw_em9305_first_party_span_evidence(
     if ((unsigned int)id >= OPEN_CFW_EM9305_FIRST_PARTY_SPAN_COUNT) {
         return 0;
     }
-    return &open_cfw_em9305_first_party_evidence[(unsigned int)id];
+    return open_cfw_em9305_first_party_evidence_by_id[(unsigned int)id];
 }
 
 enum open_cfw_em9305_candidate_status

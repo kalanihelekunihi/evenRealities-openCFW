@@ -1,5 +1,10 @@
 # G2 `pb_service_setting.c` recovery
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Status: software-closed and production-routed from independently authored,
 selector-isolated C; live service-9 qualification is deferred by project
 direction. Run addresses use

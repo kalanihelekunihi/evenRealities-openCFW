@@ -1,5 +1,10 @@
 # G2 bootloader Ambiq debug-service source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 Three authenticated executable bodies at `[0x00422468,0x00422574)` now compile
 from maintained BSD-3-Clause C at their exact stock addresses. Their behavior
 and ordering match AmbiqSuite SDK 5.1.0 `am_hal_debug.c` at public commit

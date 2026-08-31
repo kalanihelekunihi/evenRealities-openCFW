@@ -21,7 +21,13 @@ class QpcSnapshotTests(unittest.TestCase):
         self.assertEqual(self.result["host_compile"], "pass")
 
     def test_target_state_is_explicit(self):
-        self.assertIn(self.result["arc_target"], {"blocked_unavailable_reviewed_arc_compiler", "arc_objects_compiled_not_integrated"})
+        self.assertIn(
+            self.result["arc_target"],
+            {
+                "blocked_unavailable_reviewed_arc_compiler",
+                "arc_objects_compiled_component_link_receipt_separate",
+            },
+        )
         self.assertFalse(self.result["production_routed"])
 
 

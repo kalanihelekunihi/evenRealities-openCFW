@@ -1,5 +1,10 @@
 # G2 bootloader MSPI XIP-config source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated entry `[0x0041FF34,0x0041FF60)` now routes to
 `open_cfw_bootloader_mspi_xip_config_41ff34` in
 `runtime_mspi_xip_config_41ff34.c`. The clean-room C preserves the observable

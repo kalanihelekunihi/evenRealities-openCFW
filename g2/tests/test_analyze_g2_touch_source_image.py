@@ -41,10 +41,10 @@ class TouchSourceImageAdmissionTests(unittest.TestCase):
         self.assertFalse(self.report["physical_board_services_routed"])
         self.assertFalse(self.report["production_routed"])
         self.assertEqual(self.report["hardware_validation"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
         self.assertEqual(self.report["hardware_operations"], [])
         self.assertEqual(self.report["hardware_blocker"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
 
     def test_written_manifest_matches_live_analysis(self) -> None:
         stored = json.loads(MODULE.MANIFEST.read_text())

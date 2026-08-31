@@ -16,14 +16,14 @@ PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.eve
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 HEADER = ROOT / "components/shared/cordio/runtime_cordio_l2c.h"
 
-OVERLAY_SIZE = 429_058
-OVERLAY_SHA256 = "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
-COMPONENT_SIZE = 3_952_454
-COMPONENT_SHA256 = "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
-PACKAGE_SIZE = 4_745_526
-PACKAGE_SHA256 = "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
-FLASH_PLAN_SIZE = 4_643_183
-FLASH_PLAN_SHA256 = "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66"
+OVERLAY_SIZE = 360_632
+OVERLAY_SHA256 = "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+COMPONENT_SIZE = 3_885_668
+COMPONENT_SHA256 = "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5"
+PACKAGE_SIZE = 4_678_740
+PACKAGE_SHA256 = "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a"
+FLASH_PLAN_SIZE = 4_595_610
+FLASH_PLAN_SHA256 = "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127"
 HEADER_SHA256 = "3d070ea0bf7e79449425af83dbd14416a1ed606b8cb8044116be23523f21c3f3"
 
 
@@ -107,7 +107,7 @@ def validate(
         or sha(FLASH_PLAN.read_bytes()) != FLASH_PLAN_SHA256
         or (len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
             len(flash["container_only_regions"]), len(flash["protected_regions"]))
-            != (6671, 0, 6, 6)
+            != (6588, 0, 6, 6)
     ):
         raise RuntimeError("L2CAP flash plan changed")
     result = {
@@ -123,7 +123,7 @@ def validate(
         "guarded_redirects": len(functions) - len(copy_indexes),
         "exact_in_place_copies": len(copy_indexes),
         "hardware_validation": (
-            "deferred by project direction; future qualification requires authorized responsive G2/EM9305 "
+            "blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305 "
             "and ATT peer evidence"
         ),
     }

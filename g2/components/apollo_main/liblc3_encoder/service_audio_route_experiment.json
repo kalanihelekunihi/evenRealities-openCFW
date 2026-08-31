@@ -1,0 +1,333 @@
+{
+  "schema_version": 1,
+  "name": "liblc3_service_audio_route_experiment",
+  "target": "apollo_main",
+  "mode": "software-route-qualified-unplaced",
+  "sources": {
+    "builder": {
+      "path": "components/apollo_main/liblc3_encoder/build_service_audio_route_experiment.py",
+      "sha256": "f717937494d828995fd6e9a7c21fd3162b41e75377883029a3b755351da151e9"
+    },
+    "adapter": {
+      "path": "components/shared/liblc3/runtime_liblc3_service_audio_adapter.c",
+      "sha256": "f54b4be6ccb9487f88e4d5283695ea1d61db1696e8043cee2c19b2f57a6e8b13"
+    },
+    "adapter_header": {
+      "path": "components/shared/liblc3/runtime_liblc3_service_audio_adapter.h",
+      "sha256": "36d8689349765cc58047fd8580b51dc20de47776c253e7e524724c84f950e543"
+    },
+    "shim": {
+      "path": "components/shared/liblc3/runtime_liblc3_service_audio_stock_shim.c",
+      "sha256": "2c59204e9a7e070a97dbee7c79dbd5d89699c8327793328b9ef1468e3f242a4a"
+    },
+    "shim_header": {
+      "path": "components/shared/liblc3/runtime_liblc3_service_audio_stock_shim.h",
+      "sha256": "c615a301137212844ec9fa7f8253dfe435b41c6b06660a3aaf55729f74486860"
+    },
+    "readonly_linker": {
+      "path": "components/apollo_main/liblc3_encoder/data_policy_linker.ld",
+      "sha256": "281fb21953edffd0a32c8af4c75be72b5355082ebea58b779e7bda533827ab66"
+    },
+    "finalizer": {
+      "path": "components/apollo_main/liblc3_encoder/specialized_xip.py",
+      "sha256": "5fdae5e9c4fa6911f8c1de64de9ae20d220551d41ac74549d4e230ca36307a9d"
+    }
+  },
+  "encoder_admission": {
+    "path": "components/shared/liblc3/encoder_source_admission.json",
+    "sha256": "7a86198686a044c74681a748c9f344f56fd3e77779853d5bd58be1af2d044d7d"
+  },
+  "stock_evidence": {
+    "official_component": {
+      "path": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "size": 3523396,
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "run_base": 4423680,
+      "preamble_bytes": 32
+    },
+    "service_object": {
+      "start": 5744896,
+      "end_exclusive": 5747780,
+      "sha256": "01864fb4fc778a70c3c50b7999c8a43b86d4f8763479e8cf5e47d7a529207193"
+    },
+    "entries": [
+      {
+        "name": "service_audio_lc3_encoder_setup",
+        "address": 5744934,
+        "end_exclusive": 5744960,
+        "sha256": "043e57c0075b4e4c1043d93fe1c9cb7fb3abe91ba6ed24af5160a198f7eb3851",
+        "prologue_hex": "10b50400",
+        "shim_root": "open_cfw_liblc3_service_audio_stock_setup"
+      },
+      {
+        "name": "SVC_Lc3EncodeMono",
+        "address": 5744960,
+        "end_exclusive": 5745528,
+        "sha256": "a21f5d12546cd8b00b113b5234e004ca2d6c7deccd2040c3c1d019e81cc5d594",
+        "prologue_hex": "2de9f84f",
+        "shim_root": "open_cfw_liblc3_service_audio_stock_encode"
+      }
+    ],
+    "ingress": {
+      "service_audio_lc3_encoder_setup": [
+        [5567670, 5567666, 3],
+        [5830562, 5830560, 0],
+        [5830568, 5830566, 1],
+        [5830750, 5830748, 2]
+      ],
+      "SVC_Lc3EncodeMono": [
+        [5746340, 5746326, 3],
+        [5830018, 5830006, 0],
+        [5830050, 5830038, 1],
+        [5830238, 5830226, 1],
+        [5830264, 5830252, 2]
+      ]
+    },
+    "context_literal_cells": [
+      {
+        "address": 5830784,
+        "context_index": 0,
+        "references": [5830006, 5830560]
+      },
+      {
+        "address": 5830788,
+        "context_index": 1,
+        "references": [5830038, 5830226, 5830566]
+      },
+      {
+        "address": 5830796,
+        "context_index": 2,
+        "references": [5830252, 5830748]
+      },
+      {
+        "address": 5568928,
+        "context_index": 3,
+        "references": [5567666]
+      },
+      {
+        "address": 5747684,
+        "context_index": 3,
+        "references": [5746326]
+      }
+    ],
+    "contexts": [537946748, 537949376, 537952004, 537954632],
+    "context_end_exclusive": 537957260,
+    "slot_bytes": 2628,
+    "stock_configuration_bytes": 24,
+    "stock_encoder_pointer_offset": 24
+  },
+  "object_size_budgets": {
+    "adapter.o": 10000,
+    "shim.o": 6000
+  },
+  "entry_veneers": [
+    {
+      "stock_entry": 5744934,
+      "root": "open_cfw_liblc3_service_audio_stock_setup"
+    },
+    {
+      "stock_entry": 5744960,
+      "root": "open_cfw_liblc3_service_audio_stock_encode"
+    }
+  ],
+  "synthetic_qualification": {
+    "text_start": 6291456,
+    "runtime_bindings": {
+      "__aeabi_memclr": 5242881,
+      "__aeabi_memclr4": 5243137,
+      "fabsf": 5243393,
+      "floorf": 5243649,
+      "fmaxf": 5243905,
+      "fminf": 5244161,
+      "memcpy": 5244417,
+      "memmove": 5244673,
+      "memset": 5244929,
+      "sqrtf": 5245185,
+      "truncf": 5245441
+    }
+  },
+  "capacity": {
+    "current_core_end_exclusive": 8309316,
+    "protected_update_record_start": 8380416
+  },
+  "profiles": {
+    "apple-clang": {
+      "toolchain": {
+        "compiler_version_prefix": "Apple clang version 21.0.0",
+        "linker_version_prefix": "Homebrew LLD 23.1.0",
+        "objcopy_version_prefix": "llvm-objcopy, compatible with GNU objcopy"
+      },
+      "expected": {
+        "pinned_report_sha256": "dede586b139ff43fe88b49f7d6581e3a4b960191b6dd95f0f83c008547d36cf6",
+        "relocatable": {
+          "size": 121212,
+          "sha256": "826c061f89d13fba323ab3ccff826c105c7dde4dcdf764c133c4680ef0cd512b"
+        },
+        "sections": {
+          "text": {
+            "size": 44432,
+            "sha256": "3fa812174f889f3b7cb011f2187c33ecfffbadb968056900d76cb8b4f31bba2a"
+          },
+          "rodata": {
+            "size": 60336,
+            "sha256": "76d27504eb5d5a05e4fc2f6503974ce3bf9c4bd0de765adb9cf0e915ccdb7918"
+          },
+          "table_rodata": {
+            "size": 404,
+            "sha256": "ce03cdeb0ace6a379af820c7392d568563e11f90cc414fbeb281486c0ae34605"
+          }
+        },
+        "roots": {
+          "open_cfw_liblc3_service_audio_stock_encode": {
+            "offset": 40704,
+            "size": 324
+          },
+          "open_cfw_liblc3_service_audio_stock_setup": {
+            "offset": 41028,
+            "size": 160
+          }
+        },
+        "imports": [
+          "__aeabi_memclr",
+          "__aeabi_memclr4",
+          "fabsf",
+          "floorf",
+          "fmaxf",
+          "fminf",
+          "memcpy",
+          "memmove",
+          "memset",
+          "sqrtf",
+          "truncf"
+        ],
+        "relocations": {
+          "total": 515,
+          "records_sha256": "fa8c5ee7d66bb7cf8acc4f7eec5abeec63a2b499b9a9cb9325b8585cd08d2483"
+        },
+        "final_elf": {
+          "size": 182072,
+          "sha256": "546cc5e9f078aa7f8a8cf0726de338595a0964850178ee63b2273c37931d45ea"
+        },
+        "entry_veneers": [
+          {
+            "stock_entry": 5744934,
+            "root": "open_cfw_liblc3_service_audio_stock_setup",
+            "synthetic_target": 6332484,
+            "kind": "Thumb-2 B.W tail branch",
+            "encoded_hex": "8ff08dbb"
+          },
+          {
+            "stock_entry": 5744960,
+            "root": "open_cfw_liblc3_service_audio_stock_encode",
+            "synthetic_target": 6332160,
+            "kind": "Thumb-2 B.W tail branch",
+            "encoded_hex": "8ff0deba"
+          }
+        ],
+        "capacity": {
+          "current_core_end_exclusive": 8309316,
+          "protected_update_record_start": 8380416,
+          "append_headroom": 71100,
+          "text_start": 8309328,
+          "end_exclusive": 8414500,
+          "aligned_span_from_current_end": 105184,
+          "shortfall": 34084,
+          "fits": false,
+          "placement_assigned": false
+        }
+      }
+    },
+    "linux-clang": {
+      "toolchain": {
+        "compiler_version_prefix": "Homebrew clang version 22.1.8",
+        "linker_version_prefix": "Homebrew LLD 23.1.0",
+        "objcopy_version_prefix": "llvm-objcopy, compatible with GNU objcopy"
+      },
+      "expected": {
+        "pinned_report_sha256": "218bf3d80639a28cdbbe6caa8706ec32fcf4b1be42028f2be52205558c86ca9e",
+        "relocatable": {
+          "size": 122364,
+          "sha256": "020fa988928a6b70261c20fc3fb8a881d16f8350afe607eba00a0f027024aa4c"
+        },
+        "sections": {
+          "text": {
+            "size": 45552,
+            "sha256": "349ddce7fc3e6db3ea0b1fcbd5251a30223f887f26d0c196e45fcc6b25124a29"
+          },
+          "rodata": {
+            "size": 60336,
+            "sha256": "76d27504eb5d5a05e4fc2f6503974ce3bf9c4bd0de765adb9cf0e915ccdb7918"
+          },
+          "table_rodata": {
+            "size": 404,
+            "sha256": "ce03cdeb0ace6a379af820c7392d568563e11f90cc414fbeb281486c0ae34605"
+          }
+        },
+        "roots": {
+          "open_cfw_liblc3_service_audio_stock_encode": {
+            "offset": 41488,
+            "size": 328
+          },
+          "open_cfw_liblc3_service_audio_stock_setup": {
+            "offset": 41816,
+            "size": 160
+          }
+        },
+        "imports": [
+          "__aeabi_memclr",
+          "__aeabi_memclr4",
+          "fabsf",
+          "floorf",
+          "fmaxf",
+          "fminf",
+          "memcpy",
+          "memmove",
+          "memset",
+          "sqrtf",
+          "truncf"
+        ],
+        "relocations": {
+          "total": 521,
+          "records_sha256": "9a091a664170a47084731d442abdc5303557b07b96eb2d81aa7c0ade32c872ca"
+        },
+        "final_elf": {
+          "size": 183192,
+          "sha256": "cdcf854cd42fa42c27bb9d23c129be3f53530c684b1e50e31738c83b0c5db8e7"
+        },
+        "entry_veneers": [
+          {
+            "stock_entry": 5744934,
+            "root": "open_cfw_liblc3_service_audio_stock_setup",
+            "synthetic_target": 6333272,
+            "kind": "Thumb-2 B.W tail branch",
+            "encoded_hex": "8ff017bd"
+          },
+          {
+            "stock_entry": 5744960,
+            "root": "open_cfw_liblc3_service_audio_stock_encode",
+            "synthetic_target": 6332944,
+            "kind": "Thumb-2 B.W tail branch",
+            "encoded_hex": "8ff066bc"
+          }
+        ],
+        "capacity": {
+          "current_core_end_exclusive": 8309316,
+          "protected_update_record_start": 8380416,
+          "append_headroom": 71100,
+          "text_start": 8309328,
+          "end_exclusive": 8415620,
+          "aligned_span_from_current_end": 106304,
+          "shortfall": 35204,
+          "fits": false,
+          "placement_assigned": false
+        }
+      }
+    }
+  },
+  "routing": {
+    "production_placement": false,
+    "service_audio_routed": false,
+    "firmware_image_emitted": false,
+    "hardware_operations": false
+  }
+}

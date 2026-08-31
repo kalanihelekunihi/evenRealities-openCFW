@@ -39,7 +39,7 @@ class G2BoxUartManagerCandidateTests(unittest.TestCase):
     def test_source_and_fixture_are_pinned(self) -> None:
         self.assertEqual(
             (SOURCE.stat().st_size, hashlib.sha256(SOURCE.read_bytes()).hexdigest()),
-            (7435, "d3515674bd76339aa697f66f4813ba21d04dda99ae9eae01546e6ae30680a548"),
+            (7426, "d7d419940733206f76e8d8661d261f3d0eb7435f2975315274c072b99e1f1ae2"),
         )
         self.assertEqual(
             (FIXTURE.stat().st_size, hashlib.sha256(FIXTURE.read_bytes()).hexdigest()),

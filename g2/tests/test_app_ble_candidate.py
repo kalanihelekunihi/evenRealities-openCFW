@@ -429,10 +429,10 @@ class AppBleCandidateTests(unittest.TestCase):
 
     def test_source_hashes(self) -> None:
         expected = {
-            "app_ble_callbacks.c": "c34528fe84ca933c26df06807602c9dedc7718b20ff72569c55cf154a4399342",
-            "app_ble_handler.c": "76d23a93bc10ab04cfaf52463d1f25a066d890fa99d30474190e91c83cc78faa",
-            "app_ble_processor.c": "41415129b57782d75c9587aea18b97d90560a749080d0fa7eae28b3f80bda42e",
-            "app_ble_startup.c": "1b0a6be318fce1ba9bc4ee59717c071cb6ac820e6ba7990e9ce14561d4794d61",
+            "app_ble_callbacks.c": "8e26f4341e34e0c607a02a82d12c7c21977a072e153d94797ae23f4f9a84401d",
+            "app_ble_handler.c": "7f0451b3964ff161e35307934a795db1705a1e3c768633792058bff768365d58",
+            "app_ble_processor.c": "8ab54752a4bea42cf482332c6ee4129776f95786cc085387f3d24ddf51f76d78",
+            "app_ble_startup.c": "d9549ada2d52eb70bb436f95dec4d7e2e5166446a8155a0edfce28fd5d238a74",
         }
         observed = {
             source.name: hashlib.sha256(source.read_bytes()).hexdigest()

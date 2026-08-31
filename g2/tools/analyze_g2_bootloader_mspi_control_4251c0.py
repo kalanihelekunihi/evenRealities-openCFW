@@ -51,8 +51,8 @@ PINS = {
     UPSTREAM_HEADER: (36982, "2a682bb7c1618982d6a802f3220a38696cd594c89d90e64b1a698d226b0a557b"),
     UPSTREAM_LICENSE: (1525, "0770df5c1956b75715604d5788804eabfc293fc61d5dbbec498c6d379a63755f"),
     ADAPTER: (2930, "f84c982da08e189d5c1c1207e18c70d7b65bb36717139ce99da3cbaabd240fc3"),
-    BOUNDARY: (2351, "53a8e692d35b0a97d57d4c7cb16b5d42e5ba68b425e36b526cc94fad6215e061"),
-    DOCUMENT: (1744, "60b651e1699616224dcc6b881c4c1a49eabcbab02b583a79eeff713ae6d67289"),
+    BOUNDARY: (2373, "314516f3243bb68caa9077222e500b86f0c4c6adb3febf25359a7fbd2096c5c3"),
+    DOCUMENT: (1755, "41edc79d33583839f6e660caa5215dd7e74990494d5f165cc159b2369597ab64"),
 }
 FLAGS = (
     "-target", "arm-none-eabi", "-mcpu=cortex-m55", "-mthumb", "-Oz",
@@ -180,7 +180,7 @@ def audit() -> dict[str, object]:
             cwd=ROOT, check=True, capture_output=True, text=True,
         )
         component = json.loads((Path(directory) / "build-report.json").read_text())["component"]
-    require(component["source_owned_bytes"] + component["opaque_base_bytes"] == 147296, "component accounting changed")
+    require(component["source_owned_bytes"] + component["opaque_base_bytes"] == 147350, "component accounting changed")
     require(component["source_owned_in_place_bytes"] <= component["source_owned_bytes"], "in-place accounting changed")
 
     return {
@@ -203,7 +203,7 @@ def audit() -> dict[str, object]:
             "boundary_status": "official_blob",
         },
         "semantic_model": {"valid_stock_requests": 40, "low_byte_aliases": 40, "invalid_requests_fail_closed": True},
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_operations": [],
     }
 

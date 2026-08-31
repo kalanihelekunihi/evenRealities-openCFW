@@ -210,7 +210,7 @@ def audit() -> dict:
             "production stage-two symbol changed")
     require(production_status.get("source", {}).get("path")
             == "components/bootloader/core_overlay/runtime_hw_control_services_423d20.c"
-            and production_status.get("source", {}).get("license") == "GPL-3.0-or-later",
+            and production_status.get("source", {}).get("license") == "MIT",
             "production stage-two source provenance changed")
     require(production_status.get("expected") == {
                 "size": 60,
@@ -231,7 +231,7 @@ def audit() -> dict:
             == "open_cfw_bootloader_hw_control_state_423e14"
             and production_mode.get("source", {}).get("path")
             == "components/bootloader/core_overlay/runtime_hw_control_state_423e14.c"
-            and production_mode.get("source", {}).get("license") == "GPL-3.0-or-later",
+            and production_mode.get("source", {}).get("license") == "MIT",
             "production mode-flags provenance changed")
     require(production_mode.get("expected", {}).get("sha256") == SPANS[2][3]
             and production_mode.get("stock", {}).get("sha256") == SPANS[2][3]
@@ -260,8 +260,8 @@ def audit() -> dict:
             "profiles": len(profiles),
         },
         "functions": {
-            "stage_two_status": "exact-MIT-candidate / equivalent-GPL-production-source-routed",
-            "stage_two_mode_flags": "exact-MIT-candidate / equivalent-GPL-production-source-routed",
+            "stage_two_status": "exact-MIT-candidate / equivalent-MIT-production-source-routed",
+            "stage_two_mode_flags": "exact-MIT-candidate / equivalent-MIT-production-source-routed",
         },
         "providers": {
             "typed_calls": 2,
@@ -288,8 +288,8 @@ def main() -> int:
         print(json.dumps(report, indent=2, sort_keys=True))
     else:
         print("Bootloader stage-two 0x423dd0: exact isolated source tranche")
-        print("  mode-flags leaf: equivalent exact GPL source now production-routed")
-        print("  status seam: equivalent exact GPL source already production-routed")
+        print("  mode-flags leaf: equivalent exact MIT source now production-routed")
+        print("  status seam: equivalent exact MIT source already production-routed")
         print("  retained critical-save provider remains a redistribution blocker")
     return 0
 

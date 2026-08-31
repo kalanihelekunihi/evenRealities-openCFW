@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
+import os
 from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -52,8 +55,75 @@ class G2CompletionReportTests(unittest.TestCase):
         self.assertFalse(gates["source_complete"])
         self.assertTrue(gates["source_ownership_quality_clean"])
         self.assertTrue(gates["project_license_policy_clean"])
+        self.assertTrue(gates["dual_profile_ownership_reconciliation"])
         self.assertFalse(gates["binary_redistribution_authority_resolved"])
         self.assertFalse(gates["release_authorized"])
+
+    def test_checked_dual_profile_companion_is_publicly_bound(self) -> None:
+        ownership = self.assessment["dual_profile_ownership"]
+        self.assertTrue(ownership["checked"])
+        self.assertEqual(ownership["companion_schema_version"], 3)
+        self.assertEqual(
+            ownership["per_byte_ownership_policy"],
+            {
+                "all_profiles_mask_complete": False,
+                "linux_per_byte_ownership_mask_complete": False,
+                "qualification": (
+                    "Linux aggregate buckets and typed-mixed spans are exact, "
+                    "but no Linux per-byte source/generated/retained ownership "
+                    "is fabricated"
+                ),
+                "sole_current_authority_profile": "apple-clang",
+            },
+        )
+        companion = generator.ROOT / ownership["companion"]
+        self.assertEqual(
+            hashlib.sha256(companion.read_bytes()).hexdigest(),
+            ownership["companion_sha256"],
+        )
+        self.assertFalse(ownership["per_byte_ownership_mask_complete"])
+        self.assertEqual(
+            ownership["sole_current_per_byte_ownership_authority_profile"],
+            "apple-clang",
+        )
+        self.assertIn("Linux coarse spans", ownership["limitation"])
+        expected = {
+            "apple-clang": (
+                4678740,
+                "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a",
+                4677796,
+                0,
+                17800,
+            ),
+            "linux-clang": (
+                4471056,
+                "f7260f93e2c87f2403e14f5a8e6ae1436233cce2990c386a1cde48d2e8133e31",
+                4470112,
+                0,
+                272466,
+            ),
+        }
+        for profile, values in expected.items():
+            row = ownership["profiles"][profile]
+            self.assertEqual(row["package_size"], values[0])
+            self.assertEqual(row["package_sha256"], values[1])
+            self.assertEqual(row["component_payload_bytes"], values[2])
+            self.assertEqual(row["aggregate_buckets"]["unclassified"], values[3])
+            self.assertEqual(row["internal_component_container_bytes"], 300)
+            self.assertEqual(row["outer_evenota_envelope_bytes"], 944)
+            self.assertEqual(
+                row["bytes_requiring_address_label_reconciliation"], values[4]
+            )
+            self.assertEqual(
+                sum(row["aggregate_buckets"].values()),
+                row["component_payload_bytes"],
+            )
+        self.assertTrue(ownership["profiles"]["apple-clang"]
+                        ["per_byte_ownership_mask_complete"])
+        self.assertFalse(ownership["profiles"]["linux-clang"]
+                         ["per_byte_ownership_mask_complete"])
+        self.assertIn("aggregate totals", ownership["profiles"]["linux-clang"]
+                      ["per_byte_ownership_authority"])
 
     def test_touch_chain_and_license_audit_are_live(self) -> None:
         touch = self.assessment["touch_admission"]
@@ -61,6 +131,22 @@ class G2CompletionReportTests(unittest.TestCase):
         self.assertGreater(touch["admission_batches"], 0)
         self.assertGreater(touch["cumulative_candidate_instruction_bytes"], 0)
         self.assertFalse(touch["production_routed"])
+        provenance = touch["candidate_provenance"]
+        self.assertEqual(provenance["candidate_bytes"], 14_510)
+        self.assertEqual(provenance["subrow_overlap_bytes"], 0)
+        self.assertTrue(provenance["semantic_stock_address_candidates_only"])
+        self.assertFalse(provenance["production_elf_ownership"])
+        self.assertEqual(
+            provenance["stock_byte_redistribution_authority"], "NOASSERTION")
+        self.assertEqual(
+            touch["candidate_provenance_manifest"],
+            "g2-touch-final-source-candidate-provenance.tsv",
+        )
+        self.assertEqual(touch["analysis_input_count"], 69)
+        self.assertEqual(
+            touch["generation_receipt_sha256"],
+            "08273958361436eca0a774812de8ca917d6d724d2de836a9f745737d86467aa9",
+        )
         license_data = self.assessment["licensing"]
         self.assertTrue(license_data["source_metadata_clean"])
         self.assertEqual(license_data["source_errors"], 0)
@@ -84,6 +170,7 @@ class G2CompletionReportTests(unittest.TestCase):
             "components/apollo_main/core_overlay/overlay.json",
             "components/bootloader/core_overlay/overlay.json",
             "tools/manifests/g2-touch-final-classification-summary.json",
+            "tools/manifests/g2-touch-final-source-candidate-provenance.tsv",
             "tools/manifests/g2-case-register-primitives-admission-summary.json",
             "tools/manifests/g2-case-register-transforms-admission-summary.json",
             "tools/manifests/g2-case-final-classification-summary.json",
@@ -93,8 +180,86 @@ class G2CompletionReportTests(unittest.TestCase):
             "tools/manifests/g2-project-license-normalization-summary.json",
             "tools/manifests/g2-project-mit-normalization-scope-paths.txt",
             "tools/manifests/g2-project-mit-normalization-research-and-wrapper.txt",
+            "tools/manifests/em9305-final-source-readiness.tsv",
+            "tools/manifests/em9305-final-source-readiness-summary.json",
             "tools/analyze_g2_project_license_normalization.py",
+            "tools/analyze_g2_dual_profile_ownership.py",
+            "tools/analyze_g2_touch_final_frontier.py",
+            "tools/manifests/g2-dual-profile-ownership.json",
+            "tools/open_cfw.py",
         }, recorded)
+
+    def test_all_readiness_receipts_are_direct_currentness_inputs(self) -> None:
+        receipts = (
+            generator.readiness.TOUCH_SOURCE_IMAGE,
+            generator.readiness.EM9305_FINAL_LEDGER,
+            generator.readiness.EM9305_FINAL_SUMMARY,
+            generator.readiness.TOUCH_CANDIDATE_PROVENANCE,
+            generator.readiness.CASE_SOURCE_IMAGE,
+            generator.readiness.NEMAVG_STROKE_CAPS,
+            generator.readiness.CLKMGR_DIVIDERS,
+            generator.readiness.PT_SOURCE,
+            generator.readiness.CASE_SEMANTIC_LEAVES,
+            generator.readiness.CASE_PURE_HELPERS,
+            generator.readiness.CASE_REGISTER_POLICIES,
+        )
+        self.assertEqual(len(receipts), len(set(receipts)))
+        self.assertLessEqual(set(receipts), set(generator.DIRECT_INPUTS))
+        recorded = {
+            row["path"]: row for row in self.assessment["source_inputs"]
+        }
+        for receipt in receipts:
+            relative = receipt.relative_to(generator.ROOT).as_posix()
+            self.assertEqual(recorded[relative], generator._input_record(receipt))
+
+    def test_source_input_count_is_the_current_dynamic_union(self) -> None:
+        dual_records = generator._bound_dual_input_records(
+            generator.dual_ownership.analyze())
+        touch_records = generator._bound_touch_input_records(
+            generator.readiness.analyze())
+        expected_paths = {
+            path.relative_to(generator.ROOT).as_posix()
+            for path in generator.DIRECT_INPUTS
+        } | {row["path"] for row in dual_records} | {
+            row["path"] for row in touch_records
+        }
+        recorded_paths = {
+            row["path"] for row in self.assessment["source_inputs"]
+        }
+        self.assertEqual(len(expected_paths), 157)
+        self.assertEqual(recorded_paths, expected_paths)
+        self.assertEqual(len(self.assessment["source_inputs"]),
+                         len(expected_paths))
+
+    def test_touch_generation_receipt_inputs_are_publicly_bound(self) -> None:
+        live = generator.readiness.analyze()
+        touch_records = generator._bound_touch_input_records(live)
+        self.assertEqual(len(touch_records), 69)
+        recorded = {
+            row["path"]: row for row in self.assessment["source_inputs"]
+        }
+        for row in touch_records:
+            self.assertEqual(recorded[row["path"]], row)
+
+    def test_readiness_receipt_identity_drift_changes_assessment(self) -> None:
+        target = generator.readiness.CLKMGR_DIVIDERS
+        original_input_record = generator._input_record
+
+        def drifted_input_record(path: Path) -> dict[str, object]:
+            row = original_input_record(path)
+            if path == target:
+                row = dict(row)
+                row["sha256"] = "0" * 64
+            return row
+
+        with mock.patch.object(
+            generator, "_input_record", side_effect=drifted_input_record
+        ):
+            changed = generator.build_outputs()
+        self.assertNotEqual(
+            changed[generator.ASSESSMENT_NAME],
+            self.outputs[generator.ASSESSMENT_NAME],
+        )
 
     def test_raw_instruction_transcription_is_an_explicit_release_gate(self) -> None:
         quality = self.assessment["source_ownership_quality"]
@@ -124,11 +289,92 @@ class G2CompletionReportTests(unittest.TestCase):
 
     def test_alternate_output_is_byte_identical(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
-            output_dir = Path(temporary) / "assessment"
+            # macOS exposes /var as a system symlink to /private/var; hand the
+            # no-follow report writer the canonical temporary parent.
+            output_dir = Path(temporary).resolve() / "assessment"
             self.assertEqual(generator.write_outputs(output_dir, check=False), [])
             for name, expected in self.outputs.items():
                 self.assertEqual((output_dir / name).read_bytes(), expected)
             self.assertEqual(generator.write_outputs(output_dir, check=True), [])
+
+
+class G2CompletionReportStaticSafetyTests(unittest.TestCase):
+    """Exercise report bindings without invoking the package-dependent audit."""
+
+    def test_analyzer_closure_and_source_complete_definition_are_explicit(self) -> None:
+        generator._verify_direct_analyzer_import_closure()
+        self.assertEqual(len(generator.DIRECT_ANALYZER_INPUTS), 24)
+        paths = {
+            path.relative_to(generator.ROOT).as_posix()
+            for path in generator.DIRECT_INPUTS
+        }
+        self.assertLessEqual({
+            "tools/analyze_em9305_source_readiness.py",
+            "tools/analyze_gx8002_source_readiness.py",
+            "tools/apply_g2_canonical_observations.py",
+            "tools/analyze_g2_dual_profile_ownership.py",
+            "tools/analyze_g2_touch_final_frontier.py",
+        }, paths)
+        for bucket in ("candidate", "retained/external", "unclassified"):
+            self.assertIn(bucket, generator.SOURCE_COMPLETE_DEFINITION)
+
+    def test_dual_profile_private_receipts_are_exact_direct_inputs(self) -> None:
+        expected = generator._input_record(
+            generator.ROOT / "tools/generate_g2_completion_report.py"
+        )
+        report = {
+            "profiles": {
+                "test-profile": {
+                    "main_observation": {"observation_reports": [expected]},
+                    "boot_provider": {"report": expected},
+                    "package": {
+                        "package_report": expected,
+                        "flash_plan": expected,
+                    },
+                }
+            }
+        }
+        self.assertEqual(
+            generator._bound_dual_input_records(report), [expected]
+        )
+        changed = json.loads(json.dumps(report))
+        changed["profiles"]["test-profile"]["package"][
+            "flash_plan"
+        ]["sha256"] = "0" * 64
+        with self.assertRaisesRegex(
+            generator.ReportError, "direct input identity changed"
+        ):
+            generator._bound_dual_input_records(changed)
+
+    def test_report_reads_and_writes_reject_links_and_hardlinks(self) -> None:
+        with tempfile.TemporaryDirectory(
+            prefix="completion-report-path-safety-",
+            dir=generator.ROOT / "tests",
+        ) as temporary:
+            root = Path(temporary)
+            target = root / "target.json"
+            target.write_bytes(b"preserve\n")
+            link = root / "link.json"
+            link.symlink_to(target)
+            with self.assertRaisesRegex(generator.ReportError, "opened safely"):
+                generator._read_regular_path_once(link, label="test input")
+            with self.assertRaisesRegex(generator.ReportError, "opened safely"):
+                generator._atomic_write_output(link, b"replacement\n")
+            self.assertEqual(target.read_bytes(), b"preserve\n")
+
+            link.unlink()
+            hardlink = root / "hardlink.json"
+            os.link(target, hardlink)
+            with self.assertRaisesRegex(
+                generator.ReportError, "not an independent regular file"
+            ):
+                generator._atomic_write_output(target, b"replacement\n")
+            self.assertEqual(target.read_bytes(), b"preserve\n")
+
+            hardlink.unlink()
+            output = root / "output/report.json"
+            generator._atomic_write_output(output, b"complete\n")
+            self.assertEqual(output.read_bytes(), b"complete\n")
 
 
 if __name__ == "__main__":

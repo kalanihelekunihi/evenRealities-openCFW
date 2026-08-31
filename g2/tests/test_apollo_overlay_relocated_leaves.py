@@ -740,6 +740,275 @@ class ApolloOverlayRelocatedLeafTests(unittest.TestCase):
                 )
                 self.assertEqual(link_report["relocated_text_size"], len(expected_leaf))
 
+    def test_self_call_requires_exact_strict_whole_global_function(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            source, object_path = self._write_and_compile(
+                root,
+                filename="recursive.c",
+                source_text=(
+                    "__attribute__((noinline,optnone))\n"
+                    "unsigned recursive_leaf(unsigned value) {\n"
+                    "    if (value == 0u) return 0u;\n"
+                    "    return recursive_leaf(value - 1u) + 1u;\n"
+                    "}\n"
+                ),
+            )
+            observed = self._observed_relocations(
+                object_path,
+                "recursive_leaf",
+            )
+            self.assertEqual(
+                observed,
+                [{
+                    "offset": observed[0]["offset"],
+                    "type": "R_ARM_THM_CALL",
+                    "symbol": "recursive_leaf",
+                }],
+            )
+            data, sections, section = self._section_for_function(
+                object_path,
+                "recursive_leaf",
+            )
+            alignment = int(section["alignment"])
+            runtime_address = apollo_overlay.align_up(
+                self.OVERLAY_RUNTIME_ADDRESS,
+                alignment,
+            )
+            exact = [{
+                **observed[0],
+                "target_address": runtime_address,
+                "symbol_type": "STT_FUNC",
+            }]
+
+            relocated, receipt = (
+                apollo_overlay.extract_in_place_function_section(
+                    object_path,
+                    "recursive_leaf",
+                    runtime_address=runtime_address,
+                    relocation_configs=exact,
+                    strict_relocation_contract=True,
+                    allow_self_relocation=True,
+                    allow_discarded_alloc_sections=True,
+                )
+            )
+            self.assertEqual(
+                receipt["relocations"][0]["target_address"],
+                runtime_address,
+            )
+            call_offset = int(observed[0]["offset"])
+            self.assertEqual(
+                apollo_overlay.decode_thumb_branch(
+                    runtime_address + call_offset,
+                    relocated[call_offset:call_offset + 4],
+                    link=True,
+                ),
+                runtime_address,
+            )
+
+            with self.assertRaisesRegex(
+                apollo_overlay.BuildError,
+                "self relocation requires allow_self_relocation",
+            ):
+                apollo_overlay.extract_in_place_function_section(
+                    object_path,
+                    "recursive_leaf",
+                    runtime_address=runtime_address,
+                    relocation_configs=exact,
+                    strict_relocation_contract=True,
+                    allow_discarded_alloc_sections=True,
+                )
+            with self.assertRaisesRegex(
+                apollo_overlay.BuildError,
+                "without a reviewed self relocation",
+            ):
+                apollo_overlay.extract_in_place_function_section(
+                    object_path,
+                    "recursive_leaf",
+                    runtime_address=runtime_address,
+                    relocation_configs=[],
+                    strict_relocation_contract=True,
+                    allow_self_relocation=True,
+                    allow_discarded_alloc_sections=True,
+                )
+
+            hostile_contracts = (
+                (
+                    "jump",
+                    [{**exact[0], "type": "R_ARM_THM_JUMP24"}],
+                ),
+                (
+                    "wrong-symbol-type",
+                    [{**exact[0], "symbol_type": "STT_NOTYPE"}],
+                ),
+                (
+                    "wrong-runtime-target",
+                    [{**exact[0], "target_address": runtime_address + 4}],
+                ),
+            )
+            for name, relocations in hostile_contracts:
+                with self.subTest(name=name):
+                    with self.assertRaisesRegex(
+                        apollo_overlay.BuildError,
+                        "exact strict STT_FUNC call to its selected runtime entry",
+                    ):
+                        apollo_overlay.extract_in_place_function_section(
+                            object_path,
+                            "recursive_leaf",
+                            runtime_address=runtime_address,
+                            relocation_configs=relocations,
+                            strict_relocation_contract=True,
+                            allow_self_relocation=True,
+                            allow_discarded_alloc_sections=True,
+                        )
+
+            symbols = apollo_overlay.parse_elf32_symbols(data, sections)
+            symbol_table = apollo_overlay.section_named(sections, ".symtab")
+            symbol_index = next(
+                index
+                for index, symbol in enumerate(symbols)
+                if symbol["name"] == "recursive_leaf"
+            )
+            symbol_entry = int(symbol_table["offset"]) + symbol_index * 16
+            fields = list(struct.unpack_from("<IIIBBH", data, symbol_entry))
+            mutations = []
+            local = fields.copy()
+            local[3] = (
+                apollo_overlay.STB_LOCAL << 4
+            ) | apollo_overlay.STT_FUNC
+            mutations.append(("local", local, "reviewed binding"))
+            partial = fields.copy()
+            partial[2] = int(partial[2]) - 2
+            mutations.append(("partial", partial, "does not occupy its whole section"))
+            for name, mutated_fields, message in mutations:
+                with self.subTest(symbol=name):
+                    mutated = bytearray(data)
+                    struct.pack_into(
+                        "<IIIBBH",
+                        mutated,
+                        symbol_entry,
+                        *mutated_fields,
+                    )
+                    mutated_path = root / f"recursive-{name}.o"
+                    mutated_path.write_bytes(mutated)
+                    with self.assertRaisesRegex(
+                        apollo_overlay.BuildError,
+                        message,
+                    ):
+                        apollo_overlay.extract_in_place_function_section(
+                            mutated_path,
+                            "recursive_leaf",
+                            runtime_address=runtime_address,
+                            relocation_configs=exact,
+                            strict_relocation_contract=True,
+                            allow_self_relocation=True,
+                            allow_discarded_alloc_sections=True,
+                        )
+            self.assertTrue(source.exists())
+
+    def test_appended_self_call_resolves_only_to_its_own_runtime_entry(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            source, object_path = self._write_and_compile(
+                root,
+                filename="appended-recursive.c",
+                source_text=(
+                    "__attribute__((noinline,optnone))\n"
+                    "unsigned appended_recursive(unsigned value) {\n"
+                    "    if (value == 0u) return 0u;\n"
+                    "    return appended_recursive(value - 1u) + 1u;\n"
+                    "}\n"
+                ),
+            )
+            observed = self._observed_relocations(
+                object_path,
+                "appended_recursive",
+            )
+            _data, _sections, section = self._section_for_function(
+                object_path,
+                "appended_recursive",
+            )
+            alignment = int(section["alignment"])
+            offset = apollo_overlay.align_up(
+                len(self.PRIMARY_OVERLAY), alignment
+            )
+            runtime_address = self.OVERLAY_RUNTIME_ADDRESS + offset
+            direct_contract = [{
+                **observed[0],
+                "target_address": runtime_address,
+                "symbol_type": "STT_FUNC",
+            }]
+            expected_leaf, extraction = (
+                apollo_overlay.extract_in_place_function_section(
+                    object_path,
+                    "appended_recursive",
+                    runtime_address=runtime_address,
+                    relocation_configs=direct_contract,
+                    strict_relocation_contract=True,
+                    allow_self_relocation=True,
+                    allow_discarded_alloc_sections=True,
+                )
+            )
+            config = {
+                "function": "appended_recursive",
+                "strict_relocation_contract": True,
+                "allow_self_relocation": True,
+                "allow_discarded_alloc_sections": True,
+                "source": {
+                    "path": source.name,
+                    "size": len(source.read_bytes()),
+                    "sha256": self._digest(source.read_bytes()),
+                    "license": "test-only",
+                },
+                "toolchain": {
+                    "target": "arm-none-eabi",
+                    "flags": self._flags(),
+                },
+                "expected": {
+                    "size": len(expected_leaf),
+                    "sha256": self._digest(expected_leaf),
+                    "alignment": alignment,
+                    "offset": offset,
+                    "unrelocated_sha256": extraction["unrelocated_sha256"],
+                },
+                "relocations": [{
+                    **observed[0],
+                    "symbol_type": "STT_FUNC",
+                    "target_function": "appended_recursive",
+                }],
+            }
+            overlay, functions, _link, reports = self._append(
+                root,
+                leaf_configs=[config],
+            )
+            relocation = reports[0]["extraction"]["relocations"][0]
+            self.assertEqual(relocation["target_address"], runtime_address)
+            self.assertEqual(
+                functions["appended_recursive"],
+                {"offset": offset, "size": len(expected_leaf)},
+            )
+            self.assertEqual(
+                apollo_overlay.decode_thumb_branch(
+                    relocation["runtime_address"],
+                    overlay[
+                        offset + int(relocation["offset"]):
+                        offset + int(relocation["offset"]) + 4
+                    ],
+                    link=True,
+                ),
+                runtime_address,
+            )
+
+            default_reject = copy.deepcopy(config)
+            default_reject.pop("allow_self_relocation")
+            with self.assertRaisesRegex(
+                apollo_overlay.BuildError,
+                "selected self relocation requires an opted-in R_ARM_THM_CALL",
+            ):
+                self._append(root, leaf_configs=[default_reject])
+
     def test_appends_call_free_leaf_with_explicit_empty_relocations(
         self,
     ) -> None:
@@ -825,6 +1094,94 @@ class ApolloOverlayRelocatedLeafTests(unittest.TestCase):
             link_report["relocated_text_size"],
             len(expected_leaf),
         )
+
+    def test_explicit_reserved_padding_preserves_reviewed_leaf_offset(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            leaf, _expected_leaf, _source, object_path, natural_offset = (
+                self._prepared_leaf(root)
+            )
+            alignment = int(leaf["expected"]["alignment"])
+            leaf["reserved_padding_before"] = alignment
+            leaf["expected"]["offset"] = natural_offset + alignment
+            resolved = [
+                {
+                    **{
+                        key: value
+                        for key, value in leaf["relocations"][0].items()
+                        if key != "target_function"
+                    },
+                    "target_address": self.OVERLAY_RUNTIME_ADDRESS,
+                }
+            ]
+            expected_leaf, _extraction = (
+                apollo_overlay.extract_in_place_function_section(
+                    object_path,
+                    "relocated_leaf",
+                    runtime_address=(
+                        self.OVERLAY_RUNTIME_ADDRESS
+                        + natural_offset
+                        + alignment
+                    ),
+                    relocation_configs=resolved,
+                )
+            )
+            leaf["expected"]["sha256"] = self._digest(expected_leaf)
+
+            overlay, functions, link_report, reports = self._append(
+                root,
+                leaf_configs=[leaf],
+            )
+
+        reviewed_offset = natural_offset + alignment
+        self.assertEqual(
+            overlay[natural_offset:reviewed_offset],
+            b"\0" * alignment,
+        )
+        self.assertEqual(
+            overlay[reviewed_offset:reviewed_offset + len(expected_leaf)],
+            expected_leaf,
+        )
+        self.assertEqual(
+            functions["relocated_leaf"],
+            {"offset": reviewed_offset, "size": len(expected_leaf)},
+        )
+        self.assertEqual(
+            reports[0]["placement"]["padding_before"],
+            reviewed_offset - len(self.PRIMARY_OVERLAY),
+        )
+        self.assertEqual(
+            link_report["relocated_padding_size"],
+            reviewed_offset - len(self.PRIMARY_OVERLAY),
+        )
+
+    def test_reserved_padding_rejects_opaque_or_misaligned_values(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            leaf, _bytes, _source, _object, natural_offset = (
+                self._prepared_leaf(root)
+            )
+            alignment = int(leaf["expected"]["alignment"])
+            cases = (
+                (True, "must be an integer"),
+                (-1, "must be an integer"),
+                (alignment // 2, "must preserve its reviewed alignment"),
+            )
+            for value, message in cases:
+                with self.subTest(value=value):
+                    candidate = copy.deepcopy(leaf)
+                    candidate["reserved_padding_before"] = value
+                    candidate["expected"]["offset"] = (
+                        natural_offset
+                        + (value if isinstance(value, int) else 0)
+                    )
+                    with self.assertRaisesRegex(
+                        apollo_overlay.BuildError,
+                        message,
+                    ):
+                        self._append(root, leaf_configs=[candidate])
 
     def test_allows_only_existing_or_prior_overlay_function_targets(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

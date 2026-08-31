@@ -64,10 +64,10 @@ class PbServiceSettingCandidateTests(unittest.TestCase):
 
     def test_source_pin(self) -> None:
         data = SOURCE.read_bytes()
-        self.assertEqual(len(data), 18393)
+        self.assertEqual(len(data), 18384)
         self.assertEqual(
             hashlib.sha256(data).hexdigest(),
-            "203b260e1e12286734073e587507eaceaec351a307c7243c3beecabb8fe97abd",
+            "faa899b9c966d073ef4e9740221a8e2940ee4baab874ddf63ae4ef5dec0b937f",
         )
 
 

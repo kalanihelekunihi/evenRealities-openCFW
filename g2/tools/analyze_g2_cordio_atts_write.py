@@ -55,10 +55,10 @@ CANDIDATE_FUNCTIONS = [
     "open_cfw_cordio_atts_process_execute_write_request",
 ]
 CANDIDATE_LEAF_METRICS = [
-    (336684, 206, 1),
-    (336892, 358, 5),
-    (337260, 880, 8),
-    (338140, 200, 11),
+    (268204, 206, 1),
+    (268412, 358, 5),
+    (268780, 880, 8),
+    (269660, 200, 11),
 ]
 
 CALLERS = {
@@ -297,7 +297,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "strict_relocations": relocations,
             "guarded_redirects": 4,
             "source_only_api": "AttsContinueWriteReq implemented and ARM-compiled; not linked by stock",
-            "hardware_validation": "deferred by project direction",
+            "hardware_validation": "blocked by unavailable physical evidence",
         },
     }
 

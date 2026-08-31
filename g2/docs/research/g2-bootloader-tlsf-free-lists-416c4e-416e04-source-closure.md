@@ -1,5 +1,10 @@
 # G2 bootloader TLSF free-list source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The three complete authenticated entries at `[0x00416C4E,0x00416E04)` now route to compilable freestanding C in `components/bootloader/core_overlay/runtime_tlsf_free_lists_416c4e.c`. The 8,044-byte source file has SHA-256 `e3989523b9680265fde48af650cf3bbf951209d4103f17947bca45457951100e` and is a bounded BSD-3-Clause adaptation of Matthew Conte TLSF v3.1 for the recovered G2 ILP32 allocator configuration.
 
 | Entry | Stock span | Stock B | Direct callers | Apple text B | Relocations |

@@ -1,5 +1,10 @@
 # G2 bootloader MSPI guard source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The paired critical-section wrappers `[0x0041FF08,0x0041FF34)` now route to
 two production C functions in `runtime_mspi_guard_41ff08.c`. The enter wrapper
 always acquires the event-flags service and then disables MSPI when the bypass

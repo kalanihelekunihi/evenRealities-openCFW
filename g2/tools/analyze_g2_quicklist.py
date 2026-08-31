@@ -160,7 +160,12 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
     if stored != STORED or common._pair_digest(stored) != STORED_SHA256:
         raise AuditError("stored callback topology changed")
     overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = "quicklist" in json.dumps(overlay).lower()
+    routed = any(
+        int(site.get("runtime_address", -1)) < PHYSICAL[1]
+        and PHYSICAL[0]
+        < int(site.get("runtime_address", -1)) + int(site.get("expected_size", 0))
+        for site in overlay.get("patch_sites", [])
+    )
     if routed: raise AuditError("quicklist unexpectedly became production-routed")
 
     return {

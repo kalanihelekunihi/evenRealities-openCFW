@@ -1,0 +1,1916 @@
+{
+  "analysis_mode": "read-only; no hardware or flash operation",
+  "authenticated_tables": {
+    "additional_callback_and_parser_slots": 19,
+    "cmap_classes": "0x0074805C",
+    "driver_class": "0x006DCB74",
+    "metrics_variations_service": "0x0075E5AC",
+    "multiple_masters_service": "0x007480B0",
+    "ps_info_and_cff_load_services": "0x0077E848"
+  },
+  "candidate_distinction": {
+    "existing_base_support_bytes": 736,
+    "existing_base_support_functions": 9,
+    "existing_candidate_scope": "two retained source-identity waves plus base support; not a complete CFF physical map",
+    "existing_cff_candidate_bytes": 11326,
+    "existing_cff_candidate_functions": 38,
+    "newly_mapped_cff_callable_bytes": 5392,
+    "newly_mapped_cff_functions": 63,
+    "this_scope": "complete stock CFF callable and physical envelope"
+  },
+  "confidence": {
+    "high": {
+      "bytes": 16718,
+      "functions": 101
+    },
+    "mapped_total": {
+      "bytes": 16718,
+      "functions": 101
+    },
+    "medium": {
+      "bytes": 0,
+      "functions": 0
+    },
+    "unresolved_code": {
+      "bytes": 0,
+      "functions": 0,
+      "source_identities_complete": true
+    }
+  },
+  "evidence_bounds": {
+    "authenticated_target_placement": false,
+    "compiler_byte_identity_claimed": false,
+    "font_payload_authenticated": false,
+    "hardware_validation_performed": false,
+    "production_routing_claimed": false,
+    "stack_or_wcet_qualified": false
+  },
+  "functions": [
+    {
+      "body_sha256": "9c4437493fc6c5bf38ae374498345c89cca4d24aeb44c033d698936354843f21",
+      "bytes": 18,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ABF0A",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffcmap.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ABEF8",
+      "symbol": "cff_cmap_encoding_init"
+    },
+    {
+      "body_sha256": "bc7f0bc51acf61c75c206ca28e5e0d2c7fb4e8dfdcb6076dffe45857be5d2369",
+      "bytes": 6,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ABF10",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffcmap.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ABF0A",
+      "symbol": "cff_cmap_encoding_done"
+    },
+    {
+      "body_sha256": "da6b306927402bddf063fb3bc97c1f96c2dc9ec4482b680b323471e390e1d0cb",
+      "bytes": 18,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ABF22",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffcmap.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ABF10",
+      "symbol": "cff_cmap_encoding_char_index"
+    },
+    {
+      "body_sha256": "cbf7b66cc14e9b7ca2495188ae19a1f54b3c933a4646e767f8f49879ba452b21",
+      "bytes": 46,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ABF50",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffcmap.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ABF22",
+      "symbol": "cff_cmap_encoding_char_next"
+    },
+    {
+      "body_sha256": "b3047b0d190898e149eabd10421c5b30c6e0656a848bee4d86abddc73d699768",
+      "bytes": 22,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ABF66",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffcmap.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ABF50",
+      "symbol": "cff_sid_to_glyph_name"
+    },
+    {
+      "body_sha256": "0ebd37cb13386f326afac5a0b6fc10c41b0d00274265138784d8d016f27f9c60",
+      "bytes": 50,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ABF98",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffcmap.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ABF66",
+      "symbol": "cff_cmap_unicode_init"
+    },
+    {
+      "body_sha256": "84050dda2024d8fa4f3f597c099d0e9d274e66bfb0f7d538b6727fa53069336a",
+      "bytes": 24,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ABFB0",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffcmap.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ABF98",
+      "symbol": "cff_cmap_unicode_done"
+    },
+    {
+      "body_sha256": "bd729829dd45ad535c4a021b3e067acb2931293b5126fe28e1595149ea606fef",
+      "bytes": 18,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ABFC2",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffcmap.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ABFB0",
+      "symbol": "cff_cmap_unicode_char_index"
+    },
+    {
+      "body_sha256": "21f67a1bea8bfcaa20d581cbf60224b808cf821a361fa9f8a4b06ab9b3bc7e37",
+      "bytes": 18,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ABFD4",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffcmap.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ABFC2",
+      "symbol": "cff_cmap_unicode_char_next"
+    },
+    {
+      "body_sha256": "89f0db6bf37d26c04f21689bc27d62e2d4b3f7416226229b862f1f8b508e6635",
+      "bytes": 30,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ABFF2",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ABFD4",
+      "symbol": "cff_get_kerning"
+    },
+    {
+      "body_sha256": "a1edc0c4c935b163bdaa2b9fd79bf434098504f9c363b0923d4c4ca567a2eea9",
+      "bytes": 56,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC02A",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ABFF2",
+      "symbol": "cff_glyph_load"
+    },
+    {
+      "body_sha256": "c43c39629d78f60ef840a09099e891b8dbfbdf2c1dd142d18fd9cb5cb06f4349",
+      "bytes": 278,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC140",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC02A",
+      "symbol": "cff_get_advances"
+    },
+    {
+      "body_sha256": "3b2535900515e8f07f9736d7858e98e358e8cd99e5fc41c6586500146e26e8bf",
+      "bytes": 124,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC1BC",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC140",
+      "symbol": "cff_get_glyph_name"
+    },
+    {
+      "body_sha256": "8247f55e0eb48cda9617dbd05c0af4c28720520a4889b51fa547d0a9c751bb36",
+      "bytes": 174,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC26A",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC1BC",
+      "symbol": "cff_get_name_index"
+    },
+    {
+      "body_sha256": "75a065a3fcd6662bb9949fd5a60497a10093304993017b24fc1768d9eff0261b",
+      "bytes": 20,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC27E",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC26A",
+      "symbol": "cff_ps_has_glyph_names"
+    },
+    {
+      "body_sha256": "b2aee0a736d8f2a3f7675f9bab9c8a6b807c893fd5c2fd48c21f55209046b809",
+      "bytes": 140,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC30A",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC27E",
+      "symbol": "cff_ps_get_font_info"
+    },
+    {
+      "body_sha256": "15b3c79fcdd45d74c34117b7b856e74149cedc2d3b9450fdfc86707b31613346",
+      "bytes": 196,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC3CE",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC30A",
+      "symbol": "cff_ps_get_font_extra"
+    },
+    {
+      "body_sha256": "4823163656e2d62d948cdbad9916e1d3c70bd49fda7c56f2c74ffc461088a8bd",
+      "bytes": 70,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC414",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC3CE",
+      "symbol": "cff_get_ps_name"
+    },
+    {
+      "body_sha256": "be14226b535fd8892a1c5cf8246518849d6876226b480b5e66cfa87d3325edc6",
+      "bytes": 84,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC468",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC414",
+      "symbol": "cff_get_cmap_info"
+    },
+    {
+      "body_sha256": "d8e65b0546608209c7a38449acf4eb8e1a48064c8f99c657058df3724714deb4",
+      "bytes": 124,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC4E4",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC468",
+      "symbol": "cff_get_ros"
+    },
+    {
+      "body_sha256": "431d24fd83d1ea4aca959408dd4254bf52933ff6a2fd37b93d26405908afeaf7",
+      "bytes": 38,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC50A",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC4E4",
+      "symbol": "cff_get_is_cid"
+    },
+    {
+      "body_sha256": "60a60d4d3ac3e0d6af816c071ef20fd7fbe16e19dad73c17ced492d5d90a5ffc",
+      "bytes": 62,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC548",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC50A",
+      "symbol": "cff_get_cid_from_glyph_index"
+    },
+    {
+      "body_sha256": "e5bb7c328783a56f6c9404064139cb6aa645a16c89678be97b1bcd34a31073fb",
+      "bytes": 12,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC554",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC548",
+      "symbol": "cff_set_mm_blend"
+    },
+    {
+      "body_sha256": "c947bfc2aa969768d53bed2105809eb018c620e7d16cf0c09c3c1c1f6f488f47",
+      "bytes": 12,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC560",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC554",
+      "symbol": "cff_get_mm_blend"
+    },
+    {
+      "body_sha256": "5481fb55c0a037d2b575c48e123032efdd00488c5e0d7144c13b1d26eb709f3d",
+      "bytes": 12,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC56C",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC560",
+      "symbol": "cff_get_mm_var"
+    },
+    {
+      "body_sha256": "1b625abac7cf792f296e98441129e84dc9855843358e442e2caca2beb8725afa",
+      "bytes": 12,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC578",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC56C",
+      "symbol": "cff_set_var_design"
+    },
+    {
+      "body_sha256": "888281608738b119a61820ee28ba47adc5060585d00c159efa2312fcdcc258e2",
+      "bytes": 12,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC584",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC578",
+      "symbol": "cff_get_var_design"
+    },
+    {
+      "body_sha256": "aea235e8e3be8c3d915725e3b45018ebe4b326c1f3b96cf773d8a04211431aad",
+      "bytes": 12,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC590",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC584",
+      "symbol": "cff_set_instance"
+    },
+    {
+      "body_sha256": "bd3a7a67ef22116648d7b25481f100df9ab29204d8e103ee971cbe6e2f5fe850",
+      "bytes": 12,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC59C",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC590",
+      "symbol": "cff_hadvance_adjust"
+    },
+    {
+      "body_sha256": "25403e7ab07eb28122eb8c48511baa9fb1a107648ed6432cdc2cf54a72061ba9",
+      "bytes": 12,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC5A8",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC59C",
+      "symbol": "cff_metrics_adjust"
+    },
+    {
+      "body_sha256": "e05db5014cd1bb080be5312cf3b10332f8578c7dee53f54431dc213adad28320",
+      "bytes": 64,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC5E8",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffdrivr.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AC5A8",
+      "symbol": "cff_get_interface"
+    },
+    {
+      "body_sha256": "6ffe6fc386618567cbed282e3d7df13f3e8b21f0458d2711e9d24698e82cb788",
+      "bytes": 68,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC634",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffgload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AC5F0",
+      "symbol": "cff_get_glyph_data"
+    },
+    {
+      "body_sha256": "79f7db9efcb303abbe8136b6324383e32ee1f32f2f83d4bffb15bea67d96460a",
+      "bytes": 58,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AC66E",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffgload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AC634",
+      "symbol": "cff_free_glyph_data"
+    },
+    {
+      "body_sha256": "ddcd9efb50d2ca9e8f65d7db6587a7ffba60e7f00497f1bd5c19cabd6bf395fa",
+      "bytes": 1684,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ACD02",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffgload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AC66E",
+      "symbol": "cff_slot_load"
+    },
+    {
+      "body_sha256": "ca2af823998bae4405f88fa4d21a21e1ace611d6f08a4dbf4b5e61d916251edc",
+      "bytes": 106,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ACD72",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ACD08",
+      "symbol": "cff_parser_init"
+    },
+    {
+      "body_sha256": "1a60bc8fe942e79e1d0f096042ea1f1e04930228c28e155350643754521a7098",
+      "bytes": 20,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ACD86",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ACD72",
+      "symbol": "cff_parser_done"
+    },
+    {
+      "body_sha256": "25cb4dc57b336bee5c60ee9fbab82c038ced9a96480cb36aaef1683227b5b8c0",
+      "bytes": 120,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ACDFE",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ACD86",
+      "symbol": "cff_parse_integer"
+    },
+    {
+      "body_sha256": "2edb08950d9984d6ac4813ee01036d04d3f9cb050ce9bc49cae161cc3efd437a",
+      "bytes": 624,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD080",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ACE10",
+      "symbol": "cff_parse_real"
+    },
+    {
+      "body_sha256": "ab4ea8adb9d94b91cc9d9ec84b03c3c8e188cebffe6d1b4ff51a22fbaa9b6590",
+      "bytes": 74,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD0DA",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AD090",
+      "symbol": "cff_parse_num"
+    },
+    {
+      "body_sha256": "6215506830fdccffb3b35ce312d17bb32d9c47139abe07e1d29d08db77f007aa",
+      "bytes": 118,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD150",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AD0DA",
+      "symbol": "do_fixed"
+    },
+    {
+      "body_sha256": "68b47baecc997ac37055f3c95e534f9026d0c990b00467c97332593268bcd656",
+      "bytes": 10,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD15A",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AD150",
+      "symbol": "cff_parse_fixed"
+    },
+    {
+      "body_sha256": "5a27a7a7ef8a0542160fb212179e81f434cabaa36b6d9fb66f900b291b67f067",
+      "bytes": 8,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD162",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AD15A",
+      "symbol": "cff_parse_fixed_scaled"
+    },
+    {
+      "body_sha256": "e9f87acc03ec07eba6c91890547b0167754e65c5474e9a7521a73ee8621663a3",
+      "bytes": 130,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD1E4",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AD162",
+      "symbol": "cff_parse_fixed_dynamic"
+    },
+    {
+      "body_sha256": "57ae3911f5027d11e1f901b3202ea7f9cbb227b6f1df32335cab650e649a1258",
+      "bytes": 364,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD354",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AD1E8",
+      "symbol": "cff_parse_font_matrix"
+    },
+    {
+      "body_sha256": "b2dc78de624e5a368841fb16c16f10fbf8fb641da94162acd831e483b4f7e319",
+      "bytes": 90,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD3AE",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AD354",
+      "symbol": "cff_parse_font_bbox"
+    },
+    {
+      "body_sha256": "cb682107cbb76d34fc37ddc6b466abf5f8409eb491745cd6c350c2ac1e813076",
+      "bytes": 60,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD3EA",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AD3AE",
+      "symbol": "cff_parse_private_dict"
+    },
+    {
+      "body_sha256": "f08e2303ce23f6a26169c2da138e14d1c28705aa7bf1f6266b9688b2d6aed4bc",
+      "bytes": 70,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD430",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AD3EA",
+      "symbol": "cff_parse_multiple_master"
+    },
+    {
+      "body_sha256": "7194669453961f154dae8ca1aa6726ef1b1f9d9c35162ac3d94deb9ac9b2afd0",
+      "bytes": 74,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD47A",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AD430",
+      "symbol": "cff_parse_cid_ros"
+    },
+    {
+      "body_sha256": "abf8b94f1c53dba084821e6f267e45ce0d72bf765563eb3621521fb5dc406eae",
+      "bytes": 56,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD4B2",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AD47A",
+      "symbol": "cff_parse_vsindex"
+    },
+    {
+      "body_sha256": "b91c614da85beb0051f8d8e7bb00c70e27b5be1fdebbdcf212eb1a0ae14c4a1f",
+      "bytes": 110,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD520",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AD4B2",
+      "symbol": "cff_parse_blend"
+    },
+    {
+      "body_sha256": "073efee73343549ed40944f84d1bceec31716d6ee4c968a93216a856aa9c0fd5",
+      "bytes": 68,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD564",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AD520",
+      "symbol": "cff_parse_maxstack"
+    },
+    {
+      "body_sha256": "7e5698a112eac806f7aa6ed0f14bc75e1a2ce37112d2ae9e56a58a73f460da14",
+      "bytes": 486,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD74A",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffparse.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AD564",
+      "symbol": "cff_parser_run"
+    },
+    {
+      "body_sha256": "3f35cba77f5d28c038eea4bf5dbfef523929bbaaccee90b5adfddf25b31de9d7",
+      "bytes": 22,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD760",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AD74A",
+      "symbol": "cff_get_standard_encoding"
+    },
+    {
+      "body_sha256": "b3c2fca6cd25038c6820295bbcbfb50ad36a3aa2b65c939a7aacd6058628593b",
+      "bytes": 52,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD7AC",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AD778",
+      "symbol": "cff_index_read_offset"
+    },
+    {
+      "body_sha256": "86fcade6ffad93f59f7ffea496afb81916e07e6ac8dd8e6336d966347cf95299",
+      "bytes": 276,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD8C0",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AD7AC",
+      "symbol": "cff_index_init"
+    },
+    {
+      "body_sha256": "c0654bf341ef3cfa1060b9c2678e932f1e976676191a13da62593611a823ef86",
+      "bytes": 54,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD8F6",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AD8C0",
+      "symbol": "cff_index_done"
+    },
+    {
+      "body_sha256": "8fcdafbf96f0dd4cafd97a38cdfcc23b5837cae3599b351f00dd05335bf59062",
+      "bytes": 264,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AD9FE",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AD8F6",
+      "symbol": "cff_index_load_offsets"
+    },
+    {
+      "body_sha256": "37ac2582ea08b4664867df289fb5ab96531afa8ccd3658bda4fafe380674f34e",
+      "bytes": 328,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADB46",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AD9FE",
+      "symbol": "cff_index_get_pointers"
+    },
+    {
+      "body_sha256": "27d2c98d08fe9e0dbf1670763834e92ee3cd72b9231e447fbdf63547d94e869e",
+      "bytes": 264,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADC4E",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ADB46",
+      "symbol": "cff_index_access_element"
+    },
+    {
+      "body_sha256": "87ec8f48458fba9247b3c4d6f82430711f565db6936442fb6aabb8778f02476f",
+      "bytes": 16,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADC5E",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ADC4E",
+      "symbol": "cff_index_forget_element"
+    },
+    {
+      "body_sha256": "c0d94d581ba94a27631775de9aad1a0a46bfb3d1bf8cfe296a5364e50c3fad52",
+      "bytes": 104,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADCC6",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ADC5E",
+      "symbol": "cff_index_get_name"
+    },
+    {
+      "body_sha256": "4d7cef9bdd6f30c5e127dc76406b7b2fc32ed848dc4dde4ae80248499a8e06fa",
+      "bytes": 22,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADCDC",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ADCC6",
+      "symbol": "cff_index_get_string"
+    },
+    {
+      "body_sha256": "e58aa906a38d0c8cf2ede4a1614cd1dd22df74d0b99dc9c14af491c1190cad65",
+      "bytes": 62,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADD1A",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ADCDC",
+      "symbol": "cff_index_get_sid_string"
+    },
+    {
+      "body_sha256": "813fb25bc0df5aa0c9a29a022f2c6051c0ad8c8557ef4d1adc7312da7001cf36",
+      "bytes": 34,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADD3C",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ADD1A",
+      "symbol": "CFF_Done_FD_Select"
+    },
+    {
+      "body_sha256": "3cb702839cbc4cc2e55de0fcee766fd09b67de4bf40c9226744c6367a417b08f",
+      "bytes": 124,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADDB8",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ADD3C",
+      "symbol": "CFF_Load_FD_Select"
+    },
+    {
+      "body_sha256": "5961e0b1f6286a660da573c479f1d49634f7ff2d7f2ed24716e6af605dc35217",
+      "bytes": 120,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADE30",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ADDB8",
+      "symbol": "cff_fd_select_get"
+    },
+    {
+      "body_sha256": "783c8ff034d61bdfd6e5b579f6dcd10d845196db8c2fd24630d6f482b2aa4c20",
+      "bytes": 116,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADEA4",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ADE30",
+      "symbol": "cff_charset_compute_cids"
+    },
+    {
+      "body_sha256": "ba41a7ccb7ae1c617f4171fa4b8ff1b8f39759238b66ad607673f943c1215cec",
+      "bytes": 18,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADEB6",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ADEA4",
+      "symbol": "cff_charset_cid_to_gindex"
+    },
+    {
+      "body_sha256": "07aee609d5aaca46f8b45d3d3d19662a5f4b3bb79d7bb99c8a4a0334236fc7c0",
+      "bytes": 22,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADECC",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ADEB6",
+      "symbol": "cff_charset_free_cids"
+    },
+    {
+      "body_sha256": "955e075fdc4d7cfbf631300c17e099899994693493457a56ab61d04b571464bf",
+      "bytes": 36,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005ADEF0",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005ADECC",
+      "symbol": "cff_charset_done"
+    },
+    {
+      "body_sha256": "bb5bb636a3ea5fad6f60cf03c7ef29e135e4d9586da39dc7bbe4d910d8d9568d",
+      "bytes": 544,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AE110",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005ADEF0",
+      "symbol": "cff_charset_load"
+    },
+    {
+      "body_sha256": "1ab383484804f69954ab9f3109d8426d7c69a26334f098a6d7c412fab98f00d1",
+      "bytes": 112,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AE188",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AE118",
+      "symbol": "cff_vstore_done"
+    },
+    {
+      "body_sha256": "3e523d0d28d8123bac6fb08ad608a092e3f31c1d2efab9d8b94ed701a7c389fc",
+      "bytes": 676,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AE42C",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AE188",
+      "symbol": "cff_vstore_load"
+    },
+    {
+      "body_sha256": "54ccb41845a9c9c032c74f3126dddf97bc36de71dba4164d69fddfd444da8794",
+      "bytes": 16,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AE43C",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AE42C",
+      "symbol": "cff_blend_clear"
+    },
+    {
+      "body_sha256": "476e7b54c7ebe261e5fe8c3fd9c535c1b3415fb5e7352609a3bcadf07d819dee",
+      "bytes": 436,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AE5F0",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AE43C",
+      "symbol": "cff_blend_doBlend"
+    },
+    {
+      "body_sha256": "98d3163daf88fcd704ed560355a28a3dde10ab139968e55b8ee543263d37d0e5",
+      "bytes": 460,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AE7BC",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AE5F0",
+      "symbol": "cff_blend_build_vector"
+    },
+    {
+      "body_sha256": "81f990ee5950b9a687b8dbf2bba562c492c79a5cc766a22f0995558172d2be5d",
+      "bytes": 46,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AE7EA",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AE7BC",
+      "symbol": "cff_blend_check_vector"
+    },
+    {
+      "body_sha256": "5cf17f26e30f357bcbcd4e947682bed302e44487535f35b76eb35af18fc48e9b",
+      "bytes": 16,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AE7FA",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AE7EA",
+      "symbol": "cff_get_var_blend"
+    },
+    {
+      "body_sha256": "5a84e99f3b092f736b3310319f3acef73a57c54bb24ca69ec90b57bd7e17170f",
+      "bytes": 16,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AE80A",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AE7FA",
+      "symbol": "cff_done_blend"
+    },
+    {
+      "body_sha256": "85f70c6bbffd82fd0f7349d91ea89c0999bc2cd574ad7ac1cac34ce05b23ddba",
+      "bytes": 14,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AE818",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AE80A",
+      "symbol": "cff_encoding_done"
+    },
+    {
+      "body_sha256": "ad473332ef7cf560b6b451fd09b2617b0a4aa18671ee838baaa5196329efa7ab",
+      "bytes": 632,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AEA90",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AE818",
+      "symbol": "cff_encoding_load"
+    },
+    {
+      "body_sha256": "db504d715df3597d075204ed4bf38f45f7d926741ac76ba8eef994ce644f6c10",
+      "bytes": 342,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AEBE6",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AEA90",
+      "symbol": "cff_load_private_dict"
+    },
+    {
+      "body_sha256": "bd417f0bb51e0395b3bc94808639abd864dbfafe3080034832c6332c12df96b3",
+      "bytes": 564,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AEE28",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AEBF4",
+      "symbol": "cff_subfont_load"
+    },
+    {
+      "body_sha256": "90c838c764d713058c6dc5867882d625c291f53148bc29d4a215ff2b43e476fc",
+      "bytes": 84,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AEE7C",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AEE28",
+      "symbol": "cff_subfont_done"
+    },
+    {
+      "body_sha256": "6211cc5064cbb2563178720075048c8c4904f745f228cd67f873fa96148cef04",
+      "bytes": 1116,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF2D8",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AEE7C",
+      "symbol": "cff_font_load"
+    },
+    {
+      "body_sha256": "f0da6cfae0409d4a7e9dfd552bb24afd8da0c25a82a00477b4bf48a8450460a6",
+      "bytes": 270,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF3E6",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffload.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AF2D8",
+      "symbol": "cff_font_done"
+    },
+    {
+      "body_sha256": "9c1a249c3c696578f836b007c342f257eb15cdcba1b29822995248d15f8646e2",
+      "bytes": 50,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF418",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AF3E6",
+      "symbol": "cff_size_get_globals_funcs"
+    },
+    {
+      "body_sha256": "ad2fef1e024ef561586923375672b104f64fdd7de58fb3dc76052e7a69dcc5fc",
+      "bytes": 72,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF468",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AF420",
+      "symbol": "cff_size_done"
+    },
+    {
+      "body_sha256": "1adab03c778dc8b261937ca363d3c90f1517f791368cc5e6da24d0fc8b028b14",
+      "bytes": 270,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF576",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AF468",
+      "symbol": "cff_make_private_dict"
+    },
+    {
+      "body_sha256": "08ed37d2788ded0467a725cd7dd5134b9bcc540d2e61e50777e06cf8d28d5c86",
+      "bytes": 160,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF616",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AF576",
+      "symbol": "cff_size_init"
+    },
+    {
+      "body_sha256": "fe1680a311aab36596980209720f78288e7785861085890b43e2f98fa45d3d8a",
+      "bytes": 146,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF6A8",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AF616",
+      "symbol": "cff_size_select"
+    },
+    {
+      "body_sha256": "8b84896660dc4b6063e54cb1222ca43e9694d107b695cf5f8349ccc009912805",
+      "bytes": 190,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF766",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AF6A8",
+      "symbol": "cff_size_request"
+    },
+    {
+      "body_sha256": "03fb60bae3ceea234ef03fc6b50c3df9418ccb9bef6a8a91cf13e58b3bfd030c",
+      "bytes": 10,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF770",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AF766",
+      "symbol": "cff_slot_done"
+    },
+    {
+      "body_sha256": "db70b105067a198a064e04cf94c80f3f35153291de5637fe45d3a664324b0b11",
+      "bytes": 50,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF7A2",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005AF770",
+      "symbol": "cff_slot_init"
+    },
+    {
+      "body_sha256": "e75ae217b3ce9117e9243622c71491dfe0557bf685bc72b3208b5f4d512721af",
+      "bytes": 24,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF7CC",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AF7B4",
+      "symbol": "cff_strcpy"
+    },
+    {
+      "body_sha256": "6efe3a99eca76372e249a2d3e85a68792cb712d2078f98a33f55223ca1de66d1",
+      "bytes": 92,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF828",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AF7CC",
+      "symbol": "remove_subset_prefix"
+    },
+    {
+      "body_sha256": "cf781cc01689ff9415a1730a67aafacfa55817b205825170af96a39ba730f98f",
+      "bytes": 100,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005AF88C",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AF828",
+      "symbol": "remove_style"
+    },
+    {
+      "body_sha256": "448e9d7671c724fe85f75a59274450975c44b3a30837b0082f9b247cd2c5a35c",
+      "bytes": 1912,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005B0004",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "pinned-ghidra-source-order-call-semantics",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": true,
+      "start": "0x005AF88C",
+      "symbol": "cff_face_init"
+    },
+    {
+      "body_sha256": "94384a9f12c0cef0ff05384a6732fb44b93dcdfd84efbd8b9a220a628704e041",
+      "bytes": 66,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005B004A",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005B0008",
+      "symbol": "cff_face_done"
+    },
+    {
+      "body_sha256": "45a70c377d9169a6d25830e3ea2285e10ee4801318e1c2889d1534a6b93cd2ba",
+      "bytes": 122,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005B00C4",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005B004A",
+      "symbol": "cff_driver_init"
+    },
+    {
+      "body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+      "bytes": 2,
+      "compiler_byte_identity_claimed": false,
+      "confidence": "high",
+      "end_exclusive": "0x005B0112",
+      "identity_corroboration": [
+        "exact-official-body-hash",
+        "pinned-freetype-2.9.1-definition-and-source-order",
+        "call-service-parser-table-or-thumb-semantics"
+      ],
+      "mapping_origin": "authenticated-table-source-order-thumb-boundary",
+      "module": "cffobjs.c",
+      "present_in_narrow_candidate": false,
+      "start": "0x005B0110",
+      "symbol": "cff_driver_done"
+    }
+  ],
+  "image": {
+    "bytes": 3523396,
+    "run_address_rule": "run = file_offset + 0x00437FE0",
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+  },
+  "mapping_sha256": "16761c056d968c5c4847c918d5a4d04a1a5a7fb883f125e833054f3762b7266e",
+  "physical_residue": [
+    {
+      "bytes": 8,
+      "callable": false,
+      "category": "literal-pointer-data-pool",
+      "end_exclusive": "0x005AC5F0",
+      "sha256": "8794af1f195f1191a18e886580673ca9e27009736c4ca7381adf9774b9e400d4",
+      "start": "0x005AC5E8"
+    },
+    {
+      "bytes": 6,
+      "callable": false,
+      "category": "literal-pointer-data-pool",
+      "end_exclusive": "0x005ACD08",
+      "sha256": "bec0b850f2b4fdd32b68f56dab3bbcd13f1ef527c113690eddef7f0fe53842bd",
+      "start": "0x005ACD02"
+    },
+    {
+      "bytes": 18,
+      "callable": false,
+      "category": "literal-pointer-data-pool",
+      "end_exclusive": "0x005ACE10",
+      "sha256": "dfaa060b1862c82fb832072db1abb32809fa0bbee2be458568ff2a67e998ae0a",
+      "start": "0x005ACDFE"
+    },
+    {
+      "bytes": 16,
+      "callable": false,
+      "category": "literal-pointer-data-pool",
+      "end_exclusive": "0x005AD090",
+      "sha256": "1cd4cdde27ecc08cb44333fa1608793863c07f6de7ee10599ca4ca20d0763919",
+      "start": "0x005AD080"
+    },
+    {
+      "bytes": 4,
+      "callable": false,
+      "category": "literal-pointer-data-pool",
+      "end_exclusive": "0x005AD1E8",
+      "sha256": "9471931ae99ff0cfd3f6af4b4e1f26e547bd64e969836e3bda46345005e73352",
+      "start": "0x005AD1E4"
+    },
+    {
+      "bytes": 24,
+      "callable": false,
+      "category": "literal-pointer-data-pool",
+      "end_exclusive": "0x005AD778",
+      "sha256": "d32e5d790d025a61912f4ebc1b452ab2a1ca7c71b0fb1a6bd826d31450c95921",
+      "start": "0x005AD760"
+    },
+    {
+      "bytes": 8,
+      "callable": false,
+      "category": "literal-pointer-data-pool",
+      "end_exclusive": "0x005AE118",
+      "sha256": "38903642c518e48190623d5c451842a4709987f888b33ece29a4f3c054d384a9",
+      "start": "0x005AE110"
+    },
+    {
+      "bytes": 14,
+      "callable": false,
+      "category": "literal-pointer-data-pool",
+      "end_exclusive": "0x005AEBF4",
+      "sha256": "17e867d77afa602e9e42c18a35e5e725a677a06e21bf241741fd2e7d39565e41",
+      "start": "0x005AEBE6"
+    },
+    {
+      "bytes": 8,
+      "callable": false,
+      "category": "literal-pointer-data-pool",
+      "end_exclusive": "0x005AF420",
+      "sha256": "02bcacc3ed57032b14b11544bd64dc72f92d5836996d150e2332a4e10f1b818e",
+      "start": "0x005AF418"
+    },
+    {
+      "bytes": 18,
+      "callable": false,
+      "category": "literal-pointer-data-pool",
+      "end_exclusive": "0x005AF7B4",
+      "sha256": "b1f424b21b7f0bff6a308a074c56a31459c9ed3aedc7f494ccdc585be0226dfc",
+      "start": "0x005AF7A2"
+    },
+    {
+      "bytes": 4,
+      "callable": false,
+      "category": "literal-pointer-data-pool",
+      "end_exclusive": "0x005B0008",
+      "sha256": "305a08ebb88f122163cd5ec75ce506fd9bb7c62971f43462dac455db460f35da",
+      "start": "0x005B0004"
+    },
+    {
+      "bytes": 76,
+      "callable": false,
+      "category": "literal-pointer-data-pool",
+      "end_exclusive": "0x005B0110",
+      "sha256": "a323d73bccfd7cac164c79ec228b2497645f16664af02aaff2dbd555e48ff04b",
+      "start": "0x005B00C4"
+    },
+    {
+      "bytes": 2,
+      "callable": false,
+      "category": "alignment-padding",
+      "end_exclusive": "0x005B0114",
+      "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "start": "0x005B0112"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "callable_bytes": 16718,
+    "envelope_end_exclusive": "0x005B0114",
+    "envelope_start": "0x005ABEF8",
+    "module": "cff",
+    "physical_bytes": 16924,
+    "residual_physical": {
+      "bytes": 206,
+      "category_bytes": {
+        "alignment-padding": 2,
+        "literal-pointer-data-pool": 204
+      },
+      "intervals": 13,
+      "unclassified_bytes": 0,
+      "unresolved_callable_bytes": 0
+    }
+  },
+  "source_inventory": {
+    "files": 6,
+    "inventory_sha256": "cfea356c6c42883c0e1dcfc7230a45f8e512e7d2828558fad15276110190a3ea",
+    "sha256_by_path": {
+      "src/cff/cffcmap.c": "341757512521d2a509ae85a298a33e748c0f61fad8dbcbf175d44f379953b0d1",
+      "src/cff/cffdrivr.c": "97b79d9ee982bce110ce9ac0b4aeeb7599e3a02e5b8d1cd80babffb8405bdbfb",
+      "src/cff/cffgload.c": "f3ede2b81f654f0c95dc5cf67e8f6962ceb68aa4e6c096c4ab1b81b57c29cd8f",
+      "src/cff/cffload.c": "f8ec69b219bfd0ced42da86e57448482d363d533934325fdeb287362f769b232",
+      "src/cff/cffobjs.c": "5f36ebf06afbacda76cab4b4913ced754112fe1c35deb96276bd8c8f0cd73d7a",
+      "src/cff/cffparse.c": "c8818be29c81cafbdf6f395fea4918610701ac3168a67af8e6887c5145eef4fa"
+    }
+  },
+  "status": "g2-freetype-cff-callable-physical-closure",
+  "upstream": {
+    "commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+    "license": "FTL",
+    "tag": "VER-2-9-1",
+    "version": "2.9.1"
+  }
+}

@@ -220,8 +220,8 @@ def analyze(*, enforce_expected=True):
                 "unimplemented_application_contracts_after"],
             "typed_external_or_unavailable_functions": 12,
         },
-        "hardware_validation": "deferred by project direction",
-        "hardware_blocker": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "hardware_blocker": "blocked by unavailable physical evidence",
         "exclusions": "all EULA bodies, product main loop, resident table loaders, unresolved pointer-table implementations, system handoff, and halt remain unadmitted",
     }
 

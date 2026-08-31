@@ -52,10 +52,10 @@ class PbServiceHealthCandidateTests(unittest.TestCase):
 
     def test_source_is_pinned(self) -> None:
         data = SOURCE.read_bytes()
-        self.assertEqual(len(data), 12366)
+        self.assertEqual(len(data), 12357)
         self.assertEqual(
             hashlib.sha256(data).hexdigest(),
-            "2a5faf89b2fc881b8ae2a19a28f1a2ba780fb7776939c5a560879f1c8791b6d6",
+            "e66df409c7cf62ff50563a6cade81c7ebc2c0759094e611b92660c46765cb795",
         )
 
 

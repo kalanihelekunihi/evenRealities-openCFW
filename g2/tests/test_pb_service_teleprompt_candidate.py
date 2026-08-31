@@ -61,10 +61,10 @@ class PbServiceTelepromptCandidateTests(unittest.TestCase):
 
     def test_source_is_pinned(self) -> None:
         data = SOURCE.read_bytes()
-        self.assertEqual(len(data), 13441)
+        self.assertEqual(len(data), 13432)
         self.assertEqual(
             hashlib.sha256(data).hexdigest(),
-            "d1f308195a7076fe41043f0cea8b70a6b1d9250dabb962f6b05285120c616c68",
+            "403c917e094485afa896a3559bc5fcd8e32dfa234fc5534e168c400fda54fc74",
         )
 
 

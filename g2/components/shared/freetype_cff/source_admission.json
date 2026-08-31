@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "component": "g2-freetype-cff",
+  "license": "FTL",
+  "upstream": {
+    "version": "2.9.1",
+    "tag": "VER-2-9-1",
+    "commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+    "snapshot_verifier": "third_party/freetype/verify_snapshot.py"
+  },
+  "retained_evidence": {
+    "closures": [
+      "apollo-opacity-wave11",
+      "apollo-opacity-wave14"
+    ],
+    "functions": 47,
+    "bytes": 12062,
+    "cff_functions": 38,
+    "cff_bytes": 11326,
+    "base_support_functions": 9,
+    "base_support_bytes": 736
+  },
+  "complete_map": {
+    "functions": 101,
+    "callable_bytes": 16718,
+    "physical_bytes": 16924,
+    "physical_residue_bytes": 206,
+    "unresolved_callable_bytes": 0,
+    "mapping_sha256": "16761c056d968c5c4847c918d5a4d04a1a5a7fb883f125e833054f3762b7266e"
+  },
+  "source_inventory": {
+    "cff_files": 17,
+    "cff_source_bytes": 269028
+  },
+  "build": {
+    "community_source": true,
+    "software_verification_target": "freetype-cff-source-closure",
+    "cortex_m55_compile_and_link_gate": "tests.test_runtime_target_provider_candidate",
+    "production_overlay": false,
+    "authenticated_stock_policy_callsite_recovered": false,
+    "authenticated_target_placement": false,
+    "target_compile": {
+      "translation_units": [
+        "src/cff/cff.c"
+      ],
+      "target": "arm-none-eabi/cortex-m55/thumb/hard-float",
+      "warnings_as_errors": true,
+      "short_enums": true
+    },
+    "production_overlay_gate": "requires pinned IAR-compatible code generation, relocation and link placement plus payload, stack and WCET qualification"
+  },
+  "policy": {
+    "hinting_engine": "Adobe only; old CFF engine excluded",
+    "stem_darkening_boolean": "0 or 1",
+    "darkening_parameters": "eight integers; non-negative monotonic X and Y in [0,500]"
+  },
+  "hardware_validation": {
+    "performed": false,
+    "blocker": "no authorized physical G2 hardware or authenticated external CFF font payload was supplied to this software-only tranche"
+  }
+}

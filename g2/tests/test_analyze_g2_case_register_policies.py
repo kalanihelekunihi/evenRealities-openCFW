@@ -47,7 +47,7 @@ class CaseRegisterPolicyAdmissionTests(unittest.TestCase):
         self.assertTrue(self.result["software_source_complete"])
         self.assertFalse(self.result["production_routed"])
         self.assertEqual(self.result["hardware_validation"],
-                         "deferred by project direction")
+                         "blocked by unavailable physical evidence")
         self.assertEqual(self.result["hardware_operations"], [])
         self.assertEqual(self.result["production_files_modified"], [])
 

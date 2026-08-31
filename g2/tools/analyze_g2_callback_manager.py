@@ -31,8 +31,8 @@ PINS = {
     PM: "f852dd3ba7e7ad36fd58cce9bf7aa3469d3bedca2c176491a85e9791df9a8ab2",
     PV: "1b1816a1d20381bd6726ed81ab84247a689971ea9f4d91fd857891ae2c45ad96",
 }
-SOURCE_SIZE = 6461
-SOURCE_SHA256 = "a38f47ee52c54c6117716553a039917b15c8f8c7f2674d9d5d751d23cb4040f9"
+SOURCE_SIZE = 6452
+SOURCE_SHA256 = "b1602b5dc9a1a02d2d4627593a0e202ec8a846f75981c8dbe560ef8a011de143"
 PRODUCTION_FUNCTIONS = (
     "open_cfw_callback_mgr_create", "open_cfw_callback_mgr_delete",
     "open_cfw_callback_mgr_init", "open_cfw_callback_mgr_deinit",
@@ -185,7 +185,7 @@ def analyze(image: Path = IMAGE) -> dict:
     if set(leaves) != set(PRODUCTION_FUNCTIONS):
         raise c.AuditError("production callback-manager leaf inventory changed")
     expected_sizes = (22, 10, 22, 40, 70, 66, 130, 48)
-    expected_offsets = (252916, 252940, 252952, 252976, 253016, 253088, 253156, 253288)
+    expected_offsets = (193068, 193092, 193104, 193128, 193168, 193240, 193308, 193440)
     if any(
         leaf["source"].get("path")
         != "components/apollo_main/core_overlay/callback_manager.c"

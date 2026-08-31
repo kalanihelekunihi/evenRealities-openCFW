@@ -64,7 +64,7 @@ UPSTREAM_SHA256 = (
     "e7b484446a0f48d1050b95e60925088e"
 )
 PROVENANCE_SHA256 = (
-    "44c588de6dec4ed3397fa6f942cfef3dc0fdb707742be73a0c8a4d78fd0ca9d0"
+    "8d8b17dfdd485f83334df11333729e426c9b7d0ef41dade2502cf2870e1d2a94"
 )
 UPSTREAM_COMMIT = "0494ce7169f06a734a7bd7585f49a9fa91fa7318"
 UPSTREAM_TREE = "06dd0162169d3cb550cd24a3e34d0e4d02983ad3"
@@ -290,19 +290,22 @@ EXPECTED_FUNCTION_OFFSETS = {
 }
 EXPECTED_AGGREGATE = {
     "main": {
-        "overlay_size": 429_058,
+        "overlay_size": 360_578,
         "overlay_sha256": (
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
         ),
-        "component_size": 3_952_454,
+        "component_size": 3_883_974,
         "component_sha256": (
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
         ),
-        "text_size": 163_862,
-        "rodata_size": 9_572,
+        "stage_component_sha256": (
+            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
+        ),
+        "text_size": 109_592,
+        "rodata_size": 3_996,
         "isolated_text_size": 140,
-        "isolated_padding_size": 6,
-        "resolved_relocation_count": 989,
+        "isolated_padding_size": 4,
+        "resolved_relocation_count": 906,
     },
     "boot": {
         "overlay_size": 15_240,
@@ -311,7 +314,7 @@ EXPECTED_AGGREGATE = {
         ),
         "component_size": 163_840,
         "component_sha256": (
-            "8f24989979719b4c9f1273624240ba702a99decf735d099bfee1afcda16159e0"
+            "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad"
         ),
         "text_size": 204,
         "rodata_size": 0,
@@ -433,9 +436,19 @@ class RuntimeLittlefsUtilTests(unittest.TestCase):
         cls.production_reports = {}
         cls.production_overlays = {}
         if cls.production_ready:
+            stage_config = json.loads(MAIN_CONFIG.read_text(encoding="utf-8"))
+            stage_config["expected"] = stage_config["core_stage_expected"]
+            for profile in stage_config.get("toolchain_profiles", {}).values():
+                if "core_stage_expected" in profile:
+                    profile["expected"] = profile["core_stage_expected"]
+            stage_config_path = temporary / "main-stage-overlay.json"
+            stage_config_path.write_text(
+                json.dumps(stage_config, indent=2) + "\n",
+                encoding="utf-8",
+            )
             main_report = apollo_overlay.build(
                 root=ROOT,
-                config_path=MAIN_CONFIG,
+                config_path=stage_config_path,
                 output_dir=temporary / "main-component",
                 clang=os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
             )
@@ -611,7 +624,7 @@ class RuntimeLittlefsUtilTests(unittest.TestCase):
         ):
             self.assertIn(expression, upstream)
 
-        self.assertEqual(len(PROVENANCE.read_bytes()), 46478)
+        self.assertEqual(len(PROVENANCE.read_bytes()), 47_240)
         self.assertEqual(sha256(PROVENANCE.read_bytes()), PROVENANCE_SHA256)
         provenance = json.loads(PROVENANCE.read_text(encoding="utf-8"))
         self.assertEqual(provenance["license"], "BSD-3-Clause")
@@ -1040,7 +1053,10 @@ class RuntimeLittlefsUtilTests(unittest.TestCase):
                 )
                 self.assertEqual(
                     report["component"]["sha256"],
-                    aggregate["component_sha256"],
+                    aggregate.get(
+                        "stage_component_sha256",
+                        aggregate["component_sha256"],
+                    ),
                 )
                 link = report["overlay"]["link"]
                 for key in (

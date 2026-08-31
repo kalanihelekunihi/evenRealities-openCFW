@@ -16,6 +16,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 COMPONENT = ROOT / "components" / "apollo_main" / "core_overlay"
 SOURCE = COMPONENT / "runtime_vsnprintf.c"
+ENGINE_SOURCE = (
+    ROOT / "components/shared/runtime/runtime_iar_vsnprintf_engine.c"
+)
 FIXTURE = ROOT / "tests" / "fixtures" / "runtime_vsnprintf_host.c"
 OFFICIAL = (
     ROOT
@@ -823,9 +826,24 @@ class RuntimeVsnprintfTests(unittest.TestCase):
             "runtime_strnlen_s.c",
             "runtime_etoa.c",
             "runtime_ftoa.c",
-            "runtime_vsnprintf.c",
+            "runtime_iar_vsnprintf_engine.c",
         ):
             self.assertIn(dependency, fixture)
+
+    def test_production_specialization_uses_relocation_safe_self_dispatch(
+        self,
+    ) -> None:
+        engine = ENGINE_SOURCE.read_text()
+        self.assertIn(
+            "#define OPEN_CFW_RUNTIME_VSNPRINTF_FUNCTION \\\n    open_cfw_runtime_iar_vsnprintf_engine",
+            engine,
+        )
+        self.assertNotIn("OPEN_CFW_RUNTIME_VSNPRINTF_RECURSE_ADDRESS", engine)
+        self.assertNotIn("0x007F7060", engine)
+        self.assertIn(
+            '#include "../../apollo_main/core_overlay/runtime_vsnprintf.c"',
+            engine,
+        )
 
 
 if __name__ == "__main__":

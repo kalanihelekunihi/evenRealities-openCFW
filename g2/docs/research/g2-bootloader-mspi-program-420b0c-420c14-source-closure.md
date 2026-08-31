@@ -1,5 +1,10 @@
 # G2 bootloader MX25U25643G page-program source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The complete authenticated page-program function `[0x00420B0C,0x00420C14)`
 is now routed to compilable clean-room C. The 264-byte stock body has SHA-256
 `dcaf2a13af5fb811c228b4845363682411abf1acab703507368f6d1e4463b15e`.

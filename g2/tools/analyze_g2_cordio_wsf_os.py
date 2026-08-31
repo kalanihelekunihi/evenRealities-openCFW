@@ -63,11 +63,11 @@ FILE_HASHES = {
     MATRIX_BEST: "d6eddd6b685e16a9177dd5fea63d66895119df5cea581c398b79d7118c391811",
     MATRIX_SOURCE: "d166324a7b6b291e1bae593caf5bb0b03bdf0e68833342c8f57ae646a92ac6e2",
     MATRIX_PROVIDERS: "e99bc73d7bf500a51a32fd0639d3ff42977aabb4f667697b6ca35caaadc539c0",
-    MATRIX_MANIFEST: "0636c55d2ec637d32f6833df404c259299efae41b8dcf1ac25267de21da67861",
-    CANDIDATE_OS_C: "66d8e2a0a06b4ea89c3779b32b1f7bad7522d2fd7d1a3e1134b6c680fc12508e",
-    CANDIDATE_OS_H: "5e3480211cee74bbfc2ae5bdfe9c281be3a933dc09ee8f775b9bf05830c2baf5",
-    CANDIDATE_QUEUE_C: "909db5407f72c0b56b5a50605b142dbb461585f342a397c7acf4a6dbc703d6fa",
-    CANDIDATE_QUEUE_H: "19e85f58cfb3329ee3cf6dfe104f8138dc89ffd30dc648ea06f9c467eac2edb1",
+    MATRIX_MANIFEST: "0636c55d2ec637d32f6833df404c259299efae41b8dcf1ac25226de21da67861",
+    CANDIDATE_OS_C: "b5e06661616d083661894394f89c2e7dd8039afde238e9400148208f4b44c60a",
+    CANDIDATE_OS_H: "6301598c71dc1e8cea215173d1810669d85abb0732ab3b44ba63816a823dbef5",
+    CANDIDATE_QUEUE_C: "da33f0b38236af81b4aa33b91c5c785e52b5b81867820c4877b9b87c417eec4e",
+    CANDIDATE_QUEUE_H: "e64b75cb6d2d7d26ad9db3f1bebe4ef4d3b1b0c33e684160ac115b37d57d42ed",
 }
 
 OS_PRODUCTION_FUNCTIONS = [
@@ -296,11 +296,11 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
     for unit, source, prefix, mapped, names, first_offset, expected_metrics in (
         (
             "wsf_os", CANDIDATE_OS_C, "replace_cordio_wsf_os_", os_rows,
-            OS_PRODUCTION_FUNCTIONS, 334020, (614, 10, 25),
+            OS_PRODUCTION_FUNCTIONS, 265540, (614, 10, 25),
         ),
         (
             "wsf_queue", CANDIDATE_QUEUE_C, "replace_cordio_wsf_queue_",
-            queue_rows, QUEUE_PRODUCTION_FUNCTIONS, 334644, (272, 4, 16),
+            queue_rows, QUEUE_PRODUCTION_FUNCTIONS, 266164, (272, 4, 16),
         ),
     ):
         source_path = source.relative_to(ROOT).as_posix()
@@ -428,7 +428,7 @@ def analyze(corpus_root: Path, image: Path = IMAGE) -> dict[str, Any]:
             "the exact G2 definition site producing WSF_MAX_HANDLERS=10 is unavailable; a later official Ambiq source differs from R2.5.1 only by changing the guarded default from 9 to 10",
             "WsfQueueEmpty has no independently bounded linked stock body and is excluded from recovered-byte coverage",
             "all eighteen bounded functions are guarded-routed from maintained C; WsfQueueEmpty remains source-only because no independent stock body exists",
-            "live controller scheduling, ISR wake behavior, handler ordering, and sleep/wakeup remain deferred by project direction; future qualification requires authorized physical evidence",
+            "live controller scheduling, ISR wake behavior, handler ordering, and sleep/wakeup remain blocked by unavailable physical evidence; future qualification requires authorized physical evidence",
         ],
     }
 

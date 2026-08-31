@@ -1,5 +1,10 @@
 # G2 bootloader TLSF request-size and class-mapping source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 ## Result
 
 The three complete authenticated entries at `[0x00416BCE,0x00416C4E)` now route to compilable freestanding C in `components/bootloader/core_overlay/runtime_tlsf_mapping_416bce.c`. The 3,464-byte source file has SHA-256 `4c7c107d4e9d1d2cf06e5a80fb497ed17195adeb9a9a3b4052fae42b8ddee2f2` and is a bounded BSD-3-Clause adaptation of Matthew Conte TLSF v3.1 for the recovered G2 ILP32 allocator configuration.

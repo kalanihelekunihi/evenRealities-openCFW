@@ -87,6 +87,15 @@ TARGET_FLAGS = [
     "-Wextra",
     "-Werror",
 ]
+HERMETIC_APPLE_FLAG_PREFIX = [
+    "--no-default-config",
+    "-nostdinc",
+    "-isystem",
+    (
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/"
+        "XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+    ),
+]
 
 PRODUCTION_SOURCE = {
     "path": (
@@ -114,9 +123,9 @@ PRODUCTION_TOOLCHAIN = {
 }
 PRODUCTION_TOOLCHAIN_REPORT = {
     "executable": os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
-    "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)",
+    "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
     "target": "arm-none-eabi",
-    "flags": TARGET_FLAGS[1:],
+    "flags": HERMETIC_APPLE_FLAG_PREFIX + TARGET_FLAGS[1:],
 }
 
 STOCK = {
@@ -443,12 +452,20 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
         cls.package = package
         cls.application = package[PACKAGE_PREAMBLE_SIZE:]
         cls.production_config = json.loads(CONFIG.read_text(encoding="utf-8"))
+        stage_config = json.loads(CONFIG.read_text(encoding="utf-8"))
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = Path(cls.temporary.name) / "core-stage-overlay.json"
+        stage_config_path.write_text(json.dumps(stage_config), encoding="utf-8")
+        cls.production_config = stage_config
         cls.production_output = (
             Path(cls.temporary.name) / "production-component"
         )
         cls.production_report = apollo_overlay.build(
             root=ROOT,
-            config_path=CONFIG,
+            config_path=stage_config_path,
             output_dir=cls.production_output,
             clang=os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
         )
@@ -782,26 +799,32 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
     ) -> None:
         config = self.production_config
         report = self.production_report
-        self.assertEqual(
-            config["in_place_leaves"],
-            PRODUCTION_IN_PLACE_RECORDS,
-        )
+        configured_leaves = [
+            leaf
+            for leaf in config["in_place_leaves"]
+            if leaf["function"] in STOCK
+        ]
+        self.assertEqual(configured_leaves, PRODUCTION_IN_PLACE_RECORDS)
         self.assertEqual(report["base"], config["base"])
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 429058,
+                "overlay_size": 360578,
                 "overlay_sha256": (
-                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+                    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
                 ),
-                "component_size": 3952454,
+                "component_size": 3883974,
                 "component_sha256": (
-                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+                    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
                 ),
             },
         )
 
-        built_leaves = report["in_place_leaves"]
+        built_leaves = [
+            leaf
+            for leaf in report["in_place_leaves"]
+            if leaf["extraction"]["function"] in STOCK
+        ]
         self.assertEqual(
             [
                 leaf["extraction"]["function"]
@@ -918,12 +941,12 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                 "patch_site_count": len(overlay["patched_sites"]),
             },
             {
-                "size": 429058,
+                "size": 360578,
                 "sha256": (
-                    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+                    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
                 ),
-                "function_count": 2_631,
-                "patch_site_count": 2_374,
+                "function_count": 2_436,
+                "patch_site_count": 2_324,
             },
         )
         self.assertTrue(set(STOCK).isdisjoint(overlay["functions"]))
@@ -938,16 +961,18 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                     Path(self.production_output)
                     / "ota_s200_firmware_ota.bin"
                 ).relative_to(ROOT).as_posix(),
-                "size": 3952454,
+                "size": 3883974,
                 "sha256": (
-                    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+                    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
                 ),
-                "opaque_base_bytes": 3_111_914,
-                "source_owned_bytes": 431_334,
+                "opaque_base_bytes": 3_123_534,
+                "source_owned_bytes": 362_962,
                 "source_owned_in_place_bytes": 184,
+                "source_owned_in_place_data_bytes": 2_200,
                 "generated_wrapper_bytes": 32,
-                "generated_patch_site_bytes": 409_066,
-                "replaced_stock_function_bytes": 409_246,
+                "generated_patch_site_bytes": 397_446,
+                "replaced_stock_function_bytes": 397_626,
+                "replaced_stock_data_bytes": 2_200,
             },
         )
         self.assertEqual(
@@ -968,15 +993,20 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
             )
             replacement = bytes.fromhex(site["replacement_hex"])
             reconstructed[offset:offset + len(replacement)] = replacement
-        for leaf in built_leaves:
+        # Reconstruct the complete current core stage.  The NTZ records above
+        # are the subject of this test, but other independently admitted
+        # in-place leaves (for example Cordio closures) are part of the same
+        # production component and must not be silently omitted here.
+        for leaf in report["in_place_leaves"]:
             placement = leaf["placement"]
             offset = int(placement["payload_offset"])
             replacement = bytes.fromhex(placement["replacement_hex"])
-            self.assertEqual(
-                self.package[offset:offset + len(replacement)],
-                replacement,
-                placement["function"],
-            )
+            if leaf["extraction"]["function"] in STOCK:
+                self.assertEqual(
+                    self.package[offset:offset + len(replacement)],
+                    replacement,
+                    placement["function"],
+                )
             reconstructed[offset:offset + len(replacement)] = replacement
         reconstructed.extend(self.production_overlay)
         package_length_word = (
@@ -1022,8 +1052,22 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                 )
                 if official != generated
             )
+        for leaf in report["in_place_leaves"]:
+            placement = leaf["placement"]
+            offset = int(placement["payload_offset"])
+            replacement = bytes.fromhex(placement["replacement_hex"])
+            expected_mutations.update(
+                offset + index
+                for index, (official, generated) in enumerate(
+                    zip(
+                        self.package[offset:offset + len(replacement)],
+                        replacement,
+                    )
+                )
+                if official != generated
+            )
         self.assertEqual(actual_mutations, expected_mutations)
-        self.assertEqual(len(actual_mutations), 114981)
+        self.assertEqual(len(actual_mutations), 379467)
 
         vector_start = PACKAGE_PREAMBLE_SIZE
         self.assertEqual(

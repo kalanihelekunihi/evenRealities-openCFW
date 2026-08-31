@@ -188,11 +188,11 @@ class AeabiDivmodTests(unittest.TestCase):
     def test_sources_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "508d1bd1dab717af2671d28af08f0b7e8368fb2b99bb22edecd4b3276a750588",
+            "2222252bb0d1ffdab597d023a0737a77d044b4e1b6addb8fbb545d8386855f7e",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "8c4ddfa97c70feaa831bd57afbaa762d8f12fd44c4c7179349054abcdb0c5961",
+            "9e9eec3da396f214345b3193cc55d6d92a2eb7d5de3c9695c74d11dfd8c5134b",
         )
 
 

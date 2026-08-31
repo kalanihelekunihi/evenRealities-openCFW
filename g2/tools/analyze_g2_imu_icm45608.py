@@ -5,10 +5,13 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import importlib.util
 import json
+import re
 import struct
 import sys
 from pathlib import Path
+from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,7 +21,6 @@ IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 FUNCTION_MAP = ROOT / "tools/manifests/g2-imu-icm45608-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-imu-icm45608-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-imu-icm45608-provenance.tsv"
-SOURCE = ROOT / "components/apollo_main/core_overlay/imu_icm45608.c"
 SOURCE_PATH = "components/apollo_main/core_overlay/imu_icm45608.c"
 TDK_PORT_PATH = "components/apollo_main/core_overlay/imu_icm45608_tdk_port.c"
 TDK_SNAPSHOT = ROOT / "third_party/invensense-icm45608"
@@ -26,26 +28,25 @@ TDK_PROVENANCE = TDK_SNAPSHOT / "PROVENANCE.json"
 TDK_VERIFY = TDK_SNAPSHOT / "verify_snapshot.py"
 TDK_LICENSE = TDK_SNAPSHOT / "LICENSE"
 OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+COMPONENT_BUILDER = (
+    ROOT / "components/apollo_main/core_overlay/build_component.py"
+)
 BUILD_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
-PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
-FLASH_PLAN = ROOT / "build/source/flash-plan.json"
-SOURCE_PIN = (49_643, "31139f620035fda77f01fa4205fb01e55dd1ea129c6f9efbab5629eb29003503")
 PINS = {
     FUNCTION_MAP: "111409c72081337d19c6cc62e501bfd39011c4bff92de02928abdb18b0941f5b",
     CLOSURE: "ba9bdb509da95a8a30c286632376123e97401541fbd9ddf347fc2de593bd07f8",
-    PROVENANCE: "e0b22a5c43fb99202b82602a0b680a61d8a313abeca4defcd289a8666f84af49",
-    TDK_PROVENANCE: "fa1b6b89c4fb493809bea577f0ecd41284e26d215383bab8edd04f30a093963a",
-    TDK_VERIFY: "85db0aeb203a3288ec67b179ff13551ee7a012d9b32d7657103bde18e38de386",
+    PROVENANCE: "68b400c84fafeece9d61b0bda22a741456bde6d4263e00c52d953f5a9785561e",
+    TDK_PROVENANCE: "be486672038868ef86a4365b388f86746883d4ca771c504e8b63a9d4b80c733e",
+    TDK_VERIFY: "d22531aae24e5eb4ceb9c3ae81aa6b61fe5998cef1a39bdb2f84fd6546f84073",
     TDK_LICENSE: "68bed9c72222b77b8744add292f524000661c6537d960adeaf740722b0b2637f",
 }
 TDK_TAG = "1.1.2"
 TDK_COMMIT = "b79ae575f7f310e5ae2e1164096d1a858bb74662"
 TDK_AGGREGATE = "cc6088eed9f14a02af419a29856064ab62e4b79e2860a135e1d84ba22e1c9570"
-TDK_PRIMARY_FUNCTION_SHA256 = "983996c480608643ecf7018d68116a6a7c1a85ea9fd41bf84beb7156ce8555dd"
-TDK_BUILD_SOURCE_SHA256 = "b7cb9c494916fd9267f2174cceb4422ce8173cbd027c7dbc918721958952c60b"
 PHYSICAL = (0x004A35B0, 0x004A6644)
 PHYSICAL_SHA256 = "d4946b892b0fcb6e45a3cb2f4dadd452e737712815577d6780c26ff7e1185e22"
+CALLER_ROWS_SHA256 = "e8cad0ba615a9a793e8f31f21c81db34ec749c9682be8d2236940030fbb3f9b0"
 BODY_SHA256 = "9a2ab101ce16b0bbb2c08a8338249ca8eb97ecece2fb331fe0595a3cb628e21e"
 GAP_SHA256 = "f715282f60d047a6a9aa7942b9396eabe3ad99cebafbd7a705178ba10b0da912"
 ENTRY_SHA256 = "6fc6c004909b2109de41e379b3f119f55075c78506a8943a0112505c34dfba4c"
@@ -104,7 +105,7 @@ STORED_ENTRIES = (
     (0x004A3808, 0x004A35EB),
     (0x004A3810, 0x004A56D5),
 )
-PRODUCTION_FUNCTIONS = (
+RETIRED_WRAPPER_FUNCTIONS = (
     "open_cfw_imu_bus_read", "open_cfw_imu_bus_write",
     "open_cfw_imu_filter_init", "open_cfw_imu_filter_update",
     "open_cfw_imu_device_context_init", "open_cfw_imu_apply_odr_config",
@@ -134,6 +135,43 @@ PRODUCTION_FUNCTIONS = (
     "open_cfw_imu_set_state_one", "open_cfw_imu_set_state_two",
     "open_cfw_imu_get_compass_ready", "open_cfw_imu_set_state_three",
     "open_cfw_imu_delay_callback",
+)
+
+RESTRICTED_NOTICE_PATHS = (
+    "third_party/invensense-icm45608/src/imu/inv_imu_edmp_defs.h",
+    "third_party/invensense-icm45608/src/imu/inv_imu_edmp_patches_defs.h",
+    "third_party/invensense-icm45608/src/imu/inv_imu_edmp_patch_key_offsets.h",
+    "third_party/invensense-icm45608/src/imu/inv_imu_edmp_calmag_defs.h",
+    "third_party/invensense-icm45608/src/imu/"
+    "inv_imu_edmp_all_quat_patch_key_offsets.h",
+)
+DENSE_PAYLOAD_PATHS = (
+    "third_party/invensense-icm45608/src/imu/edmp_prgm_ram_dispatch.h",
+    "third_party/invensense-icm45608/src/imu/"
+    "edmp_prgm_ram_dispatch_over_gaf.h",
+    "third_party/invensense-icm45608/src/imu/edmp_prgm_ram_patch_calmag.h",
+    "third_party/invensense-icm45608/src/imu/edmp_prgm_ram_selftest.h",
+    "third_party/invensense-icm45608/src/imu/edmp_ram_aid_image.h",
+    "third_party/invensense-icm45608/src/imu/edmp_ram_aid_over_gaf_image.h",
+    "third_party/invensense-icm45608/src/imu/edmp_ram_all_quat_image.h",
+    "third_party/invensense-icm45608/src/imu/edmp_ram_b2s_image.h",
+    "third_party/invensense-icm45608/src/imu/edmp_ram_b2s_over_gaf_image.h",
+    "third_party/invensense-icm45608/src/imu/edmp_ram_mrm_image.h",
+)
+RISKY_PATHS = frozenset(RESTRICTED_NOTICE_PATHS + DENSE_PAYLOAD_PATHS)
+SELECTED_PAYLOAD_PATHS = (
+    "third_party/invensense-icm45608/src/imu/edmp_ram_mrm_image.h",
+    "third_party/invensense-icm45608/src/imu/edmp_prgm_ram_dispatch.h",
+    "third_party/invensense-icm45608/src/imu/edmp_ram_b2s_image.h",
+    "third_party/invensense-icm45608/src/imu/edmp_ram_aid_image.h",
+    "third_party/invensense-icm45608/src/imu/edmp_prgm_ram_patch_calmag.h",
+)
+SELECTED_PAYLOAD_IDENTITIES = (
+    (674, "6436679c2bb3d34da51a19ad9afb941fb4c5cc807149eb38c90f022492776799"),
+    (25, "86e12e2483301114273ba809c1de6dbe11491c97e121f60ac6e8ef69472f98f8"),
+    (1310, "f9a6d7db4e1f2511b228845d391cf0fcb4e5269cfcfea445a9b2ee80c9274230"),
+    (375, "16e4e9a482563c57ff82bec369464e0094d4a92140840edcaee738e201615ba7"),
+    (125, "80eb396ba1b365d332aabebed514cccb19f5d5a8eba1d6543be61ceda4fa8b2f"),
 )
 BW_HITS = tuple((site, 0x004A4576) for site in (
     0x004A38E0, 0x004A3958, 0x004A39CE, 0x004A3A90, 0x004A3B18,
@@ -191,7 +229,243 @@ def thumb_bw_target(data: bytes, address: int) -> int | None:
     return address + 4 + immediate
 
 
-def analyze(image_path: Path = IMAGE) -> dict:
+def _load_module(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    if spec is None or spec.loader is None:
+        raise AuditError(f"cannot load required audit module: {path}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _selected_payloads() -> tuple[bytes, ...]:
+    payloads = tuple(bytes(
+        int(value, 16)
+        for value in re.findall(r"0x([0-9a-fA-F]{2})", (ROOT / path).read_text())
+    ) for path in SELECTED_PAYLOAD_PATHS)
+    identities = tuple((len(payload), sha256(payload)) for payload in payloads)
+    if identities != SELECTED_PAYLOAD_IDENTITIES:
+        raise AuditError("selected EDMP payload identity changed")
+    return payloads
+
+
+def _caller_rows(config: dict[str, Any]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for leaf in config.get("relocated_leaves", []):
+        source = leaf.get("source", {}).get("path")
+        function = leaf.get("function")
+        for relocation in leaf.get("relocations", []):
+            target = relocation.get("target_address")
+            if (isinstance(target, int) and not isinstance(target, bool)
+                    and PHYSICAL[0] <= (target & ~1) < PHYSICAL[1]):
+                rows.append({
+                    "function": function,
+                    "offset": relocation.get("offset"),
+                    "source": source,
+                    "target_address": target,
+                })
+    return sorted(rows, key=lambda row: (
+        row["source"], row["function"], row["offset"], row["target_address"]
+    ))
+
+
+def _caller_digest(rows: list[dict[str, Any]]) -> str:
+    return sha256((json.dumps(
+        rows, sort_keys=True, separators=(",", ":")
+    ) + "\n").encode())
+
+
+def _patch_interval(site: dict[str, Any]) -> tuple[int, int]:
+    start = site.get("runtime_address")
+    size = site.get("expected_size")
+    expected_hex = site.get("expected_hex")
+    if size is None and isinstance(expected_hex, str):
+        if re.fullmatch(r"(?:[0-9a-fA-F]{2})+", expected_hex) is None:
+            raise AuditError("overlay patch expected_hex is invalid")
+        size = len(expected_hex) // 2
+    if (not isinstance(start, int) or isinstance(start, bool)
+            or not isinstance(size, int) or isinstance(size, bool) or size < 1):
+        raise AuditError("overlay patch interval is not a positive integer range")
+    return start, start + size
+
+
+def audit_overlay_boundary(
+    config: dict[str, Any], function_starts: set[int]
+) -> dict[str, Any]:
+    selected_sources = {
+        item.get("path") for item in config.get("sources", [])
+        if isinstance(item, dict)
+    }
+    forbidden_sources = {
+        SOURCE_PATH, TDK_PORT_PATH,
+        *(path for path in selected_sources
+          if isinstance(path, str)
+          and path.startswith("third_party/invensense-icm45608/")),
+    }
+    if selected_sources & forbidden_sources:
+        raise AuditError("retired ICM45608 source route reappeared")
+
+    leaf_sources = {
+        item.get("source", {}).get("path")
+        for item in config.get("relocated_leaves", [])
+        if isinstance(item, dict)
+    }
+    if SOURCE_PATH in leaf_sources or TDK_PORT_PATH in leaf_sources:
+        raise AuditError("retired ICM45608 source leaf reappeared")
+    if set(RETIRED_WRAPPER_FUNCTIONS) & set(config.get("functions", [])):
+        raise AuditError("retired ICM45608 wrapper function reappeared")
+
+    overlaps = []
+    for site in config.get("patch_sites", []):
+        start, end = _patch_interval(site)
+        if start < PHYSICAL[1] and PHYSICAL[0] < end:
+            overlaps.append(site.get("name"))
+    if overlaps:
+        raise AuditError("a patch overlaps the retained stock ICM45608 object")
+
+    include_dirs = list(config.get("toolchain", {}).get("include_dirs", []))
+    for profile in config.get("toolchain_profiles", {}).values():
+        include_dirs.extend(profile.get("include_dirs", []))
+    if any(path == "third_party/invensense-icm45608/src"
+           or path.startswith("third_party/invensense-icm45608/src/")
+           for path in include_dirs if isinstance(path, str)):
+        raise AuditError("retired InvenSense compiler include route reappeared")
+
+    callers = _caller_rows(config)
+    if (len(callers) != 29 or len({row["function"] for row in callers}) != 11
+            or len({row["target_address"] & ~1 for row in callers}) != 20
+            or _caller_digest(callers) != CALLER_ROWS_SHA256):
+        raise AuditError("stock ICM45608 external caller topology changed")
+    if any((row["target_address"] & ~1) not in function_starts
+           for row in callers):
+        raise AuditError("stock ICM45608 caller does not target a known entry")
+    return {
+        "external_callers": len(callers),
+        "external_caller_functions": len({row["function"] for row in callers}),
+        "external_caller_targets": len({
+            row["target_address"] & ~1 for row in callers
+        }),
+        "redirect_overlap_bytes": 0,
+        "caller_rows_sha256": CALLER_ROWS_SHA256,
+    }
+
+
+def audit_public_closure(config: dict[str, Any]) -> dict[str, Any]:
+    builder = _load_module("g2_imu_core_builder_audit", COMPONENT_BUILDER)
+    inputs = builder._canonical_input_paths(ROOT, OVERLAY, config)
+    relative_inputs = {
+        path.relative_to(ROOT.resolve()).as_posix() for path in inputs
+    }
+    selected_risky = sorted(relative_inputs & RISKY_PATHS)
+    if selected_risky:
+        raise AuditError(
+            f"restricted InvenSense input entered compiler closure: {selected_risky[0]}"
+        )
+    if any(path == SOURCE_PATH or path == TDK_PORT_PATH
+           or path.startswith("third_party/invensense-icm45608/src/")
+           for path in relative_inputs):
+        raise AuditError("retired ICM45608 implementation entered compiler closure")
+
+    tools = str(ROOT / "tools")
+    if tools not in sys.path:
+        sys.path.insert(0, tools)
+    import community_distribution
+
+    records = community_distribution._selected_records()
+    destinations = {destination for _source, destination in records}
+    risky_destinations = {
+        f"g2/{path}" for path in RISKY_PATHS
+    }
+    selected_bundle_risky = sorted(destinations & risky_destinations)
+    if selected_bundle_risky:
+        raise AuditError(
+            f"restricted InvenSense input entered community bundle: "
+            f"{selected_bundle_risky[0]}"
+        )
+    retired_destinations = {f"g2/{SOURCE_PATH}", f"g2/{TDK_PORT_PATH}"}
+    if destinations & retired_destinations:
+        raise AuditError("retired ICM45608 source entered community bundle")
+    return {
+        "compiler_inputs": len(relative_inputs),
+        "community_bundle_records": len(records),
+        "restricted_notice_files_selected": 0,
+        "dense_payload_files_selected": 0,
+        "retired_implementation_files_selected": 0,
+    }
+
+
+def audit_built_boundary(
+    report_path: Path, donor_data: bytes, caller_rows: list[dict[str, Any]]
+) -> dict[str, Any]:
+    report = json.loads(report_path.read_text())
+    component_record = report.get("component", {})
+    component_path = ROOT / component_record.get("artifact", "")
+    component = component_path.read_bytes()
+    if (len(component), sha256(component)) != (
+            component_record.get("size"), component_record.get("sha256")):
+        raise AuditError("canonical component artifact/report identity changed")
+    donor_object = image_slice(donor_data, *PHYSICAL)
+    component_object = image_slice(component, *PHYSICAL)
+    if component_object != donor_object or sha256(component_object) != PHYSICAL_SHA256:
+        raise AuditError("canonical component changed retained donor ICM45608 bytes")
+
+    source_paths = {
+        item.get("path") for item in report.get("sources", [])
+        if isinstance(item, dict)
+    }
+    if (SOURCE_PATH in source_paths or TDK_PORT_PATH in source_paths
+            or any(isinstance(path, str) and
+                   path.startswith("third_party/invensense-icm45608/src/")
+                   for path in source_paths)):
+        raise AuditError("retired ICM45608 source entered built component")
+
+    for site in report.get("overlay", {}).get("patched_sites", []):
+        start = site.get("runtime_address")
+        size = site.get("expected_size") or site.get("size")
+        if (isinstance(start, int) and isinstance(size, int)
+                and start < PHYSICAL[1] and PHYSICAL[0] < start + size):
+            raise AuditError("built patch overlaps retained stock ICM45608 object")
+
+    built_callers: list[dict[str, Any]] = []
+    for leaf in report.get("relocated_leaves", []):
+        for relocation in leaf.get("extraction", {}).get("relocations", []):
+            target = relocation.get("target_address")
+            if (isinstance(target, int) and not isinstance(target, bool)
+                    and PHYSICAL[0] <= (target & ~1) < PHYSICAL[1]):
+                built_callers.append({
+                    "function": leaf.get("extraction", {}).get("function"),
+                    "offset": relocation.get("offset"),
+                    "source": leaf.get("source", {}).get("path"),
+                    "target_address": target,
+                })
+    built_callers.sort(key=lambda row: (
+        row["source"], row["function"], row["offset"], row["target_address"]
+    ))
+    if built_callers != caller_rows:
+        raise AuditError("built stock ICM45608 caller topology changed")
+
+    overlay_record = report.get("overlay", {})
+    overlay_path = ROOT / overlay_record.get("artifact", "")
+    overlay_data = overlay_path.read_bytes()
+    if (len(overlay_data), sha256(overlay_data)) != (
+            overlay_record.get("size"), overlay_record.get("sha256")):
+        raise AuditError("canonical overlay artifact/report identity changed")
+    payload_hits = [overlay_data.count(payload) for payload in _selected_payloads()]
+    if any(payload_hits):
+        raise AuditError("retired EDMP payload sequence entered canonical overlay")
+    return {
+        "component_stock_object_sha256": PHYSICAL_SHA256,
+        "component_stock_object_bytes": len(donor_object),
+        "built_external_callers": len(built_callers),
+        "selected_payload_sequence_hits": payload_hits,
+    }
+
+
+def analyze(
+    image_path: Path = IMAGE,
+    build_report_path: Path | None = BUILD_REPORT,
+) -> dict:
     data = image_path.read_bytes()
     if len(data) != 3_523_396 or sha256(data) != IMAGE_SHA256:
         raise AuditError("official image changed")
@@ -322,43 +596,6 @@ def analyze(image_path: Path = IMAGE) -> dict:
            if (site, value) not in STORED_ENTRIES and site != 0x0077FD5C):
         raise AuditError("an accidental raw window became aligned")
 
-    source = SOURCE.read_bytes()
-    if (len(source), sha256(source)) != SOURCE_PIN:
-        raise AuditError("IMU source changed")
-    source_text = source.decode("utf-8")
-    required_source_markers = (
-        "int32_t (*read)(uint8_t, uint8_t *, uint32_t);",
-        "int32_t (*write)(uint8_t, const uint8_t *, uint32_t);",
-        "sizeof(struct open_cfw_imu_device) == 0x48u",
-        "offsetof(struct open_cfw_imu_device, fifo_callback) == 0x18u",
-        "sizeof(struct open_cfw_imu_fusion_result) == 84u",
-        "open_cfw_retained_imu_i2c_read(\n               4u, 0x69u, &register_address, 1u, data, size)",
-        "open_cfw_retained_imu_i2c_write(\n               4u, 0x69u, &register_address, 1u, data, size)",
-        "who_am_i != 0x81u",
-        "open_cfw_imu_source_soft_reset()",
-        "open_cfw_icm45608_tdk_configure(",
-        "open_cfw_icm45608_tdk_read_fifo(",
-        "open_cfw_icm45608_tdk_parse_fifo(",
-        "open_cfw_icm45608_tdk_poll_registers(",
-        "open_cfw_icm45608_tdk_decode_gaf(",
-        "open_cfw_icm45608_tdk_mag_who_am_i(",
-        "open_cfw_icm45608_tdk_read_extended_events(",
-        "(extended_events & 0x0cu) != 0u",
-        "(extended_events & 0x01u) != 0u",
-        "(extended_events & 0x02u) != 0u",
-        "OPEN_CFW_IMU_FIFO_MIRROR",
-    )
-    if any(marker not in source_text for marker in required_source_markers):
-        raise AuditError("IMU exact transport/device/init ABI marker changed")
-    if any(marker in source_text for marker in (
-            "open_cfw_retained_inv_imu_init",
-            "open_cfw_retained_inv_imu_adv_init",
-            "open_cfw_retained_imu_decode_fusion",
-            "open_cfw_retained_imu_who_am_i",
-            "open_cfw_retained_mag_who_am_i",
-            "open_cfw_imu_bus_read(0x00u")):
-        raise AuditError("opaque retained vendor acquisition reappeared")
-
     tdk = json.loads(TDK_PROVENANCE.read_text())
     if (tdk.get("license"), tdk.get("upstream", {}).get("tag"),
             tdk.get("upstream", {}).get("commit"),
@@ -368,142 +605,27 @@ def analyze(image_path: Path = IMAGE) -> dict:
             tdk.get("selection", {}).get("aggregate_sha256"),
             tdk.get("g2_delta", {}).get("transport_bytes"),
             tdk.get("g2_delta", {}).get("fifo_callback_offset")) != (
-                "BSD-3-Clause", TDK_TAG, TDK_COMMIT, "1.1.0", 52,
+                "mixed-file-specific", TDK_TAG, TDK_COMMIT, "1.1.0", 52,
                 594_177, TDK_AGGREGATE, 16, 24):
-        raise AuditError("TDK exact-ABI snapshot provenance changed")
-    overlay = json.loads(OVERLAY.read_text())
-    leaves = [item for item in overlay["relocated_leaves"]
-              if item.get("source", {}).get("path") == SOURCE_PATH]
-    names = {item["function"] for item in leaves}
-    if (len(leaves) != 54 or names != set(PRODUCTION_FUNCTIONS)
-            or not names <= set(overlay["functions"])
-            or sum(item["expected"]["size"] for item in leaves) != 8_610
-            or sum(len(item["relocations"]) for item in leaves) != 83):
-        raise AuditError("IMU production leaf closure changed")
-    if any(item.get("profiles") != ["apple-clang"]
-           or item.get("source", {}).get("license") != "GPL-3.0-only"
-           for item in leaves):
-        raise AuditError("IMU production source policy changed")
-    non_strict = {item["function"] for item in leaves
-                  if not item.get("strict_relocation_contract")}
-    if non_strict != {"open_cfw_imu_device_context_init"}:
-        raise AuditError("IMU callback-pointer relocation policy changed")
-
-    expected_patch = {
-        (int(row["entry"], 0), int(row["size"]), row["sha256"],
-         PRODUCTION_FUNCTIONS[index])
-        for index, row in enumerate(rows)
-        if index != 21
-    }
-    patches = [item for item in overlay["patch_sites"]
-               if item.get("target_function") in names]
-    observed_patch = {
-        (item["runtime_address"], item["expected_size"],
-         item["expected_sha256"], item["target_function"])
-        for item in patches
-    }
-    if (len(patches) != 52 or observed_patch != expected_patch
-            or sum(item["expected_size"] for item in patches) != 11_672
-            or any(item.get("branch") != "b_w"
-                   or item.get("profiles") != ["apple-clang"]
-                   for item in patches)):
-        raise AuditError("IMU guarded replacement closure changed")
-    if any(item["target_function"] == "open_cfw_imu_noop_sample_callback"
-           for item in patches):
-        raise AuditError("two-byte IMU no-op was not retained as unreachable")
-
-    build = json.loads(BUILD_REPORT.read_text())
-    if (build["overlay"]["size"], build["overlay"]["sha256"],
-            build["component"]["size"], build["component"]["sha256"]) != (
-                332_148,
-                "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
-                3_855_544,
-                "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"):
-        raise AuditError("IMU canonical component changed")
-    built = [item for item in build["relocated_leaves"]
-             if item.get("source", {}).get("path") == SOURCE_PATH]
-    if (len(built) != 54
-            or sum(item["placement"]["size"] for item in built) != 8_610
-            or sum(item["extraction"]["size"] for item in built) != 8_610
-            or sum(item["placement"]["padding_before"] for item in built) != 30
-            or sum(item["extraction"]["relocation_count"] for item in built) != 83):
-        raise AuditError("IMU built leaf closure changed")
-
-    tdk_sources = [item for item in build["sources"]
-                   if item["path"] == TDK_PORT_PATH or
-                   item["path"].startswith(
-                       "third_party/invensense-icm45608/src/")]
-    tdk_source_digest = sha256(("\n".join(
-        item["path"] + "\t" + item["sha256"] for item in tdk_sources
-    ) + "\n").encode())
-    # The TDK primary is a fixed contiguous function set. Later production
-    # overlays may append unrelated functions, so bound this slice explicitly.
-    tdk_functions = tuple(overlay["functions"][1792:1935])
-    tdk_function_digest = sha256(("\n".join(tdk_functions) + "\n").encode())
-    if (len(tdk_sources), sum(item["size"] for item in tdk_sources),
-            tdk_source_digest, len(tdk_functions), tdk_function_digest,
-            sum(build["overlay"]["functions"][name]["size"]
-                for name in tdk_functions)) != (
-                8, 184_197, TDK_BUILD_SOURCE_SHA256,
-                143, TDK_PRIMARY_FUNCTION_SHA256, 54_128):
-        raise AuditError("TDK primary source closure changed")
-    if any(name not in build["overlay"]["functions"]
-           for name in tdk_functions):
-        raise AuditError("TDK primary function missing from built overlay")
-
-    manifest = json.loads(MANIFEST.read_text())
-    main = manifest["component_overrides"]["apollo_main"]
-    imu_regions = [item for item in main["regions"]
-                   if item.get("name", "").startswith("imu_icm45608_")]
-    status_bytes = {
-        status: sum(item["size"] for item in imu_regions
-                    if item.get("address_status") == status)
-        for status in ("generated_source_entry_replacement", "official_blob",
-                       "source_compiled", "generated_alignment")
-    }
-    if (len(imu_regions) != 143 or status_bytes != {
-            "generated_source_entry_replacement": 11_672,
-            "official_blob": 764,
-            "source_compiled": 8_610,
-            "generated_alignment": 30,
-    }):
-        raise AuditError("IMU manifest ownership tiling changed")
-    primary = next(item for item in main["regions"]
-                   if item["name"] == "apollo_core_source_overlay")
-    if (primary["size"], primary["target_address"],
-            "pristine TDK ICM45608 1.1.2" in primary["function"]) != (
-                173_434, 0x00794324, True):
-        raise AuditError("TDK primary manifest region changed")
-    if (main["provider"]["size"], main["provider"]["sha256"],
-            manifest["package"]["expected_size"],
-            manifest["package"]["expected_sha256"]) != (
-                3_855_544,
-                "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
-                4_634_038,
-                "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"):
-        raise AuditError("IMU package identity changed")
-    package = PACKAGE.read_bytes()
-    if (len(package), sha256(package)) != (
-            4_634_038,
-            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"):
-        raise AuditError("IMU package artifact changed")
-    plan_bytes = FLASH_PLAN.read_bytes()
-    plan = json.loads(plan_bytes)
-    if (len(plan_bytes), sha256(plan_bytes), plan.get("package_sha256"),
-            tuple(len(plan[key]) for key in (
-                "flash_regions", "unresolved_flash_regions",
-                "container_only_regions", "protected_regions"))) != (
-                    3_108_201,
-                    "9618a0d0f2ad5dfb572479320d8ec8e15a011a600edcd8d9bbd542c3625c4d66",
-                    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
-                    (6671, 0, 6, 6)):
-        raise AuditError("IMU deployment plan changed")
-
-    blocker = (
-        "authorized right temple is not under test because qualification is deferred by project direction; authorized left temple must "
-        "remain stock; future qualification requires a responsive authorized G2 ICM45608 path, calibrated "
-        "motion rig, or golden FIFO/EDMP trace is required for future qualification"
+        raise AuditError("TDK research snapshot provenance changed")
+    restricted_notices = tuple(
+        "strictly prohibited" in (ROOT / path).read_text(errors="replace")
+        for path in RESTRICTED_NOTICE_PATHS
     )
+    if restricted_notices != (True,) * 5:
+        raise AuditError("restricted InvenSense notice inventory changed")
+    payloads = _selected_payloads()
+    donor_payload_hits = [data.count(payload) for payload in payloads]
+    if donor_payload_hits != [0, 0, 0, 0, 1]:
+        raise AuditError("official donor EDMP payload occurrence contract changed")
+
+    overlay = json.loads(OVERLAY.read_text())
+    boundary = audit_overlay_boundary(overlay, starts)
+    public_closure = audit_public_closure(overlay)
+    callers = _caller_rows(overlay)
+    built = None
+    if build_report_path is not None:
+        built = audit_built_boundary(build_report_path, data, callers)
 
     return {
         "surface": {
@@ -547,42 +669,48 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "license": "unknown",
             "tdk_exact_abi_tag": TDK_TAG,
             "tdk_exact_abi_commit": TDK_COMMIT,
-            "tdk_snapshot_license": "BSD-3-Clause",
+            "tdk_snapshot_license": (
+                "mixed: root BSD-3-Clause plus five restrictive file notices"
+            ),
             "tdk_snapshot_files": 52,
             "tdk_snapshot_bytes": 594_177,
             "tdk_snapshot_aggregate": TDK_AGGREGATE,
+            "tdk_snapshot_status": (
+                "repository-local research evidence; not a public/compiler input"
+            ),
+            "restricted_notice_files": len(RESTRICTED_NOTICE_PATHS),
+            "dense_payload_files": len(DENSE_PAYLOAD_PATHS),
+            "selected_payloads_in_official_donor": donor_payload_hits,
         },
         "production": {
             "candidate": SOURCE_PATH,
-            "source_inventory_available": True,
-            "production_routed": True,
-            "source_functions": 54,
-            "tdk_primary_functions": 143,
-            "total_source_functions": 197,
+            "source_inventory_available": False,
+            "production_routed": False,
+            "retained_donor": True,
+            "stock_functionality_preserved": True,
+            "source_functions": 0,
+            "tdk_primary_functions": 0,
+            "total_source_functions": 0,
             "recovered_functions": 53,
-            "compiled_text_bytes": 8_610,
-            "tdk_compiled_function_bytes": 54_128,
-            "tdk_build_source_files": 8,
-            "tdk_build_source_bytes": 184_197,
-            "generated_alignment_bytes": 30,
-            "guarded_redirects": 52,
-            "authenticated_relocations": 83,
-            "ownership_bytes": 11_672,
-            "retained_compatibility_bytes": 764,
-            "manifest_regions": 143,
-            "source_owned_device_initialization": True,
-            "exact_three_argument_transport_abi": True,
-            "source_owned_fifo_acquisition": True,
-            "source_owned_register_polling": True,
-            "source_owned_edmp_gaf_configuration": True,
-            "source_owned_gaf_decode": True,
-            "source_owned_magnetometer_i2cm": True,
-            "source_owned_extended_edmp_images": True,
-            "source_owned_aid_b2s_configuration": True,
-            "source_owned_aid_b2s_event_routing": True,
+            "compiled_text_bytes": 0,
+            "tdk_compiled_function_bytes": 0,
+            "tdk_build_source_files": 0,
+            "tdk_build_source_bytes": 0,
+            "generated_alignment_bytes": 0,
+            "guarded_redirects": 0,
+            "authenticated_relocations": boundary["external_callers"],
+            "ownership_bytes": 0,
+            "retained_stock_bytes": PHYSICAL[1] - PHYSICAL[0],
+            "redirect_overlap_bytes": boundary["redirect_overlap_bytes"],
+            "external_callers": boundary["external_callers"],
+            "external_caller_functions": boundary["external_caller_functions"],
+            "external_caller_targets": boundary["external_caller_targets"],
+            "external_caller_rows_sha256": boundary["caller_rows_sha256"],
+            "restricted_compiler_or_bundle_files": 0,
+            "public_closure": public_closure,
+            "built_boundary": built,
             "remaining_software_gap": None,
-            "hardware_validation": "deferred by project direction",
-            "hardware_blocker": blocker,
+            "hardware_validation": "blocked by unavailable physical evidence",
         },
     }
 

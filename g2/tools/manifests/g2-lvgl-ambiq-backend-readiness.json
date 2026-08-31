@@ -1,0 +1,123 @@
+{
+  "analysis_mode": "offline source authentication and target compile; no hardware or flash operation",
+  "cache_free_radius_mask": {
+    "provider": {
+      "arm_circle_descriptor_size": 28,
+      "arm_parameter_offsets": {
+        "cfg": 8,
+        "circle": 32,
+        "radius": 24
+      },
+      "arm_parameter_size": 36,
+      "exports": [
+        "lv_draw_sw_mask_radius_init",
+        "lv_draw_sw_mask_free_param"
+      ],
+      "g2_display": {
+        "height": 288,
+        "width": 576
+      },
+      "global_cache_dependency": false,
+      "host_verification_contract": {
+        "allocation_failure_result": "transparent with output buffer unchanged",
+        "allocation_failure_sites": 3,
+        "authenticated_reference_parity_cases": 1505,
+        "maximum_visible_g2_radius": 144,
+        "peak_allocation_upper_bound_bytes": 3296
+      },
+      "maximum_representable_radius": 65535,
+      "path": "third_party/lvgl-ambiq-backend/g2-compat/lvgl_ambiq_sw_mask_cache_free.c",
+      "sha256": "b87383f4e05d775cb808e94851fdc8c99d27f7f9508e43454aad81ad20f3e643"
+    },
+    "upstream": {
+      "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+      "git_blob_sha1": "0e1a17a67f15e44fe294a26b18f7be5da7c2acb2",
+      "path": "src/draw/sw/lv_draw_sw_mask.c",
+      "repository": "https://github.com/lvgl/lvgl.git",
+      "sha256": "8a5075210d3a59c4fa7ea00e5675205a6a2e7e8e98305c26045c30c2e77846a6",
+      "size": 43443
+    }
+  },
+  "compatibility_inputs": {
+    "lvgl-g2-ambiq-draw-buffer-abi.patch": "17dedb9b304817621a0312d8231aa7426732e089c88403ea6ace98e746d31e4b",
+    "lvgl-g2-hybrid-compile.patch": "bd31e6967c795ba21a3c4320d30262fe71f0a297d6c2970979c51dbbb3cf6b7c",
+    "lvgl_ambiq_nema_compat.h": "a1f5246e2546de30452071951d18047043ba0f5c94095f66c76af52e74aa449d",
+    "lvgl_ambiq_sw_mask_cache_free.c": "b87383f4e05d775cb808e94851fdc8c99d27f7f9508e43454aad81ad20f3e643",
+    "lvgl_ambiq_sw_mask_compat.h": "5eefc7bd1ff7f58f228a03452a704c47141da84b3137629900b8ce6cec895f56"
+  },
+  "component": "G2 Ambiq LVGL draw backend source readiness",
+  "draw_thread_stack": {
+    "argument_evidence": {
+      "argument_role": "AAPCS fifth argument to lv_thread_init",
+      "bytes_hex": "206801904ff4004000900ff225232822dff85c1420682c300df093f8",
+      "decoded_sequence": "mov.w r0,#0x8000; str r0,[sp]; ...; bl lv_thread_init",
+      "end_exclusive": "0x004C74EA",
+      "sha256": "2a3ef9a3527acc2d6ad14b5c6b823bf4e05ee8b550b1b295f5f1fa874ab56177",
+      "start": "0x004C74CE",
+      "thread_init_target": "0x004D4610"
+    },
+    "bytes": 32768,
+    "hardware_stack_qualified": false,
+    "official_image": {
+      "load_base": "0x00437FE0",
+      "path": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "size": 3523396
+    },
+    "source_macro": "LV_DRAW_THREAD_STACK_SIZE",
+    "stock_function": {
+      "end_exclusive": "0x004C74EE",
+      "name": "lv_draw_ambiq_init",
+      "sha256": "7b7d08b910da49cd2484e09b80e18b3183c11cf356b7e6ea44d5eb1212da0c17",
+      "size": 280,
+      "start": "0x004C73D6"
+    }
+  },
+  "nema_interface": {
+    "full_sdk_subtree_git_tree_sha1": "e690768a6e7b4d6a8d526fc75e8278a2764deff3",
+    "imported_interface_bytes": 251655,
+    "imported_interface_digest": "186008f77de1bfa3942b4ad0de8f2a8932fcc834558fb1641d87e94f3ccd36a8",
+    "imported_interface_files": 32,
+    "nemagfx_version": "1.4.12",
+    "nemavg_version": "1.1.8",
+    "repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq.git",
+    "reproduction_commit": "b853fded7e545f005727e13bf2ce83018c7e242d"
+  },
+  "remaining_gates": [
+    "atomic link admission of the public NemaGFX/NemaVG and GPU-patch archives or admitted source equivalents",
+    "32 KiB draw-thread worst-case and runtime stack qualification with FreeType enabled",
+    "stock-IAR versus maintained-GNU archive policy",
+    "Apollo510 command-list, cache, power-retention, antialiasing, and display-output hardware validation"
+  ],
+  "schema_version": 1,
+  "software_status": {
+    "active_g2_translation_units": 11,
+    "cache_free_radius_mask_provider": true,
+    "cortex_m55_compile_gate": "enforced by this builder",
+    "exact_source_imported": true,
+    "lv_draw_sw_complex": 0,
+    "production_overlay_registered": false,
+    "production_ready": false
+  },
+  "source": {
+    "bytes": 170833,
+    "canonical_commit": "5be8e0ae5077aa3880aba8a322b1487d6bc73c07",
+    "equivalent_replay_commit": "67fd93e268f86b2ce90d4f1b14b53e36bf49ddd0",
+    "files": 16,
+    "linked_g2_translation_units": [
+      "lv_draw_ambiq.c",
+      "lv_draw_ambiq_arc.c",
+      "lv_draw_ambiq_box_shadow.c",
+      "lv_draw_ambiq_buffer.c",
+      "lv_draw_ambiq_fill.c",
+      "lv_draw_ambiq_img.c",
+      "lv_draw_ambiq_letter.c",
+      "lv_draw_ambiq_mask_rect.c",
+      "lv_draw_ambiq_private.c",
+      "lv_draw_ambiq_triangle.c",
+      "lv_draw_ambiq_vector_font.c"
+    ],
+    "repository": "https://github.com/AmbiqMicro/LVGL.git",
+    "subtree_git_tree_sha1": "1e774257495fa43177e04fc5c8a42a77c2d7d619"
+  }
+}

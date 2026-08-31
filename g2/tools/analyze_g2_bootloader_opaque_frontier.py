@@ -24,10 +24,13 @@ BOUNDARY_HEADER = BOUNDARY.with_suffix(".h")
 GENERIC_PROVIDER = (
     ROOT / "research/candidates/target_runtime/runtime_target_scalar_candidate.c"
 )
+INITIALIZER_SOURCE = (
+    ROOT / "components/bootloader/core_overlay/runtime_hw_initializer_42308e.c"
+)
 
 OFFICIAL_PIN = (148599, "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5")
 FILE_PINS = {
-    CENSUS: (1868, "5562fedd60b909d5ce55841f43d868eb02b7ab0b6ca3d977e74b0f8ca31d6eb9"),
+    CENSUS: (1848, "b78441e455e00e78d70f2690042cc6c3b43f7a4e2ae4f829010119a785b90102"),
     BOUNDARY: (1261, "5fa3de0c7a72d5b0bead2b3d2bd631cec09ddfcf9a1f5a7ec522f77c749ac966"),
     BOUNDARY_HEADER: (1653, "16b99cb8816deea5cadf16322279464c9a4fcc622422896e165df9c9d2baa7a3"),
     GENERIC_PROVIDER: (12567, "aad6d15e8b64fe9f8fb9ae4611bb8663c1fa6a67bdc75c3e3cbc853a7b22093b"),
@@ -127,6 +130,7 @@ def audit(
         boundary_path: FILE_PINS[BOUNDARY],
         boundary_header_path: FILE_PINS[BOUNDARY_HEADER],
         GENERIC_PROVIDER: FILE_PINS[GENERIC_PROVIDER],
+        INITIALIZER_SOURCE: (10733, "8b096ec91c3092619b432c77f9c52f76ea76e230d65e2538af26fa3ce880fa91"),
     }
     for path, expected in selected_pins.items():
         payload = path.read_bytes()
@@ -184,8 +188,10 @@ def audit(
     core_name = "bootloader_memory_qsort_core_423a48_source_in_place"
     wrapper_name = "bootloader_memory_qsort_423d08_source_in_place"
     successor_name = "bootloader_hw_global_service_423d20_source_in_place"
-    for name in (core_name, wrapper_name, successor_name):
+    initializer_name = "bootloader_hw_initializer_42308e_source_in_place"
+    for name in (initializer_name, core_name, wrapper_name, successor_name):
         require(name in by_name, f"production region disappeared: {name}")
+    initializer = by_name[initializer_name]
     qsort_core = by_name[core_name]
     qsort_wrapper = by_name[wrapper_name]
     successor = by_name[successor_name]
@@ -197,6 +203,10 @@ def audit(
              successor["address_status"])
             == (0x00423D20, 56, "source_compiled"),
             "qsort local successor ownership changed")
+    require((initializer["target_address"], initializer["size"],
+             initializer["address_status"])
+            == (0x0042308E, 570, "source_compiled"),
+            "earliest authenticated body ownership changed")
     require(not any("qsort_boundary" in json.dumps(row) for row in regions),
             "typed unsupported boundary was incorrectly production-routed")
 
@@ -212,7 +222,8 @@ def audit(
             "sole_public_caller": 0x0041FA22,
         },
         "census": {
-            "earliest_complete_opaque_body_bytes": 570,
+            "earliest_complete_opaque_body_bytes": 0,
+            "earliest_body_source_owned_bytes": 570,
             "sequential_parent_region_bytes": 9190,
             "post_mspi_parent_region_bytes": 57153,
         },

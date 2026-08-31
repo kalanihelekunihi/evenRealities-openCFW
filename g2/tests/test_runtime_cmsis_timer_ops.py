@@ -65,15 +65,15 @@ TARGET = {
 }
 
 APPLE_LINKED = {
-    "open_cfw_cmsis_timer_start": "e25e86bcec428023ee83c5e7adaf7c7b0c1d342df99b999dba8d7758fb26660b",
-    "open_cfw_cmsis_timer_stop": "1b12f9f4e4b270777479d2701337fce49592cc4870cd3b1950fc584767049d43",
-    "open_cfw_cmsis_timer_delete": "b625c905d8cc764114929f392712270d825778a4497a4f469bb0ccb76c70f702",
+    "open_cfw_cmsis_timer_start": "1e6347dd38dd0cd0670369f77a2f68105d7f86635de0506eea95722fa3b3b971",
+    "open_cfw_cmsis_timer_stop": "e8787ad34af5234c2bbbd8f7a5811b34e3318d16594b597b4f0fca9e9478baa1",
+    "open_cfw_cmsis_timer_delete": "8fbce07385d2f8007b12964ee473db6062ccf6caacf8df70a6bbec6dc74c6e39",
 }
 
 LINUX_LINKED = {
-    "open_cfw_cmsis_timer_start": "b4953c1df877822fed2f62442f02dbeb32e188578b78a9fe1cf1726d407a5254",
-    "open_cfw_cmsis_timer_stop": "a36745a4e77584d6824a9de2279068f83d72f2405fae1146966b9931cb12e1e8",
-    "open_cfw_cmsis_timer_delete": "676d909401b0dc9314fcd957337410d1dc0b8203f4907a0af01c963c9d95824c",
+    "open_cfw_cmsis_timer_start": "d9a5720f0b589297bf300e2d05f425ccb4ef68beecf737273cc98b04bb633110",
+    "open_cfw_cmsis_timer_stop": "610b3c8dc4784fe490c77b3cfa9f81777805fe36b953cfd6a0acafb4f1eaae00",
+    "open_cfw_cmsis_timer_delete": "d94f4f1f17ef764cf1702c785167f13a4cc6e4ab807c06875e4ea5fe886b576f",
 }
 
 
@@ -232,8 +232,8 @@ class RuntimeCmsisTimerOpsTests(unittest.TestCase):
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
-        self.assertEqual(main["provider"]["size"], 3_952_346)
-        self.assertEqual(main["provider"]["profiles"]["linux-clang"]["size"], 3_728_356)
+        self.assertEqual(main["provider"]["size"], 3_883_974)
+        self.assertEqual(main["provider"]["profiles"]["linux-clang"]["size"], 3_676_308)
         region_names = {item["name"] for item in main["regions"]}
         self.assertTrue(
             {

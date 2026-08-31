@@ -165,7 +165,7 @@ def production_report(linked: list[tuple[str, int, int, str]]) -> dict:
         "source_owned_bytes_added": 852,
         "stock_bytes_replaced": sum(end - start for _, start, end, _ in linked),
         "hardware_validation": (
-            "deferred by project direction; future qualification requires authorized G2/EM9305 legacy responder pairing, "
+            "blocked by unavailable physical evidence; future qualification requires authorized G2/EM9305 legacy responder pairing, "
             "confirm/random, STK handling, key distribution, retry, and interoperability physical evidence"
         ),
     }

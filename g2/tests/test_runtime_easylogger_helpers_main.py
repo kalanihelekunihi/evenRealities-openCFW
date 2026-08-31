@@ -4,6 +4,7 @@ import os
 
 import ctypes
 import hashlib
+import json
 import struct
 import subprocess
 import sys
@@ -339,20 +340,20 @@ TARGET_CLOSURE_SHA256 = (
     "682363db5f9393d204f3ca9b8a620fa0"
     "1c399d012381724213bf380336d8aa24"
 )
-PRODUCTION_OVERLAY_SIZE = 429_058
+PRODUCTION_OVERLAY_SIZE = 360_578
 PRODUCTION_OVERLAY_SHA256 = (
-    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
 )
-PRODUCTION_COMPONENT_SIZE = 3_952_454
+PRODUCTION_COMPONENT_SIZE = 3_883_974
 PRODUCTION_COMPONENT_SHA256 = (
-    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
 )
 PRODUCTION_LEAVES = {
     "open_cfw_easylogger_helpers_get_logger": {
-        "offset": 174_768,
+        "offset": 114_920,
         "size": 10,
         "padding_before": 2,
-        "runtime_address": 0x007B_EDD4,
+        "runtime_address": 0x007B_040C,
         "sha256": (
             "5970df921f43a013c1198a9d9a5fc1c1"
             "67e7d6b104aaefa8135d94630c3aea5b"
@@ -364,10 +365,10 @@ PRODUCTION_LEAVES = {
         "relocations": [],
     },
     "open_cfw_easylogger_helpers_assert_failed": {
-        "offset": 174_780,
+        "offset": 114_932,
         "size": 168,
         "padding_before": 2,
-        "runtime_address": 0x007B_EDE0,
+        "runtime_address": 0x007B_0418,
         "sha256": (
             "2437cde26a848cd283fbf7d67862f63f"
             "1bdd3262f6db17dc19ffb36ba51fa3bc"
@@ -379,10 +380,10 @@ PRODUCTION_LEAVES = {
         "relocations": [],
     },
     "open_cfw_easylogger_get_fmt_enabled": {
-        "offset": 174_948,
+        "offset": 115_100,
         "size": 38,
         "padding_before": 0,
-        "runtime_address": 0x007B_EE88,
+        "runtime_address": 0x007B_04C0,
         "sha256": (
             "93a04bebddcaabf397058f30793491388"
             "8c49cca4135c5dfd4b1177ebe7a0624"
@@ -395,21 +396,21 @@ PRODUCTION_LEAVES = {
                 0x0E,
                 0x007B_04CE,
                 "open_cfw_easylogger_helpers_assert_failed",
-                0x007B_EDE0,
+                0x007B_0418,
             ),
             (
                 0x12,
                 0x007B_04D2,
                 "open_cfw_easylogger_helpers_get_logger",
-                0x007B_EDD4,
+                0x007B_040C,
             ),
         ],
     },
     "open_cfw_easylogger_get_fmt_used_and_enabled_u32": {
-        "offset": 174_988,
+        "offset": 115_140,
         "size": 22,
         "padding_before": 2,
-        "runtime_address": 0x007B_EEB0,
+        "runtime_address": 0x007B_04E8,
         "sha256": (
             "353077e72b5c3fdb3534472dcb345e48"
             "23670d971233e94f4b3df3afc90e871e"
@@ -422,15 +423,15 @@ PRODUCTION_LEAVES = {
                 0x0A,
                 0x007B_04F2,
                 "open_cfw_easylogger_get_fmt_enabled",
-                0x007B_EE88,
+                0x007B_04C0,
             ),
         ],
     },
     "open_cfw_easylogger_get_fmt_used_and_enabled_ptr": {
-        "offset": 175_012,
+        "offset": 115_164,
         "size": 22,
         "padding_before": 2,
-        "runtime_address": 0x007B_EEC8,
+        "runtime_address": 0x007B_0500,
         "sha256": (
             "6c5f1c48b7e8fb80e64c9db3e096a92"
             "3894770b482c17a7a9b78af9f4c3ed56f"
@@ -443,15 +444,15 @@ PRODUCTION_LEAVES = {
                 0x0A,
                 0x007B_050A,
                 "open_cfw_easylogger_get_fmt_enabled",
-                0x007B_EE88,
+                0x007B_04C0,
             ),
         ],
     },
     "open_cfw_easylogger_strcpy": {
-        "offset": 175_036,
+        "offset": 115_188,
         "size": 130,
         "padding_before": 2,
-        "runtime_address": 0x007B_EEE0,
+        "runtime_address": 0x007B_0518,
         "sha256": (
             "28596bd394c2cec04862dd33abf23595"
             "b937e6b1908f9b77a36e4160d0697ff1"
@@ -464,13 +465,13 @@ PRODUCTION_LEAVES = {
                 0x62,
                 0x007B_057A,
                 "open_cfw_easylogger_helpers_assert_failed",
-                0x007B_EDE0,
+                0x007B_0418,
             ),
             (
                 0x6C,
                 0x007B_0584,
                 "open_cfw_easylogger_helpers_assert_failed",
-                0x007B_EDE0,
+                0x007B_0418,
             ),
         ],
     },
@@ -648,9 +649,24 @@ class RuntimeEasyLoggerHelpersMainTests(unittest.TestCase):
         production_output = (
             Path(cls.temporary.name) / "production-apollo-main"
         )
+        production_config = json.loads(
+            PRODUCTION_CONFIG.read_text(encoding="utf-8")
+        )
+        production_config["expected"] = dict(
+            production_config["core_stage_expected"]
+        )
+        for profile in production_config["toolchain_profiles"].values():
+            profile["expected"] = dict(profile["core_stage_expected"])
+        production_config_path = (
+            Path(cls.temporary.name) / "production-core-stage.json"
+        )
+        production_config_path.write_text(
+            json.dumps(production_config, indent=2) + "\n",
+            encoding="utf-8",
+        )
         cls.production_report = apollo_overlay.build(
             root=ROOT,
-            config_path=PRODUCTION_CONFIG,
+            config_path=production_config_path,
             output_dir=production_output,
             clang=os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
         )
@@ -1216,12 +1232,12 @@ class RuntimeEasyLoggerHelpersMainTests(unittest.TestCase):
                 )
             },
             {
-                "replaced_stock_function_bytes": 409_246,
-                "generated_patch_site_bytes": 409_066,
+                "replaced_stock_function_bytes": 397_626,
+                "generated_patch_site_bytes": 397_446,
                 "generated_wrapper_bytes": 32,
                 "source_owned_in_place_bytes": 184,
-                "source_owned_bytes": 431_334,
-                "opaque_base_bytes": 3_111_914,
+                "source_owned_bytes": 362_962,
+                "opaque_base_bytes": 3_123_534,
             },
         )
 

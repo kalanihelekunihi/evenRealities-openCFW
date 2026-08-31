@@ -2,41 +2,49 @@
 
 ## Result
 
-The canonical Apple-profile Apollo component's 3,267,306 builder-owned opaque
+The canonical Apple-profile Apollo component's 3,081,392 builder-owned opaque
 base bytes now have a conservative, disjoint origin ledger. The ledger
 intersects the flash plan with the authenticated 64-shard Ghidra function map
 and 357 retained source paths:
 
 | Opaque-base category | Bytes | Qualification |
 |---|---:|---|
-| Retained third-party-path function envelopes | 122,876 | Lower-bound family ownership; not a pristine-source claim |
-| Retained first-party/project-path function envelopes | 359,684 | Lower-bound project ownership |
-| Unanchored discovered functions | 662,584 | Code discovered by Ghidra without a retained-path owner |
-| Outside trustworthy function envelopes | 2,122,162 | Mixed data, assets, alignment, missed code, and rejected analyzer artifacts |
-| **Total** | **3,267,306** | Exactly reconciles component builder accounting |
+| Retained third-party-path function envelopes | 86,364 | Lower-bound family ownership; not a pristine-source claim |
+| Retained first-party/project-path function envelopes | 291,566 | Lower-bound project ownership |
+| Unanchored discovered functions | 613,302 | Code discovered by Ghidra without a retained-path owner |
+| Outside trustworthy function envelopes | 2,090,160 | Mixed data, assets, alignment, missed code, and rejected analyzer artifacts |
+| **Total** | **3,081,392** | Exactly reconciles component builder accounting |
 
-The third-party lower bound divides into LVGL 70,362 bytes, Cordio 37,720,
+The third-party lower bound divides into LVGL 70,362 bytes, Cordio 1,208,
 littlefs 11,700, TinyFrame 1,568, TLSF 1,456, EasyLogger 70, and Ring-Buffer
 zero. Ring-Buffer is zero in this *opaque* ledger because its linked stock
 closure has already moved to controlled ownership.
 
 This replaces the former single opaque percentage as a prioritization tool.
-It deliberately does not call the 2,122,790-byte residual “data”: that bucket
+It deliberately does not call the 2,090,160-byte residual “data”: that bucket
 also includes code missed by path anchoring or rejected from envelope
 accounting.
 
+Release readiness is a separate disjoint partition over the same 3,081,392
+bytes: zero candidate-source bytes remain and all 3,081,392 bytes are typed
+retained/external. The `draw_start_cap` (1,668 physical bytes), `draw_end_cap`
+(1,640 physical bytes), and `draw_caps` (3,306 physical bytes) NemaVG records
+are all production-routed to reviewed MIT source and excluded from both the
+opaque base and current unanchored mask. Remaining Nema internals and hardware
+contracts are not yet sufficiently recovered for safe routing.
+
 ## Flash-plan metadata reconciliation
 
-The package flash plan currently labels 3,270,038 Apollo bytes as
-`official_blob`, 2,732 more than the component builder's canonical opaque-base
-count. Exact overlap proves that all 2,732 bytes are controlled patch sites or
+The package flash plan currently labels 3,099,192 Apollo bytes as
+`official_blob`, 17,800 more than the component builder's canonical opaque-base
+count. Exact overlap proves that all 17,800 bytes are controlled patch sites or
 in-place source leaves. The companion ledger corrects their accounting
 classification without changing emitted bytes or flash addresses and fails
-closed on the 28 sites.
+closed on the 79 sites.
 
 This is a metadata normalization gap in the hand-partitioned package manifest,
 not an executable ownership gap. A later mechanical manifest regeneration can
-split those 19 ranges; until then the analyzer proves and records the exact
+split the affected ranges; until then the analyzer proves and records the exact
 delta rather than silently reporting incompatible opaque totals.
 
 ## Trust boundary
@@ -60,4 +68,4 @@ python3 tools/analyze_g2_apollo_origin_accounting.py \
 ```
 
 The analysis is read-only and performs no signing, flashing, erase, or hardware
-operation.
+operation. Physical GPU qualification remains blocked by unavailable physical evidence.

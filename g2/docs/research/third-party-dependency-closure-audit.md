@@ -47,7 +47,7 @@ The snapshot is **production-excluded by explicit decision**: its
 `[0x004D798C,0x004D83D8)` remain cut-forward pending a compiler/ABI readiness
 matrix and a reviewed production-overlay admission decision. See
 [`g2-json-parser-source-candidate-audit.md`](g2-json-parser-source-candidate-audit.md)
-and [`../third_party/cJSON/README.openCFW.md`](../third_party/cJSON/README.openCFW.md).
+and [`third_party/cJSON/README.openCFW.md`](../../third_party/cJSON/README.openCFW.md).
 No exact historical *producing* commit is asserted.
 That is deliberate: source-identical commit intervals, mixed vendor trees, and
 private patches make those historical object identities unobservable from the

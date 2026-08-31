@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: MIT */
 #include <assert.h>
+#include <stdarg.h>
 #include <string.h>
 #include <stdint.h>
 
@@ -18,15 +19,40 @@ static volatile uint32_t ambient_reset_register;
 static uint32_t route_code;
 static uint32_t route_value;
 static uint32_t delay_ticks;
+static uint32_t delay_history[10];
+static unsigned int delay_call_count;
 static unsigned int buzzer_prepare_calls;
 static volatile uint32_t buzzer_route_word = 0x55667788U;
 static uint32_t buzzer_frequency;
 static uint8_t buzzer_duty;
-static uint32_t buzzer_disable_argument;
+static unsigned int buzzer_pwm_start_calls;
+static unsigned int buzzer_pwm_stop_calls;
+static unsigned int buzzer_pin_configure_calls;
+static uint32_t buzzer_pin;
+static volatile uint32_t buzzer_pin_configuration = 0xA5A55A5AU;
+static int buzzer_timer_storage;
+static void *buzzer_timer_link = &buzzer_timer_storage;
+static volatile uint32_t buzzer_script_state = 7U;
+static volatile uint8_t buzzer_active_flag = 1U;
+static volatile uint8_t buzzer_pending_flag = 1U;
 static uint32_t identifier_selector;
-static uint32_t uart_length;
 static uint32_t uart_timeout;
 static int uart_result;
+static uint8_t uart_initialized;
+static uint8_t uart_error_flag;
+static uint32_t uart_device_storage[11];
+static int uart_mutex_storage;
+static int uart_semaphore_storage;
+static void *uart_device_link = &uart_device_storage;
+static void *uart_mutex_link = &uart_mutex_storage;
+static void *uart_semaphore_link = &uart_semaphore_storage;
+static uint8_t uart_tx_buffer[0x400];
+static volatile uint32_t uart_cache_clean_register;
+static volatile uint32_t uart_registers[0x1000U / sizeof(uint32_t)];
+static unsigned int uart_data_barriers;
+static uint8_t uart_cache_barrier_sequence[12];
+static unsigned int uart_cache_barrier_calls;
+static unsigned int uart_delay_calls;
 static uint8_t audio_status[3] = {7U, 8U, 9U};
 static uint32_t codec_route_code;
 static uint8_t codec_route_enabled;
@@ -44,7 +70,7 @@ static char *audio_path_output;
 static uint32_t audio_path_capacity;
 static uint8_t time_configuration[9];
 static const uint8_t *time_configuration_link = time_configuration;
-static int32_t time_output_seconds;
+static uint32_t time_output_seconds;
 static void *time_output_record;
 struct open_cfw_pt_uled_operations;
 static const struct open_cfw_pt_uled_operations *uled_operations_link;
@@ -71,13 +97,15 @@ static uint32_t codec_mic_enabled;
 static uint32_t pdm_mic_enabled;
 static uint32_t pcm_route_mode;
 static uint32_t audio_unregister_mode;
-static void *released_buffers[2];
-static unsigned int released_buffer_count;
+static union { uint64_t align; uint8_t bytes[6000]; } lc3_encoder_storage;
 static const uint8_t audio_single_callback;
 static const uint8_t audio_stereo_callback;
-static uint8_t audio_codec_buffer_0;
-static uint8_t audio_codec_buffer_1;
-static uint8_t audio_pdm_buffer;
+static union { uint32_t words[0xA44U / 4U]; uint8_t bytes[0xA44U]; }
+    audio_codec_buffer_0;
+static union { uint32_t words[0xA44U / 4U]; uint8_t bytes[0xA44U]; }
+    audio_codec_buffer_1;
+static union { uint32_t words[0xA44U / 4U]; uint8_t bytes[0xA44U]; }
+    audio_pdm_buffer;
 static volatile uint32_t identifier_1_state;
 static int identifier_1_initialize_result;
 static int identifier_1_read_result;
@@ -104,6 +132,8 @@ static void *submitted_lens_message;
 static uint32_t event_flags;
 static unsigned int allocation_count;
 static unsigned int allocation_fail_at;
+static unsigned int allocation_fail_first;
+static uint8_t allocation_fail_always;
 static void *released_allocations[2];
 static unsigned int released_allocation_count;
 static union { uint64_t align; uint8_t bytes[32]; } allocation_0;
@@ -111,6 +141,8 @@ static union { uint64_t align; uint8_t bytes[0x10000]; } allocation_1;
 static unsigned int system_reset_inner_calls;
 static volatile uint32_t system_reset_control;
 static unsigned int system_reset_wait_calls;
+static unsigned int system_reset_barrier_calls;
+static uint32_t system_reset_barrier_values[2];
 static int input_queue_storage;
 static int input_thread_storage;
 static int audio_queue_storage;
@@ -122,6 +154,30 @@ static void *audio_thread_link = &audio_thread_storage;
 static uint32_t direct_audio_message[4];
 static uint32_t direct_thread_flags;
 static void *direct_thread;
+static int direct_queue_result;
+static unsigned int direct_queue_calls;
+static unsigned int input_log_calls;
+static int input_log_result;
+static uint32_t audio_log_filter;
+static unsigned int audio_log_filter_calls;
+static unsigned int audio_structured_log_calls;
+static unsigned int audio_trace_log_calls;
+static int audio_log_result;
+static uint32_t audio_log_level;
+static uint32_t audio_log_line;
+static uint32_t audio_trace_flags;
+static const char *audio_log_function;
+static const char *audio_log_message;
+static uint32_t audio_log_arguments[2];
+static unsigned int audio_log_argument_count;
+static unsigned int ring_acquire_barriers;
+static unsigned int ring_release_barriers;
+static unsigned int ring_callback_calls;
+static void *ring_callback_descriptor;
+static uint32_t ring_callback_event;
+static uint32_t ring_callback_count;
+static volatile uint32_t *ring_callback_write_index;
+static uint32_t ring_callback_observed_write_index;
 static const char *audio_name_table[2] = {"codec", "pdm"};
 static union { uint64_t align; uint8_t bytes[32]; } audio_registration_storage;
 static union { uint64_t align; uint8_t bytes[32]; } audio_recorder_storage;
@@ -138,11 +194,19 @@ static volatile uint8_t font_xip_active;
 static uint32_t mspi_control_operation;
 static uint32_t mspi_control_argument;
 static unsigned int mspi_control_calls;
+static int font_mutex_acquire_result;
+static int font_mutex_release_result;
 static unsigned int mram_delete_all_calls;
 static unsigned int privacy_clear_calls;
 static volatile uint8_t pairing_flag_0;
 static volatile uint32_t pairing_word;
 static volatile uint8_t pairing_flag_1;
+static const uint8_t direct_charger_configuration;
+static const void *direct_charger_interface_link;
+static uint32_t direct_charger_registers[2];
+static uint8_t direct_charger_values[2];
+static unsigned int direct_charger_write_calls;
+static uint8_t direct_identifier_value = 0x42U;
 static uint8_t postprocess_state_0;
 static uint8_t postprocess_state_1;
 static uint8_t postprocess_state_2;
@@ -152,6 +216,13 @@ static volatile uint32_t postprocess_primary;
 static volatile uint32_t postprocess_mode;
 static volatile uint32_t time_format_word;
 static unsigned int postprocess_send_calls;
+static uint16_t postprocess_transport_first;
+static const void *postprocess_transport_second;
+static uint32_t postprocess_transport_third;
+static uint32_t postprocess_transport_fourth;
+static uint8_t postprocess_transport_command;
+static uint8_t postprocess_transport_route;
+static uint32_t postprocess_transport_auxiliary;
 static unsigned int postprocess_refresh_calls;
 static unsigned int postprocess_onboarding_calls;
 static unsigned int postprocess_remove_calls;
@@ -236,32 +307,46 @@ static void host_audio_codec_route(uint32_t code, uint32_t value)
 {
     route_code = code;
     route_value = value;
+    if (value == buzzer_pin_configuration) {
+        buzzer_pin = code;
+        ++buzzer_pin_configure_calls;
+    }
 }
 
 
 static int host_delay_ticks(uint32_t ticks)
 {
     delay_ticks = ticks;
+    if (delay_call_count < 10U) delay_history[delay_call_count] = ticks;
+    ++delay_call_count;
     return 0;
 }
 
 
-static void host_buzzer_prepare(void)
+static int host_buzzer_timer_stop(void *timer)
 {
+    assert(timer == &buzzer_timer_storage);
     ++buzzer_prepare_calls;
+    return 0;
 }
 
 
-static void host_buzzer_apply(uint32_t frequency, uint8_t duty)
+static void host_buzzer_pwm_update(uint32_t frequency, uint8_t duty)
 {
     buzzer_frequency = frequency;
     buzzer_duty = duty;
 }
 
 
-static void host_buzzer_disable(uint32_t argument)
+static void host_buzzer_pwm_start(void)
 {
-    buzzer_disable_argument = argument;
+    ++buzzer_pwm_start_calls;
+}
+
+
+static void host_buzzer_pwm_stop(void)
+{
+    ++buzzer_pwm_stop_calls;
 }
 
 
@@ -274,13 +359,28 @@ static void host_hardware_identifier_read(uint32_t selector, uint32_t *record)
 }
 
 
-static int host_uart_write(const uint8_t *data, uint32_t length,
-                           uint32_t timeout)
+static void host_uart_data_memory_barrier(void) { ++uart_data_barriers; }
+static void host_uart_cache_dsb(void)
 {
-    assert(data != 0);
-    uart_length = length;
+    assert(uart_cache_barrier_calls < sizeof(uart_cache_barrier_sequence));
+    uart_cache_barrier_sequence[uart_cache_barrier_calls++] = 1U;
+}
+static void host_uart_cache_isb(void)
+{
+    assert(uart_cache_barrier_calls < sizeof(uart_cache_barrier_sequence));
+    uart_cache_barrier_sequence[uart_cache_barrier_calls++] = 2U;
+}
+static uint32_t host_uart_tick_get(void) { return 123U; }
+static int host_uart_semaphore_acquire(void *semaphore, uint32_t timeout)
+{
+    assert(semaphore == &uart_semaphore_storage);
     uart_timeout = timeout;
-    return uart_result;
+    return timeout == 0U ? 0 : uart_result;
+}
+static void host_uart_delay_us(uint32_t microseconds)
+{
+    assert(microseconds == 10U);
+    ++uart_delay_calls;
 }
 
 
@@ -304,6 +404,23 @@ static void host_display_apply(uint32_t a, uint32_t b, uint32_t c,
     assert(a == 0U && b == 0U && c == 0U && d == 0U);
     assert(width == 0x240U && height == 0x120U);
     ++display_apply_calls;
+}
+
+
+static int32_t host_lens_sync_transport(uint16_t first, const void *second,
+                                        uint32_t third, uint32_t fourth,
+                                        uint8_t command, uint8_t route,
+                                        uint32_t auxiliary)
+{
+    postprocess_transport_first = first;
+    postprocess_transport_second = second;
+    postprocess_transport_third = third;
+    postprocess_transport_fourth = fourth;
+    postprocess_transport_command = command;
+    postprocess_transport_route = route;
+    postprocess_transport_auxiliary = auxiliary;
+    ++postprocess_send_calls;
+    return -1;
 }
 
 
@@ -335,7 +452,7 @@ static int32_t host_time_to_seconds(const void *record)
 }
 
 
-static void host_time_output(int32_t seconds, void *record)
+static void host_time_output(uint32_t seconds, void *record)
 {
     time_output_seconds = seconds;
     time_output_record = record;
@@ -404,12 +521,13 @@ static int32_t host_charger_enable(void *device, uint32_t argument)
 }
 
 
-static void host_audio_register(uint32_t listener, uint32_t mode,
-                                const void *callback)
+static int host_audio_register(uint32_t listener, uint32_t mode,
+                               const void *callback)
 {
     audio_register_listener = listener;
     audio_register_mode = mode;
     audio_register_callback = callback;
+    return 0;
 }
 
 
@@ -442,13 +560,6 @@ static void host_pcm_route(uint32_t mode)
 static void host_audio_unregister(uint32_t mode)
 {
     audio_unregister_mode = mode;
-}
-
-
-static void host_audio_release(void *buffer)
-{
-    assert(released_buffer_count < 2U);
-    released_buffers[released_buffer_count++] = buffer;
 }
 
 
@@ -516,16 +627,18 @@ static void host_rtc_set_time(const void *record)
 
 static int host_mutex_acquire(void *mutex, uint32_t timeout)
 {
-    assert(mutex == &display_mutex_storage || mutex == &font_mutex_storage);
+    assert(mutex == &display_mutex_storage || mutex == &font_mutex_storage ||
+           mutex == &uart_mutex_storage);
     assert(timeout == 0xFFFFFFFFU);
-    return 0;
+    return mutex == &font_mutex_storage ? font_mutex_acquire_result : 0;
 }
 
 
 static int host_mutex_release(void *mutex)
 {
-    assert(mutex == &display_mutex_storage || mutex == &font_mutex_storage);
-    return 0;
+    assert(mutex == &display_mutex_storage || mutex == &font_mutex_storage ||
+           mutex == &uart_mutex_storage);
+    return mutex == &font_mutex_storage ? font_mutex_release_result : 0;
 }
 
 static int32_t host_mspi_control(void *device, uint32_t operation,
@@ -541,6 +654,41 @@ static int32_t host_mspi_control(void *device, uint32_t operation,
 static void host_mram_delete_all(void) { ++mram_delete_all_calls; }
 static void host_privacy_clear(void) { ++privacy_clear_calls; }
 
+static const void *host_charger_slot_configuration(void *handle)
+{
+    assert(handle != NULL);
+    return &direct_charger_configuration;
+}
+
+static const void *host_charger_configuration_interface(
+    const void *configuration)
+{
+    assert(configuration == &direct_charger_configuration);
+    return direct_charger_interface_link;
+}
+
+static int32_t host_direct_charger_write(const void *context,
+                                         uint32_t register_address,
+                                         const void *input, uint32_t length)
+{
+    assert(context == &direct_charger_configuration && length == 1U);
+    assert(direct_charger_write_calls < 2U);
+    direct_charger_registers[direct_charger_write_calls] = register_address;
+    direct_charger_values[direct_charger_write_calls] = *(const uint8_t *)input;
+    ++direct_charger_write_calls;
+    return (int32_t)0x2BAD0000U;
+}
+
+static int32_t host_direct_identifier_read(const void *context,
+                                           uint32_t register_address,
+                                           uint8_t *output, uint32_t length)
+{
+    assert(context == &direct_identifier_value);
+    assert(register_address == 0x101U && length == 1U && output != NULL);
+    *output = direct_identifier_value;
+    return (int32_t)0x2BAD0000U;
+}
+
 
 static void host_display_buffer_write(void *destination, uintptr_t source,
                                       uint32_t length)
@@ -551,18 +699,133 @@ static void host_display_buffer_write(void *destination, uintptr_t source,
 }
 
 
+static void host_system_reset_barrier(void)
+{
+    assert(system_reset_barrier_calls < 2U);
+    system_reset_barrier_values[system_reset_barrier_calls++] =
+        system_reset_control;
+}
+
+
+static void host_ring_acquire_barrier(void) { ++ring_acquire_barriers; }
+static void host_ring_release_barrier(void) { ++ring_release_barriers; }
+
+
+static void host_ring_callback(void *descriptor, uint32_t event,
+                               uint32_t count)
+{
+    ++ring_callback_calls;
+    ring_callback_descriptor = descriptor;
+    ring_callback_event = event;
+    ring_callback_count = count;
+    ring_callback_observed_write_index = *ring_callback_write_index;
+}
+
+
+static unsigned int host_input_log_failure(const char *format, int result)
+{
+    assert(strcmp(format, "input queue failure %x") == 0);
+    ++input_log_calls;
+    input_log_result = result;
+    return 0U;
+}
+
+
+static uint32_t host_audio_log_filter(void)
+{
+    ++audio_log_filter_calls;
+    return audio_log_filter;
+}
+
+
+static unsigned int host_audio_log_argument_count(const char *message)
+{
+    if (strcmp(message, "Invalid parameters for app registration") == 0 ||
+            strcmp(message, "[svc.audio]Invalid parameters for app registration") == 0 ||
+            strcmp(message, "No PCM app registered") == 0 ||
+            strcmp(message, "[svc.audio]No PCM app registered") == 0 ||
+            strcmp(message, "font mutex acquire failed") == 0 ||
+            strcmp(message, "[font]font mutex acquire failed") == 0 ||
+            strcmp(message, "font mutex release failed") == 0 ||
+            strcmp(message, "[font]font mutex release failed") == 0)
+        return 0U;
+    if (strcmp(message, "PCM app registered: ID=%d, Source=%d") == 0 ||
+            strcmp(message, "[svc.audio]PCM app registered: ID=%d, Source=%d") == 0 ||
+            strcmp(message, "App ID %d not found, current app ID is %d") == 0 ||
+            strcmp(message, "[svc.audio]App ID %d not found, current app ID is %d") == 0)
+        return 2U;
+    return 1U;
+}
+
+
+static void host_audio_structured_log(uint32_t level, const char *tag,
+                                      const char *file, const char *function,
+                                      uint32_t line, const char *message, ...)
+{
+    va_list arguments;
+    unsigned int index;
+    assert(tag != NULL && file != NULL && function != NULL && message != NULL);
+    audio_log_level = level;
+    audio_log_line = line;
+    audio_log_function = function;
+    audio_log_message = message;
+    audio_log_argument_count = host_audio_log_argument_count(message);
+    va_start(arguments, message);
+    if (strcmp(message, "audio queue failure %x") == 0) {
+        audio_log_arguments[0] = (uint32_t)va_arg(arguments, int);
+    } else {
+        for (index = 0U; index < audio_log_argument_count; ++index)
+            audio_log_arguments[index] = va_arg(arguments, uint32_t);
+    }
+    va_end(arguments);
+    ++audio_structured_log_calls;
+    if (audio_log_argument_count != 0U)
+        audio_log_result = (int)audio_log_arguments[
+            audio_log_argument_count - 1U];
+}
+
+
+static void host_audio_trace_log(uint32_t flags, const char *format, ...)
+{
+    va_list arguments;
+    unsigned int index;
+    const char *source;
+    audio_trace_flags = flags;
+    audio_log_message = format;
+    audio_log_argument_count = host_audio_log_argument_count(format);
+    va_start(arguments, format);
+    source = va_arg(arguments, const char *);
+    assert(format == source);
+    if (strcmp(format, "[thread.audio]audio queue failure %x") == 0) {
+        audio_log_arguments[0] = (uint32_t)va_arg(arguments, int);
+    } else {
+        for (index = 0U; index < audio_log_argument_count; ++index)
+            audio_log_arguments[index] = va_arg(arguments, uint32_t);
+    }
+    va_end(arguments);
+    ++audio_trace_log_calls;
+    if (audio_log_argument_count != 0U)
+        audio_log_result = (int)audio_log_arguments[
+            audio_log_argument_count - 1U];
+}
+
+
 static int host_queue_send(void *queue, const void *message,
                            uint32_t priority, uint32_t timeout)
 {
     assert(priority == 0U);
     if (timeout == 0U) {
-        if (queue == &input_queue_storage)
-            memcpy(last_message, message, sizeof(last_message));
-        else {
-            assert(queue == &audio_queue_storage);
-            memcpy(direct_audio_message, message, sizeof(direct_audio_message));
+        ++direct_queue_calls;
+        if (direct_queue_result == 0) {
+            if (queue == &input_queue_storage)
+                memcpy(last_message, message, sizeof(last_message));
+            else {
+                assert(queue == &audio_queue_storage);
+                memcpy(direct_audio_message, message,
+                       sizeof(uint32_t) * 3U);
+            }
         }
-        return 0;
+        return direct_queue_result;
     }
     if (timeout == 1000U) {
         assert(queue == &display_queue_storage);
@@ -587,7 +850,10 @@ static void *host_lens_allocate(uint32_t size)
 {
     void *result;
     ++allocation_count;
-    if (allocation_fail_at == allocation_count) return NULL;
+    if (allocation_fail_always != 0U ||
+            allocation_count <= allocation_fail_first ||
+            allocation_fail_at == allocation_count)
+        return NULL;
     if (allocation_count == 1U) {
         assert(size <= sizeof(allocation_0.bytes));
         result = allocation_0.bytes;
@@ -632,12 +898,6 @@ static void host_system_reset_inner(void) { ++system_reset_inner_calls; }
 static uint8_t host_postprocess_state_0(void) { return postprocess_state_0; }
 static uint8_t host_postprocess_state_1(void) { return postprocess_state_1; }
 static uint8_t host_postprocess_state_2(void) { return postprocess_state_2; }
-static void host_postprocess_send(uint32_t a, uint32_t b, uint32_t c,
-                                  uint32_t d)
-{
-    assert(a == 0U && b == 0U && c == 0U && d == 0U);
-    ++postprocess_send_calls;
-}
 static void host_postprocess_refresh(void) { ++postprocess_refresh_calls; }
 static int host_postprocess_onboarding(uint8_t index, const uint8_t *enabled)
 {
@@ -709,10 +969,18 @@ static void host_font_prepare(uint32_t base, uint32_t length)
 #define OPEN_CFW_PT_INPUT_MESSAGE_SEND host_input_message_send
 #define OPEN_CFW_PT_INPUT_THREAD_LINK (&input_thread_link)
 #define OPEN_CFW_PT_INPUT_QUEUE_LINK (&input_queue_link)
-#define OPEN_CFW_PT_BUZZER_PREPARE host_buzzer_prepare
+#define OPEN_CFW_PT_INPUT_LOG_FAILURE host_input_log_failure
+#define OPEN_CFW_PT_INPUT_QUEUE_FAILURE_FORMAT "input queue failure %x"
 #define OPEN_CFW_PT_BUZZER_ROUTE_WORD (&buzzer_route_word)
-#define OPEN_CFW_PT_BUZZER_APPLY host_buzzer_apply
-#define OPEN_CFW_PT_BUZZER_DISABLE host_buzzer_disable
+#define OPEN_CFW_PT_BUZZER_PWM_UPDATE host_buzzer_pwm_update
+#define OPEN_CFW_PT_BUZZER_PWM_START host_buzzer_pwm_start
+#define OPEN_CFW_PT_BUZZER_PWM_STOP host_buzzer_pwm_stop
+#define OPEN_CFW_PT_BUZZER_PIN_CONFIGURATION (&buzzer_pin_configuration)
+#define OPEN_CFW_PT_BUZZER_TIMER_LINK (&buzzer_timer_link)
+#define OPEN_CFW_PT_BUZZER_TIMER_STOP host_buzzer_timer_stop
+#define OPEN_CFW_PT_BUZZER_SCRIPT_STATE (&buzzer_script_state)
+#define OPEN_CFW_PT_BUZZER_ACTIVE_FLAG (&buzzer_active_flag)
+#define OPEN_CFW_PT_BUZZER_PENDING_FLAG (&buzzer_pending_flag)
 #define OPEN_CFW_PT_HARDWARE_IDENTIFIER_READ host_hardware_identifier_read
 #define OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_STATE (&identifier_1_state)
 #define OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_INITIALIZE host_identifier_1_initialize
@@ -727,7 +995,24 @@ static void host_font_prepare(uint32_t base, uint32_t length)
 #define OPEN_CFW_PT_CHARGER_DEVICE (&charger_device_storage)
 #define OPEN_CFW_PT_CHARGER_DISABLE host_charger_disable
 #define OPEN_CFW_PT_CHARGER_ENABLE host_charger_enable
-#define OPEN_CFW_PT_UART_WRITE host_uart_write
+#define OPEN_CFW_PT_CHARGER_SLOT_CONFIGURATION(handle) \
+    host_charger_slot_configuration(handle)
+#define OPEN_CFW_PT_CHARGER_CONFIGURATION_INTERFACE(configuration) \
+    host_charger_configuration_interface(configuration)
+#define OPEN_CFW_PT_UART_INITIALIZED (&uart_initialized)
+#define OPEN_CFW_PT_UART_DEVICE_LINK (&uart_device_link)
+#define OPEN_CFW_PT_UART_MUTEX_LINK (&uart_mutex_link)
+#define OPEN_CFW_PT_UART_SEMAPHORE_LINK (&uart_semaphore_link)
+#define OPEN_CFW_PT_UART_ERROR_FLAG (&uart_error_flag)
+#define OPEN_CFW_PT_UART_TX_BUFFER uart_tx_buffer
+#define OPEN_CFW_PT_UART_CACHE_CLEAN_REGISTER (&uart_cache_clean_register)
+#define OPEN_CFW_PT_UART_REGISTER_BASE uart_registers
+#define OPEN_CFW_PT_UART_DATA_MEMORY_BARRIER host_uart_data_memory_barrier
+#define OPEN_CFW_PT_UART_TICK_GET host_uart_tick_get
+#define OPEN_CFW_PT_UART_SEMAPHORE_ACQUIRE host_uart_semaphore_acquire
+#define OPEN_CFW_PT_UART_DELAY_US host_uart_delay_us
+#define OPEN_CFW_PT_UART_CACHE_DSB host_uart_cache_dsb
+#define OPEN_CFW_PT_UART_CACHE_ISB host_uart_cache_isb
 #define OPEN_CFW_PT_AUDIO_STATUS_BASE audio_status
 #define OPEN_CFW_PT_CODEC_ROUTE_SET host_codec_route_set
 #define OPEN_CFW_PT_AUDIO_CAPTURE_ACTIVE (&audio_capture_active)
@@ -748,16 +1033,16 @@ static void host_font_prepare(uint32_t base, uint32_t length)
     ((volatile struct open_cfw_pt_audio_recorder *)audio_recorder_storage.bytes)
 #define OPEN_CFW_PT_AUDIO_NAME_TABLE audio_name_table
 #define OPEN_CFW_PT_FILE_CLOSE host_direct_file_close
-#define OPEN_CFW_PT_AUDIO_RELEASE host_audio_release
-#define OPEN_CFW_PT_AUDIO_CODEC_BUFFER_0 (&audio_codec_buffer_0)
-#define OPEN_CFW_PT_AUDIO_CODEC_BUFFER_1 (&audio_codec_buffer_1)
-#define OPEN_CFW_PT_AUDIO_PDM_BUFFER (&audio_pdm_buffer)
+#define OPEN_CFW_PT_AUDIO_CODEC_BUFFER_0 (audio_codec_buffer_0.bytes)
+#define OPEN_CFW_PT_AUDIO_CODEC_BUFFER_1 (audio_codec_buffer_1.bytes)
+#define OPEN_CFW_PT_AUDIO_PDM_BUFFER (audio_pdm_buffer.bytes)
 #define OPEN_CFW_PT_DISPLAY_STAGE_1_WORD (&display_stage_1_word)
 #define OPEN_CFW_PT_DISPLAY_STAGE_3_WORD (&display_stage_3_word)
 #define OPEN_CFW_PT_DISPLAY_STAGE_2_FIRST_WORD (&display_stage_2_first_word)
 #define OPEN_CFW_PT_DISPLAY_STAGE_2_SECOND_WORD (&display_stage_2_second_word)
 #define OPEN_CFW_PT_DISPLAY_REINITIALIZE host_display_reinitialize
 #define OPEN_CFW_PT_DISPLAY_APPLY host_display_apply
+#define OPEN_CFW_PT_LENS_SYNC_TRANSPORT host_lens_sync_transport
 #define OPEN_CFW_PT_ULED_OPERATIONS_LINK (&uled_operations_link)
 #define OPEN_CFW_PT_DISPLAY_MUTEX_LINK (&display_mutex_link)
 #define OPEN_CFW_PT_DISPLAY_QUEUE_LINK (&display_queue_link)
@@ -766,6 +1051,52 @@ static void host_font_prepare(uint32_t base, uint32_t length)
 #define OPEN_CFW_PT_MUTEX_RELEASE host_mutex_release
 #define OPEN_CFW_PT_DISPLAY_BUFFER_WRITE host_display_buffer_write
 #define OPEN_CFW_PT_QUEUE_SEND host_queue_send
+#define OPEN_CFW_PT_RING_ACQUIRE_BARRIER() host_ring_acquire_barrier()
+#define OPEN_CFW_PT_RING_RELEASE_BARRIER() host_ring_release_barrier()
+#define OPEN_CFW_PT_AUDIO_LOG_FILTER_READ() host_audio_log_filter()
+#define OPEN_CFW_PT_AUDIO_STRUCTURED_LOG host_audio_structured_log
+#define OPEN_CFW_PT_AUDIO_TRACE_LOG host_audio_trace_log
+#define OPEN_CFW_PT_AUDIO_LOG_TAG "thread.audio"
+#define OPEN_CFW_PT_AUDIO_LOG_FILE "thread_audio.c"
+#define OPEN_CFW_PT_AUDIO_LOG_FUNCTION "AUD_SendMessage"
+#define OPEN_CFW_PT_AUDIO_LOG_MESSAGE "audio queue failure %x"
+#define OPEN_CFW_PT_AUDIO_TRACE_MESSAGE \
+    "[thread.audio]audio queue failure %x"
+#define OPEN_CFW_PT_SERVICE_AUDIO_LOG_TAG "svc.audio"
+#define OPEN_CFW_PT_SERVICE_AUDIO_LOG_FILE "service_audio.c"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_FUNCTION "SVC_PcmAppRegister"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_INVALID_MESSAGE \
+    "Invalid parameters for app registration"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_INVALID_TRACE \
+    "[svc.audio]Invalid parameters for app registration"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_OCCUPIED_MESSAGE \
+    "PCM stream is already occupied by app ID %d, unregistering previous app"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_OCCUPIED_TRACE \
+    "[svc.audio]PCM stream is already occupied by app ID %d, unregistering previous app"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_SUCCESS_MESSAGE \
+    "PCM app registered: ID=%d, Source=%d"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_SUCCESS_TRACE \
+    "[svc.audio]PCM app registered: ID=%d, Source=%d"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_FUNCTION "SVC_PcmAppUnregister"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_EMPTY_MESSAGE "No PCM app registered"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_EMPTY_TRACE \
+    "[svc.audio]No PCM app registered"
+#define OPEN_CFW_PT_FONT_LOG_TAG "font"
+#define OPEN_CFW_PT_FONT_LOG_FILE "font_manager.c"
+#define OPEN_CFW_PT_FONT_ACQUIRE_FUNCTION "font_xip_acquire"
+#define OPEN_CFW_PT_FONT_ACQUIRE_MESSAGE "font mutex acquire failed"
+#define OPEN_CFW_PT_FONT_ACQUIRE_TRACE "[font]font mutex acquire failed"
+#define OPEN_CFW_PT_FONT_RELEASE_FUNCTION "font_xip_release"
+#define OPEN_CFW_PT_FONT_RELEASE_MESSAGE "font mutex release failed"
+#define OPEN_CFW_PT_FONT_RELEASE_TRACE "[font]font mutex release failed"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_MISMATCH_MESSAGE \
+    "App ID %d not found, current app ID is %d"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_MISMATCH_TRACE \
+    "[svc.audio]App ID %d not found, current app ID is %d"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_SUCCESS_MESSAGE \
+    "PCM app unregistered: ID=%d"
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_SUCCESS_TRACE \
+    "[svc.audio]PCM app unregistered: ID=%d"
 #define OPEN_CFW_PT_FAIL_STOP host_fail_stop
 #define OPEN_CFW_PT_LENS_SYNC_QUEUE_LINK (&lens_queue_link)
 #define OPEN_CFW_PT_LENS_SYNC_EVENT_LINK (&lens_event_link)
@@ -795,6 +1126,7 @@ static void host_font_prepare(uint32_t base, uint32_t length)
 #define OPEN_CFW_PT_AMBIENT_RESET_REGISTER (&ambient_reset_register)
 #define OPEN_CFW_PT_SYSTEM_RESET_INNER host_system_reset_inner
 #define OPEN_CFW_PT_SYSTEM_RESET_CONTROL (&system_reset_control)
+#define OPEN_CFW_PT_SYSTEM_RESET_BARRIER() host_system_reset_barrier()
 #define OPEN_CFW_PT_SYSTEM_RESET_WAIT() (++system_reset_wait_calls)
 #define OPEN_CFW_PT_DISPLAY_POSTPROCESS_STATE_0 host_postprocess_state_0
 #define OPEN_CFW_PT_DISPLAY_POSTPROCESS_STATE_1 host_postprocess_state_1
@@ -804,7 +1136,6 @@ static void host_font_prepare(uint32_t base, uint32_t length)
 #define OPEN_CFW_PT_DISPLAY_POSTPROCESS_PRIMARY (&postprocess_primary)
 #define OPEN_CFW_PT_DISPLAY_POSTPROCESS_MODE (&postprocess_mode)
 #define OPEN_CFW_PT_TIME_FORMAT_WORD (&time_format_word)
-#define OPEN_CFW_PT_DISPLAY_POSTPROCESS_SEND host_postprocess_send
 #define OPEN_CFW_PT_DISPLAY_POSTPROCESS_REFRESH host_postprocess_refresh
 #define OPEN_CFW_PT_DISPLAY_POSTPROCESS_ONBOARDING host_postprocess_onboarding
 #define OPEN_CFW_PT_DISPLAY_POSTPROCESS_REMOVE host_postprocess_remove
@@ -825,6 +1156,7 @@ static void host_font_prepare(uint32_t base, uint32_t length)
 #define OPEN_CFW_PT_MSPI_CONTROL host_mspi_control
 #define OPEN_CFW_PT_FONT_0_BASE HOST_FONT_0_BASE
 #define OPEN_CFW_PT_FONT_1_BASE HOST_FONT_1_BASE
+#include "../../components/apollo_main/core_overlay/pt_protocol_lc3_setup.c"
 #include "../../components/apollo_main/core_overlay/pt_protocol_board_leaf_candidates.c"
 
 
@@ -852,7 +1184,21 @@ int main(void)
         assert(open_cfw_pt_display_postprocess_state_0() == 0U);
         assert(open_cfw_pt_display_postprocess_state_1() == 0U);
         assert(open_cfw_pt_display_postprocess_state_2() == 0U);
+        postprocess_ready = 2U;
+        postprocess_active = 1U;
+        postprocess_primary = 0U;
+        postprocess_mode = 1U;
+        assert(open_cfw_pt_display_postprocess_state_0() == 0U);
+        assert(open_cfw_pt_display_postprocess_state_1() == 1U);
+        assert(open_cfw_pt_display_postprocess_state_2() == 0U);
+        postprocess_primary = 1U;
+        postprocess_mode = 2U;
+        assert(open_cfw_pt_display_postprocess_state_2() == 0U);
 
+        memset(&record, 0xA5, sizeof(record));
+        open_cfw_pt_seconds_to_time(0U, &record);
+        assert(record.read_error == 0U && record.century_bit == 0U);
+        assert(record.year == 0U && record.month == 1U && record.day == 1U);
         open_cfw_pt_seconds_to_time(946684800U, &record);
         assert(record.weekday == 6U);
         assert(record.year == 0U && record.month == 1U && record.day == 1U);
@@ -869,35 +1215,148 @@ int main(void)
         open_cfw_pt_time_output(951829200, &record);
         assert(record.hour == 13U);
         record.month = 13U;
-        assert(open_cfw_pt_time_to_seconds(&record) == -1);
+        assert(open_cfw_pt_time_to_seconds(&record) == 980773200);
+        memset(&record, 0, sizeof(record));
+        record.month = 1U;
+        record.day = 1U;
+        assert(open_cfw_pt_time_to_seconds(&record) == 946684800);
+        record.hundredths = 49U;
+        assert(open_cfw_pt_time_to_seconds(&record) == 946684800);
+        record.hundredths = 50U;
+        assert(open_cfw_pt_time_to_seconds(&record) == 946684801);
+        record.year = 100U;
+        record.hundredths = 0U;
+        assert(open_cfw_pt_time_to_seconds(&record) == 946684800);
+        open_cfw_pt_seconds_to_time(4107542400U, &record);
+        assert(record.year == 100U && record.month == 2U && record.day == 29U);
+        open_cfw_pt_seconds_to_time(4107628800U, &record);
+        assert(record.year == 100U && record.month == 3U && record.day == 1U);
+        open_cfw_pt_seconds_to_time(UINT32_MAX, &record);
+        assert(record.year == 106U && record.month == 2U && record.day == 6U);
+        assert(record.hour == 6U && record.minute == 28U &&
+               record.second == 15U);
+        assert(open_cfw_pt_time_to_seconds(NULL) == -1);
+        open_cfw_pt_seconds_to_time(946684800U, NULL);
+        time_format_word = 1U;
+        open_cfw_pt_time_output(946684800U, &record);
+        assert(record.hour == 12U);
+        open_cfw_pt_time_output(946728000U, &record);
+        assert(record.hour == 12U);
+        open_cfw_pt_time_output(946767600U, &record);
+        assert(record.hour == 11U);
 
         system_reset_control = 0xFFFFFFFFU;
         system_reset_wait_calls = 0U;
+        system_reset_barrier_calls = 0U;
         open_cfw_pt_system_reset_inner();
         assert(system_reset_control == 0x05FA0704U);
         assert(system_reset_wait_calls == 1U);
+        assert(system_reset_barrier_calls == 2U);
+        assert(system_reset_barrier_values[0] == 0xFFFFFFFFU);
+        assert(system_reset_barrier_values[1] == 0x05FA0704U);
 
         {
-            uint8_t bytes[8] = {0U, 1U, 2U, 3U, 4U, 5U, 6U, 7U};
-            open_cfw_pt_display_buffer_write(bytes + 2U,
-                                             (uintptr_t)bytes, 6U);
-            assert(bytes[2] == 0U && bytes[7] == 5U);
+            struct {
+                uint32_t before;
+                open_cfw_pt_display_buffer_descriptor descriptor;
+                uint32_t after;
+            } guarded;
+            uint8_t ring[8] = {0xEEU, 0xEEU, 0xEEU, 0xEEU,
+                               0xEEU, 0xEEU, 0xEEU, 0xEEU};
+            const uint8_t bytes[6] = {0U, 1U, 2U, 3U, 4U, 5U};
+            memset(&guarded, 0, sizeof(guarded));
+            guarded.before = 0x11223344U;
+            guarded.after = 0x55667788U;
+            guarded.descriptor.base = ring;
+            guarded.descriptor.capacity = sizeof(ring);
+            guarded.descriptor.read_index = 2U;
+            guarded.descriptor.write_index = 6U;
+            guarded.descriptor.callback = host_ring_callback;
+            ring_callback_calls = 0U;
+            ring_acquire_barriers = 0U;
+            ring_release_barriers = 0U;
+            ring_callback_write_index = &guarded.descriptor.write_index;
+            assert(open_cfw_pt_display_buffer_write(
+                       &guarded.descriptor, (uintptr_t)bytes,
+                       sizeof(bytes)) == 3U);
+            assert(ring[6] == 0U && ring[7] == 1U && ring[0] == 2U);
+            assert(ring[1] == 0xEEU && guarded.descriptor.write_index == 1U);
+            assert(guarded.before == 0x11223344U &&
+                   guarded.after == 0x55667788U);
+            assert(ring_acquire_barriers == 1U && ring_release_barriers == 1U);
+            assert(ring_callback_calls == 1U);
+            assert(ring_callback_descriptor == &guarded.descriptor);
+            assert(ring_callback_event == 1U && ring_callback_count == 3U);
+            assert(ring_callback_observed_write_index == 1U);
+            guarded.descriptor.read_index = 2U;
+            guarded.descriptor.write_index = 1U;
+            assert(open_cfw_pt_display_buffer_write(
+                       &guarded.descriptor, (uintptr_t)bytes, 1U) == 0U);
+            guarded.descriptor.read_index = 8U;
+            guarded.descriptor.write_index = 0U;
+            assert(open_cfw_pt_display_buffer_write(
+                       &guarded.descriptor, (uintptr_t)bytes, 1U) == 0U);
+            assert(open_cfw_pt_display_buffer_write(
+                       NULL, (uintptr_t)bytes, 1U) == 0U);
+            assert(open_cfw_pt_display_buffer_write(
+                       &guarded.descriptor, 0U, 1U) == 0U);
         }
+        allocation_fail_at = 0U;
+        allocation_fail_first = 0U;
+        allocation_fail_always = 0U;
         allocation_count = 0U;
-        allocation_fail_at = 1U;
+        delay_call_count = 0U;
+        assert(open_cfw_pt_lens_sync_allocate(8U) == allocation_0.bytes);
+        assert(allocation_count == 1U && delay_call_count == 0U);
+        allocation_count = 0U;
+        allocation_fail_first = 3U;
+        delay_call_count = 0U;
         delay_ticks = 0U;
         assert(open_cfw_pt_lens_sync_allocate(8U) == allocation_1.bytes);
-        assert(allocation_count == 2U && delay_ticks == 1U);
+        assert(allocation_count == 4U && delay_call_count == 3U);
+        assert(delay_history[0] == 1U && delay_history[1] == 2U &&
+               delay_history[2] == 4U && delay_ticks == 4U);
+        allocation_count = 0U;
+        allocation_fail_first = 0U;
+        allocation_fail_always = 1U;
+        delay_call_count = 0U;
+        assert(open_cfw_pt_lens_sync_allocate(8U) == NULL);
+        assert(allocation_count == 10U && delay_call_count == 10U);
+        assert(delay_history[0] == 1U && delay_history[9] == 512U);
+        allocation_fail_always = 0U;
 
         last_message[0] = 9U;
         {
             const uint32_t message[3] = {3U, 4U, 5U};
+            input_queue_link = &input_queue_storage;
+            input_thread_link = &input_thread_storage;
+            direct_queue_result = 0;
+            direct_queue_calls = 0U;
             direct_thread_flags = 0U;
             open_cfw_pt_input_message_send(message);
             assert(last_message[0] == 3U && last_message[2] == 5U);
             assert(direct_thread == &input_thread_storage);
             assert(direct_thread_flags == 0x00400000U);
+            input_thread_link = NULL;
+            direct_thread = &input_thread_storage;
+            open_cfw_pt_input_message_send(message);
+            assert(direct_thread == NULL &&
+                   direct_thread_flags == 0x00400000U);
+            input_queue_link = NULL;
+            open_cfw_pt_input_message_send(message);
+            assert(direct_queue_calls == 2U);
+            input_queue_link = &input_queue_storage;
+            direct_queue_result = -7;
+            direct_thread_flags = 0U;
+            input_log_calls = 0U;
+            open_cfw_pt_input_message_send(message);
+            assert(input_log_calls == 1U && input_log_result == -7);
+            assert(direct_thread_flags == 0U);
+            open_cfw_pt_input_message_send(NULL);
+            assert(direct_queue_calls == 3U);
+            input_thread_link = &input_thread_storage;
         }
+        direct_queue_result = 0;
         direct_thread_flags = 0U;
         open_cfw_pt_codec_mic_enable(0x101U);
         assert(direct_audio_message[0] == 0U);
@@ -907,10 +1366,31 @@ int main(void)
         open_cfw_pt_pdm_mic_enable(0x102U);
         assert(direct_audio_message[0] == 1U);
         assert(direct_audio_message[2] == 2U);
+        audio_thread_link = NULL;
+        direct_thread = &audio_thread_storage;
+        open_cfw_pt_codec_mic_enable(1U);
+        assert(direct_thread == NULL && direct_thread_flags == 0x00400000U);
+        audio_thread_link = &audio_thread_storage;
+        direct_queue_result = -9;
+        audio_log_filter = 7U;
+        audio_log_filter_calls = 0U;
+        audio_structured_log_calls = 0U;
+        audio_trace_log_calls = 0U;
+        direct_thread_flags = 0U;
+        open_cfw_pt_codec_mic_enable(1U);
+        assert(audio_structured_log_calls == 1U &&
+               audio_trace_log_calls == 1U && audio_log_result == -9);
+        assert(audio_log_filter_calls == 2U && direct_thread_flags == 0U);
+        audio_queue_link = NULL;
+        open_cfw_pt_codec_mic_enable(1U);
+        assert(audio_log_filter_calls == 2U);
+        audio_queue_link = &audio_queue_storage;
+        direct_queue_result = 0;
 
         {
             char path[32];
             char short_path[5];
+            char one_byte_path[1] = {'X'};
             volatile struct open_cfw_pt_audio_registration *registration;
             volatile struct open_cfw_pt_audio_recorder *recorder;
             open_cfw_pt_audio_path_format_provider(0U, 7U, path,
@@ -920,25 +1400,99 @@ int main(void)
             open_cfw_pt_audio_path_format_provider(1U, 123U, short_path,
                                                    sizeof(short_path));
             assert(short_path[sizeof(short_path) - 1U] == '\0');
+            open_cfw_pt_audio_path_format_provider(1U, UINT16_MAX, path,
+                                                   sizeof(path));
+            assert(strcmp(path, "/audio/pdm_65535.pcm") == 0);
+            open_cfw_pt_audio_path_format_provider(0U, 0U, one_byte_path,
+                                                   sizeof(one_byte_path));
+            assert(one_byte_path[0] == '\0');
+            strcpy(path, "unchanged");
+            open_cfw_pt_audio_path_format_provider(2U, 7U, path,
+                                                   sizeof(path));
+            assert(strcmp(path, "unchanged") == 0);
             memset(audio_registration_storage.bytes, 0,
                    sizeof(audio_registration_storage.bytes));
             registration = OPEN_CFW_PT_AUDIO_REGISTRATION_TABLE;
-            open_cfw_pt_audio_register(0x10BU, 1U, &audio_single_callback);
+            audio_log_filter = 7U;
+            audio_log_filter_calls = 0U;
+            audio_structured_log_calls = 0U;
+            audio_trace_log_calls = 0U;
+            assert(open_cfw_pt_audio_register(
+                       0x10BU, 1U, &audio_single_callback) == 0);
             assert(registration[1].listener == 0x10BU);
             assert(registration[1].mode == 1U);
             assert(registration[1].callback == &audio_single_callback);
+            assert(audio_structured_log_calls == 1U &&
+                   audio_trace_log_calls == 1U &&
+                   audio_log_filter_calls == 2U);
+            assert(audio_log_level == 3U && audio_log_line == 0xD0U);
+            assert(strcmp(audio_log_function, "SVC_PcmAppRegister") == 0);
+            assert(strcmp(audio_log_message,
+                          "[svc.audio]PCM app registered: ID=%d, Source=%d") == 0);
+            assert(audio_log_argument_count == 2U &&
+                   audio_log_arguments[0] == 0x10BU &&
+                   audio_log_arguments[1] == 1U);
+            assert(audio_trace_flags == 0x0C800000U);
+            registration[1].reserved[0] = 0xAAU;
+            assert(open_cfw_pt_audio_register(
+                       0x20BU, 1U, &audio_stereo_callback) == 0);
+            assert(registration[1].listener == 0x20BU);
+            assert(registration[1].reserved[0] == 0U);
+            assert(registration[1].callback == &audio_stereo_callback);
+            assert(audio_structured_log_calls == 3U &&
+                   audio_trace_log_calls == 3U &&
+                   audio_log_filter_calls == 6U);
+            assert(open_cfw_pt_audio_register(0U, 2U,
+                       &audio_single_callback) == -1);
+            assert(open_cfw_pt_audio_register(0U, 0U, NULL) == -1);
+            assert(audio_structured_log_calls == 5U &&
+                   audio_trace_log_calls == 5U &&
+                   audio_log_filter_calls == 10U);
+            assert(audio_log_level == 1U && audio_log_line == 0xBFU &&
+                   audio_log_argument_count == 0U);
+            assert(audio_trace_flags == 0x04000000U);
             assert(open_cfw_pt_audio_remove(7U, 1U) == -1);
-            assert(open_cfw_pt_audio_remove(0x10BU, 1U) == 0);
+            assert(audio_structured_log_calls == 6U &&
+                   audio_trace_log_calls == 6U);
+            assert(audio_log_level == 2U && audio_log_line == 0xDDU);
+            assert(audio_log_arguments[0] == 7U &&
+                   audio_log_arguments[1] == 0x20BU);
+            assert(audio_trace_flags == 0x08800000U);
+            assert(open_cfw_pt_audio_remove(0x20BU, 1U) == 0);
             assert(registration[1].callback == NULL);
+            assert(audio_structured_log_calls == 7U &&
+                   audio_trace_log_calls == 7U);
+            assert(audio_log_level == 3U && audio_log_line == 0xE1U);
+            assert(audio_log_argument_count == 1U &&
+                   audio_log_arguments[0] == 0x20BU);
+            assert(audio_trace_flags == 0x0C400000U);
+            assert(open_cfw_pt_audio_remove(0x20BU, 1U) == 0);
+            assert(audio_structured_log_calls == 8U &&
+                   audio_trace_log_calls == 8U &&
+                   audio_log_filter_calls == 16U);
+            assert(audio_log_level == 2U && audio_log_line == 0xD8U &&
+                   audio_log_argument_count == 0U);
+            assert(audio_trace_flags == 0x08000000U);
+            assert(open_cfw_pt_audio_remove(0U, 2U) == -1);
             memset(audio_recorder_storage.bytes, 0,
                    sizeof(audio_recorder_storage.bytes));
             recorder = OPEN_CFW_PT_AUDIO_RECORDER_TABLE;
             recorder[1].file = &direct_audio_file;
+            recorder[1].byte_count = 0x11223344U;
+            recorder[1].identifier = 0x5566U;
             recorder[1].active = 1U;
+            recorder[1].initialized = 0x77U;
             direct_file_close_calls = 0U;
             open_cfw_pt_audio_unregister(1U);
             assert(direct_file_close_calls == 1U);
             assert(recorder[1].file == NULL && recorder[1].active == 0U);
+            assert(recorder[1].byte_count == 0x11223344U);
+            assert(recorder[1].identifier == 0x5566U &&
+                   recorder[1].initialized == 0x77U);
+            open_cfw_pt_audio_unregister(1U);
+            assert(direct_file_close_calls == 1U);
+            open_cfw_pt_audio_unregister(2U);
+            assert(direct_file_close_calls == 1U);
         }
         {
             struct open_cfw_pt_ambient_field field = {7U, 4U, 1U};
@@ -957,6 +1511,8 @@ int main(void)
         }
         font_configuration_flag = 0U;
         font_xip_active = 1U;
+        font_mutex_acquire_result = 0;
+        font_mutex_release_result = 0;
         mspi_control_calls = 0U;
         open_cfw_pt_font_xip_acquire();
         assert(mspi_control_calls == 1U && mspi_control_operation == 0U);
@@ -964,7 +1520,32 @@ int main(void)
         open_cfw_pt_font_xip_release();
         assert(mspi_control_calls == 2U && mspi_control_operation == 2U);
         assert(font_xip_active == 1U);
+        audio_log_filter = 7U;
+        audio_structured_log_calls = 0U;
+        audio_trace_log_calls = 0U;
         font_configuration_flag = 1U;
+        font_mutex_acquire_result = -1;
+        open_cfw_pt_font_xip_acquire();
+        assert(audio_structured_log_calls == 1U &&
+               audio_trace_log_calls == 1U && audio_log_level == 1U &&
+               audio_log_line == 0xC3U &&
+               strcmp(audio_log_function, "font_xip_acquire") == 0 &&
+               strcmp(audio_log_message,
+                      "[font]font mutex acquire failed") == 0 &&
+               audio_trace_flags == 0x04000000U &&
+               audio_log_argument_count == 0U);
+        font_mutex_acquire_result = 0;
+        font_mutex_release_result = -1;
+        open_cfw_pt_font_xip_release();
+        assert(audio_structured_log_calls == 2U &&
+               audio_trace_log_calls == 2U && audio_log_level == 1U &&
+               audio_log_line == 0xCCU &&
+               strcmp(audio_log_function, "font_xip_release") == 0 &&
+               strcmp(audio_log_message,
+                      "[font]font mutex release failed") == 0 &&
+               audio_trace_flags == 0x04000000U &&
+               audio_log_argument_count == 0U);
+        font_mutex_release_result = 0;
         open_cfw_pt_font_xip_acquire();
         open_cfw_pt_font_xip_release();
         assert(mspi_control_calls == 2U);
@@ -977,18 +1558,70 @@ int main(void)
         assert(mram_delete_all_calls == 1U && privacy_clear_calls == 1U);
         assert(pairing_flag_0 == 0U && pairing_word == 0U &&
                pairing_flag_1 == 0U);
+        {
+            uint8_t charger_device[0x100] = {0U};
+            static const struct open_cfw_pt_device_write_interface writer = {
+                .write = host_direct_charger_write,
+                .reserved = NULL,
+                .context = &direct_charger_configuration,
+            };
+            static const struct open_cfw_pt_device_read_interface reader = {
+                .reserved = NULL,
+                .read = host_direct_identifier_read,
+                .context = &direct_identifier_value,
+            };
+            uint8_t identifier = 0U;
+            void *handle = open_cfw_pt_charger_open(charger_device, 0U);
+            assert(handle == charger_device + 0x8CU);
+            assert(open_cfw_pt_charger_open(NULL, 0U) == NULL);
+            assert(open_cfw_pt_charger_open(
+                       (const void *)(uintptr_t)0x1000U,
+                       (uint8_t)0x100U) ==
+                   (void *)(uintptr_t)0x108CU);
+            assert(open_cfw_pt_charger_open(
+                       (const void *)(uintptr_t)0x1000U, 0xFFU) ==
+                   (void *)(uintptr_t)0x1884U);
+            direct_charger_interface_link = &writer;
+            direct_charger_write_calls = 0U;
+            assert(open_cfw_pt_charger_enable(handle, 0x0FU) ==
+                   (int32_t)0x2BAD0000U);
+            assert(direct_charger_write_calls == 2U);
+            assert(direct_charger_registers[0] == 0x304U &&
+                   direct_charger_registers[1] == 0x307U);
+            assert(direct_charger_values[0] == 3U &&
+                   direct_charger_values[1] == 3U);
+            direct_charger_write_calls = 0U;
+            assert(open_cfw_pt_charger_enable(handle, 0xF0U) ==
+                   OPEN_CFW_PT_PLATFORM_SUCCESS);
+            assert(direct_charger_write_calls == 0U);
+            direct_charger_write_calls = 0U;
+            assert(open_cfw_pt_charger_disable(handle, 0x0FU) ==
+                   (int32_t)0x2BAD0000U);
+            assert(direct_charger_registers[0] == 0x305U &&
+                   direct_charger_registers[1] == 0x306U);
+            assert(open_cfw_pt_hardware_identifier_2_read(
+                       &reader, 0x101U, &identifier, 1U) ==
+                   (int32_t)0x2BAD0000U);
+            assert(identifier == 0x42U);
+        }
     }
     assert(open_cfw_pt_board_display_state() == display_state);
     assert(open_cfw_pt_board_codec_platform_identifier() == 0xA1B2C3D4U);
 
     open_cfw_pt_board_buzzer_start(4000U, 30U);
     assert(buzzer_prepare_calls == 1U);
+    assert(buzzer_pwm_stop_calls == 1U);
+    assert(buzzer_pin_configure_calls == 1U && buzzer_pin == 0x91U);
+    assert(buzzer_script_state == 0U);
+    assert(buzzer_active_flag == 0U && buzzer_pending_flag == 0U);
     assert(route_code == 0x91U);
     assert(route_value == 0x55667788U);
     assert(buzzer_frequency == 4000U);
     assert(buzzer_duty == 30U);
+    assert(buzzer_pwm_start_calls == 1U);
     open_cfw_pt_board_buzzer_stop();
-    assert(buzzer_disable_argument == 1U);
+    assert(buzzer_pwm_stop_calls == 2U);
+    assert(buzzer_pin_configure_calls == 2U);
 
     {
         uint32_t identifier = 0U;
@@ -1048,12 +1681,56 @@ int main(void)
     assert(charger_disable_argument == 0x0FU);
     assert(charger_enable_argument == 0x0FU);
 
+    uart_initialized = 1U;
+    memset(uart_device_storage, 0, sizeof(uart_device_storage));
+    memset((void *)uart_registers, 0, sizeof(uart_registers));
+    uart_device_storage[0] = 0x01EA9E06U;
+    uart_device_storage[10] = 0U;
     uart_result = 0;
+    uart_registers[0x18U / 4U] = 0U;
+    uart_data_barriers = 0U;
+    uart_cache_barrier_calls = 0U;
     assert(open_cfw_pt_board_uart_sync_write(display_state, 4U, 100U) == 0);
-    assert(uart_length == 4U);
+    assert(uart_registers[0x50U / 4U] == 4U);
+    assert(uart_registers[0x4CU / 4U] ==
+           (uint32_t)(uintptr_t)uart_tx_buffer);
+    assert(uart_registers[0x48U / 4U] == 10U);
+    assert(uart_registers[0x44U / 4U] == 0x1821U);
     assert(uart_timeout == 100U);
+    assert(memcmp(uart_tx_buffer, display_state, 4U) == 0);
+    assert(uart_data_barriers == 1U);
+    assert(uart_cache_barrier_calls == 3U);
+    assert(uart_cache_barrier_sequence[0] == 1U &&
+           uart_cache_barrier_sequence[1] == 1U &&
+           uart_cache_barrier_sequence[2] == 2U);
     uart_result = 7;
     assert(open_cfw_pt_board_uart_sync_write(display_state, 4U, 100U) == -1);
+    assert(uart_registers[0x48U / 4U] == 0U);
+    assert(uart_registers[0x44U / 4U] == 0x1800U);
+    assert(uart_data_barriers == 2U);
+    assert(uart_cache_barrier_calls == 6U);
+    assert(uart_cache_barrier_sequence[3] == 1U &&
+           uart_cache_barrier_sequence[4] == 1U &&
+           uart_cache_barrier_sequence[5] == 2U);
+    uart_result = 0;
+    uart_registers[0x18U / 4U] = 8U;
+    uart_delay_calls = 0U;
+    assert(open_cfw_pt_board_uart_sync_write(display_state, 4U, 0U) == 0);
+    assert(uart_delay_calls == 100U);
+    assert(uart_data_barriers == 3U);
+    assert(uart_cache_barrier_calls == 9U);
+    assert(uart_cache_barrier_sequence[6] == 1U &&
+           uart_cache_barrier_sequence[7] == 1U &&
+           uart_cache_barrier_sequence[8] == 2U);
+    assert(open_cfw_pt_uart_status_get(NULL, &uart_timeout) == 2);
+    uart_device_storage[0] = 0U;
+    assert(open_cfw_pt_uart_status_get(
+               uart_device_storage, &uart_timeout) == 2);
+    uart_device_storage[0] = 0x01EA9E06U;
+    assert(open_cfw_pt_uart_status_get(uart_device_storage, NULL) == 6);
+    uart_initialized = 0U;
+    assert(open_cfw_pt_board_uart_sync_write(display_state, 4U, 0U) == -1);
+    uart_initialized = 1U;
 
     assert(open_cfw_pt_board_audio_status_get(0U) == &audio_status[0]);
     assert(open_cfw_pt_board_audio_status_get(1U) == &audio_status[1]);
@@ -1090,29 +1767,174 @@ int main(void)
     assert(pdm_mic_enabled == 1U);
     assert(pcm_route_mode == 1U);
 
-    released_buffer_count = 0U;
+    memset(audio_codec_buffer_0.bytes, 0, sizeof(audio_codec_buffer_0.bytes));
+    memset(audio_codec_buffer_1.bytes, 0, sizeof(audio_codec_buffer_1.bytes));
+    audio_codec_buffer_0.words[1] = 10000U;
+    audio_codec_buffer_0.words[2] = 16000U;
+    audio_codec_buffer_1.words[1] = 10000U;
+    audio_codec_buffer_1.words[2] = 24000U;
     audio_remove_result = 0;
     open_cfw_pt_board_audio_channel_1_start();
     assert(codec_mic_enabled == 0U);
     assert(audio_remove_listener == 0x10BU);
     assert(audio_remove_mode == 0U);
     assert(audio_unregister_mode == 0U);
-    assert(released_buffer_count == 2U);
-    assert(released_buffers[0] == &audio_codec_buffer_0);
-    assert(released_buffers[1] == &audio_codec_buffer_1);
-    released_buffer_count = 0U;
+    assert(audio_codec_buffer_0.words[6] ==
+           (uint32_t)(uintptr_t)(audio_codec_buffer_0.bytes + 0x1CU));
+    assert(audio_codec_buffer_1.words[6] == 0U);
     audio_remove_result = -1;
+    audio_codec_buffer_0.words[6] = 0U;
     open_cfw_pt_board_audio_channel_1_start();
-    assert(released_buffer_count == 0U);
+    assert(audio_codec_buffer_0.words[6] == 0U);
 
-    released_buffer_count = 0U;
+    memset(audio_pdm_buffer.bytes, 0, sizeof(audio_pdm_buffer.bytes));
+    audio_pdm_buffer.words[1] = 2500U;
+    audio_pdm_buffer.words[2] = 48000U;
     audio_remove_result = 0;
     open_cfw_pt_board_audio_channel_1_stop();
     assert(pdm_mic_enabled == 0U);
     assert(audio_remove_mode == 1U);
     assert(audio_unregister_mode == 1U);
-    assert(released_buffer_count == 1U);
-    assert(released_buffers[0] == &audio_pdm_buffer);
+    assert(audio_pdm_buffer.words[6] ==
+           (uint32_t)(uintptr_t)(audio_pdm_buffer.bytes + 0x1CU));
+    open_cfw_pt_audio_encoder_setup(NULL);
+
+    memset(lc3_encoder_storage.bytes, 0xA5,
+           sizeof(lc3_encoder_storage.bytes));
+    assert(open_cfw_pt_lc3_setup_encoder(
+               10000U, 16000U, 0U, lc3_encoder_storage.bytes) ==
+           (void *)lc3_encoder_storage.bytes);
+    {
+        const uint32_t *lc3_words =
+            (const uint32_t *)lc3_encoder_storage.bytes;
+        unsigned int index;
+        assert(lc3_encoder_storage.bytes[0] == 3U);
+        assert(lc3_encoder_storage.bytes[1] == 1U);
+        assert(lc3_encoder_storage.bytes[2] == 1U);
+        for (index = 3U; index < 0x4A0U; ++index)
+            assert(lc3_encoder_storage.bytes[index] == 0U);
+        assert(lc3_words[0x4A0U / 4U] == 20U);
+        assert(lc3_words[0x4A4U / 4U] == 90U);
+        assert(lc3_words[0x4A8U / 4U] == 250U);
+        for (index = 0x4ACU; index < 0x4ACU + 350U * 4U; ++index)
+            assert(lc3_encoder_storage.bytes[index] == 0U);
+        assert(lc3_encoder_storage.bytes[0x4ACU + 350U * 4U] == 0xA5U);
+    }
+
+    memset(lc3_encoder_storage.bytes, 0xA5,
+           sizeof(lc3_encoder_storage.bytes));
+    assert(open_cfw_pt_lc3_setup_encoder(
+               7500U, 24000U, 48000U, lc3_encoder_storage.bytes) ==
+           (void *)lc3_encoder_storage.bytes);
+    {
+        const uint32_t *lc3_words =
+            (const uint32_t *)lc3_encoder_storage.bytes;
+        unsigned int index;
+        assert(lc3_encoder_storage.bytes[0] == 2U);
+        assert(lc3_encoder_storage.bytes[1] == 2U);
+        assert(lc3_encoder_storage.bytes[2] == 4U);
+        assert(lc3_words[0x4A0U / 4U] == 60U);
+        assert(lc3_words[0x4A4U / 4U] == 210U);
+        assert(lc3_words[0x4A8U / 4U] == 570U);
+        for (index = 0x4ACU; index < 0x4ACU + 846U * 4U; ++index)
+            assert(lc3_encoder_storage.bytes[index] == 0U);
+        assert(lc3_encoder_storage.bytes[0x4ACU + 846U * 4U] == 0xA5U);
+    }
+    {
+        static const int durations[] = {2500, 5000, 7500, 10000};
+        static const int rates[] = {8000, 16000, 24000, 32000, 48000};
+        static const size_t expected_sizes[4][5] = {
+            {1416U, 1636U, 1856U, 2076U, 2516U},
+            {1576U, 1956U, 2336U, 2716U, 3476U},
+            {1760U, 2324U, 2888U, 3452U, 4580U},
+            {1896U, 2596U, 3296U, 3996U, 5396U},
+        };
+        unsigned int duration_index;
+        unsigned int codec_rate_index;
+        int pcm_rate_index;
+
+        for (duration_index = 0U; duration_index < 4U; ++duration_index) {
+            for (codec_rate_index = 0U; codec_rate_index < 5U;
+                 ++codec_rate_index) {
+                for (pcm_rate_index = -1; pcm_rate_index < 5;
+                     ++pcm_rate_index) {
+                    unsigned int effective_rate_index =
+                        pcm_rate_index < 0 ? codec_rate_index :
+                        (unsigned int)pcm_rate_index;
+                    int pcm_rate = pcm_rate_index < 0 ? 0 :
+                        rates[pcm_rate_index];
+                    size_t expected =
+                        expected_sizes[duration_index][effective_rate_index];
+                    void *result;
+
+                    assert(open_cfw_pt_lc3_encoder_size(
+                               durations[duration_index],
+                               rates[effective_rate_index]) == expected);
+                    memset(lc3_encoder_storage.bytes, 0xA5,
+                           sizeof(lc3_encoder_storage.bytes));
+                    result = open_cfw_pt_lc3_setup_encoder(
+                        durations[duration_index], rates[codec_rate_index],
+                        pcm_rate, lc3_encoder_storage.bytes);
+                    if (codec_rate_index <= effective_rate_index) {
+                        assert(result == (void *)lc3_encoder_storage.bytes);
+                        assert(lc3_encoder_storage.bytes[0] == duration_index);
+                        assert(lc3_encoder_storage.bytes[1] == codec_rate_index);
+                        assert(lc3_encoder_storage.bytes[2] ==
+                               effective_rate_index);
+                        assert(lc3_encoder_storage.bytes[expected] == 0xA5U);
+
+                        memset(lc3_encoder_storage.bytes, 0xA5,
+                               sizeof(lc3_encoder_storage.bytes));
+                        assert(open_cfw_pt_lc3_setup_encoder_bounded(
+                                   durations[duration_index],
+                                   rates[codec_rate_index], pcm_rate,
+                                   lc3_encoder_storage.bytes, expected) ==
+                               (void *)lc3_encoder_storage.bytes);
+                        memset(lc3_encoder_storage.bytes, 0xA5,
+                               sizeof(lc3_encoder_storage.bytes));
+                        assert(open_cfw_pt_lc3_setup_encoder_bounded(
+                                   durations[duration_index],
+                                   rates[codec_rate_index], pcm_rate,
+                                   lc3_encoder_storage.bytes, expected - 1U) ==
+                               NULL);
+                        assert(lc3_encoder_storage.bytes[0] == 0xA5U);
+                    } else {
+                        assert(result == NULL);
+                        assert(lc3_encoder_storage.bytes[0] == 0xA5U);
+                    }
+                }
+            }
+        }
+        assert(expected_sizes[3][4] == 5396U);
+        assert(open_cfw_pt_lc3_encoder_size(2500, 48000) == 2516U);
+        assert(open_cfw_pt_lc3_encoder_size(5000, 24000) == 2336U);
+        assert(open_cfw_pt_lc3_encoder_size(10000, 44100) == 0U);
+        assert(open_cfw_pt_lc3_encoder_size(10000, 96000) == 0U);
+    }
+    memset(lc3_encoder_storage.bytes, 0xA5,
+           sizeof(lc3_encoder_storage.bytes));
+    assert(open_cfw_pt_lc3_setup_encoder(
+               10000, 16000, -1, lc3_encoder_storage.bytes) ==
+           (void *)lc3_encoder_storage.bytes);
+    assert(lc3_encoder_storage.bytes[0] == 3U);
+    assert(lc3_encoder_storage.bytes[1] == 1U);
+    assert(lc3_encoder_storage.bytes[2] == 1U);
+    memset(lc3_encoder_storage.bytes, 0xA5,
+           sizeof(lc3_encoder_storage.bytes));
+    assert(open_cfw_pt_lc3_setup_encoder(
+               9000U, 16000U, 0U, lc3_encoder_storage.bytes) == 0U);
+    assert(lc3_encoder_storage.bytes[0] == 0xA5U);
+    assert(open_cfw_pt_lc3_setup_encoder(
+               -1, 16000, 0, lc3_encoder_storage.bytes) == NULL);
+    assert(open_cfw_pt_lc3_setup_encoder(
+               10000, -1, 0, lc3_encoder_storage.bytes) == NULL);
+    assert(open_cfw_pt_lc3_setup_encoder(
+               10000U, 48000U, 16000U, lc3_encoder_storage.bytes) == 0U);
+    assert(open_cfw_pt_lc3_setup_encoder(
+               10000U, 16000U, 0U, NULL) == 0U);
+    assert(open_cfw_pt_lc3_setup_encoder(
+               10000, 16000, 0, lc3_encoder_storage.bytes + 1U) == NULL);
+    assert(lc3_encoder_storage.bytes[0] == 0xA5U);
 
     open_cfw_pt_board_display_stage_1(0x11U);
     assert(display_stage_1_word == 0x11U);
@@ -1287,6 +2109,18 @@ int main(void)
     postprocess_state_0 = 1U;
     postprocess_state_1 = 1U;
     postprocess_state_2 = 1U;
+    postprocess_send_calls = 0U;
+    open_cfw_pt_display_postprocess_send(
+        0x12345U, 0x12345678U, 0x23456U, 0xABCDEF01U);
+    assert(postprocess_send_calls == 1U);
+    assert(postprocess_transport_first == 0x2345U);
+    assert(postprocess_transport_second ==
+           (const void *)(uintptr_t)0x12345678U);
+    assert(postprocess_transport_third == 0x3456U);
+    assert(postprocess_transport_fourth == 0xABCDEF01U);
+    assert(postprocess_transport_command == 5U);
+    assert(postprocess_transport_route == 2U);
+    assert(postprocess_transport_auxiliary == 0U);
     postprocess_send_calls = 0U;
     open_cfw_pt_board_display_postprocess();
     assert(postprocess_send_calls == 2U);

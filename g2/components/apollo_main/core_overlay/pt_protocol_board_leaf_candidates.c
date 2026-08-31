@@ -13,7 +13,11 @@
     ((volatile uint32_t *)(uintptr_t)0xE000ED0CU)
 #endif
 #ifndef OPEN_CFW_PT_SYSTEM_RESET_BARRIER
+#if defined(__arm__) || defined(__thumb__)
+#define OPEN_CFW_PT_SYSTEM_RESET_BARRIER() __builtin_arm_dsb(0xFU)
+#else
 #define OPEN_CFW_PT_SYSTEM_RESET_BARRIER() __sync_synchronize()
+#endif
 #endif
 #ifndef OPEN_CFW_PT_SYSTEM_RESET_WAIT
 #define OPEN_CFW_PT_SYSTEM_RESET_WAIT() \
@@ -51,8 +55,7 @@
 #endif
 #ifndef OPEN_CFW_PT_DISPLAY_POSTPROCESS_SEND
 #define OPEN_CFW_PT_DISPLAY_POSTPROCESS_SEND \
-    ((void (*)(uint32_t, uint32_t, uint32_t, uint32_t)) \
-        (uintptr_t)0x00464C37U)
+    open_cfw_pt_display_postprocess_send
 #endif
 #ifndef OPEN_CFW_PT_DISPLAY_POSTPROCESS_REFRESH
 #define OPEN_CFW_PT_DISPLAY_POSTPROCESS_REFRESH \
@@ -175,10 +178,18 @@ static void open_cfw_pt_font_xip_read_default(uint32_t address,
 #define OPEN_CFW_PT_INPUT_QUEUE_LINK \
     ((void *const volatile *)(uintptr_t)0x20004098U)
 #endif
+#ifndef OPEN_CFW_PT_INPUT_LOG_FAILURE
+#define OPEN_CFW_PT_INPUT_LOG_FAILURE \
+    ((unsigned int (*)(const char *, ...))(uintptr_t)0x004733EFU)
+#endif
+#ifndef OPEN_CFW_PT_INPUT_QUEUE_FAILURE_FORMAT
+#define OPEN_CFW_PT_INPUT_QUEUE_FAILURE_FORMAT \
+    ((const char *)(uintptr_t)0x00739E54U)
+#endif
 
 #ifndef OPEN_CFW_PT_BUZZER_PREPARE
 #define OPEN_CFW_PT_BUZZER_PREPARE \
-    ((void (*)(void))(uintptr_t)0x00502AC5U)
+    open_cfw_pt_buzzer_prepare
 #endif
 
 #ifndef OPEN_CFW_PT_BUZZER_ROUTE_WORD
@@ -188,12 +199,48 @@ static void open_cfw_pt_font_xip_read_default(uint32_t address,
 
 #ifndef OPEN_CFW_PT_BUZZER_APPLY
 #define OPEN_CFW_PT_BUZZER_APPLY \
-    ((void (*)(uint32_t, uint8_t))(uintptr_t)0x005027FDU)
+    open_cfw_pt_buzzer_apply
 #endif
 
 #ifndef OPEN_CFW_PT_BUZZER_DISABLE
 #define OPEN_CFW_PT_BUZZER_DISABLE \
-    ((void (*)(uint32_t))(uintptr_t)0x0050280BU)
+    open_cfw_pt_buzzer_disable
+#endif
+#ifndef OPEN_CFW_PT_BUZZER_PWM_UPDATE
+#define OPEN_CFW_PT_BUZZER_PWM_UPDATE \
+    ((void (*)(uint32_t, uint8_t))(uintptr_t)0x00502791U)
+#endif
+#ifndef OPEN_CFW_PT_BUZZER_PWM_START
+#define OPEN_CFW_PT_BUZZER_PWM_START \
+    ((void (*)(void))(uintptr_t)0x0050276FU)
+#endif
+#ifndef OPEN_CFW_PT_BUZZER_PWM_STOP
+#define OPEN_CFW_PT_BUZZER_PWM_STOP \
+    ((void (*)(void))(uintptr_t)0x0050277FU)
+#endif
+#ifndef OPEN_CFW_PT_BUZZER_PIN_CONFIGURATION
+#define OPEN_CFW_PT_BUZZER_PIN_CONFIGURATION \
+    ((const volatile uint32_t *)(uintptr_t)0x0078EE48U)
+#endif
+#ifndef OPEN_CFW_PT_BUZZER_TIMER_LINK
+#define OPEN_CFW_PT_BUZZER_TIMER_LINK \
+    ((void *const volatile *)(uintptr_t)0x20074504U)
+#endif
+#ifndef OPEN_CFW_PT_BUZZER_TIMER_STOP
+#define OPEN_CFW_PT_BUZZER_TIMER_STOP \
+    ((int (*)(void *))(uintptr_t)0x004494D9U)
+#endif
+#ifndef OPEN_CFW_PT_BUZZER_SCRIPT_STATE
+#define OPEN_CFW_PT_BUZZER_SCRIPT_STATE \
+    ((volatile uint32_t *)(uintptr_t)0x20074500U)
+#endif
+#ifndef OPEN_CFW_PT_BUZZER_ACTIVE_FLAG
+#define OPEN_CFW_PT_BUZZER_ACTIVE_FLAG \
+    ((volatile uint8_t *)(uintptr_t)0x20074FB5U)
+#endif
+#ifndef OPEN_CFW_PT_BUZZER_PENDING_FLAG
+#define OPEN_CFW_PT_BUZZER_PENDING_FLAG \
+    ((volatile uint8_t *)(uintptr_t)0x20074FB4U)
 #endif
 
 #ifndef OPEN_CFW_PT_HARDWARE_IDENTIFIER_READ
@@ -203,8 +250,7 @@ static void open_cfw_pt_font_xip_read_default(uint32_t address,
 
 #ifndef OPEN_CFW_PT_HARDWARE_IDENTIFIER_2_READ
 #define OPEN_CFW_PT_HARDWARE_IDENTIFIER_2_READ \
-    ((int32_t (*)(const void *, uint32_t, uint8_t *, uint32_t)) \
-        (uintptr_t)0x0055FC39U)
+    open_cfw_pt_hardware_identifier_2_read
 #endif
 
 #ifndef OPEN_CFW_PT_HARDWARE_IDENTIFIER_1_STATE
@@ -249,30 +295,116 @@ static void open_cfw_pt_font_xip_read_default(uint32_t address,
 
 #ifndef OPEN_CFW_PT_CHARGER_OPEN
 #define OPEN_CFW_PT_CHARGER_OPEN \
-    ((void *(*)(const void *, uint32_t))(uintptr_t)0x0055EFF1U)
+    open_cfw_pt_charger_open
 #endif
 
 #ifndef OPEN_CFW_PT_CHARGER_DEVICE
 #define OPEN_CFW_PT_CHARGER_DEVICE \
     ((const void *)(uintptr_t)0x20070F78U)
 #endif
+#ifndef OPEN_CFW_PT_CHARGER_SLOT_CONFIGURATION
+#define OPEN_CFW_PT_CHARGER_SLOT_CONFIGURATION(handle) \
+    (*(const void *const *)(handle))
+#endif
+#ifndef OPEN_CFW_PT_CHARGER_CONFIGURATION_INTERFACE
+#define OPEN_CFW_PT_CHARGER_CONFIGURATION_INTERFACE(configuration) \
+    (*(const struct open_cfw_pt_device_write_interface *const *) \
+        ((const uint8_t *)(configuration) + 4U))
+#endif
 
 #ifndef OPEN_CFW_PT_CHARGER_DISABLE
 #define OPEN_CFW_PT_CHARGER_DISABLE \
-    ((int32_t (*)(void *, uint32_t))(uintptr_t)0x0055F0D9U)
+    open_cfw_pt_charger_disable
 #endif
 
 #ifndef OPEN_CFW_PT_CHARGER_ENABLE
 #define OPEN_CFW_PT_CHARGER_ENABLE \
-    ((int32_t (*)(void *, uint32_t))(uintptr_t)0x0055F07BU)
+    open_cfw_pt_charger_enable
 #endif
 
 #define OPEN_CFW_PT_PLATFORM_SUCCESS ((int32_t)0x2BAD0000U)
 
 #ifndef OPEN_CFW_PT_UART_WRITE
 #define OPEN_CFW_PT_UART_WRITE \
-    ((int (*)(const uint8_t *, uint32_t, uint32_t)) \
-        (uintptr_t)0x00584C99U)
+    open_cfw_pt_uart_write
+#endif
+#ifndef OPEN_CFW_PT_UART_INITIALIZED
+#define OPEN_CFW_PT_UART_INITIALIZED \
+    ((const volatile uint8_t *)(uintptr_t)0x20074FC9U)
+#endif
+#ifndef OPEN_CFW_PT_UART_DEVICE_LINK
+#define OPEN_CFW_PT_UART_DEVICE_LINK \
+    ((void *const volatile *)(uintptr_t)0x20074610U)
+#endif
+#ifndef OPEN_CFW_PT_UART_MUTEX_LINK
+#define OPEN_CFW_PT_UART_MUTEX_LINK \
+    ((void *const volatile *)(uintptr_t)0x20074620U)
+#endif
+#ifndef OPEN_CFW_PT_UART_SEMAPHORE_LINK
+#define OPEN_CFW_PT_UART_SEMAPHORE_LINK \
+    ((void *const volatile *)(uintptr_t)0x2007461CU)
+#endif
+#ifndef OPEN_CFW_PT_UART_ERROR_FLAG
+#define OPEN_CFW_PT_UART_ERROR_FLAG \
+    ((volatile uint8_t *)(uintptr_t)0x20074FCAU)
+#endif
+#ifndef OPEN_CFW_PT_UART_TX_BUFFER
+#define OPEN_CFW_PT_UART_TX_BUFFER \
+    ((uint8_t *)(uintptr_t)0x20379DA0U)
+#endif
+#ifndef OPEN_CFW_PT_UART_CACHE_CLEAN_REGISTER
+#define OPEN_CFW_PT_UART_CACHE_CLEAN_REGISTER \
+    ((volatile uint32_t *)(uintptr_t)0xE000EF68U)
+#endif
+#ifndef OPEN_CFW_PT_UART_TRANSFER_ABORT
+#define OPEN_CFW_PT_UART_TRANSFER_ABORT \
+    open_cfw_pt_uart_transfer_abort
+#endif
+#ifndef OPEN_CFW_PT_UART_TRANSFER_START
+#define OPEN_CFW_PT_UART_TRANSFER_START \
+    open_cfw_pt_uart_transfer_start
+#endif
+#ifndef OPEN_CFW_PT_UART_STATUS_GET
+#define OPEN_CFW_PT_UART_STATUS_GET \
+    open_cfw_pt_uart_status_get
+#endif
+#ifndef OPEN_CFW_PT_UART_REGISTER_BASE
+#define OPEN_CFW_PT_UART_REGISTER_BASE \
+    ((volatile uint32_t *)(uintptr_t)0x40039000U)
+#endif
+#ifndef OPEN_CFW_PT_UART_DATA_MEMORY_BARRIER
+#if defined(__arm__) || defined(__thumb__)
+#define OPEN_CFW_PT_UART_DATA_MEMORY_BARRIER() \
+    __builtin_arm_dmb(0xFU)
+#else
+#define OPEN_CFW_PT_UART_DATA_MEMORY_BARRIER() __sync_synchronize()
+#endif
+#endif
+#ifndef OPEN_CFW_PT_UART_TICK_GET
+#define OPEN_CFW_PT_UART_TICK_GET \
+    ((uint32_t (*)(void))(uintptr_t)0x004490CDU)
+#endif
+#ifndef OPEN_CFW_PT_UART_SEMAPHORE_ACQUIRE
+#define OPEN_CFW_PT_UART_SEMAPHORE_ACQUIRE \
+    ((int (*)(void *, uint32_t))(uintptr_t)0x0044994FU)
+#endif
+#ifndef OPEN_CFW_PT_UART_DELAY_US
+#define OPEN_CFW_PT_UART_DELAY_US \
+    ((void (*)(uint32_t))(uintptr_t)0x00491103U)
+#endif
+#ifndef OPEN_CFW_PT_UART_CACHE_DSB
+#if defined(__arm__) || defined(__thumb__)
+#define OPEN_CFW_PT_UART_CACHE_DSB() __builtin_arm_dsb(0xFU)
+#else
+#define OPEN_CFW_PT_UART_CACHE_DSB() __sync_synchronize()
+#endif
+#endif
+#ifndef OPEN_CFW_PT_UART_CACHE_ISB
+#if defined(__arm__) || defined(__thumb__)
+#define OPEN_CFW_PT_UART_CACHE_ISB() __builtin_arm_isb(0xFU)
+#else
+#define OPEN_CFW_PT_UART_CACHE_ISB() __sync_synchronize()
+#endif
 #endif
 
 #ifndef OPEN_CFW_PT_AUDIO_STATUS_BASE
@@ -342,10 +474,24 @@ static void open_cfw_pt_font_xip_read_default(uint32_t address,
     open_cfw_pt_audio_unregister
 #endif
 
-#ifndef OPEN_CFW_PT_AUDIO_RELEASE
-#define OPEN_CFW_PT_AUDIO_RELEASE \
-    ((void (*)(void *))(uintptr_t)0x0057A927U)
+#ifndef OPEN_CFW_PT_AUDIO_ENCODER_SETUP
+#define OPEN_CFW_PT_AUDIO_ENCODER_SETUP \
+    open_cfw_pt_audio_encoder_setup
 #endif
+#ifndef OPEN_CFW_PT_LC3_SETUP_ENCODER
+#define OPEN_CFW_PT_LC3_SETUP_ENCODER \
+    open_cfw_pt_lc3_setup_encoder_bounded
+#endif
+
+/* The authenticated stock starts 0x20106A7C, 0x201074C0, 0x20107F04,
+ * and the next allocation at 0x20108948 establish a 0xA44-byte slot. */
+#ifndef OPEN_CFW_PT_AUDIO_CODEC_SLOT_BYTES
+#define OPEN_CFW_PT_AUDIO_CODEC_SLOT_BYTES UINT32_C(0xA44)
+#endif
+#define OPEN_CFW_PT_AUDIO_CODEC_HEADER_BYTES UINT32_C(0x1C)
+#define OPEN_CFW_PT_AUDIO_CODEC_STORAGE_BYTES \
+    (OPEN_CFW_PT_AUDIO_CODEC_SLOT_BYTES - \
+     OPEN_CFW_PT_AUDIO_CODEC_HEADER_BYTES)
 
 #ifndef OPEN_CFW_PT_AUDIO_CODEC_BUFFER_0
 #define OPEN_CFW_PT_AUDIO_CODEC_BUFFER_0 \
@@ -413,6 +559,17 @@ struct open_cfw_pt_uled_operations {
         (uintptr_t)0x00474067U)
 #endif
 
+/*
+ * Authenticated stock lens-sync transport at 0x00464772 (Thumb 0x00464773).
+ * The stock postprocess wrapper at 0x00464C36 forwards its four arguments and
+ * the exact trailing tuple (5, 2, 0) through this seven-argument boundary.
+ */
+#ifndef OPEN_CFW_PT_LENS_SYNC_TRANSPORT
+#define OPEN_CFW_PT_LENS_SYNC_TRANSPORT \
+    ((int32_t (*)(uint16_t, const void *, uint32_t, uint32_t, uint8_t, uint8_t, uint32_t)) \
+        (uintptr_t)0x00464773U)
+#endif
+
 #ifndef OPEN_CFW_PT_DISPLAY_MUTEX_LINK
 #define OPEN_CFW_PT_DISPLAY_MUTEX_LINK \
     ((void *const volatile *)(uintptr_t)0x200744E8U)
@@ -425,7 +582,7 @@ struct open_cfw_pt_uled_operations {
 
 #ifndef OPEN_CFW_PT_DISPLAY_BUFFER
 #define OPEN_CFW_PT_DISPLAY_BUFFER \
-    ((void *)(uintptr_t)0x20073B60U)
+    ((open_cfw_pt_display_buffer_descriptor *)(uintptr_t)0x20073B60U)
 #endif
 
 #ifndef OPEN_CFW_PT_MUTEX_ACQUIRE
@@ -447,6 +604,143 @@ struct open_cfw_pt_uled_operations {
 #define OPEN_CFW_PT_QUEUE_SEND \
     ((int (*)(void *, const void *, uint32_t, uint32_t)) \
         (uintptr_t)0x00449ABFU)
+#endif
+#ifndef OPEN_CFW_PT_RING_ACQUIRE_BARRIER
+#define OPEN_CFW_PT_RING_ACQUIRE_BARRIER() __sync_synchronize()
+#endif
+#ifndef OPEN_CFW_PT_RING_RELEASE_BARRIER
+#define OPEN_CFW_PT_RING_RELEASE_BARRIER() __sync_synchronize()
+#endif
+#ifndef OPEN_CFW_PT_AUDIO_LOG_FILTER
+#define OPEN_CFW_PT_AUDIO_LOG_FILTER \
+    open_cfw_pt_audio_log_filter
+#endif
+#ifndef OPEN_CFW_PT_AUDIO_LOG_FILTER_WORD
+#define OPEN_CFW_PT_AUDIO_LOG_FILTER_WORD \
+    ((const volatile uint8_t *)(uintptr_t)0x20004543U)
+#endif
+#ifndef OPEN_CFW_PT_AUDIO_LOG_FILTER_READ
+#define OPEN_CFW_PT_AUDIO_LOG_FILTER_READ() \
+    ((uint32_t)*OPEN_CFW_PT_AUDIO_LOG_FILTER_WORD)
+#endif
+#ifndef OPEN_CFW_PT_AUDIO_STRUCTURED_LOG
+#define OPEN_CFW_PT_AUDIO_STRUCTURED_LOG \
+    ((void (*)(uint32_t, const char *, const char *, const char *, uint32_t, const char *, ...))(uintptr_t)0x0043D575U)
+#endif
+#ifndef OPEN_CFW_PT_AUDIO_TRACE_LOG
+#define OPEN_CFW_PT_AUDIO_TRACE_LOG \
+    ((void (*)(uint32_t, const char *, ...))(uintptr_t)0x0043CE9FU)
+#endif
+#ifndef OPEN_CFW_PT_AUDIO_LOG_TAG
+#define OPEN_CFW_PT_AUDIO_LOG_TAG ((const char *)(uintptr_t)0x007899A0U)
+#endif
+#ifndef OPEN_CFW_PT_AUDIO_LOG_FILE
+#define OPEN_CFW_PT_AUDIO_LOG_FILE ((const char *)(uintptr_t)0x00706FECU)
+#endif
+#ifndef OPEN_CFW_PT_AUDIO_LOG_FUNCTION
+#define OPEN_CFW_PT_AUDIO_LOG_FUNCTION ((const char *)(uintptr_t)0x007899D0U)
+#endif
+#ifndef OPEN_CFW_PT_AUDIO_LOG_MESSAGE
+#define OPEN_CFW_PT_AUDIO_LOG_MESSAGE ((const char *)(uintptr_t)0x007667B0U)
+#endif
+#ifndef OPEN_CFW_PT_AUDIO_TRACE_MESSAGE
+#define OPEN_CFW_PT_AUDIO_TRACE_MESSAGE ((const char *)(uintptr_t)0x007451A0U)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_LOG_TAG
+#define OPEN_CFW_PT_SERVICE_AUDIO_LOG_TAG \
+    ((const char *)(uintptr_t)0x0078BE1CU)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_LOG_FILE
+#define OPEN_CFW_PT_SERVICE_AUDIO_LOG_FILE \
+    ((const char *)(uintptr_t)0x007053C4U)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_FUNCTION
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_FUNCTION \
+    ((const char *)(uintptr_t)0x00782E34U)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_INVALID_MESSAGE
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_INVALID_MESSAGE \
+    ((const char *)(uintptr_t)0x0074D82CU)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_INVALID_TRACE
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_INVALID_TRACE \
+    ((const char *)(uintptr_t)0x0072CE6CU)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_OCCUPIED_MESSAGE
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_OCCUPIED_MESSAGE \
+    ((const char *)(uintptr_t)0x006FCB6CU)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_OCCUPIED_TRACE
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_OCCUPIED_TRACE \
+    ((const char *)(uintptr_t)0x006E9AF0U)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_SUCCESS_MESSAGE
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_SUCCESS_MESSAGE \
+    ((const char *)(uintptr_t)0x0074D854U)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_SUCCESS_TRACE
+#define OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_SUCCESS_TRACE \
+    ((const char *)(uintptr_t)0x00737C34U)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_FUNCTION
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_FUNCTION \
+    ((const char *)(uintptr_t)0x0077B314U)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_EMPTY_MESSAGE
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_EMPTY_MESSAGE \
+    ((const char *)(uintptr_t)0x0077B32CU)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_EMPTY_TRACE
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_EMPTY_TRACE \
+    ((const char *)(uintptr_t)0x007591B0U)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_MISMATCH_MESSAGE
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_MISMATCH_MESSAGE \
+    ((const char *)(uintptr_t)0x00742A9CU)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_MISMATCH_TRACE
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_MISMATCH_TRACE \
+    ((const char *)(uintptr_t)0x00722628U)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_SUCCESS_MESSAGE
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_SUCCESS_MESSAGE \
+    ((const char *)(uintptr_t)0x00770BD8U)
+#endif
+#ifndef OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_SUCCESS_TRACE
+#define OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_SUCCESS_TRACE \
+    ((const char *)(uintptr_t)0x0074D87CU)
+#endif
+#ifndef OPEN_CFW_PT_FONT_LOG_TAG
+#define OPEN_CFW_PT_FONT_LOG_TAG \
+    ((const char *)(uintptr_t)0x00785CD0U)
+#endif
+#ifndef OPEN_CFW_PT_FONT_LOG_FILE
+#define OPEN_CFW_PT_FONT_LOG_FILE \
+    ((const char *)(uintptr_t)0x0070258CU)
+#endif
+#ifndef OPEN_CFW_PT_FONT_ACQUIRE_FUNCTION
+#define OPEN_CFW_PT_FONT_ACQUIRE_FUNCTION \
+    ((const char *)(uintptr_t)0x00776EA4U)
+#endif
+#ifndef OPEN_CFW_PT_FONT_ACQUIRE_MESSAGE
+#define OPEN_CFW_PT_FONT_ACQUIRE_MESSAGE \
+    ((const char *)(uintptr_t)0x00753E28U)
+#endif
+#ifndef OPEN_CFW_PT_FONT_ACQUIRE_TRACE
+#define OPEN_CFW_PT_FONT_ACQUIRE_TRACE \
+    ((const char *)(uintptr_t)0x00729114U)
+#endif
+#ifndef OPEN_CFW_PT_FONT_RELEASE_FUNCTION
+#define OPEN_CFW_PT_FONT_RELEASE_FUNCTION \
+    ((const char *)(uintptr_t)0x00776EBCU)
+#endif
+#ifndef OPEN_CFW_PT_FONT_RELEASE_MESSAGE
+#define OPEN_CFW_PT_FONT_RELEASE_MESSAGE \
+    ((const char *)(uintptr_t)0x00749A74U)
+#endif
+#ifndef OPEN_CFW_PT_FONT_RELEASE_TRACE
+#define OPEN_CFW_PT_FONT_RELEASE_TRACE \
+    ((const char *)(uintptr_t)0x00729148U)
 #endif
 
 #ifndef OPEN_CFW_PT_FAIL_STOP
@@ -566,8 +860,8 @@ struct open_cfw_pt_uled_operations {
 #endif
 #ifndef OPEN_CFW_PT_AMBIENT_BUS_WRITE
 #define OPEN_CFW_PT_AMBIENT_BUS_WRITE \
-    ((int (*)(uint32_t, uint32_t, const void *, uint32_t, const void *, \
-              uint32_t))(uintptr_t)0x005044B5U)
+    ((int (*)(uint32_t, uint32_t, const void *, uint32_t, const void *, uint32_t)) \
+        (uintptr_t)0x005044B5U)
 #endif
 
 #ifndef OPEN_CFW_PT_LENS_SIDE
@@ -651,10 +945,6 @@ static uint8_t open_cfw_pt_is_leap_year(uint32_t year)
     uint32_t remainder;
 
     (void)open_cfw_pt_unsigned_divide(year, 4U, &remainder);
-    if (remainder != 0U) return 0U;
-    (void)open_cfw_pt_unsigned_divide(year, 100U, &remainder);
-    if (remainder != 0U) return 1U;
-    (void)open_cfw_pt_unsigned_divide(year, 400U, &remainder);
     return remainder == 0U ? 1U : 0U;
 }
 
@@ -693,6 +983,11 @@ void open_cfw_pt_seconds_to_time(uint32_t seconds, void *output)
             since_2000, OPEN_CFW_PT_SECONDS_PER_DAY, &day_seconds);
     }
 
+    /*
+     * Stock copies indeterminate stack words into these three fields.  Zeroing
+     * them is an intentional deterministic-safety hardening; none participates
+     * in the calendar conversion or its inverse.
+     */
     record->read_error = 0U;
     (void)open_cfw_pt_unsigned_divide(day_count + 6U, 7U,
                                       &record->weekday);
@@ -719,40 +1014,39 @@ void open_cfw_pt_seconds_to_time(uint32_t seconds, void *output)
 
 int32_t open_cfw_pt_time_to_seconds(const void *input)
 {
-    enum {
-        OPEN_CFW_PT_SECONDS_PER_DAY = 86400U,
-        OPEN_CFW_PT_EPOCH_2000 = 946684800U
-    };
     const open_cfw_pt_time_record *record = input;
     uint32_t year;
-    uint32_t month;
-    uint32_t days = 0U;
+    uint32_t adjustment;
+    uint32_t month_term;
+    uint32_t days;
     uint32_t seconds;
 
-    if (record == NULL || record->year > 99U ||
-            record->month == 0U || record->month > 12U ||
-            record->day == 0U ||
-            record->day > open_cfw_pt_month_days(2000U + record->year,
-                                                  record->month) ||
-            record->hour > 23U || record->minute > 59U ||
-            record->second > 59U)
-        return -1;
-    for (year = 2000U; year < 2000U + record->year; ++year)
-        days += open_cfw_pt_is_leap_year(year) != 0U ? 366U : 365U;
-    for (month = 1U; month < record->month; ++month)
-        days += open_cfw_pt_month_days(2000U + record->year, month);
-    days += record->day - 1U;
-    seconds = OPEN_CFW_PT_EPOCH_2000 + days * OPEN_CFW_PT_SECONDS_PER_DAY +
+    /* Null handling is a deterministic safety extension to the stock ABI. */
+    if (record == NULL) return -1;
+
+    year = record->year + 2000U;
+    year -= open_cfw_pt_unsigned_divide(year, 100U, NULL) * 100U;
+    if (record->month < 3U) {
+        adjustment = 0U;
+    } else {
+        adjustment = open_cfw_pt_is_leap_year(year) != 0U ? 1U : 2U;
+    }
+    month_term = open_cfw_pt_unsigned_divide(
+        record->month * 367U - 362U, 12U, NULL);
+    days = UINT32_C(0x2ACD) + year * 365U +
+        open_cfw_pt_unsigned_divide(year + 3U, 4U, NULL) +
+        month_term - adjustment + record->day - 1U;
+    seconds = days * 86400U +
         record->hour * 3600U + record->minute * 60U + record->second;
     if (record->hundredths >= 50U) ++seconds;
     return (int32_t)seconds;
 }
 
 
-void open_cfw_pt_time_output(int32_t seconds, void *output)
+void open_cfw_pt_time_output(uint32_t seconds, void *output)
 {
     open_cfw_pt_time_record *record = output;
-    open_cfw_pt_seconds_to_time((uint32_t)seconds, output);
+    open_cfw_pt_seconds_to_time(seconds, output);
     if (record != NULL && *OPEN_CFW_PT_TIME_FORMAT_WORD == 1U) {
         (void)open_cfw_pt_unsigned_divide(record->hour, 12U,
                                           &record->hour);
@@ -773,20 +1067,48 @@ void open_cfw_pt_system_reset_inner(void)
 }
 
 
-void open_cfw_pt_display_buffer_write(void *destination, uintptr_t source,
-                                      uint32_t length)
+uint32_t open_cfw_pt_display_buffer_write(void *destination, uintptr_t source,
+                                          uint32_t length)
 {
-    uint8_t *output = destination;
+    open_cfw_pt_display_buffer_descriptor *descriptor = destination;
     const uint8_t *input = (const uint8_t *)source;
+    uint32_t read_index;
+    uint32_t write_index;
+    uint32_t available;
+    uint32_t count;
+    uint32_t first_count;
     uint32_t index;
-    if (output == NULL || input == NULL || length == 0U) return;
-    if ((uintptr_t)output <= source ||
-            (uintptr_t)output - source >= (uintptr_t)length) {
-        for (index = 0U; index < length; ++index) output[index] = input[index];
-    } else {
-        for (index = length; index != 0U; --index)
-            output[index - 1U] = input[index - 1U];
-    }
+
+    if (descriptor == NULL || descriptor->base == NULL ||
+            descriptor->capacity == 0U || input == NULL || length == 0U)
+        return 0U;
+    read_index = descriptor->read_index;
+    write_index = descriptor->write_index;
+    OPEN_CFW_PT_RING_ACQUIRE_BARRIER();
+    /* Stock relies on these invariants; fail closed rather than underflow. */
+    if (read_index >= descriptor->capacity ||
+            write_index >= descriptor->capacity)
+        return 0U;
+    if (write_index < read_index)
+        available = read_index - write_index - 1U;
+    else
+        available = descriptor->capacity - write_index + read_index - 1U;
+    if (available == 0U) return 0U;
+    count = length < available ? length : available;
+    first_count = descriptor->capacity - write_index;
+    if (first_count > count) first_count = count;
+    for (index = 0U; index < first_count; ++index)
+        descriptor->base[write_index + index] = input[index];
+    for (index = first_count; index < count; ++index)
+        descriptor->base[index - first_count] = input[index];
+    write_index += first_count;
+    if (write_index >= descriptor->capacity) write_index = 0U;
+    write_index += count - first_count;
+    OPEN_CFW_PT_RING_RELEASE_BARRIER();
+    descriptor->write_index = write_index;
+    if (descriptor->callback != NULL)
+        descriptor->callback(descriptor, 1U, count);
+    return count;
 }
 
 
@@ -809,23 +1131,111 @@ void open_cfw_pt_input_message_send(const void *message)
 {
     void *queue;
     void *thread;
+    int result;
     if (message == NULL) return;
     queue = *OPEN_CFW_PT_INPUT_QUEUE_LINK;
     thread = *OPEN_CFW_PT_INPUT_THREAD_LINK;
-    if (queue != NULL && OPEN_CFW_PT_QUEUE_SEND(
-            queue, message, 0U, 0U) == 0 && thread != NULL)
+    if (queue == NULL) return;
+    result = OPEN_CFW_PT_QUEUE_SEND(queue, message, 0U, 0U);
+    if (result == 0) {
         (void)OPEN_CFW_PT_THREAD_FLAGS_SET(thread, UINT32_C(0x00400000));
+    } else {
+        (void)OPEN_CFW_PT_INPUT_LOG_FAILURE(
+            OPEN_CFW_PT_INPUT_QUEUE_FAILURE_FORMAT, result);
+    }
 }
 
 
 static void open_cfw_pt_audio_enable_send(uint32_t type, uint32_t enabled)
 {
-    uint32_t message[4] = {type, 1U, enabled & UINT32_C(0xFF), 0U};
+    uint32_t message[3] = {type, 1U, enabled & UINT32_C(0xFF)};
     void *queue = *OPEN_CFW_PT_AUDIO_QUEUE_LINK;
     void *thread = *OPEN_CFW_PT_AUDIO_THREAD_LINK;
-    if (queue != NULL && OPEN_CFW_PT_QUEUE_SEND(
-            queue, message, 0U, 0U) == 0 && thread != NULL)
+    int result;
+    uint32_t filter;
+    if (queue == NULL) return;
+    result = OPEN_CFW_PT_QUEUE_SEND(queue, message, 0U, 0U);
+    if (result == 0) {
         (void)OPEN_CFW_PT_THREAD_FLAGS_SET(thread, UINT32_C(0x00400000));
+        return;
+    }
+    filter = OPEN_CFW_PT_AUDIO_LOG_FILTER();
+    if ((filter & 2U) != 0U)
+        OPEN_CFW_PT_AUDIO_STRUCTURED_LOG(
+            1U, OPEN_CFW_PT_AUDIO_LOG_TAG, OPEN_CFW_PT_AUDIO_LOG_FILE,
+            OPEN_CFW_PT_AUDIO_LOG_FUNCTION, 0x119U,
+            OPEN_CFW_PT_AUDIO_LOG_MESSAGE, result);
+    filter = OPEN_CFW_PT_AUDIO_LOG_FILTER();
+    if ((filter & 1U) != 0U ||
+            (OPEN_CFW_PT_AUDIO_LOG_FILTER() & 4U) != 0U)
+        OPEN_CFW_PT_AUDIO_TRACE_LOG(
+            UINT32_C(0x04400000), OPEN_CFW_PT_AUDIO_TRACE_MESSAGE,
+            OPEN_CFW_PT_AUDIO_TRACE_MESSAGE, result);
+}
+
+
+uint32_t open_cfw_pt_audio_log_filter(void)
+{
+    return OPEN_CFW_PT_AUDIO_LOG_FILTER_READ();
+}
+
+
+static uint8_t open_cfw_pt_audio_trace_enabled(void)
+{
+    uint32_t filter = OPEN_CFW_PT_AUDIO_LOG_FILTER();
+    return ((filter & 1U) != 0U ||
+            (OPEN_CFW_PT_AUDIO_LOG_FILTER() & 4U) != 0U) ? 1U : 0U;
+}
+
+
+static void open_cfw_pt_log_0(uint32_t level, uint32_t line,
+                              const char *tag, const char *file,
+                              const char *function, const char *message,
+                              uint32_t trace_flags,
+                              const char *trace_message)
+{
+    if ((OPEN_CFW_PT_AUDIO_LOG_FILTER() & 2U) != 0U)
+        OPEN_CFW_PT_AUDIO_STRUCTURED_LOG(
+            level, tag, file, function, line, message);
+    if (open_cfw_pt_audio_trace_enabled() != 0U)
+        OPEN_CFW_PT_AUDIO_TRACE_LOG(
+            trace_flags, trace_message, trace_message);
+}
+
+
+static void open_cfw_pt_audio_log_1(uint32_t level, uint32_t line,
+                                    const char *function,
+                                    const char *message,
+                                    uint32_t trace_flags,
+                                    const char *trace_message,
+                                    uint32_t value)
+{
+    if ((OPEN_CFW_PT_AUDIO_LOG_FILTER() & 2U) != 0U)
+        OPEN_CFW_PT_AUDIO_STRUCTURED_LOG(
+            level, OPEN_CFW_PT_SERVICE_AUDIO_LOG_TAG,
+            OPEN_CFW_PT_SERVICE_AUDIO_LOG_FILE, function, line, message,
+            value);
+    if (open_cfw_pt_audio_trace_enabled() != 0U)
+        OPEN_CFW_PT_AUDIO_TRACE_LOG(
+            trace_flags, trace_message, trace_message, value);
+}
+
+
+static void open_cfw_pt_audio_log_2(uint32_t level, uint32_t line,
+                                    const char *function,
+                                    const char *message,
+                                    uint32_t trace_flags,
+                                    const char *trace_message,
+                                    uint32_t first, uint32_t second)
+{
+    if ((OPEN_CFW_PT_AUDIO_LOG_FILTER() & 2U) != 0U)
+        OPEN_CFW_PT_AUDIO_STRUCTURED_LOG(
+            level, OPEN_CFW_PT_SERVICE_AUDIO_LOG_TAG,
+            OPEN_CFW_PT_SERVICE_AUDIO_LOG_FILE, function, line, message,
+            first, second);
+    if (open_cfw_pt_audio_trace_enabled() != 0U)
+        OPEN_CFW_PT_AUDIO_TRACE_LOG(
+            trace_flags, trace_message, trace_message, first, second);
 }
 
 
@@ -856,6 +1266,30 @@ struct open_cfw_pt_audio_recorder {
     uint8_t active;
     uint8_t initialized;
 };
+
+
+#if UINTPTR_MAX == UINT32_MAX
+_Static_assert(sizeof(struct open_cfw_pt_audio_registration) == 12U,
+               "stock audio registration descriptor must remain 12 bytes");
+_Static_assert(offsetof(struct open_cfw_pt_audio_registration, listener) == 0U,
+               "stock audio listener offset changed");
+_Static_assert(offsetof(struct open_cfw_pt_audio_registration, mode) == 4U,
+               "stock audio mode offset changed");
+_Static_assert(offsetof(struct open_cfw_pt_audio_registration, callback) == 8U,
+               "stock audio callback offset changed");
+_Static_assert(sizeof(struct open_cfw_pt_audio_recorder) == 12U,
+               "stock audio recorder descriptor must remain 12 bytes");
+_Static_assert(offsetof(struct open_cfw_pt_audio_recorder, file) == 0U,
+               "stock audio recorder file offset changed");
+_Static_assert(offsetof(struct open_cfw_pt_audio_recorder, byte_count) == 4U,
+               "stock audio recorder byte-count offset changed");
+_Static_assert(offsetof(struct open_cfw_pt_audio_recorder, identifier) == 8U,
+               "stock audio recorder identifier offset changed");
+_Static_assert(offsetof(struct open_cfw_pt_audio_recorder, active) == 10U,
+               "stock audio recorder active offset changed");
+_Static_assert(offsetof(struct open_cfw_pt_audio_recorder, initialized) == 11U,
+               "stock audio recorder initialized offset changed");
+#endif
 
 
 static void open_cfw_pt_zero_bytes(volatile void *destination, uint32_t length)
@@ -926,33 +1360,79 @@ void open_cfw_pt_audio_path_format_provider(uint8_t selector,
 }
 
 
-void open_cfw_pt_audio_register(uint32_t listener, uint32_t mode,
-                                const void *callback)
+int open_cfw_pt_audio_register(uint32_t listener, uint8_t mode,
+                               const void *callback)
 {
     volatile struct open_cfw_pt_audio_registration *entry;
-    if (mode >= 2U || callback == NULL) return;
+    /* The stock callers constrain mode; retain a fail-closed public boundary. */
+    if (mode >= 2U || callback == NULL) {
+        open_cfw_pt_log_0(
+            1U, 0xBFU, OPEN_CFW_PT_SERVICE_AUDIO_LOG_TAG,
+            OPEN_CFW_PT_SERVICE_AUDIO_LOG_FILE,
+            OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_FUNCTION,
+            OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_INVALID_MESSAGE,
+            UINT32_C(0x04000000),
+            OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_INVALID_TRACE);
+        return -1;
+    }
     entry = &OPEN_CFW_PT_AUDIO_REGISTRATION_TABLE[mode];
-    if (entry->callback != NULL)
+    if (entry->callback != NULL) {
+        open_cfw_pt_audio_log_1(
+            2U, 0xC6U, OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_FUNCTION,
+            OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_OCCUPIED_MESSAGE,
+            UINT32_C(0x08400000),
+            OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_OCCUPIED_TRACE,
+            entry->listener);
         open_cfw_pt_zero_bytes(entry, sizeof(*entry));
+    }
     entry->listener = listener;
     entry->mode = (uint8_t)mode;
     entry->callback = callback;
+    open_cfw_pt_audio_log_2(
+        3U, 0xD0U, OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_FUNCTION,
+        OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_SUCCESS_MESSAGE,
+        UINT32_C(0x0C800000),
+        OPEN_CFW_PT_SERVICE_AUDIO_REGISTER_SUCCESS_TRACE, listener,
+        (uint32_t)mode);
+    return 0;
 }
 
 
-int open_cfw_pt_audio_remove(uint32_t listener, uint32_t mode)
+int open_cfw_pt_audio_remove(uint32_t listener, uint8_t mode)
 {
     volatile struct open_cfw_pt_audio_registration *entry;
     if (mode >= 2U) return -1;
     entry = &OPEN_CFW_PT_AUDIO_REGISTRATION_TABLE[mode];
-    if (entry->callback == NULL) return 0;
-    if (entry->listener != listener) return -1;
+    if (entry->callback == NULL) {
+        open_cfw_pt_log_0(
+            2U, 0xD8U, OPEN_CFW_PT_SERVICE_AUDIO_LOG_TAG,
+            OPEN_CFW_PT_SERVICE_AUDIO_LOG_FILE,
+            OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_FUNCTION,
+            OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_EMPTY_MESSAGE,
+            UINT32_C(0x08000000),
+            OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_EMPTY_TRACE);
+        return 0;
+    }
+    if (entry->listener != listener) {
+        open_cfw_pt_audio_log_2(
+            2U, 0xDDU, OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_FUNCTION,
+            OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_MISMATCH_MESSAGE,
+            UINT32_C(0x08800000),
+            OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_MISMATCH_TRACE,
+            listener, entry->listener);
+        return -1;
+    }
+    open_cfw_pt_audio_log_1(
+        3U, 0xE1U, OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_FUNCTION,
+        OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_SUCCESS_MESSAGE,
+        UINT32_C(0x0C400000),
+        OPEN_CFW_PT_SERVICE_AUDIO_REMOVE_SUCCESS_TRACE, listener);
     open_cfw_pt_zero_bytes(entry, sizeof(*entry));
     return 0;
 }
 
 
-void open_cfw_pt_audio_unregister(uint32_t mode)
+void open_cfw_pt_audio_unregister(uint8_t mode)
 {
     volatile struct open_cfw_pt_audio_recorder *entry;
     if (mode >= 2U) return;
@@ -962,6 +1442,18 @@ void open_cfw_pt_audio_unregister(uint32_t mode)
         entry->file = NULL;
     }
     entry->active = 0U;
+}
+
+
+void open_cfw_pt_audio_encoder_setup(void *context)
+{
+    uint32_t *words;
+    if (context == NULL) return;
+    words = (uint32_t *)context;
+    words[6] = (uint32_t)(uintptr_t)OPEN_CFW_PT_LC3_SETUP_ENCODER(
+        (int)words[1], (int)words[2], 0,
+        (uint8_t *)context + OPEN_CFW_PT_AUDIO_CODEC_HEADER_BYTES,
+        OPEN_CFW_PT_AUDIO_CODEC_STORAGE_BYTES);
 }
 
 
@@ -1027,8 +1519,13 @@ void open_cfw_pt_font_xip_acquire(void)
 {
     void *mutex = *OPEN_CFW_PT_FONT_XIP_MUTEX_LINK;
     void *device = *OPEN_CFW_PT_FONT_XIP_DEVICE_LINK;
-    if (mutex != NULL)
-        (void)OPEN_CFW_PT_MUTEX_ACQUIRE(mutex, UINT32_MAX);
+    if (mutex != NULL &&
+            OPEN_CFW_PT_MUTEX_ACQUIRE(mutex, UINT32_MAX) != 0)
+        open_cfw_pt_log_0(
+            1U, 0xC3U, OPEN_CFW_PT_FONT_LOG_TAG,
+            OPEN_CFW_PT_FONT_LOG_FILE, OPEN_CFW_PT_FONT_ACQUIRE_FUNCTION,
+            OPEN_CFW_PT_FONT_ACQUIRE_MESSAGE, UINT32_C(0x04000000),
+            OPEN_CFW_PT_FONT_ACQUIRE_TRACE);
     if (*OPEN_CFW_PT_FONT_XIP_CONFIGURATION_FLAG != 1U && device != NULL) {
         (void)OPEN_CFW_PT_MSPI_CONTROL(device, 0U, 1U);
         *OPEN_CFW_PT_FONT_XIP_ACTIVE = 0U;
@@ -1045,7 +1542,12 @@ void open_cfw_pt_font_xip_release(void)
         (void)OPEN_CFW_PT_MSPI_CONTROL(device, 2U, 1U);
         *OPEN_CFW_PT_FONT_XIP_ACTIVE = 1U;
     }
-    if (mutex != NULL) (void)OPEN_CFW_PT_MUTEX_RELEASE(mutex);
+    if (mutex != NULL && OPEN_CFW_PT_MUTEX_RELEASE(mutex) != 0)
+        open_cfw_pt_log_0(
+            1U, 0xCCU, OPEN_CFW_PT_FONT_LOG_TAG,
+            OPEN_CFW_PT_FONT_LOG_FILE, OPEN_CFW_PT_FONT_RELEASE_FUNCTION,
+            OPEN_CFW_PT_FONT_RELEASE_MESSAGE, UINT32_C(0x04000000),
+            OPEN_CFW_PT_FONT_RELEASE_TRACE);
 }
 
 
@@ -1056,6 +1558,216 @@ void open_cfw_pt_display_postprocess_commit(void)
     *OPEN_CFW_PT_PAIRING_FLAG_0 = 0U;
     *OPEN_CFW_PT_PAIRING_WORD = 0U;
     *OPEN_CFW_PT_PAIRING_FLAG_1 = 0U;
+}
+
+
+void open_cfw_pt_display_postprocess_send(uint32_t first, uint32_t second,
+                                          uint32_t third, uint32_t fourth)
+{
+    (void)OPEN_CFW_PT_LENS_SYNC_TRANSPORT(
+        (uint16_t)first, (const void *)(uintptr_t)second, (uint16_t)third,
+        fourth, 5U, 2U, 0U);
+}
+
+
+struct open_cfw_pt_device_write_interface {
+    int32_t (*write)(const void *context, uint32_t register_address,
+                     const void *input, uint32_t length);
+    const void *reserved;
+    const void *context;
+};
+
+
+struct open_cfw_pt_device_read_interface {
+    const void *reserved;
+    int32_t (*read)(const void *context, uint32_t register_address,
+                    uint8_t *output, uint32_t length);
+    const void *context;
+};
+
+
+void *open_cfw_pt_charger_open(const void *device, uint8_t index)
+{
+    /* Null handling is a safety extension to the stock uint8_t ABI. */
+    if (device == NULL) return NULL;
+    return (uint8_t *)(uintptr_t)device + UINT32_C(0x8C) +
+        (uint32_t)index * 8U;
+}
+
+
+static int32_t open_cfw_pt_charger_control(void *handle, uint32_t mask,
+                                           uint32_t register_0,
+                                           uint32_t register_1)
+{
+    const void *configuration;
+    const struct open_cfw_pt_device_write_interface *interface;
+    uint8_t byte_0 = (uint8_t)((mask & UINT32_C(0x0C)) >> 2U);
+    uint8_t byte_1 = (uint8_t)(mask & UINT32_C(0x03));
+    int32_t result = OPEN_CFW_PT_PLATFORM_SUCCESS;
+    if (handle == NULL) return -1;
+    configuration = OPEN_CFW_PT_CHARGER_SLOT_CONFIGURATION(handle);
+    if (configuration == NULL) return -1;
+    interface = OPEN_CFW_PT_CHARGER_CONFIGURATION_INTERFACE(configuration);
+    if (interface == NULL || interface->write == NULL) return -1;
+    if (byte_1 != 0U)
+        result = interface->write(interface->context, register_0,
+                                  &byte_1, 1U);
+    if (result == OPEN_CFW_PT_PLATFORM_SUCCESS && byte_0 != 0U)
+        result = interface->write(interface->context, register_1,
+                                  &byte_0, 1U);
+    return result;
+}
+
+
+int32_t open_cfw_pt_charger_enable(void *handle, uint32_t mask)
+{
+    return open_cfw_pt_charger_control(handle, mask,
+                                       UINT32_C(0x304), UINT32_C(0x307));
+}
+
+
+int32_t open_cfw_pt_charger_disable(void *handle, uint32_t mask)
+{
+    return open_cfw_pt_charger_control(handle, mask,
+                                       UINT32_C(0x305), UINT32_C(0x306));
+}
+
+
+int32_t open_cfw_pt_hardware_identifier_2_read(const void *device,
+                                               uint32_t register_address,
+                                               uint8_t *output,
+                                               uint32_t length)
+{
+    const struct open_cfw_pt_device_read_interface *interface = device;
+    if (interface == NULL || interface->read == NULL ||
+            (output == NULL && length != 0U))
+        return -1;
+    return interface->read(interface->context, register_address,
+                           output, length);
+}
+
+
+int open_cfw_pt_uart_write(const uint8_t *data, uint32_t length,
+                           uint32_t timeout)
+{
+    uint8_t *buffer = OPEN_CFW_PT_UART_TX_BUFFER;
+    void *device = *OPEN_CFW_PT_UART_DEVICE_LINK;
+    void *mutex = *OPEN_CFW_PT_UART_MUTEX_LINK;
+    void *semaphore = *OPEN_CFW_PT_UART_SEMAPHORE_LINK;
+    uint32_t status = 0U;
+    uint32_t index;
+    uint32_t address;
+    uint32_t end;
+    (void)timeout;
+
+    if (data == NULL || length == 0U || length > 0x400U ||
+            *OPEN_CFW_PT_UART_INITIALIZED != 1U || device == NULL ||
+            mutex == NULL || semaphore == NULL)
+        return 1;
+    if (OPEN_CFW_PT_MUTEX_ACQUIRE(mutex, UINT32_MAX) != 0) return 1;
+    (void)OPEN_CFW_PT_UART_TICK_GET();
+    for (index = 0U; index < length; ++index) buffer[index] = data[index];
+
+    address = (uint32_t)(uintptr_t)buffer & ~UINT32_C(0x1F);
+    end = ((uint32_t)(uintptr_t)buffer + length + UINT32_C(0x1F)) &
+        ~UINT32_C(0x1F);
+    OPEN_CFW_PT_UART_CACHE_DSB();
+    while (address < end) {
+        *OPEN_CFW_PT_UART_CACHE_CLEAN_REGISTER = address;
+        address += UINT32_C(0x20);
+    }
+    OPEN_CFW_PT_UART_CACHE_DSB();
+    OPEN_CFW_PT_UART_CACHE_ISB();
+
+    (void)OPEN_CFW_PT_UART_SEMAPHORE_ACQUIRE(semaphore, 0U);
+    *OPEN_CFW_PT_UART_ERROR_FLAG = 0U;
+    OPEN_CFW_PT_UART_TRANSFER_ABORT();
+    OPEN_CFW_PT_UART_TRANSFER_START(buffer, length);
+    if (OPEN_CFW_PT_UART_SEMAPHORE_ACQUIRE(semaphore, 100U) != 0) {
+        OPEN_CFW_PT_UART_TRANSFER_ABORT();
+        *OPEN_CFW_PT_UART_ERROR_FLAG = 0U;
+        (void)OPEN_CFW_PT_MUTEX_RELEASE(mutex);
+        return 1;
+    }
+    if (*OPEN_CFW_PT_UART_ERROR_FLAG != 0U) {
+        *OPEN_CFW_PT_UART_ERROR_FLAG = 0U;
+        (void)OPEN_CFW_PT_MUTEX_RELEASE(mutex);
+        return 1;
+    }
+    for (index = 0U; index < 100U; ++index) {
+        (void)OPEN_CFW_PT_UART_STATUS_GET(device, &status);
+        if ((status & UINT32_C(0x08)) == 0U) break;
+        OPEN_CFW_PT_UART_DELAY_US(10U);
+    }
+    (void)OPEN_CFW_PT_MUTEX_RELEASE(mutex);
+    return 0;
+}
+
+
+void open_cfw_pt_uart_transfer_start(const void *data, uint32_t length)
+{
+    volatile uint32_t *registers = OPEN_CFW_PT_UART_REGISTER_BASE;
+    registers[0x48U / 4U] = 0U;
+    registers[0x4CU / 4U] = (uint32_t)(uintptr_t)data;
+    registers[0x50U / 4U] = length;
+    registers[0x38U / 4U] |= UINT32_C(0x1800);
+    registers[0x44U / 4U] = UINT32_C(0x1821);
+    registers[0x04U / 4U] &= ~UINT32_C(0x30);
+    OPEN_CFW_PT_UART_DATA_MEMORY_BARRIER();
+    registers[0x48U / 4U] = 10U;
+}
+
+
+void open_cfw_pt_uart_transfer_abort(void)
+{
+    volatile uint32_t *registers = OPEN_CFW_PT_UART_REGISTER_BASE;
+    registers[0x48U / 4U] = 0U;
+    registers[0x04U / 4U] &= ~UINT32_C(0x30);
+    registers[0x44U / 4U] = UINT32_C(0x1800);
+}
+
+
+int open_cfw_pt_uart_status_get(void *device, uint32_t *status)
+{
+    const uint32_t *handle = (const uint32_t *)device;
+    volatile uint32_t *registers;
+    enum { open_cfw_pt_uart_handle_magic = 0x01EA9E06U };
+    if (handle == NULL ||
+            (handle[0] & UINT32_C(0x01FFFFFF)) !=
+                open_cfw_pt_uart_handle_magic)
+        return 2;
+    if (status == NULL) return 6;
+    registers = OPEN_CFW_PT_UART_REGISTER_BASE +
+        handle[10] * (UINT32_C(0x1000) / sizeof(uint32_t));
+    *status = registers[0x18U / 4U];
+    return 0;
+}
+
+
+void open_cfw_pt_buzzer_apply(uint32_t frequency_hz, uint8_t duty_percent)
+{
+    OPEN_CFW_PT_BUZZER_PWM_UPDATE(frequency_hz, duty_percent);
+    OPEN_CFW_PT_BUZZER_PWM_START();
+}
+
+
+void open_cfw_pt_buzzer_disable(uint32_t release_pin)
+{
+    OPEN_CFW_PT_BUZZER_PWM_STOP();
+    if ((uint8_t)release_pin != 0U) {
+        OPEN_CFW_PT_AUDIO_CODEC_ROUTE(
+            UINT32_C(0x91), *OPEN_CFW_PT_BUZZER_PIN_CONFIGURATION);
+    }
+}
+
+
+void open_cfw_pt_buzzer_prepare(void)
+{
+    (void)OPEN_CFW_PT_BUZZER_TIMER_STOP(*OPEN_CFW_PT_BUZZER_TIMER_LINK);
+    open_cfw_pt_buzzer_disable(1U);
+    *OPEN_CFW_PT_BUZZER_SCRIPT_STATE = 0U;
+    *OPEN_CFW_PT_BUZZER_ACTIVE_FLAG = 0U;
+    *OPEN_CFW_PT_BUZZER_PENDING_FLAG = 0U;
 }
 
 
@@ -1187,8 +1899,8 @@ void open_cfw_pt_board_audio_channel_1_start(void)
     result = OPEN_CFW_PT_AUDIO_REMOVE(0x10BU, 0U);
     if (result == 0) {
         OPEN_CFW_PT_AUDIO_UNREGISTER(0U);
-        OPEN_CFW_PT_AUDIO_RELEASE(OPEN_CFW_PT_AUDIO_CODEC_BUFFER_0);
-        OPEN_CFW_PT_AUDIO_RELEASE(OPEN_CFW_PT_AUDIO_CODEC_BUFFER_1);
+        OPEN_CFW_PT_AUDIO_ENCODER_SETUP(OPEN_CFW_PT_AUDIO_CODEC_BUFFER_0);
+        OPEN_CFW_PT_AUDIO_ENCODER_SETUP(OPEN_CFW_PT_AUDIO_CODEC_BUFFER_1);
     }
 }
 
@@ -1209,7 +1921,7 @@ void open_cfw_pt_board_audio_channel_1_stop(void)
     result = OPEN_CFW_PT_AUDIO_REMOVE(0x10BU, 1U);
     if (result == 0) {
         OPEN_CFW_PT_AUDIO_UNREGISTER(1U);
-        OPEN_CFW_PT_AUDIO_RELEASE(OPEN_CFW_PT_AUDIO_PDM_BUFFER);
+        OPEN_CFW_PT_AUDIO_ENCODER_SETUP(OPEN_CFW_PT_AUDIO_PDM_BUFFER);
     }
 }
 

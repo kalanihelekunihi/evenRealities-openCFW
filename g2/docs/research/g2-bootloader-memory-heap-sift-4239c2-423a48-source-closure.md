@@ -1,5 +1,10 @@
 # G2 bootloader Floyd max-heap sift source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 The 134-byte helper at `[0x004239C2,0x00423A48)` has exact SHA-256
 `e209d49057309bdeb649246ad594a18f708db52ff4893c7aad55cad8464edc34`.
 Maintained source `runtime_memory_heap_sift_4239c2.c` is 3,296 bytes with

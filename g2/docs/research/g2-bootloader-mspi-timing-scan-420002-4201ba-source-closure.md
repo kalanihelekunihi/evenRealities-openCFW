@@ -1,5 +1,10 @@
 # G2 bootloader MSPI timing-scan source closure
 
+> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
+> claims below only as history. The case was bumped during lunch and caused the
+> disconnect, not firmware or flashing; exclude it from feasibility conclusions.
+> Hardware testing remains blocked by unavailable physical evidence.
+
 ## Scope and evidence boundary
 
 This closure covers authenticated bootloader bytes `[0x00420002, 0x004201BA)` (440 bytes) from `blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin`.

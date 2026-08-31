@@ -46,7 +46,11 @@ static void open_cfw_test_runtime_vsnprintf_noop(
     open_cfw_test_runtime_vsnprintf_noop
 #define OPEN_CFW_RUNTIME_VSNPRINTF_STRING_LENGTH(string, maximum_length) \
     open_cfw_runtime_strnlen_s((string), (maximum_length))
-#include "../../components/apollo_main/core_overlay/runtime_vsnprintf.c"
+#include "../../components/shared/runtime/runtime_iar_vsnprintf_engine.c"
+
+/* Exercise the exact production specialization through the existing oracle. */
+#define open_cfw_runtime_vsnprintf \
+    open_cfw_runtime_iar_vsnprintf_engine
 
 unsigned int open_cfw_test_runtime_vsnprintf_event_count;
 unsigned int open_cfw_test_runtime_vsnprintf_characters[512];

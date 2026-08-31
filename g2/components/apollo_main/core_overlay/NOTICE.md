@@ -1,5 +1,12 @@
 # Apollo core-overlay provenance and license
 
+`pt_protocol_lc3_setup.c` is an Apache-2.0 adaptation of Google/liblc3
+`src/lc3.c` from the authenticated v1.1.3 baseline at commit
+`96a3af0beb5487aca3b98a4b992a539a1f6d80d1`. Copyright 2022 Google LLC.
+The complete upstream terms are retained in `third_party/liblc3/LICENSE`.
+This attribution applies to the encoder-setup implementation; the surrounding
+G2 PT protocol ABI wiring remains separately authored MIT source.
+
 `core_helpers.c`, `evenhub_decompression.c`, `evenhub_container.c`,
 `evenhub_lifecycle.c`, `evenhub_page_event.c`, and
 `evenhub_common_data.c`, `evenhub_ui_event.c`, and
@@ -1491,8 +1498,7 @@ claim ownership of the G2 scheduler globals or Apollo port integration.
 of the retained G2 `platform/service/eAT/at_tp.c` behavior. It uses only
 authenticated command behavior, retained literal addresses, and explicit
 output/touch-driver/CMSIS-delay ABI bindings; no historical vendor source or
-stock object bytes are included. Hardware validation remains blocked by
-unavailable authorized physical G2 touch-panel evidence.
+stock object bytes are included. Hardware validation remains blocked by unavailable physical evidence; future qualification requires authorized physical G2 touch-panel evidence.
 
 `at_buzzer.c` is an independently authored MIT clean-room
 reconstruction of the retained G2 `platform/service/eAT/at_buzzer.c` command
@@ -1500,7 +1506,7 @@ behavior. It contains no historical vendor source or stock object bytes. One
 strict-relocation Thumb leaf replaces the complete stock handler and pool while
 binding only to authenticated retained response strings, AT output, and buzzer
 driver entries. Audible output, frequency/pitch, duty-cycle, beat timing,
-predefined playback, and stop behavior remain blocked by unavailable authorized
+predefined playback, and stop behavior remain blocked by unavailable physical evidence; future qualification requires authorized
 physical G2 buzzer evidence.
 
 `service_gesture_processor.c` is an independently authored GPL-3.0-only
@@ -1510,8 +1516,7 @@ historical vendor source or stock object bytes. Five strict-relocation Thumb
 leaves replace the complete stock object and pools while binding only to
 authenticated touch, buzzer, product-mode, event-publish, logging, SRAM, and
 retained-string interfaces. Physical touch/proximity electrical behavior,
-event timing, debounce, and gesture interpretation remain blocked by
-unavailable authorized G2 hardware evidence.
+event timing, debounce, and gesture interpretation remain blocked by unavailable physical evidence; future qualification requires authorized G2 hardware evidence.
 
 `drv_cy8c4046fni.c` is an independently authored MIT clean-room
 reconstruction of the retained G2 `driver/touch/drv_cy8c4046fni.c` host-driver
@@ -1522,7 +1527,7 @@ delay, SRAM, callback-table, and sibling-source interfaces. The directly
 addressed callback/string pool remains authenticated stock data. Stock
 EasyLogger diagnostics are intentionally omitted because they do not control
 controller behavior. Physical I2C, reset/DFU, report timing, and CapSense
-validation remains blocked by unavailable authorized G2 hardware evidence.
+validation remains blocked by unavailable physical evidence; future qualification requires authorized G2 hardware evidence.
 
 `cordio_gatt_profile.c` is an Apache-2.0 production adaptation of Packetcraft
 Cordio r20.05c `ble-profiles/sources/profiles/gatt/gatt_main.c` at commit
@@ -1533,7 +1538,7 @@ as non-controlling diagnostics. The exact upstream source, header, license,
 and offline verifier are retained in `third_party/packetcraft-gatt-profile`.
 This selected compatible commit is not a claim about the unrecoverable private
 historical G2 checkout. Physical ATT/CCCD/indication and peer interoperability
-validation remains blocked by unavailable authorized G2/EM9305 evidence.
+validation remains blocked by unavailable physical evidence; future qualification requires authorized G2/EM9305 evidence.
 
 `ble_ota_profile.c` is a BSD-3-Clause bounded production adaptation of the
 AmbiqSuite 2.5.1 AMOTA application skeleton at commit
@@ -1544,7 +1549,7 @@ to strict-relocation Thumb leaves; the authenticated 80-byte stock
 literal/callback pool is retained. The selected public revision is an oracle,
 not a claim about Even's historical checkout. Physical OTA CCC, reset,
 disconnect, notification timing, and peer interoperability validation remains
-blocked by unavailable authorized G2/EM9305 evidence.
+blocked by unavailable physical evidence; future qualification requires authorized G2/EM9305 evidence.
 
 `ble_ring_profile.c` is an independently authored MIT clean-room
 reconstruction of the retained G2 `platform/ble/profiles/ring/profile_ring.c`
@@ -1553,8 +1558,7 @@ bytes. All seven linked functions route to strict-relocation Thumb leaves;
 the authenticated 134-byte stock callback/literal pool is retained. Stock
 EasyLogger and hexdump calls are omitted as non-controlling diagnostics.
 Physical service discovery, delayed CCC timing, ATT RX/TX behavior, controller
-concurrency, and peer interoperability validation remains blocked by
-unavailable authorized G2/EM9305 evidence.
+concurrency, and peer interoperability validation remains blocked by unavailable physical evidence; future qualification requires authorized G2/EM9305 evidence.
 
 `callback_facades.c` is an independently authored MIT clean-room
 reconstruction of the retained G2
@@ -1608,7 +1612,7 @@ strict-relocation Thumb leaves replace all 1,362 linked stock function bytes;
 the 150-byte official alignment/literal tail remains retained. Stock
 EasyLogger diagnostics are omitted as non-controlling observability. Live
 paired-G2 relay, nanopb interoperability, and physical Ring-event behavior are
-blocked by unavailable authorized physical evidence.
+blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 `pb_service_glasses_case.c` is an independently authored GPL-3.0-only
 clean-room reconstruction of the four linked entries from the retained G2
@@ -1619,7 +1623,7 @@ selector-isolated strict-relocation Thumb leaves replace all 1,360 linked stock
 function bytes; the 124-byte official literal pool remains retained. Stock
 EasyLogger diagnostics are omitted as non-controlling observability. Live
 service-`0x81` temple/case interoperability and physical case-state validation
-are blocked by unavailable authorized physical evidence.
+are blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 `pb_service_conversate.c` is an independently authored MIT clean-room
 reconstruction of the six linked entries from the retained G2
@@ -1630,7 +1634,7 @@ selector-isolated strict-relocation Thumb leaves replace all 1,776 linked stock
 function bytes; the 128-byte official literal pool remains retained. Stock
 EasyLogger/hexdump diagnostics are omitted as non-controlling observability.
 Live service-`0x0B` master/peer BLE, timing, and conversate UI validation are
-blocked by unavailable authorized physical evidence.
+blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 `pb_service_teleprompt.c` is an independently authored MIT clean-room
 reconstruction of the seven linked entries from the retained G2
@@ -1641,7 +1645,7 @@ selector-isolated strict-relocation Thumb leaves replace all 1,854 linked stock
 function bytes; the 130-byte official alignment/literal tail remains retained.
 Stock EasyLogger/hexdump diagnostics are omitted as non-controlling
 observability. Live service-6 master/peer BLE, timing, and teleprompt UI
-validation are blocked by unavailable authorized physical evidence.
+validation is blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 `pb_service_even_ai.c` is an independently authored MIT clean-room
 reconstruction of the 25 linked entries from the retained G2
@@ -1652,7 +1656,7 @@ Twenty-seven selector-isolated strict-relocation Thumb leaves replace all
 8,404 linked stock function bytes; 552 distributed official alignment/literal
 pool bytes remain retained. Stock EasyLogger/hexdump/assert diagnostics are
 omitted as non-controlling observability. Live service-7 master/peer BLE and
-Even-AI UI validation are blocked by unavailable authorized physical evidence.
+Even-AI UI validation is blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 `pb_service_onboarding.c` is an independently authored MIT clean-room
 reconstruction of the nine linked entries from the retained G2
@@ -1664,7 +1668,7 @@ bytes. Twelve selector-isolated strict-relocation Thumb leaves replace all
 bytes remain retained. Stock EasyLogger/assert diagnostics are omitted as
 non-controlling observability. Live service-`0x10` peer BLE, display-ready,
 onboarding-control, response, notification, and nanopb interoperability are
-blocked by unavailable authorized physical evidence.
+blocked by unavailable physical evidence; future qualification requires authorized physical evidence.
 
 `pb_service_notification.c` is an independently authored GPL-3.0-only
 clean-room reconstruction of the nine linked entries from the retained G2
@@ -1676,7 +1680,7 @@ replace all 3,318 linked stock function bytes; 238 distributed official
 alignment/literal/descriptor bytes remain retained. Stock EasyLogger/assert
 diagnostics are omitted as non-controlling observability. Live service-4 peer
 BLE, notification-control, whitelist-control, whitelist-check,
-app-not-whitelisted, and nanopb interoperability are blocked by unavailable
+app-not-whitelisted, and nanopb interoperability is blocked by unavailable physical evidence; future qualification requires
 authorized physical evidence.
 
 `pb_service_pair_mgr.c` is an independently authored MIT clean-room
@@ -1688,8 +1692,7 @@ isolated strict-relocation Thumb leaves replace all 6,564 linked stock function
 bytes; 724 distributed official alignment/literal bytes remain retained. Stock
 EasyLogger/assert diagnostics are omitted as non-controlling observability.
 Live service-`0x80` security-auth, pipe-role, ring-connect, BLE-parameter,
-disconnect, unpair, peer BLE, and nanopb interoperability are blocked by
-unavailable authorized responsive physical evidence.
+disconnect, unpair, peer BLE, and nanopb interoperability is blocked by unavailable physical evidence; future qualification requires authorized responsive physical evidence.
 
 `pb_service_setting.c` is an independently authored MIT clean-room
 reconstruction of the eleven linked entries from the retained G2
@@ -1700,7 +1703,7 @@ selector-isolated strict-relocation Thumb leaves replace all 3,466 linked
 stock function bytes; 334 distributed official alignment/literal bytes remain
 retained. Stock EasyLogger diagnostics are omitted as non-controlling
 observability. Live service-9 peer BLE, full-status, recalibration, silent-
-mode, and nanopb interoperability are blocked by unavailable authorized
+mode, and nanopb interoperability is blocked by unavailable physical evidence; future qualification requires authorized
 physical evidence.
 
 `pb_service_dev_setting.c` is an independently authored GPL-3.0-only
@@ -1713,7 +1716,7 @@ bytes. Twelve selector-isolated strict-relocation Thumb leaves replace all
 bytes remain retained. Stock EasyLogger/assert diagnostics are omitted as
 non-controlling observability. Live service-`0x80` peer BLE, destructive
 factory-reset, restart, heartbeat, clock-sync, persistence, audio-control, and
-nanopb interoperability are blocked by unavailable authorized physical
+nanopb interoperability is blocked by unavailable physical evidence; future qualification requires authorized physical
 evidence.
 
 `pb_service_quicklist.c` is an independently authored MIT clean-room
@@ -1727,7 +1730,7 @@ alignment/literal bytes remain retained. The multi-item notification copy is
 limited to the twenty records that fit the recovered message workspace. Stock
 EasyLogger/assert diagnostics are omitted as non-controlling observability.
 Live service-`0x0C` peer BLE, persistent quicklist load/save, response,
-notification, and nanopb interoperability are blocked by unavailable
+notification, and nanopb interoperability is blocked by unavailable physical evidence; future qualification requires
 authorized physical evidence.
 
 `transport_protocol.c`, `ota_transport.c`, `efs_transport.c`,
@@ -1739,7 +1742,7 @@ strict-relocation Thumb leaves replace 32,798 linked stock function bytes while
 retaining 2,392 authenticated official alignment/literal-pool bytes. Stock
 EasyLogger diagnostics are omitted as non-controlling observability. Live peer,
 dual-glasses, OTA receiver, EFS filesystem/media, disconnect, timeout, and
-recovery validation are blocked by unavailable authorized responsive physical
+recovery validation is blocked by unavailable physical evidence; future qualification requires authorized responsive physical
 evidence.
 
 `ble_transport_profiles.c` is an independently authored GPL-3.0-only
@@ -1757,7 +1760,7 @@ reconstruction of the seven callable entries in the authenticated G2
 G2 source or stock executable bytes. Seven selector-isolated strict-relocation
 Thumb leaves replace all 2,174 callable stock bytes; the entry-alignment NOP
 and 170-byte official pool remain retained. Live display, event-timing, IMU,
-and paired-temple validation is blocked by unavailable authorized physical
+and paired-temple validation is blocked by unavailable physical evidence; future qualification requires authorized physical
 evidence.
 
 `system_close.c` is an independently authored MIT clean-room
@@ -1767,7 +1770,7 @@ G2 source or stock executable bytes. Twenty selector-isolated strict-relocation
 Thumb leaves replace all 4,960 stock function bytes while 408 authenticated
 official alignment/literal bytes remain retained. Live close-page display,
 selection animation, IMU reflash, shutdown/minimize, and paired-temple
-synchronization validation is blocked by unavailable authorized physical
+synchronization validation is blocked by unavailable physical evidence; future qualification requires authorized physical
 evidence.
 
 `freertos_cli_filesystem.c` is an independently authored GPL-3.0-only
@@ -1778,7 +1781,7 @@ selector-isolated strict-relocation Thumb leaves replace all 3,200 callable
 stock bytes; 56 authenticated official alignment/literal bytes remain
 retained. The implementation binds through the already bounded littlefs seam.
 Live mounted-media mutation, persistence, corruption recovery, and concurrent
-CLI validation is blocked by unavailable authorized responsive G2 hardware
+CLI validation is blocked by unavailable physical evidence; future qualification requires authorized responsive G2 hardware
 and writable physical test media.
 
 `service_nvdb.c` is an independently authored MIT clean-room
@@ -1786,8 +1789,7 @@ reconstruction of all five callable entries in the authenticated G2 factory
 NVDB lifecycle object. Five strict-relocation Thumb leaves replace all 930
 callable stock bytes while 122 authenticated official pool/alignment bytes
 remain. Its default policy refuses destructive factory reset on missing or
-mismatched media. Live persistence, recovery, and schema validation is blocked
-by unavailable authorized responsive hardware and a golden `NVdb` capture.
+mismatched media. Live persistence, recovery, and schema validation is blocked by unavailable physical evidence; future qualification requires authorized responsive hardware and a golden `NVdb` capture.
 
 `runtime_cordio_attc_main.c`, `runtime_cordio_attc_disc.c`, and their headers
 are independently adapted Apache-2.0-compatible Packetcraft Cordio ATT client
@@ -1796,8 +1798,7 @@ authenticated G2 ABI facts. They contain no proprietary historical source or
 stock executable bytes. Twenty core and fifteen discovery selector-isolated
 strict-relocation Thumb leaves replace all 3,540 and 2,908 linked stock body
 bytes respectively; four dead-stripped public definitions are maintained only
-as target-compiled source. Live ATT peer/controller behavior remains blocked
-by unavailable authorized responsive G2/EM9305 physical evidence.
+as target-compiled source. Live ATT peer/controller behavior remains blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305 physical evidence.
 
 `runtime_cordio_l2c_main.c`, `runtime_cordio_l2c_master.c`,
 `runtime_cordio_l2c_slave.c`, and their shared header are independently adapted
@@ -1808,7 +1809,7 @@ linked definitions replace all 3,372 bounded stock body bytes through nineteen
 selector-isolated strict-relocation Thumb redirects and one exact two-byte
 in-place copy; source-only `L2cDmSigReq` remains compiler-owned without claiming
 stock coverage. Live peer/controller signaling, flow control, timer, and
-buffer-lifetime validation is blocked by unavailable authorized responsive
+buffer-lifetime validation is blocked by unavailable physical evidence; future qualification requires authorized responsive
 G2/EM9305 physical evidence.
 
 `runtime_cordio_dm_adv.c` and `runtime_cordio_dm_adv.h` are independently
@@ -1818,7 +1819,7 @@ contain no proprietary historical source or stock executable bytes. Nine
 selector-isolated strict-relocation Thumb leaves replace all 562 linked stock
 body bytes; six source-only definitions remain compiler-owned without claiming
 stock coverage. Live BLE advertising, peer/controller timing, address-policy,
-and RF validation is blocked by unavailable authorized responsive G2/EM9305
+and RF validation is blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305
 physical evidence.
 
 `runtime_cordio_dm_adv_leg.c` and `runtime_cordio_dm_adv_leg.h` are
@@ -1830,7 +1831,7 @@ stock body bytes through fourteen selector-isolated strict-relocation Thumb
 redirects and three exact two-byte in-place copies; stock-absent
 `DmAdvModeLeg` remains compiler-owned without claiming stock coverage. Live
 BLE advertising, peer/controller timing, address-policy, RF, and paired-temple
-validation is blocked by unavailable authorized responsive G2/EM9305 physical
+validation is blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305 physical
 evidence.
 
 `cordio_sec_api.c` is independently adapted Apache-2.0 Packetcraft Cordio
@@ -1840,9 +1841,9 @@ stock executable bytes. Twenty selector-isolated strict-relocation Thumb
 leaves replace all 1,392 bounded stock body bytes; 46 official
 literal/alignment bytes remain retained. AES, random, public-key, and
 Diffie-Hellman primitives remain delegated to retained HCI/controller
-providers. Live controller, concurrency, timing, and paired-temple validation
-is blocked by unavailable authorized responsive right G2/EM9305 physical
-evidence; the left remains stock.
+providers. Live controller, concurrency, timing, and paired-temple qualification
+is blocked by unavailable physical evidence; future qualification requires authorized
+G2/EM9305 physical evidence.
 
 `runtime_cordio_dm_conn_sm.c` and `runtime_cordio_dm_conn_sm.h` are
 independently adapted Apache-2.0-compatible Packetcraft r20.05--r20.05c DM
@@ -1852,7 +1853,7 @@ The sole linked dispatcher replaces all 1,598 bounded stock body bytes with a
 selector-isolated strict-relocation Thumb leaf; the exact transition table and
 TU pool remain separately authenticated official constant data. Live
 controller, role-action timing, cancellation, disconnect, and paired-temple
-validation is blocked by unavailable authorized responsive G2/EM9305 physical
+validation is blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305 physical
 evidence.
 
 `runtime_cordio_dm_dev.c` and `runtime_cordio_dm_dev.h` are independently
@@ -1862,7 +1863,7 @@ historical source or stock executable bytes. Twelve selector-isolated
 strict-relocation Thumb leaves replace all 626 linked stock body bytes; six
 stock-absent whitelist/filter APIs remain compiler-owned without claiming
 stock coverage. Live controller reset, event timing, address programming,
-filter/privacy behavior, and paired-temple validation is blocked by unavailable
+filter/privacy behavior, and paired-temple validation is blocked by unavailable physical evidence; future qualification requires
 authorized responsive G2/EM9305 physical evidence.
 
 `runtime_cordio_dm_main.c` and `runtime_cordio_dm_main.h` are independently
@@ -1872,7 +1873,7 @@ control-block ABI. They contain no proprietary historical source or stock
 executable bytes. Fourteen selector-isolated strict-relocation Thumb redirects
 plus two exact two-byte in-place copies cover all sixteen linked definitions
 and all 484 bounded stock body bytes. Live HCI/controller/peer behavior,
-timing, and paired-temple validation is blocked by unavailable authorized
+timing, and paired-temple validation is blocked by unavailable physical evidence; future qualification requires authorized
 responsive G2/EM9305 physical evidence.
 
 `runtime_cordio_dm_phy.c` and `runtime_cordio_dm_phy.h` are independently
@@ -1883,5 +1884,5 @@ historical source or stock executable bytes. Six selector-isolated
 strict-relocation Thumb leaves replace all 308 linked stock body bytes; two
 dead-stripped public APIs remain compiler-owned without claiming stock
 coverage. Live controller PHY negotiation, peer/RF/timing, and paired-temple
-validation is blocked by unavailable authorized responsive G2/EM9305 physical
+validation is blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305 physical
 evidence.

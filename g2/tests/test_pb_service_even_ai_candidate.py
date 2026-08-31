@@ -87,10 +87,10 @@ class PbServiceEvenAICandidateTests(unittest.TestCase):
 
     def test_source_is_pinned(self) -> None:
         data = SOURCE.read_bytes()
-        self.assertEqual(len(data), 23775)
+        self.assertEqual(len(data), 23766)
         self.assertEqual(
             hashlib.sha256(data).hexdigest(),
-            "6a8ff21295e7612cae2287accc6e3ffb1f1fd639b61f044804ea45286b00188a",
+            "8b6afa020c4cbfc372ade7d9824080a52cf0ae11cb132f71ae140af122ba8588",
         )
 
 

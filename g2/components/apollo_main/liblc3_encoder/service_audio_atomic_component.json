@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "mode": "joint-cff-lc3-atomic-component",
+  "builder": {
+    "path": "components/apollo_main/liblc3_encoder/build_service_audio_atomic_component.py",
+    "size": 43431,
+    "sha256": "597b65b099dc3df5ea24d037be2aaeebfd93685d6f6cb0285fa461e8a7196da1"
+  },
+  "evidence": {
+    "capacity_proposal": {
+      "path": "components/apollo_main/liblc3_encoder/capacity_rebalancing_proposal.json",
+      "size": 8697,
+      "sha256": "b8c7576a191340566b202405c77651a569146386cae2f879b935c360ab5de7b4"
+    },
+    "production_replay": {
+      "path": "components/apollo_main/liblc3_encoder/service_audio_production_replay.json",
+      "size": 3269,
+      "sha256": "194ae2b10987359147f2694c95c7522a6302c8a11303fed342b89c5a50323f88"
+    }
+  },
+  "joint_layout": {
+    "minimum_suffix_span": 9152
+  },
+  "profiles": {
+    "apple-clang": {
+      "input_component": {
+        "size": 3956468,
+        "sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"
+      },
+      "core": {
+        "report": {
+          "path": "build/canonical-observation/cff-apple/build-report.json",
+          "size": 33404522,
+          "sha256": "c4bd28118f9792c3f5dfb41e6685c41f364dfd68efdcaaea89f9f061b7efa767"
+        },
+        "overlay": {
+          "path": "build/canonical-observation/cff-apple/apollo_core_overlay.bin",
+          "size": 362272,
+          "sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+        },
+        "overlay_end_exclusive": 8309316
+      },
+      "expected_layout": {
+        "main_text_bytes": 14624,
+        "canonical_cantunwind_rows": 176
+      },
+      "expected_scatter_ingress": [
+        {
+          "section": ".text.fft",
+          "start": 4553304,
+          "end_exclusive": 4554460,
+          "branch_target_count": 0,
+          "byte_window_pointer_target_count": 0,
+          "aligned_word_pointer_target_count": 0,
+          "byte_window_only_classification": "none"
+        },
+        {
+          "section": ".text.lc3_sns_analyze",
+          "start": 4554948,
+          "end_exclusive": 4556920,
+          "branch_target_count": 0,
+          "byte_window_pointer_target_count": 11,
+          "aligned_word_pointer_target_count": 0,
+          "byte_window_only_classification": "unaligned-sliding-window-false-positive"
+        },
+        {
+          "section": ".text.lc3_tns_analyze",
+          "start": 5080028,
+          "end_exclusive": 5081644,
+          "branch_target_count": 0,
+          "byte_window_pointer_target_count": 2,
+          "aligned_word_pointer_target_count": 0,
+          "byte_window_only_classification": "unaligned-sliding-window-false-positive"
+        }
+      ],
+      "expected_report_sha256": "8c142438eb54ef06e13d75d6ed2217aa4ad12614a176c18053e99cea70bbcb61"
+    },
+    "linux-clang": {
+      "input_component": {
+        "size": 3956468,
+        "sha256": "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7"
+      },
+      "core": {
+        "report": {
+          "path": "build/canonical-observation/cff-linux/build-report.json",
+          "size": 4466331,
+          "sha256": "00b8630378f3fd70156d1742e67a412ac568d1d1466b628709c6bf1fcaf6676b"
+        },
+        "overlay": {
+          "path": "build/canonical-observation/cff-linux/apollo_core_overlay.bin",
+          "size": 154604,
+          "sha256": "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6"
+        },
+        "overlay_end_exclusive": 8101648
+      },
+      "expected_layout": {
+        "main_text_bytes": 19308,
+        "canonical_cantunwind_rows": 177
+      },
+      "expected_scatter_ingress": [],
+      "expected_report_sha256": "4f63431576dc1dfb2075ff31595f38c75ded954ed19b18fc771d282f4311ce67"
+    }
+  }
+}

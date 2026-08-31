@@ -1,0 +1,73 @@
+{
+  "candidate_distinction": {
+    "existing_candidate_bytes": 38828,
+    "existing_candidate_functions": 248,
+    "existing_candidate_scope": "reachable driver/interpreter graph; not a complete physical map",
+    "newly_mapped_callable_bytes": 2900,
+    "newly_mapped_functions": 17,
+    "this_scope": "complete stock TrueType callable and physical envelope"
+  },
+  "evidence_bounds": {
+    "hardware_operations": false,
+    "source and semantic identity are not compiler byte identity": true,
+    "stock physical complement is pinned data, pointer pools, and padding": true
+  },
+  "mapped_callable_closure": {
+    "bytes": 41728,
+    "compiler_byte_identity_claimed": false,
+    "functions": 265,
+    "high": {
+      "bytes": 5294,
+      "functions": 56
+    },
+    "mapping_sha256": "9b6d8bb3292897d2a58e0c6af2b9c5bf53662e4515bc100ed6b4a0b79c795bf0",
+    "medium": {
+      "bytes": 36434,
+      "functions": 209
+    },
+    "unresolved_callable_bytes": 0
+  },
+  "production": {
+    "authenticated_target_placement": false,
+    "community_source": true,
+    "existing_full_candidate_link_gate": "tests.test_runtime_target_provider_candidate",
+    "remaining_release_gates": [
+      "pinned IAR-compatible code generation, relocation, and placement",
+      "authenticated external font payload and face-path configuration",
+      "task stack and worst-case execution-time qualification",
+      "authorized hardware rendering validation"
+    ],
+    "stock_image_overlay_routed": false
+  },
+  "schema_version": 1,
+  "status": "g2-freetype-truetype-complete-map-source-admission",
+  "translation_unit": {
+    "bytes": 1635,
+    "compatibility_warning_exception": "-Wno-cast-function-type-mismatch",
+    "path": "third_party/freetype/src/truetype/truetype.c",
+    "sha256": "66d947a360713498264df4d4a0624a8c58056d76dc909afcf0fd4dcf9ef18bee",
+    "single_object_includes": [
+      "ttdriver.c",
+      "ttgload.c",
+      "ttgxvar.c",
+      "ttinterp.c",
+      "ttobjs.c",
+      "ttpic.c",
+      "ttpload.c",
+      "ttsubpix.c"
+    ],
+    "target": "arm-none-eabi/cortex-m55/thumb/hard-float",
+    "warnings_as_errors": true
+  },
+  "truetype_source_inventory": {
+    "bytes": 739559,
+    "files": 18,
+    "inventory_sha256": "3fb88921411e4b85e7c600d7538fff4d43a1c8a138475a5d7d77bd745ae8e973"
+  },
+  "upstream": {
+    "commit": "86bc8a95056c97a810986434a3f268cbe67f2902",
+    "license": "FTL",
+    "tag": "VER-2-9-1",
+    "version": "2.9.1"
+  }
+}

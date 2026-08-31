@@ -62,11 +62,11 @@ CANDIDATE_FUNCTIONS = [
     "open_cfw_cordio_attc_initialize",
 ]
 CANDIDATE_METRICS = [
-    (349440,10,0),(349452,12,0),(349464,34,1),(349500,84,3),
-    (349584,192,4),(349776,44,2),(349820,54,3),(349876,304,4),
-    (350180,112,8),(350292,112,3),(350404,80,4),(350484,48,3),
-    (350532,376,13),(350908,318,7),(351228,60,1),(351288,52,1),
-    (351340,22,1),(351364,26,1),(351392,40,2),(351432,278,0),
+    (280960,10,0),(280972,12,0),(280984,34,1),(281020,84,3),
+    (281104,192,4),(281296,44,2),(281340,54,3),(281396,304,4),
+    (281700,112,8),(281812,112,3),(281924,80,4),(282004,48,3),
+    (282052,376,13),(282428,318,7),(282748,60,1),(282808,52,1),
+    (282860,22,1),(282884,26,1),(282912,40,2),(282952,278,0),
 ]
 
 CALLS = {
@@ -282,7 +282,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
         ):
             raise RuntimeError(f"attc_main production route changed: {name}")
     compiled = sum(row["expected"]["size"] for row in leaves)
-    alignment = leaves[0]["expected"]["offset"] - 349440
+    alignment = leaves[0]["expected"]["offset"] - 280960
     alignment += sum(
         right["expected"]["offset"] - left["expected"]["offset"]
         - left["expected"]["size"]
@@ -352,7 +352,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "on_deck_index_hardened": True,
             "g2_hci_error_base_preserved": "0xA0",
             "hardware_validation": (
-                "deferred by project direction; future qualification requires authorized responsive G2/ATT peer evidence"
+                "blocked by unavailable physical evidence; future qualification requires authorized responsive G2/ATT peer evidence"
             ),
         },
     }

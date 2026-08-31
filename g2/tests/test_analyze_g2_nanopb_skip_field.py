@@ -113,8 +113,8 @@ class NanopbSkipFieldAuditTests(unittest.TestCase):
     def test_production_source_header_and_registration_are_pinned(self) -> None:
         pins = {
             PRODUCTION_SOURCE: (
-                2_417,
-                "b0fbb6fc99f0a47a40e53662393a43c88b01d29d4b4457910b9f6be8063e7353",
+                2_453,
+                "099a16d1baf68a40b3750101a120ca67d3b143cbea8b722f4e00ac245bf4e616",
             ),
             PRODUCTION_HEADER: (
                 2_152,

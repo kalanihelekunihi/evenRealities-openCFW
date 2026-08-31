@@ -40,7 +40,7 @@ INPUT_PINS = {
     HEADER: (1554, "cbf3bd6097abf87d71d84ec6cbaa1cec12a90912cfce3412290a53495ff1fa48"),
     FIXTURE: (2535, "0985ff5d155edc22c369c9e209133a95d3d13aef74a61bc087bdb288165d534e"),
     PRODUCTION: (1458, "5b3d0246fa1fca6222cd0677cc02f7a96a87bab6dbb43808901f0162be414e06"),
-    BOUNDARY: (2005, "96ecf260299300434a3aafccad25488984ca62b8c026b20823ba990a455356e5"),
+    BOUNDARY: (2016, "b3a18231db38128947eb20246ea34c7806fcd240439ad30d71b5a0be07757939"),
 }
 FLAGS = (
     "-target", "arm-none-eabi", "-mcpu=cortex-m55", "-mthumb", "-Oz",
@@ -215,7 +215,7 @@ def audit() -> dict[str, Any]:
     require((built["extraction"]["sha256"], built["placement"]["stock_sha256"])
             == (STOCK_SHA, STOCK_SHA), "production program_dma placement changed")
     return {
-        "status": "production-routed-exact-dual-profile-source / hardware-validation-deferred-by-project-direction",
+        "status": "production-routed-exact-dual-profile-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "stock": {"start": ENTRY, "end": END, "bytes": len(stock), "sha256": STOCK_SHA},
         "identity": {"function": "program_dma",
                      "upstream_commit": provenance["upstream"]["selected_commit"],
@@ -232,7 +232,7 @@ def audit() -> dict[str, Any]:
                        "next_frontier": successor["target_address"]},
         "next_frontier": {"start": END, "end": 0x00424120,
                           "identity": "sched_hiprio", "bytes": 118},
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_gate": {"required_future_evidence":
                           "authorized clock-request, DMA MMIO, queue-index, concurrency, interrupt, and cold-boot qualification"},
         "hardware_operations": [],
@@ -249,7 +249,7 @@ def main() -> int:
     else:
         print("Bootloader program_dma 0x42403e: production-routed exact source")
         print("  next sequential frontier: 0x4240aa (sched_hiprio)")
-        print("  physical validation: deferred by project direction")
+        print("  physical validation: blocked by unavailable physical evidence")
     return 0
 
 

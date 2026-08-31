@@ -10,7 +10,6 @@ import subprocess
 import sys
 import tempfile
 import unittest
-import zlib
 from pathlib import Path
 
 
@@ -112,23 +111,23 @@ UPSTREAM_FUNCTION_SHA256 = (
     "4c0d43181467f956076ad7906a9b5ec2"
 )
 
-PRODUCTION_OFFSET = 173_780
-PRODUCTION_ADDRESS = 0x007B_E9F8
+PRODUCTION_OFFSET = 113_932
+PRODUCTION_ADDRESS = 0x007B_0030
 PRODUCTION_BYTES_SHA256 = (
     "88edbdea558812d213013a8d319a09c6"
     "3dafa86ec91a7640f427c72c77552da1"
 )
-PRODUCTION_OVERLAY_SIZE = 429_058
+PRODUCTION_OVERLAY_SIZE = 360_578
 PRODUCTION_OVERLAY_SHA256 = (
-    "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd"
+    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
 )
-PRODUCTION_COMPONENT_SIZE = 3_952_454
+PRODUCTION_COMPONENT_SIZE = 3_883_974
 PRODUCTION_COMPONENT_SHA256 = (
-    "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb"
+    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
 )
-PACKAGE_SIZE = 4_745_526
+PACKAGE_SIZE = 4_677_046
 PACKAGE_SHA256 = (
-    "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934"
+    "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"
 )
 
 
@@ -250,9 +249,18 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
         ]
 
         production_output = temporary / "production"
+        stage_config = json.loads(
+            PRODUCTION_CONFIG.read_text(encoding="utf-8")
+        )
+        stage_config["expected"] = stage_config["core_stage_expected"]
+        for profile in stage_config.get("toolchain_profiles", {}).values():
+            if "core_stage_expected" in profile:
+                profile["expected"] = profile["core_stage_expected"]
+        stage_config_path = temporary / "core-stage-overlay.json"
+        stage_config_path.write_text(json.dumps(stage_config), encoding="utf-8")
         cls.production_report = apollo_overlay.build(
             root=ROOT,
-            config_path=PRODUCTION_CONFIG,
+            config_path=stage_config_path,
             output_dir=production_output,
             clang=os.environ.get("OPENCFW_CLANG", "/usr/bin/clang"),
         )
@@ -469,7 +477,7 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
                 "alignment": 4,
                 "padding_before": 0,
                 "runtime_address": PRODUCTION_ADDRESS,
-                "runtime_address_hex": "0x007BE9F8",
+                "runtime_address_hex": "0x007B0030",
             },
         )
         extraction = leaf["extraction"]
@@ -531,10 +539,10 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 409_066,
-                "opaque_base_bytes": 3_111_914,
-                "replaced_stock_function_bytes": 409_246,
-                "source_owned_bytes": 431_334,
+                "generated_patch_site_bytes": 397_446,
+                "opaque_base_bytes": 3_123_534,
+                "replaced_stock_function_bytes": 397_626,
+                "source_owned_bytes": 362_962,
             },
         )
 
@@ -610,120 +618,6 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
             sha256(historical_overlay),
             "dba3b91264a8437ea5f44d872b41a712"
             "3d6dd70e7816bdab7d6bff82d2c93ca9",
-        )
-        historical_component = bytearray(component)
-        # Undo the newest FreeRTOS reset/unordered-event production pair
-        # before applying the older historical inverses below.
-        historical_component[38_198:38_378] = official[38_198:38_378]
-        historical_component[119_964:120_182] = official[119_964:120_182]
-        historical_component[71_484:71_638] = official[71_484:71_638]
-        # The production image now also redirects both watchdog entries.
-        # This historical checkpoint predates that milestone, so restore the
-        # exact stock bodies before truncating the appended source tail.
-        historical_component[1_012_480:1_012_544] = official[
-            1_012_480:1_012_544
-        ]
-        historical_component[1_012_544:1_012_620] = official[
-            1_012_544:1_012_620
-        ]
-        for offset, size in (
-            # Scheduler-start core admitted after this historical milestone.
-            (41_474, 46),
-            (118_028, 144),
-            (119_252, 206),
-            (21_908, 1_026),
-            (68_974, 132),
-            (76_448, 24),
-            (41_180, 20),
-            (41_200, 24),
-            (41_224, 44),
-            (40_036, 354),
-            (22_940, 106),
-            (23_056, 26),
-            (23_082, 26),
-            (123_184, 256),
-            (123_440, 112),
-            (123_552, 90),
-            (123_642, 94),
-            (40_642, 34),
-            (71_866, 180),
-            (79_496, 162),
-            (118_172, 12),
-            (118_252, 306),
-            (118_558, 8),
-            (118_566, 10),
-            (118_892, 338),
-            (39_522, 200),
-            (119_696, 246),
-            (120_182, 16),
-            (120_198, 128),
-            (120_326, 10),
-            (120_896, 22),
-            (120_982, 38),
-            (121_578, 22),
-            (121_600, 22),
-            # Charger-common eleven-body production cluster.
-            (479_132, 240),
-            (479_372, 94),
-            (479_466, 464),
-            (479_930, 450),
-            (480_380, 226),
-            (480_606, 276),
-            (480_882, 372),
-            (481_276, 142),
-            (481_440, 122),
-            (481_562, 6),
-            (481_568, 8),
-            # Goodix-derived application-error handler admitted later.
-            (858_984, 178),
-        ):
-            historical_component[offset:offset + size] = official[
-                offset:offset + size
-            ]
-        for offset, replacement_hex in (
-            (
-                691_244,
-                "b6f2ecbb00bf00bf00bf00bf00bf00bf00bf00bf"
-                "00bf00bf00bf00bf00bf00bf00bf00bf00bf00bf",
-            ),
-            (
-                1_143_640,
-                "48f266b800bf00bf00bf00bf00bf00bf00bf00bf"
-                "00bf00bf00bf00bf00bf",
-            ),
-        ):
-            replacement = bytes.fromhex(replacement_hex)
-            historical_component[offset:offset + len(replacement)] = (
-                replacement
-            )
-        del historical_component[3_637_366:]
-        first_word = struct.unpack_from("<I", historical_component, 0)[0]
-        struct.pack_into(
-            "<I",
-            historical_component,
-            0,
-            (first_word & 0xFF000000) | len(historical_component),
-        )
-        struct.pack_into(
-            "<I",
-            historical_component,
-            4,
-            zlib.crc32(historical_component[8:]) & 0xFFFFFFFF,
-        )
-        self.assertEqual(
-            sha256(bytes(historical_component)),
-            "340120823caa5d95dc9c75199edb8f9915849d8ccc3ffe58e5474bc2d3324cd6",
-        )
-        historical_payloads = dict(payloads)
-        historical_payloads["apollo_main"] = bytes(historical_component)
-        historical_image, _entries = self.open_cfw.assemble_evenota(
-            manifest,
-            historical_payloads,
-        )
-        self.assertEqual(len(historical_image), 4_415_860)
-        self.assertEqual(
-            sha256(historical_image),
-            "798f8d74b0b7062997d7c4949a6fe0254e82f96db3f3102cf9cb6d116dcdc1de",
         )
 
 

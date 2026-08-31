@@ -1,0 +1,329 @@
+{
+  "classification_policy": "admitted component build reports are authoritative for source/generated/retained totals; flash-plan address_status rows remain an address map and require the checked profile reconciliation below",
+  "gates": {
+    "binary_redistribution_authority_resolved": false,
+    "dual_profile_byte_accounting_complete": true,
+    "dual_profile_classification_complete": true,
+    "dual_profile_unclassified_bytes": 0,
+    "hardware_operations": [],
+    "hardware_validation": "blocked by unavailable physical evidence",
+    "release_authorized": false,
+    "source_complete": false
+  },
+  "per_byte_ownership_policy": {
+    "all_profiles_mask_complete": false,
+    "linux_per_byte_ownership_mask_complete": false,
+    "qualification": "Linux aggregate buckets and typed-mixed spans are exact, but no Linux per-byte source/generated/retained ownership is fabricated",
+    "sole_current_authority_profile": "apple-clang"
+  },
+  "profiles": {
+    "apple-clang": {
+      "aggregate_buckets": {
+        "candidate_source_not_routed": 30636,
+        "generated_or_reconstructible": 426474,
+        "production_source": 424703,
+        "typed_retained_or_external": 3795983,
+        "unclassified": 0
+      },
+      "apollo_flash_label_reconciliation": {
+        "authoritative_builder_accounting": {
+          "component_container_metadata": 32,
+          "generated_addressed": 425806,
+          "retained": 3198967,
+          "source": 424703
+        },
+        "bytes_requiring_reconciliation": 17800,
+        "plan_labels": {
+          "component_container_metadata": 32,
+          "generated_addressed": 412038,
+          "retained": 3216767,
+          "source": 420671
+        },
+        "plan_minus_authoritative": {
+          "component_container_metadata": 0,
+          "generated_addressed": -13768,
+          "retained": 17800,
+          "source": -4032
+        },
+        "qualification": "flash addresses and bytes are exact; profile-coarse address_status labels are non-authoritative and reconciled to admitted builder receipts"
+      },
+      "boot_provider": {
+        "component_sha256": "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
+        "component_size": 163840,
+        "report": {
+          "path": "components/bootloader/core_overlay/build/build-report.json",
+          "sha256": "3adf11abee6f95645e4442c07451f54f03137f22545385b6c02d33c2b9fab447",
+          "size": 2086362
+        }
+      },
+      "main_observation": {
+        "component_sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
+        "component_size": 3885668,
+        "observation_reports": [
+          {
+            "path": "build/canonical-observation/apple-a/build-report.json",
+            "sha256": "faa44244eb1abb457f7d6f71d7f901eacac49b6ce8b492cf4dc1174d6ff79953",
+            "size": 33680324
+          },
+          {
+            "path": "build/canonical-observation/apple-b/build-report.json",
+            "sha256": "fa5792332d24a2331f76846a1d1be4c45f263fa0464d00a5a94db654d961b58d",
+            "size": 33680324
+          }
+        ],
+        "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+        "overlay_size": 362272,
+        "source_input_entries": 879,
+        "source_inputs_sha256": "00f38b0f6d9fd0b8d1fa1e66f73878f504bbc25e9047e766418c936b2f549e65"
+      },
+      "nemavg_stroke_cap_boundary": {
+        "candidate_source_not_routed_bytes": 0,
+        "candidate_source_not_routed_functions": 0,
+        "coordinator_production_routed": true,
+        "endpoint_stock_entries_unpatched": false,
+        "ownership_accounting": "all three authenticated stroke-cap stock functions are replaced by production-routed MIT C; emitted component totals remain authoritative from the independently admitted builder reports",
+        "retained_unpatched_functions": 0,
+        "retained_unpatched_stock_bytes": 0,
+        "source_routed_functions": 3,
+        "source_routed_stock_bytes": 6614,
+        "stock_functions": 3,
+        "stock_physical_bytes": 6614,
+        "whole_candidate_production_routed": true
+      },
+      "package": {
+        "address_status_ownership_mode": "non_authoritative_requires_checked_reconciliation",
+        "component_payload_bytes": 4677796,
+        "container_regions": 6,
+        "flash_plan": {
+          "path": "build/postapply-package-apple/flash-plan.json",
+          "sha256": "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127",
+          "size": 4595610
+        },
+        "flash_plan_sha256": "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127",
+        "flash_regions": 6598,
+        "internal_component_container_bytes": 300,
+        "outer_evenota_envelope_bytes": 944,
+        "package_report": {
+          "path": "build/postapply-package-apple/build-report.json",
+          "sha256": "4d3945c95bd4ff7c8b1f8e6df4c59e5f15285c053ce37e78cfba4a830f368dcd",
+          "size": 4317
+        },
+        "package_report_sha256": "4d3945c95bd4ff7c8b1f8e6df4c59e5f15285c053ce37e78cfba4a830f368dcd",
+        "package_sha256": "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a",
+        "package_size": 4678740,
+        "physical_flash_bytes": 4677496,
+        "providers": {
+          "apollo_bootloader": {
+            "kind": "source_build",
+            "path": "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
+            "sha256": "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
+            "size": 163840
+          },
+          "apollo_main": {
+            "kind": "source_build",
+            "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
+            "sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
+            "size": 3885668
+          },
+          "ble_em9305": {
+            "kind": "official_blob",
+            "path": "blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+            "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+            "size": 211948
+          },
+          "case": {
+            "kind": "official_blob",
+            "path": "blobs/official/g2-2.2.6.10/firmware_box.bin",
+            "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+            "size": 55784
+          },
+          "codec": {
+            "kind": "official_blob",
+            "path": "blobs/official/g2-2.2.6.10/firmware_codec.bin",
+            "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+            "size": 326092
+          },
+          "touch": {
+            "kind": "official_blob",
+            "path": "blobs/official/g2-2.2.6.10/firmware_touch.bin",
+            "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+            "size": 34464
+          }
+        },
+        "typed_mixed_profile_spans": [],
+        "unresolved_regions": 0
+      },
+      "per_byte_ownership_authority": "canonical Apple component builder/region mask",
+      "per_byte_ownership_mask_complete": true,
+      "release_blocking_bytes": 3826619
+    },
+    "linux-clang": {
+      "aggregate_buckets": {
+        "candidate_source_not_routed": 30636,
+        "generated_or_reconstructible": 136046,
+        "production_source": 207141,
+        "typed_retained_or_external": 4096289,
+        "unclassified": 0
+      },
+      "apollo_flash_label_reconciliation": {
+        "authoritative_builder_accounting": {
+          "component_container_metadata": 32,
+          "generated_addressed": 135378,
+          "retained": 3499273,
+          "source": 207141
+        },
+        "bytes_requiring_reconciliation": 272466,
+        "plan_labels": {
+          "component_container_metadata": 32,
+          "generated_addressed": 407790,
+          "retained": 3226807,
+          "source": 207195
+        },
+        "plan_minus_authoritative": {
+          "component_container_metadata": 0,
+          "generated_addressed": 272412,
+          "retained": -272466,
+          "source": 54
+        },
+        "qualification": "flash addresses and bytes are exact; profile-coarse address_status labels are non-authoritative and reconciled to admitted builder receipts"
+      },
+      "boot_provider": {
+        "component_sha256": "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e",
+        "component_size": 163824,
+        "report": {
+          "path": "build/canonical-provider/linux-clang/apollo_bootloader/build-report.json",
+          "sha256": "d6369d491628d053be53eeef03f2ce78da47b35f8565e3fd4eea3635921e01f5",
+          "size": 2071485
+        }
+      },
+      "main_observation": {
+        "component_sha256": "45d32718d333b61718d7ebeededf4692760608af01951b98501189f5e809eccd",
+        "component_size": 3678000,
+        "observation_reports": [
+          {
+            "path": "build/canonical-observation/linux-a/build-report.json",
+            "sha256": "cdab5dd458526551e5bfa314d612c3363206c512cf91d73426440997a05e325e",
+            "size": 4397239
+          },
+          {
+            "path": "build/canonical-observation/linux-b/build-report.json",
+            "sha256": "c632bfad7ba9a3cecfc5442574252a1455368df8db08c3516824a63f5b2f6f45",
+            "size": 4397239
+          }
+        ],
+        "overlay_sha256": "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6",
+        "overlay_size": 154604,
+        "source_input_entries": 879,
+        "source_inputs_sha256": "00f38b0f6d9fd0b8d1fa1e66f73878f504bbc25e9047e766418c936b2f549e65"
+      },
+      "nemavg_stroke_cap_boundary": {
+        "candidate_source_not_routed_bytes": 0,
+        "candidate_source_not_routed_functions": 0,
+        "coordinator_production_routed": true,
+        "endpoint_stock_entries_unpatched": false,
+        "ownership_accounting": "all three authenticated stroke-cap stock functions are replaced by production-routed MIT C; emitted component totals remain authoritative from the independently admitted builder reports",
+        "retained_unpatched_functions": 0,
+        "retained_unpatched_stock_bytes": 0,
+        "source_routed_functions": 3,
+        "source_routed_stock_bytes": 6614,
+        "stock_functions": 3,
+        "stock_physical_bytes": 6614,
+        "whole_candidate_production_routed": true
+      },
+      "package": {
+        "address_status_ownership_mode": "non_authoritative_profile_coarse",
+        "component_payload_bytes": 4470112,
+        "container_regions": 6,
+        "flash_plan": {
+          "path": "build/postapply-package-linux/flash-plan.json",
+          "sha256": "3915b8e5d4d04bbd1a540c6851534011b611445b75354add5cd5b24bd86e35ff",
+          "size": 2509940
+        },
+        "flash_plan_sha256": "3915b8e5d4d04bbd1a540c6851534011b611445b75354add5cd5b24bd86e35ff",
+        "flash_regions": 3588,
+        "internal_component_container_bytes": 300,
+        "outer_evenota_envelope_bytes": 944,
+        "package_report": {
+          "path": "build/postapply-package-linux/build-report.json",
+          "sha256": "62939ba9e07fecf90f0cfc927f053c238932e51255f19dfe04df90ba12d465f4",
+          "size": 4315
+        },
+        "package_report_sha256": "62939ba9e07fecf90f0cfc927f053c238932e51255f19dfe04df90ba12d465f4",
+        "package_sha256": "f7260f93e2c87f2403e14f5a8e6ae1436233cce2990c386a1cde48d2e8133e31",
+        "package_size": 4471056,
+        "physical_flash_bytes": 4469812,
+        "providers": {
+          "apollo_bootloader": {
+            "kind": "source_build",
+            "path": "build/canonical-provider/linux-clang/apollo_bootloader/ota_s200_bootloader.bin",
+            "sha256": "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e",
+            "size": 163824
+          },
+          "apollo_main": {
+            "kind": "source_build",
+            "path": ".tmp-postapply-core-linux/ota_s200_firmware_ota.bin",
+            "sha256": "45d32718d333b61718d7ebeededf4692760608af01951b98501189f5e809eccd",
+            "size": 3678000
+          },
+          "ble_em9305": {
+            "kind": "official_blob",
+            "path": "blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+            "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+            "size": 211948
+          },
+          "case": {
+            "kind": "official_blob",
+            "path": "blobs/official/g2-2.2.6.10/firmware_box.bin",
+            "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+            "size": 55784
+          },
+          "codec": {
+            "kind": "official_blob",
+            "path": "blobs/official/g2-2.2.6.10/firmware_codec.bin",
+            "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+            "size": 326092
+          },
+          "touch": {
+            "kind": "official_blob",
+            "path": "blobs/official/g2-2.2.6.10/firmware_touch.bin",
+            "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+            "size": 34464
+          }
+        },
+        "typed_mixed_profile_spans": [
+          {
+            "classification": "typed_mixed_profile_ownership",
+            "component": "apollo_bootloader",
+            "component_file_offset": 148599,
+            "end_exclusive": 163824,
+            "reason": "exact bytes and addresses; no complete per-byte source-vs-generated-vs-retained mask is claimed",
+            "size": 15225
+          },
+          {
+            "classification": "typed_mixed_profile_ownership",
+            "component": "apollo_main",
+            "component_file_offset": 0,
+            "end_exclusive": 3678000,
+            "reason": "exact bytes and addresses; no complete per-byte source-vs-generated-vs-retained mask is claimed",
+            "size": 3678000
+          }
+        ],
+        "unresolved_regions": 0
+      },
+      "per_byte_ownership_authority": "aggregate totals plus explicit typed-mixed spans only",
+      "per_byte_ownership_mask_complete": false,
+      "release_blocking_bytes": 4126925
+    }
+  },
+  "schema_version": 3,
+  "source_inputs_sha256": "00f38b0f6d9fd0b8d1fa1e66f73878f504bbc25e9047e766418c936b2f549e65",
+  "target": "G2 s200_v2.2.6.10 dual-profile ownership reconciliation",
+  "unresolved_binary_authority": [
+    "codec",
+    "ble_em9305",
+    "touch",
+    "case",
+    "apollo_bootloader",
+    "apollo_main"
+  ]
+}

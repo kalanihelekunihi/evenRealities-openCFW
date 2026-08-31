@@ -35,7 +35,7 @@ LICENSE = AMBIQ_ROOT / "LICENSE"
 CMSIS_CORE = ROOT / "third_party/cmsis-core/CMSIS/Core/Include"
 
 FILE_PINS = {
-    PRODUCTION_SOURCE: (4381, "d82f43ac56e65dd0cd4072828a6566d3ec6cc34008572704f26d1d72f9efc274"),
+    PRODUCTION_SOURCE: (4368, "cfd23d4bd17f71473ad47155f64e659ae6eea0f08be614a2534005725df32e8b"),
     CENSUS: (2717, "510707c06c9f0c2685152c2dcbd7434ffed02ea4c70a967cf9c1ec73812a320d"),
     BOUNDARY: (2613, "43d72d56442cec4e749804059452b8a85dbd6845e16aae9d6247ea4c5632e4b5"),
     HEADER: (2074, "38370f780cacab76432eeef3dd3d6b54a622a8bcefc92071412c5a0e40532a4b"),
@@ -305,7 +305,7 @@ def audit() -> dict:
 
     return {
         "component": "G2 bootloader Ambiq MSPI FIFO-read frontier",
-        "status": "implemented-in-source / hardware-validation-deferred-by-project-direction",
+        "status": "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "stock": {
             "start": ENTRY, "end": 0x00423F28, "bytes": 158,
             "sha256": SPANS["mspi_fifo_read"][2], "sole_caller": 0x004263F6,
@@ -344,7 +344,7 @@ def audit() -> dict:
                        },
                        "source_owned_bytes": component["source_owned_bytes"],
                        "retained_official_bytes": component["opaque_base_bytes"]},
-        "hardware_validation": "deferred by project direction",
+        "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_gate": {
             "required_future_evidence": "authorized G2 qualification exercising all four MSPI instances, full-word and partial FIFO reads, timeouts, and cold boot",
         },
@@ -363,7 +363,7 @@ def main() -> int:
     else:
         print("Bootloader MSPI FIFO-read 0x423e8a: implemented in exact source")
         print("  upstream build identity remains fail-closed; clean-room production bytes exact")
-        print("  physical validation: deferred by project direction")
+        print("  physical validation: blocked by unavailable physical evidence")
         print("  exact local successor: 0x423f28 (CQ init, source-owned)")
     return 0
 

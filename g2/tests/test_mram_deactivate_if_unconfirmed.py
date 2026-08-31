@@ -122,11 +122,11 @@ class MramDeactivateIfUnconfirmedTests(unittest.TestCase):
     def test_source_and_fixture_are_review_pinned(self) -> None:
         self.assertEqual(
             hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-            "f2380679535b946e50a6d0006563d777e9240417fcb5c28ac451c7e52db3bda4",
+            "2be3564ebb6f909ad5c6ece8c4f0286eb02d302c4e66bcc13c11914f58911cc1",
         )
         self.assertEqual(
             hashlib.sha256(FIXTURE.read_bytes()).hexdigest(),
-            "a56942ad97927374567f0a150f443b7b4f9d7d680e2035f99ae4dc16b9991efa",
+            "a28ce03a5409ab44e04b85b2b3c13c19dbbcacf0246c4d969e282db29e6928c8",
         )
 
 

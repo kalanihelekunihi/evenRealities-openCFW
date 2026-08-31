@@ -151,9 +151,9 @@ FIELD_DECODER_AUDIT = ROOT / "docs/research/nanopb-field-decoder-cluster-boundar
 FIELD_DECODER_ANALYZER = ROOT / "tools/analyze_g2_nanopb_field_decoder_cluster.py"
 PRODUCTION_OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 EXPECTED_PROVENANCE_SIZE = 135337
-EXPECTED_PROVENANCE_SHA256 = "1ed69185777206c4776f6961906d0cfefdca433fd2009d2dd92f01148ba9ec83"
-EXPECTED_VERIFIER_SIZE = 232622
-EXPECTED_VERIFIER_SHA256 = "d3f6a5164416310b88524e207b11fb3bffb1bfb3d871209739fbdcadb8c5bcc6"
+EXPECTED_PROVENANCE_SHA256 = "2ff90b1c90d77df983dd36b0f114011a9e635db99dd5d4e379e55407ea978e6a"
+EXPECTED_VERIFIER_SIZE = 231914
+EXPECTED_VERIFIER_SHA256 = "7019062b33c569462fcaed75046055f09e61ea011837242fe6d2bef19774bce2"
 EXPECTED_RECORDS_SHA256 = "bb36791b9ae9a6cff412516db0b93911240fff8e8109d56136ca76173ac3a3e0"
 EXPECTED_SOURCE_PATHS = [
     "LICENSE.txt",
@@ -1645,7 +1645,7 @@ class NanopbSnapshotTests(unittest.TestCase):
             )
         )
         regions = manifest["component_overrides"]["apollo_main"]["regions"]
-        self.assertEqual(len(regions), 6125)
+        self.assertEqual(len(regions), 5994)
         by_name = {item["name"]: item for item in regions}
         entry = by_name["nanopb_decode_svarint_source_replacement"]
         self.assertEqual(
@@ -1655,7 +1655,7 @@ class NanopbSnapshotTests(unittest.TestCase):
         source = by_name["apollo_nanopb_decode_svarint_source_leaf"]
         self.assertEqual(
             (source["file_offset"], source["size"], source["target_address"], source["address_status"]),
-            (3708160, 54, 0x007C14E0, "source_compiled"),
+            (3648312, 54, 0x007B2B18, "source_compiled"),
         )
         self.assertEqual((SVARINT_PRODUCTION_SOURCE.stat().st_size, SVARINT_PRODUCTION_HEADER.stat().st_size), (1979, 1789))
         self.assertTrue(SVARINT_PRODUCTION_AUDIT.is_file())
@@ -1940,6 +1940,26 @@ class NanopbSnapshotTests(unittest.TestCase):
                     if item["function"] == "open_cfw_nanopb_skip_varint"
                 )["relocations"][0].update(target_address=0x0048F3C0),
                 "pb_skip_varint canonical relocation closure changed",
+            ),
+            (
+                "pb_skip_varint Apple text drift",
+                lambda root, overlay: next(
+                    item
+                    for item in overlay["relocated_leaves"]
+                    if item["function"] == "open_cfw_nanopb_skip_varint"
+                )["expected"].update(offset=124302),
+                "pb_skip_varint canonical text contract changed",
+            ),
+            (
+                "pb_skip_varint Linux text drift",
+                lambda root, overlay: next(
+                    item
+                    for item in overlay["relocated_leaves"]
+                    if item["function"] == "open_cfw_nanopb_skip_varint"
+                )["toolchain_profiles"]["linux-clang"]["expected"].update(
+                    offset=126122
+                ),
+                "pb_skip_varint Linux configuration contract changed",
             ),
             (
                 "pb_close_string_substream source drift",
@@ -2308,6 +2328,62 @@ class NanopbSnapshotTests(unittest.TestCase):
                     "pb_istream_from_buffer manifest source ownership changed",
                 ):
                     verifier.verify_production_exclusion()
+        finally:
+            verifier.ROOT = old_root
+
+    def test_admitted_manifest_placement_and_retained_output_mutations_fail_closed(
+        self,
+    ) -> None:
+        verifier = load_verifier()
+        old_root = verifier.ROOT
+        mutations = (
+            (
+                "apollo_nanopb_istream_from_buffer_source_leaf",
+                "file_offset",
+                3_708_140,
+                "pb_istream_from_buffer manifest source ownership changed",
+            ),
+            (
+                "apollo_nanopb_decode_svarint_source_leaf",
+                "target_address",
+                0x007C_14E0,
+                "pb_decode_svarint manifest source ownership changed",
+            ),
+            (
+                "apollo_nanopb_decode_varint32_eof_source_leaf",
+                "output",
+                (
+                    "apollo510b/main-source-nanopb-decode-varint32-eof-"
+                    "0x007b2b50.bin"
+                ),
+                "pb_decode_varint32 manifest ownership changed",
+            ),
+        )
+        try:
+            for name, key, value, message in mutations:
+                with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp:
+                    root = Path(tmp) / "openCFW"
+                    root.mkdir()
+                    write_valid_production_registration(root)
+                    manifest_path = (
+                        root / "manifests/g2-2.2.6.10-core-source.json"
+                    )
+                    manifest = json.loads(
+                        manifest_path.read_text(encoding="utf-8")
+                    )
+                    region = next(
+                        item
+                        for item in manifest["component_overrides"]
+                        ["apollo_main"]["regions"]
+                        if item["name"] == name
+                    )
+                    region[key] = value
+                    manifest_path.write_text(
+                        json.dumps(manifest), encoding="utf-8"
+                    )
+                    verifier.ROOT = root
+                    with self.assertRaisesRegex(SystemExit, message):
+                        verifier.verify_production_exclusion()
         finally:
             verifier.ROOT = old_root
 
