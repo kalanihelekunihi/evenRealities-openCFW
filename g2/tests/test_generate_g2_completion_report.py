@@ -62,7 +62,7 @@ class G2CompletionReportTests(unittest.TestCase):
     def test_checked_dual_profile_companion_is_publicly_bound(self) -> None:
         ownership = self.assessment["dual_profile_ownership"]
         self.assertTrue(ownership["checked"])
-        self.assertEqual(ownership["companion_schema_version"], 3)
+        self.assertEqual(ownership["companion_schema_version"], 4)
         self.assertEqual(
             ownership["per_byte_ownership_policy"],
             {
@@ -89,18 +89,18 @@ class G2CompletionReportTests(unittest.TestCase):
         self.assertIn("Linux coarse spans", ownership["limitation"])
         expected = {
             "apple-clang": (
-                4678740,
-                "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a",
-                4677796,
+                4750576,
+                "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
+                4749632,
                 0,
                 17800,
             ),
             "linux-clang": (
-                4471056,
-                "f7260f93e2c87f2403e14f5a8e6ae1436233cce2990c386a1cde48d2e8133e31",
-                4470112,
+                4750560,
+                "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
+                4749616,
                 0,
-                272466,
+            274414,
             ),
         }
         for profile, values in expected.items():

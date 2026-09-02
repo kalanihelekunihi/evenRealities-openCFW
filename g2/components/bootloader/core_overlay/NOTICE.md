@@ -176,6 +176,23 @@ the settled preceding milestone. This promotion imports no
 filesystem object, block-device, mount, format, program, or erase path and
 authorizes no signing, flashing, reset, boot, filesystem mutation, or hardware
 operation.
+`runtime_hw_state_decode_42b6b8.c` is a MIT clean-room openCFW implementation
+of the authenticated 770-byte hardware-state nibble composer and dual-output
+classifier at `[0x0042B6B8,0x0042B9BA)`. It incorporates no retained vendor
+implementation bytes. Flash initial state, retained feature flag, dynamic MMIO
+mode, masks, and caller-owned input/output records are G2 compatibility seams.
+Registration authorizes offline compilation and unsigned package assembly
+only; it authorizes no signing, flashing, reset, boot, SRAM/MMIO access,
+service invocation, or other hardware operation.
+`runtime_spotmgr_state_transition_42b294.c` is a MIT clean-room openCFW
+implementation of the authenticated 1,032-byte SPOT-manager state-transition,
+trim, register-publication, wake, and finalization orchestrator at
+`[0x0042B294,0x0042B69C)`. It incorporates no retained vendor implementation
+bytes. Rank/state tables, retained flags, SRAM/MMIO registers, delay, trim,
+transition, and interrupt providers are G2 compatibility seams. Registration
+authorizes offline compilation and unsigned package assembly only; it
+authorizes no signing, flashing, reset, boot, SRAM/MMIO access, service
+invocation, or other hardware operation.
 `runtime_hw_register_services_4236ce.c` is a MIT clean-room
 openCFW implementation of three authenticated per-instance register services
 in `[0x004236CE,0x00423764)`. It incorporates no retained vendor implementation
@@ -183,6 +200,282 @@ bytes. Type identity, bank selection and register offsets are G2 compatibility
 seams. Registration authorizes offline compilation and unsigned package
 assembly only; it authorizes no signing, flashing, reset, boot, register/MMIO
 access, service invocation, or other hardware operation.
+
+`runtime_platform_bringup_430000.c` is first-party MIT clean-room openCFW source
+for the authenticated platform bring-up, measurement, and teardown orchestrator.
+It incorporates no retained vendor implementation bytes. Both exact compiler
+profiles, its sole caller, 23 provider edges, sixteen literals, and portable
+three-attempt lifecycle model are pinned. Registration authorizes offline
+compilation and unsigned package assembly only; it authorizes no signing,
+flashing, reset, boot, callbacks/registers/clocks/channels, or other hardware
+operation.
+
+`runtime_dfu_payload_program_42dae8.c` is first-party MIT clean-room openCFW
+source for the authenticated chunked DFU payload programmer/verifier. It
+incorporates no retained vendor implementation bytes. Both exact compiler
+profiles, its sole caller, fourteen provider edges, thirteen literal cells, and
+portable chunk/program/compare/close model are pinned. Registration authorizes
+offline compilation and unsigned package assembly only; it authorizes no
+signing, flashing, reset, boot, filesystem/storage/destination programming, or
+other hardware operation.
+
+`runtime_state_register_initialize_42d3bc.c` is first-party MIT clean-room
+openCFW source for the authenticated state-transition register initializer and
+restorer. It incorporates no retained vendor implementation bytes. Both exact
+compiler profiles, its sole caller, two delay-provider edges, sixteen literal
+cells, Apollo-main analogue, and portable register-transition model are pinned.
+Registration authorizes offline compilation and unsigned package assembly only;
+it authorizes no signing, flashing, reset, boot, MMIO/power/clock/trim, or other
+hardware operation.
+
+`runtime_hw_context_initialize_42e8d0.c` is first-party MIT clean-room openCFW
+source for the authenticated hardware-context slot and calibration-profile
+initializer. It incorporates no retained vendor implementation bytes. Both
+exact compiler profiles, its sole caller, five configuration-provider edges,
+eleven literal cells, Apollo-main analogue, and portable guard/profile/default/
+validity model are pinned. Registration authorizes offline compilation and
+unsigned package assembly only; it authorizes no signing, flashing, reset,
+boot, SRAM/configuration/MMIO, or other hardware operation.
+
+`runtime_descriptor_register_430280.c` and
+`runtime_hw_state_compose_42bdf0.c` are first-party MIT clean-room openCFW
+implementations of the authenticated descriptor registrar and stored-entry
+hardware-state composer. They incorporate no retained vendor implementation
+bytes. Their exact dual-toolchain bodies, bounded ingress, provider edges,
+shared literals, Apollo-main analogues, and portable behavioral models are
+pinned. Registration authorizes offline compilation and unsigned package
+assembly only; it authorizes no signing, flashing, reset, boot, SRAM/MMIO,
+interrupt, configuration-storage, or other hardware operation.
+
+`runtime_dfu_image_crc_check_42d890.c` is a first-party MIT clean-room openCFW
+implementation of the authenticated DFU image open/read/incremental-CRC/close
+verifier. It incorporates no retained vendor implementation bytes. Both exact
+compiler profiles, its sole caller, twelve provider edges, eleven shared
+literals, and its portable chunk/remainder model are pinned. Registration
+authorizes offline compilation and unsigned package assembly only; it
+authorizes no signing, flashing, reset, boot, filesystem/storage/buffer access,
+or other hardware operation.
+`runtime_control_services_42bf54.c` is a MIT clean-room openCFW
+implementation of four authenticated runtime controls totaling 296 bytes: the
+hardware-readiness gate at `0x0042BF54`, event wait-mask service at
+`0x0042E2A2`, aligned guarded dispatcher at `0x0042E4A0`, and register power
+toggle at `0x0042F1C8`. It incorporates no retained vendor implementation
+bytes. Registration authorizes offline compilation and unsigned package
+assembly only; it authorizes no signing, flashing, reset, boot, MMIO, event,
+interrupt-mask, timing, power, or other hardware operation.
+`runtime_event_service_loop_42e2f8.c` is a MIT clean-room openCFW
+implementation of the authenticated 162-byte retained-event initialization and
+bounded-wait loop at `0x0042E2F8`. It incorporates no retained vendor
+implementation bytes. Registration authorizes offline compilation and unsigned
+package assembly only; it authorizes no signing, flashing, reset, boot,
+retained-RAM, scheduler, event, logging, timing, or other hardware operation.
+`runtime_event_runtime_services_42e53c.c` is a MIT clean-room openCFW
+implementation of three authenticated event-runtime services totaling 436
+bytes: object/task initialization, queue-driven callback dispatch, and
+callback enqueueing. It incorporates no retained vendor implementation bytes.
+Registration authorizes offline compilation and unsigned package assembly
+only; it authorizes no signing, flashing, reset, boot, RTOS-object, scheduler,
+queue, callback, logging, timing, or other hardware operation.
+`runtime_control_orchestration_42dd14.c` is a MIT clean-room openCFW
+implementation of the authenticated 84-byte non-returning event/control
+orchestrator and 74-byte critical four-word dispatch transaction. It
+incorporates no retained vendor implementation bytes. Registration authorizes
+offline compilation and unsigned package assembly only; it authorizes no
+signing, flashing, reset, boot, scheduler, event, interrupt-mask, terminal
+mode, logging, timing, or other hardware operation.
+`runtime_context_publish_42dca2.c` is a MIT clean-room openCFW implementation
+of the authenticated 114-byte queued runtime-context publisher. It incorporates
+no retained vendor implementation bytes. Registration authorizes offline
+compilation and unsigned package assembly only; it authorizes no signing,
+flashing, reset, boot, retained-RAM, RTOS queue/event, scheduler, logging,
+timing, or other hardware operation.
+`runtime_hw_clock_encode_42c26a.c` is a MIT clean-room openCFW implementation
+of the authenticated 376-byte clock-divider search, rounding, and register-field
+encoder. It incorporates no retained vendor implementation bytes. Registration
+authorizes offline compilation and unsigned package assembly only; it
+authorizes no signing, flashing, reset, boot, SRAM, MMIO, clock, peripheral,
+or other hardware operation.
+`runtime_hw_event_apply_42c0b2.c` is a MIT clean-room openCFW implementation
+of the authenticated 368-byte retained hardware-event acknowledgement, drain,
+and timed register-pulse service. It incorporates no retained vendor
+implementation bytes. Registration authorizes offline compilation and unsigned
+package assembly only; it authorizes no signing, flashing, reset, boot, SRAM,
+MMIO, clock, interrupt, peripheral, or other hardware operation.
+`runtime_hw_config_retry_43048e.c` is a MIT clean-room openCFW implementation
+of the authenticated 116-byte bounded hardware-configuration retry and callback
+setup service. It incorporates no retained vendor implementation bytes.
+Registration authorizes offline compilation and unsigned package assembly only;
+it authorizes no signing, flashing, reset, boot, callback, SRAM, MMIO,
+peripheral, or other hardware operation.
+`runtime_hw_profile_apply_42ea68.c` is a MIT clean-room openCFW implementation
+of the authenticated 142-byte validated seven-field hardware-profile encoder
+and register publisher. It incorporates no retained vendor implementation
+bytes. Registration authorizes offline compilation and unsigned package
+assembly only; it authorizes no signing, flashing, reset, boot, SRAM, MMIO,
+clock, peripheral, or other hardware operation.
+`runtime_hw_register_profile_restore_42f2fa.c` is a MIT clean-room openCFW
+implementation of the authenticated 148-byte hardware register-profile
+restoration and mode-finalization service. It incorporates no retained vendor
+implementation bytes. Registration authorizes offline compilation and unsigned
+package assembly only; it authorizes no signing, flashing, reset, boot, SRAM,
+MMIO, clock, power, peripheral, or other hardware operation.
+`runtime_event_value_profile_42f204.c` is a MIT clean-room openCFW
+implementation of the authenticated 246-byte event-value hardware-profile
+publisher and saved-field updater. It incorporates no retained vendor
+implementation bytes. Registration authorizes offline compilation and unsigned
+package assembly only; it authorizes no signing, flashing, reset, boot, SRAM,
+MMIO, clock, power, peripheral, or other hardware operation.
+`runtime_register_profile_transfer_42f020.c` is a MIT clean-room openCFW
+implementation of the authenticated 302-byte validated hardware register-
+profile capture/apply service. It incorporates no retained vendor
+implementation bytes. Registration authorizes offline compilation and unsigned
+package assembly only; it authorizes no signing, flashing, reset, boot, SRAM,
+MMIO, clock, peripheral, or other hardware operation.
+`runtime_platform_finish_430502.c` is a MIT clean-room openCFW implementation
+of the authenticated 270-byte eight-slot hardware-context and event-service
+finalizer. It incorporates no retained vendor implementation bytes.
+Registration authorizes offline compilation and unsigned package assembly only;
+it authorizes no signing, flashing, reset, boot, SRAM, MMIO, interrupts,
+peripherals, or other hardware operation.
+`runtime_state_event_zero_42cfe0.c` is a MIT clean-room openCFW implementation
+of the authenticated 274-byte sixteen-channel state/event classifier. It
+incorporates no retained vendor implementation bytes. Registration authorizes
+offline compilation and unsigned package assembly only; it authorizes no
+signing, flashing, reset, boot, SRAM, MMIO, peripheral, or other hardware
+operation.
+`runtime_chunked_source_compare_42da1e.c` is a MIT clean-room openCFW
+implementation of the authenticated 178-byte bounded 4 KiB source-reader and
+memory-comparison service. It incorporates no retained vendor implementation
+bytes. Registration authorizes offline compilation and unsigned package
+assembly only; it authorizes no signing, flashing, reset, boot, storage,
+memory-controller, DMA, or other hardware operation.
+`runtime_mode_apply_42ff00.c` is a MIT clean-room openCFW implementation of
+the authenticated 242-byte mode-to-service router and interrupt-safe aggregate
+bitset publisher. It incorporates no retained vendor implementation bytes.
+Registration authorizes offline compilation and unsigned package assembly only;
+it authorizes no signing, flashing, reset, boot, SRAM, interrupt, peripheral,
+or other hardware operation.
+`runtime_hw_descriptor_publish_42c45a.c` is a MIT clean-room openCFW
+implementation of the authenticated 108-byte ring-descriptor selector and
+per-instance register publisher. It incorporates no retained vendor
+implementation bytes. Registration authorizes offline compilation and unsigned
+package assembly only; it authorizes no signing, flashing, reset, boot, SRAM,
+MMIO, peripheral, DMA, interrupt, or other hardware operation.
+`runtime_hw_context_claim_42c4c6.c` is a MIT clean-room openCFW implementation
+of the authenticated 114-byte hardware-context validation, ownership-claim,
+and publication service. It incorporates no retained vendor implementation
+bytes. Registration authorizes offline compilation and unsigned package
+assembly only; it authorizes no signing, flashing, reset, boot, retained-SRAM,
+MMIO, peripheral, concurrency, or other hardware operation.
+`runtime_hw_context_enable_42c538.c` is a MIT clean-room openCFW implementation
+of the authenticated 258-byte context activation, command-queue setup, status
+wait, and failure rollback service. It incorporates no retained vendor
+implementation bytes. Registration authorizes offline compilation and unsigned
+package assembly only; it authorizes no signing, flashing, reset, boot,
+retained-SRAM, MMIO, command-queue, timing, peripheral, or other hardware
+operation.
+`runtime_hw_event_service_42c6f8.c` is a MIT clean-room openCFW implementation
+of the authenticated 648-byte hardware event, descriptor, callback, and
+command-queue service. It incorporates no retained vendor implementation
+bytes. Registration authorizes offline compilation and unsigned package
+assembly only; it authorizes no signing, flashing, reset, boot, retained-SRAM,
+MMIO, DMA, callback, command-queue, interrupt, or other hardware operation.
+`runtime_hw_config_transaction_42c988.c` is a MIT clean-room openCFW
+implementation of the authenticated 684-byte three-mode register snapshot,
+restore, and resource transaction. It incorporates no retained vendor
+implementation bytes. Registration authorizes offline compilation and unsigned
+package assembly only; it authorizes no signing, flashing, reset, boot, MMIO,
+power/clock, command-queue, timing, or other hardware operation.
+`runtime_hw_instance_configure_42cc34.c` is a MIT clean-room openCFW
+implementation of the authenticated 380-byte hardware-instance validation and
+mode-specific rate, register, buffer-window, and slot configuration service. It
+incorporates no retained vendor implementation bytes. Registration authorizes
+offline compilation and unsigned package assembly only; it authorizes no
+signing, flashing, reset, boot, SRAM, MMIO, clock, DMA, peripheral, or other
+hardware operation.
+
+`runtime_spotmgr_state_transition_sequence_42a2b4.c` is a BSD-3-Clause
+realization of Ambiq's Apollo510 SPOT-manager transition-sequence selector at
+commit `5efc0228528a8adce5eae0d226fac85d2551eb3b`. The authenticated transition
+table, fixed-address literal, and aligned memcpy entry are compatibility seams.
+The memcpy patch preserves both stock entries at `0x0041568C` and
+`0x004156AC`. Signing, flashing, reset, boot, MMIO, or hardware operation is
+not authorized.
+
+The SPOT-manager production sources
+`runtime_spotmgr_transition_7b_428a94.c`,
+`runtime_spotmgr_timer_irq_service_42a04a.c`,
+`runtime_spotmgr_buck_deepsleep_state_42a08c.c`,
+`runtime_spotmgr_internal_power_domain_42a19c.c`, and
+`runtime_spotmgr_power_ton_adjust_42a1bc.c` are BSD-3-Clause realizations
+grounded in Ambiq's Apollo510 HAL at commit
+`5efc0228528a8adce5eae0d226fac85d2551eb3b`. The MIT files
+`runtime_spotmgr_factory_trims_429da4.c` and
+`runtime_spotmgr_factory_trims_ensure_42a036.c` are openCFW clean-room
+compatibility implementations. Registration authorizes offline compilation
+and unsigned package assembly only; it authorizes no signing, flashing,
+reset, boot, timer/interrupt/MMIO access, rail transition, trim application,
+or other hardware operation.
+
+## SPOT-manager transition sequence 2b
+
+`runtime_spotmgr_transition_428378.c` is a BSD-3-Clause realization of the
+Apollo510 SPOT-manager `transition_sequence_2b` behavior at
+`[0x00428378,0x004283E2)`, grounded in AmbiqSuite commit
+`5efc0228528a8adce5eae0d226fac85d2551eb3b`. Both reviewed compiler profiles
+emit the same 106-byte body after one strict call relocation to the delay
+provider at `0x0041D1C0`, and that body is byte-exact with stock. The fixed
+register addresses, SRAM trim cells, five-microsecond G2 delay, and sequence
+value 26 are authenticated product compatibility seams.
+
+Registration authorizes offline compilation and unsigned package assembly
+only. Live timer delivery, MMIO ordering, voltage-rail transition, trim,
+power-stability, downstream, reset, and cold-boot qualification is blocked by
+unavailable physical evidence. It authorizes no signing, flashing, reset,
+live register access, or other hardware operation.
+`runtime_float_ratio_426db4.c` is a MIT clean-room openCFW implementation of
+the bounded floating ratio validation and encoding helper at
+`[0x00426DB4,0x00426EAC)`. It incorporates no retained vendor implementation
+bytes. The source-routed common-divisor helper and source-owned `fmodf`/`roundf`
+providers are G2 compatibility seams. Registration authorizes offline
+compilation and unsigned package assembly only; it authorizes no signing,
+flashing, reset, boot, floating-point state mutation, provider invocation, or
+other hardware operation.
+`runtime_float_multiplier_426eac.c` is a MIT clean-room openCFW
+implementation of the bounded floating multiplier validation and encoding
+helper at `[0x00426EAC,0x00426F6A)`. It incorporates no retained vendor
+implementation bytes. Its explicit Arm hard-float AAPCS entry, source-owned
+`ceilf`/`fmodf`/`roundf`/`floorf` provider declarations, output layout, and
+numeric boundary constants are G2 compatibility seams. Registration
+authorizes offline compilation and unsigned package assembly only; it
+authorizes no signing, flashing, reset, boot, floating-point state mutation,
+provider invocation, or other hardware operation.
+`runtime_clkgen_disable_426d1e.c` is a MIT clean-room openCFW implementation
+of the authenticated CLKGEN bit-preserving disable entry at
+`[0x00426D1E,0x00426D2C)`. It incorporates no retained vendor implementation
+bytes. Register `0x40004050`, its typed literal, and live clock behavior are
+G2 compatibility seams. Registration authorizes offline compilation and
+unsigned package assembly only; it authorizes no signing, flashing, reset,
+boot, MMIO/clock access, service invocation, or other hardware operation.
+
+`runtime_dual_switch_426c8c.c` is a MIT clean-room openCFW implementation
+of the authenticated dual-clock switch entry at
+`[0x00426C8C,0x00426CC4)`. It incorporates no retained vendor
+implementation bytes. The final eight stock bytes remain separately retained
+as an unreachable compatibility tail; the CLKGEN control/status registers and
+retained bounded status provider are G2 compatibility seams. Registration
+authorizes offline compilation and unsigned package assembly only; it
+authorizes no signing, flashing, reset, boot, MMIO/clock access, provider
+invocation, or other hardware operation.
+
+`runtime_mspi_lifecycle_425066.c` and its header are BSD-3-Clause structured
+implementations derived from the public AmbiqSuite 5.1.0 MSPI lifecycle
+behavior, copyright (c) 2025 Ambiq Micro, Inc. They replace the executable
+enable, disable, and deinitialize entry paths while authenticated unreachable
+tails and alignment bytes remain separate retained compatibility data.
+Registration authorizes offline compilation and unsigned package assembly
+only; it authorizes no signing, flashing, reset, boot, controller/register,
+DMA, CQ, XIP, attached-flash, or other hardware operation.
 
 `runtime_mspi_device_configure_424120.c` and
 `runtime_mspi_device_configure_424120.h` are BSD-3-Clause structured ports of
@@ -254,6 +547,18 @@ provider entries remain compatibility seams. Registration authorizes offline
 compilation and unsigned package assembly only; it authorizes no signing,
 flashing, reset, boot, FIFO, command-queue, clock, register, SRAM, MMIO, or
 other hardware operation.
+
+`runtime_float_math_427c90.c` and
+`runtime_float_math_veneers_427c90.c` provide the nine MIT binary32 math
+entries in `[0x00427C90,0x00427E84)` at their authenticated fixed addresses.
+The remainder core is a bounded adaptation of musl libc v1.2.5 `fmodf.c`,
+commit `0784374d561435f7c787a555aeab8ede699ed298`; the complete musl MIT terms
+are retained at
+`third_party/lvgl-ambiq-backend/g2-runtime/musl-math/COPYRIGHT.musl`.
+The rounding, classification, and hard-float ABI veneer code is openCFW
+clean-room compatibility work. Registration authorizes offline compilation
+and unsigned package assembly only; it authorizes no signing, flashing,
+reset, boot, FP-state mutation, or other hardware operation.
 `runtime_hw_clock_divider_422e28.c` is a MIT clean-room openCFW
 implementation of the authenticated per-instance clock-divider service at
 `[0x00422E28,0x00422EE2)`. It incorporates no retained vendor implementation
@@ -341,6 +646,86 @@ retained memset and downstream consumers are G2 compatibility seams.
 Registration authorizes offline compilation and unsigned package assembly
 only; it authorizes no signing, flashing, reset, boot, interrupt/SRAM/MMIO
 access, service invocation, or other hardware operation.
+`runtime_dfu_service_task_42de58.c` is a MIT clean-room openCFW
+implementation of the authenticated 684-byte DFU queue, image-dispatch, and
+guarded vector-handoff task at `[0x0042DE58,0x0042E104)`. It incorporates no
+retained vendor implementation bytes. Queue, file/storage, CRC/programming,
+logging, runtime-lifecycle, and vector-handoff providers are G2 compatibility
+seams. Registration authorizes offline compilation and unsigned package
+assembly only; it authorizes no signing, flashing, reset, boot, storage/MMIO
+access, vector transfer, or other hardware operation.
+`runtime_state_event_one_value_42d104.c` is a MIT clean-room openCFW
+implementation of the authenticated 696-byte state-one register tuning and
+restoration service at `[0x0042D104,0x0042D3BC)`. It incorporates no retained
+vendor implementation bytes. Retained state, MMIO registers, profile input,
+and delay provider are G2 compatibility seams. Registration authorizes offline
+compilation and unsigned package assembly only; it authorizes no signing,
+flashing, reset, boot, SRAM/MMIO access, service invocation, or other hardware
+operation.
+`runtime_queue_4275ea.c` is a bounded BSD-3-Clause adaptation of AmbiqSuite
+5.1.0 `am_hal_queue_init()`, `am_hal_queue_item_add()`, and
+`am_hal_queue_item_get()` from upstream commit
+`5efc0228528a8adce5eae0d226fac85d2551eb3b`. It replaces the three complete
+authenticated bodies in `[0x004275EA,0x004276BA)`, preserves the six-word
+queue ABI from the vendored Apollo510 header, and binds atomic add/get
+operations to the authenticated critical-save provider at `0x0041B8EC` with
+exact PRIMASK restoration. Registration authorizes offline compilation and
+unsigned package assembly only; it authorizes no signing, flashing, reset,
+boot, interrupt mutation, queue use on a live device, or other hardware
+operation.
+`runtime_memmove_4276bc.c` is a MIT clean-room openCFW implementation of the
+complete authenticated overlap-safe byte-move body at
+`[0x004276BC,0x00427752)`. It incorporates no retained vendor implementation
+bytes. The retained byte-copy provider, production caller, target memory
+system, timing, and overlap behavior are G2 compatibility seams. Registration
+authorizes offline compilation and unsigned package assembly only; it
+authorizes no signing, flashing, reset, boot, live memory access, caller
+invocation, or other hardware operation.
+`runtime_cmdq_update_indices_427754.c` is a bounded BSD-3-Clause adaptation of
+AmbiqSuite Apollo510 private `update_indices()` from `am_hal_cmdq.c` at
+upstream commit `5efc0228528a8adce5eae0d226fac85d2551eb3b`. It replaces the
+complete authenticated body `[0x00427754,0x00427794)`, preserves the 44-byte
+private command-queue ABI and register-table layout, and binds its critical
+section to the authenticated save provider at `0x0041B8EC` with exact saved
+PRIMASK restoration. Registration authorizes offline compilation and unsigned
+package assembly only; it authorizes no signing, flashing, reset, boot, live
+register access, interrupt mutation, queue use, or other hardware operation.
+`runtime_cmdq_services_427794.c` is a bounded BSD-3-Clause adaptation of the
+public Apollo510 `am_hal_cmdq` service family, copyright (c) 2025 Ambiq Micro,
+Inc., at upstream commit `5efc0228528a8adce5eae0d226fac85d2551eb3b`. It
+replaces the eleven authenticated public entries in
+`[0x00427794,0x00427C80)` with reviewable C at their original addresses. The
+queue state/register tables, SSRAM barrier threshold, MMIO registers,
+DMA/coherency behavior, interrupts, and physical peripherals are G2
+compatibility seams. Registration authorizes offline compilation and unsigned
+package assembly only; it authorizes no signing, flashing, reset, boot, live
+MMIO, queue execution, or other hardware operation.
+`runtime_float_gcd_426d48.c` is a MIT clean-room openCFW implementation of
+the bounded floating common-divisor helper at `[0x00426D48,0x00426DB2)`.
+It incorporates no retained vendor implementation bytes. The retained
+`floorf` provider, target floating-point ABI, timing, caller integration, and
+cold-boot behavior are G2 compatibility seams. Registration authorizes
+offline compilation and unsigned package assembly only; it authorizes no
+signing, flashing, reset, boot, provider invocation, or other hardware
+operation.
+
+`runtime_clkgen_config_426ccc.c` is a MIT clean-room openCFW implementation
+of the authenticated CLKGEN configuration service at
+`[0x00426CCC,0x00426D1E)`. It incorporates no retained vendor implementation
+bytes. The three CLKGEN MMIO registers and the two-write divider sequence are
+G2 compatibility seams. Registration authorizes offline compilation and
+unsigned package assembly only; it authorizes no signing, flashing, reset,
+boot, MMIO/clock access, service invocation, or other hardware operation.
+
+`runtime_clkgen_hfadj_config_426c72.c` and
+`runtime_clkgen_hfadj_disable_426c7e.c` are MIT clean-room openCFW
+implementations of the authenticated CLKGEN HFADJ configuration and
+bit-preserving disable entries. They incorporate no retained vendor
+implementation bytes; authenticated generated-NOP cave space and entry
+redirects remain separately typed generated bytes. Registration authorizes
+offline compilation and unsigned package assembly only; it authorizes no
+signing, flashing, reset, boot, MMIO/clock access, oscillator changes, or other
+hardware operation.
 
 The public G2 MSPI device-configure entry at `0x00424BE4` is supplied by
 structured BSD-3-Clause C. Its 672-byte dual-profile object is placed in situ

@@ -180,13 +180,13 @@ PRODUCTION = {
         "config": MAIN_CONFIG,
         "overlay_name": "apollo_core_overlay.bin",
         "component_name": "ota_s200_firmware_ota.bin",
-        "overlay_size": 360_578,
+        "overlay_size": 362_272,
         "overlay_sha256": (
-            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
+            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
         ),
-        "component_size": 3_883_974,
+        "component_size": 3_885_668,
         "component_sha256": (
-            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
+            "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
         ),
         "leaf_offset": 113_756,
         "leaf_address": 0x007A_FF80,
@@ -195,11 +195,11 @@ PRODUCTION = {
         "patch_offset_key": "payload_offset",
         "patch_offset": MAIN_START - MAIN_BASE + 32,
         "accounting": {
-            "generated_patch_site_bytes": 397_446,
+            "generated_patch_site_bytes": 404_060,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_123_534,
-            "replaced_stock_function_bytes": 397_626,
-            "source_owned_bytes": 362_962,
+            "opaque_base_bytes": 3_116_920,
+            "replaced_stock_function_bytes": 404_240,
+            "source_owned_bytes": 364_656,
             "source_owned_in_place_bytes": 184,
         },
     },
@@ -213,7 +213,7 @@ PRODUCTION = {
         ),
         "component_size": 163_840,
         "component_sha256": (
-            "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad"
+            "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2"
         ),
         "leaf_offset": 302,
         "leaf_address": 0x0043_45A6,
@@ -224,11 +224,11 @@ PRODUCTION = {
         "accounting": {
             "generated_alignment_bytes": 16,
             "generated_isolated_alignment_bytes": 0,
-            "generated_patch_site_bytes": 16_474,
+            "generated_patch_site_bytes": 16_426,
             "generated_relocated_alignment_bytes": 15,
             "generated_stock_to_overlay_alignment_bytes": 1,
-            "opaque_base_bytes": 119_425,
-            "source_owned_bytes": 27_925,
+            "opaque_base_bytes": 112_353,
+            "source_owned_bytes": 35_045,
         },
     },
 }

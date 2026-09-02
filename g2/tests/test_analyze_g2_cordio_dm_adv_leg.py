@@ -49,7 +49,7 @@ class CordioDmAdvLegAuditTests(unittest.TestCase):
         self.assertEqual(production["alignment_bytes_added"], 26)
         self.assertEqual(production["strict_relocations"], 32)
         self.assertEqual(production["manifest_regions"], 47)
-        self.assertEqual(production["flash_plan_counts"], (6588, 0, 6, 6))
+        self.assertEqual(production["flash_plan_counts"], (7006, 0, 6, 6))
         self.assertEqual(production["source_only_target_compiled"], ["DmAdvModeLeg"])
 
 

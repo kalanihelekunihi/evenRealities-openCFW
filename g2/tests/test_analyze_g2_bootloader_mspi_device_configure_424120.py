@@ -76,7 +76,7 @@ class BootloaderMspiDeviceConfigureTests(unittest.TestCase):
         self.assertEqual(report["production"]["compiled_sha256"],
                          analyzer.TARGET_SHA)
         self.assertEqual(report["production"]["source_owned_bytes"] +
-                         report["production"]["retained_official_bytes"], 147350)
+                         report["production"]["retained_official_bytes"], 146994)
         self.assertEqual(report["production"]["next_frontier"],
                          0x0042488E)
         self.assertEqual(report["next_frontier"], {

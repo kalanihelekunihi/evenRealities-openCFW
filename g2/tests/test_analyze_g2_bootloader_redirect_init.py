@@ -31,7 +31,7 @@ class BootloaderRedirectInitAuditTests(unittest.TestCase):
         self.assertEqual(
             self.report["provider"]["source_owned_bytes"]
             + self.report["provider"]["retained_official_bytes"],
-            147_350,
+            146_994,
         )
         self.assertGreater(self.report["deployment"]["apple_package"]["size"], 0)
         self.assertGreater(self.report["deployment"]["linux_package"]["size"], 0)

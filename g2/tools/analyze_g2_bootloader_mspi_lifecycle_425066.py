@@ -308,7 +308,7 @@ def audit() -> dict[str, object]:
             (Path(temporary) / "build-report.json").read_text(encoding="utf-8")
         )["component"]
     require(
-        component["source_owned_bytes"] + component["opaque_base_bytes"] == 147350,
+        component["source_owned_bytes"] + component["opaque_base_bytes"] == 146994,
         "component byte conservation changed",
     )
     require(

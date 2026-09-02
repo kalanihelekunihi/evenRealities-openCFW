@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+"""Register the source-owned eight-slot platform finalizer."""
+from __future__ import annotations
+import csv,hashlib,io,json
+from pathlib import Path
+R=Path(__file__).resolve().parent.parent;O=R/"components/bootloader/core_overlay/overlay.json";S=R/"components/bootloader/core_overlay/runtime_platform_finish_430502.c";B=R/"blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin";C=R/"tools/manifests/g2-bootloader-post-mspi-frontier.tsv";BASE=0x410000;A=0x430502;Z=0x430610
+SS=5744;SH="03bb874a49921bcdaa6affb67930f6da9d21a433f2d93669d2629545df50f11b";FN="open_cfw_bootloader_platform_finish_430502";BH="f92c35acae4e7f10f79008020f00bb4607f39ff6b09545fbbbc93348b6873195";UH="bad372fa5e2a442fcbf1d4e7a767aed113b369aeeaffb8d5cb4e3fd107da4b99";FL=["-mcpu=cortex-m55","-mthumb","-Oz","-ffreestanding","-fno-builtin","-ffunction-sections","-fdata-sections","-fno-unwind-tables","-fno-asynchronous-unwind-tables","-Wall","-Wextra","-Werror","-fno-ident","-mllvm","-enable-machine-outliner=never"]
+RS=((0x12,"open_cfw_bootloader_hw_context_claim_42c4c6",0x42C4C6),(0x26,"open_cfw_bootloader_callback_register_41d92c",0x41D92C),(0x3E,"open_cfw_bootloader_callback_register_41d92c",0x41D92C),(0x50,"open_cfw_bootloader_hw_config_transaction_42c988",0x42C988),(0x60,"open_cfw_bootloader_hw_instance_configure_42cc34",0x42CC34),(0x6A,"open_cfw_bootloader_hw_context_enable_42c538",0x42C538),(0x74,"open_cfw_bootloader_hw_config_retry_43048e",0x43048E),(0xA6,"open_cfw_bootloader_event_object_create_416610",0x416610),(0xCA,"open_cfw_bootloader_hw_interrupt_enable_42c63a",0x42C63A),(0xD0,"open_cfw_bootloader_nvic_enable_bit_430470",0x430470),(0xDE,"open_cfw_bootloader_event_flags_create_416762",0x416762),(0x104,"open_cfw_bootloader_log_4176ce",0x4176CE))
+def h(x):return hashlib.sha256(x).hexdigest()
+def main():
+ s=S.read_bytes();b=B.read_bytes()
+ if(len(s),h(s))!=(SS,SH):raise SystemExit("platform-finalizer source changed")
+ if h(b[A-BASE:Z-BASE])!=BH:raise SystemExit("platform-finalizer stock changed")
+ rec={"path":S.relative_to(R).as_posix(),"size":SS,"sha256":SH,"license":"MIT","origin":"clean-room eight-slot hardware-context and event-service finalizer","evidence":"docs/research/g2-bootloader-platform-finish-430502-source-closure.md"};rr=[{"offset":o,"type":"R_ARM_THM_CALL","symbol":n,"symbol_type":"STT_NOTYPE","target_address":t}for o,n,t in RS];p={"size":Z-A,"sha256":BH,"unrelocated_sha256":UH};e={"function":FN,"runtime_address":A,"source":rec,"toolchain":{"target":"arm-none-eabi","reviewed_version_prefix":"Apple clang version 21.0.0","flags":FL},"strict_relocation_contract":True,"expected":p,"stock":{"size":Z-A,"sha256":BH},"relocations":rr,"allow_discarded_alloc_sections":True,"toolchain_profiles":{"linux-clang":{"reviewed_version_prefix":"Homebrew clang version 22.1.8","expected":p,"stock":{"size":Z-A,"sha256":BH},"relocations":rr}}};o=json.loads(O.read_text());o["in_place_leaves"]=sorted([x for x in o["in_place_leaves"]if x.get("function")!=FN]+[e],key=lambda x:int(x["runtime_address"]));t=O.with_name(f".{O.name}.tmp");t.write_text(json.dumps(o,indent=2)+"\n");t.replace(O)
+ with C.open(newline="")as f:r=csv.DictReader(f,delimiter="\t");fields=list(r.fieldnames or());rows=list(r)
+ row=next((x for x in rows if int(x["start"],16)==A),None)
+ if row is None or int(row["end"],16)!=Z:raise SystemExit("platform-finalizer census changed")
+ row.update({"kind":"source_function","name":"platform_finish_430502","disposition":"source_owned_production","provider":"clean-room eight-slot hardware-context and event-service finalizer","license_status":"MIT","evidence":"exact dual-toolchain body, Apollo-main analogue, and portable lifecycle model"});out=io.StringIO(newline="");w=csv.DictWriter(out,fieldnames=fields,delimiter="\t",lineterminator="\n");w.writeheader();w.writerows(rows);C.write_text(out.getvalue());print("registered platform finalizer");return 0
+if __name__=="__main__":raise SystemExit(main())

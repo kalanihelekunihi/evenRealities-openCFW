@@ -13,7 +13,7 @@ class Tests(unittest.TestCase):
  def st(s,n):return s.x.open_cfw_test_public_device_state(n)
  def tr(s,n):return s.x.open_cfw_test_public_device_trace(n)
  def test_audit(s):
-    r=analyzer.audit();s.assertTrue(r["production"]["routed"]);s.assertEqual(r["production"]["boundary_status"],"source_compiled");s.assertEqual(r["production"]["compiled_bytes"],672);s.assertEqual(r["production"]["source_owned_bytes"]+r["production"]["retained_official_bytes"],147350);s.assertEqual(r["production"]["next_frontier"],0x424E84);s.assertEqual(r["next_code_frontier"],{"start":0x425066,"end":0x4250F0,"identity":"am_hal_mspi_enable","bytes":138,"status":"official_blob"});s.assertEqual(r["hardware_validation"],"blocked by unavailable physical evidence");s.assertEqual(r["hardware_operations"],[])
+    r=analyzer.audit();s.assertTrue(r["production"]["routed"]);s.assertEqual(r["production"]["boundary_status"],"source_compiled");s.assertEqual(r["production"]["compiled_bytes"],672);s.assertEqual(r["production"]["source_owned_bytes"]+r["production"]["retained_official_bytes"],146994);s.assertEqual(r["production"]["next_frontier"],0x424E84);s.assertEqual(r["next_code_frontier"],{"start":0x425066,"end":0x4250F0,"identity":"am_hal_mspi_enable","bytes":138,"status":"official_blob"});s.assertEqual(r["hardware_validation"],"blocked by unavailable physical evidence");s.assertEqual(r["hardware_operations"],[])
  def test_structured_source_has_no_raw_encoding(s):
   text=SOURCE.read_text();s.assertNotIn(".byte",text);s.assertNotIn("__asm__",text)
  def test_all_23_frequency_classes(s):

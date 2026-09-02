@@ -107,7 +107,7 @@ class BootloaderMspiFifoReadBoundaryTests(unittest.TestCase):
         self.assertEqual(
             report["production"]["source_owned_bytes"]
             + report["production"]["retained_official_bytes"],
-            147350,
+            146994,
         )
         self.assertEqual(report["hardware_validation"], "blocked by unavailable physical evidence")
         self.assertEqual(report["hardware_operations"], [])

@@ -21,9 +21,9 @@ envelope:
 
 | Production source | Generated/reconstructible | Candidate, not routed | Typed retained/external | Unclassified | Package |
 | ---: | ---: | ---: | ---: | ---: | ---: |
-| 424,703 | 426,474 | 30,636 | 3,795,983 | 0 | 4,678,740 |
+| 475,527 | 494,744 | 29,396 | 3,749,965 | 0 | 4,750,576 |
 
-The 3,826,619 release-blocking bytes remain classified rather than opaque.
+The 3,779,361 release-blocking bytes remain classified rather than opaque.
 `source_complete=false` and `release_authorized=false`; redistribution
 authority is unresolved for all six binary-bearing components. Hardware
 validation is blocked by unavailable physical evidence and the assessment records
@@ -34,10 +34,10 @@ locally hydrated/built firmware package.
 
 | Component | Source | Generated | Candidate | Retained/external | Unclassified | Release-blocking |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Apollo main | 394,928 | 409,348 | 0 | 3,081,392 | 0 | 3,081,392 |
-| Apollo bootloader | 29,775 | 16,490 | 0 | 117,575 | 0 | 117,575 |
+| Apollo main | 415,344 | 476,036 | 0 | 3,065,088 | 0 | 3,065,088 |
+| Apollo bootloader | 59,009 | 16,846 | 0 | 87,985 | 0 | 87,985 |
 | GX8002 codec/DSP | 0 | 92 | 0 | 326,000 | 0 | 326,000 |
-| EM9305 BLE | 0 | 0 | 1,240 | 210,708 | 0 | 211,948 |
+| EM9305 BLE | 1,174 | 1,226 | 0 | 210,584 | 0 | 210,584 |
 | PSoC Touch | 0 | 512 | 14,510 | 19,442 | 0 | 33,952 |
 | STM32 charging case | 0 | 32 | 14,886 | 40,866 | 0 | 55,752 |
 
@@ -46,13 +46,17 @@ rows in
 [`g2-touch-final-source-candidate-provenance.tsv`](../tools/manifests/g2-touch-final-source-candidate-provenance.tsv).
 Every row records `production_elf_ownership=false`; none promotes stock bytes
 or the nonproduction source image into production-source coverage. The current
-source-license audit reports 778 distributable source files and zero errors,
-and the project-wide MIT/upstream normalization census covers 906 targets.
+source-license audit reports 890 distributable source files with zero
+errors, and the project-wide MIT/upstream normalization census covers 919
+targets.
 
 The persisted
 [`em9305-final-source-readiness.tsv`](../tools/manifests/em9305-final-source-readiness.tsv)
-accounts for all 175 EM9305 residual spans / 33,658 bytes. Its final readiness
-partition is 23 spans / 1,240 bytes of concrete but unrouted source, 25 /
+accounts for all 175 EM9305 residual spans / 33,658 bytes. All 23 concrete
+spans / 1,240 stock bytes are now production-routed by the mixed-source
+provider; 210,584 provider bytes remain typed retained/external and keep
+whole-component source closure false. The residual provenance partition stays
+23 concrete-source spans, 25 /
 8,348 bytes of typed unsupported external boundary, and 127 / 24,070 bytes of
 unavailable proprietary controller code, with zero unclassified spans or
 bytes. This closes residual classification only: EM9305 remains
@@ -3506,6 +3510,252 @@ direction; future qualification requires an authorized controller fixture or
 golden capture. See
 `docs/research/g2-service-touch-dfu-recovery.md`; wider firmware functional
 completeness is not claimed.
+
+## 2026-09-02 — Platform bring-up checkpoint
+
+The 470-byte platform bring-up orchestrator at `0x00430000` is exact production
+MIT C under both reviewed compilers. Behavior, sole caller, 23 edges, literals,
+overlay ownership, manifest, and provider conservation are pinned. The frontier
+is 183 source spans / 23,538 bytes and 4 unresolved executable spans / 3,182
+bytes. Apple boot accounting is 55,827 source-owned, 91,167 retained, 16
+alignment, and 16,830 generated-patch bytes. Hardware validation is blocked by
+unavailable physical evidence; functional completeness is not claimed.
+
+## 2026-09-02 — DFU payload programmer checkpoint
+
+The 424-byte DFU payload programmer/verifier at `0x0042DAE8` is exact production
+MIT C under both reviewed compilers. Behavior, caller ingress, provider edges,
+literals, overlay ownership, manifest, and provider conservation are pinned.
+The frontier is 182 source spans / 23,068 bytes and 5 unresolved executable
+spans / 3,652 bytes. Apple boot accounting is 55,357 source-owned, 91,637
+retained, 16 alignment, and 16,830 generated-patch bytes. Hardware validation
+is blocked by unavailable physical evidence; functional completeness is not
+claimed.
+
+## 2026-09-02 — State-register initializer checkpoint
+
+The 422-byte state-transition register initializer/restorer at `0x0042D3BC` is
+exact production MIT C under both reviewed compilers. Behavior, caller ingress,
+delay edges, literals, main analogue, overlay ownership, manifest, and provider
+conservation are pinned. The frontier is 181 source spans / 22,644 bytes and 6
+unresolved executable spans / 4,076 bytes. Apple boot accounting is 54,933
+source-owned, 92,061 retained, 16 alignment, and 16,830 generated-patch bytes.
+Hardware validation is blocked by unavailable physical evidence; functional
+completeness is not claimed.
+
+## 2026-09-02 — Hardware-context initializer checkpoint
+
+The 354-byte hardware-context and calibration-profile initializer at
+`0x0042E8D0` is exact production MIT C under both reviewed compilers. Focused
+behavior, caller ingress, provider edges, literal cells, main analogue, overlay
+ownership, manifest, and provider conservation are pinned. The frontier is 180
+source spans / 22,222 bytes and 7 unresolved executable spans / 4,498 bytes.
+Apple boot accounting is 54,511 source-owned, 92,483 retained, 16 alignment,
+and 16,830 generated-patch bytes. Hardware validation is blocked by unavailable
+physical evidence; functional completeness is not claimed.
+
+## 2026-09-02 — Bootloader descriptor and state-composer checkpoint
+
+Two gaps totaling 666 bytes are now production-routed MIT C: the bounded
+descriptor/callback/interrupt registrar at `0x00430280` and the stored-entry
+hardware-state composer at `0x0042BDF0`. Both compiler profiles, portable
+behavior, ingress, provider edges, main analogues, overlay ownership, manifest,
+and provider conservation pass. The frontier is 178 source spans / 21,516
+bytes and 9 unresolved executable spans / 5,204 bytes. Apple boot accounting is
+53,805 source-owned, 93,189 retained, 16 alignment, and 16,830 generated-patch
+bytes. Hardware validation is blocked by unavailable physical evidence;
+functional completeness is not claimed.
+
+## 2026-09-02 — Bootloader DFU image CRC checkpoint
+
+The 352-byte DFU image CRC verifier at `0x0042D890` is production-routed exact
+MIT C under both reviewed compiler profiles. Focused behavior, caller ingress,
+provider edges, literal cells, overlay ownership, manifest, and provider
+conservation are pinned. The frontier is 179 source spans / 21,868 bytes and 8
+unresolved executable spans / 4,852 bytes. Apple boot accounting is 54,157
+source-owned, 92,837 retained, 16 alignment, and 16,830 generated-patch bytes.
+Hardware validation is blocked by unavailable physical evidence; functional
+completeness is not claimed.
+
+## 2026-09-02 — Hardware-context claim through 161 admissions
+
+The relocation-free 114-byte context validation, ownership-claim, and
+publication service at `0x0042C4C6` is production-routed MIT C. Both reviewed
+Clang profiles reproduce the stock body exactly; five focused tests cover
+validation ordering, non-mutating rejection, ownership/magic stamping, index
+and `0x8A8`-stride address publication, and source reviewability. Its direct
+call at `0x00430514` and 110-byte Apollo-main identity are pinned.
+
+The census now records 161 source spans / 16,218 bytes and 26 unresolved
+executable spans / 10,502 bytes. Apple boot accounting is 48,507 source-owned,
+98,487 retained, 16 alignment, and 16,830 generated-patch bytes. The canonical
+provider and manifest verify unchanged. Live retained-SRAM ownership,
+concurrency, peripheral lifecycle, reset, and cold-boot qualification is
+blocked by unavailable physical evidence. Firmware-wide completeness is not
+claimed.
+
+## 2026-09-02 — Hardware-context enable through 162 admissions
+
+The 258-byte activation and rollback service at `0x0042C538` is
+production-routed MIT C. Apple clang 21 and Homebrew clang 22 reproduce every
+stock byte after three strict provider relocations; seven focused tests cover
+validation, idempotence, readiness gating, optional command-queue setup,
+failure propagation, successful active-bit publication, rollback, and source
+reviewability. The production provider, manifest, and exhaustive analyzer pass.
+
+The census now records 162 source spans / 16,476 bytes and 25 unresolved
+executable spans / 10,244 bytes. Apple boot accounting is 48,765 source-owned,
+98,229 retained, 16 alignment, and 16,830 generated-patch bytes. Live
+retained-SRAM, MMIO, command-queue, timing, concurrency, interrupt, reset, and
+cold-boot qualification is blocked by unavailable physical evidence.
+Firmware-wide completeness is not claimed.
+
+## 2026-09-02 — Zero unresolved executable spans through 187 admissions
+
+The final 1,032-byte SPOT-manager state-transition orchestrator at
+`0x0042B294` is production-routed MIT C. Both reviewed compilers are byte-exact
+under 12 strict provider relocations, five focused tests pass, and the caller,
+literal, Apollo-main, provider, manifest, and image contracts verify.
+
+The census now records 187 source spans / 26,720 bytes and zero unresolved
+executable spans / zero unresolved executable bytes. Apple boot accounting is
+59,009 source-owned, 87,985 retained, 16 alignment, and 16,830 generated-patch
+bytes; the complete provider remains 163,840 bytes with SHA-256
+`13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`.
+Live SRAM/MMIO, trim, power, timing, interrupts, concurrency, reset, and
+cold-boot qualification is blocked by unavailable physical evidence. Software
+closure is complete; firmware-wide functional completeness is not claimed.
+
+## 2026-09-02 — Hardware-state decoder through 186 admissions
+
+The complete 770-byte hardware-state composer/classifier at `0x0042B6B8` is
+production-routed MIT C. Both reviewed compilers are relocation-free and
+byte-exact, the 16,384-case portable differential passes, and the caller,
+literal, Apollo-main, provider, manifest, and image contracts verify.
+
+The census now records 186 source spans / 25,688 bytes and 1 unresolved
+executable span / 1,032 bytes. Apple boot accounting is 57,977 source-owned,
+89,017 retained, 16 alignment, and 16,830 generated-patch bytes. Live flash,
+retained SRAM, MMIO, peripheral, concurrency, reset, and cold-boot
+qualification is blocked by unavailable physical evidence. Firmware-wide
+completeness is not claimed.
+
+## 2026-09-02 — State-one tuning through 185 admissions
+
+The complete 696-byte state-one register tuning/restoration service at
+`0x0042D104` is production-routed MIT C. Both reviewed compilers are byte-exact
+under three strict delay relocations, four focused tests pass, and the caller,
+literal, Apollo-main, provider, manifest, and image contracts verify.
+
+The census now records 185 source spans / 24,918 bytes and 2 unresolved
+executable spans / 1,802 bytes. Apple boot accounting is 57,207 source-owned,
+89,787 retained, 16 alignment, and 16,830 generated-patch bytes. Live MMIO,
+clock/power stability, trim effects, timing, interrupts, reset, and cold-boot
+qualification is blocked by unavailable physical evidence. Firmware-wide
+completeness is not claimed.
+
+## 2026-09-02 — Retained hardware-event apply through 167 admissions
+
+The 368-byte event acknowledgement, drain, timed-pulse, and register-restore
+service at `0x0042C0B2` is production-routed MIT C. Both reviewed compilers
+reproduce every stock byte after one strict delay-provider call, and focused
+tests cover terminal restoration, drain count/value, ready and non-ready pulse
+paths, dual-toolchain identity, and source reviewability. The census now has
+167 source spans / 18,932 bytes and 20 unresolved executable spans / 7,788
+bytes; boot accounting is 51,221 source-owned and 95,773 retained bytes. Live
+retained-SRAM, MMIO, clock, peripheral timing, concurrency, interrupt, reset,
+and cold boot is blocked by unavailable physical evidence. Firmware-wide
+completeness is not claimed.
+
+## 2026-09-02 — Hardware-event service through 163 admissions
+
+The 648-byte event/descriptor/callback/command-queue service at `0x0042C6F8`
+is production-routed MIT C. Apple clang 21 and Homebrew clang 22 reproduce
+every stock byte after nine strict provider relocations; seven focused tests
+cover validation, event accumulation, descriptor and callback state, terminal
+cleanup, event-mask application, command-queue failure, and source
+reviewability. The production provider, manifest, and exhaustive analyzer pass.
+
+The census now records 163 source spans / 17,124 bytes and 24 unresolved
+executable spans / 9,596 bytes. Apple boot accounting is 49,413 source-owned,
+97,581 retained, 16 alignment, and 16,830 generated-patch bytes. Live
+retained-SRAM, MMIO, DMA, callbacks, command-queue, interrupt, timing,
+concurrency, reset, and cold-boot qualification is blocked by unavailable
+physical evidence. Firmware-wide completeness is not claimed.
+
+## 2026-09-02 — Hardware clock encoder through 166 admissions
+
+The 376-byte clock-divider search and register encoder at `0x0042C26A` is
+production-routed MIT C. Both reviewed Clang profiles reproduce every stock
+byte after three strict calls to source-owned arithmetic helpers. Five focused
+tests include 10,000 deterministic differential rates plus boundary, phase,
+null-output, dual-toolchain, and source-review checks.
+
+The census now records 166 source spans / 18,564 bytes and 21 unresolved
+executable spans / 8,156 bytes. Apple boot accounting is 50,853 source-owned,
+96,141 retained, 16 alignment, and 16,830 generated-patch bytes. Live clock,
+MMIO, peripheral tolerance, signal integrity, timing, interrupt, reset, and
+cold-boot qualification is blocked by unavailable physical evidence.
+Firmware-wide completeness is not claimed.
+
+## 2026-09-02 — Hardware-configuration transaction through 164 admissions
+
+The 684-byte three-mode register snapshot/restore and resource transaction at
+`0x0042C988` is production-routed MIT C. Both reviewed Clang profiles reproduce
+every stock byte after seven strict provider relocations; seven focused tests
+cover validation, mode bounds, snapshot guards/copying, active-state guards,
+control clearing, status propagation, and source reviewability. The production
+provider, manifest, and exhaustive analyzer pass.
+
+The census now records 164 source spans / 17,808 bytes and 23 unresolved
+executable spans / 8,912 bytes. Apple boot accounting is 50,097 source-owned,
+96,897 retained, 16 alignment, and 16,830 generated-patch bytes. Live MMIO,
+saved-state validity, power/clock, command-queue, timing, concurrency,
+interrupt, reset, and cold-boot qualification is blocked by unavailable
+physical evidence. Firmware-wide completeness is not claimed.
+
+## 2026-09-02 — Hardware-instance configurator through 165 admissions
+
+The 380-byte validation and mode-specific instance configurator at
+`0x0042CC34` is production-routed MIT C. Both reviewed Clang profiles reproduce
+every stock byte after one strict source-owned clock-encoder relocation; seven
+focused tests cover handle/instance/active guards, dynamic rate and flags,
+fixed-rate register maps, buffer safety/window clamping, slot clearing, and
+source reviewability. The production provider, manifest, and exhaustive
+analyzer pass.
+
+The census now records 165 source spans / 18,188 bytes and 22 unresolved
+executable spans / 8,532 bytes. Apple boot accounting is 50,477 source-owned,
+96,517 retained, 16 alignment, and 16,830 generated-patch bytes. Live SRAM,
+MMIO, clock encoding, DMA/buffer coherency, peripheral timing, concurrency,
+interrupt, reset, and cold-boot qualification is blocked by unavailable
+physical evidence. Firmware-wide completeness is not claimed.
+
+## Bootloader transfer, interrupt, and memset-wrapper frontier update
+
+Production C now owns the MSPI blocking-transfer and interrupt entries at
+`0x004262E0`, `0x00426450`, `0x00426484`, and `0x004264BA`, adding 404 bytes
+under reviewed Apple/Linux relocation contracts. The already-routed interrupt
+clear, interrupt service, and power-control sequence continues through
+`0x00426BFE`. A new freestanding MIT C leaf owns the conventional memset ABI
+wrapper at `[0x00426C10,0x00426C22)` and calls the source-owned Arm EABI
+byte-fill provider; its final two stock bytes are an authenticated unreachable
+tail with no direct or stored ingress.
+
+Canonical bootloader accounting is now 34,441 source-owned, 16,490 generated,
+and 112,909 retained bytes across 612 manifest intervals. Apple/Linux provider
+SHA-256 values are
+`2ecbb9e4f70276b0f016f8ba55384d4c3fe74852cd337f677e66347c50235ce7`
+and
+`702221d713723e36d1c560164f75345328fd3273566daf5862f0e4d5d50c34c8`.
+The complete package SHA-256 values are
+`51889c42afdc71b953105f2292bab38a91a9b1b7d71f781d5cf78e724658e055`
+and
+`b52d978bc191f12e8dcf678a05fc0bbe13b6543981c34dd3dc0c17530c2f3f37`,
+with zero unresolved flash regions. The next retained executable frontier is
+`[0x00426C58,0x00426C72)`. Live register, timing, FIFO, interrupt, flash-bus,
+reset, and cold-boot validation is blocked by unavailable physical evidence;
+firmware-wide completeness is not claimed.
 
 ## Current bootloader progress-service increment
 
@@ -7745,6 +7995,20 @@ direction; future qualification requires authorized G2/OPT3007 physical evidence
 or a golden trace. Wider firmware functional completeness is
 not claimed.
 
+## 2026-09-01 — SPOT state-sequence and memcpy ingress correction
+
+The SPOT selector `[0x0042A2B4,0x0042A43A)` is now 390 exact bytes of
+BSD-3-Clause production C under both reviewed profiles. Its three callers,
+aligned-memcpy relocation, transition table, Apollo-main analogue, and all 400
+valid state pairs are pinned. The memcpy span now preserves 33 callers at
+`0x0041568C` and 29 at `0x004156AC` through independent redirects.
+
+The census is 55 source spans / 7,368 bytes and 95 unresolved executable spans
+/ 15,854 bytes; Apple accounting is 39,709 source, 107,285 retained, 16
+alignment, and 16,830 generated-patch bytes. The next executable frontier is
+`0x0042A43A`. Hardware validation is **blocked by unavailable physical
+evidence**; completeness is not claimed.
+
 ## Current bootloader MSPI device-reconfiguration increment
 
 The complete authenticated `[0x00420E08,0x00420E8C)` body now routes to
@@ -9767,3 +10031,678 @@ No hardware operation occurred. Live register, clock, DMA/TCB, XIP,
 attached-flash, reset, and boot validation is blocked by unavailable physical
 evidence. The next executable gap is `am_hal_mspi_enable` at
 `[0x00425066,0x004250F0)`; firmware-wide completeness is not claimed.
+
+## Bootloader MSPI lifecycle is structured production C
+
+The `am_hal_mspi_enable`, `am_hal_mspi_disable`, and
+`am_hal_mspi_deinitialize` entries at `0x00425066`, `0x004250F0`, and
+`0x0042516C` now route 128, 112, and 56 bytes of structured BSD-3-Clause C.
+Apple Clang 21 and Homebrew LLVM Clang 22 emit identical reviewed objects with
+five strict call relocations. The 10-byte enable tail, 6-byte disable tail,
+and 6-byte alignment/literal gap remain authenticated and unreachable/data.
+
+Canonical bootloader accounting is 30,071 source-owned, 16,490 generated, and
+117,279 retained bytes across 599 intervals. Public executable-transcript debt
+is two files / 4,930 bytes. Apple/Linux bootloader providers are
+`ce19a1a4423dbb5a892d144bf52dac4fdccaac956614775a8b02c685dca7042e`
+and `a5f9492da37c7f96ad2998a281f83c60e8308f40f42970386260524626a0d2aa`.
+The complete packages are 4,749,540 bytes /
+`20bcd2816ac92e69a23afdf5e76d02b941ccbf6d8438970daeac51f9dfe7276d`
+and 4,749,524 bytes /
+`c2d02ec77e1029d767f6bdc581ca9041c64e0bdb9978739471db7f45fc3bc5ac`.
+Live CQ, DMA, XIP, interrupt, timing, flash, reset, and boot validation is
+blocked by unavailable physical evidence. No hardware operation occurred.
+The next executable software frontier is `am_hal_mspi_control` at
+`[0x004251C0,0x004262E0)`; firmware-wide completeness is not claimed.
+
+## Bootloader MSPI control is structured production C
+
+The stock control entry now routes a 124-byte request-ABI adapter at
+`0x004251C0` and a 3,824-byte maintained AmbiqSuite Apollo510 body at
+`0x0042523C`. Both reviewed compiler profiles satisfy strict relocation
+contracts; Apple emits provider
+`909724a6fcc567e737e15641bb9899a7fdf8a138d5cd62e157c651d500156d4a`
+and Linux emits
+`8f04dc3ae3cb7536c602e0cd71e8f3c1f6105f0d4817ff4c6b8a5feca15dca4c`.
+The production route covers every stock ordinal through a narrow adapter,
+including stock-only SDR250 requests 10 and 11.
+
+Canonical Apple accounting is 34,019 source-owned, 16,490 generated, and
+113,331 retained official bytes across 602 regions. The 436-byte unreachable
+stock tail at `[0x0042612C,0x004262E0)` remains retained rather than being
+misreported as source. Host semantics, all four direct callers, cross-image
+attribution, both target profiles, provider identity, and manifest ownership
+are green.
+
+No hardware operation occurred. Register, XIP, timing, FIFO, interrupt,
+flash-bus, and cold-boot validation is blocked by unavailable physical
+evidence. The next executable software frontier is
+`am_hal_mspi_blocking_transfer` at `[0x004262E0,0x0042644C)`; firmware-wide
+completeness is not claimed.
+
+## Current bootloader transfer/interrupt and memset-wrapper increment
+
+Production C now owns the MSPI blocking-transfer and interrupt entries at
+`0x004262E0`, `0x00426450`, `0x00426484`, and `0x004264BA`, adding 404 bytes
+under reviewed Apple/Linux relocation contracts. The already-routed interrupt
+clear, interrupt service, and power-control sequence continues through
+`0x00426BFE`. A freestanding MIT C leaf owns the conventional memset ABI
+wrapper at `[0x00426C10,0x00426C22)` and calls the source-owned Arm EABI
+byte-fill provider; its final two stock bytes are an authenticated unreachable
+tail with no direct or stored ingress.
+
+Canonical bootloader accounting is 34,441 source-owned, 16,490 generated, and
+112,909 retained bytes across 612 manifest intervals. Apple/Linux provider
+SHA-256 values are
+`2ecbb9e4f70276b0f016f8ba55384d4c3fe74852cd337f677e66347c50235ce7`
+and
+`702221d713723e36d1c560164f75345328fd3273566daf5862f0e4d5d50c34c8`;
+complete package SHA-256 values are
+`51889c42afdc71b953105f2292bab38a91a9b1b7d71f781d5cf78e724658e055`
+and
+`b52d978bc191f12e8dcf678a05fc0bbe13b6543981c34dd3dc0c17530c2f3f37`.
+Both profiles have zero unresolved flash regions and zero unclassified
+ownership. The next retained executable frontier is
+`[0x00426C58,0x00426C72)`. Hardware qualification is blocked by unavailable
+physical evidence; firmware-wide completeness is not claimed.
+
+## CLKGEN HFADJ enable leaf is production C
+
+The authenticated bootloader entry at `[0x00426C58,0x00426C70)` is now a
+24-byte freestanding MIT C leaf. It interprets only the low input byte as a
+boolean, updates only bit 0 of CLKGEN HFADJ register `0x40004044`, preserves
+all other bits, and returns success. Apple clang 21.0.0 and Homebrew clang
+22.1.8 emit the same relocation-free Thumb body. Host tests cover enable,
+disable, low-byte truncation, bit preservation, and return semantics.
+
+The two stock bytes at `[0x00426C70,0x00426C72)` remain a verified unreachable
+terminal return with no direct or stored ingress. Canonical bootloader
+accounting is 34,465 source-owned, 16,490 generated, and 112,885 retained bytes
+across 613 manifest intervals. Apple/Linux provider SHA-256 values are
+`d94598b9785690eb38108244fe188dea3249daf27ffd31134a184ca09e264721`
+and `f3d95b3dfd24a1f08899f142fa56d812bb8373aeb6aff7a240608379ecc72107`;
+complete package SHA-256 values are
+`5fae57d1cb7ad3fa535b2c3ba6b5d92ae6c17b9afd75f413ec22438913861886`
+and `da9fcb84964a5e1ccaf8072572dbfa933e4eb82b9e18c7142ea6615214b4adf5`.
+Both profiles retain zero unresolved flash regions and zero unclassified
+ownership. Hardware qualification is blocked by unavailable physical
+evidence. The next executable software frontier is
+`[0x00426C72,0x00426C7E)`; firmware-wide completeness is not claimed.
+
+## CLKGEN HFADJ configuration entry is source-routed C
+
+The authenticated 12-byte service at `[0x00426C72,0x00426C7E)` now redirects
+to a 16-byte freestanding MIT C body at `[0x00426C28,0x00426C38)`. That cave
+was authenticated generated-NOP fill behind the already-routed HFRC2 divider
+entry, has no fallthrough or interior ingress, and therefore adds no provider
+headroom requirement. The source publishes `configuration | 1` to CLKGEN
+HFADJ register `0x40004020` and returns zero. Apple clang 21.0.0 and Homebrew
+clang 22.1.8 emit the same relocation-free body, and host tests cover the full
+configuration word and forced enable bit.
+
+Canonical bootloader accounting is now 34,481 source-owned, 16,486 generated,
+and 112,873 retained bytes across 617 manifest intervals. Linux records 34,463
+source-owned, 16,488 generated, and the same retained complement. Apple/Linux
+provider SHA-256 values are
+`a850ceaee72e362375e05a02a0d2efded61ab5cb049e90fa350e7efc8b454451`
+and `63e03a21afc67a29dd6ad7f647ca6ef3732669daa57ec47e574844d4af62143b`;
+complete package SHA-256 values are
+`9b3eddd56ca00118ba360adf487f7376b1107ec88dc54d482cdd6e06312faa19`
+and `6de1061936a7419103aafde849499105a4c158138c03ac490151bbbcfe9b2d30`.
+Both profiles have zero unresolved flash regions and zero unclassified
+ownership. Hardware qualification is blocked by unavailable physical
+evidence. The next executable software frontier is
+`[0x00426C7E,0x00426C8C)`; firmware-wide completeness is not claimed.
+
+## CLKGEN HFADJ disable entry is source-routed C
+
+The authenticated 14-byte service at `[0x00426C7E,0x00426C8C)` now redirects
+to a 20-byte freestanding MIT C body at `[0x00426C38,0x00426C4C)`. The cave is
+authenticated generated-NOP space behind the HFRC2 divider route, has no
+fallthrough or interior ingress, and requires no provider growth. The source
+clears only bit 0 of CLKGEN HFADJ register `0x40004020`, preserves every other
+bit, and returns zero. Apple clang 21.0.0 and Homebrew clang 22.1.8 emit the
+same relocation-free body; host tests cover cleared, already-clear, and
+all-other-bits-set register states.
+
+Canonical Apple bootloader accounting is 34,501 source-owned, 16,480
+generated, and 112,859 retained bytes across 619 manifest intervals. Linux
+records 34,483 source-owned, 16,480 generated, and the same retained
+complement. Apple/Linux provider SHA-256 values are
+`d41f2cb082cbd989b8b8cc812a4e986cd887a4dca4c7123993b943b1ad96950a`
+and `5727eea52624c8cf725d179e5fa7616377cbfc554e8578205b2a6940cec0303e`;
+complete package SHA-256 values are
+`677cc147a1f4fd53481acf77913af56ca23f5d14f955979f8ad4aab17639c9b2`
+and `1870273c5802a99a88a1de2bc8253e57083774bd5bf7b9ce72f8a79f88d2a385`.
+The profiles have 6,633 and 3,620 placed regions, zero unresolved flash
+regions, and zero unclassified ownership. Hardware qualification is blocked
+by unavailable physical evidence. The next executable software frontier is
+`[0x00426C8C,0x00426CCC)`; firmware-wide completeness is not claimed.
+
+## Dual-clock switch entry is production C
+
+The authenticated bootloader service at
+`[0x00426C8C,0x00426CCC)` is now represented by a 56-byte freestanding MIT
+C leaf plus an eight-byte retained unreachable stock tail. The low input byte
+controls bit 5 of CLKGEN register `0x40004044`. A new enable transition
+publishes the bit and calls the retained bounded status provider at
+`0x0041D246` for register `0x40004030` and mask/expected value
+`0x01000000`; disable and redundant enable return success without polling.
+Apple clang 21.0.0 and Homebrew clang 22.1.8 emit the same relocated body,
+and host tests cover register preservation, low-byte truncation, provider
+arguments, and status propagation.
+
+Canonical Apple bootloader accounting is 34,557 source-owned, 16,480
+generated, and 112,803 retained bytes across 620 manifest intervals. Linux
+records 34,539 source-owned, 16,480 generated, and the same retained
+complement. Apple/Linux provider SHA-256 values are
+`13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`
+and
+`11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875`;
+complete package SHA-256 values are
+`aeb58283e5ab4383be2b3ca258e789028b9259a524b936d5d5a5187ba1035b54`
+and
+`b1587219ffa1153ff3b53af5774e66d86fbb2a0e1cacc35b093cdd34d39e1e58`.
+The profiles have 6,634 and 3,621 placed regions, zero unresolved flash
+regions, and zero unclassified ownership. Hardware qualification is blocked
+by unavailable physical evidence. The next executable software frontier
+begins at `0x00426CCC`; firmware-wide completeness is not claimed.
+
+## CLKGEN configuration entry is production C
+
+The authenticated bootloader service at
+`[0x00426CCC,0x00426D1E)` is now source-routed to an 84-byte freestanding
+MIT C body in authenticated generated-NOP space at
+`[0x00415BFC,0x00415C50)`. The implementation preserves the null/status ABI,
+control bits, mode bit 29, clock-select bits 1:0, divider bits 30:2, divider
+bit 31, the required two-write sequence, and final mode activation. Apple
+clang 21.0.0 and Homebrew clang 22.1.8 emit the same relocation-free body;
+host tests cover null, masking, set/clear, and register-preservation paths.
+
+Canonical Apple bootloader accounting is 34,641 source-owned, 16,478
+generated, and 112,721 retained bytes across 624 manifest intervals. Linux
+records 34,623 source-owned, 16,480 generated, and the same retained
+complement. Apple/Linux provider SHA-256 values are
+`930f5886a6116cbfa2ceb456ff83a7a12ce891bf5bd4679df6e2ff458bb9b9e4`
+and
+`bbd9bfa4b0db6d7fe1fc7448649d6ea9bd153f0a8f30850cc2f6cf76fa6cc97a`;
+complete package SHA-256 values are
+`22f6bd25615853983a485f929f5c7bf1ae1ecd148d7ef7d4f62e57ff98f804ea`
+and
+`97de01d80549ec7eec19c5b30615e42ee57b105d202b938c214b099a40d3b26d`.
+The profiles have 6,638 and 3,621 placed regions, zero unresolved flash
+regions, and zero unclassified ownership. Hardware qualification is blocked
+by unavailable physical evidence. The next executable software frontier
+begins at `0x00426D1E`; firmware-wide completeness is not claimed.
+
+## Current bootloader CLKGEN disable increment
+
+The authenticated 14-byte entry at `[0x00426D1E,0x00426D2C)` now redirects
+to a 20-byte freestanding MIT C body at `[0x00415C50,0x00415C64)`. The source
+clears only bit 0 of CLKGEN register `0x40004050`, preserves all other bits,
+and returns zero. Apple clang 21.0.0 and Homebrew clang 22.1.8 emit the same
+relocation-free body; exact caller, literal, no-interior-ingress, host-runtime,
+and production-route checks are green.
+
+Canonical Apple bootloader accounting is 34,661 source-owned, 16,456
+generated patch-site, 16 generated-alignment, and 112,707 retained bytes
+across 626 manifest intervals. Linux records 34,643 source-owned with the same
+generated and retained totals. Apple/Linux provider SHA-256 values are
+`c979561dca62accdb4f2a4bbd3c6d2ac02518225b59f4a9639401b1e959765f3`
+and
+`621f22b25a857c6081bf979eabc2a3d7aad57c21b766fee2439a36e1a9251751`;
+complete package SHA-256 values are
+`a1b56ff04cdd1249f1b95324469ca253d11cefe602e8708b198536f31a3b04c9`
+and
+`3e0e89e8eaa83a4e4da5baefbebbb5aaa17a9bd05588643a8de52a0d7c49b983`.
+The profiles have 6,640 and 3,627 placed regions, zero unresolved flash
+regions, and zero unclassified ownership. The following four-byte padding and
+24-byte literal pool remain typed official data; the next executable software
+frontier begins at `0x00426D48`. Hardware qualification is blocked by
+unavailable physical evidence; firmware-wide completeness is not claimed.
+
+## Floating common-divisor entry is production C
+
+The authenticated bootloader helper at `[0x00426D48,0x00426DB2)` is now
+source-routed to a 112-byte freestanding MIT C body at
+`[0x00415C64,0x00415CD4)`. Apple clang 21.0.0 and Homebrew clang 22.1.8
+produce the same relocated body. Exact tests bind caller topology, the
+Apollo-main analogue, the 16-iteration Euclidean bound, `2^-23` termination,
+the retained `floorf` edge at `0x00427C90`, and the `-1.0f` exhaustion value.
+
+Canonical Apple/Linux provider SHA-256 values are
+`af1ce755ab324ed4920424ac6eb84ed24d59a25a11f52f0f5a6897152ce38b9d`
+and
+`b04e97c49e82c6daaec848816005f73b5ab1302ce675a4eb1fc4539f166dba12`;
+complete package SHA-256 values are
+`85034813f4adf36ee485b11fb1f5c8b132b28fe8e1a9aae7567902277ddd909c`
+and
+`73a10e7dda7fd15ad07fd83820e64f0989c01fa034caa665a9f7741fac951da5`.
+The profiles have 6,643 and 3,630 placed regions, zero unresolved flash
+regions, and zero unclassified ownership. The next executable software
+frontier is `0x00426DB4`. Hardware qualification is blocked by unavailable
+physical evidence; firmware-wide completeness is not claimed.
+
+## Floating ratio entry is production C
+
+The authenticated bootloader helper at `[0x00426DB4,0x00426EAC)` is now
+source-routed to a 272-byte freestanding MIT C body at
+`[0x00415CD4,0x00415DE4)`. Apple clang 21.0.0 and Homebrew clang 22.1.8
+produce the same relocated body. Exact tests bind the sole caller, no interior
+ingress, the Apollo-main analogue, GCD normalization, the retained
+`fmodf`/`roundf` edges, integer tolerance, scaling, and final encoded bounds.
+
+Canonical Apple/Linux provider SHA-256 values are
+`ac373b3c0caa5dcb6ae25cf6f004c76e778d936b7a584e3ecdf83a17283bca36`
+and
+`4993c8d06b148fa4518268af8fd5133e1494f18c74387249326dac78da1ddde0`;
+complete package SHA-256 values are
+`12a36be93bc410f2e9e122343455b24888b3750c3c0888a4410aa46cf983b891`
+and
+`a17eb8cb3527d7956c9da71f450488a0e19e08d3862e4753ec62d1ffaf4472af`.
+The profiles have 6,646 and 3,633 placed regions, zero unresolved flash
+regions, and zero unclassified ownership. The next executable software
+frontier is `0x00426EAC`. Hardware qualification is blocked by unavailable
+physical evidence; firmware-wide completeness is not claimed.
+
+## Hard-float encoder cluster and selector are production C
+
+The common-divisor and ratio entries were corrected from softfp-incompatible
+declarations to explicit AAPCS-VFP entries matching the authenticated
+`s0`/`s1` callers. Their reviewed dual-profile leaf sizes are now 92 and 252
+bytes. The 190-byte multiplier at `[0x00426EAC,0x00426F6A)` is source-routed
+to a 192-byte C cave, and the byte-identical 198-byte selector at
+`[0x00426F6C,0x00427032)` is source-routed to a 180-byte C cave. The selector
+preserves status 6/5/1/0, the `[60, 0x1.e00002p+9)` range, ratio-first
+fallback, and output fields at offsets 1, 2, 3, 6, and 8.
+
+The exhaustive post-MSPI ledger now contains 13 production-source spans /
+2,688 stock bytes, 57 exact cross-image candidates / 4,352 bytes, and 114
+typed unresolved executable spans / 18,758 bytes. Apple/Linux provider hashes
+are `ac373b3c0caa5dcb6ae25cf6f004c76e778d936b7a584e3ecdf83a17283bca36`
+and `4993c8d06b148fa4518268af8fd5133e1494f18c74387249326dac78da1ddde0`;
+package hashes are
+`12a36be93bc410f2e9e122343455b24888b3750c3c0888a4410aa46cf983b891`
+and `a17eb8cb3527d7956c9da71f450488a0e19e08d3862e4753ec62d1ffaf4472af`.
+They contain 6,653 and 3,640 placed regions with zero unresolved flash
+regions. The next executable frontier begins after `0x00427032`. Hardware
+qualification is blocked by unavailable physical evidence; firmware-wide
+completeness is not claimed.
+
+## Ambiq queue family is production-routed C
+
+The complete stock queue initializer, item-add, and item-get bodies at
+`[0x004275EA,0x004276BA)` are now routed to bounded BSD-3-Clause C under the
+authenticated six-word Apollo510 queue ABI. Add/get preserve the stock
+critical-save edge at `0x0041B8EC` and restore the exact saved PRIMASK with a
+reviewable mnemonic. Both reviewed compiler profiles pass strict relocation,
+host FIFO/wrap/atomicity/null-buffer tests, and cross-image topology checks.
+
+The exhaustive post-MSPI ledger now contains 24 production-source spans /
+4,220 stock bytes, 56 exact cross-image candidates / 4,328 bytes, and 104
+typed unresolved executable spans / 17,266 bytes. Apple/Linux boot providers
+are `d1e7151591adc15f43e7ef3efeab8d0fdf2eb1901c3035bfa62efe21a6de1489`
+and `d04cb44cb802e742ecffb576d85722c8cea4bb69c35522751906020aff7e2683`;
+packages are `7f7c1b246b51a8e15db38d93fac61fb5a681cb372ea958c4b26ff3a8b271d188`
+and `18f900b83920c2b7cc02097655152f34fbc5b17606e3dccc09cc0389488f615f`.
+They contain 6,683 and 3,670 placed regions with zero unresolved flash
+regions. The next unresolved executable frontier is `0x004276BC`. Live
+interrupt/concurrency and downstream device behavior are blocked by
+unavailable physical evidence; firmware-wide completeness is not claimed.
+
+## Overlap-safe byte move is production-routed C
+
+The complete 150-byte stock body at `[0x004276BC,0x00427752)` is now routed
+to clean-room MIT C. The 50-byte relocation-free leaf uses unsigned address
+classification, copies backward only for destructive overlap, copies forward
+otherwise, and returns the original destination. Both reviewed compilers emit
+the same bytes. The sole caller at `0x0042395A`, the non-overlap edge to the
+source-owned copy provider at `0x0041568C`, the two-byte terminal alignment,
+and the 146/150-byte Apollo-main identity are pinned.
+
+The exhaustive post-MSPI ledger now contains 25 production-source spans /
+4,370 stock bytes, 56 exact cross-image candidates / 4,328 bytes, and 103
+typed unresolved executable spans / 17,254 bytes. Apple/Linux boot providers
+are `d1e7151591adc15f43e7ef3efeab8d0fdf2eb1901c3035bfa62efe21a6de1489`
+and `d04cb44cb802e742ecffb576d85722c8cea4bb69c35522751906020aff7e2683`.
+The next unresolved executable frontier is `0x00427754`. Live memory-system,
+timing, production-caller, and cold-boot behavior is blocked by unavailable
+physical evidence; firmware-wide completeness is not claimed.
+
+## Command-queue index updater is production-routed C
+
+The complete private AmbiqSuite Apollo510 `update_indices()` body at
+`[0x00427754,0x00427794)` is now routed to bounded BSD-3-Clause C. The corrected
+64-byte boundary includes the terminal `msr primask` and pop that an earlier
+census split away. A 44-byte source leaf occupies reclaimed body space behind
+a four-byte redirect, calls only the authenticated critical-save provider at
+`0x0041B8EC`, and restores the exact saved PRIMASK. Host tests pin low-byte
+masking, monotonic epoch reconstruction, negative signed wrap correction,
+queue-address snapshots, and nested interrupt-state preservation.
+
+The exhaustive post-MSPI ledger now contains 26 production-source spans /
+4,434 stock bytes, 56 exact cross-image candidates / 4,328 bytes, and 102
+typed unresolved executable spans / 17,194 bytes. Canonical Apple bootloader
+accounting is 36,775 compiled-source bytes, 16,830 generated patch-site bytes,
+16 generated-alignment bytes, and 110,219 retained bytes. Linux records
+36,761 compiled-source, 16,826 generated patch-site, 18 generated-alignment,
+and the same retained complement. The next source-admission frontier is
+`0x00427794`. Live register, interrupt/concurrency, wrap-timing,
+downstream-caller, and cold-boot behavior is blocked by unavailable physical
+evidence; firmware-wide completeness is not claimed.
+
+## Command-queue public services are production C
+
+The eleven contiguous AmbiqSuite Apollo510 services at
+`[0x00427794,0x00427C80)` are now in-place BSD-3-Clause C under the exact
+44-byte state, 40-byte register-table, 12-byte configuration, and 8-byte
+entry contracts. Initialization, enable/disable, allocation/release/post,
+status, termination, error recovery, reset, and loop-post behavior retain the
+stock public entries, exact direct callers, updater calls, SSRAM threshold,
+and target `dmb sy`. No stock interior has a direct caller or stored Thumb
+entry pointer. Host tests cover invalid state, capacity and wrap, queue
+exhaustion, status, forced termination, recovery, reset, and loop entries.
+
+The exhaustive post-MSPI ledger now contains 37 production-source spans /
+5,490 stock bytes, 45 exact cross-image candidates / 3,068 bytes, 102 typed
+unresolved executable spans / 17,194 bytes, and 14 separately typed
+unreachable tails / 216 bytes. Canonical Apple bootloader accounting is
+37,831 compiled-source bytes, 16,830 generated patch-site bytes, 16 generated
+alignment bytes, and 109,163 retained bytes across 698 manifest intervals;
+Linux records 37,805 compiled-source, 16,826 generated patch-site, 18
+generated-alignment, and 109,175 retained bytes. Apple/Linux provider hashes
+are `d1e7151591adc15f43e7ef3efeab8d0fdf2eb1901c3035bfa62efe21a6de1489`
+and `d04cb44cb802e742ecffb576d85722c8cea4bb69c35522751906020aff7e2683`;
+package hashes are
+`7f7c1b246b51a8e15db38d93fac61fb5a681cb372ea958c4b26ff3a8b271d188`
+and `18f900b83920c2b7cc02097655152f34fbc5b17606e3dccc09cc0389488f615f`,
+with 6,712 and 3,699 placed regions and zero unresolved flash regions. The
+typed literal/padding window ends before the next executable frontier at
+`0x00427C90`. Live register, interrupt/concurrency, wrap-timing,
+downstream-device, and cold-boot behavior is blocked by unavailable physical
+evidence; firmware-wide completeness is not claimed.
+## 2026-09-01 — Bootloader binary32 runtime source closure
+
+The fixed-address math cluster `[0x00427C90,0x00427E84)` is now production C.
+Four 16-byte Arm hard-float veneers call adjacent integer-only floor,
+remainder, round, and ceiling cores; a ninth leaf implements the retained
+caller's range classifier. Both reviewed Clang profiles emit the same 432
+in-place source bytes. Seven leaves exactly reproduce their authenticated
+stock spans; the smaller remainder and classifier cores leave 68 bytes typed
+as unreachable, with no direct interior ingress or stored Thumb pointer.
+
+Host tests pass boundary, signed-zero, subnormal, infinity, NaN, and 165,000
+deterministic random binary32 cases. The existing GCD, ratio, and multiplier C
+providers now bind the source-owned math names directly. The exhaustive census
+is 267 spans: 46 source spans / 5,922 bytes, 37 exact candidates / 2,756 bytes,
+102 typed unresolved executable spans / 17,194 bytes, 16 unreachable tails /
+284 bytes, two retained-data spans / 28 bytes, and 64 typed non-entry spans /
+30,969 bytes. Zero bytes are unclassified. The next executable software
+frontier is `0x00428378`, after typed non-entry data through `0x00428378`.
+
+The Apple boot provider is 163,840 bytes with SHA-256
+`94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2`;
+the Linux provider is 163,824 bytes with SHA-256
+`426d77749f96307ae9a45173d20684570d5994d902cf1f1f5cb01f935c6ba7c6`.
+Apple accounting is 38,263 source, 108,731 retained, 16 alignment, and 16,830
+generated-patch bytes. Live FP-state, caller timing, downstream behavior,
+reset, and cold-boot validation is blocked by unavailable physical evidence.
+No hardware operation occurred, and firmware-wide completeness is not claimed.
+
+## 2026-09-01 — Bootloader SPOT-manager transition source closure
+
+The 106-byte Apollo510 `transition_sequence_2b` entry at
+`[0x00428378,0x004283E2)` is now fixed-address BSD-3-Clause production C.
+Apple clang 21.0.0 and Homebrew clang 22.1.8 emit identical bodies; after the
+single strict call relocation to `0x0041D1C0`, both reproduce every stock
+byte. The caller at `0x0042A05C`, nine shared literals, absence of interior
+ingress, and 50,000 randomized host state transitions are pinned.
+
+The exhaustive census remains 267 spans and now records 47 source spans /
+6,028 bytes and 101 typed unresolved executable spans / 17,088 bytes. Apple
+boot accounting is 38,369 source, 108,625 retained, 16 alignment, and 16,830
+generated-patch bytes. The typed interval `[0x004283E2,0x00428A94)` precedes
+the next executable frontier. Live timer, MMIO, voltage, trim, power, reset,
+and cold-boot qualification is blocked by unavailable physical evidence. No
+hardware operation occurred; firmware-wide completeness is not claimed.
+
+## 2026-09-01 — Bootloader SPOT-manager tranche through `0x0042A2A4`
+
+Seven more authenticated SPOT-manager entries are production C: transition
+7b, factory-trim load/readiness, the corrected timer ISR, SIMOBUCK deep-sleep
+classification, HP-to-deep-sleep marking, and VDDC/VDDF Ton selection. Both
+reviewed Clang profiles reproduce all 950 newly admitted stock bytes. Strict
+provider edges, all direct callers, stored callback pointers, shared literals,
+and Apollo-main analogues are pinned. Portable models pass 550,000 randomized
+states in aggregate.
+
+The post-MSPI census remains exhaustive at 57,153 bytes: 54 source spans /
+6,978 bytes, 35 exact candidates / 2,654 bytes, 96 typed unresolved executable
+spans / 16,244 bytes, 16 unreachable tails / 284 bytes, two retained-data
+spans / 28 bytes, and 64 typed non-entry spans / 30,965 bytes. Apple boot
+accounting is 39,319 source, 107,675 retained, 16 alignment, and 16,830
+generated-patch bytes. The 16-byte typed interval
+`[0x0042A2A4,0x0042A2B4)` precedes the next executable frontier. Live MMIO,
+interrupt, clock, voltage, trim, deep-sleep, reset, and cold-boot qualification
+is blocked by unavailable physical evidence. Firmware-wide completeness is
+not claimed.
+
+## 2026-09-01 — Post-MSPI register, queue, control, and late-wrapper tranche
+
+Twenty-five additional bootloader functions are fixed-address production C:
+eight register/NVIC/SCB helpers, three command-queue adapters, five runtime
+control wrappers, three event-control wrappers, and six late mode, validation,
+transfer, and platform wrappers. Apple clang 21 and Homebrew clang 22 reproduce
+all 866 authenticated bytes exactly; 21 focused host tests pass.
+
+The exhaustive 57,153-byte census now records 132 source spans / 14,150 bytes,
+55 typed unresolved executable spans / 12,552 bytes, 16 unreachable tails / 284
+bytes, two retained-data spans / 28 bytes, and 69 typed non-entry spans / 30,139
+bytes. The `0x00430B10` extent was corrected to `0x00430B3C` after the old
+boundary was found to cut through `MSR PRIMASK`; four bytes moved from mixed
+classification into executable source. Apple boot accounting is 46,439
+source-owned, 100,555 retained, 16 alignment, and 16,830 generated-patch bytes.
+The provider remains 163,840 bytes with SHA-256
+`13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`.
+Live MMIO, interrupt, event, command-queue, platform-init, reset, and cold-boot
+qualification is blocked by unavailable physical evidence. Firmware-wide
+completeness is not claimed.
+
+## 2026-09-02 — DFU service task through 184 admissions
+
+The complete 684-byte DFU queue, image-dispatch, and guarded vector-handoff
+task at `0x0042DE58` is production-routed MIT C. Both reviewed compilers are
+byte-exact under 29 strict provider relocations, four focused tests pass, and
+the caller, literal, provider, manifest, and image-assembly contracts verify.
+
+The census now records 184 source spans / 24,222 bytes and 3 unresolved
+executable spans / 2,498 bytes. Apple boot accounting is 56,511 source-owned,
+90,483 retained, 16 alignment, and 16,830 generated-patch bytes. Live queue,
+filesystem/storage, flash programming, vector handoff, interrupt, reset, and
+cold-boot qualification is blocked by unavailable physical evidence.
+Firmware-wide completeness is not claimed.
+
+## 2026-09-02 — Platform/state/profile tranche through 176 admissions
+
+The eight-slot platform finalizer, sixteen-channel state/event classifier, and
+13-word register-profile capture/apply service add 846 exact production-source
+bytes. Focused tests, both reviewed compilers, complete component build,
+provider manifest, and exhaustive audit are green.
+
+The census now records 176 source spans / 20,850 bytes and 11 unresolved
+executable spans / 5,870 bytes. Apple boot accounting is 53,139 source-owned,
+93,855 retained, 16 alignment, and 16,830 generated-patch bytes. Hardware
+validation is blocked by unavailable physical evidence; functional
+completeness is not claimed.
+
+## 2026-09-02 — Event-value profile through 173 admissions
+
+The 246-byte event-value hardware-profile publisher at `0x0042F204` is exact
+production-routed MIT C under both reviewed compilers. Its portable register
+model, component build, provider manifest, and exhaustive audit are green.
+The census now records 173 source spans / 20,004 bytes and 14 unresolved
+executable spans / 6,716 bytes. Apple boot accounting is 52,293 source-owned,
+94,701 retained, 16 alignment, and 16,830 generated-patch bytes. Hardware
+validation is blocked by unavailable physical evidence; functional
+completeness is not claimed.
+
+## 2026-09-02 — Mode router through 172 admissions
+
+The 242-byte mode router at `0x0042FF00` is production-routed MIT C. Both
+reviewed compilers reproduce its authenticated body exactly; focused tests
+cover fixed service mappings, Boolean normalization, interrupt-protected
+aggregate state, and no-op modes. The full component build, manifest, provider,
+and exhaustive analyzer are green.
+
+The census now records 172 source spans / 19,758 bytes and 15 unresolved
+executable spans / 6,962 bytes. Apple boot accounting is 52,047 source-owned,
+94,947 retained, 16 alignment, and 16,830 generated-patch bytes. The canonical
+provider remains 163,840 bytes with SHA-256
+`13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`.
+Live SRAM, interrupt/concurrency, peripheral, reset, and cold-boot validation
+is blocked by unavailable physical evidence. Functional completeness is not
+claimed.
+
+## 2026-09-01 — Runtime control-services tranche through 152 admissions
+
+Four additional fixed-address bootloader functions totaling 296 authenticated
+bytes are production-routed MIT C: hardware-readiness gating, event wait-mask
+handling, aligned guarded dispatch, and register power toggling. Apple clang 21
+and Homebrew clang 22 reproduce every body exactly, six focused tests pass, and
+the complete bootloader component and runtime manifest verify.
+
+The exhaustive 57,153-byte census now records 152 source spans / 15,126 bytes,
+35 unresolved executable spans / 11,594 bytes, and 67 typed non-entry spans /
+30,121 bytes. Apple boot accounting is 47,415 source-owned, 99,579 retained,
+16 alignment, and 16,830 generated-patch bytes. The provider remains 163,840
+bytes with SHA-256
+`13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`.
+Live MMIO, floating-point probe, event/scheduler, interrupt-mask, timing, power,
+peripheral, reset, and cold-boot qualification is blocked by unavailable physical evidence. Firmware-wide completeness is not claimed.
+
+## 2026-09-01 — Retained-event service loop through 153 admissions
+
+The complete 162-byte event initialization and bounded-wait loop at
+`0x0042E2F8..0x0042E39A` is production-routed MIT C. Both reviewed Clang
+profiles are byte-exact, the stored entry pointer and fourteen provider edges
+are pinned, four focused tests pass, and the complete component, manifest, and
+exhaustive analyzer verify.
+
+The census now records 153 source spans / 15,288 bytes and 34 unresolved
+executable spans / 11,432 bytes. Apple boot accounting is 47,577 source-owned,
+99,417 retained, 16 alignment, and 16,830 generated-patch bytes. Live retained
+RAM, scheduler/event, logging, timing, interrupt, reset, and cold-boot
+qualification is blocked by unavailable physical evidence. Firmware-wide completeness is not claimed.
+
+## 2026-09-01 — Event runtime services through 156 admissions
+
+Three functions totaling 436 authenticated bytes are production-routed MIT C:
+event object/task initialization, queue-driven callback dispatch, and callback
+enqueueing. Both reviewed compilers are byte-exact, five focused tests pass,
+and the complete provider, manifest, and exhaustive analyzer verify.
+
+The census now records 156 source spans / 15,724 bytes and 31 unresolved
+executable spans / 10,996 bytes. Apple boot accounting is 48,013 source-owned,
+98,981 retained, 16 alignment, and 16,830 generated-patch bytes. Live retained
+RAM, RTOS objects/tasks, scheduler queues, callbacks, logging, timing,
+interrupt, reset, and cold-boot qualification is blocked by unavailable physical evidence. Firmware-wide completeness is not claimed.
+
+## 2026-09-01 — Control orchestration through 158 admissions
+
+Two functions totaling 158 authenticated bytes are production-routed MIT C:
+the stored-entry event/control orchestrator and critical four-word dispatch
+transaction. Both reviewed compilers are byte-exact, four focused tests pass,
+and the complete provider, manifest, and exhaustive analyzer verify.
+
+The census now records 158 source spans / 15,882 bytes and 29 unresolved
+executable spans / 10,838 bytes. Apple boot accounting is 48,171 source-owned,
+98,823 retained, 16 alignment, and 16,830 generated-patch bytes. Live
+scheduler/event, retained RAM, interrupt-mask, terminal-mode, logging, timing,
+reset, and cold-boot qualification is blocked by unavailable physical evidence. Firmware-wide completeness is not claimed.
+
+## 2026-09-01 — Runtime-context publisher through 159 admissions
+
+The complete 114-byte queued runtime-context publisher at `0x0042DCA2` is
+production-routed MIT C. Both reviewed compilers are byte-exact, three focused
+tests pass, and the complete provider, manifest, and exhaustive analyzer verify.
+
+The census now records 159 source spans / 15,996 bytes and 28 unresolved
+executable spans / 10,724 bytes. Apple boot accounting is 48,285 source-owned,
+98,709 retained, 16 alignment, and 16,830 generated-patch bytes. Live retained
+RAM, RTOS queue/event, scheduler, logging, timing, interrupt, reset, and
+cold-boot qualification is blocked by unavailable physical evidence. Firmware-wide completeness is not claimed.
+
+## 2026-09-01 — Hardware-descriptor publisher through 160 admissions
+
+The relocation-free 108-byte ring-descriptor selector and per-instance
+register publisher at `0x0042C45A` is production-routed MIT C. Apple clang 21
+and Homebrew clang 22 reproduce the stock bytes exactly; four focused tests
+cover both compiler profiles, successor selection, modulo wrap, descriptor
+stride, field order, and source reviewability. The production provider,
+manifest, and exhaustive frontier analyzer verify without hardware access.
+
+The census now records 160 source spans / 16,104 bytes and 27 unresolved
+executable spans / 10,616 bytes. Apple boot accounting is 48,393 source-owned,
+98,601 retained, 16 alignment, and 16,830 generated-patch bytes. The canonical
+provider remains 163,840 bytes with SHA-256
+`13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`.
+Live SRAM, MMIO, peripheral, DMA, timing, interrupt, reset, and cold-boot
+qualification is blocked by unavailable physical evidence. Firmware-wide
+completeness is not claimed.
+
+## 2026-09-01 — Small runtime-service tranche through 148 admissions
+
+Five more bounded functions totaling 274 authenticated bytes are
+production-routed MIT C: critical state update, chunked indirect traversal,
+hardware-channel normalization, platform boot sequencing, and address/length
+validation. Apple clang 21 and Homebrew clang 22 reproduce all bodies exactly,
+and the focused portable tests pass.
+
+The `0x0042CEA4` boundary is corrected through `0x0042CED8`; four bytes formerly
+marked mixed now cover the complete PRIMASK restore and return. The exhaustive
+57,153-byte census records 148 source spans / 14,830 bytes, 39 unresolved
+executable spans / 11,890 bytes, and 67 typed non-entry spans / 30,121 bytes.
+Apple boot accounting is 47,119 source-owned, 99,875 retained, 16 alignment,
+and 16,830 generated-patch bytes. The provider remains 163,840 bytes with
+SHA-256 `13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`.
+Live registers, clocking, interrupt masks, platform startup, reset, and
+cold-boot qualification is blocked by unavailable physical evidence.
+Firmware-wide completeness is not claimed.
+
+## 2026-09-01 — Retained event-state tranche
+
+Five additional event-state services totaling 228 authenticated bytes are now
+production-routed MIT C: the state probe, event-flags initializer, guarded
+context initializer, wait/log control, and bit-publish control. Both reviewed
+Clang profiles reproduce the stock bodies exactly and the focused portable
+tests pass.
+
+The exhaustive 57,153-byte census now records 143 source spans / 14,556 bytes
+and 44 unresolved executable spans / 12,160 bytes. Apple boot accounting is
+46,845 source-owned, 100,149 retained, 16 alignment, and 16,830 generated-patch
+bytes. The 163,840-byte provider remains byte-identical with SHA-256
+`13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`.
+Live retained state, event objects, scheduler wakeups, logging, failure reset,
+and cold-boot qualification is blocked by unavailable physical evidence.
+Firmware-wide completeness is not claimed.
+
+## 2026-09-01 — Event setup and runtime-context lifecycle tranche
+
+Six additional bootloader functions are production-routed MIT C: the event
+runtime setup and retained callback dispatcher at `0x0042E278..0x0042E2A2`,
+plus queue/action context initialization, guarded teardown, and the runtime
+enable sequence at `0x0042DD70..0x0042DE0E`. Apple clang 21 and Homebrew clang
+22 reproduce all 178 authenticated bytes exactly, and eight focused portable
+tests pass.
+
+The boundary at `0x0042DE0E` was also corrected: that function continues
+through `0x0042DE58`, so 14 bytes formerly marked mixed are executable. The
+57,153-byte census now records 138 source spans / 14,328 bytes, 49 unresolved
+executable spans / 12,388 bytes, 16 unreachable tails / 284 bytes, two retained
+data spans / 28 bytes, and 68 typed non-entry spans / 30,125 bytes. Apple boot
+accounting is 46,617 source-owned, 100,377 retained, 16 alignment, and 16,830
+generated-patch bytes. The provider remains 163,840 bytes with SHA-256
+`13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`.
+Live retained-object, callback, scheduler, interrupt-mask, reset, and cold-boot
+qualification is blocked by unavailable physical evidence. Firmware-wide
+completeness is not claimed.

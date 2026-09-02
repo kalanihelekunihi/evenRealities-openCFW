@@ -231,32 +231,32 @@ LINUX_PATCH_SHA256 = (
 )
 LINUX_AGGREGATE = {
     "overlay": (
-        152_912,
-        "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20",
+        154_604,
+        "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6",
     ),
     "component": (
-        3_676_308,
-        "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
+        3_956_468,
+        "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
     ),
     "package": (
-        4_469_364,
-        "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
+        4_750_560,
+        "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
     ),
 }
 
 STAGED_CONSUMER_PINS = {
-    MANIFEST: "aa9c0b71cab15191d05e071a2b88fa48e08235cc14542520b7ef20f96619a1dc",
+    MANIFEST: "56eb69134262af4c59053d75bbcbddfe90a09e8e9429884ea20d532d342c1b0d",
     PROVENANCE: "2ff90b1c90d77df983dd36b0f114011a9e635db99dd5d4e379e55407ea978e6a",
     AUDIT: "b483e5b1915f54e99e8aefd047ece54153aadc6df4af51cdc4ef1cf81cc983d0",
-    ROOT / "README.md": "53b077f05138e85c0bc0702ce3a2b83a1211027c34b37b404999f30ad90d46d1",
+    ROOT / "README.md": "12de86b75a4cefe574735606102f5dff42b5e3d373cfae4cdc173bb6b5b11436",
     ROOT / "components/README.md": "13ef290eaab8a5e753fe4b5690ca3388e29dbea5aa7be6ad2ad5f085d45ad4a5",
-    ROOT / "components/apollo_main/core_overlay/NOTICE.md": "760703c1fe85c3a2a6302b7b2dd6091d92a7f876a320feca778462698da9173d",
+    ROOT / "components/apollo_main/core_overlay/NOTICE.md": "4dfc91e0feb564efce7c69e44afc340c97a66a72311b87dea1902ad8771efcca",
     ROOT / "components/apollo_main/core_overlay/EVIDENCE.md": "d7ed450d36ea1fa2db9c8d97afaf173fb23a82d8db93865e1e619bb82dbbaadc",
     ROOT / "third_party/nanopb/README.openCFW.md": "bd70ff8d92c38cad8bde2a4356f7d56f9b02994239ff09453f2f435b44fdb672",
-    ROOT / "docs/memory-map.md": "36321d9578acb17c8e2051e5196b493a5e4775db2c2b70df6d802101082017d8",
-    ROOT / "docs/source-coverage.md": "42c8481fbd55d56db9e691429107a3bc4ba4f014539e826c1106618230379457",
-    ROOT / "docs/upstream-inventory.md": "0c8981e78a75f9ae252b63407cf92395845ba5140d6b27925e86bab603c0d76c",
-    ROOT / "docs/linux-reproducible-build.md": "dc65dbc0f7b382ed6f3b1e99ff51fe14ade1de61e3f328d018f7aa8a6b20c687",
+    ROOT / "docs/memory-map.md": "6c4ce6a0b555bdad31061624c2e023c75ca071042b29c726a2b48d5cd5798ed3",
+    ROOT / "docs/source-coverage.md": "8b47d2fce8ecec0f08a6e0ccf9923b955040859b6b055495fad40d5f8a9ba621",
+    ROOT / "docs/upstream-inventory.md": "f0d32dead5abbc6b1cf5ba6989ab73b305a5a2cbec7a9788cddf3afbacb83c09",
+    ROOT / "docs/linux-reproducible-build.md": "759b08cc29e9b5522f6a1db122485c6577ea67e00ed03131a98ea28c336940b6",
 }
 
 
@@ -857,7 +857,7 @@ class NanopbDecodeSvarintProductionTests(unittest.TestCase):
                 len(overlay["patch_sites"]),
                 len(overlay["relocated_leaves"]),
             ),
-            (2440, 2328, 1871),
+            (2443, 2331, 1874),
         )
 
         self.assertEqual(overlay["functions"].count(PRODUCTION_FUNCTION), 1)

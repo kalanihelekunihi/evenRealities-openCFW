@@ -39,9 +39,9 @@ PRODUCTION_LEAVES = {
 }
 
 OVERLAY_PIN = (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae")
-COMPONENT_PIN = (3_885_668, "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5")
-PACKAGE_PIN = (4_678_740, "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a")
-FLASH_PLAN_PIN = (4_595_610, "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127")
+COMPONENT_PIN = (3_956_468, "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2")
+PACKAGE_PIN = (4_750_576, "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6")
+FLASH_PLAN_PIN = (4_630_517, "85579ad647a62c7457a5e249a43ffb57f2b1ad3f4d6abecf79d4a898d53100f7")
 
 
 class RuntimeFormatScanTests(unittest.TestCase):
@@ -250,7 +250,7 @@ class RuntimeFormatScanTests(unittest.TestCase):
                     "container_only_regions", "protected_regions",
                 )
             ),
-            (6_598, 0, 6, 6),
+            (6_646, 0, 6, 6),
         )
 
 

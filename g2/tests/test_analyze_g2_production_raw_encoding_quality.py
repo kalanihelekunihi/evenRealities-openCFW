@@ -72,13 +72,19 @@ class ProductionRawEncodingQualityTests(unittest.TestCase):
             with self.assertRaises(MODULE.AuditError):
                 MODULE.analyze()
 
-    def test_deleted_public_transcripts_are_digest_only_boundaries(self) -> None:
+    def test_retired_public_transcripts_are_digest_only_boundaries(self) -> None:
         self.assertTrue(self.result["public_source_scope_clean"])
         self.assertEqual(
             len(self.result["removed_public_transcript_boundaries"]), 2)
         for row in self.result["removed_public_transcript_boundaries"]:
-            self.assertFalse((ROOT / row["path"]).exists())
-            self.assertIn("absent_from_public_source", row["disposition"])
+            path = ROOT / row["path"]
+            if "replaced_by_structured_production_c" in row["disposition"]:
+                self.assertTrue(path.is_file())
+                self.assertEqual(
+                    sum(MODULE._directive_bytes(path.read_text()).values()), 0)
+            else:
+                self.assertFalse(path.exists())
+                self.assertIn("absent_from_public_source", row["disposition"])
 
     def test_audit_is_software_only_and_does_not_mutate_production(self) -> None:
         self.assertEqual(self.result["hardware_validation"],

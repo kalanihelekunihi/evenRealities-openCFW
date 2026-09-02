@@ -34,9 +34,9 @@ HEADER_PIN = (1_655, "8299ae5795d1fce5323c66c86fafc320b1ed166b8ce0546a198bfb0d8d
 TEST_PIN = (6_313, "5e2e1c8ae8ae7011715b89aed920797b6ef2bccd3cc0933d6da833445866d6e2")
 PRODUCTION_LEAF = (288328, 120, 2, "c79fbbc1083c7a8e935c1d2acb9a0d05f9a4ad918aa6b3003593e8f63bf8d817")
 PRODUCTION_OVERLAY = (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae")
-PRODUCTION_COMPONENT = (3_885_668, "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5")
-PRODUCTION_PACKAGE = (4_678_740, "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a")
-PRODUCTION_FLASH_PLAN = (4_595_610, "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127")
+PRODUCTION_COMPONENT = (3_956_468, "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2")
+PRODUCTION_PACKAGE = (4_750_576, "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6")
+PRODUCTION_FLASH_PLAN = (4_881_053, "e540570208e616cc3de20af268da55d17fbf59f918aee143be8a902449253262")
 PINNED_INPUTS = {
     ROOT / "tools/manifests/packetcraft-cordio-dm-conn-sm-function-map.tsv": "b0a42e95ba82522214623e7357945309ab3a5876e0ced618f30390db6e4cc0ff",
     ROOT / "tools/manifests/packetcraft-cordio-dm-conn-sm-provenance.tsv": "66ce42fad423210c94b002a83b7f9ffcba3f4d484e77771d1ee387d608744923",
@@ -191,7 +191,7 @@ def _verify_production() -> dict[str, Any]:
         "flash_regions", "unresolved_flash_regions",
         "container_only_regions", "protected_regions",
     ))
-    if counts != (6588, 0, 6, 6):
+    if counts != (7006, 0, 6, 6):
         raise AuditError("DM connection state-machine flash counts changed")
     return {
         "status": "production-routed",

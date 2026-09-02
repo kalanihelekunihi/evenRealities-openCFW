@@ -618,12 +618,12 @@ class RuntimeLittlefsUtilBitopsTests(unittest.TestCase):
         expected = {
             "main": {
                 "overlay": (
-                    360_578,
-                    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+                    362_272,
+                    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
                 ),
                 "component": (
-                    3_883_974,
-                    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
+                    3_885_668,
+                    "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5",
                 ),
                 "functions": {
                     "npw2": (
@@ -653,7 +653,7 @@ class RuntimeLittlefsUtilBitopsTests(unittest.TestCase):
                 ),
                 "component": (
                     163_840,
-                    "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
+                    "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2",
                 ),
                 "functions": {
                     "npw2": (

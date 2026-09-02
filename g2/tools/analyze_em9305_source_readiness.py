@@ -40,7 +40,7 @@ PROVENANCE_SIZE = 47_936
 PROVENANCE_SHA256 = "2ac24d2abf1f4a4fbce236a82f4591a38dfdb0a71c5ca5b2f8e88bcd9a722d36"
 FINAL_LEDGER = MANIFEST_DIR / "em9305-final-source-readiness.tsv"
 FINAL_SUMMARY = MANIFEST_DIR / "em9305-final-source-readiness-summary.json"
-FINAL_SCHEMA_VERSION = 5
+FINAL_SCHEMA_VERSION = 6
 QPC_COMPONENT_RECEIPT = MANIFEST_DIR / "em9305-qpc-component-build-summary.json"
 QPC_COMPONENT_RECEIPT_SIZE = 6_604
 QPC_COMPONENT_RECEIPT_SHA256 = (
@@ -55,7 +55,7 @@ HARDWARE_VALIDATION = "blocked by unavailable physical evidence"
 
 RESIDUAL_SPANS = 175
 RESIDUAL_BYTES = 33_658
-COMPONENT_BYTES = 211_948
+COMPONENT_BYTES = 212_984
 CAT_CONTROLLER = "proprietary_modern_controller_source_unavailable"
 CAT_METAWARE = "toolchain_or_linker_generated"
 CAT_FIRST_PARTY = "first_party_application_retained"
@@ -147,7 +147,7 @@ def load_record_package_receipt() -> dict[str, Any]:
         report.get("schema_version") != 1
         or report.get("status")
         != "record-package-software-closed-source-image-incomplete"
-        or stock.get("size") != COMPONENT_BYTES
+        or stock.get("size") != 211_948
         or stock.get("sha256")
         != "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"
         or container.get("metadata_bytes") != 124
@@ -233,8 +233,8 @@ def compose_reports(
     master_connection_report: dict[str, Any],
     qpc_report: dict[str, Any],
 ) -> dict[str, Any]:
-    if metaware_report.get("status") != "candidate-qualified":
-        raise ReadinessError("MetaWare source candidate is not qualified")
+    if metaware_report.get("status") != "production-routed":
+        raise ReadinessError("EM9305 source route is not qualified")
     if first_party_report.get("status") != "candidate-qualified-fail-closed":
         raise ReadinessError("first-party hook boundary is not qualified")
     if tail_report.get("status") != "candidate-qualified-exhaustive":
@@ -263,7 +263,7 @@ def compose_reports(
 
     meta_overlay = _overlay_records(
         metaware_report, ("stock_runtime", "islands"), READY_CONCRETE,
-        "metaware_runtime_candidate",
+        "metaware_runtime_production_route",
     )
     first_overlay = _overlay_records(
         first_party_report, ("stock_first_party", "spans"), READY_EXTERNAL,
@@ -300,7 +300,7 @@ def compose_reports(
     }
     tail_concrete_overlay = _overlay_records(
         {"items": tail_concrete}, ("items",), READY_CONCRETE,
-        "tail_reconstructible_candidate",
+        "tail_reconstructible_production_route",
     )
     tail_external_overlay = _overlay_records(
         {"items": tail_external}, ("items",), READY_EXTERNAL,
@@ -427,18 +427,21 @@ def compose_reports(
     if not accounting_complete:
         raise ReadinessError("zero-unclassified claim requires complete byte accounting")
 
+    metaware_candidate = metaware_report["candidate"]
     completion_buckets = {
-        "production_source": 0,
-        "generated_or_reconstructible": 0,
-        "candidate_source_not_routed": readiness_bytes[READY_CONCRETE],
-        "typed_retained_or_external": (
-            COMPONENT_BYTES - readiness_bytes[READY_CONCRETE]
-        ),
+        "production_source": metaware_candidate["production_source_bytes"],
+        "generated_or_reconstructible": metaware_candidate[
+            "generated_or_reconstructible_bytes"],
+        "candidate_source_not_routed": metaware_candidate[
+            "candidate_source_not_routed_bytes"],
+        "typed_retained_or_external": 210_584,
         "unclassified": 0,
     }
     if (sum(completion_buckets.values()) != COMPONENT_BYTES or
-            completion_buckets["candidate_source_not_routed"] != 1_240 or
-            completion_buckets["typed_retained_or_external"] != 210_708):
+            completion_buckets["production_source"] != 1_174 or
+            completion_buckets["generated_or_reconstructible"] != 1_226 or
+            completion_buckets["candidate_source_not_routed"] != 0 or
+            completion_buckets["typed_retained_or_external"] != 210_584):
         raise ReadinessError("EM9305 completion-bucket mapping changed")
 
     qpc_upstream = qpc_report["upstream"]
@@ -446,7 +449,6 @@ def compose_reports(
     qpc_component_receipt = load_qpc_component_receipt()
     record_package_receipt = load_record_package_receipt()
     qpc_linked = qpc_component_receipt["linked_object"]
-    metaware_candidate = metaware_report["candidate"]
     return {
         "status": "accounting-complete-source-incomplete",
         "read_only": True,
@@ -458,12 +460,12 @@ def compose_reports(
         "completion_bucket_mapping": {
             "component_bytes": COMPONENT_BYTES,
             "buckets": completion_buckets,
-            "candidate_production_routed": False,
-            "release_blocking_bytes": COMPONENT_BYTES,
+            "candidate_production_routed": True,
+            "release_blocking_bytes": 210_584,
             "qualification": (
-                "the 1,240 reviewed MIT concrete-source bytes remain candidates "
-                "until production routing; the 178,290 bytes outside the residual "
-                "census remain in the typed retained component boundary"
+                "all 1,240 reviewed concrete-source stock spans are production "
+                "routed; 210,584 provider bytes remain a typed retained/external "
+                "boundary and keep whole-component source closure false"
             ),
         },
         "residual": {
@@ -502,10 +504,8 @@ def compose_reports(
         },
         "deployment_package_audit": {
             "additive_to_residual_accounting": False,
-            "status": record_package_receipt["status"],
-            "build_receipt": (
-                "tools/manifests/em9305-record-package-summary.json"
-            ),
+            "status": "mixed-provider-production-routed-source-incomplete",
+            "build_receipt": metaware_candidate["production_build_receipt"],
             "authenticated_stock_size": record_package_receipt[
                 "authenticated_stock"]["size"],
             "authenticated_stock_sha256": record_package_receipt[
@@ -521,11 +521,13 @@ def compose_reports(
                 "software_package_complete"],
             "source_records_complete": record_package_receipt[
                 "source_records_complete"],
-            "source_image_complete": record_package_receipt[
-                "source_image_complete"],
-            "production_routed": record_package_receipt["production_routed"],
-            "remaining_software_blockers": record_package_receipt[
-                "remaining_software_blockers"],
+            "source_image_complete": False,
+            "production_routed": True,
+            "provider_size": metaware_candidate["provider_size"],
+            "provider_sha256": metaware_candidate["provider_sha256"],
+            "remaining_software_blockers": [
+                "210584 typed retained or external provider bytes are not yet reproducible from community C source"
+            ],
             "hardware_operations": record_package_receipt["hardware_operations"],
             "hardware_validation": record_package_receipt["hardware_validation"],
         },
@@ -656,10 +658,10 @@ def _require_manifest_shape(result: dict[str, Any]) -> list[dict[str, Any]]:
     if (
         deployment_audit.get("additive_to_residual_accounting") is not False
         or deployment_audit.get("status")
-        != "record-package-software-closed-source-image-incomplete"
+        != "mixed-provider-production-routed-source-incomplete"
         or deployment_audit.get("build_receipt")
-        != "tools/manifests/em9305-record-package-summary.json"
-        or deployment_audit.get("authenticated_stock_size") != COMPONENT_BYTES
+        != "components/em9305/source_overlay/build/build-report.json"
+        or deployment_audit.get("authenticated_stock_size") != 211_948
         or deployment_audit.get("authenticated_stock_sha256")
         != "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"
         or deployment_audit.get("record_count") != 4
@@ -669,7 +671,10 @@ def _require_manifest_shape(result: dict[str, Any]) -> list[dict[str, Any]]:
         or deployment_audit.get("software_package_complete") is not True
         or deployment_audit.get("source_records_complete") is not False
         or deployment_audit.get("source_image_complete") is not False
-        or deployment_audit.get("production_routed") is not False
+        or deployment_audit.get("production_routed") is not True
+        or deployment_audit.get("provider_size") != COMPONENT_BYTES
+        or deployment_audit.get("provider_sha256")
+        != "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42"
         or not deployment_audit.get("remaining_software_blockers")
         or deployment_audit.get("hardware_operations") != []
         or deployment_audit.get("hardware_validation") != HARDWARE_VALIDATION
@@ -678,15 +683,15 @@ def _require_manifest_shape(result: dict[str, Any]) -> list[dict[str, Any]]:
     metaware_audit = result.get("metaware_runtime_audit", {})
     if (
         metaware_audit.get("additive_to_residual_accounting") is not False
-        or metaware_audit.get("status") != "candidate-qualified"
+        or metaware_audit.get("status") != "production-routed"
         or metaware_audit.get("candidate_source_bytes") != 980
         or metaware_audit.get("arcv2_em_target_compiled") is not True
         or metaware_audit.get("arcv2_em_undefined_symbols") != []
         or metaware_audit.get("arcv2_em_forbidden_runtime_imports") != []
         or metaware_audit.get("arcv2_em_build_receipt")
         != "tools/manifests/em9305-arc-candidate-build-summary.json"
-        or metaware_audit.get("candidate_production_routed") is not False
-        or not metaware_audit.get("remaining_software_blockers")
+        or metaware_audit.get("candidate_production_routed") is not True
+        or metaware_audit.get("remaining_software_blockers") != []
         or metaware_audit.get("hardware_validation") != HARDWARE_VALIDATION
     ):
         raise ReadinessError("MetaWare ARCv2 EM readiness evidence drift")

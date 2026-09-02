@@ -597,6 +597,7 @@ def resolve_leaf_profile(
         "target",
         "include_dirs",
         "expected",
+        "stock",
         "relocations",
         "closure",
     }
@@ -639,6 +640,16 @@ def resolve_leaf_profile(
                 "object"
             )
         effective["expected"] = profile["expected"]
+    if "stock" in profile:
+        # A cave may need a profile-specific generated-fill span when two
+        # reviewed compilers emit different, still-bounded function sizes.
+        # The profile must pin that generated stock span independently.
+        if not isinstance(profile["stock"], dict):
+            raise BuildError(
+                f"leaf {function!r} profile {resolved!r} stock must be an "
+                "object"
+            )
+        effective["stock"] = profile["stock"]
     if "relocations" in profile:
         # Relocated leaves whose outgoing-call offsets shifted under this
         # toolchain carry their observed relocation offsets here; the call
@@ -2014,12 +2025,16 @@ def extract_in_place_function_section(
             f"in-place leaf section {section_name} has invalid alignment "
             f"{alignment}"
         )
+    # Thumb entry points require halfword alignment.  Clang nevertheless marks
+    # ordinary function sections with a conservative four-byte ELF alignment;
+    # that object-file preference is not an ISA placement requirement.  Keep
+    # the override explicit and restricted to the one reviewed 4-to-2-byte
+    # relaxation, while allowing complete Thumb functions (and their reviewed
+    # relocations) to occupy authenticated halfword-aligned stock entries.
     halfword_placement = (
         allow_halfword_placement
         and alignment == 4
-        and runtime_address % 2 == 0
-        and section_size == 2
-        and not relocation_configs
+        and runtime_address % 4 == 2
     )
     if runtime_address % alignment and not halfword_placement:
         raise BuildError(
@@ -6158,8 +6173,8 @@ def record_leaf_profile_pins(
 
     for config_key, kind in (
         ("isolated_leaves", "scalar"),
-        ("in_place_leaves", "scalar"),
-        ("cave_leaves", "scalar"),
+        ("in_place_leaves", "in_place"),
+        ("cave_leaves", "in_place"),
         ("relocated_leaves", "relocated"),
     ):
         reported = indexed(report.get(config_key, []))
@@ -6188,6 +6203,49 @@ def record_leaf_profile_pins(
                     or canonical.get("sha256") != expected["sha256"]
                 ):
                     entry["expected"] = expected
+            elif kind == "in_place":
+                extraction = item.get("extraction", {})
+                expected = {
+                    "size": pins["size"],
+                    "sha256": pins["sha256"],
+                    "unrelocated_sha256": extraction.get(
+                        "unrelocated_sha256"
+                    ),
+                }
+                reviewed_relocations = leaf.get("relocations", [])
+                observed_relocations = extraction.get("relocations", [])
+                relocations: list[dict[str, Any]] = []
+                for reviewed, observed in zip(
+                    reviewed_relocations,
+                    observed_relocations,
+                ):
+                    relocation = {
+                        "offset": observed.get("offset"),
+                        "type": observed.get("type"),
+                        "symbol": observed.get("symbol"),
+                    }
+                    if "symbol_type" in reviewed:
+                        relocation["symbol_type"] = reviewed["symbol_type"]
+                    if "target_function" in reviewed:
+                        relocation["target_function"] = reviewed[
+                            "target_function"
+                        ]
+                    else:
+                        relocation["target_address"] = observed.get(
+                            "target_address"
+                        )
+                    relocations.append(relocation)
+                expected_matches = all(
+                    canonical.get(key) == expected[key] for key in expected
+                )
+                if not (
+                    expected_matches
+                    and reviewed_relocations == relocations
+                    and len(reviewed_relocations)
+                    == len(observed_relocations)
+                ):
+                    entry["expected"] = expected
+                    entry["relocations"] = relocations
             else:
                 expected = {
                     "size": pins["size"],

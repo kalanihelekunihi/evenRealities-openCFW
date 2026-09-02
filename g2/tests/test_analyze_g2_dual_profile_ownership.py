@@ -341,17 +341,17 @@ class DualProfileOwnershipTests(unittest.TestCase):
     def test_checked_companion_conserves_both_profiles(self):
         expected = {
             "apple-clang": {
-                "production_source": 424703,
-                "generated_or_reconstructible": 426474,
-                "candidate_source_not_routed": 30636,
-                "typed_retained_or_external": 3795983,
+                "production_source": 475527,
+                "generated_or_reconstructible": 494744,
+                "candidate_source_not_routed": 29396,
+                "typed_retained_or_external": 3749965,
                 "unclassified": 0,
             },
             "linux-clang": {
-                "production_source": 207141,
-                "generated_or_reconstructible": 136046,
-                "candidate_source_not_routed": 30636,
-                "typed_retained_or_external": 4096289,
+                "production_source": 257897,
+                "generated_or_reconstructible": 411980,
+                "candidate_source_not_routed": 29396,
+                "typed_retained_or_external": 4050343,
                 "unclassified": 0,
             },
         }
@@ -379,19 +379,19 @@ class DualProfileOwnershipTests(unittest.TestCase):
         self.assertTrue(apple["per_byte_ownership_mask_complete"])
         self.assertFalse(linux["per_byte_ownership_mask_complete"])
         self.assertEqual(apple["package"]["typed_mixed_profile_spans"], [])
-        self.assertEqual(len(linux["package"]["typed_mixed_profile_spans"]), 2)
+        self.assertEqual(len(linux["package"]["typed_mixed_profile_spans"]), 3)
         self.assertIn("aggregate totals", linux["per_byte_ownership_authority"])
 
     def test_linux_profile_coarse_label_error_is_not_accepted(self):
         row = self.report["profiles"]["linux-clang"]
         reconciliation = row["apollo_flash_label_reconciliation"]
-        self.assertEqual(reconciliation["bytes_requiring_reconciliation"], 272466)
+        self.assertEqual(reconciliation["bytes_requiring_reconciliation"], 274414)
         self.assertEqual(
             reconciliation["plan_minus_authoritative"],
             {
-                "source": 54,
-                "generated_addressed": 272412,
-                "retained": -272466,
+                "source": 274414,
+                "generated_addressed": -1936,
+                "retained": -272478,
                 "component_container_metadata": 0,
             },
         )
@@ -401,9 +401,9 @@ class DualProfileOwnershipTests(unittest.TestCase):
         )
         spans = row["package"]["typed_mixed_profile_spans"]
         self.assertEqual([item["classification"] for item in spans],
-                         ["typed_mixed_profile_ownership"] * 2)
+                         ["typed_mixed_profile_ownership"] * 3)
         self.assertEqual([item["component"] for item in spans],
-                         ["apollo_bootloader", "apollo_main"])
+                         ["ble_em9305", "apollo_bootloader", "apollo_main"])
 
     def test_apple_stale_labels_also_require_checked_reconciliation(self):
         row = self.report["profiles"]["apple-clang"]
@@ -610,7 +610,7 @@ class DualProfileOwnershipTests(unittest.TestCase):
 
     def test_checked_projection_binds_receipts_and_all_six_provider_identities(self):
         checked = self.analyzer._read(self.analyzer.COMPANION)
-        self.assertEqual(checked["schema_version"], 3)
+        self.assertEqual(checked["schema_version"], 4)
         self.assertEqual(
             checked["per_byte_ownership_policy"],
             self.report["per_byte_ownership_policy"],
@@ -620,6 +620,7 @@ class DualProfileOwnershipTests(unittest.TestCase):
             self.assertEqual(set(row["package"]["providers"]),
                              self.analyzer.COMPONENT_IDS)
             self.assertIn("report", row["boot_provider"])
+            self.assertIn("report", row["em9305_provider"])
             self.assertIn("package_report", row["package"])
             self.assertIn("flash_plan", row["package"])
             self.assertEqual(

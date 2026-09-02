@@ -72,7 +72,7 @@ class BootloaderMspiSchedHiprioTests(unittest.TestCase):
         self.assertEqual(
             report["production"]["source_owned_bytes"]
             + report["production"]["retained_official_bytes"],
-            147350,
+            146994,
         )
         self.assertEqual(report["production"]["next_frontier"], 0x00424120)
         self.assertEqual(report["next_frontier"], {

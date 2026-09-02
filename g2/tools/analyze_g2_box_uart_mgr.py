@@ -293,8 +293,8 @@ def analyze(image=IMAGE):
     if (
         report["overlay"]["size"] != 362272
         or report["overlay"]["sha256"] != "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
-        or report["component"]["size"] != 3885668
-        or report["component"]["sha256"] != "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5"
+        or report["component"]["size"] != 3956468
+        or report["component"]["sha256"] != "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"
     ):
         raise c.AuditError("case-UART production component changed")
     report_leaves = [
@@ -310,26 +310,26 @@ def analyze(image=IMAGE):
     provider = manifest["component_overrides"]["apollo_main"]["provider"]
     regions = manifest["component_overrides"]["apollo_main"]["regions"]
     if (
-        provider.get("size") != 3885668
-        or provider.get("sha256") != "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5"
+        provider.get("size") != 3956468
+        or provider.get("sha256") != "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"
         or len([item for item in regions if item["name"].startswith("box_uart_mgr_")]) != 12
     ):
         raise c.AuditError("case-UART package ownership manifest changed")
     if (
-        PACKAGE.stat().st_size != 4678740
-        or _sh(PACKAGE.read_bytes()) != "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a"
+        PACKAGE.stat().st_size != 4750576
+        or _sh(PACKAGE.read_bytes()) != "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6"
     ):
         raise c.AuditError("case-UART production package changed")
     flash = json.loads(FLASH_PLAN.read_text())
     if (
-        FLASH_PLAN.stat().st_size != 4586947
-        or _sh(FLASH_PLAN.read_bytes()) != "0180ded6475c22f46ec79dd4985c8194d73f67f9827100dc5c2358f204da8f55"
+        FLASH_PLAN.stat().st_size != 4881053
+        or _sh(FLASH_PLAN.read_bytes()) != "e540570208e616cc3de20af268da55d17fbf59f918aee143be8a902449253262"
         or (
             len(flash["flash_regions"]),
             len(flash["unresolved_flash_regions"]),
             len(flash["container_only_regions"]),
             len(flash["protected_regions"]),
-            ) != (6586, 0, 6, 6)
+            ) != (7006, 0, 6, 6)
     ):
         raise c.AuditError("case-UART production flash plan changed")
     return {

@@ -345,6 +345,7 @@ class ResolveLeafProfileRecordTests(unittest.TestCase):
                 "closure_sha256": "3" * 64,
                 "rodata_offset": 40,
             },
+            "stock": {"size": 40, "sha256": "9" * 64},
             "relocations": [
                 {
                     "offset": 2,
@@ -380,6 +381,7 @@ class ResolveLeafProfileRecordTests(unittest.TestCase):
                         "closure_sha256": "7" * 64,
                         "rodata_offset": 64,
                     },
+                    "stock": {"size": 60, "sha256": "a" * 64},
                     "relocations": [
                         {
                             "offset": 10,
@@ -413,6 +415,7 @@ class ResolveLeafProfileRecordTests(unittest.TestCase):
         )
 
         self.assertIs(effective["expected"], profile["expected"])
+        self.assertIs(effective["stock"], profile["stock"])
         self.assertIs(effective["relocations"], profile["relocations"])
         self.assertEqual(effective["closure"]["text_section"], ".text.profile")
         self.assertEqual(
@@ -578,6 +581,66 @@ class ResolveLeafProfileRecordTests(unittest.TestCase):
             ],
         )
         self.assertIn("other-clang", leaf["toolchain_profiles"])
+
+    def test_in_place_record_preserves_profile_relocation_offsets(self) -> None:
+        leaf = {
+            "function": "in_place_leaf",
+            "expected": {
+                "size": 8,
+                "sha256": "a" * 64,
+                "unrelocated_sha256": "b" * 64,
+            },
+            "relocations": [
+                {
+                    "offset": 2,
+                    "type": "R_ARM_THM_CALL",
+                    "symbol": "target",
+                    "symbol_type": "STT_FUNC",
+                    "target_address": 0x00420000,
+                }
+            ],
+        }
+        report = {
+            "in_place_leaves": [
+                {
+                    "extraction": {
+                        "function": "in_place_leaf",
+                        "unrelocated_sha256": "d" * 64,
+                        "relocations": [
+                            {
+                                "offset": 4,
+                                "type": "R_ARM_THM_CALL",
+                                "symbol": "target",
+                                "symbol_type": "STT_FUNC",
+                                "target_address": 0x00420000,
+                            }
+                        ],
+                    },
+                    "pins": {"size": 8, "sha256": "c" * 64},
+                }
+            ]
+        }
+        data = {"in_place_leaves": [leaf]}
+        apollo_overlay.record_leaf_profile_pins(
+            data,
+            "linux-clang",
+            "Homebrew clang version 22.1.8",
+            report,
+        )
+        recorded = leaf["toolchain_profiles"]["linux-clang"]
+        self.assertEqual(
+            recorded["expected"],
+            {
+                "size": 8,
+                "sha256": "c" * 64,
+                "unrelocated_sha256": "d" * 64,
+            },
+        )
+        self.assertEqual(recorded["relocations"][0]["offset"], 4)
+        self.assertEqual(
+            recorded["relocations"][0]["target_address"],
+            0x00420000,
+        )
 
     def test_record_preserves_external_prel_target_and_repairs_local_closure_target(
         self,
@@ -854,26 +917,26 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 360_578,
+                "overlay_size": 362_272,
                 "overlay_sha256": (
-                    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
+                    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
                 ),
-                "component_size": 3_883_974,
+                "component_size": 3_956_468,
                 "component_sha256": (
-                    "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
+                    "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"
                 ),
             },
         )
         self.assertEqual(
             config["toolchain_profiles"]["linux-clang"]["expected"],
             {
-                "overlay_size": 152_912,
+                "overlay_size": 154_604,
                 "overlay_sha256": (
-                    "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20"
+                    "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6"
                 ),
-                "component_size": 3_676_308,
+                "component_size": 3_956_468,
                 "component_sha256": (
-                    "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7"
+                    "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7"
                 ),
             },
         )
@@ -883,15 +946,15 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
                 manifest["package"]["expected_sha256"],
             ),
             (
-                4_677_046,
-                "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
+                4_750_576,
+                "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
             ),
         )
         self.assertEqual(
             manifest["package"]["profiles"]["linux-clang"],
             {
-                "expected_size": 4_469_364,
-                "expected_sha256": "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
+                "expected_size": 4_750_560,
+                "expected_sha256": "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
             },
         )
 

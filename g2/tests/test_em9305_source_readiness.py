@@ -90,23 +90,23 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         self.assertEqual(sum(residual["readiness_segment_counts"].values()), 175)
         self.assertEqual(sum(residual["readiness_bytes"].values()), 33_658)
 
-    def test_completion_mapping_keeps_concrete_source_as_an_unrouted_candidate(self) -> None:
+    def test_completion_mapping_routes_concrete_source_and_keeps_retained_boundary(self) -> None:
         mapping = self.result["completion_bucket_mapping"]
-        self.assertEqual(mapping["component_bytes"], 211_948)
+        self.assertEqual(mapping["component_bytes"], 212_984)
         self.assertEqual(mapping["buckets"], {
-            "production_source": 0,
-            "generated_or_reconstructible": 0,
-            "candidate_source_not_routed": 1_240,
-            "typed_retained_or_external": 210_708,
+            "production_source": 1_174,
+            "generated_or_reconstructible": 1_226,
+            "candidate_source_not_routed": 0,
+            "typed_retained_or_external": 210_584,
             "unclassified": 0,
         })
-        self.assertFalse(mapping["candidate_production_routed"])
-        self.assertEqual(mapping["release_blocking_bytes"], 211_948)
+        self.assertTrue(mapping["candidate_production_routed"])
+        self.assertEqual(mapping["release_blocking_bytes"], 210_584)
 
-    def test_metaware_arc_target_compile_is_durable_but_not_routing(self) -> None:
+    def test_metaware_arc_target_compile_and_production_route_are_durable(self) -> None:
         audit = self.result["metaware_runtime_audit"]
         self.assertFalse(audit["additive_to_residual_accounting"])
-        self.assertEqual(audit["status"], "candidate-qualified")
+        self.assertEqual(audit["status"], "production-routed")
         self.assertEqual(audit["candidate_source_bytes"], 980)
         self.assertTrue(audit["arcv2_em_target_compiled"])
         self.assertEqual(audit["arcv2_em_undefined_symbols"], [])
@@ -115,8 +115,8 @@ class Em9305SourceReadinessTests(unittest.TestCase):
             audit["arcv2_em_build_receipt"],
             "tools/manifests/em9305-arc-candidate-build-summary.json",
         )
-        self.assertFalse(audit["candidate_production_routed"])
-        self.assertEqual(len(audit["remaining_software_blockers"]), 3)
+        self.assertTrue(audit["candidate_production_routed"])
+        self.assertEqual(audit["remaining_software_blockers"], [])
         self.assertEqual(
             audit["hardware_validation"],
             "blocked by unavailable physical evidence",
@@ -155,7 +155,7 @@ class Em9305SourceReadinessTests(unittest.TestCase):
                             for row in rows))
 
         summary = json.loads(self.analyzer.FINAL_SUMMARY.read_text())
-        self.assertEqual(summary["schema_version"], 5)
+        self.assertEqual(summary["schema_version"], 6)
         self.assertEqual(summary["residual_span_count"], 175)
         self.assertEqual(summary["residual_bytes"], 33_658)
         self.assertEqual(summary["unclassified_spans"], 0)
@@ -181,20 +181,20 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         self.assertEqual(sum(summary["readiness_segment_counts"].values()), 175)
         self.assertEqual(sum(summary["readiness_bytes"].values()), 33_658)
         self.assertEqual(summary["completion_buckets"], {
-            "production_source": 0,
-            "generated_or_reconstructible": 0,
-            "candidate_source_not_routed": 1_240,
-            "typed_retained_or_external": 210_708,
+            "production_source": 1_174,
+            "generated_or_reconstructible": 1_226,
+            "candidate_source_not_routed": 0,
+            "typed_retained_or_external": 210_584,
             "unclassified": 0,
         })
-        self.assertEqual(sum(summary["completion_buckets"].values()), 211_948)
+        self.assertEqual(sum(summary["completion_buckets"].values()), 212_984)
 
     def test_final_summary_hardware_and_release_shape_is_fail_closed(self) -> None:
         summary = json.loads(self.analyzer.FINAL_SUMMARY.read_text())
         self.assertFalse(summary["source_complete"])
         self.assertFalse(summary["release"])
-        self.assertFalse(summary["candidate_production_routed"])
-        self.assertEqual(summary["release_blocking_bytes"], 211_948)
+        self.assertTrue(summary["candidate_production_routed"])
+        self.assertEqual(summary["release_blocking_bytes"], 210_584)
         self.assertEqual(
             summary["hardware_validation"], "blocked by unavailable physical evidence",
         )
@@ -216,12 +216,12 @@ class Em9305SourceReadinessTests(unittest.TestCase):
             self.result["deployment_package_audit"],
         )
 
-    def test_deployment_package_wrapper_is_closed_without_source_image_claim(self) -> None:
+    def test_deployment_package_routes_mixed_provider_without_source_complete_claim(self) -> None:
         audit = self.result["deployment_package_audit"]
         self.assertFalse(audit["additive_to_residual_accounting"])
         self.assertEqual(
             audit["status"],
-            "record-package-software-closed-source-image-incomplete",
+            "mixed-provider-production-routed-source-incomplete",
         )
         self.assertEqual(audit["record_count"], 4)
         self.assertEqual(audit["erase_sector_count"], 29)
@@ -230,7 +230,12 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         self.assertTrue(audit["software_package_complete"])
         self.assertFalse(audit["source_records_complete"])
         self.assertFalse(audit["source_image_complete"])
-        self.assertFalse(audit["production_routed"])
+        self.assertTrue(audit["production_routed"])
+        self.assertEqual(audit["provider_size"], 212_984)
+        self.assertEqual(
+            audit["provider_sha256"],
+            "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42",
+        )
         self.assertEqual(audit["hardware_operations"], [])
         self.assertEqual(
             audit["hardware_validation"],

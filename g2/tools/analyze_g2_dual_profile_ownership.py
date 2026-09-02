@@ -46,6 +46,13 @@ BOOT_REPORTS = {
         / "build/canonical-provider/linux-clang/apollo_bootloader/build-report.json"
     ),
 }
+EM9305_REPORT = ROOT / "components/em9305/source_overlay/build/build-report.json"
+EM9305_PROVIDER = {
+    "kind": "source_build",
+    "path": "components/em9305/source_overlay/build/firmware_ble_em9305.bin",
+    "size": 212_984,
+    "sha256": "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42",
+}
 PACKAGE_DIRS = {
     profile: ROOT / f"build/postapply-package-{suffix}"
     for profile, suffix in (("apple-clang", "apple"), ("linux-clang", "linux"))
@@ -70,6 +77,13 @@ CANDIDATE = "candidate_source_not_routed"
 RETAINED = "typed_retained_or_external"
 UNCLASSIFIED = "unclassified"
 BUCKETS = (PRODUCTION, GENERATED, CANDIDATE, RETAINED, UNCLASSIFIED)
+EM9305_ACCOUNTING = {
+    PRODUCTION: 1_174,
+    GENERATED: 1_226,
+    CANDIDATE: 0,
+    RETAINED: 210_584,
+    UNCLASSIFIED: 0,
+}
 GENERATED_ADDRESS_STATUSES = frozenset(
     {
         "generated_alignment",
@@ -89,7 +103,6 @@ COMPONENT_IDS = frozenset(
 )
 ASSESSMENT_NAMES = {
     "codec": "GX8002 codec/DSP",
-    "ble_em9305": "EM9305 BLE controller",
     "touch": "PSoC touch controller",
     "case": "STM32 charging case",
 }
@@ -270,7 +283,7 @@ def _canonical_main(
     source_digest = _digest(first_source.get("sha256"), f"{profile} source closure")
     _require(
         isinstance(first_source.get("entries"), list)
-        and len(first_source["entries"]) == 879,
+        and len(first_source["entries"]) == 1202,
              f"{profile}: source-input entry count changed")
     _require(first.get("final") == second.get("final"),
              f"{profile}: A/B final identity differs")
@@ -333,6 +346,61 @@ def _boot(profile: str) -> tuple[dict[str, int], dict[str, Any]]:
         "component_size": accounting["size"],
         "component_sha256": _digest(component.get("sha256"), f"{profile} boot digest"),
         "report": report_record,
+    }
+
+
+def _em9305() -> tuple[dict[str, Any], dict[str, Any]]:
+    """Authenticate the mixed-source EM9305 production-provider receipt."""
+    report, report_record = _read_with_record(
+        EM9305_REPORT, "EM9305 production provider report"
+    )
+    _require(
+        report.get("status") == "em9305-runtime-production-routed"
+        and report.get("production_routed") is True,
+        "EM9305 production route is not admitted",
+    )
+    provider = report.get("provider")
+    _require(isinstance(provider, dict), "EM9305 provider receipt missing")
+    expected_receipt = {key: EM9305_PROVIDER[key] for key in ("path", "size", "sha256")}
+    _require(provider == expected_receipt, "EM9305 provider receipt identity changed")
+    artifact = _artifact(
+        ROOT,
+        {"artifact": provider["path"], "size": provider["size"],
+         "sha256": provider["sha256"]},
+        "EM9305 production provider",
+    )
+    accounting = report.get("accounting")
+    expected_report_accounting = {
+        "production_source_bytes": EM9305_ACCOUNTING[PRODUCTION],
+        "generated_or_reconstructible_bytes": EM9305_ACCOUNTING[GENERATED],
+        "candidate_source_not_routed_bytes": EM9305_ACCOUNTING[CANDIDATE],
+        "typed_retained_or_external_bytes": EM9305_ACCOUNTING[RETAINED],
+        "unclassified_bytes": EM9305_ACCOUNTING[UNCLASSIFIED],
+    }
+    _require(
+        accounting == expected_report_accounting,
+        "EM9305 production-provider accounting changed",
+    )
+    _require(
+        sum(EM9305_ACCOUNTING.values()) == EM9305_PROVIDER["size"],
+        "EM9305 production-provider accounting does not conserve",
+    )
+    _require(
+        report.get("hardware_validation")
+        == "blocked by unavailable physical evidence"
+        and report.get("hardware_operations") == [],
+        "EM9305 hardware-evidence boundary changed",
+    )
+    return {
+        "size": EM9305_PROVIDER["size"],
+        "buckets": dict(EM9305_ACCOUNTING),
+    }, {
+        "provider": dict(EM9305_PROVIDER),
+        "artifact": artifact,
+        "report": report_record,
+        "production_routed": True,
+        "hardware_validation": report["hardware_validation"],
+        "hardware_operations": [],
     }
 
 
@@ -464,6 +532,17 @@ def _package(profile: str) -> tuple[dict[str, Any], dict[str, dict[str, int]]]:
         _require(not mixed_spans, "Apple plan unexpectedly claims a coarse profile span")
     else:
         expected_spans = [
+            {
+                "component": "ble_em9305",
+                "component_file_offset": 0,
+                "end_exclusive": provider_sizes["ble_em9305"],
+                "size": provider_sizes["ble_em9305"],
+                "classification": "typed_mixed_profile_ownership",
+                "reason": (
+                    "exact bytes and addresses; no complete per-byte "
+                    "source-vs-generated-vs-retained mask is claimed"
+                ),
+            },
             {
                 "component": "apollo_bootloader",
                 "component_file_offset": 148599,
@@ -662,6 +741,16 @@ def _observed() -> dict[str, Any]:
                  f"{display_name}: classification is incomplete")
         common[component_id] = {"size": size, "buckets": normalized}
 
+    em9305, em9305_identity = _em9305()
+    em9305_live = components.get("ble_em9305")
+    _require(isinstance(em9305_live, dict), "EM9305 live row missing")
+    _require(
+        em9305_live.get("size") == em9305["size"]
+        and em9305_live.get("buckets") == em9305["buckets"]
+        and em9305_live.get("classification_complete") is True,
+        "EM9305 live readiness differs from its production-provider receipt",
+    )
+
     apple_main_row = components.get("apollo_main")
     _require(isinstance(apple_main_row, dict), "Apple main live row missing")
     nemavg_boundary = _nemavg_boundary(apple_main_row.get("details"))
@@ -693,7 +782,7 @@ def _observed() -> dict[str, Any]:
         raise OwnershipError(f"current canonical source closure: {error}") from error
     _require(
         isinstance(current_source_inputs.get("entries"), list)
-        and len(current_source_inputs["entries"]) == 879,
+        and len(current_source_inputs["entries"]) == 1202,
         "current canonical source closure entry count changed",
     )
 
@@ -725,6 +814,10 @@ def _observed() -> dict[str, Any]:
                 "size": boot_identity["component_size"],
                 "sha256": boot_identity["component_sha256"]},
                  f"{profile}: packaged boot differs from its report")
+        _require(
+            package["providers"]["ble_em9305"] == EM9305_PROVIDER,
+            f"{profile}: packaged EM9305 differs from its production receipt",
+        )
         for component_id, expected in common_providers.items():
             _require(
                 package["providers"][component_id] == expected,
@@ -769,6 +862,7 @@ def _observed() -> dict[str, Any]:
                     0, boot["retained"],
                 ),
             },
+            "ble_em9305": em9305,
             **common,
         }
         for component_id, row in component_rows.items():
@@ -787,6 +881,7 @@ def _observed() -> dict[str, Any]:
         profile_rows[profile] = {
             "main_observation": main_identity,
             "boot_provider": boot_identity,
+            "em9305_provider": em9305_identity,
             "package": package,
             "components": component_rows,
             "nemavg_stroke_cap_boundary": nemavg_boundary,
@@ -818,7 +913,7 @@ def _observed() -> dict[str, Any]:
         and profile_rows["linux-clang"]
             ["per_byte_ownership_mask_complete"] is False
         and len(profile_rows["linux-clang"]["package"]
-                ["typed_mixed_profile_spans"]) == 2,
+                ["typed_mixed_profile_spans"]) == 3,
         "dual-profile per-byte ownership authority policy changed",
     )
 
@@ -837,7 +932,7 @@ def _observed() -> dict[str, Any]:
     _require(gates.get("hardware_validation") == "blocked by unavailable physical evidence",
              "hardware validation policy changed")
     return {
-        "schema_version": 3,
+        "schema_version": 4,
         "target": "G2 s200_v2.2.6.10 dual-profile ownership reconciliation",
         "analysis_mode": (
             "offline read-only accounting; no hardware, network, signing, flashing, "
@@ -889,6 +984,7 @@ def _checked_projection(report: dict[str, Any]) -> dict[str, Any]:
         profile_rows[profile] = {
             "main_observation": row["main_observation"],
             "boot_provider": row["boot_provider"],
+            "em9305_provider": row["em9305_provider"],
             "package": {key: package[key] for key in sorted(package_keys)},
             "nemavg_stroke_cap_boundary": row["nemavg_stroke_cap_boundary"],
             "aggregate_buckets": row["aggregate_buckets"],

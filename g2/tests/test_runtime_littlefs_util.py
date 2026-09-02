@@ -290,16 +290,17 @@ EXPECTED_FUNCTION_OFFSETS = {
 }
 EXPECTED_AGGREGATE = {
     "main": {
-        "overlay_size": 360_578,
+        "overlay_size": 362_272,
         "overlay_sha256": (
-            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
+            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
         ),
-        "component_size": 3_883_974,
+        "component_size": 3_956_468,
         "component_sha256": (
-            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
+            "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"
         ),
+        "stage_component_size": 3_885_668,
         "stage_component_sha256": (
-            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
+            "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
         ),
         "text_size": 109_592,
         "rodata_size": 3_996,
@@ -314,7 +315,7 @@ EXPECTED_AGGREGATE = {
         ),
         "component_size": 163_840,
         "component_sha256": (
-            "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad"
+            "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2"
         ),
         "text_size": 204,
         "rodata_size": 0,
@@ -1045,7 +1046,10 @@ class RuntimeLittlefsUtilTests(unittest.TestCase):
                 )
                 self.assertEqual(
                     report["component"]["size"],
-                    aggregate["component_size"],
+                    aggregate.get(
+                        "stage_component_size",
+                        aggregate["component_size"],
+                    ),
                 )
                 self.assertEqual(
                     report["overlay"]["sha256"],

@@ -10,13 +10,13 @@ unresolved.
 
 | Component | Production source | Generated | Candidate, not routed | Typed retained/external | Unclassified | Total |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Apollo main (Apple authority) | 394,928 | 409,348 | 0 | 3,081,392 | 0 | 3,885,668 |
-| Apollo bootloader (Apple authority) | 27,925 | 16,490 | 0 | 119,425 | 0 | 163,840 |
+| Apollo main (Apple authority) | 415,344 | 476,036 | 0 | 3,065,088 | 0 | 3,956,468 |
+| Apollo bootloader (Apple authority) | 59,009 | 16,846 | 0 | 87,985 | 0 | 163,840 |
 | GX8002 codec | 0 | 92 | 0 | 326,000 | 0 | 326,092 |
-| EM9305 | 0 | 0 | 1,240 | 210,708 | 0 | 211,948 |
+| EM9305 | 1,174 | 1,226 | 0 | 210,584 | 0 | 212,984 |
 | Touch | 0 | 512 | 14,510 | 19,442 | 0 | 34,464 |
 
-The Apollo-main release-blocking partition is exactly 3,081,392 typed retained
+The Apollo-main release-blocking partition is exactly 3,065,088 typed retained
 bytes, with zero candidate-only bytes. All three NemaVG stroke-cap entries are
 production-routed over 6,614 stock bytes: 1,668-byte `draw_start_cap`,
 1,640-byte `draw_end_cap`, and 3,306-byte `draw_caps`. The current retained
@@ -32,7 +32,7 @@ Two corroborating values are deliberately non-additive:
   evidence overlaps the authoritative origin/readiness mask and must never be
   added to a component or aggregate total.
 
-The bootloader's 119,425-byte retained complement is derived from all 585
+The bootloader's 87,985-byte retained complement is derived from all current
 current, contiguous core-manifest intervals. The two 52-byte clock-manager
 stock leaves are production-routed source evidence, not candidates; they add
 zero bytes to the candidate bucket.
@@ -55,10 +55,10 @@ remain unavailable for open production routing.
 
 ## EM9305 and GX8002
 
-EM9305's 1,240 reviewed MIT concrete-source bytes are now mapped to
-`candidate_source_not_routed`, not retained. The remaining 210,708 component
-bytes stay typed retained/external. Because the candidate has not been routed,
-all 211,948 component bytes remain release-blocking.
+EM9305's 1,240 reviewed MIT concrete-source stock bytes are production-routed
+through the checked ARCv2-EM overlay. The emitted provider accounts them as
+1,174 compiled-source bytes plus 1,226 generated/reconstructible bytes; the
+remaining 210,584 bytes stay typed retained/external and release-blocking.
 
 The GX8002 external-provider boundary is exactly 326,000 bytes: 190,912
 executable bytes, 5,124 initialized runtime-data bytes, 9,164 gxNPU command
@@ -69,17 +69,17 @@ payloads are openly available or redistributable.
 ## Dual-profile authority limit
 
 The canonical Apple profile remains the sole current per-byte ownership-mask
-authority. Linux has exact component/package totals and two exact
+authority. Linux has exact component/package totals and three exact
 `typed_mixed_profile_ownership` spans, but
 `per_byte_ownership_mask_complete=false`; no Linux per-byte ownership is
-inferred or fabricated. The current aggregate includes the EM9305 1,240-byte
-candidate and the fully routed NemaVG stroke-cap endpoints; current package
+inferred or fabricated. The current aggregate includes the production-routed
+EM9305 frontier and the fully routed NemaVG stroke-cap endpoints; current package
 sizes and release-blocking totals are:
 
 | Profile | Source | Generated | Candidate | Retained | Unclassified | Payload |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Apple | 422,853 | 426,474 | 30,636 | 3,797,833 | 0 | 4,677,796 |
-| Linux | 205,291 | 136,046 | 30,636 | 4,098,139 | 0 | 4,470,112 |
+| Apple | 475,527 | 494,744 | 29,396 | 3,749,965 | 0 | 4,749,632 |
+| Linux | 257,897 | 411,980 | 29,396 | 4,050,343 | 0 | 4,749,616 |
 
 The checked dual companion must be refreshed only through its explicit
 maintainer route after all canonical inputs are quiescent. This audit does not

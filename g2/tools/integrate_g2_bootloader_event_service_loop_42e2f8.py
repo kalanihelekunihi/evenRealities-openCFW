@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+"""Register the source-owned retained-event initialization and service loop."""
+from __future__ import annotations
+import csv,hashlib,io,json
+from pathlib import Path
+R=Path(__file__).resolve().parent.parent;O=R/"components/bootloader/core_overlay/overlay.json";S=R/"components/bootloader/core_overlay/runtime_event_service_loop_42e2f8.c";B=R/"blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin";C=R/"tools/manifests/g2-bootloader-post-mspi-frontier.tsv";BASE=0x410000
+SS=3318;SH="bf5d5e81f717225c2382254443964a2d4b50fa5bb8b41ce001bed83f92dca142";FN="open_cfw_bootloader_event_service_loop_42e2f8";A=0x42E2F8;Z=0x42E39A;BH="d735b2b537e7adbf8183b564920a0ccca1fbbeb67a10083476918e6e7d7a84f6";UH="911313f6e17e0ad15a23b9773553ac00457107137008d941eb0e3a9db15be559";FL=["-mcpu=cortex-m55","-mthumb","-Oz","-ffreestanding","-fno-builtin","-ffunction-sections","-fdata-sections","-fno-unwind-tables","-fno-asynchronous-unwind-tables","-Wall","-Wextra","-Werror","-fno-ident","-mllvm","-enable-machine-outliner=never"]
+RS=((0x06,"open_cfw_bootloader_event_flags_init_42e254",0x42E254),(0x0A,"open_cfw_bootloader_noop_callback_42e276",0x42E276),(0x0E,"open_cfw_bootloader_event_runtime_setup_42e278",0x42E278),(0x12,"open_cfw_bootloader_event_wait_one_wrapper_42e2ea",0x42E2EA),(0x16,"open_cfw_bootloader_retained_state_probe_42e224",0x42E224),(0x2E,"open_cfw_bootloader_log_4176ce",0x4176CE),(0x38,"open_cfw_bootloader_memset_wrapper_426c10",0x426C10),(0x42,"open_cfw_bootloader_runtime_context_create_42dca2",0x42DCA2),(0x58,"open_cfw_bootloader_log_4176ce",0x4176CE),(0x62,"open_cfw_bootloader_memset_wrapper_426c10",0x426C10),(0x6C,"open_cfw_bootloader_runtime_context_create_42dca2",0x42DCA2),(0x74,"open_cfw_bootloader_noop_callback_42e39a",0x42E39A),(0x84,"open_cfw_bootloader_event_wait_4162c4",0x4162C4),(0x8A,"open_cfw_bootloader_runtime_time_4160e8",0x4160E8))
+def sha(x:bytes)->str:return hashlib.sha256(x).hexdigest()
+def main()->int:
+ source=S.read_bytes();boot=B.read_bytes()
+ if (len(source),sha(source))!=(SS,SH):raise SystemExit("event-service source changed")
+ if sha(boot[A-BASE:Z-BASE])!=BH:raise SystemExit("event-service body changed")
+ record={"path":S.relative_to(R).as_posix(),"size":SS,"sha256":SH,"license":"MIT","origin":"clean-room retained-event initialization and bounded-wait service loop","evidence":"docs/research/g2-bootloader-event-service-loop-42e2f8-source-closure.md"};rr=[{"offset":o,"type":"R_ARM_THM_CALL","symbol":s,"symbol_type":"STT_NOTYPE","target_address":t} for o,s,t in RS];pins={"size":Z-A,"sha256":BH,"unrelocated_sha256":UH};entry={"function":FN,"runtime_address":A,"source":record,"toolchain":{"target":"arm-none-eabi","reviewed_version_prefix":"Apple clang version 21.0.0","flags":FL},"strict_relocation_contract":True,"expected":pins,"stock":{"size":Z-A,"sha256":BH},"relocations":rr,"allow_discarded_alloc_sections":True,"toolchain_profiles":{"linux-clang":{"reviewed_version_prefix":"Homebrew clang version 22.1.8","expected":pins,"stock":{"size":Z-A,"sha256":BH},"relocations":rr}}}
+ overlay=json.loads(O.read_text());overlay["in_place_leaves"]=sorted([x for x in overlay["in_place_leaves"] if x.get("function")!=FN]+[entry],key=lambda x:int(x["runtime_address"]));tmp=O.with_name(f".{O.name}.tmp");tmp.write_text(json.dumps(overlay,indent=2)+"\n");tmp.replace(O)
+ with C.open(newline="") as f:reader=csv.DictReader(f,delimiter="\t");fields=list(reader.fieldnames or ());rows=list(reader)
+ row=next((x for x in rows if int(x["start"],16)==A),None)
+ if row is None or int(row["end"],16)!=Z:raise SystemExit("event-service census changed")
+ row.update({"kind":"source_function","name":"event_service_loop_42e2f8","disposition":"source_owned_production","provider":"clean-room retained-event service loop","license_status":"MIT","evidence":"exact dual-toolchain body with portable bounded-step model"});out=io.StringIO(newline="");writer=csv.DictWriter(out,fieldnames=fields,delimiter="\t",lineterminator="\n");writer.writeheader();writer.writerows(rows);C.write_text(out.getvalue());print("registered retained-event service loop");return 0
+if __name__=="__main__":raise SystemExit(main())

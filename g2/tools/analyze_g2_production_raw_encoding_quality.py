@@ -41,12 +41,15 @@ APOLLO_FUNCTIONS = {
 # These files were executable stock bytes rendered as C ``.byte`` directives.
 # They are intentionally absent from the public tree.  The digest-only records
 # preserve the audit trail without redistributing the transcription.
-REMOVED_TRANSCRIPTS = {
+REPLACED_TRANSCRIPTS = {
     "components/bootloader/core_overlay/runtime_mspi_control_4251c0.c":
         (24638, "b46f494c5e4b35a64fa9a13c6d256c720f413a4aa29a57f0b9ffdcb636d5a696", 4384),
+}
+REMOVED_TRANSCRIPTS = {
     "components/bootloader/core_overlay/runtime_mspi_transfer_interrupt_4262e0.c":
         (3798, "1b800153d9619810fa31a3186e003fbbf4902aadf3c95b36338bca2eaa630855", 546),
 }
+RETIRED_TRANSCRIPTS = REPLACED_TRANSCRIPTS | REMOVED_TRANSCRIPTS
 
 
 class AuditError(RuntimeError):
@@ -96,6 +99,16 @@ def analyze() -> dict:
                 f"removed executable transcript returned to public source: {relative}")
         require(relative not in boot_routed,
                 f"removed executable transcript returned to production routing: {relative}")
+    for relative in REPLACED_TRANSCRIPTS:
+        replacement = ROOT / relative
+        require(replacement.is_file() and relative in boot_routed,
+                f"structured transcript replacement is not production-routed: {relative}")
+        data = replacement.read_bytes()
+        require((len(data), sha256(data)) ==
+                (171600, "1c94d258f899221ed519c0025beeb350f3e1b3bedbc71386f554c24978561113"),
+                f"structured transcript replacement changed: {relative}")
+        require(sum(_directive_bytes(data.decode()).values()) == 0,
+                f"structured replacement contains raw executable directives: {relative}")
 
     for path, functions in APOLLO_FUNCTIONS.items():
         require(path in apollo_sources, f"Apollo raw-directive source is no longer routed: {path}")
@@ -170,9 +183,9 @@ def analyze() -> dict:
         "fully_raw_byte_body_bytes": sum(
             row["byte_directive_bytes"] for row in rows),
         "public_raw_executable_transcript_files": 0,
-        "removed_public_transcript_files": len(REMOVED_TRANSCRIPTS),
+        "removed_public_transcript_files": len(RETIRED_TRANSCRIPTS),
         "removed_public_transcript_executable_bytes": sum(
-            row[2] for row in REMOVED_TRANSCRIPTS.values()),
+            row[2] for row in RETIRED_TRANSCRIPTS.values()),
     }
     require(metrics == {
         "production_routed_sources_with_directives": 2,
@@ -202,9 +215,13 @@ def analyze() -> dict:
                 "deleted_source_text_bytes": record[0],
                 "deleted_source_sha256": record[1],
                 "retained_official_executable_bytes": record[2],
-                "disposition": "absent_from_public_source_and_production_routing; authenticated official bytes retained",
+                "disposition": (
+                    "historical_raw_transcript_replaced_by_structured_production_c; authenticated stock boundary retained"
+                    if path in REPLACED_TRANSCRIPTS else
+                    "absent_from_public_source_and_production_routing; authenticated official bytes retained"
+                ),
             }
-            for path, record in sorted(REMOVED_TRANSCRIPTS.items())
+            for path, record in sorted(RETIRED_TRANSCRIPTS.items())
         ],
         "hardware_validation": "blocked by unavailable physical evidence",
         "production_files_modified": [],

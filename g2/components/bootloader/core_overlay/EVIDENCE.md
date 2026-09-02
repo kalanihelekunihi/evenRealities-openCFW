@@ -2580,6 +2580,157 @@ with debugger evidence must exercise those paths. The sequential frontier is
 `0x004240AA`; firmware-wide
 completeness is not claimed.
 
+## Hardware-state decoder in-place evidence
+
+`runtime_hw_state_decode_42b6b8.c` provides the complete authenticated
+770-byte service at `[0x0042B6B8,0x0042B9BA)` as relocation-free production
+MIT C. Both reviewed compilers reproduce every stock byte. The sole caller,
+absence of interior/stored ingress, eight literals, and 738/770-byte
+Apollo-main analogue are pinned. A 16,384-case portable differential covers
+the composed nibbles, 24 primary states, 12 secondary states, alternate result
+family, and both rejection stages.
+
+The census now records 186 source spans / 25,688 bytes and 1 unresolved
+executable span / 1,032 bytes. Live retained state, MMIO, peripheral behavior,
+concurrency, reset, and cold boot are blocked by unavailable physical evidence.
+No hardware operation occurred, and firmware-wide completeness is not claimed.
+
+## SPOT-manager state-transition in-place evidence
+
+`runtime_spotmgr_state_transition_42b294.c` provides the complete authenticated
+1,032-byte service at `[0x0042B294,0x0042B69C)` as production MIT C. Both
+reviewed compilers reproduce every stock byte under 12 strict provider
+relocations. The sole caller, absence of interior/stored ingress, 15 literals,
+and 996/1,032-byte Apollo-main analogue are pinned. Portable behavior covers
+equal-state, forward start/publish, interpolation/wait, wake/interrupt, reverse
+restoration, and finalization paths.
+
+The exhaustive census now records 187 source spans / 26,720 bytes and zero
+unresolved executable spans / zero unresolved executable bytes. The complete
+163,840-byte provider is buildable and byte-stable. Live SRAM, MMIO, trim,
+power, timing, interrupts, concurrency, reset, and cold boot are blocked by
+unavailable physical evidence. No hardware operation occurred; firmware-wide
+functional completeness is not claimed.
+
+## Hardware-context claim fixed-address evidence
+
+The 114-byte function at `0x0042C4C6..0x0042C538` is relocation-free,
+byte-exact in-place MIT C under Apple clang 21 and Homebrew clang 22. Index and
+output validation, already-claimed rejection, ownership-bit transformation,
+`0x123456` magic, `0x8A8` context stride, the call at `0x00430514`, and the
+110-of-114-byte Apollo-main analogue at `0x0055C2BC` are pinned. Stock, Apple,
+Linux, and unrelocated SHA-256 are
+`9727ea0e7e8786ddfab4618f79b101d91192e7291034937b15da4a9246d17db2`.
+
+The frontier now records 161 source spans / 16,218 bytes and 26 unresolved
+executable spans / 10,502 bytes. Component accounting is 48,507 source-owned,
+98,487 opaque, 16 alignment, and 16,830 generated-patch bytes; the canonical
+provider identity is unchanged. Live retained-SRAM ownership, concurrency,
+peripheral lifecycle, reset, and cold-boot behavior is blocked by unavailable
+physical evidence. Firmware-wide completeness is not claimed.
+
+## Hardware-context enable fixed-address evidence
+
+The 258-byte function at `0x0042C538..0x0042C63A` is exact in-place MIT C
+under Apple clang 21 and Homebrew clang 22 after three strict provider
+relocations. Context magic/active checks, status routing, optional command-queue
+initialization, bounded status wait, active-bit publication, failure rollback,
+the call at `0x0043056C`, and the 246-of-258-byte Apollo-main analogue at
+`0x0055C32E` are pinned. Relocated SHA-256 is
+`0183cf1cab1b0089fb0b49f71137bf868309198abd9319ca1e35f794ba430f2a`;
+unrelocated SHA-256 is
+`0541dca0e2b4a414177436b877cf5473f5b854a12b96d4d98724747ac1293da4`.
+
+The frontier now records 162 source spans / 16,476 bytes and 25 unresolved
+executable spans / 10,244 bytes. Component accounting is 48,765 source-owned,
+98,229 opaque, 16 alignment, and 16,830 generated-patch bytes; the canonical
+provider identity is unchanged. Live retained-SRAM, MMIO, command-queue,
+timing, concurrency, interrupt, reset, and cold-boot behavior is blocked by
+unavailable physical evidence. Firmware-wide completeness is not claimed.
+
+## Hardware-event service fixed-address evidence
+
+The 648-byte function at `0x0042C6F8..0x0042C980` is exact in-place MIT C
+under Apple clang 21 and Homebrew clang 22 after nine strict provider
+relocations. Event accumulation, descriptor retirement/publication, callback
+dispatch/clearing, event-mask application, command-queue drain/resume and
+terminal register cleanup are covered by the portable model. The sole call at
+`0x00430636` and 621-of-648-byte Apollo-main analogue at `0x0055C558` are
+pinned. Relocated SHA-256 is
+`7272867858e1c23f8ad5e5938ef7f5e02d59289de7c3c76eb6c7ea69fcec5958`;
+unrelocated SHA-256 is
+`68622fb39f74db4f8713335ee263e25dc024684d86d5e59bc43f600a11ee72b4`.
+
+The frontier now records 163 source spans / 17,124 bytes and 24 unresolved
+executable spans / 9,596 bytes. Component accounting is 49,413 source-owned,
+97,581 opaque, 16 alignment, and 16,830 generated-patch bytes; the canonical
+provider identity is unchanged. Live retained-SRAM, MMIO, DMA, callback,
+command-queue, interrupt, timing, concurrency, reset, and cold-boot behavior is
+blocked by unavailable physical evidence. Firmware-wide completeness is not
+claimed.
+
+## Hardware-configuration transaction fixed-address evidence
+
+The 684-byte function at `0x0042C988..0x0042CC34` is exact in-place MIT C
+under Apple clang 21 and Homebrew clang 22 after seven strict provider
+relocations. Three-mode validation, thirteen-register save/restore, active and
+pending guards, queue enable/disable, status wait, control clearing, and
+resource routes are covered. Calls at `0x004304EC` and `0x00430552` and the
+657-of-684-byte Apollo-main analogue at `0x0055C7E8` are pinned. Relocated
+SHA-256 is `1a89b00660cf0c54c66e781ac95f19dd764bb671587c36959ad2cd34fec53ae5`;
+unrelocated SHA-256 is
+`904ef19dffe0d14d032fbab68fc23a1902fc9eb9704230e52a4a29e5d302503f`.
+
+The frontier now records 164 source spans / 17,808 bytes and 23 unresolved
+executable spans / 8,912 bytes. Component accounting is 50,097 source-owned,
+96,897 opaque, 16 alignment, and 16,830 generated-patch bytes; the canonical
+provider identity is unchanged. Live MMIO, saved-state validity, power/clock,
+command-queue, timing, concurrency, interrupt, reset, and cold-boot behavior is
+blocked by unavailable physical evidence. Firmware-wide completeness is not
+claimed.
+
+## Hardware-instance configurator fixed-address evidence
+
+The 380-byte function at `0x0042CC34..0x0042CDB0` is exact in-place MIT C
+under Apple clang 21 and Homebrew clang 22 after one strict call relocation to
+the source-owned clock encoder at `0x0042C26A`. Validation, inactive-state and
+eight-instance guards, dynamic rate/flag handling, the three fixed-rate maps,
+buffer bounds, window clamping, and four-slot clearing have portable coverage.
+The call at `0x00430562` and the 352-of-380-byte Apollo-main analogue at
+`0x0055CA94` are pinned. Relocated SHA-256 is
+`d881da0882c4dcc9f1385402b877bcb3d8c379de014c78707c8db99f5b03aa93`;
+unrelocated SHA-256 is
+`cd9cd51d75de4bf4ffa5587acfeab18036746f59f4c60d9b5c2ce91edac3f631`.
+
+The frontier now records 165 source spans / 18,188 bytes and 22 unresolved
+executable spans / 8,532 bytes. Component accounting is 50,477 source-owned,
+96,517 opaque, 16 alignment, and 16,830 generated-patch bytes; the canonical
+provider identity is unchanged. Live SRAM, MMIO, clocks, DMA/buffer
+coherency, peripheral timing, concurrency, interrupt, reset, and cold-boot
+behavior is blocked by unavailable physical evidence. Firmware-wide
+completeness is not claimed.
+
+## Hardware clock encoder fixed-address evidence
+
+The 376-byte function at `0x0042C26A..0x0042C3E2` is exact in-place MIT C
+under Apple clang 21 and Homebrew clang 22 after three strict calls to the
+source-owned rounded-divider and power-of-two helpers. Deterministic host
+differential coverage exercises zero and boundary rates, both phase modes,
+exponent scaling, rounding, fixed encoding fields, and the power-of-two
+canonicalization path. The call at `0x0042CCB0`, two shared literals at
+`0x0042C980`, and the 370-of-376-byte Apollo-main analogue at `0x0055BF64`
+are pinned. Relocated SHA-256 is
+`23796b78366978bda2ee2db94e309c4f1cae4e92f5ffbc2072f75becca3ae9e8`;
+unrelocated SHA-256 is
+`1a25dd314239f7529ac9e4ea0d6dd690acda443e34cc35eb85fbb223baa349f5`.
+
+The frontier now records 166 source spans / 18,564 bytes and 21 unresolved
+executable spans / 8,156 bytes. Component accounting is 50,853 source-owned,
+96,141 opaque, 16 alignment, and 16,830 generated-patch bytes. Live clock,
+MMIO, peripheral tolerance, signal integrity, timing, interrupt, reset, and
+cold-boot behavior is blocked by unavailable physical evidence. Firmware-wide
+completeness is not claimed.
+
 ## Post-MSPI interrupt and power closure through 0x00426BFE
 
 The exact AmbiqSuite 5.1.0 `am_hal_mspi_interrupt_service` and
@@ -2697,3 +2848,621 @@ bytes and six strict calls; the relocated object hashes to
 Host tests cover every supported clock class and all recovered guard/lifecycle
 failures. Live MMIO, clock, DMA/TCB, XIP, flash, and boot evidence is blocked
 by unavailable physical evidence; no hardware operation occurred.
+
+## MSPI lifecycle source-in-place evidence
+
+`runtime_mspi_lifecycle_425066.c` is the maintained structured
+BSD-3-Clause implementation of the G2 enable, disable, and deinitialize
+entries. Apple Clang 21 and Homebrew LLVM Clang 22 emit identical 128-, 112-,
+and 56-byte objects. Strict relocations bind the functions to CQ init, CQ
+disable, CQ termination, delay-us, and the same-source disable sibling.
+
+The source contains no executable `.byte` transcript or inline assembly. Host
+tests cover handle guards, TCB/no-TCB enable, queue reset, idempotent and busy
+disable, error propagation, XIP delay, and deinitialize ordering. Canonical
+Apple accounting is 30,071 source, 16,490 generated, and 117,279 retained
+bytes. Live physical qualification is blocked by unavailable physical
+evidence; no hardware operation occurred and firmware-wide completeness is not
+claimed.
+
+## CLKGEN HFADJ enable source-in-place evidence
+
+`runtime_clkgen_hfadj_enable_426c58.c` is a clean-room MIT C implementation of
+the authenticated bit-control leaf at `0x00426C58`. Apple clang 21.0.0 and
+Homebrew clang 22.1.8 emit the same relocation-free 24-byte Thumb body,
+SHA-256
+`99885c04446f3fcda269491e2333194b1dd622219fd089f214ef80d90eab6d8b`.
+The low input byte is normalized as a boolean, only bit 0 of CLKGEN HFADJ
+register `0x40004044` changes, every other bit is preserved, and the function
+returns zero. The following two-byte stock return is retained as an unreachable
+tail with no direct or stored ingress. Host and dual-profile target tests are
+green. Live MMIO and clock qualification is blocked by unavailable physical
+evidence; no hardware operation occurred and firmware-wide completeness is not
+claimed.
+
+## CLKGEN HFADJ configuration and disable source-cave evidence
+
+`runtime_clkgen_hfadj_config_426c72.c` and
+`runtime_clkgen_hfadj_disable_426c7e.c` are clean-room MIT C implementations
+of the authenticated entries at `[0x00426C72,0x00426C8C)`. Both reviewed
+compilers emit identical, relocation-free 16- and 20-byte Thumb bodies. The
+configuration body writes `configuration | 1` to `0x40004020`; the disable
+body clears only bit 0 of that register, preserves every other bit, and returns
+zero. Their authenticated generated-NOP caves are
+`[0x00426C28,0x00426C38)` and `[0x00426C38,0x00426C4C)`, with generated
+entry redirects and no fallthrough or interior ingress.
+
+Apple/Linux providers are respectively 163,840 and 163,824 bytes with SHA-256
+`d41f2cb082cbd989b8b8cc812a4e986cd887a4dca4c7123993b943b1ad96950a`
+and `5727eea52624c8cf725d179e5fa7616377cbfc554e8578205b2a6940cec0303e`.
+The deterministic packages are 4,749,540 and 4,749,524 bytes with SHA-256
+`677cc147a1f4fd53481acf77913af56ca23f5d14f955979f8ad4aab17639c9b2`
+and `1870273c5802a99a88a1de2bc8253e57083774bd5bf7b9ce72f8a79f88d2a385`;
+both have zero unresolved flash regions. Live MMIO, oscillator, timing, and
+cold-boot qualification is blocked by unavailable physical evidence. No
+hardware operation occurred, and firmware-wide completeness is not claimed.
+
+## Dual-clock switch source-in-place evidence
+
+`runtime_dual_switch_426c8c.c` is a clean-room MIT C implementation of the
+authenticated entry at `[0x00426C8C,0x00426CCC)`. Both reviewed compilers
+emit the same 56-byte relocated Thumb body, SHA-256
+`877df9e6e2cba9faa0c6435ae1aea24d3b3162b3a0613947c1a81154a9059426`,
+with one strict call at offset 36 to retained status provider `0x0041D246`.
+The low input byte controls bit 5 of `0x40004044`; a newly enabled
+transition checks `0x40004030` against `0x01000000`, while disable and
+redundant enable return success without polling.
+
+The eight stock bytes at `[0x00426CC4,0x00426CCC)` remain an authenticated
+unreachable tail with no direct or stored ingress. Canonical Apple/Linux
+provider SHA-256 values are
+`13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`
+and
+`11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875`.
+The complete package SHA-256 values are
+`aeb58283e5ab4383be2b3ca258e789028b9259a524b936d5d5a5187ba1035b54`
+and
+`b1587219ffa1153ff3b53af5774e66d86fbb2a0e1cacc35b093cdd34d39e1e58`;
+both have zero unresolved flash regions. Live MMIO, oscillator, transition
+timing, and cold-boot qualification is blocked by unavailable physical
+evidence. No hardware operation occurred, and firmware-wide completeness is
+not claimed.
+
+## DFU image CRC verifier evidence
+
+`runtime_dfu_image_crc_check_42d890.c` exactly reproduces the 352-byte body at
+`[0x0042D890,0x0042D9F0)` under both reviewed compilers. The sole caller at
+`0x0042DFF6`, absence of interior/stored ingress, twelve strict provider edges,
+eleven shared literals, and portable open/failure/chunk/remainder/short-read/
+CRC/close behavior are pinned. The frontier is 179 source spans / 21,868 bytes
+and 8 unresolved executable spans / 4,852 bytes. Live storage, filesystem,
+buffer/configuration state, logging, timing, reset, and cold boot are blocked by
+unavailable physical evidence. Functional completeness is not claimed.
+
+## CLKGEN configuration source-cave evidence
+
+`runtime_clkgen_config_426ccc.c` is a clean-room MIT C implementation of the
+authenticated 82-byte entry at `[0x00426CCC,0x00426D1E)`. It rejects a null
+configuration with status 6, enables control bits 2:0, publishes mode bit 29,
+publishes clock-select bits 1:0, performs the authenticated two-write divider
+update while preserving divider bit 31, sets mode bit 0, and returns success.
+Apple clang 21.0.0 and Homebrew clang 22.1.8 emit the same relocation-free
+84-byte body, SHA-256
+`eca58d33f0d33fdefcc0b3f30c8988a2986c6ed4d713b4a081cacf9f9f7fc2d9`.
+
+The two-byte size excess is handled without image growth: the compiled body
+occupies authenticated generated-NOP space at
+`[0x00415BFC,0x00415C50)`, and the stock entry is a bounded `B.W` plus NOP
+fill. Canonical Apple/Linux provider SHA-256 values are
+`930f5886a6116cbfa2ceb456ff83a7a12ce891bf5bd4679df6e2ff458bb9b9e4`
+and
+`bbd9bfa4b0db6d7fe1fc7448649d6ea9bd153f0a8f30850cc2f6cf76fa6cc97a`;
+package SHA-256 values are
+`22f6bd25615853983a485f929f5c7bf1ae1ecd148d7ef7d4f62e57ff98f804ea`
+and
+`97de01d80549ec7eec19c5b30615e42ee57b105d202b938c214b099a40d3b26d`.
+Both packages have zero unresolved flash regions. Live clock, divider,
+oscillator, timing, and cold-boot qualification is blocked by unavailable
+physical evidence. No hardware operation occurred, and firmware-wide
+completeness is not claimed.
+
+## CLKGEN disable source-cave evidence
+
+`runtime_clkgen_disable_426d1e.c` is a clean-room MIT C implementation of the
+authenticated 14-byte entry at `[0x00426D1E,0x00426D2C)`. It clears only bit
+0 of CLKGEN register `0x40004050`, preserves every other bit, and returns
+zero. Apple clang 21.0.0 and Homebrew clang 22.1.8 emit the same
+relocation-free 20-byte body, SHA-256
+`cbe1ab0d26505fa34fdac078e0935015001b2f3138109d8bad340acef1bbb48a`.
+The body occupies authenticated generated-NOP space at
+`[0x00415C50,0x00415C64)` and the stock entry is a bounded redirect.
+
+Canonical Apple/Linux provider SHA-256 values are
+`c979561dca62accdb4f2a4bbd3c6d2ac02518225b59f4a9639401b1e959765f3`
+and
+`621f22b25a857c6081bf979eabc2a3d7aad57c21b766fee2439a36e1a9251751`;
+package SHA-256 values are
+`a1b56ff04cdd1249f1b95324469ca253d11cefe602e8708b198536f31a3b04c9`
+and
+`3e0e89e8eaa83a4e4da5baefbebbb5aaa17a9bd05588643a8de52a0d7c49b983`.
+Both packages have zero unresolved flash regions. The following padding and
+literal pool remain typed official data, so the next executable frontier is
+`0x00426D48`. Live clock, oscillator, timing, register, and cold-boot
+qualification is blocked by unavailable physical evidence. No hardware
+operation occurred, and firmware-wide completeness is not claimed.
+
+## DFU service-task in-place evidence
+
+`runtime_dfu_service_task_42de58.c` provides the complete authenticated
+684-byte task at `[0x0042DE58,0x0042E104)` as production MIT C. Apple clang 21
+and Homebrew clang 22 reproduce every stock byte under 29 strict provider
+relocations; the exact and unrelocated SHA-256 values are
+`52e1f7a3ed50f4a8167463ae705cccee6ac690db1de524927a2eca9eb424557f` and
+`759dc2f405b33a3e61e91d43484cc390e102b717c3e6a7c7d4729f1705b112b8`.
+The sole direct caller at `0x0042E1CC`, absence of interior/stored ingress, and
+20 authenticated literals are pinned.
+
+Portable behavior covers queue termination, image open/read failure cleanup,
+header-gated CRC and programming, normal and alternate vector validation,
+runtime disable, handoff, and loop continuation. The complete provider and
+manifest verify without target access. The census now records 184 source spans
+/ 24,222 bytes and 3 unresolved executable spans / 2,498 bytes. Live queue,
+filesystem/storage, flash programming, vector handoff, interrupts, reset, and
+cold boot are blocked by unavailable physical evidence. No hardware operation
+occurred, and firmware-wide completeness is not claimed.
+
+## State-one register-tuning in-place evidence
+
+`runtime_state_event_one_value_42d104.c` provides the complete authenticated
+696-byte service at `[0x0042D104,0x0042D3BC)` as production MIT C. Both
+reviewed compilers reproduce every stock byte under three strict delay
+relocations. The sole caller, absence of interior/stored ingress, 16 shared
+literals, and the 684/696-byte Apollo-main analogue are pinned. Portable tests
+cover inactive save/saturation, active adjusted/default profiles, trim
+saturation, delay order, power cleanup, delta restoration, and final state.
+
+The census now records 185 source spans / 24,918 bytes and 2 unresolved
+executable spans / 1,802 bytes. Live MMIO, clocks, power stability, trim
+effects, timing, interrupts, reset, and cold boot are blocked by unavailable
+physical evidence. No hardware operation occurred, and firmware-wide
+completeness is not claimed.
+
+## Platform bring-up orchestrator evidence
+
+`runtime_platform_bringup_430000.c` exactly reproduces the 470-byte body at
+`[0x00430000,0x004301D6)` under both compilers. Its sole caller, no interior or
+stored ingress, 23 strict edges, sixteen literals, and portable context/profile/
+channel/measurement/restore/reset/teardown paths are pinned. The frontier is
+183 source spans / 23,538 bytes and 4 unresolved executable spans / 3,182
+bytes. Live callbacks, registers, clocks, channels, measurements, interrupts,
+reset, and cold boot are blocked by unavailable physical evidence. Functional
+completeness is not claimed.
+
+## DFU payload programmer evidence
+
+`runtime_dfu_payload_program_42dae8.c` exactly reproduces the 424-byte body at
+`[0x0042DAE8,0x0042DC90)` under both compilers. Its sole caller, no interior or
+stored ingress, fourteen strict edges, thirteen literals, and portable header/
+chunk/read/program/compare/advance/close paths are pinned. The frontier is 182
+source spans / 23,068 bytes and 5 unresolved executable spans / 3,652 bytes.
+Live storage, destination programming, callbacks, coherency, power loss, reset,
+and cold boot are blocked by unavailable physical evidence. Functional
+completeness is not claimed.
+
+## State-register initializer evidence
+
+`runtime_state_register_initialize_42d3bc.c` exactly reproduces the 422-byte
+body at `[0x0042D3BC,0x0042D562)` under both compilers. Its sole caller, no
+interior/stored ingress, two strict delay edges, sixteen literals, 414-byte
+Apollo-main identity, and portable restore/program/adjust/cleanup paths are
+pinned. The frontier is 181 source spans / 22,644 bytes and 6 unresolved
+executable spans / 4,076 bytes. Live MMIO, timing, trim, power, clock,
+concurrency, reset, and cold boot are blocked by unavailable physical evidence.
+Functional completeness is not claimed.
+
+## Hardware-context initializer evidence
+
+`runtime_hw_context_initialize_42e8d0.c` exactly reproduces the 354-byte body at
+`[0x0042E8D0,0x0042EA32)` under both reviewed compilers. Its sole caller, no
+interior/stored ingress, five strict provider edges, eleven literals, 339-byte
+Apollo-main identity, and portable slot/profile/default/control/validity paths
+are pinned. The frontier is 180 source spans / 22,222 bytes and 7 unresolved
+executable spans / 4,498 bytes. Live retained SRAM, configuration storage,
+calibration, MMIO, concurrency, reset, and cold boot are blocked by unavailable
+physical evidence. Functional completeness is not claimed.
+
+## Descriptor registrar and stored hardware-state composer evidence
+
+`runtime_descriptor_register_430280.c` exactly reproduces the 316-byte body at
+`[0x00430280,0x004303BC)` under both reviewed compilers, with eleven strict
+provider edges, one direct caller, no interior ingress, a 285-byte-identical
+Apollo-main analogue, and portable descriptor/callback/interrupt coverage.
+
+`runtime_hw_state_compose_42bdf0.c` exactly reproduces the 350-byte body at
+`[0x0042BDF0,0x0042BF4E)` under both reviewed compilers. Its sole authenticated
+ingress is the Thumb pointer at `0x0041D164`; four strict provider edges, four
+shared literals, a 313-byte-identical Apollo-main analogue, and portable gate,
+failure, copy, packing, and commit behavior are pinned. The canonical provider
+remains 163,840 bytes with SHA-256
+`13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`.
+
+The frontier is 178 source spans / 21,516 bytes and 9 unresolved executable
+spans / 5,204 bytes. Live SRAM, configuration storage, MMIO, callbacks,
+interrupts, concurrency, reset, and cold boot are blocked by unavailable
+physical evidence. No hardware operation occurred; functional completeness is
+not claimed.
+
+## Platform finalizer, channel classifier, and profile-transfer evidence
+
+`runtime_platform_finish_430502.c`, `runtime_state_event_zero_42cfe0.c`, and
+`runtime_register_profile_transfer_42f020.c` own 846 authenticated bytes. Both
+reviewed compilers reproduce each body exactly under 17 total strict calls.
+Their direct/interior/stored ingress, 28 shared literals, and Apollo-main
+analogues are pinned. Portable tests cover lifecycle/failure ordering,
+sixteen-channel range boundaries, handle and profile validation, and all
+capture/apply operations. Live SRAM, MMIO, interrupts, clock, peripherals,
+reset, and cold-boot validation is blocked by unavailable physical evidence;
+firmware-wide completeness is not claimed.
+
+## Event-value hardware-profile evidence
+
+`runtime_event_value_profile_42f204.c` owns the authenticated 246-byte entry
+`[0x0042F204,0x0042F2FA)`. Both reviewed compilers reproduce every stock byte
+under five strict calls; the sole caller, absence of interior/stored ingress,
+twelve shared literals, and 234/246-byte Apollo-main identity are pinned.
+Portable tests cover saved-field adjustment, active-profile publication,
+saturation, gating, and the fixed 15-cycle delay. Live SRAM, MMIO, clock,
+power, timing, peripheral, reset, and cold-boot validation is blocked by
+unavailable physical evidence; firmware-wide completeness is not claimed.
+
+## Mode router and aggregate-bitset evidence
+
+`runtime_mode_apply_42ff00.c` owns the authenticated 242-byte entry
+`[0x0042FF00,0x0042FFF2)`. Apple clang 21 and Homebrew clang 22 reproduce all
+stock bytes under eight strict call relocations; unrelocated SHA-256 is
+`3f26b603da390864dd2be07c458566263a63400f78d428f98113b1540bc53d1d`.
+The sole direct caller, absence of interior/stored ingress, and shared state
+literal `0x200270D0` are pinned. Portable tests cover direct service mappings,
+low-byte Boolean normalization, modes 6/7/9 bitset set/clear and aggregate
+publication, and ignored modes. Live SRAM, interrupt/concurrency, peripheral,
+reset, and cold-boot validation is blocked by unavailable physical evidence;
+no hardware operation occurred and firmware-wide completeness is not claimed.
+
+## Retained hardware-event apply fixed-address evidence
+
+The 368-byte function at `0x0042C0B2..0x0042C222` is exact in-place MIT C
+under both reviewed compilers after one strict delay-provider relocation.
+Portable tests cover terminal restoration, drain publication/counting, ready
+and non-ready pulse paths, saved register restoration, and delay scaling. The
+two callers, 361-of-368-byte Apollo-main analogue, and shared literals are
+pinned. The frontier now records 167 source spans / 18,932 bytes and 20
+unresolved executable spans / 7,788 bytes; component accounting is 51,221
+source-owned and 95,773 opaque bytes. Live retained-SRAM, MMIO, clock,
+peripheral timing, concurrency, interrupt, reset, and cold boot is blocked by
+unavailable physical evidence. Firmware-wide completeness is not claimed.
+
+## Runtime control-services fixed-address evidence
+
+Four exact in-place MIT C functions now cover 296 authenticated bytes at
+`0x0042BF54..0x0042BFA4`, `0x0042E2A2..0x0042E2EA`,
+`0x0042E4A0..0x0042E4F4`, and `0x0042F1C8..0x0042F204`. Apple clang 21 and
+Homebrew clang 22 reproduce every byte with strict retained-provider
+relocations. The readiness stored pointer at `0x0041D16C`, all direct callers,
+portable behavior, manifest ownership, and component conservation are pinned.
+
+The exhaustive frontier now records 152 source spans / 15,126 bytes and 35
+unresolved executable spans / 11,594 bytes. Apple component accounting is
+47,415 source-owned, 99,579 opaque, 16 alignment, and 16,830 generated-patch
+bytes; the 163,840-byte provider remains SHA-256
+`13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`.
+Live MMIO, floating-point probe, event/scheduler, interrupt-mask, timing,
+power, peripheral, reset, and cold-boot qualification is blocked by unavailable physical evidence. Firmware-wide completeness is not claimed.
+
+## Retained-event service-loop fixed-address evidence
+
+The 162-byte loop at `0x0042E2F8..0x0042E39A` is exact in-place MIT C under
+both reviewed compilers and fourteen strict provider relocations. Its sole
+ingress is the authenticated stored Thumb pointer at `0x0042E48C`; portable
+models cover both context layouts, callback eligibility, timeout rollover, and
+timestamp updates.
+
+The frontier now records 153 source spans / 15,288 bytes and 34 unresolved
+executable spans / 11,432 bytes. Component accounting is 47,577 source-owned,
+99,417 opaque, 16 alignment, and 16,830 generated-patch bytes; the canonical
+provider identity is unchanged. Live retained RAM, scheduler/event, logging,
+timing, interrupt, reset, and cold-boot behavior is blocked by unavailable physical evidence. Firmware-wide completeness is not claimed.
+
+## Event runtime-services fixed-address evidence
+
+The runtime initializer at `0x0042E53C`, callback loop at `0x0042E644`, and
+enqueue service at `0x0042E686` are exact in-place MIT C under both reviewed
+compilers and fourteen strict provider relocations. Direct ingress is limited
+to `0x0042E27A` and `0x0042E79C`; portable models cover object lifecycle,
+callback delivery, absent queues, and enqueue failure.
+
+The frontier now records 156 source spans / 15,724 bytes and 31 unresolved
+executable spans / 10,996 bytes. Component accounting is 48,013 source-owned,
+98,981 opaque, 16 alignment, and 16,830 generated-patch bytes; the canonical
+provider identity is unchanged. Live retained RAM, RTOS objects/tasks,
+scheduler queues, callbacks, logging, timing, interrupt, reset, and cold-boot
+behavior is blocked by unavailable physical evidence. Firmware-wide completeness is not claimed.
+
+## Control orchestration fixed-address evidence
+
+The non-returning orchestrator at `0x0042DD14` and critical transaction at
+`0x0042DE0E` are exact in-place MIT C under both reviewed compilers and thirteen
+strict provider relocations. The stored entry at `0x0042E174`, three direct
+transaction callers, wait-status behavior, four-word copy, `PRIMASK` restore,
+and terminal transition are pinned.
+
+The frontier now records 158 source spans / 15,882 bytes and 29 unresolved
+executable spans / 10,838 bytes. Component accounting is 48,171 source-owned,
+98,823 opaque, 16 alignment, and 16,830 generated-patch bytes; the canonical
+provider identity is unchanged. Live scheduler/event, retained RAM,
+interrupt-mask, terminal-mode, logging, timing, reset, and cold-boot behavior
+is blocked by unavailable physical evidence. Firmware-wide completeness is not claimed.
+
+## Runtime-context publisher fixed-address evidence
+
+The 114-byte publisher at `0x0042DCA2..0x0042DD14` is exact in-place MIT C
+under both reviewed compilers and four strict provider relocations. Its two
+callers, absent-queue and send-failure paths, success return, and `0x00400000`
+event publication are pinned.
+
+The frontier now records 159 source spans / 15,996 bytes and 28 unresolved
+executable spans / 10,724 bytes. Component accounting is 48,285 source-owned,
+98,709 opaque, 16 alignment, and 16,830 generated-patch bytes; the canonical
+provider identity is unchanged. Live retained RAM, RTOS queue/event, scheduler,
+logging, timing, interrupt, reset, and cold-boot behavior is blocked by unavailable physical evidence. Firmware-wide completeness is not claimed.
+
+## Hardware-descriptor publisher fixed-address evidence
+
+The 108-byte function at `0x0042C45A..0x0042C4C6` is relocation-free,
+byte-exact in-place MIT C under Apple clang 21 and Homebrew clang 22. Its sole
+direct caller at `0x0042C7EC`, absence of interior/stored ingress, 32-byte ring
+stride, successor selection, wraparound, and field order `[0,1,4,2,3,5]` are
+pinned. Stock, Apple, Linux, and unrelocated SHA-256 are
+`0deea2026365cb9c3471cdd81a7644c3fa519db2239154f3456da25ab88c5525`.
+
+The frontier now records 160 source spans / 16,104 bytes and 27 unresolved
+executable spans / 10,616 bytes. Component accounting is 48,393 source-owned,
+98,601 opaque, 16 alignment, and 16,830 generated-patch bytes; the canonical
+163,840-byte provider identity remains
+`13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b`.
+Live SRAM, MMIO, peripheral, DMA, timing, interrupt, reset, and cold-boot
+behavior is blocked by unavailable physical evidence. Firmware-wide
+completeness is not claimed.
+
+## SPOT state-sequence and memcpy dual-entry evidence
+
+The 390-byte SPOT state-transition selector at
+`[0x0042A2B4,0x0042A43A)` is exact dual-toolchain in-place source with one
+relocation to `0x004156AC`. Its three callers, 28-byte table, 384-byte-identical
+Apollo-main analogue, and all 400 valid state pairs are pinned. A whole-image
+scan also pins 33 memcpy callers at `0x0041568C` and 29 at `0x004156AC`;
+independent redirects now preserve both entries. The corrected Apple/Linux
+provider hashes are `13e2cee5…` and `11f12f80…`. Physical boot, timing, rail,
+temperature, reset, and cold-boot validation is **blocked by unavailable
+physical evidence**.
+
+## SPOT-manager source tranche through the Ton selector
+
+Seven additional fixed-address entries are production C: transition 7b
+`[0x00428A94,0x00428BA8)`, the factory-trim loader
+`[0x00429DA4,0x00429DF6)`, readiness wrapper
+`[0x0042A036,0x0042A04A)`, corrected timer ISR
+`[0x0042A04A,0x0042A078)`, SIMOBUCK deep-sleep classifier
+`[0x0042A08C,0x0042A19C)`, internal-domain marker
+`[0x0042A19C,0x0042A1B2)`, and Ton selector
+`[0x0042A1BC,0x0042A2A4)`. Both reviewed compilers reproduce every admitted
+stock byte under the pinned relocation contracts. Host models cover 550,000
+deterministic randomized states in aggregate. Direct callers, stored entry
+pointers, provider edges, Apollo-main analogues, shared literals, manifest
+ownership, and byte conservation are fail-closed.
+
+The exhaustive 57,153-byte census now has 54 production-source spans / 6,978
+bytes, 35 exact candidates / 2,654 bytes, 96 typed unresolved executable
+spans / 16,244 bytes, 16 unreachable tails / 284 bytes, two retained-data
+spans / 28 bytes, and 64 typed non-entry spans / 30,965 bytes. The next
+executable frontier is `0x0042A2B4`. Live interrupts, clocks, MMIO, trim/rail
+effects, deep sleep, reset, and cold boot are blocked by unavailable physical
+evidence. No hardware operation occurred; firmware-wide completeness is not
+claimed.
+
+## Floating common-divisor source-cave evidence
+
+`runtime_float_gcd_426d48.c` is a clean-room MIT C implementation of the
+authenticated 106-byte entry at `[0x00426D48,0x00426DB2)`. It preserves the
+recovered input ordering, `2^-23` termination threshold, 16-iteration bound,
+retained `floorf` call at `0x00427C90`, and `-1.0f` exhaustion result. Both
+reviewed compilers emit the same 92-byte hard-float relocated body, SHA-256
+`5f1d08b32b7c2291eabdff7d7ab4b17d63b265f827338acf974af4f67c082d5c`,
+in authenticated generated-NOP space at `[0x00415C64,0x00415CC0)`. The entry
+and retained provider explicitly use `pcs("aapcs-vfp")`, correcting the
+earlier softfp declaration that conflicted with the authenticated `s0`/`s1`
+caller and provider ABI.
+
+## Floating ratio encoder source-cave evidence
+
+`runtime_float_ratio_426db4.c` is a clean-room MIT C implementation of the
+authenticated 248-byte entry at `[0x00426DB4,0x00426EAC)`. It preserves the
+source-routed GCD normalization, retained `fmodf`/`roundf` edges, one-ULP
+integer tolerance, minimum-denominator scaling, and final numerator `1..63`
+and denominator `4..960` bounds. Both reviewed compilers emit the same
+252-byte hard-float relocated body, SHA-256
+`cd5568ffb4c2c273bf85947cf4aa4fdf8441eba18c6a3b5d16e59b1340f086e3`,
+in authenticated generated-NOP space at `[0x00415CD4,0x00415DD0)`. Its
+pointer-first signature and explicit `pcs("aapcs-vfp")` preserve pointers in
+`r0`/`r1` and floating inputs in `s0`/`s1`.
+
+Canonical Apple/Linux provider SHA-256 values are
+`ac373b3c0caa5dcb6ae25cf6f004c76e778d936b7a584e3ecdf83a17283bca36`
+and
+`4993c8d06b148fa4518268af8fd5133e1494f18c74387249326dac78da1ddde0`;
+package SHA-256 values are
+`7f7c1b246b51a8e15db38d93fac61fb5a681cb372ea958c4b26ff3a8b271d188`
+and
+`18f900b83920c2b7cc02097655152f34fbc5b17606e3dccc09cc0389488f615f`.
+Both packages have zero unresolved and zero unclassified bytes. Live target
+floating-point ABI, timing, caller integration, and cold-boot qualification
+is blocked by unavailable physical evidence. No hardware operation occurred,
+and firmware-wide completeness is not claimed.
+
+## Floating multiplier and encoding-selector source-cave evidence
+
+`runtime_float_multiplier_426eac.c` provides the authenticated 190-byte
+entry at `[0x00426EAC,0x00426F6A)` as a 192-byte hard-float leaf at
+`[0x00415DE4,0x00415EA4)`, relocated SHA-256
+`31c6cef0307e4b967a1528c06e5b9d8dc8d37be1dbf651f2cf76a6a9eed58004`.
+Five strict relocations bind the retained `ceilf`, `fmodf`, `roundf`, and
+`floorf` veneers.
+
+`runtime_float_encoding_select_426f6c.c` provides the byte-identical
+198-byte stock/Apollo-main entry at `[0x00426F6C,0x00427032)` as the same
+180-byte Apple/Linux hard-float leaf at `[0x00415EA4,0x00415F58)`, relocated
+SHA-256
+`685316ba4585568c3b023923927fe0ef5a399ac92f00c44c8eaa3f3a24ac6b2b`.
+It preserves null/range statuses, ratio-first fallback, the five output
+fields, and strict calls to both source-routed encoder entries.
+
+The current Apple/Linux providers are
+`ac373b3c0caa5dcb6ae25cf6f004c76e778d936b7a584e3ecdf83a17283bca36`
+and
+`4993c8d06b148fa4518268af8fd5133e1494f18c74387249326dac78da1ddde0`;
+the complete package hashes are
+`7f7c1b246b51a8e15db38d93fac61fb5a681cb372ea958c4b26ff3a8b271d188`
+and
+`18f900b83920c2b7cc02097655152f34fbc5b17606e3dccc09cc0389488f615f`.
+They contain 6,653 and 3,640 placed regions with zero unresolved flash
+regions. Live floating-point behavior, caller integration, timing, and cold
+boot remain blocked by unavailable physical evidence. No hardware operation
+occurred, and firmware-wide completeness is not claimed.
+
+## Ambiq queue-family source-cave evidence
+
+`runtime_queue_4275ea.c` provides the complete authenticated queue family at
+`[0x004275EA,0x004276BA)` as 18-, 88-, and 86-byte compiled C bodies in
+reclaimed stock-body space. The exact 24-byte ABI is pinned to the vendored
+Apollo510 header. Add/get each contain one strict `R_ARM_THM_CALL` relocation
+at object offset 14 to the critical-save provider at `0x0041B8EC`, followed by
+reviewable exact PRIMASK restoration; initialization is relocation-free.
+
+Canonical Apple/Linux providers are
+`d1e7151591adc15f43e7ef3efeab8d0fdf2eb1901c3035bfa62efe21a6de1489`
+and `d04cb44cb802e742ecffb576d85722c8cea4bb69c35522751906020aff7e2683`.
+Complete package hashes are
+`7f7c1b246b51a8e15db38d93fac61fb5a681cb372ea958c4b26ff3a8b271d188`
+and `18f900b83920c2b7cc02097655152f34fbc5b17606e3dccc09cc0389488f615f`.
+Host semantics, both target profiles, manifest ownership, and package
+conservation are green. Live interrupt/concurrency behavior is blocked by
+unavailable physical evidence; no hardware operation occurred.
+
+## Overlap-safe byte-move source-cave evidence
+
+`runtime_memmove_4276bc.c` provides the complete authenticated 150-byte
+`memmove` body at `[0x004276BC,0x00427752)` as the same 50-byte,
+relocation-free C leaf under Apple clang 21.0.0 and Homebrew clang 22.1.8.
+Its SHA-256 is
+`22a53bbac7dcb82baafe7b2907d4d94b2e4135eccb0395c9b83e37dbf79916db`.
+The leaf occupies reclaimed body space at `[0x004276C0,0x004276F2)` behind a
+four-byte redirect; deterministic NOP fill owns the remaining 96 bytes.
+
+The sole stock caller is `0x0042395A`. The unsigned overlap predicate,
+backward destructive-overlap loop, forward loop, destination return, and the
+stock non-overlap tail edge to the source-owned copy provider at `0x0041568C`
+are pinned. The Apollo-main analogue at `0x00439710` is identical in 146 of
+150 bytes; its only difference is the image-local copy-provider branch. Host
+behavior, both target profiles, source reviewability, manifest ownership, and
+provider conservation are green. Live target memory-system, timing, and
+production-caller behavior is blocked by unavailable physical evidence; no
+hardware operation occurred.
+
+## Command-queue index-update source-cave evidence
+
+`runtime_cmdq_update_indices_427754.c` provides the complete authenticated
+64-byte private AmbiqSuite Apollo510 `update_indices()` body at
+`[0x00427754,0x00427794)` as a 44-byte BSD-3-Clause C leaf. The Apple and Linux
+relocated leaf SHA-256 values are
+`e585f8d2fb16a83c80a7f76234bfe30e7ff3002e2837d8a7bb0475765cf4b160`
+and `c8d7d16687b05815d24d6e0492e6ad500bb4845b9ce070db8c8063a294628911`.
+Each has one strict `R_ARM_THM_CALL` relocation at object offset four to the
+critical-save provider at `0x0041B8EC`. The leaf occupies reclaimed body space
+at `[0x00427758,0x00427784)` behind a four-byte redirect; deterministic NOP
+fill owns the remaining 16 bytes.
+
+The upstream source is immutable Ambiq commit
+`5efc0228528a8adce5eae0d226fac85d2551eb3b`; its 35,930-byte
+`am_hal_cmdq.c` has SHA-256
+`60aa2126ca01cd72f746a92d6f34a13e909fdab24ebfab6d6b0a70b026d8fa83`
+and Git blob `0a286e565cad27cef801c389b5dedae826a2669a`. The vendored
+10,496-byte header has SHA-256
+`0113aed2f109c5f022d38055b83a75c2cf141e8621177296757fc8315926762f`.
+Host behavior covers low-byte masking, epoch reconstruction, negative signed
+wrap correction, queue-address snapshots, and exact interrupt-token restore.
+Both reviewed target profiles, three direct callers, the Apollo-main analogue,
+manifest ownership, and provider conservation are pinned. Live register,
+interrupt/concurrency, wrap-timing, downstream-caller, and cold-boot behavior
+is blocked by unavailable physical evidence; no hardware operation occurred.
+
+## Command-queue public-service in-place evidence
+
+`runtime_cmdq_services_427794.c` provides the eleven contiguous authenticated
+Apollo510 command-queue entries in `[0x00427794,0x00427C80)` as production
+BSD-3-Clause C at their original addresses. The canonical Apple profile owns
+1,056 compiled bytes in place; the 204-byte stock suffix complement after the
+compiled return paths is retained and typed as unreachable. Linux profile
+sizes and bytes are independently pinned. Allocation, status, and termination
+have strict calls to the source-routed index updater at `0x00427754`; the
+other eight leaves are relocation-free.
+
+The immutable official upstream `am_hal_cmdq.c` is pinned to Ambiq commit
+`5efc0228528a8adce5eae0d226fac85d2551eb3b`, SHA-256
+`60aa2126ca01cd72f746a92d6f34a13e909fdab24ebfab6d6b0a70b026d8fa83`,
+Git blob `0a286e565cad27cef801c389b5dedae826a2669a`. Host tests cover validation,
+enable/disable, SSRAM barriers, straight and wrapped allocation, exhaustion,
+release/post, status, termination, wrapped error recovery, reset, and loop
+posting. Both reviewed target profiles, all direct callers, all exact
+Apollo-main analogues, manifest ownership, and provider conservation are
+pinned. Full details are in
+`docs/research/g2-bootloader-cmdq-services-427794-427c80-source-closure.md`.
+
+Live MMIO, DMA/coherency, interrupt races, peripheral pause/error behavior,
+timing, downstream transactions, reset, and cold boot are blocked by
+unavailable physical evidence. No signing, flashing, reset, live register
+access, or other hardware operation occurred; firmware-wide completeness is
+not claimed.
+
+## Binary32 math in-place evidence
+
+`runtime_float_math_veneers_427c90.c` and `runtime_float_math_427c90.c`
+provide nine fixed-address production C leaves in
+`[0x00427C90,0x00427E84)`. Both reviewed compiler profiles emit 432 in-place
+source bytes under four strict adjacent-core call relocations. Seven leaves
+are stock-exact; the 168-byte remainder core and 72-byte classifier leave 68
+authenticated bytes typed as unreachable. Deterministic host differential
+tests cover signed zero, subnormals, infinities, NaNs, every decision boundary,
+and 165,000 random binary32 cases. Direct callers, absence of interior ingress
+and stored entry pointers, manifest ownership, provider conservation, and both
+toolchains are pinned. Full details are in
+`docs/research/g2-bootloader-float-math-427c90-427e84-source-closure.md`.
+
+Live FP exception flags, rounding-mode interaction, caller timing, downstream
+behavior, reset, and cold boot are blocked by unavailable physical evidence.
+No signing, flashing, reset, live register access, or other hardware operation
+occurred; firmware-wide completeness is not claimed.
+
+## SPOT-manager transition sequence 2b is production C
+
+The 106-byte authenticated entry at `[0x00428378,0x004283E2)` is now an exact
+in-place BSD-3-Clause C admission. Both reviewed compiler profiles produce the
+same unrelocated body and, after the sole strict delay-provider relocation,
+match every stock byte. The direct BL at `0x0042A05C`, absence of interior or
+stored-pointer ingress, nine authenticated shared literals, and the 50,000
+state host differential are pinned. Full details are in
+`docs/research/g2-bootloader-spotmgr-transition-428378-source-closure.md`.
+
+The census now has 47 production-source spans / 6,028 bytes and 101 typed
+unresolved executable spans / 17,088 bytes. The next executable frontier is
+`0x00428A94`. Live timer, MMIO, voltage, trim, power-stability, reset, and
+cold-boot validation is blocked by unavailable physical evidence. No hardware
+operation occurred, and firmware-wide completeness is not claimed.

@@ -180,9 +180,9 @@ PRODUCTION_SECTION = ".text." + PRODUCTION_FUNCTION
 PRODUCTION_EXIDX_SECTION = ".ARM.exidx" + PRODUCTION_SECTION
 PRODUCTION_EXIDX = bytes.fromhex("0000000001000000")
 OVERLAY_RUNTIME_ADDRESS = 0x0079_4324
-BASE_FUNCTION_COUNT = 2439
-BASE_RELOCATED_COUNT = 1870
-BASE_PATCH_COUNT = 2327
+BASE_FUNCTION_COUNT = 2442
+BASE_RELOCATED_COUNT = 1873
+BASE_PATCH_COUNT = 2330
 APPLE_CLANG = "/usr/bin/clang"
 COMPILER_PROFILES = {
     "apple-clang": {
@@ -262,7 +262,7 @@ PRODUCTION_BUILD_PROFILES = {
     "apple-clang": {
         "boot_component": (
             163_840,
-            "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
+            "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2",
         ),
         "main_component": (
             3_952_454,
@@ -278,7 +278,7 @@ PRODUCTION_BUILD_PROFILES = {
     "linux-clang": {
         "boot_component": (
             163_824,
-            "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e",
+            "426d77749f96307ae9a45173d20684570d5994d902cf1f1f5cb01f935c6ba7c6",
         ),
         "main_component": (
             3_736_060,

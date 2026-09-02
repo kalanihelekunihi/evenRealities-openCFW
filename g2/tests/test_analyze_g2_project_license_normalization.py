@@ -75,12 +75,12 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
         self.assertEqual(metrics["project_owned_gpl_records_pending_mit"], 0)
         self.assertEqual(metrics["project_owned_gpl_only_pending"], 0)
         self.assertEqual(metrics["project_owned_gpl_or_later_pending"], 0)
-        self.assertEqual(metrics["expected_mit_records_after_normalization"], 574)
+        self.assertEqual(metrics["expected_mit_records_after_normalization"], 647)
         self.assertEqual(metrics["repository_only_project_mit_files"], 1)
         self.assertEqual(
             metrics["distributed_upstream_gpl_files_preserved"], 1)
         self.assertEqual(
-            metrics["distributed_project_mit_normalization_targets"], 906)
+            metrics["distributed_project_mit_normalization_targets"], 919)
         self.assertEqual(metrics["root_policy_project_mit_files"], 4)
         self.assertEqual(
             metrics["root_policy_project_mit_census_sha256"],
@@ -108,7 +108,7 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
         metrics = self.result["metrics"]
         self.assertEqual(metrics["upstream_gpl_records_preserved"], 1)
         self.assertEqual(metrics["apache_records_preserved"], 81)
-        self.assertEqual(metrics["bsd_records_preserved"], 102)
+        self.assertEqual(metrics["bsd_records_preserved"], 134)
         self.assertEqual(metrics["isc_records_preserved"], 0)
         self.assertEqual(metrics["zlib_records_preserved"], 27)
         self.assertTrue(all(row["upstream"]
@@ -307,17 +307,30 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
 
     def test_em9305_source_image_distribution_census_is_exact(self) -> None:
         metrics = self.result["metrics"]
-        self.assertEqual(metrics["em9305_source_image_project_mit_files"], 6)
-        self.assertEqual(metrics["em9305_source_image_package_files"], 3)
-        self.assertEqual(metrics["em9305_source_image_support_files"], 3)
+        self.assertEqual(metrics["em9305_source_image_project_mit_files"], 19)
+        self.assertEqual(metrics["em9305_source_image_package_files"], 11)
+        self.assertEqual(metrics["em9305_source_image_support_files"], 8)
         paths = set(self.result["em9305_source_image_paths"])
         self.assertEqual(paths, {
             "g2/components/em9305/source_image/README.md",
             "g2/components/em9305/source_image/build_image.py",
             "g2/components/em9305/source_image/record_package.py",
+            "g2/components/em9305/source_overlay/README.md",
+            "g2/components/em9305/source_overlay/build_overlay.py",
+            "g2/components/em9305/source_overlay/reconstructible_tail.ld",
+            "g2/components/em9305/source_overlay/runtime_metaware.c",
+            "g2/components/em9305/source_overlay/runtime_metaware.h",
+            "g2/components/em9305/source_overlay/runtime_metaware_entries.c",
+            "g2/components/em9305/source_overlay/runtime_reconstructible_tail.c",
+            "g2/components/em9305/source_overlay/runtime_reconstructible_tail_entries.c",
+            "g2/tests/fixtures/em9305_reconstructible_tail_host.c",
             "g2/tests/test_analyze_em9305_record_package.py",
             "g2/tests/test_em9305_record_package.py",
+            "g2/tests/test_em9305_reconstructible_tail_overlay.py",
+            "g2/tests/test_runtime_em9305_metaware_production.py",
+            "g2/tests/test_runtime_em9305_reconstructible_tail.py",
             "g2/tools/analyze_em9305_record_package.py",
+            "g2/tools/integrate_g2_em9305_source_overlay.py",
         })
         distributed = {row["path"]: row for row in self.result["distributed_rows"]}
         for path in paths:

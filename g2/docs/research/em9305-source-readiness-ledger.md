@@ -1,6 +1,6 @@
 # EM9305 comprehensive source-readiness ledger
 
-Status: residual accounting complete; source and production readiness blocked
+Status: residual concrete-source frontier production-routed; whole-source readiness blocked
 
 Hardware activity: none
 
@@ -10,7 +10,7 @@ The authenticated EM9305 residual census is now accounted exactly once:
 
 | Readiness state | Spans | Bytes | Meaning |
 |---|---:|---:|---|
-| Concrete source available | 23 | 1,240 | isolated MIT MetaWare/runtime and tail candidates exist |
+| Concrete source available | 23 | 1,240 | MIT MetaWare/runtime and tail spans are production-routed by checked ARCv2-EM entries |
 | Typed unsupported external boundary | 25 | 8,348 | ownership/entry is accounted, but complete behavior is unavailable and the API fails closed |
 | Unavailable proprietary controller code | 127 | 24,070 | authenticated controller/vendor retention with no redistributable replacement source or typed boundary |
 | **Total** | **175** | **33,658** | complete residual code-or-mixed census |
@@ -22,7 +22,8 @@ Consequently:
 - unclassified spans after a readiness decision: 0;
 - unclassified bytes after a readiness decision: 0;
 - source complete: no;
-- production ready: no;
+- concrete-source frontier production-routed: yes;
+- whole-component source ready: no;
 - blocking spans: 152;
 - blocking bytes: 32,418.
 
@@ -38,14 +39,15 @@ The ledger composes ten independent evidence lanes:
 
 1. The existing residual-provenance map supplies the closed 175-span / 33,658-byte
    accounting scope and the 130-span proprietary controller/vendor class.
-2. The MetaWare candidate promotes its two authenticated islands / 980 bytes
+2. The MetaWare lane promotes its two authenticated islands / 980 stock bytes
    to `concrete_source_available`. A checked GCC 16.1.1 ARCv2-EM build receipt
-   covers all eight maintained candidate translation units with zero undefined
-   symbols and zero forbidden runtime imports. The proof is non-additive and
-   remains explicitly separate from production routing.
-3. The exhaustive residual-tail candidate promotes 21 spans / 260 bytes to
-   concrete source and assigns 15 spans / 630 bytes to typed unsupported
-   external boundaries.
+   routes eight external ABI entries to maintained C with zero undefined
+   symbols and zero forbidden runtime imports; two now-private interior entries
+   are deterministic NOP fill.
+3. The exhaustive residual-tail lane production-routes 21 spans / 260 stock
+   bytes through 23 four-byte entries, four direct C no-ops, and a 288-byte
+   implementation cave; it also assigns 15 spans / 630 bytes to typed
+   unsupported external boundaries.
 4. The first-party hook candidate assigns all seven spans / 1,224 bytes to
    typed boundaries. Some control-flow shells are exact, but the complete
    application behavior is not, so the ledger does not overstate source
@@ -79,9 +81,10 @@ The ledger composes ten independent evidence lanes:
 10. The deployment-package audit authenticates the four-record stock container,
     124-byte metadata, 211,824-byte payload, 29 erase-sector IDs, canonical
     offsets, nonoverlapping target intervals, and zero alignment padding. The
-    MIT parser/builder round-trips the 211,948-byte package byte-for-byte. This
-    closes container generation only: source records, candidate/QP/C placement,
-    production routing, and controller replacement remain open.
+    MIT parser/builder round-trips the 211,948-byte stock package byte-for-byte
+    and emits the complete 212,984-byte mixed provider. This closes container
+    generation and routes the 1,240-byte concrete-source frontier; QP/C
+    placement and the retained controller replacement remain open.
 
 The QP/C audit is supporting rather than additive. Its 22 portable functions
 and 2,450 bytes overlap a separately defined application cluster, not the
@@ -111,7 +114,7 @@ conditions changes:
 - readiness counts `23 + 25 + 127`; or
 - readiness bytes `1,240 + 8,348 + 24,070`.
 - the exact EM9305 package receipt, four-record/29-sector shape, byte-exact
-  rebuild, and fail-closed source-image/production/hardware policy.
+  stock rebuild, mixed-provider build, and fail-closed source/hardware policy.
 
 Tests explicitly delete one tail decision, corrupt one MetaWare hash, corrupt
 a named hook-provider hash, and mark the QP/C cluster incomplete. Each
@@ -121,6 +124,7 @@ mutation fails before the gate can claim zero unclassified bytes.
 
 ```sh
 python3 tools/analyze_em9305_source_readiness.py --json
+make em9305-source-overlay
 make em9305-arc-candidates
 make em9305-qpc-component
 make em9305-record-package
@@ -152,15 +156,14 @@ opacity remains material:
 2. Replace or lawfully source the 24,070 unavailable controller/vendor bytes,
    plus the 6,494 typed controller-cluster bytes whose exact behavior is still
    unavailable.
-3. Bind the 1,240 target-compilable concrete-source bytes to exact ARC ABI,
-   RAM, MMIO, and interior-entry contracts.
-4. Complete link placement, callback registration, and startup ordering.
-5. Supply all four source-built record payloads to the deterministic package
-   wrapper; the wrapper cannot turn retained stock records into source.
-6. Keep the production gate blocked until every residual span is concrete
+3. Complete QP/C link placement, callback registration, and startup ordering;
+   this is separate from the now-routed MetaWare/tail frontier.
+4. Replace the retained record payload bytes with community source; the mixed
+   provider wrapper cannot turn retained stock records into source.
+5. Keep the whole-source gate blocked until every residual span is concrete
    source or an intentionally excluded optional feature with a reviewed
    public contract.
 
-This ledger is evidence tooling and records the non-production ARC component
-receipt. It changes no overlay, package manifest, production route, or device
-firmware image.
+This ledger records the production-routed ARC overlay and mixed provider
+receipt. It performs no hardware operation and does not claim the retained
+controller bytes as community source.

@@ -83,7 +83,7 @@ AMBIQSUITE_CORDIO_APP_DIR := third_party/ambiqsuite-cordio-app-framework
 .PHONY: cordio-attc-main-closure
 .PHONY: cordio-attc-disc-closure
 .PHONY: cordio-l2c-runtime-closure cordio-dm-adv-closure cordio-dm-adv-leg-closure cordio-dm-conn-closure cordio-dm-conn-sm-closure cordio-dm-dev-closure cordio-dm-main-closure cordio-dm-phy-closure cordio-dm-conn-master-leg-closure cordio-dm-conn-slave-leg-closure cordio-dm-conn-slave-closure cordio-dm-conn-master-closure cordio-dm-priv-closure cordio-dm-dev-priv-closure cordio-hci-cmd-phy-closure cordio-hci-cmd-core-closure cordio-hci-tr-closure cordio-hci-core-ps-closure cordio-hci-evt-closure cordio-hci-driver-closure
-.PHONY: case-semantic-leaves case-source-image touch-source-image pt-protocol-source em9305-arc-candidates em9305-qpc-component em9305-record-package ambiqsuite-amota-snapshot ble-ota-ring-profiles-closure ring-service-closure service-input-manager-closure ui-calendar-page-closure ota-transport-closure efs-transport-closure efs-service-closure ota-service-closure evenhub-loading-page-closure dashboard-watchface-layout1-closure teleprompt-fsm-closure health-data-manager-closure drv-cy8c4046fni-closure evenhub-main-closure translate-closure translate-ui-closure teleprompt-controller-closure conversate-comm-data-closure conversate-controller-closure conversate-ui-main-page-closure service-universal-setting-closure common-image-container-closure dashboard-watchface-layout2-closure dashboard-watchface-layout3-closure thread-ring-closure sensor-hub-closure icm45608-snapshot fw-event-loop-closure ring-connect-policy-closure system-alert-closure system-close-closure freertos-cli-filesystem-closure pb-service-conversate-closure pb-service-teleprompt-closure pb-service-even-ai-closure pb-service-terminal-closure pb-service-translate-closure pb-service-dev-config-closure pb-service-health-closure pb-service-onboarding-closure pb-service-notification-closure pb-service-setting-closure pb-service-dev-setting-closure
+.PHONY: case-semantic-leaves case-source-image touch-source-image pt-protocol-source em9305-source-overlay em9305-arc-candidates em9305-qpc-component em9305-record-package ambiqsuite-amota-snapshot ble-ota-ring-profiles-closure ring-service-closure service-input-manager-closure ui-calendar-page-closure ota-transport-closure efs-transport-closure efs-service-closure ota-service-closure evenhub-loading-page-closure dashboard-watchface-layout1-closure teleprompt-fsm-closure health-data-manager-closure drv-cy8c4046fni-closure evenhub-main-closure translate-closure translate-ui-closure teleprompt-controller-closure conversate-comm-data-closure conversate-controller-closure conversate-ui-main-page-closure service-universal-setting-closure common-image-container-closure dashboard-watchface-layout2-closure dashboard-watchface-layout3-closure thread-ring-closure sensor-hub-closure icm45608-snapshot fw-event-loop-closure ring-connect-policy-closure system-alert-closure system-close-closure freertos-cli-filesystem-closure pb-service-conversate-closure pb-service-teleprompt-closure pb-service-even-ai-closure pb-service-terminal-closure pb-service-translate-closure pb-service-dev-config-closure pb-service-health-closure pb-service-onboarding-closure pb-service-notification-closure pb-service-setting-closure pb-service-dev-setting-closure
 
 case-semantic-leaves:
 	$(PYTHON) tools/analyze_g2_case_semantic_leaves.py --write-manifests
@@ -123,7 +123,21 @@ pt-protocol-source:
 		tests.test_apollo_pt_protocol_provider \
 		tests.test_analyze_g2_pt_protocol_source
 
-em9305-arc-candidates:
+em9305-source-overlay:
+	docker run --rm -v "$(CURDIR):/work" -w /work \
+		opencfw-arc-toolchain:fedora44 \
+		$(PYTHON) components/em9305/source_overlay/build_overlay.py
+	$(PYTHON) tools/integrate_g2_em9305_source_overlay.py
+	$(PYTHON) tools/analyze_em9305_metaware_runtime_candidate.py
+	$(PYTHON) tools/analyze_em9305_source_readiness.py --write-manifests
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_runtime_em9305_metaware_production \
+		tests.test_runtime_em9305_reconstructible_tail \
+		tests.test_em9305_reconstructible_tail_overlay \
+		tests.test_em9305_metaware_runtime_candidate \
+		tests.test_em9305_source_readiness
+
+em9305-arc-candidates: em9305-source-overlay
 	$(PYTHON) tools/build_em9305_arc_candidates.py \
 		--output-dir build/verification/em9305-arc \
 		--write-summary tools/manifests/em9305-arc-candidate-build-summary.json

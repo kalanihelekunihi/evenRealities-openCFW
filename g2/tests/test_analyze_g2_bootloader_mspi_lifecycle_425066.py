@@ -11,7 +11,7 @@ class Tests(unittest.TestCase):
  def reset(s,p=0x01bebebe,cfg=1,tcb=0x20070000,cq=0,hp=0,xip=0,delay=8,status=0):s.x.open_cfw_test_lifecycle_reset(p,cfg,tcb,cq,hp,xip,delay,status)
  def st(s,n):return s.x.open_cfw_test_lifecycle_state(n)
  def tr(s,n):return s.x.open_cfw_test_lifecycle_trace(n)
- def test_audit(s):r=analyzer.audit();s.assertTrue(r["production"]["routed"]);s.assertEqual(r["production"]["boundary_status"],"source_compiled");s.assertEqual(r["production"]["compiled_bytes"],296);s.assertEqual(r["production"]["source_owned_bytes"]+r["production"]["retained_official_bytes"],147350);s.assertEqual(r["production"]["next_frontier"],0x4250E6);s.assertEqual(r["successor"]["start"],0x4251C0);s.assertEqual(r["hardware_validation"],"blocked by unavailable physical evidence");s.assertEqual(r["hardware_operations"],[])
+ def test_audit(s):r=analyzer.audit();s.assertTrue(r["production"]["routed"]);s.assertEqual(r["production"]["boundary_status"],"source_compiled");s.assertEqual(r["production"]["compiled_bytes"],296);s.assertEqual(r["production"]["source_owned_bytes"]+r["production"]["retained_official_bytes"],146994);s.assertEqual(r["production"]["next_frontier"],0x4250E6);s.assertEqual(r["successor"]["start"],0x4251C0);s.assertEqual(r["hardware_validation"],"blocked by unavailable physical evidence");s.assertEqual(r["hardware_operations"],[])
  def test_production_source_is_structured_c(s):
   text=SOURCE.read_text(encoding="utf-8");s.assertNotIn(".byte",text);s.assertNotIn("__asm__",text);s.assertIn("open_cfw_bootloader_mspi_enable_425066",text);s.assertIn("open_cfw_bootloader_mspi_disable_4250f0",text);s.assertIn("open_cfw_bootloader_mspi_deinitialize_42516c",text)
  def test_enable_with_tcb_resets_queue_state(s):

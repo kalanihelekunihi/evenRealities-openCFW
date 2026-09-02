@@ -79,7 +79,10 @@ The reviewed order is:
 | `0x00415A7C` | `0x00415A94` | 24 B | Source-replaced nullable string-length helper | Complete authenticated entry |
 | `0x00415A94` | `0x00415AB6` | 34 B | Source-replaced repeated-character output helper | Complete authenticated entry |
 | `0x00415AB6` | `0x00415BF6` | 320 B | Source-replaced fixed-point float converter | Complete authenticated entry |
-| `0x00415BF6` | `0x00415FAE` | 952 B | Source-replaced bootloader formatter core | Complete authenticated entry |
+| `0x00415BF6` | `0x00415BFC` | 6 B | Bootloader formatter-core entry redirect | Generated `B.W` and NOP fill |
+| `0x00415BFC` | `0x00415C50` | 84 B | CLKGEN configuration source cave | Clean-room MIT C in authenticated generated-NOP space |
+| `0x00415C50` | `0x00415C64` | 20 B | CLKGEN disable source cave | Clean-room MIT C in authenticated generated-NOP space |
+| `0x00415C64` | `0x00415FAE` | 842 B | Bootloader formatter-core generated fill | Authenticated NOP fill after the CLKGEN source caves |
 | `0x00415FAE` | `0x00415FDA` | 44 B | Source-replaced bootloader variadic logging dispatch wrapper | Complete authenticated entry; 57 direct callers |
 | `0x00415FDA` | `0x00415FFA` | 32 B | Retained authenticated logging literal pool/data | Non-executable boundary; not treated as a C-body gap |
 | `0x00415FFA` | `0x00416026` | 44 B | Source-replaced bootloader substring-search primitive | Complete authenticated entry; six direct callers |
@@ -227,7 +230,24 @@ The reviewed order is:
 | `0x004267FE` | `0x00426808` | 10 B | MSPI interrupt-service literal pool | Official compatibility data retained |
 | `0x00426808` | `0x00426BFE` | 1,014 B | Source-owned AmbiqSuite 5.1.0 `am_hal_mspi_power_control` | Reviewable BSD-3-Clause Thumb-2 mnemonics; exact after 12 named call relocations |
 | `0x00426BFE` | `0x00426C10` | 18 B | MSPI power-control literal pool | Official compatibility data retained |
-| `0x00426C10` | `0x00434477` | 55,399 B | Remaining classified bootloader frontier | 249-span typed executable/mixed/data ledger; official compatibility bytes retained |
+| `0x00426C10` | `0x00426C22` | 18 B | Conventional memset ABI wrapper | Clean-room MIT C calling the source-owned Arm EABI byte-fill provider |
+| `0x00426C22` | `0x00426C24` | 2 B | Memset-wrapper unreachable return tail | Authenticated compatibility bytes retained; no direct or stored ingress |
+| `0x00426C24` | `0x00426C28` | 4 B | HFRC2 divider entry | Generated redirect to source-owned MIT divider calculator |
+| `0x00426C28` | `0x00426C38` | 16 B | CLKGEN HFADJ configuration source cave | Clean-room MIT C in authenticated generated-NOP space |
+| `0x00426C38` | `0x00426C4C` | 20 B | CLKGEN HFADJ disable source cave | Clean-room MIT C in authenticated generated-NOP space |
+| `0x00426C4C` | `0x00426C4E` | 2 B | Divider generated fill | Generated NOP fill after the two HFADJ caves |
+| `0x00426C4E` | `0x00426C58` | 10 B | HFRC divider entry | Generated redirect and NOP fill to the source-owned MIT divider calculator |
+| `0x00426C58` | `0x00426C70` | 24 B | CLKGEN HFADJ enable leaf | Clean-room MIT C; low-byte boolean ABI and authenticated `0x40004044` register |
+| `0x00426C70` | `0x00426C72` | 2 B | CLKGEN HFADJ enable unreachable return | Authenticated compatibility bytes with no direct or stored ingress |
+| `0x00426C72` | `0x00426C7E` | 12 B | CLKGEN HFADJ configuration entry | Generated redirect and NOP fill to the compiled C cave |
+| `0x00426C7E` | `0x00426C8C` | 14 B | CLKGEN HFADJ disable entry | Generated redirect and NOP fill to the compiled C cave |
+| `0x00426C8C` | `0x00426CC4` | 56 B | Dual-clock switch leaf | Clean-room MIT C with one strict retained status-provider call |
+| `0x00426CC4` | `0x00426CCC` | 8 B | Dual-clock switch unreachable tail | Authenticated compatibility bytes with no direct or stored ingress |
+| `0x00426CCC` | `0x00426D1E` | 82 B | CLKGEN configuration entry | Generated redirect and NOP fill to the compiled C cave at `0x00415BFC` |
+| `0x00426D1E` | `0x00426D2C` | 14 B | CLKGEN disable entry | Generated redirect and NOP fill to the compiled C cave at `0x00415C50` |
+| `0x00426D2C` | `0x00426D30` | 4 B | CLKGEN alignment padding | Authenticated retained non-entry bytes |
+| `0x00426D30` | `0x00426D48` | 24 B | CLKGEN register literal pool | Typed official compatibility data, including `0x40004050` |
+| `0x00426D48` | `0x00434477` | 55,087 B | Remaining classified bootloader frontier | Exhaustive typed executable/mixed/data ledger |
 | `0x00434477` | `0x00434478` | 1 B | Bootloader source-overlay alignment | Generated zero byte |
 | `0x00434478` | `0x004344D2` | 90 B | Bootloader littlefs source overlay | Ten Clang-built exact upstream leaves |
 | `0x004344D2` | `0x0043450A` | 56 B | Bootloader littlefs v2.10.1 `lfs_npw2` | Mini-linked fallback body |
@@ -4698,3 +4718,38 @@ blocked by unavailable physical evidence; future qualification requires authoriz
 The prior 13,432-byte retained suffix is split into 850 source bytes and a
 12,582-byte retained suffix. Live FIFO flags/data,
 descriptor state, interrupt restoration, MMIO ordering, concurrency and peripheral qualification remain blocked by unavailable physical evidence; future qualification requires authorized responsive evidence.
+
+## Bootloader floating common-divisor route
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Formatter redirect prefix | `[0x00415BF6,0x00415BFC)` | 6 | Generated branch/NOP fill |
+| CLKGEN configuration cave | `[0x00415BFC,0x00415C50)` | 84 | Source-compiled MIT C |
+| CLKGEN disable cave | `[0x00415C50,0x00415C64)` | 20 | Source-compiled MIT C |
+| Floating GCD cave | `[0x00415C64,0x00415CD4)` | 112 | Source-compiled MIT C; strict `floorf` relocation |
+| Formatter generated tail | `[0x00415CD4,0x00415FAE)` | 730 | Generated NOP fill |
+| CLKGEN gap/literal pool | `[0x00426D2C,0x00426D48)` | 28 | Authenticated official padding/data |
+| Floating GCD redirect | `[0x00426D48,0x00426DB2)` | 106 | Generated branch/NOP fill |
+| Non-entry gap | `[0x00426DB2,0x00426DB4)` | 2 | Authenticated typed mixed/data |
+| Retained executable successor | `0x00426DB4` | — | Next software frontier |
+
+The source route preserves a 16-iteration bound and calls retained `floorf`
+at `0x00427C90`. Live target floating-point ABI, timing, caller integration,
+and cold-boot qualification is blocked by unavailable physical evidence.
+
+## Bootloader floating ratio route
+
+| Segment | Range/address | Bytes | State |
+|---|---:|---:|---|
+| Floating GCD cave | `[0x00415C64,0x00415CD4)` | 112 | Source-compiled MIT C; strict `floorf` relocation |
+| Floating ratio cave | `[0x00415CD4,0x00415DE4)` | 272 | Source-compiled MIT C; seven strict call relocations |
+| Formatter generated tail | `[0x00415DE4,0x00415FAE)` | 458 | Generated NOP fill |
+| Floating GCD redirect | `[0x00426D48,0x00426DB2)` | 106 | Generated branch/NOP fill |
+| Non-entry gap | `[0x00426DB2,0x00426DB4)` | 2 | Authenticated official padding/data |
+| Floating ratio redirect | `[0x00426DB4,0x00426EAC)` | 248 | Generated branch/NOP fill |
+| Retained executable successor | `0x00426EAC` | — | Next unresolved software frontier |
+
+The ratio route calls the GCD cave directly and retains `fmodf` at
+`0x00427CCC` and `roundf` at `0x00427D98`. Live target floating-point ABI,
+timing, caller integration, and cold-boot qualification is blocked by
+unavailable physical evidence.

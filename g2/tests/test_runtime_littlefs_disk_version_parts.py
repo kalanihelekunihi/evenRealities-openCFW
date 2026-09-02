@@ -160,16 +160,17 @@ PROFILES = {
         "alignment": 4,
         "overlay_name": "apollo_core_overlay.bin",
         "component_name": "ota_s200_firmware_ota.bin",
-        "overlay_size": 360578,
+        "overlay_size": 362272,
         "overlay_sha256": (
-            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
+            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
         ),
-        "component_size": 3883974,
+        "component_size": 3885668,
         "component_sha256": (
-            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
+            "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
         ),
+        "expected_component_size": 3956468,
         "expected_component_sha256": (
-            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
+            "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"
         ),
         "overlay_base": 0x00794324,
         "provider_offset": 108456,
@@ -189,7 +190,7 @@ PROFILES = {
             "2d689313cd12e5c8d5155c7b4ba3202"
         ),
         "current_layout_rollback_sha256": (
-            "521e1eebd826864d51f30cea580478c957b38d04f60fa6d08d1ba5865cdfe958"
+            "9484bb03260b6d2b08aeea10fd810efdeeb023c88ce1b86df1553a825c4585e5"
         ),
         "historical_tail_size": 22,
         "historical_tail_offset": 113732,
@@ -410,11 +411,11 @@ PROFILES = {
             },
         },
         "accounting": {
-            "generated_patch_site_bytes": 397_446,
+            "generated_patch_site_bytes": 404_060,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_123_534,
-            "replaced_stock_function_bytes": 397_626,
-            "source_owned_bytes": 362_962,
+            "opaque_base_bytes": 3_116_920,
+            "replaced_stock_function_bytes": 404_240,
+            "source_owned_bytes": 364_656,
             "source_owned_in_place_bytes": 184,
         },
     },
@@ -432,7 +433,7 @@ PROFILES = {
         ),
         "component_size": 163840,
         "component_sha256": (
-            "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad"
+            "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2"
         ),
         "overlay_base": 0x00434478,
         "provider_offset": 24,
@@ -448,7 +449,7 @@ PROFILES = {
             "a2f2477f95c965da47d1e29c4d2d8247"
         ),
         "current_layout_rollback_sha256": (
-            "f6f1d6fde410f509081ac36d7bdf17184364713593e0f6abd03e9308d6563f59"
+            "643e47f785b74f837215c3781817eba255fc31cbdafd44e6fcbdb4f2d7bf2c7f"
         ),
         "historical_tail_size": 20,
         "later_lookahead_patch": {
@@ -508,11 +509,11 @@ PROFILES = {
         "accounting": {
             "generated_alignment_bytes": 16,
             "generated_isolated_alignment_bytes": 0,
-            "generated_patch_site_bytes": 16_474,
+            "generated_patch_site_bytes": 16_426,
             "generated_relocated_alignment_bytes": 15,
             "generated_stock_to_overlay_alignment_bytes": 1,
-            "opaque_base_bytes": 119_425,
-            "source_owned_bytes": 27_925,
+            "opaque_base_bytes": 112_353,
+            "source_owned_bytes": 35_045,
         },
     },
 }
@@ -1109,7 +1110,10 @@ class RuntimeLittlefsDiskVersionPartsTests(unittest.TestCase):
                 {
                     "overlay_size": profile["overlay_size"],
                     "overlay_sha256": profile["overlay_sha256"],
-                    "component_size": profile["component_size"],
+                    "component_size": profile.get(
+                        "expected_component_size",
+                        profile["component_size"],
+                    ),
                     "component_sha256": profile.get(
                         "expected_component_sha256",
                         profile["component_sha256"],

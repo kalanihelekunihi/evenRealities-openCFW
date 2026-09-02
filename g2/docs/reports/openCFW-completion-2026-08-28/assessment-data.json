@@ -1,16 +1,16 @@
 {
   "aggregate": {
     "buckets": {
-      "candidate_source_not_routed": 30636,
-      "generated_or_reconstructible": 426474,
-      "production_source": 424703,
-      "typed_retained_or_external": 3795983,
+      "candidate_source_not_routed": 29396,
+      "generated_or_reconstructible": 494744,
+      "production_source": 475527,
+      "typed_retained_or_external": 3749965,
       "unclassified": 0
     },
-    "component_payload_bytes": 4677796,
-    "package_bytes": 4678740,
+    "component_payload_bytes": 4749632,
+    "package_bytes": 4750576,
     "package_envelope_bytes": 944,
-    "release_blocking_bytes": 3826619,
+    "release_blocking_bytes": 3779361,
     "source_incomplete_components": [
       "apollo_main",
       "apollo_bootloader",
@@ -28,9 +28,9 @@
     {
       "buckets": {
         "candidate_source_not_routed": 0,
-        "generated_or_reconstructible": 409348,
-        "production_source": 394928,
-        "typed_retained_or_external": 3081392,
+        "generated_or_reconstructible": 476036,
+        "production_source": 415344,
+        "typed_retained_or_external": 3065088,
         "unclassified": 0
       },
       "classification_complete": true,
@@ -53,15 +53,15 @@
         "nemavg_stroke_cap_source_routed_stock_bytes": 6614,
         "origin_buckets": {
           "first_party_or_project_path_anchored": 291566,
-          "outside_trustworthy_function_envelopes": 2090160,
+          "outside_trustworthy_function_envelopes": 2087818,
           "third_party_path_anchored": 86364,
-          "unanchored_discovered_function": 613302
+          "unanchored_discovered_function": 599340
         },
         "overlapping_object_closure_evidence": {
           "additive_to_disjoint_release_totals": false,
           "bytes": 885418
         },
-        "provider_sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
+        "provider_sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
         "pt_protocol_board_source_complete": false,
         "pt_protocol_bound_commands": 66,
         "pt_protocol_candidate_stock_body_bytes": 32866,
@@ -109,27 +109,27 @@
         "pt_protocol_top_level_retained_provider_bindings_remaining": 4,
         "release_readiness_partition": {
           "candidate_source_not_routed": 0,
-          "typed_retained_or_external": 3081392
+          "typed_retained_or_external": 3065088
         },
         "unanchored_frontier_partition": {
           "candidate_source_not_routed": 0,
-          "typed_retained_unanchored_without_candidate": 613302
+          "typed_retained_unanchored_without_candidate": 599340
         }
       },
       "hardware_blocker": "blocked by unavailable physical evidence",
       "hardware_operations": [],
       "hardware_validation": "blocked by unavailable physical evidence",
       "production_routed": true,
-      "release_blocking_bytes": 3081392,
-      "size": 3885668,
+      "release_blocking_bytes": 3065088,
+      "size": 3956468,
       "source_complete": false
     },
     {
       "buckets": {
         "candidate_source_not_routed": 0,
-        "generated_or_reconstructible": 16490,
-        "production_source": 29775,
-        "typed_retained_or_external": 117575,
+        "generated_or_reconstructible": 16846,
+        "production_source": 59009,
+        "typed_retained_or_external": 87985,
         "unclassified": 0
       },
       "classification_complete": true,
@@ -139,33 +139,33 @@
         "clkmgr_divider_production_routed": true,
         "clkmgr_divider_source_functions": 2,
         "clkmgr_divider_source_stock_bytes": 52,
-        "provider_sha256": "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
+        "provider_sha256": "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b",
         "retained_complement": {
           "bytes_by_address_status": {
             "generated_alignment": 16,
-            "generated_source_entry_replacement": 16474,
-            "official_blob": 117575,
-            "source_compiled": 29775
+            "generated_source_entry_replacement": 16830,
+            "official_blob": 87985,
+            "source_compiled": 59009
           },
           "component_bytes": 163840,
           "derivation": "disjoint current core-manifest file-offset intervals; no candidate or historical-frontier bytes are added",
-          "intervals": 593,
+          "intervals": 901,
           "intervals_by_address_status": {
             "generated_alignment": 9,
-            "generated_source_entry_replacement": 206,
-            "official_blob": 67,
-            "source_compiled": 311
+            "generated_source_entry_replacement": 238,
+            "official_blob": 151,
+            "source_compiled": 503
           },
-          "retained_file_offset_set_sha256": "4c7c6b9150254adf1b3d51907bce1e9462cd2a2d067dd59f74a54897d06e1f0a",
-          "retained_official_bytes": 117575
+          "retained_file_offset_set_sha256": "a4b8af1f39da48660196330088c23ab770a6349b7e5b09b333123e3af1b67e14",
+          "retained_official_bytes": 87985
         },
-        "source_owned_in_place_bytes": 14082
+        "source_owned_in_place_bytes": 41190
       },
       "hardware_blocker": "blocked by unavailable physical evidence",
       "hardware_operations": [],
       "hardware_validation": "blocked by unavailable physical evidence",
       "production_routed": true,
-      "release_blocking_bytes": 117575,
+      "release_blocking_bytes": 87985,
       "size": 163840,
       "source_complete": false
     },
@@ -207,49 +207,51 @@
     },
     {
       "buckets": {
-        "candidate_source_not_routed": 1240,
-        "generated_or_reconstructible": 0,
-        "production_source": 0,
-        "typed_retained_or_external": 210708,
+        "candidate_source_not_routed": 0,
+        "generated_or_reconstructible": 1226,
+        "production_source": 1174,
+        "typed_retained_or_external": 210584,
         "unclassified": 0
       },
       "classification_complete": true,
       "component": "EM9305 BLE controller",
       "component_id": "ble_em9305",
       "details": {
-        "candidate_production_routed": false,
-        "candidate_source_not_routed_bytes": 1240,
+        "candidate_production_routed": true,
+        "candidate_source_not_routed_bytes": 0,
         "completion_bucket_mapping": {
           "buckets": {
-            "candidate_source_not_routed": 1240,
-            "generated_or_reconstructible": 0,
-            "production_source": 0,
-            "typed_retained_or_external": 210708,
+            "candidate_source_not_routed": 0,
+            "generated_or_reconstructible": 1226,
+            "production_source": 1174,
+            "typed_retained_or_external": 210584,
             "unclassified": 0
           },
-          "candidate_production_routed": false,
-          "component_bytes": 211948,
-          "qualification": "the 1,240 reviewed MIT concrete-source bytes remain candidates until production routing; the 178,290 bytes outside the residual census remain in the typed retained component boundary",
-          "release_blocking_bytes": 211948
+          "candidate_production_routed": true,
+          "component_bytes": 212984,
+          "qualification": "all 1,240 reviewed concrete-source stock spans are production routed; 210,584 provider bytes remain a typed retained/external boundary and keep whole-component source closure false",
+          "release_blocking_bytes": 210584
         },
         "final_source_readiness_receipts": {
           "hardware_operations": [],
           "ledger": {
             "path": "em9305-final-source-readiness.tsv",
-            "sha256": "d63cdcd7a4bbaf6a30ef55eafa470561d205ac87f55656c424786bbbec775b15",
-            "size": 32977
+            "sha256": "cfda63c68a73d27235af204f01ee6c848db9495d0294d55faf70096b7ab08bf9",
+            "size": 33152
           },
           "manifest_count": 2,
           "residual_bytes": 33658,
           "residual_span_count": 175,
-          "schema_version": 5,
+          "schema_version": 6,
           "summary": {
             "path": "em9305-final-source-readiness-summary.json",
-            "sha256": "ae70d87d4833ec98e5235813ada50564513fcbb7ecd2a02816411510bd088084",
-            "size": 5211
+            "sha256": "5cd0e51ef3274fe1e96d8c3e4aa0ff776fef4587305112f05573b5cde0d194fd",
+            "size": 4805
           }
         },
+        "generated_or_reconstructible_bytes": 1226,
         "hardware_operations": [],
+        "production_source_bytes": 1174,
         "residual_readiness_bytes": {
           "concrete_source_available": 1240,
           "typed_unsupported_external_boundary": 8348,
@@ -257,14 +259,14 @@
         },
         "residual_scope_bytes": 33658,
         "residual_unclassified_bytes": 0,
-        "typed_retained_or_external_bytes": 210708
+        "typed_retained_or_external_bytes": 210584
       },
       "hardware_blocker": "blocked by unavailable physical evidence",
       "hardware_operations": [],
       "hardware_validation": "blocked by unavailable physical evidence",
-      "production_routed": false,
-      "release_blocking_bytes": 211948,
-      "size": 211948,
+      "production_routed": true,
+      "release_blocking_bytes": 210584,
+      "size": 212984,
       "source_complete": false
     },
     {
@@ -489,8 +491,8 @@
     "checked": true,
     "classification_policy": "admitted component build reports are authoritative for source/generated/retained totals; flash-plan address_status rows remain an address map and require the checked profile reconciliation below",
     "companion": "tools/manifests/g2-dual-profile-ownership.json",
-    "companion_schema_version": 3,
-    "companion_sha256": "b00b6aee969f176e4534ebabfa52acd89c8f1c2392752c6038702d2098e3fb83",
+    "companion_schema_version": 4,
+    "companion_sha256": "0aecdef7ea2d5d95025f599f99fbd396f70409d43f5a9cde1460aba6eacf84ae",
     "limitation": "Exact aggregate source/generated/candidate/retained/container totals are checked for both profiles, but the Linux coarse spans do not provide a complete per-byte source-vs-generated-vs-retained mask.",
     "per_byte_ownership_mask_complete": false,
     "per_byte_ownership_policy": {
@@ -503,46 +505,54 @@
       "apple-clang": {
         "address_status_ownership_mode": "non_authoritative_requires_checked_reconciliation",
         "aggregate_buckets": {
-          "candidate_source_not_routed": 30636,
-          "generated_or_reconstructible": 426474,
-          "production_source": 424703,
-          "typed_retained_or_external": 3795983,
+          "candidate_source_not_routed": 29396,
+          "generated_or_reconstructible": 494744,
+          "production_source": 475527,
+          "typed_retained_or_external": 3749965,
           "unclassified": 0
         },
         "bytes_requiring_address_label_reconciliation": 17800,
-        "component_payload_bytes": 4677796,
-        "flash_plan_sha256": "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127",
+        "component_payload_bytes": 4749632,
+        "flash_plan_sha256": "e540570208e616cc3de20af268da55d17fbf59f918aee143be8a902449253262",
         "internal_component_container_bytes": 300,
         "outer_evenota_envelope_bytes": 944,
-        "package_report_sha256": "4d3945c95bd4ff7c8b1f8e6df4c59e5f15285c053ce37e78cfba4a830f368dcd",
-        "package_sha256": "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a",
-        "package_size": 4678740,
+        "package_report_sha256": "79250e9da752d137cbab889b913f604e62743b5d063bb281c233176318ec0bd6",
+        "package_sha256": "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
+        "package_size": 4750576,
         "per_byte_ownership_authority": "canonical Apple component builder/region mask",
         "per_byte_ownership_mask_complete": true,
-        "physical_flash_bytes": 4677496,
+        "physical_flash_bytes": 4749332,
         "typed_mixed_profile_spans": []
       },
       "linux-clang": {
         "address_status_ownership_mode": "non_authoritative_profile_coarse",
         "aggregate_buckets": {
-          "candidate_source_not_routed": 30636,
-          "generated_or_reconstructible": 136046,
-          "production_source": 207141,
-          "typed_retained_or_external": 4096289,
+          "candidate_source_not_routed": 29396,
+          "generated_or_reconstructible": 411980,
+          "production_source": 257897,
+          "typed_retained_or_external": 4050343,
           "unclassified": 0
         },
-        "bytes_requiring_address_label_reconciliation": 272466,
-        "component_payload_bytes": 4470112,
-        "flash_plan_sha256": "3915b8e5d4d04bbd1a540c6851534011b611445b75354add5cd5b24bd86e35ff",
+        "bytes_requiring_address_label_reconciliation": 274414,
+        "component_payload_bytes": 4749616,
+        "flash_plan_sha256": "97c93fa9df90ef15785437ebf860c644d52a4f08a251ec6e427c89d3e8f13e68",
         "internal_component_container_bytes": 300,
         "outer_evenota_envelope_bytes": 944,
-        "package_report_sha256": "62939ba9e07fecf90f0cfc927f053c238932e51255f19dfe04df90ba12d465f4",
-        "package_sha256": "f7260f93e2c87f2403e14f5a8e6ae1436233cce2990c386a1cde48d2e8133e31",
-        "package_size": 4471056,
+        "package_report_sha256": "1610afdfa301ec255a1e58128fd79b7131250c911d66b0cc8e3cb8cb2ab8a45a",
+        "package_sha256": "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
+        "package_size": 4750560,
         "per_byte_ownership_authority": "aggregate totals plus explicit typed-mixed spans only",
         "per_byte_ownership_mask_complete": false,
-        "physical_flash_bytes": 4469812,
+        "physical_flash_bytes": 4749316,
         "typed_mixed_profile_spans": [
+          {
+            "classification": "typed_mixed_profile_ownership",
+            "component": "ble_em9305",
+            "component_file_offset": 0,
+            "end_exclusive": 212984,
+            "reason": "exact bytes and addresses; no complete per-byte source-vs-generated-vs-retained mask is claimed",
+            "size": 212984
+          },
           {
             "classification": "typed_mixed_profile_ownership",
             "component": "apollo_bootloader",
@@ -555,15 +565,15 @@
             "classification": "typed_mixed_profile_ownership",
             "component": "apollo_main",
             "component_file_offset": 0,
-            "end_exclusive": 3678000,
+            "end_exclusive": 3956468,
             "reason": "exact bytes and addresses; no complete per-byte source-vs-generated-vs-retained mask is claimed",
-            "size": 3678000
+            "size": 3956468
           }
         ]
       }
     },
     "sole_current_per_byte_ownership_authority_profile": "apple-clang",
-    "source_inputs_sha256": "00f38b0f6d9fd0b8d1fa1e66f73878f504bbc25e9047e766418c936b2f549e65",
+    "source_inputs_sha256": "73582e0d6d00b90c18d82df885bff39e75a3b3c8851dab6a134f726577230a4f",
     "typed_mixed_boundary": "typed_mixed_profile_ownership"
   },
   "gates": {
@@ -630,17 +640,17 @@
     ],
     "separation_rule": "source availability and source license compliance do not establish permission to redistribute retained or binary-only firmware",
     "source_classification_counts": {
-      "project-owned-or-adapted": 599,
-      "upstream-licensed": 185
+      "project-owned-or-adapted": 672,
+      "upstream-licensed": 218
     },
     "source_errors": 0,
-    "source_files": 784,
+    "source_files": 890,
     "source_license_counts": {
       "Apache-2.0": 81,
       "BSD-2-Clause": 2,
-      "BSD-3-Clause": 99,
+      "BSD-3-Clause": 132,
       "GPL-3.0-only": 1,
-      "MIT": 574,
+      "MIT": 647,
       "Zlib": 27
     },
     "source_metadata_clean": true,
@@ -654,20 +664,20 @@
     ]
   },
   "package": {
-    "component_payload_bytes": 4677796,
+    "component_payload_bytes": 4749632,
     "conservation": {
-      "component_bucket_bytes": 4677796,
-      "component_buckets_plus_envelope_bytes": 4678740,
+      "component_bucket_bytes": 4749632,
+      "component_buckets_plus_envelope_bytes": 4750576,
       "matches_expected_package_size": true
     },
-    "expected_sha256": "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a",
-    "expected_size": 4678740,
+    "expected_sha256": "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
+    "expected_size": 4750576,
     "format": "EVENOTA",
     "generated_envelope_bytes": 944
   },
   "project_license_policy": {
     "apache_records_preserved": 81,
-    "bsd_records_preserved": 101,
+    "bsd_records_preserved": 134,
     "case_source_image_package_files": 5,
     "case_source_image_project_mit_files": 7,
     "case_source_image_support_files": 2,
@@ -675,10 +685,10 @@
     "community_controller_and_adapter_source_files": 112,
     "community_project_mit_compatible_source_files": 109,
     "community_touch_apache_source_files_preserved": 3,
-    "distributed_project_mit_normalization_targets": 906,
-    "em9305_source_image_package_files": 3,
-    "em9305_source_image_project_mit_files": 6,
-    "em9305_source_image_support_files": 3,
+    "distributed_project_mit_normalization_targets": 919,
+    "em9305_source_image_package_files": 11,
+    "em9305_source_image_project_mit_files": 19,
+    "em9305_source_image_support_files": 8,
     "overlay_records_pending_mit": 0,
     "project_owned_gpl_records_pending_mit": 0,
     "project_owned_normalization_targets": 460,
@@ -699,68 +709,68 @@
     },
     {
       "path": "build/canonical-observation/apple-a/build-report.json",
-      "sha256": "faa44244eb1abb457f7d6f71d7f901eacac49b6ce8b492cf4dc1174d6ff79953",
-      "size": 33680324
+      "sha256": "52f296deb271f879b976c30abae6537ff29e31317779c50de45c008595b96cff",
+      "size": 33748133
     },
     {
       "path": "build/canonical-observation/apple-b/build-report.json",
-      "sha256": "fa5792332d24a2331f76846a1d1be4c45f263fa0464d00a5a94db654d961b58d",
-      "size": 33680324
+      "sha256": "645bf6e3a306bd0bcc0ee0e293c60dcea88c9b6e17dfd5bcb7695e77d4b9d1c5",
+      "size": 33748133
     },
     {
       "path": "build/canonical-observation/linux-a/build-report.json",
-      "sha256": "cdab5dd458526551e5bfa314d612c3363206c512cf91d73426440997a05e325e",
-      "size": 4397239
+      "sha256": "11c45b4a7dbc04c39b9c878e074d07cdf896dbadd8f0f257cbf0271a83976131",
+      "size": 4466327
     },
     {
       "path": "build/canonical-observation/linux-b/build-report.json",
-      "sha256": "c632bfad7ba9a3cecfc5442574252a1455368df8db08c3516824a63f5b2f6f45",
-      "size": 4397239
+      "sha256": "033574ca3fa645e92ad782b05a4e6644abc304d994677d998f008a7d28a22274",
+      "size": 4466327
     },
     {
       "path": "build/canonical-provider/linux-clang/apollo_bootloader/build-report.json",
-      "sha256": "d6369d491628d053be53eeef03f2ce78da47b35f8565e3fd4eea3635921e01f5",
-      "size": 2071485
+      "sha256": "b0864c00a0563db45b87cbeff1b005362e663af1a435f90361cda74ea487e89d",
+      "size": 3408773
     },
     {
       "path": "build/postapply-package-apple/build-report.json",
-      "sha256": "4d3945c95bd4ff7c8b1f8e6df4c59e5f15285c053ce37e78cfba4a830f368dcd",
-      "size": 4317
+      "sha256": "79250e9da752d137cbab889b913f604e62743b5d063bb281c233176318ec0bd6",
+      "size": 4328
     },
     {
       "path": "build/postapply-package-apple/flash-plan.json",
-      "sha256": "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127",
-      "size": 4595610
+      "sha256": "e540570208e616cc3de20af268da55d17fbf59f918aee143be8a902449253262",
+      "size": 4881053
     },
     {
       "path": "build/postapply-package-linux/build-report.json",
-      "sha256": "62939ba9e07fecf90f0cfc927f053c238932e51255f19dfe04df90ba12d465f4",
-      "size": 4315
+      "sha256": "1610afdfa301ec255a1e58128fd79b7131250c911d66b0cc8e3cb8cb2ab8a45a",
+      "size": 4326
     },
     {
       "path": "build/postapply-package-linux/flash-plan.json",
-      "sha256": "3915b8e5d4d04bbd1a540c6851534011b611445b75354add5cd5b24bd86e35ff",
-      "size": 2509940
+      "sha256": "97c93fa9df90ef15785437ebf860c644d52a4f08a251ec6e427c89d3e8f13e68",
+      "size": 2793636
     },
     {
       "path": "components/apollo_main/core_overlay/build/build-report.json",
-      "sha256": "3cddcabf68eaf0e731499c18fe71b583e4775663db8f2438494f8fa7651971e3",
-      "size": 17630136
+      "sha256": "fcc12646c90476d8a2144993717746b922fdf70b654307266d9a9cbf5092c08f",
+      "size": 17808812
     },
     {
       "path": "components/apollo_main/core_overlay/overlay.json",
-      "sha256": "ec03febcb2955d9c50c8a84a792de5a52991906cbcdf42e49d3c9099fd8bcfe0",
-      "size": 5852619
+      "sha256": "733bc34d7545775ab067eb03c38678889694bc092fc840c64a1ef605b0081212",
+      "size": 5853221
     },
     {
       "path": "components/bootloader/core_overlay/build/build-report.json",
-      "sha256": "3adf11abee6f95645e4442c07451f54f03137f22545385b6c02d33c2b9fab447",
-      "size": 2086362
+      "sha256": "184affb97228a1fa4a77b897f432f6cc891362278702291a63ac6ed32efd92cd",
+      "size": 3432898
     },
     {
       "path": "components/bootloader/core_overlay/overlay.json",
-      "sha256": "9814321669b385acc48329358f9c9ba5ae3ddb3f56735fc55a83f0c710529a40",
-      "size": 906589
+      "sha256": "51cbac7fc08fbe61df13f595f967173fa099674256156cf43775783e7d524d06",
+      "size": 1532106
     },
     {
       "path": "components/em9305/source_image/README.md",
@@ -944,8 +954,8 @@
     },
     {
       "path": "manifests/g2-2.2.6.10-core-source.json",
-      "sha256": "c49af789b37b7ee6f5ba0598464ef9eb2107acce73e68647e923bd73de223795",
-      "size": 3186925
+      "sha256": "01157a2293e57b1c1fcc972b19380ae4245642a164eb2906ab54ef9f8f5eeccf",
+      "size": 3391215
     },
     {
       "path": "manifests/g2-2.2.6.10.json",
@@ -969,8 +979,8 @@
     },
     {
       "path": "tools/analyze_em9305_metaware_runtime_candidate.py",
-      "sha256": "bb9b62aa9e5d88b3f5f92cda58ad3dc56a8b74be69c8ef67a6ce4a8a08e3dd45",
-      "size": 12170
+      "sha256": "1bbc2ce09b7a9748664702d76d93f60c14b62a62a46c9c1f9ad2c2ff7d09feaa",
+      "size": 14246
     },
     {
       "path": "tools/analyze_em9305_pawr_boundary.py",
@@ -1004,8 +1014,8 @@
     },
     {
       "path": "tools/analyze_em9305_source_readiness.py",
-      "sha256": "faf3cb03a201a00da2e819abdd040e2694a93ba1a3d1e875845c4760f6800b55",
-      "size": 41765
+      "sha256": "b50a2d4ced53634ed216f6bbed9e966a5b59f0209ae7e3249dd183206af51ea4",
+      "size": 42240
     },
     {
       "path": "tools/analyze_em9305_unclassified_tail_candidate.py",
@@ -1024,23 +1034,23 @@
     },
     {
       "path": "tools/analyze_g2_completion_readiness.py",
-      "sha256": "28bbaba7ac5187dd12af70176269257fe9a5094ddfc21a532e64dafc36a34124",
-      "size": 82184
+      "sha256": "a76430ed4dc82d3ebaaaa60236491f2e8ff46c205cc3c299c2edac803a3584d4",
+      "size": 82999
     },
     {
       "path": "tools/analyze_g2_dual_profile_ownership.py",
-      "sha256": "8b17ba945b862d7c6ffa104614e0fd9ac3f6679a8c2c153d5595354e3c0f269e",
-      "size": 43248
+      "sha256": "827f946797318151b4533eaad875af4b1c37a135ed3908d982fc0f5cc4535949",
+      "size": 47088
     },
     {
       "path": "tools/analyze_g2_production_raw_encoding_quality.py",
-      "sha256": "78c392262ae1b7062f98ad2b331600b92a5a60c1b4c055f58694a4815473d8ef",
-      "size": 10886
+      "sha256": "a65be8c058eca0a207950c66b7df6880b3360e9839038c4446a75979416b8c7e",
+      "size": 11684
     },
     {
       "path": "tools/analyze_g2_project_license_normalization.py",
-      "sha256": "33a628d982d5fdab099c1ba95811a7b2d380993aa3c0a5d532d414a87f9d2c3a",
-      "size": 29250
+      "sha256": "76eb4d4fb74de7547ee9126949e3cfacc15e6196c6e47054249748c1fc0c82df",
+      "size": 29888
     },
     {
       "path": "tools/analyze_g2_touch_final_frontier.py",
@@ -1089,13 +1099,13 @@
     },
     {
       "path": "tools/apollo_overlay.py",
-      "sha256": "dd831e89425612d65311cb93727f857c60665cb01bba82a660e736f29b0684d3",
-      "size": 256712
+      "sha256": "52e96c335c795571f3d6bfd028bb23984607081daabfe32beb85b94ef6b31c08",
+      "size": 259559
     },
     {
       "path": "tools/apply_g2_canonical_observations.py",
-      "sha256": "4763539709d28269c84148b9eed4026fe2010a07e73bc7631bc88d7484d3bf82",
-      "size": 172249
+      "sha256": "ade996cc7b0f38f5d4194026b48b17346c111074a91a7ae6b83fa86cda3a8446",
+      "size": 199877
     },
     {
       "path": "tools/audit_g2_release_licensing.py",
@@ -1104,13 +1114,13 @@
     },
     {
       "path": "tools/manifests/em9305-final-source-readiness-summary.json",
-      "sha256": "ae70d87d4833ec98e5235813ada50564513fcbb7ecd2a02816411510bd088084",
-      "size": 5211
+      "sha256": "5cd0e51ef3274fe1e96d8c3e4aa0ff776fef4587305112f05573b5cde0d194fd",
+      "size": 4805
     },
     {
       "path": "tools/manifests/em9305-final-source-readiness.tsv",
-      "sha256": "d63cdcd7a4bbaf6a30ef55eafa470561d205ac87f55656c424786bbbec775b15",
-      "size": 32977
+      "sha256": "cfda63c68a73d27235af204f01ee6c848db9495d0294d55faf70096b7ab08bf9",
+      "size": 33152
     },
     {
       "path": "tools/manifests/em9305-record-package-summary.json",
@@ -1124,7 +1134,7 @@
     },
     {
       "path": "tools/manifests/g2-apollo-origin-accounting.json",
-      "sha256": "99e327e37ae2e14b44e4b73a9edb90e2d9add05c5feeb723938d10e9de21c702",
+      "sha256": "1b218130f2df8f0a9682cf198d966c1379aa5189ca17b27a7676861bad8ebf85",
       "size": 2747
     },
     {
@@ -1169,13 +1179,13 @@
     },
     {
       "path": "tools/manifests/g2-clkmgr-divider-candidate-summary.json",
-      "sha256": "26c15b77473f72efe4d9bb427c318d66b885874bc1984714410a8e4a3dd870b3",
+      "sha256": "b4e5f0f3beafbb856af601c5b40d1243ff5903dcb78964e1ea69f05282dc49a0",
       "size": 7275
     },
     {
       "path": "tools/manifests/g2-dual-profile-ownership.json",
-      "sha256": "b00b6aee969f176e4534ebabfa52acd89c8f1c2392752c6038702d2098e3fb83",
-      "size": 14382
+      "sha256": "0aecdef7ea2d5d95025f599f99fbd396f70409d43f5a9cde1460aba6eacf84ae",
+      "size": 16549
     },
     {
       "path": "tools/manifests/g2-nemavg-stroke-caps-candidate-summary.json",
@@ -1184,13 +1194,13 @@
     },
     {
       "path": "tools/manifests/g2-production-raw-encoding-quality-summary.json",
-      "sha256": "b23b944d0552ccbcbeee10eb225e26ec2ece69b5d5053cf9bfa868ea76370537",
-      "size": 2183
+      "sha256": "a632a5e601bfc16461f30dab4ed3a9ec1446a0203eb608e02a7ec9919ccaa7d1",
+      "size": 1799
     },
     {
       "path": "tools/manifests/g2-project-license-normalization-summary.json",
-      "sha256": "d6b1f641920c1b2171de9e8e81f330a7d21d34dba3a5cee1bf4e30ccc3e55dfa",
-      "size": 2616
+      "sha256": "5fe83857cefbdfabb136233cdf9ab590e7c2a259843e4ce1e38310d0daaa87f6",
+      "size": 2618
     },
     {
       "path": "tools/manifests/g2-project-license-normalization.tsv",
@@ -1474,8 +1484,8 @@
     },
     {
       "path": "tools/open_cfw.py",
-      "sha256": "2065bc3cefd4390080b15d277906c7e9e3b60ddc8e7e4ee046dab63310cf331a",
-      "size": 99007
+      "sha256": "177c9e6266dd1327b483a05944f7a00b8a9d4d5e85eb4a0471a04a0d41dea6d0",
+      "size": 99021
     }
   ],
   "source_ownership_quality": {

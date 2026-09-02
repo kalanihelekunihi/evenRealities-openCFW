@@ -71815,8 +71815,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             (
                 "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
-                4_678_740,
-                "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a",
+                4_750_576,
+                "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
             ),
         )
         self.assertEqual(len(self.image), package["expected_size"])
@@ -71891,8 +71891,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         self.assertEqual(
             (len(plan_bytes), hashlib.sha256(plan_bytes).hexdigest()),
             (
-                4_595_610,
-                "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127",
+                4_630_517,
+                "85579ad647a62c7457a5e249a43ffb57f2b1ad3f4d6abecf79d4a898d53100f7",
             ),
         )
         # Shared build/source output may be retained from an earlier build and

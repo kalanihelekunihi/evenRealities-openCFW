@@ -124,20 +124,20 @@ PROSPECTIVE_LINUX_PINS = {
     },
 }
 APPLE_AGGREGATE_PINS = {
-    "overlay": (360_578, "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"),
-    "component": (3_883_974, "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"),
-    "package": (4_677_046, "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"),
+    "overlay": (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"),
+    "component": (3_956_468, "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"),
+    "package": (4_750_576, "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6"),
 }
 LINUX_AGGREGATE_PINS = {
-    "overlay": (152_912, "e045351065be7c01ff3bc4666940e0b536c2b114df0681169bd37031139d7c20"),
-    "component": (3_676_308, "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7"),
-    "package": (4_469_364, "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"),
+    "overlay": (154_604, "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6"),
+    "component": (3_956_468, "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7"),
+    "package": (4_750_560, "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2"),
 }
 APPLE_CORE_STAGE_PINS = {
     "overlay": APPLE_AGGREGATE_PINS["overlay"],
     "component": (
-        3_883_974,
-        "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
+        3_885_668,
+        "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5",
     ),
 }
 LINUX_CORE_STAGE_PINS = {
@@ -1554,7 +1554,7 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
             (boot["provider"]["size"], boot["provider"]["sha256"]),
             (
                 163_840,
-                "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
+                "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2",
             ),
         )
 

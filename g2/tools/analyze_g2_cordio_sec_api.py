@@ -18,15 +18,15 @@ BASE = 0x00437FE0
 IMAGE_SIZE = 3_523_396
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 SOURCE_SHA256 = "fdfe93f8ec34dad9deea2ce5e4f5571bf53672cda202b87a2a04a3c60832634e"
-PACKAGE_SIZE = 4_678_740
-PACKAGE_SHA256 = "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a"
-FLASH_PLAN_SIZE = 4_595_610
-FLASH_PLAN_SHA256 = "b217e924841c0fda423dfc7727d76d31499f8057aade7339e4bc3b338104c127"
+PACKAGE_SIZE = 4_750_576
+PACKAGE_SHA256 = "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6"
+FLASH_PLAN_SIZE = 4_881_053
+FLASH_PLAN_SHA256 = "e540570208e616cc3de20af268da55d17fbf59f918aee143be8a902449253262"
 EXPECTED_OVERLAY = {
     "overlay_size": 362_272,
     "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
-    "component_size": 3_885_668,
-    "component_sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
+    "component_size": 3_956_468,
+    "component_sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
 }
 FUNCTIONS = (
     ("open_cfw_cordio_sec_hci_callback", 0x00536234, 0x00536324, "da8ebedf91cd554eae5a19134ec01fd47b991e76d0e8666365b8e662dca7f89c"),
@@ -113,7 +113,7 @@ def analyze() -> dict:
     }
     if any(package_report["package"].get(k) != v for k, v in expected_report.items()):
         raise AuditError("package replay changed")
-    if package_report.get("placed_region_count") != 6_586 or package_report.get("unresolved_region_count") != 0:
+    if package_report.get("placed_region_count") != 7_006 or package_report.get("unresolved_region_count") != 0:
         raise AuditError("package region census changed")
     return {
         "schema_version": 1,
@@ -133,7 +133,7 @@ def analyze() -> dict:
             "alignment_bytes": 16,
             "strict_relocations": 65,
             "package_byte_identical": True,
-            "placed_regions": 6_586,
+            "placed_regions": 7_006,
             "unresolved_regions": 0,
             "primitive_provider": "retained HCI/controller boundary",
             "hardware_validation": "blocked by unavailable physical evidence",

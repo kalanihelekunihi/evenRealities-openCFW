@@ -894,19 +894,19 @@ EXPECTED_TAG_ID_MANIFEST_PROVIDERS = {
         "kind": "source_build",
         "path": "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
         "size": 163840,
-        "sha256": "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
+        "sha256": "1676f7899d95efcd8b8279fca56d0f7b932dfaa7001905a3f66c4f585f2b8b08",
         "profiles": {
             "linux-clang": {
                 "size": 163824,
-                "sha256": "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e",
+                "sha256": "7cc6dec24f22842d6e84fe054fa1847e3c34cb6d89bf43a6a8b9659c3a7bb542",
             },
             "apple-font-manager-record": {
                 "size": 163840,
-                "sha256": "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
+                "sha256": "1676f7899d95efcd8b8279fca56d0f7b932dfaa7001905a3f66c4f585f2b8b08",
             },
             "apple-product-rtos-record": {
                 "size": 163840,
-                "sha256": "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
+                "sha256": "1676f7899d95efcd8b8279fca56d0f7b932dfaa7001905a3f66c4f585f2b8b08",
             },
         },
     },
@@ -1786,7 +1786,7 @@ def verify_production_allowlist() -> None:
                 "overlay_size": 15224,
                 "overlay_sha256": "2dad91f7403219c30fee3130d62833c98561c8fb56387960f0654723ceed67ca",
                 "component_size": 163824,
-                "component_sha256": "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e",
+                "component_sha256": "7cc6dec24f22842d6e84fe054fa1847e3c34cb6d89bf43a6a8b9659c3a7bb542",
             },
         },
     }
@@ -2025,13 +2025,13 @@ def verify_production_allowlist() -> None:
                 "overlay_size": 15240,
                 "overlay_sha256": "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314",
                 "component_size": 163840,
-                "component_sha256": "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad",
+                "component_sha256": "1676f7899d95efcd8b8279fca56d0f7b932dfaa7001905a3f66c4f585f2b8b08",
             },
             "linux-clang": {
                 "overlay_size": 15224,
                 "overlay_sha256": "2dad91f7403219c30fee3130d62833c98561c8fb56387960f0654723ceed67ca",
                 "component_size": 163824,
-                "component_sha256": "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e",
+                "component_sha256": "7cc6dec24f22842d6e84fe054fa1847e3c34cb6d89bf43a6a8b9659c3a7bb542",
             },
         },
     }

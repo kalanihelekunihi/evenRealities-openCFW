@@ -146,7 +146,7 @@ def audit() -> dict:
                        check=True, capture_output=True, text=True)
         component = json.loads((Path(raw) / "build-report.json").read_text(
             encoding="utf-8"))["component"]
-    require(component["source_owned_bytes"] + component["opaque_base_bytes"] == 147350,
+    require(component["source_owned_bytes"] + component["opaque_base_bytes"] == 146994,
             "byte conservation changed")
     require(component["source_owned_in_place_bytes"] <= component["source_owned_bytes"],
             "in-place source accounting exceeds all source-owned bytes")

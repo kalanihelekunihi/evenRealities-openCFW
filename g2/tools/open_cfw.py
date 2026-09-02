@@ -53,15 +53,15 @@ CASE_RUN_BASE = 0x08000000
 #: blobs are never given profile overrides.
 DEFAULT_TOOLCHAIN_PROFILE = "apple-clang"
 DUAL_PROFILE_OWNERSHIP_PACKAGES = {
-    "apple-clang": "20bcd2816ac92e69a23afdf5e76d02b941ccbf6d8438970daeac51f9dfe7276d",
-    "linux-clang": "c2d02ec77e1029d767f6bdc581ca9041c64e0bdb9978739471db7f45fc3bc5ac",
+    "apple-clang": "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
+    "linux-clang": "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
 }
 DUAL_PROFILE_OWNERSHIP_MANIFESTS = {
-    "apple-clang": "46c9231e02ec88f4e32e85a25cd9b367b6857613af577d6d27a145be38a98946",
-    "linux-clang": "d1682bffa8c410605cc8198793f310e5ab66854bd18f7ae2dde40b1f77718875",
+    "apple-clang": "fc65d95b6b29aa9ca888a4f02bd99787f16da5b69ae0ac72660d1ed45ad7fba1",
+    "linux-clang": "124046ef10949406a6c1ad517807513b9425261b33604054c9597670252504a5",
 }
 DUAL_PROFILE_OWNERSHIP_COMPONENTS = frozenset(
-    {"apollo_bootloader", "apollo_main"}
+    {"ble_em9305", "apollo_bootloader", "apollo_main"}
 )
 
 REQUIRED_RELEASE_COMPONENTS = {

@@ -546,7 +546,7 @@ def build_assessment() -> dict[str, Any]:
                  f"{profile} per-byte ownership authority changed")
         _require(
             (not package["typed_mixed_profile_spans"] if mask_complete else
-             len(package["typed_mixed_profile_spans"]) == 2),
+             len(package["typed_mixed_profile_spans"]) == 3),
             f"{profile} typed-mixed ownership boundary changed",
         )
         dual_profiles[profile] = {

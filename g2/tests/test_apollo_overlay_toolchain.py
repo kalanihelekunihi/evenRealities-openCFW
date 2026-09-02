@@ -742,6 +742,43 @@ probe_table:
                 allow_halfword_placement="yes",  # type: ignore[arg-type]
             )
 
+    def test_complete_thumb_leaf_can_use_reviewed_halfword_placement(self) -> None:
+        clang = self._arm_clang()
+        with tempfile.TemporaryDirectory() as directory:
+            temporary = Path(directory)
+            source = temporary / "halfword-function.c"
+            object_path = temporary / "halfword-function.o"
+            source.write_text(
+                "__attribute__((noinline, aligned(4))) "
+                "unsigned reviewed_halfword_function(unsigned x) { "
+                "return (x ^ 0x1234u) + 7u; }\n",
+                encoding="utf-8",
+            )
+            subprocess.run(
+                [
+                    clang,
+                    "--target=arm-none-eabi",
+                    *self._isolated_flags(),
+                    "-c",
+                    str(source),
+                    "-o",
+                    str(object_path),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            leaf, extraction = apollo_overlay.extract_in_place_function_section(
+                object_path,
+                "reviewed_halfword_function",
+                runtime_address=0x1002,
+                relocation_configs=[],
+                allow_halfword_placement=True,
+            )
+            self.assertGreater(len(leaf), 2)
+            self.assertEqual(extraction["runtime_address"], 0x1002)
+            self.assertEqual(extraction["alignment"], 4)
+
     def test_authenticated_isolated_leaf_can_be_appended_without_other_tu_state(
         self,
     ) -> None:

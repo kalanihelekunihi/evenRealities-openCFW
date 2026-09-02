@@ -161,10 +161,10 @@ is carried as a single system-domain row that bounds all domains.
 | Case-side UART/update protocol (frame `5A A5 FF`, OTA state machine) | implemented-in-source; hardware validation blocked by unavailable physical evidence | 8 freestanding Cortex-M0+ APIs implement frame search/checksum, BE image sum, offer/chunk parsing, retry policy, and dual-bank OTA sequencing | `research/g2-case-uart-update-source-closure.md`; `components/shared/case/runtime_case_uart_update.c`; `make case-uart-update-closure` | 9 focused source/build/behavior gates green; live RX timeout/command, erase/program, serial-window copy, option-byte swap/reset, and glasses acknowledgement evidence is blocked by unavailable physical evidence; future qualification requires authorized case hardware |
 | Charging-case firmware remainder (STM32G0) | implemented-in-source / hardware-deferred | all 222 discovered executable functions / 14,886 instruction bytes have strict Cortex-M0+ C; no callable function remains without project source; 2,184 inter-function bytes are exhaustively typed as non-body code/data boundaries; eight translation units link with zero undefined symbols into an 18,916-byte raw flash image and complete 18,948-byte EVEN package | `research/g2-box-function-map-recovery.md`; `research/g2-case-final-classification.md`; `research/corpus/case/ghidra/final-frontier`; `components/case/source_image`; `make case-semantic-leaves`; `make case-source-image` | software image/link/package gates are green; exact board vectors, GPIO/timer bindings, bank-swap behavior, identity copy-forward, and live case qualification are blocked by unavailable physical evidence |
 | — case battery/charging/thermal policy, bit-banged PMIC/charger/watchdog, `nSWAP_BANK` flow | hardware-dependent | log/code-evidenced only | `research/g2-box-stm32g0-platform-recovery.md` | requires physical case hardware execution |
-| EM9305 BLE controller source replacement | proprietary-blocked | 1,494 exact functions / 157,122 B identified; 33,658 B unresolved; public Packetcraft ends at r20.05c | `upstream-inventory.md`; `research/em9305-expanded-sdk-archive-census.md` | licensed modern Packetcraft/EM source is the only path to source ownership |
-| EM9305 residual segment classification and source admission | software-gap (classification complete; candidate integration remains) | 175 residual segments / 33,658 B are exhaustively classified; the 1,240 reviewed MIT B are `candidate_source_not_routed`, so the whole-component ledger is 1,240 candidate + 210,708 typed retained/external + 0 unclassified = 211,948 B | `research/em9305-controller-cluster-recovery.md`; `research/g2-wave0-readiness-ledger-reconciliation.md`; `tools/analyze_em9305_source_readiness.py` | production-integrate the 23 concrete-source segments; the remaining boundary stays explicit and all component bytes remain release-blocking until routing and authority are resolved |
+| EM9305 BLE controller source replacement | proprietary-blocked / mixed-provider production route | the complete 212,984-byte provider has 1,174 compiled-source + 1,226 generated/reconstructible + 210,584 typed retained/external bytes; public Packetcraft ends at r20.05c | `upstream-inventory.md`; `research/em9305-expanded-sdk-archive-census.md`; `components/em9305/source_overlay` | replace or lawfully source the 210,584 retained controller bytes; source ownership and redistribution authority remain unresolved |
+| EM9305 residual segment classification and source admission | implemented-in-source / hardware-deferred / whole-source-incomplete | all 175 residual segments / 33,658 B are exhaustively classified; all 23 concrete spans / 1,240 stock B are production-routed through ARCv2-EM C and checked veneers, leaving zero candidate and zero unclassified bytes | `research/em9305-controller-cluster-recovery.md`; `research/g2-wave0-readiness-ledger-reconciliation.md`; `components/em9305/source_overlay`; `tools/analyze_em9305_source_readiness.py`; `make em9305-source-overlay` | software compile/link/package gates are green; live boot/radio/stack-guard validation is blocked by unavailable physical evidence; the 210,584-byte retained boundary keeps whole-component source completeness false |
 | EM9305 QP/C 6.5.1 RTEF | software-gap (install placement/production routing); hardware-deferred | 3,052 cluster B 100% source/archive identified; eight GPL-3.0-or-later portable units plus two OpenCFW port units compile for ARCv2 EM and deterministically link into a 21,284-byte relocatable ELF / 32,026-byte archive with zero undefined symbols and zero forbidden runtime imports; bytes remain stock-retained | `progress.md`; `em9305-qpc-arcompact-audit.md`; `third_party/qpc/README.openCFW.md`; `tools/manifests/em9305-qpc-component-build-summary.json`; `make em9305-qpc-component` | compiler and software-link gaps are green; authenticate placement/redirect records and production composition; physical QK/critical-section/UART/voltage-monitor/radio validation is blocked by unavailable physical evidence |
-| EM9305 record-table image packaging | software wrapper implemented / source-image incomplete / hardware-deferred | deterministic MIT parser and builder authenticate the 211,948-byte, four-record container, its 124-byte metadata, 211,824-byte payload, 29 erase-sector IDs, canonical offsets, target non-overlap, and zero padding; rebuilding parsed stock records is byte-exact | `components/em9305/source_image`; `tools/analyze_em9305_record_package.py`; `tools/manifests/em9305-record-package-summary.json`; `make em9305-record-package` | container-generation software and hostile-input gates are green; all four production record bytes, QP/C/candidate placement and redirects, and a redistributable controller record remain software blockers, so `source_image_complete=false` and `production_routed=false`; live install/boot/radio validation is blocked by unavailable physical evidence |
+| EM9305 record-table image packaging | mixed-source provider implemented / source-image incomplete / hardware-deferred | deterministic MIT parser/builder plus ARC overlay emit a complete 212,984-byte four-record provider; the 124-byte table is regenerated, the first three records are preserved, the application grows by 1,036 source bytes, and package/accounting/sector guards are exact | `components/em9305/source_image`; `components/em9305/source_overlay`; `tools/integrate_g2_em9305_source_overlay.py`; `make em9305-source-overlay` | software wrapper, target compile/link, entry routing, manifest, and package gates are green; 210,584 retained bytes prevent source-image completeness and live install/boot/radio validation is blocked by unavailable physical evidence |
 | EM9305 vendor libs (PML, sleep manager/timer, protocol timer, unitimer) | proprietary-blocked | 98 exact functions / 7,172 B authenticated to SDK v4.2 blobs; source unavailable | `progress.md`; `upstream-inventory.md` | recover or recreate proprietary source; retain exact stock spans meanwhile |
 | BLE controller validation of any source-replaced Cordio path | hardware-dependent (also security) | — | `research/cordio-aggregate-closure-audit.md` | hardware/controller/concurrency validation on physical G2; blocked by unavailable physical evidence; future qualification requires the specified physical evidence |
 
@@ -225,7 +225,8 @@ update security rests on the protected Apollo bootloader.
 | Apollo (Even) bootloader — MSPI handle initializer `[0x00424A5A,0x00424AEA)` | implemented-in-source; hardware validation blocked by unavailable physical evidence | structured BSD-3-Clause C provides an 88-B dual-profile, relocation-free in-place return path; the unreachable 56-B stock tail and following alignment/literal remain retained | `research/g2-bootloader-mspi-initialize-424a5a-424aea-source-closure.md`; `components/bootloader/core_overlay/runtime_mspi_initialize_424a5a.c`; `tests/test_analyze_g2_bootloader_mspi_initialize_424a5a.py` | host state-ABI, validation, failure non-mutation, both reviewed profiles, manifest, package, and ownership gates are green; live SRAM, module, clock, XIP-delay, and cold-boot qualification is blocked by unavailable physical evidence |
 | Apollo (Even) bootloader — MSPI controller configure `[0x00424AF0,0x00424BD4)` | implemented-in-source; hardware validation blocked by unavailable physical evidence | structured BSD-3-Clause C provides a 152-B dual-profile, relocation-free in-place return path; the unreachable 76-B stock tail remains retained | `research/g2-bootloader-mspi-configure-424af0-424bd4-source-closure.md`; `components/bootloader/core_overlay/runtime_mspi_configure_424af0.c`; `tests/test_analyze_g2_bootloader_mspi_configure_424af0.py` | handle/state/MMIO/TCB/capacity semantics and both target profiles are green; live register, SRAM, clock-on-D4, XIP, and cold-boot qualification is blocked by unavailable physical evidence |
 | Apollo (Even) bootloader — public MSPI device configure `[0x00424BE4,0x00425066)` | implemented-in-source; hardware validation blocked by unavailable physical evidence | structured BSD-3-Clause C provides a 672-B dual-profile in-place return path with six strict calls; the unreachable 482-B stock tail remains retained | `research/g2-bootloader-mspi-device-configure-public-424be4-425066-source-closure.md`; `components/bootloader/core_overlay/runtime_mspi_device_configure_public_424be4.c`; `tests/test_analyze_g2_bootloader_mspi_device_configure_public_424be4.py` | all 23 clock classes, restrictions, lifecycle failures, ABI offsets, both target profiles, packaging, and byte conservation are green; live register, clock, DMA/TCB, XIP, flash, and boot qualification is blocked by unavailable physical evidence |
-| Apollo (Even) bootloader — explicit retained boundary | software-gap | the exact 117,575-B retained complement is derived from 593 current disjoint overlay intervals; the 570-B hardware initializer, 284-B private MSPI device configuration, 84-B PIO-mixed configuration, 88-B initializer, 152-B controller configuration, 672-B public device configuration, and two 52-B clock-manager leaves are production-routed source evidence and contribute zero candidate bytes | `source-coverage.md`; `research/g2-wave0-readiness-ledger-reconciliation.md`; `research/g2-apollo-clkmgr-divider-source-candidate.md`; `tools/analyze_g2_completion_readiness.py`; `manifests/g2-2.2.6.10-core-source.json` | preserve authenticated literals, data gaps, retained executable spans, and the protected secure-loader boundary; next executable software frontier is `am_hal_mspi_enable` at `[0x00425066,0x004250F0)`; hardware qualification remains blocked by unavailable physical evidence |
+| Apollo (Even) bootloader — MSPI control `[0x004251C0,0x004262E0)` | implemented-in-source; hardware validation blocked by unavailable physical evidence | a 124-B stock-ABI adapter and 3,824-B maintained AmbiqSuite body are production-routed under strict Apple/Linux relocation contracts; the 436-B unreachable stock tail remains explicit retained evidence | `research/g2-bootloader-mspi-control-4251c0-4262e0-source-closure.md`; `components/bootloader/core_overlay/runtime_mspi_control_4251c0.c`; `tools/analyze_g2_bootloader_mspi_control_4251c0.py`; `tests/test_analyze_g2_bootloader_mspi_control_4251c0.py` | all 40 stock requests, low-byte aliases, state/register/queue/failure semantics, both reviewed target profiles, manifest ownership, and provider conservation are green; live register, XIP, timing, FIFO, interrupt, flash-bus, and cold-boot qualification is blocked by unavailable physical evidence |
+| Apollo (Even) bootloader — explicit retained boundary | software-gap | the exact 107,285-B retained complement is derived from the current disjoint overlay intervals; the exhaustive post-MSPI census now admits 55 production-source spans / 7,368 stock bytes through the SPOT-manager state-transition selector at `0x0042A43A`, while 284 authenticated unreachable-tail bytes remain separately typed | `source-coverage.md`; `research/g2-bootloader-cmdq-services-427794-427c80-source-closure.md`; `research/g2-bootloader-float-math-427c90-427e84-source-closure.md`; `research/g2-bootloader-spotmgr-transition-428378-source-closure.md`; `research/g2-bootloader-spotmgr-state-transition-sequence-42a2b4-source-closure.md`; `research/g2-bootloader-aeabi-memcpy-dual-entry-routing-correction.md`; `tools/analyze_g2_bootloader_post_mspi_frontier.py`; `tools/analyze_g2_completion_readiness.py`; `manifests/g2-2.2.6.10-core-source.json` | preserve authenticated literals, unreachable return tails, data gaps, retained executable spans, and the protected secure-loader boundary; the next executable frontier is `0x0042A43A`; hardware qualification is blocked by unavailable physical evidence |
 | Ambiq secure bootloader (ROM `0x00400000`–`0x00410000`) | hardware-dependent (policy: preserve boundary) | 64 KiB, absent from EVENOTA, protected | `memory-map.md`; `progress.md` | owned-device readout or authoritative vendor source; blocked by unavailable physical evidence; future qualification requires the specified physical evidence |
 
 ## Health
@@ -256,7 +257,7 @@ update security rests on the protected Apollo bootloader.
 | Watchdog on-device enable/reset behavior | hardware-dependent | offline selector/provider chain complete; physical nPMx watchdog response is not observable in this workspace | same watchdog audit; 2026-08-22 hardware audit | authorized G2 + reset-cause/timing capture; blocked by unavailable physical evidence; future qualification requires the specified physical evidence |
 | Product startup/main thread (`s200_config_main.c`) | implemented-in-source; hardware-deferred | corrected six-function boundary (1,468 stock body bytes + 62 retained data bytes); both LVGL callbacks, widget construction, platform init, reset priority/brown-out clear, release registration, product-RTOS init, SRAM hand-off and terminal thread loop route to 584 compiled C bytes under 47 strict relocations | `research/g2-s200-config-main-recovery.md`; `g2-product-rtos-recovery.md` | host semantics and all isolated Cortex-M55 leaves pass; live startup/reset/clock/power/display validation is blocked by unavailable physical evidence; future qualification requires authorized physical evidence |
 | Selected Apollo-main source-admission frontier (FreeType engine, liblc3 encoder, LVGL/Ambiq/Nema backend) | software-gap (production-capable source admitted; placement/routing open) | FreeType complete CFF 101 functions / 16,718 callable B (older candidate 47 / 12,062 B), complete base 182 / 20,442 B (older candidate 90 / 9,736 B), SFNT 136 / 29,258 B, PSHinter 79 / 9,188 B, PSAux 199 / 29,750 B, PSNames 11 / 1,132 B, smooth renderer family 29 / 4,310 B, autofit 87 / 23,612 B, and complete TrueType 265 / 41,728 B, with zero unresolved callable bytes in the CFF, base, SFNT, PSHinter, PSAux, PSNames, smooth, autofit, and TrueType complete module maps; the CFF route census authenticates its retained default-module registration and production LVGL consumer but proves the source-built TU/class/policy route is still absent; its dual-profile finalizer closes all 45 imports and all relocations with zero static RAM, but the 477 package-verified current regions in the nominal 71,100-B interval leave only 4,422 B and cause a 22,372-/22,304-B Apple/Linux placement shortfall; even the deliberately optimistic 22,008-B reclaim upper bound remains 4,786/4,718 B short; the whole-address solver verifies all 6,120 application and 330 bootloader rows, proves zero internal application gaps, excludes 5,920 B of bootloader-only headroom for lack of application-placement and cross-entry-update authority, and leaves only a 21,706-B legal optimistic scatter pool, still 5,074/5,006 B short of the Apple/Linux minimum loadable sections; a source- and feature-identical whole-TU `-Oz` variant reduces the loadable closure to 20,416/20,364 B with 1,290/1,342 B margin, accounts for all 101 mapped functions as 81 emitted plus 20 clang-proven inline functions, retains all 55 address-taken callback roots, and first closes the byte-capacity threshold; the exact dual-profile scatter linker then uses only the stock-CFF envelope plus application tail in Apollo package entry 6, replays all relocations and 36 bindings with zero veneers/cross-entry writes, resolves all 58 callback words and the relocated 96-B class, and leaves 930/990 B Apple/Linux slack, while the guarded class-pointer patch remains unapplied because that proof uses an older root-level package ending at `0x007FCEBA`; current canonical Apple/Linux entry 6 ends at `0x007ECA44` / `0x007B9F10`, so profile-specific `0xFF` fill, growth, length/CRC, flash-plan, and package receipts still require fresh integration; the older TrueType candidate remains a narrower 248-function / 38,828-byte reachable graph; liblc3 encoder 41 source-attributed functions / 16,128 stock B, a 101,616-B specialized aligned closure, a five-table/404-B immutable-XIP data policy with 78 internal pointer relocations and zero runtime-copy/RAM bytes, a synthetic finalizer proving all 484 relocations applied before XIP emission, and a bounded dual-profile `service_audio` adapter whose compact state exactly fits each authenticated 2,628-byte stock slot (10,512 B across four contexts) with zero additional runtime-writable allocation while providing at least 2,596 B of aligned encoder capacity for a 2,596-B maximum admitted real liblc3 state; its exact stock-ABI shim owns setup at `0x0057A926` and encode at `0x0057A940`, authenticates all four/five whole-image ingress sites and the four fixed contexts, and replays all 515/521 Apple/Linux relocations with the two exact Thumb-2 veneers in synthetic layouts, but the baseline append placement remains 34,084/35,204 B short; a behavior-preserving `-Oz`/section-GC build retains the 11 bindings and five-table XIP policy while reducing best-order shortfalls to 9,152/9,100 B, and the exact seven-slot suffix pack moves only the final 84 already-strict leaves / 9,174 payload B, replays 288 relocations, closes all 127 exact-start branch ingresses with zero raw-pointer ingress, and leaves 96 B before the update record, but actual LC3 best-order finalization, 11 authenticated runtime addresses, entry routing, and atomic OTA integration remain absent, so no route or firmware image is emitted; authenticated LVGL backend 11 linked TUs / 170,833 source B plus both Nema buffer helpers covering 82 stock B, a five-function Apollo HAL adapter, a three-function FreeRTOS queue/semaphore adapter, a zero-import 14-function LVGL core-utility provider, a zero-import 11-function stateless provider, a zero-import five-function memory/AEABI runtime provider, a zero-import five-function musl scalar-math provider, a zero-import four-function FPv5-D16 musl provider closing `cosf`/`sinf`/`sqrt`/`tanf` across 35 authenticated consumer relocations, and a four-function zero-ELF-import LVGL mutex provider with six authenticated fixed calls; a zero-import five-function LVGL heap/array provider uses the three authenticated synchronized heap-facade entries, fixes the 20-byte ILP32 array ABI, and closes 41 consumer relocations; a single-export `lv_draw_buf_destroy` lifecycle provider preserves callback-before-descriptor-free ordering and resolves its sole `lv_free` import in a zero-undefined 3,584-B aggregate; a conservative section-GC link roots all 39 external Ambiq functions, retains all 96 direct Nema/GPU requirements, and removes only unreferenced `lv_ambiq_get_glyph` plus its private `utf8_codepoint_size` import; an exact 492-B `lv_global` OBJECT/BSS provider fixes the authenticated `0x2006F548` address, 0x1EC-byte ABI, and two consumer relocations while leaving collision ownership, initializer order, and handler contents unqualified; a bounded `lv_freetype_outline_add_event` provider resolves its sole `lv_global` import in a zero-undefined aggregate and stores only the authenticated callback field while leaving context lifetime/init/concurrency unqualified; an exact 2,296-B `lv_draw_buf_create`/`lv_draw_buf_reshape` provider depends only on admitted heap/global symbols plus four retained-initializer-owned callbacks and forms a zero-import 4,780-B heap/global/shape aggregate; an exact-ABI zero-import `lv_font_get_bitmap_fmt_txt` provider then closes raw/plain/compressed/RLE bitmap decoding with hostile-input sanitizer coverage; an exact `lv_vector_for_each_destroy_tasks` provider closes against only admitted `lv_array_deinit`/`lv_free`, proves unlink-before-callback and exact single-release semantics, raises the scoped maximal object to 1,369,220 B, and reduces the residual from 18 to 14 atomic-link symbols (`77f7f1022e2ea9cd79a7c638f9b0daef66903d2689d6d1b3a36d5e5b4e3680cd`) while leaving caller-owned cache handlers, asset/list extents and lifetime, callback mutation, live heap/global ownership, and concurrency unqualified; an exact `lv_draw_create_unit` provider closes its retained consumer against only admitted `lv_malloc_zeroed`/`lv_global`, preserves zeroed allocation and one-based head insertion with hostile pre-mutation rejection, raises the scoped maximal object to 1,369,740 B, and reduces the residual from 14 to 13 (`d6679431a206de8a8050544138a61b86dfcedbbb2e4721f11ce48db809027032`) while leaving initialization order, list ownership, concurrency, collision, RAM placement, and allocation lifetime unqualified; an exact `lv_draw_dispatch_request` provider preserves the authenticated two-signal sequence on `lv_global.draw_info.sync`, raises the scoped maximal object to 1,370,240 B, and reduces the residual from 13 to 12 (`2e261ab6a646ad20004b2bd631455ee1955980a73031ee995554880b9e077eca`) while keeping `lv_thread_sync_signal` explicitly unadmitted; 27 fixed scheduler/RAM dependencies remain explicitly enumerated | `research/g2-freetype-cff-production-source-admission.md`; `research/g2-freetype-cff-capacity-solver.md`; `research/g2-freetype-cff-size-optimization.md`; `research/g2-freetype-cff-exact-scatter-link.md`; `research/g2-freetype-base-complete-map-source-admission.md`; `research/g2-freetype-sfnt-function-map.md`; `research/g2-freetype-pshinter-function-map.md`; `research/g2-freetype-psaux-function-map.md`; `components/shared/freetype_psnames/README.md`; `tools/manifests/g2-freetype-psnames-function-map.json`; `components/shared/freetype_smooth/README.md`; `tools/manifests/g2-freetype-smooth-function-map.json`; `components/shared/freetype_autofit/README.md`; `tools/manifests/g2-freetype-autofit-function-map.json`; `components/shared/freetype_truetype_map/README.md`; `tools/manifests/g2-freetype-truetype-function-map.json`; `research/g2-liblc3-encoder-source-admission.md`; `research/g2-liblc3-encoder-capacity-rebalancing.md`; `research/g2-liblc3-service-audio-adapter.md`; `research/g2-liblc3-service-audio-route.md`; `research/g2-liblc3-service-audio-capacity.md`; `research/g2-liblc3-service-audio-suffix-pack.md`; `research/g2-liblc3-encoder-data-policy.md`; `research/g2-lvgl-ambiq-backend-source-readiness.md`; `research/g2-lvgl-nema-buffer-helpers-source-closure.md`; `research/g2-lvgl-apollo-hal-provider-source-admission.md`; `research/g2-lvgl-freertos-queue-provider-source-admission.md`; `research/g2-lvgl-core-utility-provider-source-admission.md`; `research/g2-lvgl-stateless-provider-source-admission.md`; `research/g2-lvgl-target-runtime-provider-source-admission.md`; `research/g2-lvgl-math-provider-source-admission.md`; `research/g2-lvgl-math-dp-provider-source-admission.md`; `research/g2-lvgl-heap-array-atomic-closure.md`; `research/g2-lvgl-mutex-provider-source-admission.md`; `research/g2-lvgl-font-fmt-source-admission.md`; `research/g2-lvgl-vector-destroy-source-admission.md`; `research/g2-lvgl-draw-unit-source-admission.md`; `research/g2-lvgl-draw-dispatch-request-source-admission.md`; `make freetype-cff-source-closure freetype-truetype-source-closure freetype-base-source-closure freetype-sfnt-source-closure freetype-pshinter-source-closure freetype-psaux-source-closure freetype-psnames-source-closure freetype-smooth-source-closure freetype-autofit-source-closure liblc3-encoder-source-readiness lvgl-ambiq-backend-readiness` | isolated host behavior, hostile-input, source-pin, deterministic-manifest, Cortex-M55 compile/link, symbol, import, and relocation gates are software evidence only; none of these candidates is counted as production ownership until exact placement, final relocation replay, ingress routing, platform binding, and overlay integration pass; stack/WCET, font payload/rendering, audio interoperability, GPU/cache/power/display behavior, and live device validation remain blocked by unavailable authorized physical evidence |
-| Apollo current unanchored/readiness frontier | software-gap | 3,081,392 release-blocking main B, all typed retained/external; 613,302 retained unanchored B and zero candidate-only B; the 885,418-B object evidence and 17,800-B label reconciliation are overlapping/non-additive | `research/g2-wave0-readiness-ledger-reconciliation.md`; `research/g2-apollo-unanchored-census.md`; `tools/analyze_g2_apollo_origin_accounting.py` | use the current disjoint readiness mask for release decisions; the source-admission row above is intentionally non-additive and cannot reduce this mask until production routing is authenticated; retain the older function census only as detailed provenance evidence |
+| Apollo current unanchored/readiness frontier | software-gap | 3,065,088 release-blocking main B, all typed retained/external; 599,340 retained unanchored B and zero candidate-only B; the 885,418-B object evidence and 17,800-B label reconciliation are overlapping/non-additive | `research/g2-wave0-readiness-ledger-reconciliation.md`; `research/g2-apollo-unanchored-census.md`; `tools/analyze_g2_apollo_origin_accounting.py` | use the current disjoint readiness mask for release decisions; the source-admission row above is intentionally non-additive and cannot reduce this mask until production routing is authenticated; retain the older function census only as detailed provenance evidence |
 
 ## Storage
 
@@ -415,3 +416,381 @@ consistently (values below are the post-nvdb_sensor_caldata state):
 Verification order: candidate + analyzer focused tests → the six
 littlefs-family modules (fastest aggregate-pin detectors) →
 `test_core_overlay` → full `./make.sh test` with NO concurrent tree edits.
+
+## 2026-09-01 bootloader floating common-divisor closure
+
+The software gap at `[0x00426D48,0x00426DB2)` is closed by production-routed
+MIT C with dual-compiler identity, strict retained-`floorf` relocation,
+host-runtime tests, complete package assembly, and zero unclassified
+ownership. The next executable bootloader gap begins at `0x00426DB4`.
+Target floating-point ABI, timing, caller integration, and cold-boot evidence
+remain blocked by unavailable physical evidence. This closure does not declare
+firmware-wide functional completeness.
+
+## 2026-09-01 bootloader floating ratio closure
+
+The software gap at `[0x00426DB4,0x00426EAC)` is closed by production-routed
+MIT C with dual-compiler identity, strict GCD/`fmodf`/`roundf` provider edges,
+host-runtime tests, complete package assembly, and zero unclassified
+ownership. The next unresolved executable bootloader gap begins at
+`0x00426EAC`. Target floating-point ABI, timing, caller integration, and
+cold-boot evidence remain blocked by unavailable physical evidence. This
+closure does not declare firmware-wide functional completeness.
+
+## 2026-09-01 bootloader register/control/late-wrapper checkpoint
+
+Twenty-five software gaps totaling 866 bytes are closed by production-routed,
+dual-toolchain-exact C with portable behavioral tests. The exhaustive frontier
+ledger is now 132 source admissions / 14,150 bytes and 55 unresolved executable
+spans / 12,552 bytes. The `0x00430B10` extent is corrected to `0x00430B3C` so
+the interrupt-mask restore and function return are no longer misclassified as
+mixed data. Live register, NVIC/SCB, command-queue, event, interrupt-mask,
+platform-init, reset, and cold-boot evidence is blocked by unavailable physical
+evidence. This checkpoint does not declare functional completeness.
+
+## 2026-09-01 bootloader small runtime-service checkpoint
+
+Five software gaps totaling 274 bytes are closed by production-routed,
+dual-toolchain-exact C with portable behavior tests. The exhaustive frontier
+ledger is now 148 source admissions / 14,830 bytes and 39 unresolved executable
+spans / 11,890 bytes. The corrected `0x0042CEA4..0x0042CED8` extent removes a
+four-byte false mixed-data interval. Live register, clock, interrupt-mask,
+platform-startup, reset, and cold-boot evidence is blocked by unavailable
+physical evidence. This checkpoint does not declare functional completeness.
+
+## 2026-09-02 bootloader state-one tuning checkpoint
+
+The 696-byte state-one saved-field, bounded-delta, trim, profile-tuning, power,
+and restoration service is closed as production-routed, dual-toolchain-exact
+MIT C. Portable tests cover inactive and active paths, both profile families,
+saturation, delay accounting, cleanup, and restoration. The exhaustive ledger
+now records 185 source spans / 24,918 bytes and 2 unresolved executable spans /
+1,802 bytes. Live SRAM/MMIO, clocks, power, trims, timing, interrupts, reset,
+and cold-boot validation is blocked by unavailable physical evidence. This
+checkpoint does not declare functional completeness.
+
+## 2026-09-02 bootloader hardware-state decoder checkpoint
+
+The 770-byte six-nibble hardware-state composer and two-stage output
+classifier is closed as relocation-free, production-routed, dual-toolchain-
+exact MIT C. A 16,384-case portable differential covers all input-field,
+dynamic-mode, state-word, alternate-family, and rejection combinations. The
+exhaustive ledger now records 186 source spans / 25,688 bytes and 1 unresolved
+executable span / 1,032 bytes. Live flash, SRAM, MMIO, peripheral, concurrency,
+reset, and cold-boot validation is blocked by unavailable physical evidence.
+This checkpoint does not declare functional completeness.
+
+## 2026-09-02 bootloader zero-unresolved-software checkpoint
+
+The final 1,032-byte SPOT-manager state transition, register publication,
+trim, wake/interrupt, and reverse-finalization service is closed as
+production-routed, dual-toolchain-exact MIT C. The exhaustive post-MSPI ledger
+now records 187 source spans / 26,720 bytes and zero unresolved executable
+spans / zero unresolved executable bytes. The complete unsigned firmware
+provider builds and verifies at 163,840 bytes. Live SRAM/MMIO, trim, power,
+timing, interrupts, concurrency, reset, and cold-boot validation is blocked by
+unavailable physical evidence. Software closure is established; functional
+completeness is not declared without that physical evidence.
+
+## 2026-09-01 bootloader event/context lifecycle checkpoint
+
+Six software gaps totaling 178 bytes are closed by production-routed,
+dual-toolchain-exact C with portable behavior tests. The exhaustive frontier
+ledger is now 138 source admissions / 14,328 bytes and 49 unresolved executable
+spans / 12,388 bytes. The corrected `0x0042DE0E..0x0042DE58` extent removes a
+14-byte false mixed-data interval. Live retained-object, callback, scheduler,
+interrupt-mask, failure-reset, and cold-boot evidence is blocked by unavailable
+physical evidence. This checkpoint does not declare functional completeness.
+
+## 2026-09-01 bootloader retained event-state checkpoint
+
+Five software gaps totaling 228 bytes are closed by production-routed,
+dual-toolchain-exact C with portable behavior tests. The exhaustive frontier
+ledger is now 143 source admissions / 14,556 bytes and 44 unresolved executable
+spans / 12,160 bytes. Live retained state, event-object, scheduler, logging,
+failure-reset, and cold-boot evidence is blocked by unavailable physical
+evidence. This checkpoint does not declare functional completeness.
+
+## 2026-09-01 bootloader runtime control-services checkpoint
+
+Four software gaps totaling 296 bytes are closed by production-routed,
+dual-toolchain-exact C with portable behavior tests. The exhaustive frontier
+ledger is now 152 source admissions / 15,126 bytes and 35 unresolved executable
+spans / 11,594 bytes. Live MMIO, floating-point probe, event/scheduler,
+interrupt-mask, timing, power, peripheral, reset, and cold-boot evidence is
+blocked by unavailable physical evidence. This checkpoint does not declare
+functional completeness.
+
+## 2026-09-02 bootloader DFU service-task checkpoint
+
+The 684-byte queue-driven DFU image dispatcher and guarded vector-handoff task
+is closed as production-routed, dual-toolchain-exact MIT C. Portable tests
+cover queue exit, open/read cleanup, CRC/program routing, vector validity,
+normal and alternate handoff, and loop continuation. The exhaustive frontier
+ledger now records 184 source spans / 24,222 bytes and 3 unresolved executable
+spans / 2,498 bytes. Live scheduler/queue, filesystem/storage, flash, vector
+handoff, interrupts, reset, and cold-boot validation is blocked by unavailable
+physical evidence. This checkpoint does not declare functional completeness.
+
+## 2026-09-02 platform bring-up checkpoint
+
+The 470-byte context/profile/channel/measurement/restore/reset orchestrator is
+production-routed dual-toolchain-exact MIT C with portable three-attempt and
+teardown coverage. The frontier ledger records 183 source spans / 23,538 bytes
+and 4 unresolved executable spans / 3,182 bytes. Live callbacks, calibration,
+registers, clocks, channels, sample accuracy/timing, interrupts, reset, and cold
+boot are blocked by unavailable physical evidence. This checkpoint does not
+declare functional completeness.
+
+## 2026-09-02 DFU payload programming checkpoint
+
+The 424-byte chunked DFU payload programmer/verifier is production-routed
+dual-toolchain-exact MIT C with portable open, bounded chunk/remainder,
+short-read, indirect-program, compare-error, advance, and close coverage. The
+frontier ledger records 182 source spans / 23,068 bytes and 5 unresolved
+executable spans / 3,652 bytes. Live storage, destination programming,
+callbacks, coherency, power-loss behavior, reset, and cold boot are blocked by
+unavailable physical evidence. This checkpoint does not declare functional
+completeness.
+
+## 2026-09-02 state-register initialization checkpoint
+
+The 422-byte state-transition register initializer/restorer is production-routed
+dual-toolchain-exact MIT C with portable restore, bounded delta, ordered delay,
+field tuning, saturated trim adjustment, and power-mask cleanup coverage. The
+frontier ledger records 181 source spans / 22,644 bytes and 6 unresolved
+executable spans / 4,076 bytes. Live MMIO, clock, power, trim, delay accuracy,
+concurrency, reset, and cold boot are blocked by unavailable physical evidence.
+This checkpoint does not declare functional completeness.
+
+## 2026-09-02 hardware-context initialization checkpoint
+
+The 354-byte slot claim and primary/secondary calibration-profile initializer
+is production-routed dual-toolchain-exact MIT C with portable guards, retained
+and read profiles, deterministic defaults, control-bit clearing, and validity
+coverage. The frontier ledger records 180 source spans / 22,222 bytes and 7
+unresolved executable spans / 4,498 bytes. Live SRAM, configuration storage,
+calibration, MMIO, peripheral effects, concurrency, reset, and cold boot are
+blocked by unavailable physical evidence. This checkpoint does not declare
+functional completeness.
+
+## 2026-09-02 descriptor registration and hardware-state composition checkpoint
+
+The 316-byte descriptor/callback/interrupt registrar and 350-byte stored-entry
+hardware-state composer are production-routed dual-toolchain-exact MIT C. Their
+portable tests cover rejection, descriptor types, callback/interrupt setup,
+readiness gating, all configuration-read failures, word copies, packed fields,
+and commit behavior. The exhaustive frontier ledger now records 178 source
+spans / 21,516 bytes and 9 unresolved executable spans / 5,204 bytes.
+
+The canonical 163,840-byte firmware provider remains byte-identical. Live
+configuration storage, retained SRAM, MMIO, callbacks, interrupts, concurrency,
+reset, and cold boot are blocked by unavailable physical evidence. This
+checkpoint does not declare functional completeness.
+
+## 2026-09-02 DFU image CRC checkpoint
+
+The complete 352-byte DFU image open/read/incremental-CRC/close verifier is now
+production-routed dual-toolchain-exact MIT C with portable open failure, full
+chunk, remainder, short-read logging, CRC match/mismatch, and cleanup coverage.
+The frontier ledger records 179 source spans / 21,868 bytes and 8 unresolved
+executable spans / 4,852 bytes. Live filesystem/storage I/O, buffer ownership,
+configuration state, logging, timing, corrupt-media behavior, reset, and cold
+boot are blocked by unavailable physical evidence. This checkpoint does not
+declare functional completeness.
+
+## 2026-09-02 bootloader hardware-configuration transaction checkpoint
+
+The 684-byte three-mode register snapshot/restore, queue-state, control-bit,
+and resource transaction is closed as production-routed dual-toolchain-exact C
+with portable validation, guard, copy, and status coverage. The frontier ledger
+is now 164 source admissions / 17,808 bytes and 23 unresolved executable spans
+/ 8,912 bytes. Live MMIO, saved-state validity, power/clock, command-queue,
+timing, concurrency, interrupt, reset, and cold-boot evidence is blocked by
+unavailable physical evidence. This checkpoint does not declare functional
+completeness.
+
+## 2026-09-02 bootloader chunked source-comparison checkpoint
+
+The 178-byte 4 KiB-bounded source-reader and comparison service is closed as
+production-routed dual-toolchain-exact C with zero-length, chunk-boundary,
+multi-chunk, mismatch, and invalid-input coverage. The frontier ledger is now
+171 source admissions / 19,516 bytes and 16 unresolved executable spans /
+7,204 bytes. Live storage, memory-controller, DMA/coherency, concurrency,
+reset, and cold-boot evidence is blocked by unavailable physical evidence.
+This checkpoint does not declare functional completeness.
+
+## 2026-09-02 bootloader mode-router checkpoint
+
+The 242-byte mode-to-service router and interrupt-safe aggregate-bitset
+publisher is closed as production-routed dual-toolchain-exact C with portable
+coverage of all routed, aggregate, normalization, and no-op cases. The frontier
+ledger is now 172 source admissions / 19,758 bytes and 15 unresolved executable
+spans / 6,962 bytes. Live SRAM, interrupt/concurrency, peripheral, reset, and
+cold-boot evidence is blocked by unavailable physical evidence. This checkpoint
+does not declare functional completeness.
+
+## 2026-09-02 bootloader event-value profile checkpoint
+
+The 246-byte saved-field and active hardware-profile publisher is closed as
+production-routed dual-toolchain-exact C with a portable register model and a
+234/246-byte-identical Apollo-main analogue. The frontier ledger is now 173
+source admissions / 20,004 bytes and 14 unresolved executable spans / 6,716
+bytes. Live SRAM, MMIO, clock, power, timing, peripheral, reset, and cold-boot
+evidence is blocked by unavailable physical evidence. This checkpoint does not
+declare functional completeness.
+
+## 2026-09-02 platform, state-classifier, and profile-transfer checkpoint
+
+Three services totaling 846 authenticated bytes are closed as production-
+routed dual-toolchain-exact C: the eight-slot platform finalizer, sixteen-
+channel state/event classifier, and validated 13-word register-profile
+capture/apply service. Portable lifecycle, range, validation, failure, capture,
+and apply coverage is green. The frontier ledger is now 176 source admissions /
+20,850 bytes and 11 unresolved executable spans / 5,870 bytes. Live SRAM, MMIO,
+interrupt/concurrency, clock, peripheral, reset, and cold-boot evidence is
+blocked by unavailable physical evidence. This checkpoint does not declare
+functional completeness.
+
+## 2026-09-01 bootloader runtime-context publisher checkpoint
+
+The 114-byte queued runtime-context publisher is closed by production-routed,
+dual-toolchain-exact C with portable failure and success-path tests. The
+frontier ledger is now 159 source admissions / 15,996 bytes and 28 unresolved
+executable spans / 10,724 bytes. Live retained-RAM, RTOS queue/event, scheduler,
+logging, timing, interrupt, reset, and cold-boot evidence is blocked by unavailable physical evidence. This checkpoint does not declare functional completeness.
+
+## 2026-09-01 bootloader hardware-descriptor publisher checkpoint
+
+The 108-byte ring-descriptor selector and per-instance register publisher is
+closed as production-routed, relocation-free, dual-toolchain-exact C with
+portable successor, wraparound, and register-field mapping tests. The frontier
+ledger is now 160 source admissions / 16,104 bytes and 27 unresolved executable
+spans / 10,616 bytes. Live SRAM, MMIO, peripheral, DMA, timing, interrupt,
+reset, and cold-boot evidence is blocked by unavailable physical evidence.
+This checkpoint does not declare functional completeness.
+
+## 2026-09-02 bootloader hardware-profile publisher checkpoint
+
+The 142-byte validated seven-field profile encoder and register publisher is
+closed as production-routed dual-toolchain-exact C with validation, route
+status, field packing, masking, and publication coverage. The frontier ledger
+is now 169 source admissions / 19,190 bytes and 18 unresolved executable spans
+/ 7,530 bytes. Live MMIO, clock, peripheral timing, concurrency, reset, and
+cold-boot evidence is blocked by unavailable physical evidence. This
+checkpoint does not declare functional completeness.
+
+## 2026-09-02 bootloader register-profile restoration checkpoint
+
+The 148-byte mode-sensitive register restoration, power-toggle, and finalizer
+service is closed as production-routed dual-toolchain-exact C with both mode
+branches, active/inactive behavior, field restoration, toggle ordering, and
+finalization coverage. The frontier ledger is now 170 source admissions /
+19,338 bytes and 17 unresolved executable spans / 7,382 bytes. Live MMIO,
+clock, power, peripheral timing, concurrency, reset, and cold-boot evidence is
+blocked by unavailable physical evidence. This checkpoint does not declare
+functional completeness.
+
+## 2026-09-02 bootloader bounded configuration-retry checkpoint
+
+The 116-byte callback setup and 1,000-attempt configuration retry service is
+closed as production-routed dual-toolchain-exact C with success, retry,
+timeout, callback, and delay coverage. The frontier ledger is now 168 source
+admissions / 19,048 bytes and 19 unresolved executable spans / 7,672 bytes.
+Live callback, timing, MMIO, peripheral, concurrency, reset, and cold-boot
+evidence is blocked by unavailable physical evidence. This checkpoint does not
+declare functional completeness.
+
+## 2026-09-02 bootloader retained hardware-event apply checkpoint
+
+The 368-byte event acknowledgement, bounded drain, timed register pulse, and
+terminal register restoration service is closed as production-routed
+dual-toolchain-exact C with portable transition coverage. The frontier ledger
+is now 167 source admissions / 18,932 bytes and 20 unresolved executable spans
+/ 7,788 bytes. Live retained-SRAM, MMIO, clock, peripheral timing,
+concurrency, interrupt, reset, and cold-boot evidence is blocked by unavailable
+physical evidence. This checkpoint does not declare functional completeness.
+
+## 2026-09-02 bootloader hardware clock-encoder checkpoint
+
+The 376-byte clock-divider search, phase selection, rounded-rate computation,
+and register-field encoder is closed as production-routed dual-toolchain-exact
+C with 10,000 deterministic differential cases and boundary coverage. The
+frontier ledger is now 166 source admissions / 18,564 bytes and 21 unresolved
+executable spans / 8,156 bytes. Live clock, MMIO, peripheral tolerance, signal
+integrity, timing, interrupt, reset, and cold-boot evidence is blocked by
+unavailable physical evidence. This checkpoint does not declare functional
+completeness.
+
+## 2026-09-02 bootloader hardware-context claim checkpoint
+
+The 114-byte context validation, ownership-claim, and publication service is
+closed as production-routed, relocation-free, dual-toolchain-exact C with
+portable validation, rejection, flag/magic, index, and address tests. The
+frontier ledger is now 161 source admissions / 16,218 bytes and 26 unresolved
+executable spans / 10,502 bytes. Live retained-SRAM ownership, concurrency,
+peripheral lifecycle, reset, and cold-boot evidence is blocked by unavailable
+physical evidence. This checkpoint does not declare functional completeness.
+
+## 2026-09-02 bootloader hardware-instance configurator checkpoint
+
+The 380-byte handle/instance validation, dynamic and fixed-rate programming,
+buffer-window calculation, and slot-reset service is closed as
+production-routed dual-toolchain-exact C with portable guard, mapping, bound,
+clamp, and cleanup coverage. The frontier ledger is now 165 source admissions
+/ 18,188 bytes and 22 unresolved executable spans / 8,532 bytes. Live SRAM,
+MMIO, clock, DMA/buffer coherency, peripheral timing, concurrency, interrupt,
+reset, and cold-boot evidence is blocked by unavailable physical evidence.
+This checkpoint does not declare functional completeness.
+
+## 2026-09-02 bootloader hardware-context enable checkpoint
+
+The 258-byte context activation, optional command-queue setup, status wait,
+active-bit publication, and failure rollback service is closed as
+production-routed dual-toolchain-exact C with portable path coverage. The
+frontier ledger is now 162 source admissions / 16,476 bytes and 25 unresolved
+executable spans / 10,244 bytes. Live retained-SRAM, MMIO, command-queue,
+timing, concurrency, interrupt, reset, and cold-boot evidence is blocked by
+unavailable physical evidence. This checkpoint does not declare functional
+completeness.
+
+## 2026-09-02 bootloader hardware-event service checkpoint
+
+The 648-byte event, descriptor, callback, and command-queue service is closed
+as production-routed dual-toolchain-exact C with portable validation, state
+transition, callback, cleanup, event-mask, and failure-path coverage. The
+frontier ledger is now 163 source admissions / 17,124 bytes and 24 unresolved
+executable spans / 9,596 bytes. Live retained-SRAM, MMIO, DMA, callbacks,
+command-queue, interrupt, timing, concurrency, reset, and cold-boot evidence is
+blocked by unavailable physical evidence. This checkpoint does not declare
+functional completeness.
+
+## 2026-09-01 bootloader control-orchestration checkpoint
+
+Two software gaps totaling 158 bytes are closed by production-routed,
+dual-toolchain-exact C with portable wait-status and transaction-copy tests.
+The frontier ledger is now 158 source admissions / 15,882 bytes and 29
+unresolved executable spans / 10,838 bytes. Live scheduler/event, retained RAM,
+interrupt-mask, terminal-mode, logging, timing, reset, and cold-boot evidence
+is blocked by unavailable physical evidence. This checkpoint does not declare
+functional completeness.
+
+## 2026-09-01 bootloader event runtime-services checkpoint
+
+Three software gaps totaling 436 bytes are closed by production-routed,
+dual-toolchain-exact C with portable lifecycle and queue behavior tests. The
+frontier ledger is now 156 source admissions / 15,724 bytes and 31 unresolved
+executable spans / 10,996 bytes. Live retained-RAM, RTOS-object, scheduler,
+queue, callback, logging, timing, interrupt, reset, and cold-boot evidence is
+blocked by unavailable physical evidence. This checkpoint does not declare
+functional completeness.
+
+## 2026-09-01 bootloader retained-event service-loop checkpoint
+
+The 162-byte retained-event initialization and bounded-wait loop is closed by
+production-routed, dual-toolchain-exact C with portable context and loop-step
+tests. The exhaustive frontier ledger is now 153 source admissions / 15,288
+bytes and 34 unresolved executable spans / 11,432 bytes. Live retained-RAM,
+scheduler/event, logging, timing, interrupt, reset, and cold-boot evidence is
+blocked by unavailable physical evidence. This checkpoint does not declare
+functional completeness.

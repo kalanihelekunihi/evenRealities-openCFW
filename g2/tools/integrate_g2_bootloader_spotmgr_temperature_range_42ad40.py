@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+import csv,hashlib,io,json
+from pathlib import Path
+R=Path(__file__).resolve().parent.parent;O=R/'components/bootloader/core_overlay/overlay.json';C=R/'tools/manifests/g2-bootloader-post-mspi-frontier.tsv';B=R/'blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin';S=R/'components/bootloader/core_overlay/runtime_spotmgr_temperature_range_42ad40.c';F='open_cfw_bootloader_spotmgr_temperature_range_42ad40';A=0x42AD40;Z=0x42ADB8;H='89f71050cf7850205a7a5ef9ccfb09dfadaadd5a6046355844d800589b65607d';SH='b24cdcfa0cd68ddc6526780829a85c4e390bac7b108ce8aaff33f51601d4b61a';FL=['-mcpu=cortex-m55','-mthumb','-Oz','-ffreestanding','-fno-builtin','-ffunction-sections','-fdata-sections','-fno-unwind-tables','-fno-asynchronous-unwind-tables','-Wall','-Wextra','-Werror','-fno-ident','-mllvm','-enable-machine-outliner=never']
+def h(b):return hashlib.sha256(b).hexdigest()
+def main():
+ s=S.read_bytes();assert(len(s),h(s))==(1617,SH);assert h(B.read_bytes()[A-0x410000:Z-0x410000])==H;p={'size':120,'sha256':H,'unrelocated_sha256':H};e={'function':F,'runtime_address':A,'source':{'path':S.relative_to(R).as_posix(),'size':len(s),'sha256':SH,'license':'BSD-3-Clause','origin':'Apollo510-compatible SPOT-manager temperature range classifier','upstream':'AmbiqSuite SDK 5.1.0 Apollo510 SPOT manager','upstream_commit':'5efc0228528a8adce5eae0d226fac85d2551eb3b','evidence':'docs/research/g2-bootloader-spotmgr-temperature-range-42ad40-source-closure.md'},'toolchain':{'target':'arm-none-eabi','reviewed_version_prefix':'Apple clang version 21.0.0','flags':FL},'strict_relocation_contract':True,'expected':p,'stock':{'size':120,'sha256':H},'relocations':[],'allow_discarded_alloc_sections':True,'toolchain_profiles':{'linux-clang':{'reviewed_version_prefix':'Homebrew clang version 22.1.8','expected':p,'stock':{'size':120,'sha256':H},'relocations':[]}}};o=json.loads(O.read_text());o['in_place_leaves']=sorted([x for x in o['in_place_leaves']if x.get('function')!=F]+[e],key=lambda x:int(x['runtime_address']));t=O.with_name('.overlay.json.tmp');t.write_text(json.dumps(o,indent=2)+'\n');t.replace(O)
+ with C.open(newline='')as f:r=csv.DictReader(f,delimiter='\t');fs=r.fieldnames;rows=list(r)
+ for x in rows:
+  if int(x['start'],16)==A:x.update(kind='source_function',name='spotmgr_temperature_range_42ad40',disposition='source_owned_production',provider='AmbiqSuite Apollo510 SPOT-manager temperature range classifier',license_status='BSD-3-Clause',evidence='exact dual-toolchain hard-float body, exact Apollo-main analogue, and boundary/non-finite host tests');break
+ else:raise SystemExit('census row missing')
+ q=io.StringIO(newline='');w=csv.DictWriter(q,fieldnames=fs,delimiter='\t',lineterminator='\n');w.writeheader();w.writerows(rows);C.write_text(q.getvalue());print('registered SPOT-manager temperature range at 0x0042AD40')
+if __name__=='__main__':main()

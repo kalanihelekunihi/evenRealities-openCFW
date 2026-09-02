@@ -732,10 +732,14 @@ Apollo main places it at `0x007B0128`. Each retained leaf is 48 bytes with SHA-2
 `87505e035fa5fe7c0dfd7c4d85b66c6b8f3b57ced45dc7afd787db6c52b0fd7b`,
 zero relocations, and no `g_MSPIState`.
 
-Broader source-owned G2 callers must be rebuilt against the same named 5.1.0
-headers. Opaque stock callers must not cross the separately proven raw
-`am_hal_mspi_control` request-ordinal mismatch; that wider control boundary
-remains intentionally opaque until its configuration is recovered.
+Broader source-owned G2 callers use the same named 5.1.0 headers. The bootloader
+`am_hal_mspi_control` ordinal mismatch is now closed by the narrow production
+adapter in `runtime_mspi_control_4251c0.c`: stock-only requests 10 and 11 are
+implemented directly and the remaining stock ordinals are translated before
+entering the maintained AmbiqSuite body. The derived BSD-3-Clause translation
+unit is separately pinned; the vendored upstream snapshot remains unchanged.
+Physical MSPI register, XIP, timing, FIFO, interrupt, flash-bus, and cold-boot
+qualification is blocked by unavailable physical evidence.
 
 ## LVGL v9.3 configuration
 
@@ -3278,6 +3282,238 @@ and XIP ordering, request `0x18`, zero mode byte, failure diagnostics, and void
 completion are authenticated G2 behavior. Physical qualification remains
 blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
 
+## AmbiqSuite Apollo510 command-queue public services
+
+`components/bootloader/core_overlay/runtime_cmdq_services_427794.c` is a
+reviewable BSD-3-Clause adaptation of the authenticated AmbiqSuite 5.1.0
+Apollo510 command-queue implementation at upstream commit
+`5efc0228528a8adce5eae0d226fac85d2551eb3b`. It production-routes eleven
+stock-compatible public entries at `[0x00427794,0x00427C80)` while preserving
+the G2 state/register layout, caller ABI, updater boundary, SSRAM address
+classification, and memory barrier. The exact imported license remains in
+`third_party/ambiqsuite/LICENSE.txt`; physical command-queue and MSPI behavior
+is blocked by unavailable physical evidence.
+
+## AmbiqSuite Apollo510 queue family
+
+`components/bootloader/core_overlay/runtime_queue_4275ea.c` is a bounded
+BSD-3-Clause adaptation of `am_hal_queue.c` from AmbiqSuite commit
+`5efc0228528a8adce5eae0d226fac85d2551eb3b`. The authenticated upstream
+source SHA-256 is
+`2ca55e34d5b9d4843e32ce0ab24e312bde580716c708c7f017adcd0a12dbd1e4`;
+the vendored 10,115-byte `am_hal_queue.h` SHA-256 is
+`eabc8d95b06f06c24cc160ca85e20bd2fca32d1e7b0d9c8d815b7b3f9dffd2db`.
+The complete initializer/add/get family is production-routed through
+`0x004276BA`. Live interrupt and concurrency qualification remains blocked by
+unavailable physical evidence.
+
+`runtime_platform_bringup_430000.c` is first-party MIT clean-room source for the
+exact 470-byte platform bring-up, measurement, and teardown orchestrator. No
+external upstream implementation is incorporated. Both compilers, the sole
+caller, 23 provider edges, sixteen literals, and portable lifecycle model are
+pinned. Physical callbacks, calibration, registers, clocks, channels,
+measurements, interrupts, reset, and cold-boot qualification is blocked by
+unavailable physical evidence.
+
+`runtime_dfu_payload_program_42dae8.c` is first-party MIT clean-room source for
+the exact 424-byte chunked DFU payload programmer/verifier. No external upstream
+implementation is incorporated. Both compilers, the sole caller, fourteen
+provider edges, thirteen literals, and portable chunk/program/compare model are
+pinned. Physical storage, destination programming, callbacks, coherency,
+power-loss behavior, reset, and cold-boot qualification is blocked by
+unavailable physical evidence.
+
+`runtime_state_register_initialize_42d3bc.c` is first-party MIT clean-room
+source for the exact 422-byte state-transition register initializer/restorer.
+No external upstream implementation is incorporated. Both compilers, the sole
+caller, delay edges, sixteen literals, Apollo-main analogue, and portable
+register model are pinned. Physical MMIO, clock, power, trim, timing,
+concurrency, reset, and cold-boot qualification is blocked by unavailable
+physical evidence.
+
+`runtime_spotmgr_state_transition_42b294.c` is first-party MIT clean-room
+source for the exact 1,032-byte SPOT-manager state-transition, trim,
+register-publication, wake, and finalization orchestrator at
+`[0x0042B294,0x0042B69C)`. No external upstream implementation is incorporated.
+Its compiler profiles, 12 provider edges, sole caller, 15 literals,
+996/1,032-byte Apollo-main analogue, portable forward/reverse model, and
+complete-image ownership are pinned. Physical SRAM, MMIO, trim, power, timing,
+interrupt, concurrency, reset, and cold-boot qualification is blocked by
+unavailable physical evidence.
+
+`runtime_hw_state_decode_42b6b8.c` is first-party MIT clean-room source for
+the exact relocation-free 770-byte hardware-state nibble composer and
+dual-output classifier at `[0x0042B6B8,0x0042B9BA)`. No external upstream
+implementation is incorporated. Its compiler profiles, sole caller, eight
+literals, 738/770-byte Apollo-main analogue, 16,384-case portable differential,
+and complete-image ownership are pinned. Physical flash, SRAM, MMIO,
+peripheral, concurrency, reset, and cold-boot qualification is blocked by
+unavailable physical evidence.
+
+`runtime_hw_context_initialize_42e8d0.c` is first-party MIT clean-room source
+for the exact 354-byte hardware-context and calibration-profile initializer. No
+external upstream implementation is incorporated. Both compilers, the sole
+caller, five provider edges, eleven literal cells, Apollo-main analogue, and
+portable profile/default model are pinned. Physical SRAM, configuration, MMIO,
+calibration, concurrency, reset, and cold-boot qualification is blocked by
+unavailable physical evidence.
+
+`runtime_dfu_image_crc_check_42d890.c` is first-party MIT clean-room source for
+the exact 352-byte DFU image open/read/CRC/close verifier. No external upstream
+implementation is incorporated. Both compilers, the sole caller, twelve
+provider edges, eleven literal cells, and portable chunk/remainder behavior are
+pinned. Physical filesystem/storage, buffer/configuration state, timing, reset,
+and cold-boot qualification is blocked by unavailable physical evidence.
+
+## G2 bootloader runtime control services
+
+`runtime_control_services_42bf54.c` is first-party MIT clean-room source for
+four exact fixed-address bodies totaling 296 bytes: readiness gating, event
+wait-mask handling, aligned guarded dispatch, and register power control. No
+external upstream implementation is incorporated. Both reviewed Clang
+profiles, strict retained-provider edges, callers, the readiness stored
+pointer, portable behavior, and complete-image ownership are pinned. Physical
+MMIO, event/scheduler, interrupt-mask, timing, power, peripheral, reset, and
+cold-boot qualification is blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
+
+`runtime_control_orchestration_42dd14.c` is first-party MIT clean-room source
+for 158 exact bytes covering event/control orchestration and a critical
+four-word dispatch transaction. No external upstream implementation is
+incorporated. Both compiler profiles, provider edges, stored/direct ingress,
+portable behavior, and complete-image ownership are pinned. Physical
+scheduler, event, retained-RAM, interrupt-mask, terminal-mode, logging, timing,
+reset, and cold-boot qualification is blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
+
+`runtime_context_publish_42dca2.c` is first-party MIT clean-room source for the
+exact 114-byte queued runtime-context publisher. No external upstream
+implementation is incorporated. Both compilers, provider edges, callers,
+portable failure/success behavior, and complete-image ownership are pinned.
+Physical retained-RAM, RTOS queue/event, scheduler, logging, timing, interrupt,
+reset, and cold-boot qualification is blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
+
+`runtime_hw_descriptor_publish_42c45a.c` is first-party MIT clean-room source
+for the exact 108-byte ring-descriptor selector and register publisher at
+`0x0042C45A`. No external upstream implementation is incorporated. Both
+compilers, relocation-free body, caller topology, portable ring wrap and field
+mapping, and complete-image ownership are pinned. Physical SRAM, MMIO,
+peripheral, DMA, timing, interrupt, reset, and cold-boot qualification is
+blocked by unavailable physical evidence; future qualification requires
+authorized hardware evidence.
+
+`runtime_hw_context_claim_42c4c6.c` is first-party MIT clean-room source for
+the exact 114-byte hardware-context validation and ownership-claim service at
+`0x0042C4C6`. No external upstream implementation is incorporated. Both
+compilers, relocation-free body, call topology, 110-byte Apollo-main identity,
+status codes, ownership flags, magic, stride, and complete-image ownership are
+pinned. Physical retained-SRAM ownership, concurrency, peripheral lifecycle,
+reset, and cold-boot qualification is blocked by unavailable physical
+evidence; future qualification requires authorized hardware evidence.
+
+`runtime_hw_context_enable_42c538.c` is first-party MIT clean-room source for
+the exact 258-byte context activation and failure-rollback service. No external
+upstream implementation is incorporated. Both compilers, three provider
+edges, call topology, 246-byte Apollo-main identity, validation/idempotence,
+command-queue setup, status wait, active flag, rollback mask, and complete-image
+ownership are pinned. Physical retained-SRAM, MMIO, command-queue, timing,
+concurrency, interrupt, reset, and cold-boot qualification is blocked by
+unavailable physical evidence; future qualification requires authorized
+hardware evidence.
+
+`runtime_hw_event_service_42c6f8.c` is first-party MIT clean-room source for
+the exact 648-byte hardware event, descriptor, callback, and command-queue
+service. No external upstream implementation is incorporated. Both compilers,
+nine provider edges, call topology, 621-byte Apollo-main identity, event/ring
+state transitions, callback clearing, command-queue failure paths, terminal
+register cleanup, and complete-image ownership are pinned. Physical
+retained-SRAM, MMIO, DMA, callback, command-queue, interrupt, timing,
+concurrency, reset, and cold-boot qualification is blocked by unavailable
+physical evidence; future qualification requires authorized hardware evidence.
+
+`runtime_hw_config_transaction_42c988.c` is first-party MIT clean-room source
+for the exact 684-byte three-mode register snapshot/restore and resource
+transaction. No external upstream implementation is incorporated. Both
+compilers, seven provider edges, two callers, 657-byte Apollo-main identity,
+thirteen-register mapping, validation/guard/status paths, queue state, resource
+routes, and complete-image ownership are pinned. Physical MMIO, saved-state
+validity, power/clock, command-queue, timing, concurrency, interrupt, reset,
+and cold-boot qualification is blocked by unavailable physical evidence;
+future qualification requires authorized hardware evidence.
+
+`runtime_hw_instance_configure_42cc34.c` is first-party MIT clean-room source
+for the exact 380-byte hardware-instance validation and mode-specific
+configuration service. No external upstream implementation is incorporated.
+Both compilers, the source-owned clock-encoder edge, sole caller, 352-byte
+Apollo-main identity, handle/instance/active guards, dynamic and fixed-rate
+paths, buffer/window calculations, slot clearing, and complete-image ownership
+are pinned. Physical SRAM, MMIO, clock, DMA/buffer coherency, peripheral
+timing, concurrency, interrupt, reset, and cold-boot qualification is blocked
+by unavailable physical evidence; future qualification requires authorized
+hardware evidence.
+
+`runtime_hw_clock_encode_42c26a.c` is first-party MIT clean-room source for the
+exact 376-byte clock-divider search, rounding, and register-field encoder. No
+external upstream implementation is incorporated. Both compilers, three
+source-owned arithmetic-helper edges, the sole caller, 370-byte Apollo-main
+identity, shared constants, deterministic differential semantics, and
+complete-image ownership are pinned. Physical clock, MMIO, peripheral
+tolerance, signal integrity, timing, interrupt, reset, and cold-boot
+qualification is blocked by unavailable physical evidence; future
+qualification requires authorized hardware evidence.
+
+`runtime_event_service_loop_42e2f8.c` is first-party MIT clean-room source for
+the exact 162-byte retained-event initialization and wait loop at
+`0x0042E2F8`. No external upstream implementation is incorporated. Both
+reviewed compiler profiles, fourteen retained-provider edges, the sole stored
+entry pointer, portable bounded-step behavior, and complete-image ownership are
+pinned. Physical retained-RAM, scheduler/event, logging, timing, interrupt,
+reset, and cold-boot qualification is blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
+
+`runtime_event_runtime_services_42e53c.c` is first-party MIT clean-room source
+for 436 exact event-runtime bytes covering object/task initialization,
+queue-driven callback dispatch, and callback enqueueing. No external upstream
+implementation is incorporated. Both compilers, provider edges, callers,
+portable lifecycle behavior, and complete-image ownership are pinned. Physical
+RTOS-object, scheduler, queue, callback, logging, timing, interrupt, reset, and
+cold-boot qualification is blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
+
+## G2 bootloader Apollo510 SPOT-manager state-sequence selector
+
+`runtime_spotmgr_state_transition_sequence_42a2b4.c` is BSD-3-Clause source
+grounded in `mcu/apollo510/hal/am_hal_spotmgr_pcm2_2.c` at commit
+`5efc0228528a8adce5eae0d226fac85d2551eb3b`. It replaces the complete
+390-byte selector at `[0x0042A2B4,0x0042A43A)` and retains the authenticated
+28-byte transition table as typed vendor data. Physical power/temperature and
+boot qualification is **blocked by unavailable physical evidence**.
+
+## G2 bootloader overlap-safe byte move
+
+`components/bootloader/core_overlay/runtime_memmove_4276bc.c` is first-party
+clean-room MIT source for `[0x004276BC,0x00427752)`. No external upstream
+source is incorporated. The unsigned overlap classification, backward and
+forward byte loops, destination return ABI, production rotation caller, and
+retained source-owned copy-provider edge are authenticated G2 behavior. The
+Apple/Linux 50-byte leaves are relocation-free and byte-identical. Physical
+memory-system, timing, caller-integration, and cold-boot qualification remains
+blocked by unavailable physical evidence.
+
+## AmbiqSuite Apollo510 command-queue index updater
+
+`components/bootloader/core_overlay/runtime_cmdq_update_indices_427754.c` is
+a bounded BSD-3-Clause adaptation of private `update_indices()` from
+AmbiqSuite Apollo510 `mcu/apollo510/hal/mcu/am_hal_cmdq.c` at immutable commit
+`5efc0228528a8adce5eae0d226fac85d2551eb3b`. The authenticated 35,930-byte
+source has SHA-256
+`60aa2126ca01cd72f746a92d6f34a13e909fdab24ebfab6d6b0a70b026d8fa83`
+and Git blob `0a286e565cad27cef801c389b5dedae826a2669a`; the vendored
+10,496-byte header has SHA-256
+`0113aed2f109c5f022d38055b83a75c2cf141e8621177296757fc8315926762f`.
+The complete private body `[0x00427754,0x00427794)` is production-routed.
+Hardware index masking, monotonic epoch reconstruction, negative-wrap
+correction, CQ-address snapshotting, and exact saved-PRIMASK restoration are
+authenticated. Live register, interrupt/concurrency, wrap-timing, downstream
+command-queue, and cold-boot qualification remains blocked by unavailable
+physical evidence.
+
 ## G2 bootloader primary and secondary progress services
 
 `runtime_hw_progress_423524.c` is first-party clean-room MIT
@@ -3785,3 +4021,103 @@ is incorporated. Index/output validation, compatible-handle rejection,
 four status values are authenticated G2 behavior. Physical SRAM ownership,
 concurrency, peripheral effects and cold-boot lifecycle qualification remains
 blocked by unavailable physical evidence; future qualification requires authorized hardware evidence.
+## Bootloader binary32 runtime admission
+
+The G2 bootloader's `floorf`, `fmodf`, `roundf`, `ceilf`, four integer cores,
+and range classifier at `[0x00427C90,0x00427E84)` are now production-routed
+from freestanding MIT C. The remainder reduction is derived from musl v1.2.5
+commit `0784374d561435f7c787a555aeab8ede699ed298`; the exact terms are retained
+in `third_party/lvgl-ambiq-backend/g2-runtime/musl-math/COPYRIGHT.musl`.
+The ABI veneers, rounding cores, and classifier are openCFW clean-room work.
+Both pinned compiler profiles emit 432 in-place bytes, and 68 authenticated
+suffix bytes remain separately typed as unreachable. See
+`research/g2-bootloader-float-math-427c90-427e84-source-closure.md`.
+
+## G2 bootloader Apollo510 SPOT-manager transition
+
+`runtime_spotmgr_transition_428378.c` is BSD-3-Clause production source
+grounded in Ambiq's public `mcu/apollo510/hal/am_hal_spotmgr_pcm2_2.c` at
+commit `5efc0228528a8adce5eae0d226fac85d2551eb3b` (Git blob
+`4d2ef939de853108e4cb18a55cb2e12be9e5c9a7`, SHA-256
+`eac14263dc23ea211b917e9c3feb69695eb511d204961fdf301c1b0fa9abbeb7`).
+The five-microsecond delay and terminal sequence 26 are authenticated G2
+product behavior. Both reviewed profiles reproduce the 106-byte stock body at
+`[0x00428378,0x004283E2)`. Physical timing, MMIO, voltage, trim, power, reset,
+and cold-boot qualification is blocked by unavailable physical evidence.
+
+## G2 bootloader Apollo510 SPOT-manager tranche
+
+The BSD-3-Clause files `runtime_spotmgr_transition_7b_428a94.c`,
+`runtime_spotmgr_timer_irq_service_42a04a.c`,
+`runtime_spotmgr_buck_deepsleep_state_42a08c.c`,
+`runtime_spotmgr_internal_power_domain_42a19c.c`, and
+`runtime_spotmgr_power_ton_adjust_42a1bc.c` are grounded in Ambiq's public
+`mcu/apollo510/hal/am_hal_spotmgr_pcm2_2.c` at commit
+`5efc0228528a8adce5eae0d226fac85d2551eb3b` (Git blob
+`4d2ef939de853108e4cb18a55cb2e12be9e5c9a7`, SHA-256
+`eac14263dc23ea211b917e9c3feb69695eb511d204961fdf301c1b0fa9abbeb7`).
+The MIT factory-trim loader/readiness files are clean-room openCFW work based
+on authenticated G2 behavior. Together these seven entries add 950 exact
+fixed-address source bytes through `0x0042A2A4`. Physical timer, interrupt,
+MMIO, rail, trim, deep-sleep, reset, and cold-boot qualification is blocked by
+unavailable physical evidence.
+
+`runtime_hw_event_apply_42c0b2.c` is first-party MIT clean-room source for the
+exact 368-byte retained hardware-event acknowledgement, drain, timed-pulse,
+and terminal restoration service. No external upstream implementation is
+incorporated. Both compilers, the delay-provider edge, two callers, shared
+literals, 361-byte Apollo-main identity, portable state transitions, and
+complete-image ownership are pinned. Physical retained-SRAM, MMIO, clock,
+peripheral timing, concurrency, interrupt, reset, and cold-boot qualification
+is blocked by unavailable physical evidence.
+
+`runtime_platform_finish_430502.c`, `runtime_state_event_zero_42cfe0.c`, and
+`runtime_register_profile_transfer_42f020.c` are first-party MIT clean-room
+sources for 846 exact authenticated bytes. No external upstream implementation
+is incorporated. Their reviewed compiler profiles, caller graphs, strict
+provider edges, shared literals, Apollo-main analogues, and portable models are
+pinned. Physical SRAM, MMIO, interrupt, clock, peripheral, reset, and cold-boot
+qualification is blocked by unavailable physical evidence.
+
+`runtime_event_value_profile_42f204.c` is first-party MIT clean-room source for
+the exact 246-byte event-value hardware-profile publisher at
+`[0x0042F204,0x0042F2FA)`. No external upstream implementation is
+incorporated. Twelve state/register literals, five provider edges, the sole
+caller, both compiler profiles, and a 234/246-byte Apollo-main analogue are
+authenticated. Physical SRAM, MMIO, clock, power, timing, peripheral, reset,
+and cold-boot qualification is blocked by unavailable physical evidence.
+
+`runtime_mode_apply_42ff00.c` is first-party MIT clean-room source for the
+exact 242-byte mode router and aggregate-bitset publisher at
+`[0x0042FF00,0x0042FFF2)`. No external upstream implementation is
+incorporated. The fixed service IDs, `0x200270D0` SRAM state anchor, sole caller,
+eight provider edges, and both reviewed compiler profiles are authenticated G2
+behavior. Physical SRAM ownership, interrupt/concurrency, peripheral effects,
+reset, and cold-boot qualification is blocked by unavailable physical evidence.
+
+`runtime_descriptor_register_430280.c` and
+`runtime_hw_state_compose_42bdf0.c` are first-party MIT clean-room source for
+666 exact authenticated bootloader bytes. No external upstream implementation
+is incorporated. Their dual-toolchain bodies, bounded caller/stored-pointer
+ingress, provider edges, shared literals, Apollo-main analogues, and portable
+models are pinned. Physical SRAM, configuration storage, MMIO, callback,
+interrupt, concurrency, reset, and cold-boot qualification is blocked by
+unavailable physical evidence.
+
+`runtime_dfu_service_task_42de58.c` is first-party MIT clean-room source for
+the exact 684-byte DFU queue, image-dispatch, and guarded vector-handoff task
+at `[0x0042DE58,0x0042E104)`. No external upstream implementation is
+incorporated. Its two reviewed compiler profiles, 29 provider edges, sole
+caller, 20 shared literals, portable model, and complete-image ownership are
+pinned. Physical scheduler/queue, filesystem/storage, flash programming,
+vector-table, interrupt, reset, and cold-boot qualification is blocked by
+unavailable physical evidence.
+
+`runtime_state_event_one_value_42d104.c` is first-party MIT clean-room source
+for the exact 696-byte state-one register tuning and restoration service at
+`[0x0042D104,0x0042D3BC)`. No external upstream implementation is incorporated.
+Its two reviewed compiler profiles, three delay-provider edges, sole caller,
+16 shared literals, 684/696-byte Apollo-main analogue, portable model, and
+complete-image ownership are pinned. Physical SRAM, MMIO, clock, power, trim,
+timing, interrupt, reset, and cold-boot qualification is blocked by unavailable
+physical evidence.

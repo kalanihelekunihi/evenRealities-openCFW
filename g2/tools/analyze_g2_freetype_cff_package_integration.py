@@ -28,12 +28,12 @@ MANIFEST = G2 / "tools/manifests/g2-freetype-cff-package-integration.json"
 
 PINS = {
     BUILDER: (24_637, "4b615fdc2f393dc5c244882c2c663b70338a94b54923aca12f639a7cf59260f9"),
-    CONFIG: (1_661, "145e9f8715509c4b85c87816dababd6b734afcc3cbd128c9c146393cecff2493"),
+    CONFIG: (1_822, "b92efd3929c66f902ac64b9142a3448d37774e67875f3f1e733bf8b3d366de0f"),
     README: (1_298, "493a0423c3282f18242af2753eeeafbc4a468834a70b1327867a82d37e105763"),
     CORE_BUILDER: (81_667, "44e2e16484ac31c771cb309b9850e63533881b6be6b8b7d168bdab352ebe47e8"),
     CORE_CONFIG: (5_853_221, "733bc34d7545775ab067eb03c38678889694bc092fc840c64a1ef605b0081212"),
-    OPEN_CFW: (99_007, "2065bc3cefd4390080b15d277906c7e9e3b60ddc8e7e4ee046dab63310cf331a"),
-    BASE_MANIFEST: (3_193_849, "79948ff0c3d234d5f74eac7d627a20588f5bec293a2fed194fe10a44b3ad1831"),
+    OPEN_CFW: (99_021, "177c9e6266dd1327b483a05944f7a00b8a9d4d5e85eb4a0471a04a0d41dea6d0"),
+    BASE_MANIFEST: (3_391_215, "01157a2293e57b1c1fcc972b19380ae4245642a164eb2906ab54ef9f8f5eeccf"),
 }
 
 
@@ -160,20 +160,25 @@ def _verify_core_route(data: dict[Path, bytes]) -> dict[str, Any]:
 
 def _verify_candidate(
     *, profile: str, base_manifest: dict[str, Any], base_package: bytes,
-    package_path: Path, builder: Any, open_cfw: Any, temporary: Path,
+    package_path: Path, base_component_path: Path, builder: Any,
+    open_cfw: Any, temporary: Path,
 ) -> dict[str, Any]:
-    # The configured package is deliberately the authenticated pre-CFF input,
-    # while ``base_manifest`` is the now-published post-CFF release contract.
-    # The component builder authenticates that old package before mutation.
-    # Parse the other five payloads structurally, then prove the reconstructed
-    # final package against the current provider/package pins below.
-    base_payloads = _payloads(base_package, base_manifest)
-    base_apollo = base_payloads["apollo_main"]
+    # The configured package supplies the current five non-Apollo payloads and
+    # package layout. The independently captured canonical PT component is the
+    # authenticated pre-CFF input. This keeps package evidence current without
+    # overwriting the pre-CFF reconstruction fixture during release builds.
+    current_payloads = _payloads(base_package, base_manifest)
+    base_apollo = base_component_path.read_bytes()
+    base_payloads = dict(current_payloads)
+    base_payloads["apollo_main"] = base_apollo
+    comparison_base_package, _comparison_entries = open_cfw.assemble_evenota(
+        base_manifest, base_payloads
+    )
     component_definition = _apollo_component(base_manifest)
     output = temporary / profile
     build_report = builder.build(
         profile=profile,
-        base_package=package_path,
+        base_component=base_component_path,
         output_dir=output,
     )
     candidate_component = (output / "ota_s200_firmware_ota.bin").read_bytes()
@@ -211,7 +216,7 @@ def _verify_candidate(
     open_cfw.validate_release_manifest(
         base_manifest, toolchain_profile=profile, payloads=payloads
     )
-    require(len(candidate_package) - len(base_package) ==
+    require(len(candidate_package) - len(comparison_base_package) ==
             len(candidate_component) - len(base_apollo),
             f"{profile}: package/component growth disagreement")
     require(all(payloads[name] == base_payloads[name]
@@ -287,7 +292,9 @@ def _verify_candidate(
     # size/CRC, and payload.  Entries 1-5 retain exact offsets and bytes.
     base_entries = []
     for index in range(6):
-        base_entries.append(struct.unpack_from("<IIII", base_package, 0x40 + index * 16))
+        base_entries.append(struct.unpack_from(
+            "<IIII", comparison_base_package, 0x40 + index * 16
+        ))
     for index, entry in enumerate(entries):
         if index < 5:
             require((entry.entry_id, entry.offset, entry.entry_size, entry.checksum)
@@ -339,7 +346,7 @@ def _verify_candidate(
         "component_receipt_sha256": build_report["receipt_sha256"],
         "package": {
             "size": len(candidate_package), "sha256": package_sha,
-            "growth_bytes": len(candidate_package) - len(base_package),
+            "growth_bytes": len(candidate_package) - len(comparison_base_package),
             "entry_6_payload_size": final_entry.payload_size,
             "entry_6_entry_size": final_entry.entry_size,
             "entry_6_crc32c_msb": f"0x{final_entry.checksum:08X}",
@@ -389,8 +396,8 @@ def validate_boundary(report: dict[str, Any]) -> None:
         "hardware_validation_performed": False,
     }, "CFF package route boundary drift")
     expected = {
-        "apple-clang": (20_416, 66_684, 70_800, 4_749_540),
-        "linux-clang": (20_356, 274_352, 278_468, 4_749_524),
+        "apple-clang": (20_416, 66_684, 70_800, 4_750_576),
+        "linux-clang": (20_356, 274_352, 278_468, 4_750_560),
     }
     for profile, row in report["profiles"].items():
         require(row["atomicity"]["changed_package_entries"] == [6] and
@@ -421,11 +428,14 @@ def analyze(*, input_overrides: dict[Path, Path] | None = None) -> dict[str, Any
         temporary = Path(raw)
         profiles = {}
         for profile in ("apple-clang", "linux-clang"):
-            package_path = G2 / config["profiles"][profile]["base_package"]["path"]
+            profile_config = config["profiles"][profile]
+            package_path = G2 / profile_config["base_package"]["path"]
+            base_component_path = G2 / profile_config["base_component"]["path"]
             package = package_path.read_bytes()
             profiles[profile] = _verify_candidate(
                 profile=profile, base_manifest=base_manifest,
                 base_package=package, package_path=package_path,
+                base_component_path=base_component_path,
                 builder=builder, open_cfw=open_cfw, temporary=temporary,
             )
     result: dict[str, Any] = {

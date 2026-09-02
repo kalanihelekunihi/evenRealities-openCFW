@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Qualify the clean-room EM9305 MetaWare runtime-islands candidate.
+"""Qualify the production-routed clean-room EM9305 runtime islands.
 
 The analyzer is read-only.  It authenticates the two 980-byte residual
 segments, their ARC instruction/caller evidence, existing provenance rows,
-and the isolated MIT candidate API.  It has no hardware or package path.
+the isolated MIT implementation, and the fail-closed ARC package route.
 """
 
 from __future__ import annotations
@@ -24,6 +24,7 @@ PROVENANCE = ROOT / "tools/manifests/em9305-residual-provenance-map.tsv"
 CANDIDATE = ROOT / "components/shared/em9305/runtime_metaware_helpers_candidate.c"
 HEADER = CANDIDATE.with_suffix(".h")
 ARC_BUILD_SUMMARY = ROOT / "tools/manifests/em9305-arc-candidate-build-summary.json"
+PRODUCTION_REPORT = ROOT / "components/em9305/source_overlay/build/build-report.json"
 
 FILE_PINS = {
     IMAGE: (
@@ -270,8 +271,44 @@ def run_audit() -> dict[str, Any]:
         ):
             raise CandidateError(f"stack limit 0x{limit:08x} disappeared")
 
+    production = json.loads(PRODUCTION_REPORT.read_text(encoding="utf-8"))
+    provider_record = production.get("provider", {})
+    provider_path = ROOT / str(provider_record.get("path", ""))
+    provider = provider_path.read_bytes()
+    accounting = production.get("accounting", {})
+    application = production.get("application", {})
+    if (
+        production.get("status") != "em9305-runtime-production-routed"
+        or production.get("target") != "ARCv2 EM"
+        or production.get("production_routed") is not True
+        or production.get("undefined_symbols") != []
+        or production.get("hardware_operations") != []
+        or production.get("hardware_validation")
+        != "blocked by unavailable physical evidence"
+        or len(provider) != 212_984
+        or sha256(provider)
+        != "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42"
+        or provider_record.get("size") != len(provider)
+        or provider_record.get("sha256") != sha256(provider)
+        or accounting != {
+            "production_source_bytes": 1_174,
+            "generated_or_reconstructible_bytes": 1_226,
+            "candidate_source_not_routed_bytes": 0,
+            "typed_retained_or_external_bytes": 210_584,
+            "unclassified_bytes": 0,
+        }
+        or sum(accounting.values()) != len(provider)
+        or application.get("metaware_implementation_bytes") != 748
+        or application.get("source_end_exclusive") != 0x00335FD4
+        or application.get("sector_end_exclusive") != 0x00336000
+        or len(production.get("metaware_entry_patches", [])) != 8
+        or production.get("metaware_interior_entries_replaced_with_generated_nops")
+        != [0x003026A8, 0x00302844]
+    ):
+        raise CandidateError("EM9305 production route receipt changed")
+
     return {
-        "status": "candidate-qualified",
+        "status": "production-routed",
         "read_only": True,
         "hardware_operations": False,
         "license": "MIT",
@@ -290,13 +327,18 @@ def run_audit() -> dict[str, Any]:
             "arcv2_em_undefined_symbols": [],
             "arcv2_em_forbidden_runtime_imports": [],
             "arcv2_em_build_receipt": str(ARC_BUILD_SUMMARY.relative_to(ROOT)),
-            "production_routed": False,
+            "production_routed": True,
+            "production_build_receipt": str(PRODUCTION_REPORT.relative_to(ROOT)),
+            "provider_size": len(provider),
+            "provider_sha256": sha256(provider),
+            "production_source_bytes": accounting["production_source_bytes"],
+            "generated_or_reconstructible_bytes": accounting[
+                "generated_or_reconstructible_bytes"],
+            "candidate_source_not_routed_bytes": 0,
         },
-        "integration_blockers": [
-            "recover and pin the exact MetaWare ARC EABI symbol names and multiword register return conventions",
-            "authenticate redirect sites, target placement, and all interior-entry callers before production routing",
-            "decide whether the stock stack guard must preserve brk_s exactly or route through an OpenCFW fatal policy",
-        ],
+        "integration_blockers": [],
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "hardware_operations": [],
     }
 
 
@@ -308,9 +350,9 @@ def main() -> int:
     if args.json:
         print(json.dumps(result, indent=2, sort_keys=True))
     else:
-        print("EM9305 MetaWare runtime islands: candidate-qualified")
+        print("EM9305 MetaWare runtime islands: production-routed")
         print("reconstructible stock bytes: 980")
-        print("production routing: disabled")
+        print("production routing: enabled in mixed-source EM9305 provider")
     return 0
 
 

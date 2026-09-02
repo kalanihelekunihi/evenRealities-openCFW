@@ -188,15 +188,15 @@ class RuntimeFreeTypeCffTests(unittest.TestCase):
             "manifest": "manifests/g2-2.2.6.10-core-source.json",
             "profiles": {
                 "apple-clang": {
-                    "size": 4_749_540,
+                    "size": 4_750_576,
                     "sha256": (
-                        "482756200d1b3c70685d7c1c29c422a5725436801e3600d7cf55fa3e16809128"
+                        "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6"
                     ),
                 },
                 "linux-clang": {
-                    "size": 4_749_524,
+                    "size": 4_750_560,
                     "sha256": (
-                        "d9386d30c0c6b1bd706b36c9ee095ad6e2e9ee9b5dacf9c58a52357c7620a362"
+                        "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2"
                     ),
                 },
             },

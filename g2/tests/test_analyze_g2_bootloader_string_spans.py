@@ -20,7 +20,7 @@ class AnalyzeBootloaderStringSpansTests(unittest.TestCase):
         self.assertEqual(
             report["provider"]["source_owned_bytes"]
             + report["provider"]["retained_official_bytes"],
-            147_350,
+            146_994,
         )
         self.assertFalse(report["hardware_block"]["physical_evidence_available"])
         self.assertEqual(

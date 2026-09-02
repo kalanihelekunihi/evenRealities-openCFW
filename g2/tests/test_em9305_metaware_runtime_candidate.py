@@ -113,7 +113,7 @@ class Em9305MetaWareRuntimeCandidateTests(unittest.TestCase):
 
     def test_audit_authenticates_both_islands_and_ten_entries(self) -> None:
         result = self.analyzer.run_audit()
-        self.assertEqual(result["status"], "candidate-qualified")
+        self.assertEqual(result["status"], "production-routed")
         self.assertTrue(result["read_only"])
         self.assertFalse(result["hardware_operations"])
         self.assertEqual(result["license"], "MIT")
@@ -131,7 +131,9 @@ class Em9305MetaWareRuntimeCandidateTests(unittest.TestCase):
             result["stock_runtime"]["entries"]["0x0033301C"]["reference_count"],
             153,
         )
-        self.assertFalse(result["candidate"]["production_routed"])
+        self.assertTrue(result["candidate"]["production_routed"])
+        self.assertEqual(result["candidate"]["candidate_source_not_routed_bytes"], 0)
+        self.assertEqual(result["integration_blockers"], [])
 
     def test_memcpy_and_memset_semantics_and_return_values(self) -> None:
         source = (ctypes.c_ubyte * 257)(*[index & 0xFF for index in range(257)])

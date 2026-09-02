@@ -25,6 +25,11 @@ RUN_BASE = 0x00410000
 STOCK_ADDRESS = 0x0041568C
 STOCK_SIZE = 166
 STOCK_SHA256 = "8e696e1fb54917a436f850e562f74e8cc8734c259fdaac9f767a3c264ff427cd"
+ALIGNED_ENTRY_ADDRESS = 0x004156AC
+ENTRY_SPANS = {
+    STOCK_ADDRESS: (32, "e0294160ea267d7f79540d517dc72e5a084496cbd167c0d301640609f78a810f"),
+    ALIGNED_ENTRY_ADDRESS: (134, "e23d4858d3544f196ab6b0b89510165e191a9364c4167192e9508e7cb36c8d0c"),
+}
 FUNCTION = "open_cfw_bootloader_aeabi_memcpy"
 FUNCTION_ADDRESS = 0x00434830
 FUNCTION_SIZE = 16
@@ -42,9 +47,17 @@ CALLERS = (
     0x0042390A, 0x00423914, 0x0042394E, 0x00423964, 0x00423B30,
     0x00423B3A, 0x00423B44, 0x00430AB6,
 )
+ALIGNED_CALLERS = (
+    0x004113C6, 0x0041147E, 0x0041237C, 0x00412896, 0x00412A5E,
+    0x00412BEE, 0x00412C24, 0x00412C92, 0x00412CB4, 0x00412F48,
+    0x0041301C, 0x004139E0, 0x004139F6, 0x004145A2, 0x0041466A,
+    0x00414676, 0x0041496A, 0x00414976, 0x00414AF2, 0x00414BC4,
+    0x00414EAA, 0x00414FA0, 0x00415076, 0x0041B910, 0x0041FA76,
+    0x00420E96, 0x004210D2, 0x0042A2C6, 0x0042DE36,
+)
 OVERLAY = (15240, "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314")
-PROVIDER = (163840, "f570bbf749b16043c8ccfc6eeae66fafaabf4146d5cc55f63d5fab729775ccad")
-LINUX_PROVIDER = (163824, "e859e0ce78f8b21e8a1542701eb52b4d7d97a62902546ef451919948d4dbbf8e")
+PROVIDER = (163840, "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b")
+LINUX_PROVIDER = (163824, "11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875")
 
 
 class AuditError(RuntimeError):
@@ -82,8 +95,22 @@ def audit() -> dict:
     official = OFFICIAL.read_bytes()
     start = STOCK_ADDRESS - RUN_BASE
     require((len(official[start:start + STOCK_SIZE]), digest(official[start:start + STOCK_SIZE])) == (STOCK_SIZE, STOCK_SHA256), "stock entry changed")
-    callers = tuple(address for address in range(RUN_BASE, RUN_BASE + len(official) - 3, 2) if decode_bl(official, address) == STOCK_ADDRESS)
-    require(callers == CALLERS, "whole-image BL caller topology changed")
+    ingress = {
+        target: tuple(
+            address
+            for address in range(RUN_BASE, RUN_BASE + len(official) - 3, 2)
+            if decode_bl(official, address) == target
+        )
+        for target in range(STOCK_ADDRESS, STOCK_ADDRESS + STOCK_SIZE, 2)
+    }
+    ingress = {target: callers for target, callers in ingress.items() if callers}
+    require(
+        ingress == {
+            STOCK_ADDRESS: CALLERS,
+            ALIGNED_ENTRY_ADDRESS: ALIGNED_CALLERS,
+        },
+        "whole-image forward-copy interior-ingress topology changed",
+    )
 
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
     leaf = next((item for item in config["relocated_leaves"] if item["function"] == FUNCTION), None)
@@ -100,9 +127,26 @@ def audit() -> dict:
     require((len(overlay), digest(overlay)) == OVERLAY, "overlay identity changed")
     require((len(provider), digest(provider)) == PROVIDER, "provider identity changed")
     require(report["overlay"]["functions"][FUNCTION] == {"offset": 952, "size": 16}, "placement changed")
-    patch = next(item for item in report["overlay"]["patched_sites"] if item["name"] == "replace_bootloader_aeabi_memcpy")
-    require((patch["target_address"], patch["expected_size"], patch["expected_sha256"]) == (FUNCTION_ADDRESS, STOCK_SIZE, STOCK_SHA256), "patch contract changed")
-    require(patch["replacement_hex"][8:] == "00bf" * 81, "full-span NOP fill changed")
+    patch_by_name = {
+        item["name"]: item for item in report["overlay"]["patched_sites"]
+    }
+    for name, address in (
+        ("replace_bootloader_aeabi_memcpy", STOCK_ADDRESS),
+        ("replace_bootloader_aeabi_memcpy_aligned_entry", ALIGNED_ENTRY_ADDRESS),
+    ):
+        patch = patch_by_name.get(name)
+        size, expected_sha = ENTRY_SPANS[address]
+        require(patch is not None, f"missing forward-copy ingress patch: {name}")
+        require(
+            (patch["runtime_address"], patch["target_address"],
+             patch["expected_size"], patch["expected_sha256"])
+            == (address, FUNCTION_ADDRESS, size, expected_sha),
+            f"forward-copy ingress patch contract changed: {name}",
+        )
+        require(
+            patch["replacement_hex"][8:] == "00bf" * ((size - 4) // 2),
+            f"forward-copy ingress NOP fill changed: {name}",
+        )
     component = report["component"]
     require(
         component["source_owned_bytes"] + component["opaque_base_bytes"]
@@ -124,7 +168,15 @@ def audit() -> dict:
         "component": "G2 Apollo bootloader Arm EABI forward copy",
         "status": "implemented-in-source / hardware-validation-blocked-by-unavailable-physical-evidence",
         "software_gap_count": 0,
-        "stock": {"address": STOCK_ADDRESS, "size": STOCK_SIZE, "sha256": STOCK_SHA256, "whole_image_callers": len(CALLERS)},
+        "stock": {
+            "address": STOCK_ADDRESS,
+            "size": STOCK_SIZE,
+            "sha256": STOCK_SHA256,
+            "entry_points": 2,
+            "whole_image_callers": len(CALLERS) + len(ALIGNED_CALLERS),
+            "entry_callers": len(CALLERS),
+            "aligned_entry_callers": len(ALIGNED_CALLERS),
+        },
         "source": {"function": FUNCTION, "address": FUNCTION_ADDRESS, "size": FUNCTION_SIZE, "sha256": FUNCTION_SHA256, "relocations": 0},
         "provider": {"size": PROVIDER[0], "sha256": PROVIDER[1], "source_owned_bytes": component["source_owned_bytes"], "retained_official_bytes": component["opaque_base_bytes"]},
         "deployment": {"apple_package": artifacts["package"], "linux_package": {"size": linux_package["expected_size"], "sha256": linux_package["expected_sha256"]}},

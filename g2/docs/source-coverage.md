@@ -620,7 +620,10 @@ and ownership boundary.
 | `0x00415A7C...0x00415A93` | 24 | Generated | Complete nullable string-length redirect and NOP fill |
 | `0x00415A94...0x00415AB5` | 34 | Generated | Complete repeated-character output redirect and NOP fill |
 | `0x00415AB6...0x00415BF5` | 320 | Generated | Complete fixed-point float converter redirect and NOP fill |
-| `0x00415BF6...0x00415FAD` | 952 | Generated | Complete bootloader formatter-core redirect and NOP fill |
+| `0x00415BF6...0x00415BFB` | 6 | Generated | Bootloader formatter-core entry redirect and NOP fill |
+| `0x00415BFC...0x00415C4F` | 84 | Source compiled | Clean-room CLKGEN configuration service in authenticated generated-NOP space |
+| `0x00415C50...0x00415C63` | 20 | Source compiled | Clean-room CLKGEN bit-preserving disable service in authenticated generated-NOP space |
+| `0x00415C64...0x00415FAD` | 842 | Generated | Authenticated formatter-core NOP fill after the two CLKGEN source caves |
 | `0x00415FAE...0x0041733B` | 5,006 | Opaque | Official logging wrapper and gap before the source-owned EasyLogger service |
 | `0x0041733C...0x004176CD` | 914 | Generated | Ten complete EasyLogger control entries replaced by source redirects |
 | `0x004176CE...0x00417ACF` | 1,026 | Generated | Complete EasyLogger `elog_output` replaced by source redirect |
@@ -685,7 +688,24 @@ and ownership boundary.
 | `0x004267FE...0x00426807` | 10 | Typed data | Retained interrupt-service literal pool |
 | `0x00426808...0x00426BFD` | 1,014 | Source | AmbiqSuite 5.1.0 `am_hal_mspi_power_control`; reviewable Thumb-2 mnemonics, exact after 12 named calls |
 | `0x00426BFE...0x00426C0F` | 18 | Typed data | Retained power-control literal pool |
-| `0x00426C10...0x00434476` | 55,399 | Classified retained | Exhaustive 249-span executable/mixed/data ledger; no source claim |
+| `0x00426C10...0x00426C21` | 18 | Source compiled | Clean-room conventional memset ABI wrapper with one typed call to the source-owned Arm EABI byte-fill provider |
+| `0x00426C22...0x00426C23` | 2 | Retained unreachable tail | Authenticated terminal return after the source leaf; no direct or stored ingress |
+| `0x00426C24...0x00426C27` | 4 | Generated | Entry redirect to the source-owned HFRC2 divider calculator |
+| `0x00426C28...0x00426C37` | 16 | Source compiled | Clean-room CLKGEN HFADJ configuration publisher in authenticated generated-NOP space |
+| `0x00426C38...0x00426C4B` | 20 | Source compiled | Clean-room CLKGEN HFADJ bit-preserving disable leaf in authenticated generated-NOP space |
+| `0x00426C4C...0x00426C4D` | 2 | Generated | Divider-tail NOP fill after the two HFADJ caves |
+| `0x00426C4E...0x00426C57` | 10 | Generated | HFRC-divider entry redirect and NOP fill |
+| `0x00426C58...0x00426C6F` | 24 | Source compiled | Clean-room CLKGEN HFADJ bit-control leaf; low-byte boolean ABI, bit-preserving register update, and zero return |
+| `0x00426C70...0x00426C71` | 2 | Retained unreachable tail | Authenticated terminal return after the source leaf; no direct or stored ingress |
+| `0x00426C72...0x00426C7D` | 12 | Generated source route | Entry redirect and NOP fill to the compiled HFADJ configuration cave |
+| `0x00426C7E...0x00426C8B` | 14 | Generated source route | Entry redirect and NOP fill to the compiled HFADJ disable cave |
+| `0x00426C8C...0x00426CC3` | 56 | Source compiled | Clean-room dual-clock switch with strict retained status-check relocation |
+| `0x00426CC4...0x00426CCB` | 8 | Retained unreachable tail | Authenticated terminal stock bytes; no direct or stored ingress |
+| `0x00426CCC...0x00426D1D` | 82 | Generated source route | Entry redirect and NOP fill to the compiled CLKGEN configuration cave at `0x00415BFC` |
+| `0x00426D1E...0x00426D2B` | 14 | Generated source route | Entry redirect and NOP fill to the compiled CLKGEN disable cave at `0x00415C50` |
+| `0x00426D2C...0x00426D2F` | 4 | Retained typed padding | Authenticated non-entry alignment bytes |
+| `0x00426D30...0x00426D47` | 24 | Retained typed data | CLKGEN register literal pool, including the disable register `0x40004050` |
+| `0x00426D48...0x00434476` | 55,087 | Classified retained | Exhaustive remaining executable/mixed/data ledger; no source claim |
 | `0x00434477` | 1 | Generated | Zero alignment before source overlay |
 | `0x00434478...0x004344D1` | 90 | Source compiled | Exact littlefs utility, comparator, open-list, disk-version, and allocator helpers |
 | `0x004344D2...0x00434509` | 56 | Source compiled | Exact upstream littlefs v2.10.1 `LFS_NO_INTRINSICS` `lfs_npw2` leaf |
@@ -9096,6 +9116,115 @@ passes; live golden-media, persistence, recovery, and schema evidence is
 blocked by unavailable physical evidence; future qualification requires authorized physical evidence. Wider firmware functional
 completeness is not claimed.
 
+## Bootloader hardware-context claim through 161 admissions
+
+The relocation-free 114-byte function at `0x0042C4C6..0x0042C538` is now
+exact production C under both reviewed compilers. The portable model covers
+invalid index and output status, already-claimed rejection, ownership/magic
+stamping, index storage, and `0x8A8`-stride context publication. The frontier
+has 161 source spans / 16,218 bytes and 26 unresolved executable spans / 10,502
+bytes. Apple boot accounting is 48,507 source-owned, 98,487 retained, 16
+alignment, and 16,830 generated-patch bytes. Live retained-SRAM ownership,
+concurrency, peripheral lifecycle, reset, and cold-boot validation is blocked
+by unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader hardware-context enable through 162 admissions
+
+The 258-byte function at `0x0042C538..0x0042C63A` is exact production C under
+both reviewed compilers after three strict provider calls. Portable tests cover
+validation, idempotence, readiness rejection, optional command-queue setup,
+setup failure, successful activation, and control-bit rollback. The frontier
+has 162 source spans / 16,476 bytes and 25 unresolved executable spans / 10,244
+bytes. Apple boot accounting is 48,765 source-owned, 98,229 retained, 16
+alignment, and 16,830 generated-patch bytes. Live retained-SRAM, MMIO,
+command-queue, timing, concurrency, interrupt, reset, and cold-boot validation
+is blocked by unavailable physical evidence; functional completeness is not
+claimed.
+
+## Bootloader hardware-event service through 163 admissions
+
+The 648-byte function at `0x0042C6F8..0x0042C980` is exact production C under
+both reviewed compilers after nine strict provider calls. Portable tests cover
+validation, event accumulation, descriptor retirement/publication, callback
+clearing, event-mask application, terminal cleanup, and command-queue failure.
+The frontier has 163 source spans / 17,124 bytes and 24 unresolved executable
+spans / 9,596 bytes. Apple boot accounting is 49,413 source-owned, 97,581
+retained, 16 alignment, and 16,830 generated-patch bytes. Live retained-SRAM,
+MMIO, DMA, callbacks, command-queue, interrupt, timing, concurrency, reset, and
+cold-boot validation is blocked by unavailable physical evidence; functional
+completeness is not claimed.
+
+## Bootloader hardware-configuration transaction through 164 admissions
+
+The 684-byte function at `0x0042C988..0x0042CC34` is exact production C under
+both reviewed compilers after seven strict provider calls. Portable tests cover
+validation, mode bounds, missing snapshots, thirteen-register restore/save,
+active guards, control clearing, and status propagation. The frontier has 164
+source spans / 17,808 bytes and 23 unresolved executable spans / 8,912 bytes.
+Apple boot accounting is 50,097 source-owned, 96,897 retained, 16 alignment,
+and 16,830 generated-patch bytes. Live MMIO, saved-state validity, power/clock,
+command-queue, timing, concurrency, interrupt, reset, and cold-boot validation
+is blocked by unavailable physical evidence; functional completeness is not
+claimed.
+
+## Bootloader hardware-instance configurator through 165 admissions
+
+The 380-byte function at `0x0042CC34..0x0042CDB0` is exact production C under
+both reviewed compilers after one strict source-owned clock-encoder call. Portable
+tests cover handle and instance validation, active-state rejection, dynamic
+rate/flag programming, the 100 kHz / 400 kHz / 1 MHz register maps, buffer
+safety, window clamping, and four-slot clearing. The frontier has 165 source
+spans / 18,188 bytes and 22 unresolved executable spans / 8,532 bytes. Apple
+boot accounting is 50,477 source-owned, 96,517 retained, 16 alignment, and
+16,830 generated-patch bytes. Live SRAM, MMIO, clock, DMA/buffer coherency,
+peripheral timing, concurrency, interrupt, reset, and cold-boot validation is
+blocked by unavailable physical evidence; functional completeness is not
+claimed.
+
+## Bootloader hardware clock encoder through 166 admissions
+
+The 376-byte function at `0x0042C26A..0x0042C3E2` is exact production C under
+both reviewed compilers after three strict source-owned arithmetic-helper
+calls. Host differential tests cover clock ceiling division, exponent search
+and scaling, phase selection, register-field packing, rounded actual rate, and
+power-of-two canonicalization. The frontier has 166 source spans / 18,564
+bytes and 21 unresolved executable spans / 8,156 bytes. Apple boot accounting
+is 50,853 source-owned, 96,141 retained, 16 alignment, and 16,830
+generated-patch bytes. Live clock, MMIO, peripheral tolerance, signal
+integrity, timing, interrupt, reset, and cold-boot validation is blocked by
+unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader zero unresolved executable spans through 187 admissions
+
+`runtime_spotmgr_state_transition_42b294.c` adds the final 1,032 exact in-place
+source bytes. The post-MSPI frontier now has 187 source spans / 26,720 bytes
+and zero unresolved executable spans / zero unresolved executable bytes; every
+one of the 57,153 frontier bytes remains classified. Apple boot accounting is
+59,009 source-owned, 87,985 retained, 16 alignment, and 16,830 generated-patch
+bytes. Hardware-dependent SRAM, MMIO, trim, power, timing, interrupts,
+concurrency, reset, and cold-boot validation is blocked by unavailable physical
+evidence; functional completeness is not claimed.
+
+## Bootloader state-one tuning through 185 admissions
+
+`runtime_state_event_one_value_42d104.c` adds 696 exact in-place source bytes.
+The post-MSPI frontier now has 185 source spans / 24,918 bytes and 2 unresolved
+executable spans / 1,802 bytes; every frontier byte remains classified. Apple
+boot accounting is 57,207 source-owned, 89,787 retained, 16 alignment, and
+16,830 generated-patch bytes. Hardware-dependent MMIO, clock/power, trim,
+timing, interrupt, reset, and cold-boot validation is blocked by unavailable
+physical evidence; functional completeness is not claimed.
+
+## Bootloader hardware-state decoder through 186 admissions
+
+`runtime_hw_state_decode_42b6b8.c` adds 770 exact in-place source bytes. The
+post-MSPI frontier now has 186 source spans / 25,688 bytes and 1 unresolved
+executable span / 1,032 bytes; every frontier byte remains classified. Apple
+boot accounting is 57,977 source-owned, 89,017 retained, 16 alignment, and
+16,830 generated-patch bytes. Hardware-dependent flash, SRAM, MMIO,
+peripheral, concurrency, reset, and cold-boot validation is blocked by
+unavailable physical evidence; functional completeness is not claimed.
+
 ## Current OPT3007 register-map source increment
 
 The private `ti_opt3007_assignRegistermap` constructor is now replaced by the
@@ -10171,6 +10300,64 @@ in-place leaves. No hardware operation occurred. The next executable entry is
 `0x0042287C`; physical SRAM-anchor qualification remains blocked and
 firmware-wide completeness is not claimed.
 
+## Current bootloader Ambiq queue increment
+
+Production BSD-3-Clause C now owns the full 208-byte stock queue family at
+`[0x004275EA,0x004276BA)`: a 24-byte initializer and 94/90-byte add/get
+services. Compiled bodies of 18/88/86 bytes occupy authenticated reclaimed
+stock-body space behind 6/6/4-byte generated entry redirects. The initializer
+is main-image exact; add/get each differ from their main analogue only in the
+image-specific critical-provider `BL` encoding.
+
+Canonical Apple bootloader accounting is 36,681 compiled-source bytes,
+16,710 generated patch-site bytes, 16 generated-alignment bytes, and 110,433
+retained bytes. Linux records 36,667 compiled-source, 16,706 generated
+patch-site, 18 generated-alignment, and the same retained complement. The
+post-MSPI census is exhaustive with 24 source spans / 4,220 stock bytes and
+no unclassified byte. Hardware validation is blocked by unavailable physical
+evidence; firmware-wide completeness is not claimed.
+
+## Current bootloader overlap-safe byte-move increment
+
+Clean-room MIT C now owns the complete 150-byte `memmove` body at
+`[0x004276BC,0x00427752)`. The same 50-byte relocation-free leaf is emitted
+by both reviewed profiles in reclaimed body space behind a four-byte entry
+redirect; 96 deterministic generated NOP bytes replace the unreachable stock
+remainder. Host oracles cover backward and forward overlap, non-overlap,
+aliasing, zero length, and the destination return value. The sole production
+caller, retained source-owned copy-provider edge, main-image analogue, and
+two-byte terminal alignment are authenticated.
+
+Canonical Apple bootloader accounting is 36,731 compiled-source bytes,
+16,810 generated patch-site bytes, 16 generated-alignment bytes, and 110,283
+retained bytes. Linux records 36,717 compiled-source, 16,806 generated
+patch-site, 18 generated-alignment, and the same retained complement. The
+post-MSPI census is exhaustive with 25 source spans / 4,370 stock bytes, 103
+unresolved executable spans / 17,254 bytes, and no unclassified byte. Hardware
+validation is blocked by unavailable physical evidence; firmware-wide
+completeness is not claimed.
+
+## Current bootloader command-queue index-update increment
+
+Bounded BSD-3-Clause C now owns the complete private AmbiqSuite Apollo510
+`update_indices()` body at `[0x00427754,0x00427794)`. Apple and Linux emit
+44-byte leaves in reclaimed body space behind a four-byte redirect, with one
+strict critical-save relocation and exact mnemonic PRIMASK restoration; 16
+deterministic generated NOP bytes replace the unreachable stock remainder.
+Host oracles cover hardware-index masking, monotonic epoch reconstruction,
+negative signed wrap correction, CQ-address snapshots, and interrupt-token
+restoration. Three production callers, the Apollo-main analogue, the private
+44-byte state ABI, and register-table offsets are authenticated.
+
+Canonical Apple bootloader accounting is 36,775 compiled-source bytes,
+16,830 generated patch-site bytes, 16 generated-alignment bytes, and 110,219
+retained bytes. Linux records 36,761 compiled-source, 16,826 generated
+patch-site, 18 generated-alignment, and the same retained complement. The
+post-MSPI census is exhaustive with 26 source spans / 4,434 stock bytes, 102
+unresolved executable spans / 17,194 bytes, and no unclassified byte. The next
+source-admission frontier is `0x00427794`. Hardware validation is blocked by
+unavailable physical evidence; firmware-wide completeness is not claimed.
+
 ## Prior bootloader service-dispatch closure
 
 `runtime_hw_service_dispatch_42377c.c` implements the exact 176-byte dispatcher
@@ -10181,6 +10368,119 @@ in-place leaves. No hardware operation occurred. The earliest retained
 executable entry remains `0x0042308E`; physical interrupt/register/callback/
 concurrency/MMIO qualification remains blocked and firmware-wide completeness
 is not claimed.
+
+## Bootloader platform bring-up through 183 admissions
+
+`runtime_platform_bringup_430000.c` adds 470 exact in-place source bytes. The
+post-MSPI frontier has 183 source spans / 23,538 bytes and 4 unresolved
+executable spans / 3,182 bytes. Apple boot accounting is 55,827 source-owned,
+91,167 retained, 2,594 source-cave, 38,008 in-place, 16 alignment, and 16,830
+generated-patch bytes. Hardware-dependent validation is blocked by unavailable
+physical evidence; functional completeness is not claimed.
+
+## Bootloader DFU payload programming through 182 admissions
+
+`runtime_dfu_payload_program_42dae8.c` adds 424 exact in-place source bytes. The
+post-MSPI frontier has 182 source spans / 23,068 bytes and 5 unresolved
+executable spans / 3,652 bytes. Apple boot accounting is 55,357 source-owned,
+91,637 retained, 2,594 source-cave, 37,538 in-place, 16 alignment, and 16,830
+generated-patch bytes. Hardware-dependent validation is blocked by unavailable
+physical evidence; functional completeness is not claimed.
+
+## Bootloader state-register initialization through 181 admissions
+
+`runtime_state_register_initialize_42d3bc.c` adds 422 exact in-place source
+bytes. The post-MSPI frontier has 181 source spans / 22,644 bytes and 6
+unresolved executable spans / 4,076 bytes. Apple boot accounting is 54,933
+source-owned, 92,061 retained, 2,594 source-cave, 37,114 in-place, 16 alignment,
+and 16,830 generated-patch bytes. Hardware-dependent validation is blocked by
+unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader hardware-context initialization through 180 admissions
+
+`runtime_hw_context_initialize_42e8d0.c` adds 354 exact in-place source bytes.
+The post-MSPI frontier has 180 source spans / 22,222 bytes and 7 unresolved
+executable spans / 4,498 bytes. Apple boot accounting is 54,511 source-owned,
+92,483 retained, 2,594 source-cave, 36,692 in-place, 16 alignment, and 16,830
+generated-patch bytes. Hardware-dependent validation is blocked by unavailable
+physical evidence; functional completeness is not claimed.
+
+## Bootloader DFU image CRC through 179 admissions
+
+`runtime_dfu_image_crc_check_42d890.c` adds 352 exact in-place production-source
+bytes. The post-MSPI frontier has 179 source spans / 21,868 bytes and 8
+unresolved executable spans / 4,852 bytes. Apple boot accounting is 54,157
+source-owned, 92,837 retained, 2,594 source-cave, 36,338 in-place, 16 alignment,
+and 16,830 generated-patch bytes. Hardware-dependent validation is blocked by
+unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader descriptor/state composition through 178 admissions
+
+`runtime_descriptor_register_430280.c` and
+`runtime_hw_state_compose_42bdf0.c` add 666 exact in-place production-source
+bytes. The post-MSPI frontier now has 178 source spans / 21,516 bytes and 9
+unresolved executable spans / 5,204 bytes. Apple boot accounting is 53,805
+source-owned, 93,189 retained, 2,594 source-cave, 35,986 in-place, 16 alignment,
+and 16,830 generated-patch bytes. Hardware-dependent validation is blocked by
+unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader runtime controls through 152 admissions
+
+Four runtime-control services add 296 exact production-source bytes at
+`0x0042BF54`, `0x0042E2A2`, `0x0042E4A0`, and `0x0042F1C8`. The post-MSPI
+frontier now has 152 source spans / 15,126 bytes and 35 unresolved executable
+spans / 11,594 bytes; every frontier byte remains classified. Apple boot
+accounting is 47,415 source-owned, 99,579 retained, 16 alignment, and 16,830
+generated-patch bytes. Hardware-dependent validation is blocked by unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader retained-event loop through 153 admissions
+
+The exact 162-byte event initialization and bounded-wait loop at
+`0x0042E2F8..0x0042E39A` is now production source. The frontier has 153 source
+spans / 15,288 bytes and 34 unresolved executable spans / 11,432 bytes. Apple
+boot accounting is 47,577 source-owned, 99,417 retained, 16 alignment, and
+16,830 generated-patch bytes. Live retained-RAM, scheduler/event, logging,
+timing, interrupt, reset, and cold-boot validation is blocked by unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader control orchestration through 158 admissions
+
+The event/control orchestrator at `0x0042DD14` and critical dispatch transaction
+at `0x0042DE0E` add 158 exact production-source bytes. The frontier has 158
+source spans / 15,882 bytes and 29 unresolved executable spans / 10,838 bytes.
+Apple boot accounting is 48,171 source-owned, 98,823 retained, 16 alignment,
+and 16,830 generated-patch bytes. Live scheduler/event, retained RAM,
+interrupt-mask, terminal-mode, logging, timing, reset, and cold-boot validation
+is blocked by unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader runtime-context publisher through 159 admissions
+
+The 114-byte publisher at `0x0042DCA2..0x0042DD14` is now exact production
+source. The frontier has 159 source spans / 15,996 bytes and 28 unresolved
+executable spans / 10,724 bytes. Apple boot accounting is 48,285 source-owned,
+98,709 retained, 16 alignment, and 16,830 generated-patch bytes. Live retained
+RAM, RTOS queue/event, scheduler, logging, timing, interrupt, reset, and
+cold-boot validation is blocked by unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader hardware-descriptor publisher through 160 admissions
+
+The relocation-free 108-byte function at `0x0042C45A..0x0042C4C6` is now
+exact production C under both reviewed compilers. The portable model covers
+ring successor selection, modulo wrap, 32-byte descriptor stride, and register
+field order `[0,1,4,2,3,5]`. The frontier has 160 source spans / 16,104 bytes
+and 27 unresolved executable spans / 10,616 bytes. Apple boot accounting is
+48,393 source-owned, 98,601 retained, 16 alignment, and 16,830 generated-patch
+bytes. Live SRAM, MMIO, peripheral, DMA, timing, interrupt, reset, and cold-boot
+validation is blocked by unavailable physical evidence; functional
+completeness is not claimed.
+
+## Bootloader event runtime services through 156 admissions
+
+Three event-runtime functions add 436 exact production-source bytes at
+`0x0042E53C`, `0x0042E644`, and `0x0042E686`. The frontier has 156 source spans
+/ 15,724 bytes and 31 unresolved executable spans / 10,996 bytes. Apple boot
+accounting is 48,013 source-owned, 98,981 retained, 16 alignment, and 16,830
+generated-patch bytes. Live RTOS-object, scheduler, queue, callback, logging,
+timing, interrupt, reset, and cold-boot validation is blocked by unavailable physical evidence; functional completeness is not claimed.
 
 ## Prior bootloader bounded memory-exchange closure
 
@@ -10387,9 +10687,11 @@ closes at 119,425 bytes.
 
 Touch's 19,442-byte retained/external complement is no longer one coarse row:
 the checked manifest emits exact address-set digests for 15,854 code-span bytes
-and 3,588 non-code bytes. EM9305 maps 1,240 reviewed MIT bytes to an unrouted
-candidate and retains 210,708 typed bytes. Within EM9305's 33,658-byte residual
-subledger, those 1,240 candidate bytes and the 8,348-byte external plus
+and 3,588 non-code bytes. EM9305 now production-routes all 1,240 reviewed
+concrete-source stock bytes through 1,174 compiled bytes plus 1,226 generated
+or reconstructible bytes in a complete 212,984-byte provider. Its remaining
+210,584 bytes are typed retained/external. Within the 33,658-byte residual
+provenance subledger, the 1,240 concrete bytes and the 8,348-byte external plus
 24,070-byte proprietary boundaries exhaust all 175 spans with zero
 unclassified. GX8002's 326,000-byte provider
 boundary is split by executable, runtime-data, NPU-command, and model class
@@ -10516,6 +10818,21 @@ clock, XIP-delay, and boot behavior is blocked by unavailable physical
 evidence. The next code frontier is `[0x00424AF0,0x00424BD4)`; no
 firmware-wide completeness claim is made.
 
+## Current bootloader MSPI lifecycle increment
+
+Structured BSD-3-Clause C now owns 296 executable bytes across the enable,
+disable, and deinitialize entries at `0x00425066`, `0x004250F0`, and
+`0x0042516C`. Both reviewed compiler profiles produce identical objects and
+the exact five-symbol relocation closure. Unreachable tails and alignment
+remain retained, giving a conservative current partition of 30,071 source,
+16,490 generated, and 117,279 retained bytes across 599 intervals.
+
+The raw transcript census falls to two files / 4,930 executable bytes. Live
+MSPI queue, DMA, XIP, timing, interrupt, flash, reset, and boot evidence is
+blocked by unavailable physical evidence. The next executable retained body
+is `am_hal_mspi_control` at `0x004251C0`; no firmware-wide completeness claim
+is made.
+
 ## Current bootloader MSPI controller-configure increment
 
 The authenticated `[0x00424AF0,0x00424BD4)` controller configure now routes a
@@ -10546,3 +10863,343 @@ retained bytes across 593 intervals. Physical MSPI register, clock, DMA/TCB,
 XIP, flash, reset, and boot evidence is blocked by unavailable physical
 evidence. The next code frontier is `[0x00425066,0x004250F0)`; no
 firmware-wide completeness claim is made.
+
+## Current bootloader MSPI control increment
+
+Production BSD-3-Clause C now owns 3,948 bytes of the stock control envelope:
+a 124-byte stock-request adapter at `[0x004251C0,0x0042523C)` and a 3,824-byte
+maintained AmbiqSuite implementation at `[0x0042523C,0x0042612C)`. Apple
+Clang 21 and Homebrew LLVM Clang 22.1.8 produce reviewed profile-specific
+bodies under one strict symbol/type/address relocation contract. The source
+uses ordinary compilable C rather than raw executable byte transcripts.
+
+The 436-byte unreachable stock tail at `[0x0042612C,0x004262E0)` remains
+retained official evidence. Canonical Apple accounting is 34,019 source,
+16,490 generated, and 113,331 retained bytes across 602 regions. Physical
+register, XIP, timing, FIFO, interrupt, flash-bus, and cold-boot qualification
+is blocked by unavailable physical evidence. The next executable retained
+body is `am_hal_mspi_blocking_transfer` at `0x004262E0`; no firmware-wide
+completeness claim is made.
+
+## Current bootloader transfer/interrupt and memset-wrapper increment
+
+The maintained BSD-3-Clause MSPI implementation now provides 404 additional
+in-place source bytes across blocking transfer and interrupt enable, disable,
+and status-get. The post-MSPI interrupt-clear/service/power-control route is
+already source-owned or generated through `0x00426BFE`. At `0x00426C10`, an
+18-byte freestanding MIT C leaf implements standard memset argument order,
+calls the source-owned Arm EABI byte-fill provider, and returns the original
+destination. The two bytes at `[0x00426C22,0x00426C24)` remain a verified
+unreachable stock tail.
+
+Current Apple accounting is 34,641 source, 16,478 generated, and 112,721
+retained bytes across 624 manifest intervals. Linux records 34,623 source,
+16,480 generated, and the same 112,721 retained bytes. Both complete provider
+and package profiles rebuild with zero unclassified ownership and zero
+unresolved flash regions. Hardware qualification is blocked by unavailable
+physical evidence. The source-owned CLKGEN HFADJ leaf at
+`[0x00426C58,0x00426C70)` preserves the low-byte boolean ABI and every
+non-control register bit; its two-byte terminal return remains a verified
+unreachable tail. The 12-byte configuration entry at `0x00426C72` now routes
+to a 16-byte compiled C cave that publishes `configuration | 1` to
+`0x40004020`. The 14-byte disable entry at `0x00426C7E` routes to a 20-byte
+compiled C cave that clears only bit 0 of the same register and preserves every
+other bit. The dual-clock entry at `0x00426C8C` is now a 56-byte compiled
+C leaf with one strict call to the retained status-check provider; its final
+eight stock bytes remain a verified unreachable tail. The next retained
+executable body at `0x00426CCC` is now source-routed to an 84-byte compiled C
+cave at `0x00415BFC`; it preserves the null/status ABI, all three register
+field updates, and the authenticated two-write divider sequence. The next
+retained executable body begins at `0x00426D1E`;
+no firmware-wide completeness claim is made.
+
+## CLKGEN disable entry is source-routed C
+
+The authenticated 14-byte service at `[0x00426D1E,0x00426D2C)` now redirects
+to a 20-byte freestanding MIT C body at `[0x00415C50,0x00415C64)`. The cave is
+authenticated generated-NOP space inside the formatter-core replacement,
+has no fallthrough or interior ingress, and requires no provider growth. The
+source clears only bit 0 of CLKGEN register `0x40004050`, preserves every
+other bit, and returns zero. Both reviewed compilers emit the same
+relocation-free body, and host tests cover all recovered register states.
+
+Canonical Apple bootloader accounting is 34,661 source-owned, 16,456
+generated patch-site, 16 generated-alignment, and 112,707 retained bytes
+across 626 manifest intervals. Linux records 34,643 source-owned with the same
+generated and retained totals. Apple/Linux provider SHA-256 values are
+`c979561dca62accdb4f2a4bbd3c6d2ac02518225b59f4a9639401b1e959765f3`
+and
+`621f22b25a857c6081bf979eabc2a3d7aad57c21b766fee2439a36e1a9251751`;
+complete package SHA-256 values are
+`a1b56ff04cdd1249f1b95324469ca253d11cefe602e8708b198536f31a3b04c9`
+and
+`3e0e89e8eaa83a4e4da5baefbebbb5aaa17a9bd05588643a8de52a0d7c49b983`.
+Both profiles have zero unresolved flash regions and zero unclassified
+ownership. The following padding and literal pool remain typed official data,
+so the next executable software frontier is `0x00426D48`. Hardware
+qualification is blocked by unavailable physical evidence; firmware-wide
+completeness is not claimed.
+
+## Current bootloader floating common-divisor increment
+
+The authenticated entry `[0x00426D48,0x00426DB2)` now redirects to a
+112-byte freestanding MIT C body at `[0x00415C64,0x00415CD4)`. The source
+preserves the ordered Euclidean loop, `2^-23` threshold, 16-iteration bound,
+retained `floorf` provider, and `-1.0f` exhaustion result. Both reviewed
+compilers emit the same relocated body. The exhaustive frontier now records
+10 production-source spans / 2,052 stock bytes and 116 unresolved executable
+spans / 19,196 bytes.
+
+Canonical Apple bootloader accounting is 34,773 source-owned, 16,450
+generated patch-site, 16 generated-alignment, and 112,601 retained bytes
+across 629 manifest intervals. Linux records 34,755 source-owned, 16,450
+generated patch-site, 18 generated-alignment, and the same retained total.
+Apple/Linux provider SHA-256 values are
+`af1ce755ab324ed4920424ac6eb84ed24d59a25a11f52f0f5a6897152ce38b9d`
+and
+`b04e97c49e82c6daaec848816005f73b5ab1302ce675a4eb1fc4539f166dba12`;
+complete package SHA-256 values are
+`85034813f4adf36ee485b11fb1f5c8b132b28fe8e1a9aae7567902277ddd909c`
+and
+`73a10e7dda7fd15ad07fd83820e64f0989c01fa034caa665a9f7741fac951da5`.
+Both profiles have zero unresolved flash regions and zero unclassified
+ownership. The two-byte gap at `[0x00426DB2,0x00426DB4)` remains typed
+non-entry data; the next executable software frontier begins at
+`0x00426DB4`. Hardware qualification is blocked by unavailable physical
+evidence; firmware-wide completeness is not claimed.
+
+## Current bootloader floating ratio increment
+
+The authenticated entry `[0x00426DB4,0x00426EAC)` now redirects to a
+272-byte freestanding MIT C body at `[0x00415CD4,0x00415DE4)`. The source
+preserves GCD normalization, one-ULP integer tolerance, all seven math-provider
+edges, repeated stock rounding, minimum-denominator scaling, and the final
+`1..63` / `4..960` encoded bounds. Both reviewed compilers emit the same
+relocated body. The exhaustive frontier now records 11 production-source
+spans / 2,300 stock bytes and 115 unresolved executable spans / 18,948 bytes.
+
+Canonical Apple bootloader accounting is 35,045 source-owned, 16,426
+generated patch-site, 16 generated-alignment, and 112,353 retained bytes
+across 632 manifest intervals. Linux records 35,027 source-owned, 16,426
+generated patch-site, 18 generated-alignment, and the same retained total.
+Apple/Linux provider SHA-256 values are
+`ac373b3c0caa5dcb6ae25cf6f004c76e778d936b7a584e3ecdf83a17283bca36`
+and
+`4993c8d06b148fa4518268af8fd5133e1494f18c74387249326dac78da1ddde0`;
+complete package SHA-256 values are
+`12a36be93bc410f2e9e122343455b24888b3750c3c0888a4410aa46cf983b891`
+and
+`a17eb8cb3527d7956c9da71f450488a0e19e08d3862e4753ec62d1ffaf4472af`.
+Both profiles have zero unresolved flash regions and zero unclassified
+ownership. The next unresolved executable software frontier begins at
+`0x00426EAC`. Hardware qualification is blocked by unavailable physical
+evidence; firmware-wide completeness is not claimed.
+
+## Current bootloader hard-float multiplier and selector increment
+
+The GCD and ratio entries now explicitly use AAPCS-VFP and compile to 92- and
+252-byte leaves matching the authenticated `s0`/`s1` ABI. The multiplier at
+`[0x00426EAC,0x00426F6A)` compiles to 192 bytes at
+`[0x00415DE4,0x00415EA4)`. The selector at
+`[0x00426F6C,0x00427032)` compiles identically under both reviewed profiles to
+180 bytes at `[0x00415EA4,0x00415F58)`. Strict relocations bind the two
+source-routed encoder entries, while host tests cover statuses, boundary and
+NaN behavior, fallback, output layout, and failure preservation.
+
+The frontier now records 13 production-source spans / 2,688 stock bytes and
+114 unresolved executable spans / 18,758 bytes. Canonical Apple bootloader
+accounting is 35,377 source-owned, 16,482 generated patch-site, 16 generated
+alignment, and 111,965 retained bytes; Linux records 35,359 source-owned,
+16,482 generated patch-site, 18 generated alignment, and the same retained
+complement. Both deterministic packages have zero unresolved flash regions.
+Hardware qualification is blocked by unavailable physical evidence;
+firmware-wide completeness is not claimed.
+
+## Current bootloader command-queue public-service increment
+
+`runtime_cmdq_services_427794.c` provides eleven production C entries over
+`[0x00427794,0x00427C80)`: initialization, lifecycle control, block
+allocation/release/post, status, termination, error recovery, reset, and loop
+posting. Apple emits 1,056 in-place source bytes and Linux emits 1,030; every
+leaf fits before its next authenticated public entry. The remaining 204 Apple
+stock bytes are 11 unreachable suffixes, separately classified rather than
+claimed as source. Exact Apollo-main analogues, all direct caller sets,
+updater relocations, and absence of interior direct or stored-pointer ingress
+are pinned.
+
+Canonical Apple accounting is now 37,831 compiled-source bytes, 16,830
+generated patch-site bytes, 16 generated-alignment bytes, and 109,163 retained
+bytes across 698 disjoint manifest intervals. The exhaustive post-MSPI census
+contains 37 source spans / 5,490 stock bytes, 45 candidates / 3,068 bytes, 102
+typed unresolved executable spans / 17,194 bytes, and no unclassified bytes.
+The typed literal/padding window `[0x00427C80,0x00427C90)` precedes the next
+executable source-admission frontier. Hardware validation is blocked by
+unavailable physical evidence; firmware-wide completeness is not claimed.
+## Bootloader binary32 math runtime through `0x00427E84`
+
+`runtime_float_math_veneers_427c90.c` and `runtime_float_math_427c90.c`
+compile into nine authenticated fixed-address entries totaling 432 production
+source bytes. Four strict `R_ARM_THM_CALL` relocations bind the hard-float ABI
+veneers to their adjacent integer cores. Floor, round, ceiling, and all four
+veneers are stock-exact. The 168-byte `fmod` core and 72-byte classifier leave
+20- and 48-byte authenticated unreachable suffixes. The remainder algorithm
+is a bounded MIT musl v1.2.5 adaptation; the other code is MIT clean-room
+openCFW compatibility work.
+
+The current post-MSPI census contains 46 source spans / 5,922 stock bytes, 37
+cross-image candidates / 2,756 bytes, 102 typed unresolved executable spans /
+17,194 bytes, 16 unreachable tails / 284 bytes, two retained-data spans / 28
+bytes, and 64 typed non-entry spans / 30,969 bytes. All 57,153 bytes are
+classified. The typed non-entry interval `[0x00427E84,0x00428378)` precedes the
+next executable entry. Current Apple boot accounting is 38,263 source-owned,
+108,731 retained, 16 alignment, and 16,830 generated-patch bytes. Physical
+FP-state, timing, reset, and cold-boot qualification is blocked by unavailable
+physical evidence; no hardware operation occurred.
+
+## Bootloader SPOT-manager transition through `0x004283E2`
+
+`runtime_spotmgr_transition_428378.c` compiles into the complete 106-byte
+fixed-address Apollo510 `transition_sequence_2b` entry. Both reviewed compiler
+profiles produce the same bytes after the strict delay call relocation and
+match stock exactly. The authenticated caller is `0x0042A05C`; nine shared
+literal addresses bind the G2 register and SRAM cells. A 50,000-state portable
+host differential covers all masked register updates, both power-switch bit
+clears, delay recording, and the terminal sequence value.
+
+The post-MSPI census now contains 47 source spans / 6,028 bytes, 37 exact
+candidates / 2,756 bytes, 101 typed unresolved executable spans / 17,088
+bytes, 16 unreachable tails / 284 bytes, two retained-data spans / 28 bytes,
+and 64 typed non-entry spans / 30,969 bytes. All 57,153 bytes remain
+classified. Current Apple boot accounting is 38,369 source-owned, 108,625
+retained, 16 alignment, and 16,830 generated-patch bytes. The next executable
+frontier is `0x00428A94`. Physical timer, MMIO, voltage, trim, power, reset,
+and cold-boot qualification is blocked by unavailable physical evidence.
+
+## Bootloader SPOT-manager source through `0x0042A2A4`
+
+The fixed-address source route now includes transition 7b (276 bytes), the
+factory-trim loader (82), readiness wrapper (20), corrected timer ISR (46),
+SIMOBUCK deep-sleep classifier (272), internal-domain marker (22), and Ton
+selector (232). All 950 bytes are exact under Apple clang 21.0.0 and Homebrew
+clang 22.1.8. The implementations contain reviewable mnemonic Thumb-2 target
+forms and portable semantic C; no raw instruction-byte directives are used.
+
+The post-MSPI census records 54 source spans / 6,978 bytes, 35 exact
+candidates / 2,654 bytes, 96 typed unresolved executable spans / 16,244 bytes,
+16 unreachable tails / 284 bytes, two retained-data spans / 28 bytes, and 64
+typed non-entry spans / 30,965 bytes. All 57,153 bytes are classified. Current
+Apple boot accounting is 39,319 source-owned, 107,675 retained, 16 alignment,
+and 16,830 generated-patch bytes. The next executable frontier is
+`0x0042A2B4`. Physical timing, MMIO, rail/trim effects, deep sleep, reset, and
+cold-boot qualification is blocked by unavailable physical evidence.
+
+## Bootloader SPOT-manager source through `0x0042A43A`
+
+`runtime_spotmgr_state_transition_sequence_42a2b4.c` adds 390 exact in-place
+bytes under Apple clang 21.0.0 and Homebrew clang 22.1.8. The post-MSPI census
+now records 55 source spans / 7,368 bytes, 35 exact candidates / 2,654 bytes,
+95 typed unresolved executable spans / 15,854 bytes, 16 unreachable tails /
+284 bytes, two retained-data spans / 28 bytes, and 64 typed non-entry spans /
+30,965 bytes. Apple boot accounting is 39,709 source-owned, 107,285 retained,
+16 alignment, and 16,830 generated-patch bytes. The next executable frontier
+is `0x0042A43A`; hardware validation is **blocked by unavailable physical
+evidence**.
+
+## Bootloader register/control/late wrappers through 132 admissions
+
+The post-MSPI source route now covers 132 fixed-address spans / 14,150 stock
+bytes. The newest 25-function tranche contributes 866 exact bytes across
+register and interrupt helpers, command-queue adapters, runtime/event controls,
+validated transfer wrappers, and platform initialization. Both reviewed Clang
+profiles are exact and the portable host models are exercised without live
+MMIO. The corrected `0x00430B10..0x00430B3C` extent reclassifies the complete
+interrupt-mask restore and function return as executable source.
+
+Remaining executable ownership is 55 spans / 12,552 bytes; all frontier bytes
+remain classified. Apple boot accounting is 46,439 source-owned, 100,555
+retained, 16 alignment, and 16,830 generated-patch bytes. Hardware-dependent
+validation is blocked by unavailable physical evidence; functional completeness
+is not claimed.
+
+## Bootloader DFU service task through 184 admissions
+
+`runtime_dfu_service_task_42de58.c` adds 684 exact in-place source bytes. The
+post-MSPI frontier now has 184 source spans / 24,222 bytes and 3 unresolved
+executable spans / 2,498 bytes; every frontier byte remains classified. Apple
+boot accounting is 56,511 source-owned, 90,483 retained, 16 alignment, and
+16,830 generated-patch bytes. Hardware-dependent scheduler, storage, flash,
+vector-handoff, interrupt, reset, and cold-boot validation is blocked by
+unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader platform/state/profile tranche through 176 admissions
+
+Three exact source leaves add 846 in-place bytes. The post-MSPI frontier now has
+176 source spans / 20,850 bytes and 11 unresolved executable spans / 5,870
+bytes. Apple boot accounting is 53,139 source-owned, 93,855 retained, 16
+alignment, and 16,830 generated-patch bytes. Hardware validation is blocked by
+unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader event-value profile through 173 admissions
+
+`runtime_event_value_profile_42f204.c` adds 246 exact in-place source bytes.
+The post-MSPI frontier now has 173 source spans / 20,004 bytes and 14 unresolved
+executable spans / 6,716 bytes. Apple boot accounting is 52,293 source-owned,
+94,701 retained, 16 alignment, and 16,830 generated-patch bytes. Hardware
+validation is blocked by unavailable physical evidence; functional
+completeness is not claimed.
+
+## Bootloader mode router through 172 admissions
+
+`runtime_mode_apply_42ff00.c` adds 242 exact in-place source bytes. The
+post-MSPI frontier now has 172 source spans / 19,758 bytes and 15 unresolved
+executable spans / 6,962 bytes; every frontier byte remains classified. Apple
+boot accounting is 52,047 source-owned, 94,947 retained, 16 alignment, and
+16,830 generated-patch bytes. Hardware-dependent validation is blocked by
+unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader retained hardware-event apply through 167 admissions
+
+The exact 368-byte source leaf at `0x0042C0B2` replaces the complete event
+acknowledgement, drain, timed-pulse, and register-restoration body. Both
+reviewed compilers, its delay edge, two callers, shared literals, main analogue,
+portable transitions, and complete-image ownership are pinned. The frontier
+has 167 source spans / 18,932 bytes and 20 unresolved executable spans / 7,788
+bytes; Apple boot accounting is 51,221 source-owned and 95,773 retained bytes.
+Live retained-SRAM, MMIO, clock, timing, concurrency, interrupt, reset, and
+cold boot is blocked by unavailable physical evidence; functional completeness
+is not claimed.
+
+## Bootloader small runtime services through 148 admissions
+
+Five bounded services add 274 exact production-source bytes. The corrected
+`0x0042CEA4..0x0042CED8` extent includes the complete PRIMASK restore and return.
+The post-MSPI frontier now has 148 source spans / 14,830 bytes and 39 unresolved
+executable spans / 11,890 bytes; every frontier byte remains classified. Apple
+boot accounting is 47,119 source-owned, 99,875 retained, 16 alignment, and
+16,830 generated-patch bytes. Hardware-dependent validation is blocked by
+unavailable physical evidence; functional completeness is not claimed.
+
+## Bootloader retained event state through 143 admissions
+
+Five event-state functions add 228 exact production-source bytes, bringing the
+post-MSPI frontier to 143 source spans / 14,556 bytes. Remaining executable
+ownership is 44 spans / 12,160 bytes; all frontier bytes remain classified.
+Apple boot accounting is 46,845 source-owned, 100,149 retained, 16 alignment,
+and 16,830 generated-patch bytes. Live event-object and scheduler behavior is
+blocked by unavailable physical evidence; functional completeness is not
+claimed.
+
+## Bootloader event and runtime-context lifecycle through 138 admissions
+
+The post-MSPI source route now covers 138 fixed-address spans / 14,328 stock
+bytes. Event-runtime setup and callback dispatch add 42 exact bytes; retained
+queue/action context lifecycle and enable sequencing add 136. The corrected
+`0x0042DE0E..0x0042DE58` boundary moves its complete PRIMASK restore, terminal
+call, stack teardown, and return from mixed classification into executable
+classification.
+
+Remaining executable ownership is 49 spans / 12,388 bytes; all 57,153 frontier
+bytes remain classified. Apple boot accounting is 46,617 source-owned, 100,377
+retained, 16 alignment, and 16,830 generated-patch bytes. Hardware-dependent
+validation is blocked by unavailable physical evidence; functional completeness
+is not claimed.

@@ -94,10 +94,10 @@ EM9305_FINAL_SUMMARY = (
     ROOT / "tools/manifests/em9305-final-source-readiness-summary.json"
 )
 EM9305_FINAL_LEDGER_SHA256 = (
-    "d63cdcd7a4bbaf6a30ef55eafa470561d205ac87f55656c424786bbbec775b15"
+    "cfda63c68a73d27235af204f01ee6c848db9495d0294d55faf70096b7ab08bf9"
 )
 EM9305_FINAL_SUMMARY_SHA256 = (
-    "ae70d87d4833ec98e5235813ada50564513fcbb7ecd2a02816411510bd088084"
+    "5cd0e51ef3274fe1e96d8c3e4aa0ff776fef4587305112f05573b5cde0d194fd"
 )
 HARDWARE_VALIDATION = "blocked by unavailable physical evidence"
 TOUCH_CANDIDATE_BYTES = 14_510
@@ -765,7 +765,7 @@ def analyze() -> dict[str, Any]:
         "official_blob": boot["opaque_base_bytes"],
         "source_compiled": boot["source_owned_bytes"],
     }, "bootloader current interval partition disagrees with its builder")
-    _require(boot_partition["retained_official_bytes"] == 117_575,
+    _require(boot_partition["retained_official_bytes"] == 87_985,
              "bootloader retained complement changed")
 
     gx = gx8002_readiness.run_audit()
@@ -797,14 +797,14 @@ def analyze() -> dict[str, Any]:
     _require(_sum(em_residual["readiness_bytes"]) == em_residual["bytes"],
              "EM9305 residual readiness does not conserve bytes")
     em_completion = em.get("completion_bucket_mapping", {})
-    _require(em_completion.get("component_bytes") == 211_948 and
-             em_completion.get("candidate_production_routed") is False and
-             em_completion.get("release_blocking_bytes") == 211_948 and
+    _require(em_completion.get("component_bytes") == 212_984 and
+             em_completion.get("candidate_production_routed") is True and
+             em_completion.get("release_blocking_bytes") == 210_584 and
              em_completion.get("buckets") == {
-                 "production_source": 0,
-                 "generated_or_reconstructible": 0,
-                 "candidate_source_not_routed": 1_240,
-                 "typed_retained_or_external": 210_708,
+                 "production_source": 1_174,
+                 "generated_or_reconstructible": 1_226,
+                 "candidate_source_not_routed": 0,
+                 "typed_retained_or_external": 210_584,
                  "unclassified": 0,
              }, "EM9305 completion mapping changed")
 
@@ -889,12 +889,12 @@ def analyze() -> dict[str, Any]:
     )
     _require(origin_release == {
         "candidate_source_not_routed": 0,
-        "typed_retained_or_external": 3_081_392,
+        "typed_retained_or_external": 3_065_088,
     } and _sum(origin_release) == main["opaque_base_bytes"],
         "Apollo origin/readiness partition changed")
     _require(origin_unanchored == {
         "candidate_source_not_routed": 0,
-        "typed_retained_unanchored_without_candidate": 613_302,
+        "typed_retained_unanchored_without_candidate": 599_340,
     } and _sum(origin_unanchored) ==
         int(origin_buckets["unanchored_discovered_function"]),
         "Apollo unanchored frontier changed")
@@ -1049,7 +1049,17 @@ def analyze() -> dict[str, Any]:
     _require(case_wrapper >= 0, "case wrapper accounting is negative")
 
     codec_size = int(base_components["codec"]["provider"]["size"])
-    em_size = int(base_components["ble_em9305"]["provider"]["size"])
+    em_size = int(em_completion["component_bytes"])
+    em_override = core["component_overrides"]["ble_em9305"]["provider"]
+    _require(
+        (em_override.get("size"), em_override.get("sha256"),
+         em_override.get("kind"), em_override.get("path"))
+        == (212_984,
+            "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42",
+            "source_build",
+            "components/em9305/source_overlay/build/firmware_ble_em9305.bin"),
+        "EM9305 core-manifest provider identity changed",
+    )
     touch_size = int(base_components["touch"]["provider"]["size"])
     _require(codec_size == gx["partition"]["bytes"], "codec identity changed")
     _require(touch_size == touch_metrics["whole_blob_bytes"], "touch identity changed")
@@ -1284,17 +1294,23 @@ def analyze() -> dict[str, Any]:
                      "external_provider_claims_open_availability": False}),
         "ble_em9305": _component(
             size=em_size,
+            production_source=em_completion["buckets"]["production_source"],
+            generated_or_reconstructible=em_completion["buckets"]
+                ["generated_or_reconstructible"],
             candidate_source=em_completion["buckets"]
                 ["candidate_source_not_routed"],
             typed_retained_or_external=em_completion["buckets"]
                 ["typed_retained_or_external"],
-            release_blocking=em_size, production_routed=False,
+            release_blocking=em_completion["release_blocking_bytes"],
+            production_routed=True,
             details={"residual_scope_bytes": em_residual["bytes"],
                      "residual_readiness_bytes": em_residual["readiness_bytes"],
                      "residual_unclassified_bytes": 0,
-                     "candidate_source_not_routed_bytes": 1_240,
-                     "typed_retained_or_external_bytes": 210_708,
-                     "candidate_production_routed": False,
+                     "production_source_bytes": 1_174,
+                     "generated_or_reconstructible_bytes": 1_226,
+                     "candidate_source_not_routed_bytes": 0,
+                     "typed_retained_or_external_bytes": 210_584,
+                     "candidate_production_routed": True,
                      "hardware_operations": em["hardware_operations"],
                      "final_source_readiness_receipts": em_final_receipts,
                      "completion_bucket_mapping": em_completion}),

@@ -71,9 +71,14 @@ def new_region(contract_region: dict[str, Any]) -> dict[str, Any]:
             "and forward-copy primitives",
         ),
         "replace_bootloader_aeabi_memcpy_source_redirect": (
-            "bootloader_aeabi_memcpy_source_replacement",
-            "Generated entry redirect and NOP fill replacing the complete "
-            "Arm EABI forward-copy primitive",
+            "bootloader_aeabi_memcpy_general_entry_source_replacement",
+            "Generated redirect and NOP fill replacing the general Arm EABI "
+            "forward-copy entry prelude while preserving its live ingress",
+        ),
+        "replace_bootloader_aeabi_memcpy_aligned_entry_source_redirect": (
+            "bootloader_aeabi_memcpy_aligned_entry_source_replacement",
+            "Generated redirect and NOP fill replacing the aligned Arm EABI "
+            "forward-copy entry body while preserving its independent live ingress",
         ),
         "opaque_before_replace_bootloader_memcmp": (
             "bootloader_opaque_between_aeabi_memcpy_and_memcmp",
@@ -162,8 +167,122 @@ def new_region(contract_region: dict[str, Any]) -> dict[str, Any]:
         ),
         "replace_bootloader_format_core_source_redirect": (
             "bootloader_format_core_source_replacement",
-            "Generated entry redirect and NOP fill replacing the complete "
-            "bootloader logging formatter core",
+            "Generated entry redirect and leading NOP fill replacing the "
+            "bootloader logging formatter core before the CLKGEN source cave",
+        ),
+        "open_cfw_bootloader_clkgen_config_426ccc_source_cave": (
+            "bootloader_clkgen_config_426ccc_source_cave",
+            "Compiled MIT CLKGEN control, mode, clock-select, and divider "
+            "configuration service in authenticated generated-NOP space",
+        ),
+        "open_cfw_bootloader_clkgen_disable_426d1e_source_cave": (
+            "bootloader_clkgen_disable_426d1e_source_cave",
+            "Compiled MIT CLKGEN bit-preserving disable service in authenticated generated-NOP space",
+        ),
+        "open_cfw_bootloader_float_gcd_426d48_source_cave": (
+            "bootloader_float_gcd_426d48_source_cave",
+            "Compiled MIT bounded floating Euclidean common-divisor helper in authenticated generated-NOP space",
+        ),
+        "replace_bootloader_format_core_source_redirect_between_caves_3": (
+            "bootloader_format_core_generated_fill_between_float_gcd_ratio_caves",
+            "Generated NOP fill between the hard-float common-divisor and ratio source caves",
+        ),
+        "open_cfw_bootloader_float_ratio_426db4_source_cave": (
+            "bootloader_float_ratio_426db4_source_cave",
+            "Compiled MIT bounded floating ratio validation and encoding helper in authenticated generated-NOP space",
+        ),
+        "replace_bootloader_format_core_source_redirect_between_caves_4": (
+            "bootloader_format_core_generated_fill_between_float_ratio_multiplier_caves",
+            "Generated NOP fill between the hard-float ratio and multiplier source caves",
+        ),
+        "open_cfw_bootloader_float_multiplier_426eac_source_cave": (
+            "bootloader_float_multiplier_426eac_source_cave",
+            "Compiled MIT bounded floating multiplier validation and encoding helper in authenticated generated-NOP space",
+        ),
+        "open_cfw_bootloader_float_encoding_select_426f6c_source_cave": (
+            "bootloader_float_encoding_select_426f6c_source_cave",
+            "Compiled MIT floating encoding selection and result publication service in authenticated generated-NOP space",
+        ),
+        "replace_bootloader_format_core_source_redirect_after_caves": (
+            "bootloader_format_core_generated_fill_after_clkgen_float_gcd_ratio_multiplier_select_caves",
+            "Generated NOP fill after the CLKGEN configuration, disable, floating common-divisor, ratio, multiplier, and encoding-selector source caves "
+            "within the bootloader formatter-core replacement span",
+        ),
+        "open_cfw_bootloader_syspll_min_fvco_427040_source_cave": (
+            "bootloader_syspll_min_fvco_427040_source_cave",
+            "Compiled BSD-3-Clause System PLL minimum-VCO configuration service in its reclaimed stock body",
+        ),
+        "replace_bootloader_syspll_min_fvco_427040_source_redirect_after_caves": (
+            "bootloader_syspll_min_fvco_427040_generated_fill_after_cave",
+            "Generated unreachable NOP fill after the bounded System PLL source cave",
+        ),
+        "open_cfw_bootloader_syspll_postdiv_427160_source_cave": (
+            "bootloader_syspll_postdiv_427160_source_cave",
+            "Compiled BSD-3-Clause System PLL postdivider configuration service in its reclaimed stock body",
+        ),
+        "replace_bootloader_syspll_postdiv_427160_source_redirect_after_caves": (
+            "bootloader_syspll_postdiv_427160_generated_fill_after_cave",
+            "Generated unreachable NOP fill after the bounded System PLL postdivider source cave",
+        ),
+        "open_cfw_bootloader_row6_create_4272ac_source_cave": (
+            "bootloader_syspll_initialize_4272ac_source_cave",
+            "Compiled BSD-3-Clause System PLL initialization service in its reclaimed stock body",
+        ),
+        "replace_bootloader_syspll_initialize_4272ac_source_redirect_after_caves": (
+            "bootloader_syspll_initialize_4272ac_generated_fill_after_cave",
+            "Generated unreachable NOP fill after the bounded System PLL initialization source cave",
+        ),
+        "open_cfw_bootloader_row6_start_427360_source_cave": (
+            "bootloader_syspll_enable_427360_source_cave",
+            "Compiled BSD-3-Clause System PLL enable service in its reclaimed stock body",
+        ),
+        "replace_bootloader_syspll_enable_427360_source_redirect_after_caves": (
+            "bootloader_syspll_enable_427360_generated_fill_after_cave",
+            "Generated unreachable NOP fill after the bounded System PLL enable source cave",
+        ),
+        "open_cfw_bootloader_row6_configure_42740c_source_cave": (
+            "bootloader_syspll_configure_42740c_source_cave",
+            "Compiled BSD-3-Clause System PLL configuration service in its reclaimed stock body",
+        ),
+        "replace_bootloader_syspll_configure_42740c_source_redirect_after_caves": (
+            "bootloader_syspll_configure_42740c_generated_fill_after_cave",
+            "Generated unreachable NOP fill after the bounded System PLL configuration source cave",
+        ),
+        "open_cfw_bootloader_row6_lock_wait_427522_source_cave": (
+            "bootloader_syspll_lock_wait_427522_source_cave",
+            "Compiled BSD-3-Clause System PLL lock-wait service in its reclaimed stock body",
+        ),
+        "replace_bootloader_syspll_lock_wait_427522_source_redirect_after_caves": (
+            "bootloader_syspll_lock_wait_427522_generated_fill_after_cave",
+            "Generated unreachable NOP fill after the bounded System PLL lock-wait source cave",
+        ),
+        "open_cfw_bootloader_queue_init_4275ea_source_cave": (
+            "bootloader_queue_init_4275ea_source_cave",
+            "Compiled BSD-3-Clause AmbiqSuite queue initializer in its reclaimed stock body",
+        ),
+        "open_cfw_bootloader_queue_item_add_427602_source_cave": (
+            "bootloader_queue_item_add_427602_source_cave",
+            "Compiled BSD-3-Clause AmbiqSuite queue item-add service in its reclaimed stock body",
+        ),
+        "open_cfw_bootloader_queue_item_get_427660_source_cave": (
+            "bootloader_queue_item_get_427660_source_cave",
+            "Compiled BSD-3-Clause AmbiqSuite queue item-get service in its reclaimed stock body",
+        ),
+        "open_cfw_bootloader_memmove_4276bc_source_cave": (
+            "bootloader_memmove_4276bc_source_cave",
+            "Compiled clean-room MIT overlap-safe byte move in its reclaimed stock body",
+        ),
+        "replace_bootloader_memmove_4276bc_source_redirect_after_caves": (
+            "bootloader_memmove_4276bc_generated_fill_after_cave",
+            "Generated unreachable NOP fill after the bounded overlap-safe byte-move source cave",
+        ),
+        "open_cfw_bootloader_cmdq_update_indices_427754_source_cave": (
+            "bootloader_cmdq_update_indices_427754_source_cave",
+            "Compiled BSD-3-Clause AmbiqSuite command-queue index updater in its reclaimed stock body",
+        ),
+        "replace_bootloader_cmdq_update_indices_427754_source_redirect_after_caves": (
+            "bootloader_cmdq_update_indices_427754_generated_fill_after_cave",
+            "Generated unreachable NOP fill after the bounded command-queue index-update source cave",
         ),
         "replace_bootloader_log_dispatch_source_redirect": (
             "bootloader_log_dispatch_source_replacement",
@@ -1251,27 +1370,39 @@ def new_region(contract_region: dict[str, Any]) -> dict[str, Any]:
         ),
         "open_cfw_bootloader_mspi_control_4251c0_source_in_place": (
             "bootloader_mspi_control_4251c0_source_in_place",
-            "Compiled AmbiqSuite-compatible G2 MSPI control dispatcher at its authenticated stock address",
+            "Compiled stock-ABI request adapter for the G2 MSPI control dispatcher at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_control_upstream_4251c0_source_in_place": (
+            "bootloader_mspi_control_upstream_42523c_source_in_place",
+            "Compiled maintained AmbiqSuite Apollo510 MSPI control body behind the stock G2 request adapter",
         ),
         "opaque_before_open_cfw_bootloader_mspi_blocking_transfer_4262e0_source_in_place": (
-            "bootloader_opaque_after_easylogger_transport",
-            "Authenticated MSPI control body and literals before the blocking-transfer service",
+            "bootloader_mspi_control_unreachable_tail_42612c_4262e0_official",
+            "Authenticated unreachable stock tail after the source-owned MSPI control dispatcher",
         ),
         "open_cfw_bootloader_mspi_blocking_transfer_4262e0_source_in_place": (
             "bootloader_mspi_blocking_transfer_4262e0_source_in_place",
             "Compiled AmbiqSuite-compatible G2 MSPI blocking-transfer service at its authenticated stock address",
         ),
         "opaque_before_open_cfw_bootloader_mspi_interrupt_enable_426450_source_in_place": (
-            "bootloader_mspi_transfer_alignment_42644c_opaque",
-            "Authenticated alignment and transfer literal before MSPI interrupt services",
+            "bootloader_mspi_blocking_transfer_unreachable_tail_and_alignment_4263e0_426450_official",
+            "Authenticated unreachable stock tail after the source-owned blocking-transfer return plus the four-byte alignment boundary before interrupt services",
         ),
         "open_cfw_bootloader_mspi_interrupt_enable_426450_source_in_place": (
             "bootloader_mspi_interrupt_enable_426450_source_in_place",
             "Compiled AmbiqSuite-compatible G2 MSPI interrupt-enable service at its authenticated stock address",
         ),
+        "opaque_before_open_cfw_bootloader_mspi_interrupt_disable_426484_source_in_place": (
+            "bootloader_mspi_interrupt_enable_unreachable_tail_42647c_426484_official",
+            "Authenticated unreachable stock tail after the source-owned MSPI interrupt-enable return",
+        ),
         "open_cfw_bootloader_mspi_interrupt_disable_426484_source_in_place": (
             "bootloader_mspi_interrupt_disable_426484_source_in_place",
             "Compiled AmbiqSuite-compatible G2 MSPI interrupt-disable service at its authenticated stock address",
+        ),
+        "opaque_before_open_cfw_bootloader_mspi_interrupt_status_get_4264ba_source_in_place": (
+            "bootloader_mspi_interrupt_disable_unreachable_tail_4264b0_4264ba_official",
+            "Authenticated unreachable stock tail after the source-owned MSPI interrupt-disable return",
         ),
         "open_cfw_bootloader_mspi_interrupt_status_get_4264ba_source_in_place": (
             "bootloader_mspi_interrupt_status_get_4264ba_source_in_place",
@@ -1294,8 +1425,8 @@ def new_region(contract_region: dict[str, Any]) -> dict[str, Any]:
             "Authenticated retained bootloader bytes after the source-owned MSPI power-control body, beginning with its literal pool",
         ),
         "opaque_before_replace_ambiq_mspi_interrupt_clear": (
-            "bootloader_opaque_after_easylogger_transport",
-            "Authenticated subsequent bootloader compatibility bytes retained after the source-owned qsort runtime and before the AmbiqSuite MSPI interrupt-clear leaf",
+            "bootloader_mspi_interrupt_status_get_unreachable_tail_4264f6_426506_official",
+            "Authenticated unreachable stock tail after the source-owned MSPI interrupt-status return and before the source-routed interrupt-clear entry",
         ),
         "opaque_before_open_cfw_bootloader_mspi_dummy_callback_424976_source_in_place": (
             "bootloader_mspi_piomixed_configure_unreachable_tail_4248e2_424976_official",
@@ -1927,17 +2058,1085 @@ def new_region(contract_region: dict[str, Any]) -> dict[str, Any]:
             "bootloader_easylogger_output_generated_fill_after_clkmgr_caves",
             "Generated NOP fill after the clock-manager source caves within the EasyLogger output replacement span",
         ),
+        "opaque_before_open_cfw_bootloader_memset_wrapper_426c10_source_in_place": (
+            "bootloader_mspi_power_control_literal_pool_426bfe_426c10_official",
+            "Authenticated non-executable MSPI power-control literal pool and alignment",
+        ),
+        "open_cfw_bootloader_memset_wrapper_426c10_source_in_place": (
+            "bootloader_memset_wrapper_426c10_source_in_place",
+            "Compiled MIT conventional memset ABI wrapper over the source-owned Arm EABI byte-fill provider",
+        ),
         "opaque_before_replace_bootloader_clkmgr_hfrc2_uq15_divider_426c24": (
-            "bootloader_opaque_before_clkmgr_divider_entries",
-            "Authenticated bootloader bytes before the source-routed clock-manager divider entries",
+            "bootloader_memset_wrapper_unreachable_tail_426c22_426c24_official",
+            "Authenticated unreachable terminal return after the source-owned memset wrapper",
         ),
         "replace_bootloader_clkmgr_hfrc2_uq15_divider_426c24_source_redirect": (
             "bootloader_clkmgr_hfrc2_uq15_divider_source_redirect",
-            "Generated entry redirect and NOP fill replacing the complete HFRC2 UQ17.15 divider body",
+            "Generated entry redirect replacing the complete HFRC2 UQ17.15 divider body",
+        ),
+        "open_cfw_bootloader_clkgen_hfadj_config_426c72_source_cave": (
+            "bootloader_clkgen_hfadj_config_426c72_source_cave",
+            "Compiled MIT CLKGEN HFADJ configuration publisher in authenticated generated-NOP space",
+        ),
+        "open_cfw_bootloader_clkgen_hfadj_disable_426c7e_source_cave": (
+            "bootloader_clkgen_hfadj_disable_426c7e_source_cave",
+            "Compiled MIT CLKGEN HFADJ bit-preserving disable leaf in authenticated generated-NOP space",
+        ),
+        "replace_bootloader_clkmgr_hfrc2_uq15_divider_426c24_source_redirect_after_caves": (
+            "bootloader_clkmgr_hfrc2_uq15_divider_generated_fill_after_hfadj_caves",
+            "Generated NOP fill after the CLKGEN HFADJ configuration and disable source caves",
         ),
         "replace_bootloader_clkmgr_hfrc_integer_divider_426c4e_source_redirect": (
             "bootloader_clkmgr_hfrc_integer_divider_source_redirect",
             "Generated entry redirect and NOP fill replacing the complete HFRC integer divider body",
+        ),
+        "open_cfw_bootloader_clkgen_hfadj_enable_426c58_source_in_place": (
+            "bootloader_clkgen_hfadj_enable_426c58_source_in_place",
+            "Compiled MIT CLKGEN HFADJ bit-control leaf at its authenticated stock address",
+        ),
+        "opaque_before_replace_bootloader_clkgen_hfadj_config_426c72": (
+            "bootloader_clkgen_hfadj_enable_unreachable_tail_426c70_426c72_official",
+            "Authenticated unreachable terminal return after the source-owned CLKGEN HFADJ enable leaf",
+        ),
+        "replace_bootloader_clkgen_hfadj_config_426c72_source_redirect": (
+            "bootloader_clkgen_hfadj_config_426c72_source_redirect",
+            "Generated entry redirect and NOP fill routing the complete CLKGEN HFADJ configuration service to compiled MIT C",
+        ),
+        "replace_bootloader_clkgen_hfadj_disable_426c7e_source_redirect": (
+            "bootloader_clkgen_hfadj_disable_426c7e_source_redirect",
+            "Generated entry redirect and NOP fill routing the complete CLKGEN HFADJ disable service to compiled MIT C",
+        ),
+        "open_cfw_bootloader_dual_switch_426c8c_source_in_place": (
+            "bootloader_dual_switch_426c8c_source_in_place",
+            "Compiled MIT CLKGEN dual-clock switch with authenticated transition status check",
+        ),
+        "opaque_before_replace_bootloader_clkgen_config_426ccc": (
+            "bootloader_dual_switch_unreachable_tail_426cc4_426ccc_official",
+            "Authenticated unreachable terminal tail after the source-owned CLKGEN dual-clock switch",
+        ),
+        "replace_bootloader_clkgen_config_426ccc_source_redirect": (
+            "bootloader_clkgen_config_426ccc_source_redirect",
+            "Generated entry redirect and NOP fill routing the complete CLKGEN configuration service to compiled MIT C",
+        ),
+        "replace_bootloader_clkgen_disable_426d1e_source_redirect": (
+            "bootloader_clkgen_disable_426d1e_source_redirect",
+            "Generated entry redirect and NOP fill routing the complete CLKGEN disable service to compiled MIT C",
+        ),
+        "opaque_before_replace_bootloader_float_gcd_426d48": (
+            "bootloader_clkgen_gap_426d2c_426d48_official",
+            "Authenticated padding and literal-pool bytes between the CLKGEN disable and floating common-divisor entries",
+        ),
+        "replace_bootloader_float_gcd_426d48_source_redirect": (
+            "bootloader_float_gcd_426d48_source_redirect",
+            "Generated entry redirect and NOP fill routing the complete bounded floating common-divisor helper to compiled MIT C",
+        ),
+        "opaque_before_replace_bootloader_float_ratio_426db4": (
+            "bootloader_float_gap_426db2_426db4_official",
+            "Authenticated two-byte padding between the floating common-divisor and ratio helper entries",
+        ),
+        "replace_bootloader_float_ratio_426db4_source_redirect": (
+            "bootloader_float_ratio_426db4_source_redirect",
+            "Generated entry redirect and NOP fill routing the complete bounded floating ratio validation helper to compiled MIT C",
+        ),
+        "replace_bootloader_float_multiplier_426eac_source_redirect": (
+            "bootloader_float_multiplier_426eac_source_redirect",
+            "Generated entry redirect and NOP fill routing the complete bounded floating multiplier validation helper to compiled MIT C",
+        ),
+        "opaque_before_replace_bootloader_float_encoding_select_426f6c": (
+            "bootloader_float_gap_426f6a_426f6c_official",
+            "Authenticated two-byte padding between the floating multiplier and encoding-selector entries",
+        ),
+        "replace_bootloader_float_encoding_select_426f6c_source_redirect": (
+            "bootloader_float_encoding_select_426f6c_source_redirect",
+            "Generated entry redirect and NOP fill routing the complete floating encoding selection and result publication service to compiled MIT C",
+        ),
+        "opaque_before_replace_bootloader_syspll_min_fvco_427040": (
+            "bootloader_float_select_syspll_gap_427032_427040_official",
+            "Authenticated literals and alignment between the floating selector and System PLL minimum-VCO entry",
+        ),
+        "replace_bootloader_syspll_min_fvco_427040_source_redirect": (
+            "bootloader_syspll_min_fvco_427040_source_redirect",
+            "Generated entry redirect routing the complete System PLL minimum-VCO service to reviewed BSD-3-Clause C",
+        ),
+        "opaque_before_replace_bootloader_syspll_postdiv_427160": (
+            "bootloader_syspll_gap_42714c_427160_official",
+            "Authenticated literals and alignment between the System PLL minimum-VCO and postdivider entries",
+        ),
+        "replace_bootloader_syspll_postdiv_427160_source_redirect": (
+            "bootloader_syspll_postdiv_427160_source_redirect",
+            "Generated entry redirect routing the complete System PLL postdivider service to reviewed BSD-3-Clause C",
+        ),
+        "replace_bootloader_syspll_initialize_4272ac_source_redirect": (
+            "bootloader_syspll_initialize_4272ac_source_redirect",
+            "Generated entry redirect routing the complete System PLL initialization service to reviewed BSD-3-Clause C",
+        ),
+        "opaque_before_open_cfw_bootloader_row6_destroy_427310_source_in_place": (
+            "bootloader_syspll_deinitialize_gap_427308_427310_official",
+            "Authenticated literal/alignment gap between the System PLL initialization and deinitialization services",
+        ),
+        "open_cfw_bootloader_row6_destroy_427310_source_in_place": (
+            "bootloader_syspll_deinitialize_427310_source_in_place",
+            "Compiled BSD-3-Clause System PLL deinitialization service replacing its complete stock body in place",
+        ),
+        "replace_bootloader_syspll_enable_427360_source_redirect": (
+            "bootloader_syspll_enable_427360_source_redirect",
+            "Generated entry redirect routing the complete System PLL enable service to reviewed BSD-3-Clause C",
+        ),
+        "open_cfw_bootloader_row6_stop_4273dc_source_in_place": (
+            "bootloader_syspll_disable_4273dc_source_in_place",
+            "Compiled BSD-3-Clause System PLL disable service replacing its complete stock body in place",
+        ),
+        "replace_bootloader_syspll_configure_42740c_source_redirect": (
+            "bootloader_syspll_configure_42740c_source_redirect",
+            "Generated entry redirect routing the complete System PLL configuration service to reviewed BSD-3-Clause C",
+        ),
+        "replace_bootloader_syspll_lock_wait_427522_source_redirect": (
+            "bootloader_syspll_lock_wait_427522_source_redirect",
+            "Generated entry redirect routing the complete System PLL lock-wait service to reviewed BSD-3-Clause C",
+        ),
+        "opaque_before_replace_bootloader_queue_init_4275ea": (
+            "bootloader_syspll_queue_gap_427588_4275ea_official",
+            "Authenticated literals, alignment, and intervening code between System PLL lock-wait and the queue family",
+        ),
+        "replace_bootloader_queue_init_4275ea_source_redirect": (
+            "bootloader_queue_init_4275ea_source_redirect",
+            "Generated entry redirect routing the complete queue initializer to reviewed BSD-3-Clause C",
+        ),
+        "replace_bootloader_queue_item_add_427602_source_redirect": (
+            "bootloader_queue_item_add_427602_source_redirect",
+            "Generated entry redirect routing the complete queue item-add service to reviewed BSD-3-Clause C",
+        ),
+        "replace_bootloader_queue_item_get_427660_source_redirect": (
+            "bootloader_queue_item_get_427660_source_redirect",
+            "Generated entry redirect routing the complete queue item-get service to reviewed BSD-3-Clause C",
+        ),
+        "opaque_before_replace_bootloader_memmove_4276bc": (
+            "bootloader_queue_memmove_alignment_4276ba_4276bc_official",
+            "Authenticated zero alignment halfword between the queue family and memmove",
+        ),
+        "replace_bootloader_memmove_4276bc_source_redirect": (
+            "bootloader_memmove_4276bc_source_redirect",
+            "Generated entry redirect and NOP fill routing the complete overlap-safe byte move to reviewed MIT C",
+        ),
+        "opaque_before_replace_bootloader_cmdq_update_indices_427754": (
+            "bootloader_memmove_cmdq_alignment_427752_427754_official",
+            "Authenticated zero alignment halfword between memmove and the command-queue index updater",
+        ),
+        "replace_bootloader_cmdq_update_indices_427754_source_redirect": (
+            "bootloader_cmdq_update_indices_427754_source_redirect",
+            "Generated entry redirect routing the complete command-queue index updater to reviewed BSD-3-Clause C",
+        ),
+        "open_cfw_bootloader_cmdq_init_427794_source_in_place": (
+            "bootloader_cmdq_init_427794_source_in_place",
+            "Compiled BSD-3-Clause AmbiqSuite command-queue initializer at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_cmdq_enable_427878_source_in_place": (
+            "bootloader_cmdq_init_427794_unreachable_tail",
+            "Authenticated unreachable remainder after the source-owned command-queue initializer",
+        ),
+        "open_cfw_bootloader_cmdq_enable_427878_source_in_place": (
+            "bootloader_cmdq_enable_427878_source_in_place",
+            "Compiled BSD-3-Clause AmbiqSuite command-queue enable service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_cmdq_disable_4278c8_source_in_place": (
+            "bootloader_cmdq_enable_427878_unreachable_tail",
+            "Authenticated unreachable remainder after the source-owned command-queue enable service",
+        ),
+        "open_cfw_bootloader_cmdq_disable_4278c8_source_in_place": (
+            "bootloader_cmdq_disable_4278c8_source_in_place",
+            "Compiled BSD-3-Clause AmbiqSuite command-queue disable service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_cmdq_alloc_block_42790a_source_in_place": (
+            "bootloader_cmdq_disable_4278c8_unreachable_tail",
+            "Authenticated unreachable remainder after the source-owned command-queue disable service",
+        ),
+        "open_cfw_bootloader_cmdq_alloc_block_42790a_source_in_place": (
+            "bootloader_cmdq_alloc_block_42790a_source_in_place",
+            "Compiled BSD-3-Clause AmbiqSuite command-queue block allocator at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_cmdq_release_block_4279be_source_in_place": (
+            "bootloader_cmdq_alloc_block_42790a_unreachable_tail",
+            "Authenticated unreachable remainder after the source-owned command-queue block allocator",
+        ),
+        "open_cfw_bootloader_cmdq_release_block_4279be_source_in_place": (
+            "bootloader_cmdq_release_block_4279be_source_in_place",
+            "Compiled BSD-3-Clause AmbiqSuite command-queue block release service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_cmdq_post_block_4279f0_source_in_place": (
+            "bootloader_cmdq_release_block_4279be_unreachable_tail",
+            "Authenticated unreachable remainder after the source-owned command-queue block release service",
+        ),
+        "open_cfw_bootloader_cmdq_post_block_4279f0_source_in_place": (
+            "bootloader_cmdq_post_block_4279f0_source_in_place",
+            "Compiled BSD-3-Clause AmbiqSuite command-queue block post service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_cmdq_get_status_427a56_source_in_place": (
+            "bootloader_cmdq_post_block_4279f0_unreachable_tail",
+            "Authenticated unreachable remainder after the source-owned command-queue block post service",
+        ),
+        "open_cfw_bootloader_cmdq_get_status_427a56_source_in_place": (
+            "bootloader_cmdq_get_status_427a56_source_in_place",
+            "Compiled BSD-3-Clause AmbiqSuite command-queue status service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_cmdq_term_427ad6_source_in_place": (
+            "bootloader_cmdq_get_status_427a56_unreachable_tail",
+            "Authenticated unreachable remainder after the source-owned command-queue status service",
+        ),
+        "open_cfw_bootloader_cmdq_term_427ad6_source_in_place": (
+            "bootloader_cmdq_term_427ad6_source_in_place",
+            "Compiled BSD-3-Clause AmbiqSuite command-queue termination service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_cmdq_error_resume_427b38_source_in_place": (
+            "bootloader_cmdq_term_427ad6_unreachable_tail",
+            "Authenticated unreachable remainder after the source-owned command-queue termination service",
+        ),
+        "open_cfw_bootloader_cmdq_error_resume_427b38_source_in_place": (
+            "bootloader_cmdq_error_resume_427b38_source_in_place",
+            "Compiled BSD-3-Clause AmbiqSuite command-queue error-resume service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_cmdq_reset_427baa_source_in_place": (
+            "bootloader_cmdq_error_resume_427b38_unreachable_tail",
+            "Authenticated unreachable remainder after the source-owned command-queue error-resume service",
+        ),
+        "open_cfw_bootloader_cmdq_reset_427baa_source_in_place": (
+            "bootloader_cmdq_reset_427baa_source_in_place",
+            "Compiled BSD-3-Clause AmbiqSuite command-queue reset service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_cmdq_post_loop_block_427c12_source_in_place": (
+            "bootloader_cmdq_reset_427baa_unreachable_tail",
+            "Authenticated unreachable remainder after the source-owned command-queue reset service",
+        ),
+        "open_cfw_bootloader_cmdq_post_loop_block_427c12_source_in_place": (
+            "bootloader_cmdq_post_loop_block_427c12_source_in_place",
+            "Compiled BSD-3-Clause AmbiqSuite looping command-queue post service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_floorf_427c90_source_in_place": (
+            "bootloader_cmdq_tail_and_float_math_gap_427c72_427c90",
+            "Authenticated unreachable command-queue suffix and typed gap before the source-owned binary32 math runtime",
+        ),
+        "open_cfw_bootloader_floorf_427c90_source_in_place": (
+            "bootloader_floorf_427c90_source_in_place",
+            "Compiled MIT hard-float floor veneer at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_floor_bits_427ca0_source_in_place": (
+            "bootloader_floor_bits_427ca0_source_in_place",
+            "Compiled MIT binary32 floor core at its authenticated internal entry",
+        ),
+        "open_cfw_bootloader_fmodf_427ccc_source_in_place": (
+            "bootloader_fmodf_427ccc_source_in_place",
+            "Compiled MIT hard-float remainder veneer at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_fmod_bits_427cdc_source_in_place": (
+            "bootloader_fmod_bits_427cdc_source_in_place",
+            "Compiled MIT freestanding binary32 remainder core at its authenticated internal entry",
+        ),
+        "opaque_before_open_cfw_bootloader_roundf_427d98_source_in_place": (
+            "bootloader_fmod_bits_427cdc_unreachable_tail",
+            "Authenticated unreachable remainder after the source-owned binary32 remainder core",
+        ),
+        "open_cfw_bootloader_roundf_427d98_source_in_place": (
+            "bootloader_roundf_427d98_source_in_place",
+            "Compiled MIT hard-float round veneer at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_round_bits_427da8_source_in_place": (
+            "bootloader_round_bits_427da8_source_in_place",
+            "Compiled MIT binary32 round core at its authenticated internal entry",
+        ),
+        "open_cfw_bootloader_ceilf_427dd0_source_in_place": (
+            "bootloader_ceilf_427dd0_source_in_place",
+            "Compiled MIT hard-float ceiling veneer at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_ceil_bits_427de0_source_in_place": (
+            "bootloader_ceil_bits_427de0_source_in_place",
+            "Compiled MIT binary32 ceiling core at its authenticated internal entry",
+        ),
+        "open_cfw_bootloader_float_range_classify_427e0c_source_in_place": (
+            "bootloader_float_range_classify_427e0c_source_in_place",
+            "Compiled MIT binary32 range classifier at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_transition_sequence_2b_428378_source_in_place": (
+            "bootloader_opaque_between_float_math_and_spotmgr_427e54_428378",
+            "Authenticated retained literal, table, and alignment bytes between the binary32 runtime and SPOT-manager transition",
+        ),
+        "open_cfw_bootloader_spotmgr_transition_sequence_2b_428378_source_in_place": (
+            "bootloader_spotmgr_transition_sequence_2b_428378_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager transition sequence at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_transition_sequence_7b_428a94_source_in_place": (
+            "bootloader_opaque_between_spotmgr_transitions_4283e2_428a94",
+            "Authenticated retained literal, table, and alignment bytes between the source-owned SPOT-manager transitions",
+        ),
+        "open_cfw_bootloader_spotmgr_transition_sequence_7b_428a94_source_in_place": (
+            "bootloader_spotmgr_transition_sequence_7b_428a94_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager transition sequence 7b at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_load_factory_trims_429da4_source_in_place": (
+            "bootloader_opaque_between_spotmgr_transition_7b_and_factory_trims_428ba8_429da4",
+            "Authenticated retained literal, table, and alignment bytes between SPOT-manager transition 7b and the factory-trim loader",
+        ),
+        "open_cfw_bootloader_spotmgr_load_factory_trims_429da4_source_in_place": (
+            "bootloader_spotmgr_load_factory_trims_429da4_source_in_place",
+            "Compiled MIT indexed SPOT-manager factory-trim loader at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_ensure_factory_trims_42a036_source_in_place": (
+            "bootloader_opaque_between_factory_trims_and_ensure_429df6_42a036",
+            "Authenticated retained literal, table, and alignment bytes between the factory-trim loader and readiness wrapper",
+        ),
+        "open_cfw_bootloader_spotmgr_ensure_factory_trims_42a036_source_in_place": (
+            "bootloader_spotmgr_ensure_factory_trims_42a036_source_in_place",
+            "Compiled MIT guarded SPOT-manager factory-trim readiness wrapper at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_spotmgr_timer_irq_service_42a04a_source_in_place": (
+            "bootloader_spotmgr_timer_irq_service_42a04a_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager timer interrupt service with exact critical-state restore",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_buck_deepsleep_state_42a08c_source_in_place": (
+            "bootloader_opaque_between_spotmgr_timer_irq_and_buck_classifier_42a078_42a08c",
+            "Authenticated retained literal and alignment bytes between the SPOT-manager timer interrupt service and SIMOBUCK classifier",
+        ),
+        "open_cfw_bootloader_spotmgr_buck_deepsleep_state_42a08c_source_in_place": (
+            "bootloader_spotmgr_buck_deepsleep_state_42a08c_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager SIMOBUCK deep-sleep state classifier at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_spotmgr_internal_power_domain_42a19c_source_in_place": (
+            "bootloader_spotmgr_internal_power_domain_42a19c_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager HP-to-deep-sleep transition marker at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_power_ton_adjust_42a1bc_source_in_place": (
+            "bootloader_opaque_between_spotmgr_internal_domain_and_ton_adjust_42a1b2_42a1bc",
+            "Authenticated retained literal and alignment bytes between the SPOT-manager internal-domain marker and Ton-trim selector",
+        ),
+        "open_cfw_bootloader_spotmgr_power_ton_adjust_42a1bc_source_in_place": (
+            "bootloader_spotmgr_power_ton_adjust_42a1bc_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager VDDC/VDDF Ton-trim selector at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_state_transition_sequence_42a2b4_source_in_place": (
+            "bootloader_opaque_between_spotmgr_ton_adjust_and_state_sequence_42a2a4_42a2b4",
+            "Authenticated retained literal and alignment bytes between the SPOT-manager Ton-trim selector and state-transition selector",
+        ),
+        "open_cfw_bootloader_spotmgr_state_transition_sequence_42a2b4_source_in_place": (
+            "bootloader_spotmgr_state_transition_sequence_42a2b4_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager power-state transition-sequence selector at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_spotmgr_temperature_transition_separate_42a43a_source_in_place": (
+            "bootloader_spotmgr_temperature_transition_separate_42a43a_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager stepwise temperature-transition dispatcher at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_spotmgr_power_trims_update_42a4bc_source_in_place": (
+            "bootloader_spotmgr_power_trims_update_42a4bc_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager power and Ton trim transition router at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_power_state_determine_42a550_source_in_place": (
+            "bootloader_opaque_between_spotmgr_power_trims_and_power_state_42a546_42a550",
+            "Authenticated retained literal and alignment bytes between the SPOT-manager trim router and power-state classifier",
+        ),
+        "open_cfw_bootloader_spotmgr_power_state_determine_42a550_source_in_place": (
+            "bootloader_spotmgr_power_state_determine_42a550_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager power and Ton state classifier at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_power_state_update_42a878_source_in_place": (
+            "bootloader_opaque_between_spotmgr_power_state_classifier_and_update_42a85e_42a878",
+            "Authenticated shared literal and alignment bytes before the SPOT-manager stimulus update entry",
+        ),
+        "open_cfw_bootloader_spotmgr_power_state_update_42a878_source_in_place": (
+            "bootloader_spotmgr_power_state_update_42a878_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager power-state stimulus update pipeline at its authenticated dispatch entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_profile_apply_42ab7c_source_in_place": (
+            "bootloader_opaque_between_spotmgr_update_and_profile_apply_42ab6e_42ab7c",
+            "Authenticated padding and shared literal words between the SPOT-manager update and profile entries",
+        ),
+        "open_cfw_bootloader_spotmgr_profile_apply_42ab7c_source_in_place": (
+            "bootloader_spotmgr_profile_apply_42ab7c_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager profile-to-register field application at its authenticated dispatch entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_init_42abbc_source_in_place": (
+            "bootloader_opaque_between_spotmgr_profile_apply_and_init_42abb2_42abbc",
+            "Authenticated shared literals and alignment between the SPOT-manager profile and initialization entries",
+        ),
+        "open_cfw_bootloader_spotmgr_init_42abbc_source_in_place": (
+            "bootloader_spotmgr_init_42abbc_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager initialization and trim-load pipeline at its authenticated dispatch entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_temperature_init_42ac54_source_in_place": (
+            "bootloader_opaque_between_spotmgr_init_and_temperature_init_42ac4e_42ac54",
+            "Authenticated alignment between the SPOT-manager initialization and temperature-monitor entries",
+        ),
+        "open_cfw_bootloader_spotmgr_temperature_init_42ac54_source_in_place": (
+            "bootloader_spotmgr_temperature_init_42ac54_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager temperature-monitor initialization at its authenticated dispatch entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_temperature_range_42ad40_source_in_place": (
+            "bootloader_opaque_between_spotmgr_temperature_init_and_range_42aca4_42ad40",
+            "Authenticated SPOT-manager shared literals and alignment before the temperature range classifier",
+        ),
+        "open_cfw_bootloader_spotmgr_temperature_range_42ad40_source_in_place": (
+            "bootloader_spotmgr_temperature_range_42ad40_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager hard-float temperature range classifier at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_spotmgr_trim_enable_42adb8_source_in_place": (
+            "bootloader_spotmgr_trim_enable_42adb8_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager trim enable and 10-bit headroom update at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_spotmgr_profile_trim_42ae24_source_in_place": (
+            "bootloader_spotmgr_profile_trim_42ae24_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager profile trim field update at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_spotmgr_trim_restore_42ae6c_source_in_place": (
+            "bootloader_spotmgr_trim_restore_42ae6c_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager gated trim restore at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_spotmgr_trim_commit_42ae9c_source_in_place": (
+            "bootloader_spotmgr_trim_commit_42ae9c_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager critical trim commit with complete PRIMASK restore at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_buck_deepsleep_scan_42aef0_source_in_place": (
+            "bootloader_spotmgr_trim_commit_scan_gap_42aeec_42aef0",
+            "Authenticated four-byte literal/alignment gap before the second SPOT-manager deep-sleep eligibility scan",
+        ),
+        "open_cfw_bootloader_spotmgr_buck_deepsleep_scan_42aef0_source_in_place": (
+            "bootloader_spotmgr_buck_deepsleep_scan_42aef0_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager deep-sleep eligibility scan at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_state_transition_effects_42b014_source_in_place": (
+            "bootloader_spotmgr_buck_scan_transition_effects_gap_42b010_42b014",
+            "Authenticated four-byte literal/alignment gap before the SPOT-manager state-transition side-effect leaf",
+        ),
+        "open_cfw_bootloader_spotmgr_state_transition_effects_42b014_source_in_place": (
+            "bootloader_spotmgr_state_transition_effects_42b014_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager state-transition side effects at the authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_spotmgr_power_transition_trims_42b06c_source_in_place": (
+            "bootloader_spotmgr_transition_effects_power_trim_gap_42b068_42b06c",
+            "Authenticated four-byte literal/alignment gap before the SPOT-manager power-transition trim transaction",
+        ),
+        "open_cfw_bootloader_spotmgr_power_transition_trims_42b06c_source_in_place": (
+            "bootloader_spotmgr_power_transition_trims_42b06c_source_in_place",
+            "Compiled BSD-3-Clause Apollo510 SPOT-manager power-transition trim transaction at the authenticated stock entry",
+        ),
+        "open_cfw_bootloader_spotmgr_state_transition_42b294_source_in_place": (
+            "bootloader_spotmgr_state_transition_42b294_source_in_place",
+            "Compiled MIT clean-room SPOT-manager state-transition, trim, and register orchestrator",
+        ),
+        "opaque_before_open_cfw_bootloader_hw_state_decode_42b6b8_source_in_place": (
+            "bootloader_spotmgr_state_transition_decode_gap_42b69c_42b6b8",
+            "Authenticated 28-byte literal and alignment gap before the hardware-state decoder",
+        ),
+        "open_cfw_bootloader_hw_state_decode_42b6b8_source_in_place": (
+            "bootloader_hw_state_decode_42b6b8_source_in_place",
+            "Compiled MIT clean-room hardware-state nibble composer and dual-output classifier",
+        ),
+        "opaque_before_open_cfw_bootloader_hw_state_compose_42bdf0_source_in_place": (
+            "bootloader_opaque_between_hw_state_decode_and_compose_42b9ba_42bdf0",
+            "Authenticated retained code and data between the hardware-state decoder and stored-entry composer",
+        ),
+        "open_cfw_bootloader_hw_state_compose_42bdf0_source_in_place": (
+            "bootloader_hw_state_compose_42bdf0_source_in_place",
+            "Compiled MIT clean-room hardware-state composer at its authenticated stored-pointer entry",
+        ),
+        "opaque_before_open_cfw_bootloader_hardware_readiness_gate_42bf54_source_in_place": (
+            "bootloader_hw_state_compose_readiness_gap_42bf4e_42bf54",
+            "Authenticated six-byte literal/alignment gap between the hardware-state composer and hardware-readiness gate",
+        ),
+        "open_cfw_bootloader_hardware_readiness_gate_42bf54_source_in_place": (
+            "bootloader_hardware_readiness_gate_42bf54_source_in_place",
+            "Compiled MIT clean-room hardware-readiness gate at its authenticated stored-pointer entry",
+        ),
+        "opaque_before_open_cfw_bootloader_hw_status_route_42c034_source_in_place": (
+            "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034",
+            "Authenticated retained code and data between the hardware-readiness gate and hardware-status route helper",
+        ),
+        "open_cfw_bootloader_hw_status_route_42c034_source_in_place": (
+            "bootloader_hw_status_route_42c034_source_in_place",
+            "Compiled MIT clean-room hardware status-route selector at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_error_classify_42c076_source_in_place": (
+            "bootloader_hw_error_classify_42c076_source_in_place",
+            "Compiled MIT clean-room hardware error-precedence classifier at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_event_apply_42c0b2_source_in_place": (
+            "bootloader_hw_event_apply_42c0b2_source_in_place",
+            "Compiled MIT clean-room retained hardware-event acknowledgement and timed-pulse service",
+        ),
+        "open_cfw_bootloader_rounded_divider_42c222_source_in_place": (
+            "bootloader_rounded_divider_42c222_source_in_place",
+            "Compiled MIT clean-room rounded integer divider at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_is_power_of_two_42c256_source_in_place": (
+            "bootloader_is_power_of_two_42c256_source_in_place",
+            "Compiled MIT clean-room nonzero power-of-two predicate at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_clock_encode_42c26a_source_in_place": (
+            "bootloader_hw_clock_encode_42c26a_source_in_place",
+            "Compiled MIT clean-room hardware clock-divider search and register-field encoder",
+        ),
+        "open_cfw_bootloader_cmdq_adapter_init_42c3e2_source_in_place": (
+            "bootloader_cmdq_adapter_init_42c3e2_source_in_place",
+            "Compiled MIT clean-room command-queue adapter initialization at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_cmdq_adapter_enable_42c420_source_in_place": (
+            "bootloader_cmdq_adapter_enable_42c420_source_in_place",
+            "Compiled MIT clean-room command-queue adapter enable service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_cmdq_adapter_disable_42c44e_source_in_place": (
+            "bootloader_cmdq_adapter_disable_42c44e_source_in_place",
+            "Compiled MIT clean-room command-queue adapter disable service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_descriptor_publish_42c45a_source_in_place": (
+            "bootloader_hw_descriptor_publish_42c45a_source_in_place",
+            "Compiled MIT clean-room ring-descriptor register publisher at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_context_claim_42c4c6_source_in_place": (
+            "bootloader_hw_context_claim_42c4c6_source_in_place",
+            "Compiled MIT clean-room hardware-context ownership claim at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_context_enable_42c538_source_in_place": (
+            "bootloader_hw_context_enable_42c538_source_in_place",
+            "Compiled MIT clean-room hardware-context activation and rollback service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_interrupt_enable_42c63a_source_in_place": (
+            "bootloader_hw_interrupt_enable_42c63a_source_in_place",
+            "Compiled MIT clean-room validated hardware interrupt-enable helper at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_interrupt_status_get_42c672_source_in_place": (
+            "bootloader_hw_interrupt_status_get_42c672_source_in_place",
+            "Compiled MIT clean-room hardware interrupt-status query helper at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_interrupt_clear_42c6b6_source_in_place": (
+            "bootloader_hw_interrupt_clear_42c6b6_source_in_place",
+            "Compiled MIT clean-room hardware interrupt-clear helper at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_hw_event_service_42c6f8_source_in_place": (
+            "bootloader_opaque_between_interrupt_clear_and_event_service_42c6e4_42c6f8",
+            "Authenticated retained alignment and data between the interrupt-clear helper and event service",
+        ),
+        "open_cfw_bootloader_hw_event_service_42c6f8_source_in_place": (
+            "bootloader_hw_event_service_42c6f8_source_in_place",
+            "Compiled MIT clean-room hardware event, descriptor, callback, and command-queue service",
+        ),
+        "opaque_before_open_cfw_bootloader_hw_config_transaction_42c988_source_in_place": (
+            "bootloader_opaque_between_event_service_and_config_transaction_42c980_42c988",
+            "Authenticated retained alignment and data between the event service and configuration transaction",
+        ),
+        "open_cfw_bootloader_hw_config_transaction_42c988_source_in_place": (
+            "bootloader_hw_config_transaction_42c988_source_in_place",
+            "Compiled MIT clean-room hardware configuration save, restore, and resource transaction",
+        ),
+        "open_cfw_bootloader_hw_instance_configure_42cc34_source_in_place": (
+            "bootloader_hw_instance_configure_42cc34_source_in_place",
+            "Compiled MIT clean-room hardware instance validation and mode-specific configuration service",
+        ),
+        "opaque_before_open_cfw_bootloader_state_adjust_42cdf8_source_in_place": (
+            "bootloader_opaque_between_instance_configure_and_state_adjust_42cdb0_42cdf8",
+            "Authenticated retained data between the instance configurator and state adjustment service",
+        ),
+        "open_cfw_bootloader_state_adjust_42cdf8_source_in_place": (
+            "bootloader_state_adjust_42cdf8_source_in_place",
+            "Compiled MIT clean-room bounded seven-bit state adjustment service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_state_update_critical_42cea4_source_in_place": (
+            "bootloader_state_update_critical_42cea4_source_in_place",
+            "Compiled MIT clean-room critical state-update service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_state_range_update_42ced8_source_in_place": (
+            "bootloader_state_range_update_42ced8_source_in_place",
+            "Compiled MIT clean-room floating-point range update service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_state_event_zero_42cfe0_source_in_place": (
+            "bootloader_state_event_zero_42cfe0_source_in_place",
+            "Compiled MIT clean-room sixteen-channel state/event fault classifier",
+        ),
+        "opaque_before_open_cfw_bootloader_state_event_one_value_42d104_source_in_place": (
+            "bootloader_state_event_zero_state_one_gap_42d0f2_42d104",
+            "Authenticated retained state providers before the state-one tuning service",
+        ),
+        "open_cfw_bootloader_state_event_one_value_42d104_source_in_place": (
+            "bootloader_state_event_one_value_42d104_source_in_place",
+            "Compiled MIT clean-room state-one register tuning and restoration service",
+        ),
+        "open_cfw_bootloader_state_register_initialize_42d3bc_source_in_place": (
+            "bootloader_state_register_initialize_42d3bc_source_in_place",
+            "Compiled MIT clean-room state-transition register initialization and restoration service",
+        ),
+        "open_cfw_bootloader_state_event_dispatch_42d562_source_in_place": (
+            "bootloader_state_event_dispatch_42d562_source_in_place",
+            "Compiled MIT clean-room byte-event state dispatcher at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_stream_mode_42d84c_source_in_place": (
+            "bootloader_opaque_between_state_dispatch_and_stream_mode_42d5c2_42d84c",
+            "Authenticated retained code and data between the state dispatcher and stream-mode primitive",
+        ),
+        "open_cfw_bootloader_stream_mode_42d84c_source_in_place": (
+            "bootloader_stream_mode_42d84c_source_in_place",
+            "Compiled MIT clean-room stream-mode selection primitive at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_runtime_context_get_42d88a_source_in_place": (
+            "bootloader_runtime_context_get_42d88a_source_in_place",
+            "Compiled MIT clean-room runtime-context pointer getter at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_dfu_image_crc_check_42d890_source_in_place": (
+            "bootloader_dfu_image_crc_check_42d890_source_in_place",
+            "Compiled MIT clean-room DFU image open/read/CRC/close verifier at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_chunked_indirect_visit_42d9f0_source_in_place": (
+            "bootloader_chunked_indirect_visit_42d9f0_source_in_place",
+            "Compiled MIT clean-room chunked indirect traversal service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_chunked_source_compare_42da1e_source_in_place": (
+            "bootloader_chunked_source_compare_42da1e_source_in_place",
+            "Compiled MIT clean-room bounded 4 KiB source-reader comparison service",
+        ),
+        "opaque_before_open_cfw_bootloader_dfu_payload_program_42dae8_source_in_place": (
+            "bootloader_chunk_compare_payload_program_gap_42dad0_42dae8",
+            "Authenticated twenty-four-byte literal/alignment gap before the DFU payload programmer",
+        ),
+        "open_cfw_bootloader_dfu_payload_program_42dae8_source_in_place": (
+            "bootloader_dfu_payload_program_42dae8_source_in_place",
+            "Compiled MIT clean-room chunked DFU payload programmer and verifier",
+        ),
+        "open_cfw_bootloader_vector_handoff_42dc90_source_in_place": (
+            "bootloader_vector_handoff_42dc90_source_in_place",
+            "Compiled MIT clean-room Cortex-M vector and stack handoff primitive at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_runtime_context_publish_42dca2_source_in_place": (
+            "bootloader_runtime_context_publish_42dca2_source_in_place",
+            "Compiled MIT clean-room queued runtime-context publisher at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_control_orchestrator_42dd14_source_in_place": (
+            "bootloader_control_orchestrator_42dd14_source_in_place",
+            "Compiled MIT clean-room non-returning event/control orchestrator at its authenticated stored-pointer entry",
+        ),
+        "open_cfw_bootloader_runtime_context_wrapper_42dd68_source_in_place": (
+            "bootloader_runtime_context_wrapper_42dd68_source_in_place",
+            "Compiled MIT clean-room runtime-context provider wrapper at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_runtime_queue_context_init_42dd70_source_in_place": (
+            "bootloader_runtime_queue_context_init_42dd70_source_in_place",
+            "Compiled MIT clean-room retained queue-context initializer at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_noop_callback_42dd98_source_in_place": (
+            "bootloader_noop_callback_42dd98_source_in_place",
+            "Compiled MIT clean-room no-op callback at the authenticated stock entry",
+        ),
+        "open_cfw_bootloader_control_one_wrapper_42dd9a_source_in_place": (
+            "bootloader_control_one_wrapper_42dd9a_source_in_place",
+            "Compiled MIT clean-room constant-one control wrapper at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_control_two_wrapper_42dda4_source_in_place": (
+            "bootloader_control_two_wrapper_42dda4_source_in_place",
+            "Compiled MIT clean-room second constant-one control wrapper at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_runtime_action_context_init_42ddae_source_in_place": (
+            "bootloader_runtime_action_context_init_42ddae_source_in_place",
+            "Compiled MIT clean-room retained action-context initializer at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_runtime_action_context_deinit_42ddda_source_in_place": (
+            "bootloader_runtime_action_context_deinit_42ddda_source_in_place",
+            "Compiled MIT clean-room guarded action-context teardown at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_runtime_enable_sequence_42ddf2_source_in_place": (
+            "bootloader_runtime_enable_sequence_42ddf2_source_in_place",
+            "Compiled MIT clean-room critical runtime enable sequence at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_critical_dispatch_transaction_42de0e_source_in_place": (
+            "bootloader_critical_dispatch_transaction_42de0e_source_in_place",
+            "Compiled MIT clean-room critical four-word dispatch transaction at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_dfu_service_task_42de58_source_in_place": (
+            "bootloader_dfu_service_task_42de58_source_in_place",
+            "Compiled MIT clean-room DFU queue service, image dispatch, and vector handoff task",
+        ),
+        "opaque_before_open_cfw_bootloader_control_bits_dispatch_42e1c4_source_in_place": (
+            "bootloader_dfu_service_control_bits_gap_42e104_42e1c4",
+            "Authenticated retained literal and alignment data after the DFU service task",
+        ),
+        "open_cfw_bootloader_control_bits_dispatch_42e1c4_source_in_place": (
+            "bootloader_control_bits_dispatch_42e1c4_source_in_place",
+            "Compiled MIT clean-room bit-22/bit-23 control dispatcher at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_control_terminal_loop_42e1da_source_in_place": (
+            "bootloader_control_terminal_loop_42e1da_source_in_place",
+            "Compiled MIT clean-room non-returning terminal notification loop at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_crc32_table_42e1ec_source_in_place": (
+            "bootloader_crc32_table_42e1ec_source_in_place",
+            "Compiled MIT clean-room table-driven CRC32 primitive at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_retained_state_probe_42e224_source_in_place": (
+            "bootloader_crc32_state_probe_gap_42e220_42e224",
+            "Authenticated retained alignment bytes between CRC32 and the source-owned state probe",
+        ),
+        "open_cfw_bootloader_retained_state_probe_42e224_source_in_place": (
+            "bootloader_retained_state_probe_42e224_source_in_place",
+            "Compiled MIT clean-room retained-state probe at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_event_flags_init_42e254_source_in_place": (
+            "bootloader_event_flags_init_42e254_source_in_place",
+            "Compiled MIT clean-room event-flags initializer at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_noop_callback_42e276_source_in_place": (
+            "bootloader_noop_callback_42e276_source_in_place",
+            "Compiled MIT clean-room no-op callback at the authenticated stock entry",
+        ),
+        "open_cfw_bootloader_event_runtime_setup_42e278_source_in_place": (
+            "bootloader_event_runtime_setup_42e278_source_in_place",
+            "Compiled MIT clean-room event-runtime setup wrapper at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_event_callback_dispatch_42e284_source_in_place": (
+            "bootloader_event_callback_dispatch_42e284_source_in_place",
+            "Compiled MIT clean-room retained callback dispatcher at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_event_wait_mask_42e2a2_source_in_place": (
+            "bootloader_event_wait_mask_42e2a2_source_in_place",
+            "Compiled MIT clean-room event wait-mask service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_event_wait_one_wrapper_42e2ea_source_in_place": (
+            "bootloader_event_wait_one_wrapper_42e2ea_source_in_place",
+            "Compiled MIT clean-room event wait-one wrapper at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_event_service_loop_42e2f8_source_in_place": (
+            "bootloader_event_service_loop_42e2f8_source_in_place",
+            "Compiled MIT clean-room retained-event initialization and bounded-wait service loop at its authenticated stored-pointer entry",
+        ),
+        "open_cfw_bootloader_noop_callback_42e39a_source_in_place": (
+            "bootloader_noop_callback_42e39a_source_in_place",
+            "Compiled MIT clean-room no-op callback at the authenticated stock entry",
+        ),
+        "open_cfw_bootloader_guard_context_init_42e39c_source_in_place": (
+            "bootloader_guard_context_init_42e39c_source_in_place",
+            "Compiled MIT clean-room guarded-context initializer at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_guarded_context_teardown_42e3ca_source_in_place": (
+            "bootloader_guarded_context_teardown_42e3ca_source_in_place",
+            "Compiled MIT clean-room guarded context teardown at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_control_one_wait_42e3e0_source_in_place": (
+            "bootloader_control_one_wait_42e3e0_source_in_place",
+            "Compiled MIT clean-room event wait/log control at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_control_two_publish_42e412_source_in_place": (
+            "bootloader_control_two_publish_42e412_source_in_place",
+            "Compiled MIT clean-room event bit-publish control at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_event_bit_set_42e444_source_in_place": (
+            "bootloader_event_bit_set_42e444_source_in_place",
+            "Compiled MIT clean-room event-bit publisher at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_aligned_guarded_dispatch_42e4a0_source_in_place": (
+            "bootloader_opaque_between_event_bit_and_guarded_dispatch_42e458_42e4a0",
+            "Authenticated retained code and data between the event-bit publisher and guarded dispatcher",
+        ),
+        "open_cfw_bootloader_aligned_guarded_dispatch_42e4a0_source_in_place": (
+            "bootloader_aligned_guarded_dispatch_42e4a0_source_in_place",
+            "Compiled MIT clean-room aligned guarded dispatcher at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_alignment_dispatch_42e4f4_source_in_place": (
+            "bootloader_alignment_dispatch_42e4f4_source_in_place",
+            "Compiled MIT clean-room alignment-gated runtime dispatcher at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_terminal_mode_42e514_source_in_place": (
+            "bootloader_alignment_dispatch_terminal_mode_gap_42e50e_42e514",
+            "Authenticated six-byte literal/alignment gap before the terminal-mode primitive",
+        ),
+        "open_cfw_bootloader_terminal_mode_42e514_source_in_place": (
+            "bootloader_terminal_mode_42e514_source_in_place",
+            "Compiled MIT clean-room terminal-mode control primitive at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_event_runtime_init_42e53c_source_in_place": (
+            "bootloader_terminal_mode_event_runtime_gap_42e534_42e53c",
+            "Authenticated retained literal/alignment bytes before event-runtime initialization",
+        ),
+        "open_cfw_bootloader_event_runtime_init_42e53c_source_in_place": (
+            "bootloader_event_runtime_init_42e53c_source_in_place",
+            "Compiled MIT clean-room event-object and task initialization service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_event_callback_loop_42e644_source_in_place": (
+            "bootloader_event_runtime_callback_loop_gap_42e642_42e644",
+            "Authenticated two-byte alignment between event-runtime initialization and callback dispatch",
+        ),
+        "open_cfw_bootloader_event_callback_loop_42e644_source_in_place": (
+            "bootloader_event_callback_loop_42e644_source_in_place",
+            "Compiled MIT clean-room queue-driven callback loop at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_event_callback_enqueue_42e686_source_in_place": (
+            "bootloader_event_callback_enqueue_42e686_source_in_place",
+            "Compiled MIT clean-room callback enqueue service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_guarded_call_cleanup_42e8a4_source_in_place": (
+            "bootloader_opaque_between_event_enqueue_and_guarded_call_42e6f2_42e8a4",
+            "Authenticated retained code and data between callback enqueue and guarded indirect-call cleanup services",
+        ),
+        "open_cfw_bootloader_guarded_call_cleanup_42e8a4_source_in_place": (
+            "bootloader_guarded_call_cleanup_42e8a4_source_in_place",
+            "Compiled MIT clean-room guarded indirect-call and ordered cleanup service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_hw_context_initialize_42e8d0_source_in_place": (
+            "bootloader_guarded_call_context_initialize_gap_42e8c2_42e8d0",
+            "Authenticated fourteen-byte literal/alignment gap before the hardware-context initializer",
+        ),
+        "open_cfw_bootloader_hw_context_initialize_42e8d0_source_in_place": (
+            "bootloader_hw_context_initialize_42e8d0_source_in_place",
+            "Compiled MIT clean-room hardware-context slot and calibration-profile initializer",
+        ),
+        "open_cfw_bootloader_hw_handle_reset_42ea32_source_in_place": (
+            "bootloader_hw_handle_reset_42ea32_source_in_place",
+            "Compiled MIT clean-room hardware-handle reset service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_profile_apply_42ea68_source_in_place": (
+            "bootloader_hw_profile_apply_42ea68_source_in_place",
+            "Compiled MIT clean-room validated seven-field hardware-profile publisher",
+        ),
+        "open_cfw_bootloader_hw_channel_config_42eaf6_source_in_place": (
+            "bootloader_hw_channel_config_42eaf6_source_in_place",
+            "Compiled MIT clean-room bounded channel configuration encoder at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_hw_handle_configure_42eb74_source_in_place": (
+            "bootloader_opaque_between_hw_channel_config_and_handle_configure_42eb74",
+            "Authenticated zero-length boundary marker between adjacent channel and handle configuration services",
+        ),
+        "open_cfw_bootloader_hw_handle_configure_42eb74_source_in_place": (
+            "bootloader_hw_handle_configure_42eb74_source_in_place",
+            "Compiled MIT clean-room hardware-handle configuration encoder at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_handle_enable_42ebaa_source_in_place": (
+            "bootloader_hw_handle_enable_42ebaa_source_in_place",
+            "Compiled MIT clean-room hardware-handle ready-gated enable service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_handle_disable_42ebe2_source_in_place": (
+            "bootloader_hw_handle_disable_42ebe2_source_in_place",
+            "Compiled MIT clean-room hardware-handle disable service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_config_dispatch_42ec0c_source_in_place": (
+            "bootloader_hw_config_dispatch_42ec0c_source_in_place",
+            "Compiled MIT clean-room hardware configuration operation dispatcher at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_hw_handle_activate_42ed60_source_in_place": (
+            "bootloader_zero_boundary_hw_config_dispatch_to_activate_42ed60",
+            "Authenticated zero-length boundary marker between adjacent hardware configuration and activation services",
+        ),
+        "open_cfw_bootloader_hw_handle_activate_42ed60_source_in_place": (
+            "bootloader_hw_handle_activate_42ed60_source_in_place",
+            "Compiled MIT clean-room idempotent hardware-handle activation service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hardware_channel_normalize_42eda0_source_in_place": (
+            "bootloader_hardware_channel_normalize_42eda0_source_in_place",
+            "Compiled MIT clean-room hardware-channel control normalization at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_hw_channel_normalize_42ee00_source_in_place": (
+            "bootloader_hardware_channel_normalize_gap_42edf6_42ee00",
+            "Authenticated retained literal/alignment bytes between adjacent normalization services",
+        ),
+        "open_cfw_bootloader_hw_channel_normalize_42ee00_source_in_place": (
+            "bootloader_hw_channel_normalize_42ee00_source_in_place",
+            "Compiled MIT clean-room calibrated packed-channel normalization service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_hw_channel_enumerate_42ee70_source_in_place": (
+            "bootloader_channel_normalize_enumerate_gap_42ee6c_42ee70",
+            "Authenticated four-byte literal/alignment gap between channel normalization and enumeration services",
+        ),
+        "open_cfw_bootloader_hw_channel_enumerate_42ee70_source_in_place": (
+            "bootloader_hw_channel_enumerate_42ee70_source_in_place",
+            "Compiled MIT clean-room bounded hardware/input channel enumeration service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_hw_handle_command_42eff4_source_in_place": (
+            "bootloader_zero_boundary_hw_channel_enumerate_to_command_42eff4",
+            "Authenticated zero-length boundary marker between adjacent channel enumeration and command services",
+        ),
+        "open_cfw_bootloader_hw_handle_command_42eff4_source_in_place": (
+            "bootloader_hw_handle_command_42eff4_source_in_place",
+            "Compiled MIT clean-room validated hardware-handle command service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_register_profile_transfer_42f020_source_in_place": (
+            "bootloader_hw_command_profile_transfer_gap_42f014_42f020",
+            "Authenticated retained literal/alignment bytes before register-profile transfer",
+        ),
+        "open_cfw_bootloader_register_profile_transfer_42f020_source_in_place": (
+            "bootloader_register_profile_transfer_42f020_source_in_place",
+            "Compiled MIT clean-room validated hardware register-profile capture/apply service",
+        ),
+        "opaque_before_open_cfw_bootloader_register_power_toggle_42f1c8_source_in_place": (
+            "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8",
+            "Authenticated retained literal table and alignment before register power toggle",
+        ),
+        "open_cfw_bootloader_register_power_toggle_42f1c8_source_in_place": (
+            "bootloader_register_power_toggle_42f1c8_source_in_place",
+            "Compiled MIT clean-room register power toggle at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_event_value_provider_42f204_source_in_place": (
+            "bootloader_event_value_profile_42f204_source_in_place",
+            "Compiled MIT clean-room event-value hardware-profile publisher at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_register_profile_restore_42f2fa_source_in_place": (
+            "bootloader_hw_register_profile_restore_42f2fa_source_in_place",
+            "Compiled MIT clean-room hardware register-profile restoration and mode finalization service",
+        ),
+        "open_cfw_bootloader_event_dispatch_42f38e_source_in_place": (
+            "bootloader_event_dispatch_42f38e_source_in_place",
+            "Compiled MIT clean-room stored-pointer event dispatcher at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_mode_apply_42ff00_source_in_place": (
+            "bootloader_opaque_between_event_dispatch_and_mode_apply_42f3da_42ff00",
+            "Authenticated retained code and data between the event dispatcher and mode router",
+        ),
+        "open_cfw_bootloader_mode_apply_42ff00_source_in_place": (
+            "bootloader_mode_apply_42ff00_source_in_place",
+            "Compiled MIT clean-room mode router and interrupt-safe aggregate bitset service",
+        ),
+        "open_cfw_bootloader_mode_one_apply_42fff2_source_in_place": (
+            "bootloader_mode_one_apply_42fff2_source_in_place",
+            "Compiled MIT clean-room constant mode-one adapter at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_platform_bringup_430000_source_in_place": (
+            "bootloader_mode_one_platform_bringup_gap_42fffe_430000",
+            "Authenticated two-byte alignment gap before platform bring-up",
+        ),
+        "open_cfw_bootloader_platform_bringup_430000_source_in_place": (
+            "bootloader_platform_bringup_430000_source_in_place",
+            "Compiled MIT clean-room platform bring-up, measurement, and teardown orchestrator",
+        ),
+        "open_cfw_bootloader_platform_boot_sequence_4301d6_source_in_place": (
+            "bootloader_platform_boot_sequence_4301d6_source_in_place",
+            "Compiled MIT clean-room platform boot sequence at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_nvic_enable_bit_430240_source_in_place": (
+            "bootloader_platform_boot_nvic_gap_4301f4_430240",
+            "Authenticated retained literal/alignment bytes before the first NVIC enable helper",
+        ),
+        "open_cfw_bootloader_nvic_enable_bit_430240_source_in_place": (
+            "bootloader_nvic_enable_bit_430240_source_in_place",
+            "Compiled MIT clean-room signed NVIC interrupt-enable bit publisher at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_scb_priority_nibble_43025c_source_in_place": (
+            "bootloader_scb_priority_nibble_43025c_source_in_place",
+            "Compiled MIT clean-room NVIC and SCB priority-nibble publisher at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_descriptor_register_430280_source_in_place": (
+            "bootloader_descriptor_register_430280_source_in_place",
+            "Compiled MIT clean-room bounded descriptor callback and interrupt registrar",
+        ),
+        "open_cfw_bootloader_boolean_route_status_4303bc_source_in_place": (
+            "bootloader_boolean_route_status_4303bc_source_in_place",
+            "Compiled MIT clean-room normalized boolean status route at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_nvic_enable_bit_430470_source_in_place": (
+            "bootloader_opaque_between_boolean_route_and_nvic_enable_4303de_430470",
+            "Authenticated retained code and data between the boolean status route and second NVIC enable helper",
+        ),
+        "open_cfw_bootloader_nvic_enable_bit_430470_source_in_place": (
+            "bootloader_nvic_enable_bit_430470_source_in_place",
+            "Compiled MIT clean-room signed NVIC interrupt-enable bit publisher at its second authenticated stock entry",
+        ),
+        "open_cfw_bootloader_hw_config_retry_43048e_source_in_place": (
+            "bootloader_hw_config_retry_43048e_source_in_place",
+            "Compiled MIT clean-room bounded hardware-configuration retry and callback setup service",
+        ),
+        "open_cfw_bootloader_platform_finish_430502_source_in_place": (
+            "bootloader_platform_finish_430502_source_in_place",
+            "Compiled MIT clean-room eight-slot hardware-context and event-service finalizer",
+        ),
+        "opaque_before_open_cfw_bootloader_address_validate_430a60_source_in_place": (
+            "bootloader_opaque_between_platform_finish_and_address_validate_430610_430a60",
+            "Authenticated retained code and data between the platform finalizer and address validator",
+        ),
+        "open_cfw_bootloader_address_validate_430a60_source_in_place": (
+            "bootloader_address_validate_430a60_source_in_place",
+            "Compiled MIT clean-room address and length validator at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_validated_byte_copy_430a9c_source_in_place": (
+            "bootloader_validated_byte_copy_430a9c_source_in_place",
+            "Compiled MIT clean-room validated byte-copy wrapper at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_validated_word_transfer_430ac4_source_in_place": (
+            "bootloader_validated_word_transfer_430ac4_source_in_place",
+            "Compiled MIT clean-room validated word-transfer wrapper at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_mode_four_wrapper_430aec_source_in_place": (
+            "bootloader_mode_four_wrapper_430aec_source_in_place",
+            "Compiled MIT clean-room mode-four provider wrapper without authenticated boot ingress",
+        ),
+        "opaque_before_open_cfw_bootloader_word_transfer_critical_430b10_source_in_place": (
+            "bootloader_mode_wrapper_word_transfer_gap_430b0c_430b10",
+            "Authenticated four-byte alignment gap before critical word transfer",
+        ),
+        "open_cfw_bootloader_word_transfer_critical_430b10_source_in_place": (
+            "bootloader_word_transfer_critical_430b10_source_in_place",
+            "Compiled MIT clean-room critical word-transfer dispatcher at its corrected authenticated extent",
+        ),
+        "opaque_before_open_cfw_bootloader_platform_services_init_43194c_source_in_place": (
+            "bootloader_opaque_between_word_transfer_and_platform_init_430b3c_43194c",
+            "Authenticated retained code and data between critical word transfer and platform service initialization",
+        ),
+        "open_cfw_bootloader_platform_services_init_43194c_source_in_place": (
+            "bootloader_platform_services_init_43194c_source_in_place",
+            "Compiled MIT clean-room platform-service initializer with authenticated stored ingress",
+        ),
+        "opaque_before_open_cfw_bootloader_zero_table_431e38_source_in_place": (
+            "bootloader_opaque_between_platform_init_and_zero_table_43198a_431e38",
+            "Authenticated retained code and data between platform initialization and zero-table service",
+        ),
+        "open_cfw_bootloader_zero_table_431e38_source_in_place": (
+            "bootloader_zero_table_431e38_source_in_place",
+            "Compiled MIT clean-room absolute/relative zero-table walker without authenticated boot ingress",
+        ),
+        "opaque_before_open_cfw_bootloader_vector_table_relocate_432910_source_in_place": (
+            "bootloader_opaque_between_zero_table_and_startup_431e70_432910",
+            "Authenticated retained code and data between the zero-table walker and Cortex-M startup services",
+        ),
+        "open_cfw_bootloader_vector_table_relocate_432910_source_in_place": (
+            "bootloader_vector_table_relocate_432910_source_in_place",
+            "Compiled MIT clean-room VTOR relocation service at its authenticated stock entry",
+        ),
+        "open_cfw_bootloader_stack_limits_init_43291a_source_in_place": (
+            "bootloader_stack_limits_init_43291a_source_in_place",
+            "Compiled MIT clean-room MSPLIM/PSPLIM initialization service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_process_stack_init_43293c_source_in_place": (
+            "bootloader_startup_literals_43292a_43293c",
+            "Authenticated startup stack-limit literal and alignment bytes",
+        ),
+        "open_cfw_bootloader_process_stack_init_43293c_source_in_place": (
+            "bootloader_process_stack_init_43293c_source_in_place",
+            "Compiled MIT clean-room PSP and runtime-handoff initialization service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_fpu_enable_432958_source_in_place": (
+            "bootloader_process_stack_literal_432954_432958",
+            "Authenticated process-stack initialization literal",
+        ),
+        "open_cfw_bootloader_fpu_enable_432958_source_in_place": (
+            "bootloader_fpu_enable_432958_source_in_place",
+            "Compiled MIT clean-room CP10/CP11 and FPSCR initialization service at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_runtime_start_43297c_source_in_place": (
+            "bootloader_startup_runtime_alignment_43297a_43297c",
+            "Authenticated alignment between the FPU initialization service and runtime startup dispatcher",
+        ),
+        "open_cfw_bootloader_runtime_start_43297c_source_in_place": (
+            "bootloader_runtime_start_43297c_source_in_place",
+            "Compiled MIT clean-room Cortex-M runtime startup dispatcher at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_init_array_run_43299c_source_in_place": (
+            "bootloader_runtime_start_alignment_43299a_43299c",
+            "Authenticated alignment between the runtime startup dispatcher and constructor-array walker",
+        ),
+        "open_cfw_bootloader_init_array_run_43299c_source_in_place": (
+            "bootloader_init_array_run_43299c_source_in_place",
+            "Compiled MIT clean-room constructor-array walker at its authenticated stock entry",
+        ),
+        "opaque_before_open_cfw_bootloader_terminal_loop_4329c4_source_in_place": (
+            "bootloader_init_array_literals_4329bc_4329c4",
+            "Authenticated constructor-array address literals before the terminal service loop",
+        ),
+        "open_cfw_bootloader_terminal_loop_4329c4_source_in_place": (
+            "bootloader_terminal_loop_4329c4_source_in_place",
+            "Compiled MIT clean-room non-returning terminal service loop at its authenticated stock entry",
+        ),
+        "opaque_after_open_cfw_bootloader_spotmgr_profile_apply_42ab7c_source_in_place": (
+            "bootloader_opaque_between_spotmgr_profile_apply_and_init_42abb2_42abbc",
+            "Authenticated shared literals and alignment between the SPOT-manager profile and initialization entries",
+        ),
+        "opaque_after_source_redirects": (
+            "bootloader_opaque_after_terminal_loop_4329d2",
+            "Authenticated retained bootloader bytes after the source-owned Cortex-M runtime startup tail",
         ),
     })
     if name not in descriptions:
@@ -2135,6 +3334,22 @@ def sync_manifest() -> None:
         "retained authenticated official MSPI configuration, lifecycle, control, and transfer bodies from 0x00424120 through 0x00426536",
         "recovered exact in-place AmbiqSuite 5.1.0 MSPI interrupt-service and power-control bodies through 0x00426BFE",
         "source-routed Apollo510 HFRC2 UQ17.15 and integer divider services through 0x00426C58 using authenticated reclaimed NOP space",
+        "recovered exact in-place clean-room CLKGEN HFADJ bit-control leaf through 0x00426C70",
+        "source-routed clean-room CLKGEN HFADJ configuration publisher through 0x00426C7E using authenticated generated NOP space",
+        "source-routed clean-room CLKGEN HFADJ bit-preserving disable leaf through 0x00426C8C using authenticated generated NOP space",
+        "recovered in-place clean-room CLKGEN dual-clock switch prefix through 0x00426CC4 with authenticated status-check binding",
+        "source-routed clean-room CLKGEN control, mode, clock-select, and divider configuration service through 0x00426D1E using authenticated generated NOP space",
+        "source-routed clean-room CLKGEN bit-preserving disable service through 0x00426D2C using authenticated generated NOP space",
+        "source-routed AmbiqSuite 5.1.0 System PLL minimum-VCO, postdivider, and initialization services through 0x00427308 using authenticated reclaimed body space",
+        "recovered exact in-place AmbiqSuite 5.1.0 System PLL deinitialization service through 0x00427360",
+        "source-routed AmbiqSuite 5.1.0 System PLL enable service through 0x004273DC using authenticated reclaimed body space",
+        "recovered exact in-place AmbiqSuite 5.1.0 System PLL disable service through 0x0042740C",
+        "source-routed AmbiqSuite 5.1.0 System PLL configuration service through 0x00427522 using authenticated reclaimed body space",
+        "source-routed AmbiqSuite 5.1.0 System PLL lock-wait service through 0x00427588 using authenticated reclaimed body space",
+        "source-routed AmbiqSuite 5.1.0 queue initializer, item-add, and item-get services through 0x004276BA using authenticated reclaimed body space",
+        "source-routed clean-room overlap-safe byte move through 0x00427752 using authenticated reclaimed body space",
+        "source-routed AmbiqSuite 5.1.0 command-queue index updater through 0x00427794 using authenticated reclaimed body space",
+        "recovered in-place AmbiqSuite 5.1.0 command-queue initialization, lifecycle, allocation, status, recovery, reset, and loop-post services through 0x00427C80; recovered in-place MIT hard-float veneers, binary32 rounding/remainder cores, and range classifier through 0x00427E84; recovered in-place BSD-3-Clause Apollo510 SPOT-manager transition sequences through 0x00428BA8; recovered in-place MIT indexed SPOT-manager factory-trim loader and readiness wrapper through 0x0042A04A; recovered in-place BSD-3-Clause SPOT-manager timer interrupt service through 0x0042A078",
     )
     parts = list(dict.fromkeys(
         part.strip() for part in override["function"].split(";") if part.strip()

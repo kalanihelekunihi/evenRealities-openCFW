@@ -31,7 +31,7 @@ blocked by unavailable physical evidence, and `hardware_operations=[]`. Its cano
 Apple package contains 4,677,796 payload bytes (4,678,740 bytes with the
 EVENOTA envelope), of which 3,826,619 are release-blocking. All bytes are
 classified, but all six binary redistribution authorities in the table above
-remain unresolved. The source audit independently reports 785 distributable
+remain unresolved. The source audit independently reports 786 distributable
 source files with zero metadata errors, and the project-wide MIT/upstream
 normalization census covers 906 targets. None of those source results grants
 permission to redistribute retained or binary-only firmware.
@@ -102,7 +102,7 @@ tree or stock-bearing build output redistributable.
 ## Compiled source inventory
 
 At the time of this audit, the two overlays, including the PT post-link
-provider's exact source/header records, form an inventory reference 785 unique,
+provider's exact source/header records, form an inventory reference 786 unique,
 content-addressed source files. The live audit
 derives overlay records from `sources`, `isolated_leaves`,
 `in_place_leaves`, and `relocated_leaves`, checks each file hash, checks the
@@ -114,7 +114,7 @@ enforces the authenticated 459-row project-owned MIT census.
 |---|---:|
 | MIT | 574 |
 | Apache-2.0 | 81 |
-| BSD-3-Clause | 100 |
+| BSD-3-Clause | 101 |
 | Zlib | 27 |
 | BSD-2-Clause | 2 |
 | GPL-3.0-only | 1 |
@@ -142,7 +142,7 @@ distributed controller/build
 adapter tranche is exhaustive over 107 C, header, assembly, and Python files:
 104 project-authored paths with an SPDX MIT option and three Touch CAT2/Cortex-M
 adaptations that correctly remain Apache-2.0. This community census does not
-change the 778-file compiled overlay inventory above.
+change the 786-file compiled overlay inventory above.
 It also includes the six-file open Touch source-image package, its MIT proof
 analyzer, and two focused MIT tests; these remain software-only source
 artifacts and do not alter the official Touch payload or its redistribution

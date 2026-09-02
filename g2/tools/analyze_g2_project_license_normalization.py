@@ -62,10 +62,10 @@ EXPECTED_ADDITIONAL_PATH_COUNT = 22
 EXPECTED_COMMUNITY_CONTROLLER_PROJECT_PATH_COUNT = 109
 EXPECTED_TOUCH_SOURCE_IMAGE_PROJECT_PATH_COUNT = 9
 EXPECTED_CASE_SOURCE_IMAGE_PROJECT_PATH_COUNT = 7
-EXPECTED_EM9305_SOURCE_IMAGE_PROJECT_PATH_COUNT = 6
+EXPECTED_EM9305_SOURCE_IMAGE_PROJECT_PATH_COUNT = 19
 EXPECTED_PT_PROTOCOL_PROJECT_PATH_COUNT = 28
 EXPECTED_PT_PROTOCOL_TOTAL_PATH_COUNT = 29
-EXPECTED_DISTRIBUTED_TARGET_COUNT = 906
+EXPECTED_DISTRIBUTED_TARGET_COUNT = 919
 COMMUNITY_CONTROLLER_ROOTS = (
     ROOT / "components/shared/touch",
     ROOT / "components/shared/case",
@@ -97,11 +97,19 @@ CASE_SOURCE_IMAGE_SUPPORT_PATHS = {
     "g2/tools/analyze_g2_case_source_image.py",
     "g2/tests/test_analyze_g2_case_source_image.py",
 }
-EM9305_SOURCE_IMAGE_PACKAGE_ROOT = ROOT / "components/em9305/source_image"
+EM9305_SOURCE_IMAGE_PACKAGE_ROOTS = (
+    ROOT / "components/em9305/source_image",
+    ROOT / "components/em9305/source_overlay",
+)
 EM9305_SOURCE_IMAGE_SUPPORT_PATHS = {
     "g2/tools/analyze_em9305_record_package.py",
     "g2/tests/test_em9305_record_package.py",
     "g2/tests/test_analyze_em9305_record_package.py",
+    "g2/tests/test_em9305_reconstructible_tail_overlay.py",
+    "g2/tests/test_runtime_em9305_metaware_production.py",
+    "g2/tests/test_runtime_em9305_reconstructible_tail.py",
+    "g2/tests/fixtures/em9305_reconstructible_tail_host.c",
+    "g2/tools/integrate_g2_em9305_source_overlay.py",
 }
 PT_PROTOCOL_SOURCE_ROOT = ROOT / "components/apollo_main/core_overlay"
 PT_PROTOCOL_APACHE_PATHS = {
@@ -320,12 +328,18 @@ def analyze() -> dict:
     } | CASE_SOURCE_IMAGE_SUPPORT_PATHS
     require(actual_case_source_image_paths == case_source_image_paths,
             "Case source-image distributed source census changed")
-    require(EM9305_SOURCE_IMAGE_PACKAGE_ROOT.is_dir(),
-            "EM9305 source-image package root missing")
+    require(all(path.is_dir() for path in EM9305_SOURCE_IMAGE_PACKAGE_ROOTS),
+            "EM9305 source-image or source-overlay package root missing")
     actual_em9305_source_image_paths = {
         "g2/" + path.relative_to(ROOT).as_posix()
-        for path in EM9305_SOURCE_IMAGE_PACKAGE_ROOT.rglob("*")
-        if path.is_file()
+        for package_root in EM9305_SOURCE_IMAGE_PACKAGE_ROOTS
+        for path in package_root.rglob("*")
+        if (
+            path.is_file()
+            and "build" not in path.relative_to(package_root).parts
+            and "__pycache__" not in path.relative_to(package_root).parts
+            and path.suffix != ".pyc"
+        )
     } | EM9305_SOURCE_IMAGE_SUPPORT_PATHS
     require(actual_em9305_source_image_paths == em9305_source_image_paths,
             "EM9305 source-image distributed source census changed")

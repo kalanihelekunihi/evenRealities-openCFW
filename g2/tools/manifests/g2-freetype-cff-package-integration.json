@@ -39,19 +39,19 @@
       "size": 24637
     },
     "components/apollo_main/freetype_cff_scatter/overlay.json": {
-      "sha256": "145e9f8715509c4b85c87816dababd6b734afcc3cbd128c9c146393cecff2493",
-      "size": 1661
+      "sha256": "b92efd3929c66f902ac64b9142a3448d37774e67875f3f1e733bf8b3d366de0f",
+      "size": 1822
     },
     "manifests/g2-2.2.6.10-core-source.json": {
-      "sha256": "79948ff0c3d234d5f74eac7d627a20588f5bec293a2fed194fe10a44b3ad1831",
-      "size": 3193849
+      "sha256": "01157a2293e57b1c1fcc972b19380ae4245642a164eb2906ab54ef9f8f5eeccf",
+      "size": 3391215
     },
     "tools/open_cfw.py": {
-      "sha256": "2065bc3cefd4390080b15d277906c7e9e3b60ddc8e7e4ee046dab63310cf331a",
-      "size": 99007
+      "sha256": "177c9e6266dd1327b483a05944f7a00b8a9d4d5e85eb4a0471a04a0d41dea6d0",
+      "size": 99021
     }
   },
-  "integration_sha256": "d9c8cf3c9a05af35922ae3e1b06eb14dc36ae59ba9005b7e83b20316c7f544e1",
+  "integration_sha256": "8abd344fdd70157a2b73fb43ba5f3956cab7e31a70ef1eacc4ad30926290335c",
   "profiles": {
     "apple-clang": {
       "atomicity": {
@@ -65,9 +65,9 @@
         "unchanged_entry_count": 5
       },
       "base_package": {
-        "path": "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
-        "sha256": "d569793138c6bc2ee456536daee59dcef0bb6051034ed966f7144083790a777a",
-        "size": 4678740
+        "path": "build/postapply-package-apple/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "sha256": "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
+        "size": 4750576
       },
       "component": {
         "growth_bytes": 70800,
@@ -77,7 +77,7 @@
         "sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
         "size": 3956468
       },
-      "component_receipt_sha256": "0f9cb50467f4900ab6f650b934cba820a84115e85541a7f1a1fb06a027864063",
+      "component_receipt_sha256": "fd7ddb78b01ec46a8fc290b4e879a45d12f0f99553a7933a9b7b2fc88b72310d",
       "ownership": {
         "cff_erased_gap_bytes": 66684,
         "cff_erased_gap_rows": 1,
@@ -88,8 +88,8 @@
         "cff_source_rows": 4,
         "collision_or_protected_overlap_count": 0,
         "container_rows": 6,
-        "flash_plan_sha256": "6dfda9822e7d56ae719f62f2f8ea64e8ac62aa9e5cb2ae11a3683f248f17e87f",
-        "flash_rows": 6607,
+        "flash_plan_sha256": "f4630f0cb0fc4b1065ef8fa24e795bb5614ff0fed397c644c9b2571fe86b1d3b",
+        "flash_rows": 7006,
         "highest_cff_end_exclusive": "0x007FDED4",
         "unresolved_rows": 0,
         "unused_scattered_table_pool_consumed": 0,
@@ -98,11 +98,11 @@
       "package": {
         "entry_6_crc32c_msb": "0x0012B7B8",
         "entry_6_entry_size": 3956596,
-        "entry_6_package_offset": 792944,
+        "entry_6_package_offset": 793980,
         "entry_6_payload_size": 3956468,
         "growth_bytes": 70800,
-        "sha256": "482756200d1b3c70685d7c1c29c422a5725436801e3600d7cf55fa3e16809128",
-        "size": 4749540
+        "sha256": "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
+        "size": 4750576
       },
       "reproducibility": {
         "component_matches_pinned_profile_output": true,
@@ -124,8 +124,8 @@
       },
       "base_package": {
         "path": "build/postapply-package-linux/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
-        "sha256": "f7260f93e2c87f2403e14f5a8e6ae1436233cce2990c386a1cde48d2e8133e31",
-        "size": 4471056
+        "sha256": "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
+        "size": 4750560
       },
       "component": {
         "growth_bytes": 278468,
@@ -135,7 +135,7 @@
         "sha256": "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
         "size": 3956468
       },
-      "component_receipt_sha256": "1cb3547341f38edfe31906ff40e53ea93b76066ca3011745b6041b1899965280",
+      "component_receipt_sha256": "6fd350e0f7098f698fa850f5d5c732ffb5dc4c0edc66c10a52ccfea0b0522613",
       "ownership": {
         "cff_erased_gap_bytes": 274352,
         "cff_erased_gap_rows": 1,
@@ -146,8 +146,8 @@
         "cff_source_rows": 4,
         "collision_or_protected_overlap_count": 0,
         "container_rows": 6,
-        "flash_plan_sha256": "c12f104bd9feb85e041a12db7a61d1c63aa9e577acb2efc9eb6abd4b2bd23496",
-        "flash_rows": 3594,
+        "flash_plan_sha256": "a37d87d77ce567036e47f76acb7545fd5e24f2c7021807c3f0ba4553a647fdfb",
+        "flash_rows": 3993,
         "highest_cff_end_exclusive": "0x007FDED4",
         "unresolved_rows": 0,
         "unused_scattered_table_pool_consumed": 0,
@@ -156,11 +156,11 @@
       "package": {
         "entry_6_crc32c_msb": "0xD90D86A3",
         "entry_6_entry_size": 3956596,
-        "entry_6_package_offset": 792928,
+        "entry_6_package_offset": 793964,
         "entry_6_payload_size": 3956468,
         "growth_bytes": 278468,
-        "sha256": "d9386d30c0c6b1bd706b36c9ee095ad6e2e9ee9b5dacf9c58a52357c7620a362",
-        "size": 4749524
+        "sha256": "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
+        "size": 4750560
       },
       "reproducibility": {
         "component_matches_pinned_profile_output": true,

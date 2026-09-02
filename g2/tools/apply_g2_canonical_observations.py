@@ -3405,8 +3405,23 @@ def _legacy_compatible_tail(
         or len(template_alignments) != len(part_alignments)
         or len(template_text) != len(part_text)
     ):
+        part_offsets = {item["file_offset"] for item in part_text}
+        template_offsets = {item["file_offset"] for item in template_text}
+        unmatched_templates = [
+            (item.get("name"), item.get("file_offset"), item.get("size"))
+            for item in template_text if item.get("file_offset") not in part_offsets
+        ][:12]
+        unmatched_parts = [
+            (item.get("identity"), item.get("file_offset"), item.get("size"))
+            for item in part_text if item.get("file_offset") not in template_offsets
+        ][:12]
         raise AdmissionError(
-            "legacy appended-tail aliases do not bijectively cover canonical parts"
+            "legacy appended-tail aliases do not bijectively cover canonical parts: "
+            f"templates(alignment={len(template_alignments)},text={len(template_text)}), "
+            f"parts(alignment={len(part_alignments)},text={len(part_text)},"
+            f"unexpected={[(item['identity'], item['part']) for item in unexpected]}), "
+            f"unmatched_templates={unmatched_templates}, "
+            f"unmatched_parts={unmatched_parts}"
         )
     for template, segment in zip(template_alignments, part_alignments):
         bind_parts(
@@ -3552,6 +3567,7 @@ def synchronize_apollo_regions(
     templates = [
         region for region in tail[1:]
         if not str(region.get("name", "")).startswith(FORBIDDEN_APPENDED_PREFIX)
+        and not str(region.get("name", "")).startswith("freetype_cff_")
     ]
     rebuilt_tail.extend(
         _legacy_compatible_tail(templates, observed_segments, config)

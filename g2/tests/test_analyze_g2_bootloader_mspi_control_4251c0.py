@@ -34,16 +34,24 @@ class BootloaderMspiControlTests(unittest.TestCase):
     def tearDownClass(cls) -> None:
         cls.temporary.cleanup()
 
-    def test_complete_control_body_is_retained_official(self) -> None:
-        self.assertEqual(self.result["status"], "semantic-candidate / production-retained-official-boundary")
-        self.assertEqual(self.result["function"]["bytes"], 4384)
-        self.assertFalse(self.result["production"]["routed"])
-        self.assertEqual(self.result["production"]["boundary_status"], "official_blob")
+    def test_complete_control_body_is_production_source_routed(self) -> None:
         self.assertEqual(
-            self.result["production"]["source_owned_bytes"]
-            + self.result["production"]["retained_official_bytes"],
-            147350,
+            self.result["status"],
+            "structured-source-dual-profile / production-source-in-place / hardware-validation-blocked-by-unavailable-physical-evidence",
         )
+        self.assertEqual(self.result["function"]["stock_bytes"], 4384)
+        self.assertTrue(self.result["production"]["routed"])
+        self.assertEqual(self.result["production"]["source_owned_bytes"], 3948)
+        self.assertEqual(self.result["production"]["adapter"]["bytes"], 124)
+        self.assertEqual(self.result["production"]["adapted_body"]["bytes"], 3824)
+        self.assertEqual(self.result["production"]["retained_unreachable_tail"]["bytes"], 436)
+
+    def test_both_reviewed_toolchain_profiles_are_pinned(self) -> None:
+        profiles = self.result["production"]["profiles"]
+        self.assertEqual(profiles["apple-clang"]["component_size"], 163840)
+        self.assertEqual(profiles["linux-clang"]["component_size"], 163824)
+        self.assertEqual(profiles["apple-clang"]["source_owned_bytes"], 34557)
+        self.assertEqual(profiles["linux-clang"]["source_owned_bytes"], 34539)
 
     def test_independent_main_body_cross_check_is_exact(self) -> None:
         comparison = self.result["cross_image"]
@@ -57,7 +65,11 @@ class BootloaderMspiControlTests(unittest.TestCase):
         )
 
     def test_literal_pool_and_hardware_policy_remain_honest(self) -> None:
-        self.assertEqual(self.result["production"]["boundary_status"], "official_blob")
+        frontier = self.result["production"]["next_executable_frontier"]
+        self.assertEqual((frontier["start"], frontier["end"], frontier["bytes"]),
+                         (0x00426506, 0x00426536, 48))
+        self.assertEqual(frontier["function"], "am_hal_mspi_interrupt_clear")
+        self.assertEqual(frontier["status"], "already-source-routed")
         self.assertEqual(self.result["semantic_model"]["valid_stock_requests"], 40)
         self.assertEqual(self.result["hardware_validation"], "blocked by unavailable physical evidence")
         self.assertEqual(self.result["hardware_operations"], [])

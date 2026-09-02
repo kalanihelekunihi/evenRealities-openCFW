@@ -195,7 +195,7 @@ class G2CompletionReadinessTests(unittest.TestCase):
         self.assertEqual(policy["project_owned_gpl_records_pending_mit"], 0)
         self.assertEqual(policy["overlay_records_pending_mit"], 0)
         self.assertEqual(
-            policy["distributed_project_mit_normalization_targets"], 906)
+            policy["distributed_project_mit_normalization_targets"], 919)
         self.assertEqual(
             policy["community_controller_and_adapter_source_files"], 112)
         self.assertEqual(
@@ -208,9 +208,9 @@ class G2CompletionReadinessTests(unittest.TestCase):
         self.assertEqual(policy["case_source_image_project_mit_files"], 7)
         self.assertEqual(policy["case_source_image_package_files"], 5)
         self.assertEqual(policy["case_source_image_support_files"], 2)
-        self.assertEqual(policy["em9305_source_image_project_mit_files"], 6)
-        self.assertEqual(policy["em9305_source_image_package_files"], 3)
-        self.assertEqual(policy["em9305_source_image_support_files"], 3)
+        self.assertEqual(policy["em9305_source_image_project_mit_files"], 19)
+        self.assertEqual(policy["em9305_source_image_package_files"], 11)
+        self.assertEqual(policy["em9305_source_image_support_files"], 8)
         self.assertEqual(policy["pt_protocol_project_mit_files"], 28)
         self.assertEqual(policy["upstream_gpl_records_preserved"], 1)
 
@@ -376,14 +376,14 @@ class G2CompletionReadinessTests(unittest.TestCase):
     def test_apollo_boundaries_are_disjoint_and_current(self) -> None:
         main = self.report["components"]["apollo_main"]
         details = main["details"]
-        self.assertEqual(main["release_blocking_bytes"], 3_081_392)
+        self.assertEqual(main["release_blocking_bytes"], 3_065_088)
         self.assertEqual(details["release_readiness_partition"], {
             "candidate_source_not_routed": 0,
-            "typed_retained_or_external": 3_081_392,
+            "typed_retained_or_external": 3_065_088,
         })
         self.assertEqual(details["unanchored_frontier_partition"], {
             "candidate_source_not_routed": 0,
-            "typed_retained_unanchored_without_candidate": 613_302,
+            "typed_retained_unanchored_without_candidate": 599_340,
         })
         self.assertEqual(details["controlled_label_reconciliation_bytes"], 17_800)
         self.assertFalse(details["controlled_label_reconciliation_additive"])
@@ -395,8 +395,12 @@ class G2CompletionReadinessTests(unittest.TestCase):
         boot = self.report["components"]["apollo_bootloader"]
         complement = boot["details"]["retained_complement"]
         self.assertEqual(complement["component_bytes"], 163_840)
-        self.assertEqual(complement["intervals"], 593)
-        self.assertEqual(complement["retained_official_bytes"], 117_575)
+        self.assertEqual(complement["intervals"], 901)
+        self.assertEqual(complement["retained_official_bytes"], 87_985)
+        self.assertEqual(
+            complement["bytes_by_address_status"]["source_compiled"],
+            59_009,
+        )
         self.assertEqual(
             complement["retained_official_bytes"],
             boot["buckets"]["typed_retained_or_external"],
@@ -417,9 +421,14 @@ class G2CompletionReadinessTests(unittest.TestCase):
                          ["external_provider_claims_open_availability"])
 
         em = self.report["components"]["ble_em9305"]
-        self.assertEqual(em["buckets"]["candidate_source_not_routed"], 1_240)
-        self.assertEqual(em["buckets"]["typed_retained_or_external"], 210_708)
-        self.assertFalse(em["details"]["candidate_production_routed"])
+        self.assertEqual(em["size"], 212_984)
+        self.assertEqual(em["buckets"]["production_source"], 1_174)
+        self.assertEqual(em["buckets"]["generated_or_reconstructible"], 1_226)
+        self.assertEqual(em["buckets"]["candidate_source_not_routed"], 0)
+        self.assertEqual(em["buckets"]["typed_retained_or_external"], 210_584)
+        self.assertTrue(em["details"]["candidate_production_routed"])
+        self.assertTrue(em["production_routed"])
+        self.assertFalse(em["source_complete"])
         receipts = em["details"]["final_source_readiness_receipts"]
         self.assertEqual(receipts["manifest_count"], 2)
         self.assertEqual(receipts["residual_span_count"], 175)

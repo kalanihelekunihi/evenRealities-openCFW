@@ -52,7 +52,7 @@ class BootloaderMspiInitializeTests(unittest.TestCase):
         self.assertEqual(report["production"]["boundary_status"], "source_compiled")
         self.assertEqual(report["production"]["compiled_bytes"], 88)
         self.assertEqual(report["production"]["source_owned_bytes"] +
-                         report["production"]["retained_official_bytes"], 147350)
+                         report["production"]["retained_official_bytes"], 146994)
         self.assertEqual(report["production"]["next_frontier"],
                          0x00424AB2)
         self.assertEqual(report["next_code_frontier"], {
