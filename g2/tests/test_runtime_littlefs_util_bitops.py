@@ -653,7 +653,7 @@ class RuntimeLittlefsUtilBitopsTests(unittest.TestCase):
                 ),
                 "component": (
                     163_840,
-                    "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2",
+                    "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b",
                 ),
                 "functions": {
                     "npw2": (

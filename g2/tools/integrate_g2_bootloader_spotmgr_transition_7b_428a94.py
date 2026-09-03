@@ -29,8 +29,8 @@ STOCK_SHA = "1e0e7ddb0036670d692a97a50f6cc821d2a2358e741b72d502e943d31bb0b351"
 UNRELOCATED_SHA = "b9d0e8cfa43d1d1a1514e2ff0fda56c2b0d50511f816d53894b19f7feb3975d8"
 DELAY = "open_cfw_bootloader_delay_us_41d1c0"
 STATUS_DELAY = "open_cfw_bootloader_delay_us_status_change_41d21c"
-APPLE_COMPONENT_SHA = "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2"
-LINUX_COMPONENT_SHA = "426d77749f96307ae9a45173d20684570d5994d902cf1f1f5cb01f935c6ba7c6"
+APPLE_COMPONENT_SHA = "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b"
+LINUX_COMPONENT_SHA = "11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875"
 FLAGS = [
     "-mcpu=cortex-m55", "-mthumb", "-Oz", "-ffreestanding",
     "-fno-builtin", "-ffunction-sections", "-fdata-sections",

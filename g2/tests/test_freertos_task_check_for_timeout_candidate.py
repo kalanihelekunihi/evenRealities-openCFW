@@ -156,39 +156,39 @@ PRODUCTION_PINS = {
         "size": 136,
         "sha256": TARGETS["apple-clang"]["sha256"],
         "alignment": 4,
-        "offset": 178_324,
+        "offset": 118_476,
         "unrelocated_sha256": TARGETS["apple-clang"]["sha256"],
     },
     "linux-clang": {
         "size": 136,
         "sha256": TARGETS["linux-clang"]["sha256"],
         "alignment": 4,
-        "offset": 180_088,
+        "offset": 120_336,
         "unrelocated_sha256": TARGETS["linux-clang"]["sha256"],
     },
 }
 
 PRODUCTION_APPLE_AGGREGATE = {
-    "overlay_size": 360_632,
+    "overlay_size": 362_272,
     "overlay_sha256": (
         "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
     ),
-    "component_size": 3_884_028,
+    "component_size": 3_956_672,
     "component_sha256": (
-        "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5"
+        "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"
     ),
 }
 
 PRODUCTION_LINUX_AGGREGATE = {
-    "overlay_size": 152_960,
+    "overlay_size": 154_604,
     "overlay_sha256": (
-        "502962f06bd57ab06558843c3de54b854"
-        "12eb1d17e4725a042fe591c7b0f346a"
+        "4caa6c35e2c8f559d7668511d8c36fd"
+        "19ba95a94a8762215f9bed4ba91e006c6"
     ),
-    "component_size": 3_676_356,
+    "component_size": 3_956_672,
     "component_sha256": (
-        "71124515cf4c1575396874ec1b7f87aa"
-        "1ccb56786c826aba365a5db8b6712471"
+        "886b0e26bb847a47614103683d71aa89"
+        "12e34379e623131b8afbd4a665eec32e"
     ),
 }
 

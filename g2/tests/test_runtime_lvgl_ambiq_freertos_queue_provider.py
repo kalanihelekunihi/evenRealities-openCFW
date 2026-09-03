@@ -127,7 +127,7 @@ class FreeRTOSQueueProviderTests(unittest.TestCase):
         self.assertTrue(provider["source_admitted"])
         self.assertFalse(provider["production_overlay_registered"])
         self.assertFalse(provider["hardware_qualified"])
-        self.assertEqual(report["missing_provider_count"], 11)
+        self.assertEqual(report["missing_provider_count"], 0)
 
     def test_public_freertos_prototypes_are_target_type_compatible(self) -> None:
         output = Path(self.temporary.name) / "freertos-abi.o"

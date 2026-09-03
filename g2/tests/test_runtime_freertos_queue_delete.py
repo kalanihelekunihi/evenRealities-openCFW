@@ -140,16 +140,17 @@ PRODUCTION_SHA256 = (
     "078c97be19fff941ddb8ea3685dc5137f"
     "7e4d7e69e25ffaa0bdf21c22df509f2"
 )
-PRODUCTION_OVERLAY_SIZE = 360_578
+PRODUCTION_OVERLAY_SIZE = 362_272
 PRODUCTION_OVERLAY_SHA256 = (
-    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
+    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
 )
-PRODUCTION_COMPONENT_SIZE = 3_883_974
+FINAL_COMPONENT_SIZE = 3_956_672
+CORE_STAGE_COMPONENT_SIZE = 3_885_668
 PRODUCTION_COMPONENT_SHA256 = (
-    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
+    "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
 )
 FINAL_COMPONENT_SHA256 = (
-    "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
+    "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"
 )
 PRODUCTION_DEPENDENCIES = {
     "open_cfw_freertos_heap4_free": 0x007B_02BC,
@@ -808,7 +809,7 @@ class RuntimeFreeRTOSQueueDeleteTests(unittest.TestCase):
             {
                 "overlay_size": PRODUCTION_OVERLAY_SIZE,
                 "overlay_sha256": PRODUCTION_OVERLAY_SHA256,
-                "component_size": PRODUCTION_COMPONENT_SIZE,
+                "component_size": FINAL_COMPONENT_SIZE,
                 "component_sha256": FINAL_COMPONENT_SHA256,
             },
         )
@@ -873,7 +874,7 @@ class RuntimeFreeRTOSQueueDeleteTests(unittest.TestCase):
             (
                 PRODUCTION_OVERLAY_SIZE,
                 PRODUCTION_OVERLAY_SHA256,
-                PRODUCTION_COMPONENT_SIZE,
+                CORE_STAGE_COMPONENT_SIZE,
                 PRODUCTION_COMPONENT_SHA256,
             ),
         )

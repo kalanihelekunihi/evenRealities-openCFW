@@ -3270,6 +3270,437 @@
     "source_admitted": true,
     "warning_count": 0
   },
+  "local_lvgl_decoder_provider": {
+    "abi_probe_artifacts": {
+      "decoder": {
+        "path": "decoder_abi.o",
+        "sha256": "734fb6f77bab16c9a50b3c3b6859a95290eb7cc210793627d930c37d4a154b94",
+        "size": 1392
+      },
+      "support": {
+        "path": "support_abi.o",
+        "sha256": "842c6351df92da010a31af243fe1979cc45f43fa87eb456a3cb2cd185107f03e",
+        "size": 1292
+      }
+    },
+    "aggregate_elf_undefined_symbols": [],
+    "aggregate_link_artifact": {
+      "path": "lvgl-ambiq-lvgl-decoder-aggregate.o",
+      "sha256": "92f09f27f55e93c91107cb5bb517d086085583e4c74da87807a57d20a1650be1",
+      "size": 48140
+    },
+    "authenticated_upstream": {
+      "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+      "commit_record": {
+        "path": "third_party/lvgl/upstream/344c7c318047b7348e1be8572a9fd4260c251cfa.commit.json",
+        "sha256": "acb765f0389ebfe50ff7ff1f834a31d8088e118dd176dac0362c3d97feea797a",
+        "size": 1634
+      },
+      "license": "MIT",
+      "qualification": "exact decoder open/close behavior retains variable, file-backed, decoder-list, header-cache, image-cache, cleanup, and cache-flush paths",
+      "repository": "https://github.com/lvgl/lvgl.git",
+      "source_git_blobs": {
+        "src/draw/lv_image_decoder.c": "48d62c89f7f35b3c10d75ba7ac0d4a84efff12a7",
+        "src/draw/lv_image_decoder.h": "3b8089aff7ac89e00694ddbaa739ac94c26e6fa1",
+        "src/draw/lv_image_decoder_private.h": "c7369d0aa6ab590bc336a9d1dd4a4b18c3e07d67",
+        "src/misc/cache/lv_cache.c": "1ab6c9fc6fc0481ecb1d357f45003dbca9ac492b",
+        "src/misc/cache/lv_cache.h": "8469c43775bf92ec16313b96d0285fd43a50363f",
+        "src/misc/cache/lv_cache_entry.c": "4f280e66e3e84ee9b47d81a2dc579183092ade69",
+        "src/misc/cache/lv_cache_entry.h": "3c28f2d929d34c82bc3e7e1340317168ea760b2a",
+        "src/misc/lv_fs.c": "e90d00c7f7af60fecf2d23400b2c59fcbf076b38"
+      },
+      "tree": "2c76db856ec570f3ee12565181e5cf52bdd33d78",
+      "tree_record": {
+        "path": "third_party/lvgl/upstream/trees.json",
+        "sha256": "9aa5b7adccc1e74492a02858859ae9abf4f8b05468adeb45ae3e9dde9df80a17",
+        "size": 149312
+      }
+    },
+    "closed_consumer_relocation_count": 9,
+    "closed_consumer_relocations": {
+      "lv_image_decoder_close": [
+        {
+          "object": "lv_draw_ambiq_arc.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_img.o",
+          "relocation_count": 2,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 2
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_private.o",
+          "relocation_count": 3,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 3
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_vector.o",
+          "relocation_count": 2,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 2
+          }
+        }
+      ],
+      "lv_image_decoder_open": [
+        {
+          "object": "lv_draw_ambiq_private.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        }
+      ]
+    },
+    "closed_residual_symbol_count": 2,
+    "hardware_qualified": false,
+    "inputs": {
+      "cache_entry_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/misc/cache/lv_cache_entry.h",
+        "sha256": "4318c88bc4001cdfd9dd828ce9316a92e1df14f3ef9c429f86d84e5ce5baefab",
+        "size": 3373
+      },
+      "cache_entry_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/misc/cache/lv_cache_entry.c",
+        "sha256": "b936460d587d5aaa35876a8f9cc11ee5d2b4313d85e25be8bb8eb9af717f3cba",
+        "size": 4104
+      },
+      "cache_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/misc/cache/lv_cache.h",
+        "sha256": "13e3f6e90635510645c974c67b507966faef4c57e479199abb4c28e969a399f9",
+        "size": 11311
+      },
+      "cache_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/misc/cache/lv_cache.c",
+        "sha256": "8e36a6ea7a981b29ae925765f57e524b43ead3dbffbc50b28856dee2a6543038",
+        "size": 9474
+      },
+      "decoder_abi_probe": {
+        "license": "MIT",
+        "path": "tests/fixtures/lvgl_ambiq_lvgl_decoder_provider_abi.c",
+        "sha256": "e1fb2e0d9023aa9626bcaea8faf6f41be317dc245c962a002697ccda4f8be559",
+        "size": 503
+      },
+      "decoder_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_image_decoder.h",
+        "sha256": "cf8cb23198e97741d52771974ea7276fd2c79b59c425a020ed4dae9f45820b04",
+        "size": 8498
+      },
+      "decoder_private_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_image_decoder_private.h",
+        "sha256": "e3c20296ecf46c9741f1884aa89822889020dc35973695f864cf977291c5e0f3",
+        "size": 3926
+      },
+      "decoder_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_image_decoder.c",
+        "sha256": "6ddccf575bc39a097943fc85772c5766ac1cad61a43c2e433b503ce13606c6bf",
+        "size": 13654
+      },
+      "fs_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/misc/lv_fs.c",
+        "sha256": "03b7c391a60e60fb1a49245abae432213ba48b425ece5a2d9047a2bfa6e79159",
+        "size": 19550
+      },
+      "hostile_host_fixture": {
+        "license": "MIT",
+        "path": "tests/fixtures/lvgl_ambiq_lvgl_decoder_support_provider_host.c",
+        "sha256": "334c40798b7861bf6a1c08399ba0620c8539ce7d2d50a80cc666f3aff3188cd3",
+        "size": 2286
+      },
+      "support_abi_probe": {
+        "license": "MIT",
+        "path": "tests/fixtures/lvgl_ambiq_lvgl_decoder_support_provider_abi.c",
+        "sha256": "da470907a84358c949a9a09a3ab3ecb142f198a8f62c88db14b32ba29d847f3b",
+        "size": 478
+      },
+      "support_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_decoder_support_provider.h",
+        "sha256": "094f52fd46230de6ff658529019ce585c10d776d84335617ec5a30d1d3941eb6",
+        "size": 345
+      },
+      "support_provider": {
+        "license": "MIT",
+        "path": "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_decoder_support_provider.c",
+        "sha256": "dcde456c1e99d422ec7575776d1ace799b11c903d1641299a32c0e1aac291710",
+        "size": 1926
+      }
+    },
+    "production_overlay_registered": false,
+    "provider_artifacts": {
+      "cache": {
+        "elf_undefined_symbols": [
+          "lv_free",
+          "lv_log_add",
+          "lv_mutex_lock",
+          "lv_mutex_unlock"
+        ],
+        "exports": [
+          "lv_cache_acquire",
+          "lv_cache_add",
+          "lv_cache_entry_acquire_data",
+          "lv_cache_entry_delete",
+          "lv_cache_entry_get_data",
+          "lv_cache_entry_get_ref",
+          "lv_cache_entry_is_invalid",
+          "lv_cache_entry_release_data",
+          "lv_cache_release"
+        ],
+        "external_relocations": {
+          "lv_free": {
+            "R_ARM_THM_JUMP24": 1
+          },
+          "lv_log_add": {
+            "R_ARM_THM_CALL": 14
+          },
+          "lv_mutex_lock": {
+            "R_ARM_THM_CALL": 3
+          },
+          "lv_mutex_unlock": {
+            "R_ARM_THM_CALL": 2,
+            "R_ARM_THM_JUMP24": 1
+          }
+        },
+        "path": "lvgl-ambiq-lvgl-decoder-cache.o",
+        "sha256": "8bcf3381e19d0e5bcaecacc21174663de5c232e35c57a62bb1d076cbb656a1f8",
+        "size": 9108
+      },
+      "decoder": {
+        "elf_undefined_symbols": [
+          "lv_cache_acquire",
+          "lv_cache_add",
+          "lv_cache_entry_get_data",
+          "lv_cache_release",
+          "lv_color_format_get_bpp",
+          "lv_draw_buf_flush_cache",
+          "lv_free",
+          "lv_fs_close",
+          "lv_fs_open",
+          "lv_fs_seek",
+          "lv_global",
+          "lv_image_cache_is_enabled",
+          "lv_image_header_cache_is_enabled",
+          "lv_image_src_get_type",
+          "lv_ll_get_head",
+          "lv_ll_get_next",
+          "lv_log_add",
+          "lv_memset",
+          "lv_strdup"
+        ],
+        "exports": [
+          "lv_image_decoder_close",
+          "lv_image_decoder_open"
+        ],
+        "external_relocations": {
+          "lv_cache_acquire": {
+            "R_ARM_THM_CALL": 2
+          },
+          "lv_cache_add": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_cache_entry_get_data": {
+            "R_ARM_THM_CALL": 2
+          },
+          "lv_cache_release": {
+            "R_ARM_THM_CALL": 1,
+            "R_ARM_THM_JUMP24": 1
+          },
+          "lv_color_format_get_bpp": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_draw_buf_flush_cache": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_free": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_fs_close": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_fs_open": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_fs_seek": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_global": {
+            "R_ARM_THM_MOVT_ABS": 4,
+            "R_ARM_THM_MOVW_ABS_NC": 4
+          },
+          "lv_image_cache_is_enabled": {
+            "R_ARM_THM_CALL": 2
+          },
+          "lv_image_header_cache_is_enabled": {
+            "R_ARM_THM_CALL": 2
+          },
+          "lv_image_src_get_type": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_ll_get_head": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_ll_get_next": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_log_add": {
+            "R_ARM_THM_CALL": 2
+          },
+          "lv_memset": {
+            "R_ARM_THM_CALL": 2
+          },
+          "lv_strdup": {
+            "R_ARM_THM_CALL": 1
+          }
+        },
+        "path": "lvgl-ambiq-lvgl-decoder-provider.o",
+        "sha256": "7446fd3c6fa1223982c81f208d947a70e6d815aa074cfddbbc3be5a46f0f949f",
+        "size": 4216
+      },
+      "filesystem": {
+        "elf_undefined_symbols": [
+          "lv_free",
+          "lv_global",
+          "lv_ll_get_head",
+          "lv_ll_get_next",
+          "lv_log_add",
+          "lv_malloc_zeroed"
+        ],
+        "exports": [
+          "lv_fs_close",
+          "lv_fs_open",
+          "lv_fs_seek"
+        ],
+        "external_relocations": {
+          "lv_free": {
+            "R_ARM_THM_CALL": 2
+          },
+          "lv_global": {
+            "R_ARM_THM_MOVT_ABS": 1,
+            "R_ARM_THM_MOVW_ABS_NC": 1
+          },
+          "lv_ll_get_head": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_ll_get_next": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_log_add": {
+            "R_ARM_THM_CALL": 5
+          },
+          "lv_malloc_zeroed": {
+            "R_ARM_THM_CALL": 1
+          }
+        },
+        "path": "lvgl-ambiq-lvgl-decoder-filesystem.o",
+        "sha256": "bce90fd688401184fd7ec731b9d546bdf7976dfe04011d26b78b55a8dd0e1508",
+        "size": 3432
+      },
+      "support": {
+        "elf_undefined_symbols": [
+          "lv_global",
+          "lv_malloc",
+          "lv_memcpy"
+        ],
+        "exports": [
+          "lv_image_cache_is_enabled",
+          "lv_image_header_cache_is_enabled",
+          "lv_image_src_get_type",
+          "lv_ll_get_head",
+          "lv_ll_get_next",
+          "lv_strdup"
+        ],
+        "external_relocations": {
+          "lv_global": {
+            "R_ARM_THM_MOVT_ABS": 2,
+            "R_ARM_THM_MOVW_ABS_NC": 2
+          },
+          "lv_malloc": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_memcpy": {
+            "R_ARM_THM_CALL": 1
+          }
+        },
+        "path": "lvgl-ambiq-lvgl-decoder-support.o",
+        "sha256": "d5089f3a226f79395fdf2ab1015fd6e9860949853dd0d15493aa95449140581f",
+        "size": 3216
+      }
+    },
+    "qualification": "exact LVGL decoder open/close with source-closed file, cache, list, allocation, logging, mutex, color-format, global, and cache-flush dependencies; live decoder registration, filesystem drivers, cache lifecycle, collision, RAM, and concurrency remain runtime-unqualified",
+    "required_exports": [
+      "lv_image_decoder_close",
+      "lv_image_decoder_open"
+    ],
+    "source_admitted": true,
+    "target_source_artifacts": {
+      "cache": {
+        "path": "cache_source.o",
+        "sha256": "e2fb7de4933d7932485838b6d0cfcdbc4f87950769efd11765eab677d1cddbc0",
+        "size": 12232
+      },
+      "cache_entry": {
+        "path": "cache_entry_source.o",
+        "sha256": "e0a16a0a3b3f0406411634dcb452eb7671318b2dcbc9fe72ac65f1f1f76dc5f1",
+        "size": 11104
+      },
+      "decoder": {
+        "path": "decoder_source.o",
+        "sha256": "de45c4834b10b62cb7c069d2900350693f414a1b7fa61c73e107edc9ef129fb9",
+        "size": 9560
+      },
+      "filesystem": {
+        "path": "fs_source.o",
+        "sha256": "bddbbd4485d4b8ec42f6f150a6064e3610228745edfd95db9f31fad00bef49c2",
+        "size": 10628
+      },
+      "support": {
+        "path": "support_source.o",
+        "sha256": "aff6a4ca00473db3fd63219e55646e02803f6650e93be248587d02c9b2519d95",
+        "size": 2556
+      }
+    },
+    "transitive_provider_exports": {
+      "cache": [
+        "lv_cache_acquire",
+        "lv_cache_add",
+        "lv_cache_entry_acquire_data",
+        "lv_cache_entry_delete",
+        "lv_cache_entry_get_data",
+        "lv_cache_entry_get_ref",
+        "lv_cache_entry_is_invalid",
+        "lv_cache_entry_release_data",
+        "lv_cache_release"
+      ],
+      "filesystem": [
+        "lv_fs_close",
+        "lv_fs_open",
+        "lv_fs_seek"
+      ],
+      "support": [
+        "lv_image_cache_is_enabled",
+        "lv_image_header_cache_is_enabled",
+        "lv_image_src_get_type",
+        "lv_ll_get_head",
+        "lv_ll_get_next",
+        "lv_strdup"
+      ]
+    },
+    "warning_count": 0
+  },
   "local_lvgl_draw_buf_lifecycle_provider": {
     "abi_probe_artifact": {
       "path": "lvgl_ambiq_lvgl_draw_buf_lifecycle_provider_abi.o",
@@ -3742,6 +4173,181 @@
     "transitive_residual_dependencies": [
       "lv_thread_sync_signal"
     ],
+    "warning_count": 0
+  },
+  "local_lvgl_draw_task_provider": {
+    "abi_probe_artifact": {
+      "path": "lvgl_ambiq_lvgl_draw_task_provider_abi.o",
+      "sha256": "97577f4542bf3f075c51db1b8c5ee4f2248ff0f933eb5b97d52c6acf8a808d86",
+      "size": 1020
+    },
+    "aggregate_elf_undefined_symbols": [],
+    "aggregate_link_artifact": {
+      "path": "lvgl-ambiq-lvgl-draw-task-aggregate.o",
+      "sha256": "d6620afbb9c02d0bcb81617531f9a0c1730c74c22ab614b120dda591d3a799cf",
+      "size": 8344
+    },
+    "all_external_exports": [
+      "lv_draw_get_available_task"
+    ],
+    "artifact": {
+      "path": "lvgl-ambiq-lvgl-draw-task-provider.o",
+      "sha256": "3b103e71b599e201f56362e973fda7f3f9ef8569a819a39947423d8dfbf451a5",
+      "size": 1448
+    },
+    "authenticated_upstream": {
+      "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+      "commit_record": {
+        "path": "third_party/lvgl/upstream/344c7c318047b7348e1be8572a9fd4260c251cfa.commit.json",
+        "sha256": "acb765f0389ebfe50ff7ff1f834a31d8088e118dd176dac0362c3d97feea797a",
+        "size": 1634
+      },
+      "license": "MIT",
+      "qualification": "single- and multi-unit task selection preserves the authenticated ordering, full-screen serialization, rotated resolution, preferred-unit, and older-overlap rules",
+      "repository": "https://github.com/lvgl/lvgl.git",
+      "source_git_blobs": {
+        "src/core/lv_global.h": "4515c01c9b80779a7d61701e28b4fb3554a92ba9",
+        "src/core/lv_refr.c": "5ebca8e1891630c297ca649ecc5d2e0a89e3661c",
+        "src/core/lv_refr_private.h": "3b2985b70ebd88f726f2c9c86d39d6257d135784",
+        "src/display/lv_display.c": "695d38b2652decc2362b283dd69ee08b8b4f7582",
+        "src/display/lv_display_private.h": "d831ec4861e73f53da86432fb221804f71fa5c79",
+        "src/draw/lv_draw.c": "b24dda671bf57cecc80e0f30ab8df00b29d2fdf4",
+        "src/draw/lv_draw.h": "b35cb52f8298d591d56ce50a03fb21c64f7e7f50",
+        "src/draw/lv_draw_private.h": "057d4dd08a7d61417ecea732e4ff3401419d3af9",
+        "src/misc/lv_area_private.h": "bebca59406277fb2921635c5070d00caa77aed57"
+      },
+      "tree": "2c76db856ec570f3ee12565181e5cf52bdd33d78",
+      "tree_record": {
+        "path": "third_party/lvgl/upstream/trees.json",
+        "sha256": "9aa5b7adccc1e74492a02858859ae9abf4f8b05468adeb45ae3e9dde9df80a17",
+        "size": 149312
+      }
+    },
+    "closed_consumer_relocation_count": 1,
+    "closed_consumer_relocations": {
+      "lv_draw_get_available_task": [
+        {
+          "object": "lv_draw_ambiq.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        }
+      ]
+    },
+    "closed_residual_symbol_count": 1,
+    "elf_undefined_symbols": [
+      "lv_area_intersect",
+      "lv_global"
+    ],
+    "external_relocations": {
+      "lv_area_intersect": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_global": {
+        "R_ARM_THM_MOVT_ABS": 1,
+        "R_ARM_THM_MOVW_ABS_NC": 1
+      }
+    },
+    "fixed_address_import_count": 0,
+    "fixed_address_imports": {},
+    "hardware_qualified": false,
+    "hostile_input_policy": "a null layer fails closed; valid lists preserve single-unit order, multi-unit full-screen serialization, preferred-unit filtering, and older-task independence",
+    "inputs": {
+      "abi_probe": {
+        "license": "MIT",
+        "path": "tests/fixtures/lvgl_ambiq_lvgl_draw_task_provider_abi.c",
+        "sha256": "20a760dded804a86fdc20eba27599507cf8f901ada90a526c2f36a3f9a25b4e7",
+        "size": 370
+      },
+      "hostile_host_fixture": {
+        "license": "MIT",
+        "path": "tests/fixtures/lvgl_ambiq_lvgl_draw_task_provider_host.c",
+        "sha256": "bad427693410f52f2e776b35f6b3cbe2cb8cb2fbcdcc17c7599ecbfc3c73d82e",
+        "size": 3306
+      },
+      "provider": {
+        "license": "MIT",
+        "path": "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_draw_task_provider.c",
+        "sha256": "d61660f93f6d2325d2c04dd0d64b7aaa29e127ca269ceeb766c4a17838a1fee7",
+        "size": 4558
+      },
+      "provider_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_draw_task_provider.h",
+        "sha256": "57c87ed7aeb9abc698cda8c2f4023d5aa2a2014c604166278f433e7d463c9afb",
+        "size": 454
+      },
+      "upstream_area_private_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/misc/lv_area_private.h",
+        "sha256": "567579a0ed9b9ace5228d6517b493a3fe7d189ecc2c1c16b2294063e8caec2eb",
+        "size": 3431
+      },
+      "upstream_display_private_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/display/lv_display_private.h",
+        "sha256": "61850d779baccd95555162f598dc41a9fd5e0b23b560073f0fa38c577f588248",
+        "size": 5513
+      },
+      "upstream_display_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/display/lv_display.c",
+        "sha256": "5df4029060729fe53d197fd024efe8cb5fbf66fa1792894a1fa24633ffb7acbb",
+        "size": 36279
+      },
+      "upstream_draw_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw.h",
+        "sha256": "96eed74c7547d92627ac4f794396e6acc642d452b94689deb0e481d8ae010359",
+        "size": 10355
+      },
+      "upstream_draw_private_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw_private.h",
+        "sha256": "adcbf9990329ae2d1649f3682872852c5bafde9d189cc54d65ba4dd47fb98c99",
+        "size": 6368
+      },
+      "upstream_draw_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw.c",
+        "sha256": "3a8779642bbdba4b303864e55fbf2292a7ee31de21f826c8bcd4d4dd153dd817",
+        "size": 20652
+      },
+      "upstream_global_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/core/lv_global.h",
+        "sha256": "cfbf0696f3f62a4ed3cfe2f16a94fda107e321ca3ec33491f64d4d54dda80921",
+        "size": 6197
+      },
+      "upstream_refresh_private_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/core/lv_refr_private.h",
+        "sha256": "6da132c946d734dcb75e8888cddf9d0440ce38e5cb1262a896c6925675a03975",
+        "size": 1350
+      },
+      "upstream_refresh_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/core/lv_refr.c",
+        "sha256": "b79ff0ad60347ddda8cd8f85175504a812ec4ff35bf8ce1f4901baefc5cf180b",
+        "size": 48329
+      }
+    },
+    "production_overlay_registered": false,
+    "qualification": "exact-ABI draw-task selection with reviewed global/area aggregate closure; live display/global initialization, list lifetime, serialization, collision, RAM placement, and concurrency remain unqualified",
+    "required_exports": [
+      "lv_draw_get_available_task"
+    ],
+    "reviewed_runtime_dependencies": {
+      "lv_area_intersect": "local_lvgl_core_provider",
+      "lv_global": "local_lvgl_global_storage_provider"
+    },
+    "source_admitted": true,
+    "target_source_artifact": {
+      "path": "lvgl_ambiq_lvgl_draw_task_provider.o",
+      "sha256": "146ae1cf94aa234607c3b5d6d6e8bb383b6d7906e8014ce648d5ddd937c03456",
+      "size": 1276
+    },
     "warning_count": 0
   },
   "local_lvgl_draw_unit_provider": {
@@ -4515,6 +5121,1033 @@
     },
     "warning_count": 0
   },
+  "local_lvgl_label_provider": {
+    "abi_probe_artifacts": {
+      "label": {
+        "path": "label_abi-source.o",
+        "sha256": "f185d79c99c0db50f62c0817a6f2358bbc28291438bd564328ed1345f1553e79",
+        "size": 1016
+      },
+      "support": {
+        "path": "support_abi-source.o",
+        "sha256": "f656d90f80dee80ba4852c07ff271e4ac734d7af43fc06cac6125a92170216b9",
+        "size": 1220
+      }
+    },
+    "aggregate_elf_undefined_symbols": [],
+    "aggregate_link_artifact": {
+      "path": "lvgl-ambiq-lvgl-label-aggregate.o",
+      "sha256": "81dad58e17c0beb4e5721229f73e8d935c29a1791c26c1635c2279c7b26daad5",
+      "size": 49412
+    },
+    "authenticated_upstream": {
+      "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+      "commit_record": {
+        "path": "third_party/lvgl/upstream/344c7c318047b7348e1be8572a9fd4260c251cfa.commit.json",
+        "sha256": "acb765f0389ebfe50ff7ff1f834a31d8088e118dd176dac0362c3d97feea797a",
+        "size": 1634
+      },
+      "license": "MIT",
+      "qualification": "the exact label iterator, draw-letter helper, text layout, font lookup/release, draw-buffer allocation, and fill-descriptor paths are retained",
+      "repository": "https://github.com/lvgl/lvgl.git",
+      "source_git_blobs": {
+        "src/draw/lv_draw_buf.c": "58562a86e55ca5897c3b79b3a486d3f7107aeea0",
+        "src/draw/lv_draw_label.c": "02c4e7c3934f45086162aff1d318c7f0befc26ef",
+        "src/draw/lv_draw_label.h": "f2cc6daadbb67c1038c43d80c01c62d2e949de15",
+        "src/draw/lv_draw_label_private.h": "f4ee4ea03b963bd91638a1e0667195925117f8f1",
+        "src/draw/lv_draw_rect.c": "3ee299ac56ce1a6c49959ab15608fb056a95e30d",
+        "src/font/lv_font.c": "a509621cc02be9022f8e947e491e814daab5a29d",
+        "src/misc/lv_text.c": "de182033b1f14e800bdb05d4198e5c748a542346"
+      },
+      "tree": "2c76db856ec570f3ee12565181e5cf52bdd33d78",
+      "tree_record": {
+        "path": "third_party/lvgl/upstream/trees.json",
+        "sha256": "9aa5b7adccc1e74492a02858859ae9abf4f8b05468adeb45ae3e9dde9df80a17",
+        "size": 149312
+      }
+    },
+    "closed_consumer_relocation_count": 1,
+    "closed_consumer_relocations": {
+      "lv_draw_label_iterate_characters": [
+        {
+          "object": "lv_draw_ambiq_letter.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_JUMP24": 1
+          }
+        }
+      ]
+    },
+    "closed_residual_symbol_count": 1,
+    "cluster_artifact": {
+      "path": "lvgl-ambiq-lvgl-label-cluster.o",
+      "sha256": "2502cfe99b1c16732031b7e409d9ec416fd70d392fd071fd4fb80e5455862e1f",
+      "size": 18472
+    },
+    "cluster_elf_undefined_symbols": [
+      "lv_area_get_width",
+      "lv_area_intersect",
+      "lv_area_move",
+      "lv_draw_buf_destroy",
+      "lv_draw_buf_reshape",
+      "lv_font_get_glyph_bitmap",
+      "lv_free",
+      "lv_global",
+      "lv_log_add",
+      "lv_malloc_zeroed",
+      "lv_memcpy",
+      "lv_memset"
+    ],
+    "cluster_exports": [
+      "lv_area_is_out",
+      "lv_color_black",
+      "lv_color_make",
+      "lv_draw_buf_create_ex",
+      "lv_draw_fill_dsc_init",
+      "lv_draw_label_iterate_characters",
+      "lv_draw_unit_draw_letter",
+      "lv_font_get_glyph_dsc",
+      "lv_font_get_glyph_width",
+      "lv_font_get_line_height",
+      "lv_font_glyph_release_draw_data",
+      "lv_point_set",
+      "lv_text_encoded_get_char_id",
+      "lv_text_encoded_letter_next_2",
+      "lv_text_get_next_line",
+      "lv_text_get_size",
+      "lv_text_get_width_with_flags"
+    ],
+    "cluster_external_relocations": {
+      "lv_area_get_width": {
+        "R_ARM_THM_CALL": 5
+      },
+      "lv_area_intersect": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_area_move": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_draw_buf_destroy": {
+        "R_ARM_THM_CALL": 2
+      },
+      "lv_draw_buf_reshape": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_font_get_glyph_bitmap": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_free": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_global": {
+        "R_ARM_THM_MOVT_ABS": 3,
+        "R_ARM_THM_MOVW_ABS_NC": 3
+      },
+      "lv_log_add": {
+        "R_ARM_THM_CALL": 8,
+        "R_ARM_THM_JUMP24": 1
+      },
+      "lv_malloc_zeroed": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_memcpy": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_memset": {
+        "R_ARM_THM_CALL": 3
+      }
+    },
+    "hardware_qualified": false,
+    "inputs": {
+      "draw_buf_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw_buf.c",
+        "sha256": "94ba137be50d8516e17314da33992fb53995ea071d9043fa7174d4e52d629f4e",
+        "size": 22801
+      },
+      "draw_rect_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw_rect.c",
+        "sha256": "ded33dcbb4aa3f986b6200b79dd5f4b374878fb5ec8f4aa21ea5607a408ca05d",
+        "size": 11615
+      },
+      "font_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/font/lv_font.c",
+        "sha256": "dfb414a729c7b22c4d77c1d5adda98a47152cab6a5ad6e7c47b7a563ac80d2b3",
+        "size": 3622
+      },
+      "hostile_host_fixture": {
+        "license": "MIT",
+        "path": "tests/fixtures/lvgl_ambiq_lvgl_label_support_provider_host.c",
+        "sha256": "f3f630a60b8b8856831783ede88d8eef8cf4bb16e2f16e07dcca71d1f8bfe190",
+        "size": 1284
+      },
+      "label_abi_probe": {
+        "license": "MIT",
+        "path": "tests/fixtures/lvgl_ambiq_lvgl_label_provider_abi.c",
+        "sha256": "0e35eb527b5a98ddacc99bd608451163cdfaf4f82ee443d3e071b25ba8d1c07a",
+        "size": 347
+      },
+      "label_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw_label.h",
+        "sha256": "8e807d090ca1d1caa5ba67704c5979a236edb8eac6ca60c58dc45207a3e9ed2a",
+        "size": 8014
+      },
+      "label_private_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw_label_private.h",
+        "sha256": "ac3ebe18bfa2a411b1e5f935646fc91bfce0bc3cd3bfdb5b1efaed739d33a56b",
+        "size": 2033
+      },
+      "label_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw_label.c",
+        "sha256": "c271033836eec1b20f32a37d1b1aee9af21084a8ef870d5a9a7aa192b5aac8bd",
+        "size": 22792
+      },
+      "support_abi_probe": {
+        "license": "MIT",
+        "path": "tests/fixtures/lvgl_ambiq_lvgl_label_support_provider_abi.c",
+        "sha256": "7c3e68eefb97b1b1f9365e2701a736ce2018117ede6c77dcf4eb0b567b4a7372",
+        "size": 513
+      },
+      "support_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_label_support_provider.h",
+        "sha256": "6d706e7e5d86af15046e541cb6ab5e51eb0285eae361e8117d404890c339cedb",
+        "size": 233
+      },
+      "support_provider": {
+        "license": "MIT",
+        "path": "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_label_support_provider.c",
+        "sha256": "c461667421c8e3363170252b83dbe2ee60f837546b88fddaf5263b559e09132f",
+        "size": 4892
+      },
+      "text_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/misc/lv_text.c",
+        "sha256": "353a509bf3b371fc60b35e003656990cbba92c0f2e8a5f853b8f0dc2e7fcce77",
+        "size": 30332
+      }
+    },
+    "production_overlay_registered": false,
+    "provider_artifacts": {
+      "draw_buf": {
+        "elf_undefined_symbols": [
+          "lv_free",
+          "lv_global",
+          "lv_log_add",
+          "lv_malloc_zeroed"
+        ],
+        "exports": [
+          "lv_draw_buf_create_ex"
+        ],
+        "external_relocations": {
+          "lv_free": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_global": {
+            "R_ARM_THM_MOVT_ABS": 2,
+            "R_ARM_THM_MOVW_ABS_NC": 2
+          },
+          "lv_log_add": {
+            "R_ARM_THM_CALL": 2
+          },
+          "lv_malloc_zeroed": {
+            "R_ARM_THM_CALL": 1
+          }
+        },
+        "path": "lvgl-ambiq-lvgl-label-draw_buf.o",
+        "sha256": "b80546ec7eaebd862c90fa429f6d62c57c1325e97812a4a6024e1a1caae1c88d",
+        "size": 2340
+      },
+      "draw_rect": {
+        "elf_undefined_symbols": [
+          "lv_memset"
+        ],
+        "exports": [
+          "lv_draw_fill_dsc_init"
+        ],
+        "external_relocations": {
+          "lv_memset": {
+            "R_ARM_THM_CALL": 1
+          }
+        },
+        "path": "lvgl-ambiq-lvgl-label-draw_rect.o",
+        "sha256": "a21fe24434375fd1a31dfc333b2cd523e51be510bc430306440fa12625da4f6a",
+        "size": 1140
+      },
+      "font": {
+        "elf_undefined_symbols": [
+          "lv_log_add",
+          "lv_memset"
+        ],
+        "exports": [
+          "lv_font_get_glyph_dsc",
+          "lv_font_get_glyph_width",
+          "lv_font_get_line_height",
+          "lv_font_glyph_release_draw_data"
+        ],
+        "external_relocations": {
+          "lv_log_add": {
+            "R_ARM_THM_CALL": 4
+          },
+          "lv_memset": {
+            "R_ARM_THM_CALL": 1
+          }
+        },
+        "path": "lvgl-ambiq-lvgl-label-font.o",
+        "sha256": "d8ae8635c326b2659b7721aecf9243b7912d857848db45c3883d64d81f87ea9f",
+        "size": 3916
+      },
+      "label": {
+        "elf_undefined_symbols": [
+          "lv_area_get_width",
+          "lv_area_intersect",
+          "lv_area_is_out",
+          "lv_area_move",
+          "lv_color_black",
+          "lv_color_make",
+          "lv_draw_buf_create_ex",
+          "lv_draw_buf_destroy",
+          "lv_draw_buf_reshape",
+          "lv_draw_fill_dsc_init",
+          "lv_font_get_glyph_bitmap",
+          "lv_font_get_glyph_dsc",
+          "lv_font_get_glyph_width",
+          "lv_font_get_line_height",
+          "lv_font_glyph_release_draw_data",
+          "lv_global",
+          "lv_log_add",
+          "lv_memcpy",
+          "lv_memset",
+          "lv_point_set",
+          "lv_text_encoded_get_char_id",
+          "lv_text_encoded_letter_next_2",
+          "lv_text_get_next_line",
+          "lv_text_get_size",
+          "lv_text_get_width_with_flags"
+        ],
+        "exports": [
+          "lv_draw_label_iterate_characters",
+          "lv_draw_unit_draw_letter"
+        ],
+        "external_relocations": {
+          "lv_area_get_width": {
+            "R_ARM_THM_CALL": 5
+          },
+          "lv_area_intersect": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_area_is_out": {
+            "R_ARM_THM_CALL": 2
+          },
+          "lv_area_move": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_color_black": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_color_make": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_draw_buf_create_ex": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_draw_buf_destroy": {
+            "R_ARM_THM_CALL": 2
+          },
+          "lv_draw_buf_reshape": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_draw_fill_dsc_init": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_font_get_glyph_bitmap": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_font_get_glyph_dsc": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_font_get_glyph_width": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_font_get_line_height": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_font_glyph_release_draw_data": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_global": {
+            "R_ARM_THM_MOVT_ABS": 1,
+            "R_ARM_THM_MOVW_ABS_NC": 1
+          },
+          "lv_log_add": {
+            "R_ARM_THM_CALL": 2
+          },
+          "lv_memcpy": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_memset": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_point_set": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_text_encoded_get_char_id": {
+            "R_ARM_THM_MOVT_ABS": 1,
+            "R_ARM_THM_MOVW_ABS_NC": 1
+          },
+          "lv_text_encoded_letter_next_2": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_text_get_next_line": {
+            "R_ARM_THM_CALL": 3
+          },
+          "lv_text_get_size": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_text_get_width_with_flags": {
+            "R_ARM_THM_CALL": 4
+          }
+        },
+        "path": "lvgl-ambiq-lvgl-label-label.o",
+        "sha256": "6c89a00e30e3a81f5a22ed0f142f7892866de140817c41914af52b79212446ca",
+        "size": 5756
+      },
+      "support": {
+        "elf_undefined_symbols": [],
+        "exports": [
+          "lv_area_is_out",
+          "lv_color_black",
+          "lv_color_make",
+          "lv_point_set"
+        ],
+        "external_relocations": {},
+        "path": "lvgl-ambiq-lvgl-label-support.o",
+        "sha256": "bfd9c12968567ad89acdaa358086d3229fb153f02973ea9732e3ae69dcbb8697",
+        "size": 3672
+      },
+      "text": {
+        "elf_undefined_symbols": [
+          "lv_font_get_glyph_width",
+          "lv_font_get_line_height",
+          "lv_log_add"
+        ],
+        "exports": [
+          "lv_text_encoded_get_char_id",
+          "lv_text_encoded_letter_next_2",
+          "lv_text_get_next_line",
+          "lv_text_get_size",
+          "lv_text_get_width_with_flags"
+        ],
+        "external_relocations": {
+          "lv_font_get_glyph_width": {
+            "R_ARM_THM_CALL": 3
+          },
+          "lv_font_get_line_height": {
+            "R_ARM_THM_CALL": 1
+          },
+          "lv_log_add": {
+            "R_ARM_THM_JUMP24": 1
+          }
+        },
+        "path": "lvgl-ambiq-lvgl-label-text.o",
+        "sha256": "6449887516a60e55748bdc5975958f89b3f34d2040ae08f9cd0a7b0e3ce19ba5",
+        "size": 5996
+      }
+    },
+    "qualification": "exact LVGL label iteration with source-closed text, font, draw-buffer, fill, area, color, allocation, logging, and global dependencies; live font/cache/allocator registration, collision, RAM, and concurrency remain runtime-unqualified",
+    "required_exports": [
+      "lv_draw_label_iterate_characters"
+    ],
+    "source_admitted": true,
+    "target_source_artifacts": {
+      "draw_buf": {
+        "path": "draw_buf-source.o",
+        "sha256": "cd88b0c0058b9834c7d7809d354abb3286dde6d91868842e0e7c4965c123cee4",
+        "size": 21868
+      },
+      "draw_rect": {
+        "path": "draw_rect-source.o",
+        "sha256": "3b5aedb859c7edd78920343bda70fdc7a4c8dfb0e3a5f39ae31929c30a288e5c",
+        "size": 6248
+      },
+      "font": {
+        "path": "font-source.o",
+        "sha256": "aa453114276c3f51058caed239791daa3bb48a16f876d36660ecfe7db58dc971",
+        "size": 4828
+      },
+      "label": {
+        "path": "label-source.o",
+        "sha256": "8e66661c31e8b3fd8b370b3b595b3f8114e98f15ebff3f984fe808ecb1fadbb1",
+        "size": 9132
+      },
+      "support": {
+        "path": "support-source.o",
+        "sha256": "0a31214791cc2b39689a0b2dfc2ee452e50d2754ce80b51ef17fc897e6846d0b",
+        "size": 3092
+      },
+      "text": {
+        "path": "text-source.o",
+        "sha256": "701cab34c6b9cea204dfd198ab582c310ce2c16d3bb490be9ac0e848cb1681cc",
+        "size": 10992
+      }
+    },
+    "warning_count": 0
+  },
+  "local_lvgl_layer_alloc_provider": {
+    "abi_probe_artifact": {
+      "path": "lvgl_ambiq_lvgl_layer_alloc_provider_abi.o",
+      "sha256": "fda4c2622abe8479c932c4254000757ce5e0dce9234fbc6ece72ea71fc3fb03a",
+      "size": 1024
+    },
+    "aggregate_elf_undefined_symbols": [],
+    "aggregate_link_artifact": {
+      "path": "lvgl-ambiq-lvgl-layer-alloc-aggregate.o",
+      "sha256": "29ed9dc41094587281f79597c610fc30271d6fe38340c4b577d84638a4b81007",
+      "size": 34452
+    },
+    "all_external_exports": [
+      "lv_draw_layer_alloc_buf"
+    ],
+    "artifact": {
+      "path": "lvgl-ambiq-lvgl-layer-alloc-provider.o",
+      "sha256": "cc24714099180a2d1d52825f24689441a34d6fa1892d705f350f621a26c2970d",
+      "size": 2836
+    },
+    "authenticated_upstream": {
+      "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+      "commit_record": {
+        "path": "third_party/lvgl/upstream/344c7c318047b7348e1be8572a9fd4260c251cfa.commit.json",
+        "sha256": "acb765f0389ebfe50ff7ff1f834a31d8088e118dd176dac0362c3d97feea797a",
+        "size": 1634
+      },
+      "license": "MIT",
+      "qualification": "valid layers preserve authenticated lazy allocation, stride accounting, alpha clear, cache flush, and allocation-failure warning behavior",
+      "repository": "https://github.com/lvgl/lvgl.git",
+      "source_git_blobs": {
+        "src/core/lv_global.h": "4515c01c9b80779a7d61701e28b4fb3554a92ba9",
+        "src/draw/lv_draw.c": "b24dda671bf57cecc80e0f30ab8df00b29d2fdf4",
+        "src/draw/lv_draw.h": "b35cb52f8298d591d56ce50a03fb21c64f7e7f50",
+        "src/draw/lv_draw_buf.c": "58562a86e55ca5897c3b79b3a486d3f7107aeea0",
+        "src/draw/lv_draw_buf.h": "c36e0a612f7fb46f69f5a7a4ae97000dd76a3837",
+        "src/draw/lv_draw_buf_private.h": "a22640315e37433b77605d4ac8f36e689d3b5e9c",
+        "src/draw/lv_draw_private.h": "057d4dd08a7d61417ecea732e4ff3401419d3af9",
+        "src/misc/lv_color.c": "1096e3b9b6923077d195c1478d5121d46d75c7c0",
+        "src/misc/lv_color.h": "1a160b4a56b8a7bc01b59a20b72ae35f5fff518c",
+        "src/misc/lv_log.h": "7774ba6fc9c80ad3dcd115ecaa0ad4ecd0483425",
+        "src/stdlib/lv_string.h": "12466c6cbc4ac564db33b0a5b3af171883acae01"
+      },
+      "tree": "2c76db856ec570f3ee12565181e5cf52bdd33d78",
+      "tree_record": {
+        "path": "third_party/lvgl/upstream/trees.json",
+        "sha256": "9aa5b7adccc1e74492a02858859ae9abf4f8b05468adeb45ae3e9dde9df80a17",
+        "size": 149312
+      }
+    },
+    "closed_consumer_relocation_count": 1,
+    "closed_consumer_relocations": {
+      "lv_draw_layer_alloc_buf": [
+        {
+          "object": "lv_draw_ambiq.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        }
+      ]
+    },
+    "closed_residual_symbol_count": 1,
+    "elf_undefined_symbols": [
+      "lv_area_get_height",
+      "lv_area_get_width",
+      "lv_draw_buf_create",
+      "lv_draw_buf_destroy",
+      "lv_draw_buf_flush_cache",
+      "lv_global",
+      "lv_log_add",
+      "lv_memset"
+    ],
+    "external_relocations": {
+      "lv_area_get_height": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_area_get_width": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_draw_buf_create": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_draw_buf_destroy": {
+        "R_ARM_THM_CALL": 2
+      },
+      "lv_draw_buf_flush_cache": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_global": {
+        "R_ARM_THM_MOVT_ABS": 1,
+        "R_ARM_THM_MOVW_ABS_NC": 1
+      },
+      "lv_log_add": {
+        "R_ARM_THM_CALL": 1
+      },
+      "lv_memset": {
+        "R_ARM_THM_CALL": 1
+      }
+    },
+    "fixed_address_import_count": 0,
+    "fixed_address_imports": {},
+    "hardware_qualified": false,
+    "hostile_input_policy": "null/empty layers, missing stride handlers, zero or overflowing extents, malformed draw buffers, and memory-account overflow fail before unsafe access or leave no allocation",
+    "inputs": {
+      "abi_probe": {
+        "license": "MIT",
+        "path": "tests/fixtures/lvgl_ambiq_lvgl_layer_alloc_provider_abi.c",
+        "sha256": "4c04c0b9aaa1469c7de0a1dc0e5d76dcd70e1f639037f28005bb38855b122aaf",
+        "size": 192
+      },
+      "hostile_host_fixture": {
+        "license": "MIT",
+        "path": "tests/fixtures/lvgl_ambiq_lvgl_layer_alloc_provider_host.c",
+        "sha256": "5704b139d50e77dc383939d27b2fde72416094c1d6e9e726ef8395f73b4a6f0d",
+        "size": 4226
+      },
+      "provider": {
+        "license": "MIT",
+        "path": "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_layer_alloc_provider.c",
+        "sha256": "685856a96c964d54adbd0cf8998495e9d70e858728167c5ad88f8a89d89e6bc3",
+        "size": 4248
+      },
+      "provider_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_layer_alloc_provider.h",
+        "sha256": "abb877f33c04b598faf3dc61774243ede14c9e391d645d6170e59e6001e15574",
+        "size": 306
+      },
+      "upstream_color_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/misc/lv_color.h",
+        "sha256": "7138d069102507fbe9e81bb2e06498482eb071733378bc4e0f52dbc483ec7020",
+        "size": 14903
+      },
+      "upstream_draw_buf_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw_buf.h",
+        "sha256": "45fa9990279ef5aecd1808e78d06681bdae598e8def00932d03360de294cf9b6",
+        "size": 14311
+      },
+      "upstream_draw_buf_private_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw_buf_private.h",
+        "sha256": "afb2268e7bb91163b422b8095eab814f308fef438c6f2a817e0a5fc8f74b703b",
+        "size": 1016
+      },
+      "upstream_draw_buf_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw_buf.c",
+        "sha256": "94ba137be50d8516e17314da33992fb53995ea071d9043fa7174d4e52d629f4e",
+        "size": 22801
+      },
+      "upstream_draw_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw.h",
+        "sha256": "96eed74c7547d92627ac4f794396e6acc642d452b94689deb0e481d8ae010359",
+        "size": 10355
+      },
+      "upstream_draw_private_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw_private.h",
+        "sha256": "adcbf9990329ae2d1649f3682872852c5bafde9d189cc54d65ba4dd47fb98c99",
+        "size": 6368
+      },
+      "upstream_draw_source": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/draw/lv_draw.c",
+        "sha256": "3a8779642bbdba4b303864e55fbf2292a7ee31de21f826c8bcd4d4dd153dd817",
+        "size": 20652
+      },
+      "upstream_global_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/core/lv_global.h",
+        "sha256": "cfbf0696f3f62a4ed3cfe2f16a94fda107e321ca3ec33491f64d4d54dda80921",
+        "size": 6197
+      },
+      "upstream_log_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/misc/lv_log.h",
+        "sha256": "4b8d99d061bebe0e164af33e99ca3445e17183bb8a933936843dfd9e6fe4c20e",
+        "size": 4623
+      },
+      "upstream_string_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/stdlib/lv_string.h",
+        "sha256": "668a5be6caffb6cf21964a47d9dffd18b3d937c30080d8af5099e2da102b714c",
+        "size": 7741
+      }
+    },
+    "production_overlay_registered": false,
+    "qualification": "exact-ABI lazy layer allocation with reviewed core/buffer/global/logging closure; live handler initialization, cache behavior, heap/global ownership, collision, RAM placement, and concurrency remain unqualified",
+    "required_exports": [
+      "lv_draw_layer_alloc_buf"
+    ],
+    "reviewed_runtime_dependencies": {
+      "lv_area_get_height": "local_lvgl_core_provider",
+      "lv_area_get_width": "local_lvgl_core_provider",
+      "lv_draw_buf_create": "local_lvgl_draw_buf_shape_provider",
+      "lv_draw_buf_destroy": "local_lvgl_draw_buf_lifecycle_provider",
+      "lv_draw_buf_flush_cache": "local_lvgl_stateless_provider",
+      "lv_global": "local_lvgl_global_storage_provider",
+      "lv_log_add": "local_lvgl_log_provider",
+      "lv_memset": "local_lvgl_stateless_provider"
+    },
+    "source_admitted": true,
+    "target_source_artifact": {
+      "path": "lvgl_ambiq_lvgl_layer_alloc_provider.o",
+      "sha256": "df5ffc50377217d3092404482844e1614b34205b4f4e1bfe0484930befb59a78",
+      "size": 2504
+    },
+    "transitive_source_closed": true,
+    "warning_count": 0
+  },
+  "local_lvgl_log_provider": {
+    "abi_probe_artifact": {
+      "path": "lvgl_ambiq_lvgl_log_provider_abi.o",
+      "sha256": "73e8ed9ec8f908112b7ea5cdc102d239f40ab7b7bf7965a899a970119db3147a",
+      "size": 1112
+    },
+    "aggregate_elf_undefined_symbols": [],
+    "aggregate_link_artifact": {
+      "path": "lvgl-ambiq-lvgl-log-aggregate.o",
+      "sha256": "c19effb664c3984375b0de96ea6b5ea23b1f21c16d25849d4a7c6d0af5035ca0",
+      "size": 15228
+    },
+    "all_external_exports": [
+      "lv_log_add"
+    ],
+    "artifact": {
+      "path": "lvgl-ambiq-lvgl-log-provider.o",
+      "sha256": "a1ca277a5c1d44d73dc0b135ad91520383e76cef91ffa251f5ddc4234c1f6a4d",
+      "size": 2016
+    },
+    "authenticated_upstream": {
+      "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+      "commit_record": {
+        "path": "third_party/lvgl/upstream/344c7c318047b7348e1be8572a9fd4260c251cfa.commit.json",
+        "sha256": "acb765f0389ebfe50ff7ff1f834a31d8088e118dd176dac0362c3d97feea797a",
+        "size": 1634
+      },
+      "formatter_commit": "d3b984684bb8a8bdc48cc7a1abecb93ce59bbe3e",
+      "formatter_upstream": "https://github.com/mpaland/printf.git",
+      "license": "MIT",
+      "qualification": "callback-mode WARN logging preserves authenticated level filtering, basename, timestamp/delta, message formatting, callback, and last-timestamp behavior",
+      "repository": "https://github.com/lvgl/lvgl.git",
+      "source_git_blobs": {
+        "src/core/lv_global.h": "4515c01c9b80779a7d61701e28b4fb3554a92ba9",
+        "src/misc/lv_log.c": "4dd197587d930cd08fc9648bc45b000c8d2b192e",
+        "src/misc/lv_log.h": "7774ba6fc9c80ad3dcd115ecaa0ad4ecd0483425"
+      },
+      "tree": "2c76db856ec570f3ee12565181e5cf52bdd33d78",
+      "tree_record": {
+        "path": "third_party/lvgl/upstream/trees.json",
+        "sha256": "9aa5b7adccc1e74492a02858859ae9abf4f8b05468adeb45ae3e9dde9df80a17",
+        "size": 149312
+      }
+    },
+    "closed_consumer_relocation_count": 67,
+    "closed_consumer_relocations": {
+      "lv_log_add": [
+        {
+          "object": "lv_draw_ambiq.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_arc.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_box_shadow.o",
+          "relocation_count": 2,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 2
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_buffer.o",
+          "relocation_count": 9,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 9
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_fill.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_img.o",
+          "relocation_count": 7,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 7
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_letter.o",
+          "relocation_count": 5,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 4,
+            "R_ARM_THM_JUMP24": 1
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_mask_rect.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_private.o",
+          "relocation_count": 15,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 15
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_triangle.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_vector.o",
+          "relocation_count": 10,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 10
+          }
+        },
+        {
+          "object": "lv_draw_ambiq_vector_font.o",
+          "relocation_count": 14,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 14
+          }
+        }
+      ]
+    },
+    "closed_residual_symbol_count": 1,
+    "closed_transitive_relocation_count": 1,
+    "closed_transitive_relocations": {
+      "local_lvgl_layer_alloc_provider": 1
+    },
+    "elf_undefined_symbols": [
+      "lv_global",
+      "open_cfw_lv_tick_get",
+      "open_cfw_runtime_snprintf",
+      "open_cfw_runtime_vsnprintf_wrapper",
+      "open_cfw_strlen"
+    ],
+    "external_relocations": {
+      "lv_global": {
+        "R_ARM_THM_MOVT_ABS": 1,
+        "R_ARM_THM_MOVW_ABS_NC": 1
+      },
+      "open_cfw_lv_tick_get": {
+        "R_ARM_THM_CALL": 1
+      },
+      "open_cfw_runtime_snprintf": {
+        "R_ARM_THM_CALL": 1
+      },
+      "open_cfw_runtime_vsnprintf_wrapper": {
+        "R_ARM_THM_CALL": 1
+      },
+      "open_cfw_strlen": {
+        "R_ARM_THM_CALL": 1
+      }
+    },
+    "fixed_runtime_addresses": {
+      "0x2006F600": "source-owned LVGL tick state inside authenticated lv_global storage"
+    },
+    "hardware_qualified": false,
+    "hostile_input_policy": "invalid levels and null file/function/format inputs return before formatting; valid callback-mode messages remain bounded to the authenticated 256/512-byte buffers",
+    "inputs": {
+      "abi_probe": {
+        "license": "MIT",
+        "path": "tests/fixtures/lvgl_ambiq_lvgl_log_provider_abi.c",
+        "sha256": "3e88b0632167baad2399bf37221137a49371f9624fd8b05b9876a1449cb03651",
+        "size": 296
+      },
+      "aeabi_divmod": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/aeabi_divmod.c",
+        "sha256": "2222252bb0d1ffdab597d023a0737a77d044b4e1b6addb8fbb545d8386855f7e",
+        "size": 4804
+      },
+      "hostile_host_fixture": {
+        "license": "MIT",
+        "path": "tests/fixtures/lvgl_ambiq_lvgl_log_provider_host.c",
+        "sha256": "198c0f2d9402c27e36b2b39ffd743328cd5e74013377f090200f3f4342a3075f",
+        "size": 3165
+      },
+      "lv_tick": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/lv_tick.c",
+        "sha256": "6e16a7b032e855a121b9a4d15c127dc1f11ad4812f69d206462faec918edc198",
+        "size": 1409
+      },
+      "provider": {
+        "license": "MIT",
+        "path": "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_log_provider.c",
+        "sha256": "dceb9051c4ec695576a3c36d21bb06bbfd11246d33ca33ff022f929c9d1844b5",
+        "size": 3314
+      },
+      "provider_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_log_provider.h",
+        "sha256": "ccee6753da26506f6f2d620536872e5efbe0d9a02dc82a84adc1eb5b3c668303",
+        "size": 362
+      },
+      "runtime_bounded_string_length": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/runtime_bounded_string_length.c",
+        "sha256": "7b2ff837a73e2b8c41c41bfe50b8fe6e4a964b51064ff76d0941a1322f2750ba",
+        "size": 1420
+      },
+      "runtime_etoa": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/runtime_etoa.c",
+        "sha256": "61c53bb9c4d583e12718adb35a4ab1815841e9884df1bafe596f0b21763898c2",
+        "size": 7516
+      },
+      "runtime_format_out_reverse": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/runtime_format_out_reverse.c",
+        "sha256": "cd2be8e16f02e922a0ad410fc64eae98f9106b761bd85c33d69e3cafd5ebc26e",
+        "size": 3391
+      },
+      "runtime_format_parse_helpers": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/runtime_format_parse_helpers.c",
+        "sha256": "16fac942794cf535477d3ba37af5e77c0fcdd757aaa68df7e8272fb6b39203d4",
+        "size": 2168
+      },
+      "runtime_ftoa": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/runtime_ftoa.c",
+        "sha256": "2c229a484d5589ed006f9aec9862364d6a86381f4f3278a0352e457885f30983",
+        "size": 13469
+      },
+      "runtime_ntoa_format": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/runtime_ntoa_format.c",
+        "sha256": "4ce36ff24dba43783c1cd75d5a029ecf352a8cad15c2019ef3c932a9b277d990",
+        "size": 5207
+      },
+      "runtime_ntoa_integer": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/runtime_ntoa_integer.c",
+        "sha256": "4f7044a8e87240a7ee5925cde7461a32067c7bf331a9384c58a4ef68d16f3232",
+        "size": 5981
+      },
+      "runtime_printf_wrappers": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/runtime_printf_wrappers.c",
+        "sha256": "c28318100a6eb00d476df9253cbf2d28c202c78f27d1529f2fcd826a355f7971",
+        "size": 2250
+      },
+      "runtime_string": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/runtime_string.c",
+        "sha256": "90577edc949f33f09baf719cc0dc5b23bccfad86616794efc302a64683166a48",
+        "size": 433
+      },
+      "runtime_strnlen_s": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/runtime_strnlen_s.c",
+        "sha256": "b8de450f42d1a8beda4319001f0aea554096316588b2872ba06946c124a98cc8",
+        "size": 1021
+      },
+      "runtime_vsnprintf": {
+        "license": "MIT",
+        "path": "components/apollo_main/core_overlay/runtime_vsnprintf.c",
+        "sha256": "3229a2c14011a3025962d2b2477f73c92bf93acbaee7d304e78e7b883f6c31de",
+        "size": 37463
+      },
+      "upstream_global_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/core/lv_global.h",
+        "sha256": "cfbf0696f3f62a4ed3cfe2f16a94fda107e321ca3ec33491f64d4d54dda80921",
+        "size": 6197
+      },
+      "upstream_log_header": {
+        "license": "MIT",
+        "path": "third_party/lvgl/src/misc/lv_log.h",
+        "sha256": "4b8d99d061bebe0e164af33e99ca3445e17183bb8a933936843dfd9e6fe4c20e",
+        "size": 4623
+      }
+    },
+    "production_overlay_registered": false,
+    "production_runtime_artifact": {
+      "path": "lvgl-ambiq-lvgl-log-runtime.o",
+      "sha256": "99a67191cf82ecc37b0d6810613a268bf377280bfc4ea41a50fcf33c545e5dd6",
+      "size": 13964
+    },
+    "qualification": "exact callback-mode WARN logging over the existing source-owned formatter/string/tick cluster; live callback ownership, tick concurrency, collision, placement, and output transport remain unqualified",
+    "required_exports": [
+      "lv_log_add"
+    ],
+    "reviewed_runtime_dependencies": {
+      "lv_global": "local_lvgl_global_storage_provider",
+      "open_cfw_lv_tick_get": "source-owned core-overlay tick provider",
+      "open_cfw_runtime_snprintf": "source-owned core-overlay formatter provider",
+      "open_cfw_runtime_vsnprintf_wrapper": "source-owned core-overlay formatter provider",
+      "open_cfw_strlen": "source-owned core-overlay string provider"
+    },
+    "runtime_all_exports": [
+      "open_cfw_aeabi_uldivmod_core",
+      "open_cfw_lv_tick_get",
+      "open_cfw_runtime_ascii_is_digit",
+      "open_cfw_runtime_bounded_byte_store",
+      "open_cfw_runtime_bounded_string_length",
+      "open_cfw_runtime_etoa",
+      "open_cfw_runtime_format_out_reverse",
+      "open_cfw_runtime_ftoa",
+      "open_cfw_runtime_noop_output",
+      "open_cfw_runtime_ntoa_format",
+      "open_cfw_runtime_ntoa_long",
+      "open_cfw_runtime_ntoa_long_long",
+      "open_cfw_runtime_parse_decimal",
+      "open_cfw_runtime_snprintf",
+      "open_cfw_runtime_strnlen_s",
+      "open_cfw_runtime_vsnprintf",
+      "open_cfw_runtime_vsnprintf_wrapper",
+      "open_cfw_strlen"
+    ],
+    "runtime_root_symbols": [
+      "open_cfw_lv_tick_get",
+      "open_cfw_runtime_snprintf",
+      "open_cfw_runtime_vsnprintf_wrapper",
+      "open_cfw_strlen"
+    ],
+    "source_admitted": true,
+    "target_source_artifact": {
+      "path": "lvgl_ambiq_lvgl_log_provider.o",
+      "sha256": "5bc00237d7f54ccfb7eb55d839f95a626ffdaa286e2f60f40d424c4603847fe5",
+      "size": 1816
+    },
+    "warning_count": 0
+  },
   "local_lvgl_mutex_provider": {
     "abi_probe_artifact": {
       "path": "lvgl_ambiq_lvgl_mutex_provider_abi.o",
@@ -4947,22 +6580,27 @@
   "local_lvgl_thread_sync_signal_provider": {
     "abi_probe_artifact": {
       "path": "lvgl_ambiq_lvgl_thread_sync_signal_provider_abi.o",
-      "sha256": "9895a3e05c4f9405ac0aabf7cb0c09d32946d8a7d13340fccb567d81be513787",
-      "size": 1044
+      "sha256": "6c4cdc36d26040954239adb9caa26c86acf82bc2670a8c407a3fa9b3c7a16caa",
+      "size": 1628
     },
     "aggregate_elf_undefined_symbols": [],
     "aggregate_link_artifact": {
       "path": "lvgl-ambiq-lvgl-thread-sync-signal-aggregate.o",
-      "sha256": "4d9ee85c604f6ad3f18a8d547fad3a775f326d2f2cf9c866cc144e1c330bb79b",
-      "size": 1836
+      "sha256": "4f82e5232652fd83555c7321d2743c14eb75e0b1b8de728df2db691fe1fe3e2c",
+      "size": 4288
     },
     "all_external_exports": [
-      "lv_thread_sync_signal"
+      "lv_thread_delete",
+      "lv_thread_init",
+      "lv_thread_sync_delete",
+      "lv_thread_sync_init",
+      "lv_thread_sync_signal",
+      "lv_thread_sync_wait"
     ],
     "artifact": {
       "path": "lvgl-ambiq-lvgl-thread-sync-signal-provider.o",
-      "sha256": "48251997ef18222cd29f8397f049ad5ca3c20b95b789d8917bbb03632db69269",
-      "size": 1140
+      "sha256": "ddbbc2988d6f974c109e0f5d826f24579a2251d7acb569414b05184cb35252da",
+      "size": 3592
     },
     "authenticated_upstream": {
       "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
@@ -4974,7 +6612,7 @@
       "freertos_commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
       "freertos_repository": "https://github.com/FreeRTOS/FreeRTOS-Kernel.git",
       "notify_mode": 1,
-      "qualification": "the recovered non-Kconfig FreeRTOS configuration selects task notifications; the exact 12-byte condition ABI, lazy initialization, pending-signal and waiter-notify paths are bound to already source-owned fixed FreeRTOS entries",
+      "qualification": "the recovered non-Kconfig FreeRTOS configuration selects task notifications; the exact 12-byte condition and thread ABIs, dynamic thread lifecycle, lazy initialization, pending-signal, task-take, and waiter-notify paths are recovered in maintained C over already source-owned scheduler entries",
       "repository": "https://github.com/lvgl/lvgl.git",
       "source_git_blobs": {
         "src/lv_conf_internal.h": "a848f30f7d68e5550af4eaf8b4bd7a54c770b4e7",
@@ -4989,8 +6627,44 @@
         "size": 149312
       }
     },
-    "closed_consumer_relocation_count": 2,
+    "closed_consumer_relocation_count": 7,
     "closed_consumer_relocations": {
+      "lv_thread_delete": [
+        {
+          "object": "lv_draw_ambiq.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        }
+      ],
+      "lv_thread_init": [
+        {
+          "object": "lv_draw_ambiq.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        }
+      ],
+      "lv_thread_sync_delete": [
+        {
+          "object": "lv_draw_ambiq.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        }
+      ],
+      "lv_thread_sync_init": [
+        {
+          "object": "lv_draw_ambiq.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        }
+      ],
       "lv_thread_sync_signal": [
         {
           "object": "lv_draw_ambiq.o",
@@ -4999,51 +6673,71 @@
             "R_ARM_THM_CALL": 2
           }
         }
+      ],
+      "lv_thread_sync_wait": [
+        {
+          "object": "lv_draw_ambiq.o",
+          "relocation_count": 1,
+          "relocation_types": {
+            "R_ARM_THM_CALL": 1
+          }
+        }
       ]
     },
-    "closed_residual_symbol_count": 1,
+    "closed_residual_symbol_count": 6,
     "closed_transitive_relocation_count": 2,
     "closes_transitive_provider_dependency": "local_lvgl_draw_dispatch_provider",
     "elf_undefined_symbols": [],
     "external_relocations": {},
-    "fixed_address_import_count": 3,
+    "fixed_address_import_count": 8,
     "fixed_address_imports": {
+      "0x004420BD": "source-owned vPortYield Thumb entry",
       "0x004420D1": "source-owned vPortEnterCritical Thumb entry",
       "0x004420E9": "source-owned vPortExitCritical Thumb entry",
-      "0x00455C49": "source-owned xTaskGenericNotify Thumb entry"
+      "0x004548BB": "source-owned xTaskCreate Thumb entry",
+      "0x00454AAF": "source-owned vTaskDelete Thumb entry",
+      "0x0045589D": "source-owned xTaskGetCurrentTaskHandle Thumb entry",
+      "0x00455C49": "source-owned xTaskGenericNotify Thumb entry",
+      "0x00455FA9": "source-owned prvAddCurrentTaskToDelayedList Thumb entry"
     },
     "hardware_qualified": false,
-    "hostile_input_policy": "null input fails before fixed calls; lazy-init, pending signal, waiter handoff, double-check race, ignored notify failure, and noncanonical initialized state are covered by the sanitizer host oracle",
+    "hostile_input_policy": "null input fails before fixed calls; init, wait, delete, lazy-init, pending signal, waiter handoff, double-check race, ignored notification results, and noncanonical initialized state are covered by the sanitizer host oracle",
     "inputs": {
       "abi_probe": {
         "license": "MIT",
         "path": "tests/fixtures/lvgl_ambiq_lvgl_thread_sync_signal_provider_abi.c",
-        "sha256": "fe5d9fe0ad39ccd02ff576ae9378fa518e04a54da0cd2e5dd38a7c257a5913bf",
-        "size": 871
+        "sha256": "854a0ab3a9e50a69361a61b712cb9d289f07abdf9b1765d354d081570eaf9a5f",
+        "size": 1965
+      },
+      "g2_freertos_tcb_patch": {
+        "license": "MIT",
+        "path": "components/shared/freertos/g2-tcb-v10.5.1.patch",
+        "sha256": "cf8c457153b75ad6a3163b9b6e6873e476e03537bb4534c9c8e4557de0eb4eb3",
+        "size": 1730
       },
       "host_config": {
         "license": "MIT",
         "path": "tests/fixtures/lvgl_ambiq_lvgl_thread_sync_signal_provider_host_config.h",
-        "sha256": "8a873ee14edc662fa4b7e12dc059e255f7c01830e5eec709eb0d41fe7dbd8f54",
-        "size": 663
+        "sha256": "195cdb859d6bde8c6afa9461d52b20881ad1541eb41f682def6dc496ae6f5e88",
+        "size": 1481
       },
       "hostile_host_fixture": {
         "license": "MIT",
         "path": "tests/fixtures/lvgl_ambiq_lvgl_thread_sync_signal_provider_host.c",
-        "sha256": "6598a84dfea87bde5449a9a1c6259a26c84bf119e7bf3804e1e39900b5237205",
-        "size": 3191
+        "sha256": "c90123d093aed4781081d2a1754df700bd35cdad8d49a2a442db30c09a9cd2be",
+        "size": 10285
       },
       "provider": {
         "license": "MIT",
         "path": "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_thread_sync_signal_provider.c",
-        "sha256": "c3243b85717b42fa610ce9d62ca9212e6d9dbb5ee58b347d4ec9773aa0d19cf8",
-        "size": 3018
+        "sha256": "6ad255b1942d8ab316a49dc34a48f19b2c7624d1b524de9b0f8f865ecb29c642",
+        "size": 9428
       },
       "provider_header": {
         "license": "MIT",
         "path": "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_thread_sync_signal_provider.h",
-        "sha256": "f45cf159a935ffd71e980e1de1ceb9d5845ad7bb954dfa4aa8e773b8915e38b4",
-        "size": 585
+        "sha256": "5338079762f5bd94e7a6112e007924e039febe8dd2696f1e47eca01d3c6c0c1b",
+        "size": 1635
       },
       "recovered_lv_conf": {
         "license": "MIT",
@@ -5057,11 +6751,23 @@
         "sha256": "8fdefac8d8219c25b9a7a5424b6469b2882f9ae0331bfe33e69720b804a9a24e",
         "size": 5437
       },
+      "source_owned_task_delete": {
+        "license": "MIT",
+        "path": "components/shared/freertos/runtime_freertos_task_delete.c",
+        "sha256": "fd0f9a420781d8bcf2365bae20a5b6946e6092a33bb7ea8bf713f3ab9e5261cd",
+        "size": 4684
+      },
       "source_owned_task_notify": {
         "license": "MIT",
         "path": "components/shared/freertos/runtime_freertos_task_notify.c",
         "sha256": "e33a4a76b2f018fd191d10d1a9a3f1c1c777031e2a41c7b3a6b459d5cb07e2ab",
         "size": 8632
+      },
+      "upstream_freertos_tasks": {
+        "license": "MIT",
+        "path": "third_party/freertos-kernel/tasks.c",
+        "sha256": "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463",
+        "size": 223695
       },
       "upstream_lv_conf_internal": {
         "license": "MIT",
@@ -5089,20 +6795,30 @@
       }
     },
     "production_overlay_registered": false,
-    "qualification": "exact task-notification-mode ABI and source behavior with source-owned fixed calls; live scheduler, critical nesting, TCB lifetime, RAM, collision, paired wait, and wakeup behavior remain unqualified",
+    "qualification": "exact FreeRTOS thread create/delete and four-function task-notification sync ABI, including source task-take behavior, with source-owned fixed calls; live scheduler, critical nesting, TCB lifetime, RAM, collision, and wakeup behavior remain unqualified",
     "required_exports": [
-      "lv_thread_sync_signal"
+      "lv_thread_delete",
+      "lv_thread_init",
+      "lv_thread_sync_delete",
+      "lv_thread_sync_init",
+      "lv_thread_sync_signal",
+      "lv_thread_sync_wait"
     ],
     "reviewed_runtime_dependencies": {
+      "0x004420BD": "source-owned FreeRTOS port-yield entry",
       "0x004420D1": "source-owned scheduler-port critical entry",
       "0x004420E9": "source-owned scheduler-port critical exit",
-      "0x00455C49": "source-owned FreeRTOS xTaskGenericNotify entry"
+      "0x004548BB": "source-owned FreeRTOS xTaskCreate entry",
+      "0x00454AAF": "source-owned FreeRTOS vTaskDelete entry",
+      "0x0045589D": "source-owned FreeRTOS current-task entry",
+      "0x00455C49": "source-owned FreeRTOS xTaskGenericNotify entry",
+      "0x00455FA9": "source-owned FreeRTOS delayed-list insertion entry"
     },
     "source_admitted": true,
     "target_source_artifact": {
       "path": "lvgl_ambiq_lvgl_thread_sync_signal_provider.o",
-      "sha256": "311b0db237f5051bce92970186641d2771c29e0a1c382387ede9c204af84909d",
-      "size": 984
+      "sha256": "ea7b79666b87c9a5d23894183e7a68bc908ae20612d26998558352d1a618a7c1",
+      "size": 2820
     },
     "warning_count": 0
   },
@@ -6307,8 +8023,8 @@
       }
     },
     "expected_remaining_nema_hal_symbols": [],
-    "expected_residual_symbol_count": 11,
-    "expected_residual_symbol_digest": "f9d7f5b3fc8db9a19441ec0c4991ac9161c0ae46583e56c2a2298f2794732744",
+    "expected_residual_symbol_count": 0,
+    "expected_residual_symbol_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "expected_section_gc_elided_imports": [
       "utf8_codepoint_size"
     ],
@@ -6318,284 +8034,8 @@
     "qualification": "compile/link evidence only; private sibling origin and non-G2 platform configuration"
   },
   "missing_nema_hal_provider_count": 0,
-  "missing_provider_count": 11,
-  "missing_provider_ledger": [
-    {
-      "api_family": "lvgl-core",
-      "consumer_objects": [
-        {
-          "object": "lv_draw_ambiq.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        }
-      ],
-      "exact_unavailable_input": "atomic production link of the checked LVGL 9.3-development source closure",
-      "provider_admitted": false,
-      "retained_stock_provider_bytes": null,
-      "symbol": "lv_draw_get_available_task"
-    },
-    {
-      "api_family": "lvgl-core",
-      "consumer_objects": [
-        {
-          "object": "lv_draw_ambiq_letter.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_JUMP24": 1
-          }
-        }
-      ],
-      "exact_unavailable_input": "atomic production link of the checked LVGL 9.3-development source closure",
-      "provider_admitted": false,
-      "retained_stock_provider_bytes": null,
-      "symbol": "lv_draw_label_iterate_characters"
-    },
-    {
-      "api_family": "lvgl-core",
-      "consumer_objects": [
-        {
-          "object": "lv_draw_ambiq.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        }
-      ],
-      "exact_unavailable_input": "atomic production link of the checked LVGL 9.3-development source closure",
-      "provider_admitted": false,
-      "retained_stock_provider_bytes": null,
-      "symbol": "lv_draw_layer_alloc_buf"
-    },
-    {
-      "api_family": "lvgl-core",
-      "consumer_objects": [
-        {
-          "object": "lv_draw_ambiq_arc.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_img.o",
-          "relocation_count": 2,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 2
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_private.o",
-          "relocation_count": 3,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 3
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_vector.o",
-          "relocation_count": 2,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 2
-          }
-        }
-      ],
-      "exact_unavailable_input": "atomic production link of the checked LVGL 9.3-development source closure",
-      "provider_admitted": false,
-      "retained_stock_provider_bytes": null,
-      "symbol": "lv_image_decoder_close"
-    },
-    {
-      "api_family": "lvgl-core",
-      "consumer_objects": [
-        {
-          "object": "lv_draw_ambiq_private.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        }
-      ],
-      "exact_unavailable_input": "atomic production link of the checked LVGL 9.3-development source closure",
-      "provider_admitted": false,
-      "retained_stock_provider_bytes": null,
-      "symbol": "lv_image_decoder_open"
-    },
-    {
-      "api_family": "lvgl-core",
-      "consumer_objects": [
-        {
-          "object": "lv_draw_ambiq.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_arc.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_box_shadow.o",
-          "relocation_count": 2,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 2
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_buffer.o",
-          "relocation_count": 9,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 9
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_fill.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_img.o",
-          "relocation_count": 7,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 7
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_letter.o",
-          "relocation_count": 5,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 4,
-            "R_ARM_THM_JUMP24": 1
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_mask_rect.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_private.o",
-          "relocation_count": 15,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 15
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_triangle.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_vector.o",
-          "relocation_count": 10,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 10
-          }
-        },
-        {
-          "object": "lv_draw_ambiq_vector_font.o",
-          "relocation_count": 14,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 14
-          }
-        }
-      ],
-      "exact_unavailable_input": "atomic production link of the checked LVGL 9.3-development source closure",
-      "provider_admitted": false,
-      "retained_stock_provider_bytes": null,
-      "symbol": "lv_log_add"
-    },
-    {
-      "api_family": "lvgl-core",
-      "consumer_objects": [
-        {
-          "object": "lv_draw_ambiq.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        }
-      ],
-      "exact_unavailable_input": "atomic production link of the checked LVGL 9.3-development source closure",
-      "provider_admitted": false,
-      "retained_stock_provider_bytes": null,
-      "symbol": "lv_thread_delete"
-    },
-    {
-      "api_family": "lvgl-core",
-      "consumer_objects": [
-        {
-          "object": "lv_draw_ambiq.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        }
-      ],
-      "exact_unavailable_input": "atomic production link of the checked LVGL 9.3-development source closure",
-      "provider_admitted": false,
-      "retained_stock_provider_bytes": null,
-      "symbol": "lv_thread_init"
-    },
-    {
-      "api_family": "lvgl-core",
-      "consumer_objects": [
-        {
-          "object": "lv_draw_ambiq.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        }
-      ],
-      "exact_unavailable_input": "atomic production link of the checked LVGL 9.3-development source closure",
-      "provider_admitted": false,
-      "retained_stock_provider_bytes": null,
-      "symbol": "lv_thread_sync_delete"
-    },
-    {
-      "api_family": "lvgl-core",
-      "consumer_objects": [
-        {
-          "object": "lv_draw_ambiq.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        }
-      ],
-      "exact_unavailable_input": "atomic production link of the checked LVGL 9.3-development source closure",
-      "provider_admitted": false,
-      "retained_stock_provider_bytes": null,
-      "symbol": "lv_thread_sync_init"
-    },
-    {
-      "api_family": "lvgl-core",
-      "consumer_objects": [
-        {
-          "object": "lv_draw_ambiq.o",
-          "relocation_count": 1,
-          "relocation_types": {
-            "R_ARM_THM_CALL": 1
-          }
-        }
-      ],
-      "exact_unavailable_input": "atomic production link of the checked LVGL 9.3-development source closure",
-      "provider_admitted": false,
-      "retained_stock_provider_bytes": null,
-      "symbol": "lv_thread_sync_wait"
-    }
-  ],
+  "missing_provider_count": 0,
+  "missing_provider_ledger": [],
   "production_admission": {
     "blockers": [
       "the exact pinned public implementation archives are available only in the scoped sibling SDK and are not imported into this repository",
@@ -6616,8 +8056,12 @@
       "the isolated LVGL font-format provider is source-closed but not routed; source bitmap extent and live draw-buffer cache callback ownership remain caller/runtime-unqualified",
       "the isolated LVGL vector-task destroy provider is source-closed but not routed; list extent, callback mutation, and live allocator ownership remain runtime-unqualified",
       "the isolated LVGL draw-unit create provider is source-closed but not routed; global initialization, list/count ownership, serialization, collision, RAM placement, and allocation lifetime remain runtime-unqualified",
-      "the isolated LVGL draw-dispatch request provider and its exact task-notification-mode lv_thread_sync_signal dependency are source-closed but not routed; sync initialization, scheduler/TCB state, critical nesting, RAM, collision, paired wait, and concurrency remain runtime-unqualified",
-      "the remaining FreeRTOS thread/sync OSAL, draw scheduling/layer, decoder/cache, logging, and global-state initializer closure is incomplete; the stock FreeRTOS task-notification selection remains unrecovered",
+      "the isolated LVGL draw-task selection provider is source-closed but not routed; display/global initialization, task-list lifetime, serialization, collision, RAM placement, and concurrency remain runtime-unqualified",
+      "the isolated LVGL layer-allocation provider is source-closed but not routed; draw-buffer handlers, cache behavior, heap/global ownership, collision, RAM placement, and concurrency remain runtime-unqualified",
+      "the isolated LVGL callback logging provider and source-owned formatter/string/tick cluster are source-closed but not routed; callback ownership, tick concurrency, collision, placement, and output transport remain runtime-unqualified",
+      "the exact LVGL decoder open/close, filesystem, cache, and support cluster is source-closed but not routed; live decoder registration, filesystem drivers, cache lifecycle, collision, RAM, and concurrency remain runtime-unqualified",
+      "the exact LVGL label iterator, text/font/draw-buffer dependencies, and source-owned area/color leaves are source-closed but not routed; live font/cache/allocator registration, collision, RAM, and concurrency remain runtime-unqualified",
+      "the isolated LVGL draw-dispatch request provider and its exact six-function task-notification-mode thread/sync OSAL dependency are source-closed but not routed; scheduler/TCB state, critical nesting, task allocation, RAM, collision, wakeup, and concurrency remain runtime-unqualified",
       "binary notice/license policy and GNU-versus-stock-IAR compatibility require explicit admission",
       "Apollo510 command-list, IRQ, cache, power-retention, antialiasing, and output evidence is unavailable"
     ],

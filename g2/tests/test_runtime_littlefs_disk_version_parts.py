@@ -168,9 +168,9 @@ PROFILES = {
         "component_sha256": (
             "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
         ),
-        "expected_component_size": 3956468,
+        "expected_component_size": 3956672,
         "expected_component_sha256": (
-            "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"
+            "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"
         ),
         "overlay_base": 0x00794324,
         "provider_offset": 108456,
@@ -433,7 +433,7 @@ PROFILES = {
         ),
         "component_size": 163840,
         "component_sha256": (
-            "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2"
+            "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b"
         ),
         "overlay_base": 0x00434478,
         "provider_offset": 24,
@@ -449,7 +449,7 @@ PROFILES = {
             "a2f2477f95c965da47d1e29c4d2d8247"
         ),
         "current_layout_rollback_sha256": (
-            "643e47f785b74f837215c3781817eba255fc31cbdafd44e6fcbdb4f2d7bf2c7f"
+            "a0ba3953f49a2d2090b3896a256a1a16348af759252180379dec8088365b7841"
         ),
         "historical_tail_size": 20,
         "later_lookahead_patch": {
@@ -509,11 +509,11 @@ PROFILES = {
         "accounting": {
             "generated_alignment_bytes": 16,
             "generated_isolated_alignment_bytes": 0,
-            "generated_patch_site_bytes": 16_426,
+            "generated_patch_site_bytes": 16_830,
             "generated_relocated_alignment_bytes": 15,
             "generated_stock_to_overlay_alignment_bytes": 1,
-            "opaque_base_bytes": 112_353,
-            "source_owned_bytes": 35_045,
+            "opaque_base_bytes": 87_985,
+            "source_owned_bytes": 59_009,
         },
     },
 }

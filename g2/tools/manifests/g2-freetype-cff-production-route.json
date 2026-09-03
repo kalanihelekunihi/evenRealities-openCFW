@@ -1,21 +1,21 @@
 {
   "analysis_mode": "read-only; no build, signing, flash, or hardware operation",
   "authenticated_component_route": {
-    "base_argument": "same-build pre-CFF Apollo component",
+    "base_argument": "same-build LC3-service Apollo component plus authenticated residual generated-NOP host tails",
     "builder": "components/apollo_main/freetype_cff_scatter/build_component.py",
     "canonical_package": {
-      "apple_cff_region_rows": 6,
-      "highest_cff_end_exclusive": "0x007FDED4",
-      "linux_profile_replacement_rows": 5,
+      "apple_cff_region_rows": 16,
+      "highest_cff_end_exclusive": "0x0073EF04",
+      "linux_profile_replacement_rows": 1,
       "manifest": "manifests/g2-2.2.6.10-core-source.json",
       "profiles": {
         "apple-clang": {
-          "sha256": "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
-          "size": 4750576
+          "sha256": "3929fdde5ab5520683fdac9393fc3abc322b2eccc3e203c44df544071945c858",
+          "size": 4750780
         },
         "linux-clang": {
-          "sha256": "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
-          "size": 4750560
+          "sha256": "5153e24fad9420235c0a1777bb0cf00b82d6af529333db2792586920628c2b1d",
+          "size": 4750764
         }
       }
     },
@@ -33,12 +33,12 @@
       "replacement_little_endian_hex": "14c05a00",
       "replacement_symbol": "cff_driver_class"
     },
-    "post_link_order": "core -> liblc3 -> product-test -> freetype-cff",
+    "post_link_order": "core -> liblc3-ltpf -> product-test -> liblc3-service-audio -> freetype-cff",
     "profiles": {
       "apple-clang": {
         "component": {
-          "sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
-          "size": 3956468
+          "sha256": "78eca5222c333c5fd3793608d67aad476ecac911f6e15164feeb2e1009944826",
+          "size": 3956672
         },
         "loadable_bytes": 20416,
         "relocations": 0,
@@ -84,8 +84,8 @@
       },
       "linux-clang": {
         "component": {
-          "sha256": "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
-          "size": 3956468
+          "sha256": "821875b74af0016e41dfb564a5370c32a30c5215077db5708fd9066af798328f",
+          "size": 3956672
         },
         "loadable_bytes": 20356,
         "relocations": 0,
@@ -146,10 +146,10 @@
     {
       "evidence": "external XIP payloads and runtime-initialized configuration arrays are absent from the official main image, so font names, hashes, formats, and FreeType face paths remain unresolved",
       "gate": "font payload and live rendering",
-      "status": "blocked-unavailable-physical-evidence"
+      "status": "blocked by unavailable physical evidence"
     }
   ],
-  "census_sha256": "3b83ff33fc72d6a43897edec82f3ad881f77079ec3d5eb95bb7a37cdfcaa6e70",
+  "census_sha256": "39fbf5825cb31526dcb50774001d11ca1634ca7f1f8f716c1f0b8dd93c5f428c",
   "complete_map": {
     "callable_bytes": 16718,
     "functions": 101,
@@ -172,24 +172,24 @@
       "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
     },
     "components/apollo_main/core_overlay/build_component.py": {
-      "bytes": 81667,
-      "sha256": "44e2e16484ac31c771cb309b9850e63533881b6be6b8b7d168bdab352ebe47e8"
+      "bytes": 90227,
+      "sha256": "1a4f8e642484d0331bc92dfdc79d2ed2ef075df613d609c3a629aaaa3f7091a8"
     },
     "components/apollo_main/core_overlay/overlay.json": {
-      "bytes": 5853221,
-      "sha256": "733bc34d7545775ab067eb03c38678889694bc092fc840c64a1ef605b0081212"
+      "bytes": 5974575,
+      "sha256": "9b1f644af28273bde1bc622ca2157b6986097a4e3eb6e5c536ed1bd563731b13"
     },
     "components/apollo_main/freetype_cff_scatter/build_component.py": {
-      "bytes": 24637,
-      "sha256": "4b615fdc2f393dc5c244882c2c663b70338a94b54923aca12f639a7cf59260f9"
+      "bytes": 40269,
+      "sha256": "b344b37620574e9cec4af153f54b23e124afbe64332126118e678401f1feb4b9"
     },
     "components/apollo_main/freetype_cff_scatter/overlay.json": {
-      "bytes": 1822,
-      "sha256": "b92efd3929c66f902ac64b9142a3448d37774e67875f3f1e733bf8b3d366de0f"
+      "bytes": 1883,
+      "sha256": "71c6f4f38ed68913307045f75d2ab23ab8b9d6909f3496e2a64c76def4329b40"
     },
     "manifests/g2-2.2.6.10-core-source.json": {
-      "bytes": 3353423,
-      "sha256": "416339b199ceb6b19916225bb12ebf190d064c349f4c5b808c671ea59608d053"
+      "bytes": 3527931,
+      "sha256": "bfe70bc04c7ec384c75690fc224a992dc71e1020d1d7c0494ce3da6f9466f7ac"
     },
     "research/corpus/apollo-main/ghidra/decomp/functions.jsonl": {
       "bytes": 3270703,

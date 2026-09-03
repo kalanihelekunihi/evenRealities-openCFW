@@ -20,30 +20,30 @@
     "apple-clang": {
       "aggregate_buckets": {
         "candidate_source_not_routed": 29396,
-        "generated_or_reconstructible": 494744,
-        "production_source": 475527,
-        "typed_retained_or_external": 3749965,
+        "generated_or_reconstructible": 414544,
+        "production_source": 562151,
+        "typed_retained_or_external": 3743745,
         "unclassified": 0
       },
       "apollo_flash_label_reconciliation": {
         "authoritative_builder_accounting": {
           "component_container_metadata": 32,
-          "generated_addressed": 492850,
-          "retained": 3153073,
-          "source": 474353
+          "generated_addressed": 412650,
+          "retained": 3146853,
+          "source": 560977
         },
-        "bytes_requiring_reconciliation": 17800,
+        "bytes_requiring_reconciliation": 120246,
         "plan_labels": {
           "component_container_metadata": 32,
-          "generated_addressed": 479082,
-          "retained": 3170873,
-          "source": 470321
+          "generated_addressed": 509098,
+          "retained": 3170651,
+          "source": 440731
         },
         "plan_minus_authoritative": {
           "component_container_metadata": 0,
-          "generated_addressed": -13768,
-          "retained": 17800,
-          "source": -4032
+          "generated_addressed": 96448,
+          "retained": 23798,
+          "source": -120246
         },
         "qualification": "flash addresses and bytes are exact; profile-coarse address_status labels are non-authoritative and reconciled to admitted builder receipts"
       },
@@ -78,24 +78,24 @@
         }
       },
       "main_observation": {
-        "component_sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
-        "component_size": 3956468,
+        "component_sha256": "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe",
+        "component_size": 3956672,
         "observation_reports": [
           {
-            "path": "build/canonical-observation/apple-a/build-report.json",
-            "sha256": "52f296deb271f879b976c30abae6537ff29e31317779c50de45c008595b96cff",
-            "size": 33748133
+            "path": "build/canonical-observation-g2-final9/apple-a/build-report.json",
+            "sha256": "6b14ac7e6d160765408eb51fdc7a790db5beb6b0bda652394894e079c4344738",
+            "size": 34215206
           },
           {
-            "path": "build/canonical-observation/apple-b/build-report.json",
-            "sha256": "645bf6e3a306bd0bcc0ee0e293c60dcea88c9b6e17dfd5bcb7695e77d4b9d1c5",
-            "size": 33748133
+            "path": "build/canonical-observation-g2-final9/apple-b/build-report.json",
+            "sha256": "7c9e63eff8e95150c21df67f2a4cd0165826aa369639992006fa1f57ffcda1e5",
+            "size": 34215206
           }
         ],
-        "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
-        "overlay_size": 362272,
-        "source_input_entries": 879,
-        "source_inputs_sha256": "73582e0d6d00b90c18d82df885bff39e75a3b3c8851dab6a134f726577230a4f"
+        "overlay_sha256": "9d0a3144cb6a5545592e0269435acab2bd9aaab943017d385ff0f423651ed69d",
+        "overlay_size": 368330,
+        "source_input_entries": 1252,
+        "source_inputs_sha256": "7f9d6b71f59dbde087d664c8f7ede8dba77aecd71d5088989b6c5e01c6844eca"
       },
       "nemavg_stroke_cap_boundary": {
         "candidate_source_not_routed_bytes": 0,
@@ -113,26 +113,26 @@
       },
       "package": {
         "address_status_ownership_mode": "non_authoritative_requires_checked_reconciliation",
-        "component_payload_bytes": 4749632,
-        "container_regions": 6,
+        "component_payload_bytes": 4749836,
+        "container_regions": 8,
         "flash_plan": {
-          "path": "build/postapply-package-apple/flash-plan.json",
-          "sha256": "e540570208e616cc3de20af268da55d17fbf59f918aee143be8a902449253262",
-          "size": 4881053
+          "path": "build/source/flash-plan.json",
+          "sha256": "5e5e01e8fa29724dd787221ea6d4956ff2a64d438dc4edeae3020a27b3c20588",
+          "size": 5119194
         },
-        "flash_plan_sha256": "e540570208e616cc3de20af268da55d17fbf59f918aee143be8a902449253262",
-        "flash_regions": 7006,
+        "flash_plan_sha256": "5e5e01e8fa29724dd787221ea6d4956ff2a64d438dc4edeae3020a27b3c20588",
+        "flash_regions": 7319,
         "internal_component_container_bytes": 300,
         "outer_evenota_envelope_bytes": 944,
         "package_report": {
-          "path": "build/postapply-package-apple/build-report.json",
-          "sha256": "79250e9da752d137cbab889b913f604e62743b5d063bb281c233176318ec0bd6",
+          "path": "build/source/build-report.json",
+          "sha256": "20a8122cc22c927cab2a50c78139af5e7337e97ecf7aa4b2a0e4454eeed58d6d",
           "size": 4328
         },
-        "package_report_sha256": "79250e9da752d137cbab889b913f604e62743b5d063bb281c233176318ec0bd6",
-        "package_sha256": "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
-        "package_size": 4750576,
-        "physical_flash_bytes": 4749332,
+        "package_report_sha256": "20a8122cc22c927cab2a50c78139af5e7337e97ecf7aa4b2a0e4454eeed58d6d",
+        "package_sha256": "f2842600b84f303c40d2d299761c1abc0a7083acc05f2d378be9a045b0d9a846",
+        "package_size": 4750780,
+        "physical_flash_bytes": 4749536,
         "providers": {
           "apollo_bootloader": {
             "kind": "source_build",
@@ -143,8 +143,8 @@
           "apollo_main": {
             "kind": "source_build",
             "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
-            "sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
-            "size": 3956468
+            "sha256": "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe",
+            "size": 3956672
           },
           "ble_em9305": {
             "kind": "source_build",
@@ -176,35 +176,35 @@
       },
       "per_byte_ownership_authority": "canonical Apple component builder/region mask",
       "per_byte_ownership_mask_complete": true,
-      "release_blocking_bytes": 3779361
+      "release_blocking_bytes": 3773141
     },
     "linux-clang": {
       "aggregate_buckets": {
         "candidate_source_not_routed": 29396,
-        "generated_or_reconstructible": 411980,
-        "production_source": 257897,
-        "typed_retained_or_external": 4050343,
+        "generated_or_reconstructible": 331848,
+        "production_source": 344453,
+        "typed_retained_or_external": 4044123,
         "unclassified": 0
       },
       "apollo_flash_label_reconciliation": {
         "authoritative_builder_accounting": {
           "component_container_metadata": 32,
-          "generated_addressed": 410086,
-          "retained": 3453451,
-          "source": 256723
+          "generated_addressed": 329954,
+          "retained": 3447231,
+          "source": 343279
         },
-        "bytes_requiring_reconciliation": 274414,
+        "bytes_requiring_reconciliation": 3359246,
         "plan_labels": {
           "component_container_metadata": 32,
-          "generated_addressed": 408150,
-          "retained": 3180973,
-          "source": 531137
+          "generated_addressed": 3540194,
+          "retained": 87985,
+          "source": 492285
         },
         "plan_minus_authoritative": {
           "component_container_metadata": 0,
-          "generated_addressed": -1936,
-          "retained": -272478,
-          "source": 274414
+          "generated_addressed": 3210240,
+          "retained": -3359246,
+          "source": 149006
         },
         "qualification": "flash addresses and bytes are exact; profile-coarse address_status labels are non-authoritative and reconciled to admitted builder receipts"
       },
@@ -239,24 +239,24 @@
         }
       },
       "main_observation": {
-        "component_sha256": "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
-        "component_size": 3956468,
+        "component_sha256": "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38",
+        "component_size": 3956672,
         "observation_reports": [
           {
-            "path": "build/canonical-observation/linux-a/build-report.json",
-            "sha256": "11c45b4a7dbc04c39b9c878e074d07cdf896dbadd8f0f257cbf0271a83976131",
-            "size": 4466327
+            "path": "build/canonical-observation-g2-final9/linux-a/build-report.json",
+            "sha256": "0e1ead87d886988de878d5047d732e82ce767cff3b3c608dbbf8c94d766a1367",
+            "size": 5277522
           },
           {
-            "path": "build/canonical-observation/linux-b/build-report.json",
-            "sha256": "033574ca3fa645e92ad782b05a4e6644abc304d994677d998f008a7d28a22274",
-            "size": 4466327
+            "path": "build/canonical-observation-g2-final9/linux-b/build-report.json",
+            "sha256": "5fa0131506f4c6aa5ac7bdb4cfc77ac26dfd2ef166ef42f0cdc649ed8e16e78c",
+            "size": 5277522
           }
         ],
-        "overlay_sha256": "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6",
-        "overlay_size": 154604,
-        "source_input_entries": 879,
-        "source_inputs_sha256": "73582e0d6d00b90c18d82df885bff39e75a3b3c8851dab6a134f726577230a4f"
+        "overlay_sha256": "97a591e61178dd77394814b9a7e4863d7b08a0e6a97558820a212170e145cf41",
+        "overlay_size": 160652,
+        "source_input_entries": 1252,
+        "source_inputs_sha256": "7f9d6b71f59dbde087d664c8f7ede8dba77aecd71d5088989b6c5e01c6844eca"
       },
       "nemavg_stroke_cap_boundary": {
         "candidate_source_not_routed_bytes": 0,
@@ -274,26 +274,26 @@
       },
       "package": {
         "address_status_ownership_mode": "non_authoritative_profile_coarse",
-        "component_payload_bytes": 4749616,
+        "component_payload_bytes": 4749820,
         "container_regions": 6,
         "flash_plan": {
-          "path": "build/postapply-package-linux/flash-plan.json",
-          "sha256": "97c93fa9df90ef15785437ebf860c644d52a4f08a251ec6e427c89d3e8f13e68",
-          "size": 2793636
+          "path": "build/source-linux/flash-plan.json",
+          "sha256": "b00b118e420da553f1625a9f5555c8f52921e02c6bac54af257bc7e5dad3f6c6",
+          "size": 586640
         },
-        "flash_plan_sha256": "97c93fa9df90ef15785437ebf860c644d52a4f08a251ec6e427c89d3e8f13e68",
-        "flash_regions": 3993,
+        "flash_plan_sha256": "b00b118e420da553f1625a9f5555c8f52921e02c6bac54af257bc7e5dad3f6c6",
+        "flash_regions": 810,
         "internal_component_container_bytes": 300,
         "outer_evenota_envelope_bytes": 944,
         "package_report": {
-          "path": "build/postapply-package-linux/build-report.json",
-          "sha256": "1610afdfa301ec255a1e58128fd79b7131250c911d66b0cc8e3cb8cb2ab8a45a",
-          "size": 4326
+          "path": "build/source-linux/build-report.json",
+          "sha256": "ac84d8c56ec337f38d96dbbcaa4c893ee399bdf137c393e382cd21757d5d3b6c",
+          "size": 4348
         },
-        "package_report_sha256": "1610afdfa301ec255a1e58128fd79b7131250c911d66b0cc8e3cb8cb2ab8a45a",
-        "package_sha256": "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
-        "package_size": 4750560,
-        "physical_flash_bytes": 4749316,
+        "package_report_sha256": "ac84d8c56ec337f38d96dbbcaa4c893ee399bdf137c393e382cd21757d5d3b6c",
+        "package_sha256": "e534ffe034360b24fffc3d7fc50988234fc48ae20f6e8afa8be2507247c8cd39",
+        "package_size": 4750764,
+        "physical_flash_bytes": 4749520,
         "providers": {
           "apollo_bootloader": {
             "kind": "source_build",
@@ -303,9 +303,9 @@
           },
           "apollo_main": {
             "kind": "source_build",
-            "path": ".tmp-postapply-core-linux/ota_s200_firmware_ota.bin",
-            "sha256": "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
-            "size": 3956468
+            "path": "build/canonical-provider/linux-clang/apollo_main/ota_s200_firmware_ota.bin",
+            "sha256": "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38",
+            "size": 3956672
           },
           "ble_em9305": {
             "kind": "source_build",
@@ -353,20 +353,20 @@
             "classification": "typed_mixed_profile_ownership",
             "component": "apollo_main",
             "component_file_offset": 0,
-            "end_exclusive": 3956468,
+            "end_exclusive": 3956672,
             "reason": "exact bytes and addresses; no complete per-byte source-vs-generated-vs-retained mask is claimed",
-            "size": 3956468
+            "size": 3956672
           }
         ],
         "unresolved_regions": 0
       },
       "per_byte_ownership_authority": "aggregate totals plus explicit typed-mixed spans only",
       "per_byte_ownership_mask_complete": false,
-      "release_blocking_bytes": 4079739
+      "release_blocking_bytes": 4073519
     }
   },
   "schema_version": 4,
-  "source_inputs_sha256": "73582e0d6d00b90c18d82df885bff39e75a3b3c8851dab6a134f726577230a4f",
+  "source_inputs_sha256": "7f9d6b71f59dbde087d664c8f7ede8dba77aecd71d5088989b6c5e01c6844eca",
   "target": "G2 s200_v2.2.6.10 dual-profile ownership reconciliation",
   "unresolved_binary_authority": [
     "codec",

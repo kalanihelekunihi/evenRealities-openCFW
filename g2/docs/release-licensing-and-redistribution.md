@@ -25,15 +25,15 @@ repository does not establish authority to distribute it publicly. The
 is an authority gate only; it does not assert that distribution is forbidden
 under facts or agreements outside this repository.
 
-The current 157-input completion assessment reports
+The current 166-input completion assessment reports
 `source_complete=false`, `release_authorized=false`, hardware validation
 blocked by unavailable physical evidence, and `hardware_operations=[]`. Its canonical
-Apple package contains 4,677,796 payload bytes (4,678,740 bytes with the
-EVENOTA envelope), of which 3,826,619 are release-blocking. All bytes are
+Apple package contains 4,749,836 payload bytes (4,750,780 bytes with the
+EVENOTA envelope), of which 3,776,765 are release-blocking. All bytes are
 classified, but all six binary redistribution authorities in the table above
-remain unresolved. The source audit independently reports 786 distributable
+remain unresolved. The source audit independently reports 891 distributable
 source files with zero metadata errors, and the project-wide MIT/upstream
-normalization census covers 906 targets. None of those source results grants
+normalization census covers 919 targets. None of those source results grants
 permission to redistribute retained or binary-only firmware.
 
 Older per-closure provenance manifests retain exact milestone package
@@ -102,7 +102,7 @@ tree or stock-bearing build output redistributable.
 ## Compiled source inventory
 
 At the time of this audit, the two overlays, including the PT post-link
-provider's exact source/header records, form an inventory reference 786 unique,
+provider's exact source/header records, form an inventory reference 891 unique,
 content-addressed source files. The live audit
 derives overlay records from `sources`, `isolated_leaves`,
 `in_place_leaves`, and `relocated_leaves`, checks each file hash, checks the
@@ -112,18 +112,16 @@ enforces the authenticated 459-row project-owned MIT census.
 
 | Declared license | Unique files |
 |---|---:|
-| MIT | 574 |
+| MIT | 648 |
 | Apache-2.0 | 81 |
-| BSD-3-Clause | 101 |
+| BSD-3-Clause | 132 |
 | Zlib | 27 |
 | BSD-2-Clause | 2 |
 | GPL-3.0-only | 1 |
 
 All current compiled-overlay source records are license-metadata clean. The overlay inventory
-contains 574 MIT records in total. Of the 460 exact project-owned policy rows,
-459 remain compiled and one (`imu_icm45608.c`) is retained only as MIT-licensed
-repository research. The production image now keeps the authenticated stock IMU
-donor object instead of compiling that wrapper or its TDK dependency closure.
+contains 648 MIT records in total. All 460 exact project-owned policy rows are
+normalized to MIT with no pending GPL-only project record.
 The sole GPL source is the authenticated g2flash `ring_gesture.c`. InvenSense
 EDMP headers carrying dense payload bytes or an express-license-only
 redistribution notice are not treated as ordinary BSD source merely because a
@@ -132,17 +130,17 @@ fifteen known risk paths by exact identity. Shared littlefs, EasyLogger, and
 other provider records retain their authenticated upstream terms.
 
 The separately audited repository-wide public-and-research license closure
-contains 894 distinct project-authored MIT-compatible files. Of these, 890
+contains 919 distinct project-authored MIT-compatible files. Of these, 915
 G2-internal files carry an inline SPDX expression permitting MIT. The four
 root community policies (`CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `SECURITY.md`,
 and `SUPPORT.md`) inherit MIT under the exact authenticated root `LICENSE`;
 their names, sizes, individual SHA-256 identities, and aggregate census digest
 are fail-closed inputs to the same audit. Its newly
 distributed controller/build
-adapter tranche is exhaustive over 107 C, header, assembly, and Python files:
-104 project-authored paths with an SPDX MIT option and three Touch CAT2/Cortex-M
+adapter tranche is exhaustive over 112 C, header, assembly, and Python files:
+109 project-authored paths with an SPDX MIT option and three Touch CAT2/Cortex-M
 adaptations that correctly remain Apache-2.0. This community census does not
-change the 786-file compiled overlay inventory above.
+change the 891-file compiled overlay inventory above.
 It also includes the six-file open Touch source-image package, its MIT proof
 analyzer, and two focused MIT tests; these remain software-only source
 artifacts and do not alter the official Touch payload or its redistribution

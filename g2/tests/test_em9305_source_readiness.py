@@ -155,7 +155,7 @@ class Em9305SourceReadinessTests(unittest.TestCase):
                             for row in rows))
 
         summary = json.loads(self.analyzer.FINAL_SUMMARY.read_text())
-        self.assertEqual(summary["schema_version"], 6)
+        self.assertEqual(summary["schema_version"], 7)
         self.assertEqual(summary["residual_span_count"], 175)
         self.assertEqual(summary["residual_bytes"], 33_658)
         self.assertEqual(summary["unclassified_spans"], 0)
@@ -231,6 +231,10 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         self.assertFalse(audit["source_records_complete"])
         self.assertFalse(audit["source_image_complete"])
         self.assertTrue(audit["production_routed"])
+        self.assertEqual(audit["remaining_software_blockers"], [])
+        self.assertEqual(audit["remaining_source_completeness_blockers"], [
+            "210584 typed retained or external provider bytes require unavailable exact provider source and redistribution authority",
+        ])
         self.assertEqual(audit["provider_size"], 212_984)
         self.assertEqual(
             audit["provider_sha256"],

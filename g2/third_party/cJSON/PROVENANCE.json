@@ -26,7 +26,7 @@
     }
   },
   "selection": {
-    "classification": "authenticated public tagged compatibility baseline for the stock linked parse-side cJSON implementation; production-excluded",
+    "classification": "authenticated public tagged compatibility baseline for the stock linked parse-side cJSON implementation; bounded parse-side production route admitted",
     "exact_public_source_candidate": true,
     "exact_g2_checkout_proven": false,
     "firmware_build_timestamp": "2025-04-28T13:29:15Z",
@@ -66,8 +66,13 @@
     "stock_noncode_bytes": 64,
     "linked_functions": 21,
     "external_caller_sites": 34,
-    "production_routed": false,
-    "production_decision": "explicitly production-excluded at admission: the 2,572 stock body bytes remain cut-forward. Production admission requires a compiler/ABI readiness matrix against the authenticated baseline, reviewed overlay integration, and ownership accounting; identification and vendoring are not admission."
+    "production_routed": true,
+    "production_source": {
+      "path": "components/shared/cjson/runtime_cjson_parse.c",
+      "size": 26626,
+      "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63"
+    },
+    "production_decision": "the authenticated parse-side semantics are production-routed through 21 strict dual-profile relocated leaves and 21 stock-entry redirects. The freestanding MIT adaptation preserves the G2 allocator-hook and error-record SRAM ABI, replaces all compiler-library dependencies with local C, and leaves hardware operations empty."
   },
   "files": [
     {

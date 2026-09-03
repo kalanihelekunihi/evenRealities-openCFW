@@ -243,8 +243,23 @@ class G2CompletionReadinessTests(unittest.TestCase):
         self.assertEqual(case["buckets"]["unclassified"], 0)
         self.assertTrue(case["details"]["software_image_link_complete"])
         self.assertTrue(case["details"]["software_even_package_complete"])
+        self.assertFalse(case["details"]["physical_board_services_routed"])
+        self.assertEqual(
+            case["details"]["candidate_admission_blocker_class"],
+            "hardware-dependent-board-routing",
+        )
+        self.assertEqual(
+            case["details"]["candidate_admission_hardware_validation"],
+            "blocked by unavailable physical evidence",
+        )
+        self.assertEqual(
+            case["details"]["candidate_admission_hardware_operations"], [],
+        )
         self.assertEqual(case["details"]["source_image_translation_units"], 8)
         self.assertEqual(case["details"]["source_image_undefined_symbols"], 0)
+        self.assertEqual(case["details"]["candidate_source_functions"], 222)
+        self.assertEqual(
+            case["details"]["remaining_callable_software_functions"], 0)
         self.assertEqual(case["details"]["physical_bucket_digest"],
                          final["metrics"]["physical_bucket_digest"])
         self.assertEqual(case["hardware_validation"],
@@ -376,16 +391,16 @@ class G2CompletionReadinessTests(unittest.TestCase):
     def test_apollo_boundaries_are_disjoint_and_current(self) -> None:
         main = self.report["components"]["apollo_main"]
         details = main["details"]
-        self.assertEqual(main["release_blocking_bytes"], 3_065_088)
+        self.assertEqual(main["release_blocking_bytes"], 3_061_168)
         self.assertEqual(details["release_readiness_partition"], {
             "candidate_source_not_routed": 0,
-            "typed_retained_or_external": 3_065_088,
+            "typed_retained_or_external": 3_061_168,
         })
         self.assertEqual(details["unanchored_frontier_partition"], {
             "candidate_source_not_routed": 0,
-            "typed_retained_unanchored_without_candidate": 599_340,
+            "typed_retained_unanchored_without_candidate": 596_170,
         })
-        self.assertEqual(details["controlled_label_reconciliation_bytes"], 17_800)
+        self.assertEqual(details["controlled_label_reconciliation_bytes"], 21_544)
         self.assertFalse(details["controlled_label_reconciliation_additive"])
         self.assertEqual(details["overlapping_object_closure_evidence"], {
             "bytes": 885_418,
@@ -456,8 +471,20 @@ class G2CompletionReadinessTests(unittest.TestCase):
         details = self.report["components"]["touch"]["details"]
         self.assertTrue(details["software_image_link_complete"])
         self.assertTrue(details["software_fwpk_package_complete"])
+        self.assertFalse(details["physical_board_services_routed"])
+        self.assertEqual(
+            details["candidate_admission_blocker_class"],
+            "hardware-dependent-resident-abi",
+        )
+        self.assertEqual(
+            details["candidate_admission_hardware_validation"],
+            "blocked by unavailable physical evidence",
+        )
+        self.assertEqual(details["candidate_admission_hardware_operations"], [])
         self.assertEqual(details["source_image_translation_units"], 31)
         self.assertEqual(details["source_image_undefined_symbols"], 0)
+        self.assertEqual(details["candidate_source_functions"], 178)
+        self.assertEqual(details["remaining_callable_software_functions"], 0)
         self.assertLessEqual(details["source_image_raw_flash_bytes"], 65536)
 
 

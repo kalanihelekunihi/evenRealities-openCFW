@@ -213,7 +213,7 @@ PRODUCTION = {
         ),
         "component_size": 163_840,
         "component_sha256": (
-            "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2"
+            "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b"
         ),
         "leaf_offset": 302,
         "leaf_address": 0x0043_45A6,
@@ -224,11 +224,11 @@ PRODUCTION = {
         "accounting": {
             "generated_alignment_bytes": 16,
             "generated_isolated_alignment_bytes": 0,
-            "generated_patch_site_bytes": 16_426,
+            "generated_patch_site_bytes": 16_830,
             "generated_relocated_alignment_bytes": 15,
             "generated_stock_to_overlay_alignment_bytes": 1,
-            "opaque_base_bytes": 112_353,
-            "source_owned_bytes": 35_045,
+            "opaque_base_bytes": 87_985,
+            "source_owned_bytes": 59_009,
         },
     },
 }

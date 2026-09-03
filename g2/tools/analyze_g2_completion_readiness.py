@@ -97,7 +97,7 @@ EM9305_FINAL_LEDGER_SHA256 = (
     "cfda63c68a73d27235af204f01ee6c848db9495d0294d55faf70096b7ab08bf9"
 )
 EM9305_FINAL_SUMMARY_SHA256 = (
-    "5cd0e51ef3274fe1e96d8c3e4aa0ff776fef4587305112f05573b5cde0d194fd"
+    "3fa764455494d542f04d0a71236e9d52f7a116eab8867a1bffc82e20f3e0907e"
 )
 HARDWARE_VALIDATION = "blocked by unavailable physical evidence"
 TOUCH_CANDIDATE_BYTES = 14_510
@@ -889,12 +889,12 @@ def analyze() -> dict[str, Any]:
     )
     _require(origin_release == {
         "candidate_source_not_routed": 0,
-        "typed_retained_or_external": 3_065_088,
+        "typed_retained_or_external": 3_058_868,
     } and _sum(origin_release) == main["opaque_base_bytes"],
         "Apollo origin/readiness partition changed")
     _require(origin_unanchored == {
         "candidate_source_not_routed": 0,
-        "typed_retained_unanchored_without_candidate": 599_340,
+        "typed_retained_unanchored_without_candidate": 594_706,
     } and _sum(origin_unanchored) ==
         int(origin_buckets["unanchored_discovered_function"]),
         "Apollo unanchored frontier changed")
@@ -902,7 +902,7 @@ def analyze() -> dict[str, Any]:
         "bytes": 885_418,
         "additive_to_disjoint_release_totals": False,
     }, "Apollo overlapping object evidence policy changed")
-    _require(int(origin["controlled_bytes_mislabeled_official_blob"]) == 17_800,
+    _require(int(origin["controlled_bytes_mislabeled_official_blob"]) == 23_814,
              "Apollo controlled-label reconciliation changed")
     clkmgr_dividers = _read(CLKMGR_DIVIDERS)
     _require(clkmgr_dividers.get("status") ==
@@ -1346,10 +1346,22 @@ def analyze() -> dict[str, Any]:
                          touch_source_image["software_link_complete"],
                      "software_fwpk_package_complete":
                          touch_source_image["software_package_complete"],
+                     "physical_board_services_routed":
+                         touch_source_image["physical_board_services_routed"],
+                     "candidate_admission_blocker_class":
+                         "hardware-dependent-resident-abi",
+                     "candidate_admission_hardware_validation":
+                         touch_source_image["hardware_validation"],
+                     "candidate_admission_hardware_operations":
+                         touch_source_image["hardware_operations"],
                      "source_image_translation_units":
                          touch_source_image["metrics"]["source_translation_units"],
                      "source_image_undefined_symbols":
                          touch_source_image["metrics"]["undefined_symbols"],
+                     "candidate_source_functions":
+                         touch_candidate_provenance["entry_claim_count"],
+                     "remaining_callable_software_functions":
+                         touch_progress["remaining_functions"],
                      "source_image_raw_flash_bytes":
                          touch_source_image["metrics"]["raw_flash_bytes"],
                      "typed_code_complement_bytes":
@@ -1406,10 +1418,22 @@ def analyze() -> dict[str, Any]:
                          case_source_image["software_link_complete"],
                      "software_even_package_complete":
                          case_source_image["software_package_complete"],
+                     "physical_board_services_routed":
+                         case_source_image["physical_board_services_routed"],
+                     "candidate_admission_blocker_class":
+                         "hardware-dependent-board-routing",
+                     "candidate_admission_hardware_validation":
+                         case_source_image["hardware_validation"],
+                     "candidate_admission_hardware_operations":
+                         case_source_image["hardware_operations"],
                      "source_image_translation_units":
                          case_source_image["metrics"]["source_translation_units"],
                      "source_image_undefined_symbols":
                          case_source_image["metrics"]["undefined_symbols"],
+                     "candidate_source_functions":
+                         case_final_metrics["candidate_source_functions"],
+                     "remaining_callable_software_functions":
+                         case_final_metrics["unclassified_functions"],
                      "source_image_raw_flash_bytes":
                          case_source_image["metrics"]["raw_flash_bytes"],
                      "physical_bucket_digest":

@@ -236,13 +236,13 @@ PRODUCTION_FINAL_SHA256 = (
     "9e1e0772d76f5763881fe5e845fe3c4"
 )
 PRODUCTION_OVERLAY_SHA256 = (
-    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
+    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
 )
 PRODUCTION_COMPONENT_SHA256 = (
-    "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"
+    "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"
 )
 PRODUCTION_PACKAGE_SHA256 = (
-    "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"
+    "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
 )
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -831,9 +831,9 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 360_578,
+                "overlay_size": 362_272,
                 "overlay_sha256": PRODUCTION_OVERLAY_SHA256,
-                "component_size": 3_883_974,
+                "component_size": 3_956_672,
                 "component_sha256": PRODUCTION_COMPONENT_SHA256,
             },
         )
@@ -894,42 +894,48 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
             ],
         )
         component_report = report["component"]
-        self.assertEqual(component_report["size"], 3_883_974)
+        self.assertEqual(component_report["size"], 3_956_672)
         self.assertEqual(
             component_report["sha256"],
             PRODUCTION_COMPONENT_SHA256,
         )
         self.assertEqual(
             component_report["replaced_stock_function_bytes"],
-            397_626,
+            415_622,
         )
         self.assertEqual(
             component_report["generated_patch_site_bytes"],
-            403_190,
+            395_666,
         )
         self.assertEqual(component_report["generated_wrapper_bytes"], 32)
         self.assertEqual(
             component_report["source_owned_in_place_bytes"],
             184,
         )
-        self.assertEqual(component_report["source_owned_bytes"], 392_746)
-        self.assertEqual(component_report["opaque_base_bytes"], 3_088_006)
+        self.assertEqual(component_report["source_owned_bytes"], 495_910)
+        self.assertEqual(component_report["opaque_base_bytes"], 3_065_064)
 
         overlay = CURRENT_OVERLAY.read_bytes()
         component = CURRENT_COMPONENT.read_bytes()
         package = CURRENT_PACKAGE.read_bytes()
-        self.assertEqual(len(overlay), 360_578)
+        self.assertEqual(len(overlay), 362_272)
         self.assertEqual(sha256(overlay), PRODUCTION_OVERLAY_SHA256)
-        self.assertEqual(len(component), 3_883_974)
+        self.assertEqual(len(component), 3_956_672)
         self.assertEqual(sha256(component), PRODUCTION_COMPONENT_SHA256)
-        self.assertEqual(len(package), 4_677_046)
+        self.assertEqual(len(package), 4_750_780)
         self.assertEqual(sha256(package), PRODUCTION_PACKAGE_SHA256)
+        # Later LC3/service/CFF composition extends the final component after
+        # the core overlay, so ``len(component) - len(overlay)`` no longer
+        # identifies the overlay payload start.  Map the admitted runtime
+        # address through the component preamble instead.
+        component_offset = (
+            config["preamble_bytes"]
+            + PRODUCTION_RUNTIME_ADDRESS
+            - config["run_base"]
+        )
         self.assertEqual(
             overlay[PRODUCTION_OFFSET:PRODUCTION_OFFSET + 116],
-            component[
-                len(component) - len(overlay) + PRODUCTION_OFFSET:
-                len(component) - len(overlay) + PRODUCTION_OFFSET + 116
-            ],
+            component[component_offset:component_offset + 116],
         )
 
         patches = [
@@ -961,14 +967,14 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
                 "output_name": (
                     "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
                 ),
-                "expected_size": 4_677_046,
+                "expected_size": 4_750_780,
                 "expected_sha256": PRODUCTION_PACKAGE_SHA256,
                 "profiles": {
                     "linux-clang": {
-                        "expected_size": 4_469_364,
+                        "expected_size": 4_750_764,
                         "expected_sha256": (
-                            "79e0ecab05996ac4d1bd71483b104554"
-                            "4a9bdc767abb6bff51a2cc700f89333e"
+                            "70055c3eec63f5460123a54ac97b9399"
+                            "f40fd7e09118477751c78cd6288c0a1e"
                         ),
                     },
                 },
@@ -983,14 +989,18 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
                     "components/apollo_main/core_overlay/build/"
                     "ota_s200_firmware_ota.bin"
                 ),
-                "size": 3_883_974,
+                "size": 3_956_672,
                 "sha256": PRODUCTION_COMPONENT_SHA256,
                 "profiles": {
                     "linux-clang": {
-                        "size": 3_676_308,
+                        "path": (
+                            "build/canonical-provider/linux-clang/apollo_main/"
+                            "ota_s200_firmware_ota.bin"
+                        ),
+                        "size": 3_956_672,
                         "sha256": (
-                            "dc726a1c6187357c6c9a6b39152957bf"
-                            "3772fa06bc30d8bdd6db662af7c3dee7"
+                            "886b0e26bb847a47614103683d71aa89"
+                            "12e34379e623131b8afbd4a665eec32e"
                         ),
                     },
                 },

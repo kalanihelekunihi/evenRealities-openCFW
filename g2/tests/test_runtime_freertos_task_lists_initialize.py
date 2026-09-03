@@ -126,30 +126,30 @@ PROFILE_PINS = {
             "576317c22dd5de6f527fb595c4668b52"
         ),
         "overlay": (
-            360_578,
-            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
+            362_272,
+            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
         ),
         "component": (
-            3_883_974,
-            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
+            3_956_672,
+            "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
         ),
         "core_component": (
-            3_883_974,
-            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
+            3_885_668,
+            "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5",
         ),
         "component_accounting": {
-            "generated_patch_site_bytes": 397_446,
+            "generated_patch_site_bytes": 404_060,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_123_534,
-            "replaced_stock_function_bytes": 397_626,
+            "opaque_base_bytes": 3_116_920,
+            "replaced_stock_function_bytes": 404_240,
             "replaced_stock_data_bytes": 2_200,
-            "source_owned_bytes": 362_962,
+            "source_owned_bytes": 364_656,
             "source_owned_in_place_bytes": 184,
             "source_owned_in_place_data_bytes": 2_200,
         },
         "package": (
-            4_677_046,
-            "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
+            4_750_780,
+            "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27",
         ),
         "replacement_prefix": "5df32cb9",
         "replacement_sha256": (
@@ -165,29 +165,29 @@ PROFILE_PINS = {
             "9f443d31aad4e50858c5a64d95c04f6"
         ),
         "overlay": (
-            145_314,
-            "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19",
+            147_008,
+            "36dee8d3beebc0055456267ad068a9944a9eccc0bfec04f78603dd384709fab4",
         ),
         "component": (
-            3_676_308,
-            "dc726a1c6187357c6c9a6b39152957bf3772fa06bc30d8bdd6db662af7c3dee7",
+            3_956_672,
+            "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a",
         ),
         "core_component": (
-            3_668_710,
-            "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8",
+            3_670_404,
+            "c2d3fad0382523efb9aa3cfdf19e63e81dca9fdcecdc838e37cac5c48fde430f",
         ),
         "component_accounting": {
-            "generated_patch_site_bytes": 99_340,
+            "generated_patch_site_bytes": 105_954,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_423_840,
-            "replaced_stock_function_bytes": 99_520,
+            "opaque_base_bytes": 3_417_226,
+            "replaced_stock_function_bytes": 106_134,
             "replaced_stock_data_bytes": 0,
-            "source_owned_bytes": 145_498,
+            "source_owned_bytes": 147_192,
             "source_owned_in_place_bytes": 184,
         },
         "package": (
-            4_469_364,
-            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
+            4_750_764,
+            "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559",
         ),
         "replacement_prefix": "5df3babc",
         "replacement_sha256": (
@@ -1412,7 +1412,15 @@ class RuntimeFreeRTOSTaskListsInitializeProductionTests(unittest.TestCase):
             },
         )
         tail = by_name["apollo_freertos_task_lists_initialize_source_leaf"]
-        self.assertIs(tail, regions[-2685])
+        leaf_index = regions.index(tail)
+        self.assertEqual(
+            [region["name"] for region in regions[leaf_index - 1:leaf_index + 2]],
+            [
+                "apollo_littlefs_file_size_private_source_leaf",
+                "apollo_freertos_task_lists_initialize_source_leaf",
+                "apollo_nanopb_close_string_substream_source_leaf",
+            ],
+        )
         self.assertEqual(
             tail,
             {

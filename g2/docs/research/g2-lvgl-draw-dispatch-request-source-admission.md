@@ -3,8 +3,8 @@
 ## Scope
 
 This note bounds the isolated `lv_draw_dispatch_request` provider required by
-the retained Ambiq draw unit.  It neither provides the FreeRTOS condition
-implementation nor registers a production route.
+the retained Ambiq draw unit and its subsequently admitted FreeRTOS
+task-notification sync dependency. It does not register a production route.
 
 ## Authenticated behavior
 
@@ -25,10 +25,13 @@ performs no arithmetic or direct MMIO access.
 The Cortex-M55 object exports only `lv_draw_dispatch_request`.  Its exact
 imports are `lv_global` and `lv_thread_sync_signal`. `lv_global` is owned by
 the isolated global-storage provider. The subsequent task-notification-mode
-admission now provides `lv_thread_sync_signal`, and the three-provider aggregate
-is undefined-symbol-free. This does not imply that the live scheduler is
-qualified. The retained consumer and every target relocation are pinned by the
-component analyzer.
+admission now provides the exact `lv_thread_sync_init`, `lv_thread_sync_wait`,
+`lv_thread_sync_signal`, and `lv_thread_sync_delete` ABI. The three-provider
+aggregate is undefined-symbol-free, and the maximal backend link closes all
+five sync relocations. The extended provider also closes the two thread
+lifecycle relocations, reducing the residual provider ledger from 11 to 6
+symbols. This does not imply that the live scheduler is qualified. The retained
+consumer and every target relocation are pinned by the component analyzer.
 
 ## Admission boundary
 

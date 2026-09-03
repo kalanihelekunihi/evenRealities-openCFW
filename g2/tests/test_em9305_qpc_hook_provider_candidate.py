@@ -86,7 +86,7 @@ class Em9305QpcHookProviderCandidateTests(unittest.TestCase):
     def test_audit_admits_wsf_source_and_keeps_hardware_providers_blocked(self) -> None:
         result = self.analyzer.run_audit()
         self.assertEqual(
-            result["status"], "candidate-qualified-one-software-two-hardware",
+            result["status"], "candidate-qualified-software-provider-two-hardware",
         )
         self.assertTrue(result["read_only"])
         self.assertFalse(result["hardware_operations"])
@@ -226,7 +226,7 @@ class Em9305QpcHookProviderCandidateTests(unittest.TestCase):
         )
         result = json.loads(completed.stdout)
         self.assertEqual(
-            result["status"], "candidate-qualified-one-software-two-hardware",
+            result["status"], "candidate-qualified-software-provider-two-hardware",
         )
 
 

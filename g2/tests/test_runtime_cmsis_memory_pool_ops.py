@@ -177,8 +177,8 @@ class RuntimeCmsisMemoryPoolOpsTests(unittest.TestCase):
         main = manifest["component_overrides"]["apollo_main"]
         regions = {item["name"]: item for item in main["regions"]}
         self.assertEqual((regions["apollo_cmsis_memory_pool_create_block_source_leaf"]["file_offset"], regions["apollo_cmsis_memory_pool_free_source_leaf"]["file_offset"]), (3656796, 3656992))
-        self.assertEqual((main["provider"]["size"], main["provider"]["profiles"]["linux-clang"]["size"]), (3883974, 3676308))
-        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_size"]), (4677046, 4469364))
+        self.assertEqual((main["provider"]["size"], main["provider"]["profiles"]["linux-clang"]["size"]), (3956672, 3956672))
+        self.assertEqual((manifest["package"]["expected_size"], manifest["package"]["profiles"]["linux-clang"]["expected_size"]), (4750780, 4750764))
 
 
 if __name__ == "__main__":

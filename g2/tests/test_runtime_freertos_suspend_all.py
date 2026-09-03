@@ -923,12 +923,12 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                360_578,
+                362_272,
                 (
-                    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
+                    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
                 ),
-                2_436,
-                2_324,
+                2_439,
+                2_327,
             ),
         )
         component = self.production["component"]
@@ -946,15 +946,15 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                 )
             },
             {
-                "size": 3_883_974,
+                "size": 3_885_668,
                 "sha256": (
-                    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
+                    "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
                 ),
-                "generated_patch_site_bytes": 397_446,
-                "replaced_stock_function_bytes": 397_626,
-                "source_owned_bytes": 362_962,
+                "generated_patch_site_bytes": 404_060,
+                "replaced_stock_function_bytes": 404_240,
+                "source_owned_bytes": 364_656,
                 "source_owned_in_place_bytes": 184,
-                "opaque_base_bytes": 3_123_534,
+                "opaque_base_bytes": 3_116_920,
             },
         )
 
@@ -968,15 +968,15 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                     "g2-openCFW-s200_v2.2.6.10-core-source."
                     "evenota.bin"
                 ),
-                "expected_size": 4_677_046,
+                "expected_size": 4_750_780,
                 "expected_sha256": (
-                    "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"
+                    "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
                 ),
                 "profiles": {
                     "linux-clang": {
-                        "expected_size": 4_469_364,
+                        "expected_size": 4_750_764,
                         "expected_sha256": (
-                            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"
+                            "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559"
                         ),
                     },
                 },

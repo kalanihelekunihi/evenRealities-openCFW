@@ -235,17 +235,17 @@ LINUX_AGGREGATE = {
         "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6",
     ),
     "component": (
-        3_956_468,
-        "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
+        3_956_672,
+        "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a",
     ),
     "package": (
-        4_750_560,
-        "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
+        4_750_764,
+        "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559",
     ),
 }
 
 STAGED_CONSUMER_PINS = {
-    MANIFEST: "56eb69134262af4c59053d75bbcbddfe90a09e8e9429884ea20d532d342c1b0d",
+    MANIFEST: "9a4a09070b60cc003c1b819aa35e1b20a36046af09cd564cb36142fa3199238c",
     PROVENANCE: "2ff90b1c90d77df983dd36b0f114011a9e635db99dd5d4e379e55407ea978e6a",
     AUDIT: "b483e5b1915f54e99e8aefd047ece54153aadc6df4af51cdc4ef1cf81cc983d0",
     ROOT / "README.md": "12de86b75a4cefe574735606102f5dff42b5e3d373cfae4cdc173bb6b5b11436",
@@ -254,9 +254,9 @@ STAGED_CONSUMER_PINS = {
     ROOT / "components/apollo_main/core_overlay/EVIDENCE.md": "d7ed450d36ea1fa2db9c8d97afaf173fb23a82d8db93865e1e619bb82dbbaadc",
     ROOT / "third_party/nanopb/README.openCFW.md": "bd70ff8d92c38cad8bde2a4356f7d56f9b02994239ff09453f2f435b44fdb672",
     ROOT / "docs/memory-map.md": "6c4ce6a0b555bdad31061624c2e023c75ca071042b29c726a2b48d5cd5798ed3",
-    ROOT / "docs/source-coverage.md": "8b47d2fce8ecec0f08a6e0ccf9923b955040859b6b055495fad40d5f8a9ba621",
-    ROOT / "docs/upstream-inventory.md": "f0d32dead5abbc6b1cf5ba6989ab73b305a5a2cbec7a9788cddf3afbacb83c09",
-    ROOT / "docs/linux-reproducible-build.md": "759b08cc29e9b5522f6a1db122485c6577ea67e00ed03131a98ea28c336940b6",
+    ROOT / "docs/source-coverage.md": "41a3a52b1f41c620869e5422205e4b6fee69dd06a8e01b8f72028d326d6cd316",
+    ROOT / "docs/upstream-inventory.md": "d7e791c24672420b91c5a7f003e9c9cbfbbf6294a5e39a727233efa4935137bb",
+    ROOT / "docs/linux-reproducible-build.md": "7d639bdccef174abba1cfac051a37da13caf1e852f05525b99562b2d7fe75e0d",
 }
 
 

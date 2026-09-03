@@ -27,13 +27,57 @@ BASE_MANIFEST = G2 / "manifests/g2-2.2.6.10-core-source.json"
 MANIFEST = G2 / "tools/manifests/g2-freetype-cff-package-integration.json"
 
 PINS = {
-    BUILDER: (24_637, "4b615fdc2f393dc5c244882c2c663b70338a94b54923aca12f639a7cf59260f9"),
-    CONFIG: (1_822, "b92efd3929c66f902ac64b9142a3448d37774e67875f3f1e733bf8b3d366de0f"),
+    BUILDER: (40_269, "b344b37620574e9cec4af153f54b23e124afbe64332126118e678401f1feb4b9"),
+    CONFIG: (1_868, "4784877e78720d157f80c469d2fd04c532d23d9374506732d99db3c779d5b9dd"),
     README: (1_298, "493a0423c3282f18242af2753eeeafbc4a468834a70b1327867a82d37e105763"),
-    CORE_BUILDER: (81_667, "44e2e16484ac31c771cb309b9850e63533881b6be6b8b7d168bdab352ebe47e8"),
-    CORE_CONFIG: (5_853_221, "733bc34d7545775ab067eb03c38678889694bc092fc840c64a1ef605b0081212"),
-    OPEN_CFW: (99_021, "177c9e6266dd1327b483a05944f7a00b8a9d4d5e85eb4a0471a04a0d41dea6d0"),
-    BASE_MANIFEST: (3_391_215, "01157a2293e57b1c1fcc972b19380ae4245642a164eb2906ab54ef9f8f5eeccf"),
+    CORE_BUILDER: (90_227, "1a4f8e642484d0331bc92dfdc79d2ed2ef075df613d609c3a629aaaa3f7091a8"),
+    CORE_CONFIG: (6_029_233, "9649d9ee18c72b5796601b14d5daaa5878fc958246763887c5fa5fbd03ea054f"),
+    OPEN_CFW: (99_692, "ccbc5884b455daf5756cde99ebdf5c9edb88f0a093fd6b11e351795efe3907c3"),
+    BASE_MANIFEST: (3_554_396, "93b167c5493a7161f37426a90ecbe9ec63d838bc93f0505fd66b6f3f87f844a5"),
+}
+
+# Minimal authenticated generated-NOP tails actually consumed by the admitted
+# CFF layout.  The canonical core builder derives the superset independently
+# from its same-build LC3 route report.
+HOST_SLOTS = {
+    "apple-clang": [
+        {"function": "open_cfw_font_manager_create_chain",
+         "entry": 4639456, "start": 4639652, "end_exclusive": 4640598,
+         "forbidden_entries": [4639712]},
+        {"function": "open_cfw_ring_service_cmd_package_parse",
+         "entry": 4663688, "start": 4663692, "end_exclusive": 4664240,
+         "forbidden_entries": []},
+        {"function": "OTA_ReceivePacket",
+         "entry": 4774104, "start": 4774108, "end_exclusive": 4775488,
+         "forbidden_entries": [4774908, 4774968, 4775020, 4775044,
+                               4775072]},
+        {"function": "APP_PbRxDevCfgFrameDataProcess",
+         "entry": 5080024, "start": 5080028, "end_exclusive": 5081980,
+         "forbidden_entries": [5080062, 5080550]},
+    ],
+    "linux-clang": [
+        {"function": "open_cfw_iar_memcpy_void", "entry": 4430820,
+         "start": 4430848, "end_exclusive": 4430852,
+         "forbidden_entries": []},
+        {"function": "open_cfw_compress_log_ring_read_locked",
+         "entry": 4442106, "start": 4442110, "end_exclusive": 4442322,
+         "forbidden_entries": []},
+        {"function": "open_cfw_compress_log_encode_record",
+         "entry": 4443012, "start": 4443016, "end_exclusive": 4443806,
+         "forbidden_entries": []},
+        {"function": "open_cfw_easylogger_output", "entry": 4445556,
+         "start": 4445560, "end_exclusive": 4446582,
+         "forbidden_entries": []},
+        {"function": "open_cfw_easylogger_hexdump", "entry": 4446924,
+         "start": 4446928, "end_exclusive": 4447368,
+         "forbidden_entries": []},
+        {"function": "open_cfw_nanopb_decode_static_field", "entry": 4782440,
+         "start": 4782444, "end_exclusive": 4782876,
+         "forbidden_entries": [4782516, 4782518, 4782812]},
+        {"function": "open_cfw_nemavg_draw_start_cap_endpoint",
+         "entry": 5355760, "start": 5355764, "end_exclusive": 5357428,
+         "forbidden_entries": [5355774]},
+    ],
 }
 
 
@@ -101,10 +145,11 @@ def _apollo_component(manifest: dict[str, Any]) -> dict[str, Any]:
 def _new_rows(
     flash_rows: list[dict[str, Any]], profile: str
 ) -> list[dict[str, Any]]:
-    del profile
     return [
         row for row in flash_rows
-        if row["region"].startswith("freetype_cff_")
+        if row["region"].startswith("freetype_cff_") or
+        (profile == "linux-clang" and
+         row["region"] == "apollo_main_linux_canonical_lc3_cff_image")
     ]
 
 
@@ -114,6 +159,7 @@ def _verify_core_route(data: dict[Path, bytes]) -> dict[str, Any]:
         "cff_builder = _load_cff_scatter_builder()" in source and
         "cff_report = cff_builder.build(" in source and
         "base_component=pre_cff_component_path" in source and
+        'host_slots=lc3_service_report["residual_host_slots"]' in source and
         "final_component = (\n            cff_output" in source,
         "canonical core CFF post-link invocation drift",
     )
@@ -133,12 +179,12 @@ def _verify_core_route(data: dict[Path, bytes]) -> dict[str, Any]:
     }
     expected = {
         "apple-clang": (
-            3_956_468,
-            "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
+            3_956_672,
+            "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe",
         ),
         "linux-clang": (
-            3_956_468,
-            "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
+            3_956_672,
+            "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38",
         ),
     }
     for profile, pins in profiles.items():
@@ -148,8 +194,14 @@ def _verify_core_route(data: dict[Path, bytes]) -> dict[str, Any]:
             f"{profile}: canonical core final CFF component pin drift",
         )
     return {
-        "post_link_order": "core -> liblc3 -> product-test -> freetype-cff",
-        "base_argument": "same-build pre-CFF Apollo component",
+        "post_link_order": (
+            "core -> liblc3-ltpf -> product-test -> "
+            "liblc3-service-audio -> freetype-cff"
+        ),
+        "base_argument": (
+            "same-build LC3-service Apollo component plus authenticated "
+            "residual generated-NOP host tails"
+        ),
         "profiles": {
             profile: {"component_size": values[0], "component_sha256": values[1]}
             for profile, values in expected.items()
@@ -180,6 +232,7 @@ def _verify_candidate(
         profile=profile,
         base_component=base_component_path,
         output_dir=output,
+        host_slots=HOST_SLOTS[profile],
     )
     candidate_component = (output / "ota_s200_firmware_ota.bin").read_bytes()
     require(build_report["regions"] is None,
@@ -234,16 +287,25 @@ def _verify_candidate(
         row["region"]: artifacts[row["artifact"].removeprefix("regions/")]
         for row in new_rows
     }
-    manifest_source = [
-        row for row in new_rows if row["address_status"] == "source_compiled"
+    pointer = [
+        row for row in new_rows
+        if row["target_address"] < builder.MODULE_SLOT + 4 and
+        row["end_exclusive"] > builder.MODULE_SLOT
     ]
-    pointer = [row for row in new_rows
-               if row["address_status"] == "generated_source_data_replacement"]
-    require(len(pointer) == 1 and
-            row_payloads[pointer[0]["region"]] == builder.REPLACEMENT_CLASS_BYTES,
-            f"{profile}: class-pointer route row drift")
+    pointer.sort(key=lambda row: row["target_address"])
+    pointer_bytes = b"".join(
+        row_payloads[row["region"]][
+            max(builder.MODULE_SLOT, row["target_address"]) -
+            row["target_address"]:
+            min(builder.MODULE_SLOT + 4, row["end_exclusive"]) -
+            row["target_address"]
+        ] for row in pointer
+    )
+    require(pointer and pointer_bytes == builder.REPLACEMENT_CLASS_BYTES,
+            f"{profile}: class-pointer route bytes drift")
     sections = build_report["placement"]["sections"]
-    require(len(sections) == 4, f"{profile}: finalized CFF section count drift")
+    require(len(sections) == (10 if profile == "apple-clang" else 11),
+            f"{profile}: finalized CFF section count drift")
     for section in sections:
         start = section["start"]
         end = section["end_exclusive"]
@@ -254,36 +316,24 @@ def _verify_candidate(
             candidate_component[offset:offset + len(body)] == body,
             f"{profile}: finalized CFF section byte replay drift",
         )
-        covering = [
+        covering = sorted([
             row for row in flash_rows
             if row.get("target") == "apollo510b_internal_mram" and
             row.get("address_status") in {
-                "source_compiled", "generated_padding"
+                "source_compiled", "generated_padding",
+                "source_compiled_rodata", "generated_source_data_replacement",
             } and
-            row["target_address"] <= start and row["end_exclusive"] >= end
-        ]
-        require(len(covering) == 1,
-                f"{profile}: finalized CFF section lacks unique plan ownership")
-    # Linux's release plan intentionally coarsens the compiler-dependent
-    # appended source tail, so its tail text/exidx and erased prefix are owned
-    # by that single source-overlay row rather than carrying Apple subregion
-    # names.  Authenticate the exact bytes and bounds independently here.
-    gap_start = builder.RUN_BASE + len(base_apollo) - 0x20
-    gap_end = builder.TAIL_TEXT_START
-    gap = candidate_component[
-        builder._runtime_offset(gap_start):builder._runtime_offset(gap_end)
-    ]
-    require(gap and set(gap) == {0xFF},
-            f"{profile}: generated erased gap drift")
-    covering_gap = [
-        row for row in flash_rows
-        if row.get("target") == "apollo510b_internal_mram" and
-        row["target_address"] <= gap_start and row["end_exclusive"] >= gap_end
-    ]
-    require(len(covering_gap) == 1,
-            f"{profile}: erased CFF gap lacks unique plan ownership")
-    require(len(manifest_source) == (4 if profile == "apple-clang" else 2),
-            f"{profile}: in-place manifest CFF source row drift")
+            row["end_exclusive"] > start and row["target_address"] < end
+        ], key=lambda row: row["target_address"])
+        cursor = start
+        for row in covering:
+            if row["target_address"] > cursor:
+                break
+            cursor = max(cursor, row["end_exclusive"])
+            if cursor >= end:
+                break
+        require(cursor >= end,
+                f"{profile}: finalized CFF section lacks plan ownership")
     require(all(row["end_exclusive"] <= builder.UPDATE_FLAG for row in new_rows) and
             all(item["end_exclusive"] <= builder.UPDATE_FLAG for item in sections),
             f"{profile}: CFF row overlaps update flag")
@@ -365,13 +415,13 @@ def _verify_candidate(
             "flash_rows": len(flash_rows),
             "unresolved_rows": len(unresolved),
             "container_rows": len(container),
-            "cff_rows": len(sections) + len(pointer) + 1,
+            "cff_rows": len(new_rows),
             "cff_source_rows": len(sections),
             "cff_source_bytes": sum(item["size"] for item in sections),
             "cff_generated_pointer_rows": len(pointer),
-            "cff_generated_pointer_bytes": sum(row["size"] for row in pointer),
-            "cff_erased_gap_rows": 1,
-            "cff_erased_gap_bytes": len(gap),
+            "cff_generated_pointer_bytes": len(pointer_bytes),
+            "cff_erased_gap_rows": 0,
+            "cff_erased_gap_bytes": 0,
             "highest_cff_end_exclusive": f"0x{max(item['end_exclusive'] for item in sections):08X}",
             "update_flag": f"0x{builder.UPDATE_FLAG:08X}",
             "collision_or_protected_overlap_count": 0,
@@ -396,8 +446,8 @@ def validate_boundary(report: dict[str, Any]) -> None:
         "hardware_validation_performed": False,
     }, "CFF package route boundary drift")
     expected = {
-        "apple-clang": (20_416, 66_684, 70_800, 4_750_576),
-        "linux-clang": (20_356, 274_352, 278_468, 4_750_560),
+        "apple-clang": (20_414, 0, 0, 4_750_780),
+        "linux-clang": (20_354, 0, 0, 4_750_764),
     }
     for profile, row in report["profiles"].items():
         require(row["atomicity"]["changed_package_entries"] == [6] and

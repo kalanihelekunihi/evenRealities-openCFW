@@ -180,8 +180,8 @@ class RuntimeCmsisKernelLifecycleTests(unittest.TestCase):
         self.assertEqual(
             (config["expected"]["overlay_size"], config["expected"]["overlay_sha256"],
              config["expected"]["component_size"], config["expected"]["component_sha256"]),
-            (360578, "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
-             3883974, "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9"),
+            (362272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+             3956672, "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"),
         )
 
 

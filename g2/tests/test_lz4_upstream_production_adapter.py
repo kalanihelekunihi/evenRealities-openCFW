@@ -46,8 +46,8 @@ PROFILE_PINS = {
             "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
         ),
         "component": (
-            3883974,
-            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb",
+            3885668,
+            "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5",
         ),
         "legacy": {
             "open_cfw_evenhub_mode2_decompress_legacy": {
@@ -67,16 +67,16 @@ PROFILE_PINS = {
                 "size": 30,
             },
         },
-        "accounting": (362962, 397446, 397626, 3123534),
+        "accounting": (364656, 404060, 404240, 3116920),
     },
     "linux-clang": {
         "overlay": (
-            145314,
-            "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19",
+            147008,
+            "36dee8d3beebc0055456267ad068a9944a9eccc0bfec04f78603dd384709fab4",
         ),
         "component": (
-            3668710,
-            "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8",
+            3670404,
+            "c2d3fad0382523efb9aa3cfdf19e63e81dca9fdcecdc838e37cac5c48fde430f",
         ),
         "legacy": {
             "open_cfw_evenhub_mode2_decompress_legacy": {
@@ -96,7 +96,7 @@ PROFILE_PINS = {
                 "size": 30,
             },
         },
-        "accounting": (145498, 99340, 99520, 3423840),
+        "accounting": (147192, 105954, 106134, 3417226),
     },
 }
 

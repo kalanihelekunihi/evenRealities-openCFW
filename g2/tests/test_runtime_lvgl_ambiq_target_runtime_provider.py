@@ -110,10 +110,10 @@ class TargetRuntimeProviderTests(unittest.TestCase):
         self.assertEqual(upstream["commit"], "87f0227cb60147a26a1eeb4fb06e3b505e9c7261")
         self.assertEqual(upstream["license"], "Apache-2.0 WITH LLVM-exception")
         self.assertEqual(len(upstream["algorithmic_sources"]), 4)
-        self.assertEqual(report["missing_provider_count"], 11)
+        self.assertEqual(report["missing_provider_count"], 0)
         self.assertEqual(
             report["maximal_scoped_candidate_closure"]["expected_residual_symbol_digest"],
-            "f9d7f5b3fc8db9a19441ec0c4991ac9161c0ae46583e56c2a2298f2794732744",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         )
         missing = {row["symbol"] for row in report["missing_provider_ledger"]}
         self.assertTrue(PROVIDER_SYMBOLS.isdisjoint(missing))

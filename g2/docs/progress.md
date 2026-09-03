@@ -3610,6 +3610,24 @@ retained-SRAM, MMIO, command-queue, timing, concurrency, interrupt, reset, and
 cold-boot qualification is blocked by unavailable physical evidence.
 Firmware-wide completeness is not claimed.
 
+## 2026-09-03 — cJSON parse-side production admission
+
+The complete linked DaveGamble cJSON parse-side closure is production-routed
+from maintained, freestanding MIT C. All 21 stock entries and 2,572 stock body
+bytes are replaced by 21 strict branch sites and 21 relocated source leaves.
+The fixed G2 allocator-hook and parse-error SRAM records remain at
+`0x2007410C` and `0x200004BC`; the source introduces no undefined target
+symbols, allocated data, retained libc dependency, or hardware operation.
+
+Apple clang emits 2,442 source bytes in a 364,718-byte core overlay with
+SHA-256 `e75a1cea3fd41a7614e812c6cbf0d5c11c9539dd4446a15642dad912b5bc7b8d`.
+Linux clang emits 2,434 source bytes in a 157,044-byte core overlay with
+SHA-256 `89065b6e80b9bbc3dbe97ec48e921071e2b2b10ccba4a0a3c8e5f689101d00f9`.
+Host differential tests cover scalars, numbers, BOM handling, escapes,
+surrogates, arrays, objects, malformed input, and randomized numeric inputs.
+Live service integration remains blocked by unavailable physical evidence;
+firmware-wide completeness is not claimed.
+
 ## 2026-09-02 — Zero unresolved executable spans through 187 admissions
 
 The final 1,032-byte SPOT-manager state-transition orchestrator at
@@ -3639,6 +3657,24 @@ executable span / 1,032 bytes. Apple boot accounting is 57,977 source-owned,
 retained SRAM, MMIO, peripheral, concurrency, reset, and cold-boot
 qualification is blocked by unavailable physical evidence. Firmware-wide
 completeness is not claimed.
+
+## 2026-09-03 — Compact-log file port production admission
+
+All twelve functions in the 1,324-byte G2 compact-log file-port object are now
+implemented as reviewable MIT C and production-routed with twelve guarded
+stock-entry redirects. The Apple and Linux compiler profiles emit 1,090 and
+1,086 text bytes respectively with 41 strict relocations. Portable tests cover
+manager recovery, five-file rotation, version-header writes, cross-file sync,
+missing-file reconciliation, invalid-state reset, and export timeout behavior.
+
+Two independent observations per profile reproduce complete 3,956,672-byte
+Apollo firmware components. The admitted Apple component SHA-256 is
+`78eca5222c333c5fd3793608d67aad476ecac911f6e15164feeb2e1009944826`;
+the Linux component SHA-256 is
+`821875b74af0016e41dfb564a5370c32a30c5215077db5708fd9066af798328f`.
+Live concurrent logging, power-loss recovery, flash-wear behavior, and timeout
+timing are blocked by unavailable physical evidence. Firmware-wide source
+completeness is not claimed while retained executable regions remain.
 
 ## 2026-09-02 — State-one tuning through 185 admissions
 

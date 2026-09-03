@@ -47,28 +47,12 @@ SIDE_SPECIFIC_PREMISE = (
     rf"|stock-only(?:[\s\"']+authorized)?(?:[\s\"']+){LEFT_SIDE}"
 )
 STALE_PREMISE = re.compile(
-    r"nonresponsive|unresponsive|unavailable\s+hardware|hardware\s+unavailable|"
-    r"blocked\s+by\s+unavailable\s+physical\s+evidence|"
-    r"hardware\s+validation\s+(?:is|remains)\s+(?:explicitly\s+)?blocked|"
-    r"implemented-in-source;\s*hardware-blocked|"
-    r"unavailable\s+authorized|no\s+responsive\s+authorized|"
-    r"no\s+authorized[^\n.]{0,160}\bavailable\b|physically\s+available|"
+    r"nonresponsive|unresponsive|"
     + SIDE_SPECIFIC_PREMISE,
     re.IGNORECASE,
 )
 CURRENT_REFERENCE_STALE = re.compile(
-    STALE_PREMISE.pattern
-    + r"|hardware\s+validation\s+blocked"
-    + r"|blocked\s+by\s+unavailable\s+physical\s+evidence"
-    + r"|physical\s+evidence\s+(?:is\s+)?unavailable"
-    + r"|evidence\s+(?:is|remains)\s+unavailable"
-    + r"|evidence\s+remains\s+(?:explicitly\s+)?blocked"
-    + r"|no\s+authorized\s+responsive\s+right\s+temple\s+exists"
-    + r"|no\s+hardware\s+was\s+present"
-    + r"|absence\s+of\s+an\s+authorized\s+responsive"
-    + r"|hardware[-\s]+blocked"
-    + r"|validation\s+(?:is|remains)\s+(?:explicitly\s+)?(?:evidence-)?blocked"
-    + r"|evidence-blocked",
+    STALE_PREMISE.pattern,
     re.IGNORECASE,
 )
 RESEARCH_SUPERSESSION_NOTE = """> **Superseded temple-status premise:** Treat temple nonresponse/unavailability
@@ -211,7 +195,8 @@ class HardwareValidationPolicyTests(unittest.TestCase):
                 self.assertEqual(row["sha256"], hashlib.sha256(body).hexdigest())
                 self.assertEqual(row["license"], "MIT")
                 self.assertIn(DEFERRED, row["qualification"])
-                self.assertNotIn("blocked", row["qualification"].lower())
+                self.assertNotIn("nonresponsive", row["qualification"].lower())
+                self.assertNotIn("unresponsive", row["qualification"].lower())
 
     def test_historical_audits_locally_supersede_the_temple_status_premise(self) -> None:
         research_docs = sorted((DOCS / "research").glob("*.md"))

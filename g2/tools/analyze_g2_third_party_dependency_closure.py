@@ -374,6 +374,10 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         ROOT / "tools/analyze_g2_liblc3.py",
         "third_party_liblc3_boundary",
     ).analyze()
+    cjson = _load(
+        ROOT / "tools/analyze_g2_json_parser.py",
+        "third_party_cjson_boundary",
+    ).analyze()
     service_audio = _load(
         ROOT / "tools/analyze_g2_service_audio.py",
         "third_party_liblc3_service_audio_consumer",
@@ -1439,6 +1443,18 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or liblc3["production"]["production_routed"]
     ):
         raise ClosureError("Google liblc3 source/version boundary changed")
+    if (
+        cjson["identity"]["upstream_version_interval"]
+        != "v1.7.9 through v1.7.12"
+        or cjson["production"]["source_sha256"]
+        != "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63"
+        or not cjson["production"]["production_routed"]
+        or cjson["production"]["routed_functions"] != 21
+        or cjson["production"]["entry_patch_sites"] != 21
+        or cjson["production"]["undefined_symbols"] != 0
+        or cjson["production"]["hardware_operations"]
+    ):
+        raise ClosureError("DaveGamble cJSON production closure changed")
     service_audio_provider = service_audio["provider_boundary"]
     if (
         service_audio_provider["liblc3_calls"] != 5
@@ -2157,6 +2173,10 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
             "liblc3_snapshot_files": 38,
             "liblc3_exact_public_commit_recoverable": False,
             "liblc3_production_routed": False,
+            "cjson_version_interval": "v1.7.9 through v1.7.12",
+            "cjson_production_routed": True,
+            "cjson_routed_functions": 21,
+            "cjson_undefined_symbols": 0,
             "service_audio_liblc3_calls": 5,
             "service_audio_linked_functions": 14,
             "service_audio_indirect_body_calls": 1,

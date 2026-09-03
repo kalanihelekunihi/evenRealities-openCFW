@@ -40,28 +40,31 @@ class FreeTypeCffPackageIntegrationTests(unittest.TestCase):
         self.assertEqual(checked, self.report)
         self.assertEqual(
             self.report["integration_sha256"],
-            "8abd344fdd70157a2b73fb43ba5f3956cab7e31a70ef1eacc4ad30926290335c",
+            "52b2c8c6764e760df691d248a8673ef41b095be1b4f29111c816f085eee7e0f1",
         )
 
     def test_dual_profile_package_receipts_are_exact(self) -> None:
         expected = {
             "apple-clang": (
-                3_956_468,
-                "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
-                4_750_576,
-                "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
-                "0x0012B7B8",
+                3_956_672,
+                "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe",
+                4_750_780,
+                "f2842600b84f303c40d2d299761c1abc0a7083acc05f2d378be9a045b0d9a846",
+                "0x327A621C",
+                "0x005AFEB8",
             ),
             "linux-clang": (
-                3_956_468,
-                "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
-                4_750_560,
-                "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
-                "0xD90D86A3",
+                3_956_672,
+                "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38",
+                4_750_764,
+                "e534ffe034360b24fffc3d7fc50988234fc48ae20f6e8afa8be2507247c8cd39",
+                "0xDD72C07D",
+                "0x005AFE7C",
             ),
         }
         for profile, values in expected.items():
-            component_size, component_sha, package_size, package_sha, crc = values
+            (component_size, component_sha, package_size, package_sha, crc,
+             highest) = values
             row = self.report["profiles"][profile]
             self.assertEqual((row["component"]["size"], row["component"]["sha256"]),
                              (component_size, component_sha))
@@ -69,7 +72,7 @@ class FreeTypeCffPackageIntegrationTests(unittest.TestCase):
                               row["package"]["entry_6_crc32c_msb"]),
                              (package_size, package_sha, crc))
             self.assertEqual(row["ownership"]["highest_cff_end_exclusive"],
-                             "0x007FDED4")
+                             highest)
             self.assertEqual(row["ownership"]["collision_or_protected_overlap_count"], 0)
             self.assertEqual(row["ownership"]["unused_scattered_table_pool_consumed"], 0)
 
@@ -82,7 +85,8 @@ class FreeTypeCffPackageIntegrationTests(unittest.TestCase):
             output = Path(raw) / "candidate"
             report = self.builder.build(
                 profile=profile, base_component=component_path,
-                output_dir=output
+                output_dir=output,
+                host_slots=self.analyzer.HOST_SLOTS[profile],
             )
             component = (output / "ota_s200_firmware_ota.bin").read_bytes()
             self.open_cfw.validate_apollo_main(component)
@@ -93,11 +97,8 @@ class FreeTypeCffPackageIntegrationTests(unittest.TestCase):
             slot = self.builder._runtime_offset(self.builder.MODULE_SLOT)
             self.assertEqual(component[slot:slot + 4],
                              self.builder.REPLACEMENT_CLASS_BYTES)
-            gap_start = self.builder._runtime_offset(
-                int(report["placement"]["erased_gap_start"], 16)
-            )
-            gap_end = self.builder._runtime_offset(self.builder.TAIL_TEXT_START)
-            self.assertEqual(set(component[gap_start:gap_end]), {0xFF})
+            self.assertTrue(report["placement"]["host_scatter"])
+            self.assertGreater(report["placement"]["host_slot_count"], 0)
             for section in report["placement"]["sections"]:
                 start = self.builder._runtime_offset(section["start"])
                 artifact = output / f"{section['name'][1:]}.bin"

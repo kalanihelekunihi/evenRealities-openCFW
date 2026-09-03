@@ -68,8 +68,28 @@ class G2CompressLogPortTests(unittest.TestCase):
         self.assertEqual(p["littlefs_commit"], "0494ce7169f06a734a7bd7585f49a9fa91fa7318")
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
 
-    def test_not_production_routed(self):
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_complete_dual_profile_production_route(self):
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["routed_functions"], 12)
+        self.assertEqual(production["stock_redirects"], 12)
+        self.assertEqual(production["replaced_stock_bytes"], 1324)
+        self.assertEqual(production["strict_relocations"], 41)
+        self.assertEqual(
+            production["profile_text_bytes"],
+            {"apple-clang": 1090, "linux-clang": 1086},
+        )
+        self.assertEqual(
+            production["complete_firmware_profiles"],
+            ["apple-clang", "linux-clang"],
+        )
+        self.assertEqual(
+            self.report["hardware"],
+            {
+                "validation": "blocked by unavailable physical evidence",
+                "qualification_complete": False,
+            },
+        )
 
 
 if __name__ == "__main__":

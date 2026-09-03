@@ -42,10 +42,13 @@ interval-ceiling tag v1.7.12 (`3c8935676a97c7c97bf006db8312875b4f292f6c`) as
 the reproducible OpenCFW baseline. All 21 linked parse-side functions were
 re-verified byte-identical C text across the interval during admission; the
 whole-file tag diff is confined to dead-stripped print/create/edit/utils code.
-The snapshot is **production-excluded by explicit decision**: its
-21 functions / 2,572 body bytes at
-`[0x004D798C,0x004D83D8)` remain cut-forward pending a compiler/ABI readiness
-matrix and a reviewed production-overlay admission decision. See
+All 21 functions / 2,572 body bytes at `[0x004D798C,0x004D83D8)` are now
+dual-profile production-routed through a 26,626-byte freestanding maintained C
+provider. The route has 21 strict entry redirects, preserves the fixed SRAM
+allocator-hook and parse-error ABI, has no undefined symbols or hardware
+operations, and is covered by native differential tests. The family is
+therefore functionally closed; only the exact historical checkout inside the
+source-identical interval remains binary-unobservable. See
 [`g2-json-parser-source-candidate-audit.md`](g2-json-parser-source-candidate-audit.md)
 and [`third_party/cJSON/README.openCFW.md`](../../third_party/cJSON/README.openCFW.md).
 No exact historical *producing* commit is asserted.
@@ -325,6 +328,10 @@ EasyLogger `elog_output` is the separately authenticated body at `0x0043D574`.
 The core makes 30 calls to EasyLogger controls/output, 14 to FreeRTOS
 kernel/port seams, two to the exact CMSIS-FreeRTOS tick wrapper, and 13 to
 bounded IAR DLIB primitives, while embedding zero third-party definitions.
+All eight private functions are now clean-room C, host-tested, freestanding
+ARM-compiled, and production-routed in both complete firmware profiles; live
+concurrency, flash-wear, and power-loss qualification is blocked by unavailable
+physical evidence.
 See [`g2-compress-log-core-recovery.md`](g2-compress-log-core-recovery.md).
 
 The companion port completes the transitive storage check. Eighteen calls

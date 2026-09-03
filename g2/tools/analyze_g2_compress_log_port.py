@@ -16,6 +16,14 @@ import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
+SOURCE = ROOT / "components/apollo_main/core_overlay/compress_log_port.c"
+HEADER = SOURCE.with_suffix(".h")
+SOURCE_PATH = "components/apollo_main/core_overlay/compress_log_port.c"
+HEADER_PATH = "components/apollo_main/core_overlay/compress_log_port.h"
+SOURCE_SIZE = 17_905
+SOURCE_SHA256 = "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e"
+HEADER_SIZE = 1_095
+HEADER_SHA256 = "76379ea92735573dfa4d3291259ed869bb2412794a8925f52cafdb26407a8a8a"
 FM = ROOT / "tools/manifests/g2-compress-log-port-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-compress-log-port-closure.tsv"
 PM = ROOT / "tools/manifests/g2-compress-log-port-provider-map.tsv"
@@ -72,6 +80,20 @@ SOURCE_OWNED_PATCHES = {
     0x47697E: "open_cfw_event_loop_push_delayed",
     0x476ACE: "open_cfw_event_loop_remove_delayed",
 }
+PRODUCTION_FUNCTIONS = (
+    "open_cfw_compress_log_path_format",
+    "open_cfw_compress_log_file_exists",
+    "open_cfw_compress_log_manager_reconcile",
+    "open_cfw_compress_log_manager_load",
+    "open_cfw_compress_log_manager_save",
+    "open_cfw_compress_log_file_remove",
+    "open_cfw_compress_log_write_file_version_header",
+    "open_cfw_compress_log_rotate_file",
+    "open_cfw_compress_log_sync_to_files",
+    "open_cfw_compress_log_export_timeout_callback",
+    "open_cfw_compress_log_export_notify",
+    "open_cfw_compress_log_export_active",
+)
 
 
 def sh(value: bytes) -> str:
@@ -111,6 +133,123 @@ def _source_owned_provider_patches() -> None:
     }
     if observed != SOURCE_OWNED_PATCHES:
         raise c.AuditError("file/event provider production ownership changed")
+
+
+def _production_route(blob: bytes) -> dict:
+    """Authenticate the complete dual-profile source route in the live config."""
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    source = SOURCE.read_bytes()
+    header = HEADER.read_bytes()
+    if (len(source), sh(source)) != (SOURCE_SIZE, SOURCE_SHA256):
+        raise c.AuditError("compact-log port production source changed")
+    if (len(header), sh(header)) != (HEADER_SIZE, HEADER_SHA256):
+        raise c.AuditError("compact-log port production header changed")
+
+    header_rows = [
+        row for row in overlay["sources"] if row.get("path") == HEADER_PATH
+    ]
+    if len(header_rows) != 1:
+        raise c.AuditError("compact-log port header route changed")
+    header_row = header_rows[0]
+    if (
+        header_row.get("size") != HEADER_SIZE
+        or header_row.get("sha256") != HEADER_SHA256
+        or header_row.get("license") != "MIT"
+    ):
+        raise c.AuditError("compact-log port header pin changed")
+
+    leaves = {
+        row.get("function"): row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == SOURCE_PATH
+    }
+    if set(leaves) != set(PRODUCTION_FUNCTIONS) or len(leaves) != 12:
+        raise c.AuditError("compact-log port production leaf set changed")
+    profile_bytes = {"apple-clang": 0, "linux-clang": 0}
+    relocation_count = 0
+    for function in PRODUCTION_FUNCTIONS:
+        leaf = leaves[function]
+        source_row = leaf.get("source", {})
+        if (
+            source_row.get("size") != SOURCE_SIZE
+            or source_row.get("sha256") != SOURCE_SHA256
+            or source_row.get("license") != "MIT"
+            or leaf.get("strict_relocation_contract") is not True
+            or leaf.get("allow_discarded_alloc_sections") is not True
+        ):
+            raise c.AuditError("compact-log port leaf source contract changed")
+        profiles = leaf.get("toolchain_profiles", {})
+        if set(profiles) != {"linux-clang"}:
+            raise c.AuditError("compact-log port leaf profile set changed")
+        for profile, expected in (
+            ("apple-clang", leaf.get("expected")),
+            ("linux-clang", profiles["linux-clang"].get("expected")),
+        ):
+            if (
+                not isinstance(expected, dict)
+                or not isinstance(expected.get("offset"), int)
+                or not isinstance(expected.get("size"), int)
+                or expected["size"] <= 0
+                or expected.get("alignment") != 4
+                or len(str(expected.get("sha256", ""))) != 64
+                or len(str(expected.get("unrelocated_sha256", ""))) != 64
+            ):
+                raise c.AuditError("compact-log port leaf compiler pin changed")
+            profile_bytes[profile] += expected["size"]
+        relocations = leaf.get("relocations")
+        if not isinstance(relocations, list):
+            raise c.AuditError("compact-log port relocation contract changed")
+        for relocation in relocations:
+            if (
+                relocation.get("symbol") != relocation.get("target_function")
+                or relocation.get("symbol_type") != "STT_NOTYPE"
+                or relocation.get("type") not in {
+                    "R_ARM_THM_CALL", "R_ARM_THM_JUMP24",
+                    "R_ARM_THM_MOVW_PREL_NC", "R_ARM_THM_MOVT_PREL",
+                }
+                or not isinstance(relocation.get("offset"), int)
+            ):
+                raise c.AuditError("compact-log port relocation entry changed")
+        relocation_count += len(relocations)
+    if profile_bytes != {"apple-clang": 1090, "linux-clang": 1086}:
+        raise c.AuditError("compact-log port production text size changed")
+    if relocation_count != 41:
+        raise c.AuditError("compact-log port relocation count changed")
+
+    patches = [
+        row for row in overlay["patch_sites"]
+        if str(row.get("name", "")).startswith("replace_compress_log_port_")
+    ]
+    if len(patches) != 12:
+        raise c.AuditError("compact-log port stock redirect set changed")
+    for index, ((start, end), function, patch) in enumerate(
+        zip(F, PRODUCTION_FUNCTIONS, patches), start=1
+    ):
+        if (
+            patch.get("name") != f"replace_compress_log_port_{index:02d}"
+            or patch.get("runtime_address") != start
+            or patch.get("expected_size") != end - start
+            or patch.get("expected_sha256") != sh(c._slice(blob, start, end))
+            or patch.get("branch") != "b_w"
+            or patch.get("target_function") != function
+        ):
+            raise c.AuditError("compact-log port stock redirect changed")
+    return {
+        "production_routed": True,
+        "source_path": SOURCE_PATH,
+        "source_size": SOURCE_SIZE,
+        "source_sha256": SOURCE_SHA256,
+        "header_size": HEADER_SIZE,
+        "header_sha256": HEADER_SHA256,
+        "routed_functions": 12,
+        "stock_redirects": 12,
+        "replaced_stock_bytes": 1324,
+        "strict_relocations": relocation_count,
+        "profile_text_bytes": profile_bytes,
+        "complete_firmware_profiles": ["apple-clang", "linux-clang"],
+    }
 
 
 def analyze(image: Path = IMAGE) -> dict:
@@ -227,10 +366,7 @@ def analyze(image: Path = IMAGE) -> dict:
     if struct.unpack_from("<I", blob, 0x44AA28 - c.BASE)[0] != 120000:
         raise c.AuditError("export timeout changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("compress_log_port" in item.get("path", "").lower() for item in overlay["sources"])
-    if routed:
-        raise c.AuditError("unimplemented compact-log port entered production overlay")
+    production = _production_route(blob)
     return {
         "schema_version": 1,
         "analysis_mode": "read-only raw-image closure; corpus-independent",
@@ -281,7 +417,11 @@ def analyze(image: Path = IMAGE) -> dict:
             "new_version_discriminator": False,
             "private_generating_commit_recoverable": False,
         },
-        "production": {"production_routed": False},
+        "production": production,
+        "hardware": {
+            "validation": "blocked by unavailable physical evidence",
+            "qualification_complete": False,
+        },
     }
 
 

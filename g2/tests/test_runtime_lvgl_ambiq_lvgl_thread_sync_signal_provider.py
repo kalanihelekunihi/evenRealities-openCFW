@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Hostile, ABI/fixed-call, and residual gates for LVGL sync signaling."""
+"""Hostile, ABI/fixed-call, and residual gates for LVGL thread/sync OSAL."""
 
 from __future__ import annotations
 
@@ -32,7 +32,7 @@ class LVGLThreadSyncSignalProviderTests(unittest.TestCase):
     def tearDownClass(cls) -> None:
         cls.temporary.cleanup()
 
-    def test_hostile_lazy_pending_waiter_and_race_paths_are_sanitizer_clean(self) -> None:
+    def test_hostile_thread_lifecycle_sync_and_race_paths_are_sanitizer_clean(self) -> None:
         executable = Path(self.temporary.name) / "host-oracle"
         subprocess.run([
             self.clang, "-std=gnu11", "-O1", "-g", "-fshort-enums",
@@ -53,23 +53,23 @@ class LVGLThreadSyncSignalProviderTests(unittest.TestCase):
         provider = report["local_lvgl_thread_sync_signal_provider"]
         self.assertEqual(provider["target_source_artifact"], {
             "path": "lvgl_ambiq_lvgl_thread_sync_signal_provider.o",
-            "size": 984,
-            "sha256": "311b0db237f5051bce92970186641d2771c29e0a1c382387ede9c204af84909d",
+            "size": 2_820,
+            "sha256": "ea7b79666b87c9a5d23894183e7a68bc908ae20612d26998558352d1a618a7c1",
         })
         self.assertEqual(provider["artifact"], {
             "path": "lvgl-ambiq-lvgl-thread-sync-signal-provider.o",
-            "size": 1_140,
-            "sha256": "48251997ef18222cd29f8397f049ad5ca3c20b95b789d8917bbb03632db69269",
+            "size": 3_592,
+            "sha256": "ddbbc2988d6f974c109e0f5d826f24579a2251d7acb569414b05184cb35252da",
         })
         self.assertEqual(provider["abi_probe_artifact"], {
             "path": "lvgl_ambiq_lvgl_thread_sync_signal_provider_abi.o",
-            "size": 1_044,
-            "sha256": "9895a3e05c4f9405ac0aabf7cb0c09d32946d8a7d13340fccb567d81be513787",
+            "size": 1_628,
+            "sha256": "6c4cdc36d26040954239adb9caa26c86acf82bc2670a8c407a3fa9b3c7a16caa",
         })
         self.assertEqual(provider["aggregate_link_artifact"], {
             "path": "lvgl-ambiq-lvgl-thread-sync-signal-aggregate.o",
-            "size": 1_836,
-            "sha256": "4d9ee85c604f6ad3f18a8d547fad3a775f326d2f2cf9c866cc144e1c330bb79b",
+            "size": 4_288,
+            "sha256": "4f82e5232652fd83555c7321d2743c14eb75e0b1b8de728df2db691fe1fe3e2c",
         })
         self.assertEqual(provider["elf_undefined_symbols"], [])
         self.assertEqual(provider["external_relocations"], {})
@@ -77,10 +77,17 @@ class LVGLThreadSyncSignalProviderTests(unittest.TestCase):
         self.assertEqual(provider["fixed_address_imports"], {
             "0x004420D1": "source-owned vPortEnterCritical Thumb entry",
             "0x004420E9": "source-owned vPortExitCritical Thumb entry",
+            "0x0045589D": "source-owned xTaskGetCurrentTaskHandle Thumb entry",
+            "0x00455FA9": "source-owned prvAddCurrentTaskToDelayedList Thumb entry",
             "0x00455C49": "source-owned xTaskGenericNotify Thumb entry",
+            "0x004420BD": "source-owned vPortYield Thumb entry",
+            "0x004548BB": "source-owned xTaskCreate Thumb entry",
+            "0x00454AAF": "source-owned vTaskDelete Thumb entry",
         })
-        self.assertEqual(provider["closed_consumer_relocation_count"], 2)
+        self.assertEqual(provider["fixed_address_import_count"], 8)
+        self.assertEqual(provider["closed_consumer_relocation_count"], 7)
         self.assertEqual(provider["closed_transitive_relocation_count"], 2)
+        self.assertEqual(provider["closed_residual_symbol_count"], 6)
         self.assertTrue(provider["source_admitted"])
         self.assertFalse(provider["production_overlay_registered"])
         self.assertFalse(provider["hardware_qualified"])
@@ -96,14 +103,17 @@ class LVGLThreadSyncSignalProviderTests(unittest.TestCase):
             "src/osal/lv_freertos.c", "src/osal/lv_freertos.h",
             "src/osal/lv_os.h", "src/lv_conf_internal.h",
         })
-        self.assertEqual(report["missing_provider_count"], 11)
+        self.assertEqual(report["missing_provider_count"], 0)
         missing = {row["symbol"] for row in report["missing_provider_ledger"]}
-        self.assertNotIn("lv_thread_sync_signal", missing)
-        self.assertIn("lv_thread_sync_wait", missing)
+        self.assertTrue({
+            "lv_thread_sync_init", "lv_thread_sync_wait",
+            "lv_thread_sync_signal", "lv_thread_sync_delete",
+        }.isdisjoint(missing))
+        self.assertTrue({"lv_thread_init", "lv_thread_delete"}.isdisjoint(missing))
         self.assertTrue(report["local_lvgl_draw_dispatch_provider"]["dependency_admitted"])
         self.assertEqual(
             report["maximal_scoped_candidate_closure"]["expected_residual_symbol_digest"],
-            "f9d7f5b3fc8db9a19441ec0c4991ac9161c0ae46583e56c2a2298f2794732744",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         )
 
 

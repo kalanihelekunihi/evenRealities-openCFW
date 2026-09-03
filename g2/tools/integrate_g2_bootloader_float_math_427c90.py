@@ -23,8 +23,8 @@ BOOT = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin"
 CENSUS = ROOT / "tools/manifests/g2-bootloader-post-mspi-frontier.tsv"
 EVIDENCE = "docs/research/g2-bootloader-float-math-427c90-427e84-source-closure.md"
 BOOT_BASE = 0x00410000
-APPLE_COMPONENT_SHA = "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2"
-LINUX_COMPONENT_SHA = "426d77749f96307ae9a45173d20684570d5994d902cf1f1f5cb01f935c6ba7c6"
+APPLE_COMPONENT_SHA = "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b"
+LINUX_COMPONENT_SHA = "11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875"
 
 FLAGS = [
     "-mcpu=cortex-m55",

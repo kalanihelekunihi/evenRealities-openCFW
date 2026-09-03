@@ -90,6 +90,17 @@ RAW_WINDOWS = (
     (0x005EB7A1, 0x0045823E), (0x006A4252, 0x00458272),
 )
 
+# Later authenticated composition stages intentionally reuse the generated-NOP
+# tails behind three EFS entry redirects.  These ranges remain part of the
+# replaced stock EFS intervals, but their final bytes are source-owned by the
+# LC3 service and FreeType CFF stages rather than by the EFS filler itself.
+COMPOSED_HOST_RANGES = (
+    (0x00456C11, 0x004577C1, "liblc3_service_audio_"),
+    (0x004577C4, 0x00457998, "freetype_cff_host_scatter_"),
+    (0x00457A58, 0x00458012, "freetype_cff_host_scatter_"),
+    (0x004580C8, 0x0045893C, "freetype_cff_host_scatter_"),
+)
+
 
 class AuditError(RuntimeError):
     pass
@@ -296,17 +307,74 @@ def analyze(image_path: Path = IMAGE) -> dict:
     manifest = json.loads(MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
     regions = {region["name"]: region for region in main["regions"]}
+    composed_host_bytes = 0
+    observed_composed_hosts: list[tuple[int, int, str]] = []
+    all_regions = main["regions"]
     for order, row in enumerate(rows, 1):
-        item = regions.get(f"efs_service_{order:02d}_source_replacement")
-        expected = (
-            int(row["stock_start"], 0), int(row["stock_bytes"]),
-            "generated_source_entry_replacement",
+        start = int(row["stock_start"], 0)
+        end = int(row["stock_end_exclusive"], 0)
+        covering = sorted(
+            (
+                max(start, item["target_address"]),
+                min(end, item["target_address"] + item["size"]),
+                item,
+            )
+            for item in all_regions
+            if isinstance(item.get("target_address"), int)
+            and isinstance(item.get("size"), int)
+            and item["target_address"] < end
+            and item["target_address"] + item["size"] > start
         )
-        if not item or (
-            item.get("target_address"), item.get("size"),
-            item.get("address_status"),
-        ) != expected:
-            raise AuditError(f"production EFS service stock region changed: {row['function']}")
+        cursor = start
+        for segment_start, segment_end, item in covering:
+            if segment_start != cursor or segment_end <= segment_start:
+                raise AuditError(
+                    f"production EFS service stock coverage changed: {row['function']}"
+                )
+            name = item.get("name", "")
+            status = item.get("address_status")
+            own_prefix = f"efs_service_{order:02d}_source_replacement"
+            if name.startswith(own_prefix):
+                if status != "generated_source_entry_replacement":
+                    raise AuditError(
+                        f"production EFS service route class changed: {row['function']}"
+                    )
+            else:
+                matching_host = next(
+                    (
+                        expected
+                        for expected in COMPOSED_HOST_RANGES
+                        if (segment_start, segment_end) == expected[:2]
+                        and name.startswith(expected[2])
+                    ),
+                    None,
+                )
+                if matching_host is None or status != "generated_source_data_replacement":
+                    raise AuditError(
+                        f"production EFS service composed host changed: {row['function']}"
+                    )
+                composed_host_bytes += segment_end - segment_start
+                observed_composed_hosts.append(matching_host)
+            cursor = segment_end
+        if cursor != end or not covering:
+            raise AuditError(
+                f"production EFS service stock coverage changed: {row['function']}"
+            )
+        first_start, first_end, first_item = covering[0]
+        if (
+            first_start != start
+            or first_end - first_start < 4
+            or not first_item.get("name", "").startswith(
+                f"efs_service_{order:02d}_source_replacement"
+            )
+            or first_item.get("address_status")
+            != "generated_source_entry_replacement"
+        ):
+            raise AuditError(
+                f"production EFS service entry redirect changed: {row['function']}"
+            )
+    if tuple(observed_composed_hosts) != COMPOSED_HOST_RANGES or composed_host_bytes != 7_090:
+        raise AuditError("production EFS service composed-host census changed")
     service_regions = [region for region in main["regions"]
                        if region["name"].startswith("efs_service_")]
     if sum(region["size"] for region in service_regions
@@ -358,6 +426,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "source_functions": 12, "compiled_text_bytes": 2936,
             "alignment_bytes": 16, "strict_relocations": 68,
             "stock_replaced_bytes": 9276, "retained_gap_pool_bytes": 658,
+            "composed_host_tail_bytes": composed_host_bytes,
             "software_functional_gap": False,
             "hardware_validation": "blocked by unavailable physical evidence",
             "hardware_blocker": (

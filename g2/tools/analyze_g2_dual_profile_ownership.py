@@ -29,12 +29,12 @@ COMPANION = ROOT / "tools/manifests/g2-dual-profile-ownership.json"
 BASE_MANIFEST = ROOT / "manifests/g2-2.2.6.10.json"
 OBSERVATIONS = {
     "apple-clang": (
-        ROOT / "build/canonical-observation/apple-a/build-report.json",
-        ROOT / "build/canonical-observation/apple-b/build-report.json",
+        ROOT / "build/canonical-observation-g2-final9/apple-a/build-report.json",
+        ROOT / "build/canonical-observation-g2-final9/apple-b/build-report.json",
     ),
     "linux-clang": (
-        ROOT / "build/canonical-observation/linux-a/build-report.json",
-        ROOT / "build/canonical-observation/linux-b/build-report.json",
+        ROOT / "build/canonical-observation-g2-final9/linux-a/build-report.json",
+        ROOT / "build/canonical-observation-g2-final9/linux-b/build-report.json",
     ),
 }
 BOOT_REPORTS = {
@@ -54,8 +54,8 @@ EM9305_PROVIDER = {
     "sha256": "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42",
 }
 PACKAGE_DIRS = {
-    profile: ROOT / f"build/postapply-package-{suffix}"
-    for profile, suffix in (("apple-clang", "apple"), ("linux-clang", "linux"))
+    "apple-clang": ROOT / "build/source",
+    "linux-clang": ROOT / "build/source-linux",
 }
 APOLLO_PROVIDER_PATHS = {
     "apple-clang": {
@@ -67,7 +67,9 @@ APOLLO_PROVIDER_PATHS = {
             "build/canonical-provider/linux-clang/apollo_bootloader/"
             "ota_s200_bootloader.bin"
         ),
-        "apollo_main": ".tmp-postapply-core-linux/ota_s200_firmware_ota.bin",
+        "apollo_main": (
+            "build/canonical-provider/linux-clang/apollo_main/ota_s200_firmware_ota.bin"
+        ),
     },
 }
 
@@ -283,7 +285,7 @@ def _canonical_main(
     source_digest = _digest(first_source.get("sha256"), f"{profile} source closure")
     _require(
         isinstance(first_source.get("entries"), list)
-        and len(first_source["entries"]) == 1202,
+        and len(first_source["entries"]) == 1252,
              f"{profile}: source-input entry count changed")
     _require(first.get("final") == second.get("final"),
              f"{profile}: A/B final identity differs")
@@ -325,7 +327,7 @@ def _canonical_main(
     _require(accounting == second_accounting, f"{profile}: A/B accounting differs")
     identity = {
         "source_inputs_sha256": source_digest,
-        "source_input_entries": 879,
+        "source_input_entries": len(first_source["entries"]),
         "component_sha256": _digest(final.get("component_sha256"), "main component"),
         "component_size": _integer(final.get("component_size"), "main size", minimum=1),
         "overlay_sha256": _digest(final.get("overlay_sha256"), "main overlay"),
@@ -488,16 +490,25 @@ def _package(profile: str) -> tuple[dict[str, Any], dict[str, dict[str, int]]]:
             and all(part not in ("", ".", "..") for part in provider_path.parts),
             f"{profile}: provider identity is invalid",
         )
+        # Source-build receipts name the manifest output path.  That path is
+        # shared by profile builds and can therefore be overwritten by a
+        # later build of the other profile.  Authenticate Apollo providers
+        # against their admitted, profile-specific canonical copies instead;
+        # retain the receipt path validation above so an unexpected manifest
+        # path still fails closed.
+        authenticated_path = APOLLO_PROVIDER_PATHS.get(profile, {}).get(
+            name, path_value
+        )
         provider_identities[name] = {
             "kind": kind,
-            "path": path_value,
+            "path": authenticated_path,
             "size": provider_sizes[name],
             "sha256": _digest(provider.get("sha256"), "provider digest"),
         }
         _artifact(
             ROOT,
             {
-                "artifact": path_value,
+                "artifact": authenticated_path,
                 "size": provider_sizes[name],
                 "sha256": provider_identities[name]["sha256"],
             },
@@ -782,7 +793,7 @@ def _observed() -> dict[str, Any]:
         raise OwnershipError(f"current canonical source closure: {error}") from error
     _require(
         isinstance(current_source_inputs.get("entries"), list)
-        and len(current_source_inputs["entries"]) == 1202,
+        and len(current_source_inputs["entries"]) == 1252,
         "current canonical source closure entry count changed",
     )
 

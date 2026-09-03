@@ -461,19 +461,19 @@ byte-reproducible Apple artifacts.
 make core-canonical-observation \
   OPENCFW_CLANG="$APPLE_CLANG_REVIEW" \
   OPENCFW_TOOLCHAIN_PROFILE=apple-clang \
-  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation/apple-a
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final9/apple-a
 make core-canonical-observation \
   OPENCFW_CLANG="$APPLE_CLANG_REVIEW" \
   OPENCFW_TOOLCHAIN_PROFILE=apple-clang \
-  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation/apple-b
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final9/apple-b
 make core-canonical-observation \
   OPENCFW_CLANG=/path/to/reviewed/linux-clang \
   OPENCFW_TOOLCHAIN_PROFILE=linux-clang \
-  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation/linux-a
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final9/linux-a
 make core-canonical-observation \
   OPENCFW_CLANG=/path/to/reviewed/linux-clang \
   OPENCFW_TOOLCHAIN_PROFILE=linux-clang \
-  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation/linux-b
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final9/linux-b
 ```
 
 Each output directory contains its own `build-report.json` and the artifacts
@@ -513,10 +513,10 @@ python3 components/bootloader/core_overlay/build_component.py \
 
 LINUX_BOOT_PROVIDER=build/canonical-provider/linux-clang/apollo_bootloader/ota_s200_bootloader.bin
 make core-canonical-admission \
-  CORE_CANONICAL_APPLE_A=build/canonical-observation/apple-a/build-report.json \
-  CORE_CANONICAL_APPLE_B=build/canonical-observation/apple-b/build-report.json \
-  CORE_CANONICAL_LINUX_A=build/canonical-observation/linux-a/build-report.json \
-  CORE_CANONICAL_LINUX_B=build/canonical-observation/linux-b/build-report.json \
+  CORE_CANONICAL_APPLE_A=build/canonical-observation-g2-final9/apple-a/build-report.json \
+  CORE_CANONICAL_APPLE_B=build/canonical-observation-g2-final9/apple-b/build-report.json \
+  CORE_CANONICAL_LINUX_A=build/canonical-observation-g2-final9/linux-a/build-report.json \
+  CORE_CANONICAL_LINUX_B=build/canonical-observation-g2-final9/linux-b/build-report.json \
   CORE_CANONICAL_PROFILE_PROVIDER_ARGS="--profile-provider linux-clang apollo_bootloader $LINUX_BOOT_PROVIDER"
 ```
 
@@ -538,10 +538,9 @@ They perform no network access, signing, flashing, or hardware operation.
 
 ### Rebuild post-apply dual-profile evidence
 
-After `core-canonical-apply` succeeds, rebuild the admitted Apple and Linux
-Apollo-main providers into the exact paths consumed by the ownership analyzer.
-Use the same isolated Apple compiler and reviewed Linux compiler that produced
-the admitted observations:
+After `core-canonical-apply` succeeds, rebuild the admitted Apple provider and
+independently reproduce the Linux provider. Use the same isolated Apple
+compiler and reviewed Linux compiler that produced the admitted observations:
 
 ```sh
 python3 components/apollo_main/core_overlay/build_component.py \
@@ -552,76 +551,15 @@ python3 components/apollo_main/core_overlay/build_component.py \
   --clang /path/to/reviewed/linux-clang \
   --toolchain-profile linux-clang \
   --output-dir .tmp-postapply-core-linux
+cmp .tmp-postapply-core-linux/ota_s200_firmware_ota.bin \
+  build/canonical-provider/linux-clang/apollo_main/ota_s200_firmware_ota.bin
 ```
 
-The live core-source manifest points at the Apple providers. Create the Linux
-scratch manifest below by changing only the `apollo_bootloader` and
-`apollo_main` provider path strings to the analyzer-required Linux paths. The
-script fails if either original path has drifted, proves that reversing those
-two substitutions recovers the original semantic JSON tree, and verifies the
-written tree before any package command consumes it:
-
-```sh
-python3 - manifests/g2-2.2.6.10-core-source.json \
-  manifests/.tmp-g2-linux-postapply.json <<'PY'
-from __future__ import annotations
-
-import copy
-import json
-import os
-from pathlib import Path
-import sys
-
-
-source, destination = map(Path, sys.argv[1:])
-if source.is_symlink() or not source.is_file():
-    raise SystemExit("core-source manifest is not a regular file")
-if destination.parent.resolve() != source.parent.resolve():
-    raise SystemExit("scratch manifest must stay beside the source manifest")
-if destination.is_symlink():
-    raise SystemExit("scratch manifest must not be a symlink")
-original = json.loads(source.read_text(encoding="utf-8"))
-candidate = copy.deepcopy(original)
-updates = {
-    "apollo_bootloader": (
-        "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
-        "build/canonical-provider/linux-clang/apollo_bootloader/"
-        "ota_s200_bootloader.bin",
-    ),
-    "apollo_main": (
-        "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
-        ".tmp-postapply-core-linux/ota_s200_firmware_ota.bin",
-    ),
-}
-overrides = candidate.get("component_overrides")
-if not isinstance(overrides, dict):
-    raise SystemExit("core-source component_overrides object is missing")
-selected = {name: overrides.get(name) for name in updates}
-if set(selected) != set(updates) or not all(
-    isinstance(component, dict) for component in selected.values()
-):
-    raise SystemExit("Apollo provider set changed")
-for name, (old_path, new_path) in updates.items():
-    provider = selected[name].get("provider")
-    if not isinstance(provider, dict) or provider.get("path") != old_path:
-        raise SystemExit(f"{name}: current provider path changed")
-    provider["path"] = new_path
-audit = copy.deepcopy(candidate)
-audit_rows = audit["component_overrides"]
-for name, (old_path, _new_path) in updates.items():
-    audit_rows[name]["provider"]["path"] = old_path
-if audit != original:
-    raise SystemExit("scratch manifest changed a field other than two paths")
-payload = json.dumps(candidate, indent=2, sort_keys=True) + "\n"
-temporary = destination.with_name(destination.name + ".write")
-if temporary.exists() or temporary.is_symlink():
-    raise SystemExit(f"refusing existing temporary output: {temporary}")
-temporary.write_text(payload, encoding="utf-8")
-os.replace(temporary, destination)
-if json.loads(destination.read_text(encoding="utf-8")) != candidate:
-    raise SystemExit("scratch manifest readback changed")
-PY
-```
+The live core-source manifest carries authenticated profile-specific provider
+paths. `open_cfw.py` reads and reports those effective paths for Linux, so both
+profiles use the same semantic manifest identity; a scratch manifest would
+change that identity and correctly lose the checked ownership-authority
+pointer.
 
 Build, verify the six current providers and deterministic package, and then
 verify the complete generated artifact set for each profile:
@@ -640,14 +578,14 @@ python3 tools/open_cfw.py verify-artifacts \
   --toolchain-profile apple-clang
 
 python3 tools/open_cfw.py build \
-  --manifest manifests/.tmp-g2-linux-postapply.json \
+  --manifest manifests/g2-2.2.6.10-core-source.json \
   --output-dir build/postapply-package-linux \
   --toolchain-profile linux-clang
 python3 tools/open_cfw.py verify \
-  --manifest manifests/.tmp-g2-linux-postapply.json \
+  --manifest manifests/g2-2.2.6.10-core-source.json \
   --toolchain-profile linux-clang
 python3 tools/open_cfw.py verify-artifacts \
-  --manifest manifests/.tmp-g2-linux-postapply.json \
+  --manifest manifests/g2-2.2.6.10-core-source.json \
   --output-dir build/postapply-package-linux \
   --toolchain-profile linux-clang
 ```
@@ -665,9 +603,9 @@ before atomically replacing the companion and verifying its readback. Ordinary
 `make dual-profile-ownership` remains read-only and fails closed if the checked
 receipt is missing, stale, redirected, or inconsistent with live evidence.
 
-The scratch manifest, `.tmp-postapply-core-linux/`, the four canonical receipt
-trees under `build/canonical-observation/{apple-a,apple-b,linux-a,linux-b}/`,
-and both `build/postapply-package-*` directories are ignored, private local
+`.tmp-postapply-core-linux/`, the four canonical receipt trees under
+`build/canonical-observation-g2-final9/{apple-a,apple-b,linux-a,linux-b}/`, and
+both `build/postapply-package-*` directories are ignored, private local
 evidence. They are not Git inputs or community-archive members. This entire
 sequence is deterministic and software-only: it performs no network access,
 signing, flashing, or hardware operation.

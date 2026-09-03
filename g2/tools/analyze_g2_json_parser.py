@@ -8,6 +8,10 @@ import analyze_g2_compress_log_core as q
 import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
 IMAGE=ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin';FM=ROOT/'tools/manifests/g2-json-parser-function-map.tsv';CL=ROOT/'tools/manifests/g2-json-parser-closure.tsv'
+SOURCE=ROOT/'components/shared/cjson/runtime_cjson_parse.c'
+SOURCE_PATH='components/shared/cjson/runtime_cjson_parse.c'
+SOURCE_SIZE=26626
+SOURCE_SHA256='710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63'
 PINS={FM:'3da8d5145ff3a49c454b7d342ec6fa663a9f4def717b8c53c3542136f22c6878',CL:'eea456f98d57361981f91b04337686e085e0865b7794a243fdaa989827c17963'}
 PHYS=(0x4D798C,0x4D83D8)
 IAR={0x43C0E4,0x44A43C,0x44B610,0x46CACC};NANOPB={0x48949C};IAR_UNCLOSED={0x4D58C2,0x542D48}
@@ -66,7 +70,29 @@ def analyze(image=IMAGE):
  for a,s in ((0x78D15C,'null'),(0x78D164,'false'),(0x78D16C,'true')):
   o=a-c.BASE;e=b.find(b'\0',o)
   if e<0 or b[o:e].decode('ascii')!=s:raise c.AuditError('literal pool string changed')
+ source=SOURCE.read_bytes()
+ if len(source)!=SOURCE_SIZE or sh(source)!=SOURCE_SHA256:raise c.AuditError('production cJSON source changed')
+ for marker in (b'0x2007410C',b'0x200004BC',b'3c8935676a97c7c97bf006db8312875b4f292f6c',b'OPEN_CFW_CJSON_G2'):
+  if marker not in source:raise c.AuditError('production cJSON ABI/provenance marker changed')
  overlay=json.loads((ROOT/'components/apollo_main/core_overlay/overlay.json').read_text())
- if any('json' in x.get('path','').lower() for x in overlay['sources']):raise c.AuditError('unimplemented JSON parser routed')
- return {'schema_version':1,'identity':{'image_sha256':c.IMAGE_SHA256,'retained_path':None,'upstream_family':'cJSON (DaveGamble/cJSON)','upstream_version_interval':'v1.7.9 through v1.7.12','embedded_third_party_definitions':['cJSON 1.7.9-1.7.12 parse-side subset: ParseWithOpts/Parse/parse_value/parse_string/parse_number/parse_array/parse_object/parse_hex4/utf16_literal_to_utf8/buffer_skip_whitespace/skip_utf8_bom/get_decimal_point/case_insensitive_strcmp/cJSON_New_Item plus public cJSON_Delete/GetArraySize/GetArrayItem/GetObjectItem/IsArray']},'surface':{'linked_functions':21,'ghidra_discovered_functions':0,'restored_functions':21,'path_anchored_functions':0,'body_bytes':2572,'physical_bytes':2636,'noncode_bytes':64,'reachable_instructions':1172,'direct_body_calls':47,'internal_direct_body_calls':34,'external_direct_body_calls':13,'indirect_body_calls':6,'direct_bl_entry_sites':68,'external_direct_bl_entry_sites':34,'stored_function_entry_pointers':0,'strict_interior_ingress':0,'b_w_entry_or_interior_targets':0},'provider_boundary':{'admitted_nanopb_shared_initializer_calls':1,'nanopb_commit':'98bf4db69897b53434f3d0ba72e0a3ab1a902824','iar_dlib_calls':7,'unclosed_iar_runtime_calls':5,'unclosed_iar_runtime_bodies':['0x004D58C2 tolower trampoline','0x00542D48 strtod'],'hook_dispatch_sites':6,'cmsis_freertos_calls':0,'freertos_kernel_calls':0,'new_version_discriminator':True,'version_interval':'cJSON v1.7.9 through v1.7.12'},'production':{'production_routed':False}}
+ names=[r['function'] for r in rows];name_set=set(names);entries={int(r['stock_start'],0):r for r in rows}
+ if not name_set.issubset(set(overlay['functions'])):raise c.AuditError('production cJSON function inventory is incomplete')
+ patches=[x for x in overlay['patch_sites'] if x.get('runtime_address') in entries]
+ if len(patches)!=21:raise c.AuditError('production cJSON entry patch inventory changed')
+ for patch in patches:
+  row=entries[patch['runtime_address']]
+  if (patch.get('branch'),patch.get('target_function'),patch.get('expected_size'),patch.get('expected_sha256'))!=('b_w',row['function'],int(row['stock_bytes'],0),row['stock_sha256']):raise c.AuditError('production cJSON entry patch changed')
+ leaves={x.get('function'):x for x in overlay['relocated_leaves'] if x.get('function') in name_set}
+ if set(leaves)!=name_set:raise c.AuditError('production cJSON relocated leaf inventory changed')
+ apple_bytes=linux_bytes=0
+ for name in names:
+  leaf=leaves[name];src=leaf.get('source',{});tool=leaf.get('toolchain',{});linux=leaf.get('toolchain_profiles',{}).get('linux-clang',{})
+  if (src.get('path'),src.get('size'),src.get('sha256'),src.get('license'),src.get('upstream_commit'))!=(SOURCE_PATH,SOURCE_SIZE,SOURCE_SHA256,'MIT','3c8935676a97c7c97bf006db8312875b4f292f6c'):raise c.AuditError('production cJSON source identity changed')
+  if leaf.get('strict_relocation_contract') is not True or '-DOPEN_CFW_CJSON_G2=1' not in tool.get('flags',[]) or tool.get('include_dirs')!=['third_party/cJSON/g2-compat','third_party/cJSON']:raise c.AuditError('production cJSON toolchain contract changed')
+  if name=='cJSON_Delete' and leaf.get('allow_self_relocation') is not True:raise c.AuditError('production cJSON recursive delete route changed')
+  expected=leaf.get('expected',{});linux_expected=linux.get('expected',{})
+  if any(not isinstance(x.get(k),int) or x[k]<0 for x in (expected,linux_expected) for k in ('size','offset','alignment')):raise c.AuditError('production cJSON placement pin changed')
+  apple_bytes+=expected['size'];linux_bytes+=linux_expected['size']
+ if (apple_bytes,linux_bytes)!=(2442,2434):raise c.AuditError('production cJSON payload size changed')
+ return {'schema_version':2,'identity':{'image_sha256':c.IMAGE_SHA256,'retained_path':None,'upstream_family':'cJSON (DaveGamble/cJSON)','upstream_version_interval':'v1.7.9 through v1.7.12','embedded_third_party_definitions':['cJSON 1.7.9-1.7.12 parse-side subset: ParseWithOpts/Parse/parse_value/parse_string/parse_number/parse_array/parse_object/parse_hex4/utf16_literal_to_utf8/buffer_skip_whitespace/skip_utf8_bom/get_decimal_point/case_insensitive_strcmp/cJSON_New_Item plus public cJSON_Delete/GetArraySize/GetArrayItem/GetObjectItem/IsArray']},'surface':{'linked_functions':21,'ghidra_discovered_functions':0,'restored_functions':21,'path_anchored_functions':0,'body_bytes':2572,'physical_bytes':2636,'noncode_bytes':64,'reachable_instructions':1172,'direct_body_calls':47,'internal_direct_body_calls':34,'external_direct_body_calls':13,'indirect_body_calls':6,'direct_bl_entry_sites':68,'external_direct_bl_entry_sites':34,'stored_function_entry_pointers':0,'strict_interior_ingress':0,'b_w_entry_or_interior_targets':0},'provider_boundary':{'admitted_nanopb_shared_initializer_calls':1,'nanopb_commit':'98bf4db69897b53434f3d0ba72e0a3ab1a902824','iar_dlib_calls':7,'unclosed_iar_runtime_calls':5,'unclosed_iar_runtime_bodies':['0x004D58C2 tolower trampoline','0x00542D48 strtod'],'hook_dispatch_sites':6,'cmsis_freertos_calls':0,'freertos_kernel_calls':0,'new_version_discriminator':True,'version_interval':'cJSON v1.7.9 through v1.7.12'},'production':{'production_routed':True,'source_path':SOURCE_PATH,'source_size':SOURCE_SIZE,'source_sha256':SOURCE_SHA256,'routed_functions':21,'entry_patch_sites':21,'replaced_stock_function_bytes':2572,'apple_payload_bytes':apple_bytes,'linux_payload_bytes':linux_bytes,'undefined_symbols':0,'retained_external_runtime_calls':0,'fixed_sram_hook_abi':True,'hardware_operations':[]}}
 if __name__=='__main__':print(json.dumps(analyze(),indent=2,sort_keys=True))

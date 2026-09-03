@@ -56,20 +56,21 @@ No CMSIS-FreeRTOS or FreeRTOS kernel API is used.
 
 ## Production boundary
 
-**Explicit decision: production-excluded.** The pristine translation units in
-this subtree are authenticated reference material and are not linked. The
-2,572 stock body bytes remain cut-forward in every build profile. Production
-admission requires, at minimum:
+The pristine files in this subtree remain authenticated reference material.
+Production uses the bounded MIT adaptation
+`components/shared/cjson/runtime_cjson_parse.c`, not a whole-file link of
+`cJSON.c`. The adaptation preserves all 21 linked parse-side APIs and the
+authenticated G2 SRAM allocator-hook/error ABI while replacing `memset`,
+`strlen`, `strncmp`, `strcmp`, `tolower`, and `strtod` dependencies with local
+freestanding C.
 
-- a compiler/ABI readiness matrix against this authenticated baseline,
-- host-tested behavior verification of the candidate build,
-- reviewed production-overlay integration with entry redirects,
-- source-coverage and ownership accounting updates, and
-- fail-closed tests pinning the resulting overlay, component, and package.
-
-Identification and vendoring are not admission. Do not compile this subtree
-into any production component without that review; `verify_snapshot.py`
-fails closed if the recorded production-exclusion decision is removed.
+All 21 stock function entries are redirected to strict relocated leaves in
+both reviewed profiles. The route replaces 2,572 stock function bytes with
+2,442 Apple-clang or 2,434 Linux-clang function bytes, has zero undefined
+symbols and zero allocated data sections, and performs no hardware operation.
+Four canonical observations and ordinary fail-closed builds pin the complete
+overlay/component result. `verify_snapshot.py` authenticates both the pristine
+snapshot and the admitted production-source identity.
 
 ## Verification
 

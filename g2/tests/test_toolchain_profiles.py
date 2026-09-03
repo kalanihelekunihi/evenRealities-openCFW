@@ -777,6 +777,41 @@ class ResolveLeafProfileRecordTests(unittest.TestCase):
 
 
 class OpenCfwProfileHelperTests(unittest.TestCase):
+    def test_profile_specific_provider_paths_select_exact_linux_artifacts(self) -> None:
+        manifest = open_cfw.load_manifest(CORE_MANIFEST)
+        payloads = open_cfw.read_providers(
+            manifest, OPENCFW_ROOT, toolchain_profile="linux-clang"
+        )
+        self.assertEqual(
+            (len(payloads["apollo_bootloader"]),
+             open_cfw.sha256_bytes(payloads["apollo_bootloader"])),
+            (163824,
+             "11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875"),
+        )
+        self.assertEqual(
+            (len(payloads["apollo_main"]),
+             open_cfw.sha256_bytes(payloads["apollo_main"])),
+            (3956672,
+             "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a"),
+        )
+        providers = {
+            component["name"]: component["provider"]
+            for component in manifest["components"]
+        }
+        self.assertEqual(
+            open_cfw.effective_provider_path(
+                providers["apollo_bootloader"], "linux-clang"
+            ),
+            "build/canonical-provider/linux-clang/apollo_bootloader/"
+            "ota_s200_bootloader.bin",
+        )
+        self.assertEqual(
+            open_cfw.effective_provider_path(
+                providers["apollo_main"], "linux-clang"
+            ),
+            "build/canonical-provider/linux-clang/apollo_main/ota_s200_firmware_ota.bin",
+        )
+
     def test_profile_pins_canonical_is_none(self) -> None:
         record = {"profiles": {"linux-clang": {"size": 1}}}
         self.assertIsNone(open_cfw.profile_pins(record, "apple-clang"))
@@ -921,9 +956,9 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
                 "overlay_sha256": (
                     "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
                 ),
-                "component_size": 3_956_468,
+                "component_size": 3_956_672,
                 "component_sha256": (
-                    "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"
+                    "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"
                 ),
             },
         )
@@ -934,9 +969,9 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
                 "overlay_sha256": (
                     "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6"
                 ),
-                "component_size": 3_956_468,
+                "component_size": 3_956_672,
                 "component_sha256": (
-                    "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7"
+                    "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a"
                 ),
             },
         )
@@ -946,15 +981,15 @@ class CoreLz4ProfilePinTests(unittest.TestCase):
                 manifest["package"]["expected_sha256"],
             ),
             (
-                4_750_576,
-                "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
+                4_750_780,
+                "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27",
             ),
         )
         self.assertEqual(
             manifest["package"]["profiles"]["linux-clang"],
             {
-                "expected_size": 4_750_560,
-                "expected_sha256": "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
+                "expected_size": 4_750_764,
+                "expected_sha256": "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559",
             },
         )
 
@@ -1137,7 +1172,7 @@ class LinuxProfileReproductionTests(unittest.TestCase):
 
 
 class EffectiveRegionsTests(unittest.TestCase):
-    """The appended-source region coarsening under a non-canonical profile."""
+    """The admitted whole-image replacement and appended Linux source tail."""
 
     def _apollo_main_override(self) -> dict:
         manifest = json.loads(CORE_MANIFEST.read_text(encoding="utf-8"))
@@ -1155,13 +1190,32 @@ class EffectiveRegionsTests(unittest.TestCase):
     def test_non_canonical_profile_coarsens_appended_tail(self) -> None:
         component = self._apollo_main_override()
         boundary = component["source_appended_boundary"]
-        base = [r for r in component["regions"] if r["file_offset"] < boundary]
         data_len = boundary + 123456
         regions = open_cfw.effective_component_regions(
             component, data_len, "linux-clang"
         )
-        # Base regions are preserved; the appended tail is one coarse region.
-        self.assertEqual(len(regions), len(base) + 1)
+        # The reviewed Linux profile replaces the canonical base partition
+        # with an exact preamble plus whole-image receipt, then coarsens only
+        # its compiler-owned appended source tail.
+        self.assertEqual(len(regions), 3)
+        self.assertEqual(
+            (
+                regions[0]["file_offset"],
+                regions[0]["size"],
+                regions[0]["address_status"],
+            ),
+            (0, 32, "container_only"),
+        )
+        self.assertEqual(
+            (
+                regions[1]["file_offset"],
+                regions[1]["size"],
+                regions[1]["target_address"],
+                regions[1]["address_status"],
+            ),
+            (32, boundary - 32, 0x00438000,
+             "generated_source_data_replacement"),
+        )
         coarse = regions[-1]
         self.assertEqual(coarse["file_offset"], boundary)
         self.assertEqual(coarse["size"], data_len - boundary)
@@ -1216,8 +1270,8 @@ class SourceProfileReproductionTests(unittest.TestCase):
                 open_cfw.sha256_file(component_report),
             ),
             (
-                1_834_576,
-                "540c8bf67144c8822ca3d4982ba5b77062d14f71a3f8bbe6a3b7b564881baa21",
+                2_654_590,
+                "b71a6ea9b5b4687134432173d563266f6902ef7ce211a8266337d607634b856f",
             ),
         )
         with _RepoLocalTemp() as tmp:
@@ -1230,17 +1284,30 @@ class SourceProfileReproductionTests(unittest.TestCase):
             self.assertEqual(
                 (report_path.stat().st_size, open_cfw.sha256_file(report_path)),
                 (
-                    2_322,
-                    "3d0f0968f5f26a550719240a12a0e6f4e083f2ea566940f215f84b2a5f382a9a",
+                    4_333,
+                    "23a24fab255986238741cb7cc7d4deaea70856865a12fc0570bbe81983af41a3",
                 ),
+            )
+            reported_providers = {
+                provider["component"]: provider
+                for provider in report["providers"]
+            }
+            self.assertEqual(
+                reported_providers["apollo_bootloader"]["path"],
+                "build/canonical-provider/linux-clang/apollo_bootloader/"
+                "ota_s200_bootloader.bin",
+            )
+            self.assertEqual(
+                reported_providers["apollo_main"]["path"],
+                "build/canonical-provider/linux-clang/apollo_main/ota_s200_firmware_ota.bin",
             )
             plan_path = tmp / "flash-plan.json"
             plan = json.loads(plan_path.read_text(encoding="utf-8"))
             self.assertEqual(
                 (plan_path.stat().st_size, open_cfw.sha256_file(plan_path)),
                 (
-                    836433,
-                    "a63772c778639dfcaf296985e64b3e643012f41c83a2900d9d06b68132b2e40f",
+                    586_640,
+                    "a12761cbc365f63d9e253c4fdd4855b9c437c8b70769cbaa1fb5d17f7098f46e",
                 ),
             )
             self.assertEqual(
@@ -1249,7 +1316,7 @@ class SourceProfileReproductionTests(unittest.TestCase):
                     len(plan["unresolved_flash_regions"]),
                     len(plan["container_only_regions"]),
                 ),
-                (1176, 2, 5),
+                (810, 0, 6),
             )
 
             source_owned_bytes = sum(
@@ -1272,11 +1339,13 @@ class SourceProfileReproductionTests(unittest.TestCase):
                 package_pin["expected_size"] - provider_bytes
             )
             main_component = manifest["component_overrides"]["apollo_main"]
-            main_preamble_bytes = next(
-                region["size"]
+            main_preamble_bytes = sum(
+                min(region["file_offset"] + region["size"], 32)
+                - region["file_offset"]
                 for region in main_component["regions"]
-                if region["name"] == "ota_preamble"
+                if region["file_offset"] < 32
             )
+            self.assertEqual(main_preamble_bytes, 32)
             generated_bytes = (
                 generated_flash_bytes
                 + package_envelope_bytes
@@ -1289,7 +1358,7 @@ class SourceProfileReproductionTests(unittest.TestCase):
             )
             self.assertEqual(
                 (source_owned_bytes, generated_bytes, opaque_bytes),
-                (136709, 94408, 4206615),
+                (493_459, 3_542_272, 715_033),
             )
         self.assertEqual(report["package"]["size"], package_pin["expected_size"])
         self.assertEqual(

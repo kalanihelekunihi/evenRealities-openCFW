@@ -14,39 +14,39 @@
   "profiles": {
     "apple-clang": {
       "base_package": {
-        "path": "build/postapply-package-apple/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
-        "size": 4749540,
-        "sha256": "fb409f4ae8942cf06a1cb51651d5aa104b65e91c340dd268320bd2a683310283"
+      "path": "build/postapply-package-final8-apple/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "size": 4750780,
+      "sha256": "f2842600b84f303c40d2d299761c1abc0a7083acc05f2d378be9a045b0d9a846"
       },
       "base_component": {
-        "path": "build/canonical-observation/apple-a/pt-component.bin",
-        "size": 3885668,
-        "sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
-        "runtime_end_exclusive": 8309316
+      "path": "build/canonical-observation-g2-final8/apple-a/liblc3-service-component.bin",
+        "size": 3956672,
+        "sha256": "301ffa0a891108dff13d5f2fd9b38b2b163c3142d635461d9a71213590c607e3",
+        "runtime_end_exclusive": 8380320
       },
       "expected": {
         "component": {
-          "size": 3956468,
-          "sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"
+          "size": 3956672,
+          "sha256": "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe"
         }
       }
     },
     "linux-clang": {
       "base_package": {
-        "path": "build/postapply-package-linux/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
-        "size": 4749524,
-        "sha256": "6fda43b52e0e36370c197f3ad5b3d21cc522f7f0d2555560deeacbc62c0309b9"
+      "path": "build/postapply-package-final8-linux/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "size": 4750764,
+      "sha256": "e534ffe034360b24fffc3d7fc50988234fc48ae20f6e8afa8be2507247c8cd39"
       },
       "base_component": {
-        "path": "build/canonical-observation/linux-a/pt-component.bin",
-        "size": 3678000,
-        "sha256": "45d32718d333b61718d7ebeededf4692760608af01951b98501189f5e809eccd",
-        "runtime_end_exclusive": 8101648
+      "path": "build/canonical-observation-g2-final8/linux-a/liblc3-service-component.bin",
+        "size": 3956672,
+        "sha256": "7260477fe660b80f9966bdc7b3b72015c70a3e4134c3d0899119cf8a98a3813c",
+        "runtime_end_exclusive": 8380320
       },
       "expected": {
         "component": {
-          "size": 3956468,
-          "sha256": "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7"
+          "size": 3956672,
+          "sha256": "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38"
         }
       }
     }

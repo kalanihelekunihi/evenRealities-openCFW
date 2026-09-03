@@ -223,14 +223,14 @@ PRODUCTION_AGGREGATES = {
     "apple-clang": {
         "overlay_size": 362_272,
         "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
-        "component_size": 3_885_668,
-        "component_sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
+        "component_size": 3_956_672,
+        "component_sha256": "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
     },
     "linux-clang": {
-        "overlay_size": 152_960,
+        "overlay_size": 154_604,
         "overlay_sha256": "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6",
-        "component_size": 3_676_356,
-        "component_sha256": "45d32718d333b61718d7ebeededf4692760608af01951b98501189f5e809eccd",
+        "component_size": 3_956_672,
+        "component_sha256": "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a",
     },
 }
 

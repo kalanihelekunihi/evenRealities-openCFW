@@ -283,7 +283,7 @@ def run_audit() -> dict[str, Any]:
     if rows[-1]["name"] != "blocked by unavailable physical evidence":
         raise CandidateError("hardware qualification policy drift")
     return {
-        "status": "candidate-qualified-one-software-two-hardware",
+        "status": "candidate-qualified-software-provider-two-hardware",
         "read_only": True,
         "hardware_operations": False,
         "license": "MIT",
@@ -332,7 +332,7 @@ def main() -> int:
     if args.json:
         print(json.dumps(result, indent=2, sort_keys=True))
     else:
-        print("EM9305 QP/C hook providers: candidate-qualified-one-software-two-hardware")
+        print("EM9305 QP/C hook providers: candidate-qualified-software-provider-two-hardware")
         print("software provider: wsfOsRunIdleTasks")
         print("hardware providers: PalUartResume, VoltMon_DoMeasurement")
         print("hardware validation: blocked by unavailable physical evidence")

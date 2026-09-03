@@ -80,7 +80,7 @@ class LVGLMutexProviderTests(unittest.TestCase):
         self.assertFalse(provider["production_overlay_registered"])
         self.assertFalse(provider["hardware_qualified"])
 
-    def test_consumer_and_notify_independent_residual_boundaries_are_exact(self) -> None:
+    def test_consumer_and_sync_provider_residual_boundaries_are_exact(self) -> None:
         report = json.loads(MANIFEST.read_text(encoding="utf-8"))
         provider = report["local_lvgl_mutex_provider"]
         relocations = provider["closed_consumer_relocations"]
@@ -95,17 +95,17 @@ class LVGLMutexProviderTests(unittest.TestCase):
         self.assertEqual(upstream["commit"], "344c7c318047b7348e1be8572a9fd4260c251cfa")
         self.assertEqual(upstream["freertos_commit"], "def7d2df2b0506d3d249334974f51e427c17a41c")
         self.assertEqual(len(upstream["source_git_blobs"]), 3)
-        self.assertEqual(report["missing_provider_count"], 11)
+        self.assertEqual(report["missing_provider_count"], 0)
         self.assertEqual(
             report["maximal_scoped_candidate_closure"]["expected_residual_symbol_digest"],
-            "f9d7f5b3fc8db9a19441ec0c4991ac9161c0ae46583e56c2a2298f2794732744",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         )
         missing = {row["symbol"] for row in report["missing_provider_ledger"]}
         self.assertTrue(SYMBOLS.isdisjoint(missing))
         self.assertTrue({
             "lv_thread_sync_delete", "lv_thread_sync_init",
             "lv_thread_sync_signal", "lv_thread_sync_wait",
-        }.issubset(missing))
+        }.isdisjoint(missing))
 
 
 if __name__ == "__main__":

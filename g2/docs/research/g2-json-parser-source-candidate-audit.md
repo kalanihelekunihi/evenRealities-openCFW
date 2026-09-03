@@ -21,6 +21,12 @@ consistent with an unmodified upstream cJSON from the interval, built with
 `ENABLE_LOCALES=Off` (constant `get_decimal_point`), with the
 print/create/edit/utils side dead-stripped by static linking.
 
+The parse-side closure is now production-routed. The admitted source is
+`components/shared/cjson/runtime_cjson_parse.c` (26,626 bytes, SHA-256
+`710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63`).
+It emits 21 strict relocated leaves and 21 authenticated stock-entry redirects
+in both compiler profiles.
+
 ## Object enumeration
 
 21 functions / 2,572 body bytes in the physical interval
@@ -40,7 +46,7 @@ instruction-word interior collisions. 47 direct body calls (34 internal,
 
 Literal pool: `"null"`/`"false"`/`"true"` at
 `0x0078D15C/0x0078D164/0x0078D16C`; UTF-8 BOM `EF BB BF 00` at `0x004D7F90`;
-pointers to `global_hooks` (`0x200004BC`) and `global_error` (`0x2007410C`);
+pointers to `global_hooks` (`0x2007410C`) and `global_error` (`0x200004BC`);
 double constants `0.0`, `2147483647.0` (INT_MAX), `0xC1DFFFFFFFFFFFFF`
 (IAR-materialized `(double)INT_MIN`); surrogate mask `0x000FFC00`.
 
@@ -150,17 +156,39 @@ via 0x004D43A4 +0x28) and `strtod` 0x00542D48 (1 call). No CMSIS-FreeRTOS
 or FreeRTOS kernel API is used. The six `blx` sites are the cJSON
 allocator-hook dispatches and are classified, not opaque.
 
+The production adaptation removes every direct provider edge above. Local
+freestanding C implements zero-fill, length/comparison, ASCII case folding,
+and bounded decimal conversion; the only runtime dispatches are the six
+authenticated allocator/deallocator hooks through the existing three-word
+SRAM ABI. Target-object inspection reports zero undefined symbols and zero
+allocated data sections. Apple clang 21 emits 2,442 function bytes and Linux
+clang 22.1.8 emits 2,434; both replace the same 2,572 stock function bytes.
+
+## Production admission
+
+Four independent canonical observations (Apple A/B and Linux A/B) agree on
+the complete source closure and profile-specific bytes. The production route
+preserves the fixed `global_hooks` and `global_error` SRAM objects, keeps the
+v1.7.12 parse data model and 1,000-level nesting limit, and carries no hardware
+operation. A host differential corpus covers scalar values, signed and
+exponent numbers, UTF-8 BOM input, escapes, UTF-16/surrogate conversion,
+arrays, objects, case-insensitive object lookup, deletion, and malformed input.
+The ARM audit separately proves exactly 21 function sections, no undefined
+symbol, and no non-code allocation section.
+
+The larger Apple core tail is included in the existing service-audio suffix
+packing boundary: 11,698 suffix bytes (105 leaves, 11,616 payload bytes, 321
+relocations) are moved into authenticated host caves, preserving the LC3 table
+start at `0x007EA620`. Ordinary fail-closed Apple and Linux builds reproduce
+the canonical 3,956,672-byte components.
+
 ## What remains externally gated
 
 - The exact tag within v1.7.9–v1.7.12 and Even's vendoring path (copy-paste
   vs submodule vs SDK carrier) are not observable from the binary; no
   version string or producing commit is recoverable (cJSON versions itself
   only via macros/`cJSON_Version`, which is dead-stripped).
-- The `tolower` trampoline (0x004D58C2, inside the unclosed body preceding
-  `service_whitelist.c`) and `strtod` (0x00542D48) remain unclosed provider
-  bodies owned by other frontier work; this audit only bounds their
-  semantics by call-site behavior.
-- License: upstream cJSON is MIT; admission/recording decisions are owned
-  by the parent frontier process (`docs/upstream-inventory.md`,
-  `tools/manifests/g2-third-party-dependency-closure.json`), which this
-  audit deliberately does not modify.
+- The stock `tolower` trampoline and `strtod` bodies remain provenance facts,
+  but no production cJSON path calls them.
+- License: upstream and the bounded production adaptation are MIT. No cJSON
+  hardware validation is applicable; the route performs no hardware action.

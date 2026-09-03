@@ -53,8 +53,13 @@ class ThirdPartyDependencyClosureTests(unittest.TestCase):
         census = report["dependency_census"]
         self.assertEqual(census["families"], 26)
         self.assertEqual(census["selected_source_commit_or_baseline"], 25)
+        self.assertEqual(census["linked_functional_status_closed"], 13)
+        self.assertEqual(census["bounded_waiting_external_gate"], 13)
         self.assertEqual(census["locally_actionable_bounded_functional_gaps"], 0)
         self.assertEqual(report["cross_checks"]["cordio_unclassified_reusable_paths"], 0)
+        self.assertTrue(report["cross_checks"]["cjson_production_routed"])
+        self.assertEqual(report["cross_checks"]["cjson_routed_functions"], 21)
+        self.assertEqual(report["cross_checks"]["cjson_undefined_symbols"], 0)
         self.assertEqual(report["cross_checks"]["cordio_copied_gatt_profile_source_owned_functions"], 6)
         self.assertEqual(report["cross_checks"]["ambiqsuite_cordio_application_framework_paths"], 9)
         self.assertEqual(report["cross_checks"]["ambiqsuite_cordio_application_framework_anchored_functions"], 50)

@@ -294,9 +294,9 @@ EXPECTED_AGGREGATE = {
         "overlay_sha256": (
             "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
         ),
-        "component_size": 3_956_468,
+        "component_size": 3_956_672,
         "component_sha256": (
-            "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"
+            "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"
         ),
         "stage_component_size": 3_885_668,
         "stage_component_sha256": (
@@ -315,7 +315,7 @@ EXPECTED_AGGREGATE = {
         ),
         "component_size": 163_840,
         "component_sha256": (
-            "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2"
+            "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b"
         ),
         "text_size": 204,
         "rodata_size": 0,

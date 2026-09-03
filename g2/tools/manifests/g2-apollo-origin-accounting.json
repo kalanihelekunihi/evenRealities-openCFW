@@ -3,14 +3,14 @@
   "target": "official G2 s200_v2.2.6.10 Apollo main",
   "classification_policy": "disjoint release-readiness partition over builder-owned opaque bytes; origin and object-closure evidence are explicitly non-additive corroborating views",
   "expected_counts": {
-    "component_opaque_base_bytes": 3065088,
-    "manifest_official_blob_bytes_before_reconciliation": 3082888,
-    "controlled_bytes_mislabeled_official_blob": 17800,
+  "component_opaque_base_bytes": 3058868,
+  "manifest_official_blob_bytes_before_reconciliation": 3082666,
+  "controlled_bytes_mislabeled_official_blob": 23814,
     "origin_buckets": {
-      "first_party_or_project_path_anchored": 291566,
-      "outside_trustworthy_function_envelopes": 2087818,
+    "first_party_or_project_path_anchored": 290362,
+    "outside_trustworthy_function_envelopes": 2087436,
       "third_party_path_anchored": 86364,
-      "unanchored_discovered_function": 599340
+    "unanchored_discovered_function": 594706
     },
     "third_party_family_bytes": {
       "EasyLogger-master": 70,
@@ -23,11 +23,11 @@
     },
     "release_readiness_partition": {
       "candidate_source_not_routed": 0,
-      "typed_retained_or_external": 3065088
+    "typed_retained_or_external": 3058868
     },
     "unanchored_frontier_partition": {
       "candidate_source_not_routed": 0,
-      "typed_retained_unanchored_without_candidate": 599340
+    "typed_retained_unanchored_without_candidate": 594706
     },
     "candidate_stock_address_set_sha256": "8d3f6bd4ec698feaf7ef9df0d43e4f53f6f4e506eb64b6ce458d4cc5722822f1",
     "candidate_stock_content_sha256": "84fe3cc0e16a9d50b73d0f8d1eb3280eb1dc9ba298bb4a139b57894550ad0c3f",
@@ -47,6 +47,6 @@
     "the 885418 known physical object-evidence bytes overlap the authoritative origin/readiness masks and must not be added to them",
     "all three NemaVG stroke-cap intervals (6614 bytes) are source-routed and excluded from the retained byte mask",
     "no NemaVG stroke-cap endpoint interval remains retained or candidate-only",
-    "the 17800 controlled-label reconciliation is a flash-plan presentation delta, not additional retained payload"
+    "the 23814 controlled-label reconciliation and 16-byte conservative retained delta are flash-plan presentation differences, not additional payload"
   ]
 }

@@ -262,32 +262,32 @@ PRODUCTION_BUILD_PROFILES = {
     "apple-clang": {
         "boot_component": (
             163_840,
-            "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2",
+            "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b",
         ),
         "main_component": (
-            3_952_454,
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+            3_956_672,
+            "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
         ),
         "package_artifacts": {
             "package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin": (
-                4_745_526,
-                "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+                4_750_780,
+                "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27",
             ),
         },
     },
     "linux-clang": {
         "boot_component": (
             163_824,
-            "426d77749f96307ae9a45173d20684570d5994d902cf1f1f5cb01f935c6ba7c6",
+            "11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875",
         ),
         "main_component": (
-            3_736_060,
-            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+            3_956_672,
+            "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a",
         ),
         "package_artifacts": {
             "package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin": (
-                4_529_116,
-                "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+                4_750_764,
+                "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559",
             ),
         },
     },

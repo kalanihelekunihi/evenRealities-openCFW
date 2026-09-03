@@ -168,22 +168,22 @@ class IARRuntimeMathErrnoCandidateTests(unittest.TestCase):
             {
                 "overlay_size": 362272,
                 "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
-                "component_size": 3956468,
-                "component_sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
+                "component_size": 3956672,
+                "component_sha256": "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
             },
         )
 
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4750576, "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6"),
+            (4750780, "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"),
         )
         self.assertEqual(
             (
                 manifest["package"]["profiles"]["linux-clang"]["expected_size"],
                 manifest["package"]["profiles"]["linux-clang"]["expected_sha256"],
             ),
-            (4750560, "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2"),
+            (4750764, "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559"),
         )
 
     @unittest.skipUnless(

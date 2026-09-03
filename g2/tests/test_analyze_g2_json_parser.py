@@ -9,5 +9,6 @@ class JsonParserTests(unittest.TestCase):
  def test_providers(self):
   p=self.r['provider_boundary'];self.assertEqual((p['admitted_nanopb_shared_initializer_calls'],p['iar_dlib_calls'],p['unclosed_iar_runtime_calls'],p['hook_dispatch_sites']),(1,7,5,6));self.assertEqual(p['nanopb_commit'],'98bf4db69897b53434f3d0ba72e0a3ab1a902824');self.assertEqual((p['cmsis_freertos_calls'],p['freertos_kernel_calls']),(0,0));self.assertEqual(p['version_interval'],'cJSON v1.7.9 through v1.7.12')
  def test_claims(self):
-  i=self.r['identity'];self.assertEqual(i['upstream_family'],'cJSON (DaveGamble/cJSON)');self.assertEqual(i['upstream_version_interval'],'v1.7.9 through v1.7.12');self.assertIsNone(i['retained_path']);self.assertEqual(len(i['embedded_third_party_definitions']),1);self.assertFalse(self.r['production']['production_routed'])
+  i=self.r['identity'];self.assertEqual(i['upstream_family'],'cJSON (DaveGamble/cJSON)');self.assertEqual(i['upstream_version_interval'],'v1.7.9 through v1.7.12');self.assertIsNone(i['retained_path']);self.assertEqual(len(i['embedded_third_party_definitions']),1)
+  p=self.r['production'];self.assertTrue(p['production_routed']);self.assertEqual((p['routed_functions'],p['entry_patch_sites'],p['replaced_stock_function_bytes']),(21,21,2572));self.assertEqual((p['apple_payload_bytes'],p['linux_payload_bytes']),(2442,2434));self.assertEqual((p['undefined_symbols'],p['retained_external_runtime_calls']),(0,0));self.assertTrue(p['fixed_sram_hook_abi']);self.assertEqual(p['hardware_operations'],[])
 if __name__=='__main__':unittest.main()

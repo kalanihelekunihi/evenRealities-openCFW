@@ -54,7 +54,7 @@ PINS = {
     MAIN: (3_523_396, "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"),
     FUNCTIONS: (3_270_703, "9fd9c1c34e17abb977f2ccb32a931d9b96743db2db10707de19bf9ea6ae42662"),
     CORPUS: (401_413, "c378175fa46f9044fa11edd79129b99ff65ecdf496fc781375708ab74479f379"),
-    FRONTIER: (75_754, "76aa4c93419ee7055e6023ae28fa3382551be46fc72456ae700f0a1529780ded"),
+    FRONTIER: (83_220, "6af54dfc96c888687b0687ac9b83d5ab427b0f2d4ecc9bb33c284c68cf29fd3e"),
     CLKMGR_HEADER: (15_438, "39ea260e7f1bcd06c0ced31bea86508e6861f0fa2a4ddc09571fe01a4f7573e5"),
     STATUS_HEADER: (4_903, "7ffa44277fab4731bdcb742c807c9f026aadfe8456545d8f04f5053621661ee2"),
     PROVENANCE: (18_060, "ee9eb7e9ab8465bbe8b836b9baf04d6a10d470091bb60fe51f0771fecf36bdec"),
@@ -221,7 +221,7 @@ def run_audit() -> dict[str, Any]:
         if (row.get("end"), row.get("size"), row.get("sha256"),
                 row.get("disposition")) != (
                     f"0x{end:08x}", str(end - start), facts["sha256"],
-                    "cross_image_exact_source_candidate"):
+                    "source_owned_production"):
             raise AuditError(f"frontier record drift: 0x{start:08X}")
         function = main_functions.get(main_start)
         if function is None or (function["body_bytes"], function["body_sha256"],

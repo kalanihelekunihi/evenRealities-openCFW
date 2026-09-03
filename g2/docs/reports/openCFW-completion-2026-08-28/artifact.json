@@ -8,23 +8,27 @@
   "dual_profile_ownership": {
     "checked": true,
     "companion": "tools/manifests/g2-dual-profile-ownership.json",
-    "companion_sha256": "0aecdef7ea2d5d95025f599f99fbd396f70409d43f5a9cde1460aba6eacf84ae"
+    "companion_sha256": "69f214efbfd4b914bc7c182396120f2592cd88a2f5ca191fdec9199d7ca7c379"
   },
   "files": {
     "assessment-data.json": {
-      "sha256": "52edd291e0de9c67977a4b9a7c7f281284a64329646a4bd4cc9bb6f881f61886",
-      "size": 69671
+      "sha256": "f0feb2ee5dbebbbbc9af3cf4de00a74202caa38dae6e7c3e456688c8380c8b18",
+      "size": 76412
     },
     "report.html": {
-      "sha256": "7c1ec5e41f40b3706b34d53c66e91cfd34f840bf84cb1b99fee9cb5729e8c3fc",
-      "size": 42583
+      "sha256": "e2b86209b0ffb3bf35c3b4061ec0e3343d0bc03a52e60acc3c2e87b1835cad25",
+      "size": 48248
     }
   },
   "gate_snapshot": {
     "binary_redistribution_authority_resolved": false,
     "byte_accounting_complete": true,
+    "candidate_artifacts_complete_and_hardware_blocked": true,
     "classification_complete": true,
     "dual_profile_ownership_reconciliation": true,
+    "functional_hardware_rows_explicitly_blocked": true,
+    "functional_proprietary_rows_explicitly_blocked": true,
+    "functional_software_gap_rows_zero": true,
     "hardware_blocker": "blocked by unavailable physical evidence",
     "hardware_operations": [],
     "hardware_validation": "blocked by unavailable physical evidence",
@@ -37,7 +41,7 @@
   "generator": "g2/tools/generate_g2_completion_report.py",
   "hardware_operations": [],
   "hardware_validation": "blocked by unavailable physical evidence",
-  "schema_version": 3,
+  "schema_version": 4,
   "surface": "report",
   "title": "G2 openCFW Completion Assessment"
 }

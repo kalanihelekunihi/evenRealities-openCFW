@@ -25,6 +25,14 @@ import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
+SOURCE = ROOT / "components/apollo_main/core_overlay/compress_log_core.c"
+HEADER = SOURCE.with_suffix(".h")
+SOURCE_PATH = "components/apollo_main/core_overlay/compress_log_core.c"
+HEADER_PATH = "components/apollo_main/core_overlay/compress_log_core.h"
+SOURCE_SIZE = 21_095
+SOURCE_SHA256 = "5d7fdbcad7bd290e593af153d787b1351d3b7bdb47de9ebd69fdd60462ee9c38"
+HEADER_SIZE = 899
+HEADER_SHA256 = "9ee8284247da8bc538b3288845e00e39672d4de7be1d7cca748b696e6983305b"
 FM = ROOT / "tools/manifests/g2-compress-log-core-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-compress-log-core-closure.tsv"
 PM = ROOT / "tools/manifests/g2-compress-log-core-provider-map.tsv"
@@ -72,6 +80,16 @@ EXTERNAL_TARGET_COUNTS = {
     0x5FA0BA: 1,
 }
 PATH_REFS = [0x43C918, 0x43CA18, 0x43CF60, 0x43CFAC, 0x43D010, 0x43D094]
+PRODUCTION_FUNCTIONS = (
+    "open_cfw_compress_log_mutex_init",
+    "open_cfw_compress_log_ring_read_locked",
+    "open_cfw_compress_log_get_all_buffer",
+    "open_cfw_compress_log_ring_write",
+    "open_cfw_compress_log_encode_record",
+    "open_cfw_compress_log_output",
+    "open_cfw_compress_log_periodic_sync",
+    "open_cfw_compress_log_force_sync",
+)
 
 
 def sh(value: bytes) -> str:
@@ -166,6 +184,144 @@ def _provenance() -> None:
     iar = (ROOT / "docs/research/iar-dlib-runtime-census.md").read_text()
     if "9.20 is therefore a practical lower bound" not in iar or "9.60.2" not in iar:
         raise c.AuditError("IAR DLIB family assessment changed")
+
+
+def _production_route(blob: bytes) -> dict:
+    """Authenticate the complete dual-profile source route in the live config."""
+    overlay = json.loads(
+        (ROOT / "components/apollo_main/core_overlay/overlay.json").read_text()
+    )
+    if (len(SOURCE.read_bytes()), sh(SOURCE.read_bytes())) != (
+        SOURCE_SIZE, SOURCE_SHA256
+    ):
+        raise c.AuditError("compact-log core production source changed")
+    if (len(HEADER.read_bytes()), sh(HEADER.read_bytes())) != (
+        HEADER_SIZE, HEADER_SHA256
+    ):
+        raise c.AuditError("compact-log core production header changed")
+
+    header_rows = [
+        row for row in overlay["sources"] if row.get("path") == HEADER_PATH
+    ]
+    if len(header_rows) != 1:
+        raise c.AuditError("compact-log core header route changed")
+    if (
+        header_rows[0].get("size") != HEADER_SIZE
+        or header_rows[0].get("sha256") != HEADER_SHA256
+        or header_rows[0].get("license") != "MIT"
+    ):
+        raise c.AuditError("compact-log core header pin changed")
+
+    leaves = {
+        row.get("function"): row
+        for row in overlay["relocated_leaves"]
+        if row.get("source", {}).get("path") == SOURCE_PATH
+    }
+    if set(leaves) != set(PRODUCTION_FUNCTIONS) or len(leaves) != 8:
+        raise c.AuditError("compact-log core production leaf set changed")
+    profile_bytes = {"apple-clang": 0, "linux-clang": 0}
+    relocation_count = 0
+    for function in PRODUCTION_FUNCTIONS:
+        leaf = leaves[function]
+        source_row = leaf.get("source", {})
+        if (
+            source_row.get("size") != SOURCE_SIZE
+            or source_row.get("sha256") != SOURCE_SHA256
+            or source_row.get("license") != "MIT"
+            or leaf.get("strict_relocation_contract") is not True
+            or leaf.get("allow_discarded_alloc_sections") is not True
+        ):
+            raise c.AuditError("compact-log core leaf source contract changed")
+        profiles = leaf.get("toolchain_profiles", {})
+        if set(profiles) != {"linux-clang"}:
+            raise c.AuditError("compact-log core leaf profile set changed")
+        for profile, expected in (
+            ("apple-clang", leaf.get("expected")),
+            ("linux-clang", profiles["linux-clang"].get("expected")),
+        ):
+            if (
+                not isinstance(expected, dict)
+                or not isinstance(expected.get("offset"), int)
+                or not isinstance(expected.get("size"), int)
+                or expected["size"] <= 0
+                or expected.get("alignment") != 4
+                or len(str(expected.get("sha256", ""))) != 64
+                or len(str(expected.get("unrelocated_sha256", ""))) != 64
+            ):
+                raise c.AuditError("compact-log core leaf compiler pin changed")
+            profile_bytes[profile] += expected["size"]
+        relocations = leaf.get("relocations")
+        if not isinstance(relocations, list):
+            raise c.AuditError("compact-log core relocation contract changed")
+        for relocation in relocations:
+            function_target = relocation.get("target_function")
+            address_target = relocation.get("target_address")
+            if (
+                relocation.get("symbol_type") != "STT_NOTYPE"
+                or relocation.get("type") not in {
+                    "R_ARM_THM_CALL", "R_ARM_THM_JUMP24",
+                    "R_ARM_THM_MOVW_PREL_NC", "R_ARM_THM_MOVT_PREL",
+                }
+                or not isinstance(relocation.get("offset"), int)
+                or not (
+                    relocation.get("symbol") == function_target
+                    or isinstance(address_target, int)
+                )
+            ):
+                raise c.AuditError("compact-log core relocation entry changed")
+        relocation_count += len(relocations)
+    if profile_bytes != {"apple-clang": 2498, "linux-clang": 2498}:
+        raise c.AuditError("compact-log core production text size changed")
+    if relocation_count != 66:
+        raise c.AuditError("compact-log core relocation count changed")
+
+    patches = [
+        row for row in overlay["patch_sites"]
+        if str(row.get("name", "")).startswith("replace_compress_log_core_")
+    ]
+    if len(patches) != 8:
+        raise c.AuditError("compact-log core stock redirect set changed")
+    for index, ((start, end), function, patch) in enumerate(
+        zip(F, PRODUCTION_FUNCTIONS, patches), start=1
+    ):
+        if (
+            patch.get("name") != f"replace_compress_log_core_{index:02d}"
+            or patch.get("runtime_address") != start
+            or patch.get("expected_size") != end - start
+            or patch.get("expected_sha256") != sh(c._slice(blob, start, end))
+            or patch.get("branch") != "b_w"
+            or patch.get("target_function") != function
+        ):
+            raise c.AuditError("compact-log core stock redirect changed")
+
+    manifest = json.loads(
+        (ROOT / "manifests/g2-2.2.6.10-core-source.json").read_text()
+    )
+    provider = manifest["component_overrides"]["apollo_main"]["provider"]
+    if (
+        provider.get("size") != 3_956_672
+        or provider.get("sha256")
+        != "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe"
+        or provider.get("profiles", {}).get("linux-clang", {}).get("size")
+        != 3_956_672
+        or provider.get("profiles", {}).get("linux-clang", {}).get("sha256")
+        != "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38"
+    ):
+        raise c.AuditError("compact-log core firmware provider route changed")
+    return {
+        "production_routed": True,
+        "source_path": SOURCE_PATH,
+        "source_size": SOURCE_SIZE,
+        "source_sha256": SOURCE_SHA256,
+        "header_size": HEADER_SIZE,
+        "header_sha256": HEADER_SHA256,
+        "routed_functions": 8,
+        "stock_redirects": 8,
+        "replaced_stock_bytes": 2300,
+        "strict_relocations": relocation_count,
+        "profile_text_bytes": profile_bytes,
+        "complete_firmware_profiles": ["apple-clang", "linux-clang"],
+    }
 
 
 def analyze(image: Path = IMAGE) -> dict:
@@ -264,10 +420,7 @@ def analyze(image: Path = IMAGE) -> dict:
         if _cstring(blob, address) != expected:
             raise c.AuditError("exact compact-log symbol changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("compress_log" in item.get("path", "").lower() for item in overlay["sources"])
-    if routed:
-        raise c.AuditError("unimplemented compact-log core entered production overlay")
+    production = _production_route(blob)
     return {
         "schema_version": 1,
         "analysis_mode": "read-only raw-image closure; corpus-independent",
@@ -319,7 +472,11 @@ def analyze(image: Path = IMAGE) -> dict:
             "new_version_discriminator": False,
             "private_generating_commit_recoverable": False,
         },
-        "production": {"production_routed": False},
+        "production": production,
+        "hardware": {
+            "validation": "blocked by unavailable physical evidence",
+            "qualification_complete": False,
+        },
     }
 
 

@@ -767,12 +767,12 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                360_578,
+                362_272,
                 (
-                    "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
+                    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
                 ),
-                2_436,
-                2_324,
+                2_439,
+                2_327,
             ),
         )
         self.assertEqual(
@@ -789,14 +789,14 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 self.production["component"]["opaque_base_bytes"],
             ),
             (
-                3_883_974,
+                3_885_668,
                 (
-                    "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
+                    "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
                 ),
-                397_446,
-                397_626,
-                362_962,
-                3_123_534,
+                404_060,
+                404_240,
+                364_656,
+                3_116_920,
             ),
         )
 
@@ -816,15 +816,15 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 )
             },
             {
-                "expected_size": 4_677_046,
+                "expected_size": 4_750_780,
                 "expected_sha256": (
-                    "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"
+                    "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
                 ),
                 "profiles": {
                     "linux-clang": {
-                        "expected_size": 4_469_364,
+                        "expected_size": 4_750_764,
                         "expected_sha256": (
-                            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"
+                            "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559"
                         ),
                     },
                 },
@@ -853,9 +853,14 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 "and_task_notify_wait"
             ),
             "freertos_task_notify_wait_source_replacement",
-            "freertos_task_notify_source_replacement",
+            "freertos_task_notify_source_replacement_split_0001dc68_0001dc6c",
+            "liblc3_service_audio_0005_0001dc6c_0001ddd8",
             "opaque_between_freertos_task_notify_variants",
-            "freertos_task_notify_from_isr_source_replacement",
+            (
+                "freertos_task_notify_from_isr_source_replacement_"
+                "split_0001dde0_0001dde4"
+            ),
+            "liblc3_service_audio_0006_0001dde4_0001df7c",
             (
                 "opaque_between_freertos_task_notify_from_isr_and_"
                 "add_current_to_delayed_list"
@@ -934,11 +939,20 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                     0x0045_5B84,
                     "generated_source_entry_replacement",
                 ),
-                "freertos_task_notify_source_replacement": (
+                (
+                    "freertos_task_notify_source_replacement_"
+                    "split_0001dc68_0001dc6c"
+                ): (
                     121_960,
-                    368,
+                    4,
                     0x0045_5C48,
                     "generated_source_entry_replacement",
+                ),
+                "liblc3_service_audio_0005_0001dc6c_0001ddd8": (
+                    121_964,
+                    364,
+                    0x0045_5C4C,
+                    "generated_source_data_replacement",
                 ),
                 "opaque_between_freertos_task_notify_variants": (
                     122_328,
@@ -946,11 +960,20 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                     0x0045_5DB8,
                     "official_blob",
                 ),
-                "freertos_task_notify_from_isr_source_replacement": (
+                (
+                    "freertos_task_notify_from_isr_source_replacement_"
+                    "split_0001dde0_0001dde4"
+                ): (
                     122_336,
-                    412,
+                    4,
                     0x0045_5DC0,
                     "generated_source_entry_replacement",
+                ),
+                "liblc3_service_audio_0006_0001dde4_0001df7c": (
+                    122_340,
+                    408,
+                    0x0045_5DC4,
+                    "generated_source_data_replacement",
                 ),
                 (
                     "opaque_between_freertos_task_notify_from_isr_and_"

@@ -90,12 +90,12 @@ class LVGLHeapArrayProviderTests(unittest.TestCase):
         self.assertEqual(upstream["commit"], "344c7c318047b7348e1be8572a9fd4260c251cfa")
         self.assertEqual(upstream["tree"], "2c76db856ec570f3ee12565181e5cf52bdd33d78")
         self.assertEqual(len(upstream["source_git_blobs"]), 3)
-        self.assertEqual(report["missing_provider_count"], 11)
+        self.assertEqual(report["missing_provider_count"], 0)
         missing = {row["symbol"] for row in report["missing_provider_ledger"]}
         self.assertTrue(SYMBOLS.isdisjoint(missing))
         self.assertEqual(
             report["maximal_scoped_candidate_closure"]["expected_residual_symbol_digest"],
-            "f9d7f5b3fc8db9a19441ec0c4991ac9161c0ae46583e56c2a2298f2794732744",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         )
 
 

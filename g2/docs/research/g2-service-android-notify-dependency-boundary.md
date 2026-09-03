@@ -18,19 +18,24 @@ object (1), or the closed `sync_interface_api.c` provider (1). The object uses
 no CMSIS-FreeRTOS or FreeRTOS kernel API at all — unlike its sibling
 `service_ancc.c` it holds no mutex.
 
-## Flagged embedded third-party candidate
+## Production-routed embedded third-party provider
 
-Thirteen calls terminate at an unadmitted JSON parser body at 0x004D79FA /
+Thirteen calls terminate at the cJSON parser body at 0x004D79FA /
 0x004D7F7E / 0x004D83AA (Ghidra-missed code between `service_whitelist.c` and
 `pb_service_notification.c`). The body shows cJSON-class structure: a
 null/true/false literal pool at 0x0078D15C, a linked-node get-item walk, and
 parse wrappers. The same provider is used by the already closed
-`service_whitelist.c` (19 call sites). No version string or producing commit is
-recoverable from the image, so it is recorded as a flagged embedded
-third-party body candidate — not silently absorbed into admitted providers —
-and no new version/commit discriminator is claimed.
+`service_whitelist.c` (19 call sites). Four binary discriminators bound it to
+DaveGamble cJSON v1.7.9 through v1.7.12. OpenCFW selects authenticated tag
+v1.7.12 (`3c8935676a97c7c97bf006db8312875b4f292f6c`) and now routes all 21 linked
+parse-side functions through maintained freestanding C in both compiler
+profiles. The route has 21 strict entry redirects, no undefined symbols, and
+preserves the fixed SRAM allocator-hook and parse-error ABI. The exact private
+historical checkout within the source-identical interval remains
+binary-unobservable; that provenance limitation is not a software gap.
 
-The object adds no other reusable implementation or version signal. Remaining
-work is first-party source recreation of the JSON message handling and
-validation against dual-glasses sync behavior. Reproduce with
+The object adds no other reusable implementation or version signal. The
+retained first-party JSON message handling remains blocked by unavailable
+proprietary inputs, and live dual-glasses sync validation is blocked by
+unavailable physical evidence. Reproduce with
 `python3 tools/analyze_g2_service_android_notify.py` and its focused test.

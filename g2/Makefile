@@ -1414,12 +1414,14 @@ compress-log-core-closure:
 	$(PYTHON) tools/analyze_g2_compress_log_core.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_compress_log_core \
+		tests.test_runtime_compress_log_core \
 		tests.test_analyze_g2_first_party_frontier
 
 compress-log-port-closure:
 	$(PYTHON) tools/analyze_g2_compress_log_port.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_compress_log_port \
+		tests.test_runtime_compress_log_port \
 		tests.test_analyze_g2_first_party_frontier
 
 file-runtime-closure:

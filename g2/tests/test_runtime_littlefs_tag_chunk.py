@@ -379,9 +379,9 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
                         "overlay_sha256": (
                             "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6"
                         ),
-                        "component_size": 3_956_468,
+                        "component_size": 3_956_672,
                         "component_sha256": (
-                            "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7"
+                            "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a"
                         ),
                     },
                 )
@@ -395,7 +395,7 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
                         ),
                         "component_size": 163_824,
                         "component_sha256": (
-                            "426d77749f96307ae9a45173d20684570d5994d902cf1f1f5cb01f935c6ba7c6"
+                            "11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875"
                         ),
                     },
                 )
@@ -472,40 +472,48 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
         boot = manifest["component_overrides"]["apollo_bootloader"]
         self.assertEqual(
             (main["provider"]["size"], main["provider"]["sha256"]),
-            (3_956_468, "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2"),
+            (3_956_672, "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"),
         )
         self.assertEqual(
             (boot["provider"]["size"], boot["provider"]["sha256"]),
-            (163_840, "94afbc3d7e1aa8d0d21095de081523c2ed9e422287355128eb20d36bf27c88e2"),
+            (163_840, "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b"),
         )
         self.assertEqual(
             (manifest["package"]["expected_size"], manifest["package"]["expected_sha256"]),
-            (4_750_576, "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6"),
+            (4_750_780, "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"),
         )
         self.assertEqual(
             main["provider"]["profiles"]["linux-clang"],
             {
-                "size": 3_956_468,
+                "path": (
+                    "build/canonical-provider/linux-clang/apollo_main/"
+                    "ota_s200_firmware_ota.bin"
+                ),
+                "size": 3_956_672,
                 "sha256": (
-                    "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7"
+                    "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a"
                 ),
             },
         )
         self.assertEqual(
             boot["provider"]["profiles"]["linux-clang"],
             {
+                "path": (
+                    "build/canonical-provider/linux-clang/"
+                    "apollo_bootloader/ota_s200_bootloader.bin"
+                ),
                 "size": 163_824,
                 "sha256": (
-                    "426d77749f96307ae9a45173d20684570d5994d902cf1f1f5cb01f935c6ba7c6"
+                    "11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875"
                 ),
             },
         )
         self.assertEqual(
             manifest["package"]["profiles"]["linux-clang"],
             {
-                "expected_size": 4_750_560,
+                "expected_size": 4_750_764,
                 "expected_sha256": (
-                    "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2"
+                    "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559"
                 ),
             },
         )

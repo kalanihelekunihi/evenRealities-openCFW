@@ -45,11 +45,11 @@ DEPENDENCY_PINS = {
     MAP_ANALYZER: "68f20cf54a36305d6c460d082c907d3d94efeff545238ff8b6f1189267322b70",
 }
 ROUTE_INPUT_PINS = {
-    BUILDER: (81_667, "44e2e16484ac31c771cb309b9850e63533881b6be6b8b7d168bdab352ebe47e8"),
-    OVERLAY: (5_853_221, "733bc34d7545775ab067eb03c38678889694bc092fc840c64a1ef605b0081212"),
-    SCATTER_BUILDER: (24_637, "4b615fdc2f393dc5c244882c2c663b70338a94b54923aca12f639a7cf59260f9"),
-    SCATTER_CONFIG: (1_822, "b92efd3929c66f902ac64b9142a3448d37774e67875f3f1e733bf8b3d366de0f"),
-    PACKAGE_MANIFEST: (3_353_423, "416339b199ceb6b19916225bb12ebf190d064c349f4c5b808c671ea59608d053"),
+    BUILDER: (90_227, "1a4f8e642484d0331bc92dfdc79d2ed2ef075df613d609c3a629aaaa3f7091a8"),
+    OVERLAY: (5_974_575, "9b1f644af28273bde1bc622ca2157b6986097a4e3eb6e5c536ed1bd563731b13"),
+    SCATTER_BUILDER: (40_269, "b344b37620574e9cec4af153f54b23e124afbe64332126118e678401f1feb4b9"),
+    SCATTER_CONFIG: (1_883, "71c6f4f38ed68913307045f75d2ab23ab8b9d6909f3496e2a64c76def4329b40"),
+    PACKAGE_MANIFEST: (3_527_931, "bfe70bc04c7ec384c75690fc224a992dc71e1020d1d7c0494ce3da6f9466f7ac"),
 }
 DEFAULT_MODULE_TABLE = 0x0073EEF8
 CFF_DRIVER_CLASS = 0x006DCB74
@@ -83,22 +83,22 @@ EXPECTED_ROUTE_TOKEN_COUNTS = {
 }
 EXPECTED_PROFILE_COMPONENTS = {
     "apple-clang": {
-        "size": 3_956_468,
-        "sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
+        "size": 3_956_672,
+        "sha256": "78eca5222c333c5fd3793608d67aad476ecac911f6e15164feeb2e1009944826",
     },
     "linux-clang": {
-        "size": 3_956_468,
-        "sha256": "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
+        "size": 3_956_672,
+        "sha256": "821875b74af0016e41dfb564a5370c32a30c5215077db5708fd9066af798328f",
     },
 }
 EXPECTED_PROFILE_PACKAGES = {
     "apple-clang": {
-        "size": 4_750_576,
-        "sha256": "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
+        "size": 4_750_780,
+        "sha256": "3929fdde5ab5520683fdac9393fc3abc322b2eccc3e203c44df544071945c858",
     },
     "linux-clang": {
-        "size": 4_750_560,
-        "sha256": "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
+        "size": 4_750_764,
+        "sha256": "5153e24fad9420235c0a1777bb0cf00b82d6af529333db2792586920628c2b1d",
     },
 }
 EXPECTED_ROUTE_PLACEMENT = {
@@ -261,14 +261,18 @@ def _authenticate_component_route(data: dict[Path, bytes]) -> dict[str, Any]:
     apollo = package_manifest.get("component_overrides", {}).get("apollo_main", {})
     package = package_manifest.get("package", {})
     provider = apollo.get("provider", {})
+    linux_provider = provider.get("profiles", {}).get("linux-clang", {})
     _require(
         provider.get("path")
         == "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin"
         and (provider.get("size"), provider.get("sha256"))
         == (EXPECTED_PROFILE_COMPONENTS["apple-clang"]["size"],
             EXPECTED_PROFILE_COMPONENTS["apple-clang"]["sha256"])
-        and provider.get("profiles", {}).get("linux-clang")
-        == EXPECTED_PROFILE_COMPONENTS["linux-clang"],
+        and linux_provider.get("path")
+        == "build/canonical-provider/linux-clang/apollo_main/ota_s200_firmware_ota.bin"
+        and (linux_provider.get("size"), linux_provider.get("sha256"))
+        == (EXPECTED_PROFILE_COMPONENTS["linux-clang"]["size"],
+            EXPECTED_PROFILE_COMPONENTS["linux-clang"]["sha256"]),
         "canonical package Apollo CFF provider drift",
     )
     package_profiles = {
@@ -302,27 +306,43 @@ def _authenticate_component_route(data: dict[Path, bytes]) -> dict[str, Any]:
         for row in replacement.get("regions", [])
         if str(row.get("name", "")).startswith("freetype_cff_")
     ]
+    linux_route_rows = [
+        row
+        for replacement in linux_replacements
+        for row in replacement.get("regions", [])
+        if row.get("name") == "apollo_main_linux_canonical_lc3_cff_image"
+    ]
     _require(
-        len(apple_cff_rows) == 6
+        len(apple_cff_rows) == 16
         and sum(row["size"] for row in apple_cff_rows
-                if row["address_status"] == "source_compiled") == 20_416
+                if row["address_status"] == "container_only") == 4
         and sum(row["size"] for row in apple_cff_rows
                 if row["address_status"]
-                == "generated_source_data_replacement") == 4
+                == "generated_source_data_replacement") == 21_011
         and max(row["target_address"] + row["size"]
-                for row in apple_cff_rows) == 0x007FDED4
-        and len(linux_cff_rows) == 5
-        and sum(row["size"] for row in linux_cff_rows
-                if row["address_status"] == "source_compiled") == 16_240
-        and sum(row["size"] for row in linux_cff_rows
-                if row["address_status"]
-                == "generated_source_data_replacement") == 4,
+                for row in apple_cff_rows
+                if row.get("target_address") is not None) == 0x0073EF04
+        and linux_cff_rows == []
+        and len(linux_route_rows) == 1
+        and linux_route_rows[0].get("file_offset") == 32
+        and linux_route_rows[0].get("size") == 3_523_364
+        and linux_route_rows[0].get("target_address") == LOAD_BASE + 32
+        and linux_route_rows[0].get("address_status")
+        == "generated_source_data_replacement"
+        and linux_route_rows[0].get("output")
+        == "apollo510b/main-linux-canonical-lc3-cff.bin",
         "canonical CFF region ownership drift",
     )
 
     return {
-        "post_link_order": "core -> liblc3 -> product-test -> freetype-cff",
-        "base_argument": "same-build pre-CFF Apollo component",
+        "post_link_order": (
+            "core -> liblc3-ltpf -> product-test -> "
+            "liblc3-service-audio -> freetype-cff"
+        ),
+        "base_argument": (
+            "same-build LC3-service Apollo component plus authenticated "
+            "residual generated-NOP host tails"
+        ),
         "builder": SCATTER_BUILDER.relative_to(G2).as_posix(),
         "config": SCATTER_CONFIG.relative_to(G2).as_posix(),
         "guarded_stock_interval": {
@@ -344,8 +364,8 @@ def _authenticate_component_route(data: dict[Path, bytes]) -> dict[str, Any]:
             "manifest": PACKAGE_MANIFEST.relative_to(G2).as_posix(),
             "profiles": package_profiles,
             "apple_cff_region_rows": len(apple_cff_rows),
-            "linux_profile_replacement_rows": len(linux_cff_rows),
-            "highest_cff_end_exclusive": "0x007FDED4",
+            "linux_profile_replacement_rows": len(linux_route_rows),
+            "highest_cff_end_exclusive": "0x0073EF04",
         },
         "canonical_package_manifest_route_enabled": True,
     }
@@ -451,7 +471,7 @@ def analyze(
         {
             "gate": "font payload and live rendering",
             "evidence": config["font_registration"]["qualification"],
-            "status": "blocked-unavailable-physical-evidence",
+            "status": "blocked by unavailable physical evidence",
         },
     ]
     result: dict[str, Any] = {

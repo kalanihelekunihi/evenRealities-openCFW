@@ -43,14 +43,14 @@ class LVGLNemaAtomicLinkTests(unittest.TestCase):
         self.assertEqual(json.loads(MANIFEST.read_text(encoding="utf-8")), self.report)
         self.assertEqual(self.report["local_target_compile"]["object_count"], 15)
         self.assertEqual(self.report["direct_nema_requirement_count"], 96)
-        self.assertEqual(self.report["missing_provider_count"], 11)
+        self.assertEqual(self.report["missing_provider_count"], 0)
         self.assertEqual(self.report["missing_nema_hal_provider_count"], 0)
         maximal = self.report["maximal_scoped_candidate_closure"]
         self.assertFalse(maximal["performed"])
-        self.assertEqual(maximal["expected_residual_symbol_count"], 11)
+        self.assertEqual(maximal["expected_residual_symbol_count"], 0)
         self.assertEqual(
             maximal["expected_residual_symbol_digest"],
-            "f9d7f5b3fc8db9a19441ec0c4991ac9161c0ae46583e56c2a2298f2794732744",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         )
         self.assertEqual(maximal["expected_remaining_nema_hal_symbols"], [])
         self.assertEqual(maximal["expected_section_gc_root_count"], 39)
@@ -301,14 +301,15 @@ class LVGLNemaAtomicLinkTests(unittest.TestCase):
         sync_signal = self.report["local_lvgl_thread_sync_signal_provider"]
         self.assertEqual(sync_signal["artifact"], {
             "path": "lvgl-ambiq-lvgl-thread-sync-signal-provider.o",
-            "size": 1_140,
-            "sha256": "48251997ef18222cd29f8397f049ad5ca3c20b95b789d8917bbb03632db69269",
+            "size": 3_592,
+            "sha256": "ddbbc2988d6f974c109e0f5d826f24579a2251d7acb569414b05184cb35252da",
         })
         self.assertEqual(sync_signal["elf_undefined_symbols"], [])
         self.assertEqual(sync_signal["aggregate_elf_undefined_symbols"], [])
-        self.assertEqual(sync_signal["fixed_address_import_count"], 3)
-        self.assertEqual(sync_signal["closed_consumer_relocation_count"], 2)
+        self.assertEqual(sync_signal["fixed_address_import_count"], 8)
+        self.assertEqual(sync_signal["closed_consumer_relocation_count"], 7)
         self.assertEqual(sync_signal["closed_transitive_relocation_count"], 2)
+        self.assertEqual(sync_signal["closed_residual_symbol_count"], 6)
         self.assertTrue(sync_signal["source_admitted"])
         self.assertFalse(sync_signal["production_overlay_registered"])
         self.assertFalse(sync_signal["hardware_qualified"])
@@ -377,7 +378,7 @@ class LVGLNemaAtomicLinkTests(unittest.TestCase):
     def test_static_ledger_omission_fails_closed(self) -> None:
         original = self.analyzer.EXPECTED_MAXIMAL_RESIDUAL_SYMBOLS
         try:
-            self.analyzer.EXPECTED_MAXIMAL_RESIDUAL_SYMBOLS = original[:-1]
+            self.analyzer.EXPECTED_MAXIMAL_RESIDUAL_SYMBOLS = ("omitted_provider",)
             with self.assertRaisesRegex(self.analyzer.AuditError, "omission"):
                 self.analyzer._validate_static_boundary()
         finally:
@@ -415,12 +416,12 @@ class LVGLNemaAtomicLinkTests(unittest.TestCase):
         })
         maximal = report["maximal_scoped_candidate_closure"]
         self.assertTrue(maximal["performed"])
-        self.assertEqual(maximal["residual_symbol_count"], 11)
+        self.assertEqual(maximal["residual_symbol_count"], 0)
         self.assertEqual(maximal["remaining_nema_hal_symbols"], [])
         self.assertEqual(maximal["artifact"], {
             "path": "lvgl-ambiq-nema-evb-maximal-partial.o",
-            "size": 1_370_696,
-            "sha256": "d1c96688dfd7e7c845a9b4e0bcb2610bc239d881c89aa79e09faefc8d0bcd8cf",
+            "size": 1_422_532,
+            "sha256": "87edb7b7f51078fa4c21360048f564f9898ea994500bdd9d006fb7e29667fdd8",
         })
         self.assertEqual(maximal["compile"]["warning_count"], 0)
         section_gc = maximal["section_gc"]

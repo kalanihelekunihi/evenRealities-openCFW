@@ -56,8 +56,70 @@ class G2CompletionReportTests(unittest.TestCase):
         self.assertTrue(gates["source_ownership_quality_clean"])
         self.assertTrue(gates["project_license_policy_clean"])
         self.assertTrue(gates["dual_profile_ownership_reconciliation"])
+        self.assertTrue(gates["functional_software_gap_rows_zero"])
+        self.assertTrue(gates["functional_hardware_rows_explicitly_blocked"])
+        self.assertTrue(
+            gates["functional_proprietary_rows_explicitly_blocked"])
+        self.assertTrue(
+            gates["candidate_artifacts_complete_and_hardware_blocked"])
         self.assertFalse(gates["binary_redistribution_authority_resolved"])
         self.assertFalse(gates["release_authorized"])
+
+    def test_nine_domain_functional_ledger_is_semantically_closed(self) -> None:
+        ledger = self.assessment["functional_capability_ledger"]
+        self.assertEqual(set(ledger["domain_counts"]),
+                         set(generator.CAPABILITY_DOMAINS))
+        self.assertEqual(ledger["row_count"], 185)
+        self.assertEqual(ledger["totals"], {
+            "implemented-in-source": 152,
+            "software-gap": 0,
+            "hardware-dependent": 19,
+            "proprietary-blocked": 14,
+        })
+        self.assertEqual(ledger["software_gap_rows"], 0)
+        self.assertTrue(ledger["software_gap_gate"])
+        self.assertEqual(ledger["hardware_marked_rows"], 130)
+        self.assertEqual(ledger["hardware_rows_explicitly_blocked"], 130)
+        self.assertTrue(ledger["hardware_blocker_wording_gate"])
+        self.assertEqual(ledger["hardware_blocker_wording_failures"], [])
+        self.assertEqual(ledger["proprietary_marked_rows"], 16)
+        self.assertEqual(ledger["proprietary_rows_explicitly_blocked"], 16)
+        self.assertTrue(ledger["proprietary_blocker_wording_gate"])
+        self.assertEqual(ledger["proprietary_blocker_wording_failures"], [])
+
+    def test_candidate_images_are_compilable_and_exactly_hardware_blocked(
+            self) -> None:
+        boundaries = self.assessment["candidate_admission_boundaries"]
+        self.assertEqual(set(boundaries), {"touch", "case"})
+        self.assertEqual(
+            sum(row["candidate_bytes"] for row in boundaries.values()),
+            self.assessment["aggregate"]["buckets"]
+            ["candidate_source_not_routed"],
+        )
+        self.assertEqual(boundaries["touch"]["candidate_bytes"], 14_510)
+        self.assertEqual(boundaries["touch"]["source_translation_units"], 31)
+        self.assertEqual(boundaries["touch"]["candidate_source_functions"], 178)
+        self.assertEqual(
+            boundaries["touch"]["blocker_class"],
+            "hardware-dependent-resident-abi",
+        )
+        self.assertEqual(boundaries["case"]["candidate_bytes"], 14_886)
+        self.assertEqual(boundaries["case"]["source_translation_units"], 8)
+        self.assertEqual(boundaries["case"]["candidate_source_functions"], 222)
+        self.assertEqual(
+            boundaries["case"]["blocker_class"],
+            "hardware-dependent-board-routing",
+        )
+        for row in boundaries.values():
+            self.assertEqual(row["remaining_callable_software_functions"], 0)
+            self.assertEqual(row["undefined_symbols"], 0)
+            self.assertTrue(row["software_link_complete"])
+            self.assertTrue(row["software_package_complete"])
+            self.assertFalse(row["production_routed"])
+            self.assertFalse(row["physical_board_services_routed"])
+            self.assertEqual(
+                row["hardware_validation"], generator.HARDWARE_STATUS)
+            self.assertEqual(row["hardware_operations"], [])
 
     def test_checked_dual_profile_companion_is_publicly_bound(self) -> None:
         ownership = self.assessment["dual_profile_ownership"]
@@ -89,18 +151,18 @@ class G2CompletionReportTests(unittest.TestCase):
         self.assertIn("Linux coarse spans", ownership["limitation"])
         expected = {
             "apple-clang": (
-                4750576,
-                "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
-                4749632,
+                4750780,
+                "f2842600b84f303c40d2d299761c1abc0a7083acc05f2d378be9a045b0d9a846",
+                4749836,
                 0,
-                17800,
+                120246,
             ),
             "linux-clang": (
-                4750560,
-                "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
-                4749616,
+                4750764,
+                "e534ffe034360b24fffc3d7fc50988234fc48ae20f6e8afa8be2507247c8cd39",
+                4749820,
                 0,
-            274414,
+                3359246,
             ),
         }
         for profile, values in expected.items():
@@ -226,7 +288,7 @@ class G2CompletionReportTests(unittest.TestCase):
         recorded_paths = {
             row["path"] for row in self.assessment["source_inputs"]
         }
-        self.assertEqual(len(expected_paths), 157)
+        self.assertEqual(len(expected_paths), 166)
         self.assertEqual(recorded_paths, expected_paths)
         self.assertEqual(len(self.assessment["source_inputs"]),
                          len(expected_paths))
@@ -303,7 +365,7 @@ class G2CompletionReportStaticSafetyTests(unittest.TestCase):
 
     def test_analyzer_closure_and_source_complete_definition_are_explicit(self) -> None:
         generator._verify_direct_analyzer_import_closure()
-        self.assertEqual(len(generator.DIRECT_ANALYZER_INPUTS), 24)
+        self.assertEqual(len(generator.DIRECT_ANALYZER_INPUTS), 28)
         paths = {
             path.relative_to(generator.ROOT).as_posix()
             for path in generator.DIRECT_INPUTS
@@ -317,6 +379,45 @@ class G2CompletionReportStaticSafetyTests(unittest.TestCase):
         }, paths)
         for bucket in ("candidate", "retained/external", "unclassified"):
             self.assertIn(bucket, generator.SOURCE_COMPLETE_DEFINITION)
+
+    def test_functional_ledger_gap_and_hardware_wording_fail_closed(self) -> None:
+        source = generator.CAPABILITY_LEDGER.read_text(encoding="utf-8")
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary).resolve() / "ledger.md"
+            software_gap = source.replace(
+                "| Protocol | 62 | 0 | 3 | 5 |",
+                "| Protocol | 61 | 1 | 3 | 5 |",
+                1,
+            ).replace(
+                "| implemented-in-source / hardware-deferred |",
+                "| software-gap |",
+                1,
+            )
+            path.write_text(software_gap, encoding="utf-8")
+            report = generator._functional_capability_ledger(path)
+            self.assertEqual(report["software_gap_rows"], 1)
+            self.assertFalse(report["software_gap_gate"])
+
+            missing_block = source.replace(
+                "physical case execution is blocked by unavailable physical evidence",
+                "physical case execution is pending",
+                1,
+            )
+            path.write_text(missing_block, encoding="utf-8")
+            report = generator._functional_capability_ledger(path)
+            self.assertFalse(report["hardware_blocker_wording_gate"])
+            self.assertEqual(len(report["hardware_blocker_wording_failures"]), 1)
+
+            missing_proprietary_block = source.replace(
+                "resident image is blocked by unavailable proprietary inputs",
+                "resident image is pending",
+                1,
+            )
+            path.write_text(missing_proprietary_block, encoding="utf-8")
+            report = generator._functional_capability_ledger(path)
+            self.assertFalse(report["proprietary_blocker_wording_gate"])
+            self.assertEqual(
+                len(report["proprietary_blocker_wording_failures"]), 1)
 
     def test_dual_profile_private_receipts_are_exact_direct_inputs(self) -> None:
         expected = generator._input_record(

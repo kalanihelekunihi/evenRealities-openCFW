@@ -102,17 +102,34 @@ shape APIs. The zero-import fmt_txt bitmap provider closes one more. The
 vector-task lifecycle provider closes one more, and the draw-unit creation
 provider closes the exact authenticated global-list insertion API. The current
 draw-dispatch request provider then closes the exact two-signal wrapper. The
-task-notification-mode sync-signal provider closes its formerly residual
-dependency with three source-owned fixed FreeRTOS entries. The current maximal
-ledger contains 11 symbols and no Nema, Apollo HAL,
-FreeRTOS queue, admitted LVGL utility/stateless/mutex/heap/array/destroy/
-global-storage/FreeType-event/draw-buffer-shape/font-format/vector-destroy/
-draw-unit-create/draw-dispatch-request API,
-admitted memory/AEABI conversion, or admitted nine-symbol math import. Its
-canonical digest is
-`f9d7f5b3fc8db9a19441ec0c4991ac9161c0ae46583e56c2a2298f2794732744`.
-The 1,370,696-byte maximal partial link has SHA-256
-`d1c96688dfd7e7c845a9b4e0bcb2610bc239d881c89aa79e09faefc8d0bcd8cf`.
+task-notification-mode OSAL provider closes the exact four-function
+`lv_thread_sync_init`/`wait`/`signal`/`delete` ABI and the
+`lv_thread_init`/`delete` lifecycle ABI across seven authenticated backend
+relocations. Six fixed FreeRTOS entries are already source-owned; the exact
+notification-take path is now maintained C over two additional source-owned
+FreeRTOS delayed-list/yield entries, for eight source-owned fixed calls total.
+The remaining draw-task selection, layer-buffer allocation, and callback
+logging APIs are now source-closed as exact-ABI providers. Logging retains the
+source-owned formatter/string/tick path rather than becoming a no-op.
+
+The exact LVGL decoder open/close translation unit is section-rooted together
+with its exact filesystem and cache sources and six source-owned list/cache/
+string leaves. That 48,140-byte aggregate has zero undefined symbols and
+SHA-256
+`92f09f27f55e93c91107cb5bb517d086085583e4c74da87807a57d20a1650be1`;
+all variable and file-backed open, cache acquisition/release, close, seek, and
+draw-buffer flush paths remain present.
+
+Finally, the exact label iterator and draw-letter helper are section-rooted
+with exact text, font, draw-buffer, and fill-descriptor sources plus four
+bounded area/color leaves. Its 49,412-byte aggregate has zero undefined symbols
+and SHA-256
+`81dad58e17c0beb4e5721229f73e8d935c29a1791c26c1635c2279c7b26daad5`.
+The maximal residual ledger is therefore empty; the canonical empty-set digest
+is `4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945`.
+The scoped 1,422,532-byte maximal partial link resolves every symbol and has
+SHA-256
+`87edb7b7f51078fa4c21360048f564f9898ea994500bdd9d006fb7e29667fdd8`.
 
 These are compile and relocation results, not production admission.
 
@@ -168,7 +185,8 @@ transitive relocation. Default mode needs no external SDK: it reproduces the
 Apollo HAL provider, the isolated five-object FreeRTOS provider, and the
 isolated zero-import LVGL utility, stateless, target-runtime, math, and
 FPv5-D16 math providers plus the fixed-source-boundary mutex, heap/array,
-draw-buffer-destroy/shape, exact global-storage, and FreeType outline-event providers and
+   draw-buffer-destroy/shape, exact global-storage, FreeType outline-event,
+   draw-task/layer/logging, decoder/filesystem/cache, and label/text/font providers and
 emits the complete precomputed missing-provider ledger in
 `tools/manifests/g2-lvgl-nema-link-admission.json`. Any omitted or duplicate
 residual symbol is a hard error.
@@ -217,11 +235,10 @@ Production admission remains fail-closed on:
    dependencies, including ISR priority, wake/yield, timeout, and allocation;
 3. G2-specific Nema memory-pool, IRQ, cache, power-retention, and toolchain
    configuration rather than the EVB example configuration;
-4. exact configuration and atomic source admission for the remaining 16 LVGL
-   thread/sync OSAL, draw scheduling/layer, decoder/cache, logging, and
-   global-state initializer
-   imports; in particular, the FreeRTOS task-notification selection is not
-   recovered;
+4. production placement and ingress routing for the now zero-residual LVGL/
+   Ambiq/Nema source closure; exact font/cache/filesystem/decoder registration,
+   global initialization, collision, and writable-memory ownership remain
+   runtime-unqualified;
 5. archive redistribution/notice approval and a deliberate GNU-versus-stock-
    IAR route; and
 6. authorized Apollo510/G2 command-list, IRQ, cache, suspend/resume,

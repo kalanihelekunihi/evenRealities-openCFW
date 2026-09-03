@@ -21,10 +21,11 @@ closed private compact-log core are diagnostic/record providers, not embedded
 definitions.
 
 The object therefore hides no additional third-party library, version, or
-commit. The remaining opaque behavior is first-party G2 rotation, manager-file,
-version-header, and export-state policy. The private historical producing
-commit remains binary-unobservable. The object itself is not yet
-production-routed by OpenCFW.
+commit. Its first-party rotation, manager-file, version-header, and export-state
+policy is now implemented in production C and routed over the existing
+source-owned file/event providers. Twelve guarded redirects replace all 1,324
+callable stock bytes. The private historical producing commit remains
+binary-unobservable, but it is no longer a software prerequisite.
 
 ## Reproduction
 
@@ -37,8 +38,9 @@ make compress-log-port-closure
 The analyzer authenticates the official G2 2.2.6.10 image, all three
 manifests, the complete executable and physical intervals, M-profile Thumb
 control flow, call and entry topology, the stored callback, path and diagnostic
-strings, manager constants, upstream provenance, and the exact production
-redirects for every file/event provider entry.
+strings, manager constants, upstream provenance, all twelve production source
+leaves and redirects, 41 strict relocations, and both compiler-profile pins.
+The target also compiles and executes the host behavioral suite.
 
 | Evidence | Result |
 |---|---:|
@@ -114,9 +116,9 @@ Software_Version: 2.2.6.10\n
 ```
 
 The sync function appends caller bytes across file boundaries, updates the
-current offset after each successful write, and persists manager state. Its
-shared file operations are OpenCFW-source-owned already; only this policy
-layer remains to reconstruct.
+current offset after each successful write, and persists manager state. The
+production implementation preserves that policy while calling the existing
+OpenCFW-source-owned shared file operations.
 
 ## Export timeout
 
@@ -145,20 +147,20 @@ baseline, not proof of Even's historical checkout; later source states remain
 binary-equivalent under the recovered G2 configuration.
 
 The export scheduler entries are exact production redirects for delayed
-insertion and removal. Thus a compact-log source candidate can call existing
-OpenCFW provider APIs directly and does not need to recover another RTOS or
-timer implementation.
+insertion and removal. The production compact-log implementation calls these
+OpenCFW provider APIs directly and does not need another RTOS or timer
+implementation.
 
-## OpenCFW implication
+## OpenCFW production result
 
-The core and port pair now provide a compact implementation target:
+`components/apollo_main/core_overlay/compress_log_port.c` (17,905 bytes,
+SHA-256 `473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e`)
+implements all twelve functions. The Apple profile emits 1,090 text bytes and
+the Linux profile emits 1,086; both carry 41 reviewed relocations and feed the
+complete CFF/LC3 firmware builder. Host tests cover manager recovery, rotation,
+header creation, cross-file writes, missing-file reconciliation, invalid-state
+reset, export start/stop, and timeout expiry.
 
-1. preserve the high-volume compact hook ABI at `0x0043CE9E`;
-2. recreate the 44-byte record/ring behavior from the core closure;
-3. recreate the five-file manager and rotation behavior in this report;
-4. bind it to the existing source-owned file and delayed-callback APIs; and
-5. validate concurrent production, power-loss recovery, storage wear, and
-   export timeout on target hardware before production admission.
-
-No hardware, signing, flashing, erase, or runtime operation was performed in
-this audit.
+Live concurrent logging, power-loss recovery, storage wear, and export timing
+remain **blocked by unavailable physical evidence**. No hardware, signing,
+flashing, erase, or runtime operation was performed in this work.

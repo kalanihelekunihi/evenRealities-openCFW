@@ -31,14 +31,28 @@ import audit_g2_release_licensing as licensing
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = ROOT / "docs/reports/openCFW-completion-2026-08-28"
+CAPABILITY_LEDGER = ROOT / "docs/functional-capability-ledger.md"
 ASSESSMENT_NAME = "assessment-data.json"
 ARTIFACT_NAME = "artifact.json"
 REPORT_NAME = "report.html"
 HARDWARE_STATUS = "blocked by unavailable physical evidence"
+PROPRIETARY_STATUS = "blocked by unavailable proprietary inputs"
 SOURCE_COMPLETE_DEFINITION = (
     "Every required behavior byte is routed from maintained source: candidate, "
     "retained/external, and unclassified byte counts are all zero."
 )
+CAPABILITY_DOMAINS = (
+    "Protocol", "Security", "Platform", "Health", "System", "Storage",
+    "Sensors", "Hardware services", "Deployment",
+)
+CAPABILITY_STATUSES = (
+    "implemented-in-source", "software-gap", "hardware-dependent",
+    "proprietary-blocked",
+)
+CAPABILITY_STATUS_ALIASES = {
+    "authenticated donor retained / hardware-deferred": "proprietary-blocked",
+    "external-provider/proprietary-blocked": "proprietary-blocked",
+}
 
 COMPONENT_LABELS = {
     "apollo_main": "Apollo main application",
@@ -82,6 +96,15 @@ DIRECT_INPUTS = (
     readiness.PROJECT_LICENSE_SUMMARY,
     readiness.PROJECT_LICENSE_SCOPE_PATHS,
     readiness.PROJECT_LICENSE_ADDITIONAL_PATHS,
+    CAPABILITY_LEDGER,
+    ROOT / "tools/analyze_g2_freetype_cff_package_integration.py",
+    ROOT / "tools/manifests/g2-freetype-cff-package-integration.json",
+    ROOT / "tools/analyze_g2_freetype_cff_placement_link.py",
+    ROOT / "tools/manifests/g2-freetype-cff-placement-link.json",
+    ROOT / "tools/analyze_g2_freetype_cff_production_route.py",
+    ROOT / "tools/manifests/g2-freetype-cff-production-route.json",
+    ROOT / "tools/audit_g2_lvgl_nema_link.py",
+    ROOT / "tools/manifests/g2-lvgl-nema-link-admission.json",
     ROOT / "tools/manifests/gx8002-source-readiness.tsv",
     ROOT / "tools/manifests/em9305-residual-provenance-map.tsv",
     ROOT / "tools/manifests/em9305-record-package-summary.json",
@@ -243,6 +266,138 @@ def _input_record(path: Path) -> dict[str, Any]:
         "path": relative.as_posix(),
         "size": len(raw),
         "sha256": _sha256_bytes(raw),
+    }
+
+
+def _markdown_fields(line: str) -> list[str]:
+    return [field.strip() for field in line.strip().strip("|").split("|")]
+
+
+def _functional_capability_ledger(
+    path: Path = CAPABILITY_LEDGER,
+) -> dict[str, Any]:
+    """Parse and reconcile the nine-domain capability ledger fail-closed."""
+
+    try:
+        text = _read_regular_path_once(
+            path, label="functional capability ledger"
+        ).decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise ReportError("functional capability ledger is not UTF-8") from error
+
+    try:
+        summary_start = text.index("## Row counts\n")
+        summary_end = text.index("\n## Protocol\n", summary_start)
+    except ValueError as error:
+        raise ReportError("functional capability ledger headings changed") from error
+
+    summary: dict[str, Counter[str]] = {}
+    for line in text[summary_start:summary_end].splitlines():
+        if not line.startswith("|") or line.startswith("| ---"):
+            continue
+        fields = _markdown_fields(line)
+        if not fields or fields[0] not in CAPABILITY_DOMAINS:
+            continue
+        _require(len(fields) == 5, "functional ledger summary shape changed")
+        try:
+            counts = [int(value) for value in fields[1:]]
+        except ValueError as error:
+            raise ReportError(
+                f"functional ledger summary is not numeric: {fields[0]}"
+            ) from error
+        _require(
+            all(value >= 0 for value in counts),
+            f"functional ledger summary is negative: {fields[0]}",
+        )
+        summary[fields[0]] = Counter(dict(zip(CAPABILITY_STATUSES, counts)))
+    _require(
+        tuple(summary) == CAPABILITY_DOMAINS,
+        "functional ledger summary domain order changed",
+    )
+
+    domain_counts: dict[str, dict[str, int]] = {}
+    hardware_marked_rows = 0
+    hardware_blockers: list[dict[str, str]] = []
+    proprietary_marked_rows = 0
+    proprietary_blockers: list[dict[str, str]] = []
+    total = Counter({status: 0 for status in CAPABILITY_STATUSES})
+    for domain in CAPABILITY_DOMAINS:
+        try:
+            start = text.index(f"## {domain}\n")
+        except ValueError as error:
+            raise ReportError(
+                f"functional ledger domain is absent: {domain}"
+            ) from error
+        end = text.find("\n## ", start + 4)
+        section = text[start:end if end >= 0 else len(text)]
+        observed = Counter({status: 0 for status in CAPABILITY_STATUSES})
+        for line in section.splitlines():
+            if not line.startswith("|") or line.startswith("| ---"):
+                continue
+            fields = _markdown_fields(line)
+            if fields[1] == "Gap status":
+                continue
+            _require(
+                len(fields) == 5,
+                f"{domain} functional ledger row shape changed",
+            )
+            raw_status = fields[1]
+            matches = [
+                status for status in CAPABILITY_STATUSES
+                if raw_status.startswith(status)
+            ]
+            if raw_status in CAPABILITY_STATUS_ALIASES:
+                matches = [CAPABILITY_STATUS_ALIASES[raw_status]]
+            _require(
+                len(matches) == 1,
+                f"{domain} functional ledger status is uncounted: {raw_status}",
+            )
+            observed[matches[0]] += 1
+            if "hardware" in raw_status.lower():
+                hardware_marked_rows += 1
+                if HARDWARE_STATUS not in fields[4]:
+                    hardware_blockers.append({
+                        "domain": domain,
+                        "capability": fields[0],
+                        "status": raw_status,
+                    })
+            if "proprietary" in raw_status.lower():
+                proprietary_marked_rows += 1
+                if PROPRIETARY_STATUS not in fields[4]:
+                    proprietary_blockers.append({
+                        "domain": domain,
+                        "capability": fields[0],
+                        "status": raw_status,
+                    })
+        _require(
+            observed == summary[domain],
+            f"{domain} functional ledger summary does not match detailed rows",
+        )
+        domain_counts[domain] = {
+            status: observed[status] for status in CAPABILITY_STATUSES
+        }
+        total.update(observed)
+
+    return {
+        "path": CAPABILITY_LEDGER.relative_to(ROOT).as_posix(),
+        "row_count": sum(total.values()),
+        "domain_counts": domain_counts,
+        "totals": {status: total[status] for status in CAPABILITY_STATUSES},
+        "software_gap_rows": total["software-gap"],
+        "software_gap_gate": total["software-gap"] == 0,
+        "hardware_marked_rows": hardware_marked_rows,
+        "hardware_rows_explicitly_blocked": (
+            hardware_marked_rows - len(hardware_blockers)
+        ),
+        "hardware_blocker_wording_gate": not hardware_blockers,
+        "hardware_blocker_wording_failures": hardware_blockers,
+        "proprietary_blocked_rows": total["proprietary-blocked"],
+        "proprietary_marked_rows": proprietary_marked_rows,
+        "proprietary_rows_explicitly_blocked": (
+            proprietary_marked_rows - len(proprietary_blockers)
+        ),
+        "proprietary_blocker_wording_gate": not proprietary_blockers,
+        "proprietary_blocker_wording_failures": proprietary_blockers,
     }
 
 
@@ -416,6 +571,7 @@ def build_assessment() -> dict[str, Any]:
     """Translate the live audit into the public, lossless assessment schema."""
     _verify_direct_analyzer_import_closure()
     direct_inputs_before = [_input_record(path) for path in DIRECT_INPUTS]
+    capability_ledger = _functional_capability_ledger()
     live = readiness.analyze()
     touch_input_records = _bound_touch_input_records(live)
     license_audit = licensing.analyze()
@@ -457,6 +613,7 @@ def build_assessment() -> dict[str, Any]:
              "public package envelope does not conserve package bytes")
 
     touch = next(row for row in components if row["component_id"] == "touch")
+    case = next(row for row in components if row["component_id"] == "case")
     touch_detail = touch["details"]
     touch_admission = {
         "authoritative_batch": touch_detail["authoritative_batch"],
@@ -480,6 +637,65 @@ def build_assessment() -> dict[str, Any]:
         "analysis_input_count":
             touch_detail["generation_receipt"]["analysis_inputs"]["path_count"],
     }
+
+    candidate_admission_boundaries = {}
+    for component, package_key in (
+        (touch, "software_fwpk_package_complete"),
+        (case, "software_even_package_complete"),
+    ):
+        component_id = component["component_id"]
+        detail = component["details"]
+        candidate_admission_boundaries[component_id] = {
+            "candidate_bytes":
+                component["buckets"]["candidate_source_not_routed"],
+            "source_translation_units": detail["source_image_translation_units"],
+            "candidate_source_functions": detail["candidate_source_functions"],
+            "remaining_callable_software_functions":
+                detail["remaining_callable_software_functions"],
+            "undefined_symbols": detail["source_image_undefined_symbols"],
+            "raw_flash_bytes": detail["source_image_raw_flash_bytes"],
+            "software_link_complete": detail["software_image_link_complete"],
+            "software_package_complete": detail[package_key],
+            "production_routed": component["production_routed"],
+            "physical_board_services_routed":
+                detail["physical_board_services_routed"],
+            "blocker_class": detail["candidate_admission_blocker_class"],
+            "hardware_validation":
+                detail["candidate_admission_hardware_validation"],
+            "hardware_operations":
+                detail["candidate_admission_hardware_operations"],
+        }
+    candidate_components = {
+        row["component_id"]
+        for row in components
+        if row["buckets"]["candidate_source_not_routed"]
+    }
+    _require(
+        candidate_components == set(candidate_admission_boundaries),
+        "candidate component set is not completely admission-bound",
+    )
+    _require(
+        sum(row["candidate_bytes"]
+            for row in candidate_admission_boundaries.values())
+        == aggregate["buckets"]["candidate_source_not_routed"],
+        "candidate admission boundaries do not conserve candidate bytes",
+    )
+    candidate_artifacts_complete_and_hardware_blocked = all(
+        row["candidate_bytes"] > 0
+        and row["source_translation_units"] > 0
+        and row["candidate_source_functions"] > 0
+        and row["remaining_callable_software_functions"] == 0
+        and row["undefined_symbols"] == 0
+        and row["raw_flash_bytes"] > 0
+        and row["software_link_complete"]
+        and row["software_package_complete"]
+        and not row["production_routed"]
+        and not row["physical_board_services_routed"]
+        and row["blocker_class"].startswith("hardware-dependent-")
+        and row["hardware_validation"] == HARDWARE_STATUS
+        and row["hardware_operations"] == []
+        for row in candidate_admission_boundaries.values()
+    )
 
     source_inventory = license_audit["source_inventory"]
     license_counts = Counter(row["license"] for row in source_inventory)
@@ -513,6 +729,27 @@ def build_assessment() -> dict[str, Any]:
              "hardware policy wording drifted")
     _require(gates["hardware_operations"] == [],
              "hardware operations appeared in the software-only audit")
+    gates["functional_software_gap_rows_zero"] = capability_ledger[
+        "software_gap_gate"
+    ]
+    gates["functional_hardware_rows_explicitly_blocked"] = capability_ledger[
+        "hardware_blocker_wording_gate"
+    ]
+    gates["functional_proprietary_rows_explicitly_blocked"] = (
+        capability_ledger["proprietary_blocker_wording_gate"]
+    )
+    gates["candidate_artifacts_complete_and_hardware_blocked"] = (
+        candidate_artifacts_complete_and_hardware_blocked
+    )
+    _require(
+        not gates["release_authorized"] or (
+            gates["functional_software_gap_rows_zero"]
+            and gates["functional_hardware_rows_explicitly_blocked"]
+            and gates["functional_proprietary_rows_explicitly_blocked"]
+            and gates["candidate_artifacts_complete_and_hardware_blocked"]
+        ),
+        "release authorization bypasses functional capability gates",
+    )
 
     dual_report = dual_ownership.analyze()
     dual_input_records = _bound_dual_input_records(dual_report)
@@ -615,7 +852,7 @@ def build_assessment() -> dict[str, Any]:
         source_inputs_by_path[row["path"]] = row
 
     return {
-        "schema_version": 3,
+        "schema_version": 4,
         "assessment_date": "2026-08-28",
         "target": f"{base['target']} {base['package']['version']}",
         "generated_by": "tools/generate_g2_completion_report.py",
@@ -651,6 +888,24 @@ def build_assessment() -> dict[str, Any]:
                 "A durable redistribution grant is recorded for every packaged "
                 "binary. Source licensing does not establish this grant."
             ),
+            "functional_software_gap_rows_zero": (
+                "The nine-domain capability ledger has no locally actionable "
+                "software-gap row. This does not imply source completeness."
+            ),
+            "functional_hardware_rows_explicitly_blocked": (
+                "Every ledger row whose status names a hardware dependency "
+                "uses the exact unavailable-physical-evidence disposition."
+            ),
+            "functional_proprietary_rows_explicitly_blocked": (
+                "Every ledger row whose status names a proprietary boundary "
+                "uses the exact unavailable-proprietary-inputs disposition."
+            ),
+            "candidate_artifacts_complete_and_hardware_blocked": (
+                "Every candidate-only component has zero remaining callable "
+                "software functions, links and packages with zero undefined "
+                "symbols, remains outside production routing, and records the "
+                "exact unavailable-physical-evidence disposition."
+            ),
         },
         "package": {
             "format": base["package"]["format"],
@@ -668,6 +923,8 @@ def build_assessment() -> dict[str, Any]:
         "components": components,
         "aggregate": aggregate,
         "touch_admission": touch_admission,
+        "candidate_admission_boundaries": candidate_admission_boundaries,
+        "functional_capability_ledger": capability_ledger,
         "gates": gates,
         "dual_profile_ownership": dual_profile_ownership,
         "source_ownership_quality": live["source_ownership_quality"],
@@ -738,6 +995,10 @@ def build_html(assessment: dict[str, Any], assessment_sha256: str) -> bytes:
     gate_order = (
         "byte_accounting_complete",
         "classification_complete",
+        "functional_software_gap_rows_zero",
+        "functional_hardware_rows_explicitly_blocked",
+        "functional_proprietary_rows_explicitly_blocked",
+        "candidate_artifacts_complete_and_hardware_blocked",
         "source_complete",
         "source_metadata_clean",
         "source_ownership_quality_clean",
@@ -800,6 +1061,35 @@ def build_html(assessment: dict[str, Any], assessment_sha256: str) -> bytes:
         f"<dd>{_html_cell(value)}</dd>"
         for key, value in assessment["definitions"].items()
     )
+    capability = assessment["functional_capability_ledger"]
+    capability_rows = "".join(
+        "<tr>"
+        f"<th scope=\"row\">{_html_cell(domain)}</th>"
+        f"<td>{counts['implemented-in-source']}</td>"
+        f"<td>{counts['software-gap']}</td>"
+        f"<td>{counts['hardware-dependent']}</td>"
+        f"<td>{counts['proprietary-blocked']}</td>"
+        "</tr>"
+        for domain, counts in capability["domain_counts"].items()
+    )
+    candidate_boundary_rows = "".join(
+        "<tr>"
+        f"<th scope=\"row\">{_html_cell(COMPONENT_LABELS[component_id])}</th>"
+        f"<td>{_fmt_int(row['candidate_bytes'])}</td>"
+        f"<td>{_fmt_int(row['source_translation_units'])}</td>"
+        f"<td>{_fmt_int(row['candidate_source_functions'])}</td>"
+        f"<td>{_fmt_int(row['remaining_callable_software_functions'])}</td>"
+        f"<td>{_fmt_int(row['undefined_symbols'])}</td>"
+        f"<td>{_html_cell(row['software_link_complete'])}</td>"
+        f"<td>{_html_cell(row['software_package_complete'])}</td>"
+        f"<td>{_html_cell(row['production_routed'])}</td>"
+        f"<td>{_html_cell(row['physical_board_services_routed'])}</td>"
+        f"<td>{_html_cell(row['blocker_class'])}</td>"
+        "</tr>"
+        for component_id, row in assessment[
+            "candidate_admission_boundaries"
+        ].items()
+    )
 
     document = f"""<!doctype html>
 <html lang="en">
@@ -844,6 +1134,16 @@ th:first-child,td:first-child{{text-align:left}} code{{font-size:.82em;overflow-
 <section><h2>Aggregate payload classes</h2>
 <table><thead><tr><th>Class</th><th>Bytes</th><th>Payload share</th></tr></thead><tbody>{bucket_rows}</tbody></table></section>
 
+<section><h2>Nine-domain functional-capability ledger</h2>
+<p>The checked ledger contains {_fmt_int(capability['row_count'])} capability rows. It reports {_fmt_int(capability['software_gap_rows'])} locally actionable software-gap rows. All {_fmt_int(capability['hardware_marked_rows'])} rows whose status names a hardware dependency use the exact disposition <strong>{_html_cell(assessment['hardware_validation'])}</strong>. All {_fmt_int(capability['proprietary_marked_rows'])} rows whose status names a proprietary boundary use the exact disposition <strong>{_html_cell(PROPRIETARY_STATUS)}</strong>.</p>
+<table><thead><tr><th>Domain</th><th>Implemented in source</th><th>Software gap</th><th>Hardware dependent</th><th>Proprietary blocked</th></tr></thead><tbody>{capability_rows}</tbody></table>
+<p class="note">Zero software-gap rows is narrower than whole-image source completion; typed retained/external and proprietary boundaries remain release-blocking.</p></section>
+
+<section><h2>Candidate image admission boundaries</h2>
+<p>The complete candidate bucket is conserved across the rows below. Each software image links and packages with zero undefined symbols, but production and physical board-service routing remain disabled pending the exact hardware disposition <strong>{_html_cell(assessment['hardware_validation'])}</strong>.</p>
+<table><thead><tr><th>Component</th><th>Candidate bytes</th><th>Translation units</th><th>Source functions</th><th>Remaining callable functions</th><th>Undefined symbols</th><th>Links</th><th>Packages</th><th>Production routed</th><th>Board services routed</th><th>Blocker class</th></tr></thead><tbody>{candidate_boundary_rows}</tbody></table>
+<p class="note">These rows prove software artifact closure, not functional hardware validation or permission to route either image on a device.</p></section>
+
 <section><h2>Checked dual-profile ownership</h2>
 <p>The Apple and Linux package reports, flash plans, admitted component receipts, and checked companion conserve exact aggregate ownership totals. Flash-plan ownership labels remain non-authoritative presentation boundaries.</p>
 <table><thead><tr><th>Profile</th><th>Package bytes</th><th>Package SHA-256</th><th>Production source</th><th>Generated</th><th>Candidate</th><th>Retained / external</th><th>Unclassified</th><th>Internal container</th><th>Reconciled label bytes</th></tr></thead><tbody>{dual_rows}</tbody></table>
@@ -879,7 +1179,7 @@ def build_outputs() -> dict[str, bytes]:
     assessment_sha = _sha256_bytes(assessment_bytes)
     report_bytes = build_html(assessment, assessment_sha)
     artifact = {
-        "schema_version": 3,
+        "schema_version": 4,
         "surface": "report",
         "title": "G2 openCFW Completion Assessment",
         "generator": "g2/tools/generate_g2_completion_report.py",

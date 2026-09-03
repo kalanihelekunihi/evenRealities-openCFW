@@ -270,7 +270,14 @@ class CanonicalCFFAdmissionTests(unittest.TestCase):
 
         def receipt(seed: int):
             return {
-                "observation": {"schema_version": 3},
+                "observation": {
+                    "schema_version": 3,
+                    "freetype_cff": {
+                        "section_artifacts": {
+                            key: {} for key in ADMISSION.CFF_SECTION_NAMES
+                        },
+                    },
+                },
                 "report_identity": (1, seed, 0),
                 "artifact_identities": {
                     key: (1, seed + index + 1, 0)

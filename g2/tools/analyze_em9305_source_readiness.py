@@ -40,7 +40,7 @@ PROVENANCE_SIZE = 47_936
 PROVENANCE_SHA256 = "2ac24d2abf1f4a4fbce236a82f4591a38dfdb0a71c5ca5b2f8e88bcd9a722d36"
 FINAL_LEDGER = MANIFEST_DIR / "em9305-final-source-readiness.tsv"
 FINAL_SUMMARY = MANIFEST_DIR / "em9305-final-source-readiness-summary.json"
-FINAL_SCHEMA_VERSION = 6
+FINAL_SCHEMA_VERSION = 7
 QPC_COMPONENT_RECEIPT = MANIFEST_DIR / "em9305-qpc-component-build-summary.json"
 QPC_COMPONENT_RECEIPT_SIZE = 6_604
 QPC_COMPONENT_RECEIPT_SHA256 = (
@@ -239,7 +239,7 @@ def compose_reports(
         raise ReadinessError("first-party hook boundary is not qualified")
     if tail_report.get("status") != "candidate-qualified-exhaustive":
         raise ReadinessError("residual-tail partition is not qualified")
-    if hook_provider_report.get("status") != "candidate-qualified-one-software-two-hardware":
+    if hook_provider_report.get("status") != "candidate-qualified-software-provider-two-hardware":
         raise ReadinessError("QP/C named hook-provider boundary is not qualified")
     if (
         hook_provider_report.get("software_provider_gaps") != []
@@ -525,8 +525,9 @@ def compose_reports(
             "production_routed": True,
             "provider_size": metaware_candidate["provider_size"],
             "provider_sha256": metaware_candidate["provider_sha256"],
-            "remaining_software_blockers": [
-                "210584 typed retained or external provider bytes are not yet reproducible from community C source"
+            "remaining_software_blockers": [],
+            "remaining_source_completeness_blockers": [
+                "210584 typed retained or external provider bytes require unavailable exact provider source and redistribution authority"
             ],
             "hardware_operations": record_package_receipt["hardware_operations"],
             "hardware_validation": record_package_receipt["hardware_validation"],
@@ -675,7 +676,10 @@ def _require_manifest_shape(result: dict[str, Any]) -> list[dict[str, Any]]:
         or deployment_audit.get("provider_size") != COMPONENT_BYTES
         or deployment_audit.get("provider_sha256")
         != "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42"
-        or not deployment_audit.get("remaining_software_blockers")
+        or deployment_audit.get("remaining_software_blockers") != []
+        or deployment_audit.get("remaining_source_completeness_blockers") != [
+            "210584 typed retained or external provider bytes require unavailable exact provider source and redistribution authority"
+        ]
         or deployment_audit.get("hardware_operations") != []
         or deployment_audit.get("hardware_validation") != HARDWARE_VALIDATION
     ):
@@ -699,7 +703,7 @@ def _require_manifest_shape(result: dict[str, Any]) -> list[dict[str, Any]]:
     if (
         qpc_hook_audit.get("additive_to_residual_accounting") is not False
         or qpc_hook_audit.get("status")
-        != "candidate-qualified-one-software-two-hardware"
+        != "candidate-qualified-software-provider-two-hardware"
         or qpc_hook_audit.get("software_provider_gaps") != []
         or qpc_hook_audit.get("software_provider_source_available") is not True
         or qpc_hook_audit.get("hardware_dependent_providers")

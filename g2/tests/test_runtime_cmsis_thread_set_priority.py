@@ -26,9 +26,9 @@ class RuntimeCmsisThreadSetPriorityTests(unittest.TestCase):
   manifest=json.loads(MANIFEST.read_text());main=manifest['component_overrides']['apollo_main'];regions={x['name']:x for x in main['regions']}
   self.assertEqual((regions['apollo_freertos_task_priority_set_source_leaf']['file_offset'],regions['apollo_freertos_task_priority_set_source_leaf']['size'],regions['apollo_freertos_task_priority_set_source_leaf']['target_address']),(3658792,208,8082440))
   self.assertEqual((regions['apollo_cmsis_thread_set_priority_source_leaf']['file_offset'],regions['apollo_cmsis_thread_set_priority_source_leaf']['size'],regions['apollo_cmsis_thread_set_priority_source_leaf']['target_address']),(3659000,50,8082648))
-  self.assertEqual((main['provider']['size'],main['provider']['profiles']['linux-clang']['size']),(3883974,3676308))
-  self.assertEqual((manifest['package']['expected_size'],manifest['package']['expected_sha256']),(4677046,'46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4'))
-  self.assertEqual((manifest['package']['profiles']['linux-clang']['expected_size'],manifest['package']['profiles']['linux-clang']['expected_sha256']),(4469364,'79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e'))
+  self.assertEqual((main['provider']['size'],main['provider']['profiles']['linux-clang']['size']),(3956672,3956672))
+  self.assertEqual((manifest['package']['expected_size'],manifest['package']['expected_sha256']),(4750780,'49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27'))
+  self.assertEqual((manifest['package']['profiles']['linux-clang']['expected_size'],manifest['package']['profiles']['linux-clang']['expected_sha256']),(4750764,'617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559'))
  def test_raise_ready_task_moves_list_and_yields(self):
   self.lib.open_cfw_priority_host_reset(10,5,5,1);self.assertEqual(self.lib.open_cfw_priority_host_call(0,12),0);self.assertEqual(tuple(self.get(i) for i in range(7)),(12,12,44,1,12,1,1))
  def test_inherited_priority_changes_base_only(self):

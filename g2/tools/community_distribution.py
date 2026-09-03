@@ -400,12 +400,12 @@ EM9305_PREDECISION_INPUT_MEMBER = (
 )
 EM9305_FINAL_READINESS_IDENTITIES = {
     "g2/tools/manifests/em9305-final-source-readiness-summary.json": (
-        5_211,
-        "ae70d87d4833ec98e5235813ada50564513fcbb7ecd2a02816411510bd088084",
+        4_882,
+        "3fa764455494d542f04d0a71236e9d52f7a116eab8867a1bffc82e20f3e0907e",
     ),
     "g2/tools/manifests/em9305-final-source-readiness.tsv": (
-        32_977,
-        "d63cdcd7a4bbaf6a30ef55eafa470561d205ac87f55656c424786bbbec775b15",
+        33_152,
+        "cfda63c68a73d27235af204f01ee6c848db9495d0294d55faf70096b7ab08bf9",
     ),
 }
 EM9305_ARC_BUILD_RECEIPT = (
@@ -581,6 +581,7 @@ LICENSE_INHERITANCE_SCOPES = (
     ("g2/third_party/tlsf/", "BSD-3-Clause", "g2/third_party/tlsf/tlsf.h", "f7f73c48810ba60203095667c226e5a600a6ea0f69afba48efff6efbaa628d4f"),
     ("g2/components/apollo_main/core_overlay/runtime_easylogger_", "MIT", "g2/third_party/easylogger/LICENSE", "4a7be67e9701d0344c62d1b92eed8f40b874d00d64a9ee6b3853eb47ef4ea7f9"),
     ("g2/components/apollo_main/core_overlay/runtime_tinyframe_", "MIT", "g2/third_party/tinyframe/LICENSE", "eb7b9df3ca390100d31f9aac23f2d8dfe0183a63987112675fc58af9a42f6874"),
+    ("g2/components/bootloader/core_overlay/runtime_mspi_control_4251c0.c", "BSD-3-Clause", "g2/third_party/ambiqsuite-apollo510/LICENSE", "0770df5c1956b75715604d5788804eabfc293fc61d5dbbec498c6d379a63755f"),
     ("g2/components/apollo_main/ring_gesture/upstream/", "GPL-3.0-only", "g2/components/apollo_main/ring_gesture/LICENSE", "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"),
     ("g2/components/apollo_main/ring_gesture/DERIVATION.patch", "GPL-3.0-only", "g2/components/apollo_main/ring_gesture/LICENSE", "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"),
     ("g2/components/shared/cmbacktrace/", "MIT", "g2/third_party/cmbacktrace/LICENSE", "e8ed0e84184d2130bd1fcf5a52ce8c16b5bf338c272cab6bbd7993a9d723934e"),
@@ -1615,29 +1616,29 @@ def _verify_em9305_public_readiness_receipts(
         )
     buckets = summary.get("completion_buckets")
     if (
-        summary.get("schema_version") != 5
+        summary.get("schema_version") != 7
         or summary.get("status")
         != "accounting-complete-source-incomplete"
-        or summary.get("component_bytes") != 211_948
+        or summary.get("component_bytes") != 212_984
         or summary.get("residual_span_count") != 175
         or summary.get("residual_bytes") != 33_658
         or summary.get("unclassified_spans") != 0
         or summary.get("unclassified_bytes") != 0
         or summary.get("source_complete") is not False
         or summary.get("release") is not False
-        or summary.get("candidate_production_routed") is not False
+        or summary.get("candidate_production_routed") is not True
         or summary.get("hardware_operations") != []
         or isinstance(summary.get("hardware_operations"), bool)
         or summary.get("hardware_validation")
         != "blocked by unavailable physical evidence"
         or buckets != {
-            "production_source": 0,
-            "generated_or_reconstructible": 0,
-            "candidate_source_not_routed": 1_240,
-            "typed_retained_or_external": 210_708,
+            "production_source": 1_174,
+            "generated_or_reconstructible": 1_226,
+            "candidate_source_not_routed": 0,
+            "typed_retained_or_external": 210_584,
             "unclassified": 0,
         }
-        or sum(buckets.values()) != 211_948
+        or sum(buckets.values()) != 212_984
     ):
         raise CommunityBundleError(
             "final EM9305 readiness semantics changed"
@@ -1650,15 +1651,11 @@ def _verify_em9305_public_readiness_receipts(
         "arcv2_em_forbidden_runtime_imports": [],
         "arcv2_em_target_compiled": True,
         "arcv2_em_undefined_symbols": [],
-        "candidate_production_routed": False,
+        "candidate_production_routed": True,
         "candidate_source_bytes": 980,
         "hardware_validation": "blocked by unavailable physical evidence",
-        "remaining_software_blockers": [
-            "recover and pin the exact MetaWare ARC EABI symbol names and multiword register return conventions",
-            "authenticate redirect sites, target placement, and all interior-entry callers before production routing",
-            "decide whether the stock stack guard must preserve brk_s exactly or route through an OpenCFW fatal policy",
-        ],
-        "status": "candidate-qualified",
+        "remaining_software_blockers": [],
+        "status": "production-routed",
     }:
         raise CommunityBundleError(
             "final EM9305 ARCv2 EM audit semantics changed"
@@ -1707,7 +1704,7 @@ def _verify_em9305_public_readiness_receipts(
         "redistribution_authority_resolved": False,
         "software_provider_gaps": [],
         "software_provider_source_available": True,
-        "status": "candidate-qualified-one-software-two-hardware",
+        "status": "candidate-qualified-software-provider-two-hardware",
         "unresolved_providers": [],
         "wsf_idle_semantics": {
             "callback_capacity": 3,
@@ -1733,22 +1730,24 @@ def _verify_em9305_public_readiness_receipts(
             "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
         "authenticated_stock_size": 211_948,
         "build_receipt":
-            "tools/manifests/em9305-record-package-summary.json",
+            "components/em9305/source_overlay/build/build-report.json",
         "erase_sector_count": 29,
         "hardware_operations": [],
         "hardware_validation": "blocked by unavailable physical evidence",
-        "production_routed": False,
+        "production_routed": True,
+        "provider_sha256":
+            "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42",
+        "provider_size": 212_984,
         "record_count": 4,
-        "remaining_software_blockers": [
-            "provide production source and linked bytes for all four EM9305 records",
-            "resolve target placement and redirects for qualified ARC candidates and the target-linked QP/C component",
-            "replace the retained proprietary controller record with redistributable compilable source",
+        "remaining_software_blockers": [],
+        "remaining_source_completeness_blockers": [
+            "210584 typed retained or external provider bytes require unavailable exact provider source and redistribution authority",
         ],
         "software_package_complete": True,
         "software_wrapper_complete": True,
         "source_image_complete": False,
         "source_records_complete": False,
-        "status": "record-package-software-closed-source-image-incomplete",
+        "status": "mixed-provider-production-routed-source-incomplete",
         "stock_roundtrip_byte_exact": True,
     }:
         raise CommunityBundleError(

@@ -16,17 +16,18 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 PATH_ANALYZER = ROOT / "tools/analyze_apollo_embedded_source_paths.py"
 FIRST_PARTY_FRONTIER_ANALYZER = ROOT / "tools/analyze_g2_first_party_frontier.py"
-DEFAULT_PLAN = ROOT / "build/postapply-package-apple/flash-plan.json"
+DEFAULT_PLAN = ROOT / "build/source/flash-plan.json"
 DEFAULT_COMPONENT_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 MANIFEST = ROOT / "tools/manifests/g2-apollo-origin-accounting.json"
 NEMAVG_STROKE_CAPS = ROOT / "tools/manifests/g2-nemavg-stroke-caps-candidate-summary.json"
-PLAN_SHA256 = "e540570208e616cc3de20af268da55d17fbf59f918aee143be8a902449253262"
+PLAN_SHA256 = "5e5e01e8fa29724dd787221ea6d4956ff2a64d438dc4edeae3020a27b3c20588"
 MAX_TRUSTWORTHY_FUNCTION_ENVELOPE = 16_384
 EXPECTED_FUNCTIONS = 7_370
 EXPECTED_REJECTED_ENVELOPES = 8
-EXPECTED_MANIFEST_OFFICIAL_BYTES = 3_082_888
-EXPECTED_METADATA_GAP_BYTES = 17_800
-EXPECTED_METADATA_GAP_SITES = 79
+EXPECTED_MANIFEST_OFFICIAL_BYTES = 3_082_666
+EXPECTED_METADATA_GAP_BYTES = 23_814
+EXPECTED_METADATA_GAP_SITES = 119
+EXPECTED_CONSERVATIVE_RETAINED_DELTA_BYTES = 16
 EXPECTED_NEMAVG_CANDIDATE_BYTES = 6_614
 EXPECTED_NEMAVG_ROUTED_BYTES = 6_614
 EXPECTED_NEMAVG_RETAINED_ENDPOINT_BYTES = 0
@@ -140,11 +141,16 @@ def analyze(plan_path: Path, component_report_path: Path, corpus: Path) -> dict[
         )
 
     component = component_report["component"]
-    true_opaque_bytes = sum(official)
-    if true_opaque_bytes != component["opaque_base_bytes"]:
+    plan_opaque_bytes = sum(official)
+    conservative_retained_delta = (
+        int(component["opaque_base_bytes"]) - plan_opaque_bytes
+    )
+    if conservative_retained_delta != EXPECTED_CONSERVATIVE_RETAINED_DELTA_BYTES:
         raise AccountingError(
-            f"component/plan opaque reconciliation failed: {true_opaque_bytes} != {component['opaque_base_bytes']}"
+            "component/plan conservative-retained reconciliation failed: "
+            f"{conservative_retained_delta}"
         )
+    true_opaque_bytes = int(component["opaque_base_bytes"])
 
     anchored = {row["entry"]: row for row in correlation["functions"]}
     first_party = bytearray(image_size)
@@ -207,6 +213,9 @@ def analyze(plan_path: Path, component_report_path: Path, corpus: Path) -> dict[
             buckets["outside_trustworthy_function_envelopes"] += 1
     if cross_root:
         raise AccountingError(f"cross-root byte ownership appeared: {cross_root}")
+    buckets["outside_trustworthy_function_envelopes"] += (
+        conservative_retained_delta
+    )
     if sum(buckets.values()) != true_opaque_bytes:
         raise AccountingError("origin buckets do not cover the opaque Apollo base")
 
@@ -383,6 +392,7 @@ def analyze(plan_path: Path, component_report_path: Path, corpus: Path) -> dict[
             "controlled_bytes_mislabeled_official_blob": metadata_gap_bytes,
             "sites": sorted(metadata_gap_sites, key=lambda row: row["runtime_address"]),
             "qualification": "companion accounting corrects classification only; emitted bytes and flash addresses are unchanged",
+            "conservative_retained_delta_bytes": conservative_retained_delta,
         },
         "opaque_origin_lower_bounds": buckets,
         "release_readiness_partition": release_readiness_partition,

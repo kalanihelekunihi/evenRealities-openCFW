@@ -905,6 +905,45 @@ def _validate_liblc3_schema(value: Any) -> None:
             )
 
 
+def _validate_liblc3_service_schema(value: Any) -> dict[str, Any]:
+    service = _require_exact_keys(
+        value,
+        {"license", "component", "suffix", "target_runtime",
+         "lc3_finalization", "service_audio_entry_guards", "routing",
+         "hardware"},
+        "liblc3 service-audio receipt",
+    )
+    if (
+        service["license"] != "Apache-2.0 AND MIT"
+        or service["hardware"] != DEFERRED_HARDWARE_POLICY
+        or service["routing"] != {
+            "production_placement": True,
+            "service_audio_routed": True,
+            "firmware_image_emitted": True,
+            "hardware_operations": False,
+        }
+    ):
+        raise AdmissionError("liblc3 service-audio routing boundary changed")
+    component = _require_exact_keys(
+        service["component"],
+        {"size", "sha256", "runtime_end_exclusive", "nested_crc32"},
+        "liblc3 service-audio component",
+    )
+    _pin(component, "size", "sha256", "liblc3 service-audio component")
+    if (
+        component["runtime_end_exclusive"] != 0x007FDFA0
+        or re.fullmatch(r"0x[0-9A-F]{8}", str(component["nested_crc32"])) is None
+        or service["target_runtime"].get("undefined_symbols") != []
+        or service["target_runtime"].get("output_relocations") != 0
+        or service["lc3_finalization"].get("output_relocations") != 0
+        or service["lc3_finalization"].get("all_input_relocations_applied")
+           is not True
+        or len(service["service_audio_entry_guards"]) != 2
+    ):
+        raise AdmissionError("liblc3 service-audio closure receipt changed")
+    return service
+
+
 def _validate_freetype_cff_schema(value: Any) -> dict[str, Any]:
     """Reject incomplete or extensible CFF stage receipts before reading bytes."""
     cff = _require_exact_keys(
@@ -931,46 +970,72 @@ def _validate_freetype_cff_schema(value: Any) -> dict[str, Any]:
         type(component["runtime_start"]) is not int
         or type(component["runtime_end_exclusive"]) is not int
         or type(component["growth_bytes"]) is not int
-        or component["growth_bytes"] <= 0
+        or component["growth_bytes"] < 0
         or re.fullmatch(r"0x[0-9A-F]{8}", str(component["nested_crc32"])) is None
     ):
         raise AdmissionError("FreeType CFF component extent is malformed")
 
-    placement = _require_exact_keys(
-        cff["placement"],
-        {
-            "base_runtime_end_exclusive", "runtime_end_exclusive",
-            "erased_gap_start", "erased_gap_end_exclusive",
-            "erased_gap_size", "erased_gap_byte", "nested_crc32", "sections",
-            "unused_scattered_table_pool_bytes",
-            "unused_scattered_table_pool_consumed",
-        },
-        "FreeType CFF placement receipt",
-    )
-    for key in (
+    placement = cff["placement"]
+    host_scatter = isinstance(placement, dict) and \
+        placement.get("host_scatter") is True
+    placement_keys = {
         "base_runtime_end_exclusive", "runtime_end_exclusive",
-        "erased_gap_start", "erased_gap_end_exclusive",
-    ):
+        "nested_crc32", "sections", "unused_scattered_table_pool_bytes",
+        "unused_scattered_table_pool_consumed",
+    }
+    placement_keys.update(
+        {"host_slot_count", "host_scatter", "host_slots_available",
+         "host_slot_capacity_bytes", "host_slot_receipt_sha256",
+         "host_packing"}
+        if host_scatter else
+        {"erased_gap_start", "erased_gap_end_exclusive",
+         "erased_gap_size", "erased_gap_byte"}
+    )
+    placement = _require_exact_keys(
+        placement, placement_keys, "FreeType CFF placement receipt")
+    address_keys = ["base_runtime_end_exclusive", "runtime_end_exclusive"]
+    if not host_scatter:
+        address_keys.extend(("erased_gap_start", "erased_gap_end_exclusive"))
+    for key in address_keys:
         if re.fullmatch(r"0x[0-9A-F]{8}", str(placement[key])) is None:
             raise AdmissionError("FreeType CFF placement address is malformed")
     if (
-        type(placement["erased_gap_size"]) is not int
-        or placement["erased_gap_size"] < 0
-        or placement["erased_gap_byte"] != 0xFF
-        or type(placement["nested_crc32"]) is not int
+        type(placement["nested_crc32"]) is not int
         or not 0 <= placement["nested_crc32"] <= 0xFFFFFFFF
         or placement["unused_scattered_table_pool_bytes"] != 360
         or placement["unused_scattered_table_pool_consumed"] != 0
     ):
         raise AdmissionError("FreeType CFF padding or table-pool receipt changed")
+    if host_scatter:
+        if (
+            component["growth_bytes"] != 0
+            or placement["host_slot_count"] !=
+               placement["host_slots_available"]
+            or type(placement["host_slot_capacity_bytes"]) is not int
+            or placement["host_slot_capacity_bytes"] <= 0
+            or re.fullmatch(r"[0-9a-f]{64}", str(
+                placement["host_slot_receipt_sha256"])) is None
+            or not isinstance(placement["host_packing"], list)
+        ):
+            raise AdmissionError("FreeType CFF host-scatter receipt changed")
+    elif (
+        type(placement["erased_gap_size"]) is not int
+        or placement["erased_gap_size"] < 0
+        or placement["erased_gap_byte"] != 0xFF
+    ):
+        raise AdmissionError("FreeType CFF erased-gap receipt changed")
     sections = placement["sections"]
-    if not isinstance(sections, list) or len(sections) != len(CFF_SECTION_NAMES):
+    if not isinstance(sections, list) or len(sections) < 4:
         raise AdmissionError("FreeType CFF section receipt count changed")
     previous_end = -1
-    for expected_name, section in zip(CFF_SECTION_NAMES, sections):
+    section_names: list[str] = []
+    for section in sections:
+        expected_name = section.get("name") if isinstance(section, dict) else "?"
+        keys = {"name", "start", "end_exclusive", "size", "alignment", "sha256"}
+        if host_scatter and str(expected_name).startswith(".cff_host_"):
+            keys.add("input_section")
         section = _require_exact_keys(
-            section,
-            {"name", "start", "end_exclusive", "size", "alignment", "sha256"},
+            section, keys,
             f"FreeType CFF section {expected_name}",
         )
         _pin(section, "size", "sha256", f"FreeType CFF section {expected_name}")
@@ -978,8 +1043,7 @@ def _validate_freetype_cff_schema(value: Any) -> dict[str, Any]:
         end = section["end_exclusive"]
         alignment = section["alignment"]
         if (
-            section["name"] != expected_name
-            or type(start) is not int
+            type(start) is not int
             or type(end) is not int
             or end - start != section["size"]
             or start < previous_end
@@ -989,7 +1053,17 @@ def _validate_freetype_cff_schema(value: Any) -> dict[str, Any]:
             or start % alignment
         ):
             raise AdmissionError(f"FreeType CFF section {expected_name} changed")
+        section_names.append(section["name"])
         previous_end = end
+    if host_scatter:
+        if (
+            section_names[-3:] != [".cff_stock_rodata", ".cff_stock_text",
+                                   ".cff_stock_exidx"]
+            or not section_names[0].startswith(".cff_host_")
+        ):
+            raise AdmissionError("FreeType CFF host section ordering changed")
+    elif tuple(section_names) != CFF_SECTION_NAMES:
+        raise AdmissionError("FreeType CFF legacy section ordering changed")
 
     patch = _require_exact_keys(
         cff["module_class_patch"],
@@ -1045,10 +1119,10 @@ def _validate_freetype_cff_schema(value: Any) -> dict[str, Any]:
         raise AdmissionError("FreeType CFF final link is not closed")
 
     artifacts = _require_exact_keys(
-        cff["section_artifacts"], set(CFF_SECTION_NAMES),
+        cff["section_artifacts"], set(section_names),
         "FreeType CFF section artifact mapping",
     )
-    for name in CFF_SECTION_NAMES:
+    for name in section_names:
         _require_exact_keys(
             artifacts[name], {"artifact", "size", "sha256"},
             f"FreeType CFF section artifact {name}",
@@ -1058,7 +1132,7 @@ def _validate_freetype_cff_schema(value: Any) -> dict[str, Any]:
 
 def _validate_freetype_cff_contract(
     observation: dict[str, Any],
-    pt_component: bytes,
+    base_component: bytes,
     final_component: bytes,
     section_artifacts: dict[str, bytes],
 ) -> None:
@@ -1086,38 +1160,34 @@ def _validate_freetype_cff_contract(
         "sha256"
     ]:
         raise AdmissionError("FreeType CFF final component bytes changed")
-    base_end = run_base + len(pt_component) - preamble
+    base_end = run_base + len(base_component) - preamble
     final_end = run_base + len(final_component) - preamble
     if (
         component["runtime_start"] != run_base
         or component["runtime_end_exclusive"] != final_end
-        or component["growth_bytes"] != len(final_component) - len(pt_component)
-        or component["growth_bytes"] <= 0
+        or component["growth_bytes"] != len(final_component) - len(base_component)
+        or component["growth_bytes"] < 0
         or final_end >= CFF_UPDATE_FLAG
     ):
         raise AdmissionError("FreeType CFF component mapping changed")
 
     placement = cff["placement"]
-    erased_start = address(placement["erased_gap_start"], "CFF erased-gap start")
-    erased_end = address(
-        placement["erased_gap_end_exclusive"], "CFF erased-gap end"
-    )
+    host_scatter = placement.get("host_scatter") is True
     if (
         address(
             placement["base_runtime_end_exclusive"], "CFF base runtime end"
         ) != base_end
         or address(placement["runtime_end_exclusive"], "CFF runtime end")
         != final_end
-        or erased_start != base_end
-        or erased_end - erased_start != placement["erased_gap_size"]
         or placement["nested_crc32"]
         != int(component["nested_crc32"], 16)
     ):
         raise AdmissionError("FreeType CFF stage-chain extent changed")
 
-    if set(section_artifacts) != set(CFF_SECTION_NAMES):
+    section_names = [row["name"] for row in placement["sections"]]
+    if set(section_artifacts) != set(section_names):
         raise AdmissionError("FreeType CFF section artifact set changed")
-    output = bytearray(pt_component)
+    output = bytearray(base_component)
     output.extend(b"\xff" * (len(final_component) - len(output)))
     ranges: list[tuple[int, int]] = []
     for section in placement["sections"]:
@@ -1139,21 +1209,27 @@ def _validate_freetype_cff_contract(
         output[start:end] = body
     if any(left[1] > right[0] for left, right in zip(ranges, ranges[1:])):
         raise AdmissionError("FreeType CFF section artifacts overlap")
-    tail_start = placement["sections"][2]["start"]
-    if erased_end != tail_start or any(
-        byte != 0xFF
-        for byte in final_component[
-            preamble + erased_start - run_base:
-            preamble + erased_end - run_base
-        ]
-    ):
-        raise AdmissionError("FreeType CFF erased-gap bytes changed")
+    if not host_scatter:
+        erased_start = address(
+            placement["erased_gap_start"], "CFF erased-gap start")
+        erased_end = address(
+            placement["erased_gap_end_exclusive"], "CFF erased-gap end")
+        tail_start = placement["sections"][2]["start"]
+        if (
+            erased_start != base_end
+            or erased_end - erased_start != placement["erased_gap_size"]
+            or erased_end != tail_start
+            or any(byte != 0xFF for byte in final_component[
+                preamble + erased_start - run_base:
+                preamble + erased_end - run_base])
+        ):
+            raise AdmissionError("FreeType CFF erased-gap bytes changed")
 
     patch = cff["module_class_patch"]
     patch_runtime = address(patch["runtime_address"], "CFF module-class patch")
     patch_offset = preamble + patch_runtime - run_base
     if (
-        pt_component[patch_offset:patch_offset + 4] != CFF_STOCK_CLASS_BYTES
+        base_component[patch_offset:patch_offset + 4] != CFF_STOCK_CLASS_BYTES
         or final_component[patch_offset:patch_offset + 4]
         != CFF_REPLACEMENT_CLASS_BYTES
     ):
@@ -1181,15 +1257,20 @@ def load_observation(path: Path, expected_profile: str) -> dict[str, Any]:
         "intermediate_artifacts",
     }
     cff_observation_keys = legacy_observation_keys | {"freetype_cff"}
+    routed_observation_keys = cff_observation_keys | {
+        "liblc3_service_audio"
+    }
     schema_version = (
         observation.get("schema_version") if isinstance(observation, dict) else None
     )
     expected_keys = (
-        legacy_observation_keys if schema_version == 2 else cff_observation_keys
+        (legacy_observation_keys if schema_version == 2 else
+         cff_observation_keys if schema_version == 3 else
+         routed_observation_keys)
     )
     if (
         not isinstance(observation, dict)
-        or schema_version not in (2, 3)
+        or schema_version not in (2, 3, 4)
         or set(observation) != expected_keys
         or observation.get("complete") is not True
         or observation.get("profile") != expected_profile
@@ -1254,8 +1335,10 @@ def load_observation(path: Path, expected_profile: str) -> dict[str, Any]:
         "core_stage_overlay", "core_stage_component",
         "liblc3_payload", "liblc3_component",
     }
-    if schema_version == 3:
+    if schema_version >= 3:
         intermediate_keys.add("pt_component")
+    if schema_version >= 4:
+        intermediate_keys.add("liblc3_service_component")
     intermediate_records = _require_exact_keys(
         observation["intermediate_artifacts"],
         intermediate_keys,
@@ -1263,7 +1346,12 @@ def load_observation(path: Path, expected_profile: str) -> dict[str, Any]:
     )
     cff = (
         _validate_freetype_cff_schema(observation["freetype_cff"])
-        if schema_version == 3 else None
+        if schema_version >= 3 else None
+    )
+    lc3_service = (
+        _validate_liblc3_service_schema(
+            observation["liblc3_service_audio"])
+        if schema_version >= 4 else None
     )
     if cff is not None:
         scatter_inputs = [
@@ -1287,8 +1375,8 @@ def load_observation(path: Path, expected_profile: str) -> dict[str, Any]:
     ]
     if cff is not None:
         all_records.extend(
-            (name, cff["section_artifacts"][name], cff_artifacts)
-            for name in CFF_SECTION_NAMES
+            (name, record, cff_artifacts)
+            for name, record in cff["section_artifacts"].items()
         )
     for key, outer, destination in all_records:
         _require_exact_keys(
@@ -1371,9 +1459,20 @@ def load_observation(path: Path, expected_profile: str) -> dict[str, Any]:
     ):
         raise AdmissionError("PT placement/section receipt is incomplete")
     if cff is not None:
+        cff_base = intermediate_artifacts[
+            "liblc3_service_component"
+        ] if lc3_service is not None else intermediate_artifacts["pt_component"]
+        if lc3_service is not None:
+            expected = lc3_service["component"]
+            if (len(cff_base), _digest(cff_base)) != (
+                expected["size"], expected["sha256"]
+            ):
+                raise AdmissionError(
+                    "liblc3 service-audio intermediate artifact changed"
+                )
         _validate_freetype_cff_contract(
             observation,
-            intermediate_artifacts["pt_component"],
+            cff_base,
             artifacts["component"],
             cff_artifacts,
         )
@@ -1433,9 +1532,19 @@ def validate_observation_independence(
         artifact_identities = observation.get("artifact_identities")
         schema_version = observation.get("observation", {}).get("schema_version")
         artifact_keys = set(legacy_artifact_keys)
-        if schema_version == 3:
+        if isinstance(schema_version, int) and schema_version >= 3:
             artifact_keys.add("pt_component")
-            artifact_keys.update(CFF_SECTION_NAMES)
+            cff = observation.get("observation", {}).get("freetype_cff")
+            section_artifacts = (
+                cff.get("section_artifacts") if isinstance(cff, dict) else None
+            )
+            if not isinstance(section_artifacts, dict):
+                raise AdmissionError(
+                    "canonical observation inode evidence is incomplete"
+                )
+            artifact_keys.update(section_artifacts)
+        if isinstance(schema_version, int) and schema_version >= 4:
+            artifact_keys.add("liblc3_service_component")
         if (
             not isinstance(report_identity, tuple)
             or len(report_identity) < 2
@@ -1904,21 +2013,34 @@ def update_profile_pins(
             "configured FreeType CFF placement",
         )
         observed_sections = observed_cff["placement"]["sections"]
-        stock_sections = observed_sections[:2]
-        tail_sections = observed_sections[2:]
+        stock_sections = [row for row in observed_sections
+                          if row["name"].startswith(".cff_stock_")]
+        host_sections = [row for row in observed_sections
+                         if row["name"].startswith(".cff_host_")]
         observed_patch = int(
             observed_cff["module_class_patch"]["runtime_address"], 16
         )
+        host_scatter = observed_cff["placement"].get("host_scatter") is True
+        placement_valid = (
+            len(stock_sections) == 3
+            and stock_sections[0]["start"] == configured_placement["stock_start"]
+            and stock_sections[-1]["end_exclusive"]
+                <= configured_placement["stock_end_exclusive"]
+            and observed_patch == configured_placement["module_class_pointer"]
+        )
+        if not host_scatter:
+            tail_sections = observed_sections[2:]
+            placement_valid = placement_valid and (
+                tail_sections[0]["start"] >= configured_placement["tail_start"]
+                and tail_sections[-1]["end_exclusive"]
+                    == configured_placement["tail_end_exclusive"]
+            )
+        else:
+            placement_valid = placement_valid and bool(host_sections)
         if (
             configured_cff.get("license") != CFF_LICENSE
             or configured_cff.get("hardware") != DEFERRED_HARDWARE_POLICY
-            or stock_sections[0]["start"] != configured_placement["stock_start"]
-            or stock_sections[-1]["end_exclusive"]
-            > configured_placement["stock_end_exclusive"]
-            or tail_sections[0]["start"] < configured_placement["tail_start"]
-            or tail_sections[-1]["end_exclusive"]
-            != configured_placement["tail_end_exclusive"]
-            or observed_patch != configured_placement["module_class_pointer"]
+            or not placement_valid
         ):
             raise AdmissionError("FreeType CFF fixed placement contract changed")
     _require_reviewed_core_leaf_pins(config, profile, observation)
@@ -2023,7 +2145,7 @@ def _validate_pt_contract(
         raise AdmissionError(
             "PT final component differs from its authenticated receipt"
         )
-    if observation.get("schema_version") == 3:
+    if int(observation.get("schema_version", 0)) >= 3:
         pt_record = _require_exact_keys(
             observation.get("intermediate_artifacts", {}).get("pt_component"),
             {"artifact", "size", "sha256"},
@@ -2992,6 +3114,35 @@ def _linux_profile_region_replacements(
     component: bytes,
 ) -> list[dict[str, Any]]:
     """Build exact Linux base-region classifications from its receipt bytes."""
+    if observation.get("liblc3_service_audio") is not None:
+        boundary = int(config["base"]["size"])
+        return [{
+            "start": 0,
+            "end_exclusive": boundary,
+            "regions": [
+                {
+                    "name": "apollo_main_linux_ota_preamble",
+                    "function": "Generated 32-byte LLVM-profile staging header",
+                    "file_offset": 0,
+                    "size": int(config["preamble_bytes"]),
+                    "address_status": "container_only",
+                    "output": "apollo510b/main-linux-ota-preamble.bin",
+                },
+                {
+                    "name": "apollo_main_linux_canonical_lc3_cff_image",
+                    "function": (
+                        "Deterministic LLVM-profile Apollo source image with LC3 "
+                        "service-audio and FreeType CFF host-scatter routing"
+                    ),
+                    "file_offset": int(config["preamble_bytes"]),
+                    "size": boundary - int(config["preamble_bytes"]),
+                    "address_status": "generated_source_data_replacement",
+                    "output": "apollo510b/main-linux-canonical-lc3-cff.bin",
+                    "target": "apollo510b_internal_mram",
+                    "target_address": int(config["run_base"]),
+                },
+            ],
+        }]
     replacements: list[dict[str, Any]] = []
     liblc3 = observation.get("liblc3_ltpf")
     placement = liblc3.get("placement") if isinstance(liblc3, dict) else None
@@ -3257,6 +3408,8 @@ def _legacy_compatible_tail(
     templates: list[dict[str, Any]],
     segments: list[dict[str, Any]],
     config: dict[str, Any],
+    *,
+    allow_schema_migration: bool = False,
 ) -> list[dict[str, Any]]:
     """Bind authenticated leaf parts to reviewed public presentation aliases."""
     original_templates = copy.deepcopy(templates)
@@ -3400,11 +3553,12 @@ def _legacy_compatible_tail(
         segment for segment in remaining_parts
         if segment not in part_alignments and segment not in part_text
     ]
-    if (
+    vector_changed = (
         unexpected
         or len(template_alignments) != len(part_alignments)
         or len(template_text) != len(part_text)
-    ):
+    )
+    if vector_changed and not allow_schema_migration:
         part_offsets = {item["file_offset"] for item in part_text}
         template_offsets = {item["file_offset"] for item in template_text}
         unmatched_templates = [
@@ -3423,18 +3577,120 @@ def _legacy_compatible_tail(
             f"unmatched_templates={unmatched_templates}, "
             f"unmatched_parts={unmatched_parts}"
         )
-    for template, segment in zip(template_alignments, part_alignments):
-        bind_parts(
-            template["name"],
-            [(segment["identity"], segment["part"])],
-            require_legacy_size=False,
-        )
-    for template, segment in zip(template_text, part_text):
-        bind_parts(
-            template["name"],
-            [(segment["identity"], segment["part"])],
-            require_legacy_size=False,
-        )
+    if vector_changed:
+        if unexpected:
+            raise AdmissionError(
+                "canonical tail schema migration contains an unsupported leaf part"
+            )
+
+        # A source admission may split an existing compiler closure, add a
+        # leaf, or introduce a new alignment interval.  The ordinary path
+        # deliberately rejects those cardinality changes.  This explicit
+        # migration path is reached only from the four-observation admission
+        # command and therefore derives presentation aliases from already
+        # authenticated leaf/part receipts.  Exact unchanged aliases are
+        # retained; stale generic aliases are retired rather than guessed by
+        # ordinal position.
+        remaining_by_extent: dict[
+            tuple[int, int, str], list[dict[str, Any]]
+        ] = {}
+        for template in remaining_templates:
+            status = template.get("address_status")
+            category = (
+                "alignment" if status == "generated_alignment" else
+                "text" if status == "source_compiled" else
+                "rodata" if status == "source_compiled_rodata" else
+                ""
+            )
+            if category:
+                remaining_by_extent.setdefault(
+                    (template["file_offset"], template["size"], category), []
+                ).append(template)
+
+        synthesized: list[dict[str, Any]] = []
+        for segment in remaining_parts:
+            category = (
+                "alignment" if segment["status"] == "generated_alignment" else
+                "rodata" if segment["part"] == "rodata" else
+                "text"
+            )
+            candidates = remaining_by_extent.get(
+                (segment["file_offset"], segment["size"], category), []
+            )
+            candidates = [
+                item for item in candidates
+                if item["name"] not in consumed_templates
+            ]
+            if len(candidates) > 1:
+                raise AdmissionError(
+                    "canonical tail schema migration found ambiguous legacy aliases"
+                )
+            if candidates:
+                alias = candidates[0]["name"]
+            else:
+                identity = segment["identity"]
+                part = segment["part"]
+                slug = re.sub(r"[^A-Za-z0-9]+", "-", identity).strip("-").lower()
+                slug = (slug[:48] or "leaf")
+                suffix = _digest(f"{identity}\0{part}".encode())[:10]
+                alias = (
+                    f"apollo_core_canonical_{slug}_{part}_{suffix}"
+                )
+                if alias in by_name:
+                    raise AdmissionError(
+                        "canonical tail schema migration alias collision"
+                    )
+                offset = segment["file_offset"]
+                if category == "alignment":
+                    function = f"Generated alignment for {identity} ({part})"
+                elif category == "rodata":
+                    function = (
+                        f"Production source-owned {identity} compiled rodata"
+                    )
+                else:
+                    function = (
+                        f"Production source-owned {identity} compiled from maintained C"
+                    )
+                template = {
+                    "name": alias,
+                    "function": function,
+                    "file_offset": offset,
+                    "size": segment["size"],
+                    "address_status": segment["status"],
+                    "output": (
+                        "apollo510b/main-source-canonical-"
+                        f"{slug}-{part}-{suffix}.bin"
+                    ),
+                    "target": "apollo510b_internal_mram",
+                    "target_address": (
+                        config["run_base"] + offset - config["preamble_bytes"]
+                    ),
+                }
+                by_name[alias] = template
+                synthesized.append(template)
+            bind_parts(
+                alias,
+                [(segment["identity"], segment["part"])],
+                require_legacy_size=True,
+            )
+        templates = [
+            template for template in templates
+            if template["name"] in consumed_templates
+        ] + synthesized
+        canonical_replay = False
+    else:
+        for template, segment in zip(template_alignments, part_alignments):
+            bind_parts(
+                template["name"],
+                [(segment["identity"], segment["part"])],
+                require_legacy_size=False,
+            )
+        for template, segment in zip(template_text, part_text):
+            bind_parts(
+                template["name"],
+                [(segment["identity"], segment["part"])],
+                require_legacy_size=False,
+            )
     if len(bindings) != len(templates) or len(consumed_parts) != len(segments):
         raise AdmissionError("legacy appended-tail alias consumption is incomplete")
 
@@ -3466,6 +3722,95 @@ def _legacy_compatible_tail(
     return rebuilt
 
 
+def _transition_regions(regions: list[dict[str, Any]], base: bytes,
+                        final: bytes, config: dict[str, Any], *,
+                        prefix: str, function: str) -> list[dict[str, Any]]:
+    """Split a tiled map around one authenticated same-component transition."""
+    _partition(regions, len(base), f"{prefix} input region map")
+    if len(final) < len(base):
+        raise AdmissionError(f"{prefix} unexpectedly shrank the component")
+    virtual = base + b"\xFF" * (len(final) - len(base))
+    raw: list[tuple[int, int]] = []
+    start: int | None = None
+    for index, (before, after) in enumerate(zip(virtual, final)):
+        if before != after and start is None:
+            start = index
+        elif before == after and start is not None:
+            raw.append((start, index))
+            start = None
+    if start is not None:
+        raw.append((start, len(final)))
+    if len(final) > len(base):
+        raw.append((len(base), len(final)))
+    raw.sort()
+    mutations: list[tuple[int, int]] = []
+    for left, right in raw:
+        if mutations and left <= mutations[-1][1] + 8:
+            mutations[-1] = (mutations[-1][0], max(mutations[-1][1], right))
+        else:
+            mutations.append((left, right))
+    if any(virtual[index] != final[index] and not any(
+            left <= index < right for left, right in mutations)
+           for index in range(len(final))):
+        raise AdmissionError(f"{prefix} mutation coverage is incomplete")
+
+    boundaries = {0, len(final)}
+    for row in regions:
+        boundaries.add(int(row["file_offset"]))
+        boundaries.add(int(row["file_offset"]) + int(row["size"]))
+    for left, right in mutations:
+        boundaries.add(left)
+        boundaries.add(right)
+    points = sorted(boundaries)
+    result = []
+    run_base = int(config["run_base"])
+    preamble = int(config["preamble_bytes"])
+    mutation_index = 0
+    for left, right in zip(points, points[1:]):
+        if left >= len(final) or right <= left:
+            continue
+        changed = next((interval for interval in mutations
+                        if interval[0] <= left and right <= interval[1]), None)
+        source = next((row for row in regions
+                       if int(row["file_offset"]) <= left and
+                       right <= int(row["file_offset"]) + int(row["size"])), None)
+        if changed is None and source is not None:
+            row = copy.deepcopy(source)
+            row["file_offset"] = left
+            row["size"] = right - left
+            if left != int(source["file_offset"]) or right != (
+                int(source["file_offset"]) + int(source["size"])
+            ):
+                row["name"] = f"{source['name']}_split_{left:08x}_{right:08x}"
+                row["output"] = f"apollo510b/{prefix}-retained-{left:08x}-{right:08x}.bin"
+            if "target_address" in row:
+                row["target_address"] = run_base + left - preamble
+            result.append(row)
+            continue
+        if changed is None:
+            raise AdmissionError(f"{prefix} left an unmapped appended interval")
+        mutation_row = {
+            "name": f"{prefix}_{mutation_index:04d}_{left:08x}_{right:08x}",
+            "function": function,
+            "file_offset": left,
+            "size": right - left,
+            "address_status": "generated_source_data_replacement",
+            "output": f"apollo510b/{prefix}-{mutation_index:04d}-{left:08x}-{right:08x}.bin",
+        }
+        if right <= preamble:
+            mutation_row["address_status"] = "container_only"
+        else:
+            if left < preamble:
+                raise AdmissionError(
+                    f"{prefix} mutation crosses the staging preamble")
+            mutation_row["target"] = "apollo510b_internal_mram"
+            mutation_row["target_address"] = run_base + left - preamble
+        result.append(mutation_row)
+        mutation_index += 1
+    _partition(result, len(final), f"{prefix} output region map")
+    return result
+
+
 def synchronize_apollo_regions(
     regions: list[dict[str, Any]],
     config: dict[str, Any],
@@ -3476,6 +3821,9 @@ def synchronize_apollo_regions(
     apple_core_stage_component: bytes,
     apple_liblc3_component: bytes,
     apple_pt_component: bytes | None = None,
+    apple_liblc3_service_component: bytes | None = None,
+    *,
+    allow_tail_schema_migration: bool = False,
 ) -> list[dict[str, Any]]:
     """Rebuild the admitted core/PT/liblc3 map, then apply exact CFF scatter."""
     original = copy.deepcopy(regions)
@@ -3570,7 +3918,12 @@ def synchronize_apollo_regions(
         and not str(region.get("name", "")).startswith("freetype_cff_")
     ]
     rebuilt_tail.extend(
-        _legacy_compatible_tail(templates, observed_segments, config)
+        _legacy_compatible_tail(
+            templates,
+            observed_segments,
+            config,
+            allow_schema_migration=allow_tail_schema_migration,
+        )
     )
     result = result[:tail_start] + rebuilt_tail
     expected_size = apple_observation["core_stage"]["expected"]["component_size"]
@@ -3595,17 +3948,20 @@ def synchronize_apollo_regions(
         raise AdmissionError(
             "Apple pre-CFF providers changed size; detailed CFF base cannot be proven"
         )
-    cff_builder = _load_cff_builder()
-    try:
-        result = cff_builder.region_partition(
-            result,
-            len(apple_pt_component),
-            copy.deepcopy(cff["placement"]["sections"]),
-            APPLE_PROFILE,
-        )
-    except Exception as error:
-        raise AdmissionError("cannot derive canonical FreeType CFF region map") \
-            from error
+    if apple_liblc3_service_component is None:
+        raise AdmissionError("Apple LC3 service-audio component is absent")
+    result = _transition_regions(
+        result, apple_pt_component, apple_liblc3_service_component, config,
+        prefix="liblc3_service_audio",
+        function=("Compiled LC3 service-audio closure, exact relocation replay, "
+                  "runtime providers, guarded veneers, and integrity data"),
+    )
+    result = _transition_regions(
+        result, apple_liblc3_service_component, apple_component, config,
+        prefix="freetype_cff_host_scatter",
+        function=("Compiled FreeType 2.9.1 CFF host-tail scatter closure and "
+                  "guarded module-class routing"),
+    )
     _partition(result, len(apple_component), "CFF-integrated Apollo region map")
     return result
 
@@ -3957,6 +4313,8 @@ def synchronize_manifest(
     linux: dict[str, Any],
     auxiliary: dict[tuple[str, str], dict[str, Any]],
     dependencies: dict[str, Any] | None = None,
+    *,
+    allow_tail_schema_migration: bool = False,
 ) -> dict[str, Any]:
     if dependencies is None:
         dependencies = _dependency_snapshot(manifest_path, raw)
@@ -3968,6 +4326,12 @@ def synchronize_manifest(
     if not isinstance(provider, dict) or provider.get("kind") != "source_build":
         raise AdmissionError("Apollo source provider contract changed")
     _preserve_source_appended_boundary(override, config)
+    tail_schema_version = override.get("canonical_tail_schema_version")
+    if tail_schema_version not in (None, 2):
+        raise AdmissionError("Apollo canonical tail schema version changed")
+    migrate_tail = allow_tail_schema_migration or tail_schema_version == 2
+    if allow_tail_schema_migration:
+        override["canonical_tail_schema_version"] = 2
     # The live provider may still carry the prior admitted generation.  The
     # authenticated observation bytes drive all validation and are published
     # transactionally with config and manifest only when --apply is selected.
@@ -3986,6 +4350,10 @@ def synchronize_manifest(
         apple["intermediate_artifacts"]["core_stage_component"],
         apple["intermediate_artifacts"]["liblc3_component"],
         apple["intermediate_artifacts"].get("pt_component", b""),
+        apple["intermediate_artifacts"].get(
+            "liblc3_service_component", b""
+        ),
+        allow_tail_schema_migration=migrate_tail,
     )
     region_profiles = override.setdefault("profile_region_replacements", {})
     if not isinstance(region_profiles, dict):
@@ -4002,10 +4370,28 @@ def synchronize_manifest(
     profiles = provider.get("profiles")
     if not isinstance(profiles, dict) or not isinstance(profiles.get(LINUX_PROFILE), dict):
         raise AdmissionError("Apollo Linux provider profile is missing")
+    linux_profile = profiles[LINUX_PROFILE]
+    linux_provider_path = linux_profile.get("path")
+    if linux_provider_path is not None:
+        if not isinstance(linux_provider_path, str) or not linux_provider_path:
+            raise AdmissionError("Apollo Linux provider path is invalid")
+        linux_provider = _contained_regular_path(
+            PROJECT_ROOT.resolve(), linux_provider_path,
+            "live Linux Apollo provider",
+        )
+        linux_provider_payload = _read_regular(
+            linux_provider, "live Linux Apollo provider"
+        )
+        if linux_provider_payload != linux["artifacts"]["component"]:
+            raise AdmissionError(
+                "live Linux Apollo provider differs from admitted observations"
+            )
     profiles[LINUX_PROFILE] = {
         "size": len(linux["artifacts"]["component"]),
         "sha256": _digest(linux["artifacts"]["component"]),
     }
+    if linux_provider_path is not None:
+        profiles[LINUX_PROFILE]["path"] = linux_provider_path
 
     # Package pins are derived from the exact selected provider bytes; no
     # package bytes are written by this synchronizer.
@@ -4546,6 +4932,9 @@ def _run_locked(
         linux,
         auxiliary,
         dependencies,
+        allow_tail_schema_migration=bool(
+            getattr(args, "allow_tail_schema_migration", False)
+        ),
     )
     if args.apply:
         # Repeat every mutable external-input proof immediately before the
@@ -4591,6 +4980,9 @@ def _run_locked(
             linux,
             repeated_auxiliary,
             repeated_dependencies,
+            allow_tail_schema_migration=bool(
+                getattr(args, "allow_tail_schema_migration", False)
+            ),
         )
         if repeated_manifest != updated_manifest:
             raise AdmissionError("canonical providers changed during admission")
@@ -4660,6 +5052,14 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
     parser.add_argument("--apply", action="store_true")
+    parser.add_argument(
+        "--allow-tail-schema-migration",
+        action="store_true",
+        help=(
+            "explicitly permit authenticated four-observation migration when "
+            "the compiler-owned leaf/part vector changed"
+        ),
+    )
     args = parser.parse_args(argv)
     args.profile_provider = [
         (profile, component, Path(path))

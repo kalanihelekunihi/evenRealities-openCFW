@@ -2,15 +2,15 @@
   "aggregate": {
     "buckets": {
       "candidate_source_not_routed": 29396,
-      "generated_or_reconstructible": 494744,
-      "production_source": 475527,
-      "typed_retained_or_external": 3749965,
+      "generated_or_reconstructible": 414750,
+      "production_source": 559645,
+      "typed_retained_or_external": 3746045,
       "unclassified": 0
     },
-    "component_payload_bytes": 4749632,
-    "package_bytes": 4750576,
+    "component_payload_bytes": 4749836,
+    "package_bytes": 4750780,
     "package_envelope_bytes": 944,
-    "release_blocking_bytes": 3779361,
+    "release_blocking_bytes": 3775441,
     "source_incomplete_components": [
       "apollo_main",
       "apollo_bootloader",
@@ -24,13 +24,45 @@
   "analysis_mode": "offline composed byte/source/license audit; no hardware, MMIO, reset, DFU, signing, flashing, or publishing operation",
   "assessment_date": "2026-08-28",
   "authoritative_audit": "tools/analyze_g2_completion_readiness.py",
+  "candidate_admission_boundaries": {
+    "case": {
+      "blocker_class": "hardware-dependent-board-routing",
+      "candidate_bytes": 14886,
+      "candidate_source_functions": 222,
+      "hardware_operations": [],
+      "hardware_validation": "blocked by unavailable physical evidence",
+      "physical_board_services_routed": false,
+      "production_routed": false,
+      "raw_flash_bytes": 18916,
+      "remaining_callable_software_functions": 0,
+      "software_link_complete": true,
+      "software_package_complete": true,
+      "source_translation_units": 8,
+      "undefined_symbols": 0
+    },
+    "touch": {
+      "blocker_class": "hardware-dependent-resident-abi",
+      "candidate_bytes": 14510,
+      "candidate_source_functions": 178,
+      "hardware_operations": [],
+      "hardware_validation": "blocked by unavailable physical evidence",
+      "physical_board_services_routed": false,
+      "production_routed": false,
+      "raw_flash_bytes": 15560,
+      "remaining_callable_software_functions": 0,
+      "software_link_complete": true,
+      "software_package_complete": true,
+      "source_translation_units": 31,
+      "undefined_symbols": 0
+    }
+  },
   "components": [
     {
       "buckets": {
         "candidate_source_not_routed": 0,
-        "generated_or_reconstructible": 476036,
-        "production_source": 415344,
-        "typed_retained_or_external": 3065088,
+        "generated_or_reconstructible": 396042,
+        "production_source": 499462,
+        "typed_retained_or_external": 3061168,
         "unclassified": 0
       },
       "classification_complete": true,
@@ -41,7 +73,7 @@
         "clkmgr_divider_source_functions": 2,
         "clkmgr_divider_source_stock_bytes": 52,
         "controlled_label_reconciliation_additive": false,
-        "controlled_label_reconciliation_bytes": 17800,
+        "controlled_label_reconciliation_bytes": 21544,
         "nemavg_stroke_cap_candidate_bytes": 0,
         "nemavg_stroke_cap_candidate_functions": 0,
         "nemavg_stroke_cap_coordinator_production_routed": true,
@@ -52,16 +84,16 @@
         "nemavg_stroke_cap_source_routed_functions": 3,
         "nemavg_stroke_cap_source_routed_stock_bytes": 6614,
         "origin_buckets": {
-          "first_party_or_project_path_anchored": 291566,
-          "outside_trustworthy_function_envelopes": 2087818,
+          "first_party_or_project_path_anchored": 290882,
+          "outside_trustworthy_function_envelopes": 2087752,
           "third_party_path_anchored": 86364,
-          "unanchored_discovered_function": 599340
+          "unanchored_discovered_function": 596170
         },
         "overlapping_object_closure_evidence": {
           "additive_to_disjoint_release_totals": false,
           "bytes": 885418
         },
-        "provider_sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
+        "provider_sha256": "78eca5222c333c5fd3793608d67aad476ecac911f6e15164feeb2e1009944826",
         "pt_protocol_board_source_complete": false,
         "pt_protocol_bound_commands": 66,
         "pt_protocol_candidate_stock_body_bytes": 32866,
@@ -109,19 +141,19 @@
         "pt_protocol_top_level_retained_provider_bindings_remaining": 4,
         "release_readiness_partition": {
           "candidate_source_not_routed": 0,
-          "typed_retained_or_external": 3065088
+          "typed_retained_or_external": 3061168
         },
         "unanchored_frontier_partition": {
           "candidate_source_not_routed": 0,
-          "typed_retained_unanchored_without_candidate": 599340
+          "typed_retained_unanchored_without_candidate": 596170
         }
       },
       "hardware_blocker": "blocked by unavailable physical evidence",
       "hardware_operations": [],
       "hardware_validation": "blocked by unavailable physical evidence",
       "production_routed": true,
-      "release_blocking_bytes": 3065088,
-      "size": 3956468,
+      "release_blocking_bytes": 3061168,
+      "size": 3956672,
       "source_complete": false
     },
     {
@@ -242,11 +274,11 @@
           "manifest_count": 2,
           "residual_bytes": 33658,
           "residual_span_count": 175,
-          "schema_version": 6,
+          "schema_version": 7,
           "summary": {
             "path": "em9305-final-source-readiness-summary.json",
-            "sha256": "5cd0e51ef3274fe1e96d8c3e4aa0ff776fef4587305112f05573b5cde0d194fd",
-            "size": 4805
+            "sha256": "3fa764455494d542f04d0a71236e9d52f7a116eab8867a1bffc82e20f3e0907e",
+            "size": 4882
           }
         },
         "generated_or_reconstructible_bytes": 1226,
@@ -284,6 +316,9 @@
         "admission_batches": 18,
         "admission_chain_candidate_instruction_bytes": 8524,
         "authoritative_batch": 26,
+        "candidate_admission_blocker_class": "hardware-dependent-resident-abi",
+        "candidate_admission_hardware_operations": [],
+        "candidate_admission_hardware_validation": "blocked by unavailable physical evidence",
         "candidate_provenance": {
           "address_set_sha256": "ab7fbcdd8d7aa5d6a8f974f14a75eca3041689315410350d2337a309ff81277b",
           "candidate_bytes": 14510,
@@ -304,6 +339,7 @@
         },
         "candidate_provenance_manifest": "g2-touch-final-source-candidate-provenance.tsv",
         "candidate_provenance_subrows": 6,
+        "candidate_source_functions": 178,
         "cumulative_candidate_instruction_bytes": 13694,
         "generation_receipt": {
           "analysis_inputs": {
@@ -391,7 +427,9 @@
             "g2-touch-final-source-candidate-provenance.tsv": "d1a9f838eb85cfc571b55836ae479d63b995aa5b02c5283dee02ace2e910be6b"
           }
         },
+        "physical_board_services_routed": false,
         "reachable_unclassified_functions": 0,
+        "remaining_callable_software_functions": 0,
         "remaining_source_or_implementation_functions": 0,
         "resident_abi_available": false,
         "software_fwpk_package_complete": true,
@@ -429,6 +467,10 @@
       "component": "STM32 charging case",
       "component_id": "case",
       "details": {
+        "candidate_admission_blocker_class": "hardware-dependent-board-routing",
+        "candidate_admission_hardware_operations": [],
+        "candidate_admission_hardware_validation": "blocked by unavailable physical evidence",
+        "candidate_source_functions": 222,
         "final_unclassified_bytes": 0,
         "open_semantic_questions": [
           "exact FreeRTOS point release within V10.x",
@@ -446,6 +488,7 @@
           "upstream_freertos_kernel": 5814,
           "upstream_stm32_hal": 1324
         },
+        "physical_board_services_routed": false,
         "physical_bucket_digest": "126efe6801410d0051201a4a0a7f04a3a0ddd917117cb305afad35772e907a89",
         "prior_unresolved_bytes": 17070,
         "pure_helper_candidate_bytes": 248,
@@ -458,6 +501,7 @@
         "register_primitive_candidate_functions": 13,
         "register_transform_candidate_bytes": 96,
         "register_transform_candidate_functions": 5,
+        "remaining_callable_software_functions": 0,
         "semantic_leaf_candidate_bytes": 14208,
         "semantic_leaf_candidate_functions": 189,
         "software_even_package_complete": true,
@@ -478,8 +522,12 @@
   ],
   "definitions": {
     "binary_redistribution_authority_resolved": "A durable redistribution grant is recorded for every packaged binary. Source licensing does not establish this grant.",
+    "candidate_artifacts_complete_and_hardware_blocked": "Every candidate-only component has zero remaining callable software functions, links and packages with zero undefined symbols, remains outside production routing, and records the exact unavailable-physical-evidence disposition.",
     "candidate_source_not_routed": "Reviewed source candidate not used by the production provider.",
     "classification_complete": "Every byte has a source, generated, candidate, or typed-boundary decision. This is independent of source completion.",
+    "functional_hardware_rows_explicitly_blocked": "Every ledger row whose status names a hardware dependency uses the exact unavailable-physical-evidence disposition.",
+    "functional_proprietary_rows_explicitly_blocked": "Every ledger row whose status names a proprietary boundary uses the exact unavailable-proprietary-inputs disposition.",
+    "functional_software_gap_rows_zero": "The nine-domain capability ledger has no locally actionable software-gap row. This does not imply source completeness.",
     "generated_or_reconstructible": "Deterministic framing, patch, alignment, or format metadata; this does not imply recovered application behavior.",
     "production_source": "Bytes emitted from maintained source and routed by the current production component build.",
     "source_complete": "Every required behavior byte is routed from maintained source: candidate, retained/external, and unclassified byte counts are all zero.",
@@ -492,7 +540,7 @@
     "classification_policy": "admitted component build reports are authoritative for source/generated/retained totals; flash-plan address_status rows remain an address map and require the checked profile reconciliation below",
     "companion": "tools/manifests/g2-dual-profile-ownership.json",
     "companion_schema_version": 4,
-    "companion_sha256": "0aecdef7ea2d5d95025f599f99fbd396f70409d43f5a9cde1460aba6eacf84ae",
+    "companion_sha256": "69f214efbfd4b914bc7c182396120f2592cd88a2f5ca191fdec9199d7ca7c379",
     "limitation": "Exact aggregate source/generated/candidate/retained/container totals are checked for both profiles, but the Linux coarse spans do not provide a complete per-byte source-vs-generated-vs-retained mask.",
     "per_byte_ownership_mask_complete": false,
     "per_byte_ownership_policy": {
@@ -506,44 +554,44 @@
         "address_status_ownership_mode": "non_authoritative_requires_checked_reconciliation",
         "aggregate_buckets": {
           "candidate_source_not_routed": 29396,
-          "generated_or_reconstructible": 494744,
-          "production_source": 475527,
-          "typed_retained_or_external": 3749965,
+          "generated_or_reconstructible": 414750,
+          "production_source": 559645,
+          "typed_retained_or_external": 3746045,
           "unclassified": 0
         },
-        "bytes_requiring_address_label_reconciliation": 17800,
-        "component_payload_bytes": 4749632,
-        "flash_plan_sha256": "e540570208e616cc3de20af268da55d17fbf59f918aee143be8a902449253262",
+        "bytes_requiring_address_label_reconciliation": 117740,
+        "component_payload_bytes": 4749836,
+        "flash_plan_sha256": "92eacdf8f30db7dde5c92dc70c270b8ddd77bcd7b0de2e8a64872302b8df500f",
         "internal_component_container_bytes": 300,
         "outer_evenota_envelope_bytes": 944,
-        "package_report_sha256": "79250e9da752d137cbab889b913f604e62743b5d063bb281c233176318ec0bd6",
-        "package_sha256": "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
-        "package_size": 4750576,
+        "package_report_sha256": "c781105b6d101583f2ecb0f757f82074a0a67e597396365004015871ab7f4e7d",
+        "package_sha256": "3929fdde5ab5520683fdac9393fc3abc322b2eccc3e203c44df544071945c858",
+        "package_size": 4750780,
         "per_byte_ownership_authority": "canonical Apple component builder/region mask",
         "per_byte_ownership_mask_complete": true,
-        "physical_flash_bytes": 4749332,
+        "physical_flash_bytes": 4749536,
         "typed_mixed_profile_spans": []
       },
       "linux-clang": {
         "address_status_ownership_mode": "non_authoritative_profile_coarse",
         "aggregate_buckets": {
           "candidate_source_not_routed": 29396,
-          "generated_or_reconstructible": 411980,
-          "production_source": 257897,
-          "typed_retained_or_external": 4050343,
+          "generated_or_reconstructible": 332056,
+          "production_source": 341945,
+          "typed_retained_or_external": 4046423,
           "unclassified": 0
         },
-        "bytes_requiring_address_label_reconciliation": 274414,
-        "component_payload_bytes": 4749616,
-        "flash_plan_sha256": "97c93fa9df90ef15785437ebf860c644d52a4f08a251ec6e427c89d3e8f13e68",
+        "bytes_requiring_address_label_reconciliation": 3361546,
+        "component_payload_bytes": 4749820,
+        "flash_plan_sha256": "268beba302fb1ec01b987effc53d83eb2e52974a5bc9785ae0c2f0e883d0b62b",
         "internal_component_container_bytes": 300,
         "outer_evenota_envelope_bytes": 944,
-        "package_report_sha256": "1610afdfa301ec255a1e58128fd79b7131250c911d66b0cc8e3cb8cb2ab8a45a",
-        "package_sha256": "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
-        "package_size": 4750560,
+        "package_report_sha256": "d0d616baf8521b714318cfe7dd45a275b64dfe9ded4e97ba9ccd7b4c655518ef",
+        "package_sha256": "5153e24fad9420235c0a1777bb0cf00b82d6af529333db2792586920628c2b1d",
+        "package_size": 4750764,
         "per_byte_ownership_authority": "aggregate totals plus explicit typed-mixed spans only",
         "per_byte_ownership_mask_complete": false,
-        "physical_flash_bytes": 4749316,
+        "physical_flash_bytes": 4749520,
         "typed_mixed_profile_spans": [
           {
             "classification": "typed_mixed_profile_ownership",
@@ -565,22 +613,103 @@
             "classification": "typed_mixed_profile_ownership",
             "component": "apollo_main",
             "component_file_offset": 0,
-            "end_exclusive": 3956468,
+            "end_exclusive": 3956672,
             "reason": "exact bytes and addresses; no complete per-byte source-vs-generated-vs-retained mask is claimed",
-            "size": 3956468
+            "size": 3956672
           }
         ]
       }
     },
     "sole_current_per_byte_ownership_authority_profile": "apple-clang",
-    "source_inputs_sha256": "73582e0d6d00b90c18d82df885bff39e75a3b3c8851dab6a134f726577230a4f",
+    "source_inputs_sha256": "8a419101a39ba69d5a507d5beafeb8ac329a425bc9b80e6c3efd535060e53108",
     "typed_mixed_boundary": "typed_mixed_profile_ownership"
+  },
+  "functional_capability_ledger": {
+    "domain_counts": {
+      "Deployment": {
+        "hardware-dependent": 2,
+        "implemented-in-source": 3,
+        "proprietary-blocked": 1,
+        "software-gap": 0
+      },
+      "Hardware services": {
+        "hardware-dependent": 3,
+        "implemented-in-source": 18,
+        "proprietary-blocked": 1,
+        "software-gap": 0
+      },
+      "Health": {
+        "hardware-dependent": 1,
+        "implemented-in-source": 4,
+        "proprietary-blocked": 1,
+        "software-gap": 0
+      },
+      "Platform": {
+        "hardware-dependent": 5,
+        "implemented-in-source": 23,
+        "proprietary-blocked": 2,
+        "software-gap": 0
+      },
+      "Protocol": {
+        "hardware-dependent": 3,
+        "implemented-in-source": 62,
+        "proprietary-blocked": 5,
+        "software-gap": 0
+      },
+      "Security": {
+        "hardware-dependent": 0,
+        "implemented-in-source": 14,
+        "proprietary-blocked": 1,
+        "software-gap": 0
+      },
+      "Sensors": {
+        "hardware-dependent": 0,
+        "implemented-in-source": 13,
+        "proprietary-blocked": 2,
+        "software-gap": 0
+      },
+      "Storage": {
+        "hardware-dependent": 2,
+        "implemented-in-source": 5,
+        "proprietary-blocked": 0,
+        "software-gap": 0
+      },
+      "System": {
+        "hardware-dependent": 3,
+        "implemented-in-source": 10,
+        "proprietary-blocked": 1,
+        "software-gap": 0
+      }
+    },
+    "hardware_blocker_wording_failures": [],
+    "hardware_blocker_wording_gate": true,
+    "hardware_marked_rows": 130,
+    "hardware_rows_explicitly_blocked": 130,
+    "path": "docs/functional-capability-ledger.md",
+    "proprietary_blocked_rows": 14,
+    "proprietary_blocker_wording_failures": [],
+    "proprietary_blocker_wording_gate": true,
+    "proprietary_marked_rows": 16,
+    "proprietary_rows_explicitly_blocked": 16,
+    "row_count": 185,
+    "software_gap_gate": true,
+    "software_gap_rows": 0,
+    "totals": {
+      "hardware-dependent": 19,
+      "implemented-in-source": 152,
+      "proprietary-blocked": 14,
+      "software-gap": 0
+    }
   },
   "gates": {
     "binary_redistribution_authority_resolved": false,
     "byte_accounting_complete": true,
+    "candidate_artifacts_complete_and_hardware_blocked": true,
     "classification_complete": true,
     "dual_profile_ownership_reconciliation": true,
+    "functional_hardware_rows_explicitly_blocked": true,
+    "functional_proprietary_rows_explicitly_blocked": true,
+    "functional_software_gap_rows_zero": true,
     "hardware_blocker": "blocked by unavailable physical evidence",
     "hardware_operations": [],
     "hardware_validation": "blocked by unavailable physical evidence",
@@ -640,17 +769,17 @@
     ],
     "separation_rule": "source availability and source license compliance do not establish permission to redistribute retained or binary-only firmware",
     "source_classification_counts": {
-      "project-owned-or-adapted": 672,
-      "upstream-licensed": 218
+      "project-owned-or-adapted": 674,
+      "upstream-licensed": 219
     },
     "source_errors": 0,
-    "source_files": 890,
+    "source_files": 893,
     "source_license_counts": {
       "Apache-2.0": 81,
       "BSD-2-Clause": 2,
       "BSD-3-Clause": 132,
       "GPL-3.0-only": 1,
-      "MIT": 647,
+      "MIT": 650,
       "Zlib": 27
     },
     "source_metadata_clean": true,
@@ -664,14 +793,14 @@
     ]
   },
   "package": {
-    "component_payload_bytes": 4749632,
+    "component_payload_bytes": 4749836,
     "conservation": {
-      "component_bucket_bytes": 4749632,
-      "component_buckets_plus_envelope_bytes": 4750576,
+      "component_bucket_bytes": 4749836,
+      "component_buckets_plus_envelope_bytes": 4750780,
       "matches_expected_package_size": true
     },
-    "expected_sha256": "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
-    "expected_size": 4750576,
+    "expected_sha256": "3929fdde5ab5520683fdac9393fc3abc322b2eccc3e203c44df544071945c858",
+    "expected_size": 4750780,
     "format": "EVENOTA",
     "generated_envelope_bytes": 944
   },
@@ -700,7 +829,7 @@
     "upstream_gpl_records_preserved": 1,
     "zlib_records_preserved": 27
   },
-  "schema_version": 3,
+  "schema_version": 4,
   "source_inputs": [
     {
       "path": "blobs/official/g2-2.2.6.10/firmware_touch.bin",
@@ -708,24 +837,24 @@
       "size": 34464
     },
     {
-      "path": "build/canonical-observation/apple-a/build-report.json",
-      "sha256": "52f296deb271f879b976c30abae6537ff29e31317779c50de45c008595b96cff",
-      "size": 33748133
+      "path": "build/canonical-observation-g2-final6/apple-a9/build-report.json",
+      "sha256": "09130b14d0cbcb137d36d83060cd42b921b6eb458bc16f42b7fcb27d3da9881d",
+      "size": 34052969
     },
     {
-      "path": "build/canonical-observation/apple-b/build-report.json",
-      "sha256": "645bf6e3a306bd0bcc0ee0e293c60dcea88c9b6e17dfd5bcb7695e77d4b9d1c5",
-      "size": 33748133
+      "path": "build/canonical-observation-g2-final6/apple-b9/build-report.json",
+      "sha256": "686252186909d63cf527d18d0d3aebe7047c0480917d645197190f4b53de4972",
+      "size": 34052969
     },
     {
-      "path": "build/canonical-observation/linux-a/build-report.json",
-      "sha256": "11c45b4a7dbc04c39b9c878e074d07cdf896dbadd8f0f257cbf0271a83976131",
-      "size": 4466327
+      "path": "build/canonical-observation-g2-final6/linux-a16/build-report.json",
+      "sha256": "997fb9e9a0458a0017b7293cdbaaa22a81bec36b601e133d6082aaed48a9f9d7",
+      "size": 5116682
     },
     {
-      "path": "build/canonical-observation/linux-b/build-report.json",
-      "sha256": "033574ca3fa645e92ad782b05a4e6644abc304d994677d998f008a7d28a22274",
-      "size": 4466327
+      "path": "build/canonical-observation-g2-final6/linux-b17/build-report.json",
+      "sha256": "277e2ae88c9fdf45abe1da70e3366936823964bbb55a00d8bc307fa02c72f40e",
+      "size": 5116682
     },
     {
       "path": "build/canonical-provider/linux-clang/apollo_bootloader/build-report.json",
@@ -733,34 +862,34 @@
       "size": 3408773
     },
     {
-      "path": "build/postapply-package-apple/build-report.json",
-      "sha256": "79250e9da752d137cbab889b913f604e62743b5d063bb281c233176318ec0bd6",
+      "path": "build/source-linux/build-report.json",
+      "sha256": "d0d616baf8521b714318cfe7dd45a275b64dfe9ded4e97ba9ccd7b4c655518ef",
+      "size": 4348
+    },
+    {
+      "path": "build/source-linux/flash-plan.json",
+      "sha256": "268beba302fb1ec01b987effc53d83eb2e52974a5bc9785ae0c2f0e883d0b62b",
+      "size": 586640
+    },
+    {
+      "path": "build/source/build-report.json",
+      "sha256": "c781105b6d101583f2ecb0f757f82074a0a67e597396365004015871ab7f4e7d",
       "size": 4328
     },
     {
-      "path": "build/postapply-package-apple/flash-plan.json",
-      "sha256": "e540570208e616cc3de20af268da55d17fbf59f918aee143be8a902449253262",
-      "size": 4881053
-    },
-    {
-      "path": "build/postapply-package-linux/build-report.json",
-      "sha256": "1610afdfa301ec255a1e58128fd79b7131250c911d66b0cc8e3cb8cb2ab8a45a",
-      "size": 4326
-    },
-    {
-      "path": "build/postapply-package-linux/flash-plan.json",
-      "sha256": "97c93fa9df90ef15785437ebf860c644d52a4f08a251ec6e427c89d3e8f13e68",
-      "size": 2793636
+      "path": "build/source/flash-plan.json",
+      "sha256": "92eacdf8f30db7dde5c92dc70c270b8ddd77bcd7b0de2e8a64872302b8df500f",
+      "size": 5081764
     },
     {
       "path": "components/apollo_main/core_overlay/build/build-report.json",
-      "sha256": "fcc12646c90476d8a2144993717746b922fdf70b654307266d9a9cbf5092c08f",
-      "size": 17808812
+      "sha256": "ba0f725f12f28a6b0794b8e607b3cf666de6e796481bfe2a02e967a0d72b6dc0",
+      "size": 17974617
     },
     {
       "path": "components/apollo_main/core_overlay/overlay.json",
-      "sha256": "733bc34d7545775ab067eb03c38678889694bc092fc840c64a1ef605b0081212",
-      "size": 5853221
+      "sha256": "9b1f644af28273bde1bc622ca2157b6986097a4e3eb6e5c536ed1bd563731b13",
+      "size": 5974575
     },
     {
       "path": "components/bootloader/core_overlay/build/build-report.json",
@@ -953,9 +1082,14 @@
       "size": 2561
     },
     {
+      "path": "docs/functional-capability-ledger.md",
+      "sha256": "6f6579fd4f4b518851ad911fee6ac1f8c6a74112a66f98d6527d6e92ee6e26cc",
+      "size": 152042
+    },
+    {
       "path": "manifests/g2-2.2.6.10-core-source.json",
-      "sha256": "01157a2293e57b1c1fcc972b19380ae4245642a164eb2906ab54ef9f8f5eeccf",
-      "size": 3391215
+      "sha256": "bfe70bc04c7ec384c75690fc224a992dc71e1020d1d7c0494ce3da6f9466f7ac",
+      "size": 3527931
     },
     {
       "path": "manifests/g2-2.2.6.10.json",
@@ -994,8 +1128,8 @@
     },
     {
       "path": "tools/analyze_em9305_qpc_hook_provider_candidate.py",
-      "sha256": "8bbfbd5951abfde4b111286527f76afddacecbc9a09696a451985b924000dedf",
-      "size": 15855
+      "sha256": "4d17f47d5bf46295a27ad2391d6b1d96e326a0ac51fa0b1091ecf2b15bb78f46",
+      "size": 15865
     },
     {
       "path": "tools/analyze_em9305_record_package.py",
@@ -1014,8 +1148,8 @@
     },
     {
       "path": "tools/analyze_em9305_source_readiness.py",
-      "sha256": "b50a2d4ced53634ed216f6bbed9e966a5b59f0209ae7e3249dd183206af51ea4",
-      "size": 42240
+      "sha256": "aeba8c889529cdbba315753dcf6fa8a760a8a550fe3186bf459ff8bbcca8bea5",
+      "size": 42555
     },
     {
       "path": "tools/analyze_em9305_unclassified_tail_candidate.py",
@@ -1034,13 +1168,28 @@
     },
     {
       "path": "tools/analyze_g2_completion_readiness.py",
-      "sha256": "a76430ed4dc82d3ebaaaa60236491f2e8ff46c205cc3c299c2edac803a3584d4",
-      "size": 82999
+      "sha256": "5079418304bb6781ba9555daaf549390881396e7046d2dd7a1e480d0a6c007c9",
+      "size": 84539
     },
     {
       "path": "tools/analyze_g2_dual_profile_ownership.py",
-      "sha256": "827f946797318151b4533eaad875af4b1c37a135ed3908d982fc0f5cc4535949",
-      "size": 47088
+      "sha256": "3c43b8a0c685af2e7e1294331ca80a022c6cd71f5b4244b01fe9d567fa0bab6d",
+      "size": 47702
+    },
+    {
+      "path": "tools/analyze_g2_freetype_cff_package_integration.py",
+      "sha256": "2d70482729b3314c43c020963a3035fa700f10cf48f9ff604a04018d016a653e",
+      "size": 24064
+    },
+    {
+      "path": "tools/analyze_g2_freetype_cff_placement_link.py",
+      "sha256": "500d1241c04514325264113cb66707b64fed70b008755fd75e992ccb7236b012",
+      "size": 19217
+    },
+    {
+      "path": "tools/analyze_g2_freetype_cff_production_route.py",
+      "sha256": "25bf7ade87222787fd814e62a99bb0b0a289934c3b50fccc40f9082d529e76e0",
+      "size": 23713
     },
     {
       "path": "tools/analyze_g2_production_raw_encoding_quality.py",
@@ -1104,8 +1253,13 @@
     },
     {
       "path": "tools/apply_g2_canonical_observations.py",
-      "sha256": "ade996cc7b0f38f5d4194026b48b17346c111074a91a7ae6b83fa86cda3a8446",
-      "size": 199877
+      "sha256": "480df908b4cdb4639dd86a9cfa2dc0a9843f115f5ae6ebeada268bfbeca8ba82",
+      "size": 217813
+    },
+    {
+      "path": "tools/audit_g2_lvgl_nema_link.py",
+      "sha256": "8d0c22de453bbbc63432d428a0ba796651471cab10bce52075de8d6ad18b327d",
+      "size": 383327
     },
     {
       "path": "tools/audit_g2_release_licensing.py",
@@ -1114,8 +1268,8 @@
     },
     {
       "path": "tools/manifests/em9305-final-source-readiness-summary.json",
-      "sha256": "5cd0e51ef3274fe1e96d8c3e4aa0ff776fef4587305112f05573b5cde0d194fd",
-      "size": 4805
+      "sha256": "3fa764455494d542f04d0a71236e9d52f7a116eab8867a1bffc82e20f3e0907e",
+      "size": 4882
     },
     {
       "path": "tools/manifests/em9305-final-source-readiness.tsv",
@@ -1134,8 +1288,8 @@
     },
     {
       "path": "tools/manifests/g2-apollo-origin-accounting.json",
-      "sha256": "1b218130f2df8f0a9682cf198d966c1379aa5189ca17b27a7676861bad8ebf85",
-      "size": 2747
+      "sha256": "b5b957d454d38bf0bd2ebe0f3497d0d20172f6fde61901201c248d607bc57e38",
+      "size": 2767
     },
     {
       "path": "tools/manifests/g2-box-function-map-summary.json",
@@ -1179,13 +1333,33 @@
     },
     {
       "path": "tools/manifests/g2-clkmgr-divider-candidate-summary.json",
-      "sha256": "b4e5f0f3beafbb856af601c5b40d1243ff5903dcb78964e1ea69f05282dc49a0",
+      "sha256": "153de72b2b673befa1841084875042312d1076f360abe0793be062f7d3bf8f4c",
       "size": 7275
     },
     {
       "path": "tools/manifests/g2-dual-profile-ownership.json",
-      "sha256": "0aecdef7ea2d5d95025f599f99fbd396f70409d43f5a9cde1460aba6eacf84ae",
-      "size": 16549
+      "sha256": "69f214efbfd4b914bc7c182396120f2592cd88a2f5ca191fdec9199d7ca7c379",
+      "size": 16567
+    },
+    {
+      "path": "tools/manifests/g2-freetype-cff-package-integration.json",
+      "sha256": "1e496591ab36b8106e70ec914130aeb757562190af0b465d5651f67ffe19f093",
+      "size": 7145
+    },
+    {
+      "path": "tools/manifests/g2-freetype-cff-placement-link.json",
+      "sha256": "c8ff1ebfd687c6bbc546776c42e5f26bbba7517333a3801f043c054d15d1fd87",
+      "size": 37673
+    },
+    {
+      "path": "tools/manifests/g2-freetype-cff-production-route.json",
+      "sha256": "3fe650ca9e88910e3b04b9820012b9b1b13eb69209da39b778af30b14e596a98",
+      "size": 9596
+    },
+    {
+      "path": "tools/manifests/g2-lvgl-nema-link-admission.json",
+      "sha256": "cdb8a9f1ca8c795684a2125ea9f0db67f5787cf5df263ed102022aae0b623907",
+      "size": 283113
     },
     {
       "path": "tools/manifests/g2-nemavg-stroke-caps-candidate-summary.json",
@@ -1199,7 +1373,7 @@
     },
     {
       "path": "tools/manifests/g2-project-license-normalization-summary.json",
-      "sha256": "5fe83857cefbdfabb136233cdf9ab590e7c2a259843e4ce1e38310d0daaa87f6",
+      "sha256": "c619bc82d882c164f981db4ffe68f787aa1799f5a2b70fa7f37ab4348d05fc22",
       "size": 2618
     },
     {
@@ -1484,8 +1658,8 @@
     },
     {
       "path": "tools/open_cfw.py",
-      "sha256": "177c9e6266dd1327b483a05944f7a00b8a9d4d5e85eb4a0471a04a0d41dea6d0",
-      "size": 99021
+      "sha256": "a565416d3fb67d5a343167ccbacc915efd7d27f245c8fd07fb7af9581b4c2deb",
+      "size": 99692
     }
   ],
   "source_ownership_quality": {

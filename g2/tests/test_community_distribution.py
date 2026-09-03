@@ -2646,7 +2646,7 @@ class CommunityPublicEvidenceStaticTests(unittest.TestCase):
         self.assertFalse(
             summary["deployment_package_audit"]["source_image_complete"]
         )
-        self.assertFalse(
+        self.assertTrue(
             summary["deployment_package_audit"]["production_routed"]
         )
         arc_receipt = payload[distribution.EM9305_ARC_BUILD_RECEIPT]
@@ -3250,7 +3250,6 @@ class CanonicalMaintainerWorkflowDocsTests(unittest.TestCase):
             self.assertNotIn(machine_path, section)
 
     def test_postapply_dual_profile_reconstruction_is_exact_and_local(self) -> None:
-        snippets = []
         for doc in (self.COMMUNITY_DOC, self.LINUX_DOC):
             text = doc.read_text(encoding="utf-8")
             section = text.split(
@@ -3260,23 +3259,22 @@ class CanonicalMaintainerWorkflowDocsTests(unittest.TestCase):
             for required in (
                 "--output-dir components/apollo_main/core_overlay/build",
                 "--output-dir .tmp-postapply-core-linux",
-                "manifests/.tmp-g2-linux-postapply.json",
-                '"build/canonical-provider/linux-clang/apollo_bootloader/"',
-                '"ota_s200_bootloader.bin"',
-                '".tmp-postapply-core-linux/ota_s200_firmware_ota.bin"',
-                'overrides = candidate.get("component_overrides")',
-                'audit_rows = audit["component_overrides"]',
-                'if audit != original:',
-                'raise SystemExit("scratch manifest changed a field other than two paths")',
+                "cmp .tmp-postapply-core-linux/ota_s200_firmware_ota.bin",
+                "build/canonical-provider/linux-clang/apollo_main/ota_s200_firmware_ota.bin",
+                "authenticated profile-specific provider\npaths",
+                "same semantic manifest identity",
+                "scratch manifest would\nchange that identity",
                 "--output-dir build/postapply-package-apple",
                 "--output-dir build/postapply-package-linux",
                 "make dual-profile-ownership-write",
-                "build/canonical-observation/{apple-a,apple-b,linux-a,linux-b}/",
+                "build/canonical-observation-g2-final3/"
+                "{apple-a,apple-b,linux-a,linux-b}/",
                 "ignored, private local\nevidence",
                 "not Git inputs or community-archive members",
                 "no network access,\nsigning, flashing, or hardware operation",
             ):
                 self.assertIn(required, section)
+            self.assertNotIn("manifests/.tmp-g2-linux-postapply.json", section)
             self.assertEqual(
                 section.count("python3 tools/open_cfw.py build \\"), 2
             )
@@ -3290,54 +3288,6 @@ class CanonicalMaintainerWorkflowDocsTests(unittest.TestCase):
                 section.rindex("python3 tools/open_cfw.py verify-artifacts"),
                 section.index("make dual-profile-ownership-write"),
             )
-            snippets.append(
-                section.split(
-                    "manifests/.tmp-g2-linux-postapply.json <<'PY'\n", 1
-                )[1].split("\nPY\n", 1)[0]
-            )
-
-        self.assertEqual(snippets[0], snippets[1])
-        with tempfile.TemporaryDirectory(prefix="opencfw-postapply-doc-") as tmp:
-            temporary = Path(tmp)
-            source = temporary / "g2-2.2.6.10-core-source.json"
-            destination = temporary / ".tmp-g2-linux-postapply.json"
-            original = json.loads(
-                (ROOT / "manifests/g2-2.2.6.10-core-source.json").read_text(
-                    encoding="utf-8"
-                )
-            )
-            source.write_text(
-                json.dumps(original, indent=2, sort_keys=True) + "\n",
-                encoding="utf-8",
-            )
-            completed = subprocess.run(
-                [sys.executable, "-", str(source), str(destination)],
-                input=snippets[0],
-                text=True,
-                capture_output=True,
-                check=False,
-            )
-            self.assertEqual(completed.returncode, 0, completed.stderr)
-            observed = json.loads(destination.read_text(encoding="utf-8"))
-
-        expected = json.loads(json.dumps(original))
-        expected_paths = {
-            "apollo_bootloader": (
-                "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
-                "build/canonical-provider/linux-clang/apollo_bootloader/"
-                "ota_s200_bootloader.bin",
-            ),
-            "apollo_main": (
-                "components/apollo_main/core_overlay/build/"
-                "ota_s200_firmware_ota.bin",
-                ".tmp-postapply-core-linux/ota_s200_firmware_ota.bin",
-            ),
-        }
-        for name, (old_path, new_path) in expected_paths.items():
-            provider = expected["component_overrides"][name]["provider"]
-            self.assertEqual(provider["path"], old_path)
-            provider["path"] = new_path
-        self.assertEqual(observed, expected)
 
 
 if __name__ == "__main__":

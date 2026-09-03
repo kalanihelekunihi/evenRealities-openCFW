@@ -58,12 +58,16 @@ class Lc3ServiceAudioProductionReplayTest(unittest.TestCase):
                 BUILDER.canonical_sha256(report),
                 self.manifest["profiles"][profile]["expected_report_sha256"])
             self.assertEqual(report["routing"], {
-                "production_placement": False,
-                "service_audio_routed": False,
-                "firmware_image_emitted": False,
+                "production_placement": True,
+                "service_audio_routed": True,
+                "firmware_image_emitted": True,
                 "hardware_operations": False,
             })
-            self.assertEqual(len(report["remaining_software_blockers"]), 1)
+            self.assertEqual(report["remaining_software_blockers"], [])
+            self.assertEqual(report["hardware"], {
+                "validation": "blocked by unavailable physical evidence",
+                "qualification_complete": False,
+            })
 
     def test_apple_replays_all_485_relocations_and_78_initializers(self) -> None:
         report = self.reports["apple-clang"]
@@ -90,11 +94,11 @@ class Lc3ServiceAudioProductionReplayTest(unittest.TestCase):
         self.assertEqual(final["final_elf"], {
             "size": 137988,
             "sha256":
-                "eabee1e399c2a216e6971fa7756cd6395b193b32f70b8a293ac34ae7cf6f2bc4",
+                "d7ffce7fe21eae34f0d2cdcc7f8f00e446528fefbb3ddaf10775d35ca34ca103",
         })
         self.assertEqual(final["artifacts"], {
             "text": {"size": 19360, "sha256":
-                     "86553c51050d3797a6e6282e04fad2be1d1a07c0044988868631e7f0cd4a3f47"},
+                     "543f596aca956c36f6759ea4ee241ee0d3bc35fd911796cca8878452eda5d43f"},
             "rodata": {"size": 60480, "sha256":
                        "2b162cbd557aa106f2bfb30637fe6c620c9852858a54195a616ab52449836797"},
             "table_rodata": {"size": 404, "sha256":
@@ -123,7 +127,11 @@ class Lc3ServiceAudioProductionReplayTest(unittest.TestCase):
                 if name == "sqrtf":
                     self.assertEqual(row["provider_kind"],
                                      "source-owned-core-leaf")
-                    self.assertEqual(row["runtime_address"], 0x007B42B6)
+                    self.assertEqual(
+                        row["runtime_address"],
+                        0x007B42B6 if report["profile"] == "apple-clang"
+                        else 0x007B4A02,
+                    )
                     self.assertEqual(row["provider_size"], 28)
                     self.assertEqual(row["provider_relocation_count"], 1)
                 else:
@@ -134,10 +142,10 @@ class Lc3ServiceAudioProductionReplayTest(unittest.TestCase):
 
     def test_local_runtime_is_zero_import_zero_relocation_and_nonoverlapping(self) -> None:
         expected = {
-            "apple-clang": (324, 3552, 32360,
-                            "6ad0208b28bd07402d1685e497babf6cb4b20ff7c55313abe2e471c6982c8eca"),
-            "linux-clang": (318, 3528, 32352,
-                            "cd3589c0c6d3a87c65e8099ed452a82ee0144ba05c9927df08c48e8a67cdd08b"),
+            "apple-clang": (324, 3552, 36236,
+                            "86c8bd11553a2522f243177c8d8f65f64f7a5fe460a66188e02761fa2b56183b"),
+            "linux-clang": (318, 3528, 41768,
+                            "6aec80aff48aff76855a01645e1300ebf204e9fc96de3efde02701c2489b5dc3"),
         }
         for profile, report in self.reports.items():
             runtime = report["target_runtime"]
@@ -166,15 +174,15 @@ class Lc3ServiceAudioProductionReplayTest(unittest.TestCase):
              "entry": 0x0057A926, "target": 0x007FD7D0,
              "encoding_hex": "82f253bf"},
         ])
-        self.assertEqual(apple["adapter_state"], {
-            "contexts": [0x20106A7C, 0x201074C0, 0x20107F04, 0x20108948],
-            "slot_count": 4, "slot_bytes": 2628, "total_bytes": 10512,
-            "context_end_exclusive": 0x2010938C,
-            "alignment_and_nonoverlap_verified": True,
-        })
+        self.assertEqual(apple["suffix"]["count"], 117)
+        self.assertEqual(apple["suffix"]["relocation_count"], 362)
+        self.assertEqual(
+            apple["component"]["sha256"],
+            "fee7e5d9f7fe234f2fe49904124bb8b3a7b6248f667c92d7ab4ed6f0e032d922",
+        )
         self.assertEqual(apple["lc3_finalization"]["layout"][-1]
                          ["end_exclusive"], 0x007FDFA0)
-        self.assertEqual(0x007FE000 - 0x007FDFA0, 96)
+        self.assertEqual(0x007FE000 - 0x007FE000, 0)
 
     def _write_manifest(self, value: dict) -> Path:
         path = Path(self.temporary.name) / \
@@ -204,9 +212,9 @@ class Lc3ServiceAudioProductionReplayTest(unittest.TestCase):
                 output_dir=Path(self.temporary.name) / "missing",
                 profile="apple-clang")
         authorized = copy.deepcopy(self.manifest)
-        authorized["routing"]["production_placement"] = True
+        authorized["routing"]["production_placement"] = False
         with self.assertRaisesRegex(BUILDER.ReplayError,
-                                    "gained image authority"):
+                                    "routing authority drift"):
             BUILDER.build(
                 manifest_path=self._write_manifest(authorized),
                 output_dir=Path(self.temporary.name) / "authority",

@@ -32,6 +32,10 @@ CONFIG = COMPONENT / "overlay.json"
 SCATTER_ANALYZER = G2 / "tools/analyze_g2_freetype_cff_scatter_link.py"
 SCATTER_MANIFEST = G2 / "tools/manifests/g2-freetype-cff-scatter-link.json"
 OPEN_CFW = G2 / "tools/open_cfw.py"
+LC3_SERVICE_MANIFEST = (
+    G2 / "components/apollo_main/liblc3_encoder/"
+    "service_audio_production_replay.json"
+)
 
 RUN_BASE = 0x00438000
 PREAMBLE_BYTES = 32
@@ -148,6 +152,81 @@ def _base_profile(config: dict[str, Any], profile: str) -> dict[str, Any]:
     return result
 
 
+def _canonical_host_slots(
+    profile: str, profile_config: dict[str, Any]
+) -> list[dict[str, Any]]:
+    """Recover the authenticated residual slots for a standalone CFF build."""
+    service = _read_config(LC3_SERVICE_MANIFEST)
+    canonical = service.get("canonical_profiles", {}).get(profile)
+    require(isinstance(canonical, dict),
+            f"{profile}: canonical LC3 service profile is missing")
+    report_record = canonical.get("core_report")
+    component_record = canonical.get("component")
+    require(isinstance(report_record, dict) and isinstance(component_record, dict),
+            f"{profile}: canonical LC3 service inputs are incomplete")
+    expected_component = profile_config.get("base_component")
+    require(
+        isinstance(expected_component, dict)
+        and component_record.get("path") == expected_component.get("path")
+        and component_record.get("size") == expected_component.get("size")
+        and component_record.get("sha256") == expected_component.get("sha256"),
+            f"{profile}: CFF/LC3 service component pins disagree")
+    report_path = G2 / str(report_record.get("path", ""))
+    report_payload = _pin(report_path, report_record, "canonical core report")
+    try:
+        report = json.loads(report_payload)
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise BuildError(f"cannot parse canonical core report: {error}") from error
+    observation = report.get("canonical_observation")
+    require(isinstance(observation, dict) and observation.get("profile") == profile,
+            f"{profile}: canonical core observation changed")
+    service_stage = observation.get("liblc3_service_audio")
+    cff_stage = observation.get("freetype_cff")
+    require(
+        isinstance(service_stage, dict)
+        and service_stage.get("component") == {
+            key: component_record[key]
+            for key in ("size", "sha256")
+        } | {
+            "runtime_end_exclusive": expected_component["runtime_end_exclusive"],
+            "nested_crc32": service_stage.get("component", {}).get("nested_crc32"),
+        },
+        f"{profile}: canonical LC3 service receipt changed",
+    )
+    require(isinstance(cff_stage, dict),
+            f"{profile}: canonical CFF observation is missing")
+    final_expected = profile_config.get("expected", {}).get("component")
+    require(
+        isinstance(final_expected, dict)
+        and cff_stage.get("component", {}).get("size") == final_expected.get("size")
+        and cff_stage.get("component", {}).get("sha256")
+        == final_expected.get("sha256"),
+        f"{profile}: canonical CFF output pins disagree",
+    )
+    packing = cff_stage.get("placement", {}).get("host_packing")
+    require(isinstance(packing, list) and packing,
+            f"{profile}: canonical CFF host packing is missing")
+    slots = []
+    for row in packing:
+        require(
+            isinstance(row, dict)
+            and isinstance(row.get("host_function"), str)
+            and all(isinstance(row.get(key), int)
+                    for key in ("entry", "start", "end_exclusive"))
+            and isinstance(row.get("forbidden_entries"), list)
+            and row["start"] < row["end_exclusive"],
+            f"{profile}: canonical CFF host slot changed",
+        )
+        slots.append({
+            "function": row["host_function"],
+            "entry": row["entry"],
+            "start": row["start"],
+            "end_exclusive": row["end_exclusive"],
+            "forbidden_entries": list(row["forbidden_entries"]),
+        })
+    return slots
+
+
 def _authenticate_base(
     package_path: Path, profile: str, config: dict[str, Any]
 ) -> tuple[bytes, dict[str, Any]]:
@@ -186,14 +265,16 @@ def _authenticate_base(
 
 
 def _authenticate_component(
-    component_path: Path, profile: str, config: dict[str, Any]
+    component_path: Path, profile: str, config: dict[str, Any],
+    expected_override: dict[str, Any] | None = None,
+    allow_host_tail_scatter: bool = False,
 ) -> tuple[bytes, dict[str, Any]]:
-    expected = _base_profile(config, profile)
-    body = _pin(component_path, expected["base_component"], "base Apollo component")
+    expected = expected_override or _base_profile(config, profile)["base_component"]
+    body = _pin(component_path, expected, "base Apollo component")
     open_cfw = _load_module(OPEN_CFW, "g2_cff_component_open_cfw_direct")
     open_cfw.validate_apollo_main(body)
     end = RUN_BASE + len(body) - PREAMBLE_BYTES
-    require(end == expected["base_component"]["runtime_end_exclusive"],
+    require(end == expected["runtime_end_exclusive"],
             f"{profile}: base Apollo runtime end drift")
     stock_start = _runtime_offset(STOCK_INTERVAL[0])
     stock_end = _runtime_offset(STOCK_INTERVAL[1])
@@ -202,8 +283,9 @@ def _authenticate_component(
     slot = _runtime_offset(MODULE_SLOT)
     require(body[slot:slot + 4] == STOCK_CLASS_BYTES,
             f"{profile}: stock CFF class-pointer guard drift")
-    require(end <= TAIL_TEXT_START,
-            f"{profile}: current Apollo component collides with CFF tail")
+    if not allow_host_tail_scatter:
+        require(end <= TAIL_TEXT_START,
+                f"{profile}: current Apollo component collides with CFF tail")
     return body, {
         "package": None,
         "component": {
@@ -250,6 +332,181 @@ def _build_sections(profile: str, directory: Path, config: dict[str, Any]) -> tu
         bodies[name] = body
     require(tuple(bodies) == SECTION_ORDER, f"{profile}: section order drift")
     return bodies, report
+
+
+def _pack_host_text(rows: list[dict[str, Any]],
+                    host_slots: list[dict[str, Any]]) \
+                    -> list[dict[str, Any]]:
+    work = [{**slot, "cursor": int(slot["start"]), "items": []}
+            for slot in host_slots]
+    for row in sorted(rows, key=lambda item: (int(item["size"]), item["name"]),
+                      reverse=True):
+        for slot in work:
+            alignment = int(row["alignment"])
+            start = (int(slot["cursor"]) + alignment - 1) & -alignment
+            forbidden = {int(value) for value in slot.get("forbidden_entries", [])}
+            while start in forbidden:
+                start += alignment
+            if start + int(row["size"]) <= int(slot["end_exclusive"]):
+                slot["items"].append({
+                    "input_section": row["name"], "start": start,
+                    "end_exclusive": start + int(row["size"]),
+                    "size": int(row["size"]), "alignment": alignment,
+                    "padding_before": start - int(slot["cursor"]),
+                })
+                slot["cursor"] = start + int(row["size"])
+                break
+        else:
+            raise BuildError(
+                f"CFF host-tail function does not fit: {row['name']}")
+    return [slot for slot in work if slot["items"]]
+
+
+def _host_linker_script(stock: list[dict[str, Any]],
+                        packed: list[dict[str, Any]]) -> str:
+    stock_selectors = "\n".join(
+        f"    *({row['name']})" for row in stock)
+    host_sections = []
+    index = 0
+    for slot in packed:
+        for item in slot["items"]:
+            item["output_section"] = f".cff_host_{index:03d}"
+            host_sections.append(
+                f"  {item['output_section']} 0x{item['start']:08X} :\n"
+                "  {\n"
+                f"    *({item['input_section']})\n"
+                "  }")
+            index += 1
+    return f"""/* SPDX-License-Identifier: MIT */
+SECTIONS
+{{
+  .cff_stock_rodata 0x{STOCK_INTERVAL[0]:08X} :
+  {{
+    *(.rodata)
+    *(.rodata.*)
+  }}
+  .cff_stock_text ALIGN(16) :
+  {{
+{stock_selectors}
+  }}
+  .cff_stock_exidx ALIGN(4) :
+  {{
+    *(.ARM.exidx*)
+    *(.ARM.extab*)
+  }}
+{chr(10).join(host_sections)}
+  ASSERT(ADDR(.cff_stock_text) + SIZEOF(.cff_stock_text) <= 0x{STOCK_INTERVAL[1]:08X}, "stock text overflow")
+  ASSERT(ADDR(.cff_stock_exidx) + SIZEOF(.cff_stock_exidx) <= 0x{STOCK_INTERVAL[1]:08X}, "stock exidx overflow")
+  /DISCARD/ :
+  {{
+    *(.comment)
+    *(.note.GNU-stack)
+    *(.llvm_addrsig)
+    *(.ARM.attributes)
+  }}
+}}
+"""
+
+
+def _build_host_sections(profile: str, directory: Path,
+                         config: dict[str, Any],
+                         host_slots: list[dict[str, Any]]) \
+                         -> tuple[dict[str, bytes], dict[str, Any]]:
+    """Relink the admitted CFF closure into stock and authenticated NOP tails."""
+    dependencies = config.get("dependencies", {})
+    _pin(SCATTER_ANALYZER, dependencies["scatter_analyzer"], "scatter analyzer")
+    _pin(SCATTER_MANIFEST, dependencies["scatter_manifest"], "scatter manifest")
+    scatter = _load_module(SCATTER_ANALYZER, "g2_cff_component_host_scatter")
+    size_module = scatter.load_module(
+        scatter.SIZE_ANALYZER, "g2_cff_component_host_size_dependency")
+    size_report = json.loads(size_module.MANIFEST.read_text(encoding="utf-8"))
+    selected = size_report["selected_candidate"]["profiles"]["apple-clang"]
+    map_symbols = set(
+        selected["final"]["materialized_complete_map_symbol_names"]
+    ) | set(selected["final"]["inlined_only_complete_map_symbol_names"])
+    require(len(map_symbols) == 101, "complete CFF source-function set drift")
+    builder = size_module.load_module(size_module.BUILDER)
+    compiler = builder.PROFILES.get(profile)
+    require(compiler is not None, f"no compiler for CFF profile: {profile}")
+    chosen = next(variant for variant in size_module.VARIANTS
+                  if variant.name == size_module.SELECTED)
+    builder.TARGET_FLAGS = size_module._flags(builder, chosen)
+    directory.mkdir(parents=True)
+    objects = {
+        "cff.o": directory / "cff.o",
+        "policy.o": directory / "policy.o",
+        "providers.o": directory / "providers.o",
+    }
+    builder._compile(compiler, size_module.CFF_SOURCE, objects["cff.o"])
+    builder._compile(compiler, size_module.POLICY, objects["policy.o"])
+    builder._compile(compiler, size_module.PROVIDERS, objects["providers.o"])
+    text = scatter._text_inputs(objects, builder)
+    stock, tail = scatter._partition_text(text)
+    packed = _pack_host_text(tail, host_slots)
+    script = _host_linker_script(stock, packed)
+    script_path = directory / "host-scatter.ld"
+    script_path.write_text(script, encoding="utf-8")
+    final = directory / "cff-host-scatter.elf"
+    bindings = {**builder.RETAINED_BINDINGS, "__aeabi_memcpy": 0x00439BE4}
+    builder.run([
+        str(builder.TOOLS["lld"]), "-m", "armelf", "-T", str(script_path),
+        *(f"--undefined={name}" for name in builder.REQUIRED_EXPORTS),
+        *(f"--defsym={name}=0x{address:08X}"
+          for name, address in sorted(bindings.items())),
+        *(str(path) for path in objects.values()), "-o", str(final),
+    ])
+    defined, undefined = builder._symbols(final)
+    relocations = builder._relocations(final, set(undefined))
+    require(not undefined and relocations["total"] == 0,
+            f"{profile}: host scatter retained link gaps")
+    require(set(builder.REQUIRED_EXPORTS) <= set(defined),
+            f"{profile}: host scatter public roots drift")
+    expected = {".cff_stock_rodata", ".cff_stock_text",
+                ".cff_stock_exidx"} | {
+        item["output_section"] for slot in packed for item in slot["items"]}
+    allocated = [row for row in scatter._sections(final, builder)
+                 if row.get("flags", 0) & 2 and row.get("size", 0)]
+    require({row["name"] for row in allocated} == expected,
+            f"{profile}: host scatter allocated-section drift")
+    bodies: dict[str, bytes] = {}
+    spans = []
+    planned = {item["output_section"]: item
+               for slot in packed for item in slot["items"]}
+    for row in allocated:
+        name = row["name"]
+        path = directory / f"{name[1:]}.bin"
+        builder.run([str(builder.TOOLS["objcopy"]), "--dump-section",
+                     f"{name}={path}", str(final)])
+        body = path.read_bytes()
+        require(len(body) == int(row["size"]),
+                f"{profile}: host scatter extraction size drift")
+        bodies[name] = body
+        if name in planned:
+            require(int(row["address"]) == int(planned[name]["start"]) and
+                    len(body) == int(planned[name]["size"]),
+                    f"{profile}: host function placement drift: {name}")
+        spans.append({"name": name, "start": int(row["address"]),
+                      "end_exclusive": int(row["address"]) + len(body),
+                      "size": len(body), "alignment": int(row["alignment"]),
+                      "sha256": digest(body),
+                      **({"input_section": planned[name]["input_section"]}
+                         if name in planned else {})})
+    spans.sort(key=lambda row: row["start"])
+    require(all(left["end_exclusive"] <= right["start"]
+                for left, right in zip(spans, spans[1:])),
+            f"{profile}: host scatter sections overlap")
+    return bodies, {
+        "mode": "authenticated-host-tail-scatter",
+        "sections": spans,
+        "host_packing": packed,
+        "linker_script": {"size": len(script.encode()),
+                          "sha256": digest(script.encode())},
+        "final_elf": {"size": final.stat().st_size,
+                      "sha256": sha256(final)},
+        "undefined_symbols": [], "relocations": relocations,
+        "tail_input_sections": [row["name"] for row in tail],
+        "tail_input_bytes": sum(int(row["size"]) for row in tail),
+    }
 
 
 def _validate_spans(report: dict[str, Any], bodies: dict[str, bytes]) -> list[dict[str, Any]]:
@@ -326,6 +583,48 @@ def _apply(
         "erased_gap_size": TAIL_TEXT_START - base_end,
         "erased_gap_byte": ERASED_BYTE,
         "nested_crc32": nested_crc,
+    }
+
+
+def _apply_host(base: bytes, spans: list[dict[str, Any]],
+                bodies: dict[str, bytes],
+                host_slots: list[dict[str, Any]]) \
+                -> tuple[bytes, dict[str, Any]]:
+    output = bytearray(base)
+    host_intervals = [(int(row["start"]), int(row["end_exclusive"]))
+                      for row in host_slots]
+    for span in spans:
+        start = int(span["start"])
+        end = int(span["end_exclusive"])
+        is_stock = STOCK_INTERVAL[0] <= start < end <= STOCK_INTERVAL[1]
+        is_host = any(left <= start < end <= right
+                      for left, right in host_intervals)
+        require(is_stock or is_host,
+                f"host-scatter section escaped authenticated intervals: {span['name']}")
+        offset = _runtime_offset(start)
+        require(offset + int(span["size"]) <= len(output),
+                f"host-scatter section escapes component: {span['name']}")
+        if is_host:
+            require(output[offset:offset + int(span["size"])] ==
+                    b"\x00\xBF" * (int(span["size"]) // 2),
+                    f"host-scatter compare-before-write guard drift: {span['name']}")
+        output[offset:offset + int(span["size"])] = bodies[span["name"]]
+    slot = _runtime_offset(MODULE_SLOT)
+    require(output[slot:slot + 4] == STOCK_CLASS_BYTES,
+            "class-pointer compare-before-write guard changed")
+    output[slot:slot + 4] = REPLACEMENT_CLASS_BYTES
+    struct.pack_into("<I", output, 0, 0x04000000 | len(output))
+    struct.pack_into("<I", output, 4, 0)
+    nested_crc = zlib.crc32(output[8:]) & 0xFFFFFFFF
+    struct.pack_into("<I", output, 4, nested_crc)
+    open_cfw = _load_module(OPEN_CFW, "g2_cff_component_open_cfw_host_final")
+    open_cfw.validate_apollo_main(bytes(output))
+    return bytes(output), {
+        "base_runtime_end_exclusive": RUN_BASE + len(base) - PREAMBLE_BYTES,
+        "runtime_end_exclusive": RUN_BASE + len(output) - PREAMBLE_BYTES,
+        "nested_crc32": nested_crc,
+        "host_slot_count": len(host_slots),
+        "host_scatter": True,
     }
 
 
@@ -452,6 +751,8 @@ def build(
     base_component: Path | None = None,
     config_path: Path = CONFIG, base_regions: list[dict[str, Any]] | None = None,
     observe: bool = False,
+    host_slots: list[dict[str, Any]] | None = None,
+    base_expected_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     config = _read_config(config_path)
     require((base_package is None) != (base_component is None),
@@ -459,15 +760,25 @@ def build(
     component, base = (
         _authenticate_base(base_package.resolve(), profile, config)
         if base_package is not None else
-        _authenticate_component(base_component.resolve(), profile, config)
+        _authenticate_component(
+            base_component.resolve(), profile, config,
+            expected_override=base_expected_override,
+            allow_host_tail_scatter=host_slots is not None)
     )
     with tempfile.TemporaryDirectory(prefix="opencfw-cff-component-") as raw:
         temporary = Path(raw)
-        bodies, scatter_report = _build_sections(
-            profile, temporary / "link", config
-        )
-        spans = _validate_spans(scatter_report, bodies)
-        candidate, placement = _apply(component, spans, bodies)
+        if host_slots is None:
+            bodies, scatter_report = _build_sections(
+                profile, temporary / "link", config
+            )
+            spans = _validate_spans(scatter_report, bodies)
+            candidate, placement = _apply(component, spans, bodies)
+        else:
+            bodies, scatter_report = _build_host_sections(
+                profile, temporary / "link", config, host_slots)
+            spans = scatter_report["sections"]
+            candidate, placement = _apply_host(
+                component, spans, bodies, host_slots)
 
         expected = _base_profile(config, profile).get("expected", {})
         observed = {"size": len(candidate), "sha256": digest(candidate)}
@@ -476,7 +787,7 @@ def build(
                     f"{profile}: final CFF component pin drift")
         regions = (
             region_partition(base_regions, len(component), spans, profile)
-            if base_regions is not None else None
+            if base_regions is not None and host_slots is None else None
         )
         report: dict[str, Any] = {
             "schema_version": 1,
@@ -486,7 +797,8 @@ def build(
             "component": {
                 **observed,
                 "runtime_start": RUN_BASE,
-                "runtime_end_exclusive": CANDIDATE_END,
+                "runtime_end_exclusive": int(
+                    placement["runtime_end_exclusive"]),
                 "growth_bytes": len(candidate) - len(component),
                 "nested_crc32": f"0x{placement['nested_crc32']:08X}",
             },
@@ -497,6 +809,15 @@ def build(
                 "sections": spans,
                 "unused_scattered_table_pool_bytes": 360,
                 "unused_scattered_table_pool_consumed": 0,
+                **({
+                    "host_slots_available": len(host_slots),
+                    "host_slot_capacity_bytes": sum(
+                        int(row["end_exclusive"]) - int(row["start"])
+                        for row in host_slots
+                    ),
+                    "host_slot_receipt_sha256": digest(canonical(host_slots)),
+                    "host_packing": scatter_report["host_packing"],
+                } if host_slots is not None else {}),
             },
             "module_class_patch": {
                 "runtime_address": f"0x{MODULE_SLOT:08X}",
@@ -508,7 +829,12 @@ def build(
             "scatter_manifest": {
                 "size": SCATTER_MANIFEST.stat().st_size,
                 "sha256": sha256(SCATTER_MANIFEST),
-                "profile_final_elf": scatter_report["final_elf"],
+                "profile_final_elf": (
+                    {"bytes": scatter_report["final_elf"]["size"],
+                     "sha256": scatter_report["final_elf"]["sha256"]}
+                    if host_slots is not None else
+                    scatter_report["final_elf"]
+                ),
                 "undefined_symbols": scatter_report["undefined_symbols"],
                 "relocations": scatter_report["relocations"],
             },
@@ -516,6 +842,7 @@ def build(
             "safety": {
                 "all_mutations_in_apollo_entry_6": True,
                 "cross_entry_atomicity_required": False,
+                "host_tail_scatter": host_slots is not None,
                 "hardware_validation_performed": False,
                 "automatic_flashing_authorized": False,
             },
@@ -569,15 +896,21 @@ def main() -> int:
         profile = _base_profile(config, args.profile)
         require(not (args.base_package and args.base_component),
                 "base package and base component are mutually exclusive")
-        package = (
-            args.base_package or G2 / profile["base_package"]["path"]
-            if args.base_component is None else None
-        )
+        package = args.base_package
+        component = args.base_component
+        host_slots = None
+        if package is None and component is None:
+            # The CFF stage is post-link: its canonical standalone input is the
+            # authenticated pre-CFF component, while base_package supplies only
+            # an explicit legacy/package-integration input when requested.
+            component = G2 / profile["base_component"]["path"]
+        if package is None:
+            host_slots = _canonical_host_slots(args.profile, profile)
         report = build(
             profile=args.profile, base_package=package,
-            base_component=args.base_component,
+            base_component=component,
             output_dir=args.output_dir, config_path=args.config,
-            observe=args.observe,
+            host_slots=host_slots, observe=args.observe,
         )
     except (BuildError, OSError, KeyError, ValueError) as error:
         print(f"G2 FreeType CFF component build failed: {error}", file=sys.stderr)

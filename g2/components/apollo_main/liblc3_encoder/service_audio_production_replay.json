@@ -1,9 +1,9 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "name": "liblc3_service_audio_production_order_replay",
   "target": "apollo_main",
   "firmware_version": "2.2.6.10",
-  "mode": "production-order-replay-proven-image-routing-blocked",
+  "mode": "production-routed-canonical-image-verified",
   "sources": {
     "runtime": {
       "path": "components/shared/liblc3/runtime_liblc3_target_runtime.c",
@@ -17,8 +17,8 @@
     },
     "replay_builder": {
       "path": "components/apollo_main/liblc3_encoder/build_service_audio_production_replay.py",
-      "size": 20009,
-      "sha256": "e6f2bc1ad9b0dfa57592c169a9c8255031f7abad1989806861bfc1666872e61c"
+      "size": 40246,
+      "sha256": "b680a104d0690ee0db758660838568190b7e88443c78e725fe00fe16f6a94a9b"
     },
     "suffix_analyzer": {
       "path": "tools/analyze_g2_liblc3_service_audio_suffix_pack.py",
@@ -46,6 +46,32 @@
       "path": "components/apollo_main/liblc3_encoder/service_audio_capacity_experiment.json",
       "size": 3656,
       "sha256": "daab69c12426e9dcd9713ae2233cd21e9fedc5b15dfa6d6ea926824e91e51ac9"
+    }
+  },
+  "canonical_profiles": {
+    "apple-clang": {
+      "core_report": {
+        "path": "build/canonical-observation-g2-final8/apple-a/build-report.json",
+        "size": 34215206,
+        "sha256": "4b20488e79e849bb15bbdb3fb4e31d4d4c355997371fef88798fa7509b94e4b3"
+      },
+      "component": {
+        "path": "build/canonical-observation-g2-final8/apple-a/liblc3-service-component.bin",
+        "size": 3956672,
+        "sha256": "301ffa0a891108dff13d5f2fd9b38b2b163c3142d635461d9a71213590c607e3"
+      }
+    },
+    "linux-clang": {
+      "core_report": {
+        "path": "build/canonical-observation-g2-final8/linux-a/build-report.json",
+        "size": 5283172,
+        "sha256": "21d3a5b6aba4effec64b5e0a5f7fc4a90bf29be667604b661229b33ec795c83b"
+      },
+      "component": {
+        "path": "build/canonical-observation-g2-final8/linux-a/liblc3-service-component.bin",
+        "size": 3956672,
+        "sha256": "7260477fe660b80f9966bdc7b3b72015c70a3e4134c3d0899119cf8a98a3813c"
+      }
     }
   },
   "target_profile": [
@@ -76,7 +102,7 @@
         "lld": "/opt/homebrew/bin/ld.lld",
         "objcopy": "/opt/homebrew/opt/llvm@22/bin/llvm-objcopy"
       },
-      "expected_report_sha256": "bfd15afbbb89881462facee37939a00e9d7b40da7b8e53bf18bc24182b91997c"
+      "expected_report_sha256": "776e4206a1c633443bdb63772dfbabb2f248c0331d231c83c0157567a907621c"
     },
     "linux-clang": {
       "tools": {
@@ -84,13 +110,13 @@
         "lld": "/opt/homebrew/bin/ld.lld",
         "objcopy": "/opt/homebrew/opt/llvm@22/bin/llvm-objcopy"
       },
-      "expected_report_sha256": "d18cfd2720e77c59ba780a866a683e7fee33f4c5e073ecedfa38a6adeee03b67"
+      "expected_report_sha256": "e1306bfef9f51a619677d6fdc494dcf649ba681640ffe041c764b417297bbc40"
     }
   },
   "routing": {
-    "production_placement": false,
-    "service_audio_routed": false,
-    "firmware_image_emitted": false,
+    "production_placement": true,
+    "service_audio_routed": true,
+    "firmware_image_emitted": true,
     "hardware_operations": false
   }
 }

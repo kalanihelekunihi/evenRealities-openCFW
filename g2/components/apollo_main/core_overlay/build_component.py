@@ -45,9 +45,11 @@ _CANONICAL_INTERMEDIATE_NAMES = {
     "liblc3_payload": "liblc3-payload.bin",
     "liblc3_component": "liblc3-component.bin",
     "pt_component": "pt-component.bin",
+    "liblc3_service_component": "liblc3-service-component.bin",
 }
 CFF_COMPONENT_ROOT = COMPONENT_ROOT.parent / "freetype_cff_scatter"
 CFF_SHARED_ROOT = OPENCFW_ROOT / "components/shared/freetype_cff"
+LC3_SERVICE_ROOT = COMPONENT_ROOT.parent / "liblc3_encoder"
 PT_AGGREGATE_LICENSE = "MIT AND Apache-2.0"
 PT_APACHE_SOURCE = (
     "components/apollo_main/core_overlay/pt_protocol_lc3_setup.c"
@@ -142,6 +144,8 @@ def _canonical_input_paths(
     fixed.update(COMPONENT_ROOT.glob("pt_protocol_*.c"))
     fixed.update(COMPONENT_ROOT.glob("pt_protocol_*.h"))
     for directory in (
+        LC3_SERVICE_ROOT,
+        OPENCFW_ROOT / "components/shared/liblc3",
         CFF_SHARED_ROOT,
         OPENCFW_ROOT / "third_party/freetype",
         OPENCFW_ROOT / "research/candidates/freetype/g2_config",
@@ -1098,6 +1102,19 @@ def _load_cff_scatter_builder() -> Any:
     return module
 
 
+def _load_liblc3_service_audio_builder() -> Any:
+    path = LC3_SERVICE_ROOT / "build_service_audio_production_replay.py"
+    specification = importlib.util.spec_from_file_location(
+        "open_cfw_liblc3_service_audio_builder", path
+    )
+    if specification is None or specification.loader is None:
+        raise BuildError(f"cannot load LC3 service-audio builder: {path}")
+    module = importlib.util.module_from_spec(specification)
+    sys.modules[specification.name] = module
+    specification.loader.exec_module(module)
+    return module
+
+
 def _stage_config(config: dict[str, Any], profile: str) -> dict[str, Any]:
     """Return the byte-identical pre-provider core configuration."""
     stage = copy.deepcopy(config)
@@ -1385,6 +1402,7 @@ def build(
             "post-link providers; review and pin both stages together"
         )
     pt_builder = _load_pt_protocol_builder()
+    lc3_service_builder = _load_liblc3_service_audio_builder()
     cff_builder = _load_cff_scatter_builder()
     toolchain_identity: dict[str, Any] | None = None
     recorded_builtin_include: Path | None = None
@@ -1505,8 +1523,8 @@ def build(
                 raise BuildError("canonical toolchain identity changed during build")
         if not record_canonical:
             _verify_pt_provider_profile(config, profile, pt_report)
-        pre_cff_component_path = pt_output / "ota_s200_firmware_ota.bin"
-        pre_cff_component = pre_cff_component_path.read_bytes()
+        pt_component_path = pt_output / "ota_s200_firmware_ota.bin"
+        pt_component = pt_component_path.read_bytes()
         if record_canonical:
             pt_interval = (pt_output / "pt-protocol-in-place.bin").read_bytes()
             pt_placement = pt_report["placement"]
@@ -1515,11 +1533,54 @@ def build(
                 or sha256(pt_interval) != pt_placement["interval_sha256"]
             ):
                 raise BuildError("canonical PT interval artifact changed")
+        route_core_report = copy.deepcopy(stage_report)
+        route_core_report["component"].update({
+            "size": len(pt_component), "sha256": sha256(pt_component)
+        })
+        if not isinstance(provider_report["placement"].get("sections"), dict):
+            route_core_report["overlay"]["overlay_end_exclusive"] = (
+                int(config["run_base"]) + len(pt_component)
+                - int(config["preamble_bytes"])
+            )
+        route_core_report["overlay"]["post_link_providers"] = {
+            "liblc3_ltpf": {
+                "placement": copy.deepcopy(provider_report["placement"]),
+                "payload": {
+                    "size": int(provider_report["overlay"]["size"]),
+                    "sha256": provider_report["overlay"]["sha256"],
+                },
+            },
+            "pt_protocol": {
+                "placement": copy.deepcopy(pt_report["placement"]),
+            },
+        }
+        lc3_service_output = temporary / "liblc3-service-audio"
+        lc3_service_report = lc3_service_builder.route_component(
+            base_component=pt_component_path,
+            core_config=config,
+            core_report=route_core_report,
+            output_dir=lc3_service_output,
+            profile=profile,
+        )
+        pre_cff_component_path = (
+            lc3_service_output / "ota_s200_firmware_ota.bin"
+        )
+        pre_cff_component = pre_cff_component_path.read_bytes()
+        if (
+            int(lc3_service_report["component"]["size"])
+            != len(pre_cff_component)
+            or lc3_service_report["component"]["sha256"]
+            != sha256(pre_cff_component)
+        ):
+            raise BuildError("LC3 service-audio component receipt changed")
         cff_output = temporary / "freetype-cff-scatter"
         cff_report = cff_builder.build(
             profile=profile,
             base_component=pre_cff_component_path,
             output_dir=cff_output,
+            host_slots=lc3_service_report["residual_host_slots"],
+            base_expected_override=lc3_service_report["component"],
+            observe=record_canonical,
         )
         final_component = (
             cff_output / "ota_s200_firmware_ota.bin"
@@ -1540,7 +1601,7 @@ def build(
         final_overlay = (
             stage_overlay
             if isinstance(placement_sections, dict)
-            else pre_cff_component[official_size:]
+            else pt_component[official_size:]
         )
 
     observed = {
@@ -1559,7 +1620,7 @@ def build(
     provider_payload_size = int(provider_report["overlay"]["size"])
     cave_placement = isinstance(placement_sections, dict)
     if cave_placement:
-        if len(pre_cff_component) != stage_component_size:
+        if len(pt_component) != stage_component_size:
             raise BuildError("canonical cave provider changed component size")
         admitted_source_bytes = sum(
             int(item["size"]) for item in placement_sections.values()
@@ -1568,7 +1629,7 @@ def build(
             raise BuildError("canonical liblc3 cave byte accounting changed")
         generated_delta = -admitted_source_bytes + 4
     else:
-        admitted_source_bytes = len(pre_cff_component) - stage_component_size
+        admitted_source_bytes = len(pt_component) - stage_component_size
         if admitted_source_bytes < provider_payload_size:
             raise BuildError("canonical appended provider accounting changed")
         generated_delta = 4
@@ -1579,7 +1640,7 @@ def build(
                 "size": int(function["size"]),
             }
         overlay_report["overlay_end_exclusive"] = (
-            config["run_base"] + len(pre_cff_component) - config["preamble_bytes"]
+            config["run_base"] + len(pt_component) - config["preamble_bytes"]
         )
         overlay_report["overlay_end_exclusive_hex"] = (
             f"0x{overlay_report['overlay_end_exclusive']:08X}"
@@ -1665,6 +1726,24 @@ def build(
                         provider_report["historical_non_corpus_routing"]
                     ),
                 },
+                "liblc3_service_audio": {
+                    "license": "Apache-2.0 AND MIT",
+                    "component": copy.deepcopy(
+                        lc3_service_report["component"]
+                    ),
+                    "suffix": copy.deepcopy(lc3_service_report["suffix"]),
+                    "target_runtime": copy.deepcopy(
+                        lc3_service_report["target_runtime"]
+                    ),
+                    "lc3_finalization": copy.deepcopy(
+                        lc3_service_report["lc3_finalization"]
+                    ),
+                    "service_audio_entry_guards": copy.deepcopy(
+                        lc3_service_report["service_audio_entry_guards"]
+                    ),
+                    "routing": copy.deepcopy(lc3_service_report["routing"]),
+                    "hardware": copy.deepcopy(lc3_service_report["hardware"]),
+                },
                 "pt_protocol": {
                     "license": PT_AGGREGATE_LICENSE,
                     "sources": copy.deepcopy(pt_report["source"]["files"]),
@@ -1719,10 +1798,60 @@ def build(
         int(item["size"]) for item in cff_sections
         if item["name"] == ".cff_stock_text"
     )
-    cff_erased_gap_bytes = int(cff_report["placement"]["erased_gap_size"])
+    cff_stock_exidx_bytes = next(
+        int(item["size"]) for item in cff_sections
+        if item["name"] == ".cff_stock_exidx"
+    )
+    cff_erased_gap_bytes = int(cff_report["placement"].get(
+        "erased_gap_size", 0
+    ))
     cff_pointer_bytes = len(bytes.fromhex(
         cff_report["module_class_patch"]["replacement_hex"]
     ))
+    lc3_source_bytes = (
+        int(lc3_service_report["target_runtime"]["total_text_bytes"])
+        + sum(int(row["size"]) for row in
+              lc3_service_report["lc3_finalization"]["artifacts"].values())
+    )
+    lc3_veneer_bytes = sum(len(bytes.fromhex(row["replacement_hex"]))
+                           for row in lc3_service_report[
+                               "service_audio_entry_guards"])
+    lc3_layout_padding_bytes = sum(
+        int(row["padding_before"])
+        for row in lc3_service_report["lc3_finalization"]["layout"]
+    )
+    lc3_suffix_padding_bytes = int(
+        lc3_service_report["suffix"]["internal_padding_bytes"]
+    )
+    lc3_component_growth_bytes = (
+        int(lc3_service_report["component"]["size"]) - len(pt_component)
+    )
+    lc3_source_net_growth_bytes = (
+        sum(int(row["size"]) for row in
+            lc3_service_report["lc3_finalization"]["artifacts"].values())
+        + lc3_layout_padding_bytes
+        - lc3_suffix_padding_bytes
+        - int(lc3_service_report["suffix"]["payload_bytes"])
+    )
+    lc3_generated_extension_bytes = (
+        lc3_component_growth_bytes - lc3_source_net_growth_bytes
+    )
+    if lc3_generated_extension_bytes < 0:
+        raise BuildError("LC3 service component growth accounting changed")
+    cff_host_source_bytes = sum(
+        int(row["size"]) for row in cff_sections
+        if row["name"].startswith(".cff_host_")
+    )
+    prior_accounting = {
+        key: int(component_report.get(key, 0))
+        for key in (
+            "size",
+            "source_owned_bytes",
+            "generated_patch_site_bytes",
+            "generated_wrapper_bytes",
+            "opaque_base_bytes",
+        )
+    }
     component_report.update(
         {
             "size": len(final_component),
@@ -1730,14 +1859,20 @@ def build(
             "opaque_base_bytes": int(component_report["opaque_base_bytes"])
             - patch_bytes - pt_capacity - pt_patch_bytes
             - cff_stock_rodata_bytes - cff_stock_text_bytes
-            - cff_pointer_bytes,
+            - cff_stock_exidx_bytes
+            - cff_pointer_bytes - lc3_veneer_bytes,
             "source_owned_bytes": int(component_report["source_owned_bytes"])
-            + admitted_source_bytes + pt_payload_size + cff_source_bytes,
+            + admitted_source_bytes + pt_payload_size + cff_source_bytes
+            + lc3_source_bytes,
             "generated_patch_site_bytes": int(
                 component_report["generated_patch_site_bytes"]
             )
             + generated_delta + pt_padding_size + pt_patch_bytes
-            + cff_erased_gap_bytes + cff_pointer_bytes,
+            + cff_erased_gap_bytes + cff_pointer_bytes + lc3_veneer_bytes
+            + lc3_layout_padding_bytes - lc3_suffix_padding_bytes
+            - int(lc3_service_report["target_runtime"]["total_text_bytes"])
+            - int(lc3_service_report["suffix"]["payload_bytes"])
+            - cff_host_source_bytes + lc3_generated_extension_bytes,
             "replaced_stock_data_bytes": int(
                 component_report.get("replaced_stock_data_bytes", 0)
             ) + cff_stock_rodata_bytes,
@@ -1746,9 +1881,38 @@ def build(
             ) + cff_stock_text_bytes,
             "generated_erased_padding_bytes": int(
                 component_report.get("generated_erased_padding_bytes", 0)
-            ) + cff_erased_gap_bytes,
+            ) + cff_erased_gap_bytes + lc3_generated_extension_bytes,
         }
     )
+    if (int(component_report["source_owned_bytes"]) +
+            int(component_report["generated_patch_site_bytes"]) +
+            int(component_report.get("generated_wrapper_bytes", 0)) +
+            int(component_report["opaque_base_bytes"]) !=
+            int(component_report["size"])):
+        accounted = (
+            int(component_report["source_owned_bytes"])
+            + int(component_report["generated_patch_site_bytes"])
+            + int(component_report.get("generated_wrapper_bytes", 0))
+            + int(component_report["opaque_base_bytes"])
+        )
+        raise BuildError(
+            "canonical component byte accounting does not conserve: "
+            f"accounted={accounted}, size={component_report['size']}, "
+            f"delta={accounted - int(component_report['size'])}, "
+            f"prior={prior_accounting}, admitted={admitted_source_bytes}, "
+            f"generated_delta={generated_delta}, patch={patch_bytes}, "
+            f"pt_capacity={pt_capacity}, pt_payload={pt_payload_size}, "
+            f"pt_padding={pt_padding_size}, cff_source={cff_source_bytes}, "
+            f"cff_host={cff_host_source_bytes}, "
+            f"cff_stock={cff_stock_rodata_bytes + cff_stock_text_bytes + cff_stock_exidx_bytes}, "
+            f"cff_pointer={cff_pointer_bytes}, lc3_source={lc3_source_bytes}, "
+            f"lc3_veneer={lc3_veneer_bytes}, "
+            f"lc3_layout_padding={lc3_layout_padding_bytes}, "
+            f"lc3_suffix_padding={lc3_suffix_padding_bytes}, "
+            f"lc3_generated_extension={lc3_generated_extension_bytes}, "
+            f"lc3_text={lc3_service_report['target_runtime']['total_text_bytes']}, "
+            f"lc3_suffix_payload={lc3_service_report['suffix']['payload_bytes']}"
+        )
     stage_report["sources"].extend(provider_report["sources"])
     stage_report["sources"].extend(
         {
@@ -1797,6 +1961,22 @@ def build(
                 "historical_non_corpus_routing"
             ],
         },
+        "liblc3_service_audio": {
+            "license": "Apache-2.0 AND MIT",
+            "component": copy.deepcopy(lc3_service_report["component"]),
+            "suffix": copy.deepcopy(lc3_service_report["suffix"]),
+            "target_runtime": copy.deepcopy(
+                lc3_service_report["target_runtime"]
+            ),
+            "lc3_finalization": copy.deepcopy(
+                lc3_service_report["lc3_finalization"]
+            ),
+            "service_audio_entry_guards": copy.deepcopy(
+                lc3_service_report["service_audio_entry_guards"]
+            ),
+            "routing": copy.deepcopy(lc3_service_report["routing"]),
+            "hardware": copy.deepcopy(lc3_service_report["hardware"]),
+        },
         "pt_protocol": {
             "license": PT_AGGREGATE_LICENSE,
             "sources": copy.deepcopy(pt_report["source"]["files"]),
@@ -1842,7 +2022,8 @@ def build(
             "core_stage_component": stage_component,
             "liblc3_payload": liblc3_payload,
             "liblc3_component": liblc3_component,
-            "pt_component": pre_cff_component,
+            "pt_component": pt_component,
+            "liblc3_service_component": pre_cff_component,
         }
         intermediate_records = {}
         for key, name in _CANONICAL_INTERMEDIATE_NAMES.items():
@@ -1864,7 +2045,7 @@ def build(
             ),
         })
         stage_report["canonical_observation"] = {
-            "schema_version": 3,
+            "schema_version": 4,
             "complete": True,
             "profile": profile,
             "source_inputs": _canonical_input_report(input_snapshot),
@@ -1878,6 +2059,9 @@ def build(
             "core_stage": stage_pin_observation,
             "liblc3_ltpf": copy.deepcopy(
                 stage_report["canonical_stages"]["liblc3_ltpf"]
+            ),
+            "liblc3_service_audio": copy.deepcopy(
+                stage_report["canonical_stages"]["liblc3_service_audio"]
             ),
             "pt_protocol": pt_observation,
             "freetype_cff": copy.deepcopy(

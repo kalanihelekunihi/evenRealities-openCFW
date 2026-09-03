@@ -19,16 +19,16 @@ ANALYZER = ROOT / "tools/analyze_g2_dual_profile_ownership.py"
 sys.path.insert(0, str(ROOT / "tools"))
 import open_cfw  # noqa: E402
 EVIDENCE = (
-    ROOT / "build/canonical-observation/apple-a/build-report.json",
-    ROOT / "build/canonical-observation/apple-b/build-report.json",
-    ROOT / "build/canonical-observation/linux-a/build-report.json",
-    ROOT / "build/canonical-observation/linux-b/build-report.json",
+    ROOT / "build/canonical-observation-g2-final9/apple-a/build-report.json",
+    ROOT / "build/canonical-observation-g2-final9/apple-b/build-report.json",
+    ROOT / "build/canonical-observation-g2-final9/linux-a/build-report.json",
+    ROOT / "build/canonical-observation-g2-final9/linux-b/build-report.json",
     ROOT / "components/bootloader/core_overlay/build/build-report.json",
     ROOT / "build/canonical-provider/linux-clang/apollo_bootloader/build-report.json",
-    ROOT / "build/postapply-package-apple/build-report.json",
-    ROOT / "build/postapply-package-apple/flash-plan.json",
-    ROOT / "build/postapply-package-linux/build-report.json",
-    ROOT / "build/postapply-package-linux/flash-plan.json",
+    ROOT / "build/source/build-report.json",
+    ROOT / "build/source/flash-plan.json",
+    ROOT / "build/source-linux/build-report.json",
+    ROOT / "build/source-linux/flash-plan.json",
 )
 
 
@@ -130,12 +130,12 @@ class DualProfileObservationIndependenceTests(unittest.TestCase):
         analyzer = load_analyzer()
         expected = {
             "apple-clang": (
-                ROOT / "build/canonical-observation/apple-a/build-report.json",
-                ROOT / "build/canonical-observation/apple-b/build-report.json",
+                ROOT / "build/canonical-observation-g2-final9/apple-a/build-report.json",
+                ROOT / "build/canonical-observation-g2-final9/apple-b/build-report.json",
             ),
             "linux-clang": (
-                ROOT / "build/canonical-observation/linux-a/build-report.json",
-                ROOT / "build/canonical-observation/linux-b/build-report.json",
+                ROOT / "build/canonical-observation-g2-final9/linux-a/build-report.json",
+                ROOT / "build/canonical-observation-g2-final9/linux-b/build-report.json",
             ),
         }
         self.assertEqual(analyzer.OBSERVATIONS, expected)
@@ -341,17 +341,17 @@ class DualProfileOwnershipTests(unittest.TestCase):
     def test_checked_companion_conserves_both_profiles(self):
         expected = {
             "apple-clang": {
-                "production_source": 475527,
-                "generated_or_reconstructible": 494744,
+                "production_source": 562151,
+                "generated_or_reconstructible": 414544,
                 "candidate_source_not_routed": 29396,
-                "typed_retained_or_external": 3749965,
+                "typed_retained_or_external": 3743745,
                 "unclassified": 0,
             },
             "linux-clang": {
-                "production_source": 257897,
-                "generated_or_reconstructible": 411980,
+                "production_source": 344453,
+                "generated_or_reconstructible": 331848,
                 "candidate_source_not_routed": 29396,
-                "typed_retained_or_external": 4050343,
+                "typed_retained_or_external": 4044123,
                 "unclassified": 0,
             },
         }
@@ -385,13 +385,13 @@ class DualProfileOwnershipTests(unittest.TestCase):
     def test_linux_profile_coarse_label_error_is_not_accepted(self):
         row = self.report["profiles"]["linux-clang"]
         reconciliation = row["apollo_flash_label_reconciliation"]
-        self.assertEqual(reconciliation["bytes_requiring_reconciliation"], 274414)
+        self.assertEqual(reconciliation["bytes_requiring_reconciliation"], 3359246)
         self.assertEqual(
             reconciliation["plan_minus_authoritative"],
             {
-                "source": 274414,
-                "generated_addressed": -1936,
-                "retained": -272478,
+                "source": 149006,
+                "generated_addressed": 3210240,
+                "retained": -3359246,
                 "component_container_metadata": 0,
             },
         )
@@ -410,7 +410,7 @@ class DualProfileOwnershipTests(unittest.TestCase):
         self.assertEqual(
             row["apollo_flash_label_reconciliation"]
             ["bytes_requiring_reconciliation"],
-            17800,
+            120246,
         )
         self.assertEqual(
             row["package"]["address_status_ownership_mode"],
@@ -670,9 +670,9 @@ class DualProfileOwnershipTests(unittest.TestCase):
         plan = json.loads((root / "flash-plan.json").read_text())
         build["providers"].pop()
         records = [
-            {"path": "build/postapply-package-apple/build-report.json",
+            {"path": "build/source/build-report.json",
              "size": 1, "sha256": "0" * 64},
-            {"path": "build/postapply-package-apple/flash-plan.json",
+            {"path": "build/source/flash-plan.json",
              "size": 1, "sha256": "0" * 64},
         ]
         with (

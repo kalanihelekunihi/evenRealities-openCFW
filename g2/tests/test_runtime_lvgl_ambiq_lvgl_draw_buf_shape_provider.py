@@ -96,13 +96,13 @@ class LVGLDrawBufferShapeProviderTests(unittest.TestCase):
             "src/draw/lv_draw_buf.c", "src/draw/lv_draw_buf.h",
             "src/draw/lv_draw_buf_private.h", "src/core/lv_global.h",
         })
-        self.assertEqual(report["missing_provider_count"], 11)
+        self.assertEqual(report["missing_provider_count"], 0)
         missing = {row["symbol"] for row in report["missing_provider_ledger"]}
         self.assertNotIn("lv_draw_buf_create", missing)
         self.assertNotIn("lv_draw_buf_reshape", missing)
         self.assertEqual(
             report["maximal_scoped_candidate_closure"]["expected_residual_symbol_digest"],
-            "f9d7f5b3fc8db9a19441ec0c4991ac9161c0ae46583e56c2a2298f2794732744",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         )
 
 

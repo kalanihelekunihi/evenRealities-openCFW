@@ -2892,6 +2892,79 @@ class LegacyTailIdempotenceTests(unittest.TestCase):
                     tampered_canonical, segments, config
                 )
 
+    def test_explicit_schema_migration_derives_new_authenticated_aliases(self):
+        config = {"run_base": 0x1000, "preamble_bytes": 0}
+        templates = [{
+            "name": "old_leaf",
+            "function": "Old source leaf",
+            "address_status": "source_compiled",
+            "file_offset": 0x200,
+            "size": 4,
+            "output": "old.bin",
+            "target": "apollo510b_internal_mram",
+            "target_address": 0x1200,
+        }]
+        segments = [
+            {
+                "identity": "new_leaf", "part": "alignment_before",
+                "status": "generated_alignment", "file_offset": 0x200,
+                "size": 2,
+            },
+            {
+                "identity": "new_leaf", "part": "text",
+                "status": "source_compiled", "file_offset": 0x202,
+                "size": 6,
+            },
+        ]
+        with self.patches()[0], self.patches()[1], self.patches()[2], \
+                self.patches()[3], mock.patch.object(
+                    admission, "LEGACY_RETIRED_ALIGNMENT_ALIASES", set()
+                ):
+            with self.assertRaisesRegex(
+                admission.AdmissionError, "bijectively"
+            ):
+                admission._legacy_compatible_tail(
+                    templates, segments, config
+                )
+            migrated = admission._legacy_compatible_tail(
+                templates, segments, config, allow_schema_migration=True
+            )
+            self.assertEqual(
+                [row["address_status"] for row in migrated],
+                ["generated_alignment", "source_compiled"],
+            )
+            self.assertEqual(
+                [(row["file_offset"], row["size"]) for row in migrated],
+                [(0x200, 2), (0x202, 6)],
+            )
+            self.assertTrue(all(
+                row["name"].startswith("apollo_core_canonical_new-leaf_")
+                for row in migrated
+            ))
+            self.assertEqual(
+                admission._legacy_compatible_tail(
+                    migrated, segments, config
+                ),
+                migrated,
+            )
+            post_link = copy.deepcopy(migrated)
+            post_link.append({
+                "name": "post_link_transition",
+                "function": "Authenticated post-link transition",
+                "address_status": "generated_source_data_replacement",
+                "file_offset": 0x208,
+                "size": 2,
+                "output": "post-link.bin",
+                "target": "apollo510b_internal_mram",
+                "target_address": 0x1208,
+            })
+            self.assertEqual(
+                admission._legacy_compatible_tail(
+                    post_link, segments, config, allow_schema_migration=True
+                ),
+                migrated,
+            )
+
 
 class RegionSynchronizationTests(unittest.TestCase):
     def setUp(self):

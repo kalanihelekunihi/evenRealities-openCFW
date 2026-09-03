@@ -40,9 +40,9 @@ PRODUCTION_FILES = {
     RUNTIME_TEST: (7_754, "08f5c0ef4e953e08700112e8ba6a9097b01e7246e7b3ee0fa9e527bec662ffea"),
 }
 PRODUCTION_OVERLAY = (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae")
-PRODUCTION_COMPONENT = (3_956_468, "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2")
-PRODUCTION_PACKAGE = (4_750_576, "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6")
-PRODUCTION_FLASH_PLAN = (4_881_053, "e540570208e616cc3de20af268da55d17fbf59f918aee143be8a902449253262")
+PRODUCTION_COMPONENT = (3_956_672, "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef")
+PRODUCTION_PACKAGE = (4_750_780, "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27")
+PRODUCTION_FLASH_PLAN = (4_961_300, "f2625775d8a7b3c81c8862db00979cdcf4965eeb003e4b6b84e8cb2d8c1293b9")
 CONFIG_LEAF_CONTRACT_SHA256 = "48f8f665bc34c29cb0abd2061286cc0f38fc39a831d0bd49a6eed092dcbf6583"
 BUILD_LEAF_CONTRACT_SHA256 = "96e15d2840bbe09221a8859ae955be520c919faf5178ff7a1222a6fff7d4adf3"
 ROUTE_CONTRACT_SHA256 = "f95204934ead6d0799758732f008414ef10c9ca5b296de97ead52b61e59dc4bd"
@@ -222,7 +222,7 @@ def verify_production() -> dict:
         "flash_regions", "unresolved_flash_regions",
         "container_only_regions", "protected_regions",
     ))
-    if counts != (7006, 0, 6, 6):
+    if counts != (7104, 0, 8, 6):
         raise AuditError("HCI command-core flash-plan counts changed")
     return {
         "status": "production-routed",

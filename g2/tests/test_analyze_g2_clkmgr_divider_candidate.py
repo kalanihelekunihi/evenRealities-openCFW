@@ -48,8 +48,8 @@ class ClockManagerDividerAdmissionTests(unittest.TestCase):
                 report["production"]["package"]["sha256"],
             ),
             (
-                4_677_046,
-                "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4",
+                4_750_780,
+                "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27",
             ),
         )
         self.assertEqual(
@@ -58,8 +58,8 @@ class ClockManagerDividerAdmissionTests(unittest.TestCase):
                 report["production"]["linux_clang"]["package"]["sha256"],
             ),
             (
-                4_469_364,
-                "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e",
+                4_750_764,
+                "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559",
             ),
         )
 

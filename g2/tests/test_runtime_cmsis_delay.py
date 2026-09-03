@@ -71,7 +71,7 @@ class RuntimeCmsisDelayTests(unittest.TestCase):
         manifest=json.loads(MANIFEST.read_text());main=manifest["component_overrides"]["apollo_main"]
         region=next(x for x in main["regions"] if x["name"]=="apollo_cmsis_delay_source_leaf")
         self.assertEqual((region["file_offset"],region["size"],region["target_address"]),(3658760,30,8082408))
-        self.assertEqual((manifest["package"]["expected_size"],manifest["package"]["expected_sha256"]),(4677046,"46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"))
+        self.assertEqual((manifest["package"]["expected_size"],manifest["package"]["expected_sha256"]),(4750780,"49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"))
 
 
 if __name__ == "__main__": unittest.main()

@@ -70,8 +70,25 @@ class G2CompressLogCoreTests(unittest.TestCase):
         self.assertEqual(p["freertos_kernel_commit"], "def7d2df2b0506d3d249334974f51e427c17a41c")
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
 
-    def test_not_production_routed(self):
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_route(self):
+        p = self.report["production"]
+        self.assertTrue(p["production_routed"])
+        self.assertEqual(
+            (
+                p["routed_functions"], p["stock_redirects"],
+                p["replaced_stock_bytes"], p["strict_relocations"],
+                p["profile_text_bytes"], p["complete_firmware_profiles"],
+            ),
+            (
+                8, 8, 2300, 66,
+                {"apple-clang": 2498, "linux-clang": 2498},
+                ["apple-clang", "linux-clang"],
+            ),
+        )
+        self.assertEqual(
+            self.report["hardware"]["validation"],
+            "blocked by unavailable physical evidence",
+        )
 
 
 if __name__ == "__main__":

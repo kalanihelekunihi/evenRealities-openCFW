@@ -23,7 +23,10 @@ The object embeds no third-party function definition and provides no new
 version discriminator. Its dependencies terminate at already identified IAR
 DLIB, EasyLogger, FreeRTOS-Kernel/port, CMSIS-FreeRTOS, and first-party service
 seams. No historical private G2 producing commit is observable in the binary.
-The object is not production-routed by OpenCFW.
+OpenCFW now production-routes a clean-room C implementation of all eight
+functions in both reviewed compiler profiles. Eight guarded stock-entry
+redirects replace all 2,300 stock executable bytes while preserving the
+external ABI and the existing whole-image compact-output ingress.
 
 ## Reproducible evidence
 
@@ -36,7 +39,10 @@ make compress-log-core-closure
 The fail-closed analyzer authenticates the official G2 2.2.6.10 image, three
 pinned manifests, all function bodies, M-profile Thumb control flow, direct
 call topology, whole-image entry topology, retained strings, external literal
-cells, upstream provenance records, and production-overlay exclusion.
+cells, upstream provenance records, the production C/header identities, all
+eight strict relocated leaves, all eight guarded redirects, and the Apple and
+Linux complete-firmware provider pins. The same target also executes the host
+behavior harness and compiles the implementation as freestanding ARM C.
 
 The ordinary decoder used by several earlier object audits is insufficient
 here because the code contains M-profile system instructions such as `MRS`.
@@ -126,9 +132,10 @@ commit for this compact format.
 invocation it drains at most nine full 4,096-byte blocks through the
 compress-log port. The force-sync function drains full blocks and then the
 remaining partial record data, reporting block, remainder, and byte totals.
-The port implementation is a distinct retained translation unit and is the
-next closure target; this report treats its entry at `0x0044A798` only as a
-first-party provider seam.
+The port implementation is a distinct translation unit whose complete
+production source route is independently authenticated by
+`make compress-log-port-closure`; this core calls its source-owned entry at
+`0x0044A798` through a strict relocation.
 
 ## Provider boundary
 
@@ -150,16 +157,17 @@ The relevant authenticated source selections remain:
 These commits explain the provider functions only. They do not identify the
 private G2 compact-log hook or encoder's historical source commit.
 
-## OpenCFW implication
+## OpenCFW production implementation
 
-The dependency shortcut is now explicit: OpenCFW can reuse the authenticated
-CMSIS/FreeRTOS and EasyLogger selections around this object, but it must
-recreate the compact-record encoder, ring policy, and persistence cadence as
-first-party compatibility behavior. A later production implementation should
-keep the existing entry ABI at `0x0043CE9E`, because its 5,718 direct callers
-make caller-by-caller rewriting needlessly broad. It should not transplant
-upstream `elog_output` at that address.
+`components/apollo_main/core_overlay/compress_log_core.c` recreates the
+compact-record encoder, ring policy, mutex/critical-section handling, and
+persistence cadence as first-party compatibility behavior. The route keeps
+the existing entry ABI at `0x0043CE9E`, so the 5,726 authenticated direct
+callers continue to use one guarded replacement. It does not transplant
+upstream `elog_output` at that address. The eight production leaves total
+2,498 bytes in each reviewed profile and carry 66 authenticated strict
+relocations to source-owned or explicitly retained policy providers.
 
 Runtime equivalence, flash wear, concurrent producer stress, and power-loss
-recovery still require target hardware. This audit used no device, signing,
-flashing, erase, or runtime operation.
+recovery remain **blocked by unavailable physical evidence**. This audit used
+no device, signing, flashing, erase, or runtime operation.

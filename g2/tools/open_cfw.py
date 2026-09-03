@@ -53,12 +53,12 @@ CASE_RUN_BASE = 0x08000000
 #: blobs are never given profile overrides.
 DEFAULT_TOOLCHAIN_PROFILE = "apple-clang"
 DUAL_PROFILE_OWNERSHIP_PACKAGES = {
-    "apple-clang": "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6",
-    "linux-clang": "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2",
+    "apple-clang": "f2842600b84f303c40d2d299761c1abc0a7083acc05f2d378be9a045b0d9a846",
+    "linux-clang": "e534ffe034360b24fffc3d7fc50988234fc48ae20f6e8afa8be2507247c8cd39",
 }
 DUAL_PROFILE_OWNERSHIP_MANIFESTS = {
-    "apple-clang": "fc65d95b6b29aa9ca888a4f02bd99787f16da5b69ae0ac72660d1ed45ad7fba1",
-    "linux-clang": "124046ef10949406a6c1ad517807513b9425261b33604054c9597670252504a5",
+    "apple-clang": "6cd8fed2d29687a02d5cf30692a5083ab4e629081d48d5db033bad879fc85e9f",
+    "linux-clang": "6cd8fed2d29687a02d5cf30692a5083ab4e629081d48d5db033bad879fc85e9f",
 }
 DUAL_PROFILE_OWNERSHIP_COMPONENTS = frozenset(
     {"ble_em9305", "apollo_bootloader", "apollo_main"}
@@ -172,6 +172,25 @@ def profile_pins(record: dict[str, Any], profile_id: str) -> dict[str, Any] | No
             f"profile override {profile_id!r} must be an object"
         )
     return override
+
+
+def effective_provider_path(record: dict[str, Any], profile_id: str) -> str:
+    """Return the provider path actually selected for ``profile_id``.
+
+    Build reports are security evidence as well as presentation output.  They
+    must therefore name the same profile-specific artifact that
+    :func:`read_providers` authenticated rather than always echoing the
+    canonical top-level path.
+    """
+
+    override = profile_pins(record, profile_id)
+    path = (
+        override.get("path", record.get("path"))
+        if override is not None else record.get("path")
+    )
+    if not isinstance(path, str):
+        raise OpenCFWError("provider path is missing")
+    return path
 
 
 class OpenCFWError(RuntimeError):
@@ -567,15 +586,13 @@ def read_providers(
         provider = component.get("provider", {})
         if provider.get("kind") not in ("official_blob", "source_build"):
             raise OpenCFWError(f"{name}: unsupported provider kind")
-        provider_path = provider.get("path")
-        if not isinstance(provider_path, str):
-            raise OpenCFWError(f"{name}: provider path is missing")
+        override = profile_pins(provider, toolchain_profile)
+        provider_path = effective_provider_path(provider, toolchain_profile)
         data = _read_regular_file_below(
             project_root,
             provider_path,
             f"{name} provider",
         )
-        override = profile_pins(provider, toolchain_profile)
         if override is not None:
             expected_size = override.get("size")
             expected_sha256 = override.get("sha256")
@@ -1763,7 +1780,9 @@ def make_build_report(
             {
                 "component": component["name"],
                 "kind": component["provider"]["kind"],
-                "path": component["provider"]["path"],
+                "path": effective_provider_path(
+                    component["provider"], toolchain_profile
+                ),
                 "size": len(payloads[component["name"]]),
                 "sha256": sha256_bytes(payloads[component["name"]]),
             }

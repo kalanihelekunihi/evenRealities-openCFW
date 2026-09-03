@@ -288,21 +288,21 @@ COMMON_RELOCATIONS = {
 PROFILES = {
     "apple-clang": {
         "version": "Apple clang version 21.0.0",
-        "overlay_size": 360_578,
+        "overlay_size": 362_272,
         "overlay_sha256": (
-            "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7"
+            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
         ),
-        "component_size": 3_883_974,
+        "component_size": 3_885_668,
         "component_sha256": (
-            "71d4e2b8011cc1e7503bdbe9e7251963f04b0092a80934d00e5a5ad181c651eb"
+            "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
         ),
-        "package_size": 4_677_046,
+        "package_size": 4_750_780,
         "package_sha256": (
-            "46733920d307a3830513b7f492de5345f552e27de65679eb4fde2b54dfca4ab4"
+            "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
         ),
         # Builder reports exclude isolated/non-emitted registry categories.
-        "function_count": 2_436,
-        "patch_count": 2_324,
+        "function_count": 2_439,
+        "patch_count": 2_327,
         "tail_growth": 782,
         "lz4_tail_growth": 1_758,
         "next_closure_tail_growth": 492,
@@ -336,16 +336,16 @@ PROFILES = {
         "legacy_reset_unordered_tail_growth": 388,
         # Active rollback build from the current production registry.
         "legacy_semaphore_layout": {
-            "overlay_size": 138_622,
+            "overlay_size": 140_316,
             "overlay_sha256": (
-                "c47795fbc98d7c430796e47354c76f38384d423523bcb07f94c2f840cbbaf720"
+                "da757d0b3610100efdb77aae449f67e649eb59afbf2c1eada38b8f7a15f1105a"
             ),
-            "component_size": 3_662_018,
+            "component_size": 3_663_712,
             "component_sha256": (
-                "54b2efa02faacfbd11f7c86dd7d3f2b1adfee954ba791a91e24bb5407fc981ef"
+                "8f6daf58360b317f809e76140b11577391cde7769cec72cc8d5dfc924b66a4fc"
             ),
-            "function_count": 755,
-            "patch_count": 697,
+            "function_count": 758,
+            "patch_count": 700,
             "function_offset": 106_572,
             "function_size": 596,
             "patch_payload_offset": 40_036,
@@ -379,25 +379,26 @@ PROFILES = {
             },
         },
         # Historical pre-cluster milestone.  The rollback still recreates its
-        # exact 3,639,438-byte extent; the byte stream moved to
-        # a2fa6903… after the campaign authenticated the previously
+        # exact current 3,641,540-byte extent; the byte stream moved after
+        # the active three-leaf LZ4 source route joined the rollback base and
+        # the campaign authenticated the previously
         # placeholder-pinned `open_cfw_transport_crc32_update` overlay byte
         # at offset 0 and clang 2100.3.30.1 refreshed retained copy-site
         # replacements.  The sha below authenticates the current fail-closed
         # reconstruction; the original recording was
         # 4e0a7f0604081d056f5e9c94142db2a4db5e3419f6e8a0cc98f82794eb37823c.
-        "prior_component_size": 3_639_846,
+        "prior_component_size": 3_641_540,
         "prior_component_sha256": (
-            "ed6ab911090f64dec9473c2a5e07ff7cde877e09f3f688a9d51b6cbac6af51ed"
+            "ca02135d2c083bad2ce346dc5a72c143751fb4d0746880d85745caebd722d004"
         ),
         "provider_addresses": {MASK: 0x007A_FF08, CLEAR_MASK: 0x007A_FF1E},
         "accounting": {
-            "source_owned_bytes": 362_962,
+            "source_owned_bytes": 364_656,
             "source_owned_in_place_bytes": 184,
-            "generated_patch_site_bytes": 397_446,
-            "replaced_stock_function_bytes": 397_626,
+            "generated_patch_site_bytes": 404_060,
+            "replaced_stock_function_bytes": 404_240,
             "replaced_stock_data_bytes": 2_200,
-            "opaque_base_bytes": 3_123_534,
+            "opaque_base_bytes": 3_116_920,
             "generated_wrapper_bytes": 32,
         },
         "leaves": {
@@ -451,20 +452,20 @@ PROFILES = {
     },
     "linux-clang": {
         "version": "Homebrew clang version 22.1.8",
-        "overlay_size": 145_314,
+        "overlay_size": 147_008,
         "overlay_sha256": (
-            "2bea2be98b0154fa117e9a6e6cedc61a41c7b980279398657af3722cb96c8c19"
+            "36dee8d3beebc0055456267ad068a9944a9eccc0bfec04f78603dd384709fab4"
         ),
-        "component_size": 3_668_710,
+        "component_size": 3_670_404,
         "component_sha256": (
-            "dc7f8a490c731da02850abec1d214f59c79c55062379f5100199e9999e5b28e8"
+            "c2d3fad0382523efb9aa3cfdf19e63e81dca9fdcecdc838e37cac5c48fde430f"
         ),
-        "package_size": 4_469_364,
+        "package_size": 4_750_764,
         "package_sha256": (
-            "79e0ecab05996ac4d1bd71483b1045544a9bdc767abb6bff51a2cc700f89333e"
+            "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559"
         ),
-        "function_count": 792,
-        "patch_count": 732,
+        "function_count": 795,
+        "patch_count": 735,
         "tail_growth": 778,
         "lz4_tail_growth": 1_790,
         "next_closure_tail_growth": 492,
@@ -490,23 +491,24 @@ PROFILES = {
         "nanopb_varint32_patch_span": 256,
         "nanopb_skip_string_patch_span": 32,
         # Net tail retained by the active Linux rollback registry after the
-        # removed read/svarint/skip-string closures are accounted for.
-        "current_rollback_net_tail_growth": 208,
+        # removed read/svarint/skip-string closures and all subsequently
+        # admitted Linux source routes are accounted for.
+        "current_rollback_net_tail_growth": 18_634,
         "later_tail_growth": 2_834,
         "legacy_reset_unordered_tail_growth": 388,
         "legacy_semaphore_layout": {
-            "overlay_size": 126_822,
+            "overlay_size": 142_244,
             "overlay_sha256": (
-                "3347ed7a8bfab677ebe7bb4dc4469a82"
-                "20c80f0d44ebaab3d4882a9db0264338"
+                "034e2e19a8b4ac478d869f07cb0a4422"
+                "8ca2033e02d46caf6f78cd4448f8f023"
             ),
-            "component_size": 3_650_218,
+            "component_size": 3_665_640,
             "component_sha256": (
-                "4f21a29b33633ce387a12ad55463bc86"
-                "a2dff9dc43b4d528d317165fe326555b"
+                "463b99b89294361f6c039f49dfad467b"
+                "1b95bf2fbe96c66de4364a510cfeb72d"
             ),
-            "function_count": 660,
-            "patch_count": 610,
+            "function_count": 762,
+            "patch_count": 704,
             "function_offset": 107_124,
             "function_size": 606,
             "patch_payload_offset": 40_036,
@@ -541,16 +543,16 @@ PROFILES = {
         },
         "prior_component_size": 3_641_278,
         "prior_component_sha256": (
-            "6bead197d657c26fa6ba84210949c8e28b266fbf63a8f908edda1d64516a3163"
+            "dfc186208522a89f001b452ca472cd74b81309c5da7e965ffac9cd8f8d440465"
         ),
         "provider_addresses": {MASK: 0x007B_054C, CLEAR_MASK: 0x007B_0562},
         "accounting": {
-            "source_owned_bytes": 145_498,
+            "source_owned_bytes": 147_192,
             "source_owned_in_place_bytes": 184,
-            "generated_patch_site_bytes": 99_340,
-            "replaced_stock_function_bytes": 99_520,
+            "generated_patch_site_bytes": 105_954,
+            "replaced_stock_function_bytes": 106_134,
             "replaced_stock_data_bytes": 0,
-            "opaque_base_bytes": 3_423_840,
+            "opaque_base_bytes": 3_417_226,
             "generated_wrapper_bytes": 32,
         },
         "leaves": {
@@ -798,7 +800,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         )
         self.assertEqual(
             (len(self.config["functions"]), len(self.config["patch_sites"])),
-            (2440, 2328),
+            (2443, 2331),
         )
 
         for leaf in (
@@ -1239,11 +1241,13 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             and region["address_status"].startswith("generated_")
         )
         package_envelope = package_size - sum(component_sizes.values())
-        main_preamble = next(
-            region["size"]
+        main_preamble = sum(
+            min(region["file_offset"] + region["size"], 32)
+            - region["file_offset"]
             for region in effective_regions["apollo_main"]
-            if region["name"] == "ota_preamble"
+            if region["file_offset"] < 32
         )
+        self.assertEqual(main_preamble, 32)
         generated = generated_flash + package_envelope + main_preamble
         opaque = package_size - source_owned - generated
         self.assertTrue(all(value >= 0 for value in (source_owned, generated, opaque)))
@@ -1597,7 +1601,16 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         }
         self.assertLessEqual(set(legacy_patches), set(current_patches))
         removed_patch_names = set(current_patches) - set(legacy_patches)
-        self.assertLessEqual(expected_removed_patch_names, removed_patch_names)
+        if self.profile_name == "linux-clang":
+            # Most post-milestone platform and hardware-service routes are
+            # Apple-profile-only in this historical rollback build.  Restrict
+            # the common removal census to entries that are actually present
+            # in the active Linux registry, then require exact equality so an
+            # unreviewed Linux removal still fails closed.
+            expected_removed_patch_names &= set(current_patches)
+            self.assertEqual(expected_removed_patch_names, removed_patch_names)
+        else:
+            self.assertLessEqual(expected_removed_patch_names, removed_patch_names)
         changed_redirects = []
         for name, legacy_patch in legacy_patches.items():
             current_patch = current_patches[name]

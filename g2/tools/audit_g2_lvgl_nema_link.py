@@ -54,7 +54,7 @@ EXPECTED_PUBLIC_RESIDUAL_DIGEST = (
     "db934f5d3d45c767227f50cd4b4d02160aff380a0885cb2735814accd9c78a29"
 )
 EXPECTED_MAXIMAL_RESIDUAL_DIGEST = (
-    "f9d7f5b3fc8db9a19441ec0c4991ac9161c0ae46583e56c2a2298f2794732744"
+    "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
 )
 EXPECTED_BACKEND_GC_ROOTS = (
     "lv_ambiq_blend_mode_change", "lv_ambiq_blend_mode_clear",
@@ -1221,6 +1221,553 @@ LVGL_DRAW_UNIT_UPSTREAM_EVIDENCE = {
         "fail before global-list mutation"
     ),
 }
+LVGL_DRAW_TASK_PROVIDER_SYMBOLS = frozenset({"lv_draw_get_available_task"})
+LVGL_DRAW_TASK_PROVIDER_INPUTS = {
+    "provider": (
+        "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_draw_task_provider.c",
+        4_558, "d61660f93f6d2325d2c04dd0d64b7aaa29e127ca269ceeb766c4a17838a1fee7", "MIT",
+    ),
+    "provider_header": (
+        "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_draw_task_provider.h",
+        454, "57c87ed7aeb9abc698cda8c2f4023d5aa2a2014c604166278f433e7d463c9afb", "MIT",
+    ),
+    "abi_probe": (
+        "tests/fixtures/lvgl_ambiq_lvgl_draw_task_provider_abi.c",
+        370, "20a760dded804a86fdc20eba27599507cf8f901ada90a526c2f36a3f9a25b4e7", "MIT",
+    ),
+    "hostile_host_fixture": (
+        "tests/fixtures/lvgl_ambiq_lvgl_draw_task_provider_host.c",
+        3_306, "bad427693410f52f2e776b35f6b3cbe2cb8cb2fbcdcc17c7599ecbfc3c73d82e", "MIT",
+    ),
+    "upstream_draw_source": LVGL_DRAW_UNIT_PROVIDER_INPUTS["upstream_draw_source"],
+    "upstream_draw_header": LVGL_DRAW_UNIT_PROVIDER_INPUTS["upstream_draw_header"],
+    "upstream_draw_private_header": LVGL_DRAW_UNIT_PROVIDER_INPUTS["upstream_draw_private_header"],
+    "upstream_global_header": LVGL_DRAW_UNIT_PROVIDER_INPUTS["upstream_global_header"],
+    "upstream_display_source": (
+        "third_party/lvgl/src/display/lv_display.c", 36_279,
+        "5df4029060729fe53d197fd024efe8cb5fbf66fa1792894a1fa24633ffb7acbb", "MIT",
+    ),
+    "upstream_display_private_header": (
+        "third_party/lvgl/src/display/lv_display_private.h", 5_513,
+        "61850d779baccd95555162f598dc41a9fd5e0b23b560073f0fa38c577f588248", "MIT",
+    ),
+    "upstream_refresh_source": (
+        "third_party/lvgl/src/core/lv_refr.c", 48_329,
+        "b79ff0ad60347ddda8cd8f85175504a812ec4ff35bf8ce1f4901baefc5cf180b", "MIT",
+    ),
+    "upstream_refresh_private_header": (
+        "third_party/lvgl/src/core/lv_refr_private.h", 1_350,
+        "6da132c946d734dcb75e8888cddf9d0440ce38e5cb1262a896c6925675a03975", "MIT",
+    ),
+    "upstream_area_private_header": (
+        "third_party/lvgl/src/misc/lv_area_private.h", 3_431,
+        "567579a0ed9b9ace5228d6517b493a3fe7d189ecc2c1c16b2294063e8caec2eb", "MIT",
+    ),
+}
+LVGL_DRAW_TASK_SOURCE_ARTIFACT = {
+    "size": 1_276,
+    "sha256": "146ae1cf94aa234607c3b5d6d6e8bb383b6d7906e8014ce648d5ddd937c03456",
+}
+LVGL_DRAW_TASK_PROVIDER_ARTIFACT = {
+    "size": 1_448,
+    "sha256": "3b103e71b599e201f56362e973fda7f3f9ef8569a819a39947423d8dfbf451a5",
+}
+LVGL_DRAW_TASK_ABI_PROBE_ARTIFACT = {
+    "size": 1_020,
+    "sha256": "97577f4542bf3f075c51db1b8c5ee4f2248ff0f933eb5b97d52c6acf8a808d86",
+}
+LVGL_DRAW_TASK_AGGREGATE_ARTIFACT = {
+    "size": 8_344,
+    "sha256": "d6620afbb9c02d0bcb81617531f9a0c1730c74c22ab614b120dda591d3a799cf",
+}
+LVGL_DRAW_TASK_UPSTREAM_EVIDENCE = {
+    "repository": "https://github.com/lvgl/lvgl.git",
+    "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+    "tree": "2c76db856ec570f3ee12565181e5cf52bdd33d78",
+    "tree_record": LVGL_CORE_UPSTREAM_EVIDENCE["tree_record"],
+    "commit_record": LVGL_CORE_UPSTREAM_EVIDENCE["commit_record"],
+    "source_git_blobs": {
+        "src/draw/lv_draw.c": "b24dda671bf57cecc80e0f30ab8df00b29d2fdf4",
+        "src/draw/lv_draw.h": "b35cb52f8298d591d56ce50a03fb21c64f7e7f50",
+        "src/draw/lv_draw_private.h": "057d4dd08a7d61417ecea732e4ff3401419d3af9",
+        "src/core/lv_global.h": "4515c01c9b80779a7d61701e28b4fb3554a92ba9",
+        "src/core/lv_refr.c": "5ebca8e1891630c297ca649ecc5d2e0a89e3661c",
+        "src/core/lv_refr_private.h": "3b2985b70ebd88f726f2c9c86d39d6257d135784",
+        "src/display/lv_display.c": "695d38b2652decc2362b283dd69ee08b8b4f7582",
+        "src/display/lv_display_private.h": "d831ec4861e73f53da86432fb221804f71fa5c79",
+        "src/misc/lv_area_private.h": "bebca59406277fb2921635c5070d00caa77aed57",
+    },
+    "license": "MIT",
+    "qualification": (
+        "single- and multi-unit task selection preserves the authenticated ordering, full-screen "
+        "serialization, rotated resolution, preferred-unit, and older-overlap rules"
+    ),
+}
+LVGL_LAYER_ALLOC_PROVIDER_SYMBOLS = frozenset({"lv_draw_layer_alloc_buf"})
+LVGL_LAYER_ALLOC_PROVIDER_INPUTS = {
+    "provider": (
+        "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_layer_alloc_provider.c",
+        4_248, "685856a96c964d54adbd0cf8998495e9d70e858728167c5ad88f8a89d89e6bc3", "MIT",
+    ),
+    "provider_header": (
+        "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_layer_alloc_provider.h",
+        306, "abb877f33c04b598faf3dc61774243ede14c9e391d645d6170e59e6001e15574", "MIT",
+    ),
+    "abi_probe": (
+        "tests/fixtures/lvgl_ambiq_lvgl_layer_alloc_provider_abi.c",
+        192, "4c04c0b9aaa1469c7de0a1dc0e5d76dcd70e1f639037f28005bb38855b122aaf", "MIT",
+    ),
+    "hostile_host_fixture": (
+        "tests/fixtures/lvgl_ambiq_lvgl_layer_alloc_provider_host.c",
+        4_226, "5704b139d50e77dc383939d27b2fde72416094c1d6e9e726ef8395f73b4a6f0d", "MIT",
+    ),
+    "upstream_draw_source": LVGL_DRAW_UNIT_PROVIDER_INPUTS["upstream_draw_source"],
+    "upstream_draw_header": LVGL_DRAW_UNIT_PROVIDER_INPUTS["upstream_draw_header"],
+    "upstream_draw_private_header": LVGL_DRAW_UNIT_PROVIDER_INPUTS["upstream_draw_private_header"],
+    "upstream_global_header": LVGL_DRAW_UNIT_PROVIDER_INPUTS["upstream_global_header"],
+    "upstream_draw_buf_source": (
+        "third_party/lvgl/src/draw/lv_draw_buf.c", 22_801,
+        "94ba137be50d8516e17314da33992fb53995ea071d9043fa7174d4e52d629f4e", "MIT",
+    ),
+    "upstream_draw_buf_header": (
+        "third_party/lvgl/src/draw/lv_draw_buf.h", 14_311,
+        "45fa9990279ef5aecd1808e78d06681bdae598e8def00932d03360de294cf9b6", "MIT",
+    ),
+    "upstream_draw_buf_private_header": (
+        "third_party/lvgl/src/draw/lv_draw_buf_private.h", 1_016,
+        "afb2268e7bb91163b422b8095eab814f308fef438c6f2a817e0a5fc8f74b703b", "MIT",
+    ),
+    "upstream_color_header": (
+        "third_party/lvgl/src/misc/lv_color.h", 14_903,
+        "7138d069102507fbe9e81bb2e06498482eb071733378bc4e0f52dbc483ec7020", "MIT",
+    ),
+    "upstream_log_header": (
+        "third_party/lvgl/src/misc/lv_log.h", 4_623,
+        "4b8d99d061bebe0e164af33e99ca3445e17183bb8a933936843dfd9e6fe4c20e", "MIT",
+    ),
+    "upstream_string_header": (
+        "third_party/lvgl/src/stdlib/lv_string.h", 7_741,
+        "668a5be6caffb6cf21964a47d9dffd18b3d937c30080d8af5099e2da102b714c", "MIT",
+    ),
+}
+LVGL_LAYER_ALLOC_SOURCE_ARTIFACT = {
+    "size": 2_504,
+    "sha256": "df5ffc50377217d3092404482844e1614b34205b4f4e1bfe0484930befb59a78",
+}
+LVGL_LAYER_ALLOC_PROVIDER_ARTIFACT = {
+    "size": 2_836,
+    "sha256": "cc24714099180a2d1d52825f24689441a34d6fa1892d705f350f621a26c2970d",
+}
+LVGL_LAYER_ALLOC_ABI_PROBE_ARTIFACT = {
+    "size": 1_024,
+    "sha256": "fda4c2622abe8479c932c4254000757ce5e0dce9234fbc6ece72ea71fc3fb03a",
+}
+LVGL_LAYER_ALLOC_AGGREGATE_ARTIFACT = {
+    "size": 34_452,
+    "sha256": "29ed9dc41094587281f79597c610fc30271d6fe38340c4b577d84638a4b81007",
+}
+LVGL_LAYER_ALLOC_UPSTREAM_EVIDENCE = {
+    "repository": "https://github.com/lvgl/lvgl.git",
+    "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+    "tree": "2c76db856ec570f3ee12565181e5cf52bdd33d78",
+    "tree_record": LVGL_CORE_UPSTREAM_EVIDENCE["tree_record"],
+    "commit_record": LVGL_CORE_UPSTREAM_EVIDENCE["commit_record"],
+    "source_git_blobs": {
+        "src/draw/lv_draw.c": "b24dda671bf57cecc80e0f30ab8df00b29d2fdf4",
+        "src/draw/lv_draw.h": "b35cb52f8298d591d56ce50a03fb21c64f7e7f50",
+        "src/draw/lv_draw_private.h": "057d4dd08a7d61417ecea732e4ff3401419d3af9",
+        "src/draw/lv_draw_buf.c": "58562a86e55ca5897c3b79b3a486d3f7107aeea0",
+        "src/draw/lv_draw_buf.h": "c36e0a612f7fb46f69f5a7a4ae97000dd76a3837",
+        "src/draw/lv_draw_buf_private.h": "a22640315e37433b77605d4ac8f36e689d3b5e9c",
+        "src/core/lv_global.h": "4515c01c9b80779a7d61701e28b4fb3554a92ba9",
+        "src/misc/lv_color.c": "1096e3b9b6923077d195c1478d5121d46d75c7c0",
+        "src/misc/lv_color.h": "1a160b4a56b8a7bc01b59a20b72ae35f5fff518c",
+        "src/misc/lv_log.h": "7774ba6fc9c80ad3dcd115ecaa0ad4ecd0483425",
+        "src/stdlib/lv_string.h": "12466c6cbc4ac564db33b0a5b3af171883acae01",
+    },
+    "license": "MIT",
+    "qualification": (
+        "valid layers preserve authenticated lazy allocation, stride accounting, alpha clear, "
+        "cache flush, and allocation-failure warning behavior"
+    ),
+}
+LVGL_LOG_PROVIDER_SYMBOLS = frozenset({"lv_log_add"})
+LVGL_LOG_RUNTIME_ROOT_SYMBOLS = frozenset({
+    "open_cfw_runtime_snprintf", "open_cfw_runtime_vsnprintf_wrapper",
+    "open_cfw_strlen", "open_cfw_lv_tick_get",
+})
+LVGL_LOG_RUNTIME_EXPORTS = frozenset({
+    "open_cfw_aeabi_uldivmod_core", "open_cfw_lv_tick_get",
+    "open_cfw_runtime_ascii_is_digit", "open_cfw_runtime_bounded_byte_store",
+    "open_cfw_runtime_bounded_string_length", "open_cfw_runtime_etoa",
+    "open_cfw_runtime_format_out_reverse", "open_cfw_runtime_ftoa",
+    "open_cfw_runtime_noop_output", "open_cfw_runtime_ntoa_format",
+    "open_cfw_runtime_ntoa_long", "open_cfw_runtime_ntoa_long_long",
+    "open_cfw_runtime_parse_decimal", "open_cfw_runtime_snprintf",
+    "open_cfw_runtime_strnlen_s", "open_cfw_runtime_vsnprintf",
+    "open_cfw_runtime_vsnprintf_wrapper", "open_cfw_strlen",
+})
+LVGL_LOG_PROVIDER_INPUTS = {
+    "provider": (
+        "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_log_provider.c",
+        3_314, "dceb9051c4ec695576a3c36d21bb06bbfd11246d33ca33ff022f929c9d1844b5", "MIT",
+    ),
+    "provider_header": (
+        "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_log_provider.h",
+        362, "ccee6753da26506f6f2d620536872e5efbe0d9a02dc82a84adc1eb5b3c668303", "MIT",
+    ),
+    "abi_probe": (
+        "tests/fixtures/lvgl_ambiq_lvgl_log_provider_abi.c", 296,
+        "3e88b0632167baad2399bf37221137a49371f9624fd8b05b9876a1449cb03651", "MIT",
+    ),
+    "hostile_host_fixture": (
+        "tests/fixtures/lvgl_ambiq_lvgl_log_provider_host.c", 3_165,
+        "198c0f2d9402c27e36b2b39ffd743328cd5e74013377f090200f3f4342a3075f", "MIT",
+    ),
+    "runtime_printf_wrappers": (
+        "components/apollo_main/core_overlay/runtime_printf_wrappers.c", 2_250,
+        "c28318100a6eb00d476df9253cbf2d28c202c78f27d1529f2fcd826a355f7971", "MIT",
+    ),
+    "runtime_vsnprintf": (
+        "components/apollo_main/core_overlay/runtime_vsnprintf.c", 37_463,
+        "3229a2c14011a3025962d2b2477f73c92bf93acbaee7d304e78e7b883f6c31de", "MIT",
+    ),
+    "runtime_format_parse_helpers": (
+        "components/apollo_main/core_overlay/runtime_format_parse_helpers.c", 2_168,
+        "16fac942794cf535477d3ba37af5e77c0fcdd757aaa68df7e8272fb6b39203d4", "MIT",
+    ),
+    "runtime_format_out_reverse": (
+        "components/apollo_main/core_overlay/runtime_format_out_reverse.c", 3_391,
+        "cd2be8e16f02e922a0ad410fc64eae98f9106b761bd85c33d69e3cafd5ebc26e", "MIT",
+    ),
+    "runtime_ntoa_format": (
+        "components/apollo_main/core_overlay/runtime_ntoa_format.c", 5_207,
+        "4ce36ff24dba43783c1cd75d5a029ecf352a8cad15c2019ef3c932a9b277d990", "MIT",
+    ),
+    "runtime_ntoa_integer": (
+        "components/apollo_main/core_overlay/runtime_ntoa_integer.c", 5_981,
+        "4f7044a8e87240a7ee5925cde7461a32067c7bf331a9384c58a4ef68d16f3232", "MIT",
+    ),
+    "runtime_ftoa": (
+        "components/apollo_main/core_overlay/runtime_ftoa.c", 13_469,
+        "2c229a484d5589ed006f9aec9862364d6a86381f4f3278a0352e457885f30983", "MIT",
+    ),
+    "runtime_etoa": (
+        "components/apollo_main/core_overlay/runtime_etoa.c", 7_516,
+        "61c53bb9c4d583e12718adb35a4ab1815841e9884df1bafe596f0b21763898c2", "MIT",
+    ),
+    "runtime_bounded_string_length": (
+        "components/apollo_main/core_overlay/runtime_bounded_string_length.c", 1_420,
+        "7b2ff837a73e2b8c41c41bfe50b8fe6e4a964b51064ff76d0941a1322f2750ba", "MIT",
+    ),
+    "runtime_strnlen_s": (
+        "components/apollo_main/core_overlay/runtime_strnlen_s.c", 1_021,
+        "b8de450f42d1a8beda4319001f0aea554096316588b2872ba06946c124a98cc8", "MIT",
+    ),
+    "runtime_string": (
+        "components/apollo_main/core_overlay/runtime_string.c", 433,
+        "90577edc949f33f09baf719cc0dc5b23bccfad86616794efc302a64683166a48", "MIT",
+    ),
+    "lv_tick": (
+        "components/apollo_main/core_overlay/lv_tick.c", 1_409,
+        "6e16a7b032e855a121b9a4d15c127dc1f11ad4812f69d206462faec918edc198", "MIT",
+    ),
+    "aeabi_divmod": (
+        "components/apollo_main/core_overlay/aeabi_divmod.c", 4_804,
+        "2222252bb0d1ffdab597d023a0737a77d044b4e1b6addb8fbb545d8386855f7e", "MIT",
+    ),
+    "upstream_log_header": LVGL_LAYER_ALLOC_PROVIDER_INPUTS["upstream_log_header"],
+    "upstream_global_header": LVGL_LAYER_ALLOC_PROVIDER_INPUTS["upstream_global_header"],
+}
+LVGL_LOG_SOURCE_ARTIFACT = {
+    "size": 1_816,
+    "sha256": "5bc00237d7f54ccfb7eb55d839f95a626ffdaa286e2f60f40d424c4603847fe5",
+}
+LVGL_LOG_PROVIDER_ARTIFACT = {
+    "size": 2_016,
+    "sha256": "a1ca277a5c1d44d73dc0b135ad91520383e76cef91ffa251f5ddc4234c1f6a4d",
+}
+LVGL_LOG_ABI_PROBE_ARTIFACT = {
+    "size": 1_112,
+    "sha256": "73e8ed9ec8f908112b7ea5cdc102d239f40ab7b7bf7965a899a970119db3147a",
+}
+LVGL_LOG_RUNTIME_ARTIFACT = {
+    "size": 13_964,
+    "sha256": "99a67191cf82ecc37b0d6810613a268bf377280bfc4ea41a50fcf33c545e5dd6",
+}
+LVGL_LOG_AGGREGATE_ARTIFACT = {
+    "size": 15_228,
+    "sha256": "c19effb664c3984375b0de96ea6b5ea23b1f21c16d25849d4a7c6d0af5035ca0",
+}
+LVGL_LOG_UPSTREAM_EVIDENCE = {
+    "repository": "https://github.com/lvgl/lvgl.git",
+    "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+    "tree": "2c76db856ec570f3ee12565181e5cf52bdd33d78",
+    "tree_record": LVGL_CORE_UPSTREAM_EVIDENCE["tree_record"],
+    "commit_record": LVGL_CORE_UPSTREAM_EVIDENCE["commit_record"],
+    "source_git_blobs": {
+        "src/misc/lv_log.c": "4dd197587d930cd08fc9648bc45b000c8d2b192e",
+        "src/misc/lv_log.h": "7774ba6fc9c80ad3dcd115ecaa0ad4ecd0483425",
+        "src/core/lv_global.h": "4515c01c9b80779a7d61701e28b4fb3554a92ba9",
+    },
+    "formatter_upstream": "https://github.com/mpaland/printf.git",
+    "formatter_commit": "d3b984684bb8a8bdc48cc7a1abecb93ce59bbe3e",
+    "license": "MIT",
+    "qualification": (
+        "callback-mode WARN logging preserves authenticated level filtering, basename, "
+        "timestamp/delta, message formatting, callback, and last-timestamp behavior"
+    ),
+}
+LVGL_DECODER_PROVIDER_SYMBOLS = frozenset({
+    "lv_image_decoder_close", "lv_image_decoder_open",
+})
+LVGL_DECODER_FS_SYMBOLS = frozenset({"lv_fs_close", "lv_fs_open", "lv_fs_seek"})
+LVGL_DECODER_CACHE_ROOT_SYMBOLS = frozenset({
+    "lv_cache_acquire", "lv_cache_add", "lv_cache_entry_get_data", "lv_cache_release",
+})
+LVGL_DECODER_CACHE_EXPORTS = frozenset({
+    "lv_cache_acquire", "lv_cache_add", "lv_cache_entry_acquire_data",
+    "lv_cache_entry_delete", "lv_cache_entry_get_data", "lv_cache_entry_get_ref",
+    "lv_cache_entry_is_invalid", "lv_cache_entry_release_data", "lv_cache_release",
+})
+LVGL_DECODER_SUPPORT_SYMBOLS = frozenset({
+    "lv_image_cache_is_enabled", "lv_image_header_cache_is_enabled",
+    "lv_image_src_get_type", "lv_ll_get_head", "lv_ll_get_next", "lv_strdup",
+})
+LVGL_DECODER_PROVIDER_INPUTS = {
+    "decoder_source": (
+        "third_party/lvgl/src/draw/lv_image_decoder.c", 13_654,
+        "6ddccf575bc39a097943fc85772c5766ac1cad61a43c2e433b503ce13606c6bf", "MIT",
+    ),
+    "decoder_header": (
+        "third_party/lvgl/src/draw/lv_image_decoder.h", 8_498,
+        "cf8cb23198e97741d52771974ea7276fd2c79b59c425a020ed4dae9f45820b04", "MIT",
+    ),
+    "decoder_private_header": (
+        "third_party/lvgl/src/draw/lv_image_decoder_private.h", 3_926,
+        "e3c20296ecf46c9741f1884aa89822889020dc35973695f864cf977291c5e0f3", "MIT",
+    ),
+    "fs_source": (
+        "third_party/lvgl/src/misc/lv_fs.c", 19_550,
+        "03b7c391a60e60fb1a49245abae432213ba48b425ece5a2d9047a2bfa6e79159", "MIT",
+    ),
+    "cache_source": (
+        "third_party/lvgl/src/misc/cache/lv_cache.c", 9_474,
+        "8e36a6ea7a981b29ae925765f57e524b43ead3dbffbc50b28856dee2a6543038", "MIT",
+    ),
+    "cache_header": (
+        "third_party/lvgl/src/misc/cache/lv_cache.h", 11_311,
+        "13e3f6e90635510645c974c67b507966faef4c57e479199abb4c28e969a399f9", "MIT",
+    ),
+    "cache_entry_source": (
+        "third_party/lvgl/src/misc/cache/lv_cache_entry.c", 4_104,
+        "b936460d587d5aaa35876a8f9cc11ee5d2b4313d85e25be8bb8eb9af717f3cba", "MIT",
+    ),
+    "cache_entry_header": (
+        "third_party/lvgl/src/misc/cache/lv_cache_entry.h", 3_373,
+        "4318c88bc4001cdfd9dd828ce9316a92e1df14f3ef9c429f86d84e5ce5baefab", "MIT",
+    ),
+    "support_provider": (
+        "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_decoder_support_provider.c",
+        1_926, "dcde456c1e99d422ec7575776d1ace799b11c903d1641299a32c0e1aac291710", "MIT",
+    ),
+    "support_header": (
+        "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_decoder_support_provider.h",
+        345, "094f52fd46230de6ff658529019ce585c10d776d84335617ec5a30d1d3941eb6", "MIT",
+    ),
+    "decoder_abi_probe": (
+        "tests/fixtures/lvgl_ambiq_lvgl_decoder_provider_abi.c", 503,
+        "e1fb2e0d9023aa9626bcaea8faf6f41be317dc245c962a002697ccda4f8be559", "MIT",
+    ),
+    "support_abi_probe": (
+        "tests/fixtures/lvgl_ambiq_lvgl_decoder_support_provider_abi.c", 478,
+        "da470907a84358c949a9a09a3ab3ecb142f198a8f62c88db14b32ba29d847f3b", "MIT",
+    ),
+    "hostile_host_fixture": (
+        "tests/fixtures/lvgl_ambiq_lvgl_decoder_support_provider_host.c", 2_286,
+        "334c40798b7861bf6a1c08399ba0620c8539ce7d2d50a80cc666f3aff3188cd3", "MIT",
+    ),
+}
+LVGL_DECODER_SOURCE_ARTIFACT = {
+    "size": 9_560,
+    "sha256": "de45c4834b10b62cb7c069d2900350693f414a1b7fa61c73e107edc9ef129fb9",
+}
+LVGL_DECODER_PROVIDER_ARTIFACT = {
+    "size": 4_216,
+    "sha256": "7446fd3c6fa1223982c81f208d947a70e6d815aa074cfddbbc3be5a46f0f949f",
+}
+LVGL_DECODER_FS_SOURCE_ARTIFACT = {
+    "size": 10_628,
+    "sha256": "bddbbd4485d4b8ec42f6f150a6064e3610228745edfd95db9f31fad00bef49c2",
+}
+LVGL_DECODER_FS_ARTIFACT = {
+    "size": 3_432,
+    "sha256": "bce90fd688401184fd7ec731b9d546bdf7976dfe04011d26b78b55a8dd0e1508",
+}
+LVGL_DECODER_CACHE_SOURCE_ARTIFACT = {
+    "size": 12_232,
+    "sha256": "e2fb7de4933d7932485838b6d0cfcdbc4f87950769efd11765eab677d1cddbc0",
+}
+LVGL_DECODER_CACHE_ENTRY_SOURCE_ARTIFACT = {
+    "size": 11_104,
+    "sha256": "e0a16a0a3b3f0406411634dcb452eb7671318b2dcbc9fe72ac65f1f1f76dc5f1",
+}
+LVGL_DECODER_CACHE_ARTIFACT = {
+    "size": 9_108,
+    "sha256": "8bcf3381e19d0e5bcaecacc21174663de5c232e35c57a62bb1d076cbb656a1f8",
+}
+LVGL_DECODER_SUPPORT_SOURCE_ARTIFACT = {
+    "size": 2_556,
+    "sha256": "aff6a4ca00473db3fd63219e55646e02803f6650e93be248587d02c9b2519d95",
+}
+LVGL_DECODER_SUPPORT_ARTIFACT = {
+    "size": 3_216,
+    "sha256": "d5089f3a226f79395fdf2ab1015fd6e9860949853dd0d15493aa95449140581f",
+}
+LVGL_DECODER_ABI_PROBE_ARTIFACT = {
+    "size": 1_392,
+    "sha256": "734fb6f77bab16c9a50b3c3b6859a95290eb7cc210793627d930c37d4a154b94",
+}
+LVGL_DECODER_SUPPORT_ABI_PROBE_ARTIFACT = {
+    "size": 1_292,
+    "sha256": "842c6351df92da010a31af243fe1979cc45f43fa87eb456a3cb2cd185107f03e",
+}
+LVGL_DECODER_AGGREGATE_ARTIFACT = {
+    "size": 48_140,
+    "sha256": "92f09f27f55e93c91107cb5bb517d086085583e4c74da87807a57d20a1650be1",
+}
+LVGL_DECODER_UPSTREAM_EVIDENCE = {
+    "repository": "https://github.com/lvgl/lvgl.git",
+    "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+    "tree": "2c76db856ec570f3ee12565181e5cf52bdd33d78",
+    "tree_record": LVGL_CORE_UPSTREAM_EVIDENCE["tree_record"],
+    "commit_record": LVGL_CORE_UPSTREAM_EVIDENCE["commit_record"],
+    "source_git_blobs": {
+        "src/draw/lv_image_decoder.c": "48d62c89f7f35b3c10d75ba7ac0d4a84efff12a7",
+        "src/draw/lv_image_decoder.h": "3b8089aff7ac89e00694ddbaa739ac94c26e6fa1",
+        "src/draw/lv_image_decoder_private.h": "c7369d0aa6ab590bc336a9d1dd4a4b18c3e07d67",
+        "src/misc/lv_fs.c": "e90d00c7f7af60fecf2d23400b2c59fcbf076b38",
+        "src/misc/cache/lv_cache.c": "1ab6c9fc6fc0481ecb1d357f45003dbca9ac492b",
+        "src/misc/cache/lv_cache.h": "8469c43775bf92ec16313b96d0285fd43a50363f",
+        "src/misc/cache/lv_cache_entry.c": "4f280e66e3e84ee9b47d81a2dc579183092ade69",
+        "src/misc/cache/lv_cache_entry.h": "3c28f2d929d34c82bc3e7e1340317168ea760b2a",
+    },
+    "license": "MIT",
+    "qualification": (
+        "exact decoder open/close behavior retains variable, file-backed, decoder-list, "
+        "header-cache, image-cache, cleanup, and cache-flush paths"
+    ),
+}
+LVGL_LABEL_PROVIDER_SYMBOLS = frozenset({"lv_draw_label_iterate_characters"})
+LVGL_LABEL_PROVIDER_EXPORTS = frozenset({
+    "lv_draw_label_iterate_characters", "lv_draw_unit_draw_letter",
+})
+LVGL_LABEL_DRAW_BUF_SYMBOLS = frozenset({"lv_draw_buf_create_ex"})
+LVGL_LABEL_DRAW_RECT_SYMBOLS = frozenset({"lv_draw_fill_dsc_init"})
+LVGL_LABEL_FONT_SYMBOLS = frozenset({
+    "lv_font_get_glyph_dsc", "lv_font_get_glyph_width", "lv_font_get_line_height",
+    "lv_font_glyph_release_draw_data",
+})
+LVGL_LABEL_TEXT_SYMBOLS = frozenset({
+    "lv_text_encoded_get_char_id", "lv_text_encoded_letter_next_2",
+    "lv_text_get_next_line", "lv_text_get_size", "lv_text_get_width_with_flags",
+})
+LVGL_LABEL_SUPPORT_SYMBOLS = frozenset({
+    "lv_area_is_out", "lv_color_black", "lv_color_make", "lv_point_set",
+})
+LVGL_LABEL_PROVIDER_INPUTS = {
+    "label_source": (
+        "third_party/lvgl/src/draw/lv_draw_label.c", 22_792,
+        "c271033836eec1b20f32a37d1b1aee9af21084a8ef870d5a9a7aa192b5aac8bd", "MIT",
+    ),
+    "label_header": (
+        "third_party/lvgl/src/draw/lv_draw_label.h", 8_014,
+        "8e807d090ca1d1caa5ba67704c5979a236edb8eac6ca60c58dc45207a3e9ed2a", "MIT",
+    ),
+    "label_private_header": (
+        "third_party/lvgl/src/draw/lv_draw_label_private.h", 2_033,
+        "ac3ebe18bfa2a411b1e5f935646fc91bfce0bc3cd3bfdb5b1efaed739d33a56b", "MIT",
+    ),
+    "draw_buf_source": LVGL_LAYER_ALLOC_PROVIDER_INPUTS["upstream_draw_buf_source"],
+    "draw_rect_source": (
+        "third_party/lvgl/src/draw/lv_draw_rect.c", 11_615,
+        "ded33dcbb4aa3f986b6200b79dd5f4b374878fb5ec8f4aa21ea5607a408ca05d", "MIT",
+    ),
+    "font_source": (
+        "third_party/lvgl/src/font/lv_font.c", 3_622,
+        "dfb414a729c7b22c4d77c1d5adda98a47152cab6a5ad6e7c47b7a563ac80d2b3", "MIT",
+    ),
+    "text_source": (
+        "third_party/lvgl/src/misc/lv_text.c", 30_332,
+        "353a509bf3b371fc60b35e003656990cbba92c0f2e8a5f853b8f0dc2e7fcce77", "MIT",
+    ),
+    "support_provider": (
+        "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_label_support_provider.c",
+        4_892, "c461667421c8e3363170252b83dbe2ee60f837546b88fddaf5263b559e09132f", "MIT",
+    ),
+    "support_header": (
+        "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_label_support_provider.h",
+        233, "6d706e7e5d86af15046e541cb6ab5e51eb0285eae361e8117d404890c339cedb", "MIT",
+    ),
+    "label_abi_probe": (
+        "tests/fixtures/lvgl_ambiq_lvgl_label_provider_abi.c", 347,
+        "0e35eb527b5a98ddacc99bd608451163cdfaf4f82ee443d3e071b25ba8d1c07a", "MIT",
+    ),
+    "support_abi_probe": (
+        "tests/fixtures/lvgl_ambiq_lvgl_label_support_provider_abi.c", 513,
+        "7c3e68eefb97b1b1f9365e2701a736ce2018117ede6c77dcf4eb0b567b4a7372", "MIT",
+    ),
+    "hostile_host_fixture": (
+        "tests/fixtures/lvgl_ambiq_lvgl_label_support_provider_host.c", 1_284,
+        "f3f630a60b8b8856831783ede88d8eef8cf4bb16e2f16e07dcca71d1f8bfe190", "MIT",
+    ),
+}
+LVGL_LABEL_SOURCE_ARTIFACTS = {
+    "label": {"size": 9_132, "sha256": "8e66661c31e8b3fd8b370b3b595b3f8114e98f15ebff3f984fe808ecb1fadbb1"},
+    "draw_buf": {"size": 21_868, "sha256": "cd88b0c0058b9834c7d7809d354abb3286dde6d91868842e0e7c4965c123cee4"},
+    "draw_rect": {"size": 6_248, "sha256": "3b5aedb859c7edd78920343bda70fdc7a4c8dfb0e3a5f39ae31929c30a288e5c"},
+    "font": {"size": 4_828, "sha256": "aa453114276c3f51058caed239791daa3bb48a16f876d36660ecfe7db58dc971"},
+    "text": {"size": 10_992, "sha256": "701cab34c6b9cea204dfd198ab582c310ce2c16d3bb490be9ac0e848cb1681cc"},
+    "support": {"size": 3_092, "sha256": "0a31214791cc2b39689a0b2dfc2ee452e50d2754ce80b51ef17fc897e6846d0b"},
+}
+LVGL_LABEL_PROVIDER_ARTIFACTS = {
+    "label": {"size": 5_756, "sha256": "6c89a00e30e3a81f5a22ed0f142f7892866de140817c41914af52b79212446ca"},
+    "draw_buf": {"size": 2_340, "sha256": "b80546ec7eaebd862c90fa429f6d62c57c1325e97812a4a6024e1a1caae1c88d"},
+    "draw_rect": {"size": 1_140, "sha256": "a21fe24434375fd1a31dfc333b2cd523e51be510bc430306440fa12625da4f6a"},
+    "font": {"size": 3_916, "sha256": "d8ae8635c326b2659b7721aecf9243b7912d857848db45c3883d64d81f87ea9f"},
+    "text": {"size": 5_996, "sha256": "6449887516a60e55748bdc5975958f89b3f34d2040ae08f9cd0a7b0e3ce19ba5"},
+    "support": {"size": 3_672, "sha256": "bfd9c12968567ad89acdaa358086d3229fb153f02973ea9732e3ae69dcbb8697"},
+    "cluster": {"size": 18_472, "sha256": "2502cfe99b1c16732031b7e409d9ec416fd70d392fd071fd4fb80e5455862e1f"},
+}
+LVGL_LABEL_ABI_ARTIFACTS = {
+    "label": {"size": 1_016, "sha256": "f185d79c99c0db50f62c0817a6f2358bbc28291438bd564328ed1345f1553e79"},
+    "support": {"size": 1_220, "sha256": "f656d90f80dee80ba4852c07ff271e4ac734d7af43fc06cac6125a92170216b9"},
+}
+LVGL_LABEL_AGGREGATE_ARTIFACT = {
+    "size": 49_412,
+    "sha256": "81dad58e17c0beb4e5721229f73e8d935c29a1791c26c1635c2279c7b26daad5",
+}
+LVGL_LABEL_UPSTREAM_EVIDENCE = {
+    "repository": "https://github.com/lvgl/lvgl.git",
+    "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+    "tree": "2c76db856ec570f3ee12565181e5cf52bdd33d78",
+    "tree_record": LVGL_CORE_UPSTREAM_EVIDENCE["tree_record"],
+    "commit_record": LVGL_CORE_UPSTREAM_EVIDENCE["commit_record"],
+    "source_git_blobs": {
+        "src/draw/lv_draw_label.c": "02c4e7c3934f45086162aff1d318c7f0befc26ef",
+        "src/draw/lv_draw_label.h": "f2cc6daadbb67c1038c43d80c01c62d2e949de15",
+        "src/draw/lv_draw_label_private.h": "f4ee4ea03b963bd91638a1e0667195925117f8f1",
+        "src/draw/lv_draw_buf.c": "58562a86e55ca5897c3b79b3a486d3f7107aeea0",
+        "src/draw/lv_draw_rect.c": "3ee299ac56ce1a6c49959ab15608fb056a95e30d",
+        "src/font/lv_font.c": "a509621cc02be9022f8e947e491e814daab5a29d",
+        "src/misc/lv_text.c": "de182033b1f14e800bdb05d4198e5c748a542346",
+    },
+    "license": "MIT",
+    "qualification": (
+        "the exact label iterator, draw-letter helper, text layout, font lookup/release, "
+        "draw-buffer allocation, and fill-descriptor paths are retained"
+    ),
+}
 LVGL_DRAW_DISPATCH_PROVIDER_SYMBOLS = frozenset({"lv_draw_dispatch_request"})
 LVGL_DRAW_DISPATCH_PROVIDER_INPUTS = {
     "provider": (
@@ -1283,27 +1830,31 @@ LVGL_DRAW_DISPATCH_UPSTREAM_EVIDENCE = {
         "draw synchronization object and deliberately ignores both results"
     ),
 }
-LVGL_THREAD_SYNC_SIGNAL_PROVIDER_SYMBOLS = frozenset({"lv_thread_sync_signal"})
+LVGL_THREAD_SYNC_SIGNAL_PROVIDER_SYMBOLS = frozenset({
+    "lv_thread_init", "lv_thread_delete",
+    "lv_thread_sync_init", "lv_thread_sync_wait", "lv_thread_sync_signal",
+    "lv_thread_sync_delete",
+})
 LVGL_THREAD_SYNC_SIGNAL_PROVIDER_INPUTS = {
     "provider": (
         "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_thread_sync_signal_provider.c",
-        3_018, "c3243b85717b42fa610ce9d62ca9212e6d9dbb5ee58b347d4ec9773aa0d19cf8", "MIT",
+        9_428, "6ad255b1942d8ab316a49dc34a48f19b2c7624d1b524de9b0f8f865ecb29c642", "MIT",
     ),
     "provider_header": (
         "third_party/lvgl-ambiq-backend/g2-runtime/lvgl_ambiq_lvgl_thread_sync_signal_provider.h",
-        585, "f45cf159a935ffd71e980e1de1ceb9d5845ad7bb954dfa4aa8e773b8915e38b4", "MIT",
+        1_635, "5338079762f5bd94e7a6112e007924e039febe8dd2696f1e47eca01d3c6c0c1b", "MIT",
     ),
     "abi_probe": (
         "tests/fixtures/lvgl_ambiq_lvgl_thread_sync_signal_provider_abi.c",
-        871, "fe5d9fe0ad39ccd02ff576ae9378fa518e04a54da0cd2e5dd38a7c257a5913bf", "MIT",
+        1_965, "854a0ab3a9e50a69361a61b712cb9d289f07abdf9b1765d354d081570eaf9a5f", "MIT",
     ),
     "hostile_host_fixture": (
         "tests/fixtures/lvgl_ambiq_lvgl_thread_sync_signal_provider_host.c",
-        3_191, "6598a84dfea87bde5449a9a1c6259a26c84bf119e7bf3804e1e39900b5237205", "MIT",
+        10_285, "c90123d093aed4781081d2a1754df700bd35cdad8d49a2a442db30c09a9cd2be", "MIT",
     ),
     "host_config": (
         "tests/fixtures/lvgl_ambiq_lvgl_thread_sync_signal_provider_host_config.h",
-        663, "8a873ee14edc662fa4b7e12dc059e255f7c01830e5eec709eb0d41fe7dbd8f54", "MIT",
+        1_481, "195cdb859d6bde8c6afa9461d52b20881ad1541eb41f682def6dc496ae6f5e88", "MIT",
     ),
     "upstream_lv_freertos": LVGL_MUTEX_PROVIDER_INPUTS["upstream_lv_freertos"],
     "upstream_lv_freertos_header": LVGL_MUTEX_PROVIDER_INPUTS["upstream_lv_freertos_header"],
@@ -1321,22 +1872,34 @@ LVGL_THREAD_SYNC_SIGNAL_PROVIDER_INPUTS = {
         "e33a4a76b2f018fd191d10d1a9a3f1c1c777031e2a41c7b3a6b459d5cb07e2ab", "MIT",
     ),
     "source_owned_scheduler_port": LVGL_MUTEX_PROVIDER_INPUTS["source_owned_scheduler_port"],
+    "upstream_freertos_tasks": (
+        "third_party/freertos-kernel/tasks.c", 223_695,
+        "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463", "MIT",
+    ),
+    "g2_freertos_tcb_patch": (
+        "components/shared/freertos/g2-tcb-v10.5.1.patch", 1_730,
+        "cf8c457153b75ad6a3163b9b6e6873e476e03537bb4534c9c8e4557de0eb4eb3", "MIT",
+    ),
+    "source_owned_task_delete": (
+        "components/shared/freertos/runtime_freertos_task_delete.c", 4_684,
+        "fd0f9a420781d8bcf2365bae20a5b6946e6092a33bb7ea8bf713f3ab9e5261cd", "MIT",
+    ),
 }
 LVGL_THREAD_SYNC_SIGNAL_SOURCE_ARTIFACT = {
-    "size": 984,
-    "sha256": "311b0db237f5051bce92970186641d2771c29e0a1c382387ede9c204af84909d",
+    "size": 2_820,
+    "sha256": "ea7b79666b87c9a5d23894183e7a68bc908ae20612d26998558352d1a618a7c1",
 }
 LVGL_THREAD_SYNC_SIGNAL_PROVIDER_ARTIFACT = {
-    "size": 1_140,
-    "sha256": "48251997ef18222cd29f8397f049ad5ca3c20b95b789d8917bbb03632db69269",
+    "size": 3_592,
+    "sha256": "ddbbc2988d6f974c109e0f5d826f24579a2251d7acb569414b05184cb35252da",
 }
 LVGL_THREAD_SYNC_SIGNAL_ABI_PROBE_ARTIFACT = {
-    "size": 1_044,
-    "sha256": "9895a3e05c4f9405ac0aabf7cb0c09d32946d8a7d13340fccb567d81be513787",
+    "size": 1_628,
+    "sha256": "6c4cdc36d26040954239adb9caa26c86acf82bc2670a8c407a3fa9b3c7a16caa",
 }
 LVGL_THREAD_SYNC_SIGNAL_AGGREGATE_ARTIFACT = {
-    "size": 1_836,
-    "sha256": "4d9ee85c604f6ad3f18a8d547fad3a775f326d2f2cf9c866cc144e1c330bb79b",
+    "size": 4_288,
+    "sha256": "4f82e5232652fd83555c7321d2743c14eb75e0b1b8de728df2db691fe1fe3e2c",
 }
 LVGL_THREAD_SYNC_SIGNAL_UPSTREAM_EVIDENCE = {
     "repository": "https://github.com/lvgl/lvgl.git",
@@ -1355,14 +1918,20 @@ LVGL_THREAD_SYNC_SIGNAL_UPSTREAM_EVIDENCE = {
     "notify_mode": 1,
     "qualification": (
         "the recovered non-Kconfig FreeRTOS configuration selects task notifications; the exact "
-        "12-byte condition ABI, lazy initialization, pending-signal and waiter-notify paths are "
-        "bound to already source-owned fixed FreeRTOS entries"
+        "12-byte condition and thread ABIs, dynamic thread lifecycle, lazy initialization, "
+        "pending-signal, task-take, and waiter-notify paths are recovered in maintained C over "
+        "already source-owned scheduler entries"
     ),
 }
 LVGL_THREAD_SYNC_SIGNAL_FIXED_IMPORTS = {
     "0x004420D1": "source-owned vPortEnterCritical Thumb entry",
     "0x004420E9": "source-owned vPortExitCritical Thumb entry",
+    "0x0045589D": "source-owned xTaskGetCurrentTaskHandle Thumb entry",
+    "0x00455FA9": "source-owned prvAddCurrentTaskToDelayedList Thumb entry",
+    "0x004420BD": "source-owned vPortYield Thumb entry",
     "0x00455C49": "source-owned xTaskGenericNotify Thumb entry",
+    "0x004548BB": "source-owned xTaskCreate Thumb entry",
+    "0x00454AAF": "source-owned vTaskDelete Thumb entry",
 }
 BUFFER_HELPER_INPUTS = {
     "source": {
@@ -1497,14 +2066,7 @@ EXPECTED_PUBLIC_RESIDUAL_SYMBOLS = (
     "nemagfx_power_control", "sinf", "sqrt", "tanf", "utf8_codepoint_size",
 )
 
-EXPECTED_MAXIMAL_RESIDUAL_SYMBOLS = (
-    "lv_draw_get_available_task",
-    "lv_draw_label_iterate_characters",
-    "lv_draw_layer_alloc_buf",
-    "lv_image_decoder_close", "lv_image_decoder_open", "lv_log_add",
-    "lv_thread_delete", "lv_thread_init", "lv_thread_sync_delete",
-    "lv_thread_sync_init", "lv_thread_sync_wait",
-)
+EXPECTED_MAXIMAL_RESIDUAL_SYMBOLS: tuple[str, ...] = ()
 
 HAL_SYMBOLS = frozenset(
     {
@@ -1745,7 +2307,7 @@ def _validate_static_boundary() -> None:
     if set(ARCHIVE_CONSUMERS) - set(symbols):
         raise AuditError("archive relocation ledger contains a non-residual symbol")
     maximal = list(EXPECTED_MAXIMAL_RESIDUAL_SYMBOLS)
-    if len(maximal) != 11 or maximal != sorted(set(maximal)):
+    if maximal or maximal != sorted(set(maximal)):
         raise AuditError("maximal residual symbol ledger has an omission or duplicate")
     if _digest(maximal) != EXPECTED_MAXIMAL_RESIDUAL_DIGEST:
         raise AuditError("maximal residual symbol ledger identity changed")
@@ -1789,6 +2351,16 @@ def _validate_static_boundary() -> None:
         raise AuditError("local LVGL vector-destroy symbol remains in maximal residual ledger")
     if set(LVGL_DRAW_UNIT_PROVIDER_SYMBOLS) & set(maximal):
         raise AuditError("local LVGL draw-unit symbol remains in maximal residual ledger")
+    if set(LVGL_DRAW_TASK_PROVIDER_SYMBOLS) & set(maximal):
+        raise AuditError("local LVGL draw-task symbol remains in maximal residual ledger")
+    if set(LVGL_LAYER_ALLOC_PROVIDER_SYMBOLS) & set(maximal):
+        raise AuditError("local LVGL layer-allocation symbol remains in maximal residual ledger")
+    if set(LVGL_LOG_PROVIDER_SYMBOLS) & set(maximal):
+        raise AuditError("local LVGL logging symbol remains in maximal residual ledger")
+    if set(LVGL_DECODER_PROVIDER_SYMBOLS) & set(maximal):
+        raise AuditError("local LVGL decoder symbols remain in maximal residual ledger")
+    if set(LVGL_LABEL_PROVIDER_SYMBOLS) & set(maximal):
+        raise AuditError("local LVGL label symbol remains in maximal residual ledger")
     if set(LVGL_DRAW_DISPATCH_PROVIDER_SYMBOLS) & set(maximal):
         raise AuditError("local LVGL draw-dispatch symbol remains in maximal residual ledger")
     if set(LVGL_THREAD_SYNC_SIGNAL_PROVIDER_SYMBOLS) & set(maximal):
@@ -4487,6 +5059,1134 @@ def _compile_lvgl_draw_unit_provider(
     }
 
 
+def _compile_lvgl_draw_task_provider(
+    builder, output_dir: Path, core_obj: Path, global_storage_obj: Path,
+    clang: str, nm: str, objdump: str, lld: str,
+) -> tuple[Path, dict[str, Any]]:
+    inputs: dict[str, dict[str, Any]] = {}
+    for name, (relative, size, sha256, license_id) in LVGL_DRAW_TASK_PROVIDER_INPUTS.items():
+        path = ROOT / relative
+        data = path.read_bytes()
+        if len(data) != size or _sha256(data) != sha256:
+            raise AuditError(f"LVGL draw-task input identity changed: {relative}")
+        inputs[name] = {
+            "path": relative, "size": size, "sha256": sha256, "license": license_id,
+        }
+
+    upstream = json.loads(
+        (ROOT / LVGL_DRAW_TASK_UPSTREAM_EVIDENCE["tree_record"]["path"]).read_text()
+    )
+    observed_blobs: dict[str, str] = {}
+    for source_path in LVGL_DRAW_TASK_UPSTREAM_EVIDENCE["source_git_blobs"]:
+        parent, name = source_path.rsplit("/", 1)
+        tree = next((row for row in upstream.get("trees", []) if row.get("path") == parent), None)
+        if tree is None:
+            raise AuditError(f"LVGL draw-task tree record omits {parent}")
+        entry = next((row for row in tree.get("entries", []) if row.get("name") == name), None)
+        if entry is None or entry.get("type") != "blob":
+            raise AuditError(f"LVGL draw-task tree record omits {source_path}")
+        observed_blobs[source_path] = entry["oid"]
+    if (
+        upstream.get("root_tree") != LVGL_DRAW_TASK_UPSTREAM_EVIDENCE["tree"]
+        or observed_blobs != LVGL_DRAW_TASK_UPSTREAM_EVIDENCE["source_git_blobs"]
+    ):
+        raise AuditError("LVGL draw-task authenticated source identity changed")
+    for record_name in ("tree_record", "commit_record"):
+        record = LVGL_DRAW_TASK_UPSTREAM_EVIDENCE[record_name]
+        data = (ROOT / record["path"]).read_bytes()
+        if len(data) != record["size"] or _sha256(data) != record["sha256"]:
+            raise AuditError(f"LVGL draw-task {record_name} identity changed")
+    commit_record = json.loads(
+        (ROOT / LVGL_DRAW_TASK_UPSTREAM_EVIDENCE["commit_record"]["path"]).read_text()
+    )
+    if commit_record.get("oid") != LVGL_DRAW_TASK_UPSTREAM_EVIDENCE["commit"]:
+        raise AuditError("LVGL draw-task upstream commit identity changed")
+
+    parts = output_dir / "providers/lvgl-draw-task-parts"
+    parts.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="opencfw-lvgl-draw-task-") as temporary:
+        stage = Path(temporary)
+        lvgl = builder._stage_tree(stage)
+        stubs = stage / "stubs"
+        builder._write_stubs(stubs)
+        flags = [
+            *builder._compiler_flags(clang, stage, lvgl, stubs),
+            "-Wall", "-Wextra", "-Werror",
+            "-I", str(ROOT / "third_party/lvgl-ambiq-backend/g2-runtime"),
+        ]
+        source_obj = parts / "lvgl_ambiq_lvgl_draw_task_provider.o"
+        output = _run([
+            *flags, "-c", str(ROOT / LVGL_DRAW_TASK_PROVIDER_INPUTS["provider"][0]),
+            "-o", str(source_obj),
+        ], cwd=stage)
+        if "warning:" in output:
+            raise AuditError(f"warning in LVGL draw-task compile:\n{output}")
+        abi_obj = parts / "lvgl_ambiq_lvgl_draw_task_provider_abi.o"
+        abi_output = _run([
+            *flags, "-c", str(ROOT / LVGL_DRAW_TASK_PROVIDER_INPUTS["abi_probe"][0]),
+            "-o", str(abi_obj),
+        ], cwd=stage)
+        if "warning:" in abi_output:
+            raise AuditError(f"warning in LVGL draw-task ABI compile:\n{abi_output}")
+
+    expected_imports = {"lv_area_intersect", "lv_global"}
+    expected_relocations = {
+        "lv_area_intersect": {"R_ARM_THM_CALL": 1},
+        "lv_global": {"R_ARM_THM_MOVT_ABS": 1, "R_ARM_THM_MOVW_ABS_NC": 1},
+    }
+    source_data = source_obj.read_bytes()
+    source_undefined = _symbols(nm, source_obj, undefined=True)
+    if (
+        source_undefined != expected_imports
+        or _symbols(nm, source_obj, undefined=False) != set(LVGL_DRAW_TASK_PROVIDER_SYMBOLS)
+        or _relocations(objdump, source_obj, source_undefined) != expected_relocations
+        or len(source_data) != LVGL_DRAW_TASK_SOURCE_ARTIFACT["size"]
+        or _sha256(source_data) != LVGL_DRAW_TASK_SOURCE_ARTIFACT["sha256"]
+    ):
+        raise AuditError("LVGL draw-task source object boundary changed")
+
+    abi_data = abi_obj.read_bytes()
+    abi_undefined = _symbols(nm, abi_obj, undefined=True)
+    if (
+        len(abi_data) != LVGL_DRAW_TASK_ABI_PROBE_ARTIFACT["size"]
+        or _sha256(abi_data) != LVGL_DRAW_TASK_ABI_PROBE_ARTIFACT["sha256"]
+        or abi_undefined != set(LVGL_DRAW_TASK_PROVIDER_SYMBOLS)
+        or _symbols(nm, abi_obj, undefined=False) != {"open_cfw_lvgl_draw_task_probe"}
+        or _relocations(objdump, abi_obj, abi_undefined) != {
+            "lv_draw_get_available_task": {"R_ARM_THM_JUMP24": 1},
+        }
+    ):
+        raise AuditError("LVGL draw-task ABI probe boundary changed")
+
+    provider = output_dir / "providers/lvgl-ambiq-lvgl-draw-task-provider.o"
+    _run([
+        lld, "-r", "--gc-sections", "-u", "lv_draw_get_available_task",
+        "-o", str(provider), str(source_obj),
+    ])
+    provider_data = provider.read_bytes()
+    if (
+        _symbols(nm, provider, undefined=True) != expected_imports
+        or _symbols(nm, provider, undefined=False) != set(LVGL_DRAW_TASK_PROVIDER_SYMBOLS)
+        or _relocations(objdump, provider, expected_imports) != expected_relocations
+        or len(provider_data) != LVGL_DRAW_TASK_PROVIDER_ARTIFACT["size"]
+        or _sha256(provider_data) != LVGL_DRAW_TASK_PROVIDER_ARTIFACT["sha256"]
+    ):
+        raise AuditError("LVGL draw-task isolated provider closure changed")
+
+    aggregate = output_dir / "providers/lvgl-ambiq-lvgl-draw-task-aggregate.o"
+    aggregate_exports = (
+        LVGL_DRAW_TASK_PROVIDER_SYMBOLS
+        | LVGL_CORE_PROVIDER_SYMBOLS
+        | LVGL_GLOBAL_STORAGE_PROVIDER_SYMBOLS
+    )
+    command = [lld, "-r", "--gc-sections"]
+    for symbol in sorted(aggregate_exports):
+        command.extend(["-u", symbol])
+    _run([
+        *command, "-o", str(aggregate), str(provider), str(core_obj),
+        str(global_storage_obj),
+    ])
+    aggregate_data = aggregate.read_bytes()
+    if (
+        _symbols(nm, aggregate, undefined=True)
+        or _symbols(nm, aggregate, undefined=False) != set(aggregate_exports)
+        or len(aggregate_data) != LVGL_DRAW_TASK_AGGREGATE_ARTIFACT["size"]
+        or _sha256(aggregate_data) != LVGL_DRAW_TASK_AGGREGATE_ARTIFACT["sha256"]
+    ):
+        raise AuditError("LVGL draw-task aggregate closure changed")
+
+    return provider, {
+        "inputs": inputs,
+        "authenticated_upstream": LVGL_DRAW_TASK_UPSTREAM_EVIDENCE,
+        "target_source_artifact": {
+            "path": source_obj.name, "size": len(source_data), "sha256": _sha256(source_data),
+        },
+        "artifact": {
+            "path": provider.name, "size": len(provider_data), "sha256": _sha256(provider_data),
+        },
+        "abi_probe_artifact": {
+            "path": abi_obj.name, "size": len(abi_data), "sha256": _sha256(abi_data),
+        },
+        "aggregate_link_artifact": {
+            "path": aggregate.name, "size": len(aggregate_data),
+            "sha256": _sha256(aggregate_data),
+        },
+        "required_exports": sorted(LVGL_DRAW_TASK_PROVIDER_SYMBOLS),
+        "all_external_exports": sorted(_symbols(nm, provider, undefined=False)),
+        "elf_undefined_symbols": sorted(expected_imports),
+        "external_relocations": expected_relocations,
+        "reviewed_runtime_dependencies": {
+            "lv_area_intersect": "local_lvgl_core_provider",
+            "lv_global": "local_lvgl_global_storage_provider",
+        },
+        "aggregate_elf_undefined_symbols": [],
+        "fixed_address_imports": {},
+        "fixed_address_import_count": 0,
+        "warning_count": 0,
+        "hostile_input_policy": (
+            "a null layer fails closed; valid lists preserve single-unit order, multi-unit "
+            "full-screen serialization, preferred-unit filtering, and older-task independence"
+        ),
+        "source_admitted": True,
+        "production_overlay_registered": False,
+        "hardware_qualified": False,
+        "qualification": (
+            "exact-ABI draw-task selection with reviewed global/area aggregate closure; "
+            "live display/global initialization, list lifetime, serialization, collision, "
+            "RAM placement, and concurrency remain unqualified"
+        ),
+    }
+
+
+def _compile_lvgl_log_provider(
+    builder, output_dir: Path, global_storage_obj: Path,
+    clang: str, nm: str, objdump: str, lld: str,
+) -> tuple[Path, Path, dict[str, Any]]:
+    inputs: dict[str, dict[str, Any]] = {}
+    for name, (relative, size, sha256, license_id) in LVGL_LOG_PROVIDER_INPUTS.items():
+        path = ROOT / relative
+        data = path.read_bytes()
+        if len(data) != size or _sha256(data) != sha256:
+            raise AuditError(f"LVGL logging input identity changed: {relative}")
+        inputs[name] = {
+            "path": relative, "size": size, "sha256": sha256, "license": license_id,
+        }
+
+    upstream = json.loads(
+        (ROOT / LVGL_LOG_UPSTREAM_EVIDENCE["tree_record"]["path"]).read_text()
+    )
+    observed_blobs: dict[str, str] = {}
+    for source_path in LVGL_LOG_UPSTREAM_EVIDENCE["source_git_blobs"]:
+        parent, name = source_path.rsplit("/", 1)
+        tree = next((row for row in upstream.get("trees", []) if row.get("path") == parent), None)
+        if tree is None:
+            raise AuditError(f"LVGL logging tree record omits {parent}")
+        entry = next((row for row in tree.get("entries", []) if row.get("name") == name), None)
+        if entry is None or entry.get("type") != "blob":
+            raise AuditError(f"LVGL logging tree record omits {source_path}")
+        observed_blobs[source_path] = entry["oid"]
+    if (
+        upstream.get("root_tree") != LVGL_LOG_UPSTREAM_EVIDENCE["tree"]
+        or observed_blobs != LVGL_LOG_UPSTREAM_EVIDENCE["source_git_blobs"]
+    ):
+        raise AuditError("LVGL logging authenticated source identity changed")
+    for record_name in ("tree_record", "commit_record"):
+        record = LVGL_LOG_UPSTREAM_EVIDENCE[record_name]
+        data = (ROOT / record["path"]).read_bytes()
+        if len(data) != record["size"] or _sha256(data) != record["sha256"]:
+            raise AuditError(f"LVGL logging {record_name} identity changed")
+    commit_record = json.loads(
+        (ROOT / LVGL_LOG_UPSTREAM_EVIDENCE["commit_record"]["path"]).read_text()
+    )
+    if commit_record.get("oid") != LVGL_LOG_UPSTREAM_EVIDENCE["commit"]:
+        raise AuditError("LVGL logging upstream commit identity changed")
+
+    runtime_keys = (
+        "runtime_printf_wrappers", "runtime_vsnprintf", "runtime_format_parse_helpers",
+        "runtime_format_out_reverse", "runtime_ntoa_format", "runtime_ntoa_integer",
+        "runtime_ftoa", "runtime_etoa", "runtime_bounded_string_length",
+        "runtime_strnlen_s", "runtime_string", "lv_tick", "aeabi_divmod",
+    )
+    parts = output_dir / "providers/lvgl-log-parts"
+    parts.mkdir(parents=True, exist_ok=True)
+    runtime_parts: list[Path] = []
+    with tempfile.TemporaryDirectory(prefix="opencfw-lvgl-log-") as temporary:
+        stage = Path(temporary)
+        lvgl = builder._stage_tree(stage)
+        stubs = stage / "stubs"
+        builder._write_stubs(stubs)
+        flags = [
+            *builder._compiler_flags(clang, stage, lvgl, stubs),
+            "-Wall", "-Wextra", "-Werror",
+            "-I", str(ROOT / "third_party/lvgl-ambiq-backend/g2-runtime"),
+        ]
+        source_obj = parts / "lvgl_ambiq_lvgl_log_provider.o"
+        output = _run([
+            *flags, "-c", str(ROOT / LVGL_LOG_PROVIDER_INPUTS["provider"][0]),
+            "-o", str(source_obj),
+        ], cwd=stage)
+        if "warning:" in output:
+            raise AuditError(f"warning in LVGL logging compile:\n{output}")
+        abi_obj = parts / "lvgl_ambiq_lvgl_log_provider_abi.o"
+        abi_output = _run([
+            *flags, "-c", str(ROOT / LVGL_LOG_PROVIDER_INPUTS["abi_probe"][0]),
+            "-o", str(abi_obj),
+        ], cwd=stage)
+        if "warning:" in abi_output:
+            raise AuditError(f"warning in LVGL logging ABI compile:\n{abi_output}")
+        for key in runtime_keys:
+            runtime_part = parts / f"{key}.o"
+            runtime_output = _run([
+                *flags, "-c", str(ROOT / LVGL_LOG_PROVIDER_INPUTS[key][0]),
+                "-o", str(runtime_part),
+            ], cwd=stage)
+            if "warning:" in runtime_output:
+                raise AuditError(f"warning in LVGL logging runtime compile ({key}):\n{runtime_output}")
+            runtime_parts.append(runtime_part)
+
+    expected_imports = set(LVGL_LOG_RUNTIME_ROOT_SYMBOLS) | {"lv_global"}
+    expected_relocations = {
+        "lv_global": {"R_ARM_THM_MOVT_ABS": 1, "R_ARM_THM_MOVW_ABS_NC": 1},
+        "open_cfw_lv_tick_get": {"R_ARM_THM_CALL": 1},
+        "open_cfw_runtime_snprintf": {"R_ARM_THM_CALL": 1},
+        "open_cfw_runtime_vsnprintf_wrapper": {"R_ARM_THM_CALL": 1},
+        "open_cfw_strlen": {"R_ARM_THM_CALL": 1},
+    }
+    source_data = source_obj.read_bytes()
+    source_undefined = _symbols(nm, source_obj, undefined=True)
+    if (
+        source_undefined != expected_imports
+        or _symbols(nm, source_obj, undefined=False) != set(LVGL_LOG_PROVIDER_SYMBOLS)
+        or _relocations(objdump, source_obj, source_undefined) != expected_relocations
+        or len(source_data) != LVGL_LOG_SOURCE_ARTIFACT["size"]
+        or _sha256(source_data) != LVGL_LOG_SOURCE_ARTIFACT["sha256"]
+    ):
+        raise AuditError("LVGL logging source object boundary changed")
+
+    abi_data = abi_obj.read_bytes()
+    abi_undefined = _symbols(nm, abi_obj, undefined=True)
+    if (
+        len(abi_data) != LVGL_LOG_ABI_PROBE_ARTIFACT["size"]
+        or _sha256(abi_data) != LVGL_LOG_ABI_PROBE_ARTIFACT["sha256"]
+        or abi_undefined != set(LVGL_LOG_PROVIDER_SYMBOLS)
+        or _symbols(nm, abi_obj, undefined=False) != {"open_cfw_lvgl_log_probe"}
+        or _relocations(objdump, abi_obj, abi_undefined) != {
+            "lv_log_add": {"R_ARM_THM_CALL": 1},
+        }
+    ):
+        raise AuditError("LVGL logging ABI probe boundary changed")
+
+    provider = output_dir / "providers/lvgl-ambiq-lvgl-log-provider.o"
+    _run([
+        lld, "-r", "--gc-sections", "-u", "lv_log_add",
+        "-o", str(provider), str(source_obj),
+    ])
+    provider_data = provider.read_bytes()
+    if (
+        _symbols(nm, provider, undefined=True) != expected_imports
+        or _symbols(nm, provider, undefined=False) != set(LVGL_LOG_PROVIDER_SYMBOLS)
+        or _relocations(objdump, provider, expected_imports) != expected_relocations
+        or len(provider_data) != LVGL_LOG_PROVIDER_ARTIFACT["size"]
+        or _sha256(provider_data) != LVGL_LOG_PROVIDER_ARTIFACT["sha256"]
+    ):
+        raise AuditError("LVGL logging isolated provider closure changed")
+
+    runtime = output_dir / "providers/lvgl-ambiq-lvgl-log-runtime.o"
+    command = [lld, "-r", "--gc-sections"]
+    for symbol in sorted(LVGL_LOG_RUNTIME_ROOT_SYMBOLS):
+        command.extend(["-u", symbol])
+    _run([*command, "-o", str(runtime), *map(str, runtime_parts)])
+    runtime_data = runtime.read_bytes()
+    if (
+        _symbols(nm, runtime, undefined=True)
+        or _symbols(nm, runtime, undefined=False) != set(LVGL_LOG_RUNTIME_EXPORTS)
+        or len(runtime_data) != LVGL_LOG_RUNTIME_ARTIFACT["size"]
+        or _sha256(runtime_data) != LVGL_LOG_RUNTIME_ARTIFACT["sha256"]
+    ):
+        raise AuditError("LVGL logging production runtime closure changed")
+    tick_source = (ROOT / LVGL_LOG_PROVIDER_INPUTS["lv_tick"][0]).read_text(encoding="utf-8")
+    if set(re.findall(r"0x[0-9A-Fa-f]{8}U", tick_source)) != {"0x2006F600U"}:
+        raise AuditError("LVGL logging tick-state address changed")
+
+    aggregate = output_dir / "providers/lvgl-ambiq-lvgl-log-aggregate.o"
+    aggregate_exports = (
+        LVGL_LOG_PROVIDER_SYMBOLS | LVGL_LOG_RUNTIME_EXPORTS
+        | LVGL_GLOBAL_STORAGE_PROVIDER_SYMBOLS
+    )
+    command = [lld, "-r", "--gc-sections"]
+    for symbol in sorted(
+        LVGL_LOG_PROVIDER_SYMBOLS | LVGL_LOG_RUNTIME_ROOT_SYMBOLS
+        | LVGL_GLOBAL_STORAGE_PROVIDER_SYMBOLS
+    ):
+        command.extend(["-u", symbol])
+    _run([
+        *command, "-o", str(aggregate), str(provider), str(runtime),
+        str(global_storage_obj),
+    ])
+    aggregate_data = aggregate.read_bytes()
+    if (
+        _symbols(nm, aggregate, undefined=True)
+        or _symbols(nm, aggregate, undefined=False) != set(aggregate_exports)
+        or len(aggregate_data) != LVGL_LOG_AGGREGATE_ARTIFACT["size"]
+        or _sha256(aggregate_data) != LVGL_LOG_AGGREGATE_ARTIFACT["sha256"]
+    ):
+        raise AuditError("LVGL logging aggregate closure changed")
+
+    return provider, runtime, {
+        "inputs": inputs,
+        "authenticated_upstream": LVGL_LOG_UPSTREAM_EVIDENCE,
+        "target_source_artifact": {
+            "path": source_obj.name, "size": len(source_data), "sha256": _sha256(source_data),
+        },
+        "artifact": {
+            "path": provider.name, "size": len(provider_data), "sha256": _sha256(provider_data),
+        },
+        "abi_probe_artifact": {
+            "path": abi_obj.name, "size": len(abi_data), "sha256": _sha256(abi_data),
+        },
+        "production_runtime_artifact": {
+            "path": runtime.name, "size": len(runtime_data), "sha256": _sha256(runtime_data),
+        },
+        "aggregate_link_artifact": {
+            "path": aggregate.name, "size": len(aggregate_data),
+            "sha256": _sha256(aggregate_data),
+        },
+        "required_exports": sorted(LVGL_LOG_PROVIDER_SYMBOLS),
+        "runtime_root_symbols": sorted(LVGL_LOG_RUNTIME_ROOT_SYMBOLS),
+        "runtime_all_exports": sorted(LVGL_LOG_RUNTIME_EXPORTS),
+        "all_external_exports": sorted(_symbols(nm, provider, undefined=False)),
+        "elf_undefined_symbols": sorted(expected_imports),
+        "external_relocations": expected_relocations,
+        "reviewed_runtime_dependencies": {
+            "lv_global": "local_lvgl_global_storage_provider",
+            "open_cfw_lv_tick_get": "source-owned core-overlay tick provider",
+            "open_cfw_runtime_snprintf": "source-owned core-overlay formatter provider",
+            "open_cfw_runtime_vsnprintf_wrapper": "source-owned core-overlay formatter provider",
+            "open_cfw_strlen": "source-owned core-overlay string provider",
+        },
+        "aggregate_elf_undefined_symbols": [],
+        "fixed_runtime_addresses": {
+            "0x2006F600": "source-owned LVGL tick state inside authenticated lv_global storage",
+        },
+        "warning_count": 0,
+        "hostile_input_policy": (
+            "invalid levels and null file/function/format inputs return before formatting; valid "
+            "callback-mode messages remain bounded to the authenticated 256/512-byte buffers"
+        ),
+        "source_admitted": True,
+        "production_overlay_registered": False,
+        "hardware_qualified": False,
+        "qualification": (
+            "exact callback-mode WARN logging over the existing source-owned formatter/string/tick "
+            "cluster; live callback ownership, tick concurrency, collision, placement, and output "
+            "transport remain unqualified"
+        ),
+    }
+
+
+def _compile_lvgl_layer_alloc_provider(
+    builder, output_dir: Path, core_obj: Path, stateless_obj: Path,
+    heap_array_obj: Path, lifecycle_obj: Path, global_storage_obj: Path,
+    shape_obj: Path, log_obj: Path, log_runtime_obj: Path,
+    clang: str, nm: str, objdump: str, lld: str,
+) -> tuple[Path, dict[str, Any]]:
+    inputs: dict[str, dict[str, Any]] = {}
+    for name, (relative, size, sha256, license_id) in LVGL_LAYER_ALLOC_PROVIDER_INPUTS.items():
+        path = ROOT / relative
+        data = path.read_bytes()
+        if len(data) != size or _sha256(data) != sha256:
+            raise AuditError(f"LVGL layer-allocation input identity changed: {relative}")
+        inputs[name] = {
+            "path": relative, "size": size, "sha256": sha256, "license": license_id,
+        }
+
+    upstream = json.loads(
+        (ROOT / LVGL_LAYER_ALLOC_UPSTREAM_EVIDENCE["tree_record"]["path"]).read_text()
+    )
+    observed_blobs: dict[str, str] = {}
+    for source_path in LVGL_LAYER_ALLOC_UPSTREAM_EVIDENCE["source_git_blobs"]:
+        parent, name = source_path.rsplit("/", 1)
+        tree = next((row for row in upstream.get("trees", []) if row.get("path") == parent), None)
+        if tree is None:
+            raise AuditError(f"LVGL layer-allocation tree record omits {parent}")
+        entry = next((row for row in tree.get("entries", []) if row.get("name") == name), None)
+        if entry is None or entry.get("type") != "blob":
+            raise AuditError(f"LVGL layer-allocation tree record omits {source_path}")
+        observed_blobs[source_path] = entry["oid"]
+    if (
+        upstream.get("root_tree") != LVGL_LAYER_ALLOC_UPSTREAM_EVIDENCE["tree"]
+        or observed_blobs != LVGL_LAYER_ALLOC_UPSTREAM_EVIDENCE["source_git_blobs"]
+    ):
+        raise AuditError("LVGL layer-allocation authenticated source identity changed")
+    for record_name in ("tree_record", "commit_record"):
+        record = LVGL_LAYER_ALLOC_UPSTREAM_EVIDENCE[record_name]
+        data = (ROOT / record["path"]).read_bytes()
+        if len(data) != record["size"] or _sha256(data) != record["sha256"]:
+            raise AuditError(f"LVGL layer-allocation {record_name} identity changed")
+    commit_record = json.loads(
+        (ROOT / LVGL_LAYER_ALLOC_UPSTREAM_EVIDENCE["commit_record"]["path"]).read_text()
+    )
+    if commit_record.get("oid") != LVGL_LAYER_ALLOC_UPSTREAM_EVIDENCE["commit"]:
+        raise AuditError("LVGL layer-allocation upstream commit identity changed")
+
+    parts = output_dir / "providers/lvgl-layer-alloc-parts"
+    parts.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="opencfw-lvgl-layer-alloc-") as temporary:
+        stage = Path(temporary)
+        lvgl = builder._stage_tree(stage)
+        stubs = stage / "stubs"
+        builder._write_stubs(stubs)
+        flags = [
+            *builder._compiler_flags(clang, stage, lvgl, stubs),
+            "-Wall", "-Wextra", "-Werror",
+            "-I", str(ROOT / "third_party/lvgl-ambiq-backend/g2-runtime"),
+        ]
+        source_obj = parts / "lvgl_ambiq_lvgl_layer_alloc_provider.o"
+        output = _run([
+            *flags, "-c", str(ROOT / LVGL_LAYER_ALLOC_PROVIDER_INPUTS["provider"][0]),
+            "-o", str(source_obj),
+        ], cwd=stage)
+        if "warning:" in output:
+            raise AuditError(f"warning in LVGL layer-allocation compile:\n{output}")
+        abi_obj = parts / "lvgl_ambiq_lvgl_layer_alloc_provider_abi.o"
+        abi_output = _run([
+            *flags, "-c", str(ROOT / LVGL_LAYER_ALLOC_PROVIDER_INPUTS["abi_probe"][0]),
+            "-o", str(abi_obj),
+        ], cwd=stage)
+        if "warning:" in abi_output:
+            raise AuditError(f"warning in LVGL layer-allocation ABI compile:\n{abi_output}")
+
+    expected_imports = {
+        "lv_area_get_height", "lv_area_get_width", "lv_draw_buf_create",
+        "lv_draw_buf_destroy", "lv_draw_buf_flush_cache", "lv_global",
+        "lv_log_add", "lv_memset",
+    }
+    expected_relocations = {
+        "lv_area_get_height": {"R_ARM_THM_CALL": 1},
+        "lv_area_get_width": {"R_ARM_THM_CALL": 1},
+        "lv_draw_buf_create": {"R_ARM_THM_CALL": 1},
+        "lv_draw_buf_destroy": {"R_ARM_THM_CALL": 2},
+        "lv_draw_buf_flush_cache": {"R_ARM_THM_CALL": 1},
+        "lv_global": {"R_ARM_THM_MOVT_ABS": 1, "R_ARM_THM_MOVW_ABS_NC": 1},
+        "lv_log_add": {"R_ARM_THM_CALL": 1},
+        "lv_memset": {"R_ARM_THM_CALL": 1},
+    }
+    source_data = source_obj.read_bytes()
+    source_undefined = _symbols(nm, source_obj, undefined=True)
+    if (
+        source_undefined != expected_imports
+        or _symbols(nm, source_obj, undefined=False) != set(LVGL_LAYER_ALLOC_PROVIDER_SYMBOLS)
+        or _relocations(objdump, source_obj, source_undefined) != expected_relocations
+        or len(source_data) != LVGL_LAYER_ALLOC_SOURCE_ARTIFACT["size"]
+        or _sha256(source_data) != LVGL_LAYER_ALLOC_SOURCE_ARTIFACT["sha256"]
+    ):
+        raise AuditError("LVGL layer-allocation source object boundary changed")
+
+    abi_data = abi_obj.read_bytes()
+    abi_undefined = _symbols(nm, abi_obj, undefined=True)
+    if (
+        len(abi_data) != LVGL_LAYER_ALLOC_ABI_PROBE_ARTIFACT["size"]
+        or _sha256(abi_data) != LVGL_LAYER_ALLOC_ABI_PROBE_ARTIFACT["sha256"]
+        or abi_undefined != set(LVGL_LAYER_ALLOC_PROVIDER_SYMBOLS)
+        or _symbols(nm, abi_obj, undefined=False) != {"open_cfw_lvgl_layer_alloc_probe"}
+        or _relocations(objdump, abi_obj, abi_undefined) != {
+            "lv_draw_layer_alloc_buf": {"R_ARM_THM_JUMP24": 1},
+        }
+    ):
+        raise AuditError("LVGL layer-allocation ABI probe boundary changed")
+
+    provider = output_dir / "providers/lvgl-ambiq-lvgl-layer-alloc-provider.o"
+    _run([
+        lld, "-r", "--gc-sections", "-u", "lv_draw_layer_alloc_buf",
+        "-o", str(provider), str(source_obj),
+    ])
+    provider_data = provider.read_bytes()
+    if (
+        _symbols(nm, provider, undefined=True) != expected_imports
+        or _symbols(nm, provider, undefined=False) != set(LVGL_LAYER_ALLOC_PROVIDER_SYMBOLS)
+        or _relocations(objdump, provider, expected_imports) != expected_relocations
+        or len(provider_data) != LVGL_LAYER_ALLOC_PROVIDER_ARTIFACT["size"]
+        or _sha256(provider_data) != LVGL_LAYER_ALLOC_PROVIDER_ARTIFACT["sha256"]
+    ):
+        raise AuditError("LVGL layer-allocation isolated provider closure changed")
+
+    aggregate = output_dir / "providers/lvgl-ambiq-lvgl-layer-alloc-aggregate.o"
+    aggregate_exports = (
+        LVGL_LAYER_ALLOC_PROVIDER_SYMBOLS | LVGL_CORE_PROVIDER_SYMBOLS
+        | LVGL_STATELESS_PROVIDER_SYMBOLS | LVGL_HEAP_ARRAY_PROVIDER_SYMBOLS
+        | LVGL_DRAW_BUF_LIFECYCLE_PROVIDER_SYMBOLS
+        | LVGL_GLOBAL_STORAGE_PROVIDER_SYMBOLS | LVGL_DRAW_BUF_SHAPE_PROVIDER_SYMBOLS
+        | LVGL_LOG_PROVIDER_SYMBOLS | LVGL_LOG_RUNTIME_EXPORTS
+    )
+    command = [lld, "-r", "--gc-sections"]
+    for symbol in sorted(aggregate_exports):
+        command.extend(["-u", symbol])
+    _run([
+        *command, "-o", str(aggregate), str(provider), str(core_obj),
+        str(shape_obj), str(lifecycle_obj), str(stateless_obj), str(heap_array_obj),
+        str(global_storage_obj), str(log_obj), str(log_runtime_obj),
+    ])
+    aggregate_data = aggregate.read_bytes()
+    if (
+        _symbols(nm, aggregate, undefined=True)
+        or _symbols(nm, aggregate, undefined=False) != set(aggregate_exports)
+        or len(aggregate_data) != LVGL_LAYER_ALLOC_AGGREGATE_ARTIFACT["size"]
+        or _sha256(aggregate_data) != LVGL_LAYER_ALLOC_AGGREGATE_ARTIFACT["sha256"]
+    ):
+        raise AuditError("LVGL layer-allocation aggregate closure changed")
+
+    return provider, {
+        "inputs": inputs,
+        "authenticated_upstream": LVGL_LAYER_ALLOC_UPSTREAM_EVIDENCE,
+        "target_source_artifact": {
+            "path": source_obj.name, "size": len(source_data), "sha256": _sha256(source_data),
+        },
+        "artifact": {
+            "path": provider.name, "size": len(provider_data), "sha256": _sha256(provider_data),
+        },
+        "abi_probe_artifact": {
+            "path": abi_obj.name, "size": len(abi_data), "sha256": _sha256(abi_data),
+        },
+        "aggregate_link_artifact": {
+            "path": aggregate.name, "size": len(aggregate_data),
+            "sha256": _sha256(aggregate_data),
+        },
+        "required_exports": sorted(LVGL_LAYER_ALLOC_PROVIDER_SYMBOLS),
+        "all_external_exports": sorted(_symbols(nm, provider, undefined=False)),
+        "elf_undefined_symbols": sorted(expected_imports),
+        "external_relocations": expected_relocations,
+        "reviewed_runtime_dependencies": {
+            "lv_area_get_height": "local_lvgl_core_provider",
+            "lv_area_get_width": "local_lvgl_core_provider",
+            "lv_draw_buf_create": "local_lvgl_draw_buf_shape_provider",
+            "lv_draw_buf_destroy": "local_lvgl_draw_buf_lifecycle_provider",
+            "lv_draw_buf_flush_cache": "local_lvgl_stateless_provider",
+            "lv_global": "local_lvgl_global_storage_provider",
+            "lv_log_add": "local_lvgl_log_provider",
+            "lv_memset": "local_lvgl_stateless_provider",
+        },
+        "aggregate_elf_undefined_symbols": [],
+        "transitive_source_closed": True,
+        "fixed_address_imports": {},
+        "fixed_address_import_count": 0,
+        "warning_count": 0,
+        "hostile_input_policy": (
+            "null/empty layers, missing stride handlers, zero or overflowing extents, malformed "
+            "draw buffers, and memory-account overflow fail before unsafe access or leave no allocation"
+        ),
+        "source_admitted": True,
+        "production_overlay_registered": False,
+        "hardware_qualified": False,
+        "qualification": (
+            "exact-ABI lazy layer allocation with reviewed core/buffer/global/logging closure; "
+            "live handler initialization, cache behavior, "
+            "heap/global ownership, collision, RAM placement, and concurrency remain unqualified"
+        ),
+    }
+
+
+def _compile_lvgl_decoder_provider(
+    builder, output_dir: Path, core_obj: Path, stateless_obj: Path,
+    heap_array_obj: Path, global_storage_obj: Path, log_obj: Path,
+    log_runtime_obj: Path, mutex_obj: Path,
+    clang: str, nm: str, objdump: str, lld: str,
+) -> tuple[Path, Path, Path, Path, dict[str, Any]]:
+    inputs: dict[str, dict[str, Any]] = {}
+    for name, (relative, size, sha256, license_id) in LVGL_DECODER_PROVIDER_INPUTS.items():
+        data = (ROOT / relative).read_bytes()
+        if len(data) != size or _sha256(data) != sha256:
+            raise AuditError(f"LVGL decoder input identity changed: {relative}")
+        inputs[name] = {
+            "path": relative, "size": size, "sha256": sha256, "license": license_id,
+        }
+
+    upstream = json.loads(
+        (ROOT / LVGL_DECODER_UPSTREAM_EVIDENCE["tree_record"]["path"]).read_text()
+    )
+    observed_blobs: dict[str, str] = {}
+    for source_path in LVGL_DECODER_UPSTREAM_EVIDENCE["source_git_blobs"]:
+        parent, name = source_path.rsplit("/", 1)
+        tree = next((row for row in upstream.get("trees", []) if row.get("path") == parent), None)
+        if tree is None:
+            raise AuditError(f"LVGL decoder tree record omits {parent}")
+        entry = next((row for row in tree.get("entries", []) if row.get("name") == name), None)
+        if entry is None or entry.get("type") != "blob":
+            raise AuditError(f"LVGL decoder tree record omits {source_path}")
+        observed_blobs[source_path] = entry["oid"]
+    if (
+        upstream.get("root_tree") != LVGL_DECODER_UPSTREAM_EVIDENCE["tree"]
+        or observed_blobs != LVGL_DECODER_UPSTREAM_EVIDENCE["source_git_blobs"]
+    ):
+        raise AuditError("LVGL decoder authenticated source identity changed")
+    for record_name in ("tree_record", "commit_record"):
+        record = LVGL_DECODER_UPSTREAM_EVIDENCE[record_name]
+        data = (ROOT / record["path"]).read_bytes()
+        if len(data) != record["size"] or _sha256(data) != record["sha256"]:
+            raise AuditError(f"LVGL decoder {record_name} identity changed")
+    commit_record = json.loads(
+        (ROOT / LVGL_DECODER_UPSTREAM_EVIDENCE["commit_record"]["path"]).read_text()
+    )
+    if commit_record.get("oid") != LVGL_DECODER_UPSTREAM_EVIDENCE["commit"]:
+        raise AuditError("LVGL decoder upstream commit identity changed")
+
+    parts = output_dir / "providers/lvgl-decoder-parts"
+    parts.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="opencfw-lvgl-decoder-") as temporary:
+        stage = Path(temporary)
+        lvgl = builder._stage_tree(stage)
+        stubs = stage / "stubs"
+        builder._write_stubs(stubs)
+        flags = [
+            *builder._compiler_flags(clang, stage, lvgl, stubs),
+            "-Wall", "-Wextra", "-Werror",
+            "-I", str(ROOT / "third_party/lvgl-ambiq-backend/g2-runtime"),
+        ]
+        compile_units = {
+            "decoder_source": lvgl / "src/draw/lv_image_decoder.c",
+            "fs_source": lvgl / "src/misc/lv_fs.c",
+            "cache_source": lvgl / "src/misc/cache/lv_cache.c",
+            "cache_entry_source": lvgl / "src/misc/cache/lv_cache_entry.c",
+            "support_source": ROOT / LVGL_DECODER_PROVIDER_INPUTS["support_provider"][0],
+            "decoder_abi": ROOT / LVGL_DECODER_PROVIDER_INPUTS["decoder_abi_probe"][0],
+            "support_abi": ROOT / LVGL_DECODER_PROVIDER_INPUTS["support_abi_probe"][0],
+        }
+        compiled: dict[str, Path] = {}
+        for name, source in compile_units.items():
+            obj = parts / f"{name}.o"
+            output = _run([*flags, "-c", str(source), "-o", str(obj)], cwd=stage)
+            if "warning:" in output:
+                raise AuditError(f"warning in LVGL decoder compile ({name}):\n{output}")
+            compiled[name] = obj
+
+    decoder_source = compiled["decoder_source"]
+    fs_source = compiled["fs_source"]
+    cache_source = compiled["cache_source"]
+    cache_entry_source = compiled["cache_entry_source"]
+    support_source = compiled["support_source"]
+    decoder_abi = compiled["decoder_abi"]
+    support_abi = compiled["support_abi"]
+
+    source_artifacts = {
+        "decoder": (decoder_source, LVGL_DECODER_SOURCE_ARTIFACT),
+        "filesystem": (fs_source, LVGL_DECODER_FS_SOURCE_ARTIFACT),
+        "cache": (cache_source, LVGL_DECODER_CACHE_SOURCE_ARTIFACT),
+        "cache_entry": (cache_entry_source, LVGL_DECODER_CACHE_ENTRY_SOURCE_ARTIFACT),
+        "support": (support_source, LVGL_DECODER_SUPPORT_SOURCE_ARTIFACT),
+    }
+    source_rows: dict[str, dict[str, Any]] = {}
+    for name, (path, expected) in source_artifacts.items():
+        data = path.read_bytes()
+        if len(data) != expected["size"] or _sha256(data) != expected["sha256"]:
+            raise AuditError(f"LVGL decoder {name} source object changed")
+        source_rows[name] = {
+            "path": path.name, "size": len(data), "sha256": _sha256(data),
+        }
+
+    decoder_abi_data = decoder_abi.read_bytes()
+    decoder_abi_undefined = _symbols(nm, decoder_abi, undefined=True)
+    if (
+        len(decoder_abi_data) != LVGL_DECODER_ABI_PROBE_ARTIFACT["size"]
+        or _sha256(decoder_abi_data) != LVGL_DECODER_ABI_PROBE_ARTIFACT["sha256"]
+        or decoder_abi_undefined != set(LVGL_DECODER_PROVIDER_SYMBOLS)
+        or _symbols(nm, decoder_abi, undefined=False) != {
+            "open_cfw_lvgl_decoder_close_probe", "open_cfw_lvgl_decoder_open_probe",
+        }
+        or _relocations(objdump, decoder_abi, decoder_abi_undefined) != {
+            "lv_image_decoder_close": {"R_ARM_THM_JUMP24": 1},
+            "lv_image_decoder_open": {"R_ARM_THM_JUMP24": 1},
+        }
+    ):
+        raise AuditError("LVGL decoder ABI probe boundary changed")
+    support_abi_data = support_abi.read_bytes()
+    support_abi_undefined = _symbols(nm, support_abi, undefined=True)
+    if (
+        len(support_abi_data) != LVGL_DECODER_SUPPORT_ABI_PROBE_ARTIFACT["size"]
+        or _sha256(support_abi_data) != LVGL_DECODER_SUPPORT_ABI_PROBE_ARTIFACT["sha256"]
+        or support_abi_undefined != set(LVGL_DECODER_SUPPORT_SYMBOLS)
+        or _symbols(nm, support_abi, undefined=False) != {
+            "open_cfw_lvgl_decoder_support_probe",
+        }
+        or _relocations(objdump, support_abi, support_abi_undefined) != {
+            "lv_image_cache_is_enabled": {"R_ARM_THM_CALL": 1},
+            "lv_image_header_cache_is_enabled": {"R_ARM_THM_CALL": 1},
+            "lv_image_src_get_type": {"R_ARM_THM_CALL": 1},
+            "lv_ll_get_head": {"R_ARM_THM_CALL": 1},
+            "lv_ll_get_next": {"R_ARM_THM_CALL": 1},
+            "lv_strdup": {"R_ARM_THM_JUMP24": 1},
+        }
+    ):
+        raise AuditError("LVGL decoder support ABI probe boundary changed")
+
+    def scoped_link(name: str, roots: frozenset[str], sources: list[Path]) -> Path:
+        result = output_dir / f"providers/lvgl-ambiq-lvgl-decoder-{name}.o"
+        command = [lld, "-r", "--gc-sections"]
+        for symbol in sorted(roots):
+            command.extend(["-u", symbol])
+        _run([*command, "-o", str(result), *map(str, sources)])
+        return result
+
+    decoder = scoped_link("provider", LVGL_DECODER_PROVIDER_SYMBOLS, [decoder_source])
+    fs = scoped_link("filesystem", LVGL_DECODER_FS_SYMBOLS, [fs_source])
+    cache = scoped_link(
+        "cache", LVGL_DECODER_CACHE_ROOT_SYMBOLS, [cache_source, cache_entry_source]
+    )
+    support = scoped_link("support", LVGL_DECODER_SUPPORT_SYMBOLS, [support_source])
+
+    expected_boundaries = {
+        "decoder": (
+            decoder, LVGL_DECODER_PROVIDER_ARTIFACT, LVGL_DECODER_PROVIDER_SYMBOLS,
+            {
+                "lv_cache_acquire": {"R_ARM_THM_CALL": 2},
+                "lv_cache_add": {"R_ARM_THM_CALL": 1},
+                "lv_cache_entry_get_data": {"R_ARM_THM_CALL": 2},
+                "lv_cache_release": {"R_ARM_THM_CALL": 1, "R_ARM_THM_JUMP24": 1},
+                "lv_color_format_get_bpp": {"R_ARM_THM_CALL": 1},
+                "lv_draw_buf_flush_cache": {"R_ARM_THM_CALL": 1},
+                "lv_free": {"R_ARM_THM_CALL": 1},
+                "lv_fs_close": {"R_ARM_THM_CALL": 1},
+                "lv_fs_open": {"R_ARM_THM_CALL": 1},
+                "lv_fs_seek": {"R_ARM_THM_CALL": 1},
+                "lv_global": {"R_ARM_THM_MOVT_ABS": 4, "R_ARM_THM_MOVW_ABS_NC": 4},
+                "lv_image_cache_is_enabled": {"R_ARM_THM_CALL": 2},
+                "lv_image_header_cache_is_enabled": {"R_ARM_THM_CALL": 2},
+                "lv_image_src_get_type": {"R_ARM_THM_CALL": 1},
+                "lv_ll_get_head": {"R_ARM_THM_CALL": 1},
+                "lv_ll_get_next": {"R_ARM_THM_CALL": 1},
+                "lv_log_add": {"R_ARM_THM_CALL": 2},
+                "lv_memset": {"R_ARM_THM_CALL": 2},
+                "lv_strdup": {"R_ARM_THM_CALL": 1},
+            },
+        ),
+        "filesystem": (
+            fs, LVGL_DECODER_FS_ARTIFACT, LVGL_DECODER_FS_SYMBOLS,
+            {
+                "lv_free": {"R_ARM_THM_CALL": 2},
+                "lv_global": {"R_ARM_THM_MOVT_ABS": 1, "R_ARM_THM_MOVW_ABS_NC": 1},
+                "lv_ll_get_head": {"R_ARM_THM_CALL": 1},
+                "lv_ll_get_next": {"R_ARM_THM_CALL": 1},
+                "lv_log_add": {"R_ARM_THM_CALL": 5},
+                "lv_malloc_zeroed": {"R_ARM_THM_CALL": 1},
+            },
+        ),
+        "cache": (
+            cache, LVGL_DECODER_CACHE_ARTIFACT, LVGL_DECODER_CACHE_EXPORTS,
+            {
+                "lv_free": {"R_ARM_THM_JUMP24": 1},
+                "lv_log_add": {"R_ARM_THM_CALL": 14},
+                "lv_mutex_lock": {"R_ARM_THM_CALL": 3},
+                "lv_mutex_unlock": {"R_ARM_THM_CALL": 2, "R_ARM_THM_JUMP24": 1},
+            },
+        ),
+        "support": (
+            support, LVGL_DECODER_SUPPORT_ARTIFACT, LVGL_DECODER_SUPPORT_SYMBOLS,
+            {
+                "lv_global": {"R_ARM_THM_MOVT_ABS": 2, "R_ARM_THM_MOVW_ABS_NC": 2},
+                "lv_malloc": {"R_ARM_THM_CALL": 1},
+                "lv_memcpy": {"R_ARM_THM_CALL": 1},
+            },
+        ),
+    }
+    provider_rows: dict[str, dict[str, Any]] = {}
+    for name, (path, expected_artifact, exports, relocations) in expected_boundaries.items():
+        data = path.read_bytes()
+        undefined = _symbols(nm, path, undefined=True)
+        if (
+            _symbols(nm, path, undefined=False) != set(exports)
+            or _relocations(objdump, path, undefined) != relocations
+            or len(data) != expected_artifact["size"]
+            or _sha256(data) != expected_artifact["sha256"]
+        ):
+            raise AuditError(f"LVGL decoder {name} provider boundary changed")
+        provider_rows[name] = {
+            "path": path.name, "size": len(data), "sha256": _sha256(data),
+            "exports": sorted(exports), "elf_undefined_symbols": sorted(undefined),
+            "external_relocations": relocations,
+        }
+
+    aggregate = output_dir / "providers/lvgl-ambiq-lvgl-decoder-aggregate.o"
+    aggregate_exports = (
+        LVGL_DECODER_PROVIDER_SYMBOLS | LVGL_DECODER_FS_SYMBOLS
+        | LVGL_DECODER_CACHE_EXPORTS | LVGL_DECODER_SUPPORT_SYMBOLS
+        | LVGL_CORE_PROVIDER_SYMBOLS | LVGL_STATELESS_PROVIDER_SYMBOLS
+        | LVGL_HEAP_ARRAY_PROVIDER_SYMBOLS | LVGL_GLOBAL_STORAGE_PROVIDER_SYMBOLS
+        | LVGL_LOG_PROVIDER_SYMBOLS | LVGL_LOG_RUNTIME_EXPORTS
+        | LVGL_MUTEX_PROVIDER_SYMBOLS
+    )
+    command = [lld, "-r", "--gc-sections"]
+    for symbol in sorted(aggregate_exports):
+        command.extend(["-u", symbol])
+    _run([
+        *command, "-o", str(aggregate), str(decoder), str(fs), str(cache), str(support),
+        str(core_obj), str(stateless_obj), str(heap_array_obj), str(global_storage_obj),
+        str(log_obj), str(log_runtime_obj), str(mutex_obj),
+    ])
+    aggregate_data = aggregate.read_bytes()
+    if (
+        _symbols(nm, aggregate, undefined=True)
+        or _symbols(nm, aggregate, undefined=False) != set(aggregate_exports)
+        or len(aggregate_data) != LVGL_DECODER_AGGREGATE_ARTIFACT["size"]
+        or _sha256(aggregate_data) != LVGL_DECODER_AGGREGATE_ARTIFACT["sha256"]
+    ):
+        raise AuditError("LVGL decoder aggregate closure changed")
+
+    return decoder, fs, cache, support, {
+        "inputs": inputs,
+        "authenticated_upstream": LVGL_DECODER_UPSTREAM_EVIDENCE,
+        "target_source_artifacts": source_rows,
+        "provider_artifacts": provider_rows,
+        "abi_probe_artifacts": {
+            "decoder": {
+                "path": decoder_abi.name, "size": len(decoder_abi_data),
+                "sha256": _sha256(decoder_abi_data),
+            },
+            "support": {
+                "path": support_abi.name, "size": len(support_abi_data),
+                "sha256": _sha256(support_abi_data),
+            },
+        },
+        "aggregate_link_artifact": {
+            "path": aggregate.name, "size": len(aggregate_data),
+            "sha256": _sha256(aggregate_data),
+        },
+        "required_exports": sorted(LVGL_DECODER_PROVIDER_SYMBOLS),
+        "aggregate_elf_undefined_symbols": [],
+        "warning_count": 0,
+        "source_admitted": True,
+        "production_overlay_registered": False,
+        "hardware_qualified": False,
+        "qualification": (
+            "exact LVGL decoder open/close with source-closed file, cache, list, allocation, "
+            "logging, mutex, color-format, global, and cache-flush dependencies; live decoder "
+            "registration, filesystem drivers, cache lifecycle, collision, RAM, and concurrency "
+            "remain runtime-unqualified"
+        ),
+    }
+
+
+def _compile_lvgl_label_provider(
+    builder, output_dir: Path, core_obj: Path, stateless_obj: Path,
+    heap_array_obj: Path, lifecycle_obj: Path, shape_obj: Path,
+    global_storage_obj: Path, log_obj: Path, log_runtime_obj: Path,
+    clang: str, nm: str, objdump: str, lld: str,
+) -> tuple[Path, dict[str, Any]]:
+    inputs: dict[str, dict[str, Any]] = {}
+    for name, (relative, size, sha256, license_id) in LVGL_LABEL_PROVIDER_INPUTS.items():
+        data = (ROOT / relative).read_bytes()
+        if len(data) != size or _sha256(data) != sha256:
+            raise AuditError(f"LVGL label input identity changed: {relative}")
+        inputs[name] = {
+            "path": relative, "size": size, "sha256": sha256, "license": license_id,
+        }
+
+    upstream = json.loads(
+        (ROOT / LVGL_LABEL_UPSTREAM_EVIDENCE["tree_record"]["path"]).read_text()
+    )
+    observed_blobs: dict[str, str] = {}
+    for source_path in LVGL_LABEL_UPSTREAM_EVIDENCE["source_git_blobs"]:
+        parent, name = source_path.rsplit("/", 1)
+        tree = next((row for row in upstream.get("trees", []) if row.get("path") == parent), None)
+        if tree is None:
+            raise AuditError(f"LVGL label tree record omits {parent}")
+        entry = next((row for row in tree.get("entries", []) if row.get("name") == name), None)
+        if entry is None or entry.get("type") != "blob":
+            raise AuditError(f"LVGL label tree record omits {source_path}")
+        observed_blobs[source_path] = entry["oid"]
+    if (
+        upstream.get("root_tree") != LVGL_LABEL_UPSTREAM_EVIDENCE["tree"]
+        or observed_blobs != LVGL_LABEL_UPSTREAM_EVIDENCE["source_git_blobs"]
+    ):
+        raise AuditError("LVGL label authenticated source identity changed")
+    for record_name in ("tree_record", "commit_record"):
+        record = LVGL_LABEL_UPSTREAM_EVIDENCE[record_name]
+        data = (ROOT / record["path"]).read_bytes()
+        if len(data) != record["size"] or _sha256(data) != record["sha256"]:
+            raise AuditError(f"LVGL label {record_name} identity changed")
+    commit_record = json.loads(
+        (ROOT / LVGL_LABEL_UPSTREAM_EVIDENCE["commit_record"]["path"]).read_text()
+    )
+    if commit_record.get("oid") != LVGL_LABEL_UPSTREAM_EVIDENCE["commit"]:
+        raise AuditError("LVGL label upstream commit identity changed")
+
+    parts = output_dir / "providers/lvgl-label-parts"
+    parts.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="opencfw-lvgl-label-") as temporary:
+        stage = Path(temporary)
+        lvgl = builder._stage_tree(stage)
+        stubs = stage / "stubs"
+        builder._write_stubs(stubs)
+        flags = [
+            *builder._compiler_flags(clang, stage, lvgl, stubs),
+            "-Wall", "-Wextra", "-Werror",
+            "-I", str(ROOT / "third_party/lvgl-ambiq-backend/g2-runtime"),
+        ]
+        compile_units = {
+            "label": lvgl / "src/draw/lv_draw_label.c",
+            "draw_buf": lvgl / "src/draw/lv_draw_buf.c",
+            "draw_rect": lvgl / "src/draw/lv_draw_rect.c",
+            "font": lvgl / "src/font/lv_font.c",
+            "text": lvgl / "src/misc/lv_text.c",
+            "support": ROOT / LVGL_LABEL_PROVIDER_INPUTS["support_provider"][0],
+            "label_abi": ROOT / LVGL_LABEL_PROVIDER_INPUTS["label_abi_probe"][0],
+            "support_abi": ROOT / LVGL_LABEL_PROVIDER_INPUTS["support_abi_probe"][0],
+        }
+        compiled: dict[str, Path] = {}
+        for name, source in compile_units.items():
+            obj = parts / f"{name}-source.o"
+            output = _run([*flags, "-c", str(source), "-o", str(obj)], cwd=stage)
+            if "warning:" in output:
+                raise AuditError(f"warning in LVGL label compile ({name}):\n{output}")
+            compiled[name] = obj
+
+    source_rows: dict[str, dict[str, Any]] = {}
+    for name in ("label", "draw_buf", "draw_rect", "font", "text", "support"):
+        data = compiled[name].read_bytes()
+        expected = LVGL_LABEL_SOURCE_ARTIFACTS[name]
+        if len(data) != expected["size"] or _sha256(data) != expected["sha256"]:
+            raise AuditError(f"LVGL label {name} source object changed")
+        source_rows[name] = {
+            "path": compiled[name].name, "size": len(data), "sha256": _sha256(data),
+        }
+
+    label_abi = compiled["label_abi"]
+    label_abi_data = label_abi.read_bytes()
+    label_abi_undefined = _symbols(nm, label_abi, undefined=True)
+    if (
+        len(label_abi_data) != LVGL_LABEL_ABI_ARTIFACTS["label"]["size"]
+        or _sha256(label_abi_data) != LVGL_LABEL_ABI_ARTIFACTS["label"]["sha256"]
+        or label_abi_undefined != set(LVGL_LABEL_PROVIDER_SYMBOLS)
+        or _symbols(nm, label_abi, undefined=False) != {"open_cfw_lvgl_label_probe"}
+        or _relocations(objdump, label_abi, label_abi_undefined) != {
+            "lv_draw_label_iterate_characters": {"R_ARM_THM_JUMP24": 1},
+        }
+    ):
+        raise AuditError("LVGL label ABI probe boundary changed")
+    support_abi = compiled["support_abi"]
+    support_abi_data = support_abi.read_bytes()
+    support_abi_undefined = _symbols(nm, support_abi, undefined=True)
+    if (
+        len(support_abi_data) != LVGL_LABEL_ABI_ARTIFACTS["support"]["size"]
+        or _sha256(support_abi_data) != LVGL_LABEL_ABI_ARTIFACTS["support"]["sha256"]
+        or support_abi_undefined != set(LVGL_LABEL_SUPPORT_SYMBOLS)
+        or _symbols(nm, support_abi, undefined=False) != {
+            "open_cfw_lvgl_label_support_probe",
+        }
+        or _relocations(objdump, support_abi, support_abi_undefined) != {
+            "lv_area_is_out": {"R_ARM_THM_CALL": 1},
+            "lv_color_black": {"R_ARM_THM_CALL": 1},
+            "lv_color_make": {"R_ARM_THM_CALL": 1},
+            "lv_point_set": {"R_ARM_THM_CALL": 1},
+        }
+    ):
+        raise AuditError("LVGL label support ABI probe boundary changed")
+
+    root_groups = {
+        "label": LVGL_LABEL_PROVIDER_SYMBOLS,
+        "draw_buf": LVGL_LABEL_DRAW_BUF_SYMBOLS,
+        "draw_rect": LVGL_LABEL_DRAW_RECT_SYMBOLS,
+        "font": LVGL_LABEL_FONT_SYMBOLS,
+        "text": LVGL_LABEL_TEXT_SYMBOLS,
+        "support": LVGL_LABEL_SUPPORT_SYMBOLS,
+    }
+    expected_exports = {
+        **root_groups,
+        "label": LVGL_LABEL_PROVIDER_EXPORTS,
+    }
+    providers: dict[str, Path] = {}
+    provider_rows: dict[str, dict[str, Any]] = {}
+    for name, roots in root_groups.items():
+        provider = output_dir / f"providers/lvgl-ambiq-lvgl-label-{name}.o"
+        command = [lld, "-r", "--gc-sections"]
+        for symbol in sorted(roots):
+            command.extend(["-u", symbol])
+        _run([*command, "-o", str(provider), str(compiled[name])])
+        data = provider.read_bytes()
+        expected = LVGL_LABEL_PROVIDER_ARTIFACTS[name]
+        if (
+            _symbols(nm, provider, undefined=False) != set(expected_exports[name])
+            or len(data) != expected["size"] or _sha256(data) != expected["sha256"]
+        ):
+            raise AuditError(f"LVGL label {name} isolated provider boundary changed")
+        undefined = _symbols(nm, provider, undefined=True)
+        provider_rows[name] = {
+            "path": provider.name, "size": len(data), "sha256": _sha256(data),
+            "exports": sorted(expected_exports[name]),
+            "elf_undefined_symbols": sorted(undefined),
+            "external_relocations": _relocations(objdump, provider, undefined),
+        }
+        providers[name] = provider
+
+    cluster = output_dir / "providers/lvgl-ambiq-lvgl-label-cluster.o"
+    cluster_exports = frozenset().union(*expected_exports.values())
+    command = [lld, "-r", "--gc-sections"]
+    for symbol in sorted(frozenset().union(*root_groups.values())):
+        command.extend(["-u", symbol])
+    _run([
+        *command, "-o", str(cluster),
+        *[str(providers[name]) for name in ("label", "draw_buf", "draw_rect", "font", "text", "support")],
+    ])
+    cluster_data = cluster.read_bytes()
+    cluster_undefined = _symbols(nm, cluster, undefined=True)
+    expected_cluster_relocations = {
+        "lv_area_get_width": {"R_ARM_THM_CALL": 5},
+        "lv_area_intersect": {"R_ARM_THM_CALL": 1},
+        "lv_area_move": {"R_ARM_THM_CALL": 1},
+        "lv_draw_buf_destroy": {"R_ARM_THM_CALL": 2},
+        "lv_draw_buf_reshape": {"R_ARM_THM_CALL": 1},
+        "lv_font_get_glyph_bitmap": {"R_ARM_THM_CALL": 1},
+        "lv_free": {"R_ARM_THM_CALL": 1},
+        "lv_global": {"R_ARM_THM_MOVT_ABS": 3, "R_ARM_THM_MOVW_ABS_NC": 3},
+        "lv_log_add": {"R_ARM_THM_CALL": 8, "R_ARM_THM_JUMP24": 1},
+        "lv_malloc_zeroed": {"R_ARM_THM_CALL": 1},
+        "lv_memcpy": {"R_ARM_THM_CALL": 1},
+        "lv_memset": {"R_ARM_THM_CALL": 3},
+    }
+    if (
+        _symbols(nm, cluster, undefined=False) != set(cluster_exports)
+        or _relocations(objdump, cluster, cluster_undefined) != expected_cluster_relocations
+        or len(cluster_data) != LVGL_LABEL_PROVIDER_ARTIFACTS["cluster"]["size"]
+        or _sha256(cluster_data) != LVGL_LABEL_PROVIDER_ARTIFACTS["cluster"]["sha256"]
+    ):
+        raise AuditError("LVGL label provider cluster boundary changed")
+
+    aggregate = output_dir / "providers/lvgl-ambiq-lvgl-label-aggregate.o"
+    aggregate_exports = (
+        cluster_exports | LVGL_CORE_PROVIDER_SYMBOLS | LVGL_STATELESS_PROVIDER_SYMBOLS
+        | LVGL_HEAP_ARRAY_PROVIDER_SYMBOLS | LVGL_DRAW_BUF_LIFECYCLE_PROVIDER_SYMBOLS
+        | LVGL_DRAW_BUF_SHAPE_PROVIDER_SYMBOLS | LVGL_GLOBAL_STORAGE_PROVIDER_SYMBOLS
+        | LVGL_LOG_PROVIDER_SYMBOLS | LVGL_LOG_RUNTIME_EXPORTS
+    )
+    command = [lld, "-r", "--gc-sections"]
+    for symbol in sorted(aggregate_exports):
+        command.extend(["-u", symbol])
+    _run([
+        *command, "-o", str(aggregate), str(cluster), str(core_obj), str(stateless_obj),
+        str(heap_array_obj), str(lifecycle_obj), str(shape_obj), str(global_storage_obj),
+        str(log_obj), str(log_runtime_obj),
+    ])
+    aggregate_data = aggregate.read_bytes()
+    if (
+        _symbols(nm, aggregate, undefined=True)
+        or _symbols(nm, aggregate, undefined=False) != set(aggregate_exports)
+        or len(aggregate_data) != LVGL_LABEL_AGGREGATE_ARTIFACT["size"]
+        or _sha256(aggregate_data) != LVGL_LABEL_AGGREGATE_ARTIFACT["sha256"]
+    ):
+        raise AuditError("LVGL label aggregate closure changed")
+
+    return cluster, {
+        "inputs": inputs,
+        "authenticated_upstream": LVGL_LABEL_UPSTREAM_EVIDENCE,
+        "target_source_artifacts": source_rows,
+        "provider_artifacts": provider_rows,
+        "cluster_artifact": {
+            "path": cluster.name, "size": len(cluster_data), "sha256": _sha256(cluster_data),
+        },
+        "abi_probe_artifacts": {
+            "label": {"path": label_abi.name, "size": len(label_abi_data),
+                      "sha256": _sha256(label_abi_data)},
+            "support": {"path": support_abi.name, "size": len(support_abi_data),
+                        "sha256": _sha256(support_abi_data)},
+        },
+        "aggregate_link_artifact": {
+            "path": aggregate.name, "size": len(aggregate_data),
+            "sha256": _sha256(aggregate_data),
+        },
+        "required_exports": sorted(LVGL_LABEL_PROVIDER_SYMBOLS),
+        "cluster_exports": sorted(cluster_exports),
+        "cluster_elf_undefined_symbols": sorted(cluster_undefined),
+        "cluster_external_relocations": expected_cluster_relocations,
+        "aggregate_elf_undefined_symbols": [],
+        "warning_count": 0,
+        "source_admitted": True,
+        "production_overlay_registered": False,
+        "hardware_qualified": False,
+        "qualification": (
+            "exact LVGL label iteration with source-closed text, font, draw-buffer, fill, area, "
+            "color, allocation, logging, and global dependencies; live font/cache/allocator "
+            "registration, collision, RAM, and concurrency remain runtime-unqualified"
+        ),
+    }
+
+
 def _compile_lvgl_draw_dispatch_provider(
     builder, output_dir: Path, global_storage_obj: Path,
     clang: str, nm: str, objdump: str, lld: str,
@@ -4775,18 +6475,23 @@ def _compile_lvgl_thread_sync_signal_provider(
         or _sha256(abi_data) != LVGL_THREAD_SYNC_SIGNAL_ABI_PROBE_ARTIFACT["sha256"]
         or abi_undefined != set(LVGL_THREAD_SYNC_SIGNAL_PROVIDER_SYMBOLS)
         or _symbols(nm, abi_obj, undefined=False)
-        != {"open_cfw_lvgl_thread_sync_signal_probe"}
+        != {"open_cfw_lvgl_thread_probe", "open_cfw_lvgl_thread_sync_signal_probe"}
         or _relocations(objdump, abi_obj, abi_undefined) != {
-            "lv_thread_sync_signal": {"R_ARM_THM_JUMP24": 1},
+            "lv_thread_sync_init": {"R_ARM_THM_CALL": 1},
+            "lv_thread_sync_wait": {"R_ARM_THM_CALL": 1},
+            "lv_thread_sync_signal": {"R_ARM_THM_CALL": 1},
+            "lv_thread_sync_delete": {"R_ARM_THM_CALL": 1},
+            "lv_thread_init": {"R_ARM_THM_CALL": 1},
+            "lv_thread_delete": {"R_ARM_THM_CALL": 1},
         }
     ):
         raise AuditError("LVGL thread-sync-signal ABI probe boundary changed")
 
     provider = output_dir / "providers/lvgl-ambiq-lvgl-thread-sync-signal-provider.o"
-    _run([
-        lld, "-r", "--gc-sections", "-u", "lv_thread_sync_signal",
-        "-o", str(provider), str(source_obj),
-    ])
+    provider_command = [lld, "-r", "--gc-sections"]
+    for symbol in sorted(LVGL_THREAD_SYNC_SIGNAL_PROVIDER_SYMBOLS):
+        provider_command.extend(["-u", symbol])
+    _run([*provider_command, "-o", str(provider), str(source_obj)])
     provider_data = provider.read_bytes()
     if (
         _symbols(nm, provider, undefined=True)
@@ -4855,22 +6560,28 @@ def _compile_lvgl_thread_sync_signal_provider(
         "reviewed_runtime_dependencies": {
             "0x004420D1": "source-owned scheduler-port critical entry",
             "0x004420E9": "source-owned scheduler-port critical exit",
+            "0x0045589D": "source-owned FreeRTOS current-task entry",
+            "0x00455FA9": "source-owned FreeRTOS delayed-list insertion entry",
+            "0x004420BD": "source-owned FreeRTOS port-yield entry",
             "0x00455C49": "source-owned FreeRTOS xTaskGenericNotify entry",
+            "0x004548BB": "source-owned FreeRTOS xTaskCreate entry",
+            "0x00454AAF": "source-owned FreeRTOS vTaskDelete entry",
         },
         "aggregate_elf_undefined_symbols": [],
         "closes_transitive_provider_dependency": "local_lvgl_draw_dispatch_provider",
         "warning_count": 0,
         "hostile_input_policy": (
-            "null input fails before fixed calls; lazy-init, pending signal, waiter handoff, "
-            "double-check race, ignored notify failure, and noncanonical initialized state are "
-            "covered by the sanitizer host oracle"
+            "null input fails before fixed calls; init, wait, delete, lazy-init, pending signal, "
+            "waiter handoff, double-check race, ignored notification results, and noncanonical "
+            "initialized state are covered by the sanitizer host oracle"
         ),
         "source_admitted": True,
         "production_overlay_registered": False,
         "hardware_qualified": False,
         "qualification": (
-            "exact task-notification-mode ABI and source behavior with source-owned fixed calls; "
-            "live scheduler, critical nesting, TCB lifetime, RAM, collision, paired wait, and "
+            "exact FreeRTOS thread create/delete and four-function task-notification sync ABI, "
+            "including source task-take behavior, with source-owned fixed calls; live scheduler, "
+            "critical nesting, TCB lifetime, RAM, collision, and "
             "wakeup behavior remain unqualified"
         ),
     }
@@ -5187,6 +6898,11 @@ def _evb_link(
     lvgl_draw_buf_lifecycle_obj: Path, lvgl_global_storage_obj: Path,
     lvgl_freetype_event_obj: Path, lvgl_draw_buf_shape_obj: Path,
     lvgl_font_fmt_obj: Path, lvgl_vector_destroy_obj: Path, lvgl_draw_unit_obj: Path,
+    lvgl_draw_task_obj: Path, lvgl_layer_alloc_obj: Path,
+    lvgl_log_obj: Path, lvgl_log_runtime_obj: Path,
+    lvgl_decoder_obj: Path, lvgl_decoder_fs_obj: Path,
+    lvgl_decoder_cache_obj: Path, lvgl_decoder_support_obj: Path,
+    lvgl_label_obj: Path,
     lvgl_draw_dispatch_obj: Path, lvgl_thread_sync_signal_obj: Path,
     nm: str, lld: str,
 ) -> dict[str, Any]:
@@ -5217,6 +6933,15 @@ def _evb_link(
         str(lvgl_font_fmt_obj),
         str(lvgl_vector_destroy_obj),
         str(lvgl_draw_unit_obj),
+        str(lvgl_draw_task_obj),
+        str(lvgl_layer_alloc_obj),
+        str(lvgl_log_obj),
+        str(lvgl_log_runtime_obj),
+        str(lvgl_decoder_obj),
+        str(lvgl_decoder_fs_obj),
+        str(lvgl_decoder_cache_obj),
+        str(lvgl_decoder_support_obj),
+        str(lvgl_label_obj),
         str(lvgl_draw_dispatch_obj),
         str(lvgl_thread_sync_signal_obj),
     ])
@@ -5354,6 +7079,36 @@ def audit(
         lvgl_draw_unit_obj, lvgl_draw_unit_compile = _compile_lvgl_draw_unit_provider(
             builder, build_dir, lvgl_heap_array_obj, lvgl_global_storage_obj,
             clang, nm, objdump, lld
+        )
+        lvgl_draw_task_obj, lvgl_draw_task_compile = _compile_lvgl_draw_task_provider(
+            builder, build_dir, lvgl_core_obj, lvgl_global_storage_obj,
+            clang, nm, objdump, lld
+        )
+        lvgl_log_obj, lvgl_log_runtime_obj, lvgl_log_compile = _compile_lvgl_log_provider(
+            builder, build_dir, lvgl_global_storage_obj, clang, nm, objdump, lld
+        )
+        lvgl_layer_alloc_obj, lvgl_layer_alloc_compile = _compile_lvgl_layer_alloc_provider(
+            builder, build_dir, lvgl_core_obj, lvgl_stateless_obj,
+            lvgl_heap_array_obj, lvgl_draw_buf_lifecycle_obj,
+            lvgl_global_storage_obj, lvgl_draw_buf_shape_obj,
+            lvgl_log_obj, lvgl_log_runtime_obj,
+            clang, nm, objdump, lld
+        )
+        (
+            lvgl_decoder_obj, lvgl_decoder_fs_obj, lvgl_decoder_cache_obj,
+            lvgl_decoder_support_obj, lvgl_decoder_compile,
+        ) = _compile_lvgl_decoder_provider(
+            builder, build_dir, lvgl_core_obj, lvgl_stateless_obj,
+            lvgl_heap_array_obj, lvgl_global_storage_obj,
+            lvgl_log_obj, lvgl_log_runtime_obj, lvgl_mutex_obj,
+            clang, nm, objdump, lld,
+        )
+        lvgl_label_obj, lvgl_label_compile = _compile_lvgl_label_provider(
+            builder, build_dir, lvgl_core_obj, lvgl_stateless_obj,
+            lvgl_heap_array_obj, lvgl_draw_buf_lifecycle_obj,
+            lvgl_draw_buf_shape_obj, lvgl_global_storage_obj,
+            lvgl_log_obj, lvgl_log_runtime_obj,
+            clang, nm, objdump, lld,
         )
         lvgl_draw_dispatch_obj, lvgl_draw_dispatch_compile = (
             _compile_lvgl_draw_dispatch_provider(
@@ -5537,6 +7292,66 @@ def audit(
             "relocation_types": {"R_ARM_THM_CALL": 1},
         }]:
             raise AuditError("LVGL draw-unit consumer boundary changed")
+        draw_task_consumers = consumers.get("lv_draw_get_available_task", [])
+        if draw_task_consumers != [{
+            "object": "lv_draw_ambiq.o",
+            "relocation_count": 1,
+            "relocation_types": {"R_ARM_THM_CALL": 1},
+        }]:
+            raise AuditError("LVGL draw-task consumer boundary changed")
+        layer_alloc_consumers = consumers.get("lv_draw_layer_alloc_buf", [])
+        if layer_alloc_consumers != [{
+            "object": "lv_draw_ambiq.o",
+            "relocation_count": 1,
+            "relocation_types": {"R_ARM_THM_CALL": 1},
+        }]:
+            raise AuditError("LVGL layer-allocation consumer boundary changed")
+        log_consumers = consumers.get("lv_log_add", [])
+        if (
+            [row["object"] for row in log_consumers] != [
+                "lv_draw_ambiq.o", "lv_draw_ambiq_arc.o",
+                "lv_draw_ambiq_box_shadow.o", "lv_draw_ambiq_buffer.o",
+                "lv_draw_ambiq_fill.o", "lv_draw_ambiq_img.o",
+                "lv_draw_ambiq_letter.o", "lv_draw_ambiq_mask_rect.o",
+                "lv_draw_ambiq_private.o", "lv_draw_ambiq_triangle.o",
+                "lv_draw_ambiq_vector.o", "lv_draw_ambiq_vector_font.o",
+            ]
+            or sum(row["relocation_count"] for row in log_consumers) != 67
+            or any(
+                not set(row["relocation_types"]).issubset(
+                    {"R_ARM_THM_CALL", "R_ARM_THM_JUMP24"}
+                )
+                for row in log_consumers
+            )
+        ):
+            raise AuditError("LVGL logging consumer boundary changed")
+        decoder_consumers = {
+            symbol: consumers.get(symbol, []) for symbol in sorted(LVGL_DECODER_PROVIDER_SYMBOLS)
+        }
+        if decoder_consumers != {
+            "lv_image_decoder_close": [
+                {"object": "lv_draw_ambiq_arc.o", "relocation_count": 1,
+                 "relocation_types": {"R_ARM_THM_CALL": 1}},
+                {"object": "lv_draw_ambiq_img.o", "relocation_count": 2,
+                 "relocation_types": {"R_ARM_THM_CALL": 2}},
+                {"object": "lv_draw_ambiq_private.o", "relocation_count": 3,
+                 "relocation_types": {"R_ARM_THM_CALL": 3}},
+                {"object": "lv_draw_ambiq_vector.o", "relocation_count": 2,
+                 "relocation_types": {"R_ARM_THM_CALL": 2}},
+            ],
+            "lv_image_decoder_open": [
+                {"object": "lv_draw_ambiq_private.o", "relocation_count": 1,
+                 "relocation_types": {"R_ARM_THM_CALL": 1}},
+            ],
+        }:
+            raise AuditError("LVGL decoder consumer boundary changed")
+        label_consumers = consumers.get("lv_draw_label_iterate_characters", [])
+        if label_consumers != [{
+            "object": "lv_draw_ambiq_letter.o",
+            "relocation_count": 1,
+            "relocation_types": {"R_ARM_THM_JUMP24": 1},
+        }]:
+            raise AuditError("LVGL label-iterator consumer boundary changed")
         draw_dispatch_consumers = consumers.get("lv_draw_dispatch_request", [])
         if draw_dispatch_consumers != [{
             "object": "lv_draw_ambiq.o",
@@ -5544,13 +7359,38 @@ def audit(
             "relocation_types": {"R_ARM_THM_CALL": 1},
         }]:
             raise AuditError("LVGL draw-dispatch consumer boundary changed")
-        thread_sync_signal_consumers = consumers.get("lv_thread_sync_signal", [])
-        if thread_sync_signal_consumers != [{
-            "object": "lv_draw_ambiq.o",
-            "relocation_count": 2,
-            "relocation_types": {"R_ARM_THM_CALL": 2},
-        }]:
-            raise AuditError("LVGL thread-sync-signal consumer boundary changed")
+        thread_sync_consumers = {
+            symbol: consumers.get(symbol, [])
+            for symbol in LVGL_THREAD_SYNC_SIGNAL_PROVIDER_SYMBOLS
+        }
+        expected_thread_sync_consumers = {
+            "lv_thread_init": [{
+                "object": "lv_draw_ambiq.o", "relocation_count": 1,
+                "relocation_types": {"R_ARM_THM_CALL": 1},
+            }],
+            "lv_thread_delete": [{
+                "object": "lv_draw_ambiq.o", "relocation_count": 1,
+                "relocation_types": {"R_ARM_THM_CALL": 1},
+            }],
+            "lv_thread_sync_init": [{
+                "object": "lv_draw_ambiq.o", "relocation_count": 1,
+                "relocation_types": {"R_ARM_THM_CALL": 1},
+            }],
+            "lv_thread_sync_wait": [{
+                "object": "lv_draw_ambiq.o", "relocation_count": 1,
+                "relocation_types": {"R_ARM_THM_CALL": 1},
+            }],
+            "lv_thread_sync_signal": [{
+                "object": "lv_draw_ambiq.o", "relocation_count": 2,
+                "relocation_types": {"R_ARM_THM_CALL": 2},
+            }],
+            "lv_thread_sync_delete": [{
+                "object": "lv_draw_ambiq.o", "relocation_count": 1,
+                "relocation_types": {"R_ARM_THM_CALL": 1},
+            }],
+        }
+        if thread_sync_consumers != expected_thread_sync_consumers:
+            raise AuditError("LVGL thread-sync consumer boundary changed")
         helper_symbols = {"nema_buffer_invalidate", "nema_buffer_is_within_pool"}
         direct_ledger = []
         for symbol in direct_nema:
@@ -5780,6 +7620,62 @@ def audit(
                 ),
                 "closed_residual_symbol_count": 1,
             },
+            "local_lvgl_draw_task_provider": {
+                **lvgl_draw_task_compile,
+                "closed_consumer_relocations": {
+                    "lv_draw_get_available_task": draw_task_consumers,
+                },
+                "closed_consumer_relocation_count": sum(
+                    row["relocation_count"] for row in draw_task_consumers
+                ),
+                "closed_residual_symbol_count": 1,
+            },
+            "local_lvgl_layer_alloc_provider": {
+                **lvgl_layer_alloc_compile,
+                "closed_consumer_relocations": {
+                    "lv_draw_layer_alloc_buf": layer_alloc_consumers,
+                },
+                "closed_consumer_relocation_count": sum(
+                    row["relocation_count"] for row in layer_alloc_consumers
+                ),
+                "closed_residual_symbol_count": 1,
+            },
+            "local_lvgl_log_provider": {
+                **lvgl_log_compile,
+                "closed_consumer_relocations": {"lv_log_add": log_consumers},
+                "closed_consumer_relocation_count": sum(
+                    row["relocation_count"] for row in log_consumers
+                ),
+                "closed_transitive_relocations": {
+                    "local_lvgl_layer_alloc_provider": 1,
+                },
+                "closed_transitive_relocation_count": 1,
+                "closed_residual_symbol_count": 1,
+            },
+            "local_lvgl_decoder_provider": {
+                **lvgl_decoder_compile,
+                "closed_consumer_relocations": decoder_consumers,
+                "closed_consumer_relocation_count": sum(
+                    row["relocation_count"]
+                    for rows in decoder_consumers.values() for row in rows
+                ),
+                "closed_residual_symbol_count": len(LVGL_DECODER_PROVIDER_SYMBOLS),
+                "transitive_provider_exports": {
+                    "filesystem": sorted(LVGL_DECODER_FS_SYMBOLS),
+                    "cache": sorted(LVGL_DECODER_CACHE_EXPORTS),
+                    "support": sorted(LVGL_DECODER_SUPPORT_SYMBOLS),
+                },
+            },
+            "local_lvgl_label_provider": {
+                **lvgl_label_compile,
+                "closed_consumer_relocations": {
+                    "lv_draw_label_iterate_characters": label_consumers,
+                },
+                "closed_consumer_relocation_count": sum(
+                    row["relocation_count"] for row in label_consumers
+                ),
+                "closed_residual_symbol_count": 1,
+            },
             "local_lvgl_draw_dispatch_provider": {
                 **lvgl_draw_dispatch_compile,
                 "dependency_admitted": True,
@@ -5794,14 +7690,13 @@ def audit(
             },
             "local_lvgl_thread_sync_signal_provider": {
                 **lvgl_thread_sync_signal_compile,
-                "closed_consumer_relocations": {
-                    "lv_thread_sync_signal": thread_sync_signal_consumers,
-                },
+                "closed_consumer_relocations": thread_sync_consumers,
                 "closed_consumer_relocation_count": sum(
-                    row["relocation_count"] for row in thread_sync_signal_consumers
+                    row["relocation_count"]
+                    for rows in thread_sync_consumers.values() for row in rows
                 ),
                 "closed_transitive_relocation_count": 2,
-                "closed_residual_symbol_count": 1,
+                "closed_residual_symbol_count": 6,
             },
             "public_provider_boundary": {
                 "repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq.git",
@@ -5864,8 +7759,12 @@ def audit(
                     "the isolated LVGL font-format provider is source-closed but not routed; source bitmap extent and live draw-buffer cache callback ownership remain caller/runtime-unqualified",
                     "the isolated LVGL vector-task destroy provider is source-closed but not routed; list extent, callback mutation, and live allocator ownership remain runtime-unqualified",
                     "the isolated LVGL draw-unit create provider is source-closed but not routed; global initialization, list/count ownership, serialization, collision, RAM placement, and allocation lifetime remain runtime-unqualified",
-                    "the isolated LVGL draw-dispatch request provider and its exact task-notification-mode lv_thread_sync_signal dependency are source-closed but not routed; sync initialization, scheduler/TCB state, critical nesting, RAM, collision, paired wait, and concurrency remain runtime-unqualified",
-                    "the remaining FreeRTOS thread/sync OSAL, draw scheduling/layer, decoder/cache, logging, and global-state initializer closure is incomplete; the stock FreeRTOS task-notification selection remains unrecovered",
+                    "the isolated LVGL draw-task selection provider is source-closed but not routed; display/global initialization, task-list lifetime, serialization, collision, RAM placement, and concurrency remain runtime-unqualified",
+                    "the isolated LVGL layer-allocation provider is source-closed but not routed; draw-buffer handlers, cache behavior, heap/global ownership, collision, RAM placement, and concurrency remain runtime-unqualified",
+                    "the isolated LVGL callback logging provider and source-owned formatter/string/tick cluster are source-closed but not routed; callback ownership, tick concurrency, collision, placement, and output transport remain runtime-unqualified",
+                    "the exact LVGL decoder open/close, filesystem, cache, and support cluster is source-closed but not routed; live decoder registration, filesystem drivers, cache lifecycle, collision, RAM, and concurrency remain runtime-unqualified",
+                    "the exact LVGL label iterator, text/font/draw-buffer dependencies, and source-owned area/color leaves are source-closed but not routed; live font/cache/allocator registration, collision, RAM, and concurrency remain runtime-unqualified",
+                    "the isolated LVGL draw-dispatch request provider and its exact six-function task-notification-mode thread/sync OSAL dependency are source-closed but not routed; scheduler/TCB state, critical nesting, task allocation, RAM, collision, wakeup, and concurrency remain runtime-unqualified",
                     "binary notice/license policy and GNU-versus-stock-IAR compatibility require explicit admission",
                     "Apollo510 command-list, IRQ, cache, power-retention, antialiasing, and output evidence is unavailable",
                 ],
@@ -5892,6 +7791,11 @@ def audit(
                     lvgl_global_storage_obj, lvgl_freetype_event_obj,
                     lvgl_draw_buf_shape_obj, lvgl_font_fmt_obj,
                     lvgl_vector_destroy_obj, lvgl_draw_unit_obj,
+                    lvgl_draw_task_obj, lvgl_layer_alloc_obj,
+                    lvgl_log_obj, lvgl_log_runtime_obj,
+                    lvgl_decoder_obj, lvgl_decoder_fs_obj,
+                    lvgl_decoder_cache_obj, lvgl_decoder_support_obj,
+                    lvgl_label_obj,
                     lvgl_draw_dispatch_obj, lvgl_thread_sync_signal_obj, nm, lld
                 )
                 maximal["compile"] = evb_compile

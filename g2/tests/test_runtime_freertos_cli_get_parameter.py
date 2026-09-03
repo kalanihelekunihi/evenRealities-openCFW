@@ -109,29 +109,29 @@ PROFILE_PINS = {
         "version": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
         "production_object": (
             1_140,
-            "7aa0a8e045773df37ef2bb56666acc32c4a706ba5bebbe0dc736d7ff59dd1d05",
+            "9a4bd16e0cd193fbe980c4c34cd5100ed8347410657d1c54b0e3c1fc8eb74ce1",
         ),
-        "production_offset": 183_048,
+        "production_offset": 123_200,
         "overlay": (
-            429_058,
-            "0e3a5f42548a24be9c6be90f9d6a60031af69b6570e7d212815f6671bb6d7bcd",
+            362_272,
+            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
         ),
         "component": (
-            3_952_454,
-            "d72288b5831087acaff95fc3aaadb9e178b755ee8ce3b64a17be24af1bfd3dcb",
+            3_885_668,
+            "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5",
         ),
         "package": (
-            4_745_526,
-            "4eb4b7f409e6c7023cffa70b21b2b3646a20f1bf305333cdc57b556b5fc32934",
+            4_750_780,
+            "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27",
         ),
         "replacement_sha256": (
             "725846b2fb35bfa360ede03e42d542262fbc7f74a4aea101e6d8a9d2e2bc9bf6"
         ),
         "accounting": {
-            "generated_patch_site_bytes": 409_066,
-            "opaque_base_bytes": 3_111_914,
-            "replaced_stock_function_bytes": 409_246,
-            "source_owned_bytes": 431_334,
+            "generated_patch_site_bytes": 404_060,
+            "opaque_base_bytes": 3_116_920,
+            "replaced_stock_function_bytes": 404_240,
+            "source_owned_bytes": 364_656,
             "source_owned_in_place_bytes": 184,
         },
     },
@@ -142,27 +142,27 @@ PROFILE_PINS = {
             1_120,
             "76a9d2f7de4d6c98902b84e1ad535f6bc643ae45a4676794e8e3345f41f5b263",
         ),
-        "production_offset": 184_776,
+        "production_offset": 125_024,
         "overlay": (
-            212_664,
-            "1074b19c5f24f6bb454860f53a38fdf321ae29da6762617c36b1e47925dd0b18",
+            154_604,
+            "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6",
         ),
         "component": (
-            3_736_060,
-            "fc7e2a8363e7d8a78c28c64cbaf7dcc3a03a1089c716d2d83f8d1a9bb5c10b97",
+            3_670_404,
+            "c2d3fad0382523efb9aa3cfdf19e63e81dca9fdcecdc838e37cac5c48fde430f",
         ),
         "package": (
-            4_529_116,
-            "f0526433c366a85ab79e27df6d28ffc70d6a2ed93e608652885b49b404e380ef",
+            4_750_764,
+            "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559",
         ),
         "replacement_sha256": (
             "f5a86d3592c9b16fae073cfc5e9633dd5789985adb208cf02174be9aac6fc42e"
         ),
         "accounting": {
-            "generated_patch_site_bytes": 99_288,
-            "opaque_base_bytes": 3_423_892,
-            "replaced_stock_function_bytes": 99_468,
-            "source_owned_bytes": 205_144,
+            "generated_patch_site_bytes": 105_954,
+            "opaque_base_bytes": 3_417_226,
+            "replaced_stock_function_bytes": 106_134,
+            "source_owned_bytes": 147_192,
             "source_owned_in_place_bytes": 184,
         },
     },
@@ -255,9 +255,27 @@ class RuntimeFreeRTOSCLIGetParameterTests(unittest.TestCase):
         assert spec is not None and spec.loader is not None
         cls.apollo_overlay = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(cls.apollo_overlay)
+        build_config = json.loads(CONFIG.read_text(encoding="utf-8"))
+        core_stage_expected = (
+            build_config["core_stage_expected"]
+            if cls.profile == "apple-clang"
+            else build_config["toolchain_profiles"][cls.profile][
+                "core_stage_expected"
+            ]
+        )
+        build_config["expected"] = core_stage_expected
+        if cls.profile != "apple-clang":
+            build_config["toolchain_profiles"][cls.profile]["expected"] = (
+                core_stage_expected
+            )
+        build_config_path = temporary / "overlay.json"
+        build_config_path.write_text(
+            json.dumps(build_config),
+            encoding="utf-8",
+        )
         cls.report = cls.apollo_overlay.build(
             root=ROOT,
-            config_path=CONFIG,
+            config_path=build_config_path,
             output_dir=temporary / "overlay",
             clang=cls.clang,
             toolchain_profile=cls.profile,
@@ -640,7 +658,7 @@ class RuntimeFreeRTOSCLIGetParameterTests(unittest.TestCase):
                 3_646_593, 3, 0x007B_2461, "generated_alignment"
             ),
             "apollo_freertos_cli_get_parameter_source_leaf": (
-                3_646_596, 252, 0x007C_0E2C, "source_compiled"
+                3_646_596, 252, 0x007B_2464, "source_compiled"
             ),
         }
         for name, fields in expected.items():

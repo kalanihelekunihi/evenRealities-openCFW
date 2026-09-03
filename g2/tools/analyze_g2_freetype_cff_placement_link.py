@@ -26,6 +26,9 @@ CORE_CONFIG = G2 / "components/apollo_main/freetype_cff_scatter/overlay.json"
 CORE_ARTIFACT = (
     G2 / "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin"
 )
+ARCHIVED_CORE_ARTIFACT = (
+    G2 / "build/canonical-lc3-final-apple-f/pt-component.bin"
+)
 OPEN_CFW = G2 / "tools/open_cfw.py"
 FLASH_PLAN = G2 / "build/flash-plan.json"
 FLASH_PACKAGE = (
@@ -34,9 +37,9 @@ FLASH_PACKAGE = (
 MANIFEST = G2 / "tools/manifests/g2-freetype-cff-placement-link.json"
 
 BASE_MAP_PIN = "487186bdfb32dfb7140dc7f18151708690b78cb666afd64a1e2a59f4f3a7dbc4"
-ROUTE_ANALYZER_PIN = "3f065b90ffc07740e62c51a944890bba5cb8c81954d9a0d7db787ef973b4485d"
-ROUTE_MANIFEST_PIN = "23ad27da82cd967fc0d405ca27a61c292dbaae5cd2a53a29b6af31ed68e14b4c"
-OPEN_CFW_PIN = "2065bc3cefd4390080b15d277906c7e9e3b60ddc8e7e4ee046dab63310cf331a"
+ROUTE_ANALYZER_PIN = "1297834732108956ce0ca33e5289cf878715073b195882a87cab75c05c8828b6"
+ROUTE_MANIFEST_PIN = "af95005c4343ee04cc0396c967802da7300ef8596f6bd9e263f89df045fe9e1f"
+OPEN_CFW_PIN = "acdaaaae4260ba58bf27b4a901c7fb455b16296b45eff9488b3d9a495c8165d3"
 FLASH_PLAN_PIN = (
     4_490_259,
     "963c0cc5459a9d2ddbf522ab0b47cb03683f850334c910c9c68c92070d0a3c01",
@@ -51,6 +54,11 @@ CORE_RECEIPT = {
     "component_size": 3_885_668,
     "component_sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5",
     "runtime_end_exclusive": 0x007ECA44,
+}
+CURRENT_CONFIG_BASE_RECEIPT = {
+    "component_size": 3_956_672,
+    "component_sha256": "a87158c7cae52a5a5a01e9f5cffa2f4a346ecaf6f48da134e67a7adea1acbd37",
+    "runtime_end_exclusive": 0x007FDFA0,
 }
 PROTECTED_UPDATE_START = 0x007FE000
 MODULE_TABLE = 0x0073EEF8
@@ -108,11 +116,11 @@ def _capacity(
 ) -> dict[str, Any]:
     config = json.loads(core_config_path.read_text(encoding="utf-8"))
     expected = config["profiles"]["apple-clang"]["base_component"]
-    require(expected["size"] == CORE_RECEIPT["component_size"] and
-            expected["sha256"] == CORE_RECEIPT["component_sha256"] and
+    require(expected["size"] == CURRENT_CONFIG_BASE_RECEIPT["component_size"] and
+            expected["sha256"] == CURRENT_CONFIG_BASE_RECEIPT["component_sha256"] and
             expected["runtime_end_exclusive"] ==
-            CORE_RECEIPT["runtime_end_exclusive"],
-            "canonical Apollo component receipt drift")
+            CURRENT_CONFIG_BASE_RECEIPT["runtime_end_exclusive"],
+            "live scatter base-component receipt drift")
     component = _pre_cff_component(config, core_artifact_path)
     require(len(component) == CORE_RECEIPT["component_size"] and
             hashlib.sha256(component).hexdigest() ==
@@ -170,24 +178,10 @@ def _pre_cff_component(
 ) -> bytes:
     if artifact_path is not None:
         return artifact_path.read_bytes()
-    record = config["profiles"]["apple-clang"]["base_package"]
-    package_path = G2 / record["path"]
-    package = package_path.read_bytes()
-    require((len(package), hashlib.sha256(package).hexdigest()) ==
-            (record["size"], record["sha256"]),
-            "canonical pre-CFF package receipt drift")
-    require(package[:8] == b"EVENOTA\0", "pre-CFF package header drift")
-    count = struct.unpack_from("<I", package, 8)[0]
-    rows = [
-        struct.unpack_from("<IIII", package, 0x40 + index * 16)
-        for index in range(count)
-    ]
-    entry = [row for row in rows if row[0] == 6]
-    require(len(entry) == 1, "pre-CFF package entry-6 count drift")
-    _entry_id, offset, size, _crc = entry[0]
-    require(size >= 128 and offset + size <= len(package),
-            "pre-CFF package entry-6 extent drift")
-    return package[offset + 128:offset + size]
+    # This census preserves the historical contiguous-placement experiment.
+    # Bind its exact admitted core artifact directly; the live scatter base
+    # package advances as later production routes compose.
+    return ARCHIVED_CORE_ARTIFACT.read_bytes()
 
 
 def _flash_plan(profiles: dict[str, Any]) -> dict[str, Any]:

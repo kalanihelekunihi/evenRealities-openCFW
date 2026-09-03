@@ -12,16 +12,16 @@
     "size": 3523396
   },
   "expected": {
-    "component_sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
-    "component_size": 3956468,
-    "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
-    "overlay_size": 362272
+    "component_sha256": "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe",
+    "component_size": 3956672,
+    "overlay_sha256": "9d0a3144cb6a5545592e0269435acab2bd9aaab943017d385ff0f423651ed69d",
+    "overlay_size": 368330
   },
   "core_stage_expected": {
-    "component_sha256": "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5",
-    "component_size": 3885668,
-    "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
-    "overlay_size": 362272
+    "component_sha256": "7d8ef2f1af78f3b93f59b81517c44ebf0f8d21079d5d02c33afbe1b6ec295ebd",
+    "component_size": 3891726,
+    "overlay_sha256": "9d0a3144cb6a5545592e0269435acab2bd9aaab943017d385ff0f423651ed69d",
+    "overlay_size": 368330
   },
   "firmware_version": "2.2.6.10",
   "functions": [
@@ -2467,7 +2467,48 @@
     "open_cfw_clkmgr_hfrc_integer_divider",
     "open_cfw_nemavg_draw_start_cap_endpoint",
     "open_cfw_nemavg_draw_end_cap_endpoint",
-    "open_cfw_nemavg_draw_caps_dispatch"
+    "open_cfw_nemavg_draw_caps_dispatch",
+    "case_insensitive_strcmp",
+    "cJSON_New_Item",
+    "cJSON_Delete",
+    "get_decimal_point",
+    "parse_number",
+    "parse_hex4",
+    "utf16_literal_to_utf8",
+    "parse_string",
+    "buffer_skip_whitespace",
+    "skip_utf8_bom",
+    "cJSON_ParseWithOpts",
+    "cJSON_Parse",
+    "parse_value",
+    "parse_array",
+    "parse_object",
+    "cJSON_GetArraySize",
+    "get_array_item",
+    "cJSON_GetArrayItem",
+    "get_object_item",
+    "cJSON_GetObjectItem",
+    "cJSON_IsArray",
+    "open_cfw_compress_log_path_format",
+    "open_cfw_compress_log_file_exists",
+    "open_cfw_compress_log_manager_reconcile",
+    "open_cfw_compress_log_manager_load",
+    "open_cfw_compress_log_manager_save",
+    "open_cfw_compress_log_file_remove",
+    "open_cfw_compress_log_write_file_version_header",
+    "open_cfw_compress_log_rotate_file",
+    "open_cfw_compress_log_sync_to_files",
+    "open_cfw_compress_log_export_timeout_callback",
+    "open_cfw_compress_log_export_notify",
+    "open_cfw_compress_log_export_active",
+    "open_cfw_compress_log_mutex_init",
+    "open_cfw_compress_log_ring_read_locked",
+    "open_cfw_compress_log_get_all_buffer",
+    "open_cfw_compress_log_ring_write",
+    "open_cfw_compress_log_encode_record",
+    "open_cfw_compress_log_output",
+    "open_cfw_compress_log_periodic_sync",
+    "open_cfw_compress_log_force_sync"
   ],
   "in_place_data": [
     {
@@ -27943,6 +27984,334 @@
       "name": "replace_nemavg_stroke_caps_03",
       "runtime_address": 5359084,
       "target_function": "open_cfw_nemavg_draw_caps_dispatch"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "38a8b147d1dbbe49e7a759ddc13703c05a683233de63aaa15f1881f6b25e73f4",
+      "expected_size": 78,
+      "name": "replace_cjson_parse_01",
+      "runtime_address": 5077388,
+      "target_function": "case_insensitive_strcmp"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "9a281ed49ef71c697af040c7005c1879b8bac75ddfa3f61c23fe45526ca30dd0",
+      "expected_size": 32,
+      "name": "replace_cjson_parse_02",
+      "runtime_address": 5077466,
+      "target_function": "cJSON_New_Item"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "c28954ef3d54a6fe8a6d2f95ffe8a829957ca8eb5920c06cc0e8bb389f613023",
+      "expected_size": 90,
+      "name": "replace_cjson_parse_03",
+      "runtime_address": 5077498,
+      "target_function": "cJSON_Delete"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "abb282b50860639ee18170c25f6bcc37173b294c5a2eb1d1abb75d8453c3bf90",
+      "expected_size": 4,
+      "name": "replace_cjson_parse_04",
+      "runtime_address": 5077588,
+      "target_function": "get_decimal_point"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "9dc806267413a4190f9905aaf1effd14f64bc421ad501632e7bb76105e172c9f",
+      "expected_size": 218,
+      "name": "replace_cjson_parse_05",
+      "runtime_address": 5077596,
+      "target_function": "parse_number"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "88266bc27448ee9436a2a276ee3233571c49922cad8c8d703d8125cb1dc452ab",
+      "expected_size": 74,
+      "name": "replace_cjson_parse_06",
+      "runtime_address": 5077840,
+      "target_function": "parse_hex4"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "faab6c3906999111a6d1fb86a50df4d7bebb078263a189274952677eb930a3dd",
+      "expected_size": 246,
+      "name": "replace_cjson_parse_07",
+      "runtime_address": 5077914,
+      "target_function": "utf16_literal_to_utf8"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "21e2507836d87d7234c5d6453d6d842a1c8fbb6557011137c2298eadcc6082fb",
+      "expected_size": 398,
+      "name": "replace_cjson_parse_08",
+      "runtime_address": 5078160,
+      "target_function": "parse_string"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "562a9238737fa0d1d51ff029e3cb1c327167591bb1deddfe92b6ae86d129aa96",
+      "expected_size": 58,
+      "name": "replace_cjson_parse_09",
+      "runtime_address": 5078558,
+      "target_function": "buffer_skip_whitespace"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "f23622a6d5f79a65007056d01a2f8d387039e097b7263abe102ca8854988700a",
+      "expected_size": 66,
+      "name": "replace_cjson_parse_10",
+      "runtime_address": 5078616,
+      "target_function": "skip_utf8_bom"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "56a954aaa5c6faf7f5f086ab77c54ae2b92b65b525e3eb2b5fee8c27593bb16d",
+      "expected_size": 226,
+      "name": "replace_cjson_parse_11",
+      "runtime_address": 5078682,
+      "target_function": "cJSON_ParseWithOpts"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "7d280bb9c9b5f2cd1ffa9ce9bb12ef4903305a02fe664874cb94e8a139540279",
+      "expected_size": 12,
+      "name": "replace_cjson_parse_12",
+      "runtime_address": 5078910,
+      "target_function": "cJSON_Parse"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "7092b62f11d085c9c24718b029b68f27a826a029078dce89b98736d0aaef0ec6",
+      "expected_size": 310,
+      "name": "replace_cjson_parse_13",
+      "runtime_address": 5078936,
+      "target_function": "parse_value"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "f37fce547025ecb473cde9eaa11b4e8ddccc1ea7375248e31100fccb8a4aab1a",
+      "expected_size": 244,
+      "name": "replace_cjson_parse_14",
+      "runtime_address": 5079256,
+      "target_function": "parse_array"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "b39545ca31a56eb96e911be98f56147b8ded9d6a39e64932f1c8ec039fdeb555",
+      "expected_size": 320,
+      "name": "replace_cjson_parse_15",
+      "runtime_address": 5079500,
+      "target_function": "parse_object"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "681bef2b3f7e6038e96883bbfe8a20f69e01c8275b33504a44160f4e041db981",
+      "expected_size": 28,
+      "name": "replace_cjson_parse_16",
+      "runtime_address": 5079820,
+      "target_function": "cJSON_GetArraySize"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "626435465615d072ac13b9e4ddd9d57045a542e2a67150768edcead0c1187b9d",
+      "expected_size": 28,
+      "name": "replace_cjson_parse_17",
+      "runtime_address": 5079848,
+      "target_function": "get_array_item"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "f4fa0fd8528ce0b535aee6640bf4414975298031fb137a1697f437d4d54c055d",
+      "expected_size": 16,
+      "name": "replace_cjson_parse_18",
+      "runtime_address": 5079876,
+      "target_function": "cJSON_GetArrayItem"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "86f2e79d94d339667da2aba2b76b5fb4d0b0eb1ee4bddbd8d41356db69533763",
+      "expected_size": 86,
+      "name": "replace_cjson_parse_19",
+      "runtime_address": 5079892,
+      "target_function": "get_object_item"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "f1bbe6df057882cdbda4895089ac917e4aca3a640aa78e7e8bd3db42dbb5dc78",
+      "expected_size": 10,
+      "name": "replace_cjson_parse_20",
+      "runtime_address": 5079978,
+      "target_function": "cJSON_GetObjectItem"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "642529e518ca6be3e0b0484196b5a7bb1710f341d1aa0bff050054c4297059e5",
+      "expected_size": 28,
+      "name": "replace_cjson_parse_21",
+      "runtime_address": 5079996,
+      "target_function": "cJSON_IsArray"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "333851719ef71146cbf602e9205e5848bc2a58358c30b55823b72998e6a1ee26",
+      "expected_size": 20,
+      "name": "replace_compress_log_port_01",
+      "runtime_address": 4498548,
+      "target_function": "open_cfw_compress_log_path_format"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "35bd51c3f79dc2b9a0bdc9ffd1193de30d808ba61ba72f8bc7a40b2b1469f47e",
+      "expected_size": 40,
+      "name": "replace_compress_log_port_02",
+      "runtime_address": 4498568,
+      "target_function": "open_cfw_compress_log_file_exists"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "06cf3ed2495e5f8e3c1b36b225b80fe3d86dc65ec03e50c2d9188caa28cb7e7e",
+      "expected_size": 128,
+      "name": "replace_compress_log_port_03",
+      "runtime_address": 4498608,
+      "target_function": "open_cfw_compress_log_manager_reconcile"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "b3d81dcfd91e2a40b153034450dc21c94898d45f8aa687a0dfdd86bb53838e6a",
+      "expected_size": 176,
+      "name": "replace_compress_log_port_04",
+      "runtime_address": 4498736,
+      "target_function": "open_cfw_compress_log_manager_load"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "d80d305c90596c6b5ef5c2266f899e72919298972c66cc80e83ccd676faac3de",
+      "expected_size": 66,
+      "name": "replace_compress_log_port_05",
+      "runtime_address": 4498912,
+      "target_function": "open_cfw_compress_log_manager_save"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "f0134b3c5a74062903cb7cad18e5cdcdbb54dba141d999240d478883f02d827f",
+      "expected_size": 24,
+      "name": "replace_compress_log_port_06",
+      "runtime_address": 4498978,
+      "target_function": "open_cfw_compress_log_file_remove"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "2e95dcfa61c64adfdac66793268de2dba6ab0cfed53368c2fa78fc0d0377d23f",
+      "expected_size": 224,
+      "name": "replace_compress_log_port_07",
+      "runtime_address": 4499002,
+      "target_function": "open_cfw_compress_log_write_file_version_header"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "0c228670d99da8142ab9bb40bb305a1702aeb5dd7f0c27caed939e4e21479fd0",
+      "expected_size": 116,
+      "name": "replace_compress_log_port_08",
+      "runtime_address": 4499226,
+      "target_function": "open_cfw_compress_log_rotate_file"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "b913b20bf92841ea5243a841cd523640c736f4e67a6ed7a960600cc6b5c44d4f",
+      "expected_size": 286,
+      "name": "replace_compress_log_port_09",
+      "runtime_address": 4499352,
+      "target_function": "open_cfw_compress_log_sync_to_files"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "8a58188d829ff115bceb1296035faccd364af459a4ab06d0f191ef4894e3617b",
+      "expected_size": 68,
+      "name": "replace_compress_log_port_10",
+      "runtime_address": 4499638,
+      "target_function": "open_cfw_compress_log_export_timeout_callback"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "5f05e0bc401d0af80df5d8ad28c880a959683aaf8240e3023eb3f8eb914bd5d0",
+      "expected_size": 170,
+      "name": "replace_compress_log_port_11",
+      "runtime_address": 4499716,
+      "target_function": "open_cfw_compress_log_export_notify"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "527172205113ef50f09d88d57979d81da3197e4ddff0ab0e383699f7462a54a6",
+      "expected_size": 6,
+      "name": "replace_compress_log_port_12",
+      "runtime_address": 4499886,
+      "target_function": "open_cfw_compress_log_export_active"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "07dec9d3df52f103cf3cee74011d23364e87a095f4bbbfbe797e3e6b7bedac6f",
+      "expected_size": 46,
+      "name": "replace_compress_log_core_01",
+      "runtime_address": 4442060,
+      "target_function": "open_cfw_compress_log_mutex_init"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "bb356b2e83974fa6fcddb130085cfd2e6859da36e6796f0707f5626bf0fb1e65",
+      "expected_size": 216,
+      "name": "replace_compress_log_core_02",
+      "runtime_address": 4442106,
+      "target_function": "open_cfw_compress_log_ring_read_locked"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "2570c343810a6dd7600d201f255b9508ddc2b66fb4ecd2912b0190fe15de2157",
+      "expected_size": 382,
+      "name": "replace_compress_log_core_03",
+      "runtime_address": 4442322,
+      "target_function": "open_cfw_compress_log_get_all_buffer"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "debf15ecef87bec0076f05cc733e9f5d59fc902f3e2e2549476bea31a244c0f5",
+      "expected_size": 308,
+      "name": "replace_compress_log_core_04",
+      "runtime_address": 4442704,
+      "target_function": "open_cfw_compress_log_ring_write"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "68f4f898f4517dfd7839203e273a7ef9c526708243db978c1a9727b4a8dd1275",
+      "expected_size": 794,
+      "name": "replace_compress_log_core_05",
+      "runtime_address": 4443012,
+      "target_function": "open_cfw_compress_log_encode_record"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "e12619a59901ab35a2e841248baf0175ef61c0d4a6a66d16ae088d662f8af57e",
+      "expected_size": 100,
+      "name": "replace_compress_log_core_06",
+      "runtime_address": 4443806,
+      "target_function": "open_cfw_compress_log_output"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "6ded4830f2742948c17eea5a1b987d62c2d5387d1b379b2d001b7347a190de69",
+      "expected_size": 138,
+      "name": "replace_compress_log_core_07",
+      "runtime_address": 4443906,
+      "target_function": "open_cfw_compress_log_periodic_sync"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "2adf0d879cfa074f635b22dc5ec7c993fcdee3dfc8503b32c855e7c5ad0b9dd8",
+      "expected_size": 316,
+      "name": "replace_compress_log_core_08",
+      "runtime_address": 4444044,
+      "target_function": "open_cfw_compress_log_force_sync"
     }
   ],
   "preamble_bytes": 32,
@@ -168929,6 +169298,4633 @@
           ]
         }
       }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 362272,
+        "sha256": "776402e4d0edd1d7ff397bebee0c32325a6f57c7df143a0285eb750a761b90a9",
+        "size": 68,
+        "unrelocated_sha256": "776402e4d0edd1d7ff397bebee0c32325a6f57c7df143a0285eb750a761b90a9"
+      },
+      "function": "case_insensitive_strcmp",
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 147008,
+            "sha256": "776402e4d0edd1d7ff397bebee0c32325a6f57c7df143a0285eb750a761b90a9",
+            "size": 68,
+            "unrelocated_sha256": "776402e4d0edd1d7ff397bebee0c32325a6f57c7df143a0285eb750a761b90a9"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 362340,
+        "sha256": "dbc20fecee9e1ae8fd63cafaf78ccf832f86a317467efd6bc9eeaabc82bb1ba1",
+        "size": 28,
+        "unrelocated_sha256": "dbc20fecee9e1ae8fd63cafaf78ccf832f86a317467efd6bc9eeaabc82bb1ba1"
+      },
+      "function": "cJSON_New_Item",
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 147076,
+            "sha256": "dbc20fecee9e1ae8fd63cafaf78ccf832f86a317467efd6bc9eeaabc82bb1ba1",
+            "size": 28,
+            "unrelocated_sha256": "dbc20fecee9e1ae8fd63cafaf78ccf832f86a317467efd6bc9eeaabc82bb1ba1"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 362368,
+        "sha256": "ca466c7168538881d6a144553ff96ce9941516ea242bb6cba6fe22b1666b4939",
+        "size": 68,
+        "unrelocated_sha256": "1d6b4fd1a195bc7c7f4f0569e5ad3ad9e8988bc8c65c71e18bab1b491ae50b2e"
+      },
+      "function": "cJSON_Delete",
+      "relocations": [
+        {
+          "offset": 20,
+          "symbol": "cJSON_Delete",
+          "symbol_type": "STT_FUNC",
+          "target_function": "cJSON_Delete",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "allow_self_relocation": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 147104,
+            "sha256": "ca466c7168538881d6a144553ff96ce9941516ea242bb6cba6fe22b1666b4939",
+            "size": 68,
+            "unrelocated_sha256": "1d6b4fd1a195bc7c7f4f0569e5ad3ad9e8988bc8c65c71e18bab1b491ae50b2e"
+          },
+          "relocations": [
+            {
+              "offset": 20,
+              "symbol": "cJSON_Delete",
+              "symbol_type": "STT_FUNC",
+              "target_function": "cJSON_Delete",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 362436,
+        "sha256": "abb282b50860639ee18170c25f6bcc37173b294c5a2eb1d1abb75d8453c3bf90",
+        "size": 4,
+        "unrelocated_sha256": "abb282b50860639ee18170c25f6bcc37173b294c5a2eb1d1abb75d8453c3bf90"
+      },
+      "function": "get_decimal_point",
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 147172,
+            "sha256": "abb282b50860639ee18170c25f6bcc37173b294c5a2eb1d1abb75d8453c3bf90",
+            "size": 4,
+            "unrelocated_sha256": "abb282b50860639ee18170c25f6bcc37173b294c5a2eb1d1abb75d8453c3bf90"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 8,
+        "offset": 362444,
+        "sha256": "c077a890db10e158cc70cf234a71ead1b2d2dbc9afc7121e87977ff4dfd7485c",
+        "size": 596,
+        "unrelocated_sha256": "c077a890db10e158cc70cf234a71ead1b2d2dbc9afc7121e87977ff4dfd7485c"
+      },
+      "function": "parse_number",
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 8,
+            "offset": 147180,
+            "sha256": "f39a230e9f7fc2841fc37289488f65b948092940abc7dda7e03a50d863aec469",
+            "size": 604,
+            "unrelocated_sha256": "f39a230e9f7fc2841fc37289488f65b948092940abc7dda7e03a50d863aec469"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 363040,
+        "sha256": "1d49c2d1494a8ec075c3b066253d6d639d459f5b44600f97b1118e4bafe94ef1",
+        "size": 72,
+        "unrelocated_sha256": "1d49c2d1494a8ec075c3b066253d6d639d459f5b44600f97b1118e4bafe94ef1"
+      },
+      "function": "parse_hex4",
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 147784,
+            "sha256": "e11a8383d25bad5ee8aff560050cec64909fd58b31f229fca0c88c81b8dfc909",
+            "size": 72,
+            "unrelocated_sha256": "e11a8383d25bad5ee8aff560050cec64909fd58b31f229fca0c88c81b8dfc909"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 363112,
+        "sha256": "c4b1c680a7b7474be422e6d11a48932f21505063fb413e2d52c0c6106ba6c2d5",
+        "size": 228,
+        "unrelocated_sha256": "05c5889c63eda9aaf2f198c2c4497471a8719d54b61524defbdd18a8e2883712"
+      },
+      "function": "utf16_literal_to_utf8",
+      "relocations": [
+        {
+          "offset": 18,
+          "symbol": "parse_hex4",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5077840,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 68,
+          "symbol": "parse_hex4",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5077840,
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 147856,
+            "sha256": "d7f114f878ec8dd1be561908abe774ae6d4e1f3cecfac1746d39c544ce144c18",
+            "size": 228,
+            "unrelocated_sha256": "05c5889c63eda9aaf2f198c2c4497471a8719d54b61524defbdd18a8e2883712"
+          },
+          "relocations": [
+            {
+              "offset": 18,
+              "symbol": "parse_hex4",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5077840,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 68,
+              "symbol": "parse_hex4",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5077840,
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 363340,
+        "sha256": "b39690a8a0e2ce41096d1a5ed525aad8a051879d033da9acae96be1416aa72b4",
+        "size": 240,
+        "unrelocated_sha256": "d3c828748f4a874881a38db5e630b7ee051e400546a0e4c8763dbf70f7a8cdfd"
+      },
+      "function": "parse_string",
+      "relocations": [
+        {
+          "offset": 172,
+          "symbol": "utf16_literal_to_utf8",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5077914,
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 148084,
+            "sha256": "edada9a2d1fd224f452c564b79fcbbabe99e5e881aad04f1ecfd2f36039382b7",
+            "size": 236,
+            "unrelocated_sha256": "d0864c1db022fef5475c0953519410b78f3de37b2b5dd806771bbe3bf15b81a8"
+          },
+          "relocations": [
+            {
+              "offset": 172,
+              "symbol": "utf16_literal_to_utf8",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5077914,
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 363580,
+        "sha256": "9eef002f7a8dea03ec6301aa52b0b547d6e93ce0ebc6ab4a3b9c4e6d2d63cc91",
+        "size": 46,
+        "unrelocated_sha256": "9eef002f7a8dea03ec6301aa52b0b547d6e93ce0ebc6ab4a3b9c4e6d2d63cc91"
+      },
+      "function": "buffer_skip_whitespace",
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 148320,
+            "sha256": "10c2f4e84e74d8d5690e540e39736b78f57bd1d9d0644ab756343f9d95f60706",
+            "size": 46,
+            "unrelocated_sha256": "10c2f4e84e74d8d5690e540e39736b78f57bd1d9d0644ab756343f9d95f60706"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 363626,
+        "sha256": "60649aac4a57a1764b29bfbbb0b8cf87029f63619230fa6f3f083791216dc068",
+        "size": 46,
+        "unrelocated_sha256": "60649aac4a57a1764b29bfbbb0b8cf87029f63619230fa6f3f083791216dc068"
+      },
+      "function": "skip_utf8_bom",
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 148366,
+            "sha256": "60649aac4a57a1764b29bfbbb0b8cf87029f63619230fa6f3f083791216dc068",
+            "size": 46,
+            "unrelocated_sha256": "60649aac4a57a1764b29bfbbb0b8cf87029f63619230fa6f3f083791216dc068"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 363672,
+        "sha256": "2b2f84a8dd80a40296573b7a072f5c15d76eef3cb25a25d5a5d88b9db77c1f62",
+        "size": 208,
+        "unrelocated_sha256": "b4e6d8a00d1cf049482b65dac93081f2261796a77a1fb6a9f20c9365ec445a8f"
+      },
+      "function": "cJSON_ParseWithOpts",
+      "relocations": [
+        {
+          "offset": 76,
+          "symbol": "cJSON_New_Item",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5077466,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 86,
+          "symbol": "skip_utf8_bom",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078616,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 90,
+          "symbol": "buffer_skip_whitespace",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078558,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 98,
+          "symbol": "parse_value",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078936,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 112,
+          "symbol": "buffer_skip_whitespace",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078558,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 148,
+          "symbol": "cJSON_Delete",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5077498,
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 148412,
+            "sha256": "39cc68dc36e4bcef4d38418fd626449005a3c243a1b6407a9ee55fe742b03cbd",
+            "size": 204,
+            "unrelocated_sha256": "f7eba9eec8b62f8a7ba794d9188c2e2b7a3bcc416a341afb075009d056b6b0a2"
+          },
+          "relocations": [
+            {
+              "offset": 76,
+              "symbol": "cJSON_New_Item",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5077466,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 86,
+              "symbol": "skip_utf8_bom",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078616,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 90,
+              "symbol": "buffer_skip_whitespace",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078558,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 98,
+              "symbol": "parse_value",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078936,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 112,
+              "symbol": "buffer_skip_whitespace",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078558,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 148,
+              "symbol": "cJSON_Delete",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5077498,
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 363880,
+        "sha256": "1e5344fe395844f8d5246797ed4b9a0938b5f8d55a2f894a3c02fbcd25638b31",
+        "size": 8,
+        "unrelocated_sha256": "5021da131450e156742f13c8b061d7080e2055765b0c043fec3066a0256fef70"
+      },
+      "function": "cJSON_Parse",
+      "relocations": [
+        {
+          "offset": 4,
+          "symbol": "cJSON_ParseWithOpts",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078682,
+          "type": "R_ARM_THM_JUMP24"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 148616,
+            "sha256": "cbf893157476e7d105c6a56a9a5c19a171f4241452abe4ddef7576add068f09f",
+            "size": 8,
+            "unrelocated_sha256": "5021da131450e156742f13c8b061d7080e2055765b0c043fec3066a0256fef70"
+          },
+          "relocations": [
+            {
+              "offset": 4,
+              "symbol": "cJSON_ParseWithOpts",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078682,
+              "type": "R_ARM_THM_JUMP24"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 363888,
+        "sha256": "5d67af4c72585f1fb2881090b31d57b366ab00b76d99f0a7f363a0868ff2a1f8",
+        "size": 210,
+        "unrelocated_sha256": "7f5cae7e3d8c8fc072a2b1ebd92ab4e729f078a5d87c74aa7c5c073ba5bc2bcd"
+      },
+      "function": "parse_value",
+      "relocations": [
+        {
+          "offset": 160,
+          "symbol": "parse_string",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078160,
+          "type": "R_ARM_THM_JUMP24"
+        },
+        {
+          "offset": 176,
+          "symbol": "parse_number",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5077596,
+          "type": "R_ARM_THM_JUMP24"
+        },
+        {
+          "offset": 192,
+          "symbol": "parse_array",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5079256,
+          "type": "R_ARM_THM_JUMP24"
+        },
+        {
+          "offset": 206,
+          "symbol": "parse_object",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5079500,
+          "type": "R_ARM_THM_JUMP24"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 148624,
+            "sha256": "9d5679fec8c4f01f52073f81a56df6c4140abce759bd85391947a11ee4ea890a",
+            "size": 210,
+            "unrelocated_sha256": "f15c74f4f5c941631844d612cd2eb0da2d54295162890fe8e0a1fab49b767b1c"
+          },
+          "relocations": [
+            {
+              "offset": 160,
+              "symbol": "parse_string",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078160,
+              "type": "R_ARM_THM_JUMP24"
+            },
+            {
+              "offset": 176,
+              "symbol": "parse_number",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5077596,
+              "type": "R_ARM_THM_JUMP24"
+            },
+            {
+              "offset": 192,
+              "symbol": "parse_array",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5079256,
+              "type": "R_ARM_THM_JUMP24"
+            },
+            {
+              "offset": 206,
+              "symbol": "parse_object",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5079500,
+              "type": "R_ARM_THM_JUMP24"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 364098,
+        "sha256": "253f1d7f75aee7f1085386e9d3a83b95d352a3cf0ad84878924a0475a61fe2f8",
+        "size": 196,
+        "unrelocated_sha256": "f2b0513eb67b616815dbbbb53b620286265ad66e4f8980970e01edc8a52d10bc"
+      },
+      "function": "parse_array",
+      "relocations": [
+        {
+          "offset": 36,
+          "symbol": "buffer_skip_whitespace",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078558,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 106,
+          "symbol": "cJSON_New_Item",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5077466,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 132,
+          "symbol": "buffer_skip_whitespace",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078558,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 140,
+          "symbol": "parse_value",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078936,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 148,
+          "symbol": "buffer_skip_whitespace",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078558,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 180,
+          "symbol": "cJSON_Delete",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5077498,
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 148834,
+            "sha256": "28a3ab81e50e2bffa3f55009da5101e01c389e77826f133a489e58b7b6c19e66",
+            "size": 192,
+            "unrelocated_sha256": "5155cfa726c3f93012477a4176d4c8e9a77ab0e45d05e501a7c7ae7ba971aeba"
+          },
+          "relocations": [
+            {
+              "offset": 36,
+              "symbol": "buffer_skip_whitespace",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078558,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 102,
+              "symbol": "cJSON_New_Item",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5077466,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 128,
+              "symbol": "buffer_skip_whitespace",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078558,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 136,
+              "symbol": "parse_value",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078936,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 144,
+              "symbol": "buffer_skip_whitespace",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078558,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 176,
+              "symbol": "cJSON_Delete",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5077498,
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 364294,
+        "sha256": "0e0ac8122ff202529f986a9f90895ad35d243ab9c88b7716ede25e9a5016cb94",
+        "size": 258,
+        "unrelocated_sha256": "57cca2ecc8613432fdc7d0c10f092d84971224b54e46d1c7e3a194ac9d5cb4ac"
+      },
+      "function": "parse_object",
+      "relocations": [
+        {
+          "offset": 42,
+          "symbol": "buffer_skip_whitespace",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078558,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 116,
+          "symbol": "cJSON_New_Item",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5077466,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 144,
+          "symbol": "buffer_skip_whitespace",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078558,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 152,
+          "symbol": "parse_string",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078160,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 160,
+          "symbol": "buffer_skip_whitespace",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078558,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 194,
+          "symbol": "buffer_skip_whitespace",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078558,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 202,
+          "symbol": "parse_value",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078936,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 210,
+          "symbol": "buffer_skip_whitespace",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5078558,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 242,
+          "symbol": "cJSON_Delete",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5077498,
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 149026,
+            "sha256": "abe8a8d6eef3fcb4c54e4932efed2c63c27698b623b7ddaf830b5634ac8b9dfc",
+            "size": 254,
+            "unrelocated_sha256": "3b10780a97e233366c958108d837c5d1ffeda1764c7927321903cd0d166d1a8b"
+          },
+          "relocations": [
+            {
+              "offset": 42,
+              "symbol": "buffer_skip_whitespace",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078558,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 112,
+              "symbol": "cJSON_New_Item",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5077466,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 140,
+              "symbol": "buffer_skip_whitespace",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078558,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 148,
+              "symbol": "parse_string",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078160,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 156,
+              "symbol": "buffer_skip_whitespace",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078558,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 190,
+              "symbol": "buffer_skip_whitespace",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078558,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 198,
+              "symbol": "parse_value",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078936,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 206,
+              "symbol": "buffer_skip_whitespace",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5078558,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 238,
+              "symbol": "cJSON_Delete",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5077498,
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 364552,
+        "sha256": "9b1d0dd7f31ce69cfaf637192efafc8f32148b01cd36a237167dc7968d8774e9",
+        "size": 24,
+        "unrelocated_sha256": "9b1d0dd7f31ce69cfaf637192efafc8f32148b01cd36a237167dc7968d8774e9"
+      },
+      "function": "cJSON_GetArraySize",
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 149280,
+            "sha256": "9b1d0dd7f31ce69cfaf637192efafc8f32148b01cd36a237167dc7968d8774e9",
+            "size": 24,
+            "unrelocated_sha256": "9b1d0dd7f31ce69cfaf637192efafc8f32148b01cd36a237167dc7968d8774e9"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 364576,
+        "sha256": "9c69a902c2a411603682c7095ba4b25c6807a9dbfcf4b1179c771ceb2ca26ac0",
+        "size": 26,
+        "unrelocated_sha256": "9c69a902c2a411603682c7095ba4b25c6807a9dbfcf4b1179c771ceb2ca26ac0"
+      },
+      "function": "get_array_item",
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 149304,
+            "sha256": "9c69a902c2a411603682c7095ba4b25c6807a9dbfcf4b1179c771ceb2ca26ac0",
+            "size": 26,
+            "unrelocated_sha256": "9c69a902c2a411603682c7095ba4b25c6807a9dbfcf4b1179c771ceb2ca26ac0"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 364602,
+        "sha256": "e42bdcb5dfc0e8860adf1c7166e9f5e9c0eac559241a83603a68a0d428890f5f",
+        "size": 12,
+        "unrelocated_sha256": "ff9aa1ac1e324c42262385d46b29d143b2d77d55efd07cd27c38c762bf3feed4"
+      },
+      "function": "cJSON_GetArrayItem",
+      "relocations": [
+        {
+          "offset": 4,
+          "symbol": "get_array_item",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5079848,
+          "type": "R_ARM_THM_JUMP24"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 149330,
+            "sha256": "3b4fe5ddc752e22f2a08ded79f3aa2bd170cfba1e182272b3a1a8e1bf93f040f",
+            "size": 12,
+            "unrelocated_sha256": "ff9aa1ac1e324c42262385d46b29d143b2d77d55efd07cd27c38c762bf3feed4"
+          },
+          "relocations": [
+            {
+              "offset": 4,
+              "symbol": "get_array_item",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5079848,
+              "type": "R_ARM_THM_JUMP24"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 364614,
+        "sha256": "d208812d10f055fa994c484a1eb9d3a70dc9f650d9516309f91a20db2a1c0b12",
+        "size": 82,
+        "unrelocated_sha256": "259efb564a87313a4b043c70332ca0618e020c8eb5935c1f3c8d38f383a07886"
+      },
+      "function": "get_object_item",
+      "relocations": [
+        {
+          "offset": 52,
+          "symbol": "case_insensitive_strcmp",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5077388,
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 149342,
+            "sha256": "f29c2615ba8d8ec6d023f8977a205aac5fe329abeccd26d9eef301dc8cb805df",
+            "size": 82,
+            "unrelocated_sha256": "259efb564a87313a4b043c70332ca0618e020c8eb5935c1f3c8d38f383a07886"
+          },
+          "relocations": [
+            {
+              "offset": 52,
+              "symbol": "case_insensitive_strcmp",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5077388,
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 364696,
+        "sha256": "44f91884a8f20e8d739bf47f42c8c02d65eface2a6afc292494ee7eafdcc7ae4",
+        "size": 6,
+        "unrelocated_sha256": "e1306533deb7c78f8b3431ad297def9b17e14d91a575d167181bd7e0c1a1c546"
+      },
+      "function": "cJSON_GetObjectItem",
+      "relocations": [
+        {
+          "offset": 2,
+          "symbol": "get_object_item",
+          "symbol_type": "STT_FUNC",
+          "target_address": 5079892,
+          "type": "R_ARM_THM_JUMP24"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 149424,
+            "sha256": "36e7b0d616d526506e3c2d8819b5fa563af49e2c84ae4c0ae2a0599f40a419fb",
+            "size": 6,
+            "unrelocated_sha256": "e1306533deb7c78f8b3431ad297def9b17e14d91a575d167181bd7e0c1a1c546"
+          },
+          "relocations": [
+            {
+              "offset": 2,
+              "symbol": "get_object_item",
+              "symbol_type": "STT_FUNC",
+              "target_address": 5079892,
+              "type": "R_ARM_THM_JUMP24"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 2,
+        "offset": 364702,
+        "sha256": "db2076116a81dcd2305e65491c408a3ac68f315502808320d92cdeab2bd5ab2e",
+        "size": 16,
+        "unrelocated_sha256": "db2076116a81dcd2305e65491c408a3ac68f315502808320d92cdeab2bd5ab2e"
+      },
+      "function": "cJSON_IsArray",
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-json-parser-source-candidate-audit.md",
+        "license": "MIT",
+        "origin": "bounded freestanding adaptation of the authenticated DaveGamble/cJSON v1.7.12 parse-side closure for the G2 SRAM hook/error ABI",
+        "path": "components/shared/cjson/runtime_cjson_parse.c",
+        "sha256": "710c9d2357e850730b169fb48b190fbe06e08b8da09f34736b38c3122c6dad63",
+        "size": 26626,
+        "upstream": "https://github.com/DaveGamble/cJSON/tree/v1.7.12",
+        "upstream_commit": "3c8935676a97c7c97bf006db8312875b4f292f6c"
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-mfpu=fp-armv8",
+          "-mfloat-abi=hard",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-fno-ident",
+          "-DOPEN_CFW_CJSON_G2=1"
+        ],
+        "include_dirs": [
+          "third_party/cJSON/g2-compat",
+          "third_party/cJSON"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 2,
+            "offset": 149430,
+            "sha256": "db2076116a81dcd2305e65491c408a3ac68f315502808320d92cdeab2bd5ab2e",
+            "size": 16,
+            "unrelocated_sha256": "db2076116a81dcd2305e65491c408a3ac68f315502808320d92cdeab2bd5ab2e"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 364720,
+        "sha256": "fc059d22519d8df830d52e834bdcee32d481fce44181437e1bb3fc180e5e74d5",
+        "size": 20,
+        "unrelocated_sha256": "308b4bd5947e923e5912d1b6c11ac5df164b81491734a928b208a26f4f96d4ac"
+      },
+      "function": "open_cfw_compress_log_path_format",
+      "relocations": [
+        {
+          "offset": 16,
+          "symbol": "open_cfw_runtime_snprintf",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_runtime_snprintf",
+          "type": "R_ARM_THM_JUMP24"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-port-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+        "path": "components/apollo_main/core_overlay/compress_log_port.c",
+        "sha256": "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e",
+        "size": 17905
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_PATH_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 149448,
+            "sha256": "3c516fb6f886024c4b0747bcb68c1695a9e23dcce982a500fbb8e87a1b73fff7",
+            "size": 20,
+            "unrelocated_sha256": "308b4bd5947e923e5912d1b6c11ac5df164b81491734a928b208a26f4f96d4ac"
+          },
+          "relocations": [
+            {
+              "offset": 16,
+              "symbol": "open_cfw_runtime_snprintf",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_runtime_snprintf",
+              "type": "R_ARM_THM_JUMP24"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 364740,
+        "sha256": "801e51089ff9946233caabf6f2897aa3582b13cfde57abdb2085fe6301e13d30",
+        "size": 46,
+        "unrelocated_sha256": "e0e110953b3c4dbf1147dba8eeaa6970b14aa23f258d3f8f177380f347dc2745"
+      },
+      "function": "open_cfw_compress_log_file_exists",
+      "relocations": [
+        {
+          "offset": 10,
+          "symbol": "open_cfw_compress_log_path_format",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_path_format",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 24,
+          "symbol": "open_cfw_file_open",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_open",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 30,
+          "symbol": "open_cfw_file_close",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_close",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-port-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+        "path": "components/apollo_main/core_overlay/compress_log_port.c",
+        "sha256": "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e",
+        "size": 17905
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_EXISTS_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 149468,
+            "sha256": "a297d499cd0ed0a5df156c6abfc2e5935765fecddc19183cc4e3bc90d1e2cc0b",
+            "size": 46,
+            "unrelocated_sha256": "e0e110953b3c4dbf1147dba8eeaa6970b14aa23f258d3f8f177380f347dc2745"
+          },
+          "relocations": [
+            {
+              "offset": 10,
+              "symbol": "open_cfw_compress_log_path_format",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_path_format",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 24,
+              "symbol": "open_cfw_file_open",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_open",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 30,
+              "symbol": "open_cfw_file_close",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_close",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 364788,
+        "sha256": "0e4dda489048676ae264bed3c98e7bac6536ffc43285b84b841d50849a7c8412",
+        "size": 80,
+        "unrelocated_sha256": "bdda9614b106044297357c59ca802cabfb7be2ebe6ea8043f10d3a5e549d7da1"
+      },
+      "function": "open_cfw_compress_log_manager_save",
+      "relocations": [
+        {
+          "offset": 36,
+          "symbol": "open_cfw_file_open",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_open",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 60,
+          "symbol": "open_cfw_file_write",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_write",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 68,
+          "symbol": "open_cfw_file_close",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_close",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-port-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+        "path": "components/apollo_main/core_overlay/compress_log_port.c",
+        "sha256": "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e",
+        "size": 17905
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_SAVE_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 149516,
+            "sha256": "d46d469d1b1acae034bf9f7b74d6f23173803603cd5ce5bd1e136a891894f28e",
+            "size": 80,
+            "unrelocated_sha256": "bdda9614b106044297357c59ca802cabfb7be2ebe6ea8043f10d3a5e549d7da1"
+          },
+          "relocations": [
+            {
+              "offset": 36,
+              "symbol": "open_cfw_file_open",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_open",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 60,
+              "symbol": "open_cfw_file_write",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_write",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 68,
+              "symbol": "open_cfw_file_close",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_close",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 364868,
+        "sha256": "9e565b73e014b4d4ac43a754305c0e6f323eadd676ba84af85e215bac42f8290",
+        "size": 164,
+        "unrelocated_sha256": "75ddc2049f2d7272d984b43a21e6c5a5678728ad39ad47ff766e56a91951b52b"
+      },
+      "function": "open_cfw_compress_log_manager_reconcile",
+      "relocations": [
+        {
+          "offset": 26,
+          "symbol": "open_cfw_compress_log_file_exists",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_file_exists",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 78,
+          "symbol": "open_cfw_compress_log_file_exists",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_file_exists",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 160,
+          "symbol": "open_cfw_compress_log_manager_save",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_manager_save",
+          "type": "R_ARM_THM_JUMP24"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-port-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+        "path": "components/apollo_main/core_overlay/compress_log_port.c",
+        "sha256": "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e",
+        "size": 17905
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_RECONCILE_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 149596,
+            "sha256": "5542dd4f7d656fe4b15e854d326a1e2b7a39cb9636494abb87a5925287d964b3",
+            "size": 160,
+            "unrelocated_sha256": "f6edab0f28d3ba299fe7a9ca752c87e103a68c7b32ce75ba1a52297f2382c3e3"
+          },
+          "relocations": [
+            {
+              "offset": 26,
+              "symbol": "open_cfw_compress_log_file_exists",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_file_exists",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 78,
+              "symbol": "open_cfw_compress_log_file_exists",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_file_exists",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 156,
+              "symbol": "open_cfw_compress_log_manager_save",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_manager_save",
+              "type": "R_ARM_THM_JUMP24"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 365032,
+        "sha256": "a2a636caf005acf90c3b8eaa4bb6b693a33151fe2137ad9ac33cb70d8b455b37",
+        "size": 186,
+        "unrelocated_sha256": "42780f73cc6d0eac98799ba50cadf3c3a8e4696beb696e28f519f1cf59000562"
+      },
+      "function": "open_cfw_compress_log_manager_load",
+      "relocations": [
+        {
+          "offset": 44,
+          "symbol": "open_cfw_file_open",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_open",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 60,
+          "symbol": "open_cfw_file_read",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_read",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 84,
+          "symbol": "open_cfw_file_close",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_close",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 160,
+          "symbol": "open_cfw_compress_log_manager_reconcile",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_manager_reconcile",
+          "type": "R_ARM_THM_JUMP24"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-port-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+        "path": "components/apollo_main/core_overlay/compress_log_port.c",
+        "sha256": "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e",
+        "size": 17905
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_LOAD_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 149756,
+            "sha256": "467a8c63206f26d8d8641f1e6466a44a9edf241fa2c7417b6af439eb6f795cb3",
+            "size": 186,
+            "unrelocated_sha256": "42780f73cc6d0eac98799ba50cadf3c3a8e4696beb696e28f519f1cf59000562"
+          },
+          "relocations": [
+            {
+              "offset": 44,
+              "symbol": "open_cfw_file_open",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_open",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 60,
+              "symbol": "open_cfw_file_read",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_read",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 84,
+              "symbol": "open_cfw_file_close",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_close",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 160,
+              "symbol": "open_cfw_compress_log_manager_reconcile",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_manager_reconcile",
+              "type": "R_ARM_THM_JUMP24"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 365220,
+        "sha256": "f3354ff1d9c99d6fb44421cd165e8448b1ca8a6b3cec3a63601900b4f0a0fdd6",
+        "size": 24,
+        "unrelocated_sha256": "714d99e55185aa1de9fbb81151c182610932ddfc03336b4485312ac6348f1122"
+      },
+      "function": "open_cfw_compress_log_file_remove",
+      "relocations": [
+        {
+          "offset": 10,
+          "symbol": "open_cfw_compress_log_path_format",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_path_format",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 16,
+          "symbol": "open_cfw_file_remove",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_remove",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-port-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+        "path": "components/apollo_main/core_overlay/compress_log_port.c",
+        "sha256": "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e",
+        "size": 17905
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_REMOVE_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 149944,
+            "sha256": "f40e37ad1894ef37c85ce8e7fb9fbbad94f43343e73ec5c5fd55be209fdc07d3",
+            "size": 24,
+            "unrelocated_sha256": "714d99e55185aa1de9fbb81151c182610932ddfc03336b4485312ac6348f1122"
+          },
+          "relocations": [
+            {
+              "offset": 10,
+              "symbol": "open_cfw_compress_log_path_format",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_path_format",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 16,
+              "symbol": "open_cfw_file_remove",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_remove",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 365244,
+        "sha256": "2ed5e437df2b4098f7b7c91306f25cdae7f665974342aa4fb3ade822f18f68bf",
+        "size": 86,
+        "unrelocated_sha256": "3d6c128639e2d11fa094c63d94d0521b6d5274ace3b4e6d3f74471424ef19feb"
+      },
+      "function": "open_cfw_compress_log_write_file_version_header",
+      "relocations": [
+        {
+          "offset": 34,
+          "symbol": "open_cfw_runtime_snprintf",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_runtime_snprintf",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 60,
+          "symbol": "open_cfw_file_seek",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_seek",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 72,
+          "symbol": "open_cfw_file_write",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_write",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-port-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+        "path": "components/apollo_main/core_overlay/compress_log_port.c",
+        "sha256": "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e",
+        "size": 17905
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_HEADER_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 149968,
+            "sha256": "c6dc742e2766788f859cdd155f9e8943a7dea341d499e2fb77ef3ac90ecaf170",
+            "size": 86,
+            "unrelocated_sha256": "3d6c128639e2d11fa094c63d94d0521b6d5274ace3b4e6d3f74471424ef19feb"
+          },
+          "relocations": [
+            {
+              "offset": 34,
+              "symbol": "open_cfw_runtime_snprintf",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_runtime_snprintf",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 60,
+              "symbol": "open_cfw_file_seek",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_seek",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 72,
+              "symbol": "open_cfw_file_write",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_write",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 365332,
+        "sha256": "37378e9b0845b4bc3a24129191b655f8cd3b92ef1267c9f3c42aaab0c6182d77",
+        "size": 142,
+        "unrelocated_sha256": "57479d0c42f6ebd04591ef045f9d820676c29e55193f3b772b503fc5b7dbb850"
+      },
+      "function": "open_cfw_compress_log_rotate_file",
+      "relocations": [
+        {
+          "offset": 54,
+          "symbol": "open_cfw_compress_log_file_remove",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_file_remove",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 94,
+          "symbol": "open_cfw_compress_log_path_format",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_path_format",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 108,
+          "symbol": "open_cfw_file_open",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_open",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 116,
+          "symbol": "open_cfw_compress_log_write_file_version_header",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_write_file_version_header",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 130,
+          "symbol": "open_cfw_file_close",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_close",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 134,
+          "symbol": "open_cfw_compress_log_manager_save",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_manager_save",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-port-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+        "path": "components/apollo_main/core_overlay/compress_log_port.c",
+        "sha256": "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e",
+        "size": 17905
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_ROTATE_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 150056,
+            "sha256": "f8ca92a86e67956f7242e459e43db93fa9184e315578381bf79b6d955ab0b6b0",
+            "size": 142,
+            "unrelocated_sha256": "57479d0c42f6ebd04591ef045f9d820676c29e55193f3b772b503fc5b7dbb850"
+          },
+          "relocations": [
+            {
+              "offset": 54,
+              "symbol": "open_cfw_compress_log_file_remove",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_file_remove",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 94,
+              "symbol": "open_cfw_compress_log_path_format",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_path_format",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 108,
+              "symbol": "open_cfw_file_open",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_open",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 116,
+              "symbol": "open_cfw_compress_log_write_file_version_header",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_write_file_version_header",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 130,
+              "symbol": "open_cfw_file_close",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_close",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 134,
+              "symbol": "open_cfw_compress_log_manager_save",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_manager_save",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 365476,
+        "sha256": "22909e9f17902fa468d445d56376d646daeea89f59c9b3d4f68b49452ca5678b",
+        "size": 258,
+        "unrelocated_sha256": "5184f22facd203ef4c5cd5707e25802e7776b097164d464d3d06035f874ba62a"
+      },
+      "function": "open_cfw_compress_log_sync_to_files",
+      "relocations": [
+        {
+          "offset": 34,
+          "symbol": "open_cfw_compress_log_manager_load",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_manager_load",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 90,
+          "symbol": "open_cfw_compress_log_rotate_file",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_rotate_file",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 122,
+          "symbol": "open_cfw_compress_log_path_format",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_path_format",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 136,
+          "symbol": "open_cfw_file_open",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_open",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 152,
+          "symbol": "open_cfw_file_open",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_open",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 166,
+          "symbol": "open_cfw_compress_log_write_file_version_header",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_write_file_version_header",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 200,
+          "symbol": "open_cfw_file_seek",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_seek",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 214,
+          "symbol": "open_cfw_file_write",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_write",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 222,
+          "symbol": "open_cfw_file_close",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_file_close",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 242,
+          "symbol": "open_cfw_compress_log_manager_save",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_manager_save",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-port-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+        "path": "components/apollo_main/core_overlay/compress_log_port.c",
+        "sha256": "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e",
+        "size": 17905
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_SYNC_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 150200,
+            "sha256": "7d08a269acb5701dfbe77b421a2418a3dd899f2de20ff4980c3b5220c53c73fb",
+            "size": 258,
+            "unrelocated_sha256": "5184f22facd203ef4c5cd5707e25802e7776b097164d464d3d06035f874ba62a"
+          },
+          "relocations": [
+            {
+              "offset": 34,
+              "symbol": "open_cfw_compress_log_manager_load",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_manager_load",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 90,
+              "symbol": "open_cfw_compress_log_rotate_file",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_rotate_file",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 122,
+              "symbol": "open_cfw_compress_log_path_format",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_path_format",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 136,
+              "symbol": "open_cfw_file_open",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_open",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 152,
+              "symbol": "open_cfw_file_open",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_open",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 166,
+              "symbol": "open_cfw_compress_log_write_file_version_header",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_write_file_version_header",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 200,
+              "symbol": "open_cfw_file_seek",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_seek",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 214,
+              "symbol": "open_cfw_file_write",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_write",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 222,
+              "symbol": "open_cfw_file_close",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_file_close",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 242,
+              "symbol": "open_cfw_compress_log_manager_save",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_manager_save",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 365736,
+        "sha256": "722af04813417fc4bf15a3ff0663054c90a03aa2ffcfb5279fa7a5fac46833a7",
+        "size": 14,
+        "unrelocated_sha256": "722af04813417fc4bf15a3ff0663054c90a03aa2ffcfb5279fa7a5fac46833a7"
+      },
+      "function": "open_cfw_compress_log_export_timeout_callback",
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-port-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+        "path": "components/apollo_main/core_overlay/compress_log_port.c",
+        "sha256": "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e",
+        "size": 17905
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_TIMEOUT_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 150460,
+            "sha256": "722af04813417fc4bf15a3ff0663054c90a03aa2ffcfb5279fa7a5fac46833a7",
+            "size": 14,
+            "unrelocated_sha256": "722af04813417fc4bf15a3ff0663054c90a03aa2ffcfb5279fa7a5fac46833a7"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 365752,
+        "sha256": "3497a7f987135defe2e08a377154bfbc282d6ce4247d56e18c79e0b9da42829f",
+        "size": 58,
+        "unrelocated_sha256": "3011b85bd787bc5669717921ddc75282edc9cbd8f7c5b34294c94eb59204039c"
+      },
+      "function": "open_cfw_compress_log_export_notify",
+      "relocations": [
+        {
+          "offset": 4,
+          "symbol": "open_cfw_compress_log_export_timeout_callback",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_export_timeout_callback",
+          "type": "R_ARM_THM_MOVW_PREL_NC"
+        },
+        {
+          "offset": 8,
+          "symbol": "open_cfw_compress_log_export_timeout_callback",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_export_timeout_callback",
+          "type": "R_ARM_THM_MOVT_PREL"
+        },
+        {
+          "offset": 14,
+          "symbol": "open_cfw_event_loop_remove_delayed",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_event_loop_remove_delayed",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 22,
+          "symbol": "open_cfw_compress_log_export_timeout_callback",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_export_timeout_callback",
+          "type": "R_ARM_THM_MOVW_PREL_NC"
+        },
+        {
+          "offset": 30,
+          "symbol": "open_cfw_compress_log_export_timeout_callback",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_export_timeout_callback",
+          "type": "R_ARM_THM_MOVT_PREL"
+        },
+        {
+          "offset": 42,
+          "symbol": "open_cfw_event_loop_push_delayed",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_event_loop_push_delayed",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-port-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+        "path": "components/apollo_main/core_overlay/compress_log_port.c",
+        "sha256": "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e",
+        "size": 17905
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_NOTIFY_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 150476,
+            "sha256": "0e1d4595ae32cedafa0fa1ea404a1a4ae3ee54f68de5f306050aa6f67926d75f",
+            "size": 58,
+            "unrelocated_sha256": "3011b85bd787bc5669717921ddc75282edc9cbd8f7c5b34294c94eb59204039c"
+          },
+          "relocations": [
+            {
+              "offset": 4,
+              "symbol": "open_cfw_compress_log_export_timeout_callback",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_export_timeout_callback",
+              "type": "R_ARM_THM_MOVW_PREL_NC"
+            },
+            {
+              "offset": 8,
+              "symbol": "open_cfw_compress_log_export_timeout_callback",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_export_timeout_callback",
+              "type": "R_ARM_THM_MOVT_PREL"
+            },
+            {
+              "offset": 14,
+              "symbol": "open_cfw_event_loop_remove_delayed",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_event_loop_remove_delayed",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 22,
+              "symbol": "open_cfw_compress_log_export_timeout_callback",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_export_timeout_callback",
+              "type": "R_ARM_THM_MOVW_PREL_NC"
+            },
+            {
+              "offset": 30,
+              "symbol": "open_cfw_compress_log_export_timeout_callback",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_export_timeout_callback",
+              "type": "R_ARM_THM_MOVT_PREL"
+            },
+            {
+              "offset": 42,
+              "symbol": "open_cfw_event_loop_push_delayed",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_event_loop_push_delayed",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 365812,
+        "sha256": "7af6035484669d49a0855d5244f1ae3af24c44dccb0429ca4a182a745a2a7cf6",
+        "size": 12,
+        "unrelocated_sha256": "7af6035484669d49a0855d5244f1ae3af24c44dccb0429ca4a182a745a2a7cf6"
+      },
+      "function": "open_cfw_compress_log_export_active",
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-port-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+        "path": "components/apollo_main/core_overlay/compress_log_port.c",
+        "sha256": "473ddda6dd3b0f37d0cac08b9a1cbc6d3730fb79540598b9eb99c4c239b2226e",
+        "size": 17905
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_ACTIVE_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 150536,
+            "sha256": "7af6035484669d49a0855d5244f1ae3af24c44dccb0429ca4a182a745a2a7cf6",
+            "size": 12,
+            "unrelocated_sha256": "7af6035484669d49a0855d5244f1ae3af24c44dccb0429ca4a182a745a2a7cf6"
+          },
+          "relocations": []
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 365824,
+        "sha256": "e97557f10a579de1c0f3d9932917a8cdc7447a79621b26ba8b10a6ff2081fff6",
+        "size": 46,
+        "unrelocated_sha256": "673053aae7f4be828eaf846cbc93e15bb7de40536026ce9346bf57f27c27c865"
+      },
+      "function": "open_cfw_compress_log_mutex_init",
+      "relocations": [
+        {
+          "offset": 26,
+          "symbol": "open_cfw_freertos_queue_create_mutex_static",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_queue_create_mutex_static",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 40,
+          "symbol": "open_cfw_retained_compress_log_set_interrupt_mask",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 6267044,
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-core-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-record ring, encoder, filtering, and persistence scheduling core",
+        "path": "components/apollo_main/core_overlay/compress_log_core.c",
+        "sha256": "5d7fdbcad7bd290e593af153d787b1351d3b7bdb47de9ebd69fdd60462ee9c38",
+        "size": 21095
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_CORE_MUTEX_INIT_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 150548,
+            "sha256": "2eb2ad911ffd8c184897d1fbbc6f8d9cfcb131d1212e76104b73413475bbe0a7",
+            "size": 46,
+            "unrelocated_sha256": "673053aae7f4be828eaf846cbc93e15bb7de40536026ce9346bf57f27c27c865"
+          },
+          "relocations": [
+            {
+              "offset": 26,
+              "symbol": "open_cfw_freertos_queue_create_mutex_static",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_queue_create_mutex_static",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 40,
+              "symbol": "open_cfw_retained_compress_log_set_interrupt_mask",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 6267044,
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 365872,
+        "sha256": "abbf866d361aa2f8d039f797d6a679b9902aa0e8835cdab0cb3233812995b256",
+        "size": 282,
+        "unrelocated_sha256": "e9f83801b27ae3a655be31f701afb7598321edd3f9ff201c5e303ed8c0c24551"
+      },
+      "function": "open_cfw_compress_log_ring_read_locked",
+      "relocations": [
+        {
+          "offset": 40,
+          "symbol": "open_cfw_freertos_queue_take_mutex_recursive",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_queue_take_mutex_recursive",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 180,
+          "symbol": "open_cfw_freertos_queue_give_mutex_recursive",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_queue_give_mutex_recursive",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-core-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-record ring, encoder, filtering, and persistence scheduling core",
+        "path": "components/apollo_main/core_overlay/compress_log_core.c",
+        "sha256": "5d7fdbcad7bd290e593af153d787b1351d3b7bdb47de9ebd69fdd60462ee9c38",
+        "size": 21095
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_CORE_RING_READ_LOCKED_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 150596,
+            "sha256": "6ed8f3e0c488081a04fb419551af311f20af5886277a0ae88da5b0848d97cf31",
+            "size": 282,
+            "unrelocated_sha256": "e9f83801b27ae3a655be31f701afb7598321edd3f9ff201c5e303ed8c0c24551"
+          },
+          "relocations": [
+            {
+              "offset": 40,
+              "symbol": "open_cfw_freertos_queue_take_mutex_recursive",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_queue_take_mutex_recursive",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 180,
+              "symbol": "open_cfw_freertos_queue_give_mutex_recursive",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_queue_give_mutex_recursive",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 366156,
+        "sha256": "6c544be75020fc06490b0e97aaca5ec6371a4d7fa9e1b9bc3b946c57a9e93454",
+        "size": 272,
+        "unrelocated_sha256": "eb0a434cf514c775018e8717dc8206d71ea7301138c4f67f5948552d447d508a"
+      },
+      "function": "open_cfw_compress_log_get_all_buffer",
+      "relocations": [
+        {
+          "offset": 88,
+          "symbol": "open_cfw_retained_compress_log_set_interrupt_mask",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 6267044,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 94,
+          "symbol": "open_cfw_freertos_port_enter_critical",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_port_enter_critical",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 254,
+          "symbol": "open_cfw_retained_compress_log_clear_interrupt_mask",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 6267066,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 260,
+          "symbol": "open_cfw_freertos_port_exit_critical",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_port_exit_critical",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-core-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-record ring, encoder, filtering, and persistence scheduling core",
+        "path": "components/apollo_main/core_overlay/compress_log_core.c",
+        "sha256": "5d7fdbcad7bd290e593af153d787b1351d3b7bdb47de9ebd69fdd60462ee9c38",
+        "size": 21095
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_CORE_GET_ALL_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 150880,
+            "sha256": "b2261482506627a81e337f0664bf3fec2f57cfab1b132f0643f2f772c2f32e84",
+            "size": 272,
+            "unrelocated_sha256": "eb0a434cf514c775018e8717dc8206d71ea7301138c4f67f5948552d447d508a"
+          },
+          "relocations": [
+            {
+              "offset": 88,
+              "symbol": "open_cfw_retained_compress_log_set_interrupt_mask",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 6267044,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 94,
+              "symbol": "open_cfw_freertos_port_enter_critical",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_port_enter_critical",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 254,
+              "symbol": "open_cfw_retained_compress_log_clear_interrupt_mask",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 6267066,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 260,
+              "symbol": "open_cfw_freertos_port_exit_critical",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_port_exit_critical",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 366428,
+        "sha256": "716e110759b64afe3338905523a79d6636c2f88a816552133dfa1bf610118c22",
+        "size": 352,
+        "unrelocated_sha256": "317c76c086daeb4b7eee8e19fef4f748e4719a274fe84a2b9a6718f2ae0045a6"
+      },
+      "function": "open_cfw_compress_log_ring_write",
+      "relocations": [
+        {
+          "offset": 42,
+          "symbol": "open_cfw_freertos_queue_take_mutex_recursive",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_queue_take_mutex_recursive",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 164,
+          "symbol": "open_cfw_freertos_queue_give_mutex_recursive",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_queue_give_mutex_recursive",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 260,
+          "symbol": "open_cfw_retained_compress_log_mode",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4444366,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 272,
+          "symbol": "open_cfw_freertos_queue_give_mutex_recursive",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_queue_give_mutex_recursive",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 296,
+          "symbol": "open_cfw_retained_compress_log_mode",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4444366,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 304,
+          "symbol": "open_cfw_retained_compress_log_pressure_allowed_a",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4469892,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 310,
+          "symbol": "open_cfw_retained_compress_log_pressure_allowed_b",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4491180,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 318,
+          "symbol": "open_cfw_retained_compress_log_schedule_sync",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4493180,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 324,
+          "symbol": "open_cfw_retained_compress_log_schedule_sync",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4493180,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 336,
+          "symbol": "open_cfw_freertos_queue_give_mutex_recursive",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_queue_give_mutex_recursive",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-core-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-record ring, encoder, filtering, and persistence scheduling core",
+        "path": "components/apollo_main/core_overlay/compress_log_core.c",
+        "sha256": "5d7fdbcad7bd290e593af153d787b1351d3b7bdb47de9ebd69fdd60462ee9c38",
+        "size": 21095
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_CORE_RING_WRITE_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 151152,
+            "sha256": "6a4bb6a505050ec2ac3e34d7c35b34a09500a2433fb342d846b8553e9df77ca9",
+            "size": 352,
+            "unrelocated_sha256": "36de586056a9dece26998e012609b10ac8c4244a96855ec6c09a095503ed92f3"
+          },
+          "relocations": [
+            {
+              "offset": 40,
+              "symbol": "open_cfw_freertos_queue_take_mutex_recursive",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_queue_take_mutex_recursive",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 162,
+              "symbol": "open_cfw_freertos_queue_give_mutex_recursive",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_queue_give_mutex_recursive",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 166,
+              "symbol": "open_cfw_retained_compress_log_mode",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4444366,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 174,
+              "symbol": "open_cfw_retained_compress_log_pressure_allowed_a",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4469892,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 180,
+              "symbol": "open_cfw_retained_compress_log_pressure_allowed_b",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4491180,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 188,
+              "symbol": "open_cfw_retained_compress_log_schedule_sync",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4493180,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 194,
+              "symbol": "open_cfw_retained_compress_log_schedule_sync",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4493180,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 294,
+              "symbol": "open_cfw_retained_compress_log_mode",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4444366,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 306,
+              "symbol": "open_cfw_freertos_queue_give_mutex_recursive",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_queue_give_mutex_recursive",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 336,
+              "symbol": "open_cfw_freertos_queue_give_mutex_recursive",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_queue_give_mutex_recursive",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 366780,
+        "sha256": "e6edd483101eec0fd499c143e9bbb5d1393be698381c9b306cd597df9d352670",
+        "size": 902,
+        "unrelocated_sha256": "1a12437ebfc66742110df8da390f40f3877ba69d54af22ccf4439191fcc89e36"
+      },
+      "function": "open_cfw_compress_log_encode_record",
+      "relocations": [
+        {
+          "offset": 16,
+          "symbol": "open_cfw_retained_compress_log_mode",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4444366,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 38,
+          "symbol": "open_cfw_retained_compress_log_filter_level",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4444378,
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 108,
+          "symbol": "open_cfw_cmsis_kernel_get_tick_count",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_cmsis_kernel_get_tick_count",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 158,
+          "symbol": "open_cfw_wall_time_seconds",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_wall_time_seconds",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 892,
+          "symbol": "open_cfw_compress_log_ring_write",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_write",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-core-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-record ring, encoder, filtering, and persistence scheduling core",
+        "path": "components/apollo_main/core_overlay/compress_log_core.c",
+        "sha256": "5d7fdbcad7bd290e593af153d787b1351d3b7bdb47de9ebd69fdd60462ee9c38",
+        "size": 21095
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_CORE_ENCODE_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 151504,
+            "sha256": "8026a861a85a31149886455748b1bbb06823ef8f1407d4b7ec2cca4c05d70548",
+            "size": 902,
+            "unrelocated_sha256": "1a12437ebfc66742110df8da390f40f3877ba69d54af22ccf4439191fcc89e36"
+          },
+          "relocations": [
+            {
+              "offset": 16,
+              "symbol": "open_cfw_retained_compress_log_mode",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4444366,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 38,
+              "symbol": "open_cfw_retained_compress_log_filter_level",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4444378,
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 108,
+              "symbol": "open_cfw_cmsis_kernel_get_tick_count",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_cmsis_kernel_get_tick_count",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 158,
+              "symbol": "open_cfw_wall_time_seconds",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_wall_time_seconds",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 892,
+              "symbol": "open_cfw_compress_log_ring_write",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_write",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 367684,
+        "sha256": "e7049da17f70d0574eb2b75479555be98d9c053276e3b5e12aa2727f7c1c04c8",
+        "size": 94,
+        "unrelocated_sha256": "920d723faf0c1a1064fdd61f49a6b40c6c646f2aee756d6738cc703c11130495"
+      },
+      "function": "open_cfw_compress_log_output",
+      "relocations": [
+        {
+          "offset": 14,
+          "symbol": "open_cfw_compress_log_export_active",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_export_active",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 58,
+          "symbol": "open_cfw_freertos_queue_take_mutex_recursive",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_queue_take_mutex_recursive",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 82,
+          "symbol": "open_cfw_compress_log_encode_record",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_encode_record",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 88,
+          "symbol": "open_cfw_freertos_queue_give_mutex_recursive",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_freertos_queue_give_mutex_recursive",
+          "type": "R_ARM_THM_CALL"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-core-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-record ring, encoder, filtering, and persistence scheduling core",
+        "path": "components/apollo_main/core_overlay/compress_log_core.c",
+        "sha256": "5d7fdbcad7bd290e593af153d787b1351d3b7bdb47de9ebd69fdd60462ee9c38",
+        "size": 21095
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_CORE_OUTPUT_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 152408,
+            "sha256": "9004f8ec318ba5b889ef517f5c003c59d4980170b2d13d7e3448a8adc7ecd11c",
+            "size": 94,
+            "unrelocated_sha256": "920d723faf0c1a1064fdd61f49a6b40c6c646f2aee756d6738cc703c11130495"
+          },
+          "relocations": [
+            {
+              "offset": 14,
+              "symbol": "open_cfw_compress_log_export_active",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_export_active",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 58,
+              "symbol": "open_cfw_freertos_queue_take_mutex_recursive",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_queue_take_mutex_recursive",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 82,
+              "symbol": "open_cfw_compress_log_encode_record",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_encode_record",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 88,
+              "symbol": "open_cfw_freertos_queue_give_mutex_recursive",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_freertos_queue_give_mutex_recursive",
+              "type": "R_ARM_THM_CALL"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 367780,
+        "sha256": "5d5b469991ae710830494dd1d16b552484883d854cb4e2d01cf77f606e2000e5",
+        "size": 252,
+        "unrelocated_sha256": "0f4be85bdebe64311cfa923dc134004b895a461adcb23a574c7684cd151d9e11"
+      },
+      "function": "open_cfw_compress_log_periodic_sync",
+      "relocations": [
+        {
+          "offset": 10,
+          "symbol": "open_cfw_cmsis_kernel_get_tick_count",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_cmsis_kernel_get_tick_count",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 42,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 56,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 66,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 80,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 90,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 104,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 114,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 128,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 138,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 150,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 160,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 172,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 182,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 194,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 204,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 220,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 230,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 246,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_JUMP24"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-core-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-record ring, encoder, filtering, and persistence scheduling core",
+        "path": "components/apollo_main/core_overlay/compress_log_core.c",
+        "sha256": "5d7fdbcad7bd290e593af153d787b1351d3b7bdb47de9ebd69fdd60462ee9c38",
+        "size": 21095
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_CORE_PERIODIC_SYNC_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 152504,
+            "sha256": "7efdc125d97c7e536386e722a233e4fc304492d21e3297102f5a889d6fb56da1",
+            "size": 252,
+            "unrelocated_sha256": "0f4be85bdebe64311cfa923dc134004b895a461adcb23a574c7684cd151d9e11"
+          },
+          "relocations": [
+            {
+              "offset": 10,
+              "symbol": "open_cfw_cmsis_kernel_get_tick_count",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_cmsis_kernel_get_tick_count",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 42,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 56,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 66,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 80,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 90,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 104,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 114,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 128,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 138,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 150,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 160,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 172,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 182,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 194,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 204,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 220,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 230,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 246,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_JUMP24"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "expected": {
+        "alignment": 4,
+        "offset": 368032,
+        "sha256": "6ea56ff0d57c780b9afd0c53cbd14c4987b9e5a7f6e6a025a1b3e48dbe43c360",
+        "size": 298,
+        "unrelocated_sha256": "882001ce9420d45245545a442ee7323806afd2732e448faa414250678fc8a789"
+      },
+      "function": "open_cfw_compress_log_force_sync",
+      "relocations": [
+        {
+          "offset": 16,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 30,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 40,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 54,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 64,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 78,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 88,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 100,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 110,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 122,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 132,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 144,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 154,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 166,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 176,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 188,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 198,
+          "symbol": "open_cfw_compress_log_ring_read_locked",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_ring_read_locked",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 210,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 278,
+          "symbol": "open_cfw_compress_log_get_all_buffer",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_get_all_buffer",
+          "type": "R_ARM_THM_CALL"
+        },
+        {
+          "offset": 292,
+          "symbol": "open_cfw_compress_log_sync_to_files",
+          "symbol_type": "STT_NOTYPE",
+          "target_function": "open_cfw_compress_log_sync_to_files",
+          "type": "R_ARM_THM_JUMP24"
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-compress-log-core-recovery.md",
+        "license": "MIT",
+        "origin": "clean-room reconstruction of the complete G2 compact-record ring, encoder, filtering, and persistence scheduling core",
+        "path": "components/apollo_main/core_overlay/compress_log_core.c",
+        "sha256": "5d7fdbcad7bd290e593af153d787b1351d3b7bdb47de9ebd69fdd60462ee9c38",
+        "size": 21095
+      },
+      "strict_relocation_contract": true,
+      "allow_discarded_alloc_sections": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never",
+          "-DOPEN_CFW_COMPRESS_LOG_CORE_FORCE_SYNC_ONLY=1"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      },
+      "toolchain_profiles": {
+        "linux-clang": {
+          "reviewed_version_prefix": "Homebrew clang version 22.1.8",
+          "expected": {
+            "alignment": 4,
+            "offset": 152756,
+            "sha256": "6ea56ff0d57c780b9afd0c53cbd14c4987b9e5a7f6e6a025a1b3e48dbe43c360",
+            "size": 298,
+            "unrelocated_sha256": "882001ce9420d45245545a442ee7323806afd2732e448faa414250678fc8a789"
+          },
+          "relocations": [
+            {
+              "offset": 16,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 30,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 40,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 54,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 64,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 78,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 88,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 100,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 110,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 122,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 132,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 144,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 154,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 166,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 176,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 188,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 198,
+              "symbol": "open_cfw_compress_log_ring_read_locked",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_ring_read_locked",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 210,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 278,
+              "symbol": "open_cfw_compress_log_get_all_buffer",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_get_all_buffer",
+              "type": "R_ARM_THM_CALL"
+            },
+            {
+              "offset": 292,
+              "symbol": "open_cfw_compress_log_sync_to_files",
+              "symbol_type": "STT_NOTYPE",
+              "target_function": "open_cfw_compress_log_sync_to_files",
+              "type": "R_ARM_THM_JUMP24"
+            }
+          ]
+        }
+      }
     }
   ],
   "run_base": 4423680,
@@ -171082,6 +176078,22 @@
       "sha256": "405092c6e8fc65a740f951cb2affaad8766e2553c7b8d290ff58f435e8830f47",
       "upstream": "https://github.com/littlefs-project/littlefs/blob/0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs_util.h",
       "upstream_commit": "0494ce7169f06a734a7bd7585f49a9fa91fa7318"
+    },
+    {
+      "evidence": "docs/research/g2-compress-log-port-recovery.md",
+      "license": "MIT",
+      "origin": "clean-room reconstruction of the complete G2 compact-log file-port persistence, rotation, and export-timeout policy",
+      "path": "components/apollo_main/core_overlay/compress_log_port.h",
+      "sha256": "76379ea92735573dfa4d3291259ed869bb2412794a8925f52cafdb26407a8a8a",
+      "size": 1095
+    },
+    {
+      "evidence": "docs/research/g2-compress-log-core-recovery.md",
+      "license": "MIT",
+      "origin": "clean-room reconstruction of the complete G2 compact-record ring, encoder, filtering, and persistence scheduling core",
+      "path": "components/apollo_main/core_overlay/compress_log_core.h",
+      "sha256": "9ee8284247da8bc538b3288845e00e39672d4de7be1d7cca748b696e6983305b",
+      "size": 899
     }
   ],
   "post_link_providers": {
@@ -171102,8 +176114,8 @@
             "sha256": "5861f72d7bb2bd1be590fc7fb3f660a075b229f7f92f80079d3262c93b6cda98"
           },
           "component": {
-            "size": 3885668,
-            "sha256": "7cfe8499ba14cfc340576d259789e8143aa5b0ca0d78b988e41defd241e1093a"
+            "size": 3891726,
+            "sha256": "3a951802144482855ed98793129cff85ad1a289f4288422c22f32d063975e9dd"
           },
           "placement": {
             "text": {
@@ -171124,11 +176136,11 @@
         "linux-clang": {
           "overlay": {
             "size": 7596,
-            "sha256": "dc0f1fcd2cbbbc1ef12ac2750cff1e999b6f2ced18e73d03ea66cd178cdc019a"
+            "sha256": "9649e9890719b875331fecaa545ef87ddefa427a6cc32c03b55126e145bb41d6"
           },
           "component": {
-            "size": 3678000,
-            "sha256": "560c9348e095505e0a47a4179100743dc1366f18f383c291eb7b06f9696573c1"
+            "size": 3684048,
+            "sha256": "39f0194181ce4129e8c597d3c1b882842ef9803dda4f4acbae0aae8fa718fe33"
           }
         }
       }
@@ -171390,16 +176402,16 @@
   "toolchain_profiles": {
     "linux-clang": {
       "core_stage_expected": {
-        "component_sha256": "c2d3fad0382523efb9aa3cfdf19e63e81dca9fdcecdc838e37cac5c48fde430f",
-        "component_size": 3670404,
-        "overlay_sha256": "36dee8d3beebc0055456267ad068a9944a9eccc0bfec04f78603dd384709fab4",
-        "overlay_size": 147008
+        "component_sha256": "edc8f2d812b9767374e30c2c619d5c8040b4a2d35d84c22cff74fd365bdbcaeb",
+        "component_size": 3676450,
+        "overlay_sha256": "ac16ef6cdd8ad6a1204eec57f3d7072a791f355cb12611d3af61b8c3cb8044f3",
+        "overlay_size": 153054
       },
       "expected": {
-        "component_sha256": "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
-        "component_size": 3956468,
-        "overlay_sha256": "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6",
-        "overlay_size": 154604
+        "component_sha256": "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38",
+        "component_size": 3956672,
+        "overlay_sha256": "97a591e61178dd77394814b9a7e4863d7b08a0e6a97558820a212170e145cf41",
+        "overlay_size": 160652
       },
       "include_dirs": [
         "components/apollo_main/core_overlay/tlsf_compat",

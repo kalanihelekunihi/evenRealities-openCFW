@@ -11,22 +11,22 @@ IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 SOURCE = ROOT / "components/apollo_main/core_overlay/cordio_sec_api.c"
 OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
 OVERLAY_REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
-PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
-PACKAGE_REPORT = ROOT / "build/source/build-report.json"
-FLASH_PLAN = ROOT / "build/source/flash-plan.json"
+PACKAGE = ROOT / "build/final-validation-apple/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin"
+PACKAGE_REPORT = ROOT / "build/final-validation-apple/build-report.json"
+FLASH_PLAN = ROOT / "build/final-validation-apple/flash-plan.json"
 BASE = 0x00437FE0
 IMAGE_SIZE = 3_523_396
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 SOURCE_SHA256 = "fdfe93f8ec34dad9deea2ce5e4f5571bf53672cda202b87a2a04a3c60832634e"
-PACKAGE_SIZE = 4_750_576
-PACKAGE_SHA256 = "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6"
-FLASH_PLAN_SIZE = 4_881_053
-FLASH_PLAN_SHA256 = "e540570208e616cc3de20af268da55d17fbf59f918aee143be8a902449253262"
+PACKAGE_SIZE = 4_750_780
+PACKAGE_SHA256 = "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
+FLASH_PLAN_SIZE = 4_961_300
+FLASH_PLAN_SHA256 = "f2625775d8a7b3c81c8862db00979cdcf4965eeb003e4b6b84e8cb2d8c1293b9"
 EXPECTED_OVERLAY = {
     "overlay_size": 362_272,
     "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
-    "component_size": 3_956_468,
-    "component_sha256": "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
+    "component_size": 3_956_672,
+    "component_sha256": "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
 }
 FUNCTIONS = (
     ("open_cfw_cordio_sec_hci_callback", 0x00536234, 0x00536324, "da8ebedf91cd554eae5a19134ec01fd47b991e76d0e8666365b8e662dca7f89c"),
@@ -113,7 +113,7 @@ def analyze() -> dict:
     }
     if any(package_report["package"].get(k) != v for k, v in expected_report.items()):
         raise AuditError("package replay changed")
-    if package_report.get("placed_region_count") != 7_006 or package_report.get("unresolved_region_count") != 0:
+    if package_report.get("placed_region_count") != 7_104 or package_report.get("unresolved_region_count") != 0:
         raise AuditError("package region census changed")
     return {
         "schema_version": 1,
@@ -133,7 +133,7 @@ def analyze() -> dict:
             "alignment_bytes": 16,
             "strict_relocations": 65,
             "package_byte_identical": True,
-            "placed_regions": 7_006,
+            "placed_regions": 7_104,
             "unresolved_regions": 0,
             "primitive_provider": "retained HCI/controller boundary",
             "hardware_validation": "blocked by unavailable physical evidence",

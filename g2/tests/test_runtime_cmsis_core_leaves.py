@@ -347,18 +347,18 @@ class RuntimeCmsisCoreLeavesTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 360578,
-                "overlay_sha256": "6f1f38ff89e350a1e104f09fd9278056ac6b8884d0bc21c8357c845ba82035a7",
-                "component_size": 3883974,
-                "component_sha256": "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
+                "overlay_size": 362272,
+                "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+                "component_size": 3956672,
+                "component_sha256": "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
             },
         )
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         main = manifest["component_overrides"]["apollo_main"]
-        self.assertEqual(main["provider"]["size"], 3883974)
+        self.assertEqual(main["provider"]["size"], 3956672)
         self.assertEqual(
             main["provider"]["sha256"],
-            "a3d36ad784519c7193976e1bbfe1b5dc7c6a07fd3bba185166e12fce2a0f19d9",
+            "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
         )
         region_names = {item["name"] for item in main["regions"]}
         self.assertTrue(

@@ -67,7 +67,7 @@ def main() -> int:
     )
     require(selection["exact_g2_checkout_proven"] is False, "historical checkout overclaimed")
     boundary = value["g2_boundary"]
-    require(boundary["production_routed"] is False, "production routing changed")
+    require(boundary["production_routed"] is True, "production routing changed")
     require(boundary["linked_functions"] == 21, "linked function count changed")
     require(boundary["stock_body_bytes"] == 2572, "stock body byte count changed")
     require(boundary["stock_span"] == "[0x004D798C,0x004D83D8)", "stock span changed")
@@ -77,8 +77,16 @@ def main() -> int:
         "boundary evidence changed",
     )
     require(
-        "production-excluded" in boundary["production_decision"],
-        "explicit production-exclusion decision missing",
+        "21 strict dual-profile relocated leaves" in boundary["production_decision"],
+        "production admission decision missing",
+    )
+    production = boundary["production_source"]
+    production_path = HERE.parents[1] / production["path"]
+    production_data = production_path.read_bytes()
+    require(
+        (len(production_data), sha256(production_data))
+        == (production["size"], production["sha256"]),
+        "production source changed",
     )
 
     records = {record["path"]: record for record in value["files"]}
@@ -95,7 +103,7 @@ def main() -> int:
     print("selected tag: v1.7.12 (lightweight)")
     print("selected commit: 3c8935676a97c7c97bf006db8312875b4f292f6c")
     print("compatible interval: v1.7.9 f110bd2e585394bf47baca34a06df2569a9232b6 .. v1.7.12 3c8935676a97c7c97bf006db8312875b4f292f6c")
-    print("production: excluded (stock 2,572 body bytes retained pending compiler/ABI readiness)")
+    print("production: routed (21 strict leaves replace all 2,572 stock body bytes)")
     return 0
 
 

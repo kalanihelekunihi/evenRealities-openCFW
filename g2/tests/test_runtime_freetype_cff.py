@@ -172,13 +172,13 @@ class RuntimeFreeTypeCffTests(unittest.TestCase):
             },
             {
                 "apple-clang": (
-                    3_956_468,
-                    "aa3dbf59ad8912a92fcd9ea6e1ce33834da51989f5fb19257e7064871fb6a3b2",
+                    3_956_672,
+                    "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe",
                     20_416,
                 ),
                 "linux-clang": (
-                    3_956_468,
-                    "3255f998ea3c115803bf957e63b50e0b4a969cf478e64939610592c6fd4758f7",
+                    3_956_672,
+                    "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38",
                     20_356,
                 ),
             },
@@ -188,21 +188,21 @@ class RuntimeFreeTypeCffTests(unittest.TestCase):
             "manifest": "manifests/g2-2.2.6.10-core-source.json",
             "profiles": {
                 "apple-clang": {
-                    "size": 4_750_576,
+                    "size": 4_750_780,
                     "sha256": (
-                        "56f3c555b58099e0a744905856cc803c9aa681bdffc2b2ad8b4f61141ff8c1e6"
+                        "f2842600b84f303c40d2d299761c1abc0a7083acc05f2d378be9a045b0d9a846"
                     ),
                 },
                 "linux-clang": {
-                    "size": 4_750_560,
+                    "size": 4_750_764,
                     "sha256": (
-                        "e888fd7de4ed3b6a3a2b071f001f4769cf783ad2fc785a01ae0e08c0e5d808c2"
+                        "e534ffe034360b24fffc3d7fc50988234fc48ae20f6e8afa8be2507247c8cd39"
                     ),
                 },
             },
-            "apple_cff_region_rows": 6,
-            "linux_profile_replacement_rows": 5,
-            "highest_cff_end_exclusive": "0x007FDED4",
+            "apple_cff_region_rows": 16,
+            "linux_profile_replacement_rows": 1,
+            "highest_cff_end_exclusive": "0x0073EF04",
         })
         self.assertTrue(
             route["evidence_bounds"]["software_production_route_claimed"]
