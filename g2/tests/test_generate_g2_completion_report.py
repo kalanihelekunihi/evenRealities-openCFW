@@ -69,17 +69,17 @@ class G2CompletionReportTests(unittest.TestCase):
         ledger = self.assessment["functional_capability_ledger"]
         self.assertEqual(set(ledger["domain_counts"]),
                          set(generator.CAPABILITY_DOMAINS))
-        self.assertEqual(ledger["row_count"], 185)
+        self.assertEqual(ledger["row_count"], 198)
         self.assertEqual(ledger["totals"], {
-            "implemented-in-source": 152,
+            "implemented-in-source": 165,
             "software-gap": 0,
             "hardware-dependent": 19,
             "proprietary-blocked": 14,
         })
         self.assertEqual(ledger["software_gap_rows"], 0)
         self.assertTrue(ledger["software_gap_gate"])
-        self.assertEqual(ledger["hardware_marked_rows"], 130)
-        self.assertEqual(ledger["hardware_rows_explicitly_blocked"], 130)
+        self.assertEqual(ledger["hardware_marked_rows"], 143)
+        self.assertEqual(ledger["hardware_rows_explicitly_blocked"], 143)
         self.assertTrue(ledger["hardware_blocker_wording_gate"])
         self.assertEqual(ledger["hardware_blocker_wording_failures"], [])
         self.assertEqual(ledger["proprietary_marked_rows"], 16)
@@ -152,17 +152,17 @@ class G2CompletionReportTests(unittest.TestCase):
         expected = {
             "apple-clang": (
                 4750780,
-                "f2842600b84f303c40d2d299761c1abc0a7083acc05f2d378be9a045b0d9a846",
+                "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771",
                 4749836,
                 0,
-                120246,
+                132410,
             ),
             "linux-clang": (
                 4750764,
-                "e534ffe034360b24fffc3d7fc50988234fc48ae20f6e8afa8be2507247c8cd39",
+                "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
                 4749820,
                 0,
-                3359246,
+                3346960,
             ),
         }
         for profile, values in expected.items():

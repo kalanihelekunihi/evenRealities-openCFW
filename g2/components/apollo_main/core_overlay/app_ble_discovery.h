@@ -1,0 +1,24 @@
+/* SPDX-License-Identifier: MIT */
+#ifndef OPEN_CFW_APP_BLE_DISCOVERY_H
+#define OPEN_CFW_APP_BLE_DISCOVERY_H
+
+#include <stdint.h>
+
+enum {
+    OPEN_CFW_APP_BLE_DISCOVERY_STATE_INITIALIZE = 0,
+    OPEN_CFW_APP_BLE_DISCOVERY_STATE_FAILED = 1,
+    OPEN_CFW_APP_BLE_DISCOVERY_STATE_PHONE_READY = 2,
+    OPEN_CFW_APP_BLE_DISCOVERY_STATE_CONFIGURE = 3,
+    OPEN_CFW_APP_BLE_DISCOVERY_STATE_PHASE_COMPLETE = 4,
+    OPEN_CFW_APP_BLE_DISCOVERY_STATE_PHASE_FAILED = 5,
+    OPEN_CFW_APP_BLE_DISCOVERY_STATE_SERVICE = 6,
+    OPEN_CFW_APP_BLE_DISCOVERY_STATE_DIAGNOSTIC = 7,
+    OPEN_CFW_APP_BLE_DISCOVERY_STATE_COMPLETE = 8,
+};
+
+void open_cfw_app_start_service_discovery(uint8_t connection_id);
+void open_cfw_app_ble_server_disc_callback(
+    uint8_t connection_id, uint8_t state
+);
+
+#endif

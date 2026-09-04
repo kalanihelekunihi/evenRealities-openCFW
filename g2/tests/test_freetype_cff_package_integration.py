@@ -40,25 +40,25 @@ class FreeTypeCffPackageIntegrationTests(unittest.TestCase):
         self.assertEqual(checked, self.report)
         self.assertEqual(
             self.report["integration_sha256"],
-            "52b2c8c6764e760df691d248a8673ef41b095be1b4f29111c816f085eee7e0f1",
+            "3ea4d1d8f343c2b74bb5f99377528516b81c3aa49aa0ecf1470da57ea0bb383b",
         )
 
     def test_dual_profile_package_receipts_are_exact(self) -> None:
         expected = {
             "apple-clang": (
                 3_956_672,
-                "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe",
+                "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
                 4_750_780,
-                "f2842600b84f303c40d2d299761c1abc0a7083acc05f2d378be9a045b0d9a846",
-                "0x327A621C",
+                "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771",
+                "0x27272D0F",
                 "0x005AFEB8",
             ),
             "linux-clang": (
                 3_956_672,
-                "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38",
+                "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
                 4_750_764,
-                "e534ffe034360b24fffc3d7fc50988234fc48ae20f6e8afa8be2507247c8cd39",
-                "0xDD72C07D",
+                "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
+                "0x25B2CBBB",
                 "0x005AFE7C",
             ),
         }

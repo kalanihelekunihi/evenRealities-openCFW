@@ -64,8 +64,23 @@ class TelepromptFileListClosureTests(unittest.TestCase):
         self.assertFalse(boundary["new_version_discriminator"])
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
 
-    def test_not_production_routed(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_routed_from_compilable_c(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertFalse(production["software_gap"])
+        self.assertEqual(production["source_routed_functions"], 3)
+        self.assertEqual(production["source_compiled_bytes"], {
+            "apple-clang": 52,
+            "linux-clang": 52,
+        })
+        self.assertEqual(production["strict_relocations"], 2)
+        self.assertEqual(production["stock_body_bytes_displaced"], 166)
+        self.assertEqual(production["retained_diagnostic_pool_bytes"], 34)
+        self.assertEqual(
+            production["hardware_validation"],
+            "blocked by unavailable physical evidence",
+        )
+        self.assertEqual(production["hardware_operations"], [])
 
 
 if __name__ == "__main__":

@@ -57,7 +57,7 @@ class CordioDmConnSmAuditTests(unittest.TestCase):
         self.assertEqual(production["retained_state_table_bytes"], 80)
         self.assertEqual(production["retained_literal_pool_bytes"], 58)
         self.assertEqual(production["manifest_regions"], 2)
-        self.assertEqual(production["flash_plan_counts"], (7104, 0, 8, 6))
+        self.assertEqual(production["flash_plan_counts"], (7822, 0, 8, 6))
 
 
 if __name__ == "__main__":

@@ -82,7 +82,9 @@ class BootloaderMspiDeviceConfigureTests(unittest.TestCase):
         self.assertEqual(report["next_frontier"], {
             "start": 0x0042488E, "end": 0x00424976,
             "identity": "mspi_piomixed_configure", "bytes": 232,
-            "status": "official_blob",
+            "source_compiled_bytes": 84,
+            "retained_unreachable_tail_bytes": 148,
+            "status": "source-compiled-with-retained-unreachable-tail",
         })
         self.assertEqual(report["hardware_validation"],
                          "blocked by unavailable physical evidence")

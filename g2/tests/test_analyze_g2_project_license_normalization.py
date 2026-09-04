@@ -75,7 +75,7 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
         self.assertEqual(metrics["project_owned_gpl_records_pending_mit"], 0)
         self.assertEqual(metrics["project_owned_gpl_only_pending"], 0)
         self.assertEqual(metrics["project_owned_gpl_or_later_pending"], 0)
-        self.assertEqual(metrics["expected_mit_records_after_normalization"], 647)
+        self.assertEqual(metrics["expected_mit_records_after_normalization"], 687)
         self.assertEqual(metrics["repository_only_project_mit_files"], 1)
         self.assertEqual(
             metrics["distributed_upstream_gpl_files_preserved"], 1)

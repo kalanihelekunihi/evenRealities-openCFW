@@ -849,6 +849,15 @@ def _capture_canonical_generation(
             for item in records.values()
             if isinstance(item, dict)
         }
+        cff_records = report.get("canonical_observation", {}).get(
+            "freetype_cff", {}
+        ).get("section_artifacts", {})
+        if isinstance(cff_records, dict):
+            by_name.update({
+                item.get("artifact"): item
+                for item in cff_records.values()
+                if isinstance(item, dict)
+            })
         for path in additional_paths:
             existed, payload = previous[path]
             record = by_name.get(path.name)

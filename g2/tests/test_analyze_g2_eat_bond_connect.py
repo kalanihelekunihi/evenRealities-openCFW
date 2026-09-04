@@ -44,10 +44,25 @@ class AnalyzeG2EatBondConnectTests(unittest.TestCase):
         self.assertIsNone(self.report["lineage"]["retained_path"])
         self.assertFalse(self.report["lineage"]["source_partition_known"])
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
-        self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/eat_bond_connect.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 34)
+        self.assertTrue(production["source_inventory_available"])
+        self.assertEqual(production["source_functions"], 2)
+        self.assertEqual(production["compiled_text_bytes"], {
+            "apple-clang": 46,
+            "linux-clang": 46,
+        })
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(
+            production["hardware_validation"],
+            "blocked by unavailable physical evidence",
+        )
+        self.assertEqual(production["hardware_operations"], [])
+        self.assertEqual(len(production["hardware_evidence_required"]), 2)
 
 
 if __name__ == "__main__":

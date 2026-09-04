@@ -2543,19 +2543,19 @@ Linux toolchain regeneration. Ownership: 796 replaced stock body bytes. See
 ## Current G2 AT^NUS handler production routing
 
 The pathless `AT^NUS` command handler is authored clean-room from the
-recovered behavioral specification and production-routed under the reviewed
-apple-clang profile: one relocated overlay leaf (the 18-byte
-`open_cfw_at_nus_handler`) plus one `B.W` entry redirect with NOP fill
-replace the complete sixteen-byte stock object `[0x005A5520,0x005A5530)`
-(twelve body bytes plus the four-byte literal pool). The leaf passes the
-retained `NUS+OK\r\n` response string at `0x0078A370` to the retained output
-provider at `0x00541430` and returns one without reading its arguments; the
-stored registration pointer `0x005A5521` at `0x006C92A8` — the only ingress —
-reaches the leaf through the redirect. Apple Clang 21
-overlay/component/package pins are `147042/3670438/4448932` (SHA-256
-`b1a5bcd7…`, `76bc4a35…`, `a842e5e3…`). The leaf and redirect are gated
-`apple-clang`; linux-clang leaf pins await Linux toolchain regeneration.
-Ownership: 16 replaced stock object bytes. See
+recovered behavioral specification and production-routed under both reviewed
+profiles. Apple retains the established 18-byte
+`open_cfw_at_nus_handler` placement; Linux appends the profile-disjoint
+18-byte `open_cfw_at_nus_handler_linux` leaf so no established Linux leaf is
+displaced. Mutually exclusive `B.W` redirects with NOP fill replace the
+complete sixteen-byte stock object `[0x005A5520,0x005A5530)` (twelve body
+bytes plus the four-byte literal pool). Each leaf passes the retained
+`NUS+OK\r\n` response at `0x0078A370` to provider `0x00541430` and returns one;
+the sole stored ingress at `0x006C92A8` reaches the active profile leaf through
+its redirect. Canonical Apple overlay/component SHA-256 remains
+`21095c67…` / `7bfc8a60…`; Linux is `13a12b7f…` / `dbfc7bbf…`.
+Ownership is 16 replaced stock-object bytes. Live production-eAT behavior is
+blocked by unavailable authorized physical evidence. See
 `docs/research/g2-at-nus-recovery.md`.
 
 ## Current G2 eAT core/sensor cluster production routing
@@ -3411,13 +3411,15 @@ source coverage. See `docs/research/g2-efs-service-recovery.md` and
 `docs/research/g2-first-party-frontier-census.md` and
 `docs/research/g2-ota-service-recovery.md`.
 
-The smallest genuinely open retained-path object,
-`app\gui\PdtDistortionTest\pdt_distortion_test.c`, is now closed at
+The formerly open retained-path object
+`app\gui\PdtDistortionTest\pdt_distortion_test.c` is closed at
 `[0x005CF2B4,0x005CF634)`: four functions / 850 body bytes / 896 physical
 bytes. The audit restored a four-byte always-true predicate missed by Ghidra,
 authenticated its pointer-table entry, closed the screen-ID `0x110` descriptor,
-and pinned the event-2 LVGL object tree and adjacent gray-screen boundary. It
-remains analysis-only with no historical source or package ownership; see
+and pinned the event-2 LVGL object tree and adjacent gray-screen boundary. A
+clean-room MIT C implementation now replaces all 850 executable bytes in both
+reviewed profiles; the 46-byte literal pool remains authenticated stock. Live
+rendering remains blocked only by the missing authorized G2 panel trace; see
 `docs/research/g2-pdt-distortion-test-recovery.md`.
 
 The adjacent `app\gui\PdtGrayScreen\pdt_gray_screen.c` object is closed too:
@@ -3429,7 +3431,10 @@ The contiguous production-screen family endpoint,
 `app\gui\ProductionTest\production_test.c`, is also closed: three functions /
 286 body bytes / 316 physical bytes, its screen-ID `0x10B` registration, and
 the exact 3×3 white-dot grid are pinned in
-`docs/research/g2-production-test-screen-recovery.md`.
+`docs/research/g2-production-test-screen-recovery.md`. Its clean-room MIT C
+implementation is now production-routed in both reviewed compiler profiles;
+all 286 stock body bytes are displaced, while authorized G2 panel validation
+remains explicitly blocked by unavailable physical evidence.
 
 The retained `platform\ble\profiles\gatt\profile_gatt.c` object is no longer
 opaque first-party glue. All six bodies / 322 bytes map to Packetcraft Cordio
@@ -5568,16 +5573,25 @@ See `docs/research/g2-service-codec-porting-recovery.md`.
 
 ## G2 notification thread is object-closed
 
-Three path anchors / 374 bytes expand to eleven functions / 702 body bytes and
-114 bytes in two pools, for 816 physical bytes. Two restored bodies are the
-stored thread entry and packed creation callback. Nine BL entries, two stored
-pointers, 56 calls, six path references, both boundaries, and zero indirect or
+Three path anchors / 374 bytes expand to twelve functions / 730 body bytes and
+86 bytes in one pool, for 816 physical bytes. Three restored bodies are the
+stored thread entry, packed creation callback, and contiguous destruction
+routine previously misclassified as pool data. Nine BL entries, two stored
+pointers, 58 calls, six path references, both boundaries, and zero indirect or
 strict-interior targets are pinned.
 
-Seven calls land on exact, production-source-owned CMSIS-FreeRTOS v10.5.1
+Eight calls land on exact, production-source-owned CMSIS-FreeRTOS v10.5.1
 thread, flags, delay, and queue wrappers at `d213f261…`. Thirty calls reach
-admitted EasyLogger and eleven reach first-party state/record/whitelist policy.
+admitted EasyLogger and twelve reach first-party state/record/whitelist policy.
 No opaque utility body or new version discriminator remains.
+
+All twelve routines are now production-routed from clean-room C. Eleven
+guarded redirects plus the exact 2-byte in-place init hook replace all 730
+executable stock bytes. Both reviewed compilers emit 400 bytes under 31 strict
+relocations. Host execution covers queue IDs `4`/`0x101`, low-16-bit lengths,
+unknown-record freeing, event bits, valid/error waits, lifecycle, allocation
+failure, and terminal exit. Live scheduling and bilateral notification remain
+blocked by unavailable physical evidence.
 
 The retained-path frontier is now 99 closed / 135 open, with 471 closed
 anchors, 253,184 complete-object body bytes, and 276,188 known physical bytes.
@@ -10742,3 +10756,27 @@ generated-patch bytes. The provider remains 163,840 bytes with SHA-256
 Live retained-object, callback, scheduler, interrupt-mask, reset, and cold-boot
 qualification is blocked by unavailable physical evidence. Firmware-wide
 completeness is not claimed.
+
+## 2026-09-03 — Distortion diagnostic production route
+
+The four-function `PdtDistortionTest` object is now implemented as clean-room
+MIT C and production-routed in both reviewed compiler profiles. Four guarded
+redirects displace all 850 executable stock bytes; the compiled leaves total
+890 bytes plus two alignment bytes and carry 86 strict relocations. The
+authenticated 46-byte literal pool remains retained. Host execution verifies
+event dispatch, the 640×480 root, 574×206 frame at `(0,50)`, nested flex
+layout, image asset, two localized labels, and the exact stock style/gap call
+sequence.
+
+Independent quiescent A/B observations bind 1,274 source inputs with closure
+SHA-256 `87752f781ed58e28243872a6451d0bd1eb7295b6dc8ea7511a6994e0d666b098`.
+The Apple package is 4,750,780 bytes (`80810e194fd01b99057835de1521c1f0e7474d121fe1e9ab974109b2a51f3b20`);
+the Linux package is 4,750,764 bytes (`72e006ddfb6702469b50b364d0ae17f80f6941108f0c662d47b7e60e423658dc`).
+Both publish with zero unresolved flash regions and a checked ownership
+companion. Apollo-main retained/externally typed bytes decrease by 850 to
+3,050,436, while candidate-source bytes remain zero in that origin partition.
+
+No hardware operation was performed. Physical qualification is explicitly
+blocked by unavailable evidence: an authorized G2 panel trace must confirm the
+recovered root, frame, flex layout, image, and both localized labels. Broader
+firmware-wide source completeness is not claimed.

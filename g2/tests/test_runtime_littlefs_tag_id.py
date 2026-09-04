@@ -256,13 +256,13 @@ PRODUCTION_PROFILES = {
         "boot_leaf": (650, 0x0043_4702),
         "main_patch": "e7f292bd00bf00bf",
         "boot_patch": "23f0a3bd00bf00bf",
-        "main_overlay_size": 362_272,
+        "main_overlay_size": 380_444,
         "main_overlay_sha256": (
-            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+            "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
         ),
         "main_component_size": 3_956_672,
         "main_component_sha256": (
-            "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"
+            "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6"
         ),
         "boot_overlay_size": 15_240,
         "boot_overlay_sha256": (
@@ -276,7 +276,7 @@ PRODUCTION_PROFILES = {
         ),
         "package_size": 4_750_780,
         "package_sha256": (
-            "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
+            "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771"
         ),
     },
     "linux-clang": {
@@ -284,13 +284,13 @@ PRODUCTION_PROFILES = {
         "boot_leaf": (650, 0x0043_4702),
         "main_patch": "e8f220b900bf00bf",
         "boot_patch": "23f0a3bd00bf00bf",
-        "main_overlay_size": 154_604,
+        "main_overlay_size": 172_828,
         "main_overlay_sha256": (
-            "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6"
+            "13a12b7fc7ec3af866d4ebe9229105ce923d6842ec6e8c4b0e01564582ed8ab1"
         ),
         "main_component_size": 3_956_672,
         "main_component_sha256": (
-            "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a"
+            "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6"
         ),
         "boot_overlay_size": 15_224,
         "boot_overlay_sha256": (
@@ -304,7 +304,7 @@ PRODUCTION_PROFILES = {
         ),
         "package_size": 4_750_764,
         "package_sha256": (
-            "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559"
+            "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0"
         ),
     },
 }

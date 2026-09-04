@@ -20889,29 +20889,28 @@ signed or flashed and no hardware was accessed.
 
 ## Current AT^NUS handler production routing
 
-The clean-room `at_nus.c` replacement is production-routed under the
-reviewed apple-clang profile. One relocated leaf — the 18-byte
-`open_cfw_at_nus_handler`, which passes the retained `NUS+OK\r\n` response
-string at `0x0078A370` to the retained output provider at `0x00541430` and
-returns one without reading its arguments — is appended to the overlay, and
-one `B.W` entry redirect with NOP fill replaces the complete sixteen-byte
-pathless stock object at `[0x005A5520,0x005A5530)` (twelve body bytes plus
-the four-byte literal pool). The stored registration pointer `0x005A5521`
-at `0x006C92A8` — the only ingress — now executes the source leaf through
-the redirect. Behavioral recovery, ingress closure, and the routing record
-are pinned by `docs/research/g2-at-nus-recovery.md` and the fail-closed
-`tools/analyze_g2_at_nus.py` audit.
+The clean-room `at_nus.c` replacement is production-routed under both reviewed
+profiles. Apple keeps the established 18-byte `open_cfw_at_nus_handler` leaf;
+Linux appends the profile-disjoint 18-byte
+`open_cfw_at_nus_handler_linux` leaf at its core-stage tail. Mutually exclusive
+`B.W` redirects with NOP fill replace the complete sixteen-byte pathless stock
+object at `[0x005A5520,0x005A5530)` (twelve body bytes plus the four-byte
+literal pool), so the sole stored registration pointer `0x005A5521` executes
+the active profile leaf. Both symbols come from the same C implementation and
+pass the retained `NUS+OK\r\n` response at `0x0078A370` to provider
+`0x00541430` before returning one. Behavioral recovery, ingress closure, and
+the routing record are pinned by `docs/research/g2-at-nus-recovery.md` and the
+fail-closed `tools/analyze_g2_at_nus.py` audit.
 
-Apple Clang 21 produces overlay/component/package sizes
-`147042/3670438/4448932`, with SHA-256 values
-`b1a5bcd75031fadd93e875fa643400f20125f4d89e74b5fb55e9aa111b9dc789`,
-`76bc4a35a0fe0ed26e9489b4e4b5aec5f95ea90463685acd316851ea657d8a1e`,
-and `a842e5e3327a7790c006a3f50b2192a9e48a2f415be51e8f4d7be91a15f09adb`.
-The leaf and redirect are gated `apple-clang`, so the linux-clang build
-stays byte-identical to its recorded profile; linux-clang leaf pins await
-Linux toolchain regeneration. The component build, source package, `open_cfw
-verify`, and the fail-closed analyzer/manifest census all pass. No package was
-signed or flashed and no hardware was accessed.
+Apple overlay/component SHA-256 remains
+`21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622` /
+`7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6`;
+Linux is
+`13a12b7fc7ec3af866d4ebe9229105ce923d6842ec6e8c4b0e01564582ed8ab1` /
+`dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6`.
+No package was signed or flashed and no hardware was accessed. Live
+production-eAT validation is blocked by unavailable authorized physical
+evidence.
 
 ## Current eAT core/sensor cluster production routing
 

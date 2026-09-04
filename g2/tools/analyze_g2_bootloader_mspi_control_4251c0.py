@@ -59,8 +59,9 @@ PROFILE_PINS = {
         "compiler": "/usr/bin/clang",
         "version": "Apple clang version 21.0.0",
         "component": (163840, "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b"),
-        "source_owned": 34557,
-        "opaque": 112803,
+        "source_owned": 59009,
+        "opaque": 87985,
+        "source_owned_in_place": 41190,
         "body_unrelocated": "72cded3f11ee2d26547a0b080cc08de5b0328abb90b60a63ed639600ab60bac8",
         "body_relocated": "baa242511305c129975f70959f169012a1719efeacb3d255e0b37eacf840d872",
         "offsets": (900, 976, 1590, 1620, 1992, 2030, 2070, 2078, 2282, 2696, 2706, 2720, 2842, 3052, 3072, 3080, 3094, 3534, 3570, 3626, 3650, 3666, 3702, 3762, 3790),
@@ -70,8 +71,9 @@ PROFILE_PINS = {
         "compiler": "/opt/homebrew/opt/llvm@22/bin/clang",
         "version": "Homebrew clang version 22.1.8",
         "component": (163824, "11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875"),
-        "source_owned": 34539,
-        "opaque": 112803,
+        "source_owned": 58983,
+        "opaque": 87997,
+        "source_owned_in_place": 41178,
         "body_unrelocated": "4fd5f1910023af3a73e8e14ae9d49ccb63c4c4a044f4c181f57f0e61583795a0",
         "body_relocated": "9b46eb4b0137ce524802b66e6253a5ff539e36278b3735f936901a3b0eb93bd5",
         "offsets": (900, 976, 1590, 1620, 1996, 2034, 2074, 2082, 2286, 2700, 2710, 2724, 2846, 3054, 3074, 3082, 3096, 3536, 3570, 3626, 3650, 3666, 3702, 3762, 3800),
@@ -193,7 +195,7 @@ def audit(*, rebuild: bool = False) -> dict[str, object]:
         require((component["size"], component["sha256"]) == expected["component"], f"{name} report changed")
         require(component["source_owned_bytes"] == expected["source_owned"], f"{name} source accounting changed")
         require(component["opaque_base_bytes"] == expected["opaque"], f"{name} retained accounting changed")
-        require(component["source_owned_in_place_bytes"] == 18828, f"{name} in-place accounting changed")
+        require(component["source_owned_in_place_bytes"] == expected["source_owned_in_place"], f"{name} in-place accounting changed")
         require(report["toolchain"]["version"].startswith(expected["version"]), f"{name} compiler changed")
 
         wrapper = leaf(report, "open_cfw_bootloader_mspi_control_4251c0")
@@ -236,7 +238,7 @@ def audit(*, rebuild: bool = False) -> dict[str, object]:
     override = json.loads(MANIFEST.read_text())["component_overrides"]["apollo_bootloader"]
     provider = override["provider"]
     require((provider["size"], provider["sha256"], provider["source_owned_bytes"], provider["opaque_base_bytes"])
-            == (163840, PROFILE_PINS["apple-clang"]["component"][1], 34557, 112803), "manifest provider authority changed")
+            == (163840, PROFILE_PINS["apple-clang"]["component"][1], 59009, 87985), "manifest provider authority changed")
     regions = {item["name"]: item for item in override["regions"]}
     expected_regions = {
         "bootloader_mspi_control_4251c0_source_in_place": (BOOT_START, 124, "source_compiled"),

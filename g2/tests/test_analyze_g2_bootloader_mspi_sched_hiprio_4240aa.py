@@ -78,6 +78,9 @@ class BootloaderMspiSchedHiprioTests(unittest.TestCase):
         self.assertEqual(report["next_frontier"], {
             "start": 0x00424120, "end": 0x0042488E,
             "identity": "mspi_device_configure", "bytes": 1902,
+            "source_compiled_bytes": 284,
+            "retained_unreachable_tail_bytes": 1618,
+            "status": "source-compiled-with-retained-unreachable-tail",
         })
         self.assertEqual(report["hardware_validation"],
                          "blocked by unavailable physical evidence")

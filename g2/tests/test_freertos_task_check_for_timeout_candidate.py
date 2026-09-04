@@ -169,26 +169,26 @@ PRODUCTION_PINS = {
 }
 
 PRODUCTION_APPLE_AGGREGATE = {
-    "overlay_size": 362_272,
+    "overlay_size": 380_444,
     "overlay_sha256": (
-        "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+        "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
     ),
     "component_size": 3_956_672,
     "component_sha256": (
-        "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"
+        "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6"
     ),
 }
 
 PRODUCTION_LINUX_AGGREGATE = {
-    "overlay_size": 154_604,
+    "overlay_size": 172_828,
     "overlay_sha256": (
-        "4caa6c35e2c8f559d7668511d8c36fd"
-        "19ba95a94a8762215f9bed4ba91e006c6"
+        "13a12b7fc7ec3af866d4ebe9229105ce"
+        "923d6842ec6e8c4b0e01564582ed8ab1"
     ),
     "component_size": 3_956_672,
     "component_sha256": (
-        "886b0e26bb847a47614103683d71aa89"
-        "12e34379e623131b8afbd4a665eec32e"
+        "dbfc7bbf1462166b04fb962e9e639ba2"
+        "296c84a6e0b4f6f22d7ae5e321efc0e6"
     ),
 }
 

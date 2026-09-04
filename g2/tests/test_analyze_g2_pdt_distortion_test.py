@@ -45,9 +45,19 @@ class AnalyzeG2PdtDistortionTestTests(unittest.TestCase):
     def test_boundary_and_production_status(self) -> None:
         self.assertEqual(self.report["boundary"]["next_handler"], "0x005cf634")
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["source_functions"], 4)
+        self.assertEqual(production["stock_body_bytes_displaced"], 850)
+        self.assertEqual(production["ownership_bytes"], 850)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(
+            production["hardware_validation"],
+            "blocked by unavailable physical evidence",
+        )
+        self.assertEqual(production["hardware_operations"], [])
+        self.assertEqual(production["hardware_evidence_required"], [
+            "authorized G2 panel trace confirming the recovered 640x480 root, 574x206 frame at (0,50), nested flex layout, image asset, and both localized resource labels",
+        ])
 
 
 if __name__ == "__main__":

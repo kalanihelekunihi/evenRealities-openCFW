@@ -1,6 +1,6 @@
 # G2 teleprompt file-list recovery
 
-Status: read-only, fail-closed closure of stock 2.2.6.10
+Status: production-routed clean-room C closure of stock 2.2.6.10
 `app\gui\teleprompt\teleprompt_file_list.c`.
 
 ## Result
@@ -35,8 +35,19 @@ IAR DLIB `memcpy` and `memset` primitives. No third-party implementation is
 embedded, no new family or version discriminator appears, and there is no
 direct nanopb call.
 
-The historical source and producing commit remain unavailable. This compact
-storage object is not production-routed.
+The historical source and producing commit remain unavailable. A clean-room
+implementation now supplies all three functions from compilable C, with an
+explicit public record ABI and retained `memcpy`/`memset` provider seams.
+Complete-span guarded branches replace all 166 stock body bytes in both
+supported compiler profiles. The reviewed Apple and Linux builds each produce
+52 bytes of leaf text with two strict relocations and generate complete Apollo
+firmware images and packages. The 34-byte stock diagnostic/literal pool remains
+retained because it is not executed by the redirected entries.
+
+This is a software closure. Native tests cover null update, full-record copy,
+live-pointer getter, reset, and compile-time layout assertions. End-to-end
+device qualification is blocked by unavailable physical evidence; the storage
+implementation itself performs no hardware operation.
 
 ## Reproduction
 
@@ -45,4 +56,5 @@ make teleprompt-file-list-closure
 ```
 
 The target authenticates the stock image, complete object, ingress, provider
-surface, and aggregate retained-path frontier without hardware access.
+surface, production source, both compiler routes, live package consistency,
+and the native behavior oracle without hardware access.

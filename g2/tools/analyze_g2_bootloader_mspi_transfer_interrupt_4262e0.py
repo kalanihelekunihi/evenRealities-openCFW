@@ -31,14 +31,18 @@ PROFILES = {
         "provider": ROOT / "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
         "provider_size": 163_840,
         "provider_sha256": "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b",
-        "source_owned_bytes": 34_557,
+        "source_owned_bytes": 59_009,
+        "source_owned_in_place_bytes": 41_190,
+        "opaque_base_bytes": 87_985,
     },
     "linux-clang": {
         "report": ROOT / "build/canonical-provider/linux-clang/apollo_bootloader/build-report.json",
         "provider": ROOT / "build/canonical-provider/linux-clang/apollo_bootloader/ota_s200_bootloader.bin",
         "provider_size": 163_824,
         "provider_sha256": "11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875",
-        "source_owned_bytes": 34_539,
+        "source_owned_bytes": 58_983,
+        "source_owned_in_place_bytes": 41_178,
+        "opaque_base_bytes": 87_997,
     },
 }
 
@@ -207,9 +211,9 @@ def audit() -> dict:
         require((component["size"], component["sha256"], component["source_owned_bytes"],
                  component["source_owned_in_place_bytes"], component["opaque_base_bytes"]) ==
                 (expected["provider_size"], expected["provider_sha256"], expected["source_owned_bytes"],
-                 18_828, 112_803), f"{profile} provider accounting changed")
+                 expected["source_owned_in_place_bytes"], expected["opaque_base_bytes"]), f"{profile} provider accounting changed")
         require(component["source_owned_bytes"] + component["opaque_base_bytes"] ==
-                expected["source_owned_bytes"] + 112_803,
+                expected["source_owned_bytes"] + expected["opaque_base_bytes"],
                 f"{profile} source/official conservation changed")
         reported = {item["extraction"]["function"]: item for item in report["in_place_leaves"]}
         for name, facts in LEAVES.items():

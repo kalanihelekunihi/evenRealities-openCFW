@@ -117,17 +117,17 @@ PRODUCTION_BYTES_SHA256 = (
     "88edbdea558812d213013a8d319a09c6"
     "3dafa86ec91a7640f427c72c77552da1"
 )
-PRODUCTION_OVERLAY_SIZE = 362_272
+PRODUCTION_OVERLAY_SIZE = 380_444
 PRODUCTION_OVERLAY_SHA256 = (
-    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+    "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
 )
-PRODUCTION_COMPONENT_SIZE = 3_885_668
+PRODUCTION_COMPONENT_SIZE = 3_903_840
 PRODUCTION_COMPONENT_SHA256 = (
-    "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
+    "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752"
 )
 PACKAGE_SIZE = 4_750_780
 PACKAGE_SHA256 = (
-    "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
+    "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771"
 )
 
 
@@ -539,10 +539,10 @@ class RuntimeFreeRTOSTaskGetNameTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 404_060,
-                "opaque_base_bytes": 3_116_920,
-                "replaced_stock_function_bytes": 404_240,
-                "source_owned_bytes": 364_656,
+                "generated_patch_site_bytes": 422_476,
+                "opaque_base_bytes": 3_098_454,
+                "replaced_stock_function_bytes": 422_658,
+                "source_owned_bytes": 382_878,
             },
         )
 

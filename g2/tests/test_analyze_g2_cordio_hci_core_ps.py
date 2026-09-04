@@ -62,7 +62,7 @@ class CordioHciCorePlatformAuditTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 13)
         self.assertEqual(production["source_only_functions_compiled"], 11)
         self.assertEqual(production["manifest_regions"], 21)
-        self.assertEqual(production["flash_plan_counts"], (7104, 0, 8, 6))
+        self.assertEqual(production["flash_plan_counts"], (7822, 0, 8, 6))
         self.assertTrue(production["completed_count_underflow_hardened"])
         self.assertTrue(production["unknown_receive_type_hardened"])
 

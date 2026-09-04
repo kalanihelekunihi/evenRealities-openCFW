@@ -60,8 +60,23 @@ class G2ServiceTimeTests(unittest.TestCase):
         self.assertFalse(provider["new_version_discriminator"])
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
 
-    def test_not_production_routed(self):
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_route(self):
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertFalse(production["software_gap"])
+        self.assertEqual(production["source_routed_functions"], 11)
+        self.assertEqual(
+            production["source_compiled_bytes"],
+            {"apple-clang": 1658, "linux-clang": 1648},
+        )
+        self.assertEqual(production["strict_relocations"], 27)
+        self.assertEqual(production["stock_body_bytes_displaced"], 1308)
+        self.assertEqual(production["retained_diagnostic_pool_bytes"], 76)
+        self.assertEqual(
+            production["hardware_validation"],
+            "blocked by unavailable physical evidence",
+        )
+        self.assertEqual(production["hardware_operations"], [])
 
 
 if __name__ == "__main__":

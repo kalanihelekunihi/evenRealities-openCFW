@@ -19,7 +19,7 @@ SOURCE=ROOT/'components/apollo_main/core_overlay/ble_ota_profile.c';RING_SOURCE=
 SOURCE_PIN=(9851,'e8993403f028ebaf86289aa580d7addb3418973a3990eabd91a8d63710d9fde6');LEAF_NAMES=('open_cfw_ota_process_ccc','open_cfw_ota_process_message','open_cfw_ota_write_callback','open_cfw_ota_handler_init','open_cfw_ota_disconnect','open_cfw_ota_public_process_message','open_cfw_ota_send_data')
 LEAF_DIGEST='6e2b1e823e1ff5b60a2b1f61133d272d24a6b5844d176d5717d333408d5e6229';PATCH_DIGEST='0ae9d699f04930a83ec320bd88b5cc6c216a22e0f1ed27fe13fb5e35f444fb7d';BUILT_DIGEST='65a0c895173b0a0c85f8e8cabccd4310bf8ae3b46cfd3502153dd03898c519f9';REGION_DIGEST='bc52888e64b8aa03bf5f673fd642d5b4a8298b4cbba8b24303505e80de9c453a'
 RING_SOURCE_PIN=(14163,'1fee6da0f14810ab0ced1103e2d0b1a593dc56661027cf8af99dc43e8b903059');RING_LEAF_NAMES=('open_cfw_ring_pack_ccc_epoch','open_cfw_ring_enable_ccc','open_cfw_ring_handler_init','open_cfw_ring_service_discover','open_cfw_ring_receive_data','open_cfw_ring_process_message','open_cfw_ring_send_data')
-RING_LEAF_DIGEST='5adeccc059c3d8fd54d6d5deb67251686f989ffcc9632e043c8a2a63eaf9e547';RING_PATCH_DIGEST='0c67f235ffb2526f8cca1f1040b953a2bb0b1589cc77be63092999bb61d537d2';RING_BUILT_DIGEST='4ccbb5320cbc784867c937693ef5ff2d96e3d0e48d5dbb0742eb57a7c463fe54';RING_REGION_DIGEST='e85fccb81b854218e5cc24d0ae281af42bae019c471f3f30103f1f4ef4357804'
+RING_LEAF_DIGEST='5adeccc059c3d8fd54d6d5deb67251686f989ffcc9632e043c8a2a63eaf9e547';RING_PATCH_DIGEST='0c67f235ffb2526f8cca1f1040b953a2bb0b1589cc77be63092999bb61d537d2';RING_BUILT_DIGEST='4ccbb5320cbc784867c937693ef5ff2d96e3d0e48d5dbb0742eb57a7c463fe54';RING_REGION_DIGEST='bf0aa3d7455291ebb1cff17944bafa6526e3a90adcee5d309de97fb27c1e37cc'
 class AuditError(RuntimeError):pass
 def sha(x):return hashlib.sha256(x).hexdigest()
 def jsh(x):return sha(json.dumps(x,sort_keys=True,separators=(',',':')).encode())
@@ -95,8 +95,11 @@ def analyze(image=IMAGE):
  if len(regions)!=19 or jsh(regions)!=REGION_DIGEST:raise AuditError('production BLE OTA manifest regions changed')
  retained={x.get('name'):x for x in main['regions'] if x.get('name')=='opaque_ota_profile_literal_pool'};expected_retained={'opaque_ota_profile_literal_pool':(4972028,80,'official_blob')}
  if {k:(v.get('target_address'),v.get('size'),v.get('address_status')) for k,v in retained.items()}!=expected_retained:raise AuditError('retained BLE OTA official regions changed')
- validate_region_tiling(main['regions'],0x4B5B24,0x4BDB90,AuditError,
-                        'post-GATT multipart-transport/pair-manager corridor')
+ validate_region_tiling(
+  main['regions'],0x4B5B24,0x4BDB90,AuditError,
+  'post-GATT multipart-transport/pair-manager corridor',
+  ('official_blob','generated_source_entry_replacement','generated_source_data_replacement'),
+ )
  ring_source=RING_SOURCE.read_bytes()
  if (len(ring_source),sha(ring_source))!=RING_SOURCE_PIN:raise AuditError('production BLE Ring source changed')
  ring_leaves=[x for x in overlay['relocated_leaves'] if x.get('source',{}).get('path')==RING_SOURCE_PATH]
@@ -111,9 +114,10 @@ def analyze(image=IMAGE):
  if any(x.get('branch')!='b_w' or x.get('profiles')!=['apple-clang'] for x in ring_patches):raise AuditError('production BLE Ring redirect policy changed')
  ring_built=[x for x in build['relocated_leaves'] if x.get('source',{}).get('path')==RING_SOURCE_PATH];ring_norm=[{'function':x['extraction']['function'],'size':x['placement']['size'],'padding_before':x['placement']['padding_before'],'offset':x['placement']['offset'],'runtime_address':x['placement']['runtime_address'],'relocation_count':x['extraction']['relocation_count']} for x in ring_built]
  if len(ring_built)!=7 or jsh(ring_norm)!=RING_BUILT_DIGEST:raise AuditError('production BLE Ring built closure changed')
- ring_region_names={'ring_pack_ccc_epoch_source_replacement','ring_enable_ccc_source_replacement','ring_handler_init_source_replacement','ring_service_discover_source_replacement','ring_receive_data_source_replacement','ring_process_message_source_replacement','ring_send_data_source_replacement','opaque_ring_profile_literal_pool','ring_pack_ccc_epoch_source_text','ring_enable_ccc_source_alignment','ring_enable_ccc_source_text','ring_handler_init_source_text','ring_service_discover_source_alignment','ring_service_discover_source_text','ring_receive_data_source_alignment','ring_receive_data_source_text','ring_process_message_source_alignment','ring_process_message_source_text','ring_send_data_source_text'}
- ring_regions=[x for x in main['regions'] if x.get('name') in ring_region_names]
- if len(ring_regions)!=19 or jsh(ring_regions)!=RING_REGION_DIGEST:raise AuditError('production BLE Ring manifest regions changed')
+ ring_region_names={'ring_pack_ccc_epoch_source_text','ring_enable_ccc_source_alignment','ring_enable_ccc_source_text','ring_handler_init_source_text','ring_service_discover_source_alignment','ring_service_discover_source_text','ring_receive_data_source_alignment','ring_receive_data_source_text','ring_process_message_source_alignment','ring_process_message_source_text','ring_send_data_source_text'}
+ ring_regions=[x for x in main['regions'] if 0x4C46C0<=x.get('target_address',-1)<0x4C4C66 or x.get('name') in ring_region_names]
+ if len(ring_regions)!=36 or jsh(ring_regions)!=RING_REGION_DIGEST:raise AuditError('production BLE Ring manifest regions changed')
+ validate_region_tiling(main['regions'],0x4C46C0,0x4C4C66,AuditError,'BLE Ring stock-body corridor',('generated_source_entry_replacement','generated_source_data_replacement'))
  ring_retained={x.get('name'):x for x in main['regions'] if x.get('name') in {'apollo_opaque_before_ring_profile','opaque_ring_profile_literal_pool'}};ring_expected_retained={'apollo_opaque_before_ring_profile':(4989966,8882,'official_blob'),'opaque_ring_profile_literal_pool':(5000294,134,'official_blob')}
  if {k:(v.get('target_address'),v.get('size'),v.get('address_status')) for k,v in ring_retained.items()}!=ring_expected_retained:raise AuditError('retained BLE Ring official regions changed')
  production_modules={'ota':{'candidate':SOURCE_PATH,'source_functions':7,'compiled_text_bytes':376,'alignment_bytes':8,'stock_replaced_bytes':620,'strict_relocations':17,'retained_literal_pool_bytes':80,'software_functional_gap':False,'hardware_validation':'blocked by unavailable physical evidence','hardware_blocker':'Authorized physical G2/EM9305 peer or captured OTA CCC/reset/disconnect/notification timing evidence is required for future qualification.'},'ring':{'candidate':RING_SOURCE_PATH,'source_functions':7,'compiled_text_bytes':632,'alignment_bytes':8,'stock_replaced_bytes':1446,'strict_relocations':23,'retained_literal_pool_bytes':134,'software_functional_gap':False,'hardware_validation':'blocked by unavailable physical evidence','hardware_blocker':'Authorized physical G2/EM9305 peer or captured Ring discovery/CCC/RX/TX timing evidence is required for future qualification.'}}

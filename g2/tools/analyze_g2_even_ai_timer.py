@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_dashboard_watchface_manager as indirect_common
 import analyze_g2_ux_system as common
 import recover_apollo_embedded_source_paths as thumb
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 
 
 AuditError = common.AuditError
@@ -23,6 +24,10 @@ IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FUNCTION_MAP = ROOT / "tools/manifests/g2-even-ai-timer-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-even-ai-timer-closure.tsv"
 PROVIDER_MAP = ROOT / "tools/manifests/g2-even-ai-timer-provider-map.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/even_ai_timer.c"
+HEADER = ROOT / "components/apollo_main/core_overlay/even_ai_timer.h"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 INPUT_PINS = {
     FUNCTION_MAP: "86163bcb5b085691627761d6af0b3d007c0f9eb44d3cdb5f735553528c34463b",
     CLOSURE: "6a9425e8ddbdb1e4a92a59c52f9365400fc17d64a2c39de5b095f1fcf69095c3",
@@ -125,6 +130,25 @@ STRINGS = {
     0x0073_EBB4: "even_ai_heartbeat_timer_mgr_process_timeout",
     0x0071_4CB0: "[even_ai.timer]even_ai_heartbeat_timer: processing timeout",
 }
+SOURCE_SIZE = 16535
+SOURCE_SHA256 = "4f627214d8a1cd1fdc6ef2571e459065d70d535690fc5b0d78b63d05042069b9"
+HEADER_SIZE = 1072
+HEADER_SHA256 = "86ca2ea8f0cd8b21ea1fab30655a463e75f12a8954759dab758a6bca27d5f00f"
+PRODUCTION_FUNCTIONS = (
+    "open_cfw_even_ai_common_timer_mgr_deinit",
+    "open_cfw_even_ai_common_timer_mgr_start",
+    "open_cfw_even_ai_common_timer_mgr_stop",
+    "open_cfw_even_ai_common_timer_mgr_check_timeout",
+    "open_cfw_even_ai_common_timer_mgr_process_timeout",
+    "open_cfw_even_ai_heartbeat_timer_mgr_deinit",
+    "open_cfw_even_ai_heartbeat_timer_mgr_start",
+    "open_cfw_even_ai_heartbeat_timer_mgr_stop",
+    "open_cfw_even_ai_heartbeat_timer_mgr_check_timeout",
+    "open_cfw_even_ai_heartbeat_timer_mgr_process_timeout",
+    "open_cfw_even_ai_timer_deinit_all",
+    "open_cfw_even_ai_timer_start_all",
+    "open_cfw_even_ai_timer_process_all",
+)
 
 
 def _sha256(value: bytes) -> str:
@@ -138,6 +162,96 @@ def _all_word_hits(blob: bytes, values: set[int]) -> list[tuple[int, int]]:
         if value & 1 and (value & ~1) in values:
             hits.append((common.BASE + offset, value & ~1))
     return hits
+
+
+def _validate_production() -> dict[str, object]:
+    source = SOURCE.read_bytes()
+    header = HEADER.read_bytes()
+    if (len(source), _sha256(source)) != (SOURCE_SIZE, SOURCE_SHA256):
+        raise AuditError("production EvenAI timer source changed")
+    if (len(header), _sha256(header)) != (HEADER_SIZE, HEADER_SHA256):
+        raise AuditError("production EvenAI timer header changed")
+
+    config = json.loads(OVERLAY.read_text())
+    leaves = {
+        item.get("function"): item for item in config["relocated_leaves"]
+        if item.get("function") in PRODUCTION_FUNCTIONS
+    }
+    if set(leaves) != set(PRODUCTION_FUNCTIONS):
+        raise AuditError("production EvenAI timer leaf inventory changed")
+    if any(
+        item.get("profiles") != ["apple-clang", "linux-clang"]
+        or item.get("strict_relocation_contract") is not True
+        or item.get("source", {}).get("path")
+            != "components/apollo_main/core_overlay/even_ai_timer.c"
+        or item["source"].get("size") != SOURCE_SIZE
+        or item["source"].get("sha256") != SOURCE_SHA256
+        or item.get("expected", {}).get("alignment") != 4
+        or item.get("toolchain_profiles", {}).get("linux-clang", {})
+            .get("expected", {}).get("alignment") != 4
+        for item in leaves.values()
+    ):
+        raise AuditError("production EvenAI timer leaf contract changed")
+    apple_bytes = sum(item["expected"]["size"] for item in leaves.values())
+    linux_bytes = sum(
+        item["toolchain_profiles"]["linux-clang"]["expected"]["size"]
+        for item in leaves.values()
+    )
+    apple_relocations = sum(len(item.get("relocations", [])) for item in leaves.values())
+    linux_relocations = sum(
+        len(item["toolchain_profiles"]["linux-clang"].get("relocations", []))
+        for item in leaves.values()
+    )
+    if (apple_bytes, linux_bytes, apple_relocations, linux_relocations) != (502, 502, 22, 22):
+        raise AuditError("production EvenAI timer compiled closure changed")
+
+    patches = [
+        item for item in config["patch_sites"]
+        if item.get("name", "").startswith("replace_even_ai_timer_")
+    ]
+    if (
+        len(patches) != len(FUNCTIONS)
+        or {item.get("runtime_address") for item in patches}
+            != {start for start, _end in FUNCTIONS}
+        or any(
+            item.get("profiles") != ["apple-clang", "linux-clang"]
+            or item.get("branch") != "b_w"
+            for item in patches
+        )
+    ):
+        raise AuditError("production EvenAI timer patch route changed")
+
+    report = json.loads(REPORT.read_text())
+    built = {
+        item.get("extraction", {}).get("function"): item
+        for item in report["relocated_leaves"]
+        if item.get("extraction", {}).get("function") in PRODUCTION_FUNCTIONS
+    }
+    if set(built) != set(PRODUCTION_FUNCTIONS) or any(
+        built[name]["extraction"].get("sha256")
+            != leaves[name]["expected"]["sha256"]
+        or built[name]["placement"].get("offset")
+            != leaves[name]["expected"]["offset"]
+        for name in PRODUCTION_FUNCTIONS
+    ):
+        raise AuditError("built EvenAI timer route changed")
+
+    validate_apollo_main_artifacts(ROOT, AuditError, "EvenAI timer")
+    return {
+        "production_routed": True,
+        "source_functions": len(PRODUCTION_FUNCTIONS),
+        "compiled_text_bytes": {
+            "apple-clang": apple_bytes,
+            "linux-clang": linux_bytes,
+        },
+        "alignment_bytes": 4,
+        "strict_relocations": apple_relocations,
+        "stock_replaced_bytes": BODY_BYTES,
+        "retained_diagnostic_pool_bytes": POOL[1] - POOL[0],
+        "software_functional_gap": False,
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "hardware_operations": [],
+    }
 
 
 def analyze(image: Path = IMAGE) -> dict[str, object]:
@@ -328,10 +442,7 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
             "cmsis_5_commit": "2b7495b8535bdcb306dac29b9ded4cfb679d7e5c",
             "new_version_discriminator": False,
         },
-        "production": {
-            "production_routed": False,
-            "qualification": "behavior and provider seams are recovered; the private EvenAI object is not yet source-routed",
-        },
+        "production": _validate_production(),
     }
 
 

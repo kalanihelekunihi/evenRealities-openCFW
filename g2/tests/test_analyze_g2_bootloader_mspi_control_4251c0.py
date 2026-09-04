@@ -50,8 +50,8 @@ class BootloaderMspiControlTests(unittest.TestCase):
         profiles = self.result["production"]["profiles"]
         self.assertEqual(profiles["apple-clang"]["component_size"], 163840)
         self.assertEqual(profiles["linux-clang"]["component_size"], 163824)
-        self.assertEqual(profiles["apple-clang"]["source_owned_bytes"], 34557)
-        self.assertEqual(profiles["linux-clang"]["source_owned_bytes"], 34539)
+        self.assertEqual(profiles["apple-clang"]["source_owned_bytes"], 59009)
+        self.assertEqual(profiles["linux-clang"]["source_owned_bytes"], 58983)
 
     def test_independent_main_body_cross_check_is_exact(self) -> None:
         comparison = self.result["cross_image"]

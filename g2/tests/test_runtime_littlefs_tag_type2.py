@@ -125,32 +125,32 @@ TARGET_TEXT_PIN = (
 )
 
 APPLE_OVERLAY_PIN = (
-    362_272,
-    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+    380_444,
+    "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622",
 )
 APPLE_COMPONENT_PIN = (
     3_956_672,
-    "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
+    "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
 )
 APPLE_STAGE_COMPONENT_PIN = (
-    3_885_668,
-    "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5",
+    3_903_840,
+    "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752",
 )
 LINUX_OVERLAY_PIN = (
-    154_604,
-    "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6",
+    172_828,
+    "13a12b7fc7ec3af866d4ebe9229105ce923d6842ec6e8c4b0e01564582ed8ab1",
 )
 LINUX_COMPONENT_PIN = (
     3_956_672,
-    "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a",
+    "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
 )
 APPLE_PACKAGE_PIN = (
     4_750_780,
-    "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27",
+    "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771",
 )
 LINUX_PACKAGE_PIN = (
     4_750_764,
-    "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559",
+    "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
 )
 APPLE_LEAF = (124_548, 0x007B_29A8)
 LINUX_LEAF = (126_368, 0x007B_30C4)
@@ -518,12 +518,12 @@ class RuntimeLittlefsTagType2ProductionTests(unittest.TestCase):
                 )
             },
             {
-                "source_owned_bytes": 364_656,
-                "source_owned_in_place_bytes": 184,
-                "generated_patch_site_bytes": 404_060,
+                "source_owned_bytes": 382_878,
+                "source_owned_in_place_bytes": 186,
+                "generated_patch_site_bytes": 422_476,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_116_920,
-                "replaced_stock_function_bytes": 404_240,
+                "opaque_base_bytes": 3_098_454,
+                "replaced_stock_function_bytes": 422_658,
             },
         )
 

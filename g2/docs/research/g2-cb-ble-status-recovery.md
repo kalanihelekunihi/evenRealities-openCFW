@@ -29,5 +29,26 @@ The object has 13 direct external calls:
 There is no direct CMSIS-FreeRTOS, Cordio, IAR DLIB, allocator, or protobuf
 edge and no upstream definition is embedded. Consequently this closure adds
 no dependency family or version/commit discriminator. It narrows the future
-port to a small first-party typed facade over the generic callback manager;
-the object is not yet production-routed.
+port to a small first-party typed facade over the generic callback manager.
+
+## Production result
+
+`components/apollo_main/core_overlay/cb_ble_status.c` is the MIT-licensed,
+compilable clean-room implementation. Three selector-isolated leaves compile
+to 72 bytes, with four bytes of alignment, and carry three strict relocations
+to the recovered callback-manager ABI. The three stock bodies (168 bytes) are
+guarded redirects with NOP fill. The 34-byte diagnostic literal pool remains
+authenticated stock data because logging text is not executable behavior.
+
+Both reviewed compiler profiles are independently admitted. On the Apple
+profile, the LC3 service-audio suffix pack relocates these late overlay leaves
+to authenticated generated host slots and rewrites the three entry branches;
+the production audit verifies the final packed bytes and callback-manager
+targets, rather than accepting the earlier core-stage addresses. The Linux
+profile retains the leaves in its generated tail. `make cb-ble-status-closure`
+checks both final firmware images, package/flash-plan consistency, exact
+manifest ownership, and the host callback contract.
+
+This facade performs only deterministic in-memory list operations. It has no
+hardware operation or physical-validation tail, so hardware validation is
+`not-applicable`; the software functional gap is closed.

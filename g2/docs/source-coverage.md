@@ -7697,15 +7697,14 @@ No retained source path or historical symbol exists.
 `at_nus.c` is a clean-room replacement authored from the recovered
 behavioral specification: it passes the retained `NUS+OK\r\n` response
 string at `0x0078A370` to the retained output provider at `0x00541430` and
-returns one without reading its arguments. It passes host and freestanding
-Thumb tests and is now production-routed under the reviewed apple-clang
-profile: one relocated 18-byte leaf is appended to the overlay, and one
-entry redirect with NOP fill replaces the complete sixteen-byte stock
-object, so the stored registration pointer now lands on the redirect.
-Canonical component accounting is now 147,224 source-owned bytes, 103,374
-generated patch-site bytes, 32 wrapper bytes, 182 source-owned in-place
-bytes, and 3,419,808 opaque base bytes. The linux-clang profile pins await
-Linux toolchain regeneration.
+returns one without reading its arguments. Host and freestanding Thumb tests
+cover the shared implementation. Apple retains the established 18-byte
+`open_cfw_at_nus_handler` placement; Linux uses the profile-disjoint 18-byte
+`open_cfw_at_nus_handler_linux` leaf at its core-stage tail. Mutually exclusive
+entry redirects replace the complete sixteen-byte stock object without
+shifting established Linux leaves. Apple overlay/component SHA-256 remains
+`21095c67…` / `7bfc8a60…`; Linux is `13a12b7f…` / `dbfc7bbf…`. Live command
+transport validation is blocked by unavailable authorized physical evidence.
 
 ## Current first-party pathless eAT bond/connect increment
 

@@ -23,14 +23,26 @@ ANCS discovery, configuration, handle reporting, and completion/failure
 policy. Cordio supplies the generic discovery primitives; the ordering,
 role/phone rules, retry state, logging, and product callbacks are G2-local.
 
-This source-family split is now usable as an OpenCFW shortcut: reuse the
-admitted AmbiqSuite/Packetcraft discovery APIs, but reconstruct this state
-machine as product code. Production routing remains deferred with the wider
-central/peripheral BLE state machines and target validation.
+The clean-room two-function implementation is production-routed for both the
+reviewed Apple Clang and Linux Clang profiles. Its 516 compiled text bytes and
+23 strict relocations replace all 2,962 bounded stock body bytes; the 762-byte
+stock literal-pool/alignment remainder stays classified and retained. Host
+tests cover all nine states, both connection roles, allocation and missing
+record failures, database-hash/GATT/Ring/ANCS ordering, configuration, handle
+reporting, and completion/failure behavior. Exact route, component, manifest,
+and package checks are fail closed.
+
+No physical G2, phone peer, Ring peer, radio capture, or authorization was
+available in this environment. Live validation is therefore explicitly
+blocked by unavailable physical evidence. Required evidence is an authorized
+paired-phone and Ring trace proving role-aware discovery/configuration/failure/
+completion ordering plus a disconnect/reconnect trace proving attempt state
+and handles do not survive incorrectly. No hardware operation was performed.
 
 Reproduce with:
 
 ```sh
 python3 tools/analyze_g2_app_ble_discovery.py
-python3 -m unittest -v tests.test_analyze_g2_app_ble_discovery
+python3 -m unittest -v tests.test_analyze_g2_app_ble_discovery \
+  tests.test_runtime_app_ble_discovery
 ```

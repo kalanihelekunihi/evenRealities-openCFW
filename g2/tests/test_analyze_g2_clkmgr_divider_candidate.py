@@ -49,7 +49,7 @@ class ClockManagerDividerAdmissionTests(unittest.TestCase):
             ),
             (
                 4_750_780,
-                "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27",
+                "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771",
             ),
         )
         self.assertEqual(
@@ -59,7 +59,7 @@ class ClockManagerDividerAdmissionTests(unittest.TestCase):
             ),
             (
                 4_750_764,
-                "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559",
+                "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
             ),
         )
 

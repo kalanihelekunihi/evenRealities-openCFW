@@ -287,11 +287,11 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
                 "bd3b32c736e57005c1cbe65a2725fb66ed5389227686ff7961793f699364e68c",
             ),
         },
-        "overlay": (362272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"),
-        "component": (3956672, "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"),
-        "core_overlay": (362272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"),
-        "core_component": (3885668, "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"),
-        "package": (4750780, "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"),
+        "overlay": (380444, "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"),
+        "component": (3956672, "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6"),
+        "core_overlay": (380444, "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"),
+        "core_component": (3903840, "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752"),
+        "package": (4750780, "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771"),
     },
     "linux-clang": {
         "placements": {
@@ -312,11 +312,11 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
                 "2ef6ffe002ec6b197643da1304921bbc422dc9beb124b23343f16bf187e303a1",
             ),
         },
-        "overlay": (154604, "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6"),
-        "component": (3956672, "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a"),
-        "core_overlay": (147008, "36dee8d3beebc0055456267ad068a9944a9eccc0bfec04f78603dd384709fab4"),
-        "core_component": (3670404, "c2d3fad0382523efb9aa3cfdf19e63e81dca9fdcecdc838e37cac5c48fde430f"),
-        "package": (4750764, "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559"),
+        "overlay": (172828, "13a12b7fc7ec3af866d4ebe9229105ce923d6842ec6e8c4b0e01564582ed8ab1"),
+        "component": (3956672, "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6"),
+        "core_overlay": (165230, "4c76c122789a49d49b0cf30a06cc62adc9c93936dd0c20df7b1d22e24f62169f"),
+        "core_component": (3688626, "f1214b0388a3d9d10b278a58e5f992052786c33db14faad7c21ead607d825b76"),
+        "package": (4750764, "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0"),
     },
 }
 

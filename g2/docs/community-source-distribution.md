@@ -48,20 +48,20 @@ authorized public redistribution of those binaries. Hardware qualification is
 blocked by unavailable physical evidence; the ZIP and software-only smoke gate make no
 claim that any generated firmware has passed device qualification.
 
-The current 157-input assessment records `source_complete=false`,
+The current 166-input assessment records `source_complete=false`,
 `release_authorized=false`, `hardware_operations=[]`, and six unresolved
-binary redistribution authorities. Canonical Apple accounting is 424,703
-production-source, 426,474 generated/reconstructible, 30,636
-candidate-not-routed, 3,795,983 retained/external, and zero unclassified bytes
-over a 4,677,796-byte payload and 4,678,740-byte outer package; 3,826,619 bytes
-remain release-blocking. Canonical Linux accounting is 207,141
-production-source, 136,046 generated/reconstructible, 30,636
-candidate-not-routed, 4,096,289 retained/external, and zero unclassified bytes
-over a 4,470,112-byte payload and 4,471,056-byte outer package; 4,126,925 bytes
-remain release-blocking. The checked label reconciliations are 17,800 Apple
-bytes and 272,466 Linux bytes. The source audit reports 784 distributable files
+binary redistribution authorities. Canonical Apple accounting is 574,315
+production-source, 414,650 generated/reconstructible, 29,396
+candidate-not-routed, 3,731,475 retained/external, and zero unclassified bytes
+over a 4,749,836-byte payload and 4,750,780-byte outer package; 3,760,871 bytes
+remain release-blocking. Canonical Linux accounting is 356,659
+production-source, 331,912 generated/reconstructible, 29,396
+candidate-not-routed, 4,031,853 retained/external, and zero unclassified bytes
+over a 4,749,820-byte payload and 4,750,764-byte outer package; 4,061,249 bytes
+remain release-blocking. The checked label reconciliations are 132,410 Apple
+bytes and 3,346,976 Linux bytes. The source audit reports 930 distributable files
 with zero errors, while the project-wide MIT/upstream normalization census
-covers 906 targets. These metrics describe the hybrid source-overlay boundary;
+covers 919 targets. These metrics describe the hybrid source-overlay boundary;
 they do not expand the source-only archive into a binary redistribution grant.
 
 The repository's private build recipe uses some exact stock instruction bodies
@@ -461,19 +461,19 @@ byte-reproducible Apple artifacts.
 make core-canonical-observation \
   OPENCFW_CLANG="$APPLE_CLANG_REVIEW" \
   OPENCFW_TOOLCHAIN_PROFILE=apple-clang \
-  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final9/apple-a
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final97/apple-a
 make core-canonical-observation \
   OPENCFW_CLANG="$APPLE_CLANG_REVIEW" \
   OPENCFW_TOOLCHAIN_PROFILE=apple-clang \
-  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final9/apple-b
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final97/apple-b
 make core-canonical-observation \
   OPENCFW_CLANG=/path/to/reviewed/linux-clang \
   OPENCFW_TOOLCHAIN_PROFILE=linux-clang \
-  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final9/linux-a
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final97/linux-a
 make core-canonical-observation \
   OPENCFW_CLANG=/path/to/reviewed/linux-clang \
   OPENCFW_TOOLCHAIN_PROFILE=linux-clang \
-  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final9/linux-b
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final97/linux-b
 ```
 
 Each output directory contains its own `build-report.json` and the artifacts
@@ -513,10 +513,10 @@ python3 components/bootloader/core_overlay/build_component.py \
 
 LINUX_BOOT_PROVIDER=build/canonical-provider/linux-clang/apollo_bootloader/ota_s200_bootloader.bin
 make core-canonical-admission \
-  CORE_CANONICAL_APPLE_A=build/canonical-observation-g2-final9/apple-a/build-report.json \
-  CORE_CANONICAL_APPLE_B=build/canonical-observation-g2-final9/apple-b/build-report.json \
-  CORE_CANONICAL_LINUX_A=build/canonical-observation-g2-final9/linux-a/build-report.json \
-  CORE_CANONICAL_LINUX_B=build/canonical-observation-g2-final9/linux-b/build-report.json \
+  CORE_CANONICAL_APPLE_A=build/canonical-observation-g2-final97/apple-a/build-report.json \
+  CORE_CANONICAL_APPLE_B=build/canonical-observation-g2-final97/apple-b/build-report.json \
+  CORE_CANONICAL_LINUX_A=build/canonical-observation-g2-final97/linux-a/build-report.json \
+  CORE_CANONICAL_LINUX_B=build/canonical-observation-g2-final97/linux-b/build-report.json \
   CORE_CANONICAL_PROFILE_PROVIDER_ARGS="--profile-provider linux-clang apollo_bootloader $LINUX_BOOT_PROVIDER"
 ```
 
@@ -552,7 +552,7 @@ python3 components/apollo_main/core_overlay/build_component.py \
   --toolchain-profile linux-clang \
   --output-dir .tmp-postapply-core-linux
 cmp .tmp-postapply-core-linux/ota_s200_firmware_ota.bin \
-  build/canonical-provider/linux-clang/apollo_main/ota_s200_firmware_ota.bin
+  build/canonical-provider/linux-clang/apollo_main-final81/ota_s200_firmware_ota.bin
 ```
 
 The live core-source manifest carries authenticated profile-specific provider
@@ -604,7 +604,7 @@ before atomically replacing the companion and verifying its readback. Ordinary
 receipt is missing, stale, redirected, or inconsistent with live evidence.
 
 `.tmp-postapply-core-linux/`, the four canonical receipt trees under
-`build/canonical-observation-g2-final9/{apple-a,apple-b,linux-a,linux-b}/`, and
+`build/canonical-observation-g2-final97/{apple-a,apple-b,linux-a,linux-b}/`, and
 both `build/postapply-package-*` directories are ignored, private local
 evidence. They are not Git inputs or community-archive members. This entire
 sequence is deterministic and software-only: it performs no network access,

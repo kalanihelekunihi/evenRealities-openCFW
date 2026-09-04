@@ -347,10 +347,10 @@ class RuntimeCmsisCoreLeavesTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 362272,
-                "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+                "overlay_size": 380444,
+                "overlay_sha256": "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622",
                 "component_size": 3956672,
-                "component_sha256": "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
+                "component_sha256": "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
             },
         )
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
@@ -358,7 +358,7 @@ class RuntimeCmsisCoreLeavesTests(unittest.TestCase):
         self.assertEqual(main["provider"]["size"], 3956672)
         self.assertEqual(
             main["provider"]["sha256"],
-            "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
+            "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
         )
         region_names = {item["name"] for item in main["regions"]}
         self.assertTrue(

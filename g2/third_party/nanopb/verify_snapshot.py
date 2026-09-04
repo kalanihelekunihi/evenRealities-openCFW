@@ -4756,12 +4756,28 @@ def verify_production_exclusion() -> None:
     )
     varint32_manifest = [
         {
-            "name": "nanopb_decode_varint32_eof_source_replacement",
+            "name": "nanopb_decode_varint32_eof_source_replacement_split_000574d8_000574dc",
             "function": "Generated entry redirect and full Thumb NOP fill replacing the complete private nanopb pb_decode_varint32_eof span",
-            "file_offset": 357592, "size": 246,
+            "file_offset": 357592, "size": 4,
             "target": "apollo510b_internal_mram", "target_address": 0x0048F4B8,
             "address_status": "generated_source_entry_replacement",
-            "output": "apollo510b/source-entry-nanopb-decode-varint32-eof-0x0048f4b8.bin",
+            "output": "apollo510b/liblc3_service_audio-retained-000574d8-000574dc.bin",
+        },
+        {
+            "name": "liblc3_service_audio_0118_000574dc_000574e0",
+            "function": "Compiled LC3 service-audio closure, exact relocation replay, runtime providers, guarded veneers, and integrity data",
+            "file_offset": 357596, "size": 4,
+            "target": "apollo510b_internal_mram", "target_address": 0x0048F4BC,
+            "address_status": "generated_source_data_replacement",
+            "output": "apollo510b/liblc3_service_audio-0118-000574dc-000574e0.bin",
+        },
+        {
+            "name": "liblc3_service_audio_0119_000574e0_000575ce",
+            "function": "Compiled LC3 service-audio closure, exact relocation replay, runtime providers, guarded veneers, and integrity data",
+            "file_offset": 357600, "size": 238,
+            "target": "apollo510b_internal_mram", "target_address": 0x0048F4C0,
+            "address_status": "generated_source_data_replacement",
+            "output": "apollo510b/liblc3_service_audio-0119-000574e0-000575ce.bin",
         },
         {
             "name": "nanopb_decode_varint32_source_replacement",
@@ -5034,7 +5050,11 @@ def verify_production_exclusion() -> None:
              for name in dec_submessage_manifest} == dec_submessage_manifest,
             "pb_dec_submessage manifest ownership changed")
     decode_inner_manifest = {
-        "nanopb_decode_inner_source_replacement": (360120, 634, 0x0048FE98, "generated_source_entry_replacement"),
+        "nanopb_decode_inner_source_replacement_split_00057eb8_00057ebc": (360120, 4, 0x0048FE98, "generated_source_entry_replacement"),
+        "liblc3_service_audio_0121_00057ebc_00057ebd": (360124, 1, 0x0048FE9C, "generated_source_data_replacement"),
+        "liblc3_service_audio_0119_00057ebd_00058130_split_00057ebd_00057ec0": (360125, 3, 0x0048FE9D, "generated_source_data_replacement"),
+        "liblc3_service_audio_0123_00057ec0_00058130": (360128, 624, 0x0048FEA0, "generated_source_data_replacement"),
+        "liblc3_service_audio_0124_00058130_00058132": (360752, 2, 0x00490110, "generated_source_data_replacement"),
         "apollo_nanopb_decode_inner_source_alignment": (3649855, 1, 0x007B311F, "generated_alignment"),
         "apollo_nanopb_decode_inner_source_leaf": (3649856, 530, 0x007B3120, "source_compiled"),
         "apollo_nanopb_decode_inner_error_rodata": (3650386, 88, 0x007B3332, "source_compiled"),
@@ -5117,7 +5137,11 @@ def verify_production_exclusion() -> None:
              for name in dispatch_manifest} == dispatch_manifest,
             "nanopb dispatch manifest ownership changed")
     field_decoder_manifest = {
-        "nanopb_decode_basic_field_source_replacement": (358420, 372, 0x0048F7F4, "generated_source_entry_replacement"),
+        "nanopb_decode_basic_field_source_replacement_split_00057814_00057818": (358420, 4, 0x0048F7F4, "generated_source_entry_replacement"),
+        "liblc3_service_audio_0120_00057818_00057819": (358424, 1, 0x0048F7F8, "generated_source_data_replacement"),
+        "liblc3_service_audio_0121_00057819_00057820": (358425, 7, 0x0048F7F9, "generated_source_data_replacement"),
+        "liblc3_service_audio_0122_00057820_00057986": (358432, 358, 0x0048F800, "generated_source_data_replacement"),
+        "liblc3_service_audio_0120_00057986_00057988": (358790, 2, 0x0048F966, "generated_source_data_replacement"),
         "nanopb_decode_static_field_source_replacement": (358792, 436, 0x0048F968, "generated_source_entry_replacement"),
         "nanopb_decode_pointer_field_source_replacement": (359228, 20, 0x0048FB1C, "generated_source_entry_replacement"),
         "nanopb_decode_callback_field_source_replacement": (359248, 180, 0x0048FB30, "generated_source_entry_replacement"),

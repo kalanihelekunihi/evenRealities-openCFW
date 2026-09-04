@@ -63,8 +63,27 @@ class CbBleStatusClosureTests(unittest.TestCase):
         self.assertFalse(boundary["new_version_discriminator"])
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
 
-    def test_not_production_routed(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_routed_without_a_hardware_gap(self) -> None:
+        production = self.report["production"]
+        self.assertEqual(
+            (
+                production["production_routed"],
+                production["source_functions"],
+                production["compiled_text_bytes"],
+                production["alignment_bytes"],
+                production["strict_relocations"],
+                production["stock_replaced_bytes"],
+                production["retained_diagnostic_pool_bytes"],
+                production["post_link_suffix_relocation_verified"],
+                production["software_functional_gap"],
+                production["hardware_validation"],
+            ),
+            (True, 3, 72, 4, 3, 168, 34, True, False, "not-applicable"),
+        )
+        self.assertEqual(
+            production["profiles_verified"], ["apple-clang", "linux-clang"]
+        )
+        self.assertEqual(production["hardware_operations"], [])
 
 
 if __name__ == "__main__":

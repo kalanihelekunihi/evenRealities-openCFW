@@ -313,7 +313,7 @@ def audit() -> dict[str, object]:
     )
     require(
         (component["source_owned_bytes"], component["opaque_base_bytes"])
-        == (30071, 117279),
+        == (59009, 87985),
         "lifecycle production accounting changed",
     )
 
@@ -333,7 +333,7 @@ def audit() -> dict[str, object]:
         },
         "successor": {
             "identity": "am_hal_mspi_control",
-            "status": "official_blob",
+            "status": "production-source-with-retained-prefix-and-unreachable-tail",
             "start": 0x4251C0,
             "end": 0x4262E0,
             "retained_prefix_bytes": 28,

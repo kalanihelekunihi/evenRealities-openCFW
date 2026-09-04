@@ -1,7 +1,8 @@
 # G2 production gray-screen recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed.
+Status: complete linked-object census, clean-room production C implementation,
+dual-profile source routing, and fail-closed behavioral verification. Physical
+panel validation is blocked by unavailable authorized G2 hardware evidence.
 
 The retained `app\gui\PdtGrayScreen\pdt_gray_screen.c` object occupies
 `[0x005CF634,0x005CF7A8)`: three bodies / 340 bytes and a 32-byte pool, for
@@ -26,6 +27,21 @@ and returns zero, while the predicate always returns one.
 
 The following `ProductionTest` handler begins at `0x005CF7A8`; its matching
 path and descriptor at `0x006A45E0` independently close the object boundary.
-No authenticated first-party source/license is available, and OpenCFW claims
-no production ownership. `tools/analyze_g2_pdt_gray_screen.py` reproduces the
-complete closure from the official image.
+OpenCFW now owns a clean-room MIT implementation in
+`components/apollo_main/core_overlay/pdt_gray_screen.c`, with its ABI in
+`pdt_gray_screen.h`. All three stock entries are source-routed for reviewed
+Apple Clang 21.0.0 and Homebrew Clang 22.1.8 builds. The compiled callbacks
+occupy 250 bytes plus two alignment bytes in each profile, and the event leaf
+has an exact 18-call relocation contract to retained LVGL providers. All 340
+stock body bytes are displaced; the 32-byte diagnostic/literal pool remains
+retained.
+
+`tools/analyze_g2_pdt_gray_screen.py` now pins the source and header, three
+production leaves, provider targets, stock entry redirects and NOP fill,
+dual-profile compiled text, manifest ownership, package consistency, and the
+original object evidence. The host runtime test verifies the registered ABI,
+root publication, object count, flags, geometry, scrollbar mode, gray values,
+and no-op events. No hardware write or flash operation was performed. Closing
+physical validation requires an authorized G2 panel trace confirming the black
+640×480 root and eight 72×288 bands at x positions 0 through 504 in 72-pixel
+steps, with gray values 17, 34, 68, 136, 136, 68, 34, and 17.

@@ -173,12 +173,12 @@ class RuntimeFreeTypeCffTests(unittest.TestCase):
             {
                 "apple-clang": (
                     3_956_672,
-                    "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe",
+                    "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
                     20_416,
                 ),
                 "linux-clang": (
                     3_956_672,
-                    "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38",
+                    "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
                     20_356,
                 ),
             },
@@ -190,17 +190,17 @@ class RuntimeFreeTypeCffTests(unittest.TestCase):
                 "apple-clang": {
                     "size": 4_750_780,
                     "sha256": (
-                        "f2842600b84f303c40d2d299761c1abc0a7083acc05f2d378be9a045b0d9a846"
+                        "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771"
                     ),
                 },
                 "linux-clang": {
                     "size": 4_750_764,
                     "sha256": (
-                        "e534ffe034360b24fffc3d7fc50988234fc48ae20f6e8afa8be2507247c8cd39"
+                        "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0"
                     ),
                 },
             },
-            "apple_cff_region_rows": 16,
+            "apple_cff_region_rows": 22,
             "linux_profile_replacement_rows": 1,
             "highest_cff_end_exclusive": "0x0073EF04",
         })

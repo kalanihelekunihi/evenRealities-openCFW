@@ -231,16 +231,16 @@ LINUX_PATCH_SHA256 = (
 )
 LINUX_AGGREGATE = {
     "overlay": (
-        154_604,
-        "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6",
+        172_828,
+        "13a12b7fc7ec3af866d4ebe9229105ce923d6842ec6e8c4b0e01564582ed8ab1",
     ),
     "component": (
         3_956_672,
-        "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a",
+        "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
     ),
     "package": (
         4_750_764,
-        "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559",
+        "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
     ),
 }
 

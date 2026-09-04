@@ -19,14 +19,14 @@ IMAGE_SIZE = 3_523_396
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
 SOURCE_SHA256 = "fdfe93f8ec34dad9deea2ce5e4f5571bf53672cda202b87a2a04a3c60832634e"
 PACKAGE_SIZE = 4_750_780
-PACKAGE_SHA256 = "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
-FLASH_PLAN_SIZE = 4_961_300
-FLASH_PLAN_SHA256 = "f2625775d8a7b3c81c8862db00979cdcf4965eeb003e4b6b84e8cb2d8c1293b9"
+PACKAGE_SHA256 = "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771"
+FLASH_PLAN_SIZE = 5_485_925
+FLASH_PLAN_SHA256 = "d931ff83e416a91a87f40690c1ed2dc65cee4ee7b1bdc8fb37eaf9cd2cf624ef"
 EXPECTED_OVERLAY = {
-    "overlay_size": 362_272,
-    "overlay_sha256": "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+    "overlay_size": 380_444,
+    "overlay_sha256": "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622",
     "component_size": 3_956_672,
-    "component_sha256": "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
+    "component_sha256": "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
 }
 FUNCTIONS = (
     ("open_cfw_cordio_sec_hci_callback", 0x00536234, 0x00536324, "da8ebedf91cd554eae5a19134ec01fd47b991e76d0e8666365b8e662dca7f89c"),
@@ -113,7 +113,7 @@ def analyze() -> dict:
     }
     if any(package_report["package"].get(k) != v for k, v in expected_report.items()):
         raise AuditError("package replay changed")
-    if package_report.get("placed_region_count") != 7_104 or package_report.get("unresolved_region_count") != 0:
+    if package_report.get("placed_region_count") != 7_822 or package_report.get("unresolved_region_count") != 0:
         raise AuditError("package region census changed")
     return {
         "schema_version": 1,
@@ -133,7 +133,7 @@ def analyze() -> dict:
             "alignment_bytes": 16,
             "strict_relocations": 65,
             "package_byte_identical": True,
-            "placed_regions": 7_104,
+            "placed_regions": 7_822,
             "unresolved_regions": 0,
             "primitive_provider": "retained HCI/controller boundary",
             "hardware_validation": "blocked by unavailable physical evidence",

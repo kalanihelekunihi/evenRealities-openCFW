@@ -13,7 +13,7 @@ FIXTURE = ROOT / "tests/fixtures"
 EXPECTED_SYMBOLS = {
     "open_cfw_at_nus_handler",
 }
-SOURCE_SHA256 = "0b297201dcd6d12b51000a7e8092bb7cbb99501157898a9d8908b0a4cd757fe0"
+SOURCE_SHA256 = "acc7eacdc2d064a62bfa9d4150ad5cf1b8e8130fee4616c0f2295bdba7469f06"
 
 
 class AtNusCandidateTests(unittest.TestCase):
@@ -66,28 +66,37 @@ class AtNusCandidateTests(unittest.TestCase):
         self.assertEqual(ctypes.string_at(written.value), b"NUS+OK\r\n")
 
     def test_thumb_compile_has_exact_global_text_surface(self) -> None:
+        profiles = (
+            ("apple", [], {"open_cfw_at_nus_handler"}),
+            (
+                "linux",
+                ["-DOPEN_CFW_AT_NUS_HANDLER_NAME=open_cfw_at_nus_handler_linux"],
+                {"open_cfw_at_nus_handler_linux"},
+            ),
+        )
         with tempfile.TemporaryDirectory() as directory:
-            target = Path(directory) / "at_nus.o"
-            subprocess.run(
-                [
-                    "clang", "-target", "thumbv7em-none-eabi", "-mthumb", "-O2",
-                    "-ffreestanding", "-fno-jump-tables", "-fomit-frame-pointer",
-                    "-fno-builtin", "-mno-unaligned-access", "-fno-unwind-tables",
-                    "-fno-asynchronous-unwind-tables", "-fropi", "-Wall", "-Wextra",
-                    "-Werror", "-c", str(SOURCE), "-o", str(target),
-                ],
-                check=True,
-                cwd=ROOT,
-            )
-            symbols = subprocess.run(
-                ["nm", str(target)], check=True, capture_output=True, text=True
-            ).stdout
-            observed = {
-                fields[2]
-                for line in symbols.splitlines()
-                if len(fields := line.split()) == 3 and fields[1] == "T"
-            }
-            self.assertEqual(observed, EXPECTED_SYMBOLS)
+            for name, definitions, expected in profiles:
+                target = Path(directory) / f"at_nus_{name}.o"
+                subprocess.run(
+                    [
+                        "clang", "-target", "thumbv7em-none-eabi", "-mthumb", "-O2",
+                        "-ffreestanding", "-fno-jump-tables", "-fomit-frame-pointer",
+                        "-fno-builtin", "-mno-unaligned-access", "-fno-unwind-tables",
+                        "-fno-asynchronous-unwind-tables", "-fropi", "-Wall", "-Wextra",
+                        "-Werror", *definitions, "-c", str(SOURCE), "-o", str(target),
+                    ],
+                    check=True,
+                    cwd=ROOT,
+                )
+                symbols = subprocess.run(
+                    ["nm", str(target)], check=True, capture_output=True, text=True
+                ).stdout
+                observed = {
+                    fields[2]
+                    for line in symbols.splitlines()
+                    if len(fields := line.split()) == 3 and fields[1] == "T"
+                }
+                self.assertEqual(observed, expected)
 
     def test_source_hash(self) -> None:
         self.assertEqual(hashlib.sha256(SOURCE.read_bytes()).hexdigest(), SOURCE_SHA256)

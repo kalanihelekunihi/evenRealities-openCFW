@@ -307,9 +307,10 @@ already proven commit interval; all other edges are admitted logging or
 first-party UART lifecycle. See
 [`g2-service-codec-porting-recovery.md`](g2-service-codec-porting-recovery.md).
 
-The notification-thread closure exercises seven exact, production-source-owned
-CMSIS-FreeRTOS v10.5.1 wrappers at `d213f261…`. Queue, thread, flags, and delay
-chains therefore add no opaque utility gap; the remaining policy is first-party.
+The notification-thread closure exercises eight exact, production-source-owned
+CMSIS-FreeRTOS v10.5.1 wrappers at `d213f261…`. Queue, thread create/terminate,
+flags, and delay chains therefore add no opaque utility gap; the remaining
+policy is first-party and is now production-routed from clean-room C.
 See [`g2-thread-notification-recovery.md`](g2-thread-notification-recovery.md).
 
 The GX8002B host driver closes a misleading vendor-named seam. Its three

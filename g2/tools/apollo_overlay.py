@@ -6234,9 +6234,22 @@ def record_leaf_profile_pins(
                         relocation["target_address"] = observed.get(
                             "target_address"
                         )
+                    for expectation_key in (
+                        "target_expected_hex",
+                        "target_expected_size",
+                        "target_expected_sha256",
+                    ):
+                        if expectation_key in reviewed:
+                            relocation[expectation_key] = reviewed[
+                                expectation_key
+                            ]
                     relocations.append(relocation)
+                comparison_keys = ["size", "sha256"]
+                if "unrelocated_sha256" in canonical:
+                    comparison_keys.append("unrelocated_sha256")
                 expected_matches = all(
-                    canonical.get(key) == expected[key] for key in expected
+                    canonical.get(key) == expected[key]
+                    for key in comparison_keys
                 )
                 if not (
                     expected_matches

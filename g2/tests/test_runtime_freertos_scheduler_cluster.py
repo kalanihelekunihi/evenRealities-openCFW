@@ -288,21 +288,21 @@ COMMON_RELOCATIONS = {
 PROFILES = {
     "apple-clang": {
         "version": "Apple clang version 21.0.0",
-        "overlay_size": 362_272,
+        "overlay_size": 380_444,
         "overlay_sha256": (
-            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+            "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
         ),
-        "component_size": 3_885_668,
+        "component_size": 3_903_840,
         "component_sha256": (
-            "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
+            "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752"
         ),
         "package_size": 4_750_780,
         "package_sha256": (
-            "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
+            "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771"
         ),
         # Builder reports exclude isolated/non-emitted registry categories.
-        "function_count": 2_439,
-        "patch_count": 2_327,
+        "function_count": 2_563,
+        "patch_count": 2_448,
         "tail_growth": 782,
         "lz4_tail_growth": 1_758,
         "next_closure_tail_growth": 492,
@@ -393,12 +393,12 @@ PROFILES = {
         ),
         "provider_addresses": {MASK: 0x007A_FF08, CLEAR_MASK: 0x007A_FF1E},
         "accounting": {
-            "source_owned_bytes": 364_656,
-            "source_owned_in_place_bytes": 184,
-            "generated_patch_site_bytes": 404_060,
-            "replaced_stock_function_bytes": 404_240,
-            "replaced_stock_data_bytes": 2_200,
-            "opaque_base_bytes": 3_116_920,
+            "source_owned_bytes": 382_878,
+            "source_owned_in_place_bytes": 186,
+            "generated_patch_site_bytes": 422_476,
+            "replaced_stock_function_bytes": 422_658,
+            "replaced_stock_data_bytes": 2_248,
+            "opaque_base_bytes": 3_098_454,
             "generated_wrapper_bytes": 32,
         },
         "leaves": {
@@ -452,17 +452,17 @@ PROFILES = {
     },
     "linux-clang": {
         "version": "Homebrew clang version 22.1.8",
-        "overlay_size": 147_008,
+        "overlay_size": 165_230,
         "overlay_sha256": (
-            "36dee8d3beebc0055456267ad068a9944a9eccc0bfec04f78603dd384709fab4"
+            "4c76c122789a49d49b0cf30a06cc62adc9c93936dd0c20df7b1d22e24f62169f"
         ),
-        "component_size": 3_670_404,
+        "component_size": 3_688_626,
         "component_sha256": (
-            "c2d3fad0382523efb9aa3cfdf19e63e81dca9fdcecdc838e37cac5c48fde430f"
+            "f1214b0388a3d9d10b278a58e5f992052786c33db14faad7c21ead607d825b76"
         ),
         "package_size": 4_750_764,
         "package_sha256": (
-            "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559"
+            "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0"
         ),
         "function_count": 795,
         "patch_count": 735,
@@ -547,12 +547,12 @@ PROFILES = {
         ),
         "provider_addresses": {MASK: 0x007B_054C, CLEAR_MASK: 0x007B_0562},
         "accounting": {
-            "source_owned_bytes": 147_192,
-            "source_owned_in_place_bytes": 184,
-            "generated_patch_site_bytes": 105_954,
-            "replaced_stock_function_bytes": 106_134,
-            "replaced_stock_data_bytes": 0,
-            "opaque_base_bytes": 3_417_226,
+            "source_owned_bytes": 165_464,
+            "source_owned_in_place_bytes": 186,
+            "generated_patch_site_bytes": 124_386,
+            "replaced_stock_function_bytes": 124_568,
+            "replaced_stock_data_bytes": 48,
+            "opaque_base_bytes": 3_398_744,
             "generated_wrapper_bytes": 32,
         },
         "leaves": {

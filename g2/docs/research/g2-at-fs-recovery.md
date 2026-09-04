@@ -1,7 +1,7 @@
 # G2 eAT filesystem-command recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-source candidate and not production-routed. Run addresses use
+Status: complete linked-object census, clean-room production implementation,
+dual-profile canonical admission, and fail-closed behavioral analysis. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -44,6 +44,18 @@ two handlers therefore use descriptive names. The analyzer pins all body and
 pool bytes, command records, strings, readiness/global operands, direct-call
 closure, and complete ingress topology.
 
-No authenticated historical source or license is available. There is no
-clean-room candidate, the service is absent from `overlay.json`, and it claims
-zero package ownership bytes.
+No authenticated historical source or license is available. The independently
+authored MIT implementation in `components/apollo_main/core_overlay/at_fs.c`
+replaces the three AT command-record handler pointers through strict,
+canonical Apple/Linux relocation contracts. The 416-byte stock-body area is
+independently occupied by the LC3 provider on Apple, so the final LC3 suffix
+replay rebases the command pointers instead of fabricating colliding entry
+branches. Host runtime tests cover readiness gating,
+remove success/failure, recursive traversal, dot-entry filtering, size output,
+open failure, pacing, and mkdir results. The complete packages and build
+receipts authenticate all redirects and routed text for both profiles.
+
+The remaining physical qualification is blocked by unavailable physical
+evidence. Required evidence is an authorized G2 mounted-storage trace covering
+remove/list/mkdir plus readiness and provider faults. No hardware operation was
+performed (`hardware_operations=[]`); this blocker is not a software gap.

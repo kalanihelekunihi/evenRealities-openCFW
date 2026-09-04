@@ -174,7 +174,7 @@ def assembled_identity(profile: str) -> tuple[int, str]:
             ROOT / "build/canonical-provider/linux-clang/apollo_bootloader/ota_s200_bootloader.bin"
         ).read_bytes()
         payloads["apollo_main"] = (
-            ROOT / "build/canonical-provider/linux-clang/apollo_main/ota_s200_firmware_ota.bin"
+            ROOT / "build/canonical-provider/linux-clang/apollo_main-final72/ota_s200_firmware_ota.bin"
         ).read_bytes()
     image, _entries = open_cfw.assemble_evenota(manifest, payloads)
     return len(image), sha256(image)

@@ -56,11 +56,24 @@ source-owned CMSIS tick wrapper. Consequently it yields no new third-party
 version discriminator and leaves no opaque third-party definition inside the
 object.
 
-## OpenCFW consequence
+## Production source route
 
-OpenCFW can reproduce these timers as two small wrap-safe records over its
-existing CMSIS-FreeRTOS tick source; no additional RTOS component is required.
-The precise first-party timeout actions are now bounded, including the fixed
-10,000/3,000 tick values, sync payload `{7,7,4}`, and EvenAI control command
-three. The object is not yet production-routed, so implementation remains a
-first-party porting task rather than a dependency/provenance gap.
+`components/apollo_main/core_overlay/even_ai_timer.c` now implements all 13
+functions as C over explicit tick, role, sync, state, and control-provider
+seams. The route preserves the two private records, unsigned wrap-safe expiry,
+role-one start gate, fixed 10,000/3,000 tick intervals, sync payload `{7,7,4}`,
+and EvenAI control command three. Diagnostic-only EasyLogger calls are omitted.
+
+Each function is compiled in isolation and admitted under strict relocation
+contracts for both reviewed compiler profiles. The linked leaves total 502
+bytes in both `apple-clang` and `linux-clang`, use 22 reviewed relocations, and
+replace all 856 stock instruction bytes. Portable runtime tests cover role
+gating, ordinary and wrapping deadlines, timeout state transitions, payload
+and provider calls, fixed restart intervals, and aggregate lifecycle wrappers.
+The 100-byte stock literal/diagnostic pool remains typed retained data rather
+than executable software.
+
+The software functional gap is closed. Live scheduler timing, shared-state
+concurrency, EvenAI service integration, and BLE synchronization validation is
+**blocked by unavailable physical evidence**; no hardware operations were
+performed and this result does not declare firmware functional completeness.

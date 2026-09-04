@@ -58,7 +58,9 @@ class BootloaderMspiInitializeTests(unittest.TestCase):
         self.assertEqual(report["next_code_frontier"], {
             "start": 0x00424AF0, "end": 0x00424BD4,
             "identity": "am_hal_mspi_configure", "bytes": 228,
-            "status": "official_blob",
+            "source_compiled_bytes": 152,
+            "retained_literal_bytes": 76,
+            "status": "source-compiled-with-retained-literals",
         })
         self.assertEqual(report["hardware_validation"],
                          "blocked by unavailable physical evidence")

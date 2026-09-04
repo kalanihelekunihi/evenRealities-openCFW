@@ -767,12 +767,12 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                362_272,
+                380_444,
                 (
-                    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+                    "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
                 ),
-                2_439,
-                2_327,
+                2_563,
+                2_448,
             ),
         )
         self.assertEqual(
@@ -789,14 +789,14 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                 self.production["component"]["opaque_base_bytes"],
             ),
             (
-                3_885_668,
+                3_903_840,
                 (
-                    "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
+                    "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752"
                 ),
-                404_060,
-                404_240,
-                364_656,
-                3_116_920,
+                422_476,
+                422_658,
+                382_878,
+                3_098_454,
             ),
         )
 
@@ -818,13 +818,13 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
             {
                 "expected_size": 4_750_780,
                 "expected_sha256": (
-                    "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
+                    "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771"
                 ),
                 "profiles": {
                     "linux-clang": {
                         "expected_size": 4_750_764,
                         "expected_sha256": (
-                            "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559"
+                            "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0"
                         ),
                     },
                 },
@@ -955,7 +955,7 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                     "generated_source_data_replacement",
                 ),
                 "opaque_between_freertos_task_notify_variants": (
-                    122_328,
+                    122_449,
                     8,
                     0x0045_5DB8,
                     "official_blob",

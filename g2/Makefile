@@ -64,7 +64,7 @@ AMBIQSUITE_AMOTA_DIR := third_party/ambiqsuite-amota-profile
 AMBIQSUITE_CORDIO_APP_DIR := third_party/ambiqsuite-cordio-app-framework
 
 .PHONY: all build reference ring-source source source-release component ring-component ring-gesture-provenance core-component bootloader-component vendor-snapshots upstream-audits tlsf-snapshot easylogger-snapshot littlefs-snapshot freertos-snapshot freertos-g2-tcb-patch freertos-queue-receive-from-isr ambiqsuite-snapshot ambiqsuite-ancc-snapshot ambiqsuite-ancc-profile-closure cmsis-core-snapshot cmsis-freertos-snapshot cmsis-freertos-linked-census cmsis-freertos-core-leaves cmsis-freertos-count-leaves cmsis-freertos-message-queue-delete cmsis-freertos-thread-yield cmsis-freertos-kernel-state cmsis-freertos-kernel-lifecycle cmsis-freertos-mutex-delete cmsis-freertos-timer-running cmsis-freertos-sync-ops cmsis-freertos-sync-ops-candidate cmsis-freertos-timer-ops cmsis-freertos-timer-ops-candidate cmsis-freertos-event-flags cmsis-freertos-event-flags-candidate cmsis-freertos-timer-new cmsis-freertos-timer-new-candidate cmsis-freertos-memory-pool-new cmsis-freertos-memory-pool-new-candidate cmsis-freertos-semaphore-acquire cmsis-freertos-memory-pool-ops cmsis-freertos-message-queue-put cmsis-freertos-message-queue-get cmsis-freertos-delay cmsis-freertos-thread-set-priority cmsis-freertos-thread-terminate cmsis-freertos-thread-flags cmsis-freertos-thread-new cmsis-freertos-thread-yield-candidate cmsis-freertos-kernel-state-candidate cmsis-freertos-mutex-delete-candidate cmsis-freertos-timer-running-candidate lz4-snapshot freetype-snapshot freetype-truetype-source-closure flashdb-snapshot cmbacktrace-snapshot cmbacktrace-fault-closure nanopb-snapshot cordio-aggregate-closure cordio-gatt-profile-closure apollo-origin-accounting lvgl-display-port-closure third-party-dependency-closure lvgl-snapshot nemagfx-ambiq-provenance ambiq-gpu-patch-accessors-candidate ring-buffer-snapshot tinyframe-snapshot tinyframe-adapter-candidate ui-quicklist-page-closure ui-widget-news-page-closure ui-stock-page-closure research-corpus verify test inspect clean toolchain cjson-snapshot qpc-snapshot
-.PHONY: ble-transport-profiles-closure ble-peer-discovery-closure ble-central-closure ble-connect-params-closure ble-peripheral-closure transport-protocol-closure service-settings-closure tracepoint-settings-closure product-rtos-closure util-error-check-closure watchdog-closure freertos-task-get-info-closure freertos-scheduler-start-core-closure goodix-v170-source-overlap logger-settings-closure ambiqsuite-cordio-app-snapshot cordio-app-framework-lineage drv-gx8002b-closure drv-pdm-production-closure drv-pdm-closure drv-mx25u25643g-closure service-ancc-closure als-closure thread-ble-production-closure pt-protocol-closure service-db-api-closure ui-even-ai-closure service-time-closure thread-audio-closure compress-log-core-closure compress-log-port-closure file-runtime-closure service-algo-closure uart-sync-closure service-nvdb-closure production-mic-closure service-audio-manager-closure service-audio-closure service-kvdb-closure service-codec-host-closure service-codec-dfu-closure service-touch-dfu-closure ux-battery-sync-closure cb-ring-battery-closure callback-facades-closure callback-manager-closure silent-mode-closure onboarding-data-manager-closure onboarding-controller-closure onboarding-main-page-closure onboarding-stock-page-closure onboarding-news-page-closure lvgl-font-manager-closure box-uart-mgr-closure service-box-detect-closure common-list-container-closure common-text-container-closure evenhub-ui-closure evenhub-data-parser-closure sync-framework-closure sync-interface-api-closure display-thread-closure displaydrv-manager-closure ui-msg-notif-list-closure dashboard-main-screen-closure dashboard-watchface-layout4-closure dashboard-ext-closure dashboard-data-process-closure navigation-data-handler-closure navigation-ui-closure menu-page-closure ui-health-page-closure teleprompt-ui-closure service-em9305-dfu-closure conversate-tag-data-closure liblc3-source-closure
+.PHONY: ble-transport-profiles-closure ble-peer-discovery-closure ble-central-closure ble-connect-params-closure ble-peripheral-closure transport-protocol-closure service-settings-closure tracepoint-settings-closure product-rtos-closure util-error-check-closure watchdog-closure s200-board-config-closure freertos-task-get-info-closure freertos-scheduler-start-core-closure goodix-v170-source-overlap logger-settings-closure ambiqsuite-cordio-app-snapshot cordio-app-framework-lineage drv-gx8002b-closure drv-pdm-production-closure drv-pdm-closure drv-mx25u25643g-closure service-ancc-closure als-closure thread-ble-production-closure pt-protocol-closure service-db-api-closure ui-even-ai-closure service-time-closure thread-audio-closure compress-log-core-closure compress-log-port-closure file-runtime-closure service-algo-closure uart-sync-closure service-nvdb-closure production-mic-closure service-audio-manager-closure service-audio-closure service-kvdb-closure service-codec-host-closure service-codec-dfu-closure service-touch-dfu-closure ux-battery-sync-closure cb-ring-battery-closure callback-facades-closure callback-manager-closure silent-mode-closure onboarding-data-manager-closure onboarding-controller-closure onboarding-main-page-closure onboarding-stock-page-closure onboarding-news-page-closure lvgl-font-manager-closure box-uart-mgr-closure service-box-detect-closure common-list-container-closure common-text-container-closure evenhub-ui-closure evenhub-data-parser-closure sync-framework-closure sync-interface-api-closure display-thread-closure displaydrv-manager-closure ui-msg-notif-list-closure dashboard-main-screen-closure dashboard-watchface-layout4-closure dashboard-ext-closure dashboard-data-process-closure navigation-data-handler-closure navigation-ui-closure menu-page-closure ui-health-page-closure teleprompt-ui-closure service-em9305-dfu-closure conversate-tag-data-closure liblc3-source-closure
 .PHONY: transparent transparent-harvest transparent-db transparent-source transparent-image transparent-ledger transparent-test pb-service-quicklist-closure pb-service-pair-mgr-closure at-codec-closure box-uart-mgr-closure case-uart-update-closure touch-i2c-source-closure touch-sensing-closure iar-format-input-closure iar-format-output-closure
 .PHONY: cordio-wsf-timer-closure
 .PHONY: cordio-wsf-runtime-closure
@@ -814,6 +814,7 @@ iar-format-output-closure: source
 .PHONY: community-distribution-gate community-source-bundle community-source-smoke
 .PHONY: community-local-preflight community-local-build
 .PHONY: core-canonical-observation core-canonical-admission core-canonical-apply core-canonical-test
+.PHONY: eat-bond-connect-closure app-ble-peer-manager-closure app-ble-discovery-closure
 .PHONY: completion-readiness completion-classification-gate completion-source-gate
 .PHONY: completion-source-ownership-gate completion-license-policy-gate
 .PHONY: completion-assessment completion-assessment-check
@@ -984,18 +985,41 @@ pdt-distortion-test-closure:
 	$(PYTHON) tools/analyze_g2_pdt_distortion_test.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_pdt_distortion_test \
+		tests.test_runtime_pdt_distortion_test \
+		tests.test_analyze_g2_first_party_frontier
+
+eat-bond-connect-closure:
+	$(PYTHON) tools/analyze_g2_eat_bond_connect.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_eat_bond_connect \
+		tests.test_runtime_eat_bond_connect
+
+app-ble-peer-manager-closure:
+	$(PYTHON) tools/analyze_g2_app_ble_peer_manager.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_app_ble_peer_manager \
+		tests.test_runtime_app_ble_peer_manager \
+		tests.test_analyze_g2_first_party_frontier
+
+app-ble-discovery-closure:
+	$(PYTHON) tools/analyze_g2_app_ble_discovery.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_app_ble_discovery \
+		tests.test_runtime_app_ble_discovery \
 		tests.test_analyze_g2_first_party_frontier
 
 pdt-gray-screen-closure:
 	$(PYTHON) tools/analyze_g2_pdt_gray_screen.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_pdt_gray_screen \
+		tests.test_runtime_pdt_gray_screen \
 		tests.test_analyze_g2_first_party_frontier
 
 production-test-screen-closure:
 	$(PYTHON) tools/analyze_g2_production_test_screen.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_production_test_screen \
+		tests.test_runtime_production_test_screen \
 		tests.test_analyze_g2_first_party_frontier
 
 cordio-gatt-profile-closure: core-component
@@ -1095,6 +1119,12 @@ watchdog-closure: core-component
 		tests.test_analyze_g2_watchdog \
 		tests.test_watchdog_candidate
 
+s200-board-config-closure: core-component
+	$(PYTHON) tools/analyze_g2_s200_board_config.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_s200_board_config \
+		tests.test_runtime_s200_board_config
+
 freertos-task-get-info-closure: freertos-snapshot core-component
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_runtime_freertos_task_get_info
@@ -1163,18 +1193,21 @@ teleprompt-file-list-closure:
 	$(PYTHON) tools/analyze_g2_teleprompt_file_list.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_teleprompt_file_list \
+		tests.test_runtime_teleprompt_file_list \
 		tests.test_analyze_g2_first_party_frontier
 
 even-ai-timer-closure:
 	$(PYTHON) tools/analyze_g2_even_ai_timer.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_even_ai_timer \
+		tests.test_runtime_even_ai_timer \
 		tests.test_analyze_g2_first_party_frontier
 
 cb-ble-status-closure:
 	$(PYTHON) tools/analyze_g2_cb_ble_status.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_cb_ble_status \
+		tests.test_runtime_cb_ble_status \
 		tests.test_analyze_g2_first_party_frontier
 
 conversate-ui-menu-page-closure:
@@ -1199,6 +1232,7 @@ at-core-closure:
 	$(PYTHON) tools/analyze_g2_at_core.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_at_core \
+		tests.test_runtime_at_core \
 		tests.test_analyze_g2_first_party_frontier
 
 hal-i2c-closure:
@@ -1373,10 +1407,11 @@ at-codec-closure:
 		tests.test_at_codec_candidate \
 		tests.test_analyze_g2_first_party_frontier
 
-thread-notification-closure:
+thread-notification-closure: core-component
 	$(PYTHON) tools/analyze_g2_thread_notification.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_thread_notification \
+		tests.test_runtime_thread_notification \
 		tests.test_analyze_g2_first_party_frontier
 
 drv-gx8002b-closure:
@@ -1402,6 +1437,7 @@ service-time-closure:
 	$(PYTHON) tools/analyze_g2_service_time.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_service_time \
+		tests.test_runtime_service_time \
 		tests.test_analyze_g2_first_party_frontier
 
 thread-audio-closure:
@@ -1434,7 +1470,15 @@ service-algo-closure:
 	$(PYTHON) tools/analyze_g2_service_algo.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_service_algo \
+		tests.test_runtime_service_algo \
 		tests.test_analyze_g2_first_party_frontier
+
+.PHONY: quicklist-data-manager-closure
+quicklist-data-manager-closure:
+	$(PYTHON) tools/analyze_g2_quicklist_data_manager.py
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_analyze_g2_quicklist_data_manager \
+		tests.test_runtime_quicklist_data_manager
 
 uart-sync-closure:
 	$(PYTHON) tools/analyze_g2_uart_sync.py
@@ -2268,10 +2312,12 @@ conversate-tag-data-closure:
 		tests.test_analyze_g2_conversate_tag_data \
 		tests.test_analyze_g2_first_party_frontier
 
-legal-regulatory-closure:
+.PHONY: legal-regulatory-closure
+legal-regulatory-closure: core-component
 	$(PYTHON) tools/analyze_g2_legal_regulatory.py
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
 		tests.test_analyze_g2_legal_regulatory \
+		tests.test_runtime_legal_regulatory \
 		tests.test_analyze_g2_first_party_frontier
 
 ble-ota-ring-profiles-closure: ambiqsuite-amota-snapshot core-component

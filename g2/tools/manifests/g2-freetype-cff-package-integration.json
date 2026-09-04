@@ -6,11 +6,11 @@
     "post_link_order": "core -> liblc3-ltpf -> product-test -> liblc3-service-audio -> freetype-cff",
     "profiles": {
       "apple-clang": {
-        "component_sha256": "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe",
+        "component_sha256": "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
         "component_size": 3956672
       },
       "linux-clang": {
-        "component_sha256": "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38",
+        "component_sha256": "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
         "component_size": 3956672
       }
     }
@@ -23,12 +23,12 @@
   },
   "inputs": {
     "components/apollo_main/core_overlay/build_component.py": {
-      "sha256": "1a4f8e642484d0331bc92dfdc79d2ed2ef075df613d609c3a629aaaa3f7091a8",
-      "size": 90227
+      "sha256": "164a9fd3aeb22daa16085de2725157af4b157e8f64977a50db89986aaf97325f",
+      "size": 90584
     },
     "components/apollo_main/core_overlay/overlay.json": {
-      "sha256": "9649d9ee18c72b5796601b14d5daaa5878fc958246763887c5fa5fbd03ea054f",
-      "size": 6029233
+      "sha256": "2329b48855ecf130bbb8ea4e6f97711dc9ac9fcba1aed9c647dd896e6c488722",
+      "size": 6404019
     },
     "components/apollo_main/freetype_cff_scatter/README.md": {
       "sha256": "493a0423c3282f18242af2753eeeafbc4a468834a70b1327867a82d37e105763",
@@ -39,19 +39,19 @@
       "size": 40269
     },
     "components/apollo_main/freetype_cff_scatter/overlay.json": {
-      "sha256": "4784877e78720d157f80c469d2fd04c532d23d9374506732d99db3c779d5b9dd",
-      "size": 1868
+      "sha256": "ec7f2835ba9d04963ea6f0ca02d8f804ff4ee88485168ef0de2b230ba56ab972",
+      "size": 1842
     },
     "manifests/g2-2.2.6.10-core-source.json": {
-      "sha256": "93b167c5493a7161f37426a90ecbe9ec63d838bc93f0505fd66b6f3f87f844a5",
-      "size": 3554396
+      "sha256": "ae7c402fef4c72f3fbeae80cbfc71eb17e3907044a339b65494e8732392a150d",
+      "size": 3812990
     },
     "tools/open_cfw.py": {
-      "sha256": "ccbc5884b455daf5756cde99ebdf5c9edb88f0a093fd6b11e351795efe3907c3",
+      "sha256": "0740379679959fbf3d042a2afafd4e4bf46093681be535dd053806b34d4cf15f",
       "size": 99692
     }
   },
-  "integration_sha256": "52b2c8c6764e760df691d248a8673ef41b095be1b4f29111c816f085eee7e0f1",
+  "integration_sha256": "3ea4d1d8f343c2b74bb5f99377528516b81c3aa49aa0ecf1470da57ea0bb383b",
   "profiles": {
     "apple-clang": {
       "atomicity": {
@@ -65,43 +65,43 @@
         "unchanged_entry_count": 5
       },
       "base_package": {
-        "path": "build/postapply-package-final8-apple/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
-        "sha256": "f2842600b84f303c40d2d299761c1abc0a7083acc05f2d378be9a045b0d9a846",
+        "path": "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "sha256": "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771",
         "size": 4750780
       },
       "component": {
         "growth_bytes": 0,
-        "nested_crc32": "0xC628F8F9",
+        "nested_crc32": "0xD399E5F9",
         "runtime_end_exclusive": 8380320,
         "runtime_start": 4423680,
-        "sha256": "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe",
+        "sha256": "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
         "size": 3956672
       },
-      "component_receipt_sha256": "f6a006a4d7698f8a0ee0c4dfcd3978692e0ce8f4bc7300f08cb91b194796d7f2",
+      "component_receipt_sha256": "cee809ba7fd082a3f3d36b3ddb2187ea31708aa1bba75a07fd47f62a57c61fcd",
       "ownership": {
         "cff_erased_gap_bytes": 0,
         "cff_erased_gap_rows": 0,
         "cff_generated_pointer_bytes": 4,
         "cff_generated_pointer_rows": 2,
-        "cff_rows": 14,
+        "cff_rows": 21,
         "cff_source_bytes": 20414,
         "cff_source_rows": 10,
         "collision_or_protected_overlap_count": 0,
         "container_rows": 8,
-        "flash_plan_sha256": "3ad960bbe7c65240ff4cd11a5c1c4b3c21eed120b135e255b9012d277fc16efe",
-        "flash_rows": 7319,
+        "flash_plan_sha256": "31e9cd01970cc40503828750c14c92217f3cf86f6aa0cb3fa6a0f70244a922e2",
+        "flash_rows": 7822,
         "highest_cff_end_exclusive": "0x005AFEB8",
         "unresolved_rows": 0,
         "unused_scattered_table_pool_consumed": 0,
         "update_flag": "0x007FE000"
       },
       "package": {
-        "entry_6_crc32c_msb": "0x327A621C",
+        "entry_6_crc32c_msb": "0x27272D0F",
         "entry_6_entry_size": 3956800,
         "entry_6_package_offset": 793980,
         "entry_6_payload_size": 3956672,
         "growth_bytes": 0,
-        "sha256": "f2842600b84f303c40d2d299761c1abc0a7083acc05f2d378be9a045b0d9a846",
+        "sha256": "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771",
         "size": 4750780
       },
       "reproducibility": {
@@ -123,19 +123,19 @@
         "unchanged_entry_count": 5
       },
       "base_package": {
-        "path": "build/postapply-package-final8-linux/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
-        "sha256": "e534ffe034360b24fffc3d7fc50988234fc48ae20f6e8afa8be2507247c8cd39",
+        "path": "build/source-linux/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "sha256": "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
         "size": 4750764
       },
       "component": {
         "growth_bytes": 0,
-        "nested_crc32": "0xEB735BD1",
+        "nested_crc32": "0x3E352DE2",
         "runtime_end_exclusive": 8380320,
         "runtime_start": 4423680,
-        "sha256": "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38",
+        "sha256": "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
         "size": 3956672
       },
-      "component_receipt_sha256": "cbcd8a01b0ecac80284ebced36123337edcf9880cb934372e8cb0824261ad3a5",
+      "component_receipt_sha256": "ba9e3b70fead7b511de9c7c6a761f49f75223078585f9af7f423c94f3f65ca22",
       "ownership": {
         "cff_erased_gap_bytes": 0,
         "cff_erased_gap_rows": 0,
@@ -146,7 +146,7 @@
         "cff_source_rows": 11,
         "collision_or_protected_overlap_count": 0,
         "container_rows": 6,
-        "flash_plan_sha256": "2402611f75f20288c25cb0421e4bd2f217c5e05f800f688f6d58b234ce69d5af",
+        "flash_plan_sha256": "a295dc43ee1c6db822e62b21fe72f30a11ad19547e6db58dd0b1ab2de22540a7",
         "flash_rows": 810,
         "highest_cff_end_exclusive": "0x005AFE7C",
         "unresolved_rows": 0,
@@ -154,12 +154,12 @@
         "update_flag": "0x007FE000"
       },
       "package": {
-        "entry_6_crc32c_msb": "0xDD72C07D",
+        "entry_6_crc32c_msb": "0x25B2CBBB",
         "entry_6_entry_size": 3956800,
         "entry_6_package_offset": 793964,
         "entry_6_payload_size": 3956672,
         "growth_bytes": 0,
-        "sha256": "e534ffe034360b24fffc3d7fc50988234fc48ae20f6e8afa8be2507247c8cd39",
+        "sha256": "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
         "size": 4750764
       },
       "reproducibility": {

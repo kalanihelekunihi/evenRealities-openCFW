@@ -1,8 +1,8 @@
 # G2 pathless eAT bond/connect command recovery
 
-Status: complete two-handler census and fail-closed behavioral analysis;
-historical source unavailable, no candidates, and not production-routed. Run
-addresses use `run = file_offset + 0x00437FE0`.
+Status: complete two-handler census, clean-room implementation, dual-profile
+production routing, and fail-closed behavioral analysis. Historical source is
+unavailable. Run addresses use `run = file_offset + 0x00437FE0`.
 
 ## Result
 
@@ -26,5 +26,31 @@ strict-interior target.
 No retained source path or exact historical symbols survive. The manifest's
 handler names are descriptive. Historical source partition, inventory,
 source-only count, license, and whole-source identity therefore remain
-unknown. No clean-room candidate exists, neither handler is in `overlay.json`,
-and OpenCFW claims zero ownership bytes.
+unknown.
+
+## Production closure
+
+The MIT clean-room implementation in `eat_bond_connect.c` reproduces the two
+observable contracts: provider `0x004B46CE` plus `CLEANBOND+OK`, and provider
+`0x0046F2DC(1)` plus `BLE_KEEPCONNECT+OK`; both return zero. Two isolated
+functions compile to 46 bytes plus two alignment bytes under both reviewed
+profiles. Four strict relocations bind the two retained BLE providers and the
+retained output provider. The original 16- and 18-byte command entries are
+replaced by guarded wide branches, while the ten-byte response-pointer pool is
+retained.
+
+Independent Apple and Linux canonical generations are byte reproducible. The
+production components are 3,956,672 bytes with SHA-256
+`90899422791207c0f91d9fd3c54dcba2bba8ebc6797de47ff5014b60c070d9df`
+and `918c5888ac8b417efa21fc406de63ccffd8d9a5a24c5b80d18ec51d37e9a1a50`.
+The complete packages are 4,750,780 bytes / SHA-256
+`3afb463643b4c71538ef9ee9fbfe8dcac6860c93c49ff8dcc96f36a2e4e25c8a`
+and 4,750,764 bytes / SHA-256
+`58db365724602dc68da5ac435e13abeda6fb25320649b6c6dd8d9af6e7c2497e`;
+both flash plans have zero unresolved regions.
+
+The software functional gap is closed. Physical qualification is explicitly
+blocked by unavailable evidence: it requires an authorized bonded G2/peer
+trace proving bond deletion and fresh pairing, plus an authorized connected
+G2/peer trace proving the intended keep-connect policy. No hardware operation
+was performed.

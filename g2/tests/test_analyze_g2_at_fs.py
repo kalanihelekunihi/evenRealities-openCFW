@@ -42,10 +42,27 @@ class AnalyzeG2AtFsTests(unittest.TestCase):
     def test_lineage_and_production_boundary(self) -> None:
         self.assertEqual(self.report["lineage"]["exact_symbol"], "_atRM")
         production = self.report["production"]
-        self.assertIsNone(production["candidate"])
-        self.assertFalse(production["production_routed"])
-        self.assertEqual(production["ownership_bytes"], 0)
-        self.assertFalse(production["source_inventory_available"])
+        self.assertEqual(
+            production["candidate"],
+            "components/apollo_main/core_overlay/at_fs.c",
+        )
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["ownership_bytes"], 48)
+        self.assertEqual(production["changed_flash_bytes"], 9)
+        self.assertTrue(production["source_inventory_available"])
+        self.assertEqual(production["source_functions"], 4)
+        self.assertEqual(
+            production["compiled_text_bytes"],
+            {"apple-clang": 458, "linux-clang": 456},
+        )
+        self.assertEqual(production["command_record_bytes_replaced"], 48)
+        self.assertEqual(production["stock_body_bytes_superseded_by_lc3_host"], 416)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(
+            production["hardware_validation"],
+            "blocked by unavailable physical evidence",
+        )
+        self.assertEqual(production["hardware_operations"], [])
 
 
 if __name__ == "__main__":

@@ -633,7 +633,10 @@ def _validate_source_uart_route_receipt(
     )
     if any(type(leaf[key]) is not type(expected) or leaf[key] != expected
            for key, expected in SOURCE_UART_LEAF_EXPECTED.items()):
-        raise BuildError("PT source-UART leaf identity changed")
+        raise BuildError(
+            "PT source-UART leaf identity changed: "
+            f"expected {SOURCE_UART_LEAF_EXPECTED!r}, observed {leaf!r}"
+        )
     relocations = receipt.get("relocations")
     if not isinstance(relocations, list) or len(relocations) != len(
             SOURCE_UART_ROUTE_REQUIREMENTS):

@@ -214,6 +214,12 @@ utility graph closes over admitted LVGL and EasyLogger only; see
 The 234-byte legal/regulatory handler plus its complete regional content pool
 is also closed at 428 physical bytes; see
 [`g2-legal-regulatory-recovery.md`](g2-legal-regulatory-recovery.md).
+The S200 board-config closure corrects a four-byte zero prefix previously
+misclassified as code: one 114-byte function and 586 retained pool/data bytes
+now have an exact stored-pointer topology. Both canonical profiles route the
+entry to a 38-byte clean-room C charger-family dispatcher; live electrical
+qualification remains blocked by unavailable physical evidence. See
+[`g2-s200-board-config-recovery.md`](g2-s200-board-config-recovery.md).
 The adjacent 238-byte `conversate_ui_tag_page.c` anchor expands to eleven
 functions / 2,910 body bytes / 3,056 physical bytes. Its provider graph closes
 over admitted EasyLogger, LVGL, exact CMSIS-FreeRTOS tick access, bounded IAR
@@ -243,9 +249,10 @@ The codec UART-porting seam is closed as two functions / 342 body bytes / 414
 physical bytes. Its only reusable call is production-source-owned
 AndersKaloer Ring-Buffer initialization; see
 [`g2-service-codec-porting-recovery.md`](g2-service-codec-porting-recovery.md).
-The notification thread expands to eleven functions / 702 body bytes / 816
-physical bytes. Its seven RTOS calls are exact production-source-owned
-CMSIS-FreeRTOS v10.5.1 wrappers; see
+The notification thread expands to twelve functions / 730 body bytes / 816
+physical bytes. Its eight RTOS calls are exact production-source-owned
+CMSIS-FreeRTOS v10.5.1 wrappers, and all twelve routines are production-routed;
+see
 [`g2-thread-notification-recovery.md`](g2-thread-notification-recovery.md).
 The FlashDB service adapter expands from five anchors / 462 bytes to eleven
 functions / 908 body bytes / 1,040 physical bytes. Its reusable edges terminate

@@ -69,7 +69,7 @@ class CordioHciVendorSequenceAuditTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 23)
         self.assertEqual(production["source_only_functions_compiled"], 4)
         self.assertEqual(production["manifest_regions"], 11)
-        self.assertEqual(production["flash_plan_counts"], (7_104, 0, 8, 6))
+        self.assertEqual(production["flash_plan_counts"], (7_822, 0, 8, 6))
         self.assertTrue(production["null_and_non_command_events_fail_closed"])
         self.assertTrue(production["missing_extension_callback_falls_back"])
 

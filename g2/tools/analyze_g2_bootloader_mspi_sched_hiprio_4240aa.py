@@ -185,7 +185,7 @@ def audit() -> dict[str, Any]:
     regions = manifest["component_overrides"]["apollo_bootloader"]["regions"]
     by_name = {row["name"]: row for row in regions}
     source_name = "bootloader_mspi_sched_hiprio_4240aa_source_in_place"
-    successor_name = "bootloader_mspi_device_configure_424120_424976_official"
+    successor_name = "bootloader_mspi_device_configure_424120_source_in_place"
     require(source_name in by_name, "scheduler production region disappeared")
     require(successor_name in by_name, "device-configure successor disappeared")
     source_region = by_name[source_name]
@@ -196,8 +196,8 @@ def audit() -> dict[str, Any]:
     require(
         (successor["target_address"], successor["size"],
          successor["address_status"])
-        == (END, 2134, "official_blob"),
-        "device-configure retained-successor ownership changed",
+        == (END, 284, "source_compiled"),
+        "device-configure source-successor ownership changed",
     )
     with tempfile.TemporaryDirectory(prefix="open-cfw-sched-hiprio-component-") as raw:
         subprocess.run(["python3", str(BUILDER), "--output-dir", raw], cwd=ROOT,
@@ -236,7 +236,10 @@ def audit() -> dict[str, Any]:
                        "retained_official_bytes": component["opaque_base_bytes"],
                        "next_frontier": successor["target_address"]},
         "next_frontier": {"start": END, "end": 0x0042488E,
-                          "identity": "mspi_device_configure", "bytes": 1902},
+                          "identity": "mspi_device_configure", "bytes": 1902,
+                          "source_compiled_bytes": 284,
+                          "retained_unreachable_tail_bytes": 1618,
+                          "status": "source-compiled-with-retained-unreachable-tail"},
         "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_gate": {"blocking_condition":
                           "directed hardware testing is blocked by unavailable physical evidence",

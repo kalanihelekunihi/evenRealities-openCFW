@@ -60,7 +60,7 @@ class CordioDmDevAuditTests(unittest.TestCase):
         self.assertEqual(production["strict_relocations"], 9)
         self.assertEqual(len(production["source_only_target_compiled"]), 6)
         self.assertEqual(production["manifest_regions"], 33)
-        self.assertEqual(production["flash_plan_counts"], (7104, 0, 8, 6))
+        self.assertEqual(production["flash_plan_counts"], (7822, 0, 8, 6))
 
 
 if __name__ == "__main__":

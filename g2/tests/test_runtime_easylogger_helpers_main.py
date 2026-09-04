@@ -340,13 +340,13 @@ TARGET_CLOSURE_SHA256 = (
     "682363db5f9393d204f3ca9b8a620fa0"
     "1c399d012381724213bf380336d8aa24"
 )
-PRODUCTION_OVERLAY_SIZE = 362_272
+PRODUCTION_OVERLAY_SIZE = 380_444
 PRODUCTION_OVERLAY_SHA256 = (
-    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+    "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
 )
-PRODUCTION_COMPONENT_SIZE = 3_885_668
+PRODUCTION_COMPONENT_SIZE = 3_903_840
 PRODUCTION_COMPONENT_SHA256 = (
-    "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
+    "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752"
 )
 PRODUCTION_LEAVES = {
     "open_cfw_easylogger_helpers_get_logger": {
@@ -1232,12 +1232,12 @@ class RuntimeEasyLoggerHelpersMainTests(unittest.TestCase):
                 )
             },
             {
-                "replaced_stock_function_bytes": 404_240,
-                "generated_patch_site_bytes": 404_060,
+                "replaced_stock_function_bytes": 422_658,
+                "generated_patch_site_bytes": 422_476,
                 "generated_wrapper_bytes": 32,
-                "source_owned_in_place_bytes": 184,
-                "source_owned_bytes": 364_656,
-                "opaque_base_bytes": 3_116_920,
+                "source_owned_in_place_bytes": 186,
+                "source_owned_bytes": 382_878,
+                "opaque_base_bytes": 3_098_454,
             },
         )
 

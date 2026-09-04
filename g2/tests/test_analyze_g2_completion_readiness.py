@@ -391,16 +391,16 @@ class G2CompletionReadinessTests(unittest.TestCase):
     def test_apollo_boundaries_are_disjoint_and_current(self) -> None:
         main = self.report["components"]["apollo_main"]
         details = main["details"]
-        self.assertEqual(main["release_blocking_bytes"], 3_061_168)
+        self.assertEqual(main["release_blocking_bytes"], 3_046_598)
         self.assertEqual(details["release_readiness_partition"], {
             "candidate_source_not_routed": 0,
-            "typed_retained_or_external": 3_061_168,
+            "typed_retained_or_external": 3_046_598,
         })
         self.assertEqual(details["unanchored_frontier_partition"], {
             "candidate_source_not_routed": 0,
-            "typed_retained_unanchored_without_candidate": 596_170,
+            "typed_retained_unanchored_without_candidate": 591_115,
         })
-        self.assertEqual(details["controlled_label_reconciliation_bytes"], 21_544)
+        self.assertEqual(details["controlled_label_reconciliation_bytes"], 34_192)
         self.assertFalse(details["controlled_label_reconciliation_additive"])
         self.assertEqual(details["overlapping_object_closure_evidence"], {
             "bytes": 885_418,

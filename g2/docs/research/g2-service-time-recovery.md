@@ -75,12 +75,24 @@ the selected AmbiqSuite lineage or recover a private generating commit.
 
 ## OpenCFW boundary
 
-The object remains analysis-only. Its locally recoverable first-party behavior
-is now bounded, but production replacement still requires tests for leap-year
-edges, the 12-hour conversion rule, negative/overflow timestamps, timezone
-round trips, RTC failure behavior, peer-role selection, and timeout lifecycle.
-Those are first-party implementation and target-validation tasks, not opaque
-third-party dependency work.
+The complete 1,308-byte stock body is production-routed through eleven
+selector-isolated clean-room C leaves. They compile to 1,658 Apple-profile
+bytes and 1,648 Linux-profile bytes under 27 strict relocations; the 76-byte
+diagnostic/literal pool remains retained. The source implements the exact
+40-byte calendar and 16-byte peer-message ABIs, Gregorian conversion,
+hundredths rounding, configured 12/24-hour display, signed quarter-hour
+timezone adjustment, RTC refresh, role-gated synchronization, and the
+30-second callback/retry lifecycle. Diagnostic-only EasyLogger calls are
+deliberately omitted.
+
+Host tests cover pre-2000 clamping, leap-day conversion, epoch round trips,
+midnight/afternoon 12-hour formatting, timezone direction, RTC get/set,
+peer-role gating, the 16-byte transport payload, delayed retry, and immediate
+callback retry. Both canonical toolchain profiles compile and route every
+entry into the complete fixed-size firmware image. Live RTC behavior, peer
+transport interoperability, scheduler timing/concurrency, and bilateral time
+synchronization remain blocked by unavailable physical evidence; no hardware
+operation was attempted.
 
 ## Reproduction
 
@@ -93,5 +105,7 @@ make service-time-closure
 `tools/analyze_g2_service_time.py` authenticates the stock image and manifests,
 re-decodes all 497 instructions, validates the epoch constants and exact
 symbols, replays primary/alternate/stored ingress, accounts for every provider
-edge, and verifies the CMSIS/IAR neighboring boundaries. It performs no
-signing, flashing, erase, or hardware operation.
+edge, verifies the CMSIS/IAR neighboring boundaries, and fail-closes on source,
+relocation, routing, component, manifest, or package drift. The target also
+runs the host oracle and final-frontier gate. It performs no signing, flashing,
+erase, or hardware operation.

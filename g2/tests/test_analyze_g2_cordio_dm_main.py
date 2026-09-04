@@ -58,7 +58,7 @@ class CordioDmMainAuditTests(unittest.TestCase):
         self.assertEqual(production["alignment_bytes_added"], 20)
         self.assertEqual(production["strict_relocations"], 2)
         self.assertEqual(production["manifest_regions"], 42)
-        self.assertEqual(production["flash_plan_counts"], (7104, 0, 8, 6))
+        self.assertEqual(production["flash_plan_counts"], (7822, 0, 8, 6))
 
 
 if __name__ == "__main__":

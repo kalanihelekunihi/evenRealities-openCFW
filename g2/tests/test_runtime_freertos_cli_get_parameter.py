@@ -113,26 +113,26 @@ PROFILE_PINS = {
         ),
         "production_offset": 123_200,
         "overlay": (
-            362_272,
-            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+            380_444,
+            "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622",
         ),
         "component": (
-            3_885_668,
-            "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5",
+            3_903_840,
+            "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752",
         ),
         "package": (
             4_750_780,
-            "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27",
+            "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771",
         ),
         "replacement_sha256": (
             "725846b2fb35bfa360ede03e42d542262fbc7f74a4aea101e6d8a9d2e2bc9bf6"
         ),
         "accounting": {
-            "generated_patch_site_bytes": 404_060,
-            "opaque_base_bytes": 3_116_920,
-            "replaced_stock_function_bytes": 404_240,
-            "source_owned_bytes": 364_656,
-            "source_owned_in_place_bytes": 184,
+            "generated_patch_site_bytes": 422_476,
+            "opaque_base_bytes": 3_098_454,
+            "replaced_stock_function_bytes": 422_658,
+            "source_owned_bytes": 382_878,
+            "source_owned_in_place_bytes": 186,
         },
     },
     "linux-clang": {
@@ -144,26 +144,26 @@ PROFILE_PINS = {
         ),
         "production_offset": 125_024,
         "overlay": (
-            154_604,
-            "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6",
+            172_828,
+            "13a12b7fc7ec3af866d4ebe9229105ce923d6842ec6e8c4b0e01564582ed8ab1",
         ),
         "component": (
-            3_670_404,
-            "c2d3fad0382523efb9aa3cfdf19e63e81dca9fdcecdc838e37cac5c48fde430f",
+            3_688_626,
+            "f1214b0388a3d9d10b278a58e5f992052786c33db14faad7c21ead607d825b76",
         ),
         "package": (
             4_750_764,
-            "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559",
+            "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
         ),
         "replacement_sha256": (
             "f5a86d3592c9b16fae073cfc5e9633dd5789985adb208cf02174be9aac6fc42e"
         ),
         "accounting": {
-            "generated_patch_site_bytes": 105_954,
-            "opaque_base_bytes": 3_417_226,
-            "replaced_stock_function_bytes": 106_134,
-            "source_owned_bytes": 147_192,
-            "source_owned_in_place_bytes": 184,
+            "generated_patch_site_bytes": 124_386,
+            "opaque_base_bytes": 3_398_744,
+            "replaced_stock_function_bytes": 124_568,
+            "source_owned_bytes": 165_464,
+            "source_owned_in_place_bytes": 186,
         },
     },
 }

@@ -136,17 +136,17 @@ RELOCATED_SHA256 = (
     "afbba4f9f08b2df17a4350d7a7e83d9"
     "9b8439283ee40c1a1604bd879dff75f04"
 )
-PRODUCTION_OVERLAY_SIZE = 362_272
+PRODUCTION_OVERLAY_SIZE = 380_444
 PRODUCTION_OVERLAY_SHA256 = (
-    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+    "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
 )
 PRODUCTION_FINAL_COMPONENT_SIZE = 3_956_672
-PRODUCTION_CORE_STAGE_COMPONENT_SIZE = 3_885_668
+PRODUCTION_CORE_STAGE_COMPONENT_SIZE = 3_903_840
 PRODUCTION_FINAL_COMPONENT_SHA256 = (
-    "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"
+    "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6"
 )
 PRODUCTION_CORE_STAGE_COMPONENT_SHA256 = (
-    "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
+    "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752"
 )
 PRODUCTION_OFFSET = 113_808
 PRODUCTION_ADDRESS = 0x007A_FFB4
@@ -841,16 +841,16 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
                 )
             },
             {
-                "generated_patch_site_bytes": 404_060,
+                "generated_patch_site_bytes": 422_476,
                 "generated_wrapper_bytes": 32,
-                "opaque_base_bytes": 3_116_920,
-                "replaced_stock_function_bytes": 404_240,
-                "source_owned_bytes": 364_656,
-                "source_owned_in_place_bytes": 184,
+                "opaque_base_bytes": 3_098_454,
+                "replaced_stock_function_bytes": 422_658,
+                "source_owned_bytes": 382_878,
+                "source_owned_in_place_bytes": 186,
             },
         )
-        self.assertEqual(len(report["overlay"]["functions"]), 2_439)
-        self.assertEqual(len(report["overlay"]["patched_sites"]), 2_327)
+        self.assertEqual(len(report["overlay"]["functions"]), 2_563)
+        self.assertEqual(len(report["overlay"]["patched_sites"]), 2_448)
 
     def test_host_layout_and_null_attribute_dynamic_path(self) -> None:
         self.assertEqual(self.host_compile.stderr, "")

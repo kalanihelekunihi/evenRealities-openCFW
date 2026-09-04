@@ -768,15 +768,15 @@ class RuntimeFreeRTOSMutexHeldTests(unittest.TestCase):
                 self.production["component"]["sha256"],
             ),
             (
-                362_272,
+                380_444,
                 (
-                    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+                    "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
                 ),
-                2_439,
-                2_327,
-                3_885_668,
+                2_563,
+                2_448,
+                3_903_840,
                 (
-                    "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
+                    "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752"
                 ),
             ),
         )

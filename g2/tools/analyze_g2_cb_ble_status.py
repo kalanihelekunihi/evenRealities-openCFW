@@ -16,6 +16,8 @@ sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_dashboard_watchface_manager as indirect_common
 import analyze_g2_ux_system as common
 import recover_apollo_embedded_source_paths as thumb
+import apollo_overlay
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 
 
 AuditError = common.AuditError
@@ -23,6 +25,18 @@ IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FUNCTION_MAP = ROOT / "tools/manifests/g2-cb-ble-status-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-cb-ble-status-closure.tsv"
 PROVIDER_MAP = ROOT / "tools/manifests/g2-cb-ble-status-provider-map.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/cb_ble_status.c"
+HEADER = ROOT / "components/apollo_main/core_overlay/cb_ble_status.h"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+APPLE_COMPONENT = (
+    ROOT / "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin"
+)
+LINUX_COMPONENT = (
+    ROOT / "build/canonical-provider/linux-clang/apollo_main-final81/"
+    "ota_s200_firmware_ota.bin"
+)
 INPUT_PINS = {
     FUNCTION_MAP: "31047dbd3d932216e849e4c26f4d75985ea487f9bf953cffb00cf747d6ae526b",
     CLOSURE: "247847ad6c5221da176705c12879df4e875850248bf5418542bec52329d2962a",
@@ -78,6 +92,43 @@ STRINGS = {
     0x0073_C7F4: "[cb.ble_status]Invalid callback function",
     0x0075_2718: "CB_BLE_STATUS_UnregisterCallback",
 }
+SOURCE_SIZE = 2259
+SOURCE_SHA256 = "29dc354fed60f0aa56a29f40572081e8a8d9df0a8c1906de47c3a9e29d4f9aea"
+HEADER_SIZE = 326
+HEADER_SHA256 = "b1d861b8ab7b4c1e28870cf9160b3b511c8966e7ce9d9a242b7f59665094b6fa"
+PRODUCTION_FUNCTIONS = (
+    "open_cfw_cb_ble_status_register",
+    "open_cfw_cb_ble_status_unregister",
+    "open_cfw_cb_ble_status_notify",
+)
+PRODUCTION_PATCHES = tuple(
+    f"replace_cb_ble_status_{index:02d}" for index in range(1, 4)
+)
+PROVIDER_TARGETS = (0x0051_0240, 0x0051_03C4, 0x0051_05BC)
+PROFILE_ROUTES = {
+    "apple-clang": {
+        "component": APPLE_COMPONENT,
+        "component_sha256": "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
+        "entry_targets": (0x004D_0F28, 0x004D_0F54, 0x004D_0DC4),
+        "text_sha256": (
+            "31fc80e3f7638a4a4de8cc9adcc68296ad5f13e1c29c932eaa8afe627344a2bc",
+            "bb060cb173e10e5806aacbd2cd3bce7911e5b7fbe919da9d35d6cabc5f607aa8",
+            "df0faf9469d90248d3d129b9a717bfaa69bdba0300bd308e2f88778ee65ccc70",
+        ),
+        "configured_offsets": (373688, 373712, 373732),
+    },
+    "linux-clang": {
+        "component": LINUX_COMPONENT,
+        "component_sha256": "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
+        "entry_targets": (0x007B_ADE4, 0x007B_ADFC, 0x007B_AE10),
+        "text_sha256": (
+            "a6c87f86c76512d66d3aca3333406171473bbc01d774475aa725caebba1793c2",
+            "bf7e9b6465d5b0d0c661d2d8ed434d97e81c87cb43bc1e67c670f30e41694f6c",
+            "b96bf7060f86912dc17814ab3f1af20176e1579cf6cf8cecff01e858fc333536",
+        ),
+        "configured_offsets": (158400, 158424, 158444),
+    },
+}
 
 
 def _sha256(value: bytes) -> str:
@@ -91,6 +142,184 @@ def _stored_hits(blob: bytes, targets: set[int]) -> list[tuple[int, int]]:
         if value & 1 and (value & ~1) in targets:
             result.append((common.BASE + offset, value & ~1))
     return result
+
+
+def _component_slice(component: bytes, start: int, end: int) -> bytes:
+    first = start - common.BASE
+    return component[first:first + end - start]
+
+
+def _validate_production() -> dict[str, object]:
+    source = SOURCE.read_bytes()
+    header = HEADER.read_bytes()
+    if len(source) != SOURCE_SIZE or _sha256(source) != SOURCE_SHA256:
+        raise AuditError("production BLE-status source changed")
+    if len(header) != HEADER_SIZE or _sha256(header) != HEADER_SHA256:
+        raise AuditError("production BLE-status header changed")
+
+    config = json.loads(OVERLAY.read_text())
+    leaves = {
+        item.get("function"): item
+        for item in config["relocated_leaves"]
+        if item.get("function") in PRODUCTION_FUNCTIONS
+    }
+    if set(leaves) != set(PRODUCTION_FUNCTIONS):
+        raise AuditError("production BLE-status leaf inventory changed")
+    sizes = (22, 20, 30)
+    for index, (name, size, provider) in enumerate(zip(
+        PRODUCTION_FUNCTIONS, sizes, PROVIDER_TARGETS
+    )):
+        leaf = leaves[name]
+        if (
+            leaf.get("profiles") != ["apple-clang", "linux-clang"]
+            or leaf.get("strict_relocation_contract") is not True
+            or leaf.get("source", {}).get("path")
+                != "components/apollo_main/core_overlay/cb_ble_status.c"
+            or leaf["source"].get("size") != SOURCE_SIZE
+            or leaf["source"].get("sha256") != SOURCE_SHA256
+            or leaf.get("expected", {}).get("size") != size
+            or leaf["expected"].get("offset")
+                != PROFILE_ROUTES["apple-clang"]["configured_offsets"][index]
+            or len(leaf.get("relocations", [])) != 1
+            or leaf["relocations"][0].get("target_address") != provider
+        ):
+            raise AuditError(f"production BLE-status Apple pins changed: {name}")
+        linux = leaf.get("toolchain_profiles", {}).get("linux-clang", {})
+        if (
+            linux.get("reviewed_version_prefix")
+                != "Homebrew clang version 22.1.8"
+            or linux.get("expected", {}).get("size") != size
+            or linux["expected"].get("offset")
+                != PROFILE_ROUTES["linux-clang"]["configured_offsets"][index]
+            or linux["expected"].get("sha256")
+                != PROFILE_ROUTES["linux-clang"]["text_sha256"][index]
+        ):
+            raise AuditError(f"production BLE-status Linux pins changed: {name}")
+
+    patches = {
+        item.get("name"): item for item in config["patch_sites"]
+        if item.get("name") in PRODUCTION_PATCHES
+    }
+    if set(patches) != set(PRODUCTION_PATCHES):
+        raise AuditError("production BLE-status patch inventory changed")
+    for name, function, bounds in zip(
+        PRODUCTION_PATCHES, PRODUCTION_FUNCTIONS, FUNCTIONS
+    ):
+        patch = patches[name]
+        if (
+            patch.get("runtime_address") != bounds[0]
+            or patch.get("expected_size") != bounds[1] - bounds[0]
+            or patch.get("target_function") != function
+            or patch.get("profiles") != ["apple-clang", "linux-clang"]
+        ):
+            raise AuditError(f"production BLE-status patch changed: {name}")
+
+    report = json.loads(REPORT.read_text())
+    report_leaves = {
+        item.get("extraction", {}).get("function"): item
+        for item in report["relocated_leaves"]
+        if item.get("extraction", {}).get("function") in PRODUCTION_FUNCTIONS
+    }
+    if set(report_leaves) != set(PRODUCTION_FUNCTIONS):
+        raise AuditError("built BLE-status leaf inventory changed")
+    if any(
+        report_leaves[name]["extraction"].get("sha256")
+            != leaves[name]["expected"]["sha256"]
+        or report_leaves[name]["placement"].get("offset")
+            != leaves[name]["expected"]["offset"]
+        for name in PRODUCTION_FUNCTIONS
+    ):
+        raise AuditError("built BLE-status Apple leaf pins changed")
+
+    manifest = json.loads(MANIFEST.read_text())
+    override = manifest["component_overrides"]["apollo_main"]
+    required_regions = {
+        "cb_ble_status_register_source_nop_fill",
+        "cb_ble_status_unregister_source_nop_fill",
+        "cb_ble_status_notify_source_nop_fill",
+        "cb_ble_status_retained_diagnostic_pool",
+    }
+    regions = {item["name"]: item for item in override["regions"]}
+    if not required_regions <= set(regions):
+        raise AuditError("production BLE-status manifest regions changed")
+    if any(
+        regions[name].get("address_status")
+            not in {"generated_source_data_replacement",
+                    "generated_source_entry_replacement"}
+        for name in required_regions
+        if name != "cb_ble_status_retained_diagnostic_pool"
+    ) or regions["cb_ble_status_retained_diagnostic_pool"].get(
+        "address_status"
+    ) != "official_blob":
+        raise AuditError("production BLE-status manifest ownership changed")
+    for start, _end in FUNCTIONS:
+        offset = start - common.BASE
+        owners = [
+            item for item in override["regions"]
+            if item.get("file_offset", -1) <= offset
+            < item.get("file_offset", -1) + item.get("size", 0)
+        ]
+        if (
+            len(owners) != 1
+            or owners[0].get("address_status")
+                != "generated_source_data_replacement"
+        ):
+            raise AuditError("post-link BLE-status entry ownership changed")
+
+    for profile, route in PROFILE_ROUTES.items():
+        component = route["component"].read_bytes()
+        if len(component) != 3956672 or _sha256(component) != route[
+            "component_sha256"
+        ]:
+            raise AuditError(f"{profile} BLE-status component changed")
+        for index, ((start, end), target, size, digest, provider) in enumerate(zip(
+            FUNCTIONS, route["entry_targets"], sizes,
+            route["text_sha256"], PROVIDER_TARGETS
+        )):
+            replacement = _component_slice(component, start, end)
+            if (
+                apollo_overlay.decode_thumb_branch(
+                    start, replacement[:4], link=False
+                ) != target
+                or replacement[4:] != b"\x00\xbf" * ((len(replacement) - 4) // 2)
+            ):
+                raise AuditError(
+                    f"{profile} BLE-status stock redirect {index} changed"
+                )
+            text = _component_slice(component, target, target + size)
+            if _sha256(text) != digest:
+                raise AuditError(f"{profile} BLE-status text {index} changed")
+            relocation_offset = (18, 16, 20)[index]
+            if apollo_overlay.decode_thumb_branch(
+                target + relocation_offset,
+                text[relocation_offset:relocation_offset + 4],
+                link=(index == 2),
+            ) != provider:
+                raise AuditError(
+                    f"{profile} BLE-status provider route {index} changed"
+                )
+
+    validate_apollo_main_artifacts(ROOT, AuditError, "BLE-status callback")
+    return {
+        "candidate": str(SOURCE.relative_to(ROOT)),
+        "header": str(HEADER.relative_to(ROOT)),
+        "production_routed": True,
+        "source_inventory_available": True,
+        "source_functions": 3,
+        "compiled_text_bytes": 72,
+        "alignment_bytes": 4,
+        "strict_relocations": 3,
+        "stock_replaced_bytes": 168,
+        "retained_diagnostic_pool_bytes": 34,
+        "post_link_suffix_relocation_verified": True,
+        "profiles_verified": ["apple-clang", "linux-clang"],
+        "diagnostic_logging": (
+            "stock EasyLogger diagnostics omitted; callback semantics preserved"
+        ),
+        "software_functional_gap": False,
+        "hardware_validation": "not-applicable",
+        "hardware_operations": [],
+    }
 
 
 def analyze(image: Path = IMAGE) -> dict[str, object]:
@@ -223,10 +452,7 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
             "iar_dlib_calls": 0,
             "new_version_discriminator": False,
         },
-        "production": {
-            "production_routed": False,
-            "qualification": "callback facade and generic-manager seams are recovered; the private object is not source-routed",
-        },
+        "production": _validate_production(),
     }
 
 

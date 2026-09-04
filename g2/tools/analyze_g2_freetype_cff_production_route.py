@@ -45,11 +45,11 @@ DEPENDENCY_PINS = {
     MAP_ANALYZER: "68f20cf54a36305d6c460d082c907d3d94efeff545238ff8b6f1189267322b70",
 }
 ROUTE_INPUT_PINS = {
-    BUILDER: (90_227, "1a4f8e642484d0331bc92dfdc79d2ed2ef075df613d609c3a629aaaa3f7091a8"),
-    OVERLAY: (5_974_575, "9b1f644af28273bde1bc622ca2157b6986097a4e3eb6e5c536ed1bd563731b13"),
+    BUILDER: (90_584, "164a9fd3aeb22daa16085de2725157af4b157e8f64977a50db89986aaf97325f"),
+    OVERLAY: (6_404_019, "2329b48855ecf130bbb8ea4e6f97711dc9ac9fcba1aed9c647dd896e6c488722"),
     SCATTER_BUILDER: (40_269, "b344b37620574e9cec4af153f54b23e124afbe64332126118e678401f1feb4b9"),
-    SCATTER_CONFIG: (1_883, "71c6f4f38ed68913307045f75d2ab23ab8b9d6909f3496e2a64c76def4329b40"),
-    PACKAGE_MANIFEST: (3_527_931, "bfe70bc04c7ec384c75690fc224a992dc71e1020d1d7c0494ce3da6f9466f7ac"),
+    SCATTER_CONFIG: (1_842, "ec7f2835ba9d04963ea6f0ca02d8f804ff4ee88485168ef0de2b230ba56ab972"),
+    PACKAGE_MANIFEST: (3_812_990, "ae7c402fef4c72f3fbeae80cbfc71eb17e3907044a339b65494e8732392a150d"),
 }
 DEFAULT_MODULE_TABLE = 0x0073EEF8
 CFF_DRIVER_CLASS = 0x006DCB74
@@ -84,21 +84,21 @@ EXPECTED_ROUTE_TOKEN_COUNTS = {
 EXPECTED_PROFILE_COMPONENTS = {
     "apple-clang": {
         "size": 3_956_672,
-        "sha256": "78eca5222c333c5fd3793608d67aad476ecac911f6e15164feeb2e1009944826",
+        "sha256": "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
     },
     "linux-clang": {
         "size": 3_956_672,
-        "sha256": "821875b74af0016e41dfb564a5370c32a30c5215077db5708fd9066af798328f",
+        "sha256": "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
     },
 }
 EXPECTED_PROFILE_PACKAGES = {
     "apple-clang": {
         "size": 4_750_780,
-        "sha256": "3929fdde5ab5520683fdac9393fc3abc322b2eccc3e203c44df544071945c858",
+        "sha256": "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771",
     },
     "linux-clang": {
         "size": 4_750_764,
-        "sha256": "5153e24fad9420235c0a1777bb0cf00b82d6af529333db2792586920628c2b1d",
+        "sha256": "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
     },
 }
 EXPECTED_ROUTE_PLACEMENT = {
@@ -269,7 +269,7 @@ def _authenticate_component_route(data: dict[Path, bytes]) -> dict[str, Any]:
         == (EXPECTED_PROFILE_COMPONENTS["apple-clang"]["size"],
             EXPECTED_PROFILE_COMPONENTS["apple-clang"]["sha256"])
         and linux_provider.get("path")
-        == "build/canonical-provider/linux-clang/apollo_main/ota_s200_firmware_ota.bin"
+        == "build/canonical-provider/linux-clang/apollo_main-final81/ota_s200_firmware_ota.bin"
         and (linux_provider.get("size"), linux_provider.get("sha256"))
         == (EXPECTED_PROFILE_COMPONENTS["linux-clang"]["size"],
             EXPECTED_PROFILE_COMPONENTS["linux-clang"]["sha256"]),
@@ -313,12 +313,12 @@ def _authenticate_component_route(data: dict[Path, bytes]) -> dict[str, Any]:
         if row.get("name") == "apollo_main_linux_canonical_lc3_cff_image"
     ]
     _require(
-        len(apple_cff_rows) == 16
+        len(apple_cff_rows) == 22
         and sum(row["size"] for row in apple_cff_rows
                 if row["address_status"] == "container_only") == 4
         and sum(row["size"] for row in apple_cff_rows
                 if row["address_status"]
-                == "generated_source_data_replacement") == 21_011
+                == "generated_source_data_replacement") == 20_819
         and max(row["target_address"] + row["size"]
                 for row in apple_cff_rows
                 if row.get("target_address") is not None) == 0x0073EF04

@@ -17,7 +17,12 @@ calls to the already production source-owned ARM EABI unsigned 64-bit division
 core. Logging terminates at the admitted EasyLogger/private compact-log seams.
 
 The object provides no new IAR version discriminator and no private historical
-commit. It is not production-routed by OpenCFW.
+commit. OpenCFW now production-routes all ten stock entries to a clean-room,
+freestanding C implementation under strict Apple-Clang and Linux-Clang
+relocation contracts. The 1,712 stock body bytes are functionally displaced;
+the canonical image retains 1,809 physical compatibility bytes (including the
+136-byte pool) because the guarded four-byte entry branches make the old bodies
+unreachable. Of those entry bytes, 39 differ from the authenticated image.
 
 ## Reproduction
 
@@ -30,8 +35,11 @@ make service-algo-closure
 The fail-closed analyzer authenticates the official image, all function bodies,
 the physical object and both boundaries, M-profile/VFP instruction topology,
 calls and ingress, retained strings, production ownership of 64-bit division,
-and the exact stock bodies for IAR `asin`, signed-64-to-double conversion, and
-hardware-backed `sqrt`.
+the exact stock bodies for IAR `asin`, signed-64-to-double conversion, and
+hardware-backed `sqrt`, all ten source leaves and guarded redirects, both
+toolchain profiles, strict relocations, the live Apple build, and the canonical
+manifest tiling. The Make target also runs host behavioral tests and a
+freestanding Cortex-M55 hard-float compile.
 
 | Evidence | Result |
 |---|---:|
@@ -82,11 +90,10 @@ and sizes greater than 3,200 bytes. It does **not** require the size to equal
 therefore reads exactly 3,200 input bytes.
 
 So a short but four-byte-aligned input is accepted and then read beyond its
-declared extent. Existing callers may always supply a full frame, but an
-OpenCFW source implementation should make the precondition explicit and test
-it. Preserving the unsafe acceptance is not necessary unless compatibility
-testing demonstrates a caller dependence; avoiding the out-of-bounds read is
-the safer production policy.
+declared extent. The OpenCFW production implementation instead requires exactly
+3,200 bytes and rejects short input before dereferencing it. Host tests pin this
+fail-closed behavior as well as null outputs, silence/energy rejection, lag
+selection, angle conversion, and ten-window wraparound.
 
 ## IAR math seam
 
@@ -107,14 +114,20 @@ The six unsigned 64-bit division calls reach `0x0047CC60`, which is already an
 exact production redirect to `open_cfw_aeabi_uldivmod`. No opaque division or
 DSP library remains at that edge.
 
-## OpenCFW implication
+## OpenCFW production status
 
-A source candidate can recreate the first-party fixed-window correlation and
-energy policy while reusing the existing source-owned 64-bit division core and
-ordinary C/libm equivalents for `memset`, conversion, square root, and arcsine.
-Target tests should cover full-frame preprocessing, left/right silence, rolling
-window warm-up, lag extremes, threshold boundaries, degree conversion, and
-short-input rejection. Acoustic equivalence and microphone geometry still
-require device/golden-vector validation.
+The admitted source implements the first-party fixed-window correlation and
+energy policy, uses the existing source-owned 64-bit division core, and carries
+bounded source-owned square-root and arcsine approximations so the firmware has
+no new hosted-libm dependency. Apple Clang emits 4,762 text bytes plus 14 bytes
+of alignment; Linux Clang emits 4,774 text bytes plus 12 bytes of alignment.
+Each profile has 20 strict relocations and the same ten guarded stock-entry
+redirects. The software functional gap is closed.
+
+Acoustic equivalence, actual G2 microphone spacing and polarity, and live
+lag-to-angle behavior require an authorized physical G2 pair or authenticated
+golden microphone vectors. Hardware validation is **blocked by unavailable
+physical evidence**. This is a hardware-qualification blocker, not a remaining
+software implementation gap.
 
 No device, signing, flashing, erase, or runtime operation was performed.

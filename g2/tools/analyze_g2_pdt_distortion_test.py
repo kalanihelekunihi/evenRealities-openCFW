@@ -12,6 +12,10 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+import apollo_overlay  # noqa: E402
+from apollo_artifact_consistency import validate_apollo_main_artifacts  # noqa: E402
+
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x00437FE0
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -19,7 +23,7 @@ FUNCTION_MAP = ROOT / "tools/manifests/g2-pdt-distortion-test-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-pdt-distortion-test-closure.tsv"
 PINS = {
     FUNCTION_MAP: "8dd46d77d9b0ad5e2d576726d1e8cded5ab59d042c82c977a3f7e2f743041e90",
-    CLOSURE: "e56997538a1382b1b7d6ae044e96a8200c36a32b80d30333353afc4260e34832",
+    CLOSURE: "1cf5e26e73c80daf25610f55ea4b69a7368dcd5da5e0844e0bcc4faf208903b8",
 }
 PHYSICAL = (0x005CF2B4, 0x005CF634)
 PHYSICAL_SHA256 = "9b2057f67369aade287e9a2e4f52a58e3862bd2b609d6dd730bc32004870e583"
@@ -84,6 +88,62 @@ STORED = [
     (0x00793734, 0x005CF32D),
 ]
 
+SOURCE = ROOT / "components/apollo_main/core_overlay/pdt_distortion_test.c"
+HEADER = ROOT / "components/apollo_main/core_overlay/pdt_distortion_test.h"
+CONFIG = ROOT / "components/apollo_main/core_overlay/overlay.json"
+MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE_PIN = (12825, "500b0df06e0d2cc224dd3c8f5ae706ea493d4be7560607669c5cc0b45cd8da92")
+HEADER_PIN = (624, "11a988bac766c4acc675468a0ba1f2054e056af140d4843835f98fbb3b94a66f")
+NAMES = (
+    "open_cfw_pdt_distortion_zero_styles",
+    "open_cfw_pdt_distortion_common_data_handler",
+    "open_cfw_pdt_distortion_predicate",
+    "open_cfw_pdt_distortion_screen_event",
+)
+PATCHES = tuple(f"replace_pdt_distortion_test_{index:02d}" for index in range(1, 5))
+FUNCTIONS = ((0x005CF2B4, 0x005CF2E6), (0x005CF2E6, 0x005CF32C),
+             (0x005CF32C, 0x005CF330), (0x005CF330, 0x005CF606))
+RELOCATION_COUNTS = (4, 0, 0, 82)
+RELOCATION_TARGET_SHA256 = (
+    "8681c721db3ce47a492f97898914ce1762ccaf4c7b92d86e2e82b53642c5310e",
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "39330311d6bc0c01f6461323f3df3ee61d0fa7e39f877713b3bfe432cff60970",
+)
+COMPILED_SIZES = (46, 4, 4, 836)
+UNRELOCATED_SHA256 = (
+    "f5a2d07ecb6ee51a66307db6d56be4a8494637a85313fff444ea5c4382c77106",
+    "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+    "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+    "6a9b464ae1d02f6fb77516399509f0653f4c3bc60faae98fc193cfd71336c58f",
+)
+ROUTES = {
+    "apple-clang": {
+        "path": ROOT / "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
+        "report": ROOT / "components/apollo_main/core_overlay/build/build-report.json",
+        "component": "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
+        "targets": (0x004BC2F4, 0x004D1104, 0x004D1100, 0x0044828C),
+        "text": (
+            "7fb60f28a132a3b2ed2226ddc22d29644c99b53981fe39c28e4bd065851b8993",
+            "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+            "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+            "bc2799d730c463c039ee80ad07d7a28d4ce223eb87cdf9a1838716a89c843ce5",
+        ),
+    },
+    "linux-clang": {
+        "path": ROOT / "build/canonical-provider/linux-clang/apollo_main-final81/ota_s200_firmware_ota.bin",
+        "report": ROOT / "build/canonical-observation-g2-final97/linux-b/build-report.json",
+        "component": "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
+        "targets": (0x007BBF3C, 0x007BBF6C, 0x007BBF70, 0x007BBF74),
+        "text": (
+            "74e584ee584561bc28275ec8eee1c663f8f8acd6eed3149cb6b1cb9d4d9d3c1b",
+            "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+            "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+            "9c7b713ff58ddd0af28d780c4ef5eea017850c2044c3c40b6977bc3e37b9226d",
+        ),
+    },
+}
+
 
 class AuditError(RuntimeError):
     pass
@@ -126,6 +186,107 @@ def thumb_bw_target(data: bytes, address: int) -> int | None:
     if immediate & (1 << 24):
         immediate -= 1 << 25
     return address + 4 + immediate
+
+
+def validate_production() -> dict[str, object]:
+    for path, pin, label in ((SOURCE, SOURCE_PIN, "source"), (HEADER, HEADER_PIN, "header")):
+        payload = path.read_bytes()
+        if (len(payload), sha256(payload)) != pin:
+            raise AuditError(f"distortion-test production {label} changed")
+
+    config = json.loads(CONFIG.read_text())
+    leaves = {item.get("function"): item for item in config["relocated_leaves"]
+              if item.get("function") in NAMES}
+    if set(leaves) != set(NAMES):
+        raise AuditError("distortion-test production leaf inventory changed")
+    for index, name in enumerate(NAMES):
+        leaf = leaves[name]
+        relocations = leaf.get("relocations", [])
+        linux = leaf.get("toolchain_profiles", {}).get("linux-clang", {})
+        linux_relocations = linux.get("relocations", [])
+        expected_count = RELOCATION_COUNTS[index]
+        if (leaf.get("profiles") != ["apple-clang", "linux-clang"]
+                or leaf.get("strict_relocation_contract") is not True
+                or leaf.get("source", {}).get("sha256") != SOURCE_PIN[1]
+                or len(relocations) != expected_count
+                or len(linux_relocations) != expected_count
+                or linux.get("reviewed_version_prefix") != "Homebrew clang version 22.1.8"):
+            raise AuditError(f"distortion-test production pins changed: {name}")
+        for observed in (relocations, linux_relocations):
+            packed = b"".join(struct.pack("<I", item["target_address"]) for item in observed)
+            if sha256(packed) != RELOCATION_TARGET_SHA256[index]:
+                raise AuditError(f"distortion-test provider closure changed: {name}")
+
+    patches = {item.get("name"): item for item in config["patch_sites"]
+               if item.get("name") in PATCHES}
+    if set(patches) != set(PATCHES):
+        raise AuditError("distortion-test production patch inventory changed")
+    for name, function, bounds in zip(PATCHES, NAMES, FUNCTIONS):
+        patch = patches[name]
+        if (patch.get("runtime_address") != bounds[0]
+                or patch.get("expected_size") != bounds[1] - bounds[0]
+                or patch.get("target_function") != function
+                or patch.get("profiles") != ["apple-clang", "linux-clang"]):
+            raise AuditError(f"distortion-test production patch changed: {name}")
+
+    manifest = json.loads(MANIFEST.read_text())["component_overrides"]["apollo_main"]
+    for start, _end in FUNCTIONS:
+        offset = start - BASE
+        owners = [region for region in manifest["regions"]
+                  if region.get("file_offset", -1) <= offset
+                  < region.get("file_offset", -1) + region.get("size", 0)]
+        if len(owners) != 1 or owners[0].get("address_status") not in {
+                "generated_source_entry_replacement", "generated_source_data_replacement"}:
+            raise AuditError("distortion-test manifest entry ownership changed")
+
+    for profile, route in ROUTES.items():
+        component = route["path"].read_bytes()
+        if len(component) != 3956672 or sha256(component) != route["component"]:
+            raise AuditError(f"{profile} distortion-test component changed")
+        report = json.loads(route["report"].read_text())
+        built = {item.get("extraction", {}).get("function"): item.get("extraction", {})
+                 for item in report["relocated_leaves"]
+                 if item.get("extraction", {}).get("function") in NAMES}
+        if set(built) != set(NAMES):
+            raise AuditError(f"{profile} distortion-test built leaf inventory changed")
+        for index, (bounds, target, text_digest) in enumerate(
+                zip(FUNCTIONS, route["targets"], route["text"])):
+            replacement = image_slice(component, bounds[0], bounds[1])
+            if (apollo_overlay.decode_thumb_branch(bounds[0], replacement[:4], link=False) != target
+                    or replacement[4:] != b"\x00\xbf" * ((len(replacement) - 4) // 2)):
+                raise AuditError(f"{profile} distortion-test redirect changed")
+            extraction = built[NAMES[index]]
+            if (extraction.get("size") != COMPILED_SIZES[index]
+                    or extraction.get("unrelocated_sha256") != UNRELOCATED_SHA256[index]
+                    or extraction.get("relocation_count") != RELOCATION_COUNTS[index]):
+                raise AuditError(f"{profile} distortion-test compiled text changed")
+            if sha256(image_slice(
+                    component, target, target + COMPILED_SIZES[index])) != text_digest:
+                raise AuditError(
+                    f"{profile} distortion-test routed text changed: {NAMES[index]}"
+                )
+
+    validate_apollo_main_artifacts(ROOT, AuditError, "production distortion-test screen")
+    return {
+        "candidate": str(SOURCE.relative_to(ROOT)),
+        "header": str(HEADER.relative_to(ROOT)),
+        "production_routed": True,
+        "ownership_bytes": 850,
+        "source_inventory_available": True,
+        "source_functions": 4,
+        "compiled_text_bytes": {"apple-clang": 890, "linux-clang": 890},
+        "alignment_bytes": {"apple-clang": 2, "linux-clang": 2},
+        "strict_relocations": 86,
+        "stock_body_bytes_displaced": 850,
+        "retained_stock_noncode_bytes": 46,
+        "profiles_verified": ["apple-clang", "linux-clang"],
+        "software_functional_gap": False,
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "hardware_evidence_required": [
+            "authorized G2 panel trace confirming the recovered 640x480 root, 574x206 frame at (0,50), nested flex layout, image asset, and both localized resource labels"
+        ],
+        "hardware_operations": [],
+    }
 
 
 def analyze(image_path: Path = IMAGE) -> dict:
@@ -225,14 +386,6 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if raw_addresses != STORED or pair_digest(raw_addresses) != STORED_SHA256:
         raise AuditError("stored entry/interior topology changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any(
-        "pdt_distortion" in source.get("path", "").lower()
-        for source in overlay["sources"]
-    )
-    if routed:
-        raise AuditError("analysis-only screen unexpectedly entered production overlay")
-
     return {
         "surface": {
             "linked_functions": 4,
@@ -275,12 +428,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "adjacent_template_has_predicate": "0x005cf67a",
             "adjacent_descriptor": "0x006a45d0",
         },
-        "production": {
-            "candidate": None,
-            "production_routed": routed,
-            "ownership_bytes": 0,
-            "historical_source_available": False,
-        },
+        "production": validate_production(),
     }
 
 

@@ -219,8 +219,9 @@ The other 23 calls are admitted EasyLogger or first-party UART service, so no
 codec-vendor body is hidden here. See
 [`g2-service-codec-porting-recovery.md`](g2-service-codec-porting-recovery.md).
 
-The notification-thread object composes seven exact CMSIS-FreeRTOS v10.5.1
-wrappers—thread creation, flags set/wait, delay, and queue new/get/delete—at
+The notification-thread object composes eight exact CMSIS-FreeRTOS v10.5.1
+wrappers—thread creation/termination, flags set/wait, delay, and queue
+new/get/delete—at
 selected commit `d213f261…`. The wrappers and their kernel chains are already
 production source-owned; no new RTOS gap or discriminator appears. See
 [`g2-thread-notification-recovery.md`](g2-thread-notification-recovery.md).

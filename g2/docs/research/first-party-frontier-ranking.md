@@ -27,9 +27,9 @@ The reproducible census in
 now partitions these paths into 234 closed and zero open objects. The
 closed paths anchor all 1,230 functions / 485,274 body bytes, with no
 function shared across statuses. Complete-object records account for
-814,534 body bytes, and 232 records report 885,418 known physical bytes;
+814,846 body bytes, and 232 records report 885,418 known physical bytes;
 the closed-manifest ledger is
-`0d8b0e74744b60c570299f0e2fa78eddfe4904d15bab1fd3304b4ae6ffe4ac50`. This
+`ced59dc4826e54c647d8b948c823eee6dfd1892c029838db4a518cbf1ed2bfde`. This
 is retained-path lower-bound coverage, not whole-image or source-ownership
 coverage. The parser now consumes legacy multi-module closure records and
 standardized retained-path metadata, correctly moving the already closed
@@ -355,6 +355,13 @@ terminate at first-party policy or admitted LVGL/EasyLogger providers. See
 The legal/regulatory event handler and its retained country/identifier content
 table close as 234 body / 428 physical bytes over admitted providers; see
 [`g2-legal-regulatory-recovery.md`](g2-legal-regulatory-recovery.md).
+The S200 board-config object is now source-routed after correcting its leading
+four zero bytes from code to retained pool. Its sole function is 114 stock
+body bytes, has one stored Thumb entry pointer, and routes both canonical
+profiles to a 38-byte C leaf implementing selector-3 nPMx/BQ charger-family
+dispatch; live electrical qualification remains blocked by unavailable
+physical evidence. See
+[`g2-s200-board-config-recovery.md`](g2-s200-board-config-recovery.md).
 The Conversate tag-page object is closed as eleven functions / 2,910 body
 bytes / 3,056 physical bytes. Its 202 external calls terminate at admitted
 EasyLogger, LVGL, exact CMSIS-FreeRTOS tick, bounded IAR DLIB, or first-party
@@ -384,9 +391,10 @@ The codec UART-porting seam is closed as two functions / 342 body bytes / 414
 physical bytes. Its ring initialization reaches the already production-owned
 AndersKaloer source interval; UART lifecycle remains first-party. See
 [`g2-service-codec-porting-recovery.md`](g2-service-codec-porting-recovery.md).
-The notification thread is closed as eleven functions / 702 body bytes / 816
-physical bytes. Thread, flag, queue, and delay calls all terminate at exact
-source-owned CMSIS-FreeRTOS v10.5.1 wrappers. See
+The notification thread is closed as twelve functions / 730 body bytes / 816
+physical bytes. Thread create/terminate, flag, queue, and delay calls all
+terminate at exact source-owned CMSIS-FreeRTOS v10.5.1 wrappers. All twelve
+routines are production-routed from clean-room C. See
 [`g2-thread-notification-recovery.md`](g2-thread-notification-recovery.md).
 OTA and Ring complete the retained BLE-profile directory. OTA has seven
 functions / 620 body bytes with a four-function AmbiqSuite AMOTA skeleton;
@@ -516,10 +524,12 @@ Ordered by tractability (self-containment and testability), not importance:
    adjacent standalone `AT^NUS` registration and handler is now closed in
    [`g2-at-nus-recovery.md`](g2-at-nus-recovery.md): its twelve-byte body,
    four-byte pool, sole stored entry, response, and provider call are pinned.
-   The pathless `AT^CLEANBOND` / `AT^BLE_KEEPCONNECT` pair is now closed too
+   The pathless `AT^CLEANBOND` / `AT^BLE_KEEPCONNECT` pair is now source-closed too
    in [`g2-eat-bond-connect-recovery.md`](g2-eat-bond-connect-recovery.md):
-   both bodies, both command entries, four provider calls, and the exact
-   boundary before `at_buzzer.c` are pinned. The aggregate registry audit in
+   both bodies, both command entries, four provider calls, the exact boundary
+   before `at_buzzer.c`, and dual-profile production routing are pinned. Live
+   bond deletion/re-pairing and keep-connect effects remain explicitly blocked
+   by unavailable authorized G2/peer evidence. The aggregate registry audit in
    [`g2-eat-registry-recovery.md`](g2-eat-registry-recovery.md) proves these
    are all 21 valid stock eAT records and assigns every handler to a closed
    analysis. The registered eAT runtime frontier is therefore complete;

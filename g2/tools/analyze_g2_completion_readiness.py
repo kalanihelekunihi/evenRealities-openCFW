@@ -889,12 +889,12 @@ def analyze() -> dict[str, Any]:
     )
     _require(origin_release == {
         "candidate_source_not_routed": 0,
-        "typed_retained_or_external": 3_058_868,
+        "typed_retained_or_external": 3_046_598,
     } and _sum(origin_release) == main["opaque_base_bytes"],
         "Apollo origin/readiness partition changed")
     _require(origin_unanchored == {
         "candidate_source_not_routed": 0,
-        "typed_retained_unanchored_without_candidate": 594_706,
+        "typed_retained_unanchored_without_candidate": 591_115,
     } and _sum(origin_unanchored) ==
         int(origin_buckets["unanchored_discovered_function"]),
         "Apollo unanchored frontier changed")
@@ -902,7 +902,7 @@ def analyze() -> dict[str, Any]:
         "bytes": 885_418,
         "additive_to_disjoint_release_totals": False,
     }, "Apollo overlapping object evidence policy changed")
-    _require(int(origin["controlled_bytes_mislabeled_official_blob"]) == 23_814,
+    _require(int(origin["controlled_bytes_mislabeled_official_blob"]) == 34_192,
              "Apollo controlled-label reconciliation changed")
     clkmgr_dividers = _read(CLKMGR_DIVIDERS)
     _require(clkmgr_dividers.get("status") ==

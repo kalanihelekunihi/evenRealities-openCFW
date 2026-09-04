@@ -1,8 +1,8 @@
 # G2 pathless `AT^NUS` command recovery
 
-Status: complete linked-handler census and fail-closed behavioral analysis;
-historical source unavailable, no source candidate, and not
-production-routed. Run addresses use `run = file_offset + 0x00437FE0`.
+Status: clean-room implementation and dual-profile production routing complete;
+hardware validation is blocked by unavailable authorized physical evidence.
+Run addresses use `run = file_offset + 0x00437FE0`.
 
 ## Result
 
@@ -26,34 +26,40 @@ its arguments or perform additional validation.
 No retained source path or exact historical symbol survives. The manifest's
 `atNusHandler` name is descriptive, not a recovered source symbol. Historical
 source inventory, source-only function count, license, and whole-source
-identity therefore remain unknown. No clean-room candidate exists, the
-handler is absent from `overlay.json`, and it claims zero package ownership
-bytes.
+identity therefore remain unknown. Those historical-source limits do not
+prevent the independently authored replacement below from having an exact,
+reviewed source inventory.
 
 ## Clean-room authorship and production routing
 
 `components/apollo_main/core_overlay/at_nus.c` is an independently authored
-clean-room replacement (597 bytes, SHA-256
-`b80576c1aea40353475d331686bb5ec2b5915bc1acf911b73e6fee4a12cc87ae`) written
+clean-room replacement (743 bytes, SHA-256
+`acc7eacdc2d064a62bfa9d4150ad5cf1b8e8130fee4616c0f2295bdba7469f06`) written
 from this specification; no historical source survives. The handler emits the
 retained `NUS+OK\r\n` response at `0x0078A370` through the retained output
 provider at `0x00541430` and returns one, reading no arguments. Host tests pin
 the response bytes, the single provider call, and the return value against an
 oracle fixture; freestanding Thumb compilation exposes exactly one global text
-symbol, `open_cfw_at_nus_handler`.
+symbol, `open_cfw_at_nus_handler`; a compile-time entry-name definition emits
+the profile-disjoint `open_cfw_at_nus_handler_linux` symbol from the same C
+implementation.
 
-The candidate is routed into the Apollo main overlay under the reviewed
-apple-clang profile as one 18-byte relocated leaf (overlay offset 147,024,
-run address `0x007B8174`), reached through a single `B.W` entry redirect with
-NOP fill that replaces the complete sixteen-byte stock object
-`[0x005A5520,0x005A5530)`; the stored registration pointer `0x005A5521` at
-`0x006C92A8` now reaches the source leaf through the redirect. Apple Clang 21
-overlay/component/package sizes are `147042/3670438/4448932` with SHA-256
-`b1a5bcd75031fadd93e875fa643400f20125f4d89e74b5fb55e9aa111b9dc789`,
-`76bc4a35a0fe0ed26e9489b4e4b5aec5f95ea90463685acd316851ea657d8a1e`, and
-`a842e5e3327a7790c006a3f50b2192a9e48a2f415be51e8f4d7be91a15f09adb`. The leaf
-and redirect are gated `apple-clang`; the linux-clang profile keeps its
-recorded pins. Ownership is the full sixteen-byte stock object (twelve body
-bytes plus the four-byte literal pool). The component build, source package,
-`open_cfw` verification, and the fail-closed analyzer (now asserting the
-production routing) all pass.
+The candidate is routed under both reviewed compiler profiles through
+profile-disjoint 18-byte leaves. Apple keeps the established leaf at overlay
+offset 147,024. Linux appends `open_cfw_at_nus_handler_linux` at its core-stage
+tail so no previously reviewed Linux leaf is displaced. Two mutually exclusive
+`B.W` entry redirects replace the complete sixteen-byte stock object
+`[0x005A5520,0x005A5530)`; the retained registration pointer `0x005A5521` at
+`0x006C92A8` reaches the active source leaf through the redirect for each
+profile. Apple remains byte-identical at overlay/component SHA-256
+`21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622` /
+`7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6`.
+Linux produces overlay/component SHA-256
+`13a12b7fc7ec3af866d4ebe9229105ce923d6842ec6e8c4b0e01564582ed8ab1` /
+`dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6`.
+Ownership is the full sixteen-byte stock object (twelve body bytes plus the
+four-byte literal pool).
+
+No authorized G2 hardware or captured production eAT session is available in
+this workspace. Hardware validation therefore remains explicitly blocked; no
+device-response, timing, or transport-level completeness claim is made.

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Fail-closed complete-object and provider audit for service_time.c."""
+"""Fail-closed stock-closure and production-route audit for service_time.c."""
+
+from __future__ import annotations
 
 import csv
 import hashlib
@@ -14,6 +16,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_dashboard_watchface_manager as d
 import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as t
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-service-time-function-map.tsv"
@@ -42,6 +45,27 @@ STORED = [
     (0x4C9C6C,0x44A3B5),(0x543BDC,0x44A2B3),(0x5F9F10,0x44A2B3),
 ]
 PATH_REFS = [0x44A260, 0x44A33C]
+SOURCE = ROOT / "components/apollo_main/core_overlay/service_time.c"
+HEADER = ROOT / "components/apollo_main/core_overlay/service_time.h"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_SIZE = 12151
+SOURCE_SHA256 = "335417eaab9215e5d02021d14b0c79dd64a88831e8991712cdc3db0da73992b2"
+HEADER_SIZE = 1727
+HEADER_SHA256 = "26606854f8052a4c396518cfce513e235a401f53707a8f12894b1ae6d52f2141"
+PRODUCTION_FUNCTIONS = (
+    "open_cfw_service_time_epoch_to_calendar24",
+    "open_cfw_service_time_epoch_to_calendar_configured",
+    "open_cfw_service_time_epoch_to_calendar",
+    "open_cfw_service_time_calendar_to_epoch",
+    "open_cfw_service_time_calendar_to_epoch_wrapper",
+    "open_cfw_service_time_current_calendar_get",
+    "open_cfw_service_time_current_epoch_get",
+    "open_cfw_service_time_rtc_refresh",
+    "SVC_SystemTimeSync",
+    "RPC_SystemTimeSync",
+    "open_cfw_service_time_sync_callback",
+)
 
 
 def sh(value: bytes) -> str:
@@ -64,6 +88,115 @@ def _provenance() -> None:
     for marker in ("9.20 is therefore a practical lower bound", "9.60.2"):
         if marker not in iar:
             raise c.AuditError("IAR DLIB family assessment changed")
+
+
+def _validate_production() -> dict[str, object]:
+    source = SOURCE.read_bytes()
+    header = HEADER.read_bytes()
+    if (len(source), sh(source)) != (SOURCE_SIZE, SOURCE_SHA256):
+        raise c.AuditError("production service-time source changed")
+    if (len(header), sh(header)) != (HEADER_SIZE, HEADER_SHA256):
+        raise c.AuditError("production service-time header changed")
+
+    config = json.loads(OVERLAY.read_text())
+    leaves = {
+        item.get("function"): item for item in config["relocated_leaves"]
+        if item.get("function") in PRODUCTION_FUNCTIONS
+    }
+    if set(leaves) != set(PRODUCTION_FUNCTIONS):
+        raise c.AuditError("production service-time leaf inventory changed")
+    if any(
+        item.get("profiles") != ["apple-clang", "linux-clang"]
+        or item.get("strict_relocation_contract") is not True
+        or item.get("source", {}).get("path")
+            != "components/apollo_main/core_overlay/service_time.c"
+        or item["source"].get("size") != SOURCE_SIZE
+        or item["source"].get("sha256") != SOURCE_SHA256
+        or item.get("expected", {}).get("alignment") != 4
+        or item.get("toolchain_profiles", {}).get("linux-clang", {})
+            .get("expected", {}).get("alignment") != 4
+        for item in leaves.values()
+    ):
+        raise c.AuditError("production service-time leaf contract changed")
+
+    header_records = [
+        item for item in config["sources"]
+        if item.get("path")
+            == "components/apollo_main/core_overlay/service_time.h"
+    ]
+    if (
+        len(header_records) != 1
+        or header_records[0].get("license") != "MIT"
+        or header_records[0].get("size") != HEADER_SIZE
+        or header_records[0].get("sha256") != HEADER_SHA256
+        or {item["source"].get("license") for item in leaves.values()} != {"MIT"}
+    ):
+        raise c.AuditError("production service-time source admission changed")
+
+    apple_bytes = sum(item["expected"]["size"] for item in leaves.values())
+    linux_bytes = sum(
+        item["toolchain_profiles"]["linux-clang"]["expected"]["size"]
+        for item in leaves.values()
+    )
+    apple_relocations = sum(
+        len(item.get("relocations", [])) for item in leaves.values()
+    )
+    linux_relocations = sum(
+        len(item["toolchain_profiles"]["linux-clang"].get("relocations", []))
+        for item in leaves.values()
+    )
+    if (apple_bytes, linux_bytes, apple_relocations, linux_relocations) != (
+        1658, 1648, 27, 27
+    ):
+        raise c.AuditError("production service-time compiled closure changed")
+
+    patches = [
+        item for item in config["patch_sites"]
+        if item.get("name", "").startswith("replace_service_time_")
+    ]
+    if (
+        len(patches) != len(F)
+        or {item.get("runtime_address") for item in patches} != STARTS
+        or any(
+            item.get("profiles") != ["apple-clang", "linux-clang"]
+            or item.get("branch") != "b_w"
+            for item in patches
+        )
+    ):
+        raise c.AuditError("production service-time patch route changed")
+
+    report = json.loads(REPORT.read_text())
+    built = {
+        item.get("extraction", {}).get("function"): item
+        for item in report["relocated_leaves"]
+        if item.get("extraction", {}).get("function") in PRODUCTION_FUNCTIONS
+    }
+    if set(built) != set(PRODUCTION_FUNCTIONS) or any(
+        built[name]["extraction"].get("sha256")
+            != leaves[name]["expected"]["sha256"]
+        or built[name]["placement"].get("offset")
+            != leaves[name]["expected"]["offset"]
+        for name in PRODUCTION_FUNCTIONS
+    ):
+        raise c.AuditError("built service-time route changed")
+
+    validate_apollo_main_artifacts(ROOT, c.AuditError, "service time")
+    return {
+        "production_routed": True,
+        "source_routed_functions": len(PRODUCTION_FUNCTIONS),
+        "source_compiled_bytes": {
+            "apple-clang": apple_bytes,
+            "linux-clang": linux_bytes,
+        },
+        "strict_relocations": apple_relocations,
+        "stock_body_bytes_displaced": len(b"".join(
+            c._slice(IMAGE.read_bytes(), start, end) for start, end in F
+        )),
+        "retained_diagnostic_pool_bytes": POOL[1] - POOL[0],
+        "software_gap": False,
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "hardware_operations": [],
+    }
 
 
 def analyze(image: Path = IMAGE) -> dict:
@@ -155,10 +288,6 @@ def analyze(image: Path = IMAGE) -> dict:
     if t.literal_references(blob, 0x44A41C) != PATH_REFS:
         raise c.AuditError("retained-path references changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("service_time" in item.get("path", "").lower() for item in overlay["sources"])
-    if routed:
-        raise c.AuditError("unimplemented time service entered production overlay")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only raw-image closure; corpus-independent",
@@ -200,7 +329,12 @@ def analyze(image: Path = IMAGE) -> dict:
             "new_version_discriminator": False,
             "private_generating_commit_recoverable": False,
         },
-        "production": {"production_routed": False},
+        "production": _validate_production(),
+        "limitations": [
+            "the historical private first-party source and producing commit are unavailable",
+            "diagnostic-only EasyLogger calls are intentionally omitted from the production route",
+            "RTC, peer-role, transport, scheduler timing, and bilateral device qualification are blocked by unavailable physical evidence",
+        ],
     }
 
 

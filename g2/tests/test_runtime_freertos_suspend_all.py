@@ -923,12 +923,12 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                 len(self.production["overlay"]["patched_sites"]),
             ),
             (
-                362_272,
+                380_444,
                 (
-                    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+                    "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
                 ),
-                2_439,
-                2_327,
+                2_563,
+                2_448,
             ),
         )
         component = self.production["component"]
@@ -946,15 +946,15 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                 )
             },
             {
-                "size": 3_885_668,
+                "size": 3_903_840,
                 "sha256": (
-                    "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
+                    "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752"
                 ),
-                "generated_patch_site_bytes": 404_060,
-                "replaced_stock_function_bytes": 404_240,
-                "source_owned_bytes": 364_656,
-                "source_owned_in_place_bytes": 184,
-                "opaque_base_bytes": 3_116_920,
+                "generated_patch_site_bytes": 422_476,
+                "replaced_stock_function_bytes": 422_658,
+                "source_owned_bytes": 382_878,
+                "source_owned_in_place_bytes": 186,
+                "opaque_base_bytes": 3_098_454,
             },
         )
 
@@ -970,13 +970,13 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                 ),
                 "expected_size": 4_750_780,
                 "expected_sha256": (
-                    "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
+                    "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771"
                 ),
                 "profiles": {
                     "linux-clang": {
                         "expected_size": 4_750_764,
                         "expected_sha256": (
-                            "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559"
+                            "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0"
                         ),
                     },
                 },

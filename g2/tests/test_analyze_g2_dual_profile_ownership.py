@@ -19,10 +19,10 @@ ANALYZER = ROOT / "tools/analyze_g2_dual_profile_ownership.py"
 sys.path.insert(0, str(ROOT / "tools"))
 import open_cfw  # noqa: E402
 EVIDENCE = (
-    ROOT / "build/canonical-observation-g2-final9/apple-a/build-report.json",
-    ROOT / "build/canonical-observation-g2-final9/apple-b/build-report.json",
-    ROOT / "build/canonical-observation-g2-final9/linux-a/build-report.json",
-    ROOT / "build/canonical-observation-g2-final9/linux-b/build-report.json",
+    ROOT / "build/canonical-observation-g2-final97/apple-a/build-report.json",
+    ROOT / "build/canonical-observation-g2-final97/apple-b/build-report.json",
+    ROOT / "build/canonical-observation-g2-final97/linux-a/build-report.json",
+    ROOT / "build/canonical-observation-g2-final97/linux-b/build-report.json",
     ROOT / "components/bootloader/core_overlay/build/build-report.json",
     ROOT / "build/canonical-provider/linux-clang/apollo_bootloader/build-report.json",
     ROOT / "build/source/build-report.json",
@@ -130,12 +130,12 @@ class DualProfileObservationIndependenceTests(unittest.TestCase):
         analyzer = load_analyzer()
         expected = {
             "apple-clang": (
-                ROOT / "build/canonical-observation-g2-final9/apple-a/build-report.json",
-                ROOT / "build/canonical-observation-g2-final9/apple-b/build-report.json",
+                ROOT / "build/canonical-observation-g2-final97/apple-a/build-report.json",
+                ROOT / "build/canonical-observation-g2-final97/apple-b/build-report.json",
             ),
             "linux-clang": (
-                ROOT / "build/canonical-observation-g2-final9/linux-a/build-report.json",
-                ROOT / "build/canonical-observation-g2-final9/linux-b/build-report.json",
+                ROOT / "build/canonical-observation-g2-final97/linux-a/build-report.json",
+                ROOT / "build/canonical-observation-g2-final97/linux-b/build-report.json",
             ),
         }
         self.assertEqual(analyzer.OBSERVATIONS, expected)
@@ -341,17 +341,17 @@ class DualProfileOwnershipTests(unittest.TestCase):
     def test_checked_companion_conserves_both_profiles(self):
         expected = {
             "apple-clang": {
-                "production_source": 562151,
-                "generated_or_reconstructible": 414544,
+                "production_source": 574315,
+                "generated_or_reconstructible": 414650,
                 "candidate_source_not_routed": 29396,
-                "typed_retained_or_external": 3743745,
+                "typed_retained_or_external": 3731475,
                 "unclassified": 0,
             },
             "linux-clang": {
-                "production_source": 344453,
-                "generated_or_reconstructible": 331848,
+                "production_source": 356679,
+                "generated_or_reconstructible": 331908,
                 "candidate_source_not_routed": 29396,
-                "typed_retained_or_external": 4044123,
+                "typed_retained_or_external": 4031837,
                 "unclassified": 0,
             },
         }
@@ -385,13 +385,13 @@ class DualProfileOwnershipTests(unittest.TestCase):
     def test_linux_profile_coarse_label_error_is_not_accepted(self):
         row = self.report["profiles"]["linux-clang"]
         reconciliation = row["apollo_flash_label_reconciliation"]
-        self.assertEqual(reconciliation["bytes_requiring_reconciliation"], 3359246)
+        self.assertEqual(reconciliation["bytes_requiring_reconciliation"], 3346960)
         self.assertEqual(
             reconciliation["plan_minus_authoritative"],
             {
-                "source": 149006,
-                "generated_addressed": 3210240,
-                "retained": -3359246,
+                "source": 136780,
+                "generated_addressed": 3210180,
+                "retained": -3346960,
                 "component_container_metadata": 0,
             },
         )
@@ -410,7 +410,7 @@ class DualProfileOwnershipTests(unittest.TestCase):
         self.assertEqual(
             row["apollo_flash_label_reconciliation"]
             ["bytes_requiring_reconciliation"],
-            120246,
+            132410,
         )
         self.assertEqual(
             row["package"]["address_status_ownership_mode"],

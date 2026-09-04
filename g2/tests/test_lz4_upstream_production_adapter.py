@@ -42,12 +42,12 @@ MODE2_SHA256 = "d2a627965efb0521d9d82b99c176462388495b7e199696bf1a3eafceb619a450
 PROFILE_PINS = {
     "apple-clang": {
         "overlay": (
-            362272,
-            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+            380444,
+            "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622",
         ),
         "component": (
-            3885668,
-            "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5",
+            3903840,
+            "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752",
         ),
         "legacy": {
             "open_cfw_evenhub_mode2_decompress_legacy": {
@@ -67,16 +67,16 @@ PROFILE_PINS = {
                 "size": 30,
             },
         },
-        "accounting": (364656, 404060, 404240, 3116920),
+        "accounting": (382878, 422476, 422658, 3098454),
     },
     "linux-clang": {
         "overlay": (
-            147008,
-            "36dee8d3beebc0055456267ad068a9944a9eccc0bfec04f78603dd384709fab4",
+            165230,
+            "4c76c122789a49d49b0cf30a06cc62adc9c93936dd0c20df7b1d22e24f62169f",
         ),
         "component": (
-            3670404,
-            "c2d3fad0382523efb9aa3cfdf19e63e81dca9fdcecdc838e37cac5c48fde430f",
+            3688626,
+            "f1214b0388a3d9d10b278a58e5f992052786c33db14faad7c21ead607d825b76",
         ),
         "legacy": {
             "open_cfw_evenhub_mode2_decompress_legacy": {
@@ -96,7 +96,7 @@ PROFILE_PINS = {
                 "size": 30,
             },
         },
-        "accounting": (147192, 105954, 106134, 3417226),
+        "accounting": (165464, 124386, 124568, 3398744),
     },
 }
 

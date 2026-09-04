@@ -20,7 +20,7 @@ CLOSURE = ROOT / "tools/manifests/g2-at-nus-closure.tsv"
 PROVENANCE = ROOT / "tools/manifests/g2-at-nus-provenance.tsv"
 PINS = {
     FUNCTION_MAP: "ee8961ddbf0fdbb586de1347fdc2a1a6feeedea94ce8efda98509a0eb9f09dc6",
-    CLOSURE: "26b2f0566dce7c7a3144e1ffcb6f8dd58b4a326260bf2f72181f3a8893fa9489",
+    CLOSURE: "0a191202b3b7fe192eb711c9afe080a9c36b553d02a2d71398f1d85d65ded097",
     PROVENANCE: "d61b78f04114852cd5821b17b50b255fd81d02ad319beebe0ff7b0609f7e3157",
 }
 BODY = (0x005A5520, 0x005A552C)
@@ -161,9 +161,13 @@ def analyze(image_path: Path = IMAGE) -> dict:
     overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
     candidate = "components/apollo_main/core_overlay/at_nus.c"
     expected_patches = {
-        "replace_at_nus_handler": (
+        "replace_at_nus_handler_apple": (
             0x005A5520, 16, PHYSICAL_SHA256,
-            "open_cfw_at_nus_handler",
+            "open_cfw_at_nus_handler", ["apple-clang"],
+        ),
+        "replace_at_nus_handler_linux": (
+            0x005A5520, 16, PHYSICAL_SHA256,
+            "open_cfw_at_nus_handler_linux", ["linux-clang"],
         ),
     }
     patches = {
@@ -184,15 +188,22 @@ def analyze(image_path: Path = IMAGE) -> dict:
             or patches[name]["expected_sha256"] != digest
             or patches[name]["branch"] != "b_w"
             or patches[name]["target_function"] != target
-            or patches[name].get("profiles") != ["apple-clang"]
-            for name, (address, size, digest, target) in expected_patches.items()
+            or patches[name].get("profiles") != profiles
+            for name, (address, size, digest, target, profiles)
+            in expected_patches.items()
         )
-        or set(leaves) != {target for *_, target in expected_patches.values()}
+        or set(leaves) != {
+            target for *_prefix, target, _profiles in expected_patches.values()
+        }
         or any(
             leaf["source"]["sha256"]
-            != "0b297201dcd6d12b51000a7e8092bb7cbb99501157898a9d8908b0a4cd757fe0"
-            or leaf.get("profiles") != ["apple-clang"]
-            for leaf in leaves.values()
+            != "acc7eacdc2d064a62bfa9d4150ad5cf1b8e8130fee4616c0f2295bdba7469f06"
+            or leaf.get("profiles") != [profile]
+            or leaf.get("strict_relocation_contract") is not True
+            for profile, leaf in (
+                ("apple-clang", leaves.get("open_cfw_at_nus_handler", {})),
+                ("linux-clang", leaves.get("open_cfw_at_nus_handler_linux", {})),
+            )
         )
     ):
         raise AuditError("production AT^NUS routing changed")
@@ -225,10 +236,18 @@ def analyze(image_path: Path = IMAGE) -> dict:
             "candidate": "components/apollo_main/core_overlay/at_nus.c",
             "production_routed": True,
             "ownership_bytes": 16,
-            "source_inventory_available": False,
-            "toolchain_profiles": ["apple-clang"],
+            "source_inventory_available": True,
+            "historical_source_inventory_available": False,
+            "toolchain_profiles": ["apple-clang", "linux-clang"],
             "relocated_leaves": sorted(leaves),
             "patch_sites": sorted(patches),
+            "software_functional_gap": False,
+            "hardware_validation": "blocked by unavailable physical evidence",
+            "hardware_evidence_required": [
+                "authorized G2 command trace proving AT^NUS response bytes "
+                "and return behavior over the production eAT registry",
+            ],
+            "hardware_operations": [],
         },
     }
 

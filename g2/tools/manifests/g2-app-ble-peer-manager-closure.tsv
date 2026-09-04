@@ -22,4 +22,24 @@ stored_entry_pointers	0
 strict_interior_ingress	0
 third_party_dependency	none; G2-local Cordio application adapter
 historical_source_available	false
-production_routed	false
+source_candidate	components/apollo_main/core_overlay/app_ble_peer_manager.c
+source_bytes	7586
+source_sha256	067309c4726d1c396c953858fb7cbe55b27c4db0f7b0f814d20f2e8329abed69
+header	components/apollo_main/core_overlay/app_ble_peer_manager.h
+header_bytes	433
+header_sha256	5d2178ef7d7cf69806c447b536c819659da9d48241ef0ceee8d4bce3b580b83a
+production_profiles	apple-clang,linux-clang
+compiled_text_bytes_apple_clang	326
+compiled_text_bytes_linux_clang	326
+alignment_bytes_apple_clang	8
+alignment_bytes_linux_clang	12
+strict_relocations	17
+stock_body_bytes_displaced	446
+retained_stock_noncode_bytes	66
+production_routed	true
+ownership_bytes	446
+source_inventory	clean-room four-function source plus public header
+software_functional_gap	false
+hardware_validation	blocked by unavailable physical evidence
+hardware_evidence_required	authorized bonded G2/peer trace proving active/opening-peer disconnect completes deferred unpair and permits a fresh pairing; authorized disconnected-peer G2 trace proving immediate address-based unpair clears persistence without starting a connection
+hardware_operations	none

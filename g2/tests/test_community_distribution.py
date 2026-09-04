@@ -3260,14 +3260,14 @@ class CanonicalMaintainerWorkflowDocsTests(unittest.TestCase):
                 "--output-dir components/apollo_main/core_overlay/build",
                 "--output-dir .tmp-postapply-core-linux",
                 "cmp .tmp-postapply-core-linux/ota_s200_firmware_ota.bin",
-                "build/canonical-provider/linux-clang/apollo_main/ota_s200_firmware_ota.bin",
+                "build/canonical-provider/linux-clang/apollo_main-final81/ota_s200_firmware_ota.bin",
                 "authenticated profile-specific provider\npaths",
                 "same semantic manifest identity",
                 "scratch manifest would\nchange that identity",
                 "--output-dir build/postapply-package-apple",
                 "--output-dir build/postapply-package-linux",
                 "make dual-profile-ownership-write",
-                "build/canonical-observation-g2-final3/"
+                "build/canonical-observation-g2-final97/"
                 "{apple-a,apple-b,linux-a,linux-b}/",
                 "ignored, private local\nevidence",
                 "not Git inputs or community-archive members",

@@ -49,12 +49,28 @@ class AnalyzeG2AtNusTests(unittest.TestCase):
         )
         self.assertTrue(production["production_routed"])
         self.assertEqual(production["ownership_bytes"], 16)
-        self.assertFalse(production["source_inventory_available"])
-        self.assertEqual(production["toolchain_profiles"], ["apple-clang"])
+        self.assertTrue(production["source_inventory_available"])
+        self.assertFalse(production["historical_source_inventory_available"])
         self.assertEqual(
-            production["relocated_leaves"], ["open_cfw_at_nus_handler"]
+            production["toolchain_profiles"], ["apple-clang", "linux-clang"]
         )
-        self.assertEqual(production["patch_sites"], ["replace_at_nus_handler"])
+        self.assertEqual(
+            production["relocated_leaves"], [
+                "open_cfw_at_nus_handler",
+                "open_cfw_at_nus_handler_linux",
+            ]
+        )
+        self.assertEqual(production["patch_sites"], [
+            "replace_at_nus_handler_apple",
+            "replace_at_nus_handler_linux",
+        ])
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(
+            production["hardware_validation"],
+            "blocked by unavailable physical evidence",
+        )
+        self.assertEqual(production["hardware_operations"], [])
+        self.assertEqual(len(production["hardware_evidence_required"]), 1)
 
 
 if __name__ == "__main__":

@@ -160,17 +160,17 @@ PROFILES = {
         "alignment": 4,
         "overlay_name": "apollo_core_overlay.bin",
         "component_name": "ota_s200_firmware_ota.bin",
-        "overlay_size": 362272,
+        "overlay_size": 380444,
         "overlay_sha256": (
-            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+            "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
         ),
-        "component_size": 3885668,
+        "component_size": 3903840,
         "component_sha256": (
-            "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5"
+            "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752"
         ),
         "expected_component_size": 3956672,
         "expected_component_sha256": (
-            "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"
+            "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6"
         ),
         "overlay_base": 0x00794324,
         "provider_offset": 108456,
@@ -411,12 +411,12 @@ PROFILES = {
             },
         },
         "accounting": {
-            "generated_patch_site_bytes": 404_060,
+            "generated_patch_site_bytes": 422_476,
             "generated_wrapper_bytes": 32,
-            "opaque_base_bytes": 3_116_920,
-            "replaced_stock_function_bytes": 404_240,
-            "source_owned_bytes": 364_656,
-            "source_owned_in_place_bytes": 184,
+            "opaque_base_bytes": 3_098_454,
+            "replaced_stock_function_bytes": 422_658,
+            "source_owned_bytes": 382_878,
+            "source_owned_in_place_bytes": 186,
         },
     },
     "boot": {

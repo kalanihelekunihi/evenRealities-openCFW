@@ -72,8 +72,22 @@ class EvenAiTimerClosureTests(unittest.TestCase):
         self.assertFalse(boundary["new_version_discriminator"])
         self.assertEqual(self.report["identity"]["embedded_third_party_definitions"], [])
 
-    def test_not_production_routed(self) -> None:
-        self.assertFalse(self.report["production"]["production_routed"])
+    def test_production_route(self) -> None:
+        production = self.report["production"]
+        self.assertTrue(production["production_routed"])
+        self.assertEqual(production["source_functions"], 13)
+        self.assertEqual(
+            production["compiled_text_bytes"],
+            {"apple-clang": 502, "linux-clang": 502},
+        )
+        self.assertEqual(production["strict_relocations"], 22)
+        self.assertEqual(production["stock_replaced_bytes"], 856)
+        self.assertFalse(production["software_functional_gap"])
+        self.assertEqual(
+            production["hardware_validation"],
+            "blocked by unavailable physical evidence",
+        )
+        self.assertEqual(production["hardware_operations"], [])
 
 
 if __name__ == "__main__":

@@ -171,11 +171,11 @@ def audit() -> dict[str, Any]:
             (ENTRY, TARGET_SIZE, "source_compiled"),
             "source-owned device-configure boundary changed")
     retained = by_name[
-        "bootloader_mspi_device_configure_tail_42423c_and_piomixed_42488e_official"]
+        "bootloader_mspi_device_configure_unreachable_tail_42423c_42488e_official"]
     require((retained["target_address"], retained["size"],
              retained["address_status"]) ==
-            (ENTRY + TARGET_SIZE, 1850, "official_blob"),
-            "retained unreachable tail and successor boundary changed")
+            (ENTRY + TARGET_SIZE, 1618, "official_blob"),
+            "retained unreachable tail boundary changed")
     with tempfile.TemporaryDirectory(prefix="open-cfw-device-config-component-") as raw:
         subprocess.run(["python3", str(BUILDER), "--output-dir", raw], cwd=ROOT,
                        check=True, capture_output=True, text=True)
@@ -207,7 +207,9 @@ def audit() -> dict[str, Any]:
                        "next_frontier": END},
         "next_frontier": {"start": END, "end": 0x00424976,
                           "identity": "mspi_piomixed_configure", "bytes": 232,
-                          "status": "official_blob"},
+                          "source_compiled_bytes": 84,
+                          "retained_unreachable_tail_bytes": 148,
+                          "status": "source-compiled-with-retained-unreachable-tail"},
         "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_gate": {"blocking_condition":
                           "directed hardware testing is blocked by unavailable physical evidence",

@@ -103,10 +103,10 @@ SOURCE_ONLY = ["DmPrivReadPeerResolvableAddr","DmPrivReadLocalResolvableAddr","D
 SOURCE_PIN = (11_933, "a67468255d16729169f41910a44c8683cdc49005f828a6ae15b976f41014a1de")
 HEADER_PIN = (5_219, "d70e0f6c33637381e79a02bcff41335fee80c21905b5ae90336c29b19f0e3985")
 RUNTIME_TEST_PIN = (5_460, "90522091fb815e62ed8064278a101f86bbaab36ea7ac23d9168ce6cde6edda7a")
-PRODUCTION_OVERLAY = (362_272, "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae")
-PRODUCTION_COMPONENT = (3_956_672, "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef")
-PRODUCTION_PACKAGE = (4_750_780, "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27")
-PRODUCTION_FLASH_PLAN = (4_961_300, "f2625775d8a7b3c81c8862db00979cdcf4965eeb003e4b6b84e8cb2d8c1293b9")
+PRODUCTION_OVERLAY = (380_444, "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622")
+PRODUCTION_COMPONENT = (3_956_672, "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6")
+PRODUCTION_PACKAGE = (4_750_780, "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771")
+PRODUCTION_FLASH_PLAN = (5_485_925, "d931ff83e416a91a87f40690c1ed2dc65cee4ee7b1bdc8fb37eaf9cd2cf624ef")
 PRODUCTION_FUNCTIONS = [
     "open_cfw_cordio_dm_privacy_action_resolve",
     "open_cfw_cordio_dm_privacy_aes_resolve_complete",
@@ -238,7 +238,7 @@ def _verify_production() -> dict[str, Any]:
     counts = tuple(len(flash[key]) for key in (
         "flash_regions", "unresolved_flash_regions", "container_only_regions", "protected_regions"
     ))
-    if counts != (7104, 0, 8, 6):
+    if counts != (7822, 0, 8, 6):
         raise AuditError("dm_priv flash-plan counts changed")
     return {
         "status": "production-routed", "redirected_stock_functions": 21,

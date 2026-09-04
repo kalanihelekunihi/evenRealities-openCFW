@@ -15,7 +15,11 @@ void open_cfw_retained_at_nus_output(const char *response);
 #define OPEN_CFW_AT_NUS_RESPONSE \
     ((const char *)(uintptr_t)OPEN_CFW_AT_NUS_RESPONSE_ADDRESS)
 
-int open_cfw_at_nus_handler(void)
+#ifndef OPEN_CFW_AT_NUS_HANDLER_NAME
+#define OPEN_CFW_AT_NUS_HANDLER_NAME open_cfw_at_nus_handler
+#endif
+
+int OPEN_CFW_AT_NUS_HANDLER_NAME(void)
 {
     OPEN_CFW_AT_NUS_OUTPUT(OPEN_CFW_AT_NUS_RESPONSE);
     return 1;

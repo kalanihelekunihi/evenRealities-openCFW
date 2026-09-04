@@ -33,6 +33,17 @@ G2 = ROOT.parents[2]
 MANIFEST = ROOT / "service_audio_production_replay.json"
 SUFFIX_TOOL = G2 / "tools/analyze_g2_liblc3_service_audio_suffix_pack.py"
 ROUTE_BUILDER = ROOT / "build_service_audio_route_experiment.py"
+AT_FS_SUFFIX_NAMES = {
+    "open_cfw_at_fs_remove",
+    "open_cfw_at_fs_list_recursive",
+    "open_cfw_at_fs_list",
+    "open_cfw_at_fs_mkdir",
+}
+AT_FS_COMMAND_POINTERS = {
+    "open_cfw_at_fs_remove": 0x006C92B8,
+    "open_cfw_at_fs_list": 0x006C92C8,
+    "open_cfw_at_fs_mkdir": 0x006C92D8,
+}
 
 
 class ReplayError(RuntimeError):
@@ -80,7 +91,6 @@ PROTECTED_UPDATE_START = 0x007FE000
 # the core tail. Repack the resulting exact suffix so the LC3 table still
 # starts at its authenticated fixed address. The compact-log closure adds
 # exactly 1,106 aligned bytes to the previously admitted 11,698-byte suffix.
-APPLE_SUFFIX_SPAN = 15_310
 LC3_TABLE_START = 0x007EA620
 LC3_IMAGE_END = 0x007FDFA0
 
@@ -506,11 +516,20 @@ def _suffix_plan(config: dict[str, Any], report: dict[str, Any],
                 "packed": [], "rebased": {}, "relocations": []}
     config_leaves = {row["function"]: row
                      for row in config["relocated_leaves"]}
-    suffix, start, span = S._suffix(report, config_leaves, APPLE_SUFFIX_SPAN)
+    required_span = (
+        int(report["overlay"]["overlay_end_exclusive"]) - LC3_TABLE_START
+    )
+    suffix, start, span = S._suffix(report, config_leaves, required_span)
+    # The table boundary need not coincide with a function boundary.  Move the
+    # complete minimal strict suffix that covers it; _apply_suffix truncates at
+    # that suffix boundary and the image extension below leaves any resulting
+    # prefix interval erased before writing LC3 at its fixed address.
     require(
-        span == APPLE_SUFFIX_SPAN and start == LC3_TABLE_START,
-        "Apple suffix no longer opens the admitted LC3 start: "
-        f"span={span}, start=0x{start:08X}",
+        start <= LC3_TABLE_START
+        and span == int(report["overlay"]["overlay_end_exclusive"]) - start
+        and span >= required_span,
+        "Apple suffix no longer covers the admitted LC3 start: "
+        f"span={span}, required={required_span}, start=0x{start:08X}",
     )
     forbidden = S._host_forbidden_entries(proposal, component, bins)["forbidden"]
     packed = S.pack_suffix(suffix, bins, forbidden)
@@ -552,13 +571,30 @@ def _apply_suffix(component: bytes, report: dict[str, Any],
     suffix_names = set(placements)
     patches = [row for row in report["overlay"]["patched_sites"]
                if row.get("target_function") in suffix_names]
-    require(len(patches) == len(plan["suffix"]),
-            "suffix stock-entry patch count drift")
+    patch_names = {row["target_function"] for row in patches}
+    pointer_routed = suffix_names - patch_names
+    require(pointer_routed in (set(), AT_FS_SUFFIX_NAMES),
+            "suffix non-branch ingress set drift")
+    require(len(patches) + len(pointer_routed) == len(plan["suffix"]),
+            "suffix stock-entry/pointer ingress count drift")
     for patch in patches:
         target = placements[patch["target_function"]]
         replacement = A.encode_thumb_b_w(int(patch["runtime_address"]), target)
         replacement += b"\x00\xBF" * ((int(patch["expected_size"]) - 4) // 2)
         _runtime_write(image, int(patch["runtime_address"]), replacement)
+    command_rebases = []
+    if pointer_routed:
+        require(set(AT_FS_COMMAND_POINTERS) < pointer_routed,
+                "eAT filesystem suffix ingress is incomplete")
+        for function, pointer_address in AT_FS_COMMAND_POINTERS.items():
+            target = placements[function] | 1
+            _runtime_write(image, pointer_address, struct.pack("<I", target))
+            command_rebases.append({
+                "function": function,
+                "pointer_address": pointer_address,
+                "thumb_target": target,
+            })
+    plan["command_record_rebases"] = command_rebases
     for row in plan["packed"]:
         for item in row["items"]:
             _runtime_write(image, item["start"],
@@ -695,7 +731,9 @@ def route_component(*, manifest_path: Path = MANIFEST,
                        sum(int(row["size"]) for row in suffix["suffix"]),
                    "relocation_count": len(suffix["relocations"]),
                    "relocation_records_sha256":
-                       canonical_sha256(suffix["relocations"])},
+                       canonical_sha256(suffix["relocations"]),
+                   "command_record_rebases":
+                       suffix.get("command_record_rebases", [])},
         "target_runtime": runtime,
         "lc3_finalization": final,
         "service_audio_entry_guards": entry_guards,

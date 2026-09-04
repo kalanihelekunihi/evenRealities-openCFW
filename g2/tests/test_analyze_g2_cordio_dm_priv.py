@@ -61,7 +61,7 @@ class CordioDmPrivAuditTests(unittest.TestCase):
         )
         self.assertEqual(production["source_only_functions_compiled"], 4)
         self.assertEqual(production["manifest_regions"], 51)
-        self.assertEqual(production["flash_plan_counts"], (7_104, 0, 8, 6))
+        self.assertEqual(production["flash_plan_counts"], (7_822, 0, 8, 6))
 
 
 if __name__ == "__main__":

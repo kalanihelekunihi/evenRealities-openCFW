@@ -29,12 +29,12 @@ COMPANION = ROOT / "tools/manifests/g2-dual-profile-ownership.json"
 BASE_MANIFEST = ROOT / "manifests/g2-2.2.6.10.json"
 OBSERVATIONS = {
     "apple-clang": (
-        ROOT / "build/canonical-observation-g2-final9/apple-a/build-report.json",
-        ROOT / "build/canonical-observation-g2-final9/apple-b/build-report.json",
+        ROOT / "build/canonical-observation-g2-final97/apple-a/build-report.json",
+        ROOT / "build/canonical-observation-g2-final97/apple-b/build-report.json",
     ),
     "linux-clang": (
-        ROOT / "build/canonical-observation-g2-final9/linux-a/build-report.json",
-        ROOT / "build/canonical-observation-g2-final9/linux-b/build-report.json",
+        ROOT / "build/canonical-observation-g2-final97/linux-a/build-report.json",
+        ROOT / "build/canonical-observation-g2-final97/linux-b/build-report.json",
     ),
 }
 BOOT_REPORTS = {
@@ -68,7 +68,7 @@ APOLLO_PROVIDER_PATHS = {
             "ota_s200_bootloader.bin"
         ),
         "apollo_main": (
-            "build/canonical-provider/linux-clang/apollo_main/ota_s200_firmware_ota.bin"
+            "build/canonical-provider/linux-clang/apollo_main-final81/ota_s200_firmware_ota.bin"
         ),
     },
 }
@@ -285,7 +285,7 @@ def _canonical_main(
     source_digest = _digest(first_source.get("sha256"), f"{profile} source closure")
     _require(
         isinstance(first_source.get("entries"), list)
-        and len(first_source["entries"]) == 1252,
+        and len(first_source["entries"]) == 1287,
              f"{profile}: source-input entry count changed")
     _require(first.get("final") == second.get("final"),
              f"{profile}: A/B final identity differs")
@@ -793,7 +793,7 @@ def _observed() -> dict[str, Any]:
         raise OwnershipError(f"current canonical source closure: {error}") from error
     _require(
         isinstance(current_source_inputs.get("entries"), list)
-        and len(current_source_inputs["entries"]) == 1252,
+        and len(current_source_inputs["entries"]) == 1287,
         "current canonical source closure entry count changed",
     )
 

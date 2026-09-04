@@ -19,6 +19,15 @@ IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FM = ROOT / "tools/manifests/g2-service-algo-function-map.tsv"
 CL = ROOT / "tools/manifests/g2-service-algo-closure.tsv"
 PM = ROOT / "tools/manifests/g2-service-algo-provider-map.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/service_algo.c"
+HEADER = ROOT / "components/apollo_main/core_overlay/service_algo.h"
+SOURCE_PATH = "components/apollo_main/core_overlay/service_algo.c"
+HEADER_PATH = "components/apollo_main/core_overlay/service_algo.h"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
+SOURCE_MANIFEST = ROOT / "manifests/g2-2.2.6.10-core-source.json"
+SOURCE_PIN = (11663, "29d1fd5bde0b54d22dd7ec7c355ce76ee35baaf83b33006fe8646ebf329b0265")
+HEADER_PIN = (1431, "3bd1145adc91d431cd272d34378e045d2fa76d41e073d083758e83669952101c")
 PINS = {
     FM: "c10156f2111df6f073143bb57c9b4e87940b5510eb0b24010b25edad5734e89f",
     CL: "056aa96096da837dd70ee3bf51f754b792253c4e47a0e567a8a78673081499dc",
@@ -30,6 +39,22 @@ F = (
     (0x5918CC, 0x591BA4), (0x591BA4, 0x591BFC), (0x591BFC, 0x591C26),
     (0x591C26, 0x591C8C),
 )
+FUNCTIONS = (
+    "open_cfw_service_algo_front_buffer_get",
+    "algo_front_data_preprocess",
+    "SVC_SSRProcess",
+    "open_cfw_service_algo_quiet_nan",
+    "open_cfw_service_algo_float_hook",
+    "open_cfw_service_algo_delay_to_angle",
+    "open_cfw_service_algo_cross_correlation",
+    "open_cfw_service_algo_source_angle",
+    "open_cfw_service_algo_process",
+    "open_cfw_service_algo_energy_window_update",
+)
+APPLE_OFFSETS = (368332, 368360, 368972, 369212, 369228, 369236, 369876, 372620, 372780, 372848)
+APPLE_SIZES = (26, 610, 238, 16, 2, 640, 2744, 160, 68, 258)
+LINUX_OFFSETS = (153056, 153084, 153700, 153956, 153972, 153980, 154620, 157364, 157524, 157592)
+LINUX_SIZES = (26, 614, 256, 16, 2, 640, 2744, 160, 68, 248)
 PHYS = (0x5915DC, 0x591D14)
 STARTS = {start for start, _ in F}
 EASY = {0x43CE9E, 0x43D0CE, 0x43D574}
@@ -179,10 +204,97 @@ def analyze(image: Path = IMAGE) -> dict:
         if _cstring(blob, address) != expected:
             raise c.AuditError("audio algorithm symbol changed")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    routed = any("service_algo" in item.get("path", "").lower() for item in overlay["sources"])
-    if routed:
-        raise c.AuditError("unimplemented audio algorithm entered production overlay")
+    source = SOURCE.read_bytes()
+    header = HEADER.read_bytes()
+    if (len(source), sh(source)) != SOURCE_PIN or (len(header), sh(header)) != HEADER_PIN:
+        raise c.AuditError("production service-algorithm source changed")
+    source_text = source.decode("utf-8")
+    required_source_contract = (
+        "size != OPEN_CFW_SERVICE_ALGO_INPUT_BYTES",
+        "OPEN_CFW_SERVICE_ALGO_FRAMES 800u",
+        "OPEN_CFW_SERVICE_ALGO_ENERGY_WINDOWS 10u",
+        "for (lag = -maximum_lag; lag <= maximum_lag; ++lag)",
+        "open_cfw_service_algo_delay_to_angle",
+    )
+    combined_text = source_text + "\n" + header.decode("utf-8")
+    if any(token not in combined_text for token in required_source_contract):
+        raise c.AuditError("production service-algorithm contract changed")
+
+    overlay = json.loads(OVERLAY.read_text())
+    header_records = [item for item in overlay["sources"] if item.get("path") == HEADER_PATH]
+    if len(header_records) != 1 or (header_records[0].get("size"), header_records[0].get("sha256")) != HEADER_PIN:
+        raise c.AuditError("production service-algorithm header admission changed")
+    leaves = [
+        item for item in overlay["relocated_leaves"]
+        if item.get("source", {}).get("path") == SOURCE_PATH
+    ]
+    if tuple(item.get("function") for item in leaves) != FUNCTIONS:
+        raise c.AuditError("production service-algorithm leaf inventory changed")
+    if tuple(item["expected"]["offset"] for item in leaves) != APPLE_OFFSETS or tuple(item["expected"]["size"] for item in leaves) != APPLE_SIZES:
+        raise c.AuditError("Apple service-algorithm placement changed")
+    linux = [item.get("toolchain_profiles", {}).get("linux-clang", {}) for item in leaves]
+    if tuple(item.get("expected", {}).get("offset") for item in linux) != LINUX_OFFSETS or tuple(item.get("expected", {}).get("size") for item in linux) != LINUX_SIZES:
+        raise c.AuditError("Linux service-algorithm placement changed")
+    if sum(len(item.get("relocations", [])) for item in leaves) != 20 or sum(len(item.get("relocations", [])) for item in linux) != 20:
+        raise c.AuditError("service-algorithm relocation closure changed")
+    if any(
+        item.get("profiles") != ["apple-clang", "linux-clang"] or
+        item.get("strict_relocation_contract") is not True or
+        item.get("source", {}).get("license") != "MIT" or
+        (item.get("source", {}).get("size"), item.get("source", {}).get("sha256")) != SOURCE_PIN
+        for item in leaves
+    ):
+        raise c.AuditError("service-algorithm production policy changed")
+
+    patches = [item for item in overlay["patch_sites"] if item.get("name", "").startswith("replace_service_algo_")]
+    if len(patches) != 10:
+        raise c.AuditError("service-algorithm redirect count changed")
+    for index, (patch, bounds, function) in enumerate(zip(patches, F, FUNCTIONS), 1):
+        start, end = bounds
+        if (
+            patch.get("name") != f"replace_service_algo_{index:02d}" or
+            patch.get("runtime_address") != start or
+            patch.get("expected_size") != end - start or
+            patch.get("expected_sha256") != sh(c._slice(blob, start, end)) or
+            patch.get("target_function") != function or
+            patch.get("branch") != "b_w" or
+            patch.get("profiles") != ["apple-clang", "linux-clang"]
+        ):
+            raise c.AuditError(f"service-algorithm redirect {index:02d} changed")
+
+    report = json.loads(REPORT.read_text())
+    built = [
+        item for item in report["relocated_leaves"]
+        if item.get("source", {}).get("path") == SOURCE_PATH
+    ]
+    if (
+        report.get("toolchain", {}).get("profile") != "apple-clang" or
+        len(built) != 10 or
+        sum(item["extraction"]["size"] for item in built) != 4762 or
+        sum(item["placement"]["padding_before"] for item in built) != 14 or
+        sum(item["extraction"]["relocation_count"] for item in built) != 20
+    ):
+        raise c.AuditError("built service-algorithm leaf closure changed")
+
+    manifest = json.loads(SOURCE_MANIFEST.read_text())
+    tiled = []
+    for region in manifest["component_overrides"]["apollo_main"]["regions"]:
+        start = region.get("target_address")
+        if start is None:
+            continue
+        end = start + region.get("size", 0)
+        lo, hi = max(PHYS[0], start), min(PHYS[1], end)
+        if lo < hi:
+            tiled.append((lo, hi, region.get("address_status"), region.get("name")))
+    if len(tiled) != 25 or tiled[0][0] != PHYS[0] or tiled[-1][1] != PHYS[1] or any(a[1] != b[0] for a, b in zip(tiled, tiled[1:])):
+        raise c.AuditError("service-algorithm manifest tiling changed")
+    status_bytes = Counter()
+    status_regions = Counter()
+    for lo, hi, status, _ in tiled:
+        status_bytes[status] += hi - lo
+        status_regions[status] += 1
+    if status_bytes != Counter({"official_blob": 1808, "generated_source_data_replacement": 40}) or status_regions != Counter({"generated_source_data_replacement": 15, "official_blob": 10}):
+        raise c.AuditError("service-algorithm manifest ownership changed")
     return {
         "schema_version": 1,
         "analysis_mode": "read-only raw-image closure; corpus-independent",
@@ -195,7 +307,7 @@ def analyze(image: Path = IMAGE) -> dict:
         "surface": {
             "linked_functions": 10,
             "ghidra_discovered_functions": 10,
-            "restored_functions": 0,
+            "restored_functions": 10,
             "path_anchored_functions": 2,
             "raw_path_references": 3,
             "raw_path_referencing_functions": 2,
@@ -213,8 +325,10 @@ def analyze(image: Path = IMAGE) -> dict:
         "behavior": {
             "stereo_frame_count": 800,
             "required_input_bytes": 3200,
-            "implemented_size_check": "non-null, four-byte aligned, and <= 3200",
-            "short_aligned_input_is_accepted_but_read_as_3200_bytes": True,
+            "stock_size_check": "non-null, four-byte aligned, and <= 3200",
+            "stock_short_aligned_input_is_accepted_but_read_as_3200_bytes": True,
+            "production_size_check": "non-null and exactly 3200 bytes",
+            "production_short_input_rejected": True,
             "rolling_energy_windows": 10,
             "correlation_lag_min": -10,
             "correlation_lag_max": 10,
@@ -232,7 +346,25 @@ def analyze(image: Path = IMAGE) -> dict:
             "new_version_discriminator": False,
             "private_generating_commit_recoverable": False,
         },
-        "production": {"production_routed": False},
+        "production": {
+            "source_admitted": True,
+            "production_routed": True,
+            "candidate": SOURCE_PATH,
+            "source_functions": 10,
+            "compiled_text_bytes": 4762,
+            "linux_compiled_text_bytes": 4774,
+            "generated_alignment_bytes": 14,
+            "linux_generated_alignment_bytes": 12,
+            "strict_relocations": 20,
+            "guarded_redirects": 10,
+            "functionally_displaced_stock_body_bytes": 1712,
+            "manifest_changed_entry_bytes": 40,
+            "physically_retained_compatibility_bytes": 1808,
+            "retained_literal_pool_bytes": 136,
+            "software_functional_gap": False,
+            "hardware_validation": "blocked by unavailable physical evidence",
+            "hardware_blocker": "Acoustic equivalence, G2 microphone spacing/polarity, and live lag-to-angle behavior require an authorized physical G2 pair or authenticated golden microphone vectors; validation is blocked by unavailable physical evidence.",
+        },
     }
 
 

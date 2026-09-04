@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_ux_system as common
 import recover_apollo_embedded_source_paths as thumb
+from apollo_artifact_consistency import validate_apollo_main_artifacts
 
 
 AuditError = common.AuditError
@@ -22,6 +23,10 @@ IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 FUNCTION_MAP = ROOT / "tools/manifests/g2-teleprompt-file-list-function-map.tsv"
 CLOSURE = ROOT / "tools/manifests/g2-teleprompt-file-list-closure.tsv"
 PROVIDER_MAP = ROOT / "tools/manifests/g2-teleprompt-file-list-provider-map.tsv"
+SOURCE = ROOT / "components/apollo_main/core_overlay/teleprompt_file_list.c"
+HEADER = ROOT / "components/apollo_main/core_overlay/teleprompt_file_list.h"
+OVERLAY = ROOT / "components/apollo_main/core_overlay/overlay.json"
+REPORT = ROOT / "components/apollo_main/core_overlay/build/build-report.json"
 INPUT_PINS = {
     FUNCTION_MAP: "b616ae850073917011964f2433f274b68a78bf106d54cc9da7c7972ce8f26e26",
     CLOSURE: "bfcd5d0668b0a0211f6850265e0e1f7d870c6f4cd0006d3fb211c7489982aca5",
@@ -73,6 +78,15 @@ ENTRIES = [
 ENTRY_DIGEST = "5df4c69f7dfbf07b41058957584b24d26904005568f4ff77db48731dfc69a809"
 GLOBAL = 0x2010_93D4
 RECORD_BYTES = 0xF52
+SOURCE_SIZE = 2551
+SOURCE_SHA256 = "5887f4353ef6569e989ab6280f5e65a8f3f926c96944be94bf06decf4b7c0565"
+HEADER_SIZE = 607
+HEADER_SHA256 = "c13ece03341385a955da40158807504f8ea82988bfed26a4be5840c2c6a0d781"
+PRODUCTION_FUNCTIONS = (
+    "open_cfw_teleprompt_file_list_update",
+    "open_cfw_teleprompt_file_list_get",
+    "open_cfw_teleprompt_file_list_reset",
+)
 STRINGS = {
     PATH_RUN: RETAINED_PATH,
     0x0078_3DFC: "file_list is NULL",
@@ -86,6 +100,114 @@ STRINGS = {
 
 def _sha256(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
+
+
+def _validate_production() -> dict[str, object]:
+    source = SOURCE.read_bytes()
+    header = HEADER.read_bytes()
+    if (len(source), _sha256(source)) != (SOURCE_SIZE, SOURCE_SHA256):
+        raise AuditError("production teleprompt file-list source changed")
+    if (len(header), _sha256(header)) != (HEADER_SIZE, HEADER_SHA256):
+        raise AuditError("production teleprompt file-list header changed")
+
+    config = json.loads(OVERLAY.read_text())
+    leaves = {
+        item.get("function"): item for item in config["relocated_leaves"]
+        if item.get("function") in PRODUCTION_FUNCTIONS
+    }
+    if set(leaves) != set(PRODUCTION_FUNCTIONS):
+        raise AuditError("production teleprompt file-list leaf inventory changed")
+    if any(
+        item.get("profiles") != ["apple-clang", "linux-clang"]
+        or item.get("strict_relocation_contract") is not True
+        or item.get("source", {}).get("path")
+            != "components/apollo_main/core_overlay/teleprompt_file_list.c"
+        or item["source"].get("size") != SOURCE_SIZE
+        or item["source"].get("sha256") != SOURCE_SHA256
+        or item.get("expected", {}).get("alignment") != 4
+        or item.get("toolchain_profiles", {}).get("linux-clang", {})
+            .get("expected", {}).get("alignment") != 4
+        for item in leaves.values()
+    ):
+        raise AuditError("production teleprompt file-list leaf contract changed")
+
+    header_records = [
+        item for item in config["sources"]
+        if item.get("path")
+            == "components/apollo_main/core_overlay/teleprompt_file_list.h"
+    ]
+    if (
+        len(header_records) != 1
+        or header_records[0].get("license") != "MIT"
+        or header_records[0].get("size") != HEADER_SIZE
+        or header_records[0].get("sha256") != HEADER_SHA256
+        or {item["source"].get("license") for item in leaves.values()} != {"MIT"}
+    ):
+        raise AuditError("production teleprompt file-list source admission changed")
+
+    apple_bytes = sum(item["expected"]["size"] for item in leaves.values())
+    linux_bytes = sum(
+        item["toolchain_profiles"]["linux-clang"]["expected"]["size"]
+        for item in leaves.values()
+    )
+    apple_relocations = sum(
+        len(item.get("relocations", [])) for item in leaves.values()
+    )
+    linux_relocations = sum(
+        len(item["toolchain_profiles"]["linux-clang"].get("relocations", []))
+        for item in leaves.values()
+    )
+    if (
+        apple_bytes, linux_bytes, apple_relocations, linux_relocations
+    ) != (52, 52, 2, 2):
+        raise AuditError("production teleprompt file-list compiled closure changed")
+
+    patches = [
+        item for item in config["patch_sites"]
+        if item.get("name", "").startswith("replace_teleprompt_file_list_")
+    ]
+    if (
+        len(patches) != len(FUNCTIONS)
+        or {item.get("runtime_address") for item in patches}
+            != {start for start, _end in FUNCTIONS}
+        or any(
+            item.get("profiles") != ["apple-clang", "linux-clang"]
+            or item.get("branch") != "b_w"
+            for item in patches
+        )
+    ):
+        raise AuditError("production teleprompt file-list patch route changed")
+
+    report = json.loads(REPORT.read_text())
+    built = {
+        item.get("extraction", {}).get("function"): item
+        for item in report["relocated_leaves"]
+        if item.get("extraction", {}).get("function") in PRODUCTION_FUNCTIONS
+    }
+    if set(built) != set(PRODUCTION_FUNCTIONS) or any(
+        built[name]["extraction"].get("sha256")
+            != leaves[name]["expected"]["sha256"]
+        or built[name]["placement"].get("offset")
+            != leaves[name]["expected"]["offset"]
+        for name in PRODUCTION_FUNCTIONS
+    ):
+        raise AuditError("built teleprompt file-list route changed")
+
+    validate_apollo_main_artifacts(ROOT, AuditError, "teleprompt file-list")
+    return {
+        "production_routed": True,
+        "source_routed_functions": len(PRODUCTION_FUNCTIONS),
+        "source_compiled_bytes": {
+            "apple-clang": apple_bytes,
+            "linux-clang": linux_bytes,
+        },
+        "strict_relocations": apple_relocations,
+        "stock_body_bytes_displaced": BODY_BYTES,
+        "retained_diagnostic_pool_bytes": POOL[1] - POOL[0],
+        "software_gap": False,
+        "hardware_validation": "blocked by unavailable physical evidence",
+        "hardware_operations": [],
+    }
 
 
 def analyze(image: Path = IMAGE) -> dict[str, object]:
@@ -181,14 +303,6 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
     if stored:
         raise AuditError("unexpected stored file-list entry pointer")
 
-    overlay = json.loads((ROOT / "components/apollo_main/core_overlay/overlay.json").read_text())
-    production_routes = [
-        site
-        for site in overlay.get("patch_sites", [])
-        if PHYSICAL[0] <= site.get("runtime_address", -1) < PHYSICAL[1]
-    ]
-    if production_routes:
-        raise AuditError("file-list object unexpectedly became production-routed")
     counts = Counter(target for _, target in calls)
     return {
         "schema_version": 1,
@@ -237,10 +351,11 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
             "nanopb_direct_calls": 0,
             "new_version_discriminator": False,
         },
-        "production": {"production_routed": False},
+        "production": _validate_production(),
         "limitations": [
-            "the first-party source, schema declaration, and producing commit are unavailable",
+            "the historical first-party source, schema declaration, and producing commit are unavailable",
             "this storage object does not itself decode nanopb; schema decoding remains in the caller/provider object",
+            "end-to-end device qualification is blocked by unavailable physical evidence",
         ],
     }
 

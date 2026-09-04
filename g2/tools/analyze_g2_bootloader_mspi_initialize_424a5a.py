@@ -137,10 +137,10 @@ def audit() -> dict:
     require((routed["target_address"], routed["size"],
              routed["address_status"]) == (ENTRY, COMPILED_SIZE, "source_compiled"),
             "source-owned initializer boundary changed")
-    retained = by_name["bootloader_opaque_after_easylogger_transport"]
+    retained = by_name["bootloader_mspi_initialize_literal_424aea_opaque"]
     require((retained["target_address"], retained["size"],
-             retained["address_status"]) == (ENTRY + COMPILED_SIZE, 6740, "official_blob"),
-            "retained official MSPI boundary changed")
+             retained["address_status"]) == (ENTRY + COMPILED_SIZE, 62, "official_blob"),
+            "retained initializer literal boundary changed")
     with tempfile.TemporaryDirectory(prefix="open-cfw-mspi-initialize-component-") as raw:
         subprocess.run(["python3", str(BUILDER), "--output-dir", raw], cwd=ROOT,
                        check=True, capture_output=True, text=True)
@@ -168,7 +168,9 @@ def audit() -> dict:
                        "next_frontier": ENTRY + COMPILED_SIZE},
         "next_code_frontier": {"start": 0x00424AF0, "end": 0x00424BD4,
                                "identity": "am_hal_mspi_configure", "bytes": 228,
-                               "status": "official_blob"},
+                               "source_compiled_bytes": 152,
+                               "retained_literal_bytes": 76,
+                               "status": "source-compiled-with-retained-literals"},
         "hardware_validation": "blocked by unavailable physical evidence",
         "hardware_operations": [],
     }

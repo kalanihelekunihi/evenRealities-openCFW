@@ -29,9 +29,9 @@ The current 166-input completion assessment reports
 `source_complete=false`, `release_authorized=false`, hardware validation
 blocked by unavailable physical evidence, and `hardware_operations=[]`. Its canonical
 Apple package contains 4,749,836 payload bytes (4,750,780 bytes with the
-EVENOTA envelope), of which 3,776,765 are release-blocking. All bytes are
+EVENOTA envelope), of which 3,760,871 are release-blocking. All bytes are
 classified, but all six binary redistribution authorities in the table above
-remain unresolved. The source audit independently reports 891 distributable
+remain unresolved. The source audit independently reports 930 distributable
 source files with zero metadata errors, and the project-wide MIT/upstream
 normalization census covers 919 targets. None of those source results grants
 permission to redistribute retained or binary-only firmware.
@@ -102,17 +102,17 @@ tree or stock-bearing build output redistributable.
 ## Compiled source inventory
 
 At the time of this audit, the two overlays, including the PT post-link
-provider's exact source/header records, form an inventory reference 891 unique,
+provider's exact source/header records, form an inventory reference 930 unique,
 content-addressed source files. The live audit
 derives overlay records from `sources`, `isolated_leaves`,
 `in_place_leaves`, and `relocated_leaves`, checks each file hash, checks the
 declared license identifier, authenticates the exact mapped license-text bytes,
 rejects conflicting duplicate identity/license metadata, and independently
-enforces the authenticated 459-row project-owned MIT census.
+enforces the authenticated 460-row project-owned MIT census.
 
 | Declared license | Unique files |
 |---|---:|
-| MIT | 648 |
+| MIT | 687 |
 | Apache-2.0 | 81 |
 | BSD-3-Clause | 132 |
 | Zlib | 27 |
@@ -120,7 +120,7 @@ enforces the authenticated 459-row project-owned MIT census.
 | GPL-3.0-only | 1 |
 
 All current compiled-overlay source records are license-metadata clean. The overlay inventory
-contains 648 MIT records in total. All 460 exact project-owned policy rows are
+contains 687 MIT records in total. All 460 exact project-owned policy rows are
 normalized to MIT with no pending GPL-only project record.
 The sole GPL source is the authenticated g2flash `ring_gesture.c`. InvenSense
 EDMP headers carrying dense payload bytes or an express-license-only
@@ -140,7 +140,7 @@ distributed controller/build
 adapter tranche is exhaustive over 112 C, header, assembly, and Python files:
 109 project-authored paths with an SPDX MIT option and three Touch CAT2/Cortex-M
 adaptations that correctly remain Apache-2.0. This community census does not
-change the 891-file compiled overlay inventory above.
+change the 930-file compiled overlay inventory above.
 It also includes the six-file open Touch source-image package, its MIT proof
 analyzer, and two focused MIT tests; these remain software-only source
 artifacts and do not alter the official Touch payload or its redistribution

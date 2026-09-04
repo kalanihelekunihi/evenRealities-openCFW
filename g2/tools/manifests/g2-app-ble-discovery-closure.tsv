@@ -23,4 +23,24 @@ stored_entry_pointer_digest	6c84b02361a59c714618cb7adbddbc9e4ab5c72cce37a1a157a8
 strict_interior_ingress	0
 third_party_dependency	none; G2-local Cordio discovery policy adapter
 historical_source_available	false
-production_routed	false
+source_candidate	components/apollo_main/core_overlay/app_ble_discovery.c
+source_bytes	13592
+source_sha256	6ea54444af63e40f19c1b0345d70dca22b37034f2efdb83c4954bc0f368f2569
+header	components/apollo_main/core_overlay/app_ble_discovery.h
+header_bytes	778
+header_sha256	e3d76c53e8c5bbbf523f5675602dda8c60463fca63414f4ae4700fcd3b3dda93
+production_profiles	apple-clang,linux-clang
+compiled_text_bytes_apple_clang	516
+compiled_text_bytes_linux_clang	516
+alignment_bytes_apple_clang	0
+alignment_bytes_linux_clang	0
+strict_relocations	23
+stock_body_bytes_displaced	2962
+retained_stock_noncode_bytes	762
+production_routed	true
+ownership_bytes	2962
+source_inventory	clean-room two-function source plus public header
+software_functional_gap	false
+hardware_validation	blocked by unavailable physical evidence
+hardware_evidence_required	authorized paired phone and ring traces proving role-aware database-hash, GATT, Ring, optional ANCS, configuration, failure, and completion sequencing; authorized disconnect/reconnect trace proving discovery attempt state is reset without stale handles
+hardware_operations	none

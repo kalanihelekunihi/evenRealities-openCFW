@@ -266,12 +266,12 @@ PRODUCTION_BUILD_PROFILES = {
         ),
         "main_component": (
             3_956_672,
-            "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
+            "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
         ),
         "package_artifacts": {
             "package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin": (
                 4_750_780,
-                "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27",
+                "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771",
             ),
         },
     },
@@ -282,12 +282,12 @@ PRODUCTION_BUILD_PROFILES = {
         ),
         "main_component": (
             3_956_672,
-            "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a",
+            "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
         ),
         "package_artifacts": {
             "package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin": (
                 4_750_764,
-                "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559",
+                "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
             ),
         },
     },

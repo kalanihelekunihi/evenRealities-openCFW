@@ -69,10 +69,10 @@ class ApolloCoreOverlayTests(unittest.TestCase):
     def test_overlay_and_complete_component_are_pinned(self) -> None:
         overlay = self.component_report["overlay"]
         component = self.component_report["component"]
-        self.assertEqual(overlay["size"], 365824)
+        self.assertEqual(overlay["size"], 380444)
         self.assertEqual(
             overlay["sha256"],
-            "45092489ddbead9691d4065213a61aeb1ca5b34efc2a352c968c4170ccd9e9fd",
+            "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622",
         )
         expected_legacy_functions = {
                 "evenhub_longpress": {"offset": 0, "size": 54},
@@ -2718,25 +2718,25 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     separators=(",", ":"),
                 ).encode("utf-8")
             ).hexdigest(),
-            "12b429b4169d736d6b137e0459eefc5ca5220718a663a06409e107aadf60850d",
+            "8ad2c8a51fd8cd6c86b775c58c14207c334715df230a8fb0395fc94e07cb71d9",
         )
         self.assertEqual(overlay["link"]["text_size"], 109592)
         self.assertEqual(overlay["link"]["rodata_size"], 3996)
         self.assertEqual(overlay["link"]["resolved_relocation_count"], 906)
-        self.assertEqual(len(overlay["functions"]), 2472)
-        self.assertEqual(len(overlay["patched_sites"]), 2361)
-        self.assertEqual(component["replaced_stock_function_bytes"], 419518)
-        self.assertEqual(component["generated_patch_site_bytes"], 396010)
+        self.assertEqual(len(overlay["functions"]), 2563)
+        self.assertEqual(len(overlay["patched_sites"]), 2448)
+        self.assertEqual(component["replaced_stock_function_bytes"], 434040)
+        self.assertEqual(component["generated_patch_site_bytes"], 395910)
         self.assertEqual(component["generated_wrapper_bytes"], 32)
-        self.assertEqual(component["source_owned_in_place_bytes"], 184)
-        self.assertEqual(component["source_owned_in_place_data_bytes"], 2200)
-        self.assertEqual(component["replaced_stock_data_bytes"], 7118)
-        self.assertEqual(component["source_owned_bytes"], 499462)
-        self.assertEqual(component["opaque_base_bytes"], 3061168)
+        self.assertEqual(component["source_owned_in_place_bytes"], 186)
+        self.assertEqual(component["source_owned_in_place_data_bytes"], 2248)
+        self.assertEqual(component["replaced_stock_data_bytes"], 7166)
+        self.assertEqual(component["source_owned_bytes"], 514132)
+        self.assertEqual(component["opaque_base_bytes"], 3046598)
         self.assertEqual(component["size"], 3956672)
         self.assertEqual(
             component["sha256"],
-            "78eca5222c333c5fd3793608d67aad476ecac911f6e15164feeb2e1009944826",
+            "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
         )
 
     def test_freertos_semaphore_take_upstream_pair_is_source_closed(self) -> None:
@@ -3103,7 +3103,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     self.assertEqual(
                         self.component_report["canonical_stages"]
                         ["liblc3_service_audio"]["suffix"]["count"],
-                        117,
+                        208,
                     )
                 else:
                     self.assertEqual(
@@ -4479,7 +4479,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         config = apollo_overlay.load_config(
             COMPONENT_ROOT / "overlay.json"
         )
-        self.assertEqual(len(config["sources"]), 297)
+        self.assertEqual(len(config["sources"]), 315)
 
     def test_upstream_list_and_littlefs_leaf_increment_is_pinned(
         self,
@@ -4819,33 +4819,33 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (2476, 2364, 1907),
+            (2568, 2452, 1999),
         )
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 365824,
+                "overlay_size": 380444,
                 "overlay_sha256": (
-                    "45092489ddbead9691d4065213a61aeb1ca5b34efc2a352c968c4170ccd9e9fd"
+                    "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
                 ),
                 "component_size": 3956672,
                 "component_sha256": (
-                    "78eca5222c333c5fd3793608d67aad476ecac911f6e15164feeb2e1009944826"
+                    "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6"
                 ),
             },
         )
         self.assertEqual(
             config["toolchain_profiles"]["linux-clang"]["expected"],
             {
-                "overlay_size": 158144,
+                "overlay_size": 172828,
                 "overlay_sha256": (
-                    "edb8e0a69d13b7c54ac77470d17d2d0"
-                    "5b28d2ea262e599d6fe0ca469f64d7e7f"
+                    "13a12b7fc7ec3af866d4ebe9229105ce"
+                    "923d6842ec6e8c4b0e01564582ed8ab1"
                 ),
                 "component_size": 3956672,
                 "component_sha256": (
-                    "821875b74af0016e41dfb564a5370c32"
-                    "a30c5215077db5708fd9066af798328f"
+                    "dbfc7bbf1462166b04fb962e9e639ba2"
+                    "296c84a6e0b4f6f22d7ae5e321efc0e6"
                 ),
             },
         )
@@ -71853,7 +71853,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             (
                 "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
                 4_750_780,
-                "3929fdde5ab5520683fdac9393fc3abc322b2eccc3e203c44df544071945c858",
+                "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771",
             ),
         )
         self.assertEqual(len(self.image), package["expected_size"])
@@ -71875,12 +71875,12 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             ),
             (
                 3_956_672,
-                "78eca5222c333c5fd3793608d67aad476ecac911f6e15164feeb2e1009944826",
+                "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
                 3_523_396,
             ),
         )
         regions = main["regions"]
-        self.assertEqual(len(regions), 6_269)
+        self.assertEqual(len(regions), 6_823)
         cursor = 0
         for region in regions:
             self.assertEqual(region["file_offset"], cursor)
@@ -71901,7 +71901,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
             hashlib.sha256(
                 json.dumps(projection, separators=(",", ":")).encode()
             ).hexdigest(),
-            "d563fa27e5acc219388acf62fef2260d99453ccb39279c49479a317370eca701",
+            "53387be483d0bfa28c83a2a56d5301f91d648975a3b13e5551777b76d144695c",
         )
 
         flash_regions, unresolved, container, _ = open_cfw.plan_regions(
@@ -71928,8 +71928,8 @@ class ApolloCoreOverlayTests(unittest.TestCase):
         self.assertEqual(
             (len(plan_bytes), hashlib.sha256(plan_bytes).hexdigest()),
             (
-                5_082_692,
-                "92eacdf8f30db7dde5c92dc70c270b8ddd77bcd7b0de2e8a64872302b8df500f",
+                5_485_925,
+                "d931ff83e416a91a87f40690c1ed2dc65cee4ee7b1bdc8fb37eaf9cd2cf624ef",
             ),
         )
         # Shared build/source output may be retained from an earlier build and
@@ -71950,7 +71950,7 @@ class ApolloCoreOverlayTests(unittest.TestCase):
                     "protected_regions",
                 )
             ),
-            (7_268, 0, 8, 6),
+            (7_822, 0, 8, 6),
         )
 
 

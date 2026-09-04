@@ -42,23 +42,23 @@ class ApolloOriginAccountingTests(unittest.TestCase):
     @unittest.skipUnless(CORPUS.is_dir() and PLAN.is_file() and REPORT.is_file(), "authenticated corpus/current build unavailable")
     def test_authenticated_origin_accounting(self):
         report = self.analyzer.analyze(PLAN, REPORT, CORPUS)
-        self.assertEqual(report["component_accounting"]["opaque_base_bytes"], 3061168)
-        self.assertEqual(report["flash_plan_metadata_gap"]["controlled_bytes_mislabeled_official_blob"], 21544)
-        self.assertEqual(report["flash_plan_metadata_gap"]["conservative_retained_delta_bytes"], 16)
-        self.assertEqual(sum(report["opaque_origin_lower_bounds"].values()), 3061168)
+        self.assertEqual(report["component_accounting"]["opaque_base_bytes"], 3046598)
+        self.assertEqual(report["flash_plan_metadata_gap"]["controlled_bytes_mislabeled_official_blob"], 34192)
+        self.assertEqual(report["flash_plan_metadata_gap"]["conservative_retained_delta_bytes"], 0)
+        self.assertEqual(sum(report["opaque_origin_lower_bounds"].values()), 3046598)
         self.assertEqual(sum(report["third_party_path_anchored_bytes_by_family"].values()), 86364)
         self.assertEqual(len(report["ghidra_envelopes"]["rejected_oversized"]), 8)
         self.assertEqual(report["release_readiness_partition"], {
             "candidate_source_not_routed": 0,
-            "typed_retained_or_external": 3061168,
+            "typed_retained_or_external": 3046598,
         })
         self.assertEqual(report["unanchored_frontier_partition"]
-                         ["typed_retained_unanchored_without_candidate"], 596170)
+                         ["typed_retained_unanchored_without_candidate"], 591115)
         self.assertEqual(
             sum(report["unanchored_frontier_partition"][key] for key in
                 ("candidate_source_not_routed",
                  "typed_retained_unanchored_without_candidate")),
-            596170,
+            591115,
         )
         self.assertEqual(
             report["unanchored_frontier_partition"]

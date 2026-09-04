@@ -1,7 +1,7 @@
 # G2 distortion-test screen recovery
 
-Status: complete linked-object census and fail-closed behavioral analysis; no
-historical source candidate and not production-routed. Run addresses use
+Status: complete linked-object census, clean-room C implementation, and
+dual-profile production route. Run addresses use
 `run = file_offset + 0x00437FE0`.
 
 ## Result
@@ -48,15 +48,25 @@ predicate returns one for every input.
 
 The UI handler constructs the screen only for event `2`; event `3` is
 recognized but remains a no-op. Construction creates a 640 by 480 root at
-`0x2007487C`, builds three nested LVGL objects, clears four style properties,
-and lays out two resource-backed text/image children using
+`0x2007487C`, a 574 by 206 frame at `(0,50)`, and nested column/row flex
+containers. It reproduces the root style group, all six distinct frame style
+clears, two additional complete frame style groups, and the style group on
+each flex container. The row contains the retained image asset and two
+localized labels using
 `ID_DASHBOARD_CALENDAR_BLUETOOTH_DISCONNECTED_1` and `_2`. The root is also
 published to the registration state field at `0x20003068`. Every other event
 returns zero without changing the tree.
 
-No authenticated historical source or license is available. There is no
-clean-room source candidate, the object is absent from `overlay.json`, and it
-claims zero package ownership bytes. `tools/analyze_g2_pdt_distortion_test.py`
-pins the official image, four function bodies, literal pool, physical object,
-registration record, retained strings and resource IDs, adjacent-object
-boundary evidence, direct calls, stored entries, and strict-interior absence.
+No authenticated historical source or license is available. The clean-room MIT
+implementation in `components/apollo_main/core_overlay/pdt_distortion_test.c`
+replaces all 850 executable stock bytes through four guarded redirects in both
+admitted compiler profiles while retaining the authenticated 46-byte literal
+pool. `tools/analyze_g2_pdt_distortion_test.py` pins the official image, source
+and header, four function bodies, literal pool, physical object, registration
+record, retained strings and resource IDs, adjacent-object boundary evidence,
+direct calls, stored entries, strict-interior absence, 86 strict relocations,
+compiled leaves and routed text, component identities, manifest ownership, and
+exact dual-profile routes. Live rendering remains blocked by unavailable
+physical evidence: the missing evidence is an authorized G2 panel trace
+confirming the recovered 640x480 root, 574x206 frame at `(0,50)`, nested flex
+layout, image asset, and both localized resource labels.

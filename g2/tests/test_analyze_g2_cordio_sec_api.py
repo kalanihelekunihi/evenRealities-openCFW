@@ -38,7 +38,7 @@ class CordioSecApiClosureTests(unittest.TestCase):
             "alignment_bytes": 16,
             "strict_relocations": 65,
             "package_byte_identical": True,
-            "placed_regions": 7104,
+            "placed_regions": 7822,
             "unresolved_regions": 0,
             "primitive_provider": "retained HCI/controller boundary",
             "hardware_validation": "blocked by unavailable physical evidence",

@@ -14,39 +14,39 @@
   "profiles": {
     "apple-clang": {
       "base_package": {
-      "path": "build/postapply-package-final8-apple/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "path": "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
         "size": 4750780,
-      "sha256": "f2842600b84f303c40d2d299761c1abc0a7083acc05f2d378be9a045b0d9a846"
+        "sha256": "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771"
       },
       "base_component": {
-      "path": "build/canonical-observation-g2-final8/apple-a/liblc3-service-component.bin",
+        "path": "build/canonical-observation-g2-final85/apple-a/liblc3-service-component.bin",
         "size": 3956672,
-        "sha256": "301ffa0a891108dff13d5f2fd9b38b2b163c3142d635461d9a71213590c607e3",
+        "sha256": "044d6a3c8c0243e3f3a36240cf4c54d809b081e73491cd340e2214663fe2dd3e",
         "runtime_end_exclusive": 8380320
       },
       "expected": {
         "component": {
           "size": 3956672,
-          "sha256": "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe"
+          "sha256": "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6"
         }
       }
     },
     "linux-clang": {
       "base_package": {
-      "path": "build/postapply-package-final8-linux/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "path": "build/source-linux/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
         "size": 4750764,
-      "sha256": "e534ffe034360b24fffc3d7fc50988234fc48ae20f6e8afa8be2507247c8cd39"
+        "sha256": "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0"
       },
       "base_component": {
-      "path": "build/canonical-observation-g2-final8/linux-a/liblc3-service-component.bin",
+        "path": "build/canonical-observation-g2-nus-final/linux-a/liblc3-service-component.bin",
         "size": 3956672,
-        "sha256": "7260477fe660b80f9966bdc7b3b72015c70a3e4134c3d0899119cf8a98a3813c",
+        "sha256": "332faaa7e267efd71661611a10d0a2c5038d4f731e14ba0cc904dac36b1199b0",
         "runtime_end_exclusive": 8380320
       },
       "expected": {
         "component": {
           "size": 3956672,
-          "sha256": "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38"
+          "sha256": "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6"
         }
       }
     }

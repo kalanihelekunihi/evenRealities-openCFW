@@ -7699,6 +7699,10 @@ class BootloaderCoreOverlayTests(unittest.TestCase):
         self.assertEqual(
             manifest_override["provider"]["profiles"]["linux-clang"],
             {
+                "path": (
+                    "build/canonical-provider/linux-clang/"
+                    "apollo_bootloader/ota_s200_bootloader.bin"
+                ),
                 "size": 163824,
                 "sha256": (
                     "11f12f80ce187fce53f37b2d27bf9326"

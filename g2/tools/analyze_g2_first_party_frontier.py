@@ -24,7 +24,7 @@ MANIFEST_DIR = ROOT / "tools" / "manifests"
 DEFAULT_CORPUS = ROOT / "research/corpus/apollo-main/ghidra/full64-j64-auth"
 
 EXPECTED_CLOSED_LEDGER_SHA256 = (
-    "a09e1e7472f4bfb020b3ca0119e30459e1aae8fc6d14b6c2dbfb9651e8d09218"
+    "1cf3f8eee73ca5a98b8659a4eafb4414c5eddf68f5895554082d68bb6a99592a"
 )
 EXPECTED_SURFACE = {
     "retained_first_party_paths": 234,
@@ -39,7 +39,7 @@ EXPECTED_SURFACE = {
     "anchored_body_bytes": 485274,
     "closed_anchored_body_bytes": 485274,
     "open_anchored_body_bytes": 0,
-    "closed_manifest_body_bytes": 814822,
+    "closed_manifest_body_bytes": 814846,
     "closed_manifest_physical_bytes_known": 885418,
     "closed_manifests_with_physical_bytes": 232,
     "closed_manifests_without_physical_bytes": 2,

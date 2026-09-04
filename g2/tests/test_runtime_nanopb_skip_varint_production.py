@@ -172,24 +172,24 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
             "ec17aa0a8e01050d8b30f737e7ca83d4b8842da1d7d33f6b3b74fa199a4f4519",
         ),
         "overlay": (
-            362_272,
-            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+            380_444,
+            "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622",
         ),
         "core_stage_overlay": (
-            362_272,
-            "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae",
+            380_444,
+            "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622",
         ),
         "core_stage_component": (
-            3_885_668,
-            "696e5cf555021cce294426d39863f60108b669a2b80ca65f591997bb0f5265d5",
+            3_903_840,
+            "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752",
         ),
         "component": (
             3_956_672,
-            "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef",
+            "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
         ),
         "package": (
             4_750_780,
-            "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27",
+            "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771",
         ),
     },
     "linux-clang": {
@@ -212,24 +212,24 @@ PROFILE_PINS: dict[str, dict[str, object]] = {
             "f54c433a31f74f74b34709901da696d850b4dd2d0fb743b8166d49256c287303",
         ),
         "overlay": (
-            154_604,
-            "4caa6c35e2c8f559d7668511d8c36fd19ba95a94a8762215f9bed4ba91e006c6",
+            172_828,
+            "13a12b7fc7ec3af866d4ebe9229105ce923d6842ec6e8c4b0e01564582ed8ab1",
         ),
         "core_stage_overlay": (
-            147_008,
-            "36dee8d3beebc0055456267ad068a9944a9eccc0bfec04f78603dd384709fab4",
+            165_230,
+            "4c76c122789a49d49b0cf30a06cc62adc9c93936dd0c20df7b1d22e24f62169f",
         ),
         "core_stage_component": (
-            3_670_404,
-            "c2d3fad0382523efb9aa3cfdf19e63e81dca9fdcecdc838e37cac5c48fde430f",
+            3_688_626,
+            "f1214b0388a3d9d10b278a58e5f992052786c33db14faad7c21ead607d825b76",
         ),
         "component": (
             3_956_672,
-            "fcf152485bcb227050118de834f039e111f7f4118cba0ff8e7901c0b12cdb43a",
+            "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
         ),
         "package": (
             4_750_764,
-            "617c37fc25913f5590a15a410e3f35687c50328e2ef1618b0a67fbbd8f9ef559",
+            "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
         ),
     },
 }

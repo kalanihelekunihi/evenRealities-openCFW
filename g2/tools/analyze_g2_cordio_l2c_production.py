@@ -16,14 +16,14 @@ PACKAGE = ROOT / "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.eve
 FLASH_PLAN = ROOT / "build/source/flash-plan.json"
 HEADER = ROOT / "components/shared/cordio/runtime_cordio_l2c.h"
 
-OVERLAY_SIZE = 362_272
-OVERLAY_SHA256 = "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+OVERLAY_SIZE = 380_444
+OVERLAY_SHA256 = "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
 COMPONENT_SIZE = 3_956_672
-COMPONENT_SHA256 = "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"
+COMPONENT_SHA256 = "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6"
 PACKAGE_SIZE = 4_750_780
-PACKAGE_SHA256 = "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
-FLASH_PLAN_SIZE = 4_961_300
-FLASH_PLAN_SHA256 = "f2625775d8a7b3c81c8862db00979cdcf4965eeb003e4b6b84e8cb2d8c1293b9"
+PACKAGE_SHA256 = "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771"
+FLASH_PLAN_SIZE = 5_485_925
+FLASH_PLAN_SHA256 = "d931ff83e416a91a87f40690c1ed2dc65cee4ee7b1bdc8fb37eaf9cd2cf624ef"
 HEADER_SHA256 = "3d070ea0bf7e79449425af83dbd14416a1ed606b8cb8044116be23523f21c3f3"
 
 
@@ -107,7 +107,7 @@ def validate(
         or sha(FLASH_PLAN.read_bytes()) != FLASH_PLAN_SHA256
         or (len(flash["flash_regions"]), len(flash["unresolved_flash_regions"]),
             len(flash["container_only_regions"]), len(flash["protected_regions"]))
-            != (7104, 0, 8, 6)
+            != (7822, 0, 8, 6)
     ):
         raise RuntimeError("L2CAP flash plan changed")
     result = {

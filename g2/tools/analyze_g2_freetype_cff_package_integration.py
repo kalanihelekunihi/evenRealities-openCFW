@@ -28,12 +28,12 @@ MANIFEST = G2 / "tools/manifests/g2-freetype-cff-package-integration.json"
 
 PINS = {
     BUILDER: (40_269, "b344b37620574e9cec4af153f54b23e124afbe64332126118e678401f1feb4b9"),
-    CONFIG: (1_868, "4784877e78720d157f80c469d2fd04c532d23d9374506732d99db3c779d5b9dd"),
+    CONFIG: (1_842, "ec7f2835ba9d04963ea6f0ca02d8f804ff4ee88485168ef0de2b230ba56ab972"),
     README: (1_298, "493a0423c3282f18242af2753eeeafbc4a468834a70b1327867a82d37e105763"),
-    CORE_BUILDER: (90_227, "1a4f8e642484d0331bc92dfdc79d2ed2ef075df613d609c3a629aaaa3f7091a8"),
-    CORE_CONFIG: (6_029_233, "9649d9ee18c72b5796601b14d5daaa5878fc958246763887c5fa5fbd03ea054f"),
-    OPEN_CFW: (99_692, "ccbc5884b455daf5756cde99ebdf5c9edb88f0a093fd6b11e351795efe3907c3"),
-    BASE_MANIFEST: (3_554_396, "93b167c5493a7161f37426a90ecbe9ec63d838bc93f0505fd66b6f3f87f844a5"),
+    CORE_BUILDER: (90_584, "164a9fd3aeb22daa16085de2725157af4b157e8f64977a50db89986aaf97325f"),
+    CORE_CONFIG: (6_404_019, "2329b48855ecf130bbb8ea4e6f97711dc9ac9fcba1aed9c647dd896e6c488722"),
+    OPEN_CFW: (99_692, "0740379679959fbf3d042a2afafd4e4bf46093681be535dd053806b34d4cf15f"),
+    BASE_MANIFEST: (3_812_990, "ae7c402fef4c72f3fbeae80cbfc71eb17e3907044a339b65494e8732392a150d"),
 }
 
 # Minimal authenticated generated-NOP tails actually consumed by the admitted
@@ -41,19 +41,27 @@ PINS = {
 # from its same-build LC3 route report.
 HOST_SLOTS = {
     "apple-clang": [
-        {"function": "open_cfw_font_manager_create_chain",
-         "entry": 4639456, "start": 4639652, "end_exclusive": 4640598,
-         "forbidden_entries": [4639712]},
-        {"function": "open_cfw_ring_service_cmd_package_parse",
-         "entry": 4663688, "start": 4663692, "end_exclusive": 4664240,
+        {"function": "EFS_ReceivePacket",
+         "entry": 5049728, "start": 5050962, "end_exclusive": 5051102,
          "forbidden_entries": []},
-        {"function": "OTA_ReceivePacket",
-         "entry": 4774104, "start": 4774108, "end_exclusive": 4775488,
-         "forbidden_entries": [4774908, 4774968, 4775020, 4775044,
-                               4775072]},
+        {"function": "APP_PbRxNotificationFrameDataProcess",
+         "entry": 5073832, "start": 5073836, "end_exclusive": 5074352,
+         "forbidden_entries": []},
+        {"function": "APP_PbTxEncodeNotifAppIDNotInWhitelist",
+         "entry": 5075388, "start": 5075392, "end_exclusive": 5075926,
+         "forbidden_entries": []},
         {"function": "APP_PbRxDevCfgFrameDataProcess",
          "entry": 5080024, "start": 5080028, "end_exclusive": 5081980,
          "forbidden_entries": [5080062, 5080550]},
+        {"function": "open_cfw_service_kvdb_init",
+         "entry": 5084888, "start": 5084892, "end_exclusive": 5085828,
+         "forbidden_entries": [5085108, 5085440]},
+        {"function": "APP_PbRxEvenAIFrameDataProcess",
+         "entry": 5124556, "start": 5124560, "end_exclusive": 5125424,
+         "forbidden_entries": []},
+        {"function": "open_cfw_health_page_build_summary",
+         "entry": 5224288, "start": 5224292, "end_exclusive": 5226934,
+         "forbidden_entries": [5225984, 5226240]},
     ],
     "linux-clang": [
         {"function": "open_cfw_iar_memcpy_void", "entry": 4430820,
@@ -180,11 +188,11 @@ def _verify_core_route(data: dict[Path, bytes]) -> dict[str, Any]:
     expected = {
         "apple-clang": (
             3_956_672,
-            "7e7456eddfc5832bd0dd8522706c4b95bcc9ab3ab66d71f56728f8395e6f88fe",
+            "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
         ),
         "linux-clang": (
             3_956_672,
-            "64f6e109a83331ef31c9c7245ef05458779f1031f514ad12a228b2aacb09fa38",
+            "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
         ),
     }
     for profile, pins in profiles.items():

@@ -236,13 +236,13 @@ PRODUCTION_FINAL_SHA256 = (
     "9e1e0772d76f5763881fe5e845fe3c4"
 )
 PRODUCTION_OVERLAY_SHA256 = (
-    "8c80c3fa53a89c77d145533f59f63389dfa31f968642f783323ed81ac81be5ae"
+    "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
 )
 PRODUCTION_COMPONENT_SHA256 = (
-    "79323dd5ae9211e9d1c393f26593c98c96c53d928c44c4447c946e67ef0fbeef"
+    "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6"
 )
 PRODUCTION_PACKAGE_SHA256 = (
-    "49c61010614d5db51c9e97f3ca549e47644a32805411d0ff5dc96ea7445d3e27"
+    "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771"
 )
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -831,7 +831,7 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
         self.assertEqual(
             config["expected"],
             {
-                "overlay_size": 362_272,
+                "overlay_size": 380_444,
                 "overlay_sha256": PRODUCTION_OVERLAY_SHA256,
                 "component_size": 3_956_672,
                 "component_sha256": PRODUCTION_COMPONENT_SHA256,
@@ -901,24 +901,24 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
         )
         self.assertEqual(
             component_report["replaced_stock_function_bytes"],
-            415_622,
+            434_040,
         )
         self.assertEqual(
             component_report["generated_patch_site_bytes"],
-            395_666,
+            395_910,
         )
         self.assertEqual(component_report["generated_wrapper_bytes"], 32)
         self.assertEqual(
             component_report["source_owned_in_place_bytes"],
-            184,
+            186,
         )
-        self.assertEqual(component_report["source_owned_bytes"], 495_910)
-        self.assertEqual(component_report["opaque_base_bytes"], 3_065_064)
+        self.assertEqual(component_report["source_owned_bytes"], 514_132)
+        self.assertEqual(component_report["opaque_base_bytes"], 3_046_598)
 
         overlay = CURRENT_OVERLAY.read_bytes()
         component = CURRENT_COMPONENT.read_bytes()
         package = CURRENT_PACKAGE.read_bytes()
-        self.assertEqual(len(overlay), 362_272)
+        self.assertEqual(len(overlay), 380_444)
         self.assertEqual(sha256(overlay), PRODUCTION_OVERLAY_SHA256)
         self.assertEqual(len(component), 3_956_672)
         self.assertEqual(sha256(component), PRODUCTION_COMPONENT_SHA256)
@@ -973,8 +973,8 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
                     "linux-clang": {
                         "expected_size": 4_750_764,
                         "expected_sha256": (
-                            "70055c3eec63f5460123a54ac97b9399"
-                            "f40fd7e09118477751c78cd6288c0a1e"
+                            "50f2ee3722aeaa720eed1a7c65381b02"
+                            "ac3ec0ceabecf9eb57d661d8e060a6d0"
                         ),
                     },
                 },
@@ -999,8 +999,8 @@ class RuntimeCmsisMutexNewTests(unittest.TestCase):
                         ),
                         "size": 3_956_672,
                         "sha256": (
-                            "886b0e26bb847a47614103683d71aa89"
-                            "12e34379e623131b8afbd4a665eec32e"
+                            "dbfc7bbf1462166b04fb962e9e639ba2"
+                            "296c84a6e0b4f6f22d7ae5e321efc0e6"
                         ),
                     },
                 },
