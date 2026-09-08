@@ -984,7 +984,7 @@ def analyze(corpus: Path, plan: Path, component_report: Path) -> dict[str, Any]:
         or algo_provider["iar_sqrt_calls"] != 2
         or service_algo["identity"]["nationalchip_lvp_code_linked"]
         or service_algo["identity"]["embedded_third_party_definitions"]
-        or not service_algo["behavior"]["short_aligned_input_is_accepted_but_read_as_3200_bytes"]
+        or not service_algo["behavior"]["stock_short_aligned_input_is_accepted_but_read_as_3200_bytes"]
     ):
         raise ClosureError("audio service-algorithm IAR/DSP ownership changed")
     uart_provider = uart_sync["provider_boundary"]

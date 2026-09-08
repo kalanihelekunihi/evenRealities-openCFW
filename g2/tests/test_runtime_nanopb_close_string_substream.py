@@ -1042,7 +1042,7 @@ class NanopbCloseStringSubstreamProductionTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (2_443, 2_331, 1_874),
+            (2_568, 2_452, 1_999),
         )
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaves = [

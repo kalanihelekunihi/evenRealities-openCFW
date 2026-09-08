@@ -1,0 +1,53 @@
+{
+  "dependency_headers": {
+    "include/utility/list.h": {
+      "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+      "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+    },
+    "include/utility/types.h": {
+      "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+      "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+    }
+  },
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "oracle": {
+    "path": "drivers_lib/padmux/grus_padmux.o",
+    "blob": "e42a2efc51c4ebacf55575630907be84888ba61a",
+    "sha256": "2e5151ccf36515b89d72dfb124e0dc941d8d3e022c42befb4a76c9afe1f28521",
+    "role": "identity_only"
+  },
+  "bindings": {
+    "open_cfw_gx8002_padmux_check": 270558648
+  },
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-jump-tables"
+  ],
+  "header": {
+    "path": "include/driver/gx_padmux.h",
+    "blob": "4d7aaa315665a24dc55d77c0bf7b3c285d7358b8",
+    "sha256": "ed2dfbb290aa634bca68dc536583ac7a24994fb9b9f73165dc00ba453ea631d2"
+  },
+  "source_sha256": "91045bc9b189c75d0bf05bc1c68b8ced88ad9ab199891579f74a5c9b5f0e3e78",
+  "symbol": "open_cfw_gx8002_padmux_set",
+  "section_name": ".text",
+  "package_offset": 64360,
+  "compiled_bytes": 76,
+  "compiled_sha256": "1f8925b8ae5ae8bdf589b1dfa6676b2a3d9c0c7c203831b7b6e32dfd707e03d3",
+  "stock_envelope_bytes": 84,
+  "stock_sha256": "e79030ef743a7f2eaa5d5ebec638cd08afd8e71b68914d54ae7b73e990fadaa4",
+  "fits": true,
+  "source_admitted": false,
+  "limits": [
+    "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "placement": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_files": [
+      {
+        "path": "lvp/common/uart_message_v2.h",
+        "git_blob": "74c1de26a9a8072bb7bba448ccf88b1e4729d5f7",
+        "sha256": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2"
+      },
+      {
+        "path": "lvp/common/lvp_queue.h",
+        "git_blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+        "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+      }
+    ],
+    "source_sha256": "fad3f4a2e2f648d0ab1d94e3ef87fc1c69586e76455123653ec969a6f372e2b6",
+    "flags": [
+      "-O2",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "sections": [
+      {
+        "section": ".text.open_cfw_gx8002_uart_async_tick",
+        "package_offset": 71872,
+        "compiled_bytes": 132,
+        "compiled_sha256": "a49f4f7925b47f1154e43e38ee49b9280dccdc0aeaad81351ebd5aedb989251f",
+        "stock_envelope_bytes": 136,
+        "stock_sha256": "7fed5638a46054e3f9ee80327ae2e93d43ee2e809ad36506b81eea6b5e52ea4b",
+        "byte_exact": false
+      },
+      {
+        "section": ".rodata.uart_error",
+        "package_offset": 83721,
+        "compiled_bytes": 14,
+        "compiled_sha256": "dfcaaec7ccfc781e5c018d4ad0f07f1e3a5fafabc4f59624039433170ace25d0",
+        "stock_envelope_bytes": 14,
+        "stock_sha256": "dfcaaec7ccfc781e5c018d4ad0f07f1e3a5fafabc4f59624039433170ace25d0",
+        "byte_exact": true
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Linked placement only; target callback/CRC/queue path comparison pending.",
+      "Existing queue and registration state remain retained."
+    ]
+  },
+  "cases": 240,
+  "source_admitted": false,
+  "limits": [
+    "Queue, CRC, logging and callback calls modeled; no hardware timing claim.",
+    "Finite packet/registration states; firmware integration pending."
+  ]
+}

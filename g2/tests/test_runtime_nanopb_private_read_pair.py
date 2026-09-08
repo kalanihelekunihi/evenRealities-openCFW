@@ -469,7 +469,7 @@ class NanopbPrivateReadPairProductionTests(unittest.TestCase):
                 len(overlay["patch_sites"]),
                 len(overlay["relocated_leaves"]),
             ),
-            (2443, 2331, 1874),
+            (2568, 2452, 1999),
         )
         self.assertEqual(overlay["functions"].count(BUF_FUNCTION), 1)
         self.assertEqual(overlay["functions"].count(BYTE_FUNCTION), 1)

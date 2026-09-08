@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "load_base": 4423648,
+  "dependencies": [
+    {
+      "path": "third_party/cmsis-core/CMSIS/Core/Include/cmsis_gcc.h",
+      "sha256": "2f92cd832b6f58e4d4803b28d7340443f5e46b0f357a307cda76a42a0e530108",
+      "output": "cmsis_gcc.h",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "third_party/cmsis-core/LICENSE.txt",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "output": "CMSIS_LICENSE.txt",
+      "license": "Apache-2.0"
+    }
+  ],
+  "functions": [
+    {
+      "entry": 4491500,
+      "end": 4491508,
+      "function": "FUN_004488ec",
+      "stock_sha256": "e5f5e62dc71878f964110f3a656adbc03cd55c51f0aaa0542b6ead80f99430e8",
+      "source": {
+        "path": "components/shared/cortex_m55/atomic_store_barrier.c",
+        "sha256": "877b86ebb600158f5841da19003b5e7d6e25267a9f9640eb7c755af0da5b0366",
+        "license": "MIT"
+      },
+      "expected_text": {
+        "size": 8,
+        "sha256": "e5f5e62dc71878f964110f3a656adbc03cd55c51f0aaa0542b6ead80f99430e8"
+      },
+      "upstream_commit": "d23a6949a0331ca96853bcd98b0fdcc4db47184c",
+      "review": "docs/research/g2-cortex-m55-reviewed-source.md"
+    },
+    {
+      "entry": 4491508,
+      "end": 4491516,
+      "function": "FUN_004488f4",
+      "stock_sha256": "e0af382433dcd2fe57b105589adcbeb5b7862f9c9cbc16ce06cf1c73f6e61c2e",
+      "source": {
+        "path": "components/shared/cortex_m55/atomic_load_barrier.c",
+        "sha256": "c126a6fc5affaa41125e1920320c283d9fdda2add1ff5597ab75f9d2c2054f4f",
+        "license": "MIT"
+      },
+      "expected_text": {
+        "size": 8,
+        "sha256": "e0af382433dcd2fe57b105589adcbeb5b7862f9c9cbc16ce06cf1c73f6e61c2e"
+      },
+      "upstream_commit": "d23a6949a0331ca96853bcd98b0fdcc4db47184c",
+      "review": "docs/research/g2-cortex-m55-reviewed-source.md"
+    },
+    {
+      "entry": 4465192,
+      "end": 4465208,
+      "function": "FUN_00442228",
+      "stock_sha256": "20544c4419eb022379feecc8516b093c79a0d4ed053277e2b24edcafe311aabf",
+      "source": {
+        "path": "components/shared/cortex_m55/exception_active.c",
+        "sha256": "84f3347ea524c1aa2be2d19c6981bfe6416c0429e0d2a8bfed815c47d5e4f4bd",
+        "license": "MIT"
+      },
+      "expected_text": {
+        "size": 12,
+        "sha256": "0432fbcd0f46b6555fcc785521139ef7e275b0f3ba95052be4941b80e5d2fe6d"
+      },
+      "upstream_commit": "d23a6949a0331ca96853bcd98b0fdcc4db47184c",
+      "review": "docs/research/g2-cortex-m55-reviewed-source.md"
+    },
+    {
+      "entry": 5847456,
+      "end": 5847462,
+      "function": "FUN_005939a0",
+      "stock_sha256": "8e4e19e92c6716850c14126bd4e27ba37c0ae28804278e410d30557268987b2a",
+      "source": {
+        "path": "components/shared/cortex_m55/process_stack_pointer.c",
+        "sha256": "aee4bdb7cf87cc66d1b5e07f5160ef9d7f6d22b20dc053e14a9ca527472e3ffc",
+        "license": "MIT"
+      },
+      "expected_text": {
+        "size": 6,
+        "sha256": "8e4e19e92c6716850c14126bd4e27ba37c0ae28804278e410d30557268987b2a"
+      },
+      "upstream_commit": "d23a6949a0331ca96853bcd98b0fdcc4db47184c",
+      "review": "docs/research/g2-cortex-m55-reviewed-source.md"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "placement": {
+    "source_sha256": "9810f0ede764fe4df3ace291fc94608cf225d8cc3a81dcc3eae4b00545c23cad",
+    "local_header_sha256": "dac3f35fda97bdc90c75cf9c212309a91ebf5ecf70214623537bd86c5b4215b0",
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "dependencies": [
+      {
+        "path": "lvp/app_core/lvp_app.h",
+        "git_blob": "4b7e105ff09df684966817f1045f28dd030b5f2d",
+        "sha256": "5f3302a3482d2539d515d068e1c1364508f7eca6711d23ab063c27dc18556450"
+      },
+      {
+        "path": "lvp/app_core/lvp_app_core.h",
+        "git_blob": "e7521399bfa5d16c4ebacba2699e2f0286fc09cd",
+        "sha256": "7267c8f17cf22c3fe8904ac6babf611c3f1ea750c254a782c982b4e9fbb03c25"
+      },
+      {
+        "path": "lvp/common/lvp_queue.h",
+        "git_blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+        "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+      }
+    ],
+    "flags": [
+      "-O2",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-shrink-wrap"
+    ],
+    "sections": [
+      {
+        "section": ".text.open_cfw_gx8002_app_initialize",
+        "package_offset": 74336,
+        "compiled_bytes": 116,
+        "compiled_sha256": "51d1876ba02e685e95be47000a01666b15ae51e999c51155007f020be18ea2da",
+        "stock_envelope_bytes": 116,
+        "stock_sha256": "51d1876ba02e685e95be47000a01666b15ae51e999c51155007f020be18ea2da",
+        "byte_exact": true
+      },
+      {
+        "section": ".rodata.suspend_name",
+        "package_offset": 84346,
+        "compiled_bytes": 15,
+        "compiled_sha256": "725994ebdd066c23cff8b59339dda76dfe9a4ac39124508aaa130da59fec7df8",
+        "stock_envelope_bytes": 15,
+        "stock_sha256": "725994ebdd066c23cff8b59339dda76dfe9a4ac39124508aaa130da59fec7df8",
+        "byte_exact": true
+      },
+      {
+        "section": ".rodata.resume_name",
+        "package_offset": 84361,
+        "compiled_bytes": 14,
+        "compiled_sha256": "bcf3ac581380b16bb1b55d2fc57795a0a59815cd090df3e84b6ecb1cd8968971",
+        "stock_envelope_bytes": 14,
+        "stock_sha256": "bcf3ac581380b16bb1b55d2fc57795a0a59815cd090df3e84b6ecb1cd8968971",
+        "byte_exact": true
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Startup callback/call-order comparison pending.",
+      "State remains retained; no hardware qualification."
+    ]
+  },
+  "cases": 72,
+  "source_admitted": false,
+  "limits": [
+    "Returning AppInit callback and separately qualified service calls modeled.",
+    "No concurrent initialization, hardware startup or timing qualification."
+  ]
+}

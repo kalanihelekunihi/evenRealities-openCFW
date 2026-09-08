@@ -1,0 +1,78 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_memset",
+      "section_name": ".text",
+      "compiled_bytes": 102,
+      "compiled_sha256": "7203abf09c7b20f3cb6a21e90f268a0ac5e4cec95108d30d3cf99f34a8fbe2a1",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_memset",
+          "package_offset": 77656,
+          "bytes": 160,
+          "sha256": "6a7e1574db7e88044461737fd6efb583384a102e90cb44adade502c98da9c062",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "build": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "dependencies": [
+        {
+          "path": "utility/libc/memset.c",
+          "blob": "75687249c1599cb4590e929d8f18b06e52c148c9",
+          "sha256": "d175f6079caa9768e909ebb0f26ea97018e108c71de2dc58edede28218033499"
+        },
+        {
+          "path": "utility/libc/csky/memset_fast.o",
+          "blob": "fd20a0df1dffbf1e130ffeb8619ff2b00f44fbd6",
+          "sha256": "502de113a832e38d17d7fe91cffe153dea29ff539c833fb20aba826d0bc6a23c"
+        },
+        {
+          "path": "LICENSE",
+          "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+          "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+        }
+      ],
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "source_sha256": "04d26d6aed66fb4e0dcd9e283e0df12ccfa6a4cd13be3d2d2adcd71f6dbf3517",
+      "compiled_bytes": 102,
+      "compiled_sha256": "7203abf09c7b20f3cb6a21e90f268a0ac5e4cec95108d30d3cf99f34a8fbe2a1",
+      "package_offset": 77656,
+      "stock_envelope_bytes": 160,
+      "stock_sha256": "6a7e1574db7e88044461737fd6efb583384a102e90cb44adade502c98da9c062",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Candidate only. Need decoded store width/order, alignment, return, ABI and signed count boundary qualification; retained object supplies no output bytes."
+      ]
+    },
+    "cases": 45224,
+    "large_count_prefix_cases": 32,
+    "frame_bytes": 0,
+    "source_admitted": false,
+    "limits": [
+      "Decoded ordered byte/word traces, normal lengths and wraparound arithmetic. Huge positive loop paths use32-store checkpoints, not full execution or valid-memory claims. No hardware/MMIO/timing qualification; arbitrary addresses in arithmetic cases are synthetic."
+    ]
+  },
+  "notice_sha256": "7d5f789be1b677e56616d36cbea64296dabab4c5ee3b257181ddd860944e4cdd",
+  "manual_sha256": "579bd296dbf88b0b6842a473432e65199b87c0c19fcf04bb214f67241c68d509",
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Source fill implementation only. Signed stock block tests preserved, including bounded negative-count tail. Large positive paths checked at loop prefixes; no valid-memory claim for arbitrary32-bit counts/addresses, no hardware/MMIO/timing qualification."
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "source_sha256": "de4bf648fddd90b96a298f2e2e44740a5a7cead29697e1b386f7e6b987a35c40",
+  "header_sha256": "e649fd29c5c9c35fdcee57c9b649fc0df581d3875e11b27c4f51b3273ab6bcd0",
+  "compiler_version": "csky-unknown-elf-gcc (GCC) 13.0.1 20230301 (experimental)",
+  "target": "csky-unknown-elf",
+  "elf_flags": "0x21006009",
+  "compile_flags": [
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "functions": [
+    {
+      "symbol": "gx_analog_set_adc_in_sel",
+      "compiled_bytes": 24,
+      "compiled_sha256": "1ba592d0cd7b4d40f5b87400cc56c5069bf15d150cf5c297ef03d50684b7e100",
+      "stock_occurrences": [
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_adc_in_sel",
+          "bytes": 24,
+          "package_offset": 62524,
+          "region": "image_a_xip_text",
+          "sha256": "9d4e9e34537119eb017c8fbc6ec0ff7b2db0471813ebc37af0c77f3834e77156"
+        },
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_adc_in_sel",
+          "bytes": 24,
+          "package_offset": 264708,
+          "region": "image_b_sram_text",
+          "sha256": "9d4e9e34537119eb017c8fbc6ec0ff7b2db0471813ebc37af0c77f3834e77156"
+        }
+      ],
+      "matching_cases": 4265
+    },
+    {
+      "symbol": "gx_analog_set_adc_out_at_clk",
+      "compiled_bytes": 24,
+      "compiled_sha256": "83096951c1238dc7517092fdde8e1699480109aa7b75c06edbf647b1e57e11bd",
+      "stock_occurrences": [
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_adc_out_at_clk",
+          "bytes": 24,
+          "package_offset": 62500,
+          "region": "image_a_xip_text",
+          "sha256": "251065a85d7363ccb14196fcd89c02e857c9eb0c33808be02523c8bf20dcf238"
+        },
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_adc_out_at_clk",
+          "bytes": 24,
+          "package_offset": 264684,
+          "region": "image_b_sram_text",
+          "sha256": "251065a85d7363ccb14196fcd89c02e857c9eb0c33808be02523c8bf20dcf238"
+        }
+      ],
+      "matching_cases": 4265
+    },
+    {
+      "symbol": "gx_analog_set_adc_rstn",
+      "compiled_bytes": 24,
+      "compiled_sha256": "919bead1bd4ae88fc797580271c15001cd0bfe48c882d9cb2dd77d83c0bdb2f2",
+      "stock_occurrences": [
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_adc_rstn",
+          "bytes": 24,
+          "package_offset": 62548,
+          "region": "image_a_xip_text",
+          "sha256": "9b6101eb3e3da0c27405540923b4982d883d813f1628ce45c4f33bd15ff0d64b"
+        },
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_adc_rstn",
+          "bytes": 24,
+          "package_offset": 264732,
+          "region": "image_b_sram_text",
+          "sha256": "9b6101eb3e3da0c27405540923b4982d883d813f1628ce45c4f33bd15ff0d64b"
+        }
+      ],
+      "matching_cases": 4265
+    },
+    {
+      "symbol": "gx_analog_set_adc_sample_clk_sel",
+      "compiled_bytes": 24,
+      "compiled_sha256": "aa1788649e82d64f1ed5511e036675e6b0643c0d42c83e7337fa7e6444872f32",
+      "stock_occurrences": [
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_adc_sample_clk_sel",
+          "bytes": 24,
+          "package_offset": 62476,
+          "region": "image_a_xip_text",
+          "sha256": "0ca0f7ec2e7307b2d2ff0df8be2f83d6f4c2f89807e84d8dcba55b305bf7c51a"
+        },
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_adc_sample_clk_sel",
+          "bytes": 24,
+          "package_offset": 264660,
+          "region": "image_b_sram_text",
+          "sha256": "0ca0f7ec2e7307b2d2ff0df8be2f83d6f4c2f89807e84d8dcba55b305bf7c51a"
+        }
+      ],
+      "matching_cases": 4265
+    },
+    {
+      "symbol": "gx_analog_set_pga_bypass",
+      "compiled_bytes": 24,
+      "compiled_sha256": "8e70f8df024c1059921929f80915154bb0658c3980c150162ae88405a608908c",
+      "stock_occurrences": [
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_pga_bypass",
+          "bytes": 24,
+          "package_offset": 62428,
+          "region": "image_a_xip_text",
+          "sha256": "9588bb951cdc852bb57d5dce0258f46e3770ae01ee4de4fabff821311d778677"
+        },
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_pga_bypass",
+          "bytes": 24,
+          "package_offset": 264612,
+          "region": "image_b_sram_text",
+          "sha256": "9588bb951cdc852bb57d5dce0258f46e3770ae01ee4de4fabff821311d778677"
+        }
+      ],
+      "matching_cases": 4265
+    },
+    {
+      "symbol": "gx_analog_set_pga_enable",
+      "compiled_bytes": 24,
+      "compiled_sha256": "2f72fe2827fc7e8a0f9dd42524ac97dd9e86caa52e73e6580102d7896cdcc4ca",
+      "stock_occurrences": [
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_pga_enable",
+          "bytes": 24,
+          "package_offset": 62452,
+          "region": "image_a_xip_text",
+          "sha256": "9ecf90c5e330510a3b7fd46427377d69825f27ce3470890d195127ba87811ab6"
+        },
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_pga_enable",
+          "bytes": 24,
+          "package_offset": 264636,
+          "region": "image_b_sram_text",
+          "sha256": "9ecf90c5e330510a3b7fd46427377d69825f27ce3470890d195127ba87811ab6"
+        }
+      ],
+      "matching_cases": 4265
+    },
+    {
+      "symbol": "gx_analog_set_pga_itrim",
+      "compiled_bytes": 28,
+      "compiled_sha256": "6de26482966f9ee40b30c67730c92b4b0f31a193686d2dc50028414b6758cf69",
+      "stock_occurrences": [
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_pga_itrim",
+          "bytes": 28,
+          "package_offset": 62400,
+          "region": "image_a_xip_text",
+          "sha256": "0504969ffa98417f5c5517561d2a85745f13e55cf70fb9c821c00833ec1f404c"
+        },
+        {
+          "object": "drivers_lib/analog/adc.o",
+          "symbol": "gx_analog_set_pga_itrim",
+          "bytes": 28,
+          "package_offset": 264584,
+          "region": "image_b_sram_text",
+          "sha256": "0504969ffa98417f5c5517561d2a85745f13e55cf70fb9c821c00833ec1f404c"
+        }
+      ],
+      "matching_cases": 4265
+    }
+  ],
+  "compiled_function_bytes": 172,
+  "stock_occurrence_bytes": 344,
+  "differential_cases": 29855,
+  "firmware_bytes_emitted": 0,
+  "production_source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Restricted instruction interpreter, not a complete C-SKY emulator.",
+    "Finite differential cases, not an all-input proof.",
+    "No whole-image startup, call-site, interrupt or hardware qualification."
+  ]
+}

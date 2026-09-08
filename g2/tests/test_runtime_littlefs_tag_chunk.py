@@ -486,7 +486,8 @@ class RuntimeLittlefsTagChunkProductionTests(unittest.TestCase):
             main["provider"]["profiles"]["linux-clang"],
             {
                 "path": (
-                    "build/canonical-provider/linux-clang/apollo_main/"
+                    "build/canonical-provider/linux-clang/"
+                    "apollo_main-final81/"
                     "ota_s200_firmware_ota.bin"
                 ),
                 "size": 3_956_672,

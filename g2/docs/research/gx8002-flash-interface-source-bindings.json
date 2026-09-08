@@ -1,0 +1,288 @@
+[
+  {
+    "index": 0,
+    "name": "init",
+    "declaration": "GX_FLASH_DEV *(*init) (int bus, int cs, int speed, int mode)",
+    "runtime_address": 268583996,
+    "package_offset": 91216,
+    "symbol": "open_cfw_gx8002_flash_interface_initialize",
+    "declaration_source": "void *open_cfw_gx8002_flash_interface_initialize(void)",
+    "source_file": "runtime_gx8002_flash_interface_initialize.c"
+  },
+  {
+    "index": 1,
+    "name": "readdata",
+    "declaration": "int (*readdata)(unsigned int addr, unsigned char *data, unsigned int len)",
+    "runtime_address": 268580892,
+    "package_offset": 88112,
+    "symbol": "open_cfw_gx8002_flash_read",
+    "declaration_source": "int open_cfw_gx8002_flash_read(unsigned address,void *buffer,unsigned length)",
+    "source_file": "runtime_gx8002_flash_read.c"
+  },
+  {
+    "index": 2,
+    "name": "chiperase",
+    "declaration": "int (*chiperase) (void)",
+    "runtime_address": 268582400,
+    "package_offset": 89620,
+    "symbol": "open_cfw_gx8002_flash_chip_erase",
+    "declaration_source": "int open_cfw_gx8002_flash_chip_erase(void)",
+    "source_file": "runtime_gx8002_flash_erase.c"
+  },
+  {
+    "index": 3,
+    "name": "erasedata",
+    "declaration": "int (*erasedata)(unsigned int addr, unsigned int len)",
+    "runtime_address": 268582232,
+    "package_offset": 89452,
+    "symbol": "open_cfw_gx8002_flash_erase",
+    "declaration_source": "int open_cfw_gx8002_flash_erase(unsigned address,unsigned length)",
+    "source_file": "runtime_gx8002_flash_erase.c"
+  },
+  {
+    "index": 4,
+    "name": "pageprogram",
+    "declaration": "int (*pageprogram)(unsigned int addr, unsigned char *data, unsigned int len)",
+    "runtime_address": 268581940,
+    "package_offset": 89160,
+    "symbol": "open_cfw_gx8002_flash_page_program",
+    "declaration_source": "int open_cfw_gx8002_flash_page_program(unsigned address,const void *buffer,unsigned length)",
+    "source_file": "runtime_gx8002_flash_page_program.c"
+  },
+  {
+    "index": 5,
+    "name": "sync",
+    "declaration": "void (*sync)(void)",
+    "runtime_address": 268581560,
+    "package_offset": 88780,
+    "symbol": "open_cfw_gx8002_flash_sync",
+    "declaration_source": "int open_cfw_gx8002_flash_sync(void)",
+    "source_file": "runtime_gx8002_flash_block_range.c"
+  },
+  {
+    "index": 6,
+    "name": "test",
+    "declaration": "void (*test)(int argc, char *argv[])",
+    "runtime_address": 0,
+    "package_offset": null,
+    "symbol": null
+  },
+  {
+    "index": 7,
+    "name": "calcblockrange",
+    "declaration": "void (*calcblockrange)(unsigned int addr, unsigned int len, unsigned int *pstart, unsigned int *pend)",
+    "runtime_address": 268581520,
+    "package_offset": 88740,
+    "symbol": "open_cfw_gx8002_flash_block_range",
+    "declaration_source": "int open_cfw_gx8002_flash_block_range(uint32_t address,uint32_t length, volatile uint32_t *start, volatile uint32_t *end)",
+    "source_file": "runtime_gx8002_flash_block_range.c"
+  },
+  {
+    "index": 8,
+    "name": "badinfo",
+    "declaration": "int (*badinfo)(void)",
+    "runtime_address": 0,
+    "package_offset": null,
+    "symbol": null
+  },
+  {
+    "index": 9,
+    "name": "pageprogram_yaffs2",
+    "declaration": "int (*pageprogram_yaffs2)(unsigned int addr, unsigned char *data, unsigned int len)",
+    "runtime_address": 0,
+    "package_offset": null,
+    "symbol": null
+  },
+  {
+    "index": 10,
+    "name": "readoob",
+    "declaration": "int (*readoob)(unsigned int addr, unsigned char *data, unsigned int len)",
+    "runtime_address": 0,
+    "package_offset": null,
+    "symbol": null
+  },
+  {
+    "index": 11,
+    "name": "writeoob",
+    "declaration": "int (*writeoob)(unsigned int addr, unsigned char *data, unsigned int len)",
+    "runtime_address": 0,
+    "package_offset": null,
+    "symbol": null
+  },
+  {
+    "index": 12,
+    "name": "gettype",
+    "declaration": "char *(*gettype)(void)",
+    "runtime_address": 268583492,
+    "package_offset": 90712,
+    "symbol": "open_cfw_gx8002_flash_gettype",
+    "declaration_source": "char *open_cfw_gx8002_flash_gettype(void)",
+    "source_file": "runtime_gx8002_flash_info.c"
+  },
+  {
+    "index": 13,
+    "name": "getinfo",
+    "declaration": "int (*getinfo)(enum gx_flash_info flash_info)",
+    "runtime_address": 268580952,
+    "package_offset": 88172,
+    "symbol": "open_cfw_gx8002_flash_getinfo",
+    "declaration_source": "int open_cfw_gx8002_flash_getinfo(unsigned selector)",
+    "source_file": "runtime_gx8002_flash_info.c"
+  },
+  {
+    "index": 14,
+    "name": "write_protect_mode",
+    "declaration": "int (*write_protect_mode)(void)",
+    "runtime_address": 268581248,
+    "package_offset": 88468,
+    "symbol": "open_cfw_gx8002_flash_write_protect_mode",
+    "declaration_source": "int open_cfw_gx8002_flash_write_protect_mode(void)",
+    "source_file": "runtime_gx8002_flash_protection.c"
+  },
+  {
+    "index": 15,
+    "name": "write_protect_status",
+    "declaration": "int (*write_protect_status)(unsigned int *len)",
+    "runtime_address": 268581100,
+    "package_offset": 88320,
+    "symbol": "open_cfw_gx8002_flash_write_protect_status",
+    "declaration_source": "int open_cfw_gx8002_flash_write_protect_status(unsigned *length)",
+    "source_file": "runtime_gx8002_flash_protection.c"
+  },
+  {
+    "index": 16,
+    "name": "write_protect_lock",
+    "declaration": "int (*write_protect_lock)(unsigned int addr)",
+    "runtime_address": 268581488,
+    "package_offset": 88708,
+    "symbol": "open_cfw_gx8002_flash_write_protect_lock",
+    "declaration_source": "int open_cfw_gx8002_flash_write_protect_lock(unsigned requested)",
+    "source_file": "runtime_gx8002_flash_protection_set.c"
+  },
+  {
+    "index": 17,
+    "name": "write_protect_unlock",
+    "declaration": "int (*write_protect_unlock)(void)",
+    "runtime_address": 268581504,
+    "package_offset": 88724,
+    "symbol": "open_cfw_gx8002_flash_write_protect_unlock",
+    "declaration_source": "int open_cfw_gx8002_flash_write_protect_unlock(void)",
+    "source_file": "runtime_gx8002_flash_protection_set.c"
+  },
+  {
+    "index": 18,
+    "name": "otp_lock",
+    "declaration": "int (*otp_lock)(void)",
+    "runtime_address": 268583504,
+    "package_offset": 90724,
+    "symbol": "open_cfw_gx8002_flash_otp_lock",
+    "declaration_source": "int open_cfw_gx8002_flash_otp_lock(void)",
+    "source_file": "runtime_gx8002_flash_otp_lock.c"
+  },
+  {
+    "index": 19,
+    "name": "otp_status",
+    "declaration": "int (*otp_status)(unsigned char *data)",
+    "runtime_address": 268581600,
+    "package_offset": 88820,
+    "symbol": "open_cfw_gx8002_flash_otp_status",
+    "declaration_source": "int open_cfw_gx8002_flash_otp_status(uint8_t *locked)",
+    "source_file": "runtime_gx8002_flash_otp_status.c"
+  },
+  {
+    "index": 20,
+    "name": "otp_erase",
+    "declaration": "int (*otp_erase)(void)",
+    "runtime_address": 268581848,
+    "package_offset": 89068,
+    "symbol": "open_cfw_gx8002_flash_otp_erase",
+    "declaration_source": "int open_cfw_gx8002_flash_otp_erase(void)",
+    "source_file": "runtime_gx8002_flash_otp_erase.c"
+  },
+  {
+    "index": 21,
+    "name": "otp_write",
+    "declaration": "int (*otp_write)(unsigned int addr, unsigned char *data, unsigned int len)",
+    "runtime_address": 268582584,
+    "package_offset": 89804,
+    "symbol": "open_cfw_gx8002_flash_otp_write",
+    "declaration_source": "int open_cfw_gx8002_flash_otp_write(unsigned offset,const uint8_t *buffer,unsigned length)",
+    "source_file": "runtime_gx8002_flash_otp_write.c"
+  },
+  {
+    "index": 22,
+    "name": "otp_read",
+    "declaration": "int (*otp_read)(unsigned int addr, unsigned char* data, unsigned int len)",
+    "runtime_address": 268582820,
+    "package_offset": 90040,
+    "symbol": "open_cfw_gx8002_flash_otp_read",
+    "declaration_source": "int open_cfw_gx8002_flash_otp_read(unsigned offset,uint8_t *buffer,unsigned length)",
+    "source_file": "runtime_gx8002_flash_otp_read.c"
+  },
+  {
+    "index": 23,
+    "name": "otp_get_region",
+    "declaration": "int (*otp_get_region)(unsigned int *region)",
+    "runtime_address": 268581668,
+    "package_offset": 88888,
+    "symbol": "open_cfw_gx8002_flash_otp_get_region",
+    "declaration_source": "int open_cfw_gx8002_flash_otp_get_region(unsigned *count)",
+    "source_file": "runtime_gx8002_flash_otp_region.c"
+  },
+  {
+    "index": 24,
+    "name": "otp_set_region",
+    "declaration": "int (*otp_set_region)(unsigned int region)",
+    "runtime_address": 268581688,
+    "package_offset": 88908,
+    "symbol": "open_cfw_gx8002_flash_otp_set_region",
+    "declaration_source": "int open_cfw_gx8002_flash_otp_set_region(unsigned region)",
+    "source_file": "runtime_gx8002_flash_otp_region.c"
+  },
+  {
+    "index": 25,
+    "name": "otp_get_current_region",
+    "declaration": "int (*otp_get_current_region)(unsigned int *region)",
+    "runtime_address": 268581728,
+    "package_offset": 88948,
+    "symbol": "open_cfw_gx8002_flash_otp_get_current_region",
+    "declaration_source": "int open_cfw_gx8002_flash_otp_get_current_region(unsigned *region)",
+    "source_file": "runtime_gx8002_flash_otp_region.c"
+  },
+  {
+    "index": 26,
+    "name": "otp_get_region_size",
+    "declaration": "int (*otp_get_region_size)(unsigned int *size)",
+    "runtime_address": 268581752,
+    "package_offset": 88972,
+    "symbol": "open_cfw_gx8002_flash_otp_get_region_size",
+    "declaration_source": "int open_cfw_gx8002_flash_otp_get_region_size(unsigned *size)",
+    "source_file": "runtime_gx8002_flash_otp_region.c"
+  },
+  {
+    "index": 27,
+    "name": "block_isbad",
+    "declaration": "int (*block_isbad)(unsigned int addr)",
+    "runtime_address": 0,
+    "package_offset": null,
+    "symbol": null
+  },
+  {
+    "index": 28,
+    "name": "calc_phy_offset",
+    "declaration": "int (*calc_phy_offset)(unsigned int start, unsigned int logic_offset, unsigned int *phy_offset)",
+    "runtime_address": 0,
+    "package_offset": null,
+    "symbol": null
+  },
+  {
+    "index": 29,
+    "name": "uid_read",
+    "declaration": "int (*uid_read)(unsigned char *buf, int buf_len, int *ret_len)",
+    "runtime_address": 268583172,
+    "package_offset": 90392,
+    "symbol": "open_cfw_gx8002_flash_uid_read",
+    "declaration_source": "int open_cfw_gx8002_flash_uid_read(uint8_t *buffer,int requested,volatile int *actual)",
+    "source_file": "runtime_gx8002_flash_uid_read.c"
+  }
+]

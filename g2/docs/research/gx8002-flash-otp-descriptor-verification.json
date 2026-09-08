@@ -1,0 +1,49 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_flash_otp_descriptor",
+      "section_name": ".data.open_cfw_gx8002_flash_otp_descriptor",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 20,
+      "compiled_sha256": "09b41766794d0ca0378b72a89022efd40dfabec77f8215ea02c2471641cfa255",
+      "stock_occurrences": [
+        {
+          "symbol": "flash_otp_descriptor",
+          "package_offset": 100064,
+          "bytes": 20,
+          "sha256": "09b41766794d0ca0378b72a89022efd40dfabec77f8215ea02c2471641cfa255",
+          "region": "image_a_sram_data"
+        }
+      ]
+    }
+  ],
+  "source_sha256": "9eb6bb70969eab70e227971063bea4aca058b1181ce3b68fa272e8356b94c3ac",
+  "flags": [
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "fields": {
+    "base_address": 4096,
+    "region_stride": 4096,
+    "region_bytes": 512,
+    "region_count": 3,
+    "selection_flags": 0
+  },
+  "evidence": [
+    "OTP read at package 0x15fb8: base+offset+selected_region*stride.",
+    "Qualified region accessors establish size/count/selection flags at offsets 8/12/16."
+  ],
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Matches shipped descriptor configuration; physical OTP behavior remains unqualified."
+  ]
+}

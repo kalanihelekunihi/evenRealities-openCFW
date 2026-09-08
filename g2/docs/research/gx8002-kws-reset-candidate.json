@@ -1,0 +1,67 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "dependencies": [
+    {
+      "path": "lvp/vui/kws/kws_strategy.c",
+      "blob": "ce8fc7e44d6f0857b181620f393fc1fdfc1e4b2b",
+      "sha256": "015a22e3aa42219e3375129e3be0045b5f6b03c9b46d781d5dd0ca425b7a08b4"
+    },
+    {
+      "path": "lvp/vui/kws/kws_strategy.h",
+      "blob": "271fd92fece6b28259ec2d99aa9869b58e4a01f7",
+      "sha256": "61e7cbe44efb5bfe1641055113836ccd9a2c45e0f581b0a1a5d3d1bf63740245"
+    },
+    {
+      "path": "LICENSE",
+      "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+      "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+    }
+  ],
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "source_sha256": "6fbe5e863bc671016597642a93886631332fac111100c8dc32255bd10a74f2aa",
+  "type_header_sha256": "115b1b52a22f7529ca22fd7ea501fd0a23e00316880c5734db552eea4133c2dd",
+  "functions": [
+    {
+      "symbol": "KwsStrategyReset",
+      "section_name": ".text.KwsStrategyReset",
+      "compiled_bytes": 20,
+      "compiled_sha256": "dca3f6de054f478e1ffc203dc1eeebcb72c39ad70a191c090f26959e09013d2f",
+      "package_offset": 73456,
+      "stock_envelope_bytes": 20,
+      "stock_sha256": "dca3f6de054f478e1ffc203dc1eeebcb72c39ad70a191c090f26959e09013d2f",
+      "fits": true,
+      "exact_stock_payload": true
+    },
+    {
+      "symbol": "KwsStrategyInit",
+      "section_name": ".text.KwsStrategyInit",
+      "compiled_bytes": 8,
+      "compiled_sha256": "a8d2053faa21656bd4def9c5933ed4c9c013520e45d946e35f3d9bbc2314a08e",
+      "package_offset": 73476,
+      "stock_envelope_bytes": 8,
+      "stock_sha256": "a8d2053faa21656bd4def9c5933ed4c9c013520e45d946e35f3d9bbc2314a08e",
+      "fits": true,
+      "exact_stock_payload": true
+    }
+  ],
+  "source_bss": {
+    "address": 537061288,
+    "size": 164,
+    "section_type": "SHT_NOBITS"
+  },
+  "source_admitted": false,
+  "limits": [
+    "Candidate reset/init plus BSS definition only. Need decoded calls, frame and memset extent qualification; no source ownership registered yet."
+  ]
+}

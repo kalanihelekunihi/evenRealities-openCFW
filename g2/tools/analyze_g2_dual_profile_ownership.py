@@ -29,12 +29,12 @@ COMPANION = ROOT / "tools/manifests/g2-dual-profile-ownership.json"
 BASE_MANIFEST = ROOT / "manifests/g2-2.2.6.10.json"
 OBSERVATIONS = {
     "apple-clang": (
-        ROOT / "build/canonical-observation-g2-final97/apple-a/build-report.json",
-        ROOT / "build/canonical-observation-g2-final97/apple-b/build-report.json",
+        ROOT / "build/canonical-observation-g2-final99/apple-a/build-report.json",
+        ROOT / "build/canonical-observation-g2-final99/apple-b/build-report.json",
     ),
     "linux-clang": (
-        ROOT / "build/canonical-observation-g2-final97/linux-a/build-report.json",
-        ROOT / "build/canonical-observation-g2-final97/linux-b/build-report.json",
+        ROOT / "build/canonical-observation-g2-final99/linux-a/build-report.json",
+        ROOT / "build/canonical-observation-g2-final99/linux-b/build-report.json",
     ),
 }
 BOOT_REPORTS = {

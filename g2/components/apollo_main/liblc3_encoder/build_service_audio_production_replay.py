@@ -463,7 +463,7 @@ def _profile_host_bins(config: dict[str, Any], report: dict[str, Any],
     pt = providers["pt_protocol"]["placement"]
     reservations.append((int(pt["runtime_start"]), int(pt["runtime_end_exclusive"])))
 
-    names = (proposal["selected_functions"] if profile == "apple-clang" else
+    names = (proposal["suffix_host_functions"] if profile == "apple-clang" else
              sorted(report_leaves))
     bins = []
     for name in names:

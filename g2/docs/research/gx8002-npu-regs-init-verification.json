@@ -1,0 +1,68 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_npu_regs_init",
+      "section_name": ".text",
+      "compiled_bytes": 64,
+      "compiled_sha256": "38e4fbd96d69d37eb04634e73a4f412e97a661d75ef40fa217a6249eb002a820",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_npu_regs_init",
+          "package_offset": 61148,
+          "bytes": 76,
+          "sha256": "52b01e6f998655d59aa97070311e663fd68804a3a93691b02463d89ce1a3d823",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "oracle": {
+      "path": "drivers_lib/snpu/grus/snpu.o",
+      "blob": "2565938852946027c726e66d0d8ee6e0bd0cc0d7",
+      "sha256": "6ce5cb2c361f4bae59fc87dd86631bd6c888dffbe28461b0db2e27f8c6e22f03",
+      "role": "identity_only"
+    },
+    "bindings": {
+      "open_cfw_gx8002_snpu_register_pointer": 537032980,
+      "open_cfw_gx8002_npu_set_clock_gate": 270554648,
+      "open_cfw_gx8002_npu_set_idle_cycle": 270554696,
+      "open_cfw_gx8002_npu_set_idle_mode": 270554672,
+      "open_cfw_gx8002_npu_clr_interrupt": 270554984,
+      "open_cfw_gx8002_npu_en_interrupt": 270554732,
+      "open_cfw_gx8002_npu_set_overtime_thr": 270554720
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "source_sha256": "aa48f4ec1634d790d0a950570e3f7350ad2ab133f9fa29e088e91a3b001595c2",
+    "symbol": "open_cfw_gx8002_npu_regs_init",
+    "section_name": ".text",
+    "package_offset": 61148,
+    "compiled_bytes": 64,
+    "compiled_sha256": "38e4fbd96d69d37eb04634e73a4f412e97a661d75ef40fa217a6249eb002a820",
+    "stock_envelope_bytes": 76,
+    "stock_sha256": "52b01e6f998655d59aa97070311e663fd68804a3a93691b02463d89ce1a3d823",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Candidate only. Need live pointer reloads, exact helper ordering and arguments, and ABI checks. Only external pointer slot described; no state ownership claimed."
+    ]
+  },
+  "cases": 888,
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Six ordered helper calls with live pointer reloads, exact arguments, caller clobbers and eight-byte frame. Only the external pointer slot is described, not ownership of driver state. Synthetic pointer encodings test forwarding only. Helpers have separate source qualification; no physical MMIO timing claim."
+  ]
+}

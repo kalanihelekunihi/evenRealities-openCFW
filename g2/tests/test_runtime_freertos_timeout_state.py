@@ -905,7 +905,7 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                     "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
                 ),
                 2_563,
-                2_448,
+                2_447,
             ),
         )
         component = self.production["component"]
@@ -977,13 +977,14 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
             "opaque_between_freertos_task_event_removal_functions",
             (
                 "freertos_task_remove_from_unordered_event_list_"
-                "source_replacement_split_0001d49c_0001d4a1"
+                "source_replacement_split_0001d49c_0001d4a1_"
+                "split_0001d49c_0001d4a0"
             ),
-            "liblc3_service_audio_0004_0001d4a1_0001d574",
-            (
-                "freertos_task_remove_from_unordered_event_list_"
-                "source_replacement_split_0001d574_0001d576"
-            ),
+            "liblc3_service_audio_0050_0001d4a0_0001d4a1",
+            "liblc3_service_audio_0051_0001d4a1_0001d572",
+            "liblc3_service_audio_0007_0001d4a1_0001d574_"
+            "split_0001d572_0001d574",
+            "liblc3_service_audio_0008_0001d574_0001d576",
             "freertos_task_internal_set_timeout_state_source_replacement",
             "freertos_task_check_for_timeout_source_replacement",
             "apollo_freertos_task_internal_set_timeout_state_source_leaf",
@@ -1051,27 +1052,32 @@ class RuntimeFreeRTOSTimeoutStateTests(unittest.TestCase):
                 ),
                 (
                     "freertos_task_remove_from_unordered_event_list_"
-                    "source_replacement_split_0001d49c_0001d4a1"
+                    "source_replacement_split_0001d49c_0001d4a1_"
+                    "split_0001d49c_0001d4a0"
                 ): (
                     119_964,
-                    5,
+                    4,
                     0x0045_547C,
                     "generated_source_entry_replacement",
                 ),
-                "liblc3_service_audio_0004_0001d4a1_0001d574": (
+                "liblc3_service_audio_0050_0001d4a0_0001d4a1": (
+                    119_968, 1, 0x0045_5480,
+                    "generated_source_data_replacement",
+                ),
+                "liblc3_service_audio_0051_0001d4a1_0001d572": (
                     119_969,
-                    211,
+                    209,
                     0x0045_5481,
                     "generated_source_data_replacement",
                 ),
-                (
-                    "freertos_task_remove_from_unordered_event_list_"
-                    "source_replacement_split_0001d574_0001d576"
-                ): (
-                    120_180,
-                    2,
-                    0x0045_5554,
-                    "generated_source_entry_replacement",
+                "liblc3_service_audio_0007_0001d4a1_0001d574_"
+                "split_0001d572_0001d574": (
+                    120_178, 2, 0x0045_5552,
+                    "generated_source_data_replacement",
+                ),
+                "liblc3_service_audio_0008_0001d574_0001d576": (
+                    120_180, 2, 0x0045_5554,
+                    "generated_source_data_replacement",
                 ),
                 (
                     "freertos_task_internal_set_timeout_state_"

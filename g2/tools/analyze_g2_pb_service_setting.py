@@ -13,7 +13,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from apollo_artifact_consistency import validate_apollo_main_artifacts
+from apollo_artifact_consistency import (
+    validate_apollo_main_artifacts, validate_composed_source_replacement,
+)
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x00437FE0
 IMAGE_SHA256 = "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
@@ -311,15 +313,12 @@ def analyze(image_path: Path = IMAGE) -> dict:
     main = manifest["component_overrides"]["apollo_main"]
     region_by_name = {item["name"]: item for item in main["regions"]}
     for region_name, row in zip(MANIFEST_PATCH_NAMES, rows):
-        region = region_by_name.get(region_name)
-        if region is None or (
-            region.get("target_address"), region.get("size"),
-            region.get("address_status"),
-        ) != (int(row["stock_start"], 0), int(row["stock_bytes"]),
-              "generated_source_entry_replacement"):
-            raise AuditError(
-                f"production manifest replacement changed: {row['function']}"
-            )
+        start = int(row["stock_start"], 0)
+        validate_composed_source_replacement(
+            main["regions"], start, start + int(row["stock_bytes"]),
+            region_name, AuditError,
+            f"production manifest replacement for {row['function']}",
+        )
     for name, size, offset, _, region_suffix in FUNCTIONS:
         region = region_by_name.get(f"pb_setting_{region_suffix}_source_text")
         if region is None or (

@@ -1,0 +1,176 @@
+{
+  "source_sha256": "a466f41663ee57ccd2ffa1eba6ccd5d060208e4ce05891833b1accdd581d68ac",
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "compile_flags": [
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "upstream_header": {
+    "path": "include/driver/gx_snpu.h",
+    "git_blob": "a2a911b22f7f379d9f489d959519125d5cad3a52",
+    "sha256": "72aa01a5cc6519da63dff4afa7163c7d3a3045d203998e691768dfa189643a46"
+  },
+  "configuration": {
+    "CONFIG_ARCH_GRUS": 1
+  },
+  "functions": [
+    {
+      "symbol": "LvpModelGetCmdSize",
+      "compiled_bytes": 6,
+      "compiled_sha256": "f1696730dce84d40bae6ffb7652cb8587c148d339af3f9c7b4bc1fab6170c711",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpModelGetCmdSize",
+          "package_offset": 74112,
+          "bytes": 6,
+          "sha256": "f1696730dce84d40bae6ffb7652cb8587c148d339af3f9c7b4bc1fab6170c711",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "LvpModelGetWeightSize",
+      "compiled_bytes": 8,
+      "compiled_sha256": "9e42c34e2845d3cb222c3a9fdb7052c5afe7295954eac0b05cdfde745c2a0628",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpModelGetWeightSize",
+          "package_offset": 74120,
+          "bytes": 8,
+          "sha256": "9e42c34e2845d3cb222c3a9fdb7052c5afe7295954eac0b05cdfde745c2a0628",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "LvpModelGetOpsSize",
+      "compiled_bytes": 4,
+      "compiled_sha256": "45370350a684766b91f6812212e07e5548ee4513419b4ebad49d55184bbcc347",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpModelGetOpsSize",
+          "package_offset": 74128,
+          "bytes": 4,
+          "sha256": "45370350a684766b91f6812212e07e5548ee4513419b4ebad49d55184bbcc347",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "LvpModelGetDataSize",
+      "compiled_bytes": 6,
+      "compiled_sha256": "e038b4cc0483c3f283c740e8913cfe415d7f70a4a83710b2c957de768f0e7e9a",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpModelGetDataSize",
+          "package_offset": 74132,
+          "bytes": 6,
+          "sha256": "e038b4cc0483c3f283c740e8913cfe415d7f70a4a83710b2c957de768f0e7e9a",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "LvpModelGetTmpSize",
+      "compiled_bytes": 4,
+      "compiled_sha256": "121a905852ec4e098f07b7890d24bb5ac863f1ab9ef50247a25391d4b4350b5d",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpModelGetTmpSize",
+          "package_offset": 74140,
+          "bytes": 4,
+          "sha256": "121a905852ec4e098f07b7890d24bb5ac863f1ab9ef50247a25391d4b4350b5d",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "LvpCTCModelInitSnpuTask",
+      "compiled_bytes": 56,
+      "compiled_sha256": "abef8eff3685a8e789509abad858f5f1323969ae83d0a7c4eb160f56d91845fd",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpCTCModelInitSnpuTask",
+          "package_offset": 74164,
+          "bytes": 56,
+          "sha256": "abef8eff3685a8e789509abad858f5f1323969ae83d0a7c4eb160f56d91845fd",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "LvpCTCModelGetSnpuOutBuffer",
+      "compiled_bytes": 8,
+      "compiled_sha256": "ffd5ae7a1cf361e478c56a5f2334db4d7ab17d32e9e4660c377f243e5e0c3db6",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpCTCModelGetSnpuOutBuffer",
+          "package_offset": 74220,
+          "bytes": 8,
+          "sha256": "ffd5ae7a1cf361e478c56a5f2334db4d7ab17d32e9e4660c377f243e5e0c3db6",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "LvpCTCModelGetSnpuFeatsBuffer",
+      "compiled_bytes": 2,
+      "compiled_sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpCTCModelGetSnpuFeatsBuffer",
+          "package_offset": 74228,
+          "bytes": 2,
+          "sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "LvpCTCModelGetSnpuStateBuffer",
+      "compiled_bytes": 6,
+      "compiled_sha256": "2fdec7e2ba49640dc3190bd0a2d7e9f2d5426b306837cd7c8de7f28c7ceb22d3",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpCTCModelGetSnpuStateBuffer",
+          "package_offset": 74232,
+          "bytes": 6,
+          "sha256": "2fdec7e2ba49640dc3190bd0a2d7e9f2d5426b306837cd7c8de7f28c7ceb22d3",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "LvpCTCModelGetSnpuFeatsDim",
+      "compiled_bytes": 6,
+      "compiled_sha256": "49eb9189c4982c4fad237355d11c7b85a886f53588793e017054340d8d7719f3",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpCTCModelGetSnpuFeatsDim",
+          "package_offset": 74240,
+          "bytes": 6,
+          "sha256": "49eb9189c4982c4fad237355d11c7b85a886f53588793e017054340d8d7719f3",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "compiled_function_bytes": 106,
+  "saved_task_address": "0x2002e85c",
+  "task_size": 32,
+  "source_admitted_as_model_data": false,
+  "firmware_bytes_emitted": 0,
+  "hardware_qualified": false,
+  "limits": [
+    "Byte-exact interface code does not reconstruct the model graph or accelerator commands.",
+    "Saved-task initialization/copy and its other callers remain separate recovery work."
+  ]
+}

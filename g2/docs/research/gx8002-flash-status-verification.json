@@ -1,0 +1,203 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_flash_read_status",
+      "section_name": ".text.flash_read_status",
+      "compiled_bytes": 24,
+      "compiled_sha256": "33208916865f5312951fc4d352a09f7b012586a5c3682250852131e279cfe203",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_read_status",
+          "package_offset": 87880,
+          "bytes": 24,
+          "sha256": "5a6fd6b420a62e8103f4c9f571817e7d10e87ea18e8676dd802a4b5fda0187f4",
+          "region": "image_a_sram_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_flash_write_enable",
+      "section_name": ".text.flash_write_enable",
+      "compiled_bytes": 16,
+      "compiled_sha256": "00395533c33256f30d9c6d109fae92144ce5dbea5f9c8f59a4b055adbda91faa",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_write_enable",
+          "package_offset": 87904,
+          "bytes": 16,
+          "sha256": "00395533c33256f30d9c6d109fae92144ce5dbea5f9c8f59a4b055adbda91faa",
+          "region": "image_a_sram_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_flash_wait_ready",
+      "section_name": ".text.flash_wait_ready",
+      "compiled_bytes": 18,
+      "compiled_sha256": "1d94fdd049a92b17fcebb6f8fe2fc1970686e84de1bc5692908c543f1480b18f",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_wait_ready",
+          "package_offset": 87920,
+          "bytes": 20,
+          "sha256": "da9def7696fa153d078ae1e8e72909680bdab5a7b7b53ab315acae637aa3a1cd",
+          "region": "image_a_sram_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_flash_read_status2",
+      "section_name": ".text.flash_read_status2",
+      "compiled_bytes": 24,
+      "compiled_sha256": "3560821a080ce82930cd83307857cad513d6f0e687e6ec829c18d9b46cb0a358",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_read_status2",
+          "package_offset": 87940,
+          "bytes": 24,
+          "sha256": "a0b72a9156f77b7b33839fc353889b14eda0a2f7fed20077503f3099ae056898",
+          "region": "image_a_sram_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "build": {
+      "source_sha256": "8b0b560502f5fe8dbb15733964906f16451abd830d89beeee6d6b34ff35ef00f",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_flash_read_status",
+          "section": ".text.flash_read_status",
+          "compiled_bytes": 24,
+          "compiled_sha256": "33208916865f5312951fc4d352a09f7b012586a5c3682250852131e279cfe203",
+          "package_offset": 87880,
+          "stock_envelope_bytes": 24,
+          "stock_sha256": "5a6fd6b420a62e8103f4c9f571817e7d10e87ea18e8676dd802a4b5fda0187f4",
+          "byte_exact": false
+        },
+        {
+          "symbol": "open_cfw_gx8002_flash_write_enable",
+          "section": ".text.flash_write_enable",
+          "compiled_bytes": 16,
+          "compiled_sha256": "00395533c33256f30d9c6d109fae92144ce5dbea5f9c8f59a4b055adbda91faa",
+          "package_offset": 87904,
+          "stock_envelope_bytes": 16,
+          "stock_sha256": "00395533c33256f30d9c6d109fae92144ce5dbea5f9c8f59a4b055adbda91faa",
+          "byte_exact": true
+        },
+        {
+          "symbol": "open_cfw_gx8002_flash_wait_ready",
+          "section": ".text.flash_wait_ready",
+          "compiled_bytes": 18,
+          "compiled_sha256": "1d94fdd049a92b17fcebb6f8fe2fc1970686e84de1bc5692908c543f1480b18f",
+          "package_offset": 87920,
+          "stock_envelope_bytes": 20,
+          "stock_sha256": "da9def7696fa153d078ae1e8e72909680bdab5a7b7b53ab315acae637aa3a1cd",
+          "byte_exact": false
+        },
+        {
+          "symbol": "open_cfw_gx8002_flash_read_status2",
+          "section": ".text.flash_read_status2",
+          "compiled_bytes": 24,
+          "compiled_sha256": "3560821a080ce82930cd83307857cad513d6f0e687e6ec829c18d9b46cb0a358",
+          "package_offset": 87940,
+          "stock_envelope_bytes": 24,
+          "stock_sha256": "a0b72a9156f77b7b33839fc353889b14eda0a2f7fed20077503f3099ae056898",
+          "byte_exact": false
+        }
+      ],
+      "source_admitted": false,
+      "limits": [
+        "Decoded status helpers require transport-call and stack qualification.",
+        "Polling has no timeout; no physical hardware qualification."
+      ]
+    },
+    "comparison": {
+      "build": {
+        "source_sha256": "8b0b560502f5fe8dbb15733964906f16451abd830d89beeee6d6b34ff35ef00f",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_flash_read_status",
+            "section": ".text.flash_read_status",
+            "compiled_bytes": 24,
+            "compiled_sha256": "33208916865f5312951fc4d352a09f7b012586a5c3682250852131e279cfe203",
+            "package_offset": 87880,
+            "stock_envelope_bytes": 24,
+            "stock_sha256": "5a6fd6b420a62e8103f4c9f571817e7d10e87ea18e8676dd802a4b5fda0187f4",
+            "byte_exact": false
+          },
+          {
+            "symbol": "open_cfw_gx8002_flash_write_enable",
+            "section": ".text.flash_write_enable",
+            "compiled_bytes": 16,
+            "compiled_sha256": "00395533c33256f30d9c6d109fae92144ce5dbea5f9c8f59a4b055adbda91faa",
+            "package_offset": 87904,
+            "stock_envelope_bytes": 16,
+            "stock_sha256": "00395533c33256f30d9c6d109fae92144ce5dbea5f9c8f59a4b055adbda91faa",
+            "byte_exact": true
+          },
+          {
+            "symbol": "open_cfw_gx8002_flash_wait_ready",
+            "section": ".text.flash_wait_ready",
+            "compiled_bytes": 18,
+            "compiled_sha256": "1d94fdd049a92b17fcebb6f8fe2fc1970686e84de1bc5692908c543f1480b18f",
+            "package_offset": 87920,
+            "stock_envelope_bytes": 20,
+            "stock_sha256": "da9def7696fa153d078ae1e8e72909680bdab5a7b7b53ab315acae637aa3a1cd",
+            "byte_exact": false
+          },
+          {
+            "symbol": "open_cfw_gx8002_flash_read_status2",
+            "section": ".text.flash_read_status2",
+            "compiled_bytes": 24,
+            "compiled_sha256": "3560821a080ce82930cd83307857cad513d6f0e687e6ec829c18d9b46cb0a358",
+            "package_offset": 87940,
+            "stock_envelope_bytes": 24,
+            "stock_sha256": "a0b72a9156f77b7b33839fc353889b14eda0a2f7fed20077503f3099ae056898",
+            "byte_exact": false
+          }
+        ],
+        "source_admitted": false,
+        "limits": [
+          "Decoded status helpers require transport-call and stack qualification.",
+          "Polling has no timeout; no physical hardware qualification."
+        ]
+      },
+      "cases": 3075,
+      "transport_contract": "Source-qualified command read/write, successful completion; actual status-read helper is executed inside wait-ready.",
+      "limits": [
+        "Finite status schedules; polling remains unbounded if busy never clears.",
+        "No physical flash qualification."
+      ]
+    }
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Source-qualified command transport contract; status polling has no timeout and physical flash remains unqualified."
+  ]
+}

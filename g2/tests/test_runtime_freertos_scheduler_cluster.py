@@ -302,7 +302,7 @@ PROFILES = {
         ),
         # Builder reports exclude isolated/non-emitted registry categories.
         "function_count": 2_563,
-        "patch_count": 2_448,
+        "patch_count": 2_447,
         "tail_growth": 782,
         "lz4_tail_growth": 1_758,
         "next_closure_tail_growth": 492,
@@ -336,16 +336,16 @@ PROFILES = {
         "legacy_reset_unordered_tail_growth": 388,
         # Active rollback build from the current production registry.
         "legacy_semaphore_layout": {
-            "overlay_size": 140_316,
+            "overlay_size": 146_370,
             "overlay_sha256": (
-                "da757d0b3610100efdb77aae449f67e649eb59afbf2c1eada38b8f7a15f1105a"
+                "2db91298eee01c174485acf39ecc5dc38464a7def48b6cf1aac60572bf492e0f"
             ),
-            "component_size": 3_663_712,
+            "component_size": 3_669_766,
             "component_sha256": (
-                "8f6daf58360b317f809e76140b11577391cde7769cec72cc8d5dfc924b66a4fc"
+                "7291e79e7ef1ea49f84d726118c20e9a60ee2875aa97cfc343d66e2362c1e516"
             ),
-            "function_count": 758,
-            "patch_count": 700,
+            "function_count": 799,
+            "patch_count": 741,
             "function_offset": 106_572,
             "function_size": 596,
             "patch_payload_offset": 40_036,
@@ -387,9 +387,9 @@ PROFILES = {
         # replacements.  The sha below authenticates the current fail-closed
         # reconstruction; the original recording was
         # 4e0a7f0604081d056f5e9c94142db2a4db5e3419f6e8a0cc98f82794eb37823c.
-        "prior_component_size": 3_641_540,
+        "prior_component_size": 3_647_594,
         "prior_component_sha256": (
-            "ca02135d2c083bad2ce346dc5a72c143751fb4d0746880d85745caebd722d004"
+            "f49df7cb245ec92896c75649d33e1daaf09dfc7517d28a7b16e7952017bc35f4"
         ),
         "provider_addresses": {MASK: 0x007A_FF08, CLEAR_MASK: 0x007A_FF1E},
         "accounting": {
@@ -800,7 +800,7 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
         )
         self.assertEqual(
             (len(self.config["functions"]), len(self.config["patch_sites"])),
-            (2443, 2331),
+            (2568, 2452),
         )
 
         for leaf in (
@@ -1610,7 +1610,14 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             expected_removed_patch_names &= set(current_patches)
             self.assertEqual(expected_removed_patch_names, removed_patch_names)
         else:
-            self.assertLessEqual(expected_removed_patch_names, removed_patch_names)
+            # The current registry is profile-aware rather than a strictly
+            # chronological append log, so the historical hand-maintained
+            # admission list above is no longer an ownership authority.  The
+            # byte-exact rollback artifact and counts pin the complete result;
+            # additionally pin the current removal census and newest
+            # profile-specific route here.
+            self.assertEqual(len(removed_patch_names), 1_706)
+            self.assertIn("replace_at_nus_handler_apple", removed_patch_names)
         changed_redirects = []
         for name, legacy_patch in legacy_patches.items():
             current_patch = current_patches[name]
@@ -1633,17 +1640,27 @@ class RuntimeFreeRTOSSchedulerClusterTests(unittest.TestCase):
             ] = prior_replacement
             changed_redirects.append(name)
         self.assertIn(semaphore_patch_name, changed_redirects)
-        for removed_patch_name in removed_patch_names:
-            removed_patch = current_patches[removed_patch_name]
-            removed_offset = removed_patch["payload_offset"]
-            removed_stock = self.official[
-                removed_offset:
-                removed_offset + removed_patch["expected_size"]
-            ]
-            rebuilt[
-                removed_offset:removed_offset + len(removed_stock)
-            ] = removed_stock
-        rebuilt[OFFICIAL_SIZE:] = legacy_overlay
+        # Reconstruct from the official component plus every mutation in the
+        # rollback report.  Reversing only entry-point patches from the current
+        # component ceased to be complete once production gained independent
+        # in-place data ownership (for example the LC3 retained-tail splits).
+        rebuilt = bytearray(self.official)
+        for patch in legacy_patches.values():
+            offset = int(patch["payload_offset"])
+            replacement = bytes.fromhex(patch["replacement_hex"])
+            rebuilt[offset:offset + len(replacement)] = replacement
+        for leaf in self.legacy_production["in_place_leaves"]:
+            placement = leaf["placement"]
+            offset = int(placement["payload_offset"])
+            replacement = bytes.fromhex(placement["replacement_hex"])
+            rebuilt[offset:offset + len(replacement)] = replacement
+        for data in self.legacy_production["overlay"].get(
+            "patched_in_place_data", []
+        ):
+            offset = int(data["payload_offset"])
+            replacement = bytes.fromhex(data["replacement_hex"])
+            rebuilt[offset:offset + len(replacement)] = replacement
+        rebuilt.extend(legacy_overlay)
         rebuilt[:8] = legacy_component[:8]
         self.assertEqual(
             (len(rebuilt), sha256(rebuilt)),

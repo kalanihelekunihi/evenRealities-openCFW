@@ -1,0 +1,182 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_rtc_set_tick",
+      "section_name": ".text",
+      "compiled_bytes": 12,
+      "compiled_sha256": "a20e6d50e2e45f1f0edb4b1eca5b44447e26f603db47133512d71800702874f1",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_rtc_set_tick",
+          "package_offset": 64572,
+          "bytes": 12,
+          "sha256": "a20e6d50e2e45f1f0edb4b1eca5b44447e26f603db47133512d71800702874f1",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidates": {
+      "start": {
+        "dependency_headers": {
+          "include/utility/list.h": {
+            "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+            "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+          },
+          "include/utility/types.h": {
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        },
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "drivers_lib/rtc/dw_rtc.o",
+          "blob": "bc29abc7e65c826c8e5a2cd0799988445b5d50ff",
+          "sha256": "e2aad98d9d1e7a758e28952e3aef1e43c7edc0362dd6ac569ebe37fb8e64cd59",
+          "role": "identity_only"
+        },
+        "bindings": {},
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-jump-tables"
+        ],
+        "header": {
+          "path": "include/driver/gx_rtc.h",
+          "blob": "e57b41aa277b78926dddd1f890f9fb34aefa2e8e",
+          "sha256": "75dae9cf50af1b9a9b976c13f9c2364666e88bd310698807476832dbf9335494"
+        },
+        "source_sha256": "2399cde13886958b504e1e217ad7b57b6c558bc90b6b3a6d29b662895d9cda3b",
+        "symbol": "open_cfw_gx8002_rtc_start_tick",
+        "section_name": ".text",
+        "package_offset": 64556,
+        "compiled_bytes": 16,
+        "compiled_sha256": "16405b6c894e37098adac09e9cb167e68b623eee1c3a6a91afd6cee9a3ae67a3",
+        "stock_envelope_bytes": 16,
+        "stock_sha256": "2849ebfb203d08c3291de5f818fe078b7eec290bee0c186a3c0048244dc48ae5",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+        ]
+      },
+      "set": {
+        "dependency_headers": {
+          "include/utility/list.h": {
+            "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+            "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+          },
+          "include/utility/types.h": {
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        },
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "drivers_lib/rtc/dw_rtc.o",
+          "blob": "bc29abc7e65c826c8e5a2cd0799988445b5d50ff",
+          "sha256": "e2aad98d9d1e7a758e28952e3aef1e43c7edc0362dd6ac569ebe37fb8e64cd59",
+          "role": "identity_only"
+        },
+        "bindings": {},
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-jump-tables"
+        ],
+        "header": {
+          "path": "include/driver/gx_rtc.h",
+          "blob": "e57b41aa277b78926dddd1f890f9fb34aefa2e8e",
+          "sha256": "75dae9cf50af1b9a9b976c13f9c2364666e88bd310698807476832dbf9335494"
+        },
+        "source_sha256": "b87ccd58a51ab22127d1be9449baa3273ace2271095dd3c51d36e8de4b000200",
+        "symbol": "open_cfw_gx8002_rtc_set_tick",
+        "section_name": ".text",
+        "package_offset": 64572,
+        "compiled_bytes": 12,
+        "compiled_sha256": "a20e6d50e2e45f1f0edb4b1eca5b44447e26f603db47133512d71800702874f1",
+        "stock_envelope_bytes": 12,
+        "stock_sha256": "a20e6d50e2e45f1f0edb4b1eca5b44447e26f603db47133512d71800702874f1",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+        ]
+      }
+    },
+    "decoded_cases": 644,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Finite register patterns and decoded leaf ABI; no physical RTC timing or concurrency proof. Admission export and evidence pinning pending."
+    ]
+  },
+  "attribution": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "object": "drivers_lib/rtc/dw_rtc.o",
+    "blob": "bc29abc7e65c826c8e5a2cd0799988445b5d50ff",
+    "object_sha256": "e2aad98d9d1e7a758e28952e3aef1e43c7edc0362dd6ac569ebe37fb8e64cd59",
+    "sections": [
+      {
+        "symbol": "rtc_isr",
+        "package_offset": 64524,
+        "runtime_address": 270558848,
+        "bytes": 32,
+        "sha256": "bb8cc0ade6891953872ceac15f1136faeccead9c79c3cb6b063768ee19f1d6c6",
+        "full_relocated_section_match": true
+      },
+      {
+        "symbol": "gx_rtc_start_tick",
+        "package_offset": 64556,
+        "runtime_address": 270558880,
+        "bytes": 16,
+        "sha256": "2849ebfb203d08c3291de5f818fe078b7eec290bee0c186a3c0048244dc48ae5",
+        "full_relocated_section_match": true
+      },
+      {
+        "symbol": "gx_rtc_set_tick",
+        "package_offset": 64572,
+        "runtime_address": 270558896,
+        "bytes": 12,
+        "sha256": "a20e6d50e2e45f1f0edb4b1eca5b44447e26f603db47133512d71800702874f1",
+        "full_relocated_section_match": true
+      }
+    ],
+    "bindings": {
+      ".bss": 537033536
+    },
+    "source_admitted": false,
+    "limits": [
+      "Comparison-only authenticated SDK object; none of its bytes are linked into reconstructed firmware."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_rtc_ticks.py": "9edb6e9e9978c789ceb801cd91345b33ca49bf7b1afb936ec3778f79e611e224",
+    "analyze_gx8002_rtc_primitives.py": "c09e331eea8c4af3549570206abedcb4838a4cfd5d9f0fd86380069f6c7cc100",
+    "build_gx8002_rtc_start_tick_candidate.py": "d147b8ce8bac99655d4e958946ccb9687ae11385b87ed50e9f3d42c24def9b0c",
+    "build_gx8002_rtc_set_tick_candidate.py": "6a367fe66f0a6a1fe852af5f1aa3f20a186f71bda608364c6b36525a15ba5123",
+    "verify_gx8002_rtc_set_tick.py": "4bf1e5965ddc7cf24817b5301431ee624d934a377bf081620d3cdef11828ae0b"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded finite register patterns and leaf ABI, authenticated SDK attribution. No physical RTC timing or concurrent access proof."
+  ]
+}

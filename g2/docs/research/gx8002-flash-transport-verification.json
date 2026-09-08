@@ -1,0 +1,480 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_spi_wait_idle",
+      "section_name": ".text.spi_wait_idle",
+      "compiled_bytes": 16,
+      "compiled_sha256": "f9d3683293b7c1a9e4d1da0cc7b9002f2fd5b956a6137c69cc1a0b0d0df9cd0a",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_spi_wait_idle",
+          "package_offset": 87648,
+          "bytes": 16,
+          "sha256": "4c69925f75f82a665d3f637a6b5e93397488e1ae4279ebb5716c9349bc6c0319",
+          "region": "image_a_sram_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_spi_wait_rx_empty",
+      "section_name": ".text.spi_wait_rx_empty",
+      "compiled_bytes": 20,
+      "compiled_sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_spi_wait_rx_empty",
+          "package_offset": 87664,
+          "bytes": 20,
+          "sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f",
+          "region": "image_a_sram_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_spi_wait_tx_empty",
+      "section_name": ".text.spi_wait_tx_empty",
+      "compiled_bytes": 20,
+      "compiled_sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_spi_wait_tx_empty",
+          "package_offset": 87684,
+          "bytes": 20,
+          "sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e",
+          "region": "image_a_sram_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_flash_command_read",
+      "section_name": ".text.flash_command_read",
+      "compiled_bytes": 86,
+      "compiled_sha256": "73bdcf28e547cab400698ae50bac8b118c0506caf1208db4634ec71211f6aa87",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_command_read",
+          "package_offset": 87704,
+          "bytes": 88,
+          "sha256": "f0d8c693bf72ba26eb9a556639f6402d0753f5be529c78f6d7ac0ec466c78acd",
+          "region": "image_a_sram_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_flash_command_write",
+      "section_name": ".text.flash_command_write",
+      "compiled_bytes": 88,
+      "compiled_sha256": "234048697e90fd5d8fb5a76542ead4e68a227b4804ef8e959dc9499d93adf6d1",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_command_write",
+          "package_offset": 87792,
+          "bytes": 88,
+          "sha256": "4b27605a5582c72731e335ff64fc3486ef2381ffd5273eb4a245792e710bd893",
+          "region": "image_a_sram_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "build": {
+      "source_sha256": "add288ee3d8fc9f733db7c89fd922b8d1efe575c7a66d79e33e08a974ff3afc2",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_spi_wait_idle",
+          "section": ".text.spi_wait_idle",
+          "compiled_bytes": 16,
+          "compiled_sha256": "f9d3683293b7c1a9e4d1da0cc7b9002f2fd5b956a6137c69cc1a0b0d0df9cd0a",
+          "package_offset": 87648,
+          "stock_envelope_bytes": 16,
+          "stock_sha256": "4c69925f75f82a665d3f637a6b5e93397488e1ae4279ebb5716c9349bc6c0319",
+          "byte_exact": false
+        },
+        {
+          "symbol": "open_cfw_gx8002_spi_wait_rx_empty",
+          "section": ".text.spi_wait_rx_empty",
+          "compiled_bytes": 20,
+          "compiled_sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f",
+          "package_offset": 87664,
+          "stock_envelope_bytes": 20,
+          "stock_sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f",
+          "byte_exact": true
+        },
+        {
+          "symbol": "open_cfw_gx8002_spi_wait_tx_empty",
+          "section": ".text.spi_wait_tx_empty",
+          "compiled_bytes": 20,
+          "compiled_sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e",
+          "package_offset": 87684,
+          "stock_envelope_bytes": 20,
+          "stock_sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e",
+          "byte_exact": true
+        },
+        {
+          "symbol": "open_cfw_gx8002_flash_command_read",
+          "section": ".text.flash_command_read",
+          "compiled_bytes": 86,
+          "compiled_sha256": "73bdcf28e547cab400698ae50bac8b118c0506caf1208db4634ec71211f6aa87",
+          "package_offset": 87704,
+          "stock_envelope_bytes": 88,
+          "stock_sha256": "f0d8c693bf72ba26eb9a556639f6402d0753f5be529c78f6d7ac0ec466c78acd",
+          "byte_exact": false
+        },
+        {
+          "symbol": "open_cfw_gx8002_flash_command_write",
+          "section": ".text.flash_command_write",
+          "compiled_bytes": 88,
+          "compiled_sha256": "234048697e90fd5d8fb5a76542ead4e68a227b4804ef8e959dc9499d93adf6d1",
+          "package_offset": 87792,
+          "stock_envelope_bytes": 88,
+          "stock_sha256": "4b27605a5582c72731e335ff64fc3486ef2381ffd5273eb4a245792e710bd893",
+          "byte_exact": false
+        }
+      ],
+      "source_admitted": false,
+      "limits": [
+        "Readiness schedules, buffer accesses and complete transfer traces require qualification.",
+        "Polling has no timeout; no physical hardware qualification."
+      ]
+    },
+    "comparisons": {
+      "read": {
+        "build": {
+          "source_sha256": "add288ee3d8fc9f733db7c89fd922b8d1efe575c7a66d79e33e08a974ff3afc2",
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror"
+          ],
+          "functions": [
+            {
+              "symbol": "open_cfw_gx8002_spi_wait_idle",
+              "section": ".text.spi_wait_idle",
+              "compiled_bytes": 16,
+              "compiled_sha256": "f9d3683293b7c1a9e4d1da0cc7b9002f2fd5b956a6137c69cc1a0b0d0df9cd0a",
+              "package_offset": 87648,
+              "stock_envelope_bytes": 16,
+              "stock_sha256": "4c69925f75f82a665d3f637a6b5e93397488e1ae4279ebb5716c9349bc6c0319",
+              "byte_exact": false
+            },
+            {
+              "symbol": "open_cfw_gx8002_spi_wait_rx_empty",
+              "section": ".text.spi_wait_rx_empty",
+              "compiled_bytes": 20,
+              "compiled_sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f",
+              "package_offset": 87664,
+              "stock_envelope_bytes": 20,
+              "stock_sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f",
+              "byte_exact": true
+            },
+            {
+              "symbol": "open_cfw_gx8002_spi_wait_tx_empty",
+              "section": ".text.spi_wait_tx_empty",
+              "compiled_bytes": 20,
+              "compiled_sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e",
+              "package_offset": 87684,
+              "stock_envelope_bytes": 20,
+              "stock_sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e",
+              "byte_exact": true
+            },
+            {
+              "symbol": "open_cfw_gx8002_flash_command_read",
+              "section": ".text.flash_command_read",
+              "compiled_bytes": 86,
+              "compiled_sha256": "73bdcf28e547cab400698ae50bac8b118c0506caf1208db4634ec71211f6aa87",
+              "package_offset": 87704,
+              "stock_envelope_bytes": 88,
+              "stock_sha256": "f0d8c693bf72ba26eb9a556639f6402d0753f5be529c78f6d7ac0ec466c78acd",
+              "byte_exact": false
+            },
+            {
+              "symbol": "open_cfw_gx8002_flash_command_write",
+              "section": ".text.flash_command_write",
+              "compiled_bytes": 88,
+              "compiled_sha256": "234048697e90fd5d8fb5a76542ead4e68a227b4804ef8e959dc9499d93adf6d1",
+              "package_offset": 87792,
+              "stock_envelope_bytes": 88,
+              "stock_sha256": "4b27605a5582c72731e335ff64fc3486ef2381ffd5273eb4a245792e710bd893",
+              "byte_exact": false
+            }
+          ],
+          "source_admitted": false,
+          "limits": [
+            "Readiness schedules, buffer accesses and complete transfer traces require qualification.",
+            "Polling has no timeout; no physical hardware qualification."
+          ]
+        },
+        "cases": 7725,
+        "source_admitted": false,
+        "limits": [
+          "All counts 0..256 with valid nonwrapping buffers; NULL only at count zero. Larger counts and other address domains remain unqualified.",
+          "Finite hardware readiness schedules; no hardware timing or liveness claim."
+        ]
+      },
+      "write": {
+        "build": {
+          "source_sha256": "add288ee3d8fc9f733db7c89fd922b8d1efe575c7a66d79e33e08a974ff3afc2",
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror"
+          ],
+          "functions": [
+            {
+              "symbol": "open_cfw_gx8002_spi_wait_idle",
+              "section": ".text.spi_wait_idle",
+              "compiled_bytes": 16,
+              "compiled_sha256": "f9d3683293b7c1a9e4d1da0cc7b9002f2fd5b956a6137c69cc1a0b0d0df9cd0a",
+              "package_offset": 87648,
+              "stock_envelope_bytes": 16,
+              "stock_sha256": "4c69925f75f82a665d3f637a6b5e93397488e1ae4279ebb5716c9349bc6c0319",
+              "byte_exact": false
+            },
+            {
+              "symbol": "open_cfw_gx8002_spi_wait_rx_empty",
+              "section": ".text.spi_wait_rx_empty",
+              "compiled_bytes": 20,
+              "compiled_sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f",
+              "package_offset": 87664,
+              "stock_envelope_bytes": 20,
+              "stock_sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f",
+              "byte_exact": true
+            },
+            {
+              "symbol": "open_cfw_gx8002_spi_wait_tx_empty",
+              "section": ".text.spi_wait_tx_empty",
+              "compiled_bytes": 20,
+              "compiled_sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e",
+              "package_offset": 87684,
+              "stock_envelope_bytes": 20,
+              "stock_sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e",
+              "byte_exact": true
+            },
+            {
+              "symbol": "open_cfw_gx8002_flash_command_read",
+              "section": ".text.flash_command_read",
+              "compiled_bytes": 86,
+              "compiled_sha256": "73bdcf28e547cab400698ae50bac8b118c0506caf1208db4634ec71211f6aa87",
+              "package_offset": 87704,
+              "stock_envelope_bytes": 88,
+              "stock_sha256": "f0d8c693bf72ba26eb9a556639f6402d0753f5be529c78f6d7ac0ec466c78acd",
+              "byte_exact": false
+            },
+            {
+              "symbol": "open_cfw_gx8002_flash_command_write",
+              "section": ".text.flash_command_write",
+              "compiled_bytes": 88,
+              "compiled_sha256": "234048697e90fd5d8fb5a76542ead4e68a227b4804ef8e959dc9499d93adf6d1",
+              "package_offset": 87792,
+              "stock_envelope_bytes": 88,
+              "stock_sha256": "4b27605a5582c72731e335ff64fc3486ef2381ffd5273eb4a245792e710bd893",
+              "byte_exact": false
+            }
+          ],
+          "source_admitted": false,
+          "limits": [
+            "Readiness schedules, buffer accesses and complete transfer traces require qualification.",
+            "Polling has no timeout; no physical hardware qualification."
+          ]
+        },
+        "cases": 7725,
+        "source_admitted": false,
+        "limits": [
+          "All counts 0..256 with valid nonwrapping buffers; NULL only at count zero. Larger counts and other address domains remain unqualified.",
+          "Finite hardware readiness schedules; no hardware timing or liveness claim."
+        ]
+      },
+      "idle": {
+        "build": {
+          "source_sha256": "add288ee3d8fc9f733db7c89fd922b8d1efe575c7a66d79e33e08a974ff3afc2",
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror"
+          ],
+          "functions": [
+            {
+              "symbol": "open_cfw_gx8002_spi_wait_idle",
+              "section": ".text.spi_wait_idle",
+              "compiled_bytes": 16,
+              "compiled_sha256": "f9d3683293b7c1a9e4d1da0cc7b9002f2fd5b956a6137c69cc1a0b0d0df9cd0a",
+              "package_offset": 87648,
+              "stock_envelope_bytes": 16,
+              "stock_sha256": "4c69925f75f82a665d3f637a6b5e93397488e1ae4279ebb5716c9349bc6c0319",
+              "byte_exact": false
+            },
+            {
+              "symbol": "open_cfw_gx8002_spi_wait_rx_empty",
+              "section": ".text.spi_wait_rx_empty",
+              "compiled_bytes": 20,
+              "compiled_sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f",
+              "package_offset": 87664,
+              "stock_envelope_bytes": 20,
+              "stock_sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f",
+              "byte_exact": true
+            },
+            {
+              "symbol": "open_cfw_gx8002_spi_wait_tx_empty",
+              "section": ".text.spi_wait_tx_empty",
+              "compiled_bytes": 20,
+              "compiled_sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e",
+              "package_offset": 87684,
+              "stock_envelope_bytes": 20,
+              "stock_sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e",
+              "byte_exact": true
+            },
+            {
+              "symbol": "open_cfw_gx8002_flash_command_read",
+              "section": ".text.flash_command_read",
+              "compiled_bytes": 86,
+              "compiled_sha256": "73bdcf28e547cab400698ae50bac8b118c0506caf1208db4634ec71211f6aa87",
+              "package_offset": 87704,
+              "stock_envelope_bytes": 88,
+              "stock_sha256": "f0d8c693bf72ba26eb9a556639f6402d0753f5be529c78f6d7ac0ec466c78acd",
+              "byte_exact": false
+            },
+            {
+              "symbol": "open_cfw_gx8002_flash_command_write",
+              "section": ".text.flash_command_write",
+              "compiled_bytes": 88,
+              "compiled_sha256": "234048697e90fd5d8fb5a76542ead4e68a227b4804ef8e959dc9499d93adf6d1",
+              "package_offset": 87792,
+              "stock_envelope_bytes": 88,
+              "stock_sha256": "4b27605a5582c72731e335ff64fc3486ef2381ffd5273eb4a245792e710bd893",
+              "byte_exact": false
+            }
+          ],
+          "source_admitted": false,
+          "limits": [
+            "Readiness schedules, buffer accesses and complete transfer traces require qualification.",
+            "Polling has no timeout; no physical hardware qualification."
+          ]
+        },
+        "cases": 68,
+        "source_admitted": false,
+        "limits": [
+          "Finite busy traces demonstrate continued polling, not physical liveness.",
+          "RX/TX helpers and full transport still need composed trace verification."
+        ]
+      },
+      "empty": {
+        "build": {
+          "source_sha256": "add288ee3d8fc9f733db7c89fd922b8d1efe575c7a66d79e33e08a974ff3afc2",
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror"
+          ],
+          "functions": [
+            {
+              "symbol": "open_cfw_gx8002_spi_wait_idle",
+              "section": ".text.spi_wait_idle",
+              "compiled_bytes": 16,
+              "compiled_sha256": "f9d3683293b7c1a9e4d1da0cc7b9002f2fd5b956a6137c69cc1a0b0d0df9cd0a",
+              "package_offset": 87648,
+              "stock_envelope_bytes": 16,
+              "stock_sha256": "4c69925f75f82a665d3f637a6b5e93397488e1ae4279ebb5716c9349bc6c0319",
+              "byte_exact": false
+            },
+            {
+              "symbol": "open_cfw_gx8002_spi_wait_rx_empty",
+              "section": ".text.spi_wait_rx_empty",
+              "compiled_bytes": 20,
+              "compiled_sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f",
+              "package_offset": 87664,
+              "stock_envelope_bytes": 20,
+              "stock_sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f",
+              "byte_exact": true
+            },
+            {
+              "symbol": "open_cfw_gx8002_spi_wait_tx_empty",
+              "section": ".text.spi_wait_tx_empty",
+              "compiled_bytes": 20,
+              "compiled_sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e",
+              "package_offset": 87684,
+              "stock_envelope_bytes": 20,
+              "stock_sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e",
+              "byte_exact": true
+            },
+            {
+              "symbol": "open_cfw_gx8002_flash_command_read",
+              "section": ".text.flash_command_read",
+              "compiled_bytes": 86,
+              "compiled_sha256": "73bdcf28e547cab400698ae50bac8b118c0506caf1208db4634ec71211f6aa87",
+              "package_offset": 87704,
+              "stock_envelope_bytes": 88,
+              "stock_sha256": "f0d8c693bf72ba26eb9a556639f6402d0753f5be529c78f6d7ac0ec466c78acd",
+              "byte_exact": false
+            },
+            {
+              "symbol": "open_cfw_gx8002_flash_command_write",
+              "section": ".text.flash_command_write",
+              "compiled_bytes": 88,
+              "compiled_sha256": "234048697e90fd5d8fb5a76542ead4e68a227b4804ef8e959dc9499d93adf6d1",
+              "package_offset": 87792,
+              "stock_envelope_bytes": 88,
+              "stock_sha256": "4b27605a5582c72731e335ff64fc3486ef2381ffd5273eb4a245792e710bd893",
+              "byte_exact": false
+            }
+          ],
+          "source_admitted": false,
+          "limits": [
+            "Readiness schedules, buffer accesses and complete transfer traces require qualification.",
+            "Polling has no timeout; no physical hardware qualification."
+          ]
+        },
+        "cases": 58,
+        "source_admitted": false,
+        "limits": [
+          "Finite status schedules model hardware reads; no hardware liveness proof.",
+          "Full command transport/buffer behavior remains unqualified."
+        ]
+      }
+    }
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Valid nonwrapping caller buffers and polled MMIO behavior; controller limits, readiness liveness and physical hardware remain unqualified."
+  ]
+}

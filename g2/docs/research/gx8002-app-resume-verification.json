@@ -1,0 +1,50 @@
+{
+  "symbol": "open_cfw_gx8002_app_resume",
+  "source_sha256": "8729063d7ef3666032cc879a910ea32ac33164c5ad90b6215c64706ab6610c62",
+  "compile_flags": [
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-shrink-wrap"
+  ],
+  "linker_script_sha256": "e6d955542f0763a7b06a8bc87bc29c3f660cb6419ad4f73fa90c3d992f564c5d",
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream_header": {
+    "path": "lvp/app_core/lvp_app.h",
+    "git_blob": "4b7e105ff09df684966817f1045f28dd030b5f2d",
+    "sha256": "5f3302a3482d2539d515d068e1c1364508f7eca6711d23ab063c27dc18556450"
+  },
+  "dependency_header": {
+    "path": "lvp/app_core/lvp_app_core.h",
+    "git_blob": "e7521399bfa5d16c4ebacba2699e2f0286fc09cd",
+    "sha256": "7267c8f17cf22c3fe8904ac6babf611c3f1ea750c254a782c982b4e9fbb03c25"
+  },
+  "compiled_bytes": 28,
+  "compiled_sha256": "9e3f8b938241ed0908d706c81e1468eb9e9e3781bb85479bc7bb7cfbe1a1a616",
+  "stock_occurrences": [
+    {
+      "symbol": "open_cfw_gx8002_app_resume",
+      "package_offset": 74248,
+      "bytes": 28,
+      "sha256": "9e3f8b938241ed0908d706c81e1468eb9e9e3781bb85479bc7bb7cfbe1a1a616",
+      "region": "image_a_xip_text"
+    }
+  ],
+  "resolved_data_symbol": {
+    "symbol": "open_cfw_gx8002_app_core_ops",
+    "address": "0x20026d38"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Application pointer and callback target remain runtime-owned data.",
+    "Exact linked bytes corroborate the existing XIP translation, not hardware boot qualification."
+  ]
+}

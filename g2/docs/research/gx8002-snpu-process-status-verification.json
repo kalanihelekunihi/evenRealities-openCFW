@@ -1,0 +1,81 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_snpu_process_status",
+      "section_name": ".text",
+      "compiled_bytes": 232,
+      "compiled_sha256": "9c13411534d2d43bfa6c9f4e8052f7409892cef2c7a0725eddc913f90a16a9b1",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_snpu_process_status",
+          "package_offset": 61796,
+          "bytes": 264,
+          "sha256": "4a355bdc0e1e305525929c8eac316b20a217f4109f51bf53eab4883274228675",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "oracle": {
+      "path": "drivers_lib/snpu/grus/snpu.o",
+      "blob": "2565938852946027c726e66d0d8ee6e0bd0cc0d7",
+      "sha256": "6ce5cb2c361f4bae59fc87dd86631bd6c888dffbe28461b0db2e27f8c6e22f03",
+      "role": "identity_only"
+    },
+    "bindings": {
+      "open_cfw_gx8002_snpu_process_words": 537031504,
+      "open_cfw_gx8002_npu_get_interrupt": 270554864,
+      "open_cfw_gx8002_npu_clr_interrupt_without_overflow": 270555104,
+      "open_cfw_gx8002_npu_get_over_cmd_addr": 270555232,
+      "open_cfw_gx8002_npu_get_op_overflow_cmd_addr": 270555248,
+      "open_cfw_gx8002_npu_clr_overflow_interrupt": 270555192,
+      "open_cfw_gx8002_snpu_suspend": 270555792,
+      "open_cfw_gx8002_snpu_overtime_reset": 270555932
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-move-loop-invariants"
+    ],
+    "header": {
+      "path": "include/driver/gx_snpu.h",
+      "blob": "a2a911b22f7f379d9f489d959519125d5cad3a52",
+      "sha256": "72aa01a5cc6519da63dff4afa7163c7d3a3045d203998e691768dfa189643a46"
+    },
+    "source_sha256": "93b873f9b90990eda8240437fea93578a50e9c11d5785b420624843fadbb9c94",
+    "symbol": "open_cfw_gx8002_snpu_process_status",
+    "section_name": ".text",
+    "package_offset": 61796,
+    "compiled_bytes": 232,
+    "compiled_sha256": "9c13411534d2d43bfa6c9f4e8052f7409892cef2c7a0725eddc913f90a16a9b1",
+    "stock_envelope_bytes": 264,
+    "stock_sha256": "4a355bdc0e1e305525929c8eac316b20a217f4109f51bf53eab4883274228675",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Candidate only. Need full event priority, ring traversal, callback/state mutations, wrap behavior, never-completing prefixes, state accesses and ABI qualification. Candidate only; state and descriptor semantics remain partially unmodeled."
+    ]
+  },
+  "model_sha256": "d64027e07f4f1d7f7ff9f78369bfad90a99a442bfa7b82e1f5ff786eafc9995b",
+  "cases": 14048,
+  "noncompletion_prefix_cases": 120,
+  "frame_bytes": {
+    "stock": 56,
+    "source": 44
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded call-boundary model with valid ring indices0..9, all target/start/end positions, callback mutations, helper clobbers, event priorities and observed returns. Scratch stack addresses normalized; pointed-to stack words remain bounds checked. Helper implementations and physical hardware timing are separate obligations. Unmatched descriptor prefixes through32 record visits; no claim of termination. Offset-only state view and descriptor semantics remain incomplete."
+  ]
+}

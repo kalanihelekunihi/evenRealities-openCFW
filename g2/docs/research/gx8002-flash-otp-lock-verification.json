@@ -1,0 +1,104 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_flash_otp_lock",
+      "section_name": ".text.flash_otp_lock",
+      "compiled_bytes": 100,
+      "compiled_sha256": "5f1371980e8a22de3ed3d2122b6a9257a5f20f51f72c5d1a47b41caeb25c1af7",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_otp_lock",
+          "package_offset": 90724,
+          "bytes": 100,
+          "sha256": "6177b2cd3ed83808cf801361535b19d40020a8bb41d96c821de7e995f7b51812",
+          "region": "image_a_sram_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "build": {
+      "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+      "source_sha256": "7f97b591c50a635e269827d890b9c502bac1884834ab37a73b74df68ec261e78",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_flash_otp_lock",
+          "section": ".text.flash_otp_lock",
+          "compiled_bytes": 100,
+          "compiled_sha256": "5f1371980e8a22de3ed3d2122b6a9257a5f20f51f72c5d1a47b41caeb25c1af7",
+          "package_offset": 90724,
+          "stock_envelope_bytes": 100,
+          "stock_sha256": "6177b2cd3ed83808cf801361535b19d40020a8bb41d96c821de7e995f7b51812",
+          "byte_exact": false,
+          "fits": true
+        }
+      ],
+      "source_admitted": false,
+      "analysis_only_overlapping_sections_allowed": false,
+      "limits": [
+        "Region snapshots, device reloads and lock-bit extraction require decoded qualification.",
+        "No physical flash qualification."
+      ]
+    },
+    "comparison": {
+      "build": {
+        "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+        "source_sha256": "7f97b591c50a635e269827d890b9c502bac1884834ab37a73b74df68ec261e78",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_flash_otp_lock",
+            "section": ".text.flash_otp_lock",
+            "compiled_bytes": 100,
+            "compiled_sha256": "5f1371980e8a22de3ed3d2122b6a9257a5f20f51f72c5d1a47b41caeb25c1af7",
+            "package_offset": 90724,
+            "stock_envelope_bytes": 100,
+            "stock_sha256": "6177b2cd3ed83808cf801361535b19d40020a8bb41d96c821de7e995f7b51812",
+            "byte_exact": false,
+            "fits": true
+          }
+        ],
+        "source_admitted": false,
+        "analysis_only_overlapping_sections_allowed": false,
+        "limits": [
+          "Region snapshots, device reloads and lock-bit extraction require decoded qualification.",
+          "No physical flash qualification."
+        ]
+      },
+      "decoded_cases": 25800,
+      "frame_bytes": 16,
+      "source_admitted": false,
+      "limits": [
+        "Helpers modeled; no physical OTP qualification. Rejection tests and admission remain."
+      ]
+    }
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Qualified OTP lock status-byte payload, helper order, device reload and region snapshot with helper clobbers. Helpers modeled; physical OTP remains unqualified."
+  ]
+}

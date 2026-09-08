@@ -7,6 +7,7 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/"tools"))
 import analyze_g2_ux_system as c
 import analyze_g2_dashboard_watchface_manager as d
 import recover_apollo_embedded_source_paths as t
+from apollo_artifact_consistency import validate_region_tiling
 IMAGE=ROOT/"blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin";FM=ROOT/"tools/manifests/g2-service-codec-porting-function-map.tsv";CL=ROOT/"tools/manifests/g2-service-codec-porting-closure.tsv";PM=ROOT/"tools/manifests/g2-service-codec-porting-provider-map.tsv"
 SOURCE=ROOT/"components/apollo_main/core_overlay/service_codec_porting.c";OVERLAY=ROOT/"components/apollo_main/core_overlay/overlay.json";BUILD_REPORT=ROOT/"components/apollo_main/core_overlay/build/build-report.json";MANIFEST=ROOT/"manifests/g2-2.2.6.10-core-source.json";PACKAGE=ROOT/"build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin";FLASH_PLAN=ROOT/"build/source/flash-plan.json"
 PINS={FM:"337862aacdaa492a409533d35cd3e0febbacd71efa315dfb79bbbe224adeff63",CL:"f7df6f7f553d7946e8cadbf5bdb18d76b19e0b6e2857361f6b773c85d8ce8013",PM:"d5d00d196ab80981a3ce83c25e59ef3f7d59d46d82cb5d89356a84f6f5677081"}
@@ -62,7 +63,11 @@ def analyze(image=IMAGE):
  manifest=json.loads(MANIFEST.read_text());main=manifest["component_overrides"]["apollo_main"]
  if (main["provider"]["size"],main["provider"]["sha256"])!=(build["component"]["size"],build["component"]["sha256"]):raise c.AuditError("codec UART manifest/component accounting diverged")
  regions=[item for item in main["regions"] if item["name"].startswith("service_codec_porting")]
- if len(regions)!=8 or [item["size"] for item in regions]!=[166,186,156,72,15878,86,2,40] or [item["address_status"] for item in regions]!=["official_blob","generated_source_entry_replacement","generated_source_entry_replacement","official_blob","official_blob","source_compiled","generated_alignment","source_compiled"]:raise c.AuditError("codec UART manifest ownership changed")
+ totals={status:sum(item["size"] for item in regions if item["address_status"]==status) for status in ("official_blob","generated_source_entry_replacement","source_compiled","generated_alignment")}
+ if len(regions)!=18 or totals!={"official_blob":16076,"generated_source_entry_replacement":342,"source_compiled":126,"generated_alignment":2}:raise c.AuditError("codec UART manifest ownership changed")
+ suffix=[item for item in main["regions"] if isinstance(item.get("target_address"),int) and 0x58FCF0<=item["target_address"]<0x593AF6]
+ suffix_totals=validate_region_tiling(suffix,0x58FCF0,0x593AF6,c.AuditError,"codec UART retained/composed suffix",("official_blob","generated_source_data_replacement"))
+ if suffix_totals!={"official_blob":15838,"generated_source_data_replacement":40} or any(item["address_status"]=="generated_source_data_replacement" and not item["name"].startswith("liblc3_service_audio_") for item in suffix):raise c.AuditError("codec UART composed suffix owner changed")
  package_bytes=PACKAGE.read_bytes()
  if (len(package_bytes),sh(package_bytes))!=(manifest["package"]["expected_size"],manifest["package"]["expected_sha256"]):raise c.AuditError("codec UART package artifact changed")
  plan_bytes=FLASH_PLAN.read_bytes();plan=json.loads(plan_bytes)

@@ -772,7 +772,7 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                     "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
                 ),
                 2_563,
-                2_448,
+                2_447,
             ),
         )
         self.assertEqual(
@@ -854,13 +854,18 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
             ),
             "freertos_task_notify_wait_source_replacement",
             "freertos_task_notify_source_replacement_split_0001dc68_0001dc6c",
-            "liblc3_service_audio_0005_0001dc6c_0001ddd8",
+            "liblc3_service_audio_0052_0001dc6c_0001ddd6",
+            "liblc3_service_audio_0053_0001ddd6_0001ddd8",
             "opaque_between_freertos_task_notify_variants",
             (
                 "freertos_task_notify_from_isr_source_replacement_"
                 "split_0001dde0_0001dde4"
             ),
-            "liblc3_service_audio_0006_0001dde4_0001df7c",
+            "liblc3_service_audio_0046_0001dde4_0001df7a_"
+            "split_0001dde4_0001dde5",
+            "liblc3_service_audio_0054_0001dde5_0001df7a",
+            "liblc3_service_audio_0055_0001df7a_0001df7b",
+            "liblc3_service_audio_0056_0001df7b_0001df7c",
             (
                 "opaque_between_freertos_task_notify_from_isr_and_"
                 "add_current_to_delayed_list"
@@ -948,14 +953,18 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                     0x0045_5C48,
                     "generated_source_entry_replacement",
                 ),
-                "liblc3_service_audio_0005_0001dc6c_0001ddd8": (
+                "liblc3_service_audio_0052_0001dc6c_0001ddd6": (
                     121_964,
-                    364,
+                    362,
                     0x0045_5C4C,
                     "generated_source_data_replacement",
                 ),
+                "liblc3_service_audio_0053_0001ddd6_0001ddd8": (
+                    122_326, 2, 0x0045_5DB6,
+                    "generated_source_data_replacement",
+                ),
                 "opaque_between_freertos_task_notify_variants": (
-                    122_449,
+                    122_328,
                     8,
                     0x0045_5DB8,
                     "official_blob",
@@ -969,10 +978,21 @@ class RuntimeFreeRTOSResetEventItemValueTests(unittest.TestCase):
                     0x0045_5DC0,
                     "generated_source_entry_replacement",
                 ),
-                "liblc3_service_audio_0006_0001dde4_0001df7c": (
-                    122_340,
-                    408,
-                    0x0045_5DC4,
+                "liblc3_service_audio_0046_0001dde4_0001df7a_"
+                "split_0001dde4_0001dde5": (
+                    122_340, 1, 0x0045_5DC4,
+                    "generated_source_data_replacement",
+                ),
+                "liblc3_service_audio_0054_0001dde5_0001df7a": (
+                    122_341, 405, 0x0045_5DC5,
+                    "generated_source_data_replacement",
+                ),
+                "liblc3_service_audio_0055_0001df7a_0001df7b": (
+                    122_746, 1, 0x0045_5F5A,
+                    "generated_source_data_replacement",
+                ),
+                "liblc3_service_audio_0056_0001df7b_0001df7c": (
+                    122_747, 1, 0x0045_5F5B,
                     "generated_source_data_replacement",
                 ),
                 (

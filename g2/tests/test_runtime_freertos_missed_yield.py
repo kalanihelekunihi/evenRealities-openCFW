@@ -759,7 +759,7 @@ class RuntimeFreeRTOSMissedYieldTests(unittest.TestCase):
                     "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
                 ),
                 2_563,
-                2_448,
+                2_447,
                 3_903_840,
                 (
                     "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752"

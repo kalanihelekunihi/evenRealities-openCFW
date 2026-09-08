@@ -319,18 +319,64 @@ def analyze(image_path: Path = IMAGE) -> dict:
     manifest = json.loads(MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
     regions = {region["name"]: region for region in main["regions"]}
+    composed = []
+    composed_ranges = (
+        (0x00444F64, 0x00445106),
+        (0x00446D44, 0x00447A1A),
+        (0x00447F04, 0x00448660),
+    )
     for order, row in enumerate(rows, 1):
-        item = regions.get(f"ota_service_{order:02d}_source_replacement")
         replacement_size = 4 if row["name"] == "_fileCmdParse" else int(row["size"])
-        expected = (
-            int(row["entry"], 0), replacement_size,
-            "generated_source_entry_replacement",
+        start = int(row["entry"], 0)
+        end = start + replacement_size
+        covering = sorted(
+            (
+                max(start, item["target_address"]),
+                min(end, item["target_address"] + item["size"]),
+                item,
+            )
+            for item in main["regions"]
+            if isinstance(item.get("target_address"), int)
+            and isinstance(item.get("size"), int)
+            and item["target_address"] < end
+            and item["target_address"] + item["size"] > start
         )
-        if not item or (
-            item.get("target_address"), item.get("size"),
-            item.get("address_status"),
-        ) != expected:
+        cursor = start
+        for segment_start, segment_end, item in covering:
+            if segment_start != cursor or segment_end <= segment_start:
+                raise AuditError(f"production OTA stock region changed: {row['name']}")
+            name = item.get("name", "")
+            if name.startswith(f"ota_service_{order:02d}_source_replacement"):
+                if item.get("address_status") != "generated_source_entry_replacement":
+                    raise AuditError(f"production OTA stock route changed: {row['name']}")
+            elif (
+                name.startswith("liblc3_service_audio_")
+                and item.get("address_status") == "generated_source_data_replacement"
+                and any(left <= segment_start and segment_end <= right
+                        for left, right in composed_ranges)
+            ):
+                if composed and composed[-1][1] == segment_start:
+                    composed[-1] = (composed[-1][0], segment_end)
+                else:
+                    composed.append((segment_start, segment_end))
+            else:
+                raise AuditError(f"production OTA composed owner changed: {row['name']}")
+            cursor = segment_end
+        if cursor != end or not covering:
             raise AuditError(f"production OTA stock region changed: {row['name']}")
+        first_start, first_end, first_item = covering[0]
+        if (
+            first_start != start
+            or first_end - first_start < 4
+            or not first_item.get("name", "").startswith(
+                f"ota_service_{order:02d}_source_replacement"
+            )
+            or first_item.get("address_status")
+            != "generated_source_entry_replacement"
+        ):
+            raise AuditError(f"production OTA entry redirect changed: {row['name']}")
+    if tuple(composed) != composed_ranges:
+        raise AuditError("production OTA/LC3 composed-host census changed")
     reclaimed_tail = {
         "liblc3_ltpf_source_text": (0x00445664, 5596, "source_compiled"),
         "liblc3_ltpf_text_cave_tail": (0x00446C40, 30, "generated_alignment"),

@@ -1,0 +1,43 @@
+{
+  "frame_bytes": 16,
+  "build": {
+    "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+    "source_sha256": "83fa03ed463abb0b6906b16ed99ff9b9d38faf309cf09e2232d68772702e1d64",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_flash_otp_transmit",
+        "section": ".text.flash_otp_transmit",
+        "compiled_bytes": 160,
+        "compiled_sha256": "f84244af2c0439e7c1ab187f999a419a0d7b98029a46b3a0509b9d3001baf155",
+        "package_offset": 89640,
+        "stock_envelope_bytes": 164,
+        "stock_sha256": "203ede9b613cdfeb84d37ff42870c12bba79778c9120422d054bb10f07d6b1d6",
+        "byte_exact": false,
+        "fits": true
+      }
+    ],
+    "source_admitted": false,
+    "analysis_only_overlapping_sections_allowed": false,
+    "limits": [
+      "Region snapshots, device reloads and lock-bit extraction require decoded qualification.",
+      "No physical flash qualification."
+    ]
+  },
+  "cases": 1368,
+  "source_admitted": false,
+  "limits": [
+    "Modeled helper clobbers and finite FIFO readiness. Synthetic wrapped pointers do not certify physical buffer validity. Rejection tests and admission remain."
+  ]
+}

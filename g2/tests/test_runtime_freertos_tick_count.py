@@ -1426,8 +1426,8 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 hashlib.sha256(pre_bq27427_overlay).hexdigest(),
             ),
             (
-                159_902,
-                "094aa2f3bb6fc0484db27df117802801ce5483d74b36b9f6834e8bdf06f798b7",
+                179_768,
+                "75dfb288c201108d1a5361f9319db92ed1648c00e6916dff1fade92de44fb142",
             ),
         )
         pre_reset_unordered_overlay = pre_bq27427_overlay[
@@ -1439,8 +1439,8 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 hashlib.sha256(pre_reset_unordered_overlay).hexdigest(),
             ),
             (
-                159_514,
-                "cf7a05089cfee32a0593a976f7166033a2cc305a6a98f478e09e0b4b3d8173c3",
+                179_380,
+                "e1401cf7fae827d4fc13724457897724ea03b6dc11e8c359d638a9fbcfc127c1",
             ),
         )
         pre_semaphore_take_overlay = pre_reset_unordered_overlay[
@@ -1452,8 +1452,8 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 hashlib.sha256(pre_semaphore_take_overlay).hexdigest(),
             ),
             (
-                158_890,
-                "f4215dbd41d718c638deb51ba4c0f30c13a5311479d7ffe9c2054a8fcc502de8",
+                178_756,
+                "58fba461ef263302936a2bfdd37eeabb077aaf503410205df774f8343e2544bb",
             ),
         )
         pre_easylogger_overlay = pre_semaphore_take_overlay[
@@ -1465,36 +1465,36 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 hashlib.sha256(pre_easylogger_overlay).hexdigest(),
             ),
             (
-                156_796,
-                "92d99a6eefc9ca8dc228d0fbc51b9dcd684f7b6cbf1dd1892875c64e939b462e",
+                176_662,
+                "11fe1288e74e962defc80025dcc904f97d989534da239463f488744be1eadbb0",
             ),
         )
         pre_timeout_overlay = pre_easylogger_overlay[:-timeout_tail_size]
         self.assertEqual(
             (len(pre_timeout_overlay), hashlib.sha256(pre_timeout_overlay).hexdigest()),
             (
-                156_658,
-                "a0b36a6c7a860c06039add7eefe15b83807b2bb76f7f89954064184c0c39ac45",
+                176_524,
+                "e38d38310b7f580479b8d88b7ff5471fdf8cbc08042ade525c1468522ed2aafd",
             ),
         )
         lz4_overlay = pre_timeout_overlay[:-next_closure_tail_size]
         self.assertEqual(
             (len(lz4_overlay), hashlib.sha256(lz4_overlay).hexdigest()),
             (
-                156_166,
-                "a40010dea68b80dc378322e312c0e7685e3025b899465571b77b6b3eb48e5909",
+                176_032,
+                "330c68cd76649faad75b961db7d0c28adabb5ab4f8da219cae0bbeafcd78e8b2",
             ),
         )
         scheduler_overlay = lz4_overlay[:-lz4_tail_size]
         self.assertEqual(
             (len(scheduler_overlay), hashlib.sha256(scheduler_overlay).hexdigest()),
             (
-                154_408,
-                "d3accbdc0e6de2143d8fa7d6d16f0705cefd8e2a5c3f607a30c98961017a1b2f",
+                174_274,
+                "ab3b564947efd50fddc6efd7df1a9847f6e88aefa2d5760aec1d547925e2ab6d",
             ),
         )
         historical_overlay = scheduler_overlay[:-scheduler_tail_size]
-        self.assertEqual(len(historical_overlay) - 115_318, 38_308)
+        self.assertEqual(len(historical_overlay) - 115_318, 58_174)
         self.assertEqual(
             hashlib.sha256(historical_overlay[:115_318]).hexdigest(),
             "8a2f88b627148f820d5cc2d6ed8e4336"
@@ -1612,10 +1612,10 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
             4,
             zlib.crc32(restored[8:]) & 0xFFFFFFFF,
         )
-        self.assertEqual(len(restored), 3_675_309)
+        self.assertEqual(len(restored), 3_695_175)
         self.assertEqual(
             hashlib.sha256(restored).hexdigest(),
-            "0ee7c6d2a3d3ecd0f7019f602122d8f3653ecb3d76acd202caa8562e313eb9b6",
+            "5250f0fdfd1c64c6961a323bea8ebe539626b8d1756bd652e6e157afdf81bb8b",
         )
 
     @_APPLE_ONLY
@@ -1664,7 +1664,8 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "profiles": {
                     "linux-clang": {
                         "path": (
-                            "build/canonical-provider/linux-clang/apollo_main/"
+                            "build/canonical-provider/linux-clang/"
+                            "apollo_main-final81/"
                             "ota_s200_firmware_ota.bin"
                         ),
                         "size": 3_956_672,
@@ -2010,9 +2011,9 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 "rodata_size": 3_996,
                 "isolated_text_size": 140,
                 "isolated_padding_size": 4,
-                "relocated_text_size": 240_226,
+                "relocated_text_size": 258_276,
                 "relocated_rodata_size": 6_424,
-                "relocated_padding_size": 1_886,
+                "relocated_padding_size": 2_008,
                 "resolved_relocation_count": 906,
             },
         )
@@ -2037,7 +2038,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
                 len(current_report["overlay"]["functions"]),
                 len(current_report["overlay"]["patched_sites"]),
             ),
-            (2_563, 2_449),
+            (2_563, 2_448),
         )
 
         current_overlay = CURRENT_OVERLAY.read_bytes()
@@ -2109,7 +2110,7 @@ class RuntimeFreeRTOSTickCountTests(unittest.TestCase):
             if entry.filename == "ota/s200_firmware_ota.bin"
         )
         self.assertEqual(main_entry.payload_size, 3_956_672)
-        self.assertEqual(main_entry.checksum, 0x4814CC1E)
+        self.assertEqual(main_entry.checksum, 0x27272D0F)
 
 
 if __name__ == "__main__":

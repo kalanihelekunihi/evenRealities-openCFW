@@ -1,0 +1,118 @@
+{
+  "build": {
+    "upstream_evidence": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "dependencies": [
+        {
+          "path": "arch/soc/grus/include/core_ck804.h",
+          "git_blob": "ed6595b0a0e510fba0219954933f250c0eba83de",
+          "sha256": "f967c3201c24ceb417f83f915669c74f7182bf23784a7464f450ef6564f6f20a"
+        },
+        {
+          "path": "arch/soc/grus/include/csi_gcc.h",
+          "git_blob": "82802d1850f8ff8cc4701154658bcf362902e721",
+          "sha256": "638e1bf91b9d7cbba877d943132e83db37c75c97ee852ccce256c99a7dcfb530"
+        },
+        {
+          "path": "include/utility/libc/stdlib.h",
+          "git_blob": "75c21b5367091e23fb703e4b3dfc65ffc4e71a8f",
+          "sha256": "d2549da080238fe93ed114e2d7e83b7889390faa631a37d87f324f63698ea29d"
+        },
+        {
+          "path": "include/utility/libc/klibc/extern.h",
+          "git_blob": "7d7c7b8d190f5d792a2ff355e7d288e407833ddd",
+          "sha256": "addf134407ecf22a5bced6c998d30660dae0846528ad934eaa49742a9a7daf49"
+        },
+        {
+          "path": "include/utility/libc/klibc/inline.h",
+          "git_blob": "0e547437338ab639b5eda06e04a80454e7f80758",
+          "sha256": "1456ca9eb1444031e51a9424859da5340844e7be166ff7ab68f25159329be9e1"
+        },
+        {
+          "path": "include/utility/util.h",
+          "git_blob": "a66b1d1b2183c0b83b8d7d3eff9a98867a6bcb87",
+          "sha256": "b31dc428b0da16a50b5b1bb5a0059d537d66df38a9ccd5061430b0c0d56b9f74"
+        },
+        {
+          "path": "LICENSE",
+          "git_blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+          "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+        }
+      ],
+      "source_sha256": "a833900ba2c0289669c3a4110d9d86bd59e8915926a14e5ec11a8b28420c2d24",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-mistack"
+      ],
+      "compiled_bytes": 60,
+      "compiled_sha256": "f6a98377acaca6dc26031f869f80b8188e1979348c6fe82203120013caafcc74",
+      "relocations": 1,
+      "stock_package_offset": 95624,
+      "stock_envelope_bytes": 80,
+      "source_admitted": false,
+      "context_preservation_qualified": false,
+      "limits": [
+        "Plain interrupt attribute omits stock r18-r31 and fr0-fr7 save/restore.",
+        "Must preserve interrupted register state across arbitrary handler calls before admission.",
+        "Stock indexes vectors 32..63 without a bounds check; no hardware qualification."
+      ]
+    },
+    "c_flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "entry_source_sha256": "8635ab746b4e5b9ec484ccd4fbac73e2f795b59f0cbdb6919f89155552a006f3",
+    "compiled_bytes": 80,
+    "compiled_sha256": "2b9be9a54c1b3d8fcdb7d6b2a45308ea36236b4583947e12c56970d058e2a779",
+    "stock_package_offset": 95624,
+    "stock_envelope_bytes": 80,
+    "stock_sha256": "4603c68912b68c0dc567ddcea48266e00421c600eec7ac5c0e8db8a55dfc9288",
+    "source_admitted": false,
+    "limits": [
+      "Fits stock entry with combined r15-r31 save block, preserving r16/r17 additionally.",
+      "Software frame grows from stock 92 bytes to 100, plus four bytes in C callback path.",
+      "Register restoration and nested interrupt execution require qualification.",
+      "No hardware or nested interrupt qualification."
+    ]
+  },
+  "manual_sha256": "579bd296dbf88b0b6842a473432e65199b87c0c19fcf04bb214f67241c68d509",
+  "manual_printed_pages": [
+    180,
+    182,
+    297,
+    299
+  ],
+  "cases": 24,
+  "instruction_managed_bytes_per_level": 32,
+  "software_bytes_per_returning_callback_level": 104,
+  "modeled_peak_bytes": [
+    136,
+    272,
+    408,
+    544
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Models stack transfers and saved control values, not PSR enable-bit timing or exception arrival.",
+    "Nested entry is injected at the callback point; other interrupt points remain unqualified.",
+    "Callback clobbers are modeled; arbitrary callback stack usage and physical stack capacity are not bounded.",
+    "Vendor ISA document is mirrored externally; GX8002-specific errata remain unqualified."
+  ]
+}

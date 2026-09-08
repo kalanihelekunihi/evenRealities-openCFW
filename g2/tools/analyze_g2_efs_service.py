@@ -95,10 +95,9 @@ RAW_WINDOWS = (
 # replaced stock EFS intervals, but their final bytes are source-owned by the
 # LC3 service and FreeType CFF stages rather than by the EFS filler itself.
 COMPOSED_HOST_RANGES = (
-    (0x00456C11, 0x004577C1, "liblc3_service_audio_"),
-    (0x004577C4, 0x00457998, "freetype_cff_host_scatter_"),
-    (0x00457A58, 0x00458012, "freetype_cff_host_scatter_"),
-    (0x004580C8, 0x0045893C, "freetype_cff_host_scatter_"),
+    (0x00456C10, 0x004579BA, "liblc3_service_audio_"),
+    (0x00457A58, 0x00458018, "liblc3_service_audio_"),
+    (0x004580C4, 0x00458B5C, "liblc3_service_audio_"),
 )
 
 
@@ -344,7 +343,8 @@ def analyze(image_path: Path = IMAGE) -> dict:
                     (
                         expected
                         for expected in COMPOSED_HOST_RANGES
-                        if (segment_start, segment_end) == expected[:2]
+                        if expected[0] <= segment_start
+                        and segment_end <= expected[1]
                         and name.startswith(expected[2])
                     ),
                     None,
@@ -354,7 +354,10 @@ def analyze(image_path: Path = IMAGE) -> dict:
                         f"production EFS service composed host changed: {row['function']}"
                     )
                 composed_host_bytes += segment_end - segment_start
-                observed_composed_hosts.append(matching_host)
+                if not observed_composed_hosts or (
+                    observed_composed_hosts[-1] != matching_host
+                ):
+                    observed_composed_hosts.append(matching_host)
             cursor = segment_end
         if cursor != end or not covering:
             raise AuditError(
@@ -373,7 +376,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
             raise AuditError(
                 f"production EFS service entry redirect changed: {row['function']}"
             )
-    if tuple(observed_composed_hosts) != COMPOSED_HOST_RANGES or composed_host_bytes != 7_090:
+    if tuple(observed_composed_hosts) != COMPOSED_HOST_RANGES or composed_host_bytes != 7_682:
         raise AuditError("production EFS service composed-host census changed")
     service_regions = [region for region in main["regions"]
                        if region["name"].startswith("efs_service_")]

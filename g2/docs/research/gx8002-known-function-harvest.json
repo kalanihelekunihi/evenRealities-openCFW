@@ -1,0 +1,31 @@
+{
+  "processor_repository": "https://github.com/taligentx/ghidra_csky_WinnerMicro",
+  "processor_commit": "0daaa056e8c570ba514fc0d0226384ecf9f9df05",
+  "firmware_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "local_processor_fix": "zero-extend movih immediate before shifting",
+  "patched_32b_data_sha256": "0135b93175df811b7b97484d1c6ddb3df0120c35089d4e60c86a061de28fe68f",
+  "movih_semantic_regression_passed": true,
+  "respect_read_only_literal_memory": true,
+  "analog_literal_regression_passed": true,
+  "analysis_script_sha256": {
+    "PrepareGx8002KnownFunctions.java": "bca412a1e922827b24f9fff057ca44a07f505292401e7d446f00c3563d0bde58",
+    "CheckCskyMovih.java": "13b6def4608e45a9caf8bfaa7848727fe1725efa717e1c020543e847c718566c",
+    "ExportAllFunctionDecomp.java": "e4114c017c5dda3fe8c8eb8bbe3108783a3ef5b8a17465f2cb78336575196ec6"
+  },
+  "volatile_mmio_windows": [
+    "0xa0003000+0x1000",
+    "0xa0005000+0x1000",
+    "0xa0a00000+0x1000",
+    "0xe000f000+0x1000"
+  ],
+  "analysis_image_sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
+  "load_address": "0x10003000",
+  "seed_count": 24,
+  "exported_functions": 24,
+  "firmware_bytes_emitted": 0,
+  "source_admitted": false,
+  "limits": [
+    "Named stock matches are analysis candidates, not complete callable-boundary proof.",
+    "Processor semantics and decompiler output require function-by-function qualification."
+  ]
+}

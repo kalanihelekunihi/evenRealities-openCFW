@@ -39,7 +39,7 @@ LEAF_NAMES = (
 LEAF_DIGEST = "dbc6a5d37554fb05d34257db61ce26cbb4ac40005264c0b38ace5779dd7f5a68"
 PATCH_DIGEST = "1438650fbe6295315d0429def79c3d4eae2fcb31dafc5a57ff2e1a22830108ca"
 BUILT_DIGEST = "0dafcad8ff47cb1a94052b1793cd37169c1cd8caf804fa8cc6d0d7d1265a1e93"
-REGION_DIGEST = "ff843c92d0d94b5c499defa50e0d334d34bfbeba69ac8e0338083f30c95f7da6"
+REGION_DIGEST = "049282300f709c3d02c8167a14f24d403687fcbca71a79cb3f254fbf5153a118"
 RETAINED = 'app\\gui\\SystemAlert\\systemAlert.c'
 FULL_PATH = 'D:\\01_workspace\\s200_ap510b_iar_git\\app\\gui\\SystemAlert\\systemAlert.c'
 PATH_RUN = 0x6fd85c
@@ -287,14 +287,15 @@ def analyze(image=IMAGE):
         raise c.AuditError("production SystemAlert built closure changed")
     manifest = json.loads(MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
-    regions = [x for x in main["regions"] if x["name"].startswith("system_alert_") or x["name"].startswith("opaque_system_alert_")]
-    if len(regions) != 21 or _jsh(regions) != REGION_DIGEST or sum(x["size"] for x in regions) != 3544:
+    regions = [x for x in main["regions"] if x["name"].startswith("system_alert_") or x["name"].startswith("opaque_system_alert_") or (x["name"].startswith("freetype_cff_host_scatter_") and x.get("target_address") == 0x4D2F4C)]
+    if len(regions) != 23 or _jsh(regions) != REGION_DIGEST or sum(x["size"] for x in regions) != 3544:
         raise c.AuditError("production SystemAlert manifest regions changed")
     replacements = [x for x in regions if x["address_status"] == "generated_source_entry_replacement"]
     retained = [x for x in regions if x["address_status"] == "official_blob"]
     compiled = [x for x in regions if x["address_status"] == "source_compiled"]
     generated_alignment = [x for x in regions if x["address_status"] == "generated_alignment"]
-    if (len(replacements), sum(x["size"] for x in replacements), len(retained), sum(x["size"] for x in retained), len(compiled), sum(x["size"] for x in compiled), len(generated_alignment), sum(x["size"] for x in generated_alignment)) != (7, 2174, 2, 172, 8, 1189, 4, 9):
+    composed = [x for x in regions if x["address_status"] == "generated_source_data_replacement"]
+    if (len(replacements), sum(x["size"] for x in replacements), len(retained), sum(x["size"] for x in retained), len(compiled), sum(x["size"] for x in compiled), len(generated_alignment), sum(x["size"] for x in generated_alignment), len(composed), sum(x["size"] for x in composed)) != (8, 2130, 2, 172, 8, 1189, 4, 9, 1, 44):
         raise c.AuditError("production SystemAlert stock/overlay tiling changed")
     return {
         "schema_version": 1,

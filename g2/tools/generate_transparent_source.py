@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import argparse
 import concurrent.futures
+import hashlib
 import json
 import re
 import shutil
@@ -41,6 +42,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 RUNTIME_HEADER = REPO_ROOT / "tools/transparent/openg2_decompiled_runtime.h"
 DEFAULT_DB = REPO_ROOT / "build/transparent"
 DEFAULT_BUNDLES = REPO_ROOT / "research/corpus/apollo-main/ghidra/decomp/bundles"
+REVIEWED_SOURCES = REPO_ROOT / "tools/transparent/reviewed_sources.json"
 
 #: Functions are grouped into shard directories so no single directory holds
 #: several thousand files.
@@ -393,6 +395,60 @@ def compile_unit(
     return completed.returncode == 0, completed.stderr
 
 
+def load_reviewed_sources(database: dict[str, Any], manifest_path: Path = REVIEWED_SOURCES,
+                          root: Path = REPO_ROOT) -> tuple[dict[int, dict], dict[str, bytes]]:
+    """Authenticate reviewed replacements before creating any generated output.
+
+    Compilation alone cannot repair incorrect recovered ordering or register
+    semantics. These explicitly reviewed C units take precedence over Ghidra.
+    A missing or stale review is an error, never a fallback to decompilation.
+    """
+    manifest = json.loads(manifest_path.read_text())
+    if manifest.get("schema_version") != 1:
+        raise GenerateError("unsupported reviewed-source manifest schema")
+
+    def read_pinned(record):
+        path = (root / record["path"]).resolve()
+        if not path.is_relative_to(root.resolve()):
+            raise GenerateError("reviewed-source path escapes repository")
+        data = path.read_bytes()
+        if hashlib.sha256(data).hexdigest() != record["sha256"]:
+            raise GenerateError(f"reviewed-source hash changed: {record['path']}")
+        return data
+
+    image_path = (root / database["image"]["path"]).resolve()
+    if not image_path.is_relative_to(root.resolve()):
+        raise GenerateError("reviewed firmware path escapes repository")
+    image = image_path.read_bytes()
+    if hashlib.sha256(image).hexdigest() != manifest["firmware_sha256"]:
+        raise GenerateError("reviewed firmware authentication failed")
+    base = manifest["load_base"]
+    if database["image"]["load_base"] != base:
+        raise GenerateError("reviewed firmware load base changed")
+    records = {r["entry"]: r for r in database["functions"]}
+    reviewed = {}
+    for row in manifest["functions"]:
+        entry, end = row["entry"], row["end"]
+        if entry in reviewed or entry not in records or not base <= entry < end <= base + len(image):
+            raise GenerateError("invalid or duplicate reviewed function interval")
+        record = records[entry]
+        if record["ranges"] != [[entry, end]] or record["ghidra_name"] != row["function"]:
+            raise GenerateError(f"reviewed function boundary changed: {entry:#x}")
+        if hashlib.sha256(image[entry-base:end-base]).hexdigest() != row["stock_sha256"]:
+            raise GenerateError(f"reviewed stock body changed: {entry:#x}")
+        expected = row["expected_text"]
+        if not 0 < expected["size"] <= end-entry or not re.fullmatch(r"[0-9a-f]{64}", expected["sha256"]):
+            raise GenerateError("invalid reviewed compiled-text contract")
+        reviewed[entry] = dict(row, text=read_pinned(row["source"]).decode("utf-8"))
+    dependencies = {}
+    for row in manifest["dependencies"]:
+        name = row["output"]
+        if Path(name).name != name or name in dependencies or name == RUNTIME_HEADER.name:
+            raise GenerateError("invalid reviewed dependency output name")
+        dependencies[name] = read_pinned(row)
+    return reviewed, dependencies
+
+
 def classify_error(stderr: str) -> str:
     for line in stderr.splitlines():
         marker = next(
@@ -417,6 +473,7 @@ def generate(
     database = json.loads((database_dir / "function-db.json").read_text(encoding="utf-8"))
     regions = json.loads((database_dir / "region-map.json").read_text(encoding="utf-8"))
     bodies = load_bundles(bundle_dir)
+    reviewed, reviewed_dependencies = load_reviewed_sources(database)
 
     signatures = {
         record["ghidra_name"]: record["signature"]
@@ -429,6 +486,8 @@ def generate(
     code_root = output_dir / "code"
     code_root.mkdir(parents=True)
     shutil.copy2(RUNTIME_HEADER, output_dir / RUNTIME_HEADER.name)
+    for name, data in reviewed_dependencies.items():
+        (output_dir / name).write_bytes(data)
 
     units: list[dict[str, Any]] = []
     dispositions: Counter[str] = Counter()
@@ -436,6 +495,13 @@ def generate(
         entry = record["entry"]
         body = bodies.get(entry)
         text, disposition = render_unit(record, body, signatures)
+        review = reviewed.get(entry)
+        if review is not None:
+            evidence_dir = output_dir / "decompiled-evidence"
+            evidence_dir.mkdir(exist_ok=True)
+            (evidence_dir / f"fn_{entry:08x}.c").write_text(text, encoding="utf-8")
+            text = review["text"]
+            disposition = "reviewed-source"
         shard = f"shard-{index // SHARD_SIZE:03d}"
         shard_dir = code_root / shard
         shard_dir.mkdir(exist_ok=True)
@@ -451,6 +517,8 @@ def generate(
             "source": str(source_path.relative_to(output_dir)),
             "disposition": disposition,
         })
+        if review is not None:
+            units[-1]["reviewed_source"] = {k: v for k, v in review.items() if k != "text"}
 
     data_regions = [
         region for region in regions["regions"] if region["kind"] != "function"

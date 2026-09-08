@@ -1,0 +1,34 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "path": "arch/soc/grus/spl/spl_spinor.c",
+  "git_blob": "e98ce16956acc2c97989c3e29c727df5ec7a1a1f",
+  "sha256": "a4b55a11ea67992e67791f7da06729850b5a358b2a027298a5d81cd8ef429606",
+  "identified_function_role": "SPI-NOR initialization and quad/XIP configuration",
+  "stock_runtime": 268584432,
+  "stock_device_selection": {
+    "skip_quad": [
+      1849362,
+      1849363
+    ],
+    "alternate_quad": [
+      8732690,
+      8740883
+    ],
+    "generic_quad": "all other initial IDs",
+    "additional_after_reload": 2113558
+  },
+  "upstream_difference": "SDK additionally lists 0x856014 in alternate-quad cases; stock sends it to generic-quad. Stock also re-reads device ID and calls an extra routine for 0x204016.",
+  "xip_call_arguments": [
+    235,
+    8,
+    1,
+    24,
+    4,
+    0,
+    1,
+    4,
+    4
+  ],
+  "source_reuse_status": "Reference evidence only: file header says proprietary and confidential; do not silently label verbatim source MIT.",
+  "source_admitted": false
+}

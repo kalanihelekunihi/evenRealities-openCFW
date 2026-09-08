@@ -1,0 +1,49 @@
+{
+  "source_sha256": "34e3bd4d91c4be5ee066d243b625b9efd79a8d839c4c1ce0a20fd8cbf9b6019d",
+  "table_generator_sha256": "8044bf2b25b6f7719d51d607d940b4f69bbefedbc85e953e5894b093f392f4e5",
+  "linker_script_sha256": "960ae154b05efde1667510086d6ffd5c041478418ceec5835caa72083351fb8d",
+  "flags": [
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-tree-loop-optimize"
+  ],
+  "sections": [
+    {
+      "symbol": "open_cfw_gx8002_crc32_no_comp",
+      "package_offset": "0x12d80",
+      "capacity": 180,
+      "compiled_bytes": 160,
+      "sha256": "b740605e74bcf52961f89b1f21ccef845df11b28df79a62d6afdf0896d5b239f",
+      "byte_exact": false
+    },
+    {
+      "symbol": "open_cfw_gx8002_crc32",
+      "package_offset": "0x12e34",
+      "capacity": 12,
+      "compiled_bytes": 12,
+      "sha256": "c3ee7a90b568411ce33a4f9c8a1dde841ba43f2c1a82f0c9a7333e92f865be8c",
+      "byte_exact": true
+    },
+    {
+      "symbol": "open_cfw_gx8002_crc_table",
+      "package_offset": "0x14e94",
+      "capacity": 1024,
+      "compiled_bytes": 1024,
+      "sha256": "12f3e0576d447eb37b36d82ba0c1c5481b8f0d12fdc70347ce4a076b229d4c86",
+      "byte_exact": true
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Placement only; CRC core instruction comparison still pending.",
+    "No firmware container emitted."
+  ]
+}

@@ -7,10 +7,10 @@ is recomputed from the build; none is carried forward by hand.
 
 | Origin | Bytes | Share |
 | --- | ---: | ---: |
-| Recovered code, compiled from decompiled C | 706,186 | 20.0% |
-| Envelope padding after placed code | 192,612 | 5.5% |
+| Compiled C (reviewed and unreviewed) | 711,178 | 20.2% |
+| Envelope padding after placed code | 194,974 | 5.5% |
 | Declared data arrays (vendor-derived) | 2,128,548 | 60.4% |
-| Traps where nothing was established | 496,050 | 14.1% |
+| Traps where nothing was established | 488,696 | 13.9% |
 | **Opaque bytes copied without a source unit** | **0** | **0.0%** |
 | Total | 3,523,396 | 100.0% |
 
@@ -18,16 +18,17 @@ is recomputed from the build; none is carried forward by hand.
 
 * 7,449 functions recovered from the image, covering 1,394,848 bytes.
 * 7,217 of 7,449 translation units compile (96.9%), 1,238,042 bytes of recovered code.
-* 5,125 functions fit their stock envelope and were placed.
+* 5,149 functions fit their stock envelope and were placed.
+* 4 placed functions use reviewed C (34 compiled bytes). The remaining placed functions still use unreviewed decompilation.
 
 ### Evidence tier of each recovered function
 
 | Tier | Functions | Bytes |
 | --- | ---: | ---: |
-| attributed | 1,793 | 340,204 |
-| candidate | 11 | 538 |
+| attributed | 1,467 | 253,716 |
 | decompiled | 3,002 | 709,102 |
 | identified | 2,643 | 345,004 |
+| source | 337 | 87,026 |
 
 ### Non-code regions, by classification
 
@@ -45,7 +46,7 @@ is recomputed from the build; none is carried forward by hand.
 
 | Reason | Count |
 | --- | ---: |
-| compiled-size-exceeds-envelope | 1,955 |
+| compiled-size-exceeds-envelope | 1,938 |
 | split-range-tail | 309 |
 | did-not-compile | 232 |
 | undefined symbol isCurrentModePrivileged | 22 |
@@ -55,11 +56,11 @@ is recomputed from the build; none is carried forward by hand.
 | undefined symbol __aeabi_f2d | 6 |
 | undefined symbol DataSynchronizationBarrier | 5 |
 | undefined symbol DataMemoryBarrier | 3 |
-| undefined symbol SCARRY4 | 3 |
 | undefined symbol __aeabi_fcmplt | 3 |
 | undefined symbol halt_baddata | 3 |
 | unit has no allocatable content | 3 |
-| undefined symbol CONCAT15 | 2 |
+| undefined symbol __aeabi_f2iz | 2 |
+| undefined symbol __aeabi_d2ulz | 1 |
 
 ### By how much recovered code overshoots its stock envelope
 
@@ -70,23 +71,23 @@ eight. That is why the distribution piles up just over the line.
 
 | Overshoot | Functions |
 | --- | ---: |
-| <= 2 bytes over | 500 |
-| <= 4 bytes over | 327 |
-| <= 8 bytes over | 538 |
+| <= 2 bytes over | 497 |
+| <= 4 bytes over | 325 |
+| <= 8 bytes over | 532 |
 | <= 16 bytes over | 248 |
-| <= 32 bytes over | 166 |
-| <= 64 bytes over | 76 |
-| <= 128 bytes over | 27 |
+| <= 32 bytes over | 165 |
+| <= 64 bytes over | 72 |
+| <= 128 bytes over | 26 |
 | <= 256 bytes over | 26 |
 | > 256 bytes over | 47 |
 
-Total overshoot across 1,955 unplaceable functions: 80,546 bytes.
+Total overshoot across 1,938 unplaceable functions: 80,160 bytes.
 
 ### Optimization variant that made each placed function fit
 
 | Variant | Functions |
 | --- | ---: |
-| Oz | 5,083 |
+| Oz | 5,107 |
 | Os | 23 |
 | O1 | 11 |
 | Oz-no-jump-tables | 8 |
@@ -102,5 +103,5 @@ Total overshoot across 1,955 unplaceable functions: 80,546 bytes.
 * **Traps are honest failures.** Where the corpus establishes nothing,
   the image halts rather than running invented behavior.
 
-For reference, 2,219,678 of 3,523,396 bytes (63.0%) happen to match the stock payload -- almost all of that is the
+For reference, 2,219,494 of 3,523,396 bytes (63.0%) happen to match the stock payload -- almost all of that is the
 declared data, which is byte-identical by construction.

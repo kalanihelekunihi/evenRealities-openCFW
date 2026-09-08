@@ -1,0 +1,111 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "source_sha256": "dc734906a82e238fd24b835a1caaa7eeec8bf9db5017b5794be3356ea8c885fe",
+  "compile_flags": [
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "functions": [
+    {
+      "symbol": "gx_audio_in_set_i2s_clock",
+      "compiled_bytes": 16,
+      "compiled_sha256": "91a7641123fe2081007ec7f5b6554794e9d28c73106c84493893ad90de7648d6",
+      "scratch_register_mapping": {
+        "r1": "r1",
+        "r2": "r3",
+        "r3": "r2"
+      },
+      "stock_occurrences": [
+        {
+          "object": "drivers_lib/audio_in/v2.0/audio_in.o",
+          "symbol": "gx_audio_in_set_i2s_clock",
+          "bytes": 16,
+          "package_offset": 55468,
+          "region": "image_a_xip_text",
+          "sha256": "858c741414657d172650adfb64f7b32d6efaf25d0a2783ee2448167d6ab7e9d2"
+        },
+        {
+          "object": "drivers_lib/audio_in/v2.0/audio_in.o",
+          "symbol": "gx_audio_in_set_i2s_clock",
+          "bytes": 16,
+          "package_offset": 254412,
+          "region": "image_b_sram_text",
+          "sha256": "858c741414657d172650adfb64f7b32d6efaf25d0a2783ee2448167d6ab7e9d2"
+        }
+      ]
+    },
+    {
+      "symbol": "gx_audio_in_set_i2sin_mode",
+      "compiled_bytes": 16,
+      "compiled_sha256": "c937f01bec01637d88ddaf9cdaf7387442ca3ecb5ec256351bded8ef1cb3105d",
+      "scratch_register_mapping": {
+        "r1": "r1",
+        "r2": "r3",
+        "r3": "r2"
+      },
+      "stock_occurrences": [
+        {
+          "object": "drivers_lib/audio_in/v2.0/audio_in.o",
+          "symbol": "gx_audio_in_set_i2sin_mode",
+          "bytes": 16,
+          "package_offset": 55484,
+          "region": "image_a_xip_text",
+          "sha256": "1591546bd5375552b7c3fe36e98f0962522ae12635cc90eb3fc1f7d10a2476a7"
+        },
+        {
+          "object": "drivers_lib/audio_in/v2.0/audio_in.o",
+          "symbol": "gx_audio_in_set_i2sin_mode",
+          "bytes": 16,
+          "package_offset": 254428,
+          "region": "image_b_sram_text",
+          "sha256": "1591546bd5375552b7c3fe36e98f0962522ae12635cc90eb3fc1f7d10a2476a7"
+        }
+      ]
+    },
+    {
+      "symbol": "gx_audio_in_set_i2sout_mode",
+      "compiled_bytes": 16,
+      "compiled_sha256": "b1c4f8cda028474940d05ccf21c03a9f50561c4ad777cdc4431eef1b5d8ea375",
+      "scratch_register_mapping": {
+        "r1": "r1",
+        "r2": "r3",
+        "r3": "r2"
+      },
+      "stock_occurrences": [
+        {
+          "object": "drivers_lib/audio_in/v2.0/audio_in.o",
+          "symbol": "gx_audio_in_set_i2sout_mode",
+          "bytes": 16,
+          "package_offset": 55500,
+          "region": "image_a_xip_text",
+          "sha256": "8533e11fea8692b5ef1526a451cd7ac3636d88c7fb93c475c7784a63f4ea2ccc"
+        },
+        {
+          "object": "drivers_lib/audio_in/v2.0/audio_in.o",
+          "symbol": "gx_audio_in_set_i2sout_mode",
+          "bytes": 16,
+          "package_offset": 254444,
+          "region": "image_b_sram_text",
+          "sha256": "8533e11fea8692b5ef1526a451cd7ac3636d88c7fb93c475c7784a63f4ea2ccc"
+        }
+      ]
+    }
+  ],
+  "compiled_function_bytes": 48,
+  "stock_occurrence_bytes": 96,
+  "firmware_bytes_emitted": 0,
+  "hardware_qualified": false,
+  "qualification": "Exact GNU-decoded instructions modulo consistent r1/r2/r3 allocation.",
+  "limits": [
+    "Bitfield layout is target-compiler-dependent and checked on every build.",
+    "Whole-device timing and integration remain unqualified."
+  ]
+}

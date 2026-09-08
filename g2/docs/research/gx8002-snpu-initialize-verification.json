@@ -1,0 +1,66 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_snpu_initialize",
+      "section_name": ".text",
+      "compiled_bytes": 76,
+      "compiled_sha256": "e5928512dd306c603a683c88ccdfeaa0a771b84da06f5c41d911921aa9d1de59",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_snpu_initialize",
+          "package_offset": 62080,
+          "bytes": 76,
+          "sha256": "51f99552ff0fabd10752d894b754e4449be1762423faa4e3b40c95031c1bfc41",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "oracle": {
+      "path": "drivers_lib/snpu/grus/snpu.o",
+      "blob": "2565938852946027c726e66d0d8ee6e0bd0cc0d7",
+      "sha256": "6ce5cb2c361f4bae59fc87dd86631bd6c888dffbe28461b0db2e27f8c6e22f03",
+      "role": "identity_only"
+    },
+    "bindings": {
+      "open_cfw_gx8002_snpu_initialize_state": 537031504,
+      "open_cfw_gx8002_snpu_device_init": 270554536,
+      "open_cfw_gx8002_snpu_tcb_init": 270555348,
+      "open_cfw_gx8002_snpu_request_irq": 270554544,
+      "open_cfw_gx8002_snpu_isr": 270556384
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "source_sha256": "ce20660d1454e839678b40a574129abb513f48c16f0e3862d1fcf39979c39780",
+    "symbol": "open_cfw_gx8002_snpu_initialize",
+    "section_name": ".text",
+    "package_offset": 62080,
+    "compiled_bytes": 76,
+    "compiled_sha256": "e5928512dd306c603a683c88ccdfeaa0a771b84da06f5c41d911921aa9d1de59",
+    "stock_envelope_bytes": 76,
+    "stock_sha256": "51f99552ff0fabd10752d894b754e4449be1762423faa4e3b40c95031c1bfc41",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Candidate only. Need ordered state writes, helper/ISR arguments, helper mutations, return value and ABI qualification. TCB initialization and ISR remain separately unrecovered. No state ownership claimed."
+    ]
+  },
+  "cases": 201,
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Caller qualification only: ordered writes, exact helper/ISR arguments, helper mutations, caller clobbers and twelve-byte frame. TCB and ISR implementations remain separate recovery work. Offset-only state view does not own or fully describe driver state; no hardware qualification."
+  ]
+}

@@ -301,11 +301,11 @@ def _production_route(blob: bytes) -> dict:
     if (
         provider.get("size") != 3_956_672
         or provider.get("sha256")
-        != "5f70b48c50297e3fd3fc25435edcafa0070a26f5d74f44c161e4b1fe1ed40f26"
+        != "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6"
         or provider.get("profiles", {}).get("linux-clang", {}).get("size")
         != 3_956_672
         or provider.get("profiles", {}).get("linux-clang", {}).get("sha256")
-        != "ee1d134ab19772c279dab63c4c7e46a57c66a4c596264af9aacdcd281b4eb970"
+        != "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6"
     ):
         raise c.AuditError("compact-log core firmware provider route changed")
     return {

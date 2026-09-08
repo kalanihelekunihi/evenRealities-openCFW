@@ -1,0 +1,42 @@
+{
+  "repository": "https://github.com/ROCm/half",
+  "commit": "207ee58595a64b5c4a70df221f1e6e704b807811",
+  "header_sha256": "d659163a391183c877d8ea91e8bb683cd9b7286429f2fb31fd24ce4e4cace730",
+  "reference_object_sha256": "36d261f6ac2d56cc61395971a51e8c80bbb385959d782584d1052e06b576161d",
+  "tables": [
+    {
+      "name": "base_table",
+      "bytes": 1024,
+      "source_sha256": "6ac12597e10ffb084dee014eebfd52580eb845fd6b5cca643aeac527f7b02f2a",
+      "matches_reference": true
+    },
+    {
+      "name": "shift_table",
+      "bytes": 512,
+      "source_sha256": "a199f717fba4d1378a33d65e9660e45adc176876a3450bacf2a80da985fbdf14",
+      "matches_reference": true
+    },
+    {
+      "name": "mantissa_table",
+      "bytes": 8192,
+      "source_sha256": "fde0d2e5b12ec87700a45911bac2f877cce020d110fb1824d6aca0a9d4362356",
+      "matches_reference": true
+    },
+    {
+      "name": "exponent_table",
+      "bytes": 256,
+      "source_sha256": "255ea7b610355f8c125f24715602a17f540f3d8c019d552585e6a13ed844879b",
+      "matches_reference": true
+    },
+    {
+      "name": "offset_table",
+      "bytes": 128,
+      "source_sha256": "4938eeb147348a8fd7c9c7fa7957dc3251b6304578dd8377a6ea374658b2277f",
+      "matches_reference": true
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Matching tables establish a source-family fingerprint, not exact historical release or complete rounding equivalence. Inspection only; tables are not copied into firmware."
+  ]
+}

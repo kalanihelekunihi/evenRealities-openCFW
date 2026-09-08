@@ -1,0 +1,61 @@
+{
+  "build": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "dependencies": [
+      {
+        "path": "lvp/vui/kws/kws_strategy.c",
+        "blob": "ce8fc7e44d6f0857b181620f393fc1fdfc1e4b2b",
+        "sha256": "015a22e3aa42219e3375129e3be0045b5f6b03c9b46d781d5dd0ca425b7a08b4"
+      },
+      {
+        "path": "lvp/vui/kws/kws_strategy.h",
+        "blob": "271fd92fece6b28259ec2d99aa9869b58e4a01f7",
+        "sha256": "61e7cbe44efb5bfe1641055113836ccd9a2c45e0f581b0a1a5d3d1bf63740245"
+      },
+      {
+        "path": "LICENSE",
+        "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+        "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+      }
+    ],
+    "bindings": {
+      "printf": 270560292,
+      "open_cfw_gx8002_activation_list": 537061288,
+      "open_cfw_gx8002_kws_overflow_message": 270578511
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-shrink-wrap",
+      "-fira-algorithm=priority"
+    ],
+    "source_sha256": "bedbff86f61a86ff7b75a494c1f6dd5eec2fb06477f43bb183665ea4b4a136f2",
+    "type_header_sha256": "115b1b52a22f7529ca22fd7ea501fd0a23e00316880c5734db552eea4133c2dd",
+    "compiled_bytes": 144,
+    "compiled_sha256": "72bf37ef9648e882dcf430e445533e243908b40731bcce104d6b097deeaa1be4",
+    "package_offset": 73484,
+    "stock_envelope_bytes": 144,
+    "stock_sha256": "4d4f415054f3a39040b37872e460198a48be795b2b56dabd2b9f4005fd03fc1f",
+    "fits": true,
+    "exact_stock_payload": false,
+    "source_admitted": false,
+    "limits": [
+      "Candidate only; floating-point comparisons, list accesses, invalid count domain, call ABI and insertion/update behavior need qualification."
+    ]
+  },
+  "cases": 26048,
+  "symbolic_float_condition_cases": 578,
+  "frame_bytes": 4,
+  "source_admitted": false,
+  "limits": [
+    "Valid list counts0..8 and negative-count logging only. Positive corrupted counts above8 can read beyond the list before capacity checking. IEEE model plus both comparison outcomes with identical raw operands; no physical FP control/status or timing claim. Storage and overflow message remain separate retained dependencies."
+  ]
+}

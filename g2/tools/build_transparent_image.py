@@ -377,6 +377,18 @@ def trap_bytes(size: int) -> bytes:
     return THUMB_BREAKPOINT + b"\0" * (size - 2)
 
 
+def validate_reviewed_payload(unit: dict[str, Any], payload: bytes | None) -> bool:
+    """Reviewed source must keep its admitted text; never degrade it to a trap."""
+    if unit.get("disposition") != "reviewed-source":
+        return False
+    review = unit.get("reviewed_source", {})
+    expected = review.get("expected_text", {})
+    if (payload is None or len(payload) != expected.get("size") or
+            hashlib.sha256(payload).hexdigest() != expected.get("sha256")):
+        raise ImageError(f"reviewed compiled text changed: {unit.get('entry')!r}")
+    return True
+
+
 def build(
     source_dir: Path,
     database_dir: Path,
@@ -501,6 +513,7 @@ def build(
             is_entry_range = low <= entry < high
             object_name = unit.get("object")
             if not is_entry_range or not object_name or not unit.get("compiled"):
+                validate_reviewed_payload(unit, None)
                 reason = (
                     "split-range-tail" if not is_entry_range
                     else "did-not-compile"
@@ -560,6 +573,7 @@ def build(
                     else:
                         last_failure = message.split(":", 1)[0][:60]
                     payload = None
+            is_reviewed = validate_reviewed_payload(unit, payload)
             if payload is None:
                 if best_overflow is not None:
                     # Some variants can fail for an unrelated reason after one
@@ -582,6 +596,7 @@ def build(
                 "entry": entry,
                 "name": unit.get("name"),
                 "envelope": envelope,
+                "reviewed_source": is_reviewed,
                 **report,
             })
 
@@ -627,6 +642,8 @@ def build(
         },
         "opaque_bytes": 0,
         "units_placed": len(unit_reports),
+        "reviewed_source_units": sum(r["reviewed_source"] for r in unit_reports),
+        "reviewed_source_bytes": sum(r["placed_bytes"] for r in unit_reports if r["reviewed_source"]),
     }
     (output_dir / "IMAGE-REPORT.json").write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"

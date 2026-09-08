@@ -121,7 +121,7 @@ def _package_model(manifest: dict[str, Any]) -> dict[str, Any]:
                 "package Apollo regions are not an exact nonoverlapping cover")
         cursor = row["end_exclusive"]
         status_bytes[row["address_status"]] += row["size"]
-    require(cursor == address["current_core_end_exclusive"] and
+    require(cursor == address["package_runtime_end_exclusive"] and
             cursor - address["run_base"] ==
             address["component_runtime_bytes"],
             "package Apollo runtime cover drift")
@@ -314,9 +314,9 @@ def analyze(manifest_path: Path = MANIFEST) -> dict[str, Any]:
                 "placement": _placement_model(manifest, selected),
             }
     require(profiles["apple-clang"]["placement"]["append_shortfall"] ==
-            9152 and
+            27316 and
             profiles["linux-clang"]["placement"]["append_shortfall"] ==
-            9100,
+            27268,
             "dual-profile optimized shortfall drift")
     return {
         "schema_version": 1,
@@ -335,13 +335,13 @@ def analyze(manifest_path: Path = MANIFEST) -> dict[str, Any]:
             "production_patch_bytes_emitted": False,
             "remaining_blockers": [
                 "The accepted Apple -Oz/GC closure still exceeds the only "
-                "unowned contiguous append interval by 9,152 bytes even "
+                "unowned contiguous append interval by 27,316 bytes even "
                 "after enumerating all six section orders.",
                 "All interior package bytes are already owned; generated PT "
                 "padding and LTPF/alignment reservations have no LC3 ownership.",
-                "The 30,676-byte capacity repack would make -Oz fit with "
-                "21,532 bytes margin, but its production move/replay contract "
-                "is not implemented.",
+                "The 48,780-byte counterfactual capacity repack would make "
+                "-Oz fit with 21,456 bytes margin; the production firmware "
+                "instead uses the authenticated source-slot/suffix route.",
                 "Final stock runtime addresses, OTA CRC regeneration, and "
                 "atomic package emission remain unassigned.",
             ],

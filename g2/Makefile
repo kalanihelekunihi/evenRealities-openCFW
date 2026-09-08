@@ -2378,7 +2378,8 @@ transparent: transparent-ledger
 
 transparent-test:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
-		tests.test_transparent_source_pipeline
+		tests.test_transparent_source_pipeline tests.test_transparent_runtime \
+		tests.test_transparent_reviewed_source
 
 dual-profile-ownership:
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) tools/analyze_g2_dual_profile_ownership.py
@@ -2404,3 +2405,43 @@ inspect: source
 
 clean:
 	$(PYTHON) -c 'from pathlib import Path; import shutil; root=Path.cwd().resolve(); targets=tuple((root/path).resolve() for path in ("build", "$(RING_COMPONENT_BUILD_DIR)", "$(CORE_COMPONENT_BUILD_DIR)", "$(BOOT_COMPONENT_BUILD_DIR)")); assert all(root in path.parents and path != root for path in targets); [shutil.rmtree(path, ignore_errors=True) for path in targets]'
+
+# Native macOS C-SKY toolchain and recovered codec leaf qualification.
+# The toolchain source revisions must already be fetched; see the build driver.
+.PHONY: csky-macos-toolchain gx8002-analog-source-check
+csky-macos-toolchain:
+	$(PYTHON) tools/build_g2_csky_macos.py
+
+gx8002-analog-source-check:
+	$(PYTHON) tools/verify_gx8002_analog_source.py
+	$(PYTHON) -m unittest tests.test_csky_macos_build tests.test_runtime_gx8002_analog tests.test_gx8002_upstream_objects tests.test_gx8002_analog_target
+
+.PHONY: gx8002-cache-source-check
+gx8002-cache-source-check:
+	$(PYTHON) tools/verify_gx8002_csi_source.py
+	$(PYTHON) tools/verify_gx8002_icache_source.py
+	$(PYTHON) -m unittest tests.test_gx8002_icache_target
+
+.PHONY: gx8002-source-candidate codec-source-experimental
+gx8002-source-candidate:
+	$(PYTHON) tools/build_gx8002_source_candidate.py
+	$(PYTHON) -m unittest tests.test_gx8002_source_candidate tests.test_gx8002_i2s_source tests.test_gx8002_vad_curves tests.test_gx8002_model_interface tests.test_gx8002_memcpy tests.test_gx8002_app_resume tests.test_gx8002_app_suspend tests.test_gx8002_upstream_queue tests.test_gx8002_queue_get_target tests.test_gx8002_trigger_event tests.test_gx8002_crc_target tests.test_gx8002_crc_source tests.test_gx8002_crc_table tests.test_gx8002_uart_transmit_target tests.test_gx8002_uart_putc_target tests.test_gx8002_ui2a_target tests.test_gx8002_putchw_target tests.test_gx8002_format_target tests.test_gx8002_printf_abi_target tests.test_gx8002_tinyprintf_padding tests.test_gx8002_uart_tick_target tests.test_gx8002_uart_tick tests.test_gx8002_app_tick tests.test_gx8002_app_tick_target tests.test_gx8002_power_registration tests.test_gx8002_power_registration_target tests.test_gx8002_irq_interpreter tests.test_gx8002_clock_lookup_target tests.test_gx8002_platform_gate_target tests.test_gx8002_watchdog_interrupt_target tests.test_gx8002_watchdog_initialize_target tests.test_gx8002_app_initialize_target tests.test_gx8002_reboot_target tests.test_gx8002_clear_bss_target tests.test_gx8002_system_initialize_target tests.test_gx8002_start_mode_target tests.test_gx8002_spi_transport_target tests.test_gx8002_flash_status_target tests.test_gx8002_flash_device_target tests.test_gx8002_flash_quad_target tests.test_gx8002_flash_xip_target tests.test_gx8002_platform_config_target tests.test_gx8002_flash_discover_target tests.test_gx8002_flash_word_io_target tests.test_gx8002_flash_info_target tests.test_gx8002_flash_otp_region_target tests.test_gx8002_flash_address_target tests.test_gx8002_flash_protection_target tests.test_gx8002_flash_protection_set_target tests.test_gx8002_flash_interrupt_target tests.test_gx8002_flash_interface_full_target tests.test_gx8002_flash_erase_target tests.test_gx8002_flash_read_target tests.test_gx8002_flash_page_program_target tests.test_gx8002_flash_block_bounds_target tests.test_gx8002_flash_block_wrapper_target tests.test_gx8002_flash_otp_status_target tests.test_gx8002_flash_otp_lock_target tests.test_gx8002_flash_otp_erase_target tests.test_gx8002_flash_otp_transmit_target tests.test_gx8002_flash_otp_write_model tests.test_gx8002_flash_otp_write_target tests.test_gx8002_flash_otp_read_model tests.test_gx8002_flash_otp_read_target tests.test_gx8002_otp_receive_summary tests.test_gx8002_flash_uid_read_model tests.test_gx8002_flash_uid_read_target tests.test_gx8002_uid_receive_summary tests.test_gx8002_flash_resume_target tests.test_gx8002_board_initialize_target tests.test_gx8002_irq_compact tests.test_gx8002_reset_entry tests.test_gx8002_main tests.test_gx8002_mode tests.test_gx8002_idle tests.test_gx8002_tws tests.test_gx8002_kws_insert tests.test_gx8002_memset tests.test_gx8002_kws_reset tests.test_gx8002_max_initialize tests.test_gx8002_max_list tests.test_gx8002_tws_shutdown tests.test_gx8002_stream_shutdown tests.test_gx8002_driver_exit tests.test_gx8002_audio_reset tests.test_gx8002_snpu_suspend tests.test_gx8002_irq_mask tests.test_gx8002_snpu_clock tests.test_gx8002_npu_registers tests.test_gx8002_npu_control tests.test_gx8002_npu_accessors tests.test_gx8002_npu_configuration tests.test_gx8002_npu_interrupt_masks tests.test_gx8002_npu_interrupt_status tests.test_gx8002_snpu_device tests.test_gx8002_npu_regs_init tests.test_gx8002_snpu_resume_internal tests.test_gx8002_snpu_initialize tests.test_gx8002_snpu_isr tests.test_gx8002_snpu_process_status tests.test_gx8002_snpu_dump tests.test_gx8002_snpu_overtime tests.test_gx8002_snpu_tcb_init tests.test_gx8002_dcache_clean_range tests.test_gx8002_snpu_task_cmd_cache_flush tests.test_gx8002_snpu_submit_task tests.test_gx8002_submit_cache_composition tests.test_gx8002_snpu_run_task_model tests.test_gx8002_snpu_run_task tests.test_gx8002_run_submit_composition tests.test_gx8002_run_submit_cache_composition tests.test_gx8002_snpu_get_state tests.test_gx8002_gpio_isr tests.test_gx8002_gpio_isr_model tests.test_gx8002_gpio_output tests.test_gx8002_gpio_trigger tests.test_gx8002_gpio_trigger_model tests.test_gx8002_gpio_disable_trigger tests.test_gx8002_gpio_disable_trigger_model tests.test_gx8002_gpio_initialize tests.test_gx8002_device_list_init tests.test_gx8002_spi_register_master tests.test_gx8002_spi_register_master_model tests.test_gx8002_dw_spi_cleanup tests.test_gx8002_dw_spi_irq tests.test_gx8002_dw_spi_probe tests.test_gx8002_dw_spi_probe_model tests.test_gx8002_spi_transfer_lifecycle tests.test_gx8002_spi_transfer_alignment_model tests.test_gx8002_spi_transfer_tx_model tests.test_gx8002_spi_transfer_rx_model tests.test_gx8002_spi_transfer_message_model tests.test_gx8002_spi_transfer_fifo_target tests.test_gx8002_padmux_get tests.test_gx8002_padmux_check tests.test_gx8002_padmux_set tests.test_gx8002_padmux_init tests.test_gx8002_padmux_defaults tests.test_gx8002_rtc_ticks tests.test_gx8002_rtc_isr tests.test_gx8002_rtc_error
+
+codec-source-experimental: bootloader-component core-component gx8002-source-candidate
+	$(PYTHON) tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-codec-source-experimental.json --output-dir build/codec-source-experimental --toolchain-profile apple-clang
+	$(PYTHON) tools/open_cfw.py verify-artifacts --manifest manifests/g2-2.2.6.10-codec-source-experimental.json --output-dir build/codec-source-experimental --toolchain-profile apple-clang
+	cp components/shared/gx8002/TINYPRINTF-NOTICE.txt build/codec-source-experimental/package/TINYPRINTF-NOTICE.txt
+	cp components/shared/gx8002/NATIONALCHIP-STARTUP-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-STARTUP-NOTICE.txt
+	cp components/shared/gx8002/NATIONALCHIP-MAIN-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-MAIN-NOTICE.txt
+	cp components/shared/gx8002/NATIONALCHIP-MODE-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-MODE-NOTICE.txt
+	cp components/shared/gx8002/NATIONALCHIP-IDLE-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-IDLE-NOTICE.txt
+	cp components/shared/gx8002/NATIONALCHIP-TWS-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-TWS-NOTICE.txt
+	cp components/shared/gx8002/NATIONALCHIP-KWS-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-KWS-NOTICE.txt
+	cp components/shared/gx8002/NATIONALCHIP-PARAMETERS-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-PARAMETERS-NOTICE.txt
+	cp components/shared/gx8002/NATIONALCHIP-LIBC-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-LIBC-NOTICE.txt
+	cp components/shared/gx8002/NATIONALCHIP-MAX-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-MAX-NOTICE.txt
+	cp components/shared/gx8002/NATIONALCHIP-STREAM-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-STREAM-NOTICE.txt
+
+.PHONY: gx8002-known-function-harvest
+gx8002-known-function-harvest:
+	$(PYTHON) tools/harvest_gx8002_known_functions.py

@@ -39,36 +39,36 @@ class Liblc3EncoderCapacityTests(unittest.TestCase):
 
     def test_conditional_capacity_arithmetic_is_exact(self) -> None:
         capacity = self.report["capacity"]
-        self.assertEqual(capacity["eligible_slot_count"], 609)
-        self.assertEqual(capacity["selected_count"], 82)
-        self.assertEqual(capacity["selected_closure_bytes"], 30598)
-        self.assertEqual(capacity["selected_slot_bytes"], 61648)
-        self.assertEqual(capacity["predecessor_savings"], 30484)
-        self.assertEqual(capacity["conditional_repack_savings"], 30676)
-        self.assertEqual(capacity["conditional_overlay_size"], 331596)
+        self.assertEqual(capacity["eligible_slot_count"], 654)
+        self.assertEqual(capacity["selected_count"], 211)
+        self.assertEqual(capacity["selected_closure_bytes"], 48603)
+        self.assertEqual(capacity["selected_slot_bytes"], 113656)
+        self.assertEqual(capacity["predecessor_savings"], 48684)
+        self.assertEqual(capacity["conditional_repack_savings"], 48780)
+        self.assertEqual(capacity["conditional_overlay_size"], 331664)
         encoder = self.report["encoder"]
-        self.assertEqual(encoder["conditional_margin_before_update"], 172)
-        self.assertEqual(encoder["conditional_encoder_end_exclusive"], 0x007FDF54)
+        self.assertEqual(encoder["conditional_margin_before_update"], 92)
+        self.assertEqual(encoder["conditional_encoder_end_exclusive"], 0x007FDFA4)
         self.assertFalse(encoder["placement_authorized"])
 
     def test_relocation_and_ingress_closure_is_quantified(self) -> None:
         relocations = self.report["relocations"]
-        self.assertEqual(relocations["all_relocated_leaf_relocations"], 5677)
-        self.assertEqual(relocations["movable_target_relocations"], 2406)
-        self.assertEqual(relocations["movable_fixed_target_relocations"], 596)
-        self.assertEqual(relocations["incoming_selected_relocations"], 102)
-        self.assertEqual(relocations["selected_outgoing_relocations"], 850)
+        self.assertEqual(relocations["all_relocated_leaf_relocations"], 6137)
+        self.assertEqual(relocations["movable_target_relocations"], 2515)
+        self.assertEqual(relocations["movable_fixed_target_relocations"], 598)
+        self.assertEqual(relocations["incoming_selected_relocations"], 213)
+        self.assertEqual(relocations["selected_outgoing_relocations"], 1499)
         self.assertLess(
             relocations["maximum_thumb_branch_displacement"], 1 << 24
         )
         ingress = self.report["ingress"]
         self.assertEqual((ingress["branch_count"], ingress["raw_pointer_count"]),
-                         (146, 0))
+                         (364, 1))
 
     def test_suffix_is_strict_but_repack_integration_stays_fail_closed(self) -> None:
         contracts = self.report["strict_contracts"]
         self.assertFalse(contracts["production_full_repack_allowed"])
-        self.assertEqual(contracts["full_repack_moved_non_strict_leaves"], 206)
+        self.assertEqual(contracts["full_repack_moved_non_strict_leaves"], 205)
         self.assertEqual(contracts["minimum_suffix_contract_blocker_bytes"], 0)
         self.assertEqual(contracts["minimum_suffix_contract_blocker_relocations"], 0)
         self.assertEqual(contracts["minimum_suffix_contract_blockers"], [])
@@ -91,17 +91,17 @@ class Liblc3EncoderCapacityTests(unittest.TestCase):
         pt = self.report["pt_source_uart"]
         self.assertTrue(pt["provider_interval_unchanged"])
         self.assertTrue(pt["receipt_refresh_required"])
-        self.assertEqual(pt["new_call_sites"], [0x007CF14C, 0x007CF188])
+        self.assertEqual(pt["new_call_sites"], [0x007CC14C, 0x007CC188])
 
-    def test_shorter_selection_is_rejected(self) -> None:
+    def test_stale_derived_selection_receipt_is_rejected(self) -> None:
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        manifest["selected_functions"].pop()
+        manifest["expected"]["selected_count"] -= 1
         with tempfile.TemporaryDirectory(prefix="liblc3-capacity-tamper-") as d:
             path = Path(d) / "proposal.json"
             path.write_text(json.dumps(manifest), encoding="utf-8")
             with self.assertRaisesRegex(
                 self.module.CapacityError,
-                "selected prefix is not the minimal candidate prefix",
+                "selected count drift",
             ):
                 self.module.analyze(path)
 

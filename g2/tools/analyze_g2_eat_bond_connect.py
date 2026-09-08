@@ -75,7 +75,7 @@ ROUTES = {
     },
     "linux-clang": {
         "path": ROOT / "build/canonical-provider/linux-clang/apollo_main-final81/ota_s200_firmware_ota.bin",
-        "report": ROOT / "build/canonical-observation-g2-final97/linux-b/build-report.json",
+        "report": ROOT / "build/canonical-observation-g2-final99/linux-b/build-report.json",
         "component": "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
         "targets": (0x007BC2B8, 0x007BC2D0),
         "text": (

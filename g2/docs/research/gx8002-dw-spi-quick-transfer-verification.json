@@ -1,0 +1,930 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_dw_spi_quick_transfer",
+      "section_name": ".text",
+      "compiled_bytes": 602,
+      "compiled_sha256": "964b5afa5ff89a937beda755efe5e1558d669c00643b24796e6ee25cd19a5e8b",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_dw_spi_quick_transfer",
+          "package_offset": 63376,
+          "bytes": 634,
+          "sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "dependency_headers": {
+      "include/utility/list.h": {
+        "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+        "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+      },
+      "include/utility/types.h": {
+        "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+        "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+      }
+    },
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "oracle": {
+      "path": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+      "blob": "600d763a219007e2af7b5006989d44984abf0861",
+      "sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+      "role": "identity_only"
+    },
+    "bindings": {
+      "open_cfw_gx8002_clock_gate": 268587136
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-jump-tables"
+    ],
+    "header": {
+      "path": "include/driver/spi.h",
+      "blob": "aabfb6e88beeee65eb74262d339d0ce44fdfcbce",
+      "sha256": "b158f2feee6baed0af40b3d2c5db0bfa0c76b4d8d96a8484ddcb98df04f69ebd"
+    },
+    "source_sha256": "c68057ce761cf50607f634d1f06433d05554167cd90238ba27059b7fbbddbd52",
+    "symbol": "open_cfw_gx8002_dw_spi_quick_transfer",
+    "section_name": ".text",
+    "package_offset": 63376,
+    "compiled_bytes": 602,
+    "compiled_sha256": "964b5afa5ff89a937beda755efe5e1558d669c00643b24796e6ee25cd19a5e8b",
+    "stock_envelope_bytes": 634,
+    "stock_sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+    ]
+  },
+  "qualification": {
+    "lifecycle": {
+      "candidate": {
+        "dependency_headers": {
+          "include/utility/list.h": {
+            "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+            "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+          },
+          "include/utility/types.h": {
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        },
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+          "blob": "600d763a219007e2af7b5006989d44984abf0861",
+          "sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+          "role": "identity_only"
+        },
+        "bindings": {
+          "open_cfw_gx8002_clock_gate": 268587136
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-jump-tables"
+        ],
+        "header": {
+          "path": "include/driver/spi.h",
+          "blob": "aabfb6e88beeee65eb74262d339d0ce44fdfcbce",
+          "sha256": "b158f2feee6baed0af40b3d2c5db0bfa0c76b4d8d96a8484ddcb98df04f69ebd"
+        },
+        "source_sha256": "c68057ce761cf50607f634d1f06433d05554167cd90238ba27059b7fbbddbd52",
+        "symbol": "open_cfw_gx8002_dw_spi_quick_transfer",
+        "section_name": ".text",
+        "package_offset": 63376,
+        "compiled_bytes": 602,
+        "compiled_sha256": "964b5afa5ff89a937beda755efe5e1558d669c00643b24796e6ee25cd19a5e8b",
+        "stock_envelope_bytes": 634,
+        "stock_sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+        ]
+      },
+      "attribution": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "object": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+        "blob": "600d763a219007e2af7b5006989d44984abf0861",
+        "object_sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+        "package_offset": 63376,
+        "runtime_address": 270557700,
+        "bytes": 634,
+        "sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+        "full_relocated_section_match": true,
+        "bindings": {
+          "gx_clock_set_module_enable": 268587136
+        },
+        "source_admitted": false,
+        "limits": [
+          "SDK object linked only as a comparison oracle, never a firmware provider. C reconstruction and target qualification remain required."
+        ]
+      },
+      "decoded_cases": 4,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "qualified_paths": [
+        "busy entry",
+        "empty transfer list"
+      ],
+      "limits": [
+        "No nonempty transfers, FIFO operations, alignment errors or hardware behavior qualified. Clock helper modeled without state changes; fixed 28-byte frame."
+      ]
+    },
+    "alignment": {
+      "candidate": {
+        "dependency_headers": {
+          "include/utility/list.h": {
+            "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+            "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+          },
+          "include/utility/types.h": {
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        },
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+          "blob": "600d763a219007e2af7b5006989d44984abf0861",
+          "sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+          "role": "identity_only"
+        },
+        "bindings": {
+          "open_cfw_gx8002_clock_gate": 268587136
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-jump-tables"
+        ],
+        "header": {
+          "path": "include/driver/spi.h",
+          "blob": "aabfb6e88beeee65eb74262d339d0ce44fdfcbce",
+          "sha256": "b158f2feee6baed0af40b3d2c5db0bfa0c76b4d8d96a8484ddcb98df04f69ebd"
+        },
+        "source_sha256": "c68057ce761cf50607f634d1f06433d05554167cd90238ba27059b7fbbddbd52",
+        "symbol": "open_cfw_gx8002_dw_spi_quick_transfer",
+        "section_name": ".text",
+        "package_offset": 63376,
+        "compiled_bytes": 602,
+        "compiled_sha256": "964b5afa5ff89a937beda755efe5e1558d669c00643b24796e6ee25cd19a5e8b",
+        "stock_envelope_bytes": 634,
+        "stock_sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+        ]
+      },
+      "attribution": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "object": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+        "blob": "600d763a219007e2af7b5006989d44984abf0861",
+        "object_sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+        "package_offset": 63376,
+        "runtime_address": 270557700,
+        "bytes": 634,
+        "sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+        "full_relocated_section_match": true,
+        "bindings": {
+          "gx_clock_set_module_enable": 268587136
+        },
+        "source_admitted": false,
+        "limits": [
+          "SDK object linked only as a comparison oracle, never a firmware provider. C reconstruction and target qualification remain required."
+        ]
+      },
+      "decoded_cases": 280,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Misaligned length/buffer setup and error shutdown only; no FIFO execution or complete-function admission."
+      ]
+    },
+    "tx": {
+      "candidate": {
+        "dependency_headers": {
+          "include/utility/list.h": {
+            "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+            "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+          },
+          "include/utility/types.h": {
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        },
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+          "blob": "600d763a219007e2af7b5006989d44984abf0861",
+          "sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+          "role": "identity_only"
+        },
+        "bindings": {
+          "open_cfw_gx8002_clock_gate": 268587136
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-jump-tables"
+        ],
+        "header": {
+          "path": "include/driver/spi.h",
+          "blob": "aabfb6e88beeee65eb74262d339d0ce44fdfcbce",
+          "sha256": "b158f2feee6baed0af40b3d2c5db0bfa0c76b4d8d96a8484ddcb98df04f69ebd"
+        },
+        "source_sha256": "c68057ce761cf50607f634d1f06433d05554167cd90238ba27059b7fbbddbd52",
+        "symbol": "open_cfw_gx8002_dw_spi_quick_transfer",
+        "section_name": ".text",
+        "package_offset": 63376,
+        "compiled_bytes": 602,
+        "compiled_sha256": "964b5afa5ff89a937beda755efe5e1558d669c00643b24796e6ee25cd19a5e8b",
+        "stock_envelope_bytes": 634,
+        "stock_sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+        ]
+      },
+      "attribution": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "object": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+        "blob": "600d763a219007e2af7b5006989d44984abf0861",
+        "object_sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+        "package_offset": 63376,
+        "runtime_address": 270557700,
+        "bytes": 634,
+        "sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+        "full_relocated_section_match": true,
+        "bindings": {
+          "gx_clock_set_module_enable": 268587136
+        },
+        "source_admitted": false,
+        "limits": [
+          "SDK object linked only as a comparison oracle, never a firmware provider. C reconstruction and target qualification remain required."
+        ]
+      },
+      "decoded_cases": 160,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "TX cases only; RX, multi-transfer and hardware qualification remain incomplete."
+      ]
+    },
+    "rx": {
+      "candidate": {
+        "dependency_headers": {
+          "include/utility/list.h": {
+            "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+            "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+          },
+          "include/utility/types.h": {
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        },
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+          "blob": "600d763a219007e2af7b5006989d44984abf0861",
+          "sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+          "role": "identity_only"
+        },
+        "bindings": {
+          "open_cfw_gx8002_clock_gate": 268587136
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-jump-tables"
+        ],
+        "header": {
+          "path": "include/driver/spi.h",
+          "blob": "aabfb6e88beeee65eb74262d339d0ce44fdfcbce",
+          "sha256": "b158f2feee6baed0af40b3d2c5db0bfa0c76b4d8d96a8484ddcb98df04f69ebd"
+        },
+        "source_sha256": "c68057ce761cf50607f634d1f06433d05554167cd90238ba27059b7fbbddbd52",
+        "symbol": "open_cfw_gx8002_dw_spi_quick_transfer",
+        "section_name": ".text",
+        "package_offset": 63376,
+        "compiled_bytes": 602,
+        "compiled_sha256": "964b5afa5ff89a937beda755efe5e1558d669c00643b24796e6ee25cd19a5e8b",
+        "stock_envelope_bytes": 634,
+        "stock_sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+        ]
+      },
+      "attribution": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "object": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+        "blob": "600d763a219007e2af7b5006989d44984abf0861",
+        "object_sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+        "package_offset": 63376,
+        "runtime_address": 270557700,
+        "bytes": 634,
+        "sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+        "full_relocated_section_match": true,
+        "bindings": {
+          "gx_clock_set_module_enable": 268587136
+        },
+        "source_admitted": false,
+        "limits": [
+          "SDK object linked only as a comparison oracle, never a firmware provider. C reconstruction and target qualification remain required."
+        ]
+      },
+      "decoded_cases": 160,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "RX cases only; multi-transfer and hardware qualification remain incomplete."
+      ]
+    },
+    "message": {
+      "candidate": {
+        "dependency_headers": {
+          "include/utility/list.h": {
+            "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+            "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+          },
+          "include/utility/types.h": {
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        },
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+          "blob": "600d763a219007e2af7b5006989d44984abf0861",
+          "sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+          "role": "identity_only"
+        },
+        "bindings": {
+          "open_cfw_gx8002_clock_gate": 268587136
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-jump-tables"
+        ],
+        "header": {
+          "path": "include/driver/spi.h",
+          "blob": "aabfb6e88beeee65eb74262d339d0ce44fdfcbce",
+          "sha256": "b158f2feee6baed0af40b3d2c5db0bfa0c76b4d8d96a8484ddcb98df04f69ebd"
+        },
+        "source_sha256": "c68057ce761cf50607f634d1f06433d05554167cd90238ba27059b7fbbddbd52",
+        "symbol": "open_cfw_gx8002_dw_spi_quick_transfer",
+        "section_name": ".text",
+        "package_offset": 63376,
+        "compiled_bytes": 602,
+        "compiled_sha256": "964b5afa5ff89a937beda755efe5e1558d669c00643b24796e6ee25cd19a5e8b",
+        "stock_envelope_bytes": 634,
+        "stock_sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+        ]
+      },
+      "attribution": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "object": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+        "blob": "600d763a219007e2af7b5006989d44984abf0861",
+        "object_sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+        "package_offset": 63376,
+        "runtime_address": 270557700,
+        "bytes": 634,
+        "sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+        "full_relocated_section_match": true,
+        "bindings": {
+          "gx_clock_set_module_enable": 268587136
+        },
+        "source_admitted": false,
+        "limits": [
+          "SDK object linked only as a comparison oracle, never a firmware provider. C reconstruction and target qualification remain required."
+        ]
+      },
+      "decoded_cases": 270,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Model composition for fixed distinct list nodes; clock helper does not mutate state. Invalid widths, concurrency and physical FIFO behavior remain unqualified."
+      ]
+    },
+    "gate": {
+      "candidate": {
+        "dependency_headers": {
+          "include/utility/list.h": {
+            "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+            "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+          },
+          "include/utility/types.h": {
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        },
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+          "blob": "600d763a219007e2af7b5006989d44984abf0861",
+          "sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+          "role": "identity_only"
+        },
+        "bindings": {
+          "open_cfw_gx8002_clock_gate": 268587136
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-jump-tables"
+        ],
+        "header": {
+          "path": "include/driver/spi.h",
+          "blob": "aabfb6e88beeee65eb74262d339d0ce44fdfcbce",
+          "sha256": "b158f2feee6baed0af40b3d2c5db0bfa0c76b4d8d96a8484ddcb98df04f69ebd"
+        },
+        "source_sha256": "c68057ce761cf50607f634d1f06433d05554167cd90238ba27059b7fbbddbd52",
+        "symbol": "open_cfw_gx8002_dw_spi_quick_transfer",
+        "section_name": ".text",
+        "package_offset": 63376,
+        "compiled_bytes": 602,
+        "compiled_sha256": "964b5afa5ff89a937beda755efe5e1558d669c00643b24796e6ee25cd19a5e8b",
+        "stock_envelope_bytes": 634,
+        "stock_sha256": "7327bfd821913d05255020723c44cf51e29af05fac10e878efec9c6a645f9d62",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+        ]
+      },
+      "gate_placement": {
+        "upstream_evidence": {
+          "upstream_build": {
+            "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+            "upstream_dependencies": [
+              {
+                "path": "arch/soc/grus/include/clk_priv.h",
+                "git_blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+                "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+              },
+              {
+                "path": "arch/soc/grus/include/base_addr.h",
+                "git_blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+              },
+              {
+                "path": "include/driver/gx_clock.h",
+                "git_blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+                "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+              },
+              {
+                "path": "include/driver/gx_clock/gx_clock_v2.h",
+                "git_blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+              },
+              {
+                "path": "LICENSE",
+                "git_blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+                "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+              }
+            ],
+            "flags": [
+              "-Os",
+              "-mcpu=ck804ef",
+              "-mhard-float",
+              "-ffreestanding",
+              "-fno-builtin",
+              "-ffunction-sections",
+              "-fdata-sections",
+              "-Wall",
+              "-Wextra",
+              "-Werror",
+              "-fno-tree-loop-optimize",
+              "-fno-delete-null-pointer-checks"
+            ],
+            "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+            "configuration": "#define CONFIG_ARCH_GRUS 1\n",
+            "sections": [
+              {
+                "section": ".text.__module_get_info",
+                "bytes": 160,
+                "sha256": "6664da47e0446404acdc5363a024dade757bd809f6728235bb7799543e84578f",
+                "relocations": 1
+              },
+              {
+                "section": ".text.open_cfw_gx8002_clock_lookup",
+                "bytes": 8,
+                "sha256": "1562e7a0168550db54af150d4fd9df2b744ac384cafa59377ab129f54e2f5d80",
+                "relocations": 1
+              },
+              {
+                "section": ".text.open_cfw_gx8002_platform_gate",
+                "bytes": 288,
+                "sha256": "367035be237c0f55167689494547c086158cf9499136c794676700d037e90d0e",
+                "relocations": 3
+              },
+              {
+                "section": ".rodata.open_cfw_gx8002_platform_gate",
+                "bytes": 76,
+                "sha256": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+                "relocations": 19
+              },
+              {
+                "section": ".data.gx_clock_param_table",
+                "bytes": 416,
+                "sha256": "d12a5ad69719038f933a1c9d1c98ed1093de9e7f12d0d709ae8c6ec324c18852",
+                "relocations": 20
+              },
+              {
+                "section": ".data.gx_clock_dto_table",
+                "bytes": 3,
+                "sha256": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+                "relocations": 0
+              },
+              {
+                "section": ".data.gx_clock_div_table",
+                "bytes": 68,
+                "sha256": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872",
+                "relocations": 0
+              }
+            ],
+            "source_admitted": false,
+            "firmware_bytes_emitted": 0,
+            "limits": [
+              "Unlinked candidate; stock gate envelope is 256 bytes at package 0x17094.",
+              "Module lookup, tables, jump tables and MMIO behavior require qualification.",
+              "No hardware qualification or complete source-only claim."
+            ]
+          },
+          "tables": [
+            {
+              "symbol": "gx_clock_param_table",
+              "section_name": ".data.gx_clock_param_table",
+              "package_offset": 100084,
+              "runtime_address": 537028320,
+              "bytes": 416,
+              "sha256": "64a888d435653e525749e8de221f6b171d5c0f4e7d7270f146cfa42521856296",
+              "byte_exact": true
+            },
+            {
+              "symbol": "gx_clock_dto_table",
+              "section_name": ".data.gx_clock_dto_table",
+              "package_offset": 100500,
+              "runtime_address": 537028736,
+              "bytes": 3,
+              "sha256": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+              "byte_exact": true
+            },
+            {
+              "symbol": "gx_clock_div_table",
+              "section_name": ".data.gx_clock_div_table",
+              "package_offset": 100504,
+              "runtime_address": 537028740,
+              "bytes": 68,
+              "sha256": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872",
+              "byte_exact": true
+            }
+          ],
+          "source_table_bytes": 487,
+          "module_lookup": {
+            "package_offset": 92760,
+            "runtime_address": 268585540,
+            "compiled_bytes": 160,
+            "compiled_sha256": "002a00eee4ab7761a5a8fce8b26c97c18509b72615dc8d558ac107189ecc6b8f",
+            "stock_envelope_bytes": 164,
+            "stock_sha256": "c885a50be5de150cc7dd0c1c90182a285d028b5f379f6ab15cad6da07f24b055",
+            "behavior_qualified": false
+          },
+          "source_admitted": false,
+          "limits": [
+            "Lookup helper fits original entry; gate code remains at a temporary analysis address.",
+            "One alignment byte between DTO and divider table remains outside table ownership.",
+            "Clock code qualification and firmware integration remain pending."
+          ]
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "--param=case-values-threshold=3",
+          "-fno-gcse",
+          "-fno-tree-forwprop"
+        ],
+        "sections": [
+          {
+            "section": ".text.open_cfw_gx8002_platform_gate",
+            "package_offset": 94356,
+            "runtime_address": 268587136,
+            "compiled_bytes": 254,
+            "compiled_sha256": "d1730683d8b0b9745b3fa086ce0af1b1a9871d36c62e05ba1bcfc6f5eba6803a",
+            "stock_envelope_bytes": 256,
+            "stock_sha256": "3b7098dbdad7b4aa8a49035c26ce58a6939e6a14c41ea0b6d37370265c6ca6f6"
+          },
+          {
+            "section": ".rodata.open_cfw_gx8002_platform_gate",
+            "package_offset": 95200,
+            "runtime_address": 268587980,
+            "compiled_bytes": 148,
+            "compiled_sha256": "5083b30f8f66b1cee1a568c50a56c4d773cbbe2ce11c8827eaf1cfb365cdf161",
+            "stock_envelope_bytes": 148,
+            "stock_sha256": "afccb63ec8702159c8204fa919b9fa2155b57917accca2b993e58cc49396f329"
+          }
+        ],
+        "source_admitted": false,
+        "limits": [
+          "Lookup resolves to separately qualified source entry.",
+          "Gate MMIO behavior and switch-target equivalence pending; no hardware qualification."
+        ]
+      },
+      "combinations": 36,
+      "decoded_gate_calls": 72,
+      "sample_gate_traces": [
+        [
+          [
+            14,
+            1,
+            [
+              [
+                "lookup",
+                14
+              ],
+              [
+                "read",
+                2687500424,
+                0
+              ],
+              [
+                "write",
+                2687500316,
+                1024
+              ],
+              [
+                "lookup",
+                14
+              ],
+              [
+                "write",
+                2687500320,
+                33792
+              ]
+            ]
+          ],
+          [
+            14,
+            0,
+            [
+              [
+                "lookup",
+                14
+              ],
+              [
+                "read",
+                2687500424,
+                0
+              ],
+              [
+                "write",
+                2687500316,
+                1024
+              ],
+              [
+                "lookup",
+                14
+              ],
+              [
+                "write",
+                2687500316,
+                33792
+              ]
+            ]
+          ]
+        ],
+        [
+          [
+            14,
+            1,
+            [
+              [
+                "lookup",
+                14
+              ],
+              [
+                "read",
+                2687500424,
+                4294967295
+              ],
+              [
+                "write",
+                2687500320,
+                1024
+              ],
+              [
+                "lookup",
+                14
+              ],
+              [
+                "write",
+                2687500320,
+                33792
+              ]
+            ]
+          ],
+          [
+            14,
+            0,
+            [
+              [
+                "lookup",
+                14
+              ],
+              [
+                "read",
+                2687500424,
+                4294967295
+              ],
+              [
+                "write",
+                2687500316,
+                1024
+              ],
+              [
+                "lookup",
+                14
+              ],
+              [
+                "write",
+                2687500316,
+                33792
+              ]
+            ]
+          ]
+        ],
+        [
+          [
+            14,
+            1,
+            [
+              [
+                "lookup",
+                14
+              ],
+              [
+                "read",
+                2687500424,
+                1431655765
+              ],
+              [
+                "write",
+                2687500320,
+                1024
+              ],
+              [
+                "lookup",
+                14
+              ],
+              [
+                "write",
+                2687500320,
+                33792
+              ]
+            ]
+          ],
+          [
+            14,
+            0,
+            [
+              [
+                "lookup",
+                14
+              ],
+              [
+                "read",
+                2687500424,
+                1431655765
+              ],
+              [
+                "write",
+                2687500316,
+                1024
+              ],
+              [
+                "lookup",
+                14
+              ],
+              [
+                "write",
+                2687500316,
+                33792
+              ]
+            ]
+          ]
+        ]
+      ],
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Call-boundary composition only: helper executes with its own abstract stack and modeled lookup/table. Transfer caller clobbers modeled. No nested stack sharing, concurrent changes, or physical clock effects proved."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "verify_gx8002_dw_spi_quick_transfer.py": "a098e388e3c9fa104e7b452adeea35393fbe2a7e2f0f82e69f3daac914839ece",
+    "build_gx8002_dw_spi_quick_transfer_candidate.py": "9b7dfb23f7e13ab1d4e9fb8371b1d99a8c2f709f54684942bdf4469f5741fa5d",
+    "analyze_gx8002_dw_spi_quick_transfer.py": "1773de323090552ff4112761f4ed482b98078309a7d06c026866b76449c88bc9",
+    "compare_gx8002_platform_gate.py": "01576ca85a2ba94bee543f14f4a4ee63157a596f8a1bcae0ce9bf70d587580dd",
+    "link_gx8002_platform_gate.py": "0bcc315834fbcc06505e4e17a96cdaba9d84d24bf1c6c6055ea6955e36ba3a09",
+    "verify_gx8002_spi_transfer_lifecycle.py": "cb66ffc6268f35582ac1b580a505c2a5f12cc10df0ff785298b0bf3dbee2ee33",
+    "verify_gx8002_spi_transfer_alignment.py": "8df87b12d79d8eb382239d4d889fd865a753b5d29069a186846c35e93b938e09",
+    "verify_gx8002_spi_transfer_tx.py": "1536b9ac9fceeedc7c297ddadb7a2da792cdd6141043cc6b42d8e762b78e9382",
+    "verify_gx8002_spi_transfer_rx.py": "ea0b92bdb232422e2fc9ad6a2a31e5fc0454bed02ad99bc2fe402d2670b3f9ff",
+    "verify_gx8002_spi_transfer_message.py": "ead9171af9b5221f7d3c9ebcef173861c7f306b049c68b1864fcf7b11e0da0ef",
+    "verify_gx8002_spi_transfer_gate_composition.py": "4ebda8c1a74cbe61a1031b2b5ae97a176bae23ed4898778d3ef17ffe1713a998",
+    "model_gx8002_spi_transfer_lifecycle.py": "8f4a1e40c0ca903970c18df2f8a1b32819f55b24ed213f90f19889d7d5352d24",
+    "model_gx8002_spi_transfer_alignment.py": "0f9811dabaf046b96dc7abbf1f588a31165301d3d51d1800388a3df61100414c",
+    "model_gx8002_spi_transfer_tx.py": "b8595307062b25c92d13319f97bfc5dac9eaf7674c802301d00eb3baa0457c85",
+    "model_gx8002_spi_transfer_rx.py": "8a327c325362b9d3b77f845559228fa2f321cc454461d9c9289a64a410b212c2",
+    "model_gx8002_spi_transfer_message.py": "476a187b6e93164d1c3ed0156c02c46d7554cf0d28b2d72b431344db8be724f3"
+  },
+  "decoded_transfer_cases": 874,
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Source admission covers recovered valid-buffer/list contracts; it is not whole-firmware or hardware qualification.",
+    "Unsupported widths, malformed/metadata-aliased lists, FIFO overrun/negative free space, concurrent mutation and non-progressing hardware remain outside finite replay.",
+    "Clock-boundary composition uses the existing modeled lookup and separate abstract helper stack; no shared nested-stack or physical timing proof.",
+    "Shared RX/TX data buffers are modeled; metadata remains distinct. No new timeout, saturation or validation behavior is introduced."
+  ]
+}

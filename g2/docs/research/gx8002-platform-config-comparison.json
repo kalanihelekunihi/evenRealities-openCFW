@@ -1,0 +1,53 @@
+{
+  "build": {
+    "generated_dispatch_table": {
+      "section": ".rodata.platform_config",
+      "compiled_bytes": 40,
+      "compiled_sha256": "308a2863220425a1fe9b604e355cf773712981883107d1aca5ba46a6cd55ce03",
+      "package_offset": 92600,
+      "stock_envelope_bytes": 40,
+      "stock_sha256": "83890dd848a94351156e5f91a0c3f1540e65343545303002588ee05e8c526e5d"
+    },
+    "source_sha256": "e8b158daa2d926dfb5f030bbc89bde566ac98f0992727c0b3aa72310908b2181",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_platform_config",
+        "section": ".text.platform_config",
+        "compiled_bytes": 196,
+        "compiled_sha256": "9beb14aba99f83e4a1dcc9e5118a4569fa0ecae67e396a3e8828015101551d12",
+        "package_offset": 97672,
+        "stock_envelope_bytes": 212,
+        "stock_sha256": "c191d14f04f7b7dd7c98b8348ac80c329b52b46a4d3a35c47b2765911d89bfac",
+        "byte_exact": false,
+        "fits": true
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Placement and decoded dispatcher/input/MMIO qualification required.",
+      "No physical hardware qualification."
+    ]
+  },
+  "cases": 77056,
+  "source_admitted": false,
+  "limits": [
+    "Aligned caller records and ordered record/register effects; no physical hardware qualification."
+  ],
+  "coverage": [
+    "Every operation; invalid unsigned selectors; every byte value at every record offset.",
+    "All 65536 independent packed-byte pairs in operation 7.",
+    "Operation 9 second read can differ independently from the first; source-generated dispatch table executed."
+  ]
+}

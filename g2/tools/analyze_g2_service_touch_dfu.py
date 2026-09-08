@@ -378,7 +378,7 @@ def analyze(image_path: Path = IMAGE) -> dict:
     if (len(flash_plan["flash_regions"]),
             len(flash_plan["unresolved_flash_regions"]),
             flash_plan["package_sha256"]) != (
-            7_104, 0, manifest["package"]["expected_sha256"]):
+            7_822, 0, manifest["package"]["expected_sha256"]):
         raise AuditError("touch-DFU flash-plan closure changed")
 
     return {

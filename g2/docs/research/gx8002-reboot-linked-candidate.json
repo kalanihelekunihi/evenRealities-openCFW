@@ -1,0 +1,42 @@
+{
+  "source_sha256": "7c35ea49b951763e282abc621f60261b3f12a460b67a71c4fe74bb3c7cb3aad4",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-inline"
+  ],
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_reboot",
+      "package_offset": 64836,
+      "compiled_bytes": 36,
+      "compiled_sha256": "183481196057553ffe50cf0e3ba7690da528d2afe46c014acfe2203ce10352f1",
+      "stock_envelope_bytes": 36,
+      "stock_sha256": "183481196057553ffe50cf0e3ba7690da528d2afe46c014acfe2203ce10352f1",
+      "byte_exact": true
+    },
+    {
+      "symbol": "open_cfw_gx8002_watchdog_callback",
+      "package_offset": 74276,
+      "compiled_bytes": 6,
+      "compiled_sha256": "681d9a80d95dc259f5c9f5ccf26f7ba04e800e5553533ade73e76b8d8c11db21",
+      "stock_envelope_bytes": 8,
+      "stock_sha256": "a429e153e2a7b1504ac88a72bd890316368f1a7ed14f825dbcb59ad5673faa9e",
+      "byte_exact": false
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Clock gate resolves to separately qualified source entry.",
+    "Reset wait is stock behavior; no physical reset or hardware qualification.",
+    "Callback path comparison pending."
+  ]
+}

@@ -3267,7 +3267,7 @@ class CanonicalMaintainerWorkflowDocsTests(unittest.TestCase):
                 "--output-dir build/postapply-package-apple",
                 "--output-dir build/postapply-package-linux",
                 "make dual-profile-ownership-write",
-                "build/canonical-observation-g2-final97/"
+                "build/canonical-observation-g2-final99/"
                 "{apple-a,apple-b,linux-a,linux-b}/",
                 "ignored, private local\nevidence",
                 "not Git inputs or community-archive members",

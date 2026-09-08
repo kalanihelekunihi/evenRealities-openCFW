@@ -42,6 +42,13 @@ BUILDER = load_builder()
 class Lc3ServiceAudioAtomicComponentTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
+        missing = [path for path in INPUTS.values() if not path.is_file()]
+        if missing:
+            raise unittest.SkipTest(
+                "historical CFF-first atomic-component inputs are unavailable; "
+                "the superseding production route is covered by "
+                "test_apollo_liblc3_service_audio_production_replay"
+            )
         cls.temporary = tempfile.TemporaryDirectory(
             prefix="open-cfw-lc3-atomic-test-")
         cls.root = Path(cls.temporary.name)

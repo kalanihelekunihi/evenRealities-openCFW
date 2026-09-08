@@ -1,0 +1,137 @@
+{
+  "source_sha256": "34e3bd4d91c4be5ee066d243b625b9efd79a8d839c4c1ce0a20fd8cbf9b6019d",
+  "target_builds": [
+    {
+      "flags": [
+        "-O2",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "sections": [
+        {
+          "name": ".text.open_cfw_gx8002_crc32_no_comp",
+          "bytes": 188,
+          "sha256": "d9310a8ad4a5aa6cf95e7e9052e812f4b4a12933f2895962ce1735c779f5da4e",
+          "relocations": 1
+        },
+        {
+          "name": ".text.open_cfw_gx8002_crc32",
+          "bytes": 12,
+          "sha256": "f5b987e9129a66bf9766be4360355982fed092b2e19efae2290f55625fccdedc",
+          "relocations": 1
+        }
+      ]
+    },
+    {
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "sections": [
+        {
+          "name": ".text.step",
+          "bytes": 20,
+          "sha256": "9f2326771ec0498ddfc4f62cfea96ac2accda9c911731598a7578e80b1bc6a5c",
+          "relocations": 1
+        },
+        {
+          "name": ".text.open_cfw_gx8002_crc32_no_comp",
+          "bytes": 100,
+          "sha256": "5e3a1b9a71e9f0ab838c452cf3af20fbe4abd521e947abb1c288650ea954cf3d",
+          "relocations": 6
+        },
+        {
+          "name": ".text.open_cfw_gx8002_crc32",
+          "bytes": 12,
+          "sha256": "f5b987e9129a66bf9766be4360355982fed092b2e19efae2290f55625fccdedc",
+          "relocations": 1
+        }
+      ]
+    },
+    {
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-finline-functions"
+      ],
+      "sections": [
+        {
+          "name": ".text.step",
+          "bytes": 20,
+          "sha256": "9f2326771ec0498ddfc4f62cfea96ac2accda9c911731598a7578e80b1bc6a5c",
+          "relocations": 1
+        },
+        {
+          "name": ".text.open_cfw_gx8002_crc32_no_comp",
+          "bytes": 100,
+          "sha256": "5e3a1b9a71e9f0ab838c452cf3af20fbe4abd521e947abb1c288650ea954cf3d",
+          "relocations": 6
+        },
+        {
+          "name": ".text.open_cfw_gx8002_crc32",
+          "bytes": 12,
+          "sha256": "f5b987e9129a66bf9766be4360355982fed092b2e19efae2290f55625fccdedc",
+          "relocations": 1
+        }
+      ]
+    },
+    {
+      "flags": [
+        "-O2",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-tree-loop-optimize"
+      ],
+      "sections": [
+        {
+          "name": ".text.open_cfw_gx8002_crc32_no_comp",
+          "bytes": 160,
+          "sha256": "bf9e529354774397c599df07f3705a606264309cc3244ee0fd464233dbae691e",
+          "relocations": 1
+        },
+        {
+          "name": ".text.open_cfw_gx8002_crc32",
+          "bytes": 12,
+          "sha256": "f5b987e9129a66bf9766be4360355982fed092b2e19efae2290f55625fccdedc",
+          "relocations": 1
+        }
+      ]
+    }
+  ],
+  "host_cases": 2052,
+  "source_admitted": false,
+  "limits": [
+    "Target instruction and placement comparisons remain pending.",
+    "Host tests use native little-endian memory and ordinary non-aliasing input."
+  ]
+}

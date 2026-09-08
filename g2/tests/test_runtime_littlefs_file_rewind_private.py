@@ -1049,7 +1049,7 @@ class RuntimeLittlefsFileRewindPrivateProductionTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (2_440, 2_449, 1_871),
+            (2_568, 2_452, 1_999),
         )
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaves = [
@@ -1265,7 +1265,7 @@ class RuntimeLittlefsFileRewindPrivateProductionTests(unittest.TestCase):
             ),
         })
         tail = by_name["apollo_littlefs_file_rewind_private_source_leaf"]
-        self.assertIs(tail, regions[-2_683])
+        self.assertIs(tail, regions[-2_870])
         self.assertEqual(tail, {
             "name": "apollo_littlefs_file_rewind_private_source_leaf",
             "function": (

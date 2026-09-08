@@ -1,0 +1,591 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_irq_compact_entry",
+      "section_name": ".text",
+      "ownership_kind": "compiled_assembly",
+      "compiled_bytes": 80,
+      "compiled_sha256": "4603c68912b68c0dc567ddcea48266e00421c600eec7ac5c0e8db8a55dfc9288",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_irq_compact_entry",
+          "package_offset": 95624,
+          "bytes": 80,
+          "sha256": "4603c68912b68c0dc567ddcea48266e00421c600eec7ac5c0e8db8a55dfc9288",
+          "region": "image_a_sram_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "base": {
+      "build": {
+        "source_sha256": "99028a1de8f7d065ded16bafca9ac70b1645d1d68331ca1e58d104a5d9ccef92",
+        "flags": [
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-mistack"
+        ],
+        "compiled_bytes": 80,
+        "compiled_sha256": "4603c68912b68c0dc567ddcea48266e00421c600eec7ac5c0e8db8a55dfc9288",
+        "byte_exact": true,
+        "software_frame_bytes": 92,
+        "source_kind": "architecture_assembly",
+        "source_admitted": false,
+        "limits": [
+          "Requires ABI-compliant callbacks; combined decoded dispatch/context checks remain before admission. No hardware qualification."
+        ]
+      },
+      "cases": 768,
+      "source_admitted": false,
+      "limits": [
+        "Full context and dispatch for valid vectors32..63 with modeled ABI-compliant callbacks. Nested control timing, invalid vector domains and callback stack usage remain separate."
+      ]
+    },
+    "cases": 225,
+    "boundaries": 25,
+    "results": [
+      {
+        "boundary": 268588406,
+        "instruction": "ipush",
+        "nested_depth": 1,
+        "peak_bytes": 132
+      },
+      {
+        "boundary": 268588406,
+        "instruction": "ipush",
+        "nested_depth": 2,
+        "peak_bytes": 140
+      },
+      {
+        "boundary": 268588406,
+        "instruction": "ipush",
+        "nested_depth": 3,
+        "peak_bytes": 148
+      },
+      {
+        "boundary": 268588408,
+        "instruction": "subi",
+        "nested_depth": 1,
+        "peak_bytes": 156
+      },
+      {
+        "boundary": 268588408,
+        "instruction": "subi",
+        "nested_depth": 2,
+        "peak_bytes": 188
+      },
+      {
+        "boundary": 268588408,
+        "instruction": "subi",
+        "nested_depth": 3,
+        "peak_bytes": 220
+      },
+      {
+        "boundary": 268588410,
+        "instruction": "stm",
+        "nested_depth": 1,
+        "peak_bytes": 212
+      },
+      {
+        "boundary": 268588410,
+        "instruction": "stm",
+        "nested_depth": 2,
+        "peak_bytes": 300
+      },
+      {
+        "boundary": 268588410,
+        "instruction": "stm",
+        "nested_depth": 3,
+        "peak_bytes": 388
+      },
+      {
+        "boundary": 268588414,
+        "instruction": "subi",
+        "nested_depth": 1,
+        "peak_bytes": 212
+      },
+      {
+        "boundary": 268588414,
+        "instruction": "subi",
+        "nested_depth": 2,
+        "peak_bytes": 300
+      },
+      {
+        "boundary": 268588414,
+        "instruction": "subi",
+        "nested_depth": 3,
+        "peak_bytes": 388
+      },
+      {
+        "boundary": 268588416,
+        "instruction": "fstms",
+        "nested_depth": 1,
+        "peak_bytes": 244
+      },
+      {
+        "boundary": 268588416,
+        "instruction": "fstms",
+        "nested_depth": 2,
+        "peak_bytes": 364
+      },
+      {
+        "boundary": 268588416,
+        "instruction": "fstms",
+        "nested_depth": 3,
+        "peak_bytes": 484
+      },
+      {
+        "boundary": 268588420,
+        "instruction": "push",
+        "nested_depth": 1,
+        "peak_bytes": 244
+      },
+      {
+        "boundary": 268588420,
+        "instruction": "push",
+        "nested_depth": 2,
+        "peak_bytes": 364
+      },
+      {
+        "boundary": 268588420,
+        "instruction": "push",
+        "nested_depth": 3,
+        "peak_bytes": 484
+      },
+      {
+        "boundary": 268588422,
+        "instruction": "lrw",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588422,
+        "instruction": "lrw",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588422,
+        "instruction": "lrw",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588424,
+        "instruction": "ld.w",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588424,
+        "instruction": "ld.w",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588424,
+        "instruction": "ld.w",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588428,
+        "instruction": "andi",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588428,
+        "instruction": "andi",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588428,
+        "instruction": "andi",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588432,
+        "instruction": "subi",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588432,
+        "instruction": "subi",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588432,
+        "instruction": "subi",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588434,
+        "instruction": "lrw",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588434,
+        "instruction": "lrw",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588434,
+        "instruction": "lrw",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588436,
+        "instruction": "ldr.w",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588436,
+        "instruction": "ldr.w",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588436,
+        "instruction": "ldr.w",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588440,
+        "instruction": "bez",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588440,
+        "instruction": "bez",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588440,
+        "instruction": "bez",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588444,
+        "instruction": "lsli",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588444,
+        "instruction": "lsli",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588444,
+        "instruction": "lsli",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588446,
+        "instruction": "addu",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588446,
+        "instruction": "addu",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588446,
+        "instruction": "addu",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588448,
+        "instruction": "ld.w",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588448,
+        "instruction": "ld.w",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588448,
+        "instruction": "ld.w",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588450,
+        "instruction": "jsr",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588450,
+        "instruction": "jsr",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588450,
+        "instruction": "jsr",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588452,
+        "instruction": "ld.w",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588452,
+        "instruction": "ld.w",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588452,
+        "instruction": "ld.w",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588456,
+        "instruction": "addi",
+        "nested_depth": 1,
+        "peak_bytes": 248
+      },
+      {
+        "boundary": 268588456,
+        "instruction": "addi",
+        "nested_depth": 2,
+        "peak_bytes": 372
+      },
+      {
+        "boundary": 268588456,
+        "instruction": "addi",
+        "nested_depth": 3,
+        "peak_bytes": 496
+      },
+      {
+        "boundary": 268588458,
+        "instruction": "fldms",
+        "nested_depth": 1,
+        "peak_bytes": 244
+      },
+      {
+        "boundary": 268588458,
+        "instruction": "fldms",
+        "nested_depth": 2,
+        "peak_bytes": 364
+      },
+      {
+        "boundary": 268588458,
+        "instruction": "fldms",
+        "nested_depth": 3,
+        "peak_bytes": 484
+      },
+      {
+        "boundary": 268588462,
+        "instruction": "addi",
+        "nested_depth": 1,
+        "peak_bytes": 244
+      },
+      {
+        "boundary": 268588462,
+        "instruction": "addi",
+        "nested_depth": 2,
+        "peak_bytes": 364
+      },
+      {
+        "boundary": 268588462,
+        "instruction": "addi",
+        "nested_depth": 3,
+        "peak_bytes": 484
+      },
+      {
+        "boundary": 268588464,
+        "instruction": "ldm",
+        "nested_depth": 1,
+        "peak_bytes": 212
+      },
+      {
+        "boundary": 268588464,
+        "instruction": "ldm",
+        "nested_depth": 2,
+        "peak_bytes": 300
+      },
+      {
+        "boundary": 268588464,
+        "instruction": "ldm",
+        "nested_depth": 3,
+        "peak_bytes": 388
+      },
+      {
+        "boundary": 268588468,
+        "instruction": "addi",
+        "nested_depth": 1,
+        "peak_bytes": 212
+      },
+      {
+        "boundary": 268588468,
+        "instruction": "addi",
+        "nested_depth": 2,
+        "peak_bytes": 300
+      },
+      {
+        "boundary": 268588468,
+        "instruction": "addi",
+        "nested_depth": 3,
+        "peak_bytes": 388
+      },
+      {
+        "boundary": 268588470,
+        "instruction": "ipop",
+        "nested_depth": 1,
+        "peak_bytes": 156
+      },
+      {
+        "boundary": 268588470,
+        "instruction": "ipop",
+        "nested_depth": 2,
+        "peak_bytes": 188
+      },
+      {
+        "boundary": 268588470,
+        "instruction": "ipop",
+        "nested_depth": 3,
+        "peak_bytes": 220
+      },
+      {
+        "boundary": 268588472,
+        "instruction": "nir",
+        "nested_depth": 1,
+        "peak_bytes": 132
+      },
+      {
+        "boundary": 268588472,
+        "instruction": "nir",
+        "nested_depth": 2,
+        "peak_bytes": 140
+      },
+      {
+        "boundary": 268588472,
+        "instruction": "nir",
+        "nested_depth": 3,
+        "peak_bytes": 148
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Only post-NIE boundaries tested; nested entry overwrites outer EPC/EPSR. Nested register values inherited and stack shared; callbacks obey C ABI. Boundary injection over-approximates actual IE/priority acceptance and excludes instruction-internal faults. No physical capacity or callback stack bound is claimed."
+    ]
+  },
+  "abi": {
+    "compiler_header_sha256": "0ed3316c5feb5a861c9dff32a809fedff950ce7e5baacffc80276a66606ba4be",
+    "gpr_call_really_used": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "callee_preserved_general_registers": [
+      "r4",
+      "r5",
+      "r6",
+      "r7",
+      "r8",
+      "r9",
+      "r10",
+      "r11",
+      "r15",
+      "r16",
+      "r17"
+    ],
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "sdk_dependencies": [
+      {
+        "path": "arch/soc/grus/link.ld",
+        "git_blob": "f3e55af8f2c0e6be7528e6a8b7dbd3322281d3c1",
+        "sha256": "1dc73b74c4b5962a848693ab857e90d34115489a8a7e499897533ad786ff77be"
+      },
+      {
+        "path": "arch/soc/grus/include/soc_config.h",
+        "git_blob": "a71032b0b6933521b1b2f5ec7e9808f168bcdc16",
+        "sha256": "abda275af6aee96ad676c190e2a72363a79595413336371fced4450f8df76809"
+      },
+      {
+        "path": "arch/cpu/csky/ck804/start.S",
+        "git_blob": "63396df27539a800868a2f1a7aa646ead837ad46",
+        "sha256": "c3ad818c3264f2784be67c0e65b946ba561468d9e6edf5ea2d8e0ca56f0a975a"
+      },
+      {
+        "path": "configs/github_grus_gx8002b_dev_erji_english.config",
+        "git_blob": "713975ddc77254b91642da75bb56cbceec24d80a",
+        "sha256": "174c3ede81295adefb001ca975345bddecb58a81cc86d12b8fda2be84c721634"
+      }
+    ],
+    "sdk_stack_top": "CONFIG_STAGE2_DRAM_BASE + CONFIG_STAGE2_DRAM_SIZE - 4",
+    "sdk_linker_reservation": "CONFIG_MCU_MAIN_STACK_SIZE * 1024 after BSS",
+    "source_admitted": false,
+    "limits": [
+      "Compiler metadata establishes local compiler register convention, not compliance of arbitrary retained assembly handlers.",
+      "r16/r17 corruption in the existing stress model is deliberately stronger than the C ABI requires. Extra saves may be conservative rather than mandatory.",
+      "SDK example configuration is not the shipped G2 configuration. BSS-to-SP distance is not evidence of callback stack budget, mainline usage, nesting depth or complete physical allocation."
+    ]
+  },
+  "isa_manual_sha256": "579bd296dbf88b0b6842a473432e65199b87c0c19fcf04bb214f67241c68d509",
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Source-authored architecture assembly, not counted as C. Exact stock code and frame; full decoded dispatch and post-NIE nested context checks. ABI-compliant callbacks and valid vectors assumed. No new stack growth; physical callback capacity, exception acceptance timing and instruction faults remain whole-device qualification work."
+  ]
+}

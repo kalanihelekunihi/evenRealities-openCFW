@@ -110,3 +110,70 @@ def validate_region_tiling(
         raise
     except Exception as exc:
         raise error_type(f"{label} tiling structure invalid: {exc}") from exc
+
+
+def validate_composed_source_replacement(
+    regions: Iterable[Mapping[str, Any]],
+    start: int,
+    end_exclusive: int,
+    own_prefix: str,
+    error_type: Type[Exception] = RuntimeError,
+    label: str = "source replacement",
+    composed_prefixes: tuple[str, ...] = (
+        "liblc3_service_audio_", "freetype_cff_host_scatter_",
+    ),
+) -> dict[str, int]:
+    """Prove a guarded redirect plus exact post-link host composition.
+
+    Later source-owned packing stages may reuse the generated-NOP bytes after
+    an earlier overlay's four-byte entry redirect.  The manifest therefore
+    legitimately splits one stock function across multiple owners.  This
+    check preserves the important invariants: complete non-overlapping
+    coverage, the original redirect at the entry, and only authenticated
+    source-data owners in the remaining interval.
+    """
+    try:
+        tiles = sorted(
+            (item for item in regions
+             if isinstance(item.get("target_address"), int)
+             and isinstance(item.get("size"), int)
+             and item["target_address"] < end_exclusive
+             and item["target_address"] + item["size"] > start),
+            key=lambda item: item["target_address"],
+        )
+        cursor = start
+        totals = {"entry": 0, "composed": 0}
+        for item in tiles:
+            address = max(start, item["target_address"])
+            end = min(end_exclusive, item["target_address"] + item["size"])
+            if address != cursor or end <= address:
+                raise error_type(f"{label} is gapped or overlapping")
+            name = str(item.get("name", ""))
+            status = item.get("address_status")
+            if name.startswith(own_prefix):
+                if status != "generated_source_entry_replacement":
+                    raise error_type(f"{label} entry ownership class changed")
+                totals["entry"] += end - address
+            elif any(name.startswith(prefix) for prefix in composed_prefixes):
+                if status != "generated_source_data_replacement":
+                    raise error_type(f"{label} composed ownership class changed")
+                totals["composed"] += end - address
+            else:
+                raise error_type(f"{label} has an unsupported post-link owner")
+            cursor = end
+        if cursor != end_exclusive or not tiles:
+            raise error_type(f"{label} does not cover its complete interval")
+        first = tiles[0]
+        if (
+            first.get("target_address") != start
+            or first.get("size", 0) < 4
+            or not str(first.get("name", "")).startswith(own_prefix)
+            or first.get("address_status")
+            != "generated_source_entry_replacement"
+        ):
+            raise error_type(f"{label} entry redirect changed")
+        return totals
+    except error_type:
+        raise
+    except Exception as exc:
+        raise error_type(f"{label} structure invalid: {exc}") from exc

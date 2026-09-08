@@ -93,6 +93,9 @@ class Liblc3ServiceAudioSuffixPackTests(unittest.TestCase):
         self.assertEqual((adapter["slot_count"], adapter["slot_bytes"],
                           adapter["total_bytes"]), (4, 2628, 10512))
         self.assertTrue(adapter["alignment_and_nonoverlap_verified"])
+        self.assertEqual(self.report["remaining_software_blockers"], [])
+        self.assertTrue(self.report["evidence_boundary"][
+            "production_route_superseded_this_plan"])
 
     def test_hostile_insufficient_or_misaligned_pack_is_rejected(self) -> None:
         leaves = [{"function": "large", "size": 8, "alignment": 8}]

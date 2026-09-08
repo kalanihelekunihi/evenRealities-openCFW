@@ -1,0 +1,40 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream_files": [
+    {
+      "path": "lvp/app_core/lvp_app.h",
+      "git_blob": "4b7e105ff09df684966817f1045f28dd030b5f2d",
+      "sha256": "5f3302a3482d2539d515d068e1c1364508f7eca6711d23ab063c27dc18556450"
+    },
+    {
+      "path": "lvp/app_core/lvp_app_core.h",
+      "git_blob": "e7521399bfa5d16c4ebacba2699e2f0286fc09cd",
+      "sha256": "7267c8f17cf22c3fe8904ac6babf611c3f1ea750c254a782c982b4e9fbb03c25"
+    },
+    {
+      "path": "lvp/app_core/lvp_app_core.c",
+      "git_blob": "53c8f1042464a6aa59c01a2e158ab605b7110896",
+      "sha256": "b173c70c86b93b9d2f9c48050cf43513390e94368cfcac424dd2f04ba8f32174"
+    }
+  ],
+  "source_sha256": "8729063d7ef3666032cc879a910ea32ac33164c5ad90b6215c64706ab6610c62",
+  "compiled_bytes": 28,
+  "stock_resume_offset": "0x12208",
+  "stock_resume_size": 28,
+  "byte_exact": true,
+  "source_admitted": true,
+  "app_pointer": "0x20026d38",
+  "identified_candidates": {
+    "resume": "0x12208",
+    "watchdog_callback": "0x12224",
+    "suspend": "0x1222c",
+    "trigger_event": "0x1224c",
+    "initialize_event": "0x12260",
+    "event_tick": "0x122d4"
+  },
+  "limits": [
+    "Names inferred from matching upstream structure and call pattern.",
+    "Other candidate boundaries and dependencies need qualification."
+  ],
+  "admission_scope": "resume callback only; experimental hybrid"
+}

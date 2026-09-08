@@ -1,0 +1,12 @@
+{
+  "checked_instruction_counts": [
+    8,
+    8
+  ],
+  "cases": 252,
+  "precondition": "cursor != end; readiness eventually asserted",
+  "step": "read one FIFO word, store low byte, cursor=(cursor+1) mod 2^32, exit iff cursor=end",
+  "limits": [
+    "One-iteration decoded checks, not full huge-transfer or hardware qualification. Entry/cleanup and integration with an induction argument remain."
+  ]
+}

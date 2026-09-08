@@ -1,0 +1,53 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "dependencies": [
+    {
+      "path": "utility/libc/memset.c",
+      "git_blob": "75687249c1599cb4590e929d8f18b06e52c148c9",
+      "sha256": "d175f6079caa9768e909ebb0f26ea97018e108c71de2dc58edede28218033499"
+    },
+    {
+      "path": "utility/libc/csky/memset.o",
+      "git_blob": "ec9c58307e777759ed6f6147d3039a44da8309cf",
+      "sha256": "0b64842892d0fa8583f015e1d981a4a671a8e505c3c2cb42ff4d966a68cf583b",
+      "code_sections": [
+        {
+          "name": ".text",
+          "bytes": 16,
+          "matches_stock_memset": false
+        }
+      ]
+    },
+    {
+      "path": "utility/libc/csky/memset_fast.o",
+      "git_blob": "fd20a0df1dffbf1e130ffeb8619ff2b00f44fbd6",
+      "sha256": "502de113a832e38d17d7fe91cffe153dea29ff539c833fb20aba826d0bc6a23c",
+      "code_sections": [
+        {
+          "name": ".text",
+          "bytes": 158,
+          "matches_stock_memset": false,
+          "matches_stock_after_zextb_prefix": true
+        }
+      ]
+    }
+  ],
+  "stock": {
+    "package_offset": 77656,
+    "address": 270571980,
+    "bytes": 160,
+    "prefix": {
+      "bytes": 2,
+      "instruction": "zextb r1, r1"
+    }
+  },
+  "source_admitted": false,
+  "observed_behavior": [
+    "Leading byte stores align destination to4bytes, followed by16-byte groups,4-byte words and atmost3tailbytes.",
+    "Word-loop size comparisons use signed CMPLTI. Counts with highbit set require separate arithmetic/valid-memory qualification.",
+    "Plain SDK C differs for initially unaligned addresses: it keeps those fills bytewise instead of aligning then usingword stores."
+  ],
+  "limits": [
+    "Object comparisons identify lineage only; objects must not supply emitted firmware or source arrays. Need source reconstruction and decoded memory/return checks."
+  ]
+}

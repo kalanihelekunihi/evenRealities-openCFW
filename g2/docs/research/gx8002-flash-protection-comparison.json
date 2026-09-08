@@ -1,0 +1,54 @@
+{
+  "build": {
+    "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+    "source_sha256": "e5c76c0e0ad25e1c211afee584e9e28f7778b4efce30cc90c7d2a852911ff581",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_flash_write_protect_status",
+        "section": ".text.flash_write_protect_status",
+        "compiled_bytes": 144,
+        "compiled_sha256": "5591cf4a6510b1d84980eb350bf3d4331b70b8d03cb129c860edfb9d8110d8d0",
+        "package_offset": 88320,
+        "stock_envelope_bytes": 148,
+        "stock_sha256": "97bb92c3e2b3a750692363a88751841fe6a374acb94800b26596a0a4feed0ae4",
+        "byte_exact": false,
+        "fits": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_flash_write_protect_mode",
+        "section": ".text.flash_write_protect_mode",
+        "compiled_bytes": 36,
+        "compiled_sha256": "1b5ff686fc469b6d0ae4c9afad978938cdf791b3a832f8795a5bace7420f1ffa",
+        "package_offset": 88468,
+        "stock_envelope_bytes": 36,
+        "stock_sha256": "457cef6d95b3b74af2716f01f99ddde03daa4ddf876e6d1a567718c0b797aef2",
+        "byte_exact": false,
+        "fits": true
+      }
+    ],
+    "source_admitted": false,
+    "analysis_only_overlapping_sections_allowed": false,
+    "limits": [
+      "Decoded profile reads, status calls and output writes require qualification.",
+      "Protection profile initialization and device table remain retained dependencies; no physical hardware qualification."
+    ]
+  },
+  "cases": 114752,
+  "source_admitted": false,
+  "limits": [
+    "Both sections fit; admission adapter and reviewed baseline remain pending.",
+    "Helpers modeled; no hardware qualification; Four valid output aliases covered; exhaustive arbitrary-memory aliasing is not claimed."
+  ]
+}

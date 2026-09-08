@@ -928,7 +928,7 @@ class RuntimeFreeRTOSSuspendAllTests(unittest.TestCase):
                     "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
                 ),
                 2_563,
-                2_448,
+                2_447,
             ),
         )
         component = self.production["component"]

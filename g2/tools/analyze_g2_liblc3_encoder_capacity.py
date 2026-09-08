@@ -136,10 +136,12 @@ def _pin_core(
         == address["current_core_end_exclusive"],
         "core overlay address receipt drift",
     )
+    core_stage = report.get("canonical_stages", {}).get("core", {})
     require(
         live["sha256"] == evidence["overlay_artifact"]["sha256"]
-        and report["component"]["sha256"]
-        == evidence["component_artifact"]["sha256"],
+        and core_stage.get("sha256")
+        == evidence["component_artifact"]["sha256"]
+        and core_stage.get("size") == len(component),
         "core report artifact receipt drift",
     )
     payload_offset = live["overlay_payload_offset"]
@@ -359,15 +361,16 @@ def _selection_and_layout(
 ) -> dict[str, Any]:
     expected = proposal["expected"]
     current_size = report["overlay"]["size"]
-    shortfall = proposal["address_model"]["current_shortfall"]
+    shortfall = proposal["address_model"][
+        "conditional_required_repack_savings"
+    ]
     derived: list[str] = []
     for _size, name, _patch, _leaf in candidates:
         derived.append(name)
         trial_size, _ = _repack(report, set(derived), config_leaves)
         if current_size - trial_size >= shortfall:
             break
-    selected = proposal["selected_functions"]
-    require(selected == derived, "selected prefix is not the minimal candidate prefix")
+    selected = derived
     require(len(selected) == expected["selected_count"], "selected count drift")
     require(
         canonical_sha256(selected) == expected["selected_list_sha256"],

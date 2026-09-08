@@ -1,0 +1,253 @@
+{
+  "repository": "https://github.com/NationalChip/gxDNN",
+  "commit": "0637b47c8fa0031f8f5651a903cd7d14716382fd",
+  "archive": {
+    "path": "grus/lib/libcmodel.a",
+    "git_blob": "7910c1d4e7ed6c9a528724c3a42bbfdee5994f77",
+    "sha256": "70a18015d1eaa07870a9635db0b442a1a350170aabe14367ed61f4ea188f8653"
+  },
+  "members": [
+    {
+      "name": "cmd_block.o",
+      "bytes": 2744,
+      "sha256": "e87e599878d917dbfe1762572fb3b3500b77640566a808d53296bc9f4c6de228",
+      "machine": 62,
+      "functions": [
+        "cmd_block_init",
+        "cmd_block_destroy"
+      ]
+    },
+    {
+      "name": "cmd_link.o",
+      "bytes": 4264,
+      "sha256": "651a2a6a627bd53078ade8c3e7252c9b2f4631986b1545a95225eb5d7612f047",
+      "machine": 62,
+      "functions": [
+        "cmd_link_start",
+        "cmd_link_stop",
+        "cm_link_init",
+        "cm_link_destroy"
+      ]
+    },
+    {
+      "name": "cmd_parse.o",
+      "bytes": 12368,
+      "sha256": "f842f73010fe0429e1031ea59befba14fa31186746a7a484baae7f4f2ae655c0",
+      "machine": 62,
+      "functions": [
+        "get_cmd_type",
+        "transform_rel_to_abs",
+        "parse_cur_cmd",
+        "parse_next_cmd",
+        "parse_base_cmd",
+        "parse_mc_matmul_cmd",
+        "parse_mc_conv2d_cmd",
+        "parse_mc_transpose_cmd",
+        "parse_op_format_cmd",
+        "parse_op_tensor_scalar_cmd",
+        "parse_op_tensor_tensor_cmd",
+        "parse_op_tensor_vector_cmd",
+        "parse_op_copy_cmd",
+        "parse_op_pool_cmd",
+        "parse_op_active_cmd",
+        "parse_op_reduce_cmd",
+        "parse_op_bn_cmd",
+        "parse_fc_cmd",
+        "parse_conv2d_cmd",
+        "parse_ds_conv2d_cmd",
+        "parse_transpose_cmd",
+        "parse_mcu_cmd",
+        "parse_time_cmd"
+      ]
+    },
+    {
+      "name": "cmd_process.o",
+      "bytes": 8104,
+      "sha256": "18a0cd13bf4fb2dbe6fd269dcb0bab77e7753d245fa893919d58e5c529ee604a",
+      "machine": 62,
+      "functions": [
+        "cmd_process"
+      ]
+    },
+    {
+      "name": "regs.o",
+      "bytes": 20224,
+      "sha256": "fc534428d8f8919cd1fd372aefd6ccf5990b775e509b5826e80e48ecdb367feb",
+      "machine": 62,
+      "functions": [
+        "cm_get_idle_cycle",
+        "cm_get_idle_type",
+        "cm_get_work_en",
+        "cm_get_mcu_int_en",
+        "cm_get_op_overflow_int_en",
+        "cm_get_mac_overflow_int_en",
+        "cm_get_cmd_err_int_en",
+        "cm_get_overtime_int_en",
+        "cm_get_idle_int_en",
+        "cm_get_over_int_en",
+        "cm_clr_mcu_int_clr",
+        "cm_clr_op_overflow_int_clr",
+        "cm_clr_mac_overflow_int_clr",
+        "cm_clr_cmd_err_int_clr",
+        "cm_clr_overtime_int_clr",
+        "cm_clr_idle_int_clr",
+        "cm_clr_over_int_clr",
+        "cm_set_mcu_status",
+        "cm_set_op_overflow_status",
+        "cm_set_mac_overflow_status",
+        "cm_set_cmd_err_status",
+        "cm_set_overtime_status",
+        "cm_set_idle_status",
+        "cm_set_over_status",
+        "cm_set_all_idle_status",
+        "cm_clr_mcu_status",
+        "cm_clr_op_overflow_status",
+        "cm_clr_mac_overflow_status",
+        "cm_clr_cmd_err_status",
+        "cm_clr_overtime_status",
+        "cm_clr_idle_status",
+        "cm_clr_over_status",
+        "cm_clr_all_idle_status",
+        "cm_get_cmd_list_addr",
+        "cm_set_major_version",
+        "cm_set_minor_version",
+        "cm_get_cell_size",
+        "cm_set_cmd_cur_addr",
+        "cm_set_over_addr",
+        "cm_set_mcu_id",
+        "cm_set_mcu_struct_addr",
+        "cm_get_mcu_done",
+        "cm_set_base_addr",
+        "cm_get_debug_time_addr",
+        "cm_get_debug_time_len",
+        "cm_send_int",
+        "cm_clr_int_status",
+        "cm_get_int_en"
+      ]
+    },
+    {
+      "name": "regs_opt.o",
+      "bytes": 4616,
+      "sha256": "38fd0d24df25e82dcc3a8aa80ccc179a07b7e5f7ec85aceb5ab6b0c87c301b7e",
+      "machine": 62,
+      "functions": [
+        "cm_reg_init",
+        "cm_reg_destory",
+        "cm_reg_read",
+        "cm_reg_write"
+      ]
+    },
+    {
+      "name": "calc.o",
+      "bytes": 28816,
+      "sha256": "32a6be8ec28e801dcb8be5a154da2798be2ff337b0b42ca2dec2b78911e066c2",
+      "machine": 62,
+      "functions": [
+        "calc_add",
+        "calc_bn",
+        "calc_mul",
+        "active_relu",
+        "calc_log",
+        "calc_exp",
+        "calc_pow",
+        "calc_div",
+        "calc_sub",
+        "active_tanh",
+        "active_sigmoid",
+        "choose_calc_func",
+        "calc_activate",
+        "set_base_addr",
+        "calc_mc_matmul",
+        "calc_mc_conv2d",
+        "calc_mc_transpose",
+        "calc_op_format",
+        "calc_op_tensor_scalar",
+        "calc_op_tensor_tensor",
+        "calc_op_tensor_vector",
+        "calc_op_copy",
+        "calc_op_active",
+        "calc_op_reduce",
+        "calc_op_pool",
+        "calc_op_bn",
+        "set_mcu_regs",
+        "set_time_regs"
+      ]
+    },
+    {
+      "name": "cmodel.o",
+      "bytes": 3376,
+      "sha256": "8c367df19c987fcb0842c6f55af9c5e4f1a6a05e345ef30ef3b97010b81754ec",
+      "machine": 62,
+      "functions": [
+        "cmodel_init",
+        "cmodel_destroy",
+        "cmodel_reg_read",
+        "cmodel_reg_write",
+        "cmodel_register_interrupt"
+      ]
+    },
+    {
+      "name": "dec_gen_cmd.o",
+      "bytes": 4176,
+      "sha256": "778256154d323386bc53893d99bf38336144be0117ac04dc8547cf401fe8a0ab",
+      "machine": 62,
+      "functions": [
+        "gen_matmul_cmd",
+        "gen_ds_conv2d_cmd",
+        "gen_transpose_cmd"
+      ]
+    },
+    {
+      "name": "dec_parse.o",
+      "bytes": 6296,
+      "sha256": "3ecacc01ec0274d6dbb7b0e202997462421e25b357975302ba1e9282b96687a0",
+      "machine": 62,
+      "functions": [
+        "dec_matmul",
+        "dec_conv2d",
+        "dec_depthwise_conv2d",
+        "dec_transpose"
+      ]
+    },
+    {
+      "name": "dec_regs.o",
+      "bytes": 2752,
+      "sha256": "1aa3afbd2923d27ffce015573f002b90893aa577b0468536f7274a04b6a21f82",
+      "machine": 62,
+      "functions": [
+        "load_cmd_multi_add_pro",
+        "load_cmd_conv2d_pro",
+        "load_cmd_transpose_pro"
+      ]
+    },
+    {
+      "name": "float16.o",
+      "bytes": 285560,
+      "sha256": "36d261f6ac2d56cc61395971a51e8c80bbb385959d782584d1052e06b576161d",
+      "machine": 62,
+      "functions": [
+        "_GLOBAL__sub_I_float16.cpp",
+        "_Z8fp16_expt",
+        "_Z7fp16_lnt",
+        "half_float16_2_float32",
+        "half_float16_max",
+        "half_float16_min",
+        "half_float16_exp",
+        "half_float16_log",
+        "is_overflow",
+        "_ZN10half_float6detail15float2half_implILSt17float_round_style1EEEtfNS0_9bool_typeILb1EEE",
+        "half_float16_add",
+        "half_float16_sub",
+        "half_float16_mul",
+        "half_float16_div",
+        "half_float16_neg",
+        "half_float16_pow",
+        "half_float32_2_float16"
+      ]
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Read-only object inspection. The x86-64 model archive is not linked, executed or copied into firmware. Host pointer width differs from target command storage. Inferred fields require separate firmware validation."
+  ]
+}

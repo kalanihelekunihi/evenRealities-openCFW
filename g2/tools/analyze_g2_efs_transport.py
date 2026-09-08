@@ -9,6 +9,7 @@ import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as th
 from analyze_g2_thread_ble_production import wide_branch_target
 from apollo_artifact_consistency import validate_apollo_main_artifacts
+from apollo_overlay import decode_thumb_branch
 IMAGE=ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin';FM=ROOT/'tools/manifests/g2-efs-transport-function-map.tsv';PM=ROOT/'tools/manifests/g2-efs-transport-provider-map.tsv';CL=ROOT/'tools/manifests/g2-efs-transport-closure.tsv'
 SOURCE=ROOT/'components/apollo_main/core_overlay/efs_transport.c';OVERLAY=ROOT/'components/apollo_main/core_overlay/overlay.json';REPORT=ROOT/'components/apollo_main/core_overlay/build/build-report.json';MANIFEST=ROOT/'manifests/g2-2.2.6.10-core-source.json'
 PINS={FM:'5bf8d4181e1f2051e1c3a741ac1bb781257fed67e9797dd6211f59cb70bed2fd',PM:'a8521cc8865ec2e2b82675b6ebaad9ab13cbc26dbb553acb3915da5e0b423ebb',CL:'05122c063c3ef33f24c09b76251c101a258205dd58f52c21273d06d4d5cad56d'}
@@ -69,9 +70,26 @@ def analyze(image=IMAGE):
   if not item or item['placement']['offset']!=offset or item['placement']['size']!=size or item['placement']['alignment']!=4 or item['extraction']['relocation_count']!=relocs:raise c.AuditError(f'production EFS transport build report changed: {name}')
  manifest=json.loads(MANIFEST.read_text());main=manifest['component_overrides']['apollo_main'];regions={x['name']:x for x in main['regions']}
  validate_apollo_main_artifacts(ROOT,c.AuditError,'EFS transport')
- expected_regions={'efs_transport_01_source_replacement':(0x4D0D80,1374,'generated_source_entry_replacement'),'efs_transport_02_source_replacement':(0x4D12DE,616,'generated_source_entry_replacement'),'efs_transport_retained_pool':(0x4D1546,162,'official_blob'),'efs_transport_receive_source_text':(0x7C8D38,700,'source_compiled'),'efs_transport_send_source_text':(0x7C8FF4,576,'source_compiled')}
+ expected_regions={'efs_transport_02_source_replacement':(0x4D12DE,616,'generated_source_entry_replacement'),'efs_transport_retained_pool':(0x4D1546,162,'official_blob'),'efs_transport_receive_source_text':(0x7C8D38,700,'source_compiled'),'efs_transport_send_source_text':(0x7C8FF4,576,'source_compiled')}
  for name,expected in expected_regions.items():
   item=regions.get(name)
   if not item or (item.get('target_address'),item.get('size'),item.get('address_status'))!=expected:raise c.AuditError(f'production EFS transport region changed: {name}')
+ first=[]
+ for x in sorted(main['regions'],key=lambda row:row.get('target_address',1<<63)):
+  a=x.get('target_address');size=x.get('size')
+  if not isinstance(a,int) or not isinstance(size,int) or a>=0x4D12DE or a+size<=0x4D0D80:continue
+  name=x.get('name','')
+  owner=('efs' if name.startswith('efs_transport_01_source_replacement') else
+         'lc3' if name.startswith('liblc3_service_audio_') else
+         'cff' if name.startswith('freetype_cff_host_scatter_') else None)
+  if owner is None:raise c.AuditError('production EFS transport host owner changed')
+  a=max(a,0x4D0D80);z=min(a+size,0x4D12DE)
+  if first and first[-1][2]==owner and first[-1][1]==a:first[-1]=(first[-1][0],z,owner)
+  else:first.append((a,z,owner))
+ if first!=[(0x4D0D80,0x4D0D84,'efs'),(0x4D0D84,0x4D1251,'lc3'),(0x4D1251,0x4D12C8,'cff'),(0x4D12C8,0x4D12DE,'efs')]:raise c.AuditError('production EFS transport composed receive ownership changed')
+ component=(ROOT/'components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin').read_bytes()
+ for name,_,_,_,entry,_,_ in production:
+  offset=entry-c.BASE
+  if decode_thumb_branch(entry,component[offset:offset+4],link=False)!=reported[name]['placement']['runtime_address']:raise c.AuditError(f'production EFS transport final redirect changed: {name}')
  return {'schema_version':1,'identity':{'image_sha256':c.IMAGE_SHA256,'retained_path':r'platform\protocols\efs_service\efs_transport.c','embedded_third_party_definitions':[]},'surface':{'linked_functions':2,'path_anchored_functions':2,'body_bytes':1990,'physical_bytes':2152,'outer_pool_bytes':162,'reachable_instructions':766,'direct_body_calls':87,'internal_direct_body_calls':0,'external_direct_body_calls':87,'indirect_body_calls':4,'indirect_call_sites':dyn,'direct_bl_entry_sites':2,'stored_function_pointers':0},'provider_boundary':{'easylogger_calls':60,'cmsis_freertos_calls':1,'runtime_calls':8,'efs_service_calls':5,'crc16_calls':4,'heap_wrapper_calls':6,'first_party_calls':3,'registered_callback_calls':4,'callback_slots':['0x2000096C','0x20000970'],'historical_efs_transport_commit':None,'new_version_discriminator':False},'production':{'candidate':'components/apollo_main/core_overlay/efs_transport.c','production_routed':True,'source_functions':2,'compiled_text_bytes':1276,'alignment_bytes':0,'strict_relocations':15,'stock_replaced_bytes':1990,'retained_pool_bytes':162,'software_functional_gap':False,'hardware_validation':'blocked by unavailable physical evidence','hardware_blocker':'hardware validation is blocked by unavailable physical evidence; future qualification requires an authorized G2 pair and either a component-specific EFS transport/media fixture or an authenticated golden capture covering EFS import/export, fragmentation, CRC failure, timeout, disconnect/resume, and media content'}}
 if __name__=='__main__':print(json.dumps(analyze(),indent=2,sort_keys=True))

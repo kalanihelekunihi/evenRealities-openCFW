@@ -94,11 +94,11 @@ class Lc3ServiceAudioProductionReplayTest(unittest.TestCase):
         self.assertEqual(final["final_elf"], {
             "size": 137988,
             "sha256":
-                "d7ffce7fe21eae34f0d2cdcc7f8f00e446528fefbb3ddaf10775d35ca34ca103",
+                "c05eec2bfa21dbeb3fa47993c1424a61891cc4bccf87b50377561d0d83133f35",
         })
         self.assertEqual(final["artifacts"], {
             "text": {"size": 19360, "sha256":
-                     "543f596aca956c36f6759ea4ee241ee0d3bc35fd911796cca8878452eda5d43f"},
+                     "86adc0a842f9a6dc2dcd14164d9a1ee5a83aeb222ff0fc4223d6a9f40ecde60d"},
             "rodata": {"size": 60480, "sha256":
                        "2b162cbd557aa106f2bfb30637fe6c620c9852858a54195a616ab52449836797"},
             "table_rodata": {"size": 404, "sha256":
@@ -142,8 +142,8 @@ class Lc3ServiceAudioProductionReplayTest(unittest.TestCase):
 
     def test_local_runtime_is_zero_import_zero_relocation_and_nonoverlapping(self) -> None:
         expected = {
-            "apple-clang": (324, 3552, 36236,
-                            "86c8bd11553a2522f243177c8d8f65f64f7a5fe460a66188e02761fa2b56183b"),
+            "apple-clang": (324, 3552, 6392,
+                            "647e0a8ebea484dbe4047379d0a298b69ad726f21701f97f841a9325400ccf4f"),
             "linux-clang": (318, 3528, 41768,
                             "6aec80aff48aff76855a01645e1300ebf204e9fc96de3efde02701c2489b5dc3"),
         }
@@ -174,11 +174,11 @@ class Lc3ServiceAudioProductionReplayTest(unittest.TestCase):
              "entry": 0x0057A926, "target": 0x007FD7D0,
              "encoding_hex": "82f253bf"},
         ])
-        self.assertEqual(apple["suffix"]["count"], 117)
-        self.assertEqual(apple["suffix"]["relocation_count"], 362)
+        self.assertEqual(apple["suffix"]["count"], 208)
+        self.assertEqual(apple["suffix"]["relocation_count"], 748)
         self.assertEqual(
             apple["component"]["sha256"],
-            "fee7e5d9f7fe234f2fe49904124bb8b3a7b6248f667c92d7ab4ed6f0e032d922",
+            "044d6a3c8c0243e3f3a36240cf4c54d809b081e73491cd340e2214663fe2dd3e",
         )
         self.assertEqual(apple["lc3_finalization"]["layout"][-1]
                          ["end_exclusive"], 0x007FDFA0)

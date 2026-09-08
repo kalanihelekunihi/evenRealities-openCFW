@@ -1,0 +1,51 @@
+{
+  "dependency_headers": {
+    "include/utility/list.h": {
+      "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+      "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+    },
+    "include/utility/types.h": {
+      "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+      "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+    }
+  },
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "oracle": {
+    "path": "drivers_lib/rtc/dw_rtc.o",
+    "blob": "bc29abc7e65c826c8e5a2cd0799988445b5d50ff",
+    "sha256": "e2aad98d9d1e7a758e28952e3aef1e43c7edc0362dd6ac569ebe37fb8e64cd59",
+    "role": "identity_only"
+  },
+  "bindings": {},
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-jump-tables"
+  ],
+  "header": {
+    "path": "include/driver/gx_rtc.h",
+    "blob": "e57b41aa277b78926dddd1f890f9fb34aefa2e8e",
+    "sha256": "75dae9cf50af1b9a9b976c13f9c2364666e88bd310698807476832dbf9335494"
+  },
+  "source_sha256": "2399cde13886958b504e1e217ad7b57b6c558bc90b6b3a6d29b662895d9cda3b",
+  "symbol": "open_cfw_gx8002_rtc_start_tick",
+  "section_name": ".text",
+  "package_offset": 64556,
+  "compiled_bytes": 16,
+  "compiled_sha256": "16405b6c894e37098adac09e9cb167e68b623eee1c3a6a91afd6cee9a3ae67a3",
+  "stock_envelope_bytes": 16,
+  "stock_sha256": "2849ebfb203d08c3291de5f818fe078b7eec290bee0c186a3c0048244dc48ae5",
+  "fits": true,
+  "source_admitted": false,
+  "limits": [
+    "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+  ]
+}

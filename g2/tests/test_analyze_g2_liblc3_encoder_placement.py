@@ -52,11 +52,11 @@ class Liblc3EncoderPlacementTests(unittest.TestCase):
 
     def test_current_capacity_proves_no_move_impossible(self) -> None:
         placement = self.report["placement"]
-        self.assertEqual(placement["append_headroom"], 71100)
-        self.assertEqual(placement["required_aligned_span"], 128752)
-        self.assertEqual(placement["append_only_shortfall"], 57652)
-        self.assertEqual(placement["optimistic_known_capacity"], 93968)
-        self.assertEqual(placement["optimistic_known_capacity_shortfall"], 34784)
+        self.assertEqual(placement["append_headroom"], 52928)
+        self.assertEqual(placement["required_aligned_span"], 128740)
+        self.assertEqual(placement["append_only_shortfall"], 75812)
+        self.assertEqual(placement["optimistic_known_capacity"], 75796)
+        self.assertEqual(placement["optimistic_known_capacity_shortfall"], 52944)
         self.assertTrue(placement["branch_range_sufficient"])
         self.assertFalse(
             self.report["routing"][

@@ -1,0 +1,109 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_flash_page_program",
+      "section_name": ".text.flash_page_program",
+      "compiled_bytes": 120,
+      "compiled_sha256": "90a127ecf25ef110a8bd0fd9ed60d3252fa316eccc4d014f99d721f2ee250ea2",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_page_program",
+          "package_offset": 89160,
+          "bytes": 120,
+          "sha256": "c46499396b343fc51827d8304a39ef67c40944479e3359cc458e974aa2ba4830",
+          "region": "image_a_sram_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "build": {
+      "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+      "source_sha256": "607ada4952b9ba0b578d4105076f19de3909f81ac0ff476a75de7b626ace2591",
+      "flags": [
+        "-Os",
+        "-fno-shrink-wrap",
+        "-fira-algorithm=priority",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_flash_page_program",
+          "section": ".text.flash_page_program",
+          "compiled_bytes": 120,
+          "compiled_sha256": "90a127ecf25ef110a8bd0fd9ed60d3252fa316eccc4d014f99d721f2ee250ea2",
+          "package_offset": 89160,
+          "stock_envelope_bytes": 120,
+          "stock_sha256": "c46499396b343fc51827d8304a39ef67c40944479e3359cc458e974aa2ba4830",
+          "byte_exact": false,
+          "fits": true
+        }
+      ],
+      "source_admitted": false,
+      "analysis_only_overlapping_sections_allowed": false,
+      "limits": [
+        "Decoded bounds, page chunk calls and callback reloads require qualification.",
+        "Read callback targets and buffer validity depend on callers; no physical hardware qualification."
+      ]
+    },
+    "comparison": {
+      "build": {
+        "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+        "source_sha256": "607ada4952b9ba0b578d4105076f19de3909f81ac0ff476a75de7b626ace2591",
+        "flags": [
+          "-Os",
+          "-fno-shrink-wrap",
+          "-fira-algorithm=priority",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_flash_page_program",
+            "section": ".text.flash_page_program",
+            "compiled_bytes": 120,
+            "compiled_sha256": "90a127ecf25ef110a8bd0fd9ed60d3252fa316eccc4d014f99d721f2ee250ea2",
+            "package_offset": 89160,
+            "stock_envelope_bytes": 120,
+            "stock_sha256": "c46499396b343fc51827d8304a39ef67c40944479e3359cc458e974aa2ba4830",
+            "byte_exact": false,
+            "fits": true
+          }
+        ],
+        "source_admitted": false,
+        "analysis_only_overlapping_sections_allowed": false,
+        "limits": [
+          "Decoded bounds, page chunk calls and callback reloads require qualification.",
+          "Read callback targets and buffer validity depend on callers; no physical hardware qualification."
+        ]
+      },
+      "cases": 640,
+      "overflow_cases": 8,
+      "source_admitted": false,
+      "limits": [
+        "Callbacks modeled with replacement and clobbers; physical buffer validity unqualified.",
+        "Eight wrapped length-plus-offset cases qualified; no physical write operation performed."
+      ]
+    }
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Qualified page splitting, ordered callback reloads and wrapped bounds/offset sums. Callback bodies modeled; physical writes and synthetic buffer validity remain unqualified."
+  ]
+}

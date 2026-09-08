@@ -82,7 +82,7 @@ GENERATED_COMPONENT_SHA256 = (
     "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752"
 )
 GENERATED_APPLICATION_SHA256 = (
-    "7b52e2f5652a8a4786ebb914f9dfb6d39ac4a508af138b61a4d20bc6efcf0225"
+    "4ab18d06706acdb528d2efb879c6d40eac0e6a5a5bbd67e8cc62fa4383b7b42b"
 )
 
 SET_BYTES = bytes.fromhex(
@@ -155,19 +155,19 @@ GENERATED_TOPOLOGY = {
     "set": {
         "count": 79,
         "address_sha256": (
-            "4629c69e51b0d2257bf71c3819b60fd453da9c004b2a45e7558927cc68424233"
+            "99959c9403b3c9178680b6b1e75b00fe9b1a0cd74771ce5694a628bf9927b71e"
         ),
         "encoding_sha256": (
-            "ecdde0e259d95e7dc925cd65de224e3e921fea2e8a197c2660e229b2b46dc317"
+            "0a056a5267908bb995b2d89ce604cce9e2f3b085b22c3bc11abae098fb050a92"
         ),
     },
     "clear": {
         "count": 4,
         "address_sha256": (
-            "fc78e340f83c0b28f3b4f8c974262d7b26f93cbef14d312058e1f877ace442f8"
+            "6912679a50015635a24ce89e7400717fe04ed64724eb81dfd284b4961567b2ad"
         ),
         "encoding_sha256": (
-            "15c2e46c0c88d391575b6846403d36f477b09aabebcd734aed4af8739f69a35d"
+            "2c88a9345c5e6c0b79e9b18bc8248059e8b1a56b9a6c869547365988c309fa3d"
         ),
     },
 }

@@ -425,6 +425,7 @@ BOARD_LEAF_LOCAL_SOURCE_CALLABLES={
 BOARD_LEAF_SOURCE_OVERLAY_TARGETS={
  "OPEN_CFW_PT_INPUT_LOG_FAILURE":"open_cfw_log_format_dispatch",
  "OPEN_CFW_PT_AUDIO_STRUCTURED_LOG":"open_cfw_easylogger_output",
+ "OPEN_CFW_PT_AUDIO_TRACE_LOG":"open_cfw_compress_log_output",
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_REFRESH":"open_cfw_service_kvdb_invalidate_magic",
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_ONBOARDING":"open_cfw_kvdb_onboarding_config_update_and_persist",
  "OPEN_CFW_PT_DISPLAY_POSTPROCESS_REMOVE":"open_cfw_file_remove",
@@ -452,6 +453,10 @@ BOARD_LEAF_SOURCE_OVERLAY_TARGETS={
  "OPEN_CFW_PT_UART_SEMAPHORE_ACQUIRE":"open_cfw_cmsis_semaphore_acquire",
  "OPEN_CFW_PT_UART_DELAY_US":"open_cfw_delay_us_passthrough",
  "OPEN_CFW_PT_BUZZER_TIMER_STOP":"open_cfw_cmsis_timer_stop",
+}
+BOARD_LEAF_CANDIDATE_OVERLAY_TARGETS={
+ 0x0044A19A:"open_cfw_service_time_current_calendar_get",
+ 0x0044A1FE:"SVC_SystemTimeSync",
 }
 
 # Fixed data is a separate supported ABI from the 53 top-level board-table
@@ -1261,9 +1266,9 @@ def analyze(*,enforce_canonical_pin:bool=True)->dict:
  routed_leaf_candidates={address:all_routed.get(address)
   for address in BOARD_LEAF_CANDIDATES
   if all_routed.get(address) is not None}
- if routed_leaf_candidates:
+ if routed_leaf_candidates != BOARD_LEAF_CANDIDATE_OVERLAY_TARGETS:
   raise RuntimeError(
-   "PT retained-provider leaf candidates unexpectedly production-routed: "
+   "PT retained-provider leaf candidate overlay routing changed: "
    f"{routed_leaf_candidates}")
  host_operations=set(re.findall(
   r"OPEN_CFW_PT_OP_[A-Z0-9_]+",board_fixture))-{"OPEN_CFW_PT_OP_COUNT"}

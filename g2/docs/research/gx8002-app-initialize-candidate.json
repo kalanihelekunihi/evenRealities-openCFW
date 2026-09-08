@@ -1,0 +1,29 @@
+{
+  "source_sha256": "03432bbf6a12d687a26323ddbfd147cd74c6ce537d4b2d1c0cdbf80a9c120e56",
+  "stock_package_offset": 74336,
+  "stock_envelope_bytes": 116,
+  "sections": [
+    {
+      "name": ".rodata.open_cfw_gx8002_app_initialize.str1.4",
+      "bytes": 30,
+      "sha256": "b0c4eda85a6556616360a5b6b2a33eacbe61ff837d38ce823ddbea72aafd4b84",
+      "relocations": 0
+    },
+    {
+      "name": ".text.open_cfw_gx8002_app_initialize",
+      "bytes": 116,
+      "sha256": "d43d16cbce9620f57501606f9e965b3660fbc448f7a8a62bd5575b94d7b39276",
+      "relocations": 12
+    }
+  ],
+  "source_admitted": false,
+  "remaining_dependencies": [
+    "suspend registration at package 0x10c4c",
+    "resume registration at package 0x10ca4",
+    "watchdog initializer at package 0xfcac",
+    "watchdog callback at package 0x12224"
+  ],
+  "limits": [
+    "Compilation only; record prototypes and target execution require further verification."
+  ]
+}

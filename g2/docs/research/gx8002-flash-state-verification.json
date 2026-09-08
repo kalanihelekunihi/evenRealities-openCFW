@@ -1,0 +1,61 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_flash_state",
+      "section_name": ".data.open_cfw_gx8002_flash_state",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 32,
+      "compiled_sha256": "4c13016a7b3d2210e1fc05016be996b5180ca7270a24ff854cfc4ecc5f218f6a",
+      "stock_occurrences": [
+        {
+          "symbol": "flash_state",
+          "package_offset": 99576,
+          "bytes": 32,
+          "sha256": "4c13016a7b3d2210e1fc05016be996b5180ca7270a24ff854cfc4ecc5f218f6a",
+          "region": "image_a_sram_data"
+        }
+      ]
+    }
+  ],
+  "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+  "source_sha256": "ddfcd6672ca3fe33fb93ceef20d7e73fbbcbd7c6eed2704f059b9b23b58c567d",
+  "flags": [
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "fields": {
+    "device_index": -1,
+    "usable_bytes": 0,
+    "address_bytes": 0,
+    "selected_device": 0,
+    "command": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "program_words": 0,
+    "read_words": 0
+  },
+  "evidence": [
+    "Discovery owns index/size/address-width/device; OTP paths use command scratch bytes.",
+    "Initializer installs word-program/read callbacks at offsets 24/28."
+  ],
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Matches shipped initial state; interface/device ownership and physical startup remain unqualified."
+  ]
+}

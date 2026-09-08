@@ -7,17 +7,18 @@
   "evidence": {
     "capacity_experiment": {
       "path": "components/apollo_main/liblc3_encoder/service_audio_capacity_experiment.json",
-      "size": 3656,
-      "sha256": "daab69c12426e9dcd9713ae2233cd21e9fedc5b15dfa6d6ea926824e91e51ac9"
+      "size": 3702,
+      "sha256": "a837a71536a011f72edb080b13904795d9284045577dedb13b112b38d719b36b"
     },
     "capacity_rebalancing_proposal": {
       "path": "components/apollo_main/liblc3_encoder/capacity_rebalancing_proposal.json",
-      "size": 8697,
-      "sha256": "b8c7576a191340566b202405c77651a569146386cae2f879b935c360ab5de7b4"
+      "size": 8752,
+      "sha256": "57129afe81d4079e72de162700618f7b1e2ee64e62a1f8e7d0cfaeb239a6c052"
     }
   },
   "address_model": {
     "apple_best_order_shortfall": 9152,
+    "historical_core_end_exclusive": 8309316,
     "protected_update_start": 8380416
   },
   "service_audio_entries": {
@@ -48,7 +49,7 @@
     "truncf"
   ],
   "expected": {
-    "apple_capacity_report_sha256": "e832d755be5f3b02dde8613511a1f87a0377767120ac050fa37e91eb07d2c16d",
+    "apple_capacity_report_sha256": "ad6b55d5f5f1a68220c8efdcbd9c1acc17ef890a536cb14fa24b6c102408ff84",
     "suffix_count": 84,
     "suffix_start": 8300064,
     "suffix_span": 9252,
@@ -59,15 +60,15 @@
     "used_host_payload": 9174,
     "used_host_alignment_padding": 68,
     "all_host_tail_capacity": 61320,
-    "preexisting_host_tail_branch_targets": 10,
-    "preexisting_host_tail_byte_window_pointer_targets": 104,
+    "preexisting_host_tail_branch_targets": 9,
+    "preexisting_host_tail_byte_window_pointer_targets": 101,
     "preexisting_host_tail_aligned_pointer_targets": 24,
     "placement_records_sha256": "fc797c985f1ed0b4e2cb88765dfe253e28111009adbcc2415828e184b83206ac",
     "relocation_count": 288,
     "relocation_records_sha256": "a9ef708024e3dfb55f38edfdde717e057fbd3ceb68dd84c8f374e87dd5394664",
     "rebased_payloads_sha256": "7f4cb20f254bd828036015bffecdd12aae8adf6634600112e50bc22b2460e46a",
     "new_component_size": 3876416,
-    "new_component_sha256": "b3dc1d99cc8ce6b4c989e456379d613eb44aaa0fc20e0f0438c0831e3b67096b",
+    "new_component_sha256": "a34ec613427418c81f3fdd39a7e7128326b2334b9313aeae25a39d5e0f7c2587",
     "new_core_end_exclusive": 8300064,
     "lc3_section_order": [
       "table_rodata",

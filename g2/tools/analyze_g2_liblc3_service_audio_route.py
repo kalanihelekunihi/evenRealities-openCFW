@@ -300,8 +300,8 @@ def analyze(config_path: Path = CONFIG) -> dict[str, Any]:
                 "all_relocations_applied_at_synthetic_layout": True,
             }
 
-    require(profiles["apple-clang"]["capacity"]["shortfall"] == 34084 and
-            profiles["linux-clang"]["capacity"]["shortfall"] == 35204,
+    require(profiles["apple-clang"]["capacity"]["shortfall"] == 52244 and
+            profiles["linux-clang"]["capacity"]["shortfall"] == 53364,
             "route-integrated residual capacity drift")
     return {
         "schema_version": 1,

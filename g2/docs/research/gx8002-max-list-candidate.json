@@ -1,0 +1,104 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "dependencies": [
+    {
+      "path": "lvp/vui/kws/max_decoder.c",
+      "blob": "2a8f84622b184635227da9cd52b6124cc1dfc4f4",
+      "sha256": "9c2e95460801cdd78ef88622c0bbcd545d69d1bead652a2d69b76a27fb8ac3eb"
+    },
+    {
+      "path": "include/lvp_param.h",
+      "blob": "6e8aa73abb6ddc555fb0183456d88629d912f5b6",
+      "sha256": "56033502b75e9a02f2d0c6959974ba2016166ebdd732786d7295d5c2a100ac95"
+    },
+    {
+      "path": "LICENSE",
+      "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+      "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+    }
+  ],
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "source_sha256": "2478467a2f4e8f64ee1aea30caa9999b13d6fb93dac2442865daeed10b5d27f9",
+  "type_header_sha256": "50e31ae81a2b0660b78e6fd65cd40479344b68265c5bffa16a885e5b0884b385",
+  "regions": [
+    {
+      "section_name": ".text",
+      "package_offset": 73228,
+      "compiled_bytes": 120,
+      "compiled_sha256": "b47690e4dbe7001c18a30d7a2d8a5fc05c2c4235ad02cca6c1ab695eb79ae178",
+      "stock_envelope_bytes": 120,
+      "stock_sha256": "6f689d6258ea7e1ca4764329a4a3a5010561d40aebb6db7542020e6917d930dc",
+      "fits": true,
+      "exact_stock_payload": false
+    },
+    {
+      "section_name": ".rodata.header",
+      "package_offset": 84026,
+      "compiled_bytes": 43,
+      "compiled_sha256": "72c51e0a535fffabc4ceae3d958042bd4c888f0905875b3dc0edc9890fb2b864",
+      "stock_envelope_bytes": 43,
+      "stock_sha256": "72c51e0a535fffabc4ceae3d958042bd4c888f0905875b3dc0edc9890fb2b864",
+      "fits": true,
+      "exact_stock_payload": true
+    },
+    {
+      "section_name": ".rodata.word",
+      "package_offset": 84069,
+      "compiled_bytes": 27,
+      "compiled_sha256": "3ee6dde84e007788ac0c97246f22ea38830763302211cfa7823d3108d75919af",
+      "stock_envelope_bytes": 27,
+      "stock_sha256": "3ee6dde84e007788ac0c97246f22ea38830763302211cfa7823d3108d75919af",
+      "fits": true,
+      "exact_stock_payload": true
+    },
+    {
+      "section_name": ".rodata.value",
+      "package_offset": 84096,
+      "compiled_bytes": 12,
+      "compiled_sha256": "d95a22a79e919d634527b6f1da4162dd113552a2080f1c1c4142a53ce4f665f3",
+      "stock_envelope_bytes": 12,
+      "stock_sha256": "d95a22a79e919d634527b6f1da4162dd113552a2080f1c1c4142a53ce4f665f3",
+      "fits": true,
+      "exact_stock_payload": true
+    },
+    {
+      "section_name": ".rodata.threshold",
+      "package_offset": 84108,
+      "compiled_bytes": 13,
+      "compiled_sha256": "f2593b6f0129913f3e4abe6afe85f1ce300ad26932eb2d41597fd7cb53a4950d",
+      "stock_envelope_bytes": 13,
+      "stock_sha256": "f2593b6f0129913f3e4abe6afe85f1ce300ad26932eb2d41597fd7cb53a4950d",
+      "fits": true,
+      "exact_stock_payload": true
+    },
+    {
+      "section_name": ".rodata.newline",
+      "package_offset": 85326,
+      "compiled_bytes": 2,
+      "compiled_sha256": "102b51b9765a56a3e899f7cf0ee38e5251f9c503b357b330a49183eb7b155604",
+      "stock_envelope_bytes": 2,
+      "stock_sha256": "102b51b9765a56a3e899f7cf0ee38e5251f9c503b357b330a49183eb7b155604",
+      "fits": true,
+      "exact_stock_payload": true
+    }
+  ],
+  "defined_bss": {
+    "address": 537061276,
+    "size": 8
+  },
+  "source_admitted": false,
+  "limits": [
+    "Candidate only. Need live count/pointer reload, printf argument, state write and frame qualification. Parameter table has separate source ownership; no full MAX decoder/hardware claim."
+  ]
+}

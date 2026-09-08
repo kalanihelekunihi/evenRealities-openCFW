@@ -1,0 +1,27 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "dependencies": [
+    {
+      "path": "arch/cpu/csky/ck804/start.S",
+      "git_blob": "63396df27539a800868a2f1a7aa646ead837ad46",
+      "sha256": "c3ad818c3264f2784be67c0e65b946ba561468d9e6edf5ea2d8e0ca56f0a975a"
+    },
+    {
+      "path": "LICENSE",
+      "git_blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+      "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+    }
+  ],
+  "source_sha256": "a144f7fa63903b414b7bfecdb63dad9688305ccbb22dc6b0e6e4e42bfe6feaf7",
+  "flags": [
+    "-mcpu=ck804ef",
+    "-mhard-float"
+  ],
+  "compiled_bytes": 40,
+  "compiled_sha256": "9fb7304cee7e70154b75908d044b5945863004400d46aab96c7d3ddef53457e9",
+  "byte_exact": true,
+  "source_admitted": false,
+  "limits": [
+    "Main remains a separate retained dependency. Reset control/register/call sequence needs decoded checks; no full boot qualification."
+  ]
+}

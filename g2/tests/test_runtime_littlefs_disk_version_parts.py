@@ -190,7 +190,7 @@ PROFILES = {
             "2d689313cd12e5c8d5155c7b4ba3202"
         ),
         "current_layout_rollback_sha256": (
-            "9484bb03260b6d2b08aeea10fd810efdeeb023c88ce1b86df1553a825c4585e5"
+            "30b4e1573f88c13b50584c1034cf4ad6515f8fd85f2aefc4bd4beaa3673133db"
         ),
         "historical_tail_size": 22,
         "historical_tail_offset": 113732,

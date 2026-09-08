@@ -41,8 +41,8 @@ class Liblc3WholeAddressCapacityTests(unittest.TestCase):
 
     def test_package_plan_is_an_exact_whole_application_cover(self) -> None:
         package = self.report["package"]
-        self.assertEqual(package["apollo_region_count"], 5995)
-        self.assertEqual(package["runtime_bytes"], 3885636)
+        self.assertEqual(package["apollo_region_count"], 6820)
+        self.assertEqual(package["runtime_bytes"], 3956640)
         self.assertTrue(package["exact_contiguous_region_cover"])
         self.assertEqual(package["largest_generated_padding_interval"], 10844)
         self.assertEqual(package["largest_generated_alignment_interval"], 2434)
@@ -50,8 +50,8 @@ class Liblc3WholeAddressCapacityTests(unittest.TestCase):
 
     def test_oz_gc_reduces_but_retains_import_and_table_contracts(self) -> None:
         expected = {
-            "apple-clang": (19360, 60480, 404, 485, 9156),
-            "linux-clang": (19308, 60480, 404, 486, 9108),
+            "apple-clang": (19360, 60480, 404, 485, 27316),
+            "linux-clang": (19308, 60480, 404, 486, 27268),
         }
         for name, profile in self.report["profiles"].items():
             selected = profile["build"]["accepted"]["oz_gc"]
@@ -85,10 +85,10 @@ class Liblc3WholeAddressCapacityTests(unittest.TestCase):
         apple = self.report["profiles"]["apple-clang"]["placement"]
         linux = self.report["profiles"]["linux-clang"]["placement"]
         self.assertEqual((apple["append_shortfall"],
-                          linux["append_shortfall"]), (9152, 9100))
+                          linux["append_shortfall"]), (27316, 27268))
         self.assertEqual((apple["linked_order_append_shortfall"],
                           linux["linked_order_append_shortfall"]),
-                         (9156, 9108))
+                         (27316, 27268))
         self.assertFalse(apple["whole_address_production_fit"])
         self.assertEqual(apple["interior_intervals_admitted_for_new_ownership"], 0)
         self.assertTrue(apple["thumb_bw_range_sufficient"])
@@ -96,10 +96,10 @@ class Liblc3WholeAddressCapacityTests(unittest.TestCase):
         self.assertFalse(apple["best_order_final_relocation_replay_attempted"])
         self.assertEqual(
             apple["placing_only_table_in_protected_padding_counterfactual_shortfall"],
-            8752)
+            26912)
         self.assertTrue(apple["conditional_repack"]["oz_closure_would_fit"])
         self.assertEqual(apple["conditional_repack"]
-                         ["margin_before_update_record"], 21532)
+                         ["margin_before_update_record"], 21456)
         self.assertFalse(apple["conditional_repack"]["production_authority"])
         self.assertFalse(self.report["routing"]["production_placement"])
         self.assertFalse(self.report["routing"]["firmware_image_emitted"])

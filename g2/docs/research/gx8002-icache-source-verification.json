@@ -1,0 +1,36 @@
+{
+  "source_sha256": "38acfd956e6681895d18296d7f500e0de68ad24df32ff5735e5f478ef49a91f4",
+  "compile_flags": [
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "compiled_bytes": 28,
+  "compiled_sha256": "c8f8f2e2b43f4522d3124581dcbd8f4ad270f7cc5a10c13211819c23adb8e06f",
+  "stock_occurrences": [
+    {
+      "object": "drivers_lib/cache/gx_icache.o",
+      "symbol": "gx_icache_enable",
+      "bytes": 28,
+      "package_offset": 96048,
+      "region": "image_a_sram_text",
+      "sha256": "c6678a8329737660bf403117fc337bba701e744329ded559b6e012531a5a4001"
+    }
+  ],
+  "matching_trace_cases": 140,
+  "firmware_bytes_emitted": 0,
+  "production_source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Restricted bounded interpreter; no hardware model.",
+    "Original unbounded wait is preserved, not repaired.",
+    "Whole-image integration remains unqualified."
+  ]
+}

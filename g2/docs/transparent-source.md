@@ -8,6 +8,19 @@ The measured result of the current run is in
 [`transparent-source-ledger.md`](transparent-source-ledger.md), which is
 regenerated from the build and never edited by hand.
 
+The [2026-09-07 scalar-helper recovery](research/g2-transparent-pcode-scalar-recovery.md)
+adds the missing carry, signed-overflow, signed-borrow, and five-/six-byte
+concatenation operations and corrects odd-width low-operand masking. Its
+bounded same-compiler comparison places 20 additional functions. The full
+image rebuild confirms 5,145 placed functions, and the aggregate ledger has
+been regenerated from that build.
+
+The subsequent [reviewed Cortex-M55 replacements](research/g2-cortex-m55-reviewed-source.md)
+bring the current build to 5,149 placed functions, including four reviewed C
+units. The current ledger distinguishes these from unreviewed decompilation,
+which remains a source-completion blocker. The active
+[source-only goal](source-only-goal.md) prioritizes macOS builds.
+
 ## The problem this solves
 
 The existing `source` profile reproduces the official Apollo payload by taking
@@ -189,7 +202,7 @@ declared data arrays, or an explicit trap. The `opaque_bytes` count is zero,
 and that is a checked property of the build, not a claim.
 
 It is worth being precise about which of those three dominates. 7,217 of 7,449
-functions compile and 5,125 of them place, so about half the image's code bytes
+functions compile and 5,149 of them place, so about half the image's code bytes
 are compiled from recovered C; the rest of the image is declared data, which is
 the larger share by byte count, and traps. The ledger gives the exact split.
 

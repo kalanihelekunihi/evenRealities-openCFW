@@ -1,0 +1,98 @@
+{
+  "build": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "dependencies": [
+      {
+        "path": "lvp/lvp_mode_tws.c",
+        "blob": "4bd9d2962adac54871e6c6eb905174a0ee649300",
+        "sha256": "18e45319c213c185f1652b73f820ba469ed6847fba06ff247244d13df3635574"
+      },
+      {
+        "path": "lvp/lvp_mode.h",
+        "blob": "e551d09fc861f1964411a84b7d0a818b3bef84c6",
+        "sha256": "6e7d5f178ecc4af50ee325d55fccc1dadc69eef762dab52580da355705107818"
+      },
+      {
+        "path": "lvp/common/lvp_queue.h",
+        "blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+        "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+      },
+      {
+        "path": "include/driver/gx_snpu.h",
+        "blob": "a2a911b22f7f379d9f489d959519125d5cad3a52",
+        "sha256": "72aa01a5cc6519da63dff4afa7163c7d3a3045d203998e691768dfa189643a46"
+      },
+      {
+        "path": "include/driver/gx_pmu_ctrl.h",
+        "blob": "d3826fa23025ff1ffd4c39ad639998a2de6e2b9f",
+        "sha256": "d22a3a65c28d3b8bb065d9925d102c0d64a2521740e7e5468e232a686e9c3bf5"
+      },
+      {
+        "path": "lvp/common/lvp_audio_in.h",
+        "blob": "c5f42384d65dfefc510c288ad29df217f1583239",
+        "sha256": "2829063b0f71ead93e50d1fba8e07db2705058314ec38a151b80f1040e0ba318"
+      },
+      {
+        "path": "lvp/common/snpu_engine/lvp_kws.h",
+        "blob": "d83412e58b0559c2580e15216b8b60fd6b53f170",
+        "sha256": "5795575ae9086d2008d31fa6b9609154ed0e30b1d27607ad36f770cb9950ad6a"
+      },
+      {
+        "path": "lvp/vui/kws/max_decoder.c",
+        "blob": "2a8f84622b184635227da9cd52b6124cc1dfc4f4",
+        "sha256": "9c2e95460801cdd78ef88622c0bbcd545d69d1bead652a2d69b76a27fb8ac3eb"
+      },
+      {
+        "path": "LICENSE",
+        "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+        "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+      }
+    ],
+    "bindings": {
+      "LvpQueueInit": 270561180,
+      "LvpInitMaxKws": 270567748,
+      "gx_pmu_get_wakeup_source": 268585280,
+      "LvpKwsInit": 270560656,
+      "LvpAudioInInit": 270562236,
+      "LvpAudioInStandbyToStartup": 270562912,
+      "printf": 270560292,
+      "open_cfw_gx8002_tws_snpu_callback": 268591936,
+      "open_cfw_gx8002_tws_audio_callback": 268592092,
+      "open_cfw_gx8002_tws_init_error": 270578224,
+      "open_cfw_gx8002_tws_state": 537061100
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "source_sha256": "25cebe9c1a01b28b321b11d408f57236f720daba1935f099be1b88388fbfcea4",
+    "interface_header_sha256": "a96f9fbec8cc365e2df417033204381ff5be18135fd3d9f813bdcfa3fa2440bb",
+    "interface_probe_sha256": "48a197d92598822af310028081695f024ed9fe87d905e85973a5e698604fd302",
+    "interface_compatibility_checked": true,
+    "config_sha256": "9811f2aa66324bafe0b823ac15ac80ea0041bea02b181698910ee4ebb4a711ba",
+    "compiled_bytes": 108,
+    "compiled_sha256": "078a066c2dd64a7abdb1fe757f0e7545eff616c2c47403bd5aae79d04a99bbf1",
+    "package_offset": 72700,
+    "stock_envelope_bytes": 108,
+    "stock_sha256": "078a066c2dd64a7abdb1fe757f0e7545eff616c2c47403bd5aae79d04a99bbf1",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Candidate only. Need continuous stock/source call and state comparison, stack/ABI checks, and interface type compatibility verification before admission."
+    ]
+  },
+  "cases": 5130,
+  "frame_bytes": 12,
+  "source_admitted": false,
+  "limits": [
+    "Continuous init control flow with modeled returning helpers, caller clobbers and ordered standby writes. Queue and printf already have source; decoder, audio/KWS helpers, callbacks, messages and state require separate ownership. No hardware or whole-TWS qualification."
+  ]
+}

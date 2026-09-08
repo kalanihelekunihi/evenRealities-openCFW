@@ -1,0 +1,39 @@
+{
+  "source_sha256": "99240e0d650ee2c61d21ff348c73510612698c65ed6160bb032c37a50d45084f",
+  "compiled_sha256": "c0073030be5adf13878faab7f99cc205447c78cdf56b9c4f2cae0544685cc377",
+  "compiled_bytes": 96,
+  "compile_flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-tree-loop-optimize"
+  ],
+  "target_cases": 4128,
+  "source_admitted": true,
+  "admission_scope": "experimental hybrid codec; ordinary non-overlapping RAM",
+  "stock_equivalence_proven": false,
+  "symbol": "open_cfw_gx8002_memcpy",
+  "stock_occurrences": [
+    {
+      "symbol": "open_cfw_gx8002_memcpy",
+      "package_offset": 96076,
+      "bytes": 126,
+      "sha256": "af512ad3fc99968703776dc00eadecc3803acd0a16500a18a5e5052b06d987ef",
+      "region": "image_a_sram_text"
+    }
+  ],
+  "stock_ram_result_comparison_cases": 4128,
+  "exact_memory_access_trace_cases": 4128,
+  "stock_body_sha256": "af512ad3fc99968703776dc00eadecc3803acd0a16500a18a5e5052b06d987ef",
+  "limits": [
+    "Restricted instruction interpreter, not a processor emulator.",
+    "Memory access traces match tested cases; same-entry placement fits; hardware timing remains unqualified."
+  ]
+}

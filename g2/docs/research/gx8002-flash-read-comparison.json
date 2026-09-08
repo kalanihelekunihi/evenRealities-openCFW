@@ -1,0 +1,43 @@
+{
+  "build": {
+    "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+    "source_sha256": "1e2d9195410ad3b5cb01c10a76b7602e3989133eb6e22af4156e31b12c49d5e4",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_flash_read",
+        "section": ".text.flash_read",
+        "compiled_bytes": 60,
+        "compiled_sha256": "46dfe5ffb221de3cfcbddb9b32be56391812902a7dd21dc0ea66a46d3f6472b1",
+        "package_offset": 88112,
+        "stock_envelope_bytes": 60,
+        "stock_sha256": "c7bf772295ce4ab80a4992372a49adae71e42c27347111db8a49d8f189bbb8ee",
+        "byte_exact": false,
+        "fits": true
+      }
+    ],
+    "source_admitted": false,
+    "analysis_only_overlapping_sections_allowed": false,
+    "limits": [
+      "Decoded callback reads, chunk calls and return behavior require qualification.",
+      "Read callback targets and buffer validity depend on callers; no physical hardware qualification."
+    ]
+  },
+  "cases": 177,
+  "source_admitted": false,
+  "limits": [
+    "Callback contracts modeled, including synthetic callback replacement and address wrapping; these cases do not claim real buffer validity.",
+    "Largest positive signed length completed in 32768 callbacks; hardware not accessed."
+  ]
+}

@@ -461,19 +461,19 @@ byte-reproducible Apple artifacts.
 make core-canonical-observation \
   OPENCFW_CLANG="$APPLE_CLANG_REVIEW" \
   OPENCFW_TOOLCHAIN_PROFILE=apple-clang \
-  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final97/apple-a
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final99/apple-a
 make core-canonical-observation \
   OPENCFW_CLANG="$APPLE_CLANG_REVIEW" \
   OPENCFW_TOOLCHAIN_PROFILE=apple-clang \
-  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final97/apple-b
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final99/apple-b
 make core-canonical-observation \
   OPENCFW_CLANG=/path/to/reviewed/linux-clang \
   OPENCFW_TOOLCHAIN_PROFILE=linux-clang \
-  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final97/linux-a
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final99/linux-a
 make core-canonical-observation \
   OPENCFW_CLANG=/path/to/reviewed/linux-clang \
   OPENCFW_TOOLCHAIN_PROFILE=linux-clang \
-  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final97/linux-b
+  CORE_CANONICAL_OBSERVATION_DIR=build/canonical-observation-g2-final99/linux-b
 ```
 
 Each output directory contains its own `build-report.json` and the artifacts
@@ -513,10 +513,10 @@ python3 components/bootloader/core_overlay/build_component.py \
 
 LINUX_BOOT_PROVIDER=build/canonical-provider/linux-clang/apollo_bootloader/ota_s200_bootloader.bin
 make core-canonical-admission \
-  CORE_CANONICAL_APPLE_A=build/canonical-observation-g2-final97/apple-a/build-report.json \
-  CORE_CANONICAL_APPLE_B=build/canonical-observation-g2-final97/apple-b/build-report.json \
-  CORE_CANONICAL_LINUX_A=build/canonical-observation-g2-final97/linux-a/build-report.json \
-  CORE_CANONICAL_LINUX_B=build/canonical-observation-g2-final97/linux-b/build-report.json \
+  CORE_CANONICAL_APPLE_A=build/canonical-observation-g2-final99/apple-a/build-report.json \
+  CORE_CANONICAL_APPLE_B=build/canonical-observation-g2-final99/apple-b/build-report.json \
+  CORE_CANONICAL_LINUX_A=build/canonical-observation-g2-final99/linux-a/build-report.json \
+  CORE_CANONICAL_LINUX_B=build/canonical-observation-g2-final99/linux-b/build-report.json \
   CORE_CANONICAL_PROFILE_PROVIDER_ARGS="--profile-provider linux-clang apollo_bootloader $LINUX_BOOT_PROVIDER"
 ```
 
@@ -604,7 +604,7 @@ before atomically replacing the companion and verifying its readback. Ordinary
 receipt is missing, stale, redirected, or inconsistent with live evidence.
 
 `.tmp-postapply-core-linux/`, the four canonical receipt trees under
-`build/canonical-observation-g2-final97/{apple-a,apple-b,linux-a,linux-b}/`, and
+`build/canonical-observation-g2-final99/{apple-a,apple-b,linux-a,linux-b}/`, and
 both `build/postapply-package-*` directories are ignored, private local
 evidence. They are not Git inputs or community-archive members. This entire
 sequence is deterministic and software-only: it performs no network access,

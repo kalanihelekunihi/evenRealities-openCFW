@@ -1,0 +1,37 @@
+{
+  "source_sha256": "9a93a3fb6f093d460901ccf711e02a4c2c4fba820afe8199f8ebfe68b6edf90a",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "sections": [
+    {
+      "section": ".text.open_cfw_gx8002_npu_en_interrupt",
+      "size": 120
+    },
+    {
+      "section": ".text.open_cfw_gx8002_npu_clr_interrupt",
+      "size": 120
+    },
+    {
+      "section": ".text.open_cfw_gx8002_npu_clr_interrupt_without_overflow",
+      "size": 88
+    },
+    {
+      "section": ".text.open_cfw_gx8002_npu_clr_overflow_interrupt",
+      "size": 40
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Object candidates only. Need linked placement and full-mask ordered primitive/MMIO/frame qualification. Do not combine repeated register operations."
+  ]
+}

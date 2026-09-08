@@ -1,0 +1,42 @@
+{
+  "source_sha256": "dafa9d8a070fccb26ac59f64ca27616559de794ee726cd5c57ff9c1f7193be79",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_flash_quad_enable",
+      "section": ".text.flash_quad_enable",
+      "compiled_bytes": 54,
+      "compiled_sha256": "568ffe8565b5035a08a8b5e9f24af77f7b15d62bd3b9f677502cb03c502ec195",
+      "package_offset": 90824,
+      "stock_envelope_bytes": 56,
+      "stock_sha256": "8eecff182409e0e973db4a75e27c2422f6b7f7118ffc45072ad6f012a2cea514",
+      "byte_exact": false
+    },
+    {
+      "symbol": "open_cfw_gx8002_flash_quad_enable_pair",
+      "section": ".text.flash_quad_enable_pair",
+      "compiled_bytes": 60,
+      "compiled_sha256": "51bb5d4aee657dedd25406afd64070d57d43b1d2d040594e083c048b6022b49d",
+      "package_offset": 90948,
+      "stock_envelope_bytes": 60,
+      "stock_sha256": "e6ff89252d68f407ddfb09b1a7a27286f72519ee94158c769ba6a81b48daed2c",
+      "byte_exact": false
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Decoded status helpers require transport-call and stack qualification.",
+    "Polling has no timeout; no physical hardware qualification."
+  ]
+}

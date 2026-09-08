@@ -19,10 +19,10 @@ ANALYZER = ROOT / "tools/analyze_g2_dual_profile_ownership.py"
 sys.path.insert(0, str(ROOT / "tools"))
 import open_cfw  # noqa: E402
 EVIDENCE = (
-    ROOT / "build/canonical-observation-g2-final97/apple-a/build-report.json",
-    ROOT / "build/canonical-observation-g2-final97/apple-b/build-report.json",
-    ROOT / "build/canonical-observation-g2-final97/linux-a/build-report.json",
-    ROOT / "build/canonical-observation-g2-final97/linux-b/build-report.json",
+    ROOT / "build/canonical-observation-g2-final99/apple-a/build-report.json",
+    ROOT / "build/canonical-observation-g2-final99/apple-b/build-report.json",
+    ROOT / "build/canonical-observation-g2-final99/linux-a/build-report.json",
+    ROOT / "build/canonical-observation-g2-final99/linux-b/build-report.json",
     ROOT / "components/bootloader/core_overlay/build/build-report.json",
     ROOT / "build/canonical-provider/linux-clang/apollo_bootloader/build-report.json",
     ROOT / "build/source/build-report.json",
@@ -130,12 +130,12 @@ class DualProfileObservationIndependenceTests(unittest.TestCase):
         analyzer = load_analyzer()
         expected = {
             "apple-clang": (
-                ROOT / "build/canonical-observation-g2-final97/apple-a/build-report.json",
-                ROOT / "build/canonical-observation-g2-final97/apple-b/build-report.json",
+                ROOT / "build/canonical-observation-g2-final99/apple-a/build-report.json",
+                ROOT / "build/canonical-observation-g2-final99/apple-b/build-report.json",
             ),
             "linux-clang": (
-                ROOT / "build/canonical-observation-g2-final97/linux-a/build-report.json",
-                ROOT / "build/canonical-observation-g2-final97/linux-b/build-report.json",
+                ROOT / "build/canonical-observation-g2-final99/linux-a/build-report.json",
+                ROOT / "build/canonical-observation-g2-final99/linux-b/build-report.json",
             ),
         }
         self.assertEqual(analyzer.OBSERVATIONS, expected)

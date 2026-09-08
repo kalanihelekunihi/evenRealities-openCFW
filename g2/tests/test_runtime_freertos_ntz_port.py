@@ -946,7 +946,7 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                     "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622"
                 ),
                 "function_count": 2_563,
-                "patch_site_count": 2_448,
+                "patch_site_count": 2_447,
             },
         )
         self.assertTrue(set(STOCK).isdisjoint(overlay["functions"]))
@@ -1008,6 +1008,10 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                     placement["function"],
                 )
             reconstructed[offset:offset + len(replacement)] = replacement
+        for data in report["overlay"]["patched_in_place_data"]:
+            offset = int(data["payload_offset"])
+            replacement = bytes.fromhex(data["replacement_hex"])
+            reconstructed[offset:offset + len(replacement)] = replacement
         reconstructed.extend(self.production_overlay)
         package_length_word = (
             struct.unpack_from("<I", self.package, 0)[0]
@@ -1066,8 +1070,21 @@ class RuntimeFreeRTOSNTZPortTests(unittest.TestCase):
                 )
                 if official != generated
             )
+        for data in report["overlay"]["patched_in_place_data"]:
+            offset = int(data["payload_offset"])
+            replacement = bytes.fromhex(data["replacement_hex"])
+            expected_mutations.update(
+                offset + index
+                for index, (official, generated) in enumerate(
+                    zip(
+                        self.package[offset:offset + len(replacement)],
+                        replacement,
+                    )
+                )
+                if official != generated
+            )
         self.assertEqual(actual_mutations, expected_mutations)
-        self.assertEqual(len(actual_mutations), 385707)
+        self.assertEqual(len(actual_mutations), 403165)
 
         vector_start = PACKAGE_PREAMBLE_SIZE
         self.assertEqual(

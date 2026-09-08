@@ -172,10 +172,18 @@ def _pin_core(manifest: dict[str, Any]):
 
 
 def _suffix(report: dict[str, Any], config_leaves: dict[str, Any],
-            required: int) -> tuple[list[dict[str, Any]], int, int]:
+            required: int, *,
+            end_exclusive: int | None = None
+            ) -> tuple[list[dict[str, Any]], int, int]:
     base = report["overlay"]["overlay_runtime_address"]
-    end = report["overlay"]["overlay_end_exclusive"]
-    ordered = report["overlay"]["link"]["relocated_functions"]
+    end = (report["overlay"]["overlay_end_exclusive"]
+           if end_exclusive is None else end_exclusive)
+    ordered = [
+        row for row in report["overlay"]["link"]["relocated_functions"]
+        if base + row["offset"] + row["size"] <= end
+    ]
+    require(ordered and end <= report["overlay"]["overlay_end_exclusive"],
+            "suffix endpoint escapes the authenticated core")
     suffix: list[dict[str, Any]] = []
     for leaf in reversed(ordered):
         suffix.append(leaf)
@@ -198,7 +206,7 @@ def _host_bins(proposal: dict[str, Any], candidates: list[Any],
     run_base = proposal["address_model"]["run_base"]
     preamble = proposal["address_model"]["preamble_bytes"]
     bins = []
-    for name in proposal["selected_functions"]:
+    for name in proposal["suffix_host_functions"]:
         patch, _leaf = by_name[name]
         start = patch["runtime_address"] + 4
         end = patch["runtime_address"] + patch["expected_size"]
@@ -354,13 +362,19 @@ def _rebase_leaf(payload: bytes, leaf: dict[str, Any], new_base: int,
 
 
 def _ingress(proposal: dict[str, Any], report: dict[str, Any],
-             component: bytes, suffix: list[dict[str, Any]]) -> dict[str, Any]:
+             component: bytes, suffix: list[dict[str, Any]], *,
+             scan_end_exclusive: int | None = None) -> dict[str, Any]:
     run_base = proposal["address_model"]["run_base"]
     preamble = proposal["address_model"]["preamble_bytes"]
     base = report["overlay"]["overlay_runtime_address"]
+    scan_end = (run_base + len(component) - preamble
+                if scan_end_exclusive is None else scan_end_exclusive)
+    scan_limit = preamble + scan_end - run_base
+    require(preamble <= scan_limit <= len(component),
+            "suffix ingress scan endpoint escapes component")
     starts = {base + row["offset"] for row in suffix}
     observed = set()
-    for offset in range(preamble, len(component) - 3, 2):
+    for offset in range(preamble, scan_limit - 3, 2):
         site = run_base + offset - preamble
         try:
             target = decode_thumb_branch(site, component[offset:offset + 4])
@@ -370,23 +384,26 @@ def _ingress(proposal: dict[str, Any], report: dict[str, Any],
             observed.add((site, target))
     expected = set()
     for patch in report["overlay"]["patched_sites"]:
-        if patch.get("target_address") in starts:
+        if (patch.get("target_address") in starts and
+                patch["runtime_address"] < scan_end):
             expected.add((patch["runtime_address"], patch["target_address"]))
     for leaf in report["relocated_leaves"]:
         for relocation in leaf["extraction"]["relocations"]:
             if relocation["type"] in {"R_ARM_THM_CALL", "R_ARM_THM_JUMP24"} and \
-                    relocation["target_address"] in starts:
+                    relocation["target_address"] in starts and \
+                    relocation["runtime_address"] < scan_end:
                 expected.add((relocation["runtime_address"],
                               relocation["target_address"]))
     require(observed == expected, "suffix exact-entry executable ingress drift")
     raw = []
-    for offset in range(preamble, len(component) - 3):
+    for offset in range(preamble, scan_limit - 3):
         value = struct.unpack_from("<I", component, offset)[0] & ~1
         if value in starts:
             raw.append((run_base + offset - preamble, value))
     require(not raw, "suffix has raw-pointer ingress")
     stock = sum(1 for patch in report["overlay"]["patched_sites"]
-                if patch.get("target_address") in starts)
+                if patch.get("target_address") in starts and
+                patch["runtime_address"] < scan_end)
     return {
         "exact_entry_branch_count": len(observed),
         "stock_entry_redirect_count": stock,
@@ -409,8 +426,10 @@ def analyze(manifest_path: Path = MANIFEST, *, record: bool = False) -> dict[str
     (proposal, config, report, _overlay, component, protected, candidates,
      config_leaves) = _pin_core(manifest)
     required = manifest["address_model"]["apple_best_order_shortfall"]
+    historical_end = manifest["address_model"][
+        "historical_core_end_exclusive"]
     suffix, suffix_start, suffix_span = _suffix(
-        report, config_leaves, required)
+        report, config_leaves, required, end_exclusive=historical_end)
     bins = _host_bins(proposal, candidates, component)
     forbidden = _host_forbidden_entries(proposal, component, bins)
     packed = pack_suffix(suffix, bins, forbidden["forbidden"])
@@ -419,7 +438,9 @@ def analyze(manifest_path: Path = MANIFEST, *, record: bool = False) -> dict[str
         for slot in packed for item in slot["items"]
     }
     require(len(placements) == len(suffix), "suffix placement lost a leaf")
-    ingress = _ingress(proposal, report, component, suffix)
+    ingress = _ingress(
+        proposal, report, component, suffix,
+        scan_end_exclusive=historical_end)
 
     base = report["overlay"]["overlay_runtime_address"]
     old_intervals = sorted((
@@ -466,9 +487,9 @@ def analyze(manifest_path: Path = MANIFEST, *, record: bool = False) -> dict[str
             image_write(patched, item["start"], rebased[item["function"]],
                         run_base=run_base, preamble=preamble)
 
-    new_component_size = len(component) - suffix_span
+    new_core_end = historical_end - suffix_span
+    new_component_size = preamble + new_core_end - run_base
     new_component = bytes(patched[:new_component_size])
-    new_core_end = report["overlay"]["overlay_end_exclusive"] - suffix_span
     require(run_base + len(new_component) - preamble == new_core_end,
             "truncated component runtime-end drift")
     sizes = {name: oz["sections"][name]["size"] for name in
@@ -536,7 +557,7 @@ def analyze(manifest_path: Path = MANIFEST, *, record: bool = False) -> dict[str
 
     return {
         "schema_version": 1,
-        "status": "exact-suffix-pack-capacity-proven-production-route-blocked",
+        "status": "historical-suffix-pack-superseded-by-production-route",
         "capacity": summary,
         "host_slots": packed,
         "ingress": ingress,
@@ -567,15 +588,18 @@ def analyze(manifest_path: Path = MANIFEST, *, record: bool = False) -> dict[str
         },
         "protected_intervals": protected,
         "routing": manifest["routing"],
-        "remaining_software_blockers": [
-            "Authenticate stock addresses and ownership for all 11 retained runtime imports; the current finalizer deliberately uses synthetic bindings.",
-            "Extend the LC3 finalizer to accept the proven table-rodata/rodata/text production order and replay all 485 relocations at these exact addresses.",
-            "Integrate the 84 entry redirects, seven stock-tail payloads, suffix truncation, four exact adapter slots, and service_audio veneers into one atomic OTA builder with final package integrity receipts.",
-        ],
+        "remaining_software_blockers": [],
+        "historical_plan": {
+            "core_end_exclusive": historical_end,
+            "superseded_by":
+                "service_audio_production_replay source-slot/suffix route",
+            "active_production_authority": False,
+        },
         "evidence_boundary": {
             "core_bytes_synthesized_in_memory": True,
             "firmware_image_emitted": False,
             "production_routing_authorized": False,
+            "production_route_superseded_this_plan": True,
             "hardware_validation_performed": False,
         },
     }

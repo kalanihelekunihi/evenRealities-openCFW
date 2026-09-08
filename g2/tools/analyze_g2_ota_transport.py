@@ -9,6 +9,7 @@ import analyze_g2_ux_system as c
 import recover_apollo_embedded_source_paths as th
 from analyze_g2_thread_ble_production import wide_branch_target
 from apollo_artifact_consistency import validate_apollo_main_artifacts
+from apollo_overlay import decode_thumb_branch
 IMAGE=ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin';FM=ROOT/'tools/manifests/g2-ota-transport-function-map.tsv';PM=ROOT/'tools/manifests/g2-ota-transport-provider-map.tsv';CL=ROOT/'tools/manifests/g2-ota-transport-closure.tsv'
 SOURCE=ROOT/'components/apollo_main/core_overlay/ota_transport.c';OVERLAY=ROOT/'components/apollo_main/core_overlay/overlay.json';REPORT=ROOT/'components/apollo_main/core_overlay/build/build-report.json';MANIFEST=ROOT/'manifests/g2-2.2.6.10-core-source.json'
 PINS={FM:'8ca8cf7a770d279caa9a01bfddf4c0b7c73eb56224fde9b93ac41fd50bd2dcbc',PM:'5caf3a01a4ea5da99a02ab490cd915f46a4392b035fbf38f833a8fc95456a6cd',CL:'55cbee38bbef2f726c2856e18307b15ffa7494cfaae780960a7dbb2a158b0a15'}
@@ -70,12 +71,27 @@ def analyze(image=IMAGE):
   if not item or item['placement']['offset']!=offset or item['placement']['size']!=size or item['placement']['alignment']!=4 or item['extraction']['relocation_count']!=relocs:raise c.AuditError(f'production OTA transport build report changed: {name}')
  manifest=json.loads(MANIFEST.read_text());main=manifest['component_overrides']['apollo_main'];regions={x['name']:x for x in main['regions']}
  validate_apollo_main_artifacts(ROOT,c.AuditError,'OTA transport')
- expected_regions={'ota_transport_02_source_replacement':(0x48DE40,616,'generated_source_entry_replacement'),'ota_transport_03_source_replacement':(0x48E0A8,4,'generated_source_entry_replacement'),'ota_transport_retained_pool':(0x48E0AC,288,'official_blob'),'ota_transport_source_alignment':(0x7C8822,2,'generated_alignment'),'ota_transport_receive_source_text':(0x7C8824,704,'source_compiled'),'ota_transport_send_source_text':(0x7C8AE4,584,'source_compiled'),'ota_transport_state_source_text':(0x7C8D2C,12,'source_compiled')}
+ expected_regions={'ota_transport_03_source_replacement':(0x48E0A8,4,'generated_source_entry_replacement'),'ota_transport_source_alignment':(0x7C8822,2,'generated_alignment'),'ota_transport_receive_source_text':(0x7C8824,704,'source_compiled'),'ota_transport_send_source_text':(0x7C8AE4,584,'source_compiled'),'ota_transport_state_source_text':(0x7C8D2C,12,'source_compiled')}
  for name,expected in expected_regions.items():
   item=regions.get(name)
   if not item or (item.get('target_address'),item.get('size'),item.get('address_status'))!=expected:raise c.AuditError(f'production OTA transport region changed: {name}')
- first=[x for x in main['regions'] if x.get('target_address') is not None and 0x48D8D8<=x['target_address']<0x48DE40 and (x['name'].startswith('ota_transport_01_source_replacement') or x['name'].startswith('freetype_cff_host_scatter_'))]
- if sorted((x['target_address'],x['target_address']+x['size'],x['address_status']) for x in first)!=[(0x48D8D8,0x48D8DC,'generated_source_entry_replacement'),(0x48D8DC,0x48DE0E,'generated_source_data_replacement'),(0x48DE0E,0x48DE40,'generated_source_entry_replacement')]:raise c.AuditError('production OTA transport/CFF disjoint receive ownership changed')
+ stock=[]
+ for x in sorted(main['regions'],key=lambda row:row.get('target_address',1<<63)):
+  a=x.get('target_address');size=x.get('size')
+  if not isinstance(a,int) or not isinstance(size,int) or a>=0x48E1CC or a+size<=0x48D8D8:continue
+  name=x.get('name','')
+  owner=('ota' if name.startswith('ota_transport_') and 'source_replacement' in name else
+         'lc3' if name.startswith('liblc3_service_audio_') else
+         'pool' if name.startswith('ota_transport_retained_pool') else None)
+  if owner is None:raise c.AuditError('production OTA transport stock owner changed')
+  z=a+size
+  if stock and stock[-1][2]==owner and stock[-1][1]==a:stock[-1]=(stock[-1][0],z,owner)
+  else:stock.append((a,z,owner))
+ if stock!=[(0x48D8D8,0x48D8DC,'ota'),(0x48D8DC,0x48E0A8,'lc3'),(0x48E0A8,0x48E0AC,'ota'),(0x48E0AC,0x48E154,'pool'),(0x48E154,0x48E158,'lc3'),(0x48E158,0x48E1CC,'pool')]:raise c.AuditError('production OTA transport composed ownership changed')
+ component=(ROOT/'components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin').read_bytes()
+ for name,_,_,_,entry,_,_ in production:
+  offset=entry-c.BASE
+  if decode_thumb_branch(entry,component[offset:offset+4],link=False)!=reported[name]['placement']['runtime_address']:raise c.AuditError(f'production OTA transport final redirect changed: {name}')
  routed=True
  return {'schema_version':1,'identity':{'image_sha256':c.IMAGE_SHA256,'retained_path':r'platform\protocols\ota_service\ota_transport.c','embedded_third_party_definitions':[]},'surface':{'linked_functions':3,'path_anchored_functions':2,'body_bytes':2004,'physical_bytes':2292,'outer_pool_bytes':288,'reachable_instructions':772,'direct_body_calls':86,'internal_direct_body_calls':0,'external_direct_body_calls':86,'indirect_body_calls':4,'indirect_call_sites':dyn,'direct_bl_entry_sites':6,'stored_function_pointers':0},'provider_boundary':{'easylogger_calls':60,'runtime_calls':8,'ota_service_calls':5,'crc16_calls':4,'heap_wrapper_calls':6,'first_party_calls':3,'registered_callback_calls':4,'callback_slots':['0x20003058','0x2000305C'],'historical_ota_transport_commit':None,'new_version_discriminator':False},'production':{'candidate':'components/apollo_main/core_overlay/ota_transport.c','production_routed':routed,'source_functions':3,'compiled_text_bytes':1300,'alignment_bytes':2,'strict_relocations':14,'stock_replaced_bytes':2004,'retained_pool_bytes':288,'software_functional_gap':False,'hardware_validation':'blocked by unavailable physical evidence','hardware_blocker':'hardware validation is blocked by unavailable physical evidence; future qualification requires an authorized G2 pair and either a component-specific OTA receiver fixture or an authenticated golden capture covering C0/C1/C2 framing, retransmission timeout, callback timing, CRC failure, and disconnect/recovery'}}
 if __name__=='__main__':print(json.dumps(analyze(),indent=2,sort_keys=True))

@@ -1,0 +1,380 @@
+{
+  "scope": "affected recovered units, Apple Clang -Oz; helper semantics only, no production admission",
+  "runtime_before_sha256": "b25058b5b48db4d6ae5552768439fad5b982f131e253c27a8174cf33bd42b5fe",
+  "runtime_after_sha256": "d2fa40880014418691dc120aa6564dabbdbbf5308da7ac2348dd850d7df28b33",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.33.1)",
+  "comparison_base_commit": "fc1040f1d73fec0ceaab79ee0db580bdfed521ad",
+  "affected_units": 122,
+  "before_undefined_helper_references": 58,
+  "after_undefined_helper_references": 0,
+  "before_placed": 32,
+  "after_placed": 52,
+  "newly_placed": [
+    {
+      "entry": "0x44e79e",
+      "stock_bytes": 230,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "SCARRY4"
+        ],
+        "placed": false,
+        "reason": "undefined symbol SCARRY4"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 198
+      }
+    },
+    {
+      "entry": "0x44f316",
+      "stock_bytes": 160,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "SCARRY4"
+        ],
+        "placed": false,
+        "reason": "compiled size 168 exceeds envelope 160"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 138
+      }
+    },
+    {
+      "entry": "0x47d870",
+      "stock_bytes": 72,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "CONCAT15",
+          "CONCAT16"
+        ],
+        "placed": false,
+        "reason": "compiled size 80 exceeds envelope 72"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 72
+      }
+    },
+    {
+      "entry": "0x4b6a38",
+      "stock_bytes": 54,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "CONCAT15"
+        ],
+        "placed": false,
+        "reason": "compiled size 60 exceeds envelope 54"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 48
+      }
+    },
+    {
+      "entry": "0x4b6afa",
+      "stock_bytes": 46,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "CONCAT15"
+        ],
+        "placed": false,
+        "reason": "compiled size 56 exceeds envelope 46"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 44
+      }
+    },
+    {
+      "entry": "0x4b6b50",
+      "stock_bytes": 86,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "CONCAT15"
+        ],
+        "placed": false,
+        "reason": "undefined symbol CONCAT15"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 76
+      }
+    },
+    {
+      "entry": "0x4b6bee",
+      "stock_bytes": 54,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "CONCAT15"
+        ],
+        "placed": false,
+        "reason": "compiled size 60 exceeds envelope 54"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 48
+      }
+    },
+    {
+      "entry": "0x4b82e8",
+      "stock_bytes": 140,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "CONCAT15",
+          "CONCAT16"
+        ],
+        "placed": false,
+        "reason": "undefined symbol CONCAT15"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 136
+      }
+    },
+    {
+      "entry": "0x4c5774",
+      "stock_bytes": 58,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "CONCAT15"
+        ],
+        "placed": false,
+        "reason": "compiled size 60 exceeds envelope 58"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 48
+      }
+    },
+    {
+      "entry": "0x4c57d6",
+      "stock_bytes": 58,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "CONCAT15"
+        ],
+        "placed": false,
+        "reason": "compiled size 60 exceeds envelope 58"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 48
+      }
+    },
+    {
+      "entry": "0x4dd510",
+      "stock_bytes": 3118,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "SBORROW4"
+        ],
+        "placed": false,
+        "reason": "undefined symbol SBORROW4"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 1578
+      }
+    },
+    {
+      "entry": "0x58fad2",
+      "stock_bytes": 74,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "CARRY4"
+        ],
+        "placed": false,
+        "reason": "compiled size 82 exceeds envelope 74"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 70
+      }
+    },
+    {
+      "entry": "0x590e6c",
+      "stock_bytes": 252,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "SBORROW4"
+        ],
+        "placed": false,
+        "reason": "compiled size 260 exceeds envelope 252"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 240
+      }
+    },
+    {
+      "entry": "0x59123a",
+      "stock_bytes": 314,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "SBORROW4"
+        ],
+        "placed": false,
+        "reason": "undefined symbol SBORROW4"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 284
+      }
+    },
+    {
+      "entry": "0x5915ea",
+      "stock_bytes": 336,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "CARRY4"
+        ],
+        "placed": false,
+        "reason": "undefined symbol CARRY4"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 316
+      }
+    },
+    {
+      "entry": "0x59173a",
+      "stock_bytes": 320,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "CARRY4"
+        ],
+        "placed": false,
+        "reason": "compiled size 336 exceeds envelope 320"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 292
+      }
+    },
+    {
+      "entry": "0x5a2eea",
+      "stock_bytes": 568,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "CONCAT15",
+          "CONCAT16"
+        ],
+        "placed": false,
+        "reason": "undefined symbol CONCAT15"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 376
+      }
+    },
+    {
+      "entry": "0x5d377c",
+      "stock_bytes": 686,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "SCARRY4"
+        ],
+        "placed": false,
+        "reason": "undefined symbol SCARRY4"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 408
+      }
+    },
+    {
+      "entry": "0x5d4582",
+      "stock_bytes": 456,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "SCARRY4"
+        ],
+        "placed": false,
+        "reason": "undefined symbol SCARRY4"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 300
+      }
+    },
+    {
+      "entry": "0x5d7e1a",
+      "stock_bytes": 234,
+      "before": {
+        "compiled": true,
+        "unresolved_helpers": [
+          "SCARRY4"
+        ],
+        "placed": false,
+        "reason": "compiled size 244 exceeds envelope 234"
+      },
+      "after": {
+        "compiled": true,
+        "unresolved_helpers": [],
+        "placed": true,
+        "compiled_bytes": 234
+      }
+    }
+  ],
+  "placement_regressions": [],
+  "production_admitted": false,
+  "hardware_operations": []
+}

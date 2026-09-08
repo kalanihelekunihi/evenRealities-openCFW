@@ -1,0 +1,62 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_snpu_task_cmd_cache_flush",
+      "section_name": ".text",
+      "compiled_bytes": 22,
+      "compiled_sha256": "da821eab7de20759b12510d46f3c748013a666a335c73d62107cc7de5240667a",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_snpu_task_cmd_cache_flush",
+          "package_offset": 61300,
+          "bytes": 24,
+          "sha256": "42da9e45e21207f39aa76f27b021db7f97272dfad2cb8748b22f1858a9edf6e8",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "oracle": {
+      "path": "drivers_lib/snpu/grus/snpu.o",
+      "blob": "2565938852946027c726e66d0d8ee6e0bd0cc0d7",
+      "sha256": "6ce5cb2c361f4bae59fc87dd86631bd6c888dffbe28461b0db2e27f8c6e22f03",
+      "role": "identity_only"
+    },
+    "bindings": {
+      "open_cfw_gx8002_dcache_clean_range": 268588644
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "source_sha256": "549fa595b008c9033cf1ebf62755c5b5911372d1521f734dfae86fa3d5edb4b1",
+    "symbol": "open_cfw_gx8002_snpu_task_cmd_cache_flush",
+    "section_name": ".text",
+    "package_offset": 61300,
+    "compiled_bytes": 22,
+    "compiled_sha256": "da821eab7de20759b12510d46f3c748013a666a335c73d62107cc7de5240667a",
+    "stock_envelope_bytes": 24,
+    "stock_sha256": "42da9e45e21207f39aa76f27b021db7f97272dfad2cb8748b22f1858a9edf6e8",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Candidate only. Need both ordered cache-clean calls, pointer wrapping, clobber preservation and ABI checks. Cache helper needs separate evidence."
+    ]
+  },
+  "cases": 2485,
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Wrapper-only call order, 32-bit pointer arithmetic, conservative caller clobbers and eight-byte frame. Synthetic wrapping arguments do not establish physical address validity or cache coherence. Cache implementation requires separate qualification."
+  ]
+}

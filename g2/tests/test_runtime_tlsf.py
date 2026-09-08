@@ -1013,9 +1013,9 @@ class RuntimeTlsfTests(unittest.TestCase):
             overlay["sha256"],
             "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622",
         )
-        self.assertEqual(overlay["overlay_end_exclusive"], 0x007ECA44)
+        self.assertEqual(overlay["overlay_end_exclusive"], 0x007F1140)
         self.assertEqual(len(overlay["functions"]), 2_563)
-        self.assertEqual(len(overlay["patched_sites"]), 2_448)
+        self.assertEqual(len(overlay["patched_sites"]), 2_447)
         self.assertEqual(overlay["link"]["text_size"], 109592)
         self.assertEqual(overlay["link"]["rodata_size"], 3996)
         self.assertEqual(
@@ -1030,7 +1030,7 @@ class RuntimeTlsfTests(unittest.TestCase):
             overlay["functions"]["block_remove"],
             {"offset": 109372, "size": 220},
         )
-        self.assertEqual(len(self.integrated_report["sources"]), 296)
+        self.assertEqual(len(self.integrated_report["sources"]), 315)
         isolated_leaves = self.integrated_report["isolated_leaves"]
         self.assertEqual(
             {

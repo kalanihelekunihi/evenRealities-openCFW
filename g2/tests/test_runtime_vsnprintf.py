@@ -293,10 +293,10 @@ class RuntimeVsnprintfTests(unittest.TestCase):
     ) -> None:
         self.assert_render(b"plain text", b"plain text")
         self.assert_render(b"a%%b", b"a%b")
-        self.assert_render(b"%q", b"q")
-        self.assert_render(b"A%05qZ", b"AqZ")
+        self.assert_render(b"%k", b"k")
+        self.assert_render(b"A%05kZ", b"AkZ")
 
-        for malformed in (b"%", b"%05", b"%.", b"%ll"):
+        for malformed in (b"%", b"%05", b"%.", b"%ll", b"%q"):
             result, buffer = self.render(malformed)
             with self.subTest(format=malformed):
                 self.assertEqual(result, 1)

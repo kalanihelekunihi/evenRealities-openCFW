@@ -1,0 +1,42 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "oracle": {
+    "path": "drivers_lib/snpu/grus/snpu.o",
+    "blob": "2565938852946027c726e66d0d8ee6e0bd0cc0d7",
+    "sha256": "6ce5cb2c361f4bae59fc87dd86631bd6c888dffbe28461b0db2e27f8c6e22f03",
+    "role": "identity_only"
+  },
+  "bindings": {
+    "open_cfw_gx8002_snpu_state": 537031504
+  },
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "header": {
+    "path": "include/driver/gx_snpu.h",
+    "blob": "a2a911b22f7f379d9f489d959519125d5cad3a52",
+    "sha256": "72aa01a5cc6519da63dff4afa7163c7d3a3045d203998e691768dfa189643a46"
+  },
+  "source_sha256": "12ea485c2a76608002899a2e2999271a428d1d78e50fb9921a4961f694ec9321",
+  "symbol": "open_cfw_gx8002_snpu_get_state",
+  "section_name": ".text",
+  "package_offset": 62388,
+  "compiled_bytes": 12,
+  "compiled_sha256": "e0db1e81ec121e7e298e9e4a1729e274737e52a23ffac3318f1cf38986de80ae",
+  "stock_envelope_bytes": 12,
+  "stock_sha256": "e0db1e81ec121e7e298e9e4a1729e274737e52a23ffac3318f1cf38986de80ae",
+  "fits": true,
+  "source_admitted": false,
+  "limits": [
+    "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "source_admitted": false,
+  "upstream_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "stock_score_function": {
+    "package_offset": 72808,
+    "address": 270567132,
+    "frame_bytes": 84
+  },
+  "state_identification": {
+    "activation_flags": {
+      "address": 537061188,
+      "bytes": 2,
+      "evidence": "Initial memset of2 bytes at state base"
+    },
+    "max_index": {
+      "address": 537061192,
+      "evidence": "Read signed modulo10 in score routine; incremented by decoder wrapper"
+    },
+    "decoder_window": {
+      "address": 537061196,
+      "rows": 10,
+      "columns": 2,
+      "element_bytes": 4,
+      "evidence": "State base+8 plus index modulo10 shifted3"
+    },
+    "keyword_list_count": {
+      "address": 537061276,
+      "evidence": "State base+0x58, compared against2 at MAX init"
+    },
+    "keyword_list_pointer": {
+      "address": 537061280,
+      "entry_bytes": 88,
+      "evidence": "State base+0x5c; print loop advances88 bytes"
+    },
+    "vui_state": {
+      "address": 537029932,
+      "active_value": 1,
+      "evidence": "Wrapper reads initialized-data base20026c7c+0xb0 and compares1"
+    }
+  },
+  "wrapper": {
+    "package_offset": 73348,
+    "address": 270567672,
+    "bytes": 76,
+    "frame_bytes": 8,
+    "vendor_difference": "Stock checks first score-helper return and skips the state read/major0 call when return is zero. Pinned upstream LvpDoMaxDecoder ignores ret and tests s_state unconditionally. Preserve/review this difference rather than compiling upstream wrapper unchanged.",
+    "context_kws_byte_offset": 13
+  },
+  "limits": [
+    "Decoded layout/control identification, not qualified implementation. Do not assume source global declaration order equals stock BSS layout. Full score/strategy behavior and list parameter types remain to recover."
+  ]
+}

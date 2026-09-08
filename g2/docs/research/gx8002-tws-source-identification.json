@@ -1,0 +1,90 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "dependencies": [
+    {
+      "path": "lvp/lvp_mode_tws.c",
+      "git_blob": "4bd9d2962adac54871e6c6eb905174a0ee649300",
+      "sha256": "18e45319c213c185f1652b73f820ba469ed6847fba06ff247244d13df3635574"
+    },
+    {
+      "path": "lvp/lvp_mode_tws.h",
+      "git_blob": "fdd2928ff722bb973ba5c1f86b3fc37ae509cb11",
+      "sha256": "37c4483d9a7e5af5a4e0dd4f7488ae8904e61a9fdf2027372a7a1108a78649cb"
+    },
+    {
+      "path": "lvp/common/lvp_buffer.c",
+      "git_blob": "b3d49834f8e84abfec56a5bfb2d0e86993a05648",
+      "sha256": "a491c43e4494187b269a4bb35e8fbe5c46b6f29c678980c30b3f8f9a0e324978"
+    },
+    {
+      "path": "lvp/common/lvp_buffer_v2/lvp_tws_buffer.c",
+      "git_blob": "f9ce9286db0ed5dbb7096395e2c69c80a098c57c",
+      "sha256": "48570553190bb24c23bed557e8097d6c0e42fd2afda1db5dc6e97b684e84e674"
+    },
+    {
+      "path": "lvp/common/snpu_engine/lvp_kws.h",
+      "git_blob": "d83412e58b0559c2580e15216b8b60fd6b53f170",
+      "sha256": "5795575ae9086d2008d31fa6b9609154ed0e30b1d27607ad36f770cb9950ad6a"
+    },
+    {
+      "path": "include/lvp_buffer.h",
+      "git_blob": "5e0df54b16aceb44c80ffbc1fca037fd2acf1e98",
+      "sha256": "61ff9a1cb8146ad520c6e3bf77bbebf5d04e4842031bbf28d3f60c4112e69859"
+    },
+    {
+      "path": "lvp/vui/kws/max_decoder.c",
+      "git_blob": "2a8f84622b184635227da9cd52b6124cc1dfc4f4",
+      "sha256": "9c2e95460801cdd78ef88622c0bbcd545d69d1bead652a2d69b76a27fb8ac3eb"
+    }
+  ],
+  "source_admitted": false,
+  "init": {
+    "package_offset": 72700,
+    "envelope_bytes": 108,
+    "frame_bytes": 12,
+    "queue": 537061100,
+    "queue_buffer": 537061120,
+    "queue_bytes": 56,
+    "element_bytes": 8,
+    "snpu_callback": 268591936,
+    "audio_callback": 268592092,
+    "failure_message": 270578224,
+    "standby_state": 537061176,
+    "standby_state_value": 2,
+    "countdown": 537061180,
+    "countdown_value": 50
+  },
+  "helper_identification": {
+    "LvpQueueInit": 270561180,
+    "gx_pmu_get_wakeup_source": 268585280,
+    "LvpKwsInit": 270560656,
+    "LvpAudioInInit": 270562236,
+    "printf": 270560292,
+    "LvpAudioInStandbyToStartup": 270562912,
+    "LvpKwsDone": 270560684,
+    "LvpAudioInDone": 270562296,
+    "buffer_initialize": 270560704,
+    "memset": 270571980,
+    "LvpInitMaxKws": 270567748
+  },
+  "configuration_evidence": [
+    "Keyword recognition enabled: SNPU callback and wakeup source passed to LvpKwsInit.",
+    "Standby enabled: writes FVAD state2 and countdown50 after successful init/resume.",
+    "Queue capacity7 of8-byte MODULE_INFO entries.",
+    "MAX decoder identified: LvpInitMaxKws checks g_kws_list.count against MODEL_OUTPUT_LENGTH=2, prints the matching LVP_MAX_DECODE diagnostic on mismatch, then calls KwsStrategyInit.",
+    "Buffer helper starts with three memset calls matching legacy LvpInitBuffer with hardware logfbank; pinned V2 instead logs phase buffers before clearing two objects. This is a lineage inference, not yet full buffer qualification."
+  ],
+  "limits": [
+    "Call identification and configuration evidence only. Returning helpers, source object layouts and TWS tick/audio callback behavior still require recovery and decoded comparison."
+  ],
+  "init_candidate": {
+    "exact_stock_payload_bytes": 108,
+    "source_admitted": false,
+    "report": "gx8002-tws-candidate.json",
+    "remaining": [
+      "Continuous decoded behavior comparison including wakeup/mode boundaries, audio failure, helper clobbers and write order.",
+      "Verify recovered unsigned wakeup declarations against upstream enum compatibility on native target.",
+      "Register reviewed admission and tests, then rebuild macOS firmware package."
+    ]
+  }
+}

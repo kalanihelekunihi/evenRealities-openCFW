@@ -1,0 +1,75 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_flash_protection_256k",
+      "section_name": ".rodata.open_cfw_gx8002_flash_protection_256k",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 40,
+      "compiled_sha256": "7d2f303a1df1a13df5c5a919f54f4ec921abe84a9b703db55ba28472d35b07cf",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_protection_256k",
+          "package_offset": 99728,
+          "bytes": 40,
+          "sha256": "7d2f303a1df1a13df5c5a919f54f4ec921abe84a9b703db55ba28472d35b07cf",
+          "region": "image_a_sram_data"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_flash_protection_512k",
+      "section_name": ".rodata.open_cfw_gx8002_flash_protection_512k",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 56,
+      "compiled_sha256": "0bbbbabc2ae6f74271f7ee0c52a48d5213691a55089d482b1da0041a01391928",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_protection_512k",
+          "package_offset": 99768,
+          "bytes": 56,
+          "sha256": "0bbbbabc2ae6f74271f7ee0c52a48d5213691a55089d482b1da0041a01391928",
+          "region": "image_a_sram_data"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_flash_protection_1024k",
+      "section_name": ".rodata.open_cfw_gx8002_flash_protection_1024k",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 72,
+      "compiled_sha256": "930387170749728e23aee7289ff8308c0e3514ae76859417138adb4811213373",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_protection_1024k",
+          "package_offset": 99824,
+          "bytes": 72,
+          "sha256": "930387170749728e23aee7289ff8308c0e3514ae76859417138adb4811213373",
+          "region": "image_a_sram_data"
+        }
+      ]
+    }
+  ],
+  "table_header_sha256": "481b5c356670c6de4c444d69cdaea4298fb97edacb09706254ba43182bde8596",
+  "source_sha256": "035c8980d2540f0d570692a96e52eb7d5d10297adc64eece0251dac92416f124",
+  "flags": [
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "evidence": [
+    "Source-built protection query/setter establish four status bytes and protected length per entry.",
+    "Initializer at package0x166d8 establishes table pointers/counts5/7/9."
+  ],
+  "limits": [
+    "Policy matches shipped firmware; vendor register semantics and physical protection not independently qualified."
+  ]
+}

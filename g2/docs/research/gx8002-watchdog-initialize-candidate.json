@@ -1,0 +1,41 @@
+{
+  "source_sha256": "8174332b203e9f358ac3eb0ca5292709383cfa4eaf2c9a561fabab6f705ac069",
+  "compile_flags": [
+    "-Os",
+    "-fno-shrink-wrap",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "sections": [
+    {
+      "name": ".text.open_cfw_gx8002_watchdog_interrupt",
+      "bytes": 28,
+      "sha256": "dc6a6fea8c13bc405f4eb21fb15cf648afafbdb0985ebcfe4d9d73f1e6a6e17f",
+      "relocations": 1
+    },
+    {
+      "name": ".rodata.open_cfw_gx8002_watchdog_initialize.str1.1",
+      "bytes": 22,
+      "sha256": "882c1dcd4a416b20677e601f94f471dc4d629cda89ad5fd063d41f627756f46f",
+      "relocations": 0
+    },
+    {
+      "name": ".text.open_cfw_gx8002_watchdog_initialize",
+      "bytes": 132,
+      "sha256": "48676475855c1fbe4ae0c2e61ea00e9bc567edc90b12c0197c0921cab3eeebca",
+      "relocations": 6
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Initializer 132 bytes exceeds stock 128; interrupt now fits 28 bytes.",
+    "Host selector check excludes MMIO; full target behavior remains unqualified."
+  ]
+}

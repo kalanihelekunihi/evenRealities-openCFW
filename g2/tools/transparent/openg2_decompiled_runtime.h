@@ -83,13 +83,16 @@ typedef struct { uint64_t low; uint64_t high; } undefined16;
     static inline result_type name(high_type high, low_type low)             \
     {                                                                        \
         return (result_type)(((result_type)high << (low_bits))               \
-                             | (result_type)(low_type)low);                  \
+                             | ((result_type)(low_type)low                  \
+                                & (((result_type)1 << (low_bits)) - 1)));   \
     }
 
 OPENG2_CONCAT(CONCAT11, uint16_t, uint8_t, uint8_t, 8)
 OPENG2_CONCAT(CONCAT12, uint32_t, uint8_t, uint16_t, 16)
 OPENG2_CONCAT(CONCAT13, uint32_t, uint8_t, uint32_t, 24)
 OPENG2_CONCAT(CONCAT14, uint64_t, uint8_t, uint32_t, 32)
+OPENG2_CONCAT(CONCAT15, uint64_t, uint8_t, uint64_t, 40)
+OPENG2_CONCAT(CONCAT16, uint64_t, uint8_t, uint64_t, 48)
 OPENG2_CONCAT(CONCAT17, uint64_t, uint8_t, uint64_t, 56)
 OPENG2_CONCAT(CONCAT21, uint32_t, uint16_t, uint8_t, 8)
 OPENG2_CONCAT(CONCAT22, uint32_t, uint16_t, uint16_t, 16)
@@ -106,6 +109,26 @@ OPENG2_CONCAT(CONCAT62, uint64_t, uint64_t, uint16_t, 16)
 OPENG2_CONCAT(CONCAT71, uint64_t, uint64_t, uint8_t, 8)
 
 #undef OPENG2_CONCAT
+
+/* P-code overflow predicates operate on bit vectors, not overflowing signed
+ * C expressions.  Unsigned arithmetic preserves the recovered 32-bit wrap
+ * while the sign-bit tests implement INT_SCARRY and INT_SBORROW. */
+static inline bool CARRY4(uint32_t left, uint32_t right)
+{
+    return left + right < left;
+}
+
+static inline bool SCARRY4(uint32_t left, uint32_t right)
+{
+    uint32_t result = left + right;
+    return ((~(left ^ right) & (left ^ result)) >> 31) != 0;
+}
+
+static inline bool SBORROW4(uint32_t left, uint32_t right)
+{
+    uint32_t result = left - right;
+    return (((left ^ right) & (left ^ result)) >> 31) != 0;
+}
 
 /* SUBab(x, offset) takes b bytes out of an a-byte value.  Ghidra only ever
  * emits the low-slice form with a byte offset, so the shift is explicit. */

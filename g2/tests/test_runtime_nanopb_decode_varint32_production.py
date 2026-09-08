@@ -70,7 +70,10 @@ LEGACY_CANDIDATE_TOKENS = (
 
 PRIVATE_PATCH_NAME = "replace_nanopb_decode_varint32_eof"
 PUBLIC_PATCH_NAME = "replace_nanopb_decode_varint32"
-PRIVATE_MANIFEST_NAME = "nanopb_decode_varint32_eof_source_replacement"
+PRIVATE_MANIFEST_NAME = (
+    "nanopb_decode_varint32_eof_source_replacement_"
+    "split_000574d8_000574dc"
+)
 PUBLIC_MANIFEST_NAME = "nanopb_decode_varint32_source_replacement"
 OFFICIAL_PAIR_REGION_NAME = (
     "opaque_application_between_nanopb_istream_from_buffer_and_nanopb_decode_varint"
@@ -1064,7 +1067,7 @@ def validate_atomic_production_topology(
         for region in generated
     ] != [
         (
-            PRIVATE_MANIFEST_NAME, 357_592, PRIVATE_SPAN[0], 246,
+            PRIVATE_MANIFEST_NAME, 357_592, PRIVATE_SPAN[0], 4,
             "generated_source_entry_replacement",
         ),
         (
@@ -1463,9 +1466,10 @@ class NanopbDecodeVarint32ProductionTests(unittest.TestCase):
 
         expected = (
             (
-                PRIVATE_MANIFEST_NAME, 357_592, PRIVATE_SPAN[0], 246,
+                PRIVATE_MANIFEST_NAME, 357_592, PRIVATE_SPAN[0], 4,
                 "generated_source_entry_replacement",
-                "apollo510b/source-entry-nanopb-decode-varint32-eof-0x0048f4b8.bin",
+                "apollo510b/liblc3_service_audio-retained-"
+                "000574d8-000574dc.bin",
             ),
             (
                 PUBLIC_MANIFEST_NAME, 357_838, PUBLIC_SPAN[0], 10,

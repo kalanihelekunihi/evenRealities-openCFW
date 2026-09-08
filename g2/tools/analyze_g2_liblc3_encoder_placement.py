@@ -26,7 +26,7 @@ PROPOSAL = (
 )
 CORE_CONFIG = G2 / "components/apollo_main/core_overlay/overlay.json"
 CORE_ARTIFACT = (
-    G2 / "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin"
+    G2 / "components/apollo_main/core_overlay/build/core-stage-component.bin"
 )
 FLASH_PLAN = G2 / "build/flash-plan.json"
 OPEN_CFW_TOOL = G2 / "tools/open_cfw.py"
@@ -126,11 +126,12 @@ def _core_receipt(proposal: dict[str, Any]) -> tuple[dict[str, Any], dict[str, A
             core["preamble_bytes"] == evidence["preamble_bytes"],
             "core address model drift")
     current = evidence["current_component"]
-    require(core["expected"]["component_size"] == current["size"] and
-            core["expected"]["component_sha256"] == current["sha256"] and
-            core["expected"]["overlay_size"] ==
+    stage_expected = core["core_stage_expected"]
+    require(stage_expected["component_size"] == current["size"] and
+            stage_expected["component_sha256"] == current["sha256"] and
+            stage_expected["overlay_size"] ==
             evidence["current_overlay"]["size"] and
-            core["expected"]["overlay_sha256"] ==
+            stage_expected["overlay_sha256"] ==
             evidence["current_overlay"]["sha256"],
             "current Apple core receipt drift")
     computed_end = core["run_base"] + current["size"] - core["preamble_bytes"]
@@ -194,8 +195,12 @@ def _core_receipt(proposal: dict[str, Any]) -> tuple[dict[str, Any], dict[str, A
             target = decode_thumb_bl(patch, encoded)
         except BuildError as error:
             raise PlacementError("current LTPF patch is not a Thumb BL") from error
-        require(target == ltpf["patched_target"],
-                "current LTPF route target drift")
+        # The authenticated capacity artifact is deliberately the core stage,
+        # before bounded post-link providers are applied.  Its LTPF call must
+        # therefore still target the stock implementation; the provider route
+        # is authenticated independently from the core configuration above.
+        require(target == 0x00438FB8,
+                "core-stage stock LTPF target drift")
         artifact_report.update({
             "size": len(raw),
             "sha256": sha256_bytes(raw),

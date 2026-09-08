@@ -12,6 +12,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tools"))
+from apollo_artifact_consistency import validate_composed_source_replacement
 IMAGE = ROOT / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
 BASE = 0x0043_7FE0
 IMAGE_SIZE = 3_523_396
@@ -413,22 +415,13 @@ def analyze(image: Path = IMAGE) -> dict[str, object]:
     region_by_name = {item["name"]: item for item in main["regions"]}
     for row in rows:
         order = int(row["recovery_order"])
-        region = region_by_name.get(
-            f"transport_protocol_{order:02d}_source_replacement"
+        start = int(row["stock_start"], 0)
+        validate_composed_source_replacement(
+            main["regions"], start, start + int(row["stock_bytes"]),
+            f"transport_protocol_{order:02d}_source_replacement",
+            AuditError,
+            f"production transport manifest replacement for {row['function']}",
         )
-        if region is None or (
-            region.get("target_address"),
-            region.get("size"),
-            region.get("address_status"),
-        ) != (
-            int(row["stock_start"], 0),
-            int(row["stock_bytes"]),
-            "generated_source_entry_replacement",
-        ):
-            raise AuditError(
-                f"production transport manifest replacement changed: "
-                f"{row['function']}"
-            )
     source_regions = [
         item for item in main["regions"]
         if item["name"].startswith("transport_protocol_")

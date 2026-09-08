@@ -850,7 +850,7 @@ class RuntimeCmsisMessageQueueNewTests(unittest.TestCase):
             },
         )
         self.assertEqual(len(report["overlay"]["functions"]), 2_563)
-        self.assertEqual(len(report["overlay"]["patched_sites"]), 2_448)
+        self.assertEqual(len(report["overlay"]["patched_sites"]), 2_447)
 
     def test_host_layout_and_null_attribute_dynamic_path(self) -> None:
         self.assertEqual(self.host_compile.stderr, "")

@@ -71,8 +71,8 @@ ROUTES = {
     },
     "linux-clang": {
         "component": ROOT / "build/canonical-provider/linux-clang/apollo_main-final81/ota_s200_firmware_ota.bin",
-        "report": ROOT / "build/canonical-observation-g2-final97/linux-b/build-report.json",
-        "overlay": ROOT / "build/canonical-observation-g2-final97/linux-b/apollo_core_overlay.bin",
+        "report": ROOT / "build/canonical-observation-g2-final99/linux-b/build-report.json",
+        "overlay": ROOT / "build/canonical-observation-g2-final99/linux-b/apollo_core_overlay.bin",
         "component_sha256": "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
         "overlay_sha256": "13a12b7fc7ec3af866d4ebe9229105ce923d6842ec6e8c4b0e01564582ed8ab1",
         "overlay_size": 172828,

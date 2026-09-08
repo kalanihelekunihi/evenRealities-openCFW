@@ -1,0 +1,106 @@
+{
+  "functions": [
+    {
+      "symbol": "LvpAppEventTick",
+      "compiled_bytes": 80,
+      "compiled_sha256": "2f22190e80fcb026d413a121506eff7e9d31f5293eaa7b16cb2f9623d5e809ba",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpAppEventTick",
+          "package_offset": 74452,
+          "bytes": 80,
+          "sha256": "84e1d267b7ced9c6614fdfd8c965e440dc9f457c1b8541f56d0c5a060529f123",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_watchdog_ping",
+      "compiled_bytes": 10,
+      "compiled_sha256": "75a3350b641ef0ca252160dec01f5d2246c3ba7fc7f9380545d7fb3dd9dd1a7e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_watchdog_ping",
+          "package_offset": 64812,
+          "bytes": 10,
+          "sha256": "75a3350b641ef0ca252160dec01f5d2246c3ba7fc7f9380545d7fb3dd9dd1a7e",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "placement": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_files": [
+        {
+          "path": "lvp/app_core/lvp_app.h",
+          "git_blob": "4b7e105ff09df684966817f1045f28dd030b5f2d",
+          "sha256": "5f3302a3482d2539d515d068e1c1364508f7eca6711d23ab063c27dc18556450"
+        },
+        {
+          "path": "lvp/app_core/lvp_app_core.h",
+          "git_blob": "e7521399bfa5d16c4ebacba2699e2f0286fc09cd",
+          "sha256": "7267c8f17cf22c3fe8904ac6babf611c3f1ea750c254a782c982b4e9fbb03c25"
+        },
+        {
+          "path": "lvp/common/lvp_queue.h",
+          "git_blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+          "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+        }
+      ],
+      "flags": [
+        "-O2",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-shrink-wrap"
+      ],
+      "functions": [
+        {
+          "symbol": "LvpAppEventTick",
+          "source_sha256": "41bf0d36fa75605b50f9cf45b0cd30d3026567c14a32a0bc7fec23cbe206ba3a",
+          "package_offset": 74452,
+          "stock_envelope_bytes": 80,
+          "compiled_bytes": 80,
+          "compiled_sha256": "2f22190e80fcb026d413a121506eff7e9d31f5293eaa7b16cb2f9623d5e809ba",
+          "stock_sha256": "84e1d267b7ced9c6614fdfd8c965e440dc9f457c1b8541f56d0c5a060529f123",
+          "byte_exact": false
+        },
+        {
+          "symbol": "open_cfw_gx8002_watchdog_ping",
+          "source_sha256": "7a730006fa24f7f79280d7f7cd251b77a51f96e3a68832aa69b152875b6bd60e",
+          "package_offset": 64812,
+          "stock_envelope_bytes": 10,
+          "compiled_bytes": 10,
+          "compiled_sha256": "75a3350b641ef0ca252160dec01f5d2246c3ba7fc7f9380545d7fb3dd9dd1a7e",
+          "stock_sha256": "75a3350b641ef0ca252160dec01f5d2246c3ba7fc7f9380545d7fb3dd9dd1a7e",
+          "byte_exact": true
+        }
+      ],
+      "source_admitted": false,
+      "limits": [
+        "Event tick target path comparison pending; existing app and queue state retained.",
+        "Hardware and timing unqualified."
+      ]
+    },
+    "cases": 48,
+    "source_admitted": false,
+    "limits": [
+      "Modeled queue, callbacks and services; no concurrent mutation outside calls.",
+      "Hardware timing and firmware integration remain pending."
+    ]
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Experimental same-entry hybrid; modeled dependency and callback comparison.",
+    "Existing application/queue state and asynchronous hardware timing remain unqualified."
+  ]
+}

@@ -5,6 +5,9 @@
 //
 // Usage:
 //   -postScript ExportAllFunctionDecomp.java <output-dir> [shard-index] [shard-count]
+//       [respect-read-only]
+// The final opt-in flag propagates constants from explicitly read-only memory;
+// existing callers retain their previous decompiler options.
 //
 // Emits, into <output-dir>:
 //   functions-<shard>.jsonl  one record per function, sorted by entry point
@@ -17,6 +20,7 @@
 
 import ghidra.app.decompiler.DecompInterface;
 import ghidra.app.decompiler.DecompileResults;
+import ghidra.app.decompiler.DecompileOptions;
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSetView;
@@ -70,6 +74,14 @@ public class ExportAllFunctionDecomp extends GhidraScript {
         }
 
         DecompInterface decompiler = new DecompInterface();
+        if (arguments.length > 3) {
+            if (!arguments[3].equals("respect-read-only")) {
+                throw new IllegalArgumentException("unknown export option");
+            }
+            DecompileOptions options = new DecompileOptions();
+            options.setRespectReadOnly(true);
+            decompiler.setOptions(options);
+        }
         decompiler.toggleCCode(true);
         decompiler.toggleSyntaxTree(true);
         decompiler.setSimplificationStyle("decompile");

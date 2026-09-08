@@ -1,0 +1,41 @@
+{
+  "build": {
+    "source_sha256": "94fa1df733de5881808e789b59a1df528433c7cf2898ee8bf8dec5ec7dee20e8",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "compiled_bytes": 66,
+    "compiled_sha256": "96b52487b44bc43ae907f6c2cb534ddb28352540c299ad7cc7d7c7a9bc0fa8f8",
+    "package_offset": 90880,
+    "stock_envelope_bytes": 68,
+    "stock_sha256": "3ad3bf5f20af5ace8818df4ec378fc6b5e9bac922ea6855000c280bbb83f461c",
+    "fits": true,
+    "bindings": {
+      "open_cfw_gx8002_flash_command_read": 268580484,
+      "open_cfw_gx8002_flash_command_write": 268580572,
+      "open_cfw_gx8002_flash_wait_ready": 268580700,
+      "open_cfw_gx8002_flash_write_enable": 268580684
+    },
+    "source_admitted": false,
+    "limits": [
+      "Decoded path, argument, MMIO and state-write comparison remains required.",
+      "Command transport and control helpers are separately qualified source dependencies.",
+      "Polling has no timeout; physical flash effects remain unqualified."
+    ]
+  },
+  "cases": 1024,
+  "source_admitted": false,
+  "limits": [
+    "Source-qualified read transport initializes one byte on completion; polling has no timeout.",
+    "Transport/control calls are modeled with ABI clobbers; hardware effects are not qualified."
+  ]
+}

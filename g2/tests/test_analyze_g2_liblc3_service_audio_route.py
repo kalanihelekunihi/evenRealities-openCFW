@@ -65,10 +65,10 @@ class Liblc3ServiceAudioRouteTests(unittest.TestCase):
     def test_capacity_and_routing_remain_fail_closed(self) -> None:
         self.assertEqual(
             self.report["profiles"]["apple-clang"]["capacity"]["shortfall"],
-            34084)
+            52244)
         self.assertEqual(
             self.report["profiles"]["linux-clang"]["capacity"]["shortfall"],
-            35204)
+            53364)
         routing = self.report["routing"]
         self.assertFalse(routing["production_patch_bytes_emitted"])
         self.assertFalse(routing["production_placement"])

@@ -1,0 +1,144 @@
+{
+  "upstream_build": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_dependencies": [
+      {
+        "path": "arch/soc/grus/include/clk_priv.h",
+        "git_blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+        "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+      },
+      {
+        "path": "arch/soc/grus/include/base_addr.h",
+        "git_blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+        "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+      },
+      {
+        "path": "include/driver/gx_clock.h",
+        "git_blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+        "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+      },
+      {
+        "path": "include/driver/gx_clock/gx_clock_v2.h",
+        "git_blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+        "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+      },
+      {
+        "path": "LICENSE",
+        "git_blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+        "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+      }
+    ],
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-tree-loop-optimize",
+      "-fno-delete-null-pointer-checks"
+    ],
+    "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+    "configuration": "#define CONFIG_ARCH_GRUS 1\n",
+    "sections": [
+      {
+        "section": ".text.__module_get_info",
+        "bytes": 160,
+        "sha256": "6664da47e0446404acdc5363a024dade757bd809f6728235bb7799543e84578f",
+        "relocations": 1
+      },
+      {
+        "section": ".text.open_cfw_gx8002_clock_lookup",
+        "bytes": 8,
+        "sha256": "1562e7a0168550db54af150d4fd9df2b744ac384cafa59377ab129f54e2f5d80",
+        "relocations": 1
+      },
+      {
+        "section": ".text.open_cfw_gx8002_platform_gate",
+        "bytes": 288,
+        "sha256": "367035be237c0f55167689494547c086158cf9499136c794676700d037e90d0e",
+        "relocations": 3
+      },
+      {
+        "section": ".rodata.open_cfw_gx8002_platform_gate",
+        "bytes": 76,
+        "sha256": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+        "relocations": 19
+      },
+      {
+        "section": ".data.gx_clock_param_table",
+        "bytes": 416,
+        "sha256": "d12a5ad69719038f933a1c9d1c98ed1093de9e7f12d0d709ae8c6ec324c18852",
+        "relocations": 20
+      },
+      {
+        "section": ".data.gx_clock_dto_table",
+        "bytes": 3,
+        "sha256": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+        "relocations": 0
+      },
+      {
+        "section": ".data.gx_clock_div_table",
+        "bytes": 68,
+        "sha256": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872",
+        "relocations": 0
+      }
+    ],
+    "source_admitted": false,
+    "firmware_bytes_emitted": 0,
+    "limits": [
+      "Unlinked candidate; stock gate envelope is 256 bytes at package 0x17094.",
+      "Module lookup, tables, jump tables and MMIO behavior require qualification.",
+      "No hardware qualification or complete source-only claim."
+    ]
+  },
+  "tables": [
+    {
+      "symbol": "gx_clock_param_table",
+      "section_name": ".data.gx_clock_param_table",
+      "package_offset": 100084,
+      "runtime_address": 537028320,
+      "bytes": 416,
+      "sha256": "64a888d435653e525749e8de221f6b171d5c0f4e7d7270f146cfa42521856296",
+      "byte_exact": true
+    },
+    {
+      "symbol": "gx_clock_dto_table",
+      "section_name": ".data.gx_clock_dto_table",
+      "package_offset": 100500,
+      "runtime_address": 537028736,
+      "bytes": 3,
+      "sha256": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+      "byte_exact": true
+    },
+    {
+      "symbol": "gx_clock_div_table",
+      "section_name": ".data.gx_clock_div_table",
+      "package_offset": 100504,
+      "runtime_address": 537028740,
+      "bytes": 68,
+      "sha256": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872",
+      "byte_exact": true
+    }
+  ],
+  "source_table_bytes": 487,
+  "module_lookup": {
+    "package_offset": 92760,
+    "runtime_address": 268585540,
+    "compiled_bytes": 160,
+    "compiled_sha256": "002a00eee4ab7761a5a8fce8b26c97c18509b72615dc8d558ac107189ecc6b8f",
+    "stock_envelope_bytes": 164,
+    "stock_sha256": "c885a50be5de150cc7dd0c1c90182a285d028b5f379f6ab15cad6da07f24b055",
+    "behavior_qualified": false
+  },
+  "source_admitted": false,
+  "limits": [
+    "Lookup helper fits original entry; gate code remains at a temporary analysis address.",
+    "One alignment byte between DTO and divider table remains outside table ownership.",
+    "Clock code qualification and firmware integration remain pending."
+  ]
+}

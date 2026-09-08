@@ -407,7 +407,7 @@ class NanopbIstreamFromBufferProductionTests(unittest.TestCase):
                 len(config["patch_sites"]),
                 len(config["relocated_leaves"]),
             ),
-            (2443, 2331, 1874),
+            (2568, 2452, 1999),
         )
         self.assertEqual(config["functions"].count(FUNCTION), 1)
         leaves = [
@@ -528,7 +528,8 @@ class NanopbIstreamFromBufferProductionTests(unittest.TestCase):
             provider["profiles"]["linux-clang"],
             {
                 "path": (
-                    "build/canonical-provider/linux-clang/apollo_main/"
+                    "build/canonical-provider/linux-clang/"
+                    "apollo_main-final81/"
                     "ota_s200_firmware_ota.bin"
                 ),
                 "size": LINUX_AGGREGATE["component"][0],

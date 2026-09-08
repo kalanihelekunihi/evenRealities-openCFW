@@ -1,0 +1,90 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_device_list_init",
+      "section_name": ".text",
+      "compiled_bytes": 20,
+      "compiled_sha256": "4e7e5e95824bfc057f5be66b2f41e88cbc8c32e5d74c12e7d8ec2d03816b791b",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_device_list_init",
+          "package_offset": 63092,
+          "bytes": 20,
+          "sha256": "4e7e5e95824bfc057f5be66b2f41e88cbc8c32e5d74c12e7d8ec2d03816b791b",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "oracle": {
+      "path": "drivers_lib/spi/device.o",
+      "blob": "d6709f8990a19d8e08ebe21ec9059d7f580fa15b",
+      "sha256": "b882f90d25260a0981f480f547b9212888558febffab0a0b9e1d97c01d389fec",
+      "role": "identity_only"
+    },
+    "bindings": {
+      "open_cfw_gx8002_device_heads": 537033424
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-jump-tables"
+    ],
+    "header": {
+      "path": "include/driver/device.h",
+      "blob": "2ad120d2714f44325eeeb60afc60242687316e32",
+      "sha256": "7e4e1cac61f5e542b6cdb058e4837d04fea476f3492dc012ae37966facc8e902"
+    },
+    "source_sha256": "3de9b82fe6d377e4f8fc7d944e4e4982e43ce4dc0fb3340f7601c9a1597091af",
+    "symbol": "open_cfw_gx8002_device_list_init",
+    "section_name": ".text",
+    "package_offset": 63092,
+    "compiled_bytes": 20,
+    "compiled_sha256": "4e7e5e95824bfc057f5be66b2f41e88cbc8c32e5d74c12e7d8ec2d03816b791b",
+    "stock_envelope_bytes": 20,
+    "stock_sha256": "4e7e5e95824bfc057f5be66b2f41e88cbc8c32e5d74c12e7d8ec2d03816b791b",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+    ]
+  },
+  "semantics": {
+    "ordered_writes": [
+      [
+        537033424,
+        537033424
+      ],
+      [
+        537033428,
+        537033424
+      ],
+      [
+        537033432,
+        537033432
+      ],
+      [
+        537033436,
+        537033432
+      ]
+    ],
+    "stack_bytes": 0,
+    "return": "void",
+    "callee_saved": "unchanged"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Four ordered pointer stores and leaf ABI, byte-identical stock. Registry operations and concurrency remain separate."
+  ]
+}

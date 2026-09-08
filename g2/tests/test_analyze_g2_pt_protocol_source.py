@@ -28,10 +28,10 @@ class Tests(unittest.TestCase):
         self.assertEqual(self.r["software"]["target_bss_bytes"], 0)
         self.assertEqual(self.r["software"]["target_loadable_bytes"], 22643)
         self.assertEqual(
-            self.r["software"]["production_text_placement_free_bytes"], 72740)
+            self.r["software"]["production_text_placement_free_bytes"], 96)
         self.assertEqual(
             self.r["software"]["production_text_placement_shortfall_bytes"],
-            0,
+            22547,
         )
         self.assertEqual(
             self.r["software"]["production_ram_binding_remaining_bytes"], 0)
@@ -114,7 +114,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(
             software["board_top_level_retained_provider_bindings_remaining"], 4)
         self.assertEqual(
-            software["board_retained_provider_bindings_remaining"], 13)
+            software["board_retained_provider_bindings_remaining"], 12)
         self.assertEqual(
             software["board_retained_provider_candidate_stock_body_bytes"],
             3402,
@@ -134,7 +134,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(
             sum(item["category"] == "source_overlay_callable"
                 for item in callable_census),
-            29,
+            30,
         )
         self.assertEqual(
             sum(item["category"] == "source_local_callable"
@@ -144,7 +144,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(
             sum(item["category"] == "retained_callable"
                 for item in callable_census),
-            13,
+            12,
         )
         self.assertTrue(all(
             item["runtime_address"] == (item["thumb_pointer"] & ~1)
@@ -160,28 +160,30 @@ class Tests(unittest.TestCase):
             software["board_second_order_callable_unique_addresses"], 42)
         self.assertEqual(
             software["board_second_order_source_overlay_callable_bindings"],
-            29,
+            30,
         )
         self.assertEqual(
             software[
                 "board_second_order_source_overlay_callable_unique_addresses"
             ],
-            29,
+            30,
         )
         self.assertEqual(
             software["board_second_order_source_local_callable_bindings"], 39)
         self.assertEqual(
-            software["board_second_order_source_callable_bindings"], 68)
+            software["board_second_order_source_callable_bindings"], 69)
         self.assertEqual(
-            software["board_second_order_retained_callable_bindings"], 13)
+            software["board_second_order_retained_callable_bindings"], 12)
         self.assertEqual(
             software["board_second_order_retained_callable_unique_addresses"],
-            13,
+            12,
         )
         trace = next(item for item in callable_census
                      if item["macro"] == "OPEN_CFW_PT_AUDIO_TRACE_LOG")
-        self.assertEqual(trace["category"], "retained_callable")
+        self.assertEqual(trace["category"], "source_overlay_callable")
         self.assertEqual(trace["runtime_address"], 0x0043CE9E)
+        self.assertEqual(
+            trace["target_function"], "open_cfw_compress_log_output")
         self.assertEqual(trace["abi"],
                          "void (*)(uint32_t, const char *, ...)")
         lens_transport = next(

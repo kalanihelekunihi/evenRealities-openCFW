@@ -11,7 +11,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from apollo_artifact_consistency import validate_apollo_main_artifacts
+from apollo_artifact_consistency import (
+    validate_apollo_main_artifacts, validate_composed_source_replacement,
+)
 sys.path.insert(0, str(ROOT / "tools"))
 import analyze_g2_compress_log_core as q
 import analyze_g2_flashdb as fdb
@@ -302,8 +304,33 @@ def analyze(image: Path = IMAGE) -> dict:
 
     manifest = json.loads(MANIFEST.read_text())
     main = manifest["component_overrides"]["apollo_main"]
+    replacement_prefixes = (
+        "service_kvdb_01_migrations_replacement",
+        "service_kvdb_02_read_replacement",
+        "service_kvdb_03_write_replacement",
+        "service_kvdb_04_defaults-get_replacement",
+        "service_kvdb_05_read-all_replacement",
+        "service_kvdb_06_init_replacement",
+        "service_kvdb_07_invalidate-magic_replacement",
+    )
+    for (start, end), prefix, name in zip(F, replacement_prefixes, names):
+        validate_composed_source_replacement(
+            main["regions"], start, end, prefix, c.AuditError,
+            f"service_kvdb manifest replacement for {name}",
+        )
     kv_regions = [item for item in main["regions"] if item["name"].startswith("service_kvdb_")]
-    if len(kv_regions) != 19:
+    ownership = {
+        status: sum(item["size"] for item in kv_regions
+                    if item.get("address_status") == status)
+        for status in ("generated_source_entry_replacement", "official_blob",
+                       "source_compiled", "generated_alignment")
+    }
+    if len(kv_regions) != 20 or ownership != {
+        "generated_source_entry_replacement": 518,
+        "official_blob": 156,
+        "source_compiled": 342,
+        "generated_alignment": 8,
+    }:
         raise c.AuditError("service_kvdb manifest ownership changed")
     sysenv_partition = next(item for item in flashdb["partitions"] if item["name"] == "kvdb")
     return {

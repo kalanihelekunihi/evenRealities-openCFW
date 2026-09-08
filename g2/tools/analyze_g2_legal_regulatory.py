@@ -16,7 +16,7 @@ SOURCE_PIN=(2067,"8916de06c518b2b54cb16bcba71328e43697580f6db8b20e26f2a923bdc8b7
 PROVIDER_TARGETS=(0x005BF332,0x0058C238,0x0044EA04)
 ROUTES={
  "apple-clang":{"path":ROOT/"components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin","report":ROOT/"components/apollo_main/core_overlay/build/build-report.json","component":"7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6","target":0x004B9738,"text":"ba4098df37d9a571693dd030f8d1e25b1e54a7c37977b4bafd33df56d485837e"},
- "linux-clang":{"path":ROOT/"build/canonical-provider/linux-clang/apollo_main-final81/ota_s200_firmware_ota.bin","report":ROOT/"build/canonical-observation-g2-final97/linux-b/build-report.json","component":"dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6","target":0x007BC310,"text":"274671c2f9cf2f6f5c3a756935b252d0fa0e2caa407ccdf5c704961c98513c6e"},
+ "linux-clang":{"path":ROOT/"build/canonical-provider/linux-clang/apollo_main-final81/ota_s200_firmware_ota.bin","report":ROOT/"build/canonical-observation-g2-final99/linux-b/build-report.json","component":"dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6","target":0x007BC310,"text":"274671c2f9cf2f6f5c3a756935b252d0fa0e2caa407ccdf5c704961c98513c6e"},
 }
 def sh(x):return hashlib.sha256(x).hexdigest()
 def validate_production():

@@ -1,0 +1,68 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_snpu_suspend",
+      "section_name": ".text",
+      "compiled_bytes": 72,
+      "compiled_sha256": "2f55f71f44695acaa958650e2d2a706011222d636ad8507d05b32d2e1baf7077",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_snpu_suspend",
+          "package_offset": 61468,
+          "bytes": 72,
+          "sha256": "eb2472f2320922612c0dff2853011040197ddd4629fcc8862c7a160740a815d1",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "oracle": {
+      "path": "drivers_lib/snpu/grus/snpu.o",
+      "blob": "2565938852946027c726e66d0d8ee6e0bd0cc0d7",
+      "sha256": "6ce5cb2c361f4bae59fc87dd86631bd6c888dffbe28461b0db2e27f8c6e22f03",
+      "role": "identity_only"
+    },
+    "bindings": {
+      "open_cfw_gx8002_snpu_state": 537031504,
+      "open_cfw_gx8002_npu_is_enabled": 270554636,
+      "open_cfw_gx8002_npu_disable": 270554624,
+      "open_cfw_gx8002_npu_all_idle": 270554852,
+      "gx_clock_set_module_snpu_enable": 268587500
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "source_sha256": "77598f7e30e383e504915edeb613d164141ab164d88c0b9a7c1be27f614c2c77",
+    "symbol": "open_cfw_gx8002_snpu_suspend",
+    "section_name": ".text",
+    "package_offset": 61468,
+    "compiled_bytes": 72,
+    "compiled_sha256": "2f55f71f44695acaa958650e2d2a706011222d636ad8507d05b32d2e1baf7077",
+    "stock_envelope_bytes": 72,
+    "stock_sha256": "eb2472f2320922612c0dff2853011040197ddd4629fcc8862c7a160740a815d1",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Candidate only. Need live pointer reloads, state reads/writes, helper ordering, wait completion/noncompletion and ABI checks. State layout has explicit unmodeled fields; no state ownership claimed."
+    ]
+  },
+  "cases": 3024,
+  "noncompletion_prefix_cases": 54,
+  "frame_bytes": 8,
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Helper boundary model uses synthetic nonnull register pointers after the initial null check. Helpers may change pointer/state; their implementation and physical timing remain separate. Never-ready loop checked through32 polling prefixes. Full SNPU state layout remains unmodeled and is not source-owned by this function."
+  ]
+}

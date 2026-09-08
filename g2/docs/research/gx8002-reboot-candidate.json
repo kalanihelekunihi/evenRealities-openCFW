@@ -1,0 +1,27 @@
+{
+  "source_sha256": "c536ff899bfa948fb2a473d641441d10a01005ebc152f63dcb0f26c164b05686",
+  "functions": [
+    {
+      "symbol": "reboot",
+      "compiled_bytes": 36,
+      "sha256": "183481196057553ffe50cf0e3ba7690da528d2afe46c014acfe2203ce10352f1",
+      "stock_offset": 64836,
+      "stock_bytes": 36,
+      "byte_exact": true
+    },
+    {
+      "symbol": "watchdog_callback",
+      "compiled_bytes": 6,
+      "sha256": "681d9a80d95dc259f5c9f5ccf26f7ba04e800e5553533ade73e76b8d8c11db21",
+      "stock_offset": 74276,
+      "stock_bytes": 8,
+      "byte_exact": false
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Platform gate at runtime 0x10025080 remains unrecovered.",
+    "Watchdog callback has no return after nonreturning reboot; target qualification pending.",
+    "No hardware reset performed."
+  ]
+}

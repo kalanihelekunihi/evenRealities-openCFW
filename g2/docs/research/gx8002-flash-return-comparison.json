@@ -1,0 +1,79 @@
+{
+  "verification_scope": "complete initializer including setup, selection and return",
+  "cases": 198,
+  "full": {
+    "selection": {
+      "build": {
+        "interface_header_sha256": "e6deaf33be66df20b1c0544093a35475522fd82e21a1e03728c7b0d468bbdbe0",
+        "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+        "source_sha256": "d88ce7ae954cce549847c60282dee5ca41d2c1e863882b7503d1f509e9516b70",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "compiled_bytes": 208,
+        "compiled_sha256": "fa446ed18d11da34ffae13a48f87ce089af84de83098ac81b8db2274433fabc7",
+        "package_offset": 91652,
+        "stock_envelope_bytes": 212,
+        "stock_sha256": "462b2ad1b65f026f6f8856267ee22d9b83c4080c8c3573e554c3ba5fdbd39a4a",
+        "fits": true,
+        "configuration_constant": {
+          "section": ".rodata.flash_configuration",
+          "runtime_address": 268584640,
+          "package_offset": 91860,
+          "bytes": 4,
+          "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "stock_sha256": "7252d7e8d0a2588064aca36b76f30dab1f4b9e0a42bfcc3660c73829562d8209"
+        },
+        "bindings": {
+          "open_cfw_gx8002_platform_gate": 268587136,
+          "open_cfw_gx8002_flash_state": 537027812,
+          "open_cfw_gx8002_flash_interface": 537027844,
+          "open_cfw_gx8002_platform_config": 268590452,
+          "open_cfw_gx8002_spi_wait_idle": 268580428,
+          "open_cfw_gx8002_flash_wait_ready": 268580700,
+          "open_cfw_gx8002_flash_quad_enable": 268583604,
+          "open_cfw_gx8002_flash_quad_enable_pair": 268583728,
+          "open_cfw_gx8002_flash_device_config": 268583660,
+          "open_cfw_gx8002_flash_xip_config": 268583788,
+          "open_cfw_gx8002_flash_discover": 268583312,
+          "open_cfw_gx8002_flash_word_program": 268580744,
+          "open_cfw_gx8002_flash_word_read": 268582060
+        },
+        "source_admitted": false,
+        "limits": [
+          "Decoded path, argument, MMIO and state-write comparison remains required.",
+          "All service/callback functions have separate source reconstructions; flash state/interface ownership remains pending.",
+          "Complete startup composition, stack capacity and physical flash behavior remain unqualified."
+        ]
+      },
+      "cases": 819,
+      "source_admitted": false,
+      "limits": [
+        "Only successful-discovery device selection is modeled; setup, failure return, callbacks and XIP arguments remain separate.",
+        "Models changed state pointers/IDs between reads and ABI-clobbering returning services; no hardware behavior claim.",
+        "Candidate r5=1 is supplied from the preceding decoded setup and needs full-routine verification."
+      ]
+    },
+    "cases": 198,
+    "source_admitted": false,
+    "stock_frame_bytes": 32,
+    "candidate_frame_bytes": 32,
+    "limits": [
+      "Full decoded function with modeled returning services; end-to-end composition, state/interface ownership and physical behavior remain unresolved.",
+      "Source-defined read-only configuration removes the extra stack word; physical stack capacity and interrupt interaction remain unqualified."
+    ]
+  },
+  "source_admitted": false,
+  "limits": [
+    "Use verify_gx8002_flash_initialize for admission; no physical qualification."
+  ]
+}

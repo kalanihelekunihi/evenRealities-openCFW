@@ -22,7 +22,7 @@ EXPECTED_COMMUNITY_SOURCE_ADMISSION = {
     ROOT / "manifests/g2-2.2.6.10-core-source.json":
         "ae7c402fef4c72f3fbeae80cbfc71eb17e3907044a339b65494e8732392a150d",
     ROOT / "components/apollo_main/core_overlay/build_component.py":
-        "164a9fd3aeb22daa16085de2725157af4b157e8f64977a50db89986aaf97325f",
+        "ff1b3d78f4f2d071bb653374f8ce557a5a6d0f0a7a23b8525743a21b4068d066",
     ROOT / "components/apollo_main/liblc3_encoder/build_service_audio_atomic_component.py":
         "597b65b099dc3df5ea24d037be2aaeebfd93685d6f6cb0285fa461e8a7196da1",
     ROOT / "components/shared/freetype/README.md":

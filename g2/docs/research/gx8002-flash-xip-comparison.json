@@ -1,0 +1,44 @@
+{
+  "build": {
+    "source_sha256": "b3a5dcfd19350d4ceeba72378c5440fd19704f37826b12bfc9d3b6ca58f7537e",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_flash_xip_config",
+        "section": ".text.flash_xip_config",
+        "compiled_bytes": 204,
+        "compiled_sha256": "473889904dae4bd3c4ba8cfca7d8f2c17b882d11872258a70fda2be9e6d7fc56",
+        "package_offset": 91008,
+        "stock_envelope_bytes": 208,
+        "stock_sha256": "2f70590857e0d55bcdfbe20d407e9a950ebc414bd42cfa6749f0b159b34006f2",
+        "byte_exact": false
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Decoded XIP argument and ordered MMIO qualification required.",
+      "No physical XIP hardware qualification."
+    ]
+  },
+  "cases": 28328,
+  "successful_configurations": 3602,
+  "rejected_configurations": 24726,
+  "limits": [
+    "Ordered MMIO and nine-argument ABI comparison; physical XIP hardware remains unqualified."
+  ],
+  "coverage": [
+    "Command length boundaries; all line-width triples 0..5; address alignment and mode branches.",
+    "All arguments individually cover each single bit and unsigned boundaries; 2048 seeded valid random configurations."
+  ]
+}

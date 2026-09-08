@@ -7,23 +7,23 @@
   "evidence": {
     "core_config": {
       "path": "components/apollo_main/core_overlay/overlay.json",
-      "size": 5853221,
-      "sha256": "733bc34d7545775ab067eb03c38678889694bc092fc840c64a1ef605b0081212"
+      "size": 6404019,
+      "sha256": "2329b48855ecf130bbb8ea4e6f97711dc9ac9fcba1aed9c647dd896e6c488722"
     },
     "core_report": {
       "path": "components/apollo_main/core_overlay/build/build-report.json",
-      "size": 17630136,
-      "sha256": "3cddcabf68eaf0e731499c18fe71b583e4775663db8f2438494f8fa7651971e3"
+      "size": 18733866,
+      "sha256": "d995a87972f4c8910e8af84ccfcbb8f73d8837f507cf9e621a6fd9d51eab28a2"
     },
     "component_artifact": {
-      "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
-      "size": 3885668,
-      "sha256": "898d5efb1430dc0c3e0b8b7e26823a653952114ffeab0d3ae6e89d8925301ef5"
+      "path": "components/apollo_main/core_overlay/build/core-stage-component.bin",
+      "size": 3903840,
+      "sha256": "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752"
     },
     "capacity_proposal": {
       "path": "components/apollo_main/liblc3_encoder/capacity_rebalancing_proposal.json",
-      "size": 8697,
-      "sha256": "b8c7576a191340566b202405c77651a569146386cae2f879b935c360ab5de7b4"
+      "size": 8752,
+      "sha256": "57129afe81d4079e72de162700618f7b1e2ee64e62a1f8e7d0cfaeb239a6c052"
     },
     "ghidra_functions": {
       "path": "research/corpus/apollo-main/ghidra/decomp/functions.jsonl",
@@ -56,11 +56,11 @@
   "address_model": {
     "run_base": 4423680,
     "preamble_bytes": 32,
-    "current_component_end_exclusive": 8309316,
+    "current_component_end_exclusive": 8327488,
     "protected_update_start": 8380416,
-    "stable_repack_delta": -27168,
-    "conditional_repack_savings": 30676,
-    "conditional_encoder_margin": 172
+    "stable_repack_delta": -41152,
+    "conditional_repack_savings": 48780,
+    "conditional_encoder_margin": 92
   },
   "toolchain": {
     "profile": "apple-clang",
@@ -75,7 +75,7 @@
     {
       "function": "open_cfw_runtime_strtod_bounded",
       "current_address": 8277952,
-      "proposed_address": 8250784,
+      "proposed_address": 8236800,
       "size": 2696,
       "alignment": 8,
       "padding_before": 6,
@@ -83,14 +83,14 @@
       "unrelocated_sha256": "2fa0691cc127bc2290f914c1b222e08285a2688acb4f6824f4d8e4f4fd89562c",
       "relocation_count": 27,
       "current_relocations_sha256": "1bdec7ab45b5a55e46dc05cacb1319ad0cd039c6c57925820c0f5c67a4a307eb",
-      "proposed_relocations_sha256": "f402b6a395397c26412633ca8a1873dc15986d19063b1ee5951c7dd78017a7d0",
+      "proposed_relocations_sha256": "0c432f919449f523e0aaca436c2ea6747a8bfcac7125db017ab9ea1e19905937",
       "proposed_sha256": "f101260a58280ed1eaba9ca14efb1eb3fac093b940861ae17512b1b9adc381c3",
       "strict_contract_feasible": true
     },
     {
       "function": "open_cfw_runtime_strtod",
       "current_address": 8280648,
-      "proposed_address": 8253480,
+      "proposed_address": 8239496,
       "size": 10,
       "alignment": 4,
       "padding_before": 0,
@@ -98,14 +98,14 @@
       "unrelocated_sha256": "c0f86b6340a2462c036aec2c6fb57c2c6bcf1aca89e1343acb05dd7e0be75c53",
       "relocation_count": 1,
       "current_relocations_sha256": "aa88dcb7b83fc98362f5031d92d8943f9ed6085ee718324900de6233e510edc8",
-      "proposed_relocations_sha256": "2773989eda3e83c6c37a3dacaaa741c6d9849142ea3eeff721a87d630116d2ac",
+      "proposed_relocations_sha256": "3e6672f7414e9e36492235f82e628baa486f3d2a421ffe7fb0f352958aa9a2e0",
       "proposed_sha256": "dc260cccb953eb1ee5f684555ac357c148a51e3f7cbfbbf764b1fe69abe84e68",
       "strict_contract_feasible": true
     },
     {
       "function": "open_cfw_runtime_scanset_match",
       "current_address": 8280660,
-      "proposed_address": 8253492,
+      "proposed_address": 8239508,
       "size": 126,
       "alignment": 4,
       "padding_before": 2,
@@ -120,7 +120,7 @@
     {
       "function": "open_cfw_runtime_vsscanf",
       "current_address": 8280788,
-      "proposed_address": 8253620,
+      "proposed_address": 8239636,
       "size": 2530,
       "alignment": 4,
       "padding_before": 2,
@@ -128,14 +128,14 @@
       "unrelocated_sha256": "19e5b1847d367f45ce057f8c774b546e72e9e8017ea9b318b580f0678deac1f3",
       "relocation_count": 2,
       "current_relocations_sha256": "c005b27b1e6b77e31020cb2aadc96cc30d0f96044af6670a7c35a97cf52b6f7c",
-      "proposed_relocations_sha256": "b8e8171913a322fbc5315be9a8698f0574facdcc92c854248ff7a7166135b695",
+      "proposed_relocations_sha256": "7a63de800403a6d1704b9d97c265f81e31fa517c14eb869745a6867bbfea9e67",
       "proposed_sha256": "dee879b8f869c0a6a43c34f207632b2d084950d60cc805473b3218f27226968e",
       "strict_contract_feasible": true
     },
     {
       "function": "open_cfw_runtime_sscanf",
       "current_address": 8283320,
-      "proposed_address": 8256152,
+      "proposed_address": 8242168,
       "size": 28,
       "alignment": 4,
       "padding_before": 2,
@@ -143,14 +143,14 @@
       "unrelocated_sha256": "1e99e4ad4a9e81101f3362310387e3ec290c6d309b8f396466b18f63d8e52c76",
       "relocation_count": 1,
       "current_relocations_sha256": "69bbc97b6675e4b559e4ba9bbf711dd735c150beee0dff6710a3b82475e6cab6",
-      "proposed_relocations_sha256": "2417c8f45a1856bcfa81fdbc3cd62afec10cafef308f1057c741cba07d754dba",
+      "proposed_relocations_sha256": "b7d991fc254b71f29197130bf77862905ad7da10e4920d60a531bfe89a2946be",
       "proposed_sha256": "5b9b453d793098d1d65c7d5330808f2d00e5319429450c51aff6294fd1fd9f54",
       "strict_contract_feasible": true
     },
     {
       "function": "open_cfw_runtime_iar_scanf_core",
       "current_address": 8283348,
-      "proposed_address": 8256180,
+      "proposed_address": 8242196,
       "size": 12,
       "alignment": 4,
       "padding_before": 0,
@@ -158,14 +158,14 @@
       "unrelocated_sha256": "71eab4af4f355d4c99b93894025c73f4f543ba38e7a92ae4409a05e4f40082a0",
       "relocation_count": 1,
       "current_relocations_sha256": "12101f461f8eb4ff2d260d08f9b7a0d5456f3b72abe27c0b8218aacc76856d90",
-      "proposed_relocations_sha256": "2e0642991738e904bcf04f315437b58ab8935be8280e802b7cbc5cba4c50a2ec",
+      "proposed_relocations_sha256": "a77267b2a1a05e83c7bf8c86d9a490469fbb0a5778042b63b02975fc56c33284",
       "proposed_sha256": "b15f8461b3b88539f4d8f4893115d2546b26f3cdaa456d01540fa81a438317b9",
       "strict_contract_feasible": true
     },
     {
       "function": "open_cfw_runtime_iar_vsnprintf_engine",
       "current_address": 8283360,
-      "proposed_address": 8256192,
+      "proposed_address": 8242208,
       "size": 3508,
       "alignment": 4,
       "padding_before": 0,
@@ -173,8 +173,8 @@
       "unrelocated_sha256": "24e5b210239de8aef9f953b9913dd733e05f97a14d3e1cb78d42230320317418",
       "relocation_count": 12,
       "current_relocations_sha256": "c9eb9751c113e2ad823870e1a634e0bd107b66b45be2e107eb5195209bf5de6c",
-      "proposed_relocations_sha256": "652fdb8d9d6391d31fde1ce84da8c629f4b41f2842474eaacc3a1a54950b548d",
-      "proposed_sha256": "3dee8d97770ea585fd8578655a58752b699ab19d5602f172b02257e98bfd9e79",
+      "proposed_relocations_sha256": "4187bb38a86567d2747555a9c367bdbf51a06126bd51bcb0f91818ecc89c9fc1",
+      "proposed_sha256": "e5dae2738a1027db409e5ca716f81c866298a80efd0645870c00435f526d7c9e",
       "strict_contract_feasible": true
     }
   ],
@@ -242,7 +242,7 @@
       "R_ARM_THM_MOVW_PREL_NC": 1
     },
     "current_relocations_sha256": "bb5e313ec85f3fb8087e8f30133dfd07b331da2ccc6b6cad8236caa97342dfd3",
-    "proposed_relocations_sha256": "418b8ac1526c423dbab07130103445be6392549ae91f91fe4f44371b44444873",
+    "proposed_relocations_sha256": "f9dc357a3e7efead4fe2240bee630877a7bc446f4d9efeadb813313e60a5de92",
     "exact_entry_branch_ingress": 6,
     "exact_entry_branches_sha256": "ba5cb075c53d8da9a77119c7f8880365721e84e1c4cee6970c85876360774fc9",
     "external_false_interior_decodes": 4,

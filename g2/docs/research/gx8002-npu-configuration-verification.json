@@ -1,0 +1,495 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_npu_set_clock_gate",
+      "section_name": ".text.npu_set_clock_gate",
+      "compiled_bytes": 22,
+      "compiled_sha256": "42b58e34a74cc01042975beed25b60c302e4df7056527941fa4ab4f2fa96c8ff",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_npu_set_clock_gate",
+          "package_offset": 60324,
+          "bytes": 24,
+          "sha256": "ba08a9baad1ded7eb38ecb5b2f1553da5ac7f9750c46ad101fedf55909440a21",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_npu_set_idle_mode",
+      "section_name": ".text.npu_set_idle_mode",
+      "compiled_bytes": 22,
+      "compiled_sha256": "4b74815b51f090a12f7959c39d5bb16d65d68afbcd8ed59d7b12b12cc0af8350",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_npu_set_idle_mode",
+          "package_offset": 60348,
+          "bytes": 24,
+          "sha256": "9f48c71b9c9fa555e9ca49df47a56460911abc6666385b794f615ce31d3d311d",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_npu_set_idle_cycle",
+      "section_name": ".text.npu_set_idle_cycle",
+      "compiled_bytes": 24,
+      "compiled_sha256": "6ab6a7dd90053efe3f1fa13a153a7af1f32556b308b7c7692df84e309dbed11a",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_npu_set_idle_cycle",
+          "package_offset": 60372,
+          "bytes": 24,
+          "sha256": "6ab6a7dd90053efe3f1fa13a153a7af1f32556b308b7c7692df84e309dbed11a",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_npu_set_overtime_thr",
+      "section_name": ".text.npu_set_overtime_thr",
+      "compiled_bytes": 10,
+      "compiled_sha256": "4ae2191428bd4446c13484fcb5b235642b1e9e7a566d4a3d0d3741827a5ecec2",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_npu_set_overtime_thr",
+          "package_offset": 60396,
+          "bytes": 12,
+          "sha256": "d15ec44a9c35bb6d9fe21f13733140503bf65469c5aa59ff721c33e661b6ab7c",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "identification": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "object": {
+        "path": "drivers_lib/snpu/grus/snpu_regs.o",
+        "blob": "39979d2d40e2c1363d1d7e42577faace128af918",
+        "sha256": "c5f79288252a084bb7e98b5bb6546919469ba003bfb7d2da4c4eed5c88df3150"
+      },
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "functions": [
+        {
+          "symbol": "npu_set_clock_gate",
+          "object_offset": 100,
+          "object_symbol_size": 22,
+          "matches": [
+            {
+              "package_offset": 60324,
+              "runtime_address": 270554648,
+              "bytes": 22,
+              "sha256": "42b58e34a74cc01042975beed25b60c302e4df7056527941fa4ab4f2fa96c8ff",
+              "calls": [
+                {
+                  "offset": 8,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 16,
+                  "helper": "reg_clr_bit",
+                  "runtime_target": 270554588
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "symbol": "npu_set_idle_mode",
+          "object_offset": 124,
+          "object_symbol_size": 22,
+          "matches": [
+            {
+              "package_offset": 60348,
+              "runtime_address": 270554672,
+              "bytes": 22,
+              "sha256": "4b74815b51f090a12f7959c39d5bb16d65d68afbcd8ed59d7b12b12cc0af8350",
+              "calls": [
+                {
+                  "offset": 8,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 16,
+                  "helper": "reg_clr_bit",
+                  "runtime_target": 270554588
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "symbol": "npu_set_idle_cycle",
+          "object_offset": 148,
+          "object_symbol_size": 24,
+          "matches": [
+            {
+              "package_offset": 60372,
+              "runtime_address": 270554696,
+              "bytes": 24,
+              "sha256": "6ab6a7dd90053efe3f1fa13a153a7af1f32556b308b7c7692df84e309dbed11a",
+              "calls": [
+                {
+                  "offset": 6,
+                  "helper": "reg_get_val",
+                  "runtime_target": 270554604
+                },
+                {
+                  "offset": 18,
+                  "helper": "reg_set_val",
+                  "runtime_target": 270554608
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "symbol": "npu_set_overtime_thr",
+          "object_offset": 172,
+          "object_symbol_size": 10,
+          "matches": [
+            {
+              "package_offset": 60396,
+              "runtime_address": 270554720,
+              "bytes": 10,
+              "sha256": "4ae2191428bd4446c13484fcb5b235642b1e9e7a566d4a3d0d3741827a5ecec2",
+              "calls": [
+                {
+                  "offset": 4,
+                  "helper": "reg_set_val",
+                  "runtime_target": 270554608
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "symbol": "npu_en_interrupt",
+          "object_offset": 184,
+          "object_symbol_size": 120,
+          "matches": [
+            {
+              "package_offset": 60408,
+              "runtime_address": 270554732,
+              "bytes": 120,
+              "sha256": "2950d70efb40ab8a443d340292257c18eee88559c5ca24b0abc1172f73198033",
+              "calls": [
+                {
+                  "offset": 18,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 34,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 50,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 66,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 82,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 98,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 114,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "symbol": "npu_dis_interrupt",
+          "object_offset": 304,
+          "object_symbol_size": 120,
+          "matches": []
+        },
+        {
+          "symbol": "npu_get_interrupt",
+          "object_offset": 436,
+          "object_symbol_size": 120,
+          "matches": [
+            {
+              "package_offset": 60540,
+              "runtime_address": 270554864,
+              "bytes": 120,
+              "sha256": "b2e4d9bf13720bbfc9d034c33705f2c7102f965716e8f9dc7831a0046edad655",
+              "calls": [
+                {
+                  "offset": 6,
+                  "helper": "reg_get_val",
+                  "runtime_target": 270554604
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "symbol": "npu_clr_interrupt",
+          "object_offset": 556,
+          "object_symbol_size": 120,
+          "matches": [
+            {
+              "package_offset": 60660,
+              "runtime_address": 270554984,
+              "bytes": 120,
+              "sha256": "3fee841b503a0b5fcd0c6df0a117346a7309d1d59570db0232f9799a9ee709aa",
+              "calls": [
+                {
+                  "offset": 18,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 34,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 50,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 66,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 82,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 98,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 114,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "symbol": "npu_clr_interrupt_without_overflow",
+          "object_offset": 676,
+          "object_symbol_size": 88,
+          "matches": [
+            {
+              "package_offset": 60780,
+              "runtime_address": 270555104,
+              "bytes": 88,
+              "sha256": "8dec1bf46029af3ad700a7622a3df93829fa87e5070a4cb894bffd84df83fa3b",
+              "calls": [
+                {
+                  "offset": 18,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 34,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 50,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 66,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 82,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "symbol": "npu_clr_overflow_interrupt",
+          "object_offset": 764,
+          "object_symbol_size": 40,
+          "matches": [
+            {
+              "package_offset": 60868,
+              "runtime_address": 270555192,
+              "bytes": 40,
+              "sha256": "41a05d4ac598a21074cdebdeb73e6138d63c3da0081f9d9b5ca1add23195112e",
+              "calls": [
+                {
+                  "offset": 18,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                },
+                {
+                  "offset": 34,
+                  "helper": "reg_set_bit",
+                  "runtime_target": 270554572
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "source_admitted": false,
+      "limits": [
+        "Identification only. Fixed bytes match and branch relocations resolve to known primitives; need envelope and behavior qualification before source replacement. No object bytes emitted."
+      ]
+    },
+    "source_sha256": "a5f8976fb6bf57142ef59cb7b85045a8a4cd9cd0791cee2c6409edf387ee1273",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "regions": [
+      {
+        "symbol": "open_cfw_gx8002_npu_set_clock_gate",
+        "section_name": ".text.npu_set_clock_gate",
+        "package_offset": 60324,
+        "compiled_bytes": 22,
+        "compiled_sha256": "42b58e34a74cc01042975beed25b60c302e4df7056527941fa4ab4f2fa96c8ff",
+        "stock_envelope_bytes": 24,
+        "stock_sha256": "ba08a9baad1ded7eb38ecb5b2f1553da5ac7f9750c46ad101fedf55909440a21",
+        "fits": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_npu_set_idle_mode",
+        "section_name": ".text.npu_set_idle_mode",
+        "package_offset": 60348,
+        "compiled_bytes": 22,
+        "compiled_sha256": "4b74815b51f090a12f7959c39d5bb16d65d68afbcd8ed59d7b12b12cc0af8350",
+        "stock_envelope_bytes": 24,
+        "stock_sha256": "9f48c71b9c9fa555e9ca49df47a56460911abc6666385b794f615ce31d3d311d",
+        "fits": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_npu_set_idle_cycle",
+        "section_name": ".text.npu_set_idle_cycle",
+        "package_offset": 60372,
+        "compiled_bytes": 24,
+        "compiled_sha256": "6ab6a7dd90053efe3f1fa13a153a7af1f32556b308b7c7692df84e309dbed11a",
+        "stock_envelope_bytes": 24,
+        "stock_sha256": "6ab6a7dd90053efe3f1fa13a153a7af1f32556b308b7c7692df84e309dbed11a",
+        "fits": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_npu_set_overtime_thr",
+        "section_name": ".text.npu_set_overtime_thr",
+        "package_offset": 60396,
+        "compiled_bytes": 10,
+        "compiled_sha256": "4ae2191428bd4446c13484fcb5b235642b1e9e7a566d4a3d0d3741827a5ecec2",
+        "stock_envelope_bytes": 12,
+        "stock_sha256": "d15ec44a9c35bb6d9fe21f13733140503bf65469c5aa59ff721c33e661b6ab7c",
+        "fits": true
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Linked candidate only. Need polarity, idle-cycle halfword preservation, threshold offset, helper/MMIO ordering and ABI qualification."
+    ]
+  },
+  "register_source_sha256": "49098de6210e37002f469df76fe3d8e1c3a35ed7b5fff97efdea9390edfbef53",
+  "register_native_sections": [
+    {
+      "symbol": "open_cfw_gx8002_reg_get_bit",
+      "section_name": ".text.get_bit",
+      "runtime_address": 270554560,
+      "compiled_bytes": 10,
+      "compiled_sha256": "e460b0ed4643600dfa37cb872b9c3e78b5193f147d6426d60905117d4fe73be4",
+      "package_offset": 60236,
+      "stock_envelope_bytes": 12,
+      "stock_sha256": "335f75d829bc2845baffdef6f4040721b11820336c2594ed91d0ac35ad0443a9",
+      "fits": true,
+      "ownership_kind": "compiled_assembly"
+    },
+    {
+      "symbol": "open_cfw_gx8002_reg_set_bit",
+      "section_name": ".text.set_bit",
+      "runtime_address": 270554572,
+      "compiled_bytes": 12,
+      "compiled_sha256": "7c1ada9e55d10e25bfad38d4125a715cee208effa1d61d59650ebd2bf9879b6b",
+      "package_offset": 60248,
+      "stock_envelope_bytes": 16,
+      "stock_sha256": "1b5d7c15180072e3f59f11ce082ad400d20dac46e39d5ca1f5258d5437769293",
+      "fits": true,
+      "ownership_kind": "compiled_assembly"
+    },
+    {
+      "symbol": "open_cfw_gx8002_reg_clear_bit",
+      "section_name": ".text.clear_bit",
+      "runtime_address": 270554588,
+      "compiled_bytes": 14,
+      "compiled_sha256": "c6d8f049be2bd6824633828409e9f5b0f51d6ce7fa84ecde5a4287bec660aa0b",
+      "package_offset": 60264,
+      "stock_envelope_bytes": 16,
+      "stock_sha256": "ed58f0fc67a39c7bad454b06c4545c5720021a65c75b9042a50fb4d5eeb0568d",
+      "fits": true,
+      "ownership_kind": "compiled_assembly"
+    },
+    {
+      "symbol": "open_cfw_gx8002_reg_get_value",
+      "section_name": ".text.get_value",
+      "runtime_address": 270554604,
+      "compiled_bytes": 4,
+      "compiled_sha256": "533f729244a3fb5e28373c4db14612484712e0d059683b35ff9d07112def6325",
+      "package_offset": 60280,
+      "stock_envelope_bytes": 4,
+      "stock_sha256": "533f729244a3fb5e28373c4db14612484712e0d059683b35ff9d07112def6325",
+      "fits": true,
+      "ownership_kind": "compiled_c"
+    },
+    {
+      "symbol": "open_cfw_gx8002_reg_set_value",
+      "section_name": ".text.set_value",
+      "runtime_address": 270554608,
+      "compiled_bytes": 4,
+      "compiled_sha256": "7d95518500e0843644c6a570f2fde503019dc6d7577e8dbaebe97792ced2a905",
+      "package_offset": 60284,
+      "stock_envelope_bytes": 4,
+      "stock_sha256": "7d95518500e0843644c6a570f2fde503019dc6d7577e8dbaebe97792ced2a905",
+      "fits": true,
+      "ownership_kind": "compiled_c"
+    }
+  ],
+  "cases": 71824,
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded configuration/primitive composition checks ordered calls and MMIO, full-width nonzero polarity, halfword preservation, threshold offset, caller clobbers and stack frames. Aligned synthetic addresses only; physical hardware timing remains unqualified."
+  ]
+}

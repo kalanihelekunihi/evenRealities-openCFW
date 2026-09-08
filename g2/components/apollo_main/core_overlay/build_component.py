@@ -839,9 +839,11 @@ def _capture_canonical_generation(
             or observed[3] != sha256(previous[component_path][1])
         ):
             raise BuildError("canonical existing generation identity changed")
-        records = report.get("canonical_observation", {}).get(
-            "intermediate_artifacts", {}
-        )
+        records = report.get("intermediate_artifacts")
+        if not isinstance(records, dict):
+            records = report.get("canonical_observation", {}).get(
+                "intermediate_artifacts", {}
+            )
         if not isinstance(records, dict):
             records = {}
         by_name = {
@@ -957,7 +959,9 @@ def _publish_canonical_outputs(
         }
         if final_records != expected_final_records:
             raise BuildError("canonical final artifact identity changed")
-    records = observation.get("intermediate_artifacts", {})
+    records = report.get("intermediate_artifacts")
+    if not isinstance(records, dict):
+        records = observation.get("intermediate_artifacts", {})
     if additional_artifacts:
         if set(records) != set(_CANONICAL_INTERMEDIATE_NAMES):
             raise BuildError("canonical intermediate artifact schema changed")
@@ -1496,16 +1500,14 @@ def build(
         )
         liblc3_component_path = provider_output / "ota_s200_firmware_ota.bin"
         liblc3_component = liblc3_component_path.read_bytes()
-        liblc3_payload = b""
-        if record_canonical:
-            liblc3_payload = (
-                provider_output / "liblc3_ltpf.text.bin"
-            ).read_bytes()
-            if (
-                len(liblc3_payload) != int(provider_report["overlay"]["size"])
-                or sha256(liblc3_payload) != provider_report["overlay"]["sha256"]
-            ):
-                raise BuildError("canonical liblc3 payload artifact changed")
+        liblc3_payload = (
+            provider_output / "liblc3_ltpf.text.bin"
+        ).read_bytes()
+        if (
+            len(liblc3_payload) != int(provider_report["overlay"]["size"])
+            or sha256(liblc3_payload) != provider_report["overlay"]["sha256"]
+        ):
+            raise BuildError("canonical liblc3 payload artifact changed")
         pt_output = temporary / "pt-protocol"
         pt_report = pt_builder.build(
             base_path=liblc3_component_path,
@@ -2024,26 +2026,30 @@ def build(
     except ValueError:
         overlay_report["artifact"] = str(overlay_path)
         component_report["artifact"] = str(component_path)
-    additional_artifacts: dict[Path, bytes] = {}
-    if record_canonical:
-        intermediate_payloads = {
-            "core_stage_overlay": stage_overlay,
-            "core_stage_component": stage_component,
-            "liblc3_payload": liblc3_payload,
-            "liblc3_component": liblc3_component,
-            "pt_component": pt_component,
-            "liblc3_service_component": pre_cff_component,
+    intermediate_payloads = {
+        "core_stage_overlay": stage_overlay,
+        "core_stage_component": stage_component,
+        "liblc3_payload": liblc3_payload,
+        "liblc3_component": liblc3_component,
+        "pt_component": pt_component,
+        "liblc3_service_component": pre_cff_component,
+    }
+    additional_artifacts: dict[Path, bytes] = {
+        output_dir / name: intermediate_payloads[key]
+        for key, name in _CANONICAL_INTERMEDIATE_NAMES.items()
+    }
+    intermediate_records = {
+        key: {
+            "artifact": name,
+            "size": len(intermediate_payloads[key]),
+            "sha256": sha256(intermediate_payloads[key]),
         }
-        intermediate_records = {}
-        for key, name in _CANONICAL_INTERMEDIATE_NAMES.items():
-            payload = intermediate_payloads[key]
-            path = output_dir / name
-            additional_artifacts[path] = payload
-            intermediate_records[key] = {
-                "artifact": name,
-                "size": len(payload),
-                "sha256": sha256(payload),
-            }
+        for key, name in _CANONICAL_INTERMEDIATE_NAMES.items()
+    }
+    stage_report["intermediate_artifacts"] = copy.deepcopy(
+        intermediate_records
+    )
+    if record_canonical:
         pt_observation = copy.deepcopy(
             stage_report["canonical_stages"]["pt_protocol"]
         )

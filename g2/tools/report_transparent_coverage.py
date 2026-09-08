@@ -57,6 +57,9 @@ def release_readiness_blockers(summary: dict[str, Any]) -> list[str]:
         blockers.append(
             f"only {summary['units_placed']} of {summary['units_total']} source units are placed"
         )
+    unreviewed = summary.get("unreviewed_code_units", summary["units_placed"])
+    if unreviewed != 0:
+        blockers.append(f"{unreviewed} placed functions still rely on unreviewed decompilation")
     return blockers
 
 
@@ -87,7 +90,7 @@ def render(build_dir: Path) -> tuple[str, dict[str, Any]]:
         "",
         "| Origin | Bytes | Share |",
         "| --- | ---: | ---: |",
-        f"| Recovered code, compiled from decompiled C | {code:,} | {percent(code, total)} |",
+        f"| Compiled C (reviewed and unreviewed) | {code:,} | {percent(code, total)} |",
         f"| Envelope padding after placed code | {padding:,} | {percent(padding, total)} |",
         f"| Declared data arrays (vendor-derived) | {data:,} | {percent(data, total)} |",
         f"| Traps where nothing was established | {trapped:,} | {percent(trapped, total)} |",
@@ -103,6 +106,9 @@ def render(build_dir: Path) -> tuple[str, dict[str, Any]]:
         f" ({percent(compile_report.get('compiled', 0), compile_report.get('attempted', 1))}),"
         f" {compile_report.get('compiled_bytes', 0):,} bytes of recovered code.",
         f"* {image['units_placed']:,} functions fit their stock envelope and were placed.",
+        f"* {image.get('reviewed_source_units', 0):,} placed functions use reviewed C"
+        f" ({image.get('reviewed_source_bytes', 0):,} compiled bytes)."
+        " The remaining placed functions still use unreviewed decompilation.",
         "",
         "### Evidence tier of each recovered function",
         "",
@@ -207,6 +213,9 @@ def render(build_dir: Path) -> tuple[str, dict[str, Any]]:
         "units_compiled": compile_report.get("compiled", 0),
         "units_total": compile_report.get("attempted", 0),
         "units_placed": image["units_placed"],
+        "reviewed_source_units": image.get("reviewed_source_units", 0),
+        "reviewed_source_bytes": image.get("reviewed_source_bytes", 0),
+        "unreviewed_code_units": image["units_placed"] - image.get("reviewed_source_units", 0),
     }
     return "\n".join(lines), summary
 

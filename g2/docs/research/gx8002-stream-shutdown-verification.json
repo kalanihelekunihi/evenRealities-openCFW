@@ -1,0 +1,123 @@
+{
+  "functions": [
+    {
+      "symbol": "LvpKwsDone",
+      "section_name": ".text.LvpKwsDone",
+      "compiled_bytes": 20,
+      "compiled_sha256": "310acf73ea192928c8cb6807edca2a4b7f2ecd3b9c17d571b19e187e2eb3d5f3",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpKwsDone",
+          "package_offset": 66360,
+          "bytes": 20,
+          "sha256": "310acf73ea192928c8cb6807edca2a4b7f2ecd3b9c17d571b19e187e2eb3d5f3",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "LvpAudioInDone",
+      "section_name": ".text.LvpAudioInDone",
+      "compiled_bytes": 10,
+      "compiled_sha256": "2bb18b788a135470012a4ed668c79205990ec18ac5877ca8b9a82ccafacf3608",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpAudioInDone",
+          "package_offset": 67972,
+          "bytes": 12,
+          "sha256": "d73c9634cda502fcfb7390b3ec55401dca01f7b02e41c8015ab51e935d30c13e",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "dependencies": [
+      {
+        "path": "lvp/common/snpu_engine/lvp_kws.c",
+        "blob": "efdce5bc8f3773e8c42d828a9bd72430ad3b43c7",
+        "sha256": "65de0e35ea000c6d4dd2b940a2c75ca0aa58a81cbf9b5eaebc22ba240f852732"
+      },
+      {
+        "path": "lvp/common/lvp_audio_in.c",
+        "blob": "43963b1adaad4f7040206c06769ee8a69656848f",
+        "sha256": "cd52150f9f3e45061b358ad2d6401932a37a60857b2432b8a92a45a36624b64f"
+      },
+      {
+        "path": "include/driver/gx_snpu.h",
+        "blob": "a2a911b22f7f379d9f489d959519125d5cad3a52",
+        "sha256": "72aa01a5cc6519da63dff4afa7163c7d3a3045d203998e691768dfa189643a46"
+      },
+      {
+        "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+        "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+        "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+      },
+      {
+        "path": "LICENSE",
+        "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+        "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+      }
+    ],
+    "bindings": {
+      "gx_snpu_exit": 270556480,
+      "gx_audio_in_exit": 270551428
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "source_sha256": "a29f97f145ef92c333f1df69bb5481f03c2dd9db5a080cb20a5f789fcce93fa6",
+    "interface_header_sha256": "3e397930e7a841140a618de5bb2df49045b9e06e4bf5517b495e62ce7e47ecef",
+    "config_sha256": "9811f2aa66324bafe0b823ac15ac80ea0041bea02b181698910ee4ebb4a711ba",
+    "regions": [
+      {
+        "symbol": "LvpKwsDone",
+        "section_name": ".text.LvpKwsDone",
+        "package_offset": 66360,
+        "compiled_bytes": 20,
+        "compiled_sha256": "310acf73ea192928c8cb6807edca2a4b7f2ecd3b9c17d571b19e187e2eb3d5f3",
+        "stock_envelope_bytes": 20,
+        "stock_sha256": "310acf73ea192928c8cb6807edca2a4b7f2ecd3b9c17d571b19e187e2eb3d5f3",
+        "fits": true,
+        "exact_stock_payload": true
+      },
+      {
+        "symbol": "LvpAudioInDone",
+        "section_name": ".text.LvpAudioInDone",
+        "package_offset": 67972,
+        "compiled_bytes": 10,
+        "compiled_sha256": "2bb18b788a135470012a4ed668c79205990ec18ac5877ca8b9a82ccafacf3608",
+        "stock_envelope_bytes": 12,
+        "stock_sha256": "d73c9634cda502fcfb7390b3ec55401dca01f7b02e41c8015ab51e935d30c13e",
+        "fits": true,
+        "exact_stock_payload": false
+      }
+    ],
+    "defined_bss": {
+      "address": 537033552,
+      "size": 4
+    },
+    "source_admitted": false,
+    "limits": [
+      "Candidate only. Need ordered driver call/callback clear, zero return, ABI qualification. Driver exits and callback execution remain separate."
+    ]
+  },
+  "cases": 3108,
+  "frame_bytes": 4,
+  "notice_sha256": "dd0e2e56d39e75687525994c62d27c7fe227eb5ae92ab72ac70395a46fbe760a",
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Driver exits modeled at call boundaries; their implementation, hardware effects and asynchronous callback timing remain unqualified. Typed callback BSS is source-defined but adds no firmware payload bytes."
+  ]
+}

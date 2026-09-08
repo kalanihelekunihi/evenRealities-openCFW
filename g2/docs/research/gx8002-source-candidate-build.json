@@ -1,0 +1,2765 @@
+{
+  "schema_version": 1,
+  "firmware_size": 326092,
+  "firmware_sha256": "8e1467f51789e731a4367ce10dbd3ce10bee8f510226aa7556d7d0368fc29670",
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "source_only": false,
+  "hardware_qualified": false,
+  "source_replacement_occurrences": 262,
+  "byte_ownership": {
+    "compiled_c": 13396,
+    "compiled_assembly": 156,
+    "generated_source_data": 2854,
+    "generated_container_metadata": 80,
+    "generated_unreachable_fill": 724,
+    "retained_stock": 308882
+  },
+  "ownership": [
+    {
+      "offset": 0,
+      "size": 80,
+      "kind": "generated_container_metadata"
+    },
+    {
+      "offset": 80,
+      "size": 12692,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 12772,
+      "size": 32,
+      "kind": "compiled_c",
+      "symbol": "gx_dcache_enable",
+      "sha256": "27131066495edc120dbc5b8bd8689e4e56505161ad05ca940f828b0ce290e973"
+    },
+    {
+      "offset": 12804,
+      "size": 38356,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 51160,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_uart_transmit",
+      "sha256": "afd75252ca2ce2235e7ea36db9acb6881cb7c10659a74523a74802f21da08f8a"
+    },
+    {
+      "offset": 51176,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_uart_transmit"
+    },
+    {
+      "offset": 51180,
+      "size": 852,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 52032,
+      "size": 36,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_uart_putc",
+      "sha256": "6e80cacd03325f662f1ae547b4632841c7ed29bb0bc9bee5cb3fea3e4e2d3db6"
+    },
+    {
+      "offset": 52068,
+      "size": 536,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 52604,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_console_putc",
+      "sha256": "8ddb9dcb26be484d64f578e557d2fd6b22beb5103666b45dac905f945ebec5d6"
+    },
+    {
+      "offset": 52624,
+      "size": 1136,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 53760,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_board_register_initialize",
+      "sha256": "c1da72101417bd2c7d587d0d26a6bb5dd7a3d079a4d5865936deaad5c8615215"
+    },
+    {
+      "offset": 53780,
+      "size": 240,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_audio_reset",
+      "sha256": "054231c072b37eaa20ea7762130e061d47d0ce890a13594de6e1ca8f08f46d3b"
+    },
+    {
+      "offset": 54020,
+      "size": 80,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_audio_reset"
+    },
+    {
+      "offset": 54100,
+      "size": 1368,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 55468,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_i2s_clock",
+      "sha256": "91a7641123fe2081007ec7f5b6554794e9d28c73106c84493893ad90de7648d6"
+    },
+    {
+      "offset": 55484,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_i2sin_mode",
+      "sha256": "c937f01bec01637d88ddaf9cdaf7387442ca3ecb5ec256351bded8ef1cb3105d"
+    },
+    {
+      "offset": 55500,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_i2sout_mode",
+      "sha256": "b1c4f8cda028474940d05ccf21c03a9f50561c4ad777cdc4431eef1b5d8ea375"
+    },
+    {
+      "offset": 55516,
+      "size": 736,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 56252,
+      "size": 44,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_fftvad_curve_1",
+      "sha256": "56789fd125994e2b3616b713db2f66b34f9438132fb922a0c8ac66efc5c44ce4"
+    },
+    {
+      "offset": 56296,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_1"
+    },
+    {
+      "offset": 56302,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 56304,
+      "size": 44,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_fftvad_curve_2",
+      "sha256": "502bcd4fc0b251b71ee2aad756c5447d2956dccbf28e611d7aa8c6b17199772a"
+    },
+    {
+      "offset": 56348,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_2"
+    },
+    {
+      "offset": 56354,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 56356,
+      "size": 56,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_fftvad_curve_3",
+      "sha256": "a614b80d23903dee94bba411801a14d208ef5013af11b54430470c31203010c3"
+    },
+    {
+      "offset": 56412,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_3"
+    },
+    {
+      "offset": 56418,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 56420,
+      "size": 44,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_fftvad_curve_4",
+      "sha256": "812d42a762e6b47d9a6894b680038f3dd0083bcd85e28297babac067f6b1e779"
+    },
+    {
+      "offset": 56464,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_4"
+    },
+    {
+      "offset": 56470,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 56472,
+      "size": 32,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_fftvad_curve_5",
+      "sha256": "2e1de7bd3af9b2616edafde6ff85edc105012245b3e68a5fcc5d984b2bc43850"
+    },
+    {
+      "offset": 56504,
+      "size": 600,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 57104,
+      "size": 42,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_exit",
+      "sha256": "75885377c2b61802208f35a149efef8a8d705fc829620a8195a2b662a37d55c7"
+    },
+    {
+      "offset": 57146,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_exit"
+    },
+    {
+      "offset": 57148,
+      "size": 3064,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 60212,
+      "size": 2,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_device_init",
+      "sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a"
+    },
+    {
+      "offset": 60214,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_snpu_device_init"
+    },
+    {
+      "offset": 60216,
+      "size": 2,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_device_exit",
+      "sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a"
+    },
+    {
+      "offset": 60218,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_snpu_device_exit"
+    },
+    {
+      "offset": 60220,
+      "size": 14,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_request_irq",
+      "sha256": "62dbfdd4f87d37e1fc8fe696acd975f47267bfb63de738f9c3ad90d3d2a38c4f"
+    },
+    {
+      "offset": 60234,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_snpu_request_irq"
+    },
+    {
+      "offset": 60236,
+      "size": 10,
+      "kind": "compiled_assembly",
+      "symbol": "open_cfw_gx8002_reg_get_bit",
+      "sha256": "e460b0ed4643600dfa37cb872b9c3e78b5193f147d6426d60905117d4fe73be4"
+    },
+    {
+      "offset": 60246,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_reg_get_bit"
+    },
+    {
+      "offset": 60248,
+      "size": 12,
+      "kind": "compiled_assembly",
+      "symbol": "open_cfw_gx8002_reg_set_bit",
+      "sha256": "7c1ada9e55d10e25bfad38d4125a715cee208effa1d61d59650ebd2bf9879b6b"
+    },
+    {
+      "offset": 60260,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_reg_set_bit"
+    },
+    {
+      "offset": 60264,
+      "size": 14,
+      "kind": "compiled_assembly",
+      "symbol": "open_cfw_gx8002_reg_clear_bit",
+      "sha256": "c6d8f049be2bd6824633828409e9f5b0f51d6ce7fa84ecde5a4287bec660aa0b"
+    },
+    {
+      "offset": 60278,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_reg_clear_bit"
+    },
+    {
+      "offset": 60280,
+      "size": 4,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_reg_get_value",
+      "sha256": "533f729244a3fb5e28373c4db14612484712e0d059683b35ff9d07112def6325"
+    },
+    {
+      "offset": 60284,
+      "size": 4,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_reg_set_value",
+      "sha256": "7d95518500e0843644c6a570f2fde503019dc6d7577e8dbaebe97792ced2a905"
+    },
+    {
+      "offset": 60288,
+      "size": 10,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_enable",
+      "sha256": "2abc70bbd8c2ce09486b64fa44ccddde45eedc5dcb7618c3d6362755b801571a"
+    },
+    {
+      "offset": 60298,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_npu_enable"
+    },
+    {
+      "offset": 60300,
+      "size": 10,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_disable",
+      "sha256": "53d6873e67d609efcc726c59cdab53fc602d8551a246396203f4ce51284e3970"
+    },
+    {
+      "offset": 60310,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_npu_disable"
+    },
+    {
+      "offset": 60312,
+      "size": 10,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_is_enabled",
+      "sha256": "3f608d6de970291d2daafc3812aae3a063bb69a0e4dd353123de1a846178a57b"
+    },
+    {
+      "offset": 60322,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_npu_is_enabled"
+    },
+    {
+      "offset": 60324,
+      "size": 22,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_set_clock_gate",
+      "sha256": "42b58e34a74cc01042975beed25b60c302e4df7056527941fa4ab4f2fa96c8ff"
+    },
+    {
+      "offset": 60346,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_npu_set_clock_gate"
+    },
+    {
+      "offset": 60348,
+      "size": 22,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_set_idle_mode",
+      "sha256": "4b74815b51f090a12f7959c39d5bb16d65d68afbcd8ed59d7b12b12cc0af8350"
+    },
+    {
+      "offset": 60370,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_npu_set_idle_mode"
+    },
+    {
+      "offset": 60372,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_set_idle_cycle",
+      "sha256": "6ab6a7dd90053efe3f1fa13a153a7af1f32556b308b7c7692df84e309dbed11a"
+    },
+    {
+      "offset": 60396,
+      "size": 10,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_set_overtime_thr",
+      "sha256": "4ae2191428bd4446c13484fcb5b235642b1e9e7a566d4a3d0d3741827a5ecec2"
+    },
+    {
+      "offset": 60406,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_npu_set_overtime_thr"
+    },
+    {
+      "offset": 60408,
+      "size": 120,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_en_interrupt",
+      "sha256": "114ef88a01b12ea4d6043fbdd625ca11561909d19c49207a7f5ba15a682d860d"
+    },
+    {
+      "offset": 60528,
+      "size": 12,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_all_idle",
+      "sha256": "78dd4705683df333bf2eba912f0e00f79c106778f9ace021cd8860d3ae6f0d3e"
+    },
+    {
+      "offset": 60540,
+      "size": 118,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_get_interrupt",
+      "sha256": "ba2daaed5d1a28c05460563856722cfb8624c571d73fc97bd513be53b56f9579"
+    },
+    {
+      "offset": 60658,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_npu_get_interrupt"
+    },
+    {
+      "offset": 60660,
+      "size": 120,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_clr_interrupt",
+      "sha256": "782dca8182bf9a7b78aca29f714bc93dfbe0b40bda60b2d8c18830929f449f3d"
+    },
+    {
+      "offset": 60780,
+      "size": 88,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_clr_interrupt_without_overflow",
+      "sha256": "2f3e7fbf1cbcc004754721ea0fd9fd2eed2a3e142af79e44a30ad4bd34be0852"
+    },
+    {
+      "offset": 60868,
+      "size": 40,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_clr_overflow_interrupt",
+      "sha256": "eaa98984e1cd96028e59dda6c3dd90c37b08ce6f02861f2a3c40693b537577ae"
+    },
+    {
+      "offset": 60908,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_get_over_cmd_addr",
+      "sha256": "38bcb14f68647f06f4e9ea1ea70ce57d3f7e7575ecbb193ef2de72734b3ce500"
+    },
+    {
+      "offset": 60924,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_get_op_overflow_cmd_addr",
+      "sha256": "d6ad96ff7efc98d61e012e1c0ca247170fc741d4bdd70a51197c4319de0b791d"
+    },
+    {
+      "offset": 60940,
+      "size": 22,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_reset",
+      "sha256": "cbdd7eb44e59ab6cda031cb9125e4bf51475ef5051dcbe66d91cedb6ff29277b"
+    },
+    {
+      "offset": 60962,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_npu_reset"
+    },
+    {
+      "offset": 60964,
+      "size": 10,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_set_task_head",
+      "sha256": "1a1e34c51c568f2edb32086d73ba13b54e91d8398963d43f8541a030b09248a6"
+    },
+    {
+      "offset": 60974,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_npu_set_task_head"
+    },
+    {
+      "offset": 60976,
+      "size": 14,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_get_task_head",
+      "sha256": "8a636c4f9dbdc9667b3a7d2faabdf66077b7058ea07108c72bb170df667deebe"
+    },
+    {
+      "offset": 60990,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_npu_get_task_head"
+    },
+    {
+      "offset": 60992,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_get_base_addr",
+      "sha256": "6bdb07c6468e4e2d97ba7c22736df347e8f2736c8d5009f053d8958265bceb3c"
+    },
+    {
+      "offset": 61008,
+      "size": 14,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_get_cur_cmd_addr",
+      "sha256": "c4ff8fd45597ba3a49de7d2f98d6054f919d9add5f99a5a21deb2f4de1f6f660"
+    },
+    {
+      "offset": 61022,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_npu_get_cur_cmd_addr"
+    },
+    {
+      "offset": 61024,
+      "size": 108,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_tcb_init",
+      "sha256": "f9fe2c65aab9e42a46e956ee1318c407c232bd8f7d94946117186acda98d5140"
+    },
+    {
+      "offset": 61132,
+      "size": 16,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_snpu_tcb_init"
+    },
+    {
+      "offset": 61148,
+      "size": 64,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_npu_regs_init",
+      "sha256": "38e4fbd96d69d37eb04634e73a4f412e97a661d75ef40fa217a6249eb002a820"
+    },
+    {
+      "offset": 61212,
+      "size": 12,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_npu_regs_init"
+    },
+    {
+      "offset": 61224,
+      "size": 76,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_resume_internal",
+      "sha256": "db25fe14623fa4ae71d3516344f75d6d0531d0d4c0660529fe090c1d4afd8fd7"
+    },
+    {
+      "offset": 61300,
+      "size": 22,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_task_cmd_cache_flush",
+      "sha256": "da821eab7de20759b12510d46f3c748013a666a335c73d62107cc7de5240667a"
+    },
+    {
+      "offset": 61322,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_snpu_task_cmd_cache_flush"
+    },
+    {
+      "offset": 61324,
+      "size": 124,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_submit_task",
+      "sha256": "922724e5b15c80f5983d750832468db2bc451c21bafec702e8007ea1c8fcbc9a"
+    },
+    {
+      "offset": 61448,
+      "size": 20,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_snpu_submit_task"
+    },
+    {
+      "offset": 61468,
+      "size": 72,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_suspend",
+      "sha256": "2f55f71f44695acaa958650e2d2a706011222d636ad8507d05b32d2e1baf7077"
+    },
+    {
+      "offset": 61540,
+      "size": 60,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_dump_words",
+      "sha256": "d09bf4cbc15d52c64927d71787d6c57260b03a311c680b2c85213866e301879e"
+    },
+    {
+      "offset": 61600,
+      "size": 8,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_snpu_dump_words"
+    },
+    {
+      "offset": 61608,
+      "size": 188,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_overtime_reset",
+      "sha256": "4a64a66009434700231ea9a61d058a41e96b234ea7a3799f465d78f37af0ec82"
+    },
+    {
+      "offset": 61796,
+      "size": 232,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_process_status",
+      "sha256": "9c13411534d2d43bfa6c9f4e8052f7409892cef2c7a0725eddc913f90a16a9b1"
+    },
+    {
+      "offset": 62028,
+      "size": 32,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_snpu_process_status"
+    },
+    {
+      "offset": 62060,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_isr",
+      "sha256": "0ae80bdee100081dce0265d8cb84a97f49c240ec1d2f3c2c9e464043f174160b"
+    },
+    {
+      "offset": 62080,
+      "size": 76,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_initialize",
+      "sha256": "e5928512dd306c603a683c88ccdfeaa0a771b84da06f5c41d911921aa9d1de59"
+    },
+    {
+      "offset": 62156,
+      "size": 32,
+      "kind": "compiled_c",
+      "symbol": "gx_snpu_exit",
+      "sha256": "e507b893aa1c1bbbeb786a1a553133d36125703084a9cdecdcc55ac5be6db322"
+    },
+    {
+      "offset": 62188,
+      "size": 188,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_run_task",
+      "sha256": "9d88636fc8e77a64b92cca036cc0e00b5f5d8f01071d5237bb639022809a3545"
+    },
+    {
+      "offset": 62376,
+      "size": 12,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_snpu_run_task"
+    },
+    {
+      "offset": 62388,
+      "size": 12,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_snpu_get_state",
+      "sha256": "e0db1e81ec121e7e298e9e4a1729e274737e52a23ffac3318f1cf38986de80ae"
+    },
+    {
+      "offset": 62400,
+      "size": 28,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_pga_itrim",
+      "sha256": "6de26482966f9ee40b30c67730c92b4b0f31a193686d2dc50028414b6758cf69"
+    },
+    {
+      "offset": 62428,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_pga_bypass",
+      "sha256": "8e70f8df024c1059921929f80915154bb0658c3980c150162ae88405a608908c"
+    },
+    {
+      "offset": 62452,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_pga_enable",
+      "sha256": "2f72fe2827fc7e8a0f9dd42524ac97dd9e86caa52e73e6580102d7896cdcc4ca"
+    },
+    {
+      "offset": 62476,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_adc_sample_clk_sel",
+      "sha256": "aa1788649e82d64f1ed5511e036675e6b0643c0d42c83e7337fa7e6444872f32"
+    },
+    {
+      "offset": 62500,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_adc_out_at_clk",
+      "sha256": "83096951c1238dc7517092fdde8e1699480109aa7b75c06edbf647b1e57e11bd"
+    },
+    {
+      "offset": 62524,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_adc_in_sel",
+      "sha256": "1ba592d0cd7b4d40f5b87400cc56c5069bf15d150cf5c297ef03d50684b7e100"
+    },
+    {
+      "offset": 62548,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_adc_rstn",
+      "sha256": "919bead1bd4ae88fc797580271c15001cd0bfe48c882d9cb2dd77d83c0bdb2f2"
+    },
+    {
+      "offset": 62572,
+      "size": 68,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_gpio_isr",
+      "sha256": "3f877adbc531c6990cf25740acb7798c9270b21d7fec2c7203ed92064147c41d"
+    },
+    {
+      "offset": 62640,
+      "size": 96,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_gpio_set_direction",
+      "sha256": "9332e4c5856aa83291084dfe11abab445e1c885179be808e10f295203b1b7f9f"
+    },
+    {
+      "offset": 62736,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_gpio_set_direction"
+    },
+    {
+      "offset": 62740,
+      "size": 36,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_gpio_set_level",
+      "sha256": "bc2e948e04cf277bc8dd790cc8ab3d624386020f6de347fea390aa71e03ecc48"
+    },
+    {
+      "offset": 62776,
+      "size": 8,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_gpio_set_level"
+    },
+    {
+      "offset": 62784,
+      "size": 176,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_gpio_enable_trigger",
+      "sha256": "d297ea3341d8fef9496991b17e0644d3101b917ba29c18a1bda394c87721b2a4"
+    },
+    {
+      "offset": 62960,
+      "size": 16,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_gpio_enable_trigger"
+    },
+    {
+      "offset": 62976,
+      "size": 92,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_gpio_disable_trigger",
+      "sha256": "d90ff2fcb331b40941b032845634f56061b4dd9869c722c650b3a75727543bdb"
+    },
+    {
+      "offset": 63068,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_gpio_initialize",
+      "sha256": "a94629e7633a0e3d039e4a24a3f9856f9246d423152e2e250caaa885f584c05c"
+    },
+    {
+      "offset": 63092,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_device_list_init",
+      "sha256": "4e7e5e95824bfc057f5be66b2f41e88cbc8c32e5d74c12e7d8ec2d03816b791b"
+    },
+    {
+      "offset": 63112,
+      "size": 92,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_spi_register_master",
+      "sha256": "bddd3b535a23ea53957073abde1498c0e354ab800fb12798e766756f5e44273d"
+    },
+    {
+      "offset": 63204,
+      "size": 12,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_spi_register_master"
+    },
+    {
+      "offset": 63216,
+      "size": 12,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_dw_spi_cleanup",
+      "sha256": "7106625a18c7c6cd2c6b3da75c7b4641c5283be27d6481ab3601b09a8b399482"
+    },
+    {
+      "offset": 63228,
+      "size": 32,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_dw_spi_irq",
+      "sha256": "770352405f41c74a6f1c1c3c213bb5167dd5da93c72116cfcc7b0fff2aeac6be"
+    },
+    {
+      "offset": 63260,
+      "size": 116,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 63376,
+      "size": 602,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_dw_spi_quick_transfer",
+      "sha256": "964b5afa5ff89a937beda755efe5e1558d669c00643b24796e6ee25cd19a5e8b"
+    },
+    {
+      "offset": 63978,
+      "size": 32,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_dw_spi_quick_transfer"
+    },
+    {
+      "offset": 64010,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 64012,
+      "size": 256,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_dw_spi_probe",
+      "sha256": "afc184fb1f473b55ed519f09446e8c9d396ddc424025079f3416200eadce2354"
+    },
+    {
+      "offset": 64268,
+      "size": 12,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_dw_spi_probe"
+    },
+    {
+      "offset": 64280,
+      "size": 40,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_padmux_get",
+      "sha256": "e5af2284986f0b29768c4e62c2e3170085f771cb1e6140adb89f7ee9f1f730ae"
+    },
+    {
+      "offset": 64320,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_padmux_get"
+    },
+    {
+      "offset": 64324,
+      "size": 36,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_padmux_check",
+      "sha256": "a0567c5d096381ebe1698941c02316d253b74362a053772a12ca2e8d6bc4b165"
+    },
+    {
+      "offset": 64360,
+      "size": 76,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_padmux_set",
+      "sha256": "1f8925b8ae5ae8bdf589b1dfa6676b2a3d9c0c7c203831b7b6e32dfd707e03d3"
+    },
+    {
+      "offset": 64436,
+      "size": 8,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_padmux_set"
+    },
+    {
+      "offset": 64444,
+      "size": 72,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_padmux_init",
+      "sha256": "fa6395cc2cbc744d17d89d4f325d0003c1b48c1eac8c70eba84108aed54a1a78"
+    },
+    {
+      "offset": 64516,
+      "size": 8,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_padmux_init"
+    },
+    {
+      "offset": 64524,
+      "size": 132,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 64656,
+      "size": 28,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_watchdog_interrupt",
+      "sha256": "a0b252e832cbc80e5ab5dd7e42d2da1521bf6a6aa1dd48edf1fd711b3ed21cbe"
+    },
+    {
+      "offset": 64684,
+      "size": 128,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_watchdog_initialize",
+      "sha256": "7e418c9bfc7ed7145c90473157a4245569624b97204953232de9fbd97c35c302"
+    },
+    {
+      "offset": 64812,
+      "size": 10,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_watchdog_ping",
+      "sha256": "75a3350b641ef0ca252160dec01f5d2246c3ba7fc7f9380545d7fb3dd9dd1a7e"
+    },
+    {
+      "offset": 64822,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 64824,
+      "size": 12,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_watchdog_stop",
+      "sha256": "d10f827a10decaa5a3f926c6d48d2f5d4801720d5528636f7eddbaff4a5206fe"
+    },
+    {
+      "offset": 64836,
+      "size": 36,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_reboot",
+      "sha256": "183481196057553ffe50cf0e3ba7690da528d2afe46c014acfe2203ce10352f1"
+    },
+    {
+      "offset": 64872,
+      "size": 324,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 65196,
+      "size": 116,
+      "kind": "compiled_c",
+      "symbol": "ui2a",
+      "sha256": "1c56a84556db258117acb2b5c36a6b8bdccf7490fd138a3663516bd8ce61185f"
+    },
+    {
+      "offset": 65312,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "ui2a"
+    },
+    {
+      "offset": 65316,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "putf",
+      "sha256": "077f24889dc1989e2ffc55dbae7df48b2d121a4010480dd892cbd56e38515f16"
+    },
+    {
+      "offset": 65340,
+      "size": 204,
+      "kind": "compiled_c",
+      "symbol": "putchw",
+      "sha256": "17941c2509c00207c65d888462a7616959ebc37cd2b14a784eb9f54caf3e73d9"
+    },
+    {
+      "offset": 65544,
+      "size": 8,
+      "kind": "generated_unreachable_fill",
+      "symbol": "putchw"
+    },
+    {
+      "offset": 65552,
+      "size": 370,
+      "kind": "compiled_c",
+      "symbol": "tfp_format",
+      "sha256": "e1ca4b6708f0aa18639f5ff8ebac2ca0a9fb69e85cfa6140817f8f123c762ab5"
+    },
+    {
+      "offset": 65922,
+      "size": 46,
+      "kind": "generated_unreachable_fill",
+      "symbol": "tfp_format"
+    },
+    {
+      "offset": 65968,
+      "size": 28,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_printf",
+      "sha256": "79242060e5c7dc8d80a3c5fc32da3e619c8da639fc3fa4d1c525443a4b5bf91b"
+    },
+    {
+      "offset": 65996,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_printf"
+    },
+    {
+      "offset": 65998,
+      "size": 46,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 66044,
+      "size": 10,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_fputc",
+      "sha256": "ed24c31be459841c2b3caa4352563c5b81ca7de88e045b230a185d61bd9ab5ca"
+    },
+    {
+      "offset": 66054,
+      "size": 306,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 66360,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "LvpKwsDone",
+      "sha256": "310acf73ea192928c8cb6807edca2a4b7f2ecd3b9c17d571b19e187e2eb3d5f3"
+    },
+    {
+      "offset": 66380,
+      "size": 476,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 66856,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "LvpQueueInit",
+      "sha256": "cfb98298b268914abd19b4c90183868e23dc33cdc467f60d8f06d494a0c83071"
+    },
+    {
+      "offset": 66876,
+      "size": 70,
+      "kind": "compiled_c",
+      "symbol": "LvpQueueGet",
+      "sha256": "35342e1033dc92abf9567caae65fd8587d7005fc76d77956fceff64db06ed150"
+    },
+    {
+      "offset": 66946,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "LvpQueueGet"
+    },
+    {
+      "offset": 66950,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 66952,
+      "size": 10,
+      "kind": "compiled_c",
+      "symbol": "LvpQueueIsEmpty",
+      "sha256": "bc6d60f81dfc11f3f53d02427b0026e5f4bafde64a7523070778e7fe9852b679"
+    },
+    {
+      "offset": 66962,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 66964,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "LvpQueueIsFull",
+      "sha256": "c620a8a4045d04230f4b4bb4597e2eddb44da812b769e99a36e0d4956144e4a9"
+    },
+    {
+      "offset": 66988,
+      "size": 984,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 67972,
+      "size": 10,
+      "kind": "compiled_c",
+      "symbol": "LvpAudioInDone",
+      "sha256": "2bb18b788a135470012a4ed668c79205990ec18ac5877ca8b9a82ccafacf3608"
+    },
+    {
+      "offset": 67982,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "LvpAudioInDone"
+    },
+    {
+      "offset": 67984,
+      "size": 700,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 68684,
+      "size": 88,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_register_suspend",
+      "sha256": "684471d1e22b2b6fda3d868d65be41fac2baec3fc303efab8a8542ab272c7ae7"
+    },
+    {
+      "offset": 68772,
+      "size": 88,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_register_resume",
+      "sha256": "3514cb617280c5f98807995fe52d24b830e64d5f9b4d77a913d5467e735cf73d"
+    },
+    {
+      "offset": 68860,
+      "size": 3012,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 71872,
+      "size": 132,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_uart_async_tick",
+      "sha256": "a49f4f7925b47f1154e43e38ee49b9280dccdc0aeaad81351ebd5aedb989251f"
+    },
+    {
+      "offset": 72004,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_uart_async_tick"
+    },
+    {
+      "offset": 72008,
+      "size": 488,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 72496,
+      "size": 84,
+      "kind": "compiled_c",
+      "symbol": "LvpInitMode",
+      "sha256": "4c82d299076da74b2c76f4051466c3df2d1675782b90a5a1a553159441df98d4"
+    },
+    {
+      "offset": 72580,
+      "size": 32,
+      "kind": "compiled_c",
+      "symbol": "LvpModeTick",
+      "sha256": "2adc7e571bea6e30fbf1173586db8a6876fad9764856fca8493542ed6409bacf"
+    },
+    {
+      "offset": 72612,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "LvpModeTick"
+    },
+    {
+      "offset": 72616,
+      "size": 2,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_idle_tick",
+      "sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a"
+    },
+    {
+      "offset": 72618,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_idle_tick"
+    },
+    {
+      "offset": 72620,
+      "size": 4,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_idle_buffer_init",
+      "sha256": "45370350a684766b91f6812212e07e5548ee4513419b4ebad49d55184bbcc347"
+    },
+    {
+      "offset": 72624,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_idle_done",
+      "sha256": "1edf61be1c830ac39d16195d785c4b595eeb5edf1a0ab83495ff9388c754ab53"
+    },
+    {
+      "offset": 72640,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_idle_init",
+      "sha256": "3d966926811795d95e242ece4b3212e71c21d931071b55ef3a5bd31bd68cdadf"
+    },
+    {
+      "offset": 72656,
+      "size": 8,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_tws_buffer_init",
+      "sha256": "c2858d003b1b32fcf0616cee7bc1fa944095da1b984c7fad5804d8170309d61e"
+    },
+    {
+      "offset": 72664,
+      "size": 36,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_tws_done",
+      "sha256": "7287ce9fcec71966beda3f9622c61e199fdc0cf8db2ad740c01ad3306af18a5f"
+    },
+    {
+      "offset": 72700,
+      "size": 108,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_tws_init",
+      "sha256": "078a066c2dd64a7abdb1fe757f0e7545eff616c2c47403bd5aae79d04a99bbf1"
+    },
+    {
+      "offset": 72808,
+      "size": 420,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 73228,
+      "size": 120,
+      "kind": "compiled_c",
+      "symbol": "LvpPrintMaxKwsList",
+      "sha256": "b47690e4dbe7001c18a30d7a2d8a5fc05c2c4235ad02cca6c1ab695eb79ae178"
+    },
+    {
+      "offset": 73348,
+      "size": 76,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 73424,
+      "size": 32,
+      "kind": "compiled_c",
+      "symbol": "LvpInitMaxKws",
+      "sha256": "d8c283a78a4c47e5cb414550c067811f9a4aee8c7beadeb012886d4750a33efd"
+    },
+    {
+      "offset": 73456,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "KwsStrategyReset",
+      "sha256": "dca3f6de054f478e1ffc203dc1eeebcb72c39ad70a191c090f26959e09013d2f"
+    },
+    {
+      "offset": 73476,
+      "size": 8,
+      "kind": "compiled_c",
+      "symbol": "KwsStrategyInit",
+      "sha256": "a8d2053faa21656bd4def9c5933ed4c9c013520e45d946e35f3d9bbc2314a08e"
+    },
+    {
+      "offset": 73484,
+      "size": 144,
+      "kind": "compiled_c",
+      "symbol": "KwsStragegyInsertKwsActivation",
+      "sha256": "72bf37ef9648e882dcf430e445533e243908b40731bcce104d6b097deeaa1be4"
+    },
+    {
+      "offset": 73628,
+      "size": 484,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 74112,
+      "size": 6,
+      "kind": "compiled_c",
+      "symbol": "LvpModelGetCmdSize",
+      "sha256": "f1696730dce84d40bae6ffb7652cb8587c148d339af3f9c7b4bc1fab6170c711"
+    },
+    {
+      "offset": 74118,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 74120,
+      "size": 8,
+      "kind": "compiled_c",
+      "symbol": "LvpModelGetWeightSize",
+      "sha256": "9e42c34e2845d3cb222c3a9fdb7052c5afe7295954eac0b05cdfde745c2a0628"
+    },
+    {
+      "offset": 74128,
+      "size": 4,
+      "kind": "compiled_c",
+      "symbol": "LvpModelGetOpsSize",
+      "sha256": "45370350a684766b91f6812212e07e5548ee4513419b4ebad49d55184bbcc347"
+    },
+    {
+      "offset": 74132,
+      "size": 6,
+      "kind": "compiled_c",
+      "symbol": "LvpModelGetDataSize",
+      "sha256": "e038b4cc0483c3f283c740e8913cfe415d7f70a4a83710b2c957de768f0e7e9a"
+    },
+    {
+      "offset": 74138,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 74140,
+      "size": 4,
+      "kind": "compiled_c",
+      "symbol": "LvpModelGetTmpSize",
+      "sha256": "121a905852ec4e098f07b7890d24bb5ac863f1ab9ef50247a25391d4b4350b5d"
+    },
+    {
+      "offset": 74144,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "LvpSetSnpuTask",
+      "sha256": "0371a4e5c9a2c0e5e8d5ad62e13a94e5b33a7da838d2d3116519cdb18693faa1"
+    },
+    {
+      "offset": 74164,
+      "size": 56,
+      "kind": "compiled_c",
+      "symbol": "LvpCTCModelInitSnpuTask",
+      "sha256": "abef8eff3685a8e789509abad858f5f1323969ae83d0a7c4eb160f56d91845fd"
+    },
+    {
+      "offset": 74220,
+      "size": 8,
+      "kind": "compiled_c",
+      "symbol": "LvpCTCModelGetSnpuOutBuffer",
+      "sha256": "ffd5ae7a1cf361e478c56a5f2334db4d7ab17d32e9e4660c377f243e5e0c3db6"
+    },
+    {
+      "offset": 74228,
+      "size": 2,
+      "kind": "compiled_c",
+      "symbol": "LvpCTCModelGetSnpuFeatsBuffer",
+      "sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a"
+    },
+    {
+      "offset": 74230,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 74232,
+      "size": 6,
+      "kind": "compiled_c",
+      "symbol": "LvpCTCModelGetSnpuStateBuffer",
+      "sha256": "2fdec7e2ba49640dc3190bd0a2d7e9f2d5426b306837cd7c8de7f28c7ceb22d3"
+    },
+    {
+      "offset": 74238,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 74240,
+      "size": 6,
+      "kind": "compiled_c",
+      "symbol": "LvpCTCModelGetSnpuFeatsDim",
+      "sha256": "49eb9189c4982c4fad237355d11c7b85a886f53588793e017054340d8d7719f3"
+    },
+    {
+      "offset": 74246,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 74248,
+      "size": 28,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_app_resume",
+      "sha256": "9e3f8b938241ed0908d706c81e1468eb9e9e3781bb85479bc7bb7cfbe1a1a616"
+    },
+    {
+      "offset": 74276,
+      "size": 6,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_watchdog_callback",
+      "sha256": "681d9a80d95dc259f5c9f5ccf26f7ba04e800e5553533ade73e76b8d8c11db21"
+    },
+    {
+      "offset": 74282,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_watchdog_callback"
+    },
+    {
+      "offset": 74284,
+      "size": 32,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_app_suspend",
+      "sha256": "e60aac77b3e922a5d4ebfbcec0889ac2470a435a401d0e0f5a27050ba9674a37"
+    },
+    {
+      "offset": 74316,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "LvpTriggerAppEvent",
+      "sha256": "2f5554b3cdeefadc8c4ec289e4c5cf451d9be34a66a46b4bdbf6b31fc9fb6dad"
+    },
+    {
+      "offset": 74336,
+      "size": 116,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_app_initialize",
+      "sha256": "51d1876ba02e685e95be47000a01666b15ae51e999c51155007f020be18ea2da"
+    },
+    {
+      "offset": 74452,
+      "size": 80,
+      "kind": "compiled_c",
+      "symbol": "LvpAppEventTick",
+      "sha256": "2f22190e80fcb026d413a121506eff7e9d31f5293eaa7b16cb2f9623d5e809ba"
+    },
+    {
+      "offset": 74532,
+      "size": 2652,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 77184,
+      "size": 160,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_crc32_no_comp",
+      "sha256": "b740605e74bcf52961f89b1f21ccef845df11b28df79a62d6afdf0896d5b239f"
+    },
+    {
+      "offset": 77344,
+      "size": 20,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_crc32_no_comp"
+    },
+    {
+      "offset": 77364,
+      "size": 12,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_crc32",
+      "sha256": "c3ee7a90b568411ce33a4f9c8a1dde841ba43f2c1a82f0c9a7333e92f865be8c"
+    },
+    {
+      "offset": 77376,
+      "size": 280,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 77656,
+      "size": 102,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_memset",
+      "sha256": "7203abf09c7b20f3cb6a21e90f268a0ac5e4cec95108d30d3cf99f34a8fbe2a1"
+    },
+    {
+      "offset": 77758,
+      "size": 58,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_memset"
+    },
+    {
+      "offset": 77816,
+      "size": 4514,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 82330,
+      "size": 8,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_snpu_dump_word",
+      "sha256": "a0072e8eead89ca05052e1fcbcddbdb5f5412b7822aa578c6be9a50112457d07"
+    },
+    {
+      "offset": 82338,
+      "size": 70,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_snpu_overtime_addresses",
+      "sha256": "072866dd29a71e21442f30711c1ac37eeac0abe05b2e99550f82c4aff6767daf"
+    },
+    {
+      "offset": 82408,
+      "size": 30,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_snpu_overtime_before",
+      "sha256": "b9dca4d654284aa6f3a55dba5aa02a6849cf4fd425ac757c2a3acaa07e3be46b"
+    },
+    {
+      "offset": 82438,
+      "size": 23,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_snpu_overtime_command",
+      "sha256": "50a5ee02d926dac052e9c923afc9e8578895d6d1ed7c2a043d5c4522b5bcfe56"
+    },
+    {
+      "offset": 82461,
+      "size": 16,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_snpu_overtime_type",
+      "sha256": "bccc5284ace35885f55b5a323561fa0fd862a025f8a6595854754956d40d6021"
+    },
+    {
+      "offset": 82477,
+      "size": 35,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 82512,
+      "size": 64,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_padmux_defaults",
+      "sha256": "8ddaed4c3145c740d216bc4597d5c78cdb33460e1539a147c78f4c5ec1e4d5e8"
+    },
+    {
+      "offset": 82576,
+      "size": 22,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 82598,
+      "size": 22,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_watchdog_error",
+      "sha256": "882c1dcd4a416b20677e601f94f471dc4d629cda89ad5fd063d41f627756f46f"
+    },
+    {
+      "offset": 82620,
+      "size": 1101,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 83721,
+      "size": 14,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_uart_error_string",
+      "sha256": "dfcaaec7ccfc781e5c018d4ad0f07f1e3a5fafabc4f59624039433170ace25d0"
+    },
+    {
+      "offset": 83735,
+      "size": 57,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 83792,
+      "size": 20,
+      "kind": "generated_source_data",
+      "symbol": "lvp_idle_mode_info",
+      "sha256": "228a928f037258249c3d0f3b644392f50a7c4f70beba0d929660eb35528b3cf3"
+    },
+    {
+      "offset": 83812,
+      "size": 22,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_idle_exit_message",
+      "sha256": "4ab2501b0e3b8e9b1f30608661701e48029b6db0de846a5d28a45b8e1e9aae53"
+    },
+    {
+      "offset": 83834,
+      "size": 22,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_idle_init_message",
+      "sha256": "d07d293d23272d812fb93e98083ed78a59f516c586bd4c89f2fb9ac250fe391f"
+    },
+    {
+      "offset": 83856,
+      "size": 20,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 83876,
+      "size": 24,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_tws_exit",
+      "sha256": "8e1e1d58893a4aa52f714bdd7ae6b63abb97afeec0d58c129c120ee58ace1b5a"
+    },
+    {
+      "offset": 83900,
+      "size": 126,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 84026,
+      "size": 43,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_max_list_header",
+      "sha256": "72c51e0a535fffabc4ceae3d958042bd4c888f0905875b3dc0edc9890fb2b864"
+    },
+    {
+      "offset": 84069,
+      "size": 27,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_max_list_word",
+      "sha256": "3ee6dde84e007788ac0c97246f22ea38830763302211cfa7823d3108d75919af"
+    },
+    {
+      "offset": 84096,
+      "size": 12,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_max_list_value",
+      "sha256": "d95a22a79e919d634527b6f1da4162dd113552a2080f1c1c4142a53ce4f665f3"
+    },
+    {
+      "offset": 84108,
+      "size": 13,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_max_list_threshold",
+      "sha256": "f2593b6f0129913f3e4abe6afe85f1ce300ad26932eb2d41597fd7cb53a4950d"
+    },
+    {
+      "offset": 84121,
+      "size": 66,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_max_init_error",
+      "sha256": "cd6fd0832fed0057accde9b3b18e121a42ea87053f875dc0b15809222bf2f1d9"
+    },
+    {
+      "offset": 84187,
+      "size": 159,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 84346,
+      "size": 15,
+      "kind": "generated_source_data",
+      "symbol": "suspend_name",
+      "sha256": "725994ebdd066c23cff8b59339dda76dfe9a4ac39124508aaa130da59fec7df8"
+    },
+    {
+      "offset": 84361,
+      "size": 14,
+      "kind": "generated_source_data",
+      "symbol": "resume_name",
+      "sha256": "bcf3ac581380b16bb1b55d2fc57795a0a59815cd090df3e84b6ecb1cd8968971"
+    },
+    {
+      "offset": 84375,
+      "size": 951,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 85326,
+      "size": 2,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_max_list_newline",
+      "sha256": "102b51b9765a56a3e899f7cf0ee38e5251f9c503b357b330a49183eb7b155604"
+    },
+    {
+      "offset": 85328,
+      "size": 324,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 85652,
+      "size": 1024,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_crc_table",
+      "sha256": "12f3e0576d447eb37b36d82ba0c1c5481b8f0d12fdc70347ce4a076b229d4c86"
+    },
+    {
+      "offset": 86676,
+      "size": 276,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 86952,
+      "size": 56,
+      "kind": "generated_source_data",
+      "symbol": "flash_info_dispatch_table",
+      "sha256": "4c62ae033f6b3585b733c3db8e061a4d796e13a59be738c46ae1b958607fd014"
+    },
+    {
+      "offset": 87008,
+      "size": 8,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_flash_name_p25q21l",
+      "sha256": "93e7b52ddb821f50dee9c3cb8caf38edf956c8c94935a1f9917857a9bb439365"
+    },
+    {
+      "offset": 87016,
+      "size": 8,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_flash_name_p25q40l",
+      "sha256": "deb005c80de171bdcbe675ffd606956cff5c498906c63884119b36ab77307453"
+    },
+    {
+      "offset": 87024,
+      "size": 8,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_flash_name_p25q80l",
+      "sha256": "3924ce70a19e25d1d8d5131fdb2200660173be1230f70b804e95b4e3983b815f"
+    },
+    {
+      "offset": 87032,
+      "size": 9,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_flash_name_en25s20a",
+      "sha256": "1aa2311d54394c1709718896bd62842c70d63d33fc4129a8b1b2201f17fca1d9"
+    },
+    {
+      "offset": 87041,
+      "size": 9,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_flash_name_en25s40a",
+      "sha256": "b62a3154de5a5a6c76a0d4b65c6d72ee43acc9728bc9b7e529171694de809e8e"
+    },
+    {
+      "offset": 87050,
+      "size": 10,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_flash_name_zb25wq80a",
+      "sha256": "b8dabb634a3dd91a34025ea488300c8ad306e8f1f0bb37c68591eb837599d961"
+    },
+    {
+      "offset": 87060,
+      "size": 256,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 87316,
+      "size": 40,
+      "kind": "compiled_assembly",
+      "symbol": "open_cfw_gx8002_reset_entry",
+      "sha256": "9fb7304cee7e70154b75908d044b5945863004400d46aab96c7d3ddef53457e9"
+    },
+    {
+      "offset": 87356,
+      "size": 28,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_clear_bss",
+      "sha256": "b1da93d1e1f8ddfa042a1bc1c031092b7bc83589cee44fd5434e0b61a7e28313"
+    },
+    {
+      "offset": 87384,
+      "size": 8,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_clear_bss"
+    },
+    {
+      "offset": 87392,
+      "size": 164,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_system_initialize",
+      "sha256": "f360e6bb561e07d2bc525a3346b1fbef903fa8b37bf15bf055d023b86f2a5a12"
+    },
+    {
+      "offset": 87556,
+      "size": 92,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 87648,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_spi_wait_idle",
+      "sha256": "f9d3683293b7c1a9e4d1da0cc7b9002f2fd5b956a6137c69cc1a0b0d0df9cd0a"
+    },
+    {
+      "offset": 87664,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_spi_wait_rx_empty",
+      "sha256": "da93999fca646e1b9e017846bc7f2eb1b674b3d4bbbde58655b21638e5e06a1f"
+    },
+    {
+      "offset": 87684,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_spi_wait_tx_empty",
+      "sha256": "ec144e2f4506e7013b5a249fd1ef46b01de8e8ba1809c5b6bdbf27b5cd2c317e"
+    },
+    {
+      "offset": 87704,
+      "size": 86,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_command_read",
+      "sha256": "73bdcf28e547cab400698ae50bac8b118c0506caf1208db4634ec71211f6aa87"
+    },
+    {
+      "offset": 87790,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_command_read"
+    },
+    {
+      "offset": 87792,
+      "size": 88,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_command_write",
+      "sha256": "234048697e90fd5d8fb5a76542ead4e68a227b4804ef8e959dc9499d93adf6d1"
+    },
+    {
+      "offset": 87880,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_read_status",
+      "sha256": "33208916865f5312951fc4d352a09f7b012586a5c3682250852131e279cfe203"
+    },
+    {
+      "offset": 87904,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_write_enable",
+      "sha256": "00395533c33256f30d9c6d109fae92144ce5dbea5f9c8f59a4b055adbda91faa"
+    },
+    {
+      "offset": 87920,
+      "size": 18,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_wait_ready",
+      "sha256": "1d94fdd049a92b17fcebb6f8fe2fc1970686e84de1bc5692908c543f1480b18f"
+    },
+    {
+      "offset": 87938,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_wait_ready"
+    },
+    {
+      "offset": 87940,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_read_status2",
+      "sha256": "3560821a080ce82930cd83307857cad513d6f0e687e6ec829c18d9b46cb0a358"
+    },
+    {
+      "offset": 87964,
+      "size": 140,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_word_program",
+      "sha256": "5452095d8efe914ca8b4b84c8eafaddf8a4269c61e0ab21a5eafbef6938c2a80"
+    },
+    {
+      "offset": 88104,
+      "size": 8,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_word_program"
+    },
+    {
+      "offset": 88112,
+      "size": 60,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_read",
+      "sha256": "46dfe5ffb221de3cfcbddb9b32be56391812902a7dd21dc0ea66a46d3f6472b1"
+    },
+    {
+      "offset": 88172,
+      "size": 76,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_getinfo",
+      "sha256": "fcef4fa501b611b044448323e885095a71fd7383a9f23db5eb5b77f058315622"
+    },
+    {
+      "offset": 88248,
+      "size": 68,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_block_bounds",
+      "sha256": "34ddbdc8da6084ba01acdd3758bf13da9161b79f0e06a88976c6d354171f3dee"
+    },
+    {
+      "offset": 88316,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_block_bounds"
+    },
+    {
+      "offset": 88320,
+      "size": 144,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_write_protect_status",
+      "sha256": "5591cf4a6510b1d84980eb350bf3d4331b70b8d03cb129c860edfb9d8110d8d0"
+    },
+    {
+      "offset": 88464,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_write_protect_status"
+    },
+    {
+      "offset": 88468,
+      "size": 36,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_write_protect_mode",
+      "sha256": "1b5ff686fc469b6d0ae4c9afad978938cdf791b3a832f8795a5bace7420f1ffa"
+    },
+    {
+      "offset": 88504,
+      "size": 204,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_write_protect_set",
+      "sha256": "985f5c54be2f1ec6641f7d9d9e83e16e9407fe2614d73da60f24116df33cc306"
+    },
+    {
+      "offset": 88708,
+      "size": 14,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_write_protect_lock",
+      "sha256": "5a8ecfd5f8c3397ead6f25ff5c0f4f71011690f078c23afaedb9e2c3a05f4665"
+    },
+    {
+      "offset": 88722,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_write_protect_lock"
+    },
+    {
+      "offset": 88724,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_write_protect_unlock",
+      "sha256": "c7806e43d6d54db8118a11793c200a3b85dae2f6c4bf5cbd9aa961c929ef4d1c"
+    },
+    {
+      "offset": 88740,
+      "size": 38,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_block_range",
+      "sha256": "4903f0c76a40c94b43279ee525c9a6ed4083010f1f631ec5fe668c41f903ea18"
+    },
+    {
+      "offset": 88778,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_block_range"
+    },
+    {
+      "offset": 88780,
+      "size": 8,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_sync",
+      "sha256": "2afd8af3a1d9df086a34790fe77639d14904b1a98ebda850ab7b86a2eebbae94"
+    },
+    {
+      "offset": 88788,
+      "size": 30,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_interrupt",
+      "sha256": "f05157766938ef6130db77f2cc491225edb0e0e927f48e0cf2be66598dd04b13"
+    },
+    {
+      "offset": 88818,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_interrupt"
+    },
+    {
+      "offset": 88820,
+      "size": 68,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_otp_status",
+      "sha256": "3701863b83f5a560dc1add9c004af7dd3813b87552e878bce53589ecd41ab7cd"
+    },
+    {
+      "offset": 88888,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_otp_get_region",
+      "sha256": "22ecdbf5a23aa230e9da463f83e5a8d59046f4cdcbf7ab0b3a20b3090643cefa"
+    },
+    {
+      "offset": 88908,
+      "size": 36,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_otp_set_region",
+      "sha256": "98140d110ef069c6ebff09bf2c415dc0cce88b1449657e87b0e4453ee0487fc0"
+    },
+    {
+      "offset": 88944,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_otp_set_region"
+    },
+    {
+      "offset": 88948,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_otp_get_current_region",
+      "sha256": "67e7f774b7b48a64079a5fdce54c80d21b7719c4cec79d037fca383151f667cf"
+    },
+    {
+      "offset": 88972,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_otp_get_region_size",
+      "sha256": "b5efb0f67d08e6e62b466ef4ebe983f19435efeb2a5a9c00071f7b705dad3f49"
+    },
+    {
+      "offset": 88992,
+      "size": 60,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_encode_address",
+      "sha256": "4fe50743faae9aaf76d12ac6cecae89dc8b84119746bf80772889ad5a397ca83"
+    },
+    {
+      "offset": 89052,
+      "size": 16,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_encode_address"
+    },
+    {
+      "offset": 89068,
+      "size": 92,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_otp_erase",
+      "sha256": "82225466c69365354713d54e7c851f74f1149d4a72b6cd5efb2f49476e764dea"
+    },
+    {
+      "offset": 89160,
+      "size": 120,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_page_program",
+      "sha256": "90a127ecf25ef110a8bd0fd9ed60d3252fa316eccc4d014f99d721f2ee250ea2"
+    },
+    {
+      "offset": 89280,
+      "size": 172,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_word_read",
+      "sha256": "d8e8d97b9fd497b4c47dd3f9d486f6bf55147013326e46f79fad9c4803c37c65"
+    },
+    {
+      "offset": 89452,
+      "size": 160,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_erase",
+      "sha256": "971d1ec1013647276c1b10cf82478725e99d44f8a06ecf53d12eca038ee6c04f"
+    },
+    {
+      "offset": 89612,
+      "size": 8,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_erase"
+    },
+    {
+      "offset": 89620,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_chip_erase",
+      "sha256": "b5ac9a7d7886f0e79976f0aa6a7903c5db5a604048427ad847c56f16d7222cf1"
+    },
+    {
+      "offset": 89640,
+      "size": 160,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_otp_transmit",
+      "sha256": "f84244af2c0439e7c1ab187f999a419a0d7b98029a46b3a0509b9d3001baf155"
+    },
+    {
+      "offset": 89800,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_otp_transmit"
+    },
+    {
+      "offset": 89804,
+      "size": 228,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_otp_write",
+      "sha256": "18501eece64fa3fc6c74e7a48fa6a55deb694d5e5e1265a09543d19033dde601"
+    },
+    {
+      "offset": 90032,
+      "size": 8,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_otp_write"
+    },
+    {
+      "offset": 90040,
+      "size": 344,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_otp_read",
+      "sha256": "35a2af68a0aa0abf63b214243b02f3aa0e4065e48a732047297f4f27238a61bf"
+    },
+    {
+      "offset": 90384,
+      "size": 8,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_otp_read"
+    },
+    {
+      "offset": 90392,
+      "size": 136,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_uid_read",
+      "sha256": "77076231a56de40f396cb33698d19dabc7662c6fbb97336de115223f25f4d27d"
+    },
+    {
+      "offset": 90528,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_uid_read"
+    },
+    {
+      "offset": 90532,
+      "size": 160,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_discover",
+      "sha256": "2345884da4748afb7a83099292b0dfdf8ce8f79600d6623d90162ec00150cfef"
+    },
+    {
+      "offset": 90692,
+      "size": 20,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_discover"
+    },
+    {
+      "offset": 90712,
+      "size": 12,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_gettype",
+      "sha256": "c142502ff3114f03c5ce206749fe46a76ad51944285e2228d7744cb1a6ce70c9"
+    },
+    {
+      "offset": 90724,
+      "size": 100,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_otp_lock",
+      "sha256": "5f1371980e8a22de3ed3d2122b6a9257a5f20f51f72c5d1a47b41caeb25c1af7"
+    },
+    {
+      "offset": 90824,
+      "size": 54,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_quad_enable",
+      "sha256": "568ffe8565b5035a08a8b5e9f24af77f7b15d62bd3b9f677502cb03c502ec195"
+    },
+    {
+      "offset": 90878,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_quad_enable"
+    },
+    {
+      "offset": 90880,
+      "size": 66,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_device_config",
+      "sha256": "96b52487b44bc43ae907f6c2cb534ddb28352540c299ad7cc7d7c7a9bc0fa8f8"
+    },
+    {
+      "offset": 90946,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_device_config"
+    },
+    {
+      "offset": 90948,
+      "size": 60,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_quad_enable_pair",
+      "sha256": "51bb5d4aee657dedd25406afd64070d57d43b1d2d040594e083c048b6022b49d"
+    },
+    {
+      "offset": 91008,
+      "size": 204,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_xip_config",
+      "sha256": "473889904dae4bd3c4ba8cfca7d8f2c17b882d11872258a70fda2be9e6d7fc56"
+    },
+    {
+      "offset": 91212,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_flash_xip_config"
+    },
+    {
+      "offset": 91216,
+      "size": 428,
+      "kind": "compiled_c",
+      "symbol": "flash_interface_initialize",
+      "sha256": "d15c5553eaa56de14f59c48aa1b9dc5b35bddf50ad9b34b35ec760564a07428d"
+    },
+    {
+      "offset": 91644,
+      "size": 8,
+      "kind": "generated_unreachable_fill",
+      "symbol": "flash_interface_initialize"
+    },
+    {
+      "offset": 91652,
+      "size": 208,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_initialize",
+      "sha256": "fa446ed18d11da34ffae13a48f87ce089af84de83098ac81b8db2274433fabc7"
+    },
+    {
+      "offset": 91860,
+      "size": 4,
+      "kind": "generated_source_data",
+      "symbol": "configuration.0",
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "offset": 91864,
+      "size": 44,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_flash_protection_initialize",
+      "sha256": "2861894f4c8650211442e65d204df23242894deb5d6b60ea7f24978d6a3614af"
+    },
+    {
+      "offset": 91908,
+      "size": 592,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 92500,
+      "size": 66,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_reset_reason",
+      "sha256": "2c8844387c6f298e34b408f42d40214280aad594654585228b0aa579ca57bb90"
+    },
+    {
+      "offset": 92566,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_reset_reason"
+    },
+    {
+      "offset": 92568,
+      "size": 30,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_start_mode",
+      "sha256": "81524a329c1561cf3abec4eb0887bf1ec0fdd53dcb6799ed58b83be159aea0b6"
+    },
+    {
+      "offset": 92598,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_start_mode"
+    },
+    {
+      "offset": 92600,
+      "size": 40,
+      "kind": "generated_source_data",
+      "symbol": "platform_config_dispatch_table",
+      "sha256": "308a2863220425a1fe9b604e355cf773712981883107d1aca5ba46a6cd55ce03"
+    },
+    {
+      "offset": 92640,
+      "size": 120,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 92760,
+      "size": 160,
+      "kind": "compiled_c",
+      "symbol": "__module_get_info",
+      "sha256": "002a00eee4ab7761a5a8fce8b26c97c18509b72615dc8d558ac107189ecc6b8f"
+    },
+    {
+      "offset": 92920,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "__module_get_info"
+    },
+    {
+      "offset": 92924,
+      "size": 1432,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 94356,
+      "size": 254,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_platform_gate",
+      "sha256": "d1730683d8b0b9745b3fa086ce0af1b1a9871d36c62e05ba1bcfc6f5eba6803a"
+    },
+    {
+      "offset": 94610,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_platform_gate"
+    },
+    {
+      "offset": 94612,
+      "size": 108,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 94720,
+      "size": 36,
+      "kind": "compiled_c",
+      "symbol": "gx_clock_set_module_snpu_enable",
+      "sha256": "82ec3ac21ca5e8c3ef48dadfa9c8db649d492fef4058b2cc5e5f8dab3e05fc65"
+    },
+    {
+      "offset": 94756,
+      "size": 444,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 95200,
+      "size": 148,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_platform_gate_switches",
+      "sha256": "5083b30f8f66b1cee1a568c50a56c4d773cbbe2ce11c8827eaf1cfb365cdf161"
+    },
+    {
+      "offset": 95348,
+      "size": 76,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 95424,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_irq_enable",
+      "sha256": "56853caf38fc9f39f447f650d2fb7ebc2c966846828ef65ca082a578a76dad08"
+    },
+    {
+      "offset": 95448,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_irq_enable"
+    },
+    {
+      "offset": 95452,
+      "size": 28,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_irq_disable",
+      "sha256": "1a07efec4102044820f1dccd482cf3b68d04432b93f84a63fc09d894954a3728"
+    },
+    {
+      "offset": 95480,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_irq_restore_enabled",
+      "sha256": "b7632bc1df988fe3a7037b7f2e308dc01719f9fffc0c9a82699958cdd1a42d5b"
+    },
+    {
+      "offset": 95504,
+      "size": 8,
+      "kind": "compiled_c",
+      "symbol": "gx_mask_irq",
+      "sha256": "625e78a4196a5487bf64e3f15e6ae50ab149f74e8440b6cdfc73fb175aa87e3d"
+    },
+    {
+      "offset": 95512,
+      "size": 8,
+      "kind": "compiled_c",
+      "symbol": "gx_unmask_irq",
+      "sha256": "df2aefe1f41bc6706169ae40b78db39ecb8b47fae94d666c1517f6c3adfab656"
+    },
+    {
+      "offset": 95520,
+      "size": 40,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_irq_save_disable",
+      "sha256": "aaebcc432d0991944ce68e089f7d72bac13ea8614110c77edbdd2bb641e70075"
+    },
+    {
+      "offset": 95560,
+      "size": 8,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 95568,
+      "size": 36,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_request_irq",
+      "sha256": "4893a4aa74bf57e55d264bcf3bf25c66f88906e7b312307e62f4cf3009666eab"
+    },
+    {
+      "offset": 95604,
+      "size": 10,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_irq_save",
+      "sha256": "9c1f817c9205b13c6e97621f3d835dfd96fc53350e495c1f6ebf710555a72fd4"
+    },
+    {
+      "offset": 95614,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_irq_save"
+    },
+    {
+      "offset": 95616,
+      "size": 6,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_irq_restore",
+      "sha256": "7593678031624d1ed8d5c3c73c205df650f800e7727bf28e3ef0b40df48cce75"
+    },
+    {
+      "offset": 95622,
+      "size": 2,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_irq_restore"
+    },
+    {
+      "offset": 95624,
+      "size": 80,
+      "kind": "compiled_assembly",
+      "symbol": "open_cfw_gx8002_irq_compact_entry",
+      "sha256": "4603c68912b68c0dc567ddcea48266e00421c600eec7ac5c0e8db8a55dfc9288"
+    },
+    {
+      "offset": 95704,
+      "size": 32,
+      "kind": "compiled_c",
+      "symbol": "gx_dcache_enable",
+      "sha256": "27131066495edc120dbc5b8bd8689e4e56505161ad05ca940f828b0ce290e973"
+    },
+    {
+      "offset": 95736,
+      "size": 128,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 95864,
+      "size": 88,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_dcache_clean_range",
+      "sha256": "6759d32ec24839030372f5d2588373fd248de487c0009122746d6f553b3cb874"
+    },
+    {
+      "offset": 95952,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_dcache_clean_range"
+    },
+    {
+      "offset": 95956,
+      "size": 92,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 96048,
+      "size": 28,
+      "kind": "compiled_c",
+      "symbol": "gx_icache_enable",
+      "sha256": "c8f8f2e2b43f4522d3124581dcbd8f4ad270f7cc5a10c13211819c23adb8e06f"
+    },
+    {
+      "offset": 96076,
+      "size": 96,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_memcpy",
+      "sha256": "c0073030be5adf13878faab7f99cc205447c78cdf56b9c4f2cae0544685cc377"
+    },
+    {
+      "offset": 96172,
+      "size": 30,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_memcpy"
+    },
+    {
+      "offset": 96202,
+      "size": 1286,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 97488,
+      "size": 20,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_board_initialize",
+      "sha256": "f4d9e98b7ce4ca2ab12c33fca6d9b6da5d5e1e96fe7c28b9e50f3b34b5c3202f"
+    },
+    {
+      "offset": 97508,
+      "size": 164,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 97672,
+      "size": 196,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_platform_config",
+      "sha256": "9beb14aba99f83e4a1dcc9e5118a4569fa0ecae67e396a3e8828015101551d12"
+    },
+    {
+      "offset": 97868,
+      "size": 16,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_platform_config"
+    },
+    {
+      "offset": 97884,
+      "size": 880,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 98764,
+      "size": 86,
+      "kind": "compiled_c",
+      "symbol": "LvpQueuePut",
+      "sha256": "188dd2d5ff8fd5c96c2582c6483c1c589a1e6a6241fbb414cc231892ccae1c1c"
+    },
+    {
+      "offset": 98850,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "LvpQueuePut"
+    },
+    {
+      "offset": 98854,
+      "size": 258,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 99112,
+      "size": 40,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_main",
+      "sha256": "1f72bf9dc8487a6d644fda9abea9fda5d1de355bdf8472734835fcaf88e6ea5d"
+    },
+    {
+      "offset": 99152,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_main"
+    },
+    {
+      "offset": 99156,
+      "size": 420,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 99576,
+      "size": 32,
+      "kind": "generated_source_data",
+      "symbol": "flash_state",
+      "sha256": "4c13016a7b3d2210e1fc05016be996b5180ca7270a24ff854cfc4ecc5f218f6a"
+    },
+    {
+      "offset": 99608,
+      "size": 120,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_flash_interface",
+      "sha256": "3ed98080020e5113ba225cc8807b4f170c5aeaf222848675bb805c74945ded8c"
+    },
+    {
+      "offset": 99728,
+      "size": 40,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_flash_protection_256k",
+      "sha256": "7d2f303a1df1a13df5c5a919f54f4ec921abe84a9b703db55ba28472d35b07cf"
+    },
+    {
+      "offset": 99768,
+      "size": 56,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_flash_protection_512k",
+      "sha256": "0bbbbabc2ae6f74271f7ee0c52a48d5213691a55089d482b1da0041a01391928"
+    },
+    {
+      "offset": 99824,
+      "size": 72,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_flash_protection_1024k",
+      "sha256": "930387170749728e23aee7289ff8308c0e3514ae76859417138adb4811213373"
+    },
+    {
+      "offset": 99896,
+      "size": 168,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 100064,
+      "size": 20,
+      "kind": "generated_source_data",
+      "symbol": "flash_otp_descriptor",
+      "sha256": "09b41766794d0ca0378b72a89022efd40dfabec77f8215ea02c2471641cfa255"
+    },
+    {
+      "offset": 100084,
+      "size": 416,
+      "kind": "generated_source_data",
+      "symbol": "gx_clock_param_table",
+      "sha256": "64a888d435653e525749e8de221f6b171d5c0f4e7d7270f146cfa42521856296"
+    },
+    {
+      "offset": 100500,
+      "size": 3,
+      "kind": "generated_source_data",
+      "symbol": "gx_clock_dto_table",
+      "sha256": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b"
+    },
+    {
+      "offset": 100503,
+      "size": 1,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 100504,
+      "size": 68,
+      "kind": "generated_source_data",
+      "symbol": "gx_clock_div_table",
+      "sha256": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872"
+    },
+    {
+      "offset": 100572,
+      "size": 948,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 101520,
+      "size": 176,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_wakeword_parameters",
+      "sha256": "2cd8ce5f9d52d8970e10cc44c6deb329a44a962b8754ce5b350a740067ad5c53"
+    },
+    {
+      "offset": 101696,
+      "size": 149908,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 251604,
+      "size": 32,
+      "kind": "compiled_c",
+      "symbol": "gx_dcache_enable",
+      "sha256": "27131066495edc120dbc5b8bd8689e4e56505161ad05ca940f828b0ce290e973"
+    },
+    {
+      "offset": 251636,
+      "size": 2776,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 254412,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_i2s_clock",
+      "sha256": "91a7641123fe2081007ec7f5b6554794e9d28c73106c84493893ad90de7648d6"
+    },
+    {
+      "offset": 254428,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_i2sin_mode",
+      "sha256": "c937f01bec01637d88ddaf9cdaf7387442ca3ecb5ec256351bded8ef1cb3105d"
+    },
+    {
+      "offset": 254444,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_i2sout_mode",
+      "sha256": "b1c4f8cda028474940d05ccf21c03a9f50561c4ad777cdc4431eef1b5d8ea375"
+    },
+    {
+      "offset": 254460,
+      "size": 632,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 255092,
+      "size": 44,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_fftvad_curve_1",
+      "sha256": "56789fd125994e2b3616b713db2f66b34f9438132fb922a0c8ac66efc5c44ce4"
+    },
+    {
+      "offset": 255136,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_1"
+    },
+    {
+      "offset": 255142,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 255144,
+      "size": 44,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_fftvad_curve_2",
+      "sha256": "502bcd4fc0b251b71ee2aad756c5447d2956dccbf28e611d7aa8c6b17199772a"
+    },
+    {
+      "offset": 255188,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_2"
+    },
+    {
+      "offset": 255194,
+      "size": 66,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 255260,
+      "size": 44,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_fftvad_curve_4",
+      "sha256": "812d42a762e6b47d9a6894b680038f3dd0083bcd85e28297babac067f6b1e779"
+    },
+    {
+      "offset": 255304,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_4"
+    },
+    {
+      "offset": 255310,
+      "size": 2,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 255312,
+      "size": 32,
+      "kind": "compiled_c",
+      "symbol": "gx_audio_in_set_fftvad_curve_5",
+      "sha256": "2e1de7bd3af9b2616edafde6ff85edc105012245b3e68a5fcc5d984b2bc43850"
+    },
+    {
+      "offset": 255344,
+      "size": 9240,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 264584,
+      "size": 28,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_pga_itrim",
+      "sha256": "6de26482966f9ee40b30c67730c92b4b0f31a193686d2dc50028414b6758cf69"
+    },
+    {
+      "offset": 264612,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_pga_bypass",
+      "sha256": "8e70f8df024c1059921929f80915154bb0658c3980c150162ae88405a608908c"
+    },
+    {
+      "offset": 264636,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_pga_enable",
+      "sha256": "2f72fe2827fc7e8a0f9dd42524ac97dd9e86caa52e73e6580102d7896cdcc4ca"
+    },
+    {
+      "offset": 264660,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_adc_sample_clk_sel",
+      "sha256": "aa1788649e82d64f1ed5511e036675e6b0643c0d42c83e7337fa7e6444872f32"
+    },
+    {
+      "offset": 264684,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_adc_out_at_clk",
+      "sha256": "83096951c1238dc7517092fdde8e1699480109aa7b75c06edbf647b1e57e11bd"
+    },
+    {
+      "offset": 264708,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_adc_in_sel",
+      "sha256": "1ba592d0cd7b4d40f5b87400cc56c5069bf15d150cf5c297ef03d50684b7e100"
+    },
+    {
+      "offset": 264732,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "gx_analog_set_adc_rstn",
+      "sha256": "919bead1bd4ae88fc797580271c15001cd0bfe48c882d9cb2dd77d83c0bdb2f2"
+    },
+    {
+      "offset": 264756,
+      "size": 61336,
+      "kind": "retained_stock"
+    }
+  ],
+  "limitations": [
+    "Authenticated stock still supplies all retained ranges.",
+    "No whole-device or timing qualification; experimental candidate only."
+  ]
+}

@@ -1089,10 +1089,10 @@ class RuntimeLittlefsFileSizePrivateTests(unittest.TestCase):
             615_594,
         )
         source_tail = by_name["apollo_littlefs_file_size_private_source_leaf"]
-        self.assertIs(source_tail, regions[-2_686])
+        self.assertIs(source_tail, regions[-2_873])
         self.assertEqual(
             source_tail["file_offset"] + source_tail["size"],
-            regions[-2_685]["file_offset"],
+            regions[-2_872]["file_offset"],
         )
         self.assertEqual(
             source_tail,

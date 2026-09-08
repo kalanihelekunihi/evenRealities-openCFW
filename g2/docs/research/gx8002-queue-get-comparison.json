@@ -1,0 +1,51 @@
+{
+  "symbol": "LvpQueueGet",
+  "stock_occurrences": [
+    {
+      "symbol": "LvpQueueGet",
+      "package_offset": 66876,
+      "bytes": 74,
+      "sha256": "31898a7d6f013ef63ffcc625138adff59d5aa02529e9f18833d168de8b53a043",
+      "region": "image_a_xip_text"
+    }
+  ],
+  "upstream_files": [
+    {
+      "path": "lvp/common/lvp_queue.c",
+      "git_blob": "575d43d27ebd9ca3655a199363eba4968fd8155f",
+      "sha256": "ed8fba34e8658c0c7d49868790a89dce7188b8c81fe0c04f68969de1670b5814"
+    },
+    {
+      "path": "lvp/common/lvp_queue.h",
+      "git_blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+      "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+    },
+    {
+      "path": "include/lvp_attr.h",
+      "git_blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+      "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+    }
+  ],
+  "compile_flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-ivopts"
+  ],
+  "cases": 2196,
+  "compiled_bytes": 70,
+  "compiled_sha256": "35342e1033dc92abf9567caae65fd8587d7005fc76d77956fceff64db06ed150",
+  "exact_memory_trace_comparison": true,
+  "source_admitted": true,
+  "limits": [
+    "Finite valid queue states, no concurrent mutation or aliasing.",
+    "Not a full processor emulator; experimental same-entry placement; no hardware qualification."
+  ]
+}
