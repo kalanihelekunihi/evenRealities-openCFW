@@ -1,6 +1,6 @@
 # GX8002 C integration candidate
 
-Date: 2026-09-08. The 200 qualified C functions and five architecture assembly routines now supply bytes to an
+Date: 2026-09-08. The 214 qualified C functions and five architecture assembly routines now supply bytes to an
 experimental firmware container and complete EVENOTA package built on macOS.
 This is an intermediate hybrid, not the final source-only firmware.
 
@@ -21,16 +21,17 @@ The [build report](gx8002-source-candidate-build.json) assigns every codec byte:
 
 | Owner | Bytes |
 | --- | ---: |
-| Compiled C, 216 occurrences of 200 functions | 13,396 |
+| Compiled C, 230 occurrences of 214 functions | 14,416 |
 | Compiled architecture assembly | 156 |
-| Generated source data | 2,854 |
+| Generated source data | 3,113 |
 | Generated FWPK and UART header metadata | 80 |
-| Generated unreachable envelope fill | 724 |
-| Authenticated retained stock | 308,882 |
+| Generated unreachable envelope fill | 712 |
+| Authenticated retained stock | 307,615 |
 | Total | 326,092 |
 
-The C sections replace their complete original intervals without moving entry
-addresses. All are relocation-free. The builder rejects overlaps, changed
+The C sections preserve their original entry addresses. An explicitly
+authenticated partition assigns the platform-config unused tail to the source
+PLL frequency table, keeping code and data ownership disjoint. All are relocation-free. The builder rejects overlaps, changed
 source reports, changed object payloads, incorrect stock intervals, and any
 change to retained ranges. It regenerates both FWPK CRC-32 values and the
 UART stage-2 byte-sum checksum. BINH structure and stage-1 CRCs still validate.
@@ -44,12 +45,12 @@ candidate does not retroactively promote bytes in the existing default build.
 
 Codec: `build/gx8002-source-candidate/firmware_codec.hybrid-candidate.bin`
 
-SHA-256: `8e1467f51789e731a4367ce10dbd3ce10bee8f510226aa7556d7d0368fc29670`
+SHA-256: `26da0f0d9fe13d659128ba11b07288ee32d940e21208efe9cbc82c92d7abdab6`
 
 EVENOTA: `build/codec-source-experimental/package/g2-openCFW-s200_v2.2.6.10-codec-source-experimental.evenota.bin`
 
 Size: 4,750,780 bytes. SHA-256:
-`f97de22d33de7c0e23d7cfa637f7df185204e3a138deef8dde17bfcffde33279`.
+`f31253a2f4d0bd0e022617cadd4ae11a7e41c63848cb45eefe3f8f6e26947064`.
 
 The explicit experimental manifest pins these artifacts. Package assembly and
 `open_cfw.py verify-artifacts` pass, with zero unresolved flash regions. The
@@ -263,7 +264,7 @@ OTP lock fully integrated. Native macOS codec build passes202 tests; full
 package build and verify-artifacts pass with apple-clang. Ownership7220 C,
 2040 source data,80 metadata,302 fill,316450 retained;113 functions and129
 code occurrences plus16 data regions. Codec SHA:
-f92c56731ae3896e8414d5d6c870073c24b77174258b9c3187cd675b7978064a.
+f92c56731ae3896e8414d5d6c870073c24b77177858b9c3187cd675b7978064a.
 Package SHA:44b611556ef32745f021fe892b58f26ba815feceb5f99f191abcdb9d3c387bcf.
 Candidate pin identifies this hybrid, not vendor identity or hardware proof.
 Full source-only goal active; no physical OTP operation.
@@ -386,7 +387,7 @@ routines,40 source-data regions and249 replacement regions. The old switch
 table remains retained pending reachability/ownership analysis.
 
 Trigger disable adds92 C bytes. All630 macOS integration tests pass.
-Totals:189 C functions/205 occurrences, five architecture routines,40 data
+Totals:189 C functions/206 occurrences, five architecture routines,40 data
 regions and250 replacement regions. Retained stock remains310,284 bytes.
 
 GPIO and SPI-list initialization add44 compiled C bytes identical to stock.
@@ -415,3 +416,29 @@ verification passes. Retained stock and hardware limitations still apply.
 Padmux get/check/set/init and the 64-byte typed default table pass all721
 integration tests. The macOS package rebuild succeeds; artifact verification
 passes. This remains a hybrid containing retained stock.
+
+RTC ISR/start/set and source-authored diagnostic pass all732integration tests,
+macOS package rebuild and artifact verification. Retained stock remains308800
+bytes; physical hardware and whole-firmware source-only qualification are open.
+
+The clock-divider checkpoint passes 735 integration tests on macOS. Its
+28-byte C routine uses the recovered two-register ABI and has 12,800 decoded
+comparison cases. Package assembly and artifact verification both pass after
+updating the explicit experimental hashes. The oversized frequency candidate
+and RTC initializer remain outside this admitted set.
+
+The clock-frequency checkpoint passes 778 integration tests and package artifact
+verification on macOS. It adds the 444-byte source clock function and 76-byte
+switch table, plus a 16-byte source PLL table in the explicitly partitioned host
+tail. This removes 520 retained bytes. RTC initializer remains outside this
+admitted set, and hardware/source-only completion remains unproven.
+
+### Board-pin initializer integrated on macOS (2026-09-08)
+
+The native C-SKY integration completed with 791 passing tests in 21.704 seconds. The initializer adds 104 compiled C bytes; its diagnostic and configuration table add 45 source-data bytes. Codec ownership is now 14,300 compiled C bytes, 156 assembly bytes, 3,090 source-data bytes, 80 metadata bytes, 708 unreachable-fill bytes, and 307,758 retained stock bytes. The 209 C functions account for 225 occurrences.
+
+The macOS apple-clang package build and verify-artifacts both completed successfully. Codec SHA-256: `23452eb8ae7c4848550a1d75afa5f3f6bc8850ffaad04acde19e4a13cd197379`. Package SHA-256: `eccc87d1a2d35a629e96e589360458dfa624b34ac76ed4abeb16159db082cb67` (4,750,780 bytes). Notices copied into the package directory. No hardware qualification or source-only completion is claimed. The source-only goal remains active; gsensor lifecycle and the retained code/data still require reconstruction.
+
+### Sensor accessor package verified on macOS
+
+The 802-test integration and apple-clang package build/verify-artifacts completed successfully. Current codec has 210 C functions at 226 occurrences, 14,324 compiled C bytes, 3,113 source-data bytes and 307,711 retained stock bytes. Codec SHA-256 e3b04bad77fd6e5df232ed910bb56d34d358c54ec4514dee49e449a94a3d6227; package SHA-256 844046c8b1a2c2effd440c45f7e794ebaad242b1f5d28f5a9e7067a35b6c0b82. Notices copied. Source-only and hardware-qualified remain false.

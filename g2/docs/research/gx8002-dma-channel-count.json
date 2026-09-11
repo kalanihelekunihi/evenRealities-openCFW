@@ -1,0 +1,49 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "instruction_bytes_sha256": "c9e2eac228226019f53a957b1f106dcb67b542283857e2365931d2241bbb06fe",
+  "initializer_package_offset": 53580,
+  "state_address": 537061692,
+  "device_base": 2701131776,
+  "channel_count_address": 537061696,
+  "initialized_channel_count": 2,
+  "initialized_channel_indices": [
+    0,
+    1
+  ],
+  "instructions": {
+    "0xd14e": [
+      "lrw",
+      "r4, 0x2002e93c",
+      2
+    ],
+    "0xd152": [
+      "lsli",
+      "r3, r3, 24",
+      2
+    ],
+    "0xd150": [
+      "movi",
+      "r3, 161",
+      2
+    ],
+    "0xd154": [
+      "st.w",
+      "r3, (r4, 0x0)",
+      2
+    ],
+    "0xd158": [
+      "movi",
+      "r3, 2",
+      2
+    ],
+    "0xd15a": [
+      "st.w",
+      "r3, (r4, 0x4)",
+      2
+    ]
+  },
+  "source_admitted": false,
+  "limits": [
+    "Static initialization evidence; call reachability and later mutation of channel count are not established. This is not proof of physical controller capacity."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "candidate": {
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_uart_transmit_buffer",
+        "compiled_bytes": 100,
+        "compiled_sha256": "8fc84b065633dcecade41e297e164dc0f1286af705e659d050b0fc0c03aa06d7",
+        "stock_sha256": "375edd5581ad449b2bddd0726871e243dbd671cad91cc7ed8fd27cce0756bd66",
+        "package_offset": 52396,
+        "envelope_bytes": 96,
+        "fits": false
+      }
+    ],
+    "source_sha256": "dee2744e08e5bd9ad1c6764dcfa41f280fc29425ff371d22a1846e2edda0b513",
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Decoded behavior qualification pending, including fifth stack argument and DMA helper. The DMA helper remains opaque at this stage."
+    ]
+  },
+  "decoded_cases": 2304,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Finite stock/source ordered access and ABI comparisons; DMA and IRQ leaves modeled. Placement does not yet fit the stock envelope."
+  ]
+}

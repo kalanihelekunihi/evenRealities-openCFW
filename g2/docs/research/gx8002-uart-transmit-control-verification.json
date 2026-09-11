@@ -1,0 +1,36 @@
+{
+  "candidate": {
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_uart_transmit_start",
+        "compiled_bytes": 52,
+        "compiled_sha256": "5779abdc2ee4e5ae3ef399994467d6db75582eac117811d835c1bce9d5144a32",
+        "stock_sha256": "30dd041815e310b2646b1d72f7e141b34cd8b3931cdfdcff67a2c0628a11df07",
+        "package_offset": 52156,
+        "envelope_bytes": 52,
+        "fits": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_uart_transmit_stop",
+        "compiled_bytes": 40,
+        "compiled_sha256": "e84b017904c2639eb06f035733ec25f0553c1d1a65036d1ec0f76056a57139c7",
+        "stock_sha256": "a63e4490d44bdfd06c6d5a1c679e61d3cb315bacadf8b19753cb3592d5e4f2cb",
+        "package_offset": 52208,
+        "envelope_bytes": 40,
+        "fits": true
+      }
+    ],
+    "source_sha256": "b9bf5ac7ef30840cf47885732e0b926f0665cff72a3384b529212a242c302f92",
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. IRQ return-token preservation, descriptor writes and MMIO transaction order need decoded qualification."
+    ]
+  },
+  "decoded_cases": 192,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Finite descriptor/MMIO and IRQ-token cases, exact trace comparison. IRQ helpers modeled; physical UART effects unqualified."
+  ]
+}

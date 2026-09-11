@@ -1,0 +1,33 @@
+{
+  "candidate": {
+    "additional_flags": [
+      "--param=max-completely-peel-times=0"
+    ],
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_header": "include/driver/gx_dma_ahb.h",
+    "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_dma_irq_handler",
+        "compiled_bytes": 92,
+        "compiled_sha256": "72cf0593bdd80103a2973abe497434d03949d549f8786110ac90e46f0dfbb361",
+        "stock_sha256": "3e0ed2f28df735bf3bd8395ba3bc12339364e9ec8d7cdb008520e5e945183536",
+        "package_offset": 53352,
+        "envelope_bytes": 92,
+        "fits": true
+      }
+    ],
+    "source_sha256": "6367949bc89a14e62690cdf0b3c74051808a8f0fdcf63833505d24e9ee7fc258",
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Decoded IRQ status, helper ordering, callback mutation and MMIO qualification pending."
+    ]
+  },
+  "decoded_cases": 168,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Helper bodies modeled with caller clobbers. Mutation checks device reload, callback lookup after deallocation, and single status sampling; no hardware IRQ delivery proof."
+  ]
+}

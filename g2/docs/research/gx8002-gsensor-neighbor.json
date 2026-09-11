@@ -1,0 +1,28 @@
+{
+  "routine_package_start": 71204,
+  "routine_code_end": 71720,
+  "code_sha256": "40c5570cacfb5c43a19eba8ce3889d1099a9c5a5f311e4a180fb23ea18189b9e",
+  "literal_package_offset": 71724,
+  "array_base": 537029748,
+  "index_register": "r7 (original r0 argument)",
+  "indexed_reads": [
+    71394,
+    71490
+  ],
+  "indexed_writes": [
+    71402,
+    71418
+  ],
+  "address_expression": "(0x20026c74 + (argument << 2)) modulo 2^32",
+  "arguments_aliasing_sensor_word": [
+    1073741823,
+    2147483647,
+    3221225471,
+    4294967295
+  ],
+  "argument_validation_unresolved": true,
+  "source_admitted": false,
+  "limits": [
+    "Static decoded register-use evidence only; original argument is copied to r7 while its low byte is passed to helper at 0x1104c. Helper rejection and caller ranges have not been established. No claim excludes computed writers."
+  ]
+}

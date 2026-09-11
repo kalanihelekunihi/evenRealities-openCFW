@@ -91,3 +91,49 @@ C routines and the22-byte diagnostic are now registered in the experimental
 source candidate. The732-test integration build is running. Initializer remains
 unregistered pending additional helper qualification. No new package completion
 is claimed until integration, packaging and artifact checks finish.
+
+RTC init/clock-gate decoded composition passes60scenarios/60gatecalls across
+stock/C selections, clock frequencies and source-register patterns. The gate
+request is module0/enable1 even on the later frequency-error path; helper writes
+stay within clock-control registers. Seveninitializer tests pass. Gate lookup
+and helper stack retain their documented abstractions; frequency/IRQ/printf
+bodies still require further qualification at the initializer boundary.
+
+RTC/clock composition passes 12 cases with decoded source clock, lookup and
+divider execution driving stock/source RTC initialization. Actual RTC clock
+records select 12.288 MHz, 32 kHz or 24.576 MHz, exercising both diagnostic
+rejection and prescaler/IRQ/start success. RTC and clock frames remain separate;
+gate/IRQ/printf/start remain modeled in this check. Existing clock ELF inputs
+were used without changing the running integration build's registered sources.
+
+Nine RTC initializer tests now pass, including two frequency-hook regression
+cases. They verify that the decoded helper's result overrides the placeholder
+frequency in both directions: 32 kHz enables initialization, while 65536 rejects
+it. This guards the RTC/clock composition boundary without altering registered
+clock integration inputs. The initializer remains unadmitted.
+
+RTC IRQ composition passes 24 stock/source outer and IRQ-helper combinations.
+Successful initialization writes the RTC handler/private pair to the actual
+IRQ-4 slots and executes the decoded controller-enable leaf, writing bit 4 to
+0xe000e100. Frequency rejection produces none of those effects. Frames remain
+separate and other helpers are modeled; physical interrupt delivery is not
+proven. Existing IRQ artifacts were read without rebuilding registered inputs.
+
+The actual source-built RTC diagnostic passes decoded stock/source formatting:
+both emit exactly `RTC prescaler error!` plus newline and agree on the formatter
+return. The check reads existing artifacts only. Character output remains
+modeled; printf-wrapper composition and physical UART delivery are not claimed.
+
+RTC diagnostic/printf composition passes 24 stock/source outer and wrapper
+combinations. It checks the real diagnostic pointer, decoded wrapper forwarding
+with no variadic arguments, and the separately decoded formatter's exact output
+and return. Success paths skip printf; failure emits once. Nine initializer tests
+still pass. Harness pointer translation and separate frames are explicit; UART
+hardware output is not proved. The initializer remains unadmitted.
+
+The consolidated RTC initializer qualification now rebuilds/rechecks clock source,
+authenticates upstream object attribution, runs the 660 core cases and gate,
+start, clock, IRQ and printf compositions, and exports the 72-byte initializer
+ELF. The aggregate run passes on macOS with principal evidence hashes recorded.
+It remains unregistered pending dependency/admission review; separate-helper
+frames and physical delivery/timing limits remain explicit.

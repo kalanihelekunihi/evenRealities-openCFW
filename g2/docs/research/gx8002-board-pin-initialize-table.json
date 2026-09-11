@@ -1,0 +1,101 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "headers": {
+      "include/driver/gx_padmux.h": {
+        "blob": "4d7aaa315665a24dc55d77c0bf7b3c285d7358b8",
+        "sha256": "ed2dfbb290aa634bca68dc536583ac7a24994fb9b9f73165dc00ba453ea631d2"
+      },
+      "include/driver/gx_gpio.h": {
+        "blob": "b32734abd5371a24a0e5050ce6825a62795333fe",
+        "sha256": "b6a97ac029e6e1f3d3829789678fea1ce5563685228c6d992bfc687a88fb64cf"
+      }
+    },
+    "symbol": "open_cfw_gx8002_board_pin_initialize",
+    "section_name": ".text",
+    "bindings": {
+      "open_cfw_gx8002_padmux_init": 270558768,
+      "open_cfw_gx8002_padmux_check": 270558648,
+      "open_cfw_gx8002_gpio_set_direction": 270556964,
+      "open_cfw_gx8002_printf": 270560292,
+      "open_cfw_gx8002_board_pin_setup": 270559260
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-shrink-wrap"
+    ],
+    "source_sha256": "8c3606464ed55720d34e6730235827b729051848cdace007bd9d99023e26bc27",
+    "compiled_bytes": 104,
+    "compiled_sha256": "55cfa58578b79d4a14bb295ac596892a8a9cd304edbbc7d5d9060578f5f36753",
+    "package_offset": 65068,
+    "stock_envelope_bytes": 104,
+    "stock_sha256": "020b8fb5b2d7ad9c8d67731bae760cb0910d9dad03d6816d5bcc0967af9418b0",
+    "fits": true,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Guard state, helper transactions, ABI and diagnostic source data need qualification."
+    ]
+  },
+  "policy": {
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_board_pin_defaults",
+        "section_name": ".rodata.open_cfw_gx8002_board_pin_defaults",
+        "compiled_bytes": 26,
+        "compiled_sha256": "dbba8b7181274bb6b00ff03b26b745499ec6957c9230cb7e6a73beb95569bb82",
+        "ownership_kind": "generated_source_data",
+        "stock_occurrences": [
+          {
+            "symbol": "open_cfw_gx8002_board_pin_defaults",
+            "package_offset": 82620,
+            "bytes": 26,
+            "sha256": "dbba8b7181274bb6b00ff03b26b745499ec6957c9230cb7e6a73beb95569bb82",
+            "region": "image_a_xip_text"
+          }
+        ]
+      }
+    ],
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "header": {
+      "path": "include/driver/gx_padmux.h",
+      "blob": "4d7aaa315665a24dc55d77c0bf7b3c285d7358b8",
+      "sha256": "ed2dfbb290aa634bca68dc536583ac7a24994fb9b9f73165dc00ba453ea631d2"
+    },
+    "source_sha256": "9e1fe766d20b9b4d43abefd8241f5e7662b37fb2a7260fd393ef9551edf6d9f9",
+    "verifier_sha256": "a16c670612f05014fb81df7c49cf2a224e89e21f7f4907b02d7477d6615f06ed",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "policy": "Pins 0..12 in ascending order; pin 2 uses function zero, all others function one.",
+    "limits": [
+      "Typed table layout and policy only; hardware meaning/effects of selected functions are not qualified."
+    ]
+  },
+  "decoded_cases": 60,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Compiled table read in decoded initializer with translated memory. Helpers modeled; no MMIO/physical effects proven here."
+  ]
+}

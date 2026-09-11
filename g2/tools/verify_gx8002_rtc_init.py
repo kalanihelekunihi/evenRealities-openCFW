@@ -17,7 +17,7 @@ def expected(frequency,control):
     return trace
 
 
-def execute(code,entry,frequency,control,start_hook=None):
+def execute(code,entry,frequency,control,start_hook=None,gate_hook=None,frequency_hook=None,irq_hook=None,printf_hook=None):
     r={f'r{i}':(0x91234567+i*0x1020304)&MASK for i in range(32)}
     r['r14']=0x2002f7fc;initial=r.copy();saved=None;pc=entry;condition=False;trace=[]
     for _ in range(50):
@@ -50,10 +50,18 @@ def execute(code,entry,frequency,control,start_hook=None):
             target=int(args,0)
             if entry==0xfc48:target=(target+0x101f6a74)&MASK
             value=0xa5216789
-            if target==0x10025080:trace.append(('gate',r['r0'],r['r1']))
-            elif target==0x10025210:trace.append(('frequency',r['r0']));value=frequency
-            elif target==0x10206c24:trace.append(('printf',r['r0']))
-            elif target==0x1002553c:trace.append(('irq',r['r0'],r['r1'],r['r2']))
+            if target==0x10025080:
+                trace.append(('gate',r['r0'],r['r1']))
+                if gate_hook is not None:gate_hook(r['r0'],r['r1'])
+            elif target==0x10025210:
+                trace.append(('frequency',r['r0']))
+                value=frequency if frequency_hook is None else frequency_hook(r['r0'])
+            elif target==0x10206c24:
+                trace.append(('printf',r['r0']))
+                if printf_hook is not None:value=printf_hook(r['r0'])
+            elif target==0x1002553c:
+                trace.append(('irq',r['r0'],r['r1'],r['r2']))
+                if irq_hook is not None:irq_hook(r['r0'],r['r1'],r['r2'])
             elif target==0x102066a0:
                 trace.append(('start',))
                 if start_hook is not None:start_hook()

@@ -1,0 +1,37 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "path": "lvp/common/uart_message_v2.c",
+  "git_blob": "b5ae5ebac76df3bb7e60b0209ef71234114a15db",
+  "sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+  "candidates": [
+    {
+      "package_entry": 69708,
+      "upstream_symbol": "_GetMessageHandle",
+      "evidence": "Two ports, null for others; context bases separated by 0x17c. Stock ABI operates on the full register; upstream signature is unsigned char. Exact upstream recompilation not yet qualified."
+    },
+    {
+      "package_entry": 71204,
+      "upstream_symbol": "_UartMessageAsyncRecvCallback",
+      "evidence": "Byte-narrowed handle lookup, UART read, four receive states, shifting magic/verification words, queue insertion; helpers appear inlined. Full function equivalence remains unproved."
+    }
+  ],
+  "next_steps": [
+    "Compile upstream MESSAGE_HANDLE layout under the stock queue configuration and verify sizeof 0x17c and field offsets.",
+    "Compare receive callback paths and indexed header/body/verification counters against stock before reusing upstream implementation."
+  ],
+  "source_admitted": false,
+  "neighbor_header_counter_candidate": {
+    "runtime": 537029748,
+    "package_offset": 101512,
+    "stock_words": [
+      4,
+      4
+    ],
+    "upstream_symbol": "s_recv_header_data_count",
+    "upstream_initializer": [
+      4,
+      4
+    ],
+    "status": "Initializer matches; full indexed header-copy path equivalence still pending"
+  }
+}

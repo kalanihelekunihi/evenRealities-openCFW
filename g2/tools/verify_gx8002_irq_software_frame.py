@@ -9,7 +9,7 @@ from verify_gx8002_memcpy_source import decode
 from link_gx8002_uart_console import ROOT
 
 
-def execute(code,start,seed,depth=0,stack=None,stack_top=0x8000,architecture=False,interrupt_pc=None,initial_registers=None):
+def execute(code,start,seed,depth=0,stack=None,stack_top=0x8000,architecture=False,interrupt_pc=None,initial_registers=None,body_target=0x10025598):
     regs={f'r{i}':(seed+i*0x1020304)&0xffffffff for i in range(32)}
     regs.update({f'fr{i}':(seed^((i+1)*0x1234567))&0xffffffff for i in range(8)})
     if initial_registers is not None:regs.update(initial_registers)
@@ -32,7 +32,7 @@ def execute(code,start,seed,depth=0,stack=None,stack_top=0x8000,architecture=Fal
             if not architecture:raise ValueError('boundary injection requires architecture model')
             injected=True
             nested=execute(code,start,seed^0xdeadbeef,depth-1,stack,regs['r14'],True,
-                           interrupt_pc=interrupt_pc,initial_registers=regs.copy())
+                           interrupt_pc=interrupt_pc,initial_registers=regs.copy(),body_target=body_target)
             peak=min(peak,regs['r14']-nested['modeled_peak_bytes'])
         op,args,width=code[pc];p=[x.strip() for x in args.split(',')];following=pc+width
         if op=='nie':
@@ -61,7 +61,7 @@ def execute(code,start,seed,depth=0,stack=None,stack_top=0x8000,architecture=Fal
                     if address not in stack:raise ValueError('uninitialized restore')
                     regs[name]=stack.pop(address)
         elif op=='bsr':
-            if int(p[0],0)!=0x10025598:raise ValueError('unexpected body target')
+            if int(p[0],0)!=body_target:raise ValueError('unexpected body target')
             calls+=1
             if architecture:
                 for name in volatile:regs[name]^=0xffffffff
@@ -76,7 +76,7 @@ def execute(code,start,seed,depth=0,stack=None,stack_top=0x8000,architecture=Fal
             sentinel=(seed^0xface1234)&0xffffffff
             stack[call_sp]=sentinel;peak=min(peak,call_sp)
             if depth and interrupt_pc is None:
-                nested=execute(code,start,seed^0xdeadbeef,depth-1,stack,call_sp,architecture)
+                nested=execute(code,start,seed^0xdeadbeef,depth-1,stack,call_sp,architecture,body_target=body_target)
                 if nested['calls']!=1:raise ValueError('nested model failure')
                 peak=min(peak,call_sp-nested['modeled_peak_bytes'])
             if stack.pop(call_sp)!=sentinel:raise ValueError('callback return address corrupted')

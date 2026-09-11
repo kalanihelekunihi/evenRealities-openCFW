@@ -11,7 +11,7 @@ from analyze_gx8002_upstream_objects import IMAGE
 from verify_gx8002_memcpy_source import decode
 
 
-def execute(code,start,status,handler,private,stop=None):
+def execute(code,start,status,handler,private,stop=None,table_address=0x20026ef4,handler_hook=None):
     r={f'r{i}':0x98760000+i for i in range(32)};initial=r.copy();pc=start;saved=None;trace=[]
     irq=(status&511)-32
     if not 0<=irq<32:raise ValueError('outside qualified IRQ domain')
@@ -37,12 +37,13 @@ def execute(code,start,status,handler,private,stop=None):
             m=re.fullmatch(r'(r\d+), \((r\d+), (0x[0-9a-f]+|r\d+ << 3)\)',args)
             if not m:raise ValueError('unsupported memory operand')
             reg,base,off=m.groups();address=r[base]+(r[off.split()[0]]<<3 if '<<' in off else int(off,0))
-            values={0xe000ec00:status,0x20026ef4+irq*8:handler,0x20026ef8+irq*8:private}
+            values={0xe000ec00:status,table_address+irq*8:handler,table_address+4+irq*8:private}
             if address not in values:raise ValueError('unexpected read')
             r[reg]=values[address];trace.append(('read',address,r[reg]))
         elif op=='jsr':
             if not handler or r[p[0]]!=handler:raise ValueError('unexpected handler')
             trace.append(('handler',handler,r['r0'],r['r1']))
+            if handler_hook is not None:handler_hook(handler,r['r0'],r['r1'])
             for i in (0,1,2,3,12,13,15):r[f'r{i}']=0xdead0000+i
         else:raise ValueError('unsupported instruction '+op)
         pc=following

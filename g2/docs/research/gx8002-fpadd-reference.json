@@ -1,0 +1,21 @@
+{
+  "gcc_commit": "1e9b70447a8417f5c692370de4533e43d754e8fa",
+  "source_hashes": {
+    "libgcc/fp-bit.c": "f635ba0d69f88c0090b5997c2087c36780939caf1477aece8f2fc3d3c684817f",
+    "libgcc/fp-bit.h": "c8a495705755faec80c153265579a46411393d6b531548b55679fcba0bf33d1f",
+    "COPYING.RUNTIME": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74"
+  },
+  "extracted_core_sha256": "d898df939df586bf629e98edc59232bf5d781aa500363f5eacc74ba66f3eeda6",
+  "reference_source_sha256": "9987b1a914ce34e4274f7fc10ca3b8d2ab86275f63c8de9c3d10f5e67335aae4",
+  "host": "macOS clang",
+  "sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "input_cases": 33280,
+  "arithmetic_checks": 66560,
+  "source_admitted": false,
+  "limits": [
+    "Exact upstream core with host type/class scaffolding; cancellation and doubling invariants only. Not a stock-binary comparison or target ABI test. Reference is for later decoded arithmetic checks."
+  ]
+}

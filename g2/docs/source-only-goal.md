@@ -4847,3 +4847,2685 @@ inputs until terminal success. Expected203functions/219Coccurrences/42dataregion
 unregistered, can continue helper composition independently. Latestverified
 package remains721-test f97de22d33de7c0e23d7cfa637f7df185204e3a138deef8dde17bfcffde33279.
 Full source-only goal active, hardware unqualified.
+
+### RTC initializer clock-gate composition checkpoint
+
+Previous turn progressed RTCprimitive registration. Session66373 polled live;
+rtc-primitives-integration.log expected732tests. Preserve registered evidence.
+Only unregistered initializer files changed: gate_hook and new decoded gate
+composition based on existing verified gate interpreter. Session78055 passed
+60scenarios/60gatecalls; module0enable1, bounded clockcontrol writes. Seveninit
+tests pass; session24362 reran660directcases. Gate lookup/separate stack modeled,
+frequencyIRQprintf stillmodeled. Next further helper qualification. Fullgoalactive.
+
+### Upstream clock-frequency source candidate
+
+Previous turn progressed RTCinit gatecomposition. Session66373 polled live;
+RTCprimitive integration expected732tests. Located retained clockfrequency entry
+17224/runtime10025210; prior clock admission only covered lookup/tables/gate.
+Pinned SDK clk_priv.h contains _clk_get_module_frequence. Added source adapter
+runtime_gx8002_clock_frequency.c and separate authenticated native builder/output
+build/gx8002-clock-frequency (does not mutate registered gate inputs). Buildpassed,
+reportgx8002-clock-frequency-candidate.json. Unlinked/unadmitted; next fixed-entry
+link, helper/table attribution and full decoded qualification. This upstream
+source can replace shared RTC/SPI frequency helper, beyond modeledreturns.
+Full source-only goal active; no hardware qualification.
+
+### Clock-frequency helper layout investigation
+
+Previous turn progressed authenticated upstream frequency adapter. Session66373
+polled live, RTCprimitive integration ongoing. Frequencyinitial544bytes exceeds
+stock444bytes at17224..173e0. Targeted no-inline-functions-called-once produced
+548+8wrapper, reverted. Added public lookup-contract adapter as existinggate
+uses: compiler now emits __module_get_info160bytes plus frequency468bytes and
+8byteadapter. This preserves lookupNULL contract and permits reuse of qualified
+lookupentry; still24bytes overfrequency slot. Session86245 nativebuild passed.
+Next divider helper separation/link placement and behavioral qualification.
+Only unregistered frequency files changed. Full source-only goal active.
+
+### Frequency divider boundary checkpoint
+
+Previous turn progressed frequency lookup boundary. Session66373 polled live;
+RTCprimitive integration stillrunning. Publicdivider adapter alone leftfreq468.
+Targeted noinline produced specialized28-byte .isra.0 helper andfreq480; adding
+noclone/noipa preserves originalaggregateargument ABI, helper40/freq468/lookup160.
+Session61889 nativebuild passed. Source adapter annotations only; pinnedSDK body
+unchanged. Still24-byte frequencyoverrun, unlinked/unadmitted. Next fixedentry
+layout analysis/target proof, no blindbinarypull-through. Fullgoalactive.
+
+### Clock-frequency fixed-address analysis link
+
+Previous turn progressed shareddivider ABI. Session66373 polled live; registered
+RTC integration inputs unchanged. Added link_gx8002_clock_frequency_candidate.py,
+native link passed: lookup160/164 at10024a44, divider40/40 at10024ae8, freq468/444
+at10025210. Analysis switchtable11000000 avoids overlap; original text overrun
+would overwrite neighboring gatejump table. Allrelocs resolve, adapters discarded,
+analysis ELF/disassembly plus report emitted. Not firmwareprovider/admitted.
+Next inspect decoded arithmetic/layout and qualify helpers. Fullgoalactive.
+
+### Divider slot correction from stock disassembly
+
+Previous turn progressed analysis link. Session66373 polled live. Directstock
+16afc..16b24 disassembly provesdivider ends16b18, slot28not40; followingPLL
+routine starts16b18. Corrected linkreport envelope, now rejectsdivider40/28
+andfrequency468/444. Session48902 rebuilt analysis successfully. Prior claimed
+dividerfit superseded; no such candidate admitted. Public aggregate noipa helper
+spills16bytes unnecessarily relative tostock r0/r1-only inputs. Next recover
+stock-compatible helper calling shape and qualify behavior. Fullgoalactive.
+
+### Stock-ABI divider C fits
+
+Previous turn corrected divider28-byte envelope. Session66373 polled live;
+RTCintegration unchanged. Added runtime_gx8002_clock_divider.c using upstream
+GX_CLOCK_MODULE_PARAM/GX_CLOCK_DIV types with stock r0param/r1base calling shape.
+Initial include lacked private paramtype; correctedclk_priv.h. Nativebuilder
+passes28/28bytes SHA c6f8b015db32d4bba236e3c4e2f9b57eec0c158deda80bc3f08d982e6c3c3592.
+Builder authenticates clk_priv/base/gxclock headers, no unrelated RTC oracle.
+Need decodedmemory/ABI proof and integration, unregistered. Sourcefrequency
+stilloversize; newhelper will permit correctstockboundary oncequalified.
+Full source-only goal active.
+
+### Divider decoded qualification checkpoint
+
+Previous turn progressed28-byte stockABI divider C. Session66373 polled live;
+RTCintegration stillrunning. Added verify_gx8002_clock_divider.py: session84860
+passed12800stock/C cases across null/present descriptor, two MMIO bases, aligned
+offsets, shifts0..31, masks and words. Exact descriptor/register read order and
+width, resultzero-or-field+1 and leafABI checked. Threefocusedtests pass including
+halfword-mask readmutation. Divider stillunregistered; next admission/export,
+frequencycallingboundary adjustment and placement. Fullgoalactive.
+
+### Divider admission/export verified
+
+Previous turn progressed12800dividercases/3tests. Session66373 polled live;
+RTC732-test integration stillrunning. Divider now standardadmission args, pinned
+builder/decoder,28-byte SRAMrow and artifactexport. Session63858 requalified;
+session15939 used actual reviewed_replacements against savedreport/exportELF,
+passes28bytes. Unregistered untilcurrentintegration/packagefinish. Frequency
+stilloversize; next adapt shared helper call preserving upstream logic and proof.
+Full source-only goal active; no hardware completion claim.
+
+### Upstream frequency divider-call adaptation
+
+Previous turn progressed divider admission. Session66373 polled live. Unregistered
+frequencybuilder now authenticates SDK header and generates minimally adapted
+header: oneexact divider call replaced with qualified two-register externalcall,
+plus declaration. Anchorcounts enforced; adaptedheaderhash reported. No upstream
+arithmetic edits. Source no longer uses aggregate noipa helper/adapters. Generated
+SDK header initially triggered existing signedness warnings because localinclude;
+restored original system-header treatment with-isystem, warnings remainerrors for
+adapter. Session29635 nativebuild passed: lookup160/frequency480/lookupadapter8.
+Frequency still36over444slot. Oldanalysislink requires externaldividerbinding
+update before rerun. Registered RTCinputs untouched, fullgoalactive.
+
+### RTC integration passed; adapted frequency analysis link
+
+Previous turn progressed minimal upstreamdividercall adaptation. Session66373
+terminal0,732tests passed. Actualcodec bce004c362b8987f2020863bfc1dfbcb52839ac15da4ce37b7e40c32be447e02,
+266regions, C13456/assembly156/data2876/metadata80/fill724/retained308800.
+Updatedmanifest203functions and researchJSON. Started package79208 (expect oldpin
+mismatch then update/rebuild); latestfullyverifiedpackage remains721test.
+
+Updated frequencyanalysislink externaldivider10024ae8, removes oversizedaggregate
+helper section, recordsbinding. Session49308 passedlookup160/freq480 (36over444),
+no unresolvedrelocations. Analysisjumptable11000000, notfirmwareprovider. Next
+finishpackage and continue frequencyplacement/behavior, RTCinithelper proof.
+Fullsource-only goalactive; hardwareunqualified.
+
+Package79208 reached expected oldpin mismatch; observed798fed4e9066e7bddd868917d64107a5598100aa28faf08260997272145de041, manifest updated. Pinned rebuild started next.
+
+### Frequency switch inventory and layout experiment
+
+Previous turn progressed RTC732-test integration and updated analysisbinding.
+Package86041 polled live. Frequency entry stack now24bytes matchingstock but
+text480. Targeted no-reorder-blocks (stock epilogue atbottom vs candidateearly)
+expandedto488 andlookup164; reverted and rebuilt480/lookup160. Created19-entry
+stock/source switchtarget inventory at stock17474/runtime10025460 vsanalysis
+11000000. Next decodedmodule remap verification; targetinventoryalone notproof.
+Package notices/verify pendingterminal rebuild. Fullgoalactive.
+
+### Frequency decoded dispatch and RTC package verification
+
+Previous turn progressed switchinventory. Package86041 terminal0; copied11notices
+and started verify51914 (live onpoll). Latestfullyverified remains721test until
+terminal success. Added verify_gx8002_frequency_dispatch.py: session61717 passed
+259stock/C cases (0..255 plus signedboundaries/allones), actualjump-table walks,
+lookupcall orzero-return semantics. This is dispatch-only, nofullABI/MMIO/arithmetic
+claim; sourcefrequency480stilloversize. Next tests and arithmetic qualification.
+Full source-only goal active.
+
+### RTC package verified; divider integration started
+
+Previous turn progressed frequency259dispatchcases. Verify51914 terminal0;
+latestverified732-test package798fed4e9066e7bddd868917d64107a5598100aa28faf08260997272145de041,
+codec bce004c362b8987f2020863bfc1dfbcb52839ac15da4ce37b7e40c32be447e02. ResearchMD
+updated203functions/219Coccurrences/data2876/retained308800. Session58073 fresh
+dividerreport matchesreviewed. Registered28-byte divider and3tests, started
+make24299 clock-divider-integration.log expected735tests. Preserve registered
+divider sources/builders/verifier/report untilterminalsuccess. Expected204functions
+and267regions; confirm actualownership afterbuild. Frequency480stillunadmitted,
+RTCinitadditionalhelpers stillpending. Fullsource-only goalactive.
+
+### Frequency dispatch mutation tests
+
+Previous turn progressed verifiedRTCpackage/divider registration. Session24299
+polledlive, clock-divider-integration.log expected735tests. Added four decoded
+frequencydispatch tests: alias/zeropath, unsignedbypass, wronglookup and switched
+targetmutations. Initial discoveryfromroot failed tools import; correctedg2cwd
+invocation passed4tests. Sourcefrequency remains480bytes/analysis-only. Next
+arithmetic/MMIO qualification beyonddispatch. Registereddividerinputs unchanged.
+Fullsource-only goalactive.
+
+### PLL arithmetic model checkpoint
+
+Previous turn progressed dispatchmutations. Session24299 polledlive,735-test
+dividerintegration ongoing. Added model_gx8002_clock_pll_frequency.py and5tests;
+corrected initialfilewrite cwd (no files created byfailedcommand). All5pass.
+Model captures orderedoverlappinginputbands,32-bitwrap andintegerdivisionorder;
+zero wrappedfeedbackdivisor rejected outsidecontract. No decodedPLL proof yet.
+Next usemodel againststock/sourceinstructions. Registeredinputs unchanged,
+fullsource-only goalactive.
+
+### Decoded PLL slice checkpoint
+
+Previous turn progressed independentPLLmodel/5tests. Session24299 polledlive;
+divider735-test integration ongoing. Added verify_gx8002_clock_pll_slice.py,
+session31373 passed480stock/C cases vsmodel with exactfive-registerread order.
+Stockentry172b0 exits1732e/1737e; sourceentry100252f2 exits10025390/10025246.
+Sliceonly: nofullABI/DTO/divider/source-selection proof. Frequency still480over
+444slot. Next mutationtests and wider execution composition. Fullgoalactive.
+
+### PLL slice mutation coverage
+
+Previous turn progressed480decodedPLLcases. Session24299 polledlive,735-test
+dividerintegration ongoing. Added test_gx8002_clock_pll_slice.py;4tests pass:
+nominal/overflow, five-registersequence, wrongregisteroffset andwronginputmask
+mutations against compiledslice. No registeredinputs changed. Next DTOscaling
+andfull-frequency execution/placement. Fullsource-only goalactive.
+
+Clock DTO continuation: 72 decoded stock/C arithmetic-slice cases and four
+focused tests pass on macOS. The bypass bit, 25-bit numerator and 64-bit product
+are now checked with ordered descriptor/MMIO reads. This does not change the
+source-only status: the frequency candidate remains 36 bytes oversized and
+unadmitted, and full-function composition remains outstanding. The clock-divider
+integration process is still live; no newer completed package is claimed here.
+
+Completed clock-divider package checkpoint: the native macOS integration build
+passed all 735 tests. The codec now has 204 C functions at 220 occurrences,
+five architecture routines, 42 data regions, and 267 replacement regions.
+Ownership: compiled C 13,484; assembly 156; source data 2,876; metadata 80;
+unreachable fill 724; retained stock 308,772 bytes. The 326,092-byte codec SHA is
+dd1ce6168f52fa8bc4fc72d126563cc9179187d5eaa5ad72dadf7033461057f4.
+The rebuilt 4,750,780-byte EVENOTA SHA is
+a3156edb778357a31809e0e9c59ac13c577ad1efc972d2095ed9b7e03c707dd0.
+Package build and verify-artifacts both exited successfully; all 11 source
+notices were copied. No hardware was flashed. Source-only and hardware-qualified
+remain false. The full goal remains active, including oversized frequency and
+RTC initializer qualification plus all remaining components and opaque data.
+
+Clock selection continuation: 26,624 decoded stock/source comparisons and four
+focused tests pass natively on macOS. The check includes changing selection
+register values between repeated volatile reads, preserving the zero-frequency
+fallthrough when the second selection read clears. Ordered MMIO, 32 kHz shortcut,
+low-frequency returns and PLL/DTO/divider routing agree at the slice boundary.
+This supplies new behavioral evidence for the full frequency reconstruction;
+it does not admit the oversized function or establish full ABI/hardware behavior.
+The last complete package remains the 735-test clock-divider checkpoint.
+
+Frequency size progress: an isolated source adaptation reduces the candidate
+from 480 to 452 bytes using exact masked-subband arithmetic and an equivalent
+unsigned early-return predicate. Two focused algebra/domain tests pass. Eight
+bytes still exceed the original envelope; the probe is not linked or admitted.
+The baseline qualification artifacts remain for the unchanged 480-byte candidate.
+No source-only or hardware completion is claimed.
+
+The 452-byte clock-frequency probe now has an isolated analysis link and passes
+480 decoded PLL and 72 DTO cases against the stock-qualified models, including
+ordered PLL register reads. Further algebraic factoring and disabling compiler
+reassociation did not reduce size and were reverted. The eight-byte excess and
+full-function qualification remain; no oversized code was admitted to firmware.
+
+Size-probe selection qualification now passes 26,624 decoded cases in addition
+to its 480 PLL and 72 DTO cases; six focused tests pass on macOS. A targeted
+jump-threading experiment increased size to 504 bytes and was reverted. The
+restored 452-byte probe remains eight bytes oversized and unadmitted. Firmware
+package contents and the active full-source objective are unchanged.
+
+Clock probe dispatch continuation: 259 linked jump-table/dispatch cases and
+four mutation/boundary tests pass on macOS for the smaller candidate. The
+combined report now records its analysis ELF hash alongside all slice counts.
+The 452-byte candidate is still eight bytes oversized; lookup/full ABI and
+whole-function composition remain incomplete. No firmware bytes were promoted.
+
+Clock selection size experiment: two alternate C forms compiled to 460 and 456
+bytes, respectively, so neither displaced the qualified 452-byte probe. A separate
+script and report preserve the latter experiment without changing the candidate
+or admitted firmware. The eight-byte excess remains an implementation task,
+not an external blocker; full source-only reconstruction remains active.
+
+Clock return continuation: 56 decoded stock/probe divider-call and epilogue
+comparisons plus three focused tests pass on macOS. Helper target/arguments,
+zero bypass, division, caller clobbers and saved-register restoration agree
+under a valid-frame assumption. This is additional evidence toward complete
+function verification, not full ABI proof or source admission. The overall
+source-only goal remains active.
+
+Clock return/divider composition now passes 864 decoded stock/source outer/leaf
+combinations on macOS, including descriptor absence, zero divider, mask/shift
+boundaries and unsigned frequencies. The actual decoded leaf drives the outer
+result, replacing the earlier arbitrary divider result at this boundary. Three
+return tests pass. Separate modeled frames and fixed entry assumptions remain;
+no whole-function or hardware claim, and no additional source admission.
+
+Clock text now has a 444-byte alternative that fits its envelope by using a
+16-byte source-authored PLL frequency table. An isolated analysis link succeeds
+with no unresolved text/table relocations. The table needs real firmware
+placement and decoded qualification; existing source-owned fill intervals are
+potential locations but none was assigned or overwritten. Full-function
+qualification and source-only reconstruction remain active. No firmware
+admission is claimed from text fit alone.
+
+The fitting table-based clock candidate passes 480 decoded PLL cases using its
+actual linked source-authored table. Table contents, indexed access bounds and
+ordered MMIO reads are checked. Four existing PLL tests pass. Real table
+placement, remaining path qualification and whole-function validation remain
+open; source-only status is unchanged.
+
+Fitting table candidate path qualification passes on macOS: 259 dispatch,
+26,624 selection, 480 PLL, 72 DTO and 56 return cases. Evidence is now specific
+to its changed code layout. Separate slice state and modeled return/helper
+assumptions remain; this does not replace whole-function validation or admit
+the analysis-address table into firmware. The full source-only goal stays active.
+
+Clock table placement analysis identifies and authenticates a 16-byte source-owned
+platform-config tail at runtime 0x10025e38/package 97868. The isolated link uses
+real function/switch/table addresses and resolves all three sections. It does
+not modify the firmware or bypass overlap rejection. Explicit ownership carving,
+host/control-flow checks and complete function validation remain required.
+
+Actual-address clock placement checks pass on macOS: 259 dispatch, 26,624
+selection, 480 PLL, 72 DTO and 56 epilogue cases using the proposed firmware
+switch/table addresses. This verifies the changed linked pointers within the
+slice scope. Firmware remains unchanged pending host-tail safety, ownership
+integration and whole-function qualification. The full source-only goal remains
+active.
+
+Proposed table host check: an authenticated local platform-config CFG walk covers
+82 reachable instructions and all ten dispatch targets without entering its
+unused tail. External references, startup effects and explicit ownership carving
+still require review; no firmware change or source admission was made. This adds
+local control-flow evidence toward table placement while the full goal remains
+active.
+
+Table-reference inventory finds one original pointer into the proposed tail,
+in the platform-config dispatch table already replaced by generated source data.
+The current candidate has no literal pointers into the interval under an
+all-byte-alignment little-endian scan. Computed addresses remain outside this
+check; ownership and whole-function integration are still pending. Goal active.
+
+Implemented a standalone exact-tail source-data ownership partition helper.
+Seven tests pass on macOS, including existing composer/checksum integration
+with artificial test data and rejection of unsafe or unauthenticated partitions.
+No real firmware provider uses it yet; actual table admission and complete clock
+function qualification remain open. The full source-only objective stays active.
+
+Validated the source-tail partition against the real compiled host and PLL table,
+producing disjoint 196-byte code and 16-byte data regions with unchanged payloads
+and authenticated stock provenance. This advances ownership integration beyond
+synthetic tests; no firmware emitted and full clock qualification remains open.
+The complete source-only goal remains active.
+
+Clock lookup-result boundary now passes 1,280 decoded stock/source comparisons
+on macOS: lookup failures avoid parameter reads, and the signed -1 offset returns
+zero. Other byte values reach selection with correct sign extension, without
+claiming later invalid-shift behavior. Full lookup-body and whole-function
+composition remain outstanding. The complete source-only goal stays active.
+
+Decoded lookup/result-gate composition passes 1,028 stock/source combinations
+using actual authenticated clock records. The observed offset domain is
+nonnegative and below 32, refining the valid-input scope for later full-function
+checks. Separate frame translation and modeled dispatch remain limitations;
+no source-only completion or firmware admission is claimed.
+
+Clock early-return paths now pass 777 continuous entry-to-return candidate frame
+cases plus three tests on macOS. Unlike prior slices, this check creates and
+restores the same saved frame through the actual prologue and epilogue. The
+lookup body remains modeled and successful MMIO paths still need continuous
+execution. No complete-function or firmware admission claim; full goal active.
+
+Extended continuous clock execution through low-frequency MMIO and divider
+paths: 156 cases pass on macOS with one register/stack state from entry to return.
+Helper arguments and saved-register restoration are checked, while helper bodies
+remain modeled. PLL/DTO and full integrated behavior still need continuous
+qualification; no firmware admission or source-only completion claimed.
+
+Added continuous 32 kHz clock-path verification: 192 cases pass on macOS, and
+all 156 low-frequency frame cases remain passing. Valid modeled descriptors
+and helpers are still assumptions; PLL/DTO continuous execution and actual
+provider integration remain outstanding. Full source-only goal active.
+
+Continuous clock DTO paths now pass 150 cases on macOS, with the 156 low-frequency
+and 192 32 kHz regressions still passing. The interpreter follows actual scaling
+instructions through the same saved frame. Lookup/divider helpers remain modeled;
+PLL and complete function integration are not yet proven. Goal remains active.
+
+Continuous clock PLL paths now pass 72 cases on macOS through calculation, source
+table reads, DTO and return, including invalid-PLL early exit. Low/32 kHz/DTO
+regressions remain passing (156/192/150). Modeled helpers and descriptors remain
+explicit limitations; whole-image/source-only completion is still unproven.
+
+Added 1,664 continuous changing-selection clock cases with ordered MMIO traces.
+Tightened byte/word read validation in the continuous interpreter; PLL/DTO frame
+regressions still pass. This removes the constant-selection assumption for the
+covered non-PLL routes but leaves modeled helpers and descriptors. Goal active.
+
+Connected continuous clock execution to decoded source-divider behavior: 162
+cases pass with ordered descriptor/MMIO reads driving final frequency. All 1,664
+changing-selection regressions remain passing. Separate helper frames and modeled
+lookup remain limitations; full firmware/source-only completion remains open.
+
+Removed the separate divider-frame assumption for 162 clock cases: caller and
+source divider now share registers, memory and the call/return address. All
+cases pass on macOS, with PLL-frame regressions passing. Modeled lookup and
+remaining whole-function comparison still prevent completion/admission claims.
+
+Connected decoded lookup failure paths to the caller's actual simulated frame:
+259 cases pass on macOS, with bounded info-record writes and shared call/return
+state. Shared-divider regressions (162) pass. Successful lookup and full stock
+comparison remain open, so no completion or firmware admission is claimed.
+
+Removed modeled lookup for 32 successful low-frequency cases using actual source
+records and shared caller/helper state. All pass on macOS, along with 259 lookup
+failure regressions. Other module/routes and stock full-machine comparison
+remain open; the complete source-only goal remains active.
+
+Connected both decoded clock helpers and actual source parameter/divider tables
+in one machine state. All 26 module cases pass on macOS under zeroed MMIO,
+removing modeled helper results for this domain. Broader MMIO/routes and stock
+comparison still require work; full source-only goal remains active.
+
+First complete-path stock/source clock comparison passes all 26 module inputs
+for the zeroed-MMIO low-frequency domain. Both lookup and divider run decoded
+within the caller machine, using actual tables and continuous frame state.
+Broader register-state comparison and actual firmware admission remain pending;
+full source-only reconstruction is still active.
+
+Expanded continuous stock/source clock checks from 26 to 208 cases, covering both
+low-frequency sources and varied divider registers with actual descriptors.
+All pass on macOS against independent divisor expectations. Higher-frequency
+routes, integration and full source-only completion remain open; goal active.
+
+Added 130 direct stock/source 24.576 MHz/DTO/divider cases using actual tables
+and both decoded helpers in shared state. All pass on macOS against independent
+expected frequencies. PLL stock comparison and provider integration remain open;
+the full source-only objective remains active.
+
+Added 312 direct stock/source PLL-to-return cases with actual records and both
+helpers in shared state. All pass on macOS, including invalid-PLL exits and
+DTO/divider behavior checked against independent calculations. Dynamic MMIO,
+provider integration and complete firmware/source-only verification remain open.
+
+Strengthened all 650 direct stock/source clock cases to compare complete ordered
+MMIO read addresses, widths and values as well as results/helper calls. All pass
+on macOS. This adds observable access equivalence within the tested register
+states; hardware timing, dynamic registers and provider integration remain open.
+
+Removed a circular placement dependency on current hybrid-image fill. The check
+now uses freshly compiled, hash-reviewed host source and authenticated original
+envelope geometry, so it can remain valid after table installation. Actual
+partition and 312 PLL comparison cases pass on macOS. Goal remains active.
+
+Created and ran the consolidated clock-frequency source evidence generator.
+It replays 650 continuous comparisons plus host/partition checks and defines
+three exact linked source sections with evidence hashes and export support.
+All checks pass on macOS. Registration/admission remains pending; no firmware
+change or complete source-only claim was made.
+
+Registered the bounded clock-frequency source provider and explicit authenticated
+platform-config tail partition in the experimental composer. The aggregate
+qualification and 14 ownership/container tests pass. Started the full native
+macOS integration build (clock-frequency-integration.log); no completed new
+firmware/package is claimed while that process runs. Registered inputs must
+remain unchanged during integration. Full source-only/hardware goal stays active.
+
+While clock integration remains live, RTC initializer frequency composition now
+passes 12 cases using the decoded source clock and its real helper/table logic.
+Both successful 32 kHz initialization and high-frequency diagnostic routes agree
+for stock/source outer code. Separate outer/helper frames and modeled remaining
+RTC helpers remain limits. No completed package claim while integration runs.
+
+Integration session remains verified live. Added two RTC frequency-hook
+regressions; all nine initializer tests pass on macOS. They ensure helper-derived
+frequency drives success/error decisions rather than a supplied placeholder.
+Registered integration inputs remain unchanged; no new completed package claim.
+
+While integration remains live, added 24 RTC IRQ composition cases using decoded
+stock/source registration and enable instructions. Handler/private installation
+and controller bit-4 enable agree; failure paths skip both. Separate frames and
+physical delivery remain limitations. No completed new firmware claim.
+
+Verified the source-built RTC diagnostic through stock/source decoded formatter
+instructions with exact message/newline output and matching return values.
+Character delivery and printf wrapper remain outside this check. Integration
+is still live; no registered inputs changed and no new package completion claim.
+
+Completed clock-frequency integration/package checkpoint: all 742 tests pass on
+native macOS, followed by successful package build and verify-artifacts. Codec
+SHA-256 is 94ac39c35629202cad532a4ad4f763b5b1ec60c4e5ab95cef7dcbaef010c2303;
+EVENOTA SHA-256 is 1619d0f89aa0bb98e05b7eeb974f4dd3b7c3f020106d49b7904f44226d60767e.
+Codec ownership: 13,928 C bytes, 156 assembly, 2,968 source data, 80 metadata,
+708 unreachable fill, 308,252 retained stock. There are 205 C functions at 221
+occurrences and 270 replacement regions. All 11 source notices were copied.
+No hardware was flashed. Complete source-only and hardware qualification remain
+false; RTC initializer and the many remaining opaque components remain work.
+
+Added 24 RTC printf composition cases connecting the diagnostic call to decoded
+wrapper forwarding and verified formatter output; nine RTC tests pass. Separate
+frames/pointer translation and physical UART remain limits. Last package remains
+the completed 742-test clock-frequency checkpoint; full goal stays active.
+
+Created and ran consolidated RTC initializer qualification covering upstream
+attribution, core behavior and all identified helper compositions. The 72-byte
+source initializer fits and export support is ready; aggregate checks pass on
+macOS. Provider registration remains pending, and the full source-only objective
+is still incomplete and active.
+
+RTC initializer aggregate is now registered. A fresh aggregate exactly matched
+the reviewed baseline, and the exported ELF passed reviewed_replacements.
+The native macOS integration is running (rtc-init-integration.log); do not count
+this as a completed package checkpoint until that run and packaging finish.
+An isolated, reproducible SPI setup compiler-option probe tested 21 variants;
+minimum text remains 120 bytes against the 116-byte envelope. No SPI source or
+provider was changed by these probes. The largest existing unreachable fill is
+80 bytes, insufficient for straightforward relocation of the whole function.
+
+Completed RTC initializer integration: all 751 tests passed on native macOS,
+followed by successful package build and verify-artifacts. Codec SHA-256
+b8e7eb55e12c0629df7ccff3ce0791c9f3cb0da80ec4ab8d1ca2efd28abbf628;
+EVENOTA SHA-256 c69bbcd91c8c977bf267d9b9bce75c07d11136b6b1d8a36211c41f672b95e1f1.
+206 C functions at 222 occurrences, 271 replacement regions, 14,000 C bytes,
+156 assembly bytes, 2,968 source data, 80 metadata, 708 fill, and 308,180 retained
+stock bytes. Eleven notices copied; no flashing. Full source-only and hardware
+qualification remain false. This supersedes the pending RTC integration entry.
+
+Recovered board pin configure at package 0xfd68 as a new C candidate. Native
+macOS compilation emits 64 bytes, fitting the 64-byte slot. It is unregistered
+and unqualified; next work is decoded transaction/ABI comparison, source
+diagnostic data and reviewed helper compositions. Last completed package is
+the 751-test RTC checkpoint. Full source-only goal remains active.
+
+Board pin guard decoded qualification now passes 8,100 cases and seven tests
+on native macOS. Error-path and initialized-state behavior match; mutation
+tests detect wrong helper/default selection and ABI corruption. Helper bodies
+and diagnostic data remain pending; candidate is not registered. Last package
+remains the verified 751-test RTC checkpoint, and full goal is active.
+
+Board pin diagnostic is now compiled from a C string and exact-extent checked.
+Ten combined guard/data tests and 18 stock/source formatting cases pass on
+macOS. Integer/output helper bodies and guard/padmux compositions remain
+pending; no source admission claimed. Full source-only goal remains active.
+
+Board guard now composes decoded padmux setter/checker/getter across 3,360
+cases and all 16 stock/source combinations; 12 tests pass. Separate helper
+frames and modeled readback are explicit limits. Printf composition and
+integration remain pending; source-only goal stays active.
+
+Board guard/printf forwarding now passes 288 decoded cases with both stock
+and source wrappers, signed pin boundaries, initialization/error paths and
+varied formatter returns. Thirteen guard/data tests pass on macOS. The wrapper
+forwards the original pin value and the guard preserves its -1 error return.
+Frames and format-pointer translation are explicit harness boundaries; integer
+and output helper bodies remain modeled. Candidate remains unregistered and
+the full source-only goal remains active.
+
+Diagnostic integer conversion now executes decoded stock/source ui2a bodies
+at the formatter boundary. All 36 formatter/integer combinations pass for
+nine signed pin boundaries, including INT_MIN and -1. The formatter interpreter
+fork adds an explicit hook while preserving existing registered verifiers.
+Helper memory/output-buffer translation remains separate; character/padding
+and physical UART remain modeled. The 288 guard/printf cases and 13 tests
+still pass. Source admission and complete source-only firmware remain pending.
+
+Diagnostic padding now executes decoded putchw with the formatter-provided
+width, sign, base and converted digits. Seventy-two formatter/integer/padding
+stock/source combinations pass across nine signed pin values; the 288
+guard/printf cases remain passing. Separate helper memory and output-stream
+translation remain explicit. Character output and physical UART are modeled.
+No integration admission yet; the full source-only goal remains active.
+
+Added decoded putf boundary verification: 210 stock/source cases establish
+character/stream forwarding and failure only for fputc result 0xffffffff.
+Three wrapper tests pass, 16 combined with board guard/data tests. This helper
+still needs connection to formatter/padding execution; fputc and physical UART
+are modeled. No new provider admission; full source-only goal remains active.
+
+Decoded putf is now connected to both literal character emission and padding
+output. All 144 stock/source formatter/integer/padding/putf combinations pass,
+including equality of the emitted byte stream with the expected diagnostic.
+Separate frames and buffer translation remain explicit; fputc return and
+physical UART are modeled. Candidate is still unregistered; full source-only
+firmware remains the active objective.
+
+Decoded fputc now passes 108 forwarding/return cases and is connected to the
+diagnostic putf path using matched stock/source wrappers. It ignores stream
+and console result and returns zero. All 144 diagnostic combinations and
+16 tests pass. Console output remains a modeled boundary; physical UART and
+full source-only integration remain incomplete. Goal stays active.
+
+Console/UART port wrapper composition passes 72 decoded combinations,
+including selected-port reads, descriptor arithmetic, byte truncation and
+CR-before-LF behavior. Two new console tests pass, 18 combined boundary/guard
+tests. This composition is not yet connected to the diagnostic; UART transmit
+and the port-global value remain modeled. Full source-only goal stays active.
+
+Diagnostic composition now reaches console/UART port wrappers and compares
+the CR/LF-translated transmit sequence. Each transmit call also executes both
+stock/source transmitter bodies with scripted busy-then-ready MMIO and exact
+read/write trace checks. All 144 diagnostic combinations and 18 tests pass.
+This uses selected port zero, separate frames and scripted MMIO; physical
+timing/hardware remain unqualified. Aggregate admission/integration is next;
+the complete source-only goal remains active.
+
+Board pin guard and diagnostic are registered for experimental source
+admission. Fresh aggregate/data reports matched reviewed baselines and both
+ELF/object exports passed reviewed_replacements. Full macOS integration is
+running in board-pin-integration.log; no completed package checkpoint claimed
+until terminal success and artifact verification. Last verified package remains
+the 751-test RTC build. Full source-only and hardware goals remain incomplete.
+
+While board-pin integration continues, recovered its caller at 0xfda8 as C.
+Native macOS build emits 132 bytes exactly matching stock, including all eight
+configuration calls and the original cleanup/diagnostic/infinite-loop failure
+path. It is unregistered; decoded/composed qualification and source diagnostic
+remain next. No current integration inputs changed by this candidate.
+
+Eight-pin setup decoded comparison now passes 3,096 cases and four tests on
+macOS. All 256 combinations of zero/-1 guard returns are covered, plus two
+unsigned wraparound cases, varying cleanup/printf returns, and both terminal
+paths. Mutation testing detects a wrong configured pin. Actual helper bodies
+and fatal diagnostic source remain pending; this caller is not registered.
+Board-pin integration remains the existing live process; full goal is active.
+
+Fatal setup diagnostic now compiles from a C string and matches its 49-byte
+stock extent at 0x142f2. Seven setup/data tests pass. Decoded setup/guard
+composition passes 2,048 combinations: both stock/source choices, initialization
+states and all 256 conflict masks. Guard padmux/printf and setup cleanup
+helpers remain modeled in this composition, with separate checked frames.
+The setup caller is unregistered; board-pin integration remains live and the
+full source-only goal remains active.
+
+Fatal cleanup now executes decoded setters in 48 setup/setter combinations
+with shared register words. Exact ordered writes clear pins 5,6,11,12 while
+preserving neighboring fields, regardless of modeled checker failure. Nine
+setup/data tests pass, including hook-controlled guard failure and cleanup
+call gating. Actual checker/guard/diagnostic composition remains pending.
+Integration session 1482 was confirmed live this turn; full goal stays active.
+
+Cleanup composition now includes decoded checker and getter bodies: 192
+stock/source combinations pass with written and inverted readback. Shared
+cleanup words retain neighboring fields and ordered writes. Nine setup/data
+tests pass. Guard/printf are still modeled in this cleanup-specific harness;
+separate frames and scripted readback are explicit limitations. Integration
+session 1482 was confirmed live; full source-only goal remains active.
+
+Completed board-pin integration/package checkpoint: 769 tests passed on
+macOS, then package build and verify-artifacts succeeded. Codec SHA-256
+7f027e84d6d8d180e6c7b40c74f0f618f99ef51ec7c3aef415013b41921e5231;
+EVENOTA SHA-256 bc4def4984f11f61c26cb2d79031d8a1c47bd069b772c76d3a5daa45c36560a7.
+207 C functions, 14,064 C bytes, 2,996 source-data bytes and 308,088 retained
+stock bytes. Eleven notices copied. Session 1482 is terminal success; no live
+integration remains. Eight-pin caller printf forwarding separately passes
+24 cases and nine setup/data tests; that caller remains unregistered.
+Full source-only and hardware qualification remain false; goal stays active.
+
+Fatal setup diagnostic now passes four stock/source formatter/putf paths
+through decoded fputc, console, UART wrappers and both transmitters under
+scripted busy/ready MMIO. Literal text rejects unexpected integer/padding
+helper calls; output exactly preserves its internal CR/LF and trailing text.
+The 24 setup/printf cases and nine setup/data tests pass on macOS.
+Shared whole-call stack and physical hardware remain unqualified; admission
+of the setup caller remains pending and the full source-only goal is active.
+
+Eight-pin setup and fatal diagnostic passed aggregate/export checks and are
+registered for experimental integration. The full macOS suite is running in
+board-pin-setup-integration.log. Last verified package remains the 769-test
+board-pin checkpoint until new integration/package verification completes.
+Source-only and hardware qualification remain false; full goal stays active.
+
+While setup integration runs, recovered the next board initializer table at
+0x142bc as typed source policy using authenticated SDK GX_PIN_CONFIG. Thirteen
+entries cover pins 0..12; pin 2 selects function zero, all others one. The
+26-byte compiled table matches stock; four policy/extent tests pass on macOS.
+This table is unregistered; initializer code/call composition remains next.
+Integration session 58083 was confirmed live; full source-only goal is active.
+
+Recovered board pin initializer at 0xfe2c in C. It compiles to 104 bytes on
+macOS, fitting the original slot; unregistered and unqualified. It performs
+table initialization/checks, conditional GPIO direction, eight-pin setup, then
+sets the initialized flag only after setup returns. Header authentication and
+decoded/composed behavior remain next. Integration 58083 is live; goal active.
+
+Initializer builder now authenticates gx_padmux.h and gx_gpio.h against
+NationalChip commit 8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5, recording Git
+blob and SHA-256 identities. The C GPIO prototype now matches the recovered
+implementation and upstream GX_GPIO_DIRECTION enum; direction zero is named
+GX_GPIO_DIRECTION_INPUT. Native compilation remains 104 bytes with unchanged
+code SHA-256 55cfa58578b79d4a14bb295ac596892a8a9cd304edbbc7d5d9060578f5f36753.
+Decoded qualification remains next. Integration 58083 was confirmed live;
+the full source-only goal remains active.
+
+Initializer decoded comparison passes 240 cases and three tests on macOS,
+covering table variations, error-bit branches and setup return/nonreturn.
+The initialized flag is absent from nonreturn traces. Helpers and nonreturn
+are modeled at call boundaries; actual helper composition remains pending.
+Integration 58083 was confirmed live; full source-only goal remains active.
+
+Initializer now consumes the decoded setup terminal path in 2,048
+stock/source combinations across all 256 guard failure masks and diagnostic
+branches. Setup self-loop prevents the initialized flag write. Four initializer
+tests pass, including a hook overriding an assumed return. Lower helpers remain
+modeled in this composition and frames are separate. Integration 58083 was
+confirmed live; complete source-only firmware remains the active goal.
+
+Completed eight-pin setup integration/package checkpoint: 778 macOS tests,
+package build and verify-artifacts passed. 208 C functions, 14,196 C bytes,
+3,045 source-data bytes and 307,907 retained stock bytes. Codec SHA remains
+7f027e84d6d8d180e6c7b40c74f0f618f99ef51ec7c3aef415013b41921e5231;
+EVENOTA SHA remains bc4def4984f11f61c26cb2d79031d8a1c47bd069b772c76d3a5daa45c36560a7
+because new code/data reproduce stock bytes exactly. Eleven notices copied.
+Session 58083 terminal success; no live integration remains. Initializer error
+message at 0x14323 is now a 19-byte source-authored literal; seven initializer/
+data tests pass. Initializer remains unregistered; source-only goal active.
+
+Initializer source-table composition passes 60 cases with exact compiled-data
+read order. Initializer/GPIO composition passes 24 stock/source combinations
+with shared register words and 52 ordered accesses per case, preserving
+unrelated bits and setting input policy for pins 0..12. Other helpers remain
+modeled in these finite compositions; initializer remains unregistered.
+Full source-only firmware goal stays active.
+
+Initializer per-pin diagnostic now passes 144 decoded formatter/output
+combinations through scripted UART transmission. Initializer/printf forwarding
+passes 180 cases across per-entry error masks and return values; processing
+continues after diagnostics. Seven initializer/data tests pass on macOS.
+Other initializer helpers and physical hardware remain unqualified in this
+composition; aggregate admission is pending and full goal remains active.
+
+Initializer pin checks now execute decoded checker/getter bodies in 32
+stock/source combinations. Diagnostic decisions follow decoded register
+readback; ordered reads cover all 13 pins. Eight initializer/data tests pass,
+including hook-driven diagnostic selection. Post-init padmux words and other
+helpers remain modeled; padmux initialization composition remains next.
+The full source-only goal stays active.
+
+Board/padmux initialization composition passes 24 decoded combinations.
+The 13-entry override table feeds all 32 default-pin setter calls, with
+non-board pins defaulting to function zero. Nine initializer/data tests pass,
+including initialization argument forwarding and ignored helper error. Setter
+bodies remain modeled in this particular composition; other reviewed helper
+proofs remain separate. Full source-only admission/firmware remains pending.
+
+Board/padmux initialization now includes decoded setter bodies and shared
+register words in 96 combinations. All 32 writes are checked and final words
+match the board/default policy from both zero/all-one initial states. Setter
+checker and other board helpers remain modeled in this composition; decoded
+checker composition is independently established. Full goal remains active.
+
+Board initializer, diagnostic and 13-pin source table passed aggregate/export
+checks and are registered. Fresh reports matched reviewed baselines for all
+three artifacts. Full macOS integration runs in board-pin-initialize-integration.log.
+Last verified package remains the 778-test setup checkpoint pending terminal
+integration/package verification. Complete source-only goal remains active.
+
+Recovered gsensor_workstate diagnostic accessor at 0xfe94 as C. Native macOS
+build fits its 24-byte slot; both state reads are preserved across printf.
+The name comes from the diagnostic, not a hardware lifecycle claim. Candidate
+is unregistered; decoded behavior/data qualification remains next. Integration
+85121 was confirmed live; full source-only goal remains active.
+
+Gsensor accessor decoded comparison passes 216 cases and three tests on
+macOS. First-read value is printed; second-read value is returned even when
+changed during the modeled printf call. Wrong second-read address is rejected.
+Printf composition, diagnostic data and state lifecycle remain pending.
+Integration 85121 was confirmed live; full source-only goal stays active.
+
+Gsensor diagnostic is source-authored and exact-extent checked at 0x14336.
+It passes 144 decoded formatter/output combinations through scripted UART
+transmission; six accessor/data tests pass on macOS. Accessor printf boundary
+and state lifecycle remain pending. Initializer integration 85121 was confirmed
+live; complete source-only firmware remains the active goal.
+
+Gsensor accessor/printf composition passes 144 decoded cases, forwarding
+the first state value while returning the second independently of printf.
+Seven accessor/data tests pass. Separate frames, translated format pointer
+and scripted UART/state values remain explicit limits; state producer/lifecycle
+and admission remain pending. Integration 85121 confirmed live; goal active.
+
+Authenticated stock literal inventory found one exact state-address literal
+(0x20026c70 at 0xfea4), in the accessor. A neighboring pointer 0x20026c74
+appears at 0x1182c. Candidate initialized-data offset 0x18c84 contains one,
+but section mapping is explicitly unverified in this inventory. Computed or
+indirect writers are not excluded; producer/lifecycle remains unresolved.
+Integration 85121 confirmed live; full source-only goal remains active.
+
+Gsensor candidate initialized word is now bounded by authenticated image-A
+data region 0x184fc..0x18d90, SHA e0a88003909bb45ae966bfedcbf6e21a5bc83137d26bd36c7f81114fa0034384.
+Its value is one. Instruction/data memory alias mapping remains unproved here;
+this is not a state initialization or no-writer claim. Neighboring literal
+0x20026c74 occurs in a different complex routine; producer remains unresolved.
+Integration 85121 confirmed live; full source-only goal stays active.
+
+### Board-pin initializer integrated on macOS (2026-09-08)
+
+The native C-SKY integration completed with 791 passing tests in 21.704 seconds. The initializer adds 104 compiled C bytes; its diagnostic and configuration table add 45 source-data bytes. Codec ownership is now 14,300 compiled C bytes, 156 assembly bytes, 3,090 source-data bytes, 80 metadata bytes, 708 unreachable-fill bytes, and 307,758 retained stock bytes. The 209 C functions account for 225 occurrences.
+
+The macOS apple-clang package build and verify-artifacts both completed successfully. Codec SHA-256: `23452eb8ae7c4848550a1d75afa5f3f6bc8850ffaad04acde19e4a13cd197379`. Package SHA-256: `eccc87d1a2d35a629e96e589360458dfa624b34ac76ed4abeb16159db082cb67` (4,750,780 bytes). Notices copied into the package directory. No hardware qualification or source-only completion is claimed. The source-only goal remains active; gsensor lifecycle and the retained code/data still require reconstruction.
+
+### Gsensor initialized-data mapping checked (2026-09-08)
+
+The state inventory now invokes the stock section analyzer and authenticates the three pinned SDK memory-layout sources before translating the DRAM alias. Address 0x20026c70 maps to package offset 0x18c84, containing the initialized word 1. Four tests pass for section endpoints, rejected out-of-bounds/unaligned addresses, altered stock layout, and altered SDK evidence. This supersedes the earlier unverified mapping note. It does not identify runtime writers, establish hardware behavior, or admit additional source bytes. The full source-only goal remains active.
+
+### Gsensor reader source admission prepared (2026-09-08)
+
+The aggregate reader qualification completed successfully, including decoded before/after-state behavior, printf forwarding, formatter/UART composition and authenticated data mapping. Eleven focused tests pass. The builder now registers the 24-byte C reader and source diagnostic; the initialized state word and its producers remain retained/unresolved. Full integration was started as session 62357, logging to build/gx8002-board/gsensor-integration.log. Do not count the new rows as a verified package checkpoint until that build and package verification complete. The prior verified package remains the 791-test checkpoint.
+
+### Channel lookup recovered (2026-09-08)
+
+Recovered helper at package 0x1104c as C: channel 0 returns 0x2002e050, channel 1 returns 0x2002e1cc, other values return null. Native macOS C-SKY compilation produces 28 bytes exactly matching stock (SHA-256 6bfc14e2268d8a026582d4f40694583902020dd40126f5d1bbfa60033f48e4e9). Decoded stock/source replay passes 520 cases. All four wrapping indices previously identified narrow to byte 255 and return null; the caller branches on null at 0x11638 before the array accesses. This narrows the producer search but does not exclude other writers. Lookup is not yet registered for admission. Gsensor integration session 62357 remains live as authoritatively polled; registered inputs were left unchanged.
+
+Channel lookup regression checkpoint: four tests pass, covering both valid channels, all rejected byte values, absence of implicit argument truncation in the lookup itself, and a mutated rejection predicate. The 520-case verifier now checks the caller instructions at 0x1162a/2c/2e/32/36/38, pinning byte narrowing, original-index preservation, helper target and null rejection. Full integration session 62357 was authoritatively polled and remains live. No registered build input was modified in this checkpoint.
+
+Channel lookup source admission is prepared in verify_gx8002_channel_lookup_source.py. A fresh exported ELF and regenerated report pass reviewed_replacements against the saved JSON baseline, admitting one 28-byte C occurrence at package 0x1104c. A tuple/list serialization mismatch in caller evidence was caught by the gate and corrected before this successful rerun. Registration is deferred until the live gsensor integration (session 62357) completes; no new package ownership is claimed yet.
+
+Upstream UART message candidate identified at pinned SDK commit 8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5, authenticated file lvp/common/uart_message_v2.c (git blob b5ae5ebac76df3bb7e60b0209ef71234114a15db). _GetMessageHandle and _UartMessageAsyncRecvCallback structurally match package routines 0x1104c and 0x11624. This is a candidate identification, not upstream equivalence admission. Next verify MESSAGE_HANDLE size/offsets and the complete receive paths. Evidence saved in gx8002-uart-message-upstream-candidates.json.
+
+UART message ABI probe: authenticated upstream declarations compiled on native macOS C-SKY with queue length eight yield MESSAGE_HANDLE size 380 (0x17c), MSG_PACK size 32, cur_recv_pack offset 28, cur_send_pack 60, queue 348, recv_state 368, send_state 372, pmu_lock 376. These match recovered context stride and observed accesses. Probe/report: analyze_gx8002_uart_message_layout.py and gx8002-uart-message-layout.json. This supports upstream identification, not whole-callback equivalence. The 802-test package repin build is session 6883; observed package hash 844046c8b1a2c2effd440c45f7e794ebaad242b1f5d28f5a9e7067a35b6c0b82. Verification remains pending.
+
+### Sensor accessor package verified on macOS
+
+The 802-test integration and apple-clang package build/verify-artifacts completed successfully. Current codec has 210 C functions at 226 occurrences, 14,324 compiled C bytes, 3,113 source-data bytes and 307,711 retained stock bytes. Codec SHA-256 e3b04bad77fd6e5df232ed910bb56d34d358c54ec4514dee49e449a94a3d6227; package SHA-256 844046c8b1a2c2effd440c45f7e794ebaad242b1f5d28f5a9e7067a35b6c0b82. Notices copied. Source-only and hardware-qualified remain false.
+
+After the verified 802-test package checkpoint, channel lookup was registered with its four regression tests; full integration is running as session 74421, log build/gx8002-board/channel-lookup-integration.log. Upstream receive-header helper contains s_recv_header_data_count[2] = {4,4}; stock words at runtime 0x20026c74/78 (package 0x18c88/8c) also equal {4,4}. This identifies a stronger candidate for the neighboring indexed array; full header-copy equivalence remains pending.
+
+Upstream UART header probe now compiles on native macOS C-SKY: 204 code bytes at O2, extracted from authenticated uart_message_v2.c with original copyright retained and CRC delegated by prototype. Stock inlined path 0x116d6..0x11764 uses header boundary 14, counter reset four, little-endian CRC bytes 10..13 and CRC call over ten bytes, consistent with upstream source. The probe retains a visible upstream signedness warning (-Wno-error=sign-compare); it is unlinked and not admitted. Behavioral replay and integration remain pending. Channel lookup integration session 74421 confirmed live.
+
+Upstream UART header probe linked at isolated analysis address 0x10300000 with counters at 0x20026c74 and CRC at 0x102098a8; zero unresolved relocations, source initializer {4,4} verified. A native macOS host harness passed all eleven fragmentation splits on both ports (22 cases), checking assembled bytes, CRC call timing/length and repeated-message counter reset. CRC result is scripted; target/stock behavioral comparison remains pending. Harness preserved as tests/gx8002_uart_header_host_check.c (include generated header.c with build-directory include path when rerunning). Channel integration 74421 remains live.
+
+UART header host verifier is now reproducible via tools/verify_gx8002_uart_header_host.py: rebuilds authenticated upstream target probe, compiles the persistent harness with macOS clang and runs it. Passing coverage: 22 fragmentation cases, four trailing-input/CRC success-failure cases and four followup counter-reset cases. CRC remains scripted and stock target comparison remains pending. Full channel-lookup integration session 74421 was polled and remains live.
+
+Added execute_gx8002_uart_header_probe.py, a bounded interpreter for the linked upstream helper. Initial 28 decoded source cases (two ports, input lengths 0..13) pass expected return and remaining-length checks with CRC result modeled. Memory accesses are bounded by initialized dictionary bytes, unknown instructions reject. Stock inlined-path comparison, detailed ABI restoration checks and broader trace assertions remain pending; no source admission is claimed.
+
+Decoded upstream header target verifier passes 616 combinations: both ports, counters 4..14, input lengths 0..13, CRC success/failure. Checks exact header bytes, counter state, leftover length, conditional cursor advancement, return result, CRC argument boundary and callee-preserved registers. Saved values remain abstract rather than stack-memory execution. Evidence: verify_gx8002_uart_header_target.py and gx8002-uart-header-target-verification.json. This is source-target qualification only; stock inlined execution remains pending.
+
+Stock/upstream header comparison: compare_gx8002_uart_header.py passed 616 finite combinations using decoded stock 0x116d6..0x11764 and linked upstream helper. Compared exact header bytes, count, remaining length, conditional pointer advance and CRC calls/results. Stock path terminates at caller boundaries 0x116a4/0x11802/0x1173c; those are interpreted as incomplete/success/failure for comparison, not full callback execution. CRC remains modeled. The 806-test package rebuild completed; verify-artifacts is session 96152. No full source-only or hardware completion claimed.
+
+806-test package verification completed successfully on macOS: 211 C functions, 227 C occurrences, 14,352 compiled C bytes and 307,683 retained stock bytes. Package SHA remains 844046c8b1a2c2effd440c45f7e794ebaad242b1f5d28f5a9e7067a35b6c0b82. Header comparison now authenticates the full stock ELF payload against IMAGE_SHA and records hashes of both interpreters. Its 616-case rerun passed, as did three explicit stock/source boundary regression tests. Whole callback and hardware remain unqualified.
+
+Header transition extension: verify_gx8002_uart_header_transition.py passes 30 decoded cases across both ports and body lengths 1,2,4,255,256,32768,65535 with CRC pass/fail plus incomplete headers. Stock success reads length from context+0x24, sets recv_state at +0x170 to 2; failure sets zero, incomplete keeps one. Zero-body queue path deliberately remains outside this bounded model and raises rather than silently succeeding. Full callback reconstruction remains active.
+
+Empty-header publication: verify_gx8002_uart_empty_header.py authenticates stock and decodes 0x1180a..0x11828. Six cases pass for both ports and modeled queue returns 0/1/-1. Ordered writes set receive state zero, packet port, packet length zero; queue receives the 32-byte packet before magic/length clearing. Call runtime target is 0x100261b8. Caller clobbers modeled and queue status ignored by this path. Queue internals and whole callback composition remain pending; no source-only completion claimed.
+
+Empty header/queue composition passed 256 cases via verify_gx8002_uart_empty_header_queue.py: both ports, decoded stock/upstream LvpQueuePut and every aligned head/tail position for eight 32-byte slots. Real packet snapshot from outer decoder feeds queue; copied bytes/tail updates or full-queue no-write behavior match independent expected memory. Outer state/magic/length cleanup still occurs regardless of queue result. Separate frames and translated addresses remain explicit limits; no concurrent or whole callback qualification.
+
+UART body reconstruction started: authenticated upstream _UartMessageAsyncRecvCheckBody extracted with copyright preserved, compiles as a 384-byte native C-SKY object via build_gx8002_uart_body_upstream_probe.py. Stock entry 0x11278 narrows channel for lookup, subtracts optional four-byte trailer, and accesses body counter at context base+0x308+4*port, consistent with upstream opening logic. Probe uses analysis-only external declarations and unresolved relocations, so dependency ABI and all copy/DMA/completion paths remain pending. No source admission claimed.
+
+Body probe dependency review corrected port/length signedness and buffer pointer declarations to match pinned gx_uart.h; authenticated uart_message_v2.h, lvp_queue.h and gx_uart.h before compiling. Probe remains 384 bytes. Recorded stock body code extent/hash and candidate async-start/stop/buffer, queue, callback and storage addresses in gx8002-uart-body-bindings.json. Allocation preparation appears inlined; bindings are not called-routine equivalence claims.
+
+Body probe now includes authenticated upstream _UartMessagePrepareRecv, replacing its external declaration with registration lookup, capacity/offset checks and assignment. Compiles to 480 bytes; linked at isolated analysis address 0x10301000 with candidate UART/queue/callback globals and body counters at 0x2002e358. Link has no unresolved symbols or relocations. Registration array candidate 0x2002e360 has 16 entries with 28-byte stride in stock. This is still an analysis artifact: no firmware placement/admission or behavioral equivalence yet.
+
+Receive preparation host harness: generated prepare.c from authenticated upstream preparation function and compiled tests/gx8002_uart_prepare_host_check.c with native macOS clang. 128 combinations (16 registration positions, two trailer flags, four starting offsets) plus three rejection cases passed. Confirms body pointer assignment, offset increment/reset and failure clearing. Probe builder preserves extracted preparation source for repeat runs. Target ABI/stock preparation comparison remains pending; no firmware admission.
+
+Preparation host coverage expanded to 138 cases and made reproducible with verify_gx8002_uart_prepare_host.py. New cases establish first-match rejection despite a later usable registration, full-packet-length wrap check despite trailer-excluded capacity, and rejection for tested flagged lengths below four. Rebuilt authenticated source and native harness passed. These characterize upstream behavior, not target equivalence or source-only completion.
+
+C-SKY registration ABI measured from authenticated upstream: sizeof UART_MSG_REGIST=28, offsets port0/msg_id4/buffer8/capacity12/offset16/callback20/priv24. Analyzer rejects mismatch against stock field accesses. Body builder now also emits standalone prepare-target.elf at isolated 0x10302000 with registry 0x2002e360 for target replay. Build passed; behavior remains unqualified until decoded comparison.
+
+Preparation target execution added: execute_gx8002_uart_prepare.py handles the decoded standalone upstream helper with bounded target memory and callee-preserved register checks. verify_gx8002_uart_prepare_target.py passed 576 combinations over match positions 0/7/15/absent, flags, lengths, offsets, capacities and null/non-null buffers. Exact final memory matches independent preparation semantics, including offset reset before null-buffer rejection. Stock inlined preparation comparison remains pending; no admission claimed.
+
+Stock preparation comparison passed 576 combinations. compare_gx8002_uart_prepare.py authenticates stock ELF bytes and compares decoded inlined stock 0x11304 onward against the upstream standalone target helper. Both return classification, exact final memory and ordered writes match. Stock stops at 0x11386/0x112fa caller continuations; full body copy, asynchronous transfers and callback behavior remain pending.
+
+Stock body copy slice now passes 160 decoded cases across ports, trailer flags, body sizes, starting counts and available input. Verifies exact destination bytes including untouched neighbors, counts/remaining length, completion cursor advance, return value and trailer state. Entry 0x113b0 assumes prior validation/preparation; partial stop 0x1140c precedes async scheduling. Initial 500-instruction bound was insufficient for 64-byte loop and was raised to 2000; rerun passed. Source-target comparison remains pending.
+
+Body-copy comparison now passes 160 decoded stock/upstream cases via compare_gx8002_uart_body_copy.py. Upstream execution begins at linked 0x1030104e; both paths compare full modeled memory, completed return and partial continuation boundaries. Includes source postincrement loads/indexed stores and stock distinct loop structure. Async scheduling, entry validation and whole-body composition remain pending.
+
+Async scheduling stock slice passes 2240 decoded cases (ports, all 16 base alignments, five received counts, seven remaining lengths, helper success/failure). Checks strict >32 threshold and destination past first 16-byte boundary, stop-then-buffer call order, rounded transfer length, callback/private argument, counter advance and cursor reset. Helpers modeled with caller clobbers. Source-target scheduling comparison and physical transfers remain pending.
+
+Async scheduling stock/upstream comparison passes 2240 cases via compare_gx8002_uart_body_schedule.py. Decoded linked upstream branch at 0x103010dc and stock 0x1140c agree on helper call sequence/arguments, zero return and complete final modeled memory across alignments, thresholds and helper return codes. Instruction write order is not claimed identical; concurrent observers and actual DMA/helper execution remain unqualified. Whole-body composition remains pending.
+
+Body input validation comparison passed 12 decoded stock/upstream cases: both ports, null buffer/null length pointer/empty input, restart helper success/failure. Exact restart arguments and -1 return match. Important scope: the original helper dereferences recv_buffer_p before its null check, so null pointer-to-pointer is not treated as safely rejected. This slice starts after that dereference; whole-function entry validation remains pending.
+
+Already-complete body branch comparison passes 36 decoded stock/upstream cases (ports, trailer flags, lengths, helper results). Checks counter reset, restart-before-publication sequence, exact queued packet bytes, magic/length cleanup for unflagged packets, trailer state for flagged packets, zero return and final memory. Helpers remain modeled and entry assumes count already equals body size. Whole-body continuous execution remains pending.
+
+Continuous body execution implemented in execute_gx8002_uart_body_full.py. compare_gx8002_uart_body_full.py passes 72 stock/upstream entry-to-return cases over ports, trailer flags, initial counts, input sizes and helper results. Compares return, all non-stack modeled memory, helper call sequence and callee-preserved registers; source/stock frames modeled separately. Initial coverage uses 20-byte bodies and valid registration/buffers, so broader DMA and rejection cases remain pending. No firmware source admission yet.
+
+Continuous body comparison expanded to 2592 passing cases with body sizes 20/80/128, alignments 0/1/15 and valid/missing/undersized/null registration modes. Coverage counters: {'async': 608, 'restart': 840, 'queue': 144, 'failure': 1200}. Both whole decoded functions agree on return, non-stack memory, helper call sequence and preserved registers. Helpers remain modeled, actual DMA and source admission pending.
+
+UART body original-entry candidate built at 0x10207cec, package 0x11278: 480 compiled bytes fit the 500-byte stock region ending 0x1146c. compare_gx8002_uart_body_full.verify(original_entry=True) passes all 2592 continuous cases; saved gx8002-uart-body-original-entry.json. Candidate ELF/disassembly in build/gx8002-uart-body-probe. No unresolved text relocations. Reviewed source admission, initialized-state ownership, helper qualification and whole-device behavior remain pending.
+
+Original-entry body comparison expanded to 7776 passing continuous cases. Helper statuses now vary independently for restart, stop, async-buffer and queue (in addition to uniform success/failure), avoiding an assumption that all helpers share a return result. Coverage: async1824/restart2520/queue432/failure3600. Interpreter now checks exact pop register list and rejects indexed word writes outside modeled memory. Actual helper execution, independent source-admission review and hardware remain pending.
+
+Whole-body lookup composition: full interpreter now accepts a lookup hook; comparator refreshes the admitted channel-lookup dependency and invokes its decoded C-SKY instructions at 0x10207ac0 for every lookup in both bodies. Original-entry 7776-case comparison passed. Lookup remains a separate decoded frame, but no longer a constant-table model in this run. UART/queue boundaries and physical effects remain modeled.
+
+Whole-body queue composition passed: verify_gx8002_uart_body_queue.py refreshes recovered queue source and runs its decoded put code on each published packet, testing full/available states at tail wrap. 1728 queue executions across 7776 body cases passed exact memory expectations. Separate queue memory translation remains explicit; outer hook currently consumes available-state return, while baseline independently varies failure status. UART helpers and actual DMA remain modeled.
+
+UART receive controls reconstructed as C in runtime_gx8002_uart_receive_control.c. Native macOS build emits start52 bytes at 0x1020368c and stop40 bytes at 0x102036c0, fitting original envelopes. Both bind IRQ save/restore at 0x10025560/6c. Start rejects null callback, sets descriptor mode/callback/private then enables receive interrupt; stop clears callbacks and receive interrupt. Compiled bytes differ from stock; decoded MMIO/order/IRQ-token qualification remains pending.
+
+### UART receive-control and body composition checkpoint
+
+Reconstructed receive start/stop C builds natively on macOS at the original
+entries, fitting the 52/40-byte envelopes. The authenticated stock wrapper and
+compiled candidates pass 192 ordered descriptor/MMIO/IRQ-token comparisons
+against an independent contract. An additional 384 combinations execute the
+stock and authenticated upstream PSR save/restore leaves, including initially
+disabled interrupts and restoration of all processor-state bits.
+
+The continuous upstream packet-body comparison now accepts decoded receive
+control hooks. All 7,776 body cases pass at the original entry with 30,240 start
+and 21,888 stop executions across stock/source implementations and three
+register/PSR states. Each helper uses an isolated descriptor state; persistent
+cross-call UART state and physical interrupt delivery are not claimed. The
+async-buffer helper remains modeled. These candidates are not admitted into
+the package yet; the last verified package remains 211 C functions with
+307,683 retained codec bytes. Reports: gx8002-uart-receive-control-verification,
+gx8002-uart-receive-irq, and gx8002-uart-body-control JSON under docs/research.
+
+### Asynchronous UART buffer reconstruction
+
+Added runtime_gx8002_uart_receive_buffer.c and native macOS candidate builder/
+decoded verifier. The stock entry 0xcd0c (runtime 0x10203780) compares against
+compiled C across 2,304 cases: null buffer/callback, zero and extreme lengths,
+fifth stack argument, DMA selection, IRQ tokens, MMIO words, and DMA results.
+Full ordered memory/helper traces and callee-saved registers are compared.
+
+Inspection of the DMA callee at package 0xc71c demonstrated that it consumes
+r1/r2 as buffer/length, in addition to r0 descriptor. The C prototype/call and
+verifier explicitly preserve/check all three; a descriptor-only model was
+insufficient. DMA internals remain unreconstructed, and IRQ leaves are modeled
+in this particular verifier. The candidate is 100 bytes versus a 96-byte stock
+envelope and is not admitted. Five initial compiler-flag probes did not reduce
+size; no overlapping package placement has been performed. Latest candidate
+SHA256 a46486e5e5250afa82d7bfe7d516f557cad3de67dff0df3d959d826eaccf38e4.
+
+### UART DMA setup C and decoded qualification
+
+Reconstructed package 0xc71c/runtime 0x10203190 as
+runtime_gx8002_uart_receive_dma.c. Native macOS compilation produces 140 bytes,
+fitting the stock envelope. Uses the authenticated upstream gx_dma_ahb.h
+(blob 0a63d02cb756c4ca9597f595146cbdc95cf9d46d at SDK commit
+8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5).
+
+The decoded stock/source comparison passes 768 cases with ordered memory
+accesses, five helper boundaries, preserved caller buffer/length, callee-saved
+registers, signed channel failure, invalid port failure, and differing results
+from the two burst lookups. An independent transfer-call oracle checks all 12
+configuration words against their upstream fields, as well as destination,
+source, length and channel. Cache/select/burst/callback/transfer helpers remain
+modeled; this function is not admitted yet. Candidate SHA256
+7e8266b0b1860efb076d2dffd26d8c51aa5bb8e15a577760e054e1b1cba57581.
+Reports: gx8002-uart-receive-dma-candidate.json and
+ gx8002-uart-receive-dma-verification.json. Package ownership counts unchanged.
+
+### UART DMA burst source and composition
+
+Added runtime_gx8002_uart_dma_burst.c, using the authenticated upstream DMA
+burst enumeration. Both volatile descriptor reads (offsets 0x34 and 0x38)
+remain ordered even when only one direction is selected. Unsupported lengths
+map to the single-transfer enumeration. Native macOS candidate is 114 bytes
+in the 116-byte envelope at package 0xc5dc/runtime 0x10203050; SHA256
+ dcb19548b684924c227ade43682f3012a7bb2c2ce260097aa486c9eb0d0314c4.
+
+8,232 decoded stock/source cases pass independent mapping, read-order and ABI
+contracts. 180 additional DMA setup compositions execute 300 burst calls
+across all stock/source combinations, including a changed receive burst size
+between the two lookups and the invalid-port early return. The 768 baseline
+DMA setup cases also pass after adding the optional leaf hook. Remaining DMA
+cache/channel/callback/transfer dependencies are still modeled; source
+admission and package integration remain pending. Reports are
+ gx8002-uart-dma-burst-verification.json and
+ gx8002-uart-dma-burst-composition.json under docs/research.
+
+### DMA callback storage and channel allocation candidates
+
+Recovered DMA callback registration at package 0xd0f0 as C. The native macOS
+candidate is 16 bytes in the 20-byte envelope and passes 189 decoded ordered
+write/ABI cases, including null callback/private values and wrapping channel
+arithmetic. Extreme indices are arithmetic tests, not claims of valid storage.
+The leaf writes callback at 0x20027320 + 4*channel and private data eight bytes
+later. Candidate SHA256
+61d8d6c721972003f2d052d571f3027af0396741219eb8d167f5fd9621524121.
+
+Recovered channel selection at package 0xcfd8 as C. It reads channel count at
+0x2002e940, scans allocation bytes at 0x2002ecac under saved interrupt state,
+reserves the first zero byte, calls runtime 0x10025080 with (25,1), and restores
+interrupt state on both exits. It compiles to 76 bytes in the 76-byte envelope;
+SHA256 a945f0a79b5690ff020f7d9a81c04080ddd3ad9b5d759abb85aab0fc5f21113e.
+Decoded selection qualification and resource-helper identification remain next.
+Neither candidate has been admitted into the package. Reports use the
+ gx8002-dma-callback and gx8002-dma-select prefixes under docs/research.
+
+### DMA selection decoded qualification and clock gate reuse
+
+The 76-byte channel selector passes 6,132 decoded stock/source cases against
+an independent ordered-access oracle: every occupancy bit pattern for counts
+0..8, nonzero occupied values 1/128/255, and four IRQ tokens. Checks cover first
+free channel, no-free-channel/zero-count failures, reservation before the
+resource call, and restoration of the original token under caller clobbers.
+The tested channel counts do not establish actual hardware capacity.
+
+Identified runtime 0x10025080 as the previously reconstructed platform clock
+gate. DMA uses module 25, enable 1. A composed verifier executes the existing
+stock/source gate in 72 combinations, making 36 gate calls only after a free
+channel was reserved. Gate effects match its independent oracle. The module
+lookup and configuration table remain modeled/stock-backed in this proof;
+physical clock behavior is unqualified. Reports: gx8002-dma-select-verification
+and gx8002-dma-select-gate JSON. No package admission or ownership change yet.
+
+### DMA transfer candidate and initialized channel domain
+
+Added runtime_gx8002_dma_transfer.c for package 0xd104/runtime 0x10203b78.
+It forwards the fifth stack argument to configuration at 0x102038f4, exits
+only on -1, writes the channel mask to device+0x310, calls descriptor cache
+at 0x10025664 with state[channel+218] and 416 bytes, rereads the device base,
+and writes device+0x3a0. Native macOS candidate is 76 bytes against 72 available;
+not admitted and decoded behavior qualification remains pending. The shift
+uses the allocated-channel caller contract; out-of-range shifts are not
+claimed. Latest candidate SHA cb3ef966a683ee3d791d4a04094b288f0abae47572fc1b103733ce67d5011560.
+
+Authenticated initialization instructions at package 0xd14c show state base
+0x2002e93c, device base 0xa1000000, and channel count 2 stored at 0x2002e940.
+Analyzer/report gx8002-dma-channel-count verifies these decoded instructions
+against the authenticated stock image. Reachability and later count mutation
+remain unproven; this evidence establishes initialization, not physical
+capacity. Cache helpers at package 0x1761c and 0x17678 have line-operation
+loops with selector bits 2 and 8 respectively; reconstruction remains next.
+
+### DMA transfer qualification and existing cache source reuse
+
+The transfer candidate passes 384 decoded stock/source cases in initialized
+channels 0/1, with fifth stack argument forwarding, exact -1 error semantics,
+ordered MMIO writes, register preservation, and a device-base mutation across
+the modeled cache call to verify the second volatile load. An equivalent
+index-expression change did not reduce its 76-byte size (72-byte envelope).
+
+Correction to the preceding cache note: runtime 0x10025664/package 0x17678
+already has admitted dcache_clean_range source. Reused and refreshed that
+existing verifier, then composed its decoded stock/source leaf with transfer
+in 24 combinations. All pass; 16 cache calls each emit the expected 26 line
+commands for 416 bytes. The setup/configuration dependency remains modeled,
+and no hardware cache coherence claim is made. Reports: gx8002-dma-transfer-
+verification.json and gx8002-dma-transfer-cache.json. No package change yet.
+
+### DMA configuration dependency: bus-address translation
+
+Inspected the full configuration routine (package 0xce80..0xcfd8). It builds
+control/config fields, clears channel status, translates source/destination,
+writes channel registers, bounds linked-list count, builds descriptors, and
+translates the descriptor-list address. Nested source work remains necessary.
+
+Recovered its address translator at package 0xd1ec/runtime 0x10203c60 as
+runtime_gx8002_dma_bus_address.c. Native macOS C compilation is byte-identical
+to the complete 20-byte stock routine, SHA256
+5fbc1188c3db999213e1792838696590b573194f67c658437e35149b5e49c419.
+131,388 decoded stock/source cases pass an independent interval oracle: map
+[0x10000000,0x30000000) to low 28 bits, preserve other addresses. Corpus covers
+both ends of every 64KiB block plus dense alias boundaries and wraparound.
+Register preservation is checked. Not yet admitted; physical addressability
+is not established by this arithmetic proof. Report:
+gx8002-dma-bus-address-verification.json. Package ownership remains unchanged.
+
+### DMA status clearing and descriptor candidate
+
+Status clearing at package 0xcd90 is reconstructed as C, fits its 36-byte
+space, and passes 96 decoded stock/source ordered-access and ABI cases. The
+single state-base read and all five mask writes (offsets 0x338,0x340,0x348,
+0x350,0x358) match an independent oracle. Shift values beyond initialized
+channels 0/1 are arithmetic tests only. SHA256
+b66a6721e83a15765cb80a3b0b366b842f6ec9666b23c1ee1de0024e47151790.
+
+Inspected descriptor construction at 0xcdb4..0xce80 and added an unqualified
+C candidate. It uses six-word descriptor stride, leaves word five untouched,
+sets last-link pointer zero, clears final control bits 27/28, and computes
+last length using signed remainder with exact multiples represented as 4095.
+Direction increments preserve stock unsigned-halfword values, notably
+0xf001 rather than replacing it with a signed decrement. Native candidate
+is 224 bytes versus 204 available, with no additional rodata section.
+Decoded behavior and valid count-domain qualification remain pending. Neither
+routine is admitted; package ownership remains unchanged. Reports use
+ gx8002-dma-clear and gx8002-dma-descriptors prefixes under docs/research.
+
+### Descriptor native macOS contract checks
+
+Added gx8002_dma_descriptors_host_check.c and native clang runner. 15,552
+cases pass with address and undefined-behavior sanitizers: counts 0..17,
+all 16 source/destination direction combinations, widths 0/1/2/4/128/255,
+length boundaries and negative arithmetic probes. Checks cover full output
+against an independent indexed oracle, untouched sixth words and trailing
+sentinels, unchanged input pattern, and every next-link translation argument.
+Count zero intentionally emits the final descriptor, matching the observed
+stock control flow; this is not a claim that callers use zero-length DMA.
+
+This host proof does not replace decoded stock/source instruction comparison,
+which remains next. The candidate still occupies 224 bytes in a 204-byte
+envelope and is not admitted. Host runner report:
+gx8002-dma-descriptors-host.json. No package ownership changes.
+
+### Descriptor decoded stock/source and bus composition
+
+Added a bounded byte-memory descriptor interpreter with checked callee-saved
+registers and stack restoration. The target C and authenticated stock pass
+1,920 cases comparing all output bytes plus ordered pattern reads, descriptor
+writes, and translation calls. Counts 0/1/2/3/17, all direction combinations,
+widths 0/1/4/255, and six signed length probes are covered. Stack temporaries
+and saved frames are abstracted; pattern/output buffers are separate.
+
+A second run composes the byte-identical C bus translator as decoded code:
+14,592 nested translation calls pass across the same descriptor corpus.
+The translator's own 131,388-case proof is refreshed. Reports:
+gx8002-dma-descriptors-verification.json and gx8002-dma-descriptors-bus.json.
+Descriptor candidate still exceeds its stock envelope by 20 bytes and remains
+unadmitted. These proofs do not establish physical DMA behavior. No package
+ownership changes in this checkpoint.
+
+### Full DMA configuration C candidate
+
+Added runtime_gx8002_dma_configure.c for package 0xce80..0xcfd8, connecting
+reconstructed clear, bus-address and descriptor helpers. Native macOS C builds
+to 324 bytes within the 344-byte envelope. The authenticated upstream
+GX_DMA_AHB_CH_CONFIG type has compile-time checks for its 48-byte size and
+all 12 stock field offsets. Candidate preserves staged validation of address
+updates, master selectors and handshake selectors; register writes occur
+before the descriptor-list size rejection, as in stock. Device-base reads
+around translation calls remain separate volatile accesses. The list count
+uses stock signed quotient/remainder followed by unsigned byte-bound check.
+
+This is a build candidate only: full decoded stock/source configuration
+comparison, including the late failure path and nested calls, remains pending.
+The width/channel caller domains and negative list-count behavior need explicit
+qualification. Descriptor construction still exceeds its individual envelope;
+no overlapping code has been placed into any firmware package. Report:
+gx8002-dma-configure-candidate.json. Goal and package ownership remain unchanged.
+
+### Configuration validation decoded comparison
+
+Added bounded entry-to-first-helper/return interpreters for stock and compiled
+configuration. 46,656 selector combinations pass an independent validation
+oracle, including values 0,1,2,3,4 and UINT32_MAX for each of the six validated
+fields. Ordered configuration reads match exactly; invalid fields return -1
+before any external write, while valid cases reach the clear helper with the
+channel intact. Rejection paths verify saved-register and stack restoration.
+
+This is deliberately a partial control-flow proof: successful cases stop at
+the clear call, so register programming, late descriptor-size failure and
+nested descriptor construction still require full-path comparison. Report:
+gx8002-dma-configure-validation.json. Candidate/source admission and package
+ownership remain unchanged.
+
+### Full configuration decoded comparison
+
+Continuous configuration entry-to-return comparison passes 576 stock/source
+cases across initialized channels 0/1, master and handshake selectors, widths
+0/1/2/7, and nine length boundaries including signed probes and descriptor
+capacity limits. External ordered reads/writes and clear/translation/descriptor
+call arguments match. An independent oracle checks all register values, exact
+late-failure write count, list-count rejection, and every descriptor argument.
+
+The late size failure leaves five register writes, while successful setup adds
+the translated list-pointer write. Saved registers and stack restoration are
+checked at every return. Nested helpers remain modeled in this run; the device
+base is fixed and mutable-state composition remains work to do. Report:
+gx8002-dma-configure-verification.json. No package admission yet.
+
+### Configuration nested source composition
+
+Configuration's 576-case corpus now runs decoded clear and address-translation
+leaves: 2,304 clear executions and 6,144 bus translations pass across stock/
+source combinations. A separate composition passes the actual configuration
+arguments to decoded stock/source descriptor builders at the actual output
+address, completing 1,536 descriptor executions. Independent checks cover the
+fixed source/incrementing destination pattern selected by this corpus, control
+bits, and the untouched sixth descriptor word.
+
+Helpers still execute in isolated memory/frames, with fixed device base for
+clear and modeled translation inside this descriptor composition. Shared-memory
+whole-chain execution and package placement remain incomplete. Reports:
+gx8002-dma-configure-leaves.json and gx8002-dma-configure-descriptors.json.
+The standalone descriptor proof is refreshed. No package ownership changes.
+
+### Descriptor candidate now fits original placement
+
+Reused the accumulated unsigned source/destination offsets for the final
+entry, and applied the local GCC flag -fno-tree-scev-cprop after measured
+compiler probes. The descriptor builder shrank from 224 to 156 bytes, fitting
+the 204-byte envelope without binary extraction or manual machine-code edits.
+The builder records the additional flag. Other compiler settings are unchanged.
+
+Refreshed proofs on the compact candidate all pass: 1,920 decoded comparisons,
+15,552 native clang ASan/UBSan cases, 14,592 decoded address-translation calls,
+and 1,536 descriptor executions composed with configuration. No package
+admission yet. The previously recorded descriptor-size blocker is resolved;
+UART receive-buffer and DMA transfer size excesses remain separate work.
+
+### Remaining compact-placement investigation
+
+Measured seven optimization-pass flags, three optimization levels, and ten
+register/control-flow flags for each of DMA transfer and UART receive-buffer.
+None reduced the current 76/100-byte candidates to their 72/96-byte envelopes.
+Do not repeat these identical probes; saved results are
+ gx8002-dma-uart-fit-probes.json and gx8002-dma-uart-register-probes.json.
+-O1/-O2/-Oz also failed to improve either minimum.
+
+Expressed UART descriptor storage as an external typed 32-word-stride array,
+with an explicit linker binding to 0x20026a94. This makes the storage dependency
+visible for eventual source storage reconstruction and produces identical code
+bytes. All 2,304 decoded receive-buffer cases pass after the change. The state
+array definition and remaining compact placement remain pending. No package
+changes; these candidates remain unadmitted. Next work should pursue source
+layout/code-generation changes or reviewed relocation, not repeat flag probes.
+
+### Receive-side cache range reconstruction
+
+Unsigned-16 and signed descriptor-index experiments did not shrink DMA
+transfer; restored the original unsigned indexing expression and refreshed
+its 384 decoded cases successfully. No indexing restriction was retained.
+
+Reconstructed the receive cache helper at package 0x1761c/runtime 0x10025608
+as runtime_gx8002_dcache_invalid_range.c. It reuses the reviewed clean-range
+C structure with the stock operation selector 2 rather than 8. The native
+macOS candidate is 88 bytes in the 92-byte envelope. 12,864 complete decoded
+stock/source comparisons and 144 huge-positive-size 65-write prefix checks
+pass, covering signed sizes, alignment, address wrapping and preserved ABI.
+The upstream gx_dcache.h is authenticated; the copied SNPU object reference
+is explicitly only unrelated identity evidence, not this helper's provenance.
+
+This completes a candidate for a previously modeled receive-DMA dependency;
+source admission and caller composition remain pending. Physical cache
+coherence is unqualified. Report: gx8002-dcache-invalid-range-verification.json.
+No package ownership change yet.
+
+### Receive DMA cache and allocator composition
+
+Receive DMA now has optional decoded cache and allocator hooks. 504 composed
+cache cases pass across stock/source caller and leaf combinations, with
+stored cache buffer/length deliberately differing from transfer arguments.
+Signed/nonpositive sizes, alignment and wrapping addresses are included.
+Cache processing precedes selection even when allocation fails or port is
+invalid. Both component baseline verifiers refresh successfully.
+
+144 allocator compositions pass over both initialized channels, four occupancy
+patterns, three IRQ tokens and ports 0/1/2. The selected channel is written to
+the UART descriptor only after successful allocation. Invalid port failure
+occurs after reservation, with no added cleanup, preserving stock behavior.
+Isolated allocator state and modeled IRQ/clock boundaries remain limits.
+Reports: gx8002-uart-receive-dma-cache.json and
+ gx8002-uart-receive-dma-select.json. No source admission/package change yet.
+
+### Receive DMA registration and completion handler
+
+72 stock/source receive-DMA/callback-registration combinations pass, with 32
+actual decoded registration calls. They check channel-indexed callback/private
+stores, suppression on failed allocation/invalid port, and registration before
+transfer setup. Report: gx8002-uart-receive-dma-callback.json.
+
+Traced registered completion entry 0x102030e4/package 0xc670. Added
+runtime_gx8002_uart_receive_complete.c: release stored channel, set it to -1,
+read length then buffer, invoke cache helper 0x100256c0, then read callback,
+private data and port and call it. Native candidate is 34 bytes within 36;
+SHA256 5c1921ed0c842f388c3dcb96b4c7641389fc995098ac364f94842e650271020c.
+Decoded completion behavior, release and cache dependencies still need
+qualification. No null callback guard was added. Nothing in this checkpoint
+is admitted into the package; ownership counts remain unchanged.
+
+### Receive completion qualification and deallocation source
+
+Receive completion passes 288 decoded stock/source cases with an independent
+ordered-access oracle. Controlled release/cache mutations verify that buffer,
+length, callback, private data and port are reread at their stock boundaries.
+Callee-saved registers and stack restoration are checked; callbacks remain
+modeled. Report: gx8002-uart-receive-complete-verification.json.
+
+The release entry at 0xd0c4 wraps deallocation at 0xd024. Added C for the
+latter: clear allocation byte under saved IRQ state, scan channel count, keep
+clock active only if an allocation byte equals exactly one, otherwise disable
+module 25, then restore IRQ state. Exact-one differs from selection's nonzero
+check and is preserved. Native candidate and report:
+gx8002-dma-deallocate-candidate.json. Decoded qualification remains pending.
+No package changes or admission in this checkpoint.
+
+### Deallocation qualification and release wrapper candidate
+
+Deallocation passes 5,008 decoded stock/source cases against an independent
+ordered-memory/clock-call oracle: all allocation combinations from 0/1/2/255
+for counts 1..4, every in-table release channel, and four IRQ tokens. Exact-one
+scan behavior, byte clearing, clock-disable conditions and ABI are preserved.
+Counts above initialized two channels are bounded algorithm probes only.
+
+Expressed allocation/count via one explicit external DMA-state symbol. This
+keeps state ownership visible but remains 72 bytes versus 68 available. All
+5,008 cases pass after this change. Added runtime_gx8002_dma_release.c wrapper
+at package 0xd0c4: native C is byte-identical to stock, eight bytes, SHA256
+ a88262c0eff797a3425044f38b2fd2c7c3c5fdb25d1b8230d19dcaf6d7f62031.
+Wrapper decoded composition remains pending. Reports use gx8002-dma-deallocate
+and gx8002-dma-release prefixes. No package admission or ownership changes.
+
+### Release composition and completion cache candidate
+
+The release wrapper's exact push/call/pop sequence composes with decoded
+stock/source deallocation in 384 cases across initialized channels, allocation
+bytes 0/1/2/255 and three IRQ tokens. The nested deallocator retains its own
+abstract frame; IRQ and clock calls remain modeled. Report:
+gx8002-dma-release-verification.json.
+
+Recovered completion cache helper at package 0x176d4/runtime 0x100256c0 as
+runtime_gx8002_dcache_clean_invalid_range.c, preserving command selector 10.
+Native macOS build is 88 bytes in the 92-byte envelope. 12,864 full decoded
+stock/source cases and 144 huge-size prefixes pass for ordered cache commands,
+signed-size semantics, alignment and address wrapping. The unrelated SNPU
+object identity is not claimed as provenance. Physical coherence, caller
+composition and source admission remain pending. Report:
+gx8002-dcache-clean-invalid-range-verification.json. No package changes.
+
+### Receive completion with decoded release and cache leaves
+
+128 composed completion cases pass across stock/source caller and leaf
+variants, both initialized channels, four allocation patterns and four cache
+sizes. Release executes the reconstructed wrapper and decoded deallocator;
+completion cache executes the decoded clean/invalidate range helper. Ordered
+release then cache then callback, stored channel reset to -1, allocator effects,
+and exact cache commands are checked. Component baseline verifiers refresh.
+
+These remain separate descriptor/allocation/cache frames, with modeled final
+callback delivery and modeled IRQ/clock internals inside deallocation. Report:
+gx8002-uart-complete-leaves.json. Shared-state whole-chain validation and
+package admission remain outstanding; no package ownership changes.
+
+### Persistent DMA allocation lifecycle
+
+Added verify_gx8002_dma_allocation_lifecycle.py to carry actual decoded
+allocation-byte results into subsequent select/deallocate calls. All 5,184
+four-operation sequences pass (20,736 decoded calls), spanning every sequence
+of select/free0/free1, all initial byte pairs from 0/1/2/255, and stock/source
+selector/deallocator combinations. An independent persistent-state oracle
+checks returned channels, reuse/exhaustion/repeated frees, clock calls and
+per-operation IRQ save/restore tokens.
+
+This removes reset-between-calls assumptions for the allocation table, but
+per-call register frames are still reconstructed and IRQ/clock internals are
+modeled. It does not prove concurrent or physical DMA ownership. Report:
+gx8002-dma-allocation-lifecycle.json. Source admission and package integration
+remain outstanding; package ownership unchanged.
+
+### Consolidated DMA/UART source link
+
+Added link_gx8002_dma_uart_source.py. It compiles 17 reconstructed source units
+using the native macOS toolchain and authenticated upstream DMA header, then
+links them together into a 1,532-byte analysis .text section. No undefined
+symbols or unresolved relocations remain. Cache dependency names resolve to
+the three C range implementations; DMA/configuration/descriptor/release and
+receive calls link directly between source objects.
+
+This is not a firmware image or an admission proof. The link uses a relocated
+analysis address, external IRQ/clock and state bindings, and still contains
+original numeric callback addresses. Those callback bindings must be made
+relocation-aware before this layout can execute. Original-slot excesses are
+not solved merely by this compact link. Persistent storage initialization,
+full type compatibility and whole-firmware integration remain outstanding.
+Report: gx8002-dma-uart-source-link.json; artifact:
+build/gx8002-dma-uart-source/dma-uart.elf. Package ownership unchanged.
+
+### Relocation-aware receive completion callback
+
+Replaced receive-DMA's numeric completion address with a C function symbol.
+The original-placement builder binds that symbol to 0x102030e4 and its 768
+stock/source cases still pass. The consolidated macOS link instead resolves
+it to the actual reconstructed completion routine within relocated .text.
+
+The link check now requires an R_CKCORE_ADDR32 callback-symbol relocation in
+the input object and checks the relocated pointer in the linked receive body,
+rejecting the old numeric address. All 17 source units still link in 1,532
+bytes with no unresolved symbols/relocations. This resolves the explicitly
+recorded callback relocation issue for this subset; it does not prove the
+whole analysis ELF runnable. State/IRQ/clock external bindings and full
+firmware integration remain. Report: gx8002-dma-uart-source-link.json.
+
+### DMA initialization and inferred C layout
+
+Reconstructed full initializer 0xd14c..0xd1cc as C with a relocatable IRQ
+handler symbol. Native macOS candidate is 120 bytes in 128 available. It sets
+device/count, computes both aligned list addresses, clears allocation bytes,
+enables module 25, writes reset/status/config registers, disables the clock,
+and registers IRQ 10. Ordered decoded qualification remains pending.
+
+Added runtime_gx8002_dma_layout.h with compile-time offsets: device 0, count 4,
+two 432-byte descriptor storage regions at 8, list-address words at 0x368 and
+allocation bytes at 0x370. Inferred padded size is 884; it is not yet a claim
+of full linker storage ownership. Static assertions compile with the native
+cross-compiler. No state instance or package replacement has been admitted.
+Report: gx8002-dma-initialize-candidate.json.
+
+### DMA initialization and interrupt delivery reconstruction (macOS)
+
+- Added decoded initialization verification: 18 stock/source cases check state
+  layout writes, descriptor alignment, allocation reset, clock calls, ordered
+  MMIO writes, and IRQ 10 registration. Clock-enable mutation verifies that the
+  device base is loaded after the helper. This does not establish RAM ownership
+  or physical IRQ delivery.
+- Reconstructed `runtime_gx8002_dma_irq_handler.c`: one status snapshot, exactly
+  two channels, clear then device-base reload and disable write, deallocation,
+  then callback/private-data lookup and invocation. Return is zero. Updated the
+  initializer's handler prototype to match this recovered return type.
+- Native C-SKY GCC builds the handler to 92 bytes (stock envelope 92) using
+  `--param=max-completely-peel-times=0`; default loop expansion produced 108.
+  168 decoded comparisons plus an independent sequencing oracle passed,
+  covering null callbacks, high status bits, caller clobbers, and helper-driven
+  device/callback/private/status changes. A unittest reruns this qualification.
+- The analysis-only DMA/UART link now contains 19 source units, 1744 text bytes,
+  SHA-256 `10fe903c9c65c506a1b804c9d6cd4a59739493d265f9247f0a220f981027a3ab`,
+  with no unresolved symbols/relocations. State, clock, IRQ registration and
+  interrupt-mask helpers still use explicit external bindings.
+- These functions remain unadmitted to the firmware package. The last packaged
+  checkpoint and its 307683 retained codec bytes are unchanged. Next work is
+  composed interrupt-to-completion execution and integration qualification;
+  passing isolated models or a relocated analysis link is not runnable firmware.
+
+### Composed DMA IRQ to UART completion
+
+- Added `verify_gx8002_dma_irq_completion.py` and a regression test. 5120 cases
+  execute decoded stock/source IRQ handlers with decoded clear, deallocation,
+  release, UART completion and cache routines. Allocation bytes persist across
+  both channel visits and the callback's second deallocation.
+- Verified 9216 deallocation calls and 3072 completions with an independent
+  ordering/allocation oracle. Cases vary pending status, callback registration,
+  allocation values (0, 1, 2, 255), and completion sizes (0, 77, 416, -1).
+  Both IRQ regression tests passed in 4.035 seconds on macOS.
+- Extended completion execution to accept the actual descriptor address, so
+  channel 1 uses its distinct descriptor. Private pointers come through the
+  decoded IRQ callback load. Descriptor channel clearing and final application
+  callback arguments are checked.
+- Corrected the DMA handler to the existing IRQ ABI `int (int, void *)` and
+  registration to `void request_irq(int, int (*)(int, void *), void *)`, matching
+  the existing reconstructed IRQ source and the pinned SDK gx_irq.h. The handler
+  ignores both parameters; its compiled code size remains 92 bytes.
+- The composed verifier still uses separate routine register/MMIO frames;
+  IRQ masking, clock internals and the final application callback are modeled.
+  No hardware qualification or package ownership is claimed. The source-only
+  goal remains active, and the packaged retained-byte count is unchanged.
+
+### DMA/UART analysis link uses reconstructed IRQ functions
+
+- Included the existing reconstructed `runtime_gx8002_irq.c` in the native
+  macOS DMA/UART analysis link, authenticating its CSI headers, SDK license and
+  IRQ interface against the pinned NationalChip SDK commit. Removed absolute
+  function bindings for request_irq, irq_save and irq_restore.
+- The linker report checks that IRQ functions reside in compiled text, the
+  initializer's DMA handler pointer relocates, and five registration/save/restore
+  call sites target the linked C functions. UART completion relocation checks
+  remain enabled. A native build regression passed in 0.913 seconds.
+- Analysis output: 20 source units, 1916 text bytes, SHA-256
+  `a4201ccca7ac8c5d7e79481145eafb055c278b35364a09aca7a67c4499ad9e7a`.
+  No unresolved symbols or relocations. Clock control and persistent storage
+  still have external bindings; the IRQ dispatch entry is outside this link.
+  This is not a firmware package or hardware qualification. No packaged
+  retained-byte reduction is claimed by this linking step.
+
+### DMA/UART link replaces fixed clock-function dependency
+
+- Linked the existing pinned upstream GRUS clock candidate, including its
+  module lookup, source-defined tables and generated switch data. DMA resource
+  calls now alias the linked platform gate; initializer, selection and
+  deallocation call targets are checked in decoded linked text.
+- The analysis-only link has 21 source units: text 2372 bytes, rodata 76 bytes,
+  initialized data 488 bytes. Text SHA-256:
+  `5edbd0a537e5e9b818dcf80a78eddc3855941237872d9e62323b06b172ee491f`.
+  Source-built clock tables relocate to analysis data address 0x20080000.
+  Native macOS build regression passed; no unresolved symbols/relocations.
+- Clock source/header/configuration provenance is included in the link report.
+  This newly linked clock compilation still needs behavior checks at its
+  relocated layout; prior original-entry gate qualification is not silently
+  inherited. Persistent DMA/UART/IRQ storage remains externally bound, and
+  this analysis ELF is not a runnable firmware image. Packaged ownership has
+  not changed in this step.
+
+### Relocated upstream clock gate behavior
+
+- Added `verify_gx8002_dma_uart_clock_link.py`: rebuilds the 21-unit source link
+  on macOS and executes its decoded clock gate at the actual linked address,
+  using its relocated switch data and source-defined module table.
+- 16864 cases match the independent clock MMIO oracle: valid/invalid module
+  values, enable values 0/1/2/UINT32_MAX, source-register patterns including
+  every single bit and complement, and two possible results for unused
+  out-of-range shift intermediates. This does not assert architecture semantics
+  for those shifts; both tested results are discarded by the affected paths.
+- Lookup calls remain modeled against the linked table. This establishes
+  relocated gate control flow and observable MMIO for the tested domain, not
+  whole-firmware execution, concurrency behavior, or physical clock operation.
+  Package ownership and the source-only completion status remain unchanged.
+
+### Clock lookup executes with the relocated gate
+
+- Replaced the modeled lookup in the relocated clock verifier with decoded
+  execution of the linked `__module_get_info`. Gate and helper now share
+  registers and stack-local memory; the helper's link-register return is checked.
+- Added lookup instructions and bounded stack output writes to the executor.
+  All 16864 gate/lookup cases still match the independent MMIO oracle. A native
+  macOS regression reruns the combined execution.
+- This closes the modeled lookup boundary for the fixed linked table. It does
+  not establish mutated-table fallback behavior, concurrent access, or physical
+  clock effects. The analysis build remains outside firmware package ownership;
+  source-only firmware completion is still unproved.
+
+### DMA callback storage becomes relocatable
+
+- Replaced the callback writer's absolute 0x20027320 literal with the same
+  `open_cfw_gx8002_dma_callbacks` symbol used by the IRQ reader. Original-entry
+  linking still binds that symbol to the stock location.
+- Passed 189 decoded callback cases and 72 receive/registration composition
+  cases (32 nested callback stores). Default linked text remains unchanged.
+- Link verification now requires a symbol relocation and the resolved storage
+  address in both writer and IRQ reader. A regression links storage at
+  0x20090000, rejects stale original literals in those functions, and restores
+  the default analysis layout. Both link regressions passed in 3.542 seconds.
+- This removes a source-level obstacle to moving callback storage. Its final
+  allocation, initialization and firmware admission remain pending; no stock
+  storage ownership or packaged retained-byte reduction is claimed.
+
+### Remaining DMA/UART fixed state references removed
+
+- DMA clear and select now derive device/count/allocation from the shared DMA
+  state symbol; UART receive start/stop use the existing UART descriptor symbol.
+  Candidate linkers bind original addresses for stock comparison. The analysis
+  linker requires object relocations for these three source units.
+- Passed 96 clear, 6132 select and 192 receive-control decoded cases. Persistent
+  allocation qualification passed 5184 sequences/20736 calls; composed IRQ
+  completion passed 5120 cases/9216 deallocations/3072 completions.
+- Original-envelope sizes remain 36, 76, 52 and 40 bytes respectively. The clear
+  candidate is now byte-exact. The 21-unit macOS analysis link remains 2372 text
+  bytes; text SHA-256 is now
+  `90bb139d38c0c64a20f8dbfccf1eb3984b05feedc24fdffaff3ac8c5e89a3305`.
+- These changes make state references relocatable; final storage ownership,
+  startup initialization and firmware package integration still require work.
+  No source-only completion or hardware qualification is claimed.
+
+### Source-owned DMA storage analysis variant
+
+- Added C definitions for the 884-byte DMA state and 16-byte callback array,
+  matching consumer declarations and recovered layout assertions. The analysis
+  linker can now allocate both in BSS instead of using absolute bindings.
+- The owned-storage variant places callbacks at 0x20090000 and state at
+  0x20090010. It checks ELF NOBITS ownership, symbol sizes, callback relocation,
+  and that both initialized aligned 416-byte lists fit their reserved storage.
+- Three native link regressions passed in 5.969 seconds. Saved the owned variant
+  evidence in gx8002-dma-owned-storage-link.json, then restored the default
+  analysis build/report so existing original-address verifiers remain usable.
+- BSS requires startup zeroing. These addresses are analysis placements, not
+  validated physical firmware RAM ownership. UART/IRQ storage and boot/runtime
+  integration remain unfinished; no runnable/source-only firmware claim.
+
+### Source-owned DMA initialization execution
+
+- Added `verify_gx8002_dma_owned_initialize.py`, rebuilding and executing the
+  initializer with the owned-storage variant's actual state and function
+  addresses. 18 cases check ordered state/MMIO writes, allocation reset,
+  handler registration and both descriptor pointers' alignment and containment.
+- The two clock calls per case execute the linked gate and lookup in a separate
+  decoded frame (36 calls), with their MMIO traces checked against the clock
+  oracle. IRQ registration remains modeled. Original-address initialization
+  comparisons rerun before the relocated checks.
+- The verifier restores the default analysis build after testing. Startup BSS
+  clearing, physical RAM placement, IRQ registration composition and firmware
+  integration remain pending. No packaged ownership change is claimed.
+
+### Initializer IRQ registration boundary replaced by decoded execution
+
+- Added a linked IRQ registration executor that follows the call into VIC
+  enable in the same register frame and checks the leaf return address.
+- Owned DMA initialization now executes both clock gate/lookup and IRQ
+  registration/enable dependencies: 18 initializer cases, 36 clock calls and
+  18 registration calls. The IRQ oracle checks ordered handler/private table
+  stores followed by VIC enable bit 10.
+- Added 148 linked registration boundary cases covering IRQs 0..33 and large
+  unsigned values, null/non-null handlers and private data extremes. Invalid
+  inputs produce no writes. The native regression passes.
+- Separate initializer/clock/IRQ abstract frames remain. Physical interrupt
+  delivery, startup clearing, final memory placement and firmware integration
+  are not established; the source-only goal remains active.
+
+### Source-owned IRQ table and saved-enable storage
+
+- Added C definitions for 32 IRQ entries (256 bytes) and two saved-enable words
+  (8 bytes), matching reconstructed registration/dispatch types with size and
+  private-field-offset assertions. Analysis linking can now allocate these in
+  BSS and removes their original-address bindings.
+- Owned DMA initialization now uses both source-owned DMA and IRQ storage.
+  Its 18 initialization cases, 36 clock calls, 18 registration calls and 148
+  registration boundary cases pass at the relocated IRQ table. The regression
+  checks that table storage is no longer external and has the expected extent.
+- BSS zeroing and physical memory placement remain integration requirements;
+  UART descriptor storage remains external in this analysis variant. IRQ
+  dispatch/physical delivery and complete firmware build remain unfinished.
+
+### UART storage default audit
+
+- Added an authenticated descriptor-default analyzer for the two 128-byte UART
+  descriptors at package 0x18aa8/0x18b28. Cross-checked port, MMIO base and IRQ
+  identity against pinned SDK base_addr.h and soc.h (UART bases A0100000 and
+  A0200000; IRQs 6 and 7).
+- Nonzero defaults at offsets 16, 28 and 32 are 115200, 8 and 1. Their consumer
+  semantics still need qualification before source-owned initialization. Zero
+  words include runtime state and must not be interpreted as unused fields.
+- Saved gx8002-uart-descriptor-defaults.json with image/header identities and
+  field evidence. This changes the next action: recover those default consumers
+  rather than allocate an incorrectly zero-filled UART descriptor table.
+
+### UART defaults traced into configuration
+
+- Extended the authenticated descriptor analyzer with 16 exact decoded
+  instruction checks from configuration at package 0xc954. Offset 16 feeds
+  unsigned input-clock/(baud<<4) arithmetic, storing the integer divisor at
+  offset 20. Fractional calculation follows and is not yet qualified here.
+- Verified zero normalization of offsets 28 and 32 to 8 and 1. Their semantic
+  field names remain unproven: the routine independently replaces low five LCR
+  bits with constant 3 at ca14..ca20, rather than using these two fields there.
+- The consumer evidence prevents guessing a configurable framing implementation
+  from default values alone. Next reconstruction target is the configuration
+  routine, including fractional divisor and FIFO/DMA setup dependencies.
+
+### UART FIFO-depth source reconstruction
+
+- Reconstructed the configuration dependency at package c8ec..c954 as C. It
+  reads descriptor device then parameter register +f4, accepts only one-hot
+  encodings in bits 23:16, and returns encoding*16; unsupported values return 0.
+- Native macOS C-SKY build is 30 bytes inside the original 104-byte envelope.
+  1536 decoded stock/source cases match an independent explicit mapping for
+  all 256 encodings, three unrelated-bit patterns, and both UART bases. Ordered
+  reads and callee-preserved registers are checked.
+- Source and builders/verifier are saved under uart_fifo_depth. This remains
+  unadmitted; physical FIFO operation and full UART configuration are not yet
+  qualified. No packaged retained-byte reduction is claimed.
+
+### UART configuration C candidate compiled
+
+- Reconstructed the full c954..cabc configuration control flow in
+  runtime_gx8002_uart_configure.c: default normalization, clock/baud divisor,
+  fractional divisor expression, ordered register setup, FIFO-derived burst
+  fields, DMA enable/channel reset, and UART IRQ registration.
+- Native macOS compilation emits a 360-byte function section, equal to the
+  stock envelope, with explicit unresolved dependencies on FIFO, UART ISR,
+  IRQ registration, and five compiler floating-point runtime functions.
+- This is an unlinked, unqualified candidate. The inferred double expression
+  must be checked against the stock float helper identities and decoded effects;
+  full MMIO order also needs verification. Baud values making baud<<4 zero
+  remain outside defined C division behavior. No candidate bytes admitted.
+
+### Native macOS target libgcc build
+
+- The installed C-SKY compiler lacked libgcc.a. Built `all-target-libgcc` with
+  `make -j4` and installed with `make install-target-libgcc` from
+  g2/build/csky-macos/gcc-build, using the existing native macOS configuration
+  and GCC source commit 1e9b70447a8417f5c692370de4533e43d754e8fa.
+- Source-built archive supplies __floatunsidf, __divdf3, __muldf3, __adddf3 and
+  __fixunsdfsi. UART configuration now links against it without unresolved
+  symbols in an analysis ELF; FIFO/ISR/registration remain absolute bindings.
+  Archive SHA-256: 9ecd75da478b51b4d25152616294e3550ef249049d242a43d1e5519d9ba48b7b.
+- Saved runtime provenance and link evidence in the UART configuration report.
+  This resolves a native build dependency, not stock float equivalence or
+  hardware qualification. Full configuration comparison and firmware admission
+  remain pending. No Linux build was used.
+
+### Floating-point runtime provenance and mismatch audit
+
+- Added an authenticated runtime audit covering GCC fp-bit.c/fp-bit.h,
+  libgcc2.c, C-SKY build rules and COPYING.RUNTIME at the pinned source commit.
+- Compared the five source-built helper bodies with equal-length stock slices
+  at their inferred UART call targets. None is byte-exact. These slices are not
+  claimed as established stock function extents or semantic equivalence.
+- Observed closely matching unsigned-to-double pack preparation structure;
+  source-built __floatunsidf calls __pack_d, while stock calls package 13b00.
+  This is lineage evidence only. Next qualification must execute/check the
+  arithmetic helpers rather than treating successful linking as equivalence.
+
+### Unsigned-to-double preparation comparison
+
+- Added decoded execution through the pack-call boundary for stock 13a5c and
+  source-built __floatunsidf. Compared initialized class/sign/exponent/fraction
+  fields in 8239 cases: low integers, high-bit samples, power-of-two neighbors
+  and UINT32_MAX. An independent integer-normalization oracle also passes.
+- Zero prepares class 2/sign 0 without initializing unused fields. Nonzero
+  values prepare class 3, exponent floor(log2(value)), and fraction normalized
+  to bit 60. This supports the inferred helper identity but does not execute
+  __pack_d or prove the complete floating-point runtime.
+- Out-of-range shift intermediates are modeled as zero before conditional
+  replacement; final IEEE encoding and pack behavior remain next work.
+
+### Unsigned integer conversion reaches final IEEE bits
+
+- Added decoded execution of stock/source double pack helpers for the normalized
+  integer domain. The 8239 preparation cases now feed their actual prepared
+  fields into both pack implementations and compare final 64-bit IEEE results
+  against exact host uint32-to-double conversion.
+- Tested zero's uninitialized payload fields with zero and UINT32_MAX seeds.
+  All cases pass. Stock carry-add packing and upstream 64-bit addition paths
+  both execute; no pack-result stub supplies the output.
+- Conversion and packing still use separate abstract frames. This qualifies
+  the sampled unsigned integer domain only, not arbitrary floating values,
+  NaNs, denormals, generic rounding, arithmetic helpers, or hardware execution.
+
+### Double-to-unsigned wrapper comparison
+
+- Added decoded stock/source wrapper comparison for __fixunsdfsi. 4372 cases
+  cover fractional-divisor-scale values and neighboring doubles at integer,
+  2^31 and UINT32_MAX boundaries. Results match truncation in the valid domain.
+- Verified comparison against 2^31, signed-conversion calls, and the subtract
+  then add-2^31 path. Helper arguments/order and caller-clobber resilience match.
+- __gedf2, __subdf3 and __fixdfsi bodies remain modeled; this is wrapper
+  qualification only. NaNs, overflow, arithmetic helper equivalence and complete
+  UART configuration qualification remain outstanding.
+
+### Signed conversion tail verification
+
+- Added decoded stock/source execution after double unpacking in __fixdfsi.
+  8716 finite in-range cases cover positive/negative fractions, fractional UART
+  values, and signed integer boundaries. Both tails match truncation toward zero.
+- Linked source entry is resolved from its symbol and checked against the
+  expected post-unpack instruction. Stack endpoint and conditional sign handling
+  are checked. Unpacked fields and entry frame are modeled; unpack execution,
+  exceptional values and full floating runtime qualification remain pending.
+
+### Double unpack source/stock execution
+
+- Added decoded double-unpack execution with byte/halfword/word reads, bounded
+  stack save, output stores, carry/64-bit normalization and ABI checks.
+- 16376 cases compare stock and source-built __unpack_d against an independent
+  integer decomposition oracle: every finite exponent, both signs and four
+  fraction patterns. Zero and subnormal normalization are included.
+- NaN/Infinity and exhaustive mantissas remain outside this corpus. This closes
+  a helper qualification gap but is not yet composed into the signed conversion
+  frame or the full UART arithmetic path. Firmware admission remains pending.
+
+### Decoded unpack feeds signed conversion
+
+- Replaced verifier-generated unpack fields in the signed-fix comparison with
+  decoded stock/source unpack outputs. All four producer/consumer combinations
+  execute, with zero and UINT32_MAX seeds for fields left unwritten by zero.
+- 8716 input values yield 69728 composed conversion executions, all matching
+  truncation toward zero. Added a regression rerunning the native source build
+  and this composition. Unpack fields also retain their independent oracle.
+- Frames remain separate and the conversion prefix is not executed by this
+  composition. Arithmetic helpers and complete UART configuration remain
+  unfinished; no source-only firmware completion or admission is claimed.
+
+### Full signed conversion and unsigned-wrapper composition
+
+- Executed __fixdfsi from its stock/source entry: input spills, 28-byte local
+  frame, unpack arguments, decoded unpack effects, caller clobbers, conversion
+  and stack/link restoration. 34864 full calls pass alongside the existing
+  69728 producer/consumer tail checks over 8716 input values.
+- Replaced the unsigned wrapper's signed-conversion model with that decoded
+  function and its decoded unpack dependency. All 4372 unsigned-wrapper cases
+  continue to pass. Comparison and subtraction remain modeled boundaries.
+- Updated regression assertions. Separate nested interpreter frames remain;
+  full UART configuration and arithmetic-helper qualification are unfinished.
+
+### Double comparison core verified
+
+- Added decoded stock/source comparison-parts execution using decoded unpacked
+  inputs. 529 finite pairs match the independent numeric ordering oracle,
+  including signed zero, minimum subnormals, adjacent doubles, large values
+  and the unsigned conversion threshold at 2^31.
+- Checks branch/sign/exponent/fraction ordering and callee-preserved registers.
+  The GE wrapper, NaNs/Infinities, and composition into the unsigned wrapper
+  remain outstanding. This is not full floating-runtime qualification.
+
+### Full comparison wrapper integrated into unsigned conversion
+
+- Added decoded GE wrapper execution: stack/spills, two actual decoded unpack
+  calls, comparison-parts call and ABI restoration. All 529 finite pairs pass
+  for stock/source wrappers against the numeric-order oracle.
+- Unsigned conversion now calls this decoded GE path instead of a host
+  comparison model. All 4372 wrapper cases pass with decoded comparison,
+  signed conversion and unpacking. Only subtraction remains modeled in this
+  conversion chain. Separate helper frames and finite-domain limits remain.
+- UART arithmetic and complete configuration/firmware integration remain
+  outstanding; no source-only completion claim.
+
+### Subtraction wrapper input preparation
+
+- Added decoded subtraction-wrapper execution through the addition-core call,
+  including both decoded unpack calls. 169 finite operand pairs verify stack
+  argument placement, second-operand sign inversion, and core input/output
+  pointers for stock and source-built __subdf3.
+- Covers signed zeros, subnormals, fractional and large values. The addition
+  core and final packing remain unverified for subtraction; no subtraction
+  result model has been promoted to qualified execution. Next work is the
+  common arithmetic core shared by add/subtract.
+
+### Authenticated addition-core host reference
+
+- Built a host reference from the exact pinned GCC _fpadd_parts function and
+  LSHIFT macro, with explicit 64-bit fraction/class scaffolding. Source hashes
+  and GCC runtime license identity are recorded in gx8002-fpadd-reference.json.
+- Native macOS Clang ASan/UBSan passes 66560 cancellation/doubling checks over
+  33280 sign/exponent/fraction inputs. The reference supplies the actual upstream
+  sticky-bit arithmetic for subsequent decoded comparisons.
+- These checks do not compare stock instructions, target ABI, general rounding
+  or all arithmetic paths. Stock addition-core execution remains next work;
+  no firmware admission or source-only completion claim.
+
+### Decoded addition core started
+
+- Added an instruction executor for stock/source _fpadd_parts including
+  saved registers, bounded stack/output memory, carry arithmetic and source
+  64-bit arithmetic instructions. 8320 cancellation/doubling cases pass against
+  exact integer invariants across signs, exponents and fraction samples.
+- Unlike the host reference, this executes actual stock and linked C-SKY
+  instructions. Unequal operands, exponent alignment and exceptional classes
+  remain unqualified; the executor is not yet a general arithmetic proof.
+
+### Unequal finite addition-core paths
+
+- Extended decoded core checks with an integer sticky-alignment/sign/normalization
+  oracle. Added 612 operand combinations spanning both signs and exponent gaps
+  around 31/32/63/64 bits and beyond the retained fraction width.
+- Added 2048 deterministic varied finite operand pairs with 52-bit fractions
+  and exponents -100..100. Stock and source-built cores match the oracle for
+  these cases and the existing 8320 cancellation/doubling cases.
+- Enabled the AND instruction reached by alignment. Final IEEE packing for
+  arithmetic results, exceptional classes and exhaustive coverage remain
+  unqualified; no full subtraction or firmware completion claim yet.
+
+### Arithmetic packing and unsigned conversion chain closed for corpus
+
+- Finite addition-core outputs now feed decoded stock/source pack helpers:
+  4096 executions match host IEEE addition for 2048 deterministic operand pairs.
+- Subtraction wrapper can now execute unpack, core and pack through return.
+  Ten stock/source executions of conversion-threshold subtraction cases pass.
+- Replaced the unsigned conversion's subtraction model with that decoded path.
+  All 4372 conversion cases pass using decoded comparison, signed conversion,
+  unpack, subtraction core and packing. No host arithmetic result supplies the
+  tested chain; nested helper frames are still separate.
+- Multiplication/division, full UART configuration, exceptional floating values
+  and firmware integration remain unfinished. No firmware admission claimed.
+
+### Complete baud rounding addition
+
+- Added full decoded __adddf3 wrapper checks for adding 0.5 to 4130 finite
+  baud-rounding-scale values, including nextafter neighbors at integer
+  boundaries. 8260 stock/source executions match the expected IEEE result.
+- The path executes unpack, core and pack. Core input storage now seeds fields
+  left unwritten for zero, preserving zero-class behavior without undefined
+  dictionary reads. Existing core and unsigned conversion suites still pass.
+- Multiplication/division and the full UART configuration remain outstanding;
+  these finite-domain checks do not establish general IEEE exceptional-value
+  behavior or hardware qualification. No firmware admission claimed.
+
+### Decoded baud scaling multiplication
+
+- Added a finite multiplication executor for the stock __muldf3 and the pinned
+  GCC runtime built natively on macOS. Stock integer multiplication at package
+  0x13ab4 is executed from decoded instructions; the source build's mul.u32 and
+  mula.u32 paths execute with explicit register-pair arithmetic.
+- 6180 zero/normal nonnegative scaling inputs produce 12360 stock/source
+  executions matching multiplication by 16. Includes deterministic fraction
+  samples, integer-boundary neighbors and the approximately 2^-32 lower baud
+  ratio boundary. Separately, 2097 full-width integer-multiply cases match
+  modulo-2^64 products.
+- Unpack and pack execute decoded bodies in separate helper frames; caller
+  register clobbering and multiply callee preservation are checked. This is a
+  scoped interpreter, not hardware execution or full IEEE qualification.
+  Subnormal results, NaNs and infinities remain outside this corpus.
+- Added a regression test and gx8002-uart-scaling-multiply.json evidence report.
+  Division, full ordered UART MMIO verification and firmware admission remain
+  outstanding. No retained bytes or package ownership counts changed.
+
+### Decoded UART fractional division and arithmetic chain
+
+- Executed stock __divdf3 (package 0x13894) and macOS-built pinned GCC
+  __divdf3 with decoded unpack/pack bodies. Added xor and decrement-and-branch
+  handling to the existing arithmetic interpreter to cover the division loop.
+- 2234 valid remainder/denominator pairs, including zero, near-half and
+  near-one ratios, powers of two, the default baud denominator, large uint32
+  denominators and deterministic samples, pass 4468 stock/source division
+  executions against binary64 division.
+- Each decoded division result then feeds decoded multiplication by 16,
+  addition of 0.5 and unsigned conversion through comparison and signed fix.
+  All 4468 composed executions match the expected UART fractional integer.
+  Nested helpers execute decoded instructions in separate frames.
+- Integer inputs currently enter this chain as exactly representable host
+  binary64 values. Composing the already examined uint-to-double entry,
+  executing full UART MMIO ordering and firmware integration remain required.
+  No zero-denominator, NaN, infinity or subnormal-result qualification claimed.
+  The source-only goal remains incomplete; package ownership is unchanged.
+
+### Integer conversion now enters the UART arithmetic chain
+
+- Extended uint-to-double execution beyond its former pack boundary through
+  the real wrapper epilogue and return, using decoded pack instructions in a
+  separate helper frame. Checks cover stack bounds, saved registers, callee
+  preservation and caller-register clobbering at the helper boundary.
+- 8239 uint32 inputs pass 32956 stock/source full-function executions across
+  two unused-field seeds. Existing unpacked-field and IEEE-bit oracles remain.
+- The UART fraction verifier now obtains both floating operands from these
+  decoded conversion wrappers. All 4468 stock/source sequences pass conversion,
+  division, multiplication, addition and unsigned conversion. Host arithmetic
+  supplies expected results only, not the intermediate operation results.
+- Full UART configuration/MMIO execution and source integration remain open.
+  These scoped execution checks do not qualify exceptional IEEE values,
+  hardware behavior or the complete firmware. No package ownership changed.
+
+### UART configuration ordered execution
+
+- Added decoded whole-function configuration execution and a stock/source
+  comparison for 400 descriptor/MMIO scenarios. 333 enter baud programming;
+  these execute uint-to-double, divide, multiply, add and unsigned conversion
+  helpers from decoded instructions in separate frames.
+- Corrected the C candidate's volatile ordering after FIFO depth lookup:
+  stock reloads the device pointer before storing descriptor depth. The
+  candidate now does so too. Tests include changing the device pointer at the
+  FIFO helper boundary, both default-field paths and all threshold selectors
+  plus out-of-range selectors.
+- Ordered descriptor and MMIO read/write traces and helper arguments match;
+  independent oracles check final descriptor fields and the complete ordered
+  UART register-write sequence. Regression test passes on native macOS.
+- FIFO depth return and IRQ registration remain modeled call boundaries in
+  this test; their separate checks are not a composed UART integration proof.
+  No hardware behavior, interrupt concurrency or zero shifted denominator
+  qualification. Source admission and complete firmware reconstruction remain
+  outstanding; no package ownership counts changed.
+
+### UART configuration composed with FIFO depth helper
+
+- Added an optional decoded FIFO hook to whole-function UART configuration
+  execution. Both stock and source helper bodies execute, and their descriptor
+  and parameter-register reads are included in the ordered trace. The source
+  helper is rebuilt natively on macOS before composition.
+- 1200 cases cover threshold selectors, twelve valid/invalid FIFO encodings,
+  both DMA modes and an injected device-pointer change after helper return.
+  2400 decoded FIFO executions and 1000 baud-programming case pairs pass stock/
+  source trace comparison plus descriptor and ordered-MMIO oracles.
+- This uses separate decoded helper frames; it is not a firmware image link or
+  hardware run. IRQ registration remains modeled in this verifier. Source-only
+  completion and firmware admission are still outstanding.
+
+### UART configuration composed with IRQ registration and VIC enable
+
+- Replaced the optional IRQ boundary with decoded registration plus VIC enable
+  in a shared nested helper frame. The source IRQ unit is rebuilt through its
+  native macOS linker, and handler-table/VIC writes join the UART ordered trace
+  and resulting memory state.
+- 1200 full configuration scenarios pass with both FIFO and IRQ composition:
+  2400 decoded IRQ calls and 2400 FIFO calls across stock/source. IRQ inputs
+  include UART lines 6 and 7, line 31, and rejected line 32. Independent oracles
+  check handler/private table slots, enable mask and write ordering.
+- Added a regression test. This composes separately linked source units in
+  scoped instruction interpreters; it does not yet link this UART cluster into
+  the firmware or execute its registered interrupt handler. No hardware or
+  source-only completion claim, and no package ownership counts changed.
+
+### UART interrupt source candidate recovered
+
+- Recovered the registered handler at package 0xc804 / runtime 0x10203278 as
+  C, including sampled pending bits, ready callbacks, non-DMA buffered receive
+  and transmit, descriptor cursor/remaining updates, completion callbacks and
+  the transmitter-empty polling loop. No callback-null guards or poll timeout
+  were invented; source preserves the observed call assumptions and loop.
+- Preserved receive-side device-pointer reloads for each byte and transmit-side
+  cached device access. FIFO-space calculation in this handler uses the raw
+  parameter byte shifted by four, unlike the separate validated-depth helper.
+- Native macOS compilation emits 226 bytes within the original 232-byte
+  envelope. Candidate authenticates stock and the pinned SDK UART header.
+- This is build evidence only. Decoded trace comparison, callback mutation,
+  drain-loop qualification and integration remain required before admission.
+  The new source is not counted as replacing retained firmware bytes yet.
+
+### UART interrupt dispatch verification
+
+- Added a scoped decoded interrupt executor and independent ordered-read/
+  callback oracle. 1728 cases compare original and compiled C dispatch for
+  pending values 0..15, receive/transmit modes 0, 1 and 3, DMA enabled/disabled,
+  three FIFO values and optional receive-callback mutation.
+- Callback mutation changes device pointer, port, transmit mode/private data
+  and the pending register. Checks establish that dispatch retains the sampled
+  pending bits but reloads transmit-side descriptor/device fields afterward.
+  Caller clobbering and callee register restoration are checked.
+- Native macOS regression test passes. Buffered mode 2 and the transmit-drain
+  loop are still unqualified; callback bodies are modeled effects. Handler
+  source remains unadmitted and the complete source-only goal remains open.
+
+### Buffered UART interrupt execution
+
+- Extended decoded execution with byte buffer accesses, post-increment byte
+  operations, minimum counts, signed loop comparisons and interrupt-bit clear
+  instructions. Both the original and compiled handler now execute mode 2.
+- 1152 cases match ordered traces and memory. Independent oracles validate
+  receive bytes, transmit bytes, cursor/remaining updates, completion callback
+  order and interrupt-enable masks. Buffers include unaligned addresses and
+  zero/partial/full transfers; receive/transmit/both pending paths are covered.
+- Transmitter drain checks complete immediately or after three empty samples,
+  totaling 2560 stock/source poll reads. Permanently stalled hardware, large
+  signed-count edges and buffered callback mutation remain unqualified.
+- Native macOS buffered and dispatch regression tests pass. No admission or
+  complete firmware claim; source-only integration remains outstanding.
+
+### Buffered completion callback mutation
+
+- Added 96 decoded stock/source cases where receive completion changes the
+  UART device pointer, port, transmit mode, DMA state, buffer/length and
+  completion callback/context before the same interrupt handles transmit.
+- Ordered traces and memory agree. Independent oracles check the new transmit
+  device and bytes, cursor updates, ready/completion callback arguments and
+  interrupt masks on both devices. Clearing the pending register in the
+  callback does not replace the handler's already sampled pending value.
+- All three interrupt regression tests pass on macOS. Callback bodies remain
+  modeled and this is not concurrent hardware execution. Source admission,
+  stalled-drain/large-count edges and complete firmware integration remain open.
+
+### Source-linked UART configuration cluster
+
+- Added a native macOS analysis link containing recovered configuration,
+  FIFO depth, interrupt handler, IRQ routines and source-owned IRQ storage,
+  with the native-built GCC runtime archive. No absolute function bindings
+  or unresolved symbols remain in this cluster.
+- Linked text is 3670 bytes and IRQ BSS is 264 bytes. Checks validate source
+  function sections, BSS type/extents, applied relocations, configuration calls
+  to linked FIFO/IRQ functions and the relocated interrupt-handler literal.
+- The handler literal is checked through decoded literal-load operands because
+  its pool can lie outside the compiler's function symbol size.
+- Native link regression passes. This is an analysis ELF, not a complete
+  firmware image. Relocated execution, startup zeroing, physical placement and
+  the remaining firmware functionality/data still require reconstruction and
+  integration. No package ownership counts or completion claims changed.
+
+### Relocated UART source-cluster execution
+
+- Executed configuration from the source-linked UART ELF, including its
+  relocated GCC arithmetic, FIFO depth, IRQ registration and VIC enable code.
+  1200 cases match the stock configuration checks; 1000 enter baud arithmetic.
+- Valid IRQ cases explicitly verify the source-owned table contains the actual
+  relocated handler address and descriptor pointer. For stock comparison only,
+  IRQ table addresses and handler-pointer values are normalized to stock
+  addresses. Descriptor and MMIO effects otherwise compare unchanged.
+- Native macOS relocated regression passes. Nested helper frames remain scoped
+  interpreter executions; startup/BSS zeroing, physical placement, registered
+  ISR dispatch integration and full firmware reconstruction remain unfinished.
+  No firmware source-admission or package ownership claim changed.
+
+### IRQ entry and dispatcher included in UART source cluster
+
+- Extended the native source link with the existing explicit interrupt-context
+  assembly wrapper and ordinary C dispatcher body, both using the cluster's
+  source-owned IRQ table. These are source files, not extracted instruction
+  arrays. The plain compiler interrupt attribute alone remains unsuitable
+  because it omits register preservation present in stock.
+- The cluster now contains seven checked entry/helper symbols, 3750 text bytes
+  and 264 BSS bytes, with no unresolved symbols. The native source-link test
+  passes; configuration relocation checks are rerun after the added code moves
+  linked addresses.
+- This does not yet compose hardware entry through dispatcher into UART ISR,
+  or qualify startup, nested interrupts and physical execution. Full firmware
+  source-only reconstruction remains outstanding; no package admission changed.
+
+### Relocated IRQ dispatch to UART handler
+
+- Extended the dispatcher interpreter with a configurable IRQ table address
+  and decoded handler hook. Added 72 source-cluster dispatch cases covering
+  IRQs 6, 7 and 31, status upper bits, and pending values 0..7.
+- The relocated dispatcher reads the expected table slots and passes the IRQ
+  and descriptor to the relocated UART handler. The handler executes in a
+  separate decoded frame; receive/transmit ready callbacks match independent
+  argument and ordering checks. Native regression passes.
+- Active-vector and table reads are supplied by the harness. Hardware entry
+  context, nested interrupts and startup are not covered by this composition.
+  No firmware admission or complete source-only build claim changed.
+
+### Relocated IRQ entry context checks
+
+- Parameterized the existing software-frame executor's dispatcher target,
+  including recursive calls, and applied it to the UART cluster's relocated
+  entry and dispatcher addresses.
+- 48 seed/depth/model combinations pass register restoration and frame checks
+  for one through four modeled levels. Software-only peak is 104 bytes per
+  level; with the existing hardware-frame model it is 136 bytes per level.
+- These are modeled clobber/frame checks, not the actual combined dispatcher/
+  UART call-stack demand or physical nested-interrupt execution. Source-only
+  firmware completion remains unproven and no package ownership changed.
+
+### Stalled transmitter polling prefixes
+
+- Added verifier-only stopping at a selected number of transmitter status
+  reads, without changing firmware code. 36 stock/source cases match prefixes
+  of 1, 2, 16 and 128 reads with the empty bit continuously clear.
+- Checks confirm buffers/cursors finish transferring before the wait, while
+  interrupt enable remains unchanged and no completion callback runs during
+  the observed stalled prefix. Zero-length transmission is included.
+- All four interrupt regression tests pass on macOS. Finite-prefix evidence
+  does not establish eventual behavior, timing or physical hardware behavior.
+  No timeout was added to source; firmware integration remains unfinished.
+
+### Source-authored UART descriptor defaults
+
+- Added two 128-byte UART descriptors as C designated initializers, using
+  authenticated SDK UART base/IRQ constants, baud 115200, the observed default
+  normalization values 8 and 1, and zero initialization for mutable fields.
+  No extracted byte arrays are used. Original names of fields 7/8 remain
+  unestablished and are not guessed in the source.
+- The native UART cluster now owns a 256-byte data section at its analysis
+  data address. Compiled defaults compare exactly with authenticated stock
+  descriptors; the build checks symbol size/section and the regression checks
+  the new source-owned extent.
+- This is source data in an analysis link, not admitted firmware ownership.
+  Startup copying and relocated descriptor consumer composition remain open,
+  along with the full firmware source-only objective.
+
+### Configuration consumes source-owned UART defaults
+
+- Parameterized configuration/FIFO descriptor addresses and executed the
+  linked configuration using both descriptors loaded from compiled C data.
+- 24 port/clock/FIFO combinations pass baud, threshold and IRQ registration
+  oracles. Registered private pointers reference the relocated descriptors,
+  and traces contain no accesses to the retained stock descriptor range.
+- This models loading the data section rather than executing startup copy.
+  Clock values are harness inputs and nested helpers use separate frames.
+  Complete firmware integration and source-only completion remain open.
+
+### Configured source-owned descriptors reach interrupt dispatch
+
+- Extended the owned-defaults check to retain configuration output, arm ready
+  callbacks in that descriptor, then supply the actual registered handler and
+  private pointer to decoded dispatch. The relocated UART ISR now accepts the
+  configured descriptor address in its execution model.
+- All 24 cases reach the registered source handler and produce expected port,
+  receive-count, transmit-space and private-context callback arguments.
+- Application callback setup and peripheral pending values remain harness
+  inputs. This connects configuration data to dispatch but does not execute
+  startup or actual hardware IRQ entry. Full firmware integration remains open.
+
+### UART initialization C candidate
+
+- Recovered package 0xcabc..0xcb24 into C: reject ports >=2, enable module
+  17/18, obtain frequency for module 16, snap within 100 Hz of a MHz boundary,
+  store clock/baud into the selected descriptor and return configuration's
+  result. Descriptor selection uses the source-owned symbol.
+- Native macOS candidate emits 104 bytes, fitting the 104-byte stock envelope.
+  The analysis placement still binds helpers to their established addresses.
+- Build evidence only: clock-rounding boundary traces, helper composition and
+  integration remain required. No source admission or firmware completion
+  claimed for this candidate.
+
+### UART initialization boundary verification
+
+- 1080 decoded stock/source cases pass an independent clock-rounding and
+  ordered-helper oracle, including 99/100/101 Hz boundary neighbors, large
+  uint32 clocks, invalid ports, baud values and configuration return statuses.
+- Native regression passes. Gate, frequency and configuration calls remain
+  modeled boundaries in this initializer test; composition remains required.
+  No firmware admission or source-only completion claimed.
+
+### UART initialization source closure with upstream clocks
+
+- Added an optional expanded UART analysis link containing initialization,
+  pinned upstream gate/frequency adapters, recovered divider and their source
+  tables. Output is separate from the configuration-only analysis artifact.
+- Native macOS link emits 4986 text bytes with eleven checked function symbols,
+  source UART/IRQ storage and no unresolved symbols. Regression passes.
+- Relocated clock/initialization execution and startup remain unqualified in
+  this expanded artifact. It is not a complete firmware image or admission;
+  retained firmware ownership counts remain unchanged.
+
+### Relocated initialization call and descriptor checks
+
+- 1080 cases execute initialization from the expanded source ELF. Independent
+  oracles check port rejection, clock-rounding boundaries, selected source
+  descriptor addresses, helper call arguments and returned configuration status.
+- Relocated gate/frequency/configuration targets resolve correctly. Helper
+  results remain modeled in this check; composing their actual instruction
+  execution is still required. Native macOS regression passes.
+- No startup, hardware or complete source-only firmware claim changed.
+
+### Initialization hands descriptor state to configuration
+
+- Added a configuration callback to the initialization interpreter and composed
+  it with the expanded source ELF. Initializer writes update the compiled C
+  descriptor before decoded configuration runs; its return propagates back.
+- 24 cases continue through configuration, actual IRQ registration output and
+  decoded dispatch into the relocated UART handler. Native composed and
+  existing owned-default regression tests pass.
+- Clock gate/frequency helper results remain modeled at initialization's
+  boundary. Startup and physical hardware execution are not covered. Complete
+  source-only firmware integration remains outstanding.
+
+### Initialization clock-gate composition
+
+- Initialization now invokes decoded relocated upstream gate and lookup code
+  in its composed check. The gate's actual call target identifies its lookup;
+  literal references identify the correct source table despite duplicate local
+  table names from the frequency adapter.
+- All 24 initialization/configuration/dispatch cases pass with 24 decoded gate
+  calls checked against an independent MMIO oracle. Frequency result remains
+  supplied by the harness; gate peripheral values are modeled inputs.
+- No startup, hardware execution or complete firmware admission claim changed.
+
+### Relocated frequency helper execution probe
+
+- Parameterized frequency entry/lookup/divider/table addresses in the existing
+  decoded executor. A relocated module-16 high-frequency scenario now executes
+  actual lookup, divider and source tables, returning the expected 24576000 Hz.
+- Fixed width-specific source-cell reads: overlapping byte/halfword/word views
+  must select the value for the requested width rather than a flattened last
+  value. Existing 130 high-frequency stock/source cases still pass.
+- This is one probe, not broad relocated frequency qualification. Connecting
+  frequency to initialization and full firmware integration remain unfinished.
+
+### Decoded frequency feeds UART initialization
+
+- Added optional frequency composition using the expanded source ELF directly,
+  avoiding a separate rebuild inside the helper. The decoded frequency result
+  now supplies initialization, then configuration, registration and dispatch.
+- Eight port/FIFO cases pass with decoded gate, frequency/lookup/divider,
+  arithmetic, FIFO, IRQ and UART handler paths. Frequency uses the established
+  24.576 MHz source scenario; peripheral values and callback setup are modeled.
+- This narrow shared-state scenario does not establish general clock behavior,
+  actual hardware IRQ entry or startup. Source-only firmware remains unfinished.
+
+### Relocated UART frequency DTO/divider patterns
+
+- Extended the frequency probe with register-pattern inputs and an independent
+  integer oracle derived from the linked DTO/divider records. Five patterns
+  cover zero, small fractions, maximum DTO fraction, bypass and all-one fields.
+- The high-frequency source selector is held fixed; varying it accidentally
+  entered the unconfigured PLL path during development. PLL composition is
+  still outside this probe. The corrected five-pattern native test passes.
+- Broader source selection, full clock peripheral state and hardware execution
+  remain unqualified; source-only firmware integration remains open.
+
+### Expanded clock-to-UART composition
+
+- The decoded-frequency initialization path now covers all five DTO/divider
+  patterns rather than only bypass. Forty port/FIFO/pattern cases pass through
+  gate, frequency, initialization rounding, baud arithmetic, IRQ registration
+  and dispatch. Updated native regression passes.
+- Frequency expectation comes from the independent source-record arithmetic
+  oracle; configuration consumes the decoded helper return. The fixed source
+  selector, modeled peripheral state and separate interpreter frames remain
+  limitations. Startup and complete firmware integration are still open.
+
+### UART transmit start/stop recovery
+
+- Recovered transmit ready-callback control from stock packages 0xcbbc and
+  0xcbf0. Start rejects a null callback, sets mode/callback/context and enables
+  TX interrupt bit 1 under IRQ save/restore. Stop clears callback/context and
+  disables that bit while preserving the observed mode behavior.
+- Native compiled C passes 192 decoded stock/source cases and independent
+  ordered-write/IRQ-token oracles. Regression passes. IRQ helper bodies remain
+  modeled here; control integration and firmware admission remain required.
+
+### Receive/transmit controls linked into UART cluster
+
+- Added both receive and transmit start/stop C objects to the source-owned UART
+  cluster. All four entry points are checked as linked source functions and
+  their call targets must resolve to the recovered IRQ save/restore functions.
+- The configuration cluster now has 3934 text bytes and eleven checked entry/
+  helper symbols; the expanded initialization cluster has fifteen symbols.
+  No absolute function bindings or unresolved symbols were introduced.
+- Native source-link and full clock-composition regressions pass after address
+  changes. Control execution with relocated descriptors and IRQ helpers still
+  needs composition; complete firmware integration remains unfinished.
+
+### Relocated UART control traces
+
+- Parameterized descriptor and IRQ target addresses in receive/transmit control
+  execution. All four relocated entries pass 384 ordered-trace and memory
+  comparisons against the independent control oracle at source-owned addresses.
+- Native regression passes. IRQ tokens remain modeled at the helper boundary;
+  actual IRQ save/restore composition and full firmware integration remain open.
+
+### Relocated controls compose IRQ save/restore
+
+- Replaced modeled control IRQ returns with decoded relocated PSR save/restore
+  leaves. Expanded to 576 cases, including explicit interrupt-enabled and
+  disabled processor states; 864 IRQ leaf calls pass.
+- Oracles check disable/restore transitions, exact token preservation, null
+  callback behavior and existing descriptor/MMIO traces. Native regression
+  passes. Architectural PSR semantics remain modeled, not physical execution;
+  firmware integration and source-only completion remain outstanding.
+
+### Configuration state now feeds decoded UART start routines
+
+- Replaced manual callback descriptor writes in the owned-defaults composition
+  with actual relocated receive/transmit start execution. Both interpreters now
+  accept the preceding configuration memory without resetting its state.
+- The full native macOS clock-to-dispatch check passes 40 cases and 80 start
+  calls. Each start executes decoded IRQ save/restore and checks the entire
+  resulting memory against an independent update oracle, preserving IRQ table
+  entries and unrelated configuration state.
+- Standalone receive (192 cases), transmit, relocated controls, owned defaults
+  and initializer composition regressions pass. An initial test command named
+  a nonexistent receive test module; the receive verifier was run directly.
+- Callback implementations, physical peripheral behavior, startup and complete
+  source-only firmware integration remain unresolved. No ownership or hardware
+  qualification claim was added; the retained-stock package was not rebuilt.
+
+### Recovered UART drain wait from executable stock
+
+- Added source-authored `open_cfw_gx8002_uart_flush` for codec package
+  0xcb24..0xcb40. Native macOS C-SKY compilation produces 24 bytes inside the
+  28-byte stock envelope, with the descriptor reference relocated normally.
+- Authenticated stock/source decoded verification passes 160 cases, including
+  40 finite stalled prefixes. Independent oracles check status bit 6, exact
+  read order, single sampling of the device pointer, and eventual return.
+  The source preserves the stock unbounded wait; only the verifier bounds
+  unavailable stimuli. Native unittest passes.
+- This new recovery is not yet admitted into the firmware package or the
+  relocated UART cluster. Physical MMIO semantics and whole-image source-only
+  completion remain unqualified; no retained-stock ownership count changed.
+
+### Drain wait joins the source-linked UART cluster
+
+- Linked the recovered drain wait into both UART cluster variants using the
+  source-authored descriptor symbol, replacing its analysis-only absolute
+  descriptor binding in the combined ELF. The default cluster now checks 12
+  function symbols; the initializer/clock variant checks 16.
+- Added 160 relocated execution cases using device addresses read from the
+  actual compiled descriptor defaults. Checks reject stock descriptor reads
+  and verify exact polling traces and termination against an independent
+  oracle, including finite prefixes of indefinite waits.
+- Five native macOS tests pass: isolated drain wait, relocated drain wait,
+  both source links, and the full clock-to-start-to-dispatch composition.
+  Firmware placement, startup and device execution remain incomplete; this
+  analysis link does not constitute a runnable source-only firmware image.
+
+### Recovered blocking UART byte receive
+
+- Reconstructed codec 0xc7ec..0xc804 as source-authored C. Native macOS
+  compilation produces 18 bytes within the 24-byte original envelope.
+- Authenticated stock/source decoded comparison passes 800 cases, checking
+  data-ready bit 0, single sampling of the device pointer, one full-width
+  data-register read after readiness, low-byte truncation, and preserved ABI.
+  Finite stalled prefixes verify that no data read happens before readiness;
+  the source retains the original unbounded polling behavior.
+- Native unittest passes. The routine is not yet admitted into the package;
+  physical behavior and complete source-only firmware remain unqualified.
+
+### Blocking receive joins the source UART link
+
+- Added the recovered byte receive object to both UART source cluster builds.
+  The default cluster checks 13 function symbols; initializer/clock checks 17,
+  with no unresolved symbols or unapplied relocations.
+- Verified 800 relocated cases with device pointers taken from actual compiled
+  descriptor defaults. Independent trace/result checks cover readiness,
+  full-width data reads and low-byte return, including stalled prefixes;
+  any stock descriptor address access is rejected.
+- Five native macOS tests pass: isolated and relocated byte receive, both
+  source links, and full clock-to-start-to-dispatch composition. These remain
+  analysis ELFs; startup, physical execution and complete source-only firmware
+  integration are outstanding. No package ownership claim changed.
+
+### Recovered blocking UART buffer read
+
+- Reconstructed codec 0xcb64..0xcb90 in C. Native macOS compilation fits the
+  original 44-byte envelope. The caller invokes the recovered byte receiver
+  once per requested byte and returns zero for nonpositive signed lengths.
+- Authenticated decoded stock/source comparison passes 84 cases, covering
+  negative/zero lengths, positive lengths, byte patterns, wrapped destination
+  addresses, descriptor arguments and callee-saved registers. Native unittest
+  passes. Byte helper returns are modeled in this caller check; nested polling
+  composition and firmware admission remain pending.
+
+### Blocking buffer receive composes decoded polling
+
+- Replaced modeled byte-helper results in a new composition check with decoded
+  stock/source byte receiver execution. The ordered trace now includes each
+  descriptor load, readiness poll, full-width data read and destination store.
+- 108 cases pass, including 30 stalled prefixes that prove the caller stores no
+  byte and makes no further call when its current receive remains blocked.
+  Changing the modeled device between calls checks fresh descriptor sampling;
+  signed nonpositive lengths remain side-effect free.
+- Three native macOS regressions pass. Interpreters still use separate frames
+  and modeled peripheral stimuli; firmware integration and physical execution
+  remain unqualified. No source-only completion claim is made.
+
+### Blocking buffer read joins the source UART cluster
+
+- Linked the recovered buffer reader against the source byte receiver and
+  source descriptor storage in both cluster variants (14/18 checked functions).
+- 108 relocated nested execution cases pass, including 30 stalled prefixes.
+  The check resolves actual ELF symbols, validates the helper call target,
+  reads device pointers from compiled defaults, and compares complete ordered
+  descriptor/poll/data/store traces with an independent oracle.
+- Four native macOS tests pass: relocated nested receive, both source links,
+  and the full clock-to-dispatch composition. Analysis links are not complete
+  firmware images; startup and physical execution remain unqualified.
+
+### Recovered blocking UART buffer write
+
+- Reconstructed codec 0xcb90..0xcbbc as source-authored C. Native macOS
+  compilation fits the original 44-byte envelope and calls the existing
+  recovered byte transmitter through a normal linker symbol.
+- Authenticated decoded stock/source comparison passes 84 cases, verifying
+  signed nonpositive lengths, ordered source-byte loads and helper arguments,
+  wrapped buffer addresses, return values and callee-saved registers.
+  Native unittest passes. Transmit helper effects remain modeled here;
+  nested polling composition and full firmware admission remain pending.
+
+### Blocking buffer write composes decoded transmitter
+
+- Added authenticated stock/source nested execution of the buffer writer and
+  recovered polled transmitter. Complete ordered traces include source-byte
+  loads, helper arguments, descriptor reads, status polls and MMIO writes.
+- 108 cases pass, including 30 stalled prefixes with no premature peripheral
+  write or subsequent byte load. Device changes between calls check fresh
+  descriptor sampling; nonpositive signed lengths remain side-effect free.
+- Both native macOS tests pass. Interpreter frames and peripheral stimuli are
+  modeled; physical timing and complete firmware integration remain pending.
+
+### Blocking write joins the source UART link
+
+- Linked buffer write and the existing source transmitter into both UART
+  variants (16/20 checked functions). The transmitter is selected from the
+  compiler-produced console object through a relocatable source-section link;
+  no stock executable extraction or console-state binding is introduced.
+- 108 relocated nested cases pass, including 30 stalled prefixes. Checks
+  validate the actual helper call target and descriptor addresses from source
+  defaults, plus complete byte-load/poll/MMIO-write traces.
+- Four native macOS regressions pass, including both source links and full
+  clock-to-dispatch composition. Startup, complete image integration and
+  physical execution remain unqualified; the full goal remains incomplete.
+
+### Recovered asynchronous UART transmit-buffer entry
+
+- Reconstructed codec 0xccac..0xcd0c in C: callback/buffer rejection,
+  descriptor mode/cursor/count/context updates, DMA request setup, and the
+  non-DMA interrupt-enable path with saved IRQ token restoration.
+- 2,304 authenticated stock/source decoded cases pass with an independent
+  final-state oracle covering descriptor and MMIO changes. Fifth stack
+  argument and helper arguments/returns are checked; native unittest passes.
+- DMA and IRQ helpers remain modeled in this entry-point verifier. Placement,
+  nested helper composition and full firmware integration remain pending;
+  this source recovery does not establish a runnable source-only image.
+
+### Recovered UART DMA transmit completion
+
+- Inspected DMA setup 0xc694..0xc71c: for non-0/non-1 ports stock proceeds
+  without initializing the destination handshake field. This edge remains
+  explicit unresolved behavior for setup reconstruction, not silently fixed.
+- Recovered its completion dependency 0xc650..0xc670 as C: release channel,
+  store the unused-channel sentinel, flush the selected port, then reload
+  callback/context/port and invoke the callback. No null guard was added.
+- Native macOS compilation produces all 32 original bytes exactly, verified
+  against authenticated stock SHA-256; native unittest passes. This proves
+  instruction identity at original placement, not helper closure or hardware
+  execution. DMA setup and complete firmware integration remain pending.
+
+### Transmit completion ordering and mutation verification
+
+- Added 48 authenticated stock/source decoded cases with independent ordered
+  access/call expectations. Checks prove release precedes the channel sentinel,
+  drain receives the freshly loaded port, and callback/context/port are loaded
+  after drain. Controlled helper mutations expose stale-load mistakes.
+- Both native macOS tests pass, retaining exact 32-byte instruction identity
+  verification. Release/drain/callback effects remain modeled in this check;
+  physical delivery and complete source-only firmware are not established.
+
+### Transmit completion composes decoded drain wait
+
+- Added 108 authenticated stock/source nested completion/drain cases, including
+  36 stalled prefixes. Independent ordered trace and descriptor-state oracles
+  show the channel is released and marked unused before polling; callback
+  fields are not read and notification is not delivered while drain is stalled.
+- Controlled descriptor mutation checks port selection and callback reloads.
+  Four native macOS tests pass, including prior completion and drain tests.
+- Release and application callback remain modeled; decoded helpers use separate
+  interpreter frames. Full image integration and physical delivery remain open.
+
+### Transmit completion composes release and deallocation
+
+- Replaced modeled release effects in a new completion check with decoded
+  release/deallocation execution, checked against the independent allocation
+  oracle. Combined this with decoded UART drain polling.
+- 192 cases pass across stock/source outer and helper combinations, both DMA
+  channels, multiple allocation states, and completing/stalled drains. Channel
+  clearing, release-before-drain order and callback gating are checked.
+- Two native macOS tests pass. Deallocation IRQ/clock effects and application
+  callback remain modeled, with separate interpreter frames. This is further
+  dependency qualification, not full image or physical DMA completion proof.
+
+### DMA deallocation composes decoded IRQ leaves
+
+- Added optional decoded IRQ hooks to the deallocation interpreter and 640
+  stock/source outer/helper combinations. Checks preserve the full allocation
+  trace oracle, verify actual PSR disable/restore transitions and require any
+  resource-gate call to occur while interrupts are disabled.
+- Two native macOS tests pass, including transmit completion leaf regression.
+  Resource-gate effects and architectural PSR semantics remain modeled; this
+  is dependency qualification, not physical concurrency or firmware completion.
+
+### Completion release now carries decoded IRQ state
+
+- Extended the transmit completion/release/deallocation/drain composition to
+  execute PSR save/restore leaves. Expanded to 768 cases across enabled,
+  disabled and high-bit processor states, with stock/source helper variants.
+- Checks require resource gating during interrupt exclusion and exact original
+  state restoration before drain starts, including when drain subsequently
+  stalls. Allocation effects and callback gating retain independent oracles.
+- Two native macOS tests pass. Clock effects, application callbacks and PSR
+  architecture semantics remain modeled; whole-firmware and physical DMA
+  completion qualification remain outstanding.
+
+### Completion deallocation executes the source clock gate
+
+- Replaced the completion check's modeled resource gate with decoded gate and
+  module-lookup execution from the source-linked DMA/UART ELF and its compiled
+  clock table. Independent MMIO oracle checks every gate call while IRQ state
+  is disabled; original state must still be restored before drain.
+- Expanded to 2,304 cases with three clock-register patterns. Native macOS
+  regression passes. Application callbacks, MMIO stimuli and architecture
+  semantics remain modeled; separate interpreter frames are not physical
+  execution or a complete source-only firmware build.
+
+### Transmit DMA setup reconstructed using upstream configuration types
+
+- Added C setup for 0xc694 using authenticated pinned NationalChip DMA types.
+  Valid ports configure memory-to-peripheral transfer and handshake 7/5.
+  Stock ignores the transfer result; this behavior is retained.
+- Explicit invalid-port repair releases the allocated channel and resets its
+  descriptor sentinel instead of passing stock's uninitialized handshake field.
+  Native host assertions check all 12 config fields, allocation failure,
+  valid ports, invalid-port cleanup and ignored transfer failure.
+- Native C-SKY build succeeds at 144 bytes versus 136 available. This candidate
+  is not admitted: decoded stock/source valid-path qualification and placement
+  remain pending, along with whole-firmware source-only completion.
+
+### Decoded transmit DMA setup qualification for valid ports
+
+- Added 384 authenticated stock/source target execution cases for ports 0/1,
+  channel-allocation success/failure, buffer/length boundaries, burst results
+  and ignored helper errors. Independent oracle checks the 12-word transfer
+  configuration and cache/select/burst/callback/transfer call order.
+- Different compiler stack frames are excluded from external-trace comparison;
+  each is independently interpreted and ABI restoration checked. Native macOS
+  unittest passes. Invalid-port cleanup remains a documented behavior repair
+  covered by the separate host check, not claimed as stock equivalence.
+- Helper effects remain modeled; 144-byte placement still exceeds the original
+  136-byte envelope. Full source-only integration remains incomplete.
+
+### Target qualification of invalid-port DMA cleanup
+
+- Added 144 compiled-target repair cases across invalid ports, allocation
+  failure, both real channels and allocation states. The repair invokes decoded
+  release/deallocation, restores the unused-channel sentinel, returns an error
+  and submits neither callback registration nor transfer.
+- Independent call-order/allocation checks and both native macOS regressions
+  pass. This repair is explicitly not stock equivalence; valid-port equivalence
+  remains covered separately. IRQ/clock effects are modeled in this check.
+- Placement overrun, remaining helper composition and full source-only image
+  integration are still outstanding.
+
+### Transmit DMA setup composes decoded burst sizing
+
+- Added 120 stock/source setup/helper combinations with 240 decoded burst
+  calls. Checks require transmit direction, both descriptor reads and the
+  independent enum mapping in each resulting DMA configuration field.
+- Changing the transmit size between calls verifies independent source and
+  destination burst sampling. Both native macOS regressions pass, including
+  invalid-port cleanup. Other setup helpers and physical DMA remain unqualified;
+  source-only image integration and placement remain outstanding.
+
+### Transmit DMA setup consumes decoded channel selection
+
+- Added 96 stock/source setup/allocator combinations across both valid ports,
+  allocation patterns and IRQ tokens. Independent allocator oracle checks state
+  effects; selected channel must flow into descriptor storage, callback
+  registration and the complete DMA transfer configuration.
+- Exhaustion produces neither channel storage nor callback/transfer submission.
+  Both native macOS tests pass, including burst-composition regression.
+- Allocator IRQ/clock helpers remain modeled in this check; separate frames,
+  placement and whole-image source-only integration remain outstanding.
+
+### Transmit DMA setup composes decoded callback registration
+
+- Added 48 stock/source setup/registration combinations with 32 decoded
+  callback registrations. Independent checks verify the per-channel handler
+  and private-data slots, the recovered transmit completion address and UART
+  descriptor, plus registration before transfer submission.
+- Allocation failure produces no registration or transfer. Three native macOS
+  regressions pass, covering registration, selection and burst composition.
+- Callback table writes are still in a separate frame; runtime invocation,
+  DMA transfer effects and full source-only firmware integration remain open.
+
+### Transmit DMA setup composes decoded cache cleaning
+
+- Added 336 stock/source setup/cache combinations with independent cache-command
+  oracles. Checks cover aligned/unaligned/wrapped pointers and length boundaries,
+  including nonpositive signed cache lengths, before channel selection.
+- Transfer arguments supply the cache range even when descriptor cache fields
+  differ; cleaning still precedes an unsuccessful allocation. Both native
+  macOS tests pass, including callback-registration regression.
+- Cache execution uses a separate decoded frame with modeled architecture/MMIO;
+  physical coherence and full source-only firmware integration remain open.
+
+### Transmit DMA joins the source-linked DMA/UART cluster
+
+- Added transmit setup, buffer entry, completion and drain source objects to
+  the DMA/UART link: 25 source units, 2,672 text bytes, no unresolved symbols.
+  Exact helper-target sets are checked for all three transmit callers and the
+  completion callback literal must relocate to the source symbol.
+- Four native macOS tests pass, including owned DMA storage, callback-storage
+  relocation and completion/clock composition. This resolves analysis-link
+  executable dependencies without extracting stock instructions.
+- Persistent UART state remains externally bound in this cluster; relocated
+  transmit execution, physical placement/startup and complete source-only
+  firmware integration remain outstanding. This ELF is not a firmware image.
+
+### Relocated transmit DMA setup execution
+
+- Executed actual transmit-setup instructions from the combined source ELF in
+  72 cases. Every helper target must resolve through the linked symbol map;
+  callback registration must use the relocated completion address.
+- Independent call/configuration/state oracles cover valid ports, allocation
+  failure and explicit invalid-port cleanup. Three native macOS tests pass.
+- Helper effects remain modeled here, and UART state is still externally bound.
+  Source-only startup, physical placement and full firmware integration remain
+  incomplete; no firmware ownership claim was added.
+
+### DMA/UART cluster can own all runtime storage
+
+- Added optional source UART storage to the DMA/UART linker, using authenticated
+  upstream address/IRQ headers and compiled defaults checked against stock.
+  With DMA, IRQ and UART storage enabled, the cluster has no external bindings
+  and no unresolved symbols. UART initialized data is 256 bytes.
+- Four native macOS link tests pass, including the combined storage mode.
+  Existing analysis configurations remain available for comparison.
+- This establishes source definitions, not startup initialization or physical
+  memory placement. Relocated consumers of the combined storage mode and a
+  complete runnable source-only firmware image remain unqualified.
+
+### Transmit setup executes against source-owned UART defaults
+
+- Added 36 decoded setup cases with all DMA/IRQ/UART storage source-linked.
+  Actual compiled descriptor rows supply device pointers and initial state.
+  Complete descriptor-state comparison checks that only the channel field
+  changes on success and allocation failure preserves every default word.
+- Tests reject retained stock descriptor accesses. Three native macOS checks
+  pass, including original-binding regression and valid-port stock comparison.
+- Helper effects remain modeled; startup initialization and complete runnable
+  source-only firmware integration remain outstanding.
+
+### Relocated transmit setup writes the source callback table
+
+- Replaced the registration boundary with decoded callback-store instructions
+  from the same linked ELF. The modeled four-word table uses the actual source
+  BSS symbol; exact slots, completion pointer, descriptor pointer and untouched
+  slots are independently checked.
+- Both native macOS relocated tests pass. Owned-storage mode executes 24
+  registrations across 36 setup cases; allocation failure leaves the table
+  untouched. Default-binding regression also passes.
+- BSS initialization is modeled, not startup execution; callback consumption,
+  remaining helper effects and whole-firmware integration remain outstanding.
+
+### DMA interrupt consumes relocated transmit registration
+
+- Parameterized the decoded DMA ISR for linked state/table/helper addresses.
+  Relocated transmit setup now feeds actual callback-table write output into
+  that ISR, which dispatches the source completion pointer and UART descriptor.
+- Both relocated macOS tests pass, including 24 owned-storage dispatches.
+  Original stock/source ISR regression also passes. Independent checks retain
+  clear/deallocate/callback ordering and exact dispatched arguments.
+- ISR clear/deallocation and completion effects remain modeled in this composed
+  check; hardware pending state and startup are modeled. Complete source-only
+  firmware integration remains outstanding.
+
+### Relocated DMA dispatch executes transmit completion and drain
+
+- Extended owned-storage setup/registration/ISR composition through the actual
+  relocated completion and drain instructions. Descriptor channel state from
+  setup reaches completion, which resets its sentinel while preserving other
+  words. The application callback receives the expected port and context.
+- 24 decoded completions pass with explicit 0/32/64 drain-status stimuli;
+  three native macOS regressions pass. Application completion fields remain
+  harness inputs pending buffer-entry composition; release/ISR side effects
+  remain modeled. Startup and full source-only firmware are not yet complete.
+
+### Buffer entry feeds actual descriptor updates into DMA setup
+
+- Added 72 relocated buffer/setup cases using compiled source descriptor rows,
+  including 18 nested setup calls. The fifth stack argument, callback, buffer,
+  count, mode and request register pass through actual decoded buffer writes.
+- Independent full-memory and return oracles cover null arguments, successful
+  allocation and exhaustion. Both native macOS regressions pass.
+- DMA-enabled mode is a harness input; setup leaf effects remain modeled in
+  this check. Connecting this entry to the longer registration/ISR/completion
+  chain, startup and whole-firmware integration remain outstanding.
+
+### Buffer submission reaches application completion through decoded chain
+
+- Extended the source-owned buffer/setup check through decoded callback table
+  writes, DMA ISR dispatch, transmit completion and drain polling. Application
+  callback/context now come from actual buffer-entry descriptor writes.
+- The 72 submission cases include 18 setup calls and 12 delivered completions.
+  Full descriptor-state checks preserve unrelated words and verify channel
+  reset. Failed submissions leave the callback table empty. Three native macOS
+  regressions pass.
+- DMA mode/pending stimuli and remaining setup/ISR/release effects are modeled;
+  no physical transfer, startup or complete source-only firmware claim is made.
+
+### UART completion, drain and DMA release admitted
+
+- Admitted three reviewed C functions into the experimental codec: the
+  instruction-identical 32-byte UART transmit completion callback, the
+  24-byte UART drain wait in its 28-byte envelope, and the
+  instruction-identical 8-byte DMA release wrapper.
+- Qualification covers 48 completion order/mutation cases, 160 drain cases
+  including 40 finite stalled prefixes, 384 release/deallocation compositions,
+  and the existing nested completion/release/drain regressions. Thirteen focused
+  ownership and composition tests pass on macOS.
+- The codec now has 214 C functions at 230 occurrences and 284 total source
+  replacement occurrences. Ownership is 14,416 compiled C bytes, 156 compiled
+  assembly bytes, 3,113 generated source-data bytes, 80 generated metadata
+  bytes, 712 generated unreachable-fill bytes, and 307,615 retained stock bytes.
+- The 326,092-byte codec SHA-256 is
+  `26da0f0d9fe13d659128ba11b07288ee32d940e21208efe9cbc82c92d7abdab6`.
+  The 4,750,780-byte macOS EVENOTA SHA-256 is
+  `f31253a2f4d0bd0e022617cadd4ae11a7e41c63848cb45eefe3f8f6e26947064`;
+  package build and artifact verification pass with 7,822 placed and zero
+  unresolved flash regions.
+- This remains an experimental hybrid. DMA deallocation and transmit setup are
+  still oversized, physical UART/DMA timing is unqualified, other components
+  remain source-incomplete, and 307,615 codec bytes still depend on retained
+  stock. The full source-only goal remains active.

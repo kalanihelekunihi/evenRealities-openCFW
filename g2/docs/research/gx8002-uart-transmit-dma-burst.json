@@ -1,0 +1,69 @@
+{
+  "burst_dependency": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_header": "include/driver/gx_dma_ahb.h",
+      "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_uart_dma_burst",
+          "compiled_bytes": 114,
+          "compiled_sha256": "dcb19548b684924c227ade43682f3012a7bb2c2ce260097aa486c9eb0d0314c4",
+          "stock_sha256": "e03da7bafc416d6fe5f9a1b44b5af1ea4fde190728a508e43bc079225f4fb096",
+          "package_offset": 50652,
+          "envelope_bytes": 116,
+          "fits": true
+        }
+      ],
+      "source_sha256": "793e6e195b30145329f6c4e5485d0b7747a26cfe892e4182db7e3a4d9555f396",
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Build only. Decoded burst mapping and ordered descriptor-read qualification pending."
+      ]
+    },
+    "decoded_cases": 8232,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Finite burst inputs covering all supported sizes and nearby values; both volatile descriptor reads preserved. No concurrent descriptor mutation proof."
+    ]
+  },
+  "dma_dependency": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_header": "include/driver/gx_dma_ahb.h",
+      "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_uart_transmit_dma",
+          "compiled_bytes": 144,
+          "compiled_sha256": "a95f27267bfef742a6d674f75bd9d245bd1613858f05604d2b83c413da6d4313",
+          "stock_sha256": "e3ddeaedb4679eb3a61c07c018a65a41c25c3feb8935fb8c0c42870f26c41276",
+          "package_offset": 50836,
+          "envelope_bytes": 136,
+          "fits": false
+        }
+      ],
+      "source_sha256": "533168dee449252590411c7ec7b35e0007ee8642ee9f4ba9551f1209d368e7b5",
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Build only. Invalid-port cleanup is an explicit repair, not stock equivalence. Decoded DMA setup behavior and upstream config layout qualification pending; called helpers remain separate dependencies."
+      ]
+    },
+    "decoded_cases": 384,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Valid ports only; external ordered accesses and helper argument comparison, excluding private stack layout; called helpers modeled, no DMA hardware behavior claim."
+    ]
+  },
+  "decoded_cases": 120,
+  "burst_calls": 240,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Separate descriptor snapshots at each leaf call, including changed transmit burst size between calls. Other DMA setup helpers remain modeled."
+  ]
+}

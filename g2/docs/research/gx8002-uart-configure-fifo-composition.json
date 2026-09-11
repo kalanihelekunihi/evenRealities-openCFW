@@ -1,0 +1,62 @@
+{
+  "candidate": {
+    "runtime_link": {
+      "archive": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/lib/gcc/csky-unknown-elf/13.0.1/libgcc.a",
+      "archive_sha256": "9ecd75da478b51b4d25152616294e3550ef249049d242a43d1e5519d9ba48b7b",
+      "linked_sha256": "595cd5c97023a76f79030415a8fd9d7e84fc43fc8ef7b83a395a1338a4832fab",
+      "unresolved_symbols": [],
+      "gcc_source_commit": "1e9b70447a8417f5c692370de4533e43d754e8fa",
+      "hardware_qualified": false
+    },
+    "source_sha256": "6f0b76a041797c059e7733cd0038531f1eb3a6c98bdc489553fe4c4fae681d5d",
+    "compiled_bytes": 360,
+    "undefined_dependencies": [
+      "__floatunsidf",
+      "__divdf3",
+      "__muldf3",
+      "__adddf3",
+      "__fixunsdfsi",
+      "open_cfw_gx8002_uart_fifo_depth",
+      "open_cfw_gx8002_uart_interrupt",
+      "open_cfw_gx8002_request_irq"
+    ],
+    "stock_offset": 51540,
+    "stock_envelope_bytes": 360,
+    "stock_sha256": "1d959331817c7f2921ac87ef65ff42703f518571de90177804946b0b223c81cd",
+    "source_admitted": false,
+    "limits": [
+      "Analysis link uses source-built libgcc; UART/IRQ dependencies remain absolute bindings. Full MMIO ordering and float conversion/helper correspondence require qualification. No linked firmware output. Baud values that overflow baud<<4 to zero remain outside a defined C division domain."
+    ]
+  },
+  "fifo_candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_header": "include/driver/gx_uart.h",
+    "upstream_blob": "243606a2bb600a45c13a4b6dc7174cc549ab93ba",
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_uart_fifo_depth",
+        "compiled_bytes": 30,
+        "compiled_sha256": "63f47f966c2985b19642fdc66d2d5f2b8c9d6718a01743dd0ff9b64815435224",
+        "stock_sha256": "f7ecb769838b23c9231ce4ecd40390fc96491e211cf28831b9c98cf3000922c4",
+        "package_offset": 51436,
+        "envelope_bytes": 104,
+        "fits": true
+      }
+    ],
+    "source_sha256": "ac98821c7ceae521c6ab565ab0ad004ff9d014783ff31266641b0449c8e81145",
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Decoded FIFO parameter mapping requires separate verification."
+    ]
+  },
+  "composed_fifo": true,
+  "fifo_executions": 2400,
+  "cases": 1200,
+  "arithmetic_cases": 1000,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Ordered descriptor/MMIO reads and writes and helper arguments compared. Arithmetic helpers execute decoded bodies in separate frames. IRQ registration remains modeled. FIFO helper executes decoded instructions in a separate frame when composed_fifo is true; otherwise its return is modeled. An injected device-pointer change after FIFO return tests descriptor reload ordering. No physical UART, concurrent interrupt execution or zero shifted denominator qualification."
+  ]
+}

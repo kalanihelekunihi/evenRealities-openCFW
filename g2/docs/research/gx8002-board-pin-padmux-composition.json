@@ -1,0 +1,42 @@
+{
+  "candidate": {
+    "symbol": "open_cfw_gx8002_board_pin_configure",
+    "section_name": ".text",
+    "bindings": {
+      "open_cfw_gx8002_padmux_check": 270558648,
+      "open_cfw_gx8002_padmux_set": 270558684,
+      "open_cfw_gx8002_printf": 270560292
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-shrink-wrap"
+    ],
+    "source_sha256": "ae1c2a4169d553e06fe2d25381d64b49522057a6e409d0da79b61f65213fbd7a",
+    "compiled_bytes": 64,
+    "compiled_sha256": "6c5c9b7ec5b369538be6624e57d6241c329d07d1a68a35e865014427f9502024",
+    "package_offset": 64872,
+    "stock_envelope_bytes": 64,
+    "stock_sha256": "c4613a49d56f5400ed0427d71f73df1c6aaa719a5943a66c585e41a8df65c93b",
+    "fits": true,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Guard state, helper transactions, ABI and diagnostic source data need qualification."
+    ]
+  },
+  "combinations": 3360,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "All 16 stock/source guard/set/check/get combinations, modeled written readback. Separate checked helper frames; no shared nested stack, concurrency or physical pad proof. Diagnostic output remains modeled."
+  ]
+}

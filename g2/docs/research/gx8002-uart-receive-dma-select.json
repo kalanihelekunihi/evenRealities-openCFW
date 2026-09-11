@@ -1,0 +1,68 @@
+{
+  "dma_dependency": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_header": "include/driver/gx_dma_ahb.h",
+      "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_uart_receive_dma",
+          "compiled_bytes": 140,
+          "compiled_sha256": "7e8266b0b1860efb076d2dffd26d8c51aa5bb8e15a577760e054e1b1cba57581",
+          "stock_sha256": "12105aea5e33e600543c3338e1916864690678b3206e390eea4516a5c05dcd42",
+          "package_offset": 50972,
+          "envelope_bytes": 140,
+          "fits": true
+        }
+      ],
+      "source_sha256": "7e126dbf856190d34e885b3240725b9313ffea75b1031dd7bed5da42e6f92987",
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Build only. Decoded DMA setup behavior and upstream config layout qualification pending; called helpers remain separate dependencies."
+      ]
+    },
+    "decoded_cases": 768,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Finite ordered accesses and helper argument comparison; called helpers modeled, no DMA hardware behavior claim."
+    ]
+  },
+  "selection_dependency": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_header": "include/driver/gx_dma_ahb.h",
+      "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_dma_select",
+          "compiled_bytes": 76,
+          "compiled_sha256": "a945f0a79b5690ff020f7d9a81c04080ddd3ad9b5d759abb85aab0fc5f21113e",
+          "stock_sha256": "7f7d631ef92ec3468b7dfa60231f07ef82c223bfcf318deaac31a656b92cec17",
+          "package_offset": 53208,
+          "envelope_bytes": 76,
+          "fits": true
+        }
+      ],
+      "source_sha256": "2a62ac7c225f80db52dbcddc2540ae255a338154ca7a2a6e45f09e70fdeb1de3",
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Build only. Decoded channel scan, allocation writes, interrupt-token and resource-call qualification pending."
+      ]
+    },
+    "decoded_cases": 6132,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "All allocation occupancy combinations for counts 0 through 8; this is a test domain, not established hardware capacity. IRQ/resource helpers modeled."
+    ]
+  },
+  "decoded_cases": 144,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Separate allocator state and frame; IRQ/clock helpers modeled. Invalid port is checked after channel reservation, matching stock without adding cleanup."
+  ]
+}

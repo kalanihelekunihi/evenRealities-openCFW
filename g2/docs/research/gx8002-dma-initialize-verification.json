@@ -1,0 +1,30 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_header": "include/driver/gx_dma_ahb.h",
+    "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_dma_initialize",
+        "compiled_bytes": 120,
+        "compiled_sha256": "3350ad2406e1e8587cabc637c874669edaa7e3c09c1911f71907274564e8d484",
+        "stock_sha256": "01f9a1330112844396400ae5a09a5d78f910e308149823903c400783a88013fd",
+        "package_offset": 53580,
+        "envelope_bytes": 128,
+        "fits": true
+      }
+    ],
+    "source_sha256": "dbf60fd37958c795d57b458a3eb46d2d91f725fd900526bd71820eb700bacb58",
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Decoded initialization order, state layout, IRQ registration and MMIO qualification pending."
+    ]
+  },
+  "decoded_cases": 18,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Clock/IRQ helpers modeled with caller clobbers and controlled state-base mutation. No hardware reset/IRQ delivery proof."
+  ]
+}

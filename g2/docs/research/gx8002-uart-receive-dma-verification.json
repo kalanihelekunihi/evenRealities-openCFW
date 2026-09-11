@@ -1,0 +1,30 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_header": "include/driver/gx_dma_ahb.h",
+    "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_uart_receive_dma",
+        "compiled_bytes": 140,
+        "compiled_sha256": "7e8266b0b1860efb076d2dffd26d8c51aa5bb8e15a577760e054e1b1cba57581",
+        "stock_sha256": "12105aea5e33e600543c3338e1916864690678b3206e390eea4516a5c05dcd42",
+        "package_offset": 50972,
+        "envelope_bytes": 140,
+        "fits": true
+      }
+    ],
+    "source_sha256": "fa2ae5628f4a2271338513f233d635c0effe2ea41f4154b7d34db53610aa0657",
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Decoded DMA setup behavior and upstream config layout qualification pending; called helpers remain separate dependencies."
+    ]
+  },
+  "decoded_cases": 768,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Finite ordered accesses and helper argument comparison; called helpers modeled, no DMA hardware behavior claim."
+  ]
+}

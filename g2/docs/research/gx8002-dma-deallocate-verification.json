@@ -1,0 +1,30 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_header": "include/driver/gx_dma_ahb.h",
+    "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_dma_deallocate",
+        "compiled_bytes": 72,
+        "compiled_sha256": "b6b36e917741cd2d0a5ef587e0b8e28ded4dad2fdc143bac236d4654ad910c1f",
+        "stock_sha256": "402fc0fe95edff47a790a08ca4972bb74885da0fe31bf898df28bfd31328336c",
+        "package_offset": 53284,
+        "envelope_bytes": 68,
+        "fits": false
+      }
+    ],
+    "source_sha256": "0bd6453305d341073f9b2c12724a0a940cfb4cc81e43deb1c433cd588302ec6d",
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Decoded deallocation, exact-one scan and clock-disable ordering qualification pending."
+    ]
+  },
+  "decoded_cases": 5008,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Counts 1..4, valid in-table channel; initialized hardware uses two. IRQ/clock modeled, no concurrency proof."
+  ]
+}

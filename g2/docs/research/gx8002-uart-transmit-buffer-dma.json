@@ -1,0 +1,491 @@
+{
+  "candidate": {
+    "owned_uart_storage": [
+      {
+        "symbol": "open_cfw_gx8002_uart_descriptors",
+        "address": 537395200,
+        "bytes": 256,
+        "compiled_defaults_verified": true
+      }
+    ],
+    "transmit_source_calls": [
+      {
+        "caller": "uart_transmit_dma",
+        "callees": [
+          "dcache_clean_range",
+          "dma_select",
+          "uart_dma_burst",
+          "dma_callback",
+          "dma_transfer",
+          "dma_release"
+        ]
+      },
+      {
+        "caller": "uart_transmit_complete",
+        "callees": [
+          "dma_release",
+          "uart_flush"
+        ]
+      },
+      {
+        "caller": "uart_transmit_buffer",
+        "callees": [
+          "uart_transmit_dma",
+          "irq_save",
+          "irq_restore"
+        ]
+      }
+    ],
+    "transmit_completion_address": 271648780,
+    "owned_dma_storage": [
+      {
+        "symbol": "open_cfw_gx8002_dma_state",
+        "address": 537460752,
+        "bytes": 884,
+        "zero_initialized": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_dma_callbacks",
+        "address": 537460736,
+        "bytes": 16,
+        "zero_initialized": true
+      }
+    ],
+    "owned_irq_storage": [
+      {
+        "symbol": "open_cfw_gx8002_irq_table",
+        "address": 537461644,
+        "bytes": 256,
+        "zero_initialized": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_irq_saved_enable",
+        "address": 537461636,
+        "bytes": 8,
+        "zero_initialized": true
+      }
+    ],
+    "clock_dependency": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_dependencies": [
+        {
+          "path": "arch/soc/grus/include/clk_priv.h",
+          "git_blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+          "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+        },
+        {
+          "path": "arch/soc/grus/include/base_addr.h",
+          "git_blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+          "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+        },
+        {
+          "path": "include/driver/gx_clock.h",
+          "git_blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+          "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+        },
+        {
+          "path": "include/driver/gx_clock/gx_clock_v2.h",
+          "git_blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+          "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+        },
+        {
+          "path": "LICENSE",
+          "git_blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+          "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+        }
+      ],
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-tree-loop-optimize",
+        "-fno-delete-null-pointer-checks"
+      ],
+      "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+      "configuration": "#define CONFIG_ARCH_GRUS 1\n",
+      "sections": [
+        {
+          "section": ".text.__module_get_info",
+          "bytes": 160,
+          "sha256": "6664da47e0446404acdc5363a024dade757bd809f6728235bb7799543e84578f",
+          "relocations": 1
+        },
+        {
+          "section": ".text.open_cfw_gx8002_clock_lookup",
+          "bytes": 8,
+          "sha256": "1562e7a0168550db54af150d4fd9df2b744ac384cafa59377ab129f54e2f5d80",
+          "relocations": 1
+        },
+        {
+          "section": ".text.open_cfw_gx8002_platform_gate",
+          "bytes": 288,
+          "sha256": "367035be237c0f55167689494547c086158cf9499136c794676700d037e90d0e",
+          "relocations": 3
+        },
+        {
+          "section": ".rodata.open_cfw_gx8002_platform_gate",
+          "bytes": 76,
+          "sha256": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+          "relocations": 19
+        },
+        {
+          "section": ".data.gx_clock_param_table",
+          "bytes": 416,
+          "sha256": "d12a5ad69719038f933a1c9d1c98ed1093de9e7f12d0d709ae8c6ec324c18852",
+          "relocations": 20
+        },
+        {
+          "section": ".data.gx_clock_dto_table",
+          "bytes": 3,
+          "sha256": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+          "relocations": 0
+        },
+        {
+          "section": ".data.gx_clock_div_table",
+          "bytes": 68,
+          "sha256": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872",
+          "relocations": 0
+        }
+      ],
+      "source_admitted": false,
+      "firmware_bytes_emitted": 0,
+      "limits": [
+        "Unlinked candidate; stock gate envelope is 256 bytes at package 0x17094.",
+        "Module lookup, tables, jump tables and MMIO behavior require qualification.",
+        "No hardware qualification or complete source-only claim."
+      ]
+    },
+    "upstream_dependencies": [
+      {
+        "path": "arch/soc/grus/include/core_ck804.h",
+        "git_blob": "ed6595b0a0e510fba0219954933f250c0eba83de",
+        "sha256": "f967c3201c24ceb417f83f915669c74f7182bf23784a7464f450ef6564f6f20a"
+      },
+      {
+        "path": "arch/soc/grus/include/csi_gcc.h",
+        "git_blob": "82802d1850f8ff8cc4701154658bcf362902e721",
+        "sha256": "638e1bf91b9d7cbba877d943132e83db37c75c97ee852ccce256c99a7dcfb530"
+      },
+      {
+        "path": "include/utility/libc/stdlib.h",
+        "git_blob": "75c21b5367091e23fb703e4b3dfc65ffc4e71a8f",
+        "sha256": "d2549da080238fe93ed114e2d7e83b7889390faa631a37d87f324f63698ea29d"
+      },
+      {
+        "path": "include/utility/libc/klibc/extern.h",
+        "git_blob": "7d7c7b8d190f5d792a2ff355e7d288e407833ddd",
+        "sha256": "addf134407ecf22a5bced6c998d30660dae0846528ad934eaa49742a9a7daf49"
+      },
+      {
+        "path": "include/utility/libc/klibc/inline.h",
+        "git_blob": "0e547437338ab639b5eda06e04a80454e7f80758",
+        "sha256": "1456ca9eb1444031e51a9424859da5340844e7be166ff7ab68f25159329be9e1"
+      },
+      {
+        "path": "include/utility/util.h",
+        "git_blob": "a66b1d1b2183c0b83b8d7d3eff9a98867a6bcb87",
+        "sha256": "b31dc428b0da16a50b5b1bb5a0059d537d66df38a9ccd5061430b0c0d56b9f74"
+      },
+      {
+        "path": "LICENSE",
+        "git_blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+        "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+      },
+      {
+        "path": "include/driver/gx_irq.h",
+        "git_blob": "9e1b15b19c44f3802c46243ce8566cdd7aa489a5",
+        "sha256": "c926df2f9b69b630df814ac0e27786c2ff6b290b270f21057d1e05e32f21d0a9"
+      }
+    ],
+    "linked_irq": {
+      "request_irq": 271646856,
+      "irq_save": 271646720,
+      "irq_restore": 271646732,
+      "irq_enable": 271646740
+    },
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "header_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+    "sources": [
+      {
+        "name": "irq",
+        "sha256": "b29788e88cbfb3f053111c88e204dab802b42a2c25b726b5fcf44962108dd97d",
+        "extra_flags": [
+          "-fno-shrink-wrap"
+        ]
+      },
+      {
+        "name": "dma_initialize",
+        "sha256": "dbf60fd37958c795d57b458a3eb46d2d91f725fd900526bd71820eb700bacb58",
+        "extra_flags": []
+      },
+      {
+        "name": "dma_irq_handler",
+        "sha256": "6367949bc89a14e62690cdf0b3c74051808a8f0fdcf63833505d24e9ee7fc258",
+        "extra_flags": [
+          "--param=max-completely-peel-times=0"
+        ]
+      },
+      {
+        "name": "dma_bus_address",
+        "sha256": "0927a9cd2db8e0758fc1733fa4b35bc8ab7803a96b5f26b866b9d3cadcf9cc8e",
+        "extra_flags": []
+      },
+      {
+        "name": "dma_callback",
+        "sha256": "2bad7611930411062bf9744876ab20bde2734ee02d6053e5d8a897641f605437",
+        "extra_flags": []
+      },
+      {
+        "name": "dma_clear",
+        "sha256": "697ef2f038f5388e72c932112c22e3f3ce6303ef86fa7d4d490dad65a1f5beb9",
+        "extra_flags": []
+      },
+      {
+        "name": "dma_configure",
+        "sha256": "8d5c4240a3e9e782a1af141aede4de0f702f199ce165bc475915b48e4415a889",
+        "extra_flags": []
+      },
+      {
+        "name": "dma_deallocate",
+        "sha256": "0bd6453305d341073f9b2c12724a0a940cfb4cc81e43deb1c433cd588302ec6d",
+        "extra_flags": []
+      },
+      {
+        "name": "dma_descriptors",
+        "sha256": "182b6b4ec407e5c54a12962d94b7dc6bd7c03398f402ef32f5c2bf092839b427",
+        "extra_flags": [
+          "-fno-tree-scev-cprop"
+        ]
+      },
+      {
+        "name": "dma_release",
+        "sha256": "e6a1d4347cdce8e1e4d5085614bd6de5b9889ba383d64d0b5867359386045b73",
+        "extra_flags": []
+      },
+      {
+        "name": "dma_select",
+        "sha256": "ecccdbd492865957b7aa0a9b9c694da69b0f9e0bbf3852159c472fd9ece1e88d",
+        "extra_flags": []
+      },
+      {
+        "name": "dma_transfer",
+        "sha256": "f458babcf944e072161b7db8c602e31447bb3a424492ca0c242f84805788f56b",
+        "extra_flags": []
+      },
+      {
+        "name": "uart_dma_burst",
+        "sha256": "793e6e195b30145329f6c4e5485d0b7747a26cfe892e4182db7e3a4d9555f396",
+        "extra_flags": []
+      },
+      {
+        "name": "uart_receive_buffer",
+        "sha256": "7087df41826eff0932ea6bf929d42354af99f8037a3b6c3ebd86563b2e19f82e",
+        "extra_flags": []
+      },
+      {
+        "name": "uart_receive_complete",
+        "sha256": "7eb6e646ad8bea698e2d61ecd78fb0c0bc9c36e3277c0efc3042067b7536bb8f",
+        "extra_flags": []
+      },
+      {
+        "name": "uart_receive_control",
+        "sha256": "1dbbcb5bbb5a3c43ef419843d6fc1d26dc4c16863cac496ac56af8a7211a1087",
+        "extra_flags": []
+      },
+      {
+        "name": "uart_receive_dma",
+        "sha256": "fa2ae5628f4a2271338513f233d635c0effe2ea41f4154b7d34db53610aa0657",
+        "extra_flags": []
+      },
+      {
+        "name": "dcache_clean_range",
+        "sha256": "f37c783f2f81037c95acac8c573a1d898954b31664c75fdba676d293803754dd",
+        "extra_flags": []
+      },
+      {
+        "name": "dcache_invalid_range",
+        "sha256": "b7014f519fcf1c1a2ba73ff232e823338533c588bc24b33132125e8ee89e21ba",
+        "extra_flags": []
+      },
+      {
+        "name": "dcache_clean_invalid_range",
+        "sha256": "1c7fafbcc6225fcb201cf4b0626a0a8bfea738f0e27f54b6c945c3c40340a767",
+        "extra_flags": []
+      },
+      {
+        "name": "uart_transmit_dma",
+        "sha256": "533168dee449252590411c7ec7b35e0007ee8642ee9f4ba9551f1209d368e7b5",
+        "extra_flags": []
+      },
+      {
+        "name": "uart_transmit_complete",
+        "sha256": "84c12edc62273e6dbca2c47c810ca3dfa29962bfb1bb452103bd16276550c5b7",
+        "extra_flags": []
+      },
+      {
+        "name": "uart_transmit_buffer",
+        "sha256": "dee2744e08e5bd9ad1c6764dcfa41f280fc29425ff371d22a1846e2edda0b513",
+        "extra_flags": []
+      },
+      {
+        "name": "uart_flush",
+        "sha256": "1b9afb920bc07de4be8f830e5455d304b1b6ab3569d195eb43756513b70109b2",
+        "extra_flags": []
+      },
+      {
+        "name": "dma_storage",
+        "sha256": "9c45e99af6efe72d7d5988351dcc5020c8bfef01d6ec206dcce11548052a3262",
+        "extra_flags": []
+      },
+      {
+        "name": "irq_storage",
+        "sha256": "5a52e896381610cf8b6345d42b8e0369ce768d424eb1b1afa2c9ef22fe20a025",
+        "extra_flags": []
+      },
+      {
+        "name": "uart_storage",
+        "sha256": "5355cee0e9cceb1de7e4c12030fa327f90a8811bf4db24a3e0246d846b00b69e",
+        "extra_flags": []
+      },
+      {
+        "name": "platform_gate",
+        "sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+        "extra_flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-tree-loop-optimize",
+          "-fno-delete-null-pointer-checks"
+        ]
+      }
+    ],
+    "source_count": 28,
+    "sections": [
+      {
+        "name": ".text",
+        "address": 271646720,
+        "bytes": 2672,
+        "sha256": "a423c9bdce89260cd8e0145a5a46c4aaa49ba4c3e394d3472d51e1dcdc71b88a"
+      },
+      {
+        "name": ".rodata",
+        "address": 271649392,
+        "bytes": 76,
+        "sha256": "ad97e028579924c5cad42ac015606e0a9ae655427b5447818abb51201ced78b2"
+      },
+      {
+        "name": ".data",
+        "address": 537395200,
+        "bytes": 744,
+        "sha256": "ee17de1b00f4eb08508d5aaa7b54d933c335ad6c9ba9fbc444931cd8565a22cf"
+      }
+    ],
+    "callback_link": {
+      "symbol": "open_cfw_gx8002_uart_receive_complete",
+      "linked_address": 271648104,
+      "original_address": 270545124,
+      "symbol_relocation_verified": true
+    },
+    "callback_storage": [
+      {
+        "function": "dma_callback",
+        "address": 537460736
+      },
+      {
+        "function": "dma_irq_handler",
+        "address": 537460736
+      }
+    ],
+    "state_relocations": [
+      {
+        "unit": "dma_clear",
+        "symbol": "open_cfw_gx8002_dma_state"
+      },
+      {
+        "unit": "dma_select",
+        "symbol": "open_cfw_gx8002_dma_state"
+      },
+      {
+        "unit": "uart_receive_control",
+        "symbol": "open_cfw_gx8002_uart_descriptors"
+      }
+    ],
+    "dma_irq_handler_pointer": 271647012,
+    "irq_source_calls": [
+      {
+        "caller": "dma_initialize",
+        "callee": "request_irq",
+        "target": 271646856
+      },
+      {
+        "caller": "dma_select",
+        "callee": "irq_save",
+        "target": 271646720
+      },
+      {
+        "caller": "dma_select",
+        "callee": "irq_restore",
+        "target": 271646732
+      },
+      {
+        "caller": "dma_deallocate",
+        "callee": "irq_save",
+        "target": 271646720
+      },
+      {
+        "caller": "dma_deallocate",
+        "callee": "irq_restore",
+        "target": 271646732
+      }
+    ],
+    "clock_source_calls": [
+      {
+        "caller": "dma_initialize",
+        "target": 271649104
+      },
+      {
+        "caller": "dma_select",
+        "target": 271649104
+      },
+      {
+        "caller": "dma_deallocate",
+        "target": 271649104
+      }
+    ],
+    "source_aliases": {
+      "open_cfw_gx8002_dma_resource": "open_cfw_gx8002_platform_gate",
+      "open_cfw_gx8002_uart_dma_cache": "open_cfw_gx8002_dcache_invalid_range",
+      "open_cfw_gx8002_dma_descriptor_cache": "open_cfw_gx8002_dcache_clean_range",
+      "open_cfw_gx8002_dma_complete_cache": "open_cfw_gx8002_dcache_clean_invalid_range"
+    },
+    "external_bindings": {},
+    "unresolved_symbols": [],
+    "source_admitted": false,
+    "firmware_image": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Analysis-only relocated link; receive completion callback is symbol-relocated and checked. IRQ registration/masking use reconstructed C with pinned upstream CSI; clock uses pinned upstream GRUS source and tables; persistent state remains externally bound. Full integration/type compatibility and hardware initialization remain unproved."
+    ]
+  },
+  "decoded_cases": 72,
+  "decoded_setup_calls": 18,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Source defaults and application parameters feed decoded buffer/setup frames. DMA mode is modeled as already configured; setup leaf effects modeled. Startup and physical execution unqualified."
+  ]
+}

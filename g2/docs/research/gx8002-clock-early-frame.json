@@ -1,0 +1,69 @@
+{
+  "placement": {
+    "candidate": {
+      "candidate": {
+        "baseline_bytes": 480,
+        "probe_bytes": 444,
+        "allocated_sections": {
+          ".text.__module_get_info": 160,
+          ".text.open_cfw_gx8002_clock_frequency": 444,
+          ".rodata.open_cfw_gx8002_clock_frequency": 76,
+          ".text.open_cfw_gx8002_frequency_lookup": 8,
+          ".rodata.subband_hz.0": 16,
+          ".data.gx_clock_param_table": 416,
+          ".data.gx_clock_dto_table": 3,
+          ".data.gx_clock_div_table": 68
+        },
+        "envelope_bytes": 444,
+        "adaptation": "Replace four masked PLL subband cases with a source-authored four-frequency table; express equivalent low-frequency module predicate as stock comparison and bit clear.",
+        "adapted_header_sha256": "6b07599b5fe721955bfe7bb27b239847d2aec74c329903f0034b88cdd0730a49",
+        "source_admitted": false,
+        "limits": [
+          "Unlinked size probe only; no decoded or ABI qualification."
+        ]
+      },
+      "linked_text_bytes": 444,
+      "linked_text_sha256": "c7a5293f36d9cbe6329966905b2f5f7fbf7a77e9e81c51f3b829463ae0240a8f",
+      "table_bytes": 16,
+      "table_sha256": "09c9c22a46cf6b831d62d6ae88946b79696dbc30cfb8f54aecc14bf81e3cc0a4",
+      "analysis_table_address": 285216768,
+      "source_admitted": false,
+      "limits": [
+        "Analysis-only table and switch addresses; firmware table placement and whole-function decoded qualification pending."
+      ]
+    },
+    "host_symbol": "open_cfw_gx8002_platform_config",
+    "host_compiled_sha256": "9beb14aba99f83e4a1dcc9e5118a4569fa0ecae67e396a3e8828015101551d12",
+    "table_package_offset": 97868,
+    "table_runtime_address": 268590648,
+    "sections": [
+      {
+        "section": ".text.open_cfw_gx8002_clock_frequency",
+        "address": 268587536,
+        "bytes": 444,
+        "sha256": "faeb5d9704c0b819ba774c4a215813cf7af49b4dfa225b62cfae3b256b51f52f"
+      },
+      {
+        "section": ".rodata.open_cfw_gx8002_clock_frequency",
+        "address": 268588128,
+        "bytes": 76,
+        "sha256": "2492e3fefedbde3edfabbb970efe25f63056ddbb8e924686e8dfff562da28645"
+      },
+      {
+        "section": ".rodata.subband_hz",
+        "address": 268590648,
+        "bytes": 16,
+        "sha256": "09c9c22a46cf6b831d62d6ae88946b79696dbc30cfb8f54aecc14bf81e3cc0a4"
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Isolated proposed placement only. Builder overlap/carving support and host/control-flow qualification required; firmware unchanged."
+    ]
+  },
+  "decoded_cases": 777,
+  "source_admitted": false,
+  "limits": [
+    "Continuous candidate frame for immediate-zero, failed lookup and -1 offset paths only. Lookup body modeled; successful MMIO paths and hardware not qualified."
+  ]
+}

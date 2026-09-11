@@ -27,6 +27,24 @@ class RtcInitTests(unittest.TestCase):
         v.execute(self.code,v.ADDRESS,32768,0,start_hook=lambda:seen.append('start'))
         self.assertEqual(seen,['start'])
 
+    def test_gate_hook_runs_on_error_path(self):
+        seen=[]
+        v.execute(self.code,v.ADDRESS,65536,0,gate_hook=lambda module,enable:seen.append((module,enable)))
+        self.assertEqual(seen,[(0,1)])
+
+    def test_clock_hook_drives_success_instead_of_placeholder(self):
+        seen=[]
+        def clock(module):
+            seen.append(module)
+            return 32000
+        trace=v.execute(self.code,v.ADDRESS,0xffffffff,2,frequency_hook=clock)
+        self.assertEqual(trace,v.expected(32000,2))
+        self.assertEqual(seen,[0])
+
+    def test_clock_hook_can_reject_initialization(self):
+        trace=v.execute(self.code,v.ADDRESS,0,0,frequency_hook=lambda module:65536)
+        self.assertEqual(trace,v.expected(65536,0))
+
     def test_wrong_helper_target_rejected(self):
         code=self.code.copy();pc=next(pc for pc,(op,a,w) in code.items() if op=='bsr')
         op,args,w=code[pc];code[pc]=(op,'0x10025084',w)

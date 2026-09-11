@@ -1,0 +1,38 @@
+{
+  "registry_size": 28,
+  "registry_offsets": {
+    "port": 0,
+    "msg_id": 4,
+    "msg_buffer": 8,
+    "msg_buffer_length": 12,
+    "msg_buffer_offset": 16,
+    "msg_pack_callback": 20,
+    "priv": 24
+  },
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "sources_sha256": {
+    "lvp/common/uart_message_v2.c": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+    "lvp/common/uart_message_v2.h": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2",
+    "lvp/common/lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+  },
+  "queue_length": 8,
+  "message_handle_size": 380,
+  "packet_size": 32,
+  "offsets": {
+    "magic": 0,
+    "tmp_vef": 4,
+    "port": 8,
+    "init_flag": 12,
+    "cur_recv_pack": 28,
+    "cur_send_pack": 60,
+    "uart_send_pack_queue": 348,
+    "recv_state": 368,
+    "send_state": 372,
+    "pmu_lock": 376
+  },
+  "matches_stock_context_stride": true,
+  "source_admitted": false,
+  "limits": [
+    "ABI layout probe only, with queue length eight. No upstream callback equivalence or hardware execution claim."
+  ]
+}

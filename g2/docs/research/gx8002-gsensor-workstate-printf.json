@@ -1,0 +1,86 @@
+{
+  "candidate": {
+    "symbol": "open_cfw_gx8002_gsensor_workstate",
+    "section_name": ".text",
+    "bindings": {
+      "open_cfw_gx8002_printf": 270560292
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-shrink-wrap"
+    ],
+    "source_sha256": "bb7f9c9aba6826e479988025a343ab67d2d06ded4da7a88273587f8f206029df",
+    "compiled_bytes": 24,
+    "compiled_sha256": "5958f04bbdc085d13ecf4acd54c19e8e6fbe6d4c1f58f6b20378231db3de1caa",
+    "package_offset": 65172,
+    "stock_envelope_bytes": 24,
+    "stock_sha256": "78fe2d34876ed5ec31876dccf41cff1aff7777ba51252c7229d70a0240670a21",
+    "fits": true,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Guard state, helper transactions, ABI and diagnostic source data need qualification."
+    ]
+  },
+  "message": {
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_gsensor_workstate_message",
+        "section_name": ".rodata.open_cfw_gx8002_gsensor_workstate_message",
+        "compiled_bytes": 23,
+        "compiled_sha256": "93c1b9b3edb4d4b3712d422863af5cf04a5b8b9014ae3460f7960fe4661c9fa1",
+        "ownership_kind": "generated_source_data",
+        "stock_occurrences": [
+          {
+            "symbol": "open_cfw_gx8002_gsensor_workstate_message",
+            "package_offset": 82742,
+            "bytes": 23,
+            "sha256": "93c1b9b3edb4d4b3712d422863af5cf04a5b8b9014ae3460f7960fe4661c9fa1",
+            "region": "image_a_xip_text"
+          }
+        ]
+      }
+    ],
+    "source_sha256": "1c9faaa6ad5fdf15bc74da2e138009d56107aa2f50f095d124fbe4d1c279bf9d",
+    "verifier_sha256": "c90440603af9a551194427166d8e17cdb326d9ed07e869e9701e29e84fb26981",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "source_admitted": true,
+    "hardware_qualified": false,
+    "limits": [
+      "Experimental source diagnostic admission only. No board initialization or hardware proof."
+    ]
+  },
+  "formatting": {
+    "decoded_cases": 144,
+    "source_admitted": false,
+    "limits": [
+      "Decoded formatter/integer/padding/putf composition with separate helper memory and translated buffers. Matched stock/source fputc, console and UART wrappers decoded at selected port zero. Each transmit call checked against both decoded transmitter bodies with scripted busy/ready MMIO. Physical UART remains unqualified."
+    ]
+  },
+  "combinations": 144,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Separate accessor/printf frames and translated format pointer. Formatter/UART checked separately with scripted MMIO; before/after state values modeled, lifecycle unqualified."
+  ]
+}

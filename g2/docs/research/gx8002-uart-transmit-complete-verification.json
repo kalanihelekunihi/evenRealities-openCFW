@@ -1,0 +1,48 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_transmit_complete",
+      "compiled_bytes": 32,
+      "compiled_sha256": "9cdc95dd9011964db0001ec2c4191dc7f6515611defa77577ed790e8f336d224",
+      "section_name": ".text",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_transmit_complete",
+          "package_offset": 50768,
+          "bytes": 32,
+          "sha256": "9cdc95dd9011964db0001ec2c4191dc7f6515611defa77577ed790e8f336d224",
+          "region": "image_a_sram_text"
+        }
+      ]
+    }
+  ],
+  "candidate": {
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_uart_transmit_complete",
+        "compiled_bytes": 32,
+        "compiled_sha256": "9cdc95dd9011964db0001ec2c4191dc7f6515611defa77577ed790e8f336d224",
+        "stock_sha256": "9cdc95dd9011964db0001ec2c4191dc7f6515611defa77577ed790e8f336d224",
+        "package_offset": 50768,
+        "envelope_bytes": 32,
+        "fits": true
+      }
+    ],
+    "source_sha256": "84c12edc62273e6dbca2c47c810ca3dfa29962bfb1bb452103bd16276550c5b7",
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Decoded completion ordering and indirect callback arguments need qualification; release and flush dependencies remain separate."
+    ]
+  },
+  "decoded_cases": 48,
+  "evidence_sha256": {
+    "build_gx8002_uart_transmit_complete.py": "69b2cd083434e17f8674c9ca57f47aa958d346746ed202a89999e87f28b85f8d",
+    "verify_gx8002_uart_transmit_complete.py": "ea38c778533f85caaf130e4a006e903b250db8ad216613290a6cccfb0dd76e5a"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Exact original instructions and finite decoded ordering qualification. Release, flush and application callback remain separately qualified dependencies; no physical completion delivery proof."
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "probe": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "headers_sha256": {
+      "lvp/common/uart_message_v2.h": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2",
+      "lvp/common/lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e",
+      "include/driver/gx_uart.h": "570c2b4fd9486a2a56442df5e57f97ce08feab79e6ecfccb87ca57d5bc175c5e"
+    },
+    "upstream_sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+    "probe_sha256": "4750c8464c41771d7a69097363322c66a29449b1963c65d55fb03f04c385e8d1",
+    "compiled_bytes": 480,
+    "analysis_bindings": {
+      "_GetMessageHandle": 270564032,
+      "gx_uart_start_async_recv": 270546572,
+      "gx_uart_stop_async_recv": 270546624,
+      "gx_uart_async_recv_buffer": 270546816,
+      "LvpQueuePut": 268591544,
+      "_UartMessageAsyncRecvCallback": 270565528,
+      "_uartRecvBufferCallback": 270565088,
+      "s_uart_recv_buffer": 537060640,
+      "s_uart_recv_pack_queue": 537062596,
+      "s_uart_msg_regist_array": 537060192
+    },
+    "analysis_address": 271585280,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Linked analysis-only upstream body helper with analysis-only external declarations. Dependency ABI, stock equivalence, placement and whole-callback execution remain unqualified."
+    ]
+  },
+  "decoded_cases": 2592,
+  "coverage": {
+    "async": 608,
+    "restart": 840,
+    "queue": 144,
+    "failure": 1200
+  },
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Continuous stock/upstream body entry-to-return with abstract saved frames and modeled helpers. Finite valid port/buffer states; physical helpers and concurrency unqualified."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "candidate": {
+    "symbol": "open_cfw_gx8002_board_pin_setup",
+    "section_name": ".text",
+    "bindings": {
+      "open_cfw_gx8002_board_pin_configure": 270559196,
+      "open_cfw_gx8002_padmux_set": 270558684,
+      "open_cfw_gx8002_printf": 270560292
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-shrink-wrap"
+    ],
+    "source_sha256": "73b0298433495f255955184c110204fd120330ea1477ad7ea86027d5c1499b40",
+    "compiled_bytes": 132,
+    "compiled_sha256": "3fd7513b1f81793ebcdb3cc54c50c04714bcacc3751fadc11f5f43ebb7423e33",
+    "package_offset": 64936,
+    "stock_envelope_bytes": 132,
+    "stock_sha256": "3fd7513b1f81793ebcdb3cc54c50c04714bcacc3751fadc11f5f43ebb7423e33",
+    "fits": true,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Guard state, helper transactions, ABI and diagnostic source data need qualification."
+    ]
+  },
+  "decoded_cases": 3096,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Finite decoded calls and sum arithmetic with modeled helper returns. Self-branch is the original terminal error loop. Helper composition, shared nested stack, and hardware not qualified."
+  ]
+}

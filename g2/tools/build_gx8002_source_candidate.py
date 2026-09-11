@@ -130,6 +130,23 @@ from verify_gx8002_rtc_isr import verify as verify_rtc_isr
 from verify_gx8002_rtc_start_tick import verify as verify_rtc_start_tick
 from verify_gx8002_rtc_set_tick import verify as verify_rtc_set_tick
 from verify_gx8002_rtc_error import verify as verify_rtc_error
+from verify_gx8002_rtc_init_source import verify as verify_rtc_init_source
+from verify_gx8002_board_pin_source import verify as verify_board_pin_source
+from verify_gx8002_board_pin_setup_source import verify as verify_board_pin_setup_source
+from verify_gx8002_board_pin_initialize_source import verify as verify_board_pin_initialize_source
+from verify_gx8002_board_pin_initialize_error import verify as verify_board_pin_initialize_error
+from verify_gx8002_board_pin_defaults import verify as verify_board_pin_defaults
+from verify_gx8002_gsensor_workstate_source import verify as verify_gsensor_workstate
+from verify_gx8002_channel_lookup_source import verify as verify_channel_lookup
+from verify_gx8002_gsensor_workstate_message import verify as verify_gsensor_workstate_message
+from verify_gx8002_board_pin_setup_error import verify as verify_board_pin_setup_error
+from verify_gx8002_board_pin_error import verify as verify_board_pin_error
+from verify_gx8002_clock_divider import verify as verify_clock_divider
+from verify_gx8002_clock_frequency_source import verify as verify_clock_frequency
+from verify_gx8002_uart_transmit_complete import verify as verify_uart_transmit_complete
+from verify_gx8002_uart_flush import verify as verify_uart_flush
+from verify_gx8002_dma_release import verify as verify_dma_release
+from gx8002_source_tail_data import partition as partition_tail_data
 from verify_gx8002_dcache_clean_range import verify as verify_dcache_clean_range
 from verify_gx8002_snpu_task_cmd_cache_flush import verify as verify_snpu_task_cmd_cache_flush
 from verify_gx8002_start_mode import verify as verify_start_mode
@@ -238,6 +255,7 @@ def compose(stock, replacements):
 def build(prefix, sdk, output):
     output.mkdir(parents=True, exist_ok=True)
     replacements = []
+    tail_allocations = []
     for kind, verifier, artifact, baseline in (
         ('analog', verify_analog, 'runtime_gx8002_analog.o', 'gx8002-analog-source-verification.json'),
         ('csi', verify_csi, 'runtime_gx8002_dcache_enable.o', 'gx8002-csi-source-verification.json'),
@@ -353,6 +371,22 @@ def build(prefix, sdk, output):
         ('rtc-start-tick', verify_rtc_start_tick, 'rtc-start-tick.elf', 'gx8002-rtc-start-tick-verification.json'),
         ('rtc-set-tick', verify_rtc_set_tick, 'rtc-set-tick.elf', 'gx8002-rtc-set-tick-verification.json'),
         ('rtc-error', verify_rtc_error, 'rtc-error.o', 'gx8002-rtc-error-verification.json'),
+        ('rtc-init', verify_rtc_init_source, 'rtc-init.elf', 'gx8002-rtc-init-source-verification.json'),
+        ('board-pin', verify_board_pin_source, 'board-pin.elf', 'gx8002-board-pin-source-verification.json'),
+        ('board-pin-error', verify_board_pin_error, 'board-pin-error.o', 'gx8002-board-pin-error-verification.json'),
+        ('board-pin-setup', verify_board_pin_setup_source, 'board-pin-setup.elf', 'gx8002-board-pin-setup-source-verification.json'),
+        ('board-pin-setup-error', verify_board_pin_setup_error, 'board-pin-setup-error.o', 'gx8002-board-pin-setup-error-verification.json'),
+        ('board-pin-initialize', verify_board_pin_initialize_source, 'board-pin-initialize.elf', 'gx8002-board-pin-initialize-source-verification.json'),
+        ('board-pin-initialize-error', verify_board_pin_initialize_error, 'board-pin-initialize-error.o', 'gx8002-board-pin-initialize-error-verification.json'),
+        ('board-pin-defaults', verify_board_pin_defaults, 'board-pin-defaults.o', 'gx8002-board-pin-defaults-verification.json'),
+        ('gsensor-workstate', verify_gsensor_workstate, 'gsensor-workstate.elf', 'gx8002-gsensor-workstate-source-verification.json'),
+        ('channel-lookup', verify_channel_lookup, 'channel-lookup.elf', 'gx8002-channel-lookup-source-verification.json'),
+        ('gsensor-workstate-message', verify_gsensor_workstate_message, 'gsensor-workstate-message.o', 'gx8002-gsensor-workstate-message-verification.json'),
+        ('clock-divider', verify_clock_divider, 'clock-divider.elf', 'gx8002-clock-divider-verification.json'),
+        ('clock-frequency', verify_clock_frequency, 'clock-frequency.elf', 'gx8002-clock-frequency-source-verification.json'),
+        ('uart-transmit-complete', verify_uart_transmit_complete, 'complete.elf', 'gx8002-uart-transmit-complete-verification.json'),
+        ('uart-flush', verify_uart_flush, 'flush.elf', 'gx8002-uart-flush-verification.json'),
+        ('dma-release', verify_dma_release, 'release.elf', 'gx8002-dma-release-verification.json'),
         ('trigger', verify_trigger, 'setter.elf', 'gx8002-trigger-event-verification.json'),
         ('queue_put', verify_put, 'queue-size.o', 'gx8002-queue-put-comparison.json'),
         ('queue_get', verify_get, 'queue-size.o', 'gx8002-queue-get-comparison.json'),
@@ -368,6 +402,14 @@ def build(prefix, sdk, output):
         report = verifier(prefix, sdk, directory)
         reviewed = json.loads((ROOT / 'docs/research' / baseline).read_text())
         replacements += reviewed_replacements(report, reviewed, directory / artifact, kind)
+        if 'tail_allocation' in report:
+            tail_allocations.append(report['tail_allocation'])
+    for allocation in tail_allocations:
+        data_rows=[r for r in replacements if r['symbol']==allocation['data_symbol']]
+        if len(data_rows)!=1:raise ValueError('Source tail allocation must identify one data section')
+        data=data_rows[0]
+        replacements=partition_tail_data(IMAGE.read_bytes(),[r for r in replacements if r is not data],data,
+            allocation['host_symbol'],allocation['host_stock_sha256'])
     firmware, ownership, totals = compose(IMAGE.read_bytes(), replacements)
     path = output / 'firmware_codec.hybrid-candidate.bin'
     path.write_bytes(firmware)

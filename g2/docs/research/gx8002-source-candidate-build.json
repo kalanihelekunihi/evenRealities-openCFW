@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
   "firmware_size": 326092,
-  "firmware_sha256": "8e1467f51789e731a4367ce10dbd3ce10bee8f510226aa7556d7d0368fc29670",
+  "firmware_sha256": "26da0f0d9fe13d659128ba11b07288ee32d940e21208efe9cbc82c92d7abdab6",
   "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
   "source_only": false,
   "hardware_qualified": false,
-  "source_replacement_occurrences": 262,
+  "source_replacement_occurrences": 284,
   "byte_ownership": {
-    "compiled_c": 13396,
+    "compiled_c": 14416,
     "compiled_assembly": 156,
-    "generated_source_data": 2854,
+    "generated_source_data": 3113,
     "generated_container_metadata": 80,
-    "generated_unreachable_fill": 724,
-    "retained_stock": 308882
+    "generated_unreachable_fill": 712,
+    "retained_stock": 307615
   },
   "ownership": [
     {
@@ -34,7 +34,19 @@
     },
     {
       "offset": 12804,
-      "size": 38356,
+      "size": 37964,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 50768,
+      "size": 32,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_uart_transmit_complete",
+      "sha256": "9cdc95dd9011964db0001ec2c4191dc7f6515611defa77577ed790e8f336d224"
+    },
+    {
+      "offset": 50800,
+      "size": 360,
       "kind": "retained_stock"
     },
     {
@@ -52,8 +64,21 @@
     },
     {
       "offset": 51180,
-      "size": 852,
+      "size": 824,
       "kind": "retained_stock"
+    },
+    {
+      "offset": 52004,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_uart_flush",
+      "sha256": "a6860d1ed6f56fbe6a4d3af2d018380a2f5a723b26e7d0a4de9ff6552c6b03e1"
+    },
+    {
+      "offset": 52028,
+      "size": 4,
+      "kind": "generated_unreachable_fill",
+      "symbol": "open_cfw_gx8002_uart_flush"
     },
     {
       "offset": 52032,
@@ -76,7 +101,19 @@
     },
     {
       "offset": 52624,
-      "size": 1136,
+      "size": 820,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 53444,
+      "size": 8,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_dma_release",
+      "sha256": "a88262c0eff797a3425044f38b2fd2c7c3c5fdb25d1b8230d19dcaf6d7f62031"
+    },
+    {
+      "offset": 53452,
+      "size": 308,
       "kind": "retained_stock"
     },
     {
@@ -897,8 +934,31 @@
     },
     {
       "offset": 64524,
-      "size": 132,
-      "kind": "retained_stock"
+      "size": 32,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_rtc_isr",
+      "sha256": "bb8cc0ade6891953872ceac15f1136faeccead9c79c3cb6b063768ee19f1d6c6"
+    },
+    {
+      "offset": 64556,
+      "size": 16,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_rtc_start_tick",
+      "sha256": "16405b6c894e37098adac09e9cb167e68b623eee1c3a6a91afd6cee9a3ae67a3"
+    },
+    {
+      "offset": 64572,
+      "size": 12,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_rtc_set_tick",
+      "sha256": "a20e6d50e2e45f1f0edb4b1eca5b44447e26f603db47133512d71800702874f1"
+    },
+    {
+      "offset": 64584,
+      "size": 72,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_rtc_init",
+      "sha256": "11777e797c3c28ba130d614ea61f7cc19ce41c7e7283381f300bf9a4b94f191d"
     },
     {
       "offset": 64656,
@@ -942,8 +1002,31 @@
     },
     {
       "offset": 64872,
-      "size": 324,
-      "kind": "retained_stock"
+      "size": 64,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_board_pin_configure",
+      "sha256": "6c5c9b7ec5b369538be6624e57d6241c329d07d1a68a35e865014427f9502024"
+    },
+    {
+      "offset": 64936,
+      "size": 132,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_board_pin_setup",
+      "sha256": "3fd7513b1f81793ebcdb3cc54c50c04714bcacc3751fadc11f5f43ebb7423e33"
+    },
+    {
+      "offset": 65068,
+      "size": 104,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_board_pin_initialize",
+      "sha256": "55cfa58578b79d4a14bb295ac596892a8a9cd304edbbc7d5d9060578f5f36753"
+    },
+    {
+      "offset": 65172,
+      "size": 24,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_gsensor_workstate",
+      "sha256": "5958f04bbdc085d13ecf4acd54c19e8e6fbe6d4c1f58f6b20378231db3de1caa"
     },
     {
       "offset": 65196,
@@ -1116,7 +1199,19 @@
     },
     {
       "offset": 68860,
-      "size": 3012,
+      "size": 848,
+      "kind": "retained_stock"
+    },
+    {
+      "offset": 69708,
+      "size": 28,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_channel_lookup",
+      "sha256": "6bfc14e2268d8a026582d4f40694583902020dd40126f5d1bbfa60033f48e4e9"
+    },
+    {
+      "offset": 69736,
+      "size": 2136,
       "kind": "retained_stock"
     },
     {
@@ -1510,7 +1605,9 @@
     {
       "offset": 82576,
       "size": 22,
-      "kind": "retained_stock"
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_rtc_error",
+      "sha256": "865a19599fbc16a0f2697c6930b2524eacd3a5a7c0ac702f945af254ec33390b"
     },
     {
       "offset": 82598,
@@ -1521,7 +1618,42 @@
     },
     {
       "offset": 82620,
-      "size": 1101,
+      "size": 26,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_board_pin_defaults",
+      "sha256": "dbba8b7181274bb6b00ff03b26b745499ec6957c9230cb7e6a73beb95569bb82"
+    },
+    {
+      "offset": 82646,
+      "size": 28,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_board_pin_error",
+      "sha256": "71bfe2007fc6aacd60af3d21a6294613e1c4a1b2dd18206c78a876343a8ba44a"
+    },
+    {
+      "offset": 82674,
+      "size": 49,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_board_pin_setup_error",
+      "sha256": "09515aa83a78b193605821f7640762f52ddfa987e49c8812869cbe4b93520b12"
+    },
+    {
+      "offset": 82723,
+      "size": 19,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_board_pin_initialize_error",
+      "sha256": "fc3593e36a7a9cd7d4808b060ce2860d460fcbc907880c78dbe900908bd2898f"
+    },
+    {
+      "offset": 82742,
+      "size": 23,
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_gsensor_workstate_message",
+      "sha256": "93c1b9b3edb4d4b3712d422863af5cf04a5b8b9014ae3460f7960fe4661c9fa1"
+    },
+    {
+      "offset": 82765,
+      "size": 956,
       "kind": "retained_stock"
     },
     {
@@ -2250,7 +2382,14 @@
     },
     {
       "offset": 92924,
-      "size": 1432,
+      "size": 28,
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_clock_divider",
+      "sha256": "c6f8b015db32d4bba236e3c4e2f9b57eec0c158deda80bc3f08d982e6c3c3592"
+    },
+    {
+      "offset": 92952,
+      "size": 1404,
       "kind": "retained_stock"
     },
     {
@@ -2281,7 +2420,9 @@
     {
       "offset": 94756,
       "size": 444,
-      "kind": "retained_stock"
+      "kind": "compiled_c",
+      "symbol": "open_cfw_gx8002_clock_frequency",
+      "sha256": "faeb5d9704c0b819ba774c4a215813cf7af49b4dfa225b62cfae3b256b51f52f"
     },
     {
       "offset": 95200,
@@ -2293,7 +2434,9 @@
     {
       "offset": 95348,
       "size": 76,
-      "kind": "retained_stock"
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_clock_frequency_dispatch",
+      "sha256": "2492e3fefedbde3edfabbb970efe25f63056ddbb8e924686e8dfff562da28645"
     },
     {
       "offset": 95424,
@@ -2465,8 +2608,9 @@
     {
       "offset": 97868,
       "size": 16,
-      "kind": "generated_unreachable_fill",
-      "symbol": "open_cfw_gx8002_platform_config"
+      "kind": "generated_source_data",
+      "symbol": "open_cfw_gx8002_clock_subband_hz",
+      "sha256": "09c9c22a46cf6b831d62d6ae88946b79696dbc30cfb8f54aecc14bf81e3cc0a4"
     },
     {
       "offset": 97884,

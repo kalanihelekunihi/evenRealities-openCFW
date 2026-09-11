@@ -1,0 +1,55 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "headers": {
+      "include/driver/gx_padmux.h": {
+        "blob": "4d7aaa315665a24dc55d77c0bf7b3c285d7358b8",
+        "sha256": "ed2dfbb290aa634bca68dc536583ac7a24994fb9b9f73165dc00ba453ea631d2"
+      },
+      "include/driver/gx_gpio.h": {
+        "blob": "b32734abd5371a24a0e5050ce6825a62795333fe",
+        "sha256": "b6a97ac029e6e1f3d3829789678fea1ce5563685228c6d992bfc687a88fb64cf"
+      }
+    },
+    "symbol": "open_cfw_gx8002_board_pin_initialize",
+    "section_name": ".text",
+    "bindings": {
+      "open_cfw_gx8002_padmux_init": 270558768,
+      "open_cfw_gx8002_padmux_check": 270558648,
+      "open_cfw_gx8002_gpio_set_direction": 270556964,
+      "open_cfw_gx8002_printf": 270560292,
+      "open_cfw_gx8002_board_pin_setup": 270559260
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-shrink-wrap"
+    ],
+    "source_sha256": "8c3606464ed55720d34e6730235827b729051848cdace007bd9d99023e26bc27",
+    "compiled_bytes": 104,
+    "compiled_sha256": "55cfa58578b79d4a14bb295ac596892a8a9cd304edbbc7d5d9060578f5f36753",
+    "package_offset": 65068,
+    "stock_envelope_bytes": 104,
+    "stock_sha256": "020b8fb5b2d7ad9c8d67731bae760cb0910d9dad03d6816d5bcc0967af9418b0",
+    "fits": true,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Guard state, helper transactions, ABI and diagnostic source data need qualification."
+    ]
+  },
+  "combinations": 24,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded initializer/GPIO direction with shared scripted register words. Other helpers modeled, separate frames; physical pin behavior not qualified."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "stock_code_start": 70264,
+  "stock_code_end": 70744,
+  "stock_code_sha256": "5a689e46992c7f5828d8a054534bee014d42363ab4cb55dfe3deb130c0da6e17",
+  "candidate_bindings": {
+    "_GetMessageHandle": 270564032,
+    "gx_uart_start_async_recv": 270546572,
+    "gx_uart_stop_async_recv": 270546624,
+    "gx_uart_async_recv_buffer": 270546816,
+    "LvpQueuePut": 268591544,
+    "_UartMessageAsyncRecvCallback": 270565528,
+    "_uartRecvBufferCallback": 270565088,
+    "s_uart_recv_buffer": 537060640,
+    "s_uart_recv_pack_queue": 537062596
+  },
+  "body_counter_base": 537060184,
+  "source_admitted": false,
+  "limits": [
+    "Bindings inferred from stock calls and matching upstream control flow; called routine behavior still needs qualification. Allocation preparation appears inlined and has no binding here."
+  ]
+}
