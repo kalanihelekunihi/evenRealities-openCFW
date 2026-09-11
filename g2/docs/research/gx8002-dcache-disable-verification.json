@@ -1,0 +1,50 @@
+{
+  "symbol": "gx_dcache_disable",
+  "section_name": ".text.gx_dcache_disable",
+  "ownership_kind": "compiled_assembly",
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "source_sha256": "51d9227790290177116be6c9eafeab0bcd159751d4c2c1552adf91fceefaf318",
+  "compile_flags": [
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "compiled_bytes": 36,
+  "compiled_sha256": "e17a4bb8faafbdd211d36925d2b433f72472eabccc616300140aa1d3f1ac8a12",
+  "stock_occurrences": [
+    {
+      "object": "drivers_lib/cache/gx_dcache.o",
+      "symbol": "gx_dcache_disable",
+      "bytes": 36,
+      "package_offset": 12804,
+      "region": "boot_stage2",
+      "sha256": "e17a4bb8faafbdd211d36925d2b433f72472eabccc616300140aa1d3f1ac8a12"
+    },
+    {
+      "object": "drivers_lib/cache/gx_dcache.o",
+      "symbol": "gx_dcache_disable",
+      "bytes": 36,
+      "package_offset": 95736,
+      "region": "image_a_sram_text",
+      "sha256": "e17a4bb8faafbdd211d36925d2b433f72472eabccc616300140aa1d3f1ac8a12"
+    },
+    {
+      "object": "drivers_lib/cache/gx_dcache.o",
+      "symbol": "gx_dcache_disable",
+      "bytes": 36,
+      "package_offset": 251636,
+      "region": "image_b_sram_text",
+      "sha256": "e17a4bb8faafbdd211d36925d2b433f72472eabccc616300140aa1d3f1ac8a12"
+    }
+  ],
+  "firmware_bytes_emitted": 0,
+  "production_source_admitted": false,
+  "hardware_qualified": false
+}

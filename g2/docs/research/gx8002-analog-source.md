@@ -58,6 +58,43 @@ instructions, unexpected addresses, missing returns, relocations, and changed
 function inventories fail closed. Separate host C tests exercise all seven
 functions against decoded register-transfer expectations.
 
+## LDO analog voltage: a second object, pinned as assembly (CD-004)
+
+`drivers_lib/analog/ldo.o` is a separate NationalChip SDK object from the
+`adc.o` leaves above; the whole-image upstream-object scan
+(`analyze_gx8002_upstream_objects.py`) found exactly one of its fifteen
+functions with a byte-exact stock occurrence inside this repository's
+current work scope: `gx_analog_set_ldo_ana_voltage`. It has a sentinel input
+(`UINT32_MAX` means "leave the register unchanged", returned as-is rather
+than the usual zero success code), then merges the low nibble of the voltage
+argument into the upper nibble of the control byte at `0xA0005054` and writes
+it back.
+
+As with `gx_dcache_disable`, the pinned toolchain's C lowering of that
+mask/OR/narrow sequence chooses a different destination register than the
+stock object (it accumulates the merged byte in `r3` and stores from `r3`;
+stock accumulates in `r0` and stores from `r0`), even though the mask
+constant itself lowers identically (`andi ..., 240`). Fighting the register
+allocator through C rewrites did not converge, so
+`runtime_gx8002_analog_ldo.c` pins the reviewed algorithm as inline assembly,
+matching the pattern used for `gx_dcache_disable`. `verify_gx8002_analog_ldo.py`
+authenticates the compiled result against the pinned SDK's `ldo.o` byte for
+byte, then differentially checks 144 boundary-value `(voltage, previous)`
+pairs against the decoded stock instruction stream (mirroring the
+`adc.o` restricted interpreter's approach, extended with `cmpne`/`bf`/`subi`
+for the sentinel branch this leaf needs).
+
+The resulting 32-byte section exactly matches the stock object at two package
+offsets: 17,496 (boot stage 2 IRAM, the span this closes part of for work
+item CD-004) and 91,908 (image A SRAM). There are no relocations or undefined
+symbols. `make -C g2 gx8002-source-candidate` now routes both occurrences as
+`compiled_assembly`. The other fourteen `ldo.o` leaves
+(`gx_analog_set_ldo_fla_*`, `gx_analog_set_ldo_dig_*`,
+`gx_analog_get_ldo_*`, `gx_analog_set_ldo_ana_ctrl`, ...) have no byte-exact
+occurrence inside this item's target range and are out of scope here; a
+future tranche can extend this file's coverage the same way if a
+byte-exact occurrence for one of them is found.
+
 This is finite differential testing and manual leaf review, not a complete
 C-SKY emulator or an all-input proof. Startup, call-site boundaries, interrupts,
 whole-image placement and actual hardware behavior remain unqualified. The

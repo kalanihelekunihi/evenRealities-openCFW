@@ -10780,3 +10780,663 @@ No hardware operation was performed. Physical qualification is explicitly
 blocked by unavailable evidence: an authorized G2 panel trace must confirm the
 recovered root, frame, flex layout, image, and both localized labels. Broader
 firmware-wide source completeness is not claimed.
+
+## 2026-09-11 — CD-001 UART boot stage-one decode pass (no bytes reclassified)
+
+Investigated work item CD-001 (codec, package `0x50..0x2050`, 8,192 B, IRAM
+`0x10000000..0x10002000`, part of the region Wave 6 closed as a typed
+external boundary via `runtime_gx8002_uart_boot_stage1_boundary.c`). This
+pass is analysis-only; `bytes_source_owned = 0` and no ownership entry moves.
+
+Found that plain `-b binary` disassembly of this span (and, per the Wave 6/7
+audits' wording, likely of earlier stage-one attempts) mis-decodes CK804EF
+abiv2 instructions because the raw-binary objdump target carries no ELF
+`e_flags`; the fix already used by ~30 other `compare_gx8002_*`/
+`build_gx8002_*_candidate` tools (wrap via `objcopy -B csky`, patch `e_flags`
+to `0x21006009`) applies here too and yields a readable decode. With it: the
+first 256 bytes are a standard 64-word CK804EF vector table (reset entry
+`0x10000100`, one shared trap target, one shared IRQ target); the reset
+prologue matches `runtime_gx8002_reset_entry.S` instruction-for-instruction;
+a called subroutine at `0x1000013c` (three call sites) is an unsigned
+32-bit divide, with a structurally parallel remainder routine at
+`0x10000180`, both distinct from this toolchain's libgcc `__udivsi3`; they
+feed a UART baud-divisor calculation that resembles the already-reconstructed
+`runtime_gx8002_uart_configure.c`/`clock_frequency.c`/`channel_lookup.c`
+shape, suggesting stage one may share source with the main runtime driver
+tree (`build/upstream-nationalchip-lvp-kws/uart_boot.mk`'s reduced Kconfig)
+rather than being bespoke. The reset handler's second call target decodes to
+`0x10002900`, 256 bytes past the pinned 10,240-byte stage-one body — read as
+a chain-load into stage two's post-vector-table entry (CD-003's region
+starts at `0x10002800`), not a decode error.
+
+None of this is compiled, linked, or run through the decoded-instruction
+execute()-comparison harness this codebase uses to qualify GX8002 routines
+(see `verify_gx8002_uart_configure.py`), so per the hard rules it is not
+treated as source-owned. Full findings, exact reproduction commands, and
+concrete next steps (build an execute() interpreter for the opcodes found
+here, test the shared-driver-source hypothesis, resolve the stage-two
+hand-off address, coordinate with CD-002 which covers the remaining
+`0x10002000..0x10002800` of the same official region) are in
+`docs/research/gx8002-uart-boot-stage1-cd001-analysis.md`.
+
+No source landed, no build/manifest/overlay changed, no hardware accessed.
+
+## 2026-09-11 — Completion-readiness/license-policy census drift fixed (XC-002)
+
+`make -C g2 completion-readiness` was failing closed on two unrelated census
+drifts caused by legitimately landed GX8002 and Touch source-image work from
+the concurrently running fleet, not by any real regression:
+
+* `analyze_g2_production_raw_encoding_quality.py`'s directive regex matched
+  C99 designated-initializer/member-access syntax (`{.word = x}`) as if it
+  were a GNU-assembler `.word` directive. Tightened to exclude anything
+  followed by `=`; added a regression test. Two new GX8002 register-access
+  files (`runtime_gx8002_i2s.c`, `runtime_gx8002_vad_curves.c`) now census
+  clean with zero raw-instruction bytes, as they always were.
+* `analyze_g2_project_license_normalization.py`'s community-controller and
+  Touch-source-image censuses were missing 175 newly landed, already-MIT GX8002
+  files and one new Touch NVIC header. Registered them in the hand-maintained
+  manifests and repinned the four dependent counts
+  (`EXPECTED_COMMUNITY_CONTROLLER_PROJECT_PATH_COUNT` 109→284,
+  `EXPECTED_TOUCH_SOURCE_IMAGE_PROJECT_PATH_COUNT` 9→10,
+  `EXPECTED_DISTRIBUTED_TARGET_COUNT` 919→1095). A third drift (Case
+  source-image, `board_config.h`) appeared live during re-verification and got
+  the same treatment (`EXPECTED_CASE_SOURCE_IMAGE_PROJECT_PATH_COUNT` 7→8,
+  `EXPECTED_DISTRIBUTED_TARGET_COUNT` 1095→1096). All 16
+  `test_analyze_g2_project_license_normalization` cases and the tool itself
+  now run clean.
+
+`tools/transparent/reviewed_sources.json` was checked and found still
+accurate (no AM item has landed reviewed, production-routed C yet this fleet
+run). `make -C g2 completion-readiness` still fails on one unrelated,
+Touch-owned check (`_touch_generation_receipt`, pinning
+`components/touch/source_image/startup.c`) that a different concurrently
+running item is actively editing; that item's own generator, not this one,
+must re-pin it. `docs/reports/.../assessment-data.json` and
+`docs/transparent-source-ledger.md` regeneration were deferred for the same
+reason — the latter also because `XC-004` is concurrently regenerating the
+same `build/transparent/` pipeline output. See
+`docs/research/tooling-completion-readiness-truthfulness.md` for the full
+account. No hardware operation was performed; this item has no flash-range
+component.
+
+## 2026-09-11 — Charging-case typed_external_or_unsupported byte accounting
+
+The case component's 40,866-byte `typed_external_or_unsupported` whole-blob
+bucket (`g2-case-final-classification.md`) is now reconciled against the
+independent, earlier `g2-box-stm32g0-platform-recovery.md` island map and
+sub-typed by content into one authoritative, non-overlapping accounting of
+every byte in `0x08000000..0x0800D9C8`: 1,104 bytes are evidence-anchored
+upstream/first-party platform islands, 2,120 bytes are the already-typed
+final-frontier inter-function gaps, 428 bytes are unambiguous zero/0xFF fill,
+7,826 bytes are genuine, legible debug/log strings (`Set SN:`, `1.2.57`,
+`%s reset GLS`, the `{"vol":%d,...}` JSON status template, and the full
+`[OTA_BOX]`/`[AGING_*]` corpus), and 29,388 bytes remain undifferentiated
+`residual_unresolved_code_or_data`. The two prior records disagreed at 162
+bytes (a final-frontier function and a platform island both claiming the same
+address); admitted-function evidence wins those ties. See
+`docs/research/g2-case-byte-accounting-closure.md`.
+
+This is accounting, not source ownership: zero bytes moved from
+`typed_external_or_unsupported` into `project_source_candidate`, and
+`production_routed` remains `false`. The debug/log strings and the two
+first-party data tables are understood but not yet source-authored — the
+case component has no logging/formatting module to route them into yet, and
+most log strings have no pointer literal (consistent with an indexed
+`compress_log` scheme whose ID encoding is still unresolved), so adding them
+now would be inert, unrouted data. The case updater's preserved per-device SN
+identity windows are confirmed absent from this range entirely (they live at
+`0x0803F000+`/`0x0807F000+`, beyond the 55,752-byte application image); there
+is nothing to reconstruct or divergence-document for identity windows here.
+The source image's current 18,916-byte layout intentionally does not match
+the stock 55,752-byte layout address-for-address (independent clean-room
+compilation plus 29,388 still-unmapped bytes make byte-exact placement
+either meaningless or a route back to copying stock bytes); this divergence
+is now explicitly documented rather than silently accepted.
+
+No hardware operation was performed or implied. Follow-up: resolve the
+`compress_log` ID scheme to route the string corpus; run a full Ghidra
+function map over `residual_unresolved_code_or_data`; production-route the
+222 already-admitted functions (tracked separately, in progress).
+
+## 2026-09-11 — Touch residual NOP-padding independent reconstruction (TC-002)
+
+Two rows of the Touch 19,442-byte `typed_external_or_unsupported` complement
+(`g2-touch-final-physical-byte-buckets.tsv`) were pinned as
+"reconstructible semantics; stock authority unresolved" but never actually
+reconstructed: `typed_code_residual_arch_nop_padding` (8 bytes, scattered
+Thumb `NOP`/0xBF00 halfwords) and `typed_code_residual_legacy_nop_padding`
+(126 bytes, scattered legacy `MOV r8, r8`/0x46C0 halfwords). A new verifier,
+`tools/verify_g2_touch_nop_padding_reconstruction.py`
+(`tests.test_g2_touch_nop_padding_reconstruction`, 3 tests, all passing),
+assembles both canonical instructions with the project's ARMv6-M clang
+toolchain, tiles the compiled encodings to the pinned byte counts, and
+requires the resulting SHA-256 to equal the digest already pinned for the
+authenticated stock bytes at those addresses. Both match exactly:
+`0fbf3781a9...` (arch) and `ce9feda3ce...` (legacy). See
+`docs/research/g2-touch-nop-padding-reconstruction.md`.
+
+This is an independent reconstruction proof layered on the existing pin, not
+a bucket relabel: zero bytes moved from `typed_external_or_unsupported` to
+`project_source_candidate`, the 19,442-byte total is unchanged, and
+`production_routed` stays `false` for all 134 bytes — the source-built Touch
+candidate (`components/touch/source_image`, being routed separately under
+`TC-001`) is a freestanding link with its own layout, not an address-matched
+replacement of the stock image, so there is nowhere to place these two
+specific halfword patterns at their stock addresses yet. The remaining
+19,308 bytes of the complement (7,000 B Infineon CapSense/CAT2 mixed
+provider, 6,686 B owner-unresolved CFG, 1,924 B literal pools tied to that
+unowned code, 192 B vector table, 1,756 B resident configuration/tuning
+tables, 1,640 B retained log/product strings, and 110 B of smaller
+NOASSERTION residuals) are untouched and stay licensing-, ownership-, or
+hardware-resident-blocked as previously documented; reproducing the literal
+log/product strings verbatim would be copying shipped bytes, not
+reconstructing them, so they are deliberately left typed/retained rather
+than encoded as source. No hardware operation was performed. This item
+(`TC-002`) remains open; see the research doc's "What this does and does not
+close" section for the itemized remainder.
+
+## 2026-09-11 — Touch source image production routing and NVIC configuration (TC-001)
+
+The existing 31-translation-unit clean-room Touch source image
+(`components/touch/source_image`, shared runtime in
+`components/shared/touch`) is now production-routed: a new manifest
+profile, `manifests/g2-2.2.6.10-touch-source-experimental.json` (same
+`component_overrides` shape as `g2-2.2.6.10-codec-source-experimental.json`
+and `g2-2.2.6.10-ring-source.json`), overrides the `touch` component from
+`official_blob` to `source_build`, pins the built FWPK's size/SHA-256, marks
+the `touch_application` region `source_compiled`, and pins a deterministic
+assembled-package size/SHA-256. A new `make touch-source-experimental`
+target builds the source image, then runs `tools/open_cfw.py build` and
+`verify-artifacts` against the profile. New tests
+(`tests.test_touch_source_manifest_routing`) confirm the override actually
+takes effect, every other component stays untouched, and the assembled
+package is byte-for-byte reproducible.
+
+The image's own NVIC vector-slot assumptions are now explicit, documented,
+tested configuration rather than a prose hardware blocker. A new header,
+`components/touch/source_image/psoc4000t_nvic.h`, names every PSoC 4000T
+external IRQ with its `psoc4000t.svd`-assigned number — the same public
+ordering `g2-touch-identity-recovery.md` already cross-checked against the
+shipped vector-table shape to identify the part, so the assignment is
+silicon configuration, not something read out of firmware bytes.
+`startup.c`'s vector table is now built from these names via designated
+initializers and resized from an unexplained 48-entry array down to the 29
+entries (16 core + 13 documented external IRQs) the part actually has, a
+76-byte raw-image reduction. `SCB1_IRQHandler`, `MSCLP_LP_IRQHandler`, and
+`MSCLP_IRQHandler` stay empty ISRs — only the *slot assignment* was a
+resolvable non-blocker; the runtime peripheral MMIO *behavior* those
+handlers would need on real hardware is still genuinely hardware-blocked.
+New tests (`tests.test_runtime_touch_nvic_config`) pin both the header's
+enum values (by parsing, no compiler needed) and the linked ELF's actual
+vector table (named handler at the right index, everything else at
+`Default_Handler`, reserved core slots zero, array size matching the
+documented shape).
+
+This item does not touch the separate byte-exact stock-image decompilation
+closure tracked by the other `g2-touch-*` research audits (still open, per
+`g2-touch-software-readiness-ledger.md`), and does not claim any hardware
+qualification: `hardware_validation` stays `"blocked by unavailable
+physical evidence"` throughout. See
+`docs/research/g2-touch-source-image-production-routing.md`.
+
+## 2026-09-11 — GX8002 command-stream generator infrastructure
+
+Added `tools/gxdnn_command_emitter.py`, a source-authored assembler/
+disassembler for the gxDNN command-stream wire format already decoded
+read-only in `gx8002-gxdnn-cmodel.md`/`analyze_gx8002_model_command_chain.py`:
+base-slot/offset addressing, sequential/linked header framing with the
+completion-interrupt bit, and full named-field encode/decode for the three
+completely-understood opcode-1 subtypes (`copy`, `tensor_vector`,
+`tensor_tensor`), including their arithmetic selector. Every other opcode
+and subtype round-trips as an explicitly opaque `RawCommand` rather than
+being invented. `tools/gxdnn_quantize.py` adds a half-precision quantizer
+reusing the already-authenticated IEEE754 binary16 codec.
+
+While building the encoder, three previously-unexported payload fields were
+checked across all 212 shipped commands and found to be exactly zero in
+every one of the 152 `copy`/`tensor_vector`/`tensor_tensor` instances; the
+codec now treats them as reserved-must-be-zero and fails closed if that ever
+changes. Header bits 8-9 vary with no explanation and are preserved verbatim
+via an explicit `header_reserved` field rather than being dropped.
+
+22 new host tests cover address/extent/command round-trips, rejection of
+invalid encodings, a randomized 50-command synthetic program, and half-float
+quantization. One test authenticates the firmware image and the shipped
+9,164-byte command block by the pinned SHA-256 hashes, decodes it with this
+module, and re-encodes it byte-for-byte identical to the original — an
+encoder fidelity check against the real oracle, not a claim that the shipped
+graph is source-owned.
+
+This does not close the codec's 9,164 accelerator-command or 120,800 model
+bytes: six of nine opcode-1 subtypes and all four non-opcode-1 command types
+remain fully opaque, no trained replacement model or ground-truth wake-word
+label exists, and no gxDNN functional interpreter exists to qualify one.
+Nothing here touches the codec build, `overlay.json`, or any manifest. See
+`docs/research/gx8002-command-emitter-generator.md`.
+
+## 2026-09-11 — Documentation re-pin sweep (XC-008)
+
+Diffed the current committed content of the four SHA-256-pinned reference
+docs (`docs/source-coverage.md`, `docs/memory-map.md`,
+`docs/upstream-inventory.md`, `docs/linux-reproducible-build.md`) against
+their `STAGED_CONSUMER_PINS` entries in
+`tests/test_runtime_nanopb_decode_svarint_production.py`. Found one stale
+pin: `docs/linux-reproducible-build.md` was edited by commit `d794c28e`
+(benign scratch-directory rename in its worked examples, internally
+consistent) without a matching pin update, so
+`test_production_runtime_and_overlay_contract_is_exact` had been failing
+closed independent of any per-item agent's own changes. Re-pinned the
+digest to the document's actual current SHA-256; no prose content in any of
+the four docs was changed. The other three docs already matched their pins.
+
+Reran both documented pin-check paths
+(`tests.test_runtime_nanopb_decode_svarint_production`,
+`tests.test_runtime_nanopb_decode_varint32_production`) to confirm the fix
+and to look for further drift. None found in the four-doc pin surface.
+Two unrelated pre-existing failures were observed and left alone as
+outside this item's scope: a local Xcode `clang-2100.3.34.2` vs. pinned
+`clang-2100.3.33.1` toolchain-identity mismatch, and two newly landed,
+uncommitted manifests (`g2-2.2.6.10-source-only.json`,
+`g2-2.2.6.10-touch-source-experimental.json`) not yet registered in
+`ACTIVE_PRODUCTION_SURFACES` — both belong to their landing items, not to
+the four-doc pin sweep. See
+`docs/research/tooling-doc-pin-resync.md`.
+
+## 2026-09-11 — BL-009 bootloader gap census (no bytes closed)
+
+Re-verified all 25 `official_blob` spans BL-009 assigns in
+`0x0042B9BA..0x00430470` (5,978 bytes) against a freshly rebuilt
+`flash-plan.json`: still fully retained, none claimed by other landed or
+in-progress work. Disassembled every span (Capstone Thumb/M-class) instead
+of taking the work item's prose labels at face value, and found the mix is
+not what "literal/alignment gap" implies everywhere: seven spans (≈4,556
+bytes) are real executable Cortex-M55 functions, sixteen (≈1,166 bytes) are
+non-code data of varying clarity, and only two (4 bytes total, both `00 00`)
+are unambiguous zero-fill alignment.
+
+Landed nothing in `overlay.json`, `build_component.py`, or any manifest —
+took no integration lock. Two blocking findings ruled out a defensible
+close this pass: (1) the code spans need the same disassembly-anchored,
+differentially-tested reconstruction rigor as the 198 functions already
+landed in this overlay, with the three largest (1,078B / 650B / 2,854B)
+each comparable in size to a full BL-xxx item on their own; (2) five of the
+seven code spans call, and the one clear 192-byte pointer table
+(`0x0042E104`) mostly targets, addresses inside two much larger ranges that
+are themselves still fully opaque and already claimed by sibling work in
+progress — `0x0041B862..0x0041F918` (BL-005) and
+`0x004329D2..0x00434477` (BL-012, with neighbor BL-011 also in progress).
+Writing the pointer table's literal values today would be mechanical but
+would still route into retained bytes, which the goal text explicitly
+excludes from completion.
+
+Full per-span classification, evidence, and a recommendation to resequence
+BL-009 after BL-005/BL-012 land is in
+`docs/research/g2-bootloader-gap-census-42b9ba-430470.md`. No signing,
+flashing, reset, or other hardware operation occurred.
+
+## 2026-09-11 — CD-002 codec UART-boot stage-1 data tail (no bytes closed)
+
+Investigated the 2,048-byte CD-002 range (package `0x2050..0x2850`, runtime
+`0x10002000..0x10002800`, the tail of the 10,240-byte UART-boot stage-1
+IRAM blob). Re-verified it is still one `retained_stock` block against a
+freshly rebuilt `flash-plan.json` and `gx8002-source-candidate-build.json`;
+nothing else has claimed it.
+
+Disassembly shows the range is data, not instructions (87.5% zero bytes,
+the rest a small record table and an MMIO-address-shaped table), and the
+linker script in the already-pinned public NationalChip `grus` SDK
+(`arch/soc/grus/link.ld`, `SDK_COMMIT` `8bf9ee5c...`) scopes exactly this
+kind of stage-1 `.data` to a small object list (`spl_start.S` +
+`arch/soc/grus/spl/*.c` + a board's `boot_board.c`). One value in the range
+is a non-coincidental, exact match for that SDK's `spl.c:uart_new_baudrate
+= 115200` initializer. Compiled that object cluster with our own pinned
+`csky-unknown-elf-gcc` against the closest public board
+(`grus_gx8002b_dev_1v`, the only board a checked-in `.config` names) across
+four optimization levels; none converged to more than ~19% byte agreement
+with the stock range beyond the one anchor, so the exact product
+board/config/build this range was actually produced from remains
+unidentified. Landed no source, no registration in
+`build_gx8002_source_candidate.py`/`Makefile`/`overlay.json` — there is
+nothing verified yet to register. Also fetched the previously-unmateralized
+`boards/` subtree (115 files) into the git-ignored, already-pinned SDK
+checkout via `git checkout HEAD -- boards/` for reuse by whoever
+picks this range up next.
+
+Full analysis, the match-rate table, and concrete followups (try the other
+GX8002B board directories now available locally; cross-reference from the
+adjacent text region instead of guessing) are in
+`docs/research/gx8002-uart-boot-stage1-data-tail.md`. No hardware operation
+occurred.
+
+## 2026-09-11 — XC-001 source-only manifest and package gate (tooling)
+
+Added `manifests/g2-2.2.6.10-source-only.json`, extending
+`g2-2.2.6.10-core-source.json` with a `source_build` provider for the three
+components core-source leaves as `official_blob` (codec, touch, case), so
+the manifest names a source build for all six EVENOTA components. codec
+reuses the existing GX8002 hybrid provider from
+`g2-2.2.6.10-codec-source-experimental.json`; touch and case are new
+`source_build` providers pointing at `build/touch-source-image/` and
+`build/case-source-image/`, which already build link-complete FWPK/EVEN
+images from `components/shared/touch` and `components/shared/case` source
+but are far smaller than stock (15,592 / 18,948 vs. 34,464 / 55,784 bytes)
+and marked `production_routed: false` by their own summaries.
+`tools/build_g2_source_only_manifest.py` repins those three providers'
+size/SHA-256 and the touch/case region partitions from whatever is on disk,
+then computes and pins the package-level size/SHA-256 by a real (non-strict)
+assembly pass — the only way to learn those pins before every provider byte
+is known. Verified live (private output dir, not the shared
+`build/source-only/`): `open_cfw.py build` assembles the resulting package
+byte-identically to its own pin (4,695,072 bytes at the moment of that run;
+this number moves as concurrent touch/case/codec work lands).
+
+Also added `make -C g2 source-only` (build all six + repin + assemble +
+verify) and `make -C g2 source-only-gate`
+(`analyze_g2_completion_readiness.py --require-source-only`, new gate
+function `source_only_gate()`, exit code 6). The gate requires every
+component be *both* `source_complete` (zero release-blocking bytes) *and*
+`production_routed` — a source candidate with zero blocking bytes but no
+production routing still fails, which is the exact "candidate source not
+routed" exclusion the completion goal calls out. Today all six components
+fail: codec has 326,000 retained bytes inside its hybrid provider; touch,
+case, and the other three components either aren't production-routed or
+still carry nonzero release-blocking bytes per the live readiness ledger.
+That failure, with an exact per-component byte count, is the deliverable —
+this item closes no component. Full detail, including why this is a
+different (broader, six-component) gate than
+`build_gx8002_source_candidate.py`'s pre-existing codec-only
+`--require-source-only` flag, is in
+`docs/research/cross-cutting-source-only-gate.md`. No hardware operation
+occurred.
+
+## 2026-09-11 — XC-005 Apollo data/asset generator tooling
+
+Added the host tooling XC-005 asks for: a generator per Apollo data-region
+family, so an AD-* item ("Apollo main application - retained data, tables,
+and assets") reconstructs a region from a documented source asset instead of
+a byte array. `tools/assetgen_lvgl_image.py` (PNG → `lv_image_dsc_t`, seven
+`lv_color_format_t` variants, self-round-trip-verified and compiled against
+the real vendored `lv_image_dsc.h` with `LV_CONF_SKIP=1`),
+`tools/assetgen_string_pool.py` (JSON string list → packed blob + offset or
+pointer table, compiled and exercised at runtime), and
+`tools/assetgen_nanopb_descriptor.py` (`.proto` → nanopb `pb_msgdesc_t` C,
+wrapping `protoc` and the real `nanopb==0.4.9` generator pinned to the exact
+tag already vendored at `third_party/nanopb`) are fully offline once their
+external tools are installed and pass end-to-end, including compiling the
+generated source against the real vendored headers.
+`tools/assetgen_lvgl_font.py` wraps the official `lv_font_conv@1.5.3` (MIT)
+pinned by exact npm integrity hash; it also passed end-to-end in this
+session but needs network access at generation time to resolve the pinned
+package, a stated limitation rather than a hidden one.
+
+Cordio tables and FreeType payloads get no new tool: per the existing
+`cordio-att-uuid-source-recovery.md` and `freetype-*` audits, the former's
+maintainable representation is the matching already-vendored upstream
+Packetcraft/Cordio `.c` file (identified by the existing `cordio-*` audit
+methodology), and the latter's is a licensed TTF/OTF file the vendored
+FreeType 2.9.1 engine parses directly — neither needs conversion tooling.
+Detail, and how an AD-* item is expected to use all of this, is in
+`docs/research/g2-apollo-asset-generator-tooling.md`.
+
+This item owns no flash range and closes none: it is pure tooling for AD-*
+items to consume next. `python3 -m unittest tests.test_assetgen_lvgl_image
+tests.test_assetgen_string_pool tests.test_assetgen_nanopb_descriptor
+tests.test_assetgen_lvgl_font` — 18 tests, all passing on this macOS host.
+No hardware operation occurred.
+
+## 2026-09-11 — CD-003 UART boot stage 2 reset window, two leaves admitted
+
+Narrowed the 2,452-byte retained span at package `[0x2850, 0x31E4)` (runtime
+`0x10002800..0x10003194`, the codec IRAM UART boot stage 2 vector table,
+reset entry, and its earliest glue code). Fixed a disassembly prerequisite
+first: raw `objcopy -I binary` C-SKY objects need their ELF `e_flags`
+(`0x21006009`) patched to the SDK's value or `objdump` silently misdecodes
+32-bit V2 instructions as unrelated 16-bit pairs — this affected every prior
+raw-binary disassembly attempt in this window.
+
+Two of the three exact NationalChip `lvp_kws` object matches
+`gx8002-upstream-object-candidates.json` already named inside this window
+are now admitted, both 4-byte aligned so they fit the existing candidate
+placement contract: `gx_analog_config_update_enable` (`runtime_gx8002_analog_config_update_enable.c`,
+new, byte-exact against the 20-byte stock envelope at `0x2A8C`) and a second
+occurrence of the already-reviewed `open_cfw_gx8002_irq_enable`
+(`runtime_gx8002_irq.c`, unchanged; new
+`verify_gx8002_irq_boot_stage2_enable.py` proves instruction-level VIC-write
+equivalence against the 28-byte envelope at `0x311C` for 269 `IRQn` values).
+Both are wired into `build_gx8002_source_candidate.py` and pass
+`gx8002-source-candidate`/`codec-source-experimental`, moving 48 bytes from
+`retained_stock` to `compiled_c` in the codec candidate ownership ledger.
+
+The third match, `dw_uart_getc` at `0x2F1E`, is source-identical (the
+existing `runtime_gx8002_uart_receive_byte.c` compiles byte-for-byte equal to
+the 22-byte stock envelope) but cannot be routed through the existing
+pipeline: `0x2F1E` is only 2-byte aligned, and
+`reviewed_replacements()`'s alignment check requires 4 because C-SKY GCC
+always emits `sh_addralign=4` for `.text` sections regardless of optimization
+flags — every occurrence presently in the ledger is 4-aligned. This is a
+tooling gap, not a missing reconstruction; see
+`docs/research/gx8002-uart-boot-stage2-reset-source.md` for the fix options
+and the full disassembled layout of the window (vector table, reset entry,
+BSS-clear loop, exception-frame builder) that still remains retained stock —
+about 2,384 of the 2,452 bytes. Hardware qualification of the admitted
+leaves stays **blocked by unavailable physical evidence**. No hardware
+operation occurred.
+
+## 2026-09-11 — CD-009 image-A boot-region tail: pad, CRC trailer, XIP length (codec)
+
+Work item CD-009 covered package `[0x0000B58C, 0x0000C650)`, 4,292 retained
+codec bytes split across the tail of the image-A BINH stage-1 block, its
+following XIP-length word, and the first 192 bytes of image-A stage-2 XIP
+text. Inspecting the actual bytes showed the stage-1 block's real vector
+table and boot code end well before this item's range (inside CD-008's
+span); this item's 4,092-byte stage-1-block slice is a contiguous run of
+zero bytes, and the block's trailing 4 bytes are not opaque code but the
+block's own CRC-32/MPEG-2 checksum — the same value
+`tools/analyze_g2_codec_fwpk_segments.py`'s existing `parse_binh_image`
+already computes and checks. The 4 bytes after that are the public BINH
+stage-2 XIP-text length word, also already read by that same parser.
+
+Added `components/shared/gx8002/runtime_gx8002_image_a_stage1_tail.[ch]`
+(a reviewed 4,100-byte `generated_source_data` array: implicit zero-fill
+plus the CRC trailer and length word as C99 designated initializers) and
+`tools/verify_gx8002_image_a_stage1_tail.py`, which compiles that source,
+independently recomputes the trailer/length word from the authenticated
+stock image via the existing FWPK/BINH parser (not by trusting the C
+literal), and requires the compiled bytes to match both that
+recomputation and the raw stock bytes. `tests/test_gx8002_image_a_stage1_
+tail.py` adds a second, independent CRC derivation and a mutation check.
+Registered as a new tranche in `tools/build_gx8002_source_candidate.py`
+and the `gx8002-source-candidate` Makefile test list under the CD-009
+integration lock; `make -C g2 gx8002-source-candidate` and `make -C g2
+codec-source-experimental` both pass with this tranche included.
+
+This closes 4,100 of the item's 4,292 bytes (95.5%) as reviewed,
+source-generated container bookkeeping. The remaining 192 bytes (package
+`[0x0000C590, 0x0000C650)`, the start of image-A stage-2 XIP text) are
+dense real code, not padding, and remain an unmodified, opaque span behind
+the existing `runtime_gx8002_image_a_xip_boundary.c` typed provider —
+no Ghidra function-level analysis of image A's own address space exists
+yet in this repository. `docs/research/gx8002-source-readiness-ledger.md`
+and its TSV still fold this item's range into their existing monolithic
+`image_a_stage1`/`image_a_xip_text` rows; splitting those rows to reflect
+this finer accounting is left as follow-up rather than risking an
+uncoordinated edit to that actively-shared, cross-cutting ledger while
+other GX8002 items are in flight. Full detail in
+`docs/research/gx8002-image-a-stage1-tail-source.md`. No hardware
+operation occurred; hardware qualification remains blocked by unavailable
+physical evidence, unaffected by this item.
+
+## 2026-09-11 — BL-006 bootloader retained-seam survey (no bytes closed)
+
+Re-checked the 77-region, 5,892-byte BL-006 catalog in
+`[0x0041F9B6, 0x00428378)` against a fresh `flash-plan.json`: still exactly
+77 `official_blob` regions in that range, untouched by other agents.
+
+Added `tools/analyze_g2_bootloader_bl006_retained_survey.py` (5 passing
+cases in `tests/test_analyze_g2_bootloader_bl006_retained_survey.py`), which
+pins each region's authenticated SHA-256, disassembles the whole stock
+bootloader image once with Capstone, and independently corroborates —
+rather than trusting the prose of the per-function closure audits — which
+regions are unreachable in the shipped image: a branch into a region only
+counts as live if its source is neither inside a span the current build
+already overwrites (read live from `overlay.json`) nor inside another
+BL-006 region itself. Result: 30 regions `corroborated_unreachable_control_
+flow`, 47 `no_control_flow_reference_found`, zero flagged for review, and
+zero region-start addresses found as a data literal anywhere else in the
+image.
+
+Full catalog, per-region byte content (several decode as ASCII strings,
+plain 32-bit constants, or pointer-shaped words), and concrete follow-up
+recommendations are in `docs/research/g2-bootloader-bl006-retained-seam-
+survey.md`. Two blocking findings: (1) the 26 confirmed-dead stock-function
+tails (3,104 bytes) have no existing build primitive to fill as generated
+bytes — `in_place_leaves` requires compiled C to exactly fill its declared
+size, and the redirect+NOP-fill mechanism that already does this elsewhere
+(the LittleFS callback family) only applies to *relocated*, not in-place,
+leaves; (2) the remaining 51 literal-pool/alignment regions (2,788 bytes)
+are real data whose exact pointer targets have not been traced against
+currently source-owned symbols. Both need a coordinated shared-file change
+(`apollo_overlay.py`/`build_component.py`/`overlay.json` provider-region
+accounting) under the integration lock, judged out of proportion for a
+solo pass while other agents land concurrent bootloader work in the same
+files. BL-006 remains open at 5,892 retained bytes. No hardware operation
+occurred.
+
+## 2026-09-11 — BL-003 bootloader AEABI-neighborhood cave leaves (partial)
+
+Work item BL-003 covered 11,158 retained Apollo bootloader bytes across
+eleven official regions in `[0x004155E8,0x0041A648)`. This pass closed two
+of them (30 bytes): `[0x00415672,0x0041568C)`, a 26-byte bounded
+three-word `{cursor, remaining, total}` output sink between the AEABI
+byte-fill and forward-copy primitives, matching the counted-sprintf shape
+used by the neighboring numeric formatters; and `[0x00416026,0x0041602A)`,
+two single-instruction 2-byte compatibility stubs (an infinite self-loop
+trap and a bare-return no-op) between the substring-search primitive and
+the critical-context predicate. Both admitted as `in_place_leaves` at
+their exact stock addresses/sizes (the trap and no-op are byte-identical
+to stock; the sink is the same size but a different, functionally
+equivalent instruction schedule, which the tooling explicitly allows for
+this leaf kind). Full detail in
+`docs/research/g2-bootloader-bounded-sink-415672-source-closure.md` and
+`docs/research/g2-bootloader-trap-stubs-416026-416030-source-closure.md`.
+
+The other nine regions (11,128 bytes) remain retained stock, reconned in
+`docs/research/g2-bootloader-bl003-remaining-recon-4155e8-41a648.md`: two
+undetermined address tables (36 and 98 bytes) pointing at code this and
+prior work items have not named; one 38-byte cave that disassembles like an
+ARM semihosting `SYS_EXIT_EXTENDED` trap with a plausible but unverified
+reading; four small literals, two of which (an SRAM object address and the
+EasyLogger ANSI CSI-start escape) already compile byte-identical to stock
+via `apollo_overlay.compile_in_place_data_group` but cannot be routed
+because `components/bootloader/core_overlay/build_component.py` -- unlike
+`components/apollo_main/core_overlay/build_component.py` -- does not yet
+read an `in_place_data` key; and a 10,896-byte unanalyzed compatibility
+tail at `[0x00417BB8,0x0041A648)` (97.6% of the item) with no existing
+audit, whose rough linear-sweep instruction census suggests on the order
+of 80-130 distinct functions still to identify. `make -C g2
+bootloader-component` and the two new narrow test modules pass; `make -C
+g2 source` was rerun to confirm the flash plan places the two closed spans
+as `in_place`. No hardware operation occurred; hardware qualification
+remains blocked by unavailable physical evidence, unaffected by this item.
+
+## 2026-09-11 — CD-006 UART-boot stage 2 diagnostic strings (partial)
+
+Work item CD-006 covered 8,192 retained codec bytes at package
+`[0x7204,0x9204)` / runtime `0x100071B4..0x100091B4`, inside the volatile
+UART-boot stage 2 IRAM envelope (`gx8002-uart-boot-stage2-boundary.md`).
+Disassembly (via the existing whole-image wrapper ELF) shows this span is
+not one function: `[0x7204,0x7F22)` (3,358 bytes) is an unattributed
+segregated-fit allocator/comparator code cluster; `[0x7F22,0x9204)` (4,834
+bytes) is almost entirely printf format strings, short labels, two small
+address tables, a duplicate occurrence of the six already-admitted SPI-NOR
+device-name strings, and — from `0x85B4` on — the U-Boot-derived
+command-line prompt/help/dispatch cluster that
+`peripheral-oss-library-provenance-audit.md` already flagged as
+GPL-licensed with no authorized fork/release pin, so it is not reconstructed
+here or claimed as blocked-by-hardware; it is blocked by unresolved
+licensing provenance.
+
+This pass admits six literal printf format strings (83 bytes) as
+`generated_source_data`: five from `arch/soc/grus/trap_c.c`'s crash-dump
+register printer and one from `boards/nationalchip/grus_bk32887_1v/misc_board.c`'s
+padmux board-init error path, both in the pinned NationalChip `lvp_kws` SDK
+(commit `8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5`, MIT). Each string is a
+standalone `__attribute__((aligned(1)))` `const char[]` in the new
+`components/shared/gx8002/runtime_gx8002_uart_boot_stage2_diagnostics.c`,
+verified by `verify_gx8002_uart_boot_stage2_diagnostics.py` against both the
+stock package bytes and the literal text regex-extracted from the pinned
+upstream source file, then registered in
+`build_gx8002_source_candidate.py` and the `gx8002-source-candidate` test
+list. Only the string bytes are claimed; the surrounding trap-handler and
+board-init control flow for this occurrence are not reconstructed (the
+`trap_c.c` call sites are `#if 0` in the pinned checkout, so this stock
+build used a different configuration/revision of that file — the string
+content match is exact, the code-path match is not established).
+`make -C g2 gx8002-source-candidate` and `make -C g2
+codec-source-experimental` pass. Full detail in
+`docs/research/gx8002-uart-boot-stage2-diagnostics-source.md`.
+8,109 of the 8,192 bytes remain `retained_stock`: the allocator/comparator
+code (3,358 B, needs RE against no known upstream match), duplicate
+flash-device-name strings (41 B, needs a new `stock_occurrences` entry on
+the existing tranche rather than new source), other unclaimed driver/probe
+strings and two address tables (~1,641 B), and the GPL-blocked U-Boot
+command-line cluster (~3,069 B). No hardware operation occurred; hardware
+qualification remains blocked by unavailable physical evidence, unaffected
+by this item.
+
+## 2026-09-11 — CD-005 UART boot stage 2 libc leaves (partial)
+
+CD-005 covers 8,192 retained package bytes at `0x5204..0x7204` (runtime
+`0x100051B4..0x100071B4`), inside the same UART boot stage 2 (IRAM) envelope
+as CD-003/CD-006/CD-009. Disassembling the raw package bytes (via
+`csky-unknown-elf-objcopy -I binary -O elf32-csky-little -B csky` plus
+`objdump -D`, matching `verify_gx8002_padmux_get.py`/`compare_gx8002_memset.py`)
+shows this span holds the tail of a diagnostic register-dump routine, a
+device-registration helper, and a run of recognizable C-library leaves:
+`strcmp`, a `strstr`/`memmem`-style search, `strchr`, `strlen`, `strnlen`,
+`memset`, `memcpy`, a second bounded search, an itoa/ctype dispatch table, a
+256-entry radix lookup, CRC-32 code and its 1,024-byte table, and a
+radix/`itoa`-style conversion crossing the item's end boundary. The pinned
+NationalChip `lvp_kws` checkout tracks only `utility/libc/memset.c` in this
+directory (`include/utility/libc/string.h` declares the rest but no bodies
+are tracked), and the main-image `memset`/`memcpy` occurrences already
+admitted (`runtime_gx8002_memset.c`, `runtime_gx8002_memcpy.c`) are
+confirmed-different compiled bodies at different package offsets, so this is
+a distinct, uncovered occurrence.
+
+This pass admits `strcmp`, `strchr`, `strlen`, and `strnlen` as reviewed C in
+new `components/shared/gx8002/runtime_gx8002_stage2_libc.c` (clean-room;
+no upstream `.c` source for these four symbols is present in the pinned
+checkout). `strlen`/`strnlen` use plain byte loops instead of the stock's
+word-at-a-time trick (same input/output behavior, smaller code, still fits
+the stock envelope); `strcmp` returns the sign of the first difference
+rather than the stock's exact `-1`/`0`/`1`, matching the documented C
+contract. `build_gx8002_stage2_libc_candidate.py` compiles all four
+(`-Os -mcpu=ck804ef -mhard-float -ffreestanding -fno-builtin
+-ffunction-sections -fdata-sections -Wall -Wextra -Werror`, no SDK object
+linked) well under their stock envelopes (24/22/16/22 compiled bytes against
+36/26/74/40-byte envelopes). `verify_gx8002_stage2_libc.py` decodes both the
+stock bytes and the compiled candidate with a restricted leaf-instruction
+interpreter and checks 13,908 cases against an independent Python oracle
+(boundary strings, embedded `0x00`/`0xff`, four base-address alignments,
+`strnlen` bounds past the string end). `test_gx8002_stage2_libc.py` adds a
+native macOS/`ctypes` black-box check. Registered in
+`build_gx8002_source_candidate.py` and the `gx8002-source-candidate` test
+list; `make -C g2 gx8002-source-candidate` and `make -C g2
+codec-source-experimental` pass. Full detail in
+`docs/research/gx8002-stage2-libc-source.md`.
+
+84 of the 8,192 bytes become compiled C (the four candidates), 92 more
+become `generated_unreachable_fill` (the now-unreachable stock tails of
+those four envelopes), and 8,016 bytes remain `retained_stock`: the
+diagnostic dump/registration helper (~3,772 B), the `strstr`-style search
+(76 B), the orphaned strlen-trick constants (8 B), the stock `memset`/`memcpy`
+pair (350 B, a different 16-byte-unrolled algorithm than the admitted
+main-image occurrences — needs its own harness), the second bounded search
+plus itoa/radix tables (~324 B), CRC-32 code and its reproducible table
+(1,204 B, same well-known `0xEDB88320` polynomial as `gx8002-crc-recovery.md`),
+and a radix conversion routine that continues past this item's boundary into
+whatever item covers `0x7204` onward. No hardware operation occurred;
+hardware qualification remains blocked by unavailable physical evidence,
+unaffected by this item.

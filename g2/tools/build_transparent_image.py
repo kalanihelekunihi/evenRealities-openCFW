@@ -275,15 +275,39 @@ def place_unit(
     envelope_start: int,
     envelope_size: int,
     symbol_addresses: dict[str, int],
+    *,
+    shared_pool: dict[bytes, int] | None = None,
 ) -> tuple[bytes, dict[str, Any]]:
-    """Lay a unit's sections into its envelope and fix every reference."""
+    """Lay a unit's sections into its envelope and fix every reference.
+
+    `shared_pool` is an optional content-addressed cache of already-placed
+    read-only constant sections (literal pools), shared across every call that
+    passes the same dict.  A `.rodata*` section with no relocations of its own
+    is pure constant bytes: if an earlier unit already placed byte-identical
+    content, this unit reuses that address instead of duplicating the bytes.
+    Code, and any section a relocation targets, is never shared -- only inert
+    constant data can safely alias between two independent functions.
+    """
     sections = placeable_sections(elf)
     if not sections:
         raise ImageError("unit has no allocatable content")
 
     placement: dict[int, int] = {}
+    reused: set[int] = set()
     cursor = envelope_start
     for position, section in enumerate(sections):
+        content = elf.contents(section)
+        shareable = (
+            shared_pool is not None
+            and section["type"] != 8  # SHT_NOBITS: .bss needs its own storage
+            and section["name"].startswith(".rodata")
+            and not elf.relocations(section["index"])
+        )
+        cached = shared_pool.get(content) if shareable else None
+        if cached is not None and cached % max(section["align"], 1) == 0:
+            placement[section["index"]] = cached
+            reused.add(section["index"])
+            continue
         # The function must begin exactly at its stock entry point.  Thumb code
         # is 2-byte aligned and stock functions routinely start two bytes off a
         # word boundary, so honouring the object's 4-byte .text alignment here
@@ -293,6 +317,8 @@ def place_unit(
             align = max(section["align"], 1)
             cursor = (cursor + align - 1) // align * align
         placement[section["index"]] = cursor
+        if shareable:
+            shared_pool[content] = cursor
         cursor += section["size"]
     total = cursor - envelope_start
     if total > envelope_size:
@@ -300,6 +326,8 @@ def place_unit(
 
     buffer = bytearray(b"\0" * total)
     for section in sections:
+        if section["index"] in reused:
+            continue  # bytes already live at a shared address, not in this buffer
         start = placement[section["index"]] - envelope_start
         buffer[start:start + section["size"]] = elf.contents(section)
 
@@ -375,6 +403,32 @@ def trap_bytes(size: int) -> bytes:
     if size < 2:
         return b"\0" * size
     return THUMB_BREAKPOINT + b"\0" * (size - 2)
+
+
+def align_up(value: int, alignment: int) -> int:
+    return (value + alignment - 1) // alignment * alignment
+
+
+#: A compiled function that does not fit its stock envelope is not opaque --
+#: it is source, just too large for the space the stock linker gave that one
+#: address.  Rather than trap it, its body is placed in an appended relocation
+#: arena and the stock envelope gets a direct `B.W` redirect to it, the same
+#: entry-redirect technique the production core overlay
+#: (components/apollo_main/core_overlay/overlay.json `patch_sites` +
+#: `relocated_leaves`) already uses.  Every caller still resolves the stock
+#: entry address via `symbol_addresses`, so the redirect is transparent to
+#: every other placed or relocated unit.
+REDIRECT_STUB_BYTES = 4  # one Thumb-2 B.W
+
+#: Sanity ceiling on one relocated function's compiled size.  Real recovered
+#: leaves are at most a few hundred bytes; anything past this is treated as a
+#: build inconsistency rather than silently accepted.
+RELOCATED_UNIT_LIMIT = 1 << 16
+
+#: The device-family address boundary recorded in docs/memory-map.md
+#: (`0x00800000`, "End of ... internal MRAM").  The relocation arena is
+#: appended after the base image and must stay inside it.
+DEVICE_ADDRESS_LIMIT = 0x00800000
 
 
 def validate_reviewed_payload(unit: dict[str, Any], payload: bytes | None) -> bool:
@@ -500,6 +554,10 @@ def build(
     overflow_histogram: Counter[str] = Counter()
     overflow_total = [0]
     unit_reports: list[dict[str, Any]] = []
+    # Units whose compiled form is real source but does not fit the stock
+    # envelope: placed later, in address order, once every fitting unit has
+    # claimed its stock bytes and the relocation arena's base is known.
+    pending_relocations: list[dict[str, Any]] = []
 
     for record in database["functions"]:
         entry = record["entry"]
@@ -527,6 +585,8 @@ def build(
             report: dict[str, Any] = {}
             last_failure = "unknown"
             best_overflow: int | None = None
+            best_overflow_object: Path | None = None
+            best_overflow_variant: str | None = None
             for variant_name, extra in SIZE_VARIANTS:
                 if variant_name == "Oz":
                     candidate_object = source_dir / object_name
@@ -565,11 +625,10 @@ def build(
                         # function, at its best variant, not once per attempt.
                         last_failure = "compiled-size-exceeds-envelope"
                         overflow = int(match.group(1)) - int(match.group(2))
-                        best_overflow = (
-                            overflow
-                            if best_overflow is None
-                            else min(best_overflow, overflow)
-                        )
+                        if best_overflow is None or overflow < best_overflow:
+                            best_overflow = overflow
+                            best_overflow_object = candidate_object
+                            best_overflow_variant = variant_name
                     else:
                         last_failure = message.split(":", 1)[0][:60]
                     payload = None
@@ -582,6 +641,35 @@ def build(
                     last_failure = "compiled-size-exceeds-envelope"
                     overflow_total[0] += best_overflow
                     overflow_histogram[bucket_overflow(best_overflow)] += 1
+                # A pure size overshoot is not opacity -- the unit is real,
+                # reviewed-quality decompiled C that compiled cleanly; it just
+                # does not fit the one address the stock linker gave it.
+                # Reviewed-source pins are authenticated against a payload
+                # placed at the stock address, so they are never relocated.
+                # A stock envelope narrower than one redirect instruction
+                # cannot host a trampoline either; both fall back to a trap.
+                relocatable = (
+                    last_failure == "compiled-size-exceeds-envelope"
+                    and best_overflow_object is not None
+                    and envelope >= REDIRECT_STUB_BYTES
+                    and unit.get("disposition") != "reviewed-source"
+                )
+                if relocatable:
+                    pending_relocations.append({
+                        "entry": entry,
+                        "name": unit.get("name"),
+                        "low": low,
+                        "envelope": envelope,
+                        "object": best_overflow_object,
+                        "variant": best_overflow_variant,
+                    })
+                    continue
+                if last_failure == "compiled-size-exceeds-envelope":
+                    last_failure = (
+                        "reviewed-source-cannot-relocate"
+                        if unit.get("disposition") == "reviewed-source"
+                        else "redirect-envelope-too-small"
+                    )
                 write(low, trap_bytes(envelope), "trap")
                 accounting["trap:placement"] += 1
                 byte_accounting["trap"] += envelope
@@ -599,6 +687,59 @@ def build(
                 "reviewed_source": is_reviewed,
                 **report,
             })
+
+    # --- place overflow units in an appended relocation arena --------------
+    # Every entry redirect above still resolves through the stock address
+    # (symbol_addresses never changes), so placement order here only affects
+    # arena packing, not correctness.  Sorting by entry keeps it deterministic
+    # and matches the address-ordered corpus invariant the harvest already
+    # guarantees.
+    arena_base = load_base + image_size
+    relocated_arena = bytearray()
+    shared_pool: dict[bytes, int] = {}
+    relocated_reports: list[dict[str, Any]] = []
+    for item in sorted(pending_relocations, key=lambda entry: entry["entry"]):
+        elf = Elf32(item["object"].read_bytes(), item["object"].name)
+        cursor = arena_base + len(relocated_arena)
+        aligned_cursor = align_up(cursor, 4)
+        if aligned_cursor > cursor:
+            relocated_arena.extend(b"\0" * (aligned_cursor - cursor))
+        payload, place_report = place_unit(
+            elf, aligned_cursor, RELOCATED_UNIT_LIMIT, symbol_addresses,
+            shared_pool=shared_pool,
+        )
+        place_report["variant"] = item["variant"] or "Oz"
+        relocated_arena.extend(payload)
+        redirect = encode_thumb_branch(item["low"], aligned_cursor, link=False)
+        write(
+            item["low"],
+            redirect + b"\0" * (item["envelope"] - REDIRECT_STUB_BYTES),
+            "redirect",
+        )
+        accounting["redirect"] += 1
+        byte_accounting["redirect"] += REDIRECT_STUB_BYTES
+        byte_accounting["redirect-padding"] += item["envelope"] - REDIRECT_STUB_BYTES
+        byte_accounting["relocated-code"] += len(payload)
+        variant_counts[place_report["variant"]] += 1
+        relocated_reports.append({
+            "entry": item["entry"],
+            "name": item["name"],
+            "envelope": item["envelope"],
+            "redirect_site": item["low"],
+            "overlay_address": aligned_cursor,
+            "reviewed_source": False,
+            **place_report,
+        })
+        unit_reports.append(relocated_reports[-1])
+
+    if relocated_arena and arena_base + len(relocated_arena) > DEVICE_ADDRESS_LIMIT:
+        raise ImageError(
+            "relocation arena exceeds the documented device address boundary "
+            f"{DEVICE_ADDRESS_LIMIT:#x}"
+        )
+
+    overlay_path = output_dir / "transparent-relocated-overlay.bin"
+    overlay_path.write_bytes(bytes(relocated_arena))
 
     if not all(covered):
         missing = covered.index(0)
@@ -644,6 +785,14 @@ def build(
         "units_placed": len(unit_reports),
         "reviewed_source_units": sum(r["reviewed_source"] for r in unit_reports),
         "reviewed_source_bytes": sum(r["placed_bytes"] for r in unit_reports if r["reviewed_source"]),
+        "relocated_overlay": {
+            "artifact": str(overlay_path.relative_to(output_dir)),
+            "base_address": arena_base,
+            "size": len(relocated_arena),
+            "sha256": hashlib.sha256(bytes(relocated_arena)).hexdigest(),
+            "functions_placed": len(relocated_reports),
+            "compiled_bytes": sum(r["placed_bytes"] for r in relocated_reports),
+        },
     }
     (output_dir / "IMAGE-REPORT.json").write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"

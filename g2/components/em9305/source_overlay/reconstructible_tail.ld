@@ -61,6 +61,8 @@ SECTIONS
     *(.text.open_cfw_em9305_shift_left64_words)
     *(.text.open_cfw_em9305_shift_right64_words)
     *(.text.open_cfw_em9305_udivmod64.part.*)
+    *(.text.open_cfw_em9305_metaware_stack_pointer_in_bounds)
+    *(.text.open_cfw_em9305_metaware_stack_guard_with_policy)
   }
 
   /DISCARD/ : { *(.comment) *(.note*) *(.ARC.attributes) *(.eh_frame*) }

@@ -3466,3 +3466,28 @@ unresolved executable spans / 17,088 bytes. The next executable frontier is
 `0x00428A94`. Live timer, MMIO, voltage, trim, power-stability, reset, and
 cold-boot validation is blocked by unavailable physical evidence. No hardware
 operation occurred, and firmware-wide completeness is not claimed.
+
+## AEABI-neighborhood compatibility cave leaves (work item BL-003)
+
+Two authenticated caves retained between the AEABI primitives near the top
+of the image are now exact-size in-place C admissions. `[0x00415672,
+0x0041568C)` (26 bytes, between the byte-fill and forward-copy primitives)
+is a bounded three-word `{cursor, remaining, total}` output sink matching
+the counted-sprintf shape used by the neighboring numeric formatters;
+`[0x00416026,0x0041602A)` (4 bytes, between the substring-search primitive
+and the critical-context predicate) is two single-instruction stubs, an
+infinite self-loop trap and a bare-return no-op, both byte-identical to
+stock. Full details, including the recovered semantics, are in
+`docs/research/g2-bootloader-bounded-sink-415672-source-closure.md` and
+`docs/research/g2-bootloader-trap-stubs-416026-416030-source-closure.md`.
+
+This closes 30 of the 11,158 bytes assigned to `BL-003`. The other nine
+official regions in `[0x004155E8,0x0041A648)` -- two address tables, one
+plausible-but-unverified semihosting-shaped cave, four small literals (two
+of which already compile byte-identical to stock but cannot be routed until
+this component's `build_component.py` gains the `in_place_data` wiring
+`components/apollo_main/core_overlay/build_component.py` already has), and
+a 10,896-byte unanalyzed compatibility tail -- remain retained stock. Full
+reconnaissance is in
+`docs/research/g2-bootloader-bl003-remaining-recon-4155e8-41a648.md`. No
+hardware operation occurred, and firmware-wide completeness is not claimed.

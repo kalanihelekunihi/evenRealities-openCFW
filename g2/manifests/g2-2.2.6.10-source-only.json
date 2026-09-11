@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "extends": "g2-2.2.6.10-core-source.json",
+  "package": {
+    "output_name": "g2-openCFW-s200_v2.2.6.10-source-only.evenota.bin",
+    "expected_size": 4694996,
+    "expected_sha256": "419804e22054ff1c03c8f1b7d1ddb26dff79b7fc46ddc259cf82b9b546196df2"
+  },
+  "component_overrides": {
+    "codec": {
+      "function": "Experimental GX8002 hybrid with 214 C functions, source-authored IRQ/reset assembly and NPU instruction wrappers, and recovered data; retained stock and hardware limitations remain",
+      "provider": {
+        "kind": "source_build",
+        "path": "build/gx8002-source-candidate/firmware_codec.hybrid-candidate.bin",
+        "size": 326092,
+        "sha256": "26da0f0d9fe13d659128ba11b07288ee32d940e21208efe9cbc82c92d7abdab6"
+      }
+    },
+    "touch": {
+      "function": "Touch-controller firmware package built from the source-authored ARMv6-M application image; not yet production-routed (resident-ABI and hardware qualification remain)",
+      "provider": {
+        "kind": "source_build",
+        "path": "build/touch-source-image/firmware_touch.bin",
+        "size": 15516,
+        "sha256": "51d067df27e30bef96d0459a7dc30928c47e717c9b83e12a99083155d2f5654f"
+      },
+      "regions": [
+        {
+          "name": "fwpk_wrapper",
+          "function": "FWPK metadata and reflected CRC-32C over the source-built application",
+          "file_offset": 0,
+          "size": 32,
+          "address_status": "container_only",
+          "output": "touch/source-only-fwpk-wrapper.bin"
+        },
+        {
+          "name": "touch_application",
+          "function": "Touch-controller Cortex-M vector table and source-built application",
+          "file_offset": 32,
+          "size": 15484,
+          "target": "touch_controller",
+          "target_address": 0,
+          "address_status": "inferred_from_vector_table",
+          "output": "touch/source-only-application-0x00000000.bin"
+        }
+      ]
+    },
+    "case": {
+      "function": "Charging-case STM32G0 application built from the source-authored image; not yet production-routed (resident-ABI and hardware qualification remain)",
+      "provider": {
+        "kind": "source_build",
+        "path": "build/case-source-image/firmware_box.bin",
+        "size": 18948,
+        "sha256": "5af2623dba3e4316f03a368510be02b2cfb5aace7331030110472b375d2b5fa8"
+      },
+      "regions": [
+        {
+          "name": "even_wrapper",
+          "function": "EVEN header, case version, length, and additive checksum over the source-built application",
+          "file_offset": 0,
+          "size": 32,
+          "address_status": "container_only",
+          "output": "case/source-only-even-wrapper.bin"
+        },
+        {
+          "name": "case_application",
+          "function": "STM32G0 Cortex-M0+ vector table and source-built charging-case application",
+          "file_offset": 32,
+          "size": 18916,
+          "target": "case_stm32g0",
+          "target_address": 134217728,
+          "alternate_target_addresses": [
+            134479872
+          ],
+          "address_status": "confirmed_from_vector_and_ota_code",
+          "output": "case/source-only-application-logical-0x08000000.bin"
+        }
+      ]
+    }
+  }
+}

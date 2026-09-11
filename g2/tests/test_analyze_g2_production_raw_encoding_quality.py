@@ -92,6 +92,18 @@ class ProductionRawEncodingQualityTests(unittest.TestCase):
         self.assertEqual(self.result["production_files_modified"], [])
         self.assertTrue(self.result["source_ownership_suitable"])
 
+    def test_designated_initializers_are_not_mistaken_for_directives(self) -> None:
+        # `{.word = value}` and `object.word = value` are C99 designated
+        # initializers / member access, not GNU-assembler `.word` directives.
+        # A real directive is never followed by `=`; only by its operand list.
+        self.assertEqual(MODULE._directive_bytes(
+            "typedef union { uint32_t word; } r;\n"
+            "void f(void) { r v = {.word = 1}; v.word = 2; (void)v.word; }\n"
+        ), {"byte": 0, "short": 0, "hword": 0, "word": 0})
+        self.assertEqual(MODULE._directive_bytes(
+            '__asm__(".word 0x1234\\n");\n'
+        ), {"byte": 0, "short": 0, "hword": 0, "word": 4})
+
 
 if __name__ == "__main__":
     unittest.main()

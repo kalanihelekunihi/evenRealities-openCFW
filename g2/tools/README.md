@@ -67,6 +67,22 @@ matches [`../docs/source-coverage.md`](../docs/source-coverage.md).
 | `unittest_identity_baseline.py` | 1 | compare test-suite identity across revisions |
 | `verify_ambiqsuite_cordio_wsf_timer_archive.py` | 1 | authenticate one delivered archive |
 
+## Asset generators — `assetgen_*.py`
+
+XC-005 host tooling. Each turns a source asset (image, string list, `.proto`
+schema, or font) into reviewed C source for an Apollo LVGL/FreeType/protobuf
+data region, so AD-* items reconstructing "retained data, tables, and
+assets" have a generator instead of a byte array. None reads the stock
+firmware image. See
+[`../docs/research/g2-apollo-asset-generator-tooling.md`](../docs/research/g2-apollo-asset-generator-tooling.md).
+
+| Script | Produces | External dependency |
+| --- | --- | --- |
+| `assetgen_lvgl_image.py` | `lv_image_dsc_t` C source from a PNG | Pillow only (offline) |
+| `assetgen_string_pool.py` | packed string-pool C source from a JSON string list | none (offline) |
+| `assetgen_nanopb_descriptor.py` | nanopb `pb_msgdesc_t` C source from a `.proto` | `protoc` + pinned `nanopb==0.4.9` (offline once installed) |
+| `assetgen_lvgl_font.py` | `lv_font_t` C source from a TTF/OTF | pinned `lv_font_conv@1.5.3` via `npx` (needs network) |
+
 ## Data and scripts
 
 | Path | Contents |

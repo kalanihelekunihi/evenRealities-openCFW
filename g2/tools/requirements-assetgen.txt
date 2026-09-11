@@ -1,0 +1,17 @@
+# Host-only Apollo data-asset generator tooling (XC-005). These are external
+# build-time dependencies for tools/assetgen_*.py; none of them, nor their
+# output, links into or ships inside firmware.
+#
+# nanopb's Python generator, pinned to the exact tag already vendored as this
+# repo's nanopb runtime (third_party/nanopb, tag nanopb-0.4.9, commit
+# 98bf4db69897b53434f3d0ba72e0a3ab1a902824). Zlib license.
+nanopb==0.4.9
+
+# Pillow backs assetgen_lvgl_image.py's PNG decoding. MIT-Open (HPND) license.
+Pillow>=10.0
+
+# assetgen_lvgl_font.py additionally needs a Node.js/npm install providing
+# `npx`; it fetches the pinned lv_font_conv@1.5.3 (MIT) from the npm registry
+# at generation time rather than vendoring it here (see that tool's module
+# docstring). protoc (the Protocol Buffers compiler) is a separate system
+# package required by assetgen_nanopb_descriptor.py.

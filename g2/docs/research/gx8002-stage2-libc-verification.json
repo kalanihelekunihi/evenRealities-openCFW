@@ -1,0 +1,76 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_stage2_strcmp",
+      "section_name": ".text.open_cfw_gx8002_stage2_strcmp",
+      "compiled_bytes": 24,
+      "compiled_sha256": "3692d3b1e513db5540c0ce4b5caa82e0e943e74d68bd463f250b05d63888b306",
+      "stock_occurrences": [
+        {
+          "package_offset": 25280,
+          "bytes": 36,
+          "sha256": "90dbc680c495fc3c287b8a977f126add18808e3786e9a5a00daa2c8163ba375b",
+          "symbol": "open_cfw_gx8002_stage2_strcmp",
+          "region": "boot_stage2"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_stage2_strchr",
+      "section_name": ".text.open_cfw_gx8002_stage2_strchr",
+      "compiled_bytes": 22,
+      "compiled_sha256": "dec810bf068e43012b58cc218fc91897988180d509b99e40bfedaa44cf423e56",
+      "stock_occurrences": [
+        {
+          "package_offset": 25392,
+          "bytes": 26,
+          "sha256": "ab85ef2bdf620645e2accb724c5eac5682d82514020454d94deeeb29d35ddb10",
+          "symbol": "open_cfw_gx8002_stage2_strchr",
+          "region": "boot_stage2"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_stage2_strlen",
+      "section_name": ".text.open_cfw_gx8002_stage2_strlen",
+      "compiled_bytes": 16,
+      "compiled_sha256": "03b4359b43851f469a4a7e843576b88822078de89dd2331a8716fa374c1b16b5",
+      "stock_occurrences": [
+        {
+          "package_offset": 25420,
+          "bytes": 74,
+          "sha256": "e50dc29cc2485ae3a9ec64dce0f6b95824f18a0640dcf4dd0397c5241d3175aa",
+          "symbol": "open_cfw_gx8002_stage2_strlen",
+          "region": "boot_stage2"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_stage2_strnlen",
+      "section_name": ".text.open_cfw_gx8002_stage2_strnlen",
+      "compiled_bytes": 22,
+      "compiled_sha256": "d44b17127f992e0d167e66be27ccbf7b4c88b9aecd22d5670001a59de4c344ff",
+      "stock_occurrences": [
+        {
+          "package_offset": 25504,
+          "bytes": 40,
+          "sha256": "863a46266b1380c23cf55b739b924219b41bc0a9cb0ae09349b2f545b0e9865d",
+          "symbol": "open_cfw_gx8002_stage2_strnlen",
+          "region": "boot_stage2"
+        }
+      ]
+    }
+  ],
+  "cases": {
+    "strcmp": 416,
+    "strchr": 6560,
+    "strlen": 812,
+    "strnlen": 6120
+  },
+  "total_cases": 13908,
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded leaf-instruction execution against synthetic buffers at several base alignments; boundary, embedded-0xff/0x00, and random strings up to 20 bytes. strcmp is checked for sign/zero agreement with the documented C contract, not the stock -1/0/1 encoding. No hardware, MMIO, or timing qualification, and no claim about any other occurrence of these symbols in the codec image."
+  ]
+}

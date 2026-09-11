@@ -19,7 +19,10 @@ COMPONENT_ROOT = ROOT / "components"
 MANIFEST = ROOT / "tools/manifests/g2-production-raw-encoding-quality.tsv"
 SUMMARY = ROOT / "tools/manifests/g2-production-raw-encoding-quality-summary.json"
 
-DIRECTIVE = re.compile(r"\.(byte|short|hword|word)\s+([^\"\\]+)")
+# A leading `(?!=)` excludes C99 designated-initializer/member-access syntax
+# such as `{.word = value}` or `value.word = x`: real GNU-assembler directives
+# are never followed by `=`, only by their operand list.
+DIRECTIVE = re.compile(r"\.(byte|short|hword|word)\s+(?!=)([^\"\\]+)")
 WIDTH = {"byte": 1, "short": 2, "hword": 2, "word": 4}
 
 # path: (component, routed bytes, raw instruction bytes, semantic literal bytes,

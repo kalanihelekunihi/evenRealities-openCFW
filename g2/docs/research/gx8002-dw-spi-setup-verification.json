@@ -1,4 +1,21 @@
 {
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_dw_spi_setup",
+      "section_name": ".text",
+      "compiled_bytes": 116,
+      "compiled_sha256": "939a9a5708fc762e8912f5524806c13e6ffe099203bd9c4ce8d5417ab4d2fc7a",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_dw_spi_setup",
+          "package_offset": 63260,
+          "bytes": 116,
+          "sha256": "b25118f489e60485455c13aec8b304efd82a5275a7dc91eeddacb4e3cefe9d79",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
   "candidate": {
     "dependency_headers": {
       "include/utility/list.h": {
@@ -38,15 +55,15 @@
       "blob": "aabfb6e88beeee65eb74262d339d0ce44fdfcbce",
       "sha256": "b158f2feee6baed0af40b3d2c5db0bfa0c76b4d8d96a8484ddcb98df04f69ebd"
     },
-    "source_sha256": "3dc9e83c2d52c2e563d65d888522597f36a293e1e001d839dc199eb5e88c492a",
+    "source_sha256": "f6677186666dc19f287e0b3ab15f34acfebffcfc93cab7f525e532b5300b9e43",
     "symbol": "open_cfw_gx8002_dw_spi_setup",
     "section_name": ".text",
     "package_offset": 63260,
-    "compiled_bytes": 120,
-    "compiled_sha256": "77afed0e770ef9340a2bee0d3adb8a56063ccde5531a86b2bca8c57a4b456db9",
+    "compiled_bytes": 116,
+    "compiled_sha256": "939a9a5708fc762e8912f5524806c13e6ffe099203bd9c4ce8d5417ab4d2fc7a",
     "stock_envelope_bytes": 116,
     "stock_sha256": "b25118f489e60485455c13aec8b304efd82a5275a7dc91eeddacb4e3cefe9d79",
-    "fits": false,
+    "fits": true,
     "source_admitted": false,
     "limits": [
       "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
@@ -73,15 +90,15 @@
   },
   "decoded_cases": 17280,
   "evidence_sha256": {
-    "verify_gx8002_dw_spi_setup.py": "8d8dda79fcabd821ccd52d32d06c75f65b6dab45edc2990f0cb58fa341c3d82d",
+    "verify_gx8002_dw_spi_setup.py": "b23be7f7cb78a8bca8bff4a9f30e17649d018aeeb5481e28d1dda5519e473e53",
     "model_gx8002_dw_spi_setup.py": "eab5f1f709bf4ab6ba7bff81aa4fed60e7378f65fc6228a4c142ce52348892b6",
     "analyze_gx8002_dw_spi_setup.py": "d53b0b6428ac108d28f2e0d0abaa05666ef0930601e8273c107d68498f63819a",
     "build_gx8002_dw_spi_setup_candidate.py": "109a9b9a42fdfaae9eeb5810f7e89d13b64016fbf1ad299a27dd30fef68a8753"
   },
-  "source_admitted": false,
+  "source_admitted": true,
   "hardware_qualified": false,
   "limits": [
-    "Candidate exceeds original slot; no integration admission.",
-    "Clock helper effects modeled; valid distinct state/device storage and nonzero post-call speed required."
+    "Clock helper effects modeled; valid distinct state/device storage and nonzero post-call speed required.",
+    "Fixed 12-byte frame ABI modeled; physical SPI clock/divider hardware behavior unqualified."
   ]
 }

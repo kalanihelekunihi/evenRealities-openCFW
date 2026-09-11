@@ -1,0 +1,48 @@
+{
+  "symbol": "gx_analog_set_ldo_ana_voltage",
+  "section_name": ".text.gx_analog_set_ldo_ana_voltage",
+  "ownership_kind": "compiled_assembly",
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "source_sha256": "abbba02f2acdffd0baad90bc29394a98031c0eafc42e1aac5b14ac77eb369ddb",
+  "compile_flags": [
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "compiled_bytes": 32,
+  "compiled_sha256": "1821e235b0f31e6c05e200cbc729d31394f18e843d259df67fc9baa6d07b936c",
+  "stock_occurrences": [
+    {
+      "object": "drivers_lib/analog/ldo.o",
+      "symbol": "gx_analog_set_ldo_ana_voltage",
+      "bytes": 32,
+      "package_offset": 17496,
+      "region": "boot_stage2",
+      "sha256": "1821e235b0f31e6c05e200cbc729d31394f18e843d259df67fc9baa6d07b936c"
+    },
+    {
+      "object": "drivers_lib/analog/ldo.o",
+      "symbol": "gx_analog_set_ldo_ana_voltage",
+      "bytes": 32,
+      "package_offset": 91908,
+      "region": "image_a_sram_text",
+      "sha256": "1821e235b0f31e6c05e200cbc729d31394f18e843d259df67fc9baa6d07b936c"
+    }
+  ],
+  "differential_cases": 144,
+  "firmware_bytes_emitted": 0,
+  "production_source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Restricted leaf interpreter, not a complete C-SKY emulator.",
+    "Boundary-value differential cases, not an all-input proof.",
+    "No whole-image startup, call-site or hardware qualification."
+  ]
+}

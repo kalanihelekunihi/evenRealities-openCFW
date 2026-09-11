@@ -8,6 +8,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import shutil
 import struct
 import subprocess
@@ -18,11 +19,28 @@ ROOT = Path(__file__).resolve().parents[3]
 COMPONENT = Path(__file__).resolve().parent
 SHARED = ROOT / "components/shared/case"
 LINKER = COMPONENT / "linker.ld"
+BOARD_CONFIG = COMPONENT / "board_config.h"
 DEFAULT_OUTPUT = ROOT / "build/case-source-image"
 
 
 class BuildError(RuntimeError):
     pass
+
+
+def board_config_u32(name: str) -> int:
+    """Read one ``UINT32_C(0x...)`` macro from board_config.h.
+
+    board_config.h is the single documented source of truth for the
+    board-routing assumptions (vectors, bank addresses, identity windows)
+    this builder validates against; parsing it here instead of repeating
+    the literal keeps the two from silently drifting apart.
+    """
+    text = BOARD_CONFIG.read_text(encoding="utf-8")
+    match = re.search(
+        rf"#define {re.escape(name)}\s+UINT32_C\((0x[0-9A-Fa-f]+)\)", text)
+    if not match:
+        raise BuildError(f"board_config.h is missing macro {name}")
+    return int(match.group(1), 16)
 
 
 def sha256(data: bytes) -> str:
@@ -79,10 +97,16 @@ def build(output: Path) -> dict:
     run([objcopy, "-O", "binary", str(elf), str(unchecked)])
     raw = unchecked.read_bytes()
     raw += b"\xFF" * ((-len(raw)) & 3)
-    if len(raw) > 0x3F000:
+    # board_config.h is the documented source of truth for these board-
+    # routing constants (stack top, flash bank base, preserved identity
+    # window); read from there instead of repeating the literals.
+    flash_base = board_config_u32("OPEN_CFW_CASE_FLASH_BASE")
+    stack_top = board_config_u32("OPEN_CFW_CASE_STACK_TOP")
+    identity_limit = board_config_u32("OPEN_CFW_CASE_BANK1_IDENTITY_LIMIT")
+    if flash_base + len(raw) > identity_limit:
         raise BuildError("raw image overlaps preserved bank-1 identity window")
     stack, reset = struct.unpack_from("<II", raw)
-    if stack != 0x20002C88 or reset & 1 == 0 or not (0x08000000 <= reset < 0x08000000 + len(raw)):
+    if stack != stack_top or reset & 1 == 0 or not (flash_base <= reset < flash_base + len(raw)):
         raise BuildError(f"invalid Case vectors: SP={stack:#x}, reset={reset:#x}")
     checksum = sum(struct.unpack(f">{len(raw) // 4}I", raw)) & 0xFFFFFFFF
     wrapper = b"EVEN" + bytes((1, 2, 57, 0)) + struct.pack(">II", len(raw), checksum) + bytes(16)
@@ -94,7 +118,7 @@ def build(output: Path) -> dict:
     source_inventory = [{
         "path": str(path.relative_to(ROOT)),
         "sha256": sha256(path.read_bytes()),
-    } for path in [*sources, LINKER]]
+    } for path in [*sources, LINKER, BOARD_CONFIG]]
     report = {
         "schema_version": 1,
         "component": "G2 charging-case source image",

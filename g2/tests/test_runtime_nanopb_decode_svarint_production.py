@@ -256,7 +256,7 @@ STAGED_CONSUMER_PINS = {
     ROOT / "docs/memory-map.md": "6c4ce6a0b555bdad31061624c2e023c75ca071042b29c726a2b48d5cd5798ed3",
     ROOT / "docs/source-coverage.md": "7d21139a01d649cc4280f34c95603188421c9d24aa5438103a585b2e5882037d",
     ROOT / "docs/upstream-inventory.md": "b51309d1159aaad9d983658b2b5d1055699967062025f306f47365d964218aee",
-    ROOT / "docs/linux-reproducible-build.md": "a80f6971972877c624cf93c97488ab6d33d54e65d933ae62f98be8bfd09ef58a",
+    ROOT / "docs/linux-reproducible-build.md": "8932944744a7ff88f4f7a5f2bb3b3b66da512d28ea8c398a1b263ad06ba2c123",
 }
 
 

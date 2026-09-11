@@ -16,11 +16,11 @@ _Static_assert(sizeof(struct open_cfw_dw_spi_device_state) == 16,
 
 int open_cfw_gx8002_dw_spi_setup(struct spi_device *device)
 {
-    volatile struct spi_device *d = device;
+    struct spi_device *d = device;
     d->mode = 0;
-    if (d->bits_per_word == 0)
+    if (!d->bits_per_word)
         d->bits_per_word = 8;
-    volatile struct open_cfw_dw_spi_device_state *state = d->controller_state;
+    struct open_cfw_dw_spi_device_state *state = d->controller_state;
     if (!state) {
         state = (void *)(uintptr_t)0x20027ae0u;
         if (state->device)
@@ -30,7 +30,12 @@ int open_cfw_gx8002_dw_spi_setup(struct spi_device *device)
         d->max_speed_hz = 10000000u;
     unsigned int clock = open_cfw_gx8002_clock_frequency(14);
     unsigned int speed = d->max_speed_hz;
-    unsigned int divider = (clock / speed) & ~1u;
+    unsigned int divider = clock / speed;
+    /* GCC's csky_split_and selects 32-bit ANDNI before BCLRI for "& ~1u".
+     * The low-register read/write constraint selects the understood 16-bit
+     * instruction needed by this fixed entry's 116-byte envelope. No memory
+     * or flags are changed. */
+    __asm__("bclri %0, 0" : "+a" (divider));
     if (divider * speed != clock)
         divider += 2;
     state->device = device;

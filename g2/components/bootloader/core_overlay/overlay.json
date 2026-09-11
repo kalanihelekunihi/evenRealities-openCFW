@@ -40225,6 +40225,53 @@
       }
     }
   ],
+  "in_place_data": [
+    {
+      "symbol": "open_cfw_bootloader_critical_transfer_base",
+      "section": ".rodata.open_cfw_bootloader_critical_transfer_base",
+      "source": {
+        "path": "components/bootloader/core_overlay/runtime_critical_transfer_base.c",
+        "size": 1372,
+        "sha256": "40e5addc01c1e678dba605b127987e80edfeefff2b1befe5dc992bdbe36c3b00",
+        "license": "MIT",
+        "origin": "clean-room reproduction of the fixed SRAM critical-transfer staging base literal consumed by the already-routed critical word-transfer dispatcher",
+        "evidence": "docs/research/g2-bootloader-critical-transfer-base-literal-430b0c-source-closure.md"
+      },
+      "toolchain": {
+        "target": "arm-none-eabi",
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "flags": [
+          "-mcpu=cortex-m55",
+          "-mthumb",
+          "-Oz",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-ident"
+        ]
+      },
+      "expected": {
+        "size": 4,
+        "sha256": "9e80397374794d01d92e70c63768b7f2d39dd005963af1028813df954b6d1f7b",
+        "alignment": 4
+      },
+      "placements": [
+        {
+          "name": "critical_transfer_base_literal",
+          "runtime_address": 4393740,
+          "source_offset": 0,
+          "size": 4,
+          "stock_sha256": "9e80397374794d01d92e70c63768b7f2d39dd005963af1028813df954b6d1f7b"
+        }
+      ]
+    }
+  ],
   "toolchain": {
     "target": "arm-none-eabi",
     "reviewed_version_prefix": "Apple clang version 21.0.0",

@@ -52,3 +52,26 @@ startup, call boundaries, peripheral timing, interrupt behavior, or a complete
 codec image. Both reports emit zero firmware bytes and leave production
 ownership accounting unchanged. Native source compilation is now available;
 source-only whole-image integration remains the next substantive boundary.
+
+## Data-cache disable: same upstream algorithm, pinned as assembly (CD-004)
+
+`gx_dcache_disable` is the mirror of `gx_dcache_enable`: clear
+`CACHE->CER`'s `EN` bit, then write `CACHE_CIR_INV_ALL_Msk` to `CACHE->CIR`,
+inside the same `__DSB()`/`__ISB()` barrier pair. The pinned upstream header's
+`csi_dcache_disable()` implements exactly this, but this repository's C-SKY
+toolchain lowers the single-bit `&= ~EN_Msk` to an `andni` instruction in a
+different register than the stock object, which uses `bclri`. Editing the
+vendored header to coax a different instruction choice is not an option, so
+`runtime_gx8002_dcache_disable.c` pins the upstream algorithm as reviewed
+inline assembly — every mnemonic, register and immediate is the disassembled
+stock body — instead of C. `verify_gx8002_dcache_disable.py` compiles it and
+requires the result to be byte-identical to the authenticated stock object at
+every occurrence before returning a report; a diverging compile fails closed
+the same way the enable/icache checks do.
+
+The resulting 36-byte section exactly matches the stock object at three
+package offsets: 12,804 (boot stage 2 IRAM, the span this closes part of for
+work item CD-004), 95,736 (image A SRAM), and 251,636 (image B SRAM). There
+are no relocations or undefined symbols. `make -C g2 gx8002-source-candidate`
+now routes all three occurrences as `compiled_assembly`; see
+`docs/research/gx8002-source-candidate-build.json` for current totals.

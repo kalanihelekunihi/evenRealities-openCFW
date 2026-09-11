@@ -20,9 +20,11 @@ export OPENCFW_TOOLCHAIN_PROFILE
 REFERENCE_MANIFEST ?= manifests/g2-2.2.6.10.json
 RING_SOURCE_MANIFEST ?= manifests/g2-2.2.6.10-ring-source.json
 SOURCE_MANIFEST ?= manifests/g2-2.2.6.10-core-source.json
+SOURCE_ONLY_MANIFEST ?= manifests/g2-2.2.6.10-source-only.json
 REFERENCE_BUILD_DIR ?= build/reference
 RING_SOURCE_BUILD_DIR ?= build/ring-source
 SOURCE_BUILD_DIR ?= build/source
+SOURCE_ONLY_BUILD_DIR ?= build/source-only
 RELEASE_BUILD_DIR ?= build/release
 SOURCE_PACKAGE := $(SOURCE_BUILD_DIR)/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin
 REFERENCE_PACKAGE := $(REFERENCE_BUILD_DIR)/package/g2-openCFW-s200_v2.2.6.10.evenota.bin
@@ -103,6 +105,12 @@ touch-source-image:
 	$(PYTHON) tools/analyze_g2_touch_source_image.py --write-manifest
 	$(PYTHON) -m unittest tests.test_runtime_touch_unsigned_division tests.test_touch_source_image tests.test_analyze_g2_touch_source_image
 
+.PHONY: touch-source-experimental
+touch-source-experimental: touch-source-image
+	$(PYTHON) tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-touch-source-experimental.json --output-dir build/touch-source-experimental --toolchain-profile apple-clang
+	$(PYTHON) tools/open_cfw.py verify-artifacts --manifest manifests/g2-2.2.6.10-touch-source-experimental.json --output-dir build/touch-source-experimental --toolchain-profile apple-clang
+	$(PYTHON) -m unittest tests.test_touch_source_manifest_routing tests.test_runtime_touch_nvic_config
+
 pt-protocol-source:
 	$(PYTHON) tools/analyze_g2_pt_protocol_source.py --write-manifest
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
@@ -124,9 +132,7 @@ pt-protocol-source:
 		tests.test_analyze_g2_pt_protocol_source
 
 em9305-source-overlay:
-	docker run --rm -v "$(CURDIR):/work" -w /work \
-		opencfw-arc-toolchain:fedora44 \
-		$(PYTHON) components/em9305/source_overlay/build_overlay.py
+	$(PYTHON) components/em9305/source_overlay/build_overlay.py
 	$(PYTHON) tools/integrate_g2_em9305_source_overlay.py
 	$(PYTHON) tools/analyze_em9305_metaware_runtime_candidate.py
 	$(PYTHON) tools/analyze_em9305_source_readiness.py --write-manifests
@@ -2352,6 +2358,25 @@ transparent-harvest:
 		--expect-executable-sha256 \
 		36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863
 
+BOOTLOADER_HARVEST_DIR ?= research/corpus/apollo-bootloader/ghidra/decomp
+BOOTLOADER_HARVEST_JOBS ?= 4
+
+# Re-harvests per-function decompilation for the Apollo bootloader (XC-009),
+# the bootloader analog of transparent-harvest above.  Needs Ghidra and a JDK
+# and an analyzed Ghidra project over
+# blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin; the checked-in corpus
+# already carries a completed harvest, so this is only for refreshing it.
+bootloader-ghidra-harvest:
+	$(PYTHON) tools/harvest_ghidra_decomp.py \
+		--project "$${OPENCFW_BOOTLOADER_GHIDRA_PROJECT:?set to an analyzed Ghidra project directory}" \
+		--project-name apollo_bootloader_template \
+		--program ota_s200_bootloader.bin \
+		--output "$(BOOTLOADER_HARVEST_DIR)" \
+		--jobs "$(BOOTLOADER_HARVEST_JOBS)" \
+		--ghidra-home "$${OPENCFW_GHIDRA_HOME:-/opt/homebrew/Cellar/ghidra/12.1.3/libexec}" \
+		--expect-executable-sha256 \
+		f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5
+
 transparent-db:
 	$(PYTHON) tools/build_transparent_function_db.py \
 		--harvest "$(TRANSPARENT_HARVEST_DIR)" \
@@ -2442,6 +2467,41 @@ codec-source-experimental: bootloader-component core-component gx8002-source-can
 	cp components/shared/gx8002/NATIONALCHIP-LIBC-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-LIBC-NOTICE.txt
 	cp components/shared/gx8002/NATIONALCHIP-MAX-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-MAX-NOTICE.txt
 	cp components/shared/gx8002/NATIONALCHIP-STREAM-NOTICE.txt build/codec-source-experimental/package/NATIONALCHIP-STREAM-NOTICE.txt
+
+.PHONY: source-only source-only-gate
+# Selects a source_build provider for all six EVENOTA components (extends
+# g2-2.2.6.10-core-source.json; adds codec, touch, and case) and assembles/
+# verifies the resulting EVENOTA package on macOS.  This is a packaging
+# target, not a completion claim: touch and case are source-built but not
+# yet production-routed, and the codec provider is the experimental hybrid
+# with retained stock bytes documented in
+# docs/research/gx8002-source-candidate-build.json.  Run `source-only-gate`
+# (or `make -C g2 completion-readiness --require-source-only`, see below)
+# to see exactly which bytes and components still block source-only status.
+# Rebuilds shared component outputs (bootloader-component, core-component,
+# gx8002-source-candidate) via codec-source-experimental: take the XC-001
+# integration lock (see continue-analysis.sh) before running this target.
+source-only: codec-source-experimental touch-source-image case-source-image
+	$(PYTHON) tools/build_g2_source_only_manifest.py
+	$(PYTHON) tools/open_cfw.py build \
+		--manifest "$(SOURCE_ONLY_MANIFEST)" \
+		--output-dir "$(SOURCE_ONLY_BUILD_DIR)" \
+		--toolchain-profile apple-clang
+	$(PYTHON) tools/open_cfw.py verify \
+		--manifest "$(SOURCE_ONLY_MANIFEST)" \
+		--toolchain-profile apple-clang
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest -v \
+		tests.test_build_g2_source_only_manifest \
+		tests.test_g2_source_only_package
+
+# Fail-closed gate: exits nonzero and prints the exact per-component
+# release-blocking byte count unless every one of the six components is
+# both source-complete (zero retained/candidate bytes) and production-
+# routed.  Until every component finishes, this is expected to fail; that
+# failure IS the deliverable (see analyze_g2_completion_readiness.py
+# --require-source-only and tests.test_analyze_g2_completion_readiness_source_only).
+source-only-gate:
+	$(PYTHON) tools/analyze_g2_completion_readiness.py --require-source-only
 
 .PHONY: gx8002-known-function-harvest
 gx8002-known-function-harvest:

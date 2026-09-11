@@ -11,7 +11,11 @@ are regenerated directly from their authenticated semantics.
 
 The builder preserves the first three records byte-for-byte, extends only the
 application record, rebuilds the record table, and performs no hardware
-operation. The 980-byte MetaWare runtime and the 260-byte reconstructible-tail
+operation. It requires an ARCv2 (`-mcpu=em`) GCC/binutils; see
+`toolchain/TOOLCHAIN.md` for the pinned, reproducible macOS toolchain,
+`toolchain/fetch_arc_toolchain.sh` to install it, and the `OPENCFW_ARC_*`
+environment variables (or `--gcc`/`--nm`/... flags) `build_overlay.py`
+accepts to point at any other ARC toolchain instead. The 980-byte MetaWare runtime and the 260-byte reconstructible-tail
 frontier are both production-routed through maintained ARCv2-EM C and checked
 entry veneers. The remaining 210,584 provider bytes are an authenticated,
 typed retained controller boundary, so whole-component source completion is

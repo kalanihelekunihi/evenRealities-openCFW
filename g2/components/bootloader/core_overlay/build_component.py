@@ -30,6 +30,7 @@ from apollo_overlay import (  # noqa: E402
     align_up,
     append_isolated_leaves,
     append_relocated_leaves,
+    compile_in_place_data_group,
     compile_in_place_leaf,
     compile_isolated_leaf,
     compile_overlay,
@@ -132,6 +133,9 @@ def patch_bootloader(
     in_place_leaves: tuple[tuple[bytes, dict[str, Any]], ...] | list[
         tuple[bytes, dict[str, Any]]
     ] = (),
+    in_place_data: tuple[tuple[bytes, dict[str, Any]], ...] | list[
+        tuple[bytes, dict[str, Any]]
+    ] = (),
 ) -> tuple[bytes, dict[str, Any]]:
     run_base = int(config["run_base"])
     partition_end = int(config["partition_end_exclusive"])
@@ -187,6 +191,82 @@ def patch_bootloader(
 
     in_place_plans: list[dict[str, Any]] = []
     in_place_ranges: list[tuple[int, int, str]] = []
+    in_place_data_plans: list[dict[str, Any]] = []
+    for payload, report in in_place_data:
+        extraction = report.get("extraction")
+        if not isinstance(extraction, dict):
+            raise BuildError("bootloader in-place data report is incomplete")
+        symbol = extraction.get("symbol")
+        placements = extraction.get("placements")
+        if not isinstance(symbol, str) or not isinstance(placements, list):
+            raise BuildError("bootloader in-place data report is invalid")
+        for placement in placements:
+            if not isinstance(placement, dict):
+                raise BuildError(f"in-place data {symbol} placement is invalid")
+            name = placement.get("name")
+            runtime_address = placement.get("runtime_address")
+            source_offset = placement.get("source_offset")
+            size = placement.get("size")
+            stock_sha256 = placement.get("stock_sha256")
+            if (
+                not isinstance(name, str)
+                or not isinstance(runtime_address, int)
+                or not isinstance(source_offset, int)
+                or not isinstance(size, int)
+                or size < 1
+                or source_offset < 0
+                or source_offset + size > len(payload)
+                or not isinstance(stock_sha256, str)
+            ):
+                raise BuildError(
+                    f"bootloader in-place data {symbol} placement is invalid"
+                )
+            end_exclusive = runtime_address + size
+            offset = runtime_address - run_base
+            if runtime_address & 1:
+                raise BuildError(
+                    f"in-place data {name} must use an even Thumb address"
+                )
+            if offset < 0 or offset + size > len(base):
+                raise BuildError(f"in-place data {name} exceeds the stock image")
+            if any(
+                offset < site_offset + site_size
+                and site_offset < offset + size
+                for site_offset, site_size, _site in reviewed_sites
+            ):
+                raise BuildError(f"in-place data {name} overlaps a patch site")
+            for other_start, other_end, other_name in in_place_ranges:
+                if runtime_address < other_end and other_start < end_exclusive:
+                    raise BuildError(
+                        f"in-place data {name} overlaps {other_name}"
+                    )
+            observed = bytes(base[offset:offset + size])
+            observed_digest = sha256(observed)
+            if observed_digest != stock_sha256:
+                raise BuildError(
+                    f"in-place data {name} stock SHA-256 differs at "
+                    f"0x{runtime_address:08X}"
+                )
+            replacement = payload[source_offset:source_offset + size]
+            patched[offset:offset + size] = replacement
+            in_place_ranges.append((runtime_address, end_exclusive, name))
+            in_place_data_plans.append(
+                {
+                    "name": name,
+                    "symbol": symbol,
+                    "region_kind": "in_place",
+                    "runtime_address": runtime_address,
+                    "runtime_address_hex": f"0x{runtime_address:08X}",
+                    "end_exclusive": end_exclusive,
+                    "end_exclusive_hex": f"0x{end_exclusive:08X}",
+                    "file_offset": offset,
+                    "expected_size": size,
+                    "size": size,
+                    "stock_sha256": observed_digest,
+                    "replacement_sha256": sha256(replacement),
+                    "replacement_hex": replacement.hex(),
+                }
+            )
     for leaf, report in in_place_leaves:
         extraction = report.get("extraction")
         stock = report.get("stock")
@@ -391,6 +471,8 @@ def patch_bootloader(
         details["patched_cave_leaves"] = cave_plans
     if in_place_plans:
         details["patched_in_place_leaves"] = in_place_plans
+    if in_place_data_plans:
+        details["patched_in_place_data"] = in_place_data_plans
     return bytes(patched), details
 
 
@@ -405,7 +487,9 @@ def provider_regions(
     regions: list[dict[str, Any]] = []
     cursor = 0
     sites = sorted(
-        details["patched_sites"] + details.get("patched_in_place_leaves", []),
+        details["patched_sites"]
+        + details.get("patched_in_place_leaves", [])
+        + details.get("patched_in_place_data", []),
         key=lambda item: item["file_offset"],
     )
     caves = sorted(
@@ -676,6 +760,19 @@ def build(
         raise BuildError("every in-place leaf requires a function name")
     if len(set(in_place_function_names)) != len(in_place_function_names):
         raise BuildError("in-place leaf function names must be unique")
+    in_place_data_configs = config.get("in_place_data", [])
+    if (
+        not isinstance(in_place_data_configs, list)
+        or any(not isinstance(item, dict) for item in in_place_data_configs)
+    ):
+        raise BuildError("in_place_data must be a list of records")
+    in_place_data_symbols = [
+        item.get("symbol") for item in in_place_data_configs
+    ]
+    if any(not isinstance(name, str) for name in in_place_data_symbols):
+        raise BuildError("every in-place data group requires a symbol name")
+    if len(set(in_place_data_symbols)) != len(in_place_data_symbols):
+        raise BuildError("in-place data group symbols must be unique")
     configured_functions = config.get("functions")
     if (
         not isinstance(configured_functions, dict)
@@ -963,6 +1060,27 @@ def build(
                     ),
                 )
             )
+        in_place_data: list[tuple[bytes, dict[str, Any]]] = []
+        for index, data_config in enumerate(in_place_data_configs):
+            data_config = resolve_leaf_profile(
+                data_config,
+                resolved_profile,
+                record=record_profile,
+            )
+            data_config = {
+                **data_config,
+                "toolchain_profiles": {},
+            }
+            in_place_data.append(
+                compile_in_place_data_group(
+                    root=root,
+                    clang=clang,
+                    group_config=data_config,
+                    object_path=temporary_root / f"in-place-data-{index}.o",
+                    toolchain_profile=DEFAULT_TOOLCHAIN_PROFILE,
+                    record=record_profile,
+                )
+            )
 
     # The compiled function ABI (offsets/sizes within the overlay) is
     # toolchain-specific.  Under a non-canonical profile, verify against that
@@ -998,6 +1116,7 @@ def build(
         config=config,
         cave_leaves=cave_leaves,
         in_place_leaves=in_place_leaves,
+        in_place_data=in_place_data,
     )
     provider_digest = sha256(provider)
     if not record_profile:
@@ -1069,6 +1188,17 @@ def build(
         int(report["placement"]["size"]) for report in in_place_leaf_reports
     )
     source_owned_bytes += source_owned_in_place_bytes
+    patched_in_place_data = details.get("patched_in_place_data", [])
+    expected_data_placements = sum(
+        len(report["extraction"]["placements"]) for _payload, report in in_place_data
+    )
+    if len(patched_in_place_data) != expected_data_placements:
+        raise BuildError("in-place data patch report count changed")
+    in_place_data_reports = [report for _payload, report in in_place_data]
+    source_owned_in_place_data_bytes = sum(
+        int(placement["size"]) for placement in patched_in_place_data
+    )
+    source_owned_bytes += source_owned_in_place_data_bytes
     provider_contract = {
         "schema_version": 1,
         "component": "apollo_bootloader",
@@ -1125,6 +1255,7 @@ def build(
                 len(base)
                 - sum(site["expected_size"] for site in details["patched_sites"])
                 - source_owned_in_place_bytes
+                - source_owned_in_place_data_bytes
             ),
             "generated_patch_site_bytes": sum(
                 site["expected_size"] for site in details["patched_sites"]
@@ -1154,6 +1285,15 @@ def build(
                 if in_place_leaf_reports
                 else {}
             ),
+            **(
+                {
+                    "source_owned_in_place_data_bytes": (
+                        source_owned_in_place_data_bytes
+                    )
+                }
+                if in_place_data_reports
+                else {}
+            ),
         },
         "provider_contract": provider_contract,
         "safety": {
@@ -1171,6 +1311,8 @@ def build(
         report["cave_leaves"] = cave_leaf_reports
     if in_place_leaf_reports:
         report["in_place_leaves"] = in_place_leaf_reports
+    if in_place_data_reports:
+        report["in_place_data"] = in_place_data_reports
     if len(source_records) == 1:
         report["source"] = source_records[0]
     atomic_write_json(output_dir / "build-report.json", report)

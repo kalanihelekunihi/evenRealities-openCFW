@@ -1,0 +1,30 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_image_a_stage1_tail",
+      "section_name": ".data.open_cfw_gx8002_image_a_stage1_tail",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 4100,
+      "compiled_sha256": "4dcc993acca7f160eea47ab8cd88ffe5c840ea50f13b55848dbfeb0afa4776a1",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_image_a_stage1_tail",
+          "package_offset": 46476,
+          "bytes": 4100,
+          "sha256": "4dcc993acca7f160eea47ab8cd88ffe5c840ea50f13b55848dbfeb0afa4776a1",
+          "region": "image_a_stage1_tail"
+        }
+      ]
+    }
+  ],
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "source_sha256": "d19214556c902fce4b0d21d6c9384a8c0778d799484a665f7dcf988edc2ed96e",
+  "header_sha256": "89bec6b76bece8e47d6d3d8ffbf5cb1f3d0adc6782df9a98ed39271d38286a8d",
+  "stage1_block_crc32_mpeg2": "0x21C58EDB",
+  "stage2_xip_text_size": 36484,
+  "limits": [
+    "Covers only the deterministic pad/CRC/length tail; the preceding BINH stage-1 block header/code and the following stage-2 XIP text remain separate, still-opaque spans.",
+    "The CRC-32/MPEG-2 trailer and XIP length word are format bookkeeping, independently recomputed here from the public BINH algorithm; they are not a claim of redistribution rights over the surrounding still-proprietary block content that the checksum covers."
+  ]
+}

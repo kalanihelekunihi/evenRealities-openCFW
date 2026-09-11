@@ -3,10 +3,12 @@
 """Execute stock and source setup against independent transaction expectations."""
 import json
 import hashlib
+import shutil
 import re
 import subprocess
 from itertools import product
 from pathlib import Path
+from verify_gx8002_logging import check_paths
 from analyze_gx8002_dw_spi_setup import analyze
 from build_gx8002_dw_spi_setup_candidate import build, ROOT
 from model_gx8002_dw_spi_setup import Case, expected, DEVICE, FIXED_STATE, OTHER_STATE, MASK
@@ -117,9 +119,12 @@ def execute(code, case):
     raise ValueError('Setup step bound')
 
 
-def verify():
+def verify(prefix=None,sdk=None,output=None):
+    check_paths(prefix,sdk)
     attribution = analyze()
     candidate = build()
+    if not candidate['fits']:
+        raise ValueError('Setup exceeds slot')
     out = ROOT/'build/gx8002-board'
     pre = str(ROOT/'build/csky-macos/install/bin/csky-unknown-elf-objdump')
     stock = decode(subprocess.check_output([pre,'-d',str(out/'dw-spi-setup-oracle.elf')],text=True))
@@ -137,11 +142,17 @@ def verify():
                       'analyze_gx8002_dw_spi_setup.py', 'build_gx8002_dw_spi_setup_candidate.py')
     evidence_hashes = {name: hashlib.sha256((ROOT/'tools'/name).read_bytes()).hexdigest()
                        for name in evidence_files}
-    return {'candidate':candidate,'attribution':attribution,'decoded_cases':count,
+    row = {k:candidate[k] for k in ('symbol','section_name','compiled_bytes','compiled_sha256')}
+    row['stock_occurrences'] = [{'symbol':candidate['symbol'],'package_offset':0xf71c,'bytes':116,
+                                 'sha256':candidate['stock_sha256'],'region':'image_a_xip_text'}]
+    if output:
+        output.mkdir(parents=True,exist_ok=True)
+        shutil.copyfile(out/'dw-spi-setup-candidate.elf',output/'dw-spi-setup.elf')
+    return {'functions':[row],'candidate':candidate,'attribution':attribution,'decoded_cases':count,
             'evidence_sha256':evidence_hashes,
-            'source_admitted':False,'hardware_qualified':False,
-            'limits':['Candidate exceeds original slot; no integration admission.',
-                      'Clock helper effects modeled; valid distinct state/device storage and nonzero post-call speed required.']}
+            'source_admitted':True,'hardware_qualified':False,
+            'limits':['Clock helper effects modeled; valid distinct state/device storage and nonzero post-call speed required.',
+                      'Fixed 12-byte frame ABI modeled; physical SPI clock/divider hardware behavior unqualified.']}
 
 if __name__ == '__main__':
     report = verify()

@@ -721,6 +721,33 @@ def _component(
     }
 
 
+def source_only_gate(components: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    """Fail-closed source-only readiness derived from the per-component ledger.
+
+    A component only counts once it is both ``source_complete`` (zero
+    release-blocking bytes -- no retained ``official_blob`` region, trap, or
+    unreviewed-decompilation byte left uncovered) and ``production_routed``
+    (its source build is what actually ships, not an unrouted candidate).
+    See the "Completion conditions" section of docs/source-only-goal.md and
+    manifests/g2-2.2.6.10-source-only.json, which selects a source_build
+    provider for every component without itself claiming completion.
+    """
+    blocking_bytes_by_component = {
+        name: row["release_blocking_bytes"]
+        for name, row in components.items()
+        if not row["source_complete"] or not row["production_routed"]
+    }
+    not_production_routed = [
+        name for name, row in components.items() if not row["production_routed"]
+    ]
+    return {
+        "ready": not blocking_bytes_by_component,
+        "manifest": "manifests/g2-2.2.6.10-source-only.json",
+        "blocking_bytes_by_component": blocking_bytes_by_component,
+        "not_production_routed_components": not_production_routed,
+    }
+
+
 def analyze() -> dict[str, Any]:
     base = _read(BASE_MANIFEST)
     core = _read(CORE_MANIFEST)
@@ -1487,6 +1514,7 @@ def analyze() -> dict[str, Any]:
     source_incomplete_components = [
         name for name, row in components.items() if not row["source_complete"]
     ]
+    source_only = source_only_gate(components)
     return {
         "schema_version": 1,
         "analysis_mode": (
@@ -1504,10 +1532,12 @@ def analyze() -> dict[str, Any]:
             "unclassified_components": unclassified_components,
             "source_incomplete_components": source_incomplete_components,
         },
+        "source_only": source_only,
         "gates": {
             "byte_accounting_complete": True,
             "classification_complete": not unclassified_components,
             "source_complete": not source_incomplete_components,
+            "source_only_ready": source_only["ready"],
             "source_metadata_clean": license_summary["source_errors"] == 0,
             "source_ownership_quality_clean": raw_quality_clean,
             "project_license_policy_clean": project_license_clean,
@@ -1605,6 +1635,14 @@ def main() -> int:
     parser.add_argument("--require-source-complete", action="store_true")
     parser.add_argument("--require-source-ownership-quality", action="store_true")
     parser.add_argument("--require-project-license-policy", action="store_true")
+    parser.add_argument(
+        "--require-source-only", action="store_true",
+        help=(
+            "fail closed unless every one of the six EVENOTA components is "
+            "both source-complete and production-routed; always prints the "
+            "exact per-component release-blocking byte report"
+        ),
+    )
     args = parser.parse_args()
     report = analyze()
     if args.json:
@@ -1626,6 +1664,18 @@ def main() -> int:
         print("  project-owned GPL records pending MIT: "
               f"{report['project_license_policy']['project_owned_gpl_records_pending_mit']}")
         print(f"  release authorized: {report['gates']['release_authorized']}")
+    if args.require_source_only:
+        source_only = report["source_only"]
+        print(f"  source-only ready: {source_only['ready']}")
+        if not source_only["ready"]:
+            print("  source-only per-component release-blocking bytes:")
+            for name in sorted(report["components"]):
+                blocking = source_only["blocking_bytes_by_component"].get(name)
+                if blocking is None:
+                    continue
+                routed = report["components"][name]["production_routed"]
+                print(f"    {name}: {blocking} bytes blocking"
+                      f"{'' if routed else ' (not production-routed)'}")
     if args.require_classified and not report["gates"]["classification_complete"]:
         return 2
     if args.require_source_complete and not report["gates"]["source_complete"]:
@@ -1636,6 +1686,8 @@ def main() -> int:
     if (args.require_project_license_policy and
             not report["gates"]["project_license_policy_clean"]):
         return 5
+    if args.require_source_only and not report["gates"]["source_only_ready"]:
+        return 6
     return 0
 
 

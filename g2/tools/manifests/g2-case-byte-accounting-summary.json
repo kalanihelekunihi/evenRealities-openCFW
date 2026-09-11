@@ -1,0 +1,64 @@
+{
+  "app_base": 134217728,
+  "app_bytes": 55752,
+  "bucket_bytes": {
+    "admitted_function_source_candidate": 14886,
+    "gap_frontier_typed_unsupported_interfunction_code_or_data_boundary": 2058,
+    "gap_frontier_typed_zero_alignment_or_data": 62,
+    "platform_first_party_g2": 542,
+    "platform_upstream_cmsis_startup": 204,
+    "platform_upstream_freertos_kernel": 238,
+    "platform_upstream_stm32_hal": 120,
+    "residual_ff_fill": 4,
+    "residual_log_string_candidate": 7826,
+    "residual_unresolved_code_or_data": 29388,
+    "residual_zero_fill": 424
+  },
+  "component": "G2 charging-case typed_external_or_unsupported byte accounting",
+  "hardware_operations": [],
+  "hardware_validation": "blocked by unavailable physical evidence",
+  "identity_windows_in_range": {
+    "count": 0,
+    "note": "The case OTA updater's preserved SN identity windows (0x0803F000..0x0803F00F, 0x0803F800..0x0803F807, and the bank-2 mirrors at 0x0807Fxxx) are proven by g2-box-stm32g0-platform-recovery.md to lie far beyond this 55,752-byte application image (image_contains_preserved_windows: false). Zero identity-window bytes exist inside 0x08000000..0x0800D9C8; there is nothing to reconstruct or divergence-document for identity windows within this range."
+  },
+  "island_evidence": {
+    "platform_first_party_g2": [
+      "OTA updater literals referencing the bank-2 preserved SN windows",
+      "USART1 IRQ thunk plus the two symmetric GLS frame packers (0x5A channel, 10-retry, 0xFF failure fill)",
+      "static task/timer descriptor table with name and entry literals",
+      "application task/timer name string block"
+    ],
+    "platform_upstream_cmsis_startup": [
+      "Cortex-M0+ vector table, 46 words, STM32G0B1-class IRQ map",
+      "reset trampoline (SystemInit -> _start) and default self-loop exception slots"
+    ],
+    "platform_upstream_freertos_kernel": [
+      "GCC ARM_CM0 port: interrupt-mask helpers, xPortPendSVHandler; exact V10-line instruction sequence",
+      "SysTick vector gate: SCS read + xTaskGetSchedulerState guard",
+      "xPortSysTickHandler (mask/tick/PENDSVSET/unmask)",
+      "xTaskGetSchedulerState over kernel statics at 0x20000128",
+      "xTaskIncrementTick head (xTickCount/xPendedTicks/uxSchedulerSuspended evidence)"
+    ],
+    "platform_upstream_stm32_hal": [
+      "HAL FLASH credential island: OPTKEYR + KEYR unlock literals and surrounding flash-driver code",
+      "HAL_UART_IRQHandler head (USART ISR/CR1/CR3/ICR sequence)"
+    ]
+  },
+  "metrics": {
+    "admitted_function_source_candidate_bytes": 14886,
+    "gap_frontier_bytes": 2120,
+    "platform_attributed_bytes": 1104,
+    "pre_residual_typed_bytes": 3224,
+    "residual_bytes": 37642,
+    "residual_ff_fill_bytes": 4,
+    "residual_log_string_candidate_bytes": 7826,
+    "residual_unresolved_code_or_data_bytes": 29388,
+    "residual_zero_fill_bytes": 424,
+    "row_count": 1135,
+    "typed_external_or_unsupported_bytes": 40866
+  },
+  "note": "Naming a byte range here is a precondition for routing reviewed source at those addresses, not source ownership itself. residual_unresolved_code_or_data remains opaque and needs a full Ghidra function map (recommended next action in g2-box-stm32g0-platform-recovery.md) before it can be reduced further.",
+  "production_routed": false,
+  "row_count": 1135,
+  "schema_version": 1
+}

@@ -25,6 +25,34 @@ STOCK_IDENTITY = (
     211_948,
     "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
 )
+# Reproducible macOS-native ARC toolchain.  See toolchain/TOOLCHAIN.md for
+# the pin (release tag, asset SHA-256, gcc/binutils versions) and
+# toolchain/fetch_arc_toolchain.sh to install it.  arc-linux-gnu-* stays the
+# fallback name so a Linux host with that triple on PATH (e.g. the previous
+# Red Hat cross package) keeps working without setting any OPENCFW_ARC_*
+# override.
+ARC_TOOLCHAIN_TRIPLE = "arc-zephyr-elf"
+ARC_TOOLCHAIN_RELEASE = "arc-zephyr-elf-1.0.1"
+ARC_TOOLCHAIN_CACHE_DEFAULT = (
+    Path.home() / ".cache" / "opencfw" / "toolchains" / ARC_TOOLCHAIN_RELEASE
+)
+
+
+def _toolchain_cache_dir() -> Path:
+    override = os.environ.get("OPENCFW_ARC_TOOLCHAIN_DIR")
+    return Path(override) if override else ARC_TOOLCHAIN_CACHE_DEFAULT
+
+
+def _default_tool(tool: str, env_var: str) -> str:
+    explicit = os.environ.get(env_var)
+    if explicit:
+        return explicit
+    cached = _toolchain_cache_dir() / "bin" / f"{ARC_TOOLCHAIN_TRIPLE}-{tool}"
+    if cached.is_file():
+        return str(cached)
+    return f"arc-linux-gnu-{tool}"
+
+
 APP_ADDRESS = 0x00302400
 APP_STOCK_END = 0x00335BC8
 APP_SECTOR_END = 0x00336000
@@ -145,7 +173,14 @@ def build(
     run([gcc, *FLAGS, "-c", str(meta_entries), "-o", str(meta_entries_path)])
     run([
         gcc, "-mcpu=em", "-nostdlib", "-Wl,--gc-sections",
-        f"-Wl,-T,{linker}", str(object_path), str(entries_path),
+        # Use GCC's own -T recognition (not -Wl,-T,...): some ARC GCC builds
+        # (e.g. picolibc-hosted toolchains) only suppress their implicit
+        # default linker script when -T is visible to the driver itself, not
+        # when it is smuggled through -Wl.  Passing -Wl,-T leaves that
+        # default script appended ahead of ours, which silently changes
+        # orphan-section placement under --gc-sections and can corrupt the
+        # fixed-address layout this script requires.
+        "-T", str(linker), str(object_path), str(entries_path),
         str(meta_object_path), str(meta_entries_path), "-o", str(elf),
     ])
     undefined = [line.split()[-1] for line in run([nm, "-u", str(elf)]).splitlines()
@@ -194,8 +229,15 @@ def build(
         temporary = Path(raw)
         for index, (section, address, allocation) in enumerate(ENTRY_PATCHES):
             body = extract_section(objcopy, elf, section, temporary / f"entry-{index}.bin")
-            if len(body) != 4:
-                raise BuildError(f"{section}: expected four-byte C tail branch, got {len(body)}")
+            # The emitted C wrapper is normally a single four-byte tail
+            # branch.  Some compilers additionally emit a two-byte
+            # zero/sign-extension instruction ahead of the branch for
+            # entries whose C signature narrows the argument to uint8_t or
+            # uint16_t (still one call-clobbered register, still exactly one
+            # compiled tail branch); accept that compiler-driven variation as
+            # long as it still fits the deterministic NOP-fill allocation.
+            if len(body) < 4 or len(body) % 2 or len(body) > allocation:
+                raise BuildError(f"{section}: expected a four-byte-or-larger C tail branch, got {len(body)}")
             replacement = body + ARC_NOP * ((allocation - len(body)) // 2)
             if len(replacement) != allocation:
                 raise BuildError(f"{section}: invalid NOP-fill allocation")
@@ -347,11 +389,11 @@ def build(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--gcc", default=os.environ.get("OPENCFW_ARC_GCC", "arc-linux-gnu-gcc"))
-    parser.add_argument("--nm", default=os.environ.get("OPENCFW_ARC_NM", "arc-linux-gnu-nm"))
-    parser.add_argument("--objcopy", default=os.environ.get("OPENCFW_ARC_OBJCOPY", "arc-linux-gnu-objcopy"))
-    parser.add_argument("--objdump", default=os.environ.get("OPENCFW_ARC_OBJDUMP", "arc-linux-gnu-objdump"))
-    parser.add_argument("--readelf", default=os.environ.get("OPENCFW_ARC_READELF", "arc-linux-gnu-readelf"))
+    parser.add_argument("--gcc", default=_default_tool("gcc", "OPENCFW_ARC_GCC"))
+    parser.add_argument("--nm", default=_default_tool("nm", "OPENCFW_ARC_NM"))
+    parser.add_argument("--objcopy", default=_default_tool("objcopy", "OPENCFW_ARC_OBJCOPY"))
+    parser.add_argument("--objdump", default=_default_tool("objdump", "OPENCFW_ARC_OBJDUMP"))
+    parser.add_argument("--readelf", default=_default_tool("readelf", "OPENCFW_ARC_READELF"))
     parser.add_argument("--output-dir", type=Path, default=SOURCE_DIR / "build")
     args = parser.parse_args()
     report = build(

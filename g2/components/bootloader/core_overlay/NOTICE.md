@@ -1530,3 +1530,21 @@ and retained critical-section behavior are G2 compatibility seams.
 Registration authorizes offline compilation and unsigned package assembly
 only; it authorizes no signing, flashing, reset, boot, interrupt/SRAM/MMIO
 access, service invocation, or other hardware operation.
+
+`runtime_bounded_sink_415672.c` and `runtime_trap_stubs_416026.c` are MIT
+clean-room openCFW implementations of the authenticated bounded-output
+character sink at `[0x00415672,0x0041568C)` and the two single-instruction
+compatibility stubs (self-loop trap, no-op return) at `[0x00416026,
+0x0041602A)`. They incorporate no retained vendor implementation bytes.
+Registration authorizes offline compilation and unsigned package assembly
+only; it authorizes no signing, flashing, reset, boot, or other hardware
+operation.
+
+`runtime_event_flags_literal_41658c.c` and
+`runtime_easylogger_csi_literal_417ad0.c` are MIT clean-room openCFW
+reconstructions of two authenticated flash literals -- the SRAM address of
+the shared event-flags object at `[0x0041658C,0x00416590)` and the
+EasyLogger ANSI CSI-start escape at `[0x00417AD0,0x00417AD4)`. Both compile
+byte-identical to their stock spans but are candidate source only: neither
+is registered in `overlay.json`, because this component's
+`build_component.py` does not yet read an `in_place_data` key.

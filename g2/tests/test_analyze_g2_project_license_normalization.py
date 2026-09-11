@@ -80,7 +80,7 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
         self.assertEqual(
             metrics["distributed_upstream_gpl_files_preserved"], 1)
         self.assertEqual(
-            metrics["distributed_project_mit_normalization_targets"], 919)
+            metrics["distributed_project_mit_normalization_targets"], 1097)
         self.assertEqual(metrics["root_policy_project_mit_files"], 4)
         self.assertEqual(
             metrics["root_policy_project_mit_census_sha256"],
@@ -198,8 +198,8 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
 
     def test_community_controller_and_build_adapter_census_is_exact(self) -> None:
         metrics = self.result["metrics"]
-        self.assertEqual(metrics["community_controller_and_adapter_source_files"], 112)
-        self.assertEqual(metrics["community_project_mit_compatible_source_files"], 109)
+        self.assertEqual(metrics["community_controller_and_adapter_source_files"], 288)
+        self.assertEqual(metrics["community_project_mit_compatible_source_files"], 285)
         self.assertEqual(metrics["community_touch_apache_source_files_preserved"], 3)
 
         project_paths = set(self.result["community_project_paths"])
@@ -256,8 +256,8 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
 
     def test_touch_source_image_distribution_census_is_exact(self) -> None:
         metrics = self.result["metrics"]
-        self.assertEqual(metrics["touch_source_image_project_mit_files"], 9)
-        self.assertEqual(metrics["touch_source_image_package_files"], 6)
+        self.assertEqual(metrics["touch_source_image_project_mit_files"], 10)
+        self.assertEqual(metrics["touch_source_image_package_files"], 7)
         self.assertEqual(metrics["touch_source_image_support_files"], 3)
         paths = set(self.result["touch_source_image_paths"])
         self.assertEqual(
@@ -268,6 +268,7 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
                 "g2/components/touch/source_image/firmware_image.c",
                 "g2/components/touch/source_image/firmware_image.h",
                 "g2/components/touch/source_image/linker.ld",
+                "g2/components/touch/source_image/psoc4000t_nvic.h",
                 "g2/components/touch/source_image/startup.c",
                 "g2/tests/test_analyze_g2_touch_source_image.py",
                 "g2/tests/test_touch_source_image.py",
@@ -282,14 +283,15 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
 
     def test_case_source_image_distribution_census_is_exact(self) -> None:
         metrics = self.result["metrics"]
-        self.assertEqual(metrics["case_source_image_project_mit_files"], 7)
-        self.assertEqual(metrics["case_source_image_package_files"], 5)
+        self.assertEqual(metrics["case_source_image_project_mit_files"], 8)
+        self.assertEqual(metrics["case_source_image_package_files"], 6)
         self.assertEqual(metrics["case_source_image_support_files"], 2)
         paths = set(self.result["case_source_image_paths"])
         self.assertEqual(
             paths,
             {
                 "g2/components/case/source_image/README.md",
+                "g2/components/case/source_image/board_config.h",
                 "g2/components/case/source_image/build_image.py",
                 "g2/components/case/source_image/compiler_runtime.c",
                 "g2/components/case/source_image/linker.ld",

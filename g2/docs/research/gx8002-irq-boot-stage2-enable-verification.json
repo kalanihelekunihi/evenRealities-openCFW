@@ -1,0 +1,41 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_irq_enable",
+      "compiled_bytes": 24,
+      "compiled_sha256": "56853caf38fc9f39f447f650d2fb7ebc2c966846828ef65ca082a578a76dad08",
+      "ownership_kind": "compiled_c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_irq_enable",
+          "package_offset": 12572,
+          "bytes": 28,
+          "sha256": "20ab189f59c9c2d4c95dbfffd1f676eca7c9be468f8eff2cb70f3a7357f43063",
+          "region": "boot_stage2"
+        }
+      ]
+    }
+  ],
+  "source_sha256": "b29788e88cbfb3f053111c88e204dab802b42a2c25b726b5fcf44962108dd97d",
+  "verifier_sha256": "2cce7626ca5c6160e35ac55049193007dc55a44312425175352cd9fa58b11c4c",
+  "flags": [
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "decoded_cases": 269,
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "policy": "Decoded-instruction VIC write comparison; consistent register renaming only.",
+  "limits": [
+    "Compiled bytes differ from the stock envelope (register allocation only); instruction-level MMIO write is proven identical for all tested IRQn.",
+    "VIC hardware behavior is not qualified."
+  ]
+}

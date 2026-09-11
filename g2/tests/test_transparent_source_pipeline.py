@@ -11,6 +11,9 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import shutil
+import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -283,6 +286,122 @@ class ImagePlacementTests(unittest.TestCase):
     def test_unsupported_relocations_are_not_silently_accepted(self) -> None:
         self.assertNotIn(0, self.module.SUPPORTED_RELOCATIONS)
         self.assertNotIn(self.module.R_ARM_PREL31, self.module.SUPPORTED_RELOCATIONS)
+
+
+class RelocationArenaTests(unittest.TestCase):
+    """A function that outgrows its stock envelope gets relocated, not trapped.
+
+    These exercise the same `place_unit` primitive the per-envelope placement
+    path uses, with the optional shared literal-pool cache the relocation
+    arena passes it.  No full image build is needed: the placement contract
+    is pure and address-independent given a symbol table.
+    """
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.module = load("build_transparent_image")
+        cls.clang = shutil.which("clang")
+
+    def test_align_up_rounds_to_the_next_multiple(self) -> None:
+        align_up = self.module.align_up
+        self.assertEqual(align_up(0, 4), 0)
+        self.assertEqual(align_up(1, 4), 4)
+        self.assertEqual(align_up(4, 4), 4)
+        self.assertEqual(align_up(5, 8), 8)
+
+    def test_redirect_stub_is_exactly_one_thumb_branch(self) -> None:
+        # `REDIRECT_STUB_BYTES` sizes every redirect write; it must match what
+        # encode_thumb_branch actually produces or padding math goes wrong.
+        stub = self.module.encode_thumb_branch(0x00438000, 0x00794400, link=False)
+        self.assertEqual(len(stub), self.module.REDIRECT_STUB_BYTES)
+
+    def _compile(self, tmp: Path, name: str, body: str) -> "object":
+        if self.clang is None:
+            self.skipTest("clang unavailable")
+        header = ROOT / "tools/transparent"
+        source = tmp / f"{name}.c"
+        source.write_text(body, encoding="utf-8")
+        obj = tmp / f"{name}.o"
+        completed = subprocess.run(
+            [
+                self.clang, "--target=armv8.1m.main-none-eabi", "-mcpu=cortex-m55",
+                "-mthumb", "-mfloat-abi=soft", "-std=gnu11", "-Oz", "-ffreestanding",
+                "-fno-builtin", "-ffunction-sections", "-fdata-sections",
+                "-I", str(header), "-c", str(source), "-o", str(obj),
+            ],
+            capture_output=True, text=True, check=False,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        return self.module.Elf32(obj.read_bytes(), obj.name)
+
+    def test_shared_pool_deduplicates_identical_rodata_across_units(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            tmp = Path(scratch)
+            elf_a = self._compile(
+                tmp, "unit_a",
+                '#include "openg2_decompiled_runtime.h"\n'
+                "const unsigned char pool_a[8] = {1,2,3,4,5,6,7,8};\n"
+                "unsigned int fn_a(void) { return pool_a[3]; }\n",
+            )
+            elf_b = self._compile(
+                tmp, "unit_b",
+                '#include "openg2_decompiled_runtime.h"\n'
+                "const unsigned char pool_b[8] = {1,2,3,4,5,6,7,8};\n"
+                "unsigned int fn_b(void) { return pool_b[5]; }\n",
+            )
+
+            shared_pool: dict[bytes, int] = {}
+            base = 0x00794324
+            payload_a, report_a = self.module.place_unit(
+                elf_a, base, 1 << 16, {}, shared_pool=shared_pool
+            )
+            second_base = base + len(payload_a)
+            payload_b, report_b = self.module.place_unit(
+                elf_b, second_base, 1 << 16, {}, shared_pool=shared_pool
+            )
+
+            # The identical 8-byte pool is only ever placed once: unit B's
+            # placement omits it, and both units' relocations resolve inside
+            # unit A's buffer for that content.
+            self.assertEqual(len(shared_pool), 1)
+            pool_address = next(iter(shared_pool.values()))
+            self.assertGreaterEqual(pool_address, base)
+            self.assertLess(pool_address, base + len(payload_a))
+            pool_bytes = bytes([1, 2, 3, 4, 5, 6, 7, 8])
+            self.assertIn(pool_bytes, bytes(payload_a))
+            self.assertNotIn(pool_bytes, bytes(payload_b))
+            # Placing the same content through a *fresh* dict (no sharing)
+            # costs strictly more bytes than sharing did.
+            unshared_b, _ = self.module.place_unit(elf_b, second_base, 1 << 16, {})
+            self.assertGreater(len(unshared_b), len(payload_b))
+
+    def test_shared_pool_never_reuses_code_sections(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            tmp = Path(scratch)
+            # Two trivially identical leaf functions: same machine code, but
+            # code must never alias even when byte-identical, since a future
+            # edit to one must not silently move the other.
+            elf_a = self._compile(
+                tmp, "leaf_a",
+                '#include "openg2_decompiled_runtime.h"\n'
+                "unsigned int leaf_a(unsigned int x) { return x + 1; }\n",
+            )
+            elf_b = self._compile(
+                tmp, "leaf_b",
+                '#include "openg2_decompiled_runtime.h"\n'
+                "unsigned int leaf_b(unsigned int x) { return x + 1; }\n",
+            )
+            shared_pool: dict[bytes, int] = {}
+            base = 0x00794324
+            payload_a, _ = self.module.place_unit(
+                elf_a, base, 1 << 16, {}, shared_pool=shared_pool
+            )
+            payload_b, _ = self.module.place_unit(
+                elf_b, base + len(payload_a), 1 << 16, {}, shared_pool=shared_pool
+            )
+            self.assertGreater(len(payload_b), 0)
+            # .text is never registered in the pool at all.
+            self.assertNotIn(bytes(payload_a), shared_pool)
 
 
 if __name__ == "__main__":

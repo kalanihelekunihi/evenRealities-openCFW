@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILDER_PATH = ROOT / "components/em9305/source_overlay/build_overlay.py"
 RECORD_PATH = ROOT / "components/em9305/source_image/record_package.py"
 STOCK_PATH = ROOT / "blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin"
-IMAGE = "opencfw-arc-toolchain:fedora44"
+DOCKER_IMAGE = "opencfw-arc-toolchain:fedora44"
 
 
 def load_module(name: str, path: Path):
@@ -36,52 +36,90 @@ RECORDS = load_module("em9305_overlay_record_package", RECORD_PATH)
 BUILDER = load_module("em9305_reconstructible_tail_builder", BUILDER_PATH)
 
 
+def _native_toolchain() -> dict[str, str] | None:
+    """Resolve the same OPENCFW_ARC_* toolchain build_overlay.py would use.
+
+    Returns None if none of an explicit override, the pinned macOS cache
+    (see toolchain/fetch_arc_toolchain.sh), or an arc-linux-gnu-* toolchain
+    on PATH is available.
+    """
+    tools = {
+        name: BUILDER._default_tool(name, f"OPENCFW_ARC_{name.upper()}")
+        for name in ("gcc", "nm", "objcopy", "objdump", "readelf")
+    }
+    for tool in tools.values():
+        resolved = tool if Path(tool).is_absolute() else shutil.which(tool)
+        if not resolved:
+            return None
+    return tools
+
+
+def _docker_toolchain() -> bool:
+    if shutil.which("docker") is None:
+        return False
+    probe = subprocess.run(
+        ["docker", "image", "inspect", DOCKER_IMAGE],
+        cwd=ROOT,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    return probe.returncode == 0
+
+
 class EM9305ReconstructibleTailOverlayTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        if shutil.which("docker") is None:
-            raise unittest.SkipTest("Docker is unavailable for the ARC target build")
-        probe = subprocess.run(
-            ["docker", "image", "inspect", IMAGE],
-            cwd=ROOT,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
-        if probe.returncode != 0:
-            raise unittest.SkipTest(f"local ARC toolchain image is unavailable: {IMAGE}")
         (ROOT / "build").mkdir(exist_ok=True)
         cls.temporary = tempfile.TemporaryDirectory(
             prefix="em9305-tail-test-", dir=ROOT / "build"
         )
         cls.output = Path(cls.temporary.name)
-        relative_output = cls.output.relative_to(ROOT)
-        command = [
-            "docker", "run", "--rm",
-            "-v", f"{ROOT}:/work", "-w", "/work", IMAGE,
-            "python3", "components/em9305/source_overlay/build_overlay.py",
-            "--gcc", "/usr/bin/arc-linux-gnu-gcc",
-            "--nm", "/usr/bin/arc-linux-gnu-nm",
-            "--objcopy", "/usr/bin/arc-linux-gnu-objcopy",
-            "--output-dir", relative_output.as_posix(),
-        ]
-        subprocess.run(command, cwd=ROOT, check=True, capture_output=True, text=True)
-        cls.report = json.loads((cls.output / "build-report.json").read_text())
+
+        tools = _native_toolchain()
+        if tools is not None:
+            cls.report = BUILDER.build(
+                gcc=tools["gcc"], nm=tools["nm"], objcopy=tools["objcopy"],
+                objdump=tools["objdump"], readelf=tools["readelf"],
+                output_dir=cls.output,
+            )
+            disassembly = subprocess.run(
+                [tools["objdump"], "-d", str(cls.output / "reconstructible_tail.elf")],
+                cwd=ROOT, check=True, capture_output=True, text=True,
+            )
+            cls.disassembly = disassembly.stdout
+        elif _docker_toolchain():
+            relative_output = cls.output.relative_to(ROOT)
+            command = [
+                "docker", "run", "--rm",
+                "-v", f"{ROOT}:/work", "-w", "/work", DOCKER_IMAGE,
+                "python3", "components/em9305/source_overlay/build_overlay.py",
+                "--gcc", "/usr/bin/arc-linux-gnu-gcc",
+                "--nm", "/usr/bin/arc-linux-gnu-nm",
+                "--objcopy", "/usr/bin/arc-linux-gnu-objcopy",
+                "--output-dir", relative_output.as_posix(),
+            ]
+            subprocess.run(command, cwd=ROOT, check=True, capture_output=True, text=True)
+            cls.report = json.loads((cls.output / "build-report.json").read_text())
+            disassembly = subprocess.run(
+                [
+                    "docker", "run", "--rm", "-v", f"{ROOT}:/work", "-w", "/work",
+                    DOCKER_IMAGE, "/usr/bin/arc-linux-gnu-objdump", "-d",
+                    f"/work/{relative_output.as_posix()}/reconstructible_tail.elf",
+                ],
+                cwd=ROOT, check=True, capture_output=True, text=True,
+            )
+            cls.disassembly = disassembly.stdout
+        else:
+            raise unittest.SkipTest(
+                "no ARC toolchain is available: install "
+                "components/em9305/source_overlay/toolchain/fetch_arc_toolchain.sh "
+                f"or provide the {DOCKER_IMAGE} Docker image"
+            )
+
         cls.provider = (cls.output / "firmware_ble_em9305.bin").read_bytes()
         cls.stock = STOCK_PATH.read_bytes()
         cls.parsed = RECORDS.parse_package(cls.provider)
         cls.stock_parsed = RECORDS.parse_package(cls.stock)
-        disassembly = subprocess.run(
-            [
-                "docker", "run", "--rm", "-v", f"{ROOT}:/work", "-w", "/work",
-                IMAGE, "/usr/bin/arc-linux-gnu-objdump", "-d",
-                f"/work/{relative_output.as_posix()}/reconstructible_tail.elf",
-            ],
-            cwd=ROOT,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-        cls.disassembly = disassembly.stdout
 
     @classmethod
     def tearDownClass(cls) -> None:
@@ -91,14 +129,14 @@ class EM9305ReconstructibleTailOverlayTests(unittest.TestCase):
         self.assertEqual(len(self.provider), 212_984)
         self.assertEqual(
             hashlib.sha256(self.provider).hexdigest(),
-            "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42",
+            "56694060c0d2761c2004581d0cec97cdb8642c1ff44675194d05d605bf8dd9c7",
         )
         accounting = self.report["accounting"]
         self.assertEqual(
             accounting,
             {
-                "production_source_bytes": 1_174,
-                "generated_or_reconstructible_bytes": 1_226,
+                "production_source_bytes": 1_190,
+                "generated_or_reconstructible_bytes": 1_210,
                 "candidate_source_not_routed_bytes": 0,
                 "typed_retained_or_external_bytes": 210_584,
                 "unclassified_bytes": 0,
@@ -148,11 +186,21 @@ class EM9305ReconstructibleTailOverlayTests(unittest.TestCase):
     def test_all_entry_wrappers_are_exact_branches_to_c_implementations(self) -> None:
         rows = self.report["entry_patches"]
         self.assertEqual(len(rows), 23)
+        allocation_by_section = {
+            section: allocation for section, _address, allocation in BUILDER.ENTRY_PATCHES
+        }
         for row in rows:
             section = row["section"]
             suffix = section.removeprefix(".tail_")
             with self.subTest(section=section):
-                self.assertEqual(row["source_bytes"], 4)
+                # The compiled wrapper is always at least a single four-byte
+                # tail branch; some entries additionally carry a compiler-
+                # emitted narrow-argument extension ahead of it (see
+                # toolchain/TOOLCHAIN.md).  Either way it must still fit the
+                # entry's authenticated stock allocation.
+                self.assertGreaterEqual(row["source_bytes"], 4)
+                self.assertEqual(row["source_bytes"] % 2, 0)
+                self.assertLessEqual(row["source_bytes"], allocation_by_section[section])
                 self.assertIn(f"Disassembly of section {section}:", self.disassembly)
                 self.assertIn(f"_{suffix}_impl>", self.disassembly)
         self.assertEqual(self.report["undefined_symbols"], [])

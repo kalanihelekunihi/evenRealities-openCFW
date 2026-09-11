@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "extends": "g2-2.2.6.10.json",
+  "package": {
+    "output_name": "g2-openCFW-s200_v2.2.6.10-touch-source-experimental.evenota.bin",
+    "profiles": {},
+    "expected_size": 4282279,
+    "expected_sha256": "817a9fcfbcb2bfd6a008c91b57c977c2ae5faadfc7d171e00f0ca4215eaaa4c7"
+  },
+  "component_overrides": {
+    "touch": {
+      "function": "PSoC 4000T (CY8C4046FNI) Touch-controller firmware, fully source-built from the 31-translation-unit clean-room source image (components/touch/source_image, components/shared/touch); NVIC external-IRQ ordering is explicit PSoC 4000T SVD configuration, not stock-derived; physical peripheral MMIO behavior stays unqualified pending hardware",
+      "provider": {
+        "kind": "source_build",
+        "path": "build/touch-source-image/firmware_touch.bin",
+        "size": 15516,
+        "sha256": "51d067df27e30bef96d0459a7dc30928c47e717c9b83e12a99083155d2f5654f"
+      },
+      "regions": [
+        {
+          "name": "fwpk_wrapper",
+          "function": "FWPK metadata and reflected CRC-32C",
+          "file_offset": 0,
+          "size": 32,
+          "address_status": "container_only",
+          "output": "touch/fwpk-wrapper.bin"
+        },
+        {
+          "name": "touch_application",
+          "function": "Source-built Touch Cortex-M0+ vector table and application (31 TUs, 178 functions), superseding the retained stock touch_application region",
+          "file_offset": 32,
+          "size": 15484,
+          "target": "touch_controller",
+          "target_address": 0,
+          "address_status": "source_compiled",
+          "output": "touch/application-0x00000000.bin"
+        }
+      ]
+    }
+  }
+}
