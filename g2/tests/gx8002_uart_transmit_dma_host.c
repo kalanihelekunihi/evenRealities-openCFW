@@ -4,17 +4,19 @@
 #include "gx_dma_ahb.h"
 static int selected, released, transferred, callbacks, bursts;
 static GX_DMA_AHB_CH_CONFIG captured;
+static volatile uint32_t *expected_descriptor;
 void open_cfw_gx8002_uart_transmit_complete(volatile uint32_t *d) {(void)d;}
 void open_cfw_gx8002_dcache_clean_range(uint32_t b,uint32_t n) {assert(b==0x20050000 && n==32);}
 int open_cfw_gx8002_dma_select(void) {return selected;}
 void open_cfw_gx8002_dma_release(uint32_t c) {assert(c==3);released++;}
 uint32_t open_cfw_gx8002_uart_dma_burst(volatile uint32_t *d,uint32_t tx) {(void)d;assert(tx==1);return ++bursts;}
-void open_cfw_gx8002_dma_callback(int c,uint32_t cb,volatile uint32_t *d) {assert(c==3 && cb && d[31]==3);callbacks++;}
-int open_cfw_gx8002_dma_transfer(uint32_t dst,uint32_t src,uint32_t n,int c,GX_DMA_AHB_CH_CONFIG *cfg) {assert(dst==0xa0000000 && src==0x20050000 && n==32 && c==3);captured=*cfg;transferred++;return -1;}
+void open_cfw_gx8002_dma_callback(uint32_t c,uint32_t cb,uint32_t token) {assert(c==3 && cb && token==(uint32_t)(uintptr_t)expected_descriptor && expected_descriptor[31]==3);callbacks++;}
+int open_cfw_gx8002_dma_transfer(uint32_t dst,uint32_t src,uint32_t n,uint32_t c,GX_DMA_AHB_CH_CONFIG *cfg) {assert(dst==0xa0000000 && src==0x20050000 && n==32 && c==3);captured=*cfg;transferred++;return -1;}
 #include "runtime_gx8002_uart_transmit_dma.c"
 int main(void) {
  for(unsigned p=0;p<4;p++) for(unsigned fail=0;fail<2;fail++) {
   volatile uint32_t d[32]={0};d[0]=p;d[1]=0xa0000000;d[31]=UINT32_MAX;
+  expected_descriptor=d;
   selected=fail?-1:3;released=transferred=callbacks=bursts=0;
   int r=open_cfw_gx8002_uart_transmit_dma(d,0x20050000,32);
   if(fail) {assert(r==-1 && !released && !transferred && !bursts);}

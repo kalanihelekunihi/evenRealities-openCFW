@@ -8702,7 +8702,7 @@ def audit() -> dict:
         "bootloader_validated_byte_copy_430a9c_source_in_place": (0x00430A9C, 40, "source_compiled"),
         "bootloader_validated_word_transfer_430ac4_source_in_place": (0x00430AC4, 40, "source_compiled"),
         "bootloader_mode_four_wrapper_430aec_source_in_place": (0x00430AEC, 32, "source_compiled"),
-        "bootloader_mode_wrapper_word_transfer_gap_430b0c_430b10": (0x00430B0C, 4, "official_blob"),
+        "bootloader_mode_wrapper_word_transfer_gap_430b0c_430b10": (0x00430B0C, 4, "source_compiled"),
         "bootloader_word_transfer_critical_430b10_source_in_place": (0x00430B10, 44, "source_compiled"),
         "bootloader_opaque_between_word_transfer_and_platform_init_430b3c_43194c": (0x00430B3C, 3_600, "official_blob"),
         "bootloader_platform_services_init_43194c_source_in_place": (0x0043194C, 62, "source_compiled"),
@@ -8746,7 +8746,7 @@ def audit() -> dict:
              component["source_owned_cave_bytes"],
              component["source_owned_in_place_bytes"],
             component["generated_patch_site_bytes"]) ==
-            (59_009, 87_985, 2_594, 41_190, 16_830),
+            (59_013, 87_981, 2_594, 41_190, 16_830),
             "live source/official accounting changed")
     require(component["source_owned_bytes"] + component["opaque_base_bytes"] +
             component["generated_alignment_bytes"] == 147_010,

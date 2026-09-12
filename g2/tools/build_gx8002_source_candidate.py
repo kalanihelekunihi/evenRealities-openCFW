@@ -21,6 +21,26 @@ from verify_gx8002_i2s_source import verify as verify_i2s
 from verify_gx8002_vad_curves import verify as verify_vad
 from verify_gx8002_model_interface import verify as verify_model
 from verify_gx8002_memcpy_source import verify as verify_memcpy
+from verify_gx8002_uart_stage1_divmod import verify as verify_uart_stage1_divmod
+from verify_gx8002_uart_stage1_reset import verify as verify_uart_stage1_reset
+from verify_gx8002_uart_stage1_pmubits import verify as verify_uart_stage1_pmubits
+from verify_gx8002_uart_stage1_serial import verify as verify_uart_stage1_serial
+from verify_gx8002_uart_stage1_idbit import verify as verify_uart_stage1_idbit
+from verify_gx8002_uart_stage1_xip import verify as verify_uart_stage1_xip
+from verify_gx8002_uart_stage1_pmufill import verify as verify_uart_stage1_pmufill
+from verify_gx8002_uart_stage1_mdelay import verify as verify_uart_stage1_mdelay
+from verify_gx8002_uart_stage1_vectors import verify as verify_uart_stage1_vectors
+from verify_gx8002_uart_stage1_railc import verify as verify_uart_stage1_railc
+from verify_gx8002_uart_stage1_railb import verify as verify_uart_stage1_railb
+from verify_gx8002_uart_stage1_raila import verify as verify_uart_stage1_raila
+from verify_gx8002_uart_stage1_pmudisp import verify as verify_uart_stage1_pmudisp
+from verify_gx8002_uart_stage1_pmusecond import verify as verify_uart_stage1_pmusecond
+from verify_gx8002_uart_stage1_postamble import verify as verify_uart_stage1_postamble
+from verify_gx8002_uart_stage1_uartcfg import verify as verify_uart_stage1_uartcfg
+from verify_gx8002_uart_stage1_traptails import verify as verify_uart_stage1_traptails
+from verify_gx8002_uart_stage1_beacon import verify as verify_uart_stage1_beacon
+from verify_gx8002_uart_stage1_announce import verify as verify_uart_stage1_announce
+from verify_gx8002_uart_stage1_handshake import verify as verify_uart_stage1_handshake
 from verify_gx8002_model_set_task import verify as verify_setter
 from verify_gx8002_app_resume import verify as verify_resume
 from verify_gx8002_app_suspend import verify as verify_suspend
@@ -131,6 +151,18 @@ from verify_gx8002_rtc_start_tick import verify as verify_rtc_start_tick
 from verify_gx8002_rtc_set_tick import verify as verify_rtc_set_tick
 from verify_gx8002_rtc_error import verify as verify_rtc_error
 from verify_gx8002_rtc_init_source import verify as verify_rtc_init_source
+from verify_gx8002_dma_clear_source import verify as verify_dma_clear_source
+from verify_gx8002_uart_receive_control_source import verify as verify_uart_receive_control_source
+from verify_gx8002_uart_receive_complete_source import verify as verify_uart_receive_complete_source
+from verify_gx8002_uart_dma_burst_source import verify as verify_uart_dma_burst_source
+from verify_gx8002_dma_initialize_source import verify as verify_dma_initialize_source
+from verify_gx8002_dma_irq_handler_source import verify as verify_dma_irq_handler_source
+from verify_gx8002_dma_deallocate_source import verify as verify_dma_deallocate_source
+from verify_gx8002_dma_select_source import verify as verify_dma_select_source
+from verify_gx8002_dma_callback_source import verify as verify_dma_callback_source
+from verify_gx8002_dma_configure_source import verify as verify_dma_configure_source
+from verify_gx8002_dma_descriptors_source import verify as verify_dma_descriptors_source
+from verify_gx8002_dma_bus_address_source import verify as verify_dma_bus_address_source
 from verify_gx8002_board_pin_source import verify as verify_board_pin_source
 from verify_gx8002_board_pin_setup_source import verify as verify_board_pin_setup_source
 from verify_gx8002_board_pin_initialize_source import verify as verify_board_pin_initialize_source
@@ -386,6 +418,18 @@ def build(prefix, sdk, output):
         ('clock-frequency', verify_clock_frequency, 'clock-frequency.elf', 'gx8002-clock-frequency-source-verification.json'),
         ('uart-transmit-complete', verify_uart_transmit_complete, 'complete.elf', 'gx8002-uart-transmit-complete-verification.json'),
         ('uart-flush', verify_uart_flush, 'flush.elf', 'gx8002-uart-flush-verification.json'),
+        ('dma-bus-address', verify_dma_bus_address_source, 'bus_address.elf', 'gx8002-dma-bus-address-source-verification.json'),
+        ('dma-descriptors', verify_dma_descriptors_source, 'descriptors.elf', 'gx8002-dma-descriptors-source-verification.json'),
+        ('dma-configure', verify_dma_configure_source, 'configure.elf', 'gx8002-dma-configure-source-verification.json'),
+        ('dma-callback', verify_dma_callback_source, 'callback.elf', 'gx8002-dma-callback-source-verification.json'),
+        ('dma-select', verify_dma_select_source, 'select.elf', 'gx8002-dma-select-source-verification.json'),
+        ('dma-deallocate', verify_dma_deallocate_source, 'deallocate.elf', 'gx8002-dma-deallocate-source-verification.json'),
+        ('dma-irq-handler', verify_dma_irq_handler_source, 'irq_handler.elf', 'gx8002-dma-irq-handler-source-verification.json'),
+        ('dma-initialize', verify_dma_initialize_source, 'initialize.elf', 'gx8002-dma-initialize-source-verification.json'),
+        ('uart-dma-burst', verify_uart_dma_burst_source, 'burst.elf', 'gx8002-uart-dma-burst-source-verification.json'),
+        ('uart-receive-complete', verify_uart_receive_complete_source, 'complete.elf', 'gx8002-uart-receive-complete-source-verification.json'),
+        ('uart-receive-control', verify_uart_receive_control_source, 'control.elf', 'gx8002-uart-receive-control-source-verification.json'),
+        ('dma-clear', verify_dma_clear_source, 'clear.elf', 'gx8002-dma-clear-source-verification.json'),
         ('dma-release', verify_dma_release, 'release.elf', 'gx8002-dma-release-verification.json'),
         ('trigger', verify_trigger, 'setter.elf', 'gx8002-trigger-event-verification.json'),
         ('queue_put', verify_put, 'queue-size.o', 'gx8002-queue-put-comparison.json'),
@@ -396,9 +440,30 @@ def build(prefix, sdk, output):
         ('resume', verify_resume, 'setter.elf', 'gx8002-app-resume-verification.json'),
         ('setter', verify_setter, 'setter.elf', 'gx8002-model-set-task-verification.json'),
         ('memcpy', verify_memcpy, 'copy.o', 'gx8002-memcpy-source-verification.json'),
+        ('uart-stage1-divmod', verify_uart_stage1_divmod, 'divmod.o', 'gx8002-uart-stage1-divmod-verification.json'),
+        ('uart-stage1-reset', verify_uart_stage1_reset, 'reset.elf', 'gx8002-uart-stage1-reset-verification.json'),
+        ('uart-stage1-pmubits', verify_uart_stage1_pmubits, 'pmubits.o', 'gx8002-uart-stage1-pmubits-verification.json'),
+        ('uart-stage1-serial', verify_uart_stage1_serial, 'serial.elf', 'gx8002-uart-stage1-serial-verification.json'),
+        ('uart-stage1-idbit', verify_uart_stage1_idbit, 'idbit.elf', 'gx8002-uart-stage1-idbit-verification.json'),
+        ('uart-stage1-xip', verify_uart_stage1_xip, 'xip.elf', 'gx8002-uart-stage1-xip-verification.json'),
+        ('uart-stage1-pmufill', verify_uart_stage1_pmufill, 'pmufill.elf', 'gx8002-uart-stage1-pmufill-verification.json'),
+        ('uart-stage1-mdelay', verify_uart_stage1_mdelay, 'mdelay.elf', 'gx8002-uart-stage1-mdelay-verification.json'),
+        ('uart-stage1-vectors', verify_uart_stage1_vectors, 'vectors.elf', 'gx8002-uart-stage1-vectors-verification.json'),
+        ('uart-stage1-railc', verify_uart_stage1_railc, 'railc.elf', 'gx8002-uart-stage1-railc-verification.json'),
+        ('uart-stage1-railb', verify_uart_stage1_railb, 'railb.elf', 'gx8002-uart-stage1-railb-verification.json'),
+        ('uart-stage1-raila', verify_uart_stage1_raila, 'raila.elf', 'gx8002-uart-stage1-raila-verification.json'),
+        ('uart-stage1-pmudisp', verify_uart_stage1_pmudisp, 'pmudisp.elf', 'gx8002-uart-stage1-pmudisp-verification.json'),
+        ('uart-stage1-pmusecond', verify_uart_stage1_pmusecond, 'pmusecond.elf', 'gx8002-uart-stage1-pmusecond-verification.json'),
+        ('uart-stage1-postamble', verify_uart_stage1_postamble, 'postamble.elf', 'gx8002-uart-stage1-postamble-verification.json'),
+        ('uart-stage1-uartcfg', verify_uart_stage1_uartcfg, 'uartcfg.elf', 'gx8002-uart-stage1-uartcfg-verification.json'),
+        ('uart-stage1-traptails', verify_uart_stage1_traptails, 'traptails.elf', 'gx8002-uart-stage1-traptails-verification.json'),
+        ('uart-stage1-beacon', verify_uart_stage1_beacon, 'beacon.elf', 'gx8002-uart-stage1-beacon-verification.json'),
+        ('uart-stage1-announce', verify_uart_stage1_announce, 'announce.elf', 'gx8002-uart-stage1-announce-verification.json'),
+        ('uart-stage1-handshake', verify_uart_stage1_handshake, 'handshake.elf', 'gx8002-uart-stage1-handshake-verification.json'),
         ('model', verify_model, 'runtime_gx8002_model_interface.o', 'gx8002-model-interface-verification.json'),
     ):
         directory = output / kind
+        print(f"Qualifying codec source: {kind}", flush=True)
         report = verifier(prefix, sdk, directory)
         reviewed = json.loads((ROOT / 'docs/research' / baseline).read_text())
         replacements += reviewed_replacements(report, reviewed, directory / artifact, kind)

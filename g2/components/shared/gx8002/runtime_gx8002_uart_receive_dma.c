@@ -5,8 +5,8 @@ extern void open_cfw_gx8002_uart_receive_complete(volatile uint32_t *);
 extern void open_cfw_gx8002_uart_dma_cache(uint32_t, uint32_t);
 extern int open_cfw_gx8002_dma_select(void);
 extern uint32_t open_cfw_gx8002_uart_dma_burst(volatile uint32_t *, uint32_t);
-extern void open_cfw_gx8002_dma_callback(int, uint32_t, volatile uint32_t *);
-extern int open_cfw_gx8002_dma_transfer(uint32_t, uint32_t, uint32_t, int, GX_DMA_AHB_CH_CONFIG *);
+extern void open_cfw_gx8002_dma_callback(uint32_t, uint32_t, uint32_t);
+extern int open_cfw_gx8002_dma_transfer(uint32_t, uint32_t, uint32_t, uint32_t, GX_DMA_AHB_CH_CONFIG *);
 
 /* Stock 0xc71c: helper results are deliberately ignored where stock ignores them. */
 int open_cfw_gx8002_uart_receive_dma(volatile uint32_t *descriptor,
@@ -35,7 +35,7 @@ int open_cfw_gx8002_uart_receive_dma(volatile uint32_t *descriptor,
     config.dst_msize=open_cfw_gx8002_uart_dma_burst(descriptor,0);
     config.flow_ctrl=GX_DMA_AHB_TT_FC_PER_TO_MEM_DMAC;
     config.dst_hs_per=0;
-    open_cfw_gx8002_dma_callback(channel,(uint32_t)(uintptr_t)open_cfw_gx8002_uart_receive_complete,descriptor);
+    open_cfw_gx8002_dma_callback(channel,(uint32_t)(uintptr_t)open_cfw_gx8002_uart_receive_complete,(uint32_t)(uintptr_t)descriptor);
     (void)open_cfw_gx8002_dma_transfer(buffer,device,length,channel,&config);
     return 0;
 }

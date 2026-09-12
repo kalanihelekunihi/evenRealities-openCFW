@@ -1,0 +1,71 @@
+{
+  "source_sha256": "0e7ea84f062ccb2eea8ed489ab605dd6f0adc58e8b675f6488f53d3880ec4181",
+  "compile_flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-tree-loop-optimize"
+  ],
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "algorithm_reference": "arch/soc/grus/spl/spl.c uint32_divmodsi4 (clean-room reimplementation; no SDK text reproduced)",
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_udiv",
+      "compiled_bytes": 46,
+      "compiled_sha256": "30e2e024055c53f9eddfeb20c3d49616b69bb348614b3f02289a010b5f40fe0a",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_udiv",
+          "package_offset": 396,
+          "bytes": 66,
+          "sha256": "6b2a91cb0b4f05e18973d6ff4a1ea55ab5b7a80e184e1fe7b0841cc7a2519765",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_umod",
+      "compiled_bytes": 40,
+      "compiled_sha256": "cb41f27af22a7bd96afb136ebe7e036ddace6594159cd37b4a8a9feacc0f4a5e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_umod",
+          "package_offset": 464,
+          "bytes": 58,
+          "sha256": "e20ef1425a6aee0a47b18c11bf8cdc2025fcf11529758f33a723df78679a0b03",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_clear_bss",
+      "compiled_bytes": 2,
+      "compiled_sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_clear_bss",
+          "package_offset": 392,
+          "bytes": 4,
+          "sha256": "178fe1aaeab962f37309afb2366e89c0281860ecd184ff047d0faec881032668",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    }
+  ],
+  "target_cases": 16550,
+  "source_admitted": true,
+  "admission_scope": "experimental hybrid codec; UART boot stage-1 leaves only",
+  "stock_equivalence_proven": false,
+  "limits": [
+    "Restricted instruction interpreter, not a processor emulator.",
+    "Return-value equivalence over finite battery plus independent oracle; scratch registers and condition flag are caller-clobbered and not compared.",
+    "Same-entry placement fits; hardware timing remains unqualified."
+  ]
+}

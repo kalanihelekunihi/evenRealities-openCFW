@@ -3138,6 +3138,390 @@ def new_region(contract_region: dict[str, Any]) -> dict[str, Any]:
             "bootloader_opaque_after_terminal_loop_4329d2",
             "Authenticated retained bootloader bytes after the source-owned Cortex-M runtime startup tail",
         ),
+        "pool_41f9b6": (
+            "bootloader_pool_41f9b6_source_in_place",
+            "Compiled MIT clean-room boot-initializer vector and literal island at authenticated stock addresses",
+        ),
+        "word_41f9cc": (
+            "bootloader_word_41f9cc_source_in_place",
+            "Compiled MIT clean-room reserved boot-initializer word preserving layout at its authenticated stock address",
+        ),
+        "word_41f9d0": (
+            "bootloader_word_41f9d0_source_in_place",
+            "Compiled MIT clean-room reserved boot-initializer word preserving layout at its authenticated stock address",
+        ),
+        "word_41f9d4": (
+            "bootloader_word_41f9d4_source_in_place",
+            "Compiled MIT clean-room reserved boot-initializer word preserving layout at its authenticated stock address",
+        ),
+        "align_41f9ee": (
+            "bootloader_align_41f9ee_source_in_place",
+            "Compiled MIT clean-room boot-initializer alignment halfword at its authenticated stock address",
+        ),
+        "pool_41fa40": (
+            "bootloader_pool_41fa40_source_in_place",
+            "Compiled MIT clean-room initializer-table pointer literals at authenticated stock addresses",
+        ),
+        "pool_41fad0": (
+            "bootloader_pool_41fad0_source_in_place",
+            "Compiled MIT clean-room guard and configuration pointer literals at authenticated stock addresses",
+        ),
+        "pool_41fcf6": (
+            "bootloader_pool_41fcf6_source_in_place",
+            "Compiled MIT clean-room pin-configuration and allocator literals at authenticated stock addresses",
+        ),
+        "pool_41fda8": (
+            "bootloader_pool_41fda8_source_in_place",
+            "Compiled MIT clean-room allocator and diagnostic pointer literals at authenticated stock addresses",
+        ),
+        "pool_42086c": (
+            "bootloader_pool_42086c_source_in_place",
+            "Compiled MIT clean-room MX25U25643G four-byte-mode literal pool at authenticated stock addresses",
+        ),
+        "pool_420978": (
+            "bootloader_pool_420978_source_in_place",
+            "Compiled MIT clean-room MX25U25643G write-enable literal pool at authenticated stock addresses",
+        ),
+        "island_4209be": (
+            "bootloader_island_4209be_source_in_place",
+            "Compiled MIT clean-room MX25U25643G write-disable literal island at authenticated stock addresses",
+        ),
+        "pool_4209fc": (
+            "bootloader_pool_4209fc_source_in_place",
+            "Compiled MIT clean-room MX25U25643G sector-erase literal pool at authenticated stock addresses",
+        ),
+        "pool_420ada": (
+            "bootloader_pool_420ada_source_in_place",
+            "Compiled MIT clean-room MX25U25643G page-program literal pool at authenticated stock addresses",
+        ),
+        "word_420c14": (
+            "bootloader_word_420c14_source_in_place",
+            "Compiled MIT clean-room reserved MX25 QE-gap word preserving layout at its authenticated stock address",
+        ),
+        "pool_420c18": (
+            "bootloader_pool_420c18_source_in_place",
+            "Compiled MIT clean-room MX25U25643G QE-service literal pool at authenticated stock addresses",
+        ),
+        "pool_420dfa": (
+            "bootloader_pool_420dfa_source_in_place",
+            "Compiled MIT clean-room MSPI device-reconfiguration literal pool at authenticated stock addresses",
+        ),
+        "word_420f0c": (
+            "bootloader_word_420f0c_source_in_place",
+            "Compiled MIT clean-room MX25U25643G serial-mode literal word at its authenticated stock address",
+        ),
+        "text_420f6a": (
+            "bootloader_text_420f6a_source_in_place",
+            "Compiled MIT clean-room MX25U25643G read-service literal island at authenticated stock addresses",
+        ),
+        "pool_420ff2": (
+            "bootloader_pool_420ff2_source_in_place",
+            "Compiled MIT clean-room LittleFS directory-bootstrap literal pool at authenticated stock addresses",
+        ),
+        "pool_421372": (
+            "bootloader_pool_421372_source_in_place",
+            "Compiled MIT clean-room LittleFS block-callback literal pool at authenticated stock addresses",
+        ),
+        "pool_42156e": (
+            "bootloader_pool_42156e_source_in_place",
+            "Compiled MIT clean-room mapped-memory control literal pool at authenticated stock addresses",
+        ),
+        "seam_42220e": (
+            "bootloader_seam_42220e_source_in_place",
+            "Compiled MIT clean-room mode-literal seam between exact source bodies at authenticated stock addresses",
+        ),
+        "seam_42228e": (
+            "bootloader_seam_42228e_source_in_place",
+            "Compiled MIT clean-room mode-literal seam between exact source bodies at authenticated stock addresses",
+        ),
+        "seam_4222d2": (
+            "bootloader_seam_4222d2_source_in_place",
+            "Compiled MIT clean-room mode-literal seam between exact source bodies at authenticated stock addresses",
+        ),
+        "pool_422430": (
+            "bootloader_pool_422430_source_in_place",
+            "Compiled MIT clean-room debug-service literal pool at authenticated stock addresses",
+        ),
+        "pool_422574": (
+            "bootloader_pool_422574_source_in_place",
+            "Compiled MIT clean-room debug-trace literal pool at authenticated stock addresses",
+        ),
+        "island_4225ac": (
+            "bootloader_island_4225ac_source_in_place",
+            "Compiled MIT clean-room constraint-handler message island at authenticated stock addresses",
+        ),
+        "align_422712": (
+            "bootloader_align_422712_source_in_place",
+            "Compiled MIT clean-room alignment halfword between exact source bodies at its authenticated stock address",
+        ),
+        "align_422872": (
+            "bootloader_align_422872_source_in_place",
+            "Compiled MIT clean-room alignment halfword between exact source bodies at its authenticated stock address",
+        ),
+        "align_422ad2": (
+            "bootloader_align_422ad2_source_in_place",
+            "Compiled MIT clean-room alignment halfword between exact source bodies at its authenticated stock address",
+        ),
+        "word_422d7a": (
+            "bootloader_word_422d7a_source_in_place",
+            "Compiled MIT clean-room reserved identity word preserving layout at its authenticated stock address",
+        ),
+        "pool_4233e0": (
+            "bootloader_pool_4233e0_source_in_place",
+            "Compiled MIT clean-room FIFO-adapter literal pool at authenticated stock addresses",
+        ),
+        "pool_423430": (
+            "bootloader_pool_423430_source_in_place",
+            "Compiled MIT clean-room mode-dispatcher literal pool at authenticated stock addresses",
+        ),
+        "pool_4236fa": (
+            "bootloader_pool_4236fa_source_in_place",
+            "Compiled MIT clean-room hardware register-service literals at authenticated stock addresses",
+        ),
+        "pool_423764": (
+            "bootloader_pool_423764_source_in_place",
+            "Compiled MIT clean-room hardware register and identity words at authenticated stock addresses",
+        ),
+        "pool_42382c": (
+            "bootloader_pool_42382c_source_in_place",
+            "Compiled MIT clean-room bounded memory-exchange literals at authenticated stock addresses",
+        ),
+        "pool_423d9a": (
+            "bootloader_pool_423d9a_source_in_place",
+            "Compiled MIT clean-room hardware-control register literal at authenticated stock addresses",
+        ),
+        "align_423dce": (
+            "bootloader_align_423dce_source_in_place",
+            "Compiled MIT clean-room hardware-control alignment halfword at its authenticated stock address",
+        ),
+        "pool_423e0c": (
+            "bootloader_pool_423e0c_source_in_place",
+            "Compiled MIT clean-room hardware-control SRAM cells at authenticated stock addresses",
+        ),
+        "word_42499c": (
+            "bootloader_word_42499c_source_in_place",
+            "Compiled MIT clean-room MSPI0 base literal at its authenticated stock address",
+        ),
+        "island_424aea": (
+            "bootloader_island_424aea_source_in_place",
+            "Compiled MIT clean-room MSPI state-literal island at authenticated stock addresses",
+        ),
+        "pool_424bd4": (
+            "bootloader_pool_424bd4_source_in_place",
+            "Compiled MIT clean-room MSPI state-literal pool at authenticated stock addresses",
+        ),
+        "frag_425160": (
+            "bootloader_frag_425160_source_in_place",
+            "Compiled MIT clean-room orphaned disable-head branch-fragment halfword at its authenticated stock address",
+        ),
+        "pad_425166": (
+            "bootloader_pad_425166_source_in_place",
+            "Compiled MIT clean-room MSPI lifecycle alignment halfword at its authenticated stock address",
+        ),
+        "word_425168": (
+            "bootloader_word_425168_source_in_place",
+            "Compiled MIT clean-room MSPI lifecycle literal word at its authenticated stock address",
+        ),
+        "pool_4251a4": (
+            "bootloader_pool_4251a4_source_in_place",
+            "Compiled MIT clean-room MSPI state pool at authenticated stock addresses",
+        ),
+        "word_42644c": (
+            "bootloader_word_42644c_source_in_place",
+            "Compiled MIT clean-room MSPI aperture-base mask word at its authenticated stock address",
+        ),
+        "frag_4264b0": (
+            "bootloader_frag_4264b0_source_in_place",
+            "Compiled MIT clean-room interrupt-disable branch-fragment halfword at its authenticated stock address",
+        ),
+        "pool_4267fe": (
+            "bootloader_pool_4267fe_source_in_place",
+            "Compiled MIT clean-room MSPI interrupt-service literal pool at authenticated stock addresses",
+        ),
+        "pool_426bfe": (
+            "bootloader_pool_426bfe_source_in_place",
+            "Compiled MIT clean-room MSPI power-control literal pool at authenticated stock addresses",
+        ),
+        "pool_426d2c": (
+            "bootloader_pool_426d2c_source_in_place",
+            "Compiled MIT clean-room CLKGEN register-address literal pool at authenticated stock addresses",
+        ),
+        "pad_426db2": (
+            "bootloader_pad_426db2_source_in_place",
+            "Compiled MIT clean-room zero-alignment fill halfword at its authenticated stock address",
+        ),
+        "pad_426f6a": (
+            "bootloader_pad_426f6a_source_in_place",
+            "Compiled MIT clean-room zero-alignment fill halfword at its authenticated stock address",
+        ),
+        "pool_427032": (
+            "bootloader_pool_427032_source_in_place",
+            "Compiled MIT clean-room floating-point literal pool at authenticated stock addresses",
+        ),
+        "pool_42714c": (
+            "bootloader_pool_42714c_source_in_place",
+            "Compiled MIT clean-room floating-point literal pool at authenticated stock addresses",
+        ),
+        "pool_427308": (
+            "bootloader_pool_427308_source_in_place",
+            "Compiled MIT clean-room floating-point literal pool at authenticated stock addresses",
+        ),
+        "pool_427588": (
+            "bootloader_pool_427588_source_in_place",
+            "Compiled MIT clean-room System-PLL literal pool at authenticated stock addresses",
+        ),
+        "word_4275e4": (
+            "bootloader_word_4275e4_source_in_place",
+            "Compiled MIT clean-room double range-error cell word at its authenticated stock address",
+        ),
+        "pad_4276ba": (
+            "bootloader_pad_4276ba_source_in_place",
+            "Compiled MIT clean-room zero-alignment fill halfword at its authenticated stock address",
+        ),
+        "pad_427752": (
+            "bootloader_pad_427752_source_in_place",
+            "Compiled MIT clean-room zero-alignment fill halfword at its authenticated stock address",
+        ),
+        "pool_427c80": (
+            "bootloader_pool_427c80_source_in_place",
+            "Compiled MIT clean-room command-queue suffix literal pool at authenticated stock addresses",
+        ),
+        "open_cfw_bootloader_binary32_rem_tail_427d84_source_in_place": (
+            "bootloader_binary32_rem_tail_427d84_source_in_place",
+            "Compiled MIT clean-room binary32 remainder-code remainder tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_clkgen_dualclock_term_tail_426cc4_source_in_place": (
+            "bootloader_clkgen_dualclock_term_tail_426cc4_source_in_place",
+            "Compiled MIT clean-room CLKGEN dual-clock-switch terminal tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_clkgen_hfadj_term_426c70_source_in_place": (
+            "bootloader_clkgen_hfadj_term_426c70_source_in_place",
+            "Compiled MIT clean-room CLKGEN HFADJ-enable terminal return at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_cmdq_alloc_rem_tail_42799e_source_in_place": (
+            "bootloader_cmdq_alloc_rem_tail_42799e_source_in_place",
+            "Compiled MIT clean-room command-queue allocator remainder interior at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_cmdq_blockrel_term_4279ee_source_in_place": (
+            "bootloader_cmdq_blockrel_term_4279ee_source_in_place",
+            "Compiled MIT clean-room command-queue block-release terminal return at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_cmdq_disable_tail_4278fc_source_in_place": (
+            "bootloader_cmdq_disable_tail_4278fc_source_in_place",
+            "Compiled MIT clean-room command-queue disable remainder tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_cmdq_enable_tail_4278bc_source_in_place": (
+            "bootloader_cmdq_enable_tail_4278bc_source_in_place",
+            "Compiled MIT clean-room command-queue enable remainder tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_cmdq_errresume_rem_tail_427b90_source_in_place": (
+            "bootloader_cmdq_errresume_rem_tail_427b90_source_in_place",
+            "Compiled MIT clean-room command-queue error-resume remainder at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_cmdq_init_rem_tail_42784c_source_in_place": (
+            "bootloader_cmdq_init_rem_tail_42784c_source_in_place",
+            "Compiled MIT clean-room command-queue initializer remainder tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_cmdq_post_tail_427a4c_source_in_place": (
+            "bootloader_cmdq_post_tail_427a4c_source_in_place",
+            "Compiled MIT clean-room command-queue block-post remainder tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_cmdq_reset_rem_tail_427c02_source_in_place": (
+            "bootloader_cmdq_reset_rem_tail_427c02_source_in_place",
+            "Compiled MIT clean-room command-queue reset remainder tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_cmdq_reset_tail_427c72_source_in_place": (
+            "bootloader_cmdq_reset_tail_427c72_source_in_place",
+            "Compiled MIT clean-room command-queue reset epilogue tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_cmdq_status_rem_tail_427abe_source_in_place": (
+            "bootloader_cmdq_status_rem_tail_427abe_source_in_place",
+            "Compiled MIT clean-room command-queue status remainder tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_cmdq_term_tail_427b2e_source_in_place": (
+            "bootloader_cmdq_term_tail_427b2e_source_in_place",
+            "Compiled MIT clean-room command-queue termination remainder tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_double_range_error_4275d2_source_in_place": (
+            "bootloader_double_range_error_4275d2_source_in_place",
+            "Compiled MIT clean-room double-ldexp range-error tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_memset_term_tail_426c22_source_in_place": (
+            "bootloader_memset_term_tail_426c22_source_in_place",
+            "Compiled MIT clean-room memset-wrapper terminal return at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_blocking_rem_tail_4263e0_source_in_place": (
+            "bootloader_mspi_blocking_rem_tail_4263e0_source_in_place",
+            "Compiled MIT clean-room MSPI blocking-transfer remainder at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_config_pre_tail_424b88_source_in_place": (
+            "bootloader_mspi_config_pre_tail_424b88_source_in_place",
+            "Compiled MIT clean-room MSPI device-configuration pre-step tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_control_rem_tail_42612c_source_in_place": (
+            "bootloader_mspi_control_rem_tail_42612c_source_in_place",
+            "Compiled MIT clean-room MSPI control-dispatcher remainder at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_devconfig2_rem_tail_42423c_source_in_place": (
+            "bootloader_mspi_devconfig2_rem_tail_42423c_source_in_place",
+            "Compiled MIT clean-room MSPI device-configuration remainder interior at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_devconfig_rem_tail_424e84_source_in_place": (
+            "bootloader_mspi_devconfig_rem_tail_424e84_source_in_place",
+            "Compiled MIT clean-room MSPI public device-configuration remainder at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_disable_tail_425162_source_in_place": (
+            "bootloader_mspi_disable_tail_425162_source_in_place",
+            "Compiled MIT clean-room MSPI disable mini-tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_enable_tail_4250e6_source_in_place": (
+            "bootloader_mspi_enable_tail_4250e6_source_in_place",
+            "Compiled MIT clean-room MSPI enable epilogue tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_irq_disable_tail_4264b2_source_in_place": (
+            "bootloader_mspi_irq_disable_tail_4264b2_source_in_place",
+            "Compiled MIT clean-room MSPI interrupt-disable publish tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_irq_enable_tail_42647c_source_in_place": (
+            "bootloader_mspi_irq_enable_tail_42647c_source_in_place",
+            "Compiled MIT clean-room MSPI interrupt-enable remainder tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_irq_status_tail_4264f6_source_in_place": (
+            "bootloader_mspi_irq_status_tail_4264f6_source_in_place",
+            "Compiled MIT clean-room MSPI interrupt-status remainder tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_piomix_rem_tail_4248e2_source_in_place": (
+            "bootloader_mspi_piomix_rem_tail_4248e2_source_in_place",
+            "Compiled MIT clean-room MSPI PIO-mixed configuration remainder interior at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_mspi_state_init_tail_424ab2_source_in_place": (
+            "bootloader_mspi_state_init_tail_424ab2_source_in_place",
+            "Compiled MIT clean-room MSPI per-instance state-initializer tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_spot_trim_classify_tail_427e54_source_in_place": (
+            "bootloader_spot_trim_classify_tail_427e54_source_in_place",
+            "Compiled MIT clean-room SPOT trim-search float classifier suffix tail at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_spot_trim_search_a_427e84_source_in_place": (
+            "bootloader_spot_trim_search_a_427e84_source_in_place",
+            "Compiled MIT clean-room SPOT trim-search service variant A at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_spot_trim_search_b_428068_source_in_place": (
+            "bootloader_spot_trim_search_b_428068_source_in_place",
+            "Compiled MIT clean-room SPOT trim-search service variant B at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_spot_trim_search_c_428240_source_in_place": (
+            "bootloader_spot_trim_search_c_428240_source_in_place",
+            "Compiled MIT clean-room SPOT trim-search service variant C at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_syspll_alt_entry_4275c4_source_in_place": (
+            "bootloader_syspll_alt_entry_4275c4_source_in_place",
+            "Compiled MIT clean-room System-PLL alternate setter entry at its authenticated stock address",
+        ),
+        "open_cfw_bootloader_u64_divzero_4275e8_source_in_place": (
+            "bootloader_u64_divzero_4275e8_source_in_place",
+            "Compiled MIT clean-room unsigned-64-bit divmod divide-by-zero tail at its authenticated stock address",
+        ),
     })
     if name not in descriptions:
         raise ValueError(f"no reviewed manifest identity for new region {name}")
@@ -3188,10 +3572,15 @@ def sync_manifest() -> None:
     linux_expected = overlay_config["toolchain_profiles"]["linux-clang"][
         "expected"
     ]
-    provider.setdefault("profiles", {})["linux-clang"] = {
-        "size": linux_expected["component_size"],
-        "sha256": linux_expected["component_sha256"],
-    }
+    linux_profile = provider.setdefault("profiles", {}).setdefault(
+        "linux-clang", {}
+    )
+    linux_profile["size"] = linux_expected["component_size"]
+    linux_profile["sha256"] = linux_expected["component_sha256"]
+    linux_profile.setdefault(
+        "path",
+        "build/canonical-provider/linux-clang/apollo_bootloader/ota_s200_bootloader.bin",
+    )
     for profile_name in (
         "apple-font-manager-record",
         "apple-product-rtos-record",

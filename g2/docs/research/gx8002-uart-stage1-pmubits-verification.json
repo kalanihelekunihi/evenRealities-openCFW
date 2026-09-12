@@ -1,0 +1,93 @@
+{
+  "c_source_sha256": "7cf8b7eea0d59a321a6e73982ef60f7b410785ac08a27398bb967e5400aa5500",
+  "s_source_sha256": "f4ac65a7290cd41a4f001a6af8660c9ba6c2313c876cb456360e09b709cef871",
+  "compile_flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-tree-loop-optimize"
+  ],
+  "assemble_flags": [
+    "-mcpu=ck804ef",
+    "-mhard-float"
+  ],
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "register_reference": "arch/soc/grus/include/base_addr.h PMU_CFG_POWER_ON_RESET_REG1 (clean-room use of address and bit positions; no SDK text reproduced)",
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_pmu_set_bit0",
+      "compiled_bytes": 24,
+      "compiled_sha256": "c129ea2dfca4ff4b8641316ddd710f04a4ba92376f7a4adb53e0d0cf11cc41ea",
+      "ownership_kind": "compiled_c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_pmu_set_bit0",
+          "package_offset": 964,
+          "bytes": 24,
+          "sha256": "59cffcb39f15326377c0536709a1a01b63697a26b04b77826c7a67c3b024e78c",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_pmu_set_bit1",
+      "compiled_bytes": 24,
+      "compiled_sha256": "353abafc3cd67b1984e221582b56b8be47c1346b6dc32c2e80d815e207fa9e17",
+      "ownership_kind": "compiled_assembly",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_pmu_set_bit1",
+          "package_offset": 988,
+          "bytes": 24,
+          "sha256": "353abafc3cd67b1984e221582b56b8be47c1346b6dc32c2e80d815e207fa9e17",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_pmu_get_bit0",
+      "compiled_bytes": 12,
+      "compiled_sha256": "730f5b1f0ddabd5a6ee9d36ada3140d8546e71691ccd55d9676dfab7d9410562",
+      "ownership_kind": "compiled_c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_pmu_get_bit0",
+          "package_offset": 1012,
+          "bytes": 12,
+          "sha256": "730f5b1f0ddabd5a6ee9d36ada3140d8546e71691ccd55d9676dfab7d9410562",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_pmu_get_bit1",
+      "compiled_bytes": 12,
+      "compiled_sha256": "9c4f7fa5c6d0a4e5436185f33350fc96448713e57ff01548d54107090ca628c3",
+      "ownership_kind": "compiled_c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_pmu_get_bit1",
+          "package_offset": 1024,
+          "bytes": 12,
+          "sha256": "9c4f7fa5c6d0a4e5436185f33350fc96448713e57ff01548d54107090ca628c3",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    }
+  ],
+  "target_cases": 308,
+  "source_admitted": true,
+  "admission_scope": "experimental hybrid codec; UART boot stage-1 PMU leaves only",
+  "stock_equivalence_proven": false,
+  "limits": [
+    "Restricted instruction interpreter, not a processor emulator.",
+    "MMIO trace equivalence over a finite battery plus an independent oracle; the PMU register is modeled as stateful with no external concurrent updates. Hardware timing remains unqualified."
+  ]
+}

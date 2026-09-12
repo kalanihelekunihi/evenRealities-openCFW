@@ -59,8 +59,8 @@ PROFILE_PINS = {
         "compiler": "/usr/bin/clang",
         "version": "Apple clang version 21.0.0",
         "component": (163840, "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b"),
-        "source_owned": 59009,
-        "opaque": 87985,
+        "source_owned": 59013,
+        "opaque": 87981,
         "source_owned_in_place": 41190,
         "body_unrelocated": "72cded3f11ee2d26547a0b080cc08de5b0328abb90b60a63ed639600ab60bac8",
         "body_relocated": "baa242511305c129975f70959f169012a1719efeacb3d255e0b37eacf840d872",
@@ -238,7 +238,7 @@ def audit(*, rebuild: bool = False) -> dict[str, object]:
     override = json.loads(MANIFEST.read_text())["component_overrides"]["apollo_bootloader"]
     provider = override["provider"]
     require((provider["size"], provider["sha256"], provider["source_owned_bytes"], provider["opaque_base_bytes"])
-            == (163840, PROFILE_PINS["apple-clang"]["component"][1], 59009, 87985), "manifest provider authority changed")
+            == (163840, PROFILE_PINS["apple-clang"]["component"][1], 59013, 87981), "manifest provider authority changed")
     regions = {item["name"]: item for item in override["regions"]}
     expected_regions = {
         "bootloader_mspi_control_4251c0_source_in_place": (BOOT_START, 124, "source_compiled"),

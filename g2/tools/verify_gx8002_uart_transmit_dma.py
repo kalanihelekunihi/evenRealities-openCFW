@@ -7,7 +7,7 @@ from analyze_gx8002_upstream_objects import IMAGE_SHA,sha
 from build_transparent_image import Elf32
 
 
-def execute(code,entry,port,buffer,length,channel,burst1,burst2,status,burst_hook=None,cache_hook=None,cache_buffer=0x20060000,cache_length=77,select_hook=None,callback_hook=None,release_hook=None,helper_addresses=None,descriptor_address=0x20026a94,initial_memory=None):
+def execute(code,entry,port,buffer,length,channel,burst1,burst2,status,burst_hook=None,cache_hook=None,cache_buffer=0x20060000,cache_length=77,select_hook=None,callback_hook=None,release_hook=None,helper_addresses=None,descriptor_address=0x20026a94,initial_memory=None,transfer_hook=None):
     descriptor=descriptor_address;base=0xa0000000;stack=0x2002f000
     memory={descriptor:port,descriptor+4:base,descriptor+100:cache_length,descriptor+96:cache_buffer,descriptor+124:0xffffffff}
     if initial_memory is not None:memory=dict(initial_memory)
@@ -69,6 +69,7 @@ def execute(code,entry,port,buffer,length,channel,burst1,burst2,status,burst_hoo
             elif target==0x10203b78:
                 config=memory[r['r14']]
                 trace.append(('transfer',r['r0'],r['r1'],r['r2'],r['r3'],tuple(memory[config+i*4] for i in range(12))));result=status
+                if transfer_hook is not None:result=transfer_hook(r['r0'],r['r1'],r['r2'],r['r3'],config,tuple(memory[config+i*4] for i in range(12)))
             else:raise ValueError('DMA setup helper target')
             for i in (0,1,2,3,12,13,15,*range(18,32)):r[f'r{i}']=0xb0000000+i
             r['r0']=result

@@ -3491,3 +3491,719 @@ a 10,896-byte unanalyzed compatibility tail -- remain retained stock. Full
 reconnaissance is in
 `docs/research/g2-bootloader-bl003-remaining-recon-4155e8-41a648.md`. No
 hardware operation occurred, and firmware-wide completeness is not claimed.
+
+## BL-006 literal cluster 0x0042220E..0x00422AD4 (work item BL-006)
+
+Nine retained literal/alignment regions (192 bytes) between exact
+source-owned bodies are now produced from reviewed MIT C through this
+component's `in_place_data` mechanism: three mode/bitmap literal seams
+(`0x0042220E`, `0x0042228E`, `0x004222D2`), the client-service pool
+(`0x00422430`), the debug-trace pool (`0x00422574`), the
+constraint-handler island (`0x004225AC`, handler cell plus default
+message), and three two-byte alignment halfwords (`0x00422712`,
+`0x00422872`, `0x00422AD2`). Sources are
+`runtime_bl006_mode_seams_42220e.c`, `runtime_bl006_debug_pool_422430.c`,
+and `runtime_bl006_align_fill_422712.c`; every literal word is a named
+struct field with its consumers and meaning documented, and all payloads
+compile relocation-free and byte-identical to stock. Full details are in
+`docs/research/g2-bootloader-bl006-cluster-4220b2-422ad4-source-closure.md`,
+verified by `g2/tests/test_runtime_bootloader_bl006_cluster.py`.
+
+This closes 192 of the 5,892 bytes assigned to `BL-006`. The remaining
+68 regions (5,700 bytes) -- dead stock tails after short in-place leaves
+and the other literal pools catalogued in
+`docs/research/g2-bootloader-bl006-retained-seam-survey.md` -- remain
+retained stock. No hardware operation occurred, and firmware-wide
+completeness is not claimed.
+
+## BL-006 hardware-service and MSPI pools 0x004233E0..0x004251C0 (work item BL-006)
+
+Eight more retained literal regions (154 bytes) are now produced from
+reviewed MIT C through this component's `in_place_data` mechanism:
+the instance pools (`0x004233E0`, `0x00423430`), the clock-reference
+pool (`0x004236FA`, including the spilled 3 MHz mode-4 reference),
+the register/status pool (`0x00423764`), the
+descriptor/clock/status pool (`0x0042382C`), the control-service
+SRAM cells (`0x00423E0C`), the MSPI0 base word (`0x0042499C`), and
+the MSPI state pool (`0x004251A4`, including one reserved word with
+no routed consumer). Sources are
+`runtime_bl006_hw_service_pools_4233e0.c`,
+`runtime_bl006_hw_register_pools_4236fa.c`, and
+`runtime_bl006_mspi_pools_423e0c.c`; every literal word is a named
+struct field with its loader PCs and host-model meaning documented,
+zero references come from entry-redirect stock spans, and all
+payloads compile relocation-free and byte-identical to stock. Full
+details are in
+`docs/research/g2-bootloader-bl006-cluster-4233e0-4251c0-source-closure.md`,
+verified by `g2/tests/test_runtime_bootloader_bl006_hw_pools.py`.
+
+This brings BL-006 to 346 of 5,892 bytes from reviewed source (192
+prior plus 154 here). The remaining 60 regions (5,546 bytes) --
+dead stock tails, pools whose consumers live in not-yet-routed
+spans, and scattered small pools -- remain retained stock. No
+hardware operation occurred, and firmware-wide completeness is not
+claimed.
+
+## BL-006 boot-initialization pools 0x0041F9B6..0x0041FDC0 (work item BL-006)
+
+Six more retained literal regions (198 bytes) are now produced from
+reviewed MIT C through this component's `in_place_data` mechanism:
+the SCS/transport island head (`0x0041F9B6`, 22 bytes admitted;
+the trailing 12 bytes pointing into unidentified retained globals
+stay retained), the comparator alignment (`0x0041F9EE`), the
+initializer-table pool (`0x0041FA40`), the guard/config pool
+(`0x0041FAD0`), the 30-word pin-configuration pool (`0x0041FCF6`,
+every pin/offset call site matched to the reviewed dispatcher),
+and the allocator/log pool (`0x0041FDA8`). The single source is
+`runtime_bl006_boot_init_pools_41f9b6.c`; every literal word is a
+named struct field with its stock loader PCs and host-model meaning
+documented. Unlike the prior two BL-006 clusters, the loaders live
+in entry-redirect stock spans, so these pools are admitted as
+authenticated layout reproductions with reviewed meanings, not as
+address-live traffic; the audit states this explicitly. Full
+details are in
+`docs/research/g2-bootloader-bl006-cluster-41f9b6-41fdc0-source-closure.md`,
+verified by `g2/tests/test_runtime_bootloader_bl006_boot_pools.py`.
+
+This brings BL-006 to 544 of 5,892 bytes from reviewed source (346
+prior plus 198 here). The remaining 54 regions (5,348 bytes) --
+MX25 flash-driver literal gaps, LittleFS/mapped-memory pools,
+control/MSPI pools, unreachable tails, and scattered small pools --
+remain retained stock. No hardware operation occurred, and
+firmware-wide completeness is not claimed.
+
+## BL-006 hardware-control and MSPI ISR pools 0x00423D9A..0x00426C10 (work item BL-006)
+
+Four more retained literal/alignment regions (36 bytes) are now
+produced from reviewed MIT C through this component's
+`in_place_data` mechanism: the control-register pool (`0x00423D9A`,
+pad plus `0xE0000E80` loaded by the exact register query and global
+service), the service-entry alignment (`0x00423DCE`), the
+interrupt-service pool (`0x004267FE`, callback pointer plus MSPI
+register base with exact interrupt-service loaders), and the
+power-control pool (`0x00426BFE`, callback pointer, handle prefix,
+state-table base, and register base with exact interrupt-service
+and power-control loaders). Sources are
+`runtime_bl006_hw_control_pool_423d9a.c` and
+`runtime_bl006_mspi_isr_pools_4267fe.c`; every literal word is a
+named struct field with its loader PCs and consumer-source meaning
+documented. The two callback-pointer slots are a documented weaker
+case (values live in shipped code, no exact-body loader of the slot
+itself); the verifier pins their complete loader set so any new
+loader forces re-derivation, and every entry-redirect-span reference
+is proven dead by span containment. All payloads compile
+relocation-free and byte-identical to stock. Full details are in
+`docs/research/g2-bootloader-bl006-cluster-423d9a-426c10-source-closure.md`,
+verified by `g2/tests/test_runtime_bootloader_bl006_ctrl_pools.py`.
+
+This brings BL-006 to 580 of 5,892 bytes from reviewed source (544
+prior plus 36 here). The remaining 50 regions (5,312 bytes) -- dead
+stock tails, pools whose consumers live in not-yet-routed spans, and
+scattered small pools -- remain retained stock. No hardware operation
+occurred, and firmware-wide completeness is not claimed.
+
+## BL-006 MX25 shared literal pools 0x0042086C..0x00420F70 (work item BL-006)
+
+Nine more retained literal regions (208 bytes) are now produced from
+reviewed MIT C through this component's `in_place_data` mechanism:
+the event-state pool (`0x0042086C`, NVIC IPR base, MSPI handle/active
+words, event-service words), the log-file pool (`0x00420978`), the
+event-release island (`0x004209BE`), the NVIC/timing-active pool
+(`0x004209FC`), the log-tag/timing/guard/low-init pool
+(`0x00420ADA`), the low-init/driver/soft-reset pool suffix
+(`0x00420C18`, 68 of the 72 bytes at `0x00420C14`; the leading
+`0x000081F6` word has no loader and no reviewed meaning and stays
+retained), the log-format/read-ID pool (`0x00420DFA`), the
+transfer-timeout word (`0x00420F0C`, 1000000), and the QE "set"-text
+island (`0x00420F6A`, selected by `adr` at stock loader `0x00420DD2`).
+The single source is `runtime_bl006_mx25_pools_42086c.c`; every
+literal word is a named struct field with its stock loader PCs and
+reviewed consumer-source meaning documented. The consumers live in
+entry-redirect stock spans, so these pools are admitted as
+authenticated layout reproductions with reviewed meanings, not as
+address-live traffic; the audit states this explicitly, including the
+duplicate-word split (later MX25 functions load the file/tag copies
+at `0x00421030`/`0x00421034`, pinned as out of scope for these
+slots). All payloads compile relocation-free and byte-identical to
+stock. Full details are in
+`docs/research/g2-bootloader-bl006-cluster-42086c-420f70-source-closure.md`,
+verified by `g2/tests/test_runtime_bootloader_bl006_mx25_pools.py`.
+
+This brings BL-006 to 788 of 5,892 bytes from reviewed source (580
+prior plus 208 here). The remaining 42 regions (5,104 bytes) -- dead
+stock tails, the LittleFS/mapped-memory pools, the 214-byte shared
+log-pointer pool at `0x00420FF2`, the retained `0x00420C14` head
+word, and scattered small pools -- remain retained stock. No
+hardware operation occurred, and firmware-wide completeness is not
+claimed.
+
+## BL-006 LittleFS-adjacent literal pools 0x00420FF2..0x00421584 (work item BL-006)
+
+Three more retained literal regions (334 bytes) are now produced from
+reviewed MIT C through this component's `in_place_data` mechanism:
+the 214-byte MX25/LittleFS shared pool (`0x00420FF2`, 53 words:
+transfer formats, busy words, address-mode words, the MSPI
+state-handle word, enter-4byte words, the shared log-file path and
+log tag, latch/erase/program words, QE words including the "clear"
+text pointer, reconfigure/quad-mode/serial-mode words, and the
+1000000 read timeout), the 98-byte
+directory-bootstrap/format/init/callback pool (`0x00421372`, 24
+words: paths table, LittleFS object, shared log function/file/tag,
+per-outcome formats, format and init words, and the three
+block-callback log formats), and the 22-byte mapped-memory
+control/security/window pool (`0x0042156E`, 5 words read live by the
+in-place selector and odd-selector wrapper). The single source is
+`runtime_bl006_littlefs_pools_420ff2.c`; every literal word is a named
+struct field with its stock loader PCs (163 loaders across 82 slots,
+mapped by exact-entry Capstone decode with complete span coverage)
+and reviewed consumer-source meaning documented. The MX25/LittleFS
+pools are admitted as authenticated layout reproductions with
+reviewed meanings, not as live traffic; the mapped-memory pool is
+live traffic named in the reviewed selector source. All payloads
+compile relocation-free and byte-identical to stock. Full details are
+in
+`docs/research/g2-bootloader-bl006-cluster-420ff2-421584-source-closure.md`,
+verified by `g2/tests/test_runtime_bootloader_bl006_littlefs_pools.py`.
+
+This brings BL-006 to 1,122 of 5,892 bytes from reviewed source (788
+prior plus 334 here). The remaining 39 regions (4,770 bytes) -- dead
+stock tails, MSPI/clock pools, and clock/cmdq/binary32 tail pools --
+remain retained stock. No hardware operation occurred, and
+firmware-wide completeness is not claimed.
+
+## BL-006 CLKGEN pool and alignment pads 0x00426D2C..0x00427754 (work item BL-006)
+
+Five more retained regions (36 bytes) are now produced from reviewed
+MIT C through this component's `in_place_data` mechanism: the
+28-byte CLKGEN register-address pool (`0x00426D2C`, alignment fill
+plus six `0x400040xx` words -- HFADJ control, CLKGEN control,
+dual-switch status, CLKGEN mode, CLKGEN divider, disable target --
+each named by an already-reviewed consumer source) and four
+two-byte zero-alignment fills (`0x00426DB2`, `0x00426F6A`,
+`0x004276BA`, `0x00427752`, each with zero loaders in any routed
+span). The sources are `runtime_bl006_clkgen_pool_426d2c.c` and
+`runtime_bl006_zero_pads_426db2.c`. No byte-exact shipped body loads
+any pool slot (decided per body by stock-hash comparison); the only
+in-place references are stock decodes of two functionally replaced
+bodies whose recompiled `.text` provably avoids every slot, and all
+redirect-span references are contained in overwritten spans. The pool
+is admitted as an authenticated layout reproduction with reviewed
+meanings, not as address-live traffic; the pads are explicit zero
+fills. The verifier pins the complete loader set so any new loader
+forces re-derivation. All payloads compile relocation-free and
+byte-identical to stock, and the private component build carries
+them at their runtime addresses byte-identically. Full details are in
+`docs/research/g2-bootloader-bl006-cluster-426d2c-427754-source-closure.md`,
+verified by `g2/tests/test_runtime_bootloader_bl006_clkgen_pads.py`.
+
+This brings BL-006 to 1,158 of 5,892 bytes from reviewed source
+(1,122 prior plus 36 here). The remaining 34 regions (4,734 bytes)
+-- dead stock tails needing a fill primitive, mixed code/data spans,
+the orphan `0x00422D7A` datum and `0x00420C14` head word, and the
+binary32/PLL table spans -- remain retained stock. No hardware
+operation occurred, and firmware-wide completeness is not claimed.
+
+## BL-006 float/System-PLL pools and reserved words 0x00420C14..0x00427310 (work item BL-006)
+
+Five more retained regions (50 bytes) are now produced from reviewed
+MIT C through this component's `in_place_data` mechanism: the
+14-byte float-ratio bound pool (`0x00427032`, alignment pad plus
+`0x1p-23f`, `0x1.000002p-23f`, `0x1.e00002p+9f`), the 20-byte
+multiplier/select bound pool (`0x0042714C`, `0x1.f80002p+5f`,
+reserved zero, `0x1p+24f`, `0x1.800002p+6f`, `60.0f`), the 8-byte
+select/PLL pool (`0x00427308`, `240.0f`, `1000000.0f`), and the
+reserved words `0x00420C14` (`0x000081F6`, closing the MX25 QE gap
+fully) and `0x00422D7A` (`0x20000002`). The sources are
+`runtime_bl006_float_syspll_pools_427032.c` and
+`runtime_bl006_reserved_words_420c14.c`. Every float spelling is
+checked against the stock word independently and against the reviewed
+replacement consumer source text; all 19 routed loaders live in
+entry-redirect stock spans (float gcd/ratio/multiplier/
+encoding-select, System PLL minimum-VCO), and no byte-exact shipped
+body loads any slot, so the pools are admitted as authenticated
+layout reproductions with reviewed meanings while the two reserved
+words and two reserved slots preserve layout only. All payloads
+compile relocation-free and byte-identical to stock, and the
+component build records all 5 placements with provider bytes matching
+stock. Full details are in
+`docs/research/g2-bootloader-bl006-cluster-426d2c-427754-source-closure.md`
+(plus addenda in the 42086c and 4220b2 cluster docs), verified by
+`g2/tests/test_runtime_bootloader_bl006_float_pools.py`.
+
+This brings BL-006 to 1,208 of 5,892 bytes from reviewed source
+(1,158 prior plus 50 here). The remaining 29 regions (4,684 bytes)
+-- dead stock tails needing a fill primitive, mixed code/data spans
+(`0x00424AB2`, `0x00424B88`, `0x004250E6`, `0x00425160`,
+`0x00427588`), the MSPI lifecycle pools, the command-queue tails,
+and the 1316-byte `0x00427E54` binary32 table -- remain retained
+stock. The flash-plan manifest still labels admitted data pools
+`official_blob` (no manifest region re-cut has ever been done for a
+BL-006 cluster); that accounting is follow-up work. No hardware
+operation occurred, and firmware-wide completeness is not claimed.
+
+## BL-006 MSPI state-literal island/pool and boot-island tail words (work item BL-006)
+
+Five more retained placements (34 bytes) are now produced from
+reviewed MIT C through this component's `in_place_data` mechanism:
+the MSPI state-literal island (`0x00424AEA`, alignment pad plus the
+`0x2001CAA0` state-table base with live loaders in the byte-exact
+command-queue initializer/terminator), the MSPI state-literal pool
+(`0x00424BD4`, 100000U pause timeout and `0x40060000` MSPI0 base
+with live loaders in byte-exact command-queue bodies, plus two
+pad-configuration words whose only stock-decode loaders sit in the
+functionally replaced device-configure span and are stale by
+construction), and three reserved trailing boot-island words
+(`0x0041F9CC/0x0041F9D0/0x0041F9D4`, pointers into retained
+`0x004341xx` tables with no routed loader and no reviewed meaning).
+Sources are the new `runtime_bl006_mspi_state_pools_424aea.c` and
+the extended `runtime_bl006_reserved_words_420c14.c` (the two
+pre-existing entries' source pins were updated to the extended
+file). One loader-target correction is recorded in the audit (the
+stock configure load at `0x00424B1A` targets `0x00424BD8`, not
+`0x00424BD4`). All payloads compile relocation-free and
+byte-identical to stock. Full details are in
+`docs/research/g2-bootloader-bl006-cluster-424aea-424be4-source-closure.md`,
+verified by `g2/tests/test_runtime_bootloader_bl006_mspi_state_pools.py`.
+
+This brings BL-006 to 1,242 of 5,892 bytes from reviewed source
+(1,208 prior plus 34 here). The remaining 29 regions (4,650 bytes)
+-- dead stock tails needing a fill primitive (including the code
+halves of `0x00424AB2`/`0x00424B88` whose data suffixes close
+here), the 98-byte System-PLL lock-wait body at `0x00427588`, the
+command-queue tails, and the 1316-byte `0x00427E54` binary32 table
+-- remain retained stock. No hardware operation occurred, and
+firmware-wide completeness is not claimed. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+### BL-006 System-PLL pool plus range-error/div-zero tails
+(`0x00427588..0x004275EA`, 84 bytes)
+
+The 60-byte System-PLL literal pool at `0x00427588` (megahertz
+scalings, VCO bounds, post-divider/PTS table pointers, SYSPLL
+state and magic words, VRCTRL/PLL register addresses) and the
+4-byte range-error cell word at `0x004275E4` are reproduced as
+named-field `in_place_data` structs in
+`runtime_bl006_syspll_pool_427588.c`; the 18-byte ldexp
+range-error setter at `0x004275D2` (stores `0x22` to
+`0x20027194`) and the 2-byte divmod divide-by-zero return at
+`0x004275E8` are reconstructed as in-place leaves in
+`runtime_double_range_error_4275d2.c` and
+`runtime_u64_divzero_4275e8.c`. Every loader is pinned to a
+replaced span with call-only relocations (including 32-bit
+`ldr.w` loaders a linear sweep misses) or to a retained dead
+span; the 14-byte setter prologue at `0x004275C4` stays
+retained for the missing dead-tail fill primitive. Evidence in
+`docs/research/g2-bootloader-bl006-cluster-427588-syspll-pool-source-closure.md`,
+verified by `g2/tests/test_runtime_bootloader_bl006_syspll_pool.py`.
+
+This brings BL-006 to 1,326 of 5,892 bytes from reviewed source
+(1,242 prior plus 84 here). The provider hash moves to
+`696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3`
+(the 15 changed bytes are exactly the range-error span); pins
+updated in `overlay.json`, the core-source manifest, and
+`test_bootloader_core_overlay.py`. The manifest region table
+still regenerates via `make source` (blocked by an unrelated
+apollo_main snapshot breakage). No hardware operation occurred,
+and firmware-wide completeness is not claimed. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+### BL-006 span survey `0x00427E54..0x00428378` (work item BL-006,
+no bytes admitted)
+
+The last unexamined BL-006 region (1,316 bytes) is four
+single-exit Thumb-2 code subspans, not a literal pool: the
+48-byte classifier suffix tail T0 (`vcmp.f32` vs embedded
+`50.0f`/`1000.0f`, returns 2/3/4) and three SPOT trim-service
+bodies F1/F2/F3 (484/472/312 bytes, balanced `push.w`/`pop.w pc`
+frames, exact out-of-span callee and pool-target sets pinned).
+No image word targets any entry; the survey still flags no
+surviving external branch. The span's data pools live in
+retained SPOT-table gaps owned by other items. It stays
+retained for the missing dead-tail fill primitive (best
+characterized first-use candidate) or full reconstruction.
+Evidence in
+`docs/research/g2-bootloader-bl006-span-427e54-spot-trim-survey.md`,
+verified by
+`g2/tests/test_runtime_bootloader_bl006_span_427e54.py` (8
+tests). BL-006 remains at 1,326 of 5,892 bytes from reviewed
+source. No hardware operation occurred. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+### BL-006 command-queue suffix pool and MSPI aperture mask (work item BL-006, +20 bytes)
+
+The 16-byte command-queue suffix literal pool at
+`[0x00427C80,0x00427C90)` (queue state-table base `0x200262F0`,
+register-table base `0x00430880`, initialized-prefix magic
+`0x01CDCDCD` = `OPEN_CFW_CMDQ_INITIALIZED |
+OPEN_CFW_CMDQ_MAGIC`, shared-RAM base `0x20080000`, all spelled
+in `runtime_cmdq_services_427794.c`) and the 4-byte XIP
+aperture-base mask word at `[0x0042644C,0x00426450)`
+(`0x1FFF0000`, spelled in `runtime_mspi_control_4251c0.c`) are
+now produced from reviewed MIT C as named-field `in_place_data`
+(`runtime_bl006_cmdq_suffix_pool_427c80.c`,
+`runtime_bl006_mspi_aperture_mask_42644c.c`). Every loader sits
+in a replaced span whose shipped replacement carries only
+`R_ARM_THM_CALL` relocations (stale by construction); loader
+sets were derived by a sync-independent literal-load encoding
+sweep (anchored Capstone desynchronizes inside the error-resume
+and post-loop spans and misses two magic loaders) with no
+pointer-table, dead-span, relocated-source, or backward-`adr.w`
+references. Both payloads reproduce stock exactly, so the
+provider is byte-identical (`696a6baf…`, 163,840 bytes) and no
+manifest or overlay-test pins change; the manifest region
+re-cut for these two splits stays deferred with the other
+BL-006 pool re-cuts (`make source` blocked by the unrelated
+apollo_main littlefs-snapshot breakage). Evidence in
+`docs/research/g2-bootloader-bl006-cluster-427c80-42644c-source-closure.md`,
+verified by
+`g2/tests/test_runtime_bootloader_bl006_cmdq_mspi_literals.py`
+(8 tests). BL-006 stands at 1,346 of 5,892 bytes from reviewed
+source. No hardware operation occurred. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+## BL-006 dead-tail leaves 0x00424AB2/0x00424B88/0x004250E6/0x00427C72 (work item BL-006)
+
+Four more retained spans (156 bytes) are now produced from
+reviewed MIT C through this component's `in_place_leaves`
+mechanism: the per-instance MSPI state-initializer tail
+(`0x00424AB2`, 56 bytes: `p = base + index*stride`,
+`p->u8[0x0C] = 0`, `p->u32[0x18] = 0`, `p->u8[0x8C9] = 7`,
+`p->u32[0x8CC] = 8`, out-slot publish, return 0), the public
+MSPI device-configuration pre-step tail (`0x00424B88`, 76
+bytes: 0x858-field publish, 0x101-clamp to 0x100, config-byte
+copies to offsets 9/8, 0x1A to offset 0xA, return 0), the MSPI
+enable epilogue (`0x004250E6`, 10 bytes: bit-25 merge and
+publish, return 0), and the command-queue reset epilogue
+(`0x00427C72`, 14 bytes: narrow-and-publish through the
+register table, return 0). Sources are
+`runtime_bl006_mspi_state_tails_424ab2.c` (tails A and B) and
+`runtime_bl006_epilogue_tails_4250e6.c` (tails C and D); each
+leaf is a naked-assembly target body with explicit instruction
+widths plus a portable C twin for host testing. All four
+payloads compile relocation-free and byte-identical to stock.
+All four spans are graded `corroborated_unreachable_control_flow`
+by the whole-image retained survey and have no whole-image `bl`
+caller, so no live traffic is claimed; the leaves document dead
+bytes from reviewed source and pin the behavior the replaced
+heads must cover. The provider stays byte-identical
+(`696a6baf…`, 163,840 bytes). Evidence in
+`docs/research/g2-bootloader-bl006-tail-leaves-424ab2-4250e6-427c72-source-closure.md`,
+verified by
+`g2/tests/test_runtime_bootloader_bl006_tail_leaves.py`
+(9 tests). This brings BL-006 to 1,502 of 5,892 bytes from
+reviewed source (1,346 prior plus 156 here). No hardware
+operation occurred. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## BL-006 command-queue and MSPI interrupt-enable tails 0x0042647C/0x004278BC..0x00427C02 (work item BL-006)
+
+Six more retained tail regions (70 bytes) are now produced from
+reviewed MIT C through this component's `in_place_leaves`
+mechanism: the command-queue enable remainder (`0x004278BC`,
+bit-25 merge), the disable remainder (`0x004278FC`, publish then
+bit-25 clear), the block-post remainder (`0x00427A4C`,
+register-table publish), the termination remainder (`0x00427B2E`,
+state-table publish through the head-owned slot, `pop {r1, r4,
+r5, pc}` return), the reset remainder (`0x00427C02`, queue
+publish then bit-25 clear), and the MSPI interrupt-enable
+remainder (`0x0042647C`, 32-bit store to base + `0x200`). The
+single source is `runtime_bl006_cmdq_irq_tails_4278bc.c`; each
+leaf is a naked-assembly target body with explicit instruction
+widths plus a portable C twin for host testing. All six payloads
+compile relocation-free and byte-identical to stock, every span
+is graded `corroborated_unreachable_control_flow` by the
+whole-image retained survey with no whole-image `bl` caller, so
+no live traffic is claimed; the leaves document dead bytes from
+reviewed source and pin the behavior the replaced heads must
+cover. Full details are in
+`docs/research/g2-bootloader-bl006-tail-leaves-42647c-427c02-source-closure.md`,
+verified by
+`g2/tests/test_runtime_bootloader_bl006_cmdq_irq_tails.py`
+(11 tests). This brings BL-006 to 1,572 of 5,892 source-owned
+bytes (1,502 prior plus 70 here); 58 of the 77 survey regions are
+fully closed. No hardware operation occurred. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+## BL-006 MSPI status, CLKGEN dual-clock, and command-queue init/block-release tails 0x004264F6/0x00426CC4/0x0042784C/0x004279EE (work item BL-006)
+
+Four more retained tail regions (70 bytes) are now produced from
+reviewed MIT C through this component's `in_place_leaves`
+mechanism: the MSPI interrupt-status remainder (`0x004264F6`,
+scaled status-word publish, `pop {r4}` return), the CLKGEN
+dual-clock-switch terminal tail (`0x00426CC4`, slot-derived
+publish, `pop {r1, pc}` return), the command-queue initializer
+remainder (`0x0042784C`, OR-accumulate plus three publishes plus
+state-out, `pop {r4, r5}` return), and the command-queue
+block-release terminal return (`0x004279EE`, bare `bx lr` with
+r0 pass-through). The single source is
+`runtime_bl006_mspi_clkgen_cmdq_tails_4264f6.c`; each leaf is a
+naked-assembly target body with explicit instruction widths plus
+a portable C twin for host testing. All four payloads compile
+relocation-free and byte-identical to stock, every span is
+graded `corroborated_unreachable_control_flow` by the whole-image
+retained survey with no whole-image `bl` caller, so no live
+traffic is claimed; the leaves document dead bytes from reviewed
+source and pin the behavior the replaced heads must cover. The
+host twin for the initializer remainder models the target link
+word as a native struct (the target's 4-byte slots at +0x00/+0x04
+would overlap as 8-byte host pointers) while preserving the
+state-to-link thread. The 10-byte slice at `0x004264B0` is
+deliberately excluded: it starts mid-instruction (32-bit ADD.W
+at `0x004264AE`) and needs the data/fill route. Full details are
+in
+`docs/research/g2-bootloader-bl006-tail-leaves-4264f6-4279ee-source-closure.md`,
+verified by
+`g2/tests/test_runtime_bootloader_bl006_mspi_clkgen_cmdq_tails.py`
+(9 tests). This brings BL-006 to 1,642 of 5,892 source-owned
+bytes (1,572 prior plus 70 here); 62 of the 77 survey regions are
+fully closed. No hardware operation occurred. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+## BL-006 terminal returns, status/binary32 tails, setter entry, disable tails (work item BL-006)
+
+Seven dead tails now reproduce their stock bytes exactly through
+the `in_place_leaves` mechanism: the memset-wrapper terminal
+return (`0x00426C22`, `pop {r4, pc}`), the CLKGEN HFADJ-enable
+terminal return (`0x00426C70`, bare `bx lr` with r0
+pass-through), the command-queue status remainder (`0x00427ABE`,
+pending-flag clear, mask-thread hit test, boolean publish,
+zero return), the binary32 remainder-code remainder
+(`0x00427D84`, carry-gated complement, r4 restore, carry-clear
+transfer to `0x004275C4`), the System-PLL alternate setter entry
+(`0x004275C4`, cell-pointer load, `0x21` select, join of the
+shared publish body at `0x004275DE`), the MSPI disable mini-tail
+(`0x00425162`, zero return plus head-owned block restore), and
+the MSPI interrupt-disable publish tail (`0x004264B2`,
+word publish at base plus `0x200`, zero return). The two
+out-of-span branches use reviewed explicit encodings (`.inst.w
+0xF4FFAC17`, `.inst.n 0xE005`) because the relocatable object
+cannot resolve far-absolute mnemonic operands; each encoding was
+cross-checked by assembling the identical branch at the
+identical offset with the same toolchain. Four loader-free slots
+go through `in_place_data` as named layout preservation: the
+orphaned disable-head `bl` fragment (`0x00425160`), the
+alignment halfword (`0x00425166`), the `0x0007FFFF` lifecycle
+word (`0x00425168`), and the orphaned interrupt-disable-head
+`adds.w` fragment (`0x004264B0`, resolving the prior turn's
+deliberate exclusion). The new sources are
+`runtime_bl006_terminal_returns_426c22.c`,
+`runtime_bl006_cmdq_status_binary32_tails_427abe.c`,
+`runtime_bl006_syspll_alt_entry_4275c4.c`,
+`runtime_bl006_disable_tail_425162.c`,
+`runtime_bl006_tail_fragments_425160.c`, and
+`runtime_bl006_irq_disable_tail_4264b2.c` (all MIT, each with a
+portable C twin for host testing). Survey grades are
+`corroborated_unreachable_control_flow` for the disable,
+interrupt-disable, status, and System-PLL regions and the weaker
+`no_control_flow_reference_found` (asserted as-is) for the two
+terminal returns and the remainder-code tail; a whole-image `bl`
+sweep finds no caller of any new entry, so no live traffic is
+claimed. Full details are in
+`docs/research/g2-bootloader-bl006-tail-leaves-426c22-427d84-source-closure.md`,
+verified by
+`g2/tests/test_runtime_bootloader_bl006_tail7_fragments.py`
+(14 tests). The System-PLL pool verifier was re-derived for the
+routed prologue (mixed loader contract on the `0x004275E4`
+cell). This brings BL-006 to 69 of 77 regions (1,722 of 5,892
+closed-region bytes; +84 newly source-owned bytes this turn).
+No hardware operation occurred. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+## BL-006 allocator and error-resume interiors 0x0042799E..0x00427BAA (work item BL-006)
+
+Two multi-entry, branch-bearing dead interiors (58 bytes) are now
+produced from reviewed MIT C as exact in-place leaves: the
+command-queue allocator remainder (`0x0042799E`, wrap publish /
+failure return / slow-path bounds check) and the error-resume
+remainder (`0x00427B90`, scan loop-back plus match epilogue). The
+five narrow unconditional exits into the replaced heads are spelled
+with reviewed 16-bit encodings (`.inst.n`) because the relocatable
+object cannot resolve far-absolute mnemonic branch operands; six
+in-source assembler probes prove the reference assembler emits the
+identical bytes at the identical offsets (binary32-tail `.inst.w`
+precedent). The live allocator and error-resume behavior stays
+covered by the AmbiqSuite-adapted `runtime_cmdq_services_427794.c`;
+the new source is `runtime_bl006_cmdq_alloc_resume_tails_42799e.c`
+(MIT, portable C twins for host testing). Both survey regions grade
+`corroborated_unreachable_control_flow` and a whole-image `bl` sweep
+finds no caller of either entry, so no live traffic is claimed. Full
+details are in
+`docs/research/g2-bootloader-bl006-tail-leaves-42799e-427b90-source-closure.md`,
+verified by
+`g2/tests/test_runtime_bootloader_bl006_cmdq_alloc_resume.py`
+(10 tests). `build_component.py` succeeds with the two leaves
+(15,240 overlay bytes); `make -C g2 bootloader-component` stays
+blocked at the other lane's `littlefs-snapshot` prerequisite. This
+brings BL-006 to 71 of 77 regions (1,780 of 5,892 closed-region
+bytes; +58 newly source-owned bytes this turn). No hardware
+operation occurred. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## BL-006 MSPI dead interiors 0x0042423C..0x0042644C (work item BL-006)
+
+Five dead MSPI interiors (2,792 bytes) are now produced from
+reviewed MIT C as exact in-place leaves: the PIO-mixed nibble
+arms (`0x004248E2`, 148 B), the blocking-transfer end
+(`0x004263E0`, 108 B, two reviewed call relocations plus a
+reviewed `.inst.w` for the retained delay call), the
+control-dispatcher arms (`0x0042612C`, 436 B, one call
+relocation plus thirteen reviewed branch spellings), the public
+device-configuration body (`0x00424E84`, 482 B, two call
+relocations plus ten reviewed narrow spellings), and the
+device-configuration arms (`0x0042423C`, 1,618 B, no
+relocations). Out-of-span exits use reviewed `.inst`/`.inst.w`
+spellings with same-offset assembler probes, except the eleven
+wide exits, which the reference assembler spells with a variant
+bit and are pinned by decoder verification instead. Portable C
+twins cover every arm/entry on the host. All five survey
+regions grade `corroborated_unreachable_control_flow` and a
+whole-image `bl` sweep finds no caller of any entry, so no live
+traffic is claimed; live MSPI behavior stays with the
+AmbiqSuite-adapted services. The earlier fragment loader test
+is now deadness-aware (leaf Q documents the stock `0x00425168`
+loads from dead F3 arms). Full details are in
+`docs/research/g2-bootloader-bl006-tail-leaves-4248e2-4263e0-source-closure.md`,
+verified by
+`g2/tests/test_runtime_bootloader_bl006_mspi_tails.py` (12
+tests). `build_component.py` succeeds with the five leaves
+(15,240 overlay bytes); `make -C g2 bootloader-component`
+stays blocked at the other lane's `littlefs-snapshot`
+prerequisite. This brings BL-006 to 76 of 77 regions (4,572 of
+5,892 closed-region bytes; +2,792 newly source-owned bytes this
+turn); only the 1,316-byte binary32/SPOT span remains (fill
+primitive followup). No hardware operation occurred. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+## BL-006 SPOT trim-search span 0x00427E54..0x00428378 (work item BL-006)
+
+The last retained BL-006 region (1,316 bytes) is now produced
+from reviewed MIT C as four exact in-place leaves in
+`runtime_bl006_spot_trim_span_427e54.c`: the float classifier
+suffix tail (`0x00427E54`, 48 B, no calls), trim-search
+variant A (`0x00427E84`, 484 B, nine reviewed call
+relocations), variant B (`0x00428068`, 472 B, eight call
+relocations), and variant C (`0x00428240`, 312 B, four call
+relocations, including `transition_start(50)` with no
+`delay(50)`). No `.inst` spellings were needed: pool loads
+reuse retained SPOT-table slots through stock PC-relative
+immediates and every call names a source-owned symbol; VFP
+mnemonics assemble natively. Portable C twins model the 15
+absolute-word cells and count callee invocations, developed
+against a 180-trial unicorn execution differential of the
+stock bodies (which caught a signed-`blt` clamp bug and a
+wrong merge target before landing). The span grades
+`corroborated_unreachable_control_flow` and a whole-image
+`bl` sweep finds no caller of any entry, so no live traffic
+is claimed; live SPOT behavior stays with the SPOT-manager
+sources. Full details are in
+`docs/research/g2-bootloader-bl006-span-427e54-spot-trim-source-closure.md`,
+verified by
+`g2/tests/test_runtime_bootloader_bl006_spot_trim.py` (14
+tests). `build_component.py` succeeds with the four leaves
+(15,240 overlay bytes); `make -C g2 bootloader-component`
+stays blocked at the other lane's `littlefs-snapshot`
+prerequisite. The manifest's bootloader section is synced
+from the fresh contract (96 reviewed region identities for
+the whole BL-006 range, which prior turns never registered;
+plus a `sync-manifest` merge fix preserving the
+`linux-clang` profile path), so
+`test_bootloader_core_overlay.py` is fully green (14 tests).
+This brings BL-006 to 77 of 77 regions (5,892 of 5,892
+bytes): the item is done. No hardware operation occurred.
+Hardware qualification stays blocked by unavailable physical
+evidence.
+
+## BL-009 gap literals (2026-09-12, partial: 334 of 5,978 bytes)
+
+Fourteen new MIT clean-room in-place data groups
+(`runtime_bl009_*.c`) route the understood scalar cells of the retained
+`0x0042B9BA..0x00430470` spans: SCB->CCR literal, register-block bases,
+96 MHz / 250 kHz / 1 MHz / 100 kHz / 400 kHz clock literals,
+floating-point range/calibration bounds (35.0, -273.0, 50.0, 1000.0,
+290.0, -1000.0, 299.5, 1.02809, -0.004281, +0.0, -123.456, -20.0,
+-22.0, 48.0, -290.0), fallback dispatch address `0x08000140`, MMIO
+store targets, masked-identifier compare constants, field mask
+`0xFFFFFBFE`, read-path words, `0xDEADBEEF` sentinel, and zero alignment
+cells. Every routed word cell has an identified original Thumb literal
+load in an already source-routed neighbour (sync-proof whole-image
+byte-pattern scan); pointer cells into still-opaque BL-005/BL-011/BL-012
+code, unattributed SRAM addresses, unreferenced words, and all seven
+code spans stay retained. First multi-placement groups in this
+component (payload concatenates routed runs; holes stay
+`official_blob`). Component build succeeds with 77 in-place data
+groups; the raw provider is byte-identical with and without these
+entries (sha256 `696a6baf...`), proving byte-exact reproduction.
+Manifest regions synced (8 flips, 7 splits, 958 regions;
+`opaque_base_bytes` 82089 -> 81755, `source_owned_bytes` 64905 ->
+65239); shared `build/source` flash-plan regeneration stays blocked on
+the package pin desync owned by other lanes' uncommitted apollo_main /
+manifest changes (observed `262aacb1` vs pinned `1bb3f8c8`), verified
+privately instead (BL-009 range `official_blob` 5978 -> 5644).
+Verified by `g2/tests/test_bootloader_bl009_gap_literals.py` (4 tests)
+and `test_bootloader_core_overlay.py` (14 tests, green). Full
+derivation in
+`docs/research/g2-bootloader-bl009-gap-literals-source-closure.md`. No
+hardware operation occurred. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## BL-009 trim-state leaves (2026-09-12, partial: 580 of 5,978 bytes)
+
+Six new MIT clean-room in-place leaves
+(`runtime_bl009_trim_state_leaves_42d5c2.c`, 210 bytes at
+`0x0042D5C2`/`0x42D5F8`/`0x42D61E`/`0x42D63A`/`0x42D692`/`0x42D6A6`)
+reconstruct the self-contained power-trim state helpers between the
+state dispatcher and the stream-mode primitive: a state-flag
+publisher, a gated 10-bit LDO trim-field publisher, a dual
+field setter, a six-register calibration-block programmer, and a
+raise/clear status-bit pair. Each body is byte-exact under both
+reviewed toolchains with zero relocations and matches its Apollo main
+analogue (`0x005A07E6`..`0x005A08CA`); portable behavior models cover
+1,800 randomized register/flag cases. One new in-place data group
+(`runtime_bl009_trim_pool_42d7e0.c`, 36 bytes, nine placements)
+routes the attributable peripheral-address cells of the shared pool
+at `0x0042D79E..0x0042D848`; the four SRAM-address cells stay
+retained as unattributed. The blocked `0x0042D5CC` body (opaque
+BL-005 call), the 220-byte `0x0042D6C0` dispatcher, and the remaining
+code spans / pointer tables stay retained. Component build succeeds
+with 331 in-place leaves and 78 data groups; the built provider is
+byte-identical to stock across the whole BL-009 window. Manifest
+regions synced (1 blob retiled into the 21 observed regions; provider
+hash unchanged). Shared `build/source` flash-plan regeneration stays
+blocked on other lanes' uncommitted apollo_main/manifest changes, as
+before. Verified by
+`g2/tests/test_runtime_bootloader_bl009_trim_leaves_42d5c2.py` (9
+tests), `test_bootloader_bl009_gap_literals.py`, and
+`test_bootloader_core_overlay.py` (27 tests green together). Full
+derivation in
+`docs/research/g2-bootloader-bl009-trim-leaves-42d5c2-source-closure.md`.
+No hardware operation occurred. Hardware qualification stays blocked
+by unavailable physical evidence.
+
+## BL-009 state-flag dispatcher (2026-09-12, partial: 810 of 5,978 bytes)
+
+One new MIT clean-room in-place leaf
+(`runtime_bl009_state_dispatch_42d6c0.c`, 222 bytes at
+`0x0042D6C0..0x0042D79E`) reconstructs the self-contained state-flag
+dispatcher between the trim-state leaves and the shared literal
+pool: no arguments, no calls, returns 0, and publishes three
+retained SRAM flag bytes from the low byte of the `0x4002000C`
+trim-block state register (0x21/0x22/0x23 mode selector), one SRAM
+state word, and a guarded status word (masked with `0x3FE00000`,
+matched against `0x31800000`, mid field floor 0x14, high field
+floor 0x19, zero low halfword). The body is byte-exact under both
+reviewed toolchains with zero relocations and matches its Apollo
+main analogue at `0x005A08E4`; the portable behavior model covers
+2,000 randomized cases against an independent expectation plus
+mode/state/guard boundary cases. One new in-place data group
+(`runtime_bl009_dispatch_pool_42d834.c`, 8 bytes, two placements)
+routes the attributable register-address and field-mask cells at
+`0x0042D834`/`0x0042D840`; the dispatcher's five SRAM-address
+cells stay retained as unattributed. The blocked `0x0042D5CC`
+body (opaque BL-005 call), the 4-byte `0x0042D848` return-zero
+tail (unattributed entry), and the remaining code spans / pointer
+tables stay retained. Verified by
+`g2/tests/test_runtime_bootloader_bl009_dispatch_42d6c0.py` (8
+tests). Full derivation in
+`docs/research/g2-bootloader-bl009-dispatch-42d6c0-source-closure.md`.
+No hardware operation occurred. Hardware qualification stays blocked
+by unavailable physical evidence.

@@ -1,0 +1,75 @@
+{
+  "c_source_sha256": "e38c211e3f264494b181961e7ab1a4c4221a224549b3d1a566ce14e9aa0fae97",
+  "notice_sha256": "3bf817f53f7abf043769cb760734b022e3bb50879937d1fdf1444d424dd028df",
+  "compile_flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-tree-loop-optimize",
+    "-fno-jump-tables"
+  ],
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "register_reference": "arch/soc/grus/spl/spl_counter.c (gx_get_time_us reads GXSCPU_VA_COUNTER_2_VALUE +0x04 then GXSCPU_VA_COUNTER_2_ACCSNAP +0x08 under GX_REG_BASE_COUNTER = 0xA0400000; spl_udelay spins while now < snapshot + usec + 1; spl_mdelay loops spl_udelay(1000); 1 MHz rate gives 1 ms per 1000 ticks); clean-room body from decoded stock flow, no SDK text reproduced",
+  "upstream_files": [
+    {
+      "path": "arch/soc/grus/spl/spl_counter.c",
+      "git_blob": "d9f534e98fe7c0944fafe1340f6ec507b5200c6c",
+      "sha256": "26921da15385f1004446347b737e4ba33ef482ab41a28ea88862f4e4c1b6f9f6"
+    },
+    {
+      "path": "LICENSE",
+      "git_blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+      "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+    }
+  ],
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_mdelay",
+      "compiled_bytes": 92,
+      "compiled_sha256": "ab499c8356a04f0a8df2027f2ed8160319ddfb1d5b1d5bda6e806e618a527908",
+      "ownership_kind": "compiled_c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_mdelay",
+          "package_offset": 1100,
+          "bytes": 112,
+          "sha256": "8745b75085460bfc0c40063d66b9a934f24f5e3268c0e57c55ce1b3e29e3cccb",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    }
+  ],
+  "target_cases": 160,
+  "source_admitted": true,
+  "admission_scope": "experimental hybrid codec; UART boot stage-1 millisecond-delay leaf only",
+  "stock_equivalence_proven": false,
+  "handoff": {
+    "address": "0x1000046c",
+    "carried_r0": "0xffffffff",
+    "compared_registers": [
+      "r0",
+      "r4",
+      "r5",
+      "r6",
+      "r14",
+      "r15"
+    ],
+    "r15_note": "compared up to the chaining instruction, which the executor does not step past; the retained 0x46C flow saves r15 on entry and never returns",
+    "counter_advance_per_snapshot": 577,
+    "stack_window": [
+      "0x200027c0",
+      "0x20002810"
+    ]
+  },
+  "limits": [
+    "Restricted instruction interpreter, not a processor emulator.",
+    "Counter-2 is modeled RAM advancing 577 ticks per snapshot, not hardware time. Millisecond counts above 255 are not in the battery (same code paths, longer runs). Stack-window slot assignment is excluded as compiler scratch; final counter cells are compared exactly. Hardware timing remains unqualified."
+  ]
+}

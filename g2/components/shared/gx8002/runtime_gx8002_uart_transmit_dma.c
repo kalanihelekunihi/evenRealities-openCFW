@@ -6,8 +6,8 @@ extern void open_cfw_gx8002_dcache_clean_range(uint32_t, uint32_t);
 extern int open_cfw_gx8002_dma_select(void);
 extern void open_cfw_gx8002_dma_release(uint32_t);
 extern uint32_t open_cfw_gx8002_uart_dma_burst(volatile uint32_t *, uint32_t);
-extern void open_cfw_gx8002_dma_callback(int, uint32_t, volatile uint32_t *);
-extern int open_cfw_gx8002_dma_transfer(uint32_t, uint32_t, uint32_t, int, GX_DMA_AHB_CH_CONFIG *);
+extern void open_cfw_gx8002_dma_callback(uint32_t, uint32_t, uint32_t);
+extern int open_cfw_gx8002_dma_transfer(uint32_t, uint32_t, uint32_t, uint32_t, GX_DMA_AHB_CH_CONFIG *);
 
 /* Recovered codec 0xc694. Valid ports preserve stock setup order.
  * Explicit repair: stock uses an uninitialized dst_hs_per for other ports;
@@ -40,7 +40,7 @@ int open_cfw_gx8002_uart_transmit_dma(volatile uint32_t *descriptor,
         return -1;
     }
     config.flow_ctrl=GX_DMA_AHB_TT_FC_MEM_TO_PER_DMAC;
-    open_cfw_gx8002_dma_callback(channel,(uint32_t)(uintptr_t)open_cfw_gx8002_uart_transmit_complete,descriptor);
+    open_cfw_gx8002_dma_callback(channel,(uint32_t)(uintptr_t)open_cfw_gx8002_uart_transmit_complete,(uint32_t)(uintptr_t)descriptor);
     (void)open_cfw_gx8002_dma_transfer(device,buffer,length,channel,&config);
     return 0;
 }

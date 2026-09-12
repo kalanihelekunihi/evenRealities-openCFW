@@ -1,0 +1,47 @@
+{
+  "c_source_sha256": "6f3bdc30a9bf4598d9fdc1909820655e1541fde66d19af7b25fb1190735a5483",
+  "notice_sha256": "c99b98a5ed25c067bdbeb6a91ca712ff8a5b9186f8145880257309d9f6a46296",
+  "compile_flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "register_reference": "no upstream register map is used: every address is a fill-provided descriptor value and every constant is a stock immediate; clean-room body from decoded stock flow, no SDK text reproduced",
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_railb",
+      "compiled_bytes": 350,
+      "compiled_sha256": "b606c302efa900c41fd691be5b9cc0eacf97d1640dcdf838b22046ba7a948b9b",
+      "ownership_kind": "compiled_assembly",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_railb",
+          "package_offset": 2688,
+          "bytes": 350,
+          "sha256": "b606c302efa900c41fd691be5b9cc0eacf97d1640dcdf838b22046ba7a948b9b",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    }
+  ],
+  "target_cases": 7680,
+  "loop_passes": 4,
+  "source_admitted": true,
+  "admission_scope": "experimental hybrid codec; UART boot stage-1 rail-sequencing operation B only (body plus exactly four loop passes, exact unfiltered traces)",
+  "stock_equivalence_proven": false,
+  "leftover_paths": "fill-fail, null-entry, and selector-match arms run with implementation-defined registers and are excluded from the battery; the assembly keeps the same branches without an outcome claim there. General-form bit-length/shift code is unreachable through the fill contract (entry bytes 1..3 forced zero) and verified by transcription identity only.",
+  "limits": [
+    "Restricted instruction interpreter, not a processor emulator.",
+    "Register shifts by a register count use the low 5 bits; both sides share the executor so agreement holds by construction, hardware shift semantics for negative counts remain unqualified.",
+    "The ld.h halfword load is modeled zero-extending; only zero values occur on fill-reachable paths so sign semantics are unprobed and unqualified.",
+    "Both frames are exactly 24 bytes, so pop traffic is compared exactly with no window exclusion; descriptor values and all other accesses are compared exactly. Hardware timing remains unqualified."
+  ]
+}

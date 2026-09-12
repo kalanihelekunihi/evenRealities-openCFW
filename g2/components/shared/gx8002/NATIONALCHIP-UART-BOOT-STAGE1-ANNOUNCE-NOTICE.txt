@@ -1,0 +1,15 @@
+GX8002 UART boot stage-1 announce leaf (CD-001): clean-room statement
+============================================================================
+
+Files: components/shared/gx8002/runtime_gx8002_uart_stage1_announce.S
+Symbols: open_cfw_gx8002_uart_stage1_announce
+Ranges: runtime 0x1000065C, package 0x6AC, 124 bytes.
+
+The assembly in this file was written from the decoded control flow of
+the stock GX8002 UART boot stage-1 image (used only as an analysis and
+differential-test oracle). No vendor source was consulted and no vendor
+object or SDK text is reproduced: the 0x20002014 cell, the 0xA0100000
+base, every register offset, rail id, and constant is a numeric
+immediate observed in the decoded stock flow.
+
+License: MIT (see the SPDX identifier in the source file).

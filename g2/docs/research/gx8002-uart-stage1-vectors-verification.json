@@ -1,0 +1,54 @@
+{
+  "s_source_sha256": "8b585fbaff2ce92470e9bece8ffc70eb8a9533bbbc3089421b13d159529a9729",
+  "notice_sha256": "32c8012a3f904c38a7c6f89946096060d0d95509405450c8964ece68565e5ad2",
+  "assemble_flags": [
+    "-mcpu=ck804ef",
+    "-mhard-float"
+  ],
+  "link_addresses": {
+    "vectors": 268435456,
+    "traps": 268435760,
+    "reset_entry": 268435712
+  },
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_vectors",
+      "compiled_bytes": 256,
+      "compiled_sha256": "8e67dcb95424b8f428a4b3e065ba7c2bbac73a4fd47c7b8d20b9bb1f9636104d",
+      "section_name": ".rodata.open_cfw_gx8002_uart_stage1_vectors",
+      "ownership_kind": "generated_source_data",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_vectors",
+          "package_offset": 80,
+          "bytes": 256,
+          "sha256": "8e67dcb95424b8f428a4b3e065ba7c2bbac73a4fd47c7b8d20b9bb1f9636104d",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_traps",
+      "compiled_bytes": 8,
+      "compiled_sha256": "a16f3bb23d3f7f3a561f9d33f03e62205f458823f1cdc7d44edd50e19486955c",
+      "section_name": ".text.open_cfw_gx8002_uart_stage1_traps",
+      "ownership_kind": "compiled_assembly",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_traps",
+          "package_offset": 384,
+          "bytes": 8,
+          "sha256": "a16f3bb23d3f7f3a561f9d33f03e62205f458823f1cdc7d44edd50e19486955c",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    }
+  ],
+  "target_cases": 5,
+  "source_admitted": true,
+  "admission_scope": "experimental hybrid codec; UART boot stage-1 vector table and trap entries only",
+  "stock_equivalence_proven": false,
+  "limits": [
+    "Byte-exact linked-image equivalence over the two envelopes plus structural symbol checks; no processor emulation beyond single-stepping the two decoded self-branches. Hardware timing remains unqualified."
+  ]
+}

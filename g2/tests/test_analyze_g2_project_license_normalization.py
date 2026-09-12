@@ -6,6 +6,7 @@ from __future__ import annotations
 import importlib.util
 import re
 import sys
+import tempfile
 import unittest
 from unittest import mock
 from pathlib import Path
@@ -63,6 +64,58 @@ class RootPolicyProjectCensusStaticTests(unittest.TestCase):
                 MODULE._root_policy_project_rows()
 
 
+class CasePackageSourceStaticTests(unittest.TestCase):
+    """The Case census covers distributed source, not generated build outputs.
+
+    Kept outside ProjectLicenseNormalizationTests so it runs even while
+    unrelated live-tree drift keeps the full analyze() red.
+    """
+
+    def test_generated_build_outputs_are_not_package_source(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            pkg = Path(tmp)
+            (pkg / "build" / "objects").mkdir(parents=True)
+            generated = pkg / "build" / "case-source.bin"
+            generated.write_bytes(b"\x00")
+            source = pkg / "startup.c"
+            source.write_text("/* SPDX-License-Identifier: MIT */\n")
+            with mock.patch.object(
+                MODULE, "CASE_SOURCE_IMAGE_PACKAGE_ROOT", pkg
+            ):
+                self.assertFalse(MODULE._is_case_package_source(generated))
+                self.assertTrue(MODULE._is_case_package_source(source))
+
+    def test_live_tree_build_outputs_are_excluded_without_registration(
+        self,
+    ) -> None:
+        build_artifact = (
+            ROOT / "components/case/source_image/build/case-source.bin"
+        )
+        with mock.patch.object(
+            MODULE,
+            "CASE_SOURCE_IMAGE_PACKAGE_ROOT",
+            ROOT / "components/case/source_image",
+        ):
+            self.assertFalse(MODULE._is_case_package_source(build_artifact))
+            self.assertTrue(
+                MODULE._is_case_package_source(
+                    ROOT / "components/case/source_image/startup.c"
+                )
+            )
+        manifest = {
+            line.strip()
+            for line in (
+                ROOT / "tools/manifests/"
+                "g2-project-mit-normalization-case-source-image.txt"
+            ).read_text().splitlines()
+            if line.strip() and not line.startswith("#")
+        }
+        self.assertTrue(
+            all("/build/" not in entry for entry in manifest),
+            "generated build outputs must never be registered as MIT targets",
+        )
+
+
 class ProjectLicenseNormalizationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -80,7 +133,7 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
         self.assertEqual(
             metrics["distributed_upstream_gpl_files_preserved"], 1)
         self.assertEqual(
-            metrics["distributed_project_mit_normalization_targets"], 1097)
+            metrics["distributed_project_mit_normalization_targets"], 1112)
         self.assertEqual(metrics["root_policy_project_mit_files"], 4)
         self.assertEqual(
             metrics["root_policy_project_mit_census_sha256"],
@@ -198,8 +251,8 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
 
     def test_community_controller_and_build_adapter_census_is_exact(self) -> None:
         metrics = self.result["metrics"]
-        self.assertEqual(metrics["community_controller_and_adapter_source_files"], 288)
-        self.assertEqual(metrics["community_project_mit_compatible_source_files"], 285)
+        self.assertEqual(metrics["community_controller_and_adapter_source_files"], 301)
+        self.assertEqual(metrics["community_project_mit_compatible_source_files"], 298)
         self.assertEqual(metrics["community_touch_apache_source_files_preserved"], 3)
 
         project_paths = set(self.result["community_project_paths"])
@@ -309,8 +362,8 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
 
     def test_em9305_source_image_distribution_census_is_exact(self) -> None:
         metrics = self.result["metrics"]
-        self.assertEqual(metrics["em9305_source_image_project_mit_files"], 19)
-        self.assertEqual(metrics["em9305_source_image_package_files"], 11)
+        self.assertEqual(metrics["em9305_source_image_project_mit_files"], 21)
+        self.assertEqual(metrics["em9305_source_image_package_files"], 13)
         self.assertEqual(metrics["em9305_source_image_support_files"], 8)
         paths = set(self.result["em9305_source_image_paths"])
         self.assertEqual(paths, {
@@ -325,6 +378,8 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
             "g2/components/em9305/source_overlay/runtime_metaware_entries.c",
             "g2/components/em9305/source_overlay/runtime_reconstructible_tail.c",
             "g2/components/em9305/source_overlay/runtime_reconstructible_tail_entries.c",
+            "g2/components/em9305/source_overlay/toolchain/TOOLCHAIN.md",
+            "g2/components/em9305/source_overlay/toolchain/fetch_arc_toolchain.sh",
             "g2/tests/fixtures/em9305_reconstructible_tail_host.c",
             "g2/tests/test_analyze_em9305_record_package.py",
             "g2/tests/test_em9305_record_package.py",

@@ -1,0 +1,16 @@
+GX8002 UART boot stage-1 UART-configure leaf (CD-001): clean-room statement
+=========================================================================
+
+File: components/shared/gx8002/runtime_gx8002_uart_stage1_uartcfg.S
+Symbol: open_cfw_gx8002_uart_stage1_uart_config
+Range: runtime 0x10000C9C, package 0xCEC, 208 bytes.
+
+The assembly in this file was written from the decoded control flow of
+the stock GX8002 UART boot stage-1 image (used only as an analysis and
+differential-test oracle). No vendor source was consulted and no vendor
+object or SDK text is reproduced: the 0xA0005000 MMIO base, every
+register offset, mask, and bit position is a numeric immediate observed
+in the decoded stock flow. An abandoned draft is not applicable: the
+first reviewed form assembled to exactly the 208-byte envelope.
+
+License: MIT (see the SPDX identifier in the source file).

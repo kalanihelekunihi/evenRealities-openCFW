@@ -13,15 +13,15 @@
   },
   "expected": {
     "component_sha256": "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
-    "component_size": 3956672,
-    "overlay_sha256": "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622",
-    "overlay_size": 380444
+    "component_size": 3908856,
+    "overlay_sha256": "8c93066abff4265d21b994fd4659bfc9785124dd1537b41130f22b4603788e06",
+    "overlay_size": 385460
   },
   "core_stage_expected": {
-    "component_sha256": "2fe63dbce04257b3961fa80702e62fe4e5ee9859df5908b9245377f272c60752",
-    "component_size": 3903840,
-    "overlay_sha256": "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622",
-    "overlay_size": 380444
+    "component_sha256": "c89454536f8365a0753f53bb35d7f28430ddbbf3962191a6e18968f39c15219c",
+    "component_size": 3908856,
+    "overlay_sha256": "8c93066abff4265d21b994fd4659bfc9785124dd1537b41130f22b4603788e06",
+    "overlay_size": 385460
   },
   "firmware_version": "2.2.6.10",
   "functions": [
@@ -2592,7 +2592,71 @@
     "open_cfw_at_fs_list",
     "open_cfw_at_fs_mkdir",
     "open_cfw_at_nus_handler",
-    "open_cfw_at_nus_handler_linux"
+    "open_cfw_at_nus_handler_linux",
+    "open_cfw_lvgl_get_style_width",
+    "open_cfw_lvgl_get_style_height",
+    "open_cfw_lvgl_get_style_translate_x",
+    "open_cfw_lvgl_get_style_translate_y",
+    "open_cfw_lvgl_get_style_pad_top",
+    "open_cfw_lvgl_get_style_pad_left",
+    "open_cfw_lvgl_get_style_pad_row",
+    "open_cfw_lvgl_get_style_pad_column",
+    "open_cfw_lvgl_get_style_margin_top",
+    "open_cfw_lvgl_get_style_margin_bottom",
+    "open_cfw_lvgl_get_style_margin_left",
+    "open_cfw_lvgl_get_style_margin_right",
+    "open_cfw_lvgl_get_style_border_width",
+    "open_cfw_lvgl_get_style_border_side",
+    "open_cfw_lvgl_get_style_base_dir",
+    "open_cfw_lvgl_get_style_grid_column_dsc_array",
+    "open_cfw_lvgl_get_style_grid_column_align",
+    "open_cfw_lvgl_get_style_grid_row_dsc_array",
+    "open_cfw_lvgl_get_style_grid_row_align",
+    "open_cfw_lvgl_get_style_grid_cell_column_pos",
+    "open_cfw_lvgl_get_style_grid_cell_x_align",
+    "open_cfw_lvgl_get_style_grid_cell_column_span",
+    "open_cfw_lvgl_get_style_grid_cell_row_pos",
+    "open_cfw_lvgl_get_style_grid_cell_y_align",
+    "open_cfw_lvgl_get_style_grid_cell_row_span",
+    "open_cfw_lvgl_obj_get_width_with_margin",
+    "open_cfw_lvgl_obj_get_height_with_margin",
+    "open_cfw_lvgl_area_copy",
+    "open_cfw_lvgl_memzero",
+    "open_cfw_lvgl_get_style_space_left",
+    "open_cfw_lvgl_get_style_space_top",
+    "open_cfw_lvgl_grid_get_col_dsc",
+    "open_cfw_lvgl_grid_get_row_dsc",
+    "open_cfw_lvgl_grid_get_col_pos",
+    "open_cfw_lvgl_grid_get_row_pos",
+    "open_cfw_lvgl_grid_get_col_span",
+    "open_cfw_lvgl_grid_get_row_span",
+    "open_cfw_lvgl_grid_get_cell_col_align",
+    "open_cfw_lvgl_grid_get_cell_row_align",
+    "open_cfw_lvgl_grid_get_grid_col_align",
+    "open_cfw_lvgl_grid_get_grid_row_align",
+    "open_cfw_lvgl_grid_get_margin_hor",
+    "open_cfw_lvgl_grid_get_margin_ver",
+    "open_cfw_lvgl_grid_div_round_closest",
+    "open_cfw_lvgl_grid_init",
+    "open_cfw_lvgl_grid_calc_free",
+    "open_cfw_lvgl_grid_count_tracks",
+    "open_cfw_lvgl_grid_align",
+    "open_cfw_lvgl_grid_calc_cols",
+    "open_cfw_lvgl_grid_calc_rows",
+    "open_cfw_lvgl_grid_calc",
+    "open_cfw_lvgl_grid_item_repos",
+    "open_cfw_lvgl_grid_update",
+    "open_cfw_libc_strcpy",
+    "open_cfw_state_init_params",
+    "open_cfw_state_nibble_to_mode",
+    "open_cfw_state_mode_switch",
+    "open_cfw_state_flag_get",
+    "open_cfw_state_sample_vote",
+    "open_cfw_state_sample_retry",
+    "open_cfw_state_flag_or",
+    "open_cfw_state_latch_store",
+    "open_cfw_state_value_get",
+    "open_cfw_libc_strtoul"
   ],
   "in_place_data": [
     {
@@ -29495,6 +29559,710 @@
       ],
       "runtime_address": 5920032,
       "target_function": "open_cfw_at_nus_handler_linux"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "d130aa374d18864937c42206f57cc1ae758dabeae0c8fc8a0def346d94a56e89",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_01",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769818,
+      "target_function": "open_cfw_lvgl_get_style_width"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "1375d228d40adef9593ce8a64446b415135ce5cc53fc65ac4ff34e1d1b27e43d",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_02",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769828,
+      "target_function": "open_cfw_lvgl_get_style_height"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "11d408c0ae3b843214347d8d96f6193d1869fa71febbfb145c628cdbf512ceda",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_03",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769838,
+      "target_function": "open_cfw_lvgl_get_style_translate_x"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "bc08a636bc6ec2f00ebc97b38f77b59c29f2c170b7c4c2c2a3436aae343f4a14",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_04",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769848,
+      "target_function": "open_cfw_lvgl_get_style_translate_y"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "5f8c836b00e9a17f00aa0d8a72ba42ed003058f077e38c96f5c3f8afff74aa60",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_05",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769858,
+      "target_function": "open_cfw_lvgl_get_style_pad_top"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "9ebc7b9748a2b7a74bdee4c8313878cd09656dd5ba93d92483f5c19e2f1c4b8f",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_06",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769868,
+      "target_function": "open_cfw_lvgl_get_style_pad_left"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "f16078dc017c205f363b070839a22e3bcff0e038a4eca154d8427bb54a745cf5",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_07",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769878,
+      "target_function": "open_cfw_lvgl_get_style_pad_row"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "90db0ebae72e3b69ce2c8bcc1d0ee8198d29f8a8b0030b4a1e72d2002de8fa0c",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_08",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769888,
+      "target_function": "open_cfw_lvgl_get_style_pad_column"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "46fd180724eaf70d0cde2cd77a040871f0b2adb8c1ffe5145f4d2ced45de866f",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_09",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769898,
+      "target_function": "open_cfw_lvgl_get_style_margin_top"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "1fe9f0f06db8a3ff9cb12988c641aae8fd8ba081cff37af634c576341296e5e7",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_10",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769908,
+      "target_function": "open_cfw_lvgl_get_style_margin_bottom"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "223c350bd61a4252438cbadb40f8a6a79e422a733ab8b68094799ed9f1a5ef2f",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_11",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769918,
+      "target_function": "open_cfw_lvgl_get_style_margin_left"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "b8f3e67ae191b91b39add6a3fd71381ddbcaa68e94ae5567c10ab7d7bbce8406",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_12",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769928,
+      "target_function": "open_cfw_lvgl_get_style_margin_right"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "81bc5be45f4ac10c0204b44572e2c84d2257fc57a7a8c0cec9359a9c3b494084",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_13",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769938,
+      "target_function": "open_cfw_lvgl_get_style_border_width"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "e3431a6c8e4986209d3174e9e21be751abf19035435fdc0a2177309f593791e8",
+      "expected_size": 12,
+      "name": "replace_apollo_am040_14",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769948,
+      "target_function": "open_cfw_lvgl_get_style_border_side"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "88d91ba68e179265fa686937f6322d60e6896ac12f6140c4447e6f3eacc6484a",
+      "expected_size": 12,
+      "name": "replace_apollo_am040_15",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769960,
+      "target_function": "open_cfw_lvgl_get_style_base_dir"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "ba0a16d9807b9ce58e365294bec600bb01b69ecf87b9f79b45209b16053f765a",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_16",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769972,
+      "target_function": "open_cfw_lvgl_get_style_grid_column_dsc_array"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "0252503627231159cb2fae3bf8d37ca1470e009e31d11f3fe2dc57529bbf9218",
+      "expected_size": 12,
+      "name": "replace_apollo_am040_17",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769982,
+      "target_function": "open_cfw_lvgl_get_style_grid_column_align"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "245e9a5104de354c02ecc080dbdf8df1e2428c00a87db575595bfd765c673d42",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_18",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769994,
+      "target_function": "open_cfw_lvgl_get_style_grid_row_dsc_array"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "2dbc32e3a550464c6011aa389b6d9f6868de05befb04ac466fb6d397a0828444",
+      "expected_size": 12,
+      "name": "replace_apollo_am040_19",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770004,
+      "target_function": "open_cfw_lvgl_get_style_grid_row_align"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "c353b84d18f06b886553db4f83e931692d38f463d887d74f4f48995d9c0b130d",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_20",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770016,
+      "target_function": "open_cfw_lvgl_get_style_grid_cell_column_pos"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "f620cbb432c04a3471aaa4acdf3c14d547c901be9c3469203f7b5e0792700ff8",
+      "expected_size": 12,
+      "name": "replace_apollo_am040_21",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770026,
+      "target_function": "open_cfw_lvgl_get_style_grid_cell_x_align"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "49a1adae0a8a72163a21a5f0b2849bdab6ada5f88805140f53a4d8494e6a3759",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_22",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770038,
+      "target_function": "open_cfw_lvgl_get_style_grid_cell_column_span"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "c757d823282472c02297d0a833f7b3d4898d07eaff977b08e05013df4000892d",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_23",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770048,
+      "target_function": "open_cfw_lvgl_get_style_grid_cell_row_pos"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "64d1dec03235998919bc1d31db1ffd9f1a3f5a82505f184e155d66fac6ef5c22",
+      "expected_size": 12,
+      "name": "replace_apollo_am040_24",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770058,
+      "target_function": "open_cfw_lvgl_get_style_grid_cell_y_align"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "cff20649b47374922ee77b914b5320c36d961fae44a04681536df1ae709f85a0",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_25",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770070,
+      "target_function": "open_cfw_lvgl_get_style_grid_cell_row_span"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "3ebd13a74a860e2778ddb6329b3a2eddb33384e64f9a20a1a60957f0abdf5922",
+      "expected_size": 36,
+      "name": "replace_apollo_am040_26",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769716,
+      "target_function": "open_cfw_lvgl_obj_get_width_with_margin"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "bc71e5dd41807ad1fb3bf1c28c30323fc3888d146801177520e918662715d36d",
+      "expected_size": 36,
+      "name": "replace_apollo_am040_27",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769752,
+      "target_function": "open_cfw_lvgl_obj_get_height_with_margin"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "f73e45d66d1de715a1cb3942d89782eb1b96f870340fc063782c50ee367fc9a6",
+      "expected_size": 18,
+      "name": "replace_apollo_am040_28",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769788,
+      "target_function": "open_cfw_lvgl_area_copy"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "8ebfea69619b4c79986e2199b360c7f84ab47f6f062f7b811a36d7b8a26cf4c9",
+      "expected_size": 12,
+      "name": "replace_apollo_am040_29",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4769806,
+      "target_function": "open_cfw_lvgl_memzero"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "d864297772df46eb580d8c3927e5d86a4093680da9512072f4fc841064de6008",
+      "expected_size": 46,
+      "name": "replace_apollo_am040_30",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770080,
+      "target_function": "open_cfw_lvgl_get_style_space_left"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "bb77d63c96d9cf3e69d8b935f9295559178558f4a6e565e6eb28c4d699752733",
+      "expected_size": 46,
+      "name": "replace_apollo_am040_31",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770126,
+      "target_function": "open_cfw_lvgl_get_style_space_top"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "85c8ca8ef896ba65998e5b220c432e3efc91401bd9d60779a0175815f577c52c",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_32",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770172,
+      "target_function": "open_cfw_lvgl_grid_get_col_dsc"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "4a13a0fa0340e9695f22cb7a013589cf7091f431bef8695e3cf31f4806fab8bd",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_33",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770182,
+      "target_function": "open_cfw_lvgl_grid_get_row_dsc"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "36c58accd79b63c08fd7159db7ce0e6ea9efbd5d463ce611aad406422a23a39b",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_34",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770192,
+      "target_function": "open_cfw_lvgl_grid_get_col_pos"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "b44f8ef4d80c823d47a1a401ce8ce1825a5fc0926beeb33081e496774503404a",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_35",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770202,
+      "target_function": "open_cfw_lvgl_grid_get_row_pos"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "3c0baee07dbe48678585de88cf7a9e0a5506c40626813ab8a1a7bc704560af02",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_36",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770212,
+      "target_function": "open_cfw_lvgl_grid_get_col_span"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "1c2eee170f777591969250d264e0dcdc19a79f5b539867b00c24296a933fed83",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_37",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770222,
+      "target_function": "open_cfw_lvgl_grid_get_row_span"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "d8743aecb470d4c82f8079ebc70e544edfcebbf74b5f490e7466e6ca9212a16c",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_38",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770232,
+      "target_function": "open_cfw_lvgl_grid_get_cell_col_align"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "58e0afb093ad10dab09953aa19dc42d16e46f3ea50db9814a424d43bc66c18ad",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_39",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770242,
+      "target_function": "open_cfw_lvgl_grid_get_cell_row_align"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "1574a28cc152598264945ec44484ff8e4805d839279953d1bf970d477bdcbafc",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_40",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770252,
+      "target_function": "open_cfw_lvgl_grid_get_grid_col_align"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "75f2d4272345c7aca6e79bd16c93e03f4a76d79bf8a3e4e547e228b7ae4ad227",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_41",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770262,
+      "target_function": "open_cfw_lvgl_grid_get_grid_row_align"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "ca0fbfec13a51be12fbac6bee1ad96d722b77b27069d8e149126c2cbbdb34f6c",
+      "expected_size": 28,
+      "name": "replace_apollo_am040_42",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770272,
+      "target_function": "open_cfw_lvgl_grid_get_margin_hor"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "d5cbcedc4cd8620d5811fc22c20af8897ac1dc6793e70be4ba61ff37c69a5001",
+      "expected_size": 28,
+      "name": "replace_apollo_am040_43",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770300,
+      "target_function": "open_cfw_lvgl_grid_get_margin_ver"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "015d5e36e063f3dabf2cbcb91038b8f72d9cbaa923893460e5226f76a72c9dba",
+      "expected_size": 14,
+      "name": "replace_apollo_am040_44",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770328,
+      "target_function": "open_cfw_lvgl_grid_div_round_closest"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "fc7b2969e91adc5c310f855749394e0be1b25ddd158df1d94ff007cbae58b36e",
+      "expected_size": 20,
+      "name": "replace_apollo_am040_45",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770342,
+      "target_function": "open_cfw_lvgl_grid_init"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "8f749b0d78234162cffa5faa66e076c2b10cfb243ab8c2039a569230191d2736",
+      "expected_size": 30,
+      "name": "replace_apollo_am040_46",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770778,
+      "target_function": "open_cfw_lvgl_grid_calc_free"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "2b65221b1e207b520cc666835bafa78c16bf4b684c2e9d8b34ca7842ba8f4b1d",
+      "expected_size": 22,
+      "name": "replace_apollo_am040_47",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4773072,
+      "target_function": "open_cfw_lvgl_grid_count_tracks"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "ee2d6e690db8be2973e8e8a7faf9af7bfcd8afcfa28af27678fc4be4fcb13c81",
+      "expected_size": 264,
+      "name": "replace_apollo_am040_48",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4772808,
+      "target_function": "open_cfw_lvgl_grid_align"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "1314d4b999e55840d5a31877e094e2e9fdfce7aa2574366cdae736de93cf0e98",
+      "expected_size": 500,
+      "name": "replace_apollo_am040_49",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770808,
+      "target_function": "open_cfw_lvgl_grid_calc_cols"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "b98ac9e2e0c1101ec6f982620333abf29fcacf31af21334c820afa3c5eeea2e1",
+      "expected_size": 500,
+      "name": "replace_apollo_am040_50",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4771308,
+      "target_function": "open_cfw_lvgl_grid_calc_rows"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "1beed69748ac9ad61c62013330426d1092f0f576732d083740be6ce835d7782f",
+      "expected_size": 258,
+      "name": "replace_apollo_am040_51",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770520,
+      "target_function": "open_cfw_lvgl_grid_calc"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "7ba85b52cc205f75f81d91e43f2a56e70fdbfb5c9e561d662d2f5103f0b4182a",
+      "expected_size": 960,
+      "name": "replace_apollo_am040_52",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4771808,
+      "target_function": "open_cfw_lvgl_grid_item_repos"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "e468bf9012ffee3624144df6b945aa1271abf0681203c25fb25a89797488d1a4",
+      "expected_size": 156,
+      "name": "replace_apollo_am040_53",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4770364,
+      "target_function": "open_cfw_lvgl_grid_update"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "40fc73584b7ab2d723eb1b08d7d80789e31599de9b6eceb2749666ddf0d1e1d1",
+      "expected_size": 24,
+      "name": "replace_apollo_am040_54",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4773184,
+      "target_function": "open_cfw_libc_strcpy"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "a4d92947a2df306fe5237ed427ff5495f3944107209f9497ae614c67e15bda9d",
+      "expected_size": 24,
+      "name": "replace_apollo_am040_55",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4773208,
+      "target_function": "open_cfw_state_init_params"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "bed13e9966795b345004a55eb81a55e8af4cc322eeb2491c8fdcb0b0acf4360c",
+      "expected_size": 24,
+      "name": "replace_apollo_am040_56",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4773232,
+      "target_function": "open_cfw_state_nibble_to_mode"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "66dc0be5a4192c755d16663c320d986cae93259ac903e49aad7e5c5d90f020ce",
+      "expected_size": 152,
+      "name": "replace_apollo_am040_57",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4773256,
+      "target_function": "open_cfw_state_mode_switch"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "2629a71d82c78f7602d8f37273ae02bcf42f237cdaab9da0d4db6d57a1045692",
+      "expected_size": 52,
+      "name": "replace_apollo_am040_58",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4773408,
+      "target_function": "open_cfw_state_flag_get"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "6eb814fc999a7dcc3d3162f2cf41e3f42c82fcb54cddfd7b29518423412fd4df",
+      "expected_size": 28,
+      "name": "replace_apollo_am040_59",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4773460,
+      "target_function": "open_cfw_state_sample_vote"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "8cd6a123b59adde655f757e17f2ff020a19fb7ea71dd899d63332a559b60ecb5",
+      "expected_size": 108,
+      "name": "replace_apollo_am040_60",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4773488,
+      "target_function": "open_cfw_state_sample_retry"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "fd98de39e7062501b0d1ff5b9727543177dc3a975d72c80aa12b15453f5f1c9e",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_61",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4773596,
+      "target_function": "open_cfw_state_flag_or"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "35f4dae195f172d4bd59e69be0399a735154582b611df34c768d345f7fabeca7",
+      "expected_size": 10,
+      "name": "replace_apollo_am040_62",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4773606,
+      "target_function": "open_cfw_state_latch_store"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "cdffe8f30b75d3cc7d6a924f5b4e50051a3ece1d68543003fae0049efcfeb364",
+      "expected_size": 20,
+      "name": "replace_apollo_am040_63",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4773616,
+      "target_function": "open_cfw_state_value_get"
+    },
+    {
+      "branch": "b_w",
+      "expected_sha256": "35605c54e52dd1c91aed210b77e88743db4671ca679546c2c68bf7f03cc1fd8d",
+      "expected_size": 322,
+      "name": "replace_apollo_am040_64",
+      "profiles": [
+        "apple-clang"
+      ],
+      "runtime_address": 4773668,
+      "target_function": "open_cfw_libc_strtoul"
     }
   ],
   "preamble_bytes": 32,
@@ -184986,6 +185754,3696 @@
           ]
         }
       }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "0c3c59622861111afb84d7089151319f846bdedd8564bb10db93702d13e6ef58",
+        "alignment": 4,
+        "offset": 380444,
+        "unrelocated_sha256": "0c3c59622861111afb84d7089151319f846bdedd8564bb10db93702d13e6ef58"
+      },
+      "function": "open_cfw_lvgl_get_style_width",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "c1b78132c96a4545edf25fb11411353238115b49a5ed51b7edebbed7826294db",
+        "alignment": 4,
+        "offset": 380456,
+        "unrelocated_sha256": "c1b78132c96a4545edf25fb11411353238115b49a5ed51b7edebbed7826294db"
+      },
+      "function": "open_cfw_lvgl_get_style_height",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "7cb12b5ebdf1d21ed763897542e217ad4a7d0a0c0cb2e717533f627c5d6adede",
+        "alignment": 4,
+        "offset": 380468,
+        "unrelocated_sha256": "7cb12b5ebdf1d21ed763897542e217ad4a7d0a0c0cb2e717533f627c5d6adede"
+      },
+      "function": "open_cfw_lvgl_get_style_translate_x",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "e79a3ae541261bc45df529d96e502bbf2fb403aec8a8fa90c2f9cca6c1c42a80",
+        "alignment": 4,
+        "offset": 380480,
+        "unrelocated_sha256": "e79a3ae541261bc45df529d96e502bbf2fb403aec8a8fa90c2f9cca6c1c42a80"
+      },
+      "function": "open_cfw_lvgl_get_style_translate_y",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "7fdde91912d1ffc442c71e37497a457676cfc70498f6874a2bf0e9fba08e0a5b",
+        "alignment": 4,
+        "offset": 380492,
+        "unrelocated_sha256": "7fdde91912d1ffc442c71e37497a457676cfc70498f6874a2bf0e9fba08e0a5b"
+      },
+      "function": "open_cfw_lvgl_get_style_pad_top",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "6db302a6f69689abd7dfc52e49070223190a1cb02855683d83851f0c7bc5e5c3",
+        "alignment": 4,
+        "offset": 380504,
+        "unrelocated_sha256": "6db302a6f69689abd7dfc52e49070223190a1cb02855683d83851f0c7bc5e5c3"
+      },
+      "function": "open_cfw_lvgl_get_style_pad_left",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "92a15bf426df21f88c1df6e4bd03ee11be6396916be1955f4b3b1c277036213a",
+        "alignment": 4,
+        "offset": 380516,
+        "unrelocated_sha256": "92a15bf426df21f88c1df6e4bd03ee11be6396916be1955f4b3b1c277036213a"
+      },
+      "function": "open_cfw_lvgl_get_style_pad_row",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "fc0490d52366a971afe07b710de4189a2fb958fd173be771644cd36d16453308",
+        "alignment": 4,
+        "offset": 380528,
+        "unrelocated_sha256": "fc0490d52366a971afe07b710de4189a2fb958fd173be771644cd36d16453308"
+      },
+      "function": "open_cfw_lvgl_get_style_pad_column",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "60a63ac997ee4009f967e203f9b039a5efb5d0955b3e6a31d1597780f51bbf08",
+        "alignment": 4,
+        "offset": 380540,
+        "unrelocated_sha256": "60a63ac997ee4009f967e203f9b039a5efb5d0955b3e6a31d1597780f51bbf08"
+      },
+      "function": "open_cfw_lvgl_get_style_margin_top",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "ecb802872e42e0be6fcdcccde039efbcf90ce838bc56b0e6b079f04e89646c93",
+        "alignment": 4,
+        "offset": 380552,
+        "unrelocated_sha256": "ecb802872e42e0be6fcdcccde039efbcf90ce838bc56b0e6b079f04e89646c93"
+      },
+      "function": "open_cfw_lvgl_get_style_margin_bottom",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "e577dd06f6a3d1e63b179a5846824cbbd66fd5fc63145624684ad44f0b007a10",
+        "alignment": 4,
+        "offset": 380564,
+        "unrelocated_sha256": "e577dd06f6a3d1e63b179a5846824cbbd66fd5fc63145624684ad44f0b007a10"
+      },
+      "function": "open_cfw_lvgl_get_style_margin_left",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "c1dd02fc200b4d61e5bf57c4bc3eb5a465e4231501e0c452fc81a9a3e42f33e9",
+        "alignment": 4,
+        "offset": 380576,
+        "unrelocated_sha256": "c1dd02fc200b4d61e5bf57c4bc3eb5a465e4231501e0c452fc81a9a3e42f33e9"
+      },
+      "function": "open_cfw_lvgl_get_style_margin_right",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "928e37459f48f56e7cd5cd1d3477ef524b5d4dd6c7f9f80de9ed2f041a19be67",
+        "alignment": 4,
+        "offset": 380588,
+        "unrelocated_sha256": "928e37459f48f56e7cd5cd1d3477ef524b5d4dd6c7f9f80de9ed2f041a19be67"
+      },
+      "function": "open_cfw_lvgl_get_style_border_width",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 18,
+        "sha256": "1c9797b630a522eb1dbcdc01826462c0f57a2e684fcd00366fd2cf62af76ce52",
+        "alignment": 4,
+        "offset": 380600,
+        "unrelocated_sha256": "1c9797b630a522eb1dbcdc01826462c0f57a2e684fcd00366fd2cf62af76ce52"
+      },
+      "function": "open_cfw_lvgl_get_style_border_side",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 18,
+        "sha256": "5f0dea77288b390f7ada1aae2e7c6e51d46b093f9a1fb84166313f7bd6ce3f4c",
+        "alignment": 4,
+        "offset": 380620,
+        "unrelocated_sha256": "5f0dea77288b390f7ada1aae2e7c6e51d46b093f9a1fb84166313f7bd6ce3f4c"
+      },
+      "function": "open_cfw_lvgl_get_style_base_dir",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "b2f49d967a0866913a5b0eb5bcd84245a5e7b8541f22c4982faa6d2a4fdc5ae8",
+        "alignment": 4,
+        "offset": 380640,
+        "unrelocated_sha256": "b2f49d967a0866913a5b0eb5bcd84245a5e7b8541f22c4982faa6d2a4fdc5ae8"
+      },
+      "function": "open_cfw_lvgl_get_style_grid_column_dsc_array",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 18,
+        "sha256": "780cdaaac3c275ba5a3b164df6a1a4639636582d7f32e511b78bc8b84bc64ad3",
+        "alignment": 4,
+        "offset": 380652,
+        "unrelocated_sha256": "780cdaaac3c275ba5a3b164df6a1a4639636582d7f32e511b78bc8b84bc64ad3"
+      },
+      "function": "open_cfw_lvgl_get_style_grid_column_align",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "26521d3e91c514c1f1999f41c1aa6d2c8e0853edf7f7f36a4478c3935196ade1",
+        "alignment": 4,
+        "offset": 380672,
+        "unrelocated_sha256": "26521d3e91c514c1f1999f41c1aa6d2c8e0853edf7f7f36a4478c3935196ade1"
+      },
+      "function": "open_cfw_lvgl_get_style_grid_row_dsc_array",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 18,
+        "sha256": "f957024f92447f852eabb2fe4ac661f7572431a1a8254a15e32d83af19d66297",
+        "alignment": 4,
+        "offset": 380684,
+        "unrelocated_sha256": "f957024f92447f852eabb2fe4ac661f7572431a1a8254a15e32d83af19d66297"
+      },
+      "function": "open_cfw_lvgl_get_style_grid_row_align",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "920b4c799646bebec7cbcf0d3201b3c010380a73e0decd44724f8f5526e780cc",
+        "alignment": 4,
+        "offset": 380704,
+        "unrelocated_sha256": "920b4c799646bebec7cbcf0d3201b3c010380a73e0decd44724f8f5526e780cc"
+      },
+      "function": "open_cfw_lvgl_get_style_grid_cell_column_pos",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 18,
+        "sha256": "fd1ee84da4c31b8d3f5e0cd75fa4b534f49e495f93ca29bfc832ba1316194814",
+        "alignment": 4,
+        "offset": 380716,
+        "unrelocated_sha256": "fd1ee84da4c31b8d3f5e0cd75fa4b534f49e495f93ca29bfc832ba1316194814"
+      },
+      "function": "open_cfw_lvgl_get_style_grid_cell_x_align",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "2983ecaf9fa87fccac48c613b94ff9605bd78d793f36f44b7f3e0c64be015296",
+        "alignment": 4,
+        "offset": 380736,
+        "unrelocated_sha256": "2983ecaf9fa87fccac48c613b94ff9605bd78d793f36f44b7f3e0c64be015296"
+      },
+      "function": "open_cfw_lvgl_get_style_grid_cell_column_span",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "202f4651c0310fda91f9265ded35fec0b037552e03dd2e58de92ebbc7d29bcc0",
+        "alignment": 4,
+        "offset": 380748,
+        "unrelocated_sha256": "202f4651c0310fda91f9265ded35fec0b037552e03dd2e58de92ebbc7d29bcc0"
+      },
+      "function": "open_cfw_lvgl_get_style_grid_cell_row_pos",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 18,
+        "sha256": "99db1e739764eb70776abc646a45bebd101808aad51d12bff0cb234b06c724e7",
+        "alignment": 4,
+        "offset": 380760,
+        "unrelocated_sha256": "99db1e739764eb70776abc646a45bebd101808aad51d12bff0cb234b06c724e7"
+      },
+      "function": "open_cfw_lvgl_get_style_grid_cell_y_align",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 12,
+        "sha256": "ba36946bbbcc472b38473a27f372a49040dd8bdad2e24e0e58d531919ad4e2c2",
+        "alignment": 4,
+        "offset": 380780,
+        "unrelocated_sha256": "ba36946bbbcc472b38473a27f372a49040dd8bdad2e24e0e58d531919ad4e2c2"
+      },
+      "function": "open_cfw_lvgl_get_style_grid_cell_row_span",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_layout_style_getters.c",
+        "sha256": "b274c3dc85393506c7b9ad3e8d349889f6e475abdb8cdb454bc8954d40baa506",
+        "size": 11389
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 40,
+        "sha256": "700e2cfd2039f6d7d9b1002c277e645b55734d07f33d3e5cce862eda4be71f40",
+        "alignment": 4,
+        "offset": 380792,
+        "unrelocated_sha256": "1f1b7776b5e153cc9020e478e436a77742436bd2cf335e7739da489ad4732b87"
+      },
+      "function": "open_cfw_lvgl_obj_get_width_with_margin",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_left",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327608
+        },
+        {
+          "offset": 30,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_right",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327620
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 40,
+        "sha256": "476f3ea01f3faa0d3c22faf448c7e4f54af0a9e65e2fef1743c3601b9868cf1d",
+        "alignment": 4,
+        "offset": 380832,
+        "unrelocated_sha256": "80b612eb292410f180de2ba7f04de7a3fbcbfaba026d904a361b0b1dc1e9542c"
+      },
+      "function": "open_cfw_lvgl_obj_get_height_with_margin",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_top",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327584
+        },
+        {
+          "offset": 30,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_bottom",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327596
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 10,
+        "sha256": "790a4b4315e382466fbbe3baada664a3fc117463d5f12ac3b5474872f32e5d31",
+        "alignment": 4,
+        "offset": 380872,
+        "unrelocated_sha256": "790a4b4315e382466fbbe3baada664a3fc117463d5f12ac3b5474872f32e5d31"
+      },
+      "function": "open_cfw_lvgl_area_copy",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 14,
+        "sha256": "930ec2eb967343c161d81fac87c86c68eac587e4e00efc8dff6a14735c5a0cb4",
+        "alignment": 4,
+        "offset": 380884,
+        "unrelocated_sha256": "930ec2eb967343c161d81fac87c86c68eac587e4e00efc8dff6a14735c5a0cb4"
+      },
+      "function": "open_cfw_lvgl_memzero",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 44,
+        "sha256": "0cda2884e76de27ba7a6847839c802ef9d6665a969773a883dfea56de6aae399",
+        "alignment": 4,
+        "offset": 380900,
+        "unrelocated_sha256": "3ab889d12afd9caac81d31477d59b8e402de827a1b84e91b64b1ab88c88efb5b"
+      },
+      "function": "open_cfw_lvgl_get_style_space_left",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_pad_left",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327548
+        },
+        {
+          "offset": 18,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_border_width",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327632
+        },
+        {
+          "offset": 28,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_border_side",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327644
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 44,
+        "sha256": "6497270f4203bd14d7d4e40b106d793b3407b03015eea41f8d12da74cd515f66",
+        "alignment": 4,
+        "offset": 380944,
+        "unrelocated_sha256": "dd3e36e550d90c7561abaf2874e0ed84261685ccd531b3e6c91a190e7b841f76"
+      },
+      "function": "open_cfw_lvgl_get_style_space_top",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_pad_top",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327536
+        },
+        {
+          "offset": 18,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_border_width",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327632
+        },
+        {
+          "offset": 28,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_border_side",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327644
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 6,
+        "sha256": "5607ba884597446868dabfcaa5e509bf9036a25de5d3cc20d7217fddae73a521",
+        "alignment": 4,
+        "offset": 380988,
+        "unrelocated_sha256": "baeabe5a20ae32e030f279cd8ccc190b29c2fe463d61b81ce45656d3acc702f0"
+      },
+      "function": "open_cfw_lvgl_grid_get_col_dsc",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_lvgl_get_style_grid_column_dsc_array",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327684
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 6,
+        "sha256": "f1318d2ef9cffbde2139992c8dc9853ce62595f9180b8cbe9c38ed2c504e24a9",
+        "alignment": 4,
+        "offset": 380996,
+        "unrelocated_sha256": "baeabe5a20ae32e030f279cd8ccc190b29c2fe463d61b81ce45656d3acc702f0"
+      },
+      "function": "open_cfw_lvgl_grid_get_row_dsc",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_lvgl_get_style_grid_row_dsc_array",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327716
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 6,
+        "sha256": "73141bca28348bf7f381a2ec349c59d8e81fad7fd58139c67cd6565499174e8d",
+        "alignment": 4,
+        "offset": 381004,
+        "unrelocated_sha256": "baeabe5a20ae32e030f279cd8ccc190b29c2fe463d61b81ce45656d3acc702f0"
+      },
+      "function": "open_cfw_lvgl_grid_get_col_pos",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_lvgl_get_style_grid_cell_column_pos",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327748
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 6,
+        "sha256": "934ba787a48be1bdfe61724687cc55e796bcd71579258354304eef7512261b01",
+        "alignment": 4,
+        "offset": 381012,
+        "unrelocated_sha256": "baeabe5a20ae32e030f279cd8ccc190b29c2fe463d61b81ce45656d3acc702f0"
+      },
+      "function": "open_cfw_lvgl_grid_get_row_pos",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_lvgl_get_style_grid_cell_row_pos",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327792
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 6,
+        "sha256": "e96d45bdebe2e13abc9757b4fc788c9084d856af017630f3a18726134736337d",
+        "alignment": 4,
+        "offset": 381020,
+        "unrelocated_sha256": "baeabe5a20ae32e030f279cd8ccc190b29c2fe463d61b81ce45656d3acc702f0"
+      },
+      "function": "open_cfw_lvgl_grid_get_col_span",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_lvgl_get_style_grid_cell_column_span",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327780
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 6,
+        "sha256": "fcec58aede0af0d4803e1119b44ecc5458e5a9b692d4470a082a3c37c6853479",
+        "alignment": 4,
+        "offset": 381028,
+        "unrelocated_sha256": "baeabe5a20ae32e030f279cd8ccc190b29c2fe463d61b81ce45656d3acc702f0"
+      },
+      "function": "open_cfw_lvgl_grid_get_row_span",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_lvgl_get_style_grid_cell_row_span",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327824
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 6,
+        "sha256": "b7cc4ecb3c8df3a33e1efdbf86c6599c82c691f79e722d3b9c62736682b14a5d",
+        "alignment": 4,
+        "offset": 381036,
+        "unrelocated_sha256": "baeabe5a20ae32e030f279cd8ccc190b29c2fe463d61b81ce45656d3acc702f0"
+      },
+      "function": "open_cfw_lvgl_grid_get_cell_col_align",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_lvgl_get_style_grid_cell_x_align",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327760
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 6,
+        "sha256": "e96d45bdebe2e13abc9757b4fc788c9084d856af017630f3a18726134736337d",
+        "alignment": 4,
+        "offset": 381044,
+        "unrelocated_sha256": "baeabe5a20ae32e030f279cd8ccc190b29c2fe463d61b81ce45656d3acc702f0"
+      },
+      "function": "open_cfw_lvgl_grid_get_cell_row_align",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_lvgl_get_style_grid_cell_y_align",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327804
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 6,
+        "sha256": "a27530f5930b9280ebd4b81f02be0cc823718c4a2a0adf78bb82dc21228f18fb",
+        "alignment": 4,
+        "offset": 381052,
+        "unrelocated_sha256": "baeabe5a20ae32e030f279cd8ccc190b29c2fe463d61b81ce45656d3acc702f0"
+      },
+      "function": "open_cfw_lvgl_grid_get_grid_col_align",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_lvgl_get_style_grid_column_align",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327696
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 6,
+        "sha256": "d51e106e15da9a9861eb05d1ed78d87a6578049a79a57a38d5c82f0645235713",
+        "alignment": 4,
+        "offset": 381060,
+        "unrelocated_sha256": "baeabe5a20ae32e030f279cd8ccc190b29c2fe463d61b81ce45656d3acc702f0"
+      },
+      "function": "open_cfw_lvgl_grid_get_grid_row_align",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_lvgl_get_style_grid_row_align",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327728
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 24,
+        "sha256": "b515118e7383829d39b953ca1ec617d6528075eea85371360b71cb978d2011a3",
+        "alignment": 4,
+        "offset": 381068,
+        "unrelocated_sha256": "22659f24d2fb0f4ae463bb4e97729986a571b8e8a76697383110a4bf22559cd0"
+      },
+      "function": "open_cfw_lvgl_grid_get_margin_hor",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_left",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327608
+        },
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_right",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327620
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 24,
+        "sha256": "c16887f185a771a4f773712981d96a9a7d7d13a2fe3a9bacdbbefabd0d6ce969",
+        "alignment": 4,
+        "offset": 381092,
+        "unrelocated_sha256": "22659f24d2fb0f4ae463bb4e97729986a571b8e8a76697383110a4bf22559cd0"
+      },
+      "function": "open_cfw_lvgl_grid_get_margin_ver",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_top",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327584
+        },
+        {
+          "offset": 16,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_bottom",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327596
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 14,
+        "sha256": "11bc9c0e2f705b8de284ab12b8173f465fa607897f02eeaed7aceab5ec4fae3c",
+        "alignment": 4,
+        "offset": 381116,
+        "unrelocated_sha256": "11bc9c0e2f705b8de284ab12b8173f465fa607897f02eeaed7aceab5ec4fae3c"
+      },
+      "function": "open_cfw_lvgl_grid_div_round_closest",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 28,
+        "sha256": "34937c5e3cff7887f44c6ad74a0361f084b49ed338b51fb4395b89787a94ac0b",
+        "alignment": 4,
+        "offset": 381132,
+        "unrelocated_sha256": "34937c5e3cff7887f44c6ad74a0361f084b49ed338b51fb4395b89787a94ac0b"
+      },
+      "function": "open_cfw_lvgl_grid_init",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 34,
+        "sha256": "3fbbd4aa1b9e5acb13289ec8837705712467485c2e6ae61768fc817fcf955ccd",
+        "alignment": 4,
+        "offset": 381160,
+        "unrelocated_sha256": "3fbbd4aa1b9e5acb13289ec8837705712467485c2e6ae61768fc817fcf955ccd"
+      },
+      "function": "open_cfw_lvgl_grid_calc_free",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 60,
+        "sha256": "d1e115ad149a9168e80cad8cb2b0addf11817136e792299bfcaab977f4c4f938",
+        "alignment": 4,
+        "offset": 381196,
+        "unrelocated_sha256": "d1e115ad149a9168e80cad8cb2b0addf11817136e792299bfcaab977f4c4f938"
+      },
+      "function": "open_cfw_lvgl_grid_count_tracks",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 448,
+        "sha256": "1bb037bbe85bbeedab178e9ecacdc3bb5b91fea508a47384c67bd4ca3bcb7c81",
+        "alignment": 4,
+        "offset": 381256,
+        "unrelocated_sha256": "1bb037bbe85bbeedab178e9ecacdc3bb5b91fea508a47384c67bd4ca3bcb7c81"
+      },
+      "function": "open_cfw_lvgl_grid_align",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 658,
+        "sha256": "a3a5c5bfa58883c695fa80149d2738c0ae333cc7779bcf142fd8f6168c811cb9",
+        "alignment": 4,
+        "offset": 381704,
+        "unrelocated_sha256": "43540aa60193a7074ee02fc80c28e2030a4f7ac564b5648f83d721aceb27d84b"
+      },
+      "function": "open_cfw_lvgl_grid_calc_cols",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 26,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_col_dsc",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328032
+        },
+        {
+          "offset": 44,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_col_dsc",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328032
+        },
+        {
+          "offset": 58,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_col_pos",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328048
+        },
+        {
+          "offset": 66,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_col_span",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328064
+        },
+        {
+          "offset": 146,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_count_tracks",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328240
+        },
+        {
+          "offset": 340,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_col_span",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328064
+        },
+        {
+          "offset": 350,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_col_pos",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328048
+        },
+        {
+          "offset": 480,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_pad_column",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327572
+        },
+        {
+          "offset": 578,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_div_round_closest",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328160
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 654,
+        "sha256": "7718f2384dca1a09d2cd918e46020a98f15739c234321a3b7b081abe5fe16323",
+        "alignment": 4,
+        "offset": 382364,
+        "unrelocated_sha256": "38e71e2a0ae3650ac33391ea9af89764223dd6a1c13d42b42a42d0d6872d5e72"
+      },
+      "function": "open_cfw_lvgl_grid_calc_rows",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 26,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_row_dsc",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328040
+        },
+        {
+          "offset": 40,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_row_dsc",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328040
+        },
+        {
+          "offset": 54,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_row_pos",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328056
+        },
+        {
+          "offset": 64,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_row_span",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328072
+        },
+        {
+          "offset": 124,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_count_tracks",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328240
+        },
+        {
+          "offset": 312,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_row_span",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328072
+        },
+        {
+          "offset": 322,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_row_pos",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328056
+        },
+        {
+          "offset": 460,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_pad_row",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327560
+        },
+        {
+          "offset": 574,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_div_round_closest",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328160
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 268,
+        "sha256": "4034bbe94137451e0253de254f6d99e513beffd240266f146fa0e39ef81a16b8",
+        "alignment": 4,
+        "offset": 383020,
+        "unrelocated_sha256": "6e4ababdaa156f78fd23ea77daa1d3f336bd15541d01006bde7670adcce5f026"
+      },
+      "function": "open_cfw_lvgl_grid_calc",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 58,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_pad_column",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327572
+        },
+        {
+          "offset": 68,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_pad_row",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327560
+        },
+        {
+          "offset": 78,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_base_dir",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327664
+        },
+        {
+          "offset": 88,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_width",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327488
+        },
+        {
+          "offset": 98,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_height",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327500
+        },
+        {
+          "offset": 170,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_grid_col_align",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328096
+        },
+        {
+          "offset": 178,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_grid_row_align",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328104
+        },
+        {
+          "offset": 264,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_lvgl_memzero",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8327928
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 1012,
+        "sha256": "0dec089475c049872d4dfd05545665492ba2653c6ca31f1c718839166bc884d3",
+        "alignment": 4,
+        "offset": 383288,
+        "unrelocated_sha256": "a6e6e940887608ec0ec04059d30d57512c08a6fd38deb2914f137383f1a59bfb"
+      },
+      "function": "open_cfw_lvgl_grid_item_repos",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 38,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_col_span",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328064
+        },
+        {
+          "offset": 46,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_row_span",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328072
+        },
+        {
+          "offset": 66,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_col_pos",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328048
+        },
+        {
+          "offset": 74,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_row_pos",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328056
+        },
+        {
+          "offset": 82,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_cell_col_align",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328080
+        },
+        {
+          "offset": 90,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_cell_row_align",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328088
+        },
+        {
+          "offset": 168,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_base_dir",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327664
+        },
+        {
+          "offset": 270,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_left",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327608
+        },
+        {
+          "offset": 280,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_right",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327620
+        },
+        {
+          "offset": 334,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_left",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327608
+        },
+        {
+          "offset": 344,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_margin_hor",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328112
+        },
+        {
+          "offset": 384,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_right",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327620
+        },
+        {
+          "offset": 450,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_left",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327608
+        },
+        {
+          "offset": 496,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_top",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327584
+        },
+        {
+          "offset": 506,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_bottom",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327596
+        },
+        {
+          "offset": 562,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_top",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327584
+        },
+        {
+          "offset": 572,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_get_margin_ver",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328136
+        },
+        {
+          "offset": 598,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_top",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327584
+        },
+        {
+          "offset": 630,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_margin_bottom",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327596
+        },
+        {
+          "offset": 696,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_area_copy",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8327916
+        },
+        {
+          "offset": 766,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_translate_x",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327512
+        },
+        {
+          "offset": 776,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_translate_y",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327524
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 196,
+        "sha256": "b706da562d0a418b3bf9b5f6760bea68bc488d858dca394c6222beeec10d0f2b",
+        "alignment": 4,
+        "offset": 384300,
+        "unrelocated_sha256": "dd06bcdf6009878bc11a76db36430b36a708aa86643d12682055c50f42791cc4"
+      },
+      "function": "open_cfw_lvgl_grid_update",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 10,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_space_left",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8327944
+        },
+        {
+          "offset": 20,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_space_top",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8327988
+        },
+        {
+          "offset": 54,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_calc",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8330064
+        },
+        {
+          "offset": 62,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_memzero",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8327928
+        },
+        {
+          "offset": 128,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_grid_calc_free",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8328204
+        },
+        {
+          "offset": 136,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_width",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327488
+        },
+        {
+          "offset": 146,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_lvgl_get_style_height",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 8327500
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/lvgl-grid-engine-closure.md",
+        "license": "MIT",
+        "origin": "clean-room LVGL 9.3-dev flex/grid layout helpers and style getters over the retained lv_obj_get_style_prop core",
+        "path": "components/apollo_main/core_overlay/lvgl_grid_engine.c",
+        "sha256": "4b3658db754208a7cc438dfa73346e024f8e168470729ecf1216213dbfc93b37",
+        "size": 53225
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 40,
+        "sha256": "4db662f7392cbd6d111728a7292f416adb1f7c1c5da6c20573560bc451ad618f",
+        "alignment": 4,
+        "offset": 384496,
+        "unrelocated_sha256": "4db662f7392cbd6d111728a7292f416adb1f7c1c5da6c20573560bc451ad618f"
+      },
+      "function": "open_cfw_libc_strcpy",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-display-state-string-helpers-closure.md",
+        "license": "MIT",
+        "origin": "clean-room libc-shaped strcpy/strtoul over retained locale callees; upstream family unclaimed",
+        "path": "components/apollo_main/core_overlay/runtime_string_helpers.c",
+        "sha256": "7ddb5dbed88f56b4adcc27f09df9121cb0c96589321491455fb73d11123cf9b6",
+        "size": 7203
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 28,
+        "sha256": "a71f9c936e51e78548f11166a697672890b06daa5d0a062a5944f7af8bc32d0b",
+        "alignment": 4,
+        "offset": 384536,
+        "unrelocated_sha256": "a71f9c936e51e78548f11166a697672890b06daa5d0a062a5944f7af8bc32d0b"
+      },
+      "function": "open_cfw_state_init_params",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-display-state-string-helpers-closure.md",
+        "license": "MIT",
+        "origin": "clean-room first-party peripheral-state cluster over retained sample/irq/channel callees; peripheral identity open",
+        "path": "components/apollo_main/core_overlay/runtime_peripheral_state_helpers.c",
+        "sha256": "fdd08850067e152f9c2995b7ed0658682248981cdf09122b87d747fa91fdff97",
+        "size": 12575
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 16,
+        "sha256": "a0d682dc9529e786b1d44a0891c397c36eda292df51a440c43236f78fae9806e",
+        "alignment": 4,
+        "offset": 384564,
+        "unrelocated_sha256": "a0d682dc9529e786b1d44a0891c397c36eda292df51a440c43236f78fae9806e"
+      },
+      "function": "open_cfw_state_nibble_to_mode",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-display-state-string-helpers-closure.md",
+        "license": "MIT",
+        "origin": "clean-room first-party peripheral-state cluster over retained sample/irq/channel callees; peripheral identity open",
+        "path": "components/apollo_main/core_overlay/runtime_peripheral_state_helpers.c",
+        "sha256": "fdd08850067e152f9c2995b7ed0658682248981cdf09122b87d747fa91fdff97",
+        "size": 12575
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 160,
+        "sha256": "02eaebc28924d29ddee565cff7e1646755907c12bd5f5540a7d0a36ba63b2dba",
+        "alignment": 4,
+        "offset": 384580,
+        "unrelocated_sha256": "83f74b2f4bddfd44ffed18f3bf4cfe98eb4a50edad34cf41c622a45b20e3e16f"
+      },
+      "function": "open_cfw_state_mode_switch",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 34,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_state_nibble_to_mode",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8331608
+        },
+        {
+          "offset": 42,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_state_nibble_to_mode",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8331608
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-display-state-string-helpers-closure.md",
+        "license": "MIT",
+        "origin": "clean-room first-party peripheral-state cluster over retained sample/irq/channel callees; peripheral identity open",
+        "path": "components/apollo_main/core_overlay/runtime_peripheral_state_helpers.c",
+        "sha256": "fdd08850067e152f9c2995b7ed0658682248981cdf09122b87d747fa91fdff97",
+        "size": 12575
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 46,
+        "sha256": "4550781eb0af5addb3da4db4179b957457dbbfb26339037260233a8043505ef4",
+        "alignment": 4,
+        "offset": 384740,
+        "unrelocated_sha256": "4550781eb0af5addb3da4db4179b957457dbbfb26339037260233a8043505ef4"
+      },
+      "function": "open_cfw_state_flag_get",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-display-state-string-helpers-closure.md",
+        "license": "MIT",
+        "origin": "clean-room first-party peripheral-state cluster over retained sample/irq/channel callees; peripheral identity open",
+        "path": "components/apollo_main/core_overlay/runtime_peripheral_state_helpers.c",
+        "sha256": "fdd08850067e152f9c2995b7ed0658682248981cdf09122b87d747fa91fdff97",
+        "size": 12575
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 40,
+        "sha256": "d8b2429b500e2592d6ceb7c4f41d253dcbb1413dc2611efdee9cbd7aef99c818",
+        "alignment": 4,
+        "offset": 384788,
+        "unrelocated_sha256": "d8b2429b500e2592d6ceb7c4f41d253dcbb1413dc2611efdee9cbd7aef99c818"
+      },
+      "function": "open_cfw_state_sample_vote",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-display-state-string-helpers-closure.md",
+        "license": "MIT",
+        "origin": "clean-room first-party peripheral-state cluster over retained sample/irq/channel callees; peripheral identity open",
+        "path": "components/apollo_main/core_overlay/runtime_peripheral_state_helpers.c",
+        "sha256": "fdd08850067e152f9c2995b7ed0658682248981cdf09122b87d747fa91fdff97",
+        "size": 12575
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 124,
+        "sha256": "69b19d1e4b8b55aadb44ba940655b99bdeb3f40bbfdd77e6e12d16613d4d7fb9",
+        "alignment": 4,
+        "offset": 384828,
+        "unrelocated_sha256": "b64085891634680c75f20c457cb7aae2b59d2dc7c98501bf30fa516bc828bb4f"
+      },
+      "function": "open_cfw_state_sample_retry",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [
+        {
+          "offset": 24,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_state_sample_vote",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8331832
+        },
+        {
+          "offset": 40,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_state_sample_vote",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8331832
+        },
+        {
+          "offset": 70,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_state_sample_vote",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8331832
+        },
+        {
+          "offset": 104,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_state_sample_vote",
+          "symbol_type": "STT_FUNC",
+          "target_address": 8331832
+        }
+      ],
+      "source": {
+        "evidence": "docs/research/g2-display-state-string-helpers-closure.md",
+        "license": "MIT",
+        "origin": "clean-room first-party peripheral-state cluster over retained sample/irq/channel callees; peripheral identity open",
+        "path": "components/apollo_main/core_overlay/runtime_peripheral_state_helpers.c",
+        "sha256": "fdd08850067e152f9c2995b7ed0658682248981cdf09122b87d747fa91fdff97",
+        "size": 12575
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 18,
+        "sha256": "4848279b7ff692cea4e660a99ba44799ad1c022b7ba4bf7044b1365e536e45d4",
+        "alignment": 4,
+        "offset": 384952,
+        "unrelocated_sha256": "4848279b7ff692cea4e660a99ba44799ad1c022b7ba4bf7044b1365e536e45d4"
+      },
+      "function": "open_cfw_state_flag_or",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-display-state-string-helpers-closure.md",
+        "license": "MIT",
+        "origin": "clean-room first-party peripheral-state cluster over retained sample/irq/channel callees; peripheral identity open",
+        "path": "components/apollo_main/core_overlay/runtime_peripheral_state_helpers.c",
+        "sha256": "fdd08850067e152f9c2995b7ed0658682248981cdf09122b87d747fa91fdff97",
+        "size": 12575
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 18,
+        "sha256": "c157ebd93fdcdae82d122a17af05741d2ccc598cb1195dfafe924198fb91c710",
+        "alignment": 4,
+        "offset": 384972,
+        "unrelocated_sha256": "c157ebd93fdcdae82d122a17af05741d2ccc598cb1195dfafe924198fb91c710"
+      },
+      "function": "open_cfw_state_latch_store",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-display-state-string-helpers-closure.md",
+        "license": "MIT",
+        "origin": "clean-room first-party peripheral-state cluster over retained sample/irq/channel callees; peripheral identity open",
+        "path": "components/apollo_main/core_overlay/runtime_peripheral_state_helpers.c",
+        "sha256": "fdd08850067e152f9c2995b7ed0658682248981cdf09122b87d747fa91fdff97",
+        "size": 12575
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 28,
+        "sha256": "bef88614f7c8d7070eb4719b68745f5296d723b71ae037eabbfe33a3154e3896",
+        "alignment": 4,
+        "offset": 384992,
+        "unrelocated_sha256": "bef88614f7c8d7070eb4719b68745f5296d723b71ae037eabbfe33a3154e3896"
+      },
+      "function": "open_cfw_state_value_get",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-display-state-string-helpers-closure.md",
+        "license": "MIT",
+        "origin": "clean-room first-party peripheral-state cluster over retained sample/irq/channel callees; peripheral identity open",
+        "path": "components/apollo_main/core_overlay/runtime_peripheral_state_helpers.c",
+        "sha256": "fdd08850067e152f9c2995b7ed0658682248981cdf09122b87d747fa91fdff97",
+        "size": 12575
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
+    },
+    {
+      "allow_discarded_alloc_sections": true,
+      "expected": {
+        "size": 440,
+        "sha256": "eebe570a9c3b25d733f090f41ce102e30fe5d803fee78d21ba189a6a6da8517e",
+        "alignment": 4,
+        "offset": 385020,
+        "unrelocated_sha256": "eebe570a9c3b25d733f090f41ce102e30fe5d803fee78d21ba189a6a6da8517e"
+      },
+      "function": "open_cfw_libc_strtoul",
+      "profiles": [
+        "apple-clang"
+      ],
+      "relocations": [],
+      "source": {
+        "evidence": "docs/research/g2-display-state-string-helpers-closure.md",
+        "license": "MIT",
+        "origin": "clean-room libc-shaped strcpy/strtoul over retained locale callees; upstream family unclaimed",
+        "path": "components/apollo_main/core_overlay/runtime_string_helpers.c",
+        "sha256": "7ddb5dbed88f56b4adcc27f09df9121cb0c96589321491455fb73d11123cf9b6",
+        "size": 7203
+      },
+      "strict_relocation_contract": true,
+      "toolchain": {
+        "flags": [
+          "-mthumb",
+          "-mcpu=cortex-m55",
+          "-O2",
+          "-ffreestanding",
+          "-fno-jump-tables",
+          "-fomit-frame-pointer",
+          "-fno-builtin",
+          "-mno-unaligned-access",
+          "-fno-unwind-tables",
+          "-fno-asynchronous-unwind-tables",
+          "-fropi",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-mllvm",
+          "-enable-machine-outliner=never"
+        ],
+        "reviewed_version_prefix": "Apple clang version 21.0.0",
+        "target": "thumbv7em-none-eabi"
+      }
     }
   ],
   "run_base": 4423680,
@@ -187311,8 +191769,8 @@
             "sha256": "5861f72d7bb2bd1be590fc7fb3f660a075b229f7f92f80079d3262c93b6cda98"
           },
           "component": {
-            "size": 3903840,
-            "sha256": "5b6154ecb4a5bfb2a0b709c5816908fe1761732ad98545bb5406191cf7ea3948"
+            "size": 3908856,
+            "sha256": "3428d9cee62ad71e5713e9c28baebe083a04231466a9bf2b66d24d4a2c7a08ee"
           },
           "placement": {
             "text": {

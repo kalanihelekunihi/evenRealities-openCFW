@@ -5,8 +5,8 @@ from build_gx8002_uart_dma_burst import build,ROOT,IMAGE_SHA,sha,Elf32
 from verify_gx8002_memcpy_source import decode
 
 
-def execute(code,pc,tx,rx,direction):
-    r={f'r{i}':0x98760000+i for i in range(32)};r.update(r0=0x20026a94,r1=direction)
+def execute(code,pc,tx,rx,direction,descriptor_address=0x20026a94):
+    r={f'r{i}':0x98760000+i for i in range(32)};r.update(r0=descriptor_address,r1=direction)
     initial=r.copy();memory={r['r0']+52:tx,r['r0']+56:rx};reads=[];condition=False
     for _ in range(50):
         op,args,width=code[pc];p=[x.strip() for x in args.split(',')];jump=None

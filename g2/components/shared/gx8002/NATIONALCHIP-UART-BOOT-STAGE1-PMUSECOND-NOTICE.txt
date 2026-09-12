@@ -1,0 +1,25 @@
+NationalChip UART boot stage-1 second PMU dispatcher body notice (openCFW)
+
+The reviewed source in
+components/shared/gx8002/runtime_gx8002_uart_stage1_pmusecond.S is
+clean-room assembly written from decoded stock control flow. No
+NationalChip SDK source text is reproduced and no SDK register map is
+used: every address the leaf touches arrives through the descriptor
+filled by the reviewed `pmu_fill_desc` leaf, through the retained
+jump-table base address named in the file, or through the modeled
+UART/cell MMIO addresses, and every other constant in the body is a
+numeric immediate observed in the decoded stock flow. The pinned
+upstream SDK checkout is not a build input to this leaf. The leaf
+covers the dispatcher body at runtime 0x10000EB8 (package 0xF08, 476
+bytes); the 24-byte entry head (frame setup, id-range guard, retained
+jump-table dispatch) stays retained stock because the assembler
+places literal pools only at the section end, which would displace
+the inline table pool or the coinciding arms (see
+docs/research/gx8002-uart-stage1-pmusecond-source.md). The reviewed
+form keeps the stock register plan and control flow with two
+documented deviations at the body entry (a trace-neutral `nop`
+position pad for the stock dead `movi r0, 0`, and the fill-failure
+branch retargeted past it to the restore block).
+
+MIT license for the new openCFW code: see LICENSE in the repository
+root.

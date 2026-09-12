@@ -26,6 +26,32 @@ bytes is not the same as zero opaque behavior.
 
 ## Build and evidence tracks
 
+AM-015 checkpoint (2026-09-12): `0x0044FA5E..0x004501D2` remains retained
+`official_blob`; its `FUN_*` corpus records are not sufficient for source
+admission. No bytes are claimed until the helper cluster has an identified
+family or reviewed clean-room C, ABI tests, and production routing. Hardware
+qualification remains blocked by unavailable physical evidence.
+
+AM-015 follow-up (2026-09-12): bounded evidence classifies the first helper
+cluster as LVGL-like object geometry/state access, but does not establish the
+object ABI or source configuration. No bytes are admitted; recover the complete
+object/callback closure before host-oracle testing and routing.
+
+AM-015 checkpoint (2026-09-12): the existing 13-leaf display-accessor
+candidate matches authenticated stock behavior across 520 bounded oracle
+vectors. It remains unrouted and retained-callback dependent; no source-only
+bytes are claimed.
+
+AM-015 continuation (2026-09-12): retention and routing remain unchanged; the
+520-vector receipt was reproduced. This remains differential evidence only,
+since the candidate still calls retained `0x0044FA1A`/`0x00440656` and the
+remaining functions lack a reviewed closure.
+
+AM-015 callback probe (2026-09-12): `0x0044FA1A` is evidenced as a
+global-backed null-object provider (`DAT_0044FCF0+0x14`) for the accessor
+cluster; provider ownership/initialization and `0x0044D25C` logging ABI remain
+unresolved. No bytes are source-owned or production-routed.
+
 - `make -C g2 source` builds the existing hybrid reference for macOS. Preserve
   its verified behavior while replacing providers. It still requires stock
   payloads, so it cannot be the final source-only deliverable.
@@ -7887,3 +7913,1421 @@ declined to reuse (GPL-2.0+, no authorized fork/release pin) — a
 licensing block, not a hardware one. Detail in
 `docs/research/gx8002-uart-boot-stage2-diagnostics-source.md`. No hardware
 operation occurred.
+
+UART stage-1 div/mod tranche (CD-001, partial, 2026-09-11): three stage-1
+leaves (udiv/umod/clear_bss placeholder, package `0x188..0x20a`) are now
+reviewed clean-room C with 16,550 decoded stock/source/oracle comparisons
+passing, registered in the experimental codec builder with a pinned
+baseline (`research/gx8002-uart-stage1-divmod-verification.json`). The
+shared candidate and experimental package builds did not run in this pass
+(integration lock held by XC-002); 8,064 of the item's 8,192 bytes remain
+retained. Detail in `research/gx8002-uart-stage1-divmod-source.md`. No
+hardware operation occurred; hardware qualification stays blocked by
+unavailable physical evidence.
+
+AM-040 checkpoint (2026-09-11, partial): 49 of the item's 64 retained
+Apollo-main functions (1,112 of 4,102 function bytes) are now reviewed
+MIT C (`core_overlay/lvgl_layout_style_getters.c`,
+`core_overlay/lvgl_grid_engine.c`) with 18 passing host tests pinning
+all 49 stock bodies and every port's behavior
+(`research/lvgl-grid-engine-closure.md`). The ports are not yet
+production-routed (no overlay/manifest/transparent registration), so the
+range still builds from retained bytes; the deferred grid ports
+(`calc_cols`, `calc_rows`, `item_repos`, `grid_align`), the unidentified
+`0x0048D540..0x0048D866` cluster, and the `0x0048D3A0..0x0048D3C8` data
+words remain retained. No hardware operation occurred; hardware
+qualification stays blocked by unavailable physical evidence.
+
+XC-002 checkpoint 2026-09-11 (partial): `make -C g2 completion-readiness`
+was re-pinned past three landed-work drifts — bootloader 4-byte
+`critical_transfer_base` admission re-registered as `source_compiled`
+(59013/87981) across the core manifest, provider stats, and five
+apple-clang tool/test pins; Touch `startup.c` receipt refreshed via its
+generator write path; license community census extended by 13 committed MIT
+GX8002 files. The gate still fails closed on two owner items: six `.short`
+alignment pads in the new unrouted bootloader SPOT literal file (no census
+path exists by design) and CD-001's live untracked divmod file in the
+license census, plus live BL-006's 9 uncommitted in-place-data entries which
+were deliberately left unpinned. `assessment-data.json` and
+`transparent-source-ledger.md` regeneration stays deferred until those clear
+(readiness red; transparent inputs verified unchanged). Hardware
+qualification stays blocked by unavailable physical evidence.
+
+BL-006 checkpoint 2026-09-11 (partial): 9 literal/alignment regions
+(192 bytes at `0x0042220E`, `0x0042228E`, `0x004222D2`, `0x00422430`,
+`0x00422574`, `0x004225AC`, `0x00422712`, `0x00422872`, `0x00422AD2`)
+are produced from reviewed MIT C via 9 registered bootloader
+`in_place_data` groups (byte-exact, relocation-free, live consumers
+mapped; verifier `tests/test_runtime_bootloader_bl006_cluster.py`
+passes; private component build succeeds). Flash-plan reclassification
+awaits the canonical locked rebuild. 68 regions (5,700 bytes) remain
+retained. Hardware qualification stays blocked by unavailable physical
+evidence.
+
+XC-002 checkpoint 2026-09-11 evening: the completion-readiness and license
+censuses are re-pinned for everything committable — EM9305 toolchain MIT
+files registered (21), Case `build/` products excluded with regression
+tests, distributed targets 1110 -> 1112 — but the gates stay red on two
+owner lanes outside this item (BL spotmgr pads; CD-001 untracked stage-1
+files), so the assessment snapshot and transparent ledger refreshes remain
+queued behind them. The transparent ledger's committed numbers still match
+its build inputs exactly; `reviewed_sources.json` needs no new
+registration. No hardware operation; hardware qualification stays blocked
+by unavailable physical evidence.
+
+AM-040 checkpoint 2026-09-11 evening: the Apollo grid tranche is now
+53/64 functions (3,336 of 4,102 bytes) reviewed MIT C — `calc_cols`,
+`calc_rows`, `item_repos`, `grid_align` ported against the pinned LVGL
+commit 344c7c3 with 18 new passing host tests (36/36 with the first
+wave) — but zero of those bytes are production-routed yet: overlay
+registration, manifest re-pinning, and `reviewed_sources.json` admission
+for all 53 ports remain open, and the trailing 11 functions (762 bytes:
+strcpy, display state, RNG loop, flag globals, strtoul-shaped parser)
+are surveyed but unported. The range still builds from `official_blob`.
+No hardware operation; hardware qualification stays blocked by
+unavailable physical evidence.
+
+BL-006 hardware-service/MSPI pool tranche (2026-09-11): eight more
+retained bootloader regions (154 bytes at
+0x004233E0/0x00423430/0x004236FA/0x00423764/0x0042382C/0x00423E0C/0x0042499C/0x004251A4)
+are now produced from reviewed MIT C via `in_place_data`, with
+byte-exact relocation-free payloads, live-consumer mapping, and a
+4-test verifier; a private component build places all 18 data
+groups. BL-006 stands at 346 of 5,892 bytes source-owned. The
+canonical `bootloader-component` + `source` rebuild (flash-plan
+reclassification) is still pending on the integration lock, 60
+regions (5,546 bytes) remain, and hardware qualification stays
+blocked by unavailable physical evidence.
+
+CD-001 checkpoint 2026-09-11 evening: the UART boot stage-1 reset entry
+(48 bytes at package 0x150) is production-routed reviewed assembly in the
+experimental codec candidate (byte-exact, 108 decoded cases, registered;
+audit `research/gx8002-uart-stage1-reset-source.md`), bringing CD-001 to 176
+of 8,192 bytes source-owned. The shared `gx8002-source-candidate` gate is
+red for a pre-existing cause outside this item (`rtc-init` and
+`clock-frequency` baselines pin the pre-HEAD tool hash; single-field diffs,
+owner re-pin pending), so `gx8002-source-candidate-build.json` and the
+experimental manifest pins refresh with that fix, not here. 8,016 bytes
+remain retained; hardware qualification stays blocked by unavailable
+physical evidence.
+
+XC-002 checkpoint 2026-09-11 late: HEAD unchanged, so no ledger re-pin was
+due. `completion-readiness` stays red on the BL-owned spotmgr `.short`
+pads and the 2 untracked CD-001 MIT files (followup: manifest 298->300,
+targets 1112->1114 on landing); Touch/Case/EM9305 censuses, bootloader pins
+(59013/87981), `reviewed_sources.json`, and transparent-ledger inputs all
+re-verified clean. `assessment-data.json` and the transparent ledger were
+not regenerated (red gate / XC-004 pipeline). Audit:
+`research/tooling-completion-readiness-truthfulness.md`; hardware
+qualification stays blocked by unavailable physical evidence.
+
+BL-006 boot-init checkpoint 2026-09-11: 198 more retained bytes (6 regions
+`0x0041F9B6..0x0041FDC0`) now build from reviewed MIT C as named-field
+`in_place_data`, byte-exact; BL-006 stands at 544/5,892 with 54 regions
+(5,348 B) retained. Loaders are relocated leaves, so these pools are
+layout reproductions with reviewed meanings (audit-explicit), not live
+traffic. Component build and 5+13 BL-006 tests pass; full `source` gate is
+red on another agent's in-flight manifest change. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+CD-001 checkpoint 2026-09-11: four more stage-1 leaves (PMU trim-bit
+accessors at `0x10000374`/`0x1000038c`/`0x100003a4`/`0x100003b0`, 72 B) now build
+from reviewed MIT C plus one MIT assembly leaf, registered as
+`uart-stage1-pmubits`; CD-001 stands at 248/8,192 with 7,944 B retained.
+Verifier (308 cases) and 8 new tests pass; the shared
+`gx8002-source-candidate` gate is red on the pre-existing `rtc-init`
+baseline drift (evidence hash pins pre-HEAD tooling), so the
+candidate-build report refresh lands with its owner's re-pin, not here.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+AM-040 checkpoint 2026-09-11: all 64 functions in `0x0048C7B4..0x0048D866`
+are reviewed MIT C with 52 passing host tests, and all 64 are registered
+as overlay leaves with builder-verified placement pins (leaf-level
+canonical verification passes). Production routing is not yet complete:
+the component/package/manifest gates are blocked by pre-existing
+environment drift (LLD 23.1.1 vs pinned 23.1.0) and a foreign in-flight
+manifest edit, plus retained holder/literal-pool data. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+XC-002 checkpoint 2026-09-11: HEAD unchanged so no re-pin due; both gates
+still red on owner lanes. New: readiness fails at the BL partition check
+(gitignored build-report rebuilt from uncommitted BL-006 overlay reads
+59557/87437 vs manifest 59013/87981) ahead of the known spotmgr pads;
+license drift is now 4 untracked CD-001 MIT files (298 -> 302 / 1112 -> 1116
+on landing). Touch/Case/EM9305 censuses clean, no transparent registration
+due, ledger inputs identical; 21/21 reviewed-source + Touch tests pass. See
+`research/tooling-completion-readiness-truthfulness.md`; hardware
+qualification stays blocked by unavailable physical evidence.
+
+CD-001 checkpoint 2026-09-11: four UART stage-1 polled-UART leaves
+(`0x10000584`/`0x100005a0`/`0x10000620`/`0x10000640`, 124 bytes, zero fill)
+are reviewed MIT source with 476 decoded stock/source/oracle cases and 10
+passing tests, registered in the experimental codec builder; CD-001 reaches
+372/8192 source-owned bytes. Production routing is not yet complete: the
+shared candidate and package gates are blocked by a pre-existing stale
+`rtc-init` baseline (predates HEAD tooling, owner lane not CD-001), and the
+candidate ledger/manifest re-pins wait on that gate. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+BL-006 checkpoint 2026-09-11: hardware-control and MSPI ISR pools
+(`0x00423D9A`/`0x00423DCE`/`0x004267FE`/`0x00426BFE`, 36 bytes) are
+reviewed MIT source with byte-exact rebuilds and a 4-test verifier;
+BL-006 reaches 580/5892 source-owned bytes. The component builder
+passes standalone; the shared `source` gate is blocked by another
+lane's uncommitted apollo_main overlay change (pre-existing
+`littlefs-snapshot` failure, owner lane not BL-006). Hardware
+qualification stays blocked by unavailable physical evidence.
+
+AM-040 checkpoint 2026-09-12: all 64 functions in
+`0x0048C7B4..0x0048D866` re-verify as registered overlay leaves in a
+private canonical core-stage build (2,058/2,058 leaves, pins unchanged
+at 385,460 / `8c93066a…`); 52 host + 39 transparent tests pass.
+Production routing still incomplete: the full component build aborts
+in the LC3 route experiment on pre-existing LLD drift (pinned 23.1.0
+vs host 23.1.1, LC3 lane's), blocking the shared build report,
+manifest sync, flash-plan flip, and verify-artifacts here. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+XC-002 checkpoint 2026-09-12: HEAD unchanged (`284b98a7`), no re-pin
+due — both gates still red on owner lanes (BL-006 partition mismatch,
+BL spotmgr pads, 6 CD-001 untracked MIT files with SPDX verified).
+`reviewed_sources.json` needs no registration; ledger inputs match
+the committed rendering (7,449 functions / 1,394,848 bytes), so no
+regeneration. Tests: reviewed-source + Touch 21/21, Case 2/2 pass.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+AM-040 checkpoint 2026-09-12 (re-run): recorder-profile residue
+stripped from `overlay.json` (3,534 items back to canonical shape);
+all 64 functions in `0x0048C7B4..0x0048D866` re-verify as registered
+overlay leaves in a fresh private canonical core-stage build
+(2,063/2,063 leaves, overlay 385,460 / `8c93066a…`, stage component
+matching `core_stage_expected`); 52 host + 39 transparent tests pass.
+Production routing still incomplete: the full component build aborts
+in the LC3 route experiment on pre-existing LLD drift (pinned 23.1.0
+vs host 23.1.1, LC3 lane's), blocking the `littlefs-snapshot`
+aggregate re-pin, manifest sync, flash-plan flip, and
+verify-artifacts here. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+BL-006 checkpoint 2026-09-12 (partial): 9 more bootloader literal
+regions (208 B: MX25 event/log/timing/init/driver pools plus the
+ADR-selected QE "set" text) are now produced from reviewed MIT C as
+`in_place_data`, byte-exact with per-slot loader and reviewed-meaning
+evidence; item total 788/5,892 bytes. The 214-byte shared
+log-pointer pool at `0x00420FF2`, dead in-place tails (no fill
+primitive), and the unidentified `0x00420C14` head word remain
+retained stock. Direct component build passes with unchanged
+provider hash; the `make` wrapper is blocked upstream by another
+lane's `littlefs-snapshot` pins. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+The stage-1 ID-cell/clock-source tranche adds two reviewed codec leaves
+(42 stock bytes: a 12-byte ID-word getter and a byte-identical 30-byte
+PMU source-select bit modifier, `research/gx8002-uart-stage1-idbit-source.md`).
+CD-001 is now 414/8,192 bytes source-owned. The shared candidate gate
+remains red on a pre-existing stale `rtc-init` baseline (HEAD helper hash
+vs pinned hash, untouched by this item); tranche admission was verified
+through the builder's own replacement path. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+XC-002 ledger watch (2026-09-12 morning): HEAD unchanged, so no ledger
+re-pin due. `completion-readiness` still fails at the BL partition
+check (gitignored report rebuilt from BL-006's uncommitted overlay;
+spotmgr pads still behind it) and the license community drift is now 7
+untracked CD-001 MIT stage-1 leaves (SPDX verified; registration waits
+for CD-001 to land). `reviewed_sources.json`, the assessment snapshot,
+and the transparent ledger verified unchanged against their inputs.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+BL-006 checkpoint (2026-09-12): the LittleFS-adjacent literal cluster
+(`0x00420FF2`, `0x00421372`, `0x0042156E`; 334 bytes, 82 named slots,
+163 verified stock loaders) is now produced from reviewed MIT C via
+bootloader `in_place_data`, byte-exact and relocation-free; the
+mapped-memory pool is live traffic consumed by shipped in-place code.
+BL-006 stands at 1,122/5,892 bytes source-owned. The component gate
+`make -C g2 bootloader-component` remains red on another lane's
+uncommitted `apollo_main` overlay work at `littlefs-snapshot`
+(pre-existing, untouched); the overlay builder itself succeeds.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+2026-09-12 AM-040 checkpoint: 64/64 leaves stay registered and
+routed with unchanged pins; 52/52 host tests re-pass. Range
+byte-accounting is now complete (172 non-function bytes: pads,
+pools, strlen leaf, holder table). Two precise follow-ups remain
+before this range is source-only: (1) source-author the 8-word state
+holder table (still read live from stock flash) and re-promote the
+nine state leaves; (2) restore the dropped WARN format argument with
+source-authored literals and re-promote `calc_cols`/`calc_rows`.
+Both wait on the LC3 lane's LLD-drift resolution, as do the manifest
+sync, flash-plan flip (coarse regions still `official_blob`; other
+lanes own their remainder), and `verify-artifacts`. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+The CD-001 XIP tranche adds two reviewed stage-1 transfer leaves (read
+at package 0x1910, write at 0x1990): 256 retained bytes become 250
+compiled C bytes plus 6 generated fill bytes, with 1,152
+stock/source/oracle trace cases and 8 host tests passing; CD-001 stands
+at 670/8,192 bytes source-owned. Shared candidate and package
+artifacts regenerate from the green run owned elsewhere, so pinned
+records are untouched here. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+XC-002 midday 2026-09-12: HEAD unchanged, so no ledger re-pin was due.
+Completion-readiness still fails at the BL partition check (BL-006's
+uncommitted overlay; spotmgr pads behind it), and the license community
+census drift grew 7 to 8 untracked MIT files with CD-001's new XIP leaf
+(followup 298 to 306 / 1112 to 1120 on landing). Touch/Case/EM9305
+censuses, reviewed-source registration, and both generated reports were
+re-verified clean against their inputs. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+AM-040 2026-09-12: the 64 LVGL grid/style/string/state leaves for
+`0x0048C7B4..0x0048D866` remain reviewed MIT C, overlay-registered,
+and pin-verified (fresh compile matches 64/64; private core-stage
+replica green at 2,063/2,063 leaves; 52 host + 39 transparent tests
+pass), but the range is still `official_blob` in the flash plan, so
+no source-ownership is claimed yet. The flip waits on the LC3 lane's
+LLD drift and the atomic manifest re-pin. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+BL-006 2026-09-12: the CLKGEN pool (`0x00426D2C`, 28B) and four
+zero-alignment fills (8B) are now reviewed MIT C, overlay-registered,
+and pin-verified (fresh compile matches 5/5; private component build
+carries them byte-identically; 6/6 host tests pass), bringing BL-006
+to 1,158/5,892 bytes. The pool is dead layout with reviewed meanings,
+not live traffic; remaining 34 regions (4,734B) need a dead-tail fill
+primitive, mixed-span splits, or consumer routing. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+CD-001 PMU-fill checkpoint: the stage-1 descriptor-fill routine
+(package 0x7D0, 180 bytes) is now production-routed reviewed C in the
+experimental codec candidate (142 compiled bytes + 38 generated fill,
+2,438 decoded-trace cases plus 11 host tests). CD-001 stands at
+850/8,192 source-owned bytes; the literal pool, caller thunk, vector
+table, init/handshake/receive/configure/checksum routines and the rest
+of the span stay retained, and hardware qualification remains blocked
+by unavailable physical evidence.
+
+XC-002 afternoon 2026-09-12: HEAD unchanged, so no ledger re-pin was
+due. Completion-readiness still fails at the BL partition check
+(build-report 60135/86859 vs manifest pins 59013/87981, delta grown to
++1122/-1122 on BL-006's uncommitted overlay), with the spotmgr
+raw-halfword gate red behind it; license community drift grew 8 to 9
+untracked MIT files with CD-001's new pmufill leaf (followup 306 to 307
+/ 1120 to 1121 on landing). Touch/Case/EM9305 censuses,
+reviewed-source registration, and both generated reports were
+re-verified clean against their inputs. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+## 2026-09-12 AM-040 checkpoint (partial)
+
+64/64 leaves reviewed MIT C, overlay-registered with 64 patch sites, pins
+re-verified 64/64 via private replica (2,063/2,063, 385,460 / `8c93066a…`);
+52 host + 39 transparent tests pass. Range still `official_blob` in the flash
+plan: `core-component` is red at the `littlefs-snapshot` aggregate gate and
+the manifest splice (`sync-manifest`/`pin-package`) waits on the atomic
+re-pin plus a fresh component build. Transparent admission of the 64
+(`reviewed_sources.json`) is an open follow-up. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+CD-001 vectors checkpoint: the stage-1 vector table (package 0x50, 256
+bytes) and both trap entries (package 0x180, 8 bytes) are now
+production-routed reviewed assembly in the experimental codec candidate
+(byte-exact linked image, 5 verifier cases plus 9 host tests),
+unblocking the "vector table blocked on trap targets" remainder from the
+PMU-fill pass. CD-001 stands at 1114/8,192 source-owned bytes; the
+init/handshake/receive/configure/checksum routines, literal pool, caller
+thunk, and the rest of the span stay retained. The shared candidate gate
+is red at a pre-existing rtc-init pin drift owned elsewhere, and hardware
+qualification remains blocked by unavailable physical evidence.
+
+BL-006 float-pool checkpoint: the float-ratio/multiplier/select bound
+pools (`0x00427032`, `0x0042714C`, `0x00427308`, 42 bytes) are now
+production-routed reviewed C with every value spelled by its reviewed
+consumer and every loader confined to replaced stock spans, plus two
+layout-only reserved words (`0x00420C14`, `0x00422D7A`). BL-006 stands
+at 1208/5,892 source-owned bytes at overlay level (component build +
+host tests); the flash-plan manifest re-cut for data pools was never
+done for any BL-006 cluster and remains follow-up work, and hardware
+qualification remains blocked by unavailable physical evidence.
+
+XC-002 evening checkpoint: HEAD unchanged so no re-pin due; both gates
+still red on owner lanes with exact followups -- BL partition delta now
++1208/-1208 (re-pin is BL-006's landing chore), license community drift
+now 10 CD-001 MIT files (298->308 / 1112->1122 once CD-001 lands), plus
+the committed spotmgr-pad raw-encoding failure (BL owner). Touch, Case,
+and EM9305 censuses verify clean, `reviewed_sources.json` needs no
+registration (4 functions / 34 bytes, no new transparent refs), and both
+snapshot ledgers were correctly left unregenerated (readiness red;
+transparent rebuild is XC-004's pipeline). Deliberately did not re-pin
+either drift to the live tree: both are uncommitted in-flight work and
+pinning a moving file set would corrupt the committed ledger. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+BL-006 checkpoint 2026-09-12 (partial): the MSPI state-literal
+island/pool (`0x00424AEA`, `0x00424BD4`) and the boot-island tail
+(`0x0041F9CC..0x0041F9D8`) are now produced from reviewed MIT C as
+named-field `in_place_data` (34B; BL-006 now 1242/5892 source-owned).
+The `0x00424AEC`/`0x00424BD4`/`0x00424BD8` slots are address-live in
+byte-exact shipped command-queue bodies; the remaining slots are
+pinned as stale/unloaded/reserved layout with loader sets that force
+re-derivation on change. The stock image stays an oracle only; no
+bytes flow into the build. Still open: the dead-tail fill primitive,
+`0x00427588`, `0x00427E54`, and all other components; hardware
+qualification stays blocked by unavailable physical evidence.
+
+### 2026-09-12 AM-040 checkpoint (partial)
+
+`0x0048C7B4..0x0048D866` (64 fns, 4,102 B) remains production-unrouted:
+leaves are reviewed and overlay-registered but the flash plan still
+records the range as `official_blob`. The canonical build is refused by
+two pre-existing gates outside this item — the `littlefs-snapshot`
+whole-overlay aggregate pin and, behind it, the LC3 service-audio
+route-experiment toolchain identity (host LLD 23.1.1 vs pinned 23.1.0,
+no alternate linker on the Mac). Re-verified this turn: 52/52 host
+tests, stage replica 2,063/2,063 green, transparent-test 39/39.
+Follow-ups: LC3-lane LLD resolution, atomic manifest re-pin, 64
+transparent `reviewed_sources` admissions. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+### 2026-09-12 CD-001 checkpoint (partial, analysis only)
+
+Codec stage-1 item CD-001 unchanged at 1,114/8,192 source-owned bytes:
+this pass added no production-routed source because the remaining
+leaves cannot close yet — `0x10000D98`/`0x10000EA0` gate every other
+region, several 62–454 B envelopes are noreturn trap/hang tails, and
+the data tail (`0x10001E60..0x10002000`) is compiler layout that must
+stay retained rather than be copied as arrays. The stock image stayed
+an oracle only. New evidence: `0x100003BC` identified as SDK
+`spl_get_time_ms()` (pinned grus commit), the full `rts`/caller census
+and fallthrough map in
+`docs/research/gx8002-uart-stage1-tickdiv-source.md` route the
+dispatcher tranches next. Still open: all of the above plus the other
+five components; hardware qualification stays blocked by unavailable
+physical evidence.
+
+### 2026-09-12 XC-002 checkpoint (partial, ledger truthfulness)
+
+HEAD unchanged (`284b98a7`), so no ledger re-pin was due and none was
+made. `make -C g2 completion-readiness` stays red on owner lanes: the
+BL partition delta grew +1208/-1208 to +1242/-1242 (BL-006's
+uncommitted overlay, its landing chore), the raw-encoding gate still
+fails only on the committed spotmgr pads (BL owner), and the license
+census still drifts by the same 10 CD-001 untracked MIT stage-1
+leaves (followup 298->308/1112->1122 on landing). Touch/Case/EM9305
+censuses verify clean, no new reviewed C needs transparent
+registration (4 functions, 21/21 tests pass), and neither
+`assessment-data.json` nor the transparent ledger was regenerated
+while the generator is red. Full record in
+`docs/research/tooling-completion-readiness-truthfulness.md`. No
+hardware operation; hardware qualification stays blocked by
+unavailable physical evidence.
+
+AM-040 checkpoint 2026-09-12: the `0x0048C7B4..0x0048D866` LVGL
+grid/state range stays `official_blob` — its 64 reviewed MIT leaves
+are overlay-registered and stage-verified (52 host + 39 transparent
+tests pass) but not yet production-spliced. Canonical splice waits
+on the LC3 lane's LLD 23.1.0-prefix drift and the atomic
+littlefs-aggregate re-pin; transparent admission is infeasible for
+these behavioral (non-byte-exact) leaves without weakening the
+`payload == stock` gate. Full record in
+`docs/research/lvgl-grid-engine-closure.md`. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+Stage-1 delay checkpoint (2026-09-12, CD-001 partial): the UART boot
+stage-1 millisecond delay (package `0x44C`, 112 bytes) is now reviewed
+C identified against pinned SDK `spl_counter.c` (`spl_mdelay` /
+`spl_udelay(1000)` shapes, counter-2 register facts only, no SDK text),
+verified by 160 decoded stock/source/oracle cases and registered in the
+experimental codec candidate (92 compiled bytes + 20 fill). Its retained
+`0x1000046C` tail target and the `0x10000D98` dispatcher gating the rest
+of stage 1 remain retained stock; the dispatcher is decoded with a
+deferred clean-room draft (292 vs 264 bytes) and full followup routing.
+CD-001 stands at 1,226/8,192 source-owned. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+## 2026-09-12 BL-006 checkpoint (partial, 1326/5892 source-owned)
+
+Apollo-bootloader range `0x0041F9B6..0x00428378`: the
+`0x00427588..0x004275EA` System-PLL cluster is now produced from
+reviewed MIT C except the 14-byte dead setter prologue at
+`0x004275C4` (retained for the missing dead-tail fill
+primitive). 84 bytes admitted (60B pool + 4B cell word as
+`in_place_data`; 18B range-error setter + 2B divide-by-zero
+return as in-place leaves), each with pinned loaders/consumers
+and a byte-exact or exact-fill build. 4,566 bytes remain
+(mostly unreachable code tails + the 1316B binary32/float
+span). `make source` + manifest-region regeneration stay
+blocked by an unrelated apollo_main snapshot breakage; the
+bootloader component build and its gates pass on the current
+tree. No hardware operation. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+XC-002 checkpoint (2026-09-12, partial): HEAD unchanged so no re-pin
+due; ledgers re-verified. BL partition delta +1242->+1326 (owner
+BL-006); license drift 10->12 CD-001 MIT files (SPDX ok, owner CD-001);
+reviewed-source registration, assessment snapshot, and transparent
+ledger all need no action. Gates red on owner lanes. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+BL-006 checkpoint (2026-09-12, partial): no new source-owned bytes
+(1326/5892); the last unexamined region `0x00427E54..0x00428378`
+(1316B) is surveyed as four single-exit SPOT trim-service
+subspans with deadness pinned (no pointer words, no surviving
+branches, exact callee/pool sets; new 8-test verifier green).
+It stays retained for the missing dead-tail fill primitive or
+full reconstruction, as do the 26 dead tails, 2 dead heads,
+and 1 prologue. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+AM-040 checkpoint (2026-09-12, partial): Apollo-main range
+`0x0048C7B4..0x0048D866` (64 LVGL grid + string/state leaves,
+4,102 B) fully reviewed MIT C, overlay-registered, and
+replica-verified (2,063/2,063 stage leaves, pins unchanged);
+52 host + 39 transparent tests pass with no production changes.
+Range stays `official_blob`: manifest splice waits on the
+LC3-lane LLD fix and the atomic littlefs-aggregate re-pin, and
+transparent admission stays closed by the `payload == stock`
+negative result. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+CD-001 checkpoint 2026-09-12: codec stage-1 D98 dispatcher draft
+corrected against dumped jt1/jt2 contents (id-22 fill and check-arm
+routing fixed; 37/37 table entries plus 8 passthrough probes match)
+but still deferred — branch-transliterated C floors at 298 B against
+the 264 B envelope (structural table-vs-branch gap, 22-flag probe).
+CD-001 stays 1,226/8,192 B source-owned; rail op C routed as the next
+H-class tranche. No production routing changed; hardware
+qualification stays blocked by unavailable physical evidence.
+
+XC-002 checkpoint 2026-09-12: HEAD unchanged so no re-pin due; ledgers
+re-verified with the tools' own logic. BL partition delta holds at
++1326/-1326 (owner BL-006), license drift holds at 12 CD-001 MIT files
+(all SPDX verified; +12 manifest lines due on CD-001 landing), both
+gates still red on owner lanes. No transparent registration due; no
+hardware operation, qualification stays blocked by unavailable physical
+evidence.
+
+AM-040 checkpoint (2026-09-12, partial): Apollo-main range
+`0x0048C7B4..0x0048D866` (64 LVGL grid + string/state leaves,
+4,102 B) fully reviewed MIT C, overlay-registered, and
+replica-verified (2,063/2,063 stage leaves incl. 64/64 AM-040, pins
+unchanged at 385,460 / `8c93066a…`); 52 host + 39 transparent tests
+pass with no production changes. Range stays `official_blob`:
+manifest splice waits on the LC3-lane LLD fix and the atomic
+littlefs-aggregate re-pin, and transparent admission stays closed by
+the `payload == stock` negative result. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+BL-006 checkpoint (2026-09-12, partial): 20 more bytes from
+reviewed MIT C (1346/5892) -- the 16-byte command-queue suffix
+pool at `0x00427C80` and the 4-byte XIP aperture mask at
+`0x0042644C`, both named-field `in_place_data`, byte-exact,
+loader sets pinned by a sync-independent encoding sweep. The
+rebuilt provider is byte-identical, so no manifest or
+overlay-test pins change; the manifest region re-cut stays
+deferred (`make source` blocked by unrelated apollo_main
+littlefs-snapshot breakage). Remaining BL-006 work is dead
+code needing the fill primitive (or reconstruction) plus
+unspelled float words. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+Rail-op-C tranche (CD-001, 2026-09-12): the 266-byte stage-1 rail
+operation at package `0xBE0` is now 260 reviewed compiled bytes plus 6
+generated fill bytes in the experimental codec (672 decoded
+stock/source/oracle cases, exact unfiltered traces; 21 tests). CD-001
+stands at 1,492/8,192 source-owned bytes. The re-poll edge still needs
+the 0xDDC orchestrator frame, fill-fail exits stay leftover-dependent,
+and hardware behavior remains unqualified.
+
+Ledger-truthfulness checkpoint (XC-002, 2026-09-12): HEAD unchanged so
+no re-pin due; ledgers re-verified. BL partition delta holds
++1326/-1326 and license drift grew 12->13 CD-001 MIT files (new railc
+leaf, SPDX ok); both gates stay red on owner lanes (BL-006 re-pin,
+CD-001 landing, BL spotmgr pads). Touch/Case/EM9305 censuses and the
+transparent reviewed-source registration are clean; the assessment
+snapshot and transparent ledger were correctly not regenerated. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+AM-040 checkpoint (2026-09-12): the 64 LVGL grid/string/state leaves
+at `0x0048C7B4..0x0048D866` remain reviewed MIT C, overlay-registered
+(64 `relocated_leaves` + 64 `B.W` patch sites), with 52 host and 39
+transparent tests passing. A 64-function envelope survey now pins the
+transparent-admission follow-up precisely (27 FIT / 37 OVER under the
+transparent clang profile; per-function splits still required even
+for FIT). The range stays `official_blob` pending the LC3-lane LLD
+fix, the atomic littlefs-aggregate re-pin, and the manifest splice.
+Hardware qualification stays blocked by unavailable physical
+evidence.
+
+BL-006 checkpoint 2026-09-12: four dead tails (156 B:
+`0x00424AB2`/`0x00424B88`/`0x004250E6`/`0x00427C72`) now come
+from reviewed MIT in-place leaves, byte-exact with zero
+relocations and host-behavior-verified; BL-006 stands at 1,502
+of 5,892 bytes. Deadness is pinned by survey verdict plus a
+caller sweep, not by assertion. The remaining ~4,390 bytes are
+still `official_blob` (large MSPI tails, cmdq remainders, one
+calling tail, small tails/literals, SPOT-trim span). No opaque
+functionality was added; hardware qualification stays blocked
+by unavailable physical evidence.
+
+Rail B tranche (2026-09-12): the UART boot stage-1 rail operation at
+`0x10000A30` (350 bytes) is now produced from reviewed MIT assembly in
+the experimental codec, verified by 7,680 decoded stock/source/oracle
+cases plus 23 host tests and registered in the candidate builder;
+CD-001 stands at 1,842 of 8,192 bytes. A C draft was measured
+(470-byte floor) and deferred rather than fitted by dropping behavior.
+The remaining ~6,350 bytes are still retained stock (init/handshake/
+receive/beacon flows, rail op A, the `0xC9C` flow, both dispatchers and
+everything they gate, the `0x1378` sweep, the `0x19C0` region,
+postambles, the orchestrator, and the retained jump-table pool). No
+opaque functionality was added; hardware qualification stays blocked
+by unavailable physical evidence.
+
+XC-002 checkpoint 2026-09-12: HEAD unchanged (`284b98a7`), so no
+ledger re-pin was due. `completion-readiness` stays red on owner
+lanes: the BL partition delta grew to +1502/-1502 (BL-006's
+uncommitted overlay, its landing chore) and the license community
+drift grew 13 -> 14 CD-001 MIT stage-1 leaves (new `railb.S`,
+followup `298 -> 312` / `1112 -> 1126`). Touch/Case/EM9305 censuses
+are clean, `reviewed_sources.json` needs no addition (fleet C routes
+through overlays, not the transparent image), and neither
+assessment-data.json nor the transparent ledger was regenerated
+against the red gate. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+AM-040 checkpoint 2026-09-12: all 64 reviewed MIT leaves
+(`0x0048C7B4..0x0048D866`, LVGL grid engine + style getters +
+trailing string/state helpers) stay overlay-registered with
+builder-verified pins; 52 host + 39 transparent tests pass and the
+private stage replica is green (2,063/2,063, overlay 385,460 /
+`8c93066a…`). The range remains `official_blob` in the current
+flash plan: production routing still needs the LC3-lane LLD fix plus
+manifest splice owned outside this lane, and transparent admission
+stays closed on the evidenced envelope result. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+BL-006 checkpoint 2026-09-12: six more dead tails (+70 B) are now
+production-routed as reviewed MIT `in_place_leaves`
+(cmdq enable/disable/post/term/reset remainders plus the MSPI
+IRQ-enable remainder), each byte-exact with host-pinned behavior;
+BL-006 stands at 1,572 of 5,892 source-owned bytes with 58/77
+survey regions fully closed. The stock image remains an
+analysis/differential-test oracle only for these spans; no opaque
+functionality was added; hardware qualification stays blocked by
+unavailable physical evidence.
+
+CD-001 checkpoint 2026-09-12: rail operation A (+464 B) is now
+production-routed as reviewed clean-room assembly with a 228-case
+stock/source/oracle battery (exact unfiltered traces) and a private
+compose admission over package `0x8B0..0xA80`; CD-001 stands at 2,306
+of 8,192 source-owned bytes with the remaining leaves mapped in
+`gx8002-uart-stage1-raila-source.md`. The stock image remains an
+analysis/differential-test oracle only for these spans; no opaque
+functionality was added; the shared candidate gate stays red at the
+pre-existing `rtc-init` drift owned elsewhere; hardware
+qualification stays blocked by unavailable physical evidence.
+
+XC-002 checkpoint 2026-09-12: HEAD unchanged (`284b98a7`), so no ledger
+re-pin was due. Completion-readiness and license gates stay red on owner
+lanes (BL partition delta +1572/-1572 for BL-006; 15 untracked MIT
+stage-1 leaves for CD-001; spotmgr pads for BL), while Touch/Case/EM9305
+censuses, reviewed-source registration, and transparent-ledger inputs
+re-verify clean. Detail:
+`research/tooling-completion-readiness-truthfulness.md`. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+AM-040 checkpoint 2026-09-12: all 64 functions in `0x0048C7B4..0x0048D866`
+stay reviewed MIT C, overlay-registered, and replica-verified (52 host +
+39 transparent tests pass). The range remains `official_blob`: production
+splice is blocked outside this lane (canonical-build LLD/pin drift), and
+`reviewed_sources.json` admission stays foreclosed by 37 over-envelope
+compilations under the no-relocation gate. The stock image remains an
+analysis/differential-test oracle only for these spans; hardware
+qualification stays blocked by unavailable physical evidence.
+
+BL-006 checkpoint 2026-09-12: four more dead-tail spans
+(0x004264F6/0x00426CC4/0x0042784C/0x004279EE, 70B) are now
+produced from reviewed MIT C as byte-exact, relocation-free
+`in_place_leaves` (9/9 host tests pass; survey grades every span
+`corroborated_unreachable_control_flow` with no `bl` caller).
+BL-006 stands at 1,642/5,892 source-owned bytes across 62/77
+regions. Remaining work in range needs the data/fill route
+(notably the mid-instruction slice at 0x004264B0) plus the big
+unreachable stock tails; the stock image remains an
+analysis/differential-test oracle only, and hardware
+qualification stays blocked by unavailable physical evidence.
+
+CD-001 checkpoint 2026-09-12: the stage-1 first PMU dispatcher
+(264 B at package 0xDE8) is now produced from reviewed assembly
+that is production-routed in the experimental codec candidate,
+with 8,370 decoded stock/source/oracle cases and 13 host tests;
+CD-001 stands at 2,570/8,192 source-owned bytes. The retained
+second dispatcher, beacon/handshake/init regions, and tables keep
+the item partial; the stock image remains an
+analysis/differential-test oracle only, and hardware
+qualification stays blocked by unavailable physical evidence.
+
+AM-040 checkpoint 2026-09-12: all 64 LVGL grid/style-getter/
+string/state leaves (`0x0048C7B4..0x0048D866`, 4,102 function
+bytes) stay reviewed MIT C and overlay-routed via 64
+`replace_apollo_am040_*` patch sites; fresh checks show
+warning-free Cortex-M55 recompiles of all four TUs, 52/52 host
+tests, and `transparent-test` 39/39 with no production changes.
+The item stays partial: the flash plan still shows the range
+`official_blob` because the lock-gated rebuild and manifest splice
+wait on the LC3 lane's LLD 23.1.1-vs-23.1.0 drift and the atomic
+littlefs aggregate re-pin, and `reviewed_sources.json` admission
+stays closed per the established transparent `payload == stock`
+negative result. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+XC-002 checkpoint 2026-09-12: HEAD `284b98a7` unchanged so no re-pin
+was due; both gates stay red on owner lanes by design. Readiness fails
+at the BL partition check (gitignored bootloader report now
+60655/86339 vs manifest 59013/87981: delta +1642/-1642; re-pin is
+BL-006's landing chore), the raw-encoding check still names only the
+known spotmgr pads, and the license census drift holds at 15
+uncommitted CD-001 MIT stage-1 leaves (followup `298 -> 313` /
+`1112 -> 1127` once CD-001 lands). `reviewed_sources.json` needs no
+action (4 functions; fleet C routes through overlays, not the
+transparent image); assessment-data.json and the transparent ledger
+were not regenerated (generator red; inputs unchanged at 7,449
+functions / 1,394,848 bytes). Tests: transparent+Touch 21/21 pass,
+readiness 0 ran (setUpClass), license 4 ran + 1 census error.
+Hardware qualification stays blocked by unavailable physical
+evidence.
+
+BL-006 checkpoint 2026-09-12: seven dead tails (terminal
+returns 0x00426C22/0x00426C70, cmdq status 0x00427ABE, binary32
+remainder 0x00427D84, syspll alternate entry 0x004275C4,
+disable mini-tail 0x00425162, irq-disable publish 0x004264B2)
+plus four fragment/pad/literal data slots (0x00425160/66/68,
+0x004264B0) are now production-routed from reviewed MIT C,
+byte-exact with zero relocations; two out-of-span branches use
+reviewed explicit encodings cross-checked by offset-identical
+assembler probes. BL-006 stands at 69/77 regions (1,722 of
+5,892 closed-region bytes; +84 newly source-owned this turn);
+8 regions (4,170 B) remain. The item stays partial: the
+flash plan still shows the range `official_blob` because the
+lock-gated `make -C g2 source` rebuild is blocked at the
+`littlefs-snapshot` prereq by another lane's uncommitted
+apollo_main change, and the canonical-manifest contract test
+stays red on that stale manifest (both pre-existing, untouched).
+Hardware qualification stays blocked by unavailable physical
+evidence.
+
+## CD-001 checkpoint 2026-09-12 — rail postamble (60 B)
+
+The stage-1 rail postamble (`0x10001D9C`, package `0x1DEC`, 60 B) is
+now produced from reviewed assembly that is production-routed through
+the experimental codec builder (`uart-stage1-postamble`): 2,268
+decoded stock/source/oracle cases and 14 host tests pass, and the
+linked payload is byte-identical to the stock envelope. CD-001 stands
+at 2,630/8,192 bytes source-owned. The remaining 5,562 bytes still
+depend on retained stock; the mapped-but-deferred `0x10000EA0`
+second dispatcher (noreturn state machine shared with the first
+dispatcher) is the critical path. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+## XC-002 checkpoint 2026-09-12 — ledgers re-verified, no re-pin due
+
+HEAD `284b98a7` is unchanged, so no ledger re-pin was due. The
+completion-readiness gate still fails at the BL partition check
+(delta holds at +1642/-1642; BL-006's landing chore) with the
+spotmgr raw-pad failure masked behind it (BL owner's), and the
+license census drift grew 15->16 files on CD-001's untracked MIT
+postamble leaf (CD-001's landing chore: `298 -> 314` /
+`1112 -> 1128`). Touch/Case/EM9305 censuses are clean,
+`reviewed_sources.json` needs no action (fleet C routes through
+component overlays/candidates, not the transparent image), and
+neither `assessment-data.json` nor the transparent ledger was
+regenerated (readiness still red; rebuild stays XC-004's pipeline).
+Hardware qualification stays blocked by unavailable physical
+evidence.
+
+AM-040 re-run 2026-09-12: grid/state leaves re-verified (52 host +
+39 transparent tests pass, replica green, pins unchanged); range still
+`official_blob` pending the other-lane LC3 LLD + littlefs splice.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+BL-006 2026-09-12: allocator/error-resume dead interiors closed
+(+58B reviewed MIT C; 1,780/5,892B, 71/77 regions). `0x0042799E`
+and `0x00427B90` now build byte-exact as in-place leaves with
+host-verified twins and probe-pinned out-of-span branch
+encodings; live behavior stays with the AmbiqSuite-adapted cmdq
+services. Six regions (4,112B) remain. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+CD-001 2026-09-12: UART-configure block closed (+208B reviewed
+assembly, 2,838/8,192B source-owned). The shared
+`gx8002-source-candidate` gate stays red on a foreign evidence
+pin (`build_transparent_image.py` hash moved at HEAD vs the
+rtc-init baseline); the uartcfg tranche itself verifies (1,500
+cases + 15 tests) and its builder replacement row is admitted.
+Hardware qualification stays blocked by unavailable physical
+evidence.
+
+BL-006 2026-09-12: MSPI dead interiors closed (+2,792B reviewed
+MIT C; 4,572/5,892B, 76/77 regions). Five spans (`0x004248E2`,
+`0x004263E0`, `0x0042612C`, `0x00424E84`, `0x0042423C`) now
+build byte-exact as in-place leaves with call relocations,
+reviewed out-of-span encodings, and host-verified twins; live
+behavior stays with the AmbiqSuite-adapted MSPI services. Only
+the 1,316B binary32/SPOT span at `0x00427E54` remains (needs
+the dead-tail fill primitive). Hardware qualification stays
+blocked by unavailable physical evidence.
+
+XC-002 2026-09-12: completion-readiness and transparent ledgers
+re-verified truthful at HEAD 284b98a7 with no re-pin due. Both gates
+stay red on owner lanes (BL partition +4576/-4576; 17 uncommitted
+CD-001 MIT files); the committed assessment-data.json and
+transparent-source-ledger.md are correctly unregenerated while red /
+stage-absent, and no new reviewed C qualifies for transparent
+registration. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+AM-040 2026-09-12 01:48: 64/64 leaves stay reviewed MIT C and overlay-routed
+with replica-verified pins; 52 host + 39 transparent tests pass. Range
+`0x0048C7B4..0x0048D866` still `official_blob`: manifest splice waits on the
+other lane's LLD-drift resolution and the atomic littlefs aggregate re-pin.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+BL-006 2026-09-12 done: the Apollo bootloader range
+`0x0041F9B6..0x00428378` (5,892 bytes, 77 regions) is now
+fully produced from reviewed MIT C as in-place leaves and
+named-field data; the manifest bootloader section is synced
+and `test_bootloader_core_overlay.py` passes 14/14. The
+`make -C g2 source` chain stays blocked upstream at another
+lane's `littlefs-snapshot` prerequisite, and hardware
+qualification stays blocked by unavailable physical evidence.
+
+## CD-001 checkpoint 2026-09-12 — second PMU dispatcher body (476 B)
+
+The stage-1 second PMU dispatcher body (`0x10000EB8`, package `0xF08`,
+476 B) is now produced from reviewed clean-room assembly that is
+production-routed through the experimental codec builder
+(`uart-stage1-pmusecond`): 2,688 decoded stock/source/oracle cases and
+10 host tests pass, with arm-address coincidence (two documented
+reviewed-form deviations, not byte identity). The retained 24-byte
+entry head stays retained stock (inline-pool toolchain change needed),
+and the dispatch reads slot id-7, so id 25 reads the last in-bounds
+slot — the id-25 guard-hole theory is retracted. CD-001 stands at
+3,106/8,192 bytes source-owned. The remaining 5,086 bytes still depend
+on retained stock; the UART-config block, handshake/init/beacon, the
+`0x10001094` flow, the `0x10001378` sweep, the orchestrator, and the
+`0x10001E60..0x10002000` tables follow. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+AM-040 checkpoint 2026-09-12: the 64 reviewed MIT leaves for
+`0x0048C7B4..0x0048D866` remain overlay-registered (64 patch sites) and
+verified (52 host + 39 transparent tests pass, TUs `-Werror` clean); the
+range stays `official_blob` because the manifest splice waits on the
+foreign-lane LC3 LLD fix and the atomic littlefs re-pin. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+XC-002 checkpoint 2026-09-12: ledgers re-verified truthful at HEAD
+`284b98a7`; no re-pin due. The BL builder and manifest agree again via
+the lane's own write path (64905 source / 82089 opaque), moving the
+readiness failure to the retained-complement pin (87981 vs live 82089);
+companion MSPI pins stay BL-006's landing chore because interval names
+changed, not just counts. License drift stands at 18 CD-001 MIT files
+pending; both gates stay red on owner lanes. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+CD-001 checkpoint 2026-09-12: stage-1 rail-configure (0x1000046C, 56 B)
+and block-clear (0x100004A4, 44 B) trap tails now reviewed byte-identical
+assembly, production-routed in the experimental codec builder; CD-001 at
+3,414/8,192 bytes source-owned (prior total corrected 3,106 -> 3,314 for
+the concurrently-landed uartcfg block). Shared candidate gate still red
+on foreign pre-existing rtc-init drift; tranche integration proven via
+the builder admission path privately. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+## Checkpoint 2026-09-12 — BL-009 gap literals (partial)
+
+BL-009 (`0x0042B9BA..0x00430470`, 5,978 retained bytes): 334 bytes of
+understood scalar literal cells are now production-routed from reviewed
+MIT C as 14 in-place data groups (first multi-placement groups in the
+bootloader component); the built provider is proven byte-identical
+with and without them. Remaining 5,644 bytes (7 code spans calling into
+BL-005, pointer tables into BL-012/opaque code, unattributed cells)
+stay retained with per-cell triage recorded for re-runs after BL-005 /
+BL-011 / BL-012 land. Shared `build/source` regeneration is blocked by
+other lanes' package pin desync, verified privately instead. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+## Checkpoint 2026-09-12 — XC-002 ledger truthfulness (partial)
+
+HEAD `284b98a7` unchanged so no committed re-pin was due. Ledgers stay
+truthful: readiness fails closed at the BL retained complement (live
+81755 vs pin 87981, manifest↔builder agree at 65239/81755 after BL-009's
++334B landing) and the license census names exactly 19 unregistered
+CD-001 MIT files; Touch/Case/EM9305 censuses, `reviewed_sources.json`
+(4 functions), and transparent-ledger inputs (7,449 functions /
+1,394,848 bytes) all re-verified clean with the tools' own logic.
+Re-pin (retained 81_755, source 65_239, renamed frontier intervals, +19
+MIT lines) stays the BL/CD owner lanes' landing chore. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+AM-040 checkpoint 2026-09-12: the 64 LVGL grid/string/state leaves
+(`0x0048C7B4..0x0048D866`, 4,102 function bytes) stay reviewed MIT C,
+overlay-registered (64/64 `replace_apollo_am040_*` patch sites), and
+stage-verified (52 host + 39 transparent tests pass; private replica
+2,063/2,063 green). The flash-plan range stays `official_blob`: the
+manifest splice still waits on the LC3 lane's LLD drift fix (host
+23.1.1 vs pinned 23.1.0) plus the atomic littlefs aggregate re-pin.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+BL-009 checkpoint 2026-09-12: six trim-state leaves
+(`0x0042D5C2..0x0042D6C0`, 210 function bytes) plus nine shared-pool
+peripheral-address cells (36 bytes) are now reviewed MIT C,
+overlay-registered (331 in-place leaves, 78 data groups), and
+stage-verified (9 host tests incl. 1,800 randomized behavior cases and
+dual-toolchain exactness against stock and Apollo-main analogues;
+27/27 with the gap and core-overlay suites incl. the provider
+contract). BL-009 source-owned rises 334 -> 580 of 5,978 bytes with
+zero image delta across the item window. The blocked `0x0042D5CC`
+body, the `0x0042D6C0` dispatcher, remaining code spans, pointer
+tables into BL-005/BL-012, and unattributed SRAM cells stay retained;
+shared `build/source` regeneration still waits on other lanes'
+apollo_main/manifest pins. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+The stage-1 baud beacon (`0x100004D0`, 180 B) and UART bring-up
+(`0x100005C4`, 92 B) are now reviewed assembly, builder-routed with
+148-case + 16-test verification; CD-001 is 3,686/8,192 bytes
+source-owned. Shared codec gates stay red on the foreign rtc-init
+baseline drift. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+AM-040 checkpoint 2026-09-12: all 64 functions
+(`0x0048C7B4..0x0048D866`: 53 LVGL grid/flex/style leaves + strcpy,
+strtoul, 10 peripheral-state helpers) stay reviewed MIT C,
+overlay-registered with builder-verified pins, and stage-verified
+(52 host + 39 transparent tests pass; private replica 2,063/2,063
+green). Flash-plan bytes remain `official_blob`; the production
+manifest splice still waits on the LC3 lane's LLD drift fix (host
+23.1.1 vs pinned 23.1.0) plus the atomic littlefs aggregate re-pin.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+XC-002 checkpoint 2026-09-12 (~04:00): HEAD `284b98a7` unchanged;
+ledgers re-verified truthful, no re-pin due. BL manifest/builder
+agree at 65485/81509 (+246B since the ~03:15 pass); readiness still
+red at the retained complement (87_981 vs 81_509) with the frontier
+interval-rename mismatch -- re-pin stays BL-009/BL-006's landing
+chore (followup: retained 81_509, source 65_485). License drift
+19->20 CD-001 MIT files (beacon.S, SPDX ok; followup 298->318 /
+1112->1132). Touch/Case/EM9305 clean, `reviewed_sources.json`
+unchanged, assessment snapshot and transparent ledger untouched (red
+gate / XC-004 pipeline). Transparent+touch tests 21/21 pass.
+Hardware qualification stays blocked by unavailable physical
+evidence.
+
+The stage-1 announce leaf (runtime `0x1000065C`, package `0x6AC`,
+124 bytes) is now reviewed byte-identical assembly, verified by 30
+decoded stock/source/oracle cases plus 15 host tests and routed
+through the experimental codec builder (`uart-stage1-announce`
+admission replica green). CD-001 stands at 3,810/8,192 source-owned
+bytes; the shared candidate gate stays red on foreign rtc-init
+drift (another lane's uncommitted tool change). Hardware
+qualification stays blocked by unavailable physical evidence.
+
+## Checkpoint 2026-09-12 — BL-009 state-flag dispatcher (partial)
+
+BL-009 (`0x0042B9BA..0x00430470`, 5,978 bytes) is now 810 bytes
+source-owned: this pass routed the self-contained `0x0042D6C0`
+dispatcher (222 bytes, byte-exact under both reviewed toolchains,
+Apollo main twin `0x005A08E4`) and two identified pool cells (8
+bytes). The blocked `0x0042D5CC` body (opaque BL-005 call), the
+unattributed `0x0042D848` tail, six code spans, and pointer tables
+into BL-005/BL-011/BL-012 remain. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+## Checkpoint 2026-09-12 — AM-040 LVGL grid span (partial)
+
+AM-040 (`0x0048C7B4..0x0048D866`) stays 64/64 leaves reviewed MIT C,
+overlay-registered, and pin-verified (52 host + 39 transparent tests
+pass; four-TU recompiles `-Werror` clean). The range is still
+`official_blob` in the production flash plan: the manifest splice
+waits on the LC3-lane LLD fix and the atomic littlefs re-pin.
+Hardware qualification stays blocked by unavailable physical
+evidence.
+
+## Checkpoint 2026-09-12 — XC-002 ledger truthfulness (partial)
+
+HEAD `284b98a7` unchanged; no re-pin due. Ledgers re-verified
+truthful: readiness red on the BL retained complement (live
+65715/81279 vs pin 59013/87981; manifest and builder agree, rename
+adaptation is the BL owner's chore), license drift 20 -> 21 CD-001
+MIT files (SPDX ok, registration waits on CD-001's landing), and no
+transparent registration due (4 reviewed functions; fleet C routes
+through component overlays/candidates). assessment-data.json and the
+transparent ledger were not regenerated while their inputs fail or
+are unchanged. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+The stage-1 handshake leaf (`0x100006D8`, package `0x728`, 168 bytes)
+is now reviewed byte-identical assembly in the experimental codec
+builder (`uart-stage1-handshake`: 15 target cases, 13 host tests,
+admission replica green). CD-001 stands at 3,978/8,192 source-owned
+bytes; the shared candidate gate stays red on the foreign `rtc-init`
+baseline drift, which is outside this item's scope. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+### Submission chain reads burst sizing from its descriptor state
+
+- Replaced fixed setup burst results in the owned-storage submission/completion
+  chain with 24 decoded burst calls using the same descriptor words produced
+  by the source defaults and buffer-entry path. Independent checks cover both
+  ordered descriptor reads and the burst enum result.
+- Both native macOS regressions pass, retaining 72 submissions and 12 completed
+  callbacks. Broader stock/source burst tests continue to cover nondefault
+  sizes. Other setup/ISR/release effects, startup and physical transfer remain
+  unqualified; full source-only firmware integration is still outstanding.
+
+### Submission chain executes linked cache cleaning
+
+- Replaced the cache boundary in the source-owned submission/completion chain
+  with 18 decoded executions of the cache-clean routine from the same ELF.
+  Independent command oracles check exact transfer ranges and cache-register
+  writes, including zero and signed-negative sizes and allocation failure.
+- Both native macOS regressions pass, including broader cache composition.
+  This is additional execution evidence; physical coherence, remaining helper
+  effects, startup and complete source-only firmware remain unqualified.
+
+### Submission chain consumes relocated channel selection
+
+- Replaced predetermined allocator returns with 18 decoded selections against
+  the linked DMA-state address. Independent relocated trace/state oracles
+  cover channel 0, channel 1 and exhaustion; the resulting channel continues
+  through setup, registration and completion.
+- Both native macOS regressions pass. Allocation snapshots are harness inputs
+  and selector IRQ/clock effects remain modeled in this chain. Persistent
+  allocation lifecycle, startup and full source-only firmware remain open.
+
+### Submission selector executes linked IRQ save/restore
+
+- Replaced modeled selector tokens with actual linked PSR leaf execution in
+  the buffer-to-completion chain. Each selection must disable interrupts,
+  gate the resource only while disabled, and restore the original PSR before
+  returning. Allocation success and exhaustion follow the same restoration check.
+- Both native macOS regressions pass. PSR architectural semantics and gate
+  MMIO remain modeled; startup, physical concurrency and complete source-only
+  firmware integration remain outstanding.
+
+### Submission allocation executes the linked clock gate
+
+- Replaced the selector's modeled resource gate with 12 decoded gate/lookup
+  calls against the same ELF's compiled clock table. Independent register-write
+  oracle checks effects while decoded IRQ state is disabled.
+- Both native macOS regressions pass, including completion/deallocation clock
+  composition. MMIO register stimuli and architecture semantics remain modeled;
+  transfer programming, persistent allocation lifecycle, startup and complete
+  source-only firmware integration remain outstanding.
+
+### Transmit setup composes decoded transfer wrapper
+
+- Added 144 stock/source setup/transfer combinations with 96 decoded transfers.
+  Independent checks cover the full UART-generated config tuple, forwarded
+  stack config pointer, descriptor-cache request and ordered DMA enable writes.
+- Setup retains stock's ignored transfer-error result while allocation failure
+  submits no transfer. Both native macOS regressions pass.
+- Configure and descriptor-cache effects remain modeled in the transfer frame;
+  physical DMA and complete source-only firmware integration remain unfinished.
+
+### Nested transfer executes descriptor-cache cleaning
+
+- Replaced modeled descriptor-cache effects in setup/transfer composition with
+  48 decoded cache-clean executions. Independent oracles verify the 416-byte
+  descriptor range and exact cache-register commands; configuration failure
+  must skip cleaning and channel-enable writes.
+- Native macOS regression passes across 144 setup cases and 96 transfers.
+  Configure effects, physical coherence and complete source-only image
+  integration remain outstanding; no hardware execution claim is made.
+
+### UART setup reaches decoded DMA configuration
+
+- Added 28 stock/source setup/transfer/configure cases with UART-generated
+  fields and actual source/destination arguments. Configuration results now
+  drive transfer branching, including descriptor-capacity boundaries and
+  signed-negative length behavior; setup still ignores transfer errors.
+- Native macOS regression passes. Configure's clear/bus/descriptor helpers and
+  transfer cache remain modeled in this check. Separate frames and explicit
+  config forwarding do not prove physical DMA or complete firmware execution.
+
+### UART configuration uses decoded bus translation
+
+- Connected the byte-exact recovered address translator to the nested UART
+  setup/transfer/configure check. All 28 cases now execute its instructions
+  for source and destination, plus descriptor-list addresses when accepted.
+- Native macOS verification passes with 80 bus-helper calls per stock/source
+  corpus. Independent expectations check conversion, call order, and omission
+  of list translation after capacity rejection. Clear/descriptors and transfer
+  cache remain modeled in this particular check; complete firmware integration
+  and hardware qualification remain outstanding.
+
+### UART configuration reaches decoded descriptor construction
+
+- Replaced the descriptor helper model in the UART setup/transfer/configure
+  check with recovered stock/source instruction execution, including decoded
+  bus translation for list links. The actual UART-generated control and
+  translated buffer addresses feed the builder.
+- Native macOS regression passes: 28 configurations and 24 descriptor calls
+  per stock/source corpus. Independent checks cover every descriptor word,
+  incrementing source/fixed destination, terminal flags, signed remainder,
+  untouched sixth words, and memory beyond the used list. Capacity rejection
+  must skip descriptor construction.
+- Descriptor memory is still isolated from configuration MMIO; clear and
+  transfer cache remain modeled in this check. This is integration evidence,
+  not complete firmware admission or hardware qualification.
+
+### UART configuration clear and descriptor cache decoded
+
+- Connected recovered DMA-clear instructions to all 28 configurations, checking
+  the five ordered status-clear register writes and execution before address
+  translation/list construction, including capacity-rejected transfers.
+- Connected decoded cache cleaning to the 24 accepted descriptor builds. Added
+  a configurable list address to the transfer executor so configuration and
+  transfer now use the same 0x20060000 descriptor address; independent checks
+  require the 416-byte clean after construction and skip it after rejection.
+- Native macOS nested regression and standalone transfer verification pass.
+  This still uses separate execution frames/memory; physical MMIO/cache effects
+  and complete source-only firmware integration remain unqualified.
+
+### RTC source admission dependency refreshed
+
+- Re-ran the complete RTC initializer aggregate on native macOS, including
+  upstream identity, decoded core, gate/start/clock/IRQ/printf compositions and
+  clock dependency verification. The 72-byte compiled RTC payload, function
+  envelopes and all behavioral results remain unchanged.
+- Compared fresh reports recursively: the only difference was the recorded
+  build_transparent_image.py hash in the clock dependency. Refreshed that hash
+  in the clock and RTC reviewed baselines; retained strict full-report equality.
+- Exercised reviewed_replacements against the actual freshly built RTC ELF:
+  one 72-byte envelope accepted. This resolves the observed RTC baseline drift;
+  it does not prove the full candidate build or source-only completion.
+
+### DMA clear registered for source candidate admission
+
+- Added a source-admission/export wrapper for recovered DMA clear C and
+  registered it with the codec candidate builder. The existing decoded
+  qualification covers 96 channel/device combinations, exact ordered register
+  effects and preserved ABI. Source and evidence hashes remain pinned.
+- Native macOS compilation and strict reviewed_replacements validation accept
+  36 compiled bytes for the complete 36-byte envelope at package offset 0xcd90.
+  No stock bytes are used for this replacement payload.
+- The broader codec build launched before this registration is still running
+  as exec session 33012, logging to build/codec-current-build.log. Its result
+  cannot validate the newly registered entry; rebuild after resolving its next
+  result. Full firmware source-only completion and hardware qualification remain
+  outstanding.
+
+### DMA bus translator registered for source admission
+
+- Added authenticated source-admission/export checks for recovered DMA bus
+  translation and registered the helper in the codec candidate builder.
+  Admission requires byte-exact compiled instructions and the decoded mapping
+  corpus of 131388 inputs, including dense alias boundaries and both ends of
+  every 64KiB block, with ABI preservation.
+- Native macOS export and strict reviewed_replacements validation accept all
+  20 bytes at package offset 0xd1ec from compiled C. Corrected the export path
+  during validation and regenerated the pinned evidence before admission.
+- The earlier codec build remains live as exec session 33012, with no result
+  yet. It predates this registration. Whole-image integration, remaining stock
+  ownership and physical execution still require completion.
+
+### Descriptor builder registered for source admission
+
+- Added an admission/export wrapper for recovered DMA descriptor C and
+  registered it in the codec candidate builder. Qualification executes 1920
+  stock/source construction cases with decoded source bus translation, plus
+  1536 configure/descriptor calls with independent address/control checks.
+- Native macOS export and strict reviewed_replacements verification accept
+  156 compiled bytes inside the 204-byte function envelope at 0xcdb4. Admission
+  rejects overflow or any separate source data section. The unused envelope
+  tail is generated padding under the existing candidate composition policy.
+- Evidence hashes cover the source builder, decoded executor, configuration
+  composition and interpreter. This remains finite experimental qualification;
+  physical DMA and complete source-only execution remain unproved. The prior
+  broad build is still live as session 33012 and predates these registrations.
+
+### DMA configuration registered for source admission
+
+- Added a qualified source export and codec builder registration for DMA
+  configuration. Admission combines 576 full configuration cases, 46656
+  ordered early-validation cases, and the 28-case nested UART path with decoded
+  clear, translation, descriptors and descriptor cache cleaning.
+- Native macOS export and strict reviewed_replacements checks accept 324
+  compiled C bytes in the 344-byte envelope at 0xce80. Behavioral qualification
+  includes rejection before external writes and capacity rejection after the
+  stock-ordered register writes. The authenticated upstream config header and
+  recovered C layout assertions remain in use.
+- Full firmware integration still requires the broader build result and a
+  subsequent build including these registrations. Session 33012 remains live;
+  no whole-image or physical hardware completion is claimed.
+
+### DMA transfer envelope investigation
+
+- Rechecked the recovered transfer wrapper: native compilation produces 76
+  bytes against its 72-byte stock envelope. The extra code comes from the
+  compiler's descriptor address calculation compared with stock's indexed
+  load. This prevents safe in-place admission; the boundary was not expanded.
+- Tested O1/O2/O3 and disabling forward propagation, TER, reassociation,
+  induction optimization, dominator optimization, PRE and expensive
+  optimizations. All still produced 76 bytes. An empty index-materialization
+  compiler barrier also failed to reduce size and was removed.
+- Restored the original source/build flags and reran the 384-case decoded
+  transfer verification successfully. Next work requires a genuinely smaller
+  equivalent implementation or reviewed relocation, not relaxed fit checks.
+
+### Codec integration build completed; updated run started
+
+- Exec session 33012 completed successfully on macOS. Its 326092-byte hybrid
+  codec image has SHA256 33ca30a8ac1ee71ccdab62fbba663390bbb691b7abb04a06efea9845d70a23d0,
+  317 source replacement occurrences and 303627 retained stock bytes. It
+  predates the four recent DMA admission registrations and is not source-only.
+- Started an updated native build as exec session 57129, logging to
+  build/codec-current-build.log. Added flushed per-component qualification
+  output so progress is visible while individual verifiers execute.
+- Further transfer C experiments (16/8-bit index, earlier index computation,
+  equivalent return comparison) still compile to 76 bytes. Restored the
+  original source and artifact; the 72-byte envelope remains enforced.
+
+### DMA callback registration admitted
+
+- Added source admission/export and codec builder registration for recovered
+  callback registration. Native macOS verification passes 189 decoded cases
+  checking ordered callback/context stores and preserved ABI. Only channels
+  0/1 represent allocated hardware storage; extreme cases test arithmetic.
+- Strict reviewed_replacements validation accepts 16 compiled C bytes inside
+  the 20-byte envelope at 0xd0f0. Shared storage initialization and physical
+  interrupt concurrency remain unqualified.
+- Updated build session 57129 remains live, last observed at watchdog
+  initialization; it includes the previous four DMA admissions but predates
+  this callback registration. No full source-only completion is claimed.
+
+### DMA allocation source admission
+
+- Added reviewed source export and builder registration for channel selection,
+  including exhaustive occupancy checks and separate decoded clock-gate
+  composition. Normalized tuple traces to JSON lists before strict report
+  comparison; no trace values or equality requirements were removed.
+- Native macOS qualification and export validate the 76-byte C replacement
+  within its 76-byte envelope at 0xcfd8. Physical concurrent allocation remains
+  unqualified; IRQ helpers remain modeled in the base occupancy corpus.
+- Updated codec build 57129 is still live and reached flash-address checks.
+  It predates this registration and callback admission.
+
+### DMA deallocation C now fits
+
+- Re-expressed the occupancy scan as a countdown with an advancing volatile
+  byte pointer. It preserves the exact-one stopping condition and ordered
+  reads while allowing the pinned native compiler to emit ldbi.b. The result
+  is 68 bytes, down from 72, fitting the original 68-byte envelope at 0xd024.
+- Added bounded ldbi.b execution to the deallocation verifier using the existing
+  byte postincrement semantics. All 5008 stock/source state/trace cases and
+  640 decoded interrupt composition cases pass on macOS.
+- Admission/export and dependent reviewed-report refresh remain to be done;
+  the running broad build may flag changed deallocation dependency evidence.
+  Physical concurrency and full source-only firmware remain unqualified.
+
+### DMA deallocation source admitted and release dependency refreshed
+
+- Registered recovered channel deallocation in the codec candidate builder
+  with qualified export, evidence hashes, full occupancy checks and decoded
+  interrupt composition. Native macOS strict reviewed_replacements accepts
+  its 68 compiled bytes in the original 68-byte envelope.
+- Re-ran release wrapper qualification: all 384 composed cases pass. Compared
+  report fields and confirmed only deallocation_dependency changed; refreshed
+  that reviewed dependency for the smaller implementation. Release payload,
+  function envelope and remaining qualification fields are unchanged.
+- Broad build session 57129 remains live and predates this registration. Full
+  source-only firmware and hardware concurrency remain unqualified.
+
+### DMA interrupt handler source admitted
+
+- Added source-admission/export and codec builder registration for the recovered
+  DMA interrupt handler. Strict native macOS admission accepts all 92 compiled
+  bytes in its original envelope at 0xd068.
+- Qualification includes 168 status/mutation cases and 5120 nested completion
+  cases preserving allocation state across channels. Device reload, sampled
+  status, clear/deallocate ordering and callback lookup remain independently
+  checked. Physical IRQ delivery and unified memory timing remain unqualified.
+- Broad build 57129 reached the newly registered bus-address and descriptor
+  helpers. It predates this handler registration and later allocation changes;
+  completion still requires a build of the final registry and removal of all
+  remaining retained stock ownership.
+
+### Combined DMA admissions validated
+
+- Build session 57129 ended with an ldbi.b rejection from its already-loaded
+  pre-change deallocation interpreter. The on-disk updated interpreter passes;
+  this was mixed-version execution while source work continued.
+- Added codec-dma-source-admissions Make target and a fresh-process verifier
+  covering all eight new DMA exports, strict baseline checks, nonoverlapping
+  layout, compiled ownership and container regeneration. It passes on macOS:
+  788 compiled C bytes occupy 860 bytes of authenticated stock envelopes.
+- Started a new full codec build after this verification, using the current
+  registration set and current interpreters. This combined DMA check is not a
+  complete source-only image; retained firmware functionality remains.
+
+### DMA initialization source admitted
+
+- Added qualified initializer export and codec builder registration. Native
+  macOS strict admission accepts 120 compiled C bytes within the 128-byte
+  envelope at 0xd14c. Eighteen original-address cases and eighteen relocated
+  source-owned storage cases pass, including descriptor pointer bounds and
+  alignment, clock calls and decoded interrupt registration.
+- Source admission retains the original RAM locations; the relocated-storage
+  check is separate evidence and does not claim startup BSS initialization or
+  physical hardware qualification. The eight-function combined admission tool
+  predates this ninth registration and should be expanded in the next check.
+- Full build session 32888 remains live and predates initializer registration.
+  Complete source-only firmware is not yet achieved.
+
+### Nine DMA admissions checked together
+
+- Expanded the combined Make target to include initialization and added exact
+  composed-payload equality against each qualified ELF plus ownership-symbol
+  coverage checks. Native macOS run passes: nine functions, 908 compiled C
+  bytes, 988 replaced envelope bytes, valid 326092-byte container layout.
+- Inspection found incompatible cross-translation-unit declarations still to
+  reconcile: configure's signed length and volatile config pointer differ
+  from the transfer caller; transfer's unsigned channel differs from UART
+  caller declarations. These are source interface issues even where current
+  machine calling conventions coincide. Address them with dependent rebuilds.
+- Full codec build 32888 remains live. This DMA-only composition retains all
+  other stock functionality and does not establish full source-only completion.
+
+### DMA C declarations reconciled
+
+- Corrected configure's declaration in the transfer caller to int32_t length
+  and volatile config pointer, with an explicit length conversion. Corrected
+  UART RX/TX transfer declarations to uint32_t channel, matching the definition.
+- Native compiler output is unchanged for transfer and both UART setup units.
+  Decoded regression passes 384 transfer, 384 TX setup and 768 RX setup cases.
+- Re-ran configuration source admission and recursively compared the reviewed
+  report: only its nested TX/transfer source hashes changed. Refreshed those
+  hashes while retaining all code identity and behavioral checks. Other
+  dependent source-owned link reports may require fresh hash verification.
+- Full build 32888 remains in progress; these edits do not establish complete
+  source-only firmware or resolve the transfer wrapper's size constraint.
+
+### Callback declaration mismatch fixed
+
+- Matched UART RX/TX callback declarations to the implementation's three
+  uint32_t arguments and made the descriptor-address conversion explicit.
+  Updated the macOS host stub to compare the 32-bit target address token while
+  inspecting the original host descriptor through a retained host pointer.
+  Also corrected its transfer channel declaration to uint32_t.
+- clang -Wall -Wextra -Werror host build/execution and 384 TX plus 768 RX decoded
+  cases pass. Configuration admission revalidation changed only the TX source
+  hash; compiled payload and all other evidence were unchanged. Refreshed that
+  exact reviewed field after comparison.
+- Source-owned link admission evidence may still need updated source hashes.
+  Full codec build 32888 remains live; complete source-only firmware is pending.
+
+### Source-owned initialization evidence reconciled
+
+- Re-ran initializer admission after DMA declaration fixes. Recursive comparison
+  found exactly three changed source hashes in owned_link: dma_transfer,
+  uart_receive_dma and uart_transmit_dma. Linked code, symbol layout and all
+  decoded initialization results remained identical. Refreshed only those
+  reviewed hashes after checking the remaining report for exact equality.
+- The full codec build 32888 reached DMA configuration. Combined DMA admission
+  revalidation is running separately to check current evidence as a set.
+- Combined native macOS admission completed successfully: all nine functions,
+  908 compiled bytes and 988 envelope bytes pass current baseline/layout checks.
+
+### Eight DMA replacements built; UART burst admitted
+
+- Full macOS build 32888 completed successfully with 325 replacements. Codec
+  SHA256 c509b68c9d1fcce087458098700626e448f2a975926b129e26908836487ca777:
+  16212 compiled C bytes and 302767 retained stock bytes, 860 fewer retained
+  bytes than the preceding completed build. Initialization was added after
+  this run started and is not included in that result.
+- Added qualified UART burst helper export and builder registration, checking
+  decoded mapping and RX/TX compositions. Native admission accepts 114 compiled
+  bytes in the 116-byte envelope at 0xc5dc; the base corpus has 8232 cases.
+- No full build is currently running. Next full run must include initialization
+  and burst admission. All remaining retained bytes still prevent completion.
+
+### UART receive completion admitted
+
+- Started full native codec build session 87062 with initialization and UART
+  burst registrations, logging to build/codec-current-build.log.
+- Added recovered receive-completion source admission/export and builder
+  registration. Strict native admission accepts 34 C bytes in the 36-byte
+  envelope at 0xc670. All 288 direct cases and 5120 IRQ completion compositions
+  pass, covering release/cache ordering and callback lookup after mutation.
+- The running build predates this receive-completion entry. Physical callback
+  delivery, coherence and complete source-only firmware remain unqualified.
+
+### UART receive start/stop source admitted
+
+- Build 87062 completed on macOS with 327 replacements and 302523 retained
+  bytes. Codec SHA256 0427d440ffc2a37a6b0e16448421b677b841251a7efda896109992cabcddf6cd.
+  This includes initialization and burst but predates receive completion.
+- Added paired receive-control admission: 52-byte start and 40-byte stop C
+  functions linked at their original addresses from the source object. Exact
+  payload hashes match separately qualified outputs; 192 ordered descriptor,
+  MMIO and interrupt-token cases pass. Strict reviewed admission accepts both.
+- Registered the pair in the codec builder. No full build currently running;
+  next build must include receive completion and start/stop. Physical UART
+  behavior and complete source-only firmware remain unqualified.
+
+### Receive buffer placement investigated
+
+- Started full native build session 45570 with receive completion and receive
+  start/stop admissions, logging to build/codec-current-build.log.
+- Receive-buffer source still emits 100 bytes for its 96-byte envelope. Tested
+  disabling shrink wrapping, block reordering, tail merging and second
+  scheduling, plus O2; none fit (O2 grew to 108 bytes). Equivalent source
+  variations moving validation, spelling byte-address arithmetic and merging
+  returns also stayed at 100 bytes. Restored original source and compiler flags.
+- Re-ran decoded buffer verification after restoration. No envelope relaxation
+  or stock-byte substitution was introduced. A smaller equivalent source or
+  reviewed relocation remains necessary for this routine's admission.
+
+### Receive buffer instruction-level size investigation
+
+- Compared generated code with the authenticated stock entry. The candidate
+  uses wide high-register address setup and different branch layout. Tested
+  priority IRA, disabled save-slot sharing, fixed high registers, explicit
+  descriptor register constraints and the compiler's -mno-high-registers flag.
+  None fit: normal variants stayed at 100 bytes and r12 constraint grew to 112.
+- All temporary source changes and flags were removed. The original native
+  build and 2304-case decoded buffer verification pass again. These results
+  favor reviewed relocation over further repetition of these size experiments;
+  the function remains unadmitted and its 96-byte envelope is unchanged.
+- Full codec build session 45570 remains active; no source-only completion claim.
+
+### Receive buffer relocated execution verified
+
+- Current completed-image ownership has no individual generated padding span
+  of 100 bytes. No unclassified firmware range was claimed as free space.
+- Linked the existing C object at analysis address 0x10350000 with its real
+  helper targets; native linker resolves all symbols without relocations.
+  All 2304 cases match original-placement source execution, itself compared
+  against authenticated stock. The relocated routine remains 100 bytes.
+- Added reproducible verifier and report. This proves relocation preserves the
+  tested calls, fifth stack argument, state effects and ABI; it does not assign
+  physical firmware space or redirect the old entry. Those remain necessary
+  before admission. Full build 45570 remains live.
+AM-015 checkpoint (2026-09-12): the assigned Apollo interval remains wholly
+retained. Exact setter/accessor semantics are bounded, but provider
+initialization/type and the `FUN_0044D25C` logging ABI remain unresolved; no
+candidate is production-routed. See `docs/research/apollo-main-am015-44fa5e-4501d2.md`.
+
+### Receive relocation checked against container mapping
+
+- The authenticated main-image parser identifies current XIP code at
+  0x10203004..0x1020be88 (exclusive end). The analysis link at 0x10350000 is
+  outside that range. Added parsed mapping bounds and an explicit false
+  fits_current_xip_mapping result to the relocation verification report.
+- Native relocation verification still passes all 2304 cases. Executable
+  placement now has a concrete unresolved requirement: either an authenticated
+  in-range layout change or a reviewed container/loader mapping change. No
+  parser size checks were relaxed and no model/audio bytes were treated as free.
+- Full build 45570 remains live; this evidence is not runnable-image admission.

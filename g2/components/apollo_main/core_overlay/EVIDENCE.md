@@ -22474,3 +22474,133 @@ container-only, and six protected regions. No image was signed, flashed, or
 installed. Live controller PHY negotiation, peer/RF/timing, and paired-temple
 validation remains blocked by unavailable physical evidence; future qualification requires authorized responsive G2/EM9305
 physical evidence.
+
+## AM-040 LVGL grid engine and trailing string/state helpers
+
+`lvgl_grid_engine.c` (28 flex/grid leaves), `lvgl_layout_style_getters.c`
+(25 style getters), `runtime_string_helpers.c` (strcpy, strtoul), and
+`runtime_peripheral_state_helpers.c` (nine-function peripheral-state
+cluster) contribute 64 reviewed MIT leaves for `0x0048C7B4..0x0048D866`
+(4,102 function bytes; the strtoul span is 322 bytes including its
+4-byte table-delta literal). The Apple Cortex-M55 build emits 4,966
+text bytes; 23 leaves carry strict in-family call relocations (grid
+engine into style getters, mode switch into the nibble map, retry loop
+into the vote) and the rest are relocation-free absolute-address calls
+into retained providers. 64 guarded `B.W` redirects are registered in
+`overlay.json` with builder-verified placement pins; leaf-level
+canonical verification passes for all 64.
+
+Host tests (52 passing: 36 LVGL grid + 16 string/state) pin every
+stock-body SHA-256 and cover forwarding, grid distribution/placement/
+align modes, strtoul base/overflow/errno paths, the mode-switch
+transition matrix, flag branches, sample vote/retry/IRQ order, and
+flag/latch/masked-get behavior. The strtoul table arithmetic, the
+retry-loop `msr primask` restore, and the last-two getter address order
+(y_align at `0x0048C90A`, row_span at `0x0048C916`) were verified
+against capstone disassembly where Ghidra decompilation misleads.
+
+Full component/package/manifest gates remain open: the canonical
+component build is blocked by pre-existing environment drift (Homebrew
+LLD 23.1.1 vs the pinned 23.1.0 in the LC3 route experiment) and an
+in-flight foreign manifest edit tripping the freetype snapshot gate,
+neither caused by this item. Re-verified 2026-09-12 under the live
+tree: the private canonical core-stage build verifies all 2,058 stage
+leaves including all 64 AM-040 leaves (pins unchanged at 385,460 /
+`8c93066a…`); the `littlefs-snapshot` aggregate re-pin must land
+atomically with the green full build once the LLD drift is resolved.
+The holder words at
+`0x0048D704..0x0048D720`, the grid literal pool, and three 2-byte pads
+stay retained data. No image was signed, flashed, or installed. Live
+display/peripheral behavior remains blocked by unavailable physical
+evidence.
+
+Re-run 2026-09-12: the `apollo-am040-grid-state-record` profile
+residue (left by the unpromotable `prepare` state on 3,534 overlay
+items) was stripped under the integration lock, restoring the
+canonical overlay shape with pins unchanged. A fresh private
+canonical core-stage replica verifies 2,063/2,063 stage leaves
+including all 64 AM-040 leaves (overlay 385,460 / `8c93066a…`, stage
+component matching `core_stage_expected`); 52/52 host and 39/39
+transparent tests pass. Full component/manifest/flash-plan gates
+still wait on the LC3 lane's LLD-drift resolution.
+
+Re-run 2026-09-12: 52/52 host tests re-pass; warning-free
+Cortex-M55 recompiles of all four TUs; the private replica still
+aborts on the LC3 lane's LLD 23.1.0-vs-23.1.1 drift (unchanged), and
+`transparent-test` is 39/42 on 3 pre-existing release-gate failures
+from committed code in another lane (untouched). Gap-data analysis
+closed the 172 B accounting (see `lvgl-grid-engine-closure.md` and
+`g2-display-state-string-helpers-closure.md`): one live stock-flash
+read remains (8 holder words, every state-leaf call) plus a dropped
+WARN format argument in `calc_cols`/`calc_rows`, both recorded as
+follow-ups requiring re-promotion after the drift resolves. No
+production C or pins changed.
+
+Re-run 2026-09-12 (AM-040): 52/52 host tests, warning-free
+Cortex-M55 recompiles of all four TUs, private core-stage replica
+2,063/2,063 green (pins unchanged 385,460 / `8c93066a…`), transparent
+trio 39/39 (the 3 foreign release-gate failures are gone).
+`make -C g2 core-component` under the integration lock stops at the
+`littlefs-snapshot` prerequisite (aggregate pinned 380,444 /
+`21095c67…` vs live 385,460 / `8c93066a…`); manifest splice and
+`reviewed_sources.json` admission remain follow-ups. No production C,
+pins, manifest, or overlay changes made; lock released clean. No
+image was signed, flashed, or installed. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+Re-run 2026-09-12 (AM-040): 52/52 host tests, private core-stage
+replica 2,063/2,063 green (64/64 AM-040, pins unchanged 385,460 /
+`8c93066a…`, `-Werror` clean), `make -C g2 transparent-test`
+39/39 — all with no production changes. New negative result:
+transparent-profile (`armv8.1m.main`, `-Oz`) compile emits 12 bytes
+for the 10-byte `0x0048C81A` width getter with different bytes, so
+behavioral MIT leaves cannot meet the transparent `payload ==
+stock` admission contract; that follow-up stays closed without
+weakening the gate. LLD still 23.1.1 and the littlefs aggregate
+still pins 380,444 / `21095c67…`, so no lock-gated rebuild was
+attempted. No image was signed, flashed, or installed. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+Re-run 2026-09-12 (AM-040): 52/52 host tests
+(`test_runtime_lvgl_grid_engine`, `test_runtime_lvgl_grid_calc`,
+`test_runtime_str_state_helpers` via unittest), private core-stage
+replica 2,063/2,063 green (64/64 AM-040, overlay 385,460 /
+`8c93066a…` unchanged), `make -C g2 transparent-test` 39/39 — all
+with no production changes. `make -C g2 core-component` under the
+integration lock still stops at the `littlefs-snapshot`
+prerequisite (foreign aggregate drift, owner littlefs lane), and
+direct `build_component.py` stops at the reviewed Apple-clang
+identity drift (host clang 21.0.0); both pre-existing and unrelated
+to this item. Range stays `official_blob` pending the LC3-lane
+LLD fix and the atomic littlefs re-pin; `reviewed_sources.json`
+admission stays closed per the negative result above. No image
+was signed, flashed, or installed. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+Re-run 2026-09-12 (AM-040): no production changes. Fresh lock-free
+checks: all four TUs recompile warning-free under the canonical
+Cortex-M55 flags (private objects under
+`g2/build/continue-analysis/AM-040/tu-check/`), 52/52 host tests
+pass via `python3 -m unittest`, `make -C g2 transparent-test`
+passes 39/39, and all 64 `replace_apollo_am040_*` patch sites
+remain registered. Read-only probes confirm blockers unchanged
+(Homebrew LLD 23.1.1 vs pinned 23.1.0; Apple clang 21.0.0; flash
+plan still `official_blob` over `0x0048C7B4..0x0048D866`), so no
+lock-gated rebuild, manifest splice, or admission was attempted.
+No image was signed, flashed, or installed. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+Re-run 2026-09-12 (AM-040): no production changes. 52/52 host tests
+(`test_runtime_lvgl_grid_engine`, `test_runtime_lvgl_grid_calc`,
+`test_runtime_str_state_helpers`), `make -C g2 transparent-test`
+39/39, all four TUs `-Werror` clean for `thumbv7em`/`cortex-m55`
+(private objects under `g2/build/continue-analysis/AM-040/tu-check/`).
+Leaf pins re-verified against the working tree (all four file
+sha256/sizes match; 64/64 AM-040 leaves; 64 `replace_apollo_am040_*`
+patch sites; overlay 385,460 / `8c93066a…` unchanged). Read-only
+probes confirm blockers unchanged (LLD 23.1.1 vs pinned 23.1.0;
+Apple clang 21.0.0; flash plan still `official_blob` over
+`0x0048C7B4..0x0048D866`), so no lock-gated rebuild, manifest
+splice, or admission was attempted. No image was signed, flashed,
+or installed. Hardware qualification stays blocked by unavailable
+physical evidence.

@@ -31,9 +31,9 @@ PROFILES = {
         "provider": ROOT / "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
         "provider_size": 163_840,
         "provider_sha256": "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b",
-        "source_owned_bytes": 59_009,
+        "source_owned_bytes": 59_013,
         "source_owned_in_place_bytes": 41_190,
-        "opaque_base_bytes": 87_985,
+        "opaque_base_bytes": 87_981,
     },
     "linux-clang": {
         "report": ROOT / "build/canonical-provider/linux-clang/apollo_bootloader/build-report.json",

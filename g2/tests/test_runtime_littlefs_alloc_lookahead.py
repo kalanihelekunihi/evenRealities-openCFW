@@ -227,8 +227,8 @@ PRODUCTION = {
             "generated_patch_site_bytes": 16_830,
             "generated_relocated_alignment_bytes": 15,
             "generated_stock_to_overlay_alignment_bytes": 1,
-            "opaque_base_bytes": 87_985,
-            "source_owned_bytes": 59_009,
+            "opaque_base_bytes": 87_981,
+            "source_owned_bytes": 59_013,
         },
     },
 }

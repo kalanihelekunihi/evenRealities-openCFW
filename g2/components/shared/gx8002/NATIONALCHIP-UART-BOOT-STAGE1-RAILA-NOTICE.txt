@@ -1,0 +1,21 @@
+NationalChip grus SDK UART-boot stage-1 rail operation A: clean-room
+C-SKY assembly reconstruction notes (CD-001).
+
+Runtime 0x10000860, package 0x8B0, 464 bytes (460 code + 4 literal
+pool). No NationalChip source text is reproduced in
+runtime_gx8002_uart_stage1_raila.S: the file is a from-decode
+transcription whose only external facts are numeric (the fill entry
+0x10000780, the literal word 0x20002018, register/immediate
+relationships observed in the decoded flow). No SDK register map is
+used: every address comes from the fill-provided descriptor and every
+constant is a stock immediate.
+
+The stock instruction sequence is hand assembly (three pop sites, a
+shared literal pool, divs/asri/zext/tlsl/tlsr idioms, pop-per-pass
+frame drift). A private half-body C probe (entry gate, fill, first
+gates, id table, desc poll; 194 stock bytes) compiles to 108 bytes
+with the tranche flags, so C size alone would likely fit the 464-byte
+envelope; assembly is chosen so the decoded-trace battery compares
+every push/pop/drift access unfiltered instead of excluding
+compiler-private stack traffic. The probe file was scratch-only and
+is not kept in the tree.

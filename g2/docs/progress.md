@@ -1,5 +1,24 @@
 # openCFW reconstruction progress
 
+## 2026-09-12 — AM-015 continuation
+
+Revalidated `0x0044FA5E..0x004501D2` as retained `official_blob`; no bytes are
+claimed. The 13-leaf LVGL display-accessor differential verifier passed 520
+vectors again, but the candidate remains unrouted and calls retained callbacks
+at `0x0044FA1A`/`0x00440656`. See [`research/apollo-main-am015-44fa5e-4501d2.md`](research/apollo-main-am015-44fa5e-4501d2.md).
+
+## 2026-09-12 — AM-015 helper-cluster evidence
+
+Bounded Ghidra and caller excerpts identify the first AM-015 cluster as LVGL-like object geometry/state access. Object ABI, invalidation callback, and pinned-fork equivalence remain unresolved; zero bytes are source-owned. See [`research/apollo-main-am015-44fa5e-4501d2.md`](research/apollo-main-am015-44fa5e-4501d2.md).
+
+## 2026-09-12 — AM-015 bounded ownership audit
+
+AM-015 was rechecked against the current flash plan and remains a single
+`official_blob` region with no production source routing. The corpus confirms
+32 `FUN_*` bodies (1,676 function bytes) but provides no upstream identity or
+reviewed ABI; therefore zero bytes are newly source-owned. Audit:
+[`research/apollo-main-am015-44fa5e-4501d2.md`](research/apollo-main-am015-44fa5e-4501d2.md).
+
 Status date: 2026-08-30
 Compatibility target: official G2 `s200_v2.2.6.10`
 
@@ -3970,6 +3989,14 @@ with 6,689 placed and zero unresolved regions. No hardware operation occurred.
 Live register, timer, interrupt, debug, SRAM, MMIO, and cold-boot validation is
 blocked by unavailable physical evidence; future qualification requires authorized G2
 physical evidence.
+
+### 2026-09-12 — AM-015 LVGL accessor oracle checkpoint
+
+The existing clean-room `lv_display_accessors.c` candidate passes 520 bounded
+stock-oracle vectors (13 leaves × 40) with exact result/write/callback-trace
+agreement. AM-015 remains partial: it is unrouted and retained-callback
+dependent, so source-owned bytes remain 0. Audit:
+`docs/research/apollo-main-am015-44fa5e-4501d2.md`.
 The earliest retained executable remains `0x0042308E`; after retained SRAM
 literals, the sequential executable frontier is `0x00423E14`. Firmware-wide
 completeness is not claimed.
@@ -11440,3 +11467,1913 @@ and a radix conversion routine that continues past this item's boundary into
 whatever item covers `0x7204` onward. No hardware operation occurred;
 hardware qualification remains blocked by unavailable physical evidence,
 unaffected by this item.
+
+## 2026-09-11 — CD-001 UART boot stage-1 div/mod/noop leaves (partial)
+
+CD-001 covers package `0x000050..0x002050` (runtime `0x10000000..0x10002000`,
+8,192 B). The prior pass mapped the span with no admission; this pass closes
+three leaf envelopes as reviewed clean-room C
+(`components/shared/gx8002/runtime_gx8002_uart_stage1_divmod.c`, MIT):
+`open_cfw_gx8002_uart_stage1_udiv` (46 bytes in a 66-byte envelope at package
+`0x18c`), `open_cfw_gx8002_uart_stage1_umod` (40 in 58 at `0x1d0`), and
+`open_cfw_gx8002_uart_stage1_clear_bss` (2 in 4 at `0x188`, the bare-`rts`
+placeholder called from stage-1 init, matching upstream `spl_clear_bss`
+position/body with no BSS behavior claimed). The algorithm is the
+restoring division identified in pinned grus SDK `spl.c`
+`uint32_divmodsi4` (commit `8bf9ee5c`, GPL-2.0+); no SDK text is reproduced.
+`tools/verify_gx8002_uart_stage1_divmod.py` passes 16,550 decoded
+stock/source executions against an independent oracle (exhaustive small
+values, 32-bit edges, power-of-two neighborhoods, seeded randoms,
+divide-by-zero including `0/0 -> 1`); `tests/test_gx8002_uart_stage1_divmod.py`
+(8 tests) and `tests/test_gx8002_source_candidate` (7 tests) pass, and a
+private `compose` dry-run closes ownership (88 compiled C + 40 unreachable
+fill, checksums regenerate). Registered as `uart-stage1-divmod` in
+`tools/build_gx8002_source_candidate.py` with baseline
+`docs/research/gx8002-uart-stage1-divmod-verification.json` and in the
+`gx8002-source-candidate` test list. The shared `gx8002-source-candidate`
+and `codec-source-experimental` builds are the remaining step: the
+integration lock is held by XC-002, so they did not run in this pass.
+8,064 of the 8,192 bytes remain `retained_stock` (vector table, reset,
+init, baud computation, handshake/receive loop). Detail in
+`docs/research/gx8002-uart-stage1-divmod-source.md`. No hardware operation
+occurred; hardware qualification remains blocked by unavailable physical
+evidence.
+
+## 2026-09-11 — AM-040 LVGL flex/grid layout helpers and grid engine (partial)
+
+AM-040 covers `0x0048C7B4..0x0048D866` (4,274 B, 64 retained functions).
+This pass recovers 49 functions (1,112 bytes) as reviewed MIT C:
+`components/apollo_main/core_overlay/lvgl_layout_style_getters.c` (25
+`lv_obj_get_style_prop` forwards with pinned property IDs, including the
+six `uxtb`-narrowing enum getters) and
+`components/apollo_main/core_overlay/lvgl_grid_engine.c` (flex
+`width/height_with_margin`, `space_left/top`, ten grid `get_*` wrappers,
+`margin_hor/ver`, `div_round_closest`, `area_copy`, `memzero`,
+`count_tracks`, `calc_free`, `calc`, `grid_update`, `lv_grid_init`).
+Identities are pinned by assert-line numbers (width 545, height 552,
+content_width 559, content_height 569, get_child 337), the
+`LV_SIZE_CONTENT`/`LV_EVENT_LAYOUT_CHANGED=0x33` anchors, `w_layout`/
+`h_layout` bitfield order, and the `0x48CA3D` callback stored by init.
+`tests/test_runtime_lvgl_grid_engine.py` (18 tests, with
+`tests/fixtures/runtime_lvgl_grid_engine_host.c`) passes: stock-body
+SHA-256 pins for all 49 plus behavioral checks of every port; both units
+also pass the freestanding thumbv7em/cortex-m55 `-Werror` profile check.
+Remaining: `calc_cols`/`calc_rows`/`item_repos`/`grid_align` (identified,
+unported), the non-LVGL `0x0048D540..0x0048D866` cluster (unidentified),
+the `0x0048D3A0..0x0048D3C8` data words, and overlay/manifest/transparent
+registration (flash-plan bytes stay `official_blob`). Detail in
+`docs/research/lvgl-grid-engine-closure.md`. No hardware operation
+occurred; hardware qualification remains blocked by unavailable physical
+evidence.
+
+## 2026-09-11 — Completion-readiness ledger re-pin, second pass (XC-002, partial)
+
+HEAD `284b98a7` folded fleet work without re-pinning several ledgers. This
+pass re-pinned all mechanical drift and left two owner content conflicts:
+
+* Bootloader 4-byte admission (`critical_transfer_base` literal at
+  `0x00430B0C`, byte-exact): core manifest interval flipped
+  `official_blob` -> `source_compiled` (name kept: the frontier tool keys on
+  it), provider stats 59009/87985 -> 59013/87981, and the five apple-clang
+  pins in the readiness/MSPI/lifecycle/transfer-interrupt/frontier tools plus
+  two tests updated. `mspi_control` and `post_mspi_frontier` gates pass.
+* Touch receipt re-pinned via `analyze_g2_touch_final_frontier.py
+  --write-manifests` (startup.c NVIC rework); 13 frontier tests pass.
+* License community census +13 committed MIT GX8002 files (285 -> 298,
+  distributed 1097 -> 1110).
+
+Still red, both owned elsewhere: the raw-encoding gate correctly flags six
+`.short 0x0000` alignment pads in the new (unrouted)
+`runtime_spotmgr_shared_literals_42a078.c` — no census path exists for
+`.short`, so the BL owner must re-express or extend the gate with review;
+and CD-001's live untracked `runtime_gx8002_uart_stage1_divmod.c` blocks the
+license census until it lands. Live BL-006 also added 9 uncommitted
+in-place-data entries (+192 bytes) after this pass's rebuild — deliberately
+not pinned. `assessment-data.json` and `transparent-source-ledger.md` were
+verified current-or-blocked rather than regenerated (readiness still red;
+transparent source/image stages absent, inputs unchanged). Full account in
+`docs/research/tooling-completion-readiness-truthfulness.md`. No hardware
+operation occurred; hardware qualification remains blocked by unavailable
+physical evidence. This item has no flash-range component.
+
+## 2026-09-11 — BL-006 literal cluster 0x0042220E..0x00422AD4 (partial)
+
+Nine retained `official_blob` regions (192 bytes) are now produced from
+reviewed MIT C through `in_place_data`: three mode/bitmap literal seams
+(`0x0042220E`, `0x0042228E`, `0x004222D2`), the client-service pool
+(`0x00422430`), the debug-trace pool (`0x00422574`), the
+constraint-handler island (`0x004225AC`), and three two-byte alignment
+halfwords (`0x00422712`, `0x00422872`, `0x00422AD2`). New sources
+`runtime_bl006_mode_seams_42220e.c`, `runtime_bl006_debug_pool_422430.c`,
+`runtime_bl006_align_fill_422712.c` use one named struct field per
+literal word (bitmap table root, fallback/template pointers, 48/250/
+196.608 MHz instance constants, controller seam, publication cells,
+mode control words, debug counts/registers, DEMCR, handler cell plus
+message); every word's live in-place consumer was mapped by bounded
+Capstone decode of the routed spans. All payloads compile
+relocation-free and byte-identical to stock (the island hash matches the
+independently recorded `6a1c3b3c...a5b25`). Registered as 9
+`in_place_data` groups in the bootloader `overlay.json`; a private
+component build to `g2/build/continue-analysis/BL-006/component`
+succeeds with all 10 data groups placed. Verifier
+`g2/tests/test_runtime_bootloader_bl006_cluster.py` passes (4 tests:
+stock-SHA auth, byte-exact rebuild, live-consumer coverage, overlay
+registration), as do the in-place-data unit test and the 5 BL-006 survey
+tests. Audit: `docs/research/g2-bootloader-bl006-cluster-4220b2-422ad4-source-closure.md`;
+EVIDENCE.md extended. The canonical `make -C g2 bootloader-component`
++ `make -C g2 source` rebuild (flash-plan reclassification of the 192
+bytes) could not run: the integration lock was held by XC-002 then
+AM-019 for the whole pass, and the queued BL-006 acquire was released
+ungranted at time-box. Re-run needs only lock + those two targets.
+68 regions (5,700 bytes) remain: dead in-place tails (no fill primitive
+yet) and the other pools per the BL-006 seam survey. No hardware
+operation occurred; hardware qualification stays blocked by unavailable
+physical evidence.
+
+2026-09-11 evening, XC-002 ledger-truthfulness pass: registered the 2
+committed EM9305 ARC-toolchain MIT files in the license census (19 -> 21,
+distributed targets 1110 -> 1112) and taught the Case census to ignore
+gitignored `build/` products (same exclusion EM9305 already had) with 2 new
+passing regression tests; case/EM9305/Touch disk censuses now match their
+manifests exactly. Still red on other owners' lanes: BL-owned spotmgr
+`.short` pads block `completion-readiness`, and live CD-001's 2 untracked
+stage-1 files block the license gate, so `assessment-data.json` and the
+transparent ledger were verified-but-not-regenerated (ledger inputs match
+the committed rendering byte-for-byte). Detail:
+research/tooling-completion-readiness-truthfulness.md. No hardware
+operation; hardware qualification stays blocked by unavailable physical
+evidence.
+
+2026-09-11 evening, AM-040 second wave (apollo_main grid tranche
+0x0048C7B4..0x0048D866): ported the four identified-but-unported grid
+internals (`calc_cols` 0x0048CBF8, `calc_rows` 0x0048CDEC,
+`item_repos` 0x0048CFE0, `grid_align` 0x0048D3C8; 2,224 B) as reviewed
+MIT C in `components/apollo_main/core_overlay/lvgl_grid_engine.c`
+(now 28 functions, 3,074 bytes), closed over the pinned LVGL snapshot
+(`g2/third_party/lvgl`, commit 344c7c3) with the vendor build path,
+WARN lines, coord/flag/event constants, and void-return notes all
+verified against stock bytes. New `g2/tests/test_runtime_lvgl_grid_calc.py`
+adds 18 host tests (stock-SHA pins, FR/CONTENT distribution, subgrid
+borrow/free order, WARN paths, placement/RTL/STRETCH/percent-translate,
+all six align modes); 36/36 pass with the first-wave suite, and the
+freestanding cortex-m55 syntax check passes. 53/64 functions (3,336 of
+4,102 bytes) are now reviewed C. Surveyed the trailing 11 (762 B, none
+LVGL-shaped: a `strcpy`, display mode/state cluster, RNG-backed retry
+loop, flag globals, a `strtoul`-shaped parser — iar-dlib/display-driver
+leads for the next run). Routing all 53 ports (overlay leaves + patch
+sites + manifest + reviewed_sources) remains open with the recipe in
+`docs/research/lvgl-grid-engine-closure.md`. No hardware operation;
+hardware qualification stays blocked by unavailable physical evidence.
+
+## 2026-09-11 — BL-006 hardware-service and MSPI pools 0x004233E0..0x004251C0 (partial)
+
+Eight more retained `official_blob` regions (154 bytes) are now
+produced from reviewed MIT C through `in_place_data`: the
+instance pools (`0x004233E0`, `0x00423430`), the clock-reference
+pool (`0x004236FA`, including the spilled 3 MHz mode-4 reference
+the stock compiler placed apart from the other six), the
+register/status pool (`0x00423764`), the descriptor/clock/status
+pool (`0x0042382C`), the control-service SRAM cells
+(`0x00423E0C`), the MSPI0 base word (`0x0042499C`), and the MSPI
+state pool (`0x004251A4`, including one reserved word with no
+routed consumer). New sources
+`runtime_bl006_hw_service_pools_4233e0.c`,
+`runtime_bl006_hw_register_pools_4236fa.c`,
+`runtime_bl006_mspi_pools_423e0c.c` use one named struct field per
+literal word (header magic/words, 1,500,001 Hz threshold,
+chip-revision/global-control registers, 0x40039000 bank base,
+bit-6..12 fault codes, 3/6/12/24/48/49.152 MHz references,
+divider/latch/snapshot statuses, 10 MHz shutdown reference,
+countdown/latch cells, MSPI base/gate/state-base/prefix/SSRAM-limit/
+set-clear words); every word's live in-place consumer was mapped by
+bounded Capstone decode of the routed spans (zero stock-span
+consumers), with meanings from the already-reviewed consumer host
+models. All payloads compile relocation-free and byte-identical to
+stock. Registered as 8 `in_place_data` groups in the bootloader
+`overlay.json` (18 data groups total); a private component build to
+`g2/build/continue-analysis/BL-006/component-hw` succeeds with all
+18 placed (350 in-place-data bytes). Verifier
+`g2/tests/test_runtime_bootloader_bl006_hw_pools.py` passes (4
+tests), as do the prior cluster test and the 5 survey tests. Audit:
+`docs/research/g2-bootloader-bl006-cluster-4233e0-4251c0-source-closure.md`;
+EVIDENCE.md extended. The canonical `make -C g2
+bootloader-component` + `make -C g2 source` rebuild
+(flash-plan reclassification of the 154 bytes) could not run: the
+integration lock was held by AM-019 for the whole pass (~110 min,
+apparently stale); the queued BL-006 acquire was terminated
+ungranted at time-box. Re-run needs only lock + those two targets.
+BL-006 now stands at 346 of 5,892 bytes from reviewed source (17
+regions); 60 regions (5,546 bytes) remain: dead tails (no fill
+primitive), pools with stock-span consumers (early boot, MX25,
+LittleFS), and scattered small pools. No hardware operation
+occurred; hardware qualification stays blocked by unavailable
+physical evidence.
+
+CD-001 reset tranche (2026-09-11): the UART boot stage-1 reset prologue
+(runtime 0x10000100, package 0x150, 48 bytes) is now produced from reviewed
+MIT assembly (`components/shared/gx8002/runtime_gx8002_uart_boot_stage1_reset.S`,
+derived from pinned NationalChip lvp_kws `spl_start.S` at 8bf9ee5 with the
+recovered UART-boot configuration: VBR 0x10000000, stack 0x200027fc, init call
+0x100001bc, stage-2 chain-load call 0x10002900) and registered as
+`uart-stage1-reset` in `tools/build_gx8002_source_candidate.py` plus the
+Makefile candidate test list. Verifier
+(`tools/verify_gx8002_uart_stage1_reset.py`, 108 decoded control/call-trace
+cases) is byte-exact against stock; `tests/test_gx8002_uart_stage1_reset.py`
+passes 8/8 (34/34 with divmod/source-candidate/reset-entry/spl-reset
+neighbors). A private full-candidate run composes cleanly (288 replacements,
+ownership closes, row 0x150/48/compiled_assembly). The canonical
+`make -C g2 gx8002-source-candidate` gate stays red for a pre-existing reason:
+`rtc-init` and `clock-frequency` baselines still pin the old
+`build_transparent_image.py` hash (eeab...) from before HEAD 284b98a7
+(single-field diff each, verified by tree walk); re-pinning those two
+baselines belongs to their owners. CD-001 now stands at 176 of 8,192 bytes
+from reviewed source (reset 48 + divmod/udiv/umod/noop 128); the vector
+table, init, baud computation, handshake/receive loop, and 8,016 further
+bytes remain retained. No hardware operation occurred; hardware qualification
+stays blocked by unavailable physical evidence.
+
+XC-002 late pass 2026-09-11 (ledgers, no code edits): HEAD unchanged at
+`284b98a7`, so nothing new was pinnable. `completion-readiness` still fails
+at the BL-owned spotmgr `.short` pads (identical traceback, 0 tests ran);
+the license community census still exceeds the manifest by exactly the 2
+untracked MIT CD-001 files (followup: +2 manifest lines, 298->300 /
+1112->1114 once committed). Touch/Case/EM9305 disk censuses re-verified
+exact (10/8/21), bootloader pins 59013/87981 match, `reviewed_sources.json`
+needs no registration (LVGL unrouted, BL-006 uncommitted), and the
+transparent ledger inputs match the committed rendering (7,449 functions).
+Neither `assessment-data.json` nor the transparent ledger was regenerated
+(both blocked on the red gate / XC-004 pipeline, respectively). Audit:
+`docs/research/tooling-completion-readiness-truthfulness.md`. No hardware
+operation occurred; hardware qualification stays blocked by unavailable
+physical evidence.
+
+## 2026-09-11 -- BL-006 boot-initialization pools (198 B, 544/5892)
+
+Six retained literal regions (`0x0041F9B6` island head 22 B, `0x0041F9EE`,
+`0x0041FA40`, `0x0041FAD0`, `0x0041FCF6` 122 B, `0x0041FDA8`) are now produced
+from reviewed MIT C (`runtime_bl006_boot_init_pools_41f9b6.c`) via
+`in_place_data`, byte-exact and relocation-free. Every slot carries stock
+loader PCs (per-span Capstone decode) plus a reviewed host-model meaning;
+all 30 pin-pool (pin, offset) call sites match the reviewed dispatcher, and
+the SCS quartet resolves against reviewed IRQ constants plus the CMSIS NVIC
+layout. Loaders live in entry-redirect spans, so the pools are admitted as
+authenticated layout reproductions (audit states the non-liveness
+explicitly); the island's trailing 12 B stay retained. New verifier
+`g2/tests/test_runtime_bootloader_bl006_boot_pools.py` passes (5 tests);
+prior BL-006 suites (13 tests) still pass; `make -C g2 bootloader-component`
+passes. `make -C g2 source` remains red on another agent's in-flight
+`g2-2.2.6.10-core-source.json` freetype-snapshot change (untouched here).
+Audit: `docs/research/g2-bootloader-bl006-cluster-41f9b6-41fdc0-source-closure.md`.
+No hardware operation occurred; hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-11 -- CD-001 UART stage-1 PMU trim-bit leaves (72 B, 248/8192)
+
+Four retained PMU power-on-reset-register-1 (OSC trim state, `0xA0010030`)
+leaves (`0x10000374` set bit0, `0x1000038c` set bit1, `0x100003a4` get bit0,
+`0x100003b0` get bit1; package `0x3c4..0x40c`) are now produced from
+reviewed source: MIT C (`runtime_gx8002_uart_stage1_pmubits.c`, three
+leaves) plus one MIT assembly leaf (`runtime_gx8002_uart_stage1_pmusbit.S`
+for set_bit1, where this toolchain's 4-byte `andni` cannot fit the 24-byte
+envelope that only admits the 2-byte `bclri`). The set leaves preserve the
+stock clear/re-read/OR-back access pattern. New decoded-trace verifier
+(`verify_gx8002_uart_stage1_pmubits.py`, 308 stock/source/oracle cases over
+a stateful MMIO model) and `tests/test_gx8002_uart_stage1_pmubits.py`
+(8 tests) pass; the tranche is registered as `uart-stage1-pmubits` in
+`build_gx8002_source_candidate.py` and the Makefile gate list, and the
+admission/compose path was exercised privately (4 rows, 48 compiled_c +
+24 compiled_assembly bytes, zero fill). `make -C g2 gx8002-source-candidate`
+stays red on the pre-existing `rtc-init` baseline drift (its
+`evidence_sha256` pins a pre-HEAD `build_transparent_image.py`; untouched
+here, owner re-pin pending), so the candidate-build report and
+`codec-source-experimental` refresh with that fix, not here. 7,944 bytes
+remain retained; hardware qualification stays blocked by unavailable
+physical evidence. Audit: `docs/research/gx8002-uart-stage1-pmubits-source.md`.
+
+## 2026-09-11 — AM-040 trailing cluster ported, all 64 leaves overlay-registered
+
+The 11 trailing functions (`0x0048D540..0x0048D866`) are now reviewed MIT C:
+`runtime_string_helpers.c` (strcpy + strtoul over retained locale hooks; the
+PC-relative table delta resolves to the SRAM digit table at `0x006F1208`, and
+the digit/index math reproduces the stock low-byte computation exactly) and
+`runtime_peripheral_state_helpers.c` (param init, nibble map, mode switch,
+flag getter, sample vote/retry with IRQ guard, flag OR/latch/masked-get over
+retained sample/IRQ/channel callees; the retry tail is `msr primask, r0`, a
+restore, verified by hand-decode). 16 new host tests pass (52/52 with the 36
+LVGL grid tests); both TUs pass the freestanding target-profile check.
+
+All 64 leaves are registered in `core_overlay/overlay.json` with 64 `B.W`
+patch sites via `tools/integrate_g2_apollo_am040_overlay.py` (new
+`compute-pins` step replicates the builder's placement/relocation encoding
+after the recorder-profile path proved unrunnable: `--record-profile` is
+rejected by the component builder and AM-019's script never actually routed).
+Leaf-level canonical verification passes for all 64; overlay pins move to
+size 385,460 / sha `8c93066a…`. Full component/package/manifest gates stay
+open on pre-existing blockers unrelated to this item: Homebrew LLD 23.1.1 vs
+the pinned 23.1.0 in the LC3 route experiment, and an in-flight foreign
+manifest edit tripping the freetype snapshot gate. The holder words, grid
+literal pool, and pads stay retained data. Audits:
+`docs/research/lvgl-grid-engine-closure.md`,
+`docs/research/g2-display-state-string-helpers-closure.md`. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+## 2026-09-11 XC-002 night pass (completion-readiness / transparent ledgers)
+
+HEAD unchanged (`284b98a7`); no tool, manifest, or test edits -- verification
+only. One gate signature changed: readiness now fails at the bootloader
+partition check (manifest 59013/87981 vs gitignored build-report rebuilt at
+18:11 from BL-006's uncommitted overlay, 59557/87437, delta +544/-544), masking
+the known spotmgr raw-pads failure behind it (confirmed still tripping via
+direct tool run). License community drift grew 2 -> 4 untracked CD-001 MIT
+files (re-pin to 298 -> 302 / 1112 -> 1116 once CD-001 lands); Touch/Case/EM9305
+censuses verified clean with the tools' own logic. `reviewed_sources.json`
+needs no registration (no new committed transparent-image C). Assessment
+snapshot and transparent ledger not regenerated (inputs verified identical).
+21/21 reviewed-source + Touch tests pass. Audit:
+`docs/research/tooling-completion-readiness-truthfulness.md`. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+## 2026-09-11 CD-001 serial pass (UART stage-1 polled-UART leaves)
+
+Closed four polled-UART leaves in package `0x5d4..0x6ac` (runtime
+`0x10000584`, `0x100005a0`, `0x10000620`, `0x10000640`) as production-routed
+reviewed source: `put`/`try_get`/`get_char` in
+`components/shared/gx8002/runtime_gx8002_uart_stage1_serial.c` (88 compiled
+C bytes, exact-fit envelopes) and `put_sync` in
+`components/shared/gx8002/runtime_gx8002_uart_stage1_putsync.S` (36 bytes,
+byte-identical; C shapes all compile to 38 against the 36-byte envelope).
+Identified against pinned SDK `spl_uart.c` (MIT, commit 8bf9ee5, blob
+f1f58e16); GPL SDK headers deliberately unused. `verify_gx8002_uart_stage1_serial.py`
+passes 476 stock/source/oracle decoded cases with exact MMIO traces; 10 new
+host/interpreter/regression tests pass; 34/34 stage-1 tests pass.
+Registered as `uart-stage1-serial` in `build_gx8002_source_candidate.py` and
+the Makefile test list; builder-path proof (verify/baseline/replace/compose)
+splits the retained spans with zero fill. CD-001 now 372/8192B source-owned.
+Shared `gx8002-source-candidate` gate stays red on a pre-existing blocker:
+committed `rtc-init` baseline predates HEAD's `build_transparent_image.py`
+(embedded evidence hash eeab85 vs dfb2d6), unrelated to this item; full
+`make` gates and manifest re-pins therefore pending. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+BL-006 checkpoint 2026-09-11: four more retained regions (36 bytes:
+`0x00423D9A`, `0x00423DCE`, `0x004267FE`, `0x00426BFE`) are now
+production-routed reviewed MIT C via `in_place_data`
+(`runtime_bl006_hw_control_pool_423d9a.c`,
+`runtime_bl006_mspi_isr_pools_4267fe.c`; named-field structs,
+byte-exact, relocation-free). Liveness method refined: relocation
+contracts (zero non-call relocs in functional consumers) separate
+live exact-body loaders from stale stock-decode hits; the two
+callback-pointer slots are documented value-live/slot-unproven with
+a strict loader-set pin. New verifier
+`test_runtime_bootloader_bl006_ctrl_pools.py` (4 tests) plus all 18
+sibling BL-006 tests pass; standalone
+`components/bootloader/core_overlay/build_component.py` succeeds
+(15,240 overlay bytes, no hardware ops). BL-006 reaches 580/5892
+bytes (27 of 77 regions). Full `make -C g2 source` stays red on a
+pre-existing external blocker: `littlefs-snapshot` rejects another
+agent's uncommitted apollo_main overlay change, untouched by this
+item. Hardware qualification stays blocked by unavailable physical
+evidence.
+
+## 2026-09-12 — AM-040 canonical stage re-verified (64/64); full gates still blocked
+
+AM-040's 64 LVGL grid/string/state leaves (`0x0048C7B4..0x0048D866`,
+4,102 function bytes) re-verify under the current tree: a private
+replica of the canonical core-stage overlay build
+(`g2/build/continue-analysis/AM-040/core-stage-check/`, same
+`_stage_config` + `apollo_overlay.build`, apple-clang, no recording)
+verifies all 2,058 stage leaves including all 64 AM-040 leaves, with
+overlay pins unchanged at size 385,460 / sha `8c93066a…` (any
+divergence fails closed in the builder). 52/52 host tests pass via
+the documented unittest path, all four TUs pass the freestanding
+target-profile compile with `-Werror`, and the full
+`transparent-test` trio passes 39/39. `reviewed_sources.json` stays
+deliberately untouched (relocated leaves, not byte-exact transparent
+units). Still open, all pre-existing and out of lane: the full
+`core-component` build aborts downstream in the LC3 service-audio
+route experiment (pins Homebrew LLD 23.1.0, host has 23.1.1), so the
+shared build report, manifest `sync-manifest`, `make -C g2 source`
+flash-plan flip, and `verify-artifacts` cannot complete here; the
+`littlefs-snapshot` aggregate re-pin (overlay + component pins) must
+land atomically with that green full build. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+## 2026-09-12 — XC-002 ledger re-verification (no re-pin due)
+
+HEAD still `284b98a7`; all tree changes are uncommitted concurrent
+work (AM-040, BL-006, CD-001), so no tool, manifest, or test edits
+were due — re-verification only, full detail in
+`research/tooling-completion-readiness-truthfulness.md`. Readiness
+still fails at the BL partition check (gitignored build-report
+rebuilt 19:33 from BL-006's uncommitted overlay vs manifest pins
+59013/87981; owner BL-006); spotmgr pads still masked behind it
+(owner BL). License community drift grew 4→6 untracked MIT files
+(new: `runtime_gx8002_uart_stage1_putsync.S`,
+`runtime_gx8002_uart_stage1_serial.c`; owner CD-001, followup
+298→304 / 1112→1118 on landing). `reviewed_sources.json` unchanged
+(4 Cortex-M55 functions; fleet C routes via component overlays, not
+the transparent image). Assessment snapshot and transparent ledger
+not regenerated (readiness red; ledger inputs identical at 7,449
+functions / 1,394,848 bytes). Tests: reviewed-source + Touch 21/21,
+Case 2/2; readiness 0 ran (BL partition), license 4 ran + 1 census
+error (CD-001). Hardware qualification stays blocked by unavailable
+physical evidence.
+
+## 2026-09-12 — AM-040 re-run: recorder cleanup, stage re-verified (partial)
+
+AM-040 (`0x0048C7B4..0x0048D866`, 64 fns) re-verified under the live
+tree. The 64 reviewed MIT leaves were still registered with filled
+pins but stuck in the intermediate `prepare` state (3,534 items
+carrying the `apollo-am040-grid-state-record` profile); stripped it
+under the integration lock, otherwise byte-identical (`compute-pins`
+is one-shot by design and correctly refuses a re-run). Fresh private
+canonical core-stage replica verifies 2,063/2,063 leaves incl. all 64
+AM-040 (overlay 385,460 / `8c93066a…`, stage component 3,908,856 /
+`c8945453…` both match pins). Tests: 52/52 host
+(grid-engine/grid-calc/str-state) + 39/39 transparent pass. Full
+`core-component` still aborts downstream in the LC3 route experiment
+on pre-existing LLD drift (pinned 23.1.0 vs host 23.1.1, LC3 lane's);
+`littlefs-snapshot` aggregate re-pin, manifest sync, flash-plan flip
+(range still `official_blob`), and `verify-artifacts` wait on that
+green build. Full detail in `research/lvgl-grid-engine-closure.md`
+(fifth wave). Hardware qualification stays blocked by unavailable
+physical evidence.
+
+## 2026-09-12 — BL-006 MX25 shared literal pools admitted (partial)
+
+BL-006 (`0x0041F9B6..0x00428378`, 5,892 B): nine more retained
+regions (208 bytes) now produced from reviewed MIT C as named-field
+`in_place_data` structs in
+`components/bootloader/core_overlay/runtime_bl006_mx25_pools_42086c.c`,
+registered in the bootloader `overlay.json` (37 `in_place_data`
+entries): the event-state, log-file, event-release, NVIC/timing,
+log-tag/timing, low-init/driver, log-format, timeout, and QE-text
+pools. Every word carries exact-entry-decoded stock loader PCs and a
+reviewed consumer-source meaning; audit in
+`research/g2-bootloader-bl006-cluster-42086c-420f70-source-closure.md`,
+verifier `g2/tests/test_runtime_bootloader_bl006_mx25_pools.py`
+(6 tests pass; the verifier caught and forced correction of three
+transcription slips, including a file/tag duplicate-word split
+against `0x00421030`/`0x00421034`). BL-006 now 788/5,892 bytes from
+reviewed source. Direct `build_component.py` passes under the BL-006
+lock with provider hash unchanged (`13e2cee5…`); `make -C g2
+bootloader-component` itself still aborts upstream in
+`littlefs-snapshot` on another lane's apollo_main aggregate pins
+(left untouched). Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 — CD-001 tranche 5: stage-1 ID-cell and clock-source leaves (414/8,192B)
+
+Closed two leaves as production-routed reviewed C in the experimental
+codec candidate: `open_cfw_gx8002_uart_stage1_get_stored_id` (runtime
+`0x100002BC`, package `0x30C`, 12 stock bytes replaced by 10 compiled + 2
+fill) and `open_cfw_gx8002_uart_stage1_pmu_bit_modify` (runtime
+`0x10000840`, package `0x890`, 30 stock bytes replaced by 30 compiled,
+zero fill, byte-identical). Source
+`components/shared/gx8002/runtime_gx8002_uart_stage1_idbit.c`, verifier
+`g2/tools/verify_gx8002_uart_stage1_idbit.py` (642 stock/source/oracle
+cases pass), host tests `g2/tests/test_gx8002_uart_stage1_idbit.py` (9
+pass), audit `docs/research/gx8002-uart-stage1-idbit-source.md`,
+registered as `uart-stage1-serial` sibling `uart-stage1-idbit` in
+`tools/build_gx8002_source_candidate.py` and the Makefile test list.
+CD-001 now 414/8,192 bytes source-owned. `make -C g2
+gx8002-source-candidate` still fails before reaching this tranche at the
+pre-existing `rtc-init` stale baseline (checked-in JSON pins
+`build_transparent_image.py` sha `eeab8517…`, HEAD file is `dfb2d65e…`;
+all rtc files untouched in tree — failure exists at HEAD, left for its
+owner). Tranche admission itself verified through the builder's exact
+`reviewed_replacements` + `compose` path in a private output dir, and 50
+candidate/stage-1 tests pass. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+XC-002 ledger watch (2026-09-12 morning): HEAD still `284b98a7`, so no
+re-pin due; ledgers re-verified with the tools' own logic. Both gates
+still red on owner lanes: readiness fails at the BL partition check
+(BL-006's uncommitted overlay shadows the committed 59013/87981 pins;
+spotmgr pads still behind it) and the license community census drift
+grew 6 -> 7 untracked CD-001 MIT stage-1 leaves (new
+`runtime_gx8002_uart_stage1_idbit.c`, SPDX verified). Touch 10/10,
+EM9305 21/21 clean; `reviewed_sources.json` needs no action (4
+functions, no transparent-builder reference to new fleet C);
+assessment-data.json and transparent-source-ledger.md not regenerated
+(inputs unchanged: 7,449 functions / 1,394,848 bytes). Tests:
+transparent reviewed-source + Touch frontier 21/21 pass; readiness
+suite setUpClass error (0 ran); license suite 4 ran with 1 census
+error. Hardware qualification stays blocked by unavailable physical
+evidence.
+
+BL-006 LittleFS cluster (2026-09-12): 3 more retained regions (334
+bytes: `0x00420FF2` 214B shared MX25 log-pointer pool, `0x00421372`
+98B dir-bootstrap/format/init/callback pool, `0x0042156E` 22B live
+mapped-memory control/security/window pool) now produced from reviewed
+MIT C (`runtime_bl006_littlefs_pools_420ff2.c`) as named-field
+`in_place_data`, byte-exact with 163 stock loaders mapped by
+exact-entry Capstone decode and every slot named in a genuine reviewed
+consumer. New verifier
+`g2/tests/test_runtime_bootloader_bl006_littlefs_pools.py` (5 tests
+pass); sibling BL-006 suites still pass; `build_component.py` rebuilds
+the bootloader overlay cleanly. `make -C g2 bootloader-component`
+still stops at the pre-existing `littlefs-snapshot` failure caused by
+another agent's uncommitted `apollo_main` overlay work (4,468
+insertions, untouched here). BL-006 now 1,122/5,892 bytes; 39 regions
+(4,770 bytes) remain (dead tails needing the scoped-out tail-fill
+mechanism, MSPI/clock pools, clock/cmdq/binary32 tails). Hardware
+qualification stays blocked by unavailable physical evidence.
+
+2026-09-12 AM-040 (`apollo_main` `0x0048C7B4..0x0048D866`):
+re-verified under the live tree — 52/52 host tests pass
+(`test_runtime_lvgl_grid_engine`, `test_runtime_lvgl_grid_calc`,
+`test_runtime_str_state_helpers`), all four TUs cross-compile
+warning-free for Cortex-M55, and the private core-stage replica
+still aborts on the LC3 lane's pinned LLD 23.1.0 vs host 23.1.1
+(unchanged pre-existing drift). New analysis this turn: full 172 B
+gap accounting — 6 B `00 00` pads, 8 B param pool (folded),
+40 B grid pool (10/10 words decoded; 8 folded, 2 WARN format words
+identified but not consumed), 86 B strlen leaf (other item, routed),
+32 B state holder table. Two precise follow-ups before the range is
+source-only: (1) the holder table is read live from stock flash on
+every state-leaf call — needs a source-owned table + re-promote;
+(2) the routed `LOG_WARN` macro drops the stock 5th format argument
+(host-invisible, target-divergent) — needs source-authored format
+literals + `calc_cols`/`calc_rows` re-promote with format
+assertions. Both wait on the LLD-drift resolution; no production C
+or pins changed. `transparent-test` is 39/42 with 3 pre-existing
+release-gate failures from committed code in another lane
+(untouched). Hardware qualification stays blocked by unavailable
+physical evidence.
+
+## 2026-09-12 — CD-001 XIP transfer tranche (670/8192B source-owned)
+
+Closed two XIP-controller flash-transfer leaves as reviewed C in the
+experimental codec candidate: `xip_read` (runtime 0x100018c0, package
+0x1910, 128B stock / 126B compiled) and `xip_write` (0x10001940, package
+0x1990, 128B / 124B), replacing 256 retained bytes with 250 compiled
+bytes + 6 fill. New: `components/shared/gx8002/
+runtime_gx8002_uart_stage1_xip.c` (+ MIT NOTICE against SDK
+`base_addr.h` `GX_REG_BASE_XIP`), `tools/verify_gx8002_uart_stage1_xip.py`
+(1,152 stock/source/oracle decoded-trace cases pass),
+`tests/test_gx8002_uart_stage1_xip.py` (8 tests pass),
+`docs/research/gx8002-uart-stage1-xip-source.md` (+ verification JSON).
+Registered in `build_gx8002_source_candidate.py` and the Makefile
+candidate test list; private `reviewed_replacements` + `compose` check
+passes (ownership splits at 0x1910/0x1990, size unchanged). Decoded
+findings: the prologue snapshot is the masked idle bit (always zero),
+and the residual registers are asymmetric (read 0x24, write 0x20); a
+countdown loop was needed to fit the 128B envelopes. Shared
+`gx8002-source-candidate` gate not run (pre-existing stale baseline
+owned elsewhere). Next candidate: PMU descriptor-fill at 0x10000780.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+## 2026-09-12 — XC-002 ledger re-verification midday (no re-pin due)
+
+HEAD unchanged (`284b98a7`); all tree changes are uncommitted concurrent
+work, so no tool, manifest, or test edits were due. Re-verified with the
+tools' own logic: `completion-readiness` still fails at the BL partition
+check (gitignored build-report rebuilt from BL-006's uncommitted
+overlay; owner BL-006); raw-encoding gate still fails only on the
+committed spotmgr pads (owner BL); license community drift grew 7 -> 8
+files with CD-001's new untracked MIT `runtime_gx8002_uart_stage1_xip.c`
+(owner CD-001; followup +8 lines, tool 298 -> 306 / 1112 -> 1120 once
+landed). Touch/Case/EM9305 censuses clean, `reviewed_sources.json`
+unchanged (4 functions / 34 bytes, no transparent registration due),
+assessment-data.json and transparent-source-ledger.md not regenerated
+(inputs match: function-db 7,449 / 1,394,848 bytes). Tests:
+transparent-reviewed-source + Touch frontier 21/21 pass; readiness and
+license suites error fail-closed on the owner lanes above. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+## 2026-09-12 — AM-040 re-verification (no production change)
+
+Independently re-observed the uncommitted AM-040 registration without
+modifying it: 64/64 work-item starts carry exactly one
+`replace_apollo_am040_*` patch site each; fresh `compile_inventory()`
+matches all 64 leaf pins; the private core-stage replica is green
+(2,063/2,063 leaves incl. 64 AM-040; overlay 385,460 / `8c93066a…`;
+stage component matches `core_stage_expected`); 4/4 TUs recompile
+warning-free; 52/52 host and 39/39 transparent-trio tests pass. The
+release-gate module's 3 failures are pre-existing whole-image state.
+Range still `official_blob` in the flash plan; flip, manifest re-pin,
+and full `core-component` build wait on the LC3 lane's LLD 23.1.1-vs-23.1.0
+drift. Audit: `docs/research/lvgl-grid-engine-closure.md` (sixth wave).
+Hardware qualification stays blocked by unavailable physical evidence.
+
+BL-006 2026-09-12: +36B reviewed MIT C (1,158/5,892 total, 34 regions
+remain). The 28B CLKGEN register pool at `0x00426D2C` (alignment fill
++ six `0x400040xx` words, each named by a reviewed consumer source)
+is admitted as authenticated layout reproduction -- no byte-exact
+shipped body loads any slot (per-body stock-hash decision); the two
+in-place references are proven-stale functional bodies (recompiled
+`.text` avoids every slot) and redirect references are span-contained.
+Four 2B zero-alignment fills (`0x00426DB2`, `0x00426F6A`,
+`0x004276BA`, `0x00427752`) have zero routed loaders. Sources:
+`runtime_bl006_clkgen_pool_426d2c.c`, `runtime_bl006_zero_pads_426db2.c`;
+verifier `test_runtime_bootloader_bl006_clkgen_pads.py` (6/6 pass);
+private component build carries all five placements byte-identically.
+`make bootloader-component` via Makefile stays blocked by another
+agent's uncommitted apollo_main overlay change (littlefs-snapshot
+aggregate pins); not touched. Audit:
+`docs/research/g2-bootloader-bl006-cluster-426d2c-427754-source-closure.md`.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+CD-001 2026-09-11: +180B PMU descriptor-fill leaf as reviewed MIT C
+(850/8,192 total). `open_cfw_gx8002_uart_stage1_pmu_fill_desc`
+(runtime 0x10000780, package 0x7D0, 180B) fills a six-word clock
+descriptor from the 26-entry peripheral table at 0x20002018 (direct /
+entry-0 / scan-1..25 match order) with PMU-domain words for ids < 10
+and MCU-domain words for ids 10..25, all register bases pinned to the
+grus SDK base_addr.h. Compiles to 142 C-SKY bytes + 38 fill; the 12B
+literal pool stays retained. Sources:
+`components/shared/gx8002/runtime_gx8002_uart_stage1_pmufill.c`,
+verifier `tools/verify_gx8002_uart_stage1_pmufill.py` (2,438
+stock/source/oracle cases pass), `tests/test_gx8002_uart_stage1_pmufill.py`
+(11/11 pass); registered as `uart-stage1-pmufill` in
+`tools/build_gx8002_source_candidate.py` and the Makefile candidate
+test list; admission checked through the builder compose path in a
+private dir. Shared `make -C g2 gx8002-source-candidate` still red at
+the pre-existing rtc-init baseline mismatch before any stage-1 tranche
+(left for its owner). Audit:
+`docs/research/gx8002-uart-stage1-pmufill-source.md`. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+XC-002 2026-09-12 afternoon: HEAD unchanged (`284b98a7`), so no ledger
+re-pin was due and no tool, manifest, or test edits were made --
+re-verification only. Completion-readiness still fails at the BL
+partition check (gitignored build-report rebuilt from BL-006's
+uncommitted overlay now reads 60135/86859 vs manifest pins 59013/87981,
+delta +544/-544 grown to +1122/-1122; re-pin is BL-006's landing
+chore), with the spotmgr raw-halfword gate still red behind it. License
+community drift grew 8 to 9 untracked MIT files with CD-001's new
+pmufill leaf (followup 306 to 307 / 1120 to 1121 on landing; SPDX
+verified). Touch/Case/EM9305 censuses, reviewed-source registration (4
+functions, no transparent registration due), and both generated reports
+were re-verified clean against their inputs (21/21 reviewed+Touch
+tests, 2/2 Case tests; readiness suite setUpClass error, license suite
+4 ran + 1 census error, both on owner lanes). Audit:
+`docs/research/tooling-completion-readiness-truthfulness.md`. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+## 2026-09-12 — AM-040 re-run: leaves green, production flip still gated
+
+AM-040 (`0x0048C7B4..0x0048D866`, 64 LVGL grid/string/state leaves) re-verified
+under the live tree with no production changes: 52/52 host tests
+(`test_runtime_lvgl_grid_engine`, `test_runtime_lvgl_grid_calc`,
+`test_runtime_str_state_helpers`), warning-free Cortex-M55 recompiles of all
+four TUs, private core-stage replica 2,063/2,063 green (pins unchanged
+385,460 / `8c93066a…`), transparent trio 39/39. `make -C g2 core-component`
+attempted under the integration lock stops at the `littlefs-snapshot`
+prerequisite (whole-overlay aggregate pinned at 380,444 / `21095c67…` vs live
+385,460 / `8c93066a…`); the atomic re-pin cannot land from this lane while
+other lanes' overlay growth is uncommitted. Manifest still has zero
+`apollo_am040_` regions; `reviewed_sources.json` still admits only the 4
+tranche functions. Audit: `docs/research/lvgl-grid-engine-closure.md`.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+## 2026-09-12 — CD-001 re-run: vectors/traps tranche (264B), now 1114/8192
+
+CD-001 (`0x10000000..0x10002000`, UART boot stage 1) closed the 64-word
+vector table (package `0x50`, 256B) plus both shared trap entries
+(package `0x180`, 8B) as reviewed assembly
+(`components/shared/gx8002/runtime_gx8002_uart_stage1_vectors.S`): the
+table is a three-address derivation (reset word + `.rept 31`
+exception + `.rept 32` IRQ, all symbolic, no numeric literals in the
+code region), each trap a `br`-to-self with `.balign 4` zero fill, both
+sections byte-exact against the authenticated stock envelopes with no
+relocations. The vectors section routes through the builder's
+`generated_source_data` kind (non-executable section,
+full-envelope payload), the traps as `compiled_assembly`. New
+`tools/verify_gx8002_uart_stage1_vectors.py` (5 cases: byte-exactness,
+table-words-equal-link-symbols, trap self-loop stepping) with reviewed
+baseline `docs/research/gx8002-uart-stage1-vectors-verification.json`,
+plus `tests/test_gx8002_uart_stage1_vectors.py` (9 tests, all pass; all
+8 stage-1 suites 71/71 green). Registered as `uart-stage1-vectors` in
+`tools/build_gx8002_source_candidate.py` and the Makefile candidate
+test list; admission proven through the exact `reviewed_replacements` +
+`compose` path in a private dir (offsets `0x50`/`0x180`, firmware size
+unchanged). Shared `make -C g2 gx8002-source-candidate` under the
+integration lock still stops at the pre-existing `rtc-init` baseline
+drift before reaching any stage-1 tranche (untouched by this lane, left
+for its owner); `codec-source-experimental` was not attempted behind
+that red prerequisite. Audit:
+`docs/research/gx8002-uart-stage1-vectors-source.md`. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+## 2026-09-11 BL-006: float/System-PLL pools + two reserved words (+50B, 1208/5892)
+
+Closed 5 more retained regions (50 bytes) as reviewed MIT C through
+bootloader `in_place_data`, verified by new
+`g2/tests/test_runtime_bootloader_bl006_float_pools.py` (6 tests pass)
+plus all 8 pre-existing BL-006 suites green: the float-ratio bound
+pool `0x00427032` (14B: pad + `0x1p-23f`/`0x1.000002p-23f`/
+`0x1.e00002p+9f`), the multiplier/select pool `0x0042714C` (20B:
+`0x1.f80002p+5f`, reserved zero, `0x1p+24f`, `0x1.800002p+6f`,
+`60.0f`), the select/PLL pool `0x00427308` (8B: `240.0f`,
+`1000000.0f`), and reserved words `0x00420C14` (`0x000081F6`, closes
+the QE gap fully) and `0x00422D7A` (`0x20000002`). Every float spelling
+was checked against the stock word independently and against the
+reviewed consumer source text; all 19 routed loaders live in
+entry-redirect stock spans (no byte-exact shipped body loads any
+slot). Component builder records all 5 placements and the source
+build stays byte-identical to reference; provider bytes match stock.
+`make -C g2 bootloader-component` via make still stops at the
+pre-existing littlefs-snapshot pin drift from another agent's
+apollo_main overlay edit (untouched, left for its owner), so the
+component builder and `open_cfw.py build` were run directly under the
+BL-006 lock. Note: the flash plan still labels all 77 BL-006 regions
+`official_blob` (150 bootloader-wide) because the manifest region
+re-cut for `in_place_data` pools has never been done for any BL-006
+cluster -- overlay-level admission is proven, manifest accounting is
+follow-up work. Audits:
+`docs/research/g2-bootloader-bl006-cluster-426d2c-427754-source-closure.md`,
+`...-42086c-420f70-...`, `...-4220b2-422ad4-...`. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+XC-002 evening pass 2026-09-12: HEAD unchanged (`284b98a7`), so no
+re-pin due; ledgers re-verified with the tools' own logic, no tool /
+manifest / test edits. Readiness still red at the BL partition check,
+delta grown +1122/-1122 to +1208/-1208 (build-report 60221/86773 vs
+manifest 59013/87981, matching BL-006's 1208/5892 claim; owner BL-006);
+raw-encoding still fails only on the committed spotmgr pads (owner BL);
+license community drift 9->10 CD-001 MIT files (new
+`runtime_gx8002_uart_stage1_vectors.S`, SPDX verified; followup 298->308
+/ 1112->1122 once CD-001 lands). Touch/Case/EM9305 deltas 0;
+`reviewed_sources.json` still 4 functions / 34 bytes with no new
+transparent refs (new untracked Apollo leaves route only through the
+working-tree component overlay); assessment-data.json and
+transparent-source-ledger.md not regenerated (inputs match: 7,449 /
+1,394,848). Tests: transparent+Touch 21/21, Case statics 2/2 pass;
+readiness suite setUpClass error, license suite 4 ran + 1 census error.
+Audit: `docs/research/tooling-completion-readiness-truthfulness.md`
+(evening pass). Hardware qualification stays blocked by unavailable
+physical evidence.
+
+BL-006 pass 2026-09-12: +34B reviewed MIT C (1242/5892 total). New
+`runtime_bl006_mspi_state_pools_424aea.c` (island `0x00424AEA`: pad +
+`0x2001CAA0` state-table base with live loaders in byte-exact
+command-queue init/term; pool `0x00424BD4`: 100000U timeout,
+`0x40060000` MSPI0 base with live loaders in byte-exact
+pause/DMA/sched bodies, plus two pad words stale-by-construction in
+the replaced device-configure span) and three reserved boot-island
+tail words (`0x0041F9CC/D0/D4`) appended to
+`runtime_bl006_reserved_words_420c14.c`; 5 overlay `in_place_data`
+placements, byte-exact and relocation-free. New verifier
+`g2/tests/test_runtime_bootloader_bl006_mspi_state_pools.py` (8
+cases) passes; 9 neighboring BL-006 suites green. Audit:
+`docs/research/g2-bootloader-bl006-cluster-424aea-424be4-source-closure.md`
+(records a loader-target correction: stock `0x00424B1A` loads
+`0x00424BD8`, not `0x00424BD4`). 29 regions (4,650B) remain:
+dead-tail fill primitive still missing, `0x00427588` lock-wait body,
+`0x00427E54` binary32 span. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 — AM-040 (LVGL grid/state `0x0048C7B4..0x0048D866`): partial, blockers narrowed
+
+All 64 leaves stay reviewed MIT C, overlay-registered, and replica-green
+(52/52 host tests, private stage replica 2,063/2,063 incl. 64/64 AM-040
+at overlay 385,460 / `8c93066a…`, `make -C g2 transparent-test` 39/39;
+on-disk TU hashes match leaf pins; no tree changes this turn). New this
+turn: the canonical-build refusal was traced past the `littlefs-snapshot`
+aggregate gate to the LC3 service-audio route-experiment toolchain gate
+(`build_service_audio_route_experiment.py` via
+`build_service_audio_production_replay`, `build_component.py:1569`, in
+the default path): host LLD is 23.1.1 vs the reviewed 23.1.0 prefix and
+no alternate LLD exists on the Mac. Production `source` build,
+flash-plan flip (`official_blob` retained), manifest splice, and
+`verify-artifacts` therefore still wait on the LC3 lane; the
+`littlefs-snapshot` atomic re-pin and the 64-function transparent
+`reviewed_sources` admissions (`expected_text` compiles) are recorded
+follow-ups. Hardware qualification stays blocked by unavailable physical
+evidence.
+
+## 2026-09-12 — CD-001 (codec UART boot stage 1 `0x10000000..0x10002000`): partial, 0 new bytes, range routed
+
+CD-001 stays 1,114/8,192 source-owned; nothing registered this turn
+because every remaining code leaf in package `0x50..0x2050` is either
+blocked on the two unreconstructed dispatchers (`0x10000D98`,
+`0x10000EA0`), is a noreturn trap/hang tail, or cannot fit its
+envelope. New: `docs/research/gx8002-uart-stage1-tickdiv-source.md`
+identifies the `0x100003BC` leaf (62 B) as SDK `spl_get_time_ms()`
+(counter-2 VALUE/ACCSNAP at `0xA0400004/8`, `do_div(time,1000)`, pinned
+commit `8bf9ee5`), its `bsr 0x100065E4` callee as the stage-2
+`__div64_32` (package `0x6634`, CD-003 territory), and proves the leaf
+halts (`pop; bkpt`, no `rts`). Two clean-room C drafts measured
+178 B / 138 B vs the 62 B envelope, so inlining cannot fit and
+outlining has no envelope home — drafts removed, measurements kept in
+the audit. Also landed: the complete `rts` census (only 0x1302,
+0x1DD8 outside already-owned leaves), the fallthrough finding (no
+`rts` in `0x860..0x1302` or `0x3FC..0x584` — chained flows, not
+functions), the infinite-beacon reading of `0x4D0`, the pop-per-pass
+idiom shared by the rail leaves, and a per-function return/hang/block
+table gating `0xD98`+`0xEA0` as the next full-turn tranches. All
+verification was read-only (disassembly, raw bytes, SDK reads,
+compiles to `/tmp`); no shared files touched. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+## 2026-09-12 XC-002 late pass (partial, re-verification only)
+
+HEAD still `284b98a7`; no re-pin due, so no tool, manifest, or test
+edits -- only re-verification with the tools' own logic. `make
+completion-readiness` stays red at the BL partition check: the
+gitignored bootloader `build-report.json` (rebuilt 21:04 from BL-006's
+uncommitted overlay, 60255/86739) drifted further from the manifest's
+59013/87981 pin (+1208/-1208 to +1242/-1242; BL-006's landing chore).
+Raw-encoding still fails only on the committed spotmgr pads (BL
+owner). License community drift holds at the same 10 CD-001 untracked
+MIT stage-1 leaves (SPDX verified; followup 298->308/1112->1122 on
+landing). Touch/Case/EM9305 disk==manifest clean (10/8/21);
+`reviewed_sources.json` needs no action (4 fns, cortex_m55 unchanged,
+no transparent refs to new files; 21/21 tests pass). Neither
+`assessment-data.json` nor the transparent ledger was regenerated
+(generator still red; function-db still 7,449 entries matching the
+ledger). Full audit in
+`docs/research/tooling-completion-readiness-truthfulness.md`. No
+hardware operation; hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 — AM-040 (Apollo LVGL grid `0x0048C7B4..0x0048D866`): partial, re-verified, no production changes
+
+64/64 reviewed MIT leaves stay overlay-registered with unchanged
+pins; 52/52 host tests pass, the private stage replica is green
+(2,063/2,063 leaves incl. 64/64 AM-040, overlay 385,460 /
+`8c93066a…`, `-Werror` clean), and `make -C g2 transparent-test`
+passes 39/39. New: a transparent-profile (`armv8.1m.main`, `-Oz`)
+compile of the style-getter TU shows 12 emitted bytes vs the 10-byte
+stock body at `0x0048C81A` with different bytes, so the behavioral
+MIT leaves cannot meet the transparent `payload == stock` admission
+contract — that follow-up stays infeasible without weakening the
+gate. The flash-plan flip still waits on the LC3 lane's LLD
+23.1.0-prefix drift (host still 23.1.1) and the atomic
+littlefs-aggregate re-pin (380,444 / `21095c67…` vs live 385,460 /
+`8c93066a…`); no lock-gated rebuild attempted. Full audit in
+`docs/research/lvgl-grid-engine-closure.md`. No hardware operation;
+hardware qualification stays blocked by unavailable physical
+evidence.
+
+## 2026-09-12 — CD-001 (codec UART boot stage 1 `0x10000000..0x10002000`): partial, +112B source-owned, range routed
+
+CD-001 is now 1,226/8,192 source-owned (1,114 prior + 112 here).
+New tranche `uart-stage1-mdelay`: the `0x100003FC` delay leaf (package
+`0x44C`, 112 stock bytes) as reviewed clean-room C, identified against
+the pinned grus SDK `spl_counter.c` as an inlined
+`spl_mdelay`/`spl_udelay(1000)` pair (counter-2 snapshot + 1000,
+strict-less-than poll, exact `while (msec--)` shape). 92 compiled bytes
++ 20 generated fill, registered in `build_gx8002_source_candidate.py`
+and the `gx8002-source-candidate` gate list. Verification: 160
+stock/source/oracle decoded-trace cases (exact traces outside the stack
+window, handoff r0 = `0xFFFFFFFF`, callee-saved regs, final counter
+cells), 13 narrow tests green, private admission through the builder's
+exact `reviewed_replacements` + `compose` path (1 replacement, firmware
+size unchanged). One inline `pop r4-r5, r15` restores the prologue saves
+before the retained-`0x1000046C` tail chain; the verifier rejects any
+other prologue shape fail-closed. Also decoded (deferred, kept as an
+unregistered in-tree draft): the `0x10000D98` PMU dispatcher (264B) —
+jt1/jt2 maps, chkarm routing, and caller-garbage failure tails mapped,
+but the if-chain C is 292B vs the 264B envelope (branch-vs-table gap),
+so it stays retained; full routing intel appended to
+`gx8002-uart-stage1-tickdiv-source.md`. Shared gate
+`make -C g2 gx8002-source-candidate` was run under the integration lock
+and fails before reaching any stage-1 tranche at the pre-existing
+rtc-init baseline drift (`rtc-init: qualification report differs from
+reviewed source admission baseline`, same symptom prior tranches
+reported; untouched by this turn), so the gate never exercised the new
+tranche; `codec-source-experimental` was skipped as it gates on the
+same red build. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+## 2026-09-12 BL-006: System-PLL pool + range-error/div-zero tails (84B, 1326/5892)
+
+Closed the 98-byte `0x00427588` cluster except its 14-byte dead
+setter prologue: 60B literal pool + 4B range-error cell word as
+named-field `in_place_data`, 18B ldexp range-error setter and 2B
+divmod divide-by-zero return as in-place leaves (exact fill).
+Full loader derivation (anchored per-span Capstone decode;
+`ldr.w` included) pins every slot to replaced spans with
+call-only relocations or retained dead spans; `0x03938700` ==
+60000000U (postdiv low VCO bound) removed the last reserved
+grade. Provider `13e2cee5` -> `696a6baf` (15 bytes, all in the
+range-error span); pins updated in overlay.json, the
+core-source manifest (shas only), and test_bootloader_core_overlay
+(mutation ranges, allowlist, CRC). New verifier (8 tests) green;
+all 10 prior BL-006 suites + double/divmod/store/queue suites
+green; core overlay suite green except the manifest-regions
+contract test (needs `make source`, blocked by unrelated
+apollo_main littlefs-snapshot breakage; 107 of 112 region diffs
+are other turns' uncommitted records). Remaining: 26 dead-tail
+regions + A prologue + 2 partial MSPI tails + 1316B float span.
+No hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 XC-002: readiness/ledger re-verification (partial, no re-pin due)
+
+HEAD unchanged (`284b98a7`); all drift is uncommitted other-owner work,
+so no tool, manifest, or test edits were made. `completion-readiness`
+still fails at the BL partition check (gitignored build-report now
+60339/86655 vs manifest 59013/87981, delta +1326/-1326; owner BL-006),
+raw-encoding still fails only on the committed spotmgr pads (owner BL),
+and the license community drift grew 10->12 untracked MIT CD-001
+stage-1 leaves (`mdelay.c`, `pmudispatch.c` new; owner CD-001).
+`reviewed_sources.json` needs no action (4 functions/34 bytes, no
+transparent-builder reference to new fleet C); assessment-data.json and
+transparent-source-ledger.md NOT regenerated (generators still red /
+XC-004 pipeline). Green: transparent reviewed-source + Touch frontier
+21/21, Case static 2/2. Full audit in
+`docs/research/tooling-completion-readiness-truthfulness.md`. No
+hardware operation. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+## 2026-09-12 BL-006: 0x00427E54 span structurally surveyed (0B, still 1326/5892)
+
+The last unexamined BL-006 region (1,316 bytes, "between the
+binary32 runtime and SPOT-management") is four single-exit
+Thumb-2 code subspans, not a literal pool: the 48B classifier
+suffix tail T0 (`vcmp.f32` vs embedded `50.0f`/`1000.0f` at
+`0x00428060`/`0x00428064`, returns 2/3/4, single `bx lr`) and
+three SPOT trim-service bodies F1/F2/F3 (484/472/312B,
+balanced `push.w`/`pop.w pc` frames, no local stack). Callee
+sets are exact and all out-of-span (trim finalize, delay
+cycles, IRQ pause/resume, transition start, SPOT timer
+service, Ton-trim selector -- all named by reviewed sources);
+data targets all sit in retained SPOT-table gaps owned by
+other items. Deadness pinned beyond the survey: zero image
+words target any of the four entries (Thumb bit included),
+survey still flags nothing, no internal calls. A whole-span
+linear sweep desynchronizes through the float pool and
+fabricates `bl` targets, so all spans decode anchored (noted
+for future passes). Explicitly rejected: admitting the 2B
+`bx lr` stubs at `0x00426C22`/`0x00426C70`/`0x004279EE` as
+in-place leaves -- unlike the div-zero precedent they have no
+live caller, so they stay dead tails. New verifier (8 tests)
+green; survey + syspll + float suites green (19 tests). The
+span stays retained for the missing dead-tail fill primitive
+(now its best-characterized first-use candidate) or full
+reconstruction; remaining BL-006 work is 26 dead tails + 2
+dead heads + prologue + this span. Audit:
+`docs/research/g2-bootloader-bl006-span-427e54-spot-trim-survey.md`.
+No hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 AM-040: LVGL grid range re-verification (partial, blockers unchanged)
+
+Range `0x0048C7B4..0x0048D866` (64 fns, 4,102 B): all 64 leaves
+stay reviewed MIT C, overlay-registered with unchanged pins
+(overlay 385,460 / `8c93066a…`), and replica-verified. 52/52 host
+tests pass (`test_runtime_lvgl_grid_engine`,
+`test_runtime_lvgl_grid_calc`, `test_runtime_str_state_helpers`);
+private core-stage replica green 2,063/2,063 (64/64 AM-040);
+`make -C g2 transparent-test` 39/39. No production changes made.
+Lock-gated `core-component` still stops at the foreign
+`littlefs-snapshot` aggregate drift and the reviewed Apple-clang
+identity drift (host clang 21.0.0); range stays `official_blob`
+pending the LC3-lane LLD fix + atomic littlefs re-pin, and
+`reviewed_sources.json` admission stays closed (transparent
+`payload == stock` negative result stands). Audit:
+`docs/research/lvgl-grid-engine-closure.md`. No hardware
+operation. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+## 2026-09-12 — AM-015 callback closure probe
+
+AM-015 remains retained over `0x0044FA5E..0x004501D2`. A bounded decompiler
+probe proves the accessor cluster's null-object path reads the global-backed
+provider at `DAT_0044FCF0+0x14` through `0x0044FA1A`; the logging dependency
+`0x0044D25C` and provider initialization remain unresolved. The existing
+13-leaf differential emulator passes 520 vectors again, but no AM-015 bytes
+are source-owned or routed. No hardware operation; qualification remains
+blocked by unavailable physical evidence. Audit:
+`docs/research/apollo-main-am015-44fa5e-4501d2.md`.
+
+## 2026-09-12 — CD-001 (codec UART boot stage 1): D98 maps corrected, 298 B fit floor measured, still deferred
+
+0 new source-owned bytes (CD-001 stays 1,226/8,192). Rewrote the
+unregistered D98 draft
+(`components/shared/gx8002/runtime_gx8002_uart_stage1_pmudispatch.c`)
+and attempted to close its 264 B envelope. Dumped both retained jump
+tables (jt1 package 0x1EB0, jt2 package 0x1EF8) and fixed two draft
+bugs against them: id 22 now passes through to fill 22 (was 19), and
+in-range ids without a bit arm (7,8,9,10,12,15,16,19,22) now run the
+check arm (were sent to the failure tail). Read-only checker
+(`/tmp/check_d98_maps.py`, not in tree) matches all 37 table entries
+plus 8 out-of-range probes. Density rewrite + 22-flag probe reach a
+298 B floor (312 B tranche flags; 368/352 B at -O1/-O2) — the ~34 B
+gap is structural (stock table dispatch vs branch transliteration),
+so D98 stays deferred. Also decoded rail op C (0xB90..0xC9A) as the
+routed next H-class tranche (single fill call, deterministic first
+pass, pop-spinner tail). Audit appendix: section 7 of
+`docs/research/gx8002-uart-stage1-tickdiv-source.md`. No shared-file
+registration, no builder/manifest changes, no hardware operation.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+## 2026-09-12 XC-002 late pass (re-verification only, HEAD 284b98a7 unchanged)
+
+No tool, manifest, or test edits: nothing newly committed is pinnable.
+`completion-readiness` still red at the BL partition check (manifest
+59013/87981 intact; gitignored build-report 60339/86655, delta holds
++1326/-1326; re-pin is BL-006's landing chore). Raw-encoding gate still
+fails only on the known spotmgr pads (BL owner). License community drift
+holds at 12 untracked CD-001 stage-1 leaves (all SPDX MIT verified;
+followup +12 lines, tool 298->310 / 1112->1124 once CD-001 lands).
+Touch/Case/EM9305 censuses delta 0; reviewed_sources.json needs no action
+(4 functions, cortex_m55 unchanged, function-db 7,449 functions);
+assessment-data.json and transparent-source-ledger.md not regenerated
+(red generator input / missing source|image stages). Tests:
+transparent_reviewed_source + touch frontier 21/21 pass; license 4 ran
+with 1 expected census error; readiness setUpClass error as designed.
+Audit: `docs/research/tooling-completion-readiness-truthfulness.md`.
+No hardware operation; hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 AM-040: LVGL grid range re-verification (partial, blockers unchanged)
+
+Range `0x0048C7B4..0x0048D866` (64 fns, 4,102 B): all 64 leaves
+stay reviewed MIT C, overlay-registered with unchanged pins
+(overlay 385,460 / `8c93066a…`), and replica-verified. 52/52 host
+tests pass (`test_runtime_lvgl_grid_engine`,
+`test_runtime_lvgl_grid_calc`, `test_runtime_str_state_helpers` via
+unittest); private core-stage replica green 2,063/2,063 (64/64
+AM-040, stage component 3,908,856 / `c8945453…` matching
+`core_stage_expected`); `make -C g2 transparent-test` 39/39. No
+production changes made. No lock-gated rebuild attempted: host LLVM
+still 23.1.1 vs the LC3 lane's pinned 23.1.0 prefix, and the
+`littlefs-snapshot` aggregate still predates the AM-040 registration
+— both pre-existing, neither from this item. Range stays
+`official_blob` pending the LC3-lane LLD fix + atomic littlefs
+re-pin; `reviewed_sources.json` admission stays closed (transparent
+`payload == stock` negative result stands) and the holder-table
+source-authoring follow-up (`0x0048D704..0x0048D720`) stands. Audit:
+`docs/research/lvgl-grid-engine-closure.md`. No hardware operation.
+Hardware qualification stays blocked by unavailable physical
+evidence.
+
+## 2026-09-12 BL-006: command-queue suffix pool + MSPI aperture mask (20B, 1346/5892)
+
+Admitted the last two loader-evidenced literal words in the
+BL-006 range as named-field `in_place_data`: the 16B pool at
+`0x00427C80` (state-table base, register-table base,
+`INITIALIZED|MAGIC` prefix word, SSRAM base -- all spelled in
+`runtime_cmdq_services_427794.c`) and the 4B XIP aperture mask
+`0x1FFF0000` at `0x0042644C` (spelled in
+`runtime_mspi_control_4251c0.c`). Loader sets come from a
+sync-independent literal-load encoding sweep (all `ldr`/`adr`
+forms over ±4KB, plus a VFP-literal sweep): 1+1+10+3 cmdq
+loaders and 1 MSPI loader, every one inside a replaced span
+with call-only relocations, each confirmed by anchored Capstone
+decode; the anchored span sweep alone misses two magic loaders
+to desync. No pointer-table, dead-span, relocated-source, or
+backward-`adr.w` references; float-threshold words nearby stay
+retained (no reviewed spelling). Both payloads are byte-exact,
+so the rebuilt provider is identical (`696a6baf…`, verified by
+locked private builds with and without the entries) and no
+manifest/overlay-test pins change; the manifest re-cut for the
+two splits stays deferred (regions test red at baseline with 61
+stale records, +4 builder-generated records from this turn).
+New verifier (8 tests) green; all 12 prior BL-006 suites (69
+tests) green; core overlay suite 13/14 (only the known-red
+manifest-regions contract fails). Audit:
+`docs/research/g2-bootloader-bl006-cluster-427c80-42644c-source-closure.md`.
+No hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+2026-09-12 CD-001 partial: rail op C (`0x10000B90..0x10000C9A`, 266B) as
+reviewed C, registered; CD-001 now 1,492/8,192B source-owned. One
+`pmu_fill_desc` call, entry gating, two seven-store MMIO sequences, and
+the shared pop-and-check spinner (noreturn). 672 stock/source/oracle
+cases pass with exact unfiltered traces (both frames 24B, no window
+exclusion); 21 tests pass. Decoded subtleties: the check observes
+caller r5 (skip arm observes live arg2), the d4 reload checks an
+address bit, later checks always expect 1 (r2 decay), `mvcv` moves the
+inverted condition. Re-poll re-entry (orchestrator frame), fill-fail
+leftovers, and negative-count shift HW semantics stay followups. Shared
+gate red pre-existing (rtc-init pin drift, owner elsewhere); admission
+verified via the builder path privately. Audit:
+`docs/research/gx8002-uart-stage1-railc-source.md`. No hardware
+operation. Hardware qualification stays blocked by unavailable physical
+evidence.
+
+2026-09-12 XC-002 partial: HEAD still `284b98a7`, no re-pin due.
+Ledgers re-verified with the tools' own logic. BL partition delta holds
++1326/-1326 (build-report mtime Sep 11 21:52 unchanged; re-pin stays
+BL-006's landing chore); raw-encoding still fails only on the committed
+spotmgr pads (BL owner). License drift 12->13 CD-001 MIT files (new
+`runtime_gx8002_uart_stage1_railc.c`, SPDX MIT verified, still
+untracked; followup +13 lines, tool 298->311 / 1112->1125 once CD-001
+lands). Touch/Case/EM9305 clean, reviewed_sources needs no action
+(4 functions), assessment-data.json and transparent-source-ledger.md
+correctly NOT regenerated (generators still red / XC-004 pipeline).
+Tests: transparent_reviewed_source + Touch frontier 21/21 pass,
+CasePackageSourceStaticTests 2/2 pass, readiness suite setUpClass error
+(BL partition), license suite 4 ran + 1 census error (CD-001 drift).
+Gates red on owner lanes. No hardware operation. Hardware qualification
+stays blocked by unavailable physical evidence.
+
+2026-09-12 AM-040 partial: range `0x0048C7B4..0x0048D866` still
+`official_blob` in the flash plan; all 64 reviewed MIT leaves stay
+overlay-registered (no production tree change this run). Re-verified:
+52/52 host tests (`test_runtime_lvgl_grid_engine`,
+`test_runtime_lvgl_grid_calc`, `test_runtime_str_state_helpers`) and
+39/39 transparent tests pass. New evidence: full 64-function
+transparent-envelope survey (`.text` sizes under the transparent
+clang profile vs stock envelopes) gives 27 FIT / 37 OVER, and
+`place_unit`'s place-every-alloc-section rule plus 9 outlined-helper
+sections mean even FIT functions need per-function splits before any
+`reviewed_sources.json` admission; full table appended to
+`research/lvgl-grid-engine-closure.md`. Lock-gated rebuild/splice
+not attempted (host LLD still 23.1.1 vs pinned 23.1.0;
+littlefs-snapshot aggregate still predates registration). Remaining:
+LC3-lane LLD fix + atomic littlefs re-pin + manifest splice;
+holder words `0x0048D704..0x0048D720` still retained data. No
+hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 BL-006 dead-tail leaves (+156 B, 1,502/5,892)
+
+Admitted four single-exit, call-free, literal-free dead tails as
+reviewed MIT `in_place_leaves` (naked-asm target bodies with
+explicit widths + portable C twins): the MSPI per-instance
+state-initializer tail `0x00424AB2` (56 B), the public
+device-configuration pre-step tail `0x00424B88` (76 B, one
+internal `blo`), the MSPI enable epilogue `0x004250E6` (10 B),
+and the command-queue reset epilogue `0x00427C72` (14 B). All
+four compile relocation-free and byte-identical to stock;
+survey grades every span `corroborated_unreachable_control_flow`
+and a whole-image `bl` sweep finds no caller, so no live
+traffic is claimed. New verifier
+`g2/tests/test_runtime_bootloader_bl006_tail_leaves.py` (9
+tests: stock pins, byte-exact rebuilds, registration, survey
+verdicts, caller sweep, ctypes host-behavior vs oracle) passes;
+all 72 neighboring BL-006 tests pass; `build_component.py`
+builds with a byte-identical provider (`696a6baf…`, 163,840
+bytes). `make -C g2 bootloader-component` itself still stops at
+the pre-existing unrelated apollo_main littlefs-snapshot
+breakage (another agent's in-flight work); the component script
+was run directly under the BL-006 lock (acquired/released).
+Audit: `docs/research/g2-bootloader-bl006-tail-leaves-424ab2-4250e6-427c72-source-closure.md`;
+EVIDENCE.md appended. Remaining BL-006 (~4,390 B): large MSPI
+tails, cmdq remainders, the calling blocking-transfer tail
+`0x004263E0`, interrupt/CLKGEN tails, the `0x00425160`
+disable-tail literal, syspll/queue remainder, binary32 tail
+`0x00427D84`, and the 1,316-byte SPOT-trim span. No hardware
+operation. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+## 2026-09-12 — CD-001 rail operation B (0x10000A30, 350 B) as reviewed assembly
+
+Rail op B (package `0xA80..0xBDE`, runtime `0x10000A30..0x10000B8E`) is
+now production-routed reviewed assembly in the experimental codec
+candidate: 350 stock bytes replaced by 350 assembled bytes, zero fill
+(`runtime_gx8002_uart_stage1_railb.S`, links byte-identically, which
+corroborates the transcription but is not the admission claim). A
+clean-room C draft was attempted first and abandoned with a recorded
+measurement (22-variant flag probe floors at 470–474 B vs the 350 B
+envelope), following the pmusbit/putsync precedent for assembly. The
+decoded-target battery (`verify_gx8002_uart_stage1_railb.py`, report
+`docs/research/gx8002-uart-stage1-railb-verification.json`) passes
+7,680 stock/source/oracle cases with exact unfiltered traces over
+body plus four loop passes; `test_gx8002_uart_stage1_railb.py` (23
+tests) passes. The battery caught and fixed two draft misreadings
+before admission (shift/mask source is the descriptor byte cell, not
+the table entry; the id gate arms at `== 6 || >= 10`, not `>= 9`).
+Registered as `uart-stage1-railb` in
+`tools/build_gx8002_source_candidate.py` and the Makefile gate list;
+admission verified through the builder's exact
+`reviewed_replacements` + `compose` path in a private dir under the
+CD-001 lock (shared gate still red pre-existing at the `rtc-init` pin
+drift owned elsewhere). CD-001 now 1,842/8,192 B source-owned; rail A
+(464 B, same family) is the mapped next tranche. Audit:
+`docs/research/gx8002-uart-stage1-railb-source.md`. No hardware
+operation. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+XC-002 tooling pass 2026-09-12 (railb): HEAD still `284b98a7`, so no
+re-pin due -- only re-verification with the tools' own logic. BL
+partition delta grew +1326/-1326 to +1502/-1502 (build-report 60515 /
+86479 vs manifest pin 59013 / 87981; matches BL-006's 1,502B claim,
+re-pin stays BL-006's landing chore); license drift grew 13 -> 14
+CD-001 MIT stage-1 leaves (new `railb.S`, SPDX verified; followup
+`298 -> 312` / `1112 -> 1126` once CD-001 lands). Touch/Case/EM9305
+disks clean; `reviewed_sources.json` needs no action (4 fns, no
+transparent-builder reference to any new leaf); assessment-data.json
+and transparent-ledger NOT regenerated (gates red / XC-004 pipeline).
+Tests: transparent+Touch 21/21 pass; readiness setUpClass error (BL);
+license 4 ran + 1 census error (CD-001); raw gate fails only on known
+spotmgr pads (BL). Audit:
+`docs/research/tooling-completion-readiness-truthfulness.md`. No
+hardware operation. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+## 2026-09-12 AM-040 re-verification (64/64 leaves hold, range still official_blob)
+
+Re-ran AM-040 (`0x0048C7B4..0x0048D866`) with no production tree
+changes. All 64 `replace_apollo_am040_*` patch sites resolve to
+relocated leaves with filled size/sha256 pins (25 style getters, 6
+`with_margin`/`area_copy`/`memzero`/`space` helpers, 22 grid-engine
+leaves incl. `calc_cols`/`calc_rows`/`item_repos`/`grid_align`, 11
+trailing `strcpy`/state-cluster/`strtoul` leaves). Verified: 52/52
+host tests (`test_runtime_lvgl_grid_engine` 18,
+`test_runtime_lvgl_grid_calc` 18, `test_runtime_str_state_helpers`
+16), 39/39 transparent tests, and the private core-stage replica is
+green (2,063/2,063 leaves incl. 64/64 AM-040; overlay 385,460 /
+`8c93066a…` matches canonical pins). The flash plan (Sep 11 20:45,
+newer than the registration) still reports the range
+`official_blob`: the manifest splice still waits on the LC3-lane LLD
+fix (host LLD still 23.1.1 vs pinned 23.1.0, read-only probe) owned
+outside this lane, so no lock-gated rebuild was attempted.
+`reviewed_sources.json` admission stays negatively resolved (27
+FIT/37 OVER envelope survey stands). Audit:
+`docs/research/lvgl-grid-engine-closure.md`. No hardware operation.
+Hardware qualification stays blocked by unavailable physical
+evidence.
+
+## 2026-09-12 BL-006: six command-queue/MSPI tails from reviewed C (+70 B, 1572/5892)
+
+Six single-exit, call-free, branch-free, literal-free dead tails
+are now produced from reviewed MIT C as `in_place_leaves`:
+`0x004278BC` (12 B, enable bit-25 merge), `0x004278FC` (14 B,
+disable publish + clear), `0x00427A4C` (10 B, block-post table
+publish), `0x00427B2E` (10 B, termination publish through the
+head-owned slot, `pop {r1, r4, r5, pc}`), `0x00427C02` (16 B,
+reset publish + clear), `0x0042647C` (8 B, MSPI IRQ-enable store
+via `str.w`). Source:
+`components/bootloader/core_overlay/runtime_bl006_cmdq_irq_tails_4278bc.c`
+(naked-asm target bodies + portable host twins); all six compile
+relocation-free and byte-identical to stock, survey grades every
+span `corroborated_unreachable_control_flow`, whole-image `bl`
+sweep finds no caller. Verified: new
+`g2/tests/test_runtime_bootloader_bl006_cmdq_irq_tails.py` passes
+11/11. Overlay `in_place_leaves` grew 297 -> 303 (append-only;
+the large HEAD diff on overlay.json is other agents'
+uncommitted work, untouched). Audit:
+`docs/research/g2-bootloader-bl006-tail-leaves-42647c-427c02-source-closure.md`.
+58/77 survey regions fully closed; 19 regions (4,408 B) remain,
+headed by the 1,618 B MSPI tail, the 1,316 B SPOT-trim span, and
+the branch-back cmdq remainders. No hardware operation. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+## 2026-09-12 CD-001: UART boot stage-1 rail operation A from reviewed assembly (+464 B, 2306/8192)
+
+Rail op A (`0x10000860`, package `0x8B0`, 464 B: entry id/arg1 gating,
+one `pmu_fill_desc` call, entry-byte/m-cell/id-table/descriptor-table
+gates, id-gated merge/store arms, divisor retry dispatcher, bit-mask
+retry check, noreturn fail tail with shift cycling) is now produced
+from reviewed clean-room C-SKY assembly as `compiled_assembly`:
+`components/shared/gx8002/runtime_gx8002_uart_stage1_raila.S`
+(byte-identical section when linked at its entry, corroboration only)
+plus `NATIONALCHIP-UART-BOOT-STAGE1-RAILA-NOTICE.txt`. Verified: new
+`tools/verify_gx8002_uart_stage1_raila.py` (228 stock/source/oracle
+cases, exact unfiltered traces/RAM/registers; trap stops pin pc-set,
+address, traces, RAM) and `g2/tests/test_gx8002_uart_stage1_raila.py`
+passes 23/23. Registered as `uart-stage1-raila` in
+`tools/build_gx8002_source_candidate.py` and the Makefile gate list;
+private compose check gives 1 replacement over package
+`0x8B0..0xA80`. Shared `make -C g2 gx8002-source-candidate` still
+fails before any stage-1 tranche at the pre-existing `rtc-init`
+baseline drift (owner elsewhere). Audit:
+`docs/research/gx8002-uart-stage1-raila-source.md` (+ verification
+JSON). CD-001 stands at 2,306 of 8,192 source-owned bytes; remaining
+leaves are mapped in the audit. No hardware operation. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+XC-002 2026-09-12 raila pass: HEAD still `284b98a7`, so no re-pin due;
+ledgers re-verified with the tools' own logic, no tool/manifest/test
+edits. `make completion-readiness` still fails at the BL partition check
+(manifest 59013/87981 vs gitignored build-report 60585/86409, delta
++1572/-1572, owner BL-006); raw-encoding still fails only on the
+committed spotmgr pads (owner BL); license community drift 14->15 files
+(new untracked MIT `runtime_gx8002_uart_stage1_raila.S`, owner CD-001;
+followup +15 lines, 298->313/1112->1127 on landing). Touch/Case/EM9305
+censuses exact; `reviewed_sources.json` unchanged (4 fns, no transparent
+registration due); assessment-data.json and transparent-source-ledger.md
+not regenerated (red gate / XC-004 pipeline). Tests: transparent+Touch
+21/21, Case static 2/2, readiness setUpClass error, license 4 ran + 1
+census error. Audit: `docs/research/tooling-completion-readiness-truthfulness.md`.
+No hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+AM-040 2026-09-12 re-verify: 64/64 LVGL/state leaves still reviewed MIT C
+(`lvgl_grid_engine.c`, `lvgl_layout_style_getters.c`,
+`runtime_string_helpers.c`, `runtime_peripheral_state_helpers.c`),
+overlay-registered with builder-verified pins; 52/52 host tests and 39/39
+transparent tests pass, private stage replica green (2,063/2,063 incl. 64/64,
+overlay 385460/`8c93066a`). No production tree changes; range
+`0x0048C7B4..0x0048D866` stays `official_blob` — manifest splice waits on
+other lanes (host LLD 23.1.1 drift, stale canonical `expected` pin
+`7bfc8a60`). Detail: `research/lvgl-grid-engine-closure.md`. No hardware
+operation. Hardware qualification stays blocked by unavailable physical
+evidence.
+
+BL-006 2026-09-12 partial: +70B reviewed MIT C (1,642/5,892):
+MSPI irq-status tail 0x004264F6 (16B), CLKGEN dual-clock terminal
+tail 0x00426CC4 (8B), cmdq init remainder 0x0042784C (44B), cmdq
+block-release terminal return 0x004279EE (2B) as byte-exact
+`in_place_leaves` with host-verified C twins (9/9 tests pass;
+neighbor cmdq/irq tails 11/11; bootloader overlay builds with the
+leaves). Excluded 0x004264B0 (10B mid-instruction slice, needs
+data/fill route). 62/77 regions closed. `make -C g2
+bootloader-component` still blocked at the `littlefs-snapshot`
+prereq by another lane's uncommitted apollo_main change, and the
+overlay manifest-contract test was already red at turn start
+(contract predates prior uncommitted BL-006 admissions; test file
+carries another agent's edits) -- both pre-existing, untouched.
+Detail:
+`research/g2-bootloader-bl006-tail-leaves-4264f6-4279ee-source-closure.md`.
+No hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 — CD-001: stage-1 first PMU dispatcher closed (264 B)
+
+Closed the `0x10000D98` dispatcher (package `0xDE8`, 264 B) as
+reviewed clean-room assembly
+(`components/shared/gx8002/runtime_gx8002_uart_stage1_pmudispatch.S`,
+exact 264-byte fill, no relocations), verified by 8,370 decoded
+stock/source/oracle cases plus 13 host tests
+(`tools/verify_gx8002_uart_stage1_pmudisp.py`,
+`tests/test_gx8002_uart_stage1_pmudisp.py`), and registered as
+`uart-stage1-pmudisp` in the experimental codec builder. The
+deferred 298-byte C draft is removed; its fit measurements are kept
+in the new audit doc. CD-001 is now 2,570/8,192 bytes source-owned.
+Two stock-ground-truth corrections landed: three-operand shifts
+execute reversed (proven at two sites; the old `1<<fill` reading was
+wrong), and the extended-test miss joins the plain shift with the
+cell still loaded (no re-read). A first-attempt `or`-fold of the
+plain gate was wrong and was caught by the battery. Audit:
+`docs/research/gx8002-uart-stage1-pmudisp-source.md` (+ verification
+JSON). No hardware operation. Hardware qualification stays blocked
+by unavailable physical evidence.
+
+2026-09-12 (AM-040): re-verified the LVGL grid/string/state closure
+(`0x0048C7B4..0x0048D866`, 64 fns, 4,102 B) with no production tree
+changes: all four TUs recompile warning-free under the canonical
+Cortex-M55 flags (private objects under
+`g2/build/continue-analysis/AM-040/tu-check/`), 52/52 host tests pass
+(`test_runtime_lvgl_grid_engine`, `test_runtime_lvgl_grid_calc`,
+`test_runtime_str_state_helpers`), `make -C g2 transparent-test`
+passes 39/39, and all 64 `replace_apollo_am040_*` patch sites remain
+overlay-registered. The flash plan still shows the range
+`official_blob`; lock-gated rebuild/manifest splice stay blocked on
+the other lanes' LLD 23.1.1-vs-23.1.0 drift and littlefs aggregate
+re-pin. Audit: `docs/research/lvgl-grid-engine-closure.md`. No image
+was signed, flashed, or installed. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+2026-09-12 (XC-002): HEAD `284b98a7` unchanged, no re-pin due; ledgers
+re-verified with the tools' own logic. Readiness still fails at the BL
+partition check (gitignored report rebuilt from BL-006's uncommitted
+overlay, now 60655/86339: delta +1572/-1572 to +1642/-1642); license
+drift holds at 15 CD-001 MIT stage-1 leaves (SPDX verified, 0 missing);
+raw-encoding gate still only the known spotmgr pads. Reviewed-source
+registration needs no action (4 functions, cortex_m55 unchanged, no
+transparent reference to new leaves); assessment-data.json and the
+transparent ledger NOT regenerated (generators still red / inputs
+unchanged at 7,449 functions). Tests: transparent+Touch 21/21 pass,
+readiness setUpClass error, license 4 ran + 1 census error. Audit:
+`docs/research/tooling-completion-readiness-truthfulness.md`
+(pmudisp pass). No hardware operation. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+## 2026-09-12 BL-006: terminal returns, status/binary32 tails, setter entry, disable tails (+84 B, 1722/5892)
+
+Seven dead tails now reproduce stock bytes exactly as
+`in_place_leaves` (all relocation-free, verified against the
+stock oracle): the memset-wrapper terminal return `0x00426C22`
+(`pop {r4, pc}`), the CLKGEN HFADJ-enable terminal return
+`0x00426C70` (bare `bx lr`), the command-queue status remainder
+`0x00427ABE`, the binary32 remainder-code remainder `0x00427D84`
+(IT blocks plus `blo.w` to `0x004275C4`), the System-PLL
+alternate setter entry `0x004275C4` (selects `0x21`, joins the
+routed range-error body), the MSPI disable mini-tail
+`0x00425162`, and the MSPI interrupt-disable publish tail
+`0x004264B2`. Four loader-free slots go through `in_place_data`
+as named layout preservation: orphaned head fragments at
+`0x00425160`/`0x004264B0` (resolving the prior turn's
+mid-instruction exclusion), alignment at `0x00425166`, and the
+`0x0007FFFF` lifecycle word at `0x00425168`. The two
+out-of-span branches use reviewed explicit encodings
+(`.inst.w`/`.inst.n`) cross-checked by assembling identical
+branches at identical offsets. New verifier
+`test_runtime_bootloader_bl006_tail7_fragments` 14/14 pass;
+neighbor suites green (survey 5, mspi-clkgen-cmdq 9, cmdq-irq
+11, syspll 8 re-derived for the routed prologue with a mixed
+loader contract on the `0x004275E4` cell). The bootloader
+overlay builds with the 11 entries. `make -C g2
+bootloader-component` stays blocked at the `littlefs-snapshot`
+prereq by another lane's uncommitted apollo_main change, and the
+overlay manifest-contract test stays red on the stale canonical
+manifest (both pre-existing, untouched). BL-006: 69/77 regions
+closed; 8 regions (4,170 B) remain -- cmdq fragments, the
+108-byte blocking-transfer tail, four bulk MSPI tails, and the
+1,316-byte table span. Detail:
+`research/g2-bootloader-bl006-tail-leaves-426c22-427d84-source-closure.md`.
+No hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 — CD-001: stage-1 rail postamble closed (60 B)
+
+Closed the `0x10001D9C` rail postamble (package `0x1DEC`, 60 B: 56
+code + 4 pool) as reviewed clean-room assembly
+(`components/shared/gx8002/runtime_gx8002_uart_stage1_postamble.S`,
+byte-identical to the stock envelope), verified by 2,268 decoded
+stock/source/oracle cases plus 14 host tests
+(`tools/verify_gx8002_uart_stage1_postamble.py`,
+`tests/test_gx8002_uart_stage1_postamble.py`), and registered as
+`uart-stage1-postamble` in the experimental codec builder. The leaf
+sets control bits, single-pass polls, publishes id 25 / selector 0,
+and noreturn-calls the reviewed first dispatcher; the composed
+dispatcher oracle differs from the standalone one only in the pushed
+return address (`0x10001DD2`, caught by the battery itself). The
+`0x10000EA0` second dispatcher is now mapped (500 B envelope, shared
+arms into the first dispatcher, provably noreturn in-model) and
+deferred to a bounded-cycle tranche. CD-001 is now 2,630/8,192 bytes
+source-owned. Audit:
+`docs/research/gx8002-uart-stage1-postamble-source.md` (+ verification
+JSON). No hardware operation. Hardware qualification stays blocked
+by unavailable physical evidence.
+
+XC-002 2026-09-12 postamble pass (re-verification only): HEAD
+`284b98a7` unchanged so no re-pin due. Ledgers re-verified with the
+tools' own logic: BL partition delta holds at +1642/-1642 (owner:
+BL-006 landing chore), license community drift grew 15->16 files with
+CD-001's new MIT rail-postamble leaf
+(`runtime_gx8002_uart_stage1_postamble.S`, still untracked, followup
+`298 -> 314` / `1112 -> 1128` once CD-001 lands), spotmgr raw pads
+still BL owner's, Touch/Case/EM9305 censuses clean, and
+`reviewed_sources.json` needs no action (4 functions; fleet C routes
+through overlays/candidates, not the transparent image).
+`assessment-data.json` and `transparent-source-ledger.md` NOT
+regenerated (readiness still red; no `source|image` stages).
+Tests: reviewed+Touch 21/21 pass; readiness setUpClass error (BL
+partition); license 4 ran + 1 census error (CD-001). Audit:
+`docs/research/tooling-completion-readiness-truthfulness.md`
+(postamble pass). No hardware operation. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+2026-09-12 AM-040 re-verify (apollo_main `0x0048C7B4..0x0048D866` LVGL
+grid + string/state): no production tree changes by this lane. 64/64
+leaves still reviewed MIT C across 4 TUs, overlay-registered (64
+`replace_apollo_am040_*` patch sites), stage-replica green (overlay
+385,460 B / `8c93066a…` match; component `c8945453…` vs stale canonical
+`7bfc8a60…`). 52/52 host + 39/39 transparent tests pass. Range still
+`official_blob`: manifest splice still waits on the other-lane LC3 LLD
+fix + littlefs re-pin (host LLD still 23.1.1). Audit:
+`docs/research/lvgl-grid-engine-closure.md` (re-run note). No hardware
+operation. Hardware qualification stays blocked by unavailable physical
+evidence.
+
+2026-09-12 BL-006 allocator/error-resume interiors (work item BL-006):
++58B reviewed MIT C (1,780/5,892B, 71/77 regions). Two dead
+interiors as byte-exact in-place leaves with host-verified twins:
+`0x0042799E` (32B allocator wrap/fail/bounds remainder, 3 entries)
+and `0x00427B90` (26B error-resume loop-back + match epilogue).
+Five out-of-span narrow exits use reviewed `.inst.n` spellings
+pinned by six in-source assembler probes (binary32 `.inst.w`
+precedent; `b`/`.`-relative probing rejected). New verifier
+`g2/tests/test_runtime_bootloader_bl006_cmdq_alloc_resume.py`
+10/10 pass; five neighboring BL-006 suites green;
+`build_component.py` succeeds (15,240 overlay bytes at
+`0x00434478`); `make -C g2 bootloader-component` still blocked at
+the other lane's `littlefs-snapshot` prerequisite. Audit:
+`g2/docs/research/g2-bootloader-bl006-tail-leaves-42799e-427b90-source-closure.md`.
+Six regions (4,112B) remain, incl. the call-bearing
+blocking-transfer tail. No hardware operation. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+2026-09-12 CD-001 UART-configure block (work item CD-001): +208B
+reviewed MIT assembly (2,838/8,192B). The `0x10000C9C` straight-line
+MMIO register program (package `0xCEC`, seven 0xA0005000-block
+programs from descriptor words, chaining branch into retained
+`0x1000046C`, no return) as
+`runtime_gx8002_uart_stage1_uartcfg.S` (exact 208B envelope fit,
+zero fill; movih/ori base materialization, frameless form with
+per-path sp alignment and a documented r4 implementation-defined
+exclusion dead downstream). Verifier
+`g2/tools/verify_gx8002_uart_stage1_uartcfg.py`: 1,500
+stock/source/oracle cases; `g2/tests/test_gx8002_uart_stage1_uartcfg.py`
+15/15 pass; registered as `uart-stage1-uartcfg` (builder +
+`gx8002-source-candidate` test list). Audit:
+`g2/docs/research/gx8002-uart-stage1-uartcfg-source.md`. Shared
+`gx8002-source-candidate` gate still red on foreign rtc-init drift
+(`clock_dependency.evidence_sha256.build_transparent_image.py`
+pinned at 8d4c1c95 vs HEAD 284b98a7; re-pin is another lane's
+chore); the uartcfg builder replacement path was exercised
+separately (208B row admitted). 5,354B remain, keystone still the
+`0x10000EA0` second dispatcher. No hardware operation. Hardware
+qualification stays blocked by unavailable physical evidence.
+
+2026-09-12 BL-006 MSPI dead interiors (work item BL-006): +2,792B
+reviewed MIT C (4,572/5,892B, 76/77 regions). Five dead
+interiors as byte-exact in-place leaves with host-verified
+twins: PIO-mixed nibble arms `0x004248E2` (148B), blocking end
+`0x004263E0` (108B, 2 call relocs + `.inst.w` retained call),
+control dispatcher `0x0042612C` (436B, 1 call reloc + 13 branch
+spellings), public devconfig `0x00424E84` (482B, 2 call relocs
++ 10 narrow spellings), devconfig arms `0x0042423C` (1,618B,
+24 arms, no relocs). Out-of-span exits use reviewed encodings
+with same-offset probes, except 11 wide exits pinned by decoder
+verification (reference assembler emits a variant `b.w` bit).
+New verifier `g2/tests/test_runtime_bootloader_bl006_mspi_tails.py`
+12/12 pass; `bl006_tail7_fragments` refined to deadness-aware
+loader scan (14/14); five more neighboring suites green;
+`build_component.py` succeeds (15,240 overlay bytes at
+`0x00434478`); `make -C g2 bootloader-component` still blocked
+at the other lane's `littlefs-snapshot` prerequisite. Audit:
+`g2/docs/research/g2-bootloader-bl006-tail-leaves-4248e2-4263e0-source-closure.md`.
+Only the 1,316B binary32/SPOT span remains (fill-primitive
+followup). No hardware operation. Hardware qualification stays
+blocked by unavailable physical evidence.
+
+XC-002 2026-09-12: ledgers re-verified, no re-pin due (HEAD 284b98a7
+unchanged). Readiness still red on BL-006's partition lane (delta grew
++1642/-1642 to +4576/-4576 after the 01:42 gitignored build-report
+rebuild; manifest regeneration is the owner's landing chore); license
+drift 16->17 CD-001 MIT stage-1 leaves (new xip.c, SPDX ok).
+Transparent reviewed-source 8/8 pass; reviewed_sources.json needs no
+registration (new C routes via overlays, not the transparent image).
+Touch/Case/EM9305 disk==manifest clean. Audit:
+`g2/docs/research/tooling-completion-readiness-truthfulness.md`. No
+hardware operation. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+AM-040 2026-09-12 01:48: re-verified, no production changes. 52/52 host tests
+(`test_runtime_lvgl_grid_engine`, `test_runtime_lvgl_grid_calc`,
+`test_runtime_str_state_helpers`); 4/4 TUs warning-free under canonical
+Cortex-M55 flags; private stage replica green (2,063/2,063 incl. 64/64 AM-040,
+pins unchanged 385,460 / `8c93066a…`); `transparent-test` 39/39. Range
+`0x0048C7B4..0x0048D866` still `official_blob`: canonical rebuild still gated
+on other-lane LLD 23.1.0-vs-23.1.1 drift plus the stale littlefs scalar-tag
+aggregate (`verify_snapshot.py` still fails read-only), so no lock-gated
+build, manifest splice, or admission attempted. Audit:
+`g2/docs/research/lvgl-grid-engine-closure.md`. No hardware operation.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+2026-09-12 BL-006 SPOT trim-search span (work item BL-006):
+DONE -- 5,892/5,892 bytes, 77/77 regions. The last retained
+region (`0x00427E54..0x00428378`, 1,316 B) is now four
+byte-exact MIT in-place leaves in
+`runtime_bl006_spot_trim_span_427e54.c` (classifier tail 48B;
+variants A/B/C 484/472/312B; 0/9/8/4 reviewed call
+relocations; no `.inst` spellings; VFP assembles natively).
+Host twins model 15 absolute-word cells, developed against a
+180-trial unicorn stock-execution differential (caught a
+signed-`blt` clamp bug and a wrong merge target pre-landing;
+T0's VFP is not unicorn-executable, decode-qualified). New
+verifier `g2/tests/test_runtime_bootloader_bl006_spot_trim.py`
+14/14 pass; seven neighboring BL-006 suites plus the retained
+survey green; `build_component.py` succeeds (15,240 overlay
+bytes at `0x00434478`). Also synced the manifest bootloader
+section from the fresh contract (96 reviewed region
+identities the whole range was missing) with a
+`sync-manifest` merge fix preserving the `linux-clang`
+profile path, so `test_bootloader_core_overlay.py` is 14/14
+green. `make -C g2 bootloader-component` still blocked at the
+other lane's `littlefs-snapshot` prerequisite (apollo_main
+scalar-tag drift, untouched). Audit:
+`g2/docs/research/g2-bootloader-bl006-span-427e54-spot-trim-source-closure.md`.
+No hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 — CD-001: stage-1 second PMU dispatcher body closed (476 B)
+
+Closed the `0x10000EB8` second PMU dispatcher body (package `0xF08`,
+476 B) as reviewed clean-room assembly
+(`components/shared/gx8002/runtime_gx8002_uart_stage1_pmusecond.S`,
+two documented reviewed-form deviations: a trace-neutral `nop`
+position pad and a retargeted fill-failure branch), verified by 2,688
+decoded stock/source/oracle cases plus 10 host tests
+(`tools/verify_gx8002_uart_stage1_pmusecond.py`,
+`tests/test_gx8002_uart_stage1_pmusecond.py`; Makefile gate lists the
+new test), and registered as `uart-stage1-pmusecond` in the
+experimental codec builder. The battery caught and fixed a slot-index
+off-by-one in the first oracle draft (stock reads slot id-7 via the
+32-bit `ldr.w` at `0xEAE`, not id-6 as a flag-less disassembly
+suggested); this retires the id-25 guard-hole theory (id 25 reads the
+last in-bounds slot, now covered) and corrects the postamble audit's
+"20-entry table for ids 7..26" to 19 entries for ids 7..25. The 24 B
+retained entry head stays stock (inline-pool toolchain change). CD-001
+is now 3,106/8,192 bytes source-owned. Audit:
+`docs/research/gx8002-uart-stage1-pmusecond-source.md` (+ verification
+JSON). No hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 — AM-040 re-verify (no production changes)
+
+AM-040 (`0x0048C7B4..0x0048D866`, 64 LVGL grid/string/state leaves):
+52/52 host tests pass, four TUs recompile `-Werror` clean for
+Cortex-M55, `transparent-test` 39/39, 64/64 `replace_apollo_am040_*`
+patch sites registered. Range stays `official_blob` pending the
+foreign-lane LC3 LLD fix + atomic littlefs re-pin; `reviewed_sources.json`
+admission stays closed per the recorded negative result. Audits:
+`docs/research/lvgl-grid-engine-closure.md`,
+`docs/research/g2-display-state-string-helpers-closure.md`. No hardware
+operation. Hardware qualification stays blocked by unavailable physical
+evidence.
+
+## 2026-09-12 — XC-002 ledger re-verification (no pin edits)
+
+XC-002 (`-`, tooling): HEAD still `284b98a7`; all tree movement is
+uncommitted owner-lane work, so no re-pin was due. The readiness
+failure signature changed: the BL lane regenerated the core-source
+manifest via its write path (02:18; provider `696a6baf…`, 64905/82089
+now agrees with the gitignored builder report), so the manifest↔builder
+partition check passes and the gate now fails one step later at
+`bootloader retained complement changed` (pin 87_981 vs live 82_089,
+recomputed with the tool's own `_region_partition`). Re-pin deferred:
+the companion MSPI gates fail on renamed intervals, not just counts
+(`KeyError:
+'bootloader_mspi_enable_unreachable_tail_4250e6_4250f0_official'`,
+`KeyError:
+'bootloader_mspi_control_unreachable_tail_42612c_4262e0_official'`),
+and BL hands are in these files now
+(`test_bootloader_core_overlay.py` already carries the new provider
+sha) — adapting them is BL-006's landing chore. The raw-encoding gate
+now has two failing files: the committed spotmgr pads persist (41
+directive hits) plus BL-006's untracked
+`runtime_bl006_spot_trim_span_427e54.c` (3 `.word` float literals,
+`0xC3888000/0x42480000/0x447A0000`). License community drift grew
+17 → 18 CD-001 untracked MIT stage-1 leaves (new `pmusecond.S`,
+`uartcfg.S`; SPDX MIT verified on all 18, 0 missing; followup once
+CD-001 lands: +18 manifest lines, tool `298 → 316` /
+`1112 → 1130`, same bumps in companion test pins).
+`reviewed_sources.json` needs no action (4 functions, cortex_m55 still
+exactly the 4 registered files, no transparent reference to any new
+leaf). Assessment-data and transparent ledger NOT regenerated
+(readiness red; transparent inputs unchanged: 7,449 functions /
+1,394,848 code bytes). Tests: transparent reviewed-source 8/8, Touch
+frontier 13/13, CasePackageSourceStatic 2/2 pass; readiness suite
+setUpClass-errors on the retained complement, license suite 4 ran + 1
+census error, both as designed on owner items. No hardware operation.
+Hardware qualification stays blocked by unavailable physical evidence.
+
+## 2026-09-12 — CD-001: stage-1 rail-configure/block-clear trap tails closed (100 B)
+
+Closed the `0x1000046C` rail-configure tail (package `0x4BC`, 56 B)
+and the `0x100004A4` block-clear tail (package `0x4F4`, 44 B) as
+reviewed clean-room assembly
+(`components/shared/gx8002/runtime_gx8002_uart_stage1_traptails.S`,
+zero reviewed-form deviations: byte-identical to stock, exact fill,
+no relocations), verified by 288 decoded stock/source/oracle cases
+plus 11 host tests
+(`tools/verify_gx8002_uart_stage1_traptails.py`,
+`tests/test_gx8002_uart_stage1_traptails.py`; Makefile gate lists the
+new test), and registered as `uart-stage1-traptails` in the
+experimental codec builder. Both tails are straight-line H-class
+flows (first dispatcher call already leaves the envelope; every
+dispatcher terminal path falls into the retained second-dispatcher
+loop with no `rts`), so the battery compares full unfiltered
+traces/RAM/registers from entry to the chaining branch and the
+unreachable post-call tails are admitted by byte identity. All 214
+stage-1 host tests pass. Correction: the true prior total was
+3,314, not 3,106 (the pmusecond audit's "prior 2,630" predates the
+concurrently-landed 208 B uartcfg block; envelopes disjoint, both
+registered). CD-001 is now 3,414/8,192 bytes source-owned. The
+shared `gx8002-source-candidate` gate stays red on the foreign
+pre-existing `rtc-init` baseline drift (untouched); tranche
+integration proven privately via the builder admission path
+(`reviewed_replacements` + `compose` close, zero fill). Audit:
+`docs/research/gx8002-uart-stage1-traptails-source.md` (+ verification
+JSON). No hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 — BL-009 gap literals (partial, 334/5,978 bytes source-owned)
+
+Routed every understood scalar cell of the 25 retained
+`0x0042B9BA..0x00430470` spans as 14 MIT clean-room in-place data groups
+(`g2/components/bootloader/core_overlay/runtime_bl009_*.c`, 77 data
+groups total): SCB->CCR, register-block bases, clock literals (96 MHz
+down to 100 kHz), float bounds, dispatch fallback, MMIO targets,
+identifier-compare/mask/sentinel words, alignment zeros. Each word cell
+is pinned to an original literal load in routed neighbours; pointers
+into opaque BL-005/BL-011/BL-012 code, unattributed SRAM/float cells,
+and all 7 code spans stay retained (audit:
+`docs/research/g2-bootloader-bl009-gap-literals-source-closure.md`).
+Component build green with byte-identical provider (with/without
+entries); manifest regions synced (958; opaque 82089 -> 81755).
+`make -C g2 source` still blocked by other lanes' package pin desync
+(262aacb1 vs 1bb3f8c8) and littlefs-snapshot gate; ledger flip verified
+via private flash-plan regen (range blob 5978 -> 5644). Tests:
+new `test_bootloader_bl009_gap_literals` 4/4, overlay suite 14/14. No
+hardware operation. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+## 2026-09-12 — XC-002 ledger truthfulness (partial, re-verification only)
+
+HEAD `284b98a7` unchanged; no re-pin due. BL manifest (03:07) and
+builder report (03:10) agree at 65239 source / 81755 opaque (+334/-334
+since last pass, matching BL-009's gap-literal claim), so the readiness
+gate now fails one step later at the retained complement (live 81755 vs
+pin 87981); re-pin deferred again because the BL lane is actively
+rebuilding and the frontier tools' name-keyed intervals were renamed
+(numeric-only bump would still KeyError). License drift 18->19 CD-001
+MIT files (traptails.S, SPDX ok, untracked); Touch/Case/EM9305 clean;
+`reviewed_sources.json` needs no action (4 functions, no transparent
+refs to new leaves); assessment snapshot and transparent ledger not
+regenerated (inputs unchanged/red gate). Tests: transparent+Touch 21/21,
+CasePackage 2/2; readiness and license suites red on owner lanes as
+designed. Audit: `docs/research/tooling-completion-readiness-truthfulness.md`.
+No hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 — AM-040 re-verify (no production changes)
+
+AM-040 (`0x0048C7B4..0x0048D866`, 64 LVGL grid/string/state leaves):
+52/52 host tests pass, four TUs recompile `-Werror` clean for
+Cortex-M55, private stage replica green (2,063/2,063 incl. 64/64
+AM-040, overlay 385,460 / `8c93066a…`), `transparent-test` 39/39,
+64/64 `replace_apollo_am040_*` patch sites registered (no missing, no
+extras). Range stays `official_blob` pending the foreign-lane LC3 LLD
+fix (host 23.1.1 vs pinned 23.1.0) + atomic littlefs re-pin
+(380,444 / `21095c67…` vs live 385,460 / `8c93066a…`); no lock-gated
+rebuild, manifest splice, or `reviewed_sources.json` admission
+attempted. Audits: `docs/research/lvgl-grid-engine-closure.md`,
+`docs/research/g2-display-state-string-helpers-closure.md`. No
+hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+BL-009 trim-state leaves 2026-09-12: six self-contained Thumb-2
+leaves in `0x0042D5C2..0x0042D6C0` (210 bytes: state-flag publisher,
+gated LDO trim-field publisher, dual field setter, six-register
+calibration-block programmer, status-bit raise/clear pair) now reviewed
+MIT C with portable models, byte-exact under both toolchains with zero
+relocations and matching Apollo main analogues `0x005A07E6..0x005A08CA`;
+nine attributable pool cells routed as one 36-byte in-place data group.
+BL-009 source-owned 334 -> 580 of 5,978 bytes; manifest blob retiled
+1 -> 21 regions (978); provider hash unchanged; built provider
+byte-identical to stock across the BL-009 window. Blocked `0x0042D5CC`
+(opaque BL-005 call), 220-byte `0x0042D6C0` dispatcher, remaining code
+spans / pointer tables stay retained. 27 tests green (9 new + gap +
+core-overlay incl. provider contract). Shared `make source` stays
+blocked on other lanes' apollo_main/manifest flux. Audit:
+`docs/research/g2-bootloader-bl009-trim-leaves-42d5c2-source-closure.md`.
+No hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 — CD-001 beacon/bring-up leaves (partial, 3,686/8,192 bytes source-owned)
+
+Closed the baud beacon at runtime `0x100004D0` (package `0x520`, 180
+B) and the UART bring-up at runtime `0x100005C4` (package `0x614`, 92
+B) as reviewed clean-room assembly (`runtime_gx8002_uart_stage1_beacon.S`,
+byte-identical to both stock envelopes, zero relocations), verified by
+148 decoded stock/source/oracle cases plus 16 host tests
+(`tools/verify_gx8002_uart_stage1_beacon.py`,
+`tests/test_gx8002_uart_stage1_beacon.py`), and registered as
+`uart-stage1-beacon` in the experimental codec builder (+ Makefile
+gate). Both are H-class noreturn flows (first chaining call already
+leaves the envelope; dispatcher noreturn re-proven by whole-envelope
+no-`rts` scan); post-chain tails admitted by byte identity.
+Toolchain finding: the C-SKY assembler silently drops internal
+branches written with absolute address operands — all internal
+branches use symbolic labels. Envelopes tile exactly between the
+traptails/serial neighbors and pools are self-contained
+(`0x580`/`0x618`/`0x61C` single-referenced). Scoped admission proof
+via the builder's own `reviewed_replacements` + `compose` closes with
+272 `compiled_assembly` bytes and zero fill. The shared
+`gx8002-source-candidate` gate stays red on the foreign pre-existing
+`rtc-init` baseline drift (`build_transparent_image.py` hash changed
+by another lane; untouched). 96 stage-1 host tests pass. Audit:
+`docs/research/gx8002-uart-stage1-beacon-source.md` (+ verification
+JSON). No hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+AM-040 re-run 2026-09-12: 64/64 leaves stay reviewed MIT C and
+overlay-registered (64 `replace_apollo_am040_*` patch sites, all
+resolving; 2,063 relocated leaves). 52/52 host tests, 4-TU `-Werror`
+recompiles, private stage replica green (overlay 385,460 /
+`8c93066a…`, stage component matching `core_stage_expected`), and
+39/39 transparent tests all re-pass with no production tree changes by
+this lane. Range `0x0048C7B4..0x0048D866` stays `official_blob`;
+manifest splice still waits on the LC3 lane's LLD drift fix (host
+23.1.1 vs pinned 23.1.0) plus the atomic littlefs aggregate re-pin.
+Audit: `docs/research/lvgl-grid-engine-closure.md`. No hardware
+operation. Hardware qualification stays blocked by unavailable physical
+evidence.
+
+XC-002 re-verification 2026-09-12 (~04:00): HEAD `284b98a7`
+unchanged, no re-pin due. BL manifest/builder agree at 65485/81509
+(+246B source since the ~03:15 pass; 978 regions); gate still red at
+the retained complement (pin 87_981 vs live 81_509) plus the
+structural interval-rename mismatch -- both stay BL-009/BL-006's
+landing chore. License drift 19->20 CD-001 MIT files (new
+`runtime_gx8002_uart_stage1_beacon.S`, SPDX ok); Touch/Case/EM9305
+disks match manifests; `reviewed_sources.json` needs no action (fleet
+C routes through overlays, not the transparent image);
+assessment-data.json and transparent ledger not regenerated (red gate
+/ no source|image stages). Tests: transparent+touch 21/21 pass,
+CasePackageSourceStaticTests 2/2, readiness setUpClass error,
+license 4 ran + 1 census error. Audit:
+`docs/research/tooling-completion-readiness-truthfulness.md`. No
+hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 — CD-001: UART announce leaf 0x1000065C (124B) as reviewed asm
+
+Closed the stage-1 announce at runtime `0x1000065C` (package `0x6AC`,
+124B: 120 code + 4 pool, no trap word) as byte-identical reviewed
+assembly (`runtime_gx8002_uart_stage1_announce.S`, first form):
+base-cell read, `[base+0xA8]=1`, rail-select id (6 when the base
+already matches `0xA0100000`, else 4), then chain into retained
+`0x10001BF8` (straight-line prefix into reviewed D98, noreturn).
+Post-chain "ready" TX loop + reviewed postamble call + pop-return
+admitted by byte identity. Verified: 30 stock/source/oracle cases
+(5 seeds x 2 bases x 3 rail-control inits, full trace/RAM/register
+agreement) + 15 host tests; builder `reviewed_replacements`
+admission replica passes (1 row, 124B). Registered as
+`uart-stage1-announce` (builder + `gx8002-source-candidate` test
+list). CD-001 now 3,810/8,192B source-owned; 4,382B remain.
+Shared `gx8002-source-candidate` gate still red on foreign
+`rtc-init` drift (`evidence_sha256/build_transparent_image.py`
+changed by another lane's uncommitted work; functions match at
+72B) — pre-existing, not this item. `codec-source-experimental`
+not run (same gate). Audit:
+`docs/research/gx8002-uart-stage1-announce-source.md`. No hardware
+operation. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+## 2026-09-12 — BL-009: state-flag dispatcher 0x0042D6C0 (222B) + dispatch-pool cells (8B) as reviewed C
+
+Routed the self-contained state-flag dispatcher at `0x0042D6C0..0x0042D79E`
+(222 bytes, no calls, returns 0, publishes three SRAM flag bytes from the
+`0x4002000C` mode register / one state word / one guarded status word) as
+one byte-exact MIT naked-asm in-place leaf with a portable behavior model
+(`runtime_bl009_state_dispatch_42d6c0.c`), plus the two identified pool
+cells (`0x4002000C` register, `0x3FE00000` mask) as an 8-byte in-place data
+group (`runtime_bl009_dispatch_pool_42d834.c`). Dual-toolchain exact, zero
+relocations, Apollo main twin at `0x005A08E4` corroborates. BL-009 total now
+810 of 5,978 bytes. Component builder verifies 332 leaves + 79 data groups;
+built provider byte-identical to stock across the window (provider hash
+unchanged `696a6baf...`). Manifest re-tiled (983 regions; counts 65715 /
+81279, which also absorb the trim pass's 246 previously-synced-regions-only
+bytes). Verified: new 8-test suite + overlay/gap/trim suites (35 tests
+green together). `make bootloader-component`'s `littlefs-snapshot` prereq
+and shared `make -C g2 source` stay blocked by other lanes' uncommitted
+apollo_main/manifest changes (pre-existing, unrelated); the component
+builder itself was run directly under the BL-009 lock. Audit:
+`docs/research/g2-bootloader-bl009-dispatch-42d6c0-source-closure.md`. No
+hardware operation. Hardware qualification stays blocked by unavailable
+physical evidence.
+
+## 2026-09-12 — AM-040 re-verification (partial, no production changes)
+
+AM-040 (`0x0048C7B4..0x0048D866`, 64 LVGL grid/style/string/state
+leaves, 4,102 function bytes) re-verified under the live tree: 52/52
+host tests (`test_runtime_lvgl_grid_engine`,
+`test_runtime_lvgl_grid_calc`, `test_runtime_str_state_helpers`),
+`make -C g2 transparent-test` 39/39, all four TUs `-Werror` clean
+for `thumbv7em`/`cortex-m55`, and all four working-tree file
+sha256/sizes still match the overlay leaf pins (64/64 leaves, 64
+`replace_apollo_am040_*` patch sites, overlay 385,460 /
+`8c93066a…`). Flash plan still `official_blob` over the range: the
+manifest splice still waits on the other lane's LC3 LLD fix
+(Homebrew LLD 23.1.1 vs pinned 23.1.0) and the atomic littlefs
+re-pin, both pre-existing and unrelated to this item. Audit:
+`docs/research/lvgl-grid-engine-closure.md`. No hardware operation.
+Hardware qualification stays blocked by unavailable physical
+evidence.
+
+## 2026-09-12 — XC-002 ledger re-verification (partial, no production changes)
+
+HEAD still `284b98a7`; all tree movement is uncommitted owner-lane
+work, so no re-pin was due. `completion-readiness` still fails at
+`bootloader retained complement changed` (manifest and builder agree
+at 65715/81279 over 983 regions, +230/-230 since the last pass per
+BL-009's re-tile; delta vs the committed pin is +6702/-6702, and the
+two old name-keyed frontier intervals are still absent, so rename
+adaptation stays the BL owner's landing chore). Raw-encoding still
+fails on the two known BL files (committed spotmgr pads, 41 hits;
+untracked spot_trim_span, 3 hits). License community drift grew
+20 -> 21 (new CD-001 `stage1_announce.S`, MIT, untracked; Touch/Case/
+EM9305 censuses exact). `reviewed_sources.json` needs no change (4
+functions; the one `announce` hit in function-db.json is pre-existing
+decompiler prose). assessment-data.json and transparent-source-ledger
+not regenerated (gates red; ledger inputs match). Tests:
+transparent+Touch 21/21 pass, readiness 0 ran (setUpClass error),
+license 4 ran + 1 census error. Audit:
+`docs/research/tooling-completion-readiness-truthfulness.md`. No
+hardware operation. Hardware qualification stays blocked by
+unavailable physical evidence.
+
+## 2026-09-12 — CD-001: UART handshake leaf 0x100006D8 (168B) as reviewed asm
+
+Closed the stage-1 handshake at runtime `0x100006D8` (package `0x728`,
+168B: 154 code + trap word + 12 pool) as byte-identical reviewed
+assembly (`runtime_gx8002_uart_stage1_handshake.S`, corrected first
+form: first TX poll loops to `0x718`, not `0x712`): push r4-r9/r15,
+then chain into the reviewed rail-configure tail (`0x1000046C`,
+noreturn cascade per traptails/pmudisp/pmusecond). Post-chain PMU
+bit reads, bring-up calls, "GET"/"OK" exchange, delay call, and
+pop-trap admitted by byte identity. Verified: 15 stock/source/oracle
+cases (5 seeds x 3 stack bases, full trace/RAM/register agreement)
++ 13 host tests; builder `reviewed_replacements` admission replica
+passes (1 row, 168B at package `0x728`). Registered as
+`uart-stage1-handshake` (builder + `gx8002-source-candidate` test
+list). CD-001 now 3,978/8,192B source-owned; 4,214B remain.
+Shared `gx8002-source-candidate` gate still red on foreign
+`rtc-init` drift (live `clock_dependency` recompilation differs
+from its baseline; clock/rtc lane's chore) — pre-existing, not this
+item; the build stops before the stage-1 tranches.
+`codec-source-experimental` not run (same gate). Audit:
+`docs/research/gx8002-uart-stage1-handshake-source.md`. No hardware
+operation. Hardware qualification stays blocked by unavailable
+physical evidence.
+### 2026-09-12 — AM-015 bounded ABI continuation
+
+The assigned Apollo interval remains inside retained `official_blob` and is not
+routed. Exact setter/accessor semantics were bounded from authenticated Ghidra
+evidence, but provider initialization/type and the `FUN_0044D25C` logging ABI
+remain unresolved. No AM-015 bytes were admitted; no hardware operation was
+performed. Audit: `docs/research/apollo-main-am015-44fa5e-4501d2.md`.

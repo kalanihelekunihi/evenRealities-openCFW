@@ -36,6 +36,13 @@ def execute(code,entry,allocation,token,channel,gate_hook=None,irq_hook=None):
             if r[p[0]]!=0:jump=int(p[1],0)
         elif op=='zextb':r[p[0]]=r[p[1]]&255
         elif op=='br':jump=int(args,0)
+        elif op=='ldbi.b':
+            m=re.fullmatch(r'(r\d+), \((r\d+)\)',args)
+            if not m:raise ValueError('Postincrement byte operand')
+            reg,base_reg=m.groups();addr=r[base_reg]
+            if addr not in memory:raise ValueError('Postincrement byte address')
+            r[reg]=memory[addr]&255;trace.append(('read',addr,r[reg]))
+            r[base_reg]=(addr+1)&0xffffffff
         elif op in ('ld.w','ld.b','st.b'):
             m=re.fullmatch(r'(r\d+), \((r\d+), (0x[0-9a-f]+)\)',args)
             if not m:raise ValueError('Receive memory operand')

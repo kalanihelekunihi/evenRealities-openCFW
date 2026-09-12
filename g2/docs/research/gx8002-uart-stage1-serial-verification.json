@@ -1,0 +1,111 @@
+{
+  "c_source_sha256": "dad26f1caf1ae2cb746a8e729c9cef96a0500f7a0f1751ca6a4998fa50c86f10",
+  "s_source_sha256": "5128a4ec023e81a507aa89614a5d236cd65af13ead72924880c7f2298872574e",
+  "notice_sha256": "a6ac6ff0d4fa969cc913d0f6de022994f30826582cf4886f2e49a46e563cbd3c",
+  "compile_flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-tree-loop-optimize"
+  ],
+  "assemble_flags": [
+    "-mcpu=ck804ef",
+    "-mhard-float"
+  ],
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "register_reference": "arch/soc/grus/spl/spl_uart.c (serial_put/serial_put_sync/serial_try_get/serial_get_char behavior and conventions) and arch/soc/grus/include/base_addr.h (UART block addresses); clean-room bodies from decoded stock flow, no SDK text reproduced, GPL SDK headers not used",
+  "upstream_files": [
+    {
+      "path": "arch/soc/grus/spl/spl_uart.c",
+      "git_blob": "f1f58e164149513866aa47c5c6810fed6d0f4d5c",
+      "sha256": "b022423124747eb9daeac1b4886430dc5aa711d6f8af703ad670fc18692661fd"
+    },
+    {
+      "path": "arch/soc/grus/include/base_addr.h",
+      "git_blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+      "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+    },
+    {
+      "path": "LICENSE",
+      "git_blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+      "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+    }
+  ],
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_put",
+      "compiled_bytes": 28,
+      "compiled_sha256": "da6cf03dccd38259ccb2ac829e2b172c81e7a2a63bb6844735401accc15ac127",
+      "ownership_kind": "compiled_c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_put",
+          "package_offset": 1492,
+          "bytes": 28,
+          "sha256": "324a7911bba3607c29e88eb9a773625fe072480c64c9282daf9a1261510168be",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_put_sync",
+      "compiled_bytes": 36,
+      "compiled_sha256": "477ebbb0ab69b4179f5288a907b537424cc7febf81ebe000449a3be24ce647ad",
+      "ownership_kind": "compiled_assembly",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_put_sync",
+          "package_offset": 1520,
+          "bytes": 36,
+          "sha256": "477ebbb0ab69b4179f5288a907b537424cc7febf81ebe000449a3be24ce647ad",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_try_get",
+      "compiled_bytes": 32,
+      "compiled_sha256": "02e3cd94b20bfdcad82d42d66dab65eac81adb22ca2b06b6084531a672664530",
+      "ownership_kind": "compiled_c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_try_get",
+          "package_offset": 1648,
+          "bytes": 32,
+          "sha256": "0b3a5084a5f57f9666516d3f691e469da40090856f007319b2a4eca0b402eb67",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_get_char",
+      "compiled_bytes": 28,
+      "compiled_sha256": "97c43a57b7f48f17d95e40a6190c984300dd4ea3e882f1a430701ea22a6c4833",
+      "ownership_kind": "compiled_c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_get_char",
+          "package_offset": 1680,
+          "bytes": 28,
+          "sha256": "d552de87f7deb30b6ed9f529c01e8c3a63260f24aa321c2ac06098a8778d2721",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    }
+  ],
+  "target_cases": 476,
+  "source_admitted": true,
+  "admission_scope": "experimental hybrid codec; UART boot stage-1 polled-UART leaves only",
+  "stock_equivalence_proven": false,
+  "limits": [
+    "Restricted instruction interpreter, not a processor emulator.",
+    "MMIO trace equivalence over a finite battery plus an independent oracle; the LSR/RBR scripts are finite with hold-last and no external concurrent updates are modeled. The base-cell word is fixed per case. Hardware timing remains unqualified."
+  ]
+}

@@ -1,33 +1,33 @@
 {
   "component_overrides": {
     "apollo_bootloader": {
-      "function": "Even Apollo510B bootloader with source-replaced EasyLogger formatting/copy helpers, littlefs v2.10.1 leaves including the max/min/alignment and 32-bit endian utility quartets, fallback npw2/ctz/popc bit-helper trio, tag validity/type1/type3/id/size/chunk and metadata-list open predicates, disk-version major/minor pair, allocator lookahead helper, and exact upstream AmbiqSuite 5.1.0 MSPI interrupt-clear leaf; recovered S200 redirect_init two-mutex initialization entry; recovered Arm EABI byte-fill and forward-copy primitives; recovered bounded byte-comparison, string-span, CRC-32, and SRAM-word helpers; recovered numeric, formatting, logging, substring, critical-context, runtime-gate, dispatcher, callback, object, event-flags, tagged-handle, semaphore, message-queue, bit-width, count-trailing-zeros, and floor-log2 wrappers through 0x004169FC; recovered Arm EABI byte-fill primitive; recovered Arm EABI forward-copy primitive; recovered bounded byte-comparison primitive; recovered reflected CRC-32 update primitive; recovered reject-set string-span primitive; recovered accept-set string-span primitive; recovered SRAM-word setter at 0x200270CC; recovered unsigned 64-bit divide-by-ten helper; recovered unsigned decimal digit-count helper; recovered signed-magnitude decimal digit-count helper; recovered hexadecimal digit-count helper; recovered wrapping decimal parser; recovered unsigned 64-bit decimal output helper; recovered unsigned 64-bit hexadecimal output helper; recovered nullable string-length helper; recovered null-output-aware repeated-character helper; recovered fixed-point float formatter; recovered bootloader logging formatter core; recovered bootloader variadic logging dispatch wrapper; recovered substring-search primitive; recovered critical-context predicate; recovered runtime-state gate acquisition wrapper; recovered runtime-state and SRAM-gate mapper; recovered runtime-state gate release wrapper; recovered critical-context value-dispatch wrapper; recovered address-identified runtime dispatcher at 0x004160FE; recovered address-identified retained-value wrapper at 0x004161C6; recovered address-identified validated runtime call wrapper at 0x004161CE; recovered address-identified guarded runtime action wrapper at 0x00416200; recovered address-identified two-phase runtime transfer wrapper at 0x0041623A; recovered address-identified masked runtime wait wrapper at 0x004162C4; recovered address-identified optional runtime notification wrapper at 0x00416378; recovered address-identified registered runtime callback adapter at 0x0041639A; recovered address-identified registered runtime object constructor at 0x004163B2; recovered TLSF v3.1 block-header primitive cluster through 0x00416AAA; recovered TLSF v3.1 physical-block and alignment helper cluster through 0x00416BCE; recovered TLSF v3.1 request-size and class-mapping helper cluster through 0x00416C4E; recovered TLSF v3.1 free-list selection and mutation helper cluster through 0x00416E04; recovered TLSF v3.1 allocation, split, coalescing, lookup, and preparation helper cluster through 0x0041711C; recovered TLSF v3.1 control, pool, allocation, and release entry cluster through 0x004172DA; recovered EasyLogger initialization, start, output/color/format/filter control, lock/unlock, tag-level reset, and tag-level query entries through 0x004176CE; recovered EasyLogger interrupt-gated filtered formatting and output entry through 0x00417AD0; recovered EasyLogger mutex, output, time, process-name, and thread-name boot-port entries through 0x0041A700; recovered EasyLogger channel-one driver and four-channel synchronous transfer transport through 0x0041F9B6; recovered boot delay wrappers and capped initializer-table ordering and dispatch services through 0x0041FA40; recovered guarded two-stage teardown and pin-state reconciliation entry through 0x0041FAD0; recovered guarded teardown, reset, hard-float derivation, configuration submission, and channel-four/five platform setup entry through 0x0041FA98; recovered two-bank pin-group configuration dispatcher through 0x0041FCF6; recovered TLSF pool initialization, allocator-handle publication, and diagnostic entry through 0x0041FDA8; recovered NVIC enable/priority and MSPI interrupt-dispatch services through 0x0041FE28; recovered idempotent MSPI enable and disable controls through 0x0041FE62; recovered guarded event-flags initialization, acquire, and release services through 0x0041FF08; recovered paired event-lock/MSPI guard enter and exit wrappers through 0x0041FF34; recovered retained-configuration MSPI XIP request updater through 0x0041FF60; recovered longest consecutive-one run-length and center-selection helpers through 0x00420002; recovered exhaustive MSPI timing scan, pass-mask selection, and centered timing result through 0x004201BA; recovered automatic MSPI timing-selection and fallback wrapper through 0x00420254; recovered MX25U25643G low-level MSPI initialization through 0x00420476; recovered MX25U25643G public initialization and service setup through 0x0042052A; recovered MX25U25643G soft-reset sequence through 0x0042059E; recovered MX25U25643G JEDEC-ID command and packing entry through 0x004205F4; recovered MX25U25643G validated read-transfer wrapper through 0x0042069E; recovered MX25U25643G validated write-transfer wrapper through 0x0042074E; recovered MX25U25643G status-register reader through 0x004207A2; recovered MX25U25643G two-phase and fixed ready-poll wrappers through 0x00420800; recovered MX25U25643G address-mode register reader through 0x0042086C; recovered MX25U25643G guarded four-byte-mode entry sequence through 0x00420978; recovered MX25U25643G guarded sector-erase service through 0x00420ADA; recovered MX25U25643G page-splitting program service through 0x00420C14; recovered MSPI device disable, reconfiguration, enable, and pin-group service through 0x00420E8C; recovered MX25U25643G quad-mode template, reconfiguration, XIP, and control service through 0x00420F0C; recovered MX25U25643G serial-mode reconfiguration, XIP, and control service through 0x00420F6A; recovered MX25U25643G guarded blocking read service through 0x00420FF2; recovered LittleFS directory bootstrap service through 0x004211B0; recovered LittleFS format, mount, and directory-bootstrap orchestration service through 0x00421210; recovered LittleFS mount, recovery, readiness, and boot-counter initialization service through 0x004212D8; recovered LittleFS block-read callback through 0x00421310; recovered LittleFS block-program callback through 0x00421348 using authenticated reclaimed initializer body space; recovered LittleFS block-erase callback through 0x00421372 using authenticated reclaimed initializer body space; recovered LittleFS constant-success sync callback through 0x004213D8 using authenticated reclaimed initializer body space; recovered exact in-place address-index helpers through 0x004213E6; recovered mapped-memory selector, copy service, and odd-selector wrapper through 0x0042156E using authenticated reclaimed entry space; recovered exact in-place 32-bit population-count helper through 0x004215AE; recovered exact in-place two-word bitmap query and count helpers through 0x00421632; recovered exact in-place validated two-word bitmap update helper through 0x004216B2; recovered exact in-place bounded poll-delay helper through 0x004216D4; recovered exact in-place mode/configuration transaction service through 0x004217D2; recovered exact in-place dual-controller mode transaction service through 0x00421978; recovered exact in-place bitmap-client configuration and row mutation services through 0x00421B08; recovered exact in-place mode-one enable, disable, and poll-cleanup services through 0x00421BD2; recovered exact in-place mode-zero enable transaction through 0x00421CCE; recovered exact in-place mode-zero disable and poll-cleanup services through 0x00421D5E; recovered exact in-place row-four enable transaction through 0x00421E4A; recovered exact in-place row-four disable and poll-cleanup services through 0x00421EBA; recovered exact in-place row-five enable and disable services through 0x004220B2; recovered exact in-place row-six enable/disable and mode-family dispatcher services through 0x004222D2; recovered exact in-place mode enable/disable routing, all-row cleanup, and configuration copy services through 0x00422430; recovered exact in-place AmbiqSuite-compatible debug shutdown, power-reference, and trace-disable services through 0x00422574; recovered exact in-place constraint dispatch and optimized memchr services through 0x00422628; recovered exact in-place IAR-compatible double runtime services through 0x00422872; recovered exact in-place IAR thread-pointer leaf through 0x0042287C; recovered exact in-place IAR unsigned 64-bit divide/modulo runtime through 0x00422AAC; recovered exact in-place atomic snapshot, no-op, and retained-query wrappers through 0x00422AD2; recovered exact in-place four-instance initialization, register-transfer/lifecycle, register-clear, and status-mapping services through 0x00422DC6; recovered exact in-place guarded per-instance dual-descriptor initialization service through 0x00422E28; recovered exact in-place per-instance clock-divider selection and programming service through 0x00422EE2; recovered exact in-place interrupt-atomic per-instance configuration latch through 0x00422F4C; recovered exact in-place interrupt-atomic secondary per-instance configuration latch through 0x00422FA2; recovered exact in-place interrupt-atomic secondary per-instance configuration release through 0x00422FDE; recovered exact in-place per-instance register-quiesce and hardware-shutdown service through 0x0042308E; recovered exact in-place per-instance FIFO read/write and drain services at 0x004232C8 through 0x00423350; recovered exact in-place critical-section FIFO snapshot and pump adapters through 0x004233E0; recovered exact in-place type-checked mode dispatcher and mode-two/mode-three start helpers through 0x00423524; recovered exact in-place mode-zero and mode-one bounded wait wrappers through 0x004234D8; recovered exact in-place primary and secondary progress services through 0x004236CE; recovered exact in-place per-instance register OR, write, and query services through 0x00423764; recovered exact in-place per-instance interrupt and progress service dispatcher through 0x0042382C; recovered exact in-place bounded memory exchange and three-buffer rotation through 0x00423928; recovered exact in-place bounded rotate-to-front helper through 0x00423972; recovered exact in-place three-element comparator/exchange helper through 0x004239C2; recovered exact in-place Floyd max-heap sift helper through 0x00423A48; recovered exact in-place introspective qsort core and public wrapper through 0x00423D20; recovered exact in-place global hardware-control services through 0x00423E0C; recovered exact in-place hardware-control state mapper through 0x00423E40; recovered exact in-place global MSPI FIFO-write service through 0x00423E8A; recovered exact in-place global MSPI FIFO-read service through 0x00423F28; recovered exact in-place MSPI command-queue initializer through 0x00423F54; recovered exact in-place MSPI command-queue terminator through 0x00423F8E; recovered exact in-place MSPI command-queue enable/disable services through 0x00423FB8; retained authenticated official MSPI configuration, lifecycle, control, and transfer bodies from 0x00424120 through 0x00426536; recovered exact in-place AmbiqSuite 5.1.0 MSPI interrupt-service and power-control bodies through 0x00426BFE; source-routed Apollo510 HFRC2 UQ17.15 and integer divider services through 0x00426C58 using authenticated reclaimed NOP space; recovered exact in-place clean-room CLKGEN HFADJ bit-control leaf through 0x00426C70; source-routed clean-room CLKGEN HFADJ configuration publisher through 0x00426C7E using authenticated generated NOP space; source-routed clean-room CLKGEN HFADJ bit-preserving disable leaf through 0x00426C8C using authenticated generated NOP space; recovered in-place clean-room CLKGEN dual-clock switch prefix through 0x00426CC4 with authenticated status-check binding; source-routed clean-room CLKGEN control, mode, clock-select, and divider configuration service through 0x00426D1E using authenticated generated NOP space; source-routed clean-room CLKGEN bit-preserving disable service through 0x00426D2C using authenticated generated NOP space; source-routed AmbiqSuite 5.1.0 System PLL minimum-VCO, postdivider, and initialization services through 0x00427308 using authenticated reclaimed body space; recovered exact in-place AmbiqSuite 5.1.0 System PLL deinitialization service through 0x00427360; source-routed AmbiqSuite 5.1.0 System PLL enable service through 0x004273DC using authenticated reclaimed body space; recovered exact in-place AmbiqSuite 5.1.0 System PLL disable service through 0x0042740C; source-routed AmbiqSuite 5.1.0 System PLL configuration service through 0x00427522 using authenticated reclaimed body space; source-routed AmbiqSuite 5.1.0 System PLL lock-wait service through 0x00427588 using authenticated reclaimed body space; source-routed AmbiqSuite 5.1.0 queue initializer, item-add, and item-get services through 0x004276BA using authenticated reclaimed body space; source-routed clean-room overlap-safe byte move through 0x00427752 using authenticated reclaimed body space; source-routed AmbiqSuite 5.1.0 command-queue index updater through 0x00427794 using authenticated reclaimed body space; recovered in-place AmbiqSuite 5.1.0 command-queue initialization, lifecycle, allocation, status, recovery, reset, and loop-post services through 0x00427C80; recovered in-place MIT hard-float veneers, binary32 rounding/remainder cores, and range classifier through 0x00427E84; recovered in-place BSD-3-Clause Apollo510 SPOT-manager transition sequence through 0x004283E2; recovered in-place BSD-3-Clause Apollo510 SPOT-manager transition sequences through 0x00428BA8; recovered in-place MIT indexed SPOT-manager factory-trim loader through 0x00429DF6; recovered in-place MIT indexed SPOT-manager factory-trim loader and readiness wrapper through 0x0042A04A; recovered in-place BSD-3-Clause SPOT-manager timer interrupt service through 0x0042A078; recovered in-place AmbiqSuite 5.1.0 command-queue initialization, lifecycle, allocation, status, recovery, reset, and loop-post services through 0x00427C80; recovered in-place MIT hard-float veneers, binary32 rounding/remainder cores, and range classifier through 0x00427E84; recovered in-place BSD-3-Clause Apollo510 SPOT-manager transition sequences through 0x00428BA8; recovered in-place MIT indexed SPOT-manager factory-trim loader and readiness wrapper through 0x0042A04A; recovered in-place BSD-3-Clause SPOT-manager timer interrupt service through 0x0042A078",
+      "function": "Even Apollo510B bootloader with source-replaced EasyLogger formatting/copy helpers, littlefs v2.10.1 leaves including the max/min/alignment and 32-bit endian utility quartets, fallback npw2/ctz/popc bit-helper trio, tag validity/type1/type3/id/size/chunk and metadata-list open predicates, disk-version major/minor pair, allocator lookahead helper, and exact upstream AmbiqSuite 5.1.0 MSPI interrupt-clear leaf; recovered S200 redirect_init two-mutex initialization entry; recovered Arm EABI byte-fill and forward-copy primitives; recovered bounded byte-comparison, string-span, CRC-32, and SRAM-word helpers; recovered numeric, formatting, logging, substring, critical-context, runtime-gate, dispatcher, callback, object, event-flags, tagged-handle, semaphore, message-queue, bit-width, count-trailing-zeros, and floor-log2 wrappers through 0x004169FC; recovered Arm EABI byte-fill primitive; recovered Arm EABI forward-copy primitive; recovered bounded byte-comparison primitive; recovered reflected CRC-32 update primitive; recovered reject-set string-span primitive; recovered accept-set string-span primitive; recovered SRAM-word setter at 0x200270CC; recovered unsigned 64-bit divide-by-ten helper; recovered unsigned decimal digit-count helper; recovered signed-magnitude decimal digit-count helper; recovered hexadecimal digit-count helper; recovered wrapping decimal parser; recovered unsigned 64-bit decimal output helper; recovered unsigned 64-bit hexadecimal output helper; recovered nullable string-length helper; recovered null-output-aware repeated-character helper; recovered fixed-point float formatter; recovered bootloader logging formatter core; recovered bootloader variadic logging dispatch wrapper; recovered substring-search primitive; recovered critical-context predicate; recovered runtime-state gate acquisition wrapper; recovered runtime-state and SRAM-gate mapper; recovered runtime-state gate release wrapper; recovered critical-context value-dispatch wrapper; recovered address-identified runtime dispatcher at 0x004160FE; recovered address-identified retained-value wrapper at 0x004161C6; recovered address-identified validated runtime call wrapper at 0x004161CE; recovered address-identified guarded runtime action wrapper at 0x00416200; recovered address-identified two-phase runtime transfer wrapper at 0x0041623A; recovered address-identified masked runtime wait wrapper at 0x004162C4; recovered address-identified optional runtime notification wrapper at 0x00416378; recovered address-identified registered runtime callback adapter at 0x0041639A; recovered address-identified registered runtime object constructor at 0x004163B2; recovered TLSF v3.1 block-header primitive cluster through 0x00416AAA; recovered TLSF v3.1 physical-block and alignment helper cluster through 0x00416BCE; recovered TLSF v3.1 request-size and class-mapping helper cluster through 0x00416C4E; recovered TLSF v3.1 free-list selection and mutation helper cluster through 0x00416E04; recovered TLSF v3.1 allocation, split, coalescing, lookup, and preparation helper cluster through 0x0041711C; recovered TLSF v3.1 control, pool, allocation, and release entry cluster through 0x004172DA; recovered EasyLogger initialization, start, output/color/format/filter control, lock/unlock, tag-level reset, and tag-level query entries through 0x004176CE; recovered EasyLogger interrupt-gated filtered formatting and output entry through 0x00417AD0; recovered EasyLogger mutex, output, time, process-name, and thread-name boot-port entries through 0x0041A700; recovered EasyLogger channel-one driver and four-channel synchronous transfer transport through 0x0041F9B6; recovered boot delay wrappers and capped initializer-table ordering and dispatch services through 0x0041FA40; recovered guarded two-stage teardown and pin-state reconciliation entry through 0x0041FAD0; recovered guarded teardown, reset, hard-float derivation, configuration submission, and channel-four/five platform setup entry through 0x0041FA98; recovered two-bank pin-group configuration dispatcher through 0x0041FCF6; recovered TLSF pool initialization, allocator-handle publication, and diagnostic entry through 0x0041FDA8; recovered NVIC enable/priority and MSPI interrupt-dispatch services through 0x0041FE28; recovered idempotent MSPI enable and disable controls through 0x0041FE62; recovered guarded event-flags initialization, acquire, and release services through 0x0041FF08; recovered paired event-lock/MSPI guard enter and exit wrappers through 0x0041FF34; recovered retained-configuration MSPI XIP request updater through 0x0041FF60; recovered longest consecutive-one run-length and center-selection helpers through 0x00420002; recovered exhaustive MSPI timing scan, pass-mask selection, and centered timing result through 0x004201BA; recovered automatic MSPI timing-selection and fallback wrapper through 0x00420254; recovered MX25U25643G low-level MSPI initialization through 0x00420476; recovered MX25U25643G public initialization and service setup through 0x0042052A; recovered MX25U25643G soft-reset sequence through 0x0042059E; recovered MX25U25643G JEDEC-ID command and packing entry through 0x004205F4; recovered MX25U25643G validated read-transfer wrapper through 0x0042069E; recovered MX25U25643G validated write-transfer wrapper through 0x0042074E; recovered MX25U25643G status-register reader through 0x004207A2; recovered MX25U25643G two-phase and fixed ready-poll wrappers through 0x00420800; recovered MX25U25643G address-mode register reader through 0x0042086C; recovered MX25U25643G guarded four-byte-mode entry sequence through 0x00420978; recovered MX25U25643G guarded sector-erase service through 0x00420ADA; recovered MX25U25643G page-splitting program service through 0x00420C14; recovered MSPI device disable, reconfiguration, enable, and pin-group service through 0x00420E8C; recovered MX25U25643G quad-mode template, reconfiguration, XIP, and control service through 0x00420F0C; recovered MX25U25643G serial-mode reconfiguration, XIP, and control service through 0x00420F6A; recovered MX25U25643G guarded blocking read service through 0x00420FF2; recovered LittleFS directory bootstrap service through 0x004211B0; recovered LittleFS format, mount, and directory-bootstrap orchestration service through 0x00421210; recovered LittleFS mount, recovery, readiness, and boot-counter initialization service through 0x004212D8; recovered LittleFS block-read callback through 0x00421310; recovered LittleFS block-program callback through 0x00421348 using authenticated reclaimed initializer body space; recovered LittleFS block-erase callback through 0x00421372 using authenticated reclaimed initializer body space; recovered LittleFS constant-success sync callback through 0x004213D8 using authenticated reclaimed initializer body space; recovered exact in-place address-index helpers through 0x004213E6; recovered mapped-memory selector, copy service, and odd-selector wrapper through 0x0042156E using authenticated reclaimed entry space; recovered exact in-place 32-bit population-count helper through 0x004215AE; recovered exact in-place two-word bitmap query and count helpers through 0x00421632; recovered exact in-place validated two-word bitmap update helper through 0x004216B2; recovered exact in-place bounded poll-delay helper through 0x004216D4; recovered exact in-place mode/configuration transaction service through 0x004217D2; recovered exact in-place dual-controller mode transaction service through 0x00421978; recovered exact in-place bitmap-client configuration and row mutation services through 0x00421B08; recovered exact in-place mode-one enable, disable, and poll-cleanup services through 0x00421BD2; recovered exact in-place mode-zero enable transaction through 0x00421CCE; recovered exact in-place mode-zero disable and poll-cleanup services through 0x00421D5E; recovered exact in-place row-four enable transaction through 0x00421E4A; recovered exact in-place row-four disable and poll-cleanup services through 0x00421EBA; recovered exact in-place row-five enable and disable services through 0x004220B2; recovered exact in-place row-six enable/disable and mode-family dispatcher services through 0x004222D2; recovered exact in-place mode enable/disable routing, all-row cleanup, and configuration copy services through 0x00422430; recovered exact in-place AmbiqSuite-compatible debug shutdown, power-reference, and trace-disable services through 0x00422574; recovered exact in-place constraint dispatch and optimized memchr services through 0x00422628; recovered exact in-place IAR-compatible double runtime services through 0x00422872; recovered exact in-place IAR thread-pointer leaf through 0x0042287C; recovered exact in-place IAR unsigned 64-bit divide/modulo runtime through 0x00422AAC; recovered exact in-place atomic snapshot, no-op, and retained-query wrappers through 0x00422AD2; recovered exact in-place four-instance initialization, register-transfer/lifecycle, register-clear, and status-mapping services through 0x00422DC6; recovered exact in-place guarded per-instance dual-descriptor initialization service through 0x00422E28; recovered exact in-place per-instance clock-divider selection and programming service through 0x00422EE2; recovered exact in-place interrupt-atomic per-instance configuration latch through 0x00422F4C; recovered exact in-place interrupt-atomic secondary per-instance configuration latch through 0x00422FA2; recovered exact in-place interrupt-atomic secondary per-instance configuration release through 0x00422FDE; recovered exact in-place per-instance register-quiesce and hardware-shutdown service through 0x0042308E; recovered exact in-place per-instance FIFO read/write and drain services at 0x004232C8 through 0x00423350; recovered exact in-place critical-section FIFO snapshot and pump adapters through 0x004233E0; recovered exact in-place type-checked mode dispatcher and mode-two/mode-three start helpers through 0x00423524; recovered exact in-place mode-zero and mode-one bounded wait wrappers through 0x004234D8; recovered exact in-place primary and secondary progress services through 0x004236CE; recovered exact in-place per-instance register OR, write, and query services through 0x00423764; recovered exact in-place per-instance interrupt and progress service dispatcher through 0x0042382C; recovered exact in-place bounded memory exchange and three-buffer rotation through 0x00423928; recovered exact in-place bounded rotate-to-front helper through 0x00423972; recovered exact in-place three-element comparator/exchange helper through 0x004239C2; recovered exact in-place Floyd max-heap sift helper through 0x00423A48; recovered exact in-place introspective qsort core and public wrapper through 0x00423D20; recovered exact in-place global hardware-control services through 0x00423E0C; recovered exact in-place hardware-control state mapper through 0x00423E40; recovered exact in-place global MSPI FIFO-write service through 0x00423E8A; recovered exact in-place global MSPI FIFO-read service through 0x00423F28; recovered exact in-place MSPI command-queue initializer through 0x00423F54; recovered exact in-place MSPI command-queue terminator through 0x00423F8E; recovered exact in-place MSPI command-queue enable/disable services through 0x00423FB8; retained authenticated official MSPI configuration, lifecycle, control, and transfer bodies from 0x00424120 through 0x00426536; recovered exact in-place AmbiqSuite 5.1.0 MSPI interrupt-service and power-control bodies through 0x00426BFE; source-routed Apollo510 HFRC2 UQ17.15 and integer divider services through 0x00426C58 using authenticated reclaimed NOP space; recovered exact in-place clean-room CLKGEN HFADJ bit-control leaf through 0x00426C70; source-routed clean-room CLKGEN HFADJ configuration publisher through 0x00426C7E using authenticated generated NOP space; source-routed clean-room CLKGEN HFADJ bit-preserving disable leaf through 0x00426C8C using authenticated generated NOP space; recovered in-place clean-room CLKGEN dual-clock switch prefix through 0x00426CC4 with authenticated status-check binding; source-routed clean-room CLKGEN control, mode, clock-select, and divider configuration service through 0x00426D1E using authenticated generated NOP space; source-routed clean-room CLKGEN bit-preserving disable service through 0x00426D2C using authenticated generated NOP space; source-routed AmbiqSuite 5.1.0 System PLL minimum-VCO, postdivider, and initialization services through 0x00427308 using authenticated reclaimed body space; recovered exact in-place AmbiqSuite 5.1.0 System PLL deinitialization service through 0x00427360; source-routed AmbiqSuite 5.1.0 System PLL enable service through 0x004273DC using authenticated reclaimed body space; recovered exact in-place AmbiqSuite 5.1.0 System PLL disable service through 0x0042740C; source-routed AmbiqSuite 5.1.0 System PLL configuration service through 0x00427522 using authenticated reclaimed body space; source-routed AmbiqSuite 5.1.0 System PLL lock-wait service through 0x00427588 using authenticated reclaimed body space; source-routed AmbiqSuite 5.1.0 queue initializer, item-add, and item-get services through 0x004276BA using authenticated reclaimed body space; source-routed clean-room overlap-safe byte move through 0x00427752 using authenticated reclaimed body space; source-routed AmbiqSuite 5.1.0 command-queue index updater through 0x00427794 using authenticated reclaimed body space; recovered in-place AmbiqSuite 5.1.0 command-queue initialization, lifecycle, allocation, status, recovery, reset, and loop-post services through 0x00427C80; recovered in-place MIT hard-float veneers, binary32 rounding/remainder cores, and range classifier through 0x00427E84; recovered in-place BSD-3-Clause Apollo510 SPOT-manager transition sequence through 0x004283E2; recovered in-place BSD-3-Clause Apollo510 SPOT-manager transition sequences through 0x00428BA8; recovered in-place MIT indexed SPOT-manager factory-trim loader through 0x00429DF6; recovered in-place MIT indexed SPOT-manager factory-trim loader and readiness wrapper through 0x0042A04A; recovered in-place BSD-3-Clause SPOT-manager timer interrupt service through 0x0042A078; recovered in-place AmbiqSuite 5.1.0 command-queue initialization, lifecycle, allocation, status, recovery, reset, and loop-post services through 0x00427C80; recovered in-place MIT hard-float veneers, binary32 rounding/remainder cores, and range classifier through 0x00427E84; recovered in-place BSD-3-Clause Apollo510 SPOT-manager transition sequences through 0x00428BA8; recovered in-place MIT indexed SPOT-manager factory-trim loader and readiness wrapper through 0x0042A04A; recovered in-place BSD-3-Clause SPOT-manager timer interrupt service through 0x0042A078; clean-room BL-009 SCB-CCR, register-base, clock, range-bound, dispatch-fallback, MMIO-target, calibration-float, identifier-compare, divisor, and alignment gap literals at 0x0042BF4E, 0x0042C6E4, 0x0042C980, 0x0042D0F2, 0x0042E50E, 0x0042E534, 0x0042E642, 0x0042E8C8, 0x0042EDF6, 0x0042F014, 0x0042CDB0, 0x0042BFA4, 0x0042F14E, 0x004301F4, and 0x0042FFFE (334 bytes production-routed; pointers into opaque code and unattributed cells stay retained)",
       "provider": {
         "kind": "source_build",
         "path": "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
         "profiles": {
           "linux-clang": {
-            "path": "build/canonical-provider/linux-clang/apollo_bootloader/ota_s200_bootloader.bin",
             "size": 163824,
-            "sha256": "11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875"
+            "sha256": "11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875",
+            "path": "build/canonical-provider/linux-clang/apollo_bootloader/ota_s200_bootloader.bin"
           },
           "apple-font-manager-record": {
             "size": 163840,
-            "sha256": "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b"
+            "sha256": "696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3"
           },
           "apple-product-rtos-record": {
             "size": 163840,
-            "sha256": "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b"
+            "sha256": "696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3"
           }
         },
-        "sha256": "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b",
+        "sha256": "696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3",
         "size": 163840,
-        "source_owned_bytes": 59009,
-        "opaque_base_bytes": 87985,
+        "source_owned_bytes": 65715,
+        "opaque_base_bytes": 81279,
         "generated_patch_site_bytes": 16830,
         "generated_alignment_bytes": 16,
         "source_owned_cave_bytes": 2594,
-        "source_owned_in_place_bytes": 41190,
+        "source_owned_in_place_bytes": 46178,
         "generated_isolated_alignment_bytes": 0,
         "generated_relocated_alignment_bytes": 15,
         "generated_stock_to_overlay_alignment_bytes": 1
@@ -1864,14 +1864,44 @@
           "target_address": 4323608
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 63926,
-          "function": "Authenticated vector and literal island retained after the EasyLogger channel transport",
-          "name": "bootloader_easylogger_transport_vector_literal_island_0x0041f9b6",
-          "output": "apollo510b/bootloader-easylogger-transport-vector-literal-island-0x0041f9b6-0x0041f9b6.bin",
-          "size": 34,
+          "function": "Compiled MIT clean-room boot-initializer vector and literal island at authenticated stock addresses",
+          "name": "bootloader_pool_41f9b6_source_in_place",
+          "output": "apollo510b/bootloader-pool-41f9b6-source-in-place-0x0041f9b6.bin",
+          "size": 22,
           "target": "apollo510b_internal_mram",
           "target_address": 4323766
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 63948,
+          "function": "Compiled MIT clean-room reserved boot-initializer word preserving layout at its authenticated stock address",
+          "name": "bootloader_word_41f9cc_source_in_place",
+          "output": "apollo510b/bootloader-word-41f9cc-source-in-place-0x0041f9cc.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323788
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 63952,
+          "function": "Compiled MIT clean-room reserved boot-initializer word preserving layout at its authenticated stock address",
+          "name": "bootloader_word_41f9d0_source_in_place",
+          "output": "apollo510b/bootloader-word-41f9d0-source-in-place-0x0041f9d0.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323792
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 63956,
+          "function": "Compiled MIT clean-room reserved boot-initializer word preserving layout at its authenticated stock address",
+          "name": "bootloader_word_41f9d4_source_in_place",
+          "output": "apollo510b/bootloader-word-41f9d4-source-in-place-0x0041f9d4.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4323796
         },
         {
           "address_status": "generated_source_entry_replacement",
@@ -1894,11 +1924,11 @@
           "target_address": 4323814
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 63982,
-          "function": "Authenticated two-byte alignment retained before the initializer priority comparator",
-          "name": "bootloader_initializer_comparator_alignment_0x0041f9ee",
-          "output": "apollo510b/bootloader-initializer-comparator-alignment-0x0041f9ee-0x0041f9ee.bin",
+          "function": "Compiled MIT clean-room boot-initializer alignment halfword at its authenticated stock address",
+          "name": "bootloader_align_41f9ee_source_in_place",
+          "output": "apollo510b/bootloader-align-41f9ee-source-in-place-0x0041f9ee.bin",
           "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4323822
@@ -1924,11 +1954,11 @@
           "target_address": 4323832
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 64064,
-          "function": "Authenticated initializer-table pointers and alignment retained before the boot-platform setup entry",
-          "name": "bootloader_pre_platform_setup_literals_0x0041fa40",
-          "output": "apollo510b/bootloader-pre-platform-setup-literals-0x0041fa40-0x0041fa40.bin",
+          "function": "Compiled MIT clean-room initializer-table pointer literals at authenticated stock addresses",
+          "name": "bootloader_pool_41fa40_source_in_place",
+          "output": "apollo510b/bootloader-pool-41fa40-source-in-place-0x0041fa40.bin",
           "size": 16,
           "target": "apollo510b_internal_mram",
           "target_address": 4323904
@@ -1954,11 +1984,11 @@
           "target_address": 4323992
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 64208,
-          "function": "Authenticated guard, platform-configuration, and pin-configuration pointer literals retained after guarded teardown",
-          "name": "bootloader_guarded_teardown_literal_pool_0x0041fad0",
-          "output": "apollo510b/bootloader-guarded-teardown-literal-pool-0x0041fad0-0x0041fad0.bin",
+          "function": "Compiled MIT clean-room guard and configuration pointer literals at authenticated stock addresses",
+          "name": "bootloader_pool_41fad0_source_in_place",
+          "output": "apollo510b/bootloader-pool-41fad0-source-in-place-0x0041fad0.bin",
           "size": 12,
           "target": "apollo510b_internal_mram",
           "target_address": 4324048
@@ -1974,11 +2004,11 @@
           "target_address": 4324060
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 64758,
-          "function": "Authenticated pin-configuration and allocator literals retained between the pin-group dispatcher and TLSF pool initializer",
-          "name": "bootloader_pin_groups_post_dispatch_literal_pool_0x0041fcf6",
-          "output": "apollo510b/bootloader-pin-groups-post-dispatch-literal-pool-0x0041fcf6-0x0041fcf6.bin",
+          "function": "Compiled MIT clean-room pin-configuration and allocator literals at authenticated stock addresses",
+          "name": "bootloader_pool_41fcf6_source_in_place",
+          "output": "apollo510b/bootloader-pool-41fcf6-source-in-place-0x0041fcf6.bin",
           "size": 122,
           "target": "apollo510b_internal_mram",
           "target_address": 4324598
@@ -1994,11 +2024,11 @@
           "target_address": 4324720
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 64936,
-          "function": "Authenticated allocator and diagnostic pointer literals retained before the IRQ-service cluster",
-          "name": "bootloader_allocator_literal_pool_0x0041fda8",
-          "output": "apollo510b/bootloader-allocator-literal-pool-0x0041fda8-0x0041fda8.bin",
+          "function": "Compiled MIT clean-room allocator and diagnostic pointer literals at authenticated stock addresses",
+          "name": "bootloader_pool_41fda8_source_in_place",
+          "output": "apollo510b/bootloader-pool-41fda8-source-in-place-0x0041fda8.bin",
           "size": 24,
           "target": "apollo510b_internal_mram",
           "target_address": 4324776
@@ -2254,11 +2284,11 @@
           "target_address": 4327424
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 67692,
-          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G four-byte-mode entry",
-          "name": "bootloader_mspi_enter_4byte_mode_literal_gap",
-          "output": "apollo510b/bootloader-mspi-enter-4byte-mode-literal-gap-0x0042086c.bin",
+          "function": "Compiled MIT clean-room MX25U25643G four-byte-mode literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_42086c_source_in_place",
+          "output": "apollo510b/bootloader-pool-42086c-source-in-place-0x0042086c.bin",
           "size": 36,
           "target": "apollo510b_internal_mram",
           "target_address": 4327532
@@ -2274,11 +2304,11 @@
           "target_address": 4327568
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 67960,
-          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G write-enable wrapper",
-          "name": "bootloader_mspi_write_enable_literal_gap",
-          "output": "apollo510b/bootloader-mspi-write-enable-literal-gap-0x00420978.bin",
+          "function": "Compiled MIT clean-room MX25U25643G write-enable literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_420978_source_in_place",
+          "output": "apollo510b/bootloader-pool-420978-source-in-place-0x00420978.bin",
           "size": 12,
           "target": "apollo510b_internal_mram",
           "target_address": 4327800
@@ -2294,11 +2324,11 @@
           "target_address": 4327812
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 68030,
-          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G write-disable wrapper",
-          "name": "bootloader_mspi_write_disable_literal_gap",
-          "output": "apollo510b/bootloader-mspi-write-disable-literal-gap-0x004209be.bin",
+          "function": "Compiled MIT clean-room MX25U25643G write-disable literal island at authenticated stock addresses",
+          "name": "bootloader_island_4209be_source_in_place",
+          "output": "apollo510b/bootloader-island-4209be-source-in-place-0x004209be.bin",
           "size": 6,
           "target": "apollo510b_internal_mram",
           "target_address": 4327870
@@ -2314,11 +2344,11 @@
           "target_address": 4327876
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 68092,
-          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G sector-erase service",
-          "name": "bootloader_mspi_sector_erase_literal_gap",
-          "output": "apollo510b/bootloader-mspi-sector-erase-literal-gap-0x004209fc.bin",
+          "function": "Compiled MIT clean-room MX25U25643G sector-erase literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_4209fc_source_in_place",
+          "output": "apollo510b/bootloader-pool-4209fc-source-in-place-0x004209fc.bin",
           "size": 12,
           "target": "apollo510b_internal_mram",
           "target_address": 4327932
@@ -2334,11 +2364,11 @@
           "target_address": 4327944
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 68314,
-          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G page-program service",
-          "name": "bootloader_mspi_program_literal_gap",
-          "output": "apollo510b/bootloader-mspi-program-literal-gap-0x00420ada.bin",
+          "function": "Compiled MIT clean-room MX25U25643G page-program literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_420ada_source_in_place",
+          "output": "apollo510b/bootloader-pool-420ada-source-in-place-0x00420ada.bin",
           "size": 50,
           "target": "apollo510b_internal_mram",
           "target_address": 4328154
@@ -2354,14 +2384,24 @@
           "target_address": 4328204
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 68628,
-          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G QE service",
-          "name": "bootloader_mspi_quad_enable_literal_gap",
-          "output": "apollo510b/bootloader-mspi-quad-enable-literal-gap-0x00420c14.bin",
-          "size": 72,
+          "function": "Compiled MIT clean-room reserved MX25 QE-gap word preserving layout at its authenticated stock address",
+          "name": "bootloader_word_420c14_source_in_place",
+          "output": "apollo510b/bootloader-word-420c14-source-in-place-0x00420c14.bin",
+          "size": 4,
           "target": "apollo510b_internal_mram",
           "target_address": 4328468
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 68632,
+          "function": "Compiled MIT clean-room MX25U25643G QE-service literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_420c18_source_in_place",
+          "output": "apollo510b/bootloader-pool-420c18-source-in-place-0x00420c18.bin",
+          "size": 68,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4328472
         },
         {
           "address_status": "generated_source_entry_replacement",
@@ -2374,11 +2414,11 @@
           "target_address": 4328540
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 69114,
-          "function": "Authenticated non-executable literal pool preceding the MSPI device reconfiguration service",
-          "name": "bootloader_mspi_device_reconfigure_literal_gap",
-          "output": "apollo510b/bootloader-mspi-device-reconfigure-literal-gap-0x00420dfa.bin",
+          "function": "Compiled MIT clean-room MSPI device-reconfiguration literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_420dfa_source_in_place",
+          "output": "apollo510b/bootloader-pool-420dfa-source-in-place-0x00420dfa.bin",
           "size": 14,
           "target": "apollo510b_internal_mram",
           "target_address": 4328954
@@ -2404,11 +2444,11 @@
           "target_address": 4329100
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 69388,
-          "function": "Authenticated non-executable literal pool preceding the MX25U25643G serial-mode service",
-          "name": "bootloader_mspi_set_serial_mode_literal_gap",
-          "output": "apollo510b/bootloader-mspi-set-serial-mode-literal-gap-0x00420f0c.bin",
+          "function": "Compiled MIT clean-room MX25U25643G serial-mode literal word at its authenticated stock address",
+          "name": "bootloader_word_420f0c_source_in_place",
+          "output": "apollo510b/bootloader-word-420f0c-source-in-place-0x00420f0c.bin",
           "size": 4,
           "target": "apollo510b_internal_mram",
           "target_address": 4329228
@@ -2424,11 +2464,11 @@
           "target_address": 4329232
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 69482,
-          "function": "Authenticated non-executable literal and alignment gap preceding the MX25U25643G read service",
-          "name": "bootloader_mspi_read_literal_gap",
-          "output": "apollo510b/bootloader-mspi-read-literal-gap-0x00420f6a.bin",
+          "function": "Compiled MIT clean-room MX25U25643G read-service literal island at authenticated stock addresses",
+          "name": "bootloader_text_420f6a_source_in_place",
+          "output": "apollo510b/bootloader-text-420f6a-source-in-place-0x00420f6a.bin",
           "size": 6,
           "target": "apollo510b_internal_mram",
           "target_address": 4329322
@@ -2444,11 +2484,11 @@
           "target_address": 4329328
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 69618,
-          "function": "Authenticated non-executable literal and alignment pool preceding the LittleFS directory bootstrap service",
-          "name": "bootloader_fs_directories_literal_pool",
-          "output": "apollo510b/bootloader-fs-directories-literal-pool-0x00420ff2.bin",
+          "function": "Compiled MIT clean-room LittleFS directory-bootstrap literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_420ff2_source_in_place",
+          "output": "apollo510b/bootloader-pool-420ff2-source-in-place-0x00420ff2.bin",
           "size": 214,
           "target": "apollo510b_internal_mram",
           "target_address": 4329458
@@ -2554,11 +2594,11 @@
           "target_address": 4330312
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 70514,
-          "function": "Authenticated non-executable literal and alignment gap after the LittleFS block-erase callback",
-          "name": "bootloader_littlefs_erase_literal_gap",
-          "output": "apollo510b/bootloader-littlefs-erase-literal-gap-0x00421372.bin",
+          "function": "Compiled MIT clean-room LittleFS block-callback literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_421372_source_in_place",
+          "output": "apollo510b/bootloader-pool-421372-source-in-place-0x00421372.bin",
           "size": 98,
           "target": "apollo510b_internal_mram",
           "target_address": 4330354
@@ -2644,11 +2684,11 @@
           "target_address": 4330824
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 71022,
-          "function": "Authenticated non-executable mapped-memory control, security, and window literal pool",
-          "name": "bootloader_memory_select_literal_pool",
-          "output": "apollo510b/bootloader-memory-select-literal-pool-0x0042156e.bin",
+          "function": "Compiled MIT clean-room mapped-memory control literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_42156e_source_in_place",
+          "output": "apollo510b/bootloader-pool-42156e-source-in-place-0x0042156e.bin",
           "size": 22,
           "target": "apollo510b_internal_mram",
           "target_address": 4330862
@@ -2904,11 +2944,11 @@
           "target_address": 4333746
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 74254,
-          "function": "Authenticated row-six enable literal seam retained between exact source bodies",
-          "name": "bootloader_row6_enable_literal_seam",
-          "output": "apollo510b/bootloader-row6-enable-literal-seam-0x0042220e.bin",
+          "function": "Compiled MIT clean-room mode-literal seam between exact source bodies at authenticated stock addresses",
+          "name": "bootloader_seam_42220e_source_in_place",
+          "output": "apollo510b/bootloader-seam-42220e-source-in-place-0x0042220e.bin",
           "size": 18,
           "target": "apollo510b_internal_mram",
           "target_address": 4334094
@@ -2924,11 +2964,11 @@
           "target_address": 4334112
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 74382,
-          "function": "Authenticated row-six disable literal seam retained between exact source bodies",
-          "name": "bootloader_row6_disable_literal_seam",
-          "output": "apollo510b/bootloader-row6-disable-literal-seam-0x0042228e.bin",
+          "function": "Compiled MIT clean-room mode-literal seam between exact source bodies at authenticated stock addresses",
+          "name": "bootloader_seam_42228e_source_in_place",
+          "output": "apollo510b/bootloader-seam-42228e-source-in-place-0x0042228e.bin",
           "size": 18,
           "target": "apollo510b_internal_mram",
           "target_address": 4334222
@@ -2944,11 +2984,11 @@
           "target_address": 4334240
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 74450,
-          "function": "Authenticated padding and literal seam retained before exact mode routing bodies",
-          "name": "bootloader_mode_route_literal_seam",
-          "output": "apollo510b/bootloader-mode-route-literal-seam-0x004222d2.bin",
+          "function": "Compiled MIT clean-room mode-literal seam between exact source bodies at authenticated stock addresses",
+          "name": "bootloader_seam_4222d2_source_in_place",
+          "output": "apollo510b/bootloader-seam-4222d2-source-in-place-0x004222d2.bin",
           "size": 30,
           "target": "apollo510b_internal_mram",
           "target_address": 4334290
@@ -2994,11 +3034,11 @@
           "target_address": 4334614
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 74800,
-          "function": "Authenticated debug-service literal pool retained before exact source bodies",
-          "name": "bootloader_debug_services_literal_pool",
-          "output": "apollo510b/bootloader-debug-services-literal-pool-0x00422430.bin",
+          "function": "Compiled MIT clean-room debug-service literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_422430_source_in_place",
+          "output": "apollo510b/bootloader-pool-422430-source-in-place-0x00422430.bin",
           "size": 56,
           "target": "apollo510b_internal_mram",
           "target_address": 4334640
@@ -3034,11 +3074,11 @@
           "target_address": 4334894
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 75124,
-          "function": "Authenticated debug trace literal pool retained before the constraint dispatcher",
-          "name": "bootloader_debug_trace_literal_pool",
-          "output": "apollo510b/bootloader-debug-trace-literal-pool-0x00422574.bin",
+          "function": "Compiled MIT clean-room debug-trace literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_422574_source_in_place",
+          "output": "apollo510b/bootloader-pool-422574-source-in-place-0x00422574.bin",
           "size": 28,
           "target": "apollo510b_internal_mram",
           "target_address": 4334964
@@ -3054,11 +3094,11 @@
           "target_address": 4334992
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 75180,
-          "function": "Authenticated constraint-handler pointer and diagnostic string retained before memchr",
-          "name": "bootloader_constraint_pool_and_message",
-          "output": "apollo510b/bootloader-constraint-pool-and-message-0x004225ac.bin",
+          "function": "Compiled MIT clean-room constraint-handler message island at authenticated stock addresses",
+          "name": "bootloader_island_4225ac_source_in_place",
+          "output": "apollo510b/bootloader-island-4225ac-source-in-place-0x004225ac.bin",
           "size": 36,
           "target": "apollo510b_internal_mram",
           "target_address": 4335020
@@ -3124,11 +3164,11 @@
           "target_address": 4335360
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 75538,
-          "function": "Authenticated two-byte alignment between the double ldexp wrapper and core",
-          "name": "bootloader_double_ldexp_alignment",
-          "output": "apollo510b/bootloader-double-ldexp-alignment-0x00422712.bin",
+          "function": "Compiled MIT clean-room alignment halfword between exact source bodies at its authenticated stock address",
+          "name": "bootloader_align_422712_source_in_place",
+          "output": "apollo510b/bootloader-align-422712-source-in-place-0x00422712.bin",
           "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4335378
@@ -3214,11 +3254,11 @@
           "target_address": 4335712
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 75890,
-          "function": "Authenticated two-byte alignment before the IAR thread-pointer leaf",
-          "name": "bootloader_double_runtime_trailing_alignment",
-          "output": "apollo510b/bootloader-double-runtime-trailing-alignment-0x00422872.bin",
+          "function": "Compiled MIT clean-room alignment halfword between exact source bodies at its authenticated stock address",
+          "name": "bootloader_align_422872_source_in_place",
+          "output": "apollo510b/bootloader-align-422872-source-in-place-0x00422872.bin",
           "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4335730
@@ -3274,11 +3314,11 @@
           "target_address": 4336330
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 76498,
-          "function": "Authenticated two-byte alignment before the four-instance hardware-service initializer",
-          "name": "bootloader_hw_instance_init_leading_alignment",
-          "output": "apollo510b/bootloader-hw-instance-init-leading-alignment-0x00422ad2.bin",
+          "function": "Compiled MIT clean-room alignment halfword between exact source bodies at its authenticated stock address",
+          "name": "bootloader_align_422ad2_source_in_place",
+          "output": "apollo510b/bootloader-align-422ad2-source-in-place-0x00422ad2.bin",
           "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4336338
@@ -3324,11 +3364,11 @@
           "target_address": 4336972
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 77178,
-          "function": "Authenticated four-byte non-executable datum before the per-instance status mapper",
-          "name": "bootloader_hw_status_map_leading_datum",
-          "output": "apollo510b/bootloader-hw-status-map-leading-datum-0x00422d7a.bin",
+          "function": "Compiled MIT clean-room reserved identity word preserving layout at its authenticated stock address",
+          "name": "bootloader_word_422d7a_source_in_place",
+          "output": "apollo510b/bootloader-word-422d7a-source-in-place-0x00422d7a.bin",
           "size": 4,
           "target": "apollo510b_internal_mram",
           "target_address": 4337018
@@ -3464,11 +3504,11 @@
           "target_address": 4338576
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 78816,
-          "function": "Authenticated retained literal words between the FIFO adapters and mode dispatcher",
-          "name": "bootloader_hw_fifo_adapter_literal_words_4233e0_opaque",
-          "output": "apollo510b/bootloader-hw-fifo-adapter-literal-words-4233e0-opaque-0x004233e0.bin",
+          "function": "Compiled MIT clean-room FIFO-adapter literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_4233e0_source_in_place",
+          "output": "apollo510b/bootloader-pool-4233e0-source-in-place-0x004233e0.bin",
           "size": 8,
           "target": "apollo510b_internal_mram",
           "target_address": 4338656
@@ -3484,11 +3524,11 @@
           "target_address": 4338664
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 78896,
-          "function": "Authenticated retained literal words between the mode dispatcher and source-owned wait wrappers",
-          "name": "bootloader_hw_mode_dispatch_literal_words_423430_opaque",
-          "output": "apollo510b/bootloader-hw-mode-dispatch-literal-words-423430-opaque-0x00423430.bin",
+          "function": "Compiled MIT clean-room mode-dispatcher literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_423430_source_in_place",
+          "output": "apollo510b/bootloader-pool-423430-source-in-place-0x00423430.bin",
           "size": 20,
           "target": "apollo510b_internal_mram",
           "target_address": 4338736
@@ -3564,11 +3604,11 @@
           "target_address": 4339406
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 79610,
-          "function": "Authenticated retained alignment and literal word between register services",
-          "name": "bootloader_hw_register_or_literal_words_4236fa_opaque",
-          "output": "apollo510b/bootloader-hw-register-or-literal-words-4236fa-opaque-0x004236fa.bin",
+          "function": "Compiled MIT clean-room hardware register-service literals at authenticated stock addresses",
+          "name": "bootloader_pool_4236fa_source_in_place",
+          "output": "apollo510b/bootloader-pool-4236fa-source-in-place-0x004236fa.bin",
           "size": 6,
           "target": "apollo510b_internal_mram",
           "target_address": 4339450
@@ -3594,11 +3634,11 @@
           "target_address": 4339498
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 79716,
-          "function": "Authenticated retained register and identity words before the service dispatcher",
-          "name": "bootloader_hw_service_dispatch_literal_words_423764_opaque",
-          "output": "apollo510b/bootloader-hw-service-dispatch-literal-words-423764-opaque-0x00423764.bin",
+          "function": "Compiled MIT clean-room hardware register and identity words at authenticated stock addresses",
+          "name": "bootloader_pool_423764_source_in_place",
+          "output": "apollo510b/bootloader-pool-423764-source-in-place-0x00423764.bin",
           "size": 24,
           "target": "apollo510b_internal_mram",
           "target_address": 4339556
@@ -3614,11 +3654,11 @@
           "target_address": 4339580
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 79916,
-          "function": "Authenticated retained literal and status words before the bounded memory-exchange helpers",
-          "name": "bootloader_memory_exchange_literal_words_42382c_opaque",
-          "output": "apollo510b/bootloader-memory-exchange-literal-words-42382c-opaque-0x0042382c.bin",
+          "function": "Compiled MIT clean-room bounded memory-exchange literals at authenticated stock addresses",
+          "name": "bootloader_pool_42382c_source_in_place",
+          "output": "apollo510b/bootloader-pool-42382c-source-in-place-0x0042382c.bin",
           "size": 56,
           "target": "apollo510b_internal_mram",
           "target_address": 4339756
@@ -3724,11 +3764,11 @@
           "target_address": 4341114
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 81306,
-          "function": "Authenticated retained hardware-control register literal and alignment bytes",
-          "name": "bootloader_hw_control_register_literal_423d9a_opaque",
-          "output": "apollo510b/bootloader-hw-control-register-literal-423d9a-opaque-0x00423d9a.bin",
+          "function": "Compiled MIT clean-room hardware-control register literal at authenticated stock addresses",
+          "name": "bootloader_pool_423d9a_source_in_place",
+          "output": "apollo510b/bootloader-pool-423d9a-source-in-place-0x00423d9a.bin",
           "size": 6,
           "target": "apollo510b_internal_mram",
           "target_address": 4341146
@@ -3754,11 +3794,11 @@
           "target_address": 4341188
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 81358,
-          "function": "Authenticated retained alignment before the interrupt-atomic hardware-control service",
-          "name": "bootloader_hw_control_critical_alignment_423dce_opaque",
-          "output": "apollo510b/bootloader-hw-control-critical-alignment-423dce-opaque-0x00423dce.bin",
+          "function": "Compiled MIT clean-room hardware-control alignment halfword at its authenticated stock address",
+          "name": "bootloader_align_423dce_source_in_place",
+          "output": "apollo510b/bootloader-align-423dce-source-in-place-0x00423dce.bin",
           "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4341198
@@ -3774,11 +3814,11 @@
           "target_address": 4341200
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 81420,
-          "function": "Authenticated retained SRAM literal words before the hardware-control state mapper",
-          "name": "bootloader_hw_control_sram_literals_423e0c_opaque",
-          "output": "apollo510b/bootloader-hw-control-sram-literals-423e0c-opaque-0x00423e0c.bin",
+          "function": "Compiled MIT clean-room hardware-control SRAM cells at authenticated stock addresses",
+          "name": "bootloader_pool_423e0c_source_in_place",
+          "output": "apollo510b/bootloader-pool-423e0c-source-in-place-0x00423e0c.bin",
           "size": 8,
           "target": "apollo510b_internal_mram",
           "target_address": 4341260
@@ -3894,11 +3934,11 @@
           "target_address": 4342048
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 82492,
-          "function": "Authenticated unreachable stock tail after the source-owned MSPI device-configuration return",
-          "name": "bootloader_mspi_device_configure_unreachable_tail_42423c_42488e_official",
-          "output": "apollo510b/bootloader-mspi-device-configure-unreachable-tail-42423c-42488e-official-0x0042423c.bin",
+          "function": "Compiled MIT clean-room MSPI device-configuration remainder interior at its authenticated stock address",
+          "name": "bootloader_mspi_devconfig2_rem_tail_42423c_source_in_place",
+          "output": "apollo510b/bootloader-mspi-devconfig2-rem-tail-42423c-source-in-place-0x0042423c.bin",
           "size": 1618,
           "target": "apollo510b_internal_mram",
           "target_address": 4342332
@@ -3914,11 +3954,11 @@
           "target_address": 4343950
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 84194,
-          "function": "Authenticated unreachable stock tail after the source-owned MSPI PIO-mixed configuration return",
-          "name": "bootloader_mspi_piomixed_configure_unreachable_tail_4248e2_424976_official",
-          "output": "apollo510b/bootloader-mspi-piomixed-configure-unreachable-tail-4248e2-424976-official-0x004248e2.bin",
+          "function": "Compiled MIT clean-room MSPI PIO-mixed configuration remainder interior at its authenticated stock address",
+          "name": "bootloader_mspi_piomix_rem_tail_4248e2_source_in_place",
+          "output": "apollo510b/bootloader-mspi-piomix-rem-tail-4248e2-source-in-place-0x004248e2.bin",
           "size": 148,
           "target": "apollo510b_internal_mram",
           "target_address": 4344034
@@ -3944,11 +3984,11 @@
           "target_address": 4344184
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 84380,
-          "function": "Authenticated retained MSPI0 base literal before the clock-generator control service",
-          "name": "bootloader_mspi0_base_literal_42499c_opaque",
-          "output": "apollo510b/bootloader-mspi0-base-literal-42499c-opaque-0x0042499c.bin",
+          "function": "Compiled MIT clean-room MSPI0 base literal at its authenticated stock address",
+          "name": "bootloader_word_42499c_source_in_place",
+          "output": "apollo510b/bootloader-word-42499c-source-in-place-0x0042499c.bin",
           "size": 4,
           "target": "apollo510b_internal_mram",
           "target_address": 4344220
@@ -3984,14 +4024,24 @@
           "target_address": 4344410
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 84658,
-          "function": "Authenticated alignment and G2 MSPI state-base literal between initialize and configure",
-          "name": "bootloader_mspi_initialize_literal_424aea_opaque",
-          "output": "apollo510b/bootloader-mspi-initialize-literal-424aea-opaque-0x00424ab2.bin",
-          "size": 62,
+          "function": "Compiled MIT clean-room MSPI per-instance state-initializer tail at its authenticated stock address",
+          "name": "bootloader_mspi_state_init_tail_424ab2_source_in_place",
+          "output": "apollo510b/bootloader-mspi-state-init-tail-424ab2-source-in-place-0x00424ab2.bin",
+          "size": 56,
           "target": "apollo510b_internal_mram",
           "target_address": 4344498
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 84714,
+          "function": "Compiled MIT clean-room MSPI state-literal island at authenticated stock addresses",
+          "name": "bootloader_island_424aea_source_in_place",
+          "output": "apollo510b/bootloader-island-424aea-source-in-place-0x00424aea.bin",
+          "size": 6,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4344554
         },
         {
           "address_status": "source_compiled",
@@ -4004,14 +4054,24 @@
           "target_address": 4344560
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 84872,
-          "function": "Authenticated handle, MSPI base, and pad-mask literals before public device configuration",
-          "name": "bootloader_mspi_device_config_literals_424bd4_opaque",
-          "output": "apollo510b/bootloader-mspi-device-config-literals-424bd4-opaque-0x00424b88.bin",
-          "size": 92,
+          "function": "Compiled MIT clean-room MSPI device-configuration pre-step tail at its authenticated stock address",
+          "name": "bootloader_mspi_config_pre_tail_424b88_source_in_place",
+          "output": "apollo510b/bootloader-mspi-config-pre-tail-424b88-source-in-place-0x00424b88.bin",
+          "size": 76,
           "target": "apollo510b_internal_mram",
           "target_address": 4344712
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 84948,
+          "function": "Compiled MIT clean-room MSPI state-literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_424bd4_source_in_place",
+          "output": "apollo510b/bootloader-pool-424bd4-source-in-place-0x00424bd4.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4344788
         },
         {
           "address_status": "source_compiled",
@@ -4024,11 +4084,11 @@
           "target_address": 4344804
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 85636,
-          "function": "Authenticated unreachable stock tail after the source-owned public MSPI device-configuration return",
-          "name": "bootloader_mspi_device_configure_public_unreachable_tail_424e84_425066_official",
-          "output": "apollo510b/bootloader-mspi-device-configure-public-unreachable-tail-424e84-425066-official-0x00424e84.bin",
+          "function": "Compiled MIT clean-room MSPI public device-configuration remainder at its authenticated stock address",
+          "name": "bootloader_mspi_devconfig_rem_tail_424e84_source_in_place",
+          "output": "apollo510b/bootloader-mspi-devconfig-rem-tail-424e84-source-in-place-0x00424e84.bin",
           "size": 482,
           "target": "apollo510b_internal_mram",
           "target_address": 4345476
@@ -4044,11 +4104,11 @@
           "target_address": 4345958
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 86246,
-          "function": "Authenticated unreachable stock tail after the source-owned MSPI enable return",
-          "name": "bootloader_mspi_enable_unreachable_tail_4250e6_4250f0_official",
-          "output": "apollo510b/bootloader-mspi-enable-unreachable-tail-4250e6-4250f0-official-0x004250e6.bin",
+          "function": "Compiled MIT clean-room MSPI enable epilogue tail at its authenticated stock address",
+          "name": "bootloader_mspi_enable_tail_4250e6_source_in_place",
+          "output": "apollo510b/bootloader-mspi-enable-tail-4250e6-source-in-place-0x004250e6.bin",
           "size": 10,
           "target": "apollo510b_internal_mram",
           "target_address": 4346086
@@ -4064,14 +4124,44 @@
           "target_address": 4346096
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 86368,
-          "function": "Authenticated unreachable disable tail plus alignment and lifecycle literal bytes before MSPI deinitialize",
-          "name": "bootloader_mspi_disable_tail_and_lifecycle_alignment_425160_opaque",
-          "output": "apollo510b/bootloader-mspi-disable-tail-and-lifecycle-alignment-425160-opaque-0x00425160.bin",
-          "size": 12,
+          "function": "Compiled MIT clean-room orphaned disable-head branch-fragment halfword at its authenticated stock address",
+          "name": "bootloader_frag_425160_source_in_place",
+          "output": "apollo510b/bootloader-frag-425160-source-in-place-0x00425160.bin",
+          "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4346208
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 86370,
+          "function": "Compiled MIT clean-room MSPI disable mini-tail at its authenticated stock address",
+          "name": "bootloader_mspi_disable_tail_425162_source_in_place",
+          "output": "apollo510b/bootloader-mspi-disable-tail-425162-source-in-place-0x00425162.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4346210
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 86374,
+          "function": "Compiled MIT clean-room MSPI lifecycle alignment halfword at its authenticated stock address",
+          "name": "bootloader_pad_425166_source_in_place",
+          "output": "apollo510b/bootloader-pad-425166-source-in-place-0x00425166.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4346214
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 86376,
+          "function": "Compiled MIT clean-room MSPI lifecycle literal word at its authenticated stock address",
+          "name": "bootloader_word_425168_source_in_place",
+          "output": "apollo510b/bootloader-word-425168-source-in-place-0x00425168.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4346216
         },
         {
           "address_status": "source_compiled",
@@ -4084,11 +4174,11 @@
           "target_address": 4346220
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 86436,
-          "function": "Authenticated alignment and literal pool between MSPI deinitialize and the control dispatcher",
-          "name": "bootloader_mspi_control_prefix_4251a4_opaque",
-          "output": "apollo510b/bootloader-mspi-control-prefix-4251a4-opaque-0x004251a4.bin",
+          "function": "Compiled MIT clean-room MSPI state pool at authenticated stock addresses",
+          "name": "bootloader_pool_4251a4_source_in_place",
+          "output": "apollo510b/bootloader-pool-4251a4-source-in-place-0x004251a4.bin",
           "size": 28,
           "target": "apollo510b_internal_mram",
           "target_address": 4346276
@@ -4114,11 +4204,11 @@
           "target_address": 4346428
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 90412,
-          "function": "Authenticated unreachable stock tail after the source-owned MSPI control dispatcher",
-          "name": "bootloader_mspi_control_unreachable_tail_42612c_4262e0_official",
-          "output": "apollo510b/bootloader-mspi-control-unreachable-tail-42612c-4262e0-official-0x0042612c.bin",
+          "function": "Compiled MIT clean-room MSPI control-dispatcher remainder at its authenticated stock address",
+          "name": "bootloader_mspi_control_rem_tail_42612c_source_in_place",
+          "output": "apollo510b/bootloader-mspi-control-rem-tail-42612c-source-in-place-0x0042612c.bin",
           "size": 436,
           "target": "apollo510b_internal_mram",
           "target_address": 4350252
@@ -4134,14 +4224,24 @@
           "target_address": 4350688
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 91104,
-          "function": "Authenticated unreachable stock tail after the source-owned blocking-transfer return plus the four-byte alignment boundary before interrupt services",
-          "name": "bootloader_mspi_blocking_transfer_unreachable_tail_and_alignment_4263e0_426450_official",
-          "output": "apollo510b/bootloader-mspi-blocking-transfer-unreachable-tail-and-alignment-4263e0-426450-official-0x004263e0.bin",
-          "size": 112,
+          "function": "Compiled MIT clean-room MSPI blocking-transfer remainder at its authenticated stock address",
+          "name": "bootloader_mspi_blocking_rem_tail_4263e0_source_in_place",
+          "output": "apollo510b/bootloader-mspi-blocking-rem-tail-4263e0-source-in-place-0x004263e0.bin",
+          "size": 108,
           "target": "apollo510b_internal_mram",
           "target_address": 4350944
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 91212,
+          "function": "Compiled MIT clean-room MSPI aperture-base mask word at its authenticated stock address",
+          "name": "bootloader_word_42644c_source_in_place",
+          "output": "apollo510b/bootloader-word-42644c-source-in-place-0x0042644c.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4351052
         },
         {
           "address_status": "source_compiled",
@@ -4154,11 +4254,11 @@
           "target_address": 4351056
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 91260,
-          "function": "Authenticated unreachable stock tail after the source-owned MSPI interrupt-enable return",
-          "name": "bootloader_mspi_interrupt_enable_unreachable_tail_42647c_426484_official",
-          "output": "apollo510b/bootloader-mspi-interrupt-enable-unreachable-tail-42647c-426484-official-0x0042647c.bin",
+          "function": "Compiled MIT clean-room MSPI interrupt-enable remainder tail at its authenticated stock address",
+          "name": "bootloader_mspi_irq_enable_tail_42647c_source_in_place",
+          "output": "apollo510b/bootloader-mspi-irq-enable-tail-42647c-source-in-place-0x0042647c.bin",
           "size": 8,
           "target": "apollo510b_internal_mram",
           "target_address": 4351100
@@ -4174,14 +4274,24 @@
           "target_address": 4351108
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 91312,
-          "function": "Authenticated unreachable stock tail after the source-owned MSPI interrupt-disable return",
-          "name": "bootloader_mspi_interrupt_disable_unreachable_tail_4264b0_4264ba_official",
-          "output": "apollo510b/bootloader-mspi-interrupt-disable-unreachable-tail-4264b0-4264ba-official-0x004264b0.bin",
-          "size": 10,
+          "function": "Compiled MIT clean-room interrupt-disable branch-fragment halfword at its authenticated stock address",
+          "name": "bootloader_frag_4264b0_source_in_place",
+          "output": "apollo510b/bootloader-frag-4264b0-source-in-place-0x004264b0.bin",
+          "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4351152
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 91314,
+          "function": "Compiled MIT clean-room MSPI interrupt-disable publish tail at its authenticated stock address",
+          "name": "bootloader_mspi_irq_disable_tail_4264b2_source_in_place",
+          "output": "apollo510b/bootloader-mspi-irq-disable-tail-4264b2-source-in-place-0x004264b2.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4351154
         },
         {
           "address_status": "source_compiled",
@@ -4194,11 +4304,11 @@
           "target_address": 4351162
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 91382,
-          "function": "Authenticated unreachable stock tail after the source-owned MSPI interrupt-status return and before the source-routed interrupt-clear entry",
-          "name": "bootloader_mspi_interrupt_status_get_unreachable_tail_4264f6_426506_official",
-          "output": "apollo510b/bootloader-mspi-interrupt-status-get-unreachable-tail-4264f6-426506-official-0x004264f6.bin",
+          "function": "Compiled MIT clean-room MSPI interrupt-status remainder tail at its authenticated stock address",
+          "name": "bootloader_mspi_irq_status_tail_4264f6_source_in_place",
+          "output": "apollo510b/bootloader-mspi-irq-status-tail-4264f6-source-in-place-0x004264f6.bin",
           "size": 16,
           "target": "apollo510b_internal_mram",
           "target_address": 4351222
@@ -4224,11 +4334,11 @@
           "target_address": 4351286
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 92158,
-          "function": "Authenticated non-executable MSPI interrupt-service literal pool retained before power control",
-          "name": "bootloader_mspi_interrupt_service_literal_pool_4267fe_opaque",
-          "output": "apollo510b/bootloader-mspi-interrupt-service-literal-pool-4267fe-opaque-0x004267fe.bin",
+          "function": "Compiled MIT clean-room MSPI interrupt-service literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_4267fe_source_in_place",
+          "output": "apollo510b/bootloader-pool-4267fe-source-in-place-0x004267fe.bin",
           "size": 10,
           "target": "apollo510b_internal_mram",
           "target_address": 4351998
@@ -4244,11 +4354,11 @@
           "target_address": 4352008
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 93182,
-          "function": "Authenticated non-executable MSPI power-control literal pool and alignment",
-          "name": "bootloader_mspi_power_control_literal_pool_426bfe_426c10_official",
-          "output": "apollo510b/bootloader-mspi-power-control-literal-pool-426bfe-426c10-official-0x00426bfe.bin",
+          "function": "Compiled MIT clean-room MSPI power-control literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_426bfe_source_in_place",
+          "output": "apollo510b/bootloader-pool-426bfe-source-in-place-0x00426bfe.bin",
           "size": 18,
           "target": "apollo510b_internal_mram",
           "target_address": 4353022
@@ -4264,11 +4374,11 @@
           "target_address": 4353040
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 93218,
-          "function": "Authenticated unreachable terminal return after the source-owned memset wrapper",
-          "name": "bootloader_memset_wrapper_unreachable_tail_426c22_426c24_official",
-          "output": "apollo510b/bootloader-memset-wrapper-unreachable-tail-426c22-426c24-official-0x00426c22.bin",
+          "function": "Compiled MIT clean-room memset-wrapper terminal return at its authenticated stock address",
+          "name": "bootloader_memset_term_tail_426c22_source_in_place",
+          "output": "apollo510b/bootloader-memset-term-tail-426c22-source-in-place-0x00426c22.bin",
           "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4353058
@@ -4334,11 +4444,11 @@
           "target_address": 4353112
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 93296,
-          "function": "Authenticated unreachable terminal return after the source-owned CLKGEN HFADJ enable leaf",
-          "name": "bootloader_clkgen_hfadj_enable_unreachable_tail_426c70_426c72_official",
-          "output": "apollo510b/bootloader-clkgen-hfadj-enable-unreachable-tail-426c70-426c72-official-0x00426c70.bin",
+          "function": "Compiled MIT clean-room CLKGEN HFADJ-enable terminal return at its authenticated stock address",
+          "name": "bootloader_clkgen_hfadj_term_426c70_source_in_place",
+          "output": "apollo510b/bootloader-clkgen-hfadj-term-426c70-source-in-place-0x00426c70.bin",
           "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4353136
@@ -4374,11 +4484,11 @@
           "target_address": 4353164
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 93380,
-          "function": "Authenticated unreachable terminal tail after the source-owned CLKGEN dual-clock switch",
-          "name": "bootloader_dual_switch_unreachable_tail_426cc4_426ccc_official",
-          "output": "apollo510b/bootloader-dual-switch-unreachable-tail-426cc4-426ccc-official-0x00426cc4.bin",
+          "function": "Compiled MIT clean-room CLKGEN dual-clock-switch terminal tail at its authenticated stock address",
+          "name": "bootloader_clkgen_dualclock_term_tail_426cc4_source_in_place",
+          "output": "apollo510b/bootloader-clkgen-dualclock-term-tail-426cc4-source-in-place-0x00426cc4.bin",
           "size": 8,
           "target": "apollo510b_internal_mram",
           "target_address": 4353220
@@ -4404,11 +4514,11 @@
           "target_address": 4353310
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 93484,
-          "function": "Authenticated padding and literal-pool bytes between the CLKGEN disable and floating common-divisor entries",
-          "name": "bootloader_clkgen_gap_426d2c_426d48_official",
-          "output": "apollo510b/bootloader-clkgen-gap-426d2c-426d48-official-0x00426d2c.bin",
+          "function": "Compiled MIT clean-room CLKGEN register-address literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_426d2c_source_in_place",
+          "output": "apollo510b/bootloader-pool-426d2c-source-in-place-0x00426d2c.bin",
           "size": 28,
           "target": "apollo510b_internal_mram",
           "target_address": 4353324
@@ -4424,11 +4534,11 @@
           "target_address": 4353352
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 93618,
-          "function": "Authenticated two-byte padding between the floating common-divisor and ratio helper entries",
-          "name": "bootloader_float_gap_426db2_426db4_official",
-          "output": "apollo510b/bootloader-float-gap-426db2-426db4-official-0x00426db2.bin",
+          "function": "Compiled MIT clean-room zero-alignment fill halfword at its authenticated stock address",
+          "name": "bootloader_pad_426db2_source_in_place",
+          "output": "apollo510b/bootloader-pad-426db2-source-in-place-0x00426db2.bin",
           "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4353458
@@ -4454,11 +4564,11 @@
           "target_address": 4353708
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 94058,
-          "function": "Authenticated two-byte padding between the floating multiplier and encoding-selector entries",
-          "name": "bootloader_float_gap_426f6a_426f6c_official",
-          "output": "apollo510b/bootloader-float-gap-426f6a-426f6c-official-0x00426f6a.bin",
+          "function": "Compiled MIT clean-room zero-alignment fill halfword at its authenticated stock address",
+          "name": "bootloader_pad_426f6a_source_in_place",
+          "output": "apollo510b/bootloader-pad-426f6a-source-in-place-0x00426f6a.bin",
           "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4353898
@@ -4474,11 +4584,11 @@
           "target_address": 4353900
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 94258,
-          "function": "Authenticated literals and alignment between the floating selector and System PLL minimum-VCO entry",
-          "name": "bootloader_float_select_syspll_gap_427032_427040_official",
-          "output": "apollo510b/bootloader-float-select-syspll-gap-427032-427040-official-0x00427032.bin",
+          "function": "Compiled MIT clean-room floating-point literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_427032_source_in_place",
+          "output": "apollo510b/bootloader-pool-427032-source-in-place-0x00427032.bin",
           "size": 14,
           "target": "apollo510b_internal_mram",
           "target_address": 4354098
@@ -4514,11 +4624,11 @@
           "target_address": 4354364
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 94540,
-          "function": "Authenticated literals and alignment between the System PLL minimum-VCO and postdivider entries",
-          "name": "bootloader_syspll_gap_42714c_427160_official",
-          "output": "apollo510b/bootloader-syspll-gap-42714c-427160-official-0x0042714c.bin",
+          "function": "Compiled MIT clean-room floating-point literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_42714c_source_in_place",
+          "output": "apollo510b/bootloader-pool-42714c-source-in-place-0x0042714c.bin",
           "size": 20,
           "target": "apollo510b_internal_mram",
           "target_address": 4354380
@@ -4584,11 +4694,11 @@
           "target_address": 4354800
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 94984,
-          "function": "Authenticated literal/alignment gap between the System PLL initialization and deinitialization services",
-          "name": "bootloader_syspll_deinitialize_gap_427308_427310_official",
-          "output": "apollo510b/bootloader-syspll-deinitialize-gap-427308-427310-official-0x00427308.bin",
+          "function": "Compiled MIT clean-room floating-point literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_427308_source_in_place",
+          "output": "apollo510b/bootloader-pool-427308-source-in-place-0x00427308.bin",
           "size": 8,
           "target": "apollo510b_internal_mram",
           "target_address": 4354824
@@ -4704,14 +4814,54 @@
           "target_address": 4355456
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 95624,
-          "function": "Authenticated literals, alignment, and intervening code between System PLL lock-wait and the queue family",
-          "name": "bootloader_syspll_queue_gap_427588_4275ea_official",
-          "output": "apollo510b/bootloader-syspll-queue-gap-427588-4275ea-official-0x00427588.bin",
-          "size": 98,
+          "function": "Compiled MIT clean-room System-PLL literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_427588_source_in_place",
+          "output": "apollo510b/bootloader-pool-427588-source-in-place-0x00427588.bin",
+          "size": 60,
           "target": "apollo510b_internal_mram",
           "target_address": 4355464
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 95684,
+          "function": "Compiled MIT clean-room System-PLL alternate setter entry at its authenticated stock address",
+          "name": "bootloader_syspll_alt_entry_4275c4_source_in_place",
+          "output": "apollo510b/bootloader-syspll-alt-entry-4275c4-source-in-place-0x004275c4.bin",
+          "size": 14,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4355524
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 95698,
+          "function": "Compiled MIT clean-room double-ldexp range-error tail at its authenticated stock address",
+          "name": "bootloader_double_range_error_4275d2_source_in_place",
+          "output": "apollo510b/bootloader-double-range-error-4275d2-source-in-place-0x004275d2.bin",
+          "size": 18,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4355538
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 95716,
+          "function": "Compiled MIT clean-room double range-error cell word at its authenticated stock address",
+          "name": "bootloader_word_4275e4_source_in_place",
+          "output": "apollo510b/bootloader-word-4275e4-source-in-place-0x004275e4.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4355556
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 95720,
+          "function": "Compiled MIT clean-room unsigned-64-bit divmod divide-by-zero tail at its authenticated stock address",
+          "name": "bootloader_u64_divzero_4275e8_source_in_place",
+          "output": "apollo510b/bootloader-u64-divzero-4275e8-source-in-place-0x004275e8.bin",
+          "size": 2,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4355560
         },
         {
           "address_status": "generated_source_entry_replacement",
@@ -4774,11 +4924,11 @@
           "target_address": 4355684
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 95930,
-          "function": "Authenticated zero alignment halfword between the queue family and memmove",
-          "name": "bootloader_queue_memmove_alignment_4276ba_4276bc_official",
-          "output": "apollo510b/bootloader-queue-memmove-alignment-4276ba-4276bc-official-0x004276ba.bin",
+          "function": "Compiled MIT clean-room zero-alignment fill halfword at its authenticated stock address",
+          "name": "bootloader_pad_4276ba_source_in_place",
+          "output": "apollo510b/bootloader-pad-4276ba-source-in-place-0x004276ba.bin",
           "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4355770
@@ -4814,11 +4964,11 @@
           "target_address": 4355826
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 96082,
-          "function": "Authenticated zero alignment halfword between memmove and the command-queue index updater",
-          "name": "bootloader_memmove_cmdq_alignment_427752_427754_official",
-          "output": "apollo510b/bootloader-memmove-cmdq-alignment-427752-427754-official-0x00427752.bin",
+          "function": "Compiled MIT clean-room zero-alignment fill halfword at its authenticated stock address",
+          "name": "bootloader_pad_427752_source_in_place",
+          "output": "apollo510b/bootloader-pad-427752-source-in-place-0x00427752.bin",
           "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4355922
@@ -4864,11 +5014,11 @@
           "target_address": 4355988
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 96332,
-          "function": "Authenticated unreachable remainder after the source-owned command-queue initializer",
-          "name": "bootloader_cmdq_init_427794_unreachable_tail",
-          "output": "apollo510b/bootloader-cmdq-init-427794-unreachable-tail-0x0042784c.bin",
+          "function": "Compiled MIT clean-room command-queue initializer remainder tail at its authenticated stock address",
+          "name": "bootloader_cmdq_init_rem_tail_42784c_source_in_place",
+          "output": "apollo510b/bootloader-cmdq-init-rem-tail-42784c-source-in-place-0x0042784c.bin",
           "size": 44,
           "target": "apollo510b_internal_mram",
           "target_address": 4356172
@@ -4884,11 +5034,11 @@
           "target_address": 4356216
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 96444,
-          "function": "Authenticated unreachable remainder after the source-owned command-queue enable service",
-          "name": "bootloader_cmdq_enable_427878_unreachable_tail",
-          "output": "apollo510b/bootloader-cmdq-enable-427878-unreachable-tail-0x004278bc.bin",
+          "function": "Compiled MIT clean-room command-queue enable remainder tail at its authenticated stock address",
+          "name": "bootloader_cmdq_enable_tail_4278bc_source_in_place",
+          "output": "apollo510b/bootloader-cmdq-enable-tail-4278bc-source-in-place-0x004278bc.bin",
           "size": 12,
           "target": "apollo510b_internal_mram",
           "target_address": 4356284
@@ -4904,11 +5054,11 @@
           "target_address": 4356296
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 96508,
-          "function": "Authenticated unreachable remainder after the source-owned command-queue disable service",
-          "name": "bootloader_cmdq_disable_4278c8_unreachable_tail",
-          "output": "apollo510b/bootloader-cmdq-disable-4278c8-unreachable-tail-0x004278fc.bin",
+          "function": "Compiled MIT clean-room command-queue disable remainder tail at its authenticated stock address",
+          "name": "bootloader_cmdq_disable_tail_4278fc_source_in_place",
+          "output": "apollo510b/bootloader-cmdq-disable-tail-4278fc-source-in-place-0x004278fc.bin",
           "size": 14,
           "target": "apollo510b_internal_mram",
           "target_address": 4356348
@@ -4924,11 +5074,11 @@
           "target_address": 4356362
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 96670,
-          "function": "Authenticated unreachable remainder after the source-owned command-queue block allocator",
-          "name": "bootloader_cmdq_alloc_block_42790a_unreachable_tail",
-          "output": "apollo510b/bootloader-cmdq-alloc-block-42790a-unreachable-tail-0x0042799e.bin",
+          "function": "Compiled MIT clean-room command-queue allocator remainder interior at its authenticated stock address",
+          "name": "bootloader_cmdq_alloc_rem_tail_42799e_source_in_place",
+          "output": "apollo510b/bootloader-cmdq-alloc-rem-tail-42799e-source-in-place-0x0042799e.bin",
           "size": 32,
           "target": "apollo510b_internal_mram",
           "target_address": 4356510
@@ -4944,11 +5094,11 @@
           "target_address": 4356542
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 96750,
-          "function": "Authenticated unreachable remainder after the source-owned command-queue block release service",
-          "name": "bootloader_cmdq_release_block_4279be_unreachable_tail",
-          "output": "apollo510b/bootloader-cmdq-release-block-4279be-unreachable-tail-0x004279ee.bin",
+          "function": "Compiled MIT clean-room command-queue block-release terminal return at its authenticated stock address",
+          "name": "bootloader_cmdq_blockrel_term_4279ee_source_in_place",
+          "output": "apollo510b/bootloader-cmdq-blockrel-term-4279ee-source-in-place-0x004279ee.bin",
           "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4356590
@@ -4964,11 +5114,11 @@
           "target_address": 4356592
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 96844,
-          "function": "Authenticated unreachable remainder after the source-owned command-queue block post service",
-          "name": "bootloader_cmdq_post_block_4279f0_unreachable_tail",
-          "output": "apollo510b/bootloader-cmdq-post-block-4279f0-unreachable-tail-0x00427a4c.bin",
+          "function": "Compiled MIT clean-room command-queue block-post remainder tail at its authenticated stock address",
+          "name": "bootloader_cmdq_post_tail_427a4c_source_in_place",
+          "output": "apollo510b/bootloader-cmdq-post-tail-427a4c-source-in-place-0x00427a4c.bin",
           "size": 10,
           "target": "apollo510b_internal_mram",
           "target_address": 4356684
@@ -4984,11 +5134,11 @@
           "target_address": 4356694
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 96958,
-          "function": "Authenticated unreachable remainder after the source-owned command-queue status service",
-          "name": "bootloader_cmdq_get_status_427a56_unreachable_tail",
-          "output": "apollo510b/bootloader-cmdq-get-status-427a56-unreachable-tail-0x00427abe.bin",
+          "function": "Compiled MIT clean-room command-queue status remainder tail at its authenticated stock address",
+          "name": "bootloader_cmdq_status_rem_tail_427abe_source_in_place",
+          "output": "apollo510b/bootloader-cmdq-status-rem-tail-427abe-source-in-place-0x00427abe.bin",
           "size": 24,
           "target": "apollo510b_internal_mram",
           "target_address": 4356798
@@ -5004,11 +5154,11 @@
           "target_address": 4356822
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 97070,
-          "function": "Authenticated unreachable remainder after the source-owned command-queue termination service",
-          "name": "bootloader_cmdq_term_427ad6_unreachable_tail",
-          "output": "apollo510b/bootloader-cmdq-term-427ad6-unreachable-tail-0x00427b2e.bin",
+          "function": "Compiled MIT clean-room command-queue termination remainder tail at its authenticated stock address",
+          "name": "bootloader_cmdq_term_tail_427b2e_source_in_place",
+          "output": "apollo510b/bootloader-cmdq-term-tail-427b2e-source-in-place-0x00427b2e.bin",
           "size": 10,
           "target": "apollo510b_internal_mram",
           "target_address": 4356910
@@ -5024,11 +5174,11 @@
           "target_address": 4356920
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 97168,
-          "function": "Authenticated unreachable remainder after the source-owned command-queue error-resume service",
-          "name": "bootloader_cmdq_error_resume_427b38_unreachable_tail",
-          "output": "apollo510b/bootloader-cmdq-error-resume-427b38-unreachable-tail-0x00427b90.bin",
+          "function": "Compiled MIT clean-room command-queue error-resume remainder at its authenticated stock address",
+          "name": "bootloader_cmdq_errresume_rem_tail_427b90_source_in_place",
+          "output": "apollo510b/bootloader-cmdq-errresume-rem-tail-427b90-source-in-place-0x00427b90.bin",
           "size": 26,
           "target": "apollo510b_internal_mram",
           "target_address": 4357008
@@ -5044,11 +5194,11 @@
           "target_address": 4357034
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 97282,
-          "function": "Authenticated unreachable remainder after the source-owned command-queue reset service",
-          "name": "bootloader_cmdq_reset_427baa_unreachable_tail",
-          "output": "apollo510b/bootloader-cmdq-reset-427baa-unreachable-tail-0x00427c02.bin",
+          "function": "Compiled MIT clean-room command-queue reset remainder tail at its authenticated stock address",
+          "name": "bootloader_cmdq_reset_rem_tail_427c02_source_in_place",
+          "output": "apollo510b/bootloader-cmdq-reset-rem-tail-427c02-source-in-place-0x00427c02.bin",
           "size": 16,
           "target": "apollo510b_internal_mram",
           "target_address": 4357122
@@ -5064,14 +5214,24 @@
           "target_address": 4357138
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 97394,
-          "function": "Authenticated unreachable command-queue suffix and typed gap before the source-owned binary32 math runtime",
-          "name": "bootloader_cmdq_tail_and_float_math_gap_427c72_427c90",
-          "output": "apollo510b/bootloader-cmdq-tail-and-float-math-gap-427c72-427c90-0x00427c72.bin",
-          "size": 30,
+          "function": "Compiled MIT clean-room command-queue reset epilogue tail at its authenticated stock address",
+          "name": "bootloader_cmdq_reset_tail_427c72_source_in_place",
+          "output": "apollo510b/bootloader-cmdq-reset-tail-427c72-source-in-place-0x00427c72.bin",
+          "size": 14,
           "target": "apollo510b_internal_mram",
           "target_address": 4357234
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 97408,
+          "function": "Compiled MIT clean-room command-queue suffix literal pool at authenticated stock addresses",
+          "name": "bootloader_pool_427c80_source_in_place",
+          "output": "apollo510b/bootloader-pool-427c80-source-in-place-0x00427c80.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4357248
         },
         {
           "address_status": "source_compiled",
@@ -5114,11 +5274,11 @@
           "target_address": 4357340
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 97668,
-          "function": "Authenticated unreachable remainder after the source-owned binary32 remainder core",
-          "name": "bootloader_fmod_bits_427cdc_unreachable_tail",
-          "output": "apollo510b/bootloader-fmod-bits-427cdc-unreachable-tail-0x00427d84.bin",
+          "function": "Compiled MIT clean-room binary32 remainder-code remainder tail at its authenticated stock address",
+          "name": "bootloader_binary32_rem_tail_427d84_source_in_place",
+          "output": "apollo510b/bootloader-binary32-rem-tail-427d84-source-in-place-0x00427d84.bin",
           "size": 20,
           "target": "apollo510b_internal_mram",
           "target_address": 4357508
@@ -5174,14 +5334,44 @@
           "target_address": 4357644
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 97876,
-          "function": "Authenticated retained literal, table, and alignment bytes between the binary32 runtime and SPOT-manager transition",
-          "name": "bootloader_opaque_between_float_math_and_spotmgr_427e54_428378",
-          "output": "apollo510b/bootloader-opaque-between-float-math-and-spotmgr-427e54-428378-0x00427e54.bin",
-          "size": 1316,
+          "function": "Compiled MIT clean-room SPOT trim-search float classifier suffix tail at its authenticated stock address",
+          "name": "bootloader_spot_trim_classify_tail_427e54_source_in_place",
+          "output": "apollo510b/bootloader-spot-trim-classify-tail-427e54-source-in-place-0x00427e54.bin",
+          "size": 48,
           "target": "apollo510b_internal_mram",
           "target_address": 4357716
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 97924,
+          "function": "Compiled MIT clean-room SPOT trim-search service variant A at its authenticated stock address",
+          "name": "bootloader_spot_trim_search_a_427e84_source_in_place",
+          "output": "apollo510b/bootloader-spot-trim-search-a-427e84-source-in-place-0x00427e84.bin",
+          "size": 484,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4357764
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 98408,
+          "function": "Compiled MIT clean-room SPOT trim-search service variant B at its authenticated stock address",
+          "name": "bootloader_spot_trim_search_b_428068_source_in_place",
+          "output": "apollo510b/bootloader-spot-trim-search-b-428068-source-in-place-0x00428068.bin",
+          "size": 472,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4358248
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 98880,
+          "function": "Compiled MIT clean-room SPOT trim-search service variant C at its authenticated stock address",
+          "name": "bootloader_spot_trim_search_c_428240_source_in_place",
+          "output": "apollo510b/bootloader-spot-trim-search-c-428240-source-in-place-0x00428240.bin",
+          "size": 312,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4358720
         },
         {
           "address_status": "source_compiled",
@@ -5624,7 +5814,7 @@
           "target_address": 4374000
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 114510,
           "function": "Authenticated six-byte literal/alignment gap between the hardware-state composer and hardware-readiness gate",
           "name": "bootloader_hw_state_compose_readiness_gap_42bf4e_42bf54",
@@ -5647,11 +5837,121 @@
           "address_status": "official_blob",
           "file_offset": 114596,
           "function": "Authenticated retained code and data between the hardware-readiness gate and hardware-status route helper",
-          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034",
-          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-0x0042bfa4.bin",
-          "size": 144,
+          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034_retained_bfa4",
+          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-retained-bfa4-0x0042bfa4.bin",
+          "size": 8,
           "target": "apollo510b_internal_mram",
           "target_address": 4374436
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 114604,
+          "function": "Source-routed BL-009 gap literal (config/mask run); reviewed C in runtime_bl009_hwstate_pool_42bfa4.c",
+          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034_source_bfac",
+          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-source-bfac-0x0042bfac.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4374444
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 114616,
+          "function": "Authenticated retained code and data between the hardware-readiness gate and hardware-status route helper",
+          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034_retained_bfb8",
+          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-retained-bfb8-0x0042bfb8.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4374456
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 114620,
+          "function": "Source-routed BL-009 gap literal (mask/config run); reviewed C in runtime_bl009_hwstate_pool_42bfa4.c",
+          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034_source_bfbc",
+          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-source-bfbc-0x0042bfbc.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4374460
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 114636,
+          "function": "Authenticated retained code and data between the hardware-readiness gate and hardware-status route helper",
+          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034_retained_bfcc",
+          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-retained-bfcc-0x0042bfcc.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4374476
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 114640,
+          "function": "Source-routed BL-009 gap literal (pack word); reviewed C in runtime_bl009_hwstate_pool_42bfa4.c",
+          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034_source_bfd0",
+          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-source-bfd0-0x0042bfd0.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4374480
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 114644,
+          "function": "Authenticated retained code and data between the hardware-readiness gate and hardware-status route helper",
+          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034_retained_bfd4",
+          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-retained-bfd4-0x0042bfd4.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4374484
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 114648,
+          "function": "Source-routed BL-009 gap literal (peripheral run); reviewed C in runtime_bl009_hwstate_pool_42bfa4.c",
+          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034_source_bfd8",
+          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-source-bfd8-0x0042bfd8.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4374488
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 114664,
+          "function": "Authenticated retained code and data between the hardware-readiness gate and hardware-status route helper",
+          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034_retained_bfe8",
+          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-retained-bfe8-0x0042bfe8.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4374504
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 114676,
+          "function": "Source-routed BL-009 gap literal (calibration float run); reviewed C in runtime_bl009_hwstate_pool_42bfa4.c",
+          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034_source_bff4",
+          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-source-bff4-0x0042bff4.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4374516
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 114700,
+          "function": "Authenticated retained code and data between the hardware-readiness gate and hardware-status route helper",
+          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034_retained_c00c",
+          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-retained-c00c-0x0042c00c.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4374540
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 114716,
+          "function": "Source-routed BL-009 gap literal (peripheral run); reviewed C in runtime_bl009_hwstate_pool_42bfa4.c",
+          "name": "bootloader_opaque_between_readiness_gate_and_hw_status_route_42bfa4_42c034_source_c01c",
+          "output": "apollo510b/bootloader-opaque-between-readiness-gate-and-hw-status-route-42bfa4-42c034-source-c01c-0x0042c01c.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4374556
         },
         {
           "address_status": "source_compiled",
@@ -5804,7 +6104,7 @@
           "target_address": 4376246
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 116452,
           "function": "Authenticated retained alignment and data between the interrupt-clear helper and event service",
           "name": "bootloader_opaque_between_interrupt_clear_and_event_service_42c6e4_42c6f8",
@@ -5824,7 +6124,7 @@
           "target_address": 4376312
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 117120,
           "function": "Authenticated retained alignment and data between the event service and configuration transaction",
           "name": "bootloader_opaque_between_event_service_and_config_transaction_42c980_42c988",
@@ -5854,14 +6154,64 @@
           "target_address": 4377652
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 118192,
-          "function": "Authenticated retained data between the instance configurator and state adjustment service",
-          "name": "bootloader_opaque_between_instance_configure_and_state_adjust_42cdb0_42cdf8",
-          "output": "apollo510b/bootloader-opaque-between-instance-configure-and-state-adjust-42cdb0-42cdf8-0x0042cdb0.bin",
-          "size": 72,
+          "function": "Source-routed BL-009 gap literal (masked-ID compare 0x01123456); reviewed C in runtime_bl009_config_gap_42cdb0.c",
+          "name": "bootloader_opaque_between_instance_configure_and_state_adjust_42cdb0_42cdf8_source_cdb0",
+          "output": "apollo510b/bootloader-opaque-between-instance-configure-and-state-adjust-42cdb0-42cdf8-source-cdb0-0x0042cdb0.bin",
+          "size": 4,
           "target": "apollo510b_internal_mram",
           "target_address": 4378032
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 118196,
+          "function": "Authenticated retained data between the instance configurator and state adjustment service",
+          "name": "bootloader_opaque_between_instance_configure_and_state_adjust_42cdb0_42cdf8_retained_cdb4",
+          "output": "apollo510b/bootloader-opaque-between-instance-configure-and-state-adjust-42cdb0-42cdf8-retained-cdb4-0x0042cdb4.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4378036
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 118200,
+          "function": "Source-routed BL-009 gap literal (revision/config/base/mask/bound/divisor run); reviewed C in runtime_bl009_config_gap_42cdb0.c",
+          "name": "bootloader_opaque_between_instance_configure_and_state_adjust_42cdb0_42cdf8_source_cdb8",
+          "output": "apollo510b/bootloader-opaque-between-instance-configure-and-state-adjust-42cdb0-42cdf8-source-cdb8-0x0042cdb8.bin",
+          "size": 28,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4378040
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 118228,
+          "function": "Authenticated retained data between the instance configurator and state adjustment service",
+          "name": "bootloader_opaque_between_instance_configure_and_state_adjust_42cdb0_42cdf8_retained_cdd4",
+          "output": "apollo510b/bootloader-opaque-between-instance-configure-and-state-adjust-42cdb0-42cdf8-retained-cdd4-0x0042cdd4.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4378068
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 118232,
+          "function": "Source-routed BL-009 gap literal (100 kHz and 400 kHz divisors); reviewed C in runtime_bl009_config_gap_42cdb0.c",
+          "name": "bootloader_opaque_between_instance_configure_and_state_adjust_42cdb0_42cdf8_source_cdd8",
+          "output": "apollo510b/bootloader-opaque-between-instance-configure-and-state-adjust-42cdb0-42cdf8-source-cdd8-0x0042cdd8.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4378072
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 118240,
+          "function": "Authenticated retained data between the instance configurator and state adjustment service",
+          "name": "bootloader_opaque_between_instance_configure_and_state_adjust_42cdb0_42cdf8_retained_cde0",
+          "output": "apollo510b/bootloader-opaque-between-instance-configure-and-state-adjust-42cdb0-42cdf8-retained-cde0-0x0042cde0.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4378080
         },
         {
           "address_status": "source_compiled",
@@ -5904,7 +6254,7 @@
           "target_address": 4378592
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 119026,
           "function": "Authenticated retained state providers before the state-one tuning service",
           "name": "bootloader_state_event_zero_state_one_gap_42d0f2_42d104",
@@ -5944,14 +6294,264 @@
           "target_address": 4380002
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 120258,
-          "function": "Authenticated retained code and data between the state dispatcher and stream-mode primitive",
-          "name": "bootloader_opaque_between_state_dispatch_and_stream_mode_42d5c2_42d84c",
-          "output": "apollo510b/bootloader-opaque-between-state-dispatch-and-stream-mode-42d5c2-42d84c-0x0042d5c2.bin",
-          "size": 650,
+          "function": "Compiled MIT clean-room retained state-flag publisher at its authenticated stock entry",
+          "name": "bootloader_state_flag_raise_42d5c2_source_in_place",
+          "output": "apollo510b/bootloader-state-flag-raise-42d5c2-source-in-place-0x0042d5c2.bin",
+          "size": 10,
           "target": "apollo510b_internal_mram",
           "target_address": 4380098
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 120268,
+          "function": "Authenticated retained state-service body with an opaque BL-005 call",
+          "name": "bootloader_opaque_state_service_42d5cc_42d5f8",
+          "output": "apollo510b/bootloader-opaque-state-service-42d5cc-42d5f8-0x0042d5cc.bin",
+          "size": 44,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380108
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120312,
+          "function": "Compiled MIT clean-room gated trim-field publisher at its authenticated stock entry",
+          "name": "bootloader_trim_field_publish_42d5f8_source_in_place",
+          "output": "apollo510b/bootloader-trim-field-publish-42d5f8-source-in-place-0x0042d5f8.bin",
+          "size": 38,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380152
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120350,
+          "function": "Compiled MIT clean-room dual trim-field setter at its authenticated stock entry",
+          "name": "bootloader_trim_fields_set_42d61e_source_in_place",
+          "output": "apollo510b/bootloader-trim-fields-set-42d61e-source-in-place-0x0042d61e.bin",
+          "size": 28,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380190
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120378,
+          "function": "Compiled MIT clean-room trim register-block programmer at its authenticated stock entry",
+          "name": "bootloader_trim_block_program_42d63a_source_in_place",
+          "output": "apollo510b/bootloader-trim-block-program-42d63a-source-in-place-0x0042d63a.bin",
+          "size": 88,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380218
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120466,
+          "function": "Compiled MIT clean-room trim status-bit setter at its authenticated stock entry",
+          "name": "bootloader_trim_bits_raise_42d692_source_in_place",
+          "output": "apollo510b/bootloader-trim-bits-raise-42d692-source-in-place-0x0042d692.bin",
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380306
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120486,
+          "function": "Compiled MIT clean-room gated trim status-bit clearer at its authenticated stock entry",
+          "name": "bootloader_trim_bits_clear_42d6a6_source_in_place",
+          "output": "apollo510b/bootloader-trim-bits-clear-42d6a6-source-in-place-0x0042d6a6.bin",
+          "size": 26,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380326
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120512,
+          "function": "Compiled MIT clean-room state-flag dispatcher at its authenticated stock entry",
+          "name": "bootloader_state_flag_dispatch_42d6c0_source_in_place",
+          "output": "apollo510b/bootloader-state-flag-dispatch-42d6c0-source-in-place-0x0042d6c0.bin",
+          "size": 222,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380352
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 120734,
+          "function": "Authenticated retained shared literal-pool head",
+          "name": "bootloader_opaque_shared_pool_head_42d79e",
+          "output": "apollo510b/bootloader-opaque-shared-pool-head-42d79e-0x0042d79e.bin",
+          "size": 66,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380574
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120800,
+          "function": "Compiled MIT clean-room trim-pool LDO register address at its authenticated stock cell",
+          "name": "bootloader_trim_pool_ldo_reg_42d7e0_source_in_place",
+          "output": "apollo510b/bootloader-trim-pool-ldo-reg-42d7e0-source-in-place-0x0042d7e0.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380640
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 120804,
+          "function": "Authenticated retained shared-pool SRAM address cell",
+          "name": "bootloader_opaque_trim_pool_cell_42d7e4",
+          "output": "apollo510b/bootloader-opaque-trim-pool-cell-42d7e4-0x0042d7e4.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380644
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120808,
+          "function": "Compiled MIT clean-room trim-pool adjacent register address at its authenticated stock cell",
+          "name": "bootloader_trim_pool_adjacent_reg_42d7e8_source_in_place",
+          "output": "apollo510b/bootloader-trim-pool-adjacent-reg-42d7e8-source-in-place-0x0042d7e8.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380648
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 120812,
+          "function": "Authenticated retained shared-pool cells",
+          "name": "bootloader_opaque_trim_pool_cells_42d7ec_42d7f8",
+          "output": "apollo510b/bootloader-opaque-trim-pool-cells-42d7ec-42d7f8-0x0042d7ec.bin",
+          "size": 16,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380652
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120828,
+          "function": "Compiled MIT clean-room trim-pool global-control register address at its authenticated stock cell",
+          "name": "bootloader_trim_pool_global_control_42d7fc_source_in_place",
+          "output": "apollo510b/bootloader-trim-pool-global-control-42d7fc-source-in-place-0x0042d7fc.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380668
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 120832,
+          "function": "Authenticated retained shared-pool cells",
+          "name": "bootloader_opaque_trim_pool_cells_42d800_42d814",
+          "output": "apollo510b/bootloader-opaque-trim-pool-cells-42d800-42d814-0x0042d800.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380672
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120856,
+          "function": "Compiled MIT clean-room trim-pool block-head register address at its authenticated stock cell",
+          "name": "bootloader_trim_pool_block_head_42d818_source_in_place",
+          "output": "apollo510b/bootloader-trim-pool-block-head-42d818-source-in-place-0x0042d818.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380696
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120860,
+          "function": "Compiled MIT clean-room trim-pool register address at its authenticated stock cell",
+          "name": "bootloader_trim_pool_block_word_a_42d81c_source_in_place",
+          "output": "apollo510b/bootloader-trim-pool-block-word-a-42d81c-source-in-place-0x0042d81c.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380700
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120864,
+          "function": "Compiled MIT clean-room trim-pool register address at its authenticated stock cell",
+          "name": "bootloader_trim_pool_block_word_b_42d820_source_in_place",
+          "output": "apollo510b/bootloader-trim-pool-block-word-b-42d820-source-in-place-0x0042d820.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380704
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120868,
+          "function": "Compiled MIT clean-room trim-pool register address at its authenticated stock cell",
+          "name": "bootloader_trim_pool_block_word_c_42d824_source_in_place",
+          "output": "apollo510b/bootloader-trim-pool-block-word-c-42d824-source-in-place-0x0042d824.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380708
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120872,
+          "function": "Compiled MIT clean-room trim-pool register address at its authenticated stock cell",
+          "name": "bootloader_trim_pool_block_word_d_42d828_source_in_place",
+          "output": "apollo510b/bootloader-trim-pool-block-word-d-42d828-source-in-place-0x0042d828.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380712
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120876,
+          "function": "Compiled MIT clean-room trim-pool register address at its authenticated stock cell",
+          "name": "bootloader_trim_pool_block_word_e_42d82c_source_in_place",
+          "output": "apollo510b/bootloader-trim-pool-block-word-e-42d82c-source-in-place-0x0042d82c.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380716
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 120880,
+          "function": "Authenticated retained shared-pool SRAM address cell",
+          "name": "bootloader_opaque_shared_pool_cell_42d830",
+          "output": "apollo510b/bootloader-opaque-shared-pool-cell-42d830-0x0042d830.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380720
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120884,
+          "function": "Compiled MIT clean-room dispatch-pool trim-state register address at its authenticated stock cell",
+          "name": "bootloader_dispatch_pool_state_reg_42d834_source_in_place",
+          "output": "apollo510b/bootloader-dispatch-pool-state-reg-42d834-source-in-place-0x0042d834.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380724
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 120888,
+          "function": "Authenticated retained shared-pool SRAM address cells",
+          "name": "bootloader_opaque_shared_pool_cells_42d838_42d83c",
+          "output": "apollo510b/bootloader-opaque-shared-pool-cells-42d838-42d83c-0x0042d838.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380728
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 120896,
+          "function": "Compiled MIT clean-room dispatch-pool status field mask at its authenticated stock cell",
+          "name": "bootloader_dispatch_pool_field_mask_42d840_source_in_place",
+          "output": "apollo510b/bootloader-dispatch-pool-field-mask-42d840-source-in-place-0x0042d840.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380736
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 120900,
+          "function": "Authenticated retained shared-pool SRAM cell and return-zero tail",
+          "name": "bootloader_opaque_shared_pool_tail_42d844_42d848",
+          "output": "apollo510b/bootloader-opaque-shared-pool-tail-42d844-42d848-0x0042d844.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4380740
         },
         {
           "address_status": "source_compiled",
@@ -6374,7 +6974,7 @@
           "target_address": 4383988
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 124174,
           "function": "Authenticated six-byte literal/alignment gap before the terminal-mode primitive",
           "name": "bootloader_alignment_dispatch_terminal_mode_gap_42e50e_42e514",
@@ -6394,7 +6994,7 @@
           "target_address": 4384020
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 124212,
           "function": "Authenticated retained literal/alignment bytes before event-runtime initialization",
           "name": "bootloader_terminal_mode_event_runtime_gap_42e534_42e53c",
@@ -6414,7 +7014,7 @@
           "target_address": 4384060
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 124482,
           "function": "Authenticated two-byte alignment between event-runtime initialization and callback dispatch",
           "name": "bootloader_event_runtime_callback_loop_gap_42e642_42e644",
@@ -6467,11 +7067,21 @@
           "address_status": "official_blob",
           "file_offset": 125122,
           "function": "Authenticated fourteen-byte literal/alignment gap before the hardware-context initializer",
-          "name": "bootloader_guarded_call_context_initialize_gap_42e8c2_42e8d0",
-          "output": "apollo510b/bootloader-guarded-call-context-initialize-gap-42e8c2-42e8d0-0x0042e8c2.bin",
-          "size": 14,
+          "name": "bootloader_guarded_call_context_initialize_gap_42e8c2_42e8d0_retained_e8c2",
+          "output": "apollo510b/bootloader-guarded-call-context-initialize-gap-42e8c2-42e8d0-retained-e8c2-0x0042e8c2.bin",
+          "size": 6,
           "target": "apollo510b_internal_mram",
           "target_address": 4384962
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 125128,
+          "function": "Source-routed BL-009 gap literal (MMIO store targets 0x40014008/0x40014024); reviewed C in runtime_bl009_cleanup_gap_42e8c8.c",
+          "name": "bootloader_guarded_call_context_initialize_gap_42e8c2_42e8d0_source_e8c8",
+          "output": "apollo510b/bootloader-guarded-call-context-initialize-gap-42e8c2-42e8d0-source-e8c8-0x0042e8c8.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4384968
         },
         {
           "address_status": "source_compiled",
@@ -6574,14 +7184,34 @@
           "target_address": 4386208
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 126454,
-          "function": "Authenticated retained literal/alignment bytes between adjacent normalization services",
-          "name": "bootloader_hardware_channel_normalize_gap_42edf6_42ee00",
-          "output": "apollo510b/bootloader-hardware-channel-normalize-gap-42edf6-42ee00-0x0042edf6.bin",
-          "size": 10,
+          "function": "Source-routed BL-009 gap literal (alignment pad); reviewed C in runtime_bl009_norm_gap_42edf6.c",
+          "name": "bootloader_hardware_channel_normalize_gap_42edf6_42ee00_source_edf6",
+          "output": "apollo510b/bootloader-hardware-channel-normalize-gap-42edf6-42ee00-source-edf6-0x0042edf6.bin",
+          "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4386294
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 126456,
+          "function": "Authenticated retained literal/alignment bytes between adjacent normalization services",
+          "name": "bootloader_hardware_channel_normalize_gap_42edf6_42ee00_retained_edf8",
+          "output": "apollo510b/bootloader-hardware-channel-normalize-gap-42edf6-42ee00-retained-edf8-0x0042edf8.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4386296
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 126460,
+          "function": "Source-routed BL-009 gap literal (290.0f calibration literal); reviewed C in runtime_bl009_norm_gap_42edf6.c",
+          "name": "bootloader_hardware_channel_normalize_gap_42edf6_42ee00_source_edfc",
+          "output": "apollo510b/bootloader-hardware-channel-normalize-gap-42edf6-42ee00-source-edfc-0x0042edfc.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4386300
         },
         {
           "address_status": "source_compiled",
@@ -6624,14 +7254,24 @@
           "target_address": 4386804
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 126996,
-          "function": "Authenticated retained literal/alignment bytes before register-profile transfer",
-          "name": "bootloader_hw_command_profile_transfer_gap_42f014_42f020",
-          "output": "apollo510b/bootloader-hw-command-profile-transfer-gap-42f014-42f020-0x0042f014.bin",
-          "size": 12,
+          "function": "Source-routed BL-009 gap literal (-1000.0f bound literal); reviewed C in runtime_bl009_handle_gap_42f014.c",
+          "name": "bootloader_hw_command_profile_transfer_gap_42f014_42f020_source_f014",
+          "output": "apollo510b/bootloader-hw-command-profile-transfer-gap-42f014-42f020-source-f014-0x0042f014.bin",
+          "size": 4,
           "target": "apollo510b_internal_mram",
           "target_address": 4386836
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 127000,
+          "function": "Authenticated retained literal/alignment bytes before register-profile transfer",
+          "name": "bootloader_hw_command_profile_transfer_gap_42f014_42f020_retained_f018",
+          "output": "apollo510b/bootloader-hw-command-profile-transfer-gap-42f014-42f020-retained-f018-0x0042f018.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4386840
         },
         {
           "address_status": "source_compiled",
@@ -6644,14 +7284,134 @@
           "target_address": 4386848
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 127310,
-          "function": "Authenticated retained literal table and alignment before register power toggle",
-          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8",
-          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-0x0042f14e.bin",
-          "size": 122,
+          "function": "Source-routed BL-009 gap literal (alignment pad); reviewed C in runtime_bl009_register_gap_42f14e.c",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_source_f14e",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-source-f14e-0x0042f14e.bin",
+          "size": 2,
           "target": "apollo510b_internal_mram",
           "target_address": 4387150
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 127312,
+          "function": "Authenticated retained literal table and alignment before register power toggle",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_retained_f150",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-retained-f150-0x0042f150.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4387152
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 127320,
+          "function": "Source-routed BL-009 gap literal (pack word); reviewed C in runtime_bl009_register_gap_42f14e.c",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_source_f158",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-source-f158-0x0042f158.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4387160
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 127324,
+          "function": "Authenticated retained literal table and alignment before register power toggle",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_retained_f15c",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-retained-f15c-0x0042f15c.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4387164
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 127332,
+          "function": "Source-routed BL-009 gap literal (calibration float run); reviewed C in runtime_bl009_register_gap_42f14e.c",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_source_f164",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-source-f164-0x0042f164.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4387172
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 127344,
+          "function": "Authenticated retained literal table and alignment before register power toggle",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_retained_f170",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-retained-f170-0x0042f170.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4387184
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 127348,
+          "function": "Source-routed BL-009 gap literal (config base); reviewed C in runtime_bl009_register_gap_42f14e.c",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_source_f174",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-source-f174-0x0042f174.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4387188
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 127352,
+          "function": "Authenticated retained literal table and alignment before register power toggle",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_retained_f178",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-retained-f178-0x0042f178.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4387192
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 127356,
+          "function": "Source-routed BL-009 gap literal (identifier compare); reviewed C in runtime_bl009_register_gap_42f14e.c",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_source_f17c",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-source-f17c-0x0042f17c.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4387196
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 127360,
+          "function": "Source-routed BL-009 gap literal (register-address run); reviewed C in runtime_bl009_register_gap_42f14e.c",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_source_f180",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-source-f180-0x0042f180.bin",
+          "size": 24,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4387200
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 127384,
+          "function": "Authenticated retained literal table and alignment before register power toggle",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_retained_f198",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-retained-f198-0x0042f198.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4387224
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 127388,
+          "function": "Source-routed BL-009 gap literal (bound and register); reviewed C in runtime_bl009_register_gap_42f14e.c",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_source_f19c",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-source-f19c-0x0042f19c.bin",
+          "size": 8,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4387228
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 127396,
+          "function": "Source-routed BL-009 gap literal (register-address tail run); reviewed C in runtime_bl009_register_gap_42f14e.c",
+          "name": "bootloader_profile_transfer_power_toggle_gap_42f14e_42f1c8_source_f1a4",
+          "output": "apollo510b/bootloader-profile-transfer-power-toggle-gap-42f14e-42f1c8-source-f1a4-0x0042f1a4.bin",
+          "size": 36,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4387236
         },
         {
           "address_status": "source_compiled",
@@ -6724,7 +7484,7 @@
           "target_address": 4390898
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 131070,
           "function": "Authenticated two-byte alignment gap before platform bring-up",
           "name": "bootloader_mode_one_platform_bringup_gap_42fffe_430000",
@@ -6754,14 +7514,74 @@
           "target_address": 4391382
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 131572,
-          "function": "Authenticated retained literal/alignment bytes before the first NVIC enable helper",
-          "name": "bootloader_platform_boot_nvic_gap_4301f4_430240",
-          "output": "apollo510b/bootloader-platform-boot-nvic-gap-4301f4-430240-0x004301f4.bin",
-          "size": 76,
+          "function": "Source-routed BL-009 gap literal (alignment zero); reviewed C in runtime_bl009_bringup_gap_4301f4.c",
+          "name": "bootloader_platform_boot_nvic_gap_4301f4_430240_source_01f4",
+          "output": "apollo510b/bootloader-platform-boot-nvic-gap-4301f4-430240-source-01f4-0x004301f4.bin",
+          "size": 4,
           "target": "apollo510b_internal_mram",
           "target_address": 4391412
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 131576,
+          "function": "Source-routed BL-009 gap literal (+0.0f bound); reviewed C in runtime_bl009_bringup_gap_4301f4.c",
+          "name": "bootloader_platform_boot_nvic_gap_4301f4_430240_source_01f8",
+          "output": "apollo510b/bootloader-platform-boot-nvic-gap-4301f4-430240-source-01f8-0x004301f8.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4391416
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 131580,
+          "function": "Authenticated retained literal/alignment bytes before the first NVIC enable helper",
+          "name": "bootloader_platform_boot_nvic_gap_4301f4_430240_retained_01fc",
+          "output": "apollo510b/bootloader-platform-boot-nvic-gap-4301f4-430240-retained-01fc-0x004301fc.bin",
+          "size": 20,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4391420
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 131600,
+          "function": "Source-routed BL-009 gap literal (calibration float); reviewed C in runtime_bl009_bringup_gap_4301f4.c",
+          "name": "bootloader_platform_boot_nvic_gap_4301f4_430240_source_0210",
+          "output": "apollo510b/bootloader-platform-boot-nvic-gap-4301f4-430240-source-0210-0x00430210.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4391440
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 131604,
+          "function": "Authenticated retained literal/alignment bytes before the first NVIC enable helper",
+          "name": "bootloader_platform_boot_nvic_gap_4301f4_430240_retained_0214",
+          "output": "apollo510b/bootloader-platform-boot-nvic-gap-4301f4-430240-retained-0214-0x00430214.bin",
+          "size": 28,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4391444
+        },
+        {
+          "address_status": "source_compiled",
+          "file_offset": 131632,
+          "function": "Source-routed BL-009 gap literal (status register); reviewed C in runtime_bl009_bringup_gap_4301f4.c",
+          "name": "bootloader_platform_boot_nvic_gap_4301f4_430240_source_0230",
+          "output": "apollo510b/bootloader-platform-boot-nvic-gap-4301f4-430240-source-0230-0x00430230.bin",
+          "size": 4,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4391472
+        },
+        {
+          "address_status": "official_blob",
+          "file_offset": 131636,
+          "function": "Authenticated retained literal/alignment bytes before the first NVIC enable helper",
+          "name": "bootloader_platform_boot_nvic_gap_4301f4_430240_retained_0234",
+          "output": "apollo510b/bootloader-platform-boot-nvic-gap-4301f4-430240-retained-0234-0x00430234.bin",
+          "size": 12,
+          "target": "apollo510b_internal_mram",
+          "target_address": 4391476
         },
         {
           "address_status": "source_compiled",
@@ -6894,7 +7714,7 @@
           "target_address": 4393708
         },
         {
-          "address_status": "official_blob",
+          "address_status": "source_compiled",
           "file_offset": 133900,
           "function": "Authenticated four-byte alignment gap before critical word transfer",
           "name": "bootloader_mode_wrapper_word_transfer_gap_430b0c_430b10",

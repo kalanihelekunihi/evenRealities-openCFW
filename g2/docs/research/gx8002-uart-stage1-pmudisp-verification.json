@@ -1,0 +1,46 @@
+{
+  "c_source_sha256": "407d2f80812e28d816e4dc7bd498ac4bc5213ef939d09d466df8ebcaf0cb3ec4",
+  "notice_sha256": "61e79e97c3a0b995e95871b7e3b5ecfd44000ef90d98027d042a925136b0fd47",
+  "compile_flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "register_reference": "no upstream register map is used: every address is a fill-provided descriptor value or a retained table base and every constant is a stock immediate; clean-room body from decoded stock flow, no SDK text reproduced",
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_pmu_dispatch",
+      "compiled_bytes": 264,
+      "compiled_sha256": "f49b1740266c6f71cb06ad7840eda3eb89037b0a6724109a5bbdac1321a7819e",
+      "ownership_kind": "compiled_assembly",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_pmu_dispatch",
+          "package_offset": 3560,
+          "bytes": 264,
+          "sha256": "8824af275dded4cbb2a2989caeac84367c540264c919ba979696386836b7fae6",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    }
+  ],
+  "target_cases": 8370,
+  "handoff": "0x10000ea0",
+  "source_admitted": true,
+  "admission_scope": "experimental hybrid codec; UART boot stage-1 first PMU dispatcher only (entry through handoff into retained 0x10000ea0, exact unfiltered traces)",
+  "stock_equivalence_proven": false,
+  "leftover_paths": "second-fill failures observe fill scratch leftovers and are excluded from the battery; out-of-range ids fail the second fill for the same reason. The assembly keeps the same branches without an outcome claim there. The zero status-bit arm is mathematically unreachable (1u<<k never 0). Fill scratch registers r1/r7-r13/r16+ are compared by trace only, not at the handoff.",
+  "limits": [
+    "Restricted instruction interpreter, not a processor emulator.",
+    "Register shifts by a register count use the low 5 bits; both sides share the executor so agreement holds by construction, hardware shift semantics for negative counts remain unqualified.",
+    "Push/pop traffic is compared exactly with no window exclusion; descriptor values and all other accesses are compared exactly. The caller window is fully mapped. Hardware timing remains unqualified."
+  ]
+}

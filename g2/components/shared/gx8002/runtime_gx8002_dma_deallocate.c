@@ -10,9 +10,9 @@ void open_cfw_gx8002_dma_deallocate(uint32_t channel)
     volatile uint8_t *allocation=(volatile uint8_t *)open_cfw_gx8002_dma_state+0x370;
     allocation[channel]=0;
     uint32_t count=open_cfw_gx8002_dma_state[1];
-    for (uint32_t i=0;i!=count;++i) {
+    for (;count;--count) {
         /* Unlike selection, stock checks exactly one, not any nonzero byte. */
-        if (allocation[i]==1) {
+        if (*allocation++==1) {
             open_cfw_gx8002_irq_restore(token);
             return;
         }

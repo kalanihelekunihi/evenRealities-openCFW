@@ -1,0 +1,36 @@
+NationalChip UART boot stage-1 ID-cell and clock-source adaptation
+Upstream: NationalChip/lvp_kws arch/soc/grus/include/base_addr.h
+(PMU_CFG_SOURCE_SEL0 = GX_REG_BASE_PMU_CONFIG + 0x8C, the clock-source-select
+register read by boards/.../clock_board.c)
+Commit: 8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5
+Local source: runtime_gx8002_uart_stage1_idbit.c
+Recovered UART-boot configuration: the stage-1-local ID word at 0x20002008
+(chip-revision nibble stored by the early init routine, read here and by the
+UART configure routine); the single-bit modifier takes a descriptor whose
+word[0] is the bit index and whose byte[4] is the bit value.
+Only the numeric register address and the call/return conventions are taken
+from the upstream header (used under the SDK repo-level MIT LICENSE below);
+all bodies are clean-room implementations of the decoded stock behavior.
+The GPL-licensed SDK headers (common.h, spl/spl.h) were deliberately not used.
+
+MIT License
+
+Copyright (c) 2024 NationalChip
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

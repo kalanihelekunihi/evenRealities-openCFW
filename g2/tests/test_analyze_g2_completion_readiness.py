@@ -411,10 +411,10 @@ class G2CompletionReadinessTests(unittest.TestCase):
         complement = boot["details"]["retained_complement"]
         self.assertEqual(complement["component_bytes"], 163_840)
         self.assertEqual(complement["intervals"], 901)
-        self.assertEqual(complement["retained_official_bytes"], 87_985)
+        self.assertEqual(complement["retained_official_bytes"], 87_981)
         self.assertEqual(
             complement["bytes_by_address_status"]["source_compiled"],
-            59_009,
+            59_013,
         )
         self.assertEqual(
             complement["retained_official_bytes"],

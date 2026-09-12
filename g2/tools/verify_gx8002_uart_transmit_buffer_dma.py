@@ -10,6 +10,11 @@ from verify_gx8002_dma_callback import execute as register
 from verify_gx8002_dma_irq_handler import execute as interrupt
 from verify_gx8002_uart_transmit_complete import execute as complete
 from verify_gx8002_uart_flush import execute as flush
+from verify_gx8002_uart_dma_burst import execute as burst
+from verify_gx8002_dcache_clean_range import execute as clean,expected as expected_clean
+from verify_gx8002_dma_select import execute as select,expected as expected_select
+from verify_gx8002_uart_receive_irq import irq_execute
+from verify_gx8002_dma_uart_clock_link import execute as gate,oracle as gate_oracle
 
 
 def verify():
@@ -17,9 +22,11 @@ def verify():
     path=ROOT/'build/gx8002-dma-uart-source/dma-uart.elf';elf=Elf32(path.read_bytes(),str(path))
     sy={s['name']:s['value'] for s in elf.symbols() if s['name']};code=decode((path.parent/'dma-uart.disassembly.txt').read_text())
     section=next(s for s in elf.sections if s['name']=='.data');data=elf.contents(section);table=sy['open_cfw_gx8002_uart_descriptors']
+    clock_base=sy['gx_clock_param_table'];clock_table=data[clock_base-section['address']:clock_base-section['address']+416]
+    ro=next(s for s in elf.sections if s['name']=='.rodata');jumps=elf.contents(ro)
     names={'dcache_clean_range':0x10025664,'dma_select':0x10203a4c,'uart_dma_burst':0x10203050,'dma_callback':0x10203b64,'dma_transfer':0x10203b78,'dma_release':0x10203b38}
     dma_helpers={sy['open_cfw_gx8002_'+n]:v for n,v in names.items()}
-    outer_helpers={sy['open_cfw_gx8002_uart_transmit_dma']:0x10203108,sy['open_cfw_gx8002_irq_save']:0x10025560,sy['open_cfw_gx8002_irq_restore']:0x1002556c};cases=calls=completions=0
+    outer_helpers={sy['open_cfw_gx8002_uart_transmit_dma']:0x10203108,sy['open_cfw_gx8002_irq_save']:0x10025560,sy['open_cfw_gx8002_irq_restore']:0x1002556c};cases=calls=completions=burst_calls=cache_calls=selection_calls=gate_calls=0
     for port,buffer,callback,length,channel in product((0,1),(0,0x20050000),(0,0x10380000),(0,32,0xffffffff),(0,1,0xffffffff)):
         d=table+port*128;words=struct.unpack_from('<32I',data,d-section['address']);device=words[1]
         initial={d+i*4:v for i,v in enumerate(words)};initial[d+44]=1;initial[device+0xa8]=0;initial[device+4]=0
@@ -31,7 +38,45 @@ def verify():
         def setup(pointer,address,count,memory):
             nonlocal calls
             if (pointer,address,count)!=(d,buffer,length):raise ValueError('Buffer setup handoff')
-            result,trace,after=dma_execute(code,sy['open_cfw_gx8002_uart_transmit_dma'],port,address,count,channel,3,4,0xffffffff,descriptor_address=pointer,initial_memory=memory,helper_addresses=dma_helpers,callback_hook=registration)
+            def select_hook():
+                nonlocal selection_calls
+                allocation=[0,0] if channel==0 else [1,0] if channel==1 else [1,1]
+                state=sy['open_cfw_gx8002_dma_state']
+                helpers={sy['open_cfw_gx8002_irq_save']:0x10025560,sy['open_cfw_gx8002_irq_restore']:0x1002556c,sy['open_cfw_gx8002_platform_gate']:0x10025080}
+                psr=[0x40];transitions=[]
+                def irq_hook(save,argument):
+                    value,psr[0]=irq_execute(code,sy['open_cfw_gx8002_irq_save' if save else 'open_cfw_gx8002_irq_restore'],psr[0],argument)
+                    transitions.append(psr[0]);return value
+                def gate_hook(module,enabled):
+                    nonlocal gate_calls
+                    if (module,enabled)!=(25,1) or psr[0]!=0:raise ValueError('Selection gate IRQ exclusion')
+                    actual=gate(code,sy['open_cfw_gx8002_platform_gate'],jumps,clock_table,module,enabled,0xa5a5a5a5,0,clock_base,ro['address'],sy['__module_get_info'])
+                    if actual!=gate_oracle(clock_table,module,enabled,0xa5a5a5a5):raise ValueError('Submission decoded gate effects')
+                    gate_calls+=1
+                actual=select(code,sy['open_cfw_gx8002_dma_select'],allocation,0x40,state_address=state,helper_addresses=helpers,irq_hook=irq_hook,gate_hook=gate_hook)
+                if transitions!=[0,0x40]:raise ValueError('Submission IRQ restoration')
+                wanted=expected_select(allocation,0x40)
+                def address(value):return value-0x2002e93c+state
+                wanted_trace=[(x[0],address(x[1]),x[2]) if x[0] in ('read','write') else x for x in wanted[1]]
+                wanted_memory={address(k):v for k,v in wanted[2].items()}
+                if actual!=(channel,wanted_trace,wanted_memory):raise ValueError('Submission decoded allocation')
+                selection_calls+=1;return actual[0]
+            cache_events=[]
+            def cache_hook(start,size):
+                nonlocal cache_calls
+                if (start,size)!=(address,count):raise ValueError('Submission cache range')
+                actual=clean(code,sy['open_cfw_gx8002_dcache_clean_range'],start,size,0x12345678)
+                if actual!=(expected_clean(start,size),True):raise ValueError('Submission cache commands')
+                cache_events.append(actual[0]);cache_calls+=1
+            def burst_hook(desc,direction,index):
+                nonlocal burst_calls
+                if (desc,direction)!=(d,1):raise ValueError('Buffer burst arguments')
+                value,reads=burst(code,sy['open_cfw_gx8002_uart_dma_burst'],memory[d+52],memory[d+56],direction,descriptor_address=desc)
+                wanted={1<<i:i-1 for i in range(2,11)}.get(memory[d+52],0)
+                if value!=wanted or reads!=[(d+52,memory[d+52]),(d+56,memory[d+56])]:raise ValueError('Buffer decoded burst contract')
+                burst_calls+=1;return value
+            result,trace,after=dma_execute(code,sy['open_cfw_gx8002_uart_transmit_dma'],port,address,count,channel,3,4,0xffffffff,descriptor_address=pointer,initial_memory=memory,helper_addresses=dma_helpers,callback_hook=registration,burst_hook=burst_hook,cache_hook=cache_hook,select_hook=select_hook)
+            if len(cache_events)!=1:raise ValueError('Submission cache call count')
             seen.append(trace);calls+=1;return result,after
         result,trace,memory=buffer_execute(code,sy['open_cfw_gx8002_uart_transmit_buffer'],port,buffer,length,callback,0x12345678,0,0x40,1,0,descriptor_base=table,initial_memory=initial,helper_addresses=outer_helpers,dma_hook=setup)
         valid=bool(buffer and callback);success=valid and channel!=0xffffffff
@@ -59,7 +104,7 @@ def verify():
             if delivered!=[('callback',callback,port,0x12345678)]:raise ValueError('Application buffer completion')
         elif any(cb_memory.values()):raise ValueError('Registration on failed buffer submission')
         cases+=1
-    return {'candidate':candidate,'decoded_cases':cases,'decoded_setup_calls':calls,'decoded_completions':completions,'source_admitted':False,'hardware_qualified':False,'limits':['Source defaults and application parameters feed decoded buffer/setup frames. DMA mode is modeled as already configured; registration, ISR, completion and drain decoded; other setup/ISR/release effects modeled. Startup and physical execution unqualified.']}
+    return {'candidate':candidate,'decoded_cases':cases,'decoded_setup_calls':calls,'decoded_completions':completions,'decoded_burst_calls':burst_calls,'decoded_cache_calls':cache_calls,'decoded_selection_calls':selection_calls,'decoded_gate_calls':gate_calls,'source_admitted':False,'hardware_qualified':False,'limits':['Source defaults and application parameters feed decoded buffer/setup frames. DMA mode is modeled as already configured; cache cleaning, channel selection with decoded IRQ and clock leaves, burst sizing, registration, ISR, completion and drain decoded; other setup/ISR/release effects modeled. Startup and physical execution unqualified.']}
 
 if __name__=='__main__':
     r=verify();(ROOT/'docs/research/gx8002-uart-transmit-buffer-dma.json').write_text(json.dumps(r,indent=2)+'\n');print(r['decoded_cases'],r['decoded_setup_calls'])

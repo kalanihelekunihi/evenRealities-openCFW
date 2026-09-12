@@ -271,9 +271,9 @@ class PostMspiFrontierTests(unittest.TestCase):
 
     def test_live_boot_accounting_conserves_the_stock_owned_domain(self) -> None:
         component = self.result["boot_component"]
-        self.assertEqual(component["source_owned_bytes"], 59_009)
+        self.assertEqual(component["source_owned_bytes"], 59_013)
         self.assertEqual(component["source_owned_cave_bytes"], 2_594)
-        self.assertEqual(component["opaque_base_bytes"], 87_985)
+        self.assertEqual(component["opaque_base_bytes"], 87_981)
         self.assertEqual(component["source_owned_in_place_bytes"], 41_190)
         self.assertEqual(component["generated_patch_site_bytes"], 16_830)
         self.assertEqual(

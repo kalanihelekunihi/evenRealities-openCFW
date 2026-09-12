@@ -1,0 +1,52 @@
+{
+  "c_source_sha256": "1404db322ee4bd51c36cb98944c389e2acb5263e7fe9213dce4bcf6275e0b424",
+  "notice_sha256": "debab821592785e3f27cfcc1a4e38fb3f09c1c719c3508de48954fe00bcddaa4",
+  "compile_flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "register_reference": "no upstream register map is used: every address is a fill-provided descriptor value and every constant is a stock immediate; clean-room body from decoded stock flow, no SDK text reproduced",
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_raila",
+      "compiled_bytes": 464,
+      "compiled_sha256": "accd5fdd80c5e86c9f72a445d94d866e55e89e4d8eb52cc83bc26774fd3e919d",
+      "ownership_kind": "compiled_assembly",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_raila",
+          "package_offset": 2224,
+          "bytes": 464,
+          "sha256": "accd5fdd80c5e86c9f72a445d94d866e55e89e4d8eb52cc83bc26774fd3e919d",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    }
+  ],
+  "target_cases": 228,
+  "stop_kinds": {
+    "trap": 228
+  },
+  "fail_visits": 260,
+  "fill_calls": 60,
+  "source_admitted": true,
+  "admission_scope": "experimental hybrid codec; UART boot stage-1 rail-sequencing operation A only (body plus bounded fail-loop/fill-chain window, exact unfiltered traces)",
+  "stock_equivalence_proven": false,
+  "leftover_paths": "id-range, fill-fail, and entry-6-0xFF arms reach the fail tail with unset address registers and are excluded from the battery; the assembly keeps the same branches without an outcome claim there.",
+  "limits": [
+    "Restricted instruction interpreter, not a processor emulator.",
+    "Register shifts by a register count use the low 5 bits; both sides share the executor so agreement holds by construction, hardware shift semantics for negative counts remain unqualified.",
+    "Signed division truncates toward zero and the divisor is always the nonzero constant 6 on executed paths; both sides share the executor so agreement holds by construction, hardware divide semantics remain unqualified.",
+    "Trap stops compare pc, address, traces, and RAM but not the full register file: register leftovers at a wild access are implementation-defined.",
+    "Both frames drift up the caller stack on retry/fail paths; every drifted word is mapped with pattern values and compared exactly with no window exclusion. Hardware timing remains unqualified."
+  ]
+}

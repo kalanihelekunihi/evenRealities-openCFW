@@ -1,34 +1,40 @@
 #!/usr/bin/env bash
-# continue-analysis.sh - spawn a user-chosen number of parallel Claude sub-agents
-# (Sonnet 5, permission-bypass "claude-yolo" mode) that each take one open item
+# continue-analysis.sh - spawn a user-chosen number of parallel coding agents
+# through claude-yolo, Codex Luna/Spark, Muse, Agy, or Grok. Each agent takes one open item
 # from remaining-work.md, reconstruct that segment of the G2 firmware as
 # reviewed, buildable source on this Mac, and report back.  The script is the
 # only writer of the Status / Owner / Notes cells in remaining-work.md.
 #
 #   ./continue-analysis.sh run -n 4              claim 4 items, run 4 agents in parallel, ingest results
 #   ./continue-analysis.sh run -n 4 --loop       keep claiming batches until nothing is left
-#   ./continue-analysis.sh run -n 2 --component codec --dry-run
+#   ./continue-analysis.sh run -n 2 --cli codex-yolo --component codec --dry-run
+#   ./continue-analysis.sh run -n 2 --cli codex-spark-yolo --component codec --dry-run
 #   ./continue-analysis.sh status | list [--status todo] [--component X] | show ID | prompt ID
 #   ./continue-analysis.sh done|fail|block|release|claim ID [note]      manual status changes
 #   ./continue-analysis.sh lock acquire|release|status ID              integration lock (agents use this)
 #   ./continue-analysis.sh reset-stale [--to todo|failed]              recover rows whose agent died
 #   ./continue-analysis.sh resume-paused       recover saved sessions after stopping/restarting
+#   ./continue-analysis.sh dependencies [--reconcile] [--json]
 #   ./continue-analysis.sh logs ID
 #   ./continue-analysis.sh regenerate     rebuild the list from g2/build/source/flash-plan.json after work lands
 #                                         (keeps non-todo status for rows whose ID and range are unchanged)
 #
 # Environment overrides:
-#   CA_MODEL           model for sub-agents            (default: claude-sonnet-5)
-#   CA_CLAUDE_BIN      claude executable               (default: claude)
-#   CA_PERMISSION_FLAGS  (default: --allow-dangerously-skip-permissions --permission-mode bypassPermissions)
-#   CA_EFFORT          --effort level                  (default: unset)
-#   CA_MAX_BUDGET_USD  --max-budget-usd per agent      (default: unset)
+#   CA_CLI             claude-yolo|codex-yolo|codex-spark-yolo|muse|agy|grok
+#                      (default: claude-yolo)
+#   CA_CLI_BIN         executable override             (default: selected CLI name)
+#   CA_MODEL           model override; defaults: Claude claude-sonnet-5,
+#                      Codex gpt-5.6-luna, Codex Spark gpt-5.3-codex-spark,
+#                      Muse muse-spark-1.3-contributor;
+#                      Agy and Grok use their configured defaults
+#   CA_EFFORT          provider reasoning/effort level (default: unset)
+#   CA_MAX_BUDGET_USD  Claude --max-budget-usd per agent (default: unset)
 #   CA_TIMEOUT_MIN     limit each active attempt (excludes reset waits; default: 0)
 #   CA_STAGGER_SEC     delay between agent launches    (default: 15)
 #   CA_ALLOW_COMMIT=1  let agents git-commit their own files (default: agents must not commit)
 #
-# Usage limits: preserve files and Claude conversation, wait until reset + 60s,
-# then --resume the same session automatically. Unknown reset formats retry in 15m.
+# Usage limits: preserve files and the provider conversation, wait until reset + 60s,
+# then resume the same session automatically. Unknown reset formats retry in 15m.
 # Keep this process running for automatic wakeup; after stopping use resume-paused.
 # State (logs, prompts, results, locks) lives under build/continue-analysis/,
 # which the repository .gitignore already excludes.
@@ -39,17 +45,54 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORK_MD="$ROOT/remaining-work.md"
 WORK_JSON="$ROOT/remaining-work.json"
 STATE="$ROOT/build/continue-analysis"
-MODEL="${CA_MODEL:-claude-sonnet-5}"
-CLAUDE_BIN="${CA_CLAUDE_BIN:-claude}"
-PERMISSION_FLAGS="${CA_PERMISSION_FLAGS:---allow-dangerously-skip-permissions --permission-mode bypassPermissions}"
+CLI="${CA_CLI:-claude-yolo}"
+CLI_BIN="${CA_CLI_BIN:-}"
+CLI_BIN_EXPLICIT=0
+[ -n "${CA_CLI_BIN:-}" ] && CLI_BIN_EXPLICIT=1
+if [ -z "$CLI_BIN" ] && [ "$CLI" = claude-yolo ] && [ -n "${CA_CLAUDE_BIN:-}" ]; then
+    CLI_BIN="$CA_CLAUDE_BIN"
+    CLI_BIN_EXPLICIT=1
+fi
+MODEL="${CA_MODEL:-}"
+MODEL_EXPLICIT=0
+[ -n "${CA_MODEL:-}" ] && MODEL_EXPLICIT=1
 STAGGER="${CA_STAGGER_SEC:-15}"
 TIMEOUT_MIN="${CA_TIMEOUT_MIN:-0}"
 PYTHON="${PYTHON:-python3}"
 
-mkdir -p "$STATE/logs" "$STATE/prompts" "$STATE/results" "$STATE/running" "$STATE/locks" "$STATE/paused"
+mkdir -p "$STATE/logs" "$STATE/prompts" "$STATE/results" "$STATE/running" "$STATE/locks" "$STATE/paused" "$STATE/deferred" "$STATE/knowledge"
 
 die() { echo "continue-analysis: $*" >&2; exit 2; }
 note() { echo "[continue-analysis] $*"; }
+
+configure_cli() {
+    case "$CLI" in
+        claude-yolo)
+            [ -n "$CLI_BIN" ] || CLI_BIN="claude-yolo"
+            # Preserve compatibility on machines where the yolo wrapper has not been installed.
+            if ! command -v "$CLI_BIN" >/dev/null 2>&1 && [ "$CLI_BIN" = claude-yolo ] && command -v claude >/dev/null 2>&1; then
+                CLI_BIN="claude"
+            fi
+            [ -n "$MODEL" ] || MODEL="claude-sonnet-5" ;;
+        codex-yolo)
+            [ -n "$CLI_BIN" ] || CLI_BIN="codex-yolo"
+            [ -n "$MODEL" ] || MODEL="gpt-5.6-luna" ;;
+        codex-spark-yolo|codex-yolo-spark)
+            [ -n "$CLI_BIN" ] || CLI_BIN="codex-yolo"
+            [ -n "$MODEL" ] || MODEL="gpt-5.3-codex-spark"
+            # Store the canonical provider name so command, output, and resume
+            # handling remain identical to the Luna profile.
+            CLI="codex-yolo" ;;
+        muse)
+            [ -n "$CLI_BIN" ] || CLI_BIN="muse"
+            [ -n "$MODEL" ] || MODEL="muse-spark-1.3-contributor" ;;
+        agy|grok)
+            [ -n "$CLI_BIN" ] || CLI_BIN="$CLI" ;;
+        *) die "unsupported CLI '$CLI' (use claude-yolo, codex-yolo, codex-spark-yolo, muse, agy, or grok)" ;;
+    esac
+}
+
+configure_cli
 
 [ -f "$WORK_MD" ] || die "missing $WORK_MD"
 [ -f "$WORK_JSON" ] || die "missing $WORK_JSON"
@@ -75,8 +118,10 @@ ca_py() {
     CA_ROOT="$ROOT" CA_WORK_MD="$WORK_MD" CA_WORK_JSON="$WORK_JSON" CA_STATE="$STATE" \
     CA_MODEL_NAME="$MODEL" CA_ALLOW_COMMIT="${CA_ALLOW_COMMIT:-0}" \
     "$PYTHON" - "$@" <<'PY'
-import json, os, re, sys, datetime, textwrap
+import glob, hashlib, json, os, re, sys, datetime, textwrap
 from collections import Counter, OrderedDict
+sys.path.insert(0, os.path.join(os.environ["CA_ROOT"], "tools"))
+from continue_analysis_dependencies import analyze_failure_text, build_record, load_record, merge_failure, refresh_record, save_record
 
 ROOT = os.environ["CA_ROOT"]
 MD = os.environ["CA_WORK_MD"]
@@ -86,6 +131,7 @@ MODEL = os.environ["CA_MODEL_NAME"]
 ALLOW_COMMIT = os.environ.get("CA_ALLOW_COMMIT") == "1"
 STATUSES = ("todo", "in-progress", "done", "blocked", "failed")
 META_GEN = "?"
+DEFERRED = os.path.join(STATE, "deferred")
 PRI_ORDER = {"P1": 0, "P2": 1, "P3": 2}
 ROW_RE = re.compile(r"^\| ((?:AM|AD|BL|EM|CD|TC|CS|XC)-\d{3}) \|")
 
@@ -116,6 +162,135 @@ def save_rows(lines, rows):
     os.replace(tmp, MD)
 
 
+def row_statuses(rows):
+    return {item_id: row["status"] for item_id, row in rows.items()}
+
+
+def add_note(row, note):
+    if note not in row["notes"]:
+        row["notes"] = (row["notes"] + " / " + note).strip(" /")
+
+
+def refresh_deferred_rows(rows):
+    """Refresh dependency status and return whether any work row changed."""
+    changed = False
+    statuses = row_statuses(rows)
+    for path in glob.glob(os.path.join(DEFERRED, "*.json")):
+        item_id = os.path.basename(path).split(".")[0]
+        record = load_record(DEFERRED, item_id)
+        row = rows.get(item_id)
+        if not record or not row:
+            continue
+        was_ready = record.get("ready_for_completion", False)
+        record = refresh_record(record, statuses)
+        save_record(DEFERRED, record)
+        if (row["status"] in ("done", "in-progress")
+                or not (record.get("dependencies") or record.get("unresolved_dependencies"))):
+            continue
+        if record["pending_dependencies"]:
+            if row["status"] != "blocked":
+                row["status"] = "blocked"
+                row["owner"] = ""
+                add_note(row, "waiting on " + ",".join(record["pending_dependencies"]))
+                changed = True
+        elif row["status"] == "blocked":
+            row["status"] = "todo"
+            row["owner"] = ""
+            add_note(row, "dependencies complete; queued for completion verification")
+            changed = True
+        if record["ready_for_completion"] and not was_ready:
+            record["ready_at"] = datetime.datetime.now().astimezone().isoformat()
+            save_record(DEFERRED, record)
+    return changed
+
+
+def reconcile_result_logs(rows):
+    """Backfill durable dependency records from the newest historical result per item."""
+    latest = {}
+    paths = glob.glob(os.path.join(STATE, "logs", "*.result.json"))
+    paths += glob.glob(os.path.join(STATE, "results", "*.json"))
+    for path in paths:
+        try:
+            result = json.load(open(path, encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        item_id = result.get("id") or os.path.basename(path).split(".")[0]
+        if item_id not in rows:
+            continue
+        if item_id not in latest or os.path.getmtime(path) > os.path.getmtime(latest[item_id][0]):
+            latest[item_id] = (path, result)
+    structured_ids = set(latest)
+    # Older runs often exited without writing the result file. Preserve and classify
+    # those failures only when no structured result exists for that item.
+    for path in glob.glob(os.path.join(STATE, "logs", "*.json")):
+        if path.endswith(".result.json"):
+            continue
+        item_id = os.path.basename(path).split(".")[0]
+        if item_id in structured_ids or item_id not in rows:
+            continue
+        try:
+            envelope = json.load(open(path, encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        text = str(envelope.get("result", "")) if isinstance(envelope, dict) else ""
+        match = re.search(r"CA-STATUS:\s*(done|partial|blocked|failed)", text, re.I)
+        issue = analyze_failure_text(text)
+        if (not match and not (isinstance(envelope, dict) and envelope.get("is_error"))
+                and issue["kind"] == "agent-failure"):
+            continue
+        reported = match.group(1).lower() if match else ("partial" if issue["retryable"] else "blocked")
+        if reported == "partial" and issue["kind"] in ("authentication", "permission", "tool"):
+            reported = "blocked"
+        result = {"id": item_id, "status": reported, "summary": issue["description"][:200],
+                  "blockers": [issue["description"]], "followups": [],
+                  "missing_requirements": [issue], "infer_dependencies": False,
+                  "verification_only": reported == "done"}
+        if item_id not in latest or os.path.getmtime(path) > os.path.getmtime(latest[item_id][0]):
+            latest[item_id] = (path, result)
+    statuses = row_statuses(rows)
+    for item_id, (path, result) in latest.items():
+        row = rows[item_id]
+        if row["status"] == "done":
+            continue
+        reported = result.get("status")
+        if reported not in ("partial", "blocked", "failed", "done"):
+            continue
+        saved = dict(result)
+        if reported == "done":
+            saved["status"] = "partial"
+            saved["verification_only"] = True
+            saved["infer_dependencies"] = False
+            remaining = saved.get("remaining_segments") or []
+            if not isinstance(remaining, list):
+                remaining = [remaining]
+            remaining.append("Re-run the reported completion checks; the prior CLI exited nonzero or was not ingested as done.")
+            saved["remaining_segments"] = remaining
+        record = build_record(saved, item_id, path, set(rows), statuses)
+        save_record(DEFERRED, record)
+        if not record.get("verification_only"):
+            row["notes"] = row["notes"].replace(
+                "saved prior progress; queued for completion verification",
+                "saved prior progress; queued for continuation")
+        if row["status"] == "in-progress":
+            continue
+        if record["pending_dependencies"]:
+            row["status"] = "blocked"
+            row["owner"] = ""
+            add_note(row, "waiting on " + ",".join(record["pending_dependencies"]))
+        elif reported == "blocked":
+            row["status"] = "blocked"
+            row["owner"] = ""
+            add_note(row, "saved missing requirement; inspect dependencies report")
+        elif reported in ("partial", "done") and row["status"] == "failed":
+            row["status"] = "todo"
+            row["owner"] = ""
+            add_note(row, ("saved prior progress; queued for completion verification"
+                           if record.get("verification_only") else
+                           "saved prior progress; queued for continuation"))
+    refresh_deferred_rows(rows)
+    return len(latest)
+
+
 def load_items():
     d = json.load(open(JS, encoding="utf-8"))
     return d["meta"], OrderedDict((it["id"], it) for it in d["items"])
@@ -142,6 +317,16 @@ def cmd_status(args):
         print("\nin-progress:")
         for r in ip:
             print("  %s  %s  %s" % (r["id"], r["owner"], r["notes"][:100]))
+
+    waiting = []
+    for path in sorted(glob.glob(os.path.join(DEFERRED, "*.json"))):
+        record = load_record(DEFERRED, os.path.basename(path).split(".")[0])
+        if record and record.get("pending_dependencies"):
+            waiting.append((record["id"], record["pending_dependencies"]))
+    if waiting:
+        print("\nwaiting on dependencies:")
+        for item_id, pending in waiting:
+            print("  %s  %s" % (item_id, ", ".join(pending)))
 
     paused_dir = os.path.join(STATE, "paused")
     for name in sorted(os.listdir(paused_dir)):
@@ -200,7 +385,33 @@ def cmd_show(args):
     _, rows = load_rows()
     r = rows.get(args[0], {})
     print(json.dumps({"row": r, "item": {k: v for k, v in it.items() if k != "functions"},
-                      "functions": it.get("functions", [])[:200]}, indent=1))
+                      "functions": it.get("functions", [])[:200],
+                      "deferred": load_record(DEFERRED, args[0])}, indent=1))
+
+
+def cmd_dependencies(args):
+    lines, rows = load_rows()
+    reconciled = reconcile_result_logs(rows) if "--reconcile" in args else 0
+    changed = refresh_deferred_rows(rows)
+    if reconciled or changed:
+        save_rows(lines, rows)
+    records = []
+    for path in sorted(glob.glob(os.path.join(DEFERRED, "*.json"))):
+        record = load_record(DEFERRED, os.path.basename(path).split(".")[0])
+        if record:
+            records.append(record)
+    if "--json" in args:
+        print(json.dumps({"reconciled_results": reconciled, "deferred": records}, indent=2))
+        return
+    if reconciled:
+        print("reconciled %d latest result logs" % reconciled)
+    if not records:
+        print("no deferred work records")
+    for record in records:
+        state = ("ready for completion verification" if record.get("ready_for_completion") else
+                 "waiting on " + ",".join(record.get("pending_dependencies", [])) if record.get("pending_dependencies") else
+                 "saved requirements; continuation available")
+        print("%-7s %-38s %s" % (record["id"], state, record.get("summary", "")[:100]))
 
 
 def cmd_select(args):
@@ -210,7 +421,9 @@ def cmd_select(args):
     retry_failed = "--retry-failed" in rest
     ignore_deps = "--ignore-deps" in rest
     no_spread = "--no-spread" in rest
-    _, rows = load_rows()
+    lines, rows = load_rows()
+    if refresh_deferred_rows(rows):
+        save_rows(lines, rows)
     _, items = load_items()
     done = {i for i, r in rows.items() if r["status"] == "done"}
     # Saved sessions must be recovered, never replaced by a fresh claim.
@@ -263,6 +476,7 @@ def cmd_set(args):
         r["owner"] = owner
     if notes is not None and notes != "-":
         r["notes"] = (r["notes"] + " / " + notes).strip(" /") if append and r["notes"] else notes
+    refresh_deferred_rows(rows)
     save_rows(lines, rows)
     print("%s -> %s" % (item_id, status))
 
@@ -399,10 +613,11 @@ def render_prompt(it, row):
                    "Do NOT run `git commit`, `git add`, `git stash`, `git checkout`, `git reset`, or any history-changing git command; leave the working tree for the human to review and commit.")
     result_path = os.path.join(STATE, "results", it["id"] + ".json")
     header = textwrap.dedent("""\
-    You are one of several parallel sub-agents reconstructing the Even Realities G2 firmware as buildable
+    You are a runner-managed worker reconstructing the Even Realities G2 firmware as buildable
     source in the openCFW repository at %(root)s (macOS build host).  You own exactly ONE work item from
-    remaining-work.md.  Work only on that item.  Read `g2/docs/source-only-goal.md` (the "Completion
-    conditions" section) and `g2/docs/README.md` before touching anything.
+    remaining-work.md. Work only on that item; do not launch additional workers. Read only the "Completion
+    conditions" and "Build and evidence tracks" sections of `g2/docs/source-only-goal.md`, then the
+    relevant links in `g2/docs/README.md`. Retrieve historical evidence by ID/address, in bounded excerpts.
 
     HARD RULES
     1. Goal: no functionality in the final firmware may depend on opaque code or on bytes extracted from the
@@ -440,6 +655,25 @@ def render_prompt(it, row):
 
     """) % {"root": ROOT, "commit_rule": commit_rule, "id": it["id"]}
     body = []
+    policy_path = os.path.join(ROOT, "docs", "g2-reconstruction-driver-prompt.md")
+    with open(policy_path, encoding="utf-8") as policy_file:
+        policy = policy_file.read().split("\n---\n", 1)[1].strip()
+    mode = "tooling" if it.get("kind") == "tooling" else "reconstruction"
+    body.append("EXECUTION MODE: %s. The assigned item below is already selected.\n" % mode +
+                "Apply this workflow within the hard rules and component admission contract; do not launch a separate process review.\n"
+                "For reconstruction items, do not substitute workflow improvements or an evidence-only audit for source recovery.\n" + policy)
+    scope = {k: v for k, v in it.items() if k not in ("status", "owner", "notes")}
+    scope_hash = hashlib.sha256(json.dumps(scope, sort_keys=True).encode()).hexdigest()
+    knowledge_path = os.path.join(STATE, "knowledge", it["id"] + ".json")
+    body.append("DURABLE KNOWLEDGE CHECKPOINT: %s\n"
+                "Read this file if it exists, and validate its evidence before reuse. Write JSON atomically via a sibling temporary file and os.replace.\n"
+                "Use schema_version=1, id=%s, scope_sha256=%s, updated_at, input_fingerprints, proven_facts, unresolved_facts,\n"
+                "completed_segments, rejected_hypotheses, validation_receipts, blockers, next_action, active_processes.\n"
+                "This scope hash identifies the assignment, NOT source freshness; separately hash relevant working-tree inputs.\n"
+                "Keep this current checkpoint concise; archive detailed receipts under the item's private output directory.\n"
+                "The runner preserves this sidecar but does not interpret it as queue status or automatically watch its fingerprints.\n"
+                "If only unchanged blockers remain, write status=blocked with explicit dependencies/wake conditions; do not return partial solely to repeat gates."
+                % (knowledge_path, it["id"], scope_hash))
     body.append("WORK ITEM %s  (component %s, priority %s, kind %s, route %s)" % (it["id"], comp, it["priority"], it["kind"], it["route"]))
     body.append("Summary: %s" % it["summary"])
     body.append("Architecture: %s" % it.get("arch"))
@@ -454,7 +688,13 @@ def render_prompt(it, row):
         body.append("Retained functions in this item (from g2/build/transparent/function-db.json; FUN_* names are unattributed):\n" + "\n".join(fn_lines))
     if extra:
         body.append("\n".join(extra))
-    body.append("Row in remaining-work.md: %s" % json.dumps(row))
+    body.append("Current queue state: %s\nHistorical notes remain in remaining-work.md; retrieve them only if needed."
+                % json.dumps({k: v for k, v in row.items() if k != "notes"}))
+    deferred = load_record(DEFERRED, it["id"])
+    if deferred:
+        body.append("SAVED PRIOR PROGRESS (do not redo completed work):\n%s" % json.dumps(deferred, indent=2))
+        if deferred.get("ready_for_completion"):
+            body.append("All recorded prerequisite items are done. Address the saved remaining segments, rerun the completion gates, and mark this item done only if its full range now meets the definition of done.")
     body.append(PLAYBOOK.get(comp, ""))
     body.append(textwrap.dedent("""\
     BEFORE YOU START
@@ -476,7 +716,14 @@ def render_prompt(it, row):
        "summary": "<= 200 chars, what is now source-owned and what remains",
        "functions_completed": ["0x...."], "bytes_source_owned": <int>,
        "files_changed": ["..."], "tests_run": ["..."], "gates_run": ["..."],
-       "blockers": ["..."], "followups": ["..."]}
+       "blockers": ["..."], "followups": ["..."],
+       "dependencies": [{"id": "BL-005", "reason": "why it is required", "required_for": "completion"}],
+       "completion_after": ["BL-005"],
+       "remaining_segments": ["specific address/range or verification still required"],
+       "missing_requirements": [{"kind": "tool|source|configuration|license|hardware|integration", "description": "what is missing"}]}
+      Use exact remaining-work IDs in `dependencies` and `completion_after`. Omit those fields when no other
+      work item is a prerequisite. The runner saves this state, waits while prerequisites are unfinished,
+      and queues this item for completion verification when they become done.
       `done` means every byte of the range is now produced from reviewed source that is production-routed
       (data: from a source-authored representation) and the gates passed.  `partial` means real progress landed
       but the range is not closed; describe precisely what remains so the item can be re-run.  `blocked` means
@@ -501,7 +748,8 @@ def cmd_ingest(args):
     item_id, stamp, exit_code = args[0], args[1], int(args[2])
     result_path = os.path.join(STATE, "results", item_id + ".json")
     log_path = os.path.join(STATE, "logs", "%s.%s.json" % (item_id, stamp))
-    status, summary = None, ""
+    status, summary, res, log_text = None, "", None, ""
+    synthetic_failure, issue = False, None
     if os.path.exists(result_path):
         try:
             res = json.load(open(result_path, encoding="utf-8"))
@@ -512,38 +760,82 @@ def cmd_ingest(args):
     if status is None and os.path.exists(log_path):
         try:
             out = json.load(open(log_path, encoding="utf-8"))
-            text = out.get("result", "") if isinstance(out, dict) else ""
-            m = re.search(r"CA-STATUS:\s*(done|partial|blocked|failed)", text or "")
+            log_text = out.get("result", "") if isinstance(out, dict) else ""
+            m = re.search(r"CA-STATUS:\s*(done|partial|blocked|failed)", log_text or "")
             if m:
                 status = m.group(1)
-                summary = summary or (text or "").strip().split("\n")[0][:160]
+                summary = summary or (log_text or "").strip().split("\n")[0][:160]
             if isinstance(out, dict) and out.get("is_error"):
                 summary = summary or str(out.get("result", ""))[:160]
         except Exception:
             pass
     if status is None:
-        status = "failed"
         summary = summary or ("agent exited %d without a result file" % exit_code)
+        issue = ({"kind": "timeout", "retryable": True, "description": summary}
+                 if exit_code == 124 else analyze_failure_text(log_text or summary))
+        synthetic_failure = True
+        status = "partial" if issue["retryable"] else "blocked"
+        res = {"id": item_id, "status": status, "summary": summary,
+               "blockers": [issue["description"]], "followups": [],
+               "missing_requirements": [issue], "infer_dependencies": False}
+    elif res is None and status != "done":
+        issue = analyze_failure_text(log_text or summary)
+        synthetic_failure = True
+        if status == "partial" and issue["kind"] in ("authentication", "permission", "tool"):
+            status = "blocked"
+        res = {"id": item_id, "status": status, "summary": summary,
+               "blockers": [issue["description"]], "followups": [],
+               "missing_requirements": [issue], "infer_dependencies": False}
     mapping = {"done": "done", "partial": "todo", "blocked": "blocked", "failed": "failed"}
     new = mapping.get(status, "failed")
-    if new == "done" and exit_code != 0:
-        new, summary = "failed", "exit %d but result says done: %s" % (exit_code, summary)
+    completion_needs_verification = new == "done" and exit_code != 0 and res is not None
+    if completion_needs_verification:
+        status, new = "partial", "todo"
+        summary = "completion claimed with exit %d; saved for verification: %s" % (exit_code, summary)
+        res = dict(res)
+        res["status"] = "partial"
+        res["verification_only"] = True
+        res["infer_dependencies"] = False
+        remaining = res.get("remaining_segments") or []
+        if not isinstance(remaining, list):
+            remaining = [remaining]
+        remaining.append("Re-run the reported completion checks because the prior CLI exited nonzero.")
+        res["remaining_segments"] = remaining
+    elif new == "done" and exit_code != 0:
+        new, summary = "failed", "exit %d but log says done without a result file: %s" % (exit_code, summary)
     lines, rows = load_rows()
     r = rows[item_id]
+    archive_path = os.path.join(STATE, "logs", "%s.%s.result.json" % (item_id, stamp))
+    if res is not None and new != "done":
+        source_record_path = archive_path if os.path.exists(result_path) else log_path
+        existing = load_record(DEFERRED, item_id)
+        if synthetic_failure and existing:
+            record = merge_failure(existing, issue, source_record_path, row_statuses(rows))
+        else:
+            record = build_record(res, item_id, source_record_path, set(rows), row_statuses(rows))
+        save_record(DEFERRED, record)
+        if record["pending_dependencies"]:
+            new = "blocked"
+            summary = "%s; waiting on %s" % (summary, ",".join(record["pending_dependencies"]))
+    elif new == "done":
+        deferred_path = os.path.join(DEFERRED, item_id + ".json")
+        if os.path.exists(deferred_path):
+            os.unlink(deferred_path)
     stampnote = "%s %s: %s" % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M"), status, summary)
     r["status"] = new
     r["notes"] = (r["notes"] + " / " + stampnote).strip(" /") if r["notes"] else stampnote
     if new != "done":
         r["owner"] = ""
+    refresh_deferred_rows(rows)
     save_rows(lines, rows)
     # keep a copy of the result next to the log
     if os.path.exists(result_path):
-        os.replace(result_path, os.path.join(STATE, "logs", "%s.%s.result.json" % (item_id, stamp)))
+        os.replace(result_path, archive_path)
     print(new)
 
 
-cmds = {"status": cmd_status, "list": cmd_list, "show": cmd_show, "select": cmd_select, "set": cmd_set,
-        "get": cmd_get, "prompt": cmd_prompt, "ingest": cmd_ingest}
+cmds = {"status": cmd_status, "list": cmd_list, "show": cmd_show, "dependencies": cmd_dependencies,
+        "select": cmd_select, "set": cmd_set, "get": cmd_get, "prompt": cmd_prompt, "ingest": cmd_ingest}
 cmds[sys.argv[1]](sys.argv[2:])
 PY
 }
@@ -593,29 +885,28 @@ cmd_lock() {
 spawn_agent() {
     local id="$1" stamp="$2" dry="$3"
     local prompt="$STATE/prompts/$id.$stamp.md"
-    local out="$STATE/logs/$id.$stamp.json" err="$STATE/logs/$id.$stamp.stderr"
-    local sid; sid="$(uuidgen | tr 'A-Z' 'a-z')"
+    local sid; sid="$(uuidgen | tr '[:upper:]' '[:lower:]')"
+    case "$CLI" in codex-yolo|agy) sid="" ;; esac
     ca_py prompt "$id" > "$prompt" || die "prompt render failed for $id"
     rm -f "$STATE/results/$id.json"
-    local -a cmd
-    # shellcheck disable=SC2206
-    cmd=("$CLAUDE_BIN" -p --model "$MODEL" $PERMISSION_FLAGS --output-format json)
-    [ -n "${CA_EFFORT:-}" ] && cmd+=(--effort "$CA_EFFORT")
-    [ -n "${CA_MAX_BUDGET_USD:-}" ] && cmd+=(--max-budget-usd "$CA_MAX_BUDGET_USD")
-    if [ "$dry" = 1 ]; then
-        echo "DRY-RUN $id: (cd $ROOT && ${cmd[*]} < $prompt > $out 2> $err)"
-        echo "         prompt: $prompt ($(wc -c < "$prompt" | tr -d ' ') bytes), session $sid"
-        return 0
-    fi
-    md_lock; ca_py set "$id" in-progress "$MODEL session=$sid run=$stamp" "started $(date '+%Y-%m-%d %H:%M')" --append >/dev/null; md_unlock
     local checkpoint="$STATE/paused/$id.$stamp.json"
-    "$PYTHON" - "$checkpoint" "$ROOT" "$id" "$stamp" "$sid" "$prompt" "$TIMEOUT_MIN" "${cmd[@]}" <<'PYCHECKPOINT'
+    "$PYTHON" - "$checkpoint" "$ROOT" "$id" "$stamp" "$sid" "$prompt" "$TIMEOUT_MIN" \
+        "$CLI" "$CLI_BIN" "$MODEL" "$MODEL_EXPLICIT" "${CA_EFFORT:-}" "${CA_MAX_BUDGET_USD:-}" <<'PYCHECKPOINT'
 import json, sys
-path, root, item, stamp, sid, prompt, timeout = sys.argv[1:8]
+path, root, item, stamp, sid, prompt, timeout, provider, executable, model, model_explicit, effort, budget = sys.argv[1:14]
 with open(path, 'w') as f:
     json.dump(dict(root=root, id=item, stamp=stamp, sid=sid, prompt=prompt,
-                   timeout=int(timeout), cmd=sys.argv[8:]), f, indent=2)
+                   timeout=int(timeout), provider=provider, executable=executable,
+                   model=model, model_explicit=model_explicit == "1", effort=effort,
+                   max_budget_usd=budget), f, indent=2)
 PYCHECKPOINT
+    if [ "$dry" = 1 ]; then
+        "$PYTHON" "$ROOT/tools/continue_analysis_session.py" --describe "$checkpoint"
+        rm -f "$checkpoint"
+        return 0
+    fi
+    local identity="$CLI${MODEL:+ model=$MODEL} session=$sid run=$stamp"
+    md_lock; ca_py set "$id" in-progress "$identity" "started $(date '+%Y-%m-%d %H:%M')" --append >/dev/null; md_unlock
     launch_checkpoint "$id" "$stamp" "$sid" "$checkpoint"
 }
 
@@ -647,7 +938,8 @@ cmd_resume_paused() {
             note "$id already supervised by pid $pid; skipping"
             continue
         fi
-        md_lock; ca_py set "$id" in-progress "$MODEL session=$sid run=$stamp" "recovering saved session" --append >/dev/null; md_unlock
+        local provider; provider="$("$PYTHON" -c 'import json,sys; print(json.load(open(sys.argv[1])).get("provider", "claude-yolo"))' "$f")"
+        md_lock; ca_py set "$id" in-progress "$provider session=$sid run=$stamp" "recovering saved session" --append >/dev/null; md_unlock
         launch_checkpoint "$id" "$stamp" "$sid" "$f"
     done
     wait
@@ -681,14 +973,21 @@ cmd_run() {
             --loop) loop=1; shift ;;
             --max-batches) max_batches="$2"; shift 2 ;;
             --dry-run) dry=1; shift ;;
-            --model) MODEL="$2"; shift 2 ;;
+            --cli)
+                CLI="$2"
+                [ "$CLI_BIN_EXPLICIT" = 1 ] || CLI_BIN=""
+                [ "$MODEL_EXPLICIT" = 1 ] || MODEL=""
+                shift 2 ;;
+            --cli-bin) CLI_BIN="$2"; CLI_BIN_EXPLICIT=1; shift 2 ;;
+            --model) MODEL="$2"; MODEL_EXPLICIT=1; shift 2 ;;
             --component|--kind|--ids|--priority) sel+=("$1" "$2"); shift 2 ;;
             --retry-failed|--ignore-deps|--no-spread) sel+=("$1"); shift ;;
             *) die "unknown run option $1" ;;
         esac
     done
+    configure_cli
     [[ "$n" =~ ^[1-9][0-9]*$ ]] || die "-n must be a positive integer"
-    [ "$dry" = 1 ] || command -v "$CLAUDE_BIN" >/dev/null 2>&1 || die "$CLAUDE_BIN not found (set CA_CLAUDE_BIN)"
+    [ "$dry" = 1 ] || command -v "$CLI_BIN" >/dev/null 2>&1 || die "$CLI_BIN not found (set CA_CLI_BIN)"
     local batch=0
     while :; do
         batch=$((batch + 1))
@@ -702,7 +1001,8 @@ cmd_run() {
         fi
         local -a arr=()
         while IFS= read -r line; do [ -n "$line" ] && arr+=("$line"); done <<< "$ids"
-        note "batch $batch: ${#arr[@]} item(s): ${arr[*]} (model $MODEL, ${dry:+dry-run=}$dry)"
+        local display_model="${MODEL:-provider default}"
+        note "batch $batch: ${#arr[@]} item(s): ${arr[*]} (cli $CLI, model $display_model, ${dry:+dry-run=}$dry)"
         local first=1
         for id in "${arr[@]}"; do
             [ "$first" = 1 ] || { [ "$dry" = 1 ] || sleep "$STAGGER"; }
@@ -1454,6 +1754,7 @@ cmd="${1:-help}"; shift || true
 case "$cmd" in
     run) cmd_run "$@" ;;
     resume-paused) cmd_resume_paused "$@" ;;
+    dependencies) md_lock; ca_py dependencies "$@"; md_unlock ;;
     status) ca_py status ;;
     list) ca_py list "$@" ;;
     show) [ $# -ge 1 ] || die "show ID"; ca_py show "$1" ;;

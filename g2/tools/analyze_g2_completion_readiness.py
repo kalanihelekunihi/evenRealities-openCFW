@@ -792,7 +792,7 @@ def analyze() -> dict[str, Any]:
         "official_blob": boot["opaque_base_bytes"],
         "source_compiled": boot["source_owned_bytes"],
     }, "bootloader current interval partition disagrees with its builder")
-    _require(boot_partition["retained_official_bytes"] == 87_985,
+    _require(boot_partition["retained_official_bytes"] == 87_981,
              "bootloader retained complement changed")
 
     gx = gx8002_readiness.run_audit()

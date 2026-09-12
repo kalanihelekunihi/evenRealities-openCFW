@@ -4,7 +4,7 @@ import re
 MASK=0xffffffff
 def signed(v):return v if v<0x80000000 else v-0x100000000
 
-def execute(code,entry,fields,length=80,channel=1,clear_hook=None,bus_hook=None,descriptor_hook=None):
+def execute(code,entry,fields,length=80,channel=1,clear_hook=None,bus_hook=None,descriptor_hook=None,destination=0x20050000,source=0xa0000000):
     stack=0x20070000;config=0x20040000
     memory={a:0 for base,size in ((stack-96,100),(config,48),(0x2002e93c,900),(0xa1000000,256)) for a in range(base,base+size)}
     def put(a,v,n=4):
@@ -14,7 +14,7 @@ def execute(code,entry,fields,length=80,channel=1,clear_hook=None,bus_hook=None,
     put(stack,config)
     put(0x2002e93c,0xa1000000)
     put(0x2002e93c+872+channel*4,0x20060000)
-    r={f'r{i}':0x98760000+i for i in range(32)};r.update(r0=0x20050000,r1=0xa0000000,r2=length&MASK,r3=channel,r14=stack)
+    r={f'r{i}':0x98760000+i for i in range(32)};r.update(r0=destination,r1=source,r2=length&MASK,r3=channel,r14=stack)
     initial=r.copy();saved=None;regs=[f'r{i}' for i in range(4,12)]+['r15','r16','r17'];condition=False;trace=[];pc=entry
     for _ in range(3000):
         op,args,step=code[pc];p=[x.strip() for x in args.split(',')];jump=None

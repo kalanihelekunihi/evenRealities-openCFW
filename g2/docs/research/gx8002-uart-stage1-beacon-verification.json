@@ -1,0 +1,83 @@
+{
+  "s_source_sha256": "a9681930a9ae3e83672d165e962fe4e0747051be231c1b934800884fcca5baa9",
+  "notice_sha256": "ae97b08031fc02f66553feb4f5c3ba7422ce256c76be0940ba7bd534f76c9ee7",
+  "assemble_flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "register_reference": "no SDK register map used; the 0x20002008/0x20002014 cells, the 0xA0100000/0xA0200000 bases, and every offset, id, and constant is a numeric immediate observed in the decoded stock flow (traptails-leaf precedent)",
+  "upstream_files": [],
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_beacon",
+      "compiled_bytes": 180,
+      "compiled_sha256": "4b9018d3ac98a485bb41dba152625fdebae1a7272e3a264b64187de5da07ce3c",
+      "ownership_kind": "compiled_assembly",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_beacon",
+          "package_offset": 1312,
+          "bytes": 180,
+          "sha256": "4b9018d3ac98a485bb41dba152625fdebae1a7272e3a264b64187de5da07ce3c",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_stage1_bringup",
+      "compiled_bytes": 92,
+      "compiled_sha256": "9266b238525e5b985b083773b48d96c542285968022e0ea354e87df7aa3e70a4",
+      "ownership_kind": "compiled_assembly",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_stage1_bringup",
+          "package_offset": 1556,
+          "bytes": 92,
+          "sha256": "9266b238525e5b985b083773b48d96c542285968022e0ea354e87df7aa3e70a4",
+          "region": "uart_boot_stage1"
+        }
+      ]
+    }
+  ],
+  "target_cases": 148,
+  "source_admitted": true,
+  "admission_scope": "experimental hybrid codec; UART boot stage-1 baud-beacon and bring-up leaves only",
+  "stock_equivalence_proven": false,
+  "stock_envelope_shas": {
+    "0x100004d0": "4b9018d3ac98a485bb41dba152625fdebae1a7272e3a264b64187de5da07ce3c",
+    "0x100005c4": "9266b238525e5b985b083773b48d96c542285968022e0ea354e87df7aa3e70a4"
+  },
+  "handoff": {
+    "beacon_chain": "0x10000ea0",
+    "bringup_chains": [
+      "0x10000d98",
+      "0x100004d0"
+    ],
+    "compared_registers": [
+      "r0",
+      "r1",
+      "r2",
+      "r3",
+      "r4",
+      "r5",
+      "r6",
+      "r7",
+      "r12",
+      "r14",
+      "r15"
+    ]
+  },
+  "limits": [
+    "Restricted instruction interpreter, not a processor emulator.",
+    "The chaining callees (PMU dispatchers, div/mod, the beacon itself for the bring-up path) are never executed here; both sides stop at the chaining branch. They are qualified by the reviewed pmudispatch/pmusecond/divmod batteries. Poll loops are verified only over finite scripts with hold-last and no external concurrent updates. The base/flag cells are fixed per case. Hardware timing remains unqualified."
+  ]
+}

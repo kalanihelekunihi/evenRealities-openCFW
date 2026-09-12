@@ -37,6 +37,9 @@ g2/components/shared/em9305/runtime_wsf_idle_tasks.c
 g2/components/shared/em9305/runtime_wsf_idle_tasks.h
 g2/components/shared/gx8002/runtime_gx8002_analog.c
 g2/components/shared/gx8002/runtime_gx8002_analog.h
+g2/components/shared/gx8002/runtime_gx8002_analog_config_update_enable.c
+g2/components/shared/gx8002/runtime_gx8002_analog_ldo.c
+g2/components/shared/gx8002/runtime_gx8002_analog_ldo.h
 g2/components/shared/gx8002/runtime_gx8002_app_initialize.c
 g2/components/shared/gx8002/runtime_gx8002_app_resume.c
 g2/components/shared/gx8002/runtime_gx8002_app_suspend.c
@@ -131,8 +134,14 @@ g2/components/shared/gx8002/runtime_gx8002_image_a_sram_data_boundary.c
 g2/components/shared/gx8002/runtime_gx8002_image_a_sram_data_boundary.h
 g2/components/shared/gx8002/runtime_gx8002_image_a_sram_text_boundary.c
 g2/components/shared/gx8002/runtime_gx8002_image_a_sram_text_boundary.h
+g2/components/shared/gx8002/runtime_gx8002_image_a_stage1_body_pad.c
+g2/components/shared/gx8002/runtime_gx8002_image_a_stage1_body_pad.h
 g2/components/shared/gx8002/runtime_gx8002_image_a_stage1_boundary.c
 g2/components/shared/gx8002/runtime_gx8002_image_a_stage1_boundary.h
+g2/components/shared/gx8002/runtime_gx8002_image_a_stage1_header.c
+g2/components/shared/gx8002/runtime_gx8002_image_a_stage1_header.h
+g2/components/shared/gx8002/runtime_gx8002_image_a_stage1_tail.c
+g2/components/shared/gx8002/runtime_gx8002_image_a_stage1_tail.h
 g2/components/shared/gx8002/runtime_gx8002_image_a_xip_boundary.c
 g2/components/shared/gx8002/runtime_gx8002_image_a_xip_boundary.h
 g2/components/shared/gx8002/runtime_gx8002_image_b_sram_data_boundary.c
@@ -198,6 +207,9 @@ g2/components/shared/gx8002/runtime_gx8002_snpu_suspend.c
 g2/components/shared/gx8002/runtime_gx8002_snpu_task_cmd_cache_flush.c
 g2/components/shared/gx8002/runtime_gx8002_snpu_tcb_init.c
 g2/components/shared/gx8002/runtime_gx8002_spi_register_master.c
+g2/components/shared/gx8002/runtime_gx8002_spl_reset_entry.S
+g2/components/shared/gx8002/runtime_gx8002_stage2_libc.c
+g2/components/shared/gx8002/runtime_gx8002_stage2_libc.h
 g2/components/shared/gx8002/runtime_gx8002_start_mode.c
 g2/components/shared/gx8002/runtime_gx8002_stream_shutdown.c
 g2/components/shared/gx8002/runtime_gx8002_system_initialize.c
@@ -209,6 +221,7 @@ g2/components/shared/gx8002/runtime_gx8002_uart_boot_stage1_boundary.c
 g2/components/shared/gx8002/runtime_gx8002_uart_boot_stage1_boundary.h
 g2/components/shared/gx8002/runtime_gx8002_uart_boot_stage2_boundary.c
 g2/components/shared/gx8002/runtime_gx8002_uart_boot_stage2_boundary.h
+g2/components/shared/gx8002/runtime_gx8002_uart_boot_stage2_diagnostics.c
 g2/components/shared/gx8002/runtime_gx8002_uart_configure.c
 g2/components/shared/gx8002/runtime_gx8002_uart_console.c
 g2/components/shared/gx8002/runtime_gx8002_uart_dma_burst.c

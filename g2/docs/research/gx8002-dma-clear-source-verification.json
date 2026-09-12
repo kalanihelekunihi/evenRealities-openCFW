@@ -1,0 +1,60 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_dma_clear",
+      "compiled_bytes": 36,
+      "compiled_sha256": "3072b18656a919194494b1b0ab7fdae9a72cf0a8c1bf8ac9de4e1d1324084c3e",
+      "section_name": ".text",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_dma_clear",
+          "package_offset": 52624,
+          "bytes": 36,
+          "sha256": "3072b18656a919194494b1b0ab7fdae9a72cf0a8c1bf8ac9de4e1d1324084c3e",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_header": "include/driver/gx_dma_ahb.h",
+      "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_dma_clear",
+          "compiled_bytes": 36,
+          "compiled_sha256": "3072b18656a919194494b1b0ab7fdae9a72cf0a8c1bf8ac9de4e1d1324084c3e",
+          "stock_sha256": "3072b18656a919194494b1b0ab7fdae9a72cf0a8c1bf8ac9de4e1d1324084c3e",
+          "package_offset": 52624,
+          "envelope_bytes": 36,
+          "fits": true
+        }
+      ],
+      "source_sha256": "697ef2f038f5388e72c932112c22e3f3ce6303ef86fa7d4d490dad65a1f5beb9",
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Build only. Decoded ordered status-clear writes and single state-base read qualification pending."
+      ]
+    },
+    "decoded_cases": 96,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Shifts 0..31 are arithmetic checks; initialized hardware channel domain is 0/1. No physical status register effects proved."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_dma_clear.py": "b91ce2f7ca3e4a255a2e72d59d396c1bf74fa00a2aa64f705253ba390fd2af7d",
+    "verify_gx8002_dma_clear.py": "8bb32bf04f402157555d44b2b3177e477f1ccf2eed2e59213ac80ec1cbf62f10",
+    "verify_gx8002_dma_clear_source.py": "583d39ada5525152f09c71b2bff6bd92657a3c618141bafea0e5bcc7695ecd1b",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded ordered MMIO writes and ABI verified for all defined shifts and three device bases. Hardware channel domain remains 0/1; physical status clearing is not qualified."
+  ]
+}

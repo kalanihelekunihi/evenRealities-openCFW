@@ -313,7 +313,7 @@ def audit() -> dict[str, object]:
     )
     require(
         (component["source_owned_bytes"], component["opaque_base_bytes"])
-        == (59009, 87985),
+        == (59013, 87981),
         "lifecycle production accounting changed",
     )
 

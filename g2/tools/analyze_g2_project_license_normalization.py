@@ -59,13 +59,13 @@ LZ4_WRAPPER = (
 )
 EXPECTED_SCOPE_PATH_COUNT = 749
 EXPECTED_ADDITIONAL_PATH_COUNT = 22
-EXPECTED_COMMUNITY_CONTROLLER_PROJECT_PATH_COUNT = 285
+EXPECTED_COMMUNITY_CONTROLLER_PROJECT_PATH_COUNT = 298
 EXPECTED_TOUCH_SOURCE_IMAGE_PROJECT_PATH_COUNT = 10
 EXPECTED_CASE_SOURCE_IMAGE_PROJECT_PATH_COUNT = 8
-EXPECTED_EM9305_SOURCE_IMAGE_PROJECT_PATH_COUNT = 19
+EXPECTED_EM9305_SOURCE_IMAGE_PROJECT_PATH_COUNT = 21
 EXPECTED_PT_PROTOCOL_PROJECT_PATH_COUNT = 28
 EXPECTED_PT_PROTOCOL_TOTAL_PATH_COUNT = 29
-EXPECTED_DISTRIBUTED_TARGET_COUNT = 1097
+EXPECTED_DISTRIBUTED_TARGET_COUNT = 1112
 COMMUNITY_CONTROLLER_ROOTS = (
     ROOT / "components/shared/touch",
     ROOT / "components/shared/case",
@@ -111,6 +111,19 @@ EM9305_SOURCE_IMAGE_SUPPORT_PATHS = {
     "g2/tests/fixtures/em9305_reconstructible_tail_host.c",
     "g2/tools/integrate_g2_em9305_source_overlay.py",
 }
+
+
+def _is_case_package_source(path: Path) -> bool:
+    """True when a file under the Case source-image root is distributed source.
+
+    Generated `build/` outputs (ELF, binaries, objects, maps, summaries)
+    are gitignored build products, not distributed MIT targets; the EM9305
+    census already applies the same exclusion to its package roots.
+    """
+    return (
+        path.is_file()
+        and "build" not in path.relative_to(CASE_SOURCE_IMAGE_PACKAGE_ROOT).parts
+    )
 PT_PROTOCOL_SOURCE_ROOT = ROOT / "components/apollo_main/core_overlay"
 PT_PROTOCOL_APACHE_PATHS = {
     "g2/components/apollo_main/core_overlay/pt_protocol_lc3_setup.c",
@@ -324,7 +337,7 @@ def analyze() -> dict:
     actual_case_source_image_paths = {
         "g2/" + path.relative_to(ROOT).as_posix()
         for path in CASE_SOURCE_IMAGE_PACKAGE_ROOT.rglob("*")
-        if path.is_file()
+        if _is_case_package_source(path)
     } | CASE_SOURCE_IMAGE_SUPPORT_PATHS
     require(actual_case_source_image_paths == case_source_image_paths,
             "Case source-image distributed source census changed")

@@ -7,9 +7,9 @@ from analyze_gx8002_upstream_objects import IMAGE_SHA,sha
 from build_transparent_image import Elf32
 
 
-def execute(code,entry,allocation,token,gate_hook=None):
-    memory={0x2002e940:len(allocation)}
-    memory.update({0x2002ecac+i:value for i,value in enumerate(allocation)})
+def execute(code,entry,allocation,token,gate_hook=None,state_address=0x2002e93c,helper_addresses=None,irq_hook=None):
+    memory={state_address+4:len(allocation)}
+    memory.update({state_address+880+i:value for i,value in enumerate(allocation)})
     r={f'r{i}':0x98760000+i for i in range(32)};r['r14']=0x2002f000
     initial=r.copy();trace=[];pc=entry;saved=None;regs=['r4','r5','r15'];condition=False
     for _ in range(1000):
@@ -44,10 +44,16 @@ def execute(code,entry,allocation,token,gate_hook=None):
             else:memory[addr]=r[reg];trace.append(('write',addr,r[reg]))
         elif op=='bsr':
             target=int(args,0)
+            if helper_addresses is not None:
+                if target not in helper_addresses:raise ValueError('Relocated selection helper')
+                target=helper_addresses[target]
             save=target in (0xffe2eaec,0x10025560)
-            if save:trace.append(('irq_save',))
+            if save:
+                if irq_hook is not None and irq_hook(True,r['r0'])!=token:raise ValueError('Selection decoded token')
+                trace.append(('irq_save',))
             elif target in (0xffe2eaf8,0x1002556c):
                 if r['r0']!=token:raise ValueError('Selection IRQ token')
+                if irq_hook is not None:irq_hook(False,r['r0'])
                 trace.append(('irq_restore',token))
             elif target in (0xffe2e60c,0x10025080):
                 trace.append(('resource',r['r0'],r['r1']))

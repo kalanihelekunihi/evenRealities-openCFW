@@ -1,0 +1,37 @@
+NationalChip UART boot stage-1 PMU descriptor-fill adaptation
+Upstream: NationalChip/lvp_kws arch/soc/grus/include/base_addr.h
+(GX_REG_BASE_MCU_CONFIG = 0xA0300000 with MCU_CFG_SOURCE_SEL (+0x88) and
+the MCU_CFG_MEPG_CLK_INHIBIT_NORM/1SET/1CLR triple (+0x18/+0x1C/+0x20);
+GX_REG_BASE_PMU_CONFIG = 0xA0010000 with PMU_CFG_SOURCE_SEL0 (+0x8C) and
+the PMU_CFG_MEPG_CLK_INHIBIT_NORM/1SET/1CLR triple (+0x18/+0x1C/+0x20))
+Commit: 8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5
+Local source: runtime_gx8002_uart_stage1_pmufill.c
+Recovered UART-boot configuration: the 26-entry peripheral table at
+0x20002018 (16-byte entries, first word matched against the id) and the
+id < 10 MCU/PMU domain select are decoded stock behavior, not upstream.
+Only the numeric register bases and the call/return conventions are taken
+from the upstream header (used under the SDK repo-level MIT LICENSE below);
+all bodies are clean-room implementations of the decoded stock behavior.
+The GPL-licensed SDK headers (common.h, spl/spl.h) were deliberately not used.
+
+MIT License
+
+Copyright (c) 2024 NationalChip
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
