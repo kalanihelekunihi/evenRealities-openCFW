@@ -1,0 +1,29 @@
+{
+  "source_sha256": "99240e0d650ee2c61d21ff348c73510612698c65ed6160bb032c37a50d45084f",
+  "elf_sha256": "85c7c7aad07f2f74d1bafbf4794564f56ea6fef6af1791531be416818d19c18c",
+  "command": [
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-tree-loop-optimize",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_memcpy.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-memcpy/copy.o"
+  ],
+  "bytes": 96,
+  "package_offset": 302212,
+  "cases": 4128,
+  "source_admitted": false,
+  "limits": [
+    "Nonoverlapping RAM; exact source/stock access widths and order, byte results and guards. Caller coverage, integration and hardware/timing pending."
+  ]
+}

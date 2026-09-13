@@ -1,0 +1,41 @@
+{
+  "generation": {
+    "decimal_precisions": [
+      80,
+      110
+    ],
+    "minimum_rounding_margin": "0.0004799583670417623613286794185613142917351650296035550644546476636153266437",
+    "complex_rounding_margin": "0.004391557772404545175976776234561685730989521660640510104513602324176532335"
+  },
+  "source_sha256": "828c04d9bbea1d973f5498a99cb5853e93223cbfe6a8bdb14d5644ff9cf02a13",
+  "sections": [
+    {
+      "section": ".complex_coefficients",
+      "offset": 315156,
+      "bytes": 768,
+      "sha256": "9e05c434c0378b8190fb94493619719924accb86c9cd81ffd58f2654f2cc4368"
+    },
+    {
+      "section": ".bit_reverse",
+      "offset": 314676,
+      "bytes": 480,
+      "sha256": "77f9067a05b953496342be0361b74253f690465994854fd15b78525b72490278"
+    },
+    {
+      "section": ".q14_pairs",
+      "offset": 317976,
+      "bytes": 1024,
+      "sha256": "f02ad5cfc640d3484d44ba4366dd3f20b2883d83600db65dd32bdd8b049434e1"
+    },
+    {
+      "section": ".bit_lengths",
+      "offset": 319252,
+      "bytes": 256,
+      "sha256": "14a5d850c255623f9472e3c650abce0c78d32f0276b315b3a276a0462d97a1ac"
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Decimal generation agrees at 80 and 110 digits with rounding margin checked. This is reproducibility evidence, not a formal numerical-error proof. Runtime consumers and source admission remain pending."
+  ]
+}

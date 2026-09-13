@@ -1,0 +1,86 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "dependencies": [
+      {
+        "path": "arch/soc/grus/include/clk_priv.h",
+        "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+        "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+      },
+      {
+        "path": "arch/soc/grus/include/base_addr.h",
+        "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+        "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+      },
+      {
+        "path": "include/driver/gx_clock.h",
+        "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+        "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+      },
+      {
+        "path": "include/driver/gx_clock/gx_clock_v2.h",
+        "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+        "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+      },
+      {
+        "path": "LICENSE",
+        "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+        "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+      }
+    ],
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "--param=case-values-threshold=3",
+      "-fno-gcse",
+      "-fno-tree-forwprop"
+    ],
+    "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+    "lookup_runtime_address": 268448992,
+    "sections": [
+      {
+        "section": ".text",
+        "runtime_address": 268450792,
+        "package_offset": 247080,
+        "compiled_bytes": 254,
+        "compiled_sha256": "e28c7e78a2a161233b64d65240d6a10a92c651de00cad548386b9b2627fe051d",
+        "envelope_bytes": 264,
+        "fits": true,
+        "stock_sha256": "17fa73ba793655dd80b8c00f5077aed9c2b44e72e14f3daa81d4b5b4f68560fe"
+      },
+      {
+        "section": ".rodata",
+        "runtime_address": 268511580,
+        "package_offset": 307868,
+        "compiled_bytes": 148,
+        "compiled_sha256": "2ad9cba3ad623e75a0f232a33aaa80402454f2b23c8bd4664fcad5a028d48193",
+        "envelope_bytes": 148,
+        "fits": true,
+        "stock_sha256": "eb5172991b4d8194e66afe4b54c8755575bc4bb4e602b8f1a1e3eef53ebbdd54"
+      }
+    ],
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Upstream gate and source-generated jump tables only; lookup remains bound to retained backup entry.",
+      "Branch-table mapping, lookup/table semantics, MMIO equivalence and loader qualification pending."
+    ]
+  },
+  "cases": 8432,
+  "stock_table_offset": 324316,
+  "stock_table_sha256": "81bd4f742fa21f20e11836d732d1d5912e00e04632b8c749964c815720fe0620",
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Backup module lookup modeled using authenticated stock table, not yet qualified source.",
+    "Ordered MMIO and lookup traces with source-generated branch tables; physical clocks, table mutations and placement remain unqualified."
+  ]
+}

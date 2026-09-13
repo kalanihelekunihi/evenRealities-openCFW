@@ -1,0 +1,81 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_stop_i2s",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 128,
+      "compiled_sha256": "bbb59eb29130254597e69db507dc1d515ccaa888b67a8137cc4a2ef08f4fa27c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_stop_i2s",
+          "package_offset": 75464,
+          "bytes": 128,
+          "sha256": "d2fb0dde85a24ecfac70a725402cde290a7ae6ef7fd87dc163b7890e70d70807",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_stop_i2s_name",
+      "section_name": ".rodata.name",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 10,
+      "compiled_sha256": "214e42a13650bbe303bb83b1195c5f7c8215ecad0fddcb76b16861e05f160b0b",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_stop_i2s_name",
+          "package_offset": 84413,
+          "bytes": 10,
+          "sha256": "214e42a13650bbe303bb83b1195c5f7c8215ecad0fddcb76b16861e05f160b0b",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "source_sha256": "4d873aaefdfeff33ea9a1378cb4473f0d3b7757d83b9ccbfc3192fd1bd06fdd0",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "compiled_bytes": 128,
+      "compiled_sha256": "bbb59eb29130254597e69db507dc1d515ccaa888b67a8137cc4a2ef08f4fa27c",
+      "stock_envelope_bytes": 128,
+      "stock_sha256": "d2fb0dde85a24ecfac70a725402cde290a7ae6ef7fd87dc163b7890e70d70807",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Stop candidate only; shared diagnostics owned by I2S start; behavior, ownership and ABI require qualification."
+      ]
+    },
+    "cases": 504,
+    "source_admitted": false,
+    "limits": [
+      "Independent final-state and helper-argument/order oracle, shared-state mutations and preserved integer ABI; void return value intentionally unspecified; nested hardware behavior unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_stop_i2s_source.py": "5133b6528e68fba7f214c27c19d8c84b5ccae3794ee0c3341356295ff655e9eb",
+    "verify_gx8002_stop_i2s.py": "5f4b3e9850b4fb94165d6f900cba98d58c22a59b75b55504490a48dcd632f8fb",
+    "execute_gx8002_stop_i2s.py": "d5ed9945430260b74e0cc6c81320fb2975eb079c0d712f8d61f18d566e2a7103",
+    "build_gx8002_stop_i2s.py": "e3bfa33633e9ec80f8c5fdb9ee352f4905bf0922bd46c96ac17a37e525dc3cf1",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Independent final-state and helper-argument/order oracle, shared-state mutations and preserved integer ABI; void return value intentionally unspecified; nested hardware behavior unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

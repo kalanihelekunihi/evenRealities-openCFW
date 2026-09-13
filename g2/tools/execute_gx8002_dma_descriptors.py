@@ -4,7 +4,7 @@ import re
 MASK=0xffffffff
 def signed(v):return v if v<0x80000000 else v-0x100000000
 
-def execute(code,entry,count,length,control,width,bus_hook=None,source_address=0xfffffff0,destination_address=0x20000000,output_address=0x20050000):
+def execute(code,entry,count,length,control,width,bus_hook=None,source_address=0xfffffff0,destination_address=0x20000000,output_address=0x20050000,bus_address=None):
     stack=0x20070000;pattern=0x20040000;output=output_address
     memory={a:0xa5 for base,size in ((stack-96,100),(pattern,24),(output,432)) for a in range(base,base+size)}
     def put(a,v,n=4):
@@ -57,7 +57,8 @@ def execute(code,entry,count,length,control,width,bus_hook=None,source_address=0
                 if pattern<=address<pattern+24:trace.append(('read',address,r[reg]))
         elif op=='bsr':
             target=int(args,0)
-            if target not in (0xd1ec,0x10203c60):raise ValueError('Descriptor helper')
+            targets=(0xd1ec,0x10203c60) if bus_address is None else (bus_address,)
+            if target not in targets:raise ValueError('Descriptor helper')
             address=r['r0'];trace.append(('bus',address));result=address&0xfffffff if 0x10000000<=address<0x30000000 else address
             if bus_hook is not None:result=bus_hook(address)
             for i in (0,1,2,3,12,13,15,*range(18,32)):r[f'r{i}']=0xb0000000+i

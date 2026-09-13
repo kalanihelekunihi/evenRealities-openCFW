@@ -1,0 +1,308 @@
+{
+  "functions": [
+    {
+      "symbol": "UartMessageAsyncInit",
+      "section_name": ".text",
+      "compiled_bytes": 244,
+      "compiled_sha256": "ced7f35320bceaa570888fedb64eb0abbba05c6cc0ae3132b5d42252e251c59c",
+      "stock_occurrences": [
+        {
+          "symbol": "UartMessageAsyncInit",
+          "package_offset": 72164,
+          "bytes": 244,
+          "sha256": "9c2fc75d81d2d33b267afb85eaee5a3a279ec48217b64fff5af3b145de8fd334",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "suspend_label",
+      "section_name": ".rodata.suspend_label",
+      "compiled_bytes": 24,
+      "compiled_sha256": "549acd0de3dcfb33bd358ed69b78f09b8c538bd07415cb6506933879e19b18eb",
+      "ownership_kind": "generated_source_data",
+      "stock_occurrences": [
+        {
+          "symbol": "suspend_label",
+          "package_offset": 83735,
+          "bytes": 24,
+          "sha256": "549acd0de3dcfb33bd358ed69b78f09b8c538bd07415cb6506933879e19b18eb",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "resume_label",
+      "section_name": ".rodata.resume_label",
+      "compiled_bytes": 23,
+      "compiled_sha256": "562a1e29831bd73326220e5fa5006b99ced63bccb8434ce0a1a1d543f61e13f9",
+      "ownership_kind": "generated_source_data",
+      "stock_occurrences": [
+        {
+          "symbol": "resume_label",
+          "package_offset": 83759,
+          "bytes": 23,
+          "sha256": "562a1e29831bd73326220e5fa5006b99ced63bccb8434ce0a1a1d543f61e13f9",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "labels": [
+        {
+          "symbol": "suspend_label",
+          "section_name": ".rodata.suspend_label",
+          "package_offset": 83735,
+          "bytes": 24,
+          "sha256": "549acd0de3dcfb33bd358ed69b78f09b8c538bd07415cb6506933879e19b18eb"
+        },
+        {
+          "symbol": "resume_label",
+          "section_name": ".rodata.resume_label",
+          "package_offset": 83759,
+          "bytes": 23,
+          "sha256": "562a1e29831bd73326220e5fa5006b99ced63bccb8434ce0a1a1d543f61e13f9"
+        }
+      ],
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+      "headers_sha256": {
+        "uart_message_v2.h": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2",
+        "lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+      },
+      "generated_source_sha256": "39a0740a7ec9548ea1d3af83aaf053a4a98a7bd4180d911aba16f53bfaa38fa1",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-error=sign-compare",
+        "-Wno-error=unused-parameter",
+        "-Wno-error=address-of-packed-member",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-nationalchip-lvp-kws/lvp/common"
+      ],
+      "bindings": {
+        "_GetMessageHandle": 270564032,
+        "gx_uart_async_send_buffer_stop": 270546664,
+        "gx_uart_async_recv_buffer_stop": 270546692,
+        "gx_uart_init": 270546224,
+        "gx_uart_start_async_recv": 270546572,
+        "_UartMessageAsyncRecvCallback": 270565528,
+        "UartMessageAsyncSuspend": 270564468,
+        "UartMessageAsyncResume": 270564508,
+        "LvpSuspendInfoRegist": 270563008,
+        "LvpResumeInfoRegist": 270563096,
+        "LvpPmuSuspendLockCreate": 270563184,
+        "LvpQueueInit": 270561180,
+        "s_uart_recv_pack_queue": 537062596,
+        "s_uart_recv_pack_queue_buffer": 537060836
+      },
+      "compiled_bytes": 244,
+      "compiled_sha256": "ced7f35320bceaa570888fedb64eb0abbba05c6cc0ae3132b5d42252e251c59c",
+      "stock_envelope_bytes": 244,
+      "stock_sha256": "9c2fc75d81d2d33b267afb85eaee5a3a279ec48217b64fff5af3b145de8fd334",
+      "fits": true,
+      "exact_stock": false,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Source-built candidate only; complete decoded state-machine comparison and admission remain pending. External state uses established RAM addresses."
+      ]
+    },
+    "decoded_cases": 649,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Independent initialization oracle, final global memory, helper ordering and saved ABI; modeled UART/queue/power helpers. Aliases, helper mutations and nested execution pending."
+    ]
+  },
+  "mutations": {
+    "decoded_mutation_alias_cases": 1890,
+    "source_admitted": false,
+    "limits": [
+      "Selected aligned configuration/context overlaps and one helper mutation per execution. Physical helper behavior and arbitrary overlap/concurrency unqualified."
+    ]
+  },
+  "queue_composition": {
+    "queue_dependency": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_files": [
+        {
+          "path": "lvp/common/lvp_queue.c",
+          "git_blob": "575d43d27ebd9ca3655a199363eba4968fd8155f",
+          "sha256": "ed8fba34e8658c0c7d49868790a89dce7188b8c81fe0c04f68969de1670b5814"
+        },
+        {
+          "path": "lvp/common/lvp_queue.h",
+          "git_blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+          "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+        },
+        {
+          "path": "include/lvp_attr.h",
+          "git_blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+          "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+        }
+      ],
+      "compile_flags": [
+        "-O2",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "configuration": {
+        "CONFIG_ARCH_GRUS": 1,
+        "stdio_header": "empty; no stdio declarations used"
+      },
+      "functions": [
+        {
+          "symbol": "LvpQueueInit",
+          "compiled_bytes": 20,
+          "compiled_sha256": "cfb98298b268914abd19b4c90183868e23dc33cdc467f60d8f06d494a0c83071",
+          "stock_occurrences": [
+            {
+              "symbol": "LvpQueueInit",
+              "package_offset": 66856,
+              "bytes": 20,
+              "sha256": "cfb98298b268914abd19b4c90183868e23dc33cdc467f60d8f06d494a0c83071",
+              "region": "image_a_xip_text"
+            }
+          ]
+        },
+        {
+          "symbol": "LvpQueueIsEmpty",
+          "compiled_bytes": 10,
+          "compiled_sha256": "bc6d60f81dfc11f3f53d02427b0026e5f4bafde64a7523070778e7fe9852b679",
+          "stock_occurrences": [
+            {
+              "symbol": "LvpQueueIsEmpty",
+              "package_offset": 66952,
+              "bytes": 10,
+              "sha256": "bc6d60f81dfc11f3f53d02427b0026e5f4bafde64a7523070778e7fe9852b679",
+              "region": "image_a_xip_text"
+            }
+          ]
+        },
+        {
+          "symbol": "LvpQueueIsFull",
+          "compiled_bytes": 24,
+          "compiled_sha256": "c620a8a4045d04230f4b4bb4597e2eddb44da812b769e99a36e0d4956144e4a9",
+          "stock_occurrences": [
+            {
+              "symbol": "LvpQueueIsFull",
+              "package_offset": 66964,
+              "bytes": 24,
+              "sha256": "c620a8a4045d04230f4b4bb4597e2eddb44da812b769e99a36e0d4956144e4a9",
+              "region": "image_a_xip_text"
+            }
+          ]
+        }
+      ],
+      "source_admitted": true,
+      "limits": [
+        "Only three named sections match; other compiled queue functions are not qualified.",
+        "Queue callers must supply positive, consistent dimensions; concurrent access is not synchronized."
+      ]
+    },
+    "initialization_cases": 18,
+    "queue_executions": 32,
+    "source_admitted": false,
+    "limits": [
+      "Actual decoded source queue stores share caller descriptor memory; fixed256/32dimensions. Other helpers modeled; physical concurrency unqualified."
+    ]
+  },
+  "power_composition": {
+    "power_dependency": {
+      "placement": {
+        "source_sha256": "d03ef75081b2c896206f46b7e930d2dc5185ad94743f2469d1d185876f95f1b8",
+        "header_sha256": "dac3f35fda97bdc90c75cf9c212309a91ebf5ecf70214623537bd86c5b4215b0",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-tree-loop-optimize",
+          "-fno-guess-branch-probability",
+          "-fno-gcse"
+        ],
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_register_suspend",
+            "compiled_bytes": 88,
+            "compiled_sha256": "684471d1e22b2b6fda3d868d65be41fac2baec3fc303efab8a8542ab272c7ae7",
+            "stock_package_offset": 68684,
+            "stock_envelope_bytes": 88,
+            "stock_sha256": "3a4c96cd7c8670ba0750f76d84d67aa605e69afc4c49901ed6ef1882266394fb",
+            "byte_exact": false
+          },
+          {
+            "symbol": "open_cfw_gx8002_register_resume",
+            "compiled_bytes": 88,
+            "compiled_sha256": "3514cb617280c5f98807995fe52d24b830e64d5f9b4d77a913d5467e735cf73d",
+            "stock_package_offset": 68772,
+            "stock_envelope_bytes": 88,
+            "stock_sha256": "9f6731d1578f7615af239673109d1c0619615fa9e106215938354434dc23f2b9",
+            "byte_exact": false
+          }
+        ],
+        "source_admitted": false,
+        "limits": [
+          "Target registry mutation comparison pending.",
+          "Existing power state remains retained; hardware timing unqualified."
+        ]
+      },
+      "cases": 720,
+      "source_admitted": false,
+      "limits": [
+        "Memcpy call modeled; no concurrent state mutation or overlapping input.",
+        "Existing state storage and hardware remain unqualified."
+      ]
+    },
+    "initialization_cases": 54,
+    "registration_executions": 324,
+    "source_admitted": false,
+    "limits": [
+      "Decoded source power registrations share separate translated power-state storage across both calls; capacity and replacement checked. Nested memcpy modeled; physical concurrency unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_uart_message_initialize_power.py": "5d40a3f4475d0f616bebd97f60824f61e2135b8024a5058597a086255c54b601",
+    "compare_gx8002_power_registration.py": "f565f8569b7231f8e63d0cde63f81fb69774a7adf3267629c7b43d6dab1dadcf",
+    "link_gx8002_suspend_registration.py": "f970fce4110a6a71773278c3557bc03990a439b4d672614467dfaf6ebca47b73",
+    "verify_gx8002_queue_source.py": "db3608f02d3ba35bc0a51cc16d1b65c2e96a3cf24d6e95139742ccd80911bc14",
+    "verify_gx8002_uart_message_initialize_mutations.py": "0c138fa5de366778ebcbf475733a798f7f3dc379c63be136530d4ea56690524e",
+    "verify_gx8002_uart_message_initialize_queue.py": "32c0621adce2731b5025de348bad6c7d107ee3822a8c692896cfbb73da1aae30",
+    "compare_gx8002_queue_put.py": "fffb3a0ca48e0e9e557eadec90e7ba721bcdc9eb51b806d11ca3edff2a4d5f76",
+    "compare_gx8002_queue_get.py": "9e3d42e8ca159c5f505c0b500b360333a8379f80dd42967a91636e48af0f21e8",
+    "verify_gx8002_uart_message_initialize_source.py": "9ecd4796debaba823c39d4d025523c5354f315a597b22e8db1081705ffa50bf0",
+    "verify_gx8002_uart_message_initialize.py": "9b77a723448fd5861892505e59ea734f23ba0f9f2b7b0e2c051bae862ea7035d",
+    "execute_gx8002_uart_message_initialize.py": "cfeee14abe1bd0376ded5b91e2ad884a64cda1d81183efc2cecb96c593661025",
+    "build_gx8002_uart_message_initialize.py": "04ffd69372feba51781fce3992ad39a878f2eec17abbfe49b6a080f1e61977c0",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Native upstream C; independent baseline, helper mutation/context aliases and nested queue comparison. Helpers otherwise modeled; physical concurrency, cache effects and arbitrary overlap remain unqualified."
+  ]
+}

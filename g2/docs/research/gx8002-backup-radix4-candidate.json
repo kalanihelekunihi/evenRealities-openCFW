@@ -1,0 +1,51 @@
+{
+  "source_sha256": "cde3b29c8538dba119849e4ce0dc15dafeae2c143728b9072c93d130f8bb8850",
+  "variants": [
+    {
+      "variant": "forward",
+      "compiled_bytes": 1052,
+      "envelope_bytes": 532,
+      "fits": false,
+      "sha256": "3f73c6cc807e46df90052f5a8a6800cc605a4117ef2f44a83f0b8643cb879ce2",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-caller-saves",
+        "-DINVERSE=0"
+      ]
+    },
+    {
+      "variant": "inverse",
+      "compiled_bytes": 1044,
+      "envelope_bytes": 532,
+      "fits": false,
+      "sha256": "d69c9ef511c0989cdfc4049ef31f29f199da32c6674f68928d31f2eec94cdbb3",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-caller-saves",
+        "-DINVERSE=1"
+      ]
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Scalar three-stage candidate only; decoded stock comparison pending. No retained arithmetic dependencies linked."
+  ]
+}

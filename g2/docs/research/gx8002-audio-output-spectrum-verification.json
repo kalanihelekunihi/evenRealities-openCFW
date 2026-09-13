@@ -1,0 +1,98 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "header": {
+      "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+      "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+    },
+    "oracle": {
+      "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+      "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+      "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+      "section": ".text.gx_audio_in_set_output_spectrum",
+      "relocations": [
+        {
+          "offset": 66,
+          "symbol": 15,
+          "type": 19,
+          "addend": 0
+        },
+        {
+          "offset": 174,
+          "symbol": 15,
+          "type": 19,
+          "addend": 0
+        },
+        {
+          "offset": 248,
+          "symbol": 3,
+          "type": 1,
+          "addend": 0
+        }
+      ],
+      "role": "symbol_evidence_only"
+    },
+    "bindings": {
+      "open_cfw_gx8002_pcm_channel_setting": 270548424,
+      "open_cfw_gx8002_audio_output_state": 537031476
+    },
+    "source_sha256": "28794488115e63c2ef73fbc420fbc54c3511b54e2833c0a0a10f72e4f15aab7b",
+    "symbol": "open_cfw_gx8002_audio_output_spectrum",
+    "compiled_bytes": 204,
+    "compiled_sha256": "ba0810e7e9b9a0d0652247636e976c96a4590a56f12629ad0ffab8acba132b32",
+    "package_offset": 54968,
+    "stock_envelope_bytes": 252,
+    "stock_sha256": "225c8845e340fe9989f2347cf38ba947f44b57b926ab12c109af83845d9c3713",
+    "fits": true,
+    "source_admitted": false,
+    "hardware_qualified": false
+  },
+  "setting_dependency": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+        "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+        "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+        "role": "identity_only"
+      },
+      "source_sha256": "acf509a44fc74a4c6b7388c6c30148b908dbb6b3d6e82038627b18d1684e7f37",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "symbol": "open_cfw_gx8002_pcm_channel_setting",
+      "section_name": ".text",
+      "package_offset": 54100,
+      "compiled_bytes": 78,
+      "compiled_sha256": "b2ce855a5b1239d6fe1527dcaadadc941b88bd4b691500b3dd0596f67c427bc4",
+      "stock_envelope_bytes": 80,
+      "stock_sha256": "7433411d9a84dda8648b7fa2a219c102c87806c9d3e9c5fff47363ec032c642b",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Candidate only. Alignment rejection, ordered parameter writes, channel enable and ABI comparison required. No SDK object payload linked."
+      ]
+    },
+    "decoded_cases": 10752,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Alignment rejections and accepted ordered MMIO checked with defined shifts, including arithmetic boundary channel20. Hardware channel validity remains a caller contract; no physical buffer/DMA delivery qualification."
+    ]
+  },
+  "decoded_cases": 18432,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Pinned SDK aggregate and nested buffer helper execute decoded code in separate frames. Source selection changes before validation, including invalid calls. Frame count doubling wraps modulo 32 bits. Ordered field writes and full stack ABI checked; physical spectrum delivery unqualified."
+  ]
+}

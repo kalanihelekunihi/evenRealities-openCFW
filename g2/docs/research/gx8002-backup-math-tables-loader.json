@@ -1,0 +1,55 @@
+{
+  "build": {
+    "generation": {
+      "decimal_precisions": [
+        80,
+        110
+      ],
+      "minimum_rounding_margin": "0.0004799583670417623613286794185613142917351650296035550644546476636153266437"
+    },
+    "source_sha256": "93a10ef439c6ed6d366a8df3dbe78e97bb52fc3aba817c54a5fa1a4e3ea1f3ad",
+    "sections": [
+      {
+        "section": ".q14_pairs",
+        "offset": 317976,
+        "bytes": 1024,
+        "sha256": "f02ad5cfc640d3484d44ba4366dd3f20b2883d83600db65dd32bdd8b049434e1"
+      },
+      {
+        "section": ".bit_lengths",
+        "offset": 319252,
+        "bytes": 256,
+        "sha256": "14a5d850c255623f9472e3c650abce0c78d32f0276b315b3a276a0462d97a1ac"
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Decimal generation agrees at 80 and 110 digits with rounding margin checked. This is reproducibility evidence, not a formal numerical-error proof. Runtime consumers and source admission remain pending."
+    ]
+  },
+  "patches": [
+    {
+      "section": ".q14_pairs",
+      "address": 268521688,
+      "offset": 317976,
+      "bytes": 1024,
+      "sha256": "f02ad5cfc640d3484d44ba4366dd3f20b2883d83600db65dd32bdd8b049434e1"
+    },
+    {
+      "section": ".bit_lengths",
+      "address": 268522964,
+      "offset": 319252,
+      "bytes": 256,
+      "sha256": "14a5d850c255623f9472e3c650abce0c78d32f0276b315b3a276a0462d97a1ac"
+    }
+  ],
+  "replacement_bytes": 1280,
+  "loader_cases": 12,
+  "candidate_image_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Combined normal backup-loader placement, with no replacement fill and unrelated bytes unchanged.",
+    "Data retained at original physical SRAM offsets; runtime alias/clock behavior and external-reference admission remain separate."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "candidate": {
+    "labels": [
+      {
+        "symbol": "suspend_label",
+        "section_name": ".rodata.suspend_label",
+        "package_offset": 83735,
+        "bytes": 24,
+        "sha256": "549acd0de3dcfb33bd358ed69b78f09b8c538bd07415cb6506933879e19b18eb"
+      },
+      {
+        "symbol": "resume_label",
+        "section_name": ".rodata.resume_label",
+        "package_offset": 83759,
+        "bytes": 23,
+        "sha256": "562a1e29831bd73326220e5fa5006b99ced63bccb8434ce0a1a1d543f61e13f9"
+      }
+    ],
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+    "headers_sha256": {
+      "uart_message_v2.h": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2",
+      "lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+    },
+    "generated_source_sha256": "39a0740a7ec9548ea1d3af83aaf053a4a98a7bd4180d911aba16f53bfaa38fa1",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-error=sign-compare",
+      "-Wno-error=unused-parameter",
+      "-Wno-error=address-of-packed-member",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-nationalchip-lvp-kws/lvp/common"
+    ],
+    "bindings": {
+      "_GetMessageHandle": 270564032,
+      "gx_uart_async_send_buffer_stop": 270546664,
+      "gx_uart_async_recv_buffer_stop": 270546692,
+      "gx_uart_init": 270546224,
+      "gx_uart_start_async_recv": 270546572,
+      "_UartMessageAsyncRecvCallback": 270565528,
+      "UartMessageAsyncSuspend": 270564468,
+      "UartMessageAsyncResume": 270564508,
+      "LvpSuspendInfoRegist": 270563008,
+      "LvpResumeInfoRegist": 270563096,
+      "LvpPmuSuspendLockCreate": 270563184,
+      "LvpQueueInit": 270561180,
+      "s_uart_recv_pack_queue": 537062596,
+      "s_uart_recv_pack_queue_buffer": 537060836
+    },
+    "compiled_bytes": 244,
+    "compiled_sha256": "ced7f35320bceaa570888fedb64eb0abbba05c6cc0ae3132b5d42252e251c59c",
+    "stock_envelope_bytes": 244,
+    "stock_sha256": "9c2fc75d81d2d33b267afb85eaee5a3a279ec48217b64fff5af3b145de8fd334",
+    "fits": true,
+    "exact_stock": false,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Source-built candidate only; complete decoded state-machine comparison and admission remain pending. External state uses established RAM addresses."
+    ]
+  },
+  "decoded_cases": 649,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Independent initialization oracle, final global memory, helper ordering and saved ABI; modeled UART/queue/power helpers. Aliases, helper mutations and nested execution pending."
+  ]
+}

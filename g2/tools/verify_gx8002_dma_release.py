@@ -6,10 +6,11 @@ from verify_gx8002_memcpy_source import decode
 from verify_gx8002_dma_deallocate import verify as deallocate_verify,execute as deallocate,expected
 from verify_gx8002_logging import check_paths
 
-def execute(code,entry,channel,hook):
+def execute(code,entry,channel,hook,deallocate_address=None):
     if code[entry]!=('push','r15',2) or code[entry+6]!=('pop','r15',2):raise ValueError('Release frame instructions')
     op,args,size=code[entry+2]
-    if op!='bsr' or size!=4 or int(args,0) not in (0xd024,0x10203a98):raise ValueError('Release target')
+    targets=(0xd024,0x10203a98) if deallocate_address is None else (deallocate_address,)
+    if op!='bsr' or size!=4 or int(args,0) not in targets:raise ValueError('Release target')
     return hook(channel)
 
 def verify(prefix=None,sdk=None,output=None):

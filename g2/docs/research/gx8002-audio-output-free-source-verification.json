@@ -1,0 +1,67 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_aout_free",
+      "section_name": ".text.aout_free",
+      "compiled_bytes": 56,
+      "compiled_sha256": "a40da936de017627ae790ac0ed71a90f38c1f3d850d69edf57ff427eb3b9c42b",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_free",
+          "package_offset": 59500,
+          "bytes": 56,
+          "sha256": "85eb7de0708176b2160db93c50a1fc09789c294b19ef718c12ce931ea34d2269",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_free",
+          "section_name": ".text.aout_free",
+          "compiled_bytes": 56,
+          "compiled_sha256": "a40da936de017627ae790ac0ed71a90f38c1f3d850d69edf57ff427eb3b9c42b",
+          "package_offset": 59500,
+          "stock_envelope_bytes": 56,
+          "stock_sha256": "85eb7de0708176b2160db93c50a1fc09789c294b19ef718c12ce931ea34d2269",
+          "fits": true
+        }
+      ],
+      "source_sha256": "eec147706ac0254720aa2c7c7fa6c23166dd0ff2704605c511a59deb7ba7d3e0",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_out/gx_audio_out_v2.h",
+        "blob": "9c505e302116fcaa07d32e3f8ce9b03d0d6bbe2b"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "symbol_evidence_only",
+        "stock_divergence": "Stock omits upstream reset call; decoded qualification required"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 1536,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Valid RAM handle only. Memset modeled, with caller clobbers and optional active-byte mutation. Null handle writes before late guard in stock; no safe-null claim."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_output_free.py": "e09efc770edc2335f22e8ca6b8388391b0bf05697a01e92148fb115fbdd8548c",
+    "verify_gx8002_audio_output_free.py": "3128371935ce058c1272e7f28f0d524c844dcf5e255d8ed897a1c3c253b11105",
+    "verify_gx8002_audio_output_free_source.py": "fdc8c2c134ab0c07a68d59154983e9fbe32417c0cc43dcec5d0eabb75365afa9",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Experimental function-level source admission; physical register semantics, caller composition and whole firmware source-only closure remain unqualified."
+  ]
+}

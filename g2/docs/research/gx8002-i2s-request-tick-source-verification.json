@@ -1,0 +1,161 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_i2s_request_tick",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 156,
+      "compiled_sha256": "62a221fe6d8dcc9144190fd9ae4afaadf063192646ea5402d3f58af4c1e546c7",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_i2s_request_tick",
+          "package_offset": 75592,
+          "bytes": 156,
+          "sha256": "62a221fe6d8dcc9144190fd9ae4afaadf063192646ea5402d3f58af4c1e546c7",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_i2s_request_tick_request",
+      "section_name": ".rodata.request",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 48,
+      "compiled_sha256": "e448736a7ead3580470b3a27e2e1b0fdbd74f362e4698281501e47b8a149b6e8",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_i2s_request_tick_request",
+          "package_offset": 84784,
+          "bytes": 48,
+          "sha256": "e448736a7ead3580470b3a27e2e1b0fdbd74f362e4698281501e47b8a149b6e8",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_i2s_request_tick_lock",
+      "section_name": ".rodata.lock",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 39,
+      "compiled_sha256": "54cbd7d6ed3ec54402896bfa8af759ad22b2230d89a5b598d628d2f7261a5f29",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_i2s_request_tick_lock",
+          "package_offset": 84832,
+          "bytes": 39,
+          "sha256": "54cbd7d6ed3ec54402896bfa8af759ad22b2230d89a5b598d628d2f7261a5f29",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_i2s_request_tick_unlock",
+      "section_name": ".rodata.unlock",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 41,
+      "compiled_sha256": "8844390e2fa1d07ecd6cf77c36cbd8b4d6b20eb4b1ce787f9163cc7eb4dc5a51",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_i2s_request_tick_unlock",
+          "package_offset": 84871,
+          "bytes": 41,
+          "sha256": "8844390e2fa1d07ecd6cf77c36cbd8b4d6b20eb4b1ce787f9163cc7eb4dc5a51",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_i2s_request_tick_timeout",
+      "section_name": ".rodata.timeout",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 37,
+      "compiled_sha256": "d2855833e63d7408425111c2665a744bfd7f516ed3f0dc2fcdf0c273bd16d186",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_i2s_request_tick_timeout",
+          "package_offset": 84912,
+          "bytes": 37,
+          "sha256": "d2855833e63d7408425111c2665a744bfd7f516ed3f0dc2fcdf0c273bd16d186",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "source_sha256": "d5ea7f64c37e7531d078cec8446f4f29da27c29820d22374f2b0bb194df22db7",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "compiled_bytes": 156,
+      "compiled_sha256": "62a221fe6d8dcc9144190fd9ae4afaadf063192646ea5402d3f58af4c1e546c7",
+      "stock_envelope_bytes": 156,
+      "stock_sha256": "62a221fe6d8dcc9144190fd9ae4afaadf063192646ea5402d3f58af4c1e546c7",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Request tick candidate only; behavior, ownership and ABI require qualification."
+      ]
+    },
+    "cases": 384,
+    "source_admitted": false,
+    "limits": [
+      "Independent baseline with modeled helpers and integer ABI; helper mutations and nested device behavior remain unqualified."
+    ]
+  },
+  "mutation_evidence": {
+    "candidate": {
+      "source_sha256": "d5ea7f64c37e7531d078cec8446f4f29da27c29820d22374f2b0bb194df22db7",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "compiled_bytes": 156,
+      "compiled_sha256": "62a221fe6d8dcc9144190fd9ae4afaadf063192646ea5402d3f58af4c1e546c7",
+      "stock_envelope_bytes": 156,
+      "stock_sha256": "62a221fe6d8dcc9144190fd9ae4afaadf063192646ea5402d3f58af4c1e546c7",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Request tick candidate only; behavior, ownership and ABI require qualification."
+      ]
+    },
+    "cases": 660,
+    "source_admitted": false,
+    "limits": [
+      "Differential helper mutations; nested hardware behavior remains unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_i2s_request_tick_source.py": "b4449c4c578243b0caf0256c89763ef52934c8a63877cb553496c1665743ec1f",
+    "verify_gx8002_i2s_request_tick.py": "fb691d83d4bbf2d0bed26863c48a66a6591c6d469f23b21bc4a6c93308d215a5",
+    "execute_gx8002_i2s_request_tick.py": "4d5ed969d7e7e5b7a3db419b07a8410fe23413d974804ecc7efe9f5288faada6",
+    "verify_gx8002_i2s_request_tick_mutations.py": "eaf67106a09fa44b0144397dbf8b06843cad42b832a35a81a80a9e144b790ac7",
+    "build_gx8002_i2s_request_tick.py": "dcf790100950703b530439bf82d7caab15924f495039268ef2fd1b2cbad694bb",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "384 independent baseline cases and 660 differential mutation cases; helper failures modeled, nested hardware behavior unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

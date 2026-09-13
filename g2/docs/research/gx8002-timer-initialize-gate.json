@@ -1,0 +1,485 @@
+{
+  "evidence": {
+    "evidence": {
+      "evidence": {
+        "evidence": {
+          "candidate": {
+            "dependency_headers": {
+              "arch/soc/grus/include/base_addr.h": {
+                "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+              },
+              "include/driver/gx_clock/gx_clock_v2.h": {
+                "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+              }
+            },
+            "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+            "oracle": {
+              "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+              "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+              "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+              "role": "board_call_site_reference_only; implementation recovered from stock"
+            },
+            "bindings": {
+              "open_cfw_gx8002_clock_frequency": 268587536,
+              "gx_clock_set_module_enable": 268587136,
+              "memset": 270571980,
+              "gx_request_irq": 268588348,
+              "open_cfw_gx8002_timer_dispatch": 268589252,
+              "open_cfw_gx8002_timer_channel_initialize": 268588984,
+              "open_cfw_timer_slots": 537030020
+            },
+            "flags": [
+              "-Os",
+              "-mcpu=ck804ef",
+              "-mhard-float",
+              "-ffreestanding",
+              "-fno-builtin",
+              "-ffunction-sections",
+              "-fdata-sections",
+              "-Wall",
+              "-Wextra",
+              "-Werror",
+              "-fno-shrink-wrap"
+            ],
+            "header": {
+              "path": "include/driver/gx_clock/gx_clock_v2.h",
+              "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+              "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+            },
+            "source_sha256": "f52bb7b38ac7988d3e98355d7fa74f8dabd93a6a5a5bfd21605436cdf1d76b80",
+            "symbol": "open_cfw_gx8002_timer_initialize",
+            "section_name": ".text",
+            "package_offset": 96252,
+            "compiled_bytes": 116,
+            "compiled_sha256": "a5e944a68afc2978922d4a29ad8161c2e4ae542aeef889c327082225fe02bc99",
+            "stock_envelope_bytes": 116,
+            "stock_sha256": "a5e944a68afc2978922d4a29ad8161c2e4ae542aeef889c327082225fe02bc99",
+            "fits": true,
+            "source_admitted": false,
+            "limits": [
+              "Byte-exact native build only. Decoded frequency-call, ordered timer MMIO, ABI and caller integration qualification remain pending. No hardware timer qualification."
+            ]
+          },
+          "decoded_cases": 4104,
+          "source_admitted": false,
+          "limits": [
+            "Decoded outer timer ordered MMIO, helper arguments and callee-saved ABI checked. All helper effects modeled; slot state clearing, dependency composition and hardware remain pending."
+          ]
+        },
+        "channel_dependency": {
+          "placement": {
+            "placement": {
+              "evidence": {
+                "candidate": {
+                  "dependency_headers": {
+                    "arch/soc/grus/include/base_addr.h": {
+                      "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                      "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+                    },
+                    "include/driver/gx_clock/gx_clock_v2.h": {
+                      "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                      "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+                    }
+                  },
+                  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+                  "oracle": {
+                    "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+                    "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+                    "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+                    "role": "board_call_site_reference_only; implementation recovered from stock"
+                  },
+                  "bindings": {
+                    "open_cfw_gx8002_clock_frequency": 268587536
+                  },
+                  "flags": [
+                    "-Os",
+                    "-mcpu=ck804ef",
+                    "-mhard-float",
+                    "-ffreestanding",
+                    "-fno-builtin",
+                    "-ffunction-sections",
+                    "-fdata-sections",
+                    "-Wall",
+                    "-Wextra",
+                    "-Werror",
+                    "-fno-shrink-wrap"
+                  ],
+                  "header": {
+                    "path": "include/driver/gx_clock/gx_clock_v2.h",
+                    "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                    "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+                  },
+                  "source_sha256": "463853ee3cff85dfb3c207c9a0384f2300db7efc00e032fac2f1bc316581a36d",
+                  "symbol": "open_cfw_gx8002_timer_channel_initialize",
+                  "section_name": ".text",
+                  "package_offset": 96204,
+                  "compiled_bytes": 46,
+                  "compiled_sha256": "8f97a081b88f838d68648440f82cbafbd76818ff90b92f4dfcefd2970aebe447",
+                  "stock_envelope_bytes": 46,
+                  "stock_sha256": "8f97a081b88f838d68648440f82cbafbd76818ff90b92f4dfcefd2970aebe447",
+                  "fits": true,
+                  "source_admitted": false,
+                  "limits": [
+                    "Byte-exact native build only. Decoded frequency-call, ordered timer MMIO, ABI and caller integration qualification remain pending. No hardware timer qualification."
+                  ]
+                },
+                "decoded_cases": 4104,
+                "source_admitted": false,
+                "limits": [
+                  "Decoded frequency-call argument, ordered MMIO and callee-saved ABI checked. Frequency provider modeled; integration and physical timer behavior remain pending."
+                ]
+              },
+              "frequency_elf_sha256": "1eb77815eb2b5ee5e44ec784acb3727c2a47525c3cbf3c8d29582713e0c5b77e",
+              "frequency_report_sha256": "b78631d565cc602252b47e093c146ad050b7b4c9dc31c3dd0d88e7ef4725c510",
+              "composed_cases": 6,
+              "source_admitted": false,
+              "limits": [
+                "Actual decoded frequency provider and lookup with placement-table records; low-frequency source choices only. Clock registers modeled. Other frequency selections and outer timer initialization remain separate qualifications. No physical timer qualification."
+              ]
+            },
+            "divider_elf_sha256": "6b168f6b8d66fe4c9361b7a256179575e7e603ed8fd449d98535b082e12065d7",
+            "decoded_cases": 5,
+            "ordered_mmio_compared": true,
+            "source_admitted": false,
+            "limits": [
+              "Decoded timer through frequency/lookup/divider with actual table records. 24.576 MHz selection and varied registers; PLL integration and physical hardware remain pending."
+            ]
+          },
+          "divider_elf_sha256": "6b168f6b8d66fe4c9361b7a256179575e7e603ed8fd449d98535b082e12065d7",
+          "decoded_cases": 20,
+          "ordered_mmio_compared": true,
+          "source_admitted": false,
+          "limits": [
+            "Decoded timer through frequency/lookup/divider with actual table records. PLL selection, varied registers and invalid PLL returns qualified; outer initializer and physical hardware remain pending."
+          ]
+        },
+        "composed_cases": 56,
+        "source_admitted": false,
+        "limits": [
+          "Decoded outer/channel call composition preserves ordered effects and independently varied frequency results between calls. Slot clear, interrupt registration and gate remain modeled; hardware and shared-state helper composition pending."
+        ]
+      },
+      "owners": {
+        "memset": {
+          "elf_sha256": "d34cf3fd9b1989c0b952c415e7e2244f65745bbdb4deac612b24ab8803446144",
+          "report_sha256": "561c1a49fdb47716a6bd344a4504314327634384c7b3b1e2814845116d3d1d89"
+        },
+        "timer-dispatch": {
+          "elf_sha256": "8b1c1acb85a3520226334ce415297da833ebb9138982283b879d3954673a7457",
+          "report_sha256": "7e99ca3b6cd260dca537a7e9abd4d2a6e7bc6969f45f712ec342b8cbc7e75749"
+        }
+      },
+      "composed_cases": 20,
+      "slot_address": 537030020,
+      "slot_bytes": 360,
+      "source_admitted": false,
+      "limits": [
+        "Actual decoded memset stores applied to shared modeled memory before IRQ registration, with adjacent guard bytes preserved. Slot allocation authenticated from source-dispatch NOBITS section. Gate/IRQ effects and hardware remain separate qualification."
+      ]
+    },
+    "irq_elf_sha256": "9b40b9e9b08ce7d8fe05b7f39e4ae9e198b4aebed92e1761f84fb85a23cab96c",
+    "irq_report_sha256": "ebb87ab4c620a52b01f213705775844d7b9e34623ac90ecae0c695e4d689e0f3",
+    "composed_cases": 14,
+    "source_admitted": false,
+    "limits": [
+      "Decoded registration publishes timer handler/private pair and decoded enable writes IRQ14 mask. Separate helper frames; gate and hardware interrupt delivery remain unqualified."
+    ]
+  },
+  "context": {
+    "elf_sha256": "38b29242c4f1b670ab35270a099ea464ff05753c5913b90d044e787153213c7b",
+    "section_sha256": {
+      ".text.__module_get_info": "002a00eee4ab7761a5a8fce8b26c97c18509b72615dc8d558ac107189ecc6b8f",
+      ".data.gx_clock_param_table": "64a888d435653e525749e8de221f6b171d5c0f4e7d7270f146cfa42521856296",
+      ".data.gx_clock_dto_table": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+      ".data.gx_clock_div_table": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872"
+    },
+    "modules": [
+      {
+        "module": 0,
+        "table_index": 0,
+        "address": 537028320,
+        "gate_high_offset": 0,
+        "gate_all_offset": 1,
+        "clock_offset": 1,
+        "divider": 537028740,
+        "dto": 0
+      },
+      {
+        "module": 1,
+        "table_index": 1,
+        "address": 537028336,
+        "gate_high_offset": 2,
+        "gate_all_offset": 3,
+        "clock_offset": 3,
+        "divider": 537028744,
+        "dto": 0
+      },
+      {
+        "module": 2,
+        "table_index": 2,
+        "address": 537028352,
+        "gate_high_offset": 4,
+        "gate_all_offset": 5,
+        "clock_offset": 6,
+        "divider": 537028748,
+        "dto": 537028736
+      },
+      {
+        "module": 3,
+        "table_index": 3,
+        "address": 537028368,
+        "gate_high_offset": 7,
+        "gate_all_offset": 8,
+        "clock_offset": 9,
+        "divider": 537028752,
+        "dto": 0
+      },
+      {
+        "module": 4,
+        "table_index": 4,
+        "address": 537028384,
+        "gate_high_offset": 9,
+        "gate_all_offset": 10,
+        "clock_offset": 10,
+        "divider": 537028756,
+        "dto": 0
+      },
+      {
+        "module": 5,
+        "table_index": 5,
+        "address": 537028400,
+        "gate_high_offset": 11,
+        "gate_all_offset": 12,
+        "clock_offset": 11,
+        "divider": 537028760,
+        "dto": 0
+      },
+      {
+        "module": 6,
+        "table_index": 6,
+        "address": 537028416,
+        "gate_high_offset": 13,
+        "gate_all_offset": 14,
+        "clock_offset": 12,
+        "divider": 537028764,
+        "dto": 0
+      },
+      {
+        "module": 7,
+        "table_index": 7,
+        "address": 537028432,
+        "gate_high_offset": 4,
+        "gate_all_offset": 6,
+        "clock_offset": 19,
+        "divider": 537028768,
+        "dto": 0
+      },
+      {
+        "module": 8,
+        "table_index": 8,
+        "address": 537028448,
+        "gate_high_offset": 4,
+        "gate_all_offset": 19,
+        "clock_offset": 20,
+        "divider": 537028772,
+        "dto": 0
+      },
+      {
+        "module": 9,
+        "table_index": 9,
+        "address": 537028464,
+        "gate_high_offset": 20,
+        "gate_all_offset": 21,
+        "clock_offset": 24,
+        "divider": 537028776,
+        "dto": 0
+      },
+      {
+        "module": 10,
+        "table_index": 10,
+        "address": 537028480,
+        "gate_high_offset": 4,
+        "gate_all_offset": 12,
+        "clock_offset": 0,
+        "divider": 537028780,
+        "dto": 0
+      },
+      {
+        "module": 16,
+        "table_index": 11,
+        "address": 537028496,
+        "gate_high_offset": 5,
+        "gate_all_offset": 5,
+        "clock_offset": 1,
+        "divider": 0,
+        "dto": 537028737
+      },
+      {
+        "module": 17,
+        "table_index": 12,
+        "address": 537028512,
+        "gate_high_offset": 5,
+        "gate_all_offset": 24,
+        "clock_offset": -1,
+        "divider": 0,
+        "dto": 0
+      },
+      {
+        "module": 18,
+        "table_index": 13,
+        "address": 537028528,
+        "gate_high_offset": 5,
+        "gate_all_offset": 25,
+        "clock_offset": -1,
+        "divider": 0,
+        "dto": 0
+      },
+      {
+        "module": 11,
+        "table_index": 14,
+        "address": 537028544,
+        "gate_high_offset": 6,
+        "gate_all_offset": 26,
+        "clock_offset": 2,
+        "divider": 0,
+        "dto": 537028738
+      },
+      {
+        "module": 19,
+        "table_index": 15,
+        "address": 537028560,
+        "gate_high_offset": 7,
+        "gate_all_offset": 7,
+        "clock_offset": 3,
+        "divider": 537028784,
+        "dto": 0
+      },
+      {
+        "module": 20,
+        "table_index": 16,
+        "address": 537028576,
+        "gate_high_offset": 7,
+        "gate_all_offset": 28,
+        "clock_offset": -1,
+        "divider": 0,
+        "dto": 0
+      },
+      {
+        "module": 21,
+        "table_index": 17,
+        "address": 537028592,
+        "gate_high_offset": 7,
+        "gate_all_offset": 29,
+        "clock_offset": -1,
+        "divider": 0,
+        "dto": 0
+      },
+      {
+        "module": 12,
+        "table_index": 18,
+        "address": 537028608,
+        "gate_high_offset": 8,
+        "gate_all_offset": 8,
+        "clock_offset": 4,
+        "divider": 537028788,
+        "dto": 0
+      },
+      {
+        "module": 13,
+        "table_index": 19,
+        "address": 537028624,
+        "gate_high_offset": 9,
+        "gate_all_offset": 9,
+        "clock_offset": 5,
+        "divider": 537028792,
+        "dto": 0
+      },
+      {
+        "module": 14,
+        "table_index": 20,
+        "address": 537028640,
+        "gate_high_offset": 10,
+        "gate_all_offset": 10,
+        "clock_offset": 6,
+        "divider": 537028796,
+        "dto": 0
+      },
+      {
+        "module": 15,
+        "table_index": 21,
+        "address": 537028656,
+        "gate_high_offset": 11,
+        "gate_all_offset": 11,
+        "clock_offset": 7,
+        "divider": 537028800,
+        "dto": 0
+      },
+      {
+        "module": 22,
+        "table_index": 22,
+        "address": 537028672,
+        "gate_high_offset": 27,
+        "gate_all_offset": 27,
+        "clock_offset": 11,
+        "divider": 537028804,
+        "dto": 0
+      },
+      {
+        "module": 23,
+        "table_index": 23,
+        "address": 537028688,
+        "gate_high_offset": 27,
+        "gate_all_offset": 22,
+        "clock_offset": -1,
+        "divider": 0,
+        "dto": 0
+      },
+      {
+        "module": 24,
+        "table_index": 24,
+        "address": 537028704,
+        "gate_high_offset": 27,
+        "gate_all_offset": 23,
+        "clock_offset": -1,
+        "divider": 0,
+        "dto": 0
+      },
+      {
+        "module": 25,
+        "table_index": 25,
+        "address": 537028720,
+        "gate_high_offset": -1,
+        "gate_all_offset": 14,
+        "clock_offset": -1,
+        "divider": 0,
+        "dto": 0
+      }
+    ],
+    "combined_gate_index_pairs": {
+      "16": [
+        21,
+        12
+      ],
+      "19": [
+        14,
+        15
+      ],
+      "22": [
+        23,
+        24
+      ]
+    },
+    "limits": [
+      "Immutable source table context and lookup code authentication; successful module switching still needs decoded qualification."
+    ]
+  },
+  "gate_elf_sha256": "3ab4242e9aa5b76d4598a5f50c89a2d32ab5f962e39a97d1c8a05cda25745b4a",
+  "gate_report_sha256": "74ba7cb1a8b325832c5abcae691270d02368bf3f54af98de4433b6e8e66afc06",
+  "composed_cases": 16,
+  "source_admitted": false,
+  "limits": [
+    "Decoded module-23 gate programming composed at actual outer call; authenticated descriptors and independent ordered gate-write oracle. Gate lookup/private frame abstracted as in admitted gate qualification. Separate dependency frames and scripted register inputs; shared hardware-state/lifecycle qualification pending."
+  ]
+}

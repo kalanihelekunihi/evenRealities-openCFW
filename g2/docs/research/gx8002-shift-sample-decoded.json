@@ -1,0 +1,49 @@
+{
+  "build": {
+    "direct_calls": [
+      {
+        "pc": 268497128,
+        "target": 268497212
+      },
+      {
+        "pc": 268497140,
+        "target": 268497212
+      },
+      {
+        "pc": 268497160,
+        "target": 268497212
+      },
+      {
+        "pc": 268497172,
+        "target": 268497212
+      },
+      {
+        "pc": 268497200,
+        "target": 268497212
+      }
+    ],
+    "entry": 268497088,
+    "linked_section_address": 268497088,
+    "extra_flags": [
+      "-fno-tree-loop-optimize"
+    ],
+    "source_sha256": "317c0a576fdf88582a6630ae64e85c902b51b6f863f20aa669110d366ea1696a",
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "compiled_bytes": 224,
+    "stock_bytes": 116,
+    "fits": false,
+    "elf_sha256": "954f26ff119ef4ab6427155f130e59947c7894317dba609ac3d04e0d01bfd4d8",
+    "source_admitted": false,
+    "limits": [
+      "Standalone candidate. Store trace, decoded behavior and placement qualification pending."
+    ]
+  },
+  "helper_entry": 268497212,
+  "decoded_sample_cases": 263223,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Actual compiled scalar helper only; full buffer loop, packed stock instructions and overlapping memory traces not executed here.",
+    "Matches explicit scalar interpretation; extreme positive shifts of zero remain unqualified against hardware/vendor undefined behavior."
+  ]
+}

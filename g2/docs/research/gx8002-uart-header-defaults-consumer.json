@@ -1,0 +1,29 @@
+{
+  "candidate": {
+    "source_sha256": "eeb6e5445743054618087e9e3a0eebf00cecf5769a370441bccbb92195df0f15",
+    "elf_sha256": "1d0615329fa59313bf75499f7c9d74ecb7b3214700c56a340d5599b9c76dc11c",
+    "upstream": {
+      "commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "path": "lvp/common/uart_message_v2.c",
+      "blob": "b5ae5ebac76df3bb7e60b0209ef71234114a15db",
+      "sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be"
+    },
+    "package_offset": 101512,
+    "runtime_address": 537029748,
+    "bytes": 8,
+    "compiled_sha256": "267833806a8e9c01c5355ae70125042abfa3e90ca6708f00e944a4e6e5addd9f",
+    "counter_address": 537029748,
+    "source_admitted": false,
+    "limits": [
+      "Named per-port parser counters match the pinned upstream initializer and original storage exactly.",
+      "Consumer execution, storage ownership and startup qualification remain pending. No opaque array or binary extraction used to define source."
+    ]
+  },
+  "consumer_elf_sha256": "d30c5f4a5b6277d067a3872177bd3e3b943a4576301cdb0b6a6359dc53bed752",
+  "decoded_cases": 720,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Compiled per-port counter defaults feed whole-entry stock/source comparison and independent oracle. Nonselected port counter remains four. Checks final nonstack memory and helper boundaries. UART/CRC/body/queue modeled. Independent semantic oracle also checked; helper mutations and nested helper execution remain pending; not source admission."
+  ]
+}

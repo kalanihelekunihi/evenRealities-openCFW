@@ -1,0 +1,26 @@
+{
+  "baseline_report_sha256": "ebcb5d268b81fc2dadaafaec705fa038acea957c945df7f83f9b19ca6d45cb4c",
+  "baseline_firmware_sha256": "9757cc3bba9b0e8e35addedfc7b7bcb0412b1b327f86dfa51eea661f6be414f4",
+  "baseline_reproduced_exactly": true,
+  "firmware_sha256": "326ce5bbd89075c1d5ebaf1d873ad194d5e5242b75689082fea769368d29c59c",
+  "firmware_size": 326092,
+  "source_only": false,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "superseded_symbols": [
+    "open_cfw_gx8002_backup_rfft",
+    "open_cfw_gx8002_backup_cfft"
+  ],
+  "byte_ownership": {
+    "compiled_c": 46046,
+    "compiled_assembly": 2982,
+    "generated_source_data": 15261,
+    "generated_container_metadata": 88,
+    "generated_unreachable_fill": 3014,
+    "retained_stock": 258701
+  },
+  "limits": [
+    "Separate unadmitted composition experiment, not the reviewed firmware build. Existing source bytes reused from authenticated completed macOS build, not rebuilt here.",
+    "FWPK/UART/image-A checksums and container structure validated by production composer. Execution permissions, external reference closure and hardware qualification remain pending."
+  ]
+}

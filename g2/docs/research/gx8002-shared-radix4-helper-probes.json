@@ -1,0 +1,71 @@
+{
+  "original_source_sha256": "a5c332a992f0ec7aae1436b2c9395bd82a612db309eff7d9f1d8e4e6a980f4a3",
+  "probes": [
+    {
+      "noinline": [],
+      "code_bytes": 1240,
+      "source_sha256": "a5c332a992f0ec7aae1436b2c9395bd82a612db309eff7d9f1d8e4e6a980f4a3"
+    },
+    {
+      "noinline": [
+        "cross"
+      ],
+      "code_bytes": 1276,
+      "source_sha256": "2d43ed8f829f3d53c429cc525b74545d5023d38838dbe8e4f1a698ecd9738024"
+    },
+    {
+      "noinline": [
+        "add",
+        "sub"
+      ],
+      "code_bytes": 1324,
+      "source_sha256": "4fb2169fd75305b99f98c76cbc595df924c3965fbcdd668af2f336ef1a2d0d36"
+    },
+    {
+      "noinline": [
+        "half_add",
+        "half_sub"
+      ],
+      "code_bytes": 1250,
+      "source_sha256": "405c4f006b2b61fdac86f84735d9537039c6a608856e015c707c0d811b880655"
+    },
+    {
+      "noinline": [
+        "sat16"
+      ],
+      "code_bytes": 1316,
+      "source_sha256": "291efc13e374bfea56cf7abd4c734617f60fa07f125a719e5530dbf2d60087ac"
+    },
+    {
+      "noinline": [
+        "cross",
+        "add",
+        "sub"
+      ],
+      "code_bytes": 1306,
+      "source_sha256": "a160b239af2e3bae574986dbceb3bddc63376fd1def7955562e6e0ec4e3856ed"
+    },
+    {
+      "noinline": [
+        "load",
+        "store"
+      ],
+      "code_bytes": 1400,
+      "source_sha256": "dfb967b7c63dfddbf26f33869904edbd1f7650412cb21682475e72090f92ebc2"
+    },
+    {
+      "noinline": [
+        "add",
+        "sub",
+        "half_add",
+        "half_sub",
+        "cross"
+      ],
+      "code_bytes": 1276,
+      "source_sha256": "702b8b718727fb46996e9cbc1daec4a93b47673552aa6ea6d1d964c3bd9c6733"
+    }
+  ],
+  "limits": [
+    "Object sizes only. Changes are probe copies, not qualified source replacements."
+  ]
+}

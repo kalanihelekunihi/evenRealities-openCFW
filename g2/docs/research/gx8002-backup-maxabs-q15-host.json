@@ -1,0 +1,31 @@
+{
+  "build": {
+    "extra_flags": [
+      "-fno-tree-loop-optimize"
+    ],
+    "source_sha256": "4f6cf4d45cd223d0bdca906710e7a8b776ad076df2b12c36a5f0cfc7d9aaea08",
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "compiled_bytes": 44,
+    "stock_bytes": 76,
+    "fits": true,
+    "elf_sha256": "f4d9c62d81a30b4cf3c6739cebcce47c5aef1708e203d2939886d32915874f59",
+    "source_admitted": false,
+    "limits": [
+      "Standalone candidate. Store trace, decoded behavior and placement qualification pending."
+    ]
+  },
+  "native_cases": 66308,
+  "exhaustive_single_sample_values": 65536,
+  "upstream_semantics": {
+    "file": "op_dspv2.c",
+    "url": "https://raw.githubusercontent.com/XUANTIE-RV/qemu/3287d345c7f5d60d5c8774d90752f5f710744f85/target/csky/op_dspv2.c",
+    "git_blob": "492b35866da0294c4220fd0ba5c2a9fb1ba6d4b7",
+    "sha256": "80f70d8458b7e9afd92a104058d7e80ee50f2f0a2f292bf533fa4cbebfd91813"
+  },
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "All Q15 single values plus bounded random reductions with aliased output and zero-count null input.",
+    "Scalar halfword access widths differ from stock grouped loads; normal sample-memory behavior tested, not MMIO. Decoded target equivalence and placement/reference qualification pending."
+  ]
+}

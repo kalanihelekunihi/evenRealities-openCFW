@@ -1,0 +1,34 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "header": {
+      "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+      "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+    },
+    "oracle": {
+      "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+      "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+      "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+      "section": ".text.gx_audio_in_set_fftvad_enable",
+      "relocations": [],
+      "role": "symbol_evidence_only"
+    },
+    "bindings": {},
+    "source_sha256": "ad0b445dd815006d798c172eb8f95f24ee103804911ec0197eb8555892914231",
+    "symbol": "open_cfw_gx8002_audio_fftvad_enable",
+    "compiled_bytes": 104,
+    "compiled_sha256": "be541eb016a5241349522c3f5130182a275a252457130d2e55b1d3cd8408867a",
+    "package_offset": 56060,
+    "stock_envelope_bytes": 132,
+    "stock_sha256": "091eea545d39894555c7de31309ec45a64587470826adab0617c41f1d6dc2680",
+    "fits": true,
+    "source_admitted": false,
+    "hardware_qualified": false
+  },
+  "decoded_cases": 720,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Frame decrement and seven-bit narrowing, raw enable versus boolean bypass, distinct interrupt clears and ordered register updates checked. Physical FFTVAD operation unqualified."
+  ]
+}

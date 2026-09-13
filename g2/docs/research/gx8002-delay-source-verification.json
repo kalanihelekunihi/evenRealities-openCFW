@@ -1,0 +1,125 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_delay_us",
+      "section_name": ".text",
+      "ownership_kind": "compiled_assembly",
+      "compiled_bytes": 60,
+      "compiled_sha256": "282cc7ecaa9e6fa5f1521db9441160998810c7728769ee81fc1996ed4b3072e3",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_delay_us",
+          "package_offset": 96600,
+          "bytes": 72,
+          "sha256": "4680608b9b3ba839c6c8e0a4d2a0248c5810ad68c113e56147cd2d9a16d38ad7",
+          "region": "image_a_sram"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_delay_ms",
+      "section_name": ".milliseconds",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 14,
+      "compiled_sha256": "24b73f9735ceadfc730f4d07e078dfb0e188f1aa0aeddc201799fc05171c4507",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_delay_ms",
+          "package_offset": 96672,
+          "bytes": 16,
+          "sha256": "87fd076207045344e0bac4633cfb52dd7a14e631d3739b66a5bb7f41ee3d3109",
+          "region": "image_a_sram"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "boundaries": {
+      "candidate": {
+        "dependency_headers": {
+          "arch/soc/grus/include/base_addr.h": {
+            "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+            "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+          },
+          "include/driver/gx_clock/gx_clock_v2.h": {
+            "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+            "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+          }
+        },
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "arch/soc/grus/spl/spl_counter.c",
+          "blob": "d9f534e98fe7c0944fafe1340f6ec507b5200c6c",
+          "sha256": "26921da15385f1004446347b737e4ba33ef482ab41a28ea88862f4e4c1b6f9f6",
+          "role": "counter_read_order_reference; driver scaling recovered from stock"
+        },
+        "bindings": {
+          "open_cfw_gx8002_clock_time_us": 268589148
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-jump-tables"
+        ],
+        "header": {
+          "path": "include/driver/gx_clock.h",
+          "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+          "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+        },
+        "source_sha256": "f7444baf2b0cb5363b0e348b7206d7da414e9024acf3be5a0feee228d186e99b",
+        "symbol": "open_cfw_gx8002_delay_us",
+        "section_name": ".text",
+        "package_offset": 96600,
+        "compiled_bytes": 60,
+        "compiled_sha256": "282cc7ecaa9e6fa5f1521db9441160998810c7728769ee81fc1996ed4b3072e3",
+        "stock_envelope_bytes": 72,
+        "stock_sha256": "4680608b9b3ba839c6c8e0a4d2a0248c5810ad68c113e56147cd2d9a16d38ad7",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+        ],
+        "milliseconds": {
+          "compiled_bytes": 14,
+          "compiled_sha256": "24b73f9735ceadfc730f4d07e078dfb0e188f1aa0aeddc201799fc05171c4507",
+          "package_offset": 96672,
+          "stock_envelope_bytes": 16,
+          "fits": true
+        }
+      },
+      "cases": 180,
+      "source_admitted": false,
+      "limits": [
+        "Decoded microsecond stock/source, independent deadline/backoff oracle and integer ABI. Time helper modeled; millisecond wrapper and decoded timer integration remain outstanding. Physical delay timing unqualified."
+      ]
+    },
+    "cases": 175,
+    "timer_elf_sha256": "a0c0bc5482214e9b68ce9f5875672eb5ae9849c83101b5a10ebe59a3d9add9b4",
+    "source_admitted": false,
+    "limits": [
+      "Decoded millisecond wrapper ABI/argument checks composed with delay execution and decoded timer using marshalled raw counter words. Backoff instruction counts checked; physical cycle/clock timing remains unqualified."
+    ],
+    "ownership_note": "Conservative accounting: the entire 60-byte microsecond routine is classified compiled_assembly because it contains six bytes of authored inline assembly; the remaining instructions come from C. No retained binary payload."
+  },
+  "evidence_sha256": {
+    "verify_gx8002_delay_source.py": "785e1ea4e4f6ed7dcec4d8b3be7ef155da8e2bf26eebc67c9076ca73796af837",
+    "verify_gx8002_delay_nested.py": "60f70c69607ec18df3b0b90d11247db957c03857ef6dba4ee31003d2081fc1a7",
+    "verify_gx8002_delay.py": "b1604217b1de20cc1179e66a20baa86207d6f54ea4b856e427d954706e1a55e8",
+    "execute_gx8002_delay.py": "e4fdc230812b19af4e900ed463fa980e4b47887119f9451660b782d5859616c8",
+    "build_gx8002_delay_candidate.py": "77adb9fe4b6f5dc10e008775f53024facaeb0d8a479d060294965e472c236e0c"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded millisecond wrapper ABI/argument checks composed with delay execution and decoded timer using marshalled raw counter words. Backoff instruction counts checked; physical cycle/clock timing remains unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

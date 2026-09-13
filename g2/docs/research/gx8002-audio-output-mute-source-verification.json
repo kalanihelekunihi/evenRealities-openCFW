@@ -1,0 +1,171 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_aout_set_mute",
+      "section_name": ".text.aout_set_mute",
+      "compiled_bytes": 42,
+      "compiled_sha256": "3444e42a933f016ff08c6907c6738c3e7b73ce9820976b95c480abfe71d1b98e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_set_mute",
+          "package_offset": 58904,
+          "bytes": 64,
+          "sha256": "406cbfc7af549d725983a043b42eeb3e1e682ed7e02a4ddc935d2f4a964ca7ce",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_aout_get_mute",
+      "section_name": ".text.aout_get_mute",
+      "compiled_bytes": 6,
+      "compiled_sha256": "030e3071b7d18a32ac29fd8056e45560efa647d558e145da3c38f8daf25ca9a9",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_get_mute",
+          "package_offset": 57952,
+          "bytes": 8,
+          "sha256": "a403f618554c41acc4a4fbca396c46df7d52c149e2dade9902f5a5f97c757698",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_set_mute",
+          "section_name": ".text.aout_set_mute",
+          "compiled_bytes": 42,
+          "compiled_sha256": "3444e42a933f016ff08c6907c6738c3e7b73ce9820976b95c480abfe71d1b98e",
+          "package_offset": 58904,
+          "stock_envelope_bytes": 64,
+          "stock_sha256": "406cbfc7af549d725983a043b42eeb3e1e682ed7e02a4ddc935d2f4a964ca7ce",
+          "fits": true
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_get_mute",
+          "section_name": ".text.aout_get_mute",
+          "compiled_bytes": 6,
+          "compiled_sha256": "030e3071b7d18a32ac29fd8056e45560efa647d558e145da3c38f8daf25ca9a9",
+          "package_offset": 57952,
+          "stock_envelope_bytes": 8,
+          "stock_sha256": "a403f618554c41acc4a4fbca396c46df7d52c149e2dade9902f5a5f97c757698",
+          "fits": true
+        }
+      ],
+      "source_sha256": "7f8c561c7f831fbff3bc03e9ea073b276f61785c48945cebe6a08a081b2249df",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 1548,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Boolean mute and unconditional status1 verified with adjacent status bytes preserved. Valid disjoint RAM handles modeled; physical status meaning remains unresolved."
+    ]
+  },
+  "getter_qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_set_mute",
+          "section_name": ".text.aout_set_mute",
+          "compiled_bytes": 42,
+          "compiled_sha256": "3444e42a933f016ff08c6907c6738c3e7b73ce9820976b95c480abfe71d1b98e",
+          "package_offset": 58904,
+          "stock_envelope_bytes": 64,
+          "stock_sha256": "406cbfc7af549d725983a043b42eeb3e1e682ed7e02a4ddc935d2f4a964ca7ce",
+          "fits": true
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_get_mute",
+          "section_name": ".text.aout_get_mute",
+          "compiled_bytes": 6,
+          "compiled_sha256": "030e3071b7d18a32ac29fd8056e45560efa647d558e145da3c38f8daf25ca9a9",
+          "package_offset": 57952,
+          "stock_envelope_bytes": 8,
+          "stock_sha256": "a403f618554c41acc4a4fbca396c46df7d52c149e2dade9902f5a5f97c757698",
+          "fits": true
+        }
+      ],
+      "source_sha256": "7f8c561c7f831fbff3bc03e9ea073b276f61785c48945cebe6a08a081b2249df",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "signed_getter_cases": 65536,
+    "setter_getter_cases": 10,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "All16-bit cached values sign-extended as stock. Setter/getter composition preserves stock unmute/status discrepancy. Physical execution and broader driver state remain unqualified."
+    ]
+  },
+  "dispatch": {
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+    "upstream_path": "drivers_lib/audio_out/v2.0/hw.o",
+    "callbacks": [
+      {
+        "symbol": "aout_set_mute",
+        "slot": 64,
+        "stock_pointer_offset": 101404,
+        "runtime_target": 270553228,
+        "upstream_relocation": {
+          "offset": 116,
+          "symbol": 87,
+          "type": 1,
+          "addend": 0
+        }
+      },
+      {
+        "symbol": "aout_get_mute",
+        "slot": 68,
+        "stock_pointer_offset": 101408,
+        "runtime_target": 270552276,
+        "upstream_relocation": {
+          "offset": 120,
+          "symbol": 39,
+          "type": 1,
+          "addend": 0
+        }
+      }
+    ],
+    "status_semantics": "Getter returns signed halfword at handle+16. Setter writes1 there even when clearing hardware mute bits; preserve this observed discrepancy.",
+    "stock_table_package_offset": 101340,
+    "stock_table_runtime_address": 537029576,
+    "table_address_literal_offset": 60148,
+    "limits": [
+      "Stock callback values agree with authenticated upstream slot layout. Literal occurrence is address evidence, not complete runtime dispatch execution."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_output_mute.py": "32df6fb51df15cb3ee1e0f3c633bab5f60bee338d1e1cfc8defbb0312faf7e0f",
+    "verify_gx8002_audio_output_mute.py": "13de262b5b0346571941ac379733053a5d0f111d54dc31be58554d57e9950309",
+    "verify_gx8002_audio_output_mute_source.py": "62cb225b14d7437d264734bb778f80d2d5791a9b00b6e208f15d9514160714bd",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "analyze_gx8002_audio_output_mute_dispatch.py": "572e82159176009c0a5696a665180b6384585c8afb3f0d720d89a74b0dc1fbbb",
+    "verify_gx8002_audio_output_mute_getter.py": "b73d5f218cca739ba1854dff5caf4500634d2bf7ad681080ce8a7431becfeea4"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Experimental function-level source admission; physical register semantics, caller composition and whole firmware source-only closure remain unqualified."
+  ]
+}

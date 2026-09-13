@@ -1,0 +1,86 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_body_done",
+      "section_name": ".text.done",
+      "compiled_bytes": 36,
+      "compiled_sha256": "66939b98324942fbaff92a0c96e4391f1a4fa29a98399e8383af2e280e6e540d",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_body_done",
+          "package_offset": 70108,
+          "bytes": 36,
+          "sha256": "66939b98324942fbaff92a0c96e4391f1a4fa29a98399e8383af2e280e6e540d",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_uart_body_done",
+          "section_name": ".text.done",
+          "package_offset": 70108,
+          "stock_envelope_bytes": 36,
+          "compiled_bytes": 36,
+          "compiled_sha256": "66939b98324942fbaff92a0c96e4391f1a4fa29a98399e8383af2e280e6e540d",
+          "stock_sha256": "66939b98324942fbaff92a0c96e4391f1a4fa29a98399e8383af2e280e6e540d",
+          "fits": true,
+          "exact_stock": true
+        }
+      ],
+      "source_sha256": "ed346babf315789edb42978d414591a7daba88938f0ed1c2207ca97649366bee",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-inline",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-nationalchip-lvp-kws/lvp/common"
+      ],
+      "upstream": {
+        "path": "lvp/common/uart_message_v2.c",
+        "blob": "b5ae5ebac76df3bb7e60b0209ef71234114a15db",
+        "sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+        "headers": {
+          "uart_message_v2.h": {
+            "blob": "74c1de26a9a8072bb7bba448ccf88b1e4729d5f7",
+            "sha256": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2"
+          },
+          "lvp_queue.h": {
+            "blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+            "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+          }
+        }
+      },
+      "source_admitted": false,
+      "limits": [
+        "Candidate only; decoded initialization and callback qualification pending."
+      ]
+    },
+    "decoded_cases": 12288,
+    "source_admitted": false,
+    "limits": [
+      "All byte ports and four high-bit patterns, ignored private pointer/body results, helper clobbers and saved ABI checked. Body/lookup modeled; high-bit port preservation does not qualify out-of-range body arrays or physical UART callbacks."
+    ]
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "evidence_sha256": {
+    "verify_gx8002_uart_body_done_source.py": "f679331e7e027ef36c9b473c0032d3e33d130f2b77eff5ef6da59571b8f977df",
+    "verify_gx8002_uart_body_done.py": "963a72485cd0601a1c60150e8319de6468250d18d81a6d839c6f8b705c463f63",
+    "build_gx8002_uart_body_done.py": "920b6b661a30b5ca3c1b5e8681351a2ff2a5194ed4c7b0c6ba153a90e31d58d0",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "limits": [
+    "All byte ports and four high-bit patterns, ignored private pointer/body results, helper clobbers and saved ABI checked. Body/lookup modeled; high-bit port preservation does not qualify out-of-range body arrays or physical UART callbacks."
+  ]
+}

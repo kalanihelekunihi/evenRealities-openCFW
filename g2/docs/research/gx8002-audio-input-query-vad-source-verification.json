@@ -1,0 +1,364 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_audio_input_query_vad",
+      "section_name": ".text",
+      "compiled_bytes": 296,
+      "compiled_sha256": "e8615d493934bf09377158170f40a923b8e765fba50eb2f3690dc7f5b855690f",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_audio_input_query_vad",
+          "package_offset": 67984,
+          "bytes": 452,
+          "sha256": "be1ce99460808a8576a4d57ddea9e1b632ed73f02c6dfd74fd726a22ec2d63fa",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_vad_level_4_message",
+      "section_name": ".rodata.level4",
+      "compiled_bytes": 27,
+      "compiled_sha256": "80001f589b97dc76759d957b2b2f97f4fc4ee96639e59fdef7a3a2a4417ae599",
+      "ownership_kind": "generated_source_data",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_vad_level_4_message",
+          "package_offset": 82848,
+          "bytes": 27,
+          "sha256": "80001f589b97dc76759d957b2b2f97f4fc4ee96639e59fdef7a3a2a4417ae599",
+          "region": "image_a_xip_rodata"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_vad_level_3_message",
+      "section_name": ".rodata.level3",
+      "compiled_bytes": 27,
+      "compiled_sha256": "f327478411746c488e7c91fcab8fc90f3d664d73402b2c2993b6008e580af10a",
+      "ownership_kind": "generated_source_data",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_vad_level_3_message",
+          "package_offset": 82875,
+          "bytes": 27,
+          "sha256": "f327478411746c488e7c91fcab8fc90f3d664d73402b2c2993b6008e580af10a",
+          "region": "image_a_xip_rodata"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_vad_level_2_message",
+      "section_name": ".rodata.level2",
+      "compiled_bytes": 27,
+      "compiled_sha256": "b2f4156da28cc8a6a1e2a76a252b54e234a2b486e5cd800cb46cf81288255aaf",
+      "ownership_kind": "generated_source_data",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_vad_level_2_message",
+          "package_offset": 82902,
+          "bytes": 27,
+          "sha256": "b2f4156da28cc8a6a1e2a76a252b54e234a2b486e5cd800cb46cf81288255aaf",
+          "region": "image_a_xip_rodata"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_vad_level_1_message",
+      "section_name": ".rodata.level1",
+      "compiled_bytes": 27,
+      "compiled_sha256": "3232830cfedc99ecaa573d6b4f0daab355462bd7283dd904be4c4034e0674b9f",
+      "ownership_kind": "generated_source_data",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_vad_level_1_message",
+          "package_offset": 82929,
+          "bytes": 27,
+          "sha256": "3232830cfedc99ecaa573d6b4f0daab355462bd7283dd904be4c4034e0674b9f",
+          "region": "image_a_xip_rodata"
+        }
+      ]
+    }
+  ],
+  "complete": {
+    "transitions": {
+      "candidate": {
+        "compiled_bytes": 296,
+        "fits": true,
+        "compiled_sha256": "e8615d493934bf09377158170f40a923b8e765fba50eb2f3690dc7f5b855690f",
+        "stock_sha256": "be1ce99460808a8576a4d57ddea9e1b632ed73f02c6dfd74fd726a22ec2d63fa",
+        "exact_stock": false,
+        "source_sha256": "38af075bc0bd51918bc174b66b09a4c4ec31e60e6a250a485c15e98236d89c05",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "upstream": {
+          "include/lvp_param.h": {
+            "blob": "6e8aa73abb6ddc555fb0183456d88629d912f5b6",
+            "sha256": "56033502b75e9a02f2d0c6959974ba2016166ebdd732786d7295d5c2a100ac95"
+          },
+          "include/driver/gx_audio_in.h": {
+            "blob": "3211212e26d06713dc20eac8c3e108db6a0ea6da",
+            "sha256": "bf3bb33c8b52532c6dc23f871319338f81078cbf96a65eb3b5235cf7ca07645c"
+          },
+          "include/driver/gx_audio_in/gx_audio_in_v2.h": {
+            "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+            "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+          },
+          "include/driver/gx_padmux.h": {
+            "blob": "4d7aaa315665a24dc55d77c0bf7b3c285d7358b8",
+            "sha256": "ed2dfbb290aa634bca68dc536583ac7a24994fb9b9f73165dc00ba453ea631d2"
+          },
+          "lvp/common/lvp_audio_in.c": {
+            "blob": "43963b1adaad4f7040206c06769ee8a69656848f",
+            "sha256": "cd52150f9f3e45061b358ad2d6401932a37a60857b2432b8a92a45a36624b64f"
+          }
+        },
+        "configuration_sha256": "9811f2aa66324bafe0b823ac15ac80ea0041bea02b181698910ee4ebb4a711ba",
+        "bindings": {
+          "gx_audio_in_get_distance_noise_smooth": 56632,
+          "printf": 65968,
+          "gx_audio_in_set_fftvad_curve_1": 56252,
+          "gx_audio_in_set_fftvad_curve_2": 56304,
+          "gx_audio_in_set_fftvad_curve_3": 56356,
+          "gx_audio_in_set_fftvad_curve_4": 56420,
+          "gx_audio_in_set_fftvad_curve_5": 56472,
+          "gx_audio_in_set_fftvad_chipping": 56504,
+          "gx_audio_in_set_fftvad_w": 56192,
+          "gx_audio_in_get_fftvad_state": 56584
+        },
+        "diagnostics": [
+          {
+            "level": 4,
+            "package_offset": 82848,
+            "bytes": 27,
+            "sha256": "80001f589b97dc76759d957b2b2f97f4fc4ee96639e59fdef7a3a2a4417ae599"
+          },
+          {
+            "level": 3,
+            "package_offset": 82875,
+            "bytes": 27,
+            "sha256": "f327478411746c488e7c91fcab8fc90f3d664d73402b2c2993b6008e580af10a"
+          },
+          {
+            "level": 2,
+            "package_offset": 82902,
+            "bytes": 27,
+            "sha256": "b2f4156da28cc8a6a1e2a76a252b54e234a2b486e5cd800cb46cf81288255aaf"
+          },
+          {
+            "level": 1,
+            "package_offset": 82929,
+            "bytes": 27,
+            "sha256": "3232830cfedc99ecaa573d6b4f0daab355462bd7283dd904be4c4034e0674b9f"
+          }
+        ],
+        "diagnostic_source_sha256": "7178d2221a0e5e4d9a6dfa83773b598986bd69ffd9d7dbddd57dc54ab6bdbe82",
+        "decoded_call_targets": [
+          270550956,
+          270560292,
+          270550576,
+          270550628,
+          270550680,
+          270550744,
+          270550796,
+          270550828,
+          270550516,
+          270550908,
+          270560292,
+          270560292,
+          270560292
+        ],
+        "source_admitted": false
+      },
+      "transition_cases": 168,
+      "source_admitted": false,
+      "limits": [
+        "Prefix through state acquisition only. Independent threshold/call oracle; driver bodies modeled. Final VAD selection and ABI restoration pending."
+      ]
+    },
+    "complete_cases": 576,
+    "mutation_cases": 480,
+    "source_admitted": false,
+    "limits": [
+      "Full level-update/result composition and selected synchronous level mutations pass. Driver bodies modeled; no asynchronous/timing qualification. Source admission pending."
+    ]
+  },
+  "result": {
+    "transitions": {
+      "candidate": {
+        "compiled_bytes": 296,
+        "fits": true,
+        "compiled_sha256": "e8615d493934bf09377158170f40a923b8e765fba50eb2f3690dc7f5b855690f",
+        "stock_sha256": "be1ce99460808a8576a4d57ddea9e1b632ed73f02c6dfd74fd726a22ec2d63fa",
+        "exact_stock": false,
+        "source_sha256": "38af075bc0bd51918bc174b66b09a4c4ec31e60e6a250a485c15e98236d89c05",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "upstream": {
+          "include/lvp_param.h": {
+            "blob": "6e8aa73abb6ddc555fb0183456d88629d912f5b6",
+            "sha256": "56033502b75e9a02f2d0c6959974ba2016166ebdd732786d7295d5c2a100ac95"
+          },
+          "include/driver/gx_audio_in.h": {
+            "blob": "3211212e26d06713dc20eac8c3e108db6a0ea6da",
+            "sha256": "bf3bb33c8b52532c6dc23f871319338f81078cbf96a65eb3b5235cf7ca07645c"
+          },
+          "include/driver/gx_audio_in/gx_audio_in_v2.h": {
+            "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+            "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+          },
+          "include/driver/gx_padmux.h": {
+            "blob": "4d7aaa315665a24dc55d77c0bf7b3c285d7358b8",
+            "sha256": "ed2dfbb290aa634bca68dc536583ac7a24994fb9b9f73165dc00ba453ea631d2"
+          },
+          "lvp/common/lvp_audio_in.c": {
+            "blob": "43963b1adaad4f7040206c06769ee8a69656848f",
+            "sha256": "cd52150f9f3e45061b358ad2d6401932a37a60857b2432b8a92a45a36624b64f"
+          }
+        },
+        "configuration_sha256": "9811f2aa66324bafe0b823ac15ac80ea0041bea02b181698910ee4ebb4a711ba",
+        "bindings": {
+          "gx_audio_in_get_distance_noise_smooth": 56632,
+          "printf": 65968,
+          "gx_audio_in_set_fftvad_curve_1": 56252,
+          "gx_audio_in_set_fftvad_curve_2": 56304,
+          "gx_audio_in_set_fftvad_curve_3": 56356,
+          "gx_audio_in_set_fftvad_curve_4": 56420,
+          "gx_audio_in_set_fftvad_curve_5": 56472,
+          "gx_audio_in_set_fftvad_chipping": 56504,
+          "gx_audio_in_set_fftvad_w": 56192,
+          "gx_audio_in_get_fftvad_state": 56584
+        },
+        "diagnostics": [
+          {
+            "level": 4,
+            "package_offset": 82848,
+            "bytes": 27,
+            "sha256": "80001f589b97dc76759d957b2b2f97f4fc4ee96639e59fdef7a3a2a4417ae599"
+          },
+          {
+            "level": 3,
+            "package_offset": 82875,
+            "bytes": 27,
+            "sha256": "f327478411746c488e7c91fcab8fc90f3d664d73402b2c2993b6008e580af10a"
+          },
+          {
+            "level": 2,
+            "package_offset": 82902,
+            "bytes": 27,
+            "sha256": "b2f4156da28cc8a6a1e2a76a252b54e234a2b486e5cd800cb46cf81288255aaf"
+          },
+          {
+            "level": 1,
+            "package_offset": 82929,
+            "bytes": 27,
+            "sha256": "3232830cfedc99ecaa573d6b4f0daab355462bd7283dd904be4c4034e0674b9f"
+          }
+        ],
+        "diagnostic_source_sha256": "7178d2221a0e5e4d9a6dfa83773b598986bd69ffd9d7dbddd57dc54ab6bdbe82",
+        "decoded_call_targets": [
+          270550956,
+          270560292,
+          270550576,
+          270550628,
+          270550680,
+          270550744,
+          270550796,
+          270550828,
+          270550516,
+          270550908,
+          270560292,
+          270560292,
+          270560292
+        ],
+        "source_admitted": false
+      },
+      "transition_cases": 168,
+      "source_admitted": false,
+      "limits": [
+        "Prefix through state acquisition only. Independent threshold/call oracle; driver bodies modeled. Final VAD selection and ABI restoration pending."
+      ]
+    },
+    "result_cases": 131081,
+    "source_admitted": false,
+    "limits": [
+      "All16-bit state indices and selected-bit values checked through saved ABI restoration. Stable modeled hardware state; changing-level full paths and helper mutation pending."
+    ]
+  },
+  "padding": {
+    "consumer_evidence": {
+      "candidate": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "header": {
+          "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+          "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+        },
+        "oracle": {
+          "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+          "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+          "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+          "section": ".text.gx_audio_in_set_fftvad_w",
+          "relocations": [],
+          "role": "symbol_evidence_only"
+        },
+        "bindings": {},
+        "source_sha256": "c9b5b88a0d392d7ee0ec2a88bd7af40777bd79cb4ab41a52ba8a6fdb0604d7c4",
+        "symbol": "open_cfw_gx8002_audio_fftvad_w",
+        "compiled_bytes": 48,
+        "compiled_sha256": "11ad46d57a4b69bd0a29e9f538bf1276be4f828e857b0dad133728145106f93e",
+        "package_offset": 56192,
+        "stock_envelope_bytes": 60,
+        "stock_sha256": "7ab0bc07a5cfd1e2121f1545f16e79600fe10a4e54dde7ea9288da14e4e71f4c",
+        "fits": true,
+        "source_admitted": false,
+        "hardware_qualified": false
+      },
+      "decoded_cases": 4608,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "All256 values in each byte with other bytes fixed, padding independence, word RMW ordering and stack ABI checked. Physical FFTVAD weighting unqualified."
+      ]
+    },
+    "cases": 1024,
+    "limits": [
+      "Specific decoded stock/source weight setter ignores high ABI byte for query weights1/1/0. Does not prove all possible consumers or query control flow."
+    ]
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "evidence_sha256": {
+    "verify_gx8002_audio_input_query_vad_source.py": "0ba81b28904cfc6bdb764b06a0e2ad96a247f1011916bb36b5fd75c0809aeba8",
+    "verify_gx8002_vad_query_complete.py": "30510c318d2a9b7a053905739d1437d8963de61a7406088b3bcfbe907951d228",
+    "verify_gx8002_vad_query_result.py": "e28096856d2cc8cd5e3865edebf889e9eca59bac71e3bd659ab73f59689f85f0",
+    "verify_gx8002_vad_query_transitions.py": "8669babe2ff99e292e7592b43440783d5c64ff93cb8c0fc7f51c722795afe706",
+    "verify_gx8002_vad_query_weight_padding.py": "5995eca915b00427126f4b895cca77445a3be4c0488ae046d8c24e0857209f86",
+    "build_gx8002_audio_input_query_vad.py": "e6e1af48207f0e1a3c13c39b3374ab82e09d3c3c44bc2896771336dc1d76cf53",
+    "verify_gx8002_audio_fftvad_w.py": "a0c2a3049835c6b6ba2a71b0a962bac57018fd63355439d61ee75d32cd7d836a",
+    "build_gx8002_audio_fftvad_w.py": "00f5993728b1608e1e7fcc26768383c316fa9b3dc5d6325a562e891389238b68",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "limits": [
+    "Fixed firmware state layout. Modeled hardware helpers; selected synchronous mutations checked. Weight ABI padding ignored only after consumer qualification. Physical behavior, asynchronous access and timing remain unqualified."
+  ]
+}

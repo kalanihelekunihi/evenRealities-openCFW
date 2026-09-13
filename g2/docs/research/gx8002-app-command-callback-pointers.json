@@ -1,0 +1,32 @@
+{
+  "candidate": {
+    "source_sha256": "9264e416d8d225ca6b6e715163d877b935a6ae956d7ddcd00db067a13d98bede",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "compiled_bytes": 716,
+    "compiled_sha256": "5ade64867b3632d3bc9053c32215724ea5f8e3455290de7a9bd80d59dc29577b",
+    "stock_envelope_bytes": 716,
+    "stock_sha256": "9da4fc9cbeba5346396290a5eb4d04d0e13a6d0d0042e2480e742d6cd3f17e3c",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Application commands candidate only; behavior, ownership and ABI require qualification."
+    ]
+  },
+  "cases": 24,
+  "cases_reaching_mutation": 16,
+  "source_admitted": false,
+  "limits": [
+    "Differential payload pointer redirects into data, state, packet and response storage; full write/helper traces checked. Nested lifetime behavior remains unqualified."
+  ]
+}

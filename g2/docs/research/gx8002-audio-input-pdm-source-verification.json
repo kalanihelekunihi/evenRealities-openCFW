@@ -1,0 +1,83 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_audio_input_pdm",
+      "compiled_bytes": 76,
+      "compiled_sha256": "639293e3b3bd0f03f55ec726c8df598eef6ce63928e195b6149d637c6c5bef95",
+      "section_name": ".text",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_audio_input_pdm",
+          "package_offset": 54280,
+          "bytes": 76,
+          "sha256": "1dcddec4deaaf125260fd1c34de7796ca84d35bff6f633fb80f8151c50798813",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+        "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+        "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+        "section": ".text.gx_audio_in_set_input_pdm",
+        "relocations": [
+          {
+            "offset": 8,
+            "symbol": 182,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 64,
+            "symbol": 191,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 72,
+            "symbol": 3,
+            "type": 1,
+            "addend": 0
+          }
+        ],
+        "role": "symbol_evidence_only"
+      },
+      "bindings": {
+        "open_cfw_gx8002_platform_gate": 268587136,
+        "open_cfw_gx8002_audio_input_state": 537031472,
+        "gx_mdelay": 268589452
+      },
+      "source_sha256": "4786004964fe0e837b454e5ccb085c69827791c984dee201a963ef6767061de9",
+      "symbol": "open_cfw_gx8002_audio_input_pdm",
+      "compiled_bytes": 76,
+      "compiled_sha256": "639293e3b3bd0f03f55ec726c8df598eef6ce63928e195b6149d637c6c5bef95",
+      "package_offset": 54280,
+      "stock_envelope_bytes": 76,
+      "stock_sha256": "1dcddec4deaaf125260fd1c34de7796ca84d35bff6f633fb80f8151c50798813",
+      "fits": true,
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 9216,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Pinned compiler bitfield layout, ordered MMIO, low-bit polarity, state update and delay argument checked. Clock/delay helpers modeled with clobbers and optional gate mutation. Physical PDM input and delay timing unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_input_pdm.py": "27d6117847f0f452180c3db1980e9b3b2185a33278a925c0e55871cbbfce787f",
+    "verify_gx8002_audio_input_pdm.py": "fb2fa93052f668aebf25321d4c79d27537e7bf8a4a05399ccc28b685acdc90cf",
+    "verify_gx8002_audio_input_pdm_source.py": "9fde70d4fd35f051a60af0de544211b7226280ae785f17bb7a5ef089abefca42",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Reconstructed C bitfield layout checked against stock and independent ordered register masks. Clock and delay helpers modeled with gate mutation and clobbers. Physical PDM input and delay timing unqualified."
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_backup_request_irq",
+      "section_name": ".text",
+      "compiled_bytes": 40,
+      "compiled_sha256": "c9c3e8df31f60559b882799fa825b9d1616828ce605cd9e1eb73a3a454990565",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_backup_request_irq",
+          "package_offset": 250244,
+          "bytes": 40,
+          "sha256": "8c9731a1da07d5cd3d2a07152371963b3b8706ba2afa25b2e6b99ae867fa3c2a",
+          "region": "image_b_sram_text"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "comparison": {
+      "candidate": {
+        "source_sha256": "b105020f459bf86e5ef73b7f9462aefe70d7e56c83a3cf216b4073e8e2a5c4c9",
+        "compiled_bytes": 40,
+        "compiled_sha256": "c9c3e8df31f60559b882799fa825b9d1616828ce605cd9e1eb73a3a454990565",
+        "envelope_bytes": 40,
+        "fits": true,
+        "bindings": {
+          "open_cfw_gx8002_backup_irq_table": 536966056
+        },
+        "source_admitted": false,
+        "limits": [
+          "Candidate only; decoded equivalence and placement pending."
+        ]
+      },
+      "decoded_cases": 324,
+      "source_admitted": false,
+      "limits": [
+        "Ordered stores and guards checked; hardware enable effects and asynchronous dispatch not modeled."
+      ]
+    },
+    "loader": {
+      "candidate_elf_sha256": "8de780b63253ea96d3c1bec9aa546d1a8c5dda4fe8a30fe35326c273c04abbfb",
+      "candidate_image_sha256": "df67b7adcd7aeb03204f69c522ab8bd1747ba80d85fd22dd54c12bf31ef39269",
+      "normal_loader_cases": 12,
+      "source_admitted": false,
+      "limits": [
+        "All 40 replacement bytes come from compiled C; no replacement tail fill.",
+        "External references and hardware remain unqualified."
+      ]
+    },
+    "references": {
+      "image_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "package_interval": [
+        250244,
+        250284
+      ],
+      "external_branches": [
+        {
+          "offset": 249246,
+          "target": 250244,
+          "entry": true
+        },
+        {
+          "offset": 251588,
+          "target": 250244,
+          "entry": true
+        },
+        {
+          "offset": 252298,
+          "target": 250244,
+          "entry": true
+        },
+        {
+          "offset": 255644,
+          "target": 250244,
+          "entry": true
+        },
+        {
+          "offset": 258446,
+          "target": 250244,
+          "entry": true
+        },
+        {
+          "offset": 263942,
+          "target": 250244,
+          "entry": true
+        },
+        {
+          "offset": 266216,
+          "target": 250244,
+          "entry": true
+        },
+        {
+          "offset": 266630,
+          "target": 250244,
+          "entry": true
+        }
+      ],
+      "external_pool_loads": [],
+      "runtime_word_matches": [],
+      "source_admitted": false,
+      "limits": [
+        "Linear decode and word census; computed references and nonstandard entry paths are not proven absent."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "build_gx8002_backup_request_irq.py": "9effac97153634745eb492692c7d7e168ce52a0fa0a1b0b061ffbfd0da78f046",
+    "verify_gx8002_backup_request_irq.py": "649a9c7aacdf73850e7b38903a270e0e3d82f7cc612f7a71f07723a978945493",
+    "verify_gx8002_backup_request_irq_loader.py": "81bbd07232ef9944d2d90211f4755973f4be64ac557d876df946993cfbba7c8f",
+    "analyze_gx8002_backup_request_irq_references.py": "3703f59adc51d7f6c5fb2e0a473c16fde3ac0fcd0d1680885e626ae79446e08a",
+    "verify_gx8002_backup_request_irq_source.py": "d61bbd405a48c53d353bac5759a55fd46f57c15410f59db91f54e5aa36433be9",
+    "verify_gx8002_backup_memset_loader.py": "d1139f142813bf27d701424086d83dfb13c9bbbf1ef968e272368b9c7e65a405",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Unsigned IRQ-range and null-handler guards preserve stock behavior. Handler/context stores precede the write-one interrupt enable.",
+    "Decoded comparison checks ordered stores and ABI; normal loader and observed direct-entry references checked.",
+    "Computed/nonstandard entries and physical asynchronous interrupt effects remain unqualified."
+  ]
+}

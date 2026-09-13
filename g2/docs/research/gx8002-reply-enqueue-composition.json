@@ -1,0 +1,71 @@
+{
+  "binding": {
+    "candidate": {
+      "candidate": {
+        "source_sha256": "86d769e88f33dcfc30dd50143638952b7e5cb82adc0d6e068e8ee0d78d996cae",
+        "elf_sha256": "91005a165e196ed23f4b7b4864f644a3497e533b0bd9cff2bd3b2ce9ceef4389",
+        "upstream": {
+          "commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+          "path": "lvp/common/uart_message_v2.h",
+          "blob": "74c1de26a9a8072bb7bba448ccf88b1e4729d5f7",
+          "sha256": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2"
+        },
+        "package_offset": 101744,
+        "runtime_address": 537029980,
+        "bytes": 32,
+        "compiled_sha256": "8b01930ac4be34abf334d84980b37a69d63aad53b436527da6fa3d014c428fbe",
+        "counter_address": 537029980,
+        "source_admitted": false,
+        "limits": [
+          "SDK MSG_PACK field layout and named slave magic reproduce the initialized reply packet.",
+          "Existing helpers use a smaller local struct app_reply; reconcile their declarations and field meanings before source admission. Startup and consumers remain pending. No opaque array or binary extraction used to define source."
+        ]
+      },
+      "type_contract_sha256": "cae004d90203d9afdab301c23d09d644f13f2e75a45644d9d365b55aad7342a7",
+      "helpers": [
+        {
+          "name": "app_reply",
+          "original_source_sha256": "511bfc8570a21f6bad1cd57ae8f543d598d3be16a096a038bc1cbf440d378d72",
+          "staged_source_sha256": "40d62e2e984dfbc0d1642a741c59e60f17d2fe3cbee0d063d3e6f6d730cafb23",
+          "compiled_bytes": 60,
+          "envelope_bytes": 60,
+          "fits": true,
+          "compiled_sha256": "0d566dc2cda2ac1d2ddde5f73cd847e2764788c74932f6cc056a248f555d38d3"
+        },
+        {
+          "name": "i2s_ack",
+          "original_source_sha256": "6b9cd9a38c50c7cda2b5854744fabe111c5653e242cab75664f1dbaa11f0d805",
+          "staged_source_sha256": "5dd3653070e0699a9b8232f5e44f7b4f5337081091187e5c6155f9d2e6995b07",
+          "compiled_bytes": 36,
+          "envelope_bytes": 44,
+          "fits": true,
+          "compiled_sha256": "76394e3874fcc19f55910b77b6405400516ef6ce7c1a493efd2737b2a33379a0"
+        }
+      ],
+      "source_admitted": false,
+      "limits": [
+        "SDK field rewrite probe only. Removing prior member volatile qualifiers may change access order, and packed bitfield writes may change widths. Requires decoded memory/order/ABI qualification before promotion. Registered inputs unchanged."
+      ]
+    },
+    "enqueue_owner_elf_sha256": "37129103e2166d3e6dea7627456a530f6164483a2b61b7d950e34099669d394f",
+    "enqueue_symbol": {
+      "name": "UartMessageAsyncSend",
+      "value": 270566332,
+      "size": 156,
+      "type": 2,
+      "section": 1
+    },
+    "type_contract_sha256": "1c6a8468b1d99f68fbff41e9f71b687da91e02168c8b49dc295ffe9623d67a6f",
+    "source_admitted": false,
+    "limits": [
+      "Both staged helper aliases resolve to authenticated source-owned UartMessageAsyncSend, and their function pointer types match its SDK declaration. This verifies address/type binding, not nested runtime enqueue execution."
+    ]
+  },
+  "cases": 16,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Staged reply and authenticated registered enqueue execute in separate frames with explicit memory handoff on compiled packet defaults. Independent oracle checks final memory, queue publication snapshots and helper boundaries across full/failed/uninitialized cases.",
+    "UART context lookup, queue leaves, CRC, cache and send trigger remain modeled. Physical transmission and concurrency unqualified."
+  ]
+}

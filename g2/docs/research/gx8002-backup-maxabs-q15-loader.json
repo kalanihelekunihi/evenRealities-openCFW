@@ -1,0 +1,35 @@
+{
+  "build": {
+    "extra_flags": [
+      "-fno-tree-loop-optimize"
+    ],
+    "source_sha256": "4f6cf4d45cd223d0bdca906710e7a8b776ad076df2b12c36a5f0cfc7d9aaea08",
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "compiled_bytes": 44,
+    "stock_bytes": 76,
+    "fits": true,
+    "elf_sha256": "f4d9c62d81a30b4cf3c6739cebcce47c5aef1708e203d2939886d32915874f59",
+    "source_admitted": false,
+    "limits": [
+      "Standalone candidate. Store trace, decoded behavior and placement qualification pending."
+    ]
+  },
+  "patches": [
+    {
+      "section": ".text",
+      "address": 268497204,
+      "offset": 293492,
+      "bytes": 44,
+      "sha256": "e227c268c271418280bb8d9485a04cfe8176d39a505dc6a93e50893aea20c58b"
+    }
+  ],
+  "replacement_bytes": 44,
+  "loader_cases": 12,
+  "candidate_image_sha256": "b4a2ecbdeeb0b99e6e554e60ecfd160550220e1115520997a424c7ea25a4c92c",
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Combined normal backup-loader placement, with no replacement fill and unrelated bytes unchanged.",
+    "Entry retained; unused old tail left unchanged. No whole-application or hardware qualification."
+  ]
+}

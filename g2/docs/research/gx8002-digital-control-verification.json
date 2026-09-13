@@ -1,0 +1,58 @@
+{
+  "candidate": {
+    "dependency_headers": {
+      "arch/soc/grus/include/base_addr.h": {
+        "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+        "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+      },
+      "include/driver/gx_clock/gx_clock_v2.h": {
+        "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+        "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+      }
+    },
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "oracle": {
+      "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+      "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+      "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+      "role": "board_call_site_reference_only; implementation recovered from stock"
+    },
+    "bindings": {},
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "header": {
+      "path": "include/driver/gx_analog/gx_ldo.h",
+      "blob": "272fedd48f83cb6f767bb2e7af5eeaa287e37db1",
+      "sha256": "8d70862fa7d3c1d0d2022254fb21f800f95abe7a23f849938b373a433e0c3700"
+    },
+    "source_sha256": "c7e818a6534149b54167708ebefdb61a7be401164fd59e1809d262fc82416bad",
+    "symbol": "open_cfw_gx8002_digital_control",
+    "section_name": ".text",
+    "package_offset": 91940,
+    "compiled_bytes": 24,
+    "compiled_sha256": "eedd6fbd0914b27764696ab651020facb90b6587e1f209f8cce3aca49fb4a1eb",
+    "stock_envelope_bytes": 32,
+    "stock_sha256": "fa5155928dd3e4e3faf0858b9e8764d926784818c15c0ae53a53e7bfd8925d0c",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+    ]
+  },
+  "cases": 4355,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded leaf and independent four-state truth table; private read-only MMIO input. System caller integration pending."
+  ]
+}

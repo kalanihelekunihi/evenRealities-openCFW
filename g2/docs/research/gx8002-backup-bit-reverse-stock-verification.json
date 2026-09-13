@@ -1,0 +1,46 @@
+{
+  "build": {
+    "source_sha256": "09c2b9ba44e32338eb2e0d16d3b37a08500dd67ac3a9abdf90fb7d1bff7938c0",
+    "extra_flags": [],
+    "compiled_bytes": 46,
+    "envelope_bytes": 38,
+    "fits": false,
+    "source_admitted": false,
+    "limits": [
+      "Candidate for positive descriptor counts; decoded comparison and hardware bloop zero/wrap semantics remain pending. Not admitted or integrated."
+    ]
+  },
+  "vendor_evidence": {
+    "repository": "https://github.com/XUANTIE-RV/qemu",
+    "commit": "3287d345c7f5d60d5c8774d90752f5f710744f85",
+    "files": [
+      {
+        "file": "op_dspv2.c",
+        "url": "https://raw.githubusercontent.com/XUANTIE-RV/qemu/3287d345c7f5d60d5c8774d90752f5f710744f85/target/csky/op_dspv2.c",
+        "git_blob": "492b35866da0294c4220fd0ba5c2a9fb1ba6d4b7",
+        "sha256": "80f70d8458b7e9afd92a104058d7e80ee50f2f0a2f292bf533fa4cbebfd91813"
+      },
+      {
+        "file": "translate_v2.c",
+        "url": "https://raw.githubusercontent.com/XUANTIE-RV/qemu/3287d345c7f5d60d5c8774d90752f5f710744f85/target/csky/translate_v2.c",
+        "git_blob": "c479a81ecbf08bf172cbc318a053f319d627b802",
+        "sha256": "d56e8f41f25c225e3a6d7446a26062cacee2a4f9fe6a2df8661cf066c9e373a5"
+      },
+      {
+        "file": "op_helper_v2.c",
+        "url": "https://raw.githubusercontent.com/XUANTIE-RV/qemu/3287d345c7f5d60d5c8774d90752f5f710744f85/target/csky/op_helper_v2.c",
+        "git_blob": "8db6f1e8b083eb52aa1168c2d2d632830a415732",
+        "sha256": "99f73284fcb90bdae0dd0ed88885a6fcac0425e74adb384577a2f207bfb951e3"
+      }
+    ],
+    "purpose": "Instruction-semantics evidence only; vendor emulator code is not linked into firmware."
+  },
+  "cases": 1032,
+  "bounded_nontermination_prefixes": 8,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded stock/C ordered memory trace and ABI comparison, counts 1..256; count 0 and UINT_MAX compare only 128-pair prefixes, not full wrap execution.",
+    "Vendor emulator decrement/branch semantics are reference evidence, not hardware qualification. C candidate still exceeds original leaf envelope."
+  ]
+}

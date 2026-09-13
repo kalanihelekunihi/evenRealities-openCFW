@@ -1,0 +1,61 @@
+{
+  "dependency_headers": {
+    "arch/soc/grus/include/base_addr.h": {
+      "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+      "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+    },
+    "include/driver/gx_clock/gx_clock_v2.h": {
+      "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+      "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+    }
+  },
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "oracle": {
+    "path": "arch/soc/grus/spl/spl_clk.c",
+    "blob": "f2db60d51d5ea2609089819979aabd46179a4e1b",
+    "sha256": "072162e23d50bb25dbee1f404dea364ac72af76819624e97fa1d94d2be046f10",
+    "role": "behavioral_reference_with_driver_differences"
+  },
+  "bindings": {
+    "open_cfw_gx8002_clock_pll": 268585732,
+    "open_cfw_gx8002_clock_time_us": 268589148
+  },
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-jump-tables"
+  ],
+  "header": {
+    "path": "include/driver/gx_clock.h",
+    "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+    "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+  },
+  "source_sha256": "8fda5e193cb9512121c835c4b6ffd0402442b320480b30e32942b7da082d0323",
+  "symbol": "open_cfw_gx8002_clock_pll_wait_timeout",
+  "section_name": ".text",
+  "package_offset": 94240,
+  "compiled_bytes": 80,
+  "compiled_sha256": "dac14d15e0d921ef26a0e7ad9c2f2ae056b7d5ea23a91ca478cdb44a12fed451",
+  "stock_envelope_bytes": 84,
+  "stock_sha256": "3bc51dd2c1eaf26b8df4cb871985fa93861188c7b31610d9d4f5c18ee39f283a",
+  "fits": true,
+  "source_admitted": false,
+  "limits": [
+    "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+  ],
+  "wait": {
+    "package_offset": 94324,
+    "compiled_bytes": 32,
+    "compiled_sha256": "97bb958ff65b4c4cba0b22b2251168e566e2d8cceef58952a33075ba7593dc6b",
+    "stock_envelope_bytes": 32,
+    "fits": true
+  }
+}

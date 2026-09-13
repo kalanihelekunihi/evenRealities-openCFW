@@ -1,0 +1,160 @@
+{
+  "source_build_report_sha256": "ebcb5d268b81fc2dadaafaec705fa038acea957c945df7f83f9b19ca6d45cb4c",
+  "source_firmware_sha256": "9757cc3bba9b0e8e35addedfc7b7bcb0412b1b327f86dfa51eea661f6be414f4",
+  "backup_text_range": [
+    244032,
+    323164
+  ],
+  "reviewed_fill": [
+    {
+      "offset": 255136,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_1"
+    },
+    {
+      "offset": 255188,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_2"
+    },
+    {
+      "offset": 255304,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_4"
+    }
+  ],
+  "reviewed_fill_total_bytes": 18,
+  "largest_reviewed_fill_bytes": 6,
+  "retained_spans_after_compiled_functions": [
+    {
+      "preceding_source_symbol": "__module_get_info",
+      "offset": 245440,
+      "retained_span_bytes": 1640,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_platform_gate",
+      "offset": 247334,
+      "retained_span_bytes": 10,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_clock_frequency",
+      "offset": 247812,
+      "retained_span_bytes": 24,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_platform_read",
+      "offset": 248024,
+      "retained_span_bytes": 32,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_backup_status",
+      "offset": 248122,
+      "retained_span_bytes": 2,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_backup_preserve_memory",
+      "offset": 248156,
+      "retained_span_bytes": 24,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_uart_receive_complete",
+      "offset": 248246,
+      "retained_span_bytes": 1998,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_irq_save",
+      "offset": 250294,
+      "retained_span_bytes": 2,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_irq_restore",
+      "offset": 250302,
+      "retained_span_bytes": 2,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_backup_dma_descriptors",
+      "offset": 250584,
+      "retained_span_bytes": 60,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_backup_dma_configure",
+      "offset": 250988,
+      "retained_span_bytes": 64,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_dma_callback",
+      "offset": 251400,
+      "retained_span_bytes": 4,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_dma_initialize",
+      "offset": 251596,
+      "retained_span_bytes": 8,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "gx_dcache_enable",
+      "offset": 251636,
+      "retained_span_bytes": 1040,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_dma_bus_address",
+      "offset": 252696,
+      "retained_span_bytes": 1716,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "gx_audio_in_set_i2sout_mode",
+      "offset": 254460,
+      "retained_span_bytes": 632,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "gx_audio_in_set_fftvad_curve_5",
+      "offset": 255344,
+      "retained_span_bytes": 9240,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "gx_analog_set_adc_rstn",
+      "offset": 264756,
+      "retained_span_bytes": 28272,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_backup_rfft",
+      "offset": 293138,
+      "retained_span_bytes": 514,
+      "reclaimable": false
+    },
+    {
+      "preceding_source_symbol": "open_cfw_gx8002_backup_cfft",
+      "offset": 293802,
+      "retained_span_bytes": 14066,
+      "reclaimable": false
+    }
+  ],
+  "fft_lto_component_bytes": 4698,
+  "fft_original_component_bytes": 4330,
+  "minimum_shortfall_after_all_fill": 350,
+  "limits": [
+    "Reviewed unreachable fill is a candidate for separate relocation analysis, not automatically approved storage.",
+    "Retained spans are not free: they can combine old function tails, other functions and shared data. Their lengths are not available-space estimates.",
+    "No code moved, no retained bytes overwritten. Aggregate fill ignores alignment, branches and fragmentation."
+  ]
+}

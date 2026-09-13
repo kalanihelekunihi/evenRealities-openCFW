@@ -1,0 +1,110 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_flash_read_api",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 28,
+      "compiled_sha256": "955a0e554781ce6020c62542ca3b7224c1d19d8873b85679d225ef306dd945df",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_read_api",
+          "package_offset": 92108,
+          "bytes": 28,
+          "sha256": "85ae492bd3b93c8f068d5d89b83ede1fffc397b42ed89db9b193fccfe039e90d",
+          "region": "image_a_sram"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "evidence": {
+      "evidence": {
+        "candidate": {
+          "dependency_headers": {
+            "arch/soc/grus/include/base_addr.h": {
+              "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+              "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+            },
+            "include/driver/gx_clock/gx_clock_v2.h": {
+              "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+              "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+            }
+          },
+          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+          "oracle": {
+            "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+            "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+            "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+            "role": "board_call_site_reference_only; implementation recovered from stock"
+          },
+          "bindings": {},
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror"
+          ],
+          "header": {
+            "path": "include/driver/gx_flash.h",
+            "blob": "71221ef72395e8b61642dd87291804aced433f58",
+            "sha256": "d4d9d828e4363041c14ba7e3a676eec7b51c0b6427576f401516e4b6991c3d2d"
+          },
+          "source_sha256": "971dd11791135765e33981ced27aa89207b9b69a627c8c503351198a3e123f0e",
+          "symbol": "open_cfw_gx8002_flash_read_api",
+          "section_name": ".text",
+          "package_offset": 92108,
+          "compiled_bytes": 28,
+          "compiled_sha256": "955a0e554781ce6020c62542ca3b7224c1d19d8873b85679d225ef306dd945df",
+          "stock_envelope_bytes": 28,
+          "stock_sha256": "85ae492bd3b93c8f068d5d89b83ede1fffc397b42ed89db9b193fccfe039e90d",
+          "fits": true,
+          "source_admitted": false,
+          "limits": [
+            "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+          ]
+        },
+        "cases": 144,
+        "source_admitted": false,
+        "limits": [
+          "Decoded callback forwarding/return and ABI checked; buffer IO and callback implementation modeled. Caller/dependency integration pending."
+        ]
+      },
+      "decoded_read_callbacks": 16,
+      "source_table_target": 268580892,
+      "source_admitted": false,
+      "limits": [
+        "Source-generated callback slot authenticated; actual decoded read chunking drives wrapper return.",
+        "Lower-level wait/read_words callback and buffer transfer effects remain modeled as in admitted read qualification."
+      ]
+    },
+    "loader_cases": 36,
+    "decoded_api_calls": 72,
+    "source_admitted": false,
+    "limits": [
+      "Decoded loader arguments/status branches flow through decoded read API; lower callback statuses scripted to exercise error propagation. Buffer transfer semantics remain unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_flash_read_api_candidate.py": "2796cd0ab9f5b075b6619b595ad56510c141cad19b50ffd121f623485679dc57",
+    "compare_gx8002_flash_read.py": "862f9c522480cd45b4061b461f599084447de949afa0486ae29f39b292afe531",
+    "execute_gx8002_clock_source_select.py": "269bdbc02145bf7a8a6b00f5dff68d0dcf3f057c94a88efddbc313b60ee65313",
+    "execute_gx8002_kws_read_api.py": "f140cd62bdc84f5bbf91ae093e8614af3e790b04901b016e85a781683c60cf19",
+    "verify_gx8002_flash_read_api.py": "1e496368c11fef70d5ee70c6d752c99a32573bc4b4736bfe44c0b5b82b7cb895",
+    "verify_gx8002_flash_read_api_callback.py": "37da845f6993822a5ec69caefeced437fe3c4b30364b13eb7213c31d52b91029",
+    "verify_gx8002_flash_read_api_loader.py": "97cd4df2c4368112a519b313e14f8e4082ca92ec83fe4f8f0da7b50c19872fd8",
+    "verify_gx8002_flash_read_api_source.py": "5cfee07fc1611963eab8d4ccd1a4c0c80922680298a3bc7971ed558a0549c292"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded loader arguments/status branches flow through decoded read API; lower callback statuses scripted to exercise error propagation. Buffer transfer semantics remain unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

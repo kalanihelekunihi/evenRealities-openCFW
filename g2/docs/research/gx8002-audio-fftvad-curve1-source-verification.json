@@ -1,0 +1,64 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_audio_fftvad_curve1",
+      "compiled_bytes": 44,
+      "compiled_sha256": "73bed5a013ae44583012446358638fc071cb32ea8dab73b55eba203777f92050",
+      "section_name": ".text",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_audio_fftvad_curve1",
+          "package_offset": 56252,
+          "bytes": 52,
+          "sha256": "ad9a7b7686ee537464e39e9e27c9576c7e9600c1b06e265e90e48c7156ca8cd5",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+        "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+        "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+        "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+        "section": ".text.gx_audio_in_set_fftvad_curve_1",
+        "relocations": [],
+        "role": "symbol_evidence_only"
+      },
+      "bindings": {},
+      "source_sha256": "ec21c63e4aaae454e2a1eed45423aa6dff75de986d5411cf864e4ad6be47b2ca",
+      "symbol": "open_cfw_gx8002_audio_fftvad_curve1",
+      "compiled_bytes": 44,
+      "compiled_sha256": "73bed5a013ae44583012446358638fc071cb32ea8dab73b55eba203777f92050",
+      "package_offset": 56252,
+      "stock_envelope_bytes": 52,
+      "stock_sha256": "ad9a7b7686ee537464e39e9e27c9576c7e9600c1b06e265e90e48c7156ca8cd5",
+      "fits": true,
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 108,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Unsigned-short argument boundaries and rejection before MMIO checked. Valid calls perform two separate word RMWs. Physical curve response unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_fftvad_curve1.py": "ce2e177fdacd1adb3e3aa32b8f4ca9e5a137c513202afca4f9a82b316280aa82",
+    "verify_gx8002_audio_fftvad_curve1.py": "41f9ab24704ca9c442f97f5d4f345731ad477379202284bd70dd606feed07451",
+    "verify_gx8002_audio_fftvad_curve1_source.py": "3f065729d96253c5a82321513de333863e7c323a34b74863ea41a53713a7edeb",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Unsigned-short argument boundaries and rejection before MMIO checked. Valid calls perform two separate word RMWs. Physical curve response unqualified."
+  ]
+}

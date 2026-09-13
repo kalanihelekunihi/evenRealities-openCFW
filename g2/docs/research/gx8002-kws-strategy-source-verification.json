@@ -1,0 +1,130 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_kws_strategy",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 324,
+      "compiled_sha256": "9d101ea4d96a83de0b104c9ab89ed941092d92ef1e311eeef98d04028026169b",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_kws_strategy",
+          "package_offset": 73628,
+          "bytes": 328,
+          "sha256": "6f9e96155253b39ac1a21ee7beabac315a3f1635fb5fd9242c0b2193021571f1",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_kws_strategy_row",
+      "section_name": ".rodata.row",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 33,
+      "compiled_sha256": "31ed30c9c6bc444cefe3d81447cee0c259677a74eb58f587a62d68c74b4a7ea7",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_kws_strategy_row",
+          "package_offset": 84234,
+          "bytes": 33,
+          "sha256": "31ed30c9c6bc444cefe3d81447cee0c259677a74eb58f587a62d68c74b4a7ea7",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_kws_strategy_selected",
+      "section_name": ".rodata.selected",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 46,
+      "compiled_sha256": "81d97beb8cd277cb1dc5417e2b839427e50ef6c0dd0be13e2a8ecd8ca9172a46",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_kws_strategy_selected",
+          "package_offset": 84267,
+          "bytes": 46,
+          "sha256": "81d97beb8cd277cb1dc5417e2b839427e50ef6c0dd0be13e2a8ecd8ca9172a46",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "source_sha256": "50712dcb417974f9af39f05a44f8984a1c2c2f470486204056fc58a4eb81664c",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "compiled_bytes": 324,
+      "compiled_sha256": "9d101ea4d96a83de0b104c9ab89ed941092d92ef1e311eeef98d04028026169b",
+      "stock_envelope_bytes": 328,
+      "stock_sha256": "6f9e96155253b39ac1a21ee7beabac315a3f1635fb5fd9242c0b2193021571f1",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Constant-return parameter helper folded into source reference after authenticating exact leaf instructions. Selection behavior and ABI still need qualification."
+      ]
+    },
+    "decoded_cases": 693,
+    "source_admitted": false,
+    "limits": [
+      "Two-record oracle includes NaN/infinity/large finite results under pinned CK804 conversion semantics. Default rounding and modeled printf; mutations, exception flags/traps, invalid state and hardware remain unqualified."
+    ]
+  },
+  "mutation_evidence": {
+    "candidate": {
+      "source_sha256": "50712dcb417974f9af39f05a44f8984a1c2c2f470486204056fc58a4eb81664c",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "compiled_bytes": 324,
+      "compiled_sha256": "9d101ea4d96a83de0b104c9ab89ed941092d92ef1e311eeef98d04028026169b",
+      "stock_envelope_bytes": 328,
+      "stock_sha256": "6f9e96155253b39ac1a21ee7beabac315a3f1635fb5fd9242c0b2193021571f1",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Constant-return parameter helper folded into source reference after authenticating exact leaf instructions. Selection behavior and ABI still need qualification."
+      ]
+    },
+    "decoded_cases": 63,
+    "source_admitted": false,
+    "limits": [
+      "Differential logging-boundary mutations of count, pointer, scores, thresholds and context index. No independent mutation oracle or hardware qualification."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_kws_strategy_mutations.py": "77dab16f5befbdded5fefa778f7bc18ab1a925f76d28cc5f7f43fabdfec82bba",
+    "verify_gx8002_kws_strategy_source.py": "273d8979347145ba6c564834d6e5b5420177921cadd0100cf0090aa20566e3b7",
+    "verify_gx8002_kws_strategy.py": "c87d306e3a7a523066b078b9694953d5429c09ae86288dca6c3b27668ab5f444",
+    "execute_gx8002_kws_strategy.py": "7f36f8caa8f24e5fd6a9ad85b9b73dcc31ef9478152c46dc271e0ef450a023d4",
+    "build_gx8002_kws_strategy_candidate.py": "2b7e1a2040759d21ffec74b7e0ce8681bda5d868db55df36acf9be3bcfd96f30",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Two-record oracle includes NaN/infinity/large finite results under pinned CK804 conversion semantics. Default rounding and modeled printf; mutations, exception flags/traps, invalid state and hardware remain unqualified.",
+    "Differential logging-boundary mutations of count, pointer, scores, thresholds and context index. No independent mutation oracle or hardware qualification.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

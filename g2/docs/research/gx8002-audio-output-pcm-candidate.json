@@ -1,0 +1,48 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "header": {
+    "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+    "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+  },
+  "oracle": {
+    "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+    "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+    "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+    "section": ".text.gx_audio_in_set_output_pcm",
+    "relocations": [
+      {
+        "offset": 28,
+        "symbol": 15,
+        "type": 19,
+        "addend": 0
+      },
+      {
+        "offset": 140,
+        "symbol": 15,
+        "type": 19,
+        "addend": 0
+      },
+      {
+        "offset": 212,
+        "symbol": 3,
+        "type": 1,
+        "addend": 0
+      }
+    ],
+    "role": "symbol_evidence_only"
+  },
+  "bindings": {
+    "open_cfw_gx8002_pcm_channel_setting": 270548424,
+    "open_cfw_gx8002_audio_output_state": 537031476
+  },
+  "source_sha256": "dd073ca0d1b5474bde97d809cf0093c26f76cf24eba651b86a6a75800e700016",
+  "symbol": "open_cfw_gx8002_audio_output_pcm",
+  "compiled_bytes": 180,
+  "compiled_sha256": "2ea3cd74decbf8b1ed2488153408b72468550635ed8d28bdf2de2e623fdeba7b",
+  "package_offset": 54580,
+  "stock_envelope_bytes": 216,
+  "stock_sha256": "230a5c2cf80ea549352f31bbd1ff9f1bc9fb424eb8c4a70bbc2c39e797353875",
+  "fits": true,
+  "source_admitted": false,
+  "hardware_qualified": false
+}

@@ -1,0 +1,136 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_audio_out_config_buffer",
+      "section_name": ".text.audio_out_config_buffer",
+      "compiled_bytes": 52,
+      "compiled_sha256": "88c36a3b6a1625f5375c2ce67e0206417296f8f163ccdfb4c8855ac4ed647635",
+      "ownership_kind": "compiled_c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_audio_out_config_buffer",
+          "package_offset": 59760,
+          "bytes": 52,
+          "sha256": "b73a597fd4ce21f6be10ebee019c90017d2b18f1814cda02f4a5e5860d92a147",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_aout_buffer_label",
+      "section_name": ".rodata.aout_buffer_label",
+      "compiled_bytes": 27,
+      "compiled_sha256": "95a20648aad03870fa995f8cd747dd4d436e00ff9da5ddb5c36494279f98534f",
+      "ownership_kind": "generated_source_data",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_buffer_label",
+          "package_offset": 81901,
+          "bytes": 27,
+          "sha256": "95a20648aad03870fa995f8cd747dd4d436e00ff9da5ddb5c36494279f98534f",
+          "region": "image_a_xip_rodata"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_audio_out_config_buffer",
+          "section_name": ".text.audio_out_config_buffer",
+          "compiled_bytes": 52,
+          "compiled_sha256": "88c36a3b6a1625f5375c2ce67e0206417296f8f163ccdfb4c8855ac4ed647635",
+          "package_offset": 59760,
+          "stock_envelope_bytes": 52,
+          "stock_sha256": "b73a597fd4ce21f6be10ebee019c90017d2b18f1814cda02f4a5e5860d92a147",
+          "ownership_kind": "compiled_c",
+          "fits": true
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_buffer_label",
+          "section_name": ".rodata.aout_buffer_label",
+          "compiled_bytes": 27,
+          "compiled_sha256": "95a20648aad03870fa995f8cd747dd4d436e00ff9da5ddb5c36494279f98534f",
+          "package_offset": 81901,
+          "stock_envelope_bytes": 27,
+          "stock_sha256": "95a20648aad03870fa995f8cd747dd4d436e00ff9da5ddb5c36494279f98534f",
+          "ownership_kind": "generated_source_data",
+          "fits": true
+        }
+      ],
+      "source_sha256": "d65d94da98744a028e88d3fa46fa9f8cccba0e8b1263b31d51878da5dd7da5cb",
+      "identity": {
+        "section": ".text.gx_audio_out_config_buffer",
+        "bytes": 52,
+        "matches": [
+          {
+            "package_offset": 59760,
+            "runtime_address": 270554084,
+            "stock_sha256": "b73a597fd4ce21f6be10ebee019c90017d2b18f1814cda02f4a5e5860d92a147",
+            "relocations": [
+              {
+                "relative_offset": 16,
+                "type": 19,
+                "upstream_target": "printf_",
+                "addend": 0
+              },
+              {
+                "relative_offset": 40,
+                "type": 1,
+                "upstream_target": ".bss",
+                "addend": 0,
+                "stock_pointer": 537031500
+              },
+              {
+                "relative_offset": 44,
+                "type": 1,
+                "upstream_target": ".rodata",
+                "addend": 46,
+                "stock_pointer": 270576225,
+                "stock_string": "gx_audio_out_config_buffer"
+              },
+              {
+                "relative_offset": 48,
+                "type": 1,
+                "upstream_target": ".rodata.str1.1",
+                "addend": 0,
+                "stock_pointer": 270576634,
+                "stock_string": "[AOUT ERROR] %s %d\n"
+              }
+            ]
+          }
+        ]
+      },
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "drivers_lib/audio_out/audio_out.o",
+        "blob": "8f564e229b6a598b266efb6425e8d4b93a5ba6c8",
+        "sha256": "9aa4cf36b549a7be99b4084ac71abf44ced3348a8628b994c8a83f7383f03e2d"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Global dispatch slot uses original RAM address; BSS initialization and callback composition not qualified. Reuses admitted source error format; label generated from source."
+      ]
+    },
+    "decoded_cases": 576,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Raw32-bit handle and config-pointer forwarding; callback and printf modeled with caller clobbers. Fixed valid dispatch pointers, original global slot. Underlying allocation effects and BSS lifecycle not qualified by this wrapper test."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_output_public_buffer.py": "b218a9fa7da8dc0506a4a34287488b9cfee67e1fe544fffc075dc7d6180edc29",
+    "verify_gx8002_audio_output_public_buffer.py": "cbb42c47bd94003ecf6aa5d3ed5daf231117a548fc2b06078ade08f33f88c06e",
+    "verify_gx8002_audio_output_public_buffer_source.py": "535b2b9e37209cf412e5009ec3340e4e385daf70be21f0ccf5181f26da249783",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "analyze_gx8002_audio_output_public.py": "4239f1e2e65df7b5c99a034065fbccbd105f20a5005cee94a08f8c577fcf5596"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Public buffer and diagnostics source admission. Callback bodies, global BSS lifecycle, concurrent mutation outside tested boundary and whole-firmware closure remain unqualified."
+  ]
+}

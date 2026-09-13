@@ -1,0 +1,45 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream": {
+    "lvp/lvp_mode.h": {
+      "blob": "e551d09fc861f1964411a84b7d0a818b3bef84c6",
+      "sha256": "6e7d5f178ecc4af50ee325d55fccc1dadc69eef762dab52580da355705107818"
+    },
+    "lvp/lvp_mode.c": {
+      "blob": "d0983ca6d87bc5d0bd59a4010912dc9d1f85c7d3",
+      "sha256": "2c3089da885141e7088e0aeb600879e3577c08cf288d8cfe488962ff8d3cce2f"
+    },
+    "lvp/lvp_mode_tws.c": {
+      "blob": "4bd9d2962adac54871e6c6eb905174a0ee649300",
+      "sha256": "18e45319c213c185f1652b73f820ba469ed6847fba06ff247244d13df3635574"
+    }
+  },
+  "source_sha256": "82d5c370a7c80daa3830b48ff7382c55b79001b5555dce6ec04b1f24a79840be",
+  "elf_sha256": "5dd4c56fcc25fb170eac6e2a618de6cd95ca13bf1b72f3caf7e71cbf65a6f716",
+  "bindings": {
+    "lvp_idle_mode_info": 270578116,
+    "open_cfw_gx8002_tws_init": 270567024,
+    "open_cfw_gx8002_tws_done": 270566988,
+    "open_cfw_gx8002_tws_tick": 268591960,
+    "open_cfw_gx8002_tws_buffer_init": 270566980
+  },
+  "rows": [
+    {
+      "name": "mode_list",
+      "package_offset": 83784,
+      "bytes": 8,
+      "sha256": "bad8a634d85013d6ff0fc2ec9f6fd63803c710b8d3dac4bcea5aa112fc97205a"
+    },
+    {
+      "name": "tws_info",
+      "package_offset": 83856,
+      "bytes": 20,
+      "sha256": "f1cd07b5125d22d5909ea15d43382e6dfe5212e201b45fff2fb8c7a8b86cdf36"
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Typed SDK mode info/list with named callback references compiles byte-exact. No raw pointer arrays or duplicate idle state.",
+    "Registered callback ownership and composed dispatch still need verification before admission."
+  ]
+}

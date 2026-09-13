@@ -1,0 +1,38 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_power_initialize",
+      "section_name": ".text.initialize",
+      "package_offset": 68620,
+      "stock_envelope_bytes": 64,
+      "compiled_bytes": 60,
+      "compiled_sha256": "c0193093f2a502ef4a7415fca535f6af18603f10c04c9079418bd781bf262341",
+      "stock_sha256": "bb4a21e27477378a9e4c3a4d0d3625b7a850f42ab7c4a34abe6ec707de77b0b5",
+      "fits": true,
+      "exact_stock": false
+    }
+  ],
+  "source_sha256": "82ef6f5195d57444e94fedecf39ca2d225fae3fa07b179fb7b7018bf989df6d9",
+  "header_sha256": "dac3f35fda97bdc90c75cf9c212309a91ebf5ecf70214623537bd86c5b4215b0",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "upstream": {
+    "path": "lvp/common/lvp_pmu.c",
+    "blob": "a49f3266ec8a6d77f51ccb919dab5be1d13fdf56",
+    "sha256": "e1421f08efa9ddf637da03b39f6aebebef4782c720bee74a0df8d003b62a85be"
+  },
+  "source_admitted": false,
+  "limits": [
+    "Candidate only; decoded initialization and callback qualification pending."
+  ]
+}

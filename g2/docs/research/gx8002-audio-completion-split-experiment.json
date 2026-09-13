@@ -1,0 +1,21 @@
+{
+  "sections": [
+    {
+      "name": ".text",
+      "address": 268591312,
+      "bytes": 22,
+      "sha256": "62cfaf6d8dc4c0b00abd25afca1389d1ef13f19bade0ac9d4e1640342a996f08"
+    },
+    {
+      "name": ".slot",
+      "address": 268591524,
+      "bytes": 4,
+      "sha256": "bda238c9c34a19e968b17d5c599703d24a276c25f5a834c11b3762f8dcf3ad80"
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Rejected experiment: cross-section literal load grew code to 22 bytes and objdump decodes its literal reference as address zero/value 0xd0, not the intended callback slot pointer. Link success alone is insufficient. Existing qualified standalone candidate unchanged."
+  ],
+  "rejected": true
+}

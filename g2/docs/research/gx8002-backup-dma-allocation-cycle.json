@@ -1,0 +1,13 @@
+{
+  "allocator_elf_sha256": "96bdcdc0fad838f493016b0c0012c303cf53a5286709259ed4ae8151b6693445",
+  "deallocator_elf_sha256": "ba5ba48443e555999587627c80260b426cb91fb5b95343bb6f721e82dd35efc9",
+  "cases": 640,
+  "successful_allocation_release_cycles": 200,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Compiled routines composed using actual allocation-table output as deallocator input.",
+    "Preserves stock asymmetry: allocation requires zero while release considers exactly one active.",
+    "IRQ and resource primitives modeled; no physical concurrency or clock timing qualification."
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_body_probe",
+      "section_name": ".text",
+      "compiled_bytes": 480,
+      "compiled_sha256": "e9d6b82ac9d9d560aabdb80a2524831dbf839a2ae27be5d00574eca702a365c2",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_body_probe",
+          "package_offset": 70264,
+          "bytes": 500,
+          "sha256": "7990132834c4ce463f4c553e16d3ac9e38fbd639e0cbec87b1ff5fca2a78d26e",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "lookup_dependency": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_channel_lookup",
+          "section_name": ".text",
+          "compiled_bytes": 28,
+          "compiled_sha256": "6bfc14e2268d8a026582d4f40694583902020dd40126f5d1bbfa60033f48e4e9",
+          "stock_occurrences": [
+            {
+              "symbol": "open_cfw_gx8002_channel_lookup",
+              "package_offset": 69708,
+              "bytes": 28,
+              "sha256": "6bfc14e2268d8a026582d4f40694583902020dd40126f5d1bbfa60033f48e4e9",
+              "region": "image_a_xip_text"
+            }
+          ]
+        }
+      ],
+      "checks": {
+        "candidate": {
+          "symbol": "open_cfw_gx8002_channel_lookup",
+          "section_name": ".text",
+          "bindings": {},
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-fno-shrink-wrap"
+          ],
+          "source_sha256": "764906a08af856e87e44da241d15affd82829591f09e6a3c7d193bb164f6bc32",
+          "compiled_bytes": 28,
+          "compiled_sha256": "6bfc14e2268d8a026582d4f40694583902020dd40126f5d1bbfa60033f48e4e9",
+          "package_offset": 69708,
+          "stock_envelope_bytes": 28,
+          "stock_sha256": "6bfc14e2268d8a026582d4f40694583902020dd40126f5d1bbfa60033f48e4e9",
+          "fits": true,
+          "source_admitted": false,
+          "hardware_qualified": false,
+          "limits": [
+            "Build only. Guard state, helper transactions, ABI and diagnostic source data need qualification."
+          ]
+        },
+        "decoded_cases": 520,
+        "caller_instruction_evidence": {
+          "0x1162a": [
+            "zextb",
+            "r9, r0"
+          ],
+          "0x1162c": [
+            "mov",
+            "r7, r0"
+          ],
+          "0x1162e": [
+            "mov",
+            "r0, r9"
+          ],
+          "0x11632": [
+            "bsr",
+            "0x1104c"
+          ],
+          "0x11636": [
+            "mov",
+            "r4, r0"
+          ],
+          "0x11638": [
+            "bez",
+            "r0, 0x117fc"
+          ]
+        },
+        "wrapping_indices_rejected_after_byte_narrowing": [
+          1073741823,
+          2147483647,
+          3221225471,
+          4294967295
+        ],
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Lookup and caller byte-narrowing only. Rejection branch is separately visible at package 0x11638; no global exclusion of sensor writers."
+        ]
+      },
+      "evidence_sha256": {
+        "verify_gx8002_channel_lookup_source.py": "8a7f73ddb21d347d2b41979ab393f0792db7048f1af89b9b30c89e33b29b4af3",
+        "verify_gx8002_channel_lookup.py": "ddb1d1f04e13b3e3200eab04c9764e15a0758983dbe9a9b4fb83f6cf7db6029d",
+        "build_gx8002_channel_lookup_candidate.py": "929234c057a7c32f97518a5ec9d6482331b721211cb95a7104c80fcd2e7d66e0",
+        "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+      },
+      "source_admitted": true,
+      "hardware_qualified": false,
+      "limits": [
+        "Byte-identical same-entry lookup admission. Context structures remain stock; their lifecycle, other callers and physical hardware are not qualified."
+      ]
+    },
+    "probe": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "headers_sha256": {
+        "lvp/common/uart_message_v2.h": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2",
+        "lvp/common/lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e",
+        "include/driver/gx_uart.h": "570c2b4fd9486a2a56442df5e57f97ce08feab79e6ecfccb87ca57d5bc175c5e"
+      },
+      "upstream_sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+      "probe_sha256": "4750c8464c41771d7a69097363322c66a29449b1963c65d55fb03f04c385e8d1",
+      "compiled_bytes": 480,
+      "candidate_address": 270564588,
+      "candidate_bytes": 480,
+      "candidate_sha256": "e9d6b82ac9d9d560aabdb80a2524831dbf839a2ae27be5d00574eca702a365c2",
+      "stock_envelope_bytes": 500,
+      "analysis_bindings": {
+        "_GetMessageHandle": 270564032,
+        "gx_uart_start_async_recv": 270546572,
+        "gx_uart_stop_async_recv": 270546624,
+        "gx_uart_async_recv_buffer": 270546816,
+        "LvpQueuePut": 268591544,
+        "_UartMessageAsyncRecvCallback": 270565528,
+        "_uartRecvBufferCallback": 270565088,
+        "s_uart_recv_buffer": 537060640,
+        "s_uart_recv_pack_queue": 537062596,
+        "s_uart_msg_regist_array": 537060192
+      },
+      "analysis_address": 271585280,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Linked analysis-only upstream body helper with analysis-only external declarations. Dependency ABI, stock equivalence, placement and whole-callback execution remain unqualified."
+      ]
+    },
+    "original_entry": true,
+    "decoded_cases": 7776,
+    "coverage": {
+      "async": 1824,
+      "restart": 2520,
+      "queue": 432,
+      "failure": 3600
+    },
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Continuous stock/upstream body entry-to-return with abstract saved frames and modeled helpers. Finite valid port/buffer states; physical helpers and concurrency unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_uart_receive_body_source.py": "18f34d975196c8703aa1288dcccd067fd04d10dd9ba19bb541d3c73b9e5dae10",
+    "compare_gx8002_uart_body_full.py": "5234ba335eef01c0178093f30283bf17324d1b285181f0e5695aade95fc90902",
+    "execute_gx8002_uart_body_full.py": "229c88a527ae21ac55469ba92a269f78b7918c08ec13e380a6aa984f558c2c2a",
+    "build_gx8002_uart_body_upstream_probe.py": "acfc16cee67aadbc766988ffe412c99707a8aa54e6c6333c70ebcf3477c6556a",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Pinned upstream source compiled natively; 7776 complete decoded cases include decoded source lookup, helper failures and registration rejection. Receive counters are source-declared zero-initialized BSS at existing RAM addresses, not a flash replacement. UART/queue helpers remain modeled in this admission run; finite valid buffer cases do not qualify arbitrary aliasing, concurrency or physical reception."
+  ]
+}

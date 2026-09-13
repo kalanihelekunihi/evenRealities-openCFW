@@ -1,0 +1,14 @@
+{
+  "integration_report_sha256": "7411e520a548abaee7dff5d1ccee617fe378b8808c36082c27a5e0b24713f1a4",
+  "firmware_sha256": "3bdf0fcd76ca9cdcc0c8e8548860ec17fdf16dd7e52437c09e5fd3af5df39869",
+  "clock_body_sha256": "72b1d75eb12eb94e885d26931da4ef1c4be56f99174edfbb11b613ba4c745a16",
+  "adjacent_wrapper_sha256": "293a0295e46807381c786ef8e1b047ad4ef42d3d07de2bf24896ca5ee519c2e1",
+  "cases": 42160,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Clock instructions decoded from composed container; actual generated table IDs and adversarial table variants tested against independent result/write oracle.",
+    "Execution map excludes reused tail, so any attempted clock instruction fetch into that region fails. Finite cases do not prove global computed-reference closure.",
+    "Existing decoded instruction model, ordinary nonoverlapping RAM output, no concurrent mutation or hardware/timing qualification."
+  ]
+}

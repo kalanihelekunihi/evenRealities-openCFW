@@ -1,0 +1,66 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "dependencies": [
+    {
+      "path": "lvp/lvp_mode_tws.c",
+      "blob": "4bd9d2962adac54871e6c6eb905174a0ee649300",
+      "sha256": "18e45319c213c185f1652b73f820ba469ed6847fba06ff247244d13df3635574"
+    },
+    {
+      "path": "lvp/common/lvp_queue.h",
+      "blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+      "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+    },
+    {
+      "path": "include/lvp_context.h",
+      "blob": "37483158aa8c433d614dea65dff87232b6ba0f69",
+      "sha256": "75902c925c65492f776fe1c932f0b85d0298f0b7e8377def087a4fb5949170be"
+    },
+    {
+      "path": "include/lvp_attr.h",
+      "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+      "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+    },
+    {
+      "path": "lvp/app_core/lvp_app_core.h",
+      "blob": "e7521399bfa5d16c4ebacba2699e2f0286fc09cd",
+      "sha256": "7267c8f17cf22c3fe8904ac6babf611c3f1ea750c254a782c982b4e9fbb03c25"
+    },
+    {
+      "path": "LICENSE",
+      "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+      "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+    }
+  ],
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "source_sha256": "77b0b5ff02e73cc24584e33cd52d0e72d6d9b0c93e4ba1d5389c0f704538a610",
+  "compiler_assembly_sha256": "944df81fc8640937fd5aa5a67bf9ca68d02afef85c825f4bb1aec38c382c2371",
+  "transformed_assembly_sha256": "2cef226f1aa5986d13e2fe1b2c369ce3bb4fbfaf5838151f2cc686f238e05fa0",
+  "elf_sha256": "3189b2889cf4ec074790cd570ebc93022545868f9b9411fc740c363099638e25",
+  "body_sha256": "1d9d4520a0e56daf5a57e06ed31a47a1a8aaaf18c6466a544350d8ef14709d4b",
+  "body_bytes": 90,
+  "bindings": {
+    "LvpQueueGet": 270561200,
+    "LvpDoMaxDecoder": 270567672,
+    "LvpAudioInUpdateReadIndex": 270562208,
+    "LvpTriggerAppEvent": 270568640,
+    "LvpPmuSuspendIsLocked": 270563320,
+    "LvpPmuSuspend": 270563336,
+    "open_cfw_gx8002_tws_tick_state": 537061100
+  },
+  "source_admitted": false,
+  "limits": [
+    "Exact stock instruction match guards halfword-PC cross-section relocation addend. Source pool literal verified separately. Full behavior, PMU prototypes and combined shared-pool admission pending."
+  ]
+}

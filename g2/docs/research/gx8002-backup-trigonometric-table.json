@@ -1,0 +1,28 @@
+{
+  "image_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "interval": [
+    317976,
+    319000
+  ],
+  "bytes": 1024,
+  "sha256": "f02ad5cfc640d3484d44ba4366dd3f20b2883d83600db65dd32bdd8b049434e1",
+  "definition": "For integer n from -128 through 127: signed int16 pairs round(16384*(1-cos(n*pi/256))), round(16384*sin(n*pi/256)).",
+  "data_decoded_as_branches": [
+    {
+      "offset": 318672,
+      "target": 319660,
+      "entry": false
+    }
+  ],
+  "remaining_branch_findings": [
+    {
+      "offset": 263876,
+      "target": 319628,
+      "entry": true
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "All 512 coefficients match the stated formula on this macOS Python runtime. Consumer semantics and reproducible cross-runtime rounding qualification remain pending; not source admission."
+  ]
+}

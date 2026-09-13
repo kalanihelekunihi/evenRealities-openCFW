@@ -1,0 +1,41 @@
+{
+  "source_sha256": "8675b3dc7f42c98b31be3faf327790340115e71f0e6791aedbab45aaaf1ec500",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_app_gpio_suspend",
+      "package_offset": 74584,
+      "compiled_bytes": 32,
+      "compiled_sha256": "9836d8a2d40762767ab9cd88f3e5cea736bc5a5dbf156df18ee6edb16c270710",
+      "stock_envelope_bytes": 32,
+      "stock_sha256": "9836d8a2d40762767ab9cd88f3e5cea736bc5a5dbf156df18ee6edb16c270710",
+      "fits": true,
+      "exact_stock_prefix": true
+    },
+    {
+      "symbol": "open_cfw_gx8002_app_gpio_resume",
+      "package_offset": 74616,
+      "compiled_bytes": 52,
+      "compiled_sha256": "19dd9d8a49859aa13bc634c6f5bea6e7590b66112000a7fd4172f57f092b6d7d",
+      "stock_envelope_bytes": 52,
+      "stock_sha256": "19dd9d8a49859aa13bc634c6f5bea6e7590b66112000a7fd4172f57f092b6d7d",
+      "fits": true,
+      "exact_stock_prefix": true
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Application pin-six callbacks; helper order, callback ABI, shared diagnostic and ownership qualification pending."
+  ]
+}

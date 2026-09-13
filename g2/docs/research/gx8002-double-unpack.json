@@ -1,36 +1,11 @@
 {
-  "candidate": {
-    "runtime_link": {
-      "archive": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/lib/gcc/csky-unknown-elf/13.0.1/libgcc.a",
-      "archive_sha256": "9ecd75da478b51b4d25152616294e3550ef249049d242a43d1e5519d9ba48b7b",
-      "linked_sha256": "9b9b60a77f48699527fef977e33e893a98cbcd3213b468cbf32ea3aabdad3d2b",
-      "unresolved_symbols": [],
-      "gcc_source_commit": "1e9b70447a8417f5c692370de4533e43d754e8fa",
-      "hardware_qualified": false
-    },
-    "source_sha256": "d4eda7f242a1e6f22434e90905524f5078771fe587e9de42a44eff5e0d279e89",
-    "compiled_bytes": 360,
-    "undefined_dependencies": [
-      "__floatunsidf",
-      "__divdf3",
-      "__muldf3",
-      "__adddf3",
-      "__fixunsdfsi",
-      "open_cfw_gx8002_uart_fifo_depth",
-      "open_cfw_gx8002_uart_interrupt",
-      "open_cfw_gx8002_request_irq"
-    ],
-    "stock_offset": 51540,
-    "stock_envelope_bytes": 360,
-    "stock_sha256": "1d959331817c7f2921ac87ef65ff42703f518571de90177804946b0b223c81cd",
-    "source_admitted": false,
-    "limits": [
-      "Analysis link uses source-built libgcc; UART/IRQ dependencies remain absolute bindings. Full MMIO ordering and float conversion/helper correspondence require qualification. No linked firmware output. Baud values that overflow baud<<4 to zero remain outside a defined C division domain."
-    ]
-  },
-  "cases": 16376,
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "source_elf_sha256": "5172d74d96dbd0e889a14bd008ce072d1436aa9f0641fc959c499e6057f5dd6a",
+  "finite_cases": 16480,
+  "nonfinite_cases": 8404,
+  "instruction_semantics_sha256": "d56e8f41f25c225e3a6d7446a26062cacee2a4f9fe6a2df8661cf066c9e373a5",
   "source_admitted": false,
   "limits": [
-    "Every finite exponent/sign tested with four fraction patterns, including zero and subnormal normalization. No NaN/Infinity claim; finite corpus, not exhaustive fraction coverage."
+    "Exact five-word unpack output including untouched fields and callee-save state; finite and sampled NaN/infinity cases agree with independent integer field oracle. Complete pack/arithmetic remain pending."
   ]
 }

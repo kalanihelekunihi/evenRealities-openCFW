@@ -17,10 +17,11 @@ def execute(code,entry,port,buffer,length,callback,private,word,token,dma,dma_re
     for _ in range(60):
         op,args,width=code[pc];p=[x.strip() for x in args.split(',')];jump=None
         if op=='push':
-            if args!='r4-r5, r15' or saved is not None:raise ValueError('Transmit frame')
+            if args not in ('r4-r5, r15','r4-r6, r15') or saved is not None:raise ValueError('Transmit frame')
+            frame=args;regs=['r4','r5']+(['r6'] if args=='r4-r6, r15' else [])+['r15']
             saved=[r[x] for x in regs];r['r14']-=len(regs)*4
         elif op=='pop':
-            if args!='r4-r5, r15' or saved is None:raise ValueError('Transmit restore')
+            if saved is None or args!=frame:raise ValueError('Transmit restore')
             for reg,value in zip(regs,saved):r[reg]=value
             r['r14']+=len(regs)*4
             if any(r[f'r{i}']!=initial[f'r{i}'] for i in (*range(4,12),14,15,16,17)):raise ValueError('Transmit ABI')
@@ -86,7 +87,7 @@ def verify():
         if a[2]!=expected:raise ValueError('Transmit buffer independent state contract')
 
         cases+=1
-    return {'candidate':candidate,'decoded_cases':cases,'source_admitted':False,'hardware_qualified':False,'limits':['Finite stock/source ordered access and ABI comparisons; DMA and IRQ leaves modeled. Placement does not yet fit the stock envelope.']}
+    return {'candidate':candidate,'decoded_cases':cases,'source_admitted':False,'hardware_qualified':False,'limits':['Finite stock/source ordered access and ABI comparisons; DMA and IRQ leaves modeled. Candidate size is reported by the builder; physical UART effects remain unqualified.']}
 
 if __name__=='__main__':
     result=verify();(ROOT/'docs/research/gx8002-uart-transmit-buffer-verification.json').write_text(json.dumps(result,indent=2)+'\n');print('Transmit buffer cases:',result['decoded_cases'])

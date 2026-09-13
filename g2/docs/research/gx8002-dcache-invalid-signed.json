@@ -1,0 +1,162 @@
+{
+  "positive_and_entry_evidence": {
+    "bulk_evidence": {
+      "evidence": {
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_dcache_invalid_range",
+            "section_name": ".text",
+            "compiled_bytes": 88,
+            "compiled_sha256": "157cebc17965074b1601b5ed2290b5cd8e444e5cce15d1b1d21f507c81470881",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_dcache_invalid_range",
+                "package_offset": 95772,
+                "bytes": 92,
+                "sha256": "6426aa7a30be46d8fe9bda6037a0f1b8279d8fba66e7b0dd4bc0d28f6c11c93f",
+                "region": "image_a_sram_text"
+              }
+            ]
+          }
+        ],
+        "evidence": {
+          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+          "oracle": {
+            "path": "drivers_lib/snpu/grus/snpu.o",
+            "blob": "2565938852946027c726e66d0d8ee6e0bd0cc0d7",
+            "sha256": "6ce5cb2c361f4bae59fc87dd86631bd6c888dffbe28461b0db2e27f8c6e22f03",
+            "role": "unrelated_snpu_object_identity_only"
+          },
+          "header": {
+            "path": "include/driver/gx_dcache.h",
+            "blob": "e7e073102006558f9e85dc958c8e6739b06611d9",
+            "sha256": "3ab4bd1951f7ca1c839efa1db4329ba859d52dcd59745fd4a2258724a779d325"
+          },
+          "bindings": {},
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror"
+          ],
+          "source_sha256": "b7014f519fcf1c1a2ba73ff232e823338533c588bc24b33132125e8ee89e21ba",
+          "symbol": "open_cfw_gx8002_dcache_invalid_range",
+          "section_name": ".text",
+          "package_offset": 95772,
+          "compiled_bytes": 88,
+          "compiled_sha256": "157cebc17965074b1601b5ed2290b5cd8e444e5cce15d1b1d21f507c81470881",
+          "stock_envelope_bytes": 92,
+          "stock_sha256": "6426aa7a30be46d8fe9bda6037a0f1b8279d8fba66e7b0dd4bc0d28f6c11c93f",
+          "fits": true,
+          "source_admitted": false,
+          "limits": [
+            "Candidate only. Need signed-size boundaries, all ordered cache command writes, address wrapping, large-size prefixes and ABI checks. No hardware cache coherence qualification."
+          ]
+        },
+        "cases": 12864,
+        "prefix_cases": 144,
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Signed-size and exact MMIO trace comparison; moderate sizes complete, huge positives only 65-write prefixes. Void API: incidental r0 excluded. No physical address/cache coherence or timing qualification."
+        ]
+      },
+      "stock_bulk": {
+        "instructions": 18,
+        "writes_per_iteration": 8,
+        "command_increment": 128,
+        "size_decrement": 128,
+        "preserved_cache_port": 3758157828
+      },
+      "source_bulk": {
+        "instructions": 18,
+        "writes_per_iteration": 8,
+        "command_increment": 128,
+        "size_decrement": 128,
+        "preserved_cache_port": 3758157828
+      },
+      "large_input_decomposition": [
+        {
+          "size": 128,
+          "bulk_iterations": 1,
+          "bulk_writes": 8,
+          "tail_remainder": 0
+        },
+        {
+          "size": 129,
+          "bulk_iterations": 1,
+          "bulk_writes": 8,
+          "tail_remainder": 1
+        },
+        {
+          "size": 255,
+          "bulk_iterations": 1,
+          "bulk_writes": 8,
+          "tail_remainder": 127
+        },
+        {
+          "size": 256,
+          "bulk_iterations": 2,
+          "bulk_writes": 16,
+          "tail_remainder": 0
+        },
+        {
+          "size": 268435457,
+          "bulk_iterations": 2097152,
+          "bulk_writes": 16777216,
+          "tail_remainder": 1
+        },
+        {
+          "size": 1073741824,
+          "bulk_iterations": 8388608,
+          "bulk_writes": 67108864,
+          "tail_remainder": 0
+        },
+        {
+          "size": 2147483647,
+          "bulk_iterations": 16777215,
+          "bulk_writes": 134217720,
+          "tail_remainder": 127
+        }
+      ],
+      "source_admitted": false,
+      "limits": [
+        "Normalized modulo-32 affine interpretation proves every bulk iteration for all command/size words. Signed guard and decreasing positive size justify finite repetition. Residual path remains covered by finite decoded tests; complete entry-to-return symbolic proof is not yet supplied. No hardware coherence or timing qualification."
+      ]
+    },
+    "symbolic_residual_lengths": 128,
+    "negative_boundary_cases": 3,
+    "source_admitted": false,
+    "limits": [
+      "Symbolic arbitrary command values cover all 128 positive-path residuals. Entry setup checked instruction-by-instruction. Bulk guard/decrease proof supplies positive-length termination. Negative sizes follow a no-store branch; tested boundary representatives are not an exhaustive symbolic signed-predicate proof. No hardware coherence/timing qualification."
+    ]
+  },
+  "stock_nonpositive": {
+    "signed_interval": [
+      -2147483648,
+      0
+    ],
+    "decoded_instructions": 7,
+    "memory_accesses": 0,
+    "returns": true
+  },
+  "source_nonpositive": {
+    "signed_interval": [
+      -2147483648,
+      0
+    ],
+    "decoded_instructions": 7,
+    "memory_accesses": 0,
+    "returns": true
+  },
+  "source_admitted": false,
+  "limits": [
+    "Entire nonpositive signed-size interval follows a checked register-only return path. Positive bulk and all residual paths are qualified separately with symbolic command expressions. Architectural instruction semantics assumed; no physical coherence or timing qualification."
+  ]
+}

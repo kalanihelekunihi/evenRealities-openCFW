@@ -1,0 +1,79 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_receive_complete",
+      "section_name": ".text",
+      "compiled_bytes": 34,
+      "compiled_sha256": "41aa2cbb6120b837d8219461df3941d9bca14b95fe4ad44d69c217d9b56175bb",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_receive_complete",
+          "package_offset": 248212,
+          "bytes": 34,
+          "sha256": "41aa2cbb6120b837d8219461df3941d9bca14b95fe4ad44d69c217d9b56175bb",
+          "region": "image_b_sram_text"
+        }
+      ]
+    }
+  ],
+  "comparison": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_uart_transmit_complete",
+          "package_offset": 248180,
+          "runtime_address": 268451892,
+          "source_sha256": "84c12edc62273e6dbca2c47c810ca3dfa29962bfb1bb452103bd16276550c5b7",
+          "compiled_bytes": 32,
+          "compiled_sha256": "777fa93b6765de09cb2c2ae56a782c6ac814d284bfdf118ebed3a85dae53baab",
+          "stock_envelope_bytes": 32,
+          "stock_sha256": "777fa93b6765de09cb2c2ae56a782c6ac814d284bfdf118ebed3a85dae53baab",
+          "primary_instruction_structure_matches": true
+        },
+        {
+          "symbol": "open_cfw_gx8002_uart_receive_complete",
+          "package_offset": 248212,
+          "runtime_address": 268451924,
+          "source_sha256": "7eb6e646ad8bea698e2d61ecd78fb0c0bc9c36e3277c0efc3042067b7536bb8f",
+          "compiled_bytes": 34,
+          "compiled_sha256": "41aa2cbb6120b837d8219461df3941d9bca14b95fe4ad44d69c217d9b56175bb",
+          "stock_envelope_bytes": 36,
+          "stock_sha256": "6654f838b57b9029c167540d4683c37d71e2273dc4733251ce9b7972f8187748",
+          "primary_instruction_structure_matches": true
+        }
+      ],
+      "source_admitted": false,
+      "limits": [
+        "Direct-call destinations are mapped from backup disassembly; callee equivalence remains separate.",
+        "Callback registration, decoded candidate behavior and replacement placement require qualification."
+      ]
+    },
+    "decoded_cases": {
+      "transmit": 48,
+      "receive": 288
+    },
+    "source_admitted": false,
+    "limits": [
+      "Helpers are modeled by identity with caller clobbers and descriptor mutations, not executed.",
+      "Synthetic descriptor and callback addresses do not establish registration or placement.",
+      "No hardware qualification or receive tail admission."
+    ]
+  },
+  "normal_loader_cases": 12,
+  "evidence_sha256": {
+    "build_gx8002_backup_uart_completions.py": "c8dc88b120b5a571797f72d0f89389b2bc91f84662e5ab4ebc554c379a87c7b9",
+    "verify_gx8002_backup_uart_completions.py": "18e4d6aa3cd0237e903fdf4ae7923d412f23190e36b0dfa6360d91437d9cded2",
+    "verify_gx8002_backup_uart_receive_source.py": "f61f1e7c49d0ca641998c386efb4049c57f3742ad77cd732802bf2d0d3bed48e",
+    "verify_gx8002_backup_memset_loader.py": "d1139f142813bf27d701424086d83dfb13c9bbbf1ef968e272368b9c7e65a405",
+    "verify_gx8002_uart_transmit_complete.py": "ea38c778533f85caaf130e4a006e903b250db8ad216613290a6cccfb0dd76e5a",
+    "verify_gx8002_uart_receive_complete.py": "9399cfca41e755628c5a68c581e88df55faaaa5036768435e026a51d31a64a68",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Exact original instruction replacement only; no fill or new runtime allocation.",
+    "Release, completion cache and registered callback remain separately reconstructed dependencies.",
+    "Normal loader modeled; no physical device or whole-firmware qualification."
+  ]
+}

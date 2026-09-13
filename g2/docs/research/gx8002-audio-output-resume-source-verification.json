@@ -1,0 +1,66 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_aout_resume",
+      "section_name": ".text.aout_resume",
+      "compiled_bytes": 56,
+      "compiled_sha256": "458f5367616a5989aa092fba0f15367d284b79adf2d6d212278b757e01baa4de",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_resume",
+          "package_offset": 59304,
+          "bytes": 56,
+          "sha256": "a49fa94b9cade25ca94855c0d99bff9c2a6a80d8dbc017eb0bd0b40bdb0e32fb",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_resume",
+          "section_name": ".text.aout_resume",
+          "compiled_bytes": 56,
+          "compiled_sha256": "458f5367616a5989aa092fba0f15367d284b79adf2d6d212278b757e01baa4de",
+          "package_offset": 59304,
+          "stock_envelope_bytes": 56,
+          "stock_sha256": "a49fa94b9cade25ca94855c0d99bff9c2a6a80d8dbc017eb0bd0b40bdb0e32fb",
+          "fits": true
+        }
+      ],
+      "source_sha256": "4423b73ba2b09feb7fddaf2f318864b0a40b92c80cb9eb9ddea2390d3afd2691",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_out/gx_audio_out_v2.h",
+        "blob": "9c505e302116fcaa07d32e3f8ce9b03d0d6bbe2b"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 216,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Flags and IRQ can mutate during second gate call; reads must observe new state. Gate internals/physical effects remain modeled."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_output_resume.py": "50f0bd6b228aee2b7e731b3f32b649e8a40e7e2dd8d4acd742262694bb482ee0",
+    "verify_gx8002_audio_output_resume.py": "4667d1aa75d7922934b1fdc5efc226cf102c835cecfa9ab9ca70da91ccfa7f5c",
+    "verify_gx8002_audio_output_resume_source.py": "835f038d0663278211b39d1dea0b74935bd97e969babc607e7971ae374382e3c",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Experimental function-level source admission; physical register semantics, caller composition and whole firmware source-only closure remain unqualified."
+  ]
+}

@@ -1,0 +1,406 @@
+{
+  "build": {
+    "include_fill": true,
+    "source_component": {
+      "generated_reverse_256_only": true,
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_header_blob": "55ced0f4a9088c59f08bda0f7e01590b6516a1e3",
+      "sources": [
+        {
+          "name": "cfft",
+          "source": "components/shared/gx8002/runtime_gx8002_backup_cfft.c",
+          "sha256": "f0168c1fe913f191cf1e9158ed6976ea61c73c858fd5a55fc1682dae4f6f81a9",
+          "extra_flags": []
+        },
+        {
+          "name": "reverse",
+          "source": "components/shared/gx8002/runtime_gx8002_backup_bit_reverse_256.c",
+          "sha256": "519fa3b0b8a36026083de2d5dd3c7f7beec6f5494dc63224cfe8316d92b654d4",
+          "extra_flags": []
+        },
+        {
+          "name": "tables",
+          "source": "build/gx8002-source-rfft-generated-reverse-cluster/tables.c",
+          "sha256": "ba1af226669b9a1983cb2ac7045c0d99a4159bc56eebe40cdab73e3ff418e455",
+          "extra_flags": []
+        },
+        {
+          "name": "descriptor",
+          "source": "build/gx8002-source-rfft-generated-reverse-cluster/descriptor.c",
+          "sha256": "8c138f8d1da2b79bc9d31cea4120a4fe5db3d706da6f5fdd6a24eb9136059146",
+          "extra_flags": []
+        },
+        {
+          "name": "rfft",
+          "source": "components/shared/gx8002/runtime_gx8002_backup_rfft.c",
+          "sha256": "b28b3d513a4a43bb643c351e93e13806a715c23890daa8ba80174095fd52c1a5",
+          "extra_flags": [
+            "-fno-tree-loop-optimize"
+          ]
+        },
+        {
+          "name": "radix4_shared",
+          "source": "components/shared/gx8002/runtime_gx8002_backup_radix4_shared.c",
+          "sha256": "a5c332a992f0ec7aae1436b2c9395bd82a612db309eff7d9f1d8e4e6a980f4a3",
+          "extra_flags": [
+            "-fno-caller-saves"
+          ]
+        },
+        {
+          "name": "radix4_by2_shared",
+          "source": "components/shared/gx8002/runtime_gx8002_backup_radix4_by2_shared.c",
+          "sha256": "3ee867ce3c84f7d46e69851950d2daa1f7038296a9e95d5859326c899318f724",
+          "extra_flags": [
+            "-fno-caller-saves"
+          ]
+        },
+        {
+          "name": "split0",
+          "source": "components/shared/gx8002/runtime_gx8002_backup_split.c",
+          "sha256": "115a3c0b30db754e21206b121df6be1114d60ec116ccc18e5e1f3701be680dd4",
+          "extra_flags": [
+            "-DINVERSE=0",
+            "-fno-caller-saves"
+          ]
+        },
+        {
+          "name": "split1",
+          "source": "components/shared/gx8002/runtime_gx8002_backup_split.c",
+          "sha256": "115a3c0b30db754e21206b121df6be1114d60ec116ccc18e5e1f3701be680dd4",
+          "extra_flags": [
+            "-DINVERSE=1",
+            "-fno-caller-saves"
+          ]
+        }
+      ],
+      "generation": {
+        "decimal_precisions": [
+          80,
+          110
+        ],
+        "minimum_rounding_margin": "0.0004799583670417623613286794185613142917351650296035550644546476636153266437",
+        "complex_rounding_margin": "0.004391557772404545175976776234561685730989521660640510104513602324176532335"
+      },
+      "elf_sha256": "8a623afb630502273a379b9f9549687961efcf9c0043d292b99b7206eb0b380b",
+      "code_bytes": 2454,
+      "data_bytes": 1848,
+      "entry": 268501240,
+      "retained_binary_inputs": [],
+      "direct_calls": [
+        {
+          "pc": 268501054,
+          "target": 268501144
+        },
+        {
+          "pc": 268501100,
+          "target": 268502576
+        },
+        {
+          "pc": 268501116,
+          "target": 268502556
+        },
+        {
+          "pc": 268501130,
+          "target": 268502856
+        },
+        {
+          "pc": 268501136,
+          "target": 268502844
+        },
+        {
+          "pc": 268501272,
+          "target": 268500992
+        },
+        {
+          "pc": 268501288,
+          "target": 268502904
+        },
+        {
+          "pc": 268501308,
+          "target": 268503200
+        },
+        {
+          "pc": 268501324,
+          "target": 268500992
+        },
+        {
+          "pc": 268501672,
+          "target": 268501352
+        },
+        {
+          "pc": 268501708,
+          "target": 268501352
+        },
+        {
+          "pc": 268501752,
+          "target": 268501352
+        },
+        {
+          "pc": 268502150,
+          "target": 268501352
+        },
+        {
+          "pc": 268502216,
+          "target": 268501352
+        },
+        {
+          "pc": 268502250,
+          "target": 268501352
+        },
+        {
+          "pc": 268502568,
+          "target": 268501424
+        },
+        {
+          "pc": 268502588,
+          "target": 268501424
+        },
+        {
+          "pc": 268502644,
+          "target": 268502576
+        },
+        {
+          "pc": 268502656,
+          "target": 268502576
+        },
+        {
+          "pc": 268502812,
+          "target": 268502556
+        },
+        {
+          "pc": 268502824,
+          "target": 268502556
+        },
+        {
+          "pc": 268502848,
+          "target": 268502596
+        },
+        {
+          "pc": 268502860,
+          "target": 268502596
+        },
+        {
+          "pc": 268503084,
+          "target": 268502868
+        },
+        {
+          "pc": 268503118,
+          "target": 268502868
+        },
+        {
+          "pc": 268503354,
+          "target": 268503164
+        },
+        {
+          "pc": 268503404,
+          "target": 268503164
+        }
+      ],
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Standalone RFFT component artifact only. Chosen analysis address is not validated firmware placement.",
+        "All RFFT/CFFT arithmetic helpers and generated tables linked to source; no unresolved symbols or relocations. Full linked execution and loader qualification pending.",
+        "All non-FFT firmware functionality remains outside this artifact.",
+        "Bit reversal specialized to immutable source_cfft_256 inside the closed RFFT512 component. Null table pointer is never dereferenced. Generic/custom-table CFFT calls are outside this variant contract; external entry closure must be established before placement."
+      ]
+    },
+    "entry": 268496740,
+    "elf_sha256": "45ce10c83727d1047bba54c2695c85618d8b32fcc4a34adf1fb861926915bd46",
+    "sections": [
+      {
+        "section": ".fill_q15",
+        "address": 268497324,
+        "offset": 293612,
+        "size": 52,
+        "capacity": 52,
+        "sha256": "d6cdfdc7b1d236ad02e422a51e3efd9856405b48d4235834ad7f2c136b6ab0c9"
+      },
+      {
+        "section": ".fft_code0",
+        "address": 268496740,
+        "offset": 293028,
+        "size": 346,
+        "capacity": 348,
+        "sha256": "ee4c049fcd28e530752c2038300ae5903d06eb8c719fcb889357f189a76d4c3e"
+      },
+      {
+        "section": ".fft_code1",
+        "address": 268497376,
+        "offset": 293664,
+        "size": 1638,
+        "capacity": 1642,
+        "sha256": "34ea01a2720d1f4b629df385c26faf6ebd0e1a76d532317b02bf9fe0c6bd406c"
+      },
+      {
+        "section": ".fft_code2",
+        "address": 268518388,
+        "offset": 314676,
+        "size": 466,
+        "capacity": 480,
+        "sha256": "bb9bd6b7c84e89b5113a66b7e0980e52cbc2aa79b2a7398a00493cbfd83b3cf7"
+      },
+      {
+        "section": ".fft_complex_descriptor",
+        "address": 268518372,
+        "offset": 314660,
+        "size": 16,
+        "capacity": 16,
+        "sha256": "5f18688f01d3063cc294936df8608a8fde72018473594b1a9dbebb7ee553e306"
+      },
+      {
+        "section": ".fft_complex_coefficients",
+        "address": 268518868,
+        "offset": 315156,
+        "size": 768,
+        "capacity": 768,
+        "sha256": "9e05c434c0378b8190fb94493619719924accb86c9cd81ffd58f2654f2cc4368"
+      },
+      {
+        "section": ".fft_real_coefficients",
+        "address": 268521688,
+        "offset": 317976,
+        "size": 1024,
+        "capacity": 1024,
+        "sha256": "f02ad5cfc640d3484d44ba4366dd3f20b2883d83600db65dd32bdd8b049434e1"
+      },
+      {
+        "section": ".fft_inverse_descriptor",
+        "address": 536965132,
+        "offset": 325964,
+        "size": 20,
+        "capacity": 20,
+        "sha256": "92aac1614ab72f28c7f7d7a3cc0ec6ec28ad2e85b436f2d43f85be3c62fa2ffc"
+      },
+      {
+        "section": ".fft_forward_descriptor",
+        "address": 536965152,
+        "offset": 325984,
+        "size": 20,
+        "capacity": 20,
+        "sha256": "edbff7cf47058a519fab385c65a5ee9ca125b984e446a9f722a484203c3d6451"
+      }
+    ],
+    "packing": [
+      [
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/rfft.o",
+          "section": ".text.open_cfw_gx8002_backup_rfft",
+          "size": 110,
+          "align": 4
+        },
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/cfft.o",
+          "section": ".text.open_cfw_gx8002_backup_cfft",
+          "size": 150,
+          "align": 4
+        },
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/radix4_shared.o",
+          "section": ".text.multiply",
+          "size": 70,
+          "align": 4
+        },
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/radix4_by2_shared.o",
+          "section": ".text.open_cfw_gx8002_backup_radix4_by2",
+          "size": 10,
+          "align": 4
+        }
+      ],
+      [
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/radix4_shared.o",
+          "section": ".text.radix4",
+          "size": 1130,
+          "align": 4
+        },
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/split0.o",
+          "section": ".text.open_cfw_gx8002_backup_split_forward",
+          "size": 258,
+          "align": 4
+        },
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/radix4_by2_shared.o",
+          "section": ".text.radix4_by2",
+          "size": 246,
+          "align": 4
+        }
+      ],
+      [
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/split1.o",
+          "section": ".text.open_cfw_gx8002_backup_split_inverse",
+          "size": 246,
+          "align": 4
+        },
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/reverse.o",
+          "section": ".text.open_cfw_gx8002_backup_bit_reverse",
+          "size": 94,
+          "align": 4
+        },
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/split0.o",
+          "section": ".text.add_sat",
+          "size": 34,
+          "align": 4
+        },
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/split1.o",
+          "section": ".text.add_sat",
+          "size": 34,
+          "align": 4
+        },
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/radix4_shared.o",
+          "section": ".text.open_cfw_gx8002_backup_radix4",
+          "size": 20,
+          "align": 4
+        },
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/radix4_shared.o",
+          "section": ".text.open_cfw_gx8002_backup_radix4_inverse",
+          "size": 20,
+          "align": 4
+        },
+        {
+          "object": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-source-rfft-generated-reverse-cluster/radix4_by2_shared.o",
+          "section": ".text.open_cfw_gx8002_backup_radix4_by2_inverse",
+          "size": 10,
+          "align": 4
+        }
+      ]
+    ],
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Placed ELF only: loader and external reference closure pending.",
+      "Old bit-reversal table range now holds code; fixed CFFT256 contract applies. No firmware ownership registration."
+    ],
+    "fill_build": {
+      "extra_flags": [
+        "-fno-tree-scev-cprop"
+      ],
+      "source_sha256": "2f6e2c147e4681141dc763986ee5bb85a64e2f4ee6861ab3e771e92036686b2c",
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "compiled_bytes": 52,
+      "stock_bytes": 40,
+      "fits": false,
+      "elf_sha256": "5d68404504e8c4a2e011da2649a30fd1e4d0dd4555712f0ada97d4e6d67c2d8e",
+      "source_admitted": false,
+      "limits": [
+        "Standalone candidate. Store trace, decoded behavior and placement qualification pending."
+      ]
+    }
+  },
+  "linked_rfft_cases": 24,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Full linked 512-point forward/inverse source RFFT execution, real internal calls and linked descriptors/tables. Both input and output buffers match composed decoded stock arithmetic.",
+    "Extreme and random samples; fixed shipped descriptor flags. Finite instruction model, not hardware/timing proof.",
+    "Placed in original FFT ranges with fixed RFFT entry and descriptors; loader, external reference closure and hardware qualification pending."
+  ]
+}

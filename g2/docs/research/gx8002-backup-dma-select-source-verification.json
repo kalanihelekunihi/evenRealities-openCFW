@@ -1,0 +1,98 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_backup_dma_select",
+      "section_name": ".text",
+      "compiled_bytes": 84,
+      "compiled_sha256": "65968ca52d586ec261dc684d74d16a231d4052a90316afab03e54d3c39301986",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_backup_dma_select",
+          "package_offset": 251052,
+          "bytes": 84,
+          "sha256": "4003368bf7e9385d7c5cd388c529548186c34562780d916691a62084e2990f4d",
+          "region": "image_b_sram_text"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "comparison": {
+      "candidate": {
+        "source_sha256": "39ee6385cb9cc6e5048d2eadce05ae6ce882ddf5d7b2077bfa8fb68d2dfee7a6",
+        "compiled_bytes": 84,
+        "compiled_sha256": "65968ca52d586ec261dc684d74d16a231d4052a90316afab03e54d3c39301986",
+        "envelope_bytes": 84,
+        "fits": true,
+        "bindings": {
+          "open_cfw_gx8002_backup_dma_state": 537056232,
+          "open_cfw_gx8002_backup_irq_save": 268453996,
+          "open_cfw_gx8002_backup_irq_restore": 268454008,
+          "open_cfw_gx8002_backup_dma_resource": 268450792
+        },
+        "source_admitted": false,
+        "limits": [
+          "Candidate only; decoded equivalence and placement pending."
+        ]
+      },
+      "decoded_cases": 640,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Explicit two-flag oracle, including zero/large counts and nonzero occupied flag variants.",
+        "IRQ/resource helpers modeled with caller clobbers; physical concurrency and placement remain unqualified."
+      ]
+    },
+    "loader": {
+      "candidate_elf_sha256": "96bdcdc0fad838f493016b0c0012c303cf53a5286709259ed4ae8151b6693445",
+      "candidate_image_sha256": "f476b2c2779ce11b58b165bc59bda85d13b23f988302de0796b6a1cd7428a95b",
+      "normal_loader_cases": 12,
+      "source_admitted": false,
+      "limits": [
+        "All 84 replacement bytes come from compiled C; no replacement tail fill.",
+        "External references and hardware remain unqualified."
+      ]
+    },
+    "references": {
+      "image_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "package_interval": [
+        251052,
+        251136
+      ],
+      "external_branches": [
+        {
+          "offset": 248384,
+          "target": 251052,
+          "entry": true
+        },
+        {
+          "offset": 248542,
+          "target": 251052,
+          "entry": true
+        }
+      ],
+      "external_pool_loads": [],
+      "runtime_word_matches": [],
+      "source_admitted": false,
+      "limits": [
+        "Linear decode and word census; computed references and nonstandard entry paths are not proven absent."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "build_gx8002_backup_dma_select.py": "e46a0675ccd862ad8abcd245f7676cc4c6185cace753d429a48d15e8bfc6b7ef",
+    "verify_gx8002_backup_dma_select.py": "5822912f77ed41a691b80af7e929429bdac2a8ff8f9ad448b39ec09b4d894728",
+    "verify_gx8002_backup_dma_select_loader.py": "e067bdcebfc513b651565f34c8bce899a767b5a055d4632e7e80b442af5067ed",
+    "analyze_gx8002_backup_dma_select_references.py": "322dddcc886efe2b08c471fb90f213cd19b5b26c445851e7786d53893ff0d83b",
+    "verify_gx8002_backup_dma_select_source.py": "781acab448d9005639815a84162099157bb673d5575c15de8323af11ac49597e",
+    "verify_gx8002_backup_memset_loader.py": "d1139f142813bf27d701424086d83dfb13c9bbbf1ef968e272368b9c7e65a405",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Backup-specific allocator checks at most two flags, reserving the first zero flag before resource enable and interrupt restoration.",
+    "All 84 bytes compiled C, no replacement fill. Ordered effects and saved token checked for zero and oversized counts.",
+    "IRQ/resource helpers modeled; computed entries and physical concurrency remain unqualified."
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_aout_alloc_playback",
+      "section_name": ".text.aout_alloc_playback",
+      "compiled_bytes": 140,
+      "compiled_sha256": "20e2fa2e389bf8b286d63c83d848d4e69dc17015172f6dc0bd71f7d18c8cbaf9",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_alloc_playback",
+          "package_offset": 59360,
+          "bytes": 140,
+          "sha256": "752e9e5fe6b5da5cdcd410262a53a564962f847f65eab636813153a838f057b8",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_alloc_playback",
+          "section_name": ".text.aout_alloc_playback",
+          "compiled_bytes": 140,
+          "compiled_sha256": "20e2fa2e389bf8b286d63c83d848d4e69dc17015172f6dc0bd71f7d18c8cbaf9",
+          "package_offset": 59360,
+          "stock_envelope_bytes": 140,
+          "stock_sha256": "752e9e5fe6b5da5cdcd410262a53a564962f847f65eab636813153a838f057b8",
+          "fits": true
+        }
+      ],
+      "source_sha256": "2b0a6e240491af607ee01968dfa04ed782c05c32675a039316e20b09e7ba7994",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_out/gx_audio_out_v2.h",
+        "blob": "9c505e302116fcaa07d32e3f8ce9b03d0d6bbe2b"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "intentional_repair": "Reject unavailable or mismatched route before writes; stock continues with handle zero. Decoded success and repair qualification pending."
+    },
+    "decoded_success_cases": 19200,
+    "intentional_repair_cases": 132,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Memset, settings selector and IRQ registration modeled with caller clobbers. Valid fixed handle/settings RAM; asynchronous mutation and physical hardware unqualified. Stock invalid paths checked only through first low-memory write; source rejects without writes/calls."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_output_alloc_playback.py": "4ea29cae5622b62b0a1ca3ed39ad18444f2ef337cdfed8a4e8c4ccf7400ea4f8",
+    "verify_gx8002_audio_output_alloc_playback.py": "d30cf560560d0515f1d4760d5832185aae0bef0653bc53933244bb1fa5dc3415",
+    "verify_gx8002_audio_output_alloc_playback_source.py": "68bf95331eb8ea95389f71b63d82625f2666d813ed8d866a73878720bc461c8a",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Intentional repair: allocation rejection returns NULL before stock low-memory writes. Experimental function-level source admission; physical register semantics, caller composition and whole firmware source-only closure remain unqualified."
+  ]
+}

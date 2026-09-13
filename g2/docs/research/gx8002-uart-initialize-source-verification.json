@@ -1,0 +1,59 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_initialize",
+      "compiled_bytes": 104,
+      "compiled_sha256": "97eaa0fa8ec7f5bc2157029d970a224a6366d759e6622436b4efd21f0b14824c",
+      "section_name": ".text",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_initialize",
+          "package_offset": 51900,
+          "bytes": 104,
+          "sha256": "b81473c135d132c8dafa1e0a0903b7d1c341c30f517014bd4ef18e3631c0f1ac",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_header": "include/driver/gx_uart.h",
+      "upstream_blob": "243606a2bb600a45c13a4b6dc7174cc549ab93ba",
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_uart_initialize",
+          "compiled_bytes": 104,
+          "compiled_sha256": "97eaa0fa8ec7f5bc2157029d970a224a6366d759e6622436b4efd21f0b14824c",
+          "stock_sha256": "b81473c135d132c8dafa1e0a0903b7d1c341c30f517014bd4ef18e3631c0f1ac",
+          "package_offset": 51900,
+          "envelope_bytes": 104,
+          "fits": true
+        }
+      ],
+      "source_sha256": "f1a904f51c0b6fb611a2f3fb7ceeb39f17bd9fcb36edce1b4f587ccd3eee8c3e",
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Build only. Decoded initialization clock rounding and helper traces require separate verification."
+      ]
+    },
+    "cases": 1080,
+    "source_admitted": false,
+    "limits": [
+      "Decoded initializer with modeled gate/frequency/configuration calls. Boundary clock rounding, invalid ports and configuration result propagation checked; helper composition remains open."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_uart_initialize.py": "54edbd863e1e5b9aee1b73af18c8877818a2b17457e86e6bf444650e780864e6",
+    "verify_gx8002_uart_initialize.py": "5213a943fa1a0a2b748939cbd7ef9d6e5f95d11db142bff09b3013fae437e0de",
+    "verify_gx8002_uart_initialize_source.py": "bfe4b821cdf8f6a57066fdcbd84ff0a6c1513d27b946d8460a4cf44e750f57ab",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Invalid ports, clock rounding boundaries, descriptor writes and configuration-result propagation checked. Gate, frequency and configuration helper effects modeled; hardware initialization remains unqualified."
+  ]
+}

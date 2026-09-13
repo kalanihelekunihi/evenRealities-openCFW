@@ -1,0 +1,116 @@
+{
+  "evidence": {
+    "candidate": {
+      "adaptations": [
+        "Unsigned loop index for two-element array avoids signedness warning without changing iteration. Helpers and PLL initializer retain upstream bodies; saved gate is source-defined zero-initialized BSS."
+      ],
+      "source_data": {
+        "section_name": ".rodata",
+        "package_offset": 97508,
+        "bytes": 16,
+        "sha256": "e92b17c1fab00d0bee3ab9867018ac2c7fcad399d26c073583a3b3e252eeba59",
+        "stock_exact": true
+      },
+      "dependency_headers": {
+        "arch/soc/grus/include/base_addr.h": {
+          "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+          "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+        },
+        "include/driver/gx_clock/gx_clock_v2.h": {
+          "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+          "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+        }
+      },
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+        "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+        "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+        "role": "compiled_upstream_implementation"
+      },
+      "bindings": {
+        "gx_clock_set_source": 268585932,
+        "_clk_mod_lowpower_init": 268589468,
+        "gx_clock_get_module_enable": 268587392,
+        "_clk_pmu_lowpower_div_dto": 268589568,
+        "gx_clock_set_div": 268586488,
+        "gx_clock_set_pll": 268587104,
+        "memcpy": 268588856
+      },
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-jump-tables"
+      ],
+      "header": {
+        "path": "include/driver/gx_clock.h",
+        "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+        "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+      },
+      "source_sha256": "0c2b502174aa7b5b00603a14fd6b2e3acf82ba8f0f96af5813e9f01bd99845d0",
+      "symbol": "open_cfw_gx8002_clock_switch_1m",
+      "section_name": ".text",
+      "package_offset": 96808,
+      "compiled_bytes": 116,
+      "compiled_sha256": "9f6672e732ccd6d564fcc0c80dbc06a1b670c5184e3f19d056ae848616db559a",
+      "stock_envelope_bytes": 116,
+      "stock_sha256": "c07be842fa0d2109c3fa9669fbf499bef34bbc58e6f9bfd5f1c745c306eb817e",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+      ],
+      "pll_state": {
+        "section": ".pll",
+        "address": 537028808,
+        "package_offset": 100572,
+        "bytes": 56,
+        "sha256": "37ab1aaff8926c73dea91f2bcacca0b383688763e8abeb5121587e6b3b6059f9",
+        "stock_exact": true,
+        "configuration": "upstream default 24.576 MHz"
+      },
+      "runtime_state": {
+        "section": ".saved_gate",
+        "address": 537031448,
+        "bytes": 4,
+        "type": "NOBITS",
+        "startup_clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+        "clear_interval": [
+          537030016,
+          537062636
+        ]
+      }
+    },
+    "cases": 640,
+    "source_admitted": false,
+    "limits": [
+      "Decoded stock/source outer policy and integer ABI agree with independent trace oracle. Helpers modeled, memcpy initializer marshalled; nested helpers and physical timing remain unqualified."
+    ]
+  },
+  "cases": 128,
+  "dependency_elf_sha256": {
+    "clock-lowpower-init-shared": "ce097c5dfbd66949519791852726b91a57a7d6104f1cc41dd725a9ced226027a",
+    "clock-gate-query-fixed": "ee77cc16dcc1ad22348e8807f38fbfa93c64d5831781ad9edc26f568b5fcf0c1",
+    "clock-module-query": "1167dd767b688110d802c136c466e2ab9a8cbfa9c4a3f7ad48044d518fd90c35",
+    "clock-module-source-fixed": "8c8aec4d39399364775b1ebff5a54fc14a527bf46977a4181c426103d896d83c"
+  },
+  "helpers": {
+    "lookup_elf_sha256": "38b29242c4f1b670ab35270a099ea464ff05753c5913b90d044e787153213c7b",
+    "register_elf_sha256": "bbcaa9549732699f29eccc73b602db34a6b76a75557a616b7d9df54b9a374022",
+    "limits": [
+      "Lookup executor uses fixed private output 0x1000, marshalled to the actual caller stack; register helper executes on a snapshot of the modeled MMIO word."
+    ]
+  },
+  "source_admitted": false,
+  "limits": [
+    "Stateful decoded helper frames marshalled across policy calls; each transition and final state match independent models. Outer low-power call and subsequent decoded gate queries share state. Selector/divider/PLL/copy modeled here; physical clock timing remains unqualified."
+  ]
+}

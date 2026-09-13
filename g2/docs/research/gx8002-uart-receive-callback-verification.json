@@ -1,0 +1,55 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+    "headers_sha256": {
+      "uart_message_v2.h": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2",
+      "lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+    },
+    "generated_source_sha256": "e9db48023eeb58a313d9992e259193337957a26599050b792ce6ab4ff41f41fc",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-guess-branch-probability",
+      "-Wno-error=sign-compare",
+      "-Wno-error=unused-parameter",
+      "-Wno-error=address-of-packed-member",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-nationalchip-lvp-kws/lvp/common"
+    ],
+    "bindings": {
+      "receive_ram": 537059408,
+      "_GetMessageHandle": 270564032,
+      "gx_uart_read": 270546392,
+      "crc32": 270571688,
+      "_UartMessageAsyncRecvCheckBody": 270564588,
+      "s_recv_header_data_count": 537029748,
+      "s_uart_recv_pack_queue": 537062596,
+      "LvpQueuePut": 268591544
+    },
+    "compiled_bytes": 516,
+    "compiled_sha256": "1a1f07738566d481d1ebd4bcc075ba1b3c6dafbabf36a7b882ec272c93ae9514",
+    "stock_envelope_bytes": 532,
+    "stock_sha256": "3fedf5968273bdfb7e9f114006447ab8a8c2d7f561f47da6fd93595aff5055d2",
+    "fits": true,
+    "exact_stock": false,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Source-built candidate only; complete decoded state-machine comparison and admission remain pending. External state uses established RAM addresses."
+    ]
+  },
+  "decoded_cases": 2880,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Whole-entry finite stock/source comparison, final nonstack memory and helper boundaries. UART/CRC/body/queue modeled. Independent semantic oracle also checked; helper mutations and nested helper execution remain pending; not source admission."
+  ]
+}

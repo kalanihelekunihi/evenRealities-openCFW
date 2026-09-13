@@ -30,7 +30,7 @@ def arithmetic(code,s):
     return run
 
 
-def verify(composed_fifo=False,composed_irq=False):
+def verify(composed_fifo=False,composed_irq=False,replacement=None):
     candidate=build();path=ROOT/'build/gx8002-board/padmux-get-stock.elf';elf=Elf32(path.read_bytes(),str(path))
     if sha(elf.contents(next(s for s in elf.sections if s['name']=='.data')))!=IMAGE_SHA:raise ValueError('Stock identity')
     old=decode(subprocess.check_output([str(ROOT/'build/csky-macos/install/bin/csky-unknown-elf-objdump'),'-D','--start-address=0xc8ec','--stop-address=0x17574',str(path)],text=True))
@@ -50,8 +50,13 @@ def verify(composed_fifo=False,composed_irq=False):
         irq_candidate=link()
         irq_path=ROOT/'build/gx8002-irq/irq.elf'
         new.update(decode(subprocess.check_output([str(ROOT/'build/csky-macos/install/bin/csky-unknown-elf-objdump'),'-d',str(irq_path)],text=True)))
-    setups=[(old,0xc954,stock),(new,symbols['open_cfw_gx8002_uart_configure'],source)]
+    new_entry=symbols['open_cfw_gx8002_uart_configure']
+    if replacement is not None:
+        replacement_path,new_entry,replacement_helpers=replacement
+        new.update(decode(replacement_path.read_text()))
+    setups=[(old,0xc954,stock),(new,new_entry,source)]
     helpers=[({s[k]:k for k in ('uint','divide','multiply','add','fix','fifo','irq')},arithmetic(code,s)) for code,_,s in setups]
+    if replacement is not None:helpers[1]=(replacement_helpers,helpers[1][1])
     cases=0;arithmetic_cases=0
     depths=(0,1,2,3,4,8,16,32,64,127,128,255) if composed_fifo else (0,16,128,2048)
     for rx,tx,depth_input,mode in product((0,1,2,3,0xffffffff),(0,1,2,3,4),depths, (0,1)):

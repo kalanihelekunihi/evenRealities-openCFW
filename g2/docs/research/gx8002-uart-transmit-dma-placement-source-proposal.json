@@ -1,0 +1,266 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_transmit_dma_entry",
+      "section_name": ".entry",
+      "ownership_kind": "compiled_assembly",
+      "compiled_bytes": 4,
+      "compiled_sha256": "2935cfebb146d3a522a842a735b272d6b51f03755ca7f5d1c6ceaa977ea2a67a",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_transmit_dma_entry",
+          "package_offset": 50836,
+          "bytes": 136,
+          "sha256": "e3ddeaedb4679eb3a61c07c018a65a41c25c3feb8935fb8c0c42870f26c41276",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_transmit_dma",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 144,
+      "compiled_sha256": "adf235cdefdb9ce51e0e66928b8ee707f95ff35038eda6e5fd9cd962dd39a18e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_transmit_dma",
+          "package_offset": 78336,
+          "bytes": 356,
+          "sha256": "b3cb604e49b64b91365920fdf380d163c5b96e4ca9d027a09d6fece426477bcc",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "setup": {
+      "candidate": {
+        "entry_source_sha256": "9fe04abe560cfbc9977e1c8e18ccaf5ddafa2468a092edf59fcad99eccc2e6cd",
+        "placement_limits": [
+          "Proposed placement in source-generated udivdi3 fill; ownership transfer and entry redirect not yet admitted."
+        ],
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "upstream_header": "include/driver/gx_dma_ahb.h",
+        "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_uart_transmit_dma",
+            "compiled_bytes": 144,
+            "compiled_sha256": "adf235cdefdb9ce51e0e66928b8ee707f95ff35038eda6e5fd9cd962dd39a18e",
+            "stock_sha256": "9d1f96d618fdb6f9b1f9b6b88b1957c4e0fe21cc9c11f249da46cc893eba6c43",
+            "package_offset": 78336,
+            "envelope_bytes": 144,
+            "fits": true
+          },
+          {
+            "symbol": "open_cfw_gx8002_uart_transmit_dma_entry",
+            "compiled_bytes": 4,
+            "compiled_sha256": "2935cfebb146d3a522a842a735b272d6b51f03755ca7f5d1c6ceaa977ea2a67a",
+            "stock_sha256": "e3ddeaedb4679eb3a61c07c018a65a41c25c3feb8935fb8c0c42870f26c41276",
+            "package_offset": 50836,
+            "envelope_bytes": 136,
+            "fits": true
+          }
+        ],
+        "source_sha256": "6a45c518ef6e24f09d6ff8640986cdcc18d4a786160268151ca507b68506d417",
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Build only. Invalid-port cleanup is an explicit repair, not stock equivalence. Decoded DMA setup behavior and upstream config layout qualification pending; called helpers remain separate dependencies."
+        ]
+      },
+      "decoded_cases": 384,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Valid ports only; external ordered accesses and helper argument comparison, excluding private stack layout; called helpers modeled, no DMA hardware behavior claim."
+      ]
+    },
+    "cleanup": {
+      "candidate": {
+        "entry_source_sha256": "9fe04abe560cfbc9977e1c8e18ccaf5ddafa2468a092edf59fcad99eccc2e6cd",
+        "placement_limits": [
+          "Proposed placement in source-generated udivdi3 fill; ownership transfer and entry redirect not yet admitted."
+        ],
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "upstream_header": "include/driver/gx_dma_ahb.h",
+        "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_uart_transmit_dma",
+            "compiled_bytes": 144,
+            "compiled_sha256": "adf235cdefdb9ce51e0e66928b8ee707f95ff35038eda6e5fd9cd962dd39a18e",
+            "stock_sha256": "9d1f96d618fdb6f9b1f9b6b88b1957c4e0fe21cc9c11f249da46cc893eba6c43",
+            "package_offset": 78336,
+            "envelope_bytes": 144,
+            "fits": true
+          },
+          {
+            "symbol": "open_cfw_gx8002_uart_transmit_dma_entry",
+            "compiled_bytes": 4,
+            "compiled_sha256": "2935cfebb146d3a522a842a735b272d6b51f03755ca7f5d1c6ceaa977ea2a67a",
+            "stock_sha256": "e3ddeaedb4679eb3a61c07c018a65a41c25c3feb8935fb8c0c42870f26c41276",
+            "package_offset": 50836,
+            "envelope_bytes": 136,
+            "fits": true
+          }
+        ],
+        "source_sha256": "6a45c518ef6e24f09d6ff8640986cdcc18d4a786160268151ca507b68506d417",
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Build only. Invalid-port cleanup is an explicit repair, not stock equivalence. Decoded DMA setup behavior and upstream config layout qualification pending; called helpers remain separate dependencies."
+        ]
+      },
+      "release_dependency": {
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_dma_release",
+            "compiled_bytes": 8,
+            "compiled_sha256": "a88262c0eff797a3425044f38b2fd2c7c3c5fdb25d1b8230d19dcaf6d7f62031",
+            "section_name": ".text",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_dma_release",
+                "package_offset": 53444,
+                "bytes": 8,
+                "sha256": "a88262c0eff797a3425044f38b2fd2c7c3c5fdb25d1b8230d19dcaf6d7f62031",
+                "region": "image_a_sram_text"
+              }
+            ]
+          }
+        ],
+        "candidate": {
+          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+          "upstream_header": "include/driver/gx_dma_ahb.h",
+          "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+          "functions": [
+            {
+              "symbol": "open_cfw_gx8002_dma_release",
+              "compiled_bytes": 8,
+              "compiled_sha256": "a88262c0eff797a3425044f38b2fd2c7c3c5fdb25d1b8230d19dcaf6d7f62031",
+              "stock_sha256": "a88262c0eff797a3425044f38b2fd2c7c3c5fdb25d1b8230d19dcaf6d7f62031",
+              "package_offset": 53444,
+              "envelope_bytes": 8,
+              "fits": true
+            }
+          ],
+          "source_sha256": "e6a1d4347cdce8e1e4d5085614bd6de5b9889ba383d64d0b5867359386045b73",
+          "source_admitted": false,
+          "hardware_qualified": false,
+          "limits": [
+            "Build only. Release wrapper call and ABI qualification pending; deallocation remains separate."
+          ]
+        },
+        "deallocation_dependency": {
+          "candidate": {
+            "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+            "upstream_header": "include/driver/gx_dma_ahb.h",
+            "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+            "functions": [
+              {
+                "symbol": "open_cfw_gx8002_dma_deallocate",
+                "compiled_bytes": 68,
+                "compiled_sha256": "6f9185e9dcca4149d51f620ad14ac93d005ecc0927ea9f09faa2c7b30860a9d8",
+                "stock_sha256": "402fc0fe95edff47a790a08ca4972bb74885da0fe31bf898df28bfd31328336c",
+                "package_offset": 53284,
+                "envelope_bytes": 68,
+                "fits": true
+              }
+            ],
+            "source_sha256": "e51018b661f7428391c72a5e0332e0ad892a0dfaaf6a2584bc462866bf00f282",
+            "source_admitted": false,
+            "hardware_qualified": false,
+            "limits": [
+              "Build only. Decoded deallocation, exact-one scan and clock-disable ordering qualification pending."
+            ]
+          },
+          "decoded_cases": 5008,
+          "source_admitted": false,
+          "hardware_qualified": false,
+          "limits": [
+            "Counts 1..4, valid in-table channel; initialized hardware uses two. IRQ/clock modeled, no concurrency proof."
+          ]
+        },
+        "decoded_cases": 384,
+        "evidence_sha256": {
+          "build_gx8002_dma_release.py": "5d1f60a0a0d7a2bafea3486ace0f77434a15b073bd7ad6916b86e382eda1542d",
+          "verify_gx8002_dma_release.py": "28b612f11b42d029beaa65aa0a2b24f88b135f1984c4a10ffb7786a7fefbc25d"
+        },
+        "source_admitted": true,
+        "hardware_qualified": false,
+        "limits": [
+          "Exact wrapper instructions and nested decoded deallocation qualification. IRQ and clock calls remain modeled; no physical concurrency proof."
+        ]
+      },
+      "decoded_cases": 144,
+      "stock_equivalent": false,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Explicit repair of stock uninitialized handshake use. Release/deallocation decoded in separate frames; IRQ and clock effects modeled. No hardware or firmware integration qualification."
+      ]
+    },
+    "helpers": {
+      "candidate": {
+        "entry_source_sha256": "9fe04abe560cfbc9977e1c8e18ccaf5ddafa2468a092edf59fcad99eccc2e6cd",
+        "placement_limits": [
+          "Proposed placement in source-generated udivdi3 fill; ownership transfer and entry redirect not yet admitted."
+        ],
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "upstream_header": "include/driver/gx_dma_ahb.h",
+        "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_uart_transmit_dma",
+            "compiled_bytes": 144,
+            "compiled_sha256": "adf235cdefdb9ce51e0e66928b8ee707f95ff35038eda6e5fd9cd962dd39a18e",
+            "stock_sha256": "9d1f96d618fdb6f9b1f9b6b88b1957c4e0fe21cc9c11f249da46cc893eba6c43",
+            "package_offset": 78336,
+            "envelope_bytes": 144,
+            "fits": true
+          },
+          {
+            "symbol": "open_cfw_gx8002_uart_transmit_dma_entry",
+            "compiled_bytes": 4,
+            "compiled_sha256": "2935cfebb146d3a522a842a735b272d6b51f03755ca7f5d1c6ceaa977ea2a67a",
+            "stock_sha256": "e3ddeaedb4679eb3a61c07c018a65a41c25c3feb8935fb8c0c42870f26c41276",
+            "package_offset": 50836,
+            "envelope_bytes": 136,
+            "fits": true
+          }
+        ],
+        "source_sha256": "6a45c518ef6e24f09d6ff8640986cdcc18d4a786160268151ca507b68506d417",
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Build only. Invalid-port cleanup is an explicit repair, not stock equivalence. Decoded DMA setup behavior and upstream config layout qualification pending; called helpers remain separate dependencies."
+        ]
+      },
+      "decoded_cases": 180,
+      "helper_elf_sha256": {
+        "uart-dma-burst": "45032ea73f99ae7ebc462056e882e7a890e6901a17ceb8e207e21e9ed79ab930",
+        "dma-callback": "9dfbcf7172e8b9b63cb735d754a169e374200d6e9df64c7bf32b0bf3c9d36d57"
+      },
+      "limits": [
+        "Original-entry redirect, burst helpers and callback writes execute decoded source; allocation/release and transfer internals remain separate qualifications. No physical DMA/timing qualification."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "build_gx8002_uart_transmit_dma_placement.py": "ff7b8cdda2a5a1e5d736bb3431e2aa81495e0adea8545e0b82530b067aaf5d73",
+    "verify_gx8002_uart_transmit_dma_placement.py": "64ca56cea83117793f0ba5f8334e7291e939a76a94fed22754fb892960991844",
+    "verify_gx8002_uart_transmit_dma_placement_cleanup.py": "39e216928f4980edf963f84e122e6a97b1a5f7740fc4266be47c670f28853719",
+    "verify_gx8002_uart_transmit_dma_placement_helpers.py": "1cc98316cad7c50ef59dd0d07f9201f027232434b492b4f80e1e54f3208f874b",
+    "verify_gx8002_uart_transmit_dma_placement_source.py": "04e96a47eded63ac496ec630383ffcd7a663d7519cb708d0bea16a7b4859ef9f",
+    "verify_gx8002_uart_transmit_dma.py": "05d11ccd6e5de06d41b964d7fb1bb73dc4aa11e58ea9115d6b3790fb782f6840"
+  },
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "ownership_transfer_complete": false,
+  "limits": [
+    "Paired entry/body qualification; invalid-port cleanup intentionally repairs stock behavior.",
+    "Physical DMA/timing and full source-only firmware remain unqualified."
+  ]
+}

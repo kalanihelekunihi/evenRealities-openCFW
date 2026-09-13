@@ -1,0 +1,369 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_audio_input_buffer_size",
+      "section_name": ".text.size",
+      "compiled_bytes": 38,
+      "compiled_sha256": "7b7f4e9d9410e896bc5a47d7b5a8abda3878f3adc8173c3cac7e5ed039991104",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_audio_input_buffer_size",
+          "package_offset": 66992,
+          "bytes": 40,
+          "sha256": "b031c2725cff148c0f3e1a3f85a0904ab9a3eef23d72b44db269019ae996ae48",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_audio_input_buffer_addr",
+      "section_name": ".text.addr",
+      "compiled_bytes": 34,
+      "compiled_sha256": "13748ce89f721888fa066c2a65a3207b88e84dd285d64a48ea03abfca0dcda5e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_audio_input_buffer_addr",
+          "package_offset": 67032,
+          "bytes": 36,
+          "sha256": "c65fb85acfe746d97a1a6499a21a4c44f328d966eb0e0cdfb8e3074dae4e531d",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_audio_input_buffer_size",
+          "section_name": ".text.size",
+          "package_offset": 66992,
+          "stock_envelope_bytes": 40,
+          "compiled_bytes": 38,
+          "compiled_sha256": "7b7f4e9d9410e896bc5a47d7b5a8abda3878f3adc8173c3cac7e5ed039991104",
+          "stock_sha256": "b031c2725cff148c0f3e1a3f85a0904ab9a3eef23d72b44db269019ae996ae48",
+          "fits": true,
+          "exact_stock": false
+        },
+        {
+          "symbol": "open_cfw_gx8002_audio_input_buffer_addr",
+          "section_name": ".text.addr",
+          "package_offset": 67032,
+          "stock_envelope_bytes": 36,
+          "compiled_bytes": 34,
+          "compiled_sha256": "13748ce89f721888fa066c2a65a3207b88e84dd285d64a48ea03abfca0dcda5e",
+          "stock_sha256": "c65fb85acfe746d97a1a6499a21a4c44f328d966eb0e0cdfb8e3074dae4e531d",
+          "fits": true,
+          "exact_stock": false
+        }
+      ],
+      "source_sha256": "aa2c0c0d73222212d96515326dadb51232345a4981a11c6344bf0822649bf6ed",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "upstream": {
+        "path": "lvp/common/lvp_audio_in.c",
+        "blob": "43963b1adaad4f7040206c06769ee8a69656848f",
+        "sha256": "cd52150f9f3e45061b358ad2d6401932a37a60857b2432b8a92a45a36624b64f"
+      },
+      "source_admitted": false,
+      "limits": [
+        "Candidate only; decoded helper-call and unsigned division qualification pending."
+      ]
+    },
+    "decoded_cases": 99456,
+    "nested_getter_cases": 1536,
+    "getter_evidence": {
+      "accessors": {
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_mic_buffer_addr",
+            "section_name": ".text.mic_buffer_addr",
+            "compiled_bytes": 12,
+            "compiled_sha256": "fa849855e20629be9e7e4ba15d4c85fde5a698a69b1868a455f10978ed93ed82",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_mic_buffer_addr",
+                "package_offset": 66552,
+                "bytes": 12,
+                "sha256": "fa849855e20629be9e7e4ba15d4c85fde5a698a69b1868a455f10978ed93ed82",
+                "region": "image_a_xip_text"
+              }
+            ]
+          },
+          {
+            "symbol": "open_cfw_gx8002_mic_buffer_size",
+            "section_name": ".text.mic_buffer_size",
+            "compiled_bytes": 12,
+            "compiled_sha256": "a4804416e823dee2f96e051a53c3ca5479abdf2fa112c311fb448601ab405b4f",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_mic_buffer_size",
+                "package_offset": 66564,
+                "bytes": 12,
+                "sha256": "a4804416e823dee2f96e051a53c3ca5479abdf2fa112c311fb448601ab405b4f",
+                "region": "image_a_xip_text"
+              }
+            ]
+          },
+          {
+            "symbol": "open_cfw_gx8002_logfbank_buffer_addr",
+            "section_name": ".text.logfbank_buffer_addr",
+            "compiled_bytes": 12,
+            "compiled_sha256": "837162542f427757f469c8b3d25c26e29b3a46d96f24184a2395293003dbfcfc",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_logfbank_buffer_addr",
+                "package_offset": 66576,
+                "bytes": 12,
+                "sha256": "837162542f427757f469c8b3d25c26e29b3a46d96f24184a2395293003dbfcfc",
+                "region": "image_a_xip_text"
+              }
+            ]
+          },
+          {
+            "symbol": "open_cfw_gx8002_logfbank_buffer_size",
+            "section_name": ".text.logfbank_buffer_size",
+            "compiled_bytes": 12,
+            "compiled_sha256": "7a99f18ba0378d5304deb2155eac546b209df0c4778664df89d6d8918bd0764b",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_logfbank_buffer_size",
+                "package_offset": 66588,
+                "bytes": 12,
+                "sha256": "7a99f18ba0378d5304deb2155eac546b209df0c4778664df89d6d8918bd0764b",
+                "region": "image_a_xip_text"
+              }
+            ]
+          },
+          {
+            "symbol": "open_cfw_gx8002_context_header",
+            "section_name": ".text.context_header",
+            "compiled_bytes": 8,
+            "compiled_sha256": "b98d8f123ea548041a37386ae0d24e908a27b371fbb96fb312cb2fa9a3d2064f",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_context_header",
+                "package_offset": 66600,
+                "bytes": 8,
+                "sha256": "b98d8f123ea548041a37386ae0d24e908a27b371fbb96fb312cb2fa9a3d2064f",
+                "region": "image_a_xip_text"
+              }
+            ]
+          },
+          {
+            "symbol": "open_cfw_gx8002_feats_buffer",
+            "section_name": ".text.feats_buffer",
+            "compiled_bytes": 6,
+            "compiled_sha256": "9895752c4e72ec591775b7d18748d3851e97d88c2940b7fa0a1b1b1a5a456f62",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_feats_buffer",
+                "package_offset": 66608,
+                "bytes": 8,
+                "sha256": "87f2a7cb7c4f1d93bc69e8d9f7e614fe75c482c0a0033ebde891f78b7b0065ee",
+                "region": "image_a_xip_text"
+              }
+            ]
+          }
+        ],
+        "decoded_cases": 9396,
+        "source_sha256": "af8d1d5c4260615c253c2f718f43601f8da73cbd5974b3e9872601e492892be9",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "upstream": {
+          "include/lvp_context.h": {
+            "blob": "37483158aa8c433d614dea65dff87232b6ba0f69",
+            "sha256": "75902c925c65492f776fe1c932f0b85d0298f0b7e8377def087a4fb5949170be"
+          },
+          "include/lvp_attr.h": {
+            "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+            "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+          },
+          "lvp/common/lvp_buffer.c": {
+            "blob": "b3d49834f8e84abfec56a5bfb2d0e86993a05648",
+            "sha256": "a491c43e4494187b269a4bb35e8fbe5c46b6f29c678980c30b3f8f9a0e324978"
+          }
+        },
+        "source_admitted": true,
+        "hardware_qualified": false,
+        "evidence_sha256": {
+          "verify_gx8002_buffer_accessors.py": "48e7e3dddb30c6708c88543dd7c8b944e8f852eeab8654aaf447d00dbb0a8452",
+          "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+        },
+        "limits": [
+          "Fixed firmware RAM layout; five exact linked stock matches; all six decoded stock/source return values, read addresses and saved ABI checked. No physical memory or concurrent mutation qualification."
+        ]
+      },
+      "metadata": {
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_pcm_frames_per_context",
+            "section_name": ".text.pcm_frames_per_context",
+            "compiled_bytes": 12,
+            "compiled_sha256": "4cc39d1fe0b77854f31e2dea6c1ae25e09031b8be38ab7081c606307386e8c54",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_pcm_frames_per_context",
+                "package_offset": 66780,
+                "bytes": 12,
+                "sha256": "4cc39d1fe0b77854f31e2dea6c1ae25e09031b8be38ab7081c606307386e8c54",
+                "region": "image_a_xip_text"
+              }
+            ]
+          },
+          {
+            "symbol": "open_cfw_gx8002_pcm_frame_size",
+            "section_name": ".text.pcm_frame_size",
+            "compiled_bytes": 24,
+            "compiled_sha256": "7af16c787bf88b1c7596ee7822761c20c8e4ba5cc5e2134d1183d503e3de95ea",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_pcm_frame_size",
+                "package_offset": 66792,
+                "bytes": 24,
+                "sha256": "7af16c787bf88b1c7596ee7822761c20c8e4ba5cc5e2134d1183d503e3de95ea",
+                "region": "image_a_xip_text"
+              }
+            ]
+          },
+          {
+            "symbol": "open_cfw_gx8002_logfbank_frames_per_channel",
+            "section_name": ".text.logfbank_frames_per_channel",
+            "compiled_bytes": 12,
+            "compiled_sha256": "3bb0499727e36b52bcdc9eff3fbadbb7a654b8d05bbf55ac0d4b842a108d6991",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_logfbank_frames_per_channel",
+                "package_offset": 66816,
+                "bytes": 12,
+                "sha256": "3bb0499727e36b52bcdc9eff3fbadbb7a654b8d05bbf55ac0d4b842a108d6991",
+                "region": "image_a_xip_text"
+              }
+            ]
+          },
+          {
+            "symbol": "open_cfw_gx8002_context_gap",
+            "section_name": ".text.context_gap",
+            "compiled_bytes": 4,
+            "compiled_sha256": "535d43ea65c8b7bb04cc91c468cc834ffe6940dd4c4ccdc9b6cf14209940263f",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_context_gap",
+                "package_offset": 66828,
+                "bytes": 4,
+                "sha256": "535d43ea65c8b7bb04cc91c468cc834ffe6940dd4c4ccdc9b6cf14209940263f",
+                "region": "image_a_xip_text"
+              }
+            ]
+          },
+          {
+            "symbol": "open_cfw_gx8002_context_count",
+            "section_name": ".text.context_count",
+            "compiled_bytes": 12,
+            "compiled_sha256": "4335aa05429d5bf14d8631170803ceab41bbc9b5cae3dd159ad938ba36b29439",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_context_count",
+                "package_offset": 66832,
+                "bytes": 12,
+                "sha256": "4335aa05429d5bf14d8631170803ceab41bbc9b5cae3dd159ad938ba36b29439",
+                "region": "image_a_xip_text"
+              }
+            ]
+          },
+          {
+            "symbol": "open_cfw_gx8002_mic_channel_count",
+            "section_name": ".text.mic_channel_count",
+            "compiled_bytes": 12,
+            "compiled_sha256": "16fbec85ca84839f8cf98502256e471ccf54ee5fa0edca07d2fb2ccc18bc8691",
+            "stock_occurrences": [
+              {
+                "symbol": "open_cfw_gx8002_mic_channel_count",
+                "package_offset": 66844,
+                "bytes": 12,
+                "sha256": "16fbec85ca84839f8cf98502256e471ccf54ee5fa0edca07d2fb2ccc18bc8691",
+                "region": "image_a_xip_text"
+              }
+            ]
+          }
+        ],
+        "decoded_cases": 70484,
+        "source_sha256": "fb1b9eeff2d3fc0cb1a33416f4b2d54813ca3a0b54542ad48f59dd37cee23fe2",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "upstream": {
+          "include/lvp_context.h": {
+            "blob": "37483158aa8c433d614dea65dff87232b6ba0f69",
+            "sha256": "75902c925c65492f776fe1c932f0b85d0298f0b7e8377def087a4fb5949170be"
+          },
+          "include/lvp_attr.h": {
+            "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+            "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+          },
+          "lvp/common/lvp_buffer.c": {
+            "blob": "b3d49834f8e84abfec56a5bfb2d0e86993a05648",
+            "sha256": "a491c43e4494187b269a4bb35e8fbe5c46b6f29c678980c30b3f8f9a0e324978"
+          }
+        },
+        "source_admitted": true,
+        "hardware_qualified": false,
+        "evidence_sha256": {
+          "verify_gx8002_buffer_metadata.py": "0f20512ffbef680a8947574a6b098f907d03597f224427765a32139eb9c68942",
+          "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+        },
+        "limits": [
+          "Fixed firmware RAM layout; six exact linked stock matches; decoded stock/source return values, read addresses and saved ABI checked. No physical memory or concurrent mutation qualification."
+        ]
+      }
+    },
+    "source_admitted": false,
+    "limits": [
+      "Decoded nested stock/source header getters; board getter modeled. Nonzero mic-channel count required on channel2. Physical concurrency and timing unqualified."
+    ]
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "evidence_sha256": {
+    "verify_gx8002_audio_input_buffers_source.py": "0e02275f488f7db5fec2dded1faab5a25cc69a0817cea9496a23c1fabda8342e",
+    "verify_gx8002_audio_input_buffers.py": "a9ebfc3a5c2ae93aafa20bfcc530ce3606cf7f1ec7a71bf9cf5568647d26d6b3",
+    "build_gx8002_audio_input_buffers.py": "b8119aeefca3908ddfbf66ea8cf56ccd83e97419ef09fcb7469043ec42ac64fb",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_buffer_accessors.py": "48e7e3dddb30c6708c88543dd7c8b944e8f852eeab8654aaf447d00dbb0a8452",
+    "verify_gx8002_buffer_metadata.py": "0f20512ffbef680a8947574a6b098f907d03597f224427765a32139eb9c68942"
+  },
+  "limits": [
+    "Decoded nested stock/source header getters; board getter modeled. Nonzero mic-channel count required on channel2. Physical concurrency and timing unqualified."
+  ]
+}

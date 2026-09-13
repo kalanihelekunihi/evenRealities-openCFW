@@ -15,10 +15,11 @@ def execute(code,entry,port,buffer,length,callback,private,word,token,dma,dma_re
     for _ in range(60):
         op,args,width=code[pc];p=[x.strip() for x in args.split(',')];jump=None
         if op=='push':
-            if args!='r4-r5, r15' or saved is not None:raise ValueError('Receive frame')
+            if args not in ('r4-r5, r15','r4-r6, r15') or saved is not None:raise ValueError('Receive frame')
+            frame=args;regs=['r4','r5']+(['r6'] if args=='r4-r6, r15' else [])+['r15']
             saved=[r[x] for x in regs];r['r14']-=len(regs)*4
         elif op=='pop':
-            if args!='r4-r5, r15' or saved is None:raise ValueError('Receive restore')
+            if saved is None or args!=frame:raise ValueError('Receive restore')
             for reg,value in zip(regs,saved):r[reg]=value
             r['r14']+=len(regs)*4
             if any(r[f'r{i}']!=initial[f'r{i}'] for i in (*range(4,12),14,15,16,17)):raise ValueError('Receive ABI')
@@ -70,7 +71,7 @@ def verify():
         wanted=0xffffffff if not buffer or not callback else dma_result if dma else 0
         if a[0]!=wanted:raise ValueError('Receive buffer return contract')
         cases+=1
-    return {'candidate':candidate,'decoded_cases':cases,'source_admitted':False,'hardware_qualified':False,'limits':['Finite stock/source ordered access and ABI comparisons; DMA and IRQ leaves modeled. Placement does not yet fit the stock envelope.']}
+    return {'candidate':candidate,'decoded_cases':cases,'source_admitted':False,'hardware_qualified':False,'limits':['Finite stock/source ordered access and ABI comparisons; DMA and IRQ leaves modeled. Candidate size is reported by the builder; hardware effects remain unqualified.']}
 
 if __name__=='__main__':
     result=verify();(ROOT/'docs/research/gx8002-uart-receive-buffer-verification.json').write_text(json.dumps(result,indent=2)+'\n');print('Receive buffer cases:',result['decoded_cases'])

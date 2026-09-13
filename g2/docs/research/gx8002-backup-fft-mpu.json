@@ -1,0 +1,38 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream_header_blob": "ed6595b0a0e510fba0219954933f250c0eba83de",
+  "upstream_header_sha256": "f967c3201c24ceb417f83f915669c74f7182bf23784a7464f450ef6564f6f20a",
+  "initial_register_cases": 1002,
+  "backup_text_mpu_writes": [
+    {
+      "pc": 244388,
+      "arguments": "r1, cr<21, 0>"
+    },
+    {
+      "pc": 244410,
+      "arguments": "r2, cr<19, 0>"
+    },
+    {
+      "pc": 244420,
+      "arguments": "r3, cr<20, 0>"
+    },
+    {
+      "pc": 244432,
+      "arguments": "r3, cr<18, 0>"
+    }
+  ],
+  "region0": {
+    "base": 0,
+    "size_bytes": 4294967296,
+    "enabled": true,
+    "nx": 0,
+    "access_permission": 3
+  },
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Proves decoded backup startup region-0 setup for tested initial control values. Covers the former table address through a 4GB region permitting execution.",
+    "Other region state is not cleared by this slice. Higher-priority regions, writes outside scanned backup text, hardware/cache behavior and startup reachability are not excluded."
+  ]
+}

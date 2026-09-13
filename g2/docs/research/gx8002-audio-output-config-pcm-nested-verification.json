@@ -1,0 +1,137 @@
+{
+  "candidates": [
+    {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_config_pcm",
+          "section_name": ".text.aout_config_pcm",
+          "compiled_bytes": 276,
+          "compiled_sha256": "3256742ee3d97ba9b66811d96a847e19791da24e86e5a8361e6e6118727cd792",
+          "package_offset": 58052,
+          "stock_envelope_bytes": 308,
+          "stock_sha256": "472d2729da8f447f6cb1c3f5aa06a6255b482ce4e49ba93ba942b70fd2d6a559",
+          "fits": true
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_pcm_clock_diagnostic",
+          "section_name": ".rodata.aout_pcm_clock_diagnostic",
+          "compiled_bytes": 118,
+          "compiled_sha256": "cd1456ac2e416e45d575dec5425ccf36816bab21cb0f5f7da6c2e3c812c831f3",
+          "package_offset": 81724,
+          "stock_envelope_bytes": 118,
+          "stock_sha256": "cd1456ac2e416e45d575dec5425ccf36816bab21cb0f5f7da6c2e3c812c831f3",
+          "ownership_kind": "generated_source_data",
+          "fits": true
+        }
+      ],
+      "source_sha256": "510be6c8b33dbd93b49119516720eae82c5af060ab8e71c755e6bacce7b00f72",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_out/gx_audio_out_v2.h",
+        "blob": "9c505e302116fcaa07d32e3f8ce9b03d0d6bbe2b"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Candidate includes independently accounted source text and diagnostic data. Decoded behavior is not yet qualified."
+      ]
+    },
+    {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_i2s_config",
+          "section_name": ".text.aout_i2s_config",
+          "compiled_bytes": 94,
+          "compiled_sha256": "b1b22532e68da48e4d46da851250d79a9e0d5671215e4f5eb4e68c13c8ccea72",
+          "package_offset": 57404,
+          "stock_envelope_bytes": 172,
+          "stock_sha256": "cb1de50a7d7780118a2fb8a17aae1b75967396e8a1ea678b8f8d1df250d1354a",
+          "fits": true
+        }
+      ],
+      "source_sha256": "35160cd1e35aab1b78a5248776e078455f41a42ab80546aa8deaa3ec2e5de06a",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_out/gx_audio_out_v2.h",
+        "blob": "9c505e302116fcaa07d32e3f8ce9b03d0d6bbe2b"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_dac_config",
+          "section_name": ".text.aout_dac_config",
+          "compiled_bytes": 124,
+          "compiled_sha256": "a3b16534aba201428bd9f0e0e5329e820c528ab7a3fd63b74ac12c863ec0f23d",
+          "package_offset": 57204,
+          "stock_envelope_bytes": 200,
+          "stock_sha256": "315d1a3b1f2b6f995d97771a7525416921ab9ba84dbd382f402910c5bbf71d34",
+          "fits": true
+        }
+      ],
+      "source_sha256": "7b867320b878545fd01f32a030a79bdd81fb56dc16c879575214fb686f90ded8",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_set_lodac",
+          "section_name": ".text.aout_set_lodac",
+          "compiled_bytes": 194,
+          "compiled_sha256": "05bf0ebc9e345f0d3c9a79a3260dd95ac7253f83387bed4626d20f6dc2b546af",
+          "package_offset": 57576,
+          "stock_envelope_bytes": 264,
+          "stock_sha256": "5e6751715cba23e125379b5b4e1d5b6d04be5414382fbb101608b1a62d8230cd",
+          "fits": true
+        }
+      ],
+      "source_sha256": "37cbb9af40213dd26e9eb08d22c3e3d5873035094295b4d3189873d7c9a8a6ef",
+      "stock_switch_targets": [
+        270552126,
+        270552132,
+        270551968,
+        270552138,
+        270552144,
+        270552150,
+        270552156
+      ],
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    }
+  ],
+  "nested_cases": 144,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Actual decoded PCM/I2S/DAC/latch paths; uniform initial helper MMIO and fixed valid settings memory. Settings-pointer mutation is tested separately with modeled helper bodies. Hardware semantics and asynchronous mutation remain unqualified."
+  ]
+}

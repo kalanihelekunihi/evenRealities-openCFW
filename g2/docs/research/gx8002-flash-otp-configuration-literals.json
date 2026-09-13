@@ -1,0 +1,115 @@
+{
+  "evidence": {
+    "evidence": {
+      "candidate": {
+        "strings": [
+          {
+            "section_name": ".rodata.otp_error",
+            "package_offset": 92680,
+            "bytes": 22,
+            "sha256": "b3586d06a1dc876fb5451e0ed0bf073c1b75284815d5d6cb00e7ef20b51c237b"
+          },
+          {
+            "section_name": ".rodata.otp_signature",
+            "package_offset": 92702,
+            "bytes": 6,
+            "sha256": "b421a0768e6df358474f6c19477a6e0e66195e8aeb6fd75bbca804c224579b8a"
+          }
+        ],
+        "strings_source_sha256": "397aba5d052f51df72b32697f44cde60a311244db4881d43033753bbf9e3dd70",
+        "dependency_headers": {
+          "arch/soc/grus/include/base_addr.h": {
+            "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+            "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+          },
+          "include/driver/gx_clock/gx_clock_v2.h": {
+            "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+            "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+          }
+        },
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+          "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+          "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+          "role": "board_call_site_reference_only; implementation recovered from stock"
+        },
+        "bindings": {
+          "open_cfw_gx8002_clock_frequency": 268587536,
+          "open_cfw_gx8002_flash_otp_probe": 537027844,
+          "open_cfw_gx8002_flash_otp_read_api": 268584948,
+          "printf": 270560292,
+          "strncmp": 270560380,
+          "open_cfw_gx8002_flash_otp_error": 268585460,
+          "open_cfw_gx8002_flash_otp_signature": 268585482
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-shrink-wrap"
+        ],
+        "header": {
+          "path": "include/driver/gx_clock/gx_clock_v2.h",
+          "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+          "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+        },
+        "source_sha256": "1e0d36a531747f63f22bb8c17f6a35b4edc637f5c83d87a1cd039ca198225a8b",
+        "symbol": "open_cfw_gx8002_flash_otp_configuration",
+        "section_name": ".text",
+        "package_offset": 97560,
+        "compiled_bytes": 112,
+        "compiled_sha256": "b326e432e0f69887036c79845023924719f169d4c82204930eda3588269d3d6b",
+        "stock_envelope_bytes": 112,
+        "stock_sha256": "903fa15b9f0bbc15866ee7b6e1233b2a118ecb7ed23450f84426683328c9daa6",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build-only candidate. Source strings linked and byte-checked. Probe ABI, contained literal use, nested OTP and caller behavior require qualification before admission."
+        ]
+      },
+      "cases": 3840,
+      "source_admitted": false,
+      "limits": [
+        "Decoded policy, stack initialization, argument forwarding and ABI checked; flash/clock/string helpers modeled. strlen removal justified by authenticated fixed five-byte signature. Partial writes and scripted configuration mutations at helper boundaries checked; actual nested helpers and hardware remain unqualified."
+      ]
+    },
+    "api_cases": 40,
+    "decoded_api_callbacks": 20,
+    "api_elf_sha256": "85f2e472f2a0d4011308aa70cd54d417dfd38659d0123b7ddc92522f07d6e505",
+    "source_admitted": false,
+    "limits": [
+      "Actual decoded API dispatch shares caller local memory; missing callback, partial writes and signed status tested. SPI callback effects remain scripted; no hardware qualification."
+    ]
+  },
+  "literal_loads": [
+    {
+      "instruction": 268590358,
+      "cell": 268590444,
+      "value": 537027844
+    },
+    {
+      "instruction": 268590400,
+      "cell": 268590448,
+      "value": 268585460
+    },
+    {
+      "instruction": 268590416,
+      "cell": 268590448,
+      "value": 268585460
+    }
+  ],
+  "negative_checks": 3,
+  "elf_sha256": "4075802dbabd6595297589ebd821222c2fd726a1f8e7e9acaa129baf908ae714",
+  "source_admitted": false,
+  "limits": [
+    "All three disassembled literal loads resolve to two checked words contained within the 112-byte source section. Disassembler decoding trusted; three corrupted/out-of-envelope cases rejected. Candidate remains unregistered; retained hybrid OTP path still needs replacement."
+  ]
+}

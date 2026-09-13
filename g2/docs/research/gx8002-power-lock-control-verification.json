@@ -1,0 +1,73 @@
+{
+  "candidate": {
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_power_lock",
+        "section_name": ".text.lock",
+        "package_offset": 68916,
+        "stock_envelope_bytes": 44,
+        "compiled_bytes": 44,
+        "compiled_sha256": "6f9444eff0500ec1aeeaa1b3a9276ce23d81b1263d84fce05c98069dfbfddc96",
+        "stock_sha256": "6f9444eff0500ec1aeeaa1b3a9276ce23d81b1263d84fce05c98069dfbfddc96",
+        "fits": true,
+        "exact_stock": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_power_unlock",
+        "section_name": ".text.unlock",
+        "package_offset": 68960,
+        "stock_envelope_bytes": 36,
+        "compiled_bytes": 36,
+        "compiled_sha256": "20a557df7f87d133266599a83d9516f13228e3d299343a9d50ff154337ecd661",
+        "stock_sha256": "ccf1380840e610a80bbe65f45878bf42288999af5dbb7f868344122c9607c479",
+        "fits": true,
+        "exact_stock": false
+      }
+    ],
+    "source_sha256": "ab3ba618e28a6dce3d3c14c7b75eb6edbe793e166f2a334b58905bc05b71b5aa",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-peel-loops",
+      "-fno-tree-ch"
+    ],
+    "upstream": {
+      "path": "lvp/common/lvp_pmu.c",
+      "blob": "a49f3266ec8a6d77f51ccb919dab5be1d13fdf56",
+      "sha256": "e1421f08efa9ddf637da03b39f6aebebef4782c720bee74a0df8d003b62a85be"
+    },
+    "source_admitted": false,
+    "limits": [
+      "Candidate only; decoded initialization and callback qualification pending."
+    ]
+  },
+  "decoded_cases": 18480,
+  "source_admitted": false,
+  "shift_evidence": {
+    "repository": "https://github.com/T-head-Semi/qemu",
+    "commit": "3287d345c7f5d60d5c8774d90752f5f710744f85",
+    "path": "target/csky/translate_v2.c",
+    "sha256": "d56e8f41f25c225e3a6d7446a26062cacee2a4f9fe6a2df8661cf066c9e373a5",
+    "lsl_lines": [
+      530,
+      544
+    ],
+    "rotl_lines": [
+      575,
+      589
+    ],
+    "semantics": "LSL and ROTL mask count to six bits and return zero for masked counts greater than31. ROTL otherwise rotates32 bits.",
+    "qualification": "Vendor emulator source evidence; not a physical-device boundary test."
+  },
+  "limits": [
+    "All six-bit shift classes across positive/negative and signed-boundary handles, ordered memory and ABI checked. C uses two reviewed inline instruction wrappers with defined host equivalents. Vendor emulator semantics, not physical hardware qualification; asynchronous accesses unqualified."
+  ]
+}

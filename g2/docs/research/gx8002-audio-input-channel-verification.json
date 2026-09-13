@@ -1,0 +1,34 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "header": {
+      "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+      "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+    },
+    "oracle": {
+      "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+      "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+      "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+      "section": ".text.gx_audio_in_set_input_channel",
+      "relocations": [],
+      "role": "symbol_evidence_only"
+    },
+    "bindings": {},
+    "source_sha256": "3f2f8f95c55c06989b0dd27cb7deea8952fca16b0903a1e0b04c451780c0dd9e",
+    "symbol": "open_cfw_gx8002_audio_input_channel",
+    "compiled_bytes": 54,
+    "compiled_sha256": "fff2823d4b9831bc9a201c3f3ab27933274247d216503ce3dcfc4e76ae11110f",
+    "package_offset": 54524,
+    "stock_envelope_bytes": 56,
+    "stock_sha256": "4edb0c02d3d893d745dd0013cb3f2a6f001612f70750675cb474618e231b6686",
+    "fits": true,
+    "source_admitted": false,
+    "hardware_qualified": false
+  },
+  "decoded_cases": 26136,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Selector no-op paths, low-four-bit narrowing, independent channel writes and unrelated-bit preservation checked. MMIO modeled; physical channel routing unqualified."
+  ]
+}

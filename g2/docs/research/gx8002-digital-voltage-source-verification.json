@@ -1,0 +1,107 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_digital_voltage",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 38,
+      "compiled_sha256": "37f9ece862d93a0ed95b87d93b3e1a703eca0a0508d2564fd0c521fb3ee975b9",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_digital_voltage",
+          "package_offset": 91972,
+          "bytes": 44,
+          "sha256": "a5c2d9e2bbd1fc60f43afbed620510ccac0546aa4fa3b56b38c216aeb545824f",
+          "region": "image_a_sram"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "evidence": {
+      "candidate": {
+        "dependency_headers": {
+          "arch/soc/grus/include/base_addr.h": {
+            "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+            "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+          },
+          "include/driver/gx_clock/gx_clock_v2.h": {
+            "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+            "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+          }
+        },
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+          "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+          "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+          "role": "board_call_site_reference_only; implementation recovered from stock"
+        },
+        "bindings": {
+          "gx_pmu_ctrl_set": 268590452
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "header": {
+          "path": "include/driver/gx_pmu_ctrl.h",
+          "blob": "d3826fa23025ff1ffd4c39ad639998a2de6e2b9f",
+          "sha256": "d22a3a65c28d3b8bb065d9925d102c0d64a2521740e7e5468e232a686e9c3bf5"
+        },
+        "source_sha256": "f7509e1d1198e554dc62c648d1f72aba5fc5f9d5e59e1fe09b5c71ef2aef2c01",
+        "symbol": "open_cfw_gx8002_digital_voltage",
+        "section_name": ".text",
+        "package_offset": 91972,
+        "compiled_bytes": 38,
+        "compiled_sha256": "37f9ece862d93a0ed95b87d93b3e1a703eca0a0508d2564fd0c521fb3ee975b9",
+        "stock_envelope_bytes": 44,
+        "stock_sha256": "a5c2d9e2bbd1fc60f43afbed620510ccac0546aa4fa3b56b38c216aeb545824f",
+        "fits": true,
+        "source_admitted": false,
+        "intentional_change": "Initialize the 27 SDK-reserved command bits to zero instead of leaking stack data.",
+        "limits": [
+          "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+        ]
+      },
+      "cases": 2064,
+      "reserved_bit_changes": 1545,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Decoded wrapper qualification only; PMU dispatcher remains a modeled boundary.",
+        "Reserved bits intentionally zeroed; hardware behavior remains unqualified."
+      ]
+    },
+    "decoded_pmu_calls": 4120,
+    "pmu_elf_sha256": "46bda66482a75525c6ffb9a9559ab551b8edce712c56582c619bc5118f88b730",
+    "source_admitted": false,
+    "limits": [
+      "Exact wrapper-produced word marshalled into decoded PMU dispatcher with source-generated jump table.",
+      "Private caller-record address; physical reserved-bit semantics remain unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_digital_voltage_source.py": "c385fba9424015c8f76b7852a8b5010cca0d5cad8445f3a1e890307f10b8f490",
+    "verify_gx8002_digital_voltage_pmu.py": "8717119f5dc142ced22e21d919c791ee43d858154e88bde925c841c7dd3e8953",
+    "verify_gx8002_digital_voltage.py": "6eb2577a5a0a2a75a88550e7c0776806e2266102a864f037e7ca7b7e9ee7dd2a",
+    "execute_gx8002_digital_voltage.py": "656f290bc00e41eb1ecfb74cb0fbb8ba71dc413470abd52df2aa07bb36140ffe",
+    "build_gx8002_digital_voltage_candidate.py": "d7007ab94d61554cd1f2169443a542ea0a40174cfaea55f41924ae4d99edefeb",
+    "compare_gx8002_platform_config.py": "23ad550650087b1535b9f069384c6ca16d77c3aedfcc0ba7fae00e519a64548b"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Exact wrapper-produced word marshalled into decoded PMU dispatcher with source-generated jump table.",
+    "Private caller-record address; physical reserved-bit semantics remain unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

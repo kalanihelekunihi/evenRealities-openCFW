@@ -1,0 +1,31 @@
+{
+  "candidate": {
+    "source_sha256": "819095caf16e8a19190b9705bf2f9cbdd0a16025ec6b439e2de2df0092668ed9",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "compiled_bytes": 96,
+    "compiled_sha256": "b4ad8e61e09bbb1a493e7e946d1604ab3ba0fd17e11becd863694f11a722f399",
+    "stock_envelope_bytes": 96,
+    "stock_sha256": "b4ad8e61e09bbb1a493e7e946d1604ab3ba0fd17e11becd863694f11a722f399",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Notification setup candidate only; behavior, ownership and ABI require qualification."
+    ]
+  },
+  "cases": 6,
+  "source_admitted": false,
+  "limits": [
+    "Helper returns and local config mutation modeled; integer ABI and independent call/configuration oracle checked; nested behavior unqualified."
+  ]
+}

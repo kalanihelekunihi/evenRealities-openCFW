@@ -1,0 +1,60 @@
+{
+  "build": {
+    "source_sha256": "ad1d024887a07952aa70cb414dbfd8e7b4f266eb3d66aeb7652c38d74f4f81dc",
+    "variants": [
+      {
+        "variant": "forward",
+        "compiled_bytes": 190,
+        "envelope_bytes": 164,
+        "fits": false,
+        "sha256": "7c73d05ad52bd6b73f528e72abfa7022c58e26416a353640f7a6ba58bccc29cb",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-DINVERSE=0"
+        ]
+      },
+      {
+        "variant": "inverse",
+        "compiled_bytes": 188,
+        "envelope_bytes": 164,
+        "fits": false,
+        "sha256": "f05bb2d187dba3f8a24e5551c8a9686d27eeb8c278603381da259ae8f783f74e",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-DINVERSE=1"
+        ]
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Scalar arithmetic recovery candidate only; decoded packed/scalar comparison pending. Linked radix-4 dependencies remain retained."
+    ]
+  },
+  "native_arithmetic_cases": 1400,
+  "harness_sha256": "8d9c4ac9677dac2e3f20794ad1f28b955ce8d18c8eb563f53c56afde88968cd8",
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Native macOS C execution compared against packed-lane reference with no-op lower radix-4 helpers; not decoded C-SKY equivalence.",
+    "Checks complete sample buffers, unchanged coefficients and both helper call arguments. Valid disjoint buffers and even lengths only.",
+    "Candidate placement exceeds original envelopes; lower radix-4 arithmetic still retained."
+  ]
+}

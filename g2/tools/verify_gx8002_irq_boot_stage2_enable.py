@@ -38,6 +38,7 @@ def execute(code, entry, irqn):
     r['r0'] = irqn & 0xffffffff
     initial = r.copy()
     pc = entry
+    writes = []
     for _ in range(64):
         op, args, width = code[pc]
         p = [x.strip() for x in args.split(',')]
@@ -60,9 +61,11 @@ def execute(code, entry, irqn):
                 raise ValueError('unsupported store operand')
             value, base, shift_reg, shift = m.groups()
             address = (r[base] + (r[shift_reg] << int(shift))) & 0xffffffff
-            return address, r[value]
+            writes.append((address, r[value]))
         elif op == 'rts':
-            raise ValueError('returned without a VIC write')
+            if len(writes) != 1 or any(r[f'r{i}'] != initial[f'r{i}'] for i in range(4,32)):
+                raise ValueError('VIC write count or preserved ABI mismatch')
+            return writes[0]
         else:
             raise ValueError(f'unsupported instruction: {op}')
         pc += width

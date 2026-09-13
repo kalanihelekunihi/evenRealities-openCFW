@@ -1,0 +1,157 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_uart_interrupt",
+      "compiled_bytes": 226,
+      "compiled_sha256": "23aa5bfd5f5cddcbdcd542f49bfe9d66c5d24e2136ecd4f1e1ef16e455689928",
+      "section_name": ".text",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_uart_interrupt",
+          "package_offset": 51204,
+          "bytes": 232,
+          "sha256": "180a9f1aec1a232cddaddff6d8b11de5d28dc98d664a859b2221c46b65ca0c7d",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_header": "include/driver/gx_uart.h",
+      "upstream_blob": "243606a2bb600a45c13a4b6dc7174cc549ab93ba",
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_uart_interrupt",
+          "compiled_bytes": 226,
+          "compiled_sha256": "23aa5bfd5f5cddcbdcd542f49bfe9d66c5d24e2136ecd4f1e1ef16e455689928",
+          "stock_sha256": "180a9f1aec1a232cddaddff6d8b11de5d28dc98d664a859b2221c46b65ca0c7d",
+          "package_offset": 51204,
+          "envelope_bytes": 232,
+          "fits": true
+        }
+      ],
+      "source_sha256": "248829eb5680c9841f9f29adc9edc1c0d3e18e4ee0f47ad056f9682b4c090d2e",
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Build only. Decoded interrupt dispatch and callback traces require separate verification."
+      ]
+    },
+    "cases": 1728,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Decoded dispatch and ready-callback paths only: receive/transmit modes 0, 1 and 3. Callback effects modeled, including descriptor/device changes after receive callback. Buffered mode 2 and transmitter drain loop remain unqualified."
+    ]
+  },
+  "additional_qualification": {
+    "buffered": {
+      "candidate": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "upstream_header": "include/driver/gx_uart.h",
+        "upstream_blob": "243606a2bb600a45c13a4b6dc7174cc549ab93ba",
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_uart_interrupt",
+            "compiled_bytes": 226,
+            "compiled_sha256": "23aa5bfd5f5cddcbdcd542f49bfe9d66c5d24e2136ecd4f1e1ef16e455689928",
+            "stock_sha256": "180a9f1aec1a232cddaddff6d8b11de5d28dc98d664a859b2221c46b65ca0c7d",
+            "package_offset": 51204,
+            "envelope_bytes": 232,
+            "fits": true
+          }
+        ],
+        "source_sha256": "248829eb5680c9841f9f29adc9edc1c0d3e18e4ee0f47ad056f9682b4c090d2e",
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Build only. Decoded interrupt dispatch and callback traces require separate verification."
+        ]
+      },
+      "cases": 1152,
+      "poll_reads": 2560,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Small bounded buffers and no callback mutation in this corpus. Polling completes immediately or after three empty samples; permanently stalled transmitter and large signed count edge cases not qualified. No hardware execution."
+      ]
+    },
+    "mutation": {
+      "candidate": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "upstream_header": "include/driver/gx_uart.h",
+        "upstream_blob": "243606a2bb600a45c13a4b6dc7174cc549ab93ba",
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_uart_interrupt",
+            "compiled_bytes": 226,
+            "compiled_sha256": "23aa5bfd5f5cddcbdcd542f49bfe9d66c5d24e2136ecd4f1e1ef16e455689928",
+            "stock_sha256": "180a9f1aec1a232cddaddff6d8b11de5d28dc98d664a859b2221c46b65ca0c7d",
+            "package_offset": 51204,
+            "envelope_bytes": 232,
+            "fits": true
+          }
+        ],
+        "source_sha256": "248829eb5680c9841f9f29adc9edc1c0d3e18e4ee0f47ad056f9682b4c090d2e",
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Build only. Decoded interrupt dispatch and callback traces require separate verification."
+        ]
+      },
+      "cases": 96,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Receive completion callback mutates device, mode, DMA state, transmit buffer/length, completion callback/context and port. Callback bodies are modeled; no hardware or concurrency qualification."
+      ]
+    },
+    "stalled": {
+      "candidate": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "upstream_header": "include/driver/gx_uart.h",
+        "upstream_blob": "243606a2bb600a45c13a4b6dc7174cc549ab93ba",
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_uart_interrupt",
+            "compiled_bytes": 226,
+            "compiled_sha256": "23aa5bfd5f5cddcbdcd542f49bfe9d66c5d24e2136ecd4f1e1ef16e455689928",
+            "stock_sha256": "180a9f1aec1a232cddaddff6d8b11de5d28dc98d664a859b2221c46b65ca0c7d",
+            "package_offset": 51204,
+            "envelope_bytes": 232,
+            "fits": true
+          }
+        ],
+        "source_sha256": "248829eb5680c9841f9f29adc9edc1c0d3e18e4ee0f47ad056f9682b4c090d2e",
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Build only. Decoded interrupt dispatch and callback traces require separate verification."
+        ]
+      },
+      "cases": 36,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Matched finite execution prefixes at 1, 2, 16 and 128 polling reads. Prefix stop belongs to verifier, not firmware. Does not prove eventual behavior or physical hardware timing."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "build_gx8002_uart_interrupt.py": "24eed4057b955a75fa469c61b02472cc5b06dfcd771d670c6dbeb0b660999531",
+    "verify_gx8002_uart_interrupt_dispatch.py": "5123d139299ce8ee79b3498356485ec7ec778d4e5e1c22e00b029b1d40cf97f6",
+    "verify_gx8002_uart_interrupt_buffered.py": "15fb1dd88797aa18133667aea78adbb9290ce673f46ac44191017ef4cb6e4960",
+    "verify_gx8002_uart_interrupt_mutation.py": "755d8531bf4110025d5fb9b7ea19869ccf207f32b0769d42c2c1d76ec75ecb38",
+    "verify_gx8002_uart_interrupt_stall.py": "6670fa29f5513f21490a9eb0275f82a41cc5d0e7ee779bf71f96e681773ed558",
+    "execute_gx8002_uart_interrupt.py": "c23fed22fcb1213e312e996d12ff220bc169f1bdf6e410247cc9f345e7301949",
+    "verify_gx8002_uart_interrupt_source.py": "fefd26e0d22b81f595497ca9dc60094d1818e92eb7ed434302ed92f2c6f0c3f7",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded dispatch, bounded buffered transfers, callback-driven descriptor mutation and stalled drain prefixes checked. Callback bodies and MMIO stimuli modeled; arbitrary counts, concurrency and physical interrupt delivery remain unqualified."
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_aout_route",
+      "section_name": ".data.aout_route",
+      "compiled_bytes": 52,
+      "compiled_sha256": "b490dd275c5c8e43a917e17bf20a05ffac97ea4d870a26e61f7a3992ad777c0e",
+      "ownership_kind": "generated_source_data",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_route",
+          "package_offset": 101288,
+          "bytes": 52,
+          "sha256": "b490dd275c5c8e43a917e17bf20a05ffac97ea4d870a26e61f7a3992ad777c0e",
+          "region": "image_a_dram_data"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_aout_route_name",
+      "section_name": ".rodata.aout_route_name",
+      "compiled_bytes": 13,
+      "compiled_sha256": "0bcf156637a3273a2511140e3e414743acfc815b007fff8514cc9843f7012c21",
+      "ownership_kind": "generated_source_data",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_route_name",
+          "package_offset": 81842,
+          "bytes": 13,
+          "sha256": "0bcf156637a3273a2511140e3e414743acfc815b007fff8514cc9843f7012c21",
+          "region": "image_a_xip_rodata"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_route",
+          "section_name": ".data.aout_route",
+          "compiled_bytes": 52,
+          "compiled_sha256": "b490dd275c5c8e43a917e17bf20a05ffac97ea4d870a26e61f7a3992ad777c0e",
+          "package_offset": 101288,
+          "stock_envelope_bytes": 52,
+          "stock_sha256": "b490dd275c5c8e43a917e17bf20a05ffac97ea4d870a26e61f7a3992ad777c0e",
+          "ownership_kind": "generated_source_data",
+          "fits": true
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_route_name",
+          "section_name": ".rodata.aout_route_name",
+          "compiled_bytes": 13,
+          "compiled_sha256": "0bcf156637a3273a2511140e3e414743acfc815b007fff8514cc9843f7012c21",
+          "package_offset": 81842,
+          "stock_envelope_bytes": 13,
+          "stock_sha256": "0bcf156637a3273a2511140e3e414743acfc815b007fff8514cc9843f7012c21",
+          "ownership_kind": "generated_source_data",
+          "fits": true
+        }
+      ],
+      "source_sha256": "d89940341056afd87e10ac9cc2ef3fbf51378f7a0cb5ef12b1588558faaa06c5",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Typed source route/name match SDK initialization and stock linked contents. Reserved fields remain explicitly unresolved. Full boot copy and driver lifecycle composition remain unqualified."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_output_route.py": "f09766e3dac722ca187506590739ebe9dec49590ad1e96fdf4531844f0d6e485",
+    "verify_gx8002_audio_output_route_source.py": "0b61ecb12967242e78e841e651dde81694657a1905096cee78a95b5ed203598a"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Typed route/name initialization matches stock and pinned SDK; writable/readonly section flags and layout assertions verified. Reserved field semantics, boot data-copy and whole-firmware closure remain unqualified."
+  ]
+}

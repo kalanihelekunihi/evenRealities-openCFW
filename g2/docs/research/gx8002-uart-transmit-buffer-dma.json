@@ -36,7 +36,7 @@
         ]
       }
     ],
-    "transmit_completion_address": 271648780,
+    "transmit_completion_address": 271648768,
     "owned_dma_storage": [
       {
         "symbol": "open_cfw_gx8002_dma_state",
@@ -254,7 +254,7 @@
       },
       {
         "name": "dma_deallocate",
-        "sha256": "0bd6453305d341073f9b2c12724a0a940cfb4cc81e43deb1c433cd588302ec6d",
+        "sha256": "e51018b661f7428391c72a5e0332e0ad892a0dfaaf6a2584bc462866bf00f282",
         "extra_flags": []
       },
       {
@@ -276,7 +276,7 @@
       },
       {
         "name": "dma_transfer",
-        "sha256": "f458babcf944e072161b7db8c602e31447bb3a424492ca0c242f84805788f56b",
+        "sha256": "9d52499707765b0c8e7434fbbec57fca070ac85aaa64ee93dc3670b5a29718b7",
         "extra_flags": []
       },
       {
@@ -286,7 +286,7 @@
       },
       {
         "name": "uart_receive_buffer",
-        "sha256": "7087df41826eff0932ea6bf929d42354af99f8037a3b6c3ebd86563b2e19f82e",
+        "sha256": "e10761790f5236c0c4744d3ed84a7cd67f206be645a8903ada534e965759d53b",
         "extra_flags": []
       },
       {
@@ -301,7 +301,7 @@
       },
       {
         "name": "uart_receive_dma",
-        "sha256": "fa2ae5628f4a2271338513f233d635c0effe2ea41f4154b7d34db53610aa0657",
+        "sha256": "ae8539845bebb5e3ce2847ea1ca4af5496705d5355f9a52d87563214fef4cc57",
         "extra_flags": []
       },
       {
@@ -321,7 +321,7 @@
       },
       {
         "name": "uart_transmit_dma",
-        "sha256": "533168dee449252590411c7ec7b35e0007ee8642ee9f4ba9551f1209d368e7b5",
+        "sha256": "6a45c518ef6e24f09d6ff8640986cdcc18d4a786160268151ca507b68506d417",
         "extra_flags": []
       },
       {
@@ -331,7 +331,7 @@
       },
       {
         "name": "uart_transmit_buffer",
-        "sha256": "dee2744e08e5bd9ad1c6764dcfa41f280fc29425ff371d22a1846e2edda0b513",
+        "sha256": "889b47746c7b7bbc676109d36ae35114f7b9214ad3181fdaff24d9ccf71824cf",
         "extra_flags": []
       },
       {
@@ -378,14 +378,14 @@
       {
         "name": ".text",
         "address": 271646720,
-        "bytes": 2672,
-        "sha256": "a423c9bdce89260cd8e0145a5a46c4aaa49ba4c3e394d3472d51e1dcdc71b88a"
+        "bytes": 2656,
+        "sha256": "99414340c0a8e56435d11e6251a199796f3fecace8ae571051c96c850834d210"
       },
       {
         "name": ".rodata",
-        "address": 271649392,
+        "address": 271649376,
         "bytes": 76,
-        "sha256": "ad97e028579924c5cad42ac015606e0a9ae655427b5447818abb51201ced78b2"
+        "sha256": "7cff401db19365b77518c797e09f0cea9f77ec9ed07f65412ffb909a32de3da6"
       },
       {
         "name": ".data",
@@ -396,7 +396,7 @@
     ],
     "callback_link": {
       "symbol": "open_cfw_gx8002_uart_receive_complete",
-      "linked_address": 271648104,
+      "linked_address": 271648092,
       "original_address": 270545124,
       "symbol_relocation_verified": true
     },
@@ -455,15 +455,15 @@
     "clock_source_calls": [
       {
         "caller": "dma_initialize",
-        "target": 271649104
+        "target": 271649088
       },
       {
         "caller": "dma_select",
-        "target": 271649104
+        "target": 271649088
       },
       {
         "caller": "dma_deallocate",
-        "target": 271649104
+        "target": 271649088
       }
     ],
     "source_aliases": {
@@ -483,9 +483,26 @@
   },
   "decoded_cases": 72,
   "decoded_setup_calls": 18,
+  "decoded_completions": 12,
+  "decoded_burst_calls": 24,
+  "decoded_cache_calls": 18,
+  "decoded_selection_calls": 18,
+  "decoded_gate_calls": 12,
+  "decoded_clear_calls": 12,
+  "decoded_deallocation_calls": 24,
+  "decoded_release_calls": 12,
+  "decoded_disable_calls": 12,
+  "decoded_transfer": {
+    "transfers": 12,
+    "configurations": 12,
+    "descriptors": 12,
+    "clears": 12,
+    "caches": 12,
+    "translations": 36
+  },
   "source_admitted": false,
   "hardware_qualified": false,
   "limits": [
-    "Source defaults and application parameters feed decoded buffer/setup frames. DMA mode is modeled as already configured; setup leaf effects modeled. Startup and physical execution unqualified."
+    "Source defaults and application parameters feed decoded buffer/setup frames. DMA mode and interrupt arrival are modeled. Transfer, configuration, bus translation, descriptor generation and descriptor cache publication execute linked source code in separate frames with explicit handoffs. Allocation persists from selection through ISR and completion; IRQ and clock leaves are decoded. Descriptor memory is isolated; startup and physical execution unqualified."
   ]
 }

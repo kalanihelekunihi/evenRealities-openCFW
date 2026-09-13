@@ -1,0 +1,156 @@
+{
+  "functions": [
+    {
+      "symbol": "UartMessageAsyncSend",
+      "section_name": ".text",
+      "compiled_bytes": 156,
+      "compiled_sha256": "fb17ba0de869bb99e2069e749f6073703bef7b438376e0ece1292ad380ea3984",
+      "stock_occurrences": [
+        {
+          "symbol": "UartMessageAsyncSend",
+          "package_offset": 72008,
+          "bytes": 156,
+          "sha256": "7fb1da8b58509c76a54186308eaec6074ec325c8340005336f660ed8f6fb28e0",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+      "headers_sha256": {
+        "uart_message_v2.h": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2",
+        "lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+      },
+      "generated_source_sha256": "db6551cb1cc690319057a532d6318c6a96887af266102601ac29c75c4c0584b1",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-error=sign-compare",
+        "-Wno-error=unused-parameter",
+        "-Wno-error=address-of-packed-member",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-nationalchip-lvp-kws/lvp/common"
+      ],
+      "bindings": {
+        "_GetMessageHandle": 270564032,
+        "crc32": 270571688,
+        "gx_dcache_clean_range": 268588644,
+        "_UartMessageSendCheck": 270564060,
+        "LvpQueueIsFull": 270561288,
+        "LvpQueuePut": 268591544
+      },
+      "compiled_bytes": 156,
+      "compiled_sha256": "fb17ba0de869bb99e2069e749f6073703bef7b438376e0ece1292ad380ea3984",
+      "stock_envelope_bytes": 156,
+      "stock_sha256": "7fb1da8b58509c76a54186308eaec6074ec325c8340005336f660ed8f6fb28e0",
+      "fits": true,
+      "exact_stock": false,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Source-built candidate only; complete decoded state-machine comparison and admission remain pending. External state uses established RAM addresses."
+      ]
+    },
+    "decoded_cases": 2880,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Independent packet/header/sequence oracle and helper publication snapshots; final guarded memory and ABI. Helpers modeled; mutation,aliasing and nested queue composition pending."
+    ]
+  },
+  "mutations": {
+    "decoded_mutation_alias_cases": 1728,
+    "source_admitted": false,
+    "limits": [
+      "Selected aligned packet/context overlaps and helper writes checked against independent oracle and stock/source execution. Physical helpers/concurrency and arbitrary overlaps unqualified."
+    ]
+  },
+  "queue_composition": {
+    "queue_dependency": {
+      "symbol": "LvpQueuePut",
+      "section_name": ".sram_text",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpQueuePut",
+          "package_offset": 98764,
+          "bytes": 90,
+          "sha256": "f267c3301f1725624a009ffb30bf92f2dee4c0f708918a078c9f1270e94e173a",
+          "region": "image_a_sram_text"
+        }
+      ],
+      "upstream_files": [
+        {
+          "path": "lvp/common/lvp_queue.c",
+          "git_blob": "575d43d27ebd9ca3655a199363eba4968fd8155f",
+          "sha256": "ed8fba34e8658c0c7d49868790a89dce7188b8c81fe0c04f68969de1670b5814"
+        },
+        {
+          "path": "lvp/common/lvp_queue.h",
+          "git_blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+          "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+        },
+        {
+          "path": "include/lvp_attr.h",
+          "git_blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+          "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+        }
+      ],
+      "compile_flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-ivopts"
+      ],
+      "cases": 2196,
+      "compiled_bytes": 86,
+      "compiled_sha256": "188dd2d5ff8fd5c96c2582c6483c1c589a1e6a6241fbb414cc231892ccae1c1c",
+      "exact_memory_trace_comparison": true,
+      "source_admitted": true,
+      "limits": [
+        "Finite valid queue states, no concurrent mutation or aliasing.",
+        "Not a full processor emulator; experimental same-entry placement; no hardware qualification."
+      ]
+    },
+    "enqueue_cases": 72,
+    "queue_executions": 216,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Source queue executes in translated separate memory; full after initial modeled nonfull check included. Physical concurrency, shared queue/packet aliasing and actual cache effects unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_uart_message_enqueue_mutations.py": "3664e6c8b5954e4a9bc2e10e007f8c2ff99fe5421baa6f8241e5e7c46d25198a",
+    "verify_gx8002_uart_message_enqueue_queue.py": "dcbb235de6ad073cb64358444004d13008f2128fb601ecd46765fa0a04d3cada",
+    "compare_gx8002_queue_put.py": "fffb3a0ca48e0e9e557eadec90e7ba721bcdc9eb51b806d11ca3edff2a4d5f76",
+    "compare_gx8002_queue_get.py": "9e3d42e8ca159c5f505c0b500b360333a8379f80dd42967a91636e48af0f21e8",
+    "verify_gx8002_uart_message_enqueue_source.py": "1777166b34b5eca4857950cdd7709b8eea45119a20125b564eb9b36da68134f6",
+    "verify_gx8002_uart_message_enqueue.py": "80adf79dfb792564a6d2a7f446d25794f91cdab5abaa9727d3348f71bebf38e7",
+    "execute_gx8002_uart_message_enqueue.py": "b9f11265176e5b4c50af36a06d6f9067e103db8fe193f101737f76ad01299dce",
+    "build_gx8002_uart_message_enqueue.py": "7694e3097375c4cc53fe1e1893c726a705b812f5b89aad938511663b92beda4e",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Native upstream C; independent baseline, helper mutation/context aliases and nested queue comparison. Helpers otherwise modeled; physical concurrency, cache effects and arbitrary overlap remain unqualified."
+  ]
+}

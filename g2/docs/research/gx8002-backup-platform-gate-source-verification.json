@@ -1,0 +1,1105 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_platform_gate",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 254,
+      "compiled_sha256": "e28c7e78a2a161233b64d65240d6a10a92c651de00cad548386b9b2627fe051d",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_platform_gate",
+          "package_offset": 247080,
+          "bytes": 254,
+          "sha256": "0986dd703066ac80e9ff9c28e3ecbbcf40af85c0a2b975cbf78f5c5c2e7f27be",
+          "region": "image_b_sram_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_platform_gate_switches",
+      "section_name": ".rodata",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 148,
+      "compiled_sha256": "2ad9cba3ad623e75a0f232a33aaa80402454f2b23c8bd4664fcad5a028d48193",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_platform_gate_switches",
+          "package_offset": 307868,
+          "bytes": 148,
+          "sha256": "eb5172991b4d8194e66afe4b54c8755575bc4bb4e602b8f1a1e3eef53ebbdd54",
+          "region": "image_b_sram_text"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "lookup": {
+      "evidence": {
+        "upstream_evidence": {
+          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+          "dependencies": [
+            {
+              "path": "arch/soc/grus/include/clk_priv.h",
+              "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+              "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+            },
+            {
+              "path": "arch/soc/grus/include/base_addr.h",
+              "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+              "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+            },
+            {
+              "path": "include/driver/gx_clock.h",
+              "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+              "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+            },
+            {
+              "path": "include/driver/gx_clock/gx_clock_v2.h",
+              "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+              "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+            },
+            {
+              "path": "LICENSE",
+              "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+              "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+            }
+          ],
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "--param=case-values-threshold=3",
+            "-fno-gcse",
+            "-fno-tree-forwprop"
+          ],
+          "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+          "lookup_runtime_address": 268448992,
+          "sections": [
+            {
+              "section": ".text",
+              "runtime_address": 268450792,
+              "package_offset": 247080,
+              "compiled_bytes": 254,
+              "compiled_sha256": "e28c7e78a2a161233b64d65240d6a10a92c651de00cad548386b9b2627fe051d",
+              "envelope_bytes": 264,
+              "fits": true,
+              "stock_sha256": "17fa73ba793655dd80b8c00f5077aed9c2b44e72e14f3daa81d4b5b4f68560fe"
+            },
+            {
+              "section": ".rodata",
+              "runtime_address": 268511580,
+              "package_offset": 307868,
+              "compiled_bytes": 148,
+              "compiled_sha256": "2ad9cba3ad623e75a0f232a33aaa80402454f2b23c8bd4664fcad5a028d48193",
+              "envelope_bytes": 148,
+              "fits": true,
+              "stock_sha256": "eb5172991b4d8194e66afe4b54c8755575bc4bb4e602b8f1a1e3eef53ebbdd54"
+            }
+          ],
+          "source_admitted": false,
+          "hardware_qualified": false,
+          "limits": [
+            "Upstream gate and source-generated jump tables only; lookup remains bound to retained backup entry.",
+            "Branch-table mapping, lookup/table semantics, MMIO equivalence and loader qualification pending."
+          ]
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-tree-loop-optimize",
+          "-fno-delete-null-pointer-checks"
+        ],
+        "tables": [
+          {
+            "section": ".data.gx_clock_param_table",
+            "runtime_address": 536963484,
+            "package_offset": 324316,
+            "bytes": 416,
+            "sha256": "81bd4f742fa21f20e11836d732d1d5912e00e04632b8c749964c815720fe0620",
+            "byte_exact": true
+          },
+          {
+            "section": ".data.gx_clock_dto_table",
+            "runtime_address": 536963900,
+            "package_offset": 324732,
+            "bytes": 3,
+            "sha256": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+            "byte_exact": true
+          },
+          {
+            "section": ".data.gx_clock_div_table",
+            "runtime_address": 536963904,
+            "package_offset": 324736,
+            "bytes": 68,
+            "sha256": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872",
+            "byte_exact": true
+          }
+        ],
+        "source_table_bytes": 487,
+        "lookup": {
+          "compiled_bytes": 160,
+          "compiled_sha256": "72b1d75eb12eb94e885d26931da4ef1c4be56f99174edfbb11b613ba4c745a16",
+          "envelope_bytes": 192,
+          "runtime_address": 268448992,
+          "package_offset": 245280
+        },
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Source-defined parameter/DTO/divider tables match backup bytes after pointer relocation.",
+          "Lookup behavior, external references and loader qualification pending; padding excluded."
+        ]
+      },
+      "cases": 42160,
+      "source_admitted": false,
+      "limits": [
+        "Finite decoded execution; ordinary RAM reads may be optimized.",
+        "No concurrent table mutation, overlapping output, hardware or timing qualification."
+      ]
+    },
+    "composition": {
+      "lookup_build": {
+        "upstream_evidence": {
+          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+          "dependencies": [
+            {
+              "path": "arch/soc/grus/include/clk_priv.h",
+              "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+              "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+            },
+            {
+              "path": "arch/soc/grus/include/base_addr.h",
+              "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+              "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+            },
+            {
+              "path": "include/driver/gx_clock.h",
+              "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+              "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+            },
+            {
+              "path": "include/driver/gx_clock/gx_clock_v2.h",
+              "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+              "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+            },
+            {
+              "path": "LICENSE",
+              "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+              "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+            }
+          ],
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "--param=case-values-threshold=3",
+            "-fno-gcse",
+            "-fno-tree-forwprop"
+          ],
+          "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+          "lookup_runtime_address": 268448992,
+          "sections": [
+            {
+              "section": ".text",
+              "runtime_address": 268450792,
+              "package_offset": 247080,
+              "compiled_bytes": 254,
+              "compiled_sha256": "e28c7e78a2a161233b64d65240d6a10a92c651de00cad548386b9b2627fe051d",
+              "envelope_bytes": 264,
+              "fits": true,
+              "stock_sha256": "17fa73ba793655dd80b8c00f5077aed9c2b44e72e14f3daa81d4b5b4f68560fe"
+            },
+            {
+              "section": ".rodata",
+              "runtime_address": 268511580,
+              "package_offset": 307868,
+              "compiled_bytes": 148,
+              "compiled_sha256": "2ad9cba3ad623e75a0f232a33aaa80402454f2b23c8bd4664fcad5a028d48193",
+              "envelope_bytes": 148,
+              "fits": true,
+              "stock_sha256": "eb5172991b4d8194e66afe4b54c8755575bc4bb4e602b8f1a1e3eef53ebbdd54"
+            }
+          ],
+          "source_admitted": false,
+          "hardware_qualified": false,
+          "limits": [
+            "Upstream gate and source-generated jump tables only; lookup remains bound to retained backup entry.",
+            "Branch-table mapping, lookup/table semantics, MMIO equivalence and loader qualification pending."
+          ]
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-tree-loop-optimize",
+          "-fno-delete-null-pointer-checks"
+        ],
+        "tables": [
+          {
+            "section": ".data.gx_clock_param_table",
+            "runtime_address": 536963484,
+            "package_offset": 324316,
+            "bytes": 416,
+            "sha256": "81bd4f742fa21f20e11836d732d1d5912e00e04632b8c749964c815720fe0620",
+            "byte_exact": true
+          },
+          {
+            "section": ".data.gx_clock_dto_table",
+            "runtime_address": 536963900,
+            "package_offset": 324732,
+            "bytes": 3,
+            "sha256": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+            "byte_exact": true
+          },
+          {
+            "section": ".data.gx_clock_div_table",
+            "runtime_address": 536963904,
+            "package_offset": 324736,
+            "bytes": 68,
+            "sha256": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872",
+            "byte_exact": true
+          }
+        ],
+        "source_table_bytes": 487,
+        "lookup": {
+          "compiled_bytes": 160,
+          "compiled_sha256": "72b1d75eb12eb94e885d26931da4ef1c4be56f99174edfbb11b613ba4c745a16",
+          "envelope_bytes": 192,
+          "runtime_address": 268448992,
+          "package_offset": 245280
+        },
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Source-defined parameter/DTO/divider tables match backup bytes after pointer relocation.",
+          "Lookup behavior, external references and loader qualification pending; padding excluded."
+        ]
+      },
+      "gate_cases": 8432,
+      "compiled_lookup_calls": 33728,
+      "lookup_elf_sha256": "efc1713afe5aca847a2eba37e5000256cd0dc5f951532a4054eed42291dc5b23",
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Compiled upstream lookup result and ordered output writes supply the gate local structure; source-defined table IDs used.",
+        "Separate abstract frames and fixed table contents. Physical clock transitions, concurrency and loader/reference admission remain unqualified."
+      ]
+    },
+    "loader": {
+      "build": {
+        "upstream_evidence": {
+          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+          "dependencies": [
+            {
+              "path": "arch/soc/grus/include/clk_priv.h",
+              "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+              "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+            },
+            {
+              "path": "arch/soc/grus/include/base_addr.h",
+              "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+              "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+            },
+            {
+              "path": "include/driver/gx_clock.h",
+              "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+              "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+            },
+            {
+              "path": "include/driver/gx_clock/gx_clock_v2.h",
+              "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+              "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+            },
+            {
+              "path": "LICENSE",
+              "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+              "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+            }
+          ],
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "--param=case-values-threshold=3",
+            "-fno-gcse",
+            "-fno-tree-forwprop"
+          ],
+          "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+          "lookup_runtime_address": 268448992,
+          "sections": [
+            {
+              "section": ".text",
+              "runtime_address": 268450792,
+              "package_offset": 247080,
+              "compiled_bytes": 254,
+              "compiled_sha256": "e28c7e78a2a161233b64d65240d6a10a92c651de00cad548386b9b2627fe051d",
+              "envelope_bytes": 264,
+              "fits": true,
+              "stock_sha256": "17fa73ba793655dd80b8c00f5077aed9c2b44e72e14f3daa81d4b5b4f68560fe"
+            },
+            {
+              "section": ".rodata",
+              "runtime_address": 268511580,
+              "package_offset": 307868,
+              "compiled_bytes": 148,
+              "compiled_sha256": "2ad9cba3ad623e75a0f232a33aaa80402454f2b23c8bd4664fcad5a028d48193",
+              "envelope_bytes": 148,
+              "fits": true,
+              "stock_sha256": "eb5172991b4d8194e66afe4b54c8755575bc4bb4e602b8f1a1e3eef53ebbdd54"
+            }
+          ],
+          "source_admitted": false,
+          "hardware_qualified": false,
+          "limits": [
+            "Upstream gate and source-generated jump tables only; lookup remains bound to retained backup entry.",
+            "Branch-table mapping, lookup/table semantics, MMIO equivalence and loader qualification pending."
+          ]
+        },
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-tree-loop-optimize",
+          "-fno-delete-null-pointer-checks"
+        ],
+        "tables": [
+          {
+            "section": ".data.gx_clock_param_table",
+            "runtime_address": 536963484,
+            "package_offset": 324316,
+            "bytes": 416,
+            "sha256": "81bd4f742fa21f20e11836d732d1d5912e00e04632b8c749964c815720fe0620",
+            "byte_exact": true
+          },
+          {
+            "section": ".data.gx_clock_dto_table",
+            "runtime_address": 536963900,
+            "package_offset": 324732,
+            "bytes": 3,
+            "sha256": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+            "byte_exact": true
+          },
+          {
+            "section": ".data.gx_clock_div_table",
+            "runtime_address": 536963904,
+            "package_offset": 324736,
+            "bytes": 68,
+            "sha256": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872",
+            "byte_exact": true
+          }
+        ],
+        "source_table_bytes": 487,
+        "lookup": {
+          "compiled_bytes": 160,
+          "compiled_sha256": "72b1d75eb12eb94e885d26931da4ef1c4be56f99174edfbb11b613ba4c745a16",
+          "envelope_bytes": 192,
+          "runtime_address": 268448992,
+          "package_offset": 245280
+        },
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Source-defined parameter/DTO/divider tables match backup bytes after pointer relocation.",
+          "Lookup behavior, external references and loader qualification pending; padding excluded."
+        ]
+      },
+      "patches": [
+        {
+          "section": ".text",
+          "address": 268448992,
+          "offset": 245280,
+          "bytes": 160,
+          "sha256": "72b1d75eb12eb94e885d26931da4ef1c4be56f99174edfbb11b613ba4c745a16"
+        },
+        {
+          "section": ".data.gx_clock_param_table",
+          "address": 536963484,
+          "offset": 324316,
+          "bytes": 416,
+          "sha256": "81bd4f742fa21f20e11836d732d1d5912e00e04632b8c749964c815720fe0620"
+        },
+        {
+          "section": ".data.gx_clock_dto_table",
+          "address": 536963900,
+          "offset": 324732,
+          "bytes": 3,
+          "sha256": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b"
+        },
+        {
+          "section": ".data.gx_clock_div_table",
+          "address": 536963904,
+          "offset": 324736,
+          "bytes": 68,
+          "sha256": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872"
+        },
+        {
+          "section": ".text",
+          "address": 268450792,
+          "offset": 247080,
+          "bytes": 254,
+          "sha256": "e28c7e78a2a161233b64d65240d6a10a92c651de00cad548386b9b2627fe051d"
+        },
+        {
+          "section": ".rodata",
+          "address": 268511580,
+          "offset": 307868,
+          "bytes": 148,
+          "sha256": "2ad9cba3ad623e75a0f232a33aaa80402454f2b23c8bd4664fcad5a028d48193"
+        }
+      ],
+      "replacement_bytes": 1049,
+      "loader_cases": 12,
+      "candidate_image_sha256": "76e855d4d9a1937e5b9f05a1505ee78d957867bfc8bbc5a149b58c6672cd713b",
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Combined normal backup-loader placement, with no replacement fill and unrelated bytes unchanged.",
+        "Data retained at original physical SRAM offsets; runtime alias/clock behavior and external-reference admission remain separate."
+      ]
+    },
+    "references": {
+      "image_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "functions": {
+        "lookup": {
+          "interval": [
+            245280,
+            245472
+          ],
+          "branches": [
+            {
+              "offset": 245532,
+              "target": 245280,
+              "entry": true
+            },
+            {
+              "offset": 245970,
+              "target": 245280,
+              "entry": true
+            },
+            {
+              "offset": 246322,
+              "target": 245280,
+              "entry": true
+            },
+            {
+              "offset": 247114,
+              "target": 245280,
+              "entry": true
+            },
+            {
+              "offset": 247188,
+              "target": 245280,
+              "entry": true
+            },
+            {
+              "offset": 247380,
+              "target": 245280,
+              "entry": true
+            }
+          ],
+          "external_pool_loads": [],
+          "runtime_words": []
+        },
+        "gate": {
+          "interval": [
+            247080,
+            247344
+          ],
+          "branches": [
+            {
+              "offset": 245026,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 245072,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 248162,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 249456,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 251116,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 251188,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 251532,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 251578,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 252230,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 253044,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 253148,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 253234,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 254186,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 255556,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 257732,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 257740,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 257850,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 257858,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 257898,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 257906,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 257924,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 257932,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 263884,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 265010,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 265226,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 265636,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 266008,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 266196,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 266596,
+              "target": 247080,
+              "entry": true
+            },
+            {
+              "offset": 266670,
+              "target": 247080,
+              "entry": true
+            }
+          ],
+          "external_pool_loads": [],
+          "runtime_words": [
+            {
+              "offset": 307868,
+              "value": 268450820,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307872,
+              "value": 268450820,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307876,
+              "value": 268450980,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307880,
+              "value": 268450980,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307884,
+              "value": 268450980,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307888,
+              "value": 268450980,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307892,
+              "value": 268450980,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307896,
+              "value": 268450980,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307900,
+              "value": 268450980,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307904,
+              "value": 268450980,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307908,
+              "value": 268450944,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307912,
+              "value": 268450944,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307916,
+              "value": 268450980,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307920,
+              "value": 268450940,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307924,
+              "value": 268450940,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307928,
+              "value": 268450980,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307932,
+              "value": 268450936,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307936,
+              "value": 268450936,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307940,
+              "value": 268450984,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307944,
+              "value": 268451036,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307948,
+              "value": 268451036,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307952,
+              "value": 268451036,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307956,
+              "value": 268451036,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307960,
+              "value": 268451026,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307964,
+              "value": 268451036,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307968,
+              "value": 268451012,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307972,
+              "value": 268450984,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307976,
+              "value": 268451036,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307980,
+              "value": 268451036,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307984,
+              "value": 268451022,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307988,
+              "value": 268451018,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307992,
+              "value": 268451036,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 307996,
+              "value": 268451004,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 308000,
+              "value": 268451000,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 308004,
+              "value": 268451036,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 308008,
+              "value": 268451008,
+              "entry": false,
+              "replaced_switch_word": true
+            },
+            {
+              "offset": 308012,
+              "value": 268451032,
+              "entry": false,
+              "replaced_switch_word": true
+            }
+          ]
+        }
+      },
+      "tables": {
+        "switch": {
+          "address": 268511580,
+          "bytes": 148,
+          "pointer_matches": [
+            {
+              "offset": 247104,
+              "value": 268511580,
+              "within_replaced_code": true
+            },
+            {
+              "offset": 247220,
+              "value": 268511652,
+              "within_replaced_code": true
+            }
+          ]
+        },
+        "param": {
+          "address": 536963484,
+          "bytes": 416,
+          "pointer_matches": [
+            {
+              "offset": 245460,
+              "value": 536963484,
+              "within_replaced_code": true
+            },
+            {
+              "offset": 245956,
+              "value": 536963484,
+              "within_replaced_code": false
+            }
+          ]
+        },
+        "dto": {
+          "address": 536963900,
+          "bytes": 3,
+          "pointer_matches": [
+            {
+              "offset": 324360,
+              "value": 536963900,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324504,
+              "value": 536963901,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324552,
+              "value": 536963902,
+              "within_replaced_code": false
+            }
+          ]
+        },
+        "div": {
+          "address": 536963904,
+          "bytes": 68,
+          "pointer_matches": [
+            {
+              "offset": 324324,
+              "value": 536963904,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324340,
+              "value": 536963908,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324356,
+              "value": 536963912,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324372,
+              "value": 536963916,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324388,
+              "value": 536963920,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324404,
+              "value": 536963924,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324420,
+              "value": 536963928,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324436,
+              "value": 536963932,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324452,
+              "value": 536963936,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324468,
+              "value": 536963940,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324484,
+              "value": 536963944,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324564,
+              "value": 536963948,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324612,
+              "value": 536963952,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324628,
+              "value": 536963956,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324644,
+              "value": 536963960,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324660,
+              "value": 536963964,
+              "within_replaced_code": false
+            },
+            {
+              "offset": 324676,
+              "value": 536963968,
+              "within_replaced_code": false
+            }
+          ]
+        }
+      },
+      "source_admitted": false,
+      "limits": [
+        "Linear decoded branches and byte-aligned word census; computed and nonstandard entry paths are not globally excluded.",
+        "Gate interior pointers are permitted only in the 37 source-replaced switch words; data-table byte identity is a separate qualification."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "build_gx8002_backup_platform_gate.py": "fbb1daa6fcef886230138dcc2429a45c6e52136b774fe25f00a5810221216370",
+    "build_gx8002_backup_clock_tables.py": "ea58fd1065305f05d8e57bfd5cdfd0c6e232286265e825ba7e68a7f321949951",
+    "compare_gx8002_backup_clock_lookup.py": "a15426311935cc354aaf049e602f456b39cb5ff9635a6dfbd97144ffc8c33f1a",
+    "compare_gx8002_backup_platform_gate.py": "e4698efb65342b2ad91896cc5bc9e2cf71fdadcc9ea2391c720755ba3526f408",
+    "verify_gx8002_backup_clock_gate_composition.py": "60fc4dc1993edd540aa22087b5f7d4101f1c4c388d58fdc47b23c07e3fb1e0aa",
+    "verify_gx8002_backup_clock_loader.py": "c257b57c1ea74bed2491c33a7ea40cbc1dae12b39cae42b73220c653b3992abc",
+    "analyze_gx8002_backup_clock_references.py": "f8897de468ca7fc24e1c497396ea6eb3a80807efbf93c942d94eaa2564334e02",
+    "verify_gx8002_backup_clock_source_common.py": "8151b6b78ee334de1c15af16f5852ff2c37c88969ca7b68e5dec5ebb625ac730",
+    "verify_gx8002_backup_clock_lookup_source.py": "da6ef5347c9eb37ace2b090d9ab93f834a71541582706cb7433864f5774cee67",
+    "verify_gx8002_backup_platform_gate_source.py": "548bd997e001595722b225d1aa96df99d61eef5e8ad393e431ddd7f718f78f62",
+    "verify_gx8002_backup_memset_loader.py": "d1139f142813bf27d701424086d83dfb13c9bbbf1ef968e272368b9c7e65a405",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Pinned upstream source, original entry/table addresses; adjacent code tails and alignment padding retained without replacement fill.",
+    "Observed gate interior references confined to regenerated switch words. Computed/nonstandard entry closure is not globally proven.",
+    "Fixed nonoverlapping tables/output, abstract frames and modeled registers; physical clock transitions and concurrent mutations unqualified."
+  ]
+}

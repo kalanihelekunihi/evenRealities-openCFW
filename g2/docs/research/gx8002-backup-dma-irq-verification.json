@@ -1,0 +1,24 @@
+{
+  "candidate": {
+    "source_sha256": "c5411896ec6d4c0309de871d0309355bd462b3d2ddca160b71cb19d4f29040f6",
+    "compiled_bytes": 112,
+    "compiled_sha256": "a2dd5ba8fb1d4460a5995843bc67402e7e2ea754330142d1fbb8866114a4667f",
+    "envelope_bytes": 120,
+    "fits": true,
+    "bindings": {
+      "open_cfw_gx8002_backup_dma_state": 537056232,
+      "open_cfw_gx8002_backup_dma_callbacks": 536966312,
+      "open_cfw_gx8002_backup_dma_deallocate": 268454848
+    },
+    "source_admitted": false,
+    "limits": [
+      "Candidate only; decoded equivalence and placement pending."
+    ]
+  },
+  "decoded_cases": 168,
+  "source_admitted": false,
+  "limits": [
+    "Deallocator/callback bodies modeled with clobbers and callback mutation; inline MMIO write order checked.",
+    "No hardware interrupt delivery, MMIO side effects or combined relocation qualification."
+  ]
+}

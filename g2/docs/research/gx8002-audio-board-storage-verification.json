@@ -1,0 +1,61 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream": {
+      "include/lvp_param.h": {
+        "blob": "6e8aa73abb6ddc555fb0183456d88629d912f5b6",
+        "sha256": "56033502b75e9a02f2d0c6959974ba2016166ebdd732786d7295d5c2a100ac95"
+      },
+      "include/driver/gx_audio_in.h": {
+        "blob": "3211212e26d06713dc20eac8c3e108db6a0ea6da",
+        "sha256": "bf3bb33c8b52532c6dc23f871319338f81078cbf96a65eb3b5235cf7ca07645c"
+      },
+      "include/driver/gx_audio_in/gx_audio_in_v2.h": {
+        "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+        "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+      },
+      "include/driver/gx_padmux.h": {
+        "blob": "4d7aaa315665a24dc55d77c0bf7b3c285d7358b8",
+        "sha256": "ed2dfbb290aa634bca68dc536583ac7a24994fb9b9f73165dc00ba453ea631d2"
+      }
+    },
+    "source_sha256": "469d68b93640d7b34afcc879f23858e7dffb755e8d6b868e6e525390c1c604e5",
+    "elf_sha256": "2e17a488fff4ba42dd91461679705acf362cfbca1f9f9ac38eba726514360657",
+    "compiled_sha256": "e1d1077d066d53c1e39bcefca3ec0294d43ace92ffc1a986d2a432cd931dde2e",
+    "compiled_bytes": 240,
+    "package_offset": 100792,
+    "runtime_address": 537029028,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "findings": [
+      "All 240 bytes reconstructed through named SDK fields and enums, with no binary input to compilation or linking.",
+      "PDM input, stereo PDM track, 12dB rough gain, DC removal, PCM1 and logfbank outputs; remaining defaults explicitly typed or zero initialized."
+    ],
+    "limits": [
+      "Exact data and ABI agreement; startup, consumer composition and source registry admission remain to be qualified."
+    ]
+  },
+  "checked_artifacts": 372,
+  "references": [
+    {
+      "kind": "audio-board-control",
+      "artifact_sha256": "6b584bda8e84c39cfd9c0725b7a1bd11b160e78f12d5311e3e63d2ab5e89d0e5"
+    }
+  ],
+  "sdk_mapping_sha256": {
+    "arch/soc/grus/include/soc_config.h": "abda275af6aee96ad676c190e2a72363a79595413336371fced4450f8df76809",
+    "arch/soc/grus/link.ld": "1dc73b74c4b5962a848693ab857e90d34115489a8a7e499897533ad786ff77be",
+    "arch/soc/grus/spl/spl.c": "f3690694fff309c0118579baedb860b1d47c6de3cfb227a977242249568bb56b"
+  },
+  "clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+  "consumer_elf_sha256": "6b584bda8e84c39cfd9c0725b7a1bd11b160e78f12d5311e3e63d2ab5e89d0e5",
+  "startup_cases": 12,
+  "clear_writes": 8155,
+  "preserved_words": 60,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Primary loader instructions use modeled flash reads; alias uses authenticated SDK mapping, not physical measurement.",
+    "Registered board accessor and diagnostic initialization execute on typed defaults; remaining audio configuration/buffer consumers and registry admission still pending."
+  ]
+}

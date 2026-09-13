@@ -1,0 +1,195 @@
+{
+  "clock_tail_candidate": {
+    "function": "clock_lookup",
+    "source_symbol": "__module_get_info",
+    "compiled_sha256": "72b1d75eb12eb94e885d26931da4ef1c4be56f99174edfbb11b613ba4c745a16",
+    "stock_envelope": [
+      245280,
+      245472
+    ],
+    "tail": [
+      245440,
+      245472
+    ],
+    "bytes": 32,
+    "external_branches": [],
+    "external_pool_loads": [],
+    "runtime_pointers": [],
+    "reference_findings_absent": true,
+    "reclaim_admitted": false
+  },
+  "materialized_report_sha256": "5c7947b0de142f680abcd7d1454ee4420e73e8f930fc714bccd0ff9d3de17db1",
+  "attempts": [
+    {
+      "branch_entries": [
+        "copy_q15"
+      ],
+      "fits": true,
+      "rejected_states": 0
+    }
+  ],
+  "solution": {
+    "reserved": [
+      {
+        "entry": "rfft",
+        "section": ".text.open_cfw_gx8002_backup_rfft",
+        "offset": 293028,
+        "size": 110,
+        "branch": false
+      },
+      {
+        "entry": "shift_q15",
+        "section": ".text.open_cfw_gx8002_backup_shift_q15",
+        "offset": 293376,
+        "size": 84,
+        "branch": false
+      },
+      {
+        "entry": "maxabs_q15",
+        "section": ".text.open_cfw_gx8002_backup_maxabs_q15",
+        "offset": 293492,
+        "size": 44,
+        "branch": false
+      },
+      {
+        "entry": "copy_q15",
+        "section": ".text.open_cfw_gx8002_backup_copy_q15",
+        "offset": 293568,
+        "size": 4,
+        "branch": true
+      },
+      {
+        "entry": "fill_q15",
+        "section": ".text.open_cfw_gx8002_backup_fill_q15",
+        "offset": 293612,
+        "size": 52,
+        "branch": false
+      }
+    ],
+    "ranges": [
+      [
+        293138,
+        293376
+      ],
+      [
+        293460,
+        293492
+      ],
+      [
+        293536,
+        293568
+      ],
+      [
+        293572,
+        293612
+      ],
+      [
+        293664,
+        295306
+      ],
+      [
+        314676,
+        315156
+      ],
+      [
+        245440,
+        245472
+      ]
+    ],
+    "placements": [
+      [
+        {
+          "section": ".text.multiply",
+          "offset": 293140,
+          "size": 70
+        },
+        {
+          "section": ".text.open_cfw_gx8002_backup_radix4_by2",
+          "offset": 293212,
+          "size": 10
+        },
+        {
+          "section": ".text.open_cfw_gx8002_backup_cfft",
+          "offset": 293224,
+          "size": 150
+        }
+      ],
+      [
+        {
+          "section": ".text.shift_word",
+          "offset": 293460,
+          "size": 28
+        }
+      ],
+      [
+        {
+          "section": ".text.open_cfw_gx8002_backup_radix4",
+          "offset": 293536,
+          "size": 20
+        },
+        {
+          "section": ".text.open_cfw_gx8002_backup_radix4_by2_inverse",
+          "offset": 293556,
+          "size": 10
+        }
+      ],
+      [
+        {
+          "section": ".text.add_sat.lto_priv.0",
+          "offset": 293572,
+          "size": 34
+        }
+      ],
+      [
+        {
+          "section": ".text.radix4",
+          "offset": 293664,
+          "size": 1132
+        },
+        {
+          "section": ".text.radix4_by2",
+          "offset": 294796,
+          "size": 246
+        },
+        {
+          "section": ".text.open_cfw_gx8002_backup_split_forward",
+          "offset": 295044,
+          "size": 258
+        }
+      ],
+      [
+        {
+          "section": ".text.shift_sample",
+          "offset": 314676,
+          "size": 100
+        },
+        {
+          "section": ".text.open_cfw_gx8002_backup_bit_reverse",
+          "offset": 314776,
+          "size": 62
+        },
+        {
+          "section": ".text.open_cfw_gx8002_backup_copy_q15",
+          "offset": 314840,
+          "size": 56
+        },
+        {
+          "section": ".text.open_cfw_gx8002_backup_split_inverse",
+          "offset": 314896,
+          "size": 246
+        }
+      ],
+      [
+        {
+          "section": ".text.open_cfw_gx8002_backup_radix4_inverse",
+          "offset": 245440,
+          "size": 20
+        }
+      ]
+    ]
+  },
+  "source_admitted": false,
+  "limits": [
+    "Any clock tail is an unadmitted candidate only; no reuse qualification implied. Four-byte branch reservations; whole compiler sections and original alignment retained. No code emitted or branch reachability/loader behavior qualified."
+  ]
+}

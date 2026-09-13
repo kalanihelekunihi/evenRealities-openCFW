@@ -1,0 +1,51 @@
+{
+  "source_sha256": "5ce76867a3d72eb26ca56d5419d00ed4d730071e0731df5b542c3b50f5b068a7",
+  "variants": [
+    {
+      "variant": "forward",
+      "compiled_bytes": 408,
+      "envelope_bytes": 148,
+      "fits": false,
+      "sha256": "a007dcc4f562d1bc509fa17070e382bae489ec5b8d00e60a05b391c495c2308e",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-caller-saves",
+        "-DINVERSE=0"
+      ]
+    },
+    {
+      "variant": "inverse",
+      "compiled_bytes": 356,
+      "envelope_bytes": 88,
+      "fits": false,
+      "sha256": "b21f2f3399d494416e432cbe550eb8383e2ddcafa4df32499631fed69535a271",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-caller-saves",
+        "-DINVERSE=1"
+      ]
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Scalar split candidate only; packed-lane stock comparison pending. No retained arithmetic dependencies linked."
+  ]
+}

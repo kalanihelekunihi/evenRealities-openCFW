@@ -1,0 +1,18 @@
+{
+  "artifact_sha256": {
+    "select": "96bdcdc0fad838f493016b0c0012c303cf53a5286709259ed4ae8151b6693445",
+    "release": "ba5ba48443e555999587627c80260b426cb91fb5b95343bb6f721e82dd35efc9",
+    "irq": "79f72694a408c983c4142d66ef39548acaab2adb21020e0313be0f176ef428fa",
+    "gate": "52a0596ca98094f98e8a3a6c715622124f2c0f44f7de78f232d34f7bd691588a",
+    "lookup": "efc1713afe5aca847a2eba37e5000256cd0dc5f951532a4054eed42291dc5b23"
+  },
+  "cases": 1280,
+  "successful_cycles": 400,
+  "compiled_clock_calls": 704,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Compiled allocator/deallocator, CSI PSR operations, upstream clock gate and lookup compose through explicit call hooks.",
+    "Independent frames and modeled PSR/MMIO values; physical interrupts, clock hardware and concurrency remain unqualified."
+  ]
+}

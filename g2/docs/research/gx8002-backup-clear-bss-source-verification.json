@@ -1,0 +1,110 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_backup_clear_bss",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 28,
+      "compiled_sha256": "64afdb8eaa89c8e73b415c4d8980632bb76787cb21f7e4893108999e6e618635",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_backup_clear_bss",
+          "package_offset": 244328,
+          "bytes": 28,
+          "sha256": "ffee97d57fb6d6f1d31ff2d5daf3fc3c4551f84335e23f44b098881b1e8c3881",
+          "region": "image_b_sram_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_backup_bss_bounds",
+      "section_name": ".bounds",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 8,
+      "compiled_sha256": "5246480b448014cf1fa7951da4e6d4be07c37f58395fa91c77288d3eeccc68c0",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_backup_bss_bounds",
+          "package_offset": 244356,
+          "bytes": 8,
+          "sha256": "5246480b448014cf1fa7951da4e6d4be07c37f58395fa91c77288d3eeccc68c0",
+          "region": "image_b_sram_text"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "comparison": {
+      "candidate": {
+        "source_sha256": "a41e46cc68cf53d6fb3b3749f4fd9d58c8e1f4cdb7ac208e910c53527d6b9a44",
+        "bounds_sha256": "5246480b448014cf1fa7951da4e6d4be07c37f58395fa91c77288d3eeccc68c0",
+        "compiled_bytes": 28,
+        "compiled_sha256": "64afdb8eaa89c8e73b415c4d8980632bb76787cb21f7e4893108999e6e618635",
+        "envelope_bytes": 36,
+        "fits": true,
+        "bindings": {
+          "open_cfw_gx8002_backup_bss_start": 536965264,
+          "open_cfw_gx8002_backup_bss_end": 537057180
+        },
+        "source_admitted": false,
+        "limits": [
+          "Candidate only; decoded equivalence and placement pending."
+        ]
+      },
+      "cases": 4,
+      "words_per_case": 22979,
+      "source_admitted": false,
+      "limits": [
+        "Fixed recovered range and ordered word stores checked; startup condition remains separate.",
+        "Residual literal-pool placement and hardware alias/retention require separate qualification."
+      ]
+    },
+    "loader": {
+      "candidate_elf_sha256": "b0d5002aa2a76438d32f137affff550d09d3c5fe01afc01ad84c316165f2d98c",
+      "candidate_image_sha256": "f2580d70ea5c0a2150c5b75a6b391282043c0c82c488c2ec09ad7df10a765feb",
+      "normal_loader_cases": 12,
+      "source_admitted": false,
+      "limits": [
+        "All 36 replacement bytes come from compiled C and symbolic BSS bound pointers; no replacement tail fill.",
+        "External references and hardware remain unqualified."
+      ]
+    },
+    "references": {
+      "image_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "package_interval": [
+        244328,
+        244364
+      ],
+      "external_branches": [
+        {
+          "offset": 244510,
+          "target": 244328,
+          "entry": true
+        }
+      ],
+      "external_pool_loads": [],
+      "runtime_word_matches": [],
+      "source_admitted": false,
+      "limits": [
+        "Linear decode and word census; computed references and nonstandard entry paths are not proven absent."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "build_gx8002_backup_clear_bss.py": "ee925da5b808883d7bc072deab8a18fd9bf06c01e6504e804bc3d6e3a3c00afb",
+    "verify_gx8002_backup_clear_bss.py": "ea4d12a0c60039890094023b8b9b98f0f64d5d36ab0df042117d051a311493c9",
+    "verify_gx8002_backup_clear_bss_loader.py": "1e3d50919b4b6fa9cc70143dd52b2ad854fd1cbf9b334586e6db31f49ebb4460",
+    "analyze_gx8002_backup_clear_bss_references.py": "dc07f3664c8ea1d0cc9959b99fa20622ef9236ea4e691c589a9c07df0b3995b5",
+    "verify_gx8002_backup_clear_bss_source.py": "69198f58cbb86b09c56d074ccace1f05a86f9f1c9a6ef37230fd2105d66716d8",
+    "verify_gx8002_backup_dma_callback_clear.py": "61667d1b3b596dbe8b49ecf915c2310f3e3eae61d7b7ff1174f7f9148ebd4510",
+    "verify_gx8002_backup_memset_loader.py": "d1139f142813bf27d701424086d83dfb13c9bbbf1ef968e272368b9c7e65a405",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Fixed recovered range and ordered word clearing, invoked conditionally by existing startup. No unconditional zero-default claim.",
+    "Entry preserved, observed references target entry; computed/nonstandard entries not globally excluded.",
+    "Hardware memory retention and whole firmware remain separately unqualified."
+  ]
+}

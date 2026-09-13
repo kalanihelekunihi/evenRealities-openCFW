@@ -1,0 +1,34 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "header": {
+      "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+      "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+    },
+    "oracle": {
+      "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+      "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+      "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+      "section": ".text.gx_audio_in_set_fftvad_w",
+      "relocations": [],
+      "role": "symbol_evidence_only"
+    },
+    "bindings": {},
+    "source_sha256": "c9b5b88a0d392d7ee0ec2a88bd7af40777bd79cb4ab41a52ba8a6fdb0604d7c4",
+    "symbol": "open_cfw_gx8002_audio_fftvad_w",
+    "compiled_bytes": 48,
+    "compiled_sha256": "11ad46d57a4b69bd0a29e9f538bf1276be4f828e857b0dad133728145106f93e",
+    "package_offset": 56192,
+    "stock_envelope_bytes": 60,
+    "stock_sha256": "7ab0bc07a5cfd1e2121f1545f16e79600fe10a4e54dde7ea9288da14e4e71f4c",
+    "fits": true,
+    "source_admitted": false,
+    "hardware_qualified": false
+  },
+  "decoded_cases": 4608,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "All256 values in each byte with other bytes fixed, padding independence, word RMW ordering and stack ABI checked. Physical FFTVAD weighting unqualified."
+  ]
+}

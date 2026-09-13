@@ -1,0 +1,204 @@
+{
+  "functions": [
+    {
+      "symbol": "UartMessageAsyncDone",
+      "section_name": ".text",
+      "compiled_bytes": 88,
+      "compiled_sha256": "c981ea1ca15ece40a865c8d765ca926cfe2354173e6eb831ba86253945578c32",
+      "stock_occurrences": [
+        {
+          "symbol": "UartMessageAsyncDone",
+          "package_offset": 72408,
+          "bytes": 88,
+          "sha256": "6d9d79060e520066b554d01ba3732a791a631cbb63ffc369831a86a8d408771d",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+      "headers_sha256": {
+        "uart_message_v2.h": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2",
+        "lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+      },
+      "generated_source_sha256": "a87894a1832d15aed3f1c271ba52b15655b8ba86f7c718745b61c96aa5282e31",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-tree-loop-optimize",
+        "-fno-peel-loops",
+        "-fno-tree-ch",
+        "-Wno-error=sign-compare",
+        "-Wno-error=unused-parameter",
+        "-Wno-error=address-of-packed-member",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-nationalchip-lvp-kws/lvp/common"
+      ],
+      "bindings": {
+        "_GetMessageHandle": 270564032,
+        "gx_uart_async_send_buffer_stop": 270546664,
+        "gx_uart_async_recv_buffer_stop": 270546692,
+        "memset": 270571980,
+        "s_uart_msg_regist_array": 537060192,
+        "s_uart_recv_pack_queue": 537062596,
+        "s_msg_handle": 537059408
+      },
+      "compiled_bytes": 88,
+      "compiled_sha256": "c981ea1ca15ece40a865c8d765ca926cfe2354173e6eb831ba86253945578c32",
+      "stock_envelope_bytes": 88,
+      "stock_sha256": "6d9d79060e520066b554d01ba3732a791a631cbb63ffc369831a86a8d408771d",
+      "fits": true,
+      "exact_stock": false,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Source-built candidate only; complete decoded state-machine comparison and admission remain pending. External state uses established RAM addresses."
+      ]
+    },
+    "decoded_cases": 144,
+    "source_admitted": false,
+    "limits": [
+      "Independent stop/clear oracle with helper port mutation, availability and result variation; guarded memory and ABI. Memset/UART/lookup modeled; physical concurrency unqualified."
+    ]
+  },
+  "fill_composition": {
+    "comparison": {
+      "candidate": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "upstream_sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+        "headers_sha256": {
+          "uart_message_v2.h": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2",
+          "lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+        },
+        "generated_source_sha256": "a87894a1832d15aed3f1c271ba52b15655b8ba86f7c718745b61c96aa5282e31",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fno-tree-loop-optimize",
+          "-fno-peel-loops",
+          "-fno-tree-ch",
+          "-Wno-error=sign-compare",
+          "-Wno-error=unused-parameter",
+          "-Wno-error=address-of-packed-member",
+          "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-nationalchip-lvp-kws/lvp/common"
+        ],
+        "bindings": {
+          "_GetMessageHandle": 270564032,
+          "gx_uart_async_send_buffer_stop": 270546664,
+          "gx_uart_async_recv_buffer_stop": 270546692,
+          "memset": 270571980,
+          "s_uart_msg_regist_array": 537060192,
+          "s_uart_recv_pack_queue": 537062596,
+          "s_msg_handle": 537059408
+        },
+        "compiled_bytes": 88,
+        "compiled_sha256": "c981ea1ca15ece40a865c8d765ca926cfe2354173e6eb831ba86253945578c32",
+        "stock_envelope_bytes": 88,
+        "stock_sha256": "6d9d79060e520066b554d01ba3732a791a631cbb63ffc369831a86a8d408771d",
+        "fits": true,
+        "exact_stock": false,
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Source-built candidate only; complete decoded state-machine comparison and admission remain pending. External state uses established RAM addresses."
+        ]
+      },
+      "decoded_cases": 144,
+      "source_admitted": false,
+      "limits": [
+        "Independent stop/clear oracle with helper port mutation, availability and result variation; guarded memory and ABI. Memset/UART/lookup modeled; physical concurrency unqualified."
+      ]
+    },
+    "fill_dependency": {
+      "build": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "dependencies": [
+          {
+            "path": "utility/libc/memset.c",
+            "blob": "75687249c1599cb4590e929d8f18b06e52c148c9",
+            "sha256": "d175f6079caa9768e909ebb0f26ea97018e108c71de2dc58edede28218033499"
+          },
+          {
+            "path": "utility/libc/csky/memset_fast.o",
+            "blob": "fd20a0df1dffbf1e130ffeb8619ff2b00f44fbd6",
+            "sha256": "502de113a832e38d17d7fe91cffe153dea29ff539c833fb20aba826d0bc6a23c"
+          },
+          {
+            "path": "LICENSE",
+            "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+            "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+          }
+        ],
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "source_sha256": "04d26d6aed66fb4e0dcd9e283e0df12ccfa6a4cd13be3d2d2adcd71f6dbf3517",
+        "compiled_bytes": 102,
+        "compiled_sha256": "7203abf09c7b20f3cb6a21e90f268a0ac5e4cec95108d30d3cf99f34a8fbe2a1",
+        "package_offset": 77656,
+        "stock_envelope_bytes": 160,
+        "stock_sha256": "6a7e1574db7e88044461737fd6efb583384a102e90cb44adade502c98da9c062",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Candidate only. Need decoded store width/order, alignment, return, ABI and signed count boundary qualification; retained object supplies no output bytes."
+        ]
+      },
+      "cases": 45224,
+      "large_count_prefix_cases": 32,
+      "frame_bytes": 0,
+      "source_admitted": false,
+      "limits": [
+        "Decoded ordered byte/word traces, normal lengths and wraparound arithmetic. Huge positive loop paths use32-store checkpoints, not full execution or valid-memory claims. No hardware/MMIO/timing qualification; arbitrary addresses in arithmetic cases are synthetic."
+      ]
+    },
+    "fill_executions": 1296,
+    "source_admitted": false,
+    "limits": [
+      "Decoded source memset writes caller memory at all shutdown clear boundaries; UART and selector modeled. Physical concurrency/hardware unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_uart_message_done_fill.py": "7a0cd344a3950e5f0b69992713ff5d5de82b83301bc55c25dab5a0d6c0dc3c62",
+    "compare_gx8002_memset.py": "d347468f1e17bcc01e62733e4bc6a08d32558903b8e0c47570c302b4c69f0da0",
+    "build_gx8002_memset_candidate.py": "0e3169108c0aff8f05f5cbe9158d14012125100737aab0d65d9be766d788a30a",
+    "verify_gx8002_uart_message_done_source.py": "054db968c7209bd8f3f3066a93e83fdfb10a8d1de56cde577f0bae7530f1dd8f",
+    "verify_gx8002_uart_message_done.py": "479302293d947d5c1f27872519f14a6b9777030b18b8c9cd0da56e266a03d9b9",
+    "execute_gx8002_uart_message_done.py": "ff3d886a33feb8abc51e7b505b59976a4dd8757faf52f1892e31c96c70221a17",
+    "build_gx8002_uart_message_done.py": "894333fe717941b179ffcfc77e50b9dce679c4efea721a2eaa6573343b6e0989",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Independent stop/clear oracle with helper port mutation, availability and result variation; guarded memory and ABI. Memset/UART/lookup modeled; physical concurrency unqualified."
+  ]
+}

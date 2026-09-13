@@ -1,0 +1,43 @@
+{
+  "candidate": {
+    "entry_source_sha256": "9fe04abe560cfbc9977e1c8e18ccaf5ddafa2468a092edf59fcad99eccc2e6cd",
+    "placement_limits": [
+      "Proposed placement in source-generated udivdi3 fill; ownership transfer and entry redirect not yet admitted."
+    ],
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_header": "include/driver/gx_dma_ahb.h",
+    "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_uart_transmit_dma",
+        "compiled_bytes": 144,
+        "compiled_sha256": "adf235cdefdb9ce51e0e66928b8ee707f95ff35038eda6e5fd9cd962dd39a18e",
+        "stock_sha256": "9d1f96d618fdb6f9b1f9b6b88b1957c4e0fe21cc9c11f249da46cc893eba6c43",
+        "package_offset": 78336,
+        "envelope_bytes": 144,
+        "fits": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_uart_transmit_dma_entry",
+        "compiled_bytes": 4,
+        "compiled_sha256": "2935cfebb146d3a522a842a735b272d6b51f03755ca7f5d1c6ceaa977ea2a67a",
+        "stock_sha256": "e3ddeaedb4679eb3a61c07c018a65a41c25c3feb8935fb8c0c42870f26c41276",
+        "package_offset": 50836,
+        "envelope_bytes": 136,
+        "fits": true
+      }
+    ],
+    "source_sha256": "6a45c518ef6e24f09d6ff8640986cdcc18d4a786160268151ca507b68506d417",
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Build only. Invalid-port cleanup is an explicit repair, not stock equivalence. Decoded DMA setup behavior and upstream config layout qualification pending; called helpers remain separate dependencies."
+    ]
+  },
+  "decoded_cases": 384,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Valid ports only; external ordered accesses and helper argument comparison, excluding private stack layout; called helpers modeled, no DMA hardware behavior claim."
+  ]
+}

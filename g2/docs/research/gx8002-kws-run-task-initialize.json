@@ -1,0 +1,118 @@
+{
+  "evidence": {
+    "evidence": {
+      "candidate": {
+        "bindings": {
+          "LvpGetFeatsBuffer": 270560932,
+          "LvpGetLogfbankBuffer": 270560940,
+          "LvpGetPcmFrameNumPerContext": 270561104,
+          "gx_dcache_invalid_range": 268588552,
+          "memmove": 270560324,
+          "memcpy": 268588856,
+          "gx_dcache_clean_range": 268588644,
+          "LvpGetContext": 270560968,
+          "LvpCTCModelInitSnpuTask": 270568488,
+          "LvpCTCModelGetSnpuFeatsBuffer": 270568552,
+          "LvpCTCModelGetSnpuStateBuffer": 270568556,
+          "LvpCTCModelGetSnpuFeatsDim": 270568564,
+          "gx_snpu_run_task": 270556512,
+          "open_cfw_gx8002_audio_completion_forward": 268591312
+        },
+        "linked_bytes": 192,
+        "linked_sha256": "416cd847a2e12225b50e76ed9d31ae4feb746555cf1f6143d423e66c67a4895f",
+        "stock_envelope_bytes": 200,
+        "fits": true,
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "dependencies": [
+          {
+            "path": "include/driver/gx_snpu.h",
+            "blob": "a2a911b22f7f379d9f489d959519125d5cad3a52",
+            "sha256": "72aa01a5cc6519da63dff4afa7163c7d3a3045d203998e691768dfa189643a46"
+          },
+          {
+            "path": "include/lvp_context.h",
+            "blob": "37483158aa8c433d614dea65dff87232b6ba0f69",
+            "sha256": "75902c925c65492f776fe1c932f0b85d0298f0b7e8377def087a4fb5949170be"
+          },
+          {
+            "path": "include/lvp_attr.h",
+            "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+            "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+          },
+          {
+            "path": "include/lvp_buffer.h",
+            "blob": "5e0df54b16aceb44c80ffbc1fca037fd2acf1e98",
+            "sha256": "61ff9a1cb8146ad520c6e3bf77bbebf5d04e4842031bbf28d3f60c4112e69859"
+          },
+          {
+            "path": "include/vui/ctc_model.h",
+            "blob": "2b806337d3bb37e9b60c503cbb22f8716969570a",
+            "sha256": "8db6de65b16ec2e56ccdba30cf2b85cc9bdc357d8c3d520053aadec45298d079"
+          },
+          {
+            "path": "lvp/common/snpu_engine/lvp_kws.c",
+            "blob": "efdce5bc8f3773e8c42d828a9bd72430ad3b43c7",
+            "sha256": "65de0e35ea000c6d4dd2b940a2c75ca0aa58a81cbf9b5eaebc22ba240f852732"
+          },
+          {
+            "path": "LICENSE",
+            "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+            "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+          }
+        ],
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "source_sha256": "a245e14edb153baf8a1a3739764c71d075e9edf25a165f29a2aa928023448ff2",
+        "object_sha256": "b7c9f887394d15e20378dbeedaaeb76d143d02eaae3cc8af7c8b5657f633b706",
+        "object_text_bytes": 192,
+        "unresolved_helpers": [
+          "LvpGetFeatsBuffer",
+          "LvpGetLogfbankBuffer",
+          "LvpGetPcmFrameNumPerContext",
+          "gx_dcache_invalid_range",
+          "memmove",
+          "memcpy",
+          "gx_dcache_clean_range",
+          "LvpGetContext",
+          "LvpCTCModelInitSnpuTask",
+          "LvpCTCModelGetSnpuFeatsBuffer",
+          "LvpCTCModelGetSnpuStateBuffer",
+          "LvpCTCModelGetSnpuFeatsDim",
+          "open_cfw_gx8002_audio_completion_forward",
+          "gx_snpu_run_task"
+        ],
+        "source_admitted": false,
+        "limits": [
+          "Linked at recovered entry using decoded call targets; decoded behavior and combined callback/literal placement remain unqualified."
+        ]
+      },
+      "cases": 1344,
+      "source_admitted": false,
+      "limits": [
+        "Decoded stock/source argument sequence, unsigned window arithmetic, context wrap, task address masking, preserved task fields, null return and ABI checked against independent oracle. Buffer/cache/context/task helpers modeled; oversized transfer arithmetic tested without executing invalid memory transfers. Real data movement and hardware pending."
+      ]
+    },
+    "model_buffer_cases": 24,
+    "decoded_model_calls": 72,
+    "model_elf_sha256": "619ebedf6ccc4867aab99c4def7acf44fdc46004624670e7bf509846ef46714f",
+    "source_admitted": false,
+    "limits": [
+      "Actual authenticated model getters drive feature pointer, RNN state +1040 and 520 dimensions. Context/task initialization and SNPU submission still modeled; no model graph/weights or physical execution qualification."
+    ]
+  },
+  "task_cases": 24,
+  "source_admitted": false,
+  "limits": [
+    "Actual decoded source task initializer writes shared runner task, with saved pointer masking and runner input/output replacement checked. Saved task contents scripted; saved-task ownership/model graph and SNPU submission remain unqualified."
+  ]
+}

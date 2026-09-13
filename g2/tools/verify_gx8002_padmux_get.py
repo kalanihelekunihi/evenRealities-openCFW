@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 """Decoded padmux getter comparison against a nibble-access contract."""
 import json,re,struct,subprocess
-import hashlib,shutil
+import hashlib,shutil,tempfile,os
 from verify_gx8002_logging import check_paths
 from build_gx8002_padmux_get_candidate import ROOT,IMAGE,build
 from verify_gx8002_memcpy_source import decode
@@ -51,8 +51,16 @@ def execute(code,entry,pin,word):
 def programs():
     out=ROOT/'build/gx8002-board';prefix=str(ROOT/'build/csky-macos/install/bin/csky-unknown-elf-')
     path=out/'padmux-get-stock.elf'
-    subprocess.run([prefix+'objcopy','-I','binary','-O','elf32-csky-little','-B','csky',str(IMAGE),str(path)],check=True)
-    data=bytearray(path.read_bytes());struct.pack_into('<I',data,36,0x21006009);path.write_bytes(data)
+    # Readers share this analysis ELF. Publish only a complete, ABI-tagged file.
+    fd,name=tempfile.mkstemp(prefix='.padmux-stock-',suffix='.elf',dir=out)
+    os.close(fd)
+    temporary=type(path)(name)
+    try:
+        subprocess.run([prefix+'objcopy','-I','binary','-O','elf32-csky-little','-B','csky',str(IMAGE),str(temporary)],check=True)
+        data=bytearray(temporary.read_bytes());struct.pack_into('<I',data,36,0x21006009);temporary.write_bytes(data)
+        os.replace(temporary,path)
+    finally:
+        temporary.unlink(missing_ok=True)
     stock=decode(subprocess.check_output([prefix+'objdump','-D','--start-address=0xfb18','--stop-address=0xfb44',str(path)],text=True))
     return stock,decode((out/'padmux-get-candidate.disassembly.txt').read_text())
 

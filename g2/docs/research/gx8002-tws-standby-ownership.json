@@ -1,0 +1,62 @@
+{
+  "candidate": {
+    "state_source_sha256": "8bffed29a267f40d6ac75239adc2791fc53bbea52a3aad51b027c066371ae6be",
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "dependencies": [
+      {
+        "path": "lvp/lvp_mode_tws.c",
+        "blob": "4bd9d2962adac54871e6c6eb905174a0ee649300",
+        "sha256": "18e45319c213c185f1652b73f820ba469ed6847fba06ff247244d13df3635574"
+      },
+      {
+        "path": "lvp/common/lvp_queue.h",
+        "blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+        "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+      },
+      {
+        "path": "LICENSE",
+        "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+        "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+      }
+    ],
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "source_sha256": "b7718cbe65904e51eee9b85529fe20b0d6265ab9611e50f3cf1bcd42c13dd0cf",
+    "compiler_assembly_sha256": "99c84dd9022f412e0ac338cb15ee802c458697b286771b3701ed50e54b924ecb",
+    "transformed_assembly_sha256": "f8d6d5a8c8efdca860df07ecf4a1a176f0cf73ef1590a2616d4c05df56204d6d",
+    "elf_sha256": "9ec47e572633018ef32159b779b23d02b3fc39cd8acdf37bce45607be3f4472b",
+    "sections": [
+      {
+        "section": ".setter",
+        "bytes": 14,
+        "sha256": "7441f3de32763e41664baf279e666fb49b1d75d9dda91e8e06ee9e5c54f8bd45"
+      },
+      {
+        "section": ".loop",
+        "bytes": 24,
+        "sha256": "b71fdd532ed429c019c2b8e741ab583a11a08bd83ec11626284c55ad9dba72d6"
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Guarded compiler assembly and exact stock bodies; source pool verified. State allocation and admission pending."
+    ]
+  },
+  "checked_artifacts": 368,
+  "pool_owner_sha256": "815cd47b5a7a410f0164c5b3036d291780a00895d7b00a8bd6b3d603cf0a5213",
+  "clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+  "source_admitted": false,
+  "limits": [
+    "Exact C BSS state, decoded startup zero and both encoded shared source pointer loads checked. Fixed-section audit excludes retained indirect writes and physical concurrency."
+  ]
+}

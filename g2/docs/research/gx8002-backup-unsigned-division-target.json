@@ -1,0 +1,13 @@
+{
+  "zero_divisor_fault_arrivals": 760,
+  "source_elf_sha256": "cafed5940b2de06c758aaf95aa327cb7142caa7ed79901849ef1c19c5596f0e4",
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "cases": {
+    "quotient": 41910,
+    "remainder": 41910
+  },
+  "source_admitted": false,
+  "limits": [
+    "Nonzero-divisor source and stock instruction execution against exact unsigned arithmetic. Zero divisors reach DIVU with a zero operand in source and stock; exception dispatch/resumption, integration and hardware remain pending."
+  ]
+}

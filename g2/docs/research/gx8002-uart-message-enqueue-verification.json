@@ -1,0 +1,52 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+    "headers_sha256": {
+      "uart_message_v2.h": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2",
+      "lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+    },
+    "generated_source_sha256": "db6551cb1cc690319057a532d6318c6a96887af266102601ac29c75c4c0584b1",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-error=sign-compare",
+      "-Wno-error=unused-parameter",
+      "-Wno-error=address-of-packed-member",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-nationalchip-lvp-kws/lvp/common"
+    ],
+    "bindings": {
+      "_GetMessageHandle": 270564032,
+      "crc32": 270571688,
+      "gx_dcache_clean_range": 268588644,
+      "_UartMessageSendCheck": 270564060,
+      "LvpQueueIsFull": 270561288,
+      "LvpQueuePut": 268591544
+    },
+    "compiled_bytes": 156,
+    "compiled_sha256": "fb17ba0de869bb99e2069e749f6073703bef7b438376e0ece1292ad380ea3984",
+    "stock_envelope_bytes": 156,
+    "stock_sha256": "7fb1da8b58509c76a54186308eaec6074ec325c8340005336f660ed8f6fb28e0",
+    "fits": true,
+    "exact_stock": false,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Source-built candidate only; complete decoded state-machine comparison and admission remain pending. External state uses established RAM addresses."
+    ]
+  },
+  "decoded_cases": 2880,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Independent packet/header/sequence oracle and helper publication snapshots; final guarded memory and ABI. Helpers modeled; mutation,aliasing and nested queue composition pending."
+  ]
+}

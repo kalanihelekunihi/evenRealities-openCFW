@@ -1,0 +1,76 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_udivdi3",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 346,
+      "compiled_sha256": "8d16526118324b61721a3dfdb42979a0f11c53412aaad288ee66f91e78d8e825",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_udivdi3",
+          "package_offset": 77872,
+          "bytes": 464,
+          "sha256": "f13667e95ea3c7a132bb55e1a9b21521ff6578dfa1bf9a38408bdb75aeb173f9",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_udivdi3_clz",
+      "section_name": ".rodata.clz",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 256,
+      "compiled_sha256": "14a5d850c255623f9472e3c650abce0c78d32f0276b315b3a276a0462d97a1ac",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_udivdi3_clz",
+          "package_offset": 86696,
+          "bytes": 256,
+          "sha256": "14a5d850c255623f9472e3c650abce0c78d32f0276b315b3a276a0462d97a1ac",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "upstream_commit": "1e9b70447a8417f5c692370de4533e43d754e8fa",
+      "upstream_sha256": "97d364b0d74d6bf073eb3829ab12884ce243c68af8f7601d84baade12ee15599",
+      "source_sha256": "38234108605459bba6485da27ca4015a5b6d7d469fbb3b9387cf3835177528fc",
+      "runtime_license_sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74",
+      "compiled_bytes": 346,
+      "envelope_bytes": 464,
+      "fits": true,
+      "byte_exact": false,
+      "compiled_sha256": "8d16526118324b61721a3dfdb42979a0f11c53412aaad288ee66f91e78d8e825",
+      "adaptations": [
+        "Use upstream align-divisor algorithm with inline 32-bit CLZ decomposition; preserve zero-divisor hardware divide path."
+      ],
+      "source_admitted": false,
+      "limits": [
+        "Upstream candidate; behavioral and ownership checks outstanding."
+      ]
+    },
+    "cases": 4174,
+    "zero_divisor_cases": 11,
+    "lookup_sha256": "14a5d850c255623f9472e3c650abce0c78d32f0276b315b3a276a0462d97a1ac",
+    "limits": [
+      "Decoded integer ABI, quotient and divide-by-zero behavior only; execution timing and hardware exception delivery unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_udivdi3_source.py": "41e99faaf1b85b4937caf3022c336463336d3761e8bee714cd5b8b6f07b63a58",
+    "verify_gx8002_udivdi3.py": "4ca19072ef21804e6105834f49ad7930ed8534788dc130aa6c35dea7a3682501",
+    "execute_gx8002_udivdi3.py": "8dc94202bcd309952f50d0577eba870dca4b24d678cc8fc024de1c64b22f6db4",
+    "build_gx8002_udivdi3.py": "7e992089fca878f4411e94f7676ee61e07c2b43c42362d025f7f5e6c712f4b31",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded integer ABI, quotient and divide-by-zero behavior only; execution timing and hardware exception delivery unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

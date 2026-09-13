@@ -1,0 +1,91 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_clock_time_us",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 50,
+      "compiled_sha256": "b0622b7e852961cbc59722792793f72a5471f227b2182ec8c2b6738897ce436e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_clock_time_us",
+          "package_offset": 96368,
+          "bytes": 104,
+          "sha256": "896d1b174314587d841fd42279a49243033d3dd20d304e4c117c20aef27213f3",
+          "region": "image_a_sram"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "dependency_headers": {
+        "arch/soc/grus/include/base_addr.h": {
+          "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+          "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+        },
+        "include/driver/gx_clock/gx_clock_v2.h": {
+          "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+          "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+        }
+      },
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "arch/soc/grus/spl/spl_counter.c",
+        "blob": "d9f534e98fe7c0944fafe1340f6ec507b5200c6c",
+        "sha256": "26921da15385f1004446347b737e4ba33ef482ab41a28ea88862f4e4c1b6f9f6",
+        "role": "counter_read_order_reference; driver scaling recovered from stock"
+      },
+      "bindings": {},
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-jump-tables"
+      ],
+      "header": {
+        "path": "include/driver/gx_clock.h",
+        "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+        "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+      },
+      "source_sha256": "405020ca5743b21e6dc939d6937952e9d51a57f23ba9d00d4d9d06e9cbb945ac",
+      "symbol": "open_cfw_gx8002_clock_time_us",
+      "section_name": ".text",
+      "package_offset": 96368,
+      "compiled_bytes": 50,
+      "compiled_sha256": "b0622b7e852961cbc59722792793f72a5471f227b2182ec8c2b6738897ce436e",
+      "stock_envelope_bytes": 104,
+      "stock_sha256": "896d1b174314587d841fd42279a49243033d3dd20d304e4c117c20aef27213f3",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+      ]
+    },
+    "cases": 2060,
+    "source_admitted": false,
+    "limits": [
+      "Decoded stock timer and stock div64 fallback, source timer, read order and integer ABI match independent arithmetic. Division stack buffer marshalled across helper frames. Wrapper integration and hardware snapshot timing remain outstanding."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_clock_time_us_source.py": "1d39f7ae44ae522bcfe68d1575a88e955a28b511f1f001b26c4f299edd24dd46",
+    "verify_gx8002_clock_time_stock.py": "fadb38a95eefd8889fa838837da03b666c66b8b877e962746cb3149db82a3032",
+    "verify_gx8002_clock_time_us_candidate.py": "15f7f44aac728b177f2548544d5c22fa8c3cc3b75b292fb8e3c4a337ea98766f",
+    "execute_gx8002_clock_time_stock.py": "fb77a7b412698cb0e9c4320966c8c4aeeee6022a8289f28b9458da37f51b2ed1",
+    "build_gx8002_clock_time_us_candidate.py": "44498cc961cda2fdd7ac77c095a527f513de53d38972b01c7497b4f824bd706f"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded stock timer and stock div64 fallback, source timer, read order and integer ABI match independent arithmetic. Division stack buffer marshalled across helper frames. Wrapper integration and hardware snapshot timing remain outstanding.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

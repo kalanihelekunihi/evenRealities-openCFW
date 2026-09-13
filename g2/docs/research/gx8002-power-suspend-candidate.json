@@ -1,0 +1,52 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_power_suspend",
+      "section_name": ".text.suspend",
+      "package_offset": 69012,
+      "stock_envelope_bytes": 156,
+      "compiled_bytes": 156,
+      "compiled_sha256": "5429c00349475f06abafbc7d0a8a68f29b317c4875b6ec17ac73deffb3900a8b",
+      "stock_sha256": "9b0ea918a31db3f955dfd51822b7abd43a6a1af356e9c2ae70b2d137ecbaba45",
+      "fits": true,
+      "exact_stock": false
+    },
+    {
+      "symbol": "open_cfw_gx8002_power_sleep_message",
+      "section_name": ".rodata.sleep_message",
+      "package_offset": 82956,
+      "stock_envelope_bytes": 15,
+      "compiled_bytes": 15,
+      "compiled_sha256": "5a91e43a716ee06688d9006dcbcce8c1ad74184b27b059ef6400b899e648a07a",
+      "stock_sha256": "5a91e43a716ee06688d9006dcbcce8c1ad74184b27b059ef6400b899e648a07a",
+      "fits": true,
+      "exact_stock": true,
+      "ownership_kind": "generated_source_data"
+    }
+  ],
+  "source_sha256": "86887c21f6d72ca88e0f8ac92f135fa4d07ca0ee8110431a68fcd9a90b980c02",
+  "header_sha256": "dac3f35fda97bdc90c75cf9c212309a91ebf5ecf70214623537bd86c5b4215b0",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-tree-ch",
+    "-fno-peel-loops"
+  ],
+  "upstream": {
+    "path": "lvp/common/lvp_pmu.c",
+    "blob": "a49f3266ec8a6d77f51ccb919dab5be1d13fdf56",
+    "sha256": "e1421f08efa9ddf637da03b39f6aebebef4782c720bee74a0df8d003b62a85be"
+  },
+  "source_admitted": false,
+  "limits": [
+    "Candidate only; decoded initialization and callback qualification pending."
+  ]
+}

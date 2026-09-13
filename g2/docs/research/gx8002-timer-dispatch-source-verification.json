@@ -1,0 +1,121 @@
+{
+  "runtime_state": {
+    "section": ".timer_state",
+    "address": 537030020,
+    "bytes": 360,
+    "type": "NOBITS",
+    "startup_clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+    "initialization": "existing source startup BSS clear",
+    "clear_interval": [
+      537030016,
+      537062636
+    ]
+  },
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_timer_dispatch",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 108,
+      "compiled_sha256": "00b6ab14acdc2ebe6b3934825b66296f5db53b24e59ad55d080feeebc2e14aed",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_timer_dispatch",
+          "package_offset": 96472,
+          "bytes": 108,
+          "sha256": "58e2079b6799e483cf774c36910c775972d4c6093c3d3c8f32a4fa1b59b66294",
+          "region": "image_a_sram"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "dependency_headers": {
+        "arch/soc/grus/include/base_addr.h": {
+          "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+          "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+        },
+        "include/driver/gx_clock/gx_clock_v2.h": {
+          "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+          "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+        }
+      },
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "arch/soc/grus/spl/spl_counter.c",
+        "blob": "d9f534e98fe7c0944fafe1340f6ec507b5200c6c",
+        "sha256": "26921da15385f1004446347b737e4ba33ef482ab41a28ea88862f4e4c1b6f9f6",
+        "role": "counter_subsystem_reference_only; dispatch recovered from stock"
+      },
+      "bindings": {
+        "open_cfw_gx8002_clock_time_us": 268589148
+      },
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-jump-tables",
+        "-fno-ivopts"
+      ],
+      "header": {
+        "path": "include/driver/gx_clock.h",
+        "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+        "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+      },
+      "source_sha256": "97b4919ac156fca9a0f195161fe241f835aff680777f5e4b69d56b5436ffdc22",
+      "symbol": "open_cfw_gx8002_timer_dispatch",
+      "section_name": ".text",
+      "package_offset": 96472,
+      "compiled_bytes": 108,
+      "compiled_sha256": "00b6ab14acdc2ebe6b3934825b66296f5db53b24e59ad55d080feeebc2e14aed",
+      "stock_envelope_bytes": 108,
+      "stock_sha256": "58e2079b6799e483cf774c36910c775972d4c6093c3d3c8f32a4fa1b59b66294",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+      ],
+      "runtime_state": {
+        "section": ".timer_state",
+        "address": 537030020,
+        "bytes": 360,
+        "type": "NOBITS",
+        "startup_clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+        "initialization": "existing source startup BSS clear",
+        "clear_interval": [
+          537030016,
+          537062636
+        ]
+      }
+    },
+    "cases": 512,
+    "timer_evidence": {
+      "elf_sha256": "a0c0bc5482214e9b68ce9f5875672eb5ae9849c83101b5a10ebe59a3d9add9b4"
+    },
+    "source_admitted": false,
+    "limits": [
+      "512 complete decoded stock/source dispatch cases with decoded timer, independent scheduling model, ordered callback/state mutation and integer ABI. Runtime state allocated as source NOBITS inside authenticated startup clear. Hardware timing and concurrent ISR execution unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_timer_dispatch_source.py": "f6287317eb99319d0c9960dc8874d4d14bf64f3ac2750dbb503ebc21ca80bb49",
+    "verify_gx8002_timer_dispatch_paths.py": "cd2345cf45ddc9205d67169edb8eaa3a1ce6e72783ea4d91faeeac4a638a16d6",
+    "execute_gx8002_timer_dispatch.py": "db64b5b8cec3b3f028a05b3a14a367b5cbd28f9408fdbb7ace0cec6e7ae0dc5f",
+    "oracle_gx8002_timer_dispatch.py": "1139515928a051cf94010d81c3a132a8e341fd214c3d0b29047e0137d48e5417",
+    "build_gx8002_timer_dispatch_candidate.py": "ffb1867832ef078594ae48be59235727adf62bb56645b0c7fc88e60711163e44"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "512 complete decoded stock/source dispatch cases with decoded timer, independent scheduling model, ordered callback/state mutation and integer ABI. Runtime state allocated as source NOBITS inside authenticated startup clear. Hardware timing and concurrent ISR execution unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

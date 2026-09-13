@@ -1,0 +1,97 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_sample_app_init",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 52,
+      "compiled_sha256": "3630c1ae7a1b4aeee2402742eb3f7437eaaed859057d79758fda02f689ac8595",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_sample_app_init",
+          "package_offset": 74712,
+          "bytes": 52,
+          "sha256": "3630c1ae7a1b4aeee2402742eb3f7437eaaed859057d79758fda02f689ac8595",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_sample_app_init_name",
+      "section_name": ".rodata.name",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 14,
+      "compiled_sha256": "af53436f6d3e9835956b68cdd8d876c63a558245bdede779e278bb76f7b30c30",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_sample_app_init_name",
+          "package_offset": 84389,
+          "bytes": 14,
+          "sha256": "af53436f6d3e9835956b68cdd8d876c63a558245bdede779e278bb76f7b30c30",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_sample_app_init_message",
+      "section_name": ".rodata.message",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 16,
+      "compiled_sha256": "3097e6eb020120a14f6370b8d02c77a094d34eea2f5e45acc644d42a8a4341e7",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_sample_app_init_message",
+          "package_offset": 84452,
+          "bytes": 16,
+          "sha256": "3097e6eb020120a14f6370b8d02c77a094d34eea2f5e45acc644d42a8a4341e7",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "source_sha256": "f98cba352449d33f816fa7ab335e6f1cd57c213723f2a096ae475c2ff9bed3a3",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "compiled_bytes": 52,
+      "compiled_sha256": "3630c1ae7a1b4aeee2402742eb3f7437eaaed859057d79758fda02f689ac8595",
+      "stock_envelope_bytes": 52,
+      "stock_sha256": "3630c1ae7a1b4aeee2402742eb3f7437eaaed859057d79758fda02f689ac8595",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "SampleAppInit candidate: setup helper identity, guard/order, diagnostic and ABI qualification pending."
+      ]
+    },
+    "cases": 216,
+    "source_admitted": false,
+    "limits": [
+      "Byte-exact C with independent repeated-call guard/mutation oracle. Setup and lock-create bodies modeled; hardware unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_sample_app_init_source.py": "2b62be403bc0ee3232cb0412b2768b029cfcd273aae1e5429c86e1b30a5d8f6f",
+    "verify_gx8002_sample_app_init.py": "3681b1a47dcf98796d033f8d047a1840893dc219f3364e8f88ce4cb86e3c946b",
+    "execute_gx8002_max_decoder.py": "8e3eaedc4a8994f7c530891737135ce2d62f4fbbca7473ffa844c0da682d449d",
+    "build_gx8002_sample_app_init.py": "647a2f6b26e020c160cce9c82ac02faebaec3f78aa8ffe6ff5149387afba5966",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Byte-exact C with independent repeated-call guard/mutation oracle. Setup and lock-create bodies modeled; hardware unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

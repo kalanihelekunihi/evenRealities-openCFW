@@ -1,0 +1,162 @@
+{
+  "image_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "functions": {
+    "platform_config": {
+      "interval": [
+        319628,
+        319856
+      ],
+      "branches": [
+        {
+          "offset": 263876,
+          "target": 319628,
+          "entry": true
+        },
+        {
+          "offset": 318672,
+          "target": 319660,
+          "entry": false
+        },
+        {
+          "offset": 319268,
+          "target": 319790,
+          "entry": false
+        },
+        {
+          "offset": 319270,
+          "target": 319792,
+          "entry": false
+        },
+        {
+          "offset": 319272,
+          "target": 319794,
+          "entry": false
+        },
+        {
+          "offset": 319274,
+          "target": 319796,
+          "entry": false
+        },
+        {
+          "offset": 319276,
+          "target": 319798,
+          "entry": false
+        },
+        {
+          "offset": 319278,
+          "target": 319800,
+          "entry": false
+        },
+        {
+          "offset": 319280,
+          "target": 319802,
+          "entry": false
+        },
+        {
+          "offset": 319282,
+          "target": 319804,
+          "entry": false
+        }
+      ],
+      "external_pool_loads": [
+        {
+          "offset": 319526,
+          "pool": 319640
+        },
+        {
+          "offset": 319570,
+          "pool": 319644
+        },
+        {
+          "offset": 319578,
+          "pool": 319644
+        },
+        {
+          "offset": 319614,
+          "pool": 319648
+        }
+      ],
+      "runtime_words": [
+        {
+          "offset": 308092,
+          "value": 268523394,
+          "entry": false,
+          "replaced_switch_word": true
+        },
+        {
+          "offset": 308096,
+          "value": 268523432,
+          "entry": false,
+          "replaced_switch_word": true
+        },
+        {
+          "offset": 308100,
+          "value": 268523444,
+          "entry": false,
+          "replaced_switch_word": true
+        },
+        {
+          "offset": 308104,
+          "value": 268523456,
+          "entry": false,
+          "replaced_switch_word": true
+        },
+        {
+          "offset": 308108,
+          "value": 268523468,
+          "entry": false,
+          "replaced_switch_word": true
+        },
+        {
+          "offset": 308112,
+          "value": 268523480,
+          "entry": false,
+          "replaced_switch_word": true
+        },
+        {
+          "offset": 308116,
+          "value": 268523558,
+          "entry": false,
+          "replaced_switch_word": true
+        },
+        {
+          "offset": 308120,
+          "value": 268523500,
+          "entry": false,
+          "replaced_switch_word": true
+        },
+        {
+          "offset": 308124,
+          "value": 268523546,
+          "entry": false,
+          "replaced_switch_word": true
+        },
+        {
+          "offset": 308128,
+          "value": 268523368,
+          "entry": false,
+          "replaced_switch_word": true
+        }
+      ]
+    }
+  },
+  "tables": {
+    "switch": {
+      "address": 268511804,
+      "bytes": 40,
+      "pointer_matches": [
+        {
+          "offset": 319652,
+          "value": 268511804,
+          "within_replaced_code": true
+        }
+      ]
+    }
+  },
+  "source_admitted": false,
+  "reference_ready": false,
+  "limits": [
+    "Linear decoded branches and byte-aligned word census; computed and nonstandard entry paths are not globally excluded.",
+    "Frequency interior pointers are permitted only in the 10 source-replaced switch words; data-table byte identity is a separate qualification."
+  ]
+}

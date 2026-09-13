@@ -1,0 +1,415 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_audio_irq",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 532,
+      "compiled_sha256": "5276d60a1e42018cd44e6db9399340984d4040abd2c6e4b718da269308f8f78d",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_audio_irq",
+          "package_offset": 97884,
+          "bytes": 648,
+          "sha256": "b260d362d8238f27523765b4eb1d857c30bb931d919909ca48b65f362f6942ca",
+          "region": "image_a_sram"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "behavior": {
+      "candidate": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "dependencies": [
+          {
+            "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+            "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+            "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596"
+          },
+          {
+            "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+            "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+            "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+          },
+          {
+            "path": "include/utility/types.h",
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        ],
+        "upstream_symbol": "_AudioInISR",
+        "upstream_section_bytes": 648,
+        "upstream_section_sha256": "a7833d8856b780d5d1639f3d41c3d195120b104c6bacc9350b22d6ca2437f946",
+        "source_sha256": "d9dda2efabcdcb2a2651dfc15d77910b1863fdb2cbd0967c64ef80674b426024",
+        "state_source_sha256": "4800dfed2bdd627c6aa818ae2f985304b388e92c33f2e2a0c14b3838109cafaa",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "elf_sha256": "7d2a3ea10882e56c01ee61d64d96e0cc1c9203bd7aebf6adad89454ef42435c4",
+        "compiled_bytes": 532,
+        "compiled_sha256": "5276d60a1e42018cd44e6db9399340984d4040abd2c6e4b718da269308f8f78d",
+        "stock_offset": 97884,
+        "stock_bytes": 648,
+        "stock_sha256": "b260d362d8238f27523765b4eb1d857c30bb931d919909ca48b65f362f6942ca",
+        "upstream_nonrelocated_equal_bytes": 636,
+        "upstream_relocations": [
+          {
+            "offset": 176,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 366,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 644,
+            "symbol": 3,
+            "type": 1,
+            "addend": 0
+          }
+        ],
+        "source_admitted": false,
+        "limits": [
+          "C IRQ plus compiler helper linked in original slot. SDK object authenticated for provenance only and never linked or copied. MMIO ordering, callback mutations, ABI and startup state still require decoded qualification."
+        ]
+      },
+      "cases": 2352,
+      "source_admitted": false,
+      "limits": [
+        "Decoded stock/source ordered MMIO/state reads, W1C writes, callback arguments, memset calls, final memory and callee-saved ABI agree for static register inputs. Independent callback/acknowledgement/final-status oracle also checked. Dynamic status and callback mutations pending."
+      ]
+    },
+    "dynamic": {
+      "candidate": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "dependencies": [
+          {
+            "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+            "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+            "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596"
+          },
+          {
+            "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+            "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+            "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+          },
+          {
+            "path": "include/utility/types.h",
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        ],
+        "upstream_symbol": "_AudioInISR",
+        "upstream_section_bytes": 648,
+        "upstream_section_sha256": "a7833d8856b780d5d1639f3d41c3d195120b104c6bacc9350b22d6ca2437f946",
+        "source_sha256": "d9dda2efabcdcb2a2651dfc15d77910b1863fdb2cbd0967c64ef80674b426024",
+        "state_source_sha256": "4800dfed2bdd627c6aa818ae2f985304b388e92c33f2e2a0c14b3838109cafaa",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "elf_sha256": "7d2a3ea10882e56c01ee61d64d96e0cc1c9203bd7aebf6adad89454ef42435c4",
+        "compiled_bytes": 532,
+        "compiled_sha256": "5276d60a1e42018cd44e6db9399340984d4040abd2c6e4b718da269308f8f78d",
+        "stock_offset": 97884,
+        "stock_bytes": 648,
+        "stock_sha256": "b260d362d8238f27523765b4eb1d857c30bb931d919909ca48b65f362f6942ca",
+        "upstream_nonrelocated_equal_bytes": 636,
+        "upstream_relocations": [
+          {
+            "offset": 176,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 366,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 644,
+            "symbol": 3,
+            "type": 1,
+            "addend": 0
+          }
+        ],
+        "source_admitted": false,
+        "limits": [
+          "C IRQ plus compiler helper linked in original slot. SDK object authenticated for provenance only and never linked or copied. MMIO ordering, callback mutations, ABI and startup state still require decoded qualification."
+        ]
+      },
+      "cases": 2564,
+      "source_admitted": false,
+      "limits": [
+        "Read-index-driven status/enable changes and callback mutations preserve exact stock/source ordered traces and memory. Independent bounded initial status-poll oracle and all2048 interrupt-bit combinations with independent callback/acknowledgement oracle. Scripted interleavings do not prove physical interrupt timing or arbitrary concurrent writes."
+      ]
+    },
+    "record": {
+      "candidate": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "dependencies": [
+          {
+            "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+            "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+            "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596"
+          },
+          {
+            "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+            "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+            "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+          },
+          {
+            "path": "include/utility/types.h",
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        ],
+        "upstream_symbol": "_AudioInISR",
+        "upstream_section_bytes": 648,
+        "upstream_section_sha256": "a7833d8856b780d5d1639f3d41c3d195120b104c6bacc9350b22d6ca2437f946",
+        "source_sha256": "d9dda2efabcdcb2a2651dfc15d77910b1863fdb2cbd0967c64ef80674b426024",
+        "state_source_sha256": "4800dfed2bdd627c6aa818ae2f985304b388e92c33f2e2a0c14b3838109cafaa",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "elf_sha256": "7d2a3ea10882e56c01ee61d64d96e0cc1c9203bd7aebf6adad89454ef42435c4",
+        "compiled_bytes": 532,
+        "compiled_sha256": "5276d60a1e42018cd44e6db9399340984d4040abd2c6e4b718da269308f8f78d",
+        "stock_offset": 97884,
+        "stock_bytes": 648,
+        "stock_sha256": "b260d362d8238f27523765b4eb1d857c30bb931d919909ca48b65f362f6942ca",
+        "upstream_nonrelocated_equal_bytes": 636,
+        "upstream_relocations": [
+          {
+            "offset": 176,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 366,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 644,
+            "symbol": 3,
+            "type": 1,
+            "addend": 0
+          }
+        ],
+        "source_admitted": false,
+        "limits": [
+          "C IRQ plus compiler helper linked in original slot. SDK object authenticated for provenance only and never linked or copied. MMIO ordering, callback mutations, ABI and startup state still require decoded qualification."
+        ]
+      },
+      "record_elf_sha256": "42d103bb299f73010e346274818cf1701cf89e0e031afff5a93986c8f074f3d7",
+      "cases": 1344,
+      "source_admitted": false,
+      "limits": [
+        "Decoded source record callback executes on IRQ word-backed byte RAM with actual SDC stack pointer, nested SP and real linked record entry dispatch. Byte writes restricted to mapped memory or nested stack. Independent control/emitted-frame oracle. Record helpers modeled; physical execution and other callback bodies pending."
+      ]
+    },
+    "initialize": {
+      "candidate": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "dependencies": [
+          {
+            "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+            "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+            "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596"
+          },
+          {
+            "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+            "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+            "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+          },
+          {
+            "path": "include/utility/types.h",
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        ],
+        "upstream_symbol": "_AudioInISR",
+        "upstream_section_bytes": 648,
+        "upstream_section_sha256": "a7833d8856b780d5d1639f3d41c3d195120b104c6bacc9350b22d6ca2437f946",
+        "source_sha256": "d9dda2efabcdcb2a2651dfc15d77910b1863fdb2cbd0967c64ef80674b426024",
+        "state_source_sha256": "4800dfed2bdd627c6aa818ae2f985304b388e92c33f2e2a0c14b3838109cafaa",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "elf_sha256": "7d2a3ea10882e56c01ee61d64d96e0cc1c9203bd7aebf6adad89454ef42435c4",
+        "compiled_bytes": 532,
+        "compiled_sha256": "5276d60a1e42018cd44e6db9399340984d4040abd2c6e4b718da269308f8f78d",
+        "stock_offset": 97884,
+        "stock_bytes": 648,
+        "stock_sha256": "b260d362d8238f27523765b4eb1d857c30bb931d919909ca48b65f362f6942ca",
+        "upstream_nonrelocated_equal_bytes": 636,
+        "upstream_relocations": [
+          {
+            "offset": 176,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 366,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 644,
+            "symbol": 3,
+            "type": 1,
+            "addend": 0
+          }
+        ],
+        "source_admitted": false,
+        "limits": [
+          "C IRQ plus compiler helper linked in original slot. SDK object authenticated for provenance only and never linked or copied. MMIO ordering, callback mutations, ABI and startup state still require decoded qualification."
+        ]
+      },
+      "initializer_elf_sha256": "3dec3e974b197bf502eaa495163db90a479579b6fa5aafe42b1b379d9fa30282",
+      "cases": 32,
+      "source_admitted": false,
+      "limits": [
+        "Actual decoded source initializer clears/publishes all seven state words and installs recovered IRQ address across all callback-presence combinations. Initializer helper bodies modeled; IRQ execution not nested within initialization."
+      ]
+    },
+    "ownership": {
+      "candidate": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "dependencies": [
+          {
+            "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+            "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+            "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596"
+          },
+          {
+            "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+            "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+            "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+          },
+          {
+            "path": "include/utility/types.h",
+            "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+            "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+          }
+        ],
+        "upstream_symbol": "_AudioInISR",
+        "upstream_section_bytes": 648,
+        "upstream_section_sha256": "a7833d8856b780d5d1639f3d41c3d195120b104c6bacc9350b22d6ca2437f946",
+        "source_sha256": "d9dda2efabcdcb2a2651dfc15d77910b1863fdb2cbd0967c64ef80674b426024",
+        "state_source_sha256": "4800dfed2bdd627c6aa818ae2f985304b388e92c33f2e2a0c14b3838109cafaa",
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "elf_sha256": "7d2a3ea10882e56c01ee61d64d96e0cc1c9203bd7aebf6adad89454ef42435c4",
+        "compiled_bytes": 532,
+        "compiled_sha256": "5276d60a1e42018cd44e6db9399340984d4040abd2c6e4b718da269308f8f78d",
+        "stock_offset": 97884,
+        "stock_bytes": 648,
+        "stock_sha256": "b260d362d8238f27523765b4eb1d857c30bb931d919909ca48b65f362f6942ca",
+        "upstream_nonrelocated_equal_bytes": 636,
+        "upstream_relocations": [
+          {
+            "offset": 176,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 366,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 644,
+            "symbol": 3,
+            "type": 1,
+            "addend": 0
+          }
+        ],
+        "source_admitted": false,
+        "limits": [
+          "C IRQ plus compiler helper linked in original slot. SDK object authenticated for provenance only and never linked or copied. MMIO ordering, callback mutations, ABI and startup state still require decoded qualification."
+        ]
+      },
+      "checked_artifacts": 410,
+      "clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+      "source_admitted": false,
+      "limits": [
+        "Exact C BSS state and decoded startup zero checked. Fixed-section audit excludes retained indirect writes and physical concurrency."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_irq_candidate.py": "c7569ba13cf992eaaed20d8d349c7e96d9b43ffabe87f1c662424482a9c22b97",
+    "execute_gx8002_audio_irq_record.py": "dd64f3c91f67e5838b35591fb05147eb9ef102c3d58f075d98544ad0ebfb2d60",
+    "verify_gx8002_audio_irq.py": "413fc209db116a2f6b3d42abdbc75be0fcd21c79d6d71a92793bab9a39b5ee1e",
+    "verify_gx8002_audio_irq_dynamic.py": "91df1a1361c5e7acd4939792f16041682d0ca3cd460202ce345abdb547968774",
+    "verify_gx8002_audio_irq_initialize.py": "63948a707256455900c2e1f5c9fff0af4b631f1020fc8ce98daa31fa0e1307c9",
+    "verify_gx8002_audio_irq_ownership.py": "42e979d1b7c104c74b2649cf4423fc23e47d30f855c60b9422facbc88f7cd159",
+    "verify_gx8002_audio_irq_record.py": "f8b54c6c0e9851c4c96714885a74806f2660488a2b9ce5d4f38af3100fc69384",
+    "verify_gx8002_audio_irq_source.py": "3d5871f2418d57d184fa4134c2e551594ba62bd7e3bf79ec8ad63b1f172c4db2"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Experimental hybrid admission; IRQ and local compiler helper compiled from C, including source pointer literal. Twenty-eight-byte runtime BSS allocated and startup/initializer publication checked. Record callback executes on shared IRQ memory; other callback bodies and record helpers modeled. Physical execution/full firmware reconstruction remain unfinished."
+  ]
+}

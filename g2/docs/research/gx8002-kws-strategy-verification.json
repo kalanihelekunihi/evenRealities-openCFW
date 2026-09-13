@@ -1,0 +1,31 @@
+{
+  "candidate": {
+    "source_sha256": "50712dcb417974f9af39f05a44f8984a1c2c2f470486204056fc58a4eb81664c",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "compiled_bytes": 324,
+    "compiled_sha256": "9d101ea4d96a83de0b104c9ab89ed941092d92ef1e311eeef98d04028026169b",
+    "stock_envelope_bytes": 328,
+    "stock_sha256": "6f9e96155253b39ac1a21ee7beabac315a3f1635fb5fd9242c0b2193021571f1",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Constant-return parameter helper folded into source reference after authenticating exact leaf instructions. Selection behavior and ABI still need qualification."
+    ]
+  },
+  "decoded_cases": 693,
+  "source_admitted": false,
+  "limits": [
+    "Two-record oracle includes NaN/infinity/large finite results under pinned CK804 conversion semantics. Default rounding and modeled printf; mutations, exception flags/traps, invalid state and hardware remain unqualified."
+  ]
+}

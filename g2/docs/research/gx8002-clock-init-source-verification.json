@@ -1,0 +1,1239 @@
+{
+  "binding_ownership": {
+    "bindings": {
+      "gx_clock_set_div": {
+        "address": 268586488,
+        "report": "gx8002-clock-module-divider-set-source-verification.json",
+        "symbol": "open_cfw_gx8002_clock_module_divider_set",
+        "report_sha256": "59b01b0982c07aec69316e96c72d67b004cc3847bf0146bd38327911b0fb6013",
+        "compiled_bytes": 320
+      },
+      "gx_clock_set_dto": {
+        "address": 268586820,
+        "report": "gx8002-clock-module-dto-set-source-verification.json",
+        "symbol": "open_cfw_gx8002_clock_module_dto_set",
+        "report_sha256": "42dbafaff13509357fabea0aab496246e051df02a35671f48e600c2ef132e558",
+        "compiled_bytes": 198
+      },
+      "gx_clock_set_module_source": {
+        "address": 268585952,
+        "report": "gx8002-clock-module-source-fixed-source-verification.json",
+        "symbol": "open_cfw_gx8002_clock_module_source_fixed",
+        "report_sha256": "95de170f2cd973efe7d714fc644f9c9f8681d480a65baf4b2b449fb804804f20",
+        "compiled_bytes": 384
+      },
+      "gx_clock_set_source": {
+        "address": 268585932,
+        "report": "gx8002-clock-source-select-source-verification.json",
+        "symbol": "open_cfw_gx8002_clock_source_select",
+        "report_sha256": "5fe420f99eb7bd2a59ab1f867866b5780274b5cd13362fc8a8549f99a25d28a7",
+        "compiled_bytes": 20
+      },
+      "gx_clock_set_module_enable": {
+        "address": 268587136,
+        "report": "gx8002-platform-gate-verification.json",
+        "symbol": "open_cfw_gx8002_platform_gate",
+        "report_sha256": "74ba7cb1a8b325832c5abcae691270d02368bf3f54af98de4433b6e8e66afc06",
+        "compiled_bytes": 254
+      },
+      "gx_pmu_get_start_mode": {
+        "address": 268585348,
+        "report": "gx8002-start-mode-verification.json",
+        "symbol": "open_cfw_gx8002_start_mode",
+        "report_sha256": "6ff1a8ce703a366c762ccbb15eeb8e1643e5b589ff5cd7d6c318edf468c75535",
+        "compiled_bytes": 30
+      },
+      "gx_pmu_osc_get_all_trim_state": {
+        "address": 268585500,
+        "report": "gx8002-trim-state-source-verification.json",
+        "symbol": "open_cfw_gx8002_trim_state",
+        "report_sha256": "420f91a2215622a1aa314932859de1f151f3b3606483d4809b645d2552f7a60a",
+        "compiled_bytes": 18
+      },
+      "gx_clock_set_pll_no_block": {
+        "address": 268587020,
+        "report": "gx8002-clock-pll-wait-source-verification.json",
+        "symbol": "open_cfw_gx8002_clock_pll_wait_timeout",
+        "report_sha256": "09e59240698a8c1a3ea86180fb302522f467234813e9237cbf2db1da3cc41183",
+        "compiled_bytes": 80
+      },
+      "gx_clock_set_pll": {
+        "address": 268587104,
+        "report": "gx8002-clock-pll-wait-source-verification.json",
+        "symbol": "open_cfw_gx8002_clock_pll_wait",
+        "report_sha256": "09e59240698a8c1a3ea86180fb302522f467234813e9237cbf2db1da3cc41183",
+        "compiled_bytes": 32
+      },
+      "gx_analog_set_ldo_ana_voltage": {
+        "address": 268584688,
+        "report": "gx8002-analog-voltage-source-verification.json",
+        "symbol": "open_cfw_gx8002_analog_voltage",
+        "report_sha256": "a348b8c2730c775fd214808a3226d3b4acc6c916239de371076c4c74adfa3560",
+        "compiled_bytes": 32
+      },
+      "gx_analog_set_ldo_dig_voltage": {
+        "address": 268584752,
+        "report": "gx8002-digital-voltage-source-verification.json",
+        "symbol": "open_cfw_gx8002_digital_voltage",
+        "report_sha256": "053987e62b4617e737707798201b919a6be0c93c374fa780bf4c3626b35e0c30",
+        "compiled_bytes": 38
+      },
+      "pll": {
+        "address": 537028808,
+        "report": "gx8002-clock-switch-1m-source-verification.json",
+        "symbol": "open_cfw_gx8002_clock_switch_1m_pll",
+        "report_sha256": "b9fc8819aff755e5002195c8ae3b81b77ed82ff8fb08d7ed26d141f7b040b746",
+        "compiled_bytes": 56
+      },
+      "memcpy": {
+        "address": 268588856,
+        "report": "gx8002-memcpy-source-verification.json",
+        "symbol": "open_cfw_gx8002_memcpy",
+        "report_sha256": "1827eb7287710251d8eea55c32bb76f1d538b0d25d31309c955e8b2872c4f223",
+        "compiled_bytes": 96
+      }
+    },
+    "saved_gate_state": {
+      "section": ".saved_gate",
+      "address": 537031448,
+      "bytes": 4,
+      "type": "NOBITS",
+      "startup_clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+      "clear_interval": [
+        537030016,
+        537062636
+      ]
+    },
+    "limits": [
+      "Source ownership/entry-address audit; artifact hashes and executable semantics checked separately.",
+      "Saved-gate NOBITS section and recorded clear interval checked against its admitted owner; startup clear execution qualified separately."
+    ]
+  },
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_clock_init_pointer",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 564,
+      "compiled_sha256": "6269e7521abd44c7f50c3ebec87abe4ce46f78a42146dd9bd3d7499739de4fb2",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_clock_init_pointer",
+          "package_offset": 96924,
+          "bytes": 564,
+          "sha256": "a0ff342ff5296de314212fb33651adea5b074b154d1c0ed79824353d1e70b30b",
+          "region": "image_a_sram"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_clock_init_pointer_trim",
+      "section_name": ".trim",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 4,
+      "compiled_sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_clock_init_pointer_trim",
+          "package_offset": 100628,
+          "bytes": 4,
+          "sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e",
+          "region": "image_a_dram"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_clock_init_pointer_osc",
+      "section_name": ".osc",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 80,
+      "compiled_sha256": "42f07da90e978167ba33138dd98b3f6abe2de73ac10d5cda8d4e7ac6eb1530c9",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_clock_init_pointer_osc",
+          "package_offset": 100632,
+          "bytes": 80,
+          "sha256": "42f07da90e978167ba33138dd98b3f6abe2de73ac10d5cda8d4e7ac6eb1530c9",
+          "region": "image_a_dram"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_clock_init_pointer_xtal",
+      "section_name": ".xtal",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 80,
+      "compiled_sha256": "b33843a0bf1cba162d178e2b77e304a5049b6e6748fe5ee849658738574e090e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_clock_init_pointer_xtal",
+          "package_offset": 100712,
+          "bytes": 80,
+          "sha256": "b33843a0bf1cba162d178e2b77e304a5049b6e6748fe5ee849658738574e090e",
+          "region": "image_a_dram"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_clock_init_pointer_rodata",
+      "section_name": ".rodata",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 36,
+      "compiled_sha256": "e112ef0bba6cf6fd0dc04166f788a2b60687e07f7c628c3626f33517a17a70dd",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_clock_init_pointer_rodata",
+          "package_offset": 97524,
+          "bytes": 36,
+          "sha256": "e112ef0bba6cf6fd0dc04166f788a2b60687e07f7c628c3626f33517a17a70dd",
+          "region": "image_a_sram"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "evidence": {
+      "evidence": {
+        "evidence": {
+          "evidence": {
+            "evidence": {
+              "evidence": {
+                "evidence": {
+                  "evidence": {
+                    "evidence": {
+                      "candidate": {
+                        "recovered_configuration": {
+                          "SRAM_DIV_PARAM": 1,
+                          "MCU_DIV_PARAM": 3,
+                          "NPU_DIV_PARAM": 1,
+                          "FLASH_DIV_PARAM": 1,
+                          "PLL_frequency": "default 24.576 MHz",
+                          "dynamic_CPU_frequency": false,
+                          "AIN_AOUT_same_clock": false
+                        },
+                        "dependency_headers": {
+                          "arch/soc/grus/include/base_addr.h": {
+                            "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                            "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+                          },
+                          "include/driver/gx_clock/gx_clock_v2.h": {
+                            "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                            "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+                          },
+                          "include/driver/gx_pmu_ctrl.h": {
+                            "blob": "d3826fa23025ff1ffd4c39ad639998a2de6e2b9f",
+                            "sha256": "d22a3a65c28d3b8bb065d9925d102c0d64a2521740e7e5468e232a686e9c3bf5"
+                          },
+                          "include/driver/gx_pmu_osc.h": {
+                            "blob": "d07e5d6762174629b0d40963fc98a3f59e580c83",
+                            "sha256": "774e5af46fc895788560c703cd1ec2ef2974cfb670a06a50c55a6b609f1401d7"
+                          },
+                          "include/driver/gx_analog/gx_ldo.h": {
+                            "blob": "272fedd48f83cb6f767bb2e7af5eeaa287e37db1",
+                            "sha256": "8d70862fa7d3c1d0d2022254fb21f800f95abe7a23f849938b373a433e0c3700"
+                          }
+                        },
+                        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+                        "oracle": {
+                          "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+                          "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+                          "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+                          "role": "compiled_upstream_with_explicit_PDM_and_loop_index_adaptations"
+                        },
+                        "bindings": {
+                          "gx_clock_set_div": 268586488,
+                          "gx_clock_set_dto": 268586820,
+                          "gx_clock_set_module_source": 268585952,
+                          "gx_clock_set_source": 268585932,
+                          "gx_clock_set_module_enable": 268587136,
+                          "gx_pmu_get_start_mode": 268585348,
+                          "gx_pmu_osc_get_all_trim_state": 268585500,
+                          "gx_clock_set_pll_no_block": 268587020,
+                          "gx_clock_set_pll": 268587104,
+                          "gx_analog_set_ldo_ana_voltage": 268584688,
+                          "gx_analog_set_ldo_dig_voltage": 268584752,
+                          "pll": 537028808,
+                          "s_clk_mod_gate": 537031448,
+                          "memcpy": 268588856
+                        },
+                        "flags": [
+                          "-Os",
+                          "-mcpu=ck804ef",
+                          "-mhard-float",
+                          "-ffreestanding",
+                          "-fno-builtin",
+                          "-ffunction-sections",
+                          "-fdata-sections",
+                          "-Wall",
+                          "-Wextra",
+                          "-Werror",
+                          "-fno-jump-tables"
+                        ],
+                        "header": {
+                          "path": "include/driver/gx_clock.h",
+                          "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+                          "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+                        },
+                        "source_sha256": "c9235799af9c1d305443e03fd56a4c04ac577d35710b46a401e0e2cfc3961e70",
+                        "symbol": "open_cfw_gx8002_clock_init_pointer",
+                        "section_name": ".text",
+                        "package_offset": 96924,
+                        "compiled_bytes": 564,
+                        "compiled_sha256": "6269e7521abd44c7f50c3ebec87abe4ce46f78a42146dd9bd3d7499739de4fb2",
+                        "stock_envelope_bytes": 564,
+                        "stock_sha256": "a0ff342ff5296de314212fb33651adea5b074b154d1c0ed79824353d1e70b30b",
+                        "fits": true,
+                        "source_admitted": false,
+                        "limits": [
+                          "Unadmitted full initialization candidate; data placement and decoded validation pending. Crystal/oscillator selector paths share one pointer loop with the same ten-entry bounds. PDM source adapted to stock OSC_1M policy; unsigned fixed-size loop indices avoid signedness warnings. Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+                        ],
+                        "data_sections": [
+                          {
+                            "name": ".trim",
+                            "package_offset": 100628,
+                            "bytes": 4,
+                            "sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e",
+                            "stock_exact": true
+                          },
+                          {
+                            "name": ".osc",
+                            "package_offset": 100632,
+                            "bytes": 80,
+                            "sha256": "42f07da90e978167ba33138dd98b3f6abe2de73ac10d5cda8d4e7ac6eb1530c9",
+                            "stock_exact": true
+                          },
+                          {
+                            "name": ".xtal",
+                            "package_offset": 100712,
+                            "bytes": 80,
+                            "sha256": "b33843a0bf1cba162d178e2b77e304a5049b6e6748fe5ee849658738574e090e",
+                            "stock_exact": true
+                          },
+                          {
+                            "name": ".rodata",
+                            "package_offset": 97524,
+                            "bytes": 36,
+                            "sha256": "e112ef0bba6cf6fd0dc04166f788a2b60687e07f7c628c3626f33517a17a70dd",
+                            "stock_exact": true
+                          }
+                        ]
+                      },
+                      "cases": 96,
+                      "source_admitted": false,
+                      "limits": [
+                        "Full decoded stock/source helper order, state and MMIO writes agree. Helpers modeled and initializer memcpy marshalled; independent full policy oracle agrees; decoded dependency integration remains pending."
+                      ]
+                    },
+                    "analog_evidence": {
+                      "evidence": {
+                        "candidate": {
+                          "recovered_configuration": {
+                            "SRAM_DIV_PARAM": 1,
+                            "MCU_DIV_PARAM": 3,
+                            "NPU_DIV_PARAM": 1,
+                            "FLASH_DIV_PARAM": 1,
+                            "PLL_frequency": "default 24.576 MHz",
+                            "dynamic_CPU_frequency": false,
+                            "AIN_AOUT_same_clock": false
+                          },
+                          "dependency_headers": {
+                            "arch/soc/grus/include/base_addr.h": {
+                              "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                              "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+                            },
+                            "include/driver/gx_clock/gx_clock_v2.h": {
+                              "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                              "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+                            },
+                            "include/driver/gx_pmu_ctrl.h": {
+                              "blob": "d3826fa23025ff1ffd4c39ad639998a2de6e2b9f",
+                              "sha256": "d22a3a65c28d3b8bb065d9925d102c0d64a2521740e7e5468e232a686e9c3bf5"
+                            },
+                            "include/driver/gx_pmu_osc.h": {
+                              "blob": "d07e5d6762174629b0d40963fc98a3f59e580c83",
+                              "sha256": "774e5af46fc895788560c703cd1ec2ef2974cfb670a06a50c55a6b609f1401d7"
+                            },
+                            "include/driver/gx_analog/gx_ldo.h": {
+                              "blob": "272fedd48f83cb6f767bb2e7af5eeaa287e37db1",
+                              "sha256": "8d70862fa7d3c1d0d2022254fb21f800f95abe7a23f849938b373a433e0c3700"
+                            }
+                          },
+                          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+                          "oracle": {
+                            "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+                            "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+                            "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+                            "role": "compiled_upstream_with_explicit_PDM_and_loop_index_adaptations"
+                          },
+                          "bindings": {
+                            "gx_clock_set_div": 268586488,
+                            "gx_clock_set_dto": 268586820,
+                            "gx_clock_set_module_source": 268585952,
+                            "gx_clock_set_source": 268585932,
+                            "gx_clock_set_module_enable": 268587136,
+                            "gx_pmu_get_start_mode": 268585348,
+                            "gx_pmu_osc_get_all_trim_state": 268585500,
+                            "gx_clock_set_pll_no_block": 268587020,
+                            "gx_clock_set_pll": 268587104,
+                            "gx_analog_set_ldo_ana_voltage": 268584688,
+                            "gx_analog_set_ldo_dig_voltage": 268584752,
+                            "pll": 537028808,
+                            "s_clk_mod_gate": 537031448,
+                            "memcpy": 268588856
+                          },
+                          "flags": [
+                            "-Os",
+                            "-mcpu=ck804ef",
+                            "-mhard-float",
+                            "-ffreestanding",
+                            "-fno-builtin",
+                            "-ffunction-sections",
+                            "-fdata-sections",
+                            "-Wall",
+                            "-Wextra",
+                            "-Werror",
+                            "-fno-jump-tables"
+                          ],
+                          "header": {
+                            "path": "include/driver/gx_clock.h",
+                            "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+                            "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+                          },
+                          "source_sha256": "c9235799af9c1d305443e03fd56a4c04ac577d35710b46a401e0e2cfc3961e70",
+                          "symbol": "open_cfw_gx8002_clock_init_pointer",
+                          "section_name": ".text",
+                          "package_offset": 96924,
+                          "compiled_bytes": 564,
+                          "compiled_sha256": "6269e7521abd44c7f50c3ebec87abe4ce46f78a42146dd9bd3d7499739de4fb2",
+                          "stock_envelope_bytes": 564,
+                          "stock_sha256": "a0ff342ff5296de314212fb33651adea5b074b154d1c0ed79824353d1e70b30b",
+                          "fits": true,
+                          "source_admitted": false,
+                          "limits": [
+                            "Unadmitted full initialization candidate; data placement and decoded validation pending. Crystal/oscillator selector paths share one pointer loop with the same ten-entry bounds. PDM source adapted to stock OSC_1M policy; unsigned fixed-size loop indices avoid signedness warnings. Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+                          ],
+                          "data_sections": [
+                            {
+                              "name": ".trim",
+                              "package_offset": 100628,
+                              "bytes": 4,
+                              "sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e",
+                              "stock_exact": true
+                            },
+                            {
+                              "name": ".osc",
+                              "package_offset": 100632,
+                              "bytes": 80,
+                              "sha256": "42f07da90e978167ba33138dd98b3f6abe2de73ac10d5cda8d4e7ac6eb1530c9",
+                              "stock_exact": true
+                            },
+                            {
+                              "name": ".xtal",
+                              "package_offset": 100712,
+                              "bytes": 80,
+                              "sha256": "b33843a0bf1cba162d178e2b77e304a5049b6e6748fe5ee849658738574e090e",
+                              "stock_exact": true
+                            },
+                            {
+                              "name": ".rodata",
+                              "package_offset": 97524,
+                              "bytes": 36,
+                              "sha256": "e112ef0bba6cf6fd0dc04166f788a2b60687e07f7c628c3626f33517a17a70dd",
+                              "stock_exact": true
+                            }
+                          ]
+                        },
+                        "cases": 96,
+                        "source_admitted": false,
+                        "limits": [
+                          "Full decoded stock/source helper order, state and MMIO writes agree. Helpers modeled and initializer memcpy marshalled; independent full policy oracle agrees; decoded dependency integration remains pending."
+                        ]
+                      },
+                      "decoded_analog_calls": 190,
+                      "analog_object_sha256": "659e4dd0d5c3cefdbea22c032322682814ab435bee2f51a3f7931aa8ab366c12",
+                      "leaf_evidence": {
+                        "candidate": {
+                          "dependency_headers": {
+                            "arch/soc/grus/include/base_addr.h": {
+                              "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                              "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+                            },
+                            "include/driver/gx_clock/gx_clock_v2.h": {
+                              "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                              "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+                            }
+                          },
+                          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+                          "oracle": {
+                            "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+                            "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+                            "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+                            "role": "board_call_site_reference_only; implementation recovered from stock"
+                          },
+                          "bindings": {},
+                          "flags": [
+                            "-Os",
+                            "-mcpu=ck804ef",
+                            "-mhard-float",
+                            "-ffreestanding",
+                            "-fno-builtin",
+                            "-ffunction-sections",
+                            "-fdata-sections",
+                            "-Wall",
+                            "-Wextra",
+                            "-Werror"
+                          ],
+                          "header": {
+                            "path": "include/driver/gx_analog/gx_ldo.h",
+                            "blob": "272fedd48f83cb6f767bb2e7af5eeaa287e37db1",
+                            "sha256": "8d70862fa7d3c1d0d2022254fb21f800f95abe7a23f849938b373a433e0c3700"
+                          },
+                          "source_sha256": "72b248fd9ee814af28e7f227cd3c278d0fe259782df44ab1bee420bb46b82433",
+                          "symbol": "open_cfw_gx8002_analog_voltage",
+                          "section_name": ".text",
+                          "package_offset": 91908,
+                          "compiled_bytes": 32,
+                          "compiled_sha256": "a7dd3f2f9a0d1397433cf3086ea3d11631735a3a4f280968ecf34735edef377c",
+                          "stock_envelope_bytes": 32,
+                          "stock_sha256": "1821e235b0f31e6c05e200cbc729d31394f18e843d259df67fc9baa6d07b936c",
+                          "fits": true,
+                          "source_admitted": false,
+                          "limits": [
+                            "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+                          ]
+                        },
+                        "cases": 34452,
+                        "source_admitted": false,
+                        "limits": [
+                          "Restricted decoded leaf interpreter; no whole-device or physical qualification.",
+                          "All low-byte input patterns plus upper-bit and sentinel boundaries; not an exhaustive 32-bit proof."
+                        ]
+                      },
+                      "source_admitted": false,
+                      "limits": [
+                        "Analog helper decoded on private MMIO snapshots; full shared hardware state integration remains pending.",
+                        "Pure C analog candidate; physical qualification remains pending.",
+                        "Digital voltage helper remains modeled at the initialization boundary."
+                      ]
+                    },
+                    "digital_evidence": {
+                      "evidence": {
+                        "candidate": {
+                          "recovered_configuration": {
+                            "SRAM_DIV_PARAM": 1,
+                            "MCU_DIV_PARAM": 3,
+                            "NPU_DIV_PARAM": 1,
+                            "FLASH_DIV_PARAM": 1,
+                            "PLL_frequency": "default 24.576 MHz",
+                            "dynamic_CPU_frequency": false,
+                            "AIN_AOUT_same_clock": false
+                          },
+                          "dependency_headers": {
+                            "arch/soc/grus/include/base_addr.h": {
+                              "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                              "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+                            },
+                            "include/driver/gx_clock/gx_clock_v2.h": {
+                              "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                              "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+                            },
+                            "include/driver/gx_pmu_ctrl.h": {
+                              "blob": "d3826fa23025ff1ffd4c39ad639998a2de6e2b9f",
+                              "sha256": "d22a3a65c28d3b8bb065d9925d102c0d64a2521740e7e5468e232a686e9c3bf5"
+                            },
+                            "include/driver/gx_pmu_osc.h": {
+                              "blob": "d07e5d6762174629b0d40963fc98a3f59e580c83",
+                              "sha256": "774e5af46fc895788560c703cd1ec2ef2974cfb670a06a50c55a6b609f1401d7"
+                            },
+                            "include/driver/gx_analog/gx_ldo.h": {
+                              "blob": "272fedd48f83cb6f767bb2e7af5eeaa287e37db1",
+                              "sha256": "8d70862fa7d3c1d0d2022254fb21f800f95abe7a23f849938b373a433e0c3700"
+                            }
+                          },
+                          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+                          "oracle": {
+                            "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+                            "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+                            "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+                            "role": "compiled_upstream_with_explicit_PDM_and_loop_index_adaptations"
+                          },
+                          "bindings": {
+                            "gx_clock_set_div": 268586488,
+                            "gx_clock_set_dto": 268586820,
+                            "gx_clock_set_module_source": 268585952,
+                            "gx_clock_set_source": 268585932,
+                            "gx_clock_set_module_enable": 268587136,
+                            "gx_pmu_get_start_mode": 268585348,
+                            "gx_pmu_osc_get_all_trim_state": 268585500,
+                            "gx_clock_set_pll_no_block": 268587020,
+                            "gx_clock_set_pll": 268587104,
+                            "gx_analog_set_ldo_ana_voltage": 268584688,
+                            "gx_analog_set_ldo_dig_voltage": 268584752,
+                            "pll": 537028808,
+                            "s_clk_mod_gate": 537031448,
+                            "memcpy": 268588856
+                          },
+                          "flags": [
+                            "-Os",
+                            "-mcpu=ck804ef",
+                            "-mhard-float",
+                            "-ffreestanding",
+                            "-fno-builtin",
+                            "-ffunction-sections",
+                            "-fdata-sections",
+                            "-Wall",
+                            "-Wextra",
+                            "-Werror",
+                            "-fno-jump-tables"
+                          ],
+                          "header": {
+                            "path": "include/driver/gx_clock.h",
+                            "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+                            "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+                          },
+                          "source_sha256": "c9235799af9c1d305443e03fd56a4c04ac577d35710b46a401e0e2cfc3961e70",
+                          "symbol": "open_cfw_gx8002_clock_init_pointer",
+                          "section_name": ".text",
+                          "package_offset": 96924,
+                          "compiled_bytes": 564,
+                          "compiled_sha256": "6269e7521abd44c7f50c3ebec87abe4ce46f78a42146dd9bd3d7499739de4fb2",
+                          "stock_envelope_bytes": 564,
+                          "stock_sha256": "a0ff342ff5296de314212fb33651adea5b074b154d1c0ed79824353d1e70b30b",
+                          "fits": true,
+                          "source_admitted": false,
+                          "limits": [
+                            "Unadmitted full initialization candidate; data placement and decoded validation pending. Crystal/oscillator selector paths share one pointer loop with the same ten-entry bounds. PDM source adapted to stock OSC_1M policy; unsigned fixed-size loop indices avoid signedness warnings. Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+                          ],
+                          "data_sections": [
+                            {
+                              "name": ".trim",
+                              "package_offset": 100628,
+                              "bytes": 4,
+                              "sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e",
+                              "stock_exact": true
+                            },
+                            {
+                              "name": ".osc",
+                              "package_offset": 100632,
+                              "bytes": 80,
+                              "sha256": "42f07da90e978167ba33138dd98b3f6abe2de73ac10d5cda8d4e7ac6eb1530c9",
+                              "stock_exact": true
+                            },
+                            {
+                              "name": ".xtal",
+                              "package_offset": 100712,
+                              "bytes": 80,
+                              "sha256": "b33843a0bf1cba162d178e2b77e304a5049b6e6748fe5ee849658738574e090e",
+                              "stock_exact": true
+                            },
+                            {
+                              "name": ".rodata",
+                              "package_offset": 97524,
+                              "bytes": 36,
+                              "sha256": "e112ef0bba6cf6fd0dc04166f788a2b60687e07f7c628c3626f33517a17a70dd",
+                              "stock_exact": true
+                            }
+                          ]
+                        },
+                        "cases": 96,
+                        "source_admitted": false,
+                        "limits": [
+                          "Full decoded stock/source helper order, state and MMIO writes agree. Helpers modeled and initializer memcpy marshalled; independent full policy oracle agrees; decoded dependency integration remains pending."
+                        ]
+                      },
+                      "digital_candidate": {
+                        "dependency_headers": {
+                          "arch/soc/grus/include/base_addr.h": {
+                            "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                            "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+                          },
+                          "include/driver/gx_clock/gx_clock_v2.h": {
+                            "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                            "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+                          }
+                        },
+                        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+                        "oracle": {
+                          "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+                          "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+                          "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+                          "role": "board_call_site_reference_only; implementation recovered from stock"
+                        },
+                        "bindings": {
+                          "gx_pmu_ctrl_set": 268590452
+                        },
+                        "flags": [
+                          "-Os",
+                          "-mcpu=ck804ef",
+                          "-mhard-float",
+                          "-ffreestanding",
+                          "-fno-builtin",
+                          "-ffunction-sections",
+                          "-fdata-sections",
+                          "-Wall",
+                          "-Wextra",
+                          "-Werror"
+                        ],
+                        "header": {
+                          "path": "include/driver/gx_pmu_ctrl.h",
+                          "blob": "d3826fa23025ff1ffd4c39ad639998a2de6e2b9f",
+                          "sha256": "d22a3a65c28d3b8bb065d9925d102c0d64a2521740e7e5468e232a686e9c3bf5"
+                        },
+                        "source_sha256": "f7509e1d1198e554dc62c648d1f72aba5fc5f9d5e59e1fe09b5c71ef2aef2c01",
+                        "symbol": "open_cfw_gx8002_digital_voltage",
+                        "section_name": ".text",
+                        "package_offset": 91972,
+                        "compiled_bytes": 38,
+                        "compiled_sha256": "37f9ece862d93a0ed95b87d93b3e1a703eca0a0508d2564fd0c521fb3ee975b9",
+                        "stock_envelope_bytes": 44,
+                        "stock_sha256": "a5c2d9e2bbd1fc60f43afbed620510ccac0546aa4fa3b56b38c216aeb545824f",
+                        "fits": true,
+                        "source_admitted": false,
+                        "intentional_change": "Initialize the 27 SDK-reserved command bits to zero instead of leaking stack data.",
+                        "limits": [
+                          "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+                        ]
+                      },
+                      "decoded_digital_and_pmu_calls": 190,
+                      "pmu_elf_sha256": "46bda66482a75525c6ffb9a9559ab551b8edce712c56582c619bc5118f88b730",
+                      "source_admitted": false,
+                      "limits": [
+                        "Both outer initialization variants use the corrected C digital wrapper; stock reserved-bit difference is qualified separately.",
+                        "Private helper stack and PMU caller-record marshalling; MMIO trace checked independently, not merged into outer state.",
+                        "Physical hardware remains unqualified."
+                      ]
+                    },
+                    "shared_voltage_writes": 380,
+                    "pmu_elf_sha256": "46bda66482a75525c6ffb9a9559ab551b8edce712c56582c619bc5118f88b730",
+                    "source_admitted": false,
+                    "limits": [
+                      "Voltage MMIO state and ordered writes now shared with initialization; other clock helpers remain modeled in this harness.",
+                      "Digital reserved-bit correction used for both outer variants; stock difference qualified separately.",
+                      "Helper stack/record marshalling and physical qualification remain limitations."
+                    ]
+                  },
+                  "shared_selector_calls": 556,
+                  "selector_elf_sha256": "bbcaa9549732699f29eccc73b602db34a6b76a75557a616b7d9df54b9a374022",
+                  "voltage_state_included": true,
+                  "source_admitted": false,
+                  "limits": [
+                    "Selector and register leaf execute on cumulative outer state and original source descriptor addresses.",
+                    "Other clock dependencies remain modeled in this harness; physical qualification pending."
+                  ]
+                },
+                "decoded_module_calls": 3610,
+                "selectors_voltage_included": true,
+                "module_source_pairs": [
+                  [
+                    0,
+                    2
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    2,
+                    1
+                  ],
+                  [
+                    3,
+                    0
+                  ],
+                  [
+                    4,
+                    0
+                  ],
+                  [
+                    5,
+                    0
+                  ],
+                  [
+                    6,
+                    1
+                  ],
+                  [
+                    7,
+                    3
+                  ],
+                  [
+                    8,
+                    6
+                  ],
+                  [
+                    9,
+                    0
+                  ],
+                  [
+                    10,
+                    1
+                  ],
+                  [
+                    11,
+                    1
+                  ],
+                  [
+                    12,
+                    1
+                  ],
+                  [
+                    13,
+                    1
+                  ],
+                  [
+                    14,
+                    1
+                  ],
+                  [
+                    15,
+                    1
+                  ],
+                  [
+                    16,
+                    1
+                  ],
+                  [
+                    19,
+                    1
+                  ],
+                  [
+                    22,
+                    0
+                  ]
+                ],
+                "dependency_elf_sha256": "8c8aec4d39399364775b1ebff5a54fc14a527bf46977a4181c426103d896d83c",
+                "helpers": {
+                  "lookup_elf_sha256": "38b29242c4f1b670ab35270a099ea464ff05753c5913b90d044e787153213c7b",
+                  "register_elf_sha256": "bbcaa9549732699f29eccc73b602db34a6b76a75557a616b7d9df54b9a374022",
+                  "limits": [
+                    "Lookup executor uses fixed private output 0x1000, marshalled to the actual caller stack; register helper executes on a snapshot of the modeled MMIO word."
+                  ]
+                },
+                "source_admitted": false,
+                "limits": [
+                  "All 19 initialization choices execute corrected source switcher with decoded lookup/register helpers; status and full MMIO transitions match independent model. Module writes and SET/CLR gate effects propagate into cumulative outer state; remaining dependency families are modeled."
+                ]
+              },
+              "decoded_divider_calls": 2662,
+              "other_state_included": true,
+              "decoded_dto_calls": 570,
+              "dependency_elf_sha256": {
+                "clock-module-divider-set": "ede5f92ffe69d663a177b7c6d8c6fd867baee3806927f45dbf23978d523dc427",
+                "clock-module-dto-set": "f62292e454f64968cc783ea14fb6263ea781165fde532d09796686a184514555"
+              },
+              "helpers": {
+                "lookup_elf_sha256": "38b29242c4f1b670ab35270a099ea464ff05753c5913b90d044e787153213c7b",
+                "register_elf_sha256": "bbcaa9549732699f29eccc73b602db34a6b76a75557a616b7d9df54b9a374022",
+                "limits": [
+                  "Lookup executor uses fixed private output 0x1000, marshalled to the actual caller stack; register helper executes on a snapshot of the modeled MMIO word."
+                ]
+              },
+              "leaves": {
+                "lookup_elf_sha256": "38b29242c4f1b670ab35270a099ea464ff05753c5913b90d044e787153213c7b",
+                "register_elf_sha256": "bbcaa9549732699f29eccc73b602db34a6b76a75557a616b7d9df54b9a374022",
+                "limits": [
+                  "Lookup executor uses fixed private output 0x1000, marshalled to the actual caller stack; register helper executes on a snapshot of the modeled MMIO word."
+                ],
+                "divider_elf_sha256": "6b168f6b8d66fe4c9361b7a256179575e7e603ed8fd449d98535b082e12065d7",
+                "divider_limits": [
+                  "Descriptor fields and MMIO snapshot marshalled to leaf executor private parameter/descriptor addresses."
+                ]
+              },
+              "source_admitted": false,
+              "limits": [
+                "Complete outer call order with decoded divider/DTO programming and decoded lookup/register/divider leaves; full transitions match independent models. Cumulative divider/DTO state, pulse writes and SET/CLR effects merged into outer initialization; other dependency families modeled."
+              ]
+            },
+            "decoded_gate_calls": 934,
+            "gate_elf_sha256": "3ab4242e9aa5b76d4598a5f50c89a2d32ab5f962e39a97d1c8a05cda25745b4a",
+            "context": {
+              "elf_sha256": "38b29242c4f1b670ab35270a099ea464ff05753c5913b90d044e787153213c7b",
+              "section_sha256": {
+                ".text.__module_get_info": "002a00eee4ab7761a5a8fce8b26c97c18509b72615dc8d558ac107189ecc6b8f",
+                ".data.gx_clock_param_table": "64a888d435653e525749e8de221f6b171d5c0f4e7d7270f146cfa42521856296",
+                ".data.gx_clock_dto_table": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+                ".data.gx_clock_div_table": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872"
+              },
+              "modules": [
+                {
+                  "module": 0,
+                  "table_index": 0,
+                  "address": 537028320,
+                  "gate_high_offset": 0,
+                  "gate_all_offset": 1,
+                  "clock_offset": 1,
+                  "divider": 537028740,
+                  "dto": 0
+                },
+                {
+                  "module": 1,
+                  "table_index": 1,
+                  "address": 537028336,
+                  "gate_high_offset": 2,
+                  "gate_all_offset": 3,
+                  "clock_offset": 3,
+                  "divider": 537028744,
+                  "dto": 0
+                },
+                {
+                  "module": 2,
+                  "table_index": 2,
+                  "address": 537028352,
+                  "gate_high_offset": 4,
+                  "gate_all_offset": 5,
+                  "clock_offset": 6,
+                  "divider": 537028748,
+                  "dto": 537028736
+                },
+                {
+                  "module": 3,
+                  "table_index": 3,
+                  "address": 537028368,
+                  "gate_high_offset": 7,
+                  "gate_all_offset": 8,
+                  "clock_offset": 9,
+                  "divider": 537028752,
+                  "dto": 0
+                },
+                {
+                  "module": 4,
+                  "table_index": 4,
+                  "address": 537028384,
+                  "gate_high_offset": 9,
+                  "gate_all_offset": 10,
+                  "clock_offset": 10,
+                  "divider": 537028756,
+                  "dto": 0
+                },
+                {
+                  "module": 5,
+                  "table_index": 5,
+                  "address": 537028400,
+                  "gate_high_offset": 11,
+                  "gate_all_offset": 12,
+                  "clock_offset": 11,
+                  "divider": 537028760,
+                  "dto": 0
+                },
+                {
+                  "module": 6,
+                  "table_index": 6,
+                  "address": 537028416,
+                  "gate_high_offset": 13,
+                  "gate_all_offset": 14,
+                  "clock_offset": 12,
+                  "divider": 537028764,
+                  "dto": 0
+                },
+                {
+                  "module": 7,
+                  "table_index": 7,
+                  "address": 537028432,
+                  "gate_high_offset": 4,
+                  "gate_all_offset": 6,
+                  "clock_offset": 19,
+                  "divider": 537028768,
+                  "dto": 0
+                },
+                {
+                  "module": 8,
+                  "table_index": 8,
+                  "address": 537028448,
+                  "gate_high_offset": 4,
+                  "gate_all_offset": 19,
+                  "clock_offset": 20,
+                  "divider": 537028772,
+                  "dto": 0
+                },
+                {
+                  "module": 9,
+                  "table_index": 9,
+                  "address": 537028464,
+                  "gate_high_offset": 20,
+                  "gate_all_offset": 21,
+                  "clock_offset": 24,
+                  "divider": 537028776,
+                  "dto": 0
+                },
+                {
+                  "module": 10,
+                  "table_index": 10,
+                  "address": 537028480,
+                  "gate_high_offset": 4,
+                  "gate_all_offset": 12,
+                  "clock_offset": 0,
+                  "divider": 537028780,
+                  "dto": 0
+                },
+                {
+                  "module": 16,
+                  "table_index": 11,
+                  "address": 537028496,
+                  "gate_high_offset": 5,
+                  "gate_all_offset": 5,
+                  "clock_offset": 1,
+                  "divider": 0,
+                  "dto": 537028737
+                },
+                {
+                  "module": 17,
+                  "table_index": 12,
+                  "address": 537028512,
+                  "gate_high_offset": 5,
+                  "gate_all_offset": 24,
+                  "clock_offset": -1,
+                  "divider": 0,
+                  "dto": 0
+                },
+                {
+                  "module": 18,
+                  "table_index": 13,
+                  "address": 537028528,
+                  "gate_high_offset": 5,
+                  "gate_all_offset": 25,
+                  "clock_offset": -1,
+                  "divider": 0,
+                  "dto": 0
+                },
+                {
+                  "module": 11,
+                  "table_index": 14,
+                  "address": 537028544,
+                  "gate_high_offset": 6,
+                  "gate_all_offset": 26,
+                  "clock_offset": 2,
+                  "divider": 0,
+                  "dto": 537028738
+                },
+                {
+                  "module": 19,
+                  "table_index": 15,
+                  "address": 537028560,
+                  "gate_high_offset": 7,
+                  "gate_all_offset": 7,
+                  "clock_offset": 3,
+                  "divider": 537028784,
+                  "dto": 0
+                },
+                {
+                  "module": 20,
+                  "table_index": 16,
+                  "address": 537028576,
+                  "gate_high_offset": 7,
+                  "gate_all_offset": 28,
+                  "clock_offset": -1,
+                  "divider": 0,
+                  "dto": 0
+                },
+                {
+                  "module": 21,
+                  "table_index": 17,
+                  "address": 537028592,
+                  "gate_high_offset": 7,
+                  "gate_all_offset": 29,
+                  "clock_offset": -1,
+                  "divider": 0,
+                  "dto": 0
+                },
+                {
+                  "module": 12,
+                  "table_index": 18,
+                  "address": 537028608,
+                  "gate_high_offset": 8,
+                  "gate_all_offset": 8,
+                  "clock_offset": 4,
+                  "divider": 537028788,
+                  "dto": 0
+                },
+                {
+                  "module": 13,
+                  "table_index": 19,
+                  "address": 537028624,
+                  "gate_high_offset": 9,
+                  "gate_all_offset": 9,
+                  "clock_offset": 5,
+                  "divider": 537028792,
+                  "dto": 0
+                },
+                {
+                  "module": 14,
+                  "table_index": 20,
+                  "address": 537028640,
+                  "gate_high_offset": 10,
+                  "gate_all_offset": 10,
+                  "clock_offset": 6,
+                  "divider": 537028796,
+                  "dto": 0
+                },
+                {
+                  "module": 15,
+                  "table_index": 21,
+                  "address": 537028656,
+                  "gate_high_offset": 11,
+                  "gate_all_offset": 11,
+                  "clock_offset": 7,
+                  "divider": 537028800,
+                  "dto": 0
+                },
+                {
+                  "module": 22,
+                  "table_index": 22,
+                  "address": 537028672,
+                  "gate_high_offset": 27,
+                  "gate_all_offset": 27,
+                  "clock_offset": 11,
+                  "divider": 537028804,
+                  "dto": 0
+                },
+                {
+                  "module": 23,
+                  "table_index": 23,
+                  "address": 537028688,
+                  "gate_high_offset": 27,
+                  "gate_all_offset": 22,
+                  "clock_offset": -1,
+                  "divider": 0,
+                  "dto": 0
+                },
+                {
+                  "module": 24,
+                  "table_index": 24,
+                  "address": 537028704,
+                  "gate_high_offset": 27,
+                  "gate_all_offset": 23,
+                  "clock_offset": -1,
+                  "divider": 0,
+                  "dto": 0
+                },
+                {
+                  "module": 25,
+                  "table_index": 25,
+                  "address": 537028720,
+                  "gate_high_offset": -1,
+                  "gate_all_offset": 14,
+                  "clock_offset": -1,
+                  "divider": 0,
+                  "dto": 0
+                }
+              ],
+              "combined_gate_index_pairs": {
+                "16": [
+                  21,
+                  12
+                ],
+                "19": [
+                  14,
+                  15
+                ],
+                "22": [
+                  23,
+                  24
+                ]
+              },
+              "limits": [
+                "Immutable source table context and lookup code authentication; successful module switching still needs decoded qualification."
+              ]
+            },
+            "source_admitted": false,
+            "limits": [
+              "Combined initialization shared state includes gate restoration and hardware-I2C enable through decoded gate programming; gate MMIO trace matches independent model using authenticated source descriptors. Gate lookup/private stack abstracted as in admitted gate qualification. Physical timing unqualified."
+            ]
+          },
+          "shared_pll_configurations": 52,
+          "other_state_included": true,
+          "pll_elf_sha256": "53c0a8db690ed68a45a55ad4102ed2b362d92821af78874aeabca17ac6ada35b",
+          "source_admitted": false,
+          "limits": [
+            "Decoded configuration writes propagate between retries and into final initialization state.",
+            "Decoded wait/configuration/timer composed; lock samples and tick inputs scripted.",
+            "Other helper state families depend on composition option; physical timing remains unqualified."
+          ]
+        },
+        "decoded_copy_calls": 60,
+        "other_state_included": true,
+        "copy_sizes": [
+          16,
+          20
+        ],
+        "copy_object_sha256": "a024a5606cb6c33b94f0ef8b576aa6612512d614a8842b85c222d1f4c81b259b",
+        "source_admitted": false,
+        "limits": [
+          "Decoded source memcpy through complete stock/source initialization paths; source-generated retry and SRAM selector constants copied, bounds and exact byte access coverage checked. Other helpers remain modeled; physical timing unqualified."
+        ]
+      },
+      "decoded_mode_calls": 96,
+      "modeled_invalid_mode_calls": 96,
+      "other_state_included": true,
+      "status_low_bits_covered": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "mode_elf_sha256": "0998f14e0044ff2c9335803aeaa19763b4e40071e2dbb7fd1c2b73265e39eab0",
+      "source_admitted": false,
+      "limits": [
+        "Full initialization stock/source/oracle paths driven by decoded startup-mode and reset-reason bodies; ordered MMIO reads checked. Register inputs scripted; invalid mode values injected only for defensive outer coverage, not claimed as decoded query outputs. Other helpers depend on composition option; hardware timing unqualified."
+      ]
+    },
+    "decoded_trim_calls": 24,
+    "modeled_invalid_trim_calls": 24,
+    "other_state_included": true,
+    "dependency_elf_sha256": {
+      "trim-state": "3247d7991707912b67457b61edf0269f8549022b91c2291bda1d652caad841cd",
+      "trim-clock-enable": "aded7f44309e8a757cb1495a9ca1063177e8721c3819f828c8ebe3e3e81709d7"
+    },
+    "source_admitted": false,
+    "limits": [
+      "Full initialization branch driven by decoded trim query and wrapper, with ordered gate request then masked read. Combined option routes gate programming into outer shared state; invalid trim values explicitly injected only for defensive branches. Trim register input scripted; hardware and frame limitations remain."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_clock_init_candidate.py": "b98417fb7f1bc538415c32d527fc938a424cf906f12a7ef15e9a272bf7136a87",
+    "build_gx8002_clock_init_pointer_candidate.py": "e2c67e7bb8e2a49ee589e4182c54ec1d861f5fc48c8c0cef3b84d153d4c63aca",
+    "execute_gx8002_clock_init.py": "19a1edaceefd05a3d1a6d61b68f9ea7877232c087560b222ace267ecf1a6238e",
+    "oracle_gx8002_clock_init.py": "41ee9b12be4e3bfb6b26bded28e854be11f12f46be3db9bb839a67459f336baa",
+    "verify_gx8002_clock_init_analog.py": "3063aec3fa8f705a0f38f8f8705243990616607e9ec24968077237d22656613e",
+    "verify_gx8002_clock_init_bindings.py": "0db25ca2d597ea407b2fe7f41d52b4e8634fc948f0cd95c1910cf7b6ef3fdf48",
+    "verify_gx8002_clock_init_copy.py": "92874982cacd910c05b2a2fb8b78e906a15a839aa6928d99a15e4a97841a6a8a",
+    "verify_gx8002_clock_init_digital.py": "482f926f9bb9f4729645abfefb802a4524983b3fee20c493977ee5f3c9f27efb",
+    "verify_gx8002_clock_init_divider_state.py": "7c0bf913f333ca91077c3ad7a3a1cf08f985f0652e589c6f3ef85aec2e8811e4",
+    "verify_gx8002_clock_init_dividers.py": "44a5d0388981f35604669c7801f7ee24b73a1f35417eb809616ee2c2a9025e85",
+    "verify_gx8002_clock_init_gate_state.py": "04b812294db7eb44e2728929b087da57ffe688344f560eb948e1a36bb3dbee67",
+    "verify_gx8002_clock_init_gates.py": "f903833999f2ce3a79b3469cbe3651efbc854889749576a0e75136faeb719871",
+    "verify_gx8002_clock_init_mode.py": "f136dc7410cf62315c3bff6b4b6425a80c45799720ef1f5060e3ba7a1ac27b2a",
+    "verify_gx8002_clock_init_module_state.py": "a378473f660331812c7f8f79c65195aea858a97239df7765a99a77c6f03f80e1",
+    "verify_gx8002_clock_init_modules.py": "32f594cf01e27a75c40edacbef2bf50678d16e1241205bbdec2b8811b1716ef5",
+    "verify_gx8002_clock_init_paths.py": "f4c010efcb56ea9f70c2df9c891b64c381888eb5fb25f537a655f0c8b4deb4c4",
+    "verify_gx8002_clock_init_pll_blocking.py": "169d059efd08d13481f17bcdfd459a5623958bd35172f3c1857ad034a5d89de3",
+    "verify_gx8002_clock_init_pll_retry.py": "272c7812427cfb9d5e5516c03af5cececc0133b9509188e6acf66c87c2930b6f",
+    "verify_gx8002_clock_init_pll_state.py": "634c3a06cc70567753d8f462e426c5b8f5111b6479d026ce681a7e419567eef1",
+    "verify_gx8002_clock_init_selector_state.py": "542cc93b86eff550b882c91c5c25f535cd20005612d2eea802406ada1f9e7113",
+    "verify_gx8002_clock_init_selectors.py": "c2ff0e2fcf8b1925f6338f47c22424acead9577b99a76b0e3930af2ad5915d26",
+    "verify_gx8002_clock_init_source.py": "00553381d3c78b8b8f7b8e8a05e15b758b6aa1513df801682af28db5c56fa44f",
+    "verify_gx8002_clock_init_trim.py": "5ac09859634360eb245babd4cbf84dc99180ad974bf81614eb138f6b31ee1c20",
+    "verify_gx8002_clock_init_voltage_state.py": "e50b60b345e89d1f20324c6e8d5092c989ea902e28c87746114188e820f30587"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Experimental hybrid admission: decoded helper composition uses marshalled private frames and scripted mode/trim/lock/timer inputs.",
+    "Gate lookup abstraction inherited from prior admission; physical boot and timing remain unqualified.",
+    "Uses admitted corrected module switching and digital reserved-bit initialization; these deliberate differences remain explicit.",
+    "PLL state and saved gate BSS are externally owned by the admitted 1 MHz clock switch; only this initializer code and four data sections are replaced.",
+    "Invalid mode and trim values are injected defensive coverage, not decoded hardware query outputs.",
+    "Complete source-only firmware remains unfinished."
+  ]
+}

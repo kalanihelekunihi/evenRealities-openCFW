@@ -7,9 +7,9 @@ from analyze_gx8002_upstream_objects import IMAGE_SHA,sha
 from build_transparent_image import Elf32
 
 
-def execute(code,entry,allocation,token,channel,gate_hook=None,irq_hook=None):
-    memory={0x2002e940:len(allocation)}
-    memory.update({0x2002ecac+i:value for i,value in enumerate(allocation)})
+def execute(code,entry,allocation,token,channel,gate_hook=None,irq_hook=None,state_address=0x2002e93c,helper_addresses=None):
+    memory={state_address+4:len(allocation)}
+    memory.update({state_address+0x370+i:value for i,value in enumerate(allocation)})
     r={f'r{i}':0x98760000+i for i in range(32)};r['r14']=0x2002f000;r['r0']=channel
     initial=r.copy();trace=[];pc=entry;saved=None;regs=['r4','r5','r15'];condition=False
     for _ in range(1000):
@@ -52,6 +52,9 @@ def execute(code,entry,allocation,token,channel,gate_hook=None,irq_hook=None):
             else:memory[addr]=r[reg];trace.append(('write',addr,r[reg]))
         elif op=='bsr':
             target=int(args,0)
+            if helper_addresses is not None:
+                if target not in helper_addresses:raise ValueError('Relocated deallocation helper')
+                target=helper_addresses[target]
             save=target in (0xffe2eaec,0x10025560)
             if save:
                 if irq_hook is not None and irq_hook(True,r['r0'])!=token:raise ValueError('Deallocation IRQ save result')

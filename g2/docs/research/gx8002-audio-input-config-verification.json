@@ -1,0 +1,101 @@
+{
+  "candidate": {
+    "compiled_bytes": 350,
+    "fits": true,
+    "compiled_sha256": "8dbca681e6ba1f5840647b7e2075c7a73eef47cfe27c37168f3e16f8061b4c90",
+    "stock_sha256": "8a19317505b7cf21a0745c39f4214c991e1a4c5f03d3d740ad85e40101ecc541",
+    "exact_stock": false,
+    "source_sha256": "8daac676898f9a1726fc74cf43dce09e5d42260770cb6d81eda9cff566fbd8ec",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "upstream": {
+      "include/lvp_param.h": {
+        "blob": "6e8aa73abb6ddc555fb0183456d88629d912f5b6",
+        "sha256": "56033502b75e9a02f2d0c6959974ba2016166ebdd732786d7295d5c2a100ac95"
+      },
+      "include/driver/gx_audio_in.h": {
+        "blob": "3211212e26d06713dc20eac8c3e108db6a0ea6da",
+        "sha256": "bf3bb33c8b52532c6dc23f871319338f81078cbf96a65eb3b5235cf7ca07645c"
+      },
+      "include/driver/gx_audio_in/gx_audio_in_v2.h": {
+        "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+        "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+      },
+      "include/driver/gx_padmux.h": {
+        "blob": "4d7aaa315665a24dc55d77c0bf7b3c285d7358b8",
+        "sha256": "ed2dfbb290aa634bca68dc536583ac7a24994fb9b9f73165dc00ba453ea631d2"
+      },
+      "lvp/common/lvp_audio_in.c": {
+        "blob": "43963b1adaad4f7040206c06769ee8a69656848f",
+        "sha256": "cd52150f9f3e45061b358ad2d6401932a37a60857b2432b8a92a45a36624b64f"
+      }
+    },
+    "configuration_sha256": "9811f2aa66324bafe0b823ac15ac80ea0041bea02b181698910ee4ebb4a711ba",
+    "bindings": {
+      "AudioInBoardInit": 50608,
+      "AudioInBoardGetParamCtrl": 50576,
+      "gx_audio_in_set_dc_enable": 55516,
+      "gx_audio_in_set_evad_threshold": 55916,
+      "gx_audio_in_set_evad_enable": 55688,
+      "gx_audio_in_set_input_sadc": 54180,
+      "gx_audio_in_set_pga_gain": 55392,
+      "gx_audio_in_set_rough_gain": 55608,
+      "gx_audio_in_set_input_pdm": 54280,
+      "gx_audio_in_set_input_channel": 54524,
+      "gx_audio_in_set_i2s_clock": 55468,
+      "gx_audio_in_set_input_i2s": 54356,
+      "gx_audio_in_set_i2sin_mode": 55484,
+      "open_cfw_gx8002_audio_input_output": 67068,
+      "LvpGetLogfbankFrameNumPerChannel": 66816,
+      "gx_audio_in_set_fftvad_enable": 56060
+    },
+    "decoded_call_targets": [
+      270544932,
+      270544900,
+      270549840,
+      270550240,
+      270550012,
+      270548504,
+      270549716,
+      270549932,
+      270549840,
+      270550240,
+      270550012,
+      270549932,
+      270548604,
+      270548848,
+      270549840,
+      270550240,
+      270550012,
+      270549932,
+      270549792,
+      270548680,
+      270548848,
+      270549808,
+      270561392,
+      270561392,
+      270561392,
+      270561392,
+      270561140,
+      270550384
+    ],
+    "source_admitted": false
+  },
+  "bitfield_cases": 12288,
+  "helper_mutation_cases": 2048,
+  "decoded_cases": 1088,
+  "source_admitted": false,
+  "limits": [
+    "Independent call oracle, bitfield and by-value arguments, helper clobbers and saved ABI checked. Full12-bit config sweep and helper board mutations checked. Helpers modeled; source admission pending."
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "build": {
+    "generated_dispatch_table": {
+      "section": ".rodata.platform_read",
+      "compiled_bytes": 40,
+      "compiled_sha256": "96af5d85cc1f697d7488099930b8fdf641891e0e2e3fe6fd17f87b6bee175571",
+      "package_offset": 308132,
+      "stock_envelope_bytes": 40,
+      "stock_sha256": "3bc72af3aa109d69468ea65025d60244714d037645b73d2106938ba2eb7e6a0b"
+    },
+    "source_sha256": "18d4d8ec7a938a16103732a4610f4bf050c19508e7ddcaf4f55fcccd8d2da225",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_platform_read",
+        "section": ".text.platform_read",
+        "compiled_bytes": 188,
+        "compiled_sha256": "ded3e9ab1fefb835ca7e2cb5af9861f9c6a128b98f2d700f5fc692da4748bbaf",
+        "package_offset": 247836,
+        "stock_envelope_bytes": 220,
+        "stock_sha256": "024d62fea40e092a07df5a431af724965ae36344f5933e6b374f34f09089af04",
+        "byte_exact": false,
+        "fits": true
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Placement and decoded dispatcher/input/MMIO qualification required.",
+      "No physical hardware qualification."
+    ]
+  },
+  "patches": [
+    {
+      "section": ".text.platform_read",
+      "address": 268451548,
+      "offset": 247836,
+      "bytes": 188,
+      "sha256": "ded3e9ab1fefb835ca7e2cb5af9861f9c6a128b98f2d700f5fc692da4748bbaf"
+    },
+    {
+      "section": ".rodata.platform_read",
+      "address": 268511844,
+      "offset": 308132,
+      "bytes": 40,
+      "sha256": "96af5d85cc1f697d7488099930b8fdf641891e0e2e3fe6fd17f87b6bee175571"
+    }
+  ],
+  "replacement_bytes": 228,
+  "loader_cases": 12,
+  "candidate_image_sha256": "621e0e0942fb61c16549bb0b062ae3f0e85ff9f2819f708f31a3ef087b75f911",
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Combined normal backup-loader placement, with no replacement fill and unrelated bytes unchanged.",
+    "Data retained at original physical SRAM offsets; runtime alias/clock behavior and external-reference admission remain separate."
+  ]
+}

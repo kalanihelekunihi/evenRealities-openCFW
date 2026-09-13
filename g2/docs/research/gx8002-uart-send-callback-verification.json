@@ -1,0 +1,56 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+    "headers_sha256": {
+      "uart_message_v2.h": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2",
+      "lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+    },
+    "generated_source_sha256": "1ad1e97a3abe062dc295a36ee7fdb623731393677b1e968118419f91e38078a7",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-error=sign-compare",
+      "-Wno-error=unused-parameter",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-nationalchip-lvp-kws/lvp/common"
+    ],
+    "bindings": {
+      "uart_state": 537059408,
+      "_GetMessageHandle": 270564032,
+      "LvpPmuSuspendUnlock": 270563284,
+      "_UartMessageSendCheck": 270564060,
+      "_UartMessageAsyncSendBody": 270564152,
+      "gx_uart_write": 270546436,
+      "crc32": 270571688,
+      "s_send_callback": 537060728,
+      "header_count": 537060704,
+      "crc_count": 537060712,
+      "crc": 537060720
+    },
+    "compiled_bytes": 392,
+    "compiled_sha256": "6a42a24669d53316f49adb93e5927e2e2d22fee72cb9167c129c080cad4f79b1",
+    "stock_envelope_bytes": 400,
+    "stock_sha256": "21fdc03cf936bd37e07616eb4f8b53f2c2eda93e224aff75742fb1c7edabadec",
+    "fits": true,
+    "exact_stock": false,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Source-built candidate only; complete decoded state-machine comparison and admission remain pending. External state uses established RAM addresses."
+    ]
+  },
+  "decoded_cases": 10080,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Finite decoded cases and independent state-machine oracle; helpers modeled. Mutation and nested helper execution not yet qualified."
+  ]
+}

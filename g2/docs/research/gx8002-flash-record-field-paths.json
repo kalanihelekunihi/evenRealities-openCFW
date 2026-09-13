@@ -1,0 +1,710 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "object_blob": "f833ae8f45d25cea39c4863f46abf37175ce4b71",
+  "object_sha256": "ea9e15b6c30aa74b60abcb620d49499892449c5df87072f1d12203fa4a35b2a5",
+  "paths": [
+    {
+      "symbol": "sflash_getinfo",
+      "section_sha256": "6fa7b7c327df08866ade3a0aabfc8d9ab7933bd9e5ee4ccd574003fe197cb47a",
+      "pool_offset": 72,
+      "relocation": {
+        "offset": 72,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          22,
+          "lrw",
+          "r3, 0x0"
+        ],
+        [
+          24,
+          "ld.w",
+          "r3, (r3, 0xc)"
+        ],
+        [
+          26,
+          "ld.w",
+          "r0, (r3, 0x0)"
+        ],
+        [
+          30,
+          "lrw",
+          "r3, 0x0"
+        ],
+        [
+          32,
+          "ld.w",
+          "r3, (r3, 0xc)"
+        ],
+        [
+          34,
+          "ld.w",
+          "r0, (r3, 0x4)"
+        ]
+      ],
+      "classified_reads": {
+        "0x18": "runtime record pointer",
+        "0x20": "runtime record pointer"
+      }
+    },
+    {
+      "symbol": "sflash_otp_get_region",
+      "section_sha256": "f87530314fbc1270f161a9e9d801c41ac17a58033f8cb4d9bb6cf971b2b170a9",
+      "pool_offset": 16,
+      "relocation": {
+        "offset": 16,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          0,
+          "lrw",
+          "r3, 0x0"
+        ],
+        [
+          2,
+          "ld.w",
+          "r3, (r3, 0xc)"
+        ],
+        [
+          4,
+          "ld.w",
+          "r3, (r3, 0x14)"
+        ],
+        [
+          6,
+          "ld.w",
+          "r3, (r3, 0xc)"
+        ]
+      ],
+      "classified_reads": {
+        "0x2": "runtime record pointer",
+        "0x6": "OTP descriptor region field"
+      }
+    },
+    {
+      "symbol": "sflash_quad_read",
+      "section_sha256": "168da510a45f3da3dfd0e9fbe82dd778b3d16232b9a871c7322b5e5184af3eef",
+      "pool_offset": 164,
+      "relocation": {
+        "offset": 164,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          48,
+          "lrw",
+          "r1, 0x0"
+        ],
+        [
+          52,
+          "ld.w",
+          "r1, (r1, 0xc)"
+        ],
+        [
+          58,
+          "ld.w",
+          "r0, (r1, 0x4)"
+        ]
+      ],
+      "classified_reads": {
+        "0x34": "runtime record pointer"
+      }
+    },
+    {
+      "symbol": "gx_spinor_flash_getuid",
+      "section_sha256": "cd9f635a9cab608ea055af103896f787ec8c17926111f79a192e39def68ddff5",
+      "pool_offset": 136,
+      "relocation": {
+        "offset": 136,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          2,
+          "lrw",
+          "r3, 0x0"
+        ],
+        [
+          6,
+          "ld.w",
+          "r3, (r3, 0xc)"
+        ],
+        [
+          8,
+          "ld.b",
+          "r3, (r3, 0x6)"
+        ]
+      ],
+      "classified_reads": {
+        "0x6": "runtime record pointer"
+      }
+    },
+    {
+      "symbol": "sflash_write_protect_mode",
+      "section_sha256": "a6f104d30d8685dde13cff2b92e1ac12b433960696bbb006e79b4f41ce1ee22c",
+      "pool_offset": 32,
+      "relocation": {
+        "offset": 32,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          0,
+          "lrw",
+          "r3, 0x0"
+        ],
+        [
+          2,
+          "ld.w",
+          "r3, (r3, 0xc)"
+        ],
+        [
+          4,
+          "ld.w",
+          "r3, (r3, 0x10)"
+        ]
+      ],
+      "classified_reads": {
+        "0x2": "runtime record pointer"
+      }
+    },
+    {
+      "symbol": "sflash_otp_set_region",
+      "section_sha256": "5256d900d753f12080a023609e2bd99d2cf395871a9b067cd05a95d291268010",
+      "pool_offset": 36,
+      "relocation": {
+        "offset": 36,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          0,
+          "lrw",
+          "r3, 0x0"
+        ],
+        [
+          2,
+          "ld.w",
+          "r3, (r3, 0xc)"
+        ],
+        [
+          4,
+          "ld.w",
+          "r2, (r3, 0x14)"
+        ],
+        [
+          6,
+          "ld.w",
+          "r3, (r2, 0xc)"
+        ]
+      ],
+      "classified_reads": {
+        "0x2": "runtime record pointer",
+        "0x6": "OTP descriptor region count"
+      }
+    },
+    {
+      "symbol": "sflash_otp_get_current_region",
+      "section_sha256": "e7ada6e4fa580bd3460f7166b12df4538be3b613d13b1a02b087ceefcf90a8cd",
+      "pool_offset": 20,
+      "relocation": {
+        "offset": 20,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          0,
+          "lrw",
+          "r3, 0x0"
+        ],
+        [
+          2,
+          "ld.w",
+          "r3, (r3, 0xc)"
+        ],
+        [
+          4,
+          "ld.w",
+          "r3, (r3, 0x14)"
+        ],
+        [
+          6,
+          "ld.w",
+          "r3, (r3, 0x10)"
+        ]
+      ],
+      "classified_reads": {
+        "0x2": "runtime record pointer"
+      }
+    },
+    {
+      "symbol": "sflash_otp_get_region_size",
+      "section_sha256": "893e575141564c97a90b949d9cd7038fcd6719dce235846e19d6bfddf28d5dac",
+      "pool_offset": 16,
+      "relocation": {
+        "offset": 16,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          0,
+          "lrw",
+          "r3, 0x0"
+        ],
+        [
+          2,
+          "ld.w",
+          "r3, (r3, 0xc)"
+        ],
+        [
+          4,
+          "ld.w",
+          "r3, (r3, 0x14)"
+        ],
+        [
+          6,
+          "ld.w",
+          "r3, (r3, 0x8)"
+        ]
+      ],
+      "classified_reads": {
+        "0x2": "runtime record pointer"
+      }
+    },
+    {
+      "symbol": "sflash_gettype",
+      "section_sha256": "69abe783aef6a873ceeba34cb7366dade6ab1c281ae79d3643f3481324395a2f",
+      "pool_offset": 8,
+      "relocation": {
+        "offset": 8,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          0,
+          "lrw",
+          "r3, 0x0"
+        ],
+        [
+          2,
+          "ld.w",
+          "r3, (r3, 0xc)"
+        ],
+        [
+          4,
+          "ld.w",
+          "r0, (r3, 0x0)"
+        ]
+      ],
+      "classified_reads": {
+        "0x2": "runtime record pointer"
+      }
+    },
+    {
+      "symbol": "gx_spinor_flash_gettype",
+      "section_sha256": "69abe783aef6a873ceeba34cb7366dade6ab1c281ae79d3643f3481324395a2f",
+      "pool_offset": 8,
+      "relocation": {
+        "offset": 8,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          0,
+          "lrw",
+          "r3, 0x0"
+        ],
+        [
+          2,
+          "ld.w",
+          "r3, (r3, 0xc)"
+        ],
+        [
+          4,
+          "ld.w",
+          "r0, (r3, 0x0)"
+        ]
+      ],
+      "classified_reads": {
+        "0x2": "runtime record pointer"
+      }
+    },
+    {
+      "symbol": "sflash_otp_status",
+      "section_sha256": "62378728ba4473a1929aa9020b20e5dd907e072d7e9af48a32ebe902662d8177",
+      "pool_offset": 64,
+      "relocation": {
+        "offset": 64,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          2,
+          "lrw",
+          "r5, 0x0"
+        ],
+        [
+          6,
+          "ld.w",
+          "r3, (r5, 0xc)"
+        ],
+        [
+          8,
+          "ld.w",
+          "r3, (r3, 0x14)"
+        ],
+        [
+          16,
+          "ld.w",
+          "r3, (r5, 0xc)"
+        ],
+        [
+          22,
+          "ld.hs",
+          "r3, (r3, 0x6)"
+        ]
+      ],
+      "classified_reads": {
+        "0x6": "runtime record pointer",
+        "0x10": "runtime record pointer; r5 preserved by helper ABI"
+      }
+    },
+    {
+      "symbol": "sflash_otp_lock",
+      "section_sha256": "db0684a2dd920a95d4993d95429fa4ca50d51ccc1c89104dd3ba3896d12572cc",
+      "pool_offset": 96,
+      "relocation": {
+        "offset": 96,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          4,
+          "lrw",
+          "r5, 0x0"
+        ],
+        [
+          6,
+          "ld.w",
+          "r3, (r5, 0xc)"
+        ],
+        [
+          8,
+          "ld.w",
+          "r3, (r3, 0x14)"
+        ],
+        [
+          16,
+          "ld.w",
+          "r3, (r5, 0xc)"
+        ],
+        [
+          22,
+          "ld.hs",
+          "r3, (r3, 0x6)"
+        ]
+      ],
+      "classified_reads": {
+        "0x6": "runtime record pointer",
+        "0x10": "runtime record pointer; r5 preserved by helper ABI"
+      }
+    },
+    {
+      "symbol": "sflash_otp_erase",
+      "section_sha256": "cf8edaa36ddb48bb13be6d5b15cf8d2218e82afb7bc679440c254ca329f2fc28",
+      "pool_offset": 80,
+      "relocation": {
+        "offset": 80,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          2,
+          "lrw",
+          "r4, 0x0"
+        ],
+        [
+          4,
+          "ld.w",
+          "r3, (r4, 0xc)"
+        ],
+        [
+          6,
+          "ld.hs",
+          "r2, (r3, 0x6)"
+        ]
+      ],
+      "classified_reads": {
+        "0x4": "runtime record pointer"
+      }
+    },
+    {
+      "symbol": "sflash_write_protect_status",
+      "section_sha256": "dbd64adfa72d91802aca62f8195b992267c31409dbae63705c1a3b16c3b2721e",
+      "pool_offset": 144,
+      "relocation": {
+        "offset": 144,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          2,
+          "lrw",
+          "r5, 0x0"
+        ],
+        [
+          8,
+          "ld.w",
+          "r3, (r5, 0xc)"
+        ],
+        [
+          12,
+          "ld.w",
+          "r3, (r3, 0x10)"
+        ],
+        [
+          14,
+          "mov",
+          "r6, r5"
+        ],
+        [
+          30,
+          "ld.w",
+          "r3, (r5, 0xc)"
+        ],
+        [
+          32,
+          "ld.h",
+          "r3, (r3, 0x6)"
+        ],
+        [
+          56,
+          "ld.w",
+          "r3, (r6, 0xc)"
+        ],
+        [
+          60,
+          "ld.w",
+          "r18, (r3, 0x10)"
+        ]
+      ],
+      "classified_reads": {
+        "0x8": "runtime record pointer",
+        "0x1e": "runtime record pointer; preserved r5",
+        "0x38": "runtime record pointer; copied/preserved r6"
+      }
+    },
+    {
+      "symbol": "sflash_wp_lock",
+      "section_sha256": "841a03409663f78abf5d7df66c65ceeee76b16db75ac11681859f7870cca68cd",
+      "pool_offset": 200,
+      "relocation": {
+        "offset": 200,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          4,
+          "lrw",
+          "r5, 0x0"
+        ],
+        [
+          16,
+          "ld.w",
+          "r3, (r5, 0xc)"
+        ],
+        [
+          20,
+          "ld.w",
+          "r2, (r3, 0x10)"
+        ],
+        [
+          62,
+          "ld.w",
+          "r3, (r5, 0xc)"
+        ],
+        [
+          66,
+          "ld.w",
+          "r2, (r3, 0x10)"
+        ]
+      ],
+      "classified_reads": {
+        "0x10": "runtime record pointer",
+        "0x3e": "runtime record pointer; preserved r5"
+      }
+    },
+    {
+      "symbol": "sflash_otp_write",
+      "section_sha256": "423e5639b183ec0a145a6bb286745549f931b2fd85e9c249550f137b1f21d674",
+      "pool_offset": 224,
+      "relocation": {
+        "offset": 224,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          4,
+          "lrw",
+          "r8, 0x0"
+        ],
+        [
+          10,
+          "ld.w",
+          "r12, (r8, 0xc)"
+        ],
+        [
+          16,
+          "ld.w",
+          "r3, (r12, 0x14)"
+        ]
+      ],
+      "classified_reads": {
+        "0xa": "runtime record pointer"
+      }
+    },
+    {
+      "symbol": "sflash_otp_read",
+      "section_sha256": "d6226aa607a78a93a2d12dcee9fdbe116345e69956f15a586b8659a046376c38",
+      "pool_offset": 340,
+      "relocation": {
+        "offset": 340,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          6,
+          "lrw",
+          "r10, 0x0"
+        ],
+        [
+          12,
+          "ld.w",
+          "r12, (r10, 0xc)"
+        ],
+        [
+          18,
+          "ld.w",
+          "r3, (r12, 0x14)"
+        ]
+      ],
+      "classified_reads": {
+        "0xc": "runtime record pointer"
+      }
+    },
+    {
+      "symbol": "sflash_init",
+      "section_sha256": "d20f02e692c130ab7ea8712d8ffc5be7570c08905f79aa77cd69378947baf184",
+      "pool_offset": 352,
+      "relocation": {
+        "offset": 352,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          92,
+          "lrw",
+          "r5, 0x0"
+        ],
+        [
+          104,
+          "ld.w",
+          "r3, (r5, 0xc)"
+        ],
+        [
+          106,
+          "ld.w",
+          "r4, (r3, 0x4)"
+        ]
+      ],
+      "classified_reads": {
+        "0x68": "runtime record pointer; preserved r5"
+      }
+    },
+    {
+      "symbol": "xip_sflash_init",
+      "section_sha256": "256242771275b72097aa109147023f176f8f485548875d1841a2e1f989d54b1c",
+      "pool_offset": 184,
+      "relocation": {
+        "offset": 184,
+        "symbol": 2,
+        "type": 1,
+        "addend": 0
+      },
+      "verified_steps": [
+        [
+          80,
+          "lrw",
+          "r4, 0x0"
+        ],
+        [
+          84,
+          "ld.w",
+          "r3, (r4, 0xc)"
+        ],
+        [
+          86,
+          "ld.w",
+          "r3, (r3, 0x4)"
+        ],
+        [
+          120,
+          "ld.w",
+          "r3, (r4, 0xc)"
+        ],
+        [
+          122,
+          "ld.w",
+          "r2, (r3, 0x4)"
+        ]
+      ],
+      "classified_reads": {
+        "0x54": "runtime record pointer",
+        "0x78": "runtime record pointer; preserved r4"
+      }
+    }
+  ],
+  "classified_reads": 28,
+  "source_admitted": false,
+  "limits": [
+    "Selected candidate reads ruled out as device-record+12 consumers by local instruction/relocation paths. Not a whole-program or indirect access proof. Remaining fields and consumers unresolved."
+  ]
+}

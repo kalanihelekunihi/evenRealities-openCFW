@@ -1,0 +1,491 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "oracle": {
+    "path": "drivers_lib/audio_out/audio_out.o",
+    "blob": "8f564e229b6a598b266efb6425e8d4b93a5ba6c8",
+    "sha256": "9aa4cf36b549a7be99b4084ac71abf44ced3348a8628b994c8a83f7383f03e2d"
+  },
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "functions": [
+    {
+      "section": ".text.gx_audio_out_alloc_playback",
+      "bytes": 52,
+      "matches": [
+        {
+          "package_offset": 59656,
+          "runtime_address": 270553980,
+          "stock_sha256": "c9a46dc9fdad9be523173c72e525f6216f33cd774ce234eefaaa1e5511857899",
+          "relocations": [
+            {
+              "relative_offset": 16,
+              "type": 19,
+              "upstream_target": "printf_",
+              "addend": 0
+            },
+            {
+              "relative_offset": 40,
+              "type": 1,
+              "upstream_target": ".bss",
+              "addend": 0,
+              "stock_pointer": 537031500
+            },
+            {
+              "relative_offset": 44,
+              "type": 1,
+              "upstream_target": ".rodata",
+              "addend": 0,
+              "stock_pointer": 270576179,
+              "stock_string": "gx_audio_out_alloc_playback"
+            },
+            {
+              "relative_offset": 48,
+              "type": 1,
+              "upstream_target": ".rodata.str1.1",
+              "addend": 0,
+              "stock_pointer": 270576634,
+              "stock_string": "[AOUT ERROR] %s %d\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": ".text.gx_audio_out_free",
+      "bytes": 52,
+      "matches": [
+        {
+          "package_offset": 59708,
+          "runtime_address": 270554032,
+          "stock_sha256": "fcc4f6bb9631496b2328a96a7335348d09f5a242cef782ae1f748e93e57a8c28",
+          "relocations": [
+            {
+              "relative_offset": 16,
+              "type": 19,
+              "upstream_target": "printf_",
+              "addend": 0
+            },
+            {
+              "relative_offset": 40,
+              "type": 1,
+              "upstream_target": ".bss",
+              "addend": 0,
+              "stock_pointer": 537031500
+            },
+            {
+              "relative_offset": 44,
+              "type": 1,
+              "upstream_target": ".rodata",
+              "addend": 28,
+              "stock_pointer": 270576207,
+              "stock_string": "gx_audio_out_free"
+            },
+            {
+              "relative_offset": 48,
+              "type": 1,
+              "upstream_target": ".rodata.str1.1",
+              "addend": 0,
+              "stock_pointer": 270576634,
+              "stock_string": "[AOUT ERROR] %s %d\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": ".text.gx_audio_out_config_buffer",
+      "bytes": 52,
+      "matches": [
+        {
+          "package_offset": 59760,
+          "runtime_address": 270554084,
+          "stock_sha256": "b73a597fd4ce21f6be10ebee019c90017d2b18f1814cda02f4a5e5860d92a147",
+          "relocations": [
+            {
+              "relative_offset": 16,
+              "type": 19,
+              "upstream_target": "printf_",
+              "addend": 0
+            },
+            {
+              "relative_offset": 40,
+              "type": 1,
+              "upstream_target": ".bss",
+              "addend": 0,
+              "stock_pointer": 537031500
+            },
+            {
+              "relative_offset": 44,
+              "type": 1,
+              "upstream_target": ".rodata",
+              "addend": 46,
+              "stock_pointer": 270576225,
+              "stock_string": "gx_audio_out_config_buffer"
+            },
+            {
+              "relative_offset": 48,
+              "type": 1,
+              "upstream_target": ".rodata.str1.1",
+              "addend": 0,
+              "stock_pointer": 270576634,
+              "stock_string": "[AOUT ERROR] %s %d\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": ".text.gx_audio_out_config_pcm",
+      "bytes": 56,
+      "matches": [
+        {
+          "package_offset": 59812,
+          "runtime_address": 270554136,
+          "stock_sha256": "9e27c6bece314b4040bae4c751b2a84c2415f0c7e7cee678e5a7d3c9696d5ffd",
+          "relocations": [
+            {
+              "relative_offset": 18,
+              "type": 19,
+              "upstream_target": "printf_",
+              "addend": 0
+            },
+            {
+              "relative_offset": 44,
+              "type": 1,
+              "upstream_target": ".bss",
+              "addend": 0,
+              "stock_pointer": 537031500
+            },
+            {
+              "relative_offset": 48,
+              "type": 1,
+              "upstream_target": ".rodata",
+              "addend": 73,
+              "stock_pointer": 270576252,
+              "stock_string": "gx_audio_out_config_pcm"
+            },
+            {
+              "relative_offset": 52,
+              "type": 1,
+              "upstream_target": ".rodata.str1.1",
+              "addend": 0,
+              "stock_pointer": 270576634,
+              "stock_string": "[AOUT ERROR] %s %d\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": ".text.gx_audio_out_config_i2s",
+      "bytes": 56,
+      "matches": []
+    },
+    {
+      "section": ".text.gx_audio_out_config_dac",
+      "bytes": 56,
+      "matches": []
+    },
+    {
+      "section": ".text.gx_audio_out_config_cb",
+      "bytes": 56,
+      "matches": [
+        {
+          "package_offset": 59868,
+          "runtime_address": 270554192,
+          "stock_sha256": "c862848902ec3a0b77d1b99f2ef848eb53dcfc9262cf51e10e19f4cccba5709c",
+          "relocations": [
+            {
+              "relative_offset": 18,
+              "type": 19,
+              "upstream_target": "printf_",
+              "addend": 0
+            },
+            {
+              "relative_offset": 44,
+              "type": 1,
+              "upstream_target": ".bss",
+              "addend": 0,
+              "stock_pointer": 537031500
+            },
+            {
+              "relative_offset": 48,
+              "type": 1,
+              "upstream_target": ".rodata",
+              "addend": 145,
+              "stock_pointer": 270576324,
+              "stock_string": "gx_audio_out_config_cb"
+            },
+            {
+              "relative_offset": 52,
+              "type": 1,
+              "upstream_target": ".rodata.str1.1",
+              "addend": 0,
+              "stock_pointer": 270576634,
+              "stock_string": "[AOUT ERROR] %s %d\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": ".text.gx_audio_out_push_frame",
+      "bytes": 56,
+      "matches": [
+        {
+          "package_offset": 59924,
+          "runtime_address": 270554248,
+          "stock_sha256": "66623bf298ae56607a8a562bded014b956c63d1e66e682dc06ada35fac6bf6fd",
+          "relocations": [
+            {
+              "relative_offset": 18,
+              "type": 19,
+              "upstream_target": "printf_",
+              "addend": 0
+            },
+            {
+              "relative_offset": 44,
+              "type": 1,
+              "upstream_target": ".bss",
+              "addend": 0,
+              "stock_pointer": 537031500
+            },
+            {
+              "relative_offset": 48,
+              "type": 1,
+              "upstream_target": ".rodata",
+              "addend": 168,
+              "stock_pointer": 270576347,
+              "stock_string": "gx_audio_out_push_frame"
+            },
+            {
+              "relative_offset": 52,
+              "type": 1,
+              "upstream_target": ".rodata.str1.1",
+              "addend": 0,
+              "stock_pointer": 270576634,
+              "stock_string": "[AOUT ERROR] %s %d\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": ".text.gx_audio_out_drain_frame",
+      "bytes": 56,
+      "matches": []
+    },
+    {
+      "section": ".text.gx_audio_out_set_db",
+      "bytes": 56,
+      "matches": [
+        {
+          "package_offset": 59980,
+          "runtime_address": 270554304,
+          "stock_sha256": "cd7760cb88e9a8b1429911fa6580be4a7bbd65d87d30b62e3492bff3555eda2d",
+          "relocations": [
+            {
+              "relative_offset": 18,
+              "type": 19,
+              "upstream_target": "printf_",
+              "addend": 0
+            },
+            {
+              "relative_offset": 44,
+              "type": 1,
+              "upstream_target": ".bss",
+              "addend": 0,
+              "stock_pointer": 537031500
+            },
+            {
+              "relative_offset": 48,
+              "type": 1,
+              "upstream_target": ".rodata",
+              "addend": 217,
+              "stock_pointer": 270576396,
+              "stock_string": "gx_audio_out_set_db"
+            },
+            {
+              "relative_offset": 52,
+              "type": 1,
+              "upstream_target": ".rodata.str1.1",
+              "addend": 0,
+              "stock_pointer": 270576634,
+              "stock_string": "[AOUT ERROR] %s %d\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": ".text.gx_audio_out_get_db",
+      "bytes": 56,
+      "matches": []
+    },
+    {
+      "section": ".text.gx_audio_out_set_mute",
+      "bytes": 56,
+      "matches": []
+    },
+    {
+      "section": ".text.gx_audio_out_get_mute",
+      "bytes": 56,
+      "matches": []
+    },
+    {
+      "section": ".text.gx_audio_out_set_channel",
+      "bytes": 56,
+      "matches": [
+        {
+          "package_offset": 60036,
+          "runtime_address": 270554360,
+          "stock_sha256": "9250dd2a0f2e8b6b2a81646c2eabae31a48e653e0d22010bd5e83b5ea41ebc33",
+          "relocations": [
+            {
+              "relative_offset": 18,
+              "type": 19,
+              "upstream_target": "printf_",
+              "addend": 0
+            },
+            {
+              "relative_offset": 44,
+              "type": 1,
+              "upstream_target": ".bss",
+              "addend": 0,
+              "stock_pointer": 537031500
+            },
+            {
+              "relative_offset": 48,
+              "type": 1,
+              "upstream_target": ".rodata",
+              "addend": 301,
+              "stock_pointer": 270576480,
+              "stock_string": "gx_audio_out_set_channel"
+            },
+            {
+              "relative_offset": 52,
+              "type": 1,
+              "upstream_target": ".rodata.str1.1",
+              "addend": 0,
+              "stock_pointer": 270576634,
+              "stock_string": "[AOUT ERROR] %s %d\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": ".text.gx_audio_out_init",
+      "bytes": 68,
+      "matches": [
+        {
+          "package_offset": 60092,
+          "runtime_address": 270554416,
+          "stock_sha256": "31eb1b3d4f3024ebf65f067e043b0784e8325e68207cc94c1407ae82b2a72c1b",
+          "relocations": [
+            {
+              "relative_offset": 28,
+              "type": 19,
+              "upstream_target": "printf_",
+              "addend": 0
+            },
+            {
+              "relative_offset": 52,
+              "type": 1,
+              "upstream_target": ".bss",
+              "addend": 0,
+              "stock_pointer": 537031500
+            },
+            {
+              "relative_offset": 56,
+              "type": 1,
+              "upstream_target": "g_aout_v2",
+              "addend": 0,
+              "stock_pointer": 537029576
+            },
+            {
+              "relative_offset": 60,
+              "type": 1,
+              "upstream_target": ".rodata",
+              "addend": 326,
+              "stock_pointer": 270576505,
+              "stock_string": "gx_audio_out_init"
+            },
+            {
+              "relative_offset": 64,
+              "type": 1,
+              "upstream_target": ".rodata.str1.1",
+              "addend": 0,
+              "stock_pointer": 270576634,
+              "stock_string": "[AOUT ERROR] %s %d\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": ".text.gx_audio_out_exit",
+      "bytes": 52,
+      "matches": [
+        {
+          "package_offset": 60160,
+          "runtime_address": 270554484,
+          "stock_sha256": "259bfe4381446f3df46d31b8c84f8bb9cfd8d091c185bdc5732f3bdb32d5aa41",
+          "relocations": [
+            {
+              "relative_offset": 18,
+              "type": 19,
+              "upstream_target": "printf_",
+              "addend": 0
+            },
+            {
+              "relative_offset": 40,
+              "type": 1,
+              "upstream_target": ".bss",
+              "addend": 0,
+              "stock_pointer": 537031500
+            },
+            {
+              "relative_offset": 44,
+              "type": 1,
+              "upstream_target": ".rodata",
+              "addend": 344,
+              "stock_pointer": 270576523,
+              "stock_string": "gx_audio_out_exit"
+            },
+            {
+              "relative_offset": 48,
+              "type": 1,
+              "upstream_target": ".rodata.str1.1",
+              "addend": 0,
+              "stock_pointer": 270576634,
+              "stock_string": "[AOUT ERROR] %s %d\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": ".text.gx_audio_out_suspend",
+      "bytes": 56,
+      "matches": []
+    },
+    {
+      "section": ".text.gx_audio_out_resume",
+      "bytes": 56,
+      "matches": []
+    },
+    {
+      "section": ".text.gx_audio_out_set_fixed_src",
+      "bytes": 56,
+      "matches": []
+    },
+    {
+      "section": ".text.gx_audio_out_get_sdc_src",
+      "bytes": 56,
+      "matches": []
+    }
+  ],
+  "limits": [
+    "Matches exclude relocation bytes; literal targets reported separately. This is location/provenance evidence, not source admission or behavior qualification."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "repository": "https://github.com/T-head-Semi/qemu",
+  "commit": "3287d345c7f5d60d5c8774d90752f5f710744f85",
+  "path": "target/csky/translate_v2.c",
+  "sha256": "d56e8f41f25c225e3a6d7446a26062cacee2a4f9fe6a2df8661cf066c9e373a5",
+  "lsl_lines": [
+    530,
+    544
+  ],
+  "rotl_lines": [
+    575,
+    589
+  ],
+  "semantics": "LSL and ROTL mask count to six bits and return zero for masked counts greater than31. ROTL otherwise rotates32 bits.",
+  "qualification": "Vendor emulator source evidence; not a physical-device boundary test."
+}

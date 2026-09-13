@@ -1,0 +1,23 @@
+{
+  "candidate": {
+    "source_sha256": "3909afe9fcc8d113f61e7e5007497e5b07a2cf11ce1bcdca9ffa6b6582fa1bfe",
+    "compiled_bytes": 52,
+    "compiled_sha256": "0262ac8aba5bcdb979dadd9152fee6c93847b23092c5fe40659c8ebda9e35ffb",
+    "envelope_bytes": 52,
+    "fits": true,
+    "bindings": {
+      "open_cfw_gx8002_dma_state": 537056232,
+      "open_cfw_gx8002_dma_deallocate": 268454848
+    },
+    "source_admitted": false,
+    "limits": [
+      "Candidate only; decoded equivalence and placement pending."
+    ]
+  },
+  "decoded_cases": 288,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Defined shifts 0..31 checked; initialized hardware channels are 0/1. Helper effects modeled with caller-register clobbers; physical DMA cessation and concurrency unqualified."
+  ]
+}

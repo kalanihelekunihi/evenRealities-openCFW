@@ -1,0 +1,100 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "placed_elf_sha256": "a564c0c9d4f15e534b16062ded911d67b0fcc94429c8488d0060fb6b1fbe7144",
+  "observed_callers": [
+    {
+      "call": 285980,
+      "descriptor": 536965152,
+      "instructions": [
+        {
+          "pc": 285888,
+          "operation": "lrw",
+          "arguments": "r3, 0x20017020"
+        },
+        {
+          "pc": 285898,
+          "operation": "st.w",
+          "arguments": "r3, (r14, 0x8)"
+        },
+        {
+          "pc": 285978,
+          "operation": "ld.w",
+          "arguments": "r0, (r14, 0x8)"
+        },
+        {
+          "pc": 285980,
+          "operation": "bsr",
+          "arguments": "0x478a4"
+        }
+      ],
+      "scope": "Straight-line/local stack slice; intervening callees and unusual control-flow entry are not modeled."
+    },
+    {
+      "call": 288178,
+      "descriptor": 536965132,
+      "instructions": [
+        {
+          "pc": 287988,
+          "operation": "lrw",
+          "arguments": "r3, 0x2001700c"
+        },
+        {
+          "pc": 288000,
+          "operation": "st.w",
+          "arguments": "r3, (r14, 0x10)"
+        },
+        {
+          "pc": 288176,
+          "operation": "ld.w",
+          "arguments": "r0, (r14, 0x10)"
+        },
+        {
+          "pc": 288178,
+          "operation": "bsr",
+          "arguments": "0x478a4"
+        }
+      ],
+      "scope": "Straight-line/local stack slice; intervening callees and unusual control-flow entry are not modeled."
+    },
+    {
+      "call": 321302,
+      "descriptor": 536965152,
+      "instructions": [
+        {
+          "pc": 321300,
+          "operation": "lrw",
+          "arguments": "r0, 0x20017020"
+        },
+        {
+          "pc": 321302,
+          "operation": "bsr",
+          "arguments": "0x478a4"
+        }
+      ],
+      "scope": "Descriptor literal immediately precedes call."
+    },
+    {
+      "call": 323006,
+      "descriptor": 536965132,
+      "instructions": [
+        {
+          "pc": 323004,
+          "operation": "lrw",
+          "arguments": "r0, 0x2001700c"
+        },
+        {
+          "pc": 323006,
+          "operation": "bsr",
+          "arguments": "0x478a4"
+        }
+      ],
+      "scope": "Descriptor literal immediately precedes call."
+    }
+  ],
+  "fixed_descriptors_checked": 3,
+  "source_admitted": false,
+  "limits": [
+    "Observed direct calls and typed linked descriptors support the CFFT256 specialization.",
+    "Does not prove absence of computed callers, descriptor mutation through aliases, or callee writes to saved caller stack slots. Execution permission and full firmware composition remain separate."
+  ]
+}

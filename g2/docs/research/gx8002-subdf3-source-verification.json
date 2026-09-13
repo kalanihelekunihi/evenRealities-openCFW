@@ -1,0 +1,56 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_subdf3",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 54,
+      "compiled_sha256": "a4b96ee3efba31ec1103417832474a9df3fbeabb9d50fa83e48e07830ba998ae",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_subdf3",
+          "package_offset": 79448,
+          "bytes": 56,
+          "sha256": "6d209f0471142e3177e9555d073c89de0d3cccf770357d40332390c86729abc8",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "upstream_commit": "1e9b70447a8417f5c692370de4533e43d754e8fa",
+      "upstream_sha256": "f635ba0d69f88c0090b5997c2087c36780939caf1477aece8f2fc3d3c684817f",
+      "source_sha256": "70bfd58b290cc1781bccb0bca3f80319a8de23fb088d49a3fea709040835ebc0",
+      "runtime_license_sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74",
+      "compiled_bytes": 54,
+      "envelope_bytes": 56,
+      "fits": true,
+      "byte_exact": false,
+      "compiled_sha256": "a4b96ee3efba31ec1103417832474a9df3fbeabb9d50fa83e48e07830ba998ae",
+      "source_admitted": false,
+      "limits": [
+        "Upstream candidate; behavioral and ownership checks outstanding."
+      ]
+    },
+    "cases": 36,
+    "source_admitted": false,
+    "limits": [
+      "Unpack order, second sign toggle, arithmetic result pointer and double return ABI checked; addition core arithmetic remains separate."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_subdf3_source.py": "12fa256cfbb1ecf082e2aa71801a977bb1f9044a1266fe432c527868b56cdd7e",
+    "verify_gx8002_subdf3.py": "5058cbd2f245d30a4e075c904730e5eb8d5a5e48b162a07a77d77fd4f8c32bd1",
+    "execute_gx8002_subdf3.py": "7b57481b0533a525b96555ea4c92c8614767ec9f9daea075daba308d84866449",
+    "build_gx8002_subdf3.py": "0fb00a55e7724d3930ec7139e46485570ce4ae42a3da14738ccfa91ea1d43bd5",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Unpack order, second sign toggle, arithmetic result pointer and double return ABI checked; addition core arithmetic remains separate.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

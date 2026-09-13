@@ -1,0 +1,81 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "dependencies": [
+    {
+      "path": "include/lvp_context.h",
+      "blob": "37483158aa8c433d614dea65dff87232b6ba0f69",
+      "sha256": "75902c925c65492f776fe1c932f0b85d0298f0b7e8377def087a4fb5949170be"
+    },
+    {
+      "path": "include/lvp_attr.h",
+      "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+      "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+    },
+    {
+      "path": "lvp/common/lvp_audio_in.c",
+      "blob": "43963b1adaad4f7040206c06769ee8a69656848f",
+      "sha256": "cd52150f9f3e45061b358ad2d6401932a37a60857b2432b8a92a45a36624b64f"
+    },
+    {
+      "path": "lvp/common/lvp_audio_in.h",
+      "blob": "c5f42384d65dfefc510c288ad29df217f1583239",
+      "sha256": "2829063b0f71ead93e50d1fba8e07db2705058314ec38a151b80f1040e0ba318"
+    },
+    {
+      "path": "LICENSE",
+      "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+      "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+    }
+  ],
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-shrink-wrap",
+    "-fira-algorithm=priority"
+  ],
+  "bindings": {
+    "LvpAudioInQueryFFTVad": 270562308,
+    "LvpGetContextHeader": 270560924,
+    "LvpGetLogfbankFrameNumPerChannel": 270561140,
+    "LvpGetPcmFrameNumPerContext": 270561104,
+    "LvpGetContextNum": 270561156,
+    "LvpGetContextGap": 270561152
+  },
+  "source_sha256": "ebbaa711e928819780fd1b1b5afd90e63bd792bab098d1ac22e3f17ecf658937",
+  "elf_sha256": "42d103bb299f73010e346274818cf1701cf89e0e031afff5a93986c8f074f3d7",
+  "compiled_bytes": 240,
+  "compiled_sha256": "13c39deb9f021b346ec4882137e4fa480712e54eb88540407cad938900973b72",
+  "stock_offset": 98856,
+  "stock_bytes": 256,
+  "stock_sha256": "2414ecbbcd71e88bf500b63c0e70bca1d30f4150a5247bdedbecf4e718c82130",
+  "fits": true,
+  "runtime_state": {
+    "control": {
+      "address": 537062576,
+      "bytes": 20,
+      "type": "NOBITS"
+    },
+    "handler": {
+      "address": 537059232,
+      "bytes": 4,
+      "type": "NOBITS"
+    },
+    "invalid_vad": {
+      "address": 537059240,
+      "bytes": 4,
+      "type": "NOBITS"
+    }
+  },
+  "source_admitted": false,
+  "limits": [
+    "Compiled and linked only; decoded behavior, callback/control storage ownership and physical execution pending."
+  ]
+}

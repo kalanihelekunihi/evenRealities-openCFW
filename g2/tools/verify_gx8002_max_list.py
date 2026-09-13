@@ -107,6 +107,12 @@ def verify(prefix=None,sdk=None,output=None):
         if not region['fits'] or (is_data and not region['exact_stock_payload']):raise ValueError('list region validation')
         symbol='open_cfw_gx8002_max_list_'+region['section_name'].split('.')[-1] if is_data else 'LvpPrintMaxKwsList'
         rows.append({'symbol':symbol,'section_name':region['section_name'],'ownership_kind':'generated_source_data' if is_data else 'compiled_c','compiled_bytes':region['compiled_bytes'],'compiled_sha256':region['compiled_sha256'],'stock_occurrences':[{'symbol':symbol,'package_offset':region['package_offset'],'bytes':region['stock_envelope_bytes'],'sha256':region['stock_sha256'],'region':'image_a_xip_text'}]})
+    # The callback owns the complete '0x%x \n' string at this address;
+    # retain newline code/data validation, but do not emit an overlapping patch.
+    for row in rows:
+        if row['symbol']=='open_cfw_gx8002_max_list_newline':
+            row['shared_source_owner']='app-command-callback-persistent .rodata.byte suffix +5'
+            row['stock_occurrences']=[]
     notice=ROOT/'components/shared/gx8002/NATIONALCHIP-MAX-NOTICE.txt'
     if output:
         output.mkdir(parents=True,exist_ok=True);shutil.copyfile(out/'max-list-candidate.elf',output/'max-list.elf');shutil.copyfile(notice,output/notice.name)

@@ -1,0 +1,501 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_app_core_ops",
+      "section_name": ".app_core_ops",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 4,
+      "compiled_sha256": "1a89d3442e8ba8370ef2e35e69c411b29eb520752cd2ffabd2bf4c96f437664d",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_app_core_ops",
+          "package_offset": 101708,
+          "bytes": 4,
+          "sha256": "1a89d3442e8ba8370ef2e35e69c411b29eb520752cd2ffabd2bf4c96f437664d",
+          "region": "image_a_sram_data"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_sample_application",
+      "section_name": ".sample_application",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 32,
+      "compiled_sha256": "5bed8d93dbcf1dae2040467eac63f4be8c3407d6d95f87a21ea54c315d3bbb5f",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_sample_application",
+          "package_offset": 101712,
+          "bytes": 32,
+          "sha256": "5bed8d93dbcf1dae2040467eac63f4be8c3407d6d95f87a21ea54c315d3bbb5f",
+          "region": "image_a_sram_data"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "startup": {
+      "candidate": {
+        "analysis": {
+          "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+          "headers": {
+            "lvp/app_core/lvp_app.h": {
+              "blob": "4b7e105ff09df684966817f1045f28dd030b5f2d",
+              "sha256": "5f3302a3482d2539d515d068e1c1364508f7eca6711d23ab063c27dc18556450"
+            },
+            "lvp/app_core/lvp_app_core.h": {
+              "blob": "e7521399bfa5d16c4ebacba2699e2f0286fc09cd",
+              "sha256": "7267c8f17cf22c3fe8904ac6babf611c3f1ea750c254a782c982b4e9fbb03c25"
+            }
+          },
+          "package_offset": 101708,
+          "bytes": 36,
+          "runtime_address": 537029944,
+          "app_core_ops_target": 537029948,
+          "descriptor_fields": {
+            "app_name": 270579273,
+            "AppInit": 270569036,
+            "AppEventResponse": 270569220,
+            "AppTaskLoop": 270569916,
+            "AppSuspend": 270568940,
+            "suspend_priv": 270579284,
+            "AppResume": 270568908,
+            "resume_priv": 270579301
+          },
+          "owners": {
+            "app_name": [
+              {
+                "kind": "application-labels",
+                "section": ".sample_labels",
+                "offset_in_section": 0,
+                "section_sha256": "5bacd8db5ac0caff0fcdfec800459e639412371af6cab23f6cef434f13ad0cbc",
+                "text": "sample app"
+              }
+            ],
+            "AppInit": [
+              {
+                "kind": "sample-app-init",
+                "section": ".text",
+                "offset_in_section": 0,
+                "section_sha256": "3630c1ae7a1b4aeee2402742eb3f7437eaaed859057d79758fda02f689ac8595",
+                "symbols": [
+                  "",
+                  "$d",
+                  "$t",
+                  "open_cfw_gx8002_sample_app_init"
+                ]
+              }
+            ],
+            "AppEventResponse": [
+              {
+                "kind": "sample-event",
+                "section": ".text",
+                "offset_in_section": 0,
+                "section_sha256": "eeeeff063bf607984a1f1944f2b3544ac7866932eace59e65ae9ac1be15e1c70",
+                "symbols": [
+                  "",
+                  "$d",
+                  "$t",
+                  "open_cfw_gx8002_sample_event"
+                ]
+              }
+            ],
+            "AppTaskLoop": [
+              {
+                "kind": "i2s-request-tick",
+                "section": ".text",
+                "offset_in_section": 0,
+                "section_sha256": "62a221fe6d8dcc9144190fd9ae4afaadf063192646ea5402d3f58af4c1e546c7",
+                "symbols": [
+                  "",
+                  "$d",
+                  "$t",
+                  "open_cfw_gx8002_i2s_request_tick"
+                ]
+              }
+            ],
+            "AppSuspend": [
+              {
+                "kind": "app-gpio-power",
+                "section": ".text.open_cfw_gx8002_app_gpio_resume",
+                "offset_in_section": 0,
+                "section_sha256": "19dd9d8a49859aa13bc634c6f5bea6e7590b66112000a7fd4172f57f092b6d7d",
+                "symbols": [
+                  "",
+                  "$d",
+                  "$t",
+                  "open_cfw_gx8002_app_gpio_resume"
+                ]
+              }
+            ],
+            "suspend_priv": [
+              {
+                "kind": "application-labels",
+                "section": ".sample_labels",
+                "offset_in_section": 11,
+                "section_sha256": "5bacd8db5ac0caff0fcdfec800459e639412371af6cab23f6cef434f13ad0cbc",
+                "text": "SampleAppSuspend"
+              }
+            ],
+            "AppResume": [
+              {
+                "kind": "app-gpio-power",
+                "section": ".text.open_cfw_gx8002_app_gpio_suspend",
+                "offset_in_section": 0,
+                "section_sha256": "9836d8a2d40762767ab9cd88f3e5cea736bc5a5dbf156df18ee6edb16c270710",
+                "symbols": [
+                  "",
+                  "$d",
+                  "$t",
+                  "open_cfw_gx8002_app_gpio_suspend"
+                ]
+              }
+            ],
+            "resume_priv": [
+              {
+                "kind": "application-labels",
+                "section": ".sample_labels",
+                "offset_in_section": 28,
+                "section_sha256": "5bacd8db5ac0caff0fcdfec800459e639412371af6cab23f6cef434f13ad0cbc",
+                "text": "SampleAppResume"
+              }
+            ]
+          },
+          "source_admitted": false,
+          "limits": [
+            "All eight descriptor fields resolve to reviewed source sections. Layout agrees with upstream LVP_APP; startup and typed compiled descriptor still pending.",
+            "Callback type compatibility is separately verified by compiling actual definitions with the descriptor in one translation unit. This address analysis alone does not prove C type compatibility."
+          ]
+        },
+        "source_sha256": "2aacf77d7b91c22d2e2f0d01d938e9d4145a2f2fd73ee513273273efedf6befb",
+        "elf_sha256": "903525607c5a7b163ad3222ee13c24f2e95466560f6c189f633743c81bf6b6f9",
+        "rows": [
+          {
+            "section": ".app_core_ops",
+            "package_offset": 101708,
+            "bytes": 4,
+            "sha256": "1a89d3442e8ba8370ef2e35e69c411b29eb520752cd2ffabd2bf4c96f437664d"
+          },
+          {
+            "section": ".sample_application",
+            "package_offset": 101712,
+            "bytes": 32,
+            "sha256": "5bed8d93dbcf1dae2040467eac63f4be8c3407d6d95f87a21ea54c315d3bbb5f"
+          }
+        ],
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Typed descriptor compiles byte-exact on macOS. This object alone does not prove cross-translation-unit type compatibility.",
+          "SDK callback declaration reconciliation, startup mapping, dispatch composition and ownership admission remain pending."
+        ]
+      },
+      "checked_artifacts": 410,
+      "references": [
+        {
+          "kind": "app_tick",
+          "elf_sha256": "19e8569509bd789e2b42b09d267176124f360dffb16cb5549499ec8ccef467f4"
+        },
+        {
+          "kind": "startup",
+          "elf_sha256": "4c8ac47ba58672312c466812ea3dbaa00eb4694c092c5d2a94b3cefca6d982c9"
+        },
+        {
+          "kind": "suspend",
+          "elf_sha256": "a90ac4035515dd9d4ad8ebee072ab20d84e58ccbec1a5d10405eea1f5aaf93cf"
+        },
+        {
+          "kind": "resume",
+          "elf_sha256": "1c5db13457a215602450a2708112c6b3239e9b3c02df103e19637b2bb88c8e16"
+        }
+      ],
+      "sdk_mapping_sha256": {
+        "arch/soc/grus/include/soc_config.h": "abda275af6aee96ad676c190e2a72363a79595413336371fced4450f8df76809",
+        "arch/soc/grus/link.ld": "1dc73b74c4b5962a848693ab857e90d34115489a8a7e499897533ad786ff77be",
+        "arch/soc/grus/spl/spl.c": "f3690694fff309c0118579baedb860b1d47c6de3cfb227a977242249568bb56b"
+      },
+      "clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+      "startup_cases": 12,
+      "preserved_words": 9,
+      "clear_writes": 8155,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Decoded primary loader with modeled flash reads loads compiled descriptor bytes through SDK-authenticated IRAM/DRAM alias. Decoded BSS clear preserves all nine initialized words.",
+        "Physical memory aliasing, typed callback definition reconciliation and composed application dispatch remain unqualified."
+      ]
+    },
+    "consumer": {
+      "candidate": {
+        "analysis": {
+          "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+          "headers": {
+            "lvp/app_core/lvp_app.h": {
+              "blob": "4b7e105ff09df684966817f1045f28dd030b5f2d",
+              "sha256": "5f3302a3482d2539d515d068e1c1364508f7eca6711d23ab063c27dc18556450"
+            },
+            "lvp/app_core/lvp_app_core.h": {
+              "blob": "e7521399bfa5d16c4ebacba2699e2f0286fc09cd",
+              "sha256": "7267c8f17cf22c3fe8904ac6babf611c3f1ea750c254a782c982b4e9fbb03c25"
+            }
+          },
+          "package_offset": 101708,
+          "bytes": 36,
+          "runtime_address": 537029944,
+          "app_core_ops_target": 537029948,
+          "descriptor_fields": {
+            "app_name": 270579273,
+            "AppInit": 270569036,
+            "AppEventResponse": 270569220,
+            "AppTaskLoop": 270569916,
+            "AppSuspend": 270568940,
+            "suspend_priv": 270579284,
+            "AppResume": 270568908,
+            "resume_priv": 270579301
+          },
+          "owners": {
+            "app_name": [
+              {
+                "kind": "application-labels",
+                "section": ".sample_labels",
+                "offset_in_section": 0,
+                "section_sha256": "5bacd8db5ac0caff0fcdfec800459e639412371af6cab23f6cef434f13ad0cbc",
+                "text": "sample app"
+              }
+            ],
+            "AppInit": [
+              {
+                "kind": "sample-app-init",
+                "section": ".text",
+                "offset_in_section": 0,
+                "section_sha256": "3630c1ae7a1b4aeee2402742eb3f7437eaaed859057d79758fda02f689ac8595",
+                "symbols": [
+                  "",
+                  "$d",
+                  "$t",
+                  "open_cfw_gx8002_sample_app_init"
+                ]
+              }
+            ],
+            "AppEventResponse": [
+              {
+                "kind": "sample-event",
+                "section": ".text",
+                "offset_in_section": 0,
+                "section_sha256": "eeeeff063bf607984a1f1944f2b3544ac7866932eace59e65ae9ac1be15e1c70",
+                "symbols": [
+                  "",
+                  "$d",
+                  "$t",
+                  "open_cfw_gx8002_sample_event"
+                ]
+              }
+            ],
+            "AppTaskLoop": [
+              {
+                "kind": "i2s-request-tick",
+                "section": ".text",
+                "offset_in_section": 0,
+                "section_sha256": "62a221fe6d8dcc9144190fd9ae4afaadf063192646ea5402d3f58af4c1e546c7",
+                "symbols": [
+                  "",
+                  "$d",
+                  "$t",
+                  "open_cfw_gx8002_i2s_request_tick"
+                ]
+              }
+            ],
+            "AppSuspend": [
+              {
+                "kind": "app-gpio-power",
+                "section": ".text.open_cfw_gx8002_app_gpio_resume",
+                "offset_in_section": 0,
+                "section_sha256": "19dd9d8a49859aa13bc634c6f5bea6e7590b66112000a7fd4172f57f092b6d7d",
+                "symbols": [
+                  "",
+                  "$d",
+                  "$t",
+                  "open_cfw_gx8002_app_gpio_resume"
+                ]
+              }
+            ],
+            "suspend_priv": [
+              {
+                "kind": "application-labels",
+                "section": ".sample_labels",
+                "offset_in_section": 11,
+                "section_sha256": "5bacd8db5ac0caff0fcdfec800459e639412371af6cab23f6cef434f13ad0cbc",
+                "text": "SampleAppSuspend"
+              }
+            ],
+            "AppResume": [
+              {
+                "kind": "app-gpio-power",
+                "section": ".text.open_cfw_gx8002_app_gpio_suspend",
+                "offset_in_section": 0,
+                "section_sha256": "9836d8a2d40762767ab9cd88f3e5cea736bc5a5dbf156df18ee6edb16c270710",
+                "symbols": [
+                  "",
+                  "$d",
+                  "$t",
+                  "open_cfw_gx8002_app_gpio_suspend"
+                ]
+              }
+            ],
+            "resume_priv": [
+              {
+                "kind": "application-labels",
+                "section": ".sample_labels",
+                "offset_in_section": 28,
+                "section_sha256": "5bacd8db5ac0caff0fcdfec800459e639412371af6cab23f6cef434f13ad0cbc",
+                "text": "SampleAppResume"
+              }
+            ]
+          },
+          "source_admitted": false,
+          "limits": [
+            "All eight descriptor fields resolve to reviewed source sections. Layout agrees with upstream LVP_APP; startup and typed compiled descriptor still pending.",
+            "Callback type compatibility is separately verified by compiling actual definitions with the descriptor in one translation unit. This address analysis alone does not prove C type compatibility."
+          ]
+        },
+        "source_sha256": "2aacf77d7b91c22d2e2f0d01d938e9d4145a2f2fd73ee513273273efedf6befb",
+        "elf_sha256": "903525607c5a7b163ad3222ee13c24f2e95466560f6c189f633743c81bf6b6f9",
+        "rows": [
+          {
+            "section": ".app_core_ops",
+            "package_offset": 101708,
+            "bytes": 4,
+            "sha256": "1a89d3442e8ba8370ef2e35e69c411b29eb520752cd2ffabd2bf4c96f437664d"
+          },
+          {
+            "section": ".sample_application",
+            "package_offset": 101712,
+            "bytes": 32,
+            "sha256": "5bed8d93dbcf1dae2040467eac63f4be8c3407d6d95f87a21ea54c315d3bbb5f"
+          }
+        ],
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Typed descriptor compiles byte-exact on macOS. This object alone does not prove cross-translation-unit type compatibility.",
+          "SDK callback declaration reconciliation, startup mapping, dispatch composition and ownership admission remain pending."
+        ]
+      },
+      "dispatcher_elf_sha256": {
+        "suspend": "a90ac4035515dd9d4ad8ebee072ab20d84e58ccbec1a5d10405eea1f5aaf93cf",
+        "resume": "1c5db13457a215602450a2708112c6b3239e9b3c02df103e19637b2bb88c8e16"
+      },
+      "cases": 18,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Registered suspend/resume instructions dispatch compiled descriptor targets and matching private strings. Null object/callback branches and callee-saved registers checked.",
+        "Watchdog and callback bodies are returning models with caller-register clobbers. Callback definitions still require SDK type reconciliation; no physical power-transition qualification."
+      ]
+    },
+    "types": {
+      "sdk_headers": {
+        "lvp/app_core/lvp_app.h": {
+          "blob": "4b7e105ff09df684966817f1045f28dd030b5f2d",
+          "sha256": "5f3302a3482d2539d515d068e1c1364508f7eca6711d23ab063c27dc18556450"
+        },
+        "lvp/app_core/lvp_app_core.h": {
+          "blob": "e7521399bfa5d16c4ebacba2699e2f0286fc09cd",
+          "sha256": "7267c8f17cf22c3fe8904ac6babf611c3f1ea750c254a782c982b4e9fbb03c25"
+        }
+      },
+      "staged": [
+        {
+          "name": "sample_event",
+          "staged_source_sha256": "20451e014dd36bc79c0224e3fc004250c37dd624e07ba9e9a3619873a633d6f2",
+          "linker_sha256": "c9f3405037b915e06ced70b44250a3b18bed71841cfe9d30503f7ef481859f1e",
+          "sections": [
+            {
+              "section": ".text",
+              "address": 270569220,
+              "bytes": 236,
+              "sha256": "eeeeff063bf607984a1f1944f2b3544ac7866932eace59e65ae9ac1be15e1c70"
+            },
+            {
+              "section": ".rodata.hey",
+              "address": 270578887,
+              "bytes": 18,
+              "sha256": "aed8bc22590c63dd0fb71b3b9d7fd3746f8e3fa428eb12eff049cec24d6c6912"
+            },
+            {
+              "section": ".rodata.hi",
+              "address": 270578905,
+              "bytes": 17,
+              "sha256": "375147efb410379866876f9e29a02c3d2f8d6005a903302a301e4cb4cfdf375b"
+            },
+            {
+              "section": ".rodata.start",
+              "address": 270578922,
+              "bytes": 32,
+              "sha256": "c66da07ebe8a3a8dc128fdc095810e241f9d3b2167d79f717d22d423959c1032"
+            },
+            {
+              "section": ".rodata.range",
+              "address": 270578954,
+              "bytes": 44,
+              "sha256": "a8d1c3d7babe482ecae767138a263807f4742b0a8b24c102a77d02065dd209ca"
+            }
+          ]
+        },
+        {
+          "name": "gpio_power",
+          "staged_source_sha256": "8675b3dc7f42c98b31be3faf327790340115e71f0e6791aedbab45aaaf1ec500",
+          "linker_sha256": "ced6bddc7c580127b98b3c961811f78fd0a7e7f5f92ef4ae685488ec7f8b5ceb",
+          "sections": [
+            {
+              "section": ".text.open_cfw_gx8002_app_gpio_suspend",
+              "address": 270568908,
+              "bytes": 32,
+              "sha256": "9836d8a2d40762767ab9cd88f3e5cea736bc5a5dbf156df18ee6edb16c270710"
+            },
+            {
+              "section": ".text.open_cfw_gx8002_app_gpio_resume",
+              "address": 270568940,
+              "bytes": 52,
+              "sha256": "19dd9d8a49859aa13bc634c6f5bea6e7590b66112000a7fd4172f57f092b6d7d"
+            },
+            {
+              "section": ".rodata",
+              "address": 270578747,
+              "bytes": 12,
+              "sha256": "f9ce6ee6131fe1c6a31427cfc26659ea0d89e808a0ee1f084f7256a8a12635a7"
+            }
+          ]
+        }
+      ],
+      "descriptor_contract_sha256": "e5eafa70a7e87ff75d1e9cdc98eb188939223b60923024f64b204bd424c7e902",
+      "source_admitted": false,
+      "limits": [
+        "Staged SDK APP_EVENT and void-pointer callbacks compile in the same translation unit as the typed descriptor under -Werror. All resulting allocated sections match reviewed original placement and hashes.",
+        "Registered definitions are compiled together with descriptor declarations; linked allocated sections preserve reviewed bytes and addresses."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "build_gx8002_application_descriptor.py": "33f94a57dcd30210cf8a1683341744ecf525d6678f9e61295abd07a3ecf3e219",
+    "analyze_gx8002_application_descriptor.py": "f78d02e33e96252b1a523ffea158efd3abd451f6bda70bfd5ba87d4c449dd1a4",
+    "verify_gx8002_application_descriptor_startup.py": "13014c29ef2d064268800a09477d7bfbc210846bcf70e7f0821e07a856f14ebb",
+    "verify_gx8002_application_descriptor_power_dispatch.py": "255ef8dc8a98e00dd006e5e6107227a5d72fd6021c9f1683e03aaf3d0e9af2b9",
+    "verify_gx8002_application_callback_types.py": "fad9494c38f526b0e8a9956c4d2ed526251bbd5ce6ebd28ef9208f66738f2942",
+    "verify_gx8002_application_descriptor_source.py": "8509c0a41aaea1a91adf74449fb634d6768ca6e3ed75b10414b02fcacf5d74fd",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_uart_loader_setup.py": "bda5e90ecbaea1f0ec28238cb1eca686176bf2a6108477ccd99aebb44e795bb2",
+    "compare_gx8002_clear_bss.py": "47f23b157c02145323f28ac1633704a3277130d458cf6b1303bf4fbafdcfad13",
+    "analyze_gx8002_gsensor_state_references.py": "c962d532675f4dc405e6466e7364083454168e89227a21d6fb4c839a70da666c",
+    "analyze_gx8002_upstream_objects.py": "0a94d2b7bbb6588297bf4bac25254103d1998a8794d6d0973fe91e2d77023044",
+    "build_transparent_image.py": "dfb2d65e43e9e3098412d899fdccebf3bf14d0e1bcdc2d96f5ae4e31c09ac77d"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "SDK application descriptor uses named source-owned callbacks and strings at original addresses. Type compatibility, startup, power dispatch and nonoverlap checked. Callback bodies and other application paths retain separate qualifications; no whole-program composition claim.",
+    "Experimental hybrid replacement; complete firmware and physical hardware execution remain unqualified."
+  ]
+}

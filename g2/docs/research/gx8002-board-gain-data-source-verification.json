@@ -1,0 +1,55 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_messages_dmic",
+      "section_name": ".rodata.dmic",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 59,
+      "compiled_sha256": "334d31e7c35e724e86a8d8f9cc4278e5c443a6672f899d60cdac63ab095bb39e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_messages_dmic",
+          "package_offset": 81471,
+          "bytes": 59,
+          "sha256": "334d31e7c35e724e86a8d8f9cc4278e5c443a6672f899d60cdac63ab095bb39e",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_messages_gain",
+      "section_name": ".rodata.gain",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 9,
+      "compiled_sha256": "d3ef5dd9b6c901f24d5d92d763a285be5f39c36c7a852ace80fd1800f138e076",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_messages_gain",
+          "package_offset": 81462,
+          "bytes": 9,
+          "sha256": "d3ef5dd9b6c901f24d5d92d763a285be5f39c36c7a852ace80fd1800f138e076",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "dependencies": {
+    "boards/nationalchip/grus_gx8002_slight_1v/audio_board.c": {
+      "git_blob": "8562f0a61a46aef4f5ed70b5c8633c70f5f5f8af",
+      "sha256": "f088b240982504df186da3a21f4e0d730a0e1f114eb392b8f8d4d63117eb60f9"
+    }
+  },
+  "source_sha256": "ca5a3d0c1748a49c8e15580731397d018684dce9d6efb4d1c76cc5fbf3a73846",
+  "license_sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3",
+  "source_admitted": true,
+  "limits": [
+    "Gain mapping and DMIC diagnostics only; caller behavior remains separately qualified.",
+    "Experimental hybrid only; complete source-only firmware unfinished."
+  ],
+  "hardware_qualified": false,
+  "evidence_sha256": {
+    "verify_gx8002_board_gain_data.py": "01db1bf163b4fb220857ba7c4495a03cf84f0ac098a12b5f40e1d3d6ce480c72",
+    "verify_gx8002_board_gain_data_source.py": "3e00e3fbbbefe240baa6558d90d98bf9068a7493fc09eed03cc36c056b5aaa60"
+  }
+}

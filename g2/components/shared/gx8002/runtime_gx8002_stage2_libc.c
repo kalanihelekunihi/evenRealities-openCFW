@@ -19,7 +19,8 @@ int open_cfw_gx8002_stage2_strcmp(const char *a, const char *b)
         ca = (unsigned char)*a++;
         cb = (unsigned char)*b++;
     } while (ca != 0 && ca == cb);
-    return (int)ca - (int)cb;
+    int difference = (int)ca - (int)cb;
+    return (difference >> 31) | (difference != 0);
 }
 
 char *open_cfw_gx8002_stage2_strchr(const char *s, int c)

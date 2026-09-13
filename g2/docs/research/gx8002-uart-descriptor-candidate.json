@@ -1,0 +1,41 @@
+{
+  "headers": [
+    {
+      "path": "arch/soc/grus/include/base_addr.h",
+      "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+      "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+    },
+    {
+      "path": "arch/soc/grus/include/soc.h",
+      "blob": "c344194159d639f898acda1d92669da6992b3e64",
+      "sha256": "a890f25053e32c4a13a07e75c2fa1bf4ac6b931175c31f73a4aa8de8ac4da1b1"
+    }
+  ],
+  "provenance": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "object_blob": "7c6912cbe9b2d341dbdecd543fc0ad524cbc6252",
+    "object_sha256": "eb2422a0de081f7f6ab5a6850d442bb11d394db16dcadd5e76571be2b619a98b",
+    "symbol": {
+      "name": "uart_config",
+      "value": 0,
+      "size": 256,
+      "type": 1,
+      "section": 2
+    },
+    "package_offset": 101032,
+    "runtime_address": 537029268,
+    "bytes": 256,
+    "sha256": "63c9aeaf67fd2385d2b68b3c18ae2e871d7d94392b1f347ef23a49a2fc81fde2",
+    "source_admitted": false,
+    "limits": [
+      "Exact authenticated UART configuration data match. Two128byte descriptors, UART bases, baud115200,unnamed defaults8/1 andIRQ6/7 agree with recovered consumers. Full typed source layout and ownership qualification pending; object bytes must not enter source build."
+    ]
+  },
+  "source_sha256": "5355cee0e9cceb1de7e4c12030fa327f90a8811bf4db24a3e0246d846b00b69e",
+  "elf_sha256": "b410111db4e29cae260375e183a32786987ff9157fd3ad9ec4a9c94dde5bf5ca",
+  "compiled_bytes": 256,
+  "source_admitted": false,
+  "limits": [
+    "Existing source initializer compiled at original location; complete byte match. Fields7/8 default8/1 but semantic names unresolved; do not call them data/stop bits without evidence. SDK headers authenticated. Consumer/startup ownership qualification pending."
+  ]
+}

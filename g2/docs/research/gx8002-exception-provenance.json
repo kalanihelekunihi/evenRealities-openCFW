@@ -1,0 +1,34 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "sources": {
+    "arch/soc/grus/trap_c.c": {
+      "blob": "55f2f25ded0f874a7cd855779e95a488a8664552",
+      "sha256": "22d42224aa6b64b9750fc182fe51c706c2143804e670e992bd1d66b43fc675f9"
+    },
+    "arch/soc/grus/vectors.S": {
+      "blob": "8b5e7da6b0182860a56a1218873e2a1e4dcd789d",
+      "sha256": "cdb14306b9e192dae8b3d422bafe85ba6144757ebfcd9b87e7e6dc131fd47d28"
+    }
+  },
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "package_offset": 87556,
+  "bytes": 92,
+  "region_sha256": "f290fa01bd4992ef9d64bf5aee74a0794c6875473df3c1748a8016a810589d2a",
+  "frame_bytes": 72,
+  "saved_registers": [
+    "r0-r12",
+    "r13",
+    "r14",
+    "r15",
+    "epsr",
+    "epc"
+  ],
+  "stock_stack_top_and_sp_slot": 537031440,
+  "upstream_reserved_stack_bytes": 768,
+  "candidate_stack_start": 537030672,
+  "source_admitted": false,
+  "limits": [
+    "Source lineage and selected decoded frame/loop anchors, not complete compiled or symbolic equivalence. Stack interval inferred from SDK allocation and deployed top literal; ownership/startup must be verified.",
+    "Stock C handler is already an infinite loop after reading exception vector; retaining that behavior is not a substitute for reconstructing other functionality."
+  ]
+}

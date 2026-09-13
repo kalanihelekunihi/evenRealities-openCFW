@@ -7,8 +7,8 @@ from analyze_gx8002_upstream_objects import IMAGE_SHA,sha
 from build_transparent_image import Elf32
 
 
-def execute(code,entry,destination,source,length,channel,config,status,changed_base,cache_hook=None,configure_hook=None,descriptor_address=0x20050000):
-    state=0x2002e93c;base=0xa1000000;stack=0x2002f000
+def execute(code,entry,destination,source,length,channel,config,status,changed_base,cache_hook=None,configure_hook=None,descriptor_address=0x20050000,state_address=0x2002e93c,helper_addresses=None):
+    state=state_address;base=0xa1000000;stack=0x2002f000
     memory={state:base,state+872+channel*4:descriptor_address,base+0x310:0,base+0x3a0:0,changed_base+0x3a0:0,stack:config,stack-20:0}
     r={f'r{i}':0x98760000+i for i in range(32)};r.update(r0=destination,r1=source,r2=length,r3=channel,r14=stack)
     initial=r.copy();trace=[];pc=entry;saved=None;regs=['r4','r5','r6','r15'];condition=False
@@ -45,6 +45,9 @@ def execute(code,entry,destination,source,length,channel,config,status,changed_b
         elif op=='bsr':
             target=int(args,0)
             target=(target+0x101f6a74)&0xffffffff if entry==0xd104 else target
+            if helper_addresses is not None:
+                if target not in helper_addresses:raise ValueError('Relocated transfer helper')
+                target=helper_addresses[target]
             if target==0x102038f4:
                 trace.append(('configure',r['r0'],r['r1'],r['r2'],r['r3'],memory[r['r14']]))
                 result=status
@@ -80,7 +83,7 @@ def verify():
         wanted=[] if status==0xffffffff else [('write',0xa1000310,257<<channel),('write',base+0x3a0,257<<channel)]
         if writes!=wanted:raise ValueError('Transfer MMIO oracle')
         cases+=1
-    return {'candidate':candidate,'decoded_cases':cases,'source_admitted':False,'hardware_qualified':False,'limits':['Initialized channel domain 0/1; configuration and cache modeled. Tests include device-base change across cache boundary. Candidate still exceeds stock envelope.']}
+    return {'candidate':candidate,'decoded_cases':cases,'source_admitted':False,'hardware_qualified':False,'limits':['Initialized channel domain 0/1; configuration and cache modeled. Tests include device-base change across cache boundary. Candidate size is checked by the admission wrapper.']}
 
 if __name__=='__main__':
     result=verify();(ROOT/'docs/research/gx8002-dma-transfer-verification.json').write_text(json.dumps(result,indent=2)+'\n');print('Transfer cases:',result['decoded_cases'])

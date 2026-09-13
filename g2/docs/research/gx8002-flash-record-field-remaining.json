@@ -1,0 +1,100 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "paths": [
+    {
+      "object": "drivers_lib/mtd/spinor/generic_spi_nor.o",
+      "object_sha256": "fecb15d607e4893d613e17af749e47f5290c0b4898b962edc5bf21d69b5d460e",
+      "blob": "13e30cab17a7f168f289447c99603f5d5ba2b8bb",
+      "symbol": "gx_generic_spi_norflash_readdata",
+      "section_sha256": "53abd1982d54972e710a46cbd50745e4ba0eef051cfc59674492387c44e69150",
+      "verified_steps": [
+        [
+          12,
+          "lrw",
+          "r11, 0x0"
+        ],
+        [
+          52,
+          "ld.w",
+          "r3, (r11, 0xc)"
+        ],
+        [
+          56,
+          "cmphs",
+          "r3, r7"
+        ]
+      ],
+      "classification": "generic driver local g_flash_info+12 bounds value; not spinor_list record"
+    },
+    {
+      "object": "drivers_lib/mtd/spinor/generic_spi_nor.o",
+      "object_sha256": "fecb15d607e4893d613e17af749e47f5290c0b4898b962edc5bf21d69b5d460e",
+      "blob": "13e30cab17a7f168f289447c99603f5d5ba2b8bb",
+      "symbol": "gx_generic_spi_norflash_erasedata",
+      "section_sha256": "7b3d40a9ee1476af26eabe489854f18c430c38a304211b27e1457c04df29daec",
+      "verified_steps": [
+        [
+          2,
+          "lrw",
+          "r2, 0x0"
+        ],
+        [
+          4,
+          "ld.w",
+          "r3, (r2, 0xc)"
+        ],
+        [
+          6,
+          "cmphs",
+          "r0, r3"
+        ]
+      ],
+      "classification": "generic driver local g_flash_info+12 bounds value; not spinor_list record"
+    },
+    {
+      "object": "drivers_lib/mtd/spinor/generic_spi_nor.o",
+      "object_sha256": "fecb15d607e4893d613e17af749e47f5290c0b4898b962edc5bf21d69b5d460e",
+      "blob": "13e30cab17a7f168f289447c99603f5d5ba2b8bb",
+      "symbol": "gx_gereric_spi_norflash_pageprogram",
+      "section_sha256": "9230621edbb579fc3e289c8974e9d1d4871e38e0eb9d93563c6a32e12e369e93",
+      "verified_steps": [
+        [
+          18,
+          "lrw",
+          "r2, 0x0"
+        ],
+        [
+          20,
+          "ld.w",
+          "r2, (r2, 0xc)"
+        ],
+        [
+          22,
+          "cmphs",
+          "r2, r3"
+        ]
+      ],
+      "classification": "generic driver local g_flash_info+12 bounds value; not spinor_list record"
+    },
+    {
+      "object": "drivers_lib/mtd/spinor/flash_spi.o",
+      "object_sha256": "ea9e15b6c30aa74b60abcb620d49499892449c5df87072f1d12203fa4a35b2a5",
+      "blob": "f833ae8f45d25cea39c4863f46abf37175ce4b71",
+      "symbol": "gx_xip_init",
+      "section_sha256": "1a407948499095b37aa2686a67d2617510a0d94179b3e1dfee37f4ac91bda3df",
+      "verified_steps": [
+        [
+          24,
+          "ld.w",
+          "r13, (r14, 0xc)"
+        ]
+      ],
+      "classification": "incoming stack argument at SP+12"
+    }
+  ],
+  "classified_reads": 4,
+  "source_admitted": false,
+  "limits": [
+    "Completes classification of initial32 immediate word-load candidates together with28-path report. Does not cover indexed/byte/halfword accesses, pointer arithmetic, other objects or stock-only consumers; no unused-field proof."
+  ]
+}

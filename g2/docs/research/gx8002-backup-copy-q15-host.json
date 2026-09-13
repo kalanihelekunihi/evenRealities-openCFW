@@ -1,0 +1,25 @@
+{
+  "build": {
+    "extra_flags": [
+      "-fno-tree-loop-optimize"
+    ],
+    "source_sha256": "0120be27649a8cc991541e2f75e57b75d940dfbb0a571a18f59493225de441cf",
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "compiled_bytes": 56,
+    "stock_bytes": 44,
+    "fits": false,
+    "elf_sha256": "b64b128afa47ae64cb3f59e153a5ac989bcc033e4f56f14d6a7a56e7f6222868",
+    "source_admitted": false,
+    "limits": [
+      "Standalone candidate. Store trace, decoded behavior and placement qualification pending."
+    ]
+  },
+  "native_cases": 4627,
+  "null_zero_count_checked": true,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Native output against ordered block-copy model for counts 0..256 and 18 overlap/separate-buffer placements. Entire allocation compared for unintended changes.",
+    "Target instruction/read-write trace qualification and layout pending. Not memmove semantics."
+  ]
+}

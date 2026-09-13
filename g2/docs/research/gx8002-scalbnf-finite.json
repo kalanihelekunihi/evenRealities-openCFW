@@ -1,0 +1,70 @@
+{
+  "source_elf_sha256": "974a408bf9fd0035e7bce6b426ead5f853d22e858e177543a5d41a15babdc5fe",
+  "cases": 16770,
+  "rounding_mismatches": [
+    {
+      "input": "0x1000001",
+      "exponent": -25,
+      "source_and_stock": "0x0",
+      "nearest_even": "0x1"
+    },
+    {
+      "input": "0x17fffff",
+      "exponent": -25,
+      "source_and_stock": "0x0",
+      "nearest_even": "0x1"
+    },
+    {
+      "input": "0x81000001",
+      "exponent": -25,
+      "source_and_stock": "0x80000000",
+      "nearest_even": "0x80000001"
+    },
+    {
+      "input": "0x817fffff",
+      "exponent": -25,
+      "source_and_stock": "0x80000000",
+      "nearest_even": "0x80000001"
+    },
+    {
+      "input": "0x16075587",
+      "exponent": -67,
+      "source_and_stock": "0x0",
+      "nearest_even": "0x1"
+    },
+    {
+      "input": "0xdb4baa82",
+      "exponent": -205,
+      "source_and_stock": "0x80000000",
+      "nearest_even": "0x80000001"
+    },
+    {
+      "input": "0xcc1d22db",
+      "exponent": -175,
+      "source_and_stock": "0x80000000",
+      "nearest_even": "0x80000001"
+    },
+    {
+      "input": "0xaaa2b257",
+      "exponent": -108,
+      "source_and_stock": "0x80000000",
+      "nearest_even": "0x80000001"
+    },
+    {
+      "input": "0x716bcd1a",
+      "exponent": -249,
+      "source_and_stock": "0x0",
+      "nearest_even": "0x1"
+    },
+    {
+      "input": "0x56f75b19",
+      "exponent": -196,
+      "source_and_stock": "0x0",
+      "nearest_even": "0x1"
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Finite values with explicit nearest-even integer multiplication model, not hardware execution. Nonfinite behavior, FP status/other rounding modes, full int32 exponent range, placement and integration pending."
+  ]
+}

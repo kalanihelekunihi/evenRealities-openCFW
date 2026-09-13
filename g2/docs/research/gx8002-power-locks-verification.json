@@ -1,0 +1,57 @@
+{
+  "candidate": {
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_power_lock_create",
+        "section_name": ".text.lock_create",
+        "package_offset": 68860,
+        "stock_envelope_bytes": 56,
+        "compiled_bytes": 56,
+        "compiled_sha256": "231b7e86856d976850dfe6775410186ea66a91779a0d6f41e886c33f8d13c561",
+        "stock_sha256": "42aaa7b1a128fd85c014459eb6ee6468bfdc117de1f2f4fa44fba0c2f4715511",
+        "fits": true,
+        "exact_stock": false
+      },
+      {
+        "symbol": "open_cfw_gx8002_power_is_locked",
+        "section_name": ".text.is_locked",
+        "package_offset": 68996,
+        "stock_envelope_bytes": 16,
+        "compiled_bytes": 16,
+        "compiled_sha256": "88e2bf23823e496fc97209910ffd34af3aee55c059d77835a53bb36dee76bdd0",
+        "stock_sha256": "88e2bf23823e496fc97209910ffd34af3aee55c059d77835a53bb36dee76bdd0",
+        "fits": true,
+        "exact_stock": true
+      }
+    ],
+    "source_sha256": "6535b21e9322fba106e8e3f853304666c37ce0844469db71ce997e43e0884f54",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-peel-loops",
+      "-fno-tree-ch"
+    ],
+    "upstream": {
+      "path": "lvp/common/lvp_pmu.c",
+      "blob": "a49f3266ec8a6d77f51ccb919dab5be1d13fdf56",
+      "sha256": "e1421f08efa9ddf637da03b39f6aebebef4782c720bee74a0df8d003b62a85be"
+    },
+    "source_admitted": false,
+    "limits": [
+      "Candidate only; decoded initialization and callback qualification pending."
+    ]
+  },
+  "decoded_cases": 10640,
+  "source_admitted": false,
+  "limits": [
+    "Ordered full-memory and ABI comparison includes all first-free bits, exhausted bitmap, random masks, and aligned output aliases. Unaligned pointers and asynchronous changes are not qualified."
+  ]
+}

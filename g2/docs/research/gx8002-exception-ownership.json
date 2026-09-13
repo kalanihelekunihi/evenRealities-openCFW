@@ -1,0 +1,121 @@
+{
+  "candidate": {
+    "provenance": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "sources": {
+        "arch/soc/grus/trap_c.c": {
+          "blob": "55f2f25ded0f874a7cd855779e95a488a8664552",
+          "sha256": "22d42224aa6b64b9750fc182fe51c706c2143804e670e992bd1d66b43fc675f9"
+        },
+        "arch/soc/grus/vectors.S": {
+          "blob": "8b5e7da6b0182860a56a1218873e2a1e4dcd789d",
+          "sha256": "cdb14306b9e192dae8b3d422bafe85ba6144757ebfcd9b87e7e6dc131fd47d28"
+        }
+      },
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "package_offset": 87556,
+      "bytes": 92,
+      "region_sha256": "f290fa01bd4992ef9d64bf5aee74a0794c6875473df3c1748a8016a810589d2a",
+      "frame_bytes": 72,
+      "saved_registers": [
+        "r0-r12",
+        "r13",
+        "r14",
+        "r15",
+        "epsr",
+        "epc"
+      ],
+      "stock_stack_top_and_sp_slot": 537031440,
+      "upstream_reserved_stack_bytes": 768,
+      "candidate_stack_start": 537030672,
+      "source_admitted": false,
+      "limits": [
+        "Source lineage and selected decoded frame/loop anchors, not complete compiled or symbolic equivalence. Stack interval inferred from SDK allocation and deployed top literal; ownership/startup must be verified.",
+        "Stock C handler is already an infinite loop after reading exception vector; retaining that behavior is not a substitute for reconstructing other functionality."
+      ]
+    },
+    "dependencies": {
+      "arch/soc/grus/trap_c.c": {
+        "blob": "55f2f25ded0f874a7cd855779e95a488a8664552",
+        "sha256": "22d42224aa6b64b9750fc182fe51c706c2143804e670e992bd1d66b43fc675f9"
+      },
+      "include/utility/libc/stdio.h": {
+        "blob": "aa5abe3a1f5069aaa0f56d7342fbc187aafe9d0c",
+        "sha256": "4c76c88d6dd22a67e3e0e8104b1f8e32f7bf0b0c8a5617809b37c67a1090118d"
+      },
+      "include/utility/libc/klibc/extern.h": {
+        "blob": "7d7c7b8d190f5d792a2ff355e7d288e407833ddd",
+        "sha256": "addf134407ecf22a5bced6c998d30660dae0846528ad934eaa49742a9a7daf49"
+      },
+      "include/utility/libc/klibc/inline.h": {
+        "blob": "0e547437338ab639b5eda06e04a80454e7f80758",
+        "sha256": "1456ca9eb1444031e51a9424859da5340844e7be166ff7ab68f25159329be9e1"
+      },
+      "include/utility/libc/string.h": {
+        "blob": "b3c198808c20769a5ff6b955711038a910809237",
+        "sha256": "1f18f1ebc0b7c1f789056bed0ceeb92133e835d35b93f938978928dc6079b4af"
+      },
+      "include/utility/libc/printf.h": {
+        "blob": "57440440c4583bd198f95f73613f3dc8c3ca1760",
+        "sha256": "dbeab6d39c39d02104ff929ae4a6d7f5d383d62a9912bd8ccfee108e4fccc09d"
+      },
+      "generated/autoconf.h": {
+        "sha256": "9811f2aa66324bafe0b823ac15ac80ea0041bea02b181698910ee4ebb4a711ba"
+      },
+      "include/utility/libc/stdlib.h": {
+        "blob": "75c21b5367091e23fb703e4b3dfc65ffc4e71a8f",
+        "sha256": "d2549da080238fe93ed114e2d7e83b7889390faa631a37d87f324f63698ea29d"
+      },
+      "arch/soc/grus/include/csi_config.h": {
+        "blob": "4f97bdb653230263b250f621d38b89af0efc8e40",
+        "sha256": "cb4dec6e18191db7f49148054944c65832f11499bcc006ee6e05134761c6f1c2"
+      },
+      "arch/soc/grus/vectors.S": {
+        "blob": "8b5e7da6b0182860a56a1218873e2a1e4dcd789d",
+        "sha256": "cdb14306b9e192dae8b3d422bafe85ba6144757ebfcd9b87e7e6dc131fd47d28"
+      }
+    },
+    "header_blob": "4f97bdb653230263b250f621d38b89af0efc8e40",
+    "header_sha256": "cb4dec6e18191db7f49148054944c65832f11499bcc006ee6e05134761c6f1c2",
+    "sections": [
+      {
+        "name": ".handler",
+        "address": 268580336,
+        "bytes": 10,
+        "sha256": "39e7faf3fbb7e9dc1ebdebeb3ec63bc17c805c76e03e4e18b7f3af89f34da41e",
+        "stock_offset": 87556,
+        "envelope": 12,
+        "byte_exact": true
+      },
+      {
+        "name": ".entry",
+        "address": 268580348,
+        "bytes": 80,
+        "sha256": "5ba30b8f517d90ef1b6a2fe5bd589015668a3229d00f0c17677ef73da547fcf9",
+        "stock_offset": 87568,
+        "envelope": 80,
+        "byte_exact": true
+      }
+    ],
+    "stack_address": 537030672,
+    "stack_bytes": 772,
+    "elf_sha256": "9372a039c9f50733480c5e3ea7ebbe6526d87b3437ae714d38b750197bcdfe7c",
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Unmodified pinned Apache2.0 SDK C/assembly compiled and linked; stack source allocated at inferred deployed location.",
+      "Full instruction equivalence, stack ownership and exception entry execution remain to qualify. No registry admission."
+    ]
+  },
+  "checked_artifacts": 374,
+  "clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+  "cleared_words": 193,
+  "frame_start": 537031368,
+  "frame_end": 537031440,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Source 768-byte stack plus saved-SP word is allocated, disjoint from fixed registered sections, and cleared by authenticated decoded startup.",
+    "Does not rule out retained indirect writes or qualify exception nesting and original-SP minus4 write. No firmware admission."
+  ]
+}

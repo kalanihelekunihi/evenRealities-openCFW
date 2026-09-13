@@ -1,0 +1,189 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "objects": [
+    {
+      "path": "drivers_lib/mtd/spinor/flash_spi.o",
+      "blob": "f833ae8f45d25cea39c4863f46abf37175ce4b71",
+      "sha256": "ea9e15b6c30aa74b60abcb620d49499892449c5df87072f1d12203fa4a35b2a5",
+      "candidate_reads": [
+        {
+          "section": ".text.sflash_getinfo",
+          "symbol": "sflash_getinfo",
+          "instruction": "18:\t9363      \tld.w      \tr3, (r3, 0xc)"
+        },
+        {
+          "section": ".text.sflash_getinfo",
+          "symbol": "sflash_getinfo",
+          "instruction": "20:\t9363      \tld.w      \tr3, (r3, 0xc)"
+        },
+        {
+          "section": ".text.sflash_write_protect_status",
+          "symbol": "sflash_write_protect_status",
+          "instruction": "8:\t9563      \tld.w      \tr3, (r5, 0xc)"
+        },
+        {
+          "section": ".text.sflash_write_protect_status",
+          "symbol": "sflash_write_protect_status",
+          "instruction": "1e:\t9563      \tld.w      \tr3, (r5, 0xc)"
+        },
+        {
+          "section": ".text.sflash_write_protect_status",
+          "symbol": "sflash_write_protect_status",
+          "instruction": "38:\t9663      \tld.w      \tr3, (r6, 0xc)"
+        },
+        {
+          "section": ".text.sflash_write_protect_mode",
+          "symbol": "sflash_write_protect_mode",
+          "instruction": "2:\t9363      \tld.w      \tr3, (r3, 0xc)"
+        },
+        {
+          "section": ".text.sflash_wp_lock",
+          "symbol": "sflash_wp_lock",
+          "instruction": "10:\t9563      \tld.w      \tr3, (r5, 0xc)"
+        },
+        {
+          "section": ".text.sflash_wp_lock",
+          "symbol": "sflash_wp_lock",
+          "instruction": "3e:\t9563      \tld.w      \tr3, (r5, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_status",
+          "symbol": "sflash_otp_status",
+          "instruction": "6:\t9563      \tld.w      \tr3, (r5, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_status",
+          "symbol": "sflash_otp_status",
+          "instruction": "10:\t9563      \tld.w      \tr3, (r5, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_get_region",
+          "symbol": "sflash_otp_get_region",
+          "instruction": "2:\t9363      \tld.w      \tr3, (r3, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_get_region",
+          "symbol": "sflash_otp_get_region",
+          "instruction": "6:\t9363      \tld.w      \tr3, (r3, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_set_region",
+          "symbol": "sflash_otp_set_region",
+          "instruction": "2:\t9363      \tld.w      \tr3, (r3, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_set_region",
+          "symbol": "sflash_otp_set_region",
+          "instruction": "6:\t9263      \tld.w      \tr3, (r2, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_get_current_region",
+          "symbol": "sflash_otp_get_current_region",
+          "instruction": "2:\t9363      \tld.w      \tr3, (r3, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_get_region_size",
+          "symbol": "sflash_otp_get_region_size",
+          "instruction": "2:\t9363      \tld.w      \tr3, (r3, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_erase",
+          "symbol": "sflash_otp_erase",
+          "instruction": "4:\t9463      \tld.w      \tr3, (r4, 0xc)"
+        },
+        {
+          "section": ".text.sflash_quad_read",
+          "symbol": "sflash_quad_read",
+          "instruction": "34:\t9123      \tld.w      \tr1, (r1, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_write",
+          "symbol": "sflash_otp_write",
+          "instruction": "a:\td9882003 \tld.w      \tr12, (r8, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_read",
+          "symbol": "sflash_otp_read",
+          "instruction": "c:\td98a2003 \tld.w      \tr12, (r10, 0xc)"
+        },
+        {
+          "section": ".text.gx_spinor_flash_getuid",
+          "symbol": "gx_spinor_flash_getuid",
+          "instruction": "6:\t9363      \tld.w      \tr3, (r3, 0xc)"
+        },
+        {
+          "section": ".text.sflash_gettype",
+          "symbol": "sflash_gettype",
+          "instruction": "2:\t9363      \tld.w      \tr3, (r3, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_lock",
+          "symbol": "sflash_otp_lock",
+          "instruction": "6:\t9563      \tld.w      \tr3, (r5, 0xc)"
+        },
+        {
+          "section": ".text.sflash_otp_lock",
+          "symbol": "sflash_otp_lock",
+          "instruction": "10:\t9563      \tld.w      \tr3, (r5, 0xc)"
+        },
+        {
+          "section": ".text.gx_xip_init",
+          "symbol": "gx_xip_init",
+          "instruction": "18:\td9ae2003 \tld.w      \tr13, (r14, 0xc)"
+        },
+        {
+          "section": ".text.sflash_init",
+          "symbol": "sflash_init",
+          "instruction": "68:\t9563      \tld.w      \tr3, (r5, 0xc)"
+        },
+        {
+          "section": ".text.xip_sflash_init",
+          "symbol": "xip_sflash_init",
+          "instruction": "54:\t9463      \tld.w      \tr3, (r4, 0xc)"
+        },
+        {
+          "section": ".text.xip_sflash_init",
+          "symbol": "xip_sflash_init",
+          "instruction": "78:\t9463      \tld.w      \tr3, (r4, 0xc)"
+        },
+        {
+          "section": ".text.gx_spinor_flash_gettype",
+          "symbol": "gx_spinor_flash_gettype",
+          "instruction": "2:\t9363      \tld.w      \tr3, (r3, 0xc)"
+        }
+      ]
+    },
+    {
+      "path": "drivers_lib/mtd/spinor/generic_spi_nor.o",
+      "blob": "13e30cab17a7f168f289447c99603f5d5ba2b8bb",
+      "sha256": "fecb15d607e4893d613e17af749e47f5290c0b4898b962edc5bf21d69b5d460e",
+      "candidate_reads": [
+        {
+          "section": ".text.gx_generic_spi_norflash_readdata",
+          "symbol": "gx_generic_spi_norflash_readdata",
+          "instruction": "34:\td86b2003 \tld.w      \tr3, (r11, 0xc)"
+        },
+        {
+          "section": ".text.gx_generic_spi_norflash_erasedata",
+          "symbol": "gx_generic_spi_norflash_erasedata",
+          "instruction": "4:\t9263      \tld.w      \tr3, (r2, 0xc)"
+        },
+        {
+          "section": ".text.gx_gereric_spi_norflash_pageprogram",
+          "symbol": "gx_gereric_spi_norflash_pageprogram",
+          "instruction": "14:\t9243      \tld.w      \tr2, (r2, 0xc)"
+        }
+      ]
+    },
+    {
+      "path": "drivers_lib/mtd/spinor/spi_nor_ids.o",
+      "blob": "aa2bbf3819a3d693580f5e65c04111e82fd523fb",
+      "sha256": "274c895e478861b7d1ae8fcac4d4235577f96e8f3adb29e62729dd735eca21e1",
+      "candidate_reads": []
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Offset12 reads are candidates only: base register may be runtime state, stack, MMIO or a different structure. No field meaning or unused-field proof inferred. SDK chip-erase wrapper loads runtime size at+4 and delegates range erase, so does not resolve record+12. Trace record pointer origins and all indirect consumers next."
+  ]
+}

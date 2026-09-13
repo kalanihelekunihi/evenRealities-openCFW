@@ -1,0 +1,106 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_buffer_initialize",
+      "section_name": ".text",
+      "compiled_bytes": 172,
+      "compiled_sha256": "9336783a1cdd9a482b9c2b8d396eb6736fbf768dbc116997b09cc7bcfd0cb4c3",
+      "ownership_kind": "compiled_c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_buffer_initialize",
+          "package_offset": 66380,
+          "bytes": 172,
+          "sha256": "946b79647cec1c11a7ab194636f1db6d3fdbf4df9eeb6a5a7cc2388ddd21b58c",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "compiled_bytes": 172,
+      "fits": true,
+      "compiled_sha256": "9336783a1cdd9a482b9c2b8d396eb6736fbf768dbc116997b09cc7bcfd0cb4c3",
+      "stock_sha256": "946b79647cec1c11a7ab194636f1db6d3fdbf4df9eeb6a5a7cc2388ddd21b58c",
+      "source_sha256": "fe6757122373abc9d902900ac7fa2d34d97d3d2d82f416e2893a280b616d41fa",
+      "upstream": {
+        "include/lvp_context.h": {
+          "blob": "37483158aa8c433d614dea65dff87232b6ba0f69",
+          "sha256": "75902c925c65492f776fe1c932f0b85d0298f0b7e8377def087a4fb5949170be"
+        },
+        "include/lvp_attr.h": {
+          "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+          "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+        },
+        "lvp/common/lvp_buffer.c": {
+          "blob": "b3d49834f8e84abfec56a5bfb2d0e86993a05648",
+          "sha256": "a491c43e4494187b269a4bb35e8fbe5c46b6f29c678980c30b3f8f9a0e324978"
+        }
+      },
+      "source_admitted": false
+    },
+    "decoded_cases": 5,
+    "nested_clear_cases": 20,
+    "clear_candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "dependencies": [
+        {
+          "path": "utility/libc/memset.c",
+          "blob": "75687249c1599cb4590e929d8f18b06e52c148c9",
+          "sha256": "d175f6079caa9768e909ebb0f26ea97018e108c71de2dc58edede28218033499"
+        },
+        {
+          "path": "utility/libc/csky/memset_fast.o",
+          "blob": "fd20a0df1dffbf1e130ffeb8619ff2b00f44fbd6",
+          "sha256": "502de113a832e38d17d7fe91cffe153dea29ff539c833fb20aba826d0bc6a23c"
+        },
+        {
+          "path": "LICENSE",
+          "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+          "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+        }
+      ],
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "source_sha256": "04d26d6aed66fb4e0dcd9e283e0df12ccfa6a4cd13be3d2d2adcd71f6dbf3517",
+      "compiled_bytes": 102,
+      "compiled_sha256": "7203abf09c7b20f3cb6a21e90f268a0ac5e4cec95108d30d3cf99f34a8fbe2a1",
+      "package_offset": 77656,
+      "stock_envelope_bytes": 160,
+      "stock_sha256": "6a7e1574db7e88044461737fd6efb583384a102e90cb44adade502c98da9c062",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Candidate only. Need decoded store width/order, alignment, return, ABI and signed count boundary qualification; retained object supplies no output bytes."
+      ]
+    },
+    "source_admitted": false,
+    "limits": [
+      "Decoded ordered stores and nested stock/source memset traces, including surrounding memory; no physical startup or asynchronous access qualification."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_buffer_initialize_source.py": "fb70a17fa05fd347505fc04ec5a347feb2f28b48cf21c26521496ff0c8cd0e9c",
+    "verify_gx8002_buffer_initialize.py": "b36fdfa57aa7edba937285f588588fac75c7d5eeb87009c34a6f9d3432971a02",
+    "build_gx8002_buffer_initialize.py": "3a30607913fc022d417914cd0ce43fb52fb60783c67ffd4fad76d762e1fff0df",
+    "compare_gx8002_memset.py": "d347468f1e17bcc01e62733e4bc6a08d32558903b8e0c47570c302b4c69f0da0",
+    "build_gx8002_memset_candidate.py": "0e3169108c0aff8f05f5cbe9158d14012125100737aab0d65d9be766d788a30a",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Fixed firmware RAM layout; nested decoded stock/source clears and neighboring memory checked. Physical startup, timing and concurrent access remain unqualified."
+  ]
+}

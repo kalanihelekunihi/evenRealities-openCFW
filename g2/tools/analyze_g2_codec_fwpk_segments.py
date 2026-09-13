@@ -156,7 +156,7 @@ def parse_binh_image(seg, base, expect_end=None):
     }
 
 
-def parse_main_image(seg):
+def parse_main_image(seg, *, verify_stock_identity=True):
     """Type-2 segment: dual-firmware BINH concatenation for SPI NOR flash."""
     _need(len(seg) == 287808, "main image size changed")
     a = parse_binh_image(seg, 0)
@@ -176,12 +176,17 @@ def parse_main_image(seg):
     extra_off, extra_end = a["stage2_end"], b["image_offset"]
     extra = seg[extra_off:extra_end]
     _need(len(extra) == 129964, "image-A extra payload size changed")
-    _need(seg.find(b"0.0.2.3") == 0x96B4, "version string moved")
+    # This literal belongs to application code, not to a BINH header.
+    # Compilers can split/reorder its immediate words while preserving the
+    # version response. Keep this fingerprint for stock audits only.
+    version_offset = seg.find(b"0.0.2.3")
+    if verify_stock_identity:
+        _need(version_offset == 0x96B4, "version string moved")
     return {"image_a": a, "image_b": b,
             "a_extra_payload": {"offset": extra_off, "size": len(extra),
                                 "sha256": sh(extra),
                                 "identity": "NPU/audio payload (identification-level only)"},
-            "version_string_offset": 0x96B4}
+            "version_string_offset": version_offset if version_offset >= 0 else None}
 
 
 def apollo_flash_command_evidence():

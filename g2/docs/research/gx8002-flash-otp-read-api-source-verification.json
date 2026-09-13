@@ -1,0 +1,103 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_flash_otp_read_api",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 28,
+      "compiled_sha256": "14e412bc8e27c25e7634ce119e880a9910f2084d4792caa84b85b12d437d8cce",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_flash_otp_read_api",
+          "package_offset": 92168,
+          "bytes": 28,
+          "sha256": "c8be8af45b0ab29c2fc327a076328c760a9a06c5608363b2b1583008294b13ae",
+          "region": "image_a_sram"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "evidence": {
+      "candidate": {
+        "dependency_headers": {
+          "arch/soc/grus/include/base_addr.h": {
+            "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+            "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+          },
+          "include/driver/gx_clock/gx_clock_v2.h": {
+            "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+            "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+          }
+        },
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+          "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+          "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+          "role": "board_call_site_reference_only; implementation recovered from stock"
+        },
+        "bindings": {},
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "header": {
+          "path": "include/driver/gx_flash.h",
+          "blob": "71221ef72395e8b61642dd87291804aced433f58",
+          "sha256": "d4d9d828e4363041c14ba7e3a676eec7b51c0b6427576f401516e4b6991c3d2d"
+        },
+        "source_sha256": "649dbff4b3beeed0eeafe2cabbcd3e72bd86494cc9ccdab51a678af20738006d",
+        "symbol": "open_cfw_gx8002_flash_otp_read_api",
+        "section_name": ".text",
+        "package_offset": 92168,
+        "compiled_bytes": 28,
+        "compiled_sha256": "14e412bc8e27c25e7634ce119e880a9910f2084d4792caa84b85b12d437d8cce",
+        "stock_envelope_bytes": 28,
+        "stock_sha256": "c8be8af45b0ab29c2fc327a076328c760a9a06c5608363b2b1583008294b13ae",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+        ]
+      },
+      "cases": 144,
+      "source_admitted": false,
+      "limits": [
+        "Decoded callback forwarding/return and ABI checked; buffer IO and callback implementation modeled. Caller/dependency integration pending."
+      ]
+    },
+    "decoded_read_callbacks": 96,
+    "summarized_large_receive_cases": 4,
+    "source_table_target": 268582820,
+    "source_admitted": false,
+    "limits": [
+      "Source-generated callback slot authenticated; actual decoded OTP read/rejection paths drive wrapper return.",
+      "SPI readiness, device state, and address encoder effects scripted as in admitted OTP read qualification; Four high-bit lengths use the separately structure-checked receive-loop summary, not literal billion-byte iteration; no physical hardware qualification."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_flash_otp_read_api_candidate.py": "2a4c1cf70cab59e5b413e83a226bcc3a7fc78166fe0b5dda16a3dbdc10fe41d0",
+    "compare_gx8002_flash_otp_read.py": "f845dd0fa0543d4cb85412f674e206ee1a6d9e7e5bfc70dc682222807f863560",
+    "execute_gx8002_clock_source_select.py": "269bdbc02145bf7a8a6b00f5dff68d0dcf3f057c94a88efddbc313b60ee65313",
+    "model_gx8002_flash_otp_read.py": "cb4797bcecdc50c6bfe6b0203f43c94158586758b6dca211ebc79880d9db9f5b",
+    "verify_gx8002_flash_otp_read_api.py": "bf86156630e5e9e10db123fcb0f54a52a14f89a7f2c371eda7134909e5927c51",
+    "verify_gx8002_flash_otp_read_api_callback.py": "c120ee5c77c6fe5d52ed5606a30f4638ed6b1da1d0e6c36427b381cc3820ef33",
+    "verify_gx8002_flash_otp_read_api_source.py": "7b364d3fd48e5d7c5e4739b6ba3d8fecac37bf1d66a575d26044437e1b84efa3"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Source-generated callback slot authenticated; actual decoded OTP read/rejection paths drive wrapper return.",
+    "SPI readiness, device state, and address encoder effects scripted as in admitted OTP read qualification; Four high-bit lengths use the separately structure-checked receive-loop summary, not literal billion-byte iteration; no physical hardware qualification.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

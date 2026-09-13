@@ -1,0 +1,192 @@
+{
+  "candidate": {
+    "analysis": {
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "headers": {
+        "lvp/app_core/lvp_app.h": {
+          "blob": "4b7e105ff09df684966817f1045f28dd030b5f2d",
+          "sha256": "5f3302a3482d2539d515d068e1c1364508f7eca6711d23ab063c27dc18556450"
+        },
+        "lvp/app_core/lvp_app_core.h": {
+          "blob": "e7521399bfa5d16c4ebacba2699e2f0286fc09cd",
+          "sha256": "7267c8f17cf22c3fe8904ac6babf611c3f1ea750c254a782c982b4e9fbb03c25"
+        }
+      },
+      "package_offset": 101708,
+      "bytes": 36,
+      "runtime_address": 537029944,
+      "app_core_ops_target": 537029948,
+      "descriptor_fields": {
+        "app_name": 270579273,
+        "AppInit": 270569036,
+        "AppEventResponse": 270569220,
+        "AppTaskLoop": 270569916,
+        "AppSuspend": 270568940,
+        "suspend_priv": 270579284,
+        "AppResume": 270568908,
+        "resume_priv": 270579301
+      },
+      "owners": {
+        "app_name": [
+          {
+            "kind": "application-labels",
+            "section": ".sample_labels",
+            "offset_in_section": 0,
+            "section_sha256": "5bacd8db5ac0caff0fcdfec800459e639412371af6cab23f6cef434f13ad0cbc",
+            "text": "sample app"
+          }
+        ],
+        "AppInit": [
+          {
+            "kind": "sample-app-init",
+            "section": ".text",
+            "offset_in_section": 0,
+            "section_sha256": "3630c1ae7a1b4aeee2402742eb3f7437eaaed859057d79758fda02f689ac8595",
+            "symbols": [
+              "",
+              "$d",
+              "$t",
+              "open_cfw_gx8002_sample_app_init"
+            ]
+          }
+        ],
+        "AppEventResponse": [
+          {
+            "kind": "sample-event",
+            "section": ".text",
+            "offset_in_section": 0,
+            "section_sha256": "eeeeff063bf607984a1f1944f2b3544ac7866932eace59e65ae9ac1be15e1c70",
+            "symbols": [
+              "",
+              "$d",
+              "$t",
+              "open_cfw_gx8002_sample_event"
+            ]
+          }
+        ],
+        "AppTaskLoop": [
+          {
+            "kind": "i2s-request-tick",
+            "section": ".text",
+            "offset_in_section": 0,
+            "section_sha256": "62a221fe6d8dcc9144190fd9ae4afaadf063192646ea5402d3f58af4c1e546c7",
+            "symbols": [
+              "",
+              "$d",
+              "$t",
+              "open_cfw_gx8002_i2s_request_tick"
+            ]
+          }
+        ],
+        "AppSuspend": [
+          {
+            "kind": "app-gpio-power",
+            "section": ".text.open_cfw_gx8002_app_gpio_resume",
+            "offset_in_section": 0,
+            "section_sha256": "19dd9d8a49859aa13bc634c6f5bea6e7590b66112000a7fd4172f57f092b6d7d",
+            "symbols": [
+              "",
+              "$d",
+              "$t",
+              "open_cfw_gx8002_app_gpio_resume"
+            ]
+          }
+        ],
+        "suspend_priv": [
+          {
+            "kind": "application-labels",
+            "section": ".sample_labels",
+            "offset_in_section": 11,
+            "section_sha256": "5bacd8db5ac0caff0fcdfec800459e639412371af6cab23f6cef434f13ad0cbc",
+            "text": "SampleAppSuspend"
+          }
+        ],
+        "AppResume": [
+          {
+            "kind": "app-gpio-power",
+            "section": ".text.open_cfw_gx8002_app_gpio_suspend",
+            "offset_in_section": 0,
+            "section_sha256": "9836d8a2d40762767ab9cd88f3e5cea736bc5a5dbf156df18ee6edb16c270710",
+            "symbols": [
+              "",
+              "$d",
+              "$t",
+              "open_cfw_gx8002_app_gpio_suspend"
+            ]
+          }
+        ],
+        "resume_priv": [
+          {
+            "kind": "application-labels",
+            "section": ".sample_labels",
+            "offset_in_section": 28,
+            "section_sha256": "5bacd8db5ac0caff0fcdfec800459e639412371af6cab23f6cef434f13ad0cbc",
+            "text": "SampleAppResume"
+          }
+        ]
+      },
+      "source_admitted": false,
+      "limits": [
+        "All eight descriptor fields resolve to reviewed source sections. Layout agrees with upstream LVP_APP; startup and typed compiled descriptor still pending.",
+        "Callback type compatibility is separately verified by compiling actual definitions with the descriptor in one translation unit. This address analysis alone does not prove C type compatibility."
+      ]
+    },
+    "source_sha256": "2aacf77d7b91c22d2e2f0d01d938e9d4145a2f2fd73ee513273273efedf6befb",
+    "elf_sha256": "903525607c5a7b163ad3222ee13c24f2e95466560f6c189f633743c81bf6b6f9",
+    "rows": [
+      {
+        "section": ".app_core_ops",
+        "package_offset": 101708,
+        "bytes": 4,
+        "sha256": "1a89d3442e8ba8370ef2e35e69c411b29eb520752cd2ffabd2bf4c96f437664d"
+      },
+      {
+        "section": ".sample_application",
+        "package_offset": 101712,
+        "bytes": 32,
+        "sha256": "5bed8d93dbcf1dae2040467eac63f4be8c3407d6d95f87a21ea54c315d3bbb5f"
+      }
+    ],
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Typed descriptor compiles byte-exact on macOS. This object alone does not prove cross-translation-unit type compatibility.",
+      "SDK callback declaration reconciliation, startup mapping, dispatch composition and ownership admission remain pending."
+    ]
+  },
+  "checked_artifacts": 384,
+  "references": [
+    {
+      "kind": "app_tick",
+      "elf_sha256": "19e8569509bd789e2b42b09d267176124f360dffb16cb5549499ec8ccef467f4"
+    },
+    {
+      "kind": "startup",
+      "elf_sha256": "4c8ac47ba58672312c466812ea3dbaa00eb4694c092c5d2a94b3cefca6d982c9"
+    },
+    {
+      "kind": "suspend",
+      "elf_sha256": "a90ac4035515dd9d4ad8ebee072ab20d84e58ccbec1a5d10405eea1f5aaf93cf"
+    },
+    {
+      "kind": "resume",
+      "elf_sha256": "1c5db13457a215602450a2708112c6b3239e9b3c02df103e19637b2bb88c8e16"
+    }
+  ],
+  "sdk_mapping_sha256": {
+    "arch/soc/grus/include/soc_config.h": "abda275af6aee96ad676c190e2a72363a79595413336371fced4450f8df76809",
+    "arch/soc/grus/link.ld": "1dc73b74c4b5962a848693ab857e90d34115489a8a7e499897533ad786ff77be",
+    "arch/soc/grus/spl/spl.c": "f3690694fff309c0118579baedb860b1d47c6de3cfb227a977242249568bb56b"
+  },
+  "clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+  "startup_cases": 12,
+  "preserved_words": 9,
+  "clear_writes": 8155,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded primary loader with modeled flash reads loads compiled descriptor bytes through SDK-authenticated IRAM/DRAM alias. Decoded BSS clear preserves all nine initialized words.",
+    "Physical memory aliasing, typed callback definition reconciliation and composed application dispatch remain unqualified."
+  ]
+}

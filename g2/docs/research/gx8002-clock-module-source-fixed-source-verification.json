@@ -1,0 +1,1818 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_clock_module_source_fixed",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 384,
+      "compiled_sha256": "62a54e9d4430c22fc2af0773745fbd675b281651655e2f34447b1f7804cfcdba",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_clock_module_source_fixed",
+          "package_offset": 93172,
+          "bytes": 400,
+          "sha256": "cf4ba169713b50cb4649125379797a1fcb7d91ea61a35c7d5eff349aac34058b",
+          "region": "image_a_sram"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "dependency_headers": {
+        "arch/soc/grus/include/base_addr.h": {
+          "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+          "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+        },
+        "include/driver/gx_clock/gx_clock_v2.h": {
+          "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+          "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+        }
+      },
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "arch/soc/grus/include/clk_priv.h",
+        "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+        "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496",
+        "role": "compiled_upstream_implementation"
+      },
+      "bindings": {
+        "__module_get_info": 268585540,
+        "__reg_set_val": 268585520,
+        "gx_clock_param_table": 537028320
+      },
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-jump-tables",
+        "-fno-tree-ter"
+      ],
+      "header": {
+        "path": "include/driver/gx_clock.h",
+        "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+        "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+      },
+      "source_sha256": "d000844f04a7a1b50d9cb519058fd05c8e104260a574070a3f1845ae59c11315",
+      "symbol": "open_cfw_gx8002_clock_module_source_fixed",
+      "section_name": ".text",
+      "package_offset": 93172,
+      "compiled_bytes": 384,
+      "compiled_sha256": "62a54e9d4430c22fc2af0773745fbd675b281651655e2f34447b1f7804cfcdba",
+      "stock_envelope_bytes": 400,
+      "stock_sha256": "cf4ba169713b50cb4649125379797a1fcb7d91ea61a35c7d5eff349aac34058b",
+      "fits": true,
+      "adaptations": [
+        "Grouped gates advance from resolved parent table row rather than treating module IDs as table indices."
+      ],
+      "source_admitted": false,
+      "limits": [
+        "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+      ]
+    },
+    "cases": 377,
+    "limits": [
+      "377 preflight and 4180 complete decoded path cases, independent ID-based transition model, authenticated immutable table and decoded nested helpers.",
+      "Lookup private output and register snapshot are marshalled across helper frames. Physical transition timing and concurrent table/MMIO mutation remain unqualified."
+    ],
+    "nested": {
+      "cases": 4180,
+      "nested_helpers": {
+        "lookup_elf_sha256": "38b29242c4f1b670ab35270a099ea464ff05753c5913b90d044e787153213c7b",
+        "register_elf_sha256": "bbcaa9549732699f29eccc73b602db34a6b76a75557a616b7d9df54b9a374022",
+        "limits": [
+          "Lookup executor uses fixed private output 0x1000, marshalled to the actual caller stack; register helper executes on a snapshot of the modeled MMIO word."
+        ]
+      },
+      "targeted_audio_cases": 2560,
+      "differences": [
+        {
+          "module": 16,
+          "source": 0,
+          "initial": "0x2430c983",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              607177091
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              607177091
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ],
+            [
+              "write",
+              2687500316,
+              32
+            ]
+          ]
+        },
+        {
+          "module": 16,
+          "source": 0,
+          "initial": "0x3000000",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              50331648
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ],
+            [
+              "write",
+              2687500316,
+              32
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              50331648
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ]
+          ]
+        },
+        {
+          "module": 16,
+          "source": 0,
+          "initial": "0x23000000",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              587202560
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ],
+            [
+              "write",
+              2687500316,
+              32
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              587202560
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ]
+          ]
+        },
+        {
+          "module": 16,
+          "source": 0,
+          "initial": "0x20000100",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              536871168
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              536871168
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ],
+            [
+              "write",
+              2687500316,
+              32
+            ]
+          ]
+        },
+        {
+          "module": 16,
+          "source": 0,
+          "initial": "0x22000100",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              570425600
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              570425600
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ],
+            [
+              "write",
+              2687500316,
+              32
+            ]
+          ]
+        },
+        {
+          "module": 16,
+          "source": 0,
+          "initial": "0x21000100",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              553648384
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              553648384
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ],
+            [
+              "write",
+              2687500316,
+              32
+            ]
+          ]
+        },
+        {
+          "module": 16,
+          "source": 0,
+          "initial": "0x3000100",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              50331904
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ],
+            [
+              "write",
+              2687500316,
+              32
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              50331904
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967293
+            ]
+          ]
+        },
+        {
+          "module": 16,
+          "source": 1,
+          "initial": "0x3000000",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              50331648
+            ],
+            [
+              "write",
+              2687500320,
+              32
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              2
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              50331648
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              2
+            ]
+          ]
+        },
+        {
+          "module": 16,
+          "source": 1,
+          "initial": "0x23000000",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              587202560
+            ],
+            [
+              "write",
+              2687500320,
+              32
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              2
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              587202560
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              2
+            ]
+          ]
+        },
+        {
+          "module": 16,
+          "source": 1,
+          "initial": "0x20000100",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              536871168
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              2
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              536871168
+            ],
+            [
+              "write",
+              2687500320,
+              32
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              2
+            ]
+          ]
+        },
+        {
+          "module": 16,
+          "source": 1,
+          "initial": "0x22000100",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              570425600
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              2
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              570425600
+            ],
+            [
+              "write",
+              2687500320,
+              32
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              2
+            ]
+          ]
+        },
+        {
+          "module": 16,
+          "source": 1,
+          "initial": "0x21000100",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              553648384
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              2
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              553648384
+            ],
+            [
+              "write",
+              2687500320,
+              32
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              2
+            ]
+          ]
+        },
+        {
+          "module": 16,
+          "source": 1,
+          "initial": "0x3000100",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              50331904
+            ],
+            [
+              "write",
+              2687500320,
+              32
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              2
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              50331904
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              2
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 0,
+          "initial": "0x30000000",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              805306368
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967287
+            ],
+            [
+              "write",
+              2687500316,
+              128
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              805306368
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967287
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 0,
+          "initial": "0x30000800",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              805308416
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967287
+            ],
+            [
+              "write",
+              2687500316,
+              128
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              805308416
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967287
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 0,
+          "initial": "0x30000400",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              805307392
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967287
+            ],
+            [
+              "write",
+              2687500316,
+              128
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              805307392
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967287
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 0,
+          "initial": "0xc00",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              3072
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967287
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              3072
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967287
+            ],
+            [
+              "write",
+              2687500316,
+              128
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 0,
+          "initial": "0x20000c00",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              536873984
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967287
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              536873984
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967287
+            ],
+            [
+              "write",
+              2687500316,
+              128
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 0,
+          "initial": "0x10000c00",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              268438528
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967287
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "read",
+              2687500312,
+              268438528
+            ],
+            [
+              "read",
+              2687500424,
+              4294967295
+            ],
+            [
+              "write",
+              2687500424,
+              4294967287
+            ],
+            [
+              "write",
+              2687500316,
+              128
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 1,
+          "initial": "0x573b5ddd",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              1463508445
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              1463508445
+            ],
+            [
+              "write",
+              2687500320,
+              128
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 1,
+          "initial": "0x30000000",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              805306368
+            ],
+            [
+              "write",
+              2687500320,
+              128
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              805306368
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 1,
+          "initial": "0x30000800",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              805308416
+            ],
+            [
+              "write",
+              2687500320,
+              128
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              805308416
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 1,
+          "initial": "0x30000400",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              805307392
+            ],
+            [
+              "write",
+              2687500320,
+              128
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              805307392
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 1,
+          "initial": "0xc00",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              3072
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              3072
+            ],
+            [
+              "write",
+              2687500320,
+              128
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 1,
+          "initial": "0x20000c00",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              536873984
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              536873984
+            ],
+            [
+              "write",
+              2687500320,
+              128
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ]
+        },
+        {
+          "module": 19,
+          "source": 1,
+          "initial": "0x10000c00",
+          "stock_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              268438528
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ],
+          "fixed_trace": [
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "read",
+              2687500312,
+              268438528
+            ],
+            [
+              "write",
+              2687500320,
+              128
+            ],
+            [
+              "read",
+              2687500424,
+              0
+            ],
+            [
+              "write",
+              2687500424,
+              8
+            ]
+          ]
+        }
+      ],
+      "elf_sha256": {
+        "clock-module-source": "6d9de30f5c6a52417fe3f30b7e7c56ab3c63332e5c2e140ea71a5e7aedd0d631",
+        "clock-module-source-fixed": "8c8aec4d39399364775b1ebff5a54fc14a527bf46977a4181c426103d896d83c"
+      },
+      "context": {
+        "elf_sha256": "38b29242c4f1b670ab35270a099ea464ff05753c5913b90d044e787153213c7b",
+        "section_sha256": {
+          ".text.__module_get_info": "002a00eee4ab7761a5a8fce8b26c97c18509b72615dc8d558ac107189ecc6b8f",
+          ".data.gx_clock_param_table": "64a888d435653e525749e8de221f6b171d5c0f4e7d7270f146cfa42521856296",
+          ".data.gx_clock_dto_table": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+          ".data.gx_clock_div_table": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872"
+        },
+        "modules": [
+          {
+            "module": 0,
+            "table_index": 0,
+            "address": 537028320,
+            "gate_high_offset": 0,
+            "gate_all_offset": 1,
+            "clock_offset": 1,
+            "divider": 537028740,
+            "dto": 0
+          },
+          {
+            "module": 1,
+            "table_index": 1,
+            "address": 537028336,
+            "gate_high_offset": 2,
+            "gate_all_offset": 3,
+            "clock_offset": 3,
+            "divider": 537028744,
+            "dto": 0
+          },
+          {
+            "module": 2,
+            "table_index": 2,
+            "address": 537028352,
+            "gate_high_offset": 4,
+            "gate_all_offset": 5,
+            "clock_offset": 6,
+            "divider": 537028748,
+            "dto": 537028736
+          },
+          {
+            "module": 3,
+            "table_index": 3,
+            "address": 537028368,
+            "gate_high_offset": 7,
+            "gate_all_offset": 8,
+            "clock_offset": 9,
+            "divider": 537028752,
+            "dto": 0
+          },
+          {
+            "module": 4,
+            "table_index": 4,
+            "address": 537028384,
+            "gate_high_offset": 9,
+            "gate_all_offset": 10,
+            "clock_offset": 10,
+            "divider": 537028756,
+            "dto": 0
+          },
+          {
+            "module": 5,
+            "table_index": 5,
+            "address": 537028400,
+            "gate_high_offset": 11,
+            "gate_all_offset": 12,
+            "clock_offset": 11,
+            "divider": 537028760,
+            "dto": 0
+          },
+          {
+            "module": 6,
+            "table_index": 6,
+            "address": 537028416,
+            "gate_high_offset": 13,
+            "gate_all_offset": 14,
+            "clock_offset": 12,
+            "divider": 537028764,
+            "dto": 0
+          },
+          {
+            "module": 7,
+            "table_index": 7,
+            "address": 537028432,
+            "gate_high_offset": 4,
+            "gate_all_offset": 6,
+            "clock_offset": 19,
+            "divider": 537028768,
+            "dto": 0
+          },
+          {
+            "module": 8,
+            "table_index": 8,
+            "address": 537028448,
+            "gate_high_offset": 4,
+            "gate_all_offset": 19,
+            "clock_offset": 20,
+            "divider": 537028772,
+            "dto": 0
+          },
+          {
+            "module": 9,
+            "table_index": 9,
+            "address": 537028464,
+            "gate_high_offset": 20,
+            "gate_all_offset": 21,
+            "clock_offset": 24,
+            "divider": 537028776,
+            "dto": 0
+          },
+          {
+            "module": 10,
+            "table_index": 10,
+            "address": 537028480,
+            "gate_high_offset": 4,
+            "gate_all_offset": 12,
+            "clock_offset": 0,
+            "divider": 537028780,
+            "dto": 0
+          },
+          {
+            "module": 16,
+            "table_index": 11,
+            "address": 537028496,
+            "gate_high_offset": 5,
+            "gate_all_offset": 5,
+            "clock_offset": 1,
+            "divider": 0,
+            "dto": 537028737
+          },
+          {
+            "module": 17,
+            "table_index": 12,
+            "address": 537028512,
+            "gate_high_offset": 5,
+            "gate_all_offset": 24,
+            "clock_offset": -1,
+            "divider": 0,
+            "dto": 0
+          },
+          {
+            "module": 18,
+            "table_index": 13,
+            "address": 537028528,
+            "gate_high_offset": 5,
+            "gate_all_offset": 25,
+            "clock_offset": -1,
+            "divider": 0,
+            "dto": 0
+          },
+          {
+            "module": 11,
+            "table_index": 14,
+            "address": 537028544,
+            "gate_high_offset": 6,
+            "gate_all_offset": 26,
+            "clock_offset": 2,
+            "divider": 0,
+            "dto": 537028738
+          },
+          {
+            "module": 19,
+            "table_index": 15,
+            "address": 537028560,
+            "gate_high_offset": 7,
+            "gate_all_offset": 7,
+            "clock_offset": 3,
+            "divider": 537028784,
+            "dto": 0
+          },
+          {
+            "module": 20,
+            "table_index": 16,
+            "address": 537028576,
+            "gate_high_offset": 7,
+            "gate_all_offset": 28,
+            "clock_offset": -1,
+            "divider": 0,
+            "dto": 0
+          },
+          {
+            "module": 21,
+            "table_index": 17,
+            "address": 537028592,
+            "gate_high_offset": 7,
+            "gate_all_offset": 29,
+            "clock_offset": -1,
+            "divider": 0,
+            "dto": 0
+          },
+          {
+            "module": 12,
+            "table_index": 18,
+            "address": 537028608,
+            "gate_high_offset": 8,
+            "gate_all_offset": 8,
+            "clock_offset": 4,
+            "divider": 537028788,
+            "dto": 0
+          },
+          {
+            "module": 13,
+            "table_index": 19,
+            "address": 537028624,
+            "gate_high_offset": 9,
+            "gate_all_offset": 9,
+            "clock_offset": 5,
+            "divider": 537028792,
+            "dto": 0
+          },
+          {
+            "module": 14,
+            "table_index": 20,
+            "address": 537028640,
+            "gate_high_offset": 10,
+            "gate_all_offset": 10,
+            "clock_offset": 6,
+            "divider": 537028796,
+            "dto": 0
+          },
+          {
+            "module": 15,
+            "table_index": 21,
+            "address": 537028656,
+            "gate_high_offset": 11,
+            "gate_all_offset": 11,
+            "clock_offset": 7,
+            "divider": 537028800,
+            "dto": 0
+          },
+          {
+            "module": 22,
+            "table_index": 22,
+            "address": 537028672,
+            "gate_high_offset": 27,
+            "gate_all_offset": 27,
+            "clock_offset": 11,
+            "divider": 537028804,
+            "dto": 0
+          },
+          {
+            "module": 23,
+            "table_index": 23,
+            "address": 537028688,
+            "gate_high_offset": 27,
+            "gate_all_offset": 22,
+            "clock_offset": -1,
+            "divider": 0,
+            "dto": 0
+          },
+          {
+            "module": 24,
+            "table_index": 24,
+            "address": 537028704,
+            "gate_high_offset": 27,
+            "gate_all_offset": 23,
+            "clock_offset": -1,
+            "divider": 0,
+            "dto": 0
+          },
+          {
+            "module": 25,
+            "table_index": 25,
+            "address": 537028720,
+            "gate_high_offset": -1,
+            "gate_all_offset": 14,
+            "clock_offset": -1,
+            "divider": 0,
+            "dto": 0
+          }
+        ],
+        "combined_gate_index_pairs": {
+          "16": [
+            21,
+            12
+          ],
+          "19": [
+            14,
+            15
+          ],
+          "22": [
+            23,
+            24
+          ]
+        },
+        "limits": [
+          "Immutable source table context and lookup code authentication; successful module switching still needs decoded qualification."
+        ]
+      },
+      "limits": [
+        "Complete decoded outer routines and nested lookup/register helpers with marshalled private frames. Gate SET/CLR modeled as updating inhibit state. Independent ID-based transition model checked; physical timing remains outstanding."
+      ]
+    },
+    "preflight_limits": [
+      "Preflight validation and injected module-info failure only. Successful gate/source transitions, table ownership and hardware timing remain unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_clock_module_source_fixed_source.py": "9792c96e65cd6adb3fccf3fabbc950c9e3b48d61af15d8c8dad930c61ca84cfb",
+    "verify_gx8002_clock_module_source_fixed_preflight.py": "3383701325794449ee16cac601b79b3dbcdf74d1d2fd16a13c094cdd620173ff",
+    "verify_gx8002_clock_module_source_paths.py": "0592827373b9de771d12d4297790844548eae21b8827ec072dab7707227ae9ad",
+    "execute_gx8002_clock_module_source.py": "892f3652db379bef1eba604b567b0f73326e4dd40ff912f0f3009b6a02b7aa13",
+    "oracle_gx8002_clock_module_source.py": "faf7268896ee3e649dd32fdfd41f88257c26f79d646bbd5b7759df0f98e57f93",
+    "load_gx8002_clock_decoded_helpers.py": "0b9ea407d0104b0539213f2e10fa495154afec1666b314a04b9f032795cacffe",
+    "load_gx8002_clock_context.py": "c284b46e6a9420d813d5858c8bae0381e9871a42c3ff8ade1036c525bfdaaa36",
+    "build_gx8002_clock_module_source_fixed_candidate.py": "861a5c79cbbd4a1ab9af83b307fed3d42c6c7672008d4e7a54d70d5b9bd3f21e"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "377 preflight and 4180 complete decoded path cases, independent ID-based transition model, authenticated immutable table and decoded nested helpers.",
+    "Lookup private output and register snapshot are marshalled across helper frames. Physical transition timing and concurrent table/MMIO mutation remain unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

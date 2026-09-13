@@ -1,0 +1,37 @@
+{
+  "elf_sha256": "41b5b476bb5f7e913b80fbf7b20ca52e57ec2563a5ac71b377051f03eeedcf21",
+  "source_sha256": "873d2fe5935fbc97efeb5fb737d9c079171cf856a0f1f390cfe3f834a7a85139",
+  "command": [
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_float_sign.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-float-sign/sign.o"
+  ],
+  "sections": [
+    {
+      "name": "copy",
+      "offset": 302052,
+      "bytes": 22
+    },
+    {
+      "name": "absolute",
+      "offset": 302084,
+      "bytes": 12
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Complete semantic C sign helpers; decoded comparison and firmware integration pending."
+  ]
+}

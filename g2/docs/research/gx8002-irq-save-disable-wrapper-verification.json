@@ -1,0 +1,24 @@
+{
+  "candidate": {
+    "source_sha256": "472a42875fe57688a148a6cef771e025e2968d78d02c916e695ae3fdd4c9edf1",
+    "compiled_bytes": 8,
+    "compiled_sha256": "79944f92abc76be191302a109cbff51b162ae4e2fdcbbf65e348a2b3abb7bdda",
+    "elf_sha256": "a252b0538cf505b0cfe367f7ae96f53b71f758120ff0d72f374b66b329f4535f",
+    "package_offset": 95560,
+    "runtime_address": 268588340,
+    "callee_address": 268588300,
+    "source_admitted": false,
+    "limits": [
+      "Byte-exact source wrapper; original public function name not established. Registered callee binding and composed execution pending."
+    ]
+  },
+  "callee_elf_sha256": "9b40b9e9b08ce7d8fe05b7f39e4ae9e198b4aebed92e1761f84fb85a23cab96c",
+  "cases": 25,
+  "disable_executions": 800,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded wrapper forwards once to authenticated source callee; callee and32 disable bodies execute in separate frames with independent saved-bank/VIC-write oracle.",
+    "No shared physical stack or concurrent register mutation modeled; original public wrapper name unresolved. Registry admission pending."
+  ]
+}

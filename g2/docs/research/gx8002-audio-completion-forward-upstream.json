@@ -1,0 +1,36 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "dependencies": [
+    {
+      "path": "lvp/common/snpu_engine/lvp_kws.c",
+      "blob": "efdce5bc8f3773e8c42d828a9bd72430ad3b43c7",
+      "sha256": "65de0e35ea000c6d4dd2b940a2c75ca0aa58a81cbf9b5eaebc22ba240f852732"
+    },
+    {
+      "path": "include/driver/gx_snpu.h",
+      "blob": "a2a911b22f7f379d9f489d959519125d5cad3a52",
+      "sha256": "72aa01a5cc6519da63dff4afa7163c7d3a3045d203998e691768dfa189643a46"
+    },
+    {
+      "path": "LICENSE",
+      "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+      "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+    }
+  ],
+  "upstream_function": "_SnpuCallback",
+  "source_lines": [
+    53,
+    63
+  ],
+  "configuration": "CONFIG_LVP_ENABLE_KEYWORD_RECOGNITION enabled; CONFIG_ENABLE_NPU_CYCLE_STATISTIC disabled",
+  "arguments": [
+    "int module_id",
+    "GX_SNPU_STATE state",
+    "void *priv"
+  ],
+  "slot_owner": "open_cfw_gx8002_snpu_callback in runtime_gx8002_stream_shutdown.c",
+  "slot_address": 537033552,
+  "limits": [
+    "Semantic match to recovered wrapper; binary match and source-header integration not yet qualified. Prior count label was inaccurate: third ABI word is private_data pointer."
+  ]
+}

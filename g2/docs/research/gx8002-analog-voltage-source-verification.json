@@ -1,0 +1,91 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_analog_voltage",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 32,
+      "compiled_sha256": "a7dd3f2f9a0d1397433cf3086ea3d11631735a3a4f280968ecf34735edef377c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_analog_voltage",
+          "package_offset": 91908,
+          "bytes": 32,
+          "sha256": "1821e235b0f31e6c05e200cbc729d31394f18e843d259df67fc9baa6d07b936c",
+          "region": "image_a_sram"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "dependency_headers": {
+        "arch/soc/grus/include/base_addr.h": {
+          "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+          "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+        },
+        "include/driver/gx_clock/gx_clock_v2.h": {
+          "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+          "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+        }
+      },
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+        "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+        "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+        "role": "board_call_site_reference_only; implementation recovered from stock"
+      },
+      "bindings": {},
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "header": {
+        "path": "include/driver/gx_analog/gx_ldo.h",
+        "blob": "272fedd48f83cb6f767bb2e7af5eeaa287e37db1",
+        "sha256": "8d70862fa7d3c1d0d2022254fb21f800f95abe7a23f849938b373a433e0c3700"
+      },
+      "source_sha256": "72b248fd9ee814af28e7f227cd3c278d0fe259782df44ab1bee420bb46b82433",
+      "symbol": "open_cfw_gx8002_analog_voltage",
+      "section_name": ".text",
+      "package_offset": 91908,
+      "compiled_bytes": 32,
+      "compiled_sha256": "a7dd3f2f9a0d1397433cf3086ea3d11631735a3a4f280968ecf34735edef377c",
+      "stock_envelope_bytes": 32,
+      "stock_sha256": "1821e235b0f31e6c05e200cbc729d31394f18e843d259df67fc9baa6d07b936c",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+      ]
+    },
+    "cases": 34452,
+    "source_admitted": false,
+    "limits": [
+      "Restricted decoded leaf interpreter; no whole-device or physical qualification.",
+      "All low-byte input patterns plus upper-bit and sentinel boundaries; not an exhaustive 32-bit proof."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_analog_voltage_source.py": "77fd7103b5c4d1e555ed20cbaecba8716ac6cc9cd3003901e99197a6f6282372",
+    "verify_gx8002_analog_voltage.py": "640a762d925b5e6acd9c070cc9ae1cf156372f2d4d4fb1688b06830fd9fe20d5",
+    "verify_gx8002_analog_ldo.py": "61c34c52680719247aeed734ee88a74af9f4b818b040573b9c06199e955dcd10",
+    "build_gx8002_analog_voltage_candidate.py": "e39631fbd7c77da78a58ddef8736cc43f34f52eb2eea67fa7488586bf70d5d81"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Restricted decoded leaf interpreter; no whole-device or physical qualification.",
+    "All low-byte input patterns plus upper-bit and sentinel boundaries; not an exhaustive 32-bit proof.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

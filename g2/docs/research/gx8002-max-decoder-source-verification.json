@@ -1,0 +1,64 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_max_decoder",
+      "section_name": ".text",
+      "compiled_bytes": 72,
+      "compiled_sha256": "8dabe06be41c3abdc6bc8a164fa5af0c91831831186eb5507046342e3baa6435",
+      "stock_occurrences": [
+        {
+          "symbol": "LvpDoMaxDecoder",
+          "package_offset": 73348,
+          "bytes": 76,
+          "sha256": "009a003e03c8f77a155ad7630b3fa53e5289174e2ab8a6c3e0c76ce75d8eba4b",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "source_sha256": "c9b1f96704effe7a364db8f57c97f80c449cf7798f09e0d08d5653c34ea3e7c8",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "compiled_bytes": 72,
+      "compiled_sha256": "8dabe06be41c3abdc6bc8a164fa5af0c91831831186eb5507046342e3baa6435",
+      "stock_envelope_bytes": 76,
+      "stock_sha256": "009a003e03c8f77a155ad7630b3fa53e5289174e2ab8a6c3e0c76ce75d8eba4b",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Stock return gating differs from upstream; needs decoded helper mutation and ABI qualification."
+      ]
+    },
+    "decoded_cases": 810,
+    "source_admitted": false,
+    "limits": [
+      "Independent control-flow/state oracle; helpers modeled, including synthetic nonzero scorer return to exercise stock minor-pass gate. No nested source-helper or hardware qualification."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_max_decoder_source.py": "a5b3dbebf3b8ba16d8698d96b1e156a7046e6fd2716233faf39cddce829b3bf0",
+    "verify_gx8002_max_decoder.py": "b721c9e6a5ef4b7c4e351e8f11dee578f0ce4973e86c69602cb5cf8dee515d8c",
+    "execute_gx8002_max_decoder.py": "8e3eaedc4a8994f7c530891737135ce2d62f4fbbca7473ffa844c0da682d449d",
+    "build_gx8002_max_decoder_candidate.py": "0b5ecb06af74a322955ade81dffd33cacda397301273df3b1f1c5c5d9eb50999",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Independent control-flow/state oracle; helpers modeled, including synthetic nonzero scorer return to exercise stock minor-pass gate. No nested source-helper or hardware qualification.",
+    "Experimental hybrid admission only; complete source-only firmware remains unfinished."
+  ]
+}

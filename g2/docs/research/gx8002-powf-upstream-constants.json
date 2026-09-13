@@ -1,0 +1,157 @@
+{
+  "upstream": {
+    "repository": "https://chromium.googlesource.com/native_client/nacl-newlib/",
+    "commit": "4aa696c8d6294897411cf78cae87f7f4680e9687",
+    "files": [
+      {
+        "path": "newlib/libm/math/ef_pow.c",
+        "sha256": "251150c064bf01ee0f2dd19f3e79ac13c87b745f7758f99efd405e17cab96be1"
+      },
+      {
+        "path": "newlib/libm/common/sf_scalbn.c",
+        "sha256": "33f7c9d2a93c7335192b940798c2510db666fb9026f2bab20114fb960673cdcb"
+      },
+      {
+        "path": "newlib/libm/math/ef_sqrt.c",
+        "sha256": "7b2cbf7ac9b50853f10a29a9ccc43a8d0d41b91b590c3a7cf751b19fa6c96be1"
+      },
+      {
+        "path": "newlib/libm/common/fdlibm.h",
+        "sha256": "1bba6249d4b2503f3c4f9dd75dc17520a75a070c19f44e1c3d6461a198ea2b22"
+      }
+    ]
+  },
+  "matches": [
+    {
+      "constant": "L1",
+      "bits": "0x3f19999a",
+      "stock_offsets": [
+        "0x48ec8"
+      ]
+    },
+    {
+      "constant": "L2",
+      "bits": "0x3edb6db7",
+      "stock_offsets": [
+        "0x48ec4"
+      ]
+    },
+    {
+      "constant": "L3",
+      "bits": "0x3eaaaaab",
+      "stock_offsets": [
+        "0x48ec0",
+        "0x49094"
+      ]
+    },
+    {
+      "constant": "L4",
+      "bits": "0x3e8ba305",
+      "stock_offsets": [
+        "0x48ebc"
+      ]
+    },
+    {
+      "constant": "L5",
+      "bits": "0x3e6c3255",
+      "stock_offsets": [
+        "0x48eb4"
+      ]
+    },
+    {
+      "constant": "L6",
+      "bits": "0x3e53f142",
+      "stock_offsets": [
+        "0x48eb8"
+      ]
+    },
+    {
+      "constant": "P1",
+      "bits": "0x3e2aaaab",
+      "stock_offsets": [
+        "0x48ef4"
+      ]
+    },
+    {
+      "constant": "P3",
+      "bits": "0x388ab355",
+      "stock_offsets": [
+        "0x48eec"
+      ]
+    },
+    {
+      "constant": "P5",
+      "bits": "0x3331bb4c",
+      "stock_offsets": [
+        "0x48ee8"
+      ]
+    },
+    {
+      "constant": "lg2",
+      "bits": "0x3f317218",
+      "stock_offsets": [
+        "0x48ee0"
+      ]
+    },
+    {
+      "constant": "lg2_h",
+      "bits": "0x3f317200",
+      "stock_offsets": [
+        "0x48ed8"
+      ]
+    },
+    {
+      "constant": "lg2_l",
+      "bits": "0x35bfbe8c",
+      "stock_offsets": [
+        "0x48edc"
+      ]
+    },
+    {
+      "constant": "cp",
+      "bits": "0x3f76384f",
+      "stock_offsets": [
+        "0x48ed4"
+      ]
+    },
+    {
+      "constant": "cp_h",
+      "bits": "0x3f763800",
+      "stock_offsets": [
+        "0x48ecc"
+      ]
+    },
+    {
+      "constant": "cp_l",
+      "bits": "0x369dc3a0",
+      "stock_offsets": [
+        "0x48ed0"
+      ]
+    },
+    {
+      "constant": "ivln2",
+      "bits": "0x3fb8aa3b",
+      "stock_offsets": [
+        "0x4909c"
+      ]
+    },
+    {
+      "constant": "ivln2_h",
+      "bits": "0x3fb8aa00",
+      "stock_offsets": [
+        "0x49098"
+      ]
+    },
+    {
+      "constant": "ivln2_l",
+      "bits": "0x36eca570",
+      "stock_offsets": [
+        "0x490a0"
+      ]
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Literal matches support algorithm lineage, not exact version or full semantic equivalence."
+  ]
+}

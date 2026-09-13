@@ -1,0 +1,91 @@
+{
+  "integration_report_sha256": "7411e520a548abaee7dff5d1ccee617fe378b8808c36082c27a5e0b24713f1a4",
+  "firmware_sha256": "3bdf0fcd76ca9cdcc0c8e8548860ec17fdf16dd7e52437c09e5fd3af5df39869",
+  "callers": [
+    {
+      "function": "shift",
+      "pc": 285918,
+      "entry": 293376,
+      "width": 4
+    },
+    {
+      "function": "shift",
+      "pc": 288146,
+      "entry": 293376,
+      "width": 4
+    },
+    {
+      "function": "shift",
+      "pc": 288208,
+      "entry": 293376,
+      "width": 4
+    },
+    {
+      "function": "maxabs",
+      "pc": 285724,
+      "entry": 293492,
+      "width": 4
+    },
+    {
+      "function": "maxabs",
+      "pc": 288008,
+      "entry": 293492,
+      "width": 4
+    },
+    {
+      "function": "copy",
+      "pc": 279572,
+      "entry": 293568,
+      "width": 4
+    },
+    {
+      "function": "copy",
+      "pc": 279652,
+      "entry": 293568,
+      "width": 4
+    },
+    {
+      "function": "copy",
+      "pc": 287966,
+      "entry": 293568,
+      "width": 4
+    },
+    {
+      "function": "copy",
+      "pc": 288292,
+      "entry": 293568,
+      "width": 4
+    },
+    {
+      "function": "fill",
+      "pc": 285966,
+      "entry": 293612,
+      "width": 4
+    },
+    {
+      "function": "fill",
+      "pc": 286372,
+      "entry": 293612,
+      "width": 4
+    },
+    {
+      "function": "fill",
+      "pc": 286456,
+      "entry": 293612,
+      "width": 4
+    },
+    {
+      "function": "fill",
+      "pc": 287950,
+      "entry": 293612,
+      "width": 4
+    }
+  ],
+  "copy_body_offset": 314840,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "All direct callers found by bounded stock Q15 reference scans retain their exact branch bytes and target source entries in the composed container.",
+    "Computed references and other address mappings remain outside this census; this does not prove global control-flow closure."
+  ]
+}

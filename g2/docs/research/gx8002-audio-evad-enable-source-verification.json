@@ -1,0 +1,67 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_audio_evad_enable",
+      "compiled_bytes": 228,
+      "compiled_sha256": "5cad33fefbb8e9fc0ec0e7ad216ab3aa12279943e9e6424a0aad7011792848cc",
+      "section_name": ".text",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_audio_evad_enable",
+          "package_offset": 55688,
+          "bytes": 228,
+          "sha256": "390af959aef59f992980f75301f33439c2d07a693f371c96099a5216bdf07e3c",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+        "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+        "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+        "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+        "section": ".text.gx_audio_in_set_evad_enable",
+        "relocations": [],
+        "role": "symbol_evidence_only"
+      },
+      "bindings": {},
+      "source_sha256": "f263b1fd9d54196fc98e5cd1cd8ed5565804174a0b5b55f20d5946b57c94c5e2",
+      "symbol": "open_cfw_gx8002_audio_evad_enable",
+      "compiled_bytes": 228,
+      "compiled_sha256": "5cad33fefbb8e9fc0ec0e7ad216ab3aa12279943e9e6424a0aad7011792848cc",
+      "package_offset": 55688,
+      "stock_envelope_bytes": 228,
+      "stock_sha256": "390af959aef59f992980f75301f33439c2d07a693f371c96099a5216bdf07e3c",
+      "fits": true,
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 4500,
+    "persistent_busy_cases": 1125,
+    "invalid_source_repair_cases": 16,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Valid selectors compared against decoded stock and independent ordered word-MMIO oracle. Persistent busy checked as bounded polling prefix, not physical timing proof. Invalid selectors intentionally return -1 without MMIO instead of stock null access. Hardware energy detection unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_evad_enable.py": "bd3523d09ff9dc232d281df6ad1470a7c8fd3726552b3e759bc3f000bbd44e92",
+    "verify_gx8002_audio_evad_enable.py": "aada55d44e266f2dbc029ef1e6f58b3c8b100f863c8d534c3dfb200670a69c2b",
+    "verify_gx8002_audio_evad_enable_source.py": "bc6be90460ad24a6bc0553e41ab7250d5a6e28df7a3e349b34549151095ddbbb",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "execute_gx8002_audio_evad_enable.py": "b650550214ce0fba5d496f5f624e948b265f0093b5c89fa88abbfd653217ec6d"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Valid selectors compared against decoded stock and independent ordered word-MMIO oracle. Persistent busy checked as bounded polling prefix, not physical timing proof. Invalid selectors intentionally return -1 without MMIO instead of stock null access. Hardware energy detection unqualified."
+  ]
+}

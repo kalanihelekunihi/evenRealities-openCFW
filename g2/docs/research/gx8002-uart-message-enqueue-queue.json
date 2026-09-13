@@ -1,0 +1,61 @@
+{
+  "queue_dependency": {
+    "symbol": "LvpQueuePut",
+    "section_name": ".sram_text",
+    "stock_occurrences": [
+      {
+        "symbol": "LvpQueuePut",
+        "package_offset": 98764,
+        "bytes": 90,
+        "sha256": "f267c3301f1725624a009ffb30bf92f2dee4c0f708918a078c9f1270e94e173a",
+        "region": "image_a_sram_text"
+      }
+    ],
+    "upstream_files": [
+      {
+        "path": "lvp/common/lvp_queue.c",
+        "git_blob": "575d43d27ebd9ca3655a199363eba4968fd8155f",
+        "sha256": "ed8fba34e8658c0c7d49868790a89dce7188b8c81fe0c04f68969de1670b5814"
+      },
+      {
+        "path": "lvp/common/lvp_queue.h",
+        "git_blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+        "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+      },
+      {
+        "path": "include/lvp_attr.h",
+        "git_blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+        "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+      }
+    ],
+    "compile_flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-ivopts"
+    ],
+    "cases": 2196,
+    "compiled_bytes": 86,
+    "compiled_sha256": "188dd2d5ff8fd5c96c2582c6483c1c589a1e6a6241fbb414cc231892ccae1c1c",
+    "exact_memory_trace_comparison": true,
+    "source_admitted": true,
+    "limits": [
+      "Finite valid queue states, no concurrent mutation or aliasing.",
+      "Not a full processor emulator; experimental same-entry placement; no hardware qualification."
+    ]
+  },
+  "enqueue_cases": 72,
+  "queue_executions": 216,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Source queue executes in translated separate memory; full after initial modeled nonfull check included. Physical concurrency, shared queue/packet aliasing and actual cache effects unqualified."
+  ]
+}

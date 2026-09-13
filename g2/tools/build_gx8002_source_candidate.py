@@ -49,7 +49,7 @@ from verify_gx8002_queue_source import verify as verify_queue
 from compare_gx8002_queue_get import verify_get
 from compare_gx8002_queue_put import verify_put
 from verify_gx8002_trigger_event import verify as verify_trigger
-from compare_gx8002_crc import verify as verify_crc
+from verify_gx8002_crc32_source import verify as verify_crc
 from verify_gx8002_uart_console import verify as verify_console
 from verify_gx8002_logging import formatter as verify_formatter, printf as verify_printf
 from verify_gx8002_fputc import verify as verify_fputc
@@ -106,6 +106,106 @@ from verify_gx8002_memset import verify as verify_memset
 from verify_gx8002_kws_reset import verify as verify_kws_reset
 from verify_gx8002_max_initialize import verify as verify_max_initialize
 from verify_gx8002_max_list import verify as verify_max_list
+from verify_gx8002_max_score_source import verify as verify_max_score_source
+from verify_gx8002_max_decoder_source import verify as verify_max_decoder_source
+from verify_gx8002_kws_strategy_source import verify as verify_kws_strategy_source
+from verify_gx8002_bionic_offsets import verify as verify_bionic_offsets
+from verify_gx8002_bionic_run_source import verify as verify_bionic_run_source
+from verify_gx8002_next_range_source import verify as verify_next_range_source
+from verify_gx8002_app_gpio_power import verify as verify_app_gpio_power
+from verify_gx8002_app_gpio_event_source import verify as verify_app_gpio_event_source
+from verify_gx8002_sample_app_init_source import verify as verify_sample_app_init_source
+from verify_gx8002_sample_event_source import verify as verify_sample_event_source
+from verify_gx8002_start_i2s_source import verify as verify_start_i2s_source
+from verify_gx8002_stop_i2s_source import verify as verify_stop_i2s_source
+from verify_gx8002_i2s_request_tick_source import verify as verify_i2s_request_tick_source
+from verify_gx8002_app_commands_source import verify as verify_app_commands_source
+from verify_gx8002_app_reply_source import verify as verify_app_reply_source
+from verify_gx8002_app_command_callback_persistent_source import verify as verify_app_callback_source
+from verify_gx8002_notification_setup_source import verify as verify_notification_setup_source
+from verify_gx8002_notification_stamp_source import verify as verify_notification_stamp_source
+from verify_gx8002_event_notify_source import verify as verify_event_notify_source
+from verify_gx8002_fpadd_parts_source import verify as verify_fpadd_parts_source
+from verify_gx8002_adddf3_source import verify as verify_adddf3_source
+from verify_gx8002_muldf3_fixed_source import verify as verify_muldf3_fixed_source
+from verify_gx8002_divdf3_fixed_source import verify as verify_divdf3_fixed_source
+from verify_gx8002_udivdi3_source import verify as verify_udivdi3_source
+from verify_gx8002_application_vectors_source import verify as verify_application_vectors_source
+from verify_gx8002_runtime_messages_source import verify as verify_runtime_messages_source
+from verify_gx8002_board_gain_data_source import verify as verify_board_gain_data_source
+from verify_gx8002_audio_board_control_source import verify as verify_audio_board_control_source
+from verify_gx8002_audio_board_storage_source import verify as verify_audio_board_storage_source
+from verify_gx8002_uart_descriptor_source import verify as verify_uart_descriptor_source
+from verify_gx8002_distance_noise_source import verify as verify_distance_noise_source
+from verify_gx8002_exception_source import verify as verify_exception_source
+from verify_gx8002_keyword_list_get_source import verify as verify_keyword_list_get_source
+from verify_gx8002_irq_save_disable_wrapper_source import verify as verify_irq_save_disable_wrapper_source
+from verify_gx8002_audio_api_labels_source import verify as verify_audio_api_labels_source
+from verify_gx8002_application_labels_source import verify as verify_application_labels_source
+from verify_gx8002_audio_mapping_tables_source import verify as verify_audio_mapping_tables_source
+from verify_gx8002_mode_descriptors_source import verify as verify_mode_descriptors_source
+from verify_gx8002_event_defaults_source import verify as verify_event_defaults_source
+from verify_gx8002_decoder_default_source import verify as verify_decoder_default_source
+from verify_gx8002_application_descriptor_source import verify as verify_application_descriptor_source
+from verify_gx8002_uart_header_defaults_source import verify as verify_uart_header_defaults_source
+from verify_gx8002_reply_defaults_source import verify as verify_reply_defaults_source
+from verify_gx8002_clock_module_dto_set_source import verify as verify_clock_module_dto_set_source
+from verify_gx8002_clock_module_divider_set_source import verify as verify_clock_module_divider_set_source
+from verify_gx8002_clock_module_query_source import verify as verify_clock_module_query_source
+from verify_gx8002_clock_module_source_fixed_source import verify as verify_clock_module_source_fixed_source
+from verify_gx8002_timer_dispatch_source import verify as verify_timer_dispatch_source
+from verify_gx8002_delay_source import verify as verify_delay_source
+from verify_gx8002_trim_state_source import verify as verify_trim_state_source
+from verify_gx8002_trim_clock_enable_source import verify as verify_trim_clock_enable_source
+from verify_gx8002_digital_voltage_source import verify as verify_digital_voltage_source
+from verify_gx8002_analog_voltage_source import verify as verify_analog_voltage_source
+from verify_gx8002_digital_control_source import verify as verify_digital_control_source
+from verify_gx8002_flash_read_api_source import verify as verify_flash_read_api_source
+from verify_gx8002_flash_type_api_source import verify as verify_flash_type_api_source
+from verify_gx8002_flash_probe_source import verify as verify_flash_probe_source
+from verify_gx8002_dcache_invalid_range_source import verify as verify_dcache_invalid_range_source
+from verify_gx8002_dcache_clean_invalid_range_source import verify as verify_dcache_clean_invalid_range_source
+from verify_gx8002_timer_initialize_source import verify as verify_timer_initialize_source
+from verify_gx8002_timer_channel_initialize_source import verify as verify_timer_channel_initialize_source
+from verify_gx8002_flash_info_api_source import verify as verify_flash_info_api_source
+from verify_gx8002_flash_otp_configuration_source import verify as verify_flash_otp_configuration_source
+from verify_gx8002_otp_lowpower_enter_source import verify as verify_otp_lowpower_enter_source
+from verify_gx8002_platform_read_source import verify as verify_platform_read_source
+from verify_gx8002_kws_pair_source import verify as verify_kws_pair_source
+from verify_gx8002_audio_record_source import verify as verify_audio_record_source
+from verify_gx8002_active_snpu_source import verify as verify_active_snpu_source
+from verify_gx8002_tws_tick_source import verify as verify_tws_tick_source
+from verify_gx8002_tws_standby_source import verify as verify_tws_standby_source
+from verify_gx8002_tws_audio_source import verify as verify_tws_audio_source
+from verify_gx8002_audio_irq_source import verify as verify_audio_irq_source
+from verify_gx8002_flash_otp_read_api_source import verify as verify_flash_otp_read_api_source
+from verify_gx8002_dcache_disable_upstream_source import verify as verify_dcache_disable_upstream_source
+from verify_gx8002_clock_init_source import verify as verify_clock_init_source
+from verify_gx8002_clock_switch_1m_source import verify as verify_clock_switch_1m_source
+from verify_gx8002_clock_gate_query_source import verify as verify_clock_gate_query_source
+from verify_gx8002_audio_lowpower_divider_source import verify as verify_audio_lowpower_divider_source
+from verify_gx8002_clock_lowpower_init_source import verify as verify_clock_lowpower_init_source
+from verify_gx8002_clock_time_ms_source import verify as verify_clock_time_ms_source
+from verify_gx8002_clock_time_us_source import verify as verify_clock_time_us_source
+from verify_gx8002_clock_pll_wait_source import verify as verify_clock_pll_wait_source
+from verify_gx8002_clock_pll_source import verify as verify_clock_pll_source
+from verify_gx8002_clock_source_select_source import verify as verify_clock_source_select_source
+from verify_gx8002_uart_transmit_dma_placement_source import verify as verify_uart_transmit_dma_placement_source
+from verify_gx8002_subdf3_source import verify as verify_subdf3_source
+from verify_gx8002_muldi3_source import verify as verify_muldi3_source
+from verify_gx8002_pack_double_source import verify as verify_pack_double_source
+from verify_gx8002_floatunsidf_source import verify as verify_floatunsidf_source
+from verify_gx8002_fixdfsi_source import verify as verify_fixdfsi_source
+from verify_gx8002_unpack_double_source import verify as verify_unpack_double_source
+from verify_gx8002_fpcmp_parts_source import verify as verify_fpcmp_parts_source
+from verify_gx8002_gedf2_source import verify as verify_gedf2_source
+from verify_gx8002_fixunsdfsi_source import verify as verify_fixunsdfsi_source
+from verify_gx8002_div64_source import verify as verify_div64_source
+from verify_gx8002_strtok_source import verify as verify_strtok_source
+from verify_gx8002_i2s_ack_source import verify as verify_i2s_ack_source
+from verify_gx8002_vad_notify_source import verify as verify_vad_notify_source
+from verify_gx8002_notification_poll_source import verify as verify_notification_poll_source
+from verify_gx8002_mic_buffer_source import verify as verify_mic_buffer_source
 from verify_gx8002_tws_shutdown import verify as verify_tws_shutdown
 from verify_gx8002_stream_shutdown import verify as verify_stream_shutdown
 from verify_gx8002_driver_exit import verify as verify_driver_exit
@@ -138,6 +238,48 @@ from verify_gx8002_gpio_initialize import verify as verify_gpio_initialize
 from verify_gx8002_device_list_init import verify as verify_device_list_init
 from verify_gx8002_spi_register_master import verify as verify_spi_register_master
 from verify_gx8002_dw_spi_cleanup import verify as verify_dw_spi_cleanup
+from verify_gx8002_dw_spi_setup import verify as verify_dw_spi_setup
+from verify_gx8002_analog_config_update_enable import verify as verify_analog_config_update_enable
+from verify_gx8002_irq_boot_stage2_enable import verify as verify_irq_boot_stage2_enable
+from verify_gx8002_uart_boot_stage2_diagnostics import verify as verify_uart_boot_stage2_diagnostics
+from verify_gx8002_stage2_libc import verify as verify_stage2_libc
+from verify_gx8002_strncmp import verify as verify_strncmp
+from verify_gx8002_main_strlen import verify as verify_main_strlen
+from verify_gx8002_memmove_source import verify as verify_memmove_source
+from verify_gx8002_kws_flash_load_source import verify as verify_kws_flash_load_source
+from verify_gx8002_kws_initialize import verify as verify_kws_initialize
+from verify_gx8002_audio_input_standby_source import verify as verify_audio_input_standby_source
+from verify_gx8002_power_initialize_source import verify as verify_power_initialize_source
+from verify_gx8002_power_locks_source import verify as verify_power_locks_source
+from verify_gx8002_power_lock_control_source import verify as verify_power_lock_control_source
+from verify_gx8002_multiboot_switch_source import verify as verify_multiboot_switch_source
+from verify_gx8002_uart_message_start_source import verify as verify_uart_message_start_source
+from verify_gx8002_uart_message_body_source import verify as verify_uart_message_body_source
+from verify_gx8002_uart_body_done_source import verify as verify_uart_body_done_source
+from verify_gx8002_uart_receive_body_done_source import verify as verify_uart_receive_body_done_source
+from verify_gx8002_uart_message_done_source import verify as verify_uart_message_done_source
+from verify_gx8002_uart_message_initialize_source import verify as verify_uart_message_initialize_source
+from verify_gx8002_uart_message_enqueue_source import verify as verify_uart_message_enqueue_source
+from verify_gx8002_uart_registration_source import verify as verify_uart_registration_source
+from verify_gx8002_uart_receive_callback_source import verify as verify_uart_receive_callback_source
+from verify_gx8002_uart_send_callback_source import verify as verify_uart_send_callback_source
+from verify_gx8002_uart_receive_body_source import verify as verify_uart_receive_body_source
+from verify_gx8002_uart_message_power_source import verify as verify_uart_message_power_source
+from verify_gx8002_power_suspend_source import verify as verify_power_suspend_source
+from verify_gx8002_lvp_system_initialize_source import verify as verify_lvp_system_initialize_source
+from verify_gx8002_audio_input_env_noise_source import verify as verify_audio_input_env_noise_source
+from verify_gx8002_audio_input_query_vad_source import verify as verify_audio_input_query_vad_source
+from verify_gx8002_audio_input_init_source import verify as verify_audio_input_init_source
+from verify_gx8002_audio_input_state import verify as verify_audio_input_state
+from verify_gx8002_audio_input_config_source import verify as verify_audio_input_config_source
+from verify_gx8002_audio_input_output_source import verify as verify_audio_input_output_source
+from verify_gx8002_audio_input_buffers_source import verify as verify_audio_input_buffers_source
+from verify_gx8002_buffer_metadata import verify as verify_buffer_metadata
+from verify_gx8002_mic_frame import verify as verify_mic_frame
+from verify_gx8002_context_acquire import verify as verify_context_acquire
+from verify_gx8002_logfbank_index import verify as verify_logfbank_index
+from verify_gx8002_buffer_accessors import verify as verify_buffer_accessors
+from verify_gx8002_buffer_initialize_source import verify as verify_buffer_initialize_source
 from verify_gx8002_dw_spi_irq import verify as verify_dw_spi_irq
 from verify_gx8002_dw_spi_probe import verify as verify_dw_spi_probe
 from verify_gx8002_dw_spi_quick_transfer import verify as verify_dw_spi_quick_transfer
@@ -152,7 +294,80 @@ from verify_gx8002_rtc_set_tick import verify as verify_rtc_set_tick
 from verify_gx8002_rtc_error import verify as verify_rtc_error
 from verify_gx8002_rtc_init_source import verify as verify_rtc_init_source
 from verify_gx8002_dma_clear_source import verify as verify_dma_clear_source
+from verify_gx8002_uart_receive_dma_source import verify as verify_uart_receive_dma_source
+from verify_gx8002_dma_transfer_source import verify as verify_dma_transfer_source
+from verify_gx8002_uart_transmit_buffer_source import verify as verify_uart_transmit_buffer_source
+from verify_gx8002_uart_receive_buffer_source import verify as verify_uart_receive_buffer_source
 from verify_gx8002_uart_receive_control_source import verify as verify_uart_receive_control_source
+from verify_gx8002_uart_transmit_control_source import verify as verify_uart_transmit_control_source
+from verify_gx8002_uart_fifo_depth_source import verify as verify_uart_fifo_depth_source
+from verify_gx8002_uart_read_source import verify as verify_uart_read_source
+from verify_gx8002_uart_write_source import verify as verify_uart_write_source
+from verify_gx8002_uart_receive_byte_source import verify as verify_uart_receive_byte_source
+from verify_gx8002_uart_initialize_source import verify as verify_uart_initialize_source
+from verify_gx8002_uart_configure_source import verify as verify_uart_configure_source
+from verify_gx8002_uart_interrupt_source import verify as verify_uart_interrupt_source
+from verify_gx8002_dma_abort_source import verify as verify_dma_abort_source
+from verify_gx8002_uart_abort_source import verify as verify_uart_abort_source
+from verify_gx8002_console_initialize_source import verify as verify_console_initialize_source
+from verify_gx8002_cache_initialize_source import verify as verify_cache_initialize_source
+from verify_gx8002_pcm_channel_setting_source import verify as verify_pcm_channel_setting_source
+from verify_gx8002_audio_input_sadc_source import verify as verify_audio_input_sadc_source
+from verify_gx8002_audio_input_pdm_source import verify as verify_audio_input_pdm_source
+from verify_gx8002_audio_input_i2s_source import verify as verify_audio_input_i2s_source
+from verify_gx8002_audio_input_channel_source import verify as verify_audio_input_channel_source
+from verify_gx8002_audio_output_pcm_source import verify as verify_audio_output_pcm_source
+from verify_gx8002_audio_output_logfbank_source import verify as verify_audio_output_logfbank_source
+from verify_gx8002_audio_output_spectrum_source import verify as verify_audio_output_spectrum_source
+from verify_gx8002_audio_output_i2s_source import verify as verify_audio_output_i2s_source
+from verify_gx8002_audio_pga_gain_source import verify as verify_audio_pga_gain_source
+from verify_gx8002_audio_dc_enable_source import verify as verify_audio_dc_enable_source
+from verify_gx8002_audio_rough_gain_source import verify as verify_audio_rough_gain_source
+from verify_gx8002_audio_evad_enable_source import verify as verify_audio_evad_enable_source
+from verify_gx8002_audio_evad_threshold_source import verify as verify_audio_evad_threshold_source
+from verify_gx8002_audio_logfbank_enable_source import verify as verify_audio_logfbank_enable_source
+from verify_gx8002_audio_fftvad_enable_source import verify as verify_audio_fftvad_enable_source
+from verify_gx8002_audio_fftvad_w_source import verify as verify_audio_fftvad_w_source
+from verify_gx8002_audio_fftvad_chipping_source import verify as verify_audio_fftvad_chipping_source
+from verify_gx8002_audio_fftvad_state_source import verify as verify_audio_fftvad_state_source
+from verify_gx8002_audio_interrupt_enable_source import verify as verify_audio_interrupt_enable_source
+from verify_gx8002_audio_initialize_source import verify as verify_audio_initialize_source
+from verify_gx8002_audio_channel_field_source import verify as verify_audio_channel_field_source
+from verify_gx8002_audio_output_bits_source import verify as verify_audio_output_bits_source
+from verify_gx8002_audio_output_free_source import verify as verify_audio_output_free_source
+from verify_gx8002_audio_output_push_frame_source import verify as verify_audio_output_push_frame_source
+from verify_gx8002_audio_output_config_buffer_source import verify as verify_audio_output_config_buffer_source
+from verify_gx8002_audio_output_config_pcm_source import verify as verify_audio_output_config_pcm_source
+from verify_gx8002_audio_output_set_channel_source import verify as verify_audio_output_set_channel_source
+from verify_gx8002_audio_output_alloc_playback_source import verify as verify_audio_output_alloc_playback_source
+from verify_gx8002_audio_output_hw_config_source import verify as verify_audio_output_hw_config_source
+from verify_gx8002_audio_output_handle_isr_source import verify as verify_audio_output_handle_isr_source
+from verify_gx8002_audio_output_drain_frame_source import verify as verify_audio_output_drain_frame_source
+from verify_gx8002_audio_output_init_source import verify as verify_audio_output_init_source
+from verify_gx8002_audio_output_volume_source import verify as verify_audio_output_volume_source
+from verify_gx8002_audio_output_route_source import verify as verify_audio_output_route_source
+from verify_gx8002_audio_output_dispatch_source import verify as verify_audio_output_dispatch_source
+from verify_gx8002_audio_output_public_init_source import verify as verify_audio_output_public_init_source
+from verify_gx8002_audio_output_public_alloc_source import verify as verify_audio_output_public_alloc_source
+from verify_gx8002_audio_output_public_free_source import verify as verify_audio_output_public_free_source
+from verify_gx8002_audio_output_public_buffer_source import verify as verify_audio_output_public_buffer_source
+from verify_gx8002_audio_output_public_pcm_source import verify as verify_audio_output_public_pcm_source
+from verify_gx8002_audio_output_public_cb_source import verify as verify_audio_output_public_cb_source
+from verify_gx8002_audio_output_public_frame_source import verify as verify_audio_output_public_frame_source
+from verify_gx8002_audio_output_public_db_source import verify as verify_audio_output_public_db_source
+from verify_gx8002_audio_output_public_channel_source import verify as verify_audio_output_public_channel_source
+from verify_gx8002_audio_output_public_exit_source import verify as verify_audio_output_public_exit_source
+from verify_gx8002_audio_output_suspend_source import verify as verify_audio_output_suspend_source
+from verify_gx8002_audio_output_resume_source import verify as verify_audio_output_resume_source
+from verify_gx8002_audio_output_exit_source import verify as verify_audio_output_exit_source
+from verify_gx8002_audio_output_callbacks_source import verify as verify_audio_output_callbacks_source
+from verify_gx8002_audio_output_mute_source import verify as verify_audio_output_mute_source
+from verify_gx8002_audio_output_fixed_source import verify as verify_audio_output_fixed_source
+from verify_gx8002_audio_output_config_i2s_source import verify as verify_audio_output_config_i2s_source
+from verify_gx8002_audio_output_lodac_source import verify as verify_audio_output_lodac_source
+from verify_gx8002_audio_output_i2s_config_source import verify as verify_audio_output_i2s_config_source
+from verify_gx8002_audio_output_dac_source import verify as verify_audio_output_dac_source
+from verify_gx8002_audio_output_config_dac_source import verify as verify_audio_output_config_dac_source
 from verify_gx8002_uart_receive_complete_source import verify as verify_uart_receive_complete_source
 from verify_gx8002_uart_dma_burst_source import verify as verify_uart_dma_burst_source
 from verify_gx8002_dma_initialize_source import verify as verify_dma_initialize_source
@@ -176,6 +391,30 @@ from verify_gx8002_board_pin_error import verify as verify_board_pin_error
 from verify_gx8002_clock_divider import verify as verify_clock_divider
 from verify_gx8002_clock_frequency_source import verify as verify_clock_frequency
 from verify_gx8002_uart_transmit_complete import verify as verify_uart_transmit_complete
+from verify_gx8002_backup_uart_transmit_source import verify as verify_backup_uart_transmit
+from verify_gx8002_backup_uart_receive_source import verify as verify_backup_uart_receive
+from verify_gx8002_backup_dma_shared_source import verify as verify_backup_dma_shared
+from verify_gx8002_backup_preserve_memory_source import verify as verify_backup_preserve_memory
+from verify_gx8002_backup_status_source import verify as verify_backup_status
+from verify_gx8002_backup_clear_bss_source import verify as verify_backup_clear_bss
+from verify_gx8002_backup_irq_entry_source import verify as verify_backup_irq_entry
+from verify_gx8002_backup_dma_configure_source import verify as verify_backup_dma_configure
+from verify_gx8002_backup_dma_descriptors_source import verify as verify_backup_dma_descriptors
+from verify_gx8002_backup_dma_bus_address_source import verify as verify_backup_dma_bus_address
+from verify_gx8002_backup_dma_select_source import verify as verify_backup_dma_select
+from verify_gx8002_backup_irq_state_source import verify as verify_backup_irq_state
+from verify_gx8002_backup_clock_lookup_source import verify as verify_backup_clock_lookup
+from verify_gx8002_backup_platform_gate_source import verify as verify_backup_platform_gate
+from verify_gx8002_backup_clock_frequency_source import verify as verify_backup_clock_frequency
+from verify_gx8002_backup_platform_read_source import verify as verify_backup_platform_read
+from verify_gx8002_backup_rfft_source import verify as verify_backup_rfft
+from verify_gx8002_backup_cfft_source import verify as verify_backup_cfft
+from verify_gx8002_backup_request_irq_source import verify as verify_backup_request_irq
+from verify_gx8002_backup_dma_initialize_source import verify as verify_backup_dma_initialize
+from verify_gx8002_backup_dma_callback_source import verify as verify_backup_dma_callback
+from verify_gx8002_backup_dma_abort_source import verify as verify_backup_dma_abort
+from verify_gx8002_backup_dma_release_source import verify as verify_backup_dma_release
+from verify_gx8002_backup_dma_transfer_source import verify as verify_backup_dma_transfer
 from verify_gx8002_uart_flush import verify as verify_uart_flush
 from verify_gx8002_dma_release import verify as verify_dma_release
 from gx8002_source_tail_data import partition as partition_tail_data
@@ -257,6 +496,28 @@ def compose(stock, replacements):
         last = offset + size
     if last < len(stock):
         ownership.append({'offset': last, 'size': len(stock)-last, 'kind': 'retained_stock'})
+    # Rebuild image-A padding and trailer after executable replacements.
+    from generate_gx8002_image_a_tail import generate, PAD, CRC, XIP
+    tail = generate(output)
+    rebuilt_ownership = []
+    for item in ownership:
+        low, high = item['offset'], item['offset'] + item['size']
+        if high <= PAD or low >= XIP:
+            rebuilt_ownership.append(item)
+            continue
+        if item['kind'] != 'retained_stock':
+            raise ValueError('Image-A generated tail overlaps another source owner')
+        if low < PAD:
+            rebuilt_ownership.append({**item, 'size': PAD-low})
+        if high > XIP:
+            rebuilt_ownership.append({**item, 'offset': XIP, 'size': high-XIP})
+    output[PAD:XIP] = tail
+    rebuilt_ownership.extend([
+        {'offset': PAD, 'size': CRC-PAD, 'kind': 'generated_source_data',
+         'symbol': 'image_a_stage1_zero_padding', 'sha256': sha(tail[:CRC-PAD])},
+        {'offset': CRC, 'size': XIP-CRC, 'kind': 'generated_container_metadata',
+         'symbol': 'image_a_stage1_crc_and_xip_extent', 'sha256': sha(tail[CRC-PAD:])}])
+    ownership = sorted(rebuilt_ownership, key=lambda item: item['offset'])
     # Generate the complete UART header from reviewed fields, updating stage-2 sum.
     stage2 = output[0x2850:0x958c]
     uart = struct.pack('<HBBHBB', 0x8002, 1, 1, 0, 0, 0)
@@ -272,7 +533,7 @@ def compose(stock, replacements):
     validate_codec(bytes(output))
     if struct.unpack_from('>I', output, 68)[0] != sum(output[0x2850:0x958c]) & 0xffffffff:
         raise ValueError('UART stage-2 checksum does not cover rebuilt code')
-    parse_main_image(output[main_record['offset']:])  # BINH structure and stage-1 CRCs unchanged.
+    parse_main_image(output[main_record['offset']:], verify_stock_identity=False)  # Validate regenerated BINH CRC/structure; application literals may be recompiled.
     for item in ownership:
         low, high = item['offset'], item['offset'] + item['size']
         if item['kind'] == 'retained_stock' and output[low:high] != stock[low:high]:
@@ -294,7 +555,7 @@ def build(prefix, sdk, output):
         ('icache', verify_icache, 'runtime_gx8002_icache_enable.o', 'gx8002-icache-source-verification.json'),
         ('i2s', verify_i2s, 'runtime_gx8002_i2s.o', 'gx8002-i2s-source-verification.json'),
         ('vad', verify_vad, 'runtime_gx8002_vad_curves.o', 'gx8002-vad-source-verification.json'),
-        ('crc', verify_crc, 'crc.elf', 'gx8002-crc-target-comparison.json'),
+        ('crc', verify_crc, 'crc32.elf', 'gx8002-crc32-source-verification.json'),
         ('console', verify_console, 'console.elf', 'gx8002-uart-console-verification.json'),
         ('formatter', verify_formatter, 'formatter.elf', 'gx8002-formatter-verification.json'),
         ('printf', verify_printf, 'printf.elf', 'gx8002-printf-verification.json'),
@@ -357,6 +618,106 @@ def build(prefix, sdk, output):
         ('kws-reset', verify_kws_reset, 'kws-reset.elf', 'gx8002-kws-reset-verification.json'),
         ('max-initialize', verify_max_initialize, 'max-initialize.elf', 'gx8002-max-initialize-verification.json'),
         ('max-list', verify_max_list, 'max-list.elf', 'gx8002-max-list-verification.json'),
+        ('max-score', verify_max_score_source, 'max-score.elf', 'gx8002-max-score-source-verification.json'),
+        ('max-decoder', verify_max_decoder_source, 'max-decoder.elf', 'gx8002-max-decoder-source-verification.json'),
+        ('kws-strategy', verify_kws_strategy_source, 'kws-strategy.elf', 'gx8002-kws-strategy-source-verification.json'),
+        ('bionic-offsets', verify_bionic_offsets, 'offsets.elf', 'gx8002-bionic-offsets-verification.json'),
+        ('bionic-run', verify_bionic_run_source, 'bionic-run.elf', 'gx8002-bionic-run-source-verification.json'),
+        ('next-range', verify_next_range_source, 'next-range.elf', 'gx8002-next-range-source-verification.json'),
+        ('app-gpio-power', verify_app_gpio_power, 'gpio-power.elf', 'gx8002-app-gpio-power-verification.json'),
+        ('app-gpio-event', verify_app_gpio_event_source, 'app-gpio-event.elf', 'gx8002-app-gpio-event-source-verification.json'),
+        ('sample-app-init', verify_sample_app_init_source, 'sample-app-init.elf', 'gx8002-sample-app-init-source-verification.json'),
+        ('sample-event', verify_sample_event_source, 'sample-event.elf', 'gx8002-sample-event-source-verification.json'),
+        ('start-i2s', verify_start_i2s_source, 'start-i2s.elf', 'gx8002-start-i2s-source-verification.json'),
+        ('stop-i2s', verify_stop_i2s_source, 'stop-i2s.elf', 'gx8002-stop-i2s-source-verification.json'),
+        ('i2s-request-tick', verify_i2s_request_tick_source, 'i2s-request-tick.elf', 'gx8002-i2s-request-tick-source-verification.json'),
+        ('app-commands', verify_app_commands_source, 'app-commands.elf', 'gx8002-app-commands-source-verification.json'),
+        ('app-reply', verify_app_reply_source, 'app-reply.elf', 'gx8002-app-reply-source-verification.json'),
+        ('app-command-callback-persistent', verify_app_callback_source, 'app-command-callback-persistent.elf', 'gx8002-app-command-callback-persistent-source-verification.json'),
+        ('notification-setup', verify_notification_setup_source, 'notification-setup.elf', 'gx8002-notification-setup-source-verification.json'),
+        ('notification-stamp', verify_notification_stamp_source, 'notification-stamp.elf', 'gx8002-notification-stamp-source-verification.json'),
+        ('event-notify', verify_event_notify_source, 'event-notify.elf', 'gx8002-event-notify-source-verification.json'),
+        ('fpadd-parts', verify_fpadd_parts_source, 'fpadd-parts.elf', 'gx8002-fpadd-parts-source-verification.json'),
+        ('adddf3', verify_adddf3_source, 'adddf3.elf', 'gx8002-adddf3-source-verification.json'),
+        ('uart-transmit-dma-placement', verify_uart_transmit_dma_placement_source, 'uart-transmit-dma-placement.elf', 'gx8002-uart-transmit-dma-placement-source-verification.json'),
+        ('clock-source-select', verify_clock_source_select_source, 'clock-source-select.elf', 'gx8002-clock-source-select-source-verification.json'),
+        ('clock-module-dto-set', verify_clock_module_dto_set_source, 'clock-module-dto-set.elf', 'gx8002-clock-module-dto-set-source-verification.json'),
+        ('clock-module-divider-set', verify_clock_module_divider_set_source, 'clock-module-divider-set.elf', 'gx8002-clock-module-divider-set-source-verification.json'),
+        ('clock-module-query', verify_clock_module_query_source, 'clock-module-query.elf', 'gx8002-clock-module-query-source-verification.json'),
+        ('clock-module-source-fixed', verify_clock_module_source_fixed_source, 'clock-module-source-fixed.elf', 'gx8002-clock-module-source-fixed-source-verification.json'),
+        ('timer-dispatch', verify_timer_dispatch_source, 'timer-dispatch.elf', 'gx8002-timer-dispatch-source-verification.json'),
+        ('delay', verify_delay_source, 'delay.elf', 'gx8002-delay-source-verification.json'),
+        ('trim-state', verify_trim_state_source, 'trim-state.elf', 'gx8002-trim-state-source-verification.json'),
+        ('trim-clock-enable', verify_trim_clock_enable_source, 'trim-clock-enable.elf', 'gx8002-trim-clock-enable-source-verification.json'),
+        ('digital-voltage', verify_digital_voltage_source, 'digital-voltage.elf', 'gx8002-digital-voltage-source-verification.json'),
+        ('analog-voltage', verify_analog_voltage_source, 'analog-voltage.elf', 'gx8002-analog-voltage-source-verification.json'),
+        ('digital-control', verify_digital_control_source, 'digital-control.elf', 'gx8002-digital-control-source-verification.json'),
+        ('flash-read-api', verify_flash_read_api_source, 'flash-read-api.elf', 'gx8002-flash-read-api-source-verification.json'),
+        ('flash-type-api', verify_flash_type_api_source, 'flash-type-api.elf', 'gx8002-flash-type-api-source-verification.json'),
+        ('flash-probe', verify_flash_probe_source, 'flash-probe.elf', 'gx8002-flash-probe-source-verification.json'),
+        ('dcache-invalid-range', verify_dcache_invalid_range_source, 'dcache-invalid-range.elf', 'gx8002-dcache-invalid-range-source-verification.json'),
+        ('dcache-clean-invalid-range', verify_dcache_clean_invalid_range_source, 'dcache-clean-invalid-range.elf', 'gx8002-dcache-clean-invalid-range-source-verification.json'),
+        ('timer-initialize', verify_timer_initialize_source, 'timer-initialize.elf', 'gx8002-timer-initialize-source-verification.json'),
+        ('timer-channel-initialize', verify_timer_channel_initialize_source, 'timer-channel-initialize.elf', 'gx8002-timer-channel-initialize-source-verification.json'),
+        ('flash-info-api', verify_flash_info_api_source, 'flash-info-api.elf', 'gx8002-flash-info-api-source-verification.json'),
+        ('flash-otp-configuration', verify_flash_otp_configuration_source, 'flash-otp-configuration.elf', 'gx8002-flash-otp-configuration-source-verification.json'),
+        ('otp-lowpower-enter', verify_otp_lowpower_enter_source, 'otp-lowpower-enter.elf', 'gx8002-otp-lowpower-enter-source-verification.json'),
+        ('tws-tick', verify_tws_tick_source, 'tws-tick.elf', 'gx8002-tws-tick-source-verification.json'),
+        ('audio-irq', verify_audio_irq_source, 'irq.elf', 'gx8002-audio-irq-source-verification.json'),
+        ('tws-audio', verify_tws_audio_source, 'audio.elf', 'gx8002-tws-audio-source-verification.json'),
+        ('tws-standby', verify_tws_standby_source, 'standby.elf', 'gx8002-tws-standby-source-verification.json'),
+        ('active-snpu', verify_active_snpu_source, 'active-snpu.elf', 'gx8002-active-snpu-source-verification.json'),
+        ('audio-record', verify_audio_record_source, 'audio-record.elf', 'gx8002-audio-record-source-verification.json'),
+        ('kws-pair', verify_kws_pair_source, 'kws-pair.elf', 'gx8002-kws-pair-source-verification.json'),
+        ('platform-read', verify_platform_read_source, 'platform-read.elf', 'gx8002-platform-read-source-verification.json'),
+        ('flash-otp-read-api', verify_flash_otp_read_api_source, 'flash-otp-read-api.elf', 'gx8002-flash-otp-read-api-source-verification.json'),
+        ('dcache-disable-upstream', verify_dcache_disable_upstream_source, 'dcache-disable-upstream.elf', 'gx8002-dcache-disable-upstream-source-verification.json'),
+        ('clock-init', verify_clock_init_source, 'clock-init.elf', 'gx8002-clock-init-source-verification.json'),
+        ('clock-switch-1m', verify_clock_switch_1m_source, 'clock-switch-1m.elf', 'gx8002-clock-switch-1m-source-verification.json'),
+        ('clock-gate-query-fixed', verify_clock_gate_query_source, 'clock-gate-query-fixed.elf', 'gx8002-clock-gate-query-fixed-source-verification.json'),
+        ('audio-lowpower-divider', verify_audio_lowpower_divider_source, 'audio-lowpower-divider.elf', 'gx8002-audio-lowpower-divider-source-verification.json'),
+        ('clock-lowpower-init-shared', verify_clock_lowpower_init_source, 'clock-lowpower-init-shared.elf', 'gx8002-clock-lowpower-init-shared-source-verification.json'),
+        ('clock-time-ms', verify_clock_time_ms_source, 'clock-time-ms.elf', 'gx8002-clock-time-ms-source-verification.json'),
+        ('clock-time-us', verify_clock_time_us_source, 'clock-time-us.elf', 'gx8002-clock-time-us-source-verification.json'),
+        ('clock-pll-wait', verify_clock_pll_wait_source, 'clock-pll-wait.elf', 'gx8002-clock-pll-wait-source-verification.json'),
+        ('clock-pll', verify_clock_pll_source, 'clock-pll.elf', 'gx8002-clock-pll-source-verification.json'),
+        ('audio-board-control', verify_audio_board_control_source, 'audio-board-control.elf', 'gx8002-audio-board-control-source-verification.json'),
+        ('audio-board-storage', verify_audio_board_storage_source, 'storage.elf', 'gx8002-audio-board-storage-source-verification.json'),
+        ('uart-descriptors', verify_uart_descriptor_source, 'descriptors.elf', 'gx8002-uart-descriptor-source-verification.json'),
+        ('distance-noise', verify_distance_noise_source, 'noise.elf', 'gx8002-distance-noise-source-verification.json'),
+        ('exception', verify_exception_source, 'exception.elf', 'gx8002-exception-source-verification.json'),
+        ('keyword-list-get', verify_keyword_list_get_source, 'get.elf', 'gx8002-keyword-list-get-source-verification.json'),
+        ('irq-save-disable-wrapper', verify_irq_save_disable_wrapper_source, 'wrapper.elf', 'gx8002-irq-save-disable-wrapper-source-verification.json'),
+        ('audio-api-labels', verify_audio_api_labels_source, 'labels.elf', 'gx8002-audio-api-labels-source-verification.json'),
+        ('application-labels', verify_application_labels_source, 'labels.elf', 'gx8002-application-labels-source-verification.json'),
+        ('audio-mapping-tables', verify_audio_mapping_tables_source, 'tables.elf', 'gx8002-audio-mapping-tables-source-verification.json'),
+        ('mode-descriptors', verify_mode_descriptors_source, 'descriptors.elf', 'gx8002-mode-descriptors-source-verification.json'),
+        ('event-defaults', verify_event_defaults_source, 'defaults.elf', 'gx8002-event-defaults-source-verification.json'),
+        ('decoder-default', verify_decoder_default_source, 'defaults.elf', 'gx8002-decoder-default-source-verification.json'),
+        ('application-descriptor', verify_application_descriptor_source, 'descriptor.elf', 'gx8002-application-descriptor-source-verification.json'),
+        ('uart-header-defaults', verify_uart_header_defaults_source, 'defaults.elf', 'gx8002-uart-header-defaults-source-verification.json'),
+        ('reply-defaults', verify_reply_defaults_source, 'defaults.elf', 'gx8002-reply-defaults-source-verification.json'),
+        ('board-gain-data', verify_board_gain_data_source, 'board-gain-data.elf', 'gx8002-board-gain-data-source-verification.json'),
+        ('runtime-messages', verify_runtime_messages_source, 'runtime-messages.elf', 'gx8002-runtime-messages-source-verification.json'),
+        ('application-vectors', verify_application_vectors_source, 'application-vectors.elf', 'gx8002-application-vectors-source-verification.json'),
+        ('udivdi3', verify_udivdi3_source, 'udivdi3.elf', 'gx8002-udivdi3-source-verification.json'),
+        ('divdf3-fixed', verify_divdf3_fixed_source, 'divdf3-fixed.elf', 'gx8002-divdf3-fixed-source-verification.json'),
+        ('muldf3-fixed', verify_muldf3_fixed_source, 'muldf3-fixed.elf', 'gx8002-muldf3-fixed-source-verification.json'),
+        ('subdf3', verify_subdf3_source, 'subdf3.elf', 'gx8002-subdf3-source-verification.json'),
+        ('muldi3', verify_muldi3_source, 'muldi3.elf', 'gx8002-muldi3-source-verification.json'),
+        ('pack-double', verify_pack_double_source, 'pack-double.elf', 'gx8002-pack-double-source-verification.json'),
+        ('floatunsidf', verify_floatunsidf_source, 'floatunsidf.elf', 'gx8002-floatunsidf-source-verification.json'),
+        ('fixdfsi', verify_fixdfsi_source, 'fixdfsi.elf', 'gx8002-fixdfsi-source-verification.json'),
+        ('unpack-double', verify_unpack_double_source, 'unpack-double.elf', 'gx8002-unpack-double-source-verification.json'),
+        ('fpcmp-parts', verify_fpcmp_parts_source, 'fpcmp-parts.elf', 'gx8002-fpcmp-parts-source-verification.json'),
+        ('gedf2', verify_gedf2_source, 'gedf2.elf', 'gx8002-gedf2-source-verification.json'),
+        ('fixunsdfsi', verify_fixunsdfsi_source, 'fixunsdfsi.elf', 'gx8002-fixunsdfsi-source-verification.json'),
+        ('div64', verify_div64_source, 'div64.elf', 'gx8002-div64-source-verification.json'),
+        ('strtok', verify_strtok_source, 'strtok.elf', 'gx8002-strtok-source-verification.json'),
+        ('i2s-ack', verify_i2s_ack_source, 'i2s-ack.elf', 'gx8002-i2s-ack-source-verification.json'),
+        ('vad-notify', verify_vad_notify_source, 'vad-notify.elf', 'gx8002-vad-notify-source-verification.json'),
+        ('notification-poll', verify_notification_poll_source, 'notification-poll.elf', 'gx8002-notification-poll-source-verification.json'),
+        ('mic-buffer', verify_mic_buffer_source, 'mic-buffer.elf', 'gx8002-mic-buffer-source-verification.json'),
         ('tws-shutdown', verify_tws_shutdown, 'tws-shutdown.elf', 'gx8002-tws-shutdown-verification.json'),
         ('stream-shutdown', verify_stream_shutdown, 'stream-shutdown.elf', 'gx8002-stream-shutdown-verification.json'),
         ('driver-exit', verify_driver_exit, 'driver-exit.elf', 'gx8002-driver-exit-verification.json'),
@@ -391,6 +752,48 @@ def build(prefix, sdk, output):
         ('device-list-init', verify_device_list_init, 'device-list-init.elf', 'gx8002-device-list-init-verification.json'),
         ('spi-register-master', verify_spi_register_master, 'spi-register-master.elf', 'gx8002-spi-register-master-verification.json'),
         ('dw-spi-cleanup', verify_dw_spi_cleanup, 'dw-spi-cleanup.elf', 'gx8002-dw-spi-cleanup-verification.json'),
+        ('dw-spi-setup', verify_dw_spi_setup, 'dw-spi-setup.elf', 'gx8002-dw-spi-setup-verification.json'),
+        ('analog-config-update-enable', verify_analog_config_update_enable, 'analog-config-update-enable.o', 'gx8002-analog-config-update-enable-verification.json'),
+        ('irq-boot-stage2-enable', verify_irq_boot_stage2_enable, 'irq.o', 'gx8002-irq-boot-stage2-enable-verification.json'),
+        ('uart-boot-stage2-diagnostics', verify_uart_boot_stage2_diagnostics, 'uart-boot-stage2-diagnostics.o', 'gx8002-uart-boot-stage2-diagnostics-verification.json'),
+        ('stage2-libc', verify_stage2_libc, 'stage2_libc.o', 'gx8002-stage2-libc-verification.json'),
+        ('strncmp', verify_strncmp, 'strncmp.o', 'gx8002-strncmp-verification.json'),
+        ('main-strlen', verify_main_strlen, 'main-strlen.o', 'gx8002-main-strlen-verification.json'),
+        ('memmove', verify_memmove_source, 'memmove.elf', 'gx8002-memmove-source-verification.json'),
+        ('kws-flash-load', verify_kws_flash_load_source, 'loader.elf', 'gx8002-kws-flash-load-source-verification.json'),
+        ('kws-initialize', verify_kws_initialize, 'init.elf', 'gx8002-kws-initialize-verification.json'),
+        ('audio-input-standby', verify_audio_input_standby_source, 'buffers.elf', 'gx8002-audio-input-standby-source-verification.json'),
+        ('power-initialize', verify_power_initialize_source, 'buffers.elf', 'gx8002-power-initialize-source-verification.json'),
+        ('power-locks', verify_power_locks_source, 'buffers.elf', 'gx8002-power-locks-source-verification.json'),
+        ('power-lock-control', verify_power_lock_control_source, 'buffers.elf', 'gx8002-power-lock-control-source-verification.json'),
+        ('power-suspend', verify_power_suspend_source, 'buffers.elf', 'gx8002-power-suspend-source-verification.json'),
+        ('uart-receive-body-done', verify_uart_receive_body_done_source, 'buffers.elf', 'gx8002-uart-receive-body-done-source-verification.json'),
+        ('uart-message-done', verify_uart_message_done_source, 'callback.elf', 'gx8002-uart-message-done-source-verification.json'),
+        ('uart-message-initialize', verify_uart_message_initialize_source, 'callback.elf', 'gx8002-uart-message-initialize-source-verification.json'),
+        ('uart-message-enqueue', verify_uart_message_enqueue_source, 'callback.elf', 'gx8002-uart-message-enqueue-source-verification.json'),
+        ('uart-registration', verify_uart_registration_source, 'callback.elf', 'gx8002-uart-registration-source-verification.json'),
+        ('uart-receive-callback', verify_uart_receive_callback_source, 'callback.elf', 'gx8002-uart-receive-callback-source-verification.json'),
+        ('uart-send-callback', verify_uart_send_callback_source, 'callback.elf', 'gx8002-uart-send-callback-source-verification.json'),
+        ('uart-receive-body', verify_uart_receive_body_source, 'body.elf', 'gx8002-uart-receive-body-source-verification.json'),
+        ('uart-message-power', verify_uart_message_power_source, 'buffers.elf', 'gx8002-uart-message-power-source-verification.json'),
+        ('uart-body-done', verify_uart_body_done_source, 'buffers.elf', 'gx8002-uart-body-done-source-verification.json'),
+        ('uart-message-body', verify_uart_message_body_source, 'buffers.elf', 'gx8002-uart-message-body-source-verification.json'),
+        ('uart-message-start', verify_uart_message_start_source, 'buffers.elf', 'gx8002-uart-message-start-source-verification.json'),
+        ('multiboot-switch', verify_multiboot_switch_source, 'buffers.elf', 'gx8002-multiboot-switch-source-verification.json'),
+        ('lvp-system-initialize', verify_lvp_system_initialize_source, 'buffers.elf', 'gx8002-lvp-system-initialize-source-verification.json'),
+        ('audio-input-env-noise', verify_audio_input_env_noise_source, 'noise.elf', 'gx8002-audio-input-env-noise-source-verification.json'),
+        ('audio-input-query-vad', verify_audio_input_query_vad_source, 'query.elf', 'gx8002-audio-input-query-vad-source-verification.json'),
+        ('audio-input-init', verify_audio_input_init_source, 'init.elf', 'gx8002-audio-input-init-source-verification.json'),
+        ('audio-input-state', verify_audio_input_state, 'state.elf', 'gx8002-audio-input-state-verification.json'),
+        ('audio-input-config', verify_audio_input_config_source, 'config.elf', 'gx8002-audio-input-config-source-verification.json'),
+        ('audio-input-output', verify_audio_input_output_source, 'output.elf', 'gx8002-audio-input-output-source-verification.json'),
+        ('audio-input-buffers', verify_audio_input_buffers_source, 'buffers.elf', 'gx8002-audio-input-buffers-source-verification.json'),
+        ('buffer-metadata', verify_buffer_metadata, 'metadata.elf', 'gx8002-buffer-metadata-verification.json'),
+        ('mic-frame', verify_mic_frame, 'index.elf', 'gx8002-mic-frame-verification.json'),
+        ('context-acquire', verify_context_acquire, 'context.elf', 'gx8002-context-acquire-verification.json'),
+        ('logfbank-index', verify_logfbank_index, 'index.elf', 'gx8002-logfbank-index-verification.json'),
+        ('buffer-accessors', verify_buffer_accessors, 'accessors.elf', 'gx8002-buffer-accessors-verification.json'),
+        ('buffer-initialize', verify_buffer_initialize_source, 'buffer.elf', 'gx8002-buffer-initialize-source-verification.json'),
         ('dw-spi-irq', verify_dw_spi_irq, 'dw-spi-irq.elf', 'gx8002-dw-spi-irq-verification.json'),
         ('dw-spi-probe', verify_dw_spi_probe, 'dw-spi-probe.elf', 'gx8002-dw-spi-probe-verification.json'),
         ('dw-spi-quick-transfer', verify_dw_spi_quick_transfer, 'dw-spi-quick-transfer.elf', 'gx8002-dw-spi-quick-transfer-verification.json'),
@@ -417,6 +820,30 @@ def build(prefix, sdk, output):
         ('clock-divider', verify_clock_divider, 'clock-divider.elf', 'gx8002-clock-divider-verification.json'),
         ('clock-frequency', verify_clock_frequency, 'clock-frequency.elf', 'gx8002-clock-frequency-source-verification.json'),
         ('uart-transmit-complete', verify_uart_transmit_complete, 'complete.elf', 'gx8002-uart-transmit-complete-verification.json'),
+        ('backup-uart-transmit', verify_backup_uart_transmit, 'transmit.elf', 'gx8002-backup-uart-transmit-source-verification.json'),
+        ('backup-uart-receive', verify_backup_uart_receive, 'receive.elf', 'gx8002-backup-uart-receive-source-verification.json'),
+        ('backup-dma-shared', verify_backup_dma_shared, 'pair.elf', 'gx8002-backup-dma-shared-source-verification.json'),
+        ('backup-preserve-memory', verify_backup_preserve_memory, 'predicate.elf', 'gx8002-backup-preserve-memory-source-verification.json'),
+        ('backup-status', verify_backup_status, 'status.elf', 'gx8002-backup-status-source-verification.json'),
+        ('backup-clear-bss', verify_backup_clear_bss, 'clear.elf', 'gx8002-backup-clear-bss-source-verification.json'),
+        ('backup-irq-entry', verify_backup_irq_entry, 'entry.elf', 'gx8002-backup-irq-entry-source-verification.json'),
+        ('backup-dma-configure', verify_backup_dma_configure, 'configure.elf', 'gx8002-backup-dma-configure-source-verification.json'),
+        ('backup-dma-descriptors', verify_backup_dma_descriptors, 'descriptors.elf', 'gx8002-backup-dma-descriptors-source-verification.json'),
+        ('backup-dma-bus-address', verify_backup_dma_bus_address, 'bus_address.elf', 'gx8002-backup-dma-bus-address-source-verification.json'),
+        ('backup-dma-select', verify_backup_dma_select, 'select.elf', 'gx8002-backup-dma-select-source-verification.json'),
+        ('backup-irq-state', verify_backup_irq_state, 'state.elf', 'gx8002-backup-irq-state-source-verification.json'),
+        ('backup-clock-lookup', verify_backup_clock_lookup, 'tables.elf', 'gx8002-backup-clock-lookup-source-verification.json'),
+        ('backup-platform-gate', verify_backup_platform_gate, 'gate.elf', 'gx8002-backup-platform-gate-source-verification.json'),
+        ('backup-clock-frequency', verify_backup_clock_frequency, 'frequency.elf', 'gx8002-backup-clock-frequency-source-verification.json'),
+        ('backup-platform-read', verify_backup_platform_read, 'platform-read.elf', 'gx8002-backup-platform-read-source-verification.json'),
+        ('backup-rfft', verify_backup_rfft, 'rfft.elf', 'gx8002-backup-rfft-source-verification.json'),
+        ('backup-cfft', verify_backup_cfft, 'cfft.elf', 'gx8002-backup-cfft-source-verification.json'),
+        ('backup-request-irq', verify_backup_request_irq, 'request.elf', 'gx8002-backup-request-irq-source-verification.json'),
+        ('backup-dma-initialize', verify_backup_dma_initialize, 'initialize.elf', 'gx8002-backup-dma-initialize-source-verification.json'),
+        ('backup-dma-callback', verify_backup_dma_callback, 'callback.elf', 'gx8002-backup-dma-callback-source-verification.json'),
+        ('backup-dma-abort', verify_backup_dma_abort, 'abort.elf', 'gx8002-backup-dma-abort-source-verification.json'),
+        ('backup-dma-release', verify_backup_dma_release, 'release.elf', 'gx8002-backup-dma-release-source-verification.json'),
+        ('backup-dma-transfer', verify_backup_dma_transfer, 'transfer.elf', 'gx8002-backup-dma-transfer-source-verification.json'),
         ('uart-flush', verify_uart_flush, 'flush.elf', 'gx8002-uart-flush-verification.json'),
         ('dma-bus-address', verify_dma_bus_address_source, 'bus_address.elf', 'gx8002-dma-bus-address-source-verification.json'),
         ('dma-descriptors', verify_dma_descriptors_source, 'descriptors.elf', 'gx8002-dma-descriptors-source-verification.json'),
@@ -429,6 +856,79 @@ def build(prefix, sdk, output):
         ('uart-dma-burst', verify_uart_dma_burst_source, 'burst.elf', 'gx8002-uart-dma-burst-source-verification.json'),
         ('uart-receive-complete', verify_uart_receive_complete_source, 'complete.elf', 'gx8002-uart-receive-complete-source-verification.json'),
         ('uart-receive-control', verify_uart_receive_control_source, 'control.elf', 'gx8002-uart-receive-control-source-verification.json'),
+        ('uart-transmit-control', verify_uart_transmit_control_source, 'control.elf', 'gx8002-uart-transmit-control-source-verification.json'),
+        ('uart-fifo-depth', verify_uart_fifo_depth_source, 'fifo_depth.elf', 'gx8002-uart-fifo-depth-source-verification.json'),
+        ('uart-read', verify_uart_read_source, 'read.elf', 'gx8002-uart-read-source-verification.json'),
+        ('uart-write', verify_uart_write_source, 'write.elf', 'gx8002-uart-write-source-verification.json'),
+        ('uart-receive-byte', verify_uart_receive_byte_source, 'receive_byte.elf', 'gx8002-uart-receive-byte-source-verification.json'),
+        ('uart-initialize', verify_uart_initialize_source, 'initialize.elf', 'gx8002-uart-initialize-source-verification.json'),
+        ('uart-configure', verify_uart_configure_source, 'configure.elf', 'gx8002-uart-configure-source-verification.json'),
+        ('uart-interrupt', verify_uart_interrupt_source, 'interrupt.elf', 'gx8002-uart-interrupt-source-verification.json'),
+        ('dma-abort', verify_dma_abort_source, 'abort.elf', 'gx8002-dma-abort-source-verification.json'),
+        ('uart-abort', verify_uart_abort_source, 'control.elf', 'gx8002-uart-abort-source-verification.json'),
+        ('console-initialize', verify_console_initialize_source, 'initialize.elf', 'gx8002-console-initialize-source-verification.json'),
+        ('cache-initialize', verify_cache_initialize_source, 'initialize.elf', 'gx8002-cache-initialize-source-verification.json'),
+        ('pcm-channel-setting', verify_pcm_channel_setting_source, 'setting.elf', 'gx8002-pcm-channel-setting-source-verification.json'),
+        ('audio-input-sadc', verify_audio_input_sadc_source, 'sadc.elf', 'gx8002-audio-input-sadc-source-verification.json'),
+        ('audio-input-pdm', verify_audio_input_pdm_source, 'pdm.elf', 'gx8002-audio-input-pdm-source-verification.json'),
+        ('audio-input-i2s', verify_audio_input_i2s_source, 'i2s.elf', 'gx8002-audio-input-i2s-source-verification.json'),
+        ('audio-input-channel', verify_audio_input_channel_source, 'channel.elf', 'gx8002-audio-input-channel-source-verification.json'),
+        ('audio-output-pcm', verify_audio_output_pcm_source, 'pcm.elf', 'gx8002-audio-output-pcm-source-verification.json'),
+        ('audio-output-logfbank', verify_audio_output_logfbank_source, 'logfbank.elf', 'gx8002-audio-output-logfbank-source-verification.json'),
+        ('audio-output-spectrum', verify_audio_output_spectrum_source, 'spectrum.elf', 'gx8002-audio-output-spectrum-source-verification.json'),
+        ('audio-output-i2s', verify_audio_output_i2s_source, 'i2s.elf', 'gx8002-audio-output-i2s-source-verification.json'),
+        ('audio-pga-gain', verify_audio_pga_gain_source, 'gain.elf', 'gx8002-audio-pga-gain-source-verification.json'),
+        ('audio-dc-enable', verify_audio_dc_enable_source, 'gain.elf', 'gx8002-audio-dc-enable-source-verification.json'),
+        ('audio-rough-gain', verify_audio_rough_gain_source, 'gain.elf', 'gx8002-audio-rough-gain-source-verification.json'),
+        ('audio-evad-enable', verify_audio_evad_enable_source, 'gain.elf', 'gx8002-audio-evad-enable-source-verification.json'),
+        ('audio-evad-threshold', verify_audio_evad_threshold_source, 'gain.elf', 'gx8002-audio-evad-threshold-source-verification.json'),
+        ('audio-logfbank-enable', verify_audio_logfbank_enable_source, 'gain.elf', 'gx8002-audio-logfbank-enable-source-verification.json'),
+        ('audio-fftvad-enable', verify_audio_fftvad_enable_source, 'gain.elf', 'gx8002-audio-fftvad-enable-source-verification.json'),
+        ('audio-fftvad-w', verify_audio_fftvad_w_source, 'gain.elf', 'gx8002-audio-fftvad-w-source-verification.json'),
+        ('audio-fftvad-chipping', verify_audio_fftvad_chipping_source, 'gain.elf', 'gx8002-audio-fftvad-chipping-source-verification.json'),
+        ('audio-fftvad-state', verify_audio_fftvad_state_source, 'gain.elf', 'gx8002-audio-fftvad-state-source-verification.json'),
+        ('audio-interrupt-enable', verify_audio_interrupt_enable_source, 'gain.elf', 'gx8002-audio-interrupt-enable-source-verification.json'),
+        ('audio-initialize', verify_audio_initialize_source, 'gain.elf', 'gx8002-audio-initialize-source-verification.json'),
+        ('audio-channel-field', verify_audio_channel_field_source, 'field.elf', 'gx8002-audio-channel-field-source-verification.json'),
+        ('audio-output-bits', verify_audio_output_bits_source, 'bits.elf', 'gx8002-audio-output-bits-source-verification.json'),
+        ('audio-output-free', verify_audio_output_free_source, 'bits.elf', 'gx8002-audio-output-free-source-verification.json'),
+        ('audio-output-push-frame', verify_audio_output_push_frame_source, 'bits.elf', 'gx8002-audio-output-push-frame-source-verification.json'),
+        ('audio-output-config-buffer', verify_audio_output_config_buffer_source, 'bits.elf', 'gx8002-audio-output-config-buffer-source-verification.json'),
+        ('audio-output-config-pcm', verify_audio_output_config_pcm_source, 'bits.elf', 'gx8002-audio-output-config-pcm-source-verification.json'),
+        ('audio-output-set-channel', verify_audio_output_set_channel_source, 'bits.elf', 'gx8002-audio-output-set-channel-source-verification.json'),
+        ('audio-output-alloc-playback', verify_audio_output_alloc_playback_source, 'bits.elf', 'gx8002-audio-output-alloc-playback-source-verification.json'),
+        ('audio-output-hw-config', verify_audio_output_hw_config_source, 'bits.elf', 'gx8002-audio-output-hw-config-source-verification.json'),
+        ('audio-output-handle-isr', verify_audio_output_handle_isr_source, 'bits.elf', 'gx8002-audio-output-handle-isr-source-verification.json'),
+        ('audio-output-drain-frame', verify_audio_output_drain_frame_source, 'bits.elf', 'gx8002-audio-output-drain-frame-source-verification.json'),
+        ('audio-output-init', verify_audio_output_init_source, 'bits.elf', 'gx8002-audio-output-init-source-verification.json'),
+        ('audio-output-volume', verify_audio_output_volume_source, 'bits.elf', 'gx8002-audio-output-volume-source-verification.json'),
+        ('audio-output-route', verify_audio_output_route_source, 'bits.elf', 'gx8002-audio-output-route-source-verification.json'),
+        ('audio-output-dispatch', verify_audio_output_dispatch_source, 'bits.elf', 'gx8002-audio-output-dispatch-source-verification.json'),
+        ('audio-output-public-init', verify_audio_output_public_init_source, 'bits.elf', 'gx8002-audio-output-public-init-source-verification.json'),
+        ('audio-output-public-alloc', verify_audio_output_public_alloc_source, 'bits.elf', 'gx8002-audio-output-public-alloc-source-verification.json'),
+        ('audio-output-public-free', verify_audio_output_public_free_source, 'bits.elf', 'gx8002-audio-output-public-free-source-verification.json'),
+        ('audio-output-public-buffer', verify_audio_output_public_buffer_source, 'bits.elf', 'gx8002-audio-output-public-buffer-source-verification.json'),
+        ('audio-output-public-pcm', verify_audio_output_public_pcm_source, 'bits.elf', 'gx8002-audio-output-public-pcm-source-verification.json'),
+        ('audio-output-public-cb', verify_audio_output_public_cb_source, 'bits.elf', 'gx8002-audio-output-public-cb-source-verification.json'),
+        ('audio-output-public-frame', verify_audio_output_public_frame_source, 'bits.elf', 'gx8002-audio-output-public-frame-source-verification.json'),
+        ('audio-output-public-db', verify_audio_output_public_db_source, 'bits.elf', 'gx8002-audio-output-public-db-source-verification.json'),
+        ('audio-output-public-channel', verify_audio_output_public_channel_source, 'bits.elf', 'gx8002-audio-output-public-channel-source-verification.json'),
+        ('audio-output-public-exit', verify_audio_output_public_exit_source, 'bits.elf', 'gx8002-audio-output-public-exit-source-verification.json'),
+        ('audio-output-suspend', verify_audio_output_suspend_source, 'bits.elf', 'gx8002-audio-output-suspend-source-verification.json'),
+        ('audio-output-resume', verify_audio_output_resume_source, 'bits.elf', 'gx8002-audio-output-resume-source-verification.json'),
+        ('audio-output-exit', verify_audio_output_exit_source, 'bits.elf', 'gx8002-audio-output-exit-source-verification.json'),
+        ('audio-output-callbacks', verify_audio_output_callbacks_source, 'bits.elf', 'gx8002-audio-output-callbacks-source-verification.json'),
+        ('audio-output-mute', verify_audio_output_mute_source, 'bits.elf', 'gx8002-audio-output-mute-source-verification.json'),
+        ('audio-output-fixed', verify_audio_output_fixed_source, 'bits.elf', 'gx8002-audio-output-fixed-source-verification.json'),
+        ('audio-output-config-i2s', verify_audio_output_config_i2s_source, 'bits.elf', 'gx8002-audio-output-config-i2s-source-verification.json'),
+        ('audio-output-lodac', verify_audio_output_lodac_source, 'bits.elf', 'gx8002-audio-output-lodac-source-verification.json'),
+        ('audio-output-i2s-config', verify_audio_output_i2s_config_source, 'bits.elf', 'gx8002-audio-output-i2s-config-source-verification.json'),
+        ('audio-output-dac', verify_audio_output_dac_source, 'bits.elf', 'gx8002-audio-output-dac-source-verification.json'),
+        ('audio-output-config-dac', verify_audio_output_config_dac_source, 'bits.elf', 'gx8002-audio-output-config-dac-source-verification.json'),
+        ('uart-receive-buffer', verify_uart_receive_buffer_source, 'buffer.elf', 'gx8002-uart-receive-buffer-source-verification.json'),
+        ('uart-transmit-buffer', verify_uart_transmit_buffer_source, 'buffer.elf', 'gx8002-uart-transmit-buffer-source-verification.json'),
+        ('dma-transfer', verify_dma_transfer_source, 'transfer.elf', 'gx8002-dma-transfer-source-verification.json'),
+        ('uart-receive-dma', verify_uart_receive_dma_source, 'dma.elf', 'gx8002-uart-receive-dma-source-verification.json'),
         ('dma-clear', verify_dma_clear_source, 'clear.elf', 'gx8002-dma-clear-source-verification.json'),
         ('dma-release', verify_dma_release, 'release.elf', 'gx8002-dma-release-verification.json'),
         ('trigger', verify_trigger, 'setter.elf', 'gx8002-trigger-event-verification.json'),

@@ -1,0 +1,61 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_multiboot_switch",
+      "section_name": ".text.switch",
+      "package_offset": 69644,
+      "stock_envelope_bytes": 64,
+      "compiled_bytes": 64,
+      "compiled_sha256": "b1b81104eb319082be383aacbcc5cd96ac4ffdac100ac400cf9ae3a9a9ddada0",
+      "stock_sha256": "b1b81104eb319082be383aacbcc5cd96ac4ffdac100ac400cf9ae3a9a9ddada0",
+      "fits": true,
+      "exact_stock": true
+    },
+    {
+      "symbol": "open_cfw_gx8002_multiboot_first",
+      "section_name": ".rodata.first",
+      "package_offset": 83668,
+      "stock_envelope_bytes": 26,
+      "compiled_bytes": 26,
+      "compiled_sha256": "0a99ec3809fdcc5dd22a1113c412e5a178366b217b76ece13da3a71325a8e60f",
+      "stock_sha256": "0a99ec3809fdcc5dd22a1113c412e5a178366b217b76ece13da3a71325a8e60f",
+      "fits": true,
+      "exact_stock": true,
+      "ownership_kind": "generated_source_data"
+    },
+    {
+      "symbol": "open_cfw_gx8002_multiboot_second",
+      "section_name": ".rodata.second",
+      "package_offset": 83694,
+      "stock_envelope_bytes": 27,
+      "compiled_bytes": 27,
+      "compiled_sha256": "3e94481d299ea5ead240c92cd9a10153beb3fdf3efaf9533469b9b34c56cd02a",
+      "stock_sha256": "3e94481d299ea5ead240c92cd9a10153beb3fdf3efaf9533469b9b34c56cd02a",
+      "fits": true,
+      "exact_stock": true,
+      "ownership_kind": "generated_source_data"
+    }
+  ],
+  "source_sha256": "ee2803bf8a2ae638f04a528b898e8e6dd5558c3f2246bc0269a82a540f421fe4",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "upstream": {
+    "path": "lvp/common/lvp_system_init.c",
+    "blob": "e392be4ae0709c83112ceae936abe5b49a15d794",
+    "sha256": "225eca5bd3979cea79ad2be845231e22736650c98820de5a3d631d5a1de13833"
+  },
+  "source_admitted": false,
+  "limits": [
+    "Candidate only; decoded initialization and callback qualification pending."
+  ]
+}

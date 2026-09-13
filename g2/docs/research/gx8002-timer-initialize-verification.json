@@ -1,0 +1,66 @@
+{
+  "candidate": {
+    "dependency_headers": {
+      "arch/soc/grus/include/base_addr.h": {
+        "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+        "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+      },
+      "include/driver/gx_clock/gx_clock_v2.h": {
+        "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+        "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+      }
+    },
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "oracle": {
+      "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+      "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+      "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+      "role": "board_call_site_reference_only; implementation recovered from stock"
+    },
+    "bindings": {
+      "open_cfw_gx8002_clock_frequency": 268587536,
+      "gx_clock_set_module_enable": 268587136,
+      "memset": 270571980,
+      "gx_request_irq": 268588348,
+      "open_cfw_gx8002_timer_dispatch": 268589252,
+      "open_cfw_gx8002_timer_channel_initialize": 268588984,
+      "open_cfw_timer_slots": 537030020
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-shrink-wrap"
+    ],
+    "header": {
+      "path": "include/driver/gx_clock/gx_clock_v2.h",
+      "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+      "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+    },
+    "source_sha256": "f52bb7b38ac7988d3e98355d7fa74f8dabd93a6a5a5bfd21605436cdf1d76b80",
+    "symbol": "open_cfw_gx8002_timer_initialize",
+    "section_name": ".text",
+    "package_offset": 96252,
+    "compiled_bytes": 116,
+    "compiled_sha256": "a5e944a68afc2978922d4a29ad8161c2e4ae542aeef889c327082225fe02bc99",
+    "stock_envelope_bytes": 116,
+    "stock_sha256": "a5e944a68afc2978922d4a29ad8161c2e4ae542aeef889c327082225fe02bc99",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Byte-exact native build only. Decoded frequency-call, ordered timer MMIO, ABI and caller integration qualification remain pending. No hardware timer qualification."
+    ]
+  },
+  "decoded_cases": 4104,
+  "source_admitted": false,
+  "limits": [
+    "Decoded outer timer ordered MMIO, helper arguments and callee-saved ABI checked. All helper effects modeled; slot state clearing, dependency composition and hardware remain pending."
+  ]
+}

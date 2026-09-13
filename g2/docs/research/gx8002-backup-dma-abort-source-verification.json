@@ -1,0 +1,95 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_backup_dma_abort",
+      "section_name": ".text",
+      "compiled_bytes": 52,
+      "compiled_sha256": "0262ac8aba5bcdb979dadd9152fee6c93847b23092c5fe40659c8ebda9e35ffb",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_backup_dma_abort",
+          "package_offset": 251332,
+          "bytes": 52,
+          "sha256": "a4602e34a97eb1c31c44c9c83531804c315aeec31ccd9f8dc7f0833efe18f1ec",
+          "region": "image_b_sram_text"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "comparison": {
+      "candidate": {
+        "source_sha256": "3909afe9fcc8d113f61e7e5007497e5b07a2cf11ce1bcdca9ffa6b6582fa1bfe",
+        "compiled_bytes": 52,
+        "compiled_sha256": "0262ac8aba5bcdb979dadd9152fee6c93847b23092c5fe40659c8ebda9e35ffb",
+        "envelope_bytes": 52,
+        "fits": true,
+        "bindings": {
+          "open_cfw_gx8002_dma_state": 537056232,
+          "open_cfw_gx8002_dma_deallocate": 268454848
+        },
+        "source_admitted": false,
+        "limits": [
+          "Candidate only; decoded equivalence and placement pending."
+        ]
+      },
+      "decoded_cases": 288,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Defined shifts 0..31 checked; initialized hardware channels are 0/1. Helper effects modeled with caller-register clobbers; physical DMA cessation and concurrency unqualified."
+      ]
+    },
+    "loader": {
+      "candidate_elf_sha256": "e305ae0a6a15ed2bf25326d47fef2eaad7fd49c2a5b6f0695425ae0f3a78fe7d",
+      "candidate_image_sha256": "f0e7ce2acb918ce1af43eacbf39032c90847ee10a965b4b96bb7835f200e36b9",
+      "normal_loader_cases": 12,
+      "source_admitted": false,
+      "limits": [
+        "All 52 replacement bytes come from compiled C; no replacement tail fill.",
+        "External references and hardware remain unqualified."
+      ]
+    },
+    "references": {
+      "image_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "package_interval": [
+        251332,
+        251384
+      ],
+      "external_branches": [
+        {
+          "offset": 248682,
+          "target": 251332,
+          "entry": true
+        },
+        {
+          "offset": 248706,
+          "target": 251332,
+          "entry": true
+        }
+      ],
+      "external_pool_loads": [],
+      "runtime_word_matches": [],
+      "source_admitted": false,
+      "limits": [
+        "Linear decode and word census; computed references and nonstandard entry paths are not proven absent."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "build_gx8002_backup_dma_abort.py": "2ea5cd3fc47974b4df8767a5db4c20e7287250d9009553b2e8f2078d0a590f9b",
+    "verify_gx8002_backup_dma_abort.py": "8273e9e9f0f80a6a2c7c3c34ad95b6ae14452b0cdb116877a391aebdfe19eef9",
+    "verify_gx8002_backup_dma_abort_loader.py": "4af041f9402c7a690daa83fde6b7a78e0f5e0c897e542b29ced113328cf7e063",
+    "analyze_gx8002_backup_dma_abort_references.py": "af10c1bf1230230141ff4a4f2b5b0e23e3634c485ef92e62093c54bd257169b2",
+    "verify_gx8002_backup_dma_abort_source.py": "0ff9e379cb809af00c880350bf56e2b4dba51de49335ef2f71bf8da509610644",
+    "verify_gx8002_backup_memset_loader.py": "d1139f142813bf27d701424086d83dfb13c9bbbf1ef968e272368b9c7e65a405",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Single sampled device base, six ordered MMIO writes, then backup deallocation and zero return.",
+    "All 52 bytes come from compiled C with no replacement tail fill. Defined shifts checked; initialized channels are zero and one.",
+    "Deallocation helper effects modeled. Computed entries, physical DMA cessation and interrupt concurrency remain unqualified."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "original_source_sha256": "5ce76867a3d72eb26ca56d5419d00ed4d730071e0731df5b542c3b50f5b068a7",
+  "probes": [
+    {
+      "variant": "baseline",
+      "code_bytes": [
+        408,
+        356
+      ],
+      "source_sha256": "5ce76867a3d72eb26ca56d5419d00ed4d730071e0731df5b542c3b50f5b068a7"
+    },
+    {
+      "variant": "sat32_noinline",
+      "code_bytes": [
+        350,
+        354
+      ],
+      "source_sha256": "83ca01009ac4f3361ed02ddb7f8183d971342cdb831c8634fc7dd7f79322beb2"
+    },
+    {
+      "variant": "add_sat_noinline",
+      "code_bytes": [
+        320,
+        308
+      ],
+      "source_sha256": "a903df2da9c6b2d6ab35a0b73c3811eb1897f82de9ae2235ad7b2ffbf0059e2a"
+    }
+  ],
+  "limits": [
+    "Object-code size only; no source candidate modified and no behavior qualification."
+  ]
+}

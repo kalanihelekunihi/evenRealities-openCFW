@@ -1,0 +1,82 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_vad_notify",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 44,
+      "compiled_sha256": "cca3d3ef59e869cf08dab72ff4ab5c35347b0b64b531c9ac6385a2424876979e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_vad_notify",
+          "package_offset": 77096,
+          "bytes": 44,
+          "sha256": "cca3d3ef59e869cf08dab72ff4ab5c35347b0b64b531c9ac6385a2424876979e",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_vad_notify_diagnostic",
+      "section_name": ".rodata.diagnostic",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 19,
+      "compiled_sha256": "0890bb65caa6a1803f6775ba3a34e309d8b528572f704eab57333f6c14dc976e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_vad_notify_diagnostic",
+          "package_offset": 85632,
+          "bytes": 19,
+          "sha256": "0890bb65caa6a1803f6775ba3a34e309d8b528572f704eab57333f6c14dc976e",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "source_sha256": "f8b8f81abe4960fef3242b8d54f913dec4bfe0c456c79a6778b311a6f27b99fa",
+      "flags": [
+        "-Os",
+        "-fno-shrink-wrap",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "compiled_bytes": 44,
+      "compiled_sha256": "cca3d3ef59e869cf08dab72ff4ab5c35347b0b64b531c9ac6385a2424876979e",
+      "stock_envelope_bytes": 44,
+      "stock_sha256": "cca3d3ef59e869cf08dab72ff4ab5c35347b0b64b531c9ac6385a2424876979e",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Reply candidate only; behavior, ownership and ABI require qualification."
+      ]
+    },
+    "cases": 105,
+    "source_admitted": false,
+    "limits": [
+      "Original event preserved across clobbering helper and ignored results; integer ABI checked, void return unspecified. Nested behavior unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_vad_notify_source.py": "6ec364f0616366d883b2ebb557d572455f6d2f8df6fec630591cb515ccdaead5",
+    "verify_gx8002_vad_notify.py": "9a95f1669c64963b82f0c3193483829c1e4270764631a21faac927a7489b14e1",
+    "execute_gx8002_event_notify.py": "63755f509724082bd836ba859803fcc8a25f5bb0efbfb275c80bbbd989f657f6",
+    "build_gx8002_vad_notify.py": "92138ed80906bedaac8945485178921399ec1431eead537bc3ebaaf2a91a5d2f",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Original event preserved across clobbering helper and ignored results; integer ABI checked, void return unspecified. Nested behavior unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

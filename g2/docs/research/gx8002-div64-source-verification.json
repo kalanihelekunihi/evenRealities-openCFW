@@ -1,0 +1,75 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_div64",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 168,
+      "compiled_sha256": "8e60e4af0b187b56844967012fb454e36df2f1f87e0bba7e1f7cd7f9dd96530d",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_div64",
+          "package_offset": 77376,
+          "bytes": 168,
+          "sha256": "82045a5bbeb15e213a8b207c86019332ded66a417ac0539889b4d31c87667eb8",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "zero_divisor_cases": 5,
+    "candidate": {
+      "upstream_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "upstream_path": "base/src/div64.c",
+      "upstream_sha256": "e053e91b7b5f05e17f2b7589b089dc6c6b6e8caa58ca7dd3eec26dc70b32fb83",
+      "adapted_source_sha256": "e734d73cf0901e6bce95e3c8d7e0f0ddb0ae256a740c19b47353a7f99aa50274",
+      "adaptation": "Constrain output pointer to ABI r0 before final store",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "sections": [
+        {
+          "section": ".text",
+          "compiled_bytes": 168,
+          "envelope_bytes": 168,
+          "fits": true,
+          "byte_exact": false,
+          "compiled_sha256": "8e60e4af0b187b56844967012fb454e36df2f1f87e0bba7e1f7cd7f9dd96530d"
+        }
+      ],
+      "source_admitted": false,
+      "limits": [
+        "Pinned source candidate; decoded behavioral and ownership qualification outstanding."
+      ]
+    },
+    "cases": 1042,
+    "source_admitted": false,
+    "limits": [
+      "Positive divisors checked against Python arbitrary-precision divmod, complete memory and integer ABI; zero divisors reach decoded divide exception without writes; hardware exception delivery and timing unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_div64_source.py": "a59beabff5c36166fe4c4e69e9952534ec6114aaffd865d12897497361faa4e1",
+    "verify_gx8002_div64.py": "4e085b1b969df40cea9319cccbb5df2f20e0b7e3f49ad6cb2869883e7e17d1a6",
+    "execute_gx8002_div64.py": "d39c7c6f0a2a50f419e08a49c7c70fbde0b7b5417dafdf086a62ddf27ccee4a8",
+    "build_gx8002_div64.py": "c11db87e94a3ab7ae68fff91a4d640beb521710637d3d031351354f41d9a5c88",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Positive divisors checked against Python arbitrary-precision divmod, complete memory and integer ABI; zero divisors reach decoded divide exception without writes; hardware exception delivery and timing unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

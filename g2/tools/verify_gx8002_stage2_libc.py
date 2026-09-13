@@ -4,9 +4,7 @@
 
 Both the stock boot-stage-2 bytes and the compiled candidate are decoded and
 symbolically executed by the same restricted interpreter; each result is also
-checked against an independently computed Python oracle. strcmp only needs to
-match on sign/zero (the documented C contract), not the stock's exact -1/0/1
-encoding. This is a leaf-instruction interpreter, not a C-SKY system emulator
+checked against an independently computed Python oracle. strcmp must match the stock's exact -1/0/1 encoding. This is a leaf-instruction interpreter, not a C-SKY system emulator
 or hardware qualification.
 """
 import json
@@ -31,7 +29,7 @@ def _sign(n):
     return (n > 0) - (n < 0)
 
 
-def execute(code, entry, registers, memory, limit=20000):
+def execute(code, entry, registers, memory, limit=20000, preserved=tuple(range(4,32))):
     r = dict(registers)
     pc = entry
     condition = False
@@ -73,6 +71,14 @@ def execute(code, entry, registers, memory, limit=20000):
                 r[parts[0]] |= r[parts[1]]
             else:
                 r[parts[0]] = r[parts[1]] | r[parts[2]]
+        elif op == 'cmpnei':
+            condition = r[parts[0]] != int(parts[1],0)
+        elif op == 'mvc':
+            r[parts[0]] = int(condition)
+        elif op == 'asri':
+            value = r[parts[1]]
+            if value & 0x80000000: value -= 1 << 32
+            r[parts[0]] = (value >> int(parts[2],0)) & MASK
         elif op == 'cmpne':
             condition = r[parts[0]] != r[parts[1]]
         elif op == 'cmphs':
@@ -99,18 +105,20 @@ def execute(code, entry, registers, memory, limit=20000):
             reg, base, offset = m.groups()
             address = (r[base] + int(offset, 0)) & MASK
             if op == 'ld.b':
-                r[reg] = memory.get(address, 0)
+                r[reg] = memory[address]
             else:
-                r[reg] = int.from_bytes(bytes(memory.get(address + i, 0) for i in range(4)), 'little')
+                r[reg] = int.from_bytes(bytes(memory[address + i] for i in range(4)), 'little')
         elif op == 'ldbi.b':
             m = re.fullmatch(r'(r\d+), \((r\d+)\)', args)
             if not m:
                 raise ValueError('stage2 libc post-increment load operand ' + args)
             reg, base = m.groups()
             address = r[base] & MASK
-            r[reg] = memory.get(address, 0)
+            r[reg] = memory[address]
             r[base] = (r[base] + 1) & MASK
         elif op == 'rts':
+            if any(r[f'r{i}'] != registers[f'r{i}'] for i in preserved):
+                raise ValueError('Stage2 libc preserved register mismatch')
             return r['r0']
         else:
             raise ValueError('unhandled stage2 libc instruction ' + op)
@@ -192,7 +200,10 @@ def run_strchr(code, entry, s_bytes, base, target):
 
 
 def run_strlen(code, entry, s_bytes, base):
-    memory = {}
+    # Stock reads aligned words through the terminator; map only that final
+    # word explicitly. Candidate byte loads need no padding.
+    end = (base + len(s_bytes) + 3) & ~3
+    memory = {address: 0xa5 for address in range(base + len(s_bytes), end)}
     load_buffer(memory, base, s_bytes)
     r = base_registers()
     r['r0'] = base
@@ -271,7 +282,7 @@ def verify(prefix=None, sdk=None, output=None):
             want = expected_strcmp(a, b)
             stock_r = run_strcmp(stock, entries['open_cfw_gx8002_stage2_strcmp'][0], a, a_base, b, b_base)
             cand_r = run_strcmp(candidate['open_cfw_gx8002_stage2_strcmp'], 0, a, a_base, b, b_base)
-            if _sign(stock_r) != want or _sign(cand_r) != want:
+            if stock_r != (want & MASK) or cand_r != (want & MASK):
                 raise ValueError(('stage2 strcmp mismatch', a, b, stock_r, cand_r, want))
             cases['strcmp'] += 1
 
@@ -321,11 +332,11 @@ def verify(prefix=None, sdk=None, output=None):
         output.mkdir(parents=True, exist_ok=True)
         (output / 'stage2_libc.o').write_bytes(Path(evidence['object']).read_bytes())
 
-    return {'functions': evidence['functions'], 'cases': cases, 'total_cases': sum(cases.values()),
+    return {'build': evidence, 'verifier_sha256': sha(Path(__file__).read_bytes()), 'functions': evidence['functions'], 'cases': cases, 'total_cases': sum(cases.values()),
             'source_admitted': True, 'hardware_qualified': False,
             'limits': ['Decoded leaf-instruction execution against synthetic buffers at several base '
                        'alignments; boundary, embedded-0xff/0x00, and random strings up to 20 bytes. '
-                       'strcmp is checked for sign/zero agreement with the documented C contract, not '
+                       'strcmp is checked for exact agreement with '
                        'the stock -1/0/1 encoding. No hardware, MMIO, or timing qualification, and no '
                        'claim about any other occurrence of these symbols in the codec image.']}
 

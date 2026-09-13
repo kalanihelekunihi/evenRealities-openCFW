@@ -1,0 +1,64 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_audio_rough_gain",
+      "compiled_bytes": 80,
+      "compiled_sha256": "e790824b296b2c30dbd9ccdc03ccf743815423358ad634350ed2d764207e6200",
+      "section_name": ".text",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_audio_rough_gain",
+          "package_offset": 55608,
+          "bytes": 80,
+          "sha256": "4f97971c3adf190433424660eb1328ae68a2a0532a79c343d951fd0b3cada3c7",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+        "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+        "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+        "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+        "section": ".text.gx_audio_in_set_rough_gain",
+        "relocations": [],
+        "role": "symbol_evidence_only"
+      },
+      "bindings": {},
+      "source_sha256": "90360db027782b526e771eea4ace0df9c295adecc0e354a14f57a049b8a54896",
+      "symbol": "open_cfw_gx8002_audio_rough_gain",
+      "compiled_bytes": 80,
+      "compiled_sha256": "e790824b296b2c30dbd9ccdc03ccf743815423358ad634350ed2d764207e6200",
+      "package_offset": 55608,
+      "stock_envelope_bytes": 80,
+      "stock_sha256": "4f97971c3adf190433424660eb1328ae68a2a0532a79c343d951fd0b3cada3c7",
+      "fits": true,
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 8514,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Exact source selectors and no-op combinations, low-four-bit gain narrowing, ordered stereo writes and unrelated-bit preservation checked. MMIO modeled; physical gain response unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_rough_gain.py": "13cd7a6893076a86f91304b7e1b4d3e67d228ef33b9406437cc7d09b06985a12",
+    "verify_gx8002_audio_rough_gain.py": "55b54888c4965566812f6e10d5e618e5a0145ae0cfed13b283e54a055bd0dd65",
+    "verify_gx8002_audio_rough_gain_source.py": "9acc5a9fc1fa1030345f7f52907050674b93f42354d92f8e17b3726932234b59",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Pinned SDK source selectors and C bitfield layout checked against stock and independent ordered masks. Other selectors are no-ops; gain values truncate to four bits. Physical gain response unqualified."
+  ]
+}

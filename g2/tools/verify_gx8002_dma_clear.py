@@ -5,7 +5,7 @@ from build_gx8002_dma_clear import build,ROOT,IMAGE_SHA,sha,Elf32
 from verify_gx8002_memcpy_source import decode
 
 
-def execute(code,pc,channel,device):
+def execute(code,pc,channel,device,state_address=0x2002e93c):
     r={f'r{i}':0x98760000+i for i in range(32)};r.update(r0=channel);initial=r.copy();writes=[]
     for _ in range(10):
         op,args,width=code[pc];p=[x.strip() for x in args.split(',')]
@@ -19,7 +19,7 @@ def execute(code,pc,channel,device):
             reg,base,offset=m.groups();off=r[offset.split()[0]]<<2 if '<<' in offset else int(offset,0)
             address=(r[base]+off)&0xffffffff
             if op=='ld.w':
-                if address!=0x2002e93c:raise ValueError('Clear state read')
+                if address!=state_address:raise ValueError('Clear state read')
                 r[reg]=device;writes.append(('read',address,device))
             else:writes.append(('write',address,r[reg]))
         elif op=='rts':

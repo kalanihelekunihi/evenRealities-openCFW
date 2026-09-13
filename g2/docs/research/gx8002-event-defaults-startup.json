@@ -1,0 +1,49 @@
+{
+  "candidate": {
+    "source_sha256": "ef60ebd62b6d2bf4270b0f27467615dbbd92cbf906d2a42b65acf85332da8404",
+    "elf_sha256": "3379227933962dfc504e9f44fcaca876534022d5e82a60af5304508045cadd4b",
+    "package_offset": 101700,
+    "runtime_address": 537029936,
+    "bytes": 8,
+    "compiled_sha256": "3bdcf6187bab53fc6e18b7f3e8ea4a666f06f545460189157c6f1ef1e5d85ebc",
+    "pending_alias": 537029940,
+    "source_admitted": false,
+    "limits": [
+      "Source-defined invalid prior VAD sentinel and initially pending byte compile exactly; three tail bytes are compiler-initialized struct padding.",
+      "Consumer execution, shared-field ownership and startup qualification remain pending. No opaque array or binary extraction used to define source."
+    ]
+  },
+  "checked_artifacts": 382,
+  "references": [
+    {
+      "kind": "sample-event",
+      "symbol": "open_cfw_gx8002_event_state",
+      "elf_sha256": "ba4e2e0961b48716057cc8febc19bb37d6adc3236c3cb02257dc3504b3d2cc98"
+    },
+    {
+      "kind": "start-i2s",
+      "symbol": "open_cfw_gx8002_i2s_pending",
+      "elf_sha256": "6f2dbdad9e4d0d21071140ede8e024f357f2c767081ca8ea2c86b8441531a68d"
+    },
+    {
+      "kind": "stop-i2s",
+      "symbol": "open_cfw_gx8002_i2s_pending",
+      "elf_sha256": "a98d6180e9ef404a537d83931e3e5bd45524cc3b30a396749119ada456b99f87"
+    }
+  ],
+  "sdk_mapping_sha256": {
+    "arch/soc/grus/include/soc_config.h": "abda275af6aee96ad676c190e2a72363a79595413336371fced4450f8df76809",
+    "arch/soc/grus/link.ld": "1dc73b74c4b5962a848693ab857e90d34115489a8a7e499897533ad786ff77be",
+    "arch/soc/grus/spl/spl.c": "f3690694fff309c0118579baedb860b1d47c6de3cfb227a977242249568bb56b"
+  },
+  "clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+  "startup_cases": 12,
+  "preserved_words": 2,
+  "clear_writes": 8155,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded primary loader with modeled flash reads loads compiled descriptor bytes through SDK-authenticated IRAM/DRAM alias. Decoded BSS clear preserves both initialized words.",
+    "Physical memory aliasing, decoded event/I2S consumer composition remain unqualified."
+  ]
+}

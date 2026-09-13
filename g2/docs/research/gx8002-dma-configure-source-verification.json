@@ -118,15 +118,15 @@
             "functions": [
               {
                 "symbol": "open_cfw_gx8002_dma_transfer",
-                "compiled_bytes": 76,
-                "compiled_sha256": "cb3ef966a683ee3d791d4a04094b288f0abae47572fc1b103733ce67d5011560",
+                "compiled_bytes": 72,
+                "compiled_sha256": "48b713eeb59d04e800b2ac84471708949781fbeea918c60410d4a67b4644c902",
                 "stock_sha256": "f7878eaca3b0bcf3fad6473a62a66a87fbc07afcc5c63842650353d74b66218b",
                 "package_offset": 53508,
                 "envelope_bytes": 72,
-                "fits": false
+                "fits": true
               }
             ],
-            "source_sha256": "4d2f422b1bf3777c48a07deb6fea557bd7aef6cbbc4933ce34ad739ae1016acf",
+            "source_sha256": "9d52499707765b0c8e7434fbbec57fca070ac85aaa64ee93dc3670b5a29718b7",
             "source_admitted": false,
             "hardware_qualified": false,
             "limits": [
@@ -137,7 +137,7 @@
           "source_admitted": false,
           "hardware_qualified": false,
           "limits": [
-            "Initialized channel domain 0/1; configuration and cache modeled. Tests include device-base change across cache boundary. Candidate still exceeds stock envelope."
+            "Initialized channel domain 0/1; configuration and cache modeled. Tests include device-base change across cache boundary. Candidate size is checked by the admission wrapper."
           ]
         },
         {
@@ -348,7 +348,7 @@
     "verify_gx8002_dma_configure.py": "ebdd318fdbddc7a15d6cbf13c4de5dbd95d950ee3f4715f7eb2e9814dcad0979",
     "verify_gx8002_dma_configure_source.py": "f90ab104bba799040aa18871643d3bd1f6a7334d14bd91d7310b02428233a109",
     "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
-    "execute_gx8002_dma_configure.py": "7a59ea66b444e45edfb1d37af5a3d7b5a2a105ebd4d3b83125c81790df93d1dc",
+    "execute_gx8002_dma_configure.py": "0f9ce509783ddf9419ec84be23d49d0bd672823f1918abeebf61b7bbac90f87e",
     "verify_gx8002_dma_configure_validation.py": "8c7b13f7c64e408ae7d1a953df83a08fe67741806f2279970c9b6f8568b5fe4c",
     "execute_gx8002_dma_configure_validation.py": "1df363313a1ffe9b70947da48c1c6a52b7c8cf8bcb82d0966dd4622215f89a0b",
     "verify_gx8002_uart_transmit_configure.py": "759b1ef5985b68fe8ac8fcc3a9a6b1826c593246a3a54b5e3fe5746e728b70fd"

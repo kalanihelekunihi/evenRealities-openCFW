@@ -1,0 +1,70 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_pga_corrections",
+      "section_name": ".pga_corrections",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 5,
+      "compiled_sha256": "40872669c921a1dcd7c03fa241ebe872f8e6e0adb7f17f9583edd7347cb7e480",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_pga_corrections",
+          "package_offset": 81530,
+          "bytes": 5,
+          "sha256": "40872669c921a1dcd7c03fa241ebe872f8e6e0adb7f17f9583edd7347cb7e480",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_channel_selectors",
+      "section_name": ".channel_selectors",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 12,
+      "compiled_sha256": "8cc64efdd5fd77d8bbe51eadb5301b8de5ad04e84e81b857f48e2ee252058c5e",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_channel_selectors",
+          "package_offset": 81712,
+          "bytes": 12,
+          "sha256": "8cc64efdd5fd77d8bbe51eadb5301b8de5ad04e84e81b857f48e2ee252058c5e",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "candidate": {
+    "source_sha256": "19471d61b3152e74cb6696bbcdbdca2db40db8dd1f052932ccbf2149bcf6382c",
+    "elf_sha256": "9065a6cfb7bf380a9e6872c3fdd9b0a46434b81ed1226e0bec7b0b3d1e333569",
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "rows": [
+      {
+        "name": "pga_corrections",
+        "package_offset": 81530,
+        "bytes": 5,
+        "sha256": "40872669c921a1dcd7c03fa241ebe872f8e6e0adb7f17f9583edd7347cb7e480"
+      },
+      {
+        "name": "channel_selectors",
+        "package_offset": 81712,
+        "bytes": 12,
+        "sha256": "8cc64efdd5fd77d8bbe51eadb5301b8de5ad04e84e81b857f48e2ee252058c5e"
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Complete finite table domains match recovered PGA correction/channel selector formulas and deployed bytes. No binary input to compilation.",
+      "Consumer provenance already exists separately; ownership/admission pending. Does not imply retained tables remain referenced after arithmetic replacements."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_mapping_tables.py": "83077b22e02ededefe1dfba0bedeb92bf6f7ad61bee60aec4c8ce899ad9b1a16",
+    "verify_gx8002_audio_mapping_tables_source.py": "56e471e886d20e4ca84286c603a35335f8147b911053ee1c5cf9ed1629ef4e38"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Experimental source-data admission using PGA arithmetic and named channel selector definitions. Complete finite table domains checked; no raw binary arrays.",
+    "Does not claim tables remain reachable after consumer rewrites; full firmware source reconstruction remains incomplete."
+  ]
+}

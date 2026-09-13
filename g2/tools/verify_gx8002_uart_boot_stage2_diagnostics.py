@@ -29,7 +29,9 @@ ROWS = [
 ]
 
 
-def upstream_literal(sdk, relative, pattern, cache={}):
+def upstream_literal(sdk, relative, pattern, cache=None):
+    if cache is None:
+        cache = {}
     if relative not in cache:
         blob = subprocess.check_output(['git', '-C', str(sdk), 'rev-parse', SDK_COMMIT + ':' + relative],
                                         text=True).strip()
@@ -59,6 +61,9 @@ def verify(prefix=None, sdk=None, output=None):
     subprocess.run([pre + 'gcc', *FLAGS, '-c', str(source), '-o', str(obj)], check=True)
     elf = Elf32(obj.read_bytes(), str(obj))
 
+    allowed = {'.rodata.open_cfw_gx8002_uart_boot_stage2_str_' + row[0] for row in ROWS}
+    if any(s['size'] and s['flags'] & 2 and s['name'] not in allowed for s in elf.sections):
+        raise ValueError('Unaccounted diagnostic section')
     functions = []
     for suffix, offset, relative, pattern in ROWS:
         symbol = 'open_cfw_gx8002_uart_boot_stage2_str_' + suffix
@@ -82,6 +87,7 @@ def verify(prefix=None, sdk=None, output=None):
         shutil.copyfile(obj, output / 'uart-boot-stage2-diagnostics.o')
 
     return {'functions': functions, 'source_sha256': sha(source.read_bytes()), 'flags': FLAGS,
+            'verifier_sha256': sha(Path(__file__).read_bytes()),
             'sdk_commit': SDK_COMMIT, 'source_admitted': True, 'hardware_qualified': False,
             'limits': ['Six literal printf format strings only, from the trap-dump register printer and the '
                        'board padmux-init error path. The surrounding trap handler, register-dump loop, and '

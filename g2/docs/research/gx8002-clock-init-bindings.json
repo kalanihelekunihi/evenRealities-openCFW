@@ -1,0 +1,110 @@
+{
+  "bindings": {
+    "gx_clock_set_div": {
+      "address": 268586488,
+      "report": "gx8002-clock-module-divider-set-source-verification.json",
+      "symbol": "open_cfw_gx8002_clock_module_divider_set",
+      "report_sha256": "59b01b0982c07aec69316e96c72d67b004cc3847bf0146bd38327911b0fb6013",
+      "compiled_bytes": 320
+    },
+    "gx_clock_set_dto": {
+      "address": 268586820,
+      "report": "gx8002-clock-module-dto-set-source-verification.json",
+      "symbol": "open_cfw_gx8002_clock_module_dto_set",
+      "report_sha256": "42dbafaff13509357fabea0aab496246e051df02a35671f48e600c2ef132e558",
+      "compiled_bytes": 198
+    },
+    "gx_clock_set_module_source": {
+      "address": 268585952,
+      "report": "gx8002-clock-module-source-fixed-source-verification.json",
+      "symbol": "open_cfw_gx8002_clock_module_source_fixed",
+      "report_sha256": "95de170f2cd973efe7d714fc644f9c9f8681d480a65baf4b2b449fb804804f20",
+      "compiled_bytes": 384
+    },
+    "gx_clock_set_source": {
+      "address": 268585932,
+      "report": "gx8002-clock-source-select-source-verification.json",
+      "symbol": "open_cfw_gx8002_clock_source_select",
+      "report_sha256": "5fe420f99eb7bd2a59ab1f867866b5780274b5cd13362fc8a8549f99a25d28a7",
+      "compiled_bytes": 20
+    },
+    "gx_clock_set_module_enable": {
+      "address": 268587136,
+      "report": "gx8002-platform-gate-verification.json",
+      "symbol": "open_cfw_gx8002_platform_gate",
+      "report_sha256": "74ba7cb1a8b325832c5abcae691270d02368bf3f54af98de4433b6e8e66afc06",
+      "compiled_bytes": 254
+    },
+    "gx_pmu_get_start_mode": {
+      "address": 268585348,
+      "report": "gx8002-start-mode-verification.json",
+      "symbol": "open_cfw_gx8002_start_mode",
+      "report_sha256": "6ff1a8ce703a366c762ccbb15eeb8e1643e5b589ff5cd7d6c318edf468c75535",
+      "compiled_bytes": 30
+    },
+    "gx_pmu_osc_get_all_trim_state": {
+      "address": 268585500,
+      "report": "gx8002-trim-state-source-verification.json",
+      "symbol": "open_cfw_gx8002_trim_state",
+      "report_sha256": "420f91a2215622a1aa314932859de1f151f3b3606483d4809b645d2552f7a60a",
+      "compiled_bytes": 18
+    },
+    "gx_clock_set_pll_no_block": {
+      "address": 268587020,
+      "report": "gx8002-clock-pll-wait-source-verification.json",
+      "symbol": "open_cfw_gx8002_clock_pll_wait_timeout",
+      "report_sha256": "09e59240698a8c1a3ea86180fb302522f467234813e9237cbf2db1da3cc41183",
+      "compiled_bytes": 80
+    },
+    "gx_clock_set_pll": {
+      "address": 268587104,
+      "report": "gx8002-clock-pll-wait-source-verification.json",
+      "symbol": "open_cfw_gx8002_clock_pll_wait",
+      "report_sha256": "09e59240698a8c1a3ea86180fb302522f467234813e9237cbf2db1da3cc41183",
+      "compiled_bytes": 32
+    },
+    "gx_analog_set_ldo_ana_voltage": {
+      "address": 268584688,
+      "report": "gx8002-analog-voltage-source-verification.json",
+      "symbol": "open_cfw_gx8002_analog_voltage",
+      "report_sha256": "a348b8c2730c775fd214808a3226d3b4acc6c916239de371076c4c74adfa3560",
+      "compiled_bytes": 32
+    },
+    "gx_analog_set_ldo_dig_voltage": {
+      "address": 268584752,
+      "report": "gx8002-digital-voltage-source-verification.json",
+      "symbol": "open_cfw_gx8002_digital_voltage",
+      "report_sha256": "053987e62b4617e737707798201b919a6be0c93c374fa780bf4c3626b35e0c30",
+      "compiled_bytes": 38
+    },
+    "pll": {
+      "address": 537028808,
+      "report": "gx8002-clock-switch-1m-source-verification.json",
+      "symbol": "open_cfw_gx8002_clock_switch_1m_pll",
+      "report_sha256": "b9fc8819aff755e5002195c8ae3b81b77ed82ff8fb08d7ed26d141f7b040b746",
+      "compiled_bytes": 56
+    },
+    "memcpy": {
+      "address": 268588856,
+      "report": "gx8002-memcpy-source-verification.json",
+      "symbol": "open_cfw_gx8002_memcpy",
+      "report_sha256": "1827eb7287710251d8eea55c32bb76f1d538b0d25d31309c955e8b2872c4f223",
+      "compiled_bytes": 96
+    }
+  },
+  "saved_gate_state": {
+    "section": ".saved_gate",
+    "address": 537031448,
+    "bytes": 4,
+    "type": "NOBITS",
+    "startup_clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+    "clear_interval": [
+      537030016,
+      537062636
+    ]
+  },
+  "limits": [
+    "Source ownership/entry-address audit; artifact hashes and executable semantics checked separately.",
+    "Saved-gate NOBITS section and recorded clear interval checked against its admitted owner; startup clear execution qualified separately."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "entry_offset": 295308,
+  "candidate": "fdlibm-derived IEEE double exponential",
+  "upstream_repository": "https://github.com/freemint/fdlibm",
+  "upstream_commit": "61c059fed98e2ed8d26ca39617321134b33e535a",
+  "upstream_path": "e_exp.c",
+  "upstream_sha256": "43e238d65d2372039675acb01957614c9d152b7e93d8b9477732795720d9fbbf",
+  "coefficients": [
+    {
+      "coefficient": "P1",
+      "package_offset": 295956,
+      "upstream_bits": "0x3fc555555555553e",
+      "stock_bits": "0x3fc555555555553e",
+      "comparison": "exact magnitude; negative P2/P4 represented as positive literals with subtraction call sites"
+    },
+    {
+      "coefficient": "P2",
+      "package_offset": 295948,
+      "upstream_bits": "0xbf66c16c16bebd93",
+      "stock_bits": "0x3f66c16c16bebd93",
+      "comparison": "exact magnitude; negative P2/P4 represented as positive literals with subtraction call sites"
+    },
+    {
+      "coefficient": "P3",
+      "package_offset": 295940,
+      "upstream_bits": "0x3f11566aaf25de2c",
+      "stock_bits": "0x3f11566aaf25de2c",
+      "comparison": "exact magnitude; negative P2/P4 represented as positive literals with subtraction call sites"
+    },
+    {
+      "coefficient": "P4",
+      "package_offset": 295932,
+      "upstream_bits": "0xbebbbd41c5d26bf1",
+      "stock_bits": "0x3ebbbd41c5d26bf1",
+      "comparison": "exact magnitude; negative P2/P4 represented as positive literals with subtraction call sites"
+    },
+    {
+      "coefficient": "P5",
+      "package_offset": 295924,
+      "upstream_bits": "0x3e66376972bea4d0",
+      "stock_bits": "0x3e66376972bea4d0",
+      "comparison": "exact magnitude; negative P2/P4 represented as positive literals with subtraction call sites"
+    }
+  ],
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Five polynomial coefficient magnitudes match, with observed argument-reduction and overflow threshold high words supporting identification.",
+    "Does not establish exact origin revision or full behavior. Upstream explicit exception raising and NaN return behavior require comparison with stock; software-double callees remain to be reconstructed."
+  ]
+}

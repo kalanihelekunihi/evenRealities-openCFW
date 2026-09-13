@@ -1,0 +1,27 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream_blob": "efdce5bc8f3773e8c42d828a9bd72430ad3b43c7",
+  "upstream_sha256": "65de0e35ea000c6d4dd2b940a2c75ca0aa58a81cbf9b5eaebc22ba240f852732",
+  "leaves": [
+    {
+      "package_offset": 98752,
+      "runtime_address": 268591532
+    },
+    {
+      "package_offset": 98756,
+      "runtime_address": 268591536
+    },
+    {
+      "package_offset": 98760,
+      "runtime_address": 268591540
+    }
+  ],
+  "decoded_branch_candidates": [],
+  "literal_candidates": [],
+  "source_admitted": false,
+  "limits": [
+    "Linear disassembly can interpret embedded data as instructions; candidates require caller-boundary validation. Literal matches are byte occurrences, not pointer-use proof.",
+    "Primary text branch sweep and whole-package exact runtime-address occurrences only; indirect/computed references and original function identities remain unresolved. SDK conditional zero-return functions are hypotheses, not assigned names."
+  ]
+}

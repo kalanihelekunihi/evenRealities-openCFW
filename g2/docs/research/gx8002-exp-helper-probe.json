@@ -1,0 +1,144 @@
+{
+  "variants": [
+    {
+      "variant": "overflow",
+      "source_sha256": "562576cb0bd48be55d065ecf7e2af34b2a9ede7a973bb00d11898f2a8976805c",
+      "object_sha256": "4dad93aac479a6fedf133bc57c4be5811e33e822a0ce7a7ee9f9ffb04a8b4b9f",
+      "sections": [
+        {
+          "name": ".text.exp_overflow",
+          "bytes": 36
+        },
+        {
+          "name": ".text.open_cfw_gx8002_backup_exp",
+          "bytes": 772
+        }
+      ],
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-exp-helper-probe/overflow.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-exp-helper-probe/overflow.o"
+      ]
+    },
+    {
+      "variant": "tiny",
+      "source_sha256": "819e710570f3314187378a0b031002b6b9cde7d3508141d9d35fa56eaeab8eb5",
+      "object_sha256": "f8ba9a480ecc838a33e2dd97c0b7694afbf0c23ca95e0f829306db4825921c21",
+      "sections": [
+        {
+          "name": ".text.exp_tiny",
+          "bytes": 60
+        },
+        {
+          "name": ".text.open_cfw_gx8002_backup_exp",
+          "bytes": 748
+        }
+      ],
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-exp-helper-probe/tiny.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-exp-helper-probe/tiny.o"
+      ]
+    },
+    {
+      "variant": "scale",
+      "source_sha256": "53bb9e355faf3f5e07b1cbab368deddfe20ba46b826bebfcbf357e435c9c7ff8",
+      "object_sha256": "54c0ffdfb48ac2713fdb626c6e8b4c650badfbf20cd345bfa45f4113b2ce9326",
+      "sections": [
+        {
+          "name": ".text.exp_scale",
+          "bytes": 60
+        },
+        {
+          "name": ".text.open_cfw_gx8002_backup_exp",
+          "bytes": 736
+        }
+      ],
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-exp-helper-probe/scale.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-exp-helper-probe/scale.o"
+      ]
+    },
+    {
+      "variant": "tiny_scale",
+      "source_sha256": "9d4e3ad387fd04f8f42a8528cb69458fb43355d08fcb0a7cbea6a438560dcdde",
+      "object_sha256": "3a87953022d57aeebfc8fb43dbca62e39f48b1b4421e338d989230f2c8f7100b",
+      "sections": [
+        {
+          "name": ".text.exp_scale",
+          "bytes": 60
+        },
+        {
+          "name": ".text.exp_tiny",
+          "bytes": 60
+        },
+        {
+          "name": ".text.open_cfw_gx8002_backup_exp",
+          "bytes": 700
+        }
+      ],
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-exp-helper-probe/tiny_scale.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-exp-helper-probe/tiny_scale.o"
+      ]
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Compile-only complete C helper sections; execution and physical placement pending."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "dependencies": [
+      {
+        "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+        "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+        "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596"
+      },
+      {
+        "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+        "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+        "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+      },
+      {
+        "path": "include/utility/types.h",
+        "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+        "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+      }
+    ],
+    "upstream_symbol": "_AudioInISR",
+    "upstream_section_bytes": 648,
+    "upstream_section_sha256": "a7833d8856b780d5d1639f3d41c3d195120b104c6bacc9350b22d6ca2437f946",
+    "source_sha256": "d9dda2efabcdcb2a2651dfc15d77910b1863fdb2cbd0967c64ef80674b426024",
+    "state_source_sha256": "4800dfed2bdd627c6aa818ae2f985304b388e92c33f2e2a0c14b3838109cafaa",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "elf_sha256": "7d2a3ea10882e56c01ee61d64d96e0cc1c9203bd7aebf6adad89454ef42435c4",
+    "compiled_bytes": 532,
+    "compiled_sha256": "5276d60a1e42018cd44e6db9399340984d4040abd2c6e4b718da269308f8f78d",
+    "stock_offset": 97884,
+    "stock_bytes": 648,
+    "stock_sha256": "b260d362d8238f27523765b4eb1d857c30bb931d919909ca48b65f362f6942ca",
+    "upstream_nonrelocated_equal_bytes": 636,
+    "upstream_relocations": [
+      {
+        "offset": 176,
+        "symbol": 180,
+        "type": 19,
+        "addend": 0
+      },
+      {
+        "offset": 366,
+        "symbol": 180,
+        "type": 19,
+        "addend": 0
+      },
+      {
+        "offset": 644,
+        "symbol": 3,
+        "type": 1,
+        "addend": 0
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "C IRQ plus compiler helper linked in original slot. SDK object authenticated for provenance only and never linked or copied. MMIO ordering, callback mutations, ABI and startup state still require decoded qualification."
+    ]
+  },
+  "record_elf_sha256": "42d103bb299f73010e346274818cf1701cf89e0e031afff5a93986c8f074f3d7",
+  "cases": 1344,
+  "source_admitted": false,
+  "limits": [
+    "Decoded source record callback executes on IRQ word-backed byte RAM with actual SDC stack pointer, nested SP and real linked record entry dispatch. Byte writes restricted to mapped memory or nested stack. Independent control/emitted-frame oracle. Record helpers modeled; physical execution and other callback bodies pending."
+  ]
+}

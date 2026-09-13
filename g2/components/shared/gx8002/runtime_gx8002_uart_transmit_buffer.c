@@ -10,6 +10,10 @@ int open_cfw_gx8002_uart_transmit_buffer(uint32_t port, uint32_t buffer,
                                       uint32_t length, uint32_t callback,
                                       uint32_t private_data)
 {
+    /* Empty register constraint selects compact fifth-argument accesses
+     * with the pinned C-SKY compiler; no instructions are injected. */
+    register uint32_t context __asm__("r5")=private_data;
+    __asm__("" : "+r"(context));
     volatile uint32_t *descriptor=open_cfw_gx8002_uart_descriptors[port];
     if (!buffer || !callback) return -1;
     descriptor[27]=callback;
@@ -17,7 +21,7 @@ int open_cfw_gx8002_uart_transmit_buffer(uint32_t port, uint32_t buffer,
     descriptor[17]=2;
     descriptor[29]=buffer;
     descriptor[30]=length;
-    descriptor[28]=private_data;
+    descriptor[28]=context;
     descriptor[31]=UINT32_MAX;
     if (dma) {
         *(volatile uint32_t *)(uintptr_t)(descriptor[1]+0xa8)=1;

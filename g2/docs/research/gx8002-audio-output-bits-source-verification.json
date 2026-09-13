@@ -1,0 +1,87 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_aout_set_r1_frame_over_int_enable",
+      "section_name": ".text.aout_set_r1_frame_over_int_enable",
+      "compiled_bytes": 10,
+      "compiled_sha256": "eca77fb688df262f4137f1cb341654003913d8642726975a2360b833b61e4b48",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_set_r1_frame_over_int_enable",
+          "package_offset": 57172,
+          "bytes": 16,
+          "sha256": "9b52c83c5f9c6f6851237b180e84c9b5318522a4bbaa6a3ec7cc1ff5a8951ac5",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_aout_play_check_idle",
+      "section_name": ".text.aout_play_check_idle",
+      "compiled_bytes": 10,
+      "compiled_sha256": "ea748abaa6b7d1775212f5f5591f9c592e72e0cd7d889fe33d62cc765d0da36d",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_play_check_idle",
+          "package_offset": 57188,
+          "bytes": 16,
+          "sha256": "9c960076d4b5fc0513a9ccb1e83047d56e15db6a275cf2c16ce67aed79d54620",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_set_r1_frame_over_int_enable",
+          "section_name": ".text.aout_set_r1_frame_over_int_enable",
+          "compiled_bytes": 10,
+          "compiled_sha256": "eca77fb688df262f4137f1cb341654003913d8642726975a2360b833b61e4b48",
+          "package_offset": 57172,
+          "stock_envelope_bytes": 16,
+          "stock_sha256": "9b52c83c5f9c6f6851237b180e84c9b5318522a4bbaa6a3ec7cc1ff5a8951ac5",
+          "fits": true
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_play_check_idle",
+          "section_name": ".text.aout_play_check_idle",
+          "compiled_bytes": 10,
+          "compiled_sha256": "ea748abaa6b7d1775212f5f5591f9c592e72e0cd7d889fe33d62cc765d0da36d",
+          "package_offset": 57188,
+          "stock_envelope_bytes": 16,
+          "stock_sha256": "9c960076d4b5fc0513a9ccb1e83047d56e15db6a275cf2c16ce67aed79d54620",
+          "fits": true
+        }
+      ],
+      "source_sha256": "eca913851e5fe86aa146e20d001a4f88c4108ab4a0cfdfb4d33ad47f95847c69",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 4644,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Word MMIO effects and callee ABI verified with low-bit truncation. Physical register behavior and caller composition remain unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_output_bits.py": "de7fdcf34a1ac34cfaf1936d249df2c6de1cc952489f4ed5c7140caae61676bb",
+    "verify_gx8002_audio_output_bits.py": "499a02d4a3a62338e47ce0fb15e5b2ebeab6629e6ee8daa7cecadac684654fd0",
+    "verify_gx8002_audio_output_bits_source.py": "6052ab0bc996bc0e74561ab434b6c316553442867658f21950475647aa929606",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Experimental function-level source admission; physical register semantics, caller composition and whole firmware source-only closure remain unqualified."
+  ]
+}

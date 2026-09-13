@@ -1,0 +1,80 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "raw_quotient": {
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "stock_range": [
+      302556,
+      303376
+    ],
+    "external_branches": [
+      {
+        "pc": 268026,
+        "target": 302556,
+        "entry": true
+      },
+      {
+        "pc": 302034,
+        "target": 302870,
+        "entry": false
+      }
+    ],
+    "external_literal_pools": [],
+    "stored_address_words": [],
+    "source_admitted": false,
+    "limits": [
+      "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
+    ]
+  },
+  "raw_remainder": {
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "stock_range": [
+      303376,
+      304180
+    ],
+    "external_branches": [
+      {
+        "pc": 268060,
+        "target": 303376,
+        "entry": true
+      }
+    ],
+    "external_literal_pools": [
+      {
+        "pc": 303374,
+        "pool": 303376
+      }
+    ],
+    "stored_address_words": [
+      {
+        "offset": 314799,
+        "value": 536942594,
+        "entry": false
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
+    ]
+  },
+  "classifications": [
+    {
+      "finding_pc": 302034,
+      "literal": 302032,
+      "value": 228737632
+    },
+    {
+      "finding_pc": 303374,
+      "literal": 303372,
+      "value": 268522964
+    },
+    {
+      "stored_word_offset": 314799,
+      "mathematical_table_start": 314676,
+      "table_sha256": "77f9067a05b953496342be0361b74253f690465994854fd15b78525b72490278"
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "All listed raw artifacts have literal-consumer or complete mathematical-table evidence. Computed branches, other mappings and full application execution remain outside scope."
+  ]
+}

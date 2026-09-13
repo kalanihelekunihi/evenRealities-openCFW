@@ -1,0 +1,328 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_audio_initialize",
+      "compiled_bytes": 376,
+      "compiled_sha256": "8fbb93a06e25bd6e22a57c57f6a7e790ef00ea1af730210fbb97b4af17a872d7",
+      "section_name": ".text",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_audio_initialize",
+          "package_offset": 56688,
+          "bytes": 416,
+          "sha256": "f1eab7e0f77bedb29ec955e99c4d2cd3ee85d08296e032eddbce390eb57f1327",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+        "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+      },
+      "irq_header": {
+        "path": "include/driver/gx_irq.h",
+        "blob": "9e1b15b19c44f3802c46243ce8566cdd7aa489a5"
+      },
+      "types_header": {
+        "path": "include/utility/types.h",
+        "blob": "3fa306b661b584f11909cf125d6de84f9e150848"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+        "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+        "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+        "section": ".text.gx_audio_in_init",
+        "relocations": [
+          {
+            "offset": 28,
+            "symbol": 182,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 38,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 42,
+            "symbol": 5,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 116,
+            "symbol": 237,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 408,
+            "symbol": 3,
+            "type": 1,
+            "addend": 0
+          },
+          {
+            "offset": 412,
+            "symbol": 9,
+            "type": 1,
+            "addend": 0
+          }
+        ],
+        "role": "symbol_evidence_only"
+      },
+      "bindings": {
+        "open_cfw_gx8002_platform_gate": 268587136,
+        "memset": 270571980,
+        "open_cfw_gx8002_audio_reset": 270548104,
+        "gx_request_irq": 268588348,
+        "open_cfw_gx8002_audio_irq": 268590664,
+        "open_cfw_gx8002_audio_runtime": 537031472
+      },
+      "source_sha256": "aa8f477c08731a1fa45bd5b3d669553f2dfceab06666da6341996821a739c010",
+      "symbol": "open_cfw_gx8002_audio_initialize",
+      "compiled_bytes": 376,
+      "compiled_sha256": "8fbb93a06e25bd6e22a57c57f6a7e790ef00ea1af730210fbb97b4af17a872d7",
+      "package_offset": 56688,
+      "stock_envelope_bytes": 416,
+      "stock_sha256": "f1eab7e0f77bedb29ec955e99c4d2cd3ee85d08296e032eddbce390eb57f1327",
+      "fits": true,
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 11520,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "All callback-presence combinations and selector boundaries checked against independent ordered effects. Helper/reset/IRQ and config effects modeled; actual helper source composition still pending. No physical initialization claim."
+    ]
+  },
+  "nested_reset": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+        "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+      },
+      "irq_header": {
+        "path": "include/driver/gx_irq.h",
+        "blob": "9e1b15b19c44f3802c46243ce8566cdd7aa489a5"
+      },
+      "types_header": {
+        "path": "include/utility/types.h",
+        "blob": "3fa306b661b584f11909cf125d6de84f9e150848"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+        "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+        "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+        "section": ".text.gx_audio_in_init",
+        "relocations": [
+          {
+            "offset": 28,
+            "symbol": 182,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 38,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 42,
+            "symbol": 5,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 116,
+            "symbol": 237,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 408,
+            "symbol": 3,
+            "type": 1,
+            "addend": 0
+          },
+          {
+            "offset": 412,
+            "symbol": 9,
+            "type": 1,
+            "addend": 0
+          }
+        ],
+        "role": "symbol_evidence_only"
+      },
+      "bindings": {
+        "open_cfw_gx8002_platform_gate": 268587136,
+        "memset": 270571980,
+        "open_cfw_gx8002_audio_reset": 270548104,
+        "gx_request_irq": 268588348,
+        "open_cfw_gx8002_audio_irq": 268590664,
+        "open_cfw_gx8002_audio_runtime": 537031472
+      },
+      "source_sha256": "aa8f477c08731a1fa45bd5b3d669553f2dfceab06666da6341996821a739c010",
+      "symbol": "open_cfw_gx8002_audio_initialize",
+      "compiled_bytes": 376,
+      "compiled_sha256": "8fbb93a06e25bd6e22a57c57f6a7e790ef00ea1af730210fbb97b4af17a872d7",
+      "package_offset": 56688,
+      "stock_envelope_bytes": 416,
+      "stock_sha256": "f1eab7e0f77bedb29ec955e99c4d2cd3ee85d08296e032eddbce390eb57f1327",
+      "fits": true,
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "reset_candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+        "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+        "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+        "role": "identity_only"
+      },
+      "source_sha256": "4861e8b1ef077b8869148aeb55dbe5ef081feef93cab7d0dc1292e0b785c0323",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "symbol": "open_cfw_gx8002_audio_reset",
+      "section_name": ".text",
+      "package_offset": 53780,
+      "compiled_bytes": 240,
+      "compiled_sha256": "054231c072b37eaa20ea7762130e061d47d0ce890a13594de6e1ca8f08f46d3b",
+      "stock_envelope_bytes": 320,
+      "stock_sha256": "b3639b6e9474e0bca6c7ed62a62268098fdf1ebdea5b56d0307eac6d172ca3df",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Candidate only. Ordered volatile MMIO, polling and ABI comparison required. No SDK object payload linked."
+      ]
+    },
+    "nested_cases": 1440,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Actual decoded reset called in separate frame with resulting MMIO propagated to initializer. Independent ordered-effect oracle and all32 callback-presence combinations. Uniform initial MMIO only; delayed completion0/1/7 polls. Other helpers/config callback remain modeled."
+    ]
+  },
+  "callback_mutation": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+        "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+      },
+      "irq_header": {
+        "path": "include/driver/gx_irq.h",
+        "blob": "9e1b15b19c44f3802c46243ce8566cdd7aa489a5"
+      },
+      "types_header": {
+        "path": "include/utility/types.h",
+        "blob": "3fa306b661b584f11909cf125d6de84f9e150848"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+        "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+        "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+        "section": ".text.gx_audio_in_init",
+        "relocations": [
+          {
+            "offset": 28,
+            "symbol": 182,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 38,
+            "symbol": 180,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 42,
+            "symbol": 5,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 116,
+            "symbol": 237,
+            "type": 19,
+            "addend": 0
+          },
+          {
+            "offset": 408,
+            "symbol": 3,
+            "type": 1,
+            "addend": 0
+          },
+          {
+            "offset": 412,
+            "symbol": 9,
+            "type": 1,
+            "addend": 0
+          }
+        ],
+        "role": "symbol_evidence_only"
+      },
+      "bindings": {
+        "open_cfw_gx8002_platform_gate": 268587136,
+        "memset": 270571980,
+        "open_cfw_gx8002_audio_reset": 270548104,
+        "gx_request_irq": 268588348,
+        "open_cfw_gx8002_audio_irq": 268590664,
+        "open_cfw_gx8002_audio_runtime": 537031472
+      },
+      "source_sha256": "aa8f477c08731a1fa45bd5b3d669553f2dfceab06666da6341996821a739c010",
+      "symbol": "open_cfw_gx8002_audio_initialize",
+      "compiled_bytes": 376,
+      "compiled_sha256": "8fbb93a06e25bd6e22a57c57f6a7e790ef00ea1af730210fbb97b4af17a872d7",
+      "package_offset": 56688,
+      "stock_envelope_bytes": 416,
+      "stock_sha256": "f1eab7e0f77bedb29ec955e99c4d2cd3ee85d08296e032eddbce390eb57f1327",
+      "fits": true,
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "callback_mutation_cases": 1152,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Config callback modeled, mutates published callbacks, both masks and asymmetric selectors. Original argument presence preserved while live state changes honored. Actual callback source composition pending."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_initialize.py": "ace91e36910e9b191b3efe3306efaaaeddcf47ea64669ecb62f95d9297b8534e",
+    "verify_gx8002_audio_initialize.py": "96952f92275980597f7caa9fcdd481aeb73b080e28b9c772c53f3da0e78dae49",
+    "verify_gx8002_audio_initialize_source.py": "cc8564f9815b22aa414b231b37198fdc3e2d17fb82c695f13a0e88102cefdcc9",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "execute_gx8002_audio_initialize.py": "0c6e3991d09aadadfb477d4cfd07046abd92ec3b807417ed159af10b5da51c50",
+    "verify_gx8002_audio_initialize_reset.py": "0f8934df13fdebcc57b47bfb86150f0e75e21c38aec21a0d36fc58aed7e5bc90",
+    "verify_gx8002_audio_initialize_callback.py": "7e326f2da91715082e88b938c230632e69c90acd6b3d5e6c57ec86b39ba44b06",
+    "build_gx8002_audio_reset_candidate.py": "76d085ee1d93c3373aa121eb3078b8572023aa5cfa3bf8c819321d3bf3b74390",
+    "verify_gx8002_audio_reset.py": "eb4dfd8881791de181fd9ab3c91fec61eaeca2c4fe09e9d2641225475891aeaf"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Experimental function-level source admission only; full firmware remains hybrid.",
+    "Actual decoded reset checked against independent effects; gate, memset, IRQ registration and configuration callback boundaries remain modeled. Physical initialization and source-only closure are unproven."
+  ]
+}

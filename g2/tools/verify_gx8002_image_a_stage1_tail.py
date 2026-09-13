@@ -34,7 +34,7 @@ SECTION_NAME = ".data." + SYMBOL
 PACKAGE_OFFSET = 0x0000B58C
 TAIL_SIZE = 4100
 ZERO_SIZE = 4092
-FLAGS = ["-O2", "-mcpu=ck804ef", "-mhard-float", "-ffreestanding", "-fno-builtin",
+FLAGS = ["-O2", "-fno-zero-initialized-in-bss", "-mcpu=ck804ef", "-mhard-float", "-ffreestanding", "-fno-builtin",
          "-ffunction-sections", "-fdata-sections", "-Wall", "-Wextra", "-Werror"]
 
 
@@ -42,11 +42,12 @@ def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def _compile(prefix: Path, output_dir: Path) -> bytes:
+def _compile(prefix: Path, output_dir: Path, crc: int, xip_size: int) -> bytes:
     output_dir.mkdir(parents=True, exist_ok=True)
     obj = output_dir / "image-a-stage1-tail.o"
     pre = str(prefix / "csky-unknown-elf-")
-    subprocess.run([pre + "gcc", *FLAGS, "-I", str(SOURCE.parent),
+    subprocess.run([pre + "gcc", *FLAGS, f"-DOPEN_CFW_STAGE1_CRC={crc}U",
+                    f"-DOPEN_CFW_STAGE2_XIP_SIZE={xip_size}U", "-I", str(SOURCE.parent),
                     "-c", str(SOURCE), "-o", str(obj)], check=True,
                    capture_output=True, text=True)
     elf = Elf32(obj.read_bytes(), str(obj))
@@ -87,7 +88,8 @@ def verify(prefix=None, sdk=None, output=None) -> dict:
         raise ValueError("assumed zero-fill span is not all-zero in stock")
 
     out_dir = output or (ROOT / "build/continue-analysis/CD-009")
-    payload = _compile(prefix, out_dir)
+    payload = _compile(prefix, out_dir, int.from_bytes(expected[ZERO_SIZE:ZERO_SIZE+4], "little"),
+                       int.from_bytes(expected[ZERO_SIZE+4:ZERO_SIZE+8], "little"))
     if payload != stock_slice:
         raise ValueError("compiled data does not match stock/recomputed bytes")
 
@@ -109,6 +111,7 @@ def verify(prefix=None, sdk=None, output=None) -> dict:
         "source_admitted": True,
         "hardware_qualified": False,
         "source_sha256": sha(SOURCE.read_bytes()),
+        "verifier_sha256": sha(Path(__file__).read_bytes()),
         "header_sha256": sha(HEADER.read_bytes()),
         "stage1_block_crc32_mpeg2": "0x%08X" % int.from_bytes(stock_slice[ZERO_SIZE:ZERO_SIZE + 4], "little"),
         "stage2_xip_text_size": int.from_bytes(stock_slice[ZERO_SIZE + 4:ZERO_SIZE + 8], "little"),

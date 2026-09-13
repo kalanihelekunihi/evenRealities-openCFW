@@ -1,0 +1,16 @@
+{
+  "source_sha256": "cde3b29c8538dba119849e4ce0dc15dafeae2c143728b9072c93d130f8bb8850",
+  "boundary_cases": 2401,
+  "product_bounds": {
+    "maximum": 1073741824,
+    "next_largest": 1073709056,
+    "minimum": -1073709056
+  },
+  "unique_overflow_products": [
+    1073741824,
+    1073741824
+  ],
+  "limits": [
+    "Integer bounds apply only to sums of two products of signed 16-bit factors. Helper is not a general saturating int32 addition."
+  ]
+}

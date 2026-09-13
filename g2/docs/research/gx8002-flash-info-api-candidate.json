@@ -1,0 +1,51 @@
+{
+  "dependency_headers": {
+    "arch/soc/grus/include/base_addr.h": {
+      "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+      "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+    },
+    "include/driver/gx_clock/gx_clock_v2.h": {
+      "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+      "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+    }
+  },
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "oracle": {
+    "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+    "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+    "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+    "role": "board_call_site_reference_only; implementation recovered from stock"
+  },
+  "bindings": {},
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-shrink-wrap"
+  ],
+  "header": {
+    "path": "include/driver/gx_flash.h",
+    "blob": "71221ef72395e8b61642dd87291804aced433f58",
+    "sha256": "d4d9d828e4363041c14ba7e3a676eec7b51c0b6427576f401516e4b6991c3d2d"
+  },
+  "source_sha256": "e3e08cd5dfb55e24257045af5b9b444c1d6042df0e3e40950b057f89917c0092",
+  "symbol": "open_cfw_gx8002_flash_info_api",
+  "section_name": ".text",
+  "package_offset": 92148,
+  "compiled_bytes": 20,
+  "compiled_sha256": "b913c40c4ea8d8df6cf7810eb30c67ffa6802e2545eceac14b3f1f088da231e7",
+  "stock_envelope_bytes": 20,
+  "stock_sha256": "b913c40c4ea8d8df6cf7810eb30c67ffa6802e2545eceac14b3f1f088da231e7",
+  "fits": true,
+  "source_admitted": false,
+  "limits": [
+    "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+  ]
+}

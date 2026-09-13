@@ -1,0 +1,29 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_aout_init",
+      "section_name": ".text.aout_init",
+      "compiled_bytes": 118,
+      "compiled_sha256": "f0bde813b36ff30d3dc3c9005a29e11defad909611d4cbe5c0e2bb009ca13c9e",
+      "package_offset": 58532,
+      "stock_envelope_bytes": 120,
+      "stock_sha256": "9666552837a810bab95e6df347cc6f10ef65366b5cea7c4c22b840f859a9da79",
+      "fits": true
+    }
+  ],
+  "source_sha256": "d319ae79905058d2d4d883343fb2617391253ed5c73abf5f580d0d448435b45e",
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "header": {
+    "path": "include/driver/gx_audio_out/gx_audio_out_v2.h",
+    "blob": "9c505e302116fcaa07d32e3f8ce9b03d0d6bbe2b"
+  },
+  "oracle": {
+    "path": "drivers_lib/audio_out/v2.0/hw.o",
+    "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+    "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+    "role": "symbol_evidence_only",
+    "stock_divergence": "Stock inlines upstream reset; decoded qualification required"
+  },
+  "source_admitted": false,
+  "hardware_qualified": false
+}

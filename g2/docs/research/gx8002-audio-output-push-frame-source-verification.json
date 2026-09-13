@@ -1,0 +1,69 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_aout_push_frame",
+      "section_name": ".text.aout_push_frame",
+      "compiled_bytes": 114,
+      "compiled_sha256": "ab65f649968b297c5ec1883244c362595aac227c4fe52289e0830a161ae90ed0",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_push_frame",
+          "package_offset": 59188,
+          "bytes": 116,
+          "sha256": "18e172db09798954056fd81fe1384a4fa8ea650c14555494682a0271f1c75d59",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_push_frame",
+          "section_name": ".text.aout_push_frame",
+          "compiled_bytes": 114,
+          "compiled_sha256": "ab65f649968b297c5ec1883244c362595aac227c4fe52289e0830a161ae90ed0",
+          "package_offset": 59188,
+          "stock_envelope_bytes": 116,
+          "stock_sha256": "18e172db09798954056fd81fe1384a4fa8ea650c14555494682a0271f1c75d59",
+          "fits": true
+        }
+      ],
+      "source_sha256": "0fab975b76235e7e90fd9e30060776e66bca02d7947e2b89381a3255fc965f16",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_out/gx_audio_out_v2.h",
+        "blob": "9c505e302116fcaa07d32e3f8ce9b03d0d6bbe2b"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 36720,
+    "null_frame_paths": 2,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Valid RAM handle and disjoint 8-byte frame; memcpy modeled with caller clobbers. Configured stride must be nonzero; zero-divisor hardware behavior is unqualified. Both decoded interrupt helper bodies are executed. Physical hardware and asynchronous state mutation remain unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_output_push_frame.py": "89fb8be1c6464a1287a08606504a1fbdeebad997fb7c603b4d593a1a1ce18eb2",
+    "verify_gx8002_audio_output_push_frame.py": "65a8d94e411a5d6b40420972d22403b397a2135778b96fa634d56aeb65bd2238",
+    "verify_gx8002_audio_output_push_frame_source.py": "ebc76604c25d17e77a0c421d89582727ca44434f5e4a9b604fa2e36bc2d2828b",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_audio_output_bits.py": "499a02d4a3a62338e47ce0fb15e5b2ebeab6629e6ee8daa7cecadac684654fd0",
+    "build_gx8002_audio_output_bits.py": "de7fdcf34a1ac34cfaf1936d249df2c6de1cc952489f4ed5c7140caae61676bb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Experimental function-level source admission; physical register semantics, caller composition and whole firmware source-only closure remain unqualified."
+  ]
+}

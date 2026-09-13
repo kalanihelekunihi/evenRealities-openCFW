@@ -1,0 +1,185 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "oracle": {
+    "path": "drivers_lib/audio_out/audio_out.o",
+    "blob": "8f564e229b6a598b266efb6425e8d4b93a5ba6c8",
+    "sha256": "9aa4cf36b549a7be99b4084ac71abf44ced3348a8628b994c8a83f7383f03e2d"
+  },
+  "matched_source_wrappers": [
+    {
+      "upstream_section": ".text.gx_audio_out_alloc_playback",
+      "package_offset": 59656,
+      "envelope_bytes": 52,
+      "source_symbol": "open_cfw_gx8002_audio_out_alloc_playback",
+      "compiled_bytes": 52,
+      "admission": "gx8002-audio-output-public-alloc-source-verification.json"
+    },
+    {
+      "upstream_section": ".text.gx_audio_out_free",
+      "package_offset": 59708,
+      "envelope_bytes": 52,
+      "source_symbol": "open_cfw_gx8002_audio_out_free",
+      "compiled_bytes": 52,
+      "admission": "gx8002-audio-output-public-free-source-verification.json"
+    },
+    {
+      "upstream_section": ".text.gx_audio_out_config_buffer",
+      "package_offset": 59760,
+      "envelope_bytes": 52,
+      "source_symbol": "open_cfw_gx8002_audio_out_config_buffer",
+      "compiled_bytes": 52,
+      "admission": "gx8002-audio-output-public-buffer-source-verification.json"
+    },
+    {
+      "upstream_section": ".text.gx_audio_out_config_pcm",
+      "package_offset": 59812,
+      "envelope_bytes": 56,
+      "source_symbol": "open_cfw_gx8002_audio_out_config_pcm",
+      "compiled_bytes": 56,
+      "admission": "gx8002-audio-output-public-pcm-source-verification.json"
+    },
+    {
+      "upstream_section": ".text.gx_audio_out_config_cb",
+      "package_offset": 59868,
+      "envelope_bytes": 56,
+      "source_symbol": "open_cfw_gx8002_audio_out_config_cb",
+      "compiled_bytes": 56,
+      "admission": "gx8002-audio-output-public-cb-source-verification.json"
+    },
+    {
+      "upstream_section": ".text.gx_audio_out_push_frame",
+      "package_offset": 59924,
+      "envelope_bytes": 56,
+      "source_symbol": "open_cfw_gx8002_audio_out_push_frame",
+      "compiled_bytes": 56,
+      "admission": "gx8002-audio-output-public-frame-source-verification.json"
+    },
+    {
+      "upstream_section": ".text.gx_audio_out_set_db",
+      "package_offset": 59980,
+      "envelope_bytes": 56,
+      "source_symbol": "open_cfw_gx8002_audio_out_set_db",
+      "compiled_bytes": 56,
+      "admission": "gx8002-audio-output-public-db-source-verification.json"
+    },
+    {
+      "upstream_section": ".text.gx_audio_out_set_channel",
+      "package_offset": 60036,
+      "envelope_bytes": 56,
+      "source_symbol": "open_cfw_gx8002_audio_out_set_channel",
+      "compiled_bytes": 56,
+      "admission": "gx8002-audio-output-public-channel-source-verification.json"
+    },
+    {
+      "upstream_section": ".text.gx_audio_out_init",
+      "package_offset": 60092,
+      "envelope_bytes": 68,
+      "source_symbol": "open_cfw_gx8002_audio_out_init",
+      "compiled_bytes": 68,
+      "admission": "gx8002-audio-output-public-init-source-verification.json"
+    },
+    {
+      "upstream_section": ".text.gx_audio_out_exit",
+      "package_offset": 60160,
+      "envelope_bytes": 52,
+      "source_symbol": "open_cfw_gx8002_audio_out_exit",
+      "compiled_bytes": 52,
+      "admission": "gx8002-audio-output-public-exit-source-verification.json"
+    }
+  ],
+  "unresolved_sdk_sections": [
+    ".text.gx_audio_out_config_i2s",
+    ".text.gx_audio_out_config_dac",
+    ".text.gx_audio_out_drain_frame",
+    ".text.gx_audio_out_get_db",
+    ".text.gx_audio_out_set_mute",
+    ".text.gx_audio_out_get_mute",
+    ".text.gx_audio_out_suspend",
+    ".text.gx_audio_out_resume",
+    ".text.gx_audio_out_set_fixed_src",
+    ".text.gx_audio_out_get_sdc_src"
+  ],
+  "dispatch_pointer_literal_occurrences": [
+    {
+      "package_offset": 59696,
+      "matched_wrapper_owners": [
+        ".text.gx_audio_out_alloc_playback"
+      ]
+    },
+    {
+      "package_offset": 59748,
+      "matched_wrapper_owners": [
+        ".text.gx_audio_out_free"
+      ]
+    },
+    {
+      "package_offset": 59800,
+      "matched_wrapper_owners": [
+        ".text.gx_audio_out_config_buffer"
+      ]
+    },
+    {
+      "package_offset": 59856,
+      "matched_wrapper_owners": [
+        ".text.gx_audio_out_config_pcm"
+      ]
+    },
+    {
+      "package_offset": 59912,
+      "matched_wrapper_owners": [
+        ".text.gx_audio_out_config_cb"
+      ]
+    },
+    {
+      "package_offset": 59968,
+      "matched_wrapper_owners": [
+        ".text.gx_audio_out_push_frame"
+      ]
+    },
+    {
+      "package_offset": 60024,
+      "matched_wrapper_owners": [
+        ".text.gx_audio_out_set_db"
+      ]
+    },
+    {
+      "package_offset": 60080,
+      "matched_wrapper_owners": [
+        ".text.gx_audio_out_set_channel"
+      ]
+    },
+    {
+      "package_offset": 60144,
+      "matched_wrapper_owners": [
+        ".text.gx_audio_out_init"
+      ]
+    },
+    {
+      "package_offset": 60200,
+      "matched_wrapper_owners": [
+        ".text.gx_audio_out_exit"
+      ]
+    }
+  ],
+  "admission_sha256": {
+    "gx8002-audio-output-public-alloc-source-verification.json": "27a498d542ec69256742ca8342e049ac181110b6febb6b020a56d96cc0873893",
+    "gx8002-audio-output-public-free-source-verification.json": "dd54e24c22b8c1195e93f63595c5313a052e2e22bb02938af90dde14c5c107fd",
+    "gx8002-audio-output-public-buffer-source-verification.json": "07850e63fae8c35a57efb631779ec53f3d2a6eb2d407e52177cbf2b1d3efa89c",
+    "gx8002-audio-output-public-pcm-source-verification.json": "9f48da6b2d1aa7040117beb836de8d7bfcd365177a8bed7feb964e7293376ad4",
+    "gx8002-audio-output-public-cb-source-verification.json": "cbc7662013ee20412594c1032dfcd45b11df9a8d0b80df6d2bfe1a8118d8841b",
+    "gx8002-audio-output-public-frame-source-verification.json": "cfa717d84f5f71c215517abe58963deb7eb5df0204d5805ffd638a213cccea02",
+    "gx8002-audio-output-public-db-source-verification.json": "d5bc67187a3d625b797f9dc550d12f1da790b2a9e1ad37ab94aced4e69e07456",
+    "gx8002-audio-output-public-channel-source-verification.json": "6a4ddcb8e87eaad219cb992cc50bf55abae7c347a602eb2959e229a9e918df15",
+    "gx8002-audio-output-public-init-source-verification.json": "0e1f4e3c168352dd644332d982b60614a04f0cb0f211159820649a4f023a706b",
+    "gx8002-audio-output-public-exit-source-verification.json": "802b87fbaa52b0d3a5597eff450b1e1b8442e8bef3aca28fd4e09f6bf9333981"
+  },
+  "source_only": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Ownership audit uses registered reviewed reports; does not rerun their behavioral verification.",
+    "Unmatched SDK sections may be absent or compiled differently; no absence claim.",
+    "Literal scan does not cover computed pointers, aliases or runtime writes.",
+    "Global BSS initialization, startup copying and full-firmware closure remain unresolved."
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "exp": {
+    "provenance": {
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "entry_offset": 295308,
+      "candidate": "fdlibm-derived IEEE double exponential",
+      "upstream_repository": "https://github.com/freemint/fdlibm",
+      "upstream_commit": "61c059fed98e2ed8d26ca39617321134b33e535a",
+      "upstream_path": "e_exp.c",
+      "upstream_sha256": "43e238d65d2372039675acb01957614c9d152b7e93d8b9477732795720d9fbbf",
+      "coefficients": [
+        {
+          "coefficient": "P1",
+          "package_offset": 295956,
+          "upstream_bits": "0x3fc555555555553e",
+          "stock_bits": "0x3fc555555555553e",
+          "comparison": "exact magnitude; negative P2/P4 represented as positive literals with subtraction call sites"
+        },
+        {
+          "coefficient": "P2",
+          "package_offset": 295948,
+          "upstream_bits": "0xbf66c16c16bebd93",
+          "stock_bits": "0x3f66c16c16bebd93",
+          "comparison": "exact magnitude; negative P2/P4 represented as positive literals with subtraction call sites"
+        },
+        {
+          "coefficient": "P3",
+          "package_offset": 295940,
+          "upstream_bits": "0x3f11566aaf25de2c",
+          "stock_bits": "0x3f11566aaf25de2c",
+          "comparison": "exact magnitude; negative P2/P4 represented as positive literals with subtraction call sites"
+        },
+        {
+          "coefficient": "P4",
+          "package_offset": 295932,
+          "upstream_bits": "0xbebbbd41c5d26bf1",
+          "stock_bits": "0x3ebbbd41c5d26bf1",
+          "comparison": "exact magnitude; negative P2/P4 represented as positive literals with subtraction call sites"
+        },
+        {
+          "coefficient": "P5",
+          "package_offset": 295924,
+          "upstream_bits": "0x3e66376972bea4d0",
+          "stock_bits": "0x3e66376972bea4d0",
+          "comparison": "exact magnitude; negative P2/P4 represented as positive literals with subtraction call sites"
+        }
+      ],
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Five polynomial coefficient magnitudes match, with observed argument-reduction and overflow threshold high words supporting identification.",
+        "Does not establish exact origin revision or full behavior. Upstream explicit exception raising and NaN return behavior require comparison with stock; software-double callees remain to be reconstructed."
+      ]
+    },
+    "source_sha256": "2353fee6c72b3ad41eaab0ba281a504bb9889e4c66d57b8e3dbeb809c3dee77a",
+    "object_sha256": "115ee1251d29cad3a319c21eec753f87a1a50a2e5838f7156af88512274b28b7",
+    "sections": [
+      {
+        "name": ".text.open_cfw_gx8002_backup_exp",
+        "bytes": 768
+      },
+      {
+        "name": ".rodata.halF.0",
+        "bytes": 16
+      },
+      {
+        "name": ".rodata.ln2LO.1",
+        "bytes": 16
+      },
+      {
+        "name": ".rodata.ln2HI.2",
+        "bytes": 16
+      }
+    ],
+    "unresolved_dependencies": [
+      "__adddf3",
+      "__divdf3",
+      "__fixdfsi",
+      "__floatsidf",
+      "__gtdf2",
+      "__ltdf2",
+      "__muldf3",
+      "__subdf3"
+    ],
+    "source_admitted": false,
+    "limits": [
+      "macOS compile-only probe. Not linked, not stock-equivalent, not a firmware replacement. Compiler binary64 arithmetic dependencies must be implemented from source and qualified; special paths follow observed stock call shapes."
+    ]
+  },
+  "gcc_revision": "1e9b70447a8417f5c692370de4533e43d754e8fa",
+  "runtime_license": "GPL-3.0-or-later WITH GCC-exception-3.1",
+  "rebuilt_objects": [
+    {
+      "name": "_pack_df.o",
+      "sha256": "cd8aea507d4b8775e3386d62ae9aa387a329dcdb8435302abc70b7e641366f8c"
+    },
+    {
+      "name": "_unpack_df.o",
+      "sha256": "129e46dbfa82b8e3f3b7086da1c4cc2067637e231ca682be83f78b731f8989b9"
+    },
+    {
+      "name": "_addsub_df.o",
+      "sha256": "b8d47bc4b0b14b17a5d8c214410d75a3176fceebeff7b936685a44ad25c93449"
+    },
+    {
+      "name": "_mul_df.o",
+      "sha256": "90cd724d553f24d64c83e71e5d42dd1f20d6369472346056056694b4836a9964"
+    },
+    {
+      "name": "_div_df.o",
+      "sha256": "694ddeaeba3fa92c727943047e82ef7f386f73f427a48ccd8d3d0f3222e69cbe"
+    },
+    {
+      "name": "_fpcmp_parts_df.o",
+      "sha256": "58501251c591569cfdb92c0c8207f4972e5d6a24c3c888fe184147e693502432"
+    },
+    {
+      "name": "_gt_df.o",
+      "sha256": "e9849fcb5b983db39672f7c5ee17fb10b66ce861e10fc0f16ad61dbfe8beac05"
+    },
+    {
+      "name": "_lt_df.o",
+      "sha256": "38df0eec39d4c81667a2b30303c772ac8feed3f9731b29fe4c0822a62f688d70"
+    },
+    {
+      "name": "_si_to_df.o",
+      "sha256": "c62aa07d0de1c859c87bbd9bb70a118e41184a04a08698857f1729a52fdf86b8"
+    },
+    {
+      "name": "_df_to_si.o",
+      "sha256": "40e805ea0346870d45bf313cc90244f86f1352cd37b83bf0f2e70392fc3ad01f"
+    },
+    {
+      "name": "_thenan_df.o",
+      "sha256": "367a01b35a533c32046dc3479dc267d6a280611b05dbdd6fe37bb438e9d54050"
+    }
+  ],
+  "source_dependencies": {
+    "build/upstream-csky-toolchain-build/gcc/libgcc/fp-bit.c": "f635ba0d69f88c0090b5997c2087c36780939caf1477aece8f2fc3d3c684817f",
+    "build/csky-macos/gcc-build/gcc/tconfig.h": "156e462ce8c02c07825e53bd5ba3dd2ff107f46cd45159e7ceb4dd492be1b56b",
+    "build/csky-macos/gcc-build/gcc/auto-host.h": "5709929952e4e381932f666222668d902986ad1ce6072721cb62f1ab7812efa6",
+    "build/upstream-csky-toolchain-build/gcc/include/ansidecl.h": "06716406a6cd33f5bf987864ce2ffe27a5977393bfb28b7ce87621a67e05f91d",
+    "build/upstream-csky-toolchain-build/gcc/gcc/coretypes.h": "169d3b325ba9957aa6dc3953bb26dfed3bed2618950585f1891d4ab9375def21",
+    "build/csky-macos/gcc-build/gcc/tm.h": "fb393ef03c2f609830b822745800b46b09e56f4317bd677b810c64c0c8c4dbb6",
+    "build/csky-macos/gcc-build/gcc/options.h": "86e877f8bb5ec7f34a3c05b4d63ca92360c744ec99e64e37bec3e6e80699446b",
+    "build/upstream-csky-toolchain-build/gcc/gcc/flag-types.h": "5796693bde1e7f9686a857964835bdc7bef1ff9c3a597ef24c1bd8e2eb398d9c",
+    "build/upstream-csky-toolchain-build/gcc/gcc/config/csky/csky_opts.h": "6e34d6fef72fa378c535e9df4474f56b7e40800b5b66b41c8c5383f7d9e2de29",
+    "build/upstream-csky-toolchain-build/gcc/gcc/config/csky/csky_cores.def": "201eb31ddf54011c64b6e8d8ab5acde9a922d1013e5cbf29958981d22adf6182",
+    "build/csky-macos/gcc-build/gcc/insn-constants.h": "a56d057b4096beade5c675ad8d318e0f40edafe1b00cb75b4ac9974c0d90a713",
+    "build/upstream-csky-toolchain-build/gcc/gcc/config/elfos.h": "255fe5da07efc03e66574ab45a1c92deb4ed7cc064f83677e1cae109065b8354",
+    "build/upstream-csky-toolchain-build/gcc/gcc/config/newlib-stdint.h": "c10c407f447ff677f526e25f47022fb9625665d8bfe4f4552c1b8b6a1842f1bf",
+    "build/upstream-csky-toolchain-build/gcc/gcc/config/csky/csky.h": "0ed3316c5feb5a861c9dff32a809fedff950ce7e5baacffc80276a66606ba4be",
+    "build/upstream-csky-toolchain-build/gcc/gcc/config/csky/csky_isa.h": "4119b8ad7d51861c457801e39682b81f5541a82b6ccbf449e1278d01b511a8cb",
+    "build/upstream-csky-toolchain-build/gcc/gcc/config/csky/csky_isa.def": "959e52f062a88d8a8c529cac4586bdd6d9a7988d56b6d775df5cc174c9700274",
+    "build/upstream-csky-toolchain-build/gcc/gcc/config/csky/csky-elf.h": "ddab623628562f8e81b64867a1ba42f85a17a31d5a43a4ba68b7168ca17df7a3",
+    "build/upstream-csky-toolchain-build/gcc/gcc/config/initfini-array.h": "3b824fa8ab2a86c5b8e5a72b4c868e569780d5e867d80755538e483cdf04b4ab",
+    "build/csky-macos/gcc-build/gcc/insn-modes.h": "dd38fda9b839a773bb289d51cdcb177587d932f7a16b8b1ff2599a493d8f4eb6",
+    "build/upstream-csky-toolchain-build/gcc/gcc/defaults.h": "012ff1fece4d6d52b00647a49472045054094afa11637d7d5fdaced73ab95eae",
+    "build/csky-macos/gcc-build/csky-unknown-elf/libgcc/libgcc_tm.h": "a17020fe85909e7d4b4bbc236cec6181eaf7d9c9e9c294bbadf92e2701c1ad34",
+    "build/upstream-csky-toolchain-build/gcc/libgcc/fp-bit.h": "c8a495705755faec80c153265579a46411393d6b531548b55679fcba0bf33d1f"
+  },
+  "elf_sha256": "5172d74d96dbd0e889a14bd008ce072d1436aa9f0641fc959c499e6057f5dd6a",
+  "allocated_bytes": 3730,
+  "unresolved_symbols": [],
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Fully linked source arithmetic experiment at analysis address. No retained firmware helper addresses or archive extraction used.",
+    "GCC fp-bit rounding, NaN, flags and complete exp behavior have not been qualified against stock. Placement and firmware admission pending."
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_fixdfsi",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 104,
+      "compiled_sha256": "537f622b00ac8c6aadbbca7cd9ba00899cbb0ce6c7a82c9e4a89ea64557d2429",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_fixdfsi",
+          "package_offset": 80364,
+          "bytes": 112,
+          "sha256": "b74b4dca58eb33374fec2f96e5dc6968dbc3462d36ac6fce622c4e1774810340",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "upstream_commit": "1e9b70447a8417f5c692370de4533e43d754e8fa",
+      "upstream_sha256": "f635ba0d69f88c0090b5997c2087c36780939caf1477aece8f2fc3d3c684817f",
+      "source_sha256": "523749960145b3cd26884b71699fd1f260149c6175e65875ea318fae55d2fcde",
+      "adaptation": "Split guarded shift, express saturation as unsigned MAX plus sign predicate, and combine short-circuit saturation guards",
+      "runtime_license_sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74",
+      "compiled_bytes": 104,
+      "envelope_bytes": 112,
+      "fits": true,
+      "byte_exact": false,
+      "compiled_sha256": "537f622b00ac8c6aadbbca7cd9ba00899cbb0ce6c7a82c9e4a89ea64557d2429",
+      "source_admitted": false,
+      "limits": [
+        "Upstream candidate; behavioral and ownership checks outstanding."
+      ]
+    },
+    "unpacker": {
+      "upstream_commit": "1e9b70447a8417f5c692370de4533e43d754e8fa",
+      "upstream_sha256": "f635ba0d69f88c0090b5997c2087c36780939caf1477aece8f2fc3d3c684817f",
+      "source_sha256": "1046559c0afe66004fae4ed45a7fddbc4fb4835867f72bae450b0174a8d75233",
+      "runtime_license_sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74",
+      "compiled_bytes": 164,
+      "envelope_bytes": 228,
+      "fits": true,
+      "byte_exact": false,
+      "compiled_sha256": "35388505e534a74d4055be93dea074ae7702b127263c55259f071ca4f17dba8e",
+      "source_admitted": false,
+      "limits": [
+        "Upstream candidate; behavioral and ownership checks outstanding."
+      ]
+    },
+    "cases": 1013,
+    "source_admitted": false,
+    "limits": [
+      "Nested decoded unpack and signed conversion checked; physical exception flags and timing unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_fixdfsi_source.py": "e68991c600ff60a049f99619ab1d28996de3e5a4a290acb815511d330eeaee45",
+    "verify_gx8002_fixdfsi.py": "26fa9a01dc9582ab505f278ada26cdc9bc59b75db522aff915ee44a6136bd4cb",
+    "execute_gx8002_fixdfsi.py": "2a6dfbc51aee4a5510f02e9517aa8cc60a9144604391b456c3a39ca5b992fdfd",
+    "build_gx8002_fixdfsi.py": "a886019eaaa5dba2016c337812e598a53a61e6730c4429605fb701bb8d16e1d1",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5",
+    "build_gx8002_unpack_double.py": "bf4b01ee777c6f36ef0b90d91242d2b0b9a8e2a65782f5ab11473df97af9bec6",
+    "execute_gx8002_unpack_double.py": "cf6d7569c5c457cf90f8a855785e923ab80139ce380c097621635c3eb0d1fd84"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Nested decoded unpack and signed conversion checked; physical exception flags and timing unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

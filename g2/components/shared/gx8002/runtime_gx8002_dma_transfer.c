@@ -14,8 +14,11 @@ int open_cfw_gx8002_dma_transfer(uint32_t destination, uint32_t source,
     volatile uint32_t *state=open_cfw_gx8002_dma_state;
     uint32_t mask=257u<<channel;
     *(volatile uint32_t *)(uintptr_t)(state[0]+0x310)=mask;
-    channel += 218;
-    open_cfw_gx8002_dma_descriptor_cache(state[channel],416);
+    /* Preserve a compact word index instead of expanding byte arithmetic.
+     * The empty constraint emits no instructions with the pinned compiler. */
+    register uint32_t index __asm__("r5")=channel+218;
+    __asm__("" : "+r"(index));
+    open_cfw_gx8002_dma_descriptor_cache(state[index],416);
     *(volatile uint32_t *)(uintptr_t)(state[0]+0x3a0)=mask;
     return 0;
 }

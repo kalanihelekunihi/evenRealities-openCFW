@@ -1,0 +1,177 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_aout_dispatch",
+      "section_name": ".data.aout_dispatch",
+      "compiled_bytes": 84,
+      "compiled_sha256": "b5466e260001986f04418e55cdc810ea9654f2f6b1c3ef24dbd95af7b3995f8a",
+      "ownership_kind": "generated_source_data",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_dispatch",
+          "package_offset": 101340,
+          "bytes": 84,
+          "sha256": "b5466e260001986f04418e55cdc810ea9654f2f6b1c3ef24dbd95af7b3995f8a",
+          "region": "image_a_dram_data"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_dispatch",
+          "section_name": ".data.aout_dispatch",
+          "compiled_bytes": 84,
+          "compiled_sha256": "b5466e260001986f04418e55cdc810ea9654f2f6b1c3ef24dbd95af7b3995f8a",
+          "package_offset": 101340,
+          "stock_envelope_bytes": 84,
+          "stock_sha256": "b5466e260001986f04418e55cdc810ea9654f2f6b1c3ef24dbd95af7b3995f8a",
+          "ownership_kind": "generated_source_data",
+          "fits": true
+        }
+      ],
+      "bindings": [
+        {
+          "symbol": "open_cfw_gx8002_aout_alloc_playback",
+          "address": 270553684,
+          "report": "gx8002-audio-output-alloc-playback-source-verification.json",
+          "report_sha256": "b79004e83b67ca04a6751e337388dcd2c75e0ac453becb2aa4daeb187c246ed2"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_init",
+          "address": 270552856,
+          "report": "gx8002-audio-output-init-source-verification.json",
+          "report_sha256": "443bff8e52365607ee92d44758d738c46acadfd64cc4b04726c9eb1acfc5b0fc"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_exit",
+          "address": 270553924,
+          "report": "gx8002-audio-output-exit-source-verification.json",
+          "report_sha256": "7d7aa714f32b52c21c49d9e41d3407146331c14eb38b79373dbb76cb8352484a"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_suspend",
+          "address": 270552768,
+          "report": "gx8002-audio-output-suspend-source-verification.json",
+          "report_sha256": "800e5491ee4bdabf0c0bc0eeea5f7484fbf1b9d0a1fe18af9785977306fd64cf"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_resume",
+          "address": 270553628,
+          "report": "gx8002-audio-output-resume-source-verification.json",
+          "report_sha256": "04e63979735dbb6b89d10ed0cbf6649cb22de74c299b2fe2189e3a9736d0400f"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_free",
+          "address": 270553824,
+          "report": "gx8002-audio-output-free-source-verification.json",
+          "report_sha256": "83778458d9bda750db2d27c010e1b580e36e8e867da4d75430b24025651d3e48"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_config_buffer",
+          "address": 270552684,
+          "report": "gx8002-audio-output-config-buffer-source-verification.json",
+          "report_sha256": "7179bf929188e778adc0bf19f5148762cd1372086ef666524f39803e163a0279"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_config_pcm",
+          "address": 270552376,
+          "report": "gx8002-audio-output-config-pcm-source-verification.json",
+          "report_sha256": "e7729e9a6fe5890ef62cb6b4ecdf7c97cf42f4a5cc713a239c1ffdad27b8860f"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_config_i2s",
+          "address": 270552164,
+          "report": "gx8002-audio-output-config-i2s-source-verification.json",
+          "report_sha256": "79cb4b7e86fbd2767f9292eee7d574e1949c85ad2006da51c0a4b733f689987d"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_config_dac",
+          "address": 270552208,
+          "report": "gx8002-audio-output-config-dac-source-verification.json",
+          "report_sha256": "96e7de5cf61f03884f6c1fb3138dc325806db03bcf2a7210d13e19e3035a801a"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_config_cb",
+          "address": 270553880,
+          "report": "gx8002-audio-output-callbacks-source-verification.json",
+          "report_sha256": "731da53575826d1805f19a64c8837743e48ce5cb4e06bb4cec806c67ce982a66"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_push_frame",
+          "address": 270553512,
+          "report": "gx8002-audio-output-push-frame-source-verification.json",
+          "report_sha256": "543cb1f5fde6eec17b068f521c3084f37b38a38038dac3fe6a003494421435fb"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_drain_frame",
+          "address": 270552324,
+          "report": "gx8002-audio-output-drain-frame-source-verification.json",
+          "report_sha256": "c4b2ca5d58901cbdbfb3680aac7f59360382cdfedf13382854a9f0ae1cf0e949"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_set_db",
+          "address": 270552976,
+          "report": "gx8002-audio-output-volume-source-verification.json",
+          "report_sha256": "2566fca3f6a29d4b29887ad05da337d148baceef6a74f1dd883a7256fe276653"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_get_db",
+          "address": 270553072,
+          "report": "gx8002-audio-output-volume-source-verification.json",
+          "report_sha256": "2566fca3f6a29d4b29887ad05da337d148baceef6a74f1dd883a7256fe276653"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_set_mute",
+          "address": 270553228,
+          "report": "gx8002-audio-output-mute-source-verification.json",
+          "report_sha256": "a77d5c98ffd3a3381cb65bc664454f01d9ae6ca25dd48d3df5d63e8da7a5ea68"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_get_mute",
+          "address": 270552276,
+          "report": "gx8002-audio-output-mute-source-verification.json",
+          "report_sha256": "a77d5c98ffd3a3381cb65bc664454f01d9ae6ca25dd48d3df5d63e8da7a5ea68"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_set_channel",
+          "address": 270553132,
+          "report": "gx8002-audio-output-set-channel-source-verification.json",
+          "report_sha256": "bf6e0ebd0bd3d70c8695c43bebd0fd15b30a9adc76fe2b6528525d57dd622c3f"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_set_fixed_src",
+          "address": 270552284,
+          "report": "gx8002-audio-output-fixed-source-verification.json",
+          "report_sha256": "547c936dd4b39418cfce4c68d956bd04378f1e4037c86b92713cf4c1daf5a8c3"
+        },
+        {
+          "symbol": "open_cfw_gx8002_aout_get_sdc_addr",
+          "address": 270552316,
+          "report": "gx8002-audio-output-fixed-source-verification.json",
+          "report_sha256": "547c936dd4b39418cfce4c68d956bd04378f1e4037c86b92713cf4c1daf5a8c3"
+        }
+      ],
+      "source_sha256": "86ae9e86ca62568fb53f9d114e294b33a895b6d4df11b2079745070af69875cc",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    }
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_output_dispatch.py": "078dc130092d4e704f288a7ac9b1dff4b82ada93ed8e7d79cb5e9b80f8a32153",
+    "verify_gx8002_audio_output_dispatch_source.py": "a62a6d0e526408727a47722a9184c5e99baae5bd048220cb299fe903933d63ce"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Named dispatch references match stock and SDK relocations; all20 targets require source-admission records. Full public-caller ABI/lifecycle composition, boot copy and whole-firmware closure remain unqualified."
+  ]
+}

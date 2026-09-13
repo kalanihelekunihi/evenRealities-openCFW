@@ -1,0 +1,18 @@
+{
+  "source_sha256": "2353fee6c72b3ad41eaab0ba281a504bb9889e4c66d57b8e3dbeb809c3dee77a",
+  "library_sha256": "cd55525c1e951ec88f51cc891c14c59a71186434da86fce5b42830dfe891215a",
+  "finite_cases": 16826,
+  "special_cases": 5,
+  "maximum_ulp_distance": 1,
+  "ulp_histogram": {
+    "0": 15828,
+    "1": 998
+  },
+  "failures": [],
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Host ARM64 arithmetic, round-to-nearest default; Decimal 110-digit exp converted to binary64 oracle. Allows one ULP, not correctly-rounded proof.",
+    "Does not execute target GCC fp-bit helpers or establish stock equivalence, exception flags, all NaN payloads, timing or hardware behavior."
+  ]
+}

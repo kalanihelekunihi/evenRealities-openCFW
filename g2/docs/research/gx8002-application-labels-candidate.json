@@ -1,0 +1,26 @@
+{
+  "source_sha256": "491493a283244fd66cdab587441bce6d832d7f10c3389cc21967607149615164",
+  "elf_sha256": "ffe0ba3902e261fc76bd2b14fbe69a04bfba56bbad43f1c8c6e8a9b44188335a",
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "rows": [
+    {
+      "name": "soft_off",
+      "package_offset": 82971,
+      "bytes": 18,
+      "sha256": "91db0958e1e412eae3a9994cbefb84f7163515c7e3ed87ed339a53ed2f694b72",
+      "text": "set mcu Soft-Off\n\u0000"
+    },
+    {
+      "name": "sample_labels",
+      "package_offset": 84949,
+      "bytes": 44,
+      "sha256": "5bacd8db5ac0caff0fcdfec800459e639412371af6cab23f6cef434f13ad0cbc",
+      "text": "sample app\u0000SampleAppSuspend\u0000SampleAppResume\u0000"
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Readable strings match stock at exact XIP addresses. Adjacent1byte/3byte zeros are not claimed. Original application source lineage and runtime references not established by text match.",
+    "Ownership checks and admission pending; no application behavior reconstructed by this data change."
+  ]
+}

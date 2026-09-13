@@ -1,0 +1,34 @@
+{
+  "source_elf_sha256": "0991232d3123a9ebb55e0f9256e4c2fcac1b9c6f3caad34ebfbd643ac5f05537",
+  "failures": [
+    {
+      "exact_scaled_floor": "0x1ffffffffffffd00",
+      "nonzero_remainder": true,
+      "operation": "mul",
+      "a": "0xfffffffffffff",
+      "b": "0x3fefffffffffffff",
+      "expected": "0xfffffffffffff",
+      "actual": "0xffffffffffffe",
+      "pre_pack_parts": "030000000000000001fcffff00fdffffffffff1f",
+      "exponent": -1023,
+      "fraction": "0x1ffffffffffffd00",
+      "packer_agrees_with_parts_oracle": true
+    },
+    {
+      "exact_scaled_floor": "0x17fffffffffffe80",
+      "nonzero_remainder": true,
+      "operation": "div",
+      "a": "0x18000000000000",
+      "b": "0x4000000000000001",
+      "expected": "0xbffffffffffff",
+      "actual": "0xc000000000000",
+      "pre_pack_parts": "030000000000000001fcffff00ffffffffffff17",
+      "exponent": -1023,
+      "fraction": "0x17ffffffffffff00",
+      "packer_agrees_with_parts_oracle": true
+    }
+  ],
+  "limits": [
+    "Instrumentation observes actual machine state without replacing helpers. Confirms discrepancy exists in parts delivered to pack; arithmetic algorithm versus earlier instruction modeling still needs resolution."
+  ]
+}

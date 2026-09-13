@@ -1,0 +1,56 @@
+{
+  "build": {
+    "source_sha256": "ee7a40224bb2ef1e705ffa80c2235b2be0001c2274c5ca40baa703cb812c94f6",
+    "sections": [
+      {
+        "section": ".shared_literals",
+        "offset": 319640,
+        "bytes": 16,
+        "sha256": "4917ec4170d73a87a2392efb5e4f1ed119bdc7aeb28a016da048e1c91331a977"
+      },
+      {
+        "section": ".otp_error",
+        "offset": 308172,
+        "bytes": 22,
+        "sha256": "b3586d06a1dc876fb5451e0ed0bf073c1b75284815d5d6cb00e7ef20b51c237b"
+      },
+      {
+        "section": ".otp_model",
+        "offset": 308196,
+        "bytes": 6,
+        "sha256": "b421a0768e6df358474f6c19477a6e0e66195e8aeb6fd75bbca804c224579b8a"
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Exact source-authored text and symbolic pointers. Consumer and provider qualification, reference census and loader integration remain separate."
+    ]
+  },
+  "uses": [
+    {
+      "instruction": 319526,
+      "literal_offset": 319640,
+      "value": 536964480
+    },
+    {
+      "instruction": 319570,
+      "literal_offset": 319644,
+      "value": 268511908
+    },
+    {
+      "instruction": 319578,
+      "literal_offset": 319644,
+      "value": 268511908
+    },
+    {
+      "instruction": 319614,
+      "literal_offset": 319648,
+      "value": 268511884
+    }
+  ],
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Four decoded literal loads and source text identity checked; the full flash routine and called helpers are not executed by this check."
+  ]
+}

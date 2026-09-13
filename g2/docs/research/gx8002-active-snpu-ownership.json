@@ -1,0 +1,95 @@
+{
+  "startup_clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+  "candidate": {
+    "state_source_sha256": "a3336c1df2b4442de3012b0910db2ba48338f035cda0c3f5c9b8e9e32b26f93b",
+    "standalone": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "dependencies": [
+        {
+          "path": "lvp/lvp_mode_tws.c",
+          "blob": "4bd9d2962adac54871e6c6eb905174a0ee649300",
+          "sha256": "18e45319c213c185f1652b73f820ba469ed6847fba06ff247244d13df3635574"
+        },
+        {
+          "path": "lvp/common/lvp_queue.h",
+          "blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+          "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+        },
+        {
+          "path": "include/driver/gx_snpu.h",
+          "blob": "a2a911b22f7f379d9f489d959519125d5cad3a52",
+          "sha256": "72aa01a5cc6519da63dff4afa7163c7d3a3045d203998e691768dfa189643a46"
+        },
+        {
+          "path": "LICENSE",
+          "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+          "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+        }
+      ],
+      "source_sha256": "fef7b304062be2710c411a87c610988dd8a7c532e33d6eab41f5594de3564c08",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "bindings": {
+        "LvpQueuePut": 268591544,
+        "open_cfw_gx8002_active_snpu_queue": 537061100
+      },
+      "elf_sha256": "55e487139d742cfe5c0105eb24c648162b8eb81ae4ce7bec87ebf8fea3843dc5",
+      "compiled_bytes": 28,
+      "compiled_sha256": "5f6ac99640467642d3b2dce6a20a0e0abf5fd46dc520797bdd4e3b42d67d30ab",
+      "stock_offset": 99156,
+      "stock_bytes": 24,
+      "stock_sha256": "0465caddb8b3ce27579a100ecc5280c913c4546d448a1134721eb7401337f865",
+      "fits": false,
+      "source_admitted": false,
+      "limits": [
+        "Standalone link exceeds original envelope; not suitable for replacement. Stock pool shared at package 0x184e8. Behavior and queue ownership pending."
+      ]
+    },
+    "compiler_assembly_sha256": "e03f19d086b94f7eb824a238c1f15eef1f7a46ea598fb6c4e727f8740e844999",
+    "transformed_assembly_sha256": "2a8db0769d862f175220533d625b147f25e48e82921a6420e32b263ce5f14f04",
+    "elf_sha256": "815cd47b5a7a410f0164c5b3036d291780a00895d7b00a8bd6b3d603cf0a5213",
+    "body_bytes": 22,
+    "body_sha256": "82bc3887842c280fd4c82cf9a842cce5f243d7eef43486faa4ce650fd4b018b3",
+    "literal_bytes": 4,
+    "literal_sha256": "4327767f463e7ce9683714778a2f01390ca9b18bf01b6aa672ca849c5b46e950",
+    "source_admitted": false,
+    "limits": [
+      "Guarded compiler-assembly transform forces short literal load and separates source pointer pool. Exact stock instruction bytes and source-derived pointer verified; no stock extraction used in construction. Shared-pool ownership and full admission pending."
+    ]
+  },
+  "direct_literal_consumer_package_offsets": [
+    99164,
+    99190,
+    99244,
+    99274,
+    99288,
+    99412
+  ],
+  "scan_interval": [
+    87316,
+    101696
+  ],
+  "queue_region": {
+    "address": 537061100,
+    "bytes": 76,
+    "queue_bytes": 20,
+    "buffer_bytes": 56
+  },
+  "checked_artifacts": 367,
+  "missing_artifacts": [],
+  "overlapping_allocations": [],
+  "source_admitted": false,
+  "limits": [
+    "Direct disassembly references only; not exhaustive indirect-consumer discovery. Source literal preserves stock value for all consumers. Source queue and buffer BSS allocations are checked by builder; authenticated decoded startup clears every word. Retained indirect writers and concurrency remain outside audit."
+  ]
+}

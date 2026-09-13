@@ -1,0 +1,35 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "header": {
+    "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+    "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+  },
+  "oracle": {
+    "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+    "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+    "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+    "section": ".text.gx_audio_in_set_output_logfbank",
+    "relocations": [
+      {
+        "offset": 168,
+        "symbol": 3,
+        "type": 1,
+        "addend": 0
+      }
+    ],
+    "role": "symbol_evidence_only"
+  },
+  "bindings": {
+    "open_cfw_gx8002_audio_output_state": 537031476
+  },
+  "source_sha256": "c91d762d4ba129428887eb7299f63be4a989c0dd486592f94825362186acb04f",
+  "symbol": "open_cfw_gx8002_audio_output_logfbank",
+  "compiled_bytes": 172,
+  "compiled_sha256": "56bbcc54c2ed60159e52f5020426799c86564498f6781608e0928f31dcf095c1",
+  "package_offset": 54796,
+  "stock_envelope_bytes": 172,
+  "stock_sha256": "613ca02f2cce78df7ccf3d9a3ed82edf9e0c4fbefd8cc68f709c2f499b41d5da",
+  "fits": true,
+  "source_admitted": false,
+  "hardware_qualified": false
+}

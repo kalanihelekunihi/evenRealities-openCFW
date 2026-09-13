@@ -1,0 +1,34 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "header": {
+      "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+      "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+    },
+    "oracle": {
+      "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+      "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+      "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+      "section": ".text.gx_audio_in_set_interrupt_enable",
+      "relocations": [],
+      "role": "symbol_evidence_only"
+    },
+    "bindings": {},
+    "source_sha256": "083d7c52216fbd134d75e43536cbc97d5322a6ade582bfb733f6d34b2c7101db",
+    "symbol": "open_cfw_gx8002_audio_interrupt_enable",
+    "compiled_bytes": 36,
+    "compiled_sha256": "e997ebfe428083ceef5c896b30e0164902834b667de49c32051fbd6f67e32e40",
+    "package_offset": 56644,
+    "stock_envelope_bytes": 44,
+    "stock_sha256": "fa763a815a7ee485ef18a767a34632d217cf2eee6bf208ab352e71f65a76200b",
+    "fits": true,
+    "source_admitted": false,
+    "hardware_qualified": false
+  },
+  "decoded_cases": 525,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Raw masks including every bit, nonzero enables, and opposite status-clear ordering checked. Physical interrupt delivery unqualified."
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_audio_i2sin_mode",
+      "compiled_bytes": 16,
+      "compiled_sha256": "1591546bd5375552b7c3fe36e98f0962522ae12635cc90eb3fc1f7d10a2476a7",
+      "section_name": ".text",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_audio_i2sin_mode",
+          "package_offset": 55484,
+          "bytes": 16,
+          "sha256": "1591546bd5375552b7c3fe36e98f0962522ae12635cc90eb3fc1f7d10a2476a7",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+        "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+        "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+        "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+        "section": ".text.gx_audio_in_set_i2sin_mode",
+        "relocations": [],
+        "role": "symbol_evidence_only"
+      },
+      "bindings": {},
+      "source_sha256": "4d7d04957864b6e5bfe5be156ce5cfcb87e544fd50bd1a579b17aeefe78d4723",
+      "symbol": "open_cfw_gx8002_audio_i2sin_mode",
+      "compiled_bytes": 16,
+      "compiled_sha256": "1591546bd5375552b7c3fe36e98f0962522ae12635cc90eb3fc1f7d10a2476a7",
+      "package_offset": 55484,
+      "stock_envelope_bytes": 16,
+      "stock_sha256": "1591546bd5375552b7c3fe36e98f0962522ae12635cc90eb3fc1f7d10a2476a7",
+      "fits": true,
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 6912,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Raw mode low-bit narrowing and ordered read-modify-write checked with boundary and random inputs. Physical I2S input clock behavior unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_i2sin_mode.py": "7790687293e7bdaa6f0d8eaeca063cabc79ca8250cc75291185431ee0aaf91aa",
+    "verify_gx8002_audio_i2sin_mode.py": "a544fe8c0e620459806c019a164167bccf6dac0da15246862f3aa041251b08be",
+    "verify_gx8002_audio_i2sin_mode_source.py": "19cf9f248b953706460cd51eb3b820fd5fafb87fadfec74f6167e1d6270df9af",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Low-bit clock mode narrowing preserves other bits. Decoded stock/source and ordered MMIO checked across 6912 cases. Physical I2S clock behavior unqualified."
+  ]
+}

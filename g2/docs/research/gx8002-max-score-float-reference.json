@@ -1,0 +1,42 @@
+{
+  "repository": "https://github.com/T-head-Semi/qemu",
+  "commit": "3287d345c7f5d60d5c8774d90752f5f710744f85",
+  "files": [
+    {
+      "path": "target/csky/op_helper_v2.c",
+      "sha256": "99f73284fcb90bdae0dd0ed88885a6fcac0425e74adb384577a2f207bfb951e3"
+    },
+    {
+      "path": "fpu/softfloat.c",
+      "sha256": "dbd0c994a93ec1a6696c5d7c0caa49d490807046bd3f5a9eca8b461687cf241f"
+    },
+    {
+      "path": "fpu/softfloat-parts.c.inc",
+      "sha256": "778b153e3dc05798607533c3675b7c489e1268f14e94f45c7024fced1596848f"
+    },
+    {
+      "path": "target/csky/translate_v2.c",
+      "sha256": "d56e8f41f25c225e3a6d7446a26062cacee2a4f9fe6a2df8661cf066c9e373a5"
+    },
+    {
+      "path": "target/csky/op_fpuv3.c",
+      "sha256": "64672ad958caf89d8dd29aa1711b87cb9149bc9b8a584a9291e9e64002bba287"
+    },
+    {
+      "path": "target/csky/cpu.c",
+      "sha256": "4115584b6a7f1a7040f08974075dca5e3ad020c83493a398ce2eb1b4b722a081"
+    }
+  ],
+  "observations": {
+    "cpu.c:637": "ck804ef maps to e804df_cpu_initfn, enables ABIV2_FPU_SINGLE and does not enable ABIV2_FPU3.",
+    "translate_v2.c:11243": "VFP dispatch chooses disas_vfp_insn without ABIV2_FPU3.",
+    "translate_v2.c:5383": "fstosi.rz selects single-precision gen_vfp_tosirz, which calls vfp_tosirzs.",
+    "op_helper_v2.c:601": "tosirzs returns zero for NaN; saves rounding mode, selects toward zero, calls float32_to_int32 and restores mode.",
+    "softfloat-parts.c.inc:1225": "Signed conversion saturates infinities and overflow at min/max; raises flags.",
+    "op_fpuv3.c:2264": "FPUv3 helper lacks the NaN-zero override; not used for pinned CK804 configuration."
+  },
+  "limits": [
+    "Result semantics implemented in restricted scorer executor; floating flags/traps and physical device remain unqualified."
+  ],
+  "local_source_hashes_verified": true
+}

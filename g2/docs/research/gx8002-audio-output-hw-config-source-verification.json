@@ -1,0 +1,91 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_aout_select_hw_config",
+      "section_name": ".text.aout_select_hw_config",
+      "compiled_bytes": 8,
+      "compiled_sha256": "3b41c4ff5bd2cb7ac876425b0edd9d505c6914e31cef724299fd2f29c1eb8600",
+      "ownership_kind": "compiled_c",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_select_hw_config",
+          "package_offset": 59648,
+          "bytes": 8,
+          "sha256": "3b41c4ff5bd2cb7ac876425b0edd9d505c6914e31cef724299fd2f29c1eb8600",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_aout_hw_settings",
+      "section_name": ".data.aout_hw_settings",
+      "compiled_bytes": 84,
+      "compiled_sha256": "476abe0d89ba4e6f1b20ca8b03c4d1c59c69bc4cb33541ffde7b1eab7e419d8d",
+      "ownership_kind": "generated_source_data",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_hw_settings",
+          "package_offset": 101424,
+          "bytes": 84,
+          "sha256": "476abe0d89ba4e6f1b20ca8b03c4d1c59c69bc4cb33541ffde7b1eab7e419d8d",
+          "region": "image_a_dram_data"
+        }
+      ]
+    }
+  ],
+  "candidate": {
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_aout_select_hw_config",
+        "section_name": ".text.aout_select_hw_config",
+        "compiled_bytes": 8,
+        "compiled_sha256": "3b41c4ff5bd2cb7ac876425b0edd9d505c6914e31cef724299fd2f29c1eb8600",
+        "package_offset": 59648,
+        "stock_envelope_bytes": 8,
+        "stock_sha256": "3b41c4ff5bd2cb7ac876425b0edd9d505c6914e31cef724299fd2f29c1eb8600",
+        "ownership_kind": "compiled_c",
+        "fits": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_aout_hw_settings",
+        "section_name": ".data.aout_hw_settings",
+        "compiled_bytes": 84,
+        "compiled_sha256": "476abe0d89ba4e6f1b20ca8b03c4d1c59c69bc4cb33541ffde7b1eab7e419d8d",
+        "package_offset": 101424,
+        "stock_envelope_bytes": 84,
+        "stock_sha256": "476abe0d89ba4e6f1b20ca8b03c4d1c59c69bc4cb33541ffde7b1eab7e419d8d",
+        "ownership_kind": "generated_source_data",
+        "fits": true
+      }
+    ],
+    "source_sha256": "67003ccc6d5dd2cf9fe52d7f2fff21f162b99c376e7f7f0533ad5b9625c85729",
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "oracle": {
+      "path": "drivers_lib/audio_out/v2.0/hw_config.o",
+      "blob": "384aff4e5d4c80d64ffc4acc247337df556fc2c3",
+      "sha256": "e8df214a976f65a4a45c2d030d2c2d0f50e1d6231c615018c3ce57985e37996d"
+    },
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Source-defined typed settings reproduce pinned SDK and stock initialization. Some field hardware meanings remain unresolved; this is not whole-source closure."
+    ]
+  },
+  "selector_proof": {
+    "decoded_instructions": 2,
+    "returns": 537029660,
+    "input_independent": true,
+    "ram_writes": 0,
+    "calls": 0
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_output_hw_config.py": "a0f94394831880b72a32e9bea3e4c6d13d601e4338f23d6c75558a94631b96a6",
+    "verify_gx8002_audio_output_hw_config_source.py": "d985f8ba049fb113f87ed7674bb7ca1abb2f8c0b53732e6a619cdbe16369d9e1",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Typed mutable initializer matches stock and authenticated pinned SDK. Layout assertions cover consumer offsets. Some hardware field semantics and full boot/data-copy composition remain unqualified; this does not establish whole-source closure."
+  ]
+}

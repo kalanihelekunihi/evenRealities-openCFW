@@ -1,0 +1,228 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_otp_lowpower_enter",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 112,
+      "compiled_sha256": "e37e26643e02b83bb81c6039e7d771a81ad2931e212c69a6b3f863ef572f81f7",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_otp_lowpower_enter",
+          "package_offset": 92384,
+          "bytes": 116,
+          "sha256": "a24db72fbd2264608192d58c337a2e3bd10e12f40928c73b4e52997119feb3b3",
+          "region": "image_a_sram"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "caller": {
+      "candidate": {
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "source_sha256": "ac1063c758b590381a05efee573cd9c81b32d8eb13eadcf69258b9aa62ad4926",
+        "compiled_bytes": 112,
+        "compiled_sha256": "e37e26643e02b83bb81c6039e7d771a81ad2931e212c69a6b3f863ef572f81f7",
+        "package_offset": 92384,
+        "envelope_bytes": 116,
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build-only reconstruction; decoded behavior and caller integration pending. Explicit architectural sync/doze assembly remains visible source."
+        ]
+      },
+      "cases": 1152,
+      "source_admitted": false,
+      "limits": [
+        "Decoded register IO, OTP output selection, ignored OTP status, barrier/doze order and ABI checked. OTP/clock effects modeled; doze treated as returning after wake. Physical power behavior unqualified; candidate fits current slot but remains unregistered."
+      ]
+    },
+    "otp": {
+      "evidence": {
+        "evidence": {
+          "evidence": {
+            "candidate": {
+              "strings": [
+                {
+                  "section_name": ".rodata.otp_error",
+                  "package_offset": 92680,
+                  "bytes": 22,
+                  "sha256": "b3586d06a1dc876fb5451e0ed0bf073c1b75284815d5d6cb00e7ef20b51c237b"
+                },
+                {
+                  "section_name": ".rodata.otp_signature",
+                  "package_offset": 92702,
+                  "bytes": 6,
+                  "sha256": "b421a0768e6df358474f6c19477a6e0e66195e8aeb6fd75bbca804c224579b8a"
+                }
+              ],
+              "strings_source_sha256": "397aba5d052f51df72b32697f44cde60a311244db4881d43033753bbf9e3dd70",
+              "dependency_headers": {
+                "arch/soc/grus/include/base_addr.h": {
+                  "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                  "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+                },
+                "include/driver/gx_clock/gx_clock_v2.h": {
+                  "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                  "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+                }
+              },
+              "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+              "oracle": {
+                "path": "boards/nationalchip/grus_gx8002b_dev_1v/clock_board.c",
+                "blob": "6e086e80672a5cbdd0a15abb5e49c01e9fb244f4",
+                "sha256": "e8efe43ef081422da119d8370f69a495f23e249c24dc1e21b99ef49a62e59afa",
+                "role": "board_call_site_reference_only; implementation recovered from stock"
+              },
+              "bindings": {
+                "open_cfw_gx8002_clock_frequency": 268587536,
+                "open_cfw_gx8002_flash_otp_probe": 537027844,
+                "open_cfw_gx8002_flash_otp_read_api": 268584948,
+                "printf": 270560292,
+                "strncmp": 270560380,
+                "open_cfw_gx8002_flash_otp_error": 268585460,
+                "open_cfw_gx8002_flash_otp_signature": 268585482
+              },
+              "flags": [
+                "-Os",
+                "-mcpu=ck804ef",
+                "-mhard-float",
+                "-ffreestanding",
+                "-fno-builtin",
+                "-ffunction-sections",
+                "-fdata-sections",
+                "-Wall",
+                "-Wextra",
+                "-Werror",
+                "-fno-shrink-wrap"
+              ],
+              "header": {
+                "path": "include/driver/gx_clock/gx_clock_v2.h",
+                "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+              },
+              "source_sha256": "1e0d36a531747f63f22bb8c17f6a35b4edc637f5c83d87a1cd039ca198225a8b",
+              "symbol": "open_cfw_gx8002_flash_otp_configuration",
+              "section_name": ".text",
+              "package_offset": 97560,
+              "compiled_bytes": 112,
+              "compiled_sha256": "b326e432e0f69887036c79845023924719f169d4c82204930eda3588269d3d6b",
+              "stock_envelope_bytes": 112,
+              "stock_sha256": "903fa15b9f0bbc15866ee7b6e1233b2a118ecb7ed23450f84426683328c9daa6",
+              "fits": true,
+              "source_admitted": false,
+              "limits": [
+                "Build-only candidate. Source strings linked and byte-checked. Probe ABI, contained literal use, nested OTP and caller behavior require qualification before admission."
+              ]
+            },
+            "cases": 3840,
+            "source_admitted": false,
+            "limits": [
+              "Decoded policy, stack initialization, argument forwarding and ABI checked; flash/clock/string helpers modeled. strlen removal justified by authenticated fixed five-byte signature. Partial writes and scripted configuration mutations at helper boundaries checked; actual nested helpers and hardware remain unqualified."
+            ]
+          },
+          "api_cases": 40,
+          "decoded_api_callbacks": 20,
+          "api_elf_sha256": "85f2e472f2a0d4011308aa70cd54d417dfd38659d0123b7ddc92522f07d6e505",
+          "source_admitted": false,
+          "limits": [
+            "Actual decoded API dispatch shares caller local memory; missing callback, partial writes and signed status tested. SPI callback effects remain scripted; no hardware qualification."
+          ]
+        },
+        "literal_loads": [
+          {
+            "instruction": 268590358,
+            "cell": 268590444,
+            "value": 537027844
+          },
+          {
+            "instruction": 268590400,
+            "cell": 268590448,
+            "value": 268585460
+          },
+          {
+            "instruction": 268590416,
+            "cell": 268590448,
+            "value": 268585460
+          }
+        ],
+        "negative_checks": 3,
+        "elf_sha256": "4075802dbabd6595297589ebd821222c2fd726a1f8e7e9acaa129baf908ae714",
+        "source_admitted": false,
+        "limits": [
+          "All three disassembled literal loads resolve to two checked words contained within the 112-byte source section. Disassembler decoding trusted; three corrupted/out-of-envelope cases rejected. Candidate remains unregistered; retained hybrid OTP path still needs replacement."
+        ]
+      },
+      "ownership": {
+        "callback_slot": 537027844,
+        "callback_target": 268583996,
+        "owners": {
+          "flash-interface-table": {
+            "elf_sha256": "a833dd67af1fe72036a09bc6771e0245f51eb78482f1848f74a5fb076d1d3a7a",
+            "report_sha256": "47e5912d090b36243032af91619f3fa927a24c1ad209dc193465153d28405b73",
+            "address": 537027844
+          },
+          "flash-interface-initialize": {
+            "elf_sha256": "e2f5a901f6be5247ea15f1a4c4dbeabe7a0a3682a7a9847f9bd219e486bec623",
+            "report_sha256": "ac6879626e85bce1a77a49394dbd241460d29b4a198b0aec50ab378130e92ebd",
+            "address": 268583996
+          }
+        },
+        "source_admitted": false,
+        "limits": [
+          "Initial callback slot and code source owners authenticated. Runtime replacement pointers remain external input.",
+          "Probe state byte 0x20026ff4 is separate from initialized flash state; BSS ownership and callback execution integration remain pending."
+        ]
+      },
+      "probe_cases": 432,
+      "decoded_interface_calls": 432,
+      "executor_sha256": "44d277b6e3f48eaf3961d73b4d392a6970e915c9bd763eba41d7cc0a59bbb53c",
+      "source_admitted": false,
+      "limits": [
+        "Actual four caller argument registers supplied to decoded stock and source initializer; initializer return drives OTP policy. Nested initialization uses private frames and scripted peripheral helpers; physical flash and enclosing caller still unqualified."
+      ]
+    },
+    "composed_cases": 288,
+    "sleep_cases": 270,
+    "source_admitted": false,
+    "limits": [
+      "Decoded stock/source OTP policy drives decoded caller; independent sleep-selection assertion includes null probe and read failure. Helper private frames use explicit result/output handoff, not shared stack execution. Flash/clock services remain modeled and hardware unqualified. Caller now fits its slot; admission remains pending."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_flash_otp_configuration_candidate.py": "6e4a798201fef67dae027ebefab97414add07d3fe346ef492d83473da3fdeeaf",
+    "build_gx8002_otp_lowpower_enter_candidate.py": "e6820760a0bfa9edf4e427d438e5349c4e4deaa7a15dfede80ea5aed64c1aa37",
+    "execute_gx8002_clock_source_select.py": "269bdbc02145bf7a8a6b00f5dff68d0dcf3f057c94a88efddbc313b60ee65313",
+    "execute_gx8002_otp_interface.py": "44d277b6e3f48eaf3961d73b4d392a6970e915c9bd763eba41d7cc0a59bbb53c",
+    "verify_gx8002_flash_otp_configuration.py": "6a1475b919d021295f103832b3235ae077db1162faa50e756d8a0bf4edb1887f",
+    "verify_gx8002_flash_otp_configuration_api.py": "8779993765dacd510e6dd7e4c9cedc847b2ddb83ece7c9543502c7dac0b50a09",
+    "verify_gx8002_flash_otp_configuration_literals.py": "43bb476eb12da7bb80335e56a70b69cfe161129c514befc1637a89e227014d0f",
+    "verify_gx8002_flash_otp_configuration_probe.py": "335a09a525c3bbd255f2197c8bb8f21d5510b6317dee5d45542b502406612b81",
+    "verify_gx8002_flash_otp_configuration_source.py": "1740753c25166d30e343a07353e24f735154b1e0ad9ee86ae1d3b84458bdc0c8",
+    "verify_gx8002_flash_probe_callback_owner.py": "2eaa706a67af7914158857fa130ee82af82f49289a5744afe1586f238b29cc5c",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_otp_lowpower_configuration.py": "96e5e3ee4e520b57d06745e681af820702ad87ec99e351b3606701e718e7d082",
+    "verify_gx8002_otp_lowpower_enter.py": "2e55aebaa8b33d822b12167ded660b781bb7b8d43c2f4d3118958f97ffc1d084",
+    "verify_gx8002_otp_lowpower_enter_source.py": "8fda2cc18dad33121e7c7ee2a6ea5471fb39022e1a3689b6bbf097447413e585",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded stock/source OTP policy drives decoded caller; independent sleep-selection assertion includes null probe and read failure. Helper private frames use explicit result/output handoff, not shared stack execution. Flash/clock services remain modeled and hardware unqualified. Caller now fits its slot; admission remains pending.",
+    "C compilation includes visible architectural or address-forming inline assembly; no firmware byte extraction.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

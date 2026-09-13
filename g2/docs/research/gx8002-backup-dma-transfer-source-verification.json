@@ -1,0 +1,104 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_dma_transfer",
+      "section_name": ".text",
+      "compiled_bytes": 72,
+      "compiled_sha256": "bf2fe38d57dde87b4e4f078851eeb6418b3b4905f938916deccf47ade8921da7",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_dma_transfer",
+          "package_offset": 251404,
+          "bytes": 72,
+          "sha256": "c04220e29c45b91a11a8a30a43ff2d63a2e879e53fb111d136c0d57546fc0062",
+          "region": "image_b_sram_text"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "comparison": {
+      "candidate": {
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "upstream_header": "include/driver/gx_dma_ahb.h",
+        "upstream_blob": "0a63d02cb756c4ca9597f595146cbdc95cf9d46d",
+        "upstream_header_sha256": "3bdf5209ce7d760d1b0cb0352fc21b9a6a5992ba4bf089f0bbb8bea5ca372e43",
+        "functions": [
+          {
+            "symbol": "open_cfw_gx8002_dma_transfer",
+            "compiled_bytes": 72,
+            "compiled_sha256": "bf2fe38d57dde87b4e4f078851eeb6418b3b4905f938916deccf47ade8921da7",
+            "stock_sha256": "c04220e29c45b91a11a8a30a43ff2d63a2e879e53fb111d136c0d57546fc0062",
+            "package_offset": 251404,
+            "envelope_bytes": 72,
+            "fits": true
+          }
+        ],
+        "source_sha256": "9d52499707765b0c8e7434fbbec57fca070ac85aaa64ee93dc3670b5a29718b7",
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Build only. Decoded transfer setup forwarding, cache call and MMIO ordering qualification pending."
+        ]
+      },
+      "decoded_cases": 384,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Initialized channel domain 0/1; configuration and cache modeled. Tests include device-base change across cache boundary. Candidate size is checked by the admission wrapper."
+      ]
+    },
+    "loader": {
+      "candidate_elf_sha256": "ac5103a833b0416f5a76f597066e5e12affcfdee1f47e054042065a7da6d0224",
+      "candidate_image_sha256": "60f07973a43adb89943863a541078cb03c87653660c093d6e83ef2cae67e0108",
+      "normal_loader_cases": 12,
+      "source_admitted": false,
+      "limits": [
+        "All 72 replacement bytes come from compiled C; no replacement tail fill.",
+        "External references and hardware remain unqualified."
+      ]
+    },
+    "references": {
+      "image_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "package_interval": [
+        251404,
+        251476
+      ],
+      "external_branches": [
+        {
+          "offset": 248486,
+          "target": 251404,
+          "entry": true
+        },
+        {
+          "offset": 248644,
+          "target": 251404,
+          "entry": true
+        }
+      ],
+      "external_pool_loads": [],
+      "runtime_word_matches": [],
+      "source_admitted": false,
+      "limits": [
+        "Linear decode and word census; computed references and nonstandard entry paths are not proven absent."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "verify_gx8002_dma_transfer.py": "cee69a27c55bb1cd1bd4ca846ab2e72b78acc6790f9f43bf1f120418460626a6",
+    "build_gx8002_backup_dma_transfer.py": "af86b25e82735577087d4f4298e4a3161366f81af1cb176d9a45b563ee2f7512",
+    "verify_gx8002_backup_dma_transfer.py": "4f6c82767b22e1124c6f8441558628593c8d58e32d7a2d0ca9dc7061f1b5ed79",
+    "verify_gx8002_backup_dma_transfer_loader.py": "cc0559810d000fc5909a6925f064aca548c0af6a7feebadadfb396a207fbbd02",
+    "analyze_gx8002_backup_dma_transfer_references.py": "20b983e8818e3123a7bd0f8ab373a3eb13b0b42caaa369562f386404be3c7f66",
+    "verify_gx8002_backup_dma_transfer_source.py": "03650eae5f585712ac62ca9b3f0aefdd3f4e662aa19a4521c68a1ad88601fac6",
+    "verify_gx8002_backup_memset_loader.py": "d1139f142813bf27d701424086d83dfb13c9bbbf1ef968e272368b9c7e65a405",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Reuses recovered primary C and authenticated pinned upstream DMA configuration header with backup bindings.",
+    "Setup return of exactly minus one skips transfer; all other statuses proceed. Cache and register-write ordering checked.",
+    "Only initialized channels zero and one; configuration/cache helper bodies and physical DMA timing remain separately unqualified."
+  ]
+}

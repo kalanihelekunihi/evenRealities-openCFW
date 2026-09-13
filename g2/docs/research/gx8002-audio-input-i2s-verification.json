@@ -1,0 +1,50 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "header": {
+      "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+      "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+    },
+    "oracle": {
+      "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+      "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+      "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+      "section": ".text.gx_audio_in_set_input_i2s",
+      "relocations": [
+        {
+          "offset": 18,
+          "symbol": 182,
+          "type": 19,
+          "addend": 0
+        },
+        {
+          "offset": 164,
+          "symbol": 3,
+          "type": 1,
+          "addend": 0
+        }
+      ],
+      "role": "symbol_evidence_only"
+    },
+    "bindings": {
+      "open_cfw_gx8002_platform_gate": 268587136,
+      "open_cfw_gx8002_audio_input_state": 537031472
+    },
+    "source_sha256": "13b8531baf4dc6be7572b719c1174bab67c9863b398c81ee82aebc777786e20c",
+    "symbol": "open_cfw_gx8002_audio_input_i2s",
+    "compiled_bytes": 160,
+    "compiled_sha256": "c4bffd6c17762a6096650c8b602ad6b2aa3cea9afa9828ac0087b8c5635b789c",
+    "package_offset": 54356,
+    "stock_envelope_bytes": 168,
+    "stock_sha256": "56565b4c3e8c503b52aebaafe9998b7d97e4ca8cbcc940af07173a80f9a509e5",
+    "fits": true,
+    "source_admitted": false,
+    "hardware_qualified": false
+  },
+  "decoded_cases": 6048,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Pinned SDK six-word by-value ABI and compiler bitfield layout checked, including all stack arguments and raw unsigned format threshold. Gate effects modeled with caller clobbers and state mutation. Physical I2S/TDM input unqualified."
+  ]
+}

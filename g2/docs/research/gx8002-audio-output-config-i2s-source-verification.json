@@ -1,0 +1,168 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_aout_config_i2s",
+      "section_name": ".text.aout_config_i2s",
+      "compiled_bytes": 44,
+      "compiled_sha256": "03bae956aa0480edfc67f47a560308fd66fd15bfe2d2de5cd08ee3e1a8e83315",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_config_i2s",
+          "package_offset": 57840,
+          "bytes": 44,
+          "sha256": "4091de010d65ccc18706f0127bb535798971aeacc69e8e8032d670874dbacff5",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_config_i2s",
+          "section_name": ".text.aout_config_i2s",
+          "compiled_bytes": 44,
+          "compiled_sha256": "03bae956aa0480edfc67f47a560308fd66fd15bfe2d2de5cd08ee3e1a8e83315",
+          "package_offset": 57840,
+          "stock_envelope_bytes": 44,
+          "stock_sha256": "4091de010d65ccc18706f0127bb535798971aeacc69e8e8032d670874dbacff5",
+          "fits": true
+        }
+      ],
+      "source_sha256": "c314f71c1f1f4267fb42106d66618740e3c693323c7b7a58bac30487f3bc8eaf",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_out/gx_audio_out_v2.h",
+        "blob": "9c505e302116fcaa07d32e3f8ce9b03d0d6bbe2b"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 4608,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Null, disjoint and aligned overlapping configurations checked with ordered reads/writes and untouched internal bytes. I2S and lodac calls modeled; nested source execution pending."
+    ]
+  },
+  "nested_qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_i2s_config",
+          "section_name": ".text.aout_i2s_config",
+          "compiled_bytes": 94,
+          "compiled_sha256": "b1b22532e68da48e4d46da851250d79a9e0d5671215e4f5eb4e68c13c8ccea72",
+          "package_offset": 57404,
+          "stock_envelope_bytes": 172,
+          "stock_sha256": "cb1de50a7d7780118a2fb8a17aae1b75967396e8a1ea678b8f8d1df250d1354a",
+          "fits": true
+        }
+      ],
+      "source_sha256": "35160cd1e35aab1b78a5248776e078455f41a42ab80546aa8deaa3ec2e5de06a",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_out/gx_audio_out_v2.h",
+        "blob": "9c505e302116fcaa07d32e3f8ce9b03d0d6bbe2b"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "wrapper_candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_config_i2s",
+          "section_name": ".text.aout_config_i2s",
+          "compiled_bytes": 44,
+          "compiled_sha256": "03bae956aa0480edfc67f47a560308fd66fd15bfe2d2de5cd08ee3e1a8e83315",
+          "package_offset": 57840,
+          "stock_envelope_bytes": 44,
+          "stock_sha256": "4091de010d65ccc18706f0127bb535798971aeacc69e8e8032d670874dbacff5",
+          "fits": true
+        }
+      ],
+      "source_sha256": "c314f71c1f1f4267fb42106d66618740e3c693323c7b7a58bac30487f3bc8eaf",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_out/gx_audio_out_v2.h",
+        "blob": "9c505e302116fcaa07d32e3f8ce9b03d0d6bbe2b"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "lodac_candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_set_lodac",
+          "section_name": ".text.aout_set_lodac",
+          "compiled_bytes": 194,
+          "compiled_sha256": "05bf0ebc9e345f0d3c9a79a3260dd95ac7253f83387bed4626d20f6dc2b546af",
+          "package_offset": 57576,
+          "stock_envelope_bytes": 264,
+          "stock_sha256": "5e6751715cba23e125379b5b4e1d5b6d04be5414382fbb101608b1a62d8230cd",
+          "fits": true
+        }
+      ],
+      "source_sha256": "37cbb9af40213dd26e9eb08d22c3e3d5873035094295b4d3189873d7c9a8a6ef",
+      "stock_switch_targets": [
+        270552126,
+        270552132,
+        270551968,
+        270552138,
+        270552144,
+        270552150,
+        270552156
+      ],
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "nested_cases": 180,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Actual decoded I2S instructions execute with wrapper-produced40-byte config at observed hardware base. Uniform initial MMIO; finite null/alias cases. Actual decoded lodac follows I2S-produced register state; physical semantics of extension fields remain unresolved."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_output_config_i2s.py": "898ce7f3a1a1fc45e469f2d929a4a7bc0044e195ee3c23fb083b15ef4aca81b5",
+    "verify_gx8002_audio_output_config_i2s.py": "86aaaf92ec605bc80a1e165ea86af913ac3e4266b2bfc04b253978d151bc0311",
+    "verify_gx8002_audio_output_config_i2s_source.py": "bfe940feeb1e0c4f9031d461d69a4409f7e4b190f3054f0d1676c3dc50c124b4",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_audio_output_i2s_nested.py": "6cf2841e83522aceab2cbf1502c4655369a7059639ee40fd1f070546a20a5198",
+    "verify_gx8002_audio_output_lodac.py": "11a565cc8ed7c0483ecd310ee355c7a53c468d3e9b89e4e4dda7e457c8640cf8",
+    "verify_gx8002_audio_output_i2s_config.py": "695818b0df70dde74b4b44b314ef0232065d57d119f506d984413689bfd759d5",
+    "build_gx8002_audio_output_lodac.py": "7482e24d7eefcb9860c7c37acac955eaf6210583be0289894ddad523d75bf60b",
+    "build_gx8002_audio_output_i2s_config.py": "f9d0a7b7939e1d248bdfdf79e6a26db8a09fc242a221327acec2fd250caf618a"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Experimental function-level source admission; physical register semantics, caller composition and whole firmware source-only closure remain unqualified."
+  ]
+}

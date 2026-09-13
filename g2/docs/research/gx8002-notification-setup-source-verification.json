@@ -1,0 +1,113 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_notification_setup",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 96,
+      "compiled_sha256": "b4ad8e61e09bbb1a493e7e946d1604ab3ba0fd17e11becd863694f11a722f399",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_notification_setup",
+          "package_offset": 76936,
+          "bytes": 96,
+          "sha256": "b4ad8e61e09bbb1a493e7e946d1604ab3ba0fd17e11becd863694f11a722f399",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_notification_setup_pin",
+      "section_name": ".rodata.pin",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 27,
+      "compiled_sha256": "c6b24eecd3d0ee4e3472a90153197b172c746113ede17a61b99c85b3b38fc920",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_notification_setup_pin",
+          "package_offset": 85576,
+          "bytes": 27,
+          "sha256": "c6b24eecd3d0ee4e3472a90153197b172c746113ede17a61b99c85b3b38fc920",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_notification_setup_uart",
+      "section_name": ".rodata.uart",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 29,
+      "compiled_sha256": "af8ce88b7a2cee655ceef47e4ba6adfa6d2503f54b80eaa98b1ea1cbbc9da8c4",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_notification_setup_uart",
+          "package_offset": 85603,
+          "bytes": 29,
+          "sha256": "af8ce88b7a2cee655ceef47e4ba6adfa6d2503f54b80eaa98b1ea1cbbc9da8c4",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_notification_setup_bundle",
+      "section_name": ".rodata.bundle",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 32,
+      "compiled_sha256": "7ff1de23d29f8ed125084ce08845da8b126386b083ed7347d27ac7582bea7b82",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_notification_setup_bundle",
+          "package_offset": 84996,
+          "bytes": 32,
+          "sha256": "7ff1de23d29f8ed125084ce08845da8b126386b083ed7347d27ac7582bea7b82",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "candidate": {
+      "source_sha256": "819095caf16e8a19190b9705bf2f9cbdd0a16025ec6b439e2de2df0092668ed9",
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ],
+      "compiled_bytes": 96,
+      "compiled_sha256": "b4ad8e61e09bbb1a493e7e946d1604ab3ba0fd17e11becd863694f11a722f399",
+      "stock_envelope_bytes": 96,
+      "stock_sha256": "b4ad8e61e09bbb1a493e7e946d1604ab3ba0fd17e11becd863694f11a722f399",
+      "fits": true,
+      "source_admitted": false,
+      "limits": [
+        "Notification setup candidate only; behavior, ownership and ABI require qualification."
+      ]
+    },
+    "cases": 6,
+    "source_admitted": false,
+    "limits": [
+      "Helper returns and local config mutation modeled; integer ABI and independent call/configuration oracle checked; nested behavior unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "verify_gx8002_notification_setup_source.py": "9b86bcf85c238a096c89a9645dcc95c3dc1740d8c8c43692d5335570b5ed19f7",
+    "verify_gx8002_notification_setup.py": "8997f7d12139b7e74517c45a1fcf282bd06d7528a76357b4dec44f3c7bca62c7",
+    "execute_gx8002_notification_setup.py": "97d24405aa68028d9d3b7465a7e27c9ab91438cf4b51b988a1b284d475173135",
+    "build_gx8002_notification_setup.py": "e07af6908516774363de81c68c19d764a0cbef49c40ca892ce166228e0002cac",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Helper returns and local config mutation modeled; integer ABI and independent call/configuration oracle checked; nested behavior unqualified.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

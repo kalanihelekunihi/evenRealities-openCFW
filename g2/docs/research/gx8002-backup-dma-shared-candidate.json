@@ -1,0 +1,38 @@
+{
+  "source_sha256": {
+    "runtime_gx8002_backup_dma_deallocate.c": "2a1d355a31690612323b16b6293dc29afb8edb79fa6276636b7b744694fc9553",
+    "runtime_gx8002_backup_dma_irq_handler.c": "c5411896ec6d4c0309de871d0309355bd462b3d2ddca160b71cb19d4f29040f6",
+    "runtime_gx8002_backup_dma_pool.c": "9028af38d0cb9ad4244e7a779a2c6bcda2858c6214c9b4a222a9e8725e1999da"
+  },
+  "generated_source_sha256": "762a66af203b1fb5dfd3f23101dc1966076ba66338a50ea4e51c6feb3ddec81f",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-function-sections",
+    "--param=max-completely-peel-times=0"
+  ],
+  "bindings": {
+    "open_cfw_gx8002_backup_dma_state": 537056232,
+    "open_cfw_gx8002_backup_dma_state_words": 537056232,
+    "open_cfw_gx8002_backup_dma_callbacks": 536966312,
+    "open_cfw_gx8002_backup_irq_save": 268453996,
+    "open_cfw_gx8002_backup_irq_restore": 268454008,
+    "open_cfw_gx8002_backup_dma_resource": 268450792
+  },
+  "pointer_bytes": 4,
+  "pointer_sha256": "4bab914c2bacb2603bf2b68f4294ea19c7e71d3b3332931b8bfbdc31caaf4b8e",
+  "compiled_bytes": 184,
+  "compiled_sha256": "28703289d71d4ad321dc47a36b8c392cfded9a1b1e55a2352dfd8b4d3f25bd82",
+  "source_admitted": false,
+  "limits": [
+    "Shared source compilation preserves entries; behavior, tail and loader admission separate."
+  ]
+}

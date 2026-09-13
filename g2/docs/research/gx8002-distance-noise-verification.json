@@ -1,0 +1,59 @@
+{
+  "candidate": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+    "upstream_bytes": 10,
+    "source_sha256": "42c0a64a377d1a340bff86f81b5f4cb0dfcadae918b07fe1fe9ab40dd1e68702",
+    "compiled_bytes": 12,
+    "compiled_sha256": "99bf30ecc1bdf186b3e3f0ad115860c0aef1c15f7acbaa2833dc6d3e19586c27",
+    "package_offset": 56632,
+    "runtime_address": 270550956,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Pinned SDK leaf matches deployed function. Compiler emits a different address-materialization sequence within 12 bytes; decoded MMIO equivalence and source admission pending."
+    ]
+  },
+  "stock_execution": {
+    "return": "unchanged arbitrary 32-bit MMIO sample",
+    "reads": [
+      [
+        2694840760,
+        4
+      ]
+    ],
+    "instruction_addresses": [
+      56632,
+      56636,
+      56640
+    ]
+  },
+  "source_execution": {
+    "return": "unchanged arbitrary 32-bit MMIO sample",
+    "reads": [
+      [
+        2694840760,
+        4
+      ]
+    ],
+    "instruction_addresses": [
+      270550956,
+      270550958,
+      270550960
+    ]
+  },
+  "literal_address": 270550964,
+  "literal_value": 2694840704,
+  "elf_sha256": "f794941060ea2e64629843e8f629d5b3900da8935eb8a8dcda51db58aefc4f4b",
+  "evidence_sha256": {
+    "build_gx8002_distance_noise.py": "83dc19e080049964be540eacde000502e07026fbaa376cc250ced830864ee0f6",
+    "verify_gx8002_distance_noise.py": "f84ec9db533c9a15ff119667ab9488e23b8f6e95d4397d61c566efa039400907",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Restricted symbolic instruction execution proves one word read, unchanged arbitrary return and preserved ABI registers. Literal pool checked against encoded LRW. No helper calls or stores.",
+    "No physical audio peripheral measurement; registry admission pending."
+  ]
+}

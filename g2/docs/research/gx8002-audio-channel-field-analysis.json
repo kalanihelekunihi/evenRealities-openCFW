@@ -1,0 +1,20 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "caller_package_offset": 76742,
+  "command": 270,
+  "diagnostic": "receive set pdm ch delay req\n",
+  "arguments": {
+    "index": 0,
+    "value": 1
+  },
+  "resulting_register": 2694840360,
+  "field_bits": [
+    15,
+    10
+  ],
+  "literal_function_pointer_occurrences": [],
+  "inference": "Observed command identifies this helper as PDM channel delay programming. Only index0/value1 established at this direct call site.",
+  "limits": [
+    "Literal scan cannot exclude computed indirect calls. Other indices remain arithmetic behavior evidence, not hardware register-domain qualification."
+  ]
+}

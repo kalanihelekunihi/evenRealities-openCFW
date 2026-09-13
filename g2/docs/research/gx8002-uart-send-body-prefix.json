@@ -1,0 +1,56 @@
+{
+  "candidate": {
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_uart_message_body",
+        "section_name": ".text.body",
+        "package_offset": 69828,
+        "stock_envelope_bytes": 280,
+        "compiled_bytes": 280,
+        "compiled_sha256": "1d801c6ab62202b8f7539b3254e224eb6e243df3d9ca1d4803122d1190264b7f",
+        "stock_sha256": "fcb16ac77e56bc0983989afa28c3d5fc7d7f4c6cf02b20110509efcaec54e384",
+        "fits": true,
+        "exact_stock": false
+      }
+    ],
+    "source_sha256": "59fa242e1208814e0d1aa6f2200b25d91cb1ade7b123f1356ecb859642a6215e",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-inline",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-nationalchip-lvp-kws/lvp/common"
+    ],
+    "upstream": {
+      "path": "lvp/common/uart_message_v2.c",
+      "blob": "b5ae5ebac76df3bb7e60b0209ef71234114a15db",
+      "sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be",
+      "headers": {
+        "uart_message_v2.h": {
+          "blob": "74c1de26a9a8072bb7bba448ccf88b1e4729d5f7",
+          "sha256": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2"
+        },
+        "lvp_queue.h": {
+          "blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+          "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+        }
+      }
+    },
+    "source_admitted": false,
+    "limits": [
+      "Candidate only; decoded initialization and callback qualification pending."
+    ]
+  },
+  "decoded_prefix_cases": 1080,
+  "source_admitted": false,
+  "limits": [
+    "Entry through return or first UART write only. Complete send scheduling, aliasing and helper mutation remain pending. Valid ports, nonnull packet and available pointers; boundaries include unsigned arithmetic wrap."
+  ]
+}

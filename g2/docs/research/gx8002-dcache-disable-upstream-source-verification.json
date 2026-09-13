@@ -1,0 +1,126 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_dcache_disable_upstream",
+      "section_name": ".text",
+      "ownership_kind": "compiled_c",
+      "compiled_bytes": 36,
+      "compiled_sha256": "2049fc72fe7b505d7c9190a43bb88bd3390a5a8c7cb83d9fcd02961b397320ca",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_dcache_disable_upstream",
+          "package_offset": 95736,
+          "bytes": 36,
+          "sha256": "e17a4bb8faafbdd211d36925d2b433f72472eabccc616300140aa1d3f1ac8a12",
+          "region": "image_a_sram"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "evidence": {
+      "candidate": {
+        "upstream_dependencies": [
+          {
+            "path": "arch/soc/grus/include/core_ck804.h",
+            "git_blob": "ed6595b0a0e510fba0219954933f250c0eba83de",
+            "sha256": "f967c3201c24ceb417f83f915669c74f7182bf23784a7464f450ef6564f6f20a"
+          },
+          {
+            "path": "arch/soc/grus/include/csi_gcc.h",
+            "git_blob": "82802d1850f8ff8cc4701154658bcf362902e721",
+            "sha256": "638e1bf91b9d7cbba877d943132e83db37c75c97ee852ccce256c99a7dcfb530"
+          },
+          {
+            "path": "include/utility/libc/stdlib.h",
+            "git_blob": "75c21b5367091e23fb703e4b3dfc65ffc4e71a8f",
+            "sha256": "d2549da080238fe93ed114e2d7e83b7889390faa631a37d87f324f63698ea29d"
+          },
+          {
+            "path": "include/utility/libc/klibc/extern.h",
+            "git_blob": "7d7c7b8d190f5d792a2ff355e7d288e407833ddd",
+            "sha256": "addf134407ecf22a5bced6c998d30660dae0846528ad934eaa49742a9a7daf49"
+          },
+          {
+            "path": "include/utility/libc/klibc/inline.h",
+            "git_blob": "0e547437338ab639b5eda06e04a80454e7f80758",
+            "sha256": "1456ca9eb1444031e51a9424859da5340844e7be166ff7ab68f25159329be9e1"
+          },
+          {
+            "path": "include/utility/util.h",
+            "git_blob": "a66b1d1b2183c0b83b8d7d3eff9a98867a6bcb87",
+            "sha256": "b31dc428b0da16a50b5b1bb5a0059d537d66df38a9ccd5061430b0c0d56b9f74"
+          },
+          {
+            "path": "LICENSE",
+            "git_blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+            "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+          }
+        ],
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "oracle": {
+          "path": "arch/soc/grus/include/core_ck804.h",
+          "blob": "ed6595b0a0e510fba0219954933f250c0eba83de",
+          "sha256": "f967c3201c24ceb417f83f915669c74f7182bf23784a7464f450ef6564f6f20a",
+          "role": "unmodified upstream C implementation"
+        },
+        "header": {
+          "path": "include/driver/gx_dcache.h",
+          "blob": "e7e073102006558f9e85dc958c8e6739b06611d9",
+          "sha256": "3ab4bd1951f7ca1c839efa1db4329ba859d52dcd59745fd4a2258724a779d325"
+        },
+        "bindings": {},
+        "flags": [
+          "-Os",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror"
+        ],
+        "source_sha256": "c936c36b39d3641bdf9dc63fbafe748334173b75a974656126562074922407c0",
+        "symbol": "open_cfw_gx8002_dcache_disable_upstream",
+        "section_name": ".text",
+        "package_offset": 95736,
+        "compiled_bytes": 36,
+        "compiled_sha256": "2049fc72fe7b505d7c9190a43bb88bd3390a5a8c7cb83d9fcd02961b397320ca",
+        "stock_envelope_bytes": 36,
+        "stock_sha256": "e17a4bb8faafbdd211d36925d2b433f72472eabccc616300140aa1d3f1ac8a12",
+        "fits": true,
+        "source_admitted": false,
+        "limits": [
+          "Build evidence only. Decoded barrier/MMIO/ABI and caller integration qualification required. No hardware cache coherence qualification."
+        ]
+      },
+      "cases": 4132,
+      "source_admitted": false,
+      "limits": [
+        "Ordered decoded barriers/register accesses and leaf ABI checked. No physical cache-coherence or timing qualification; caller integration remains pending."
+      ]
+    },
+    "caller_elf_sha256": "aebde7650db7de75bd8c9ad9be03ae6e86cb056c5e79c817f9ab56dbaaa25852",
+    "caller_report_sha256": "c315f0ca28dd782f4299df228fe85cf280e398a1cc7dba434a1f4d3ab1ea20f0",
+    "composed_cases": 72,
+    "source_admitted": false,
+    "limits": [
+      "Decoded initialization-to-disable sequence and ABI qualified. Cache enable helpers remain modeled, CER input scripted, and no physical coherence/timing qualification."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_dcache_disable_upstream_candidate.py": "010efd3e05339d74020645a34505ad939c72410e5e9a53aa6aeba80a7ee9601e",
+    "execute_gx8002_cache_initialize_disable.py": "4cb6a36c3e83ddf580b97691ea856d093a377d2b42c05b7294840f35f8534f7e",
+    "verify_gx8002_dcache_disable_upstream.py": "44a6d6fed64f13c9ba9daae88f332e7c79352dbc7140c23fafc08d1951d50b18",
+    "verify_gx8002_dcache_disable_upstream_initialize.py": "2267eb9b1395ff9fbccc42d122db067940bb545c6c5b87f84998acd7379c3e6f",
+    "verify_gx8002_dcache_disable_upstream_source.py": "714a0e03514da9b6288180605d81ee19db3aa0d213130268793a756c7b3f3430"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Decoded initialization-to-disable sequence and ABI qualified. Cache enable helpers remain modeled, CER input scripted, and no physical coherence/timing qualification.",
+    "Experimental hybrid admission only; complete source-only firmware unfinished."
+  ]
+}

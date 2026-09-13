@@ -1,0 +1,24 @@
+{
+  "placed": false,
+  "corrected": true,
+  "correction": "Retain exponent -24 and -23 for final subnormal rounding",
+  "elf_sha256": "b644cfee887c9aded9580e71394407343a8aa719ff55783495f5c639fc921319",
+  "sources": {
+    "build/gx8002-scalbnf-corrected/scale-corrected.c": "75f41ec8eb61468e808285f4ed2e2b92ae4c6187ccc563422b40e1c986b06f16",
+    "components/shared/gx8002/runtime_gx8002_float_sign.c": "873d2fe5935fbc97efeb5fb737d9c079171cf856a0f1f390cfe3f834a7a85139"
+  },
+  "allocated": [
+    [
+      ".scale",
+      244
+    ],
+    [
+      ".sign",
+      22
+    ]
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Analysis build only. Stock behavior, FP flags and physical placement remain unverified; upstream provenance unconfirmed."
+  ]
+}

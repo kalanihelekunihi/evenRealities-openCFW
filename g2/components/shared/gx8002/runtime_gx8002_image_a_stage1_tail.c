@@ -34,8 +34,22 @@
  */
 #include "runtime_gx8002_image_a_stage1_tail.h"
 
+/* Values are supplied by the format-aware builder, never copied from a
+ * firmware byte slice. Changing the covered block requires a new CRC. */
+#ifndef OPEN_CFW_STAGE1_CRC
+#error "Builder must supply the computed stage1 CRC"
+#endif
+#ifndef OPEN_CFW_STAGE2_XIP_SIZE
+#error "Builder must supply the stage2 XIP extent"
+#endif
+#define LE_BYTE(value, shift) ((uint8_t)((uint32_t)(value) >> (shift)))
 uint8_t open_cfw_gx8002_image_a_stage1_tail[OPEN_CFW_GX8002_IMAGE_A_STAGE1_TAIL_SIZE] = {
-    /* [0, 4092): BINH stage-1 block zero-fill pad (implicit below). */
-    [4092] = 0xDBU, [4093] = 0x8EU, [4094] = 0xC5U, [4095] = 0x21U, /* stage-1 CRC-32/MPEG-2 trailer, LE */
-    [4096] = 0x84U, [4097] = 0x8EU, [4098] = 0x00U, [4099] = 0x00U  /* stage-2 XIP-text length word, LE */
+    [4092] = LE_BYTE(OPEN_CFW_STAGE1_CRC, 0),
+    [4093] = LE_BYTE(OPEN_CFW_STAGE1_CRC, 8),
+    [4094] = LE_BYTE(OPEN_CFW_STAGE1_CRC, 16),
+    [4095] = LE_BYTE(OPEN_CFW_STAGE1_CRC, 24),
+    [4096] = LE_BYTE(OPEN_CFW_STAGE2_XIP_SIZE, 0),
+    [4097] = LE_BYTE(OPEN_CFW_STAGE2_XIP_SIZE, 8),
+    [4098] = LE_BYTE(OPEN_CFW_STAGE2_XIP_SIZE, 16),
+    [4099] = LE_BYTE(OPEN_CFW_STAGE2_XIP_SIZE, 24)
 };

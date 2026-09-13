@@ -1,0 +1,392 @@
+{
+  "corrected": true,
+  "upstream_source_sha256": "f635ba0d69f88c0090b5997c2087c36780939caf1477aece8f2fc3d3c684817f",
+  "patch_sha256": "26979dfe2831cb9a0a48ef65a02877867e76d4ea986ac67cf7a4d37562062740",
+  "derived_source_sha256": "95c4779640e00b4ac5a906f0308a1aeacbfcda790e53be56b67fd289f7411c72",
+  "prior": {
+    "placed": true,
+    "placement": [
+      {
+        "name": ".add2",
+        "offset": 304224,
+        "bytes": 500,
+        "sha256": "cdbbbd3ef89d2be96e688dec9517ab338d7ddf7853ba1cd6e9a60135f713280c"
+      },
+      {
+        "name": ".copy",
+        "offset": 304724,
+        "bytes": 156,
+        "sha256": "3f59cb3b2628389fb6fc9ed41ebe5afe232c2b0140d47cbcb119b45b45804fc4"
+      },
+      {
+        "name": ".nan",
+        "offset": 304880,
+        "bytes": 20,
+        "sha256": "de47c9b27eb8d300dbb5f2c353e632c393262cf06340c4fa7f1b40c4cbd36f90"
+      },
+      {
+        "name": ".add0",
+        "offset": 304932,
+        "bytes": 46,
+        "sha256": "3d22703ddc5516f06836c3ae539126e471a6b6f9c6877dc9242bbc47ab8e0419"
+      },
+      {
+        "name": ".add1",
+        "offset": 304980,
+        "bytes": 54,
+        "sha256": "05d798381df2a02675f5d1180f7f0f365f75f8cb97ff1addfc15165ec3697e0d"
+      },
+      {
+        "name": ".gt",
+        "offset": 305888,
+        "bytes": 62,
+        "sha256": "835b97353159718f752aa2c42ef24c7f812c3d9c9809e3701e06a3add61123ae"
+      },
+      {
+        "name": ".lt",
+        "offset": 306016,
+        "bytes": 54,
+        "sha256": "6713dda2c58ca157b93f770cd9320bcda0efa90ae358900c322f409cc651b0a9"
+      },
+      {
+        "name": ".si",
+        "offset": 306128,
+        "bytes": 104,
+        "sha256": "b31fad677d349000b3d9288ef36ad9d150e8af08339e2da4d6c538dbfad90234"
+      },
+      {
+        "name": ".fi",
+        "offset": 306232,
+        "bytes": 94,
+        "sha256": "1d1d918ff912a8a1cc2b99ab45f714c7b92d6093692221d67bfd140d98a31655"
+      },
+      {
+        "name": ".pack",
+        "offset": 306756,
+        "bytes": 338,
+        "sha256": "40bfea4d4c5820b5a8751137927020198b3a135ae9d619413e0c95f8546e397c"
+      },
+      {
+        "name": ".right",
+        "offset": 307096,
+        "bytes": 38,
+        "sha256": "01a1341375902bb525734a05fd7d51ff405b687a65664e60ef3c97060f7859c7"
+      },
+      {
+        "name": ".unpack",
+        "offset": 307156,
+        "bytes": 176,
+        "sha256": "6941b26f6f58814264baa6a73853046b5a986c84daa75be136389c4f34d8b342"
+      },
+      {
+        "name": ".left",
+        "offset": 307332,
+        "bytes": 38,
+        "sha256": "41fb97e044561e8d026c2659542714b60a4dc90caf65e4c9849c36e3c5c6f2c0"
+      },
+      {
+        "name": ".compare",
+        "offset": 307384,
+        "bytes": 186,
+        "sha256": "dea5c9066ace7f323bd247b8d36457f00056730c8ca2376e99dc16ab8a30e388"
+      }
+    ],
+    "memcpy_source_sha256": "99240e0d650ee2c61d21ff348c73510612698c65ed6160bb032c37a50d45084f",
+    "prior": {
+      "gcc_revision": "1e9b70447a8417f5c692370de4533e43d754e8fa",
+      "core": {
+        "elf_sha256": "9f7b586cb8184593ed20800a31da703f6a7ed70ca7f1eb799d850260e3de4250",
+        "sections": [
+          {
+            "name": "pack",
+            "offset": 306756,
+            "bytes": 338,
+            "symbol": "__pack_d",
+            "sha256": "40bfea4d4c5820b5a8751137927020198b3a135ae9d619413e0c95f8546e397c"
+          },
+          {
+            "name": "right",
+            "offset": 307096,
+            "bytes": 38,
+            "symbol": "__lshrdi3",
+            "sha256": "01a1341375902bb525734a05fd7d51ff405b687a65664e60ef3c97060f7859c7"
+          },
+          {
+            "name": "unpack",
+            "offset": 307156,
+            "bytes": 176,
+            "symbol": "__unpack_d",
+            "sha256": "6941b26f6f58814264baa6a73853046b5a986c84daa75be136389c4f34d8b342"
+          },
+          {
+            "name": "left",
+            "offset": 307332,
+            "bytes": 38,
+            "symbol": "__ashldi3",
+            "sha256": "41fb97e044561e8d026c2659542714b60a4dc90caf65e4c9849c36e3c5c6f2c0"
+          },
+          {
+            "name": "compare",
+            "offset": 307384,
+            "bytes": 186,
+            "symbol": "__fpcmp_parts_d",
+            "sha256": "dea5c9066ace7f323bd247b8d36457f00056730c8ca2376e99dc16ab8a30e388"
+          }
+        ],
+        "source_bytes": 776,
+        "source_admitted": false,
+        "hardware_qualified": false,
+        "limits": [
+          "Whole source objects preserve original pack/unpack/comparator entries. Left shift uses 38 bytes of old unpack tail; reuse not yet admitted.",
+          "Pack semantics, relocated calls, complete composition and loader qualification pending. No firmware image changed."
+        ]
+      },
+      "wrappers": [
+        {
+          "name": "gt",
+          "offset": 305888,
+          "stock_bytes": 64,
+          "symbol": "__gtdf2",
+          "object_sha256": "e9849fcb5b983db39672f7c5ee17fb10b66ce861e10fc0f16ad61dbfe8beac05",
+          "compiled_bytes": 62,
+          "sha256": "835b97353159718f752aa2c42ef24c7f812c3d9c9809e3701e06a3add61123ae"
+        },
+        {
+          "name": "lt",
+          "offset": 306016,
+          "stock_bytes": 56,
+          "symbol": "__ltdf2",
+          "object_sha256": "38df0eec39d4c81667a2b30303c772ac8feed3f9731b29fe4c0822a62f688d70",
+          "compiled_bytes": 54,
+          "sha256": "6713dda2c58ca157b93f770cd9320bcda0efa90ae358900c322f409cc651b0a9"
+        },
+        {
+          "name": "si",
+          "offset": 306128,
+          "stock_bytes": 104,
+          "symbol": "__floatsidf",
+          "object_sha256": "c62aa07d0de1c859c87bbd9bb70a118e41184a04a08698857f1729a52fdf86b8",
+          "compiled_bytes": 104,
+          "sha256": "b31fad677d349000b3d9288ef36ad9d150e8af08339e2da4d6c538dbfad90234"
+        },
+        {
+          "name": "fi",
+          "offset": 306232,
+          "stock_bytes": 112,
+          "symbol": "__fixdfsi",
+          "object_sha256": "1d740d3eeec8fac03dec04754527c7eb565a469495e67e54e01bd901efafd159",
+          "compiled_bytes": 94,
+          "sha256": "1d1d918ff912a8a1cc2b99ab45f714c7b92d6093692221d67bfd140d98a31655"
+        }
+      ],
+      "elf_sha256": "b0e4f15ea3912754b9f99586c9fa424a8dd619551535a507b06938e2f43c1501",
+      "source_admitted": false,
+      "limits": [
+        "Original public entries, linked only to source core. Decoded wrapper behavior and firmware composition remain pending; no stock helper binding."
+      ]
+    },
+    "compile_command": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/gcc-build/./gcc/xgcc",
+      "-B/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/gcc-build/./gcc/",
+      "-B/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/csky-unknown-elf/bin/",
+      "-B/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/csky-unknown-elf/lib/",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/csky-unknown-elf/include",
+      "-isystem",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/csky-unknown-elf/sys-include",
+      "-g",
+      "-Os",
+      "-Os",
+      "-g",
+      "-Os",
+      "-DIN_GCC",
+      "-DCROSS_DIRECTORY_STRUCTURE",
+      "-W",
+      "-Wall",
+      "-Wno-narrowing",
+      "-Wwrite-strings",
+      "-Wcast-qual",
+      "-Wstrict-prototypes",
+      "-Wmissing-prototypes",
+      "-Wold-style-definition",
+      "-isystem",
+      "./include",
+      "-g",
+      "-DIN_LIBGCC2",
+      "-fbuilding-libgcc",
+      "-fno-stack-protector",
+      "-Dinhibit_libc",
+      "-I.",
+      "-I.",
+      "-I../.././gcc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc/.",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc/../gcc",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc/../include",
+      "-DHAVE_CC_TLS",
+      "-DUSE_EMUTLS",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-double-addsub-placed/addsub.o",
+      "-MT",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-double-addsub-placed/addsub.o",
+      "-MD",
+      "-MP",
+      "-MF",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-double-addsub-placed/addsub.dep",
+      "-DFINE_GRAINED_LIBRARIES",
+      "-DL_addsub_df",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc/fp-bit.c",
+      "-fvisibility=hidden",
+      "-DHIDE_EXPORTS",
+      "-ffunction-sections",
+      "-fdata-sections"
+    ],
+    "source_object_sha256": "5cd7d10aaee8fcb4a05533951737cc7945ceb5e8131da2cd57748d2b7424aa11",
+    "nan_object_sha256": "367a01b35a533c32046dc3479dc267d6a280611b05dbdd6fe37bb438e9d54050",
+    "sections": {
+      ".text._fpadd_parts": 500,
+      ".text.__adddf3": 46,
+      ".text.__subdf3": 54
+    },
+    "fits_code": true,
+    "elf_sha256": "36a685eeebee676ac20a10ece116c8171e9acd085caead3608cb56705756a3fd",
+    "source_admitted": false,
+    "limits": [
+      "Complete source dependency link; bounded placement is experimental. Stock equivalence, references, and hardware qualification remain pending."
+    ]
+  },
+  "routines": [
+    {
+      "name": "mul",
+      "offset": 305040,
+      "stock_bytes": 512,
+      "bytes": 444,
+      "object_sha256": "b0489878cfcc12741525035e7084a7079356246cdccba297701ff23279e504b6",
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/gcc-build/./gcc/xgcc",
+        "-B/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/gcc-build/./gcc/",
+        "-B/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/csky-unknown-elf/bin/",
+        "-B/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/csky-unknown-elf/lib/",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/csky-unknown-elf/include",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/csky-unknown-elf/sys-include",
+        "-g",
+        "-Os",
+        "-Os",
+        "-g",
+        "-Os",
+        "-DIN_GCC",
+        "-DCROSS_DIRECTORY_STRUCTURE",
+        "-W",
+        "-Wall",
+        "-Wno-narrowing",
+        "-Wwrite-strings",
+        "-Wcast-qual",
+        "-Wstrict-prototypes",
+        "-Wmissing-prototypes",
+        "-Wold-style-definition",
+        "-isystem",
+        "./include",
+        "-g",
+        "-DIN_LIBGCC2",
+        "-fbuilding-libgcc",
+        "-fno-stack-protector",
+        "-Dinhibit_libc",
+        "-I.",
+        "-I.",
+        "-I../.././gcc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc/.",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc/../gcc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc/../include",
+        "-DHAVE_CC_TLS",
+        "-DUSE_EMUTLS",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-double-muldiv-corrected/mul.o",
+        "-MT",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-double-muldiv-corrected/mul.o",
+        "-MD",
+        "-MP",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-double-muldiv-corrected/mul.dep",
+        "-DFINE_GRAINED_LIBRARIES",
+        "-DL_mul_df",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-double-muldiv-corrected/fp-bit.c",
+        "-fvisibility=hidden",
+        "-DHIDE_EXPORTS",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc"
+      ]
+    },
+    {
+      "name": "div",
+      "offset": 305552,
+      "stock_bytes": 280,
+      "bytes": 264,
+      "object_sha256": "461dbd219c272b10a47b4c7ee8c9b8d15bb1f3c5537eeac7db3cfa1ec8fdc2df",
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/gcc-build/./gcc/xgcc",
+        "-B/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/gcc-build/./gcc/",
+        "-B/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/csky-unknown-elf/bin/",
+        "-B/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/csky-unknown-elf/lib/",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/csky-unknown-elf/include",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/csky-unknown-elf/sys-include",
+        "-g",
+        "-Os",
+        "-Os",
+        "-g",
+        "-Os",
+        "-DIN_GCC",
+        "-DCROSS_DIRECTORY_STRUCTURE",
+        "-W",
+        "-Wall",
+        "-Wno-narrowing",
+        "-Wwrite-strings",
+        "-Wcast-qual",
+        "-Wstrict-prototypes",
+        "-Wmissing-prototypes",
+        "-Wold-style-definition",
+        "-isystem",
+        "./include",
+        "-g",
+        "-DIN_LIBGCC2",
+        "-fbuilding-libgcc",
+        "-fno-stack-protector",
+        "-Dinhibit_libc",
+        "-I.",
+        "-I.",
+        "-I../.././gcc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc/.",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc/../gcc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc/../include",
+        "-DHAVE_CC_TLS",
+        "-DUSE_EMUTLS",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-double-muldiv-corrected/div.o",
+        "-MT",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-double-muldiv-corrected/div.o",
+        "-MD",
+        "-MP",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-double-muldiv-corrected/div.dep",
+        "-DFINE_GRAINED_LIBRARIES",
+        "-DL_div_df",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-double-muldiv-corrected/fp-bit.c",
+        "-fvisibility=hidden",
+        "-DHIDE_EXPORTS",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/build/upstream-csky-toolchain-build/gcc/libgcc"
+      ]
+    }
+  ],
+  "elf_sha256": "b0c2998ecaf3efd6d5a2c58bde88bd7ba428f6de74ba355bf0705a8d88f26eb8",
+  "source_admitted": false,
+  "limits": [
+    "Whole freshly compiled source objects at original public entries. Numerical execution, references, stock equivalence and firmware integration remain pending."
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_max_decoder_state",
+      "section_name": ".decoder_state",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 4,
+      "compiled_sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_max_decoder_state",
+          "package_offset": 101696,
+          "bytes": 4,
+          "sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450",
+          "region": "image_a_sram_data"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "startup": {
+      "candidate": {
+        "source_sha256": "c02037477829f32eacbb4b08f0fbd0d746c5b33abd7c607a935fda9067fc990b",
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "headers": {
+          "lvp/vui/kws/decoder.h": {
+            "blob": "322d841dff1ea8d4a8bfe4b9df7253d9196f81f5",
+            "sha256": "a709da43db3a274e2366277cb1071265d76aa594ad5ed5a898b19ea56c49f7b6"
+          },
+          "include/lvp_param.h": {
+            "blob": "6e8aa73abb6ddc555fb0183456d88629d912f5b6",
+            "sha256": "56033502b75e9a02f2d0c6959974ba2016166ebdd732786d7295d5c2a100ac95"
+          },
+          "generated/autoconf.h": {
+            "sha256": "9811f2aa66324bafe0b823ac15ac80ea0041bea02b181698910ee4ebb4a711ba"
+          },
+          "include/driver/gx_audio_in.h": {
+            "blob": "3211212e26d06713dc20eac8c3e108db6a0ea6da",
+            "sha256": "bf3bb33c8b52532c6dc23f871319338f81078cbf96a65eb3b5235cf7ca07645c"
+          },
+          "include/driver/gx_audio_in/gx_audio_in_v2.h": {
+            "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+            "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+          },
+          "include/driver/gx_padmux.h": {
+            "blob": "4d7aaa315665a24dc55d77c0bf7b3c285d7358b8",
+            "sha256": "ed2dfbb290aa634bca68dc536583ac7a24994fb9b9f73165dc00ba453ea631d2"
+          },
+          "include/lvp_context.h": {
+            "blob": "37483158aa8c433d614dea65dff87232b6ba0f69",
+            "sha256": "75902c925c65492f776fe1c932f0b85d0298f0b7e8377def087a4fb5949170be"
+          },
+          "include/lvp_attr.h": {
+            "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+            "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+          }
+        },
+        "upstream_initializer": {
+          "path": "lvp/vui/kws/max_decoder.c",
+          "blob": "2a8f84622b184635227da9cd52b6124cc1dfc4f4",
+          "sha256": "9c2e95460801cdd78ef88622c0bbcd545d69d1bead652a2d69b76a27fb8ac3eb"
+        },
+        "elf_sha256": "5a677c6a31eadd072e555719101b484dc11677e4dbc2977dca2ba585fd74c690",
+        "compiled_sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450",
+        "bytes": 4,
+        "package_offset": 101696,
+        "runtime_address": 537029932,
+        "source_admitted": false,
+        "limits": [
+          "Typed int storage matches existing consumer declaration; initializer uses authenticated upstream enum and agrees with upstream active-state default.",
+          "Startup, consumer and ownership qualification remain pending."
+        ]
+      },
+      "checked_artifacts": 410,
+      "references": [
+        {
+          "kind": "max-decoder",
+          "symbol": "open_cfw_gx8002_max_decoder_state",
+          "elf_sha256": "f40256ba977bc60303e364623e22630a876d30ebc02111af248c11cbab82cf06"
+        }
+      ],
+      "sdk_mapping_sha256": {
+        "arch/soc/grus/include/soc_config.h": "abda275af6aee96ad676c190e2a72363a79595413336371fced4450f8df76809",
+        "arch/soc/grus/link.ld": "1dc73b74c4b5962a848693ab857e90d34115489a8a7e499897533ad786ff77be",
+        "arch/soc/grus/spl/spl.c": "f3690694fff309c0118579baedb860b1d47c6de3cfb227a977242249568bb56b"
+      },
+      "clear_elf_sha256": "f777bc2524334dc385fa32910052044d4eb5a6e72434acde2d14703732775036",
+      "startup_cases": 12,
+      "preserved_words": 1,
+      "clear_writes": 8155,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Decoded primary loader with modeled flash reads loads compiled decoder state bytes through SDK-authenticated IRAM/DRAM alias. Decoded BSS clear preserves the initialized state word.",
+        "Physical memory aliasing, decoded decoder consumer composition remain unqualified."
+      ]
+    },
+    "consumer": {
+      "candidate": {
+        "source_sha256": "c02037477829f32eacbb4b08f0fbd0d746c5b33abd7c607a935fda9067fc990b",
+        "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "headers": {
+          "lvp/vui/kws/decoder.h": {
+            "blob": "322d841dff1ea8d4a8bfe4b9df7253d9196f81f5",
+            "sha256": "a709da43db3a274e2366277cb1071265d76aa594ad5ed5a898b19ea56c49f7b6"
+          },
+          "include/lvp_param.h": {
+            "blob": "6e8aa73abb6ddc555fb0183456d88629d912f5b6",
+            "sha256": "56033502b75e9a02f2d0c6959974ba2016166ebdd732786d7295d5c2a100ac95"
+          },
+          "generated/autoconf.h": {
+            "sha256": "9811f2aa66324bafe0b823ac15ac80ea0041bea02b181698910ee4ebb4a711ba"
+          },
+          "include/driver/gx_audio_in.h": {
+            "blob": "3211212e26d06713dc20eac8c3e108db6a0ea6da",
+            "sha256": "bf3bb33c8b52532c6dc23f871319338f81078cbf96a65eb3b5235cf7ca07645c"
+          },
+          "include/driver/gx_audio_in/gx_audio_in_v2.h": {
+            "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+            "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+          },
+          "include/driver/gx_padmux.h": {
+            "blob": "4d7aaa315665a24dc55d77c0bf7b3c285d7358b8",
+            "sha256": "ed2dfbb290aa634bca68dc536583ac7a24994fb9b9f73165dc00ba453ea631d2"
+          },
+          "include/lvp_context.h": {
+            "blob": "37483158aa8c433d614dea65dff87232b6ba0f69",
+            "sha256": "75902c925c65492f776fe1c932f0b85d0298f0b7e8377def087a4fb5949170be"
+          },
+          "include/lvp_attr.h": {
+            "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+            "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+          }
+        },
+        "upstream_initializer": {
+          "path": "lvp/vui/kws/max_decoder.c",
+          "blob": "2a8f84622b184635227da9cd52b6124cc1dfc4f4",
+          "sha256": "9c2e95460801cdd78ef88622c0bbcd545d69d1bead652a2d69b76a27fb8ac3eb"
+        },
+        "elf_sha256": "5a677c6a31eadd072e555719101b484dc11677e4dbc2977dca2ba585fd74c690",
+        "compiled_sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450",
+        "bytes": 4,
+        "package_offset": 101696,
+        "runtime_address": 537029932,
+        "source_admitted": false,
+        "limits": [
+          "Typed int storage matches existing consumer declaration; initializer uses authenticated upstream enum and agrees with upstream active-state default.",
+          "Startup, consumer and ownership qualification remain pending."
+        ]
+      },
+      "consumer_elf_sha256": "f40256ba977bc60303e364623e22630a876d30ebc02111af248c11cbab82cf06",
+      "decoded_cases": 270,
+      "source_admitted": false,
+      "limits": [
+        "Compiled upstream active default feeds stock and authenticated registered decoder with independent control-flow/state oracle; helpers modeled, including synthetic nonzero scorer return to exercise stock minor-pass gate. No nested source-helper or hardware qualification."
+      ]
+    }
+  },
+  "evidence_sha256": {
+    "build_gx8002_decoder_default.py": "dde7a9e2d27b6ce8722448ca4d44918a3ea7736e7f411285748148e74817ff1f",
+    "verify_gx8002_decoder_default_startup.py": "ddcb773e135d650bbfb663d2c83fb52ab0e356782d7ff4eb951bebc993495c19",
+    "verify_gx8002_decoder_default_consumer.py": "848d159225ea245d83c65ea45972e510b769316141d479a6ac213083122b4097",
+    "verify_gx8002_decoder_default_source.py": "4074ab1a8f2812fce07e2aa5eb272d8cedc379139cf54b0ec9385d47ddfa3e71",
+    "execute_gx8002_max_decoder.py": "8e3eaedc4a8994f7c530891737135ce2d62f4fbbca7473ffa844c0da682d449d",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb",
+    "verify_gx8002_uart_loader_setup.py": "bda5e90ecbaea1f0ec28238cb1eca686176bf2a6108477ccd99aebb44e795bb2",
+    "compare_gx8002_clear_bss.py": "47f23b157c02145323f28ac1633704a3277130d458cf6b1303bf4fbafdcfad13",
+    "verify_gx8002_power_initialize.py": "c1667fdc80f065a732d90482989c0c43a66a24d25c4f4a32d7071158c35c34d5",
+    "analyze_gx8002_gsensor_state_references.py": "c962d532675f4dc405e6466e7364083454168e89227a21d6fb4c839a70da666c",
+    "analyze_gx8002_upstream_objects.py": "0a94d2b7bbb6588297bf4bac25254103d1998a8794d6d0973fe91e2d77023044",
+    "build_transparent_image.py": "dfb2d65e43e9e3098412d899fdccebf3bf14d0e1bcdc2d96f5ae4e31c09ac77d"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Upstream active-state enum initializes compatible int storage at its original address. Startup, decoder consumers and nonoverlap checked; hardware helpers remain modeled.",
+    "Experimental hybrid replacement; complete firmware and physical hardware execution remain unqualified."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_aout_set_channel",
+      "section_name": ".text.aout_set_channel",
+      "compiled_bytes": 72,
+      "compiled_sha256": "116a4d3b48deb7d6b66f21ab0132d5ca4397bf7f8293f500a063591047071e34",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_aout_set_channel",
+          "package_offset": 58808,
+          "bytes": 96,
+          "sha256": "1ec3b146da9833a9059159b9ccfe6436ccb06126d65fb1261e5ece397415d7ee",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "functions": [
+        {
+          "symbol": "open_cfw_gx8002_aout_set_channel",
+          "section_name": ".text.aout_set_channel",
+          "compiled_bytes": 72,
+          "compiled_sha256": "116a4d3b48deb7d6b66f21ab0132d5ca4397bf7f8293f500a063591047071e34",
+          "package_offset": 58808,
+          "stock_envelope_bytes": 96,
+          "stock_sha256": "1ec3b146da9833a9059159b9ccfe6436ccb06126d65fb1261e5ece397415d7ee",
+          "fits": true
+        }
+      ],
+      "source_sha256": "585f0cf5d7eaec58aa8c5f5afb4ec0d115000c1aa77b6ec78fac1fb261565646",
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_out/gx_audio_out_v2.h",
+        "blob": "9c505e302116fcaa07d32e3f8ce9b03d0d6bbe2b"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_out/v2.0/hw.o",
+        "blob": "1296d8aae3d917e9777d6cfc63cea54a4ae62d40",
+        "sha256": "7deb93f4eab19e6ecf0727911bf8b431123b494341d88b08b1a97ec34855675a",
+        "role": "identity_evidence_only"
+      },
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 780,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Ordered register effects and ABI checked. Source removes table dependency; stock table bytes are not reclaimed without a separate reference audit. Physical routing semantics remain unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_output_set_channel.py": "e997a02934c9a5b1df3247a3d551e0b245e9fd4c08cedcc0e1b8ba704b3ffd32",
+    "verify_gx8002_audio_output_set_channel.py": "58c932472336ff7f50280770bcc949fa694f1eaddadabf02b7d4e9b1343d59bd",
+    "verify_gx8002_audio_output_set_channel_source.py": "2f7a83037e2b95ddfb8fed493aea19eedcddcf8357cc8e81a33ef1a8707ab7a1",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Experimental function-level source admission; physical register semantics, caller composition and whole firmware source-only closure remain unqualified."
+  ]
+}

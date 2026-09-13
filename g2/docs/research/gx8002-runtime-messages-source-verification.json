@@ -1,0 +1,79 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_messages_stack",
+      "section_name": ".rodata.stack",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 117,
+      "compiled_sha256": "0e05f29a8be42e2f35330f3a7b9687925f007270e90b89ea33d8df981ce95c07",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_messages_stack",
+          "package_offset": 83551,
+          "bytes": 117,
+          "sha256": "0e05f29a8be42e2f35330f3a7b9687925f007270e90b89ea33d8df981ce95c07",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_messages_tws",
+      "section_name": ".rodata.tws",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 70,
+      "compiled_sha256": "e3bf69eb60b42a5ffc1ffd73cf541d50764e142ec3e40182dcadc9a4aa6d18c8",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_messages_tws",
+          "package_offset": 83900,
+          "bytes": 70,
+          "sha256": "e3bf69eb60b42a5ffc1ffd73cf541d50764e142ec3e40182dcadc9a4aa6d18c8",
+          "region": "image_a_xip_text"
+        }
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_messages_kws",
+      "section_name": ".rodata.kws",
+      "ownership_kind": "generated_source_data",
+      "compiled_bytes": 47,
+      "compiled_sha256": "8f77e5f59a53322b56a17a07b1550a48dd520a481a3172bb36f7c09dad215a4a",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_messages_kws",
+          "package_offset": 84187,
+          "bytes": 47,
+          "sha256": "8f77e5f59a53322b56a17a07b1550a48dd520a481a3172bb36f7c09dad215a4a",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "dependencies": {
+    "lvp/common/lvp_system_init.c": {
+      "git_blob": "e392be4ae0709c83112ceae936abe5b49a15d794",
+      "sha256": "225eca5bd3979cea79ad2be845231e22736650c98820de5a3d631d5a1de13833"
+    },
+    "lvp/lvp_mode_tws.c": {
+      "git_blob": "4bd9d2962adac54871e6c6eb905174a0ee649300",
+      "sha256": "18e45319c213c185f1652b73f820ba469ed6847fba06ff247244d13df3635574"
+    },
+    "lvp/vui/kws/kws_strategy.c": {
+      "git_blob": "ce8fc7e44d6f0857b181620f393fc1fdfc1e4b2b",
+      "sha256": "015a22e3aa42219e3375129e3be0045b5f6b03c9b46d781d5dd0ca425b7a08b4"
+    }
+  },
+  "source_sha256": "380aee05f5706273c5eecb183c2c2e6e0ca19d24daeb1568ec7f5aac41e4f582",
+  "license_sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3",
+  "source_admitted": true,
+  "limits": [
+    "Diagnostic strings and formatting only; caller behavior remains separately qualified.",
+    "Experimental hybrid only; complete source-only firmware unfinished."
+  ],
+  "hardware_qualified": false,
+  "evidence_sha256": {
+    "verify_gx8002_runtime_messages.py": "b51f8a33d1532f59fd5bb9ec7884a19d4035ea3eed9b62bc7b30b99871e2e7ae",
+    "verify_gx8002_runtime_messages_source.py": "864076a7feb5b5f39ac60fa8450097629d836084b0b04c4ef610685541b4cd3c"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "compiled_bytes": 124,
+  "fits": true,
+  "compiled_sha256": "aa68d7f4ce3210f6770d255613d28b8efc8ae60227a2ccddf0081c9df00be19b",
+  "stock_sha256": "c2cae1620a376420a0cc52001c16cf8b8843610aea0c7453d7e19ea43ce596fb",
+  "exact_stock": false,
+  "source_sha256": "32932091af3e96b59b97c83833761eacd9c12c8ea6c75639ad419f15c766cd66",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "upstream": {
+    "include/lvp_context.h": {
+      "blob": "37483158aa8c433d614dea65dff87232b6ba0f69",
+      "sha256": "75902c925c65492f776fe1c932f0b85d0298f0b7e8377def087a4fb5949170be"
+    },
+    "include/lvp_attr.h": {
+      "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+      "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+    },
+    "include/lvp_param.h": {
+      "blob": "6e8aa73abb6ddc555fb0183456d88629d912f5b6",
+      "sha256": "56033502b75e9a02f2d0c6959974ba2016166ebdd732786d7295d5c2a100ac95"
+    },
+    "include/driver/gx_audio_in.h": {
+      "blob": "3211212e26d06713dc20eac8c3e108db6a0ea6da",
+      "sha256": "bf3bb33c8b52532c6dc23f871319338f81078cbf96a65eb3b5235cf7ca07645c"
+    },
+    "include/driver/gx_audio_in/gx_audio_in_v2.h": {
+      "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192",
+      "sha256": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b"
+    },
+    "include/driver/gx_padmux.h": {
+      "blob": "4d7aaa315665a24dc55d77c0bf7b3c285d7358b8",
+      "sha256": "ed2dfbb290aa634bca68dc536583ac7a24994fb9b9f73165dc00ba453ea631d2"
+    },
+    "lvp/common/lvp_audio_in.c": {
+      "blob": "43963b1adaad4f7040206c06769ee8a69656848f",
+      "sha256": "cd52150f9f3e45061b358ad2d6401932a37a60857b2432b8a92a45a36624b64f"
+    }
+  },
+  "configuration_sha256": "9811f2aa66324bafe0b823ac15ac80ea0041bea02b181698910ee4ebb4a711ba",
+  "bindings": {
+    "gx_audio_in_get_distance_noise_smooth": 56632
+  },
+  "decoded_call_targets": [
+    270550956
+  ],
+  "source_admitted": false
+}

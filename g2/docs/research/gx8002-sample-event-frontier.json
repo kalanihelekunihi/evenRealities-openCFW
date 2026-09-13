@@ -1,0 +1,61 @@
+{
+  "offset": 74896,
+  "bytes": 236,
+  "stock_sha256": "2be99147c3140aac830e44211b08e31d91f791b4a29cbde1162e444d2080154a",
+  "messages": [
+    {
+      "address": 270578887,
+      "offset": 84563,
+      "bytes": 18,
+      "text": "wake up hey even\n"
+    },
+    {
+      "address": 270578905,
+      "offset": 84581,
+      "bytes": 17,
+      "text": "wake up hi even\n"
+    },
+    {
+      "address": 270578922,
+      "offset": 84598,
+      "bytes": 32,
+      "text": "=====    S:%d, first:%d  =====\n"
+    },
+    {
+      "address": 270578954,
+      "offset": 84630,
+      "bytes": 44,
+      "text": "=====   first push_frame S:%d, E:%d  =====\n"
+    }
+  ],
+  "event_layout": {
+    "event_id": 0,
+    "context_index": 4
+  },
+  "state": {
+    "last_vad": 537029936,
+    "pending_byte": 537029940,
+    "app_base": 537061572,
+    "audio_handle_offset": 4,
+    "audio_enabled_offset": 20,
+    "audio_base_offset": 24
+  },
+  "calls": {
+    "context_lookup": 270560968,
+    "vad_notification": 270571420,
+    "event_notification": 270571356,
+    "mic_buffer": 270569088,
+    "audio_frame": 270554248,
+    "printf": 270560292
+  },
+  "control_flow": [
+    "Lookup context from event+4, compare context byte12 low three bits with last VAD; notify and reread the byte after helper.",
+    "Independent event tests100 then101, each logs and rereads ID before notifying.",
+    "Event91, enabled audio state and pending byte cause microphone0 and1 lookups; ignores both return values.",
+    "Output range is microphone0 address minus app audio base, through length-1; log then reread audio handle and push range, finally clear pending byte."
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Static reconstruction only. Context/output alias mutations, independently repeated event checks and ignored-helper-error behavior require preservation."
+  ]
+}

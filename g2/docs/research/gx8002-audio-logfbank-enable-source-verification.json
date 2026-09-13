@@ -1,0 +1,64 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_audio_logfbank_enable",
+      "compiled_bytes": 52,
+      "compiled_sha256": "2a2bfb7b468809fb7e8f80682bfd220b2dd11151ca00f145d33fc7fe8d9af5a3",
+      "section_name": ".text",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_audio_logfbank_enable",
+          "package_offset": 55992,
+          "bytes": 68,
+          "sha256": "50f9d34597dbf0192008bc17b88a062f801043ba6f9ef7510cfe79d5edaab997",
+          "region": "image_a_xip_text"
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "candidate": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "header": {
+        "path": "include/driver/gx_audio_in/gx_audio_in_v2.h",
+        "blob": "1063f8c9eb8247df66b855ef0992edda81b5d192"
+      },
+      "oracle": {
+        "path": "drivers_lib/audio_in/v2.0/audio_in.o",
+        "blob": "3579b48a00fba5dd84e81dda8fc24b67dcd96840",
+        "sha256": "4943a1e980877716f773898867acdeb9412227e798ad25aa55dbdb40011d8596",
+        "section": ".text.gx_audio_in_set_logfbank_enable",
+        "relocations": [],
+        "role": "symbol_evidence_only"
+      },
+      "bindings": {},
+      "source_sha256": "7b0bf19ded4c744f114b7bbd41384c169c1ccefbcc264dd5491f9c6c641d0cfd",
+      "symbol": "open_cfw_gx8002_audio_logfbank_enable",
+      "compiled_bytes": 52,
+      "compiled_sha256": "2a2bfb7b468809fb7e8f80682bfd220b2dd11151ca00f145d33fc7fe8d9af5a3",
+      "package_offset": 55992,
+      "stock_envelope_bytes": 68,
+      "stock_sha256": "50f9d34597dbf0192008bc17b88a062f801043ba6f9ef7510cfe79d5edaab997",
+      "fits": true,
+      "source_admitted": false,
+      "hardware_qualified": false
+    },
+    "decoded_cases": 8514,
+    "source_admitted": false,
+    "hardware_qualified": false,
+    "limits": [
+      "Raw low-bit enables and inverse boolean bypass, four ordered word RMWs and unrelated-bit preservation checked. Physical logfbank operation unqualified."
+    ]
+  },
+  "evidence_sha256": {
+    "build_gx8002_audio_logfbank_enable.py": "c8fe9f7bb2165502ddc01d13d7b93692b5cd105d723892e1010137c5e85e23d4",
+    "verify_gx8002_audio_logfbank_enable.py": "3b1bada04e3989e466a3ec2e679290efa8e010d82b84d9a918b01a799b8cc78c",
+    "verify_gx8002_audio_logfbank_enable_source.py": "7c4527c3c6035b77ffd11e2c8b2562da1a068dbb03eea9d04ff9b6d5cf10e7df",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "source_admitted": true,
+  "hardware_qualified": false,
+  "limits": [
+    "Raw low-bit enables and inverse boolean bypass, four ordered word RMWs and unrelated-bit preservation checked. Physical logfbank operation unqualified."
+  ]
+}

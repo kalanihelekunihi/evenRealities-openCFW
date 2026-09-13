@@ -1,0 +1,32 @@
+{
+  "candidate": {
+    "source_sha256": "65baebbbd9f188181f935d9cae5aa7eec2581b869b24d598513ac10ceb10f37f",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "compiled_bytes": 236,
+    "compiled_sha256": "eeeeff063bf607984a1f1944f2b3544ac7866932eace59e65ae9ac1be15e1c70",
+    "stock_envelope_bytes": 236,
+    "stock_sha256": "2be99147c3140aac830e44211b08e31d91f791b4a29cbde1162e444d2080154a",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Event candidate only; source diagnostics defined, helper mutations, ignored errors and ABI require qualification."
+    ]
+  },
+  "cases": 810,
+  "cases_reaching_mutation": 405,
+  "source_admitted": false,
+  "limits": [
+    "Differential mutations at modeled helper boundaries; no device timing or nested helper execution qualification."
+  ]
+}
