@@ -1,0 +1,28 @@
+{
+  "build": {
+    "source_sha256": "112fd19419cc20dadd3270a3120fb75c4dfa08065d49212368974b93d361fb9c",
+    "functions": [
+      {
+        "name": "suspend",
+        "bytes": 26,
+        "envelope_bytes": 28,
+        "exact_stock": false
+      },
+      {
+        "name": "resume",
+        "bytes": 18,
+        "envelope_bytes": 20,
+        "exact_stock": false
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Interrupt helper bound separately; hardware qualification remains pending."
+    ]
+  },
+  "cases": 10,
+  "source_admitted": false,
+  "limits": [
+    "Ordered calls and saved ABI verified with caller-register clobbers. Helper execution and hardware delivery qualified separately."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "source_sha256": "f1e7642be96397b09564e37398890a236cc310ac57e502d469d9189b738f7bc2",
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream_files": [
+    {
+      "path": "lvp/common/lvp_queue.c",
+      "blob": "575d43d27ebd9ca3655a199363eba4968fd8155f",
+      "sha256": "ed8fba34e8658c0c7d49868790a89dce7188b8c81fe0c04f68969de1670b5814"
+    },
+    {
+      "path": "lvp/common/lvp_queue.h",
+      "blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+      "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+    },
+    {
+      "path": "include/lvp_attr.h",
+      "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+      "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+    }
+  ],
+  "command": [
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+    "-Os",
+    "-fno-ivopts",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-I",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-queue-put",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_backup_queue_put.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-queue-put/queue.o"
+  ],
+  "elf_sha256": "2c73806cde21be1f9ba427e3c7d1399e55201c0f73d67bb25e568087919ba6c5",
+  "bytes": 100,
+  "envelope_bytes": 100,
+  "fits": true,
+  "stock_byte_exact": false,
+  "source_admitted": false,
+  "limits": [
+    "Backup-specific C preserves observed queue metadata-read order using the authenticated SDK layout.",
+    "Zero record size and signed division exception behavior remain outside qualification; caller contracts and firmware integration pending."
+  ]
+}

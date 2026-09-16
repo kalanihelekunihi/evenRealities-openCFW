@@ -1,0 +1,95 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "entry": "0x4e674",
+  "reachable_instructions": 832,
+  "instruction_bytes": 2692,
+  "highest_visited": "0x4f10a",
+  "direct_targets": [
+    {
+      "package": "0x422a8",
+      "runtime": "0x10009968",
+      "sites": [
+        "0x4e692",
+        "0x4e6a6"
+      ],
+      "source_functions": [
+        "open_cfw_gx8002_memmove"
+      ]
+    },
+    {
+      "package": "0x46bcc",
+      "runtime": "0x1000e28c",
+      "sites": [
+        "0x4e70c",
+        "0x4edb4",
+        "0x4edd0"
+      ],
+      "source_functions": [
+        "open_cfw_gx8002_imcra_sample_shift"
+      ]
+    },
+    {
+      "package": "0x46c04",
+      "runtime": "0x1000e2c4",
+      "sites": [
+        "0x4e6fc",
+        "0x4eda8"
+      ],
+      "source_functions": [
+        "open_cfw_gx8002_imcra_peak_shift"
+      ]
+    },
+    {
+      "package": "0x478a4",
+      "runtime": "0x1000ef64",
+      "sites": [
+        "0x4e716",
+        "0x4edbe"
+      ],
+      "source_functions": [
+        "open_cfw_gx8002_backup_rfft"
+      ]
+    },
+    {
+      "package": "0x49c84",
+      "runtime": "0x10011344",
+      "sites": [
+        "0x4ee8c",
+        "0x4eea4",
+        "0x4eeb4",
+        "0x4eec4",
+        "0x4ef58",
+        "0x4ef66",
+        "0x4f040",
+        "0x4f04e",
+        "0x4f05c",
+        "0x4f06a",
+        "0x4f078",
+        "0x4f086",
+        "0x4f094",
+        "0x4f0b2",
+        "0x4f0c8"
+      ],
+      "source_functions": [
+        "memcpy",
+        "open_cfw_gx8002_memcpy"
+      ]
+    },
+    {
+      "package": "0x49d04",
+      "runtime": "0x100113c4",
+      "sites": [
+        "0x4e6ec"
+      ],
+      "source_functions": [
+        "memset",
+        "open_cfw_gx8002_memset"
+      ]
+    }
+  ],
+  "unresolved_control_flow": [],
+  "source_admitted": false,
+  "limits": [
+    "Direct control-flow reachability, not function/source reconstruction. No speculative linear-sweep calls from unreachable literal pools. Any unresolved control flow limits inventory completeness."
+  ]
+}

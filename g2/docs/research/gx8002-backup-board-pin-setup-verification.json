@@ -1,0 +1,55 @@
+{
+  "build": {
+    "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+    "source_sha256": "d668d544131aae960d00a435f84b53cf4aefb0df9f065190243b48c78795dbf2",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_board_pin_configure",
+        "section": ".text.board_pin_configure",
+        "compiled_bytes": 64,
+        "compiled_sha256": "58488813143d7d4834977bc4b2b2f21d25a9ba93b61d53fc66cbb15fcffc68e1",
+        "package_offset": 266700,
+        "stock_envelope_bytes": 64,
+        "stock_sha256": "47713ecd3607ed2bcc744c6df2f7f6432531e708fbbf52b73fc9230fa744339c",
+        "byte_exact": false,
+        "fits": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_board_pin_setup",
+        "section": ".text.board_pin_setup",
+        "compiled_bytes": 172,
+        "compiled_sha256": "926f21bc1c1be96f94b0246d98799a600a3400af41b9782acefba168af4a48ce",
+        "package_offset": 266764,
+        "stock_envelope_bytes": 172,
+        "stock_sha256": "da0260c2ce4a903c5ffcad4a8d232a51d0db28cb7e221645c53591eec069318b",
+        "byte_exact": false,
+        "fits": true
+      }
+    ],
+    "source_admitted": false,
+    "analysis_only_overlapping_sections_allowed": false,
+    "limits": [
+      "Pin table, diagnostic string, flag and helper implementations require source integration.",
+      "No physical flash qualification."
+    ]
+  },
+  "cases": 4315,
+  "source_admitted": false,
+  "limits": [
+    "Configure tests model pad helpers; setup tests model configure, fallback and printf.",
+    "Terminal loop is preserved stock behavior after diagnostic, not a replacement for missing code.",
+    "Diagnostic/flag storage and full hardware composition remain separate."
+  ]
+}

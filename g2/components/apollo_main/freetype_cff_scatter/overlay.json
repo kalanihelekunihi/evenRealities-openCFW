@@ -1,54 +1,54 @@
 {
-  "schema_version": 1,
   "component": "g2-apollo-main-freetype-cff-scatter",
   "dependencies": {
     "scatter_analyzer": {
-      "size": 25836,
-      "sha256": "ac99b9e6c14be45d05b13df19e4af7fca80aa15bf6ae2f4a5df4df179ba91bf1"
+      "sha256": "ac99b9e6c14be45d05b13df19e4af7fca80aa15bf6ae2f4a5df4df179ba91bf1",
+      "size": 25836
     },
     "scatter_manifest": {
-      "size": 21290,
-      "sha256": "0e0a5bbacb77196dfeff989b1f30ef64b812a3f2cfeee8ae490b853a07532eed"
+      "sha256": "0e0a5bbacb77196dfeff989b1f30ef64b812a3f2cfeee8ae490b853a07532eed",
+      "size": 21290
     }
   },
   "profiles": {
     "apple-clang": {
-      "base_package": {
-        "path": "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
-        "size": 4750780,
-        "sha256": "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771"
-      },
       "base_component": {
         "path": "build/canonical-observation-g2-final85/apple-a/liblc3-service-component.bin",
-        "size": 3956672,
-        "sha256": "044d6a3c8c0243e3f3a36240cf4c54d809b081e73491cd340e2214663fe2dd3e",
-        "runtime_end_exclusive": 8380320
+        "runtime_end_exclusive": 8380320,
+        "sha256": "97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9",
+        "size": 3956672
+      },
+      "base_package": {
+        "path": "build/source/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "sha256": "73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4",
+        "size": 4750780
       },
       "expected": {
         "component": {
-          "size": 3956672,
-          "sha256": "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6"
+          "sha256": "97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9",
+          "size": 3956672
         }
       }
     },
     "linux-clang": {
-      "base_package": {
-        "path": "build/source-linux/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
-        "size": 4750764,
-        "sha256": "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0"
-      },
       "base_component": {
         "path": "build/canonical-observation-g2-nus-final/linux-a/liblc3-service-component.bin",
-        "size": 3956672,
+        "runtime_end_exclusive": 8380320,
         "sha256": "332faaa7e267efd71661611a10d0a2c5038d4f731e14ba0cc904dac36b1199b0",
-        "runtime_end_exclusive": 8380320
+        "size": 3956672
+      },
+      "base_package": {
+        "path": "build/source-linux/package/g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+        "sha256": "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
+        "size": 4750764
       },
       "expected": {
         "component": {
-          "size": 3956672,
-          "sha256": "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6"
+          "sha256": "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
+          "size": 3956672
         }
       }
     }
-  }
+  },
+  "schema_version": 1
 }

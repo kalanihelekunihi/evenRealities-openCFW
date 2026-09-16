@@ -1,0 +1,1413 @@
+{
+  "cases": 518,
+  "build": {
+    "components": {
+      "startup": {
+        "gate": {
+          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+          "dependencies": [
+            {
+              "path": "arch/soc/grus/include/clk_priv.h",
+              "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+              "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+            },
+            {
+              "path": "arch/soc/grus/include/base_addr.h",
+              "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+              "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+            },
+            {
+              "path": "include/driver/gx_clock.h",
+              "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+              "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+            },
+            {
+              "path": "include/driver/gx_clock/gx_clock_v2.h",
+              "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+              "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+            },
+            {
+              "path": "LICENSE",
+              "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+              "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+            }
+          ],
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "--param=case-values-threshold=3",
+            "-fno-gcse",
+            "-fno-tree-forwprop"
+          ],
+          "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+          "lookup_runtime_address": 268435768,
+          "sections": [
+            {
+              "section": ".text",
+              "runtime_address": 268435960,
+              "package_offset": 232268,
+              "compiled_bytes": 254,
+              "compiled_sha256": "8678ce4322f2711341f134d231a5a9e9ed74663860f96f379ecc3c8736ef12e1",
+              "envelope_bytes": 264,
+              "fits": true,
+              "stock_sha256": "5d0742c927508b51d7aadeee1964c3f194575fce64b2e51e08ae93dcbbaa7aaa"
+            },
+            {
+              "section": ".rodata",
+              "runtime_address": 268440356,
+              "package_offset": 236664,
+              "compiled_bytes": 148,
+              "compiled_sha256": "ac938eadb01ad1dd6d48e8a23c83cadcc2075b17b957a518682ee60a82896f9c",
+              "envelope_bytes": 148,
+              "fits": true,
+              "stock_sha256": "3de641578b6bdb4e47c552747addb9e0a3c71a7897f77c768e25164eab45446e"
+            }
+          ],
+          "source_admitted": false,
+          "hardware_qualified": false,
+          "limits": [
+            "Upstream gate and source-generated jump tables only; lookup remains bound to retained stage1 entry.",
+            "Branch-table mapping, lookup/table semantics, MMIO equivalence and loader qualification pending."
+          ]
+        },
+        "frequency": {
+          "lookup_and_tables": {
+            "upstream_evidence": {
+              "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+              "dependencies": [
+                {
+                  "path": "arch/soc/grus/include/clk_priv.h",
+                  "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+                  "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+                },
+                {
+                  "path": "arch/soc/grus/include/base_addr.h",
+                  "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                  "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+                },
+                {
+                  "path": "include/driver/gx_clock.h",
+                  "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+                  "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+                },
+                {
+                  "path": "include/driver/gx_clock/gx_clock_v2.h",
+                  "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                  "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+                },
+                {
+                  "path": "LICENSE",
+                  "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+                  "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+                }
+              ],
+              "flags": [
+                "-Os",
+                "-mcpu=ck804ef",
+                "-mhard-float",
+                "-ffreestanding",
+                "-fno-builtin",
+                "-ffunction-sections",
+                "-fdata-sections",
+                "-Wall",
+                "-Wextra",
+                "-Werror",
+                "--param=case-values-threshold=3",
+                "-fno-gcse",
+                "-fno-tree-forwprop"
+              ],
+              "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+              "lookup_runtime_address": 268448992,
+              "sections": [
+                {
+                  "section": ".text",
+                  "runtime_address": 268450792,
+                  "package_offset": 247080,
+                  "compiled_bytes": 254,
+                  "compiled_sha256": "e28c7e78a2a161233b64d65240d6a10a92c651de00cad548386b9b2627fe051d",
+                  "envelope_bytes": 264,
+                  "fits": true,
+                  "stock_sha256": "17fa73ba793655dd80b8c00f5077aed9c2b44e72e14f3daa81d4b5b4f68560fe"
+                },
+                {
+                  "section": ".rodata",
+                  "runtime_address": 268511580,
+                  "package_offset": 307868,
+                  "compiled_bytes": 148,
+                  "compiled_sha256": "2ad9cba3ad623e75a0f232a33aaa80402454f2b23c8bd4664fcad5a028d48193",
+                  "envelope_bytes": 148,
+                  "fits": true,
+                  "stock_sha256": "eb5172991b4d8194e66afe4b54c8755575bc4bb4e602b8f1a1e3eef53ebbdd54"
+                }
+              ],
+              "source_admitted": false,
+              "hardware_qualified": false,
+              "limits": [
+                "Upstream gate and source-generated jump tables only; lookup remains bound to retained backup entry.",
+                "Branch-table mapping, lookup/table semantics, MMIO equivalence and loader qualification pending."
+              ]
+            },
+            "flags": [
+              "-Os",
+              "-mcpu=ck804ef",
+              "-mhard-float",
+              "-ffreestanding",
+              "-fno-builtin",
+              "-ffunction-sections",
+              "-fdata-sections",
+              "-Wall",
+              "-Wextra",
+              "-Werror",
+              "-fno-tree-loop-optimize",
+              "-fno-delete-null-pointer-checks"
+            ],
+            "tables": [
+              {
+                "section": ".data.gx_clock_param_table",
+                "runtime_address": 536876232,
+                "package_offset": 237084,
+                "bytes": 416,
+                "sha256": "fdf04e2bae2b98b2c905ff303ae58aca1f3ab7834b68ac0af70e616de733ab15",
+                "byte_exact": true
+              },
+              {
+                "section": ".data.gx_clock_dto_table",
+                "runtime_address": 536876760,
+                "package_offset": 237612,
+                "bytes": 3,
+                "sha256": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+                "byte_exact": true
+              },
+              {
+                "section": ".data.gx_clock_div_table",
+                "runtime_address": 536876764,
+                "package_offset": 237616,
+                "bytes": 68,
+                "sha256": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872",
+                "byte_exact": true
+              }
+            ],
+            "source_table_bytes": 487,
+            "lookup": {
+              "compiled_bytes": 160,
+              "compiled_sha256": "bfcbacb30bd33d081c7f20ee43c988a6187739467694b71e75e3313f42bc7099",
+              "envelope_bytes": 192,
+              "runtime_address": 268435768,
+              "package_offset": 232076
+            },
+            "source_admitted": false,
+            "hardware_qualified": false,
+            "limits": [
+              "Source-defined parameter/DTO/divider tables match stage1 bytes after pointer relocation.",
+              "Lookup behavior, external references and loader qualification pending; padding excluded."
+            ]
+          },
+          "upstream_evidence": {
+            "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+            "dependencies": [
+              {
+                "path": "arch/soc/grus/include/clk_priv.h",
+                "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+                "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+              },
+              {
+                "path": "arch/soc/grus/include/base_addr.h",
+                "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+              },
+              {
+                "path": "include/driver/gx_clock.h",
+                "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+                "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+              },
+              {
+                "path": "include/driver/gx_clock/gx_clock_v2.h",
+                "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+              },
+              {
+                "path": "LICENSE",
+                "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+                "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+              }
+            ],
+            "flags": [
+              "-Os",
+              "-mcpu=ck804ef",
+              "-mhard-float",
+              "-ffreestanding",
+              "-fno-builtin",
+              "-ffunction-sections",
+              "-fdata-sections",
+              "-Wall",
+              "-Wextra",
+              "-Werror",
+              "--param=case-values-threshold=3",
+              "-fno-gcse",
+              "-fno-tree-forwprop"
+            ],
+            "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+            "lookup_runtime_address": 268448992,
+            "sections": [
+              {
+                "section": ".text",
+                "runtime_address": 268450792,
+                "package_offset": 247080,
+                "compiled_bytes": 254,
+                "compiled_sha256": "e28c7e78a2a161233b64d65240d6a10a92c651de00cad548386b9b2627fe051d",
+                "envelope_bytes": 264,
+                "fits": true,
+                "stock_sha256": "17fa73ba793655dd80b8c00f5077aed9c2b44e72e14f3daa81d4b5b4f68560fe"
+              },
+              {
+                "section": ".rodata",
+                "runtime_address": 268511580,
+                "package_offset": 307868,
+                "compiled_bytes": 148,
+                "compiled_sha256": "2ad9cba3ad623e75a0f232a33aaa80402454f2b23c8bd4664fcad5a028d48193",
+                "envelope_bytes": 148,
+                "fits": true,
+                "stock_sha256": "eb5172991b4d8194e66afe4b54c8755575bc4bb4e602b8f1a1e3eef53ebbdd54"
+              }
+            ],
+            "source_admitted": false,
+            "hardware_qualified": false,
+            "limits": [
+              "Upstream gate and source-generated jump tables only; lookup remains bound to retained backup entry.",
+              "Branch-table mapping, lookup/table semantics, MMIO equivalence and loader qualification pending."
+            ]
+          },
+          "header_sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496",
+          "source_sha256": "74a3ad8b98de99e45872d7e1313baa4af9768d99025c89d3209e173015ee8a07",
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-fno-tree-loop-optimize",
+            "-fno-delete-null-pointer-checks"
+          ],
+          "sections": [
+            {
+              "section": ".text",
+              "address": 268436224,
+              "compiled_bytes": 468,
+              "compiled_sha256": "5ad32250464e45fc46fac8eab61a4310e0b2952f944f614713d1b9d475ef3e76",
+              "envelope_bytes": 500,
+              "fits": true
+            },
+            {
+              "section": ".rodata",
+              "address": 268440504,
+              "compiled_bytes": 76,
+              "compiled_sha256": "8140d53d497f913be05ce9ad5aeec103bc2ce3b757b2d0618cb93ef005547be9",
+              "envelope_bytes": 76,
+              "fits": true
+            }
+          ],
+          "source_admitted": false,
+          "hardware_qualified": false,
+          "limits": [
+            "Candidate only: unchanged authenticated upstream frequency arithmetic with inline divider.",
+            "Lookup and tables linked from source at original BINH stage-one addresses; physical hardware, references and loader not qualified."
+          ]
+        },
+        "arithmetic": {
+          "source_sha256": "0e7ea84f062ccb2eea8ed489ab605dd6f0adc58e8b675f6488f53d3880ec4181",
+          "elf_sha256": "28dd7a6d759a04632373be5e1b76a32f87b79dd18d6110523d1c59f9c19d94de",
+          "target_cases": 16546,
+          "sections": [
+            {
+              "name": ".divide",
+              "address": 268439072,
+              "bytes": 46
+            },
+            {
+              "name": ".remainder",
+              "address": 268439140,
+              "bytes": 40
+            }
+          ],
+          "source_admitted": false,
+          "limits": [
+            "Finite decoded-instruction battery with independent arithmetic oracle, including zero divisors.",
+            "Stage-one integration and hardware execution remain unqualified."
+          ]
+        },
+        "uart": {
+          "source_sha256": "e979b082182732c6103da9fc7521896c1f5a280d7b58ea01bb33c51d6a442326",
+          "elf_sha256": "bec23dc455fce948a5805f56a55148ffd8635f0f7a684ecbced3cb364e9c1ac7",
+          "code_bytes": 124,
+          "envelope_bytes": 128,
+          "fits": true,
+          "bindings": {
+            "open_cfw_gx8002_stage1_frequency": 232532,
+            "open_cfw_gx8002_stage1_39774": 235380,
+            "open_cfw_gx8002_stage1_397b8": 235448
+          },
+          "source_admitted": false,
+          "limits": [
+            "Complete readable UART setup C; original arithmetic helper calls and wraparound retained. Frequency and arithmetic are absolute dependencies. Decoded comparison, polling qualification, placement and integration pending."
+          ]
+        },
+        "hooks_source_sha256": "520ff51cc0d477db6206b27a4c526c91bf1147d160ec583d2c51020d4512708a",
+        "clock_control": {
+          "source_sha256": "3dc5bba937de3d0146764d7c0c614a5dc418ff0a32d768ad18ce2e82e014a9a5",
+          "elf_sha256": "f12a7998bd94d0e59b9af741040875f2003a6b198008dd9dcb5bb71f2dbb6238",
+          "code_bytes": 30,
+          "envelope_bytes": 32,
+          "fits": true,
+          "source_admitted": false,
+          "limits": [
+            "Complete conditional register setup; predicate is complete source and matches stock bytes exactly. Behavioral comparison and source integration pending."
+          ]
+        },
+        "shutdown": {
+          "source_sha256": "4f8fceca4f78986684d92831014e55be489c3541b546c363c6d29b36ddd03a66",
+          "elf_sha256": "5d281be210cf2b174168ec5ef7f9f0eafe8c5413cee6e32a9ba9b61f803ff655",
+          "stock_identical": true,
+          "code_bytes": 42,
+          "envelope_bytes": 44,
+          "fits": true,
+          "source_admitted": false,
+          "limits": [
+            "Complete C peripheral shutdown; module gate remains absolute. Behavioral comparison and source integration pending."
+          ]
+        },
+        "boot_state": {
+          "source_sha256": "af481a2e7e9fc41ea1bf738f5c81fa9386472e51dd3c6c3df56a6cf66ca3b295",
+          "elf_sha256": "2c433dc821a697dcb199cd6f4bff9899e81b5655ebd6aa1359ac2c3778813885",
+          "code_bytes": 38,
+          "envelope_bytes": 40,
+          "fits": true,
+          "source_admitted": false,
+          "limits": [
+            "Complete C mode/offset selection; initial hardware helper remains absolute. Behavioral comparison and source integration pending."
+          ]
+        },
+        "source_sha256": "d31d89421791fecdbed8ffed8e861e8ad6328e7a129ce6a41bf751fff6c2b30c",
+        "elf_sha256": "a436d88aaee07560f260ce1598a36e20c170bd74fd06af62cfb921d245184f82",
+        "loader": {
+          "entry_address": 268438860,
+          "helper_address": 268439516,
+          "mapping_vector_package_offset": 231764,
+          "elf_sha256": "50ee6ddb4719c75cae6dd7d84b69bc5d733eeb422caa551bbef8126efbc338c5",
+          "source_sha256": "27bd0abc453f52267a2ee7b698717c24fd42518b4ab4d060abb20275b9e8fce8",
+          "object_sha256": "2525a1c086104b751622b502725d24ed531ab426db48e405846b9eda723cae98",
+          "allocated_bytes": 140,
+          "undefined_symbols": [
+            "open_cfw_gx8002_loader_flash_read"
+          ],
+          "source_admitted": false,
+          "limits": [
+            "Complete C loader control compiled as a relocatable object on macOS. Linked execution addresses follow the authenticated BINH stage-one vector mapping. Decoded source comparison and integration remain pending; the flash helper remains an absolute dependency. The helper dependency is not stubbed or represented as binary data."
+          ]
+        },
+        "sections": [
+          {
+            "name": ".gate",
+            "address": 268435960,
+            "bytes": 254
+          },
+          {
+            "name": ".gate_switch",
+            "address": 268440356,
+            "bytes": 148
+          },
+          {
+            "name": ".lookup",
+            "address": 268435768,
+            "bytes": 160
+          },
+          {
+            "name": ".frequency",
+            "address": 268436224,
+            "bytes": 468
+          },
+          {
+            "name": ".frequency_switch",
+            "address": 268440504,
+            "bytes": 76
+          },
+          {
+            "name": ".data.gx_clock_param_table",
+            "address": 536876232,
+            "bytes": 416
+          },
+          {
+            "name": ".data.gx_clock_dto_table",
+            "address": 536876760,
+            "bytes": 3
+          },
+          {
+            "name": ".data.gx_clock_div_table",
+            "address": 536876764,
+            "bytes": 68
+          },
+          {
+            "name": ".divide",
+            "address": 268439072,
+            "bytes": 46
+          },
+          {
+            "name": ".remainder",
+            "address": 268439140,
+            "bytes": 40
+          },
+          {
+            "name": ".uart",
+            "address": 268440160,
+            "bytes": 124
+          },
+          {
+            "name": ".empty_hook",
+            "address": 268435764,
+            "bytes": 2
+          },
+          {
+            "name": ".fixed_hook",
+            "address": 268440288,
+            "bytes": 14
+          },
+          {
+            "name": ".clock_control",
+            "address": 268440304,
+            "bytes": 30
+          },
+          {
+            "name": ".trim_predicate",
+            "address": 268439248,
+            "bytes": 12
+          },
+          {
+            "name": ".shutdown",
+            "address": 268440116,
+            "bytes": 42
+          },
+          {
+            "name": ".boot_state",
+            "address": 268438820,
+            "bytes": 38
+          },
+          {
+            "name": ".loader",
+            "address": 268438860,
+            "bytes": 140
+          },
+          {
+            "name": ".initialize",
+            "address": 268439024,
+            "bytes": 44
+          }
+        ],
+        "source_admitted": false,
+        "limits": [
+          "Complete dispatcher and loader source linked at original entries. Dispatcher helper 0x3912c and flash helper remain absolute dependencies. Ordered behavioral verification and integration pending."
+        ]
+      },
+      "clock": {
+        "lookup_build": {
+          "upstream_evidence": {
+            "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+            "dependencies": [
+              {
+                "path": "arch/soc/grus/include/clk_priv.h",
+                "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+                "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+              },
+              {
+                "path": "arch/soc/grus/include/base_addr.h",
+                "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+              },
+              {
+                "path": "include/driver/gx_clock.h",
+                "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+                "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+              },
+              {
+                "path": "include/driver/gx_clock/gx_clock_v2.h",
+                "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+              },
+              {
+                "path": "LICENSE",
+                "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+                "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+              }
+            ],
+            "flags": [
+              "-Os",
+              "-mcpu=ck804ef",
+              "-mhard-float",
+              "-ffreestanding",
+              "-fno-builtin",
+              "-ffunction-sections",
+              "-fdata-sections",
+              "-Wall",
+              "-Wextra",
+              "-Werror",
+              "--param=case-values-threshold=3",
+              "-fno-gcse",
+              "-fno-tree-forwprop"
+            ],
+            "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+            "lookup_runtime_address": 268448992,
+            "sections": [
+              {
+                "section": ".text",
+                "runtime_address": 268450792,
+                "package_offset": 247080,
+                "compiled_bytes": 254,
+                "compiled_sha256": "e28c7e78a2a161233b64d65240d6a10a92c651de00cad548386b9b2627fe051d",
+                "envelope_bytes": 264,
+                "fits": true,
+                "stock_sha256": "17fa73ba793655dd80b8c00f5077aed9c2b44e72e14f3daa81d4b5b4f68560fe"
+              },
+              {
+                "section": ".rodata",
+                "runtime_address": 268511580,
+                "package_offset": 307868,
+                "compiled_bytes": 148,
+                "compiled_sha256": "2ad9cba3ad623e75a0f232a33aaa80402454f2b23c8bd4664fcad5a028d48193",
+                "envelope_bytes": 148,
+                "fits": true,
+                "stock_sha256": "eb5172991b4d8194e66afe4b54c8755575bc4bb4e602b8f1a1e3eef53ebbdd54"
+              }
+            ],
+            "source_admitted": false,
+            "hardware_qualified": false,
+            "limits": [
+              "Upstream gate and source-generated jump tables only; lookup remains bound to retained backup entry.",
+              "Branch-table mapping, lookup/table semantics, MMIO equivalence and loader qualification pending."
+            ]
+          },
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-fno-tree-loop-optimize",
+            "-fno-delete-null-pointer-checks"
+          ],
+          "tables": [
+            {
+              "section": ".data.gx_clock_param_table",
+              "runtime_address": 536876232,
+              "package_offset": 237084,
+              "bytes": 416,
+              "sha256": "fdf04e2bae2b98b2c905ff303ae58aca1f3ab7834b68ac0af70e616de733ab15",
+              "byte_exact": true
+            },
+            {
+              "section": ".data.gx_clock_dto_table",
+              "runtime_address": 536876760,
+              "package_offset": 237612,
+              "bytes": 3,
+              "sha256": "8afc4015a949d5a6b999c54ff00213eae3978f3f3a23a1324a9d9f5d445e6e4b",
+              "byte_exact": true
+            },
+            {
+              "section": ".data.gx_clock_div_table",
+              "runtime_address": 536876764,
+              "package_offset": 237616,
+              "bytes": 68,
+              "sha256": "86623e872da26977fb2b01bc5f0f31d4db01c077db4fdd565d108e22658f8872",
+              "byte_exact": true
+            }
+          ],
+          "source_table_bytes": 487,
+          "lookup": {
+            "compiled_bytes": 160,
+            "compiled_sha256": "bfcbacb30bd33d081c7f20ee43c988a6187739467694b71e75e3313f42bc7099",
+            "envelope_bytes": 192,
+            "runtime_address": 268435768,
+            "package_offset": 232076
+          },
+          "source_admitted": false,
+          "hardware_qualified": false,
+          "limits": [
+            "Source-defined parameter/DTO/divider tables match stage1 bytes after pointer relocation.",
+            "Lookup behavior, external references and loader qualification pending; padding excluded."
+          ]
+        },
+        "trim_build": {
+          "upstream_evidence": {
+            "trim_setters": {
+              "cases": 18432,
+              "sections": [
+                {
+                  "offset": 235508,
+                  "bytes": 24,
+                  "address": 268439200,
+                  "envelope_bytes": 24,
+                  "fits": true
+                },
+                {
+                  "offset": 235532,
+                  "bytes": 24,
+                  "address": 268439224,
+                  "envelope_bytes": 24,
+                  "fits": true
+                }
+              ],
+              "source_sha256": "e15e8d1e4aa5720c8e4a30da7793886982543c1b8154be4974a39fd2dbbbf27b",
+              "elf_sha256": "71a2fd0fc0b255b56381e6214cc56ce5382874c45c2697da6eb9781e0dd26843",
+              "source_admitted": false,
+              "limits": [
+                "Finite decoded execution with independent ordered-write oracle and ABI checks. MMIO values supplied. Both setters fit; second uses one source-authored BCLRI instruction. Hardware and startup integration pending."
+              ]
+            },
+            "board_source_sha256": "76305a995200d1c3d2da9fd0763b2ce73fae1223aa6eb574d2cdc72f6472eda7",
+            "upstream_evidence": {
+              "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+              "dependencies": [
+                {
+                  "path": "arch/soc/grus/include/clk_priv.h",
+                  "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+                  "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+                },
+                {
+                  "path": "arch/soc/grus/include/base_addr.h",
+                  "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                  "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+                },
+                {
+                  "path": "include/driver/gx_clock.h",
+                  "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+                  "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+                },
+                {
+                  "path": "include/driver/gx_clock/gx_clock_v2.h",
+                  "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                  "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+                },
+                {
+                  "path": "LICENSE",
+                  "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+                  "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+                }
+              ],
+              "flags": [
+                "-Os",
+                "-mcpu=ck804ef",
+                "-mhard-float",
+                "-ffreestanding",
+                "-fno-builtin",
+                "-ffunction-sections",
+                "-fdata-sections",
+                "-Wall",
+                "-Wextra",
+                "-Werror",
+                "--param=case-values-threshold=3",
+                "-fno-gcse",
+                "-fno-tree-forwprop"
+              ],
+              "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+              "lookup_runtime_address": 268435768,
+              "sections": [
+                {
+                  "section": ".text",
+                  "runtime_address": 268435960,
+                  "package_offset": 232268,
+                  "compiled_bytes": 254,
+                  "compiled_sha256": "8678ce4322f2711341f134d231a5a9e9ed74663860f96f379ecc3c8736ef12e1",
+                  "envelope_bytes": 264,
+                  "fits": true,
+                  "stock_sha256": "5d0742c927508b51d7aadeee1964c3f194575fce64b2e51e08ae93dcbbaa7aaa"
+                },
+                {
+                  "section": ".rodata",
+                  "runtime_address": 268440356,
+                  "package_offset": 236664,
+                  "compiled_bytes": 148,
+                  "compiled_sha256": "ac938eadb01ad1dd6d48e8a23c83cadcc2075b17b957a518682ee60a82896f9c",
+                  "envelope_bytes": 148,
+                  "fits": true,
+                  "stock_sha256": "3de641578b6bdb4e47c552747addb9e0a3c71a7897f77c768e25164eab45446e"
+                }
+              ],
+              "source_admitted": false,
+              "hardware_qualified": false,
+              "limits": [
+                "Upstream gate and source-generated jump tables only; lookup remains bound to retained stage1 entry.",
+                "Branch-table mapping, lookup/table semantics, MMIO equivalence and loader qualification pending."
+              ]
+            },
+            "upstream_path": "arch/soc/grus/spl/spl_clk.c",
+            "upstream_blob": "f2db60d51d5ea2609089819979aabd46179a4e1b",
+            "source_sha256": "9300c02f60f1ed063d3baae43b0cb616e0d6f4d871a28c0f55d373c1a2c606dd",
+            "adapted_header_sha256": "431e461cdf8d0642bbb66cd92f7aee2d7f358d5b44b30cca93f763425cffcdbf",
+            "flags": [
+              "-Os",
+              "-mcpu=ck804ef",
+              "-mhard-float",
+              "-ffreestanding",
+              "-fno-builtin",
+              "-ffunction-sections",
+              "-fdata-sections",
+              "-Wall",
+              "-Wextra",
+              "-Werror",
+              "-fno-delete-null-pointer-checks",
+              "-fno-tree-loop-optimize"
+            ],
+            "adaptations": [
+              "Force private upstream helpers inline, preserve lookup boundary; unsigned fixed-count loop indices."
+            ],
+            "code_envelope_bytes": 1356,
+            "fits": true,
+            "sections": [
+              {
+                "name": ".trim_all",
+                "address": 268439200,
+                "bytes": 24
+              },
+              {
+                "name": ".trim_32k",
+                "address": 268439224,
+                "bytes": 24
+              },
+              {
+                "name": ".board",
+                "address": 268440336,
+                "bytes": 18
+              },
+              {
+                "name": ".text",
+                "address": 268437464,
+                "bytes": 1336
+              },
+              {
+                "name": ".rodata",
+                "address": 268440580,
+                "bytes": 124
+              },
+              {
+                "name": ".data.gx_clock_param_table",
+                "address": 536876232,
+                "bytes": 416
+              },
+              {
+                "name": ".data.clock_source_table",
+                "address": 536876680,
+                "bytes": 80
+              },
+              {
+                "name": ".data.gx_clock_dto_table",
+                "address": 536876760,
+                "bytes": 3
+              },
+              {
+                "name": ".data.gx_clock_div_table",
+                "address": 536876764,
+                "bytes": 68
+              }
+            ],
+            "bindings": {
+              "__module_get_info": 232076,
+              "open_cfw_gx8002_stage1_clock_trim": 233032
+            },
+            "source_admitted": false,
+            "limits": [
+              "All compiled code and tables fit original envelopes; decoded behavioral comparison, reference qualification and integration pending. Trim setters and board hook linked as source. Clock-trim and lookup implementations remain absolute dependencies; board hook behavioral qualification pending."
+            ]
+          },
+          "source_blob": "f2db60d51d5ea2609089819979aabd46179a4e1b",
+          "adaptations": [
+            "Force private helpers inline; unsigned loop indices; use uint32_t for trim locals to match upstream helper pointer types; expose source tables to preserve runtime table loads."
+          ],
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-fno-delete-null-pointer-checks"
+          ],
+          "fits": true,
+          "configuration_blob": "220c55559e1496d5f00283c086c9ad4fea74065f",
+          "source_sha256": "884a2d983c2e9769fd75ec0eb6966bfd74b6943850d9e186d01234ecf5aea738",
+          "sections": [
+            {
+              "name": ".text",
+              "address": 268436724,
+              "bytes": 656
+            },
+            {
+              "name": ".data.gx_clock_param_table",
+              "address": 536876232,
+              "bytes": 416
+            },
+            {
+              "name": ".data.low",
+              "address": 536876648,
+              "bytes": 16
+            },
+            {
+              "name": ".data.high",
+              "address": 536876664,
+              "bytes": 16
+            },
+            {
+              "name": ".data.gx_clock_dto_table",
+              "address": 536876760,
+              "bytes": 3
+            },
+            {
+              "name": ".data.gx_clock_div_table",
+              "address": 536876764,
+              "bytes": 68
+            }
+          ],
+          "code_envelope_bytes": 740,
+          "source_admitted": false,
+          "limits": [
+            "Build candidate only; flash return is ignored as upstream/stock, configuration magic/XOR gate trim writes. Decoded behavior, placement and hardware qualification pending."
+          ]
+        },
+        "elf_sha256": "7894609cba52d431bd30aad590618975683a4239ac08bdff10b6653b816b031b",
+        "sections": [
+          {
+            "name": ".lookup",
+            "address": 268435768,
+            "bytes": 160
+          },
+          {
+            "name": ".clock_trim",
+            "address": 268436724,
+            "bytes": 656
+          },
+          {
+            "name": ".data.low",
+            "address": 536876648,
+            "bytes": 16
+          },
+          {
+            "name": ".data.high",
+            "address": 536876664,
+            "bytes": 16
+          },
+          {
+            "name": ".trim_all",
+            "address": 268439200,
+            "bytes": 24
+          },
+          {
+            "name": ".trim_32k",
+            "address": 268439224,
+            "bytes": 24
+          },
+          {
+            "name": ".board",
+            "address": 268440336,
+            "bytes": 18
+          },
+          {
+            "name": ".text",
+            "address": 268437464,
+            "bytes": 1336
+          },
+          {
+            "name": ".rodata",
+            "address": 268440580,
+            "bytes": 124
+          },
+          {
+            "name": ".data.gx_clock_param_table",
+            "address": 536876232,
+            "bytes": 416
+          },
+          {
+            "name": ".data.clock_source_table",
+            "address": 536876680,
+            "bytes": 80
+          },
+          {
+            "name": ".data.gx_clock_dto_table",
+            "address": 536876760,
+            "bytes": 3
+          },
+          {
+            "name": ".data.gx_clock_div_table",
+            "address": 536876764,
+            "bytes": 68
+          }
+        ],
+        "source_admitted": false,
+        "limits": [
+          "Existing component bodies match independent builds; linked lookup fits and passes62 comparisons against independently qualified lookup, with physical SRAM overlap check. Lookup is linked source; flash read remains the only absolute implementation in this component. Full initialization behavior, references and firmware integration pending."
+        ]
+      },
+      "flash": {
+        "registers_build": {
+          "reader_build": {
+            "adaptations": [
+              "Keep wait_till_ready as one source helper inside the original reader envelope; register-transfer calls keep original ABI."
+            ],
+            "code_envelope_bytes": 600,
+            "fits": true,
+            "upstream_evidence": {
+              "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+              "dependencies": [
+                {
+                  "path": "arch/soc/grus/include/clk_priv.h",
+                  "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+                  "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+                },
+                {
+                  "path": "arch/soc/grus/include/base_addr.h",
+                  "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+                  "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+                },
+                {
+                  "path": "include/driver/gx_clock.h",
+                  "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+                  "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+                },
+                {
+                  "path": "include/driver/gx_clock/gx_clock_v2.h",
+                  "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+                  "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+                },
+                {
+                  "path": "LICENSE",
+                  "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+                  "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+                }
+              ],
+              "flags": [
+                "-Os",
+                "-mcpu=ck804ef",
+                "-mhard-float",
+                "-ffreestanding",
+                "-fno-builtin",
+                "-ffunction-sections",
+                "-fdata-sections",
+                "-Wall",
+                "-Wextra",
+                "-Werror",
+                "--param=case-values-threshold=3",
+                "-fno-gcse",
+                "-fno-tree-forwprop"
+              ],
+              "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+              "lookup_runtime_address": 268435768,
+              "sections": [
+                {
+                  "section": ".text",
+                  "runtime_address": 268435960,
+                  "package_offset": 232268,
+                  "compiled_bytes": 254,
+                  "compiled_sha256": "8678ce4322f2711341f134d231a5a9e9ed74663860f96f379ecc3c8736ef12e1",
+                  "envelope_bytes": 264,
+                  "fits": true,
+                  "stock_sha256": "5d0742c927508b51d7aadeee1964c3f194575fce64b2e51e08ae93dcbbaa7aaa"
+                },
+                {
+                  "section": ".rodata",
+                  "runtime_address": 268440356,
+                  "package_offset": 236664,
+                  "compiled_bytes": 148,
+                  "compiled_sha256": "ac938eadb01ad1dd6d48e8a23c83cadcc2075b17b957a518682ee60a82896f9c",
+                  "envelope_bytes": 148,
+                  "fits": true,
+                  "stock_sha256": "3de641578b6bdb4e47c552747addb9e0a3c71a7897f77c768e25164eab45446e"
+                }
+              ],
+              "source_admitted": false,
+              "hardware_qualified": false,
+              "limits": [
+                "Upstream gate and source-generated jump tables only; lookup remains bound to retained stage1 entry.",
+                "Branch-table mapping, lookup/table semantics, MMIO equivalence and loader qualification pending."
+              ]
+            },
+            "dependencies": [
+              {
+                "path": "arch/soc/grus/spl/spl_spinor.c",
+                "blob": "e98ce16956acc2c97989c3e29c727df5ec7a1a1f",
+                "sha256": "a4b55a11ea67992e67791f7da06729850b5a358b2a027298a5d81cd8ef429606"
+              },
+              {
+                "path": "arch/soc/grus/spl/spl_spinor.h",
+                "blob": "6003dba1af77603a7382913ba565003e5ae6ef94",
+                "sha256": "3d2c5d5c3acbc42aad214490af6777517135902d823b2222a21e749f85a9a059"
+              },
+              {
+                "path": "include/driver/gx_flash.h",
+                "blob": "71221ef72395e8b61642dd87291804aced433f58",
+                "sha256": "d4d9d828e4363041c14ba7e3a676eec7b51c0b6427576f401516e4b6991c3d2d"
+              }
+            ],
+            "source_sha256": "ba102d7a373c9681af10e8e534e0bd91a1bd26d6f67857d16029b550faedebb3",
+            "flags": [
+              "-Os",
+              "-mcpu=ck804ef",
+              "-mhard-float",
+              "-ffreestanding",
+              "-fno-builtin",
+              "-ffunction-sections",
+              "-fdata-sections",
+              "-Wall",
+              "-Wextra",
+              "-Werror",
+              "-fno-ipa-sra",
+              "-fno-ipa-cp"
+            ],
+            "sections": [
+              {
+                "name": ".text",
+                "address": 268439516,
+                "bytes": 526
+              },
+              {
+                "name": ".data",
+                "address": 536876848,
+                "bytes": 4
+              }
+            ],
+            "source_admitted": false,
+            "limits": [
+              "Quad SPI, no XIP/DMA; sample delay1, divider2 recovered. Build only; layout/behavior qualification and register-transfer/gate closure pending."
+            ]
+          },
+          "sections": [
+            {
+              "name": ".read",
+              "bytes": 126,
+              "package_offset": 235568,
+              "stock_byte_exact": false
+            },
+            {
+              "name": ".write",
+              "bytes": 124,
+              "package_offset": 235696,
+              "stock_byte_exact": false
+            }
+          ],
+          "elf_sha256": "8582103a8d926bde33e29298535e10196cb2a206c7f799ef1c061fd3a7d23d26",
+          "source_admitted": false,
+          "limits": [
+            "Complete source-built register transfer helpers fit original128-byte entries, no external dependencies. Decoded polling/transfer verification and hardware qualification pending."
+          ]
+        },
+        "elf_sha256": "574bf3249905b14bb4c4c9621358e86041d1f2a1cb3661bd95aa8fbe0b46b6f0",
+        "sections": [
+          {
+            "name": ".read",
+            "address": 268439260,
+            "bytes": 126
+          },
+          {
+            "name": ".write",
+            "address": 268439388,
+            "bytes": 124
+          },
+          {
+            "name": ".text",
+            "address": 268439516,
+            "bytes": 526
+          },
+          {
+            "name": ".data",
+            "address": 536876848,
+            "bytes": 4
+          }
+        ],
+        "source_admitted": false,
+        "limits": [
+          "Reader and register helper bodies match separately qualified builds; all flash functions are section-defined source. Clock gate remains an absolute dependency. Composed execution and full firmware integration pending."
+        ]
+      },
+      "reset": {
+        "upstream_evidence": {
+          "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+          "dependencies": [
+            {
+              "path": "arch/soc/grus/include/clk_priv.h",
+              "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+              "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+            },
+            {
+              "path": "arch/soc/grus/include/base_addr.h",
+              "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+              "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+            },
+            {
+              "path": "include/driver/gx_clock.h",
+              "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+              "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+            },
+            {
+              "path": "include/driver/gx_clock/gx_clock_v2.h",
+              "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+              "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+            },
+            {
+              "path": "LICENSE",
+              "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+              "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+            }
+          ],
+          "flags": [
+            "-Os",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "--param=case-values-threshold=3",
+            "-fno-gcse",
+            "-fno-tree-forwprop"
+          ],
+          "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+          "lookup_runtime_address": 268435768,
+          "sections": [
+            {
+              "section": ".text",
+              "runtime_address": 268435960,
+              "package_offset": 232268,
+              "compiled_bytes": 254,
+              "compiled_sha256": "8678ce4322f2711341f134d231a5a9e9ed74663860f96f379ecc3c8736ef12e1",
+              "envelope_bytes": 264,
+              "fits": true,
+              "stock_sha256": "5d0742c927508b51d7aadeee1964c3f194575fce64b2e51e08ae93dcbbaa7aaa"
+            },
+            {
+              "section": ".rodata",
+              "runtime_address": 268440356,
+              "package_offset": 236664,
+              "compiled_bytes": 148,
+              "compiled_sha256": "ac938eadb01ad1dd6d48e8a23c83cadcc2075b17b957a518682ee60a82896f9c",
+              "envelope_bytes": 148,
+              "fits": true,
+              "stock_sha256": "3de641578b6bdb4e47c552747addb9e0a3c71a7897f77c768e25164eab45446e"
+            }
+          ],
+          "source_admitted": false,
+          "hardware_qualified": false,
+          "limits": [
+            "Upstream gate and source-generated jump tables only; lookup remains bound to retained stage1 entry.",
+            "Branch-table mapping, lookup/table semantics, MMIO equivalence and loader qualification pending."
+          ]
+        },
+        "upstream_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+        "upstream_path": "arch/cpu/csky/ck804/spl_start.S",
+        "upstream_blob": "75ac5560f9f82af420c207ba33fde4f612c8e5d3",
+        "source_sha256": "6117ce3dfc09db7f238b3e0530add8f0cb8f4f0278fb44be3cba2de42ecbc6da",
+        "elf_sha256": "23e52d86801398b6fbffaeed86ddac3515168acb270b0c26aecba4deeced3b64",
+        "vectors_bytes": 256,
+        "reset_bytes": 54,
+        "stock_byte_exact": true,
+        "source_admitted": false,
+        "limits": [
+          "Unmodified authenticated upstream assembly with recovered IRQ count and stack configuration. All vector/reset/default/empty-hook bytes match stock. Dispatcher and later-image reset are explicit absolute link dependencies here. Hardware processor control, fallback-image lifetime and full firmware admission remain pending."
+        ]
+      }
+    },
+    "elf_sha256": "2474ce81dcaf6d7abdfee0a19cf8c4d77f7a80aa76fddacdb50fc87c86bf766c",
+    "sections": [
+      {
+        "name": ".clock_trim",
+        "address": 268436724,
+        "bytes": 656
+      },
+      {
+        "name": ".data.low",
+        "address": 536876648,
+        "bytes": 16
+      },
+      {
+        "name": ".data.high",
+        "address": 536876664,
+        "bytes": 16
+      },
+      {
+        "name": ".trim_all",
+        "address": 268439200,
+        "bytes": 24
+      },
+      {
+        "name": ".trim_32k",
+        "address": 268439224,
+        "bytes": 24
+      },
+      {
+        "name": ".board",
+        "address": 268440336,
+        "bytes": 18
+      },
+      {
+        "name": ".clock_initialize",
+        "address": 268437464,
+        "bytes": 1336
+      },
+      {
+        "name": ".clock_initialize_switch",
+        "address": 268440580,
+        "bytes": 124
+      },
+      {
+        "name": ".data.clock_source_table",
+        "address": 536876680,
+        "bytes": 80
+      },
+      {
+        "name": ".read",
+        "address": 268439260,
+        "bytes": 126
+      },
+      {
+        "name": ".write",
+        "address": 268439388,
+        "bytes": 124
+      },
+      {
+        "name": ".flash",
+        "address": 268439516,
+        "bytes": 526
+      },
+      {
+        "name": ".data.flash",
+        "address": 536876848,
+        "bytes": 4
+      },
+      {
+        "name": ".vectors",
+        "address": 268435456,
+        "bytes": 256
+      },
+      {
+        "name": ".reset",
+        "address": 268435712,
+        "bytes": 54
+      },
+      {
+        "name": ".gate",
+        "address": 268435960,
+        "bytes": 254
+      },
+      {
+        "name": ".gate_switch",
+        "address": 268440356,
+        "bytes": 148
+      },
+      {
+        "name": ".lookup",
+        "address": 268435768,
+        "bytes": 160
+      },
+      {
+        "name": ".frequency",
+        "address": 268436224,
+        "bytes": 468
+      },
+      {
+        "name": ".frequency_switch",
+        "address": 268440504,
+        "bytes": 76
+      },
+      {
+        "name": ".data.gx_clock_param_table",
+        "address": 536876232,
+        "bytes": 416
+      },
+      {
+        "name": ".data.gx_clock_dto_table",
+        "address": 536876760,
+        "bytes": 3
+      },
+      {
+        "name": ".data.gx_clock_div_table",
+        "address": 536876764,
+        "bytes": 68
+      },
+      {
+        "name": ".divide",
+        "address": 268439072,
+        "bytes": 46
+      },
+      {
+        "name": ".remainder",
+        "address": 268439140,
+        "bytes": 40
+      },
+      {
+        "name": ".uart",
+        "address": 268440160,
+        "bytes": 124
+      },
+      {
+        "name": ".fixed_hook",
+        "address": 268440288,
+        "bytes": 14
+      },
+      {
+        "name": ".clock_control",
+        "address": 268440304,
+        "bytes": 30
+      },
+      {
+        "name": ".trim_predicate",
+        "address": 268439248,
+        "bytes": 12
+      },
+      {
+        "name": ".shutdown",
+        "address": 268440116,
+        "bytes": 42
+      },
+      {
+        "name": ".boot_state",
+        "address": 268438820,
+        "bytes": 38
+      },
+      {
+        "name": ".loader",
+        "address": 268438860,
+        "bytes": 140
+      },
+      {
+        "name": ".initialize",
+        "address": 268439024,
+        "bytes": 44
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Source reset/vector code linked with source dispatcher and shared empty hook. Only absolute implementation dependency is later-image reset at 0x10003100. Complete composed execution, fallback-image lifetime, loader overlap and full firmware admission remain pending."
+    ]
+  },
+  "limits": [
+    "Decoded control-register and stack setup checked against independent oracle; dispatcher return and later-image reset are boundaries, not executed bodies. No physical processor, full startup or fallback-image qualification."
+  ]
+}

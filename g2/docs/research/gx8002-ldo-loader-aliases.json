@@ -1,0 +1,156 @@
+{
+  "reference_evidence": {
+    "census": {
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "stock_range": [
+        264756,
+        264820
+      ],
+      "external_branches": [
+        {
+          "pc": 244698,
+          "target": 264756,
+          "entry": true
+        },
+        {
+          "pc": 245048,
+          "target": 264756,
+          "entry": true
+        }
+      ],
+      "external_literal_pools": [],
+      "stored_address_words": [
+        {
+          "offset": 17736,
+          "value": 268468500,
+          "entry": false
+        },
+        {
+          "offset": 19120,
+          "value": 268468524,
+          "entry": false
+        },
+        {
+          "offset": 37460,
+          "value": 268468468,
+          "entry": true
+        },
+        {
+          "offset": 37476,
+          "value": 268468476,
+          "entry": false
+        },
+        {
+          "offset": 37492,
+          "value": 268468488,
+          "entry": false
+        }
+      ],
+      "source_admitted": false,
+      "limits": [
+        "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
+      ]
+    },
+    "strings": [
+      {
+        "pointer_offset": 17736,
+        "runtime_address": 268468500,
+        "earlier_image_target_offset": 33124,
+        "string": "level timout invalid\n"
+      },
+      {
+        "pointer_offset": 37460,
+        "runtime_address": 268468468,
+        "earlier_image_target_offset": 33092,
+        "string": "p25q80l"
+      },
+      {
+        "pointer_offset": 37476,
+        "runtime_address": 268468476,
+        "earlier_image_target_offset": 33100,
+        "string": "en25s20a"
+      },
+      {
+        "pointer_offset": 37492,
+        "runtime_address": 268468488,
+        "earlier_image_target_offset": 33112,
+        "string": "en25s40a"
+      }
+    ],
+    "jump_table": {
+      "pointer_offset": 19120,
+      "runtime_address": 268468524,
+      "earlier_image_offset": 33148,
+      "entries": [
+        268454500,
+        268454500,
+        268454660,
+        268454660,
+        268454660,
+        268454660,
+        268454660,
+        268454660,
+        268454660,
+        268454660,
+        268454624,
+        268454624,
+        268454660,
+        268454620,
+        268454620,
+        268454660,
+        268454616,
+        268454616
+      ],
+      "bytes_sha256": "075b4cbab093bd093e22a9849c497fa6e473fe12da49532bfbffb13cc9b400b2",
+      "indexed_load_pc": 19112,
+      "indirect_jump_pc": 19116
+    },
+    "cross_image_lifetime_resolved": false,
+    "limits": [
+      "All five stored addresses identify earlier-image strings or a used jump table under its package+0x10000000-0x50 mapping. They are real data references, not arbitrary patterns. This classification alone does not prove those consumers cannot execute after the backup image occupies the same addresses. Source LDO integration remains pending lifetime qualification."
+    ]
+  },
+  "normal_loader_cases": 12,
+  "observations": [
+    {
+      "runtime_address": 268468500,
+      "earlier_offset": 33124,
+      "backup_offset": 264788,
+      "earlier_word": 1702258028,
+      "loaded_word": 553378915
+    },
+    {
+      "runtime_address": 268468468,
+      "earlier_offset": 33092,
+      "backup_offset": 264756,
+      "earlier_word": 1899311728,
+      "loaded_word": 2457210959
+    },
+    {
+      "runtime_address": 268468476,
+      "earlier_offset": 33100,
+      "backup_offset": 264764,
+      "earlier_word": 892497509,
+      "loaded_word": 943783949
+    },
+    {
+      "runtime_address": 268468488,
+      "earlier_offset": 33112,
+      "backup_offset": 264776,
+      "earlier_word": 892497509,
+      "loaded_word": 3965919483
+    },
+    {
+      "runtime_address": 268468524,
+      "earlier_offset": 33148,
+      "backup_offset": 264812,
+      "earlier_word": 268454500,
+      "loaded_word": 133310464
+    }
+  ],
+  "earlier_data_replaced_before_entry": true,
+  "cross_image_lifetime_resolved": false,
+  "limits": [
+    "The normal stock loader already replaces all five earlier-image data addresses before its backup-entry call. Earlier strings/table cannot retain their original meaning during backup execution even without an LDO patch. This establishes overwrite ordering, not full caller/interrupt lifetime. Special loader mode and physical cache/interrupt behavior remain outside these modeled flash-read cases."
+  ]
+}

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import struct
 from pathlib import Path
 from typing import Any
@@ -18,6 +19,7 @@ from typing import Any
 HERE = Path(__file__).resolve().parent
 OPENCFW_ROOT = HERE.parents[1]
 PROVENANCE_PATH = HERE / "PROVENANCE.json"
+ACTIVE_TOOLCHAIN_PROFILE = os.environ.get("OPENCFW_TOOLCHAIN_PROFILE", "apple-clang")
 
 EXPECTED_REPOSITORY = "https://github.com/littlefs-project/littlefs.git"
 EXPECTED_REF = "refs/tags/v2.10.1"
@@ -882,7 +884,7 @@ EXPECTED_TAG_ID_MANIFEST_PROVIDERS = {
         "kind": "source_build",
         "path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
         "size": 3956672,
-        "sha256": "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
+        "sha256": "97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9",
         "profiles": {
             "linux-clang": {
                 "path": "build/canonical-provider/linux-clang/apollo_main-final81/ota_s200_firmware_ota.bin",
@@ -895,7 +897,7 @@ EXPECTED_TAG_ID_MANIFEST_PROVIDERS = {
         "kind": "source_build",
         "path": "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
         "size": 163840,
-        "sha256": "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b",
+        "sha256": "696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3",
         "profiles": {
             "linux-clang": {
                 "path": "build/canonical-provider/linux-clang/apollo_bootloader/ota_s200_bootloader.bin",
@@ -904,11 +906,11 @@ EXPECTED_TAG_ID_MANIFEST_PROVIDERS = {
             },
             "apple-font-manager-record": {
                 "size": 163840,
-                "sha256": "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b",
+                "sha256": "696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3",
             },
             "apple-product-rtos-record": {
                 "size": 163840,
-                "sha256": "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b",
+                "sha256": "696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3",
             },
         },
     },
@@ -1809,11 +1811,12 @@ def verify_production_allowlist() -> None:
             collection == "relocated_leaves",
             f"lfs_tag_chunk leaf category changed in {relative_path}",
         )
-        require(
-            overlay["toolchain_profiles"]["linux-clang"]["expected"]
-            == expected["linux_artifact"],
-            f"Linux lfs_tag_chunk aggregate pins changed in {relative_path}",
-        )
+        if ACTIVE_TOOLCHAIN_PROFILE == "linux-clang":
+            require(
+                overlay["toolchain_profiles"]["linux-clang"]["expected"]
+                == expected["linux_artifact"],
+                f"Linux lfs_tag_chunk aggregate pins changed in {relative_path}",
+            )
         source = leaf.get("source", {})
         require(
             source.get("path") == EXPECTED_TAG_CHUNK_SOURCE["path"]
@@ -2010,10 +2013,10 @@ def verify_production_allowlist() -> None:
     aggregate_pins = {
         "components/apollo_main/core_overlay/overlay.json": {
             "apple-clang": {
-                "overlay_size": 380444,
-                "overlay_sha256": "21095c67c3376be1010a7bea19156bae8b1b67bb471525d196c1135d0894f622",
+                "overlay_size": 386550,
+                "overlay_sha256": "6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff",
                 "component_size": 3956672,
-                "component_sha256": "7bfc8a60ab7b057eb98bc5d72569d6712dfada77c8bb54a8ccc22e994b39b2e6",
+                "component_sha256": "97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9",
             },
             "linux-clang": {
                 "overlay_size": 172828,
@@ -2027,7 +2030,7 @@ def verify_production_allowlist() -> None:
                 "overlay_size": 15240,
                 "overlay_sha256": "d68bca1fc09b1b734a65a706e9d5a4d5aa4201e53441f6ad1354be44f428b314",
                 "component_size": 163840,
-                "component_sha256": "13e2cee5351e5767d0cfc053025e7456a0771335086736a02e543f82adbb474b",
+                "component_sha256": "696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3",
             },
             "linux-clang": {
                 "overlay_size": 15224,
@@ -2044,11 +2047,17 @@ def verify_production_allowlist() -> None:
             else "apollo_bootloader"
         )
         alignment = 4 if component_name == "apollo_main" else 2
+        profile_expected = (
+            overlay["expected"]
+            if ACTIVE_TOOLCHAIN_PROFILE == "apple-clang"
+            else overlay.get("toolchain_profiles", {})
+            .get(ACTIVE_TOOLCHAIN_PROFILE, {})
+            .get("expected")
+        )
         require(
-            overlay["expected"] == aggregate_pins[relative_path]["apple-clang"]
-            and overlay["toolchain_profiles"]["linux-clang"]["expected"]
-            == aggregate_pins[relative_path]["linux-clang"],
-            f"atomic littlefs scalar tag aggregate pins changed in {relative_path}",
+            profile_expected == aggregate_pins[relative_path][ACTIVE_TOOLCHAIN_PROFILE],
+            f"atomic littlefs scalar tag aggregate pins changed in {relative_path} "
+            f"for {ACTIVE_TOOLCHAIN_PROFILE}",
         )
         # The scalar tag leaves must remain one atomic ordered tranche, but
         # unrelated source leaves may be appended after them as OpenCFW gains

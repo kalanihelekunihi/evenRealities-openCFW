@@ -1,0 +1,32 @@
+{
+  "source_sha256": "b105020f459bf86e5ef73b7f9462aefe70d7e56c83a3cf216b4073e8e2a5c4c9",
+  "command": [
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Os",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_backup_request_irq.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-boot-request-irq/request.o"
+  ],
+  "elf_sha256": "b7297b096c8173659ad7344145375e36ade7ae61552cdbb2a677013413b83642",
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "code_bytes": 40,
+  "stock_envelope_bytes": 40,
+  "cases": 324,
+  "boot_table": 536909900,
+  "backup_table": 536966056,
+  "source_admitted": false,
+  "limits": [
+    "Complete shared C linked at earlier-image mapping candidate and exact ordered stores checked against stock. Table writes are disjoint; hardware enable register shared. This alone does not prove image transition, vector replacement or interrupt lifetime. Not integrated."
+  ]
+}

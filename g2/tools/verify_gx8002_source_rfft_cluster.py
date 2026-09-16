@@ -139,7 +139,7 @@ def execute(code,entry,values,rodata,descriptor,output_count):
         pc=nxt
     raise ValueError('execution bound')
 
-def verify(shared_radix4=False,shared_by2=False,lto=False,generated_reverse=False,placed=False,include_fill=False,combined_lto=False,tail_layout=False):
+def verify(shared_radix4=False,shared_by2=False,lto=False,generated_reverse=False,placed=False,include_fill=False,combined_lto=False,tail_layout=False,startup=False):
     from build_gx8002_source_rfft_cluster import build as cluster
     from verify_gx8002_backup_radix4_stock_host import execute as radix
     from verify_gx8002_backup_split_stock_host import execute as split
@@ -164,6 +164,10 @@ def verify(shared_radix4=False,shared_by2=False,lto=False,generated_reverse=Fals
         assert generated_reverse and shared_radix4 and shared_by2 and not (placed or lto or combined_lto)
         from build_gx8002_fft_q15_tail_layout import build as tail
         evidence=tail();out=ROOT/'build/gx8002-fft-q15-tail-layout';artifact='component'
+    if startup:
+        assert placed and not include_fill
+        out=ROOT/'build/gx8002-backup-startup-cluster';artifact='cluster'
+        evidence['startup_cluster_sha256']=sha((out/'cluster.elf').read_bytes())
     elf=Elf32((out/(artifact+'.elf')).read_bytes(),'RFFT');code=decode((out/(artifact+'.disassembly.txt')).read_text())
     memory={s['address']+i:v for s in elf.sections if s['flags']&2 and not s['flags']&4 for i,v in enumerate(elf.contents(s))};symbols={s['name']:s['value'] for s in elf.symbols() if s['name']}
     if lto or combined_lto or tail_layout:evidence['entry']=symbols['open_cfw_gx8002_backup_rfft']
@@ -190,5 +194,5 @@ def verify(shared_radix4=False,shared_by2=False,lto=False,generated_reverse=Fals
     report={'build':evidence,'linked_rfft_cases':cases,'source_admitted':False,'hardware_qualified':False,'limits':['Full linked 512-point forward/inverse source RFFT execution, real internal calls and linked descriptors/tables. Both input and output buffers match composed decoded stock arithmetic.','Extreme and random samples; fixed shipped descriptor flags. Finite instruction model, not hardware/timing proof.','Analysis-address component; valid firmware layout and external-entry qualification pending.']}
     if placed:
         report['limits'][-1]='Placed in original FFT ranges with fixed RFFT entry and descriptors; loader, external reference closure and hardware qualification pending.'
-    (ROOT/('docs/research/gx8002-fft-q15-tail-rfft-verification.json' if tail_layout else 'docs/research/gx8002-fft-q15-lto-rfft-verification.json' if combined_lto else 'docs/research/gx8002-placed-rfft-fill-verification.json' if placed and include_fill else 'docs/research/gx8002-placed-rfft-verification.json' if placed else 'docs/research/gx8002-source-rfft-generated-reverse-verification.json' if generated_reverse else 'docs/research/gx8002-source-rfft-lto-verification.json' if lto else 'docs/research/gx8002-source-rfft-double-shared-cluster-verification.json' if shared_by2 else 'docs/research/gx8002-source-rfft-shared-cluster-verification.json' if shared_radix4 else 'docs/research/gx8002-source-rfft-cluster-verification.json')).write_text(json.dumps(report,indent=2)+'\n');return report
+    (ROOT/('docs/research/gx8002-startup-rfft-verification.json' if startup else 'docs/research/gx8002-fft-q15-tail-rfft-verification.json' if tail_layout else 'docs/research/gx8002-fft-q15-lto-rfft-verification.json' if combined_lto else 'docs/research/gx8002-placed-rfft-fill-verification.json' if placed and include_fill else 'docs/research/gx8002-placed-rfft-verification.json' if placed else 'docs/research/gx8002-source-rfft-generated-reverse-verification.json' if generated_reverse else 'docs/research/gx8002-source-rfft-lto-verification.json' if lto else 'docs/research/gx8002-source-rfft-double-shared-cluster-verification.json' if shared_by2 else 'docs/research/gx8002-source-rfft-shared-cluster-verification.json' if shared_radix4 else 'docs/research/gx8002-source-rfft-cluster-verification.json')).write_text(json.dumps(report,indent=2)+'\n');return report
 if __name__=='__main__':print(verify()['linked_rfft_cases'])

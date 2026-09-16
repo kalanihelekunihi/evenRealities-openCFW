@@ -1,0 +1,76 @@
+{
+  "build": {
+    "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+    "source_sha256": "2b07a8a4be19946ef20c1a722f9066e829d238c183b5aae474e70e3e7796ec2c",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_flash_write_protect_status",
+        "section": ".text.flash_write_protect_status",
+        "compiled_bytes": 24,
+        "compiled_sha256": "78d804c7a415ff7b320cbdedea4ee64b2c354b7d05a6e8f753a37ee125380c37",
+        "package_offset": 260332,
+        "stock_envelope_bytes": 28,
+        "stock_sha256": "9a576d675f0fff7e44e70b07cd5126dbaddd06b13d1090f45a9e7c2524093388",
+        "byte_exact": false,
+        "fits": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_flash_write_protect_mode",
+        "section": ".text.flash_write_protect_mode",
+        "compiled_bytes": 36,
+        "compiled_sha256": "f96b8513f5daf79e8422c1b73dd7a2e3d8440971a8f55b2106cce2543e483843",
+        "package_offset": 260360,
+        "stock_envelope_bytes": 36,
+        "stock_sha256": "ec289ff3b248070da13e0a9517544a2f13526b840fd690f4567a3db7485478c4",
+        "byte_exact": false,
+        "fits": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_flash_write_protect_lock",
+        "section": ".text.flash_write_protect_lock",
+        "compiled_bytes": 14,
+        "compiled_sha256": "493d7736b581ed7d8ec71c82b18a392957e692845a339eeaeb69a2343d6e99c0",
+        "package_offset": 260664,
+        "stock_envelope_bytes": 16,
+        "stock_sha256": "e30e8b62ef04405dc323b36ccffce886fc6344fdc0cd4d5da0309eabe34b5634",
+        "byte_exact": false,
+        "fits": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_flash_write_protect_unlock",
+        "section": ".text.flash_write_protect_unlock",
+        "compiled_bytes": 16,
+        "compiled_sha256": "c814b579324b84cb2024cfbe84dd2d024a7ad599ed6e7559b984feef07c4c0bc",
+        "package_offset": 260680,
+        "stock_envelope_bytes": 16,
+        "stock_sha256": "c814b579324b84cb2024cfbe84dd2d024a7ad599ed6e7559b984feef07c4c0bc",
+        "byte_exact": true,
+        "fits": true
+      }
+    ],
+    "source_admitted": false,
+    "analysis_only_overlapping_sections_allowed": false,
+    "limits": [
+      "Callbacks require decoded qualification; external query/set engines are unresolved source dependencies.",
+      "No physical flash qualification."
+    ]
+  },
+  "cases": 192,
+  "source_admitted": false,
+  "limits": [
+    "Query and set engines modeled; callbacks alone do not establish source closure.",
+    "Finite ordinary output pointers; no hardware qualification."
+  ]
+}

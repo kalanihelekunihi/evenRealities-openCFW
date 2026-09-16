@@ -1,0 +1,57 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream_dependencies": [
+    {
+      "path": "arch/soc/grus/include/core_ck804.h",
+      "blob": "ed6595b0a0e510fba0219954933f250c0eba83de",
+      "sha256": "f967c3201c24ceb417f83f915669c74f7182bf23784a7464f450ef6564f6f20a"
+    },
+    {
+      "path": "arch/soc/grus/include/csi_gcc.h",
+      "blob": "82802d1850f8ff8cc4701154658bcf362902e721",
+      "sha256": "638e1bf91b9d7cbba877d943132e83db37c75c97ee852ccce256c99a7dcfb530"
+    },
+    {
+      "path": "include/utility/libc/stdlib.h",
+      "blob": "75c21b5367091e23fb703e4b3dfc65ffc4e71a8f",
+      "sha256": "d2549da080238fe93ed114e2d7e83b7889390faa631a37d87f324f63698ea29d"
+    },
+    {
+      "path": "include/utility/libc/klibc/extern.h",
+      "blob": "7d7c7b8d190f5d792a2ff355e7d288e407833ddd",
+      "sha256": "addf134407ecf22a5bced6c998d30660dae0846528ad934eaa49742a9a7daf49"
+    },
+    {
+      "path": "include/utility/libc/klibc/inline.h",
+      "blob": "0e547437338ab639b5eda06e04a80454e7f80758",
+      "sha256": "1456ca9eb1444031e51a9424859da5340844e7be166ff7ab68f25159329be9e1"
+    },
+    {
+      "path": "include/utility/util.h",
+      "blob": "a66b1d1b2183c0b83b8d7d3eff9a98867a6bcb87",
+      "sha256": "b31dc428b0da16a50b5b1bb5a0059d537d66df38a9ccd5061430b0c0d56b9f74"
+    },
+    {
+      "path": "LICENSE",
+      "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+      "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+    }
+  ],
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_cache_initialize",
+      "compiled_bytes": 32,
+      "compiled_sha256": "adf4457874cfffa627b8780eaa444a1c600f6dbcb75d22f850c243917ef0751f",
+      "stock_sha256": "adf4457874cfffa627b8780eaa444a1c600f6dbcb75d22f850c243917ef0751f",
+      "package_offset": 252644,
+      "envelope_bytes": 32,
+      "fits": true
+    }
+  ],
+  "source_sha256": "55ed191481015e23340c54cabcd2fd5c831150a4bf58cd5477d4b34cabd975c7",
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Build only. Cache helper ordering and CSI region write qualification pending."
+  ]
+}

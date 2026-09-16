@@ -1,0 +1,47 @@
+{
+  "sources": [
+    {
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_backup_board_initialize.c",
+      "sha256": "5a5bfa5b5ea1dc4c95a054e4f828d6c21cf49e1bafdf71848e2e7fdd86d89d7c"
+    },
+    {
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_backup_status.c",
+      "sha256": "b2e80d801337bae5f71c0d91d55878ba5eaa973b62156b97d81016a27358b1b0"
+    },
+    {
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_analog_config_update_enable.c",
+      "sha256": "2d24d6a2f1c524ca863821b4db2ff9b220b262e3504d1f1ce42d5d0cd1a386a4"
+    }
+  ],
+  "elf_sha256": "aaba3851169a898473657728553f724fd4795647c9188ad97945ce6213f7e014",
+  "sections": [
+    {
+      "section": "board",
+      "package_offset": 245268,
+      "bytes": 12,
+      "envelope": 12,
+      "fits": true,
+      "stock_identical": true
+    },
+    {
+      "section": "status",
+      "package_offset": 248056,
+      "bytes": 66,
+      "envelope": 68,
+      "fits": true,
+      "stock_identical": false
+    },
+    {
+      "section": "analog",
+      "package_offset": 252696,
+      "bytes": 20,
+      "envelope": 20,
+      "fits": true,
+      "stock_identical": true
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Complete source wrapper and both helper bodies linked at backup bindings. Behavioral comparison and incoming references remain pending; no firmware integration or hardware qualification."
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "wrapper_probe": {
+    "commit": "4aa696c8d6294897411cf78cae87f7f4680e9687",
+    "header_sha256": "9c0275ccefc9d9e88ae5b302f93daf283546602206ee74502d1fd385c7547bc7",
+    "objects": [
+      {
+        "source": {
+          "path": "newlib/libm/math/s_sin.c",
+          "sha256": "cdaef8e0eaddbc6b7b94ec7cfddf43f2fa582394e8ea0a6641407ab7b73986f8"
+        },
+        "variant": "size",
+        "command": [
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+          "-O2",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Os",
+          "-fwrapv",
+          "-ffp-contract=off",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-public-trig-probe/s_sin.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-public-trig-probe/s_sin.c.size.o"
+        ],
+        "object_sha256": "8695a44727dbe5d76ef1e881fb893dc445504becc3ffe54ffe14a31df8859664",
+        "allocated": [
+          [
+            ".text.sin",
+            132
+          ]
+        ],
+        "undefined_symbols": [
+          "__subdf3",
+          "__kernel_sin",
+          "__ieee754_rem_pio2",
+          "__kernel_cos"
+        ]
+      },
+      {
+        "source": {
+          "path": "newlib/libm/math/s_sin.c",
+          "sha256": "cdaef8e0eaddbc6b7b94ec7cfddf43f2fa582394e8ea0a6641407ab7b73986f8"
+        },
+        "variant": "low",
+        "command": [
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+          "-O2",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Os",
+          "-mno-high-registers",
+          "-fwrapv",
+          "-ffp-contract=off",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-public-trig-probe/s_sin.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-public-trig-probe/s_sin.c.low.o"
+        ],
+        "object_sha256": "8695a44727dbe5d76ef1e881fb893dc445504becc3ffe54ffe14a31df8859664",
+        "allocated": [
+          [
+            ".text.sin",
+            132
+          ]
+        ],
+        "undefined_symbols": [
+          "__subdf3",
+          "__kernel_sin",
+          "__ieee754_rem_pio2",
+          "__kernel_cos"
+        ]
+      },
+      {
+        "source": {
+          "path": "newlib/libm/math/s_cos.c",
+          "sha256": "af89424f187be4d0991474f6331ae1fd23281a7bc7be5895f3fbaf54a4d07d20"
+        },
+        "variant": "size",
+        "command": [
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+          "-O2",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Os",
+          "-fwrapv",
+          "-ffp-contract=off",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-public-trig-probe/s_cos.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-public-trig-probe/s_cos.c.size.o"
+        ],
+        "object_sha256": "c3764cf9b5053eab0a2a259e0f9f6e26fffbc2c5a3cf452286a5049c6f8662b9",
+        "allocated": [
+          [
+            ".text.cos",
+            124
+          ]
+        ],
+        "undefined_symbols": [
+          "__subdf3",
+          "__kernel_cos",
+          "__ieee754_rem_pio2",
+          "__kernel_sin"
+        ]
+      },
+      {
+        "source": {
+          "path": "newlib/libm/math/s_cos.c",
+          "sha256": "af89424f187be4d0991474f6331ae1fd23281a7bc7be5895f3fbaf54a4d07d20"
+        },
+        "variant": "low",
+        "command": [
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+          "-O2",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Os",
+          "-mno-high-registers",
+          "-fwrapv",
+          "-ffp-contract=off",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-public-trig-probe/s_cos.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-public-trig-probe/s_cos.c.low.o"
+        ],
+        "object_sha256": "c3764cf9b5053eab0a2a259e0f9f6e26fffbc2c5a3cf452286a5049c6f8662b9",
+        "allocated": [
+          [
+            ".text.cos",
+            124
+          ]
+        ],
+        "undefined_symbols": [
+          "__subdf3",
+          "__kernel_cos",
+          "__ieee754_rem_pio2",
+          "__kernel_sin"
+        ]
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Complete public wrappers compiled only. Angle reducer and its large-argument kernel require reconstruction and qualification; no full-domain trig closure claimed."
+    ]
+  },
+  "reduction_elf_sha256": "6453b4af9353f3a3b0cab776a7b7e75b99028daf931de6f49f2f9514deadf8b4",
+  "kernel_elf_sha256": [
+    "94f16079619fc495381bf64857cad0c781247e37883a172a00dde635df9f4e22",
+    "a9db4fef9ebeae5f3c801452c0cc07ebdb359de8f16333263ee25f75ed3128df"
+  ],
+  "elf_sha256": "9d11207ef1918a2c475635d672e1dc711b08f3aec4c9bb51ebe636793252618c",
+  "source_admitted": false,
+  "limits": [
+    "Complete source trig dependency closure; reducer/public wrappers at analysis addresses. No unresolved symbols or relocations. End-to-end accuracy, stock placement and hardware pending."
+  ]
+}

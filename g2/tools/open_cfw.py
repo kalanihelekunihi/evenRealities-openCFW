@@ -53,7 +53,7 @@ CASE_RUN_BASE = 0x08000000
 #: blobs are never given profile overrides.
 DEFAULT_TOOLCHAIN_PROFILE = "apple-clang"
 DUAL_PROFILE_OWNERSHIP_PACKAGES = {
-    "apple-clang": "1bb3f8c84d288a30cfd252e832ec4a51ac5eca42b5de8e8817db11a938c6a771",
+    "apple-clang": "a6c4a7adbf2e670dc6b7d6b2f3d304d860977bdbe41b2363b5a7dde0ec3cce20",
     "linux-clang": "50f2ee3722aeaa720eed1a7c65381b02ac3ec0ceabecf9eb57d661d8e060a6d0",
 }
 DUAL_PROFILE_OWNERSHIP_MANIFESTS = {

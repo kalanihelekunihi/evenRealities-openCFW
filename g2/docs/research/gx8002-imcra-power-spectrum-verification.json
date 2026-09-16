@@ -1,0 +1,19 @@
+{
+  "build": {
+    "source_sha256": "49b3a94a35dcaf98354ec6e316d663403c34a76e50b81d1a0002dc8fa5161c79",
+    "bytes": 98,
+    "source_admitted": false,
+    "startup_integrated": false,
+    "limits": [
+      "Standalone processing block only; no placement or full processing replacement.",
+      "Shift precondition -9..1 from signed Q15 peak/clamp.",
+      "Decoded numeric verification and hardware qualification pending."
+    ]
+  },
+  "cases": 396,
+  "source_admitted": false,
+  "limits": [
+    "Finite Q15 inputs and shifts -9..1; exact nonstack read/write traces and output bits under separate/fused rational binary32 MAC models.",
+    "Standalone block only; no complete processing, hardware FPU, timing or aliasing qualification."
+  ]
+}

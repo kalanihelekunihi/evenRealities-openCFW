@@ -1,0 +1,10 @@
+{
+  "cases": 48,
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "source_reader": false,
+  "candidate_sha256": null,
+  "destination_writes": 0,
+  "limits": [
+    "Cached flash IDs and sentinel initialization with failed ID-read returns only; successful ID detection/configuration remains untested. Status helper and gate bodies modeled. Zero length still enables the clock, polls readiness, and disables the clock; it is not a side-effect-free call. No physical timing or nonzero transfer qualification."
+  ]
+}

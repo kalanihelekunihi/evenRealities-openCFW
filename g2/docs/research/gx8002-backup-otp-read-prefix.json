@@ -1,0 +1,44 @@
+{
+  "build": {
+    "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+    "source_sha256": "bd137ba49996ffad6a849b3ac06f3fa9cceda6026d8403505b0d2e291b7c36e7",
+    "flags": [
+      "-Os",
+      "-fira-algorithm=priority",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_flash_otp_read",
+        "section": ".text.flash_otp_read",
+        "compiled_bytes": 492,
+        "compiled_sha256": "510164e06066225564f7003c92957ee7257a984999dbd6ed42ac6116e9d4ff57",
+        "package_offset": 262952,
+        "stock_envelope_bytes": 492,
+        "stock_sha256": "354866f6edeb127e933cc1ffd9cc5b67163fa307dd47778067bd04254ccea4fb",
+        "byte_exact": false,
+        "fits": true
+      }
+    ],
+    "source_admitted": false,
+    "analysis_only_overlapping_sections_allowed": false,
+    "limits": [
+      "Candidate only: backup width snapshots, register-shift semantics, controller effects and shared ready-wait substitution require decoded qualification. Not linked into startup or any full image.",
+      "No physical flash qualification."
+    ]
+  },
+  "rejection_cases": 2058,
+  "first_chunk_cases": 630,
+  "source_admitted": false,
+  "limits": [
+    "Ordered descriptor reads, rejection returns, address encoding, signed first chunk and rejection-path saved ABI checked. Ready wait is normalized to a successful transport status read. Accepted cases stop before transfer; receive/controller effects, width mutations, busy waits and full return ABI remain unqualified."
+  ]
+}

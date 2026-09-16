@@ -1,0 +1,79 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_spi_register_master",
+      "section_name": ".text",
+      "compiled_bytes": 92,
+      "compiled_sha256": "52b511cf9142050378fda87e41bf33cb36e39b764707704a13179030a3000bbd",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_spi_register_master",
+          "package_offset": 265048,
+          "bytes": 100,
+          "sha256": "368424a00fa3335ceba6ca7a7b3050c8bd67d3055512414472aa962cef5780e7",
+          "region": "image_b_sram_text"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "dependency_headers": {
+      "include/utility/list.h": {
+        "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+        "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+      },
+      "include/utility/types.h": {
+        "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+        "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+      }
+    },
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "oracle": {
+      "path": "drivers_lib/spi/device.o",
+      "blob": "d6709f8990a19d8e08ebe21ec9059d7f580fa15b",
+      "sha256": "b882f90d25260a0981f480f547b9212888558febffab0a0b9e1d97c01d389fec",
+      "role": "identity_only"
+    },
+    "bindings": {
+      "open_cfw_gx8002_device_heads": 536966752
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-jump-tables"
+    ],
+    "header": {
+      "path": "include/driver/spi.h",
+      "blob": "aabfb6e88beeee65eb74262d339d0ce44fdfcbce",
+      "sha256": "b158f2feee6baed0af40b3d2c5db0bfa0c76b4d8d96a8484ddcb98df04f69ebd"
+    },
+    "source_sha256": "074975a53675fc8ff4d737126b9427f1fde99d63b22fb235c19b5cc1898758f0",
+    "symbol": "open_cfw_gx8002_spi_register_master",
+    "section_name": ".text",
+    "package_offset": 265048,
+    "compiled_bytes": 92,
+    "compiled_sha256": "52b511cf9142050378fda87e41bf33cb36e39b764707704a13179030a3000bbd",
+    "stock_envelope_bytes": 100,
+    "stock_sha256": "368424a00fa3335ceba6ca7a7b3050c8bd67d3055512414472aa962cef5780e7",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+    ]
+  },
+  "cases": 2593,
+  "model_sha256": "37d5708e72f264355ec9c1eff5ee9ccab7e7d75d14da38ed2c47008ab0300ee3",
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Ordered word/byte reads, insertion writes, first eligible binding and leaf ABI on bounded valid lists. Invalid pointers, repeated registration, malformed/concurrent lists excluded."
+  ]
+}

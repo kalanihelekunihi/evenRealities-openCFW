@@ -1,0 +1,32 @@
+{
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_strncmp",
+      "section_name": ".text.open_cfw_gx8002_strncmp",
+      "compiled_bytes": 34,
+      "compiled_sha256": "a3e7bdc50f07aed2125c77de4e1da3535d43b918ed3eb138a2ad0baf7b013e01",
+      "stock_occurrences": [
+        {
+          "symbol": "open_cfw_gx8002_strncmp",
+          "package_offset": 271064,
+          "bytes": 36,
+          "sha256": "cb3bf5de687857dc08f7181dd05a8c37dd2d2de433bbbd808e13e0d167a2af95",
+          "region": "backup_sram"
+        }
+      ]
+    }
+  ],
+  "evidence_sha256": {
+    "verify_gx8002_backup_strncmp.py": "e781efbfb12424d6550dcac24643b6a26b23963855f991a9300554a154513c68",
+    "verify_gx8002_stage2_libc.py": "04d98d515d4b622fda0fe714b046ba079a498d0b379ec10b6eacf391febbd4ed",
+    "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
+  },
+  "cases": 66137,
+  "compiled_bytes": 34,
+  "source_sha256": "531e0a281eb76fa2b5b3fc2127e818f88fcf679fa8e2cbced2ad9ddb1c5ea7ba",
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Valid readable buffers; exact byte difference, termination, bound and saved ABI checked. Physical timing and pointer-wrap cases unqualified."
+  ]
+}

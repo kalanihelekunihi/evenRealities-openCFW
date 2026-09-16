@@ -1,0 +1,51 @@
+{
+  "fused_accumulates": true,
+  "elf_sha256": "778a0ff3c8d3f13a0fdf3be54b6ea89d6ba0fca4a86fe775db6d7531de9aaa84",
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "cases": 5026,
+  "differences": [],
+  "reference_precision": 90,
+  "integer_exponent_reference": "exact Fraction",
+  "max_ulp": 2,
+  "accuracy_errors": [
+    {
+      "x": "0xbfe80000",
+      "y": "0xc1600000",
+      "source": "0x397ded21",
+      "reference": "0x397ded23",
+      "ulp": 2
+    },
+    {
+      "x": "0xbfe80000",
+      "y": "0x41700000",
+      "source": "0xc5e9e508",
+      "reference": "0xc5e9e506",
+      "ulp": 2
+    },
+    {
+      "x": "0xc02c0000",
+      "y": "0x41800000",
+      "source": "0x4ae2024c",
+      "reference": "0x4ae2024a",
+      "ulp": 2
+    },
+    {
+      "x": "0xc0680000",
+      "y": "0xc1600000",
+      "source": "0x327ded21",
+      "reference": "0x327ded23",
+      "ulp": 2
+    },
+    {
+      "x": "0xc0680000",
+      "y": "0x41700000",
+      "source": "0xcd69e508",
+      "reference": "0xcd69e506",
+      "ulp": 2
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Positive bases .25..4 and exponents -4..4; negative bases -.25..-4 with integer exponents -16..16. Explicit finite nearest-even model with accumulator policy recorded by fused_accumulates, not hardware qualification. Exact Fraction for integer exponents and 90-digit Decimal otherwise; wider inputs and rounding-boundary proof remain pending."
+  ]
+}

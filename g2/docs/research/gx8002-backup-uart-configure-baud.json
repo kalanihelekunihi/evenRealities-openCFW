@@ -1,0 +1,14 @@
+{
+  "arithmetic_elf_sha256": "b51f188e23f80588ebc47ab5401ef8bb67bd3b7c0a27199b1e0115f6ed5b4b51",
+  "firmware_sha256": "1d77a0a65c7f113cb0cce38f3931b15a0b42cd1769ff14843c90e5f3f07d849b",
+  "elf_sha256": "efe1eb24c959cc1f2f50ea1d8b825ee941f405de756a505a564a44d326a94084",
+  "fifo_cluster_elf_sha256": "c87a196ef993c63f17678fd88d88e74b0dd9707f9e66c3e27e259ba06fac78ad",
+  "fifo_executions": 800,
+  "irq_elf_sha256": "8de780b63253ea96d3c1bec9aa546d1a8c5dda4fe8a30fe35326c273c04abbfb",
+  "irq_executions": 800,
+  "cases": 400,
+  "source_admitted": false,
+  "limits": [
+    "Stock configuration and source configuration both use the same decoded source arithmetic, authenticated against composed bytes; this is not a full-stock arithmetic comparison. Stock/source FIFO instructions executed in separate frames; stock/source IRQ registration executed in separate frames; device mutation follows FIFO return. Exact ordered descriptor/MMIO traces compared. Zero shifted denominators excluded. Hardware qualification remains outstanding."
+  ]
+}

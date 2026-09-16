@@ -1,0 +1,11 @@
+{
+  "elf_sha256": "496032f2f3084a2c6e421ded1d97a50c89548bebec5dc340e8057e5472c0adb4",
+  "cases": 256,
+  "frame_words": 18,
+  "writes_per_entry": 20,
+  "source_admitted": false,
+  "limits": [
+    "All 256 vector-byte values with deterministic register/control states; decoded frame writes and existing terminal loop checked.",
+    "No physical exception delivery, nested exceptions, stack-depth or recovery claim. This is the original fatal handler, not replacement functionality for missing code."
+  ]
+}

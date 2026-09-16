@@ -1,0 +1,457 @@
+{
+  "resolved_reference_evidence": {
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "firmware_sha256": "7859e7cef8f2e7e563a3966ee9acd6639202755a314a64023d6ed2a2b35f0a40",
+    "frequency_elf_sha256": "5f6eced2b31c82e45b1551b888f009336b5d106182b69b25e366cd9b8691873b",
+    "frequency_body_matches_composed_source": true,
+    "interrupt": {
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "stock_range": [
+        248720,
+        248956
+      ],
+      "external_branches": [],
+      "external_literal_pools": [
+        {
+          "pc": 247826,
+          "pool": 248784
+        },
+        {
+          "pc": 247834,
+          "pool": 248804
+        }
+      ],
+      "stored_address_words": [
+        {
+          "offset": 17492,
+          "value": 268452432,
+          "entry": true
+        },
+        {
+          "offset": 249432,
+          "value": 268452432,
+          "entry": true
+        }
+      ],
+      "source_admitted": false,
+      "limits": [
+        "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
+      ]
+    },
+    "fifo": {
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "stock_range": [
+        248956,
+        249060
+      ],
+      "external_branches": [
+        {
+          "pc": 249172,
+          "target": 248956,
+          "entry": true
+        }
+      ],
+      "external_literal_pools": [],
+      "stored_address_words": [],
+      "source_admitted": false,
+      "limits": [
+        "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
+      ]
+    },
+    "interior_pool_candidates": [
+      {
+        "pc": 247826,
+        "pool": 248784,
+        "containing_region": {
+          "offset": 247812,
+          "size": 24,
+          "kind": "retained_stock"
+        },
+        "outside_complete_source_frequency_body": true,
+        "stock_literal_word": {
+          "reader": 247686,
+          "pool": 247824,
+          "value": 1023999
+        },
+        "classification": "linear decoding of the upper half of a verified stock literal word"
+      },
+      {
+        "pc": 247834,
+        "pool": 248804,
+        "containing_region": {
+          "offset": 247812,
+          "size": 24,
+          "kind": "retained_stock"
+        },
+        "outside_complete_source_frequency_body": true,
+        "stock_literal_word": {
+          "reader": 247698,
+          "pool": 247832,
+          "value": 2918399
+        },
+        "classification": "linear decoding of the upper half of a verified stock literal word"
+      }
+    ],
+    "frequency_literal_tail_census": {
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "stock_range": [
+        247816,
+        247836
+      ],
+      "external_branches": [],
+      "external_literal_pools": [
+        {
+          "pc": 247590,
+          "pool": 247816
+        },
+        {
+          "pc": 247680,
+          "pool": 247820
+        },
+        {
+          "pc": 247686,
+          "pool": 247824
+        },
+        {
+          "pc": 247694,
+          "pool": 247828
+        },
+        {
+          "pc": 247698,
+          "pool": 247832
+        }
+      ],
+      "stored_address_words": [],
+      "source_admitted": false,
+      "limits": [
+        "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
+      ]
+    },
+    "bounded_interrupt_reference_candidates_resolved": true,
+    "source_admitted": false,
+    "limits": [
+      "Both apparent UART interior references decode upper halves of verified frequency literal words. All five bounded literal consumers lie in the replaced source frequency body; the tail census finds no branch or stored pointer into that data. This resolves these candidates within the bounded census, not arbitrary computed control flow. Tail bytes are not reclaimed by this analysis."
+    ]
+  },
+  "elf_sha256": "c87a196ef993c63f17678fd88d88e74b0dd9707f9e66c3e27e259ba06fac78ad",
+  "candidate": {
+    "source_sha256": "2ab13219f6f9e043ee0a79704445efe61d0327fe41d331213612ab34064cadb6",
+    "fifo_source_sha256": "ac98821c7ceae521c6ab565ab0ad004ff9d014783ff31266641b0449c8e81145",
+    "fifo_matches_qualified_body": true,
+    "fifo_evidence": {
+      "source_sha256": "ac98821c7ceae521c6ab565ab0ad004ff9d014783ff31266641b0449c8e81145",
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+        "-O2",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Os",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_uart_fifo_depth.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-uart-fifo/fifo.o"
+      ],
+      "elf_sha256": "7298c3abfc8f411c080861c707ac01ff34ba5f589b4ff1ac31e78173973e2467",
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "code_bytes": 30,
+      "stock_envelope_bytes": 104,
+      "decoded_cases": 1536,
+      "source_admitted": false,
+      "limits": [
+        "All 256 field encodings with unrelated-bit patterns and both descriptor/device addresses; verifies ordered reads, value mapping and ABI.",
+        "Physical device parameter values, references and integration pending. No undefined code dependencies."
+      ]
+    },
+    "command": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+      "-O2",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Os",
+      "-DOPEN_CFW_GX8002_BACKUP_RX_ORDER=1",
+      "-DOPEN_CFW_GX8002_BACKUP_SPLIT_TX=1",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_uart_interrupt.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-uart-interrupt/interrupt.o"
+    ],
+    "elf_sha256": "c87a196ef993c63f17678fd88d88e74b0dd9707f9e66c3e27e259ba06fac78ad",
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "code_bytes": 230,
+    "source_sections": [
+      {
+        "name": ".text",
+        "address": 268452432,
+        "bytes": 230
+      },
+      {
+        "name": ".fifo",
+        "address": 268452668,
+        "bytes": 30
+      },
+      {
+        "name": ".tx",
+        "address": 268452700,
+        "bytes": 22
+      }
+    ],
+    "stock_envelope_bytes": 236,
+    "fits": true,
+    "dispatch_cases": 1728,
+    "dispatch_differences": [],
+    "source_admitted": false,
+    "limits": [
+      "Complete source cluster fits linker-enforced bounds; FIFO bytes match the separately qualified source body.",
+      "Helper placement reclaims part of the old FIFO envelope; incoming/computed references and firmware integration remain pending. Other verifier reports qualify buffered, mutation, count and stall cases against this ELF hash. Callback bodies and MMIO are modeled; no hardware qualification."
+    ]
+  },
+  "interrupt_results": {
+    "buffered": {
+      "source_elf_sha256": "c87a196ef993c63f17678fd88d88e74b0dd9707f9e66c3e27e259ba06fac78ad",
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "cases": 1152,
+      "poll_reads": 2560,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Small bounded buffers and no callback mutation in this corpus. Polling completes immediately or after three empty samples; permanently stalled transmitter and large signed count edge cases not qualified. No hardware execution."
+      ]
+    },
+    "mutation": {
+      "candidate": {
+        "source_sha256": "2ab13219f6f9e043ee0a79704445efe61d0327fe41d331213612ab34064cadb6",
+        "fifo_source_sha256": "ac98821c7ceae521c6ab565ab0ad004ff9d014783ff31266641b0449c8e81145",
+        "fifo_matches_qualified_body": true,
+        "fifo_evidence": {
+          "source_sha256": "ac98821c7ceae521c6ab565ab0ad004ff9d014783ff31266641b0449c8e81145",
+          "command": [
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+            "-O2",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Os",
+            "-c",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_uart_fifo_depth.c",
+            "-o",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-uart-fifo/fifo.o"
+          ],
+          "elf_sha256": "7298c3abfc8f411c080861c707ac01ff34ba5f589b4ff1ac31e78173973e2467",
+          "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+          "code_bytes": 30,
+          "stock_envelope_bytes": 104,
+          "decoded_cases": 1536,
+          "source_admitted": false,
+          "limits": [
+            "All 256 field encodings with unrelated-bit patterns and both descriptor/device addresses; verifies ordered reads, value mapping and ABI.",
+            "Physical device parameter values, references and integration pending. No undefined code dependencies."
+          ]
+        },
+        "command": [
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+          "-O2",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Os",
+          "-DOPEN_CFW_GX8002_BACKUP_RX_ORDER=1",
+          "-DOPEN_CFW_GX8002_BACKUP_SPLIT_TX=1",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_uart_interrupt.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-uart-interrupt/interrupt.o"
+        ],
+        "elf_sha256": "c87a196ef993c63f17678fd88d88e74b0dd9707f9e66c3e27e259ba06fac78ad",
+        "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+        "code_bytes": 230,
+        "source_sections": [
+          {
+            "name": ".text",
+            "address": 268452432,
+            "bytes": 230
+          },
+          {
+            "name": ".fifo",
+            "address": 268452668,
+            "bytes": 30
+          },
+          {
+            "name": ".tx",
+            "address": 268452700,
+            "bytes": 22
+          }
+        ],
+        "stock_envelope_bytes": 236,
+        "fits": true,
+        "dispatch_cases": 1728,
+        "dispatch_differences": [],
+        "source_admitted": false,
+        "limits": [
+          "Complete source cluster fits linker-enforced bounds; FIFO bytes match the separately qualified source body.",
+          "Helper placement reclaims part of the old FIFO envelope; incoming/computed references and firmware integration remain pending. Other verifier reports qualify buffered, mutation, count and stall cases against this ELF hash. Callback bodies and MMIO are modeled; no hardware qualification."
+        ]
+      },
+      "cases": 96,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Receive completion callback mutates device, mode, DMA state, transmit buffer/length, completion callback/context and port. Callback bodies are modeled; no hardware or concurrency qualification."
+      ]
+    },
+    "stall": {
+      "candidate": {
+        "source_sha256": "2ab13219f6f9e043ee0a79704445efe61d0327fe41d331213612ab34064cadb6",
+        "fifo_source_sha256": "ac98821c7ceae521c6ab565ab0ad004ff9d014783ff31266641b0449c8e81145",
+        "fifo_matches_qualified_body": true,
+        "fifo_evidence": {
+          "source_sha256": "ac98821c7ceae521c6ab565ab0ad004ff9d014783ff31266641b0449c8e81145",
+          "command": [
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+            "-O2",
+            "-mcpu=ck804ef",
+            "-mhard-float",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Os",
+            "-c",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_uart_fifo_depth.c",
+            "-o",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-uart-fifo/fifo.o"
+          ],
+          "elf_sha256": "7298c3abfc8f411c080861c707ac01ff34ba5f589b4ff1ac31e78173973e2467",
+          "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+          "code_bytes": 30,
+          "stock_envelope_bytes": 104,
+          "decoded_cases": 1536,
+          "source_admitted": false,
+          "limits": [
+            "All 256 field encodings with unrelated-bit patterns and both descriptor/device addresses; verifies ordered reads, value mapping and ABI.",
+            "Physical device parameter values, references and integration pending. No undefined code dependencies."
+          ]
+        },
+        "command": [
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+          "-O2",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Os",
+          "-DOPEN_CFW_GX8002_BACKUP_RX_ORDER=1",
+          "-DOPEN_CFW_GX8002_BACKUP_SPLIT_TX=1",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_uart_interrupt.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-uart-interrupt/interrupt.o"
+        ],
+        "elf_sha256": "c87a196ef993c63f17678fd88d88e74b0dd9707f9e66c3e27e259ba06fac78ad",
+        "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+        "code_bytes": 230,
+        "source_sections": [
+          {
+            "name": ".text",
+            "address": 268452432,
+            "bytes": 230
+          },
+          {
+            "name": ".fifo",
+            "address": 268452668,
+            "bytes": 30
+          },
+          {
+            "name": ".tx",
+            "address": 268452700,
+            "bytes": 22
+          }
+        ],
+        "stock_envelope_bytes": 236,
+        "fits": true,
+        "dispatch_cases": 1728,
+        "dispatch_differences": [],
+        "source_admitted": false,
+        "limits": [
+          "Complete source cluster fits linker-enforced bounds; FIFO bytes match the separately qualified source body.",
+          "Helper placement reclaims part of the old FIFO envelope; incoming/computed references and firmware integration remain pending. Other verifier reports qualify buffered, mutation, count and stall cases against this ELF hash. Callback bodies and MMIO are modeled; no hardware qualification."
+        ]
+      },
+      "cases": 36,
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Matched finite execution prefixes at 1, 2, 16 and 128 polling reads. Prefix stop belongs to verifier, not firmware. Does not prove eventual behavior or physical hardware timing."
+      ]
+    },
+    "counts": {
+      "source_elf_sha256": "c87a196ef993c63f17678fd88d88e74b0dd9707f9e66c3e27e259ba06fac78ad",
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "cases": 72,
+      "source_admitted": false,
+      "limits": [
+        "Tests zero, small positive and sign-bit-set counts, including unsigned transmit availability underflow. Large positive transfers excluded. Preserves stock signed-loop behavior; does not establish that malformed descriptor lengths are safe. MMIO and callbacks modeled; no hardware execution."
+      ]
+    }
+  },
+  "linked_fifo_cases": 1536,
+  "total_cases": 4620,
+  "fifo_envelope_references": {
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "stock_range": [
+      248956,
+      249060
+    ],
+    "external_branches": [
+      {
+        "pc": 249172,
+        "target": 248956,
+        "entry": true
+      }
+    ],
+    "external_literal_pools": [],
+    "stored_address_words": [],
+    "source_admitted": false,
+    "limits": [
+      "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
+    ]
+  },
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "All behavioral reports are generated for and bound to the same complete linked ELF. FIFO exercised directly from that ELF. Reference census is bounded, excludes computed control flow and does not prove full firmware integration. The two apparent interrupt interior references are resolved as literal-word misdecoding by the included authenticated analysis; arbitrary computed flow remains outside scope."
+  ]
+}

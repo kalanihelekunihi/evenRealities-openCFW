@@ -1,0 +1,36 @@
+{
+  "source_sha256": "d31d89421791fecdbed8ffed8e861e8ad6328e7a129ce6a41bf751fff6c2b30c",
+  "elf_sha256": "c3f4d883af4e5ca997ad543dca41e9acd90673dce483e5f1b4ce88a00149f1b8",
+  "loader": {
+    "entry_address": 268438860,
+    "helper_address": 268439516,
+    "mapping_vector_package_offset": 231764,
+    "elf_sha256": "50ee6ddb4719c75cae6dd7d84b69bc5d733eeb422caa551bbef8126efbc338c5",
+    "source_sha256": "27bd0abc453f52267a2ee7b698717c24fd42518b4ab4d060abb20275b9e8fce8",
+    "object_sha256": "2525a1c086104b751622b502725d24ed531ab426db48e405846b9eda723cae98",
+    "allocated_bytes": 140,
+    "undefined_symbols": [
+      "open_cfw_gx8002_loader_flash_read"
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Complete C loader control compiled as a relocatable object on macOS. Linked execution addresses follow the authenticated BINH stage-one vector mapping. Decoded source comparison and integration remain pending; the flash helper remains an absolute dependency. The helper dependency is not stubbed or represented as binary data."
+    ]
+  },
+  "sections": [
+    {
+      "name": ".loader",
+      "address": 268438860,
+      "bytes": 140
+    },
+    {
+      "name": ".initialize",
+      "address": 268439024,
+      "bytes": 44
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Complete dispatcher and loader source linked at original entries. Five initialization helper bodies and flash helper remain absolute dependencies. Ordered behavioral verification and integration pending."
+  ]
+}

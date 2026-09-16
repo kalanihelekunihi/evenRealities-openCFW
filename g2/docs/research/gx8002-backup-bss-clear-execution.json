@@ -1,0 +1,96 @@
+{
+  "cases": 3,
+  "words_per_case": 22979,
+  "build": {
+    "upstream_evidence": {
+      "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "dependencies": [
+        {
+          "path": "arch/soc/grus/include/clk_priv.h",
+          "blob": "07b707b29a999e42761cd6148787ea4a5c4c09de",
+          "sha256": "67d2313d357f106ef5425d058a64ce4e1d1a37d33915e09b19751c0e138a0496"
+        },
+        {
+          "path": "arch/soc/grus/include/base_addr.h",
+          "blob": "536d2e51e19f12f3a7f4e354fba53be906e05702",
+          "sha256": "998fae1fc89c47dfb0029d8055b6ea3b2113d599aacad3197bf1c8ae89ee6962"
+        },
+        {
+          "path": "include/driver/gx_clock.h",
+          "blob": "09232a88f2bef6170534fa26de0903d0789b53c7",
+          "sha256": "18175ed29990bef3346e696dc5a1b87b9c3e47b0b916852547f93572a3158c92"
+        },
+        {
+          "path": "include/driver/gx_clock/gx_clock_v2.h",
+          "blob": "1eb92bbefbb341fb66856daf0620c4b025927010",
+          "sha256": "799dde5d89d8996dcbd31b0de4ca1a2222d9cc3b79388f094ec159336bf27d3d"
+        },
+        {
+          "path": "LICENSE",
+          "blob": "37a1e362999f2040c2c0cda1a3231b6b5913efbf",
+          "sha256": "2fcfa79302d7f8d0c4562bb96946ec7567cbf184cb20056b56d73cf7c666c3f3"
+        }
+      ],
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "--param=case-values-threshold=3",
+        "-fno-gcse",
+        "-fno-tree-forwprop"
+      ],
+      "source_sha256": "aa3dfefbbdc05c43e4da3a344a7efe0d3f58e6351b610debbe9075b84b75e0d2",
+      "lookup_runtime_address": 268435768,
+      "sections": [
+        {
+          "section": ".text",
+          "runtime_address": 268435960,
+          "package_offset": 232268,
+          "compiled_bytes": 254,
+          "compiled_sha256": "8678ce4322f2711341f134d231a5a9e9ed74663860f96f379ecc3c8736ef12e1",
+          "envelope_bytes": 264,
+          "fits": true,
+          "stock_sha256": "5d0742c927508b51d7aadeee1964c3f194575fce64b2e51e08ae93dcbbaa7aaa"
+        },
+        {
+          "section": ".rodata",
+          "runtime_address": 268440356,
+          "package_offset": 236664,
+          "compiled_bytes": 148,
+          "compiled_sha256": "ac938eadb01ad1dd6d48e8a23c83cadcc2075b17b957a518682ee60a82896f9c",
+          "envelope_bytes": 148,
+          "fits": true,
+          "stock_sha256": "3de641578b6bdb4e47c552747addb9e0a3c71a7897f77c768e25164eab45446e"
+        }
+      ],
+      "source_admitted": false,
+      "hardware_qualified": false,
+      "limits": [
+        "Upstream gate and source-generated jump tables only; lookup remains bound to retained stage1 entry.",
+        "Branch-table mapping, lookup/table semantics, MMIO equivalence and loader qualification pending."
+      ]
+    },
+    "upstream_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_path": "arch/cpu/csky/ck804/start.S",
+    "upstream_blob": "63396df27539a800868a2f1a7aa646ead837ad46",
+    "source_sha256": "c3ad818c3264f2784be67c0e65b946ba561468d9e6edf5ea2d8e0ca56f0a975a",
+    "elf_sha256": "2ebdd1c16d3f3f4024073bb5d4553ce0dd335b3d49a5745fd7d97f082ad5f6c5",
+    "vectors_bytes": 256,
+    "reset_and_bss_bytes": 76,
+    "stock_byte_exact": true,
+    "source_admitted": false,
+    "limits": [
+      "Unmodified authenticated upstream assembly, recovered stack/IRQ/BSS configuration and callback bindings. Startup, return loop and BSS-clear bytes match stock. System initialization, main and exception/IRQ callbacks remain absolute dependencies here. Physical processor and loaded-image lifetime remain unqualified."
+    ]
+  },
+  "limits": [
+    "Actual compiled BSS-clear instructions check every ordered zero store and register/stack restoration for the recovered fixed range. Control registers, caller behavior, physical memory and startup lifetime not modeled."
+  ]
+}

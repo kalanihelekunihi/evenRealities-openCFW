@@ -1,0 +1,31 @@
+{
+  "startup": true,
+  "build": {
+    "source_sha256": "379ec3c977df2c7a4c671ca2910caa0f39bbb5554627cd2aea74606cf0f5fb80",
+    "elf_sha256": "0a6a0778874618fe3407c05f3a761c69349a8324279d75843c3df93efea92b3a",
+    "bytes": 206,
+    "envelope_bytes": 232,
+    "fits": true,
+    "helper_bindings": {
+      "open_cfw_gx8002_memset": 268506052,
+      "drc_logf": 268501164,
+      "open_cfw_gx8002_powf": 268501156,
+      "open_cfw_gx8002_backup_exp": 268499020,
+      "__extendsfdf2": 268507892,
+      "__truncdfsf2": 268510104
+    },
+    "source_admitted": false,
+    "limits": [
+      "Development reconstruction; decoded behavioral comparison pending.",
+      "Log/power/double-exp/conversion/memset dependencies remain standalone absolute bindings; no composed source closure.",
+      "No startup or full-image integration, hardware or arbitrary-state qualification."
+    ],
+    "startup_elf_sha256": "fe381e0432a69a1593b32288eb850c15249330e8a0ef4893f4dc5255457c4f6e"
+  },
+  "cases": 27,
+  "source_admitted": false,
+  "limits": [
+    "Decoded constructor return/final memory/ordered writes/helper arguments and saved ABI compared on finite inputs.",
+    "Numeric helpers use host arithmetic and explicit float/double register transfers; source math bodies and exceptional inputs not qualified here."
+  ]
+}

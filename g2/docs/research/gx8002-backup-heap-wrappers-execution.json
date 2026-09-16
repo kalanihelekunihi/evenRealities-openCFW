@@ -1,0 +1,79 @@
+{
+  "build": {
+    "upstream_evidence": {
+      "compiled_bytes": 172,
+      "fits": true,
+      "compiled_sha256": "9336783a1cdd9a482b9c2b8d396eb6736fbf768dbc116997b09cc7bcfd0cb4c3",
+      "stock_sha256": "946b79647cec1c11a7ab194636f1db6d3fdbf4df9eeb6a5a7cc2388ddd21b58c",
+      "source_sha256": "fe6757122373abc9d902900ac7fa2d34d97d3d2d82f416e2893a280b616d41fa",
+      "upstream": {
+        "include/lvp_context.h": {
+          "blob": "37483158aa8c433d614dea65dff87232b6ba0f69",
+          "sha256": "75902c925c65492f776fe1c932f0b85d0298f0b7e8377def087a4fb5949170be"
+        },
+        "include/lvp_attr.h": {
+          "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+          "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+        },
+        "lvp/common/lvp_buffer.c": {
+          "blob": "b3d49834f8e84abfec56a5bfb2d0e86993a05648",
+          "sha256": "a491c43e4494187b269a4bb35e8fbe5c46b6f29c678980c30b3f8f9a0e324978"
+        }
+      },
+      "source_admitted": false
+    },
+    "source_sha256": "9debdd05960a5d9b1bdb9e57933e83e07d5d8c26db6ef1290657b999b4790557",
+    "functions": [
+      {
+        "name": "backup_heap_initialize",
+        "bytes": 24,
+        "envelope_bytes": 28,
+        "exact_stock_prefix": false
+      },
+      {
+        "name": "backup_allocate",
+        "bytes": 8,
+        "envelope_bytes": 8,
+        "exact_stock_prefix": true
+      },
+      {
+        "name": "backup_callocate",
+        "bytes": 8,
+        "envelope_bytes": 8,
+        "exact_stock_prefix": true
+      },
+      {
+        "name": "backup_reallocate",
+        "bytes": 8,
+        "envelope_bytes": 8,
+        "exact_stock_prefix": true
+      },
+      {
+        "name": "backup_free",
+        "bytes": 10,
+        "envelope_bytes": 12,
+        "exact_stock_prefix": true
+      }
+    ],
+    "bindings_package_offsets": {
+      "rt_system_heap_init": 271236,
+      "rt_malloc": 271352,
+      "rt_calloc": 271692,
+      "rt_realloc": 271844,
+      "rt_free": 271724
+    },
+    "heap_interval": [
+      536984448,
+      537054080
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Only wrappers reconstructed. Allocator bodies and heap ownership still unresolved; source-only firmware incomplete."
+    ]
+  },
+  "cases": 360,
+  "source_admitted": false,
+  "limits": [
+    "Allocator modeled; validates argument forwarding, normalized/preserved results and ABI only. Actual allocation semantics and hardware unqualified."
+  ]
+}

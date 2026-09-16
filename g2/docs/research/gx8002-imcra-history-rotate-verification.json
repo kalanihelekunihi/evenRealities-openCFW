@@ -1,0 +1,25 @@
+{
+  "build": {
+    "source_sha256": "16bdf75ad796e1288a1b2889653e28f3306e64bb2557506d4695c73aa04a92d7",
+    "startup_sha256": "71af6dfa2bd2444519ae2ca5009ac8d80181c1f0a3e7573e234cf36180765c24",
+    "bytes": 270,
+    "helper_bindings": {
+      "open_cfw_gx8002_memcpy": 268505924
+    },
+    "source_admitted": false,
+    "startup_integrated": false,
+    "limits": [
+      "Development fragment only; not a complete processing function.",
+      "Helpers resolved by address, not included in this standalone ELF.",
+      "Decoded equivalence and helper mutation verification pending.",
+      "No placement, complete firmware or hardware qualification."
+    ]
+  },
+  "cases": 296,
+  "source_admitted": false,
+  "limits": [
+    "Decoded periodic gate and rotation with modeled memcpy and caller clobbers; count/history mutation cases.",
+    "State/data reads and copy calls compared in order; writes compared separately. Independent gate/copy-count/slot assertions.",
+    "Positive period/history count and nonnegative bounded frame. No nested helpers, aliasing, ABI or hardware qualification."
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "boot_dispatch_classifications": [
+    {
+      "offset": 7856,
+      "classification": "earlier boot-stage-one dispatch table entry",
+      "table_runtime": 268443232,
+      "table_index": 0,
+      "target_runtime": 268438964,
+      "target_boot_package_offset": 3588,
+      "indexed_load_pc": 3576,
+      "indirect_jump_pc": 3580
+    },
+    {
+      "offset": 7860,
+      "classification": "earlier boot-stage-one dispatch table entry",
+      "table_runtime": 268443232,
+      "table_index": 1,
+      "target_runtime": 268438964,
+      "target_boot_package_offset": 3588,
+      "indexed_load_pc": 3576,
+      "indirect_jump_pc": 3580
+    }
+  ],
+  "cross_image_lifetime_resolved": false,
+  "model_operand_classifications": [
+    {
+      "offset": 103088,
+      "classification": "encoded model tensor operand, not an absolute executable pointer",
+      "command_offset": 103072,
+      "operand": "destination",
+      "base_slot": 1,
+      "tensor_offset": 3456
+    },
+    {
+      "offset": 109288,
+      "classification": "encoded model tensor operand, not an absolute executable pointer",
+      "command_offset": 109284,
+      "operand": "source",
+      "base_slot": 1,
+      "tensor_offset": 3456
+    }
+  ],
+  "unclassified_stored_offsets": [],
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "range": [
+    235168,
+    235332
+  ],
+  "stage1_vector_offset": 231764,
+  "external_branches": [
+    {
+      "pc": 235368,
+      "target": 235168,
+      "entry": true
+    }
+  ],
+  "external_literal_pools": [],
+  "stored_words": [
+    {
+      "offset": 7856,
+      "value": 268438964,
+      "entry": false
+    },
+    {
+      "offset": 7860,
+      "value": 268438964,
+      "entry": false
+    },
+    {
+      "offset": 103088,
+      "value": 268438912,
+      "entry": false
+    },
+    {
+      "offset": 109288,
+      "value": 268438912,
+      "entry": false
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Linear stage-one branch/pool census and whole-package unaligned scan of instruction/data aliases. Computed targets and other mappings remain outside scope; candidates require classification."
+  ]
+}

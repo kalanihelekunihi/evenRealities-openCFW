@@ -1,0 +1,22 @@
+{
+  "cases": 144,
+  "build": {
+    "source_sha256": "e979b082182732c6103da9fc7521896c1f5a280d7b58ea01bb33c51d6a442326",
+    "elf_sha256": "bec23dc455fce948a5805f56a55148ffd8635f0f7a684ecbced3cb364e9c1ac7",
+    "code_bytes": 124,
+    "envelope_bytes": 128,
+    "fits": true,
+    "bindings": {
+      "open_cfw_gx8002_stage1_frequency": 232532,
+      "open_cfw_gx8002_stage1_39774": 235380,
+      "open_cfw_gx8002_stage1_397b8": 235448
+    },
+    "source_admitted": false,
+    "limits": [
+      "Complete readable UART setup C; original arithmetic helper calls and wraparound retained. Frequency and arithmetic are absolute dependencies. Decoded comparison, polling qualification, placement and integration pending."
+    ]
+  },
+  "limits": [
+    "Complete stock/source UART setup compared with independent register-write oracle and ABI checks. Unsigned division/remainder and frequency modeled, not source closure. Zero shifted denominators and nonterminating hardware polling excluded. Firmware integration pending."
+  ]
+}

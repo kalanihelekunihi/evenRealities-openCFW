@@ -1,0 +1,28 @@
+{
+  "build": {
+    "source_sha256": "f9cef0a9adc89dcded66fdf70274719b44ccb1e8303f0981ccf32b6e41e75eb1",
+    "header_sha256": "3782cc9bdfb8277015195f5444900d7bb52a88f6d01e5e37aeff6b91cb6b3148",
+    "bytes": 276,
+    "envelope_bytes": 340,
+    "fits": true,
+    "bindings": {
+      "backup_heap_state": 536966876,
+      "printf": 268474676,
+      "backup_heap_malloc_align": 268513812,
+      "backup_heap_malloc_large": 268513848
+    },
+    "source_admitted": false,
+    "limits": [
+      "Recovered first-fit scan, split threshold, current/maximum usage accounting and lowest-free advancement. Decoded verification and integration pending; no upstream version identity claimed."
+    ]
+  },
+  "cases": 53568,
+  "checks": [
+    "Decoded stock/source return, ordered writes, printf arguments, final memory and preserved registers",
+    "Split/no-split boundaries, used/free block combinations, lowest-free positions, unsigned request and statistics wrap"
+  ],
+  "limits": [
+    "Fixed synthetic heap layout; printf modeled without mutation. No independent allocation oracle, full sequences or concurrent access. Integration pending."
+  ],
+  "source_admitted": false
+}

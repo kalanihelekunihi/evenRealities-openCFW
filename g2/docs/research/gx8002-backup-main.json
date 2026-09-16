@@ -1,0 +1,50 @@
+{
+  "upstream_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "sources": [
+    {
+      "path": "lvp/main.c",
+      "blob": "67447d1f50d8b286ccaae1f27ab1dabe037fa9aa",
+      "sha256": "d69a31f7085e8af189a05b4f76f1629310fb67944b1af6336e1300dcef9908b3",
+      "build_sha256": "0096d1d16b5bbcc767449ab5f07393a8caa79cd466df2a1f20fbea458205fc6f"
+    },
+    {
+      "path": "include/lvp_attr.h",
+      "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+      "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813",
+      "build_sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+    },
+    {
+      "path": "lvp/lvp_mode.h",
+      "blob": "e551d09fc861f1964411a84b7d0a818b3bef84c6",
+      "sha256": "6e7d5f178ecc4af50ee325d55fccc1dadc69eef762dab52580da355705107818",
+      "build_sha256": "6e7d5f178ecc4af50ee325d55fccc1dadc69eef762dab52580da355705107818"
+    },
+    {
+      "path": "lvp/common/lvp_system_init.h",
+      "blob": "dce823f0e1f3572b16d67a4d5522ee543baf8868",
+      "sha256": "ed528524d7f0480205ef51697a5e7a32176d225b78b0c230ccf05e82512ea0ee",
+      "build_sha256": "ed528524d7f0480205ef51697a5e7a32176d225b78b0c230ccf05e82512ea0ee"
+    },
+    {
+      "path": "lvp/app_core/lvp_app_core.h",
+      "blob": "e7521399bfa5d16c4ebacba2699e2f0286fc09cd",
+      "sha256": "7267c8f17cf22c3fe8904ac6babf611c3f1ea750c254a782c982b4e9fbb03c25",
+      "build_sha256": "7267c8f17cf22c3fe8904ac6babf611c3f1ea750c254a782c982b4e9fbb03c25"
+    }
+  ],
+  "compiled_bytes": 40,
+  "envelope_bytes": 40,
+  "exact_stock_prefix": true,
+  "bindings_package_offsets": {
+    "LvpSystemInit": 274988,
+    "LvpInitMode": 278664,
+    "LvpInitializeAppEvent": 280380,
+    "LvpModeTick": 278752,
+    "LvpSystemDone": 275468,
+    "LvpAppEventTick": 280476
+  },
+  "source_admitted": false,
+  "limits": [
+    "Denoise mode selected; unused stdio include removed. Six subsystem bodies remain explicit dependencies. Full behavior and firmware admission pending."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "source_elf_hashes": {
+    "gx8002-fmod-placed": "0658b457c95e3207c40cfe25d4243676f8b6144ac00ad625f97b76775740a0c0",
+    "gx8002-double-muldiv-corrected": "b0c2998ecaf3efd6d5a2c58bde88bd7ba428f6de74ba355bf0705a8d88f26eb8"
+  },
+  "cases": 3520,
+  "references": {
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "stock_range": [
+      300516,
+      301096
+    ],
+    "external_branches": [
+      {
+        "pc": 296354,
+        "target": 300516,
+        "entry": true
+      }
+    ],
+    "external_literal_pools": [],
+    "stored_address_words": [],
+    "source_admitted": false,
+    "limits": [
+      "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
+    ]
+  },
+  "source_admitted": false,
+  "limits": [
+    "Executes complete source remainder and corrected source multiply/divide/pack/unpack. Oracle preserves those upstream NaN payload/sign conventions. Stock exceptional behavior, floating-point flags, computed references and hardware remain unqualified."
+  ]
+}

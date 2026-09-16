@@ -38,3 +38,16 @@ All six label regions are integrated. Full macOS codec build,254 tests and
 package artifact verification pass.52 retained bytes are now source data;
 firmware bytes and hashes are unchanged. Device descriptor ownership remains
 separate and incomplete as described above.
+
+## Backup-image follow-up
+
+After source integration of all 22 populated backup callbacks, the record array
+at package 0x4f7e4/runtime 0x20016ea4 still remains an external data dependency.
+Inspection of the recovered discovery, initialization, protection, OTP and
+word-read consumers does not identify the populated records' +12 value (0x60).
+The pinned SDK's `include/driver/gx_spinor.h` and
+`include/driver/gx_flash_common.h` declare the public operations and information
+enumerations but do not declare this private record layout. This is not proof
+that the field is unused: the current source consumer set is not a complete
+whole-image pointer-flow census. No guessed meaning or replacement for this
+field has been admitted.

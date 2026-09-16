@@ -1,0 +1,53 @@
+{
+  "dependency_headers": {
+    "include/utility/list.h": {
+      "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+      "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+    },
+    "include/utility/types.h": {
+      "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+      "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+    }
+  },
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "oracle": {
+    "path": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+    "blob": "600d763a219007e2af7b5006989d44984abf0861",
+    "sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+    "role": "identity_only"
+  },
+  "bindings": {},
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-jump-tables",
+    "-fno-delete-null-pointer-checks",
+    "--param=min-pagesize=0"
+  ],
+  "header": {
+    "path": "include/driver/spi.h",
+    "blob": "aabfb6e88beeee65eb74262d339d0ce44fdfcbce",
+    "sha256": "b158f2feee6baed0af40b3d2c5db0bfa0c76b4d8d96a8484ddcb98df04f69ebd"
+  },
+  "source_sha256": "afd0b9d96292107b53a63d07e127cddd97d79437ecdedc27577404816626bda6",
+  "symbol": "open_cfw_gx8002_dw_spi_irq",
+  "section_name": ".text",
+  "package_offset": 265160,
+  "compiled_bytes": 32,
+  "compiled_sha256": "770352405f41c74a6f1c1c3c213bb5167dd5da93c72116cfcc7b0fff2aeac6be",
+  "stock_envelope_bytes": 32,
+  "stock_sha256": "41f80726223e7f56079c5563cb09ecbf36cbb098a9c2c2ceff98be9dcb9f83f7",
+  "fits": true,
+  "source_admitted": false,
+  "limits": [
+    "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+  ]
+}

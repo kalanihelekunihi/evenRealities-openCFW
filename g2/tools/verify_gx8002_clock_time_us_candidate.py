@@ -5,8 +5,8 @@ from build_gx8002_clock_time_us_candidate import build,ROOT
 from verify_gx8002_memcpy_source import decode
 MASK=0xffffffff
 
-def execute(code,low,high):
-    r={f'r{i}':0x12340000+i for i in range(32)};initial=r.copy();trace=[];pc=0x1002585c
+def execute(code,low,high,entry=0x1002585c):
+    r={f'r{i}':0x12340000+i for i in range(32)};initial=r.copy();trace=[];pc=entry
     for _ in range(40):
         op,args,width=code[pc];p=[v.strip() for v in args.split(',')]
         if op=='movih':r[p[0]]=int(p[1],0)<<16

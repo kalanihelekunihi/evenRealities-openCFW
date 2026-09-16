@@ -3,7 +3,7 @@
 import re
 MASK=0xffffffff
 
-def execute(code,entry,arguments,memory,helper):
+def execute(code,entry,arguments,memory,helper,stock_delta=0x101f6a74):
     memory=memory.copy();r={f'r{i}':0xabc00000+i for i in range(32)};r['r14']=0x20070000;r.update({f'r{i}':v for i,v in enumerate(arguments[:4])});initial=r.copy();saved=None;events=[];pc=entry;condition=False
     frame='r15'
     regs=('r15',)
@@ -22,6 +22,7 @@ def execute(code,entry,arguments,memory,helper):
             if any(r[f'r{i}']!=initial[f'r{i}'] for i in (*range(4,12),14,15,16,17)):raise ValueError('ABI')
             return ('return',r['r0']),{k:v for k,v in memory.items() if not stack<=k<stack_end},events
         elif op in ('lrw','movi'):r[p[0]]=int(p[1],0)
+        elif op=='bmaski':r[p[0]]=(1<<int(p[1],0))-1
         elif op=='divu':
             if not r[p[2]]:return ('divide_exception',),{k:v for k,v in memory.items() if not stack<=k<stack_end},events
             r[p[0]]=r[p[1]]//r[p[2]]
@@ -74,7 +75,7 @@ def execute(code,entry,arguments,memory,helper):
             r[p[0]]=(r[p[0]]-1)&MASK
             if r[p[0]]:nxt=int(p[1],0)
         elif op in ('bsr','jsr'):
-            target=r[args] if op=='jsr' else (int(args,0)+(0x101f6a74 if entry<0x100000 else 0))&MASK
+            target=r[args] if op=='jsr' else (int(args,0)+(stock_delta if entry<0x100000 else 0))&MASK
             value=helper(target,[r['r'+str(i)] for i in range(4)],memory,events)
             for i in (0,1,2,3,12,13,15,*range(18,32)):r[f'r{i}']=0xcd000000+i
             r['r0']=value

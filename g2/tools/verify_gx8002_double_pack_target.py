@@ -5,11 +5,13 @@ from build_gx8002_backup_cfft import ROOT,sha,Elf32
 from verify_gx8002_memcpy_source import decode
 from verify_gx8002_double_unpack import oracle as unpack
 
-def execute(code,entry,parts,arguments=None,return_pair=False,readonly=None,trace=None,max_steps=1600,return_float=False,float_arguments=None,float_operation=None):
+def execute(code,entry,parts,arguments=None,return_pair=False,readonly=None,trace=None,max_steps=1600,return_float=False,float_arguments=None,float_operation=None,stack_bytes=256):
+    assert 256<=stack_bytes<=16384 and stack_bytes%4==0
+    stack_bottom=0x8000-stack_bytes
     r={f'r{i}':0x65430000+i for i in range(32)};r.update(r0=0x1000,r14=0x8000,r15=0xffffffff)
     if arguments is not None:r.update({f'r{i}':x for i,x in enumerate(arguments)})
     initial=r.copy();fr={f'fr{i}':x for i,x in enumerate(float_arguments or [])}
-    mem={a:0xa5 for a in range(0x7f00,0x8000)};mem.update({0x1000+i:b for i,b in enumerate(parts)});pc=entry;c=False
+    mem={a:0xa5 for a in range(stack_bottom,0x8000)};mem.update({0x1000+i:b for i,b in enumerate(parts)});pc=entry;c=False
     if readonly:
         assert not (mem.keys() & readonly.keys())
         mem.update(readonly)
@@ -19,7 +21,7 @@ def execute(code,entry,parts,arguments=None,return_pair=False,readonly=None,trac
     def setpair(x,value):r[x]=value&0xffffffff;r['r'+str(int(x[1:])+1)]=(value>>32)&0xffffffff
     def load(a):return int.from_bytes(bytes(mem[a+i] for i in range(4)),'little')
     def store(a,x):
-        assert 0x7f00<=a<0x8000
+        assert stack_bottom<=a and a+4<=0x8000
         for i,b in enumerate(x.to_bytes(4,'little')):mem[a+i]=b
     for _ in range(max_steps):
         if trace is not None and pc in trace:
@@ -38,21 +40,40 @@ def execute(code,entry,parts,arguments=None,return_pair=False,readonly=None,trac
                 for i,reg in enumerate(regs):r[reg]=load(r['r14']+i*4)
                 r['r14']+=4*len(regs)
                 n=r['r15']
+        elif op in ('ldbi.w','stbi.w'):
+            m=re.fullmatch(r'(r\d+), \((r\d+)\)',args);assert m
+            reg,base=m.groups();address=r[base]
+            if op=='ldbi.w':r[reg]=load(address)
+            else:store(address,r[reg])
+            r[base]=(address+4)&0xffffffff
         elif op in ('ldbi.b','stbi.b'):
             m=re.fullmatch(r'(r\d+), \((r\d+)\)',args);assert m
             reg,base=m.groups();address=r[base]
             if op=='ldbi.b':r[reg]=mem[address]
             else:
-                assert 0x7f00<=address<0x8000
+                assert stack_bottom<=address<0x8000
                 mem[address]=r[reg]&255
             r[base]=(r[base]+1)&0xffffffff
         elif op in ('fmuls','fadds','fsubs','fdivs'):
             assert float_operation is not None, 'floating arithmetic model required'
             fr[p[0]]=float_operation(op,fr[p[1]],fr[p[2]])
-        elif op=='fmacs':
+        elif op=='fcmpznes':
+            assert float_operation is not None, 'floating comparison model required'
+            c=bool(float_operation(op,fr[p[0]]))
+        elif op in ('fcmphss','fcmplts'):
+            assert float_operation is not None, 'floating comparison model required'
+            c=bool(float_operation(op,fr[p[0]],fr[p[1]]))
+        elif op=='fmovs':fr[p[0]]=fr[p[1]]
+        elif op in ('frecips','fsitos','fnegs','fstosi.rz'):
+            assert float_operation is not None, 'floating arithmetic model required'
+            fr[p[0]]=float_operation(op,fr[p[1]])
+        elif op in ('fmacs','fnmacs','fmscs','fnmscs'):
             assert float_operation is not None, 'floating arithmetic model required'
             # Pass the original accumulator explicitly; the callback owns FP policy.
             fr[p[0]]=float_operation(op,fr[p[1]],fr[p[2]],fr[p[0]])
+        elif op=='fldrs':
+            m=re.fullmatch(r'(fr\d+), \((r\d+), (r\d+) << (\d+)\)',args);assert m
+            reg,base,index,shift=m.groups();fr[reg]=load((r[base]+(r[index]<<int(shift)))&0xffffffff)
         elif op=='flds':
             m=re.fullmatch(r'(fr\d+), \((r\d+), (0x[0-9a-f]+)\)',args);assert m
             reg,base,off=m.groups();fr[reg]=load(r[base]+int(off,0))
@@ -67,6 +88,9 @@ def execute(code,entry,parts,arguments=None,return_pair=False,readonly=None,trac
             reg,base,off=m.groups();address=r[base]+int(off,0);size=1 if op=='ld.b' else 2
             r[reg]=int.from_bytes(bytes(mem[address+i] for i in range(size)),'little')
         elif op=='bclri':r[p[0]]=v(p[0] if len(p)==2 else p[1])&~(1<<int(p[-1]))
+        elif op=='str.w':
+            m=re.fullmatch(r'(r\d+), \((r\d+), (r\d+) << (\d+)\)',args);assert m
+            reg,base,index,shift=m.groups();store((r[base]+(r[index]<<int(shift)))&0xffffffff,r[reg])
         elif op in ('ldr.w','ldr.b'):
             m=re.fullmatch(r'(r\d+), \((r\d+), (r\d+) << (\d+)\)',args);assert m
             reg,base,index,shift=m.groups();address=(r[base]+(r[index]<<int(shift)))&0xffffffff;r[reg]=load(address) if op=='ldr.w' else mem[address]
@@ -76,10 +100,18 @@ def execute(code,entry,parts,arguments=None,return_pair=False,readonly=None,trac
         elif op in ('mov','movi','movih','lrw'):r[p[0]]=v(p[1])<<(16 if op=='movih' else 0)
         elif op=='zext':r[p[0]]=(v(p[1])>>int(p[3]))&((1<<(int(p[2])-int(p[3])+1))-1)
         elif op=='andn':r[p[0]]=v(p[0] if len(p)==2 else p[1])&(~v(p[-1])&0xffffffff)
+        elif op=='rotli':
+            a=v(p[0] if len(p)==2 else p[1]);shift=int(p[-1]);assert 0<=shift<32
+            r[p[0]]=((a<<shift)|(a>>(32-shift)))&0xffffffff
         elif op=='asr':r[p[0]]=(signed(v(p[0] if len(p)==2 else p[1]))>>min(v(p[-1])&63,31))&0xffffffff
         elif op=='asri':r[p[0]]=(signed(v(p[0] if len(p)==2 else p[1]))>>int(p[-1]))&0xffffffff
         elif op=='abs':r[p[0]]=abs(signed(v(p[1])))&0xffffffff
         elif op=='zexth':r[p[0]]=v(p[1])&65535
+        elif op=='divs':
+            a=signed(v(p[0] if len(p)==2 else p[1]));b=signed(v(p[-1]))
+            assert b!=0, 'zero divisor requires separate exception qualification'
+            quotient=abs(a)//abs(b)
+            r[p[0]]=(-quotient if (a<0)!=(b<0) else quotient)&0xffffffff
         elif op=='divu':
             assert v(p[-1])!=0, 'zero divisor requires separate exception qualification'
             r[p[0]]=v(p[0] if len(p)==2 else p[1])//v(p[-1])

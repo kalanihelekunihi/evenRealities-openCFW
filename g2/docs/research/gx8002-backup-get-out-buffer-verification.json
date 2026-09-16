@@ -1,0 +1,43 @@
+{
+  "candidate": {
+    "compiled_bytes": 60,
+    "fits": true,
+    "compiled_sha256": "58eb035ece216b234181b9842b9a4c1c5e119a23daa7fa0277e2d2d542ca8e83",
+    "stock_sha256": "83f21ab3e1b3347a8b6e506c83903e8b1eebc1139cea95bab7e1f760d5d17cca",
+    "exact_stock": false,
+    "source_sha256": "c23f38e0926eb4898c88963f19f624031acbd7baf0abb4337223f3746a61d865",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "upstream": {
+      "include/lvp_context.h": {
+        "blob": "37483158aa8c433d614dea65dff87232b6ba0f69",
+        "sha256": "75902c925c65492f776fe1c932f0b85d0298f0b7e8377def087a4fb5949170be"
+      },
+      "include/lvp_attr.h": {
+        "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+        "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+      },
+      "lvp/common/lvp_buffer.c": {
+        "blob": "b3d49834f8e84abfec56a5bfb2d0e86993a05648",
+        "sha256": "a491c43e4494187b269a4bb35e8fbe5c46b6f29c678980c30b3f8f9a0e324978"
+      }
+    },
+    "source_admitted": false
+  },
+  "cases": 648,
+  "source_admitted": false,
+  "limits": [
+    "Ordered field reads and context writes plus arithmetic return checked for stable valid configurations. Zero output preserves context initialization.",
+    "Nonzero derived divisors required; hardware and full input domain unqualified. Fit reported separately; no source admission."
+  ]
+}

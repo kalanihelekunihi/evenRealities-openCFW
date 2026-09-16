@@ -1,0 +1,119 @@
+{
+  "cluster_sha256": "2f0bae53c880c1aad63647d0f7904a16c5dfb412b82d898e3f9a61990048e2b0",
+  "dependencies": [
+    {
+      "symbol": "open_cfw_gx8002_backup_spi_master",
+      "kind": "storage",
+      "address": 536966784,
+      "allocated_source_symbols": [
+        "open_cfw_gx8002_backup_spi_master"
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_clock_gate",
+      "kind": "function",
+      "address": 268450792,
+      "allocated_source_symbols": [
+        "$d",
+        "$t",
+        "gx_clock_set_module_enable",
+        "open_cfw_gx8002_clock_gate",
+        "open_cfw_gx8002_platform_gate",
+        "open_cfw_gx8002_backup_dma_resource",
+        "open_cfw_gx8002_dma_resource"
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_spi_register_master",
+      "kind": "function",
+      "address": 268468760,
+      "allocated_source_symbols": [
+        "$d",
+        "$t",
+        "open_cfw_gx8002_spi_register_master"
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_request_irq",
+      "kind": "function",
+      "address": 268453956,
+      "allocated_source_symbols": [
+        "$d",
+        "$t",
+        "open_cfw_gx8002_backup_request_irq",
+        "gx_request_irq",
+        "open_cfw_gx8002_request_irq"
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_dw_spi_cleanup",
+      "kind": "function",
+      "address": 268468860,
+      "allocated_source_symbols": [
+        "$d",
+        "$t",
+        "open_cfw_gx8002_dw_spi_cleanup"
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_dw_spi_setup",
+      "kind": "function",
+      "address": 268469560,
+      "allocated_source_symbols": [
+        "$d",
+        "$t",
+        "open_cfw_gx8002_dw_spi_setup"
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_dw_spi_quick_transfer",
+      "kind": "function",
+      "address": 268468904,
+      "allocated_source_symbols": [
+        "$d",
+        "$t",
+        "open_cfw_gx8002_dw_spi_quick_transfer"
+      ]
+    },
+    {
+      "symbol": "open_cfw_gx8002_dw_spi_irq",
+      "kind": "function",
+      "address": 268468872,
+      "allocated_source_symbols": [
+        "$d",
+        "$t",
+        "open_cfw_gx8002_dw_spi_irq"
+      ]
+    }
+  ],
+  "source_dependency_count": 8,
+  "source_function_dependency_count": 7,
+  "objects": [
+    {
+      "object": "fallback_device_state",
+      "address": 536966768,
+      "bytes": 16,
+      "allocated_sections": [
+        ".spi_device_state"
+      ]
+    },
+    {
+      "object": "spi_master",
+      "address": 536966784,
+      "bytes": 36,
+      "allocated_sections": [
+        ".spi_master"
+      ]
+    },
+    {
+      "object": "driver_context",
+      "address": 536966820,
+      "bytes": 44,
+      "allocated_sections": []
+    }
+  ],
+  "limits": [
+    "Symbol/section ownership audit is not composed execution or hardware proof.",
+    "Driver context +36 meaning is unresolved; its 44-byte extent is corroborated by the authenticated upstream dwspi symbol (see context-layout report), not complete backup type recovery."
+  ]
+}

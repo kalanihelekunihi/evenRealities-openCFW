@@ -1,0 +1,25 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream": [
+    {
+      "path": "utility/libdsp/Source/FastMathFunctions/csky_cos_f32.c",
+      "git_blob": "0a68e9361b9fdd152e91ca5cc661943e1a07853f",
+      "sha256": "dcac04d7d95193b8b0ced1013c80c30dd074d6bc31c3c2c4dfcf0232027506b8"
+    },
+    {
+      "path": "utility/libdsp/Source/CommonTables/csky_common_fastmath_tables.c",
+      "git_blob": "9a881da84b5ae4013fb47ca6ae865b6f931579dd",
+      "sha256": "c46be8175f2b23aa7a223c09c7d85e203ca944b9db3d4d48c4e4cd283711c3c2"
+    }
+  ],
+  "bytes": 124,
+  "envelope_bytes": 128,
+  "fits": true,
+  "exact_code": false,
+  "table_bytes": 2052,
+  "exact_table": true,
+  "source_admitted": false,
+  "limits": [
+    "Upstream condition adapted from < zero to !(>= zero), matching stock comparison; defined finite conversion domain only. Declaration-only facade used. Table selected from upstream C, not firmware. Decoded floating-point execution and placement verification remain pending."
+  ]
+}

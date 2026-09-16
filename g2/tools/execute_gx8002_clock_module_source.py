@@ -2,7 +2,7 @@
 import re
 from verify_gx8002_power_initialize import word
 MASK=0xffffffff
-def execute(code,entry,module,source,table,modules,registers,lookup_runner=None,register_runner=None):
+def execute(code,entry,module,source,table,modules,registers,lookup_runner=None,register_runner=None,stock_delta=0x1000dfec,lookup_address=0x10024a44):
     r={f'r{i}':0x43210000+i for i in range(32)};r.update(r0=module,r1=source,r14=0x20070000);initial=r.copy();saved=None;pc=entry;condition=False;calls=[];memory=dict(table);mmio=dict(registers);trace=[]
     def rd(a):
         trace.append(("read",a,mmio[a]));return mmio[a]
@@ -18,7 +18,14 @@ def execute(code,entry,module,source,table,modules,registers,lookup_runner=None,
             end=int(re.fullmatch(r'r4-r(\d+), r15',args)[1]);regs=[f'r{i}' for i in range(4,end+1)]+['r15'];saved={k:r[k] for k in regs};r['r14']-=4*len(regs)
         elif op=='pop':
             r.update(saved);r['r14']+=4*len(saved);assert all(r[f'r{i}']==initial[f'r{i}'] for i in (*range(4,12),14,15,16,17));return r['r0'],calls,trace,mmio
+        elif op=='rts':
+            assert saved is None and all(r[f'r{i}']==initial[f'r{i}'] for i in (*range(4,12),14,15,16,17))
+            return r['r0'],calls,trace,mmio
         elif op in ('movi','lrw'):r[p[0]]=int(p[1],0)
+        elif op=='rotl':
+            a=r[p[1] if len(p)==3 else p[0]];n=r[p[-1]]&31;r[p[0]]=((a<<n)|(a>>(32-n)))&MASK
+        elif op=='movih':r[p[0]]=int(p[1],0)<<16
+        elif op=='bseti':r[p[0]]|=1<<int(p[1],0)
         elif op=='mov':r[p[0]]=r[p[1]]
         elif op in ('addi','subi'):
             a=r[p[1]] if len(p)==3 else r[p[0]];r[p[0]]=(a+(1 if op=='addi' else -1)*int(p[-1],0))&MASK
@@ -32,9 +39,9 @@ def execute(code,entry,module,source,table,modules,registers,lookup_runner=None,
         elif op in ('br','bt','bf','bez','bnez'):
             take=True if op=='br' else condition if op=='bt' else not condition if op=='bf' else (r[p[0]]==0)==(op=='bez')
             if take:nxt=int(p[-1],0)
-        elif op in ('addu','and','or','nor'):
+        elif op in ('addu','and','andn','or','nor'):
             a=r[p[1]] if len(p)==3 else r[p[0]];b=r[p[-1]]
-            r[p[0]]=(a+b if op=='addu' else a&b if op=='and' else a|b if op=='or' else ~(a|b))&MASK
+            r[p[0]]=(a+b if op=='addu' else a&b if op=='and' else a&~b if op=='andn' else a|b if op=='or' else ~(a|b))&MASK
         elif op=='sextb':
             v=r[p[1]]&255;r[p[0]]=(v if v<128 else v-256)&MASK
         elif op=='zext':
@@ -51,8 +58,8 @@ def execute(code,entry,module,source,table,modules,registers,lookup_runner=None,
             else:
                 v=memory[a];r[reg]=(v if op=='ld.b' or v<128 else v-256)&MASK
         elif op=='bsr':
-            target=int(args,0)+(0x1000dfec if entry<0x100000 else 0)
-            if target==0x10024a44:
+            target=int(args,0)+(stock_delta if entry<0x100000 else 0)
+            if target==lookup_address:
                 assert r['r0']==module;dest=r['r1'];calls.append(('lookup',module));base=0xa0010000 if module<10 else 0xa0300000
                 vals=(modules[module]['address'],base,base+(0x8c if module<10 else 0x88),base+0x18,base+0x1c,base+0x20)
                 if lookup_runner is not None:

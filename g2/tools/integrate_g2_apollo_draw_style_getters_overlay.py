@@ -252,6 +252,7 @@ def prepare() -> None:
                 raise SystemExit(f"unmapped draw-style relocation: {symbol}")
             relocations.append(record)
         config["relocated_leaves"].append({
+            "allow_discarded_alloc_sections": True,
             "expected": {
                 "size": observed["size"],
                 "sha256": "0" * 64,
@@ -324,6 +325,100 @@ def promote() -> None:
     CONFIG.write_text(json.dumps(config, indent=2) + "\n")
 
 
+def compute_pins() -> None:
+    """Fill reviewed placement pins without the obsolete recorder profile."""
+    tool = overlay_module()
+    config = json.loads(CONFIG.read_text())
+    names = {function for _selector, function, _start, _end in SELECTORS}
+    run_base = config["run_base"]
+    base_len = (ROOT / config["base"]["path"]).stat().st_size
+    payload_offset = (
+        (base_len + config["alignment"] - 1)
+        // config["alignment"]
+        * config["alignment"]
+    )
+    overlay_base = run_base + payload_offset - config["preamble_bytes"]
+    leaves = [
+        item for item in config["relocated_leaves"]
+        if item.get("function") in names
+    ]
+    if len(leaves) != len(names):
+        raise SystemExit("AM-019 leaf set changed underfoot")
+    offsets = {item["function"]: item["expected"]["offset"] for item in leaves}
+
+    with tempfile.TemporaryDirectory() as directory:
+        builtin = subprocess.run(
+            ["clang", "--no-default-config", "-print-resource-dir"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        for selector, function, _start, _end in SELECTORS:
+            object_path = Path(directory) / f"{selector}.o"
+            subprocess.run(
+                [
+                    "clang", "--no-default-config", "-nostdinc",
+                    "-isystem", str(Path(builtin) / "include"),
+                    "--target=thumbv7em-none-eabi", *FLAGS,
+                    f"-D{LEAF_DEFINE_PREFIX}{selector}_ONLY=1",
+                    "-c", str(SOURCE), "-o", str(object_path),
+                ],
+                check=True,
+            )
+            data, sections = tool.parse_elf32(object_path)
+            leaf = next(item for item in leaves if item["function"] == function)
+            section = next(
+                item for item in sections if item["name"] == f".text.{function}"
+            )
+            code = bytearray(
+                data[section["offset"]:section["offset"] + section["size"]]
+            )
+            runtime = overlay_base + offsets[function]
+            for relocation in leaf["relocations"]:
+                rtype = relocation["type"]
+                if rtype not in ("R_ARM_THM_CALL", "R_ARM_THM_JUMP24"):
+                    raise SystemExit(
+                        f"unsupported pin relocation {rtype} in {function}"
+                    )
+                target = relocation.get("target_function")
+                if isinstance(target, str):
+                    if target not in offsets:
+                        raise SystemExit(
+                            f"unresolved pin target in {function}: {target}"
+                        )
+                    target_address = overlay_base + offsets[target]
+                    relocation.pop("target_function", None)
+                    relocation["target_address"] = target_address
+                else:
+                    target_address = relocation.get("target_address")
+                    if not isinstance(target_address, int):
+                        raise SystemExit(
+                            f"unresolved pin target in {function}: {relocation}"
+                        )
+                code[relocation["offset"]:relocation["offset"] + 4] = (
+                    tool.encode_thumb_branch(
+                        runtime + relocation["offset"], target_address,
+                        link=(rtype == "R_ARM_THM_CALL")
+                    )
+                )
+            leaf["expected"]["sha256"] = sha(bytes(code))
+
+    for key in ("isolated_leaves", "relocated_leaves", "in_place_leaves", "patch_sites"):
+        for item in config.get(key, []):
+            allowed = item.get("profiles")
+            if isinstance(allowed, list):
+                item["profiles"] = [
+                    profile for profile in allowed if profile != RECORDER
+                ]
+            profiles = item.get("toolchain_profiles")
+            if isinstance(profiles, dict):
+                profiles.pop(RECORDER, None)
+                if not profiles:
+                    item.pop("toolchain_profiles", None)
+    config.get("toolchain_profiles", {}).pop(RECORDER, None)
+    CONFIG.write_text(json.dumps(config, indent=2) + "\n")
+
+
 def region(name, function, status, file_offset, size, target_address, output):
     return {
         "address_status": status,
@@ -346,21 +441,77 @@ def sync_manifest() -> None:
     provider_path = ROOT / provider["path"]
     provider["size"] = provider_path.stat().st_size
     provider["sha256"] = sha(provider_path.read_bytes())
-    regions = [
-        item for item in override["regions"]
-        if not item["name"].startswith("apollo_draw_style_getter_")
-    ]
+    regions = list(override["regions"])
+
+    def splice_region(items, replacement):
+        """Replace the bytes covered by `replacement` inside the existing tiling."""
+        replacement_start = replacement["file_offset"]
+        replacement_end = replacement_start + replacement["size"]
+        owner_index = next(
+            (
+                index for index, item in enumerate(items)
+                if item["file_offset"] <= replacement_start
+                and item["file_offset"] + item["size"] >= replacement_end
+            ),
+            None,
+        )
+        if owner_index is None:
+            raise SystemExit(
+                "manifest has no owner for "
+                f"{replacement['name']} at file offset 0x{replacement_start:x}"
+            )
+        owner = items[owner_index]
+        owner_start = owner["file_offset"]
+        owner_end = owner_start + owner["size"]
+        split = []
+        if owner_start < replacement_start:
+            before = dict(owner)
+            before["size"] = replacement_start - owner_start
+            split.append(before)
+        split.append(replacement)
+        if replacement_end < owner_end:
+            after = dict(owner)
+            after["name"] = f"{owner['name']}_after_0x{replacement_end:x}"
+            if "target_address" in owner:
+                after["target_address"] = owner["target_address"] + replacement_end - owner_start
+            after["file_offset"] = replacement_end
+            after["size"] = owner_end - replacement_end
+            split.append(after)
+        items[owner_index:owner_index + 1] = split
+
     stock = sorted(SELECTORS, key=lambda item: item[2])
     first_start, last_end = stock[0][2], stock[-1][3]
     owner_index = next(
-        index for index, item in enumerate(regions)
-        if item.get("address_status") == "official_blob"
-        and item.get("target_address", 0) <= first_start
-        and item.get("target_address", 0) + item["size"] >= last_end
+        (
+            index for index, item in enumerate(regions)
+            if item.get("target_address", 0) <= first_start
+            and item.get("target_address", 0) + item["size"] >= last_end
+        ),
+        None,
     )
+    owner_end_index = owner_index
+    if owner_index is None:
+        owner_index = next(
+            (
+                index for index, item in enumerate(regions)
+                if item.get("target_address", 0) <= first_start
+                and item.get("target_address", 0) + item["size"] == first_start
+            ),
+            None,
+        )
+        owner_end_index = next(
+            (
+                index for index, item in enumerate(regions)
+                if item.get("target_address") == last_end
+            ),
+            None,
+        )
+        if owner_index is None or owner_end_index is None:
+            raise SystemExit("manifest has no owner span for AM-019 stock getters")
     owner = regions[owner_index]
+    owner_tail = regions[owner_end_index]
     owner_start = owner["target_address"]
-    owner_end = owner_start + owner["size"]
+    owner_end = owner_tail["target_address"] + owner_tail["size"]
     split = []
     if owner_start < first_start:
         before = dict(owner)
@@ -390,33 +541,44 @@ def sync_manifest() -> None:
             "official_blob", 32 + cursor - run_base, owner_end - cursor, cursor,
             f"apollo510b/main-opaque-0x{cursor:08x}.bin",
         ))
-    regions[owner_index:owner_index + 1] = split
+    regions[owner_index:owner_end_index + 1] = split
 
     leaves = [
         item for item in report["relocated_leaves"]
         if item.get("source", {}).get("path", "").endswith("runtime_obj_draw_style_getters.c")
     ]
+    leaf_regions = []
     for item in leaves:
         extraction, placement = item["extraction"], item["placement"]
         function = extraction["function"]
         slug = function.removeprefix("open_cfw_runtime_obj_get_style_").replace("_", "-")
         if placement["padding_before"]:
             address = placement["runtime_address"] - placement["padding_before"]
-            regions.append(region(
+            leaf_regions.append(region(
                 f"apollo_draw_style_getter_{slug}_overlay_alignment",
                 f"Generated runtime alignment before {function}",
                 "generated_alignment", 32 + address - run_base,
                 placement["padding_before"], address,
                 f"apollo510b/main-source-apollo-draw-style-getter-{slug}-alignment.bin",
             ))
-        regions.append(region(
+        leaf_regions.append(region(
             f"apollo_draw_style_getter_{slug}_source_text",
             f"Clean-room LVGL draw-style getter leaf ({function}) compiled from C",
             "source_compiled", 32 + placement["runtime_address"] - run_base,
             extraction["size"], placement["runtime_address"],
             f"apollo510b/main-source-apollo-draw-style-getter-{slug}-0x{placement['runtime_address']:08x}.bin",
         ))
+    for item in sorted(leaf_regions, key=lambda entry: entry["target_address"]):
+        splice_region(regions, item)
     regions.sort(key=lambda item: item["file_offset"])
+    for previous, current in zip(regions, regions[1:]):
+        previous_end = previous["file_offset"] + previous["size"]
+        if previous_end != current["file_offset"]:
+            raise SystemExit(
+                "manifest tiling gap/overlap between "
+                f"{previous['name']} and {current['name']}: "
+                f"0x{previous_end:x} != 0x{current['file_offset']:x}"
+            )
     final = max(item["file_offset"] + item["size"] for item in regions)
     if final != provider["size"]:
         raise SystemExit(f"manifest tiling ends at {final}, provider has {provider['size']} bytes")
@@ -441,13 +603,16 @@ def pin_package() -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "action", choices=("prepare", "promote", "sync-manifest", "pin-package")
+        "action",
+        choices=("prepare", "promote", "sync-manifest", "pin-package", "compute-pins"),
     )
     args = parser.parse_args()
     if args.action == "prepare":
         prepare()
     elif args.action == "promote":
         promote()
+    elif args.action == "compute-pins":
+        compute_pins()
     elif args.action == "sync-manifest":
         sync_manifest()
     else:

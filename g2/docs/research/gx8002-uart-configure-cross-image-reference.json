@@ -1,0 +1,49 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "references": {
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "stock_range": [
+      249060,
+      249436
+    ],
+    "external_branches": [
+      {
+        "pc": 249502,
+        "target": 249060,
+        "entry": true
+      }
+    ],
+    "external_literal_pools": [],
+    "stored_address_words": [
+      {
+        "offset": 17732,
+        "value": 268452948,
+        "entry": false
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
+    ]
+  },
+  "literal_offset": 17732,
+  "literal_value": 268452948,
+  "literal_reader": 17692,
+  "registration_call": 17698,
+  "irq_number": 11,
+  "registration_target": 12600,
+  "earlier_image_mapping_candidate": {
+    "delta": 268435376,
+    "handler_package_offset": 17572
+  },
+  "handler_observed_behavior": {
+    "callback_cell": 536910176,
+    "indirect_call": 17582,
+    "watchdog_status_read": 2691694612
+  },
+  "source_admitted": false,
+  "cross_image_lifetime_resolved": false,
+  "limits": [
+    "The real earlier-image watchdog pointer numerically aliases backup configuration interior code. Reader and handler instructions authenticated. Mapping candidate is consistent with the earlier image layout; loader/lifetime and IRQ table separation still require explicit evidence before dismissing the cross-image alias."
+  ]
+}

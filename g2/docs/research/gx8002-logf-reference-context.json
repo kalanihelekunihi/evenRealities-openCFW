@@ -1,0 +1,53 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "raw": {
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "stock_range": [
+      299176,
+      299776
+    ],
+    "external_branches": [
+      {
+        "pc": 297454,
+        "target": 299176,
+        "entry": true
+      }
+    ],
+    "external_literal_pools": [
+      {
+        "pc": 298674,
+        "pool": 299576
+      }
+    ],
+    "stored_address_words": [
+      {
+        "offset": 314791,
+        "value": 536938503,
+        "entry": false
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
+    ]
+  },
+  "classifications": [
+    {
+      "finding": 298674,
+      "literal_offset": 298672,
+      "literal_value": 6140886,
+      "consumer": 297980,
+      "meaning": "Upper halfword of consumed power constant, not a load instruction."
+    },
+    {
+      "finding": 314791,
+      "table_offset": 314676,
+      "table_sha256": "77f9067a05b953496342be0361b74253f690465994854fd15b78525b72490278",
+      "meaning": "Cross-element byte sequence in fully regenerated bit-reversal swap table."
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "All bounded scan findings explained. Computed targets and alternate mappings remain outside scope. No stock table bytes inserted into output."
+  ]
+}

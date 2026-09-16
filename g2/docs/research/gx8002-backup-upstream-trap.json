@@ -1,0 +1,85 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream_sources": [
+    {
+      "path": "arch/soc/grus/trap_c.c",
+      "git_blob": "55f2f25ded0f874a7cd855779e95a488a8664552",
+      "sha256": "22d42224aa6b64b9750fc182fe51c706c2143804e670e992bd1d66b43fc675f9"
+    },
+    {
+      "path": "arch/soc/grus/vectors.S",
+      "git_blob": "8b5e7da6b0182860a56a1218873e2a1e4dcd789d",
+      "sha256": "cdb14306b9e192dae8b3d422bafe85ba6144757ebfcd9b87e7e6dc131fd47d28"
+    }
+  ],
+  "commands": [
+    [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+      "-O2",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Os",
+      "-Wno-error=unused-parameter",
+      "-I",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-upstream-trap",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-upstream-trap/trap_c.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-upstream-trap/trap_c.c.o"
+    ],
+    [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+      "-O2",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Os",
+      "-Wno-error=unused-parameter",
+      "-I",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-upstream-trap",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-upstream-trap/vectors.S",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-upstream-trap/vectors.S.o"
+    ]
+  ],
+  "compatibility_headers": "Empty stdio.h, stdlib.h and csi_config.h; none contributes declarations to enabled upstream code. stdint.h from toolchain.",
+  "elf_sha256": "496032f2f3084a2c6e421ded1d97a50c89548bebec5dc340e8057e5472c0adb4",
+  "sections": [
+    {
+      "name": ".trap_c",
+      "offset": 244528,
+      "bytes": 10,
+      "stock_envelope_bytes": 12,
+      "stock_identical": true,
+      "sha256": "39e7faf3fbb7e9dc1ebdebeb3ec63bc17c805c76e03e4e18b7f3af89f34da41e"
+    },
+    {
+      "name": ".vectors",
+      "offset": 244540,
+      "bytes": 80,
+      "stock_envelope_bytes": 80,
+      "stock_identical": true,
+      "sha256": "526f98d90072d83ab6b539705fd5b1a08a1d348745a34fea3e2fcb1a9034924d"
+    }
+  ],
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "source_admitted": false,
+  "limits": [
+    "Existing upstream fatal exception path only; not a substitute for missing application functionality.",
+    "Behavior, reference census and integration pending; no claim of exception recovery or hardware qualification."
+  ]
+}

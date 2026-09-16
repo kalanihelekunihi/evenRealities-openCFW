@@ -1,0 +1,24 @@
+{
+  "source_sha256": "97b4919ac156fca9a0f195161fe241f835aff680777f5e4b69d56b5436ffdc22",
+  "command": [
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-common",
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_timer_dispatch.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-timer-storage/storage.o"
+  ],
+  "elf_sha256": "5ade112c52d686ac7cfe1ad4be42a24780656cf376fcbc3bc4eeea28bc3b134b",
+  "bytes": 360,
+  "source_admitted": false,
+  "limits": [
+    "C NOBITS storage with compile-time entry width/offset assertions. Placement lies inside recovered reset BSS-clear interval.",
+    "Timer callback lifecycle and full firmware admission remain unqualified."
+  ]
+}

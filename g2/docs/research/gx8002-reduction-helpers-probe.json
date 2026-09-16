@@ -1,0 +1,162 @@
+{
+  "helpers": true,
+  "commit": "4aa696c8d6294897411cf78cae87f7f4680e9687",
+  "header_hashes": {
+    "newlib_double_compat.h": "a0ed340bf60fe69102c3b567d52c6b26e1d3667d51e9d261a4a12dc87d53900a",
+    "newlib_reduction_compat.h": "ce6f3935c1eada6c10f44191b9909551f8f134ec64be50192a2e2847cd5239bb"
+  },
+  "objects": [
+    {
+      "source": {
+        "path": "newlib/libm/math/s_fabs.c",
+        "sha256": "9123aaa7d0c3b538db9f37d2cde1156d56013d1394f6a798fa5a6c5363e31b3a"
+      },
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+        "-O2",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Os",
+        "-mno-high-registers",
+        "-fwrapv",
+        "-ffp-contract=off",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-reduction-helpers-probe/s_fabs.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-reduction-helpers-probe/s_fabs.c.o"
+      ],
+      "object_sha256": "850446765aafa881ddcfe2dc469c0b2b0003a05eb257d20e3cbac73d81949922",
+      "allocated": [
+        [
+          ".text.fabs",
+          4
+        ]
+      ],
+      "undefined_symbols": []
+    },
+    {
+      "source": {
+        "path": "newlib/libm/math/s_floor.c",
+        "sha256": "bfcaab777d6cde5ebb3402b56ae57f8f17155cb6ec7a81793dfe67290616ddda"
+      },
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+        "-O2",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Os",
+        "-mno-high-registers",
+        "-fwrapv",
+        "-ffp-contract=off",
+        "-Wno-error=sign-compare",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-reduction-helpers-probe/s_floor.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-reduction-helpers-probe/s_floor.c.o"
+      ],
+      "object_sha256": "bd75affd81187538d20902393cb3937fc983f1801a961174ae6f5e3d23c88ffe",
+      "allocated": [
+        [
+          ".text.floor",
+          268
+        ]
+      ],
+      "undefined_symbols": [
+        "__adddf3",
+        "__gtdf2"
+      ]
+    },
+    {
+      "source": {
+        "path": "newlib/libm/common/s_scalbn.c",
+        "sha256": "fd58a65d2700f1e55e48a752a133aa2e02605ed715be20d7a20f643cbc28f780"
+      },
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+        "-O2",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Os",
+        "-mno-high-registers",
+        "-fwrapv",
+        "-ffp-contract=off",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-reduction-helpers-probe/s_scalbn.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-reduction-helpers-probe/s_scalbn.c.o"
+      ],
+      "object_sha256": "88e415b5c2dd287801d74ee05a089d4832935ed2007cddf9a0b99503c3af1da3",
+      "allocated": [
+        [
+          ".text.scalbn",
+          208
+        ]
+      ],
+      "undefined_symbols": [
+        "__muldf3",
+        "__adddf3",
+        "copysign"
+      ]
+    },
+    {
+      "source": {
+        "path": "newlib/libm/common/s_copysign.c",
+        "sha256": "dd7e69e31c64d9dc0a7c69d7e9f20019b133291b38f15724c72284d6285bf8d2"
+      },
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+        "-O2",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Os",
+        "-mno-high-registers",
+        "-fwrapv",
+        "-ffp-contract=off",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-reduction-helpers-probe/s_copysign.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-reduction-helpers-probe/s_copysign.c.o"
+      ],
+      "object_sha256": "41999a98eb6366cfa04a8886dd2e0d57ceffc1ca2250ae07785a8d50c09628d5",
+      "allocated": [
+        [
+          ".text.copysign",
+          10
+        ]
+      ],
+      "undefined_symbols": []
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Whole upstream reducers compile only; dependency linking, numerical/ABI execution, placement and hardware pending. Word setters support partial initialization without reading uninitialized double storage."
+  ]
+}

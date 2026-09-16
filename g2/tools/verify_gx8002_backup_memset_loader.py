@@ -6,8 +6,8 @@ from verify_gx8002_memcpy_source import decode
 MASK=0xffffffff
 
 
-def execute(code,image,mode,seed):
-    assert mode!=0xaabbccdd
+def execute(code,image,mode,seed,special_read_model=None):
+    assert mode!=0xaabbccdd or special_read_model is not None
     regs={f'r{i}':(seed+i*0x10203)&MASK for i in range(32)};regs['r14']=0x2002fffc;initial=dict(regs)
     memory={0x20001724:0x2f3b0,0x20033ffc:mode};calls=[];saved=None;condition=False;pc=0x396a0
     for _ in range(100):
@@ -19,7 +19,9 @@ def execute(code,image,mode,seed):
             regs.update(saved);regs['r14']+=12
             assert all(regs[f'r{i}']==initial[f'r{i}'] for i in (*range(4,12),14,15,16,17))
             return regs['r0'],calls,memory
-        elif op in ('lrw','movi'):regs[p[0]]=int(p[1],0)
+        elif op in ('lrw','movi','movih'):regs[p[0]]=int(p[1],0)<<(16 if op=='movih' else 0)
+        elif op=='rotli':
+            value=regs[p[1]];shift=int(p[2],0);regs[p[0]]=((value<<shift)|(value>>(32-shift)))&MASK
         elif op=='mov':regs[p[0]]=regs[p[1]]
         elif op=='bseti':regs[p[0]]|=1<<int(p[1],0)
         elif op in ('addi','subi','addu','subu'):
@@ -36,11 +38,15 @@ def execute(code,image,mode,seed):
         elif op=='bsr':
             assert int(args,0)==0x39930
             offset,dest,length=regs['r0'],regs['r1'],regs['r2'];calls.append(['read',offset,dest,length])
-            data=image[SEG2_OFF+offset:SEG2_OFF+offset+length];assert len(data)==length and length%4==0
+            if special_read_model is not None:
+                data=special_read_model(offset,dest,length)
+            else:
+                data=image[SEG2_OFF+offset:SEG2_OFF+offset+length]
+            assert len(data)==length and length%4==0
             for i in range(0,length,4):memory[dest+i]=int.from_bytes(data[i:i+4],'little')
             for i in (0,1,2,3,12,13,15,*range(18,32)):regs[f'r{i}']=0xbad00000+i
         elif op=='jsr':
-            assert regs[args]==0x10003100;calls.append(['entry',regs[args]])
+            assert regs[args]==(0x10000100 if mode==0xaabbccdd else 0x10003100);calls.append(['entry',regs[args]])
             for i in (0,1,2,3,12,13,15,*range(18,32)):regs[f'r{i}']=0xbad10000+i
         else:raise AssertionError((hex(pc),op,args))
         pc=nxt

@@ -100,7 +100,7 @@ static int stub_area_get_h_fn(const void *area);
 static void stub_move_children_fn(unsigned int obj, int dx, int dy,
     unsigned int ignore);
 static void stub_log_warn_fn(int level, const char *file, int line,
-    const char *func);
+    const char *func, const char *format);
 
 #define OPEN_CFW_LVGL_RETAINED_OBJ_GET_WIDTH(obj) stub_width_fn(obj)
 #define OPEN_CFW_LVGL_RETAINED_OBJ_GET_HEIGHT(obj) stub_height_fn(obj)
@@ -140,8 +140,8 @@ static void stub_log_warn_fn(int level, const char *file, int line,
 #define OPEN_CFW_LVGL_RETAINED_AREA_GET_HEIGHT(area) stub_area_get_h_fn(area)
 #define OPEN_CFW_LVGL_RETAINED_OBJ_MOVE_CHILDREN_BY(obj, dx, dy, ignore) \
     stub_move_children_fn((obj), (dx), (dy), (ignore))
-#define OPEN_CFW_LVGL_RETAINED_LOG_WARN(file, line, func) \
-    stub_log_warn_fn(2, (file), (line), (func))
+#define OPEN_CFW_LVGL_RETAINED_LOG_WARN(file, line, func, format) \
+    stub_log_warn_fn(2, (file), (line), (func), (format))
 static const int *test_col_templ_fn(unsigned int obj);
 static const int *test_row_templ_fn(unsigned int obj);
 #define OPEN_CFW_LVGL_GRID_COL_TEMPL(cont) test_col_templ_fn(cont)
@@ -153,6 +153,17 @@ static const int *test_row_templ_fn(unsigned int obj);
 #include "../../components/apollo_main/core_overlay/lvgl_grid_engine.c"
 
 /* ---- stub state ---- */
+
+const char *open_cfw_test_grid_expected_warn_file =
+    OPEN_CFW_LVGL_GRID_WARN_FILE;
+const char *open_cfw_test_grid_expected_calc_cols_func =
+    OPEN_CFW_LVGL_GRID_CALC_COLS_FUNC;
+const char *open_cfw_test_grid_expected_calc_rows_func =
+    OPEN_CFW_LVGL_GRID_CALC_ROWS_FUNC;
+const char *open_cfw_test_grid_expected_calc_cols_format =
+    OPEN_CFW_LVGL_GRID_CALC_COLS_WARN_FORMAT;
+const char *open_cfw_test_grid_expected_calc_rows_format =
+    OPEN_CFW_LVGL_GRID_CALC_ROWS_WARN_FORMAT;
 
 unsigned int open_cfw_test_grid_width_calls;
 unsigned int open_cfw_test_grid_width_obj;
@@ -378,6 +389,9 @@ unsigned int open_cfw_test_grid_move_children_ignore;
 unsigned int open_cfw_test_grid_log_calls;
 int open_cfw_test_grid_log_level;
 int open_cfw_test_grid_log_line;
+const char *open_cfw_test_grid_log_file;
+const char *open_cfw_test_grid_log_func;
+const char *open_cfw_test_grid_log_format;
 
 static unsigned int stub_parent_fn(unsigned int obj)
 {
@@ -463,13 +477,14 @@ static void stub_move_children_fn(unsigned int obj, int dx, int dy,
 }
 
 static void stub_log_warn_fn(int level, const char *file, int line,
-    const char *func)
+    const char *func, const char *format)
 {
-    (void)file;
-    (void)func;
     open_cfw_test_grid_log_calls += 1U;
     open_cfw_test_grid_log_level = level;
     open_cfw_test_grid_log_line = line;
+    open_cfw_test_grid_log_file = file;
+    open_cfw_test_grid_log_func = func;
+    open_cfw_test_grid_log_format = format;
 }
 
 const int *open_cfw_test_grid_col_templ_cont;
@@ -545,6 +560,9 @@ void open_cfw_test_grid_reset(void)
     open_cfw_test_grid_log_calls = 0U;
     open_cfw_test_grid_log_level = 0;
     open_cfw_test_grid_log_line = 0;
+    open_cfw_test_grid_log_file = 0;
+    open_cfw_test_grid_log_func = 0;
+    open_cfw_test_grid_log_format = 0;
     open_cfw_test_grid_child_list_len = 0U;
     open_cfw_test_grid_width_list_len = 0U;
     open_cfw_test_grid_height_list_len = 0U;

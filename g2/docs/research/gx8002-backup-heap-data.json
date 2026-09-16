@@ -1,0 +1,62 @@
+{
+  "initializer_evidence": {
+    "source_sha256": "3f8e90d121c6b6c5ff97f11d54410e34cfdb14c339aca6ab60d4c03f4e677423",
+    "stock_sha256": "a587747317767b5486b38ae33e376b24c7592920f61d3ca83357b8526ff46d47",
+    "bytes": 108,
+    "envelope_bytes": 116,
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Recovered alignment checks and first/sentinel block setup. State and diagnostic strings external; decoded behavior and integration pending. No upstream version identity claimed."
+    ]
+  },
+  "source_sha256": "c53bf56b15166081aa90e89951de94091689ec4adab5d09424709feb25dc4e4e",
+  "header_sha256": "3782cc9bdfb8277015195f5444900d7bb52a88f6d01e5e37aeff6b91cb6b3148",
+  "messages": [
+    {
+      "name": ".heap_message_initialize",
+      "address": 268513708,
+      "bytes": 44
+    },
+    {
+      "name": ".heap_message_invalid",
+      "address": 268513752,
+      "bytes": 58
+    },
+    {
+      "name": ".heap_message_free_range",
+      "address": 268513860,
+      "bytes": 16
+    },
+    {
+      "name": ".heap_message_free_invalid",
+      "address": 268513876,
+      "bytes": 27
+    },
+    {
+      "name": ".heap_message_free_details",
+      "address": 268513904,
+      "bytes": 48
+    },
+    {
+      "name": ".heap_message_malloc_align",
+      "address": 268513812,
+      "bytes": 33
+    },
+    {
+      "name": ".heap_message_malloc_large",
+      "address": 268513848,
+      "bytes": 11
+    },
+    {
+      "name": ".heap_message_realloc_large",
+      "address": 268513952,
+      "bytes": 24
+    }
+  ],
+  "state_bytes": 24,
+  "source_admitted": false,
+  "limits": [
+    "Six recovered state words including current and maximum used-byte statistics. Other allocator globals and heap arena ownership not claimed."
+  ]
+}

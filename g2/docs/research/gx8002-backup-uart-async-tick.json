@@ -1,0 +1,56 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream_files": [
+    {
+      "path": "lvp/common/uart_message_v2.c",
+      "blob": "b5ae5ebac76df3bb7e60b0209ef71234114a15db",
+      "sha256": "2b8d9576b975288e4cf56fb61118c198b8109f9c8777fbc0753567c10e3423be"
+    },
+    {
+      "path": "lvp/common/uart_message_v2.h",
+      "blob": "74c1de26a9a8072bb7bba448ccf88b1e4729d5f7",
+      "sha256": "3caad19b6dd7a3a5679fbb44de3289a0a1264ee4a0d667b09038f8a92193dfb2"
+    },
+    {
+      "path": "lvp/common/lvp_queue.h",
+      "blob": "497ff2ad76621ccbb29dfa84a20f7daf517e957b",
+      "sha256": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e"
+    },
+    {
+      "path": "base/src/crc32.c",
+      "blob": "082da9d8bc3b7e7d4075dc0e36f8840a2b3a7745",
+      "sha256": "c1c1b49288b89f9db59e6db8567657a97c7f671699b882bd476c52dcdc221005"
+    }
+  ],
+  "derived_source_sha256": "80d0247aa4eb7fd4493a0b8d5add29d1cb06253af2ef8852fb543ab2cb31a6fd",
+  "command": [
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-I",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-uart-async-tick",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-uart-async-tick/tick.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-uart-async-tick/tick.o"
+  ],
+  "elf_sha256": "1e244f090689708b118f9fdc41bc336f5b650e495921e798933deb7fd5e8ac5f",
+  "sections": [
+    {
+      "name": ".async_tick",
+      "bytes": 132
+    },
+    {
+      "name": ".async_message",
+      "bytes": 14
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Isolated SDK CRC-check and dispatch bodies, compiler-checked packet/registration geometry, source diagnostic matches stock.",
+    "Queue, CRC, printf and storage externally bound. CRC declaration authenticated from pinned SDK implementation; dispatch execution and integration pending."
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "source_sha256": "6f0b76a041797c059e7733cd0038531f1eb3a6c98bdc489553fe4c4fae681d5d",
+  "command": [
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Os",
+    "-ffp-contract=off",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_uart_configure.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-uart-configure/configure.o"
+  ],
+  "elf_sha256": "efe1eb24c959cc1f2f50ea1d8b825ee941f405de756a505a564a44d326a94084",
+  "code_bytes": 360,
+  "stock_envelope_bytes": 376,
+  "stock_identical": false,
+  "dependencies": [
+    {
+      "symbol": "__adddf3",
+      "offset": 304932,
+      "current_kind": "compiled_c",
+      "current_symbol": "__adddf3"
+    },
+    {
+      "symbol": "__divdf3",
+      "offset": 305552,
+      "current_kind": "compiled_c",
+      "current_symbol": "__divdf3"
+    },
+    {
+      "symbol": "__fixunsdfsi",
+      "offset": 302500,
+      "current_kind": "compiled_c",
+      "current_symbol": "__fixunsdfsi"
+    },
+    {
+      "symbol": "__floatunsidf",
+      "offset": 306444,
+      "current_kind": "compiled_c",
+      "current_symbol": "__floatunsidf"
+    },
+    {
+      "symbol": "__muldf3",
+      "offset": 305040,
+      "current_kind": "compiled_c",
+      "current_symbol": "__muldf3"
+    },
+    {
+      "symbol": "open_cfw_gx8002_request_irq",
+      "offset": 250244,
+      "current_kind": "compiled_c",
+      "current_symbol": "open_cfw_gx8002_backup_request_irq"
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_fifo_depth",
+      "offset": 248956,
+      "current_kind": "compiled_c",
+      "current_symbol": "open_cfw_gx8002_uart_fifo_depth"
+    },
+    {
+      "symbol": "open_cfw_gx8002_uart_interrupt",
+      "offset": 248720,
+      "current_kind": "compiled_c",
+      "current_symbol": "open_cfw_gx8002_uart_interrupt"
+    }
+  ],
+  "ownership_report_sha256": "74432d2649b2abe1fe094324131bc0005d0ffea3ab0d639e2e0ca02d04130785",
+  "source_admitted": false,
+  "limits": [
+    "Complete recovered shared C fits backup envelope. Absolute bindings do not constitute authenticated/executed dependency closure.",
+    "Ordered MMIO traces, FIFO/IRQ behavior, exceptional baud inputs and integration pending."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "build": {
+    "adapted_source_sha256": "56f994aa985ebfe3120995ed7708ce93f22c9f73c64a77fe102cdc8d98deb36a",
+    "header_sha256": "9c07eab730c9fc2587f0898871092ae86f6f2ef14f5cdf3efc698dd75c6ea6d9",
+    "elf_sha256": "57e9252901a1f96e95e8ecedd6741173b55fa4d8c3e0186fe2fb50dd06793123",
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "upstream_path": "utility/libdsp/Source/BasicMathFunctions/csky_shift_q15.c",
+    "upstream_blob": "96d836b060039001d522d25907a72f47ed8392a9",
+    "source_sha256": "3bf8526ee5b2ae85395490501100d67d4e7b4d9c5b5fb8c0b10a38df9bda7030",
+    "license": "Apache-2.0",
+    "source_modifications": [
+      "Replace scalar signed left shift with bounded multiplication and Q15 saturation.",
+      "Mask scalar right-shift count to five bits, matching decoded vendor PASR, then bound before target signed shift."
+    ],
+    "extra_flags": [
+      "-fno-tree-loop-optimize",
+      "-fno-guess-branch-probability"
+    ],
+    "configuration": [
+      "CSKY_MATH_NO_SIMD",
+      "csky_shift_q15=beam_shift_q15"
+    ],
+    "header_adapter": "Integer types and explicit scalar saturating-shift helpers; target signed right shift retained.",
+    "bytes": 112,
+    "envelope_bytes": 116,
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Standalone upstream C build; decoded shift equivalence and integration remain pending.",
+      "Scalar accesses differ from stock packed accesses; partial overlap/MMIO and out-of-range stock shift counts are not qualified."
+    ]
+  },
+  "vendor_commit": "3287d345c7f5d60d5c8774d90752f5f710744f85",
+  "cases": 21120,
+  "source_admitted": false,
+  "limits": [
+    "Stock packed DSP and compiled source final memory/ordered byte writes match for -128..31, word-aligned disjoint and exact in-place buffers.",
+    "Access grouping differs; partial overlap, atomicity, hardware and full-register shift ABI are not qualified. Upstream C shift parameter is int8_t.",
+    "Caller range/reference closure and integration remain pending."
+  ]
+}

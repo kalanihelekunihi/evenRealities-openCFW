@@ -1,0 +1,42 @@
+{
+  "build": {
+    "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+    "source_sha256": "ee754e74c2b15dc0defe6a430700a809790e75c2c42866afc0d5ae0b1da537d2",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_flash_block_range",
+        "section": ".text.flash_block_range",
+        "compiled_bytes": 124,
+        "compiled_sha256": "28f89d6a78b6bdf495a3772b06b0225200447b9aca679b21a1c59417b1296bd4",
+        "package_offset": 261904,
+        "stock_envelope_bytes": 124,
+        "stock_sha256": "38b9e074d06e54b05e8ed4193d7c6eef6029eba078eccd5e942265b199b9a8d4",
+        "byte_exact": false,
+        "fits": true
+      }
+    ],
+    "source_admitted": false,
+    "analysis_only_overlapping_sections_allowed": false,
+    "limits": [
+      "Region snapshots, device reloads and lock-bit extraction require decoded qualification.",
+      "No physical flash qualification."
+    ]
+  },
+  "cases": 1344,
+  "source_admitted": false,
+  "limits": [
+    "Ordered output/state aliases and observed return register checked for finite capacities. Caller interpretation of return register, large iteration ranges and hardware remain unqualified."
+  ]
+}

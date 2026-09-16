@@ -1,0 +1,105 @@
+{
+  "execution_report_sha256": "ef4b29a6f5bfe822cb9331ee2b637473036f2b0a80e912378aa00a9bbe30226e",
+  "cases": [
+    {
+      "input": "0x0",
+      "reference_binary64": "0x0",
+      "sum_binary64": "0x0",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0x8000000000000000",
+      "reference_binary64": "0x0",
+      "sum_binary64": "0x0",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0x3fe0000000000000",
+      "reference_binary64": "0x3fe0000000000000",
+      "sum_binary64": "0x3fe0000000000000",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0xbfe0000000000000",
+      "reference_binary64": "0xbfe0000000000000",
+      "sum_binary64": "0xbfe0000000000000",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0x3ff0000000000000",
+      "reference_binary64": "0xbfe243f6a8885a31",
+      "sum_binary64": "0xbfe243f6a8885a31",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0xbff0000000000000",
+      "reference_binary64": "0x3fe243f6a8885a31",
+      "sum_binary64": "0x3fe243f6a8885a31",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0x4000000000000000",
+      "reference_binary64": "0x3fdb7812aeef4b9f",
+      "sum_binary64": "0x3fdb7812aeef4b9f",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0xc000000000000000",
+      "reference_binary64": "0xbfdb7812aeef4b9f",
+      "sum_binary64": "0xbfdb7812aeef4b9f",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0x4059000000000000",
+      "reference_binary64": "0xbfe0fdaa22168c23",
+      "sum_binary64": "0xbfe0fdaa22168c23",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0xc059000000000000",
+      "reference_binary64": "0x3fe0fdaa22168c23",
+      "sum_binary64": "0x3fe0fdaa22168c23",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0x4202a05f20000000",
+      "reference_binary64": "0xbfe04b9ef621e213",
+      "sum_binary64": "0xbfe04b9ef621e213",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0xc202a05f20000000",
+      "reference_binary64": "0x3fe04b9ef621e213",
+      "sum_binary64": "0x3fe04b9ef621e213",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0x54b249ad2594c37d",
+      "reference_binary64": "0xbfd8fdb85583ea1b",
+      "sum_binary64": "0xbfd8fdb85583ea1b",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0xd4b249ad2594c37d",
+      "reference_binary64": "0x3fd8fdb85583ea1b",
+      "sum_binary64": "0x3fd8fdb85583ea1b",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0x7e37e43c8800759c",
+      "reference_binary64": "0xbfe39e51e3b9d3d4",
+      "sum_binary64": "0xbfe39e51e3b9d3d4",
+      "same_rounded_value": true
+    },
+    {
+      "input": "0xfe37e43c8800759c",
+      "reference_binary64": "0x3fe39e51e3b9d3d4",
+      "sum_binary64": "0x3fe39e51e3b9d3d4",
+      "same_rounded_value": true
+    }
+  ],
+  "rounded_value_differences": 0,
+  "limits": [
+    "Diagnostic only: rounding the two-part remainder to one binary64 can discard useful tail information; this is not the full trig error budget."
+  ]
+}

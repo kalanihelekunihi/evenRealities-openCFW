@@ -21353,3 +21353,4229 @@ Ran the bounded stock reference census without suppressing ambiguous findings. I
 The preceding turn made verified whole-source placement progress. Added authenticated placed-source/stock power execution checks for finite bases with signed-zero and one exponents, plus nonnegative finite bases with exponent one-half. All 22,925 paired cases agree with exact identity/square-root midpoint oracles, including actual compiled calls into the sqrt dependency. Report `docs/research/gx8002-powf-identities.json` is tied to placed ELF `778a0ff3c8d3f13a0fdf3be54b6ea89d6ba0fca4a86fe775db6d7531de9aaa84`.
 
 Initial execution stopped on unsupported variable arithmetic shift (asr), not a numerical mismatch. Added semantics matching the pinned C-SKY emulator reference: mask shift count to six bits and saturate counts above 31 to 31. Rerunning the complete sample passed. General power approximation, special values/domain behavior, FP modes/status, reference-context classification, integration and hardware remain pending. Firmware ownership is unchanged and the full goal remains active.
+
+### Power square and reciprocal execution (2026-09-15)
+
+The previous turn made verified exact-identity progress. Extended the power identity verifier to exponent two for both signs, including squared underflow/overflow, and exponent minus one for nonzero finite bases. Added exact integer-rational binary32 division with explicit nearest-even rounding. An independent 5,000-case Fraction-based check confirmed each finite division result is nearest among adjacent floats (ties even), and checked the overflow threshold. The complete stock/source identity suite now passes 36,023 paired cases, tied to the existing placed power ELF.
+
+The reciprocal run initially stopped at unsupported frecips. Added unary instruction callback dispatch; the test explicitly models it as nearest-even 1/x rather than silently using host floating point. This verifies decoded paths under that policy, not actual hardware reciprocal accuracy or FP exceptions. General approximation paths, other special inputs, reference classification, integration and hardware qualification remain pending. Firmware ownership is unchanged and the full source-only goal remains active.
+
+### First complete power approximation-path execution (2026-09-15)
+
+The previous turn made verified square/reciprocal progress. Added finite exact addition/subtraction to the rational arithmetic model, explicit signed-integer-to-float conversion, and separate-rounding multiply/accumulate variants. Extended decoded execution with rotli, fmovs, fsitos and accumulator callback variants. Several initial probe runs stopped on unsupported instructions; after these explicit additions, the compiled general approximation path returns exactly 3.375 for 1.5 cubed. Durable authenticated probe and executed-opcode evidence are in `verify_gx8002_powf_general_probe.py` and `gx8002-powf-general-probe.json`.
+
+This is one general-path sample, not broad correctness. The callback models finite nearest-even operations and separate multiply/add rounding, following the inspected pinned emulator's accumulator operation order; actual hardware fusion, FP flags and exceptions remain unqualified. Stock comparison, broad approximation accuracy, remaining instruction paths and reference closure are next. No firmware ownership changed; full source-only goal remains active.
+
+### General power stock comparison and accuracy sample (2026-09-15)
+
+The preceding turn made verified general-path execution progress. Added an authenticated stock/source sweep of positive bases 0.25..4 and exponents -4..4: 2,013 grid pairs and 1,000 seeded random pairs, totaling 3,013. Every source result matches stock exactly under explicit finite nearest-even arithmetic and separately rounded multiply/accumulate operations.
+
+Independently compared the results with 90-digit Decimal powers, choosing the closest adjacent binary32 value by Decimal distances and ties-to-even. The maximum observed error is one binary32 ULP, with no errors above one ULP. This is sampled approximation evidence, not a proof of correct rounding or hardware FP behavior. Reproducible verifier and report: `verify_gx8002_powf_general.py`, `gx8002-powf-general.json`, tied to placed ELF `778a0ff3c8d3f13a0fdf3be54b6ea89d6ba0fca4a86fe775db6d7531de9aaa84`. Wider exponent/base ranges, special values, reference closure and integration remain pending. No firmware ownership changed; full source-only goal remains active.
+
+### Negative-base power paths and accuracy findings (2026-09-15)
+
+The preceding turn made verified positive-base comparison progress. Extended the sweep with 2,013 negative-base/integer-exponent cases (bases -0.25..-4, exponents -16..16). The first run stopped on fnegs; added explicit unary callback support and a finite-only sign-negation arithmetic model. All 5,026 combined cases now execute and match stock exactly.
+
+Three cases exceed the earlier one-ULP sample bound, with two-ULP errors in both source and stock: input bits bfe80000/c1600000 produce 397ded21 versus reference 397ded23; bfe80000/41700000 produce c5e9e508 versus c5e9e506; c02c0000/41800000 produce 4ae2024c versus 4ae2024a. Replaced the integer-exponent reference with exact Fraction powers and nearest-neighbor distances; rerunning confirms all three findings independently of Decimal approximation. Noninteger reference cases still use 90-digit Decimal.
+
+These are accuracy limitations under the explicit separate-rounding FP model, not yet proof of hardware defects. They remain recorded in the general report's accuracy_errors list; no tolerances were relaxed and no integration was performed. Broader range, fusion/rounding policy assessment, upstream improvement selection and reference closure remain pending. Full goal active; firmware ownership unchanged.
+
+### Power accumulator-policy sensitivity (2026-09-15)
+
+The previous turn made verified negative-base accuracy findings. Added a separate fused accumulator callback computing the exact dyadic product plus accumulator and rounding once; the original separately rounded policy remains available. A cancellation control confirms (1+2^-23)*(1-2^-23)-1 yields exact -2^-46 with fusion and zero with separate rounding.
+
+Repeated all 5,026 stock/source general cases under the fused policy. Source and stock still match in every case; maximum reference error remains two ULPs, and the three original errors persist. Fusion therefore does not explain those findings. The alternative run records its own report `gx8002-powf-general-fused.json`; it does not replace the separate-rounding evidence or claim hardware semantics. Wider input coverage, upstream accuracy improvement assessment and reference closure remain pending. Full source-only goal remains active; no firmware ownership changed.
+
+### Power reference-context classification started (2026-09-15)
+
+The previous turn made verified accumulator-policy comparison progress. Added a reproducible context analyzer preserving every raw power reference finding. Seven of twelve stored-word matches begin one byte inside a decoded four-byte instruction and include a byte from the next instruction: offsets 0x1e87, 0x5401, 0x5467, 0x3bcdd, 0x40267, 0x4445b and 0x4782b. The analyzer asserts the exact instruction and width at each boundary; these are not pointer literals at those execution boundaries.
+
+Five data-region matches (0x8b30, 0x8bac, 0x1a6ab, 0x1a6d7, 0x1a703) and the apparent branch at 0x489c8 remain explicitly unresolved. Evidence is retained in `gx8002-powf-reference-context.json`; the raw scan is not waived, and alternate/computed entry paths are not claimed closed. No firmware integration or ownership change. Full source-only goal remains active.
+
+### Power literal and character-table reference findings (2026-09-15)
+
+The previous turn made verified instruction-overlap classification progress. Confirmed apparent branch 0x489c8 is the low halfword of numeric literal 0x3e2404e7, consumed by lrw at 0x487fc; the context analyzer now asserts both authenticated bytes and consumer. Reconstructed all 256 character flags at 0x8ad8..0x8bd8 from explicit ASCII/extended character ranges (control, whitespace, punctuation, numeric, uppercase, lowercase and hex-letter flags). Every generated byte matches stock. Stored-address hits 0x8b30 and 0x8bac are four consecutive flags within that table, not table pointer entries.
+
+The power reference report now preserves seven instruction-overlap classifications, two fully regenerated table classifications, and the consumed numeric-literal branch classification. Three data candidates at 0x1a6ab, 0x1a6d7 and 0x1a703 remain unresolved. This does not close computed references or qualify integration. No ownership changes; full source-only goal remains active.
+
+### Remaining power matches mapped to NPU command payload (2026-09-15)
+
+The previous turn made verified literal/table classification progress. Revalidated the section-map analyzer and command payload hash. All three remaining apparent stored addresses at 0x1a6ab, 0x1a6d7 and 0x1a703 fall inside the 9,164-byte KWS command region beginning at package offset SEG2_OFF+0xf804. Each apparent pointer begins at offset three modulo four and crosses two aligned words; the actual next aligned word is 0x00100102. Added command-relative offsets, aligned words and authenticated command-region identity to the power context report.
+
+This establishes payload location, not command semantics. The three entries remain unresolved rather than being dismissed merely because they are unaligned or outside CPU text. Their interpretation requires NPU command-format recovery, which is also part of eliminating the opaque model dependency. Full goal active, no integration or ownership change.
+
+### NPU record identity for remaining power-reference matches (2026-09-15)
+
+The preceding turn made verified command-region mapping progress. Connected the power context analyzer to the existing authenticated gxDNN-backed command-chain decoder. The three matches occur at payload offset 19 in sequential records at command offsets 6404 (tensor_tensor/add), 6448 (active), and 6492 (format). The first crosses the tensor-operation control word and packed shape; decoded extents are [1,1,2], while operand addresses are separate fields. It is now classified as command metadata rather than an operand pointer.
+
+Activation and format record identities and offsets are recorded, but their field semantics remain explicitly unresolved. Two stored-word candidates remain open. No binary command bytes are counted as reconstructed source, and model reconstruction remains part of the full active goal. Firmware ownership unchanged.
+
+### Power bounded reference findings classified (2026-09-15)
+
+The preceding turn made verified NPU record identification progress. Inspected the authenticated pinned host-reference cmd_parse.o activation/format parsers with macOS llvm-objdump. Both extract the shape from payload offset 20 using shifts 20 and 8, mask 0xfff and a byte load; source/destination addresses are separate fields. Both remaining apparent pointers cross the final control byte and shape bytes, with extents [1,1,2]. The context analyzer authenticates the parser object against the inventory and records parser instruction evidence and its digest.
+
+All raw findings in this bounded power census are now classified: seven instruction overlaps, two character-table sequences, three command metadata sequences and one numeric-literal apparent branch. No unresolved raw findings remain, but computed targets/alternate mappings are not proved closed. Extended the structural command decoder with activation/format extents, strides and selector fields; the complete 212-command walk remains valid. These are decoded geometry fields, not full model semantics or regenerated model bytes. Power special-value/wider numerical qualification and integration remain pending; full goal active.
+
+### Wider power magnitudes and output underflow (2026-09-15)
+
+The previous turn made verified bounded reference classification progress. Extended general execution to sampled base exponents -120..120, subnormal input edges and every exact power 2^n for n=-150..127. All 5,648 combined source/stock cases execute with zero differences; maximum reference error remains the previously recorded two ULPs. Integer-exponent cases use exact Fraction references, including nearest-even zero at 2^-150.
+
+The output-boundary run initially stopped on fcmphss. Added explicit callback-driven finite comparisons fcmphss/fcmplts using exact dyadic integer ordering, consistent with the inspected pinned emulator's greater-or-equal/less-than dispatch. No host floating comparison or NaN policy was silently introduced. Report `gx8002-powf-general-wide.json` records wide=True and preserves the original general report. Nonfinite/domain paths, full range/hardware policies and integration remain pending. Full goal active, ownership unchanged.
+
+### Power NaN dispatch execution (2026-09-15)
+
+The preceding turn made verified wider finite-range progress. Inspected stock canonical NaN helper at 0x49bd8: it constructs 0x7fc00000 using integer/immediate transfer instructions. Added an authenticated 5,200-case stock/source NaN dispatch verifier covering signed signaling/quiet payload samples in either operand, zero exponents, +/-1 bases and finite/infinite peers. All cases agree without a floating arithmetic callback. Both stock and pinned source return one for either +1 or -1 with NaN exponent, and canonical 0x7fc00000 for other nonzero-exponent NaN cases; this observed behavior is preserved rather than silently replaced with a different library convention.
+
+Report `gx8002-powf-nan.json` is tied to the placed power ELF. This does not model architectural side effects of moving signaling NaNs or status flags. Infinity, zero/domain exceptional operation paths and firmware integration remain pending. Full source-only goal remains active; no ownership change.
+
+### Power infinite-exponent and domain paths (2026-09-15)
+
+The previous turn made verified NaN dispatch progress. Added 4,036 stock/source checks for signed infinite exponents with sampled signed finite/infinite bases; all match exact limiting-value expectations. The only arithmetic callback permits sign-negating negative infinity. Added 6,042 negative-finite-base/fractional-exponent checks: both implementations subtract equal operands, divide zero by zero, and return the symbolic NaN unchanged. The -1 base path may first take reciprocal of positive one for negative exponents; that exact operation is explicitly allowed after the initial strict callback exposed it.
+
+Evidence reports `gx8002-powf-infinite-exponent.json` and `gx8002-powf-domain.json` authenticate the placed source and stock images. Domain operation shapes are checked separately for each implementation; exact operand traces are not claimed identical. Invalid flags, traps, hardware NaN policy, zero/infinite-base finite-exponent paths and integration remain pending. Full goal active; no ownership change.
+
+### Power zero/infinite bases (2026-09-15)
+
+The previous turn made verified infinite-exponent/domain-path progress. Added 8,088 stock/source tests for signed zero and signed infinity bases with finite exponents, covering parity transitions, fractional exponents, extremes and seeded values. All results match explicit expected magnitude/sign rules. The callback permits only the encountered special-value reciprocal, square, negation and positive-infinity multiply-accumulate (from the actual sqrt dependency for exponent one-half). The first run exposed this dependency callback arity; it was explicitly modeled and the full run passed.
+
+Report `gx8002-powf-zero-infinite-base.json` authenticates the existing placed ELF. Numerical special-result behavior is covered for these samples; FP status/traps and physical hardware remain unqualified. Experimental power integration is the next available step, retaining the recorded two-ULP approximation findings and unclassified stock tail. Full goal remains active; ownership unchanged this turn.
+
+### Complete upstream power firmware integration (2026-09-15)
+
+The preceding turn made verified zero/infinite-base progress. Added include_power to experimental composition and loader verification, requiring the preceding source dependencies. Composition freshly rebuilds the complete placed upstream power closure, verifies all four dependency sections are byte-identical to existing source patches, authenticates six execution reports and the bounded reference classification, and inserts the full 1,652-byte power function. Its 56-byte stock tail remains retained and is checked unchanged. Known approximation errors remain in embedded validation evidence; no accuracy waiver or hardware qualification is implied.
+
+MacOS-built `build/gx8002-fft-q15-power-integration-experiment/firmware_codec.unadmitted.bin` is 326,092 bytes, SHA-256 `466e623034812f58f31e3576ee74fc1faa0bbd4004c70147079562d954d74642`. Production container/FWPK/UART/image-A checks and all 12 decoded stock backup-loader cases pass. Ownership: 54,202 compiled C, 2,986 assembly, 15,537 source-generated data, 88 metadata, 3,014 unreachable fill, 250,265 retained stock bytes. The image remains an unadmitted hybrid; full application/hardware qualification, other functions/images and model reconstruction remain incomplete. Full source-only goal stays active.
+
+### Upstream float log/exp source builds (2026-09-15)
+
+The previous turn made verified power firmware integration progress. Inspected neighboring stock entries 0x490a8 and 0x49300: logarithm-style normalization at the first and exponential thresholds/range reduction at the second. Retrieved unchanged ef_log.c and ef_exp.c from the existing pinned Newlib commit. Restricted network lookup failed; the authorized escalation downloaded both files and extended the receipt with their SHA-256 identities.
+
+Added a reproducible macOS object builder. Initial exponential compilation exposed missing LOG_MAX/LOG_MIN compatibility definitions; supplied the pinned header's IEEE infinity/gradual-underflow constants in the probe-local header. Both complete source files now compile with warnings as errors. Report `gx8002-log-exp-probe.json` records source/header/object hashes and commands. Linking/placement, stock provenance comparison and numerical qualification remain pending. Firmware ownership unchanged; full goal active.
+
+### Complete log/exp source placement (2026-09-15)
+
+The previous turn made verified pinned source compilation progress. Added a macOS placement builder authenticating and compiling complete upstream functions. Log occupies 568 of the 600-byte stock region at 0x490a8. Initial O2 exp text was 628 bytes, too large for its 524-byte region; Os produces 436 bytes of complete code plus 24 bytes of source constants, all fitting at 0x49300. Constants remain a separately tracked allocated section, not a stock-data dependency.
+
+Linked ELF SHA-256 `30921775fcd8b831eeb97dc949def46f8520399a7ed07affe753eb4590629ce9`; no unresolved symbols or relocations. Assertions check allocated section names, original function entries and size envelopes. Numerical/ABI/reference qualification and firmware integration remain pending. Firmware ownership unchanged; full source-only goal remains active.
+
+### Logarithm positive-finite execution (2026-09-15)
+
+The preceding turn made verified log/exp placement progress. Added an authenticated actual-instruction logarithm verifier covering 4,021 positive inputs across all finite exponent classes, subnormal mantissa edges, exact one and seeded random values. Source and stock agree in every case; comparison with a 90-digit Decimal logarithm and nearest binary32 neighbors shows maximum error one ULP and no larger findings.
+
+Initial execution exposed unsupported fcmpznes. Added explicit finite-only nonzero comparison callback dispatch; no NaN comparison policy is inferred. The full rerun passed. Report `gx8002-logf-finite.json` authenticates placed ELF `30921775fcd8b831eeb97dc949def46f8520399a7ed07affe753eb4590629ce9`. Special-value/status behavior, reference closure, exp execution and integration remain pending. Full goal active; firmware ownership unchanged.
+
+### Logarithm special paths and reference census (2026-09-15)
+
+The previous turn made verified finite-logarithm progress. Added 5,931 paired symbolic special-path cases for signed zero, negative finite inputs and signed nonfinite values. Source and stock issue identical operations and propagate the symbolic result: signed zero uses -2^25/0; negative nonzero values (including negative NaNs) use (x-x)/0; positive nonfinite values use x+x. Three intermediate/result combinations exercise propagation without inventing hardware NaN or exception policy. Report `gx8002-logf-special-paths.json` authenticates the placed ELF and stock.
+
+Bounded reference census finds one direct entry call, one apparent external pool reference and one stored-word candidate. The latter two remain unresolved and recorded in `gx8002-double-wrapper-0x490a8-references.json`. No integration or ownership change; full source-only goal remains active.
+
+### Logarithm bounded reference classification (2026-09-15)
+
+The preceding turn made verified logarithm special-path progress. Added an authenticated context analyzer explaining both non-entry findings: apparent pool load at 0x48eb2 is the upper halfword of numeric power constant 0x005db3d6 at 0x48eb0, consumed by lrw at 0x48bfc; stored-word match 0x4cda7 crosses elements of the complete 480-byte bit-reversal swap table regenerated from 8-bit index reversal and eight-byte element offsets. Every table byte matches stock.
+
+Only the direct wrapper call at 0x489ee remains as an actual observed log entry reference. Report `gx8002-logf-reference-context.json` preserves the raw census and both classifications. This does not establish computed-target closure or reuse stock table bytes in firmware. Log integration and exp execution remain pending; full source-only goal active, ownership unchanged.
+
+### Exponential finite execution (2026-09-15)
+
+The preceding turn made verified log reference classification progress. Added actual compiled exp execution against authenticated stock for 3,561 inputs in -80..80 (grid plus seeded random). Source constants are mapped from allocated source ELF sections; stock constants are mapped from the authenticated backup payload. Source and stock agree for every case, with maximum one-ULP error against a 90-digit Decimal exponential reference and no larger findings.
+
+Added indexed raw float load fldrs and callback-driven fstosi.rz for the executed paths. The conversion model uses exact finite dyadic truncation and rejects out-of-range integers rather than inventing an exception policy. Report `gx8002-expf-finite.json` authenticates the placed log/exp ELF. Underflow/overflow thresholds, special values, reference closure, hardware and integration remain pending. Full goal active; firmware ownership unchanged.
+
+### Exponential threshold neighborhoods (2026-09-15)
+
+The preceding turn made verified finite exponential progress. Extended the sample by 129 adjacent binary32 inputs around each of the overflow, zero-underflow and normal/subnormal thresholds. All 3,948 combined stock/source executions agree, with maximum one-ULP error versus the 90-digit Decimal reference. The reference now handles the exact binary32 overflow midpoint explicitly instead of relying on host packing overflow behavior.
+
+Added independent result-class assertions so a one-ULP tolerance cannot hide a class transition: all 3,690 normal, 129 subnormal, 65 zero and 64 infinite outputs have the expected class. No class mismatches or errors above one ULP were observed. Special-value inputs, status/hardware qualification, reference closure and integration remain pending. Full source-only goal active; ownership unchanged.
+
+### Exponential nonfinite paths and bounded references (2026-09-15)
+
+The previous turn made verified exponential threshold progress. Added 630 paired nonfinite cases: signed NaN payloads execute x+x and return the symbolic result; positive infinity is returned unchanged and negative infinity returns positive zero. All stock/source path checks pass without claiming hardware NaN/status/trap behavior.
+
+The bounded reference scan finds the wrapper entry call and an apparent interior branch at 0x49092. Authenticated consumer 0x48fc4 loads the complete numeric literal 0x0da24260 at 0x49090; the apparent branch is its upper halfword. No pool or stored-address candidates remain. Reproducible special-path and reference-context reports are now present. Log/exp experimental integration is next; full source-only goal remains active, ownership unchanged.
+
+### Complete float log/exp firmware integration (2026-09-15)
+
+The previous turn made verified exponential special-path/reference progress. Added include_logexp to experimental composition and loader checks. Fresh complete source build, four authenticated execution reports, and both bounded reference classifiers gate the insertion of 568-byte log, 436-byte exp and 24-byte source constants. Stock tails (32 bytes after log and 64 bytes after exp/constants) remain explicitly retained and checked unchanged.
+
+MacOS-built `build/gx8002-fft-q15-logexp-integration-experiment/firmware_codec.unadmitted.bin`: 326,092 bytes, SHA-256 `9aa09b89e3360ae928193365df6513b6b8c3ab01a2117707524b3a39694848af`. Production container/FWPK/UART/image-A checks and all 12 decoded backup-loader cases pass. Ownership: 55,206 compiled C, 2,986 assembly, 15,561 source-generated data, 88 metadata, 3,014 unreachable fill, 249,237 retained stock bytes. This is still an unadmitted hybrid, not full application/hardware qualification or a source-only firmware. Full goal remains active, including remaining code, model/data and other firmware images.
+
+### Source math ABI wrappers (2026-09-15)
+
+The previous turn made verified log/exp firmware integration progress. Recovered the three eight-byte public backup math wrappers at 0x489e4/0x489ec/0x489f4 as straightforward C forwarding functions for power/log/exp. Fresh macOS compilation with sibling-call optimization disabled reproduces all 24 stock instruction bytes exactly, while symbolic linker targets bind to the reconstructed implementations. The builder asserts entries, allocated sections, unresolved-symbol/relocation absence and complete byte identity.
+
+Bounded external-reference checks find four power, eight log and six exp entry callers with no pool/stored-word findings. ELF SHA-256 `c472de34f4e7da212132a0f041f3961d459f712b3e2f7e4b158cbab5d24c7ec2`. These wrappers have no observed errno handling; no additional behavior was invented. Firmware ownership integration is pending; full source-only goal remains active.
+
+### Source math wrapper firmware integration (2026-09-15)
+
+The preceding turn made verified wrapper reconstruction progress. Added include_math_wrappers to experimental composition and loader checks. The builder freshly compiles all three C wrappers; composition verifies complete byte identity, original positions, retained-stock ownership and each target's existing compiled-C patch. All 24 bytes now derive from C rather than retained stock.
+
+MacOS-built `build/gx8002-fft-q15-math-wrappers-integration-experiment/firmware_codec.unadmitted.bin` remains 326,092 bytes with unchanged SHA-256 `9aa09b89e3360ae928193365df6513b6b8c3ab01a2117707524b3a39694848af`, as expected from exact wrapper reproduction. Container checks and all 12 backup-loader cases pass. Ownership is 55,230 compiled C, 2,986 assembly, 15,561 source data, 88 metadata, 3,014 unreachable fill and 249,213 retained stock bytes. Full source-only reconstruction and hardware qualification remain incomplete; goal active.
+
+### Pinned double-remainder source compiled (2026-09-15)
+
+The previous turn made verified math-wrapper integration progress. Inspected remaining routine at 0x495e4: binary64 sign/exponent extraction, magnitude comparison, normalization and shift/subtract remainder loop, with (x*y)/(x*y) exceptional path through the known double helpers. Retrieved unchanged Newlib e_fmod.c at the existing pinned commit; source SHA-256 `a2a86b8b4988672fae5a38306be2846b3724820b82eee6728a89bbdc65a296e4`.
+
+Added an explicit binary64 word adapter and authenticated macOS probe builder. Complete upstream C compiles to 966 bytes of code plus a 16-byte signed-zero table; only __muldf3 and __divdf3 remain unresolved at object stage, both already reconstructed dependencies. Source license notice preserved. Linking, exact boundary/fit checks and execution remain pending. Full source-only goal active; firmware ownership unchanged.
+
+### Double remainder boundary and size constraints (2026-09-15)
+
+The previous turn made verified upstream fmod compilation progress. Located the next function at 0x49828: fmod's 0x495e4..0x49828 envelope is 580 bytes including its literal at 0x49824. Confirmed the signed-zero table consumer at 0x49710 loads pointer 0x100155b0 from that literal. No following sine/cosine code was included in the fmod envelope.
+
+Extended the reproducible probe with three compilation variants. Os yields 656 text bytes; Os with low registers yields 604; CK803EF low-register compilation also yields 604, each with a separate 16-byte signed-zero table. Thus no tested complete source function fits the 580-byte stock envelope yet. Source adaptation or relocation is needed; no clipping, binary extraction or overwrite of the next function was attempted. This is an implementation constraint with actionable next steps, not a goal blocker. Full goal remains active; ownership unchanged.
+
+### Double remainder source fits and passes finite execution (2026-09-15)
+
+Added a reviewable patch against pinned Newlib e_fmod.c that constructs the three signed-zero returns with INSERT_WORDS instead of loading a two-element constant table. The original upstream download and license remain intact. With native macOS C-SKY GCC, Os, low registers and disabled tree forward propagation, the complete routine occupies 576 bytes within its 580-byte envelope. No following function or binary fragment is included. The reproducible probe authenticates the patch, adapted source, header, object and commands.
+
+The placement builder links at package offset 0x495e4 and checks allocated sections, entry, size and absence of unresolved symbols/relocations. ELF SHA-256 `0658b457c95e3207c40cfe25d4243676f8b6144ac00ad625f97b76775740a0c0`. Absolute multiply/divide bindings target the existing reconstructed helper positions; their identity must be checked when integrating. Actual decoded source execution passes 4,966 finite input cases against an exact integer dyadic remainder oracle, including signed zeros, subnormals and large exponent differences, with ABI checks. No host floating-point calculation supplies the oracle.
+
+Nonfinite inputs, zero divisors, stock comparison, reference census and integration remain pending. This routine is not yet admitted into firmware. Latest hybrid firmware ownership remains 249,213 retained stock bytes; full source-only and hardware-qualified goals remain incomplete and active.
+
+### Source remainder integrated into macOS hybrid build (2026-09-15)
+
+Previous goal turn made verified source placement and finite-execution progress. Added 3,520 exceptional-input cases executing the complete placed remainder together with corrected source multiply/divide and their pack/unpack/NaN dependencies. Cases cover NaN payloads and signs, infinities, signed-zero divisors and finite dividends with infinite divisors. Expected results follow the reconstructed upstream helpers' explicit NaN conventions; stock exceptional behavior and FP flags remain unqualified. Extended the 4,966 finite cases to execute stock as well: both implementations match the exact integer dyadic oracle and satisfy ABI checks.
+
+The bounded reference census finds one entry call at 0x485a2 and no external interior branches, literal-pool references or stored address words. Computed-reference closure remains outside that scan. Composer now authenticates the finite/special reports, refreshes the reference census, and checks multiply/divide source payloads against the exact dependencies used in exceptional execution. The complete 576-byte function replaces stock at 0x495e4; the four-byte tail remains explicitly stock.
+
+Native macOS rebuild produces 326,092-byte `build/gx8002-fft-q15-fmod-integration-experiment/firmware_codec.unadmitted.bin`, SHA-256 `9bf576cf1cf813a24d6f8106fb0ac59aebadebe7de788201457f89168b87149d`. Container checks and all 12 decoded stock backup-loader cases pass. Ownership: compiled C 55,806; assembly 2,986; source data 15,561; metadata 88; unreachable fill 3,014; retained stock 248,637. This remains an unadmitted hybrid, not a complete source-only or hardware-qualified firmware.
+
+Next inspected routine at 0x49828..0x49890 evaluates a binary64 polynomial by descending coefficients (multiply then add); 0x49890 begins a separate routine. This provides a concrete next source-reconstruction target; no implementation or qualification is claimed yet. Full goal remains active and incomplete.
+
+### Polynomial evaluator reconstructed and executed (2026-09-15)
+
+Previous goal turn integrated verified remainder source. Reconstructed the adjacent 0x49828..0x49890 evaluator as descending Horner C over ascending-power binary64 coefficients. Native macOS compilation produces a complete 50-byte function within the 104-byte envelope; linker resolves multiply/add to existing source helper placements. ELF SHA-256 `2eafd0dcfb716e1df3b6f988e53b6d00e7cb632a0b637b4b01dab46d95764b43`.
+
+Actual decoded evaluator and authenticated source arithmetic closure pass 680 finite cases spanning degree 0..16 against exact rational per-operation rounding. These bounded coefficients/inputs do not qualify full exponent range or exceptional values. The apparent pool reference at 0x49826 is demonstrably the upper half of the 0x100155b0 signed-zero address literal at 0x49824, consumed by fmod at 0x49710; no genuine caller is found by the bounded scan. Computed paths remain unqualified.
+
+Stock comparison, expanded arithmetic qualification and integration remain pending. No polynomial bytes are yet admitted to the firmware; latest retained-stock total remains 248,637. Full source-only goal remains active and incomplete.
+
+### Polynomial stock equivalence and payload coverage (2026-09-15)
+
+Previous goal turn reconstructed and executed the evaluator. Extended its verifier to authenticate and execute the original stock evaluator and arithmetic helpers, with both SRAM aliases mapped from the authenticated backup payload. All 680 degree-0..16 bounded polynomial cases now agree among stock, reconstructed source and exact rational per-operation rounding.
+
+Added 1,063 finite identity cases (polynomial coefficients [0,1]) spanning both signs, exponent boundary classes, subnormals and deterministic random binary64 inputs; source and stock preserve the expected value, with addition-to-positive-zero semantics for signed zero. Added 1,072 degree-zero cases preserving arbitrary coefficient bit patterns exactly even with signaling-NaN x, including NaN payloads, infinities and signed zeros. All pass with the decoded executor's ABI checks. These additional cases also compare stock; the report's stock_comparison_cases field refers specifically to the original 680 polynomial cases, with the additional counts separately recorded.
+
+General nonfinite arithmetic and extreme higher-degree evaluation remain outside this coverage, as do integration and hardware qualification. Firmware ownership is unchanged at 248,637 retained stock bytes. The complete source-only goal remains active and incomplete.
+
+### Polynomial integrated into macOS firmware experiment (2026-09-15)
+
+Previous turn expanded verified stock equivalence. Composer now rebuilds and authenticates the complete 50-byte polynomial source, checks its 680 polynomial / 1,063 identity / 1,072 payload case evidence, refreshes the bounded reference classification, and compares multiply/add payloads against the exact source arithmetic ELF used by the verifier. The unused 54-byte original-region tail remains retained stock rather than being counted as reconstructed functionality.
+
+Native macOS rebuild and all 12 decoded backup-loader cases pass. New 326,092-byte artifact: `build/gx8002-fft-q15-polynomial-integration-experiment/firmware_codec.unadmitted.bin`; SHA-256 `33201bc65d038e9191e863c787450b539fb0c2b2bbce820a4a355269bea9f3a7`. Ownership is compiled C 55,856; assembly 2,986; source data 15,561; metadata 88; unreachable fill 3,014; retained stock 248,587. General extreme/nonfinite polynomial evaluation and computed entry paths remain limited by the prior qualification scope. This is still an unadmitted hybrid, not a complete source-only or hardware-qualified firmware. Full goal remains active.
+
+### Pinned sine/cosine kernels compiled and coefficients compared (2026-09-15)
+
+Previous turn integrated polynomial source. Retrieved unchanged Newlib k_sin.c and k_cos.c at existing commit 4aa696c8d6294897411cf78cae87f7f4680e9687, preserving source notices and recording receipt hashes. New reproducible macOS probe authenticates sources and compiles complete objects using the binary64 adapter plus GET_HIGH_WORD. Os sizes: sine 360, cosine 368 bytes; low-register variants: 356 and 364. Dependencies are already reconstructed __fixdfsi, __muldf3, __adddf3 and __subdf3.
+
+Stock routines at 0x49890 and 0x499ac match these kernels structurally, including tiny-x conversion checks and tail correction. Shared literals at 0x49ac0..0x49ad4 preclude treating every next entry as a complete literal boundary. Stock tables at package 0x4f974 (S2..S6) and 0x4f99c (C1..C6), mapped from observed data pointers 0x20017034 and 0x2001705c, match all eleven upstream binary64 coefficients exactly. S1 differs: stock subtracts magnitude 0x3fc5555555555554, while upstream signed S1 is 0xbfc5555555555549. This difference must be evaluated, not silently called stock-equivalent.
+
+No trig source integrated yet. Link/placement, numerical comparison, reference classification, source data ownership and hardware qualification remain pending. Latest hybrid retains 248,587 stock bytes; full source-only goal active and incomplete.
+
+### Trig source closure and initial numerical comparison (2026-09-15)
+
+Previous goal turn compiled pinned upstream kernels and identified a coefficient mismatch. Added a reproducible complete trig source closure with existing reconstructed arithmetic, asserting every prior allocated arithmetic section retains the exact authenticated address and bytes. No undefined symbols or relocations remain. Analysis ELF SHA-256 `bae05e925b1ad454b8bfa4691ca8bb623b3da0a2100d9965e6fda520f56d6c14`; sine 356 bytes at analysis address 0x10018000, cosine 364 at 0x10018200. These addresses are outside the stock image and are not firmware placement.
+
+Executed actual decoded source and stock kernels over 201 evenly spaced inputs per kernel from -100/128 to +100/128, with zero tail and sine iy=0 supplied using its stack ABI argument. Compared against a 90-digit Decimal Taylor oracle. Sine differs from stock in 78 cases: maximum source error 1 ULP versus stock 2 ULP. Cosine differs in 8 cases: maximum source error 0 ULP versus stock 1 ULP. These are observed improvements on this bounded grid, not proof of universal accuracy or correct rounding. Results preserve every difference in the report rather than asserting stock equivalence.
+
+Nonzero tails, wider boundary sampling, exceptional behavior, shared literal/data ownership, placement and firmware integration remain pending. Firmware ownership is unchanged at 248,587 retained stock bytes. Full goal remains active and incomplete.
+
+### Trig nonzero-tail paths executed (2026-09-15)
+
+Previous goal turn linked source trig kernels and measured zero-tail accuracy. Extended the decoded execution verifier with nonzero quarter-ULP tails of both signs, sine iy=1 supplied at the incoming stack pointer, and positive/negative neighboring inputs around 2^-27, 0.3, 0.78125 and pi/4. The Decimal reference adds x and y at 90-digit precision before Taylor evaluation, avoiding a host-double addition that would discard the tail.
+
+All 448 source/stock cases per kernel completed with ABI checks. Sine maximum source error is 1 ULP versus stock 2 ULP, with 186 source/stock differences. Cosine maximum is 1 ULP for both, with 40 differences. No source cases exceed 1 ULP on this sample. Differences remain recorded, not equated with universal improvement or correct rounding. This adds 896 nonzero-tail comparisons to the prior zero-tail grid.
+
+The reducer's complete input contract, exceptional values and source placement remain pending. Unchanged upstream functions are larger than their original code regions; complete source adaptation or relocation must solve that without cutting binary bodies. No firmware ownership change; 248,587 stock bytes remain. Full goal active and incomplete.
+
+### Trig source loops and separate coefficient objects (2026-09-15)
+
+Previous turn completed nonzero-tail numerical comparisons. Added reviewable patches replacing the upstream nested polynomial expressions with descending Horner loops while retaining coefficient values and multiply/add ordering. Initial same-translation-unit constant arrays were expanded by GCC and did not reduce code size. A reproducible probe now authenticates the upstream source, applies each patch with zero fuzz, and generates separately compiled typed coefficient definitions from those source literals.
+
+Native macOS result: sine code 312 bytes plus 40 bytes of source coefficient data; cosine code 312 bytes plus 48 bytes of source coefficient data. This reduces the standalone code portions from 356/364 bytes. No coefficients were extracted from stock; all come from pinned upstream C. The complete routines still need placement work (combined code exceeds the 580-byte original kernel/literal region), linking and numerical revalidation after this transformation. No binary clipping or firmware integration occurred. Latest retained stock remains 248,587; full source-only goal active and incomplete.
+
+### Trig loops linked and numerical transformation checked (2026-09-15)
+
+Previous turn compiled smaller loop kernels. Extended the source closure builder with a separate loop variant, complete typed coefficient sections, and unchanged authenticated arithmetic sections. New analysis ELF SHA-256 `9f09125ed47a86c634a0da2efaefeaa64c8b300257c91fa9ffe7b188f878e5fe`; each kernel is 312 bytes, with 40/48 bytes of coefficient data. No undefined symbols or relocations remain.
+
+Executed the loop version over all prior 402 zero-tail and 896 nonzero-tail stock/reference comparisons. Counts, error maxima, accuracy-error records and normalized per-input stock-difference records match the original upstream source build exactly. The comparison report pins all four report hashes. This validates the transformation on those samples without asserting universal equivalence. Analysis locations remain outside firmware; original-region placement still needs work. Firmware ownership unchanged at 248,587 retained stock bytes. Full goal remains active and incomplete.
+
+### Shared polynomial makes source sine fit (2026-09-15)
+
+Previous turn linked and numerically validated loop kernels. Tested additional native compiler options: sine stayed at 312 bytes; cosine reached 308, still too large for its original envelope. Reusing the reconstructed C polynomial evaluator reduces complete sine to 264 bytes, fitting the 284-byte entry region at 0x49890..0x499ac. Added a reproducible source transformation/compile probe with hashes and dependency inventory. The same reuse increased cosine size and was not adopted for it.
+
+The shared evaluator changes addition operand order relative to the upstream expression. Finite arithmetic is commutative, but NaN payload propagation is not assumed equivalent. This candidate still requires complete linking, numerical/exceptional evaluation, reference analysis and source coefficient placement before integration. Nothing was clipped or inserted into firmware; retained-stock total remains 248,587. Full source-only goal active and incomplete.
+
+### Complete sine placed and executed at firmware addresses (2026-09-15)
+
+Previous goal turn produced a sine object small enough to fit. Added a native macOS complete source closure placing sine's 264 bytes at 0x49890, its 40-byte typed coefficient array at 0x4f974, and the existing 50-byte polynomial helper at 0x49828. Source coefficients equal the stock table, but are generated from pinned upstream literals. All existing arithmetic sections and the polynomial body remain authenticated byte-for-byte; no undefined symbols, relocations, section overlap or out-of-image allocation remain. ELF SHA-256 `94f16079619fc495381bf64857cad0c781247e37883a172a00dde635df9f4e22`.
+
+Actual placed sine execution completes 201 zero-tail and 448 nonzero-tail stock/reference cases. Maximum source error remains 1 ULP versus stock 2 ULP; stock difference counts remain 78 and 186. This is sampled reduced-interval behavior, not universal equivalence. Initial bounded reference scan finds five entry calls and two stored-address-looking words requiring classification (package offsets 99566 and 314795); those findings must be resolved before integration. Exceptional behavior and complete caller/reducer qualification also remain pending. No firmware ownership change; 248,587 stock bytes remain. Full goal remains active and incomplete.
+
+### Sine bounded reference findings classified (2026-09-15)
+
+Previous turn placed and executed source sine. Added reproducible classification of both stored-address-looking words in the sine reference census. At 0x184ee, the apparent value spans the upper half of literal 0x1020b250 at 0x184ec, demonstrably consumed by lrw at 0x1849a, and the next function's first two-byte instruction at 0x184f0. The following rts at 0x184f2 confirms the small getter's instruction sequence. At 0x4cdab, the apparent address is an unaligned cross-element sequence in the complete 480-byte bit-reversal table, independently regenerated from 8-bit reversal pairs multiplied by eight.
+
+The authenticated bounded scan therefore contains five entry calls and no unresolved findings. This does not close computed references or alternate mappings, nor reconstruct any primary-code functionality used as classification evidence. Exceptional sine behavior, coefficient-data reference coverage and integration remain pending. No firmware ownership change; 248,587 stock bytes remain. Full goal active and incomplete.
+
+### Placed sine exceptional-input comparison (2026-09-15)
+
+Previous turn resolved the bounded sine reference findings. Added decoded comparison of the placed shared-polynomial sine against the unchanged pinned upstream source closure. Tested 3,248 combinations covering both iy branches, positive/negative infinities, signaling/quiet NaN payload bit patterns, signed zeros, minimum subnormals, finite inputs and nonfinite tails. All outputs match the unchanged upstream source exactly, with ABI checks; no differences were observed. This addresses sampled NaN behavior after the shared evaluator reverses addition operands, without asserting universal payload equivalence, stock special-value equivalence or exception-flag behavior. Nonfinite inputs are outside the normal reduced-angle kernel contract.
+
+Initial coefficient-region scan finds the expected 0x20017034 table pointer at package 0x49ac0 and one apparent pool instruction immediately before the array. Since the source-generated 40-byte table is byte-identical at the original address, no coefficient value or address changes are proposed. Integration remains pending; latest hybrid still retains 248,587 stock bytes. Full source-only goal remains active and incomplete.
+
+### Source sine integrated into macOS firmware build (2026-09-15)
+
+Previous turn verified exceptional sine behavior against unchanged upstream. Composer now rebuilds the complete placed sine closure, authenticates its 201 zero-tail / 448 nonzero-tail numerical cases and 3,248 exceptional comparison cases, refreshes reference classification, and compares every linked dependency's bytes against the composed source patches. Inserts complete 264-byte source sine and its 40-byte typed upstream coefficient array. The 20-byte code-region tail and old shared literal bytes remain explicitly stock.
+
+Native macOS rebuild and all 12 decoded stock backup-loader checks pass. Artifact `build/gx8002-fft-q15-sine-integration-experiment/firmware_codec.unadmitted.bin`, 326,092 bytes, SHA-256 `3f36558d6564f85897314e5eed7b85b247e74b947e3bcf356f293b2f55d07d10`. Ownership: compiled C 56,120; assembly 2,986; source data 15,601; metadata 88; unreachable fill 3,014; retained stock 248,283. Source sine intentionally follows the pinned upstream coefficient instead of claiming stock bit equivalence; sampled accuracy differences are retained in integration evidence. Full application/hardware qualification, cosine placement and extensive remaining reconstruction are incomplete. Full goal remains active.
+
+### Complete source cosine now fits original region (2026-09-15)
+
+Previous turn integrated source sine. Extracting the common correction (z*r-x*y) and half-square (0.5*z) before cosine branch selection, then reusing the reconstructed source polynomial evaluator, reduces the complete cosine function to 252 bytes. Arithmetic grouping is retained; evaluation ordering and NaN propagation require fresh qualification. Added reproducible source transformation, compile and complete-link builders.
+
+The cosine closure places the complete function at 0x499ac and the 48-byte typed upstream coefficient array at 0x4f99c. The source coefficients equal stock at the original address. Existing polynomial and arithmetic sections remain byte-authenticated, all sections fit within the backup image, and no undefined symbols, relocations or overlaps remain. Execution, exceptional behavior, reference classification and integration are pending. No firmware ownership change: 248,283 stock bytes remain; full goal active and incomplete.
+
+### Placed cosine execution and references checked (2026-09-15)
+
+Previous turn placed a complete 252-byte cosine source implementation. Extended the decoded trig verifier to load its authenticated final-address ELF. All 201 zero-tail and 448 nonzero-tail cases complete with ABI checks. Source/stock maximum errors remain 0/1 ULP for zero tails and 1/1 ULP for nonzero tails, with 8 and 40 source/stock differences respectively; no sampled source errors exceed one ULP.
+
+Added exceptional-input comparison against unchanged pinned upstream cosine: 1,624 infinity, NaN payload/sign, signed-zero, subnormal and nonfinite-tail combinations produce identical output bits. These tests do not qualify exception flags or traps, universal equivalence, or inputs outside the kernel contract. Bounded scan of 0x499ac..0x49ac0 finds five entry calls and no external literal-pool or stored-address-word findings. Computed references remain outside scan scope.
+
+Integration is the next step. Latest hybrid still retains 248,283 stock bytes; full source-only goal active and incomplete.
+
+### Source cosine integrated into macOS firmware build (2026-09-15)
+
+Previous turn validated placed cosine execution and bounded references. Composer now authenticates its 649 numerical and 1,624 exceptional comparison cases, refreshes the entry-only reference census, and matches every linked arithmetic/polynomial dependency to the composed source patches. Complete 252-byte source cosine and 48-byte upstream coefficient data are inserted at their original locations; unused tail/shared-literal bytes remain retained stock.
+
+Native macOS rebuild and all 12 decoded backup-loader checks pass. Artifact `build/gx8002-fft-q15-cosine-integration-experiment/firmware_codec.unadmitted.bin`, 326,092 bytes, SHA-256 `699d7291e8d7839eb207653be1c7f517585b8889e004cc8c86059c8df21d7db3`. Ownership: compiled C 56,372; assembly 2,986; source data 15,649; metadata 88; unreachable fill 3,014; retained stock 247,983. This remains an unadmitted hybrid, not a source-only or hardware-qualified firmware. Full application qualification and extensive remaining reconstruction are incomplete; goal remains active.
+
+### Public trig source and reducer dependency chain identified (2026-09-15)
+
+Previous turn integrated source cosine. Traced the public cosine/sine dispatchers: reduced arguments call the reconstructed kernels; general finite arguments call the shared reducer at 0x4863c, then select kernel and sign by quadrant; nonfinite arguments use x-x. Retrieved unchanged s_sin.c, s_cos.c, e_rem_pio2.c and k_rem_pio2.c at the existing pinned Newlib commit with authenticated receipt hashes.
+
+Added reproducible macOS compilation probe for the unchanged public wrappers. sin compiles to 132 bytes and cos to 124 bytes under both tested size/low-register configurations. Their only unresolved object dependencies are __subdf3, __kernel_sin, __kernel_cos and __ieee754_rem_pio2. The reducer source uses the large-argument kernel, which additionally requires binary64 scalbn and floor; existing float versions cannot substitute for these. Linking, boundaries, full reducer reconstruction, full-domain trig qualification and integration remain pending. Firmware ownership unchanged at 247,983 retained stock bytes; full goal active and incomplete.
+
+### Complete pinned argument reducers compile on macOS (2026-09-15)
+
+Previous turn compiled public trig wrappers and identified their reducer chain. Added an endian-checked binary64 reduction adapter and reproducible pinned-source probe. SET_LOW_WORD/SET_HIGH_WORD write only their selected object bytes, so upstream's consecutive setters can initialize z without first reading its uninitialized full double representation. No upstream reducer algorithm was altered.
+
+Native Os/low-register compilation produces __ieee754_rem_pio2 code 992 bytes plus 128-byte npio2_hw and 264-byte two_over_pi tables; __kernel_rem_pio2 code 1,914 bytes plus 64-byte PIo2 and 16-byte init_jk tables. Dependencies include existing binary64 arithmetic/conversions, __eqdf2 and __gedf2 comparisons, binary64 fabs, scalbn and floor, and the reducer kernel. The unchanged kernel's line-190 indentation warning is retained as a warning through a narrowly scoped -Wno-error=misleading-indentation; other warnings remain errors. Inspection confirms q[i]=fw is intentionally after the inner accumulation loop.
+
+Complete dependency linking, numerical/ABI validation, original-region mapping and firmware integration remain pending. Firmware ownership unchanged at 247,983 retained stock bytes; full goal active and incomplete.
+
+### Binary64 reducer helpers compiled from pinned upstream (2026-09-15)
+
+Previous turn compiled both argument reducers. Retrieved unchanged binary64 fabs, floor, scalbn and copysign sources from their verified paths in the existing pinned Newlib tree, recording hashes and preserving source notices. Extended the reproducible macOS probe with a separate helper variant and an explicit copysign declaration.
+
+Complete helper sizes: fabs 4 bytes, floor 268, scalbn 208, copysign 10. fabs/copysign have no undefined symbols; floor needs __adddf3 and __gtdf2; scalbn needs __muldf3, __adddf3 and copysign. The unchanged floor carry comparison at line 123 emits a signedness warning; it intentionally uses unsigned comparison after the usual conversion. A narrowly scoped -Wno-error=sign-compare preserves the warning while keeping all other warnings as errors. No numerical correctness or stock-equivalence claim follows from compilation.
+
+Complete source linking, comparison-helper identity, numerical execution, placement and integration remain pending. Firmware ownership remains 247,983 retained stock bytes; full goal active and incomplete.
+
+### Complete source reduction closure linked; floor executed (2026-09-15)
+
+Previous turn compiled binary64 helpers. Added reproducible complete reducer linking with freshly source-built GCC equality/greater-or-equal helpers, recording source/object hashes and exact build log. Newlib reducers, tables, fabs/floor/scalbn/copysign and comparisons add 3,990 bytes at analysis address 0x10018000. Existing source arithmetic sections retain authenticated addresses and bytes. No undefined symbols or relocations remain. ELF SHA-256 `6453b4af9353f3a3b0cab776a7b7e75b99028daf931de6f49f2f9514deadf8b4`.
+
+Executed linked binary64 floor on 1,071 finite inputs spanning signed zero, subnormals, integer-boundary exponent classes and deterministic random bit patterns. All match integer flooring with ABI checks. Full reducer execution, nonfinite helper behavior, original-region mapping, placement and integration remain pending. Analysis-only link is not firmware source completion. Ownership unchanged at 247,983 retained stock bytes; full goal active and incomplete.
+
+### Binary64 scaling executed against exact rounding (2026-09-15)
+
+Previous turn linked complete reduction source and validated floor. Added decoded scalbn execution with an independent integer-dyadic nearest-even oracle. The oracle derives significand/exponent directly, handles subnormal rounding and carries, and bounds extreme exponents without huge shifts or host floating-point arithmetic.
+
+All 3,439 finite cases match exactly, with ABI checks: both signs, signed zeros, smallest subnormals, near-boundary significands, overflow/underflow, normal/subnormal transitions, deterministic random inputs, and shifts through INT_MIN/INT_MAX. Discrepancies would remain recorded in the report; none occurred. Nonfinite helper inputs, full argument-reducer execution, placement and integration remain pending. Firmware ownership remains 247,983 retained stock bytes; full goal active and incomplete.
+
+### Complete argument reducer executes through large-input path (2026-09-15)
+
+Previous turn validated binary64 scaling. Added a compiled C test wrapper with stack-local two-double output and selectable return of high remainder, low remainder or quotient. The wrapper link verifies every original reduction section unchanged. Extended the decoded executor with configurable bounded stack size (default still 256 bytes), complete-word store bounds, signed division consistent with the pinned C-SKY translator's widened signed quotient, word postincrement loads/stores, and indexed word stores. Division by zero remains an explicit unqualified exception.
+
+All 16 initial inputs execute through the complete source chain, including both signs, signed zeros, ordinary angles and magnitudes 1e10, 1e100 and 1e300. All remainders are finite and within the reduced interval and quotients are integral, with ABI checks. These are execution/range checks only: no high-precision quadrant/remainder accuracy claim yet. Re-ran the 1,071-case finite floor regression with the executor changes; it passes. Full precision oracle, expanded reducer coverage, original mapping/placement and integration remain pending. Firmware retained stock unchanged at 247,983; full goal active and incomplete.
+
+### High-precision reducer oracle exposes remainder errors (2026-09-15)
+
+Previous turn executed the complete reducer on 16 inputs but checked only output range. Added an independent Machin-identity pi oracle using Decimal arctangent series at 440 and 520 digits and exact conversion of the binary64 input. Both precisions agree on the nearest integer quotient and on the reduced remainder to better than 1e-120 for this set, including +/-1e300. The source quotient modulo eight matches every reference case.
+
+The sum of the returned high/low remainders has a maximum observed absolute error about 4.0708273462e-23. Six inputs exceed an explicit diagnostic threshold of 2^-85; discrepancies are retained in the report rather than changing the threshold or claiming an accuracy pass. This threshold is a diagnostic target, not an established upstream contract. Investigation must determine whether the errors arise from the pinned reducer algorithm, source arithmetic or executor semantics and evaluate their downstream impact. Full-domain accuracy remains unqualified. Firmware ownership unchanged at 247,983 retained stock bytes; full goal active and incomplete.
+
+### Reducer discrepancies reproduced natively on macOS (2026-09-15)
+
+Previous turn identified six high/low remainder sums exceeding a diagnostic 2^-85 threshold. Added a native macOS diagnostic that compiles the same authenticated Newlib reducers and fabs/floor/scalbn/copysign sources with Clang, contraction disabled and no builtin substitution. All 16 native outputs match decoded C-SKY high bits, low bits and quotient exactly. This supports attribution to the pinned source algorithm on these samples rather than a discrepancy in reconstructed arithmetic or decoded execution, without proving general correctness.
+
+The summed remainder rounds to the same binary64 value as the high-precision reference in all 16 cases (signed numerical zero treated equally). This does not waive the previously recorded two-part remainder errors: tail accuracy may matter downstream and a full trig error budget is still required. Full reducer coverage, placement and integration remain pending; retained stock remains 247,983. Full goal active and incomplete.
+
+### Complete public trig source linked and executed (2026-09-15)
+
+Previous turn reproduced reducer discrepancies natively and quantified their single-double rounding. Added a complete source link combining unchanged upstream public sin/cos, the full reducer/helper chain, and the reconstructed placed kernels/polynomial/typed coefficients. All prior reduction and kernel sections remain byte-authenticated at their original linked addresses; no unresolved symbols, relocations or overlaps remain. Analysis ELF SHA-256 `9d11207ef1918a2c475635d672e1dc711b08f3aec4c9bb51ebe636793252618c`.
+
+Executed 32 complete public trig calls (16 inputs per function), including signed zeros, ordinary angles and +/-1e10, +/-1e100, +/-1e300. Every result equals the rounded independent reference: 440-digit Machin-pi argument reduction followed by 110-digit Taylor evaluation and quadrant selection; maximum observed error 0 ULP. Thus the previously recorded reducer tail errors do not affect final rounding on these samples. This is not a universal accuracy claim. Public wrapper/reducer firmware placement, broader input/exceptional coverage and hardware qualification remain pending. Firmware retained stock unchanged at 247,983; full goal active and incomplete.
+
+### Expanded full-source trig accuracy coverage (2026-09-15)
+
+Previous turn linked the full public trig source chain and checked 32 calls. Extended the verifier with deterministic finite binary64 patterns across subnormal, tiny, medium, large and maximum-finite exponent classes; both signs; neighboring values around multiple pi/2 boundaries; and random raw inputs. Each public call executes the complete compiled source chain with ABI checks and a bounded 2 KiB stack.
+
+All 452 sine/cosine calls complete. Maximum error against independent 440-digit reduction and 110-digit Taylor reference is 1 ULP; no cases exceed 1 ULP. The report retains every input, output and reference result. This is broader sampling, not proof of full-domain correct rounding. Firmware placement of the public wrappers/reducer and hardware qualification remain pending. Retained stock unchanged at 247,983 bytes; full goal active and incomplete.
+
+### Public trig wrappers placed at original firmware entries (2026-09-15)
+
+Previous turn expanded end-to-end source trig accuracy. Confirmed original cosine entry/envelope 0x48454..0x484f0 and sine 0x484f0..0x48598. Added optional bounded public-wrapper placement to the complete source link: cosine 124 bytes and sine 132 bytes fit their original regions. Every linked reducer/kernel/arithmetic section remains unchanged. ELF SHA-256 `1f0c2094f30a63d904df1ba668974cf331791519cd34cfba576b26d209d645f1`.
+
+All 452 expanded end-to-end checks pass with maximum 1 ULP error after wrapper relocation. Bounded scans find two cosine entry calls and one sine entry call, with no interior branch/pool/stored-address findings. The reducer still lives at an analysis address outside the firmware image, so these wrappers cannot yet be admitted as an integrated firmware replacement. Reducer placement and full hardware qualification remain pending. Retained stock remains 247,983; full goal active and incomplete.
+
+### Stock reducer placement constraints mapped (2026-09-15)
+
+Previous turn placed public wrappers. Added authenticated stock reducer layout analysis for 0x4863c..0x489e4 (936 bytes). Consumed literal pools span 0x48994..0x489e4; callers and branch/pool/address census are recorded. Direct call targets are 0x48598, 0x4859c, and existing arithmetic/conversion entries 0x4a724/4a754/4a790/4a990/4abd0/4ac38.
+
+The stock large-input path uses a scale table at 0x10015508 and a remainder-related helper, rather than an identified call to a separate Newlib large-argument kernel. Thus there is no evidence for simply placing the 1,914-byte upstream kernel into an assumed corresponding stock region. Even the upstream front reducer's 992-byte object exceeds this 936-byte envelope before its separate tables. Complete source placement needs an explicit additional-space strategy or a source reconstruction of the stock reduction strategy with full-domain validation; neither binary clipping nor reduced-domain substitution meets the goal. This is actionable placement work, not an external blocker. Retained stock remains 247,983; full goal active and incomplete.
+
+### Existing generated fill audited for reducer placement (2026-09-15)
+
+Added `analyze_gx8002_reducer_free_space.py`, which authenticates the current experimental firmware, checks complete contiguous ownership coverage and byte totals, verifies per-row hashes where present, and authenticates the compiled upstream reducer/helper objects. The resulting report distinguishes backup-payload fill from fill belonging to other images.
+
+Of 3,014 generated unreachable-fill bytes across the package, only 18 occur inside the backup payload: three separate 6-byte intervals. The largest contiguous available interval is therefore 6 bytes, insufficient for either complete reducer (992 and 1,914 code bytes), irrespective of additional constants and dependencies. This inventory relies on existing fill ownership evidence; it does not independently establish reachability. Retained stock tails and shared literal pools remain excluded from free space. A broader relink/reclamation strategy or reconstruction of the compact stock algorithm is required. No firmware bytes changed; retained stock remains 247,983 bytes. The macOS source-only goal remains active and incomplete.
+
+### Compact reducer scale table reconstructed mathematically (2026-09-15)
+
+The prior fill inventory established that placement needs a different strategy. Inspected the stock large-angle reducer and identified all 18 binary64 values at package 0x4de48..0x4ded8 (runtime 0x10015508) as `remainder(2^(54+52*i), 2*pi) / 2^(54+52*i)` for i=0..17. Added a source generator using Machin-pi Decimal series, nearest-integer remainder, and binary64 rounding; 440- and 520-digit computations produce identical values for every entry. Generation itself never reads the firmware.
+
+Compiled the generated typed C table with the native macOS C-SKY compiler, linked it at its stock address, and verified all 144 bytes against the authenticated firmware. Table SHA-256 `fc4e84498bad397b8b4005f9a7ea7da15706409bcdfc34ed5d5be1490e6333fc`; no other allocated sections, undefined symbols or relocations. This removes the table's mathematical opacity and provides reproducible source generation, but integrated ownership/loader validation is still pending. The stock consumer chooses its index using division by 54 whereas the recovered table formula advances powers by 52; that distinction must be preserved and investigated when reconstructing the algorithm. Full-range reducer behavior remains unqualified. Experimental firmware unchanged, retained stock remains 247,983 bytes; goal active and incomplete.
+
+### Generated reducer scale integrated into experimental firmware (2026-09-15)
+
+Added optional `include_reducer_scale` to the native macOS integration composer and decoded backup-loader verifier, requiring the prior cosine integration. The composer rebuilds the mathematical C table, authenticates its linked ELF, verifies its original address and all 144 bytes, checks that the baseline region is retained stock and does not overlap other replacements, and assigns generated-source-data ownership. Prior experiment paths remain available.
+
+Full reconstruction completed and all 12 decoded backup-loader mode/seed cases passed. New output: `build/gx8002-fft-q15-reducer-scale-integration-experiment/firmware_codec.unadmitted.bin`, 326,092 bytes. SHA-256 remains `699d7291e8d7839eb207653be1c7f517585b8889e004cc8c86059c8df21d7db3` because the generated table is byte-identical to stock. Generated source data rises to 15,793 bytes and retained stock falls to 247,839 bytes; compiled C remains 56,372. The reducer code remains retained and full application/hardware execution remains unqualified. Goal active and incomplete.
+
+### Centered remainder helper reconstructed in C (2026-09-15)
+
+Reconstructed backup helper 0x4859c..0x4863c as readable C: fmod followed by two sequential sign/half-period adjustments. Exact half-period ties retain the dividend sign, unlike IEEE remainder; negative-period behavior also preserves the original adjustment order. Compiled on macOS to 140 bytes within its 160-byte envelope, linked at the original entry with complete existing source fmod and arithmetic dependencies. Prior arithmetic sections and fmod bytes are authenticated; no undefined symbols, relocations or allocated-section overlaps. ELF SHA-256 `7b1d37f884fff5d25e2fded16690f215f67253aa1f36a9719dcabf265ec9dd9a`.
+
+Executed 435 finite cases with ABI checks, including both period signs and exact half ties, against exact integer fmod followed by separately rounded host binary64 adjustments. All pass. Stock differential execution, exceptional inputs, incoming-reference checks and integration remain pending; this is not admitted firmware functionality yet. Firmware retained stock remains 247,839 bytes; complete source-only goal active and incomplete.
+
+### Centered remainder stock-helper differential checks (2026-09-15)
+
+Extended the verifier to execute the authenticated stock helper and fabs instructions, redirecting the six external arithmetic/fmod targets to the same authenticated source dependencies used by the reconstructed C. All 435 finite cases match both stock-helper control flow and the independent finite oracle. Another 144 pairwise cases cover signed zeros, minimum subnormals, infinities, quiet/signaling NaN patterns and zero divisors; every returned bit pattern matches between implementations. This isolates the recovered helper semantics without claiming full-stock arithmetic equivalence; FP flags/traps remain unqualified.
+
+The bounded incoming-reference census finds three direct entry calls, no interior branches, no external literal-pool consumers, and no stored-address findings across the two scanned SRAM aliases. Computed references remain outside this census. Integration remains pending; retained stock unchanged at 247,839 bytes. Full goal active and incomplete.
+
+### Centered remainder C integrated (2026-09-15)
+
+Integrated the complete 140-byte centered-remainder C body at package 0x4859c. Composer rebuilds it, authenticates 435 finite and 144 special differential cases against the resulting ELF, refreshes the bounded three-entry-call census, and matches every linked fmod/arithmetic dependency against the composed source payloads. The 20-byte unused stock tail remains explicitly retained and unchanged. Prior experiment modes remain available.
+
+Native macOS integration build and all 12 decoded backup-loader cases pass. New experimental firmware `build/gx8002-fft-q15-centered-integration-experiment/firmware_codec.unadmitted.bin`: 326,092 bytes, SHA-256 `1e3ecc1789ac7041ed7946cf92fccb1d70a7b8977f9905a8da922f0a057c1058`. Compiled C rises to 56,512 bytes; retained stock falls to 247,699 bytes. Full application and hardware qualification, compact reducer reconstruction, and the remaining opaque firmware remain outstanding. Goal active and incomplete.
+
+### Compact stock large-angle path exposes qualification failures (2026-09-15)
+
+Added `analyze_gx8002_compact_reducer_large.py`: authenticates stock instructions and source dependency ELF, executes the stock reducer with external calls redirected to the tested source arithmetic/centered-remainder implementations, and compares output with 520-digit Machin-pi reduction. All ten large-path executions complete with ABI checks. Tested +/-1e7 and +/-1e10 have correct quadrant modulo four and approximately 2.16e-17/3.88e-17 remainder errors. Tested +/-1e30, +/-1e100 and +/-1e300 instead disagree in quadrant, with remainder errors approximately 0.00577, 0.72057 and 0.19187 respectively. A sentinel confirms the second output double remains untouched on all ten large paths.
+
+These are stock-instruction/shared-source-dependency diagnostics, not a full-stock or hardware bug claim. Preserve failures; do not substitute the compact algorithm as a full-domain-qualified upstream replacement merely to fit its envelope. The complete upstream reducer already passes the expanded source trig sample set and still needs a broader placement/relink strategy. New evidence changes the next action away from adopting the compact stock algorithm without substantial repair. Firmware unchanged; retained stock 247,699 bytes. Goal active and incomplete.
+
+### Backup image growth constraints verified (2026-09-15)
+
+Inspected the authenticated loader length calculation. Its first flash word controls source displacement, not copy length; literals at 0x39728/34/38/3c determine a fixed 0x1408c-byte copy. New `analyze_gx8002_backup_growth.py` appends an 8 KiB diagnostic pattern in memory and executes all 12 normal loader mode/seed cases: none of the appended bytes is loaded. This probe writes no candidate firmware.
+
+Authenticated BSS bounds at 0x3ba84/88 are 0x20017090..0x2002d79c. The entire 3,990-byte upstream reducer analysis section at instruction alias 0x10018000 overlaps that startup-cleared BSS through its data alias. Consequently merely increasing copy length would still overwrite live zero-initialized storage and expose code to startup clearing. Growth requires coordinated loader, BSS/global/reference and container changes, or a different proven placement. These constraints refine the relinking task; no external blocker. Retained stock unchanged at 247,699 bytes; source-only goal active and incomplete.
+
+### Backup BSS relocation dependencies inventoried (2026-09-15)
+
+Added authenticated BSS relocation inventory against the current centered-remainder experiment. The stock linear-disassembly scan identifies 174 literal loads of 52 distinct BSS addresses; 158 consumers fall in currently retained-stock regions. A whole-package byte-offset scan also records 1,020 address-word candidates, separating alignment, unchanged words and current ownership. Each literal-pool value is verified against the stock bytes. The BSS bounds remain 0x20017090..0x2002d79c.
+
+This is a dependency inventory, not an automatic relocation map: linear decoding can include data, raw words can be accidental, source-owned consumers must be inspected in their current form, and computed addresses/stack/heap/DMA aliases remain outside the scan. Therefore changing only BSS clear bounds is insufficient. The inventory supplies concrete targets for coordinated source/global reconstruction before memory-map growth. No firmware bytes changed; retained stock remains 247,699 bytes. Full goal active and incomplete.
+
+### Symbolic saved interrupt-enable state and restore reader (2026-09-15)
+
+Traced BSS references at 0x200173a0 to stock entry 0x3d16c, which reads two consecutive words and writes them in order to interrupt-enable MMIO 0xe000e100/104. Added readable C with a named volatile two-word BSS object and the complete restore reader. Native macOS build produces 24 code bytes fitting the original 24-byte envelope, with an eight-byte NOLOAD allocation at the original BSS address; no undefined symbols or relocations. ELF SHA-256 `2c8810d83e975bdb77e5131af3d3dd20ad2f79ff67da2687e228942ec1b9f48a`.
+
+This begins replacing anonymous BSS references with symbolic source definitions. Other access paths, decoded behavioral/reference verification and integration remain pending, so no memory map or firmware changed. Retained stock remains 247,699 bytes. Goal active and incomplete.
+
+### Interrupt-enable restore behavior verified (2026-09-15)
+
+Authenticated the complete 24-byte compiled restore body as byte-identical to stock. New decoded verifier checks 164 zero/full, walking-one, walking-zero and deterministic-random mask pairs: read saved word 0, write enable word 0, read saved word 1, write enable word 1, with preserved ABI registers. Every stock/source event sequence matches. Bounded references find one direct entry call at 0x43250 and no external pool/stored-address findings.
+
+Caller inspection shows the restore call follows the conditional branch at 0x4324a in the startup/resume sequence. The saved words' writer is not yet identified; no direct duplicate pointer words were found by the earlier BSS inventory, which does not exclude computed or indirect writes. Keep the source BSS object at its original address pending write-path closure. Physical interrupt effects remain unqualified; integration pending. Retained stock unchanged at 247,699 bytes. Goal active and incomplete.
+
+### Exception-frame and stack BSS source layout recovered (2026-09-15)
+
+Resume-path inspection did not establish the saved interrupt-mask writer. Adjacent exception entry 0x3bb40..0x3bb80 establishes a saved interrupted-SP word at 0x20017390 and switches to a 72-byte frame immediately below that boundary. Added a typed C frame with checked offsets for r0..r12, r13, interrupted SP, r15 and control registers 2/4. Added symbolic BSS storage for the 768-byte span from the known BSS lower bound to the stack top, followed by the saved-SP word.
+
+Native macOS compilation and linking validate frame assertions and exact original NOLOAD placement; ELF SHA-256 `53c945fabfc6d6dcf4c81325a5964d9275ce3804626c5006e4802cc69514ea3a`. The span is a recovered layout, not a stack-usage bound or proof of exclusive ownership. Exception entry/return, handler consumption, nested behavior and all references remain outstanding. No firmware or BSS address moved; retained stock 247,699 bytes. Goal active and incomplete.
+
+### Complete upstream exception sources identified and built (2026-09-15)
+
+Identified pinned NationalChip SDK `arch/soc/grus/trap_c.c` and `vectors.S` at commit 8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5 as matching the recovered fatal exception path. Authenticated each Git blob and compiled the complete unchanged sources on macOS with original Apache-2.0 notices. The C handler produces 10 bytes matching stock at 0x3bb30; complete vector-entry assembly produces 80 bytes matching stock at 0x3bb3c. Upstream itself defines the 768-byte trap stack and saved-SP object at the reconstructed addresses, strengthening the prior inferred layout.
+
+Compatibility headers for unused stdio/stdlib/config includes provide no declarations; active stdint types use the toolchain. The upstream unused frame parameter remains unchanged with a narrowly relaxed unused-parameter error diagnostic. All executable bytes match, symbols resolve, and no relocations remain. This recovers an existing deliberately nonreturning exception path; it is not a trap substituted for unreconstructed application functionality. Behavioral/reference qualification and integration pending; firmware unchanged, retained stock 247,699 bytes. Goal active and incomplete.
+
+### Upstream exception frame execution verified (2026-09-15)
+
+Added decoded execution of the authenticated upstream exception ELF through its original terminal loop. All 256 vector-byte values with deterministic register/control states pass. Each case verifies all 18 frame words, the saved interrupted-SP word, temporary r13 save on the original stack, exactly 20 memory writes, the frame pointer supplied to trap_c, and signed vector extraction. Writes stay within the expected frame, saved-SP and original-stack addresses.
+
+This strengthens the exact-byte source match with behavioral evidence for the complete fatal path. Physical exception delivery, nested faults, stack-depth bounds, reference closure and integration remain outstanding; no recovery behavior is claimed. Firmware unchanged; retained stock remains 247,699 bytes. Full source-only goal active and incomplete.
+
+### Upstream fault path and IRQ restore integrated (2026-09-15)
+
+Added optional exception integration requiring prior centered-remainder integration. Rebuilds complete pinned upstream trap C/vector assembly and recovered IRQ-enable restore C, checks 256 frame executions and 164 ordered-access cases against authenticated ELFs, and requires whole replacement bodies to equal stock at their original addresses. This preserves Default_Handler's interior entry used by 31 observed backup vector words; no pointer rebinding or BSS relocation occurs. Existing fatal behavior is recovered from real upstream source, not introduced as a substitute for missing functionality.
+
+The macOS build and all 12 decoded backup-loader cases pass. New experiment `build/gx8002-fft-q15-exception-integration-experiment/firmware_codec.unadmitted.bin` remains 326,092 bytes and byte-identical to the previous image, SHA-256 `1e3ecc1789ac7041ed7946cf92fccb1d70a7b8977f9905a8da922f0a057c1058`. Source ownership now includes 56,546 C bytes and 3,066 assembly bytes; retained stock decreases by 114 to 247,585 bytes. Hardware exception effects and complete application/source closure remain unqualified. Goal active and incomplete.
+
+### Console-port BSS consumer wrappers reconstructed (2026-09-15)
+
+Identified 0x2001739c as the console port selector using the two observed consumers and authenticated pinned SDK gx_uart.h declarations. Added readable gx_console_init/gx_console_putc wrappers plus symbolic four-byte NOLOAD port state. Initializer stores the port before invoking UART initialization, including invalid ports or failure returns; output forwards the stored port and character.
+
+Native macOS build fits both original envelopes (16 and 20 bytes). putc is byte-identical to stock; initializer differs in scratch register allocation and still requires decoded call/state comparison. Underlying UART targets remain absolute retained-function bindings, explicitly not a source dependency closure. No state relocation or firmware integration yet. Retained stock 247,585 bytes; full source-only goal active and incomplete.
+
+### Console wrapper stock behavior verified (2026-09-15)
+
+Added decoded stock/source comparison for console initialization and character forwarding. All 252 cases pass across six port patterns, seven baud/character values and three modeled UART return values. Checks preserve the store-before-init order, stored-port load, UART arguments, initializer return bits and ABI registers. For void putc, matching r0 is an implementation observation rather than a public return-value contract. Underlying UART calls are modeled, so this does not establish hardware behavior or valid-port support.
+
+Inspected UART putc at 0x3cee0: indexes a 128-byte descriptor stride, reads its register-base field at offset four, polls status bit 0x20, and inserts carriage return before newline with a separate ready poll for each output byte. UART source reconstruction remains the next dependency task. Firmware unchanged; retained stock 247,585 bytes. Goal active and incomplete.
+
+### Shared UART character source builds for backup image (2026-09-15)
+
+Found an existing recovered UART console C implementation for the other codec image and reused it unchanged instead of duplicating its logic. New backup build binds its descriptor table to 0x20016b84. Native macOS -O2 produces a complete 52-byte putc body, within the 56-byte stock envelope, with no helper sections, unresolved symbols or relocations. ELF SHA-256 `c6049aab9c860ed2254363e0f90f0f1d15e3f298042d5644a06d59207a333173`. A size-oriented variant still needs a separate helper and remains explicitly analysis-only.
+
+The shared source preserves newline-to-CRLF conversion and per-byte ready polling in C. Decoded validation of the generated backup implementation, descriptor load order, input semantics and integration remain pending. Descriptor state is still an absolute binding; this does not claim its source closure. Firmware unchanged; retained stock 247,585 bytes. Goal active and incomplete.
+
+### Backup UART character MMIO behavior verified (2026-09-15)
+
+Added decoded comparison of complete compiled source and stock UART putc. All 4,620 cases pass across two port indices, characters -256..511 plus signed-int extremes, and three delayed-readiness schedules. Checks compare every descriptor/status read and MMIO write in order, verify a single descriptor-base load, preserve callee-saved registers, and confirm CRLF conversion applies only to integer character 10 before final low-byte masking. Each emitted byte waits independently for status bit 0x20.
+
+The descriptor bases and readiness schedules are synthetic; physical UART timing, permanently busy behavior, descriptor source ownership, incoming-reference checks and integration remain pending. Firmware unchanged; retained stock 247,585 bytes. Goal active and incomplete.
+
+### Backup UART descriptor source reused and linked (2026-09-15)
+
+Reused existing source-authored two-port UART defaults with authenticated pinned SDK register-base/IRQ constants. All 256 initialized descriptor bytes exactly reproduce backup stock at 0x4f4c4..0x4f5c4, without extraction as build input. Linked the generated writable table at 0x20016b84 with the complete 52-byte source putc; putc remains byte-identical to its previously tested ELF, with no undefined symbols or relocations. Native macOS ELF SHA-256 `f5b895a6622d10318774962056bc35a2a1a4faf2ba9992600b379605fb5257ef`.
+
+This supplies source data for putc's descriptor dependency. Unknown runtime field meanings and initialization/mutation consumers still need reconstruction; byte reproduction does not claim those semantics complete. Integration/reference/loader work remains pending. Firmware retained stock unchanged at 247,585 bytes. Goal active and incomplete.
+
+### Source UART putc and descriptors integrated (2026-09-15)
+
+Added optional UART integration following exception integration. Rebuilds shared putc and source descriptor defaults, checks the 4,620-case execution report against the unchanged linked putc hash, and refreshes the bounded incoming-reference scan (one entry call, no interior branch/pool/address findings). Integrates complete 52-byte code at 0x3cee0 plus 256 source-generated descriptor bytes at 0x4f4c4. Four unused stock tail bytes remain explicitly retained and unchanged.
+
+Full native macOS build and all 12 decoded backup-loader cases pass. New experiment `build/gx8002-fft-q15-uart-integration-experiment/firmware_codec.unadmitted.bin`, 326,092 bytes, SHA-256 `7859e7cef8f2e7e563a3966ee9acd6639202755a314a64023d6ed2a2b35f0a40`. Compiled C now 56,598 bytes; generated source data 16,049; retained stock decreases by 308 to 247,277 bytes. Other UART operations and runtime descriptor semantics, complete firmware reconstruction and hardware qualification remain outstanding. Goal active and incomplete.
+
+### Shared UART initializer built at backup placement (2026-09-15)
+
+Matched the backup initializer's port check, gate/clock calls, MHz-boundary rounding and descriptor writes to the existing reconstructed image-A C source. Reused it unchanged, linked with source-generated backup descriptors, and bound the three external gate/clock/configuration entries explicitly. Native macOS build produces 104 code bytes within the original 104-byte envelope, no undefined symbols or relocations; descriptor bytes remain authenticated. ELF SHA-256 `0e6ec9f5449acb3ecbcdf858a343bfeb06045439befcfa865f9adc2170cfd717`.
+
+Generated instructions are not byte-identical, so decoded boundary and event-order validation remains required. Gate/clock/configure dependency qualification, references and integration remain pending. No firmware changed; retained stock 247,277 bytes. Goal active and incomplete.
+
+### Backup UART initialization behavior verified (2026-09-15)
+
+Reused the established initializer instruction model for authenticated backup stock/source comparison. All 1,620 combinations pass across six port patterns, three baud values, 30 clock boundary values and three configuration returns. Valid calls preserve gate/frequency order, clock rounding within 100 Hz of MHz boundaries, descriptor clock/baud writes and configure result propagation; invalid ports return -1 with no modeled calls or writes.
+
+Current integrated ownership confirms platform gate at 0x3c528 and clock frequency at 0x3c630 already have compiled C implementations. Configuration at 0x3cce4 remains retained stock and is the next executable dependency; helper composition still needs authentication/execution beyond this modeled test. Firmware unchanged, retained stock 247,277 bytes. Goal active and incomplete.
+
+### Shared UART configuration source builds for backup (2026-09-15)
+
+Reused the complete reconstructed UART configuration C at backup entry 0x3cce4. Native macOS compilation yields 360 bytes within the 376-byte stock envelope, with no unresolved symbols or relocations. Build report records each external binding against current firmware ownership. Five binary64 arithmetic/conversion helpers and IRQ registration already have compiled C replacements; FIFO-depth detection at 0x3cc7c and UART interrupt handling at 0x3cb90 remain retained stock.
+
+The source is now buildable at the backup address but not admitted: ordered MMIO/descriptor traces and dependency authentication/execution remain required, especially baud values whose shifted denominator is zero. Absolute bindings are not counted as source closure. No firmware changed; retained stock 247,277 bytes. Goal active and incomplete.
+
+### Backup FIFO-depth source built and exhaustively field-tested (2026-09-15)
+
+Reused the complete shared FIFO-depth C at backup entry 0x3cc7c. Native macOS build produces 30 bytes within the 104-byte stock envelope, with no external code dependencies or relocations. All 1,536 stock/source comparisons pass: every 8-bit encoding, three unrelated-bit patterns and both descriptor/device addresses. Ordered descriptor/MMIO reads and preserved ABI registers match. One-hot encodings map to 16..2048 entries; zero and multi-bit encodings return zero.
+
+ELF SHA-256 `7298c3abfc8f411c080861c707ac01ff34ba5f589b4ff1ac31e78173973e2467`. Incoming-reference qualification, source cluster linking and integration remain pending; physical device effects are not modeled. Firmware unchanged, retained stock 247,277 bytes. Goal active and incomplete.
+
+### Backup UART interrupt dispatch reconstructed and corrected (2026-09-15)
+
+Built complete shared interrupt C at backup entry 0x3cb90: 226 bytes within the 236-byte envelope, without external code dependencies. Initial stock/source dispatch comparisons found 864/1,728 ordered-trace mismatches: backup reads descriptor RX mode before hardware availability, whereas the original image-A source reads availability first. Added an explicit backup-only compile-time ordering option; default image-A ordering remains unchanged. The build records that option.
+
+After correction all 1,728 dispatch cases match stock, including callback-driven descriptor/device mutation, pending-bit combinations and disabled/non-buffered modes. Buffered mode 2, completion callbacks and drain-loop stalls still need backup qualification. Reports retain a differences field, now empty, rather than waiving ordering differences. Integration pending; firmware retained stock 247,277 bytes. Goal active and incomplete.
+
+### Backup buffered UART interrupt behavior corrected and verified (2026-09-15)
+
+Extended decoded execution with signed <=0 branches and register inequality used by backup stock. Buffered comparisons exposed additional backup-specific volatile ordering: count/cursor reloads occur only after nonempty transfers and before cursor writes; RX uses the initially loaded device for its first byte, then reloads it for subsequent bytes. Added these behaviors under the existing backup-only option, preserving default image-A source semantics.
+
+All 1,152 buffered cases now match stock and independent byte/cursor/callback/mask/polling expectations; 2,560 combined stock/source drain-status reads observed. The 1,728 dispatch comparisons still pass. Complete source grows to 254 bytes versus the 236-byte stock envelope; report explicitly sets fits=false. This remains an analysis ELF and cannot overwrite the neighboring FIFO entry. No clipping or integration occurred. Placement optimization/relocation, callback mutation/stall qualification and hardware remain outstanding. Retained stock 247,277 bytes; goal active and incomplete.
+
+### Backup UART interrupt cursor optimization and callback/stall qualification (2026-09-15)
+
+Restructured the backup-only receive loop to use a byte cursor and the initially loaded device, reloading the device only between bytes. This preserves the verified volatile read/write order and reduces the complete native macOS C build from 254 to 238 bytes. Default image-A loop remains unchanged. Compiler layout trials did not recover additional space; transmit-loop alternatives provided no size benefit and were reverted.
+
+All 1,728 dispatch cases, 1,152 buffered cases (2,560 combined drain reads), 96 receive-completion callback mutation cases and 36 stalled-polling prefix cases pass against decoded backup stock. Mutation checks also independently verify changed device, mode, DMA state, cursor, length, callback/context, port and interrupt masks. Stalled checks verify no premature completion at 1/2/16/128 reads; these verifier bounds are not firmware timeouts. Callback bodies and MMIO are modeled; hardware timing/concurrency remain unqualified.
+
+The 238-byte complete body remains two bytes larger than its 236-byte envelope, so fits=false and no integration occurred. Incoming references, edge-case transfer counts and source cluster placement remain outstanding. Latest integrated firmware is unchanged with 247,277 retained stock bytes. Goal remains active and incomplete.
+
+### Backup UART signed-count boundaries and reference census (2026-09-15)
+
+Added a native-build-backed decoded verifier for 72 zero/small/sign-bit-set count combinations, including unsigned transmit-availability underflow. Exact stock/source return, memory and ordered trace match; independent checks cover cursor wrap, remaining counts, number of byte transfers and completion callback count. Counts with the sign bit set skip transfers while still participating in unsigned descriptor accounting, as in stock. Large positive transfers are explicitly excluded, not treated as qualified. This preserves behavior without claiming malformed lengths safe.
+
+Re-ran bounded incoming-reference census for interrupt and FIFO ranges. Interrupt has two stored entry-address words and two apparent interior literal-pool references from mixed code/data linear decoding. Inspection locates those apparent instructions within the frequency routine's literal region (0x3c808 onwards); ownership/source evidence still needs to discharge them before integration. FIFO has one direct entry caller and no reported pool/address-word references. These bounded scans do not establish computed control-flow closure. Complete interrupt remains 238 bytes, fits=false; image and retained-stock count unchanged. Goal active and incomplete.
+
+### UART reference candidates authenticated against source composition (2026-09-15)
+
+Added a reproducible reference-analysis tool authenticating the current composed firmware and the complete 468-byte compiled frequency routine at 0x3c630. The frequency body exactly matches the composition. Both apparent interior UART literal references originate in the retained 24-byte tail at 0x3c804..0x3c81c, beyond this complete source body. This is location evidence, not proof of unreachable tail data or computed-flow closure; the report expressly leaves those questions open.
+
+Additional ordinary GCC optimization-setting trials and a transmit integer-cursor variant did not shrink the full UART interrupt below 238 bytes. No machine-code patch, source behavior change, or integration was applied. The new analysis authenticates authoritative artifacts rather than dismissing mixed-disassembly findings heuristically. Placement remains pending; goal active and incomplete.
+
+### Complete backup UART source cluster fits (2026-09-15)
+
+Factored the backup transmit byte loop into an explicit noinline C helper under a backup-only compile option. Native macOS linked cluster now contains the complete 230-byte interrupt body at 0x10004250, complete 30-byte FIFO body at 0x1000433c and complete 22-byte helper at 0x1000435c. Linker assertions bound all three sections; only these allocated sections are accepted and no undefined symbols or relocations remain. FIFO bytes and address exactly match the separately qualified FIFO ELF. Default image-A source path is unchanged.
+
+Extended the decoded executor for the observed r4-r8 frame and actual source-helper bsr/rts execution; helper effects are executed rather than modeled as a callback. All 1,728 dispatch, 1,152 buffered, 96 callback mutation, 36 stalled-prefix and 72 count-boundary cases pass (3,084 total). Source cluster ELF SHA-256 `c87a196ef993c63f17678fd88d88e74b0dd9707f9e66c3e27e259ba06fac78ad`.
+
+This resolves the 238-byte monolithic body's placement overflow without clipping instructions or adding an opaque helper. The helper uses part of the former FIFO envelope; incoming/computed reference qualification and composition integration remain outstanding. No firmware rebuild/integration or hardware qualification claimed. Latest integrated firmware still retains 247,277 stock bytes; goal active and incomplete.
+
+### Exact linked UART cluster reproducibly qualified (2026-09-15)
+
+Added verify_gx8002_backup_uart_cluster.py as one native macOS rebuild-and-qualification entry point. The interrupt builder now rebuilds and verifies its source FIFO dependency, authenticates that evidence against both source and ELF hashes, and compares the linked FIFO body to the freshly qualified standalone body. This removes reliance on an unauthenticated pre-existing FIFO artifact.
+
+Aggregate qualification verifies every interrupt result against one linked ELF identity and directly executes the FIFO from that ELF for all 256 encodings, unrelated-bit patterns and both ports. All 4,620 cases pass: 3,084 interrupt cases and 1,536 linked FIFO cases. ELF SHA-256 `c87a196ef993c63f17678fd88d88e74b0dd9707f9e66c3e27e259ba06fac78ad`. Bounded census of the whole original FIFO envelope finds one entry caller and no interior pool or stored-address references, including the newly occupied helper region. Computed flow remains outside that census; separate apparent interrupt references are still tracked.
+
+No integration or hardware qualification claimed. Remaining work includes resolving the interrupt reference candidates and composing the source cluster with loader validation. Full source-only goal remains active and incomplete; current integrated firmware unchanged.
+
+### Apparent interrupt interior references resolved within bounded census (2026-09-15)
+
+Authenticated the five stock frequency literal readers individually and checked their decoded values against the actual 32-bit words at 0x3c808..0x3c81c. The two apparent UART-targeting lrw instructions at 0x3c812 and 0x3c81a are the upper halves of these literal words. All five real readers lie within the replaced complete frequency body. A fresh whole-backup branch/pool and whole-codec stored-address census of the literal region finds no branch/address entry and only those five readers.
+
+Updated the UART cluster gate to include and require this evidence, no direct interrupt branches, and entry-only stored interrupt pointers. Rebuilt and reran all 4,620 linked-cluster cases successfully. This discharges the two specific mixed-disassembly candidates within the explicit census scope; it does not claim arbitrary computed-flow closure or reclaim the literal tail. Cluster integration and loader checks remain next. Current integrated firmware unchanged; full source-only goal active and incomplete.
+
+### Backup UART interrupt/FIFO/helper integrated in experimental firmware (2026-09-15)
+
+Added an explicit include_uart_cluster composition stage requiring the preceding UART stage. It freshly rebuilds and executes the 4,620-case source cluster gate, authenticates the linked ELF, and adds three complete C bodies: interrupt 230 bytes at 0x3cb90, FIFO 30 bytes at 0x3cc7c, transmit helper 22 bytes at 0x3cc9c. Each patch must occupy baseline retained stock; normal composition overlap and ownership checks apply. Unoccupied gaps retain their previous bytes. No source body is clipped.
+
+Native macOS composition and all 12 decoded loader cases pass. Full loaded backup matches the composed image. Post-build checks authenticate all three complete source sections and unchanged surrounding gaps. Output: build/gx8002-fft-q15-uart-cluster-integration-experiment/firmware_codec.unadmitted.bin, 326,092 bytes; SHA-256 `1d77a0a65c7f113cb0cce38f3931b15a0b42cd1769ff14843c90e5f3f07d849b`. Ownership: 56,880 compiled C; 3,066 assembly; 16,049 generated source data; 88 metadata; 3,014 unreachable fill; 246,995 retained stock. Retained stock decreases by 282 bytes.
+
+Image remains hybrid/unadmitted, not full application or hardware qualified. UART initialization/configuration/console candidates and the other substantial firmware reconstruction work remain unfinished. Full source-only goal active and incomplete.
+
+### Backup UART configuration control paths qualified (2026-09-15)
+
+Updated configuration dependency inventory to authenticate the current UART-cluster composition, reflecting source FIFO and interrupt ownership. Added a native-build-backed verifier for the complete 360-byte configuration C body at its backup address. All 400 control-path cases match exact stock/source return, descriptor memory and ordered MMIO/helper traces. Cases cover RX/TX threshold modes, defaults, four FIFO capacities and descriptor-device mutation following FIFO return; independent assertions check defaults, activation, sentinel fields and interrupt-registration arguments.
+
+The verifier executes stock/source FIFO instructions in separate frames (800 total executions), authenticates the source FIFO cluster ELF and records its identity. IRQ registration remains modeled. Zero baud deliberately bypasses divisor arithmetic; this corpus does not qualify nonzero baud arithmetic, complete dependency execution, hardware or integration. Configuration stays unintegrated; latest experimental image retains 246,995 stock bytes. Full source-only goal active and incomplete.
+
+### Backup UART baud setup executes source arithmetic (2026-09-15)
+
+Added verify_gx8002_backup_uart_configure_baud.py. It authenticates every allocated section of the complete fixunsdfsi arithmetic dependency ELF against the current composed firmware, then executes those decoded source routines in separate frames for uint conversion, division, multiplication, addition and unsigned conversion. Both stock configuration and reconstructed configuration use this same arithmetic implementation; no full-stock arithmetic equivalence claim is made.
+
+All 400 nonzero-baud cases match exact ordered configuration traces, result and descriptor state, including executed stock/source FIFO helpers, changed device pointers, multiple threshold modes and baud/clock combinations. Independent exact integer assertions validate the whole divisor and rounded fractional divider. The earlier 400 zero-baud control cases remain a separate corpus. Zero shifted denominators, IRQ registration execution and hardware qualification remain outstanding; configuration stays unintegrated. Latest image retains 246,995 stock bytes. Goal active and incomplete.
+
+### UART configuration executes authenticated IRQ registration (2026-09-15)
+
+Extended both configuration verifiers to execute decoded stock/source IRQ registration in separate frames. The complete 40-byte source registration body is authenticated against the current composed image. All 400 zero-baud and 400 nonzero-baud configuration cases pass, now with 1,600 total IRQ executions plus FIFO execution. Independent assertions verify handler/context table writes, VIC enable writes and suppression for IRQ numbers 32 and UINT32_MAX; cases also include IRQ 6, 7 and 31.
+
+Incoming-reference census for configuration finds one direct entry caller and a stored interior-address candidate: package 0x4544 contains 0x10004454 (backup offset 0x3cd94). Inspection confirms this is in an earlier image's literal region, not merely an arbitrary unaligned byte match. Its image mapping/lifetime and use still need qualification before configuration replacement; it has not been dismissed or patched. Configuration remains unintegrated. Latest experimental firmware retains 246,995 stock bytes; goal active and incomplete.
+
+### Configuration interior alias identified as earlier watchdog pointer (2026-09-15)
+
+Added an authenticated instruction-level characterization of the package 0x4544 word. Its real reader at 0x451c passes 0x10004454 as the handler to IRQ registration at 0x4522 with IRQ number 11. The earlier-image mapping candidate (runtime = package + 0x10000000 - 0x50) maps it to 0x44a4, whose code reads callback cell 0x20009960, optionally calls it, and reads watchdog status 0xa0700014. This is a real function pointer, not a false byte-pattern match.
+
+The report preserves cross_image_lifetime_resolved=false: loader/image-lifetime and IRQ table separation evidence are still required before treating this as independent of the backup configuration interior. No pointer patch or firmware integration occurred. Latest integrated image remains unchanged; full source-only goal active and incomplete.
+
+### Earlier boot IRQ registration rebuilt from shared C (2026-09-15)
+
+Reused the complete recovered backup IRQ-registration C unchanged, linked with earlier-image table base 0x2000984c at candidate runtime 0x100030e8 (package 0x3138). Native macOS build is 40 bytes within the 40-byte stock envelope, with only the complete text section allocated and no unresolved symbols or relocations. All 324 guard/handler/context cases match exact earlier-stock ordered stores and an independent oracle.
+
+The same cases execute backup stock registration and prove disjoint handler/context table writes: earlier table 0x2000984c versus backup 0x200173a8. Both use the shared VIC enable register. This adds buildable source coverage for an earlier-image routine and concrete table separation evidence; it does not prove vector/image-transition lifetime. New candidate remains unintegrated, configuration alias lifetime remains open. Latest integrated firmware retains 246,995 stock bytes; goal active and incomplete.
+
+### Image-specific IRQ vector routing authenticated (2026-09-15)
+
+Added a reproducible stock-authenticated analysis of both 32-entry external-vector tables. Earlier boot vectors at package 0x2850 target runtime 0x10003124 (package 0x3174), whose dispatcher loads table 0x2000984c. Backup vectors at package 0x3b940 target runtime 0x10004880 (package 0x3d1c0), whose dispatcher loads table 0x200173a8. The tables are disjoint. Backup startup explicitly writes VBR=0x10003000 at 0x3bae6 before psrset ee,ie at 0x3bb18.
+
+This establishes image-specific routing after the observed backup initialization path and strengthens the real watchdog-pointer alias analysis. It does not execute complete image handoff or prove pending-interrupt timing/all transition paths. No firmware integration occurred; goal active and incomplete.
+
+### Pinned upstream backup VIC initializer built on macOS (2026-09-15)
+
+Located the observed vector-base/active/pending/enable sequence in NationalChip system.c at pinned SDK commit 8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5. Added a builder authenticating the complete file by Git blob and extracting the complete system_vic_init function unchanged. Explicit bindings provide the verified register layout (with static offset assertions), vector symbol and C-SKY control-register instructions. Native macOS build emits a complete 64-byte standalone function with no unresolved symbols or relocations.
+
+Generated code sets backup VBR, writes threshold, alternates four active-state clears and pending-state clears, then enables exceptions/interrupts. This is a standalone source candidate at an analysis address, not installed firmware; decoded ordered-state qualification and placement remain pending. No handoff/hardware claim. Goal active and incomplete.
+
+### Upstream VIC initialization ordered effects verified (2026-09-15)
+
+Added a fresh-build-backed decoded comparison between the complete upstream VIC initializer and the stock inline sequence 0x3bae4..0x3bb1c. All 256 seeded-register cases match an independent ordered-effect oracle: VBR=0x10003000, threshold=255, four interleaved active clears and pending clears, then exception/IRQ enable. Preserved registers are checked. Comparison stops before the different containing-function pop versus standalone rts; it does not equate wrapper frames.
+
+The 64-byte upstream candidate now has authenticated compilation and ordered execution evidence. Hardware acceptance timing, complete startup helper execution, handoff and placement remain unqualified. No firmware integration occurred; latest experimental image retains 246,995 stock bytes. Full source-only goal active and incomplete.
+
+### Complete adapted upstream backup system initializer compiles (2026-09-15)
+
+Added a native macOS object builder for the complete pinned NationalChip system.c, adapting only the BSS-clear decision to the recovered backup preserve-memory predicate and removing the now-unused PMU header. Real SDK CK804 core headers supply MPU and VIC operations. The build explicitly selects CK804 header macros because the compiler also exposes a CK803 compatibility macro; SDK headers are system includes, with project warnings retained. An empty stdlib compatibility header is provided because no libc declarations are used by this initializer.
+
+Complete system_init compiles to 168 bytes. The report lists unresolved link dependencies honestly: clk_init, preserve-memory predicate, clear_bss, board_init and vector symbol. This is an object candidate, not a linked/placed/qualified startup implementation. Source/header provenance closure, exact MPU behavior, dependency linking and execution remain pending. Goal active and incomplete; integrated firmware unchanged.
+
+### Backup system initializer header closure and analysis link (2026-09-15)
+
+Extended the upstream-based system initializer builder to capture compiler dependencies and authenticate every SDK dependency against the pinned Git commit. Generated bindings and toolchain headers are separately hashed; unexpected dependency locations fail. Linked the complete initializer at its original entry using explicit clock, preservation, clear-BSS, board and vector bindings. No undefined symbols or relocations remain in the linked ELF, but absolute bindings are not claimed as executed source dependency closure.
+
+Linked body remains 168 bytes versus the 164-byte stock envelope (fits=false); no instruction clipping or integration occurred. MPU code generation differs from stock and still requires decoded control-register effect comparison. The subsequent predicate/clear/board/VIC path is available for full startup-sequence qualification. Goal active and incomplete; integrated firmware unchanged.
+
+### Complete backup startup control flow and MPU effects verified (2026-09-15)
+
+Added a fresh-build-backed decoded executor for both the complete stock initializer and complete upstream-based source initializer. All 1,024 cases pass across 256 arbitrary control/general-register states and preservation returns 0,1,2,UINT32_MAX. Exact ordered control-register reads/writes, MMIO writes and helper call sequence match. An independent bitmask oracle verifies MPU configuration; clock/preserve/optional-clear/board ordering and final interrupt-enable event are asserted. Callee-preserved registers and stack restoration are checked.
+
+Helpers are explicitly modeled as returning and clobbering caller-saved registers; this is not full helper-body or handoff execution. Different MPU instruction sequences are now behaviorally qualified for this scope. The 168-byte source remains four bytes larger than the original 164-byte envelope, so no integration occurred. Goal active and incomplete; current firmware unchanged.
+
+### Startup executes authenticated preservation dependency (2026-09-15)
+
+Added 192 startup cases that execute the rebuilt preservation predicate in a separate decoded frame for both stock/source initializer control flow. Every allocated predicate section is authenticated against the current composed firmware. Exact predicate register-read order and clear-BSS branch choice match independent expectations across flags, fallback status and preservation values. The existing 1,024 arbitrary-register startup cases still pass. Other startup helpers remain explicitly modeled.
+
+Compiler layout-option trials did not reduce the complete initializer below 168 bytes. No source behavior alteration or binary clipping was used to force placement. Linked helper closure, full handoff and placement remain unfinished; integrated image unchanged and full source-only goal active.
+
+### Backup board startup wrapper and analog helper built from source (2026-09-15)
+
+Dependency inventory confirms clock and board initialization were still retained stock, while BSS clear and preservation predicate already have source ownership. Reconstructed the complete board wrapper, preserving the wakeup-status read before analog configuration enable. Linked it with existing readable status and analog-enable C. Native macOS output: wrapper 12 bytes (complete stock byte identity), status 66 bytes within 68-byte envelope, analog-enable 20 bytes (complete stock byte identity). No unresolved code symbols or relocations remain.
+
+This adds a complete source cluster for one remaining startup dependency rather than leaving a modeled board call indefinitely. Ordered behavioral execution and incoming references remain pending; no firmware integration or hardware qualification claimed. Clock initialization remains opaque. Full goal active and incomplete.
+
+### Board cluster executes standalone and inside startup (2026-09-15)
+
+Added decoded execution of the complete board wrapper, status decoder and analog-enable leaf in one register frame. All 288 cases pass across status flags, unrelated high bits, fallback values and register seeds. Independent oracle verifies the conditional status reads followed by exactly four ordered analog writes; stack and callee-preserved registers are checked.
+
+The 192 startup dependency cases now execute this board cluster as well as the preservation predicate, each in an explicit decoded frame. All allocated board-cluster bytes authenticate against the current composed image (the new wrapper/analog source bodies happen to be byte-identical to retained stock). Existing 1,024 startup control cases also pass. Clock and BSS-clear execution remain modeled in that composition; source ownership for the new board bodies has not yet been integrated. Goal active and incomplete.
+
+### Clock module-source setup recovered from upstream with audio adaptations (2026-09-15)
+
+Identified the stock clock initializer's 19-call module-source block as the pinned board _clk_mod_normal_init helper. Built the complete helper from authenticated upstream source and enum headers. Comparison found two real board differences: stock uses ADC_SYS (3) and PDM_SYS (5), versus upstream ADC_32K (4) and PDM_OSC_1M (6). Applied and recorded explicit symbolic adaptations, retaining all other upstream calls and their order.
+
+Complete source helper builds to 156 bytes at an analysis address; all 19 decoded module/source call pairs now match stock. This validates ordered arguments, not the called setter's hardware effects. Whole clock initialization, PLL/resume branches and integration remain unfinished. Goal active and incomplete; integrated image unchanged.
+
+### Clock divider and DTO setup reconstructed (2026-09-15)
+
+Added readable C for the complete backup 0x3bc8c..0x3bd1a divider/DTO setup block using authenticated pinned SDK symbolic module names and declarations. Native macOS standalone build produces 146 bytes. All 16 decoded call argument sets match stock in order, including ADC divisor 384, PDM divisor 12, audio-play DTO 0x00800000, SCPU divisor 0 and NPU divisor 6. These board-specific parameters are preserved rather than replaced with upstream board defaults.
+
+Setter implementations/hardware frequency effects are not executed in this check. This is a complete source helper at an analysis address, not an integrated replacement for the whole opaque clock routine. PLL, cold/resume branch logic, clock state data and integration remain unfinished. Full goal active and incomplete; integrated firmware unchanged.
+
+### PLL and clock-source data regenerated from upstream (2026-09-15)
+
+Added a builder extracting complete authenticated upstream PLL/source-table declarations and trim-marker initialization, using pinned SDK types. The 50 MHz PLL branch, trim marker, ten-entry crystal source table and ten-entry oscillator source table compile to 220 bytes exactly matching backup data at 0x4f200..0x4f2dc. Firmware bytes are comparison oracles only; no byte-array extraction supplies these values. Link has no unresolved symbols; section bounds, addresses and data relocations checked.
+
+Inspection also identified upstream _clk_pll_init using sizeof(array) as an iteration count (20 bytes for five entries); stock's retry sequence stops at five attempts. This upstream defect will not be copied into reconstructed control flow. Runtime mutation, reference qualification and integration of the source data remain pending. Full goal active and incomplete; integrated image unchanged.
+
+### PLL retry source built and behavior compared (2026-09-15)
+
+Added complete readable C for the oscillator-path PLL retry: mark stage-two trim complete, cache the original feedback divider, apply offsets 0/+10/+15/-10/-15, call the nonblocking setter with timeout 40, return on success, and retain the observed terminal self-loop after five failures. This uses an element-count bound instead of the upstream byte-count defect. The native macOS compiler produces 84 bytes of text/constants and links the previously authenticated 220-byte source-generated PLL/clock data.
+
+Added 504 decoded stock/source comparisons covering all five success positions and exhausted retries, three nonzero failure codes, seven initial dividers including wraparound boundaries, setter-induced descriptor changes, and two register seeds. All pass with an independent ordered write/call oracle and source return-ABI checks. The stock comparison scope is its inline retry block; setter outcomes/mutations are modeled, not hardware execution. Absolute setter binding, remaining clock control flow, placement, references, and integration still require work. Integrated hybrid image unchanged (246,995 retained stock bytes). Goal active and incomplete; this is not complete runnable source-only firmware.
+
+### Complete clock initializer source assembled (2026-09-15)
+
+Added readable C for the full backup clock initializer: initial LDO/SRAM setup; cached preservation predicate; cold-start crystal versus oscillator/PLL paths; resume source records and conditional PLL restoration; all recovered normal module/divider calls; per-iteration volatile saved-gate reloads for modules 11..25; final HW-I2C gate, ordered MMIO clears, and LDO call. Resume records use explicit field assignments matching stock stores, avoiding a compiler-emitted memcpy dependency for aggregate initialization.
+
+The native macOS builder freshly rebuilds and links the upstream-derived module helper, reconstructed divider and retry helpers, and authenticated source-generated PLL/clock data. It checks unresolved symbols, relocations and data section identity. Complete text/constants occupy 604 bytes, 28 bytes beyond the stock initializer's 576-byte envelope. This is an analysis ELF, not an admissible in-place patch. Low-level clock/predicate/trim/analog dependencies remain absolute bindings; whole initializer behavioral execution, layout resolution, incoming references and integration remain pending. Goal active and incomplete; integrated hybrid firmware unchanged.
+
+### Complete clock control flow executes against stock (2026-09-15)
+
+Added decoded execution for the whole stock initializer and the complete linked source initializer/module/divider/retry cluster in one register and byte-memory frame. All 432 comparisons pass across start predicates 0/1/2/0xffffffff, trim states 0/1/2, saved stage values 0/1/0xffffffff, five success positions plus exhausted retry, and two register seeds. The setter model mutates the feedback divider after each call; the gate model changes the bitmap after every call, exercising required reloads. Comparisons include ordered observed memory effects, all low-level calls and source-table fields, return versus failure loop, and callee/stack preservation. Explicit oracles also check initial calls, normal-module count, gate count and final LDO call.
+
+Found a previous standalone retry linker address transcription error: 0x10003a94 should be 0x100039f4 for package 0x3c334. Corrected its linker binding and verifier, added an independent package/runtime mapping assertion, and reran all 504 standalone cases. The complete clock builder already computed the correct mapping; the new whole-clock verifier also checks each linked dependency symbol against that mapping. Earlier standalone modeled success did not establish a correct dependency address; this limitation is now covered by the link check. Neither candidate was integrated into firmware.
+
+Hardware helpers remain modeled and the complete cluster remains 604 bytes versus 576 available. Placement, reference qualification, low-level source closure and firmware integration remain unfinished. Goal active and incomplete; integrated hybrid image unchanged.
+
+### Clock initializer fits at its original entry (2026-09-15)
+
+Changed complete clock compilation to an auditable combined C translation unit containing the same full source bodies, with private setup helpers declared static inline. Native compiler optimization reduces text/constants from 604 to 568 bytes without removing functionality. Builder records every source input and combined source hash. Linked at actual stock entry 0x10003294; all 432 whole-clock behavioral cases pass again there. Generated state/table sections retain their exact original addresses and contents. The routine now fits its 576-byte envelope with eight bytes spare.
+
+Ran the bounded reference census over 0x3bbd4..0x3be14. It finds one direct entry caller, two apparent external literal-pool reads and two stored interior-address candidates. These require classification before integration; mixed code/data and unaligned scans can produce false positives but are not dismissed without evidence. No firmware patch made yet. Low-level dependency source closure and hardware behavior remain incomplete. Goal active.
+
+### Clock incoming-reference candidates classified (2026-09-15)
+
+Added a reproducible authenticated classification of all bounded incoming-reference candidates for stock clock range 0x3bbd4..0x3be14. The only direct caller is startup at 0x3bad4, targeting the preserved entry. Apparent literal reads at 0x3ba60 and 0x3bbd2 decode actual literal words 0x80000200 and 0x10012940 as instructions; real LRW readers and pool addresses are asserted against stock disassembly and bytes. Interior-address words at 0x47d55 and 0x47f69 are unaligned windows spanning the encodings of addu r19,r18,r1 and movi r16,0; both containing instructions and exact offsets are checked. The report also authenticates the current hybrid firmware and records whether these patterns remain there.
+
+All enumerated bounded candidates are resolved. This evidence does not prove absence of arbitrary computed jumps or reinterpretation of executable bytes as data. The verified 568-byte source clock initializer still awaits composition and loader checks; no new image has been claimed. Full source-only goal active and incomplete.
+
+### Source clock initializer integrated into hybrid firmware (2026-09-15)
+
+Extended the existing composition and loader-verification chain with include_clock, requiring the preceding UART cluster. The new gate freshly builds and executes 432 whole-clock cases, authenticates and classifies bounded incoming references, checks exact section inventory/addresses and retained ownership, and patches only 568 bytes of complete compiled clock C plus 220 bytes of source-generated PLL/clock data. Eight trailing bytes remain explicitly retained. The composed image passes the existing container/checksum checks and all 12 decoded loader cases.
+
+New artifact: build/gx8002-fft-q15-clock-integration-experiment/firmware_codec.unadmitted.bin, 326092 bytes, SHA-256 ca1f7a252c8f3996c1e4084cb16f19dcc57fb73bff3d709dc019911184996c32. Ownership: compiled C 57448; compiled assembly 3066; generated source data 16269; container metadata 88; unreachable fill 3014; retained stock 246207. This removes 788 more retained bytes. Native macOS build used throughout.
+
+This remains an unadmitted hybrid analysis image, not a complete source-only or hardware-qualified firmware. Clock hardware helpers and other substantial opaque regions remain. Goal active and incomplete.
+
+### Backup oscillator trim reader rebuilt and executed inside clock setup (2026-09-15)
+
+Reused existing recovered trim-state C, adapting its image-A gate wrapper to the backup's inline gate(9,1) call. Native macOS build produces 22 bytes exactly equal to stock at 0x3c95c..0x3c972, including the verified gate target. No opaque arrays or instruction slices supply the implementation. Bounded reference census finds one direct entry caller and no literal or stored-address candidates.
+
+Extended whole-clock verification with 288 additional cases executing the stock/source trim reader in the same register/memory frame as clock initialization, instead of modeling its result. All pass, including volatile register reads and return/failure outcomes; the original 432 control cases also pass. Low-level gate effects remain modeled. Trim source ownership is not yet integrated (the current hybrid already has identical bytes), and the overall firmware goal remains active/incomplete.
+
+### Backup digital LDO control reconstructed in C (2026-09-15)
+
+Recovered the complete digital LDO control at package 0x40a34, distinct from the existing analog-voltage leaf. Readable C preserves unconditional register read at 0xa0005058, byte narrowing, controls 0/1/2 bit operations, and invalid-control return -1 without a write. Native macOS build is 60 bytes within the 64-byte stock envelope, without unresolved symbols or relocations.
+
+All 6144 decoded stock/source comparisons pass across every low byte, three high-bit patterns, valid controls and representative invalid values, with independent bitmask/read-write/return oracle and ABI checks. Incoming references, integration and hardware voltage/timing remain unqualified. Goal active and incomplete; hybrid image unchanged.
+
+### Clock tests execute digital LDO dependency (2026-09-15)
+
+Extended decoded clock execution with leaf returns and the LDO instruction set, then added 288 combined cases executing both actual trim and LDO source/stock bodies in the same register/memory frame. All pass with an independent ordered 0xa0005058 read/write oracle, including failure paths where the final LDO call is never reached. Existing 432 modeled clock cases, 288 trim-composed cases and 6144 standalone LDO cases also pass.
+
+Bounded LDO reference scan finds two direct clock callers and five stored address words at package 0x4548, 0x4ab0, 0x9254, 0x9264 and 0x9274. Values occupy 0x100080f4..0x1000812c, overlapping the backup LDO entry/interior. Three appear in structured 16-byte records in the earlier package region; lifetime and usage are unresolved. These are not dismissed as false positives. LDO source integration remains pending further cross-image reference analysis; the last hybrid image is unchanged. Goal active and incomplete.
+
+### LDO aliases identified as earlier-image data (2026-09-15)
+
+Added an authenticated analyzer for all five stored addresses overlapping backup LDO. Under the earlier image's package+0x10000000-0x50 mapping, pointers at 0x9254/0x9264/0x9274 resolve to NUL-terminated flash names p25q80l/en25s20a/en25s40a. The 0x4548 pointer resolves to the watchdog error string "level timout invalid"; its real LRW and print call are checked. The 0x4ab0 pointer resolves to an 18-entry jump table at package 0x817c; its indexed load and indirect jump instructions and target address bounds are checked. These are actual data uses, not scan noise.
+
+Cross-image consumer lifetime remains unproven, so the source LDO patch is not yet admitted. Evidence narrows the remaining investigation to earlier-image flash/watchdog/table consumers versus backup handoff rather than hypothetical arbitrary pointer patterns. Current hybrid unchanged; full goal active and incomplete.
+
+### Normal loader overwrites earlier-image LDO aliases before entry (2026-09-15)
+
+Added a loader-backed alias analysis that authenticates the five earlier-image data references and executes the normal stock backup loader across all 12 existing mode/register cases. The complete backup copy precedes the call to 0x10003100. Each alias word after loading equals its stock backup code/literal word and differs from the earlier string/table word, without applying any source LDO patch. Thus original earlier-image data meanings already cease to exist at those addresses before normal backup entry.
+
+This is concrete overwrite-order evidence, not a claim that every prior consumer has stopped. Special mode 0xaabbccdd, concurrent/pending interrupts, physical cache effects and full caller lifetime remain outside these modeled flash-read cases. LDO integration remains pending that qualification; current hybrid unchanged. Goal active and incomplete.
+
+### Special loader branch control recovered (2026-09-15)
+
+Extended the decoded loader engine with movih/rotli and an explicit opt-in special flash-read model, preserving the normal-path default. Added 12 special-mode control cases across supplied header values and register seeds. Mode 0xaabbccdd first reads four bytes from offset 0x61760, then calls helper 0x39930 with offset header+0x323b4, destination 0x20000000 and length argument zero. It stores/calls entry 0x10000100, not normal backup entry 0x10003100. Call ordering, offset wraparound, returned value and saved registers pass; all 12 normal loader alias cases still pass.
+
+The zero-length helper call is recorded symbolically only. Its physical meaning is unresolved and is not treated as a proven no-op or whole-image transfer. This branch does not itself prove backup LDO data lifetime. Further flash-helper and transition analysis remains; goal active/incomplete and hybrid unchanged.
+
+### Zero-length flash read side effects tested (2026-09-15)
+
+Decoded flash-reader tests now cover 48 cases: cached device IDs plus the uninitialized 0xffffff sentinel with two failed ID-read returns, varied readiness polling and register seeds. Cached paths gate module 13 on, poll status command 5, and gate it off with no destination writes. Uninitialized failure paths first perform seven ordered controller writes and attempt command 159 (three ID bytes), then converge to readiness polling and the zero-length exit. Independent call/write-order assertions and preserved-register checks pass.
+
+This extends the previous 32 cached-ID cases. It establishes that zero-length requests may initialize controller registers and attempt device identification rather than simply returning. Successful ID/configuration paths and physical flash behavior remain untested, and the helper has not yet been reconstructed as complete source. Goal active/incomplete; current hybrid unchanged.
+
+### Complete dual-path loader control written in C (2026-09-15)
+
+Added source for the complete loader control at 0x396a0..0x39744, preserving normal and magic-mode offset arithmetic, original zero-length special call, both destination/entry addresses, stored entry pointer, ignored flash-helper results and zero return after a returning entry. Native macOS compilation succeeds as a relocatable object with only the explicitly named flash-read dependency unresolved. No invented runtime binding or stub supplies that dependency.
+
+This is source reconstruction progress, not yet a linked/behaviorally qualified firmware replacement. Actual flash execution mapping, decoded source comparison, placement and integration remain pending; current hybrid unchanged and full goal active/incomplete.
+
+### Loader linked at authenticated stage-one mapping (2026-09-15)
+
+Resolved loader runtime mapping from image B's BINH header and stage-one vector table at package 0x38954. All 64 vectors authenticate: reset 0x10000100 and exceptions 0x10000130. The loader package entry 0x396a0 maps to 0x10000d4c, and flash helper 0x39930 maps to 0x10000fdc. The native macOS builder now links the complete 140-byte C loader at that entry and records both addresses and ELF identity, checking unresolved symbols and relocations.
+
+Flash helper remains an explicit absolute dependency, not source closure. Decoded stock/source loader comparison, incoming references and firmware integration remain pending. Goal active/incomplete; hybrid unchanged.
+
+### Complete source loader control verified (2026-09-15)
+
+Added 288 decoded comparisons between the complete stock dual-path loader and its linked C reconstruction. Corpus varies image base, normal/special mode, supplied header, helper return code and register seeds. Ordered header/payload calls, stored entry pointer, indirect entry, unsigned offset wraparound, zero final return and callee/stack preservation match an independent oracle. First read supplies header bytes regardless of modeled return code, so failure leaving an uninitialized header is explicitly outside scope.
+
+Native macOS source loader is behaviorally qualified at the control/call boundary, not at physical flash or called-entry execution. It remains unintegrated with the flash helper retained as an absolute dependency. Goal active and incomplete; hybrid unchanged.
+
+### Source loader full-image transfer and reference census (2026-09-15)
+
+Extended the source-loader verifier with 12 normal-mode cases using the current authenticated clock-integrated hybrid image. Actual decoded stock and source call arguments drive modeled flash transfers; both select exactly the complete 0x1408c-byte backup payload, with full-byte equality. Existing 288 dual-path control comparisons still pass. Physical flash and entry execution remain modeled.
+
+Added the loader-specific stage-one reference census under the correct 0x38954 vector mapping. It finds one direct entry caller, no external literal-pool reads and four stored interior-address candidates elsewhere in the package. Those candidates still require classification before integration. Goal active/incomplete; hybrid unchanged.
+
+### Two loader pointer candidates resolved as model operands (2026-09-15)
+
+Connected the loader reference census to the authenticated gxDNN command parser. Words 0x10000d80 at package 0x192b0 and 0x1aae8 are copy-command tensor operands: destination and source respectively, both encoded base slot 1 plus offset 3456. Exact command boundaries, field positions and parsed values are asserted. They are not absolute executable pointers despite their numeric overlap with loader instructions.
+
+Two earlier-image words at 0x1eb0/0x1eb4 (0x10000db4) remain unresolved; no integration claimed. Goal active/incomplete and current hybrid unchanged.
+
+### Remaining loader aliases identified as boot dispatch entries (2026-09-15)
+
+Resolved the roles of the two remaining stored words at 0x1eb0/0x1eb4. They are entries 0/1 in the earlier boot stage-one dispatch table at runtime 0x10001e60. The real LRW at 0xdf6, indexed load at 0xdf8, indirect jump at 0xdfc and mapped target at package 0xe04 are authenticated. Both targets are 0x10000db4 under the boot stage-one mapping, overlapping an interior address in the later BINH loader mapping.
+
+All four stored-word candidates now have identified roles (two tensor operands, two earlier-image dispatch entries). Cross-image lifetime remains unproved; role classification alone is not admission for overwriting later loader code. Goal active/incomplete; current hybrid unchanged.
+
+### Stage-one dispatcher reconstructed and linked with loader (2026-09-15)
+
+Inspected BINH stage-one reset: it writes control register 0, updates register 31, installs vector base 0x10000000 and stack 0x20002ffc before calling dispatcher 0x39744. Reconstructed that complete dispatcher in C, preserving five helper calls and their order, argument pair (1,0), and conditional loader invocation only for state word 0x20001720 == 2. Unidentified helper names retain package offsets instead of invented semantics.
+
+Native macOS link includes the complete source loader (140 bytes) and dispatcher (44 bytes within its 48-byte envelope) at original entries. No unresolved symbols or relocations remain, but five initializer helpers and flash reading remain absolute binary dependencies. Behavioral comparison of the dispatcher and source integration remain pending; reset observations alone do not prove helper interrupt effects or complete cross-image lifetime. Goal active/incomplete; hybrid unchanged.
+
+### Stage-one dispatcher behavior verified (2026-09-15)
+
+Added 180 decoded stock/source dispatcher cases covering five initial states, mutation after each of its five helper calls or no mutation, three replacement states and two register seeds. All pass with an independent ordered-call oracle, argument pair (1,0), the post-helper state read, conditional loader call exactly for state 2, and preserved registers/stack. Helpers and the loader invocation are still modeled in this dispatcher test; complete loader behavior has separate evidence.
+
+Goal active/incomplete; source integration and remaining initialization/flash dependencies are unfinished. Hybrid unchanged.
+
+### Stage-one boot-state selector reconstructed (2026-09-15)
+
+Recovered complete helper 0x39678 as C: call the initial hardware helper, read descriptor 0xa0010068, and only when its low nibble is 2 publish boot mode 2 then reread the descriptor and store its high 24 bits as the flash base. The second volatile read and publication ordering are explicit, preserving possible descriptor changes.
+
+Native macOS compilation/link yields 38 bytes within the 40-byte original envelope at 0x10000d24. Initial hardware helper 0x39b88 remains an absolute dependency. Behavioral comparison, composition with the dispatcher, references and integration are pending. Goal active/incomplete; hybrid unchanged.
+
+### Boot-state selector ordered behavior verified (2026-09-15)
+
+Added 576 decoded stock/source cases over all descriptor low nibbles, three upper-bit patterns, six independent second-read values and two register seeds. All pass with an independent ordered oracle: helper call, descriptor read, and only for low nibble 2, state publication followed by the second descriptor read and masked base write. This covers descriptor changes between reads and checks callee/stack preservation.
+
+Initial hardware helper remains modeled. Dispatcher composition, incoming references and integration remain pending. Goal active/incomplete; hybrid unchanged.
+
+### Boot-state selector linked and composed with dispatcher (2026-09-15)
+
+Stage-one cluster now links the 38-byte source boot-state selector alongside the dispatcher and loader, replacing its absolute binding. Its linked section exactly matches the independently built selector ELF. Added 288 dispatcher cases that execute the stock/source selector in an explicit separate register frame and carry its actual state writes into the dispatcher model. All pass, including retaining prior state when the descriptor does not select mode 2. Existing 180 dispatcher cases also pass.
+
+Four dispatcher helpers, the selector's hardware helper and flash remain absolute dependencies. This is a linked source cluster and scoped composed execution, not full hardware startup or firmware integration. Goal active/incomplete; hybrid unchanged.
+
+### Stage-one peripheral shutdown reconstructed exactly (2026-09-15)
+
+Recovered complete hardware helper 0x39b88 in readable C. It reads each of the two peripheral status registers at 0xa0500040/0xa0600040, writes zeros to offsets 0x30 and 0x6c of each block, then gates modules 20 and 21 off in order. The discarded status reads remain volatile and observable.
+
+Native macOS build generates 42 bytes exactly equal to the stock body, including the correctly mapped gate call addresses, within its 44-byte envelope. Full stock SHA and body equality asserted; no unresolved symbols or relocations. Gate implementation remains absolute; cluster composition and firmware integration pending. Goal active/incomplete; hybrid unchanged.
+
+### Shutdown source linked; next conditional helper reconstructed (2026-09-15)
+
+Linked the 42-byte source peripheral shutdown into the stage-one cluster, replacing the selector's absolute hardware-helper binding. The linked shutdown section is asserted equal to its independently built, stock-identical source body. All 180 dispatcher cases and 288 selector-composed cases continue to pass (shutdown behavior remains modeled in those executions).
+
+Also reconstructed complete helper 0x39c44 in C: call predicate 0x39824 and, only on zero, read 0xa0010094, replace its low nibble with 12 and write back. Native macOS build is 30 bytes within the 32-byte envelope. Predicate remains absolute; this new helper's behavioral comparison and cluster integration are pending. Full firmware goal active/incomplete; hybrid unchanged.
+
+### Conditional clock helper and predicate verified together (2026-09-15)
+
+Reconstructed the complete stage-one trim predicate 0x39824 as a volatile bit-zero read at 0xa0010030. Linked it with the conditional register helper; predicate is 12 bytes exactly equal to stock. Keeping the predicate non-inlined preserves original entries and the helper's 30-byte fit (ordinary inlining produced 34 bytes, beyond its envelope).
+
+All 4608 decoded stock/source cases pass while executing both functions in one register frame, covering trim high bits and every low register byte with three upper-bit patterns. Independent oracle checks that odd trim values avoid the control-register access and even values preserve all but the low nibble, replacing it with 12. MMIO values supplied; physical effects and firmware integration pending. Goal active/incomplete; hybrid unchanged.
+
+### Clock predicate and two hooks linked into stage-one source cluster (2026-09-15)
+
+Linked the verified conditional clock helper and trim predicate into the stage-one cluster, checking both sections against independently built ELF bodies. Reconstructed two additional complete hooks: the actual single-return stock hook at 0x38a88 (2 source bytes, stock-identical; not a missing-function stub) and the fixed-argument wrapper at 0x39c34, which ignores caller arguments and passes 115200/0 to helper 0x39bb4 (14 bytes within 16 available). The latter uses different constant-loading instructions, so no byte-identity claim; direct behavioral qualification remains pending.
+
+Existing 180 dispatcher and 288 selector-composed cases pass after linking. These tests still model the newly linked hook calls. Remaining absolute dependencies include 0x3912c, 0x39bb4, gate and flash. Full source-only goal active/incomplete; hybrid unchanged.
+
+### Fixed-argument stage-one hook verified (2026-09-15)
+
+Added 96 decoded stock/source comparisons for the complete hook at 0x39c34, using the current freshly linked stage-one cluster. Incoming argument pairs, modeled helper results and register seeds vary. All cases call helper 0x39bb4 exactly once with 115200/0 and preserve callee registers/stack, despite the source compiler's different constant-loading instructions. Underlying helper remains modeled; no physical configuration or integration claimed. Goal active/incomplete; hybrid unchanged.
+
+### Stage-one UART setup reconstructed in C (2026-09-15)
+
+Recovered complete fixed-hook dependency 0x39bb4..0x39c34. C preserves initial UART writes, optional divisor retention, explicit frequency/arithmetic calls, unsigned multiplication/shift wraparound, two busy-poll phases, divisor low/high byte writes, fractional register write and final line/FIFO settings. Arithmetic calls retain their original boundaries rather than substituting C division before zero-denominator behavior is qualified.
+
+Native macOS build is 124 bytes within the 128-byte envelope at its original mapping, without unresolved symbols or relocations. Frequency and two arithmetic implementations remain absolute dependencies; decoded comparison, polling qualification and integration pending. Goal active/incomplete; hybrid unchanged.
+
+### Stage-one UART setup behavior compared (2026-09-15)
+
+Added 144 decoded stock/source cases covering four baud values, zero/nonzero divisor-retention flags, four frequencies and three finite busy-poll patterns. All ordered helper calls and MMIO events match; independent write oracle checks divisor bytes, fractional value with unsigned intermediate wraparound, and final line/FIFO settings. Callee registers and stack preserved.
+
+Frequency and unsigned arithmetic are modeled at the original helper boundary. Zero shifted denominators and permanently busy devices are excluded; actual arithmetic implementation/source closure and firmware integration remain pending. Goal active/incomplete; hybrid unchanged.
+
+### UART and reusable arithmetic linked into stage-one source cluster (2026-09-15)
+
+Linked the independently verified 124-byte UART setup body into the stage-one cluster and corrected the fixed-hook declaration to its void return type. Linked bodies are checked against independent ELFs; allocated ranges must not overlap. Dispatcher verification continues to pass 180 modeled and 288 selector-composed cases. Fixed-hook and standalone UART checks passed 96 and 144 cases before arithmetic linking.
+
+Reused existing reconstructed SPL restoring-division C for later BINH helpers 0x39774/0x397b8, with compile-time symbol renaming. New native macOS builder verifies 16,546 decoded stock/source cases against the independent arithmetic oracle, including zero denominators (0/0 returns 1; positive/0 returns 0; modulo zero returns numerator). Compiled functions occupy 46 and 40 bytes, within their 68/60-byte envelopes. Their linked stage-one bodies match independently verified bodies. No binary extraction is used to build these functions.
+
+Remaining cluster absolute dependencies: initialization 0x3912c, frequency 0x38c54, module gate 0x38b4c, flash read 0x39930. UART plus arithmetic execution in one frame, full startup composition, reference lifetime qualification and firmware integration remain pending. Existing hybrid unchanged (246207 retained stock bytes); full source-only goal active/incomplete.
+
+### UART and arithmetic executed together (2026-09-15)
+
+Extended the UART instruction runner to execute the actual leaf arithmetic bodies in the same register frame, with explicit call/return addresses. Added 378 stock/source composed cases spanning zero baud, shifted-denominator wrap to zero, high-bit frequencies, retention modes and finite busy sequences. All ordered traces and independent final-write oracles agree; callee registers/stack preserved. Re-ran the original 144 modeled UART cases successfully.
+
+Frequency response remains modeled. Inspected full frequency entry 0x38c54: it uses module remapping, descriptor lookup 0x38a8c, source selection, analog PLL reads and divider logic. Existing runtime_gx8002_clock_frequency.c adapts authenticated upstream source and is the next reuse candidate; it has not yet been qualified for this stage-one mapping. Firmware integration unchanged; full goal active/incomplete.
+
+### Upstream frequency source rebuilt for BINH stage one (2026-09-15)
+
+Added native macOS stage-one frequency builder reusing the existing C adapter and authenticated NationalChip GRUS clk_priv.h directly, preserving its inline divider logic. Function binds at runtime 0x10000300/package 0x38c54, descriptor lookup at 0x10000138/package 0x38a8c, and compiler-generated 19-entry switch table at 0x100013b8/package 0x39d0c. Compiled code is 468 bytes within the 500-byte envelope; generated table is 76 bytes. No undefined symbols; section relocation checks pass. Lookup remains absolute.
+
+Added 1566 decoded stock/source comparisons for low-frequency behavior, module remapping, lookup failures, absent source-offset marker, oscillator selection and synthetic divider values. Ordered MMIO traces, ABI and an independent output oracle all pass. Descriptor lookup is modeled with explicit synthetic records: actual stage-one table/lookup closure, high PLL paths, changing-register behavior, references and cluster integration remain pending. No firmware ownership admission or hardware qualification claimed. Full goal active/incomplete; hybrid unchanged.
+
+### Stage-one clock tables and lookup rebuilt from upstream (2026-09-15)
+
+Added macOS builder for authenticated upstream clock lookup and tables at BINH stage-one addresses. Parameter table is 416 bytes at 0x200014c8, DTO table 3 bytes at 0x200016d8, and divider table 68 bytes at 0x200016dc. All 487 generated table bytes equal stock after source pointer relocation. Actual descriptor pointers establish DTO/divider locations; the intervening 112-byte region after the parameter table is not claimed by this build. Lookup compiles to 160 bytes within 192 available at 0x10000138/package 0x38a8c.
+
+Added 42,160 decoded stock/source lookup comparisons with independent search/output oracle, including original, sequential, reversed, absent and duplicate module IDs; null output and out-of-range IDs; preferred index and fallback search. All pass. Parameterized shared lookup interpreter's record base and re-ran its existing backup-image 42,160 cases successfully. No binary data enter source compilation. Frequency/lookup composition, references, firmware integration and hardware remain pending. Full source-only goal active/incomplete; hybrid unchanged.
+
+### Stage-one frequency and lookup source component composed (2026-09-15)
+
+Added full stage-one frequency suites using freshly compiled lookup output and the authenticated source-built tables: 248 low-frequency, 1040 high-frequency, 10240 PLL sweep, 80 slow-source and 3328 changing-selection cases (14936 total). Stock/source return values and ordered MMIO traces agree; fixed-register suites also compare an independent arithmetic oracle. Lookup executes in a separate abstract register frame, not in the frequency frame; physical MMIO/timing remains modeled.
+
+Removed the frequency builder's absolute lookup binding. The ELF now contains actual source lookup, parameter/DTO/divider tables, frequency logic and generated switch table. Every lookup/table body and address is asserted equal to its independently built counterpart; all sections have no relocations and no undefined symbols. Re-ran all 14936 cases against the combined ELF successfully. Full startup linking, reference/lifetime qualification and firmware integration remain pending. Full source-only goal active/incomplete; hybrid unchanged.
+
+### Frequency source linked into stage-one startup (2026-09-15)
+
+Startup now links the actual upstream frequency object, lookup, generated switch table and source-defined descriptor tables. UART frequency symbol aliases the compiled function rather than an absolute address. Every clock section is asserted equal in address and bytes to the independent verified component. Added overlap checks normalized across instruction/data SRAM aliases, in addition to ordinary VMA checks. Dispatcher 180 modeled plus 288 selector-composed cases and 378 UART/arithmetic cases pass. Their frequency call remains modeled; full one-frame startup execution is not claimed.
+
+Also rebuilt authenticated upstream module-gate source for stage one: 254 code bytes within 264 at runtime 0x100001f8/package 0x38b4c, plus 148 compiler-generated switch-table bytes at 0x10001324/package 0x39c78. Original lookup binding retained for this independent candidate. Behavioral/reference qualification and startup linking remain pending. Remaining startup absolute implementations: 0x3912c, gate, flash read. Full source-only goal active/incomplete; hybrid unchanged.
+
+### Stage-one module-gate behavior composed with source lookup (2026-09-15)
+
+Parameterized the existing gate instruction interpreter's record, switch and lookup addresses and added stage-one comparisons at the recovered mappings. All 8432 cases pass with 33728 compiled source lookup calls in separate abstract frames. Covers module IDs including out-of-range values, four enable values, alternating/all/zero source bits, and every one-hot/one-clear source pattern. Stock/source ordered lookup and MMIO traces agree with the independent gate oracle. Source-built parameter table IDs supply the lookup.
+
+Re-ran the existing backup-image composition: all 8432 cases and 33728 lookup calls pass after the shared interpreter change. Stage-one gate remains an independently linked candidate; startup integration, references/lifetimes, physical clock effects and complete firmware qualification remain pending. Full source-only goal active/incomplete; hybrid unchanged.
+
+### Verified gate linked into startup with shared source lookup (2026-09-15)
+
+Linked the 254-byte gate and 148-byte generated switch table into the stage-one startup ELF at original addresses. Frequency object's compiled lookup is exported; gate object's duplicate lookup is weakened and explicitly discarded, together with duplicate tables and unused adapter. The gate calls resolve to the single compiled lookup. Gate code/table bytes are asserted equal to independent verified ELF, while existing frequency/lookup/table body checks and instruction/data alias overlap checks remain active. Initial duplicate-definition linker failure was corrected; final build passes with no unresolved symbols or relocations.
+
+Dispatcher 180 modeled plus 288 selector-composed cases and 378 UART/arithmetic cases pass after linking. These scoped runners still model their gate/frequency boundaries. Only initialization 0x3912c and flash read remain absolute implementation dependencies in this cluster. Inspected 0x3912c: it includes substantial descriptor-driven clock/DTO configuration and calls 0x3980c/0x397f4; complete reconstruction remains pending. Full source-only goal active/incomplete; hybrid unchanged.
+
+### Remaining initialization traced to authenticated SPL source (2026-09-15)
+
+Identified 0x3912c as the structure of pinned arch/soc/grus/spl/spl_clk.c spl_clk_init: clear 32k/all trim states, reset divider/DTO for all modules, initialize source/module selection, call board setup, configure gates. Authenticated upstream file against its commit blob and added native macOS analysis builder with original trim/board/lookup bindings. Source extracts upstream clock routines and uses unsigned fixed-count loop indices for strict warnings.
+
+Compiler outlines several helpers instead of matching the stock inlining. Final analysis ELF therefore contains a 176-byte main plus 1868 bytes of additional source routines/tables at explicitly non-production 0x10004000. Initial discarded-helper link failure fixed by retaining source helper bodies. This is not a placement-admitted firmware component; no fit, behavior or source-only completion claim. Source clock table is placed at recovered 0x20001688 (80 bytes); equality/behavior still needs qualification. Full source-only goal active/incomplete; hybrid unchanged.
+
+### Upstream SPL initialization fits original envelopes (2026-09-15)
+
+Adapted only helper inlining and fixed-count loop index signedness in authenticated upstream SPL clock source/header. Private clock helpers are forced inline while __module_get_info remains a call boundary. This eliminates non-production outlined code: main is now 1316 bytes within stock 1356; generated switch tables are 124 bytes within the 196-byte stock region at 0x10001404. No analysis-helper allocation remains. Compiler made the 80-byte clock-source table read-only; linker explicitly places it at recovered 0x20001688.
+
+All source-defined parameter, clock-source, DTO and divider table bytes equal stock at their original addresses. Native macOS compile/link succeeds, no unresolved symbols or relocations. Added fit and data assertions and recorded adapted-header hash/compiler flags. These establish a buildable fitting candidate, not behavior or firmware admission: decoded initialization traces, external references, trim/board implementations and integration remain pending. Full source-only goal active/incomplete; hybrid unchanged.
+
+### Trim-state setter C and behavioral comparison (2026-09-15)
+
+Reconstructed 0x397f4/0x3980c in C with separate volatile clear and OR operations. Added 18432 decoded stock/source cases with independent ordered-event oracle, varying input low/high bits and independently changing first/second register reads. ABI and read consumption checked. Native macOS source builds; first setter is 24 bytes, second 26 versus its 24-byte envelope. Both -Os and -O2 exceed the second envelope; report explicitly records non-fit, so no startup integration is claimed. Behavioral checks pass; placement repair remains necessary. Full goal active/incomplete; hybrid unchanged.
+
+### Trim setter placement repaired with explicit source instruction (2026-09-15)
+
+Compiler optimization variations did not shrink the 26-byte second setter. Replaced its generated four-byte ANDNI with a source-authored inline BCLRI instruction; all surrounding operations remain C. Both setters now compile to 24 bytes within their original envelopes. No extracted bytes or opaque payloads are used. Added hard fit assertions and reran all 18432 stock/source ordered-event and ABI comparisons successfully. This one two-byte instruction must be attributed as source assembly rather than pure compiled C in any later ownership admission. Startup integration/hardware remain pending; full goal active/incomplete.
+
+### Trim setters and board hook linked into initialization candidate (2026-09-15)
+
+Initialization now links both verified trim setters, checking their bodies against the independent ELF. Reconstructed complete board hook 0x39c64 in C: call trim helper 0x38e48; only a zero result calls all-trim setter with argument 1. Compiles to 18 bytes within 20 available. All 260 decoded board branch/argument cases pass with trim/setter boundaries modeled. Rebuilt trim comparisons also pass. Added physical SRAM-alias overlap checks to the combined candidate.
+
+Clock-trim implementation 0x38e48 and descriptor lookup remain absolute dependencies of this separate initialization component. Full initialization instruction comparison and integration into startup remain pending. Full goal active/incomplete; no firmware ownership change.
+
+### Authenticated SPL clock-trim source candidate builds (2026-09-15)
+
+Recovered flash configuration contract from stock 0x38e48 and pinned grus_cfg.h: 64-byte packed record at flash 0xff000, magic 0x47525553, XOR of bytes 0..62 against byte63, trim words at offsets8/12/16. Added source builder extracting pinned spl_clk_trim and private helpers. Header/record size authenticated/asserted. Private helpers forced inline; fixed-size loops unsigned and trim locals uint32_t to match helper pointer types under native compiler.
+
+Candidate is 572 bytes within 740 available at runtime0x100004f4; no outlined analysis helper allocation, unresolved symbols or relocations. Parameter/DTO/divider tables equal stock. Compiler folds low/high source-table constants into code, so no additional table section is emitted. Lookup and flash read remain absolute dependencies; decoded behavior, changing-register effects, reference qualification and integration pending. Flash read return is ignored by upstream and stock; no failure-handling improvement claimed. Full goal active/incomplete; hybrid unchanged.
+
+### Clock trim preserves source-table loads; record validation compared (2026-09-15)
+
+Inspection showed stock loads writable low/high clock tables while prior candidate folded them. Exposed the two upstream tables at file scope to retain runtime loads without altering fields. Revised candidate656 bytes fits740; both16-byte source tables match stock at0x20001668/0x20001678. This preserves table-backed behavior without asserting arbitrary concurrent mutation equivalence.
+
+Added1040 decoded record-validation comparisons:16 deterministic valid records and one-bit corruption at every byte for each. Stock/source acceptance and exact validation read offsets/widths agree with independent magic/XOR oracle. This executes only the post-flash validation slices; flash transfer, full trim effects, full-function ABI, source-table mutation and integration remain pending. Full goal active/incomplete; hybrid unchanged.
+
+### Successful oscillator/source-write sequence compared (2026-09-15)
+
+Added144 decoded stock/source slice comparisons for the successful trim write sequence. Covers three trim-word patterns, three independently supplied four-read MMIO sequences, and every binary combination of the four source-table selections. Independent oracle verifies exact ordering:32k/1m trim writes, two low-source updates,24m trim write, then two high-source updates. All pass, including preserved runtime table selection changes. This is a bounded slice test; whole trim control flow, module switching/gating, ABI and firmware integration remain pending. Full goal active/incomplete; hybrid unchanged.
+
+### Trim module-switch slices compared (2026-09-15)
+
+Added144 differential decoded cases for the successful trim module selection sequence (SCPU10, SRAM6, flash13), feeding actual compiled lookup outputs into separate abstract frames. Varies zero/all/alternating/one-hot source selection and four enabled-gate patterns. Ordered MMIO and lookup traces match. Slice entry registers explicitly reflect preceding code (stock r4 points to info; source r4 contains1); initial harness mismatch corrected from disassembly, without changing firmware source. No independent complete switch oracle or full-function ABI claim. Whole trim execution and integration remain pending; full goal active/incomplete.
+
+### Complete trim entry-to-return execution compared (2026-09-15)
+
+Added96 full decoded stock/source trim cases, extending the module runner to execute stack save/restore, flash record validation, oscillator/source updates, module switching and gate cleanup in one frame. Compiled descriptor lookup still runs separately. Covers four source patterns, two gate-status patterns, valid/bad-magic/bad-XOR records, two flash return values and two register seeds. Return values, ordered lookup/flash/MMIO effects and callee registers/stack agree; lookup sequences and result also checked independently.
+
+Flash model always supplies64 bytes, even with error result; no claim for partial transfer or uninitialized buffers. Finite ordinary register-memory model does not qualify physical set/clear gate side effects, timing or concurrency. Source-table initialization checked against emitted tables. Full goal active/incomplete; firmware integration unchanged.
+
+### Source clock initialization and trimming linked together (2026-09-15)
+
+Added combined clock component linking initialization, trim routine, board hook and both trim setters. Shared parameter tables are selected once; duplicate trim-object tables/lookup are discarded. Board hook now targets compiled spl_clk_trim. Every allocated component section is checked against its independent build for byte and address equality; physical SRAM alias overlap checks pass. Lookup and flash read remain absolute implementations.
+
+Extended full trim verifier with a combined-ELF option and candidate hash. All96 entry-to-return trim cases pass against the newly linked cluster. This does not execute the outer1316-byte initialization routine; that comparison, lookup closure, reference admission and full firmware integration remain pending. Full goal active/incomplete; hybrid unchanged.
+
+### Clock component lookup implementation closed in source (2026-09-15)
+
+Combined clock ELF now includes its own compiled descriptor lookup at original entry. Initial separate-object attempt failed on section-local table relocation; retained the initialization unit's lookup with its source-defined tables instead. Inspection caught compiler null-output specialization. Added an unused public-input contract wrapper (discarded at link) and disabled tree loop optimization to preserve full lookup contract. Linked lookup passes62 comparisons against independently qualified lookup over original table IDs, null/valid output and in/out-of-range modules. Other component bodies/layout checks pass; all96 complete trim regression cases pass.
+
+Flash read is now the sole absolute implementation dependency in this clock component. Trim verifier still executes lookup in a separate frame from the independent lookup build; linked lookup is compared separately, not claimed as same-frame execution. Full initialization behavior and firmware admission remain pending. Full goal active/incomplete; hybrid unchanged.
+
+### Complete trim and lookup execute in one frame (2026-09-15)
+
+Extended full trim runner with actual lookup call/return execution. Stock now runs its own decoded lookup body; combined source runs the linked lookup, sharing registers, stack and descriptor memory with trim. Return-address checks and final callee-register/stack checks pass in all96 cases. Trace/result oracle checks remain active. Added same-frame-specific report with candidate hash; reran original96 separate-frame cases successfully.
+
+This removes the separate lookup abstraction for these tests. Flash still always supplies64 bytes and MMIO uses a finite register-memory model; partial transfers, hardware set/clear side effects, timing and concurrent mutation remain unqualified. Full initialization and firmware integration pending; full goal active/incomplete.
+
+### Outer initialization executes from entry to return (2026-09-15)
+
+Added16 complete outer initialization stock/source cases covering zero/all/alternating source registers, two gate-status patterns and two register seeds. Runner executes divider/DTO resets, source/module selection and gate loops using authentic tables and generated switch tables, with separate compiled lookup and modeled trim-setter/board calls. Ordered effects match, helper sequence starts with both trim resets, exactly one board call occurs, and callee registers/stack are preserved. Unsupported instruction forms encountered were added from decoded semantics; firmware source unchanged.
+
+This is a finite differential check, not a complete independent initialization oracle or same-frame execution of board/trim. Physical register side effects and full firmware integration remain unqualified. Full goal active/incomplete; hybrid unchanged.
+
+### Full initialization/trim/lookup clock sequence composed (2026-09-15)
+
+Added same-frame execution of the full source and stock clock initialization path, including real trim setters, board hook, trimming and descriptor lookup. Generalized stack push/pop and nested return handling; flash remains modeled. All96 composed cases pass over source/gate patterns, register seeds, valid/bad-magic/bad-XOR records and two flash statuses. Ordered traces and ABI match; independent helper-sequence checks require trim-complete set only for accepted records and exactly one flash read. Original16 modeled outer cases still pass.
+
+Flash supplies64 bytes even on modeled error; physical set/clear gate side effects, partial reads, timing and concurrency remain unqualified. Complete clock component is source-built and behavior-compared within these limits; full startup linking, reference admission and full firmware remain pending. Goal active/incomplete.
+
+### Pinned SPL flash reader source candidate built (2026-09-15)
+
+Located stock flash reader in authenticated spl_spinor.c and added native macOS builder preserving upstream file notices and dependency hashes. Recovered configuration:quad SPI enabled, XIP/DMA disabled, sample delay1 and baud divider2. Source includes cached identification, device-specific quad setup, busy polling and chunked reads. Register read/write helpers remain original bindings at0x39830/0x398b0; gate at0x38b4c. Disabled IPA cloning/specialization to preserve explicit helper interfaces.
+
+Final analysis candidate632 bytes exceeds600-byte stock envelope by32; no placement admission. No outlined analysis code remains; cachedJEDEC source word0x00ffffff at0x20001730. No undefined symbols or relocations. Behavioral tests, size repair and transfer helper closure pending. Full goal active/incomplete; no hybrid ownership change.
+
+### Flash register transfer source helpers fit (2026-09-15)
+
+Added independent native macOS linker for authenticated SPL register read/write routines, compiled from the same source as the main flash reader. Read126 bytes at0x10000edc and write124 bytes at0x10000f5c fit their128-byte envelopes. Neither body is byte-identical to stock; no behavioral equivalence claimed yet. No undefined symbols or relocations; all transfers/polling are source rather than retained helper implementations.
+
+Bounded compiler-option probes for the main reader found smallest624 bytes with tree-loop optimization/GCSE disabled (also624 with TER disabled); O2/O3 produced1600 and O1 produced640. Kept existing632-byte candidate/flags because probes do not establish behavioral benefit or a fit. Main-reader size repair and register polling/transfer verification remain pending. Full goal active/incomplete; firmware unchanged.
+
+### Complete flash register-transfer helpers compared (2026-09-15)
+
+Added432 decoded stock/source read/write register-transfer cases: six commands, lengths0/1/2/3/16/65, three finite busy patterns and two register seeds. Ordered MMIO/buffer traces match; independent oracle checks exact configuration/command writes and each buffer byte access. Return0 and preserved registers/stack verified. Read data carries nonzero high bits to verify low-byte truncation. Readiness and final FIFO/busy sequences must be fully consumed; unsupported instructions fail closed.
+
+Physical SPI controller behavior, nonterminating polling and main-reader integration remain pending. Main632-byte reader still exceeds600-byte envelope; no firmware ownership claim. Full goal active/incomplete.
+
+### Source flash reader fits and zero-length paths compared (2026-09-15)
+
+Keeping upstream wait_till_ready as one noinline helper inside the original reader envelope reduces combined text to526 bytes (488-byte reader plus38-byte helper), fitting600 bytes. Register helpers preserve their ABI; compilation remains native macOS. No extra analysis section, undefined symbols or relocations. Re-ran432 register-transfer cases successfully.
+
+Extended the zero-length verifier to execute the compiled reader and its actual nested polling helper. All48 source cases and48 original stock regression cases pass the same independent trace oracle: cached IDs or failed identification, finite readiness delays, clock/setup calls, no destination writes, return0 and stack/callee-save restoration. Register transfers and clock gating remain modeled at these boundaries. Successful ID/quad configuration and nonzero/chunked transfers still require qualification. No hybrid changes or hardware claim; full goal remains active/incomplete.
+
+### Flash reader nonzero and chunked transfer comparison (2026-09-15)
+
+Added136 decoded stock/source cached-ID reader cases with an independent complete ordered MMIO/byte-transfer oracle. Covers both 0xeb and0x6b commands, IDs1c3812/1c3813/854012/ffffffff, finite delayed readiness/FIFO, two register seeds, offset wrap, lengths0/1/3/65 and65535/65536/65537/131073. Every supplied RX byte is consumed and stored with low-byte truncation; stack/callee-save restoration and return0 checked. Actual source nested polling helper executes; register status and clock helpers remain modeled. Native macOS build succeeds.
+
+Initial large test destination20000000 overwrote cachedJEDEC at20001730, changing later chunk command selection. Ordinary transfer tests now use synthetic nonoverlapping destination20050000 (not a hardware RAM claim). Loader/self-overwrite behavior requires separate qualification; successful ID detection/quad setup and lengths aboveINT_MAX also remain unqualified. Stock uses signed min.s32 where this source build uses min.u32; tested lengths are belowINT_MAX. No firmware ownership change; full goal active/incomplete.
+
+### Successful flash identification and quad setup compared (2026-09-15)
+
+Extended reader execution with successful JEDEC/status helper inputs and independent ordered helper/MMIO oracle. All1872 cases pass across13 IDs including dispatch neighbors, lengths0/3/65, two finite busy patterns, two register seeds, three SR1 bytes and four SR2 bytes. Covers both one-byte command31 and two-byte command1 writes, write-enable command6, preserving unrelated status bits, already-enabled quad, special IDs requiring no setup, and resulting read commands. Compiled source nested wait executes; stack locals modeled bytewise including halfword ID construction. Cached JEDEC store and preserved registers/stack checked.
+
+Register helpers return0 with complete supplied buffers in these tests; clock gating is modeled. Physical SPI, partial/failing register transfers, destination/self-overwrite, huge signed lengths and composed helper execution remain separate work. Full source-only goal active/incomplete; no hybrid or ownership change.
+
+### Flash reader and register helpers linked as source (2026-09-15)
+
+Added native macOS flash-cluster builder. One ELF now contains source register read126 bytes, register write124 bytes, main reader/polling526 bytes and cachedJEDEC4 bytes. All flash function symbols are section-defined; no absolute flash implementation bindings remain. Exact bytes/addresses match independently tested components. Enforces original envelopes, no relocations/undefined symbols and no overlapping SRAM aliases. Clock gate is the only remaining absolute implementation dependency (ELF FILE symbol excluded from implementation classification).
+
+This closes flash helper linking, not composed behavior or full firmware admission. Full goal active/incomplete; hybrid ownership unchanged. Next work includes actual composed register-helper execution, clock/startup linkage and unresolved self-overwrite behavior.
+
+### Composed flash reader and register helpers executed (2026-09-15)
+
+Extended decoded reader execution to enter actual stock/source register helper bodies in the same register/stack frame, returning through their real link register. All1872 successful identification/setup cases and136 cached-ID transfer cases pass with source flash-cluster ELF. Cached tests include64-KiB boundaries and multi-chunk reads. Each helper independently checks exact configuration/command writes, all passed-buffer accesses, consumed finite readiness/RX/FIFO inputs, return0 and callee-save state. Stock/source ordered helper MMIO traces match; stack-buffer addresses are checked relative to each passed pointer since compiler frames differ. Actual source wait helper remains nested. Original1872 modeled-helper identification regression also passes.
+
+Clock gate remains modeled. Physical controller behavior, nonterminating waits, self-overwriting destination aliases and lengths aboveINT_MAX remain unqualified. This is component execution evidence, not runnable full firmware or new hybrid ownership. Goal active/incomplete.
+
+### Stage-one source components linked together (2026-09-15)
+
+Added native macOS stage-one source-cluster builder combining dispatcher/loader, clock initialization/trim/gate/frequency/lookup, trim setters/board hook, flash reader/register helpers, UART/arithmetic and existing boot/control hooks. No undefined symbols, relocations or absolute implementation definitions remain (ELF FILE symbols excluded). All32 allocated sections match independent component bytes and addresses, including lookup; physical SRAM aliases do not overlap.
+
+Clock initialization originally referenced its own local parameter-table section. Source adaptation declares that authenticated26-record table extern in a private build header, sharing the frequency component's source definition; recompilation produces identical final initialization bytes. No binary extraction used to construct this component. Reset/vector setup, complete composed startup execution, loader lifetime/overlap, full image packaging/admission and other G2 components remain incomplete. Goal active; hybrid ownership unchanged.
+
+### Authenticated upstream stage-one reset/vector source built (2026-09-15)
+
+Located and authenticated pinned SDK arch/cpu/csky/ck804/spl_start.S. New native macOS builder compiles the unmodified upstream file with recovered NR_IRQS32 and stack20002ffc. Source-generated256-byte vector table and54-byte reset/default/empty-hook text match every corresponding stock byte. Includes processor status80000200, clearing control-register31 bit3, vector-base10000000, stack initialization, dispatcher call and later-image reset fallback. Default handler's self-loop is the original upstream behavior, not a replacement for unknown functionality.
+
+Standalone link explicitly binds dispatcher10000df0 and later-image reset10003100. Combined startup linking must replace its duplicate empty hook and retain the fallback's cross-image dependency until reconstructed. Physical control-register semantics, fallback lifetime, full startup execution and complete firmware remain unqualified. Goal active/incomplete; no hybrid ownership changes.
+
+### Reset/vector entry integrated with stage-one source cluster (2026-09-15)
+
+Combined native macOS ELF now includes authenticated upstream vectors/reset/default handler and shared spl_clear_bss empty hook. Removed duplicate C empty-hook section; existing caller aliases resolve to source spl_clear_bss. ELF entry10000100 verified. Dispatcher reset call resolves to source; only absolute implementation remaining is later-image reset10003100. All independent component bytes/addresses remain checked, including reset/vector bytes and former empty-hook slice; no undefined symbols, relocations or overlapping SRAM aliases.
+
+Added518 decoded stock/source reset-setup cases across259 control-register31 patterns and two seeds, independent ordered oracle for PSR80000200, clearing bit3, VBR10000000, stack20002ffc, dispatcher and fallback calls. Dispatcher is modeled as returning with caller-saved clobbers; full dispatcher/fallback bodies are not executed here. Physical processor, startup composition and later-image lifetime remain unqualified. Full goal active/incomplete; no runnable full-firmware or hybrid ownership claim.
+
+### Backup-image reset/vector and BSS startup source recovered (2026-09-15)
+
+Authenticated pinned SDK arch/cpu/csky/ck804/start.S builds unmodified on macOS with NR_IRQS32, stack2002fffc and recovered BSS boundaries20017090..2002d79c. All256 vector bytes and76 startup/BSS-clear bytes match stock exactly. Source-generated internal/default vectors use10003240 (including tspend); external IRQ vectors10004880. System-init/main callback bindings remain explicit dependencies. Main maps to10015cfc/package4e63c.
+
+Clarified cross-image mapping: runtime10003100 resolves to backup package3ba40 after load. Raw stage-one objdump displays its relative call target as package3ba54 because it uses the stage-one mapping; that is not the loaded backup entry offset. Full fallback lifetime still unproven.
+
+Executed compiled BSS clearer for three register seeds, checking all22979 ordered zero stores in the fixed range and exact register/stack restoration. No caller/control-register/hardware model claim. Source assembly is necessary processor startup code, not extracted binary. Full goal active/incomplete; no firmware ownership update.
+
+### Backup reset/system source analysis link and fit finding (2026-09-15)
+
+Added analysis linker joining authenticated reset/vectors/BSS clear and adapted upstream system_init. Reset now calls section-defined system_init; system initializer calls source clear_bss and uses source vectors. All bytes/addresses match independent builds; no undefined symbols/relocations. Remaining clock, preservation, board, main and IRQ/default callbacks remain explicit external bindings.
+
+Fit check revealed existing system_init is168 bytes versus164 available; would overlap next stock function by4. Builder explicitly reports fits=false/source_admitted=false. Compiler probes disabling tree-loop optimization, TER, IPA SRA, branch-probability guessing or usingO2 did not reduce size. Difference is in compiled MPU register setup and control flow; requires source/layout repair and renewed verification before integration. No admitted firmware change. Goal active/incomplete.
+
+Also corrected both upstream assembly vector sections to carry alloc/load/readonly/data ELF flags using objcopy on source-generated objects. Upstream custom section directives lacked allocation flags; byte equality alone had not caught that packaging issue. Backup vectors now appear in allocated-section checks; stage-one rebuild/reset regression passes518 cases with vectors allocated. No vector payload bytes changed.
+
+### Backup system initializer size repaired and compared (2026-09-15)
+
+Specialized upstream generic MPU region setup to its recovered fixed region using ordinary C masks and existing control-register intrinsics. Preserves read order CAPR/PACR/PRSR and write order PRSR/CAPR/PACR, unrelated bits and subsequent MPU enable. Source initializer shrank168 to152 bytes, fitting164-byte envelope with12 bytes spare. Startup cluster now asserts fit and links reset, source system_init, vectors and BSS clear without overlapping allocated sections.
+
+Verifier passes1024 randomized control-register/preservation cases plus192 predicate/board cases (those helpers execute in separate frames), with independent MPU bitmask and ordered call/read/write oracles. Clock/BSS calls remain modeled in this system verifier; complete startup and hardware behavior are not claimed. No binary code patching or trap replacement used. Full goal active/incomplete; hybrid ownership unchanged.
+
+### Backup startup predicate and board helpers linked as source (2026-09-15)
+
+Extended backup startup cluster with reconstructed preservation predicate32 bytes, board wrapper12, status66 and analog update20. All fit original envelopes and retain independent component bytes/addresses. system_init now resolves preservation/board directly to section-defined source; board's status and analog calls also resolve internally. Reset/system/BSS/vector definitions remain intact. Physical SRAM alias ranges checked for overlaps, plus no undefined symbols/relocations.
+
+Re-ran system verification:1024 register/control-flow comparisons and192 separate-frame predicate/board compositions pass. Actual combined-frame startup execution is still pending. External implementation bindings now cover clock initialization, application main, default/tspend handler and IRQ dispatch; BSS bounds are data symbols. Full goal active/incomplete; no firmware ownership or hardware qualification claim.
+
+### Backup startup clock/trim/LDO source cluster linked (2026-09-15)
+
+Extended backup startup ELF with complete reconstructed clock initializer568 bytes, source-generated clock tables220 bytes, trim reader22 and digital LDO control60. System clock call, clock preservation/trim/LDO calls resolve to section-defined source; existing predicate/board/reset/BSS remain linked. All component payloads/addresses match independent builds; fit and physical SRAM alias non-overlap assertions pass. Re-ran432 complete clock comparison cases successfully under the existing verifier's modeled low-level setter boundaries.
+
+Remaining external clock functions are divider, DTO, source/module-source, blocking/nonblocking PLL and module-enable setters; main/default/IRQ implementations remain external as well. Saved gate state is an explicit RAM-data address, not an executable dependency. Full composed startup execution, image lifetime/admission and remaining firmware reconstruction continue; goal active/incomplete, hybrid unchanged.
+
+### Backup startup module gate and lookup source linked (2026-09-15)
+
+Linked source module gate254 bytes, switch table148, lookup160 and parameter/DTO/divider tables487 into backup startup. Clock initializer and trim now call section-defined gate; gate calls section-defined lookup against source tables. Exact allocated bytes/addresses match independent components, fit checks and physical alias non-overlap pass, no unresolved symbols or relocations. Duplicate unused wrapper definitions in the source object inputs are renamed/localized and discarded; retained gate and lookup bodies remain unchanged.
+
+Six low-level setter dependencies remain: divider, DTO, source, module-source, PLL and nonblocking PLL, alongside main/default/IRQ implementations. Full same-frame startup execution and firmware admission remain pending. Goal active/incomplete; no hybrid ownership update.
+
+### Backup clock-source selector rebuilt and linked (2026-09-15)
+
+Reused authenticated clock-source-selector C with its separately reconstructed register helper forced inline for backup layout. Native macOS compilation produces30 bytes within32, exact match to all30 stock implementation bytes atpackage3bee0/runtime100035a0. Builder authenticates stock before comparison, reports source hash and upstream evidence, and checks no undefined symbols/relocations. Backup startup source cluster now resolves gx_clock_set_source to this compiled function; component bytes and layout checks pass.
+
+Shift expressions are C-defined for clock offsets0..31; arbitrary invalid offsets are not claimed. Other setters (divider, DTO, module-source, blocking/nonblocking PLL), main and interrupt implementations remain external. Goal active/incomplete; firmware/hybrid unchanged.
+
+### Backup module-source setter source candidate built (2026-09-15)
+
+Added native macOS builder reusing authenticated grouped-clock source-switch implementation, with unsigned register-mask update helper inlined for backup layout. Builds388 bytes within456-byte envelope at100035c0/package3bf00, no undefined symbols/relocations. Lookup100034e0 and parameter table2001699c are explicit bindings. Preserves existing resolved-parent grouped traversal adaptation; audio-system/PDM/ADC paths still use specific table indices and must be compared against backup semantics.
+
+This is build/fit evidence only; not yet linked into startup or firmware-admitted. Backup-specific decoded comparison, table assumptions and full behavior remain pending. Goal active/incomplete; hybrid unchanged.
+
+### Backup module-source switching compared (2026-09-15)
+
+Added3600 complete decoded stock/source module-switch cases: all26 valid modules, source values0..9, four register patterns plus2560 targeted audio cases varying gate and source-select bits independently. Immutable authenticated backup tables and modeled lookup outputs; register-mask operations execute inline. All cases match independent ID-based transition model and stock, zero differences. Added explicit backup address/lookup parameters and inline rotl/movih/bseti/andn operations to shared executor. Existing image-A4180-case regression passes with its established26 grouped-clock differences unchanged.
+
+Source module-switch candidate remains separate pending startup link; physical timing, mutable tables, invalid module-ID coverage and actual nested lookup execution remain unqualified. Full goal active/incomplete; no firmware ownership change.
+
+### Backup module-source setter linked and rejection paths checked (2026-09-15)
+
+Linked388-byte source module-source setter into backup startup at100035c0. Clock initializer now resolves that setter internally; setter lookup and parameter-table references resolve to existing source definitions. Exported canonical source parameter-table symbol without altering bytes. All component byte/address, fit, undefined/relocation and physical overlap checks pass.
+
+Expanded comparison to3650 cases including50 invalid module/source/register combinations: IDs26/27/7fffffff/80000000/ffffffff and source boundaries. Added fail-closed leaf-rts execution with ABI preservation checks. All cases match stock and independent model; invalid IDs return error without MMIO or helper calls. Divider/DTO/blocking-PLL/nonblocking-PLL remain the four external clock setter implementations. Goal active/incomplete; full composed startup and firmware admission remain outstanding.
+
+### Backup divider and DTO setter candidates built (2026-09-15)
+
+Added native macOS builder for authenticated upstream divider/DTO setter source at backup entries10003788/100038e8. Inline unsigned register update helper for both, plus authenticated divider getter body for divider. Compiled divider318 bytes fits352; DTO210 fits268. No undefined symbols or relocations; lookup remains explicit binding100034e0. Source/dependency hashes recorded. Uses authenticated prior source generation rather than extracting firmware instructions.
+
+These are build/fit candidates only. Existing decoded divider/DTO engines located for adaptation to backup tables and inlined helpers; backup-specific behavioral checks and startup link remain pending. Full goal active/incomplete; no hybrid change.
+
+### Backup divider setter decoded comparison (2026-09-15)
+
+Added1120 backup divider cases over35 valid/invalid module IDs, eight divider boundary values and four MMIO patterns. All match stock and independent descriptor-based ordered transition oracle. Getter/register-update instructions execute inline; lookup output is modeled from authenticated backup descriptors. Checks immutable tables, preserved ABI and all ordered MMIO accesses including reset/load pulses and temporary source switching.
+
+Independent oracle exposed a shared interpreter bug: three-operand rotl used the wrong shift operand. Corrected both divider and module-source engines, retaining two-operand behavior. Re-ran backup module-source3650 cases (zero differences) and original divider3100-case regression successfully. Candidate not yet startup-linked; targeted cross-product divider fields and source/gate states, DTO verification and actual nested lookup remain pending. Full goal active/incomplete.
+
+### Backup divider targeted transitions and source link (2026-09-15)
+
+Expanded divider comparison to2820 cases, including1700 targeted combinations of current divider field, requested value, fast/slow source and inhibited/enabled gate. All decoded stock/source traces and independent descriptor oracle agree. Covers unchanged-divider exits, zero and maximum fields, temporary source switching and ordered reset/load pulses with unrelated bits retained.
+
+Linked318-byte divider into backup startup at10003788; initializer calls source setter and setter resolves source lookup. Independent payload/address, fit, unresolved/relocation and physical overlap checks pass. DTO and blocking/nonblocking PLL remain the three external clock setter implementations, along with main/interrupt paths. Lookup remains modeled in divider execution; whole startup/hardware admission still pending. Goal active/incomplete, hybrid unchanged.
+
+### Backup DTO verified and linked (2026-09-15)
+
+Added3392 complete decoded backup DTO comparisons, including1152 targeted combinations of current25-bit DTO value, requested value, enabled/bypass state, enable argument, source selection and gate inhibition. All stock/source traces match independent pulse/temporary-switch oracle. Lookup modeled from authenticated immutable descriptors; register updates execute inline. Shared DTO interpreter now handles backup frame sizes/address map and rotate forms; existing3392-case image-A regression passes.
+
+Linked210-byte DTO setter at100038e8 into backup startup with source lookup binding. All component bytes/addresses, fit, unresolved/relocation and physical alias checks pass. Only blocking/nonblocking PLL remain external clock setters; main/default/IRQ implementations and full startup/hardware integration remain outstanding. Goal active/incomplete; hybrid unchanged.
+
+### Backup PLL wait candidates built (2026-09-15)
+
+Built both reconstructed PLL wrappers with authenticated configuration implementation forced inline via private upstream header adaptation. Native macOS timeout wrapper272 bytes fits276 at100039f4; indefinite-wait wrapper220 fits224 at10003b08. Enforces only those two allocated sections, no undefined symbols or relocations. Initial compilation outlined private _clk_set_pll despite inlining the public wrapper; corrected the private inline attribute and rejected extra allocated helper sections.
+
+Recovered 'no_block' entry actually performs finite timeout polling after configuration, with64-bit microsecond clock and32-bit timeout_ms*1000 wrap, strict greater-than expiry. Both wrappers dereference configuration after helper, so null input is not claimed supported. Time source remains bound10005070/package3d9b0. Backup decoded behavior, time-source closure and startup link remain pending. Goal active/incomplete; hybrid unchanged.
+
+### Backup PLL full configuration/wait comparison (2026-09-15)
+
+Added640 complete decoded stock/source PLL cases covering both wrappers, enable0/1/2/ffffffff,16 seeded random configurations/MMIO states and five wait scenarios. Configuration register events match independent ordered mask/write oracle. Timeout outcomes independently simulate strict elapsed>wrapped32-bit threshold, including equality, high elapsed word, timeout multiplication wrap and64-bit timer wrap. Blocking path uses finite delayed-lock inputs. Shared wait executor now executes inline configuration loads/stores and needed bit instructions with preserved register/stack checks. Existing2400-case wait regression passes.
+
+Non-null immutable configuration only; microsecond source remains modeled and physical lock/concurrent mutation/nontermination are unqualified. Backup PLL candidates still separate pending startup link and time-source closure. Full goal active/incomplete; hybrid unchanged.
+
+### Backup PLL and timer source linkage (2026-09-15)
+
+Linked both verified PLL setters into backup startup at their original addresses. Added the reconstructed counter conversion at10005070:50 bytes fits the92-byte backup envelope. The C timer reads low then high MMIO words and performs modulo-64 multiplication by1000 followed by a10-bit shift, eliminating the stock division-helper call. Its existing upstream counter/header authentication is retained in build evidence.
+
+2060 backup decoded stock/source timer comparisons pass against independent arithmetic, including multiplication overflow boundaries and random64-bit counters. Stock fallback uses actual decoded backup division instructions with a marshalled helper frame. Expanded the initially truncated division range through44fe4. Existing2060-case image-A stock/source timer regression also passes after parameterizing executor entry addresses.
+
+Combined native macOS startup link passes section byte/address equality against independent components, envelope checks, physical-alias nonoverlap, and undefined-symbol/relocation checks. PLL aliases and timer now resolve to allocated source sections. Main and interrupt handlers remain external. Composed PLL/timer execution, hardware counter coherence and full firmware admission remain pending. Hybrid retained-stock ownership remains246207 bytes; no image admission was performed. Goal active and incomplete.
+
+### Backup architecture IRQ source linkage (2026-09-15)
+
+Previous goal turn made verified progress through PLL/timer source integration. This continuation links the existing source architecture IRQ entry into backup startup at10004880 and resolves gx_irq_handler to its allocated section. The80-byte assembly implementation exactly matches stock3d1c0..3d210; combined section byte/address equality, physical-alias nonoverlap and link checks pass. Reran768 context/dispatch cases and24 nested injection points at depth two. These retain the documented address rebasing and valid-vector/ABI-callback assumptions; hardware acceptance timing and stack capacity remain unqualified.
+
+IRQ table200173a8 remains an explicit external data binding. Default_Handler10003240 and main10015cfc remain external code bindings. Inspected upstream arch/soc/grus/vectors.S: trap sequence matches backup package3bb3c..3bb8c, including768-byte trap stack and saved-SP object. Stock trap_c at3bb30 reads PSR, extracts signed vector byte, and loops; default entry3bb80 branches to trap3bb3c. Next work can authenticate/build upstream vectors and qualify this real exception behavior (not introduce a placeholder trap). No firmware admission or retained-stock count change; full goal active/incomplete.
+
+### Authenticated backup exception source (2026-09-15)
+
+Previous continuation made verified IRQ linkage progress. Built upstream arch/soc/grus/vectors.S and trap_c.c authenticated against SDK8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5. Architecture assembly remains unmodified. Removed only unused stdio.h/stdlib.h includes from C because this freestanding toolchain lacks those headers and upstream diagnostics are already disabled by #if0; preserved notices and recorded original/adapted hashes.
+
+Compiled trap_c10 bytes matches stock3bb30 prefix within12-byte envelope. Exception entry80 bytes exactly matches3bb3c..3bb8c, including Default_Handler10003240. Source BSS reserves768-byte trap stack plus4-byte saved-SP at20017090..20017394; g_top_trapstack and g_trap_sp both20017390, matching stock literals. This is recovered existing exception behavior, not placeholder traps for missing functionality. Added both components and BSS to backup startup link; component byte/address and physical-alias checks cover placement. Architecture execution, exception concurrency and hardware qualification remain pending. Main and IRQ table still external. Full source-only goal active/incomplete; hybrid ownership unchanged.
+
+### Backup main identified and linked from upstream (2026-09-15)
+
+Prior turn made verified exception-source integration progress. Identified backup main4e63c..4e664 as upstream lvp/main.c with CONFIG_LVP_INIT_WORKMODE_DENOISE and stack monitoring disabled. Authenticated main and four headers against SDK8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5; removed unused stdio include only, preserving notices and recording hashes. Native macOS compilation produces40 bytes exactly equal to stock, including all six branch targets. Added allocated main section10015cfc to backup startup with component equality and link/placement checks.
+
+New explicit subsystem mapping: LvpSystemInit4322c; LvpInitMode44088 (argument5 denotes DENOISE); LvpInitializeAppEvent4473c; LvpModeTick440e0; LvpSystemDone4340c; LvpAppEventTick4479c. Main calls initialization then events while mode tick is nonzero, finishes system on zero, returns zero. These callee bodies remain dependencies, not source-closure claims. IRQ table still external. Full firmware source-only goal active/incomplete; no hybrid ownership change or hardware qualification.
+
+### Backup mode source build (2026-09-15)
+
+Previous turn made verified main-source progress. Authenticated upstream lvp/lvp_mode.c and configured idle plus denoise mode list. Native macOS tick32 bytes at1000b7a0 and mode-list8 bytes at10013664 exactly match stock. Initialization84 bytes fits88 at1000b748 but is not byte-identical, requiring decoded behavioral comparison. Source-owned loop/index BSS addresses asserted2002d2b4/2002d2b8. Initial -fdata-sections build prevented shared state addressing and overran placement; keeping upstream BSS together fixes layout. Removed unused types.h/stdio.h includes, preserving source notices/hashes. Only init/tick are selected; switch/get/exit remain outside this component's scope. Mode records1001366c/100136b0 and callbacks remain external. No startup integration or image admission yet. Full goal active/incomplete.
+
+### Backup mode behavior and integration (2026-09-15)
+
+Previous turn made source-build progress. Added216 decoded stock/source initialization cases: six requested modes (including invalid/fallback), both callbacks independently retain/change active index to either valid mode, and four seeds. Checks callback selection, INIT_FLAG65535, final type/index/loop, ordered state writes and preserved ABI. Callback bodies modeled and caller-saved registers poisoned. Both binaries match independent expected selection/results despite instruction differences. Immutable records and synchronous callback mutation only; asynchronous changes and invalid indices unqualified.
+
+Linked init/tick/list/state into backup startup. Original placements and independently linked bytes checked along with no unresolved symbols/relocations and physical-alias nonoverlap. Main now resolves mode init/tick to source sections. Two mode records and their callbacks, four remaining main callees, and IRQ table are still dependencies. No hybrid admission or retained-stock count change; full goal active/incomplete.
+
+### Backup idle mode source closure (2026-09-15)
+
+Previous turn made verified mode integration progress. Authenticated lvp/lvp_mode_idle.c against pinned SDK. Built all four callbacks,20-byte record and two22-byte diagnostic strings from source; all match stock bytes at original placements. Idle tick is authentic empty upstream behavior; it is not a substitute for denoise functionality. Adaptations remove unused includes, provide printf declaration and place original string literals in named sections. printf remains explicit10009934 (package42274).
+
+Linked idle object into startup with allocated lvp_idle_mode_info and component equality checks. Denoise record100136b0 contains type5, init1000bc44, done1000b7e8, tick1000b958, buffer_init1000b7f8. Denoise mode definition absent from pinned SDK checkout (only extern/list references); its five-word record and callback implementations still require reconstruction. No image admission or hardware qualification; complete goal active/incomplete.
+
+### Denoise dispatch record and callback recovery (2026-09-15)
+
+Prior turn made idle-source integration progress. Corrected initial buffer-path interpretation: denoise buffer callback1000b7f8/package44138 is an8-byte call/return wrapper for shared context initialization426bc (upstream lvp_buffer.c identity via LVP_CONTEXT_VERSION20191222). The following function44140 is separate denoise algorithm setup, with context/result state2002d2bc, allocation failures and float arguments; it is not the buffer callback itself.
+
+Added source denoise record, done callback, buffer wrapper and diagnostic string. All compiled bytes match stock:16 done,8 buffer,20 record,37 message. Uses authenticated mode header, symbolic callback references and original string text; no binary code/data pull-through. Init1000bc44 and tick1000b958 remain external, as do context initialization10009d7c and printf10009934. Component not yet startup-linked/admitted. Full source-only goal active/incomplete.
+
+### Denoise linkage and backup context reconstruction (2026-09-15)
+
+Previous turn made denoise record/source progress. Linked denoise record, done/buffer wrappers and message into startup, preserving component bytes and addresses with link/alias checks. Denoise init/tick still external.
+
+Reconstructed complete backup LvpInitBuffer using authenticated LVP_CONTEXT_HEADER ABI and upstream reference. Clears120-byte header20017700 and11264-byte context storage20017780. Sets two microphones,16ms/16kHz, three frames/context, four contexts of2816 bytes,2784 SNPU bytes/context,12288-byte mic storage20030000, and6144-byte output storage2001a380; disables FFT/logfbank/ref fields and VAD while retaining dimensions256/40. Native macOS candidate156 bytes fits156 envelope at10009d7c. Preserves stock ordered field assignments using volatile header. Memset explicit100113c4; behavior comparison, source-owned storage and context integration pending. Full goal active/incomplete; no image admission.
+
+### Backup context behavior and source linkage (2026-09-15)
+
+Prior turn made context-source build progress. Parameterized existing decoded initializer executor for header/helper address and stock mapping, preserving defaults. Ten backup stock/source runs pass exact ordered30 field writes and two memset arguments against independent offset/value oracle; return and preserved ABI checked with caller-saved poisoning. Existing primary initializer regression passes five seeds plus20 nested stock/source clearing combinations.
+
+Linked backup context initializer into startup at10009d7c; independent section/address equality and alias/link checks pass. Denoise buffer wrapper now calls allocated source context initialization. Memset remains explicit100113c4, and backing storage still requires source-owned declarations/ownership integration. Decoded backup clearing bodies not executed in this test. Denoise init/tick and broader functionality remain incomplete. No hybrid admission; full goal active.
+
+### Backup context clearing composed and linked (2026-09-15)
+
+Previous continuation made verified initializer integration progress. Reused existing backup C memset builder and added20 nested combinations: five seeded initial memories, stock/source initializer, stock/source clearing body. Executed decoded clear stores through existing marshalled helper-frame model; compared every byte of header/context storage and adjacent regions including8-byte header gap. Exact ordered calls/writes and preserved ABI remain checked. All pass.
+
+Linked existing C memset at100113c4 into startup and resolved initializer memset to allocated source. Component equality, placement and link checks pass. No binary oracle object supplies output bytes. Backing buffers still require source-owned allocation declarations; hardware/concurrency and overall denoise execution remain incomplete. Full goal active; hybrid unchanged.
+
+### Source-owned backup context storage (2026-09-15)
+
+Prior turn made composed clearing/source-link progress. Added C declarations for120-byte context header20017700, four2816-byte context frames20017780,6144-byte output samples2001a380 and12288-byte microphone samples20030000, all16-byte aligned. Sizes asserted at compile time using authenticated context header. Dedicated linker builder enforces NOBITS, exact addresses/sizes and allocated symbols; no extracted payload bytes. Integrated storage object in startup with independent component and physical-alias checks.
+
+Initializer still uses recovered absolute addresses that match these symbols; conversion to symbolic references and complete reader/writer/DMA ownership census remain pending. Microphone storage outside20017090..2002d79c startup clear range is intentionally not silently zero-initialized. Hardware and complete firmware remain unqualified; goal active/incomplete and hybrid unchanged.
+
+### Symbolic context storage references (2026-09-15)
+
+Previous continuation made verified storage declaration/link progress. Replaced initializer's four hardcoded buffer addresses with references to source-owned C objects. Shared storage header now defines array dimensions for declarations/definitions; memset lengths and mic/output sizes use sizeof. Both build reports record header hash. Standalone initializer retains explicit symbol placement bindings for comparison; combined startup resolves them to allocated storage objects.
+
+Native macOS initializer remains156 bytes. Ten ordered initializer comparisons and20 composed stock/source clear combinations pass after symbolic conversion and shared-size change. Final startup rebuild passes independent component byte/address equality, no undefined/relocation checks and physical-alias nonoverlap. DMA/read/write lifetime census and full denoise execution remain unfinished. Full goal active/incomplete; no hybrid admission.
+
+### Denoise initialization control-flow recovery (2026-09-15)
+
+Previous turn made symbolic storage/build progress. Added reproducible authenticated analysis for44584..44694 (runtime1000bc44):22 direct call sites, exact target set, branch operands and diagnostic literals. Identified status>=2 setup bypass, state+16 selection of beamforming0 / IMCRA1 / no-noise-reduction otherwise, algorithm error exits,512-byte allocation and DRC initialization storing result at state+24, then audio registration with callback1000bd54. Verified audio failure normalizes to-1 rather than returning arbitrary callee error; success returns0. Captured two separate428c0 calls (diagnostic then actual DRC argument) so a C translation must not merge them.
+
+This is control-flow evidence, not source admission. Ten callee bodies and callback/state behavior remain dependencies. Next work is source translation with independently checked branch/call traces. Complete firmware goal active/incomplete; no image change.
+
+### Denoise initialization C candidate (2026-09-15)
+
+Previous turn made authenticated control-flow recovery progress. Added complete C translation of initializer branches, diagnostics, beamforming/IMCRA selection, separate rate calls,512-byte allocation, DRC pointer write and audio callback registration/error normalization. Names retaining package offsets mark provisional helper identities/signatures. Ten subsystem calls plus callback, twelve diagnostic addresses and state remain explicit dependencies.
+
+Native macOS freestanding build succeeds with Wall/Wextra/Werror. Candidate300 bytes exceeds272-byte original envelope by28; report records fits=false and candidate is not startup-linked/admitted. No behavior or full-closure claim: decoded path comparison and placement optimization remain next steps. Goal active/incomplete.
+
+### Denoise initializer alignment correction (2026-09-15)
+
+Previous continuation produced complete C candidate but exposed300-byte placement excess. Inspected generated instructions: extern unsigned-char state declaration conveyed insufficient alignment, causing four byte reads for mode and byte read/write expansion for DRC pointer. Stock uses aligned word operations at state2002d2bc+16/+24. Added explicit four-byte alignment to external state declaration, justified by recovered address and stock accesses. No compiler-semantic shortcut or removed behavior.
+
+Native macOS candidate now248 bytes, fits272 envelope with24 spare. Builder asserts aligned binding, word load/store presence and absence of byte accesses, plus existing allocation/link invariants. Complete decoded branch/call equivalence remains pending, so candidate still unintegrated/unadmitted. Full goal active/incomplete.
+
+### Denoise initialization decoded equivalence (2026-09-15)
+
+Previous turn repaired state alignment and placement. Added1152 decoded stock/source comparisons spanning status0/1/2/ffffffff, state mode0/1/2/ffffffff, algorithm0/1/ffffffff, null/nonnull DRC, audio0/1/ffffffff, two register seeds and null/nonnull allocation. Matches full modeled call/argument and state read/write trace, preserved ABI, independent normalized result and final DRC pointer oracle. Rate helper deliberately returns16000 then16001; DRC must consume second result. Allocation null is passed through to DRC as stock does, without inventing an earlier error check.
+
+All cases pass. Subsystem bodies remain modeled; asynchronous mutation and hardware are unqualified. Candidate still separate awaiting integration/data ownership; full source-only goal active/incomplete.
+
+### Verified denoise initializer startup linkage (2026-09-15)
+
+Previous turn established1152 decoded path comparisons. Linked248-byte denoise initializer at1000bc44 into startup, resolving mode-record init to source and denoise_status_3c8f8 to existing allocated backup status reader. Independent component byte/address, undefined/relocation and physical-alias checks pass. Initial broad *initialize.o linker pattern accidentally selected board initialization too; equality assertion caught this, corrected selector to *denoise-initialize/initialize.o and added component names to assertion diagnostics.
+
+Denoise tick, processing setup helpers, callback, diagnostic strings and state remain explicit dependencies. Startup link is an unadmitted component and does not establish full firmware functionality. Full source-only goal active/incomplete; hybrid unchanged.
+
+### Denoise initializer diagnostic source data (2026-09-15)
+
+Previous continuation linked verified initializer. Added twelve C diagnostic string definitions (496 bytes including terminators), retaining exact spelling and formatting. Builder compiles literals, verifies each against authenticated stock at original addresses, asserts twelve allocations and clean link. Firmware is comparison-only, never supplies output data. Linked messages into startup and removed absolute string bindings; all component bytes/addresses and alias checks pass.
+
+Initializer still depends on processing helpers, callback, state and printf; denoise tick also remains incomplete. No hybrid image admission or hardware qualification; full goal active/incomplete.
+
+### Backup context readers linked (2026-09-15)
+
+Previous turn made source diagnostic integration progress. Reconstructed five readers using symbolic authenticated context-header layout: PCM frames/context42890, frames/channel428b4, sample rate428c0, context count428d0 and microphone count428dc. Each compiled12-byte body exactly matches stock. All are linked to source-owned header in startup, with component equality and alias/link checks. Denoise rate helper now resolves to source sample-rate reader.
+
+Inspection also identifies42850 as heap initialization wrapper (calls42384 with start2001bb80,end2002cb80),4286c as allocation wrapper calling423f8. Those allocator implementations remain pending. Full goal active/incomplete; no image admission or hardware qualification.
+
+### Backup allocator wrapper source (2026-09-15)
+
+Previous turn made context-reader integration progress. Confirmed upstream lvp_buffer.c LvpInitHeap/Malloc/Calloc/Realloc/Free wrappers and identified backup targets: heap init42384, malloc423f8, calloc4254c, realloc425e4, free4256c. No existing RT allocator implementation found in pinned checkout or reconstructed GX source/tools. Added five C wrappers preserving original calls and heap bounds2001bb80..2002cb80 (69632 bytes).
+
+Native macOS builds: heap-init24 fits28 but differs in constant materialization; malloc/calloc/realloc8 each exact; free10 exact prefix in12 envelope. Allocator bodies remain explicit external bindings; heap init behavioral comparison and integration pending. Full firmware goal active/incomplete.
+
+### Allocation wrappers verified and linked (2026-09-15)
+
+Previous turn built recovered wrappers. Added360 stock/source decoded cases across five wrappers, sizes/pointers including0/ffffffff, helper results0/pointer/ffffffff and two seeds. Checks exact heap bounds, argument forwarding, return normalization and preserved ABI with caller-saved poisoning. Actual allocator bodies remain modeled.
+
+Linked all five wrappers into startup and resolved denoise heap setup/allocation aliases to allocated C. Component equality and physical-alias/link checks pass. RT allocator bodies remain external; heap storage ownership and actual allocation sequences pending. Complete source-only goal active/incomplete; no image admission.
+
+### Allocator heap initialization C recovery (2026-09-15)
+
+Previous turn verified/linked LVP wrappers. Inspected underlying allocator init42384..423f8 and reconstructed C: align end down4, begin up4 with32-bit wrap; reject end<=24 or end-24<begin; usable=end-24-begin. State200176dc contains base/end/lowest-free/usable. Blocks use12-byte layout (magic16,used16,next32,previous32) with magic1ea0. Initializes first free block and terminal used sentinel, preserving assignment order.
+
+Native macOS candidate108 bytes fits116 envelope at10009a44 with freestanding Wall/Wextra/Werror. Static ABI assertions cover block size/state offset. State and diagnostic strings still external; decoded boundary/write comparison and integration pending. No upstream allocator version identity claimed. Full source-only goal active/incomplete.
+
+### Heap initialization boundary/write verification (2026-09-15)
+
+Previous continuation reconstructed108-byte heap initializer. Added3042 stock/source decoded cases covering all begin/end pairs0..32 plus actual heap bounds andfffffffc..ffffffff, across two ABI seeds. Independent oracle derives aligned bounds, rejection diagnostics and exact ordered first/sentinel/global-state writes. Compares final touched memory too; all pass. Unsigned begin+3 wrap is retained rather than introducing a new rejection rule. Printf modeled without mutation; synthetic addresses are arithmetic tests, not valid-memory/hardware claims.
+
+Heap initializer not yet startup-linked; allocator operations and global state/data ownership still pending. Full source-only goal active/incomplete.
+
+### Heap initializer linked into startup (2026-09-15)
+
+Previous turn established3042 decoded alignment/write cases. Added108-byte allocator heap initializer to backup startup at10009a44, resolving rt_system_heap_init to allocated C through existing LVP wrapper. Independent component bytes/addresses and combined physical-alias/link checks pass; explicit symbol-allocation assertion added for rt_system_heap_init.
+
+Heap state200176dc and diagnostic strings remain external data bindings. Malloc/calloc/realloc/free bodies remain external code. No image admission or complete allocator claim; full source-only goal active/incomplete.
+
+### Source-owned heap state and diagnostics (2026-09-15)
+
+Previous continuation linked verified heap initializer. Added shared heap ABI header,16-byte four-word BSS state at200176dc and two exact diagnostic strings (44/58 bytes) at100131ac/100131d8. Initializer uses shared declarations/static assertions. Rebuilt all3042 decoded boundary cases successfully. Linked state/messages into startup, removing absolute bindings; independent component bytes/address and alias checks pass.
+
+Only four recovered heap state words declared, not an invented whole allocator state. Other allocator globals, arena ownership and malloc/free/realloc/calloc implementations remain pending. Full source-only goal active/incomplete; no image admission.
+
+### Mode-list ELF permission correction (2026-09-15)
+
+Previous turn added heap source data and exposed RWX LOAD warning. Readelf identified writable private mode-pointer list in code/data segment. Made upstream private list const (translation unit has no writes), and removed empty .data input selector from list output section: even empty writable input propagated WA.216 mode behavior cases pass after const change. Added ELF32 program-header audit rejecting any LOAD with both W/X and recording segment ranges/flags. Final combined rebuild validates this guard alongside component bytes/addresses. This fixes ELF metadata, not hardware MPU qualification. Full goal active/incomplete.
+
+### Allocator calloc source linkage (2026-09-15)
+
+Previous continuation fixed ELF permission metadata. Reconstructed complete RT calloc4254c: uint32 count*size wraps, calls malloc, clears only nonnull allocation and returns original pointer. Native macOS30-byte C body exactly matches stock prefix within32 envelope. Linked at10009c0c, resolving rt_calloc wrapper target and using allocated C memset. Component byte/address, alias and no-RWX/load checks pass.
+
+Malloc remains external; exact-byte comparison does not prove whole allocation sequences or fix multiplication overflow. Full source-only goal active/incomplete; no hybrid admission.
+
+### Allocator free C recovery (2026-09-15)
+
+Previous turn source-linked calloc. Reconstructed free4256c..425e4: null returns, pointer outside[base,end) logs and returns; payload-12 header used/magic failure logs twice but continues. Clears used, restores magic1ea0, lowers lowest-free pointer, subtracts block span from used-byte statistic and calls merger42314. Diagnostic path reloads base after logging, preserving stock mutation boundary. Identified additional used-byte global200176ec; kept separate explicit binding rather than silently extending owned state.
+
+MacOS candidate136 bytes exceeds120 envelope by16; unintegrated/unadmitted. Merger, statistic and diagnostics remain dependencies. Decoded behavior and placement work pending. Full goal active/incomplete.
+
+### Heap usage field recovery and free size investigation (2026-09-15)
+
+Previous continuation reconstructed free. Six compiler probes (O2/Os/Oz and shrink-wrap/reordering/TER variants) all produced136 bytes; saved results under backup-heap-free/compiler-probes.json. Stock free accesses used-byte statistic at state+16. Extended shared source-owned state to20 bytes with explicit offsetof assertion, replacing separate free counter symbol with state.used_bytes. Free shrinks to132 but still exceeds120; unintegrated. Remaining extra halfword zero-extensions/control flow require further investigation without dropping volatile semantics.
+
+3042 heap initializer regressions pass after layout extension; startup storage/component/nonoverlap/no-RWX checks pass. State change now owns fifth recovered word200176ec. Full goal active/incomplete.
+
+### Free epilogue compiler probe (2026-09-15)
+
+With the recovered 20-byte heap state, six additional macOS compiler probes
+showed that disabling shrink wrapping reduces `backup_rt_free` from 132 to
+128 bytes. The builder now uses that setting and records the shared heap header
+hash. Probe results are in
+`build/gx8002-backup-heap-free/compiler-probes-state20.json`.
+The rebuilt candidate links without undefined symbols or relocations, but still
+exceeds its 120-byte stock envelope by eight bytes. It remains unadmitted;
+decoded behavior verification and the merger implementation are pending.
+This does not reduce retained stock in the firmware artifact or establish
+hardware execution. The source-only goal remains active.
+
+### Backup heap coalescing recovered (2026-09-15)
+
+Added `runtime_gx8002_backup_heap_merge.c` and its macOS component builder.
+The recovered forward/backward coalescing routine compiles to 112 bytes at
+0x100099d4, fitting the entire original 112-byte envelope. It preserves
+lowest-free updates, sentinel exclusion for forward merges, and repeated
+volatile header reads. No upstream revision identity is claimed.
+
+`verify_gx8002_backup_heap_merge.py` passed 864 decoded stock/source cases,
+comparing ordered reads and writes, final memory and preserved registers.
+Cases cover used/free neighbors, self links, sentinel exclusion, lowest-free
+selection, both/neither merge and wrapping synthetic addresses. This verifies
+finite synthetic executions, not concurrent mutation or complete allocator
+sequences. Integration and firmware admission remain pending; retained stock
+in the hybrid artifact is unchanged. The source-only goal remains active.
+
+### Heap merger linked into backup startup source build (2026-09-15)
+
+Integrated the verified 112-byte heap coalescer into
+`build_gx8002_backup_startup_cluster.py` at 0x100099d4. The macOS build passed:
+its allocated bytes and address match the standalone component, the heap state
+resolves to source-defined storage, all physical alias ranges remain disjoint,
+and no LOAD segment is writable and executable. The merger and heap-state
+symbols are explicitly checked as allocated definitions rather than absolute
+address stand-ins. The builder checks the merger's original envelope fit.
+
+This closes the merger's state dependency in the component link. The stock
+`free` body is still external to this cluster; its recovered C candidate is
+still eight bytes oversized. The hybrid firmware remains unchanged and
+unadmitted, and complete allocator execution and hardware qualification remain
+outstanding. The full source-only goal remains active.
+
+### Free candidate fits its original slot (2026-09-15)
+
+The recovered `free` now compiles to 120 bytes on macOS, matching its available
+120-byte envelope. Heap-header reads use ordinary RAM accesses; the two
+header writes retain explicit volatile halfword stores. This removes redundant
+zero extensions without combining the header stores. Simply removing all
+volatile accesses produced 116 bytes but merged those stores and was rejected.
+Atomic loads produced 136 bytes; compiler-barrier loads produced 124 bytes.
+The retained candidate uses neither atomic operations nor inline assembly.
+
+This is a fitting candidate, not admitted firmware. Decoded behavioral
+verification is still required, especially diagnostic argument/header reloads
+and the used-byte update before the merger. Concurrent allocator access is not
+claimed. The previous goal turn integrated the merger successfully; this turn
+removed the free size obstacle. The full source-only goal stays active.
+
+### Free verified and source-linked (2026-09-15)
+
+Added decoded stock/source verification for `free`: 7,776 cases pass against
+an independent oracle for ordered writes, diagnostic arguments, merger
+argument, final memory and preserved registers. Cases include null and range
+boundaries, invalid magic/used headers that still get freed, wrapped accounting,
+and diagnostics that mutate the header and heap base before execution resumes.
+Ordinary RAM read order is not compared; merger is modeled at this call boundary.
+Complete allocator sequences and concurrency are not established by this test.
+
+The 120-byte C free is now linked into the backup startup component at
+0x10009c2c. `rt_free` resolves to that allocated implementation, and its merger
+and heap state resolve to recovered source. The macOS cluster build passes
+component byte/address equality, nonoverlapping physical aliases, allocated
+symbol checks and no writable/executable LOAD segments. Diagnostic strings
+remain external here, as do malloc and realloc. The firmware hybrid is unchanged
+and not admitted. The complete source-only goal remains active.
+
+### Free diagnostic data source closure (2026-09-15)
+
+Added the three recovered free diagnostics as readable C string literals in
+the heap-data component: 16, 27 and 48 bytes at 0x10013244, 0x10013254 and
+0x10013270. The macOS builder verifies each compiled string byte-for-byte
+against the authenticated stock image. No string bytes are pulled into the
+output from the binary.
+
+The startup source build now resolves all three symbols to allocated C data,
+with explicit symbol-definition checks. Full component byte/address equality,
+physical alias nonoverlap and segment permission checks pass. Free's remaining
+external implementation dependency is printf; its heap state, merger and
+diagnostic data are source-defined. Malloc/realloc and broader firmware source
+closure remain outstanding. The hybrid artifact remains unchanged and
+unadmitted; the complete source-only goal remains active.
+
+### Backup malloc C reconstruction (2026-09-15)
+
+Recovered the first-fit malloc body at 0x10009ab8 into readable C. The macOS
+compiler produces 276 bytes within the original 340-byte envelope. The source
+represents alignment diagnostics, the 12-byte minimum payload, unsigned scan
+limit, split threshold, successor back-link repair, usage accounting and
+lowest-free advancement. This is a candidate: decoded verification and source
+cluster integration are pending. No upstream revision identity is claimed.
+
+Stock loads/stores at heap-state offset 20 identify maximum-used-byte tracking.
+The shared C state now includes that sixth word and occupies 24 bytes at
+0x200176dc. Initializer behavior remains unchanged. Regression verification
+passed 3,042 initializer, 7,776 free and 864 merger cases. The macOS startup
+cluster rebuilt successfully with the larger source-defined state and passed
+its placement, byte-equality and segment checks. The malloc candidate is not
+yet linked into that cluster or admitted to firmware. Full source-only firmware
+remains incomplete and the goal stays active.
+
+### Malloc decoded comparison (2026-09-15)
+
+The recovered 276-byte malloc passed 53,568 decoded stock/source cases on
+macOS. Verification compares returned pointers, ordered memory writes,
+diagnostic arguments, final memory and preserved registers. The matrix covers
+all used/free combinations of three blocks, four lowest-free positions,
+requests around split and exhaustion boundaries, wrapped request alignment,
+and current/maximum usage-counter wrap. The test uses a fixed synthetic heap
+layout and models printf without mutation; an independent allocation oracle,
+complete allocator sequences and concurrency remain unverified. The candidate
+is still not integrated or admitted to firmware. The full goal remains active.
+
+### Malloc source integration and diagnostic closure (2026-09-15)
+
+Linked the verified 276-byte malloc into the macOS backup startup source ELF
+at 0x10009ab8. `rt_malloc` now resolves to an allocated C implementation, so
+calloc and the allocation wrapper call recovered source. Added both malloc
+diagnostics as readable C string literals at 0x10013214 and 0x10013238; their
+compiled contents match authenticated stock bytes. The shared heap state and
+both diagnostic symbols are allocated source data.
+
+The startup component build passed exact component byte/address comparisons,
+physical alias nonoverlap, allocated-symbol checks and LOAD permission checks.
+This is component integration, not firmware admission or hardware execution.
+Realloc, printf and complete allocator sequences remain outstanding, alongside
+broader firmware reconstruction. The full source-only goal remains active.
+
+### Backup realloc recovered candidate (2026-09-15)
+
+Recovered realloc at 0x10009ca4 into C with unsigned alignment, usable-size
+rejection before null/zero handling, original-pointer return on out-of-range
+input, strict `old_size > aligned_size + 24` shrink splitting, successor repair,
+usage adjustment and merger call. Other size changes allocate/copy/free; failed
+allocation returns null without freeing the original block. memcpy is bound to
+recovered runtime address 0x10011344 (stock package 0x49c84).
+
+The macOS candidate compiles and links to 228 bytes, exceeding its original
+216-byte envelope by 12 bytes. It remains unintegrated and unadmitted pending
+size work and decoded behavior verification. No upstream revision identity is
+claimed. The full source-only firmware goal remains active.
+
+### Realloc compiler size investigation (2026-09-15)
+
+Fifteen macOS compiler probes found that disabling temporary-expression
+replacement (`-fno-tree-ter`) reduces the unchanged recovered realloc C from
+228 to 220 bytes. The component builder now uses this setting. Other tested
+optimization, scheduling and branch-layout settings did not improve on 220.
+Probe records are in the realloc build directory. The rebuilt candidate links
+without undefined symbols or relocations but remains four bytes over its
+216-byte envelope. Behavioral verification and integration remain pending;
+no firmware admission is claimed. The source-only goal stays active.
+
+### Realloc decoded behavior comparison (2026-09-15)
+
+The 220-byte candidate passed 38,016 decoded stock/source comparisons of
+return values, ordered writes, subsystem call arguments, final memory and
+preserved registers. Cases cover null/out-of-range pointers, aligned-size
+boundaries, strict shrink splitting, allocation failure, successor repair and
+wrapped accounting. Allocator, merger, copy and diagnostic callees are modeled
+at their boundaries; nested execution and an independent oracle remain pending.
+Arithmetic-expression probes did not reduce size below 220 bytes. The candidate
+remains four bytes oversized and unintegrated. Full firmware reconstruction
+and admission remain incomplete; the source-only goal stays active.
+
+### Realloc fits and retains decoded equivalence (2026-09-15)
+
+Compiler register-allocation probes identified `-fno-tree-coalesce-vars` as the
+remaining size improvement: alongside `-fno-tree-ter`, the unchanged recovered
+C now builds to exactly 216 bytes. The builder retains these settings. A shared
+return source probe did not improve size and was not adopted. Probe results
+are recorded in `build/gx8002-backup-heap-realloc/allocation-probes.json`.
+
+All 38,016 decoded stock/source comparisons pass again for the new 216-byte
+build. The existing modeled-callee and synthetic-state verification limits
+remain. Integration, nested allocation sequences and full firmware admission
+are still pending. The complete source-only goal remains active.
+
+### Realloc source-linked with diagnostic data (2026-09-15)
+
+Integrated the verified 216-byte realloc at 0x10009ca4 into the macOS backup
+startup source ELF. The realloc wrapper resolves to allocated C, and realloc
+calls the recovered malloc/free/merger. Its diagnostic is a readable C literal
+at 0x100132a0, verified byte-for-byte against authenticated stock. The build
+passes component byte/address equality, allocated-symbol checks, physical
+alias nonoverlap and LOAD permission checks.
+
+The remaining external implementation dependencies of these allocator bodies
+are printf and realloc's memcpy at 0x10011344. Full nested allocator execution,
+firmware admission and hardware validation remain pending. No retained-stock
+reduction in the hybrid artifact is claimed. The full source-only goal remains
+active.
+
+### Allocator memcpy source closure (2026-09-15)
+
+Reused the existing backup memcpy C reconstruction at 0x10011344 and reran
+its 4,128 decoded stock/source cases. These compare nonoverlapping RAM copies
+for all source/destination alignments and lengths 0 through 257, including
+exact memory-access widths/order, results and guards. The macOS startup source
+build now links that implementation and resolves realloc's memcpy reference to
+allocated C. Component byte/address equality, allocated-symbol checks,
+physical alias nonoverlap and LOAD permissions pass.
+
+Printf remains an external implementation dependency of the allocator cluster.
+Nested allocator execution, wider firmware source closure and hardware
+qualification remain pending. No full firmware admission is claimed; the
+source-only goal remains active.
+
+### Backup printf upstream candidate authenticated (2026-09-15)
+
+Traced backup printf at 0x10009934 to a five-argument formatter at 0x10008e20
+and character callback at 0x10009924. The callback suppresses zero characters
+and invokes the output wrapper at 0x10009990. This signature matches the SDK's
+Paland printf family, rather than its separate Tinyprintf implementation.
+
+Added a macOS candidate builder authenticating printf.c and printf.h against
+SDK commit 8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5. Unmodified upstream
+source compiles with default features: printf_ 44 bytes, _out_char 14 bytes,
+_vsnprintf 1534 bytes plus its 64-byte table. The object reports its arithmetic
+runtime and _putchar dependencies. Exact stock version/configuration identity,
+placement, output path and decoded equivalence remain unverified. This is
+upstream reuse groundwork, not source admission; the full goal remains active.
+
+### Upstream printf character callback placed and checked (2026-09-15)
+
+Placed the authenticated SDK `_out_char` at backup address 0x10009924.
+Disabling shrink wrapping yields 12 bytes within its 16-byte envelope; it is
+not byte-identical to stock. Decoded comparison passes all 256 unsigned
+character values against stock and an independent zero-suppression oracle.
+The callback calls `_putchar` at 0x10009990 only for nonzero characters.
+
+Traced that wrapper to 0x10004818 (package 0x3d158), which loads the console
+handle at 0x2001739c and calls the character writer at 0x100045a0 (0x3cee0).
+Those output dependencies and the formatter remain unintegrated. This verifies
+one authentic upstream callback, not a complete printf implementation or
+firmware. The source-only goal stays active.
+
+### Backup console forwarding recovered (2026-09-15)
+
+Added C for the console-handle forwarding function at 0x10004818 and putchar
+wrapper at 0x10009990. The macOS build produces exactly 20 and 8 bytes,
+respectively; both complete sections match authenticated stock byte-for-byte.
+They retain the console-port read at 0x2001739c and UART writer call at
+0x100045a0. No binary bytes are used as implementation inputs.
+
+The SDK libc_port.c confirms the putchar-to-console forwarding structure;
+this recovered C component makes no exact upstream-version claim. Console
+storage, UART writer and integration remain pending. These leaf matches do
+not establish full printf or firmware execution. The source-only goal remains
+active.
+
+### Backup UART character writer recovered (2026-09-15)
+
+Recovered the UART writer at 0x100045a0 into C. Stock uses a 128-byte descriptor
+stride, loads its MMIO pointer at offset four, polls status bit 0x20, inserts
+CR for character 10, and writes the low byte of the character. The C preserves
+that behavior and the unbounded ready wait. It builds on macOS to 48 bytes
+within the authenticated 56-byte interval ending at package offset 0x3cf18.
+
+The descriptor binding remains 0x20016b84. The code is not byte-identical;
+decoded MMIO comparison, descriptor ownership and integration remain pending.
+The full firmware goal remains active and no hardware qualification is claimed.
+
+### Backup UART decoded MMIO verification (2026-09-15)
+
+The 48-byte C UART writer passed 12,384 decoded stock/source/oracle cases.
+Checks compare exact ordered descriptor reads, status polling and output
+writes across all byte characters plus wider integer inputs, four synthetic
+port indices, two ready-bit patterns and zero/one/five busy polls. Carriage
+return is inserted only for integer character 10; other values emit their low
+byte. Preserved registers are checked. Synthetic ports and finite ready delays
+do not establish physical descriptor validity or hardware timing. Integration
+and descriptor reconstruction remain pending; the full goal stays active.
+
+### Console-to-UART source integration (2026-09-15)
+
+Integrated the exact console/putchar wrappers and verified 48-byte UART writer
+into the macOS backup startup source ELF. All three symbols are allocated C
+implementations; the wrappers call the linked writer at 0x100045a0. Component
+bytes and addresses match their standalone builds, physical aliases remain
+nonoverlapping, and LOAD permission checks pass. Console port at 0x2001739c
+and descriptors at 0x20016b84 remain external storage bindings. The printf
+formatter/callback integration is still pending. This closes executable calls
+within the console path but does not establish full firmware or hardware
+execution. The full source-only goal remains active.
+
+### Authenticated printf callback integrated (2026-09-15)
+
+Linked the verified SDK `_out_char` into the macOS startup source ELF at
+0x10009924. A relocatable link selects that section from freshly compiled SDK
+source; no firmware bytes are imported. `_putchar` resolves to the recovered
+allocated wrapper, completing source calls from callback through console and
+UART writer. Component byte/address equality, allocated-symbol, physical alias
+and LOAD permission checks pass. Console data and full formatter reconstruction
+remain incomplete. No hardware execution or firmware admission is claimed;
+the full source-only goal stays active.
+
+### Upstream variadic printf wrapper placed (2026-09-15)
+
+Placed authenticated SDK printf_ at 0x10009934: 44 bytes fit its 52-byte
+stock envelope. The standalone candidate includes the SDK callback at
+0x10009924 because the wrapper's literal relocation references its section.
+Formatter remains externally bound at 0x10008e20 and output wrapper at
+0x10009990. Variadic ABI verification and integration are pending.
+
+Stock formatter call inspection confirms substantial floating-point runtime
+and wide-integer paths. Those features remain in scope; default SDK compilation
+is retained rather than disabling them to simplify fitting. Exact formatter
+version/configuration and helper mapping remain incomplete. Full firmware
+admission is not claimed; the source-only goal stays active.
+
+### Printf variadic wrapper ABI verified (2026-09-15)
+
+The authenticated SDK printf wrapper passed 144 decoded stock/source/oracle
+cases. Verification checks the callback, maximum length, format pointer and
+3/4/8/16-word variadic argument stream crossing from saved registers into the
+caller stack. It also checks formatter-local buffer placement, modeled return
+propagation, preserved registers and unchanged caller stack, including a
+formatter write to its local buffer. Different stack-frame sizes in stock and
+source preserve the observed ABI. Format parsing, alignment-sensitive vararg
+types, nested output and full formatter integration remain pending. The full
+source-only firmware goal remains active.
+
+### SDK printf wrapper source integration (2026-09-15)
+
+Compiled the wrapper with shrink wrapping disabled to retain the previously
+verified 12-byte output callback; all 144 variadic ABI cases pass again.
+The macOS startup source build now resolves printf to allocated SDK printf_.
+Its wrapper bytes/address match the standalone build, and the callback still
+matches its verified component. Physical alias and LOAD permission checks pass.
+
+The formatter engine `_vsnprintf` remains explicitly external at 0x10008e20;
+linking this wrapper does not close the full printf dependency. Callback,
+putchar, console and UART executable paths are source-linked. Console storage,
+formatter helpers and full firmware validation remain outstanding. The complete
+source-only goal remains active.
+
+### Authenticated printf integer helpers placed (2026-09-15)
+
+Mapped stock integer conversion at package 0x415c8 to the SDK `_ntoa_long`
+structure and its formatting callee at 0x413e0 to `_ntoa_format`. Authenticated
+unmodified SDK source links at the corresponding backup addresses: 184 bytes
+within 192 for conversion, and 354 within 488 for formatting. Both fit without
+binary pull-through, unresolved symbols or relocations. Neither is byte-exact;
+decoded behavior and exact version identity remain pending.
+
+Reverse output remains explicitly external at 0x10008a04. Its default upstream
+candidate is 160 bytes against a 156-byte stock interval and was not silently
+included. Wide-integer and floating-point paths remain in scope. Integration
+and complete firmware validation remain pending; the full goal stays active.
+
+### SDK reverse-output helper now fits (2026-09-15)
+
+Fourteen compiler probes identified `-fno-tree-loop-optimize` as reducing the
+unchanged authenticated SDK `_out_rev` from 160 to 146 bytes. It now links at
+0x10008a04 within the original 156-byte envelope, without undefined symbols or
+relocations. Probe reports and the standalone builder preserve the evidence.
+The candidate is not byte-exact; decoded callback/padding/index-wrap behavior
+and integration remain pending. No formatter capability was disabled. The full
+source-only firmware goal remains active.
+
+### Reverse formatter decoded verification (2026-09-15)
+
+The 146-byte authenticated SDK reverse-output helper passed 2,800 decoded
+stock/source/oracle comparisons. Checks cover zero/nonzero lengths, left and
+zero padding flags, widths on both sides of string length, high-bit characters,
+maximum-length forwarding, output-index wrap, exact callback arguments,
+return values and preserved registers. Callback source mutation and unbounded
+widths are not modeled. Integration and full formatter verification remain
+pending; the complete source-only firmware goal stays active.
+
+### Verified reverse-output helper source-linked (2026-09-15)
+
+Integrated the authenticated 146-byte SDK reverse-output helper at 0x10008a04
+into the macOS backup startup source ELF. A relocatable link selects only the
+freshly compiled source section. The allocated `_out_rev` symbol and exact
+standalone component bytes/address are checked. Physical alias nonoverlap and
+LOAD permissions pass. Integer helper integration and the formatter engine
+remain pending; linking this helper alone does not close their external calls.
+Full firmware admission and hardware execution remain unproven. The complete
+source-only goal stays active.
+
+### Integer conversion decoded comparison (2026-09-15)
+
+The authenticated SDK 32-bit `_ntoa_long` passed 2,304 decoded stock/source
+comparisons covering zero, digit boundaries, high-bit magnitudes, binary/octal/
+decimal/hexadecimal bases, sign flags, precision and uppercase/hash flags.
+Checks compare generated reversed digit bytes, all formatting-callee arguments,
+return propagation and preserved registers. Formatting is modeled at its call
+boundary; an independent digit oracle and integration remain pending. The
+complete source-only firmware goal remains active.
+
+### Independent integer conversion oracle added (2026-09-15)
+
+Strengthened the 32-bit formatter conversion verifier with an independent
+Python base-formatting oracle for reversed digit bytes and explicit expected
+callee arguments, including zero precision suppression and removal of hash
+formatting for zero. All 2,304 cases pass stock, compiled SDK and oracle
+comparison. The verifier now authenticates the wrapped stock `.data` contents
+before decoding. Formatting remains modeled at the call boundary; integration
+and full formatter execution remain pending. The full source-only goal remains
+active.
+
+### Verified SDK integer conversion source-linked (2026-09-15)
+
+Integrated authenticated `_ntoa_long` at 0x10008c88 into the macOS startup
+source ELF. Its 184 compiled bytes and address match the standalone verified
+component, the symbol is allocated, and physical alias and LOAD checks pass.
+Only the digit converter is selected from the source object; `_ntoa_format`
+remains explicitly external at 0x10008aa0 until its behavior is verified.
+The formatter engine, wider numeric helpers and firmware admission remain
+incomplete. The complete source-only goal remains active.
+
+### Integer formatting decoded comparison (2026-09-15)
+
+The authenticated 354-byte SDK `_ntoa_format` passed 107,520 decoded stock/
+source cases. Checks compare its entire 40-byte guarded digit-buffer region,
+reverse-output arguments, return propagation and preserved registers across
+valid lengths 0..32, binary/octal/decimal/hex bases, signs, precision/width
+boundaries and all combinations of the low six flags. Reverse output remains
+modeled. Explicit FLAGS_PRECISION (0x400), an independent formatting oracle
+and integration remain pending. Full source-only firmware remains incomplete;
+the goal stays active.
+
+### Integer formatting precision and oracle coverage (2026-09-15)
+
+Expanded `_ntoa_format` verification to all low-six-bit flag combinations with
+and without FLAGS_PRECISION, and added an independent model of zero padding,
+prefix insertion, sign priority, width adjustment and the complete guarded
+buffer. All 215,040 decoded stock/source/oracle comparisons pass. Reverse
+output is modeled at the call boundary; nested execution and integration
+remain pending. This strengthens the existing formatter candidate evidence,
+not full firmware completion. The source-only goal stays active.
+
+### Integer formatting source chain closed (2026-09-15)
+
+Integrated the verified 354-byte `_ntoa_format` at 0x10008aa0 into the macOS
+startup source ELF. Digit conversion now calls allocated SDK formatting, which
+calls the allocated verified reverse-output helper. Both helper sections match
+the standalone bytes and addresses; allocated-symbol, alias nonoverlap and
+LOAD permission checks pass. Unselected SDK functions are discarded; duplicate
+source-object symbols are weakened only to select the already verified strong
+implementations. No firmware bytes are imported.
+
+The main formatter engine and wider numeric helpers remain incomplete, as do
+nested execution and full firmware admission. The complete source-only goal
+remains active.
+
+### Wide integer conversion source candidate (2026-09-15)
+
+Placed authenticated SDK `_ntoa_long_long` at 0x10008d48: 204 bytes fit its
+216-byte stock envelope. Reused existing division-verifier evidence to bind
+quotient to 0x1001149c and remainder to 0x100117d0. Stock loop ordering differs
+from compiler output, so chronological call order alone would reverse these
+bindings; the candidate now uses the established mathematical identities.
+Formatting remains at 0x10008aa0. Converter decoded verification and integration
+remain pending. Existing pinned libgcc source builders are available for its
+arithmetic dependencies. The full source-only firmware goal stays active.
+
+### Wide integer conversion decoded verification (2026-09-15)
+
+The authenticated 204-byte `_ntoa_long_long` passed 2,592 decoded stock/source/
+oracle cases. The matrix includes values above 32 bits, bit 63 and UINT64_MAX,
+four numeric bases, sign, precision and hash/uppercase controls. It compares
+reversed digit buffers, formatting arguments, return values and preserved
+registers. The independent oracle preserves the stock 32-digit buffer limit
+(including truncation of longer binary representations). Quotient/remainder
+are modeled using exact nonzero unsigned arithmetic, with caller registers
+poisoned after each call. Nested arithmetic execution and integration remain
+pending. Full firmware completion remains unproven; the goal stays active.
+
+### Wide integer conversion source-linked (2026-09-15)
+
+Integrated authenticated `_ntoa_long_long` at 0x10008d48 into the macOS startup
+source ELF. Its 204 bytes/address match the standalone verified converter,
+and its formatting call resolves to allocated SDK source. Allocated-symbol,
+physical alias and LOAD checks pass. Quotient/remainder remain explicit
+external bindings at their mathematically verified stock addresses. Pinned
+libgcc source integration, nested arithmetic execution and full formatter
+reconstruction remain pending. The complete source-only goal stays active.
+
+### Pinned libgcc division integrated (2026-09-15)
+
+Freshly rebuilt quotient/remainder and their bit-length table from GCC commit
+1e9b70447a8417f5c692370de4533e43d754e8fa on macOS. Quotient is 776 bytes within
+820; remainder 768 within 804; the 256-byte table equals mathematical bit
+lengths. Revalidation passed 41,910 nonzero pairs per operation against stock
+and exact arithmetic, plus 760 zero-divisor fault arrivals (not exception
+resumption qualification).
+
+Integrated all three source components into startup; the wide converter now
+calls allocated libgcc implementations. Explicit component rules precede the
+reset catch-all so arithmetic text cannot be captured as reset code. Byte/
+address equality, allocated symbols, nonoverlap and LOAD checks pass. Nested
+formatter execution and complete firmware/hardware qualification remain
+pending. The full source-only goal stays active.
+
+### Wide integer conversion with decoded division (2026-09-15)
+
+Added `verify_gx8002_backup_printf_long_long_nested.py`, rebuilding the pinned
+SDK converter and pinned GCC arithmetic using the macOS toolchain. All four
+stock/source converter and arithmetic combinations pass 160 cases each (640
+executions), with 1,716 quotient and 1,716 remainder calls per combination
+(13,728 decoded calls total). Each arithmetic return is checked against exact
+unsigned math; digit buffers and formatter arguments match an independent
+formatting oracle. Boundary values include both sides of 32-bit and signed
+64-bit boundaries, UINT64_MAX, zero, and bases 2/8/10/16. Stock 32-byte digit
+truncation remains part of this compatibility baseline.
+
+The arithmetic executes in separately marshaled interpreter frames, not one
+shared-memory firmware execution. Downstream formatting and callbacks remain
+modeled. No new firmware admission or reduction in retained stock bytes is
+claimed. Full formatter, floating paths, peripheral data ownership and the
+remaining opaque firmware still require work; the source-only goal stays active.
+
+### Main formatter source placement (2026-09-15)
+
+Authenticated stock switch dispatch identifies e/E/g/G as ordinary-character
+fallbacks at 0x10008f30, while f/F select 0x1000914e. The pinned SDK's default
+exponential support therefore exceeds the stock feature configuration. Added
+an analyzer recording this distinction, mathematical verification of the ten
+powers-of-ten doubles, and four macOS compiler probes. The default full-feature
+candidate remains available; fixed-point and long-long support stay enabled in
+the stock-configured candidate.
+
+`build_gx8002_backup_printf_main.py` now places the unmodified, configured SDK
+main formatter at 0x10008e20. Its compiled code, switch table, strings and powers
+of ten occupy 2,384 of 2,820 available bytes. The no-output callback occupies
+2 of 4 bytes at 0x10008a00. Constants and tables are compiler-generated, not
+copied from stock. Link checks pass with no unresolved relocations or symbols;
+helper addresses remain explicit external bindings in this candidate.
+
+This removes a placement uncertainty, not a firmware ownership gap yet. Main
+formatter execution equivalence, complete source-helper composition, admission
+and hardware qualification remain pending. The complete source-only goal is
+still active, and retained stock byte accounting is unchanged.
+
+### Formatter source dependency composition (2026-09-15)
+
+Built missing __nedf2 from pinned GCC fp-bit.c: 54 bytes in the stock 56-byte
+region. Decoded source wrapper plus unpack/comparison helpers matches stock
+and numeric ordering in 5,696 cases, including NaNs, infinities, subnormals,
+signed zeros and deterministic random pairs.
+
+The new build_gx8002_backup_printf_source_cluster.py links the main formatter,
+integer formatting, reverse output, unsigned division and existing source
+floating-point dependency cluster. All 17 required symbols are allocated source
+symbols rather than absolute helper bindings. No undefined symbols or remaining
+relocations; all allocated regions fit the backup payload without overlap.
+Standalone main/null, integer format/long and reverse components preserve bytes
+and addresses. The check caught linker input-section ordering moving strings
+before the entry; explicit ordered selectors fixed it, and original helper
+entry-address assertions now also pass.
+
+This is a source dependency ELF, not an admitted runnable firmware. The output
+callback remains caller-supplied. Main formatter execution, startup composition,
+full firmware ownership and hardware qualification remain pending. Retained
+stock byte accounting is unchanged; the full source-only goal stays active.
+
+### Main formatter integrated into source startup (2026-09-15)
+
+Startup now composes the source formatter dependency cluster, with _vsnprintf
+allocated at its recovered entry instead of an absolute stock binding. Integer
+and reverse helpers already owned by startup remain shared. The arithmetic
+cluster's compact memcpy is renamed consistently in source objects to avoid
+colliding with the general-purpose startup memcpy alias, preserving both
+qualified implementations and all component bytes.
+
+The upstream printf wrapper and character callback are compiled as a separate
+source translation unit, taking their function bodies from the authenticated
+SDK source. This removes the earlier partial-link requirement to resolve the
+formatter to an absolute address. The resulting wrapper and callback bytes
+match their standalone candidates after final linking.
+
+The macOS startup build passes all existing component checks plus equality of
+every allocated formatter-cluster section, allocated source helper checks,
+original formatter entry, physical nonoverlap, no undefined symbols or remaining
+relocations, and no writable-executable LOAD segments. This is still an
+unadmitted source component ELF. Main formatter execution, opaque subsystem
+and data recovery, complete firmware composition and hardware qualification
+remain outstanding. No full firmware image was changed; retained-stock counts
+are unchanged. The full source-only goal stays active.
+
+### UART descriptor defaults integrated (2026-09-15)
+
+Repaired the stale backup descriptor builder, which depended on an obsolete
+`variants/o2` UART-output candidate. It now freshly builds the current recovered
+putc and links it to the existing source-authored descriptor defaults, with SDK
+hardware constants authenticated against the pinned commit. Both 128-byte
+records match the stock initial data exactly; UART output code is unchanged.
+
+Startup now allocates those 256 bytes at 0x20016b84 and resolves its descriptor
+symbol to source storage. The complete macOS startup build passes component
+byte/address equality, allocated-symbol checks, physical nonoverlap and LOAD
+permissions checks. This closes an external data binding in the component ELF,
+not the complete semantic recovery of UART state: field slots 7 and 8 and other
+runtime field meanings still require consumer evidence. Console-port BSS
+ownership, firmware admission and hardware qualification remain pending.
+No full firmware image changed; the full source-only goal stays active.
+
+### Console initialization and port ownership (2026-09-15)
+
+Revalidated the existing console source against stock in 252 decoded cases:
+port store/load order, UART argument forwarding, modeled return propagation
+and ABI preservation pass. Linked the 16-byte console initializer at
+0x10004808 and its four-byte NOBITS port at 0x2001739c into startup. The existing
+putchar/console output wrappers now share that allocated C state. The port lies
+inside the recovered reset BSS-clear interval [0x20017090, 0x2002d79c).
+
+The macOS startup build passes source-symbol, component byte/address/type,
+physical nonoverlap and LOAD checks. gx_uart_init remains an external binding
+at 0x1000451c; initialization's underlying UART behavior and hardware remain
+pending. Review of configuration evidence still does not establish names for
+UART descriptor slots 7/8: it only establishes default normalization to 8/1.
+Those semantics remain unresolved. No complete firmware admission or change to
+retained-stock accounting; the full source-only goal remains active.
+
+### UART initializer linked to console startup (2026-09-15)
+
+Freshly rebuilt the recovered UART initializer: 104 bytes at 0x1000451c.
+Its 1,620 decoded stock/source cases pass, covering invalid-port rejection,
+MHz rounding within 100 Hz, ordered descriptor writes, helper argument
+forwarding and result propagation. Helpers are modeled in that verifier.
+
+Startup now resolves gx_uart_init to this allocated source function, sharing
+source descriptors and the existing source module clock gate. The macOS startup
+build passes component byte/address equality, allocated symbols, physical
+nonoverlap and LOAD checks. Frequency lookup (0x10003cf0) and UART configuration
+(0x100043a4) remain external dependencies. Nested initialization execution and
+hardware qualification remain pending. This is still a component ELF, not a
+complete admitted firmware; retained-stock accounting is unchanged and the
+full source-only goal remains active.
+
+### Source clock frequency linked into startup (2026-09-15)
+
+Rebuilt the recovered upstream-backed backup clock-frequency implementation
+on macOS. All five decoded suites pass (248 + 1,040 + 10,240 + 80 + 3,328 =
+14,936 finite cases). This covers low/high paths, PLL sweeps, the slow clock,
+and changing selection registers; it is not exhaustive hardware validation.
+
+Startup now links the 468-byte frequency function at 0x10003cf0 and its
+76-byte compiler-generated switch at 0x100129f0, sharing the allocated source
+module lookup. UART initialization calls this source function. Component bytes
+and addresses remain identical to the standalone candidate, and the complete
+macOS startup build passes symbol, physical-overlap and LOAD checks. UART
+configuration remains an external initializer dependency. Full firmware
+admission, remaining opaque functionality and hardware validation are still
+outstanding; no retained-stock accounting changed. The goal stays active.
+
+### UART configuration and FIFO query integrated (2026-09-15)
+
+Rebuilt configuration and reran 400 control plus 400 baud cases. Ordered
+register/descriptor traces pass. Control bypasses baud arithmetic; the baud
+suite runs both configuration variants using the same decoded source arithmetic
+and excludes zero shifted denominators. FIFO and IRQ callees execute in
+separately marshaled frames; this is not full hardware or full-stock arithmetic
+qualification.
+
+Startup now links configuration and FIFO-depth source, with arithmetic calls
+resolved to its existing source floating-point cluster. The FIFO builder also
+passes 1,536 encoding/read-order cases. Component byte/address equality,
+allocated source symbols, physical nonoverlap and LOAD checks pass in the macOS
+startup build. Interrupt handling (0x10004250) and registration (0x10004844)
+remain external bindings. Full firmware admission and remaining opaque recovery
+are unfinished; retained-stock accounting is unchanged and the goal stays active.
+
+### UART interrupt and IRQ registration source integration (2026-09-15)
+
+Rebuilt and linked UART interrupt handling (230 bytes), its complete transmit
+helper (22 bytes in the existing FIFO tail placement), and IRQ registration
+(40 bytes) into startup. Registration passes 324 decoded guard/ordered-store
+cases; the fresh interrupt build passes 1,728 dispatch comparisons without
+differences, with modeled callbacks and MMIO.
+
+The complete macOS startup build passes unchanged component bytes/addresses,
+source symbol allocation, physical nonoverlap and LOAD checks. Configuration
+now resolves interrupt handling and registration to allocated source functions.
+IRQ table storage at 0x200173a8 remains external. The inherited FIFO-tail reuse
+still requires whole-firmware computed-reference qualification; callback
+implementations and real asynchronous hardware remain unqualified. No full
+firmware image was admitted or modified; retained-stock accounting is unchanged.
+The full source-only goal remains active.
+
+### IRQ table source ownership (2026-09-15)
+
+Added a macOS builder for the existing C IRQ storage declaration: 32 eight-byte
+handler/context entries at 0x200173a8, and two saved-enable words at 0x200173a0.
+All 264 bytes are NOBITS storage within the recovered reset BSS-clear interval;
+compile-time assertions establish entry width, context offset and table extent.
+Startup now shares the allocated table between registration and architecture
+dispatch, eliminating their external table bindings.
+
+The full source startup component builds and passes allocated-symbol,
+component byte/address, physical nonoverlap and LOAD checks. This is storage
+ownership in a component ELF, not asynchronous interrupt lifecycle validation
+or complete firmware admission. Remaining opaque code/data and hardware
+qualification still require work; retained-stock accounting is unchanged and
+the full source-only goal remains active.
+
+### Opaque prepare helper identified as upstream queue initialization (2026-09-15)
+
+Tracing application-event initialization showed it calls package 0x428e8,
+previously labeled denoise_prepare_428e8. Its record-size rounding, descriptor
+stores and head/tail reset identify pinned SDK LvpQueueInit. Authenticated
+lvp_queue.c, lvp_queue.h and lvp_attr.h, removed only the unused stdio include,
+and compiled on macOS: all 20 bytes exactly match stock at runtime 0x10009fa8.
+
+Startup now links LvpQueueInit and resolves the old prepare name to that source
+function. Complete component byte/address, allocated-symbol, physical-overlap
+and LOAD checks pass. Other queue operations, application-event initialization
+and tick, caller contracts (including nonzero record sizes), full firmware
+admission and hardware validation remain unfinished. Retained-stock accounting
+is unchanged; the full source-only goal remains active.
+
+### Application event queue reader recovered (2026-09-15)
+
+The event tick calls package 0x428fc, identified as pinned SDK LvpQueueGet.
+The authenticated source builds at runtime 0x10009fbc in 70 of 80 available
+bytes with -Os (-O2 was 104 bytes and failed the placement bound). A decoded
+stock/source verifier passes 13,263 cases against an independent ring-buffer
+oracle, comparing return, full RAM, output guards, ordered writes and preserved
+registers. Empty/nonempty and wrapped reads pass across finite positive sizes
+and head/tail combinations. No concurrent mutation or malformed signed/zero
+size qualification is claimed.
+
+This is a source reader candidate, not yet linked into application-event
+processing or admitted to full firmware. The source-only goal remains active;
+remaining opaque functionality and hardware qualification are unfinished.
+
+### Source application-event tick candidate (2026-09-15)
+
+Compiled the authenticated pinned SDK LvpAppEventTick function, isolated with
+its actual APP_EVENT, LVP_APP and queue headers. UART async processing is enabled
+to match the observed final stock call at package 0x43e08; the stock tick first
+reads its misc queue and conditionally calls event-response and task-loop slots.
+The source tick fits exactly 76 bytes at 0x1000be5c, but is not byte-identical.
+
+Linked the previously verified source LvpQueueGet directly into the candidate;
+its bytes and address are unchanged and its symbol is allocated. App operations
+pointer storage and UartMessageAsyncTick remain external. Callback mutation,
+queue interaction and full tick execution need decoded qualification before
+startup integration. This remains an unadmitted component; no full firmware
+image or retained-stock accounting changed. The source-only goal stays active.
+
+### Event tick callback validation (2026-09-15)
+
+Added decoded stock/source event-tick validation: 216 cases pass against an
+independent callback-trace oracle. Checks cover empty/nonempty queue results,
+null application and callbacks, event contents, response callbacks that clear
+or replace app_core_ops, selection of the subsequent task loop, unconditional
+UART async processing, zero return and preserved ABI registers. The queue
+model asserts the complete eight-byte local event is initially zero.
+
+Queue and callback bodies are modeled in this test. The separate queue-reader
+qualification is not nested execution, and arbitrary concurrent mutation is
+not covered. Tick startup integration, callback implementations, async UART
+processing and complete firmware admission remain unfinished. The full goal
+stays active and retained-stock accounting is unchanged.
+
+### Application-event tick integrated into startup (2026-09-15)
+
+Startup now resolves LvpAppEventTick to the compiled pinned SDK body and links
+its source LvpQueueGet dependency. Queue initialization retains its independently
+qualified compilation. Unselected queue exports are localized in copied source
+objects to prevent duplicate global definitions; selected bodies remain whole.
+
+The macOS startup build passes allocated-symbol, unchanged component bytes and
+addresses, physical nonoverlap and LOAD checks. Application operations pointer,
+misc queue storage and UartMessageAsyncTick remain external. Nested event/queue
+execution, event initialization, full callback implementations and firmware
+admission/hardware qualification remain pending. Retained-stock accounting is
+unchanged; the full source-only goal remains active.
+
+### Application event queue storage linked (2026-09-15)
+
+The stock event initializer passes record size 8, buffer size 64, buffer
+0x2002d31c and descriptor 0x2002d784. Added C BSS declarations using the
+authenticated SDK APP_EVENT and LVP_QUEUE types: eight events plus a 20-byte
+queue descriptor. Compile-time checks establish sizes and buffer/member offsets;
+both objects lie inside the recovered reset BSS-clear interval.
+
+Startup now resolves the event tick's queue reference to source storage. The
+macOS build passes component, allocated-symbol, physical nonoverlap and LOAD
+checks. Application operations, event initialization, async processing and full
+firmware validation remain unfinished. These 84 BSS bytes do not constitute a
+full firmware admission or change retained-stock accounting. Goal stays active.
+
+### UART async packet dispatch candidate (2026-09-15)
+
+Identified the event-loop async callee as pinned SDK UartMessageAsyncTick:
+queue packet, optional CRC when flags equal one, then first matching command
+and port in 16 registration entries. Compiled the unchanged isolated tick and
+CRC-check source bodies with authentic packet/queue headers. Compile-time
+checks confirm 32-byte packets, 28-byte registrations and body/port offsets.
+The source CRC-error diagnostic matches stock; all candidate sections fit their
+original bounds with no undefined symbols or relocations after explicit binding.
+
+Corrected the event-tick adapter's async declaration to the SDK int return type;
+all 216 decoded event-tick cases still pass. Async queue/CRC/printf and storage
+remain externally bound in the new candidate; decoded packet dispatch, exact
+CRC ABI lineage, startup composition and hardware qualification are pending.
+No firmware admission or retained-stock accounting change; full goal active.
+
+### Backup CRC source lineage and execution (2026-09-15)
+
+Rebuilt pinned SDK base/src/crc32.c, attributed upstream to zlib 1.1.3, at
+backup entries 0x1000c510 and 0x1000c5c4 with its source table at 0x10013d58.
+The 180-byte core, 12-byte wrapper and 1,024-byte table fit their regions.
+Decoded stock/source core and nested wrapper pass 1,040 alignment/length/seed
+cases against bitwise reflected-polynomial and zlib oracles. The table equals
+independently generated polynomial values. Extended the shared decoder with
+an optional backup relocation and BMASKI used by stock.
+
+Authenticated the async adapter's uint32_t CRC prototype against the pinned
+implementation and rebuilt it successfully. CRC startup/async integration,
+packet dispatch qualification, complete firmware admission and hardware remain
+pending. Full source-only goal active; retained-stock accounting unchanged.
+
+### CRC dependency integrated into source startup (2026-09-15)
+
+Startup now includes the pinned SDK CRC core, wrapper and polynomial table at
+their verified backup addresses. Both CRC entry symbols are allocated source,
+and all three component sections preserve standalone bytes and addresses.
+The complete macOS startup build passes physical nonoverlap and LOAD checks.
+This makes the source CRC available for subsequent async dispatch integration;
+that dispatcher remains outside startup pending its own behavioral validation.
+
+Complete firmware admission, remaining opaque functionality and hardware
+qualification remain unfinished. No retained-stock accounting changed; the
+full source-only goal stays active.
+
+### Async packet dispatch decoded validation (2026-09-15)
+
+Added 576 stock/source packet-dispatch cases with an independent expected
+call-trace oracle. Covers empty queue, CRC-required and bypass flags, matching
+and rejected CRC, command/port mismatches, absent/first/middle/last registrations,
+first-match precedence with duplicate registrations, diagnostic arguments,
+packet/private callback arguments and callback result propagation. ABI registers
+are checked after modeled callees poison caller-saved registers.
+
+Queue, CRC, printf and callback bodies are modeled in this suite; nested source
+execution, concurrent registration mutation and null matched callbacks remain
+unqualified. Dispatcher integration and complete firmware/hardware validation
+are pending. Full source-only goal active; retained-stock accounting unchanged.
+
+### Async packet dispatcher linked into startup (2026-09-15)
+
+Startup now resolves UartMessageAsyncTick to the validated SDK-derived source
+body. Its direct LvpQueueGet, crc32 and printf dependencies resolve to allocated
+source implementations already in the cluster. The diagnostic is source-built.
+All candidate code/data bytes and addresses are preserved in the combined
+macOS build; source-symbol, physical nonoverlap and LOAD checks pass.
+
+Receive queue and message-registration storage remain external, and callback
+bodies, nested packet execution, complete firmware admission and hardware are
+unqualified. No retained-stock accounting changed. The full source-only goal
+remains active.
+
+### UART async registration and queue descriptor ownership (2026-09-15)
+
+Allocated the sixteen-entry UART_MSG_REGIST array at 0x2002cf30 and LVP_QUEUE
+receive descriptor at 0x2002d770 from authentic SDK types: 448 + 20 bytes of
+BSS. Compile-time size and command/callback/private offset checks match decoded
+dispatch. Both objects lie within the recovered reset BSS-clear interval.
+Startup now shares these allocated symbols with the source async dispatcher.
+
+The complete macOS startup component passes source-symbol, unchanged component
+bytes/addresses, physical nonoverlap and LOAD checks. Receive backing-buffer
+initialization, registration lifecycle, callbacks and full firmware/hardware
+qualification remain unfinished. No full firmware image or retained-stock
+accounting changed; the source-only goal stays active.
+
+### UART callback registration recovered at backup placement (2026-09-15)
+
+Reused the authenticated pinned SDK UartMessageAsyncRegist implementation at
+backup runtime 0x1000b430 (package 0x43d70), bound to the recovered registration
+array. The complete source function fits its 152-byte envelope. The decoded
+stock/source suite passes 2,312 cases against the independent field-operation
+oracle: duplicate removal, first empty insertion, exhausted tables, zero/full
+identifiers and all sixteen input/table aliases. Full table/input/guard memory
+and ABI are compared; arbitrary partial overlap and concurrency remain outside
+qualification.
+
+The registration candidate is not yet startup-linked or admitted into a full
+firmware. Remaining callback lifecycle, reception, opaque functions and hardware
+validation remain pending. Source-only goal stays active; stock accounting
+unchanged.
+
+### UART callback registration integrated (2026-09-15)
+
+Startup now links UartMessageAsyncRegist at 0x1000b430 against the same
+source-owned registration array used by the async dispatcher. The complete
+132-byte upstream-derived function preserves its verified standalone bytes
+and address. The macOS build passes allocated-symbol, component equality,
+physical nonoverlap and LOAD checks.
+
+This integrates the already-qualified finite alias/replacement behavior; it
+does not qualify reception, arbitrary concurrent lifecycle changes, callback
+implementations or full firmware execution. No complete firmware image or
+retained-stock accounting changed. The source-only goal remains active.
+
+### Application suspend/resume source recovery (2026-09-15)
+
+`build_gx8002_backup_app_power_callbacks.py` authenticates SDK commit
+`8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5` and isolates the unchanged
+`_LvpAppSuspend` and `_LvpAppResume` bodies (only removing static linkage).
+The native macOS C-SKY compiler produces exact stock bytes for both 28-byte
+routines at 0x1000bdb0 and 0x1000bdcc. Header-derived static assertions check
+callback and context field offsets. Disabling compiler shrink wrapping is
+necessary to retain the recovered envelopes; watchdog is disabled, matching
+stock control flow. The startup composition links both source functions and
+checks their allocated symbols, bytes and addresses against the standalone
+candidate. Application operations storage and initialization dependencies still
+need recovery. Exact component reproduction does not qualify hardware operation
+or remove the remaining retained bytes from the full firmware image.
+
+### Application-event initializer recovered (2026-09-15)
+
+`build_gx8002_backup_app_event_initialize.py` compiles the pinned SDK
+`LvpInitializeAppEvent` on macOS. The authenticated PMU header is Git blob
+`6bd8a876fe7ec7c308451a9634afebefdcd88c12`. Optional sensor, UART recording and
+watchdog features are disabled to match stock. Two literal strings become
+explicitly placed source-defined arrays; no binary data is copied into source.
+The resulting 96-byte initializer at 0x1000bdfc and both strings match stock
+exactly. The startup link replaces main's absolute initializer dependency and
+shares source-built queue initialization, event storage and suspend/resume
+callbacks. PMU registration routines and application operations storage remain
+explicit recovered-address dependencies. This is component recovery, not a
+complete source-only or hardware-qualified firmware image.
+
+### PMU registration and state reconstructed (2026-09-15)
+
+`build_gx8002_backup_pmu_registration.py` isolates pinned SDK
+`LvpSuspendInfoRegist`, `LvpResumeInfoRegist` and `LVP_STANDBY_HANDLE`.
+The macOS compiler produces 104-byte bodies in each original 108-byte envelope
+at 0x1000a784 and 0x1000a7f0. The authenticated 144-byte state type now supplies
+NOBITS storage at 0x2002cb88, inside the recovered reset BSS-clear interval.
+`verify_gx8002_backup_pmu_registration.py` passes 2,916 decoded stock/source/oracle
+comparisons, covering counter limits, existing callbacks across all slots,
+zero callbacks, and separate/exactly aliased input records. It checks modeled
+memory, returns and preserved registers; memcpy is modeled, and partial overlaps
+and concurrency are excluded. Startup links the two routines to the existing
+source memcpy and removes the initializer's absolute PMU registration bindings.
+Remaining PMU lifecycle functions, application operations and other firmware
+subsystems still require recovery; full firmware admission remains unfinished.
+
+### PMU initialization recovered (2026-09-15)
+
+`build_gx8002_backup_pmu_initialize.py` compiles the pinned SDK `LvpPmuInit`
+and authenticates its PMU driver header. Its 60-byte candidate fits the original
+64-byte envelope at 0x1000a744. `verify_gx8002_backup_pmu_initialize.py` passes
+270 decoded stock/source/oracle cases: cold/watchdog clear, warm-start resume
+callbacks, zero through eight registered entries, and callback mutations of the
+resume count. Calls to the wakeup reader, memset and callbacks are modeled;
+malformed counts and hardware execution remain unqualified. Startup links the
+initializer to source PMU state, memset and the previously recovered status
+reader (now also aliased as gx_pmu_get_wakeup_source). Its caller in system
+initialization still needs source recovery. This does not establish complete
+firmware or reduce the previously recorded full-image binary ownership totals.
+
+### System startup dependency inventory and completion hook (2026-09-15)
+
+`analyze_gx8002_backup_system_dependencies.py` authenticates the stock image,
+reads all direct calls in the recovered system initializer, and cross-references
+their runtime addresses with allocated symbols in the current source cluster.
+The inventory finds 21 distinct call targets, five currently source-allocated.
+The remaining targets include device, flash, DMA/cache, GPIO and RTC setup.
+SDK names are explicitly inferred from call ordering/arguments; this inventory
+is not behavioral qualification. Cold-start configuration, strings and the
+initializer body remain recovery work.
+
+`build_gx8002_backup_system_done.py` isolates the authenticated upstream empty
+`LvpSystemDone` body. Its two-byte return instruction exactly matches stock at
+0x1000aacc. This is evidence-backed original behavior, not a substitute stub.
+The startup link removes main's absolute completion-hook dependency and checks
+its source bytes/address. Complete runnable source-only firmware remains unproven.
+
+### Backup device registry initialization and state (2026-09-15)
+
+`build_gx8002_backup_device_list.py` reuses the reviewed shared C device-list
+initializer and adds a source definition of its two list heads. At backup
+address 0x10008204 it produces the exact original 20-byte body, including the
+literal pool. The decoded straight-line sequence verifies four ordered stores:
+each list's next/previous pointers refer to its own head. Source NOBITS storage
+occupies 16 bytes at 0x20017660 within the reset clear interval. The startup
+composition now includes this implementation and state. The original system
+initializer caller, registry operations, and complete firmware reconstruction
+remain pending; this component does not qualify hardware operation.
+
+### Backup GPIO initialization source reuse (2026-09-15)
+
+`build_gx8002_backup_gpio_initialize.py` reuses the shared recovered GPIO C.
+The macOS compiler produces the exact 24-byte stock body at 0x100081ec.
+The decoded straight-line contract verifies module 4 enable precedes the
+32-bit zero write to 0xa0001034, with return zero and return-address preservation.
+Startup links its gate call to the existing source implementation. Electrical
+behavior, the still-opaque system initializer caller and complete firmware
+qualification remain outside this component proof.
+
+### Backup RTC tick primitives (2026-09-15)
+
+`build_gx8002_backup_rtc_ticks.py` reuses shared recovered C for tick set/start
+at 0x10008810/0x10008800. Set is byte-exact (12 bytes); start fits 16 bytes and
+differs in scratch-register allocation. Explicit decoded instruction contracts
+for stock and source prove the same single control read followed by OR-4 write;
+set writes the input word to 0xa0003008. These leaf operations do not prove RTC
+initialization, interrupt behavior or electrical timing. Both primitives are
+included in the startup source composition; full firmware remains incomplete.
+
+### Backup RTC interrupt handler and callback state (2026-09-15)
+
+`build_gx8002_backup_rtc_isr.py` reuses shared recovered C at 0x100087dc,
+with eight bytes of source-defined callback/context BSS at 0x200176d0.
+`verify_gx8002_backup_rtc_isr.py` passes 540 decoded stock/source cases for
+callback presence, IRQ, private argument, return value and acknowledgement.
+The shared interpreter now accepts an optional state address (primary default
+unchanged) and verifies the compiler's leaf-return path. Callback behavior and
+acknowledgement values are modeled; physical effects and concurrency are not
+proved. Startup includes the handler/state. RTC initialization and complete
+firmware reconstruction remain pending.
+
+### Backup RTC initialization linked from source (2026-09-15)
+
+`build_gx8002_backup_rtc_initialize.py` reuses shared recovered initialization C
+and its source diagnostic string, placed at 0x1000881c and 0x10012eb4.
+`verify_gx8002_backup_rtc_initialize.py` passes 660 decoded stock/source cases,
+covering control bits and clock values around the 16-bit prescaler boundary.
+Stock inlines tick startup while source calls the separately checked primitive;
+the comparison models that helper's read-modify-write. Other helpers are modeled
+by calls, return values and caller-register clobbers. Initialization enables
+module zero, sets control bit 4, queries its frequency, then either logs an
+out-of-range error or writes the prescaler, registers IRQ 4 and starts ticks.
+Startup links all dependencies to existing source functions, including frequency,
+IRQ registration, formatter, ISR and tick start. Hardware and whole-firmware
+qualification remain pending.
+
+### Backup IRQ initialization (2026-09-15)
+
+`runtime_gx8002_backup_irq_initialize.c` reconstructs gx_irq_init as restoration
+of saved enable banks at 0x200173a0/4 to VIC registers 0xe000e100/4.
+`build_gx8002_backup_irq_initialize.py` produces all 24 original bytes at
+0x1000482c and checks the decoded read/write ordering and leaf return.
+Startup links the function to existing source-owned saved-enable storage.
+This is the operation already represented by the shared IRQ restore_enabled
+implementation, expressed with explicit backup register accesses. Interrupt
+delivery and full firmware qualification remain pending.
+
+### Existing backup DMA initializer integrated (2026-09-15)
+
+Re-ran `verify_gx8002_backup_dma_initialize_source.py`; its decoded comparison,
+loader check and reference analysis pass. The existing 120-byte source candidate
+at 0x10004d14 is now included in the startup composition as gx_dma_init.
+Its resource calls resolve to source clock gating and registration resolves to
+source IRQ registration. DMA state at 0x2002d3e8 and the DMA interrupt handler
+at 0x10004c04 remain explicit address dependencies. This integration does not
+claim those dependencies or hardware DMA timing are source-qualified.
+
+Further inspection also located the existing shared
+`runtime_gx8002_lvp_system_initialize.c`; it contains a primary-image keyword
+list call absent from the observed backup startup path. A backup adaptation must
+account for that difference and reconstruct its diagnostic data rather than
+blindly reuse the primary configuration.
+
+### Backup DMA state allocated from source (2026-09-15)
+
+`build_gx8002_backup_dma_storage.py` reuses the shared storage/layout definitions:
+884-byte state at 0x2002d3e8 and 16-byte callback storage at 0x200174a8.
+The state layout includes two reserved descriptor areas, derived descriptor
+pointers and allocation bytes. Backup ISR instructions at package 0x3d54a and
+0x3d55e establish callback base and private-argument base+8; the loop handles
+two channels. Both allocations are NOBITS within the recovered reset clear
+range. Startup resolves the initializer's state symbol to this source storage.
+Descriptor semantics, callback lifecycle, interrupt handler source integration
+and hardware DMA operation still require further work.
+
+### Backup DMA interrupt integration (2026-09-15)
+
+Existing decoded verifiers pass 168 IRQ cases and 1,920 deallocation cases.
+The handler fits its 120-byte envelope with 112 compiled bytes and is integrated
+at 0x10004c04, sharing source-owned DMA state and callback storage. The initializer
+now registers the source handler. The deallocator candidate is 72 bytes against
+its 68-byte envelope; behavior tests did not enforce placement. The combined
+build correctly rejected it, so its source integration is deferred and the
+handler retains an explicit deallocator dependency at 0x10004bc0. Hardware and
+full firmware qualification remain pending.
+
+### DMA deallocator size investigation (2026-09-15)
+
+Added `analyze_gx8002_backup_dma_deallocate_size.py` to reproduce the macOS
+size failure. Nine compiler-pass variants all retain 72 executable bytes against
+the 68-byte envelope. Equivalent loop and signed-byte read experiments also
+failed to reduce size and were discarded; the original source and flags are
+restored. Its 1,920 decoded behavior cases still pass. The size report explicitly
+keeps this candidate out of firmware source admission. A reviewed structural
+change or source-only relocation strategy is still required; no stock bytes or
+trap substitution were introduced.
+
+### Backup IRQ state source integrated (2026-09-15)
+
+Additional deallocator expression and optimization-level probes did not resolve
+its overflow; the original source remains restored. Independently re-ran
+`verify_gx8002_backup_irq_state_source.py`: comparison, loader and reference
+checks pass for pinned upstream CSI save/restore primitives. Startup now includes
+source functions at 0x1000486c and 0x10004878, with unused shared-object functions
+localized/discarded. Their 10- and 6-byte bodies remain identical to their
+standalone candidates. Deallocator placement and whole-firmware qualification
+remain pending.
+
+### Backup cache initialization source reuse (2026-09-15)
+
+The additional deallocator expression/compiler probes still produce 72 bytes;
+its original source is restored. Separately,
+`build_gx8002_backup_cache_initialize.py` reuses the existing recovered adapter
+and authenticated pinned CSI headers. It generates an exact 32-byte stock match
+at 0x100051a4. Startup now includes gx_cache_init and checks unchanged component
+bytes. Instruction-cache enable, data-cache disable and data-cache enable remain
+explicit dependencies at 0x10004fac, 0x10004db4 and 0x10004d94. Cache hardware
+behavior and complete source-only firmware remain unqualified.
+
+### Backup data-cache enable from pinned CSI (2026-09-15)
+
+`build_gx8002_backup_dcache_control.py` compiles the existing CSI adapter and
+authenticates its header dependencies. Data-cache enable produces the exact
+32-byte stock body at 0x10004d94, preserving all synchronization instructions.
+Startup now resolves the cache initializer's enable call to source. A probe of
+the upstream disable adapter fits its envelope but differs in scratch registers
+and bit-clear encoding; it remains outside this integration pending comparison.
+Instruction-cache enable and physical cache coherency remain unresolved.
+
+### Backup data-cache disable qualified and integrated (2026-09-15)
+
+Extended `build_gx8002_backup_dcache_control.py` with the pinned CSI disable
+adapter at 0x10004db4. `verify_gx8002_backup_dcache_disable.py` passes 66
+stock/source/oracle control patterns, including all individual set/clear bits.
+It checks two barriers, control read, bit-zero clear/write, invalidation request,
+and two final barriers, plus preserved registers. Startup now resolves disable
+to source and retains standalone section byte/address checks. Physical cache
+coherency and whole-firmware operation remain unqualified.
+
+### Backup instruction-cache enable integrated (2026-09-15)
+
+`build_gx8002_backup_icache_enable.py` reuses shared recovered external-controller
+C at 0x10004fac. `verify_gx8002_backup_icache_enable.py` passes 284 decoded
+stock/source/oracle MMIO traces, including ready states, irrelevant high status
+bits and continued polling. No timeout or alternate readiness behavior was added.
+Startup now links all three cache-initializer helper calls to source functions.
+Finite register traces do not qualify physical cache coherence or complete
+firmware operation.
+
+### Backup timer initialization recovered and integrated (2026-09-15)
+
+`build_gx8002_backup_timer_initialize.py` reuses the existing shared recovered
+C with backup bindings at 0x10004ffc. The decoded verifier passes 4,104 frequency
+cases against stock and an independent ordered-effect oracle, including the
+prescaler's unsigned underflow at sub-megahertz frequencies. Startup resolves
+clock gate/frequency, memset and IRQ registration to source. Timer slots at
+0x200174bc, dispatch at 0x100050cc and channel initialization at 0x10004fcc remain
+explicit dependencies. Helper effects are modeled; whole-device timing and
+complete firmware qualification remain pending.
+
+### Backup timer channel initializer integrated (2026-09-15)
+
+`build_gx8002_backup_timer_channel_initialize.py` reuses shared C at
+0x10004fcc. Its decoded verifier passes 4,104 clock-frequency cases against
+stock and the ordered MMIO oracle. Startup connects timer initialization to
+this source function and its source clock-frequency provider, preserving
+standalone bytes/addresses. Timer dispatch and slot storage still need
+integration; hardware timing and complete firmware remain unqualified.
+
+### Backup timer slots source-owned (2026-09-15)
+
+`build_gx8002_backup_timer_storage.py` compiles the shared timer-dispatch type
+and ten-slot declaration, discarding executable sections in this storage-only
+component. It allocates 360 NOBITS bytes at 0x200174bc, matching the recovered
+initializer's clear and lying within reset-cleared BSS. Type assertions check
+36-byte stride and deadline offset. Startup resolves the initializer's slot
+pointer to this allocation. Dispatch executable integration, callback lifecycle
+and hardware timing remain pending; the firmware goal is not complete.
+
+### Backup timer dispatch integrated (2026-09-15)
+
+`build_gx8002_backup_timer_dispatch.py` reuses shared dispatch C with backup
+clock/state addresses. `verify_gx8002_backup_timer_dispatch_paths.py` passes 512
+stock/source/oracle scheduling cases, including callbacks changing interval,
+repeat and active fields. Time and callback boundaries are modeled; nested
+backup clock execution is explicitly rejected by this verifier until qualified.
+Startup now links timer IRQ registration to source dispatch and shares its
+360-byte slot declaration with initialization. The separate storage-only object
+is omitted to avoid duplicate state definitions. Physical timing, whole-system
+behavior and complete firmware source reconstruction remain pending.
+
+### Backup digital LDO query and flash type wrapper (2026-09-15)
+
+Reused the recovered shared C implementations for the backup image, with
+pinned SDK board call sites and driver headers retained as provenance.
+`verify_gx8002_backup_digital_control.py` passes 4,355 decoded stock/source
+cases against an independent bit truth table. The 24-byte C body fits the
+32-byte envelope at 0x10008134. `verify_gx8002_backup_flash_type.py` passes
+144 callback/null-slot cases; callback internals remain modeled. Its source
+wrapper fits the 12-byte envelope at 0x1000800c. The interface layout header
+hash is included in the flash build evidence.
+
+Both components are linked into the macOS-built startup cluster with
+allocated-symbol and standalone-byte preservation checks. The complete
+cluster build passes physical placement, unresolved-symbol, relocation and
+segment checks. System initialization now has 16 of 21 direct targets
+allocated from source. This counts linkage, not complete dependency closure:
+flash callback implementations and device state still require reconstruction.
+Full-image retained-stock accounting remains unchanged at 246,207 bytes;
+complete source-only runnable firmware and hardware qualification remain pending.
+
+### Backup flash query and probe integration (2026-09-15)
+
+Added backup builds of shared recovered flash-info API and probe C. The info
+wrapper passes 144 decoded callback/null cases at 0x10008018. Probe at
+0x10007fac passes 120 retry/state/timeout cases plus 2,304 changing-pointer
+cases against stock and an independent oracle. Clock and callback results
+are scripted in this verifier; physical SPI behavior is not covered.
+
+The macOS startup cluster now links these wrappers, source clock-time helper,
+and one-byte probe state at 0x2001765c in reset-cleared BSS. All existing
+component-preservation, placement, symbol, relocation and segment checks
+pass. System-init direct source target count is 18/21. The probe callback slot
+at 0x20016d80 remains an absolute dependency, not source-owned functionality.
+
+`analyze_gx8002_backup_flash_callbacks.py` inventories the actual backup
+30-slot table for subsequent reconstruction. There are 22 non-null entries;
+unlike the primary table, UID-read is null. Candidate primary implementations
+are references only until backup semantics are verified. The table and its
+callback bodies remain to be integrated. Full-image retained-stock accounting
+is unchanged; complete source-only firmware and hardware execution are still
+unproven. The previous goal turn made concrete source/build progress.
+
+### Backup flash initializer source (2026-09-15)
+
+The previous goal turn made source/build progress. Inspected the backup
+initializer at package 0x406b8 and authored a separate C variant: it preserves
+inline SPI/status polling, calls the backup status-write helper, and omits
+the primary image's XIP configuration call. Device-selection cases retain
+signed comparison behavior, verified at IDs and neighboring values.
+
+`verify_gx8002_backup_flash_interface.py` passes 4,176 stock/source/oracle
+cases spanning discovery failure, busy sequences, status-bit combinations,
+and seeded caller registers. It checks ordered MMIO/state accesses and ABI
+preservation with helpers modeled. The 460-byte source body fits the 480-byte
+region and its entry is checked explicitly at 0x10007d78. Shared state and
+interface layout headers are hashed in build provenance.
+
+The macOS startup cluster build passes component byte/address preservation,
+physical overlap, relocation, unresolved-symbol and segment checks with this
+initializer included. Clock gating and IRQ registration resolve to existing
+source. The flash table and initialized state remain absolute dependencies;
+21 other populated table callbacks and underlying helper implementations
+remain to be qualified/integrated for backup. This is not complete flash
+closure or hardware qualification. Full-image stock accounting is unchanged.
+
+### Backup flash table, initial state and type callback (2026-09-15)
+
+The previous goal turn made source/build progress. Added the backup dispatch
+policy as named C fields with UID-read explicitly null, and compiled shared
+flash state initialization (device_index=-1, other fields zero). The 120-byte
+table and 32-byte state exactly match stock at 0x20016d80 and 0x20016d60.
+The builder uses reviewed named callback bindings; stock data only checks the
+compiled result. No binary payload array is introduced.
+
+The macOS startup cluster now allocates these objects and resolves the probe
+slot alias and initializer's state/table references to them. The shared flash
+type getter is byte-exact at 0x10007f58 and passes 2,056 decoded return/memory
+cases including selected-device self-alias. The final combined build passes
+existing symbol, relocation, byte preservation, placement and segment checks.
+Callback inventory authenticates the linked table against stock and now finds
+2 of 22 populated callbacks backed by allocated source (init and gettype).
+The other callbacks and lower-level helpers remain external dependencies;
+selected-device discovery, complete firmware and hardware qualification remain
+unfinished. Full-image retained-stock accounting is unchanged.
+
+### Backup flash information callback (2026-09-15)
+
+The previous goal turn made source/build progress. Reused the recovered shared
+information-selector C for backup getinfo at 0x10006eb8, with its compiler-generated
+56-byte dispatch table at 0x10012e00. The function fits its 76-byte envelope.
+Stock and generated tables differ because the compiler lays out cases differently;
+`verify_gx8002_backup_flash_getinfo.py` independently checks each selector's result
+and ordered state/device reads over 950 cases, including out-of-range selectors
+and capacity boundaries. Getter regression still passes 2,056 cases.
+
+Startup now resolves the table's getinfo callback to allocated source and uses
+source flash state. Unused sibling definitions are localized before discarding
+their sections to avoid duplicate globals across the shared-source objects.
+The combined macOS build passes existing symbol/relocation/placement/segment
+and component-preservation checks. Three of 22 populated flash callbacks now
+have allocated source; transport helpers, discovery and remaining callbacks
+still need closure. Full-image retained-stock accounting is unchanged, and
+complete runnable source-only firmware remains unproven.
+
+### Backup SPI command transport (2026-09-15)
+
+The previous goal turn made source/build progress. Reconstructed backup read
+and write transport at packages 0x3f570 and 0x3f5f0 using the recovered register
+sequence with inline polling helpers. The source bodies occupy 126/128 bytes
+within 128/132-byte envelopes and have no external executable dependencies.
+`verify_gx8002_backup_spi_read.py` and `verify_gx8002_backup_spi_write.py` each
+pass 7,725 ordered MMIO/buffer trace cases against stock and independent
+oracles. These cover counts 0..256, commands including all-ones, aligned and
+unaligned valid buffers, null only for zero count, and finite readiness delays.
+The backup decoder checks actual callee-saved registers; caller-saved r18 may
+be used by these leaf functions. Larger counts, invalid memory and hardware
+liveness are not qualified by these tests. Infinite polling is preserved.
+
+The initializer's status-read alias is wired to the source read transport.
+Whole-image retained-stock accounting and hardware qualification remain
+unchanged; source-only runnable firmware is not yet complete.
+
+The combined macOS startup build passed symbol, relocation, segment, physical
+placement and standalone component-preservation checks with both transport
+functions linked. Flash callback and system dependency inventories were refreshed.
+
+### Backup status-register write helper (2026-09-15)
+
+The previous goal turn made source/build progress. Authored the helper at
+package 0x3f674 as reviewed C: reject length>2 or selectors outside 1..3,
+poll status command 5 until bit0 clears, issue write-enable command 6 with
+null/zero payload, then write command 1/49/17 with the original buffer/length.
+It returns zero without propagating transport errors or waiting after the
+final command, matching stock. Source layout flags avoid a generated lookup
+array and hoisted loop constants; the final function is 90 bytes within the
+92-byte envelope. The builder rejects unexpected allocated sections so an
+orphan compiler table cannot escape the placement check.
+
+`verify_gx8002_backup_flash_status_write.py` passes 360 stock/source cases
+against an independent ordered-call oracle. It covers invalid lengths and
+selectors, pointer passthrough, status-bit/busy sequences, ignored transport
+error returns and preserved registers. The transport calls are modeled;
+physical flash behavior and nested execution are not proven by this test.
+Startup integration resolves both calls to the already reconstructed source
+transport and removes the initializer's absolute status-write binding.
+Full-image retained-stock accounting is unchanged; the active firmware goal
+remains incomplete.
+
+The combined macOS startup build passed all existing component-preservation,
+physical placement, symbol, relocation and segment checks with this helper
+linked. Dependency inventories were refreshed after the successful build.
+
+### Backup quad/device configuration helpers (2026-09-15)
+
+The previous goal turn made source/build progress. Reconstructed wait-ready,
+paired quad-enable, single quad-enable and device configuration from backup
+code at 0x3fc90..0x3fd6c. All fit their original regions (32, 66, 58, 58 bytes).
+Wait-ready returns the final command-read result, preserving a distinction
+from helpers that explicitly return zero. Configuration uses backup status-write
+selectors 1/2/3 and waits only after a required update. Status bytes and the
+preserved first byte of paired writes retain the observed call ordering.
+
+`verify_gx8002_backup_flash_quad.py` passes 5,760 stock/source/oracle cases,
+covering all 256 configuration status bytes, first-byte alternatives, ignored
+helper returns, all even ready values and finite busy sequences. Configuration
+helper calls are modeled; wait-ready is checked separately. This is not proof
+of nested whole-device execution or physical flash timing.
+
+The startup link resolves the initializer's three configuration targets to
+these C functions and their dependencies to existing source transport and
+status-write. Full-image retained-stock accounting remains unchanged; source-only
+runnable firmware and hardware qualification remain incomplete.
+
+The combined macOS startup build passed existing symbol, relocation, physical
+placement, segment and standalone-byte preservation checks with all four
+helpers included. Dependency inventories were refreshed afterward.
+
+### Backup JEDEC discovery (2026-09-15)
+
+The previous goal turn made source/build progress. Reused recovered discovery
+C at backup runtime 0x10007c90, with source state and transport addresses.
+The compiled body is 160 bytes within its 232-byte envelope. The shipped
+backup table has six devices and a zero terminator, without the 0xc22016
+fallback entry; selection falls back only when a supplied table has that ID,
+and still returns -2 after fallback selection.
+
+`verify_gx8002_backup_flash_discover.py` passes 29,260 stock/source/oracle cases:
+shipped, empty, duplicate, fallback-only and fallback-at-each-position tables,
+JEDEC byte patterns, positive/negative transport returns and caller registers.
+It checks ordered state writes and valid read addresses against immutable
+synthetic table memory. Backup optimization caches the first identifier, so
+read ordering is not asserted equal to the volatile source scan; concurrent
+table mutation is outside this qualification. Negative transport returns are
+modeled defensive paths, not generated by the current source transport.
+
+Startup now resolves discovery code to source. The device table at 0x20016ea4
+remains an absolute data dependency requiring reconstruction with its names
+and protection metadata. Full-image stock accounting is unchanged; complete
+source-only runnable firmware and physical hardware validation remain pending.
+
+The combined macOS startup build passed existing symbol, relocation, physical
+placement, segment and standalone component-preservation checks. Dependency
+inventories were refreshed following that successful build.
+
+### Backup flash device labels and record audit (2026-09-15)
+
+The previous goal turn made source/build progress. Revalidated record consumers:
+protection uses the +16 profile pointer and OTP region accessors use +20.
+The +12 word remains unidentified. Rechecked the pinned SDK spi_nor_ids.o
+section inventory (no debug layout) and public gx_spinor.h/gx_flash_common.h;
+these expose APIs and selector enums but no device-record structure definition.
+This is not proof that +12 is unused, and the table is not marked reconstructed.
+
+`build_gx8002_backup_flash_names.py` compiles the six shared source-authored
+labels at backup addresses 0x10012e38..0x10012e68, checks their bytes and all
+six stock record name/JEDEC references, and carries pinned SDK commit/object
+provenance from the existing label verifier. The labels contain 52 source
+bytes total; padding is not counted as label data. The backup startup link
+includes the six objects' sections and requires all six symbols allocated.
+Full-image retained-stock accounting is unchanged. Device table metadata,
+complete source-only firmware and physical validation remain unfinished.
+
+The combined macOS startup build passed symbol, relocation, physical placement,
+segment and component-byte preservation checks; dependency inventories were
+refreshed after the successful build.
+
+### Backup protection initialization and policies (2026-09-15)
+
+The previous goal turn made source/build progress. Reused recovered protection
+initializer C at 0x10007f80: all 44 bytes match stock and the verifier checks
+its six ordered stores. The three shared named status-mask/protected-prefix
+policy tables compile to exactly 40/56/72 stock bytes at 0x20016dfc,
+0x20016e24 and 0x20016e5c. Source storage supplies the 24-byte profile array
+at 0x20017644, within backup reset-cleared BSS. The linker resolves initializer
+pointers to these allocated tables and removes the flash initializer's absolute
+protection-init binding. The declarations describe policies and pointers;
+no binary arrays or executable pull-through are introduced by these components.
+
+Physical protection semantics, remaining flash callbacks and device-record
+field +12 remain unqualified/unresolved. Full-image retained-stock accounting
+is unchanged; the complete source-only firmware objective remains active.
+
+The combined macOS startup build passed symbol, relocation, physical placement,
+segment and component-byte preservation checks with these code/data objects.
+Dependency inventories were refreshed after completion.
+
+### Backup flash IRQ callback (2026-09-15)
+
+The previous goal turn made source/build progress. Reused the recovered IRQ15
+callback at backup runtime 0x10007138. It reads status once, conditionally reads
+controller offset0x38 for bit1 and offset0x3c for bit3, then returns zero.
+`verify_gx8002_backup_flash_interrupt.py` passes 846 ordered-read cases across
+low-byte combinations, high bits, all-ones and varied readback values.
+The build fits the 36-byte original region. Hardware register side effects
+and interrupt timing remain unqualified.
+
+Startup now resolves the initializer's registered interrupt callback to source.
+Added `analyze_gx8002_backup_flash_initializer_dependencies.py` to distinguish
+allocated source bindings from remaining absolute dependencies. This inventory
+is linkage evidence only, not whole-device qualification. Full-image retained
+stock accounting remains unchanged and the complete firmware goal is unfinished.
+
+The combined macOS build passed existing symbol, relocation, physical placement,
+segment and standalone-byte preservation checks. The initializer dependency
+inventory was refreshed from the completed ELF.
+
+### Backup word programming (2026-09-15)
+
+The previous goal turn made source/build progress. Reconstructed backup word
+programming at 0x10006d90. Inline readiness/FIFO polling and register/buffer
+ordering are preserved; the final status loop uses the already reconstructed
+wait helper. This reduces the candidate from an over-envelope inline build to
+194 bytes within the 212-byte stock region. Counts use floor(length/4), and
+zero/partial-word lengths preserve the stock configuration sequence.
+
+`verify_gx8002_backup_flash_word_program.py` passes 3,156 old/source/oracle
+trace cases for lengths 0..259 plus 511/512/513, four address patterns and
+three finite readiness schedules. Wait calls are normalized to the separately
+verified status-read contract, not nested instruction execution. Candidate
+uses a 12-byte caller frame plus the wait helper's frame, whereas stock's
+inline polling uses an 8-byte caller frame; whole-firmware stack capacity
+remains to be proven. Physical programming and invalid buffer behavior are
+not qualified. Startup installs the source programming callback; retained-stock
+full-image accounting and hardware status remain unchanged.
+
+The combined macOS build passed existing symbol, relocation, physical placement,
+segment and component-preservation checks. Initializer binding inventory now
+counts 13/15 allocated source bindings; platform configuration and word-read
+remain absolute, along with further indirect dependencies.
+
+### Backup word reading (2026-09-15)
+
+The previous goal turn made source/build progress. Reconstructed backup
+word-read at 0x100074ec, including inline readiness/FIFO polling and the
+special read mode for JEDEC IDs 0x1c3812/0x1c3813. Common setup writes are
+expressed once after selecting the command, preserving their MMIO order.
+The -O2/priority register-allocation build uses 212 bytes within the 228-byte
+region, with no executable helper dependencies. Source state remains linked.
+
+`verify_gx8002_backup_flash_word_read.py` passes 3,996 stock/source/oracle
+ordered traces across two modes and neighboring IDs, zero and partial-word
+lengths, larger boundary lengths through 513, three address patterns and
+finite readiness delays. Only aligned valid nonwrapping buffers are modeled;
+physical hardware and untested transfer domains remain unqualified. Startup
+now installs the source read callback. Whole-image retained stock accounting
+is unchanged, and the full source-only firmware goal remains incomplete.
+
+The combined macOS build passed symbol, relocation, physical placement, segment
+and component-preservation checks. Final word-read verification was rerun after
+source comment/declaration cleanup. Initializer inventory is now 14/15 allocated
+source bindings; platform configuration remains absolute.
+
+### Backup platform dispatcher integration (2026-09-15)
+
+The previous goal turn made source/build progress. Revalidated the existing
+preserved-layout platform dispatcher with 77,056 stock/source cases across
+all operations, invalid selectors, independent operation-9 repeated reads,
+and all operation-7 packed-byte pairs. A direct placement at the original
+entry would overwrite a shared literal pool used by a preceding routine.
+The reviewed layout uses a four-byte source assembly branch at 0x1001574c,
+a 200-byte C body at 0x10015768, and a generated 40-byte dispatch table.
+
+`build_gx8002_backup_platform_config_cluster.py` splits the public entry and
+body symbol names without changing any verified allocated bytes. It exports
+the original ABI address as allocated source and checks each section against
+the preserved candidate. Startup links this entry for the flash initializer.
+The shared pool gap is not copied into this component or counted as source;
+its preceding consumer and literal ownership remain unresolved separately.
+The raw operation-9 RAM word at 0x20017398 also needs explicit state ownership.
+No full firmware or hardware completion is claimed. Retained-stock full-image
+accounting remains unchanged.
+
+The combined macOS build passed existing symbol, relocation, physical placement,
+segment and component-byte preservation checks. All 15 initializer bindings
+now resolve to allocated source. This linkage milestone does not close indirect
+dependencies or qualify complete flash/device behavior.
+
+### Shared platform literal ownership in the macOS startup cluster
+
+Integrated the existing source-authored platform literals and OTP strings into
+`build_gx8002_backup_startup_cluster.py`. The probe-slot pointer now resolves to
+the allocated flash interface and the dispatch pointer resolves to a symbol
+inside the generated platform dispatch table. Required-symbol checks cover
+both aliases, the literal array, and both strings; standalone section bytes
+and addresses must remain unchanged in the combined ELF.
+
+The four literal-consumer checks passed. The combined macOS build passed its
+symbol, relocation, component-byte, physical overlap, and segment checks.
+Refreshed the flash-initializer dependency report: 15/15 bindings still resolve
+to allocated source. This closes shared literal ownership, not the preceding
+OTP-identification routine or its nested dependencies. Its existing candidate
+is 120 bytes against a 118-byte instruction envelope and requires explicit
+qualification of the two-byte alignment extension before integration.
+Full-image retained-stock accounting remains unchanged; complete runnable
+source-only firmware and hardware qualification remain unfinished.
+
+### Backup OTP-read API now compiled into the startup cluster
+
+Added `build_gx8002_backup_flash_otp_read_api.py` and its decoded verifier,
+reusing `runtime_gx8002_flash_otp_read_api.c` with the authenticated SDK headers
+at commit 8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5. The backup wrapper at
+0x1000802c/package 0x4096c compiles to 28 bytes within its 28-byte envelope.
+It forwards address, buffer and length through the interface's OTP-read slot
+at offset 88, returning -1 when that callback is absent. The builder rejects
+extra allocated sections and oversized code and records the interface header
+hash. The stock and compiled wrapper passed 144 callback/return/ABI cases.
+Callback implementation and physical flash effects remain modeled here.
+
+Integrated this wrapper into the macOS startup cluster with allocated-symbol,
+standalone-byte preservation, relocation, overlap and segment checks; the
+combined build passed. The existing OTP-identification policy verifier also
+passed 4,480 cases, and its combined platform/literal/OTP loader verifier passed
+12 cases (408 source bytes). Those loader checks establish placement including
+the two-byte alignment extension, not a complete reference census or nested
+helper qualification. OTP-identification itself remains outside the startup
+cluster pending its string helpers and full dependency qualification.
+The full-image retained-stock accounting is unchanged. The overall goal remains
+active; this is not a complete runnable source-only firmware build.
+
+### Backup string helpers linked from reviewed C on macOS
+
+Added `build_gx8002_backup_strings.py`, reusing the reviewed source leaves in
+`runtime_gx8002_strncmp.c` and `runtime_gx8002_stage2_libc.c`. Only the strlen
+section of the latter is retained from its compiled object; no stock binary
+is an input to source generation or linkage. These implementations have no
+claimed upstream libc provenance. The ELF exports allocated ABI symbols
+strncmp at 0x10009998 (34/36 bytes) and strlen at 0x100099bc (16/24 bytes).
+
+Added backup-specific decoded verifiers. strncmp passed 66,137 cases including
+all 65,536 single-byte pairs, termination, zero bounds, high-bit bounds and
+seeded longer inputs. strlen passed 1,032 terminated-buffer/alignment cases.
+The strict decoder rejects unmapped reads and checks preserved registers.
+These tests cover valid readable buffers, not physical timing or pointer wrap.
+The linked leaves' hashes match the behavior-qualified object sections.
+
+Startup now includes both source objects, requires allocated symbols and
+compares section bytes/address against their standalone ELF. The combined
+macOS build passed relocation, overlap, segment and component preservation
+checks. OTP-identification can next bind to these source string helpers;
+its integration and nested flash callback execution still need completion.
+Full-image retained-stock accounting is unchanged; the goal remains active.
+
+### OTP identification integrated with source string execution
+
+Startup now links the reviewed OTP-identification C at 0x100156d4 and removes
+all eight absolute dependency bindings from its component linker script.
+The probe slot and diagnostic/signature names alias their allocated source
+objects. All eight bindings resolve to allocated source at expected addresses.
+The 120-byte candidate explicitly consumes the authenticated two-byte alignment
+before the platform setter; the builder enforces that size and alignment, and
+normal combined section checks enforce nonoverlap and byte preservation.
+This does not establish absence of unknown computed entries into that padding.
+
+Added `verify_gx8002_backup_otp_strings.py` and an optional string execution hook
+to the OTP decoder. In 1,286 cases, both stock and candidate OTP policies execute
+the compiled source strlen/strncmp leaves with actual zero-initialized and
+partially populated stack bytes. All 256 byte values at each of the five
+signature positions are covered, along with partial reads. There were 5,144
+decoded string calls. Clock, probe, OTP IO and logging remain modeled.
+The existing 4,480 policy cases and 12 combined loader cases still pass.
+The macOS startup cluster build passed; source-only full firmware, nested flash
+execution, padding reference census and hardware qualification remain unfinished.
+Full-image retained-stock accounting is unchanged; the goal remains active.
+
+### Backup OTP-read callback candidate reconstructed
+
+Traced interface slot 22 to runtime 0x100079e8/package 0x40328 and reviewed the
+backup body through its following entry at package 0x40514. It inlines controller
+polling and address encoding, unlike the primary callback. Its address width
+is loaded before initial encoding and reloaded after a nonempty receive, then
+reused by final encoding and the next transfer. The primary source's repeated
+encoder loads would not preserve this ordering.
+
+Added `runtime_gx8002_backup_flash_otp_read.c` with these snapshots and inline
+polls, reusing the reviewed primary transfer structure and the source ready-wait
+helper ABI. Its encoder explicitly implements CK804's six-bit shift counts and
+zero result for counts 32..63 without undefined C shifts. Signed chunk selection,
+wrapped offset bounds, manufacturer rejection and final encoding are preserved
+in the candidate. `build_gx8002_backup_flash_otp_read.py` compiles on macOS to
+492 bytes, fitting the 492-byte region. It rejects overflow, extra allocations
+and unresolved symbols/relocations. No stock executable bytes are linked.
+
+This is a candidate, not admitted functionality: detailed decoded comparison
+of stock and compiled callback, including the changed ready-wait call boundary,
+width mutations and ordered MMIO/buffer effects, is the next requirement.
+It is deliberately not integrated into startup or the full image yet.
+The callback inventory was refreshed against the current startup ELF.
+Full-image retained-stock accounting remains unchanged; goal active.
+
+### Backup OTP-read rejection and first-chunk qualification
+
+Added `verify_gx8002_backup_otp_read_prefix.py`, adapting the instruction decoder
+to the actual backup and candidate stack frames, inlined shift encoding, and
+backup transport-call ABI. The stock binary and its ELF wrapper are authenticated
+before comparison. The independent expected trace requires ordered descriptor
+reads and address-byte writes, checks signed chunk selection, and normalizes the
+candidate ready-wait helper to the stock successful command-5 status read.
+
+2,058 rejection cases passed with exact return and saved-register checks;
+630 accepted cases passed through first chunk selection. Inputs include zero
+length, wrapped offset+length, unsupported signed manufacturer values, widths
+0/1/3/4/7/8/0xffffffff, and high-bit lengths. The masked-shift source encoding
+matches the decoded stock behavior for these cases. No controller transfer is
+executed by the accepted-case checks: transfer effects, repeated width changes,
+busy/status behavior and successful-path final ABI remain to be qualified.
+The 492-byte candidate remains outside startup and full-image integration.
+Full-image retained-stock accounting remains unchanged; goal active.
+
+### Backup OTP-read complete finite-transfer comparison
+
+Added `verify_gx8002_backup_otp_read_transfer.py` with an independent ordered
+transfer model. Both decoded stock and compiled C passed 648 accepted cases:
+lengths 1/2/31/32/33/63/64/65/257, both supported manufacturers, three offsets,
+six width sequences, and immediate/delayed controller readiness. Width sequences
+include changes after chunks and 0xffffffff (wrapped one-byte prefix). Buffer
+writes cross the 32-bit address boundary. Checks consume every expected MMIO,
+command/descriptor access and output byte, and require preserved return ABI.
+The decoder gained post-increment byte reads needed by stock's transmit loop.
+The 2,058 rejection and 630 first-chunk cases still pass.
+
+Ready-wait calls remain normalized to a successful flash status read. Infinite
+busy behavior, transport failures and complete billion-byte signed transfers
+are not qualified. The candidate's additional ready-helper stack depth remains
+part of whole-firmware stack qualification. Startup integration now links the
+OTP-read callback and replaces the table's absolute binding with its source
+function; full-image ownership accounting is not changed by this integration.
+
+The combined macOS startup build passed its relocation, allocated-symbol,
+component-byte preservation, physical overlap and segment checks. The refreshed
+callback inventory confirms slot 22 now points to allocated source at
+0x100079e8. Complete source-only firmware and physical operation remain
+unfinished; the goal stays active.
+
+### Backup OTP region accessors and descriptor reconstructed
+
+Added `build_gx8002_backup_otp_region.py` and
+`compare_gx8002_backup_otp_region.py`, reusing reviewed shared C accessors.
+The four backup entries at package 0x3fc28/0x3fc3c/0x3fc64/0x3fc7c passed
+40,752 decoded comparisons covering unsigned selection/count bounds, flags,
+ordered pointer-chain reads, output aliases, descriptor writes and saved ABI.
+They fit their 20/40/24/20-byte envelopes.
+
+The source-defined descriptor matches the backup's 20 bytes at 0x20016f4c:
+base 0x1000, stride 0x1000, region size 512, count 3 and initial flags 0.
+The builder compiles this named-field initializer, checks its exact stock
+layout and rejects extra allocations. The stock comparison is verification,
+not a source or linker input. Device-record pointers to this descriptor remain
+part of the unresolved device-table reconstruction.
+
+Startup integration includes all four accessors and descriptor, removes the
+four absolute callback bindings and requires allocated symbols. Full-image
+retained-stock accounting is unchanged; physical OTP behavior and complete
+firmware remain unfinished.
+
+The macOS startup build passed relocation, component preservation, allocated
+symbol, physical overlap and segment checks. The refreshed callback inventory
+confirms all four region slots (23..26) resolve to allocated source functions.
+Goal remains active.
+
+### Backup OTP lock-status callback reconstructed
+
+The device-record word at +12 remains unresolved; the reviewed consumers still
+do not justify assigning semantics to 0x60. Continued with the adjacent OTP
+status consumer whose behavior is established by decoded backup instructions.
+
+Added `runtime_gx8002_backup_flash_otp_status.c`,
+`build_gx8002_backup_otp_status.py` and its decoded comparison. The candidate
+at package 0x3fb14/runtime 0x100071d4 compiles to 84 bytes within 104 bytes.
+It snapshots region flags, uses the source readiness helper, reloads the
+selected device, rejects unsupported signed manufacturers and reads command
+0x35 into a byte before extracting the selected lock bit. Its byte read differs
+from the primary image's separate status2 helper and is reconstructed explicitly.
+
+25,600 cases passed for flags, every status byte, manufacturer acceptance and
+rejection, and two register seeds. Scripted device changes prove the post-wait
+reload; unsupported devices leave the output untouched. Helper writes are
+modeled with ignored transport return values; readiness is normalized to a
+successful status read. Busy loops, failed reads without a byte write and
+physical OTP behavior remain unqualified.
+
+Startup integration links the callback to allocated state/read/wait source and
+replaces its absolute table binding. The full-image retained-stock accounting
+is unchanged and complete firmware remains unfinished.
+
+The combined macOS startup build passed relocation, allocated-symbol, byte
+preservation, physical overlap and segment checks. The refreshed callback
+inventory confirms slot 19 resolves to allocated source. Goal remains active.
+
+### Backup OTP-lock callback reconstructed and compared
+
+Added `runtime_gx8002_backup_flash_otp_lock.c`, its macOS component builder,
+and `compare_gx8002_backup_otp_lock.py`. The 104-byte compiled function fits
+package 0x3fa9c/runtime 0x1000715c's 120-byte envelope. The backup uses direct
+command-5 and command-0x35 byte reads and the existing backup status-write
+helper with length 2 and selector 1. The primary version's separately factored
+status helpers are not transplanted. Region flags are snapshotted before
+readiness; the selected-device pointer is reloaded afterward.
+
+51,200 decoded comparisons passed across every status2 byte, four status1/seed
+pairs, region flags and supported/unsupported signed manufacturer values.
+Checks compare pointer-read order, exact two-byte status payload, helper order,
+return values and saved registers. Unsupported manufacturers perform no status
+write. Source and stock ignore scripted transport return values when helpers
+supply valid bytes. Readiness is normalized; busy loops, failed reads without
+byte writes, nested status-write execution and physical OTP effects remain
+unqualified. No hardware action was performed.
+
+Startup now links the callback against source-defined state, command read,
+readiness and status-write functions, replacing the table's absolute binding.
+Full-image retained-stock accounting is unchanged. Goal remains active.
+
+The combined macOS startup build passed allocated-symbol, relocation, component
+preservation, physical overlap and segment checks. The refreshed inventory
+confirms callback slot 18 resolves to allocated source. Complete source-only
+firmware and physical operation remain unfinished.
+
+### Backup OTP-erase callback reconstructed
+
+Added `runtime_gx8002_backup_flash_otp_erase.c`, its macOS builder and
+`compare_gx8002_backup_otp_erase.py`. The 160-byte candidate fits the 172-byte
+region at runtime 0x1000723c/package 0x3fb7c. It preserves descriptor snapshots,
+command-6 write enable, a single post-enable width load and explicit CK804
+masked-shift encoding. The command byte is reloaded between the third and
+fourth encoded byte stores, as in stock. Unsupported manufacturers return zero
+without reading the descriptor or issuing commands.
+
+4,536 decoded comparisons passed, covering manufacturer acceptance/rejection,
+region flags, seven widths (including 0xffffffff), base/stride overflow and
+scripted opcode changes across helpers. The oracle checks ordered state reads,
+all address stores, command arguments, preserved registers and final zero.
+Readiness and command transport remain modeled; no physical OTP erase occurred.
+Nested helper effects, busy loops and failed transports remain unqualified.
+
+Startup links the callback to allocated source state, readiness and command
+write functions, replacing the absolute interface slot. Full-image retained
+stock accounting is unchanged; complete source-only firmware remains unfinished.
+
+The combined macOS startup build passed relocation, allocated-symbol, component
+preservation, physical overlap and segment checks. The refreshed callback
+inventory confirms slot 20 resolves to allocated source. Goal remains active.
+
+### Backup OTP-write candidate reconstructed
+
+Added `runtime_gx8002_backup_flash_otp_write.c` and
+`build_gx8002_backup_otp_write.py` from the reviewed shared write policy and
+backup disassembly at package 0x401c4..0x40328. The initial width read feeds
+both encoding and the first transmit's prefix length. Its first command-byte
+stores occur in order 1,2,4,3. Later pages snapshot width for encoding, then
+reload width after readiness/write enable for transmit. These differ from
+primary helper factoring and are represented explicitly. Register-shift masks
+are implemented without undefined C shifts. Wrapped bounds, page splits and
+the stock conditional result accumulation are retained in the candidate.
+
+The default -Os compile was 360 bytes, exceeding 356 bytes. Four isolated
+compiler-option probes found priority allocation fits at 356 and disabling
+loop-invariant movement yields 336. The builder now uses the latter and rejects
+oversized/extra allocated sections and unresolved relocations/symbols.
+The final macOS component build passed at 336 bytes. This size result is not
+behavior qualification; the candidate is not linked into startup or a full
+image. Next work is backup-specific decoded policy comparison and reconstruction
+of the transmit helper at package 0x400d0/runtime 0x10007790. Readiness and
+command-write source already exist. No device writes were performed.
+Full-image retained-stock accounting is unchanged; goal remains active.
+
+### Backup OTP transmit helper reconstructed and compared
+
+Added `runtime_gx8002_backup_flash_otp_transmit.c`, macOS builder and decoded
+comparison. At runtime 0x10007790/package 0x400d0 it compiles to 228 bytes within
+244 bytes. Controller idle/empty polls are expressed in C; the primary source's
+register constraints and inline load assembly are unnecessary in this candidate.
+No stock code or data is extracted into the build.
+
+378 cases compared ordered controller setup, command prefix and payload bytes,
+FIFO delays, cleanup, final zero return and saved registers. Prefix lengths
+0/1/3/4/5/8/16, transfer lengths 0/1/2/31/32/33/255/256/257, two buffer addresses
+(including wrap), and three delay patterns are covered. Zero-length setup and
+cleanup still execute. Final flash readiness is normalized; hardware behavior,
+very large loops and incomplete transport writes remain unqualified. Additional
+nested ready-helper stack usage remains a whole-firmware qualification concern.
+
+Startup integration adds the helper with source state and readiness bindings.
+OTP-write's separate page-splitting candidate is not integrated yet; its decoded
+comparison is next. Full-image retained-stock accounting is unchanged.
+
+The combined macOS startup build passed allocated-symbol, relocation, component
+byte preservation, physical overlap and segment checks with the transmit helper.
+Complete source-only firmware remains unfinished; goal stays active.
+
+### Backup OTP-write page policy qualified and integrated
+
+Added `compare_gx8002_backup_otp_write.py`, decoding both the stock writer and
+336-byte compiled candidate against independent ordered events. 1,299 cases
+passed across page offsets, zero/short/multipage lengths, size limits,
+manufacturer rejection, width changes and three wrapped 0xffffffff-length
+single-call cases. Checks cover initial 1/2/4/3 byte-store ordering, later
+1/2/3/4 encoding, width snapshots/reloads, transmit arguments, ignored helper
+results, final return and saved-register ABI. Huge single-call transfers are
+modeled at the helper boundary, not iterated. Busy/failure paths, composed
+transmission and hardware remain unqualified.
+
+Startup integration links the writer at 0x10007884 to source state, readiness,
+command-write and OTP-transmit implementations. It removes the absolute slot-21
+binding and requires allocated source. Full-image retained-stock accounting is
+unchanged; this startup linkage is not a claim of complete runnable firmware.
+
+The combined macOS startup build passed allocated-symbol, relocation,
+component preservation, physical overlap and segment checks. Refreshed
+inventory confirms all nine OTP callbacks (slots 18..26) resolve to allocated
+source; nested behavior and hardware qualification remain separate. Goal active.
+
+### General backup flash read wrapper reconstructed
+
+Added `build_gx8002_backup_flash_read.py` reusing reviewed
+`runtime_gx8002_flash_read.c`, and `compare_gx8002_backup_flash_read.py`.
+The wrapper at package 0x3f7a4/runtime 0x10006e64 compiles to 60 bytes within
+84 bytes. 176 decoded comparisons passed for zero, boundary and multichunk
+lengths, high-bit lengths, wrapped addresses/buffers and register seeds.
+The callback target changes after the first chunk to require an actual slot
+reload. The wrapper ignores scripted callback returns, preserves saved ABI,
+and always performs the ready wait even when length is zero.
+
+Readiness and word-read callbacks remain modeled in this verifier; source
+word-read exists separately, but composed whole-read execution and hardware
+are not qualified here. High-bit lengths preserve the stock signed chunk rule,
+not an invented bounds check. Startup integration replaces the interface's
+absolute read binding with this source function. Full-image retained-stock
+accounting is unchanged; complete source-only firmware remains unfinished.
+
+The combined macOS startup build passed allocated-symbol, relocation, component
+preservation, physical overlap and segment checks. The refreshed inventory
+confirms general read resolves to source: 13/22 populated flash callbacks now
+have allocated source implementations. Goal stays active.
+
+### Backup page-program wrapper and helper reconstructed
+
+Added `runtime_gx8002_backup_flash_page_program.c` and its macOS builder.
+Backup splits the operation into a 148-byte internal page helper at package
+0x3fd6c/runtime 0x1000742c and a 44-byte bounds wrapper at package 0x3fe00/
+0x100074c0. Reconstructed functions compile to 132 and 40 bytes respectively.
+The helper reuses reviewed page splitting with direct command-6 write enable;
+the wrapper preserves zero-length success, wrapped unsigned bounds and the
+helper's return value. Neither is integrated into startup yet.
+
+`verify_gx8002_backup_page_program_wrapper.py` passed 560 comparisons against
+authenticated stock: zero length, bounds equality, overflow, high-bit lengths
+and arbitrary helper returns. Stock instructions are relocated to their actual
+backup runtime addresses before execution because the common decoder's default
+package-address adjustment is for the primary image. This avoids misattributing
+the direct helper call. The page helper itself remains modeled in these checks;
+its callback sequence and page boundaries need separate decoded comparison.
+No hardware writes performed; full-image retained-stock accounting unchanged.
+Goal remains active.
+
+### Backup page-program helper qualified and linked
+
+Added `compare_gx8002_backup_program_pages.py`. 111 decoded comparisons passed
+for the internal helper: zero/short/page-boundary/multipage lengths, wrapped
+addresses and source-buffer pointers, two register seeds, and three wrapped
+0xffffffff-length single-call cases. An independent event sequence checks
+command-6 enables, fresh callback-slot reads, per-page arguments, ignored
+callback results and saved registers. Callback targets change after the first
+page, requiring the reload. Readiness and actual word programming remain
+modeled, including huge single-call lengths.
+
+Startup integration now links the 132-byte helper and 40-byte public wrapper
+at their original backup entries. Source state, readiness and command-write
+bindings replace their component absolutes; the page-program table slot also
+resolves to the source wrapper. The existing wrapper's 560 decoded cases remain
+separate evidence. No hardware writes performed. The extra helper call stack
+is part of whole-firmware stack qualification. Full-image retained-stock
+accounting remains unchanged; complete source-only firmware is unfinished.
+
+The macOS startup build passed allocated-symbol, relocation, component-byte,
+physical-overlap and segment checks. Refreshed callback inventory confirms
+pageprogram resolves to source: 14/22 populated flash callbacks are now
+allocated source implementations. Goal remains active.
+
+### Backup block-range behavior reconstructed independently
+
+Added `runtime_gx8002_backup_flash_block_range.c`, macOS builder and decoded
+comparison. The primary block-range implementation is not suitable: backup
+initially clears only start, leaves end untouched if the first lookup fails,
+then clears end and reloads device state after storing the first block start.
+Its observed r0 is the original address on early exits, or address+length-1
+once the second lookup begins. The source preserves these register values;
+the caller's interpretation is still to be established rather than inventing
+a conventional success/error return.
+
+The candidate fits exactly at 124 bytes in package 0x3ff10/runtime 0x100075d0.
+1,344 decoded comparisons passed with an independent closed-form oracle:
+zero-length/overflow, block boundaries, invalid device, small capacities,
+shared outputs and outputs aliased with index/capacity state. All ordered
+reads/writes and observed returns match. Large scan ranges and caller-level
+semantics remain unqualified. The candidate is not yet integrated into startup.
+No hardware operation performed; full-image retained-stock accounting unchanged.
+Goal remains active.
+
+### Block-range public ABI established from pinned SDK
+
+Authenticated `include/driver/gx_flash.h` from SDK commit
+8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5. Both the table's calcblockrange
+field (line 24) and public gx_spi_flash_calcblockrange declaration (line 202)
+return void. Recorded blob identity, content hash and exact declarations in
+`gx8002-backup-block-range-abi.json`. This explains the backup's untouched/
+address-valued r0: there is no public status return to reconstruct. This header
+evidence is not a complete firmware call-site census.
+
+The current low-level reconstructed int signature deliberately retains observed
+r0 for differential checks; it must not be presented as a public error-return
+API. Public-facing source integration should use the SDK's void contract. The
+local reconstructed table's type remains an internal representation; broader
+SDK/header type reconciliation remains a separate integration task.
+
+Startup now links the 124-byte backup callback to source state, removes the
+absolute callback binding and requires allocated source. The 1,344 ordered
+alias/boundary comparisons remain its behavior evidence. Full-image retained
+stock accounting is unchanged; no physical operations were performed.
+
+The macOS startup build passed allocated-symbol, relocation, byte-preservation,
+physical-overlap and segment checks. Refreshed inventory confirms calcblockrange
+resolves to source, bringing coverage to 15/22 populated flash callbacks.
+The complete source-only firmware goal remains active.
+
+### Backup synchronization callback reconstructed
+
+Added `runtime_gx8002_backup_flash_sync.c`, its macOS builder and decoded
+verifier. The direct command-5 byte polling loop at runtime 0x10007118/package
+0x3fa58 compiles to 32 bytes using the same no-loop-invariant-motion option
+as the previously qualified readiness helper. Default -Os produced 36 bytes
+and was rejected by placement checks. No oversized candidate is integrated.
+
+1,152 comparisons passed across every even status byte, zero/one/three busy
+reads and transport returns 0/1/0xffffffff. The final returned transport value
+is preserved for low-level differential checks; the pinned SDK's public sync
+callback returns void. Transport byte writes are modeled, so failed reads
+without a valid status byte and physical hardware remain unqualified.
+
+Startup links the callback to source command-read and replaces the absolute
+sync table binding. Full-image retained-stock accounting is unchanged; the
+complete source-only firmware goal remains active.
+
+The combined macOS startup build passed allocated-symbol, relocation,
+component preservation, physical-overlap and segment checks. Refreshed
+inventory confirms sync resolves to source: 16/22 populated flash callbacks.
+Complete firmware and hardware qualification remain unfinished.
+
+### Backup range-erase candidate reconstructed and compared
+
+Added `runtime_gx8002_backup_flash_erase.c`, macOS builder and
+`compare_gx8002_backup_flash_erase.py`. The candidate at package 0x3ff8c/
+runtime 0x1000764c compiles to 248 bytes within 324 bytes. It reuses reviewed
+range policy while replacing primary write-enable and encoder helpers with
+backup command-6 calls and a single width snapshot per four-byte encoding.
+Shifts explicitly preserve CK804 semantics without undefined C operations.
+
+498 comparisons passed against authenticated stock for finite ranges: capacity
+rejection, end clamping, zero/partial sectors, 4 KiB versus 64 KiB selection,
+multiple commands and changing address widths. Ordered state reads, encoded
+bytes, command arguments, final results and saved ABI match. Six wrapped
+underflow cases requiring enormous iteration ranges are explicitly excluded
+and counted in the report. Readiness and command transport are modeled; no
+physical erases performed. This candidate is not integrated yet.
+
+Chip-erase at package 0x408b8 is a separate wrapper calling 0x408a4, which still
+needs reconstruction/qualification. Full-image retained-stock accounting
+remains unchanged; complete source-only firmware goal stays active.
+
+### Backup chip-erase wrappers reconstructed byte-exactly
+
+Added `runtime_gx8002_backup_flash_chip_erase.c`, builder and decoded verifier.
+The internal helper at package 0x408a4/runtime 0x10007f64 is 20 bytes; the public
+callback at package 0x408b8/runtime 0x10007f78 is eight bytes. Both compile
+byte-for-byte identically to authenticated backup code. The helper reads usable
+capacity, calls range erase with address zero and forwards its result. The
+callback forwards the helper result. No distinct chip-erase opcode is read from
+the unresolved device-record field: this path does not establish that field's
+meaning.
+
+64 decoded comparisons passed across eight capacities (including zero and
+high-bit values), four helper returns and both wrapper levels. Stock decoding
+is relocated to backup runtime addresses before using the common executor.
+Each wrapper's direct callee is modeled, so this does not qualify complete
+range erasure. Both candidates remain outside startup until the remaining
+large wrapped-range cases are addressed. No hardware erase performed;
+full-image retained-stock accounting unchanged. Goal remains active.
+
+### Full execution of previously excluded wrapped erase ranges
+
+Added `verify_gx8002_backup_erase_large.py`. The shared erase decoder now
+consumes an iterator of expected events and accepts an explicit instruction
+bound. The new verifier generates events incrementally to avoid a large list;
+it does not summarize or skip target instructions. It runs the six previously
+excluded wrapped-underflow inputs through stock and candidate until return,
+comparing every modeled command and encoded byte and checking saved ABI.
+
+The first completed case demonstrates preserved stock behavior: address 4096,
+length 0xffffffff underflows the rounded remaining count and traverses 4 GiB
+with 65,551 commands. This is evidence of the original unsigned arithmetic,
+not a behavior fix or a hardware test. Source fixes to this behavior must be
+tracked separately from reconstruction fidelity. Readiness and transport calls
+remain modeled. Further results are recorded in the large-range JSON report
+only when all cases complete.
+
+All six large cases completed successfully for both stock and candidate. Each
+executed 65,551 modeled erase commands spanning 4,294,967,296 bytes. The report
+`gx8002-backup-erase-large.json` records every input and completion count.
+The existing ordinary-range report still counts these six as outside its own
+scope; the new report supplies their separate full-loop evidence. The 498
+ordinary cases and 64 chip-wrapper cases passed again after the iterator change.
+
+Startup integration now adds range erase and both chip wrappers, resolving
+state/readiness/command helpers and both table callbacks to source symbols.
+Physical operations and nested transport failures remain unqualified.
+Full-image retained-stock accounting remains unchanged; goal active.
+
+The macOS startup build passed allocated-symbol, relocation, component-byte,
+physical-overlap and segment checks. Refreshed inventory confirms erasedata
+and chiperase resolve to allocated source: 18/22 populated flash callbacks.
+Complete runnable source-only firmware remains unfinished.
+
+### Backup protection public callbacks (macOS continuation)
+
+Recovered the four public callbacks in `runtime_gx8002_backup_flash_protection_callbacks.c` and added `build_gx8002_backup_protection_callbacks.py`. The macOS C-SKY compiler produces status/mode/lock/unlock bodies of 24/36/14/16 bytes within the stock 28/36/16/16-byte envelopes at package 0x3f8ec/0x3f908/0x3fa38/0x3fa48. Unlock is byte-exact. These are source-authored callback bodies, not extracted bytes.
+
+`verify_gx8002_backup_protection_callbacks.py` passed 192 stock-versus-candidate decoded cases, checking return results, output zeroing before query, final output writes, null and empty protection profiles, high-bit lengths, lock/unlock argument forwarding, stack output handling and preserved-register ABI. The query at 0x10006f04 and set engine at 0x10006fec are explicitly modeled external dependencies. A local instruction executor uses the existing decoder semantics with callback-specific frames; this is finite callback qualification, not physical flash qualification.
+
+The candidate is deliberately not yet integrated in the startup cluster: the shared query/set engines must be reconstructed and qualified next. Startup remains 18/22 populated source-allocated flash callbacks, and full-image retained-stock accounting is unchanged. The no-opaque-source goal remains active and incomplete.
+
+### Backup protection query engine (macOS continuation)
+
+Recovered package 0x3f844 / runtime 0x10006f04 in `runtime_gx8002_backup_flash_protection_query.c`. The macOS compiler builds a 168-byte function fitting the entire original envelope; there are no embedded stock executable bytes. The engine preserves the initial null/empty profile checks, inline status-5 busy polling, unsigned manufacturer halfword check, status-5/status-0x35 reads, selected-device/profile reloads, ordered entry loads and first matching protection-length result (including UINT32_MAX).
+
+`verify_gx8002_backup_protection_query.py` passed 73,728 decoded stock/candidate comparisons. Coverage includes all 256 first-status bytes, four second-status values, null/empty/present profiles, supported and unsupported manufacturers, zero/one/three table entries and zero/two busy responses. The verifier compares ordered external reads and command events, final memory, returns and preserved-register ABI, while changing the selected-device pointer after readiness and the second status read to exercise reloads. Transport calls supply modeled bytes and an ignored failure return. Candidate frame is four bytes larger than stock; whole-program stack safety remains unqualified. This is finite table/transport-model qualification, not hardware qualification.
+
+Builder/report: `build_gx8002_backup_protection_query.py`, `gx8002-backup-protection-query-candidate.json`, `gx8002-backup-protection-query-verification.json`. The query and four callbacks remain standalone pending reconstruction/qualification of the set engine at 0x10006fec. Startup allocation and full-image retained-stock accounting are unchanged; goal remains incomplete.
+
+### Backup protection setter and startup integration (macOS continuation)
+
+Reconstructed the shared setter at package 0x3f92c/runtime 0x10006fec in `runtime_gx8002_backup_flash_protection_set.c`. The initial plain -Os result was 272 bytes, exceeding the 268-byte stock envelope; disabling loop-invariant motion produces 264 bytes without source semantics changes. It preserves the early output clear, pre-wait identifier snapshot, post-wait profile reload, ordered table selection, status-byte mask merge, status-write call, final readiness poll and query result handling.
+
+`verify_gx8002_backup_protection_set.py` passed 3,888 decoded comparisons of ordered external memory reads/writes, helper arguments and payloads, final memory, return values and preserved-register ABI. Cases cover absent/empty/populated profiles, supported/unsupported manufacturers, six request boundaries including UINT32_MAX, zero/one/three entries, three status patterns, three query results and zero/two busy replies. Transport, status write and final query are modeled separately. Ordinary output-pointer coverage does not establish arbitrary alias or physical behavior.
+
+Integrated the setter, query and all four public protection callbacks into `build_gx8002_backup_startup_cluster.py`, replacing their absolute bindings with allocated source definitions and retaining standalone byte/address checks. The complete macOS startup-cluster build passed (log `/tmp/g2-startup-protection.log`); the refreshed callback inventory shows all 22 populated slots resolve to allocated source functions. Query and set dependencies now bind to existing source command-read/status-write/query functions. This closes the previously remaining callback allocation gap, not full firmware source closure: device records, other subsystem dependencies, whole-program stack/runtime qualification and retained stock in the full image remain unresolved. No image was flashed and the goal remains active.
+
+### Platform getter startup integration and flash-record follow-up
+
+The preceding turn made concrete progress by source-linking the protection engines and callbacks. This continuation rechecked the remaining flash record ambiguity: inspected recovered discovery/interface/word-read consumers and the pinned SDK gx_spinor.h/gx_flash_common.h. None identifies the private +12 word. Documented this evidence without claiming unused-field proof or substituting a guessed name/value.
+
+Integrated the existing recovered `runtime_gx8002_backup_platform_read.c` and its compiler-generated 40-byte switch table into the macOS startup cluster, with object-scoped sections, an allocated-symbol requirement and standalone byte/address comparison. Code is 188 bytes at runtime 0x10003edc; switch table is at 0x10012a64. Re-ran the decoded behavior verifier: 504 cases passed, with its separate relocated-record coverage; re-ran the combined loader verifier: 12 cases/228 source bytes passed. The complete startup-cluster build passed (`/tmp/g2-startup-platform-read.log`).
+
+Refreshed `gx8002-backup-system-dependencies.json`: 19/21 direct system-initializer targets now have allocated source symbols, up from 18/21. Remaining direct targets are spi_master_v3_probe and BoardInit. This is source linkage evidence for the startup cluster, not a complete firmware or hardware qualification. The private flash device-table field and full-image retained-stock accounting remain unresolved, and the goal remains active.
+
+### Backup BoardInit reconstruction
+
+Previous continuation made progress by integrating the platform getter. This turn inspected stock BoardInit (package 0x412b8/runtime 0x10008978) and spi_master_v3_probe (0x40eec). BoardInit is a pin initializer, not the separate early board_init wrapper. Unlike the primary-image recovered initializer, backup hard-codes the first pair (pin 0/function 1), then reads twelve further pairs after calling padmux_init. Reconstructed that distinction in `runtime_gx8002_backup_board_pin_initialize.c`.
+
+The macOS builder `build_gx8002_backup_board_pin_initialize.py` produces 112 bytes fitting its original envelope. `verify_gx8002_backup_board_pin_initialize.py` passed 49,152 decoded comparisons: all 8192 diagnostic error masks, three table variants, and two modeled helper-return patterns. It checks ordered table reads, init/check/printf/direction/setup calls, completion flag write and preserved-register ABI. The void return value is not constrained; candidate frame is four bytes larger than stock. Setup nonreturn and physical pad behavior remain unqualified.
+
+The initializer remains standalone: padmux_init (0x10008770), padmux_check (0x100086dc), GPIO direction (0x10008154), and board pin setup (0x100088cc) require backup source integration; printf already has startup source. Data inspection identified table 0x10012ecc as pins 0..12 with function 1 except pin 2/function 0, and diagnostic 0x10012f38 as `pin %d set error!\n`. SDK gx_padmux.h documents the two-byte GX_PIN_CONFIG pin_id/function layout. Table, diagnostic and completion flag 0x200176d8 have not yet been source-allocated here. No binary was flashed, startup remains 19/21 direct system dependencies, and the complete source-only goal remains active.
+
+### Backup pad-mux checker/setter source integration
+
+The preceding BoardInit turn made concrete source and decoded-verification progress. This continuation inspected the backup helpers at package 0x4101c and 0x41060. Unlike primary helpers, backup inlines register access. Reconstructed both in `runtime_gx8002_backup_padmux.c`: check rejects negative arguments, extracts a four-bit mux field for pins 0..32, and uses observed value 255 for larger positive pins; set rejects invalid pins before MMIO, preserves unrelated bits, writes before checking negative function arguments, and compares an independent post-write readback for nonnegative functions.
+
+`build_gx8002_backup_padmux.py` builds 64-byte check and 76-byte set bodies within the 68/80-byte envelopes, using the macOS toolchain. `verify_gx8002_backup_padmux.py` passed 78,144 decoded stock/candidate comparisons. Coverage includes all valid pins, positive/negative boundaries, function values 0..16 and 255/256/high-bit boundaries, three previous register patterns and all sixteen repeated-nibble readback patterns. Ordered MMIO events, return values and preserved-register ABI match. Modeled readback is independent of writes; physical hardware behavior remains unqualified.
+
+Integrated both source leaves in `build_gx8002_backup_startup_cluster.py` with allocated-symbol, placement, standalone-byte and layout checks. Full macOS startup-cluster build passed (`/tmp/g2-startup-padmux.log`). BoardInit's table-driven padmux_init, GPIO direction, pin setup and data dependencies remain to reconstruct/integrate; full-image source closure remains incomplete. Goal remains active.
+
+### Backup table-driven pad-mux initializer and default policy
+
+Previous turn made progress by integrating checker/setter source. Reconstructed package 0x410b0/runtime 0x10008770 in `runtime_gx8002_backup_padmux_init.c`. It preserves null/negative-size rejection, unsigned wrapping end-address calculation, first matching override, fallback reads, constant first default pin zero, later default-pin reads, all 32 setter calls and ignored setter results. The macOS C candidate is 88 bytes within the original 108-byte envelope.
+
+`verify_gx8002_backup_padmux_init.py` passed 168 decoded comparisons, covering empty/single/13/32/33-entry and invalid sizes, duplicates, null and wrapping pointers, synthetic default pin/function variants and successful/failing modeled setter returns. Ordered memory reads/calls, return value, unchanged caller memory and ABI match. These finite cases do not establish arbitrary huge-table or physical behavior.
+
+Reused the source-authored `runtime_gx8002_padmux_defaults.c` default policy (pins 0..31/function zero). The builder authenticates the GX_PIN_CONFIG header against pinned SDK commit 8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5, compiles the existing C definition, and verifies its 64-byte table matches authenticated stock at package 0x4b7b4/runtime 0x10012e74. No stock bytes are input to the compiler or linked as table data.
+
+Integrated initializer/default table into the startup cluster, binding the setter to allocated source and checking both standalone section bytes/addresses. Full macOS startup build passed (`/tmp/g2-startup-padmux-init.log`). BoardInit remains standalone pending GPIO direction, board setup and board-specific table/diagnostic/flag integration. Inspected the backup GPIO direction body; existing `runtime_gx8002_gpio_output.c` appears to implement its ordered register updates and is the next candidate for independent backup qualification. Full-image source closure is still incomplete and goal remains active.
+
+### Backup GPIO direction/level source integration
+
+Previous turn advanced source linkage for padmux_init/defaults. Reused `runtime_gx8002_gpio_output.c` after checking the backup instructions and authenticating its GPIO enum header against pinned SDK commit 8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5. `build_gx8002_backup_gpio_output.py` builds direction at package 0x40a94/runtime 0x10008154 (96 bytes within 100) and level at package 0x40af8/runtime 0x100081b8 (36 bytes within 52).
+
+`verify_gx8002_backup_gpio_output.py` passed 13,056 decoded comparisons over pins 0..64/high-bit boundaries, valid and invalid direction modes, zero/nonzero levels and independent register patterns. It checks ordered MMIO reads/writes, preserved bits, final memory, return values and preserved-register ABI. The first comparison exposed missing three-operand NOR semantics in the local copied executor; corrected that decoder handling and reran successfully. Physical hardware remains unqualified.
+
+Integrated both functions into the startup cluster with allocated-symbol, standalone-byte/address, overlap and relocation checks. Full macOS startup build passed (`/tmp/g2-startup-gpio-output.log`). Inspected remaining board setup at 0x100088cc/package 0x4120c: backup configures twelve pin/function pairs, adding (0,7),(1,7),(3,0),(4,0) before the primary eight-pin sequence. Its four-pin fallback, diagnostic and terminal loop remain stock behavior to reconstruct; do not reuse the primary eight-pin implementation unchanged. Board-specific data and setup/configure helpers still prevent complete BoardInit integration. Source-only full firmware goal remains active and incomplete.
+
+### Backup board configure/setup/data integration
+
+Previous turn made progress by source-linking GPIO output. Reconstructed backup board configure (package 0x411cc/runtime 0x1000888c,64 bytes) and twelve-pin setup (0x4120c/0x100088cc,172 bytes), both within original envelopes, in `runtime_gx8002_backup_board_pin_setup.c`. Configure reads the completion flag, checks initial mux when flag is clear, logs conflicts and returns -1, otherwise ignores the setter result and returns zero. Setup preserves the twelve ordered calls, unsigned error summation, four fallback writes, diagnostic and existing fatal terminal loop; no missing functionality was replaced by a trap.
+
+`verify_gx8002_backup_board_pin_setup.py` passed 4,315 decoded cases: configure flag/pin/function/result boundaries, all 4096 setup error masks and three unsigned cancellation/overflow cases. Ordered helper calls and flag reads, returns, terminal-loop path and successful-return ABI were checked; helpers remain modeled individually, and full nested/hardware execution remains unqualified.
+
+Compiled source board pin data via `build_gx8002_backup_board_pin_data.py`: 26-byte thirteen-pin policy, 28-byte conflict diagnostic, 49-byte fatal diagnostic, 19-byte per-pin error diagnostic and four-byte reset-cleared completion flag. Table and literal payloads match authenticated stock; BSS state lies in the reset clear interval. Source initializer/setup currently use recovered numeric addresses; the cluster allocates source objects at those same addresses. No stock executable/data bytes are imported into these objects.
+
+Integrated board initializer, setup/configure and data into the startup cluster, binding padmux init/check/set, GPIO direction and printf to existing allocated source. Complete macOS startup build passed (`/tmp/g2-startup-board-pins.log`) with byte/address, relocation and overlap checks. Refreshed system dependency inventory now reports 20/21 direct targets source-allocated; only spi_master_v3_probe remains. This is startup-source linkage progress, not full firmware qualification or changed full-image retained-stock accounting. Goal remains active and incomplete.
+
+### Backup SPI-master probe reconstruction
+
+Previous turn advanced source closure by linking board initialization. Reconstructed backup probe at package 0x40eec/runtime 0x100085ac in `runtime_gx8002_backup_dw_spi_probe.c`, adapting the earlier reviewed C initialization policy and authenticated SDK SPI types. Backup master/state addresses are 0x20017680/0x200176a4. The FIFO probing loop caches the threshold pointer between writes and reloads the register pointer after each write; this differs from the earlier-image loop and is preserved explicitly. The macOS candidate is 280 bytes within the 304-byte envelope.
+
+`verify_gx8002_backup_dw_spi_probe.py` passed 944 decoded stock/candidate cases covering existing depths, all mismatch values 2..257, no mismatch (depth 258), mismatch at 257 (depth zero), receive draining and busy polling. Ordered state/MMIO writes and reads, clock calls, master registration, IRQ arguments and preserved-register ABI match an independent transaction model. The first run identified swapped initial setup/transfer bindings; corrected using authenticated spi_master offsets and stock stores: setup +8 -> 0x10008538, transfer +12 -> 0x100082a8. Added compile-time master size/slot and driver-state size checks. Helpers do not mutate state in this finite model; physical behavior and whole-driver composition remain unqualified.
+
+The probe remains standalone, because callback cleanup/setup/transfer/IRQ, master registration and master/driver-state source allocation still require backup qualification/integration. Clock gate and IRQ registration have existing startup source. The source-only goal remains active; startup direct target count is unchanged at 20/21, and full-image retained-stock accounting is unchanged.
+
+### Backup SPI cleanup/IRQ callback integration
+
+Previous probe turn made concrete source/decoded progress. Reused the reviewed `runtime_gx8002_dw_spi_cleanup.c` and `runtime_gx8002_dw_spi_irq.c` at backup addresses via new backup builders, retaining pinned SDK object/header identity checks. Cleanup at 0x1000827c/package 0x40bbc is 12 bytes and byte-exact; IRQ at 0x10008288/package 0x40bc8 is 32 bytes within its stock envelope with differing encoding.
+
+`verify_gx8002_backup_dw_spi_leaves.py` passed 2,048 cases per callback. Cleanup follows device->master->driver_data->registers and clears controller word +8. IRQ reads status +0x30 and conditionally reads absolute 0x38 and 0x3c (not controller-relative addresses), matching the stock code. Cases cover all low status bytes plus high-bit variants, two controller bases and two memory patterns. Ordered external reads/writes, final memory, integer IRQ result and preserved-register ABI were checked. Cleanup's void return register is unconstrained; physical meaning of the absolute accesses remains unqualified.
+
+Integrated both callbacks into the macOS startup cluster with unique section names, allocated-symbol checks and standalone byte/address verification. Full startup build passed (`/tmp/g2-startup-spi-leaves.log`). Setup callback at 0x10008538/package 0x40e78 inspected: existing recovered setup C uses the same 16-byte device-state layout, but needs backup fallback address 0x20017670 and backup clock-frequency binding, with independent backup qualification. Transfer, setup, master registration and SPI state ownership remain outstanding. Full source-only firmware goal remains active; full-image retained-stock accounting unchanged.
+
+### Backup SPI setup and device-state source integration
+
+Previous turn made progress by linking SPI cleanup/IRQ. Adapted the reviewed setup C to backup entry 0x10008538/package 0x40e78, clock frequency 0x10003cf0 and fallback state 0x20017670. `build_gx8002_backup_dw_spi_setup.py` compiles 116 bytes within the original 116-byte envelope, retaining authenticated SDK SPI/header provenance. Source declaration `open_cfw_gx8002_backup_spi_device_state` owns the four-field,16-byte fallback record (device/control/divider/transfer_mode); explicit linker placement and NOBITS/reset-clear interval checks validate its storage.
+
+`verify_gx8002_backup_dw_spi_setup.py` passed 17,280 decoded stock/candidate cases, rerun after source state declaration. Coverage includes zero/default word width and speed, existing or fallback state, occupied fallback state, extreme clock/speed values, format/mode bits and speed mutations during the modeled clock call. Ordered device/state accesses, divider rounding, return values and preserved-register ABI match the independent model. The local copied executor needed movih support for the backup instruction stream. The finite scope assumes distinct valid storage and nonzero post-clock speed; physical divider behavior and whole-driver composition remain unqualified.
+
+Integrated setup and its source BSS record into the startup cluster, with the clock call resolving to allocated `gx_clock_get_module_frequence`. Full macOS startup build passed (`/tmp/g2-startup-spi-setup.log`) including standalone code/data address/byte and overlap checks. The master and remaining driver-state records, transfer callback and master registration still require source integration. Full firmware source closure remains incomplete, and the goal stays active.
+
+### Backup SPI master registration integration
+
+Previous setup continuation made concrete source/linkage progress. Reused reviewed SPI registration C with backup list heads 0x20017660 and entry 0x10008218/package 0x40b58, retaining pinned SDK type/object provenance. `build_gx8002_backup_spi_register_master.py` compiles 92 bytes within the backup 100-byte envelope. `verify_gx8002_backup_spi_register_master.py` passed 2,593 decoded stock/candidate cases against the independent list model: null/invalid master fields, bus/select bounds, existing-master lists, empty/multiple flash lists, first eligible binding and varied state seeds. Ordered accesses, list insertion writes, resulting memory and leaf ABI match. Malformed/concurrent lists and repeated registration remain excluded.
+
+Integrated registration in the startup cluster, binding its list heads to existing source storage. Full macOS startup build passed (`/tmp/g2-startup-spi-register.log`), including allocated-symbol, standalone byte/address and layout checks. Probe itself and transfer remain unintegrated.
+
+Inspection of the existing transfer C shows the driver context extends beyond the probe's 24-byte prefix: buffer +24, length +28, cleared word +32, an unresolved word +36 and width byte +40 (44-byte aligned layout). Do not allocate only the probe prefix as the complete driver object. The probe struct's 24-byte assertion describes its accessed prefix, not full driver state ownership. Transfer/layout qualification remains next; source-only firmware goal remains active and incomplete.
+
+### Backup SPI transfer lifecycle and alignment reconstruction
+
+Previous registration turn made concrete source/linkage progress. Began independent backup transfer reconstruction at package 0x40be8/runtime 0x100082a8. New `runtime_gx8002_backup_dw_spi_transfer.c` adapts the reviewed earlier-image C but preserves observed backup differences: cached message pointer for the first list check, transmit-buffer read before storing the active transfer/configuration lookup, and transmit-buffer reload before bits-per-word reload. The first lifecycle comparison exposed the extra earlier-image message read; stock frame also differs (32 bytes vs candidate 28). Corrected the local executor to check each actual frame rather than assuming the primary frame.
+
+`build_gx8002_backup_dw_spi_transfer.py` compiles 602 bytes within the 656-byte backup envelope. Four busy/empty lifecycle cases pass, rerun after the nonempty-prefix edits. `verify_gx8002_backup_spi_transfer_alignment.py` passes 280 ordered decoded alignment-error cases, covering widths 2/4, length and buffer misalignment, TX/RX selection and divider bounds. Expected transactions were independently adapted from backup instructions, and return/ABI/shutdown ordering match. These tests do not execute valid-buffer FIFO transfers.
+
+The candidate remains standalone and unadmitted: transmit, receive and multi-transfer message paths need backup qualification; the state layout includes an unresolved +36 word. No inference of whole-function or hardware completion is made from lifecycle/alignment checks. Next reuse/adapt TX/RX/message models against backup instructions before source integration. Full firmware source-only goal remains active and incomplete.
+
+### Backup SPI transmit/receive reconstruction
+
+Previous turn made progress on lifecycle/alignment. Adapted valid-buffer TX and RX paths against stock backup instructions. TX differs in width-specific operand ordering (byte data before controller pointer; halfword/word controller pointer before data), cached status/controller pointer reuse and completion ordering (next-list pointer, current-message reload, controller disable). RX caches the controller pointer for polling/chunks, reloads it after byte/word destination stores but not halfword stores, and uses the same backup completion ordering. Preserved these distinctions in C rather than accepting the earlier-image transaction model unchanged.
+
+New backup TX/RX models and verifiers each pass 160 cases across widths 1/2/4 (including rounded bits-per-word inputs), empty and nonempty buffers, small and multi-chunk counts, FIFO depths, delayed progress and data patterns. Local decoder gained stock ld.h and signed blsz support with relocated branch targets. After final RX edits, reran lifecycle (4), alignment error (280) and TX (160) successfully. All proofs remain scoped to valid modeled buffers/finite progressing FIFO scripts; malformed lists, overrun and physical timing are not qualified.
+
+The transfer candidate remains standalone. Multi-transfer message execution must be checked before integration, and complete driver-state ownership (including +36 semantics) is still pending. These edits do not establish complete firmware source closure; goal remains active and full-image retained-stock accounting unchanged.
+
+### Backup SPI multi-transfer verification and callback integration
+
+Previous turn reconstructed backup TX/RX differences. Added backup multi-transfer model/verifier using the qualified backup per-transfer models and its ten-event message prologue (the primary eleven-event prologue includes an extra state reload). `verify_gx8002_backup_spi_transfer_message.py` passed 270 cases: two/three-transfer combinations of TX/RX/empty/error paths and shared RX-to-TX data buffers. Error after earlier successful transfers and first-error shutdown remain stock behavior. Fixed distinct metadata and bounded progressing FIFO scripts remain assumptions; no physical behavior is asserted.
+
+Added `audit_gx8002_backup_spi_transfer_evidence.py`: it verifies current C/source SHA and compiled ELF bytes against all five reports, including their common build metadata and case counts. Audit passes for 874 existing decoded cases (4 lifecycle,280 alignment,160 TX,160 RX,270 message); this is consistency verification rather than another execution claim.
+
+Integrated the 620-byte transfer callback at 0x100082a8 into the macOS startup cluster, binding clock calls to allocated gx_clock_set_module_enable. Full startup build passed (`/tmp/g2-startup-spi-transfer.log`) with preserved standalone bytes/addresses, allocation, relocation and overlap checks. Probe and complete master/driver storage still need integration, with driver +36 semantics unresolved. Full firmware source closure and runtime qualification remain incomplete; goal stays active.
+
+### Backup SPI probe linkage and allocation audit
+
+Previous transfer continuation made concrete source/linkage progress. Integrated the already reconstructed/944-case-qualified backup SPI probe into the startup cluster, replacing all seven absolute dependency bindings with source symbols. The full macOS startup build passed (`/tmp/g2-startup-spi-probe.log`) with standalone bytes/addresses, allocated symbol, unresolved relocation and overlap checks. Refreshed system inventory now reports 21/21 direct system-initialization callees source-allocated. This does not imply the opaque higher-level LvpSystemInit body itself or the whole firmware is source-complete.
+
+Added `analyze_gx8002_backup_spi_source_dependencies.py`: current cluster confirms all seven probe dependencies are source-linked. It separately checks whole-object section coverage: fallback device state 0x20017670/16 bytes is allocated; SPI master 0x20017680/36 bytes and driver context 0x200176a4/44 bytes remain unallocated. Driver +36 meaning remains unresolved. This separation prevents callback linkage from being mistaken for state ownership or composed runtime qualification.
+
+Next source ownership work must cover master/context storage and account for the unresolved field, while wider firmware/model/asset reconstruction remains outstanding. Full-image retained-stock accounting unchanged; source-only firmware goal remains active and incomplete.
+
+### Backup SPI master source ownership
+
+Previous probe-link continuation made concrete progress. Added `runtime_gx8002_backup_spi_master.c`, defining the 36-byte master with the pinned SDK spi_master type and compile-time size/setup/transfer/driver_data/list offset assertions. `build_gx8002_backup_spi_master.py` authenticates SPI/list/types headers, compiles a single NOBITS object, checks no undefined symbols/relocations, and validates placement 0x20017680..0x200176a4 within the separately recovered reset-clear interval.
+
+Changed the backup probe to refer to the named source master object rather than an integer address. Reran all 944 decoded probe cases successfully. Integrated master storage in the startup cluster and removed its standalone absolute binding in favor of allocated source. Full macOS startup build passed (`/tmp/g2-startup-spi-master.log`).
+
+Updated/refreshed the SPI dependency audit to distinguish function bindings from storage: all seven function dependencies and the master storage binding resolve to source. Fallback device state and master now have whole-object allocated-section coverage; the 44-byte driver context remains unallocated and its +36 word unidentified. No claim of complete driver layout or full firmware source closure; goal remains active and full-image retained-stock accounting unchanged.
+
+### SPI context upstream extent and literal census
+
+Added `analyze_gx8002_backup_spi_context_layout.py` and its research report. The authenticated SDK commit `8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5`, object blob `600d763a219007e2af7b5006989d44984abf0861`, explicitly identifies BSS objects `spi_device_context_tab` (16 bytes), `dw_spi_master` (36 bytes), and `dwspi` (44 bytes). This corroborates the inferred backup context extent; the object has no `.debug_info` type information. A byte-position census across the authenticated backup payload finds one literal pointer into the context, targeting its base (package offset 266260). This does not account for arithmetic-derived or indirect pointers and does not establish that context +36 is unused. Updated the source-dependency audit wording to cite this stronger evidence. Both audits execute successfully on macOS. No firmware source bytes or source-ownership totals changed; context +36 and complete source-only runnable firmware remain unresolved.
+
+### Backup LvpSystemInit reconstructed and source-linked
+
+Reconstructed `runtime_gx8002_backup_lvp_system_initialize.c` and source-authored diagnostic data from the backup's decoded startup sequence, using the identified NationalChip `lvp/common/lvp_system_init.c` commit as provenance. Preserved backup-specific absence of the keyword-list print call, the 32-bit twelve-entry voltage-trim table, and build timestamp `2026-03-26, 17:07:19`. Native macOS C-SKY build yields 460 bytes at runtime `0x1000a8ec` (package `0x4322c`) within the 480-byte envelope. All 586 standalone data bytes match stock; in the combined cluster, the one-byte empty version string aliases the existing source denoise diagnostic terminator, with explicit address/content verification, leaving 585 newly allocated data bytes.
+
+`verify_gx8002_backup_lvp_system_initialize.py` passes 4,320 decoded stock/source/model cases covering cold/warm wake values, vendor IDs, bypass controls, every trim nibble and two helper-result seeds. It checks ordered helper arguments, saved ABI and stack results. Helpers are modeled, including complete PMU output-word initialization; partial helper writes, nested whole-system execution, and hardware behavior are not proven.
+
+The macOS startup cluster build completed successfully (`/tmp/g2-startup-lvp-init.log`): `LvpSystemInit` now resolves to allocated C, and its board, SPI, PMU and platform-getter references bind source implementations. Standalone section bytes/addresses, shared terminator ownership, unresolved relocations/symbols and cluster overlap checks pass. Refreshed system/SPI linkage inventories. This improves the startup cluster, not the full-image admission ledger: retained stock in the full-image experiment remains 246,207 bytes, and complete source-only runnable firmware is still unfinished.
+
+### Backup DMA deallocator fits and is source-linked
+
+Resolved the pending 72-versus-68-byte overflow in `runtime_gx8002_backup_dma_deallocate.c`. A documented inline C-SKY `ld.b` accessor exposes the instruction's zero-extended 32-bit result to GCC, avoiding its two redundant `zextb` instructions. The control flow and state management remain C; the accessor is symbolic assembly source, not extracted bytes. The current macOS compiler produces exactly 68 bytes at `0x10004bc0` (package `0x3d500`).
+
+Expanded `verify_gx8002_backup_dma_deallocate.py` to require placement fit and exercise every pair of allocation-byte values, in addition to count/channel/token boundaries: 67,456 stock/source/independent-oracle cases pass with ordered state accesses and helper calls. The startup cluster now allocates the deallocator and binds its IRQ save/restore, DMA state and clock resource to source implementations. The complete cluster build passed (`/tmp/g2-startup-dma-deallocate.log`), including standalone-byte/address preservation, unresolved-symbol/relocation and overlap checks.
+
+New `verify_gx8002_backup_dma_deallocate_irq.py` executes the actual linked deallocator with the linked PSR leaves across 160 cases. It checks original PSR restoration and requires resource gating under IRQ exclusion. Clock hardware effects remain modeled, and separate helper-boundary execution does not establish physical timing or nested machine-stack behavior. Refreshed the compiler-size diagnostic so it reports the now-fitting source rather than the historical overflow. This closes one startup executable dependency; it does not change the full-image retained-stock ledger or establish complete runnable source-only firmware.
+
+### Backup denoise audio-record callback reconstructed
+
+Retrieved pinned upstream `lvp/lvp_mode_denoise.c`, blob `096c79b83a06352cae7c2c4c7f94a503964fa39e`, from SDK commit `8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5`. `_LvpAudioInRecordCallback` identifies backup package `0x44694` / runtime `0x1000bd54`: acquire context, set its index, compute microphone sample span, invalidate microphone cache ranges, and queue the context pointer.
+
+Added source `runtime_gx8002_backup_denoise_record_callback.c`, native macOS builder and decoded verifier. The source uses observed header offsets, unsigned 32-bit wrapping multiplication/division, and live microphone-count reloads. It occupies exactly the 92-byte stock envelope. `verify_gx8002_backup_denoise_record_callback.py` passes 1,200 cases, comparing ordered non-stack reads/writes, helper calls, return value, index write and saved ABI; an independent oracle checks cache sizes and queue arguments. Cases include zero through four microphones, zero/boundary rates/lengths/frame counts and integer overflow. Source frame is four bytes larger than stock.
+
+This is a verified candidate, not yet startup-linked or source-admitted. Helpers are modeled without context/count mutation; the complete header/context types, denoise-state storage, nested stack behavior, and physical audio/cache operation remain unqualified. Next integration must inspect source ownership of the context getter, microphone-frame getter, cache invalidator and queue writer at the bound backup addresses. Full-image retained-stock counts remain unchanged.
+
+### Backup microphone-frame helper source-linked
+
+Audited the denoise callback's four function bindings against the startup ELF: none initially had allocated source at the required addresses. Reused the existing `runtime_gx8002_mic_frame.c` with authenticated pinned upstream context headers, adding a backup builder and verifier for package `0x42800` / runtime `0x10009ec0`. The candidate compiles to 58 bytes within the 72-byte envelope and passes 8,316 decoded arithmetic/read-set cases, including index wrap, pairwise boundaries and seeded 32-bit inputs. Stable ordinary RAM and nonzero context count are required; read order differs and hardware behavior is not established.
+
+Corrected semantic field names in the previous callback's partial header: +28 is frame length, +32 sample rate, +36 frames per context. The callback's multiplication already preserved the stock result; the names and test scenario mapping now agree with the pinned header. Its 1,200 decoded cases pass again.
+
+The macOS startup cluster build passed (`/tmp/g2-startup-mic-frame.log`), with microphone-frame section bytes and address preserved, no new unresolved links or overlaps. Added `analyze_gx8002_backup_denoise_callback_dependencies.py`: one of four function dependencies is now allocated source. The context getter, cache invalidator and queue writer remain unallocated, and denoise-state storage remains an absolute binding. The callback remains a separate candidate. Next target: context getter at `0x10009e8c`, which selects `(index & 3) * 2816` within the already source-owned context frames and initializes header/frame pointers. Full-image admission totals remain unchanged.
+
+### Backup context getter source-linked
+
+Reconstructed `LvpGetContext` at package `0x427cc` / runtime `0x10009e8c` using the authenticated upstream buffer source and context header with the recovered four-slot, 2816-byte configuration. `runtime_gx8002_backup_get_context.c` selects the slot with `index & 3`, initializes its header and processing-buffer pointers, writes the returned context pointer and size in stock order, and returns zero. Native macOS build is 48 bytes within the 52-byte envelope.
+
+`verify_gx8002_backup_get_context.py` passes 6,240 decoded stock/source/independent-oracle cases: low indices, high-bit and wrapping boundaries, two register seeds and output-address combinations. Exact ordered word stores and saved ABI are checked. Address-overlap cases demonstrate generated machine-store ordering rather than establishing arbitrary C aliasing validity.
+
+The startup cluster build passed (`/tmp/g2-startup-get-context.log`), binding the getter to existing source-owned `backup_context_header` and `backup_context_frames`. Standalone bytes/addresses and cluster unresolved-symbol, relocation and overlap checks pass. Refreshed denoise callback dependency audit now finds two of four helpers source allocated. The remaining helpers are cache invalidation at `0x10004dd8` and queue put at `0x10015b64`; callback integration and complete denoise-state ownership remain pending. Full-image retained-stock totals remain unchanged.
+
+### Backup cache invalidator linked and composed with callback
+
+Reused reviewed `runtime_gx8002_dcache_invalid_range.c` for backup runtime `0x10004dd8` / package `0x3d718`, adding backup-specific builder/executor verification. The backup's unrolled address-endpoint loop differs in encoding from the primary, but its emitted cache-command sequence matches the source. Native macOS compilation yields 88 bytes within the 156-byte envelope. Passed 12,864 complete MMIO trace/ABI cases and 144 large-positive 65-write prefix cases, covering signed negative sizes, alignment lows, 128-byte block transitions and address wrapping. Large prefixes do not establish complete huge-range execution or hardware coherence.
+
+Startup cluster build passed (`/tmp/g2-startup-dcache-invalid.log`) with this allocated source section and standalone byte/address preservation. Added a callback cache hook and `verify_gx8002_backup_denoise_callback_cache.py`: 72 finite audio configurations execute the actual compiled callback and linked cache leaf at a modeled helper boundary, checking every cache write against the independent range oracle. Re-ran all 1,200 callback equivalence cases successfully. Nested machine-stack execution, actual context/queue helpers and physical cache timing remain unqualified.
+
+Refreshed callback dependency audit: three of four function dependencies now have source allocations. Queue insertion at `0x10015b64` remains unresolved; callback linkage and complete denoise-state storage are still pending. Full-image retained-stock ledger remains unchanged.
+
+### Backup queue writer reconstructed with exact access order
+
+Added `runtime_gx8002_backup_queue_put.c`, a small adaptation of pinned NationalChip `LvpQueuePut` using the authenticated SDK queue layout. Unmodified upstream `-Os` output had different metadata-read order; `-O2` exceeded the 100-byte backup envelope. The adaptation explicitly preserves initial tail/member/size caching, full detection, per-byte buffer/source reads and live member-count reloads, subsequent tail/size reloads, and final tail write.
+
+The macOS builder `build_gx8002_backup_queue_put.py` uses `-Os -fno-ivopts` and produces exactly 100 bytes at `0x10015b64` / package `0x4e4a4`. `verify_gx8002_backup_queue_put.py` passes 2,196 valid queue cases against decoded stock, checking exact access traces, complete final memory, return and saved ABI plus an independent FIFO oracle. Concurrent metadata mutation, aliasing buffers, zero-size queues and signed-overflow C inputs remain outside this qualification. The source is a candidate and is not yet startup-linked; no full-image source-admission counts changed. Next step: link this writer and the callback to the now-reconstructed helpers, preserving standalone addresses and bytes.
+
+### Denoise callback and queue writer integrated
+
+Integrated the verified 100-byte queue writer and 92-byte audio-record callback into `build_gx8002_backup_startup_cluster.py`. The callback's context, microphone-frame, cache-invalidation and queue-put references now bind allocated source implementations, and the denoise initializer's callback symbol resolves to the new source callback. Linker selectors and discard rules are scoped to their individual input objects.
+
+The macOS cluster build passed (`/tmp/g2-startup-denoise-callback.log`); required allocated symbols, standalone section bytes and addresses, unresolved relocations/symbols and overlap checks pass. Updated `verify_gx8002_backup_denoise_callback_cache.py` to execute the actual linked callback, with an explicit comparison to its standalone section: all 72 composition cases pass. Dependency audit reports 4/4 source function targets. Cluster SHA-256: `ea4b082366562b5e4f1bb8d1ff3c916c64ea1bba33fb49950cb753346ae0af84`.
+
+This closes the callback's function-linkage gaps, not complete denoise reconstruction. `backup_denoise_state` remains an absolute storage binding, and other denoise/audio/DSP entry points remain opaque. Source-linked allocation does not establish full composed machine-stack behavior or hardware audio/cache operation. Full-image retained-stock accounting remains unchanged.
+
+### Backup denoise tick dependency map
+
+Added authenticated `analyze_gx8002_backup_denoise_tick.py` and its research report for runtime `0x1000b958` / package `0x44298`. The complete 748-byte envelope contains 696 bytes of decoded instructions before its literal pool. Found 22 distinct direct callees, seven currently source allocated. The report records every call site, direct function allocation, r5-relative word access and floating-point instruction for subsequent translation; these are explicitly syntactic observations, not full field/dataflow recovery.
+
+Pinned upstream `_DenoiseModeTick` is insufficient as an unchanged replacement. Backup has a state-controlled reinitialization path, algorithm mode dispatch, three-frame processing, DSP buffer copies and gain conversion absent from the simple upstream tick. Next reconstruction must preserve those branches. Remaining callees include cache cleaning (`0x3d7b4`), output/context helpers, audio-index advancement, suspend/resume, algorithm initialization and processing, app-event enqueue and DSP-copy routines. No source bytes were admitted or replaced in this audit; it establishes the actual scope and prevents an incomplete upstream substitution. Full goal remains unfinished.
+
+### Backup cache-clean dependency source-linked
+
+Added backup build and decoded verification for reviewed `runtime_gx8002_dcache_clean_range.c` at package `0x3d7b4` / runtime `0x10004e74`. The backup implements an unrolled 128-byte command loop followed by a 16-byte tail loop, with signed-size comparisons and command bit 8. Reused C preserves its command writes, including unaligned input treatment and address wrapping. Native macOS output is 88 bytes within the 156-byte envelope.
+
+Passed 12,864 complete ordered-MMIO/ABI cases and 144 large-positive 65-write prefix cases. Prefix checks do not qualify complete huge-size execution; physical cache coherence remains unproven. The startup cluster build passed (`/tmp/g2-startup-dcache-clean.log`) with allocated source, standalone byte/address preservation, and overlap/unresolved-symbol/relocation checks. Refreshed the denoise tick dependency map: eight of 22 direct targets are now source allocated. The existing backup Q15-copy candidate at `0x47ac0` is a next integration candidate, subject to current-state verification. Full-image retained-stock accounting remains unchanged.
+
+### Q15 copy helper fits and is source-linked
+
+Resolved the existing 56-versus-44-byte overflow for package `0x47ac0` / runtime `0x1000f180`. The C translation unit now provides a documented C-SKY inline-assembly implementation using symbolic paired loads, postincrement stores and hardware loops; its portable C implementation remains enabled for host testing. This is explicitly assembly-source functionality on target, not a pure-C compiler result or extracted opcode array. Both word reads still precede either store, preserving stock overlap effects rather than substituting memmove behavior.
+
+The native macOS target build produces exactly 44 bytes. Re-ran 4,626 decoded stock/target access-trace cases and 4,627 native C overlap/output cases, including zero count with null pointers. Complete memory, read/write order and saved target ABI agree in the tested domain. Paired loads are modeled as two word reads; hardware atomicity and full uint32 count-domain execution remain unqualified.
+
+Integrated the helper into the startup cluster; build passed (`/tmp/g2-startup-copy-q15.log`) with required allocated symbol, standalone byte/address preservation, no new unresolved relocations/symbols and no overlaps. Refreshed tick dependencies: nine of 22 direct callees now source allocated. Full firmware source admission totals remain unchanged; tick control flow and remaining DSP/audio dependencies are still unfinished.
+
+### Backup output-buffer selection candidate
+
+Reconstructed `LvpGetOutBuffer` at package `0x42790` / runtime `0x10009e50`, using pinned upstream field definitions and source-owned context storage. Preserved the backup's inlined slot-zero header/processing-pointer writes even when output is disabled, 512-byte frame arithmetic, ring-slot calculation and ordered header reads. Explicit 16-byte frame-storage alignment prevents the compiler from emitting byte read/modify/write accesses in place of stock word writes.
+
+The current C candidate passes 648 decoded stock/source cases covering disabled output, channel/frame configurations, index wrap and output-address wrap, with exact field-read/context-write traces and return arithmetic. Nonzero derived divisors and stable ordinary RAM are required. It currently compiles to 64 bytes against a 60-byte envelope: behavior verified in this scope, placement unresolved. The candidate is not integrated or admitted. Source startup image and full-image retained-stock counts are unchanged. Next work must resolve the four-byte overflow without removing the slot-zero side effect or replacing the function with an opaque body.
+
+### Output-buffer getter size resolved and source-linked
+
+Resolved the four-byte overflow in `runtime_gx8002_backup_get_out_buffer.c`. The arithmetic and field reads remain C; three explicit C-SKY assembly instructions compute the processing pointer and perform the two ordered slot-zero word stores using the header base. A compiler memory clobber preserves the access boundary. This is documented symbolic assembly source, not extracted instruction bytes. The portable C store path remains present for non-C-SKY compilation.
+
+The native macOS candidate now occupies exactly 60 bytes. All 648 stock/source decoded cases pass again. Integrated the getter into the startup cluster and added a linker assertion that the source-owned frame array starts exactly 128 bytes after the source-owned header, as required by the store sequence. The complete startup build passed (`/tmp/g2-startup-get-out-buffer.log`), including byte/address preservation, required symbol allocation, unresolved-link and overlap checks. Refreshed denoise tick dependency audit: ten of 22 direct targets are source allocated. Valid nonzero derived divisors and stable RAM remain the execution contract; hardware and complete firmware admission remain unfinished, with full-image retained-stock counts unchanged.
+
+### Audio read-index update source-linked
+
+Reconstructed `LvpAudioInUpdateReadIndex` at backup package `0x42d3c` / runtime `0x1000a3fc`, identified against pinned `lvp/common/lvp_audio_in.c`. The C routine reads the current read index, performs unsigned wrapping addition, reads the write index, rejects sums beyond that index with -1, or stores the new read index and returns zero. Only the two consumed control fields are declared; complete audio-control ownership is not claimed.
+
+Native macOS compilation is byte-exact with all 28 stock bytes. `verify_gx8002_backup_audio_read_index.py` passes 2,197 decoded boundary cases, including high-bit offsets and wraparound, checking ordered reads/write, return and saved ABI. The startup cluster build passed (`/tmp/g2-startup-audio-read-index.log`) with standalone byte/address preservation and allocation/link/overlap checks. Tick dependency inventory now has 11 of 22 direct targets source allocated. The two-word audio index binding at `0x2002d75c` remains absolute; concurrent audio/DMA behavior and complete firmware execution remain unqualified. Full-image retained-stock accounting remains unchanged.
+
+### Audio-input suspend/resume dependency identified
+
+Identified tick callees `0x43054` and `0x43070` against pinned `LvpAudioInSuspend/Resume` in `lvp/common/lvp_audio_in.c`: suspend disables mask `0x20007`, enables `0x10000`, and resume enables `0x30007`. Their shared helper at package `0x3e5fc` / runtime `0x10005cbc` implements interrupt status-clear and enable RMW, with opposite clear ordering for enable versus disable.
+
+Added backup builder/verifier for existing reviewed `runtime_gx8002_audio_interrupt_enable.c`, using authenticated SDK header and object symbol evidence. Passed 525 decoded stock/source/MMIO-oracle cases over all individual mask bits, mixed masks, enable values and initial register patterns. Hardware interrupt delivery remains unqualified. Added source wrappers `runtime_gx8002_backup_audio_suspend_resume.c`; their build, decoded call verification and integration remain next work. The helper is currently a standalone candidate, not startup-linked. Full-image retained-stock counts are unchanged.
+
+### Audio-input suspend/resume wrappers integrated
+
+Built `runtime_gx8002_backup_audio_suspend_resume.c` on macOS: suspend uses 26 of 28 bytes at `0x1000a714`; resume uses 18 of 20 bytes at `0x1000a730`. Added decoded wrapper verification: both stock/source call sequences and saved ABI agree across five caller-register seeds (10 cases), with helper calls poisoning caller-saved registers. The masks match pinned SDK PCM0/PCM1/logfbank and FFT-VAD start/finish bits.
+
+Integrated both wrappers and the previously verified audio interrupt-enable helper at `0x10005cbc` into the startup cluster. The complete build passed (`/tmp/g2-startup-audio-suspend-resume.log`) with standalone byte/address preservation and required-symbol, unresolved-relocation and overlap checks. The interrupt helper already passed 525 ordered MMIO cases; wrapper tests qualify calls separately and do not establish physical interrupt delivery or full nested execution. Refreshed denoise tick map now has 13 of 22 direct targets source allocated. Full-image retained-stock counts and overall firmware completion status remain unchanged.
+
+### Application-event trigger source-linked
+
+Reused reviewed `runtime_gx8002_trigger_app_event.c` for backup package `0x44728` / runtime `0x1000bde8`, with authenticated pinned SDK event and queue type headers. The macOS build is byte-exact with all 20 stock bytes. Added 24 decoded forwarding/return/ABI cases covering event-pointer patterns, modeled queue success/failure and caller-register clobbers. The wrapper intentionally ignores the queue result and returns zero, as stock does. Pointer extremes test forwarding only, not valid queue dereference.
+
+Integrated the wrapper with source `LvpQueuePut` and source-owned `s_app_misc_event_queue`. Startup build passed (`/tmp/g2-startup-trigger-app-event.log`) with required code/storage symbol allocation, standalone byte/address preservation and unresolved-link/overlap checks. Tick dependency audit now has 14 of 22 direct callees source allocated. Full nested event flow and hardware delivery remain unqualified; full-image retained-stock counts remain unchanged.
+
+### Single-channel IMCRA initialization wrapper reconstructed
+
+Added `runtime_gx8002_backup_imcra_initialize.c` for package `0x4425c` / runtime `0x1000b91c`. Native macOS compilation fits the 60-byte envelope. The wrapper allocates 43,008 bytes, stores the buffer, obtains the PCM rate, reloads the buffer, invokes the still-unresolved initializer at `0x1000e384`, stores its handle, and preserves the stock success/error behavior. Stock diagnostic text identifies `ImcraStateInit`; the pinned WebRTC initializer has a different contract and is not treated as a replacement.
+
+`verify_gx8002_backup_imcra_initialize.py` passes 144 decoded stock/source/oracle cases with ordered accesses/calls, caller-register clobbers, saved ABI, null/non-null results and simulated buffer mutation during the sample-rate call. The compiled body is not byte-identical but fits. DSP execution, storage ownership and diagnostic ownership remain unresolved absolute bindings. This standalone candidate is not startup-integrated or full-image admitted; retained-stock counts remain unchanged. Next work includes source-owning its diagnostic and integrating the wrapper while continuing reconstruction of the algorithm core.
+
+### IMCRA wrapper and diagnostic integrated
+
+Source-authored the observed `[LVP_MODE_DENOISE]ImcraStateInit Fail!\n` diagnostic at `0x1001378c`, with build-time comparison against authenticated stock. Re-ran all 144 wrapper execution cases. Integrated its 60-byte C body and diagnostic into the startup cluster, binding allocation, PCM rate and printf to allocated source functions. Complete macOS cluster build passed (`/tmp/g2-startup-imcra-initialize.log`), including standalone section byte/address preservation, required allocated symbols, unresolved-link checks and overlap checks. Tick dependency inventory now reports 15 of 22 direct targets source allocated.
+
+Added `analyze_gx8002_backup_imcra_initializer.py` to inventory the 1,024-byte algorithm-initialization envelope at package `0x46cc4`, explicitly excluding its embedded literal pools. Three of six direct callees already have source: printf, memset and float-to-double conversion. Remaining targets are `0x46c54` (workspace-sizing helper), `0x477a4`, and `0x489e4`. Observed setup checks a 196-byte header minimum and writes fixed 16,000 Hz, 512-point dimensions, 256 and 257 fields. Algorithm semantics and complete storage layout remain under investigation. The core is still absolute-bound; startup integration does not constitute full firmware admission, and full-image retained-stock totals remain unchanged.
+
+### IMCRA workspace sizing reconstructed
+
+Added C reconstruction for package `0x46c54` / runtime `0x1000e314`. It preserves all six ordered state reads even for mode zero, unsigned wrapping arithmetic, zero-mode return and identical behavior for every nonzero mode. Native macOS compilation uses 50 of the 112 available bytes. The decoded stock/source verifier and independent simplified arithmetic oracle pass 4,268 cases: observed defaults, individual field boundaries and 1,000 seeded random field tuples, each tested with four modes. An intermediate coefficient error was caught by stock/source comparison and corrected before the passing report.
+
+Observed default workspace requirement is 42,124 bytes; with the 196-byte header this consumes 42,320 of the caller's 43,008-byte allocation. Complete state typing and DSP execution are not qualified by this arithmetic test. Startup integration build is in progress in session 90349, log `/tmp/g2-startup-imcra-workspace.log`; verify its terminal result before claiming integration. Further initializer dependency `0x477a4` appears to implement a 512-entry interpolated trigonometric lookup with a quarter-cycle offset, a candidate for upstream DSP identification rather than opaque retention.
+
+The workspace startup integration build completed with exit 0. Allocated symbol, standalone section bytes/address, unresolved-link and overlap checks passed. Refreshed initializer audit now shows four of six direct targets source allocated. Full-image retained-stock accounting remains unchanged.
+
+### Pinned upstream cosine and exact source table identified
+
+Identified initializer target package `0x477a4` as NationalChip/T-HEAD `csky_cos_f32`, derived from CMSIS-DSP. Retrieved the exact pinned SDK source at commit `8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5`: cosine blob `0a68e9361b9fdd152e91ca5cc661943e1a07853f`, fast-math tables blob `9a881da84b5ae4013fb47ca6ae865b6f931579dd`. Added reproducible builder `build_gx8002_backup_cosine.py` with git-object authentication, retained upstream license preambles and a declaration-only header facade. The cosine function body is unmodified upstream C; the named `sinTable_f32` declaration is selected from upstream C, never stock data.
+
+Native macOS compilation reproduces all 2,052 bytes of the 513-entry table at runtime `0x100148d4` exactly. The function currently occupies 132 bytes against its 128-byte envelope, so it is not integrated. Stock uses a floating compare-to-zero instruction where the current compiler materializes zero and compares registers, among other register scheduling differences. Next work must resolve placement and verify floating-point behavior, including the original index-mask behavior at negative integer cycles, before admission. Full-image retained-stock totals remain unchanged.
+
+### Upstream cosine placement resolved; symbolic operation paths agree
+
+Eleven compiler configurations all produced 132-byte original upstream code. Adapted the single comparison `in < 0.0f` to `!(in >= 0.0f)` to match the stock ordered greater-or-equal-zero instruction. The native macOS compiler now emits 124 bytes, fitting the 128-byte envelope. This is an explicit upstream C adaptation, not assembly or extracted bytes. Conversion validity requires finite in-range operands; exceptional C float-to-integer conversions are not claimed.
+
+Added `verify_gx8002_backup_cosine_symbolic.py`. Both branch paths have identical decoded opcode-expression trees, including comparison input, conversion operations, multiply-accumulate ordering, table index/load order, output and preserved registers. No floating algebra reassociation or host rounding is used in this check. The 2,052-byte table remains byte-exact from upstream C. This establishes matching operation structure under target instruction semantics, not hardware FPU exception/rounding qualification or numerical approximation accuracy. Startup integration remains next work; no full-image admission or retained-stock accounting changed.
+
+### Cosine and sine table source-linked; initializer power call checked
+
+Integrated adapted pinned upstream cosine (124 bytes) and source-compiled sine table (2,052 bytes) into the macOS startup cluster. Complete build passed (`/tmp/g2-startup-cosine.log`, exit 0), including required allocated function/table symbols, standalone bytes/address preservation and unresolved-link/overlap checks. Refreshed initializer inventory now has five of six direct targets source allocated. Full-image admission and retained-stock accounting remain unchanged.
+
+The remaining target `0x489e4` is the existing byte-exact powf ABI wrapper forwarding to `0x489fc`. Existing project upstream power source closure is already placed separately at the backup addresses. Added `verify_gx8002_imcra_power_constant.py`: at the observed initializer operands `0x41200000` (10) and `0xbf19999a` (binary32 -0.6), both decoded source and stock return `0x3e809bcc` under separate and fused accumulator models, exactly matching the high-precision reference. This is specific call-site evidence, not full power-domain or hardware qualification. Next work is integrating the existing complete power closure and wrapper, with existing dependency placements checked for conflicts, then reconstructing the initializer body.
+
+### Power source dependency integration in progress
+
+Added a standalone build for the complete existing C powf ABI wrapper at `0x100100a4`, byte-exact with all eight stock bytes. Selected only this complete function from the shared wrappers translation unit; unrelated log/exp wrappers are discarded by named section. Added pinned Newlib power/sqrt and reconstructed scale/sign/absolute dependency objects to the startup builder, preserving individual original entry addresses and standalone comparisons.
+
+The first integration link detected a `.scale` output-section name collision with existing formatter code. Renamed the new math sections explicitly (`.math_power`, `.math_sqrt`, `.math_scale`, `.math_sign`, `.math_absolute`); rebuild is in progress, session 42646, log `/tmp/g2-startup-power.log`. The rebuilt standalone power ELF retained SHA `778a0ff3c8d3f13a0fdf3be54b6ea89d6ba0fca4a86fe775db6d7531de9aaa84`; initializer constant verification passes under both accumulator models. The scaling dependency intentionally includes the existing exponent -24/-23 subnormal-rounding fix, so broad stock-byte equivalence is not claimed. Existing scaling evidence reports 34,620 cases, zero rounding mismatches and 2,046 expected stock differences; this turn has not rerun that broader suite.
+
+Power integration rebuild completed with exit 0. Required source allocation, standalone section bytes/addresses, unresolved-link and overlap checks passed. Executed the linked cluster powf wrapper and complete core for the initializer constant under both accumulator models: both return `0x3e809bcc`, matching stock and the high-precision reference. Cluster ELF SHA `55728aac911259338a47e4108e8046587af1a2c7740559966eda412f0a249380`. All six direct initializer dependencies now have allocated source functions; the initializer body itself remains opaque and is the next reconstruction target. Full-image retained-stock totals remain unchanged.
+
+### Complete IMCRA initializer C candidate drafted
+
+Added `runtime_gx8002_backup_imcra_state_initialize.c`, covering observed header defaults, power threshold, workspace check, sequential buffer assignment, float-one array initialization, Q15 Hamming window, overlap normalization, history clear and memory diagnostics. Native macOS compiler accepts it with warnings-as-errors; the object contains 1,052 text bytes versus the 1,024-byte stock envelope. This is a candidate, not validated or admitted source. Exact field-read/write ordering, helper mutation effects, floating contraction/reciprocal semantics and error paths need decoded comparison; current C may require corrections before placement.
+
+Recorded a candidate layout for the default dimensions. The enumerated allocation sequence consumes 38,220 bytes including the 196-byte header, whereas the reconstructed sizing helper requires 42,320. An attempted equality assertion failed and was not weakened into a completion claim: the 4,100-byte difference is explicit unresolved evidence. Investigate against a decoded allocation trace before deciding whether it is conservative sizing or a reconstruction error. The candidate is not linked into the startup build; the previously passing source cluster remains the latest integrated result, and retained-stock totals remain unchanged.
+
+### Allocation discrepancy verified in stock; reproducible initializer candidate build
+
+Added `verify_gx8002_imcra_allocation_trace.py`, a bounded decoder executor for the actual stock allocation block `0x46d68..0x46e9a`. With observed initialized dimensions, every stored pointer matches the drafted layout and the final array ends at byte 38,220 including the header. Six isolated capacity tests around 38,220 and the independent sizing gate confirm the allocation block minimum. The 4,100-byte discrepancy is therefore present between the observed stock allocation sequence and sizing helper for these defaults, not an arithmetic adjustment to force the C layout to pass. Tests enter after the separate sizing check and do not imply smaller buffers would pass the complete initializer.
+
+Added `build_gx8002_backup_imcra_state.py` and source-authored diagnostic declarations. The complete candidate reproducibly compiles and links on macOS; all six diagnostic sections compare exactly against authenticated stock. Function text remains 1,052 bytes against 1,024 available. This is not yet behaviorally verified or integrated: field access ordering, floating operations, caller effects and errors still require complete decoded comparison. Existing integrated cluster and retained-stock accounting remain unchanged.
+
+### Initializer rejection paths verified
+
+Added `verify_gx8002_imcra_initializer_rejection.py`. It executes stock and compiled candidate from entry through header-size and signed workspace-size rejection returns, modeling the power/workspace helpers with caller-register clobbers and no state mutation. All 205 capacities pass with identical ordered state writes, helper arguments, diagnostic arguments, zero return and preserved integer/FPU registers. Coverage includes every size 0..196, allocation/sizing boundaries below acceptance, and high-bit capacities rejected by the stock signed comparison. This does not qualify accepted paths or arbitrary helper mutation.
+
+Inspected compiled window/normalization operations: the candidate emits fnmacs, fmacs and frecips at the corresponding arithmetic stages, avoiding an assumed substitution of reciprocal semantics. This observation alone is not a full numeric or ordered-memory equivalence proof. Size remains 1,052 bytes; startup integration and complete initializer execution remain pending.
+
+### Initializer fits through compiler option; allocation block compared
+
+Probed twelve semantics-preserving compiler settings. `-fno-caller-saves` reduces the unmodified initializer C body from 1,052 to 1,016 bytes, within the 1,024-byte envelope. Recorded this flag in the candidate builder and reran all 205 rejection-path comparisons successfully. No floating-point relaxation, branch removal or binary extraction was used.
+
+Extended allocation-block execution to compare the actual compiled candidate and stock, with capacities immediately below/at/above every array boundary and the sizing gate. All 78 cases agree on ordered pointer stores and allocation-block acceptance/rejection. Tests enter after the sizing gate with the observed fixed dimensions; field-read order and helper mutation are not checked by this isolated test. Window generation, normalization and the complete accepted path still need qualification. Candidate remains unintegrated; source startup and retained-stock totals are unchanged.
+
+### Normalization rounding-order mismatch fixed in C
+
+Decoded inspection exposed a real operation-order mismatch: GCC initially squared the first half-window sample separately and accumulated the second, while stock separately rounds the second sample squared and accumulates the first. Changed the C to materialize the second square in a volatile float temporary before the accumulate. The compiler now emits the stock arithmetic expression order, including reciprocal and truncating integer conversion, with an explicit stack save/reload.
+
+`verify_gx8002_imcra_normalization_symbolic.py` confirms identical decoded expression trees for one iteration with symbolic signed sample inputs, without algebraic reassociation or a chosen accumulator-rounding policy. It does not establish loop behavior or hardware reciprocal precision. The candidate now exactly fills the 1,024-byte envelope. Re-ran all 205 rejection cases and 78 allocation-boundary comparisons successfully, updating the relocated error-block address in the latter verifier. Complete accepted-path/window execution remains next work; candidate is not integrated and retained-stock totals are unchanged.
+
+### Hamming-window iteration and loop traces match
+
+Added `verify_gx8002_imcra_window_symbolic.py`. The decoded stock and candidate iteration produce identical symbolic cosine arguments, negative multiply-accumulate and scaling expression order, truncating conversion, and low-halfword output. Extended execution through each actual loop's branches and index updates for lengths 1, 2, 255, 256, 511, 512 and 513. All output expressions/indices and cosine call arguments match, including all 512 outputs at the observed default length.
+
+These checks keep cosine as an explicit symbolic call result and the step as a symbolic input: no host trigonometric approximation or arithmetic reassociation is substituted. Initial setup, zero/negative loop entry, concrete cosine execution and complete accepted initializer behavior remain pending. The initializer still fits 1,024 bytes but is not startup-integrated; retained-stock counts remain unchanged.
+
+### Normalization loop addressing verified
+
+Added `verify_gx8002_imcra_normalization_indices.py` to execute decoded integer control/address instructions for stock and candidate normalization loops. Thirteen signed lengths (-3 through selected zero, odd/even and 1,024 boundaries) agree on every sample-read address, every output address and output count. At the observed 512-sample length both read paired samples 256 apart and write 256 normalization values. Independent address formulas check the trace, including truncation toward zero for signed half-length and no accesses for nonpositive half-length.
+
+This deliberately qualifies addressing/control separately from the existing per-iteration floating expression proof; it does not claim omitted FPU instructions were numerically executed. Complete initializer setup, success-path composition and diagnostic/clear effects remain next work. No startup integration or full-image admission changed.
+
+### Window setup expressions verified
+
+Added `verify_gx8002_imcra_window_setup.py`, decoding stock and candidate setup before the window loops. The cosine input is the same binary32 pi constant; the normalization scalar preserves the same negative multiply-accumulate, addition of zero and division expression. The angle step is the same binary32 two-pi constant divided by signed frame-length conversion. Both expression results match without floating reassociation.
+
+This proof assumes stable state/pointer bindings; source and stock header-read timing differs and is not claimed equivalent under mutation. Cosine is still symbolic here. Complete accepted-path execution, array initialization, clear/diagnostic effects and integration remain pending. No full-image source admission or retained-stock count changed.
+
+### Float-one array initialization verified
+
+Added `verify_gx8002_imcra_ones_arrays.py`, executing both stock and compiled fill blocks through their real loop branches. Nine bin counts, including zero and the observed 257, match every ordered word write against each other and an independent address/value sequence. At 257 bins, both initialize the entire first array followed by the second, for 514 writes of binary32 1.0. Pointer bindings are initialized inputs; allocation and subsequent setup remain separate checks.
+
+No integration or complete-function qualification is claimed from this isolated block. The remaining accepted-path work includes final history clear, diagnostic arguments, return/ABI composition and a combined execution check. Full-image source admission totals remain unchanged.
+
+### Final initializer effects compared
+
+Added `verify_gx8002_imcra_finish.py`: 30 decoded stock/candidate final-block cases agree on memset arguments with unsigned byte-count wrap, subsequent self-pointer/capacity writes, workspace query modes, symbolic float-to-double diagnostic argument expressions and diagnostic order. Modeled calls clobber caller registers. Independent assertions check the three initial effects and all three diagnostic addresses.
+
+This test does not execute the helpers, qualify huge clear sizes, or establish the final epilogue and whole-function composition. The separate blocks now cover rejection, allocation, array fills, scalar/window setup, window iteration/indices, normalization expressions/indices, and final effects. They must still be combined to catch cross-block state/register assumptions before initializer integration. No admission or retained-stock accounting changed.
+
+### Complete initializer entry-to-return execution passes
+
+Added `execute_gx8002_imcra_state.py` and `verify_gx8002_imcra_state_complete.py`, preserving one register file, FPU state and byte-addressed memory across the full initializer. Six accepted-path runs (capacities 42,320 / 43,008 / 65,536, each under separate and fused accumulator models) match stock in 1,853 ordered state-write/helper effects, complete written nonstack memory, returned state pointer and saved integer/FPU registers. This closes the prior gap between separately initialized block tests.
+
+Helpers remain explicit models: cosine uses a shared host-math result; power returns the separately verified observed constant; workspace arithmetic, zeroing, conversion and diagnostics are modeled with caller clobbers. The test checks caller integration across actual branches/stack saves but is not concrete upstream cosine composition or hardware qualification. Memory reads are not traced and helper mutation is not covered. Next work is concrete source-helper composition and initializer startup integration, retaining these limits. No full-image source admission or retained-stock totals changed.
+
+### IMCRA initializer source-linked with concrete cosine execution
+
+Added a finite decoded cosine executor and replaced the host cosine model in six complete initializer runs with the actual compiled upstream cosine and source-built table, comparing against decoded stock cosine/table. All six accepted-path runs still match in final memory, return, saved registers and 1,853 ordered effects. Helper calls execute at a boundary with a separate register file; physical FPU behavior remains unqualified.
+
+Integrated the 1,024-byte initializer and six source-authored diagnostic sections into the startup cluster, resolving `backup_imcra_state_initialize` to its allocated source function. Complete native macOS build passed (`/tmp/g2-startup-imcra-state.log`, exit 0) with required symbols, standalone bytes/addresses, unresolved-link and overlap checks. Executed the linked initializer and linked cosine for the default allocation under both accumulator models; results match the standalone candidate. Other helper models and broader hardware/application execution remain limitations. Full-image admission/retained-stock totals are unchanged. The processing routine at package `0x4e674` remains opaque and consumes the newly reconstructed state; its opening operations shift and refill the input-history buffer.
+
+### IMCRA processing dependency map and peak helper candidate
+
+Added reachability-based inventory `analyze_gx8002_imcra_processing.py` for entry package `0x4e674`. It follows direct branches through 832 instructions / 2,692 instruction bytes, reaching `0x4f10a`, with no unresolved indirect control flow encountered. Six direct targets remain: overlapping-copy `0x422a8`, sample shift `0x46bcc`, peak shift `0x46c04`, RFFT `0x478a4`, memcpy and memset. Only the latter two are currently source-linked in the startup cluster. Reachability excludes a bogus bsr that linear disassembly found inside a literal pool.
+
+Reconstructed the peak-magnitude helper in C, `runtime_gx8002_imcra_peak_shift.c`. It reads sample zero even for count <= 0, scans further samples when count > 1, and returns 17 minus leading-zero count of the maximum absolute magnitude, with -15 for zero. Native macOS builder emits 64 of 80 bytes. Decoded tests, ff1 semantics confirmation and startup integration remain pending; it is a standalone unadmitted candidate. The processing algorithm itself remains unfinished.
+
+### Peak helper verified and source-linked
+
+`verify_gx8002_imcra_peak_shift.py` passes 65,695 decoded stock/C comparisons: all 65,536 individual int16 values, nonpositive count cases with readable sample zero, and seeded scans through 512 samples. Checks ordered sample loads, return, and preserved ABI against an independent magnitude/bit-length oracle. GCC's local C-SKY backend explicitly maps clzsi2 to ff1; the executor uses this semantics, not a hardware claim.
+
+Integrated the 64-byte peak helper into the native macOS startup cluster. Build passed (`/tmp/g2-startup-imcra-peak.log`, exit 0) with allocated-symbol, standalone-byte/address, unresolved-link and overlap checks. Refreshed processing inventory now has three of six direct targets source-linked. Full-image admission counts remain unchanged.
+
+Also identified the processing history-copy target `0x422a8` as the existing reconstructed overlap-aware memmove logic. Added backup builder `build_gx8002_backup_memmove.py`; it compiles reviewed C to 38 bytes within the 40-byte backup envelope, binding the forward case to source memcpy's address. Backup decoded overlap/ABI verification and integration remain next work; this candidate is not yet source-linked.
+
+### Backup memory move behavior verified
+
+Added `verify_gx8002_backup_memmove.py`, adapting the existing decoded verifier to backup entry `0x10009968` and memcpy target `0x10011344`, including stock's zero-count branch. All 4,355 shift/count cases pass for final memory, original destination return, access order and saved ABI. Another 266 forward-overlap cases execute decoded backup stock memcpy and the currently linked source memcpy, matching an independent snapshot-copy oracle.
+
+The initial nested test exposed a truncated stock memcpy disassembly range; corrected the range to its actual next-function boundary `0x49d04` and reran successfully. This was a verifier coverage issue, not a source fallback. The 38-byte memory-move candidate remains standalone pending startup integration. Tests use valid nonwrapping RAM and helper-boundary execution; no hardware timing or asynchronous mutation qualification is claimed. Full-image admission totals remain unchanged.
+
+### Memory move source-linked; sample shift candidate fits
+
+Integrated the verified 38-byte backup memory move into the startup cluster, resolving its forward copy to allocated source memcpy. The native macOS build passed (`/tmp/g2-startup-backup-memmove.log`, exit 0), including standalone bytes/addresses, required symbols and unresolved-link/overlap checks. Processing inventory now has four of six direct targets source allocated. Retained-stock counts remain unchanged.
+
+Added `runtime_gx8002_imcra_sample_shift.c` and its backup builder for entry `0x1000e28c`. The candidate uses C loops and explicit symbolic C-SKY asr/lsl instructions, retaining target shift-count semantics without undefined C wide shifts. This is explicitly mixed C/assembly source, not extracted opcodes. The portable fallback is scoped to shifts -31..31. An initial indexed loop exceeded placement; pointer/count iteration now compiles to 48 bytes within the 56-byte envelope. Decoded sample/shift behavior, edge counts and integration remain pending; no admission is claimed.
+
+### Sample shift decoded behavior verified
+
+Added `verify_gx8002_imcra_sample_shift.py`. All 196,895 stock/candidate comparisons pass: every signed 16-bit sample at shifts -15, 0 and 1; extrema across every shift -31..31; nonpositive count/no-access paths; and seeded arrays through 512 samples. Checks exact ordered reads/writes, final memory and preserved registers, with an independent nonsaturating shift oracle. Shift zero still reads and writes each sample as stock does.
+
+The executor explicitly rejects instruction shift magnitudes above 31, so this test does not assume undocumented masking or saturation behavior for larger counts. Target source retains the same symbolic asr/lsl instructions for those cases, but they remain unqualified. The 48-byte candidate remains standalone pending startup integration. Retained-stock and full-image admission counts are unchanged.
+
+### Sample shift source-linked; existing FFT placement revalidated
+
+Integrated the 48-byte mixed C/assembly sample-shift candidate into the startup cluster. Native macOS build passed (`/tmp/g2-startup-imcra-shift.log`, exit 0), including required allocation, standalone bytes/address preservation and unresolved-link/overlap checks. Processing inventory now has five of six direct targets source allocated. Shift magnitudes above 31 remain outside decoded test qualification; original target shift instructions are retained as source mnemonics.
+
+Rebuilt the existing fully source-generated placed RFFT component: code spans use 346/348, 1,650/1,654 and 424/480 available bytes, with source descriptors and regenerated coefficients. Re-ran 24 linked RFFT cases through `verify_gx8002_source_rfft_cluster.verify(shared_radix4=True, shared_by2=True, generated_reverse=True, placed=True)` successfully. The component retains the external RFFT entry but repacks helpers and uses former bit-reversal table space for code, so startup merge must preserve its object-scoped layout and confirm reference/alias constraints. It is not yet merged into the startup cluster. Full-image admission and retained-stock accounting remain unchanged.
+
+### Source FFT merged into startup cluster
+
+Integrated the placed source RFFT component, generated coefficients and descriptors into the native macOS startup cluster. All linker selectors/discards are object-scoped; the RFFT entry and descriptor addresses remain fixed. Repacked helper code retains its established three-section layout, including the former bit-reversal table area. Complete build passed (`/tmp/g2-startup-rfft.log`, exit 0) with required symbols, standalone section bytes/addresses and unresolved-link/overlap checks.
+
+Extended the existing linked RFFT verifier with a startup-image mode. All 24 extreme/seeded forward/inverse cases pass against composed decoded stock arithmetic using the combined startup ELF, real internal source calls and its tables/descriptors. Both mutated input and output buffers match. Refreshed processing inventory now shows all six direct targets allocated to source. This does not reconstruct the 832-instruction IMCRA processing core itself. Existing reference scans remain bounded evidence rather than exhaustive computed-pointer exclusion; hardware execution permissions/timing and complete firmware admission remain unqualified. Full-image retained-stock accounting is unchanged.
+
+### Processing front-end C candidate builds on macOS
+
+Added `runtime_gx8002_imcra_prepare.c`, reconstructing processing prefix package `0x4e674` through the forward FFT call ending at `0x4e71a`. It shifts/refills history with the source memmove dependency, reloads state fields across calls, applies signed Q15 window products, clears transform padding, computes/clamps the peak shift, shifts samples and invokes the source forward RFFT descriptor. This is explicitly a separately callable development fragment, not a replacement processing entry or a stub for the unfinished algorithm.
+
+Added native macOS builder `build_gx8002_imcra_prepare.py`. Compilation and standalone linking pass at 176 bytes with no unresolved symbols/relocations; each helper binding is checked against an allocated symbol in the existing startup ELF. The helpers themselves are not copied into this standalone ELF. Inspection confirms the compiler emits signed halfword multiplication, target signed extraction of product bits, max-with-minus-nine and the expected six helper calls. Decoded behavior, helper mutation tests and whole-processing composition remain pending. The fragment is not startup-integrated, and complete firmware admission/retained-stock accounting is unchanged.
+
+### Processing front-end decoded comparison passes
+
+Added `verify_gx8002_imcra_prepare.py`: 336 stock/candidate prefix executions agree on ordered state/sample reads and window stores, helper call arguments, final modeled memory, selected shift and FFT input. Cases span positive frame lengths 1 through 512, zero/full/intermediate hop sizes, transform padding, zero/extreme/seeded samples and helper-boundary state mutations (hop after first move; FFT output pointer after sample shift). An independent array-level oracle also checks history refill, signed Q15 products, peak/clamp and final prepared FFT samples.
+
+This is bounded prefix verification through the forward FFT call. Stack/FPU prologue preservation is excluded; memory/peak/shift helpers are models and the FFT call records input rather than executing its body. Actual source FFT has separate earlier verification. Nonpositive/huge invalid frame configurations and complete processing remain unqualified. No startup integration, full-image source admission or retained-stock accounting changed.
+
+### Power-spectrum processing block reconstructed and checked
+
+Added `runtime_gx8002_imcra_power_spectrum.c` for stock block package `0x4e71a..0x4e776`. The candidate converts signed Q15 complex FFT bins to scaled power, preserving the separately rounded imaginary-square multiplication before the multiply-accumulate. Shift is scoped to -9..1, produced by the preceding signed-Q15 peak/clamp. Native macOS builder `build_gx8002_imcra_power_spectrum.py` produces a 98-byte standalone section (including alignment) with no unresolved symbols/relocations.
+
+Added `verify_gx8002_imcra_power_spectrum.py`: 396 decoded stock/candidate cases pass with exact nonstack read traces, power output addresses/bits, and candidate stack restoration. Covers negative/zero/positive bin counts through 257, every reachable shift, zero/extreme/seeded inputs, and rational binary32 separate/fused MAC models. The candidate compiler moves scale calculation after the empty-bin branch; this has no observed nonstack effect in the tested finite domain. This remains a development block, not a complete processing entry, and has not been startup-integrated. Hardware FPU behavior, aliasing and whole-processing composition remain unqualified. Full-image admission and retained-stock accounting are unchanged.
+
+### Prior-ratio and preliminary gain update reconstructed
+
+Added `runtime_gx8002_imcra_prior_update.c` for noninitial-frame processing block package `0x4e77e..0x4e828`. The source reconstructs the regularized power/noise ratio, previous-gain prediction, nonnegative excess, alpha-weighted prior estimate, floor clamp, preliminary Wiener gain, weighted ratio and posterior history stores. The epsilon uses the decoded float constant's exact bit representation; it is algorithmic data, not executable binary pull-through. A volatile intermediate preserves the separately rounded prediction multiply before the MAC.
+
+Native macOS builder emits 228 bytes with no unresolved symbols or relocations. `verify_gx8002_imcra_prior_update.py` passes 48 decoded comparisons: lengths 1/2/3/257, alpha 0/0.92/1, zero/seeded finite nonnegative arrays and both separate/fused rational binary32 accumulator models. Exact nonstack reads, four ordered stores per bin and output bits match. Tests are limited to positive-bin noninitial-frame operation with the observed floor; NaNs, aliasing, hardware and whole-processing composition remain unqualified. The standalone block is not startup-integrated. Full-image admission and retained-stock accounting remain unchanged.
+
+### Spectrum smoothing reconstructed across edges and interior
+
+Added `runtime_gx8002_imcra_smooth.c`, reconstructing processing block package `0x4e828..0x4e930`: direct temporal smoothing at the two spectrum edges and kernel-weighted temporal smoothing in the interior. The observed radius-zero initializer path is included; it still loads the scalar kernel and performs the same multiply-accumulate sequence. Source uses explicit separately rounded intermediate products at the stock accumulation boundaries.
+
+Native macOS builder produces a 322-byte standalone section with no unresolved symbols/relocations. `verify_gx8002_imcra_smooth.py` passes 84 decoded comparisons across 0/1/2/3/8/257 bins, valid radii including zero and half-width, alpha 0/0.9/1, seeded finite nonnegative data, normalized kernels and separate/fused rational binary32 models. Exact nonstack reads, ordered output writes and result bits match. An additional alpha=1 invariant confirms the prior smoothed values remain unchanged. Tests do not cover invalid radii, aliasing or hardware behavior. This is a standalone development block; combined processing placement/composition is pending and its size is not claimed to fit the original block envelope. Full-image admission and retained-stock accounting remain unchanged.
+
+### Minimum tracking and noise-mask classification reconstructed
+
+Added `runtime_gx8002_imcra_minimum_mask.c` for processing block package `0x4e930..0x4e9d0`. It completes the full minimum-update pass before classifying bins, preserves strict threshold comparisons and conditionally reads the second threshold and smoothed value only after the power test passes. The mask is stored as float zero/one, matching stock's integer bit stores. Native macOS build produces 174 bytes with no unresolved symbols/relocations.
+
+`verify_gx8002_imcra_minimum_mask.py` passes 54 decoded comparisons covering negative/zero counts, lengths through 257, default/unit/zero threshold configurations and random/zero/equal finite arrays. Exact nonstack read and write traces and result bits agree, including short-circuit reads and equality boundaries. Mask output values are independently constrained to float zero/one. NaNs, aliasing, hardware and whole-processing composition remain unqualified. This standalone block is not startup-integrated; full-image admission and retained-stock accounting remain unchanged.
+
+### Mask-weighted spectrum smoothing reconstructed
+
+Added `runtime_gx8002_imcra_masked_smooth.c` for processing block package `0x4e9d0..0x4eb66`. It reproduces mask-controlled edge updates, interior weighted power/weight accumulation, normalization and the zero-weight self-update. The latter deliberately retains stock's rounded arithmetic instead of assuming it is a no-op. Native macOS build produces 448 bytes with no unresolved symbols/relocations; this is a standalone development fragment, not an original-envelope fit or complete processing entry.
+
+`verify_gx8002_imcra_masked_smooth.py` passes 252 decoded comparisons: bins 0/1/2/3/8/257, valid radii through half-width, default/unit/zero alpha, normalized kernels, zero/one/alternating masks and both rational binary32 MAC models. Exact nonstack reads and writes and output bits match. The alpha=1 invariant independently confirms retained estimates. The disassembly includes literal-pool bytes, but execution follows actual control flow and never treats them as instructions. Invalid radii, aliasing, hardware behavior and full processing composition remain unqualified. Full-image admission and retained-stock accounting remain unchanged.
+
+### Probability-estimation source candidate builds
+
+Added `runtime_gx8002_imcra_probability.c` for positive-bin processing block package `0x4eb66..0x4ec8c`, including secondary minima, mode-2 choice of primary minima, threshold branches and the intermediate probability estimate. Stock's exponential approximation converts a scaled float to uint32 and immediately reinterprets that integer bit pattern as float. Source preserves this union bit reinterpretation rather than replacing it with a numerical conversion or upstream exp routine. The reciprocal is explicitly emitted as a symbolic `frecips` instruction, making this a mixed C/assembly fragment, not pure C or extracted binary.
+
+Native macOS builder emits 336 bytes with no unresolved symbols/relocations. An initial generic floating-register constraint failed; the checked local C-SKY GCC constraints declare `v` for the vector/FPU register bank, and the corrected source compiles. Decoded branch/arithmetic verification, float-to-uint domain qualification and FPU reciprocal behavior remain pending. Standalone compiler success is not source admission or complete processing integration. Full-image retained-stock accounting is unchanged.
+
+### Probability block decoded comparison passes
+
+Added `verify_gx8002_imcra_probability.py`. All 288 stock/candidate comparisons pass for exact nonstack reads/writes and result bits: positive bin counts 1/2/17/257, modes 0/2 with distinct primary/secondary minima, six threshold scenarios, approximation weights 0/0.25/8 and both separate/fused rational binary32 accumulator models. Cases exercise zero/one/intermediate outcomes, threshold equality and mode-dependent pointer reloads. Float-to-uint conversion explicitly asserts finite nonnegative values below 2^32 before truncation, preserving the resulting bit reinterpretation.
+
+The reciprocal executor models correctly rounded 1/x. This is an explicit numerical-model limitation, not evidence that physical `frecips` has that accuracy; source retains the original instruction. NaNs, out-of-range conversions, aliasing, hardware, and whole-processing integration remain unqualified. The prior standalone candidate is unchanged; full-image source admission and retained-stock accounting remain unchanged.
+
+### Probability-weighted noise update and histories reconstructed
+
+Added `runtime_gx8002_imcra_noise_update.c` for positive-bin block package `0x4ec8c..0x4ed32`. It computes the probability-adjusted smoothing coefficient, updates noise power, applies the bias and completes both minimum-history passes. Native macOS builder emits 390 bytes without unresolved symbols/relocations. The standalone wrapper reloads four pointers held live by stock; this difference is explicit and must be resolved or justified in full processing composition.
+
+`verify_gx8002_imcra_noise_update.py` passes 72 decoded comparisons: counts 1/2/17/257, probabilities 0/0.5/1, alpha 0/0.85/1, observed bias 1.47, seeded finite nonnegative arrays and both rational binary32 MAC models. Output bits, four ordered writes per bin and data/parameter reads match. The four wrapper-only pointer reads are explicitly excluded, assuming stable pointers; asynchronous mutation, aliasing, hardware and complete caller composition remain unqualified. This is still a standalone development block, not startup integration or full-image source admission. Retained-stock accounting is unchanged.
+
+### Gain application, inverse FFT and overlap-output candidate builds
+
+Added `runtime_gx8002_imcra_synthesize.c` for processing package `0x4ed44..0x4ee50`, excluding the original function epilogue. The candidate applies the float gain to each complex Q15 bin, derives inverse scaling, invokes the source inverse RFFT, restores scaling, computes overlap output, saves the next overlap tail and increments the frame count with uint32 wrap. It preserves stock's halfword narrowing before normalization and the sign extraction of product bits 29..14; the resulting -32768 alone is clamped to -32767. This is not general saturating overlap-add.
+
+Native macOS builder emits a 360-byte standalone section with no unresolved symbols/relocations. Peak, sample shift, inverse descriptor and RFFT bindings are required to exist as allocated symbols in the startup source cluster; their code is not copied into this standalone ELF. Decoded complete synthesis, helper mutations, conversion ranges and shared caller state remain to be verified. Periodic history rotation and first-frame paths still need reconstruction before composing the entire processing routine. No startup integration, full-image source admission or retained-stock accounting changed.
+
+### Synthesis overlap/output block decoded comparison passes
+
+Added `verify_gx8002_imcra_overlap.py`, executing stock package `0x4edd4..0x4ee50` and the corresponding compiled synthesis tail. All 90 comparisons pass for exact ordered memory effects and final memory: frame sizes 0/1/2/3/256/512, zero/half/full hops, seeded/extreme/zero values and normal/wrapping frame counters. Independent array-level oracles check output halfword wrapping/clamp, next overlap tail and counter increment.
+
+This verifies output assembly after the final shift, not the preceding gain application, peak/shift/inverse FFT calls, synthesis entry-to-return ABI or hardware. Those composition checks remain pending. No startup integration, full-image admission or retained-stock accounting changed.
+
+### Synthesis gain application decoded comparison passes
+
+Added `verify_gx8002_imcra_gain.py` for stock package `0x4ed44..0x4ed9c` and the compiled synthesis opening block. All 126 cases agree on ordered nonstack reads/writes and final complex sample values: negative/zero/positive bin counts through 257, zero/extreme/seeded Q15 inputs and gains 0/0.25/0.5/0.9/1/2/-0.5. An independent host binary32 multiplication/truncation oracle checks every written halfword, including nonsaturating wrap. Stock's temporary stack float-to-int transfer is modeled but excluded from the nonstack trace comparison; the candidate uses register transfer instead.
+
+This closes the standalone gain-loop check, not synthesis helper composition or ABI/hardware qualification. Full synthesis now has separately checked gain and overlap/output blocks; the peak/shift/inverse FFT chain between them still requires combined execution. Full-image admission and retained-stock accounting are unchanged.
+
+### Synthesis helper-call sequence verified with state mutations
+
+Added `verify_gx8002_imcra_synthesis_calls.py` for stock package `0x4ed9c..0x4edd4` and the compiled synthesis middle block. All 660 comparisons pass for exact state-read/helper-call traces: six FFT lengths including uint32 wrap boundaries, all forward shifts -9..1, five modeled peak results and stable/mutated helper states. Independent assertions check all four helper calls, inverse descriptor address, retained original length for the first shift, pointer reloads and restored shift `-9-forward-peak`. Helper boundaries clobber caller registers; mutation cases change count after peak, both pointers after the first shift, and work pointer/count after inverse FFT.
+
+Helpers are explicit models, not executed. Wide count cases qualify argument arithmetic only, not valid memory operations. This completes separate checks of gain, helper-call sequence and overlap tail but does not yet prove one continuous synthesis entry-to-return execution, nested source FFT behavior or ABI/hardware qualification. Full-image admission and retained-stock accounting remain unchanged.
+
+### First-frame processing initialization candidate builds
+
+Added `runtime_gx8002_imcra_first_frame.c` for package `0x4ef88..0x4f0d4`: raw-bit power copies at spectrum edges, ordered kernel accumulation in the interior, initialization of masked spectrum/minima/noise arrays and both history matrices. Copy lengths and pointers reload across external calls; history count is re-read each iteration. After this block, stock continues through the normal prior-estimation path rather than skipping the first processed frame.
+
+Native macOS builder emits 332 bytes with no unresolved symbols/relocations and checks that the sole external memcpy binding is allocated in the startup source cluster. No unnecessary FFT-generated header dependency is introduced. Decoded behavior, helper mutations, first-frame composition and placement remain pending. The candidate assumes valid dimensions and kernel radius and is not startup-integrated. Full-image admission and retained-stock accounting are unchanged.
+
+### First-frame decoded execution passes
+
+Added `verify_gx8002_imcra_first_frame.py`. All 144 stock/candidate cases pass across bin counts 0/1/2/3/17/257, valid radii 0/1/3, history counts 0/1/4, both rational binary32 MAC models, and stable/mutated copy boundaries. Modeled copy calls clobber caller registers; mutations reduce the bin count after the first copy and history count after a history pair. State/data-read and copy-call sequences match, as do ordered writes. Reads/calls and writes are recorded separately, so this is not a single interleaved memory trace.
+
+The executor covers smoothing and all initialization copies through the history loop. Copy bodies are modeled and caller prologue/epilogue ABI is excluded. Valid dimensions and finite powers/kernels are assumed; nested helper, aliasing, hardware and full processing composition remain pending. No startup integration, full-image admission or retained-stock accounting changed.
+
+### Periodic history rotation candidate builds
+
+Added `runtime_gx8002_imcra_history_rotate.c` for the package `0x4ed32` gate and `0x4ee6a..0x4ef6e` rotation branch. The gate tests `(frame+1) % period`; the slot uses `(frame/period) % histories`. The source stores both current minima into their history slots, initializes global minima from slot zero, performs paired minimum reductions through later slots and resets current minima from smoothed spectra. Counts and pointers reload across external copies as decoded.
+
+Native macOS builder emits 270 bytes with no unresolved symbols/relocations and an allocated source memcpy binding. This candidate's explicit domain requires nonnegative frame below INT32_MAX, positive period/history count and valid arrays, including across modeled helper changes. Decoded verification remains pending. It is not startup-integrated or a complete processing replacement. Together with the earlier candidates it supplies the remaining major processing branch, but whole-function composition, behavior, placement and entry-to-return validation are still required. Full-image admission and retained-stock accounting remain unchanged.
+
+### Periodic history rotation decoded comparison passes
+
+Added `verify_gx8002_imcra_history_rotate.py`. All 296 cases pass for the stock gate/rotation and source candidate: bins 0/1/3/257, history counts 1/2/4, periods 1/2/5, nonrotation/rotation/slot-wrap frames, and stable/mutated copy boundaries. Copies clobber caller registers; mutation cases reduce count after the first copy and histories after the fourth. State/data-read and copy-call sequences match, and ordered writes match separately. Independent checks confirm the rotation gate, six-copy count and selected history-slot address.
+
+The verifier stops before stock's final bin reload into its continuing caller and excludes candidate prologue/epilogue ABI. Memcpy bodies are modeled; nonnegative bounded frame, positive divisors and valid arrays remain explicit assumptions. Combined processing composition, nested helpers, placement and hardware remain pending. Full-image admission and retained-stock accounting are unchanged.
+
+### Reconstructed processing stages composed into one buildable candidate
+
+Added `runtime_gx8002_imcra_process.c`, connecting preparation, power conversion, first-frame setup, prior/gain estimation, smoothing/masks, noise updates, periodic history rotation and synthesis. `build_gx8002_imcra_process.py` compiles all 12 source files and links their real stage calls into one standalone candidate on macOS. Source hashes, header hash and allocated source-helper bindings are recorded. Build passes with no unresolved symbols/relocations at 3,272 bytes.
+
+This is a development composition with stable initialized state assumptions. Wrapper stage boundaries introduce pointer/count reloads relative to stock's live registers, and separate stage tests do not prove combined behavior. Its size exceeds the original processing span; no replacement placement or startup integration is claimed. Next required work includes continuous execution, ABI/shared-state analysis, nested helper composition and size/layout work. Full-image admission and retained-stock accounting remain unchanged.
+
+### Native link-time optimization size experiment
+
+Added `probe_gx8002_imcra_process_lto.py`. It compiles every reconstructed stage with the native macOS C-SKY GCC LTO pipeline, retains the processing entry explicitly and checks that it is allocated, all external source-helper bindings retain their addresses, and there are no undefined symbols or relocations. LTO reduces the complete development candidate from 3,272 to 3,048 bytes. Adding `-fno-caller-saves` also yields 3,048 bytes, so it provides no further reduction here.
+
+These are separate size experiments; the ordinary candidate remains available for behavioral work. Inlining changes instruction layout and does not inherit standalone stage verification. Neither LTO candidate has established full stock equivalence, original-span fit, startup placement or hardware operation. Full-image source admission and retained-stock accounting remain unchanged.
+
+### Composed processing entry dispatch and saved registers checked
+
+Added `verify_gx8002_imcra_process_dispatch.py`, executing the real compiled composed entry with stage-boundary models. All 72 cases match authored stage-order/argument expectations across bins 0/1/257, initial/noninitial frames, four forward shifts and stable/mutated stage states. Checks include retained input/output/shift, first-frame bin/frame reload, radius reload, post-rotation count reload, caller register clobbers and restored integer saved registers/stack/link register.
+
+This is a candidate-wrapper test, not whole-function stock equivalence. Stage bodies are not executed and mutations establish wrapper behavior only; stock equivalence under those changes is not claimed. Shared stage stack, nested helpers, FPU state, physical FFT/reciprocal behavior, placement and hardware remain pending. Full-image source admission and retained-stock accounting remain unchanged.
+
+### First continuous processing comparison passes
+
+Added `execute_gx8002_imcra_process.py`, extending decoded execution to nested internal calls sharing one byte memory, register file and stack, with saved integer/FPU ABI checks at final return. Unsupported instructions fail closed; missing bytes fail rather than defaulting silently. A nested-call smoke check passed.
+
+Added `verify_gx8002_imcra_process_continuous.py`. One complete first-frame zero-input execution of stock and the composed candidate passes for identical final nonstack memory and preserved ABI. Candidate stage bodies execute continuously; fixture state comes from the source initializer under its helper models. Memory, peak and shift helpers remain modeled. FFT output is explicitly forced to zero, so this is a zero-signal control/composition check, not a real FFT or general-signal proof. Ordered reads/whole traces are not compared. Further frame sequences, real nested FFT composition, nonzero signals, placement and hardware remain required. Full-image admission and retained-stock accounting are unchanged.
+
+### Continuous zero-input frame sequences verified
+
+Extended `verify_gx8002_imcra_process_continuous.py` to four persistent-memory sequences: modes 0/2 and separate/fused binary32 accumulator models, each running 12 successive frames. All 48 stock/source comparisons pass for complete nonstack memory after each frame, saved ABI, incrementing frame count and zero output. This traverses initial setup, subsequent-frame estimation and periodic history rotations without reinitializing state between frames.
+
+FFT outputs remain deliberately forced to zero, so these results do not establish general signal behavior. The existing `verify_gx8002_source_rfft_cluster.execute` accepts input samples, descriptor and source table memory and returns both mutated input and output; it is available for the next helper-boundary integration. That integration has not yet happened. Full-image source admission and retained-stock accounting remain unchanged.
+
+### Continuous processing with actual source FFT passes impulse sequences
+
+Extended the continuous verifier with `concrete_fft=True`. The startup cluster's actual compiled RFFT and source tables/descriptors execute in the existing decoded FFT engine at every forward/inverse helper boundary, returning both mutated input and output buffers to the processing memory. All 16 comparisons pass over four-frame impulse sequences, both modes and both binary32 MAC models. Complete nonstack memory matches after every frame, processing ABI checks pass, and all 16 output frames contain nonzero samples.
+
+Both stock and reconstructed processing callers use the same compiled source FFT boundary in this test. Stock FFT equivalence therefore relies on the separate prior decoded FFT comparisons; stock FFT itself is not executed here. FFT has its own register/stack execution model, and other helpers remain modeled. Shared nested FFT stack, ordered reads, broader signals, placement and hardware remain unqualified. Full-image source admission and retained-stock accounting are unchanged.
+
+### Continuous source-FFT checks broadened beyond impulses
+
+Extended the continuous verifier with reproducible signal selection and separate signal reports. Added 997 Hz tone, seeded bounded noise and alternating int16-extreme streams. All 48 added frame comparisons pass (16 per signal across both modes and both MAC models), with identical final nonstack memory, preserved processing ABI and nonzero output on every tested frame. Existing impulse coverage remains separate.
+
+Both callers still use the compiled source FFT in a separate helper-boundary executor; other helpers remain modeled and physical reciprocal/FPU behavior is unqualified. These tests cover four-frame sequences per mode/model, not arbitrary signals or long-duration stability. No placement, startup integration or full-image admission is established, and retained-stock accounting remains unchanged.
+
+### LTO processing candidate passes continuous noise comparison
+
+Added `lto=True` to the continuous verifier, rebuilding the LTO candidate, resolving its actual entry symbol and recording optimization evidence separately. All 16 seeded-noise frame comparisons pass across modes 0/2 and both rational MAC models, with complete final nonstack memory equality and saved processing ABI checks. The source FFT executes at helper boundaries as in the ordinary candidate tests.
+
+Inspection of the optimized disassembly shows one processing function: LTO has already inlined all internal stage boundaries, so remaining size is not explained by retained stage-call wrappers. At 3,048 bytes the candidate still exceeds the original span. This test does not establish broad LTO signal coverage, physical reciprocal behavior, helper stack composition, placement or full-image admission. Retained-stock accounting is unchanged.
+
+### Register-intermediate size experiment verified on noise sequence
+
+Expanded LTO probes: disabling tree loop optimization reduces 3,048 to 3,032 bytes; disabling caller saves/IV optimization adds no further reduction. A separate generated-source experiment replaces only local scalar `volatile float` intermediates with float-register barriers (`asm("" : "+v"(...))`), preserving explicit compiler contraction boundaries without stack stores. It produces 2,932 bytes. Canonical stage sources remain unchanged; generated variants live under the experimental build directory.
+
+Continuous source-FFT noise verification passes all 16 frames for the register-barrier candidate under both modes and both MAC models. The first run stopped on unsupported `inct`; implemented conditional register assignment using semantics already present in other local decoded executors, then reran successfully. This is not yet original-span fit, full signal qualification or adoption into canonical source. Placement, broader behavioral evidence and full-image integration remain required; admission and retained-stock accounting are unchanged.
+
+### Continuous comparison now uses distinct stock and source FFT implementations
+
+Added `gx8002_imcra_stock_fft.py`, authenticating the stock image/wrapper and composing the existing decoded stock radix/split kernels with explicit reversal/scaling. Added `stock_fft=True` to continuous verification so stock processing consumes this decoded stock arithmetic while the reconstructed caller consumes the compiled startup source RFFT. Both ordinary and 2,932-byte register-barrier candidates pass 16 noise frames each across both modes and MAC models, with final memory equality and saved processing ABI checks.
+
+This removes the previous shared-source-FFT assumption from these two reports. Stock wrapper dispatch/reversal composition remains modeled and both FFTs execute at separate helper boundaries, not on the processing stack. Other helpers remain models; physical FPU/reciprocal, ordered reads, placement and complete firmware integration are still unqualified. Full-image admission and retained-stock accounting remain unchanged.
+
+### Additional size probes show limited compiler-only savings
+
+Expanded register-barrier probes without changing source algorithms or contraction policy. Disabling instruction scheduling remains 2,932 bytes; disabling block reordering gives 2,930; disabling branch-probability guessing gives 2,920; disabling once-called-function inlining grows to 2,988. These new variants are size measurements only and have not inherited the previous candidate's continuous verification.
+
+A bounded scan of research reports with top-level `bytes` and `envelope_bytes` found no reported single replacement with at least 220 bytes of spare envelope. This is not an exhaustive memory-map/reclaimability analysis and does not justify borrowing any unknown region. Placement remains unresolved; further work needs source/layout restructuring or evidence-backed reclaimed space, rather than more equivalent flag sweeps. Full-image admission and retained-stock accounting remain unchanged.
+
+### Shared minimum scans substantially reduce processing size
+
+Added a generated-source `lto-register-barriers-shared-min` experiment. It replaces four independent minimum loops with one noinline source helper, leaving the paired/interleaved history reduction untouched. Initial size was 2,736 bytes, but continuous execution caught modified high FPU registers without preserved stock values. Reserving vr8 alone moved allocation into another high register; reserving vr8..vr15 avoids that mismatch and produces 2,740 bytes.
+
+The corrected candidate passes 16 continuous noise frames with distinct decoded stock and compiled source FFT paths, both modes/MAC models, identical final memory and saved-register checks. Canonical stages remain unchanged. This experiment still exceeds the original span and is not placed or admitted; broad signals, entry placement and full-image integration remain pending. Full-image retained-stock accounting is unchanged.
+
+### IMCRA processing now fits an experimental two-section source layout
+
+Changed the generated shared minimum helper to a pointer/count loop and ordered the processing entry first. The combined candidate shrank from 2,740 to 2,732 bytes. Added `build_gx8002_imcra_process_placed.py`: native macOS C-SKY compilation places 2,696 bytes at the original entry 0x10015d34 (2,714-byte envelope) and the 36-byte minimum helper at 0x1001459c. The helper occupies part of the 56-byte spare source-FFT code envelope ending at 0x100145d4. The builder checks the existing startup allocation map for overlap, exact entries, section capacities, unresolved symbols and relocations, and records ELF hashes/compiler flags. This is compiled source, not extraction from a firmware binary.
+
+Added `placed=True` continuous verification. The placed candidate passes all 64 frame comparisons across impulse, 997 Hz tone, seeded noise and alternating int16 extrema, modes 0/2 and separate/fused MAC models. Every tested frame has nonzero output; final nonstack memory matches decoded stock processing with distinct stock/source FFT paths and processing saved-register checks pass.
+
+The startup linker has not yet incorporated this candidate. FFT donor reference/permission closure retains its previous limitations; stock FFT wrapper/reversal and other helpers remain modeled, FFT stack execution remains separate, and physical FPU/reciprocal behavior is unqualified. No full-image admission or retained-stock accounting changed. Next work is source-object integration into startup, preserving helper bindings and proving section bytes/addresses, followed by integrated verification.
+
+### IMCRA source processing integrated into the macOS startup ELF
+
+The placement builder now saves GCC's source-derived LTO assembly and assembles it into `process-native.o`, a normal relocatable input with the eight expected symbolic helper/data references and no LTO sections. Relinking this object reproduces both verified allocated sections byte-for-byte. No firmware image bytes are extracted for this object.
+
+The startup builder now includes this native object, scopes its linker selectors, places `.imcra_process` at 0x10015d34 and `.imcra_minimum` at 0x1001459c, and removes standalone absolute helper assignments so the existing source components satisfy every dependency. The native macOS startup build passes required-symbol ownership, exact standalone section bytes/addresses, unresolved-symbol/relocation, allocation-overlap and LOAD permission checks.
+
+Added startup selection to continuous verification, including allocated ownership checks for the processing entry, minimum helper and all eight direct references. The integrated ELF passes 16 seeded-noise frames with distinct decoded stock/source FFT paths, both modes and MAC models, matching final nonstack memory and preserved processing registers. Existing standalone four-signal coverage applies to identical processing section bytes, but is not an integrated hardware test. Other helper models and separate FFT stack execution remain limitations. Full-image admission and retained-stock accounting are unchanged; complete firmware still contains unresolved opaque functionality.
+
+### Began reconstructing beamforming spectrum preparation
+
+Refreshed the denoise tick census against the integrated startup ELF: 16 of 22 direct targets now resolve to allocated source functions. Inspected the beam spectrum wrapper at package 0x467d4 and its core at 0x45be4..0x45dac. Added a C development reconstruction of that core, including ring-slot selection, shared peak normalization, per-channel window multiplication with explicit low-word wrap, padding and forward RFFT dispatch. The pinned SDK denoise caller identifies the public path as `beamforming_triMic_spectrums`; the SDK tree does not provide the beamforming implementation at the expected GSC paths.
+
+The native macOS builder emits 276 bytes within the 456-byte core envelope, with no unresolved symbols or relocations after explicit development bindings. This is build evidence only: decoded behavior still needs comparison, and peak/saturating-shift/fill bindings remain unresolved source dependencies. No startup integration or full-image admission was made for this candidate. Next work is decoded core verification and matching the DSP helpers to pinned upstream source, retaining the stock saturation and window rounding behavior.
+
+### Beam spectrum core passes bounded decoded comparison
+
+Added `verify_gx8002_beam_spectrums.py`, executing the decoded stock core and compiled C core with shared register/memory semantics and explicit input-sensitive helper models. All 180 cases pass across 0/1/2/3 channels, 1/7/32 samples, ring slots selected by frames 0/1/5 and amplitudes 0/1/128/32767/32768. Compared return value, final nonstack memory, ordered nonstack writes/helper arguments and saved integer/FPU ABI. Window coefficients include values that exercise low-word multiplication wrap.
+
+Extended the decoded executor for the observed integer bitfield, byte/halfword extension, AND and bounded register logical-shift instructions; unsupported shifts above 31 still fail. DSP peak/shift/fill are modeled and FFT uses an input-sensitive stand-in, so this establishes bounded core control/dataflow behavior, not DSP helper correctness or numerical FFT composition. The source candidate remains unintegrated and unadmitted; complete firmware accounting is unchanged.
+
+### Pinned upstream Q15 fill builds unchanged on macOS
+
+Fetched the missing promisor blobs for pinned SDK C fill and shift sources. Added a builder for unchanged `utility/libdsp/Source/SupportFunctions/csky_fill_q15.c`, blob 18b2a19307133ce846bc2f317f43d0176fbc99da at SDK commit 8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5. ARM/T-HEAD Apache-2.0 notices are retained in the generated source. A minimal integer-type header and scalar configuration avoid architecture-specific header dependencies; a compile definition provides the reconstructed helper symbol.
+
+The fill builds to 16 bytes in its 40-byte envelope without external dependencies. All 110 compiled-code byte-array oracle cases pass, covering lengths 0..512, saturation-boundary bit patterns and two halfword alignments, including surrounding sentinels and saved-register checks. This is not yet decoded stock packed-store equivalence or startup integration. The upstream shift C source has signed-left-shift expressions requiring explicit review before reuse; no shift source adoption was made. Full firmware admission and retained-stock accounting remain unchanged.
+
+### Upstream fill compared against decoded packed stock implementation
+
+Added a dedicated decoded fill comparison using the established counted-loop and postincrement memory model. All 1,285 cases pass for lengths 0..256 and five halfword values: final memory and ordered byte-write expansion agree, and saved registers are preserved. This explicitly allows halfword versus packed word transactions; it does not establish atomicity, MMIO or unaligned destination equivalence.
+
+Added the pinned source fill object to the startup builder with an object-scoped section at 0x1000f1ac, required allocated symbol and standalone section byte/address checks. The native startup build completed successfully, including exact component bytes/addresses, allocated symbol ownership, no unresolved relocations/symbols, allocation overlap and LOAD permission checks. No full-image admission or retained-stock accounting change is implied.
+
+### Adapted pinned Q15 shift source builds and passes bounded arithmetic checks
+
+Added `build_gx8002_beam_shift_q15.py` using SDK blob 96d836b060039001d522d25907a72f47ed8392a9, preserving ARM/T-HEAD Apache-2.0 source notices. In the selected scalar branch, replaced undefined signed left shift with bounded multiplication followed by Q15 saturation, and bounded arithmetic right shift before applying the target's signed shift. The builder records exact upstream provenance and these source adaptations. No firmware bytes are used as build input.
+
+The native candidate is 148 bytes versus the original 116-byte span, so it is explicitly reported as not fitting and remains standalone. Added an integer-oracle verification: all 186 decoded compiled-code cases pass for shifts -15..15, zero/single/multiple samples and disjoint/in-place buffers with saturation boundaries and sentinels. Added observed `bhsz` signed-nonnegative branch semantics to the executor. This is not a decoded stock packed-instruction comparison, partial-overlap qualification or full shift-count-domain proof. Placement and stock comparison remain necessary before integration; full-image admission/accounting is unchanged.
+
+### Saturating shift candidate now fits its original span
+
+Compiler-only probes of the initial adapted source did not fit (best 140 bytes). Reworked the scalar adapter to clamp the unsigned shift count to 15 before multiplication/right shift, avoiding separate large-count return branches while preserving saturation and sign-extension results for every int16 sample. This reduced the default build to 122 bytes. Probes of this revised source found a 102-byte build with tree-loop optimization and branch-probability guessing disabled; adopted these flags and recorded source/header/ELF hashes.
+
+All 1,536 compiled-code arithmetic-oracle cases pass on the adopted 102-byte candidate across every signed 8-bit shift count, disjoint/in-place buffers, zero/single/multiple sample counts and selected boundary values. The executor now handles the observed unsigned minimum instruction. Full int8 coverage here proves only the adapter's stated scalar semantics for sampled values, not stock packed-instruction behavior outside the beamforming range. Stock comparison remains required before startup integration; no full-image admission/accounting change occurred.
+
+### Adapted upstream shift matches stock over the beamforming shift range
+
+Added `verify_gx8002_beam_shift_stock.py`, reusing the existing packed-DSP executor and authenticating its pinned upstream QEMU evidence files rather than introducing another instruction model. All 4,092 comparisons pass across counts 0..32, shifts -15..15, patterned/zero buffers and disjoint/exact in-place destinations. Final memory, ordered byte-write expansion and saved-register checks match; packed-versus-scalar read/write grouping remains different.
+
+Refreshed the shift reference census: three direct entry calls, no detected interior entries, external literal-pool references or stored address words within the scan. The other two callers still need shift-range and overlap analysis. Stock accepts full-register shifts whereas upstream C exposes int8_t, and partial overlaps differ for scalar versus packed access schedules. These are explicit integration constraints, not resolved by the passing beamforming-range tests. No startup or full-image admission change was made.
+
+### Shift caller inspection caught and corrected negative-count incompatibility
+
+Inspected the two remaining direct calls at package 0x46592 and 0x465d0. Both use identical source/destination pointers. The first receives a peak-derived 0..15 shift; the second computes a state-dependent shift and explicitly sign-extends it from a byte at 0x465cc. The latter does not itself prove a -15..15 range.
+
+A direct stock comparison at shift -32 failed for one patterned in-place sample, demonstrating that the previous clamp-to-15 right-shift adapter was incompatible with stock. Corrected the adapter to mask the right-shift magnitude to five bits before bounding to 15, matching the pinned vendor PASR model. Updated the arithmetic oracle to this recovered behavior. This changes the earlier adapter semantics for negative counts outside -31..-1; the previous broad scalar-oracle report was not stock equivalence.
+
+The corrected native candidate is 112 bytes and still fits the 116-byte envelope. All 1,536 scalar-oracle cases and 21,120 direct decoded stock comparisons pass, the latter covering -128..31, counts 0..32, zero/patterned input and exact in-place/disjoint buffers. Positive counts above 31 remain excluded because vendor zero/oversized-shift behavior is unqualified. The state-derived caller's positive range and computed-reference closure still require analysis before integration. No full-image admission or accounting change was made.
+
+### Recovered the beam output restoration-shift range
+
+Added `analyze_gx8002_beam_shift_callers.py`, authenticating stock/wrapper bytes and asserting decoded argument-transfer instructions at both remaining shift calls. Executed the stock peak-selection branch graph for all 65,536 halfword inputs: every output is in 0..15. At 0x464fc the caller sets r16 to 9; the restoration expression is 9 minus the stored spectrum shift minus the newly selected peak shift, followed by signed-byte extension. For stored shifts produced by valid spectrum preparation (0..15), the resulting range is -21..9, inside the corrected helper's direct stock comparison domain. Both calls use exact in-place buffers.
+
+This is a bounded local proof and still assumes valid spectrum-state provenance and ABI preservation; it does not prove every global state writer or computed reference, or execute the complete beam output routine. It resolves the ordinary caller's positive-large-shift concern without broadening hardware claims. No full-image admission/accounting change occurred.
+
+### Corrected shift helper integrated into native startup build
+
+Added the adapted pinned upstream shift object to the macOS startup link with an object-scoped `.beam_shift_q15` section at 0x1000f0c0, fit assertion, allocated symbol requirement and exact standalone byte/address comparison. Native startup build passes unresolved-symbol/relocation, allocation-overlap and LOAD permission checks. Integrated ELF SHA256 is 430d718d339e496a685feac26680ece129f8c1db7fde0b9f094ef246a698797b.
+
+Added integrated-ELF selection to the stock comparison and reran all 21,120 cases successfully against the actual startup code. The valid-state caller range argument and packed/scalar transaction limitations remain explicit; this is not full-image admission. Located the existing reconstructed maxabs source rather than duplicating it: rebuilt 44-byte candidate within 76 bytes and reran all 66,308 decoded cases successfully. That peak helper remains to be integrated, followed by beam spectrum composition with actual source DSP/FFT dependencies. Full-image retained-stock accounting is unchanged.
+
+### Beam spectrum and peak source linked into startup and composed
+
+Integrated the existing 44-byte peak source and 276-byte beam spectrum source into the native startup ELF, with scoped sections, exact component bytes/addresses and allocated symbol checks. Replaced standalone spectrum helper absolute assignments with linked source symbols, including an alias from `beam_peak_q15` to the reconstructed maxabs implementation. All startup linking, overlap and permission checks pass; every direct spectrum dependency is now source allocated.
+
+Added integrated spectrum verification that executes source peak, shift and fill bodies together with the spectrum core using shared registers, stack and memory. All 180 comparisons pass against stock core with helper models, matching final memory/result and preserving saved ABI. Added observed scalar ABS and unsigned maximum operations to the executor. Stock DSP bodies remain modeled at this level (individually compared in earlier checks); the FFT still uses an input-sensitive stand-in. Real FFT composition, complete beam output/initialization and full firmware admission remain pending. Retained-stock accounting is unchanged.
+
+### Beam spectrum composition passes with distinct stock/source FFT paths
+
+Extended the integrated spectrum verifier with concrete forward FFT execution, using the existing decoded stock radix/split composition and compiled startup source RFFT at separate helper boundaries. Source peak, saturating shift and fill continue to execute on the spectrum core's shared stack. Sized synthetic state/work/spectrum buffers for the actual 512-point transform and exercised channels 1/2/3, input frame lengths 256/512, ring-selected frames 0/5 and amplitudes 0/128/32768.
+
+All 36 final-memory/result and saved-ABI comparisons pass. The 24 non-silent cases each produce nonzero spectrum output; all 12 silent cases remain zero. This replaces the FFT stand-in for this report. Stock DSP helpers and stock FFT wrapper/reversal composition remain modeled, and the FFT has its own simulated register/stack boundary. It does not establish continuous streaming, complete beam output/initialization, hardware behavior or full firmware admission. Retained-stock accounting remains unchanged.
+
+### Original-address beam spectrum entry reconstructed from C
+
+Added a C public wrapper at 0x1000de94 (package 0x467d4), forwarding all three arguments to the source spectrum core and returning zero. Native compilation emits the same 10 instruction bytes as stock, checked directly against the authenticated image. Added the wrapper object to startup with scoped selectors, allocated symbol checks, original address and byte-for-byte component comparison. Added a verifier entry option to exercise the wrapper plus core/source DSP chain. The integrated native build passes, and all 180 entry/core/source-DSP comparisons pass with the FFT stand-in. The refreshed denoise tick census now resolves 17 of 22 direct targets to source functions. Prior concrete-FFT core evidence remains separate; no complete image or hardware admission is implied.
+
+### Began DRC stage initialization reconstruction
+
+Inspected the remaining DRC initializer at package 0x470c4 and its first stage constructor at 0x473b4..0x47488. Added a C development reconstruction of the 48-byte stage state, its pre-check clear, field/flag initialization, sample-rate conversion, two log(9)/time-product exponential coefficients and history reset. Static assertions enforce the recovered state size and flag offset. Field names describe inferred use; complete algorithm semantics and parameter ownership remain under reconstruction.
+
+The native macOS candidate builds to 210 bytes in its 212-byte span. The builder records source/ELF hashes and explicit memset/log/exp address bindings, with no unresolved symbols or relocations after standalone linking. This is build evidence only: float argument ABI, coefficient arithmetic, helper effects and decoded behavior still require comparison. The larger DRC chain and data parameter sets remain opaque/unintegrated; no full-image admission/accounting change occurred.
+
+### DRC first-stage ABI corrected and decoded behavior compared
+
+Compiled entry inspection exposed an ABI mismatch: the initial integer fifth-parameter declaration selected r1, but stock reads that parameter's word from the incoming stack before a second stack-passed float. Changed the parameter to a float whose representation is preserved through a union into the observed control field. The corrected native candidate occupies exactly 212 bytes.
+
+Added decoded constructor verification with explicit initial float registers and incoming stack arguments. All 54 cases pass, comparing return, final memory, ordered writes/math-helper arguments and saved ABI for rates 8000/16000/48000.5, several attack/release settings, three control representations and helper mutation of the initialized flag. Memset/log/exp remain modeled with caller clobbers. The executor now supports initial float arguments, byte memory operations, unsigned-to-float conversion, float negation and zero byte extension used by these routines. Exceptional float inputs, null clear behavior, actual math helpers and full DRC integration remain unqualified. Full-image accounting is unchanged.
+
+### DRC constructor passes with distinct stock and source log/exp execution
+
+Located and rebuilt the existing pinned Newlib log/exp implementation rather than reconstructing duplicate math code. The source build remains 568 bytes for log, 436 bytes for exp and 24 bytes of source constants, within their original envelopes. Extended the DRC constructor verifier with concrete math selection: source calls execute compiled Newlib bodies and stock calls execute decoded stock bodies, using the existing rational finite arithmetic executor and each image's constant memory.
+
+All 54 constructor cases pass with these distinct math implementations, including stack/float arguments, ordered state writes/math input arguments and initialized-flag mutation. This removes the host logarithm/exponential assumption from this report. Math wrapper dispatch and memset remain modeled; math executes with a separate simulated stack/register boundary. Startup math/constructor integration, exceptional inputs, complete DRC behavior and hardware remain unqualified. Full-image admission and retained-stock accounting are unchanged.
+
+### DRC constructor and pinned math dependencies linked as source
+
+Added a dedicated C log/exp wrapper builder that excludes the already-integrated power wrapper. Both forwarding wrappers total 16 bytes and match stock instruction bytes exactly. Added a DRC stage cluster builder linking the constructor, wrappers and pinned Newlib log/exp objects directly; wrapper/core references now resolve to allocated source symbols. Every allocated component section retains its verified bytes and address, and no unresolved symbols or relocations remain after the explicit memset binding.
+
+Cluster SHA256 is c7bb29fb8d4f39c0b5452d2036454b732bcc1bbc76e2ed2c2c7d53d867c199d2. This removes isolated math address bindings within the source cluster but does not yet integrate it into startup. Memset is still a standalone address assignment, and shared-stack math composition, exceptional behavior, full DRC and hardware remain pending. Full-image admission/accounting is unchanged.
+
+### DRC first-stage startup integration in progress
+
+Added the DRC constructor, dedicated log/exp wrapper object and pinned Newlib log/exp objects to startup. Scoped all math text/constant selectors to their source objects and removed the standalone memset assignment so the existing source memset satisfies the reference. Added required allocated-symbol and exact component section byte/address checks. Added integrated-ELF selection to the constructor/math comparison. The first link detected duplicate wrapper definitions (discarding sections does not avoid duplicate symbols) and a `.exp` output-section collision with formatter math. Added compile-time wrapper selection and namespaced DRC math sections. The corrected full native build passes component byte/address identity, allocated dependency ownership, relocation, overlap and LOAD permission checks. All 54 constructor comparisons also pass against the integrated ELF with distinct source/stock math execution at helper boundaries. Memset and math wrapper dispatch remain modeled in that execution check; shared-stack math, full DRC and hardware qualification remain pending. Full-image retained-stock accounting is unchanged.
+
+### Second DRC constructor reconstructed and behaviorally compared
+
+Added the 52-byte second-stage state constructor at package 0x47494..0x4756c, including its three stack-passed float representations, flag at offset 48, sample-rate conversion, two exponential coefficients and conditional history reset. Preserved the observed field write order; unknown parameter semantics remain explicitly descriptive rather than assigned unsupported algorithm roles.
+
+All 54 decoded comparisons pass with distinct compiled Newlib and decoded stock math helpers, several rates/time parameters/control representations and initialized-flag mutation. The candidate is 220 bytes versus its 216-byte span. Disabling caller saves or branch-probability guessing did not change the ELF bytes; retained default flags. Placement remains unresolved, and this stage is not startup integrated or admitted. Memset/math wrapper boundaries and exceptional values retain the prior verification limitations. Full-image accounting is unchanged.
+
+### Second DRC constructor fits after removing unnecessary local stack storage
+
+Removed `volatile` from the local product temporary, retaining volatile state field accesses and the multiplication/division expression order. The native constructor shrank from 220 to 204 bytes in the 216-byte envelope. All original 54 concrete-math comparisons still pass. Expanded the stack-passed second timing parameter to three independent values, and all 162 comparisons pass.
+
+Added the stage object to startup, removing its absolute helper assignments so existing source memset/log/exp symbols satisfy them. Required ownership and exact component byte/address checks are included. The native startup build passes exact component byte/address, allocated dependency, relocation, overlap and LOAD permission checks. All 162 comparisons pass again against the integrated ELF with distinct stock/source math execution. The math helper-boundary and finite-input limitations remain; no full-image admission/accounting change is implied.
+
+### Third DRC constructor reconstructed and compared
+
+Added the 64-byte third-stage constructor at package 0x47578..0x4766c. It preserves the second stage's parameter/coefficient sequence and additionally converts sample-rate times a stored float representation into a signed duration count, with an initialized flag at offset 60 and five history slots. Native C occupies 238 bytes in its 244-byte span.
+
+All 162 decoded comparisons pass using distinct compiled Newlib and stock math bodies, varying rate, timing fields, duration representations and helper flag mutation. Added startup object, helper resolution and exact section/symbol checks; native startup build passed allocated-symbol, component-byte/address, relocation, overlap and permission checks. All 162 comparisons pass again against the integrated ELF. Finite valid conversions and modeled helper-boundary limitations remain; no full-image admission/accounting change is implied.
+
+### Fourth DRC constructor reconstructed with double exponential preserved
+
+Inspected package 0x476bc..0x477a4 and added its 64-byte state constructor in C. It stores the incoming threshold/timing/rate values, derives a duration product and power-based gain, then widens each rounded float exponent to double, calls the existing double exponential entry and narrows the result back to float. This differs from the preceding stages' direct float exponential path and is preserved explicitly.
+
+The native macOS candidate occupies 206 bytes within its 232-byte span. Standalone link resolves named power/log/double-exp/conversion/memset bindings without opaque code extraction. This is build evidence only: decoded float/stack ABI, double-helper register transfers, precise arithmetic and mutation behavior remain to be compared before integration. Full-image admission/accounting is unchanged.
+
+### Fourth DRC constructor verified and startup integrated
+
+Added decoded stock/source constructor comparisons covering 27 combinations of rate, threshold and timing values. All pass for helper arguments, float/double register transfers, ordered state writes, return and saved ABI. Numeric helpers remain modeled in this check. Added its source object to the native macOS startup build, resolving all six dependencies to existing allocated source symbols. The build passes section identity/address, symbol ownership, relocation, overlap and LOAD permission checks; all 27 comparisons pass again against the integrated ELF. Concrete math composition and hardware remain unqualified; full-image retained-stock accounting is unchanged.
+
+### DRC final gain setter reconstructed
+
+Inspected top-level initialization at package 0x470c4 and its final call to 0x4766c. Added the latter setter as C: reject positive gain with -1, clear offset 60 for gain below -80, otherwise store gain dB at offset 16 and power(10, gain/20) at offset 60. The native macOS build occupies 78 bytes in the original 80-byte span. Behavioral comparison and startup integration remain pending. Top-level initialization and its parameter globals remain unreconstructed; no full-image completion is claimed.
+
+### DRC final gain setter verified and startup integrated
+
+Added decoded stock/source comparisons for the stage-four gain setter, covering the positive rejection path, the below -80 dB clear path, and finite in-range power conversion boundaries. All 10 standalone comparisons pass for return value, final state, ordered writes, power-helper arguments and saved ABI. Integrated the 78-byte source object into the native macOS startup cluster at 0x1000ed2c, resolving its power dependency to the existing linked source symbol and adding exact component byte/address checks. The full startup build passes, and all 10 comparisons pass again against the integrated ELF. Top-level DRC initialization, processing and complete DRC behavior remain unreconstructed; full-image retained-stock accounting is unchanged.
+### DRC top-level initializer reconstructed and startup linked
+
+Added a source reconstruction of the top-level DRC initializer and its three size helpers. The native macOS component build places the initializer at 0x1000e784, preserves the 40-byte header and 268-byte stage layout, and authors the observed parameter block and stage-control storage in source-owned sections. The startup cluster now links this object with the reconstructed stage constructors and gain setter; its linker run completes with exact addresses for all DRC initializer sections. Four decoded constructor-sequencing cases pass standalone and against the integrated startup ELF. Constructor internals, full DRC processing, and full-image retained-stock accounting remain outstanding.
+### Corrected upstream clock gate query admitted to macOS startup
+
+Ran the corrected NationalChip SDK gate-query reconstruction through its independent decoded comparison and experimental source-admission check. The upstream-derived implementation passes the gate-query cases, and the full native startup linker now includes its object at runtime address 0x10025180 with the existing module metadata and clock table bindings. Hardware clock behavior and complete source-only accounting remain outstanding.
+### Upstream-derived clock initializer source admission refreshed
+
+Ran the complete clock-initializer source-admission workflow on macOS. The upstream-derived initializer, its selector/trim/PLL composition, and four source-authored data sections pass placement, byte ownership, relocation, and decoded helper-composition checks. This remains an experimental hybrid admission pending physical clock qualification and full source-only firmware accounting.
+### DRC parameter pool corrected to exact source-owned layout
+
+Audited the top-level initializer’s literal loads against the authenticated stock disassembly and corrected the source-owned 21-word parameter block to preserve every observed value and address order. The native component and complete macOS startup relink pass, with the DRC initializer still resolving at 0x1000e784 and its source-owned parameter section at 0x20016fb8.
+### Analog voltage register leaf source admission refreshed
+
+The recovered C analog-voltage updater passes its authenticated upstream comparison, placement and independent MMIO policy checks on macOS. It remains an experimental leaf admission until its owning clock/analog call graph is fully source-linked.
+### Denoise audio dependency mapped to upstream SDK object
+
+Cross-referenced the `denoise_audio_42d58` call chain and identified its lower-level initializer at package 0x3e628 as NationalChip SDK `gx_audio_in_init`. The authenticated SDK object reports a 0x198-byte implementation. The public SDK checkout contains the caller but not the driver implementation source, so this is provenance and dependency mapping only; it does not qualify the object as source-owned.
+### Upstream audio initializer dependency closure audited
+
+Inspected the authenticated NationalChip `gx_audio_in_init` object’s relocation records. Its initializer is 0x198 bytes and depends on `gx_clock_set_module_enable`, `memset`, `_ain_reset`, `gx_request_irq`, and its own BSS/SRAM text sections. The SDK checkout exposes headers and callers but no driver C source, so the object remains an explicitly identified upstream dependency rather than a source-only replacement.
+
+The checkout is pinned to NationalChip `lvp_kws` commit `8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5`; a complete tree scan confirms `drivers_lib/audio_in/v2.0/audio_in.o` is the only audio-in implementation artifact, with no corresponding driver `.c` file. This provenance is recorded so future upstream updates can be checked without binary extraction.

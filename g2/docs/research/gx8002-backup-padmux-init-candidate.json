@@ -1,0 +1,43 @@
+{
+  "defaults": {
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "header_sha256": "ed2dfbb290aa634bca68dc536583ac7a24994fb9b9f73165dc00ba453ea631d2",
+    "source_sha256": "9869da4b3c371b177a83e3016c7046a72b055af66f3d9fc9f078639afb83cddb",
+    "compiled_bytes": 64,
+    "compiled_sha256": "8ddaed4c3145c740d216bc4597d5c78cdb33460e1539a147c78f4c5ec1e4d5e8",
+    "byte_exact": true
+  },
+  "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+  "source_sha256": "53f63118c39cdbeeb0af989bd3e52253a03fc810ede20b6d72ed8e43f89dc17d",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_padmux_init",
+      "section": ".text.padmux_init",
+      "compiled_bytes": 88,
+      "compiled_sha256": "21efe884dd7945c2473ac0f80b8bc7e230a343b997d9a37fc79ce5ed8326d108",
+      "package_offset": 266416,
+      "stock_envelope_bytes": 108,
+      "stock_sha256": "fcd10d55551590c594be693eaf98760d84d2fb52764d39e1812ee6597ea69be3",
+      "byte_exact": false,
+      "fits": true
+    }
+  ],
+  "source_admitted": false,
+  "analysis_only_overlapping_sections_allowed": false,
+  "limits": [
+    "Initializer setter dependency and table-search behavior require separate qualification.",
+    "No physical flash qualification."
+  ]
+}

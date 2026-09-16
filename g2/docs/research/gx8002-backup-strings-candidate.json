@@ -1,0 +1,31 @@
+{
+  "sources": {
+    "runtime_gx8002_strncmp.c": "531e0a281eb76fa2b5b3fc2127e818f88fcf679fa8e2cbced2ad9ddb1c5ea7ba",
+    "runtime_gx8002_stage2_libc.c": "b99154269c9f1ff3363f5429efbe4bd97e236ec63f7a088ea84ca7cb17f8b2f1"
+  },
+  "functions": [
+    {
+      "symbol": "strncmp",
+      "address": 268474776,
+      "package_offset": 271064,
+      "compiled_bytes": 34,
+      "compiled_sha256": "a3e7bdc50f07aed2125c77de4e1da3535d43b918ed3eb138a2ad0baf7b013e01",
+      "stock_envelope_bytes": 36,
+      "stock_sha256": "cb3bf5de687857dc08f7181dd05a8c37dd2d2de433bbbd808e13e0d167a2af95"
+    },
+    {
+      "symbol": "strlen",
+      "address": 268474812,
+      "package_offset": 271100,
+      "compiled_bytes": 16,
+      "compiled_sha256": "03b4359b43851f469a4a7e843576b88822078de89dd2331a8716fa374c1b16b5",
+      "stock_envelope_bytes": 24,
+      "stock_sha256": "8939dcbf7367e222394bdc357b912ca2be781d3bfe62a94d5bac0fc865b69dd0"
+    }
+  ],
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Reviewed C leaves, not upstream libc attribution. See separate backup decoded verifiers; valid readable buffers, no timing or pointer-wrap qualification."
+  ]
+}

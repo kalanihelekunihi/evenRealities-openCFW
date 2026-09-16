@@ -120,6 +120,9 @@ class GridCalcTests(unittest.TestCase):
     def sint(self, name: str) -> int:
         return ctypes.c_int32.in_dll(self.loaded, name).value
 
+    def ptr(self, name: str) -> int | None:
+        return ctypes.c_void_p.in_dll(self.loaded, name).value
+
     def set_prop(self, prop: int, value: int) -> None:
         table = (ctypes.c_uint32 * 256).in_dll(
             self.loaded, "open_cfw_test_grid_prop_value"
@@ -316,6 +319,18 @@ class GridCalcTests(unittest.TestCase):
         self.assertEqual(self.uint("open_cfw_test_grid_log_calls"), 1)
         self.assertEqual(self.sint("open_cfw_test_grid_log_level"), 2)
         self.assertEqual(self.sint("open_cfw_test_grid_log_line"), 0x11D)
+        self.assertEqual(
+            self.ptr("open_cfw_test_grid_log_file"),
+            self.ptr("open_cfw_test_grid_expected_warn_file"),
+        )
+        self.assertEqual(
+            self.ptr("open_cfw_test_grid_log_func"),
+            self.ptr("open_cfw_test_grid_expected_calc_cols_func"),
+        )
+        self.assertEqual(
+            self.ptr("open_cfw_test_grid_log_format"),
+            self.ptr("open_cfw_test_grid_expected_calc_cols_format"),
+        )
         self.assertEqual(self.uint("open_cfw_test_grid_malloc_count"), 0)
         self.assertEqual(calc.col_num, 0xBEEF)
 
@@ -344,7 +359,20 @@ class GridCalcTests(unittest.TestCase):
         self.set_ptr_global("open_cfw_test_grid_row_templ_parent", None)
         self.loaded.open_cfw_lvgl_grid_calc_rows(0x1000, ctypes.byref(calc))
         self.assertEqual(self.uint("open_cfw_test_grid_log_calls"), 1)
+        self.assertEqual(self.sint("open_cfw_test_grid_log_level"), 2)
         self.assertEqual(self.sint("open_cfw_test_grid_log_line"), 0x179)
+        self.assertEqual(
+            self.ptr("open_cfw_test_grid_log_file"),
+            self.ptr("open_cfw_test_grid_expected_warn_file"),
+        )
+        self.assertEqual(
+            self.ptr("open_cfw_test_grid_log_func"),
+            self.ptr("open_cfw_test_grid_expected_calc_rows_func"),
+        )
+        self.assertEqual(
+            self.ptr("open_cfw_test_grid_log_format"),
+            self.ptr("open_cfw_test_grid_expected_calc_rows_format"),
+        )
 
     def run_item_repos(self, col_align=0, row_align=0, base_dir=0,
                        margins=(2, 3, 4, 5), flags_half=0x0C00,

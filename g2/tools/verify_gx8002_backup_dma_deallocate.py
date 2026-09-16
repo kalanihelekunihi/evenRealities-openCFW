@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 import json,re,subprocess
-from itertools import product
+from itertools import product, chain
 from build_gx8002_backup_dma_deallocate import build,ROOT
 from verify_gx8002_memcpy_source import decode
 from analyze_gx8002_upstream_objects import IMAGE_SHA,sha
@@ -79,6 +79,7 @@ def execute(code,entry,allocation,token,channel,gate_hook=None,irq_hook=None,sta
 
 def verify():
     candidate=build()
+    assert candidate['fits'], 'Deallocator exceeds stock envelope'
     wrapper=ROOT/'build/gx8002-board/padmux-get-stock.elf'
     elf=Elf32(wrapper.read_bytes(),str(wrapper))
     assert sha(elf.contents(next(s for s in elf.sections if s['name']=='.data')))==IMAGE_SHA
@@ -88,7 +89,9 @@ def verify():
     mapping={0x3d1ac:0x10025560,0x3d1b8:0x1002556c,0x3c528:0x10025080}
     rt=lambda p:p-0x3b940+0x10003000
     d=0x2002d3e8;cases=0
-    for flags,count,channel,token in product(product((0,1,2,255),repeat=3),(0,1,2,3,0xffffffff),range(3),(0,0x98765432)):
+    boundaries=product(product((0,1,2,255),repeat=3),(0,1,2,3,0xffffffff),range(3),(0,0x98765432))
+    byte_pairs=(((a,b,2),2,2,0x98765432) for a,b in product(range(256),repeat=2))
+    for flags,count,channel,token in chain(boundaries,byte_pairs):
         a=execute(old,0x3d500,flags,token,channel,helper_addresses=mapping,count=count)
         b=execute(new,rt(0x3d500),flags,token,channel,helper_addresses={rt(k):v for k,v in mapping.items()},count=count)
         assert a==b

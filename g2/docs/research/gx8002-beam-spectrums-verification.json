@@ -1,0 +1,29 @@
+{
+  "build": {
+    "source_sha256": "e8ce39fa92c7d15e10a1e5be0fccc7a53346fc96148e9646cc39dd58f96a7493",
+    "elf_sha256": "b59a2f85b00dddb3be3a35d3e66baaab126db122aaae8a45a4d35390827afddf",
+    "bytes": 276,
+    "envelope_bytes": 456,
+    "fits": true,
+    "helper_bindings": {
+      "beam_peak_q15": 268497204,
+      "beam_shift_q15": 268497088,
+      "beam_fill_q15": 268497324,
+      "open_cfw_gx8002_backup_rfft": 268496740,
+      "source_rfft_forward": 536965152
+    },
+    "source_admitted": false,
+    "limits": [
+      "Development reconstruction; decoded behavioral comparison pending.",
+      "DSP peak, saturating shift and fill dependencies remain absolute bindings, not source closure.",
+      "No startup or full-image integration, hardware or arbitrary-state qualification."
+    ]
+  },
+  "cases": 180,
+  "source_admitted": false,
+  "limits": [
+    "Decoded stock/core C comparison with modeled DSP/FFT helpers and caller clobbers.",
+    "Final memory, ordered nonstack writes/helper calls and saved ABI compared for bounded valid states.",
+    "FFT is an input-sensitive stand-in; DSP saturation model and physical instructions need independent verification. No hardware/source closure claim."
+  ]
+}

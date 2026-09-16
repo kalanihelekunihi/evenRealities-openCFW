@@ -1,0 +1,29 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "routes": [
+    {
+      "image": "boot",
+      "vector_package_offset": 10320,
+      "external_vector_count": 32,
+      "handler_runtime": 268448036,
+      "handler_package_offset": 12660,
+      "table_literal_reader": 12690,
+      "table_base": 536909900
+    },
+    {
+      "image": "backup",
+      "vector_package_offset": 244032,
+      "external_vector_count": 32,
+      "handler_runtime": 268454016,
+      "handler_package_offset": 250304,
+      "table_literal_reader": 250334,
+      "table_base": 536966056
+    }
+  ],
+  "backup_vector_base_write": 244454,
+  "backup_interrupt_enable": 244504,
+  "source_admitted": false,
+  "limits": [
+    "Authenticates both vector tables and dispatcher table literals plus backup startup ordering. Establishes routing after the observed backup initialization path. Does not execute complete boot-to-backup handoff, qualify pending-interrupt timing, or prove that all transitions follow this path."
+  ]
+}

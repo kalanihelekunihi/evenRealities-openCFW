@@ -671,9 +671,13 @@ typedef void (*open_cfw_lvgl_retained_move_children_fn)(unsigned int obj, int dx
     ((const int *)(__UINTPTR_TYPE__)open_cfw_lvgl_grid_get_row_dsc(cont))
 #endif
 #ifndef OPEN_CFW_LVGL_RETAINED_LOG_WARN
-typedef void (*open_cfw_lvgl_retained_log_fn)(int level, const char *file, int line, const char *func);
-#define OPEN_CFW_LVGL_RETAINED_LOG_WARN(file, line, func) \
-    (((open_cfw_lvgl_retained_log_fn)(__UINTPTR_TYPE__)0x0044D25CU)(2, (file), (line), (func)))
+typedef void (*open_cfw_lvgl_retained_log_fn)(
+    int level, const char *file, int line, const char *func,
+    const char *format
+);
+#define OPEN_CFW_LVGL_RETAINED_LOG_WARN(file, line, func, format) \
+    (((open_cfw_lvgl_retained_log_fn)(__UINTPTR_TYPE__)0x0044D25CU)( \
+        2, (file), (line), (func), (format)))
 #endif
 
 /* Stock rodata pointers consumed by the two subgrid-miss WARN calls
@@ -687,6 +691,12 @@ typedef void (*open_cfw_lvgl_retained_log_fn)(int level, const char *file, int l
 #endif
 #ifndef OPEN_CFW_LVGL_GRID_CALC_ROWS_FUNC
 #define OPEN_CFW_LVGL_GRID_CALC_ROWS_FUNC ((const char *)(__UINTPTR_TYPE__)0x0078AEF8U)
+#endif
+#ifndef OPEN_CFW_LVGL_GRID_CALC_COLS_WARN_FORMAT
+#define OPEN_CFW_LVGL_GRID_CALC_COLS_WARN_FORMAT ((const char *)(__UINTPTR_TYPE__)0x0073F5ACU)
+#endif
+#ifndef OPEN_CFW_LVGL_GRID_CALC_ROWS_WARN_FORMAT
+#define OPEN_CFW_LVGL_GRID_CALC_ROWS_WARN_FORMAT ((const char *)(__UINTPTR_TYPE__)0x0073F5D8U)
 #endif
 
 enum {
@@ -739,7 +749,8 @@ void open_cfw_lvgl_grid_calc_cols(
         if (col_templ == NULL) {
             OPEN_CFW_LVGL_RETAINED_LOG_WARN(
                 OPEN_CFW_LVGL_GRID_WARN_FILE, 0x11D,
-                OPEN_CFW_LVGL_GRID_CALC_COLS_FUNC);
+                OPEN_CFW_LVGL_GRID_CALC_COLS_FUNC,
+                OPEN_CFW_LVGL_GRID_CALC_COLS_WARN_FORMAT);
             return;
         }
         pos = (int)open_cfw_lvgl_grid_get_col_pos(cont);
@@ -861,7 +872,8 @@ void open_cfw_lvgl_grid_calc_rows(
         if (row_templ == NULL) {
             OPEN_CFW_LVGL_RETAINED_LOG_WARN(
                 OPEN_CFW_LVGL_GRID_WARN_FILE, 0x179,
-                OPEN_CFW_LVGL_GRID_CALC_ROWS_FUNC);
+                OPEN_CFW_LVGL_GRID_CALC_ROWS_FUNC,
+                OPEN_CFW_LVGL_GRID_CALC_ROWS_WARN_FORMAT);
             return;
         }
         pos = (int)open_cfw_lvgl_grid_get_row_pos(cont);

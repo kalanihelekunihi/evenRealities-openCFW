@@ -1,0 +1,54 @@
+{
+  "build": {
+    "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+    "source_sha256": "81c92dfe3bb2e266e1caf0df5195aa03a35daa5a2d65ab95baf1fb620a594528",
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_backup_program_pages",
+        "section": ".text.backup_program_pages",
+        "compiled_bytes": 132,
+        "compiled_sha256": "09f55f367fa7a79cff112fc1e76c2ca9eb290666747a0350bb2b389b649b90d8",
+        "package_offset": 261484,
+        "stock_envelope_bytes": 148,
+        "stock_sha256": "2f2faf233b5428cfe1d6f4dd7c40baf208ebe53d8764cf2cd822ec045f135ec7",
+        "byte_exact": false,
+        "fits": true
+      },
+      {
+        "symbol": "open_cfw_gx8002_flash_page_program",
+        "section": ".text.flash_page_program",
+        "compiled_bytes": 40,
+        "compiled_sha256": "410f4c908d192accdde0055ec4373ce230bd58dface8ddb8e7b502af26cd6eec",
+        "package_offset": 261632,
+        "stock_envelope_bytes": 44,
+        "stock_sha256": "ca890983731c19775c121c232a52a0273c5b35fe2679b1f8f7b37f272d9af664",
+        "byte_exact": false,
+        "fits": true
+      }
+    ],
+    "source_admitted": false,
+    "analysis_only_overlapping_sections_allowed": false,
+    "limits": [
+      "Region snapshots, device reloads and lock-bit extraction require decoded qualification.",
+      "No physical flash qualification."
+    ]
+  },
+  "cases": 111,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Ordered enable commands, callback reloads, wrapped arguments, page splits, ignored callback returns and preserved ABI checked. Ready and programming callbacks modeled; high-length single calls do not execute huge transfers. No hardware writes."
+  ]
+}

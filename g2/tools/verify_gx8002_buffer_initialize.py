@@ -4,7 +4,7 @@ import json,re,subprocess
 from build_gx8002_buffer_initialize import build,ROOT,IMAGE,IMAGE_SHA,sha,Elf32
 from verify_gx8002_memcpy_source import decode
 
-def execute(code,entry,seed,memory=None,clear_code=None,clear_entry=None):
+def execute(code,entry,seed,memory=None,clear_code=None,clear_entry=None,header_address=0x20027b60,helper_address=0x102099cc,stock_delta=None):
     r={f'r{i}':(seed+i)&0xffffffff for i in range(32)};r['r14']=0x20070000;initial=r.copy();saved=None;pc=entry;events=[]
     for _ in range(130):
         op,args,w=code[pc];p=[x.strip() for x in args.split(',')]
@@ -25,13 +25,13 @@ def execute(code,entry,seed,memory=None,clear_code=None,clear_entry=None):
         elif op=='lsli':r[p[0]]=(r[p[1]]<<int(p[2],0))&0xffffffff
         elif op=='st.w':
             reg,base,offset=re.fullmatch(r'(r\d+), \((r\d+), (0x[0-9a-f]+)\)',args).groups();a=r[base]+int(offset,0)
-            if not 0x20027b60<=a<0x20027bd8 or a%4:raise ValueError('Header bounds')
-            events.append(('write',a-0x20027b60,r[reg]))
+            if not header_address<=a<header_address+120 or a%4:raise ValueError('Header bounds')
+            events.append(('write',a-header_address,r[reg]))
             if memory is not None:
                 for i,b in enumerate(r[reg].to_bytes(4,'little')):memory[a+i]=b
         elif op=='bsr':
-            target=(int(args,0)+(0x101f6a74 if entry==0x1034c else 0))&0xffffffff
-            if target!=0x102099cc:raise ValueError('Helper')
+            target=(int(args,0)+(stock_delta if stock_delta is not None else (0x101f6a74 if entry==0x1034c else 0)))&0xffffffff
+            if target!=helper_address:raise ValueError('Helper')
             events.append(('clear',r['r0'],r['r1'],r['r2']));destination=r['r0']
             if memory is not None:
                 from compare_gx8002_memset import execute as clear

@@ -1,0 +1,26 @@
+{
+  "build": {
+    "source_sha256": "f73028f72eceb062fef55082ee0bce0fe0a3d8efd18d966bcacecd7c7551c46c",
+    "elf_sha256": "8bdbeef0e4407dbf263749407244ba92a099c42711d380a1e904644c3f366ad3",
+    "bytes": 212,
+    "envelope_bytes": 212,
+    "fits": true,
+    "helper_bindings": {
+      "open_cfw_gx8002_memset": 268506052,
+      "drc_logf": 268501164,
+      "drc_expf": 268501172
+    },
+    "source_admitted": false,
+    "limits": [
+      "Development reconstruction; decoded behavioral comparison pending.",
+      "Log/exp/memset dependencies remain standalone absolute bindings; no composed source closure.",
+      "No startup or full-image integration, hardware or arbitrary-state qualification."
+    ]
+  },
+  "cases": 54,
+  "source_admitted": false,
+  "limits": [
+    "Decoded stock/C constructor compare return, final memory, ordered writes/math arguments and saved ABI, with caller clobbers and helper flag mutation.",
+    "Log/exp and memset modeled; finite sampled inputs only. Null clear, exceptional floats and real math implementation remain unqualified."
+  ]
+}

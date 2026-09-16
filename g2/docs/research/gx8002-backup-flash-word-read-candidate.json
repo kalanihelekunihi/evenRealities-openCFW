@@ -1,0 +1,34 @@
+{
+  "source_sha256": "473e96202b0243e23107afa2215f1e8ef480ab593b4a08a9cde3a5149756c7fd",
+  "flags": [
+    "-O2",
+    "-fno-shrink-wrap",
+    "-fira-algorithm=priority",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_flash_word_read",
+      "section": ".text.flash_word_read",
+      "compiled_bytes": 212,
+      "compiled_sha256": "0fbbfd7d3cb7f9d3d503dea136f35df27b4dca6227bbb10c9b42ce8fee6a24dd",
+      "package_offset": 261676,
+      "stock_envelope_bytes": 228,
+      "stock_sha256": "64c0dfb6285c680f9f134c702a8e51a489d13a8b70694bf71c9916bbb1c86239",
+      "byte_exact": false
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Readiness schedules, buffer accesses and complete transfer traces require qualification.",
+    "Polling has no timeout; no physical hardware qualification."
+  ]
+}

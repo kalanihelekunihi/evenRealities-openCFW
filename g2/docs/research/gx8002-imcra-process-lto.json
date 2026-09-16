@@ -1,0 +1,235 @@
+{
+  "baseline_bytes": 3272,
+  "source_admitted": false,
+  "experiments": [
+    {
+      "label": "lto",
+      "bytes": 3048,
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-flto"
+      ],
+      "elf": "build/gx8002-imcra-process-lto/process.elf"
+    },
+    {
+      "label": "lto-no-caller-saves",
+      "bytes": 3048,
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-flto",
+        "-fno-caller-saves"
+      ],
+      "elf": "build/gx8002-imcra-process-lto-no-caller-saves/process.elf"
+    },
+    {
+      "label": "lto-no-loop",
+      "bytes": 3032,
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-flto",
+        "-fno-tree-loop-optimize"
+      ],
+      "elf": "build/gx8002-imcra-process-lto-no-loop/process.elf"
+    },
+    {
+      "label": "lto-no-loop-no-caller",
+      "bytes": 3032,
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-flto",
+        "-fno-tree-loop-optimize",
+        "-fno-caller-saves"
+      ],
+      "elf": "build/gx8002-imcra-process-lto-no-loop-no-caller/process.elf"
+    },
+    {
+      "label": "lto-no-loop-no-iv",
+      "bytes": 3032,
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-flto",
+        "-fno-tree-loop-optimize",
+        "-fno-ivopts"
+      ],
+      "elf": "build/gx8002-imcra-process-lto-no-loop-no-iv/process.elf"
+    },
+    {
+      "label": "lto-register-barriers",
+      "bytes": 2932,
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-flto",
+        "-fno-tree-loop-optimize"
+      ],
+      "elf": "build/gx8002-imcra-process-lto-register-barriers/process.elf"
+    },
+    {
+      "label": "lto-register-barriers-no-schedule",
+      "bytes": 2932,
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-flto",
+        "-fno-tree-loop-optimize",
+        "-fno-schedule-insns",
+        "-fno-schedule-insns2"
+      ],
+      "elf": "build/gx8002-imcra-process-lto-register-barriers-no-schedule/process.elf"
+    },
+    {
+      "label": "lto-register-barriers-no-reorder",
+      "bytes": 2930,
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-flto",
+        "-fno-tree-loop-optimize",
+        "-fno-reorder-blocks"
+      ],
+      "elf": "build/gx8002-imcra-process-lto-register-barriers-no-reorder/process.elf"
+    },
+    {
+      "label": "lto-register-barriers-no-guess",
+      "bytes": 2920,
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-flto",
+        "-fno-tree-loop-optimize",
+        "-fno-guess-branch-probability"
+      ],
+      "elf": "build/gx8002-imcra-process-lto-register-barriers-no-guess/process.elf"
+    },
+    {
+      "label": "lto-register-barriers-no-inline-once",
+      "bytes": 2988,
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-flto",
+        "-fno-tree-loop-optimize",
+        "-fno-inline-functions-called-once"
+      ],
+      "elf": "build/gx8002-imcra-process-lto-register-barriers-no-inline-once/process.elf"
+    },
+    {
+      "label": "lto-register-barriers-shared-min",
+      "bytes": 2732,
+      "flags": [
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-flto",
+        "-fno-tree-loop-optimize",
+        "-fno-guess-branch-probability",
+        "-ffixed-vr8",
+        "-ffixed-vr9",
+        "-ffixed-vr10",
+        "-ffixed-vr11",
+        "-ffixed-vr12",
+        "-ffixed-vr13",
+        "-ffixed-vr14",
+        "-ffixed-vr15"
+      ],
+      "elf": "build/gx8002-imcra-process-lto-register-barriers-shared-min/process.elf"
+    }
+  ],
+  "limits": [
+    "Size experiments only; no stock equivalence or hardware qualification.",
+    "All stages provided as source. Internal calls may be inlined; external source helpers remain address bindings.",
+    "No placement or startup integration."
+  ]
+}

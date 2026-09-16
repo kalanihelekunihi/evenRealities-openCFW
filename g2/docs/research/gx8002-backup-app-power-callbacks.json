@@ -1,0 +1,58 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream_files": [
+    {
+      "path": "lvp/app_core/lvp_app_core.c",
+      "blob": "53c8f1042464a6aa59c01a2e158ab605b7110896",
+      "sha256": "b173c70c86b93b9d2f9c48050cf43513390e94368cfcac424dd2f04ba8f32174"
+    },
+    {
+      "path": "lvp/app_core/lvp_app.h",
+      "blob": "4b7e105ff09df684966817f1045f28dd030b5f2d",
+      "sha256": "5f3302a3482d2539d515d068e1c1364508f7eca6711d23ab063c27dc18556450"
+    },
+    {
+      "path": "lvp/app_core/lvp_app_core.h",
+      "blob": "e7521399bfa5d16c4ebacba2699e2f0286fc09cd",
+      "sha256": "7267c8f17cf22c3fe8904ac6babf611c3f1ea750c254a782c982b4e9fbb03c25"
+    }
+  ],
+  "command": [
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fno-shrink-wrap",
+    "-I",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-app-power-callbacks",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-app-power-callbacks/callbacks.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-app-power-callbacks/callbacks.o"
+  ],
+  "derived_source_sha256": "187e6a96cc4bac0a46c6f23061424a4befcc66452753b4d7d585c5fbd87e757e",
+  "elf_sha256": "78ce00a7c5832f8a8e25f4a76a3889742a9ad93fad17ce1a6fe2ec0a3bc64205",
+  "sections": [
+    {
+      "section": ".app_suspend",
+      "address": 268484016,
+      "bytes": 28,
+      "stock_byte_exact": true
+    },
+    {
+      "section": ".app_resume",
+      "address": 268484044,
+      "bytes": 28,
+      "stock_byte_exact": true
+    }
+  ],
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Watchdog feature disabled, matching recovered suspend control flow.",
+    "Application operations pointer remains externally bound; callbacks are source candidates, not a complete firmware."
+  ]
+}

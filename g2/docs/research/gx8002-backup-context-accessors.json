@@ -1,0 +1,102 @@
+{
+  "storage_evidence": {
+    "initializer_evidence": {
+      "upstream_evidence": {
+        "compiled_bytes": 172,
+        "fits": true,
+        "compiled_sha256": "9336783a1cdd9a482b9c2b8d396eb6736fbf768dbc116997b09cc7bcfd0cb4c3",
+        "stock_sha256": "946b79647cec1c11a7ab194636f1db6d3fdbf4df9eeb6a5a7cc2388ddd21b58c",
+        "source_sha256": "fe6757122373abc9d902900ac7fa2d34d97d3d2d82f416e2893a280b616d41fa",
+        "upstream": {
+          "include/lvp_context.h": {
+            "blob": "37483158aa8c433d614dea65dff87232b6ba0f69",
+            "sha256": "75902c925c65492f776fe1c932f0b85d0298f0b7e8377def087a4fb5949170be"
+          },
+          "include/lvp_attr.h": {
+            "blob": "79bf9187d27c403bbb201f51a6bff04d459d7f66",
+            "sha256": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813"
+          },
+          "lvp/common/lvp_buffer.c": {
+            "blob": "b3d49834f8e84abfec56a5bfb2d0e86993a05648",
+            "sha256": "a491c43e4494187b269a4bb35e8fbe5c46b6f29c678980c30b3f8f9a0e324978"
+          }
+        },
+        "source_admitted": false
+      },
+      "source_sha256": "76ee43272e61cdf1428ca38513ae37c0b86f03dc33e307617d6c982e6a0f4501",
+      "storage_header_sha256": "688157619f0c555323df6efd1de513a9a75b388e3cb9c5254818e459879b4ef6",
+      "bytes": 156,
+      "envelope_bytes": 156,
+      "exact_stock_prefix": false,
+      "source_admitted": false,
+      "limits": [
+        "Two memset calls remain bound to backup implementation. Recovered complete field assignments; behavior, BSS ownership and integration pending."
+      ]
+    },
+    "source_sha256": "da1df7945c33f472b2586c9c01c6ccc5fb34cec4554021dbf023a8b01891eed8",
+    "storage_header_sha256": "688157619f0c555323df6efd1de513a9a75b388e3cb9c5254818e459879b4ef6",
+    "allocations": [
+      {
+        "name": "context_header",
+        "address": 536966912,
+        "bytes": 120
+      },
+      {
+        "name": "context_frames",
+        "address": 536967040,
+        "bytes": 11264
+      },
+      {
+        "name": "output_samples",
+        "address": 536978304,
+        "bytes": 6144
+      },
+      {
+        "name": "microphone_samples",
+        "address": 537067520,
+        "bytes": 12288
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Uninitialized storage declarations only. Microphone buffer is outside startup BSS clearing range, as in recovered layout. DMA ownership, complete access census and hardware remain unqualified."
+    ]
+  },
+  "source_sha256": "0c3f46724f81209e2bd7a88e849bf6673d8a545c89c3e7e5cff85954b8ddfc89",
+  "functions": [
+    {
+      "name": "backup_pcm_frames_per_context",
+      "package_offset": 272528,
+      "bytes": 12,
+      "exact_stock": true
+    },
+    {
+      "name": "backup_pcm_frames_per_channel",
+      "package_offset": 272564,
+      "bytes": 12,
+      "exact_stock": true
+    },
+    {
+      "name": "backup_pcm_sample_rate",
+      "package_offset": 272576,
+      "bytes": 12,
+      "exact_stock": true
+    },
+    {
+      "name": "backup_context_count",
+      "package_offset": 272592,
+      "bytes": 12,
+      "exact_stock": true
+    },
+    {
+      "name": "backup_microphone_count",
+      "package_offset": 272604,
+      "bytes": 12,
+      "exact_stock": true
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Exact stock reader bodies, symbolic header binding. Concurrent memory semantics and hardware remain unqualified."
+  ]
+}

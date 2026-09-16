@@ -1,0 +1,20 @@
+{
+  "build": {
+    "source_sha256": "5c47d18029d7fcee5624f96af372792976bb9a5982c994d58d8ed6bc6db8b7a4",
+    "bytes": 390,
+    "source_admitted": false,
+    "startup_integrated": false,
+    "limits": [
+      "Standalone processing block only; no placement or full processing replacement.",
+      "Positive bins and stable state pointers; four live pointers reloaded for standalone wrapper.",
+      "Decoded numeric verification and hardware qualification pending."
+    ]
+  },
+  "cases": 72,
+  "source_admitted": false,
+  "limits": [
+    "Positive bins, finite nonnegative arrays; probability 0/0.5/1, alpha 0/0.85/1, bias 1.47.",
+    "Exact output bits and ordered data/parameter accesses under both MAC models. Four standalone-wrapper pointer reloads excluded; pointers assumed stable.",
+    "No full processing, aliasing, asynchronous pointer mutation or hardware qualification."
+  ]
+}

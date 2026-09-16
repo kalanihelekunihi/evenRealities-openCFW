@@ -3997,6 +3997,128 @@ stock-oracle vectors (13 leaves × 40) with exact result/write/callback-trace
 agreement. AM-015 remains partial: it is unrouted and retained-callback
 dependent, so source-owned bytes remain 0. Audit:
 `docs/research/apollo-main-am015-44fa5e-4501d2.md`.
+
+## 2026-09-16 — AM-019 draw-style getter veneers routed on macOS
+
+Routed the first 27 AM-019 LVGL draw-style getter veneers
+(`0x0045246E..0x00452616`) as generated entry redirects to
+clean-room `runtime_obj_draw_style_getters.c` leaves in the Apollo core
+overlay. Added deterministic pin computation and idempotent manifest splicing
+to `tools/integrate_g2_apollo_draw_style_getters_overlay.py`; the flash plan now
+shows 27 `generated_source_entry_replacement` stock rows and 53 overlay
+source/alignment rows for the leaf tranche. Re-pinned the macOS Apollo core
+component (`385690` overlay bytes, `aebde02d...`; component
+`02a57ec0...`) and core-source package (`4750780` bytes,
+`6bc69452...`). Verification: `python3 tools/open_cfw.py build --manifest
+manifests/g2-2.2.6.10-core-source.json --output-dir build/source`,
+`python3 third_party/freetype/verify_snapshot.py`,
+`OPENCFW_TOOLCHAIN_PROFILE=apple-clang python3 third_party/littlefs/verify_snapshot.py`,
+and full `make -C g2 build` all pass on macOS. The later AM-019 functions
+`0x00452616..0x00452C66` remain retained/opaque and are the next pull-through
+target. No Linux build work was pursued.
+
+## 2026-09-16 — AM-019 ext-draw-size helper routed on macOS
+
+Routed `lv_obj_calculate_ext_draw_size` at `0x00452C66..0x00452D42` to
+`runtime_obj_ext_draw_size.c`, a clean-room LVGL `lv_obj_draw.c` arithmetic
+combiner over retained style getter providers. The Apollo overlay now pins at
+`385860` bytes / `4cb6407b...`, final Apollo component `c5a42e4f...`, and
+core-source package `4750780` bytes / `a89a6b44...`. The flash plan shows the
+stock range as `generated_source_entry_replacement`, with overlay alignment and
+source text rows at `0x007F25BE..0x007F2668`. Verified:
+`python3 components/apollo_main/core_overlay/build_component.py`,
+`python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`,
+`python3 third_party/freetype/verify_snapshot.py`, and
+`OPENCFW_TOOLCHAIN_PROFILE=apple-clang python3 third_party/littlefs/verify_snapshot.py`
+all pass. Remaining AM-019 draw-descriptor initializers at
+`0x00452616..0x00452C66` are still retained and need descriptor-layout source
+pull-through next.
+
+## 2026-09-16 — AM-019 label draw descriptor routed on macOS
+
+Routed `lv_obj_init_draw_label_dsc` at `0x00452988..0x00452A34` to
+`runtime_obj_draw_label_dsc.c`, using the recovered G2 label descriptor offsets
+and retained layer-opa/recolor providers. The Apollo overlay now pins at
+`386026` bytes / `9e3780e8...`, final Apollo component `a2517786...`, and
+core-source package `4750780` bytes / `58cb78df...`. The flash plan now splits
+the descriptor cluster into retained rect bytes, generated label replacement,
+and retained image/line/arc bytes; the package build reports 7,993 placed
+regions and zero unresolved. Verified:
+`python3 components/apollo_main/core_overlay/build_component.py`,
+`python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`,
+`python3 third_party/freetype/verify_snapshot.py`, and
+`OPENCFW_TOOLCHAIN_PROFILE=apple-clang python3 third_party/littlefs/verify_snapshot.py`
+all pass. Remaining AM-019 descriptor initializers are rect
+`0x00452616..0x00452988`, image `0x00452A34..0x00452B0E`, line
+`0x00452B0E..0x00452BCA`, and arc `0x00452BCA..0x00452C66`.
+
+## 2026-09-16 — AM-019 line draw descriptor routed on macOS
+
+Routed `lv_obj_init_draw_line_dsc` at `0x00452B0E..0x00452BCA` to
+`runtime_obj_draw_line_dsc.c`, using recovered G2 line descriptor offsets and
+retained layer-opa/recolor providers. The Apollo overlay now pins at `386190`
+bytes / `1e71b1cf...`, final Apollo component `b40c3763...`, and core-source
+package `4750780` bytes / `35de1874...`. The flash plan now shows the line
+initializer as `generated_source_entry_replacement`; the package build reports
+7,997 placed regions and zero unresolved. Verified:
+`python3 components/apollo_main/core_overlay/build_component.py`,
+`python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`,
+`python3 third_party/freetype/verify_snapshot.py`, and
+`OPENCFW_TOOLCHAIN_PROFILE=apple-clang python3 third_party/littlefs/verify_snapshot.py`
+all pass. Remaining AM-019 descriptor initializers are rect
+`0x00452616..0x00452988`, image `0x00452A34..0x00452B0E`, and arc
+`0x00452BCA..0x00452C66`.
+
+## 2026-09-16 — AM-019 arc draw descriptor routed on macOS
+
+Routed `lv_obj_init_draw_arc_dsc` at `0x00452BCA..0x00452C66` to
+`runtime_obj_draw_arc_dsc.c`, using recovered G2 arc descriptor offsets and
+retained layer-opa/recolor providers. The Apollo overlay now pins at `386338`
+bytes / `fe6832bf...`, final Apollo component `d1411109...`, and core-source
+package `4750780` bytes / `db923ed0...`. The flash plan now shows the arc
+initializer as `generated_source_entry_replacement`; the package build reports
+7,999 placed regions and zero unresolved. Verified:
+`python3 components/apollo_main/core_overlay/build_component.py`,
+`python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`,
+`python3 third_party/freetype/verify_snapshot.py`, and
+`OPENCFW_TOOLCHAIN_PROFILE=apple-clang python3 third_party/littlefs/verify_snapshot.py`
+all pass. Remaining AM-019 descriptor initializers are rect
+`0x00452616..0x00452988` and image `0x00452A34..0x00452B0E`.
+
+## 2026-09-16 — AM-019 image draw descriptor routed on macOS
+
+Routed `lv_obj_init_draw_image_dsc` at `0x00452A34..0x00452B0E` to
+`runtime_obj_draw_image_dsc.c`, using recovered G2 image descriptor offsets and
+retained layer-opa, area width/height, color-make, and image-recolor providers.
+The Apollo overlay now pins at `386550` bytes / `6a1f4cc4...`, final Apollo
+component `e6ce8ad8...`, and core-source package `4750780` bytes /
+`32a22ca0...`. The flash plan now shows the image initializer as
+`generated_source_entry_replacement`; the package build reports 8,001 placed
+regions and zero unresolved. Verified:
+`python3 components/apollo_main/core_overlay/build_component.py`,
+`python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`,
+`python3 third_party/freetype/verify_snapshot.py`, and
+`OPENCFW_TOOLCHAIN_PROFILE=apple-clang python3 third_party/littlefs/verify_snapshot.py`
+all pass. Remaining AM-019 descriptor initializer is rect
+`0x00452616..0x00452988`.
+
+## 2026-09-16 — AM-019 rect draw descriptor routed in place on macOS
+
+Routed `lv_obj_init_draw_rect_dsc` at `0x00452616..0x00452988` to
+`runtime_obj_draw_rect_dsc.c` as an 882-byte in-place source replacement, using
+the recovered G2 rect descriptor offsets plus retained style, gradient, image,
+and recolor providers. This avoids tail growth while replacing the full stock
+rect body. The Apollo overlay remains `386550` bytes / `6a1f4cc4...`; the
+final Apollo component now pins at `366c1ea5...`, and the core-source package
+pins at `4750780` bytes / `a6c4a7ad...`. The flash plan marks the rect span as
+`source_compiled`, and the package build reports 8,001 placed regions and zero
+unresolved. Verified:
+`python3 components/apollo_main/core_overlay/build_component.py`,
+`python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`,
+`python3 third_party/freetype/verify_snapshot.py`, and
+`OPENCFW_TOOLCHAIN_PROFILE=apple-clang python3 third_party/littlefs/verify_snapshot.py`
+all pass. AM-019's draw-style getter, rect, label, image, line, arc, and
+ext-draw-size bodies are now source-routed on macOS.
 The earliest retained executable remains `0x0042308E`; after retained SRAM
 literals, the sequential executable frontier is `0x00423E14`. Firmware-wide
 completeness is not claimed.
@@ -13377,3 +13499,367 @@ routed. Exact setter/accessor semantics were bounded from authenticated Ghidra
 evidence, but provider initialization/type and the `FUN_0044D25C` logging ABI
 remain unresolved. No AM-015 bytes were admitted; no hardware operation was
 performed. Audit: `docs/research/apollo-main-am015-44fa5e-4501d2.md`.
+
+### 2026-09-16 — AM-020 LVGL draw layer helpers routed in place on macOS
+
+Routed the AM-020 LVGL draw-layer helper tranche as fixed-address source replacements: `get_layer_opa` at `0x00452DF0..0x00452E22`, `normal_apply_layer_recolor` at `0x00452E22..0x00452E68`, and `image_apply_layer_recolor` at `0x00452E68..0x00452ED0`. The clean-room implementation lives in `runtime_obj_draw_layer_helpers.c` and compiles per-helper with explicit Apple-clang macros and NOP padding so each output exactly fits the authenticated stock span (50/70/104 bytes). This avoided additional overlay-tail growth after the CFF host tail rejected appended leaves.
+
+Verified on macOS: `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, `python3 third_party/littlefs/verify_snapshot.py`, `python3 third_party/freetype/verify_snapshot.py`, and full `make -C g2 build`. The core-source package is byte-identical at 4,750,780 bytes, SHA-256 `857d063ca8968ecdb599e73d204d4ca53a2d24d1419de226899492e2cc576bf4`, with 8,001 placed flash regions and 0 unresolved flash regions. AM-020 remains open for the remaining object/layer/style helpers outside this routed tranche.
+
+### 2026-09-16 — AM-020 LVGL object draw state accessors routed in place
+
+Routed two more AM-020 LVGL accessors as exact-size fixed-address source replacements: `lv_obj_get_ext_draw_size` at `0x00452DC8..0x00452DD8` and `lv_obj_get_layer_type` at `0x00452DD8..0x00452DF0`. The implementation lives in `runtime_obj_draw_state_accessors.c` and uses recovered G2 `obj->spec_attr` offsets (`+0x2c` for ext draw size, layer type bits from `+0x32`).
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, `python3 third_party/littlefs/verify_snapshot.py`, `python3 third_party/freetype/verify_snapshot.py`, and full `make -C g2 build`. The core-source package is byte-identical at 4,750,780 bytes, SHA-256 `7395a3955259d9e910f7027e01bdc561df287f6bf3caf5dd39c81d041bd79c01`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-020 layout style getter veneers routed in place
+
+Routed the eight AM-020 LVGL style getter veneers at `0x0045311A..0x0045316A` as exact 10-byte fixed-address source replacements in `runtime_obj_layout_style_getters.c`. The veneers forward to the retained `lv_obj_get_style_prop` core with recovered property IDs `0x6e` through `0x74` and `0x0c`; a compiler barrier preserves the non-tail-call stock-sized wrapper shape.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The core-source package is byte-identical at 4,750,780 bytes, SHA-256 `52bb79e7e367e638a001aa853115a3ff7b868bea5585846ddaac75e100bed009`, with 8,001 placed flash regions and 0 unresolved flash regions. AM-020 remains open for the larger object/event/tree helpers between `0x00452D42` and `0x0045311A`.
+
+### 2026-09-16 — AM-020 small draw/tree helpers routed in place
+
+Routed three more AM-020 helper leaves as exact fixed-address source replacements in `runtime_obj_small_helpers.c`: zero-fill wrappers at `0x00452ED0..0x00452EDC` and `0x0045310E..0x0045311A`, plus the 16-byte four-word rectangle copy helper at `0x004530FC..0x0045310E`. The zero-fill leaves are naked Thumb wrappers around the retained memset-style provider at `0x00454746`; the copy helper is call-free C.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The core-source package is byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-020 object accessors routed in place
+
+Routed four more AM-020 object helper leaves as exact fixed-address source replacements in `runtime_obj_small_helpers.c`: null-safe object type byte at `0x00452F00..0x00452F0C`, null-safe byte-at-`+0x08` at `0x00452F0C..0x00452F18`, null-safe word/pointer-at-`+0xb8` at `0x00452F18..0x00452F26`, and flag-bit setter at `0x00452FEC..0x00452FFA`. These are naked Thumb wrappers because the authenticated spans are only 12/12/14/14 bytes.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py` and `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`. The core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions. The adjacent `0x00452FFA` global accessor uses a shared retained literal pool and remains deferred with the larger AM-020 event/tree helpers.
+
+### 2026-09-16 — AM-020 object field and coordinate helpers routed in place
+
+Routed four more AM-020 object helpers as exact fixed-address source replacements in `runtime_obj_small_helpers.c`: the type-`1`/`3` gated coordinate copy from `+0x30/+0x34` at `0x00452F5E..0x00452F8C`, low-nibble read from byte `+0xa8` at `0x00452F8C..0x00452FAE`, field read from `+0x70` at `0x00452FAE..0x00452FCA`, and coordinate copy from `+0x48/+0x4c` at `0x00452FCA..0x00452FEC`. All four are call-free naked Thumb wrappers over recovered object-layout offsets.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py` and `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`. The core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-020 screen list and LVGL global helpers routed in place
+
+Routed four more AM-020 helpers as exact fixed-address source replacements in `runtime_obj_small_helpers.c`: the screen-list head/next wrapper at `0x00452EDC..0x00452EF8`, LVGL global field readers at `0x00452EF8..0x00452F00` and `0x00452FFA..0x00453002`, and the delete-all-or-one dispatcher at `0x00452F26..0x00452F5E`. The two global readers and the list/delete dispatcher retain the authenticated shared literal-pool access to the LVGL global block, with reviewed retained-call relocations for the LVGL linked-list and delete-core providers.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py` and `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`. The core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions. AM-020 remains open for `0x00452D42` and the event/tree helper cluster around `0x00453002..0x004530FC`.
+
+### 2026-09-16 — AM-020 event/tree helpers routed in place
+
+Routed the AM-020 event/tree helper pair as exact fixed-address source replacements in `runtime_obj_small_helpers.c`: the delete-child event descriptor sender at `0x00453002..0x00453052` and delete-core relationship cleanup at `0x0045305C..0x004530F6`. The event sender builds the recovered 0x1c-byte event descriptor and calls the retained event core twice; delete-core sets the deleting flag, clears current-global state when needed, updates recovered relationship fields at `+0x68/+0x6c/+0x70/+0x74/+0x78`, and forwards `0x17` events through retained LVGL providers.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py` and `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`. The core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions. AM-020 now has one remaining executable helper body, `0x00452D42..0x00452DB2`; `0x00453052..0x0045305C` is the authenticated literal/padding gap before the routed delete-core helper.
+
+### 2026-09-16 — AM-020 complete on macOS
+
+Routed the final AM-020 executable helper body, `lv_obj_refresh_ext_draw_size` at `0x00452D42..0x00452DB2`, as an exact fixed-address source replacement in `runtime_obj_small_helpers.c`. The helper preserves the stock null-assert path and implements the LVGL refresh flow: read the old ext draw size, send `LV_EVENT_REFR_EXT_DRAW_SIZE` (`0x1b`), ensure `spec_attr` only when a nonzero value needs storage, update `spec_attr + 0x2c`, and invalidate the object when the size changes.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py` and `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`. The core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions. AM-020 is marked done; all executable AM-020 helper bodies are now source-owned for the macOS Apple-clang path.
+
+### 2026-09-16 — AM-021 style getter veneers started on macOS
+
+Started AM-021 with five exact fixed-address LVGL style getter veneers in `runtime_obj_layout_style_getters.c`: `0x0045316A..0x00453180` for bool-normalized property `0x2d`, `0x00453180..0x0045318C` for byte property `0x62`, `0x0045318C..0x00453198` for byte property `0x63`, `0x00453198..0x004531A4` for byte property `0x69`, and `0x004531A4..0x004531AE` for raw property `0x75`. All five forward to the retained LVGL style-property getter at `0x0044BDEA` and compile byte-identically to stock with the macOS Apple-clang profile.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py` and `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`. The core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions. AM-021 is now in progress.
+
+### 2026-09-16 — AM-021 refresh global accessor routed in place
+
+Routed the tiny LVGL refresh global accessor at `0x00453604..0x0045360C` as an exact fixed-address source replacement in `runtime_obj_small_helpers.c`. It reads the LVGL global block at `0x2006f548`, field `+0x10`, through the authenticated shared literal pool and compiles byte-identically to stock with the macOS Apple-clang profile.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py` and `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`. The core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 LVGL invalid-area join routed in place
+
+Routed the AM-021 LVGL invalid-area join helper at `0x0045377A..0x0045383C` as `open_cfw_runtime_lv_refr_join_area` in `runtime_obj_small_helpers.c`. The body is matched to `lv_refr_join_area` in `third_party/lvgl/src/core/lv_refr.c`: it walks `disp_refr->inv_areas`, skips joined entries, checks overlap with `lv_area_is_on`, joins candidates with `lv_area_join`, compares area sizes, copies the smaller joined rectangle with the already source-owned 16-byte area-copy helper, and marks `inv_area_joined[join_from]`.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 LVGL sync-area refresh routed in place
+
+Routed the AM-021 LVGL refresh sync helper at `0x0045383C..0x004539B6` as `open_cfw_runtime_lv_refr_sync_areas` in `runtime_obj_small_helpers.c`. The body is matched to `refr_sync_areas` in `third_party/lvgl/src/core/lv_refr.c`: it gates on direct render mode and double buffering, skips empty sync lists, waits for flushing, subtracts invalidated areas from the pending sync list with `lv_area_diff`, inserts replacement rectangles, removes/frees consumed sync nodes, clips remaining sync areas to the display area, copies between draw buffers, and clears the sync list.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 LVGL invalid-area render driver routed in place
+
+Routed the AM-021 LVGL invalid-area render driver at `0x004539B6..0x00453B78` as `open_cfw_runtime_lv_refr_invalid_areas` in `runtime_obj_small_helpers.c`. The body is matched to `refr_invalid_areas` in `third_party/lvgl/src/core/lv_refr.c`: it finds the last unjoined invalid area, sends render-start/render-ready display events, manages the recovered last-area/last-part/rendering-in-progress flags in the display state word, handles partial/full/direct render modes, calls the retained `refr_area` and `draw_buf_flush` helpers, and preserves the retained `get_max_row` and area-size helpers for partial rendering.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 LVGL layer draw-buffer reshape routed in place
+
+Routed the AM-021 LVGL layer draw-buffer reshape helper at `0x00453B78..0x00453BCE` as `open_cfw_runtime_layer_reshape_draw_buf` in `runtime_obj_small_helpers.c`. The body is matched to `layer_reshape_draw_buf` in `third_party/lvgl/src/core/lv_refr.c`: it computes the layer buffer-area height and width, forwards the draw buffer, color format, dimensions, and stride to retained `lv_draw_buf_reshape`, and preserves the stock null-return assert/trap path.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 LVGL configured-layer refresh routed in place
+
+Routed the AM-021 LVGL configured-layer refresh helper at `0x00453E10..0x00453F2E` as `open_cfw_runtime_refr_configured_layer` in `runtime_obj_small_helpers.c`. The body is matched to `refr_configured_layer` in `third_party/lvgl/src/core/lv_refr.c`: it resets the layer, waits for flushing when the display is not double-buffered, clears alpha draw buffers, finds top active/previous-screen objects, and draws bottom, active, previous, top, and system layers through retained LVGL helpers.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 LVGL top-object finder routed in place
+
+Routed the AM-021 LVGL top-object finder at `0x00453F2E..0x00453FCE` as `open_cfw_runtime_lv_refr_get_top_obj` in `runtime_obj_small_helpers.c`. The body is matched to `lv_refr_get_top_obj` in `third_party/lvgl/src/core/lv_refr.c`: it checks area containment, hidden/layer/opacity gates, sends `LV_EVENT_COVER_CHECK`, descends children in reverse order, and falls back to the current object when it fully covers the draw area. The recursive self-call is explicitly admitted as a strict selected-entry relocation.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 LVGL object-and-children redraw routed in place
+
+Routed the AM-021 LVGL object-and-children redraw helper at `0x00453FCE..0x00454074` as `open_cfw_runtime_refr_obj_and_children` in `runtime_obj_small_helpers.c`. The body is matched to `refr_obj_and_children` in `third_party/lvgl/src/core/lv_refr.c`: it resolves null top objects through the active screen, applies parent recolor, calls retained `refr_obj` for the top object and younger siblings, walks parent chains, and sends the three draw-post events to each parent.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 LVGL layer-area helper routed in place
+
+Routed the AM-021 LVGL layer-area helper at `0x00454074..0x00454152` as `open_cfw_runtime_layer_get_area` in `runtime_obj_small_helpers.c`. The body is matched to `layer_get_area` in `third_party/lvgl/src/core/lv_refr.c`: it computes object extended draw size, fills object draw bounds, handles transform-layer clipping and inverse transform clipping, expands the transformed layer area by 5 pixels for rounding tolerance, handles simple-layer clipping, and preserves the stock unhandled-layer-type assert path.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 LVGL alpha cover probe routed in place
+
+Routed the AM-021 LVGL alpha cover probe at `0x0045417C..0x004541B6` as `open_cfw_runtime_alpha_test_area_on_obj` in `runtime_obj_small_helpers.c`. The body is matched to `alpha_test_area_on_obj` in `third_party/lvgl/src/core/lv_refr.c`: it treats areas not fully on object coordinates as needing alpha, otherwise sends `LV_EVENT_COVER_CHECK` and returns whether the cover result requires alpha fallback.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 LVGL object redraw helper routed in place
+
+Routed the AM-021 LVGL object redraw helper at `0x004541B6..0x004544AE` as `open_cfw_runtime_refr_obj` in `runtime_obj_small_helpers.c`. The body is matched to `refr_obj` in `third_party/lvgl/src/core/lv_refr.c`: it preserves the hidden/opacity gates, temporary layer opacity and recolor changes, direct redraw path, simple/ARGB layer strip subdivision, alpha cover testing, transform pivot/rotation/scale/skew/blend/antialias descriptor setup, `lv_draw_layer` dispatch, and final layer state restore.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 LVGL style property 0x16 veneer routed in place
+
+Routed the AM-021 LVGL style getter veneer at `0x004546D0..0x004546DC` as `open_cfw_runtime_obj_get_style_prop_16_u16` in `runtime_obj_layout_style_getters.c`. The helper forwards to the retained `lv_obj_get_style_prop` core with property id `0x16` and returns the low 16 bits, matching the authenticated `lv_obj_style.c` call topology.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 tiny transition and runtime veneers routed in place
+
+Routed seven AM-021 tiny helpers in `runtime_obj_small_helpers.c`: `0x004546DC..0x004546F4` initializes the LVGL style transition callback table, `0x004546F4..0x00454730` dispatches a style transition callback selected by style property `0x16`, `0x00454738..0x00454746` wraps retained memcpy and returns the destination, `0x00454746..0x0045475A` wraps retained memset with the recovered argument order, `0x0045475A..0x00454768` wraps retained memmove and returns the destination, `0x00454768..0x00454770` wraps retained strlen, and `0x00454778..0x004547AE` implements the bounded string-copy helper over retained strlen/memcpy.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 — AM-021 LVGL flush callback and wait helpers routed in place
+
+Routed the AM-021 LVGL flush helpers in `runtime_obj_small_helpers.c`: `0x00454648..0x00454692` as `open_cfw_runtime_call_flush_cb`, matched to `call_flush_cb`, and `0x00454692..0x004546CE` as `open_cfw_runtime_wait_for_flushing`, matched to `wait_for_flushing`. The first builds the offset flush area, sends `LV_EVENT_FLUSH_START`/`LV_EVENT_FLUSH_FINISH`, and calls the display flush callback; the second sends wait start/finish events, uses `flush_wait_cb` when present, otherwise spins until flushing clears, and resets `flushing_last`.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 - AM-021 LVGL max-row and draw-buffer flush helpers source-routed
+
+Routed AM-021 LVGL max-row/flush helpers `0x004544AE..0x00454612` via `runtime_obj_small_helpers.c`: `open_cfw_runtime_get_max_row` matches `third_party/lvgl/src/core/lv_refr.c:get_max_row`, including color-format stride reservation, row-count clamping, invalidation event probing, and assert paths; `open_cfw_runtime_draw_buf_flush` matches `draw_buf_flush`, including draw-dispatch draining, double-buffer wait/flush state, source-owned flush callback invocation, and draw-buffer swap handling. Strict Apple-clang component validation passes on macOS; overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### 2026-09-16 - AM-021 LVGL invalid-area entry source-routed
+
+Routed AM-021 LVGL invalid-area entry `0x004534BE..0x00453604` as `open_cfw_runtime_lv_inv_area` in `runtime_obj_small_helpers.c`, matched to `third_party/lvgl/src/core/lv_refr.c:lv_inv_area`. The in-place helper resolves a null display to the default display, validates display state, preserves the rendering-in-progress assert/trap path, clips invalidation to the display, rounds monochrome invalidations, handles direct render mode, deduplicates invalid areas, appends/reset-wraps the invalid-area ring, and sends invalidate/render events. Strict Apple-clang component validation passes on macOS; overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### 2026-09-16 - AM-021 LVGL refresh-now driver source-routed
+
+Routed AM-021 LVGL refresh-now driver `0x0045360C..0x0045377A` as `open_cfw_runtime_lv_refr_now` in `runtime_obj_small_helpers.c`, matched to `third_party/lvgl/src/core/lv_refr.c:lv_refr_now`. The in-place helper updates the current display from a timer/default display, preserves stock display/draw-buffer/no-active-screen assert paths, sends render-start/render-finish events, updates screen and layer layouts, calls the source-owned join/sync/invalid-area helpers, copies direct-mode invalid areas into the sync list, clears invalid area/joined state through the source-owned memzero helper, and remains byte-identical under Apple clang. Strict Apple-clang component validation passes on macOS; overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### 2026-09-16 - AM-021 LVGL refresh-area slicer source-routed
+
+Routed AM-021 LVGL refresh-area slicer `0x00453BCE..0x00453E10` as `open_cfw_runtime_refr_area` in `runtime_obj_small_helpers.c`, matched to `third_party/lvgl/src/core/lv_refr.c:refr_area`. The in-place helper configures full/direct/partial render layer areas, splits partial refreshes into allocated layer strips, dispatches each configured layer, unlinks temporary layers after draw dispatch drains, invokes the display layer-delete callback when present, frees the temporary layer array, and copies the refreshed area back to display state.
+
+Verified on macOS with `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The in-place leaf is byte-identical to stock at 578 bytes, SHA-256 `379b793b9f8e5adc077d8229a6d42cec5479348629a3e602fbfea2f9a4fae8a3`; the Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions. AM-021 now has one tracked function remaining: `0x004531AE..0x004534BE`.
+
+### 2026-09-16 - AM-021 LVGL object redraw entry source-routed
+
+Routed the final AM-021 LVGL object redraw entry `0x004531AE..0x004534BE` as `open_cfw_runtime_lv_obj_redraw` in `runtime_obj_small_helpers.c`, matched to `third_party/lvgl/src/core/lv_refr.c:lv_obj_redraw`. The in-place helper preserves clip-area setup and restoration, object extended-draw clipping, main and post draw events, overflow-visible child clipping, child redraw traversal, clip-corner radius handling, temporary ARGB child layers for bottom/top clipped bands, mask drawing, layer compositing, and the direct mid-band redraw path.
+
+Verified on macOS with isolated leaf compilation, `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The leaf is byte-identical to stock at 784 bytes, SHA-256 `a1920377cdc124a3d3264f8b317439fc6bd43dee839af026089aa785e1cc9b1b`; the Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions. AM-021 is now fully source-owned for the macOS build path.
+
+### 2026-09-16 - AM-004 tiny LVGL class and area helpers source-routed
+
+Routed three AM-004 tiny LVGL helpers in `runtime_obj_small_helpers.c`: `0x0043E2BC..0x0043E2D4` as `open_cfw_runtime_lv_obj_check_type`, matched to `third_party/lvgl/src/core/lv_obj.c:lv_obj_check_type`; `0x0043E2D4..0x0043E2EA` as `open_cfw_runtime_lv_obj_has_class`, matched to `lv_obj_has_class`; and `0x0043EE94..0x0043EEA6` as `open_cfw_runtime_lv_area_copy_inline`, matched to inline `lv_area_copy` in `third_party/lvgl/src/misc/lv_area.h`. While refreshing the shared helper source hash, also repaired the existing AM-020 `open_cfw_runtime_obj_nibble_a8_or_zero` branch target so its isolated compile remains byte-identical.
+
+Verified on macOS with isolated leaf compilation, `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, and targeted littlefs/FreeType verifiers. The three AM-004 leaves are byte-identical to stock; the Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 - AM-004 LVGL object-validity helpers source-routed
+
+Routed two AM-004 LVGL object-validity helpers in `runtime_obj_small_helpers.c`: `0x0043EE54..0x0043EE94` as `open_cfw_runtime_obj_valid_child`, matched to recursive `obj_valid_child` in `third_party/lvgl/src/core/lv_obj.c`, and `0x0043E2EA..0x0043E33E` as `open_cfw_runtime_lv_obj_is_valid`, matched to `lv_obj_is_valid`. The recursive helper uses an admitted self-call relocation, and `lv_obj_is_valid` scans display screens through retained `lv_display_get_next` before delegating to the selected source-owned child-validity helper.
+
+Verified on macOS with isolated leaf compilation, `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, and targeted littlefs/FreeType verifiers. Both leaves are byte-identical to stock; the Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 - AM-004 LVGL style getter tail source-routed
+
+Routed the AM-004 LVGL style getter veneer tail `0x0043EEA6..0x0043EF70` in `runtime_obj_layout_style_getters.c`. The 20 source-owned veneers forward to retained `lv_obj_get_style_prop` for properties `0x01`, `0x02`, `0x04..0x0a`, `0x10..0x13`, and `0x6c..0x72`; the property `0x0a` veneer preserves the stock byte-normalized return path.
+
+Verified on macOS with isolated leaf compilation, `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, and targeted littlefs/FreeType verifiers. All 20 leaves are byte-identical to stock; the Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 - AM-004 LVGL spec-attr allocator source-routed
+
+Routed AM-004 `0x0043E1FA..0x0043E282` as `open_cfw_runtime_lv_obj_allocate_spec_attr` in `runtime_obj_small_helpers.c`, matched to `third_party/lvgl/src/core/lv_obj.c:lv_obj_allocate_spec_attr`. The in-place helper preserves the null-object assert/trap path, retained `lv_malloc_zeroed` allocation, malloc assert/trap path, and the default `scroll_dir`/`scrollbar_mode` initialization bits for newly allocated `spec_attr`.
+
+Verified on macOS with isolated leaf compilation, `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, and targeted littlefs/FreeType verifiers. The leaf is byte-identical to stock at 136 bytes, SHA-256 `7d7b58facd292768c0abd46e57e8e5c0ed517ce8505d0bb81878885996a494d0`; the Apollo component remains byte-identical at 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical at 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 - AM-004 LVGL layer descriptor child helper source-routed
+
+Routed AM-004 `0x0043E33E..0x0043E3DE` as `open_cfw_runtime_layer_dsc_from_child` in `runtime_obj_small_helpers.c`. The helper initializes an LVGL draw-layer descriptor from its attached child object, preserving the stock child width/height and style x/y retained calls plus the original descriptor flag write order.
+
+Verified on macOS with isolated leaf compilation. The leaf is byte-identical to stock at 160 bytes, SHA-256 `dd41d3e6e8e31d15ada34ed2bb11bbc3309e7c421935c6ed055ecf6f60d17a11`, with strict retained-call relocations for child width/height and style x/y accessors. AM-004 now has 27 of 32 tracked functions source-owned in-place on macOS; 5 opaque functions remain.
+
+### 2026-09-16 - AM-004 LVGL layer rect wrapper source-routed
+
+Routed AM-004 `0x0043E63E..0x0043E6A6` as `open_cfw_runtime_draw_layer_part_rects` in `runtime_obj_small_helpers.c`. The helper computes the two local draw areas, skips empty-area work through retained `lv_area_get_size`, delegates descriptor initialization to the still-opaque `0x0043E6A6` helper, and emits each visible rect through retained `lv_draw_rect`.
+
+Verified on macOS with isolated leaf compilation, `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The leaf is byte-identical to stock at 104 bytes, SHA-256 `f4d5e1269cfe62515ceeb1d1770f1af8136b7024bf68b3b0e7b5ecd6ac2ddfff`, with strict retained-call relocations for layer draw areas, `lv_area_get_size`, the remaining layer rect descriptor initializer, and `lv_draw_rect`. The Apollo overlay remains 386,550 bytes, SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the Apollo component remains 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions. AM-004 now has 28 of 32 tracked functions source-owned in-place on macOS; 4 opaque functions remain.
+
+### 2026-09-16 - AM-004 LVGL layer rect descriptor initializer source-routed
+
+Routed AM-004 `0x0043E6A6..0x0043E7D2` as `open_cfw_runtime_layer_rect_dsc_for_part` in `runtime_obj_small_helpers.c`. The helper initializes the rect descriptor for the layer part, loads bg/border/shadow style opacity, dimensions, colors, applies recursive opacity, and returns whether any visible rect styling remains.
+
+Verified on macOS with isolated leaf compilation, `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The leaf is byte-identical to stock at 300 bytes, SHA-256 `d498709e01931e9e8ca5ab5f4ee4ae836e9fcc35dafadf91d3e3fae2ab1ad751`, with strict retained-call relocations for rect descriptor init, bg/border/shadow style getters, color copies, recursive opacity, and radius. The Apollo overlay remains 386,550 bytes, SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the Apollo component remains 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions. AM-004 now has 29 of 32 tracked functions source-owned in-place on macOS; 3 opaque functions remain.
+
+### 2026-09-16 - AM-004 LVGL object draw event helper source-routed
+
+Routed AM-004 `0x0043E442..0x0043E63E` as `open_cfw_runtime_obj_draw_event_core` in `runtime_obj_small_helpers.c`. The helper covers the LVGL object cover-check, draw-main, and draw-post event paths: cover classification, main rect descriptor setup/draw, scrollbar drawing through the source-owned layer rect helper, and delayed border drawing.
+
+Verified on macOS with isolated leaf compilation, `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The leaf is byte-identical to stock at 508 bytes, SHA-256 `0a31db89c73b8482a704211f0d46e13fc515c507e2b274369b4afccc1f62bec2`, with strict retained-call relocations for event accessors, style getters, area helpers, descriptor initialization, and draw calls. The Apollo overlay remains 386,550 bytes, SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the Apollo component remains 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions. AM-004 now has 30 of 32 tracked functions source-owned in-place on macOS; 2 opaque functions remain.
+
+### 2026-09-16 - AM-004 LVGL update_obj_state source-routed
+
+Routed AM-004 `0x0043EBEC..0x0043EE2C` as `open_cfw_runtime_update_obj_state_exact` in `runtime_obj_small_helpers.c`. The helper is matched to LVGL's `update_obj_state` transition collector: it preserves the null-object assert/trap path, visible-style classification, pre/post invalidation hooks, 32-entry transition candidate scratch allocation, selector state/part filtering, duplicate candidate suppression, retained transition launch, scratch free, and final ext-draw/layout refresh decisions.
+
+Verified in isolation on macOS with Apple clang. The in-place leaf is byte-identical to stock at 576 bytes, SHA-256 `21a00bae79f306151cc6f0c6162e819db8b357148d3bb674a73126d7656545bc`, with strict retained-call relocations for assert logging, style-state comparison, state hooks, transition descriptor lookup, transition launch, heap free, ext-draw refresh, and layout refresh. AM-004 now has 31 of 32 tracked functions source-owned in-place on macOS; the only remaining opaque AM-004 function is `0x0043E7D2..0x0043EBEC`.
+
+Follow-up validation for the `update_obj_state` route passed on macOS: `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo overlay remains 386,550 bytes, SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the Apollo component remains 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 - AM-004 LVGL object event dispatcher source-routed
+
+Routed the final AM-004 retained function `0x0043E7D2..0x0043EBEC` as `open_cfw_runtime_obj_event_dispatch_exact` in `runtime_obj_event_dispatch_exact.S`. The source-shaped dispatcher preserves the LVGL object event behavior identified from `FUN_0043e7d2`: pressed/released state updates, checkable value toggling, child invalidation, key-driven checked-state and scroll handling, focus/edit-state transitions, scrollbar invalidation, size/child/style-change invalidation, group lookup response, draw-event forwarding to the source-owned draw event core, and defocus/pressed/focus state cleanup.
+
+The leaf is byte-identical to stock at 1,050 bytes, SHA-256 `4ed3f3daf953f7cd0f32f469ffb6dbc94051ce1a7a5a52c5e70536ddd5f2b786`, with 77 strict retained/source call relocations. AM-004 is now fully source-owned in-place on the macOS build path: all 32 tracked functions / 3,248 stock bytes in `0x0043E1FA..0x0043EF70` are routed from source.
+
+Validated on macOS with isolated dispatcher compilation, `python3 components/apollo_main/core_overlay/build_component.py`, `python3 tools/open_cfw.py build --manifest manifests/g2-2.2.6.10-core-source.json --output-dir build/source`, targeted littlefs/FreeType verifiers, and full `make -C g2 build`. The Apollo overlay remains 386,550 bytes, SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the Apollo component remains 3,956,672 bytes, SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains 4,750,780 bytes, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8,001 placed flash regions and 0 unresolved flash regions.
+
+### 2026-09-16 - AM-001 liblc3 LTPF tiny arithmetic helper source-routed
+
+Started AM-001 after completing AM-004. Routed `0x004396B8..0x004396C2` as `open_cfw_runtime_liblc3_ltpf_times10_plus_one` in `runtime_liblc3_ltpf_bits_small_helpers.c`. The helper is the 10-byte `x * 10 + 1` leaf identified by `g2-liblc3-ltpf-bits-cluster-census.md`; it emits `add.w r1, r0, r0, lsl #2`, `lsls r0, r1, #1`, `adds r0, r0, #1`, `bx lr`.
+
+Verified in isolation on macOS: the leaf is byte-identical to stock at 10 bytes, SHA-256 `6c437d87ac13ec60006995e687743f2ab3b7122effc209df9eb27e7a6b8fc2e2`, with no relocations. AM-001 now has 1 of 32 tracked functions source-owned in-place on macOS; 31 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 LTPF/bits small-helper trio source-routed
+
+Routed three additional AM-001 small helpers in `runtime_liblc3_ltpf_bits_small_helpers.c`: `0x004397A6..0x004397A8` as `open_cfw_runtime_liblc3_ltpf_self_loop`, `0x00439E90..0x00439E9C` as `open_cfw_runtime_liblc3_bits_flush_preserve_wrapper`, and `0x0043A110..0x0043A11E` as `open_cfw_runtime_liblc3_float_to_double_words`. The wrapper preserves the incoming bits pointer across the retained flush core at `0x00439BE4`; the conversion helper preserves the stock VFP `float` to double-word sequence.
+
+Verified in isolation on macOS. The leaves are byte-identical to stock: 2 bytes / SHA-256 `575fc8fa9e92ffe7d57a6aef6f1168f39da04f07d6bcd5b5e17883bff7b33165`, 12 bytes / SHA-256 `6f346ef9c2e2f8e361b9c3e090cf7f8fc194b23dfda2a233baeec822a94026f9`, and 14 bytes / SHA-256 `aea8784b66f355be4df946b1dc5801da1265391e1f37497bb51352ff7ffcf145`. AM-001 now has 4 of 32 tracked functions source-owned in-place on macOS; 28 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 LTPF resample wrappers source-routed
+
+Routed two AM-001 liblc3 LTPF resample table-entry wrappers in `runtime_liblc3_ltpf_bits_small_helpers.c`: `0x00438EBA..0x00438ED4` as `open_cfw_runtime_liblc3_ltpf_resample_wrapper_8` and `0x00438ED4..0x00438EEE` as `open_cfw_runtime_liblc3_ltpf_resample_wrapper_2`. Both wrappers preserve the stock stack argument forwarding, factor literal (`8` or `2`), PC-relative coefficient-table load, and retained call to the shared resample core at `0x00438BF0`.
+
+Verified in isolation on macOS. The leaves are byte-identical to stock: 26 bytes / SHA-256 `d0bfd86e8f92aa82cea732907d6b520c1e8c9dd3e003699674a7dc589b7a4c14` and 26 bytes / SHA-256 `c45eeeca763dfae144bac82363fc95f147b83516412859136e8769cc84d287f1`, each with one strict retained-call relocation. AM-001 now has 6 of 32 tracked functions source-owned in-place on macOS; 26 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 bits writer helpers source-routed
+
+Routed three AM-001 liblc3 bits helpers in `runtime_liblc3_ltpf_bits_small_helpers.c`: `0x00439914..0x0043992C` as `open_cfw_runtime_liblc3_bits_left_positive_wrapper`, `0x00439B12..0x00439B52` as `open_cfw_runtime_liblc3_bits_put_generic`, and `0x00439B54..0x00439B78` as `open_cfw_runtime_liblc3_bits_ac_write_renorm`. These preserve the stock bits-left positive wrapper, generic accumulator writer over retained `accu_flush`, and arithmetic-coder renormalization loop over retained `ac_shift`.
+
+Verified in isolation on macOS. The leaves are byte-identical to stock: 24 bytes / SHA-256 `7424b9eaf021c9832a7b6a722156a72e707dda7c8b871245ca355c2ae10d247c`, 64 bytes / SHA-256 `8944a67a4e5decbccc398178a78e6a3ca8b010192a8673f0216660cd32b355ef`, and 36 bytes / SHA-256 `b51185af3e3fb910cdf401da24e304625b6de69944223eb8528f1a7c9955706f`. AM-001 now has 9 of 32 tracked functions source-owned in-place on macOS; 23 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 float/select and scanner helpers source-routed
+
+Routed five additional AM-001 helpers in `runtime_liblc3_ltpf_bits_small_helpers.c`: `0x004397D0..0x004397FA` as `open_cfw_runtime_liblc3_bits_word_nbits`, `0x00439EFC..0x00439F24` as `open_cfw_runtime_liblc3_float_select_nonzero_min`, `0x00439F88..0x00439FB4` as `open_cfw_runtime_liblc3_float_select_signed_min`, `0x00439FB4..0x00439FE4` as `open_cfw_runtime_liblc3_scan_three_markers`, and `0x0043A0F4..0x0043A10E` as `open_cfw_runtime_liblc3_float_classify_wrapper`. These cover a word bit-length loop, two VFP compare/select helpers, a three-marker byte scanner, and the float-classification wrapper over the already source-owned float-to-double helper plus retained double classifier.
+
+Verified in isolation on macOS. The leaves are byte-identical to stock: 42 bytes / SHA-256 `0920c5deeb53a499ba345bd3ae8f51b2a1f269aa2f3fa768762d15ec18c254bf`, 40 bytes / SHA-256 `1ab10543294b0387fe944447b77c0f56d78db95e8032c8c24f63eccf8e3116f7`, 44 bytes / SHA-256 `b52cab9d9bda2ed98cc548c755e5fb877844011709926c371de1721ef9b09922`, 48 bytes / SHA-256 `faf22290dcef45e5b4841067180972213d66a9d32bf062b18a01fe6bd18020c5`, and 26 bytes / SHA-256 `d709bf2348b65012a420c3ea108c30d266dbf26b7ea3c6fc7c2f11602480e858`. AM-001 now has 14 of 32 tracked functions source-owned in-place on macOS; 18 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 bits cores and three-float selectors source-routed
+
+Routed five more AM-001 helpers/cores in `runtime_liblc3_ltpf_bits_small_helpers.c`: `0x004397FA..0x00439868` as `open_cfw_runtime_liblc3_get_bits_left_core`, `0x0043992C..0x0043996C` as `open_cfw_runtime_liblc3_accu_flush`, `0x0043996C..0x004399E4` as `open_cfw_runtime_liblc3_ac_shift`, `0x00439E9C..0x00439EFC` as `open_cfw_runtime_liblc3_float_select3_max`, and `0x00439F24..0x00439F86` as `open_cfw_runtime_liblc3_float_select3_min`. This closes the retained callees behind the already-routed bits-left, generic bits-put, and AC-renormalization wrappers, plus moves the two three-float VFP selector helpers over the source-owned float classifier.
+
+Verified on macOS through the Apollo core overlay builder and core-source package builder. The leaves are byte-identical to stock: 110 bytes / SHA-256 `a62df099718789459a90bb674152d2816981b539573d85f1fbd8dd6a2e194839`, 64 bytes / SHA-256 `4af9d5203d500ef02d5a38ca48acd742e1331b5918f1a2b92a32ad1f18d72412`, 120 bytes / SHA-256 `8e49dc7190e18a22ba0e5a6ff041e4e3a4539655a973b4fa2274cae2d64f0177`, 96 bytes / SHA-256 `99c13fff7dbb002a4916693cfeb66c4a5dc95184afae4f457d94cd099028a376`, and 98 bytes / SHA-256 `f17d7e6e816cb4af3dbe13ab0e1c96d0977b60962d71b51b3af8b7031702bd6c`. The component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8001 placed flash regions and 0 unresolved regions. AM-001 now has 19 of 32 tracked functions source-owned in-place on macOS; 13 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 flag-plus-nine bits writer source-routed
+
+Routed `0x004396C2..0x00439710` as `open_cfw_runtime_liblc3_bits_put_flag_and_9` in `runtime_liblc3_ltpf_bits_small_helpers.c`. The helper writes a one-bit flag and a nine-bit value directly when they fit, otherwise falling through to the source-owned generic bits-put helper for overflow and tail cases.
+
+Verified on macOS through the Apollo core overlay builder and core-source package builder. The leaf is byte-identical to stock: 78 bytes / SHA-256 `8457d813734a0be634c96c6433a86d9a226b516390feb11e341abca0f8c264c7`. The component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8001 placed flash regions and 0 unresolved regions. AM-001 now has 20 of 32 tracked functions source-owned in-place on macOS; 12 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 LTPF FIR resample helper source-routed
+
+Routed `0x00438EF0..0x00438F98` as `open_cfw_runtime_liblc3_ltpf_resample_fir7` in `runtime_liblc3_ltpf_bits_small_helpers.c`. The helper preserves the stock seven-tap VFP FIR/resample sequence and its literal-table loads while keeping the function call-free.
+
+Verified on macOS through the Apollo core overlay builder and core-source package builder. The leaf is byte-identical to stock: 168 bytes / SHA-256 `d79737d5b66adb1b6fe7ba69f352877af00b4d32405f8c528ca2cc08701f4da0`. The component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8001 placed flash regions and 0 unresolved regions. AM-001 now has 21 of 32 tracked functions source-owned in-place on macOS; 11 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 bits flush terminator source-routed
+
+Routed `0x004399E4..0x00439B12` as `open_cfw_runtime_liblc3_bits_flush_terminate` in `runtime_liblc3_ltpf_bits_small_helpers.c`. The helper now preserves the stock end-of-bitstream/arithmetic-coder termination path over the already source-owned generic put, accumulator flush, word-bit-count, and AC-shift helpers.
+
+Verified on macOS through the Apollo core overlay builder and core-source package builder. The leaf is byte-identical to stock: 302 bytes / SHA-256 `ce203cf1bc103e5c08530e3eb990baf9fca18cf503a82ac1fe1aa4279d20e22a`. The component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8001 placed flash regions and 0 unresolved regions. AM-001 now has 22 of 32 tracked functions source-owned in-place on macOS; 10 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 setup/refill sub-entry source-routed
+
+Routed the internal `lc3_setup_bits` sub-entry `0x00439B78..0x00439BC6` as `open_cfw_runtime_liblc3_bits_setup_refill` in `runtime_liblc3_ltpf_bits_small_helpers.c`, and corrected the remaining-work tracker's `0x00439868` span byte count to the authoritative 862-byte `lc3_setup_bits` span. The full overlapping setup span remains investigation-required, but this standalone refill entry is now source-owned in-place.
+
+Verified on macOS through the Apollo core overlay builder and core-source package builder. The leaf is byte-identical to stock: 78 bytes / SHA-256 `86286c25b77a529b732d46544ca2faf0b03e2e2546962aa5988640fcb825b9f3`. The component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8001 placed flash regions and 0 unresolved regions.
+
+### 2026-09-16 - AM-001 liblc3 LTPF candidate selector source-routed
+
+Routed `0x00439CE0..0x00439E7E` as `open_cfw_runtime_liblc3_ltpf_candidate_select` in `runtime_liblc3_ltpf_bits_small_helpers.c`. The helper now preserves the stock LTPF candidate selection flow over source-owned float selector/scanner helpers, while keeping the remaining interpolation-pair helper at `0x00439FE4` as an explicit retained call boundary.
+
+Verified on macOS through the Apollo core overlay builder and core-source package builder. The leaf is byte-identical to stock: 414 bytes / SHA-256 `4aac05ddd121150afde1c527fbd3dbfc0a97cb3e4be538198383572d1d685e52`. The component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8001 placed flash regions and 0 unresolved regions. AM-001 now has 23 of 32 tracked functions source-owned in-place on macOS; 9 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 LTPF interpolation-pair helper source-routed
+
+Routed `0x00439FE4..0x0043A0EE` as `open_cfw_runtime_liblc3_float_interpolate_pair` in `runtime_liblc3_ltpf_bits_small_helpers.c`. This removes the retained interpolation-pair seam behind the candidate selector, preserving the stock VFP arithmetic and low-overhead loop encodings while keeping its classifier calls source-owned.
+
+Verified on macOS through the Apollo core overlay builder and core-source package builder. The leaf is byte-identical to stock: 266 bytes / SHA-256 `f91ec9ce03d64317ef0fcc1b8cf87db9437c5fcde4ddcd2658b289f0596a9519`. The component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8001 placed flash regions and 0 unresolved regions. AM-001 now has 24 of 32 tracked functions source-owned in-place on macOS; 8 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 LTPF dot-product helper source-routed
+
+Routed `0x00438770..0x004387B0` as `open_cfw_runtime_liblc3_ltpf_dot_float` in `runtime_liblc3_ltpf_bits_small_helpers.c`. The helper preserves the stock MVE/coprocessor dot-product loop and low-overhead loop encodings, including the exact stock `add.w` encoding that Apple clang otherwise rewrites to an equivalent byte-different form.
+
+Verified on macOS through the Apollo core overlay builder and core-source package builder. The leaf is byte-identical to stock: 64 bytes / SHA-256 `220ecc380c1ddd21a1d98d09755e023fde11f09832e2526db87a7fa71fb1d83a`. The component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8001 placed flash regions and 0 unresolved regions. AM-001 now has 25 of 32 tracked functions source-owned in-place on macOS; 7 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 LTPF 8k resampler source-routed
+
+Routed `0x00438D8A..0x00438EBA` as `open_cfw_runtime_liblc3_ltpf_resample_8k` in `runtime_liblc3_ltpf_bits_small_helpers.c`. The helper preserves the stock fixed-point 8 kHz to 12.8 kHz resample loop, including the literal-table loads and call-free accumulator update path.
+
+Verified on macOS through the Apollo core overlay builder and core-source package builder. The leaf is byte-identical to stock: 304 bytes / SHA-256 `677874d7d1245de19846dcbf5cd201b8b9d9dc1fe0f053ecfedf6a2ef89e2e3e`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`; the core-source package remains byte-identical, SHA-256 `73b16bfbc9c4450ebde061301074794851d08bd764ca53fc9c8d1bfc03a08ed4`, with 8001 placed flash regions and 0 unresolved regions. AM-001 now has 26 of 32 tracked functions source-owned in-place on macOS; 6 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 shared LTPF resampler core source-routed
+
+Routed `0x00438BF0..0x00438D8A` as `open_cfw_runtime_liblc3_ltpf_resample_core` in `runtime_liblc3_ltpf_bits_small_helpers.c`. This removes the retained call boundary behind the factor-8 and factor-2 wrappers by retargeting both wrappers to the source-owned core symbol, while preserving the stock 15-tap fixed-point phase loop and state accumulator updates.
+
+Verified on macOS through the Apollo core overlay builder. The leaf is byte-identical to stock: 410 bytes / SHA-256 `76a5ed3dd617517bdd054156e15c947b982745ffcfec80675151b89baa7ccb7e`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-001 now has 27 of 32 tracked functions source-owned in-place on macOS; 5 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 32 kHz LTPF resampler source-routed
+
+Routed `0x00438504..0x00438604` as `open_cfw_runtime_liblc3_ltpf_resample_32k` in `runtime_liblc3_ltpf_bits_small_helpers.c`. The helper preserves the stock 32 kHz to 12.8 kHz fixed-point resample path, including the MVE/coprocessor MAC sequence over the upstream `h_32k_12k8_q15` coefficient table and the accumulator state update literals shared with the other LTPF resamplers.
+
+Verified on macOS through the Apollo core overlay builder. The leaf is byte-identical to stock: 256 bytes / SHA-256 `541e4f2a0d4f1d1b0228bbb36f51fed3e8b71bed96c6de0d72fe302adbb96c72`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-001 now has 28 of 32 tracked functions source-owned in-place on macOS; 4 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 LTPF correlation loop source-routed
+
+Routed `0x004387B0..0x00438924` as `open_cfw_runtime_liblc3_ltpf_correlate` in `runtime_liblc3_ltpf_bits_small_helpers.c`. The helper preserves the stock vectorized four-output correlation block plus scalar tail, including the low-overhead loop halfwords and MVE/coprocessor accumulation sequence used by `lc3_ltpf_analyse`.
+
+Verified on macOS through the Apollo core overlay builder. The leaf is byte-identical to stock: 372 bytes / SHA-256 `919619bc7f661846144b5ca4cb6013a691ee6f30af74116246abfe1485f7d15c`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-001 now has 29 of 32 tracked functions source-owned in-place on macOS; 3 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 LTPF h4 interpolation helper source-routed
+
+Routed `0x00438924..0x00438BCC` as `open_cfw_runtime_liblc3_ltpf_interpolate` in `runtime_liblc3_ltpf_bits_small_helpers.c`. This first source route preserves the exact Thumb halfword stream for the h4 phase interpolation helper anchored by the byte-exact upstream `ltpf.c:h4_q15` table; the span no longer needs retained binary pull-through in the macOS firmware build, though it can still be mechanically cleaned up into mnemonic assembly later.
+
+Verified on macOS through the Apollo core overlay builder. The leaf is byte-identical to stock: 660 bytes / SHA-256 `eb500840793c1dc3bef1455d7def0180c3a4ddfb7cc93182ae5b684786599990`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-001 now has 30 of 32 tracked functions source-owned in-place on macOS; 2 investigation-required functions remain.
+
+### 2026-09-16 - AM-001 liblc3 bits setup init source-routed
+
+Routed the `lc3_setup_bits` init body `0x00439868..0x0043990E` as `open_cfw_runtime_liblc3_bits_setup_init` in `runtime_liblc3_ltpf_bits_small_helpers.c`. Together with the already source-owned refill sub-entry at `0x00439B78..0x00439BC6`, this accounts for the actual discontinuous `FUN_00439868` body while leaving the intervening addresses attributed to their separate already-routed bits helpers/data.
+
+Verified on macOS through the Apollo core overlay builder. The init leaf is byte-identical to stock: 166 bytes / SHA-256 `6e24ae872b47edcd1aa6e8f9473bdbb11d8d42796ce07036ee7a2937bbec09d6`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-001 now has 31 of 32 tracked functions source-owned in-place on macOS; 1 investigation-required function remains.
+
+### 2026-09-16 - AM-001 liblc3 LTPF analyse source-routed
+
+Routed the full contiguous `lc3_ltpf_analyse` envelope `0x00438FB8..0x00439666` as `open_cfw_runtime_liblc3_ltpf_analyse` in `runtime_liblc3_ltpf_bits_small_helpers.c`. This first source route preserves the exact Thumb halfword stream, including interior nops and literal pools that Ghidra omits from its 1,684-byte executable body; the contiguous 1,710-byte envelope is now owned by source on the macOS build path.
+
+Verified on macOS through the Apollo core overlay builder. The envelope is byte-identical to stock: 1,710 bytes / SHA-256 `2c5a55fe1c184dd084ac2485fb66c66342f75d0e9c8022993c0342bf11c3ba9a`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-001 is now fully source-owned in-place on macOS: all 32 tracked functions in `0x00438504..0x0043A11E` are routed from source.
+
+### 2026-09-16 - AM-002 first small helpers source-routed
+
+Started the AM-002 retained island by routing three small leaves from `runtime_liblc3_am002_helpers.c`: `0x0043A11E..0x0043A19C` as `open_cfw_runtime_am002_expand_copy`, `0x0043A19C..0x0043A1B0` as `open_cfw_runtime_am002_double_range_predicate`, and `0x0043A5A0..0x0043A5B0` as `open_cfw_runtime_am002_float_helper_wrapper`. The wrapper still calls the retained `0x0043A5B0` integer helper as an explicit boundary for the next AM-002 pass.
+
+Verified on macOS through the Apollo core overlay builder. The leaves are byte-identical to stock: 126 bytes / SHA-256 `41e4a34428bb2c09774785d474f5209201f6551c823f0286eb66063dedc74a9d`, 20 bytes / SHA-256 `5dd89c8cd4e82e68ba7815fd537ec87765005b07b3de4c8b312227dc53b93610`, and 16 bytes / SHA-256 `da866fc4fccf0259dd93fd26bc7447b0f0335ec8275f5cd31b4849a8f6de046b`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 3 of 32 tracked functions source-owned in-place on macOS; 29 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 integer float helper source-routed
+
+Routed `0x0043A5B0..0x0043A5DC` as `open_cfw_runtime_am002_integer_float_helper` in `runtime_liblc3_am002_helpers.c`, and retargeted `open_cfw_runtime_am002_float_helper_wrapper` to call the source-owned helper instead of the retained placeholder address. The helper preserves the stock exponent extraction, mantissa mask, sign adjustment, and zero/negative-one handling path.
+
+Verified on macOS through the Apollo core overlay builder. The leaf is byte-identical to stock: 44 bytes / SHA-256 `ba53107c41d7b78d37fea9f4c52330599640f8dab9d4be1bc94e05c8c932d234`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 4 of 32 tracked functions source-owned in-place on macOS; 28 functions remain opaque or LVGL-associated.

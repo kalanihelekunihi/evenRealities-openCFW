@@ -1,0 +1,83 @@
+{
+  "candidate": {
+    "dependency_headers": {
+      "include/utility/list.h": {
+        "blob": "a2fb4a323b20e06c996fe77e36f53844ed2a9ef9",
+        "sha256": "c8d2eed5cc87a9265bbc01bfef2a93d05af840698f64f8fec7e818b16fcc5016"
+      },
+      "include/utility/types.h": {
+        "blob": "3fa306b661b584f11909cf125d6de84f9e150848",
+        "sha256": "df7d77a47a001c6f204b0b41a1024ff9c2c876d82de5a67438f70e1aadd22a16"
+      }
+    },
+    "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "oracle": {
+      "path": "drivers_lib/spi/dw_spi/spi_master_v3.o",
+      "blob": "600d763a219007e2af7b5006989d44984abf0861",
+      "sha256": "02ed04414f74b393f6703aab6a6e0484b18d30c02b74a11ecc5fe856e02684ae",
+      "role": "identity_only"
+    },
+    "bindings": {
+      "open_cfw_gx8002_clock_gate": 268450792
+    },
+    "flags": [
+      "-Os",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-jump-tables"
+    ],
+    "header": {
+      "path": "include/driver/spi.h",
+      "blob": "aabfb6e88beeee65eb74262d339d0ce44fdfcbce",
+      "sha256": "b158f2feee6baed0af40b3d2c5db0bfa0c76b4d8d96a8484ddcb98df04f69ebd"
+    },
+    "source_sha256": "6c191c1659bdfad8c6c97b08f4d2b95ebdfa11f729f4250d7d6f469bec5ae13c",
+    "symbol": "open_cfw_gx8002_dw_spi_quick_transfer",
+    "section_name": ".text",
+    "package_offset": 265192,
+    "compiled_bytes": 620,
+    "compiled_sha256": "98bc8ab67f886119ad713d0c56b1a536e583578cd644f6dd0a0c80a36e81fd97",
+    "stock_envelope_bytes": 656,
+    "stock_sha256": "9d37b52dc5a5735ab638aca78f5a9f5a7b7e40594b68cc42afc4f3136f9235b2",
+    "fits": true,
+    "source_admitted": false,
+    "limits": [
+      "Build evidence only; see the separate decoded qualification and composed execution reports. Full driver state ownership and hardware qualification remain incomplete."
+    ]
+  },
+  "reports": {
+    "lifecycle": {
+      "cases": 4,
+      "report_sha256": "87372d59d1a0f69b876dc73ebaada0f208c94063b909e9bccb1f31a05236aab3"
+    },
+    "alignment": {
+      "cases": 280,
+      "report_sha256": "1977fdb08525650be2709a887befbb00caed3dd2b3a8654ece909d6ceb6b5379"
+    },
+    "tx": {
+      "cases": 160,
+      "report_sha256": "acebda118e695ad9d7e44bdc728c8475b3e37d97f3ac834543c8636f1a1a56cb"
+    },
+    "rx": {
+      "cases": 160,
+      "report_sha256": "1a58409e6f926f549b49d0b4f779799711ca429ae0ce663094073cf6569a642f"
+    },
+    "message": {
+      "cases": 270,
+      "report_sha256": "e8b3044a913bd13acacd6dc3422a6e79b8fe022902e7ef3d4db035db55eb9ea7"
+    }
+  },
+  "total_cases": 874,
+  "source_admitted": false,
+  "limits": [
+    "This audit verifies evidence consistency, not new executions. Finite buffer/list/FIFO models remain bounded.",
+    "No malformed/concurrent metadata, unsupported widths, physical timing or whole-firmware qualification."
+  ]
+}

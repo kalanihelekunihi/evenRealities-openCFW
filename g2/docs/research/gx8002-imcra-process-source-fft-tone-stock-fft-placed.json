@@ -1,0 +1,90 @@
+{
+  "build": {
+    "source_sha256": "1057010fe994b0b19e8bcaebc69443670fa953d92773853160fb9894cd96c1a6",
+    "stage_sources": {
+      "components/shared/gx8002/runtime_gx8002_imcra_process.c": "1057010fe994b0b19e8bcaebc69443670fa953d92773853160fb9894cd96c1a6",
+      "components/shared/gx8002/runtime_gx8002_imcra_prepare.c": "a2ad4833c9992540ac5d796e086946b01e4c988513be0cf3b30fbe50ebedd9c4",
+      "components/shared/gx8002/runtime_gx8002_imcra_power_spectrum.c": "49b3a94a35dcaf98354ec6e316d663403c34a76e50b81d1a0002dc8fa5161c79",
+      "components/shared/gx8002/runtime_gx8002_imcra_first_frame.c": "59d3ca3b753cf40573dc70388dbbc0a92dfaee7da5d6410eccb149240273348e",
+      "components/shared/gx8002/runtime_gx8002_imcra_prior_update.c": "93faa1e663b9bc7449543550c7210ec5bfaad610b5490f7d0681b9bb484ce042",
+      "components/shared/gx8002/runtime_gx8002_imcra_smooth.c": "c64a79cd075171924821d8d8885a8e05518530704bd0b13ef53f2490c7f100bd",
+      "components/shared/gx8002/runtime_gx8002_imcra_minimum_mask.c": "a50f7dad595424123b69425a021a9c9b52119146c49a266641218a9f3bb67e71",
+      "components/shared/gx8002/runtime_gx8002_imcra_masked_smooth.c": "e4f92a6a24846e009460818f395a55383c69144a639f17ab5ab21240e24f0c69",
+      "components/shared/gx8002/runtime_gx8002_imcra_probability.c": "c3b146656afe5cb71c79584bac4c848b68fa29d863829454b3aa19e4f3c4d8c9",
+      "components/shared/gx8002/runtime_gx8002_imcra_noise_update.c": "5c47d18029d7fcee5624f96af372792976bb9a5982c994d58d8ed6bc6db8b7a4",
+      "components/shared/gx8002/runtime_gx8002_imcra_history_rotate.c": "16bdf75ad796e1288a1b2889653e28f3306e64bb2557506d4695c73aa04a92d7",
+      "components/shared/gx8002/runtime_gx8002_imcra_synthesize.c": "766aba85e3af2ba5d39de395b743ec66db63e7a9f61dc7bc782ba9ccc83a86e9"
+    },
+    "header_sha256": "aee51705fe2481a2088d62e860e7f51c4f7a475d774643bab4097b37c2ea5a93",
+    "startup_sha256": "71af6dfa2bd2444519ae2ca5009ac8d80181c1f0a3e7573e234cf36180765c24",
+    "bytes": 3272,
+    "helper_bindings": {
+      "open_cfw_gx8002_memmove": 268474728,
+      "open_cfw_gx8002_memset": 268506052,
+      "open_cfw_gx8002_imcra_peak_shift": 268493508,
+      "open_cfw_gx8002_imcra_sample_shift": 268493452,
+      "source_rfft_forward": 536965152,
+      "source_rfft_inverse": 536965132,
+      "open_cfw_gx8002_memcpy": 268505924,
+      "open_cfw_gx8002_backup_rfft": 268496740
+    },
+    "source_admitted": false,
+    "startup_integrated": false,
+    "limits": [
+      "Composed processing candidate; whole-function equivalence not established.",
+      "Helpers resolved by address, not included in this standalone ELF.",
+      "Decoded equivalence and helper mutation verification pending.",
+      "No placement, complete firmware or hardware qualification."
+    ],
+    "placed": {
+      "sizes": {
+        ".prepare": 2696,
+        ".minimum": 36
+      },
+      "minimum_address": 268518812,
+      "minimum_capacity": 56,
+      "source_admitted": false,
+      "startup_integrated": false,
+      "limits": [
+        "Experimental layout; donor interval checked against current allocated startup sections.",
+        "Repurposed FFT code-envelope permissions/reference closure inherit existing limitations.",
+        "Relinked code requires continuous verification; no complete firmware or hardware qualification."
+      ]
+    }
+  },
+  "cases": 16,
+  "sequences": [
+    {
+      "mode": 0,
+      "fused": false,
+      "frames": 4
+    },
+    {
+      "mode": 0,
+      "fused": true,
+      "frames": 4
+    },
+    {
+      "mode": 2,
+      "fused": false,
+      "frames": 4
+    },
+    {
+      "mode": 2,
+      "fused": true,
+      "frames": 4
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Continuous processing with decoded stock radix/split arithmetic and compiled source FFT at separate helper boundaries.",
+    "Stock FFT wrapper/reversal composition is modeled; kernel instructions execute. Source FFT internal calls execute. Tables generated from reconstructed coefficients.",
+    "Other helpers modeled, final memory and processing ABI compared. No shared FFT stack, hardware or placement qualification."
+  ],
+  "nonzero_output_frames": 16,
+  "stock_fft": true,
+  "lto": false,
+  "placed": true,
+  "signal": "tone",
+  "concrete_fft": true
+}

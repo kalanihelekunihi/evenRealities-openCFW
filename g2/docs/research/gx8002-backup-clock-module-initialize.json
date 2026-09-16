@@ -1,0 +1,95 @@
+{
+  "upstream_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream_path": "boards/nationalchip/grus_gx8002_slight_1v/clock_board.c",
+  "upstream_blob": "4d819cb3db67d7b229f417ab0e0c9a01306d8c16",
+  "function_sha256": "c5dbf6d365c0909e432cfcc3d9110eb884dc9c4b166892554a4e7a63b8c52ab9",
+  "adapted_function_sha256": "5c433d436c77533945794e7fa5c8f5174da11ae8013374c3783bf7ef2664a39d",
+  "adaptations": [
+    "ADC selects MODULE_SOURCE_ADC_SYS instead of ADC_32K",
+    "PDM selects MODULE_SOURCE_PDM_SYS instead of PDM_OSC_1M"
+  ],
+  "elf_sha256": "daa81da5fc3632b95048125a534b7d617079805d6a6446aabc409ad16799583a",
+  "code_bytes": 156,
+  "ordered_module_sources": [
+    [
+      10,
+      1
+    ],
+    [
+      6,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      7,
+      3
+    ],
+    [
+      8,
+      5
+    ],
+    [
+      9,
+      0
+    ],
+    [
+      22,
+      0
+    ],
+    [
+      16,
+      1
+    ],
+    [
+      11,
+      1
+    ],
+    [
+      19,
+      1
+    ],
+    [
+      12,
+      1
+    ],
+    [
+      13,
+      1
+    ],
+    [
+      14,
+      1
+    ],
+    [
+      15,
+      1
+    ]
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Complete upstream-based module helper with explicit stock audio-source adaptations compiled and its 19 ordered call arguments matched to stock inline sequence. Module-setting helper effects are not executed here. Analysis placement only; complete clock initialization, PLL/resume branches and integration remain pending."
+  ]
+}

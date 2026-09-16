@@ -1,0 +1,54 @@
+{
+  "source_sha256": "9341433cdb05cf666177173242e28cbc8d9089f35e817c43a2bacc9fcf9f4bbe",
+  "elf_sha256": "2eafd0dcfb716e1df3b6f988e53b6d00e7cb632a0b637b4b01dab46d95764b43",
+  "command": [
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Os",
+    "-ffp-contract=off",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_polynomial.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-polynomial-placed/polynomial.o"
+  ],
+  "sections": [
+    {
+      "name": ".polynomial",
+      "package_offset": 301096,
+      "bytes": 50,
+      "sha256": "c174b10a36f2fd5b638f7be04203374f6d856a6f72707e6506de8bf966978c59"
+    }
+  ],
+  "references": {
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "stock_range": [
+      301096,
+      301200
+    ],
+    "external_branches": [],
+    "external_literal_pools": [
+      {
+        "pc": 301094,
+        "pool": 301096
+      }
+    ],
+    "stored_address_words": [],
+    "source_admitted": false,
+    "limits": [
+      "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
+    ]
+  },
+  "source_admitted": false,
+  "limits": [
+    "Whole function fits; numerical, ABI, reference classification, dependency identity and integration checks remain pending. Coefficient arrays remain caller-owned."
+  ]
+}

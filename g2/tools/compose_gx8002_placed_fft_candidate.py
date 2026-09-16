@@ -5,7 +5,20 @@ from build_gx8002_source_candidate import compose
 from build_gx8002_backup_cfft import ROOT,IMAGE,IMAGE_SHA,sha,Elf32
 from build_gx8002_placed_rfft_cluster import build
 
-def experiment(include_fill=False, tail_layout=False, include_unpack=False, include_compare=False, include_core=False, include_wrappers=False, include_conversion=False, include_reverse_conversion=False, include_addsub=False, include_muldiv=False, include_exp=False, include_twins=False, include_make=False, include_uint=False, include_float=False, include_muldi=False, include_widen=False, include_udiv=False, include_fixunsigned=False, include_sign=False, include_tokenizer=False, include_copy=False, include_memset=False, include_scale=False, include_sqrt=False):
+def experiment(include_fill=False, tail_layout=False, include_unpack=False, include_compare=False, include_core=False, include_wrappers=False, include_conversion=False, include_reverse_conversion=False, include_addsub=False, include_muldiv=False, include_exp=False, include_twins=False, include_make=False, include_uint=False, include_float=False, include_muldi=False, include_widen=False, include_udiv=False, include_fixunsigned=False, include_sign=False, include_tokenizer=False, include_copy=False, include_memset=False, include_scale=False, include_sqrt=False, include_power=False, include_logexp=False, include_math_wrappers=False, include_fmod=False, include_polynomial=False, include_sine=False, include_cosine=False, include_reducer_scale=False, include_centered=False, include_exception=False, include_uart=False, include_uart_cluster=False, include_clock=False):
+    assert not include_clock or include_uart_cluster
+    assert not include_uart_cluster or include_uart
+    assert not include_uart or include_exception
+    assert not include_exception or include_centered
+    assert not include_centered or include_reducer_scale
+    assert not include_reducer_scale or include_cosine
+    assert not include_cosine or include_sine
+    assert not include_sine or include_polynomial
+    assert not include_polynomial or include_fmod
+    assert not include_fmod or include_math_wrappers
+    assert not include_math_wrappers or include_logexp
+    assert not include_logexp or include_power
+    assert not include_power or include_sqrt
     assert not include_sqrt or include_scale
     assert not include_scale or include_memset
     assert not include_memset or include_copy
@@ -467,6 +480,356 @@ def experiment(include_fill=False, tail_layout=False, include_unpack=False, incl
         patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
                         'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
                         'ownership_kind':'compiled_c','symbol':'__ieee754_sqrtf'})
+    power_evidence=None
+    if include_power:
+        from build_gx8002_powf_placed import build as build_power
+        from analyze_gx8002_powf_reference_context import analyze_context
+        power_evidence=build_power()
+        power_evidence['references']=analyze_context()
+        assert not power_evidence['references']['unresolved_stored_words']
+        assert not power_evidence['references']['unresolved_branches']
+        power_evidence['validation']={}
+        for label in ('identities','general-wide','nan','infinite-exponent','domain','zero-infinite-base'):
+            test=json.loads((ROOT/'docs/research'/('gx8002-powf-'+label+'.json')).read_text())
+            assert test['elf_sha256']==power_evidence['elf_sha256']
+            if 'differences' in test:assert not test['differences']
+            power_evidence['validation'][label]=test
+        path=ROOT/'build/gx8002-powf-placed/power.elf'
+        assert sha(path.read_bytes())==power_evidence['elf_sha256']
+        linked=Elf32(path.read_bytes(),'power');seen=set()
+        for sec in linked.sections:
+            if not sec['flags']&2 or not sec['size']:continue
+            body=linked.contents(sec);off=sec['address']-0x10003000+0x3b940;size=len(body);seen.add(sec['name'])
+            if sec['name']!='.power':
+                prior=next(p for p in patches if p['package_offset']==off)
+                assert prior['payload']==body
+                continue
+            assert off==0x489fc and size==1652
+            assert any(r['kind']=='retained_stock' and r['offset']<=off and off+size<=r['offset']+r['size'] for r in rows)
+            patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                            'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                            'ownership_kind':'compiled_c','symbol':'__ieee754_powf'})
+        assert seen=={'.power','.sqrt','.scale','.sign','.absolute'}
+    logexp_evidence=None
+    if include_logexp:
+        from build_gx8002_log_exp_placed import build as build_logexp
+        from analyze_gx8002_logf_reference_context import analyze_context as log_refs
+        from analyze_gx8002_expf_reference_context import analyze_context as exp_refs
+        logexp_evidence=build_logexp()
+        logexp_evidence['references']=[log_refs(),exp_refs()]
+        logexp_evidence['validation']={}
+        for label in ('logf-finite','logf-special-paths','expf-finite','expf-special-paths'):
+            test=json.loads((ROOT/'docs/research'/('gx8002-'+label+'.json')).read_text())
+            assert test['elf_sha256']==logexp_evidence['elf_sha256']
+            if 'differences' in test:assert not test['differences'] and not test['accuracy_errors']
+            logexp_evidence['validation'][label]=test
+        path=ROOT/'build/gx8002-log-exp-placed/math.elf'
+        assert sha(path.read_bytes())==logexp_evidence['elf_sha256']
+        linked=Elf32(path.read_bytes(),'logexp');seen=set()
+        layout={'.log':(0x490a8,568,'__ieee754_logf'),'.exp':(0x49300,436,'__ieee754_expf'),'.exp_constants':(0x494b4,24,'expf_constants')}
+        for sec in linked.sections:
+            if not sec['flags']&2 or not sec['size']:continue
+            body=linked.contents(sec);off=sec['address']-0x10003000+0x3b940;size=len(body);seen.add(sec['name'])
+            expected_off,expected_size,symbol=layout[sec['name']]
+            assert off==expected_off and size==expected_size
+            assert any(r['kind']=='retained_stock' and r['offset']<=off and off+size<=r['offset']+r['size'] for r in rows)
+            patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                            'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                            'ownership_kind':'generated_source_data' if sec['name']=='.exp_constants' else 'compiled_c','symbol':symbol})
+        assert seen==set(layout)
+    math_wrappers_evidence=None
+    if include_math_wrappers:
+        from build_gx8002_math_wrappers import build as build_math_wrappers
+        math_wrappers_evidence=build_math_wrappers()
+        path=ROOT/'build/gx8002-math-wrappers/wrappers.elf'
+        assert sha(path.read_bytes())==math_wrappers_evidence['elf_sha256']
+        linked=Elf32(path.read_bytes(),'math wrappers')
+        sections=[s for s in linked.sections if s['flags']&2 and s['size']]
+        assert len(sections)==3
+        for item in math_wrappers_evidence['sections']:
+            sec=next(s for s in sections if s['name']=='.'+item['name'])
+            off=item['offset'];body=linked.contents(sec);size=len(body)
+            assert sec['address']==off-0x3b940+0x10003000 and size==8
+            assert sha(body)==item['sha256'] and body==stock[off:off+size]
+            target=next(p for p in patches if p['package_offset']==item['target'])
+            assert target['symbol']=='__ieee754_'+item['name'] and target['ownership_kind']=='compiled_c'
+            assert any(r['kind']=='retained_stock' and r['offset']<=off and off+size<=r['offset']+r['size'] for r in rows)
+            patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                            'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                            'ownership_kind':'compiled_c','symbol':'open_cfw_gx8002_'+item['name']})
+    fmod_evidence=None
+    if include_fmod:
+        from build_gx8002_fmod_placed import build as build_fmod
+        fmod_evidence=build_fmod()
+        path=ROOT/'build/gx8002-fmod-placed/fmod.elf'
+        linked=Elf32(path.read_bytes(),'fmod')
+        assert sha(path.read_bytes())==fmod_evidence['elf_sha256']
+        for report_name in ('gx8002-fmod-finite','gx8002-fmod-special'):
+            check=json.loads((ROOT/'docs/research'/(report_name+'.json')).read_text())
+            if report_name.endswith('finite'):
+                assert check['source_elf_sha256']==fmod_evidence['elf_sha256']
+                assert check['finite_cases']==check['stock_comparison_cases']==4966
+                assert check['stock_sha256']==IMAGE_SHA
+            else:
+                assert check['source_elf_hashes']['gx8002-fmod-placed']==fmod_evidence['elf_sha256']
+                assert check['cases']==3520
+                from analyze_gx8002_double_wrapper_references import analyze as fmod_references
+                assert check['references']==fmod_references(0x495e4,0x49828)
+                dependency=ROOT/'build/gx8002-double-muldiv-corrected/muldiv.elf'
+                assert sha(dependency.read_bytes())==check['source_elf_hashes']['gx8002-double-muldiv-corrected']
+                depelf=Elf32(dependency.read_bytes(),'fmod arithmetic')
+                for symbol,off in fmod_evidence['arithmetic_targets'].items():
+                    target=next(p for p in patches if p['package_offset']==off)
+                    assert target['symbol']==symbol and target['ownership_kind']=='compiled_c'
+                    section=next(s for s in depelf.sections if s['address']==off-0x3b940+0x10003000 and s['size'])
+                    assert target['payload']==depelf.contents(section)
+            fmod_evidence[report_name]=check
+        sec=next(s for s in linked.sections if s['name']=='.fmod')
+        body=linked.contents(sec);off=0x495e4;size=len(body)
+        assert size==576 and sec['address']==off-0x3b940+0x10003000
+        assert any(r['kind']=='retained_stock' and r['offset']<=off and off+size<=r['offset']+r['size'] for r in rows)
+        patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                        'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                        'ownership_kind':'compiled_c','symbol':'__ieee754_fmod'})
+    polynomial_evidence=None
+    if include_polynomial:
+        from build_gx8002_polynomial_placed import build as build_polynomial
+        from analyze_gx8002_polynomial_reference_context import analyze_context
+        polynomial_evidence=build_polynomial()
+        polynomial_evidence['reference_context']=analyze_context()
+        path=ROOT/'build/gx8002-polynomial-placed/polynomial.elf'
+        assert sha(path.read_bytes())==polynomial_evidence['elf_sha256']
+        linked=Elf32(path.read_bytes(),'polynomial')
+        check=json.loads((ROOT/'docs/research/gx8002-polynomial-source.json').read_text())
+        assert check['source_elf_hashes']['gx8002-polynomial-placed']==polynomial_evidence['elf_sha256']
+        assert check['stock_sha256']==IMAGE_SHA
+        assert check['finite_cases']==check['stock_comparison_cases']==680
+        assert check['identity_cases']==1063 and check['degree_zero_payload_cases']==1072
+        dependency=ROOT/'build/gx8002-exp-placed-cluster/exp.elf'
+        assert sha(dependency.read_bytes())==check['source_elf_hashes']['gx8002-exp-placed-cluster']
+        depelf=Elf32(dependency.read_bytes(),'polynomial arithmetic')
+        for symbol,off in [('__muldf3',0x4a790),('__adddf3',0x4a724)]:
+            target=next(p for p in patches if p['package_offset']==off)
+            assert target['symbol']==symbol and target['ownership_kind']=='compiled_c'
+            section=next(s for s in depelf.sections if s['address']==off-0x3b940+0x10003000 and s['size'])
+            assert target['payload']==depelf.contents(section)
+        polynomial_evidence['execution']=check
+        sec=next(s for s in linked.sections if s['name']=='.polynomial')
+        body=linked.contents(sec);off=0x49828;size=len(body)
+        assert size==50 and sec['address']==off-0x3b940+0x10003000
+        assert any(r['kind']=='retained_stock' and r['offset']<=off and off+size<=r['offset']+r['size'] for r in rows)
+        patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                        'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                        'ownership_kind':'compiled_c','symbol':'open_cfw_gx8002_polynomial'})
+    sine_evidence=None
+    if include_sine:
+        from build_gx8002_sine_placed import build as build_sine
+        from analyze_gx8002_sine_reference_context import analyze_context as sine_references
+        sine_evidence=build_sine()
+        sine_evidence['references']=sine_references()
+        assert not sine_evidence['references']['unresolved_bounded_findings']
+        path=ROOT/'build/gx8002-sine-placed/sine.elf'
+        assert sha(path.read_bytes())==sine_evidence['elf_sha256']
+        linked=Elf32(path.read_bytes(),'sine')
+        checks=[]
+        for suffix,count in [('',201),('-tail',448)]:
+            check=json.loads((ROOT/'docs/research'/('gx8002-sine-placed'+suffix+'-source.json')).read_text())
+            assert check['source_elf_sha256']==sine_evidence['elf_sha256'] and check['stock_sha256']==IMAGE_SHA
+            assert check['results']['sin']['cases']==count
+            assert not check['results']['sin']['source_accuracy_errors_over_one_ulp']
+            checks.append(check)
+        special=json.loads((ROOT/'docs/research/gx8002-sine-special.json').read_text())
+        assert special['source_elf_hashes']['gx8002-sine-placed']==sine_evidence['elf_sha256']
+        assert special['cases']==3248 and not special['differences']
+        sine_evidence['execution']=checks;sine_evidence['special']=special
+        # Authenticate all linked source dependencies against the composed bytes.
+        for sec in linked.sections:
+            if not (sec['flags']&2 and sec['size']) or sec['name'] in ('.sine','.coefficients'):continue
+            off=sec['address']-0x10003000+0x3b940
+            prior=next(p for p in patches if p['package_offset']==off)
+            assert prior['payload']==linked.contents(sec)
+        for name,off,size,kind,symbol in [('.sine',0x49890,264,'compiled_c','__kernel_sin'),('.coefficients',0x4f974,40,'generated_source_data','open_cfw_gx8002_sin_coefficients')]:
+            sec=next(s for s in linked.sections if s['name']==name);body=linked.contents(sec)
+            assert sec['address']==off-0x3b940+0x10003000 and len(body)==size
+            if kind=='generated_source_data':assert body==stock[off:off+size]
+            assert any(r['kind']=='retained_stock' and r['offset']<=off and off+size<=r['offset']+r['size'] for r in rows)
+            patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                            'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                            'ownership_kind':kind,'symbol':symbol})
+    cosine_evidence=None
+    if include_cosine:
+        from build_gx8002_cosine_placed import build as build_cosine
+        from analyze_gx8002_double_wrapper_references import analyze as cosine_references
+        cosine_evidence=build_cosine()
+        cosine_evidence['references']=cosine_references(0x499ac,0x49ac0)
+        assert len(cosine_evidence['references']['external_branches'])==5
+        assert not cosine_evidence['references']['external_literal_pools'] and not cosine_evidence['references']['stored_address_words']
+        path=ROOT/'build/gx8002-cosine-placed/cosine.elf'
+        assert sha(path.read_bytes())==cosine_evidence['elf_sha256']
+        linked=Elf32(path.read_bytes(),'cosine')
+        checks=[]
+        for suffix,count in [('',201),('-tail',448)]:
+            check=json.loads((ROOT/'docs/research'/('gx8002-cosine-placed'+suffix+'-source.json')).read_text())
+            assert check['source_elf_sha256']==cosine_evidence['elf_sha256'] and check['stock_sha256']==IMAGE_SHA
+            assert check['results']['cos']['cases']==count
+            assert not check['results']['cos']['source_accuracy_errors_over_one_ulp']
+            checks.append(check)
+        special=json.loads((ROOT/'docs/research/gx8002-cosine-special.json').read_text())
+        assert special['source_elf_hashes']['gx8002-cosine-placed']==cosine_evidence['elf_sha256']
+        assert special['cases']==1624 and not special['differences']
+        cosine_evidence['execution']=checks;cosine_evidence['special']=special
+        # Authenticate all linked source dependencies against the composed bytes.
+        for sec in linked.sections:
+            if not (sec['flags']&2 and sec['size']) or sec['name'] in ('.cosine','.coefficients'):continue
+            off=sec['address']-0x10003000+0x3b940
+            prior=next(p for p in patches if p['package_offset']==off)
+            assert prior['payload']==linked.contents(sec)
+        for name,off,size,kind,symbol in [('.cosine',0x499ac,252,'compiled_c','__kernel_cos'),('.coefficients',0x4f99c,48,'generated_source_data','open_cfw_gx8002_cos_coefficients')]:
+            sec=next(s for s in linked.sections if s['name']==name);body=linked.contents(sec)
+            assert sec['address']==off-0x3b940+0x10003000 and len(body)==size
+            if kind=='generated_source_data':assert body==stock[off:off+size]
+            assert any(r['kind']=='retained_stock' and r['offset']<=off and off+size<=r['offset']+r['size'] for r in rows)
+            patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                            'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                            'ownership_kind':kind,'symbol':symbol})
+    reducer_scale_evidence=None
+    if include_reducer_scale:
+        from generate_gx8002_reducer_scale import build as build_reducer_scale
+        reducer_scale_evidence=build_reducer_scale()
+        path=ROOT/'build/gx8002-reducer-scale/scale.elf'
+        assert sha(path.read_bytes())==reducer_scale_evidence['elf_sha256']
+        linked=Elf32(path.read_bytes(),'generated reducer scale')
+        sec=next(s for s in linked.sections if s['name']=='.reducer_scale')
+        body=linked.contents(sec);off=0x4de48;size=144
+        assert sec['address']==0x10015508 and len(body)==size
+        assert body==stock[off:off+size]
+        assert any(r['kind']=='retained_stock' and r['offset']<=off and off+size<=r['offset']+r['size'] for r in rows)
+        assert not any(max(off,p['package_offset'])<min(off+size,p['package_offset']+p['bytes']) for p in patches)
+        patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                        'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                        'ownership_kind':'generated_source_data','symbol':'open_cfw_gx8002_reducer_scale'})
+    centered_evidence=None
+    if include_centered:
+        from build_gx8002_centered_remainder import build as build_centered
+        from analyze_gx8002_double_wrapper_references import analyze as centered_refs
+        centered_evidence=build_centered()
+        centered_evidence['references']=centered_refs(0x4859c,0x4863c)
+        refs=centered_evidence['references']
+        assert len(refs['external_branches'])==3
+        assert not refs['external_literal_pools'] and not refs['stored_address_words']
+        checks=json.loads((ROOT/'docs/research/gx8002-centered-remainder-execution.json').read_text())
+        assert checks['source_elf_sha256']==centered_evidence['elf_sha256'] and checks['stock_sha256']==IMAGE_SHA
+        assert checks['finite_cases']==checks['stock_helper_comparison_cases']==435
+        assert checks['special_comparison_cases']==144
+        centered_evidence['execution']=checks
+        path=ROOT/'build/gx8002-centered-remainder/centered.elf'
+        assert sha(path.read_bytes())==centered_evidence['elf_sha256']
+        linked=Elf32(path.read_bytes(),'centered remainder')
+        for sec in linked.sections:
+            if not (sec['flags']&2 and sec['size']) or sec['name']=='.centered':continue
+            off=sec['address']-0x10003000+0x3b940
+            prior=next(p for p in patches if p['package_offset']==off)
+            assert prior['payload']==linked.contents(sec)
+        sec=next(s for s in linked.sections if s['name']=='.centered')
+        body=linked.contents(sec);off=0x4859c;size=140
+        assert sec['address']==0x1000fc5c and len(body)==size
+        assert any(r['kind']=='retained_stock' and r['offset']<=off and off+160<=r['offset']+r['size'] for r in rows)
+        patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                        'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                        'ownership_kind':'compiled_c','symbol':'open_cfw_gx8002_centered_remainder'})
+    exception_evidence=None
+    if include_exception:
+        from build_gx8002_backup_upstream_trap import build as build_trap
+        from build_gx8002_backup_irq_restore import build as build_irq_restore
+        exception_evidence={'trap':build_trap(),'irq_restore':build_irq_restore()}
+        for key,directory,filename,checkfile,casekey,count,specs in [
+            ('trap','gx8002-backup-upstream-trap','trap.elf','gx8002-backup-upstream-trap-execution.json','cases',256,
+             [('.trap_c',0x3bb30,10,'compiled_c','trap_c'),('.vectors',0x3bb3c,80,'compiled_assembly','trap')]),
+            ('irq_restore','gx8002-backup-irq-restore','restore.elf','gx8002-backup-irq-restore-execution.json','ordered_access_cases',164,
+             [('.text',0x3d16c,24,'compiled_c','open_cfw_gx8002_backup_irq_restore')])]:
+            evidence=exception_evidence[key]
+            checks=json.loads((ROOT/'docs/research'/checkfile).read_text())
+            assert checks['elf_sha256']==evidence['elf_sha256'] and checks[casekey]==count
+            evidence['execution']=checks
+            path=ROOT/'build'/directory/filename
+            assert sha(path.read_bytes())==evidence['elf_sha256']
+            linked=Elf32(path.read_bytes(),key)
+            assert all(s['type']==8 or s['name'] in {x[0] for x in specs} for s in linked.sections if s['flags']&2 and s['size'])
+            for section,off,size,kind,symbol in specs:
+                sec=next(s for s in linked.sections if s['name']==section);body=linked.contents(sec)
+                assert sec['address']==off-0x3b940+0x10003000 and len(body)==size
+                # Exact full-body identity also preserves the default-handler
+                # vector entries and any interior references without rebinding.
+                assert body==stock[off:off+size]
+                assert any(r['kind']=='retained_stock' and r['offset']<=off and off+size<=r['offset']+r['size'] for r in rows)
+                patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                                'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                                'ownership_kind':kind,'symbol':symbol})
+    uart_evidence=None
+    if include_uart:
+        from build_gx8002_backup_uart_putc import build as build_uart_putc
+        from build_gx8002_backup_uart_descriptors import build as build_uart_descriptors
+        from analyze_gx8002_double_wrapper_references import analyze as uart_refs
+        probe=build_uart_putc();uart_evidence=build_uart_descriptors()
+        refs=uart_refs(0x3cee0,0x3cf18)
+        assert len(refs['external_branches'])==1 and not refs['external_literal_pools'] and not refs['stored_address_words']
+        checks=json.loads((ROOT/'docs/research/gx8002-backup-uart-putc-execution.json').read_text())
+        assert checks['elf_sha256']==uart_evidence['putc_elf_sha256'] and checks['stock_sha256']==IMAGE_SHA and checks['cases']==4620
+        uart_evidence['execution']=checks;uart_evidence['references']=refs;uart_evidence['probe']=probe
+        path=ROOT/'build/gx8002-backup-uart-descriptors/uart.elf'
+        assert sha(path.read_bytes())==uart_evidence['elf_sha256']
+        linked=Elf32(path.read_bytes(),'source UART')
+        for name,off,size,address,kind,symbol in [
+            ('.putc',0x3cee0,52,0x100045a0,'compiled_c','open_cfw_gx8002_uart_putc'),
+            ('.descriptors',0x4f4c4,256,0x20016b84,'generated_source_data','open_cfw_gx8002_uart_descriptors')]:
+            sec=next(s for s in linked.sections if s['name']==name);body=linked.contents(sec)
+            assert sec['address']==address and len(body)==size
+            if kind=='generated_source_data':assert body==stock[off:off+size]
+            assert any(r['kind']=='retained_stock' and r['offset']<=off and off+size<=r['offset']+r['size'] for r in rows)
+            patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                            'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                            'ownership_kind':kind,'symbol':symbol})
+    uart_cluster_evidence=None
+    if include_uart_cluster:
+        from verify_gx8002_backup_uart_cluster import verify as verify_uart_cluster
+        uart_cluster_evidence=verify_uart_cluster()
+        assert uart_cluster_evidence['total_cases']==4620
+        path=ROOT/'build/gx8002-backup-uart-interrupt/interrupt.elf'
+        assert sha(path.read_bytes())==uart_cluster_evidence['elf_sha256']
+        linked=Elf32(path.read_bytes(),'complete UART cluster')
+        for name,off,size,symbol in [('.text',0x3cb90,230,'open_cfw_gx8002_uart_interrupt'),
+                                     ('.fifo',0x3cc7c,30,'open_cfw_gx8002_uart_fifo_depth'),
+                                     ('.tx',0x3cc9c,22,'uart_write_bytes')]:
+            sec=next(s for s in linked.sections if s['name']==name);body=linked.contents(sec)
+            assert sec['address']==off-0x3b940+0x10003000 and len(body)==size
+            assert any(r['kind']=='retained_stock' and r['offset']<=off and off+size<=r['offset']+r['size'] for r in rows)
+            patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                            'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                            'ownership_kind':'compiled_c','symbol':symbol})
+    clock_evidence=None
+    if include_clock:
+        from verify_gx8002_backup_clock_initialize import verify as verify_clock
+        from analyze_gx8002_backup_clock_references import verify as clock_references
+        clock_evidence=verify_clock()
+        clock_evidence['references']=clock_references()
+        assert clock_evidence['cases']==432 and clock_evidence['references']['bounded_candidates_resolved']
+        path=ROOT/'build/gx8002-backup-clock-initialize/clock.elf'
+        assert sha(path.read_bytes())==clock_evidence['build']['elf_sha256']
+        linked=Elf32(path.read_bytes(),'complete source clock initializer')
+        expected={'.text':(0x3bbd4,568,'compiled_c',0x10003294),
+                  '.pll':(0x4f200,56,'generated_source_data',0x200168c0),
+                  '.stage2_trim_done':(0x4f238,4,'generated_source_data',0x200168f8),
+                  '.clk_src_xtal_table':(0x4f23c,80,'generated_source_data',0x200168fc),
+                  '.clk_src_osc_table':(0x4f28c,80,'generated_source_data',0x2001694c)}
+        assert {s['name'] for s in linked.sections if s['flags']&2 and s['size']}==set(expected)
+        for name,(off,size,kind,address) in expected.items():
+            sec=next(s for s in linked.sections if s['name']==name);body=linked.contents(sec)
+            assert sec['address']==address and len(body)==size
+            if kind=='generated_source_data':assert body==stock[off:off+size]
+            assert any(r['kind']=='retained_stock' and r['offset']<=off and off+size<=r['offset']+r['size'] for r in rows)
+            patches.append({'package_offset':off,'bytes':size,'payload':body,'compiled_bytes':size,
+                            'compiled_sha256':sha(body),'sha256':sha(stock[off:off+size]),
+                            'ownership_kind':kind,'symbol':'backup_clock'+name})
     removed=[];kept=[]
     for old in replacements:
         overlaps=[p for p in patches if max(old['package_offset'],p['package_offset'])<min(old['package_offset']+old['bytes'],p['package_offset']+p['bytes'])]
@@ -485,7 +848,10 @@ def experiment(include_fill=False, tail_layout=False, include_unpack=False, incl
         removed.append(old['symbol'])
     assert sorted(removed)==['open_cfw_gx8002_backup_cfft','open_cfw_gx8002_backup_rfft']
     firmware,ownership,totals=compose(stock,kept+patches)
-    out=ROOT/('build/gx8002-fft-q15-sqrt-integration-experiment' if include_sqrt else 'build/gx8002-fft-q15-scale-integration-experiment' if include_scale else 'build/gx8002-fft-q15-memset-integration-experiment' if include_memset else 'build/gx8002-fft-q15-copy-integration-experiment' if include_copy else 'build/gx8002-fft-q15-tokenizer-integration-experiment' if include_tokenizer else 'build/gx8002-fft-q15-sign-integration-experiment' if include_sign else 'build/gx8002-fft-q15-fixunsigned-integration-experiment' if include_fixunsigned else 'build/gx8002-fft-q15-udiv-integration-experiment' if include_udiv else 'build/gx8002-fft-q15-widen-integration-experiment' if include_widen else 'build/gx8002-fft-q15-muldi-integration-experiment' if include_muldi else 'build/gx8002-fft-q15-float-integration-experiment' if include_float else 'build/gx8002-fft-q15-uint-integration-experiment' if include_uint else 'build/gx8002-fft-q15-make-integration-experiment' if include_make else 'build/gx8002-fft-q15-twins-integration-experiment' if include_twins else 'build/gx8002-fft-q15-exp-integration-experiment' if include_exp else 'build/gx8002-fft-q15-muldiv-integration-experiment' if include_muldiv else 'build/gx8002-fft-q15-addsub-integration-experiment' if include_addsub else 'build/gx8002-fft-q15-bidirectional-integration-experiment' if include_reverse_conversion else 'build/gx8002-fft-q15-conversion-integration-experiment' if include_conversion else 'build/gx8002-fft-q15-wrappers-integration-experiment' if include_wrappers else 'build/gx8002-fft-q15-core-integration-experiment' if include_core else 'build/gx8002-fft-q15-compare-integration-experiment' if include_compare else 'build/gx8002-fft-q15-unpack-integration-experiment' if include_unpack else 'build/gx8002-fft-q15-tail-integration-experiment' if tail_layout else 'build/gx8002-placed-fft-fill-integration-experiment' if include_fill else 'build/gx8002-placed-fft-integration-experiment');out.mkdir(exist_ok=True)
+    if include_clock:assert firmware[0x3be0c:0x3be14]==stock[0x3be0c:0x3be14]
+    if include_uart:assert firmware[0x3cf14:0x3cf18]==stock[0x3cf14:0x3cf18]
+    if include_centered:assert firmware[0x48628:0x4863c]==stock[0x48628:0x4863c]
+    out=ROOT/('build/gx8002-fft-q15-clock-integration-experiment' if include_clock else 'build/gx8002-fft-q15-uart-cluster-integration-experiment' if include_uart_cluster else 'build/gx8002-fft-q15-uart-integration-experiment' if include_uart else 'build/gx8002-fft-q15-exception-integration-experiment' if include_exception else 'build/gx8002-fft-q15-centered-integration-experiment' if include_centered else 'build/gx8002-fft-q15-reducer-scale-integration-experiment' if include_reducer_scale else 'build/gx8002-fft-q15-cosine-integration-experiment' if include_cosine else 'build/gx8002-fft-q15-sine-integration-experiment' if include_sine else 'build/gx8002-fft-q15-polynomial-integration-experiment' if include_polynomial else 'build/gx8002-fft-q15-fmod-integration-experiment' if include_fmod else 'build/gx8002-fft-q15-math-wrappers-integration-experiment' if include_math_wrappers else 'build/gx8002-fft-q15-logexp-integration-experiment' if include_logexp else 'build/gx8002-fft-q15-power-integration-experiment' if include_power else 'build/gx8002-fft-q15-sqrt-integration-experiment' if include_sqrt else 'build/gx8002-fft-q15-scale-integration-experiment' if include_scale else 'build/gx8002-fft-q15-memset-integration-experiment' if include_memset else 'build/gx8002-fft-q15-copy-integration-experiment' if include_copy else 'build/gx8002-fft-q15-tokenizer-integration-experiment' if include_tokenizer else 'build/gx8002-fft-q15-sign-integration-experiment' if include_sign else 'build/gx8002-fft-q15-fixunsigned-integration-experiment' if include_fixunsigned else 'build/gx8002-fft-q15-udiv-integration-experiment' if include_udiv else 'build/gx8002-fft-q15-widen-integration-experiment' if include_widen else 'build/gx8002-fft-q15-muldi-integration-experiment' if include_muldi else 'build/gx8002-fft-q15-float-integration-experiment' if include_float else 'build/gx8002-fft-q15-uint-integration-experiment' if include_uint else 'build/gx8002-fft-q15-make-integration-experiment' if include_make else 'build/gx8002-fft-q15-twins-integration-experiment' if include_twins else 'build/gx8002-fft-q15-exp-integration-experiment' if include_exp else 'build/gx8002-fft-q15-muldiv-integration-experiment' if include_muldiv else 'build/gx8002-fft-q15-addsub-integration-experiment' if include_addsub else 'build/gx8002-fft-q15-bidirectional-integration-experiment' if include_reverse_conversion else 'build/gx8002-fft-q15-conversion-integration-experiment' if include_conversion else 'build/gx8002-fft-q15-wrappers-integration-experiment' if include_wrappers else 'build/gx8002-fft-q15-core-integration-experiment' if include_core else 'build/gx8002-fft-q15-compare-integration-experiment' if include_compare else 'build/gx8002-fft-q15-unpack-integration-experiment' if include_unpack else 'build/gx8002-fft-q15-tail-integration-experiment' if tail_layout else 'build/gx8002-placed-fft-fill-integration-experiment' if include_fill else 'build/gx8002-placed-fft-integration-experiment');out.mkdir(exist_ok=True)
     (out/'firmware_codec.unadmitted.bin').write_bytes(firmware)
     if include_unpack and not include_core:assert firmware[0x4b084:0x4b0b8]==stock[0x4b084:0x4b0b8]
     if include_compare:assert firmware[0x4b172:0x4b17a]==stock[0x4b172:0x4b17a]
@@ -524,9 +890,13 @@ def experiment(include_fill=False, tail_layout=False, include_unpack=False, incl
     if include_tokenizer:assert firmware[0x49c7c:0x49c84]==stock[0x49c7c:0x49c84]
     if include_copy:assert firmware[0x49ce4:0x49d04]==stock[0x49ce4:0x49d04]
     if include_memset:assert firmware[0x49d6a:0x49da4]==stock[0x49d6a:0x49da4]
+    if include_logexp:
+        assert firmware[0x492e0:0x49300]==stock[0x492e0:0x49300]
+        assert firmware[0x494cc:0x4950c]==stock[0x494cc:0x4950c]
+    if include_power:assert firmware[0x49070:0x490a8]==stock[0x49070:0x490a8]
     if include_sqrt:assert firmware[0x495c0:0x495e4]==stock[0x495c0:0x495e4]
     if include_scale:assert firmware[0x49bc8:0x49bd8]==stock[0x49bc8:0x49bd8]
-    result={'sqrt_evidence':sqrt_evidence,'include_sqrt':include_sqrt,'include_scale':include_scale,'scale_evidence':scale_evidence,'include_memset':include_memset,'memset_evidence':memset_evidence,'include_copy':include_copy,'copy_evidence':copy_evidence,'include_tokenizer':include_tokenizer,'tokenizer_evidence':tokenizer_evidence,'sign_evidence':sign_evidence,'include_sign':include_sign,'include_fixunsigned':include_fixunsigned,'fixunsigned_evidence':fixunsigned_evidence,'udiv_evidence':udiv_evidence,'include_udiv':include_udiv,'include_widen':include_widen,'widen_evidence':widen_evidence,'muldi_evidence':muldi_evidence,'include_muldi':include_muldi,'include_float':include_float,'float_evidence':float_evidence,'include_uint':include_uint,'uint_evidence':uint_evidence,'include_make':include_make,'make_evidence':make_evidence,'include_twins':include_twins,'twins_evidence':twins_evidence,'include_exp':include_exp,'exp_evidence':exp_evidence,'include_muldiv':include_muldiv,'muldiv_evidence':muldiv_evidence,'addsub_evidence':addsub_evidence,'include_addsub':include_addsub,'include_reverse_conversion':include_reverse_conversion,'include_conversion':include_conversion,'include_wrappers':include_wrappers,'wrapper_evidence':wrapper_evidence,'include_core':include_core,'core_evidence':core_evidence,'include_compare':include_compare,'compare_evidence':compare_evidence,'include_unpack':include_unpack,'unpack_evidence':unpack_evidence,'tail_layout':tail_layout,'include_fill':include_fill,'baseline_report_sha256':sha(report_path.read_bytes()),'baseline_firmware_sha256':sha(baseline),
+    result={'include_clock':include_clock,'clock_evidence':clock_evidence,'include_uart_cluster':include_uart_cluster,'uart_cluster_evidence':uart_cluster_evidence,'include_uart':include_uart,'uart_evidence':uart_evidence,'include_exception':include_exception,'exception_evidence':exception_evidence,'include_centered':include_centered,'centered_evidence':centered_evidence,'include_reducer_scale':include_reducer_scale,'reducer_scale_evidence':reducer_scale_evidence,'cosine_evidence':cosine_evidence,'include_cosine':include_cosine,'sine_evidence':sine_evidence,'include_sine':include_sine,'polynomial_evidence':polynomial_evidence,'include_polynomial':include_polynomial,'fmod_evidence':fmod_evidence,'include_fmod':include_fmod,'math_wrappers_evidence':math_wrappers_evidence,'include_math_wrappers':include_math_wrappers,'logexp_evidence':logexp_evidence,'include_logexp':include_logexp,'power_evidence':power_evidence,'include_power':include_power,'sqrt_evidence':sqrt_evidence,'include_sqrt':include_sqrt,'include_scale':include_scale,'scale_evidence':scale_evidence,'include_memset':include_memset,'memset_evidence':memset_evidence,'include_copy':include_copy,'copy_evidence':copy_evidence,'include_tokenizer':include_tokenizer,'tokenizer_evidence':tokenizer_evidence,'sign_evidence':sign_evidence,'include_sign':include_sign,'include_fixunsigned':include_fixunsigned,'fixunsigned_evidence':fixunsigned_evidence,'udiv_evidence':udiv_evidence,'include_udiv':include_udiv,'include_widen':include_widen,'widen_evidence':widen_evidence,'muldi_evidence':muldi_evidence,'include_muldi':include_muldi,'include_float':include_float,'float_evidence':float_evidence,'include_uint':include_uint,'uint_evidence':uint_evidence,'include_make':include_make,'make_evidence':make_evidence,'include_twins':include_twins,'twins_evidence':twins_evidence,'include_exp':include_exp,'exp_evidence':exp_evidence,'include_muldiv':include_muldiv,'muldiv_evidence':muldiv_evidence,'addsub_evidence':addsub_evidence,'include_addsub':include_addsub,'include_reverse_conversion':include_reverse_conversion,'include_conversion':include_conversion,'include_wrappers':include_wrappers,'wrapper_evidence':wrapper_evidence,'include_core':include_core,'core_evidence':core_evidence,'include_compare':include_compare,'compare_evidence':compare_evidence,'include_unpack':include_unpack,'unpack_evidence':unpack_evidence,'tail_layout':tail_layout,'include_fill':include_fill,'baseline_report_sha256':sha(report_path.read_bytes()),'baseline_firmware_sha256':sha(baseline),
             'baseline_reproduced_exactly':True,'placed_fft':evidence,'firmware_sha256':sha(firmware),
             'firmware_size':len(firmware),'source_only':False,'source_admitted':False,'hardware_qualified':False,
             'superseded_symbols':removed,'byte_ownership':totals,'ownership':ownership,
@@ -534,6 +904,6 @@ def experiment(include_fill=False, tail_layout=False, include_unpack=False, incl
                       'FWPK/UART/image-A checksums and container structure validated by production composer. Execution permissions, external reference closure and hardware qualification remain pending.']}
     (out/'build-report.json').write_text(json.dumps(result,indent=2)+'\n')
     summary={k:v for k,v in result.items() if k not in ('ownership','placed_fft')}
-    (ROOT/('docs/research/gx8002-fft-q15-sqrt-integration-experiment.json' if include_sqrt else 'docs/research/gx8002-fft-q15-scale-integration-experiment.json' if include_scale else 'docs/research/gx8002-fft-q15-memset-integration-experiment.json' if include_memset else 'docs/research/gx8002-fft-q15-copy-integration-experiment.json' if include_copy else 'docs/research/gx8002-fft-q15-tokenizer-integration-experiment.json' if include_tokenizer else 'docs/research/gx8002-fft-q15-sign-integration-experiment.json' if include_sign else 'docs/research/gx8002-fft-q15-fixunsigned-integration-experiment.json' if include_fixunsigned else 'docs/research/gx8002-fft-q15-udiv-integration-experiment.json' if include_udiv else 'docs/research/gx8002-fft-q15-widen-integration-experiment.json' if include_widen else 'docs/research/gx8002-fft-q15-muldi-integration-experiment.json' if include_muldi else 'docs/research/gx8002-fft-q15-float-integration-experiment.json' if include_float else 'docs/research/gx8002-fft-q15-uint-integration-experiment.json' if include_uint else 'docs/research/gx8002-fft-q15-make-integration-experiment.json' if include_make else 'docs/research/gx8002-fft-q15-twins-integration-experiment.json' if include_twins else 'docs/research/gx8002-fft-q15-exp-integration-experiment.json' if include_exp else 'docs/research/gx8002-fft-q15-muldiv-integration-experiment.json' if include_muldiv else 'docs/research/gx8002-fft-q15-addsub-integration-experiment.json' if include_addsub else 'docs/research/gx8002-fft-q15-bidirectional-integration-experiment.json' if include_reverse_conversion else 'docs/research/gx8002-fft-q15-conversion-integration-experiment.json' if include_conversion else 'docs/research/gx8002-fft-q15-wrappers-integration-experiment.json' if include_wrappers else 'docs/research/gx8002-fft-q15-core-integration-experiment.json' if include_core else 'docs/research/gx8002-fft-q15-compare-integration-experiment.json' if include_compare else 'docs/research/gx8002-fft-q15-unpack-integration-experiment.json' if include_unpack else 'docs/research/gx8002-fft-q15-tail-integration-experiment.json' if tail_layout else 'docs/research/gx8002-placed-fft-fill-integration-experiment.json' if include_fill else 'docs/research/gx8002-placed-fft-integration-experiment.json')).write_text(json.dumps(summary,indent=2)+'\n')
+    (ROOT/('docs/research/gx8002-fft-q15-clock-integration-experiment.json' if include_clock else 'docs/research/gx8002-fft-q15-uart-cluster-integration-experiment.json' if include_uart_cluster else 'docs/research/gx8002-fft-q15-uart-integration-experiment.json' if include_uart else 'docs/research/gx8002-fft-q15-exception-integration-experiment.json' if include_exception else 'docs/research/gx8002-fft-q15-centered-integration-experiment.json' if include_centered else 'docs/research/gx8002-fft-q15-reducer-scale-integration-experiment.json' if include_reducer_scale else 'docs/research/gx8002-fft-q15-cosine-integration-experiment.json' if include_cosine else 'docs/research/gx8002-fft-q15-sine-integration-experiment.json' if include_sine else 'docs/research/gx8002-fft-q15-polynomial-integration-experiment.json' if include_polynomial else 'docs/research/gx8002-fft-q15-fmod-integration-experiment.json' if include_fmod else 'docs/research/gx8002-fft-q15-math-wrappers-integration-experiment.json' if include_math_wrappers else 'docs/research/gx8002-fft-q15-logexp-integration-experiment.json' if include_logexp else 'docs/research/gx8002-fft-q15-power-integration-experiment.json' if include_power else 'docs/research/gx8002-fft-q15-sqrt-integration-experiment.json' if include_sqrt else 'docs/research/gx8002-fft-q15-scale-integration-experiment.json' if include_scale else 'docs/research/gx8002-fft-q15-memset-integration-experiment.json' if include_memset else 'docs/research/gx8002-fft-q15-copy-integration-experiment.json' if include_copy else 'docs/research/gx8002-fft-q15-tokenizer-integration-experiment.json' if include_tokenizer else 'docs/research/gx8002-fft-q15-sign-integration-experiment.json' if include_sign else 'docs/research/gx8002-fft-q15-fixunsigned-integration-experiment.json' if include_fixunsigned else 'docs/research/gx8002-fft-q15-udiv-integration-experiment.json' if include_udiv else 'docs/research/gx8002-fft-q15-widen-integration-experiment.json' if include_widen else 'docs/research/gx8002-fft-q15-muldi-integration-experiment.json' if include_muldi else 'docs/research/gx8002-fft-q15-float-integration-experiment.json' if include_float else 'docs/research/gx8002-fft-q15-uint-integration-experiment.json' if include_uint else 'docs/research/gx8002-fft-q15-make-integration-experiment.json' if include_make else 'docs/research/gx8002-fft-q15-twins-integration-experiment.json' if include_twins else 'docs/research/gx8002-fft-q15-exp-integration-experiment.json' if include_exp else 'docs/research/gx8002-fft-q15-muldiv-integration-experiment.json' if include_muldiv else 'docs/research/gx8002-fft-q15-addsub-integration-experiment.json' if include_addsub else 'docs/research/gx8002-fft-q15-bidirectional-integration-experiment.json' if include_reverse_conversion else 'docs/research/gx8002-fft-q15-conversion-integration-experiment.json' if include_conversion else 'docs/research/gx8002-fft-q15-wrappers-integration-experiment.json' if include_wrappers else 'docs/research/gx8002-fft-q15-core-integration-experiment.json' if include_core else 'docs/research/gx8002-fft-q15-compare-integration-experiment.json' if include_compare else 'docs/research/gx8002-fft-q15-unpack-integration-experiment.json' if include_unpack else 'docs/research/gx8002-fft-q15-tail-integration-experiment.json' if tail_layout else 'docs/research/gx8002-placed-fft-fill-integration-experiment.json' if include_fill else 'docs/research/gx8002-placed-fft-integration-experiment.json')).write_text(json.dumps(summary,indent=2)+'\n')
     return summary
 if __name__=='__main__':print(json.dumps(experiment(),indent=2))

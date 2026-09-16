@@ -4,7 +4,7 @@ import re
 from verify_gx8002_power_initialize import word
 MASK=0xffffffff
 
-def execute(code,entry,module,divider,table,lookup,registers,divider_runner=None,register_runner=None):
+def execute(code,entry,module,divider,table,lookup,registers,divider_runner=None,register_runner=None,stock_delta=0x1000dfec,lookup_address=0x10024a44):
     r={f'r{i}':0x43210000+i for i in range(32)};r.update(r0=module,r1=divider,r14=0x20070000)
     initial=r.copy();memory=dict(table);pc=entry;condition=False;saved=None;trace=[];mmio=dict(registers)
     def rd(a):
@@ -17,13 +17,22 @@ def execute(code,entry,module,divider,table,lookup,registers,divider_runner=None
     for _ in range(300):
         op,args,width=code[pc];p=[x.strip() for x in args.split(',')];nxt=pc+width
         if op=='push':
-            assert args=='r4-r11, r15, r16-r17';saved={f'r{i}':r[f'r{i}'] for i in (*range(4,12),15,16,17)};r['r14']-=4*len(saved)
+            regs=[]
+            for part in p:
+                if '-' in part:
+                    first,last=part.split('-');regs.extend(f'r{i}' for i in range(int(first[1:]),int(last[1:])+1))
+                else:regs.append(part)
+            saved={k:r[k] for k in regs};r['r14']-=4*len(saved)
         elif op=='pop':
-            assert args=='r4-r11, r15, r16-r17';r.update(saved);r['r14']+=4*len(saved)
+            r.update(saved);r['r14']+=4*len(saved)
             assert all(r[f'r{i}']==initial[f'r{i}'] for i in (*range(4,12),14,15,16,17))
             assert all(memory[a]==v for a,v in table.items())
             return trace,mmio
         elif op in ('movi','lrw'):r[p[0]]=int(p[1],0)
+        elif op=='rotl':
+            a=r[p[1] if len(p)==3 else p[0]];n=r[p[-1]]&31;r[p[0]]=((a<<n)|(a>>(32-n)))&MASK
+        elif op=='movih':r[p[0]]=int(p[1],0)<<16
+        elif op=='bseti':r[p[0]]|=1<<int(p[1],0)
         elif op=='mov':r[p[0]]=r[p[1]]
         elif op in ('addi','subi'):
             a=r[p[1]] if len(p)==3 else r[p[0]];r[p[0]]=(a+(1 if op=='addi' else -1)*int(p[-1],0))&MASK
@@ -54,7 +63,7 @@ def execute(code,entry,module,divider,table,lookup,registers,divider_runner=None
             else:
                 v=memory[a];r[reg]=(v if op=='ld.b' or v<128 else v-256)&MASK
         elif op=='bsr':
-            target=int(args,0)+(0x1000dfec if entry<0x100000 else 0)
+            target=int(args,0)+(stock_delta if entry<0x100000 else 0)
             if target==0x10024ae8:
                 status,values=lookup(module);assert status==0
                 assert (r['r0'],r['r1'])==tuple(values[:2])
@@ -68,7 +77,7 @@ def execute(code,entry,module,divider,table,lookup,registers,divider_runner=None
                 if register_runner is not None:assert register_runner(address,offset,value,mask,prior)==updated
                 wr(address,updated);status=0
             else:
-                assert target==0x10024a44
+                assert target==lookup_address
                 assert r['r0']==module;dest=r['r1'];assert 0x2006ff80<=dest and dest+24<=0x20070000
                 status,values=lookup(module);trace.append(('lookup',module,status))
                 if status==0:

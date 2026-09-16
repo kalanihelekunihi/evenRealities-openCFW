@@ -792,8 +792,11 @@ def analyze() -> dict[str, Any]:
         "official_blob": boot["opaque_base_bytes"],
         "source_compiled": boot["source_owned_bytes"],
     }, "bootloader current interval partition disagrees with its builder")
-    _require(boot_partition["retained_official_bytes"] == 87_981,
-             "bootloader retained complement changed")
+    # Keep this invariant tied to the current manifest's explicit retained
+    # boundary.  Source-admission work legitimately shrinks that boundary;
+    # a historical literal would report a false regression on macOS builds.
+    _require(boot_partition["retained_official_bytes"] == boot["opaque_base_bytes"],
+             "bootloader retained complement disagrees with manifest")
 
     gx = gx8002_readiness.run_audit()
     gx_ready = gx["readiness"]

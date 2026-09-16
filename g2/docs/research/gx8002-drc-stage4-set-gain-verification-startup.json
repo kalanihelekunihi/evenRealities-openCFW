@@ -1,0 +1,26 @@
+{
+  "startup": true,
+  "build": {
+    "source_sha256": "93a944187606d032e5569ec7db4c1bb2cead96293562308c99095a0507981a1a",
+    "elf_sha256": "f66c43808d7f0924b7af545deb805a622e44a7ddcafcf27ec29362cb20c573d1",
+    "bytes": 78,
+    "envelope_bytes": 80,
+    "fits": true,
+    "helper_bindings": {
+      "open_cfw_gx8002_powf": 268501156
+    },
+    "source_admitted": false,
+    "limits": [
+      "Development reconstruction; decoded behavioral comparison is recorded separately.",
+      "Power dependency remains a standalone absolute binding in the component build; startup integration resolves it to linked source.",
+      "No full-DRC, full-image, hardware or arbitrary-state qualification."
+    ],
+    "startup_elf_sha256": "3626c0d450f7f9b205d69eaada586ac45027ac8f60805af3b413cdb867923af6"
+  },
+  "cases": 10,
+  "source_admitted": false,
+  "limits": [
+    "Decoded gain setter return/final memory/ordered writes/power arguments and saved ABI compared on finite inputs.",
+    "Power helper uses host arithmetic; source power body and exceptional inputs are not qualified here."
+  ]
+}

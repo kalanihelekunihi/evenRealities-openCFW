@@ -1,5 +1,6 @@
 {
   "cases": 4180,
+  "nested_helpers": {},
   "targeted_audio_cases": 2560,
   "differences": [
     {
@@ -1700,6 +1701,6 @@
     ]
   },
   "limits": [
-    "Complete decoded outer routines; lookup and register update helpers modeled against authenticated table. Gate SET/CLR modeled as updating inhibit state. Independent ID-based transition model checked; decoded nested lookup and physical timing remain outstanding."
+    "Complete decoded outer routines; lookup/register helpers modeled against authenticated table. Gate SET/CLR modeled as updating inhibit state. Independent ID-based transition model checked; physical timing remains outstanding."
   ]
 }

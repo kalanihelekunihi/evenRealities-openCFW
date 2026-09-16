@@ -1,0 +1,32 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "entry_bytes_sha256": "c1cc12d7d84a4e20f0b2e742e757f990d2a9be293a65780c85ab962fc5b4fd2b",
+  "source_sha256": "b7d042fa36bc928951c3deaf1a3adbf8945107d849b5f46b8cb68bf6bdf55bee",
+  "header_sha256": "559444daa49e014b705e436dca89260897bc08acf3a45b73520813d8ebbb8d47",
+  "command": [
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+    "-O2",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_backup_exception_state.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-exception-state/state.o"
+  ],
+  "elf_sha256": "53c945fabfc6d6dcf4c81325a5964d9275ce3804626c5006e4802cc69514ea3a",
+  "frame_bytes": 72,
+  "stack_bytes": 768,
+  "saved_sp_bytes": 4,
+  "source_admitted": false,
+  "limits": [
+    "Frame offsets and original BSS layout reconstructed; 768-byte capacity follows the BSS lower bound and entry stack top, not a proven maximum stack usage.",
+    "No exception entry/return implementation or memory relocation. Nested exceptions, handler stack consumption and other references remain to be reconstructed."
+  ]
+}

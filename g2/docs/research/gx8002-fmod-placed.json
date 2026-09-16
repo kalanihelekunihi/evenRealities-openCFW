@@ -1,0 +1,209 @@
+{
+  "probe": {
+    "compact": {
+      "patch_sha256": "ee85270af54ff4a5b54eb74459a90ac7db27fd89c26bcc8e75e3de1234cc5ff2",
+      "source_sha256": "689f3f99b04604a089b1f81575c13be55e3a0404463c6d69c9005ac493a0dbb0",
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+        "-O2",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Os",
+        "-mno-high-registers",
+        "-fno-tree-forwprop",
+        "-fwrapv",
+        "-ffp-contract=off",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-fmod-probe/adapted/e_fmod.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-fmod-probe/signed-zero-compact.o"
+      ],
+      "object_sha256": "c86a4f9dfe750671c48d83faa7b949f4ab639c299e67df6d12dad496677961da",
+      "allocated": [
+        [
+          ".text.__ieee754_fmod",
+          576
+        ]
+      ],
+      "undefined_symbols": [
+        "__muldf3",
+        "__divdf3"
+      ]
+    },
+    "variants": [
+      {
+        "label": "size",
+        "command": [
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+          "-O2",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Os",
+          "-fwrapv",
+          "-ffp-contract=off",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-fmod-probe/e_fmod.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-fmod-probe/size.o"
+        ],
+        "sha256": "540f5912916775958335ec1fb843f417b9f25fe5541a87bca5faecd42faf0622",
+        "allocated": [
+          [
+            ".text.__ieee754_fmod",
+            656
+          ],
+          [
+            ".rodata.Zero",
+            16
+          ]
+        ]
+      },
+      {
+        "label": "low-registers",
+        "command": [
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+          "-O2",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Os",
+          "-mno-high-registers",
+          "-fwrapv",
+          "-ffp-contract=off",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-fmod-probe/e_fmod.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-fmod-probe/low-registers.o"
+        ],
+        "sha256": "b1166eabb1db01ae8ad54d113c17df7de70e5f1169c5a1a81912ede3aff580e5",
+        "allocated": [
+          [
+            ".text.__ieee754_fmod",
+            604
+          ],
+          [
+            ".rodata.Zero",
+            16
+          ]
+        ]
+      },
+      {
+        "label": "ck803",
+        "command": [
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+          "-O2",
+          "-mcpu=ck804ef",
+          "-mhard-float",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Os",
+          "-mno-high-registers",
+          "-mcpu=ck803ef",
+          "-fwrapv",
+          "-ffp-contract=off",
+          "-c",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-fmod-probe/e_fmod.c",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-fmod-probe/ck803.o"
+        ],
+        "sha256": "7155e88dd2490d758e362be1fa504bdf0f59e7938c6411eeace8acfab637828c",
+        "allocated": [
+          [
+            ".text.__ieee754_fmod",
+            604
+          ],
+          [
+            ".rodata.Zero",
+            16
+          ]
+        ]
+      }
+    ],
+    "commit": "4aa696c8d6294897411cf78cae87f7f4680e9687",
+    "source": {
+      "path": "newlib/libm/math/e_fmod.c",
+      "sha256": "a2a86b8b4988672fae5a38306be2846b3724820b82eee6728a89bbdc65a296e4"
+    },
+    "header_sha256": "a0ed340bf60fe69102c3b567d52c6b26e1d3667d51e9d261a4a12dc87d53900a",
+    "object_sha256": "270dd53abd0bd62b1303663bce8fa4f9e4e726b1a69de7fbc53d46d2de8e7439",
+    "command": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+      "-O2",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fwrapv",
+      "-ffp-contract=off",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-fmod-probe/e_fmod.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-fmod-probe/fmod.o"
+    ],
+    "undefined_symbols": [
+      "__muldf3",
+      "__divdf3"
+    ],
+    "allocated": [
+      [
+        ".text.__ieee754_fmod",
+        966
+      ],
+      [
+        ".rodata.Zero",
+        16
+      ]
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Complete source object only. Link existing source arithmetic dependencies, verify stock boundaries and execute before integration."
+    ]
+  },
+  "elf_sha256": "0658b457c95e3207c40cfe25d4243676f8b6144ac00ad625f97b76775740a0c0",
+  "sections": [
+    {
+      "name": ".fmod",
+      "package_offset": 300516,
+      "bytes": 576,
+      "sha256": "bd8357bdfdea165605d58bbded93976ab4df95a1c0d2430ea045347c36cbce60"
+    }
+  ],
+  "arithmetic_targets": {
+    "__muldf3": 305040,
+    "__divdf3": 305552
+  },
+  "source_admitted": false,
+  "limits": [
+    "Complete function fits original 580-byte region. Absolute arithmetic targets require authenticated source implementations at integration. Numerical, exceptional-value, ABI, reference and hardware qualification pending."
+  ]
+}

@@ -12,11 +12,14 @@ def execute(code,entry,descriptor,registers,callback_hook=None,read_hook=None,po
     for _ in range(3000):
         op,args,width=code[pc];p=[x.strip() for x in args.split(',')];following=pc+width
         if op=='push':
-            if args!='r4-r5, r15':raise ValueError('UART interrupt frame')
-            saved={f'r{i}':r[f'r{i}'] for i in (4,5,15)};r['r14']-=12
+            if args not in ('r4-r5, r15','r4-r8, r15'):raise ValueError('UART interrupt frame')
+            frame_regs=(*range(4,6 if args=='r4-r5, r15' else 9),15)
+            saved={f'r{i}':r[f'r{i}'] for i in frame_regs};r['r14']-=4*len(frame_regs)
         elif op=='pop':
-            if args!='r4-r5, r15' or saved is None:raise ValueError('UART interrupt restore')
-            r.update(saved);r['r14']+=12
+            if saved is None or args not in ('r4-r5, r15','r4-r8, r15'):raise ValueError('UART interrupt restore')
+            expected=(*range(4,6 if args=='r4-r5, r15' else 9),15)
+            if expected!=frame_regs:raise ValueError('UART frame mismatch')
+            r.update(saved);r['r14']+=4*len(frame_regs)
             if any(r[f'r{i}']!=initial[f'r{i}'] for i in (*range(4,12),14,15,16,17)):raise ValueError('UART interrupt ABI')
             return r['r0'],memory,trace
         elif op in ('ld.w','ld.b','st.w'):
@@ -48,6 +51,7 @@ def execute(code,entry,descriptor,registers,callback_hook=None,read_hook=None,po
                 r[reg]=(memory[address&~3]>>shift)&255;trace.append(('read',address,1,r[reg]))
         elif op=='min.u32':r[p[0]]=min(r[p[1]],r[p[2]])
         elif op=='bclri':r[p[0]]&=~(1<<int(p[1],0))
+        elif op=='cmpne':condition=r[p[0]]!=r[p[1]]
         elif op=='cmplt':condition=signed(r[p[0]])<signed(r[p[1]])
         elif op=='mov':r[p[0]]=r[p[1]]
         elif op in ('movi','movih','lrw'):r[p[0]]=int(p[1],0)<<(16 if op=='movih' else 0)
@@ -63,9 +67,15 @@ def execute(code,entry,descriptor,registers,callback_hook=None,read_hook=None,po
             if condition==(op=='inct'):r[p[0]]=(r[p[1]]+int(p[2],0))&0xffffffff
         elif op in ('cmpnei','cmphsi'):
             condition=r[p[0]]!=int(p[1],0) if op=='cmpnei' else r[p[0]]>=int(p[1],0)
-        elif op in ('br','bt','bf','bez','bnez','bhsz'):
-            take=True if op=='br' else condition if op=='bt' else not condition if op=='bf' else r[p[0]]==0 if op=='bez' else r[p[0]]!=0 if op=='bnez' else signed(r[p[0]])>=0
+        elif op in ('br','bt','bf','bez','bnez','bhsz','blsz'):
+            take=True if op=='br' else condition if op=='bt' else not condition if op=='bf' else r[p[0]]==0 if op=='bez' else r[p[0]]!=0 if op=='bnez' else signed(r[p[0]])<=0 if op=='blsz' else signed(r[p[0]])>=0
             if take:following=int(p[-1],0)
+        elif op=='bsr':
+            r['r15']=following;following=int(p[0],0)
+            if following not in code:raise ValueError('Missing source helper')
+        elif op=='rts':
+            following=r['r15']
+            if following not in code:raise ValueError('Unexpected helper return')
         elif op=='jsr':
             target=r[p[0]]
             count=3 if target in (0x10300000,0x10300010) else 2

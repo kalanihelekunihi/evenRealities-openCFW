@@ -1,0 +1,60 @@
+{
+  "candidate": {
+    "source_sha256": "2ab13219f6f9e043ee0a79704445efe61d0327fe41d331213612ab34064cadb6",
+    "command": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+      "-O2",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Os",
+      "-DOPEN_CFW_GX8002_BACKUP_RX_ORDER=1",
+      "-DOPEN_CFW_GX8002_BACKUP_SPLIT_TX=1",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/shared/gx8002/runtime_gx8002_uart_interrupt.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-backup-uart-interrupt/interrupt.o"
+    ],
+    "elf_sha256": "c87a196ef993c63f17678fd88d88e74b0dd9707f9e66c3e27e259ba06fac78ad",
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "code_bytes": 230,
+    "source_sections": [
+      {
+        "name": ".text",
+        "address": 268452432,
+        "bytes": 230
+      },
+      {
+        "name": ".fifo",
+        "address": 268452668,
+        "bytes": 30
+      },
+      {
+        "name": ".tx",
+        "address": 268452700,
+        "bytes": 22
+      }
+    ],
+    "stock_envelope_bytes": 236,
+    "fits": true,
+    "dispatch_cases": 1728,
+    "dispatch_differences": [],
+    "source_admitted": false,
+    "limits": [
+      "Complete function built; dispatch differences are retained for diagnosis; candidate not qualified.",
+      "Buffered mode 2, completion callbacks, transmitter stalls, references and integration still require backup qualification. Callback bodies are modeled."
+    ]
+  },
+  "cases": 96,
+  "source_admitted": false,
+  "hardware_qualified": false,
+  "limits": [
+    "Receive completion callback mutates device, mode, DMA state, transmit buffer/length, completion callback/context and port. Callback bodies are modeled; no hardware or concurrency qualification."
+  ]
+}

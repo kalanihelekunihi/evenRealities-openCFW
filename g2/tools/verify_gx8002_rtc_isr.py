@@ -12,17 +12,17 @@ MASK=0xffffffff
 ADDRESS=0x10206680
 
 
-def expected(irq,callback,argument,result,ack):
-    trace=[('read',0x20027b40,callback)]
-    if callback:trace.extend([('read',0x20027b44,argument),('call',callback,irq,argument)])
+def expected(irq,callback,argument,result,ack,state=0x20027b40):
+    trace=[('read',state,callback)]
+    if callback:trace.extend([('read',state+4,argument),('call',callback,irq,argument)])
     trace.append(('read',0xa0003018,ack))
     return trace,result if callback else 0
 
 
-def execute(code,entry,irq,callback,argument,result,ack):
+def execute(code,entry,irq,callback,argument,result,ack,state=0x20027b40):
     r={f'r{i}':(0x91234567+i*0x1020304)&MASK for i in range(32)}
     r.update(r0=irq,r14=0x2002f7fc);initial=r.copy();saved=None;pc=entry;trace=[]
-    memory={0x20027b40:callback,0x20027b44:argument,0xa0003018:ack}
+    memory={state:callback,state+4:argument,0xa0003018:ack}
     for _ in range(24):
         op,args,width=code[pc];p=[v.strip() for v in args.split(',')];nxt=pc+width
         if op=='push':
@@ -32,6 +32,9 @@ def execute(code,entry,irq,callback,argument,result,ack):
             if args!='r15' or saved is None:raise ValueError('RTC ISR restore')
             r['r15']=saved;r['r14']+=4
             if any(r[f'r{i}']!=initial[f'r{i}'] for i in (*range(4,12),14,15,16,17)):raise ValueError('RTC ISR ABI')
+            return trace,r['r0']
+        elif op=='rts':
+            if saved is not None or any(r[f'r{i}']!=initial[f'r{i}'] for i in (*range(4,12),14,15,16,17)):raise ValueError('RTC ISR leaf ABI')
             return trace,r['r0']
         elif op=='lrw':r[p[0]]=int(p[1],0)
         elif op=='mov':r[p[0]]=r[p[1]]

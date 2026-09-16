@@ -1,0 +1,88 @@
+{
+  "placed_cosine": true,
+  "placed_sine": false,
+  "loops": false,
+  "nonzero_tails": false,
+  "source_elf_sha256": "a9db4fef9ebeae5f3c801452c0cc07ebdb359de8f16333263ee25f75ed3128df",
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "results": {
+    "cos": {
+      "cases": 201,
+      "maximum_ulp_error_source_stock": [
+        0,
+        1
+      ],
+      "stock_differences": [
+        {
+          "x": "0xbfe7c00000000000",
+          "tail": "0x0",
+          "iy": 0,
+          "source": "0x3fe7956fcd7f6543",
+          "stock": "0x3fe7956fcd7f6542",
+          "reference": "0x3fe7956fcd7f6543"
+        },
+        {
+          "x": "0xbfe6400000000000",
+          "tail": "0x0",
+          "iy": 0,
+          "source": "0x3fe89241985d871f",
+          "stock": "0x3fe89241985d8720",
+          "reference": "0x3fe89241985d871f"
+        },
+        {
+          "x": "0xbfe2800000000000",
+          "tail": "0x0",
+          "iy": 0,
+          "source": "0x3feaccb526f69de5",
+          "stock": "0x3feaccb526f69de6",
+          "reference": "0x3feaccb526f69de5"
+        },
+        {
+          "x": "0xbfdf800000000000",
+          "tail": "0x0",
+          "iy": 0,
+          "source": "0x3fec339eb01ddd81",
+          "stock": "0x3fec339eb01ddd80",
+          "reference": "0x3fec339eb01ddd81"
+        },
+        {
+          "x": "0x3fdf800000000000",
+          "tail": "0x0",
+          "iy": 0,
+          "source": "0x3fec339eb01ddd81",
+          "stock": "0x3fec339eb01ddd80",
+          "reference": "0x3fec339eb01ddd81"
+        },
+        {
+          "x": "0x3fe2800000000000",
+          "tail": "0x0",
+          "iy": 0,
+          "source": "0x3feaccb526f69de5",
+          "stock": "0x3feaccb526f69de6",
+          "reference": "0x3feaccb526f69de5"
+        },
+        {
+          "x": "0x3fe6400000000000",
+          "tail": "0x0",
+          "iy": 0,
+          "source": "0x3fe89241985d871f",
+          "stock": "0x3fe89241985d8720",
+          "reference": "0x3fe89241985d871f"
+        },
+        {
+          "x": "0x3fe7c00000000000",
+          "tail": "0x0",
+          "iy": 0,
+          "source": "0x3fe7956fcd7f6543",
+          "stock": "0x3fe7956fcd7f6542",
+          "reference": "0x3fe7956fcd7f6543"
+        }
+      ],
+      "source_accuracy_errors_over_one_ulp": []
+    }
+  },
+  "source_admitted": false,
+  "limits": [
+    "Reduced interval grid; optional quarter-ULP nonzero tails with sine iy=1 and neighboring branch-boundary inputs. Decimal 90-digit Taylor reference of exact x+y. Reports differences, does not assert universal accuracy or correct rounding. Exceptional inputs, full reducer contract, placement and hardware pending."
+  ]
+}

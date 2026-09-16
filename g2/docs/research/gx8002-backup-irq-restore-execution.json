@@ -1,0 +1,31 @@
+{
+  "elf_sha256": "2c8810d83e975bdb77e5131af3d3dd20ad2f79ff67da2687e228942ec1b9f48a",
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "complete_body_stock_identical": true,
+  "ordered_access_cases": 164,
+  "references": {
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "stock_range": [
+      250220,
+      250244
+    ],
+    "external_branches": [
+      {
+        "pc": 275024,
+        "target": 250220,
+        "entry": true
+      }
+    ],
+    "external_literal_pools": [],
+    "stored_address_words": [],
+    "source_admitted": false,
+    "limits": [
+      "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
+    ]
+  },
+  "source_admitted": false,
+  "limits": [
+    "Decoded reads and writes, order and preserved ABI registers verified. Physical interrupt-controller effects and asynchronous interrupts are not modeled.",
+    "The two-word BSS reader is known; its writers and computed access paths still require closure before relocation."
+  ]
+}

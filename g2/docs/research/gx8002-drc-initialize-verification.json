@@ -1,0 +1,57 @@
+{
+  "startup": false,
+  "build": {
+    "source_sha256": "434c80a237d2f91a5af2dee818701d0c7fd92b5d1543995495b35bbe8da80caa",
+    "elf_sha256": "0cf7c3147189d216e004891c0727be1721054ebd4ee5a4bb311492873e117812",
+    "sections": [
+      [
+        ".drc_initialize",
+        "0x1000e784",
+        320
+      ],
+      [
+        ".drc_stage1_size",
+        "0x1000ea68",
+        12
+      ],
+      [
+        ".drc_stage2_size",
+        "0x1000eb48",
+        12
+      ],
+      [
+        ".drc_stage3_size",
+        "0x1000ec2c",
+        10
+      ],
+      [
+        ".drc_parameters",
+        "0x20016fb8",
+        84
+      ],
+      [
+        ".drc_stage1_control",
+        "0x2002d7b4",
+        4
+      ]
+    ],
+    "helper_bindings": {
+      "open_cfw_gx8002_memset": 268506052,
+      "open_cfw_gx8002_drc_stage1_initialize": 268495476,
+      "open_cfw_gx8002_drc_stage2_initialize": 268495700,
+      "open_cfw_gx8002_drc_stage3_initialize": 268495928,
+      "open_cfw_gx8002_drc_stage4_initialize": 268496252,
+      "open_cfw_gx8002_drc_stage4_set_gain": 268496172
+    },
+    "source_admitted": false,
+    "limits": [
+      "Development reconstruction; decoded behavioral comparison pending.",
+      "No full-image, hardware or arbitrary-state qualification."
+    ]
+  },
+  "cases": 4,
+  "source_admitted": false,
+  "limits": [
+    "Four decoded constructor-sequencing cases compare return, cleared header, stage pointers, ordered helper calls and saved ABI. Constructor internals are verified by their dedicated comparisons; arithmetic and hardware remain unqualified."
+  ]
+}

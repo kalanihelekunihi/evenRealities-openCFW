@@ -1,0 +1,40 @@
+{
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "oracle_blob": "600d763a219007e2af7b5006989d44984abf0861",
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "upstream_bss_objects": [
+    {
+      "symbol": "spi_device_context_tab",
+      "bss_offset": 0,
+      "bytes": 16
+    },
+    {
+      "symbol": "dw_spi_master",
+      "bss_offset": 16,
+      "bytes": 36
+    },
+    {
+      "symbol": "dwspi",
+      "bss_offset": 52,
+      "bytes": 44
+    }
+  ],
+  "backup_context_address": 536966820,
+  "backup_context_extent": 44,
+  "backup_literal_pointer_occurrences": [
+    {
+      "target": 536966820,
+      "context_offset": 0,
+      "package_offset": 266260,
+      "runtime_address": 268469972
+    }
+  ],
+  "has_debug_info": false,
+  "source_admitted": false,
+  "limits": [
+    "The upstream object matches primary transfer code; its layout corroborates, but does not prove, the complete backup type.",
+    "Literal occurrences do not cover pointers derived arithmetically or passed indirectly.",
+    "Offset +36 remains semantically unresolved. No claim that it is unused.",
+    "Oracle bytes are never linked into firmware."
+  ]
+}

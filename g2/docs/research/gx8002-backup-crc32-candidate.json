@@ -1,0 +1,47 @@
+{
+  "upstream_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "upstream_path": "base/src/crc32.c",
+  "upstream_sha256": "c1c1b49288b89f9db59e6db8567657a97c7f671699b882bd476c52dcdc221005",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "sections": [
+    {
+      "section": ".text.no_comp",
+      "compiled_bytes": 180,
+      "envelope_bytes": 180,
+      "fits": true,
+      "byte_exact": false,
+      "compiled_sha256": "cd71e6795f3f7b9dfe5dac8a8a07695df33eee7951ef77cd447406396dd1059b"
+    },
+    {
+      "section": ".text.crc32",
+      "compiled_bytes": 12,
+      "envelope_bytes": 12,
+      "fits": true,
+      "byte_exact": true,
+      "compiled_sha256": "c3ee7a90b568411ce33a4f9c8a1dde841ba43f2c1a82f0c9a7333e92f865be8c"
+    },
+    {
+      "section": ".rodata.crc_table",
+      "compiled_bytes": 1024,
+      "envelope_bytes": 1024,
+      "fits": true,
+      "byte_exact": true,
+      "compiled_sha256": "12f3e0576d447eb37b36d82ba0c1c5481b8f0d12fdc70347ce4a076b229d4c86"
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Pinned source candidate; decoded behavioral and ownership qualification outstanding."
+  ]
+}

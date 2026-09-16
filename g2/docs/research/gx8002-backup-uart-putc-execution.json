@@ -1,0 +1,21 @@
+{
+  "build": {
+    "source_sha256": "a8b762f4248b662d6230f18291119dc8db1bc84b8ad35f788b852e57c2116478",
+    "bytes": 48,
+    "envelope_bytes": 56,
+    "fits": true,
+    "byte_exact_prefix": false,
+    "source_admitted": false,
+    "limits": [
+      "Recovered busy polling and CR before LF; no timeout introduced. Descriptor ownership, decoded behavior and integration pending."
+    ]
+  },
+  "cases": 12384,
+  "checks": [
+    "Exact ordered descriptor/MMIO reads and writes, ready polling, CRLF and low-byte output, preserved registers"
+  ],
+  "limits": [
+    "Finite modeled ready delays; synthetic port indices do not establish valid hardware descriptors. Integration and hardware execution pending."
+  ],
+  "source_admitted": false
+}

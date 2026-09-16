@@ -1,0 +1,137 @@
+{
+  "startup": true,
+  "concrete_math": true,
+  "build": {
+    "source_sha256": "1a7beb62c4f5ac6ca6ea58d1b6ef3b6a7f93c4e448e750dc3331ed4ed2263238",
+    "elf_sha256": "7e281075042621a3b788245c8d799b81c5dace7591b879f377514656c94b12b4",
+    "bytes": 238,
+    "envelope_bytes": 244,
+    "fits": true,
+    "helper_bindings": {
+      "open_cfw_gx8002_memset": 268506052,
+      "drc_logf": 268501164,
+      "drc_expf": 268501172
+    },
+    "source_admitted": false,
+    "limits": [
+      "Development reconstruction; decoded behavioral comparison pending.",
+      "Log/exp/memset dependencies remain standalone absolute bindings; no composed source closure.",
+      "No startup or full-image integration, hardware or arbitrary-state qualification."
+    ],
+    "startup_elf_sha256": "9f047db606f623bc960d936737ad01f8e8e9e2bacca5830cca4fb7a9dbc67262",
+    "math": {
+      "probe": {
+        "commit": "4aa696c8d6294897411cf78cae87f7f4680e9687",
+        "header_sha256": "f5ae1751fc85c9bea10138c23dac53d1c848032961c38aa307392c6073fb0ccd",
+        "objects": [
+          {
+            "source": {
+              "path": "newlib/libm/math/ef_log.c",
+              "sha256": "158e7e60f5c8cd0a1105712c9aaf54c706e0e634ac9a48d57e14c6ed4ec70c30"
+            },
+            "command": [
+              "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+              "-O2",
+              "-mcpu=ck804ef",
+              "-mhard-float",
+              "-ffreestanding",
+              "-fno-builtin",
+              "-ffunction-sections",
+              "-fdata-sections",
+              "-Wall",
+              "-Wextra",
+              "-Werror",
+              "-fwrapv",
+              "-ffp-contract=off",
+              "-c",
+              "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-log-exp-probe/ef_log.c",
+              "-o",
+              "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-log-exp-probe/ef_log.c.o"
+            ],
+            "object_sha256": "c792d51a79b9772f60648443bfd5bad4daff418586910e046225f77517a7234d"
+          },
+          {
+            "source": {
+              "path": "newlib/libm/math/ef_exp.c",
+              "sha256": "663f68da933a34c218c42591937045513b7a9a2c217c6889ed593a0ff7176979"
+            },
+            "command": [
+              "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+              "-O2",
+              "-mcpu=ck804ef",
+              "-mhard-float",
+              "-ffreestanding",
+              "-fno-builtin",
+              "-ffunction-sections",
+              "-fdata-sections",
+              "-Wall",
+              "-Wextra",
+              "-Werror",
+              "-fwrapv",
+              "-ffp-contract=off",
+              "-c",
+              "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-log-exp-probe/ef_exp.c",
+              "-o",
+              "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-log-exp-probe/ef_exp.c.o"
+            ],
+            "object_sha256": "3c40e14e36b52f5bd87e59c38704b68759fb6a66e52836fb40e6e0e61ed71e6d"
+          }
+        ],
+        "source_admitted": false,
+        "limits": [
+          "Complete upstream compilation only. Linking, provenance comparison with stock, numerical verification and integration pending."
+        ]
+      },
+      "exp_command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/csky-macos/install/bin/csky-unknown-elf-gcc",
+        "-Os",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fwrapv",
+        "-ffp-contract=off",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-log-exp-probe/ef_exp.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/gx8002-log-exp-placed/exp.o"
+      ],
+      "elf_sha256": "30921775fcd8b831eeb97dc949def46f8520399a7ed07affe753eb4590629ce9",
+      "sections": [
+        {
+          "name": ".log",
+          "package_offset": 299176,
+          "bytes": 568,
+          "sha256": "de3fc7620442bf82e83115fc742536da5462e8a3cde62504f1844bc4d452bf18"
+        },
+        {
+          "name": ".exp",
+          "package_offset": 299776,
+          "bytes": 436,
+          "sha256": "c41cdc5aaafc1ad9d4778c5ff3b5fc85c8e031bb796ec72e5210b699afd08412"
+        },
+        {
+          "name": ".exp_constants",
+          "package_offset": 300212,
+          "bytes": 24,
+          "sha256": "dc7571537da0a0c5bde41b5812521db99786e8d86e3b1d73bf5b8e230b3987d7"
+        }
+      ],
+      "source_admitted": false,
+      "limits": [
+        "Whole source functions and source constants fit original regions. Numerical/ABI/reference qualification and integration pending; no binary fragments reused."
+      ]
+    }
+  },
+  "cases": 162,
+  "source_admitted": false,
+  "limits": [
+    "Decoded constructor comparison with distinct compiled Newlib and decoded stock log/exp bodies at helper boundaries.",
+    "Math wrapper dispatch and memset modeled; math uses a separate register/stack executor. Finite sampled inputs, no hardware or full DRC qualification."
+  ]
+}

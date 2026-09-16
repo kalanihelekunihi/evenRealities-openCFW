@@ -8,7 +8,7 @@ from verify_gx8002_memcpy_source import decode
 from verify_gx8002_power_initialize import word
 MASK=0xffffffff
 
-def execute(code,entry,hz,device,status,content,seed,mutation=None,probe_target=0x10007d78,read_hook=None,probe_hook=None):
+def execute(code,entry,hz,device,status,content,seed,mutation=None,probe_target=0x10007d78,read_hook=None,probe_hook=None,string_hook=None):
     r={f'r{i}':(seed+i*0x1020304)&MASK for i in range(32)};r.update(r0=0x20040000,r14=0x20050000);initial=r.copy();saved=None;pc=entry;memory={};events=[]
     for _ in range(100):
         op,args,width=code[pc];p=[x.strip() for x in args.split(',')];nxt=pc+width
@@ -51,10 +51,13 @@ def execute(code,entry,hz,device,status,content,seed,mutation=None,probe_target=
                 else:value=read_hook((a,b,c,d),memory)
                 events.append(('read',device,0,5))
             elif target==0x10009934:assert a==0x10012a8c;events.append(('error',))
-            elif target==0x100099bc:assert a==0x10012aa4;value=5;events.append(('strlen',))
+            elif target==0x100099bc:
+                assert a==0x10012aa4
+                value=5 if string_hook is None else string_hook(target,(a,b,c,d),memory)
+                events.append(('strlen',))
             elif target==0x10009998:
                 assert (a,b,c)==(r['r14'],0x10012aa4,5)
-                value=0 if bytes(memory[a+i] for i in range(5))==b'8003A' else 1
+                value=(0 if bytes(memory[a+i] for i in range(5))==b'8003A' else 1) if string_hook is None else string_hook(target,(a,b,c,d),memory)
                 events.append(('compare',))
             else:raise ValueError(('helper',hex(target)))
             if mutation and events[-1][0]==mutation[0]:

@@ -1,0 +1,18 @@
+{
+  "build": {
+    "source_sha256": "41f147b549f208f2a082e844acacce7189e4aa1d1bc5cc7ca7478f2186d59d34",
+    "bytes": 48,
+    "envelope_bytes": 56,
+    "fits": true,
+    "exact_stock": false,
+    "source_admitted": false,
+    "limits": [
+      "Explicit C-SKY shift mnemonics inside C preserve target count semantics; portable path valid only for shift -31..31. Decoded behavior verification pending."
+    ]
+  },
+  "cases": 196895,
+  "source_admitted": false,
+  "limits": [
+    "Decoded shifts limited to magnitudes <=31; every int16 value tested at shifts -15,0,1, plus all shifts -31..31 on extrema and seeded arrays. Exact reads/writes, final memory, saved ABI and no accesses for nonpositive counts. Larger shift-count ISA behavior is retained by source assembly but not qualified here."
+  ]
+}

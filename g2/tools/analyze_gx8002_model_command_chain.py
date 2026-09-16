@@ -51,6 +51,18 @@ def analyze():
                 tensor['source_a_strides_elements']=[*tensor['source_stride_fields'],1]
                 tensor['source_b_strides_elements']=([0,0,1] if subtype==4 else [*tensor['source_stride_fields'],1])
                 tensor['destination_strides_elements']=[*tensor['destination_stride_fields'],1]
+            if subtype in (0,7):
+                word=lambda off:struct.unpack_from('<I',data,payload+off)[0]
+                half=lambda off:struct.unpack_from('<H',data,payload+off)[0]
+                address=lambda value:{'base_slot':value>>28,'offset':value&0xfffffff}
+                shape=word(20)
+                row['unary_geometry']={'source':address(word(0)),'destination':address(word(12)),
+                    'extents':[shape>>20,(shape>>8)&0xfff,shape&255],
+                    'source_strides_elements':[half(26),half(24),1],
+                    'destination_strides_elements':[half(30),half(28),1]}
+                if subtype==0:
+                    row['unary_geometry']['activation_selector']=(word(16)>>4)&7
+                else:row['unary_geometry']['format_selector']=half(18)&1
             if subtype==2:
                 word=lambda off:struct.unpack_from('<I',data,payload+off)[0]
                 half=lambda off:struct.unpack_from('<H',data,payload+off)[0]

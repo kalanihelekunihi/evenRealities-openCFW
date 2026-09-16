@@ -1,0 +1,42 @@
+{
+  "source_sha256": "62a5857ba42587784e94fec011cda041842b191b0899707c5e835787e9f32275",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_flash_command_read",
+      "section": ".text.flash_command_read",
+      "compiled_bytes": 126,
+      "compiled_sha256": "036828688b0afb0f4fe62f5e91d5a1ffaabf3825ae4c9d3dfc84d0d1306953a8",
+      "package_offset": 259440,
+      "stock_envelope_bytes": 128,
+      "stock_sha256": "5062e204f3e3f9b39100deeb57eb920c4627d430ad9dca2aad7794be765d2524",
+      "byte_exact": false
+    },
+    {
+      "symbol": "open_cfw_gx8002_flash_command_write",
+      "section": ".text.flash_command_write",
+      "compiled_bytes": 128,
+      "compiled_sha256": "3c8c5161d59b2860179b2f15a4aa50077d002bfbacf63d17eceb98465452b91c",
+      "package_offset": 259568,
+      "stock_envelope_bytes": 132,
+      "stock_sha256": "b5c532312a46278df3f1b22481120b741b1e69e0f6379e88b4b7dda05c223d31",
+      "byte_exact": false
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Readiness schedules, buffer accesses and complete transfer traces require qualification.",
+    "Polling has no timeout; no physical hardware qualification."
+  ]
+}

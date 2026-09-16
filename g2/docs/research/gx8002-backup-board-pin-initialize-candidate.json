@@ -1,0 +1,35 @@
+{
+  "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+  "source_sha256": "eaaa5bea4ec4fa693eae4e765a984c9ef8c4fd2ce163be8311181afa16d8ab10",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_backup_board_pin_initialize",
+      "section": ".text.backup_board_pin_initialize",
+      "compiled_bytes": 112,
+      "compiled_sha256": "7f1bbc981da5f198be5dde5c5fd69c9f3ab1d20659bfb2e906a4c86c102b1e06",
+      "package_offset": 266936,
+      "stock_envelope_bytes": 112,
+      "stock_sha256": "bb393e3136a0f396edca7df307ed03e465a4d6fda08d011810e6c9b32e4fa51a",
+      "byte_exact": false,
+      "fits": true
+    }
+  ],
+  "source_admitted": false,
+  "analysis_only_overlapping_sections_allowed": false,
+  "limits": [
+    "Pin table, diagnostic string, flag and helper implementations require source integration.",
+    "No physical flash qualification."
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "package_interval": [
+    279940,
+    280212
+  ],
+  "runtime_entry": 268483652,
+  "function_sha256": "bab509dbccfd9f3fa365f6a12d76cdaaae5baf66e7afdc035d994a39c669505f",
+  "calls": [
+    {
+      "site": 279942,
+      "target_package": 248056,
+      "target_runtime": 268451768
+    },
+    {
+      "site": 279952,
+      "target_package": 273752,
+      "target_runtime": 268477464
+    },
+    {
+      "site": 279964,
+      "target_package": 270964,
+      "target_runtime": 268474676
+    },
+    {
+      "site": 279970,
+      "target_package": 270964,
+      "target_runtime": 268474676
+    },
+    {
+      "site": 279982,
+      "target_package": 270964,
+      "target_runtime": 268474676
+    },
+    {
+      "site": 279998,
+      "target_package": 272616,
+      "target_runtime": 268476328
+    },
+    {
+      "site": 280002,
+      "target_package": 272464,
+      "target_runtime": 268476176
+    },
+    {
+      "site": 280018,
+      "target_package": 270964,
+      "target_runtime": 268474676
+    },
+    {
+      "site": 280022,
+      "target_package": 272576,
+      "target_runtime": 268476288
+    },
+    {
+      "site": 280034,
+      "target_package": 270964,
+      "target_runtime": 268474676
+    },
+    {
+      "site": 280038,
+      "target_package": 272576,
+      "target_runtime": 268476288
+    },
+    {
+      "site": 280048,
+      "target_package": 272492,
+      "target_runtime": 268476204
+    },
+    {
+      "site": 280060,
+      "target_package": 291012,
+      "target_runtime": 268494724
+    },
+    {
+      "site": 280072,
+      "target_package": 270964,
+      "target_runtime": 268474676
+    },
+    {
+      "site": 280080,
+      "target_package": 270964,
+      "target_runtime": 268474676
+    },
+    {
+      "site": 280084,
+      "target_package": 278848,
+      "target_runtime": 268482560
+    },
+    {
+      "site": 280096,
+      "target_package": 270964,
+      "target_runtime": 268474676
+    },
+    {
+      "site": 280106,
+      "target_package": 270964,
+      "target_runtime": 268474676
+    },
+    {
+      "site": 280110,
+      "target_package": 279132,
+      "target_runtime": 268482844
+    },
+    {
+      "site": 280122,
+      "target_package": 270964,
+      "target_runtime": 268474676
+    },
+    {
+      "site": 280134,
+      "target_package": 270964,
+      "target_runtime": 268474676
+    },
+    {
+      "site": 280146,
+      "target_package": 270964,
+      "target_runtime": 268474676
+    }
+  ],
+  "branches": {
+    "0x4458c": {
+      "opcode": "bf",
+      "operands": "0x445aa"
+    },
+    "0x44596": {
+      "opcode": "bnez",
+      "operands": "r0, 0x44642"
+    },
+    "0x445c8": {
+      "opcode": "bez",
+      "operands": "r3, 0x4460e"
+    },
+    "0x445ce": {
+      "opcode": "bf",
+      "operands": "0x44628"
+    },
+    "0x44602": {
+      "opcode": "bez",
+      "operands": "r0, 0x4464e"
+    },
+    "0x4460c": {
+      "opcode": "br",
+      "operands": "0x4458e"
+    },
+    "0x44618": {
+      "opcode": "bez",
+      "operands": "r0, 0x445d6"
+    },
+    "0x44626": {
+      "opcode": "br",
+      "operands": "0x445a6"
+    },
+    "0x44632": {
+      "opcode": "bez",
+      "operands": "r0, 0x445d6"
+    },
+    "0x44640": {
+      "opcode": "br",
+      "operands": "0x445a6"
+    },
+    "0x4464c": {
+      "opcode": "br",
+      "operands": "0x445a6"
+    },
+    "0x44658": {
+      "opcode": "br",
+      "operands": "0x445a6"
+    }
+  },
+  "strings": {
+    "0x10013a4c": "[LVP_MODE_DENOISE]LvpAudioInInit OK!!!\n",
+    "0x10013a74": "[LVP_MODE_DENOISE]Denoise Init OK!!!\n",
+    "0x10013990": "[LVP_MODE_DENOISE]Init denoise mode\n",
+    "0x100139f4": "[LVP_MODE_DENOISE]No noise reduction\n",
+    "0x100137b4": "samplerate %d frame size %d\n",
+    "0x10013800": "[LVP_MODE_DENOISE]Init DRC\n",
+    "0x100139b8": "[LVP_MODE_DENOISE][DOUBLE_MIC_DENOISE]Init gsc Beamforming\n",
+    "0x1001381c": "[LVP_MODE_DENOISE]_beamformingInit Failed !!!\n",
+    "0x10013894": "[LVP_MODE_DENOISE][SINGLE_MIC_DENOISE]Init Imcra\n",
+    "0x100138c8": "[LVP_MODE_DENOISE]_imarcInit Failed !!!\n",
+    "0x10013a1c": "[LVP_MODE_DENOISE]LvpAudioInInit Failed !!!\n",
+    "0x100137d4": "[LVP_MODE_DENOISE]FrameDrcStateInit Fail!\n"
+  },
+  "state_base": 537055932,
+  "observations": [
+    "Unsigned status from3c8f8 >=2 skips local setup and proceeds to audio registration.",
+    "Local setup invokes428e8(state+28,state+52,40,4), then42850.",
+    "State word+16 equal0 invokes44140 (beamforming); equal1 invokes4425c (IMCRA); other values skip both with no-noise-reduction diagnostic.",
+    "Either algorithm setup nonzero returns-1 after diagnostic.",
+    "Two428c0 calls occur before DRC setup: first diagnostic argument, second retained as DRC argument0. Allocate512 via4286c; call470c4(retained,256,allocation), store returned pointer at state+24.",
+    "Null DRC result returns-1; nonnull proceeds to42d58(callback1000bd54). Nonzero audio registration returns-1; zero logs two success messages and returns0."
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Control-flow analysis only. Callee semantics not inferred from names alone. Denoise source implementation, state ownership, callback body and composed execution remain incomplete."
+  ]
+}

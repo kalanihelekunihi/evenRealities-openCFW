@@ -1,0 +1,43 @@
+{
+  "build": {
+    "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+    "source_sha256": "7a1a05e50c48a8737fbb3594106a0f0f1f4016f6373fcbcff649dbaf9c966244",
+    "flags": [
+      "-Os",
+      "-fno-move-loop-invariants",
+      "-mcpu=ck804ef",
+      "-mhard-float",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "functions": [
+      {
+        "symbol": "open_cfw_gx8002_flash_sync",
+        "section": ".text.flash_sync",
+        "compiled_bytes": 32,
+        "compiled_sha256": "f4735bdbdd961324521e8e876e19ce216df25ae220e98efebed3691f5502e6c3",
+        "package_offset": 260696,
+        "stock_envelope_bytes": 32,
+        "stock_sha256": "ad6e8f2b9ce0e5941f70dcf633e836fdae826277e6ebc3fa59e3d2bd2c09aa63",
+        "byte_exact": false,
+        "fits": true
+      }
+    ],
+    "source_admitted": false,
+    "analysis_only_overlapping_sections_allowed": false,
+    "limits": [
+      "Region snapshots, device reloads and lock-bit extraction require decoded qualification.",
+      "No physical flash qualification."
+    ]
+  },
+  "cases": 1152,
+  "source_admitted": false,
+  "limits": [
+    "Every even status byte and delayed readiness checked with scripted byte writes and transport returns. Public SDK sync is void; observed r0 retained internally only. No physical hardware or failed read without output byte qualification."
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "length": -3,
+      "outputs": 0
+    },
+    {
+      "length": -2,
+      "outputs": 0
+    },
+    {
+      "length": -1,
+      "outputs": 0
+    },
+    {
+      "length": 0,
+      "outputs": 0
+    },
+    {
+      "length": 1,
+      "outputs": 0
+    },
+    {
+      "length": 2,
+      "outputs": 1
+    },
+    {
+      "length": 3,
+      "outputs": 1
+    },
+    {
+      "length": 255,
+      "outputs": 127
+    },
+    {
+      "length": 256,
+      "outputs": 128
+    },
+    {
+      "length": 511,
+      "outputs": 255
+    },
+    {
+      "length": 512,
+      "outputs": 256
+    },
+    {
+      "length": 513,
+      "outputs": 256
+    },
+    {
+      "length": 1024,
+      "outputs": 512
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Integer addressing, signed half-length and loop control only. FPU and stack value transfers omitted; per-iteration expression verified separately. This is not complete initializer execution."
+  ]
+}

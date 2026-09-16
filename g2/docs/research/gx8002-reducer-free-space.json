@@ -1,0 +1,161 @@
+{
+  "firmware_sha256": "699d7291e8d7839eb207653be1c7f517585b8889e004cc8c86059c8df21d7db3",
+  "ownership_report_sha256": "ac2cca0b35e41fe7ace1da9d35d90c77835c4a685d4f4945e67487ea1d529268",
+  "all_image_fill_bytes": 3014,
+  "backup_bounds": [
+    244032,
+    326092
+  ],
+  "backup_fill": [
+    {
+      "offset": 255136,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_1"
+    },
+    {
+      "offset": 255188,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_2"
+    },
+    {
+      "offset": 255304,
+      "size": 6,
+      "kind": "generated_unreachable_fill",
+      "symbol": "gx_audio_in_set_fftvad_curve_4"
+    }
+  ],
+  "backup_fill_bytes": 18,
+  "backup_contiguous_fill_spans": [
+    [
+      255136,
+      255142
+    ],
+    [
+      255188,
+      255194
+    ],
+    [
+      255304,
+      255310
+    ]
+  ],
+  "largest_backup_fill_bytes": 6,
+  "upstream_objects": [
+    {
+      "source": {
+        "path": "newlib/libm/math/e_rem_pio2.c",
+        "sha256": "5e80de2aa15d9e85dfc2e5a92271f14ed39213bf9c3954494994f2e0f9c40858"
+      },
+      "object_sha256": "9e5b01c870ce8b763711decddbd18379eb1f42c115d6a8771fa55e01b485d8cb",
+      "allocated": [
+        [
+          ".text.__ieee754_rem_pio2",
+          992
+        ],
+        [
+          ".rodata.npio2_hw",
+          128
+        ],
+        [
+          ".rodata.two_over_pi",
+          264
+        ]
+      ],
+      "code_bytes": 992,
+      "code_fits_largest_existing_backup_fill": false
+    },
+    {
+      "source": {
+        "path": "newlib/libm/math/k_rem_pio2.c",
+        "sha256": "1123eaff975595bf56d5e1ae3c218a6c71dc8709bf86c68bee207ac53221fa16"
+      },
+      "object_sha256": "e4082a91fd6fb95235d73c69e92e5c752829024c7ff9c404b1c4b700c302dc82",
+      "allocated": [
+        [
+          ".text.__kernel_rem_pio2",
+          1914
+        ],
+        [
+          ".rodata.PIo2",
+          64
+        ],
+        [
+          ".rodata.init_jk",
+          16
+        ]
+      ],
+      "code_bytes": 1914,
+      "code_fits_largest_existing_backup_fill": false
+    },
+    {
+      "source": {
+        "path": "newlib/libm/math/s_fabs.c",
+        "sha256": "9123aaa7d0c3b538db9f37d2cde1156d56013d1394f6a798fa5a6c5363e31b3a"
+      },
+      "object_sha256": "850446765aafa881ddcfe2dc469c0b2b0003a05eb257d20e3cbac73d81949922",
+      "allocated": [
+        [
+          ".text.fabs",
+          4
+        ]
+      ],
+      "code_bytes": 4,
+      "code_fits_largest_existing_backup_fill": true
+    },
+    {
+      "source": {
+        "path": "newlib/libm/math/s_floor.c",
+        "sha256": "bfcaab777d6cde5ebb3402b56ae57f8f17155cb6ec7a81793dfe67290616ddda"
+      },
+      "object_sha256": "bd75affd81187538d20902393cb3937fc983f1801a961174ae6f5e3d23c88ffe",
+      "allocated": [
+        [
+          ".text.floor",
+          268
+        ]
+      ],
+      "code_bytes": 268,
+      "code_fits_largest_existing_backup_fill": false
+    },
+    {
+      "source": {
+        "path": "newlib/libm/common/s_scalbn.c",
+        "sha256": "fd58a65d2700f1e55e48a752a133aa2e02605ed715be20d7a20f643cbc28f780"
+      },
+      "object_sha256": "88e415b5c2dd287801d74ee05a089d4832935ed2007cddf9a0b99503c3af1da3",
+      "allocated": [
+        [
+          ".text.scalbn",
+          208
+        ]
+      ],
+      "code_bytes": 208,
+      "code_fits_largest_existing_backup_fill": false
+    },
+    {
+      "source": {
+        "path": "newlib/libm/common/s_copysign.c",
+        "sha256": "dd7e69e31c64d9dc0a7c69d7e9f20019b133291b38f15724c72284d6285bf8d2"
+      },
+      "object_sha256": "41999a98eb6366cfa04a8886dd2e0d57ceffc1ca2250ae07785a8d50c09628d5",
+      "allocated": [
+        [
+          ".text.copysign",
+          10
+        ]
+      ],
+      "code_bytes": 10,
+      "code_fits_largest_existing_backup_fill": false
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Inventory authenticates existing ownership; it does not independently prove that fill is unreachable.",
+    "Fill outside the backup payload belongs to other images and is not available for backup placement.",
+    "Retained stock tails and literal pools are not free space without additional reference and reachability evidence.",
+    "Fit compares code sizes only; alignment, data, dependencies, and branch ranges also require qualification.",
+    "No firmware bytes were changed. Larger complete functions require a new placement or relinking strategy."
+  ]
+}

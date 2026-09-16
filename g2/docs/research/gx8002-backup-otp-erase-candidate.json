@@ -1,0 +1,35 @@
+{
+  "state_header_sha256": "d88c5f9ee64a74fa5c6dbc2c42f2ca98ce518c1ac8852fb207d13a6005d655e9",
+  "source_sha256": "94668216451414803447847ccc655352981100dff3d24d2695557408fc3c5994",
+  "flags": [
+    "-Os",
+    "-mcpu=ck804ef",
+    "-mhard-float",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "functions": [
+    {
+      "symbol": "open_cfw_gx8002_flash_otp_erase",
+      "section": ".text.flash_otp_erase",
+      "compiled_bytes": 160,
+      "compiled_sha256": "61c36e9af3f1ab3ca49c2dac9a0642147794e6e425b78409250adbac80ad5763",
+      "package_offset": 260988,
+      "stock_envelope_bytes": 172,
+      "stock_sha256": "77da2e6c5ffa5cb4fc48c6439972681f0326ba962114f1757718cd02869c670b",
+      "byte_exact": false,
+      "fits": true
+    }
+  ],
+  "source_admitted": false,
+  "analysis_only_overlapping_sections_allowed": false,
+  "limits": [
+    "Region snapshots, device reloads and lock-bit extraction require decoded qualification.",
+    "No physical flash qualification."
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "build": {
+    "compiler_additional_flags": [
+      "-fno-caller-saves"
+    ],
+    "sources": [
+      {
+        "path": "components/shared/gx8002/runtime_gx8002_backup_imcra_state_initialize.c",
+        "sha256": "c4047adcaa0295fdc9b62be81c7fe5daa52d7ec9d35149c5d340b6c1602c7d96"
+      },
+      {
+        "path": "components/shared/gx8002/runtime_gx8002_backup_imcra_state_messages.c",
+        "sha256": "67616c66899ed2959855a0a5516e60384f80e9481f0d3f353956b5a965ff826e"
+      }
+    ],
+    "bytes": 1024,
+    "envelope_bytes": 1024,
+    "fits": true,
+    "diagnostics": [
+      {
+        "name": "imcra_error_header",
+        "address": "0x100142c4",
+        "bytes": 74,
+        "exact_stock": true
+      },
+      {
+        "name": "imcra_error_required",
+        "address": "0x10014310",
+        "bytes": 56,
+        "exact_stock": true
+      },
+      {
+        "name": "imcra_error_space",
+        "address": "0x10014348",
+        "bytes": 48,
+        "exact_stock": true
+      },
+      {
+        "name": "imcra_memory_temp",
+        "address": "0x10014378",
+        "bytes": 36,
+        "exact_stock": true
+      },
+      {
+        "name": "imcra_memory_static",
+        "address": "0x1001439c",
+        "bytes": 36,
+        "exact_stock": true
+      },
+      {
+        "name": "imcra_memory_total",
+        "address": "0x100143c0",
+        "bytes": 36,
+        "exact_stock": true
+      }
+    ],
+    "source_admitted": false,
+    "limits": [
+      "Full C candidate only. Current size, field access ordering, floating behavior and error-path equivalence require verification; not startup integrated. Numeric helper bindings are candidate linkage, not source ownership proof."
+    ]
+  },
+  "cases": [
+    {
+      "capacity": 42320,
+      "fused": false,
+      "effects": 1853
+    },
+    {
+      "capacity": 42320,
+      "fused": true,
+      "effects": 1853
+    },
+    {
+      "capacity": 43008,
+      "fused": false,
+      "effects": 1853
+    },
+    {
+      "capacity": 43008,
+      "fused": true,
+      "effects": 1853
+    },
+    {
+      "capacity": 65536,
+      "fused": false,
+      "effects": 1853
+    },
+    {
+      "capacity": 65536,
+      "fused": true,
+      "effects": 1853
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Full stock/source entry-to-return register and memory execution. Cosine uses shared host-math model, power fixed observed result, workspace/printf/memset/conversion modeled. No physical FPU qualification, concrete upstream cosine composition or arbitrary helper mutation proof. Ordered state writes and helper effects compared; memory reads not traced."
+  ]
+}

@@ -33,6 +33,10 @@ def execute(code, control, statuses, limit=256):
         p = [s.strip() for s in operand.split(',')]
         if op == 'movi':
             registers[p[0]] = int(p[1], 0)
+        elif op == 'movih':
+            registers[p[0]] = int(p[1], 0) << 16
+        elif op == 'mov':
+            registers[p[0]] = registers[p[1]]
         elif op == 'lsli':
             registers[p[0]] = (registers[p[1]] << int(p[2], 0)) & 0xffffffff
         elif op in ('ori', 'andi'):

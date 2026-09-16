@@ -1,0 +1,12 @@
+{
+  "elf_sha256": "efe1eb24c959cc1f2f50ea1d8b825ee941f405de756a505a564a44d326a94084",
+  "fifo_cluster_elf_sha256": "c87a196ef993c63f17678fd88d88e74b0dd9707f9e66c3e27e259ba06fac78ad",
+  "fifo_executions": 800,
+  "irq_elf_sha256": "8de780b63253ea96d3c1bec9aa546d1a8c5dda4fe8a30fe35326c273c04abbfb",
+  "irq_executions": 800,
+  "cases": 400,
+  "source_admitted": false,
+  "limits": [
+    "Zero baud bypasses divisor arithmetic. Stock/source FIFO instructions executed in separate frames; stock/source IRQ registration executed in separate frames; device mutation follows FIFO return. Exact ordered descriptor/MMIO traces compared. Nonzero baud arithmetic is separately qualified; hardware qualification remains outstanding."
+  ]
+}

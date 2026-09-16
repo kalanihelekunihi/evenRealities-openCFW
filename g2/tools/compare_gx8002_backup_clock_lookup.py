@@ -11,9 +11,9 @@ from analyze_gx8002_upstream_objects import IMAGE
 from link_gx8002_uart_console import ROOT
 
 
-def execute(code,start,module,pointer,ids):
+def execute(code,start,module,pointer,ids,record_base=0x2001699c):
     r={f'r{i}':0x98760000+i for i in range(32)};r.update(r0=module,r1=pointer)
-    initial=r.copy();memory={0x2001699c+i*16:v for i,v in enumerate(ids)}
+    initial=r.copy();memory={record_base+i*16:v for i,v in enumerate(ids)}
     memory.update({0x1000+i*4:0xa5a5a5a5 for i in range(6)})
     writes=[];pc=start;condition=False
     for _ in range(400):

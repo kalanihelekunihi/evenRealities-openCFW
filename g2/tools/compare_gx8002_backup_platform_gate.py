@@ -12,12 +12,12 @@ from build_transparent_image import Elf32
 from verify_gx8002_memcpy_source import decode
 
 
-def execute(code,start,jumps,table,module,enable,source,delta,lookup_hook=None):
+def execute(code,start,jumps,table,module,enable,source,delta,lookup_hook=None,record_base=0x2001699c,jump_base=0x1001295c,lookup_entry=0x100034e0):
     r={f'r{i}':0x98760000+i for i in range(32)};r.update(r0=module,r1=enable,r14=0x8000)
     initial=r.copy();memory={};trace=[];saved=None;pc=start;condition=False
     def byte(a):
-        if 0x2001699c<=a<0x20016b3c:return table[a-0x2001699c]
-        if 0x1001295c<=a<0x100129f0:return jumps[a-0x1001295c]
+        if record_base<=a<record_base+416:return table[a-record_base]
+        if jump_base<=a<jump_base+148:return jumps[a-jump_base]
         if a in memory:return memory[a]
         raise ValueError('unmapped read')
     def word(a):return sum(byte(a+i)<<(8*i) for i in range(4))
@@ -61,7 +61,7 @@ def execute(code,start,jumps,table,module,enable,source,delta,lookup_hook=None):
                 value=byte(a);r[reg]=(value-256 if op=='ld.bs' and value&128 else value)&0xffffffff
             else:r[reg]=word(a)
         elif op=='bsr':
-            if int(p[0],0)!=0x100034e0-delta or r['r1']!=r['r14']:raise ValueError('unexpected lookup call')
+            if int(p[0],0)!=lookup_entry-delta or r['r1']!=r['r14']:raise ValueError('unexpected lookup call')
             mod=r['r0'];out=r['r1'];trace.append(('lookup',mod));result=0xffffffff
             if lookup_hook is not None:
                 result,values,writes=lookup_hook(mod)
@@ -74,7 +74,7 @@ def execute(code,start,jumps,table,module,enable,source,delta,lookup_hook=None):
                 store(out,0)
                 if index is not None:
                     base=0xa0010000 if mod<10 else 0xa0300000
-                    for i,v in enumerate((0x2001699c+16*index,base,base+(0x8c if mod<10 else 0x88),base+24,base+28,base+32)):store(out+i*4,v)
+                    for i,v in enumerate((record_base+16*index,base,base+(0x8c if mod<10 else 0x88),base+24,base+28,base+32)):store(out+i*4,v)
                     result=0
             for i in (0,1,2,3,12,13,15):r[f'r{i}']=0xdead0000+i
             r['r0']=result

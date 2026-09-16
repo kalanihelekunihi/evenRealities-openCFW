@@ -1,0 +1,92 @@
+{
+  "matching_iteration": {
+    "cosine_arguments": [
+      [
+        "fmuls",
+        [
+          "fsitos",
+          [
+            "index"
+          ]
+        ],
+        [
+          "angle_step"
+        ]
+      ]
+    ],
+    "stores": [
+      [
+        [
+          "window"
+        ],
+        [
+          "index"
+        ],
+        [
+          "low16",
+          [
+            "fstosi.rz",
+            [
+              "fmuls",
+              [
+                "fnmacs",
+                1057635697,
+                [
+                  "cosine",
+                  [
+                    "fmuls",
+                    [
+                      "fsitos",
+                      [
+                        "index"
+                      ]
+                    ],
+                    [
+                      "angle_step"
+                    ]
+                  ]
+                ],
+                1055622431
+              ],
+              1191181824
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
+  "loops": [
+    {
+      "length": 1,
+      "matching_stores": 1
+    },
+    {
+      "length": 2,
+      "matching_stores": 2
+    },
+    {
+      "length": 255,
+      "matching_stores": 255
+    },
+    {
+      "length": 256,
+      "matching_stores": 256
+    },
+    {
+      "length": 511,
+      "matching_stores": 511
+    },
+    {
+      "length": 512,
+      "matching_stores": 512
+    },
+    {
+      "length": 513,
+      "matching_stores": 513
+    }
+  ],
+  "source_admitted": false,
+  "limits": [
+    "Symbolic integer index and angle-step inputs; compares cosine input, arithmetic operation order, truncating conversion and low-halfword store. Positive loop lengths compared with modeled cosine result. Initial setup, zero/negative lengths and helper execution are not qualified here."
+  ]
+}

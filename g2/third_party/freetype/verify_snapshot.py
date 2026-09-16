@@ -20,7 +20,7 @@ EXPECTED_SOURCE_RECORDS_SHA256 = (
 EXPECTED_SOURCE_FILE_COUNT = 297
 EXPECTED_COMMUNITY_SOURCE_ADMISSION = {
     ROOT / "manifests/g2-2.2.6.10-core-source.json":
-        "ae7c402fef4c72f3fbeae80cbfc71eb17e3907044a339b65494e8732392a150d",
+        "103920a8157e16227151672565b150350f7cc6c2f9a83d6b857d54a8e5abf834",
     ROOT / "components/apollo_main/core_overlay/build_component.py":
         "ff1b3d78f4f2d071bb653374f8ce557a5a6d0f0a7a23b8525743a21b4068d066",
     ROOT / "components/apollo_main/liblc3_encoder/build_service_audio_atomic_component.py":
@@ -54,7 +54,7 @@ EXPECTED_COMMUNITY_SOURCE_ADMISSION = {
     ROOT / "components/apollo_main/freetype_cff_scatter/build_component.py":
         "b344b37620574e9cec4af153f54b23e124afbe64332126118e678401f1feb4b9",
     ROOT / "components/apollo_main/freetype_cff_scatter/overlay.json":
-        "ec7f2835ba9d04963ea6f0ca02d8f804ff4ee88485168ef0de2b230ba56ab972",
+        "d2efc063ac6b924e7125329e862724491060ebcfa616b6641d6d94b9035950f6",
     ROOT / "components/shared/freetype_base/README.md":
         "4af883b31f56b61d9b27a08cc77acd4b79f276441a912fd289ea350f272eeeaa",
     ROOT / "components/shared/freetype_base/runtime_freetype_base.c":
