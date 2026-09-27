@@ -1,6 +1,7 @@
 # GX8002 C integration candidate
 
-Date: 2026-09-08. The 214 qualified C functions and five architecture assembly routines now supply bytes to an
+Date: 2026-09-17. The 754 qualified source replacement occurrences, including C,
+architecture assembly, recovered data, and generated container records, now supply bytes to an
 experimental firmware container and complete EVENOTA package built on macOS.
 This is an intermediate hybrid, not the final source-only firmware.
 
@@ -21,12 +22,12 @@ The [build report](gx8002-source-candidate-build.json) assigns every codec byte:
 
 | Owner | Bytes |
 | --- | ---: |
-| Compiled C, 230 occurrences of 214 functions | 14,416 |
-| Compiled architecture assembly | 156 |
-| Generated source data | 3,113 |
-| Generated FWPK and UART header metadata | 80 |
-| Generated unreachable envelope fill | 712 |
-| Authenticated retained stock | 307,615 |
+| Compiled C | 43,850 |
+| Compiled architecture assembly | 2,982 |
+| Generated source data | 13,413 |
+| Generated FWPK and UART header metadata | 88 |
+| Generated unreachable envelope fill | 3,014 |
+| Authenticated retained stock | 262,745 |
 | Total | 326,092 |
 
 The C sections preserve their original entry addresses. An explicitly
@@ -45,12 +46,12 @@ candidate does not retroactively promote bytes in the existing default build.
 
 Codec: `build/gx8002-source-candidate/firmware_codec.hybrid-candidate.bin`
 
-SHA-256: `26da0f0d9fe13d659128ba11b07288ee32d940e21208efe9cbc82c92d7abdab6`
+SHA-256: `ea1228240563deb21e2093793c50295bfe76e9a0c12cd77963ae581d7c270956`
 
 EVENOTA: `build/codec-source-experimental/package/g2-openCFW-s200_v2.2.6.10-codec-source-experimental.evenota.bin`
 
 Size: 4,750,780 bytes. SHA-256:
-`f31253a2f4d0bd0e022617cadd4ae11a7e41c63848cb45eefe3f8f6e26947064`.
+`ae48a42ccfc8e3fa886f6ff4897bc3863a403cf7e6e95f96195cbb822e51f82c`.
 
 The explicit experimental manifest pins these artifacts. Package assembly and
 `open_cfw.py verify-artifacts` pass, with zero unresolved flash regions. The

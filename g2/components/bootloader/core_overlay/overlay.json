@@ -39546,8 +39546,8 @@
       "runtime_address": 4356798,
       "source": {
         "path": "components/bootloader/core_overlay/runtime_bl006_cmdq_status_binary32_tails_427abe.c",
-        "size": 6114,
-        "sha256": "e3dd52ca7ec0f82dffe29130e869c19d60ebdda4dd4b3860dd7e7df5db482318",
+        "size": 5928,
+        "sha256": "b955d406449b1dbb1b6a5cdb72983b17dd91ccfa02768ef2ec5478c7a0e982f2",
         "license": "MIT",
         "origin": "clean-room reconstruction of the authenticated bootloader command-queue status remainder tail",
         "evidence": "docs/research/g2-bootloader-bl006-tail-leaves-426c22-427d84-source-closure.md"
@@ -39603,8 +39603,8 @@
       "runtime_address": 4357508,
       "source": {
         "path": "components/bootloader/core_overlay/runtime_bl006_cmdq_status_binary32_tails_427abe.c",
-        "size": 6114,
-        "sha256": "e3dd52ca7ec0f82dffe29130e869c19d60ebdda4dd4b3860dd7e7df5db482318",
+        "size": 5928,
+        "sha256": "b955d406449b1dbb1b6a5cdb72983b17dd91ccfa02768ef2ec5478c7a0e982f2",
         "license": "MIT",
         "origin": "clean-room reconstruction of the authenticated bootloader binary32 remainder-code remainder tail",
         "evidence": "docs/research/g2-bootloader-bl006-tail-leaves-426c22-427d84-source-closure.md"
@@ -39641,7 +39641,15 @@
         "size": 20,
         "sha256": "f35a5cb7dfcde48c147a027e717db6113d416a95014c14703077f500022a44eb"
       },
-      "relocations": [],
+      "relocations": [
+        {
+          "offset": 14,
+          "type": "R_ARM_THM_JUMP19",
+          "symbol": "open_cfw_bootloader_syspll_alt_entry_4275c4",
+          "target_address": 4355524,
+          "symbol_type": "STT_NOTYPE"
+        }
+      ],
       "allow_discarded_alloc_sections": true,
       "toolchain_profiles": {
         "linux-clang": {
@@ -39651,7 +39659,15 @@
             "sha256": "f35a5cb7dfcde48c147a027e717db6113d416a95014c14703077f500022a44eb",
             "unrelocated_sha256": "f35a5cb7dfcde48c147a027e717db6113d416a95014c14703077f500022a44eb"
           },
-          "relocations": []
+          "relocations": [
+            {
+              "offset": 14,
+              "type": "R_ARM_THM_JUMP19",
+              "symbol": "open_cfw_bootloader_syspll_alt_entry_4275c4",
+              "target_address": 4355524,
+              "symbol_type": "STT_NOTYPE"
+            }
+          ]
         }
       }
     },
@@ -39660,8 +39676,8 @@
       "runtime_address": 4355524,
       "source": {
         "path": "components/bootloader/core_overlay/runtime_bl006_syspll_alt_entry_4275c4.c",
-        "size": 3129,
-        "sha256": "0a8ec76e04c984ee902c5bfd047383c0d5954ae892438181cb61dcdd26772ecc",
+        "size": 3339,
+        "sha256": "b0702cbca96c94ee09f8cdb2eb88a867d3b2486d2d4172ef2266868793def2ce",
         "license": "MIT",
         "origin": "clean-room reconstruction of the authenticated bootloader System-PLL alternate setter entry",
         "evidence": "docs/research/g2-bootloader-bl006-tail-leaves-426c22-427d84-source-closure.md"
@@ -39698,7 +39714,15 @@
         "size": 14,
         "sha256": "a19e550e2348b6ab72f1f7ef0d2d2afa12d5b6e0944b3df1251c96119706d103"
       },
-      "relocations": [],
+      "relocations": [
+        {
+          "offset": 12,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_double_range_error_4275d2_join",
+          "target_address": 4355550,
+          "symbol_type": "STT_NOTYPE"
+        }
+      ],
       "allow_discarded_alloc_sections": true,
       "toolchain_profiles": {
         "linux-clang": {
@@ -39708,7 +39732,15 @@
             "sha256": "a19e550e2348b6ab72f1f7ef0d2d2afa12d5b6e0944b3df1251c96119706d103",
             "unrelocated_sha256": "a19e550e2348b6ab72f1f7ef0d2d2afa12d5b6e0944b3df1251c96119706d103"
           },
-          "relocations": []
+          "relocations": [
+            {
+              "offset": 12,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_double_range_error_4275d2_join",
+              "target_address": 4355550,
+              "symbol_type": "STT_NOTYPE"
+            }
+          ]
         }
       }
     },
@@ -39831,8 +39863,8 @@
       "runtime_address": 4356510,
       "source": {
         "path": "components/bootloader/core_overlay/runtime_bl006_cmdq_alloc_resume_tails_42799e.c",
-        "size": 7856,
-        "sha256": "bc82e328d14bdedfe5143748b7214d3ca48b358852d5feef69d606042103707f",
+        "size": 8071,
+        "sha256": "27c92e1e33b8d6f6c5f3fc828116157ad6ad4666b019358bf0866e8c3f2ece52",
         "license": "MIT",
         "origin": "clean-room reconstruction of the authenticated bootloader command-queue allocator remainder interior",
         "evidence": "docs/research/g2-bootloader-bl006-tail-leaves-42799e-427b90-source-closure.md"
@@ -39869,7 +39901,36 @@
         "size": 32,
         "sha256": "dcf9d1eae1901c914dcc21e28cc1f8de507044dc67797f930c622068fd307b97"
       },
-      "relocations": [],
+      "relocations": [
+        {
+          "offset": 4,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_cmdq_alloc_success_427970",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4356464
+        },
+        {
+          "offset": 8,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_cmdq_alloc_epilogue_427984",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4356484
+        },
+        {
+          "offset": 26,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_cmdq_alloc_success_427970",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4356464
+        },
+        {
+          "offset": 30,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_cmdq_alloc_epilogue_427984",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4356484
+        }
+      ],
       "allow_discarded_alloc_sections": true,
       "toolchain_profiles": {
         "linux-clang": {
@@ -39879,7 +39940,36 @@
             "sha256": "dcf9d1eae1901c914dcc21e28cc1f8de507044dc67797f930c622068fd307b97",
             "unrelocated_sha256": "dcf9d1eae1901c914dcc21e28cc1f8de507044dc67797f930c622068fd307b97"
           },
-          "relocations": []
+          "relocations": [
+            {
+              "offset": 4,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_cmdq_alloc_success_427970",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4356464
+            },
+            {
+              "offset": 8,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_cmdq_alloc_epilogue_427984",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4356484
+            },
+            {
+              "offset": 26,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_cmdq_alloc_success_427970",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4356464
+            },
+            {
+              "offset": 30,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_cmdq_alloc_epilogue_427984",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4356484
+            }
+          ]
         }
       }
     },
@@ -39888,8 +39978,8 @@
       "runtime_address": 4357008,
       "source": {
         "path": "components/bootloader/core_overlay/runtime_bl006_cmdq_alloc_resume_tails_42799e.c",
-        "size": 7856,
-        "sha256": "bc82e328d14bdedfe5143748b7214d3ca48b358852d5feef69d606042103707f",
+        "size": 8071,
+        "sha256": "27c92e1e33b8d6f6c5f3fc828116157ad6ad4666b019358bf0866e8c3f2ece52",
         "license": "MIT",
         "origin": "clean-room reconstruction of the authenticated bootloader command-queue error-resume remainder",
         "evidence": "docs/research/g2-bootloader-bl006-tail-leaves-42799e-427b90-source-closure.md"
@@ -39926,7 +40016,15 @@
         "size": 26,
         "sha256": "083d6df438d62d8c22618063fe1a0756dd25ad4f4dda8eb7bb71f0ecc0c4a27f"
       },
-      "relocations": [],
+      "relocations": [
+        {
+          "offset": 0,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_cmdq_error_resume_scan_427b76",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4356982
+        }
+      ],
       "allow_discarded_alloc_sections": true,
       "toolchain_profiles": {
         "linux-clang": {
@@ -39936,7 +40034,15 @@
             "sha256": "083d6df438d62d8c22618063fe1a0756dd25ad4f4dda8eb7bb71f0ecc0c4a27f",
             "unrelocated_sha256": "083d6df438d62d8c22618063fe1a0756dd25ad4f4dda8eb7bb71f0ecc0c4a27f"
           },
-          "relocations": []
+          "relocations": [
+            {
+              "offset": 0,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_cmdq_error_resume_scan_427b76",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4356982
+            }
+          ]
         }
       }
     },
@@ -40002,8 +40108,8 @@
       "runtime_address": 4350944,
       "source": {
         "path": "components/bootloader/core_overlay/runtime_bl006_mspi_blocking_tail_4263e0.c",
-        "size": 6143,
-        "sha256": "778a39f2e9c21b94539cecf1e57d4537638c1517957b1b853d086a48f0f7bc81",
+        "size": 6044,
+        "sha256": "fdce601b97c193697946999fc5a9e305e1b23eedbcfd4f5202ff14b83e2c5bd6",
         "license": "MIT",
         "origin": "clean-room reconstruction of the authenticated bootloader MSPI blocking-transfer remainder",
         "evidence": "docs/research/g2-bootloader-bl006-tail-leaves-4248e2-4263e0-source-closure.md"
@@ -40054,6 +40160,13 @@
           "symbol": "open_cfw_bootloader_mspi_fifo_write_423e40",
           "symbol_type": "STT_NOTYPE",
           "target_address": 4341312
+        },
+        {
+          "offset": 84,
+          "type": "R_ARM_THM_CALL",
+          "symbol": "open_cfw_bootloader_delay_service_41d246",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4313670
         }
       ],
       "allow_discarded_alloc_sections": true,
@@ -40065,7 +40178,29 @@
             "sha256": "87f7deeb376def9dc9183a17a119e755a49be7263b7a9a721406862e72c19dfc",
             "unrelocated_sha256": "87f7deeb376def9dc9183a17a119e755a49be7263b7a9a721406862e72c19dfc"
           },
-          "relocations": []
+          "relocations": [
+            {
+              "offset": 22,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_bootloader_mspi_fifo_read_423e8a",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4341386
+            },
+            {
+              "offset": 44,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_bootloader_mspi_fifo_write_423e40",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4341312
+            },
+            {
+              "offset": 84,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_bootloader_delay_service_41d246",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4313670
+            }
+          ]
         }
       }
     },
@@ -40074,8 +40209,8 @@
       "runtime_address": 4350252,
       "source": {
         "path": "components/bootloader/core_overlay/runtime_bl006_mspi_control_tail_42612c.c",
-        "size": 14581,
-        "sha256": "3388046f9d394a10addeb845c8accf7110a44e3239e4e86eb91943f05795a94a",
+        "size": 14152,
+        "sha256": "a72b2da44412bd36bea1f0837cca42322036a7718670c4600c6eae11496ea650",
         "license": "MIT",
         "origin": "clean-room reconstruction of the authenticated bootloader MSPI control-dispatcher remainder",
         "evidence": "docs/research/g2-bootloader-bl006-tail-leaves-4248e2-4263e0-source-closure.md"
@@ -40114,11 +40249,102 @@
       },
       "relocations": [
         {
+          "offset": 18,
+          "type": "R_ARM_THM_JUMP8",
+          "symbol": "open_cfw_bootloader_mspi_control_head_4260f4",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4350196
+        },
+        {
           "offset": 22,
           "type": "R_ARM_THM_CALL",
           "symbol": "open_cfw_bootloader_mspi_cq_enable_423f8e",
           "symbol_type": "STT_NOTYPE",
           "target_address": 4341646
+        },
+        {
+          "offset": 30,
+          "type": "R_ARM_THM_JUMP8",
+          "symbol": "open_cfw_bootloader_mspi_control_head_4260f4",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4350196
+        },
+        {
+          "offset": 34,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_bootloader_mspi_control_exit_e8_4252e8",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4346600
+        },
+        {
+          "offset": 46,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_bootloader_mspi_control_exit_e8_4252e8",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4346600
+        },
+        {
+          "offset": 64,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_bootloader_mspi_control_exit_e8_4252e8",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4346600
+        },
+        {
+          "offset": 114,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_bootloader_mspi_control_exit_e6_4252e6",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4346598
+        },
+        {
+          "offset": 124,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_bootloader_mspi_control_exit_e8_4252e8",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4346600
+        },
+        {
+          "offset": 186,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_bootloader_mspi_control_exit_e6_4252e6",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4346598
+        },
+        {
+          "offset": 208,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_bootloader_mspi_control_exit_e6_4252e6",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4346598
+        },
+        {
+          "offset": 230,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_bootloader_mspi_control_exit_e6_4252e6",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4346598
+        },
+        {
+          "offset": 240,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_bootloader_mspi_control_exit_e8_4252e8",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4346600
+        },
+        {
+          "offset": 426,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_bootloader_mspi_control_exit_e6_4252e6",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4346598
+        },
+        {
+          "offset": 432,
+          "type": "R_ARM_THM_JUMP24",
+          "symbol": "open_cfw_bootloader_mspi_control_exit_e8_4252e8",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4346600
         }
       ],
       "allow_discarded_alloc_sections": true,
@@ -40130,7 +40356,106 @@
             "sha256": "c83b4119f0991198d619c51dd5bcd92807c4aafa4d181444e7d9cb484f453bfe",
             "unrelocated_sha256": "c83b4119f0991198d619c51dd5bcd92807c4aafa4d181444e7d9cb484f453bfe"
           },
-          "relocations": []
+          "relocations": [
+            {
+              "offset": 18,
+              "type": "R_ARM_THM_JUMP8",
+              "symbol": "open_cfw_bootloader_mspi_control_head_4260f4",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4350196
+            },
+            {
+              "offset": 22,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_bootloader_mspi_cq_enable_423f8e",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4341646
+            },
+            {
+              "offset": 30,
+              "type": "R_ARM_THM_JUMP8",
+              "symbol": "open_cfw_bootloader_mspi_control_head_4260f4",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4350196
+            },
+            {
+              "offset": 34,
+              "type": "R_ARM_THM_JUMP24",
+              "symbol": "open_cfw_bootloader_mspi_control_exit_e8_4252e8",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4346600
+            },
+            {
+              "offset": 46,
+              "type": "R_ARM_THM_JUMP24",
+              "symbol": "open_cfw_bootloader_mspi_control_exit_e8_4252e8",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4346600
+            },
+            {
+              "offset": 64,
+              "type": "R_ARM_THM_JUMP24",
+              "symbol": "open_cfw_bootloader_mspi_control_exit_e8_4252e8",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4346600
+            },
+            {
+              "offset": 114,
+              "type": "R_ARM_THM_JUMP24",
+              "symbol": "open_cfw_bootloader_mspi_control_exit_e6_4252e6",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4346598
+            },
+            {
+              "offset": 124,
+              "type": "R_ARM_THM_JUMP24",
+              "symbol": "open_cfw_bootloader_mspi_control_exit_e8_4252e8",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4346600
+            },
+            {
+              "offset": 186,
+              "type": "R_ARM_THM_JUMP24",
+              "symbol": "open_cfw_bootloader_mspi_control_exit_e6_4252e6",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4346598
+            },
+            {
+              "offset": 208,
+              "type": "R_ARM_THM_JUMP24",
+              "symbol": "open_cfw_bootloader_mspi_control_exit_e6_4252e6",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4346598
+            },
+            {
+              "offset": 230,
+              "type": "R_ARM_THM_JUMP24",
+              "symbol": "open_cfw_bootloader_mspi_control_exit_e6_4252e6",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4346598
+            },
+            {
+              "offset": 240,
+              "type": "R_ARM_THM_JUMP24",
+              "symbol": "open_cfw_bootloader_mspi_control_exit_e8_4252e8",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4346600
+            },
+            {
+              "offset": 426,
+              "type": "R_ARM_THM_JUMP24",
+              "symbol": "open_cfw_bootloader_mspi_control_exit_e6_4252e6",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4346598
+            },
+            {
+              "offset": 432,
+              "type": "R_ARM_THM_JUMP24",
+              "symbol": "open_cfw_bootloader_mspi_control_exit_e8_4252e8",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4346600
+            }
+          ]
         }
       }
     },
@@ -40139,8 +40464,8 @@
       "runtime_address": 4345476,
       "source": {
         "path": "components/bootloader/core_overlay/runtime_bl006_mspi_devconfig_tail_424e84.c",
-        "size": 17545,
-        "sha256": "2f0080ae959f42c9b9403448c5a829836c941d981c3e7e3399ce4d0fb19ffdf5",
+        "size": 18102,
+        "sha256": "907e17d12d76834eafec35c755deb0436e1aa1a5591308ed33118cd7eebec4c8",
         "license": "MIT",
         "origin": "clean-room reconstruction of the authenticated bootloader MSPI public device-configuration remainder",
         "evidence": "docs/research/g2-bootloader-bl006-tail-leaves-4248e2-4263e0-source-closure.md"
@@ -40179,6 +40504,76 @@
       },
       "relocations": [
         {
+          "offset": 34,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4345436
+        },
+        {
+          "offset": 40,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4345436
+        },
+        {
+          "offset": 46,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4345436
+        },
+        {
+          "offset": 52,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4345436
+        },
+        {
+          "offset": 58,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4345436
+        },
+        {
+          "offset": 64,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4345436
+        },
+        {
+          "offset": 70,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4345436
+        },
+        {
+          "offset": 76,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4345436
+        },
+        {
+          "offset": 82,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4345436
+        },
+        {
+          "offset": 88,
+          "type": "R_ARM_THM_JUMP11",
+          "symbol": "open_cfw_bootloader_mspi_devconfig_head_jump_424e6e",
+          "symbol_type": "STT_NOTYPE",
+          "target_address": 4345454
+        },
+        {
           "offset": 398,
           "type": "R_ARM_THM_CALL",
           "symbol": "open_cfw_bootloader_mspi_device_configure_424120",
@@ -40202,7 +40597,92 @@
             "sha256": "96be3ed2b6277d645863984409f19be4ca6321dd94c6579eb5659de53d06b41a",
             "unrelocated_sha256": "96be3ed2b6277d645863984409f19be4ca6321dd94c6579eb5659de53d06b41a"
           },
-          "relocations": []
+          "relocations": [
+            {
+              "offset": 34,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4345436
+            },
+            {
+              "offset": 40,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4345436
+            },
+            {
+              "offset": 46,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4345436
+            },
+            {
+              "offset": 52,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4345436
+            },
+            {
+              "offset": 58,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4345436
+            },
+            {
+              "offset": 64,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4345436
+            },
+            {
+              "offset": 70,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4345436
+            },
+            {
+              "offset": 76,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4345436
+            },
+            {
+              "offset": 82,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_mspi_devconfig_head_divider_424e5c",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4345436
+            },
+            {
+              "offset": 88,
+              "type": "R_ARM_THM_JUMP11",
+              "symbol": "open_cfw_bootloader_mspi_devconfig_head_jump_424e6e",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4345454
+            },
+            {
+              "offset": 398,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_bootloader_mspi_device_configure_424120",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4342048
+            },
+            {
+              "offset": 418,
+              "type": "R_ARM_THM_CALL",
+              "symbol": "open_cfw_bootloader_mspi_xip_off_delay_424a18",
+              "symbol_type": "STT_NOTYPE",
+              "target_address": 4344344
+            }
+          ]
         }
       }
     },

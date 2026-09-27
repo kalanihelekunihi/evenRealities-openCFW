@@ -34,11 +34,9 @@
  * `open_cfw_bootloader_mspi_device_configure_424120` and
  * `open_cfw_bootloader_mspi_xip_off_delay_424a18`, named as
  * reviewed R_ARM_THM_CALL relocations. All ten out-of-span
- * narrow exits into the replaced head are spelled with reviewed
- * 16-bit encodings (`.inst`, binary32-tail precedent); nine
- * in-source probes prove the reference assembler emits the
- * identical bytes at the identical offsets (the two -114 exits
- * share one encoding). Internal branches name unique Q-labels:
+ * narrow exits into the replaced head are expressed as reviewed
+ * fixed-address `R_ARM_THM_JUMP11` relocations on canonical
+ * `b.n .` placeholders. Internal branches name unique Q-labels:
  * numeric local labels miscompile in this ten-target block
  * (undefined `.Ltmp` temporaries alongside the two `bl`
  * relocations), while the named form assembles byte-exact.
@@ -78,13 +76,9 @@ open_cfw_bl006_dc2_u32 open_cfw_bootloader_mspi_devconfig_rem_tail_424e84(
     open_cfw_bl006_dc2_u32 *exit_out)
 {
 #if defined(__arm__) || defined(__thumb__)
-    /* Out-of-span exits and their reviewed spellings (stock
-     * bytes in parentheses); all are narrow `b`:
-     * -78 (d9 e7): .inst 0xE7D9; -84 (d6 e7): .inst 0xE7D6;
-     * -90 (d3 e7): .inst 0xE7D3; -96 (d0 e7): .inst 0xE7D0;
-     * -102 (cd e7): .inst 0xE7CD; -108 (ca e7): .inst 0xE7CA;
-     * -114 (c7 e7): .inst 0xE7C7; -120 (c4 e7): .inst 0xE7C4;
-     * -126 (c1 e7): .inst 0xE7C1. */
+    /* Out-of-span exits target replaced-head joins at 0x00424E5C
+     * and 0x00424E6E.  Reviewed JUMP11 relocations attached to
+     * `b.n .` placeholders materialize the stock narrow branches. */
     __asm__ volatile(
         "adds.w r0, r1, r6, lsl #12\n"
         "adds r0, #0x88\n"
@@ -98,26 +92,36 @@ open_cfw_bl006_dc2_u32 open_cfw_bootloader_mspi_devconfig_rem_tail_424e84(
         "str r2, [r0]\n"
         "b Q2\n"
         "orrs r2, r2, #0x20000\n"
-        ".inst 0xE7D9\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_mspi_devconfig_head_divider_424e5c\n"
+        "b.n .\n"
         "orrs r2, r2, #0x30000\n"
-        ".inst 0xE7D6\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_mspi_devconfig_head_divider_424e5c\n"
+        "b.n .\n"
         "orrs r2, r2, #0x40000\n"
-        ".inst 0xE7D3\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_mspi_devconfig_head_divider_424e5c\n"
+        "b.n .\n"
         "orrs r2, r2, #0x60000\n"
-        ".inst 0xE7D0\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_mspi_devconfig_head_divider_424e5c\n"
+        "b.n .\n"
         "orrs r2, r2, #0x80000\n"
-        ".inst 0xE7CD\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_mspi_devconfig_head_divider_424e5c\n"
+        "b.n .\n"
         "orrs r2, r2, #0xc0000\n"
-        ".inst 0xE7CA\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_mspi_devconfig_head_divider_424e5c\n"
+        "b.n .\n"
         "orrs r2, r2, #0x100000\n"
-        ".inst 0xE7C7\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_mspi_devconfig_head_divider_424e5c\n"
+        "b.n .\n"
         "orrs r2, r2, #0x180000\n"
-        ".inst 0xE7C4\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_mspi_devconfig_head_divider_424e5c\n"
+        "b.n .\n"
         "orrs r2, r2, #0x200000\n"
-        ".inst 0xE7C1\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_mspi_devconfig_head_divider_424e5c\n"
+        "b.n .\n"
         "movs r0, #5\n"
         "b Q7\n"
-        ".inst 0xE7C7\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_mspi_devconfig_head_jump_424e6e\n"
+        "b.n .\n"
         "movs r0, #5\n"
         "b Q7\n"
         "ldrb r0, [r4, #0x10]\n"

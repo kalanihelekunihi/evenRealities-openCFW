@@ -2,10 +2,10 @@
   "archive": {
     "deterministic_mode": "ar rcD",
     "path": "build/verification/em9305-qpc-component/libem9305-qpc-component.a",
-    "sha256": "325847b15b61495044703d439f7245f4bad412cbf5256d3e6cd30111213f8ef0",
-    "size": 32026
+    "sha256": "c2757749570bdf538b31a4b7ae3212e7fa2934096ca3534862c41333d9f8bda4",
+    "size": 31474
   },
-  "compiler": "arc-linux-gnu-gcc (GCC) 16.1.1 20260501 (Red Hat Cross 16.1.1-1)",
+  "compiler": "arc-zephyr-elf-gcc (Zephyr SDK 1.0.1) 14.3.0",
   "flags": [
     "-mcpu=em",
     "-std=gnu99",
@@ -26,8 +26,8 @@
   "linked_object": {
     "forbidden_runtime_imports": [],
     "path": "build/verification/em9305-qpc-component/em9305-qpc-component.o",
-    "sha256": "c1aa5370945e41afcb29750174fd4531def9a887d37a0f620461eeabad587ad9",
-    "size": 21284,
+    "sha256": "018f26b81034f8fef8c96e77ad3d70d10b4cbe94128dd8f376c9e0ce1ee7fb67",
+    "size": 20724,
     "undefined_symbols": []
   },
   "port_translation_unit_count": 2,
@@ -49,8 +49,8 @@
   "translation_unit_count": 10,
   "translation_units": [
     {
-      "object_sha256": "f6e0a5f15881a1ee4787775d0d1c5f1399bfdb33af96176cd3611089fa640b36",
-      "object_size": 3696,
+      "object_sha256": "f2e1e81050464d7514bde16d7bc81de2077e7283741d5b50cf41aea4249c95a0",
+      "object_size": 3600,
       "source": "third_party/qpc/src/qf/qep_hsm.c",
       "source_sha256": "aa5eba0513db3dc6ba134329f73620540c5e9157f7f0687314925d1abf135d3b",
       "source_size": 24012,
@@ -59,8 +59,8 @@
       ]
     },
     {
-      "object_sha256": "91ef24e9cccf34d36a1e0189e17fe334957d594fd051f6af1f4b17732990fb1d",
-      "object_size": 2096,
+      "object_sha256": "906b729c9a76e0fdf05f8cb868c22f82116843fc79748954605c42c17c60999a",
+      "object_size": 2068,
       "source": "third_party/qpc/src/qf/qf_act.c",
       "source_sha256": "2c38d958b2a50029ac5000f6f636e5b244778f6138a93c873140b2d0e012f6e2",
       "source_size": 6562,
@@ -71,8 +71,8 @@
       ]
     },
     {
-      "object_sha256": "9a9b6edbcc47d02836ac3d7479bbfc3b323bfa0eb57c5cb8267d3d5d7f63afe6",
-      "object_size": 4328,
+      "object_sha256": "935ffbafb7b613cbaa0399db17537565fa5c19f076a7d66881c14897047041d4",
+      "object_size": 4292,
       "source": "third_party/qpc/src/qf/qf_actq.c",
       "source_sha256": "a1cd93ab313c3a00237be6947be68ab35ab02a2cc53fe52047a328e29d916cbb",
       "source_size": 19073,
@@ -92,8 +92,8 @@
       ]
     },
     {
-      "object_sha256": "ea127047e7636e6c618ac1494bc59d05bb80eb3c01c48587cb57058eb7ed8268",
-      "object_size": 3216,
+      "object_sha256": "00be125ebef199dbcfb28f5c38d9a7cd2ad3da9522cc406fc0ed41b8b1e2cf4a",
+      "object_size": 3144,
       "source": "third_party/qpc/src/qf/qf_dyn.c",
       "source_sha256": "568523fcd3927eff0d6407deca20b3b1465020b423b8c179936aa7b051ef790b",
       "source_size": 12648,
@@ -108,8 +108,8 @@
       ]
     },
     {
-      "object_sha256": "e74fb868c49656dceef0335028a85f6fb5d1182d579ebf1e6779343f3fa2b150",
-      "object_size": 2476,
+      "object_sha256": "acf30cfcb72a6be6deb3c743ef796ac377f8783fb5db483170c41f52e8785491",
+      "object_size": 2460,
       "source": "third_party/qpc/src/qf/qf_mem.c",
       "source_sha256": "0bd3bf03b04f7007063d4c9b054ea36b8382600f1196a56afc7cf5c0e7807f48",
       "source_size": 11500,
@@ -123,8 +123,8 @@
       ]
     },
     {
-      "object_sha256": "efbe13d9e82d2466b89e608d6a4407bca933d75ee1f706e69fd5e16ad6ed9c80",
-      "object_size": 1416,
+      "object_sha256": "bcddde732d2a12e56642e7ee883fb1485a3abc8eec171330403a354d2013634b",
+      "object_size": 1396,
       "source": "third_party/qpc/src/qf/qf_qact.c",
       "source_sha256": "5f2e2e455cd44d44cf7b07f488ce7af27998a552424b8fba391556452c90886c",
       "source_size": 3060,
@@ -139,8 +139,8 @@
       ]
     },
     {
-      "object_sha256": "717f78c162b7abd6399f965424a30ba7b0ca4e1e4f90fa4594f21f2fa3648b36",
-      "object_size": 2216,
+      "object_sha256": "0b0a30f4372ffe316b64d48aaa07c47df5d37908260dd1da4b62ce8b3b7e4295",
+      "object_size": 2192,
       "source": "third_party/qpc/src/qf/qf_qeq.c",
       "source_sha256": "861ef89f8cdb5025fda5dde3f36d090ef50094864a39b13611dd62655f02be10",
       "source_size": 12164,
@@ -151,8 +151,8 @@
       ]
     },
     {
-      "object_sha256": "c201bae3420b137666102c17a9f7cbdd87cb692947d8f3bc936c220de20c94b6",
-      "object_size": 4304,
+      "object_sha256": "fc7e9c1fc0826488345861f29f1f44a5d2a18ac8c977f3b1f80a8d9f89388c07",
+      "object_size": 4228,
       "source": "third_party/qpc/src/qk/qk.c",
       "source_sha256": "f1b069a535260c1a23d66d3dfe3373259b5068fc94bccef078bd55bf2bdfed0a",
       "source_size": 16219,
@@ -180,16 +180,16 @@
       ]
     },
     {
-      "object_sha256": "5d89a96680ca595a53713ef264df92ed0adb4753b08f9630605d0075bff67e5e",
-      "object_size": 924,
+      "object_sha256": "1bdf70292699d05d8a3fc635a6dab9cab63adf895bd7045c4b9863e4902a24e3",
+      "object_size": 904,
       "source": "components/shared/em9305/qpc_port/runtime_arc_gcc_helpers.c",
       "source_sha256": "d0bda3cbc846099d982e14f065a1637c87d6cbc994ff986a1567c644d1c793cf",
       "source_size": 588,
       "undefined_symbols_before_link": []
     },
     {
-      "object_sha256": "2447181b4ae8ac8e37fe57e1be685c875ee1e0f128e757dfe75be5324dbb932b",
-      "object_size": 5404,
+      "object_sha256": "7e25bfed437dd1d9309886b154127f7ceb244965e4282be4990c27d7206e19da",
+      "object_size": 5240,
       "source": "components/shared/em9305/qpc_port/runtime_qpc_port.c",
       "source_sha256": "7ce889990a79180b84cc5c96aefeba5dbcba39d6b25bd7ab7591265c67e1b779",
       "source_size": 5061,

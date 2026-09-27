@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20260926T223240Z",
+  "task_id": "P1-case-function-C178-boundary-inventory-001",
+  "source_hashes": [
+    {
+      "path": "g2/workflow/target.json",
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff"
+    },
+    {
+      "path": "g2/workflow/PROCEDURE.md",
+      "sha256": "ba0784bd154ffee1edc4be97ade6d05bf4b725092a5f938c4181c97e57ed1631"
+    },
+    {
+      "path": "g2/workflow/CONTRACTS.md",
+      "sha256": "7d49db8323bace121bb8153e5e73cd3e7577ad45cfdb8857e265f683c2bee275"
+    },
+    {
+      "path": "g2/workflow/prompts/common.md",
+      "sha256": "85e25237e552d8cae544d66caa02a7dee5ab1d7e1c6752e8e9d7eb7add5aab0f"
+    },
+    {
+      "path": "g2/workflow/prompts/01-inventory.md",
+      "sha256": "9298eef61a43e5ea789c879b65ff9a1143a10dc94eb64500ef7f430df3214d79"
+    },
+    {
+      "path": "g2/build/reference/package/g2-openCFW-s200_v2.2.6.10.evenota.bin",
+      "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+    },
+    {
+      "path": "g2/tools/manifests/g2-box-function-map.tsv",
+      "sha256": "5139d39d5cb61e0b427c7bcc7e8dc029724e6d30a534964897d162545b271ad8"
+    },
+    {
+      "path": "g2/tools/manifests/g2-case-byte-accounting.tsv",
+      "sha256": "1bba69f30997ff95cfef326a8109d11fbaf8bf38691a81d0a22e6296d385cfc9"
+    },
+    {
+      "path": "g2/tools/manifests/g2-case-final-gap-frontier.tsv",
+      "sha256": "7b70afc7d9c57dd6a73e46bf540e098f13e5f8e04133165def5228bb436fa56e"
+    },
+    {
+      "path": "g2/tools/analyze_g2_box_function_map.py",
+      "sha256": "755813f923f42fbf2f6562f27d5541b9bef83eef043459abb1643ad7323d9a6b"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/inventory/outer-container.json",
+      "sha256": "f6ba877dff18601af8c1250778c1f509c20aec3727034483941cc46c0b06a1d2"
+    },
+    {
+      "path": "/Applications/Xcode-beta.app/Contents/Developer/usr/bin/python3",
+      "sha256": "5f679e1250dd40ec687423f330b34d66d0ad86c66f950bc823321d56d7c00592"
+    },
+    {
+      "path": "/Users/kalani/Library/Python/3.9/lib/python/site-packages/capstone/__init__.py",
+      "sha256": "6f8a27fe069aa89a46974e189b5365d56eb5e02c2fd581d2fbfad7fbba51549f"
+    },
+    {
+      "path": "/Users/kalani/Library/Python/3.9/lib/python/site-packages/capstone/lib/libcapstone.dylib",
+      "sha256": "016084c6e70d929249a2abb22f1afda95095294e6cd70f509964ffc54006bf94"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/decisions/P1-case-map-rerun/receipt.json",
+      "sha256": "5a156b9e73e8fa2690286a91b0e617cfc61dddb4e2cdbaaee087c0f94469883d"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/tasks/P1-case-function-C15C-boundary-inventory-002/evidence.json",
+      "sha256": "3a39dd9bb27e63d8f0cdd82029e0749b45be46284a5c0584cb11ce4a20614904"
+    }
+  ],
+  "scope": [
+    {
+      "role": "mapped_body",
+      "start": "0x0800C178",
+      "end_exclusive": "0x0800C198"
+    },
+    {
+      "role": "frontier",
+      "start": "0x0800C198",
+      "end_exclusive": "0x0800C19C"
+    }
+  ],
+  "mapping": {
+    "app_base_runtime": "0x08000000",
+    "wrapper_bytes": 32,
+    "raw_component_file": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "package_case_payload_start": 573192,
+    "formula": "app_offset=runtime-0x08000000; raw_component_file_offset=app_offset+32; package_offset=573192+raw_component_file_offset",
+    "verified_by": "g2/tools/analyze_g2_box_function_map.py APP_BASE/WRAPPER/_verify_blob and inventory/outer-container.json"
+  },
+  "coordinate_anchors": [
+    {
+      "role": "mapped_body",
+      "runtime_range": [
+        "0x0800C178",
+        "0x0800C198"
+      ],
+      "app_offsets": [
+        "0xC178",
+        "0xC198"
+      ],
+      "raw_component_file_offsets": [
+        "0xC198",
+        "0xC1B8"
+      ],
+      "package_offsets": [
+        622752,
+        622784
+      ],
+      "expected_bytes": "10b50c46002809d0054909681831fff713ff01212046fef70ffd10bd72b6fee7",
+      "expected_sha256": "2f478c9377f4ef1cf65c598ae049fd684e99cdfbaf45dc8110c12f83f6379bef"
+    },
+    {
+      "role": "frontier",
+      "runtime_range": [
+        "0x0800C198",
+        "0x0800C19C"
+      ],
+      "app_offsets": [
+        "0xC198",
+        "0xC19C"
+      ],
+      "raw_component_file_offsets": [
+        "0xC1B8",
+        "0xC1BC"
+      ],
+      "package_offsets": [
+        622784,
+        622788
+      ],
+      "expected_bytes": "28010020",
+      "expected_sha256": "8b21c33cfee0449829e17428cb4b9f354e5960933c8bbf20c0fd17611ca5e882"
+    },
+    {
+      "role": "following_body_map_anchor",
+      "runtime_range": [
+        "0x0800C19C",
+        "0x0800C1C6"
+      ],
+      "app_offsets": [
+        "0xC19C",
+        "0xC1C6"
+      ],
+      "raw_component_file_offsets": [
+        "0xC1BC",
+        "0xC1E6"
+      ],
+      "package_offsets": [
+        622788,
+        622818
+      ],
+      "expected_sha256": "313af03956f2e6714e503856c02a2360f83a9a35dd23bacc7949eb43ec3c0a31"
+    }
+  ],
+  "frontier": {
+    "range": [
+      "0x0800C198",
+      "0x0800C19C"
+    ],
+    "length": 4,
+    "sha256": "8b21c33cfee0449829e17428cb4b9f354e5960933c8bbf20c0fd17611ca5e882"
+  },
+  "guardrails": [
+    "Use exact source pins and coordinate anchors.",
+    "Following body is only a mapping boundary anchor.",
+    "Any direct LDR target is an address fact, not exclusive non-code proof.",
+    "No pseudocode/C or invented semantics."
+  ]
+}

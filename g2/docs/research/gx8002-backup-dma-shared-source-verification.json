@@ -4,14 +4,14 @@
       "symbol": "open_cfw_gx8002_backup_dma_pair",
       "section_name": ".text",
       "ownership_kind": "compiled_c",
-      "compiled_bytes": 184,
-      "compiled_sha256": "28703289d71d4ad321dc47a36b8c392cfded9a1b1e55a2352dfd8b4d3f25bd82",
+      "compiled_bytes": 180,
+      "compiled_sha256": "0acfa93516953d73f11372e83fce0c56a3affbf06a9864998fc53df24282b6e2",
       "stock_occurrences": [
         {
           "symbol": "open_cfw_gx8002_backup_dma_pair",
           "package_offset": 251136,
-          "bytes": 184,
-          "sha256": "4bbfc363c7f710c5d66ad33fcf891cb71cfb7e64e1c4bc5d64f97dbb00c79641",
+          "bytes": 180,
+          "sha256": "3485c71d3ca1b720fc76b335b29f1cdedae55e996f66b97732dd8ec269b5edb6",
           "region": "image_b_sram_text"
         }
       ]
@@ -36,11 +36,11 @@
   "checks": {
     "deallocate": {
       "candidate": {
-        "source_sha256": "2a1d355a31690612323b16b6293dc29afb8edb79fa6276636b7b744694fc9553",
-        "compiled_bytes": 72,
-        "compiled_sha256": "763038fec18cdc5f9597658103725172264a5df4a2659e76e17d963bd0746aab",
+        "source_sha256": "a47a8b53417838c1cdf168a3be1393bdef78c6570d2d796fa01675bf1db9b9c7",
+        "compiled_bytes": 68,
+        "compiled_sha256": "d2e5f525f9906e21e581616e02d0b1435401c065a9101cef854f65791dbf78f1",
         "envelope_bytes": 68,
-        "fits": false,
+        "fits": true,
         "bindings": {
           "open_cfw_gx8002_backup_dma_state": 537056232,
           "open_cfw_gx8002_backup_irq_save": 268453996,
@@ -52,7 +52,7 @@
           "Candidate only; decoded equivalence and placement pending."
         ]
       },
-      "decoded_cases": 1920,
+      "decoded_cases": 67456,
       "source_admitted": false,
       "limits": [
         "Explicit two-flag oracle; counts include zero and UINT32_MAX with a synthetic three-byte allocation.",
@@ -86,11 +86,11 @@
     "shared": {
       "candidate": {
         "source_sha256": {
-          "runtime_gx8002_backup_dma_deallocate.c": "2a1d355a31690612323b16b6293dc29afb8edb79fa6276636b7b744694fc9553",
+          "runtime_gx8002_backup_dma_deallocate.c": "a47a8b53417838c1cdf168a3be1393bdef78c6570d2d796fa01675bf1db9b9c7",
           "runtime_gx8002_backup_dma_irq_handler.c": "c5411896ec6d4c0309de871d0309355bd462b3d2ddca160b71cb19d4f29040f6",
           "runtime_gx8002_backup_dma_pool.c": "9028af38d0cb9ad4244e7a779a2c6bcda2858c6214c9b4a222a9e8725e1999da"
         },
-        "generated_source_sha256": "762a66af203b1fb5dfd3f23101dc1966076ba66338a50ea4e51c6feb3ddec81f",
+        "generated_source_sha256": "f658a2b862e18cfc837a03f7c6b673ccbc126a3abb12a84f18c09fae50192f2d",
         "flags": [
           "-Os",
           "-mcpu=ck804ef",
@@ -115,8 +115,8 @@
         },
         "pointer_bytes": 4,
         "pointer_sha256": "4bab914c2bacb2603bf2b68f4294ea19c7e71d3b3332931b8bfbdc31caaf4b8e",
-        "compiled_bytes": 184,
-        "compiled_sha256": "28703289d71d4ad321dc47a36b8c392cfded9a1b1e55a2352dfd8b4d3f25bd82",
+        "compiled_bytes": 180,
+        "compiled_sha256": "0acfa93516953d73f11372e83fce0c56a3affbf06a9864998fc53df24282b6e2",
         "source_admitted": false,
         "limits": [
           "Shared source compilation preserves entries; behavior, tail and loader admission separate."
@@ -133,8 +133,8 @@
       ]
     },
     "loader": {
-      "shared_elf_sha256": "ba5ba48443e555999587627c80260b426cb91fb5b95343bb6f721e82dd35efc9",
-      "candidate_image_sha256": "be88f3dd0c29bc827dc3e6f48dd048d41d7d4b67c80eb87d36b148203095f51d",
+      "shared_elf_sha256": "9c0a74ef4a4f46f029ee672267a6b33b1180cb98e6132a377be77ee5497656fa",
+      "candidate_image_sha256": "e597ba0eaf31c35bd8d6204ec4221f97b7b0ae159e160a96a7aad44a7e6206ea",
       "normal_loader_cases": 12,
       "source_admitted": false,
       "limits": [
@@ -175,15 +175,15 @@
     }
   },
   "evidence_sha256": {
-    "build_gx8002_backup_dma_shared.py": "2d1b69e8327fe244ba4ab9bc9ac995f1da110e61f097ae2526a9fd8572fd3663",
+    "build_gx8002_backup_dma_shared.py": "8f42c09fddf9acfc2b83a6b7276192baf290e9157438f34ab46075d5709f026c",
     "build_gx8002_backup_dma_deallocate.py": "1de81c028e4ad19ee478973195d90102150a3eda3775e000f1212cf185e75a0d",
     "build_gx8002_backup_dma_irq.py": "261310a96effc2fcc6be535e08e783e110da104a46a7f72329d8fbe669ad9a86",
-    "verify_gx8002_backup_dma_deallocate.py": "eb0b87b25bae495315af4b9b0eda806d6d4687ba79af4a20122f370fb37a908d",
+    "verify_gx8002_backup_dma_deallocate.py": "a00c0c9e84b6d24f362b563c6c1a829b5e6e8e0559cf2dd2e7136c761cd166b6",
     "verify_gx8002_backup_dma_irq.py": "215b2f59052bb4870cd2ff4e0f8f8ed7243995f8135ce1c54170457b3f3673ed",
-    "verify_gx8002_backup_dma_shared.py": "4e4fb8441137fa24c7a83eb7da19f487ae04540b589aecd1c74055ab1f1f1148",
-    "verify_gx8002_backup_dma_shared_loader.py": "cd0dc6742dc195a8d2aaa2d2eaf132fadfc5d0ca48939da0da71293bca14432d",
-    "verify_gx8002_backup_dma_shared_source.py": "d47e2855d18fb5b5cc8247fa3d3cc3e066cf794719fc55b98311c6a0a71c1ec9",
-    "verify_gx8002_backup_memset_loader.py": "d1139f142813bf27d701424086d83dfb13c9bbbf1ef968e272368b9c7e65a405",
+    "verify_gx8002_backup_dma_shared.py": "7fc50563362874446fa02df2d5d29ebb730456846b758be873a3a83309746309",
+    "verify_gx8002_backup_dma_shared_loader.py": "ff5d42c90aa7a7c29be33fc8a672093a32a81d7ce1fbedbcb4ba00974f802e8c",
+    "verify_gx8002_backup_dma_shared_source.py": "9ae5ac8025ee9998f40df35de257fadcf9b998855f16c3fa4477c664994eda27",
+    "verify_gx8002_backup_memset_loader.py": "1a96687f8e93dde875324582c4bd4059dcdc93cf49f52ef06c886a0004615b1c",
     "analyze_gx8002_backup_dma_shared_references.py": "60c686e1fde02afd3dfe2c43dae3a5f64a517fd2e5d77ed19e11b73a322f36cf",
     "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
   },

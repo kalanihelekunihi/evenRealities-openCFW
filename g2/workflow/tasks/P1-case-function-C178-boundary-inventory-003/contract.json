@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20260926T223240Z",
+  "task_id": "P1-case-function-C178-boundary-inventory-003",
+  "phase": "P1_INVENTORY",
+  "objective": "Bounded P1 inventory of mapped Case body FUN_0800c178 [0x0800C178,0x0800C198) and immediately following four-byte frontier [0x0800C198,0x0800C19C). Verify wrapper-aware mapping, exact bytes/hashes, continuous Thumb decode endpoint and adjacent map boundary. Record any in-body literal target only as an address fact; preserve frontier unknown absent proof. No semantic pseudocode or C. This is a fresh corrected task packet; prior attempt 001 flagged one package endpoint error in the following-body anchor and is preserved as a separate attempt. Corrected packet pins are cross-checked between contract.input_files and evidence.source_hashes.",
+  "worker_profile": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "target_lock_sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+  "required_gate_receipts": [],
+  "corpus_manifest_sha256": "78a38e1fc1896e3f0e923a31ddb55c26167d79b28ce1a837c44816b0a08b9458",
+  "contract_manifest_sha256": "7d49db8323bace121bb8153e5e73cd3e7577ad45cfdb8857e265f683c2bee275",
+  "toolchain_manifest_sha256": null,
+  "component": "case",
+  "image_id": "case:application",
+  "address_space": "runtime=0x08000000+app_offset; app=firmware_box.bin[32:]; raw_component_file_offset=app_offset+32; package_offset=573192+raw_component_file_offset",
+  "isa_mode": "ARMv6-M Thumb candidate; exact 32-byte mapped body only",
+  "function_ids": [
+    "case:firmware_box:0x0800C178:thumb"
+  ],
+  "ranges": [
+    {
+      "role": "mapped_body",
+      "start": "0x0800C178",
+      "end_exclusive": "0x0800C198"
+    },
+    {
+      "role": "frontier",
+      "start": "0x0800C198",
+      "end_exclusive": "0x0800C19C"
+    }
+  ],
+  "input_files": [
+    {
+      "path": "g2/workflow/target.json",
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff"
+    },
+    {
+      "path": "g2/workflow/PROCEDURE.md",
+      "sha256": "ba0784bd154ffee1edc4be97ade6d05bf4b725092a5f938c4181c97e57ed1631"
+    },
+    {
+      "path": "g2/workflow/CONTRACTS.md",
+      "sha256": "7d49db8323bace121bb8153e5e73cd3e7577ad45cfdb8857e265f683c2bee275"
+    },
+    {
+      "path": "g2/workflow/prompts/common.md",
+      "sha256": "85e25237e552d8cae544d66caa02a7dee5ab1d7e1c6752e8e9d7eb7add5aab0f"
+    },
+    {
+      "path": "g2/workflow/prompts/01-inventory.md",
+      "sha256": "9298eef61a43e5ea789c879b65ff9a1143a10dc94eb64500ef7f430df3214d79"
+    },
+    {
+      "path": "g2/build/reference/package/g2-openCFW-s200_v2.2.6.10.evenota.bin",
+      "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+    },
+    {
+      "path": "g2/tools/manifests/g2-box-function-map.tsv",
+      "sha256": "5139d39d5cb61e0b427c7bcc7e8dc029724e6d30a534964897d162545b271ad8"
+    },
+    {
+      "path": "g2/tools/manifests/g2-case-byte-accounting.tsv",
+      "sha256": "1bba69f30997ff95cfef326a8109d11fbaf8bf38691a81d0a22e6296d385cfc9"
+    },
+    {
+      "path": "g2/tools/manifests/g2-case-final-gap-frontier.tsv",
+      "sha256": "7b70afc7d9c57dd6a73e46bf540e098f13e5f8e04133165def5228bb436fa56e"
+    },
+    {
+      "path": "g2/tools/analyze_g2_box_function_map.py",
+      "sha256": "755813f923f42fbf2f6562f27d5541b9bef83eef043459abb1643ad7323d9a6b"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/inventory/outer-container.json",
+      "sha256": "f6ba877dff18601af8c1250778c1f509c20aec3727034483941cc46c0b06a1d2"
+    },
+    {
+      "path": "/Applications/Xcode-beta.app/Contents/Developer/usr/bin/python3",
+      "sha256": "5f679e1250dd40ec687423f330b34d66d0ad86c66f950bc823321d56d7c00592"
+    },
+    {
+      "path": "/Users/kalani/Library/Python/3.9/lib/python/site-packages/capstone/__init__.py",
+      "sha256": "6f8a27fe069aa89a46974e189b5365d56eb5e02c2fd581d2fbfad7fbba51549f"
+    },
+    {
+      "path": "/Users/kalani/Library/Python/3.9/lib/python/site-packages/capstone/lib/libcapstone.dylib",
+      "sha256": "016084c6e70d929249a2abb22f1afda95095294e6cd70f509964ffc54006bf94"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/decisions/P1-case-map-rerun/receipt.json",
+      "sha256": "5a156b9e73e8fa2690286a91b0e617cfc61dddb4e2cdbaaee087c0f94469883d"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/tasks/P1-case-function-C16C-boundary-inventory-001/evidence.json",
+      "sha256": "d82220ef48657a0f655a88700c14c2d356b71bd37d80d4f83767eef5e618530d"
+    }
+  ],
+  "required_evidence_excerpts": [
+    {
+      "path": "g2/tools/manifests/g2-box-function-map.tsv",
+      "range": "FUN_0800c178 size 32 and FUN_0800c19c size 42",
+      "excerpt": "Map places 32-byte body [0x0800C178,0x0800C198), followed by a body at 0x0800C19C."
+    },
+    {
+      "path": "g2/tools/manifests/g2-case-final-gap-frontier.tsv",
+      "range": "[0x0800C198,0x0800C19C)",
+      "excerpt": "Four-byte unsupported boundary; verify exact bytes/hash against original and retain unknown absent exclusive non-code proof."
+    },
+    {
+      "path": "g2/tools/analyze_g2_box_function_map.py",
+      "range": "APP_BASE, WRAPPER, _verify_blob",
+      "excerpt": "Wrapper-aware offset formula, 32-byte wrapper and exact-target verification."
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/tasks/P1-case-function-C16C-boundary-inventory-001/evidence.json",
+      "range": "preceding body boundary",
+      "excerpt": "C16C body and frontier map anchors provide adjacent map context; verify task ranges independently."
+    }
+  ],
+  "read_roots": [
+    "g2/workflow/target.json",
+    "g2/workflow/PROCEDURE.md",
+    "g2/workflow/CONTRACTS.md",
+    "g2/workflow/prompts/common.md",
+    "g2/workflow/prompts/01-inventory.md",
+    "g2/build/reference/package/g2-openCFW-s200_v2.2.6.10.evenota.bin",
+    "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "g2/tools/manifests/g2-box-function-map.tsv",
+    "g2/tools/manifests/g2-case-byte-accounting.tsv",
+    "g2/tools/manifests/g2-case-final-gap-frontier.tsv",
+    "g2/tools/analyze_g2_box_function_map.py",
+    "g2/build/pseudocode-first/20260926T223240Z/inventory/outer-container.json",
+    "/Applications/Xcode-beta.app/Contents/Developer/usr/bin/python3",
+    "/Users/kalani/Library/Python/3.9/lib/python/site-packages/capstone/__init__.py",
+    "/Users/kalani/Library/Python/3.9/lib/python/site-packages/capstone/lib/libcapstone.dylib",
+    "g2/build/pseudocode-first/20260926T223240Z/decisions/P1-case-map-rerun/receipt.json",
+    "g2/build/pseudocode-first/20260926T223240Z/tasks/P1-case-function-C16C-boundary-inventory-001/evidence.json",
+    "g2/build/pseudocode-first/20260926T223240Z/tasks/P1-case-function-C16C-boundary-inventory-001/evidence.json"
+  ],
+  "write_allowlist": [
+    "g2/build/pseudocode-first/20260926T223240Z/attempts/P1-case-function-C178-boundary-inventory-003/coverage.json",
+    "g2/build/pseudocode-first/20260926T223240Z/attempts/P1-case-function-C178-boundary-inventory-003/evidence.json",
+    "g2/build/pseudocode-first/20260926T223240Z/attempts/P1-case-function-C178-boundary-inventory-003/commands.json",
+    "g2/build/pseudocode-first/20260926T223240Z/attempts/P1-case-function-C178-boundary-inventory-003/result.json"
+  ],
+  "allowed_commands": [
+    "bounded Python SHA/range verification",
+    "Capstone 5.0.7 ARM Thumb M-class width-aware decode with pinned interpreter/module/library",
+    "read-only function and frontier manifest queries"
+  ],
+  "required_artifacts": [
+    "coverage.json",
+    "evidence.json",
+    "commands.json",
+    "result.json"
+  ],
+  "acceptance_checks": [
+    "all task input pins match",
+    "wrapper-aware runtime/app/file/package mapping exact",
+    "32-byte body hash and continuous decode to 0x0800C198",
+    "four-byte frontier exact bytes/hash",
+    "following body map anchor exact",
+    "any literal target arithmetic independently checked and recorded only as address fact",
+    "do not classify frontier from address arithmetic alone",
+    "no semantics/pseudocode/C"
+  ],
+  "stop_conditions": [
+    "any package/payload/task pin mismatch",
+    "offset-layer mapping contradicts target/container receipt",
+    "body/map/hash mismatch",
+    "decode fails exact endpoint",
+    "literal instruction boundary/target fails independent verification",
+    "overclaim of prefix or semantics"
+  ],
+  "depends_on": [
+    "P1-case-map-rerun"
+  ],
+  "attempt_output_root": "g2/build/pseudocode-first/20260926T223240Z/attempts/P1-case-function-C178-boundary-inventory-003",
+  "result_path": "g2/build/pseudocode-first/20260926T223240Z/attempts/P1-case-function-C178-boundary-inventory-003/result.json"
+}

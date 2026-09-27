@@ -42,9 +42,9 @@ FINAL_LEDGER = MANIFEST_DIR / "em9305-final-source-readiness.tsv"
 FINAL_SUMMARY = MANIFEST_DIR / "em9305-final-source-readiness-summary.json"
 FINAL_SCHEMA_VERSION = 7
 QPC_COMPONENT_RECEIPT = MANIFEST_DIR / "em9305-qpc-component-build-summary.json"
-QPC_COMPONENT_RECEIPT_SIZE = 6_604
+QPC_COMPONENT_RECEIPT_SIZE = 6_584
 QPC_COMPONENT_RECEIPT_SHA256 = (
-    "e65a1b51eea5065bff760a3e20f1cd17b2f86718da561dbfd55afac35bb17f79"
+    "6b0e5716afc885aa059cf41535cc52103809d6731f1cf5ef1fde1d6f442f2aa9"
 )
 RECORD_PACKAGE_RECEIPT = MANIFEST_DIR / "em9305-record-package-summary.json"
 RECORD_PACKAGE_RECEIPT_SIZE = 2_606
@@ -118,7 +118,7 @@ def load_qpc_component_receipt() -> dict[str, Any]:
         or linked.get("undefined_symbols") != []
         or linked.get("forbidden_runtime_imports") != []
         or linked.get("sha256")
-        != "c1aa5370945e41afcb29750174fd4531def9a887d37a0f620461eeabad587ad9"
+        != "018f26b81034f8fef8c96e77ad3d70d10b4cbe94128dd8f376c9e0ce1ee7fb67"
         or report.get("hardware_operations") != []
         or report.get("hardware_validation") != HARDWARE_VALIDATION
     ):
@@ -438,8 +438,8 @@ def compose_reports(
         "unclassified": 0,
     }
     if (sum(completion_buckets.values()) != COMPONENT_BYTES or
-            completion_buckets["production_source"] != 1_174 or
-            completion_buckets["generated_or_reconstructible"] != 1_226 or
+            completion_buckets["production_source"] != 1_190 or
+            completion_buckets["generated_or_reconstructible"] != 1_210 or
             completion_buckets["candidate_source_not_routed"] != 0 or
             completion_buckets["typed_retained_or_external"] != 210_584):
         raise ReadinessError("EM9305 completion-bucket mapping changed")
@@ -647,7 +647,7 @@ def _require_manifest_shape(result: dict[str, Any]) -> list[dict[str, Any]]:
         or qpc_audit.get("arcv2_em_undefined_symbols") != []
         or qpc_audit.get("arcv2_em_forbidden_runtime_imports") != []
         or qpc_audit.get("arcv2_em_linked_object_sha256")
-        != "c1aa5370945e41afcb29750174fd4531def9a887d37a0f620461eeabad587ad9"
+        != "018f26b81034f8fef8c96e77ad3d70d10b4cbe94128dd8f376c9e0ce1ee7fb67"
         or qpc_audit.get("arcv2_em_build_receipt")
         != "tools/manifests/em9305-qpc-component-build-summary.json"
         or qpc_audit.get("install_placement_resolved") is not False
@@ -675,7 +675,7 @@ def _require_manifest_shape(result: dict[str, Any]) -> list[dict[str, Any]]:
         or deployment_audit.get("production_routed") is not True
         or deployment_audit.get("provider_size") != COMPONENT_BYTES
         or deployment_audit.get("provider_sha256")
-        != "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42"
+        != "56694060c0d2761c2004581d0cec97cdb8642c1ff44675194d05d605bf8dd9c7"
         or deployment_audit.get("remaining_software_blockers") != []
         or deployment_audit.get("remaining_source_completeness_blockers") != [
             "210584 typed retained or external provider bytes require unavailable exact provider source and redistribution authority"

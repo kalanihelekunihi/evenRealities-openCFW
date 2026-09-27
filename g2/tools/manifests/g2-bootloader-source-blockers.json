@@ -1,0 +1,220 @@
+{
+  "buckets": {
+    "candidate_source_not_routed": 0,
+    "generated_or_reconstructible": 16846,
+    "production_source": 65807,
+    "typed_retained_or_external": 81187,
+    "unclassified": 0
+  },
+  "clkmgr_divider_production_routed": true,
+  "clkmgr_divider_source_functions": 2,
+  "clkmgr_divider_source_stock_bytes": 52,
+  "component": "apollo_bootloader",
+  "production_routed": true,
+  "release_blocking_bytes": 81187,
+  "retained_complement": {
+    "bytes_by_address_status": {
+      "generated_alignment": 16,
+      "generated_source_entry_replacement": 16830,
+      "official_blob": 81187,
+      "source_compiled": 65807
+    },
+    "component_bytes": 163840,
+    "derivation": "disjoint current core-manifest file-offset intervals; no candidate or historical-frontier bytes are added",
+    "intervals": 990,
+    "intervals_by_address_status": {
+      "generated_alignment": 9,
+      "generated_source_entry_replacement": 238,
+      "official_blob": 87,
+      "source_compiled": 656
+    },
+    "retained_file_offset_set_sha256": "68b012a3ff5c57c76e2f082ddb75c4a2d0d18f7b73c0cfb87049e1784e6493c5",
+    "retained_official_bytes": 81187
+  },
+  "retained_official_frontier": {
+    "bytes": 81187,
+    "bytes_by_family": {
+      "easylogger_replacement_frontier": 31870,
+      "littlefs_replacement_frontier": 3146,
+      "other_retained_official": 10310,
+      "platform_services_source_in_place_frontier": 3600,
+      "post_redirect_tail": 6821,
+      "redirect_init_frontier": 18266,
+      "spotmgr_source_in_place_frontier": 7174
+    },
+    "interval_count": 87,
+    "intervals_by_family": {
+      "easylogger_replacement_frontier": 8,
+      "littlefs_replacement_frontier": 6,
+      "other_retained_official": 55,
+      "platform_services_source_in_place_frontier": 1,
+      "post_redirect_tail": 1,
+      "redirect_init_frontier": 1,
+      "spotmgr_source_in_place_frontier": 15
+    },
+    "largest_intervals": [
+      {
+        "end_exclusive": 21904,
+        "family": "redirect_init_frontier",
+        "file_offset": 3638,
+        "function": "opaque before replace bootloader redirect init",
+        "name": "opaque_before_replace_bootloader_redirect_init",
+        "output": "apollo510b/opaque_before_replace_bootloader_redirect_init-00000e36.bin",
+        "size": 18266
+      },
+      {
+        "end_exclusive": 63768,
+        "family": "easylogger_replacement_frontier",
+        "file_offset": 47202,
+        "function": "opaque before replace bootloader easylogger channel write 41f918",
+        "name": "opaque_before_replace_bootloader_easylogger_channel_write_41f918",
+        "output": "apollo510b/opaque_before_replace_bootloader_easylogger_channel_write_41f918-0000b862.bin",
+        "size": 16566
+      },
+      {
+        "end_exclusive": 42568,
+        "family": "easylogger_replacement_frontier",
+        "file_offset": 31672,
+        "function": "opaque before replace bootloader easylogger mutex create 41a648",
+        "name": "opaque_before_replace_bootloader_easylogger_mutex_create_41a648",
+        "output": "apollo510b/opaque_before_replace_bootloader_easylogger_mutex_create_41a648-00007bb8.bin",
+        "size": 10896
+      },
+      {
+        "end_exclusive": 148599,
+        "family": "post_redirect_tail",
+        "file_offset": 141778,
+        "function": "opaque after source redirects",
+        "name": "opaque_after_source_redirects",
+        "output": "apollo510b/opaque_after_source_redirects-000229d2.bin",
+        "size": 6821
+      },
+      {
+        "end_exclusive": 105892,
+        "family": "spotmgr_source_in_place_frontier",
+        "file_offset": 101288,
+        "function": "opaque before open cfw bootloader spotmgr load factory trims 429da4 source in place",
+        "name": "opaque_before_open_cfw_bootloader_spotmgr_load_factory_trims_429da4_source_in_place",
+        "output": "apollo510b/opaque_before_open_cfw_bootloader_spotmgr_load_factory_trims_429da4_source_in_place-00018ba8.bin",
+        "size": 4604
+      },
+      {
+        "end_exclusive": 137548,
+        "family": "platform_services_source_in_place_frontier",
+        "file_offset": 133948,
+        "function": "opaque before open cfw bootloader platform services init 43194c source in place",
+        "name": "opaque_before_open_cfw_bootloader_platform_services_init_43194c_source_in_place",
+        "output": "apollo510b/opaque_before_open_cfw_bootloader_platform_services_init_43194c_source_in_place-00020b3c.bin",
+        "size": 3600
+      },
+      {
+        "end_exclusive": 130816,
+        "family": "other_retained_official",
+        "file_offset": 127962,
+        "function": "opaque before open cfw bootloader mode apply 42ff00 source in place",
+        "name": "opaque_before_open_cfw_bootloader_mode_apply_42ff00_source_in_place",
+        "output": "apollo510b/opaque_before_open_cfw_bootloader_mode_apply_42ff00_source_in_place-0001f3da.bin",
+        "size": 2854
+      },
+      {
+        "end_exclusive": 141584,
+        "family": "other_retained_official",
+        "file_offset": 138864,
+        "function": "opaque before open cfw bootloader vector table relocate 432910 source in place",
+        "name": "opaque_before_open_cfw_bootloader_vector_table_relocate_432910_source_in_place",
+        "output": "apollo510b/opaque_before_open_cfw_bootloader_vector_table_relocate_432910_source_in_place-00021e70.bin",
+        "size": 2720
+      },
+      {
+        "end_exclusive": 45400,
+        "family": "easylogger_replacement_frontier",
+        "file_offset": 42752,
+        "function": "opaque before replace easylogger strcpy",
+        "name": "opaque_before_replace_easylogger_strcpy",
+        "output": "apollo510b/opaque_before_replace_easylogger_strcpy-0000a700.bin",
+        "size": 2648
+      },
+      {
+        "end_exclusive": 101012,
+        "family": "spotmgr_source_in_place_frontier",
+        "file_offset": 99298,
+        "function": "opaque before open cfw bootloader spotmgr transition sequence 7b 428a94 source in place",
+        "name": "opaque_before_open_cfw_bootloader_spotmgr_transition_sequence_7b_428a94_source_in_place",
+        "output": "apollo510b/opaque_before_open_cfw_bootloader_spotmgr_transition_sequence_7b_428a94_source_in_place-000183e2.bin",
+        "size": 1714
+      },
+      {
+        "end_exclusive": 2930,
+        "family": "littlefs_replacement_frontier",
+        "file_offset": 1298,
+        "function": "opaque before replace littlefs tag isvalid",
+        "name": "opaque_before_replace_littlefs_tag_isvalid",
+        "output": "apollo510b/opaque_before_replace_littlefs_tag_isvalid-00000512.bin",
+        "size": 1632
+      },
+      {
+        "end_exclusive": 47188,
+        "family": "easylogger_replacement_frontier",
+        "file_offset": 45562,
+        "function": "opaque before replace bootloader easylogger driver output 41b854",
+        "name": "opaque_before_replace_bootloader_easylogger_driver_output_41b854",
+        "output": "apollo510b/opaque_before_replace_bootloader_easylogger_driver_output_41b854-0000b1fa.bin",
+        "size": 1626
+      },
+      {
+        "end_exclusive": 138808,
+        "family": "other_retained_official",
+        "file_offset": 137610,
+        "function": "opaque before open cfw bootloader zero table 431e38 source in place",
+        "name": "opaque_before_open_cfw_bootloader_zero_table_431e38_source_in_place",
+        "output": "apollo510b/opaque_before_open_cfw_bootloader_zero_table_431e38_source_in_place-0002198a.bin",
+        "size": 1198
+      },
+      {
+        "end_exclusive": 133728,
+        "family": "other_retained_official",
+        "file_offset": 132624,
+        "function": "opaque before open cfw bootloader address validate 430a60 source in place",
+        "name": "opaque_before_open_cfw_bootloader_address_validate_430a60_source_in_place",
+        "output": "apollo510b/opaque_before_open_cfw_bootloader_address_validate_430a60_source_in_place-00020610.bin",
+        "size": 1104
+      },
+      {
+        "end_exclusive": 1024,
+        "family": "littlefs_replacement_frontier",
+        "file_offset": 0,
+        "function": "opaque before replace littlefs util max",
+        "name": "opaque_before_replace_littlefs_util_max",
+        "output": "apollo510b/opaque_before_replace_littlefs_util_max-00000000.bin",
+        "size": 1024
+      },
+      {
+        "end_exclusive": 114060,
+        "family": "other_retained_official",
+        "file_offset": 113082,
+        "function": "opaque before open cfw bootloader hwstate field publish 42bd8c source in place",
+        "name": "opaque_before_open_cfw_bootloader_hwstate_field_publish_42bd8c_source_in_place",
+        "output": "apollo510b/opaque_before_open_cfw_bootloader_hwstate_field_publish_42bd8c_source_in_place-0001b9ba.bin",
+        "size": 978
+      }
+    ]
+  },
+  "schema_version": 1,
+  "size": 163840,
+  "source_build_route": {
+    "generated_patch_site_bytes": 16830,
+    "hardware_operations": [],
+    "manifest": "manifests/g2-2.2.6.10-core-source.json",
+    "opaque_base_bytes": 81187,
+    "provider_kind": "source_build",
+    "provider_path": "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
+    "provider_sha256": "696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3",
+    "provider_size": 163840,
+    "source_owned_bytes": 65807,
+    "source_owned_in_place_bytes": 46266,
+    "toolchain_executable": "/usr/bin/clang",
+    "toolchain_profile": "apple-clang"
+  },
+  "source_complete": false,
+  "source_owned_in_place_bytes": 46266
+}

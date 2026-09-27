@@ -37,6 +37,25 @@ class CaseSourceImageAdmissionTests(unittest.TestCase):
                          "blocked by unavailable physical evidence")
         self.assertEqual(self.report["hardware_operations"], [])
 
+    def test_board_contract_is_named_and_fail_closed(self) -> None:
+        contract = self.report["board_contract"]
+        self.assertEqual(contract["flash_base"], 0x08000000)
+        self.assertEqual(contract["flash_bank_bytes"], 0x00040000)
+        self.assertEqual(contract["bank2_base"], 0x08040000)
+        self.assertEqual(contract["stack_top"], 0x20002C88)
+        self.assertEqual(contract["bank1_identity_limit"], 0x0803F000)
+        self.assertEqual(contract["confirmed_irq_slots"]["USART1"], 27)
+        self.assertEqual(contract["confirmed_usart_bases"]["USART3"], 0x40004800)
+        self.assertEqual(
+            contract["blocked_contracts"],
+            [
+                "exact board interrupt ownership",
+                "GPIO/timer routing",
+                "dual-bank updater handoff",
+                "preserved identity copy-forward",
+            ],
+        )
+
     def test_written_manifest_matches(self) -> None:
         self.assertEqual(json.loads(MODULE.MANIFEST.read_text()), self.report)
 

@@ -101,6 +101,9 @@ def build(output: Path) -> dict:
     # routing constants (stack top, flash bank base, preserved identity
     # window); read from there instead of repeating the literals.
     flash_base = board_config_u32("OPEN_CFW_CASE_FLASH_BASE")
+    flash_bank_bytes = board_config_u32("OPEN_CFW_CASE_FLASH_BANK_BYTES")
+    sram_base = board_config_u32("OPEN_CFW_CASE_SRAM_BASE")
+    sram_bytes = board_config_u32("OPEN_CFW_CASE_SRAM_BYTES")
     stack_top = board_config_u32("OPEN_CFW_CASE_STACK_TOP")
     identity_limit = board_config_u32("OPEN_CFW_CASE_BANK1_IDENTITY_LIMIT")
     if flash_base + len(raw) > identity_limit:
@@ -124,6 +127,37 @@ def build(output: Path) -> dict:
         "component": "G2 charging-case source image",
         "architecture": "ARMv6-M Cortex-M0+",
         "part_family": "STM32G0B0/G0B1 evidence class",
+        "board_contract": {
+            "flash_base": flash_base,
+            "flash_bank_bytes": flash_bank_bytes,
+            "bank1_base": flash_base,
+            "bank2_base": flash_base + flash_bank_bytes,
+            "sram_base": sram_base,
+            "sram_bytes": sram_bytes,
+            "stack_top": stack_top,
+            "bank1_identity_limit": identity_limit,
+            "confirmed_irq_slots": {
+                "PVD": 1,
+                "TIM2": 15,
+                "USART1": 27,
+                "CEC": 30,
+            },
+            "confirmed_usart_bases": {
+                "USART3": board_config_u32("OPEN_CFW_CASE_USART3_BASE"),
+                "USART4": board_config_u32("OPEN_CFW_CASE_USART4_BASE"),
+            },
+            "unconfirmed_defaults": {
+                "link_uart": "USART1",
+                "led_gpio_port": "GPIOB",
+                "pmic_gpio_ports": "GPIOB,GPIOC,GPIOD",
+            },
+            "blocked_contracts": [
+                "exact board interrupt ownership",
+                "GPIO/timer routing",
+                "dual-bank updater handoff",
+                "preserved identity copy-forward",
+            ],
+        },
         "source_translation_units": len(sources),
         "undefined_symbols": 0,
         "elf": {"path": elf.name, "size": elf.stat().st_size,

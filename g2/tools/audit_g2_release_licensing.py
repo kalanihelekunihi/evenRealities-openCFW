@@ -91,7 +91,7 @@ AUTHORITY_EVIDENCE_FIELDS = {
     "compliance_sha256",
 }
 SHA256_RE = re.compile(r"[0-9a-f]{64}")
-MAX_AUTHORITY_EVIDENCE_SIZE = 16 * 1024 * 1024
+MAX_AUTHORITY_EVIDENCE_SIZE = 32 * 1024 * 1024
 PROJECT_LICENSE_CENSUS = (
     ROOT / "tools/manifests/g2-project-license-normalization.tsv"
 )

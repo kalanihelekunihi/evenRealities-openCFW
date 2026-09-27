@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "template_only": false,
+  "campaign_id": "20260926T223240Z",
+  "task_id": "P1-em9305-record0-inventory-003",
+  "phase": "P1",
+  "objective": "Independently authenticate the raw EM9305 record 0 mapping and bytes, and inventory only record 0. Use qualified ARCompact evidence if available; otherwise preserve ISA/entry semantics and code/data classification as unknown. No decompilation or C.",
+  "worker_profile": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "target_lock_sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+  "required_gate_receipts": [],
+  "corpus_manifest_sha256": null,
+  "contract_manifest_sha256": "7d49db8323bace121bb8153e5e73cd3e7577ad45cfdb8857e265f683c2bee275",
+  "toolchain_manifest_sha256": null,
+  "component": "ble_em9305",
+  "image_id": "ble_em9305:record_0",
+  "address_space": "EM9305 record address space; target record 0",
+  "isa_mode": "unconfirmed; preserve unknown unless directly qualified evidence is pinned",
+  "function_ids": [],
+  "ranges": [
+    {
+      "layer": "package",
+      "start": 124,
+      "end": 348
+    },
+    {
+      "layer": "payload",
+      "start": 0,
+      "end": 224
+    },
+    {
+      "layer": "runtime",
+      "start": 3145728,
+      "end": 3145952
+    }
+  ],
+  "input_files": [
+    {
+      "path": "g2/workflow/target.json",
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff"
+    },
+    {
+      "path": "g2/workflow/PROCEDURE.md",
+      "sha256": "ba0784bd154ffee1edc4be97ade6d05bf4b725092a5f938c4181c97e57ed1631"
+    },
+    {
+      "path": "g2/workflow/CONTRACTS.md",
+      "sha256": "7d49db8323bace121bb8153e5e73cd3e7577ad45cfdb8857e265f683c2bee275"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"
+    },
+    {
+      "path": "g2/components/em9305/source_image/record_package.py",
+      "sha256": "33c4be40013dfcfcc786dc569e3fd108a1b9845aba211458b252a9d527e85ee4"
+    },
+    {
+      "path": "g2/manifests/g2-2.2.6.10.json",
+      "sha256": "1e6f7da11f63cf063098de2213a304e0a15fe99e9a932cdef9fedf32d2856c61"
+    },
+    {
+      "path": "g2/tools/manifests/em9305-record-package-summary.json",
+      "sha256": "947bd35ff79c88e3f7386a4966ab50173589223efc76f1ce1b6bbec42df03b19"
+    },
+    {
+      "path": "g2/workflow/prompts/common.md",
+      "sha256": "85e25237e552d8cae544d66caa02a7dee5ab1d7e1c6752e8e9d7eb7add5aab0f"
+    },
+    {
+      "path": "g2/workflow/prompts/01-inventory.md",
+      "sha256": "9298eef61a43e5ea789c879b65ff9a1143a10dc94eb64500ef7f430df3214d79"
+    }
+  ],
+  "required_evidence_excerpts": [
+    "evidence.md#target-and-scope",
+    "evidence.md#parser-boundaries",
+    "evidence.md#record-0-reference",
+    "evidence.md#decoder-and-isa-qualification"
+  ],
+  "read_roots": [
+    "g2/workflow/",
+    "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+    "g2/components/em9305/source_image/record_package.py",
+    "g2/manifests/g2-2.2.6.10.json",
+    "g2/tools/manifests/em9305-record-package-summary.json",
+    "g2/tools/analyze_em9305_record_package.py",
+    "g2/research/"
+  ],
+  "write_allowlist": [
+    "g2/workflow/attempts/P1-em9305-record0-inventory-003/"
+  ],
+  "allowed_commands": [
+    "python3 read-only in-memory import/parse_package/build_package/hash/report script",
+    "sha256sum",
+    "xxd (bounded record-0 range only)",
+    "file",
+    "command -v"
+  ],
+  "required_artifacts": [
+    "images.jsonl",
+    "coverage.jsonl",
+    "nested-images.jsonl",
+    "evidence-reuse.json",
+    "commands.jsonl",
+    "result.json",
+    "record0.bin"
+  ],
+  "acceptance_checks": [
+    "input SHA-256 values match this contract before parsing; stop stale if mismatch",
+    "record 0 map agrees across parser output and pinned manifest: package [124,348), payload [0,224), runtime [0x300000,0x3000e0)",
+    "record-0 extracted bytes hash to 137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+    "the assigned 224-byte payload is fully accounted exactly once; code/data/container/padding/unknown claims have bounded evidence",
+    "no ISA/entry/code claim without directly qualified evidence pinned to these input bytes and exact tool/spec/config hashes",
+    "record explicit nested-image detection outcome and reusable-evidence audit scope/prerequisites"
+  ],
+  "stop_conditions": [
+    "any pinned input hash differs; report stale_input and do not parse",
+    "mapping, span bounds, or parser behavior contradict pinned package references; report blocked with exact contradiction",
+    "no qualified ARCompact tool/spec evidence is available; keep architecture mode, entry semantics, and code/data intervals unknown; do not use an unpinned decoder",
+    "attempt output path is not exclusive or any required source is missing"
+  ],
+  "depends_on": [],
+  "attempt_output_root": "g2/workflow/attempts/P1-em9305-record0-inventory-003/",
+  "result_path": "g2/workflow/attempts/P1-em9305-record0-inventory-003/result.json"
+}

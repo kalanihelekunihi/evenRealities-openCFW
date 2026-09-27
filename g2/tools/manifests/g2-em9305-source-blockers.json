@@ -1,0 +1,305 @@
+{
+  "buckets": {
+    "candidate_source_not_routed": 0,
+    "generated_or_reconstructible": 1210,
+    "production_source": 1190,
+    "typed_retained_or_external": 210584,
+    "unclassified": 0
+  },
+  "completion_bucket_mapping": {
+    "buckets": {
+      "candidate_source_not_routed": 0,
+      "generated_or_reconstructible": 1210,
+      "production_source": 1190,
+      "typed_retained_or_external": 210584,
+      "unclassified": 0
+    },
+    "candidate_production_routed": true,
+    "component_bytes": 212984,
+    "qualification": "all 1,240 reviewed concrete-source stock spans are production routed; 210,584 provider bytes remain a typed retained/external boundary and keep whole-component source closure false",
+    "release_blocking_bytes": 210584
+  },
+  "component": "ble_em9305",
+  "final_source_readiness_receipts": {
+    "hardware_operations": [],
+    "ledger": {
+      "path": "em9305-final-source-readiness.tsv",
+      "sha256": "cfda63c68a73d27235af204f01ee6c848db9495d0294d55faf70096b7ab08bf9",
+      "size": 33152
+    },
+    "manifest_count": 2,
+    "residual_bytes": 33658,
+    "residual_span_count": 175,
+    "schema_version": 7,
+    "summary": {
+      "path": "em9305-final-source-readiness-summary.json",
+      "sha256": "fcffc7ba76ec96e371db5a5f4635e02d3259118e3529bdbcca7ee1533bac3774",
+      "size": 4882
+    }
+  },
+  "production_routed": true,
+  "release_blocking_bytes": 210584,
+  "residual_frontier": {
+    "decision_origins": {
+      "authenticated_residual_provenance": {
+        "bytes": 24070,
+        "spans": 127
+      },
+      "first_party_fail_closed_boundary": {
+        "bytes": 1200,
+        "spans": 5
+      },
+      "master_connection_fail_closed_boundary": {
+        "bytes": 1564,
+        "spans": 1
+      },
+      "metaware_runtime_production_route": {
+        "bytes": 980,
+        "spans": 2
+      },
+      "pawr_fail_closed_boundary": {
+        "bytes": 1804,
+        "spans": 1
+      },
+      "qpc_named_hook_provider_boundary": {
+        "bytes": 24,
+        "spans": 2
+      },
+      "slave_connection_fail_closed_boundary": {
+        "bytes": 3126,
+        "spans": 1
+      },
+      "tail_reconstructible_production_route": {
+        "bytes": 260,
+        "spans": 21
+      },
+      "tail_unsupported_external_boundary": {
+        "bytes": 630,
+        "spans": 15
+      }
+    },
+    "decisions": {
+      "em_vendor_rom_stub": {
+        "bytes": 16,
+        "spans": 1
+      },
+      "em_vendor_rom_wrapper": {
+        "bytes": 54,
+        "spans": 3
+      },
+      "em_vendor_system": {
+        "bytes": 2952,
+        "spans": 19
+      },
+      "exact-tail-branch": {
+        "bytes": 4,
+        "spans": 1
+      },
+      "external_provider": {
+        "bytes": 630,
+        "spans": 15
+      },
+      "four_entry_pawr_provider_boundary": {
+        "bytes": 1804,
+        "spans": 1
+      },
+      "metaware_runtime_production_route": {
+        "bytes": 980,
+        "spans": 2
+      },
+      "named_provider_boundary": {
+        "bytes": 24,
+        "spans": 2
+      },
+      "packetcraft_modern_controller": {
+        "bytes": 21048,
+        "spans": 104
+      },
+      "provider-required": {
+        "bytes": 1196,
+        "spans": 4
+      },
+      "reconstructible_accessor": {
+        "bytes": 200,
+        "spans": 15
+      },
+      "reconstructible_memory": {
+        "bytes": 14,
+        "spans": 1
+      },
+      "reconstructible_mmio": {
+        "bytes": 30,
+        "spans": 1
+      },
+      "reconstructible_no_op": {
+        "bytes": 16,
+        "spans": 4
+      },
+      "six_entry_slave_connection_provider_boundary": {
+        "bytes": 3126,
+        "spans": 1
+      },
+      "three_entry_master_connection_boundary": {
+        "bytes": 1564,
+        "spans": 1
+      }
+    },
+    "largest_unresolved_spans": [
+      {
+        "decision": "six_entry_slave_connection_provider_boundary",
+        "decision_origin": "slave_connection_fail_closed_boundary",
+        "end": 3318974,
+        "readiness": "typed_unsupported_external_boundary",
+        "sha256": "45c3d2477869a9ace185078ca6b5f59621eeca07ae274414e64637e5b04f12aa",
+        "size": 3126,
+        "start": 3315848
+      },
+      {
+        "decision": "four_entry_pawr_provider_boundary",
+        "decision_origin": "pawr_fail_closed_boundary",
+        "end": 3285820,
+        "readiness": "typed_unsupported_external_boundary",
+        "sha256": "f1c6059c121b60e25cfcb722c6ee546af9d19acf06ab9b55d55bcde07eaae48d",
+        "size": 1804,
+        "start": 3284016
+      },
+      {
+        "decision": "three_entry_master_connection_boundary",
+        "decision_origin": "master_connection_fail_closed_boundary",
+        "end": 3270124,
+        "readiness": "typed_unsupported_external_boundary",
+        "sha256": "3a7f6643a63279e0867a3ca07b8b3fa9c1e73ece8ca7fdc04b9eaabde38dc079",
+        "size": 1564,
+        "start": 3268560
+      },
+      {
+        "decision": "packetcraft_modern_controller",
+        "decision_origin": "authenticated_residual_provenance",
+        "end": 3236714,
+        "readiness": "unavailable_proprietary_controller_code",
+        "sha256": "51b00eb5df8bfabfbfcbe3778f0c2b42edbe1499b2dc108e32f5e2eccb02df96",
+        "size": 886,
+        "start": 3235828
+      },
+      {
+        "decision": "em_vendor_system",
+        "decision_origin": "authenticated_residual_provenance",
+        "end": 3221730,
+        "readiness": "unavailable_proprietary_controller_code",
+        "sha256": "50a494c587beab8240b3d4b284f0c6d3891a3c2a0d5ddc1b91a6f98c014e4d02",
+        "size": 830,
+        "start": 3220900
+      },
+      {
+        "decision": "packetcraft_modern_controller",
+        "decision_origin": "authenticated_residual_provenance",
+        "end": 3258058,
+        "readiness": "unavailable_proprietary_controller_code",
+        "sha256": "fb80a2a384a77f7583ae020369cd53c14e848eafc87108cbcfb688a4190d3a08",
+        "size": 786,
+        "start": 3257272
+      },
+      {
+        "decision": "packetcraft_modern_controller",
+        "decision_origin": "authenticated_residual_provenance",
+        "end": 3324734,
+        "readiness": "unavailable_proprietary_controller_code",
+        "sha256": "13f2dde0e4fa10c178e4fc242465d8c136bfc603450e6bccfda2ae8fd1d5d0eb",
+        "size": 786,
+        "start": 3323948
+      },
+      {
+        "decision": "packetcraft_modern_controller",
+        "decision_origin": "authenticated_residual_provenance",
+        "end": 3315778,
+        "readiness": "unavailable_proprietary_controller_code",
+        "sha256": "7d0e467f1b7187ce160f189b9297f8b4ffc4a295e78cdb1d7bacf497afe75f44",
+        "size": 718,
+        "start": 3315060
+      },
+      {
+        "decision": "packetcraft_modern_controller",
+        "decision_origin": "authenticated_residual_provenance",
+        "end": 3268458,
+        "readiness": "unavailable_proprietary_controller_code",
+        "sha256": "b888cb530e45f20da405d7027d7fd068c616b8995eaaea7240d7084ca24a0dce",
+        "size": 714,
+        "start": 3267744
+      },
+      {
+        "decision": "packetcraft_modern_controller",
+        "decision_origin": "authenticated_residual_provenance",
+        "end": 3247834,
+        "readiness": "unavailable_proprietary_controller_code",
+        "sha256": "2da32fb7da85824b101f95f9d94b96752109832cce0ad1e41c969fd4d1267103",
+        "size": 702,
+        "start": 3247132
+      },
+      {
+        "decision": "packetcraft_modern_controller",
+        "decision_origin": "authenticated_residual_provenance",
+        "end": 3203920,
+        "readiness": "unavailable_proprietary_controller_code",
+        "sha256": "71880b1b365f326228f7385b2850d730b5d2236c2b8a66e33e2d927d71fadc19",
+        "size": 636,
+        "start": 3203284
+      },
+      {
+        "decision": "packetcraft_modern_controller",
+        "decision_origin": "authenticated_residual_provenance",
+        "end": 3227474,
+        "readiness": "unavailable_proprietary_controller_code",
+        "sha256": "7e84b5a413fd88ac4fd64a43fb7d1971f4581caabf4210bd3dfae41d040963ef",
+        "size": 626,
+        "start": 3226848
+      }
+    ],
+    "readiness": {
+      "concrete_source_available": {
+        "bytes": 1240,
+        "spans": 23
+      },
+      "typed_unsupported_external_boundary": {
+        "bytes": 8348,
+        "spans": 25
+      },
+      "unavailable_proprietary_controller_code": {
+        "bytes": 24070,
+        "spans": 127
+      }
+    },
+    "residual_ledger_bytes": 33658,
+    "residual_ledger_spans": 175
+  },
+  "residual_readiness_bytes": {
+    "concrete_source_available": 1240,
+    "typed_unsupported_external_boundary": 8348,
+    "unavailable_proprietary_controller_code": 24070
+  },
+  "residual_scope_bytes": 33658,
+  "residual_unclassified_bytes": 0,
+  "schema_version": 1,
+  "size": 212984,
+  "source_build_route": {
+    "accounting": {
+      "candidate_source_not_routed_bytes": 0,
+      "generated_or_reconstructible_bytes": 1210,
+      "production_source_bytes": 1190,
+      "typed_retained_or_external_bytes": 210584,
+      "unclassified_bytes": 0
+    },
+    "component_toolchain": "arc-zephyr-elf-gcc (Zephyr SDK 1.0.1) 14.3.0",
+    "hardware_operations": [],
+    "hardware_validation": "blocked by unavailable physical evidence",
+    "manifest": "manifests/g2-2.2.6.10-core-source.json",
+    "package_toolchain_profile": "apple-clang",
+    "production_routed": true,
+    "provider_kind": "source_build",
+    "provider_path": "components/em9305/source_overlay/build/firmware_ble_em9305.bin",
+    "provider_sha256": "56694060c0d2761c2004581d0cec97cdb8642c1ff44675194d05d605bf8dd9c7",
+    "provider_size": 212984,
+    "status": "em9305-runtime-production-routed",
+    "undefined_symbols": []
+  },
+  "source_complete": false
+}

@@ -2,6 +2,12 @@
 
 Open, source-controlled firmware for Even Realities hardware.
 
+**G2 workflow reset (2026-09-26):** start with the
+[pseudocode-first procedure](g2/workflow/README.md). Current work is preparation
+only. Complete and freeze pseudocode for the entire official firmware bundle
+before defining parallel C reconstruction tasks. The old agent launcher is
+retired; existing sources, queues, builds and evidence remain historical inputs.
+
 `openCFW` covers two independent devices, each with its own silicon, toolchain,
 and reconstruction strategy:
 
@@ -9,7 +15,7 @@ and reconstruction strategy:
 | --- | --- | --- |
 | Device | G2 smart glasses | R1 smart ring |
 | Application MCU | Ambiq Apollo510 (Cortex-M55) | Nordic nRF52840 (Cortex-M4F) |
-| Approach | byte-exact reconstruction of the stock image, then incremental source replacement | clean-room reimplementation of the observable firmware contract |
+| Approach | full-firmware pseudocode and review, then C reconstruction targeting the exact official bundle | clean-room reimplementation of the observable firmware contract |
 | Reference version | `s200_v2.2.6.10` | `2.2.6.0009` |
 | Output | locally buildable hybrid `.evenota`; public stock-bearing binary release remains fail-closed, while hardware qualification is deferred by project direction | portable host build, freestanding Cortex-M4 objects, linked nRF52840 image |
 
@@ -18,13 +24,13 @@ entry point. They do not share code.
 
 ## What this is, and is not
 
-**G2** is not yet a clean-room replacement firmware. It is a build boundary that
-reproduces the official image byte-for-byte, then replaces reconstructed regions
-with compiled source one closure at a time. The checked-in completion assessment
-is the authoritative live classification of source-owned, retained, unresolved,
-and container-only bytes; prose milestone lists are historical context rather
-than a substitute for that machine-checked boundary. Coverage is measured, not
-estimated — see [`g2/docs/source-coverage.md`](g2/docs/source-coverage.md).
+**G2** has an existing hybrid build and substantial recovery evidence. The new
+goal is a complete build from source identical to the official `s200_v2.2.6.10`
+artifact, not a changed hybrid output. The [target lock](g2/workflow/target.json)
+identifies the official bundle and all six payloads. Full pseudocode coverage,
+source completeness and byte equality are separate gates; none is claimed by
+this preparation. Historical source coverage remains available in
+[`g2/docs/source-coverage.md`](g2/docs/source-coverage.md).
 
 **R1** is a clean-room C implementation derived from recovered protocol,
 behavioral, memory, and security-audit evidence. It is not reconstructed vendor
@@ -56,7 +62,8 @@ openCFW/
 │   ├── research/         evidence corpus: candidates, readiness, decompilation
 │   ├── tests/            regression modules gating the above
 │   ├── third_party/      vendored upstream snapshots (see third-party/README.md)
-│   └── tools/            build/release entry points + analyzers
+│   ├── tools/            build/release entry points + analyzers
+│   └── workflow/         active pseudocode-first procedure and dormant prompts
 ├── r1/                   R1 firmware: clean-room implementation
 │   ├── Makefile          host, sanitizer, freestanding, verify, SDK-image
 │   ├── docs/             correlation/ boundaries/ closures/ reference/
@@ -84,6 +91,10 @@ external: stock-bearing G2 builds require locally authorized official payloads,
 and R1 SDK-image workflows require their separately fetched, pinned vendor roots.
 
 ## Quick start
+
+For the new G2 work, read [g2/workflow/README.md](g2/workflow/README.md).
+The build commands below describe the existing implementation; they do not
+start or complete the new pseudocode-first campaign.
 
 ```sh
 ./make.sh help
@@ -145,6 +156,7 @@ Full details, including the R1 vendor SDK fetch, are in
 
 | Document | Covers |
 | --- | --- |
+| [`g2/workflow/README.md`](g2/workflow/README.md) | active G2 procedure, full-corpus gates and GPT 6 Luna Low prompt pack |
 | [`docs/repository-layout.md`](docs/repository-layout.md) | why the tree is shaped this way; where to add things |
 | [`docs/build.md`](docs/build.md) | prerequisites, every target, verification model |
 | [`docs/methodology.md`](docs/methodology.md) | evidence, attribution, and what "verified" means here |

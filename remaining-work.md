@@ -1,5 +1,12 @@
 # G2 source-only firmware: remaining work
 
+> **Historical queue — frozen by the 2026-09-26 workflow reset.** Its rows and
+> recorded statuses are preserved, not current assignments. The instructions
+> below describe the retired incremental process. Use the
+> [pseudocode-first procedure](g2/workflow/README.md); C chunks may be defined
+> only after the entire official artifact's pseudocode corpus is frozen.
+> The old queue's package hash is not the new official target identity.
+
 Generated 2026-09-11 from the production flash plan (`g2/build/source/flash-plan.json`), the Apollo
 function database (`make -C g2 transparent-db`), the codec ownership ledger, and the EM9305
 readiness ledgers. Machine-readable detail for every row (function lists, addresses, tiers,

@@ -54,6 +54,9 @@ def analyze() -> dict:
         elf = output / build["elf"]["path"]
         raw = (output / build["raw"]["path"]).read_bytes()
         package = (output / build["even"]["path"]).read_bytes()
+        contract = build.get("board_contract", {})
+        flash_base = int(contract.get("flash_base", -1))
+        stack_top = int(contract.get("stack_top", -1))
         nm = str(NM) if NM.is_file() else "llvm-nm"
         lines = subprocess.run([nm, "-g", "--defined-only", str(elf)],
                                check=True, text=True,
@@ -71,9 +74,9 @@ def analyze() -> dict:
         require(REQUIRED <= symbols,
                 f"Case linked surface lost symbols: {sorted(REQUIRED-symbols)}")
         stack, reset = struct.unpack_from("<II", raw)
-        require(stack == 0x20002C88 and reset & 1 == 1,
+        require(stack == stack_top and reset & 1 == 1,
                 "Case vector table is invalid")
-        require(0x08000000 <= reset < 0x08000000 + len(raw),
+        require(flash_base <= (reset & ~1) < flash_base + len(raw),
                 "Case reset vector escapes the raw image")
         require(package[:4] == b"EVEN" and package[4:8] == bytes((1, 2, 57, 0)),
                 "Case EVEN identity changed")
@@ -102,6 +105,7 @@ def analyze() -> dict:
             },
             "software_link_complete": True,
             "software_package_complete": True,
+            "board_contract": contract,
             "physical_board_services_routed": False,
             "production_routed": False,
             "hardware_validation": "blocked by unavailable physical evidence",

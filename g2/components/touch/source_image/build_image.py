@@ -8,6 +8,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import shutil
 import struct
 import subprocess
@@ -18,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[3]
 COMPONENT = Path(__file__).resolve().parent
 SHARED = ROOT / "components/shared/touch"
 LINKER = COMPONENT / "linker.ld"
+BOARD_CONFIG = COMPONENT / "board_config.h"
 DEFAULT_OUTPUT = ROOT / "build/touch-source-image"
 
 
@@ -36,6 +38,17 @@ def crc32c(data: bytes) -> int:
         for _ in range(8):
             crc = (crc >> 1) ^ (0x82F63B78 if crc & 1 else 0)
     return crc ^ 0xFFFFFFFF
+
+
+def board_config_u32(name: str) -> int:
+    """Read one ``UINT32_C(0x...)`` board-contract macro."""
+    text = BOARD_CONFIG.read_text(encoding="utf-8")
+    match = re.search(
+        rf"#define {re.escape(name)}\s+UINT32_C\((0x[0-9A-Fa-f]+|\d+)\)",
+        text)
+    if not match:
+        raise BuildError(f"board_config.h is missing macro {name}")
+    return int(match.group(1), 0)
 
 
 def tool(explicit: str | None, candidates: list[str]) -> str:
@@ -117,7 +130,14 @@ def build(output: Path, clang: str | None = None,
     run([objcopy_tool, "-O", "binary", str(elf), str(raw_unchecked)])
     body = raw_unchecked.read_bytes()
     body += b"\xFF" * ((-len(body)) & 3)
-    if len(body) + 4 > 65536:
+    flash_base = board_config_u32("OPEN_CFW_TOUCH_FLASH_BASE")
+    flash_bytes = board_config_u32("OPEN_CFW_TOUCH_FLASH_BYTES")
+    stack_top = board_config_u32("OPEN_CFW_TOUCH_STACK_TOP")
+    fwpk_magic = board_config_u32("OPEN_CFW_TOUCH_FWPK_MAGIC")
+    fwpk_version = board_config_u32("OPEN_CFW_TOUCH_FWPK_VERSION")
+    fwpk_record_type = board_config_u32("OPEN_CFW_TOUCH_FWPK_RECORD_TYPE")
+    fwpk_payload_offset = board_config_u32("OPEN_CFW_TOUCH_FWPK_PAYLOAD_OFFSET")
+    if len(body) + 4 > flash_bytes:
         raise BuildError("Touch raw image plus checksum exceeds 64 KiB flash")
     trailing_crc = crc32c(body)
     raw = body + struct.pack("<I", trailing_crc)
@@ -127,12 +147,16 @@ def build(output: Path, clang: str | None = None,
     if len(raw) < 8:
         raise BuildError("Touch raw image has no vector table")
     stack, reset = struct.unpack_from("<II", raw)
-    if stack != 0x20002000 or reset & 1 == 0 or reset >= len(raw):
+    if stack != stack_top or reset & 1 == 0 or not (
+        flash_base <= (reset & ~1) < flash_base + len(raw)
+    ):
         raise BuildError(
             f"invalid Touch vectors: SP={stack:#x}, reset={reset:#x}, size={len(raw):#x}")
     wrapper = (
-        b"FWPK" + bytes.fromhex("01000202") + struct.pack("<II", 1, 0) +
-        struct.pack("<IIII", 3, len(raw), 0x20, crc32c(raw))
+        struct.pack("<I", fwpk_magic) + struct.pack("<I", fwpk_version) +
+        struct.pack("<II", 1, 0) +
+        struct.pack("<IIII", fwpk_record_type, len(raw),
+                    fwpk_payload_offset, crc32c(raw))
     )
     package = wrapper + raw
     package_path = output / "firmware_touch.bin"
@@ -141,12 +165,28 @@ def build(output: Path, clang: str | None = None,
     source_inventory = [{
         "path": str(path.relative_to(ROOT)),
         "sha256": sha256(path.read_bytes()),
-    } for path in [*sources, *assembly, LINKER]]
+    } for path in [*sources, *assembly, LINKER, BOARD_CONFIG]]
     report = {
         "schema_version": 1,
         "component": "G2 Touch source image",
         "architecture": "ARMv6-M Cortex-M0+",
         "part_family": "CY8C4046FNI / PSoC 4000T",
+        "board_contract": {
+            "flash_base": flash_base,
+            "flash_bytes": flash_bytes,
+            "stack_top": stack_top,
+            "fwpk_magic": fwpk_magic,
+            "fwpk_version": fwpk_version,
+            "fwpk_record_type": fwpk_record_type,
+            "fwpk_payload_offset": fwpk_payload_offset,
+            "blocked_contracts": [
+                "SCB1_I2C_SHIFT_REGISTER_SERVICE",
+                "MSCLP_CAPSENSE_SCAN_RESULT_DRAIN",
+                "SPCIF_FLASH_SROM_ROW_PROGRAMMING",
+                "GPIO_PIN_AND_ATTENTION_LINE_ROUTING",
+                "RESIDENT_DFU_MAILBOX_RESET_HANDOFF",
+            ],
+        },
         "source_translation_units": len(sources) + len(assembly),
         "undefined_symbols": 0,
         "elf": {"path": elf.name, "size": elf.stat().st_size,

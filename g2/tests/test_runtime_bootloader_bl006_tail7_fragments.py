@@ -108,6 +108,15 @@ LEAVES: tuple[dict, ...] = (
         "address": 0x00427D84, "size": 20,
         "sha256": "f35a5cb7dfcde48c147a027e717db6113d416a95014c14703077f500022a44eb",
         "verdict": "no_control_flow_reference_found",
+        "relocations": [
+            {
+                "offset": 0x0E,
+                "type": "R_ARM_THM_JUMP19",
+                "symbol": "open_cfw_bootloader_syspll_alt_entry_4275c4",
+                "target_address": 0x004275C4,
+                "symbol_type": "STT_NOTYPE",
+            },
+        ],
     },
     {
         "path": "components/bootloader/core_overlay/runtime_bl006_syspll_alt_entry_4275c4.c",
@@ -115,6 +124,15 @@ LEAVES: tuple[dict, ...] = (
         "address": 0x004275C4, "size": 14,
         "sha256": "a19e550e2348b6ab72f1f7ef0d2d2afa12d5b6e0944b3df1251c96119706d103",
         "verdict": "corroborated_unreachable_control_flow",
+        "relocations": [
+            {
+                "offset": 12,
+                "type": "R_ARM_THM_JUMP11",
+                "symbol": "open_cfw_bootloader_double_range_error_4275d2_join",
+                "target_address": 0x004275DE,
+                "symbol_type": "STT_NOTYPE",
+            },
+        ],
     },
     {
         "path": "components/bootloader/core_overlay/runtime_bl006_disable_tail_425162.c",
@@ -262,7 +280,7 @@ class Bl006TailLeavesTests(unittest.TestCase):
                                  "sha256": leaf["sha256"]},
                     "stock": {"size": leaf["size"],
                               "sha256": leaf["sha256"]},
-                    "relocations": [],
+                    "relocations": leaf.get("relocations", []),
                     "allow_discarded_alloc_sections": True,
                 },
                 object_path=Path(directory) / "leaf.o",
@@ -323,8 +341,22 @@ class Bl006TailLeavesTests(unittest.TestCase):
                 self.assertEqual(
                     payload, self.stock(leaf["address"], leaf["size"]))
                 extraction = report["extraction"]
-                self.assertEqual(extraction["relocation_count"], 0)
-                self.assertEqual(extraction["relocations"], [])
+                expected_relocations = leaf.get("relocations", [])
+                self.assertEqual(
+                    extraction["relocation_count"], len(expected_relocations))
+                self.assertEqual(
+                    [
+                        {
+                            key: row[key]
+                            for key in (
+                                "offset", "type", "symbol",
+                                "target_address", "symbol_type",
+                            )
+                        }
+                        for row in extraction["relocations"]
+                    ],
+                    expected_relocations,
+                )
                 self.assertEqual(extraction["function"], leaf["function"])
                 self.assertEqual(extraction["runtime_address"], leaf["address"])
                 self.assertEqual(extraction["size"], leaf["size"])
@@ -351,7 +383,8 @@ class Bl006TailLeavesTests(unittest.TestCase):
                 self.assertEqual(entry["expected"]["size"], leaf["size"])
                 self.assertEqual(entry["expected"]["sha256"], leaf["sha256"])
                 self.assertEqual(entry["stock"]["sha256"], leaf["sha256"])
-                self.assertEqual(entry["relocations"], [])
+                self.assertEqual(entry["relocations"],
+                                 leaf.get("relocations", []))
                 self.assertTrue(entry["strict_relocation_contract"])
                 self.assertEqual(entry["source"]["license"], "MIT")
                 self.assertEqual(entry["source"]["path"], leaf["path"])

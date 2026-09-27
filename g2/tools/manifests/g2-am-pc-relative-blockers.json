@@ -1,0 +1,122 @@
+{
+  "blocker_bytes": 174,
+  "blocker_count": 6,
+  "blockers": [
+    {
+      "byte_length": 28,
+      "function": "open_cfw_runtime_am081_0x0050412c",
+      "instruction_count": 14,
+      "macro": "OPEN_CFW_AM081_0X0050412C_ONLY",
+      "outside_body_reference_count": 1,
+      "pc_reference_count": 1,
+      "references": [
+        {
+          "instruction": "adr r2, #0x2f0",
+          "offset": 24,
+          "target_offset": -3344,
+          "target_relation": "outside_body"
+        }
+      ],
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am081_helpers.c"
+    },
+    {
+      "byte_length": 24,
+      "function": "open_cfw_runtime_am097_0x00522602",
+      "instruction_count": 12,
+      "macro": "OPEN_CFW_AM097_0X00522602_ONLY",
+      "outside_body_reference_count": 1,
+      "pc_reference_count": 1,
+      "references": [
+        {
+          "instruction": "adr r0, #0x118",
+          "offset": 22,
+          "target_offset": -3816,
+          "target_relation": "outside_body"
+        }
+      ],
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am097_helpers.c"
+    },
+    {
+      "byte_length": 10,
+      "function": "open_cfw_runtime_am124_0x0055ea4a",
+      "instruction_count": 5,
+      "macro": "OPEN_CFW_AM124_0X0055EA4A_ONLY",
+      "outside_body_reference_count": 1,
+      "pc_reference_count": 1,
+      "references": [
+        {
+          "instruction": "adr r2, #0x290",
+          "offset": 6,
+          "target_offset": -3440,
+          "target_relation": "outside_body"
+        }
+      ],
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am124_helpers.c"
+    },
+    {
+      "byte_length": 16,
+      "function": "open_cfw_runtime_am132_0x00585c94",
+      "instruction_count": 7,
+      "macro": "OPEN_CFW_AM132_0X00585C94_ONLY",
+      "outside_body_reference_count": 1,
+      "pc_reference_count": 1,
+      "references": [
+        {
+          "instruction": "adr r0, #0x70",
+          "offset": 0,
+          "target_offset": -3984,
+          "target_relation": "outside_body"
+        }
+      ],
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am132_helpers.c"
+    },
+    {
+      "byte_length": 10,
+      "function": "open_cfw_runtime_am157_0x005c715e",
+      "instruction_count": 4,
+      "macro": "OPEN_CFW_AM157_0X005C715E_ONLY",
+      "outside_body_reference_count": 1,
+      "pc_reference_count": 1,
+      "references": [
+        {
+          "instruction": "adr r3, #0x124",
+          "offset": 2,
+          "target_offset": -3804,
+          "target_relation": "outside_body"
+        }
+      ],
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am157_helpers.c"
+    },
+    {
+      "byte_length": 86,
+      "function": "open_cfw_runtime_am180_0x005f54fe",
+      "instruction_count": 43,
+      "macro": "OPEN_CFW_AM180_0X005F54FE_ONLY",
+      "outside_body_reference_count": 2,
+      "pc_reference_count": 3,
+      "references": [
+        {
+          "instruction": "ldr r6, [pc, #0]",
+          "offset": 26,
+          "target_offset": 28,
+          "target_relation": "inside_body"
+        },
+        {
+          "instruction": "ldr r6, [pc, #0x1fc]",
+          "offset": 42,
+          "target_offset": 552,
+          "target_relation": "outside_body"
+        },
+        {
+          "instruction": "ldr r6, [pc, #0xbc]",
+          "offset": 62,
+          "target_offset": 252,
+          "target_relation": "outside_body"
+        }
+      ],
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am180_helpers.c"
+    }
+  ],
+  "outside_body_reference_count": 7,
+  "schema_version": 1
+}

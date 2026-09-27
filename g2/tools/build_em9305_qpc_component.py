@@ -41,6 +41,9 @@ FORBIDDEN_IMPORTS = frozenset({
     "__umoddi3",
 })
 HARDWARE_VALIDATION = "blocked by unavailable physical evidence"
+ARC_TOOLCHAIN_DIR = (
+    Path.home() / ".cache" / "opencfw" / "toolchains" / "arc-zephyr-elf-1.0.1"
+)
 
 
 class BuildError(RuntimeError):
@@ -68,6 +71,16 @@ def run(command: list[str]) -> str:
             f"{completed.stdout}{completed.stderr}"
         )
     return completed.stdout
+
+
+def default_arc_tool(tool: str) -> str:
+    explicit = os.environ.get(f"OPENCFW_ARC_{tool.upper()}")
+    if explicit:
+        return explicit
+    cached = ARC_TOOLCHAIN_DIR / "bin" / f"arc-zephyr-elf-{tool}"
+    if cached.is_file():
+        return str(cached)
+    return f"arc-linux-gnu-{tool}"
 
 
 def undefined_symbols(nm: str, path: Path) -> list[str]:
@@ -175,11 +188,11 @@ def build(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--gcc", default=os.environ.get("OPENCFW_ARC_GCC", "arc-linux-gnu-gcc"))
-    parser.add_argument("--ld", default=os.environ.get("OPENCFW_ARC_LD", "arc-linux-gnu-ld"))
-    parser.add_argument("--ar", default=os.environ.get("OPENCFW_ARC_AR", "arc-linux-gnu-ar"))
-    parser.add_argument("--nm", default=os.environ.get("OPENCFW_ARC_NM", "arc-linux-gnu-nm"))
-    parser.add_argument("--readelf", default=os.environ.get("OPENCFW_ARC_READELF", "arc-linux-gnu-readelf"))
+    parser.add_argument("--gcc", default=default_arc_tool("gcc"))
+    parser.add_argument("--ld", default=default_arc_tool("ld"))
+    parser.add_argument("--ar", default=default_arc_tool("ar"))
+    parser.add_argument("--nm", default=default_arc_tool("nm"))
+    parser.add_argument("--readelf", default=default_arc_tool("readelf"))
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--write-summary", type=Path)
     args = parser.parse_args()

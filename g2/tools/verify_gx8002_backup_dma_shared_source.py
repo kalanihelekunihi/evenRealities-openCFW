@@ -20,7 +20,7 @@ def verify(prefix=None,sdk=None,output=None):
     stock=IMAGE.read_bytes();assert sha(stock)==IMAGE_SHA
     rows=[]
     for name,offset,size,kind,symbol in (
-        ('.text',0x3d500,184,'compiled_c','open_cfw_gx8002_backup_dma_pair'),
+        ('.text',0x3d500,180,'compiled_c','open_cfw_gx8002_backup_dma_pair'),
         ('.callback_pointer',0x3d5b8,4,'generated_source_data','open_cfw_gx8002_backup_dma_callback_pointer'),
     ):
         section=next(s for s in elf.sections if s['name']==name);body=elf.contents(section)

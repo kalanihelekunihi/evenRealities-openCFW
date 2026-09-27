@@ -7,7 +7,7 @@ def verify():
     stock=IMAGE.read_bytes();assert sha(stock)==IMAGE_SHA
     p=ROOT/'build/gx8002-backup-dma-shared-pool/pair.elf';elf=Elf32(p.read_bytes(),str(p));image=bytearray(stock)
     sections=[s for s in elf.sections if s['flags']&2 and s['size']]
-    assert [(s['name'],s['address'],s['size']) for s in sections]==[('.text',0x10004bc0,184),('.callback_pointer',0x10004c78,4)]
+    assert [(s['name'],s['address'],s['size']) for s in sections]==[('.text',0x10004bc0,180),('.callback_pointer',0x10004c78,4)]
     for s in sections:
         offset=s['address']-0x10003000+0x3b940
         image[offset:offset+s['size']]=elf.contents(s)

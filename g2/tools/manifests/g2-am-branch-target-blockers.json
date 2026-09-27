@@ -1,0 +1,74 @@
+{
+  "byte_count": 66032,
+  "examples": {
+    "branch:indirect_or_no_imm": {
+      "function": "open_cfw_runtime_am081_0x00503568",
+      "instruction": "bx lr",
+      "site": "0x00503586",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am081_helpers.c",
+      "target": null
+    },
+    "branch:inside_body": {
+      "function": "open_cfw_runtime_am023_5669a",
+      "instruction": "beq #0x566b4",
+      "site": "0x0005669e",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am023_helpers.c",
+      "target": "0x000566b4"
+    },
+    "branch:known_am_helper_entry": {
+      "function": "open_cfw_runtime_am099_0x00524ba8",
+      "instruction": "bne #0x524bc4",
+      "site": "0x00524bbe",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am099_helpers.c",
+      "target": "0x00524bc4"
+    },
+    "branch:outside_unmodeled": {
+      "function": "open_cfw_runtime_am023_5669a",
+      "instruction": "b #0x566d6",
+      "site": "0x000566aa",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am023_helpers.c",
+      "target": "0x000566d6"
+    },
+    "call:indirect_or_no_imm": {
+      "function": "open_cfw_runtime_am082_0x00508eb6",
+      "instruction": "blx r3",
+      "site": "0x00508ec6",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am082_helpers.c",
+      "target": null
+    },
+    "call:inside_body": {
+      "function": "open_cfw_runtime_am023_58df0",
+      "instruction": "bl #0x58e10",
+      "site": "0x00058e10",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am023_helpers.c",
+      "target": "0x00058e10"
+    },
+    "call:known_am_helper_entry": {
+      "function": "open_cfw_runtime_am102_0x005288b8",
+      "instruction": "bl #0x567ca0",
+      "site": "0x005288c8",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am102_helpers.c",
+      "target": "0x00567ca0"
+    },
+    "call:outside_unmodeled": {
+      "function": "open_cfw_runtime_am084_0x0050b1ac",
+      "instruction": "bl #0x50afc4",
+      "site": "0x0050b1b4",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am084_helpers.c",
+      "target": "0x0050afc4"
+    }
+  },
+  "function_count": 658,
+  "relation_counts": {
+    "branch:indirect_or_no_imm": 63,
+    "branch:inside_body": 1967,
+    "branch:known_am_helper_entry": 35,
+    "branch:outside_unmodeled": 1392,
+    "call:indirect_or_no_imm": 55,
+    "call:inside_body": 345,
+    "call:known_am_helper_entry": 1,
+    "call:outside_unmodeled": 1822
+  },
+  "schema_version": 1,
+  "site_count": 5680
+}

@@ -502,597 +502,78 @@
       ]
     },
     "references": {
-      "image_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
-      "functions": {
-        "lookup": {
-          "interval": [
-            245280,
-            245472
-          ],
-          "branches": [
-            {
-              "offset": 245532,
-              "target": 245280,
-              "entry": true
-            },
-            {
-              "offset": 245970,
-              "target": 245280,
-              "entry": true
-            },
-            {
-              "offset": 246322,
-              "target": 245280,
-              "entry": true
-            },
-            {
-              "offset": 247114,
-              "target": 245280,
-              "entry": true
-            },
-            {
-              "offset": 247188,
-              "target": 245280,
-              "entry": true
-            },
-            {
-              "offset": 247380,
-              "target": 245280,
-              "entry": true
-            }
-          ],
-          "external_pool_loads": [],
-          "runtime_words": []
+      "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "stock_range": [
+        305888,
+        305952
+      ],
+      "external_branches": [
+        {
+          "pc": 269020,
+          "target": 305888,
+          "entry": true
         },
-        "gate": {
-          "interval": [
-            247080,
-            247344
-          ],
-          "branches": [
-            {
-              "offset": 245026,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 245072,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 248162,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 249456,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 251116,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 251188,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 251532,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 251578,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 252230,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 253044,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 253148,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 253234,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 254186,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 255556,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 257732,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 257740,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 257850,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 257858,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 257898,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 257906,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 257924,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 257932,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 263884,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 265010,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 265226,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 265636,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 266008,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 266196,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 266596,
-              "target": 247080,
-              "entry": true
-            },
-            {
-              "offset": 266670,
-              "target": 247080,
-              "entry": true
-            }
-          ],
-          "external_pool_loads": [],
-          "runtime_words": [
-            {
-              "offset": 307868,
-              "value": 268450820,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307872,
-              "value": 268450820,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307876,
-              "value": 268450980,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307880,
-              "value": 268450980,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307884,
-              "value": 268450980,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307888,
-              "value": 268450980,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307892,
-              "value": 268450980,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307896,
-              "value": 268450980,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307900,
-              "value": 268450980,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307904,
-              "value": 268450980,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307908,
-              "value": 268450944,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307912,
-              "value": 268450944,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307916,
-              "value": 268450980,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307920,
-              "value": 268450940,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307924,
-              "value": 268450940,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307928,
-              "value": 268450980,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307932,
-              "value": 268450936,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307936,
-              "value": 268450936,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307940,
-              "value": 268450984,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307944,
-              "value": 268451036,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307948,
-              "value": 268451036,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307952,
-              "value": 268451036,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307956,
-              "value": 268451036,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307960,
-              "value": 268451026,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307964,
-              "value": 268451036,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307968,
-              "value": 268451012,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307972,
-              "value": 268450984,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307976,
-              "value": 268451036,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307980,
-              "value": 268451036,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307984,
-              "value": 268451022,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307988,
-              "value": 268451018,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307992,
-              "value": 268451036,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 307996,
-              "value": 268451004,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 308000,
-              "value": 268451000,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 308004,
-              "value": 268451036,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 308008,
-              "value": 268451008,
-              "entry": false,
-              "replaced_switch_word": true
-            },
-            {
-              "offset": 308012,
-              "value": 268451032,
-              "entry": false,
-              "replaced_switch_word": true
-            }
-          ]
+        {
+          "pc": 269598,
+          "target": 305888,
+          "entry": true
+        },
+        {
+          "pc": 269842,
+          "target": 305888,
+          "entry": true
+        },
+        {
+          "pc": 270038,
+          "target": 305888,
+          "entry": true
+        },
+        {
+          "pc": 295600,
+          "target": 305888,
+          "entry": true
+        },
+        {
+          "pc": 295788,
+          "target": 305888,
+          "entry": true
+        },
+        {
+          "pc": 296366,
+          "target": 305888,
+          "entry": true
+        },
+        {
+          "pc": 296396,
+          "target": 305888,
+          "entry": true
+        },
+        {
+          "pc": 296478,
+          "target": 305888,
+          "entry": true
         }
-      },
-      "tables": {
-        "switch": {
-          "address": 268511580,
-          "bytes": 148,
-          "pointer_matches": [
-            {
-              "offset": 247104,
-              "value": 268511580,
-              "within_replaced_code": true
-            },
-            {
-              "offset": 247220,
-              "value": 268511652,
-              "within_replaced_code": true
-            }
-          ]
-        },
-        "param": {
-          "address": 536963484,
-          "bytes": 416,
-          "pointer_matches": [
-            {
-              "offset": 245460,
-              "value": 536963484,
-              "within_replaced_code": true
-            },
-            {
-              "offset": 245956,
-              "value": 536963484,
-              "within_replaced_code": false
-            }
-          ]
-        },
-        "dto": {
-          "address": 536963900,
-          "bytes": 3,
-          "pointer_matches": [
-            {
-              "offset": 324360,
-              "value": 536963900,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324504,
-              "value": 536963901,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324552,
-              "value": 536963902,
-              "within_replaced_code": false
-            }
-          ]
-        },
-        "div": {
-          "address": 536963904,
-          "bytes": 68,
-          "pointer_matches": [
-            {
-              "offset": 324324,
-              "value": 536963904,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324340,
-              "value": 536963908,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324356,
-              "value": 536963912,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324372,
-              "value": 536963916,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324388,
-              "value": 536963920,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324404,
-              "value": 536963924,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324420,
-              "value": 536963928,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324436,
-              "value": 536963932,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324452,
-              "value": 536963936,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324468,
-              "value": 536963940,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324484,
-              "value": 536963944,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324564,
-              "value": 536963948,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324612,
-              "value": 536963952,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324628,
-              "value": 536963956,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324644,
-              "value": 536963960,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324660,
-              "value": 536963964,
-              "within_replaced_code": false
-            },
-            {
-              "offset": 324676,
-              "value": 536963968,
-              "within_replaced_code": false
-            }
-          ]
-        }
-      },
+      ],
+      "external_literal_pools": [],
+      "stored_address_words": [],
       "source_admitted": false,
       "limits": [
-        "Linear decoded branches and byte-aligned word census; computed and nonstandard entry paths are not globally excluded.",
-        "Gate interior pointers are permitted only in the 37 source-replaced switch words; data-table byte identity is a separate qualification."
+        "Mixed loaded-backup linear branch/pool census and whole-codec byte-offset scan through both SRAM address mappings. Computed entry paths and other mappings remain outside scope."
       ]
     }
   },
   "evidence_sha256": {
     "build_gx8002_backup_platform_gate.py": "fbb1daa6fcef886230138dcc2429a45c6e52136b774fe25f00a5810221216370",
     "build_gx8002_backup_clock_tables.py": "ea58fd1065305f05d8e57bfd5cdfd0c6e232286265e825ba7e68a7f321949951",
-    "compare_gx8002_backup_clock_lookup.py": "a15426311935cc354aaf049e602f456b39cb5ff9635a6dfbd97144ffc8c33f1a",
-    "compare_gx8002_backup_platform_gate.py": "e4698efb65342b2ad91896cc5bc9e2cf71fdadcc9ea2391c720755ba3526f408",
+    "compare_gx8002_backup_clock_lookup.py": "07c932fb7a350327280429d8d5582ef8b7ab31fa1f584828f10fedc8948e3c39",
+    "compare_gx8002_backup_platform_gate.py": "917f342c8952aea31057b9dc7a2b63c3c85add48bcdf491c406f53cc60c7d3d5",
     "verify_gx8002_backup_clock_gate_composition.py": "60fc4dc1993edd540aa22087b5f7d4101f1c4c388d58fdc47b23c07e3fb1e0aa",
     "verify_gx8002_backup_clock_loader.py": "c257b57c1ea74bed2491c33a7ea40cbc1dae12b39cae42b73220c653b3992abc",
-    "analyze_gx8002_backup_clock_references.py": "f8897de468ca7fc24e1c497396ea6eb3a80807efbf93c942d94eaa2564334e02",
-    "verify_gx8002_backup_clock_source_common.py": "8151b6b78ee334de1c15af16f5852ff2c37c88969ca7b68e5dec5ebb625ac730",
+    "analyze_gx8002_backup_clock_references.py": "7a7fb79f603fcf6cb851cf570d70c8ca994473d8444b98eb3db596a059fe91c6",
+    "verify_gx8002_backup_clock_source_common.py": "4245612e1512ef6c964dae309eac8295b99ea99760453c95719a565fe8b28dec",
     "verify_gx8002_backup_clock_lookup_source.py": "da6ef5347c9eb37ace2b090d9ab93f834a71541582706cb7433864f5774cee67",
     "verify_gx8002_backup_platform_gate_source.py": "548bd997e001595722b225d1aa96df99d61eef5e8ad393e431ddd7f718f78f62",
-    "verify_gx8002_backup_memset_loader.py": "d1139f142813bf27d701424086d83dfb13c9bbbf1ef968e272368b9c7e65a405",
+    "verify_gx8002_backup_memset_loader.py": "1a96687f8e93dde875324582c4bd4059dcdc93cf49f52ef06c886a0004615b1c",
     "verify_gx8002_memcpy_source.py": "5907325a935f51e902ec2bb1f1be8a830bf2b8183dc212212ba0250c54c1e8eb"
   },
   "source_admitted": true,

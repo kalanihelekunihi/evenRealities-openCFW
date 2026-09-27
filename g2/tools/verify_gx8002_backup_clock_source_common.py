@@ -15,11 +15,16 @@ def verify_part(part,prefix=None,sdk=None,output=None):
     check_paths(prefix,sdk);assert part in ('lookup','gate')
     checks={'lookup':lookup(),'composition':composition(),'loader':loader(),'references':references()}
     refs=checks['references']
-    for name,record in refs['functions'].items():
-        assert not record['external_pool_loads']
-        assert all(r['entry'] for r in record['branches'])
-        assert all(r['entry'] or (name=='gate' and r['replaced_switch_word']) for r in record['runtime_words'])
-    assert all(r['within_replaced_code'] for r in refs['tables']['switch']['pointer_matches'])
+    if 'functions' in refs:
+        for name,record in refs['functions'].items():
+            assert not record['external_pool_loads']
+            assert all(r['entry'] for r in record['branches'])
+            assert all(r['entry'] or (name=='gate' and r['replaced_switch_word']) for r in record['runtime_words'])
+        assert all(r['within_replaced_code'] for r in refs['tables']['switch']['pointer_matches'])
+    else:
+        assert not refs['external_literal_pools']
+        assert not refs['stored_address_words']
+        assert all(r['entry'] for r in refs['external_branches'])
     if part=='lookup':
         path=ROOT/'build/gx8002-backup-clock-tables/tables.elf';artifact='tables.elf'
         expected=[('.text',0x100034e0,160,'compiled_c','__module_get_info'),

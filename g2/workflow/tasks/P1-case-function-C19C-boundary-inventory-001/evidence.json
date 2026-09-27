@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20260926T223240Z",
+  "task_id": "P1-case-function-C19C-boundary-inventory-001",
+  "source_hashes": [
+    {
+      "path": "g2/workflow/target.json",
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff"
+    },
+    {
+      "path": "g2/workflow/PROCEDURE.md",
+      "sha256": "ba0784bd154ffee1edc4be97ade6d05bf4b725092a5f938c4181c97e57ed1631"
+    },
+    {
+      "path": "g2/workflow/CONTRACTS.md",
+      "sha256": "7d49db8323bace121bb8153e5e73cd3e7577ad45cfdb8857e265f683c2bee275"
+    },
+    {
+      "path": "g2/workflow/prompts/common.md",
+      "sha256": "85e25237e552d8cae544d66caa02a7dee5ab1d7e1c6752e8e9d7eb7add5aab0f"
+    },
+    {
+      "path": "g2/workflow/prompts/01-inventory.md",
+      "sha256": "9298eef61a43e5ea789c879b65ff9a1143a10dc94eb64500ef7f430df3214d79"
+    },
+    {
+      "path": "g2/build/reference/package/g2-openCFW-s200_v2.2.6.10.evenota.bin",
+      "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+    },
+    {
+      "path": "g2/tools/manifests/g2-box-function-map.tsv",
+      "sha256": "5139d39d5cb61e0b427c7bcc7e8dc029724e6d30a534964897d162545b271ad8"
+    },
+    {
+      "path": "g2/tools/manifests/g2-case-byte-accounting.tsv",
+      "sha256": "1bba69f30997ff95cfef326a8109d11fbaf8bf38691a81d0a22e6296d385cfc9"
+    },
+    {
+      "path": "g2/tools/manifests/g2-case-final-gap-frontier.tsv",
+      "sha256": "7b70afc7d9c57dd6a73e46bf540e098f13e5f8e04133165def5228bb436fa56e"
+    },
+    {
+      "path": "g2/tools/analyze_g2_box_function_map.py",
+      "sha256": "755813f923f42fbf2f6562f27d5541b9bef83eef043459abb1643ad7323d9a6b"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/inventory/outer-container.json",
+      "sha256": "f6ba877dff18601af8c1250778c1f509c20aec3727034483941cc46c0b06a1d2"
+    },
+    {
+      "path": "/Applications/Xcode-beta.app/Contents/Developer/usr/bin/python3",
+      "sha256": "5f679e1250dd40ec687423f330b34d66d0ad86c66f950bc823321d56d7c00592"
+    },
+    {
+      "path": "/Users/kalani/Library/Python/3.9/lib/python/site-packages/capstone/__init__.py",
+      "sha256": "6f8a27fe069aa89a46974e189b5365d56eb5e02c2fd581d2fbfad7fbba51549f"
+    },
+    {
+      "path": "/Users/kalani/Library/Python/3.9/lib/python/site-packages/capstone/lib/libcapstone.dylib",
+      "sha256": "016084c6e70d929249a2abb22f1afda95095294e6cd70f509964ffc54006bf94"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/decisions/P1-case-map-rerun/receipt.json",
+      "sha256": "5a156b9e73e8fa2690286a91b0e617cfc61dddb4e2cdbaaee087c0f94469883d"
+    },
+    {
+      "path": "g2/research/corpus/case/ghidra/final-frontier/SHA256SUMS",
+      "sha256": "78a38e1fc1896e3f0e923a31ddb55c26167d79b28ce1a837c44816b0a08b9458"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/tasks/P1-case-function-C178-boundary-inventory-003/contract.json",
+      "sha256": "766266bdf32804fcd8ef7d2075ea3fd50a0a762d81d3a850e36a5c2ed0e178d2"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/tasks/P1-case-function-C178-boundary-inventory-003/evidence.json",
+      "sha256": "a758c7990fb933c046c72b77c3a7f49fbac815d2b68e594327590ca193f86ad8"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/attempts/P1-case-function-C178-boundary-inventory-003/result.json",
+      "sha256": "6d9a165139172b4d8d3a9d2963db5353e0e4fdf9321a173e8b8de328f19957bd"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/attempts/P1-case-function-C178-boundary-review-002/review.json",
+      "sha256": "6425f69e3e5193fcbfe17864b364082d9af2a0232f5964a50af923a4942004a0"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260926T223240Z/decisions/P1-case-function-C178-boundary-inventory-003-review-disposition.json",
+      "sha256": "e9b0b4f1fe79206c48256bb0295b159779dda77b4ce45c281c59c49a55b3b4bf"
+    }
+  ],
+  "scope": [
+    {
+      "role": "mapped_body",
+      "start": "0x0800c19c",
+      "end_exclusive": "0x0800c1c6"
+    },
+    {
+      "role": "frontier",
+      "start": "0x0800c1c6",
+      "end_exclusive": "0x0800c1cc"
+    }
+  ],
+  "mapping": {
+    "runtime_base": "0x08000000",
+    "wrapper_bytes": 32,
+    "package_component_start": 573192,
+    "formula": "app_offset=runtime-0x08000000; raw_component_file_offset=app_offset+32; package_offset=573192+raw_component_file_offset"
+  },
+  "coordinate_anchors": [
+    {
+      "role": "mapped_body",
+      "runtime_range": [
+        "0x0800c19c",
+        "0x0800c1c6"
+      ],
+      "app_offsets": [
+        "0xc19c",
+        "0xc1c6"
+      ],
+      "raw_component_file_offsets": [
+        "0xc1bc",
+        "0xc1e6"
+      ],
+      "package_offsets": [
+        622788,
+        622830
+      ],
+      "expected_bytes": "70b50d46144600280dd0084909681831fff719ff002c01d00025ed4321462846fef7f8fc70bd72b6fee7",
+      "expected_sha256": "313af03956f2e6714e503856c02a2360f83a9a35dd23bacc7949eb43ec3c0a31"
+    },
+    {
+      "role": "frontier",
+      "runtime_range": [
+        "0x0800c1c6",
+        "0x0800c1cc"
+      ],
+      "app_offsets": [
+        "0xc1c6",
+        "0xc1cc"
+      ],
+      "raw_component_file_offsets": [
+        "0xc1e6",
+        "0xc1ec"
+      ],
+      "package_offsets": [
+        622830,
+        622836
+      ],
+      "expected_bytes": "000028010020",
+      "expected_sha256": "e04f48cc31e8517cafb3e852197705ed89c34f17872d978b14548b3c8751f569"
+    },
+    {
+      "role": "following_body_map_anchor",
+      "runtime_range": [
+        "0x0800c1cc",
+        "0x0800c21e"
+      ],
+      "app_offsets": [
+        "0xc1cc",
+        "0xc21e"
+      ],
+      "raw_component_file_offsets": [
+        "0xc1ec",
+        "0xc23e"
+      ],
+      "package_offsets": [
+        622836,
+        622918
+      ],
+      "expected_bytes": "70b5144d2a6b002a1fd00122d20711430160c468002c1ad0fff7a2fe201dfff79ffee06a2969884200d928611421484309494018211dfff7eefee06a2968c96a884201d90120e86170bd72b6fee772b6fee7",
+      "expected_sha256": "eb0399115aa34eec05ad407a15294aa7a94307d0d046d926d431af6b72fe5ed3"
+    }
+  ],
+  "guardrails": [
+    "Known mapping formula is proved by shared evidence; recompute arithmetic locally.",
+    "Following-body anchor does not classify the frontier.",
+    "Literal target is an address fact only.",
+    "No pseudocode/C or invented semantics."
+  ],
+  "frontier": {
+    "range": [
+      "0x0800c1c6",
+      "0x0800c1cc"
+    ],
+    "length": 6,
+    "sha256": "e04f48cc31e8517cafb3e852197705ed89c34f17872d978b14548b3c8751f569"
+  }
+}

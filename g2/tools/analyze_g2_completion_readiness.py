@@ -13,6 +13,7 @@ that byte open source or grant permission to redistribute it.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import csv
 import hashlib
 import json
@@ -71,6 +72,12 @@ CASE_REGISTER_POLICIES = (
     ROOT / "tools/manifests/g2-case-register-policies-admission-summary.json"
 )
 CASE_FINAL = ROOT / "tools/manifests/g2-case-final-classification-summary.json"
+CASE_BYTE_ACCOUNTING = (
+    ROOT / "tools/manifests/g2-case-byte-accounting-summary.json"
+)
+CASE_RESIDUAL_SHAPE = (
+    ROOT / "tools/manifests/g2-case-residual-shape-summary.json"
+)
 RAW_ENCODING_SUMMARY = (
     ROOT / "tools/manifests/g2-production-raw-encoding-quality-summary.json"
 )
@@ -97,7 +104,7 @@ EM9305_FINAL_LEDGER_SHA256 = (
     "cfda63c68a73d27235af204f01ee6c848db9495d0294d55faf70096b7ab08bf9"
 )
 EM9305_FINAL_SUMMARY_SHA256 = (
-    "3fa764455494d542f04d0a71236e9d52f7a116eab8867a1bffc82e20f3e0907e"
+    "fcffc7ba76ec96e371db5a5f4635e02d3259118e3529bdbcca7ee1533bac3774"
 )
 HARDWARE_VALIDATION = "blocked by unavailable physical evidence"
 TOUCH_CANDIDATE_BYTES = 14_510
@@ -509,7 +516,7 @@ def _touch_generation_receipt(
     }, "Touch generation receipt input schema changed")
     path_sha256 = analysis_inputs.get("path_sha256")
     _require(isinstance(path_sha256, dict) and
-             analysis_inputs.get("path_count") == 69 == len(path_sha256) and
+             analysis_inputs.get("path_count") == 70 == len(path_sha256) and
              list(path_sha256) == sorted(path_sha256),
              "Touch generation receipt path map is not canonical and complete")
     actual_path_sha256: dict[str, str] = {}
@@ -721,7 +728,12 @@ def _component(
     }
 
 
-def source_only_gate(components: dict[str, dict[str, Any]]) -> dict[str, Any]:
+def source_only_gate(
+    components: dict[str, dict[str, Any]],
+    *,
+    source_ownership_quality_clean: bool = True,
+    project_license_policy_clean: bool = True,
+) -> dict[str, Any]:
     """Fail-closed source-only readiness derived from the per-component ledger.
 
     A component only counts once it is both ``source_complete`` (zero
@@ -740,11 +752,17 @@ def source_only_gate(components: dict[str, dict[str, Any]]) -> dict[str, Any]:
     not_production_routed = [
         name for name, row in components.items() if not row["production_routed"]
     ]
+    global_blockers = []
+    if not source_ownership_quality_clean:
+        global_blockers.append("source_ownership_quality")
+    if not project_license_policy_clean:
+        global_blockers.append("project_license_policy")
     return {
-        "ready": not blocking_bytes_by_component,
+        "ready": not blocking_bytes_by_component and not global_blockers,
         "manifest": "manifests/g2-2.2.6.10-source-only.json",
         "blocking_bytes_by_component": blocking_bytes_by_component,
         "not_production_routed_components": not_production_routed,
+        "global_blockers": global_blockers,
     }
 
 
@@ -831,8 +849,8 @@ def analyze() -> dict[str, Any]:
              em_completion.get("candidate_production_routed") is True and
              em_completion.get("release_blocking_bytes") == 210_584 and
              em_completion.get("buckets") == {
-                 "production_source": 1_174,
-                 "generated_or_reconstructible": 1_226,
+                 "production_source": 1_190,
+                 "generated_or_reconstructible": 1_210,
                  "candidate_source_not_routed": 0,
                  "typed_retained_or_external": 210_584,
                  "unclassified": 0,
@@ -919,12 +937,12 @@ def analyze() -> dict[str, Any]:
     )
     _require(origin_release == {
         "candidate_source_not_routed": 0,
-        "typed_retained_or_external": 3_046_598,
+        "typed_retained_or_external": 3_030_368,
     } and _sum(origin_release) == main["opaque_base_bytes"],
         "Apollo origin/readiness partition changed")
     _require(origin_unanchored == {
         "candidate_source_not_routed": 0,
-        "typed_retained_unanchored_without_candidate": 591_115,
+        "typed_retained_unanchored_without_candidate": 576_221,
     } and _sum(origin_unanchored) ==
         int(origin_buckets["unanchored_discovered_function"]),
         "Apollo unanchored frontier changed")
@@ -932,7 +950,7 @@ def analyze() -> dict[str, Any]:
         "bytes": 885_418,
         "additive_to_disjoint_release_totals": False,
     }, "Apollo overlapping object evidence policy changed")
-    _require(int(origin["controlled_bytes_mislabeled_official_blob"]) == 34_192,
+    _require(int(origin["controlled_bytes_mislabeled_official_blob"]) == 0,
              "Apollo controlled-label reconciliation changed")
     clkmgr_dividers = _read(CLKMGR_DIVIDERS)
     _require(clkmgr_dividers.get("status") ==
@@ -1085,7 +1103,7 @@ def analyze() -> dict[str, Any]:
         (em_override.get("size"), em_override.get("sha256"),
          em_override.get("kind"), em_override.get("path"))
         == (212_984,
-            "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42",
+            "56694060c0d2761c2004581d0cec97cdb8642c1ff44675194d05d605bf8dd9c7",
             "source_build",
             "components/em9305/source_overlay/build/firmware_ble_em9305.bin"),
         "EM9305 core-manifest provider identity changed",
@@ -1102,6 +1120,77 @@ def analyze() -> dict[str, Any]:
              "case final physical buckets do not cover the whole blob")
     _require(int(case_final_buckets.get("still_unclassified", -1)) == 0,
              "case final classification retains unclassified bytes")
+    case_byte_accounting = _read(CASE_BYTE_ACCOUNTING)
+    case_byte_metrics = case_byte_accounting["metrics"]
+    case_residual_shape = _read(CASE_RESIDUAL_SHAPE)
+    _require(
+        case_byte_metrics["admitted_function_source_candidate_bytes"] ==
+        case_final_metrics["candidate_source_bytes"] == 14_886 and
+        case_byte_metrics["typed_external_or_unsupported_bytes"] ==
+        int(case_final_buckets["typed_external_or_unsupported"]) == 40_866 and
+        case_byte_metrics["function_map_attributed_bytes"] == 37_642 and
+        case_byte_metrics["function_map_body_attributed_bytes"] == 25_314 and
+        case_byte_metrics["function_map_gap_attributed_bytes"] == 12_328 and
+        case_byte_metrics["residual_log_string_candidate_bytes"] == 0 and
+        case_byte_metrics["residual_log_string_candidate_rows"] == 0 and
+        case_byte_metrics["residual_log_string_candidate_digest"] ==
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945" and
+        case_byte_metrics["residual_unresolved_code_or_data_bytes"] ==
+        0 and
+        case_byte_accounting["identity_windows_in_range"]["count"] == 0 and
+        case_byte_accounting["production_routed"] is False and
+        case_byte_accounting["hardware_operations"] == [],
+        "case byte-accounting receipt changed",
+    )
+    _require(
+        case_residual_shape["byte_accounting_sha256"] ==
+        "1bba69f30997ff95cfef326a8109d11fbaf8bf38691a81d0a22e6296d385cfc9" and
+        case_residual_shape["row_count"] == 0 and
+        case_residual_shape["total_bytes"] ==
+        case_byte_metrics["residual_unresolved_code_or_data_bytes"] ==
+        0 and
+        case_residual_shape["rows_digest"] ==
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945" and
+        case_residual_shape["thumb_branch_count"] == 0 and
+        case_residual_shape["thumb_call_count"] == 0 and
+        case_residual_shape["thumb_in_app_target_count"] == 0 and
+        case_residual_shape["thumb_in_app_targets_digest"] ==
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945" and
+        case_residual_shape["thumb_in_app_target_refs_digest"] ==
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945" and
+        case_residual_shape["residual_recovery_target_count"] == 0 and
+        case_residual_shape["residual_recovery_queue_digest"] ==
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945" and
+        case_residual_shape["residual_recovery_row_count"] == 0 and
+        case_residual_shape["residual_recovery_row_bytes"] == 0 and
+        case_residual_shape["residual_recovery_class_rows"] == {} and
+        case_residual_shape["residual_recovery_class_bytes"] == {} and
+        case_residual_shape["residual_recovery_rows_digest"] ==
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945" and
+        case_residual_shape["residual_non_target_row_count"] == 0 and
+        case_residual_shape["residual_non_target_row_bytes"] == 0 and
+        case_residual_shape["residual_non_target_rows_digest"] ==
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945" and
+        case_residual_shape["residual_partition"] == {
+            "target_bearing_rows": 0,
+            "target_bearing_bytes": 0,
+            "non_target_rows": 0,
+            "non_target_bytes": 0,
+            "total_rows": 0,
+            "total_bytes": 0,
+        } and
+        case_residual_shape["residual_partition_digest"] ==
+        "8b8a0fb3dfaf65d7b832fa22e87151d7d6dbc06266643848b58dc61cded876df" and
+        case_residual_shape["residual_entry_candidate_count"] == 0 and
+        case_residual_shape["residual_entry_candidate_bytes"] == 0 and
+        case_residual_shape["residual_entry_candidates_digest"] ==
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945" and
+        case_residual_shape["thumb_in_app_target_bucket_counts"] == {} and
+        case_residual_shape["thumb_in_app_target_relation_counts"] == {} and
+        case_residual_shape["source_admission"] is False and
+        case_residual_shape["production_routed"] is False,
+        "case residual shape receipt changed",
+    )
 
     pt_candidate_bytes = int(
         pt_source["evidence"]["stock_function_body_bytes"])
@@ -1113,8 +1202,8 @@ def analyze() -> dict[str, Any]:
              pt_software["platform_backend_production_bound"] is True and
              pt_software["target_loadable_bytes"] == 22643 and
              pt_software["target_bss_bytes"] == 0 and
-             pt_software["production_text_placement_free_bytes"] == 72740 and
-             pt_software["production_text_placement_shortfall_bytes"] == 0 and
+             pt_software["production_text_placement_free_bytes"] == 96 and
+             pt_software["production_text_placement_shortfall_bytes"] == 22547 and
              pt_software["production_ram_binding_remaining_bytes"] == 0 and
              pt_software["production_in_place_loadable_bytes"] == 22696 and
              pt_software["production_placement_complete"] is True,
@@ -1126,7 +1215,7 @@ def analyze() -> dict[str, Any]:
     _require(
         pt_software["board_retained_provider_candidate_bindings"] == 40 and
         pt_software["board_top_level_retained_provider_bindings_remaining"] == 4 and
-        pt_software["board_retained_provider_bindings_remaining"] == 13 and
+        pt_software["board_retained_provider_bindings_remaining"] == 12 and
         pt_provider_candidate_bytes == 3402 and
         pt_software["board_retained_provider_candidates_semantic_c"] is True and
         pt_software["board_retained_provider_candidates_production_routed"] is
@@ -1134,11 +1223,11 @@ def analyze() -> dict[str, Any]:
         pt_software["board_retained_providers_source_owned"] is False and
         pt_software["board_source_complete"] is False and
         pt_software["board_second_order_callable_bindings"] == 81 and
-        pt_software["board_second_order_source_overlay_callable_bindings"] == 29 and
+        pt_software["board_second_order_source_overlay_callable_bindings"] == 30 and
         pt_software["board_second_order_source_local_callable_bindings"] == 39 and
-        pt_software["board_second_order_source_callable_bindings"] == 68 and
-        pt_software["board_second_order_retained_callable_bindings"] == 13 and
-        pt_software["board_second_order_retained_callable_unique_addresses"] == 13 and
+        pt_software["board_second_order_source_callable_bindings"] == 69 and
+        pt_software["board_second_order_retained_callable_bindings"] == 12 and
+        pt_software["board_second_order_retained_callable_unique_addresses"] == 12 and
         pt_software["board_second_order_data_bindings"] == 97 and
         pt_software["board_second_order_data_unique_addresses"] == 94 and
         pt_software["board_second_order_data_source_owned"] == 0 and
@@ -1336,8 +1425,8 @@ def analyze() -> dict[str, Any]:
             details={"residual_scope_bytes": em_residual["bytes"],
                      "residual_readiness_bytes": em_residual["readiness_bytes"],
                      "residual_unclassified_bytes": 0,
-                     "production_source_bytes": 1_174,
-                     "generated_or_reconstructible_bytes": 1_226,
+                     "production_source_bytes": 1_190,
+                     "generated_or_reconstructible_bytes": 1_210,
                      "candidate_source_not_routed_bytes": 0,
                      "typed_retained_or_external_bytes": 210_584,
                      "candidate_production_routed": True,
@@ -1466,9 +1555,139 @@ def analyze() -> dict[str, Any]:
                          case_final_metrics["unclassified_functions"],
                      "source_image_raw_flash_bytes":
                          case_source_image["metrics"]["raw_flash_bytes"],
+                     "source_image_board_contract":
+                         case_source_image["board_contract"],
+                     "byte_accounting_metrics": case_byte_metrics,
+                     "byte_accounting_buckets":
+                         case_byte_accounting["bucket_bytes"],
+                     "byte_accounting_identity_windows_in_range":
+                         case_byte_accounting["identity_windows_in_range"],
+                     "residual_shape_rows":
+                         case_residual_shape["class_rows"],
+                     "residual_shape_bytes":
+                         case_residual_shape["class_bytes"],
+                     "residual_shape_digest":
+                         case_residual_shape["rows_digest"],
+                     "residual_shape_control_flow": {
+                         "thumb_branch_count":
+                             case_residual_shape["thumb_branch_count"],
+                         "thumb_call_count":
+                             case_residual_shape["thumb_call_count"],
+                         "thumb_in_app_target_count":
+                             case_residual_shape["thumb_in_app_target_count"],
+                         "thumb_in_app_targets_digest":
+                             case_residual_shape[
+                                 "thumb_in_app_targets_digest"],
+                         "thumb_in_app_target_refs_digest":
+                             case_residual_shape[
+                                 "thumb_in_app_target_refs_digest"],
+                         "residual_recovery_target_count":
+                             case_residual_shape[
+                                 "residual_recovery_target_count"],
+                         "residual_recovery_queue_digest":
+                             case_residual_shape[
+                                 "residual_recovery_queue_digest"],
+                         "residual_recovery_row_count":
+                             case_residual_shape[
+                                 "residual_recovery_row_count"],
+                         "residual_recovery_row_bytes":
+                             case_residual_shape[
+                                 "residual_recovery_row_bytes"],
+                         "residual_recovery_class_rows":
+                             case_residual_shape[
+                                 "residual_recovery_class_rows"],
+                         "residual_recovery_class_bytes":
+                             case_residual_shape[
+                                 "residual_recovery_class_bytes"],
+                         "residual_recovery_rows_digest":
+                             case_residual_shape[
+                                 "residual_recovery_rows_digest"],
+                         "residual_non_target_row_count":
+                             case_residual_shape[
+                                 "residual_non_target_row_count"],
+                         "residual_non_target_row_bytes":
+                             case_residual_shape[
+                                 "residual_non_target_row_bytes"],
+                         "residual_non_target_rows_digest":
+                             case_residual_shape[
+                                 "residual_non_target_rows_digest"],
+                         "residual_partition":
+                             case_residual_shape["residual_partition"],
+                         "residual_partition_digest":
+                             case_residual_shape[
+                                 "residual_partition_digest"],
+                         "residual_entry_candidate_count":
+                             case_residual_shape[
+                                 "residual_entry_candidate_count"],
+                         "residual_entry_candidate_bytes":
+                             case_residual_shape[
+                                 "residual_entry_candidate_bytes"],
+                         "residual_entry_candidates_digest":
+                             case_residual_shape[
+                                 "residual_entry_candidates_digest"],
+                         "residual_entry_candidate_class_rows":
+                             case_residual_shape[
+                                 "residual_entry_candidate_class_rows"],
+                         "residual_entry_candidate_class_bytes":
+                             case_residual_shape[
+                                 "residual_entry_candidate_class_bytes"],
+                         "residual_non_target_class_rows":
+                             case_residual_shape[
+                                 "residual_non_target_class_rows"],
+                         "residual_non_target_class_bytes":
+                             case_residual_shape[
+                                 "residual_non_target_class_bytes"],
+                         "thumb_in_app_target_bucket_counts":
+                             case_residual_shape[
+                                 "thumb_in_app_target_bucket_counts"],
+                         "thumb_in_app_target_relation_counts":
+                             case_residual_shape[
+                                 "thumb_in_app_target_relation_counts"],
+                     },
                      "physical_bucket_digest":
                          case_final_metrics["physical_bucket_digest"]}),
     }
+
+    raw_quality = raw_encoding_quality.analyze()
+    raw_quality_summary = _read(RAW_ENCODING_SUMMARY)
+    _require(raw_quality["classification_complete"] is True,
+             "production raw-encoding census is not classification-complete")
+    _require(raw_quality["metrics"] == raw_quality_summary["metrics"],
+             "live production raw-encoding audit disagrees with its summary")
+    raw_overstated = int(
+        raw_quality["metrics"]["source_owned_bytes_currently_overstated"])
+    raw_quality_clean = bool(raw_quality["source_ownership_suitable"])
+    _require(
+        (raw_overstated == 0) == (
+            int(raw_quality["metrics"]["source_owned_bytes_currently_overstated"])
+            == 0
+        ),
+        "production raw-encoding source-owned overstatement total is inconsistent",
+    )
+    _require(raw_quality_clean == bool(raw_quality["source_ownership_suitable"]),
+             "production raw-encoding quality disposition is inconsistent")
+    raw_overstated_by_component: Counter[str] = Counter()
+    for row in raw_quality.get("rows", []):
+        component = row["component"]
+        raw_bytes = int(row["raw_instruction_transcription_bytes"])
+        if raw_bytes:
+            raw_overstated_by_component[component] += raw_bytes
+    _require(sum(raw_overstated_by_component.values()) == raw_overstated,
+             "raw-encoding component debt does not match total debt")
+    for component, raw_bytes in sorted(raw_overstated_by_component.items()):
+        _require(component in components,
+                 f"raw-encoding debt named unknown component: {component}")
+        row = components[component]
+        buckets = row["buckets"]
+        _require(buckets["production_source"] >= raw_bytes,
+                 f"raw-encoding debt exceeds production source: {component}")
+        buckets["production_source"] -= raw_bytes
+        buckets["typed_retained_or_external"] += raw_bytes
+        row["release_blocking_bytes"] += raw_bytes
+        row["source_complete"] = row["release_blocking_bytes"] == 0
+        row["details"]["raw_instruction_source_owned_bytes_reclassified"] = raw_bytes
+        row["details"]["raw_instruction_reclassified_to"] = (
+            "typed_retained_or_external")
 
     aggregate_buckets = {
         key: sum(component["buckets"][key] for component in components.values())
@@ -1483,17 +1702,6 @@ def analyze() -> dict[str, Any]:
     license_report = licensing.analyze()
     license_summary = license_report["summary"]
     unresolved_authority = license_summary["redistribution_authority_unresolved"]
-    raw_quality = raw_encoding_quality.analyze()
-    raw_quality_summary = _read(RAW_ENCODING_SUMMARY)
-    _require(raw_quality["classification_complete"] is True,
-             "production raw-encoding census is not classification-complete")
-    _require(raw_quality["metrics"] == raw_quality_summary["metrics"],
-             "live production raw-encoding audit disagrees with its summary")
-    raw_overstated = int(
-        raw_quality["metrics"]["source_owned_bytes_currently_overstated"])
-    raw_quality_clean = raw_overstated == 0
-    _require(raw_quality_clean == bool(raw_quality["source_ownership_suitable"]),
-             "production raw-encoding quality disposition is inconsistent")
     project_license = project_license_policy.analyze()
     project_license_summary = _read(PROJECT_LICENSE_SUMMARY)
     _require(project_license["metrics"] == project_license_summary["metrics"],
@@ -1517,7 +1725,11 @@ def analyze() -> dict[str, Any]:
     source_incomplete_components = [
         name for name, row in components.items() if not row["source_complete"]
     ]
-    source_only = source_only_gate(components)
+    source_only = source_only_gate(
+        components,
+        source_ownership_quality_clean=raw_quality_clean,
+        project_license_policy_clean=project_license_clean,
+    )
     return {
         "schema_version": 1,
         "analysis_mode": (
@@ -1564,6 +1776,14 @@ def analyze() -> dict[str, Any]:
                 "production_routed_sources_with_directives"],
             "raw_instruction_transcription_bytes": raw_quality["metrics"][
                 "raw_instruction_transcription_bytes"],
+            "public_raw_executable_transcript_files": raw_quality["metrics"][
+                "public_raw_executable_transcript_files"],
+            "public_unrouted_raw_instruction_transcript_bytes": raw_quality[
+                "metrics"]["public_unrouted_raw_instruction_transcript_bytes"],
+            "public_unrouted_raw_instruction_transcript_files": raw_quality[
+                "metrics"]["public_unrouted_raw_instruction_transcript_files"],
+            "untracked_overlay_source_inputs": raw_quality["metrics"].get(
+                "untracked_overlay_source_inputs", 0),
             "semantic_literal_bytes": raw_quality["metrics"][
                 "semantic_literal_bytes"],
             "quality_gate": raw_quality["quality_gate"],
@@ -1671,6 +1891,10 @@ def main() -> int:
         source_only = report["source_only"]
         print(f"  source-only ready: {source_only['ready']}")
         if not source_only["ready"]:
+            if source_only["global_blockers"]:
+                print("  source-only global blockers:")
+                for blocker in source_only["global_blockers"]:
+                    print(f"    {blocker}")
             print("  source-only per-component release-blocking bytes:")
             for name in sorted(report["components"]):
                 blocking = source_only["blocking_bytes_by_component"].get(name)

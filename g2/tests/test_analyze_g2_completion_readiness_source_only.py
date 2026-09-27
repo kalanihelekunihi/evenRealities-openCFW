@@ -46,6 +46,7 @@ class SourceOnlyGateTests(unittest.TestCase):
         self.assertTrue(result["ready"])
         self.assertEqual(result["blocking_bytes_by_component"], {})
         self.assertEqual(result["not_production_routed_components"], [])
+        self.assertEqual(result["global_blockers"], [])
 
     def test_retained_bytes_block_even_when_production_routed(self) -> None:
         components = {
@@ -59,6 +60,7 @@ class SourceOnlyGateTests(unittest.TestCase):
         self.assertFalse(result["ready"])
         self.assertEqual(result["blocking_bytes_by_component"], {"codec": 326_000})
         self.assertEqual(result["not_production_routed_components"], [])
+        self.assertEqual(result["global_blockers"], [])
 
     def test_unrouted_candidate_blocks_even_with_zero_blocking_bytes(self) -> None:
         """A source candidate that is not production-routed must not count
@@ -74,6 +76,7 @@ class SourceOnlyGateTests(unittest.TestCase):
         self.assertIn("touch", result["blocking_bytes_by_component"])
         self.assertEqual(result["blocking_bytes_by_component"]["touch"], 0)
         self.assertEqual(result["not_production_routed_components"], ["touch"])
+        self.assertEqual(result["global_blockers"], [])
 
     def test_every_component_missing_is_all_blocking(self) -> None:
         components = {
@@ -88,6 +91,37 @@ class SourceOnlyGateTests(unittest.TestCase):
         self.assertEqual(
             set(result["not_production_routed_components"]), set(SIX_COMPONENTS)
         )
+        self.assertEqual(result["global_blockers"], [])
+
+    def test_global_quality_debt_blocks_even_when_components_are_ready(self) -> None:
+        components = {
+            name: _row(release_blocking_bytes=0, production_routed=True)
+            for name in SIX_COMPONENTS
+        }
+        result = readiness.source_only_gate(
+            components,
+            source_ownership_quality_clean=False,
+            project_license_policy_clean=True,
+        )
+        self.assertFalse(result["ready"])
+        self.assertEqual(result["blocking_bytes_by_component"], {})
+        self.assertEqual(result["not_production_routed_components"], [])
+        self.assertEqual(result["global_blockers"], ["source_ownership_quality"])
+
+    def test_project_license_policy_debt_blocks_even_when_components_are_ready(self) -> None:
+        components = {
+            name: _row(release_blocking_bytes=0, production_routed=True)
+            for name in SIX_COMPONENTS
+        }
+        result = readiness.source_only_gate(
+            components,
+            source_ownership_quality_clean=True,
+            project_license_policy_clean=False,
+        )
+        self.assertFalse(result["ready"])
+        self.assertEqual(result["blocking_bytes_by_component"], {})
+        self.assertEqual(result["not_production_routed_components"], [])
+        self.assertEqual(result["global_blockers"], ["project_license_policy"])
 
     def test_manifest_name_is_recorded(self) -> None:
         components = {

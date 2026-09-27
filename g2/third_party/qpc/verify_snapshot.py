@@ -12,6 +12,9 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[1]
+ARC_TOOLCHAIN_DIR = (
+    Path.home() / ".cache" / "opencfw" / "toolchains" / "arc-zephyr-elf-1.0.1"
+)
 FILES = {
     "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
     "include/qassert.h": "dbd2a14e09e36ecbaaa74deee76d17dedbc770350a24ff7927aa8447987d0c54",
@@ -65,6 +68,16 @@ def compile_sources(compiler: str, arc: bool = False) -> None:
             subprocess.run([compiler, *flags, *includes, "-c", str(ROOT / relative), "-o", str(output)], check=True, capture_output=True)
 
 
+def default_arc_tool(tool: str) -> str | None:
+    explicit = os.environ.get(f"OPENCFW_ARC_{tool.upper()}")
+    if explicit:
+        return explicit
+    cached = ARC_TOOLCHAIN_DIR / "bin" / f"arc-zephyr-elf-{tool}"
+    if cached.is_file():
+        return str(cached)
+    return shutil.which(f"arc-linux-gnu-{tool}") or shutil.which(f"arc-elf32-{tool}")
+
+
 def verify() -> dict:
     actual = {path.relative_to(ROOT).as_posix() for path in ROOT.rglob("*") if path.is_file() and "__pycache__" not in path.parts and path.name not in {"README.openCFW.md", "PROVENANCE.json", "verify_snapshot.py"}}
     if actual != set(FILES):
@@ -94,11 +107,7 @@ def verify() -> dict:
         if fact not in port:
             raise SystemExit(f"QP/C EM9305 port configuration changed: {fact}")
     compile_sources("/usr/bin/clang")
-    arc_compiler = (
-        os.environ.get("OPENCFW_ARC_GCC")
-        or shutil.which("arc-linux-gnu-gcc")
-        or shutil.which("arc-elf32-gcc")
-    )
+    arc_compiler = default_arc_tool("gcc")
     target = "blocked_unavailable_reviewed_arc_compiler"
     if arc_compiler:
         compile_sources(arc_compiler, arc=True)

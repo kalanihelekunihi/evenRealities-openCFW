@@ -1,0 +1,224 @@
+{
+  "blocking_component_count": 6,
+  "component_count": 6,
+  "components": {
+    "apollo_bootloader": {
+      "blocker_class": "typed-retained-or-external-apollo-bytes",
+      "buckets": {
+        "candidate_source_not_routed": 0,
+        "generated_or_reconstructible": 16846,
+        "production_source": 65807,
+        "typed_retained_or_external": 81187,
+        "unclassified": 0
+      },
+      "classification_complete": true,
+      "exit_criteria": [
+        "Replace retained official bootloader intervals with source-owned equivalents or authorized external boundaries.",
+        "Prioritize EasyLogger, redirect-init, SpotMgr, platform-services, and post-redirect retained interval families.",
+        "Keep bootloader production routing and source-owned in-place accounting conserved."
+      ],
+      "production_routed": true,
+      "release_blocking_bytes": 81187,
+      "source_complete": false
+    },
+    "apollo_main": {
+      "blocker_class": "typed-retained-or-external-apollo-bytes",
+      "buckets": {
+        "candidate_source_not_routed": 0,
+        "generated_or_reconstructible": 395324,
+        "production_source": 529150,
+        "typed_retained_or_external": 3032198,
+        "unclassified": 0
+      },
+      "classification_complete": true,
+      "exit_criteria": [
+        "Replace or source-model all retained Apollo-main raw/mixed boundary code currently covered by AM helper transcript sources.",
+        "Resolve PC-relative/PC operand, nonlinear literal/data island, vector, IT-block, branch-target, and linear raw instruction text blockers without raw instruction transcript production routing.",
+        "Drive Apollo-main release_blocking_bytes to zero while preserving deterministic apple-clang source-only package verification."
+      ],
+      "production_routed": true,
+      "release_blocking_bytes": 3032198,
+      "source_complete": false
+    },
+    "ble_em9305": {
+      "blocker_class": "typed-retained-or-external-controller-code",
+      "buckets": {
+        "candidate_source_not_routed": 0,
+        "generated_or_reconstructible": 1210,
+        "production_source": 1190,
+        "typed_retained_or_external": 210584,
+        "unclassified": 0
+      },
+      "classification_complete": true,
+      "exit_criteria": [
+        "Resolve EM9305 unavailable proprietary controller code and typed unsupported external boundaries to concrete source or authorized provider payloads.",
+        "Production-route any required hardware/provider boundaries such as slave connection, PAwR, and master connection spans.",
+        "Preserve the authenticated residual ledger with zero unclassified bytes."
+      ],
+      "production_routed": true,
+      "release_blocking_bytes": 210584,
+      "source_complete": false
+    },
+    "case": {
+      "blocker_class": "hardware-dependent-board-routing",
+      "buckets": {
+        "candidate_source_not_routed": 14886,
+        "generated_or_reconstructible": 32,
+        "production_source": 0,
+        "typed_retained_or_external": 40866,
+        "unclassified": 0
+      },
+      "classification_complete": true,
+      "exit_criteria": [
+        "Resolve hardware-dependent board routing for the source-built charging-case image.",
+        "Production-route project source candidates and typed external/unsupported physical buckets.",
+        "Prove board services, GPIO/timer routing, dual-bank updater handoff, and preserved identity copy-forward on the target contract."
+      ],
+      "production_routed": false,
+      "release_blocking_bytes": 55752,
+      "source_complete": false
+    },
+    "codec": {
+      "blocker_class": "not-production-routed",
+      "buckets": {
+        "candidate_source_not_routed": 0,
+        "generated_or_reconstructible": 92,
+        "production_source": 0,
+        "typed_retained_or_external": 326000,
+        "unclassified": 0
+      },
+      "classification_complete": true,
+      "exit_criteria": [
+        "Provide source-owned or redistributable exact-provider implementations for all 11 GX8002 typed external spans.",
+        "Resolve proprietary model data, opaque executable/runtime data, and gxNPU command stream redistribution/source authority.",
+        "Production-route the codec provider without increasing unclassified bytes."
+      ],
+      "production_routed": false,
+      "release_blocking_bytes": 326000,
+      "source_complete": false
+    },
+    "touch": {
+      "blocker_class": "hardware-dependent-resident-abi",
+      "buckets": {
+        "candidate_source_not_routed": 14510,
+        "generated_or_reconstructible": 512,
+        "production_source": 0,
+        "typed_retained_or_external": 19442,
+        "unclassified": 0
+      },
+      "classification_complete": true,
+      "exit_criteria": [
+        "Resolve the touch resident ABI and physical board-service routing.",
+        "Production-route project source candidates and typed physical buckets including CapSense/CAT2 provider bytes, owner-unresolved code, literals, vectors, strings, and configuration tables.",
+        "Preserve the software-complete source image and FWPK package while proving stock-byte authority or replacement mappings."
+      ],
+      "production_routed": false,
+      "release_blocking_bytes": 33952,
+      "source_complete": false
+    }
+  },
+  "global_blockers": [
+    "source_ownership_quality"
+  ],
+  "global_exit_criteria": {
+    "source_ownership_quality": [
+      "Replace public raw instruction transcript sources with source-owned code models or remove them from production routing.",
+      "Reduce public_unrouted_raw_instruction_transcript_files and public_unrouted_raw_instruction_transcript_bytes to zero.",
+      "Drive source_owned_bytes_currently_overstated back to zero while preserving macOS apple-clang source-only verification."
+    ]
+  },
+  "ready": false,
+  "release_blocking_bytes": 3739673,
+  "remediation_queue": [
+    {
+      "blocking_bytes": null,
+      "exit_criteria": [
+        "Replace public raw instruction transcript sources with source-owned code models or remove them from production routing.",
+        "Reduce public_unrouted_raw_instruction_transcript_files and public_unrouted_raw_instruction_transcript_bytes to zero.",
+        "Drive source_owned_bytes_currently_overstated back to zero while preserving macOS apple-clang source-only verification."
+      ],
+      "kind": "global_gate",
+      "priority": 0,
+      "scope": "source_ownership_quality"
+    },
+    {
+      "blocker_class": "typed-retained-or-external-apollo-bytes",
+      "blocking_bytes": 3032198,
+      "exit_criteria": [
+        "Replace or source-model all retained Apollo-main raw/mixed boundary code currently covered by AM helper transcript sources.",
+        "Resolve PC-relative/PC operand, nonlinear literal/data island, vector, IT-block, branch-target, and linear raw instruction text blockers without raw instruction transcript production routing.",
+        "Drive Apollo-main release_blocking_bytes to zero while preserving deterministic apple-clang source-only package verification."
+      ],
+      "kind": "component_release_blocker",
+      "priority": 1,
+      "production_routed": true,
+      "scope": "apollo_main"
+    },
+    {
+      "blocker_class": "not-production-routed",
+      "blocking_bytes": 326000,
+      "exit_criteria": [
+        "Provide source-owned or redistributable exact-provider implementations for all 11 GX8002 typed external spans.",
+        "Resolve proprietary model data, opaque executable/runtime data, and gxNPU command stream redistribution/source authority.",
+        "Production-route the codec provider without increasing unclassified bytes."
+      ],
+      "kind": "component_release_blocker",
+      "priority": 2,
+      "production_routed": false,
+      "scope": "codec"
+    },
+    {
+      "blocker_class": "typed-retained-or-external-controller-code",
+      "blocking_bytes": 210584,
+      "exit_criteria": [
+        "Resolve EM9305 unavailable proprietary controller code and typed unsupported external boundaries to concrete source or authorized provider payloads.",
+        "Production-route any required hardware/provider boundaries such as slave connection, PAwR, and master connection spans.",
+        "Preserve the authenticated residual ledger with zero unclassified bytes."
+      ],
+      "kind": "component_release_blocker",
+      "priority": 3,
+      "production_routed": true,
+      "scope": "ble_em9305"
+    },
+    {
+      "blocker_class": "typed-retained-or-external-apollo-bytes",
+      "blocking_bytes": 81187,
+      "exit_criteria": [
+        "Replace retained official bootloader intervals with source-owned equivalents or authorized external boundaries.",
+        "Prioritize EasyLogger, redirect-init, SpotMgr, platform-services, and post-redirect retained interval families.",
+        "Keep bootloader production routing and source-owned in-place accounting conserved."
+      ],
+      "kind": "component_release_blocker",
+      "priority": 4,
+      "production_routed": true,
+      "scope": "apollo_bootloader"
+    },
+    {
+      "blocker_class": "hardware-dependent-board-routing",
+      "blocking_bytes": 55752,
+      "exit_criteria": [
+        "Resolve hardware-dependent board routing for the source-built charging-case image.",
+        "Production-route project source candidates and typed external/unsupported physical buckets.",
+        "Prove board services, GPIO/timer routing, dual-bank updater handoff, and preserved identity copy-forward on the target contract."
+      ],
+      "kind": "component_release_blocker",
+      "priority": 5,
+      "production_routed": false,
+      "scope": "case"
+    },
+    {
+      "blocker_class": "hardware-dependent-resident-abi",
+      "blocking_bytes": 33952,
+      "exit_criteria": [
+        "Resolve the touch resident ABI and physical board-service routing.",
+        "Production-route project source candidates and typed physical buckets including CapSense/CAT2 provider bytes, owner-unresolved code, literals, vectors, strings, and configuration tables.",
+        "Preserve the software-complete source image and FWPK package while proving stock-byte authority or replacement mappings."
+      ],
+      "kind": "component_release_blocker",
+      "priority": 6,
+      "production_routed": false,
+      "scope": "touch"
+    }
+  ],
+  "schema_version": 1
+}

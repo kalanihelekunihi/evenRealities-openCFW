@@ -29,9 +29,12 @@
  *       restore r4; (C clear) ? goto 0x004275C4 : return
  *     The `blo.w` target is the System-PLL alternate setter entry
  *     admitted in this same turn (identical bytes in the built
- *     image); the MVN/CMN flag detail is pinned by the host twin,
- *     which takes the incoming APSR explicitly because the HS
- *     path leaves the head's flags untouched.
+ *     image). It is expressed as a reviewed `R_ARM_THM_JUMP19`
+ *     relocation against that fixed-address entry, so the source
+ *     carries the conditional transfer semantics without a raw
+ *     instruction transcript. The MVN/CMN flag detail is pinned by
+ *     the host twin, which takes the incoming APSR explicitly
+ *     because the HS path leaves the head's flags untouched.
  *
  * Both spans are unreachable in the built image: the status span
  * sits in a region the whole-image retained survey grades
@@ -102,18 +105,10 @@ void open_cfw_bootloader_binary32_rem_tail_427d84(
 {
 #if defined(__arm__) || defined(__thumb__)
     /* The closing `blo.w` targets 0x004275C4, which lies outside
-     * this section: the relocatable object assembles at address 0
-     * and the integrated assembler rejects the far-absolute
-     * mnemonic operand ("branch target out of range"), so the
-     * instruction is spelled with its reviewed encoding. The
-     * branch sits at 0x00427D92 (PC 0x00427D96) and targets
-     * 0x004275C4: offset -2002, whose B.W T4 encoding the
-     * reference assembler produces as F4 FF AC 17 for an
-     * identical LO-conditional branch at the identical offset
-     * (assembler probe: `blo.w` to a local label 2002 bytes back
-     * emits `ff f4 17 ac`; the +10 `b` probe likewise emits the
-     * stock `05 e0`). `.inst.w` carries the 32-bit opcode; the
-     * byte-exact rebuild test pins the emission. */
+     * this section.  A reviewed fixed-address JUMP19 relocation is
+     * attached to the canonical `blo.w .` placeholder; the in-place
+     * extractor verifies the global undefined STT_NOTYPE symbol and
+     * materializes the stock `ff f4 17 ac` conditional branch. */
     __asm__ volatile(
         "ite hs\n"
         "mvnhs r0, r3\n"
@@ -121,7 +116,8 @@ void open_cfw_bootloader_binary32_rem_tail_427d84(
         "it ne\n"
         "mvnne r0, r3\n"
         "pop.w {r4, lr}\n"
-        ".inst.w 0xF4FFAC17\n"
+        ".reloc ., R_ARM_THM_JUMP19, open_cfw_bootloader_syspll_alt_entry_4275c4\n"
+        "blo.w .\n"
         "bx lr\n");
 #else
     /* Host twin with an explicit APSR model (bit 29 = C, bit 30 =

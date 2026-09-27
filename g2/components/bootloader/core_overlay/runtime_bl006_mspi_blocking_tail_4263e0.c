@@ -28,12 +28,10 @@
  * and `open_cfw_bootloader_mspi_fifo_write_423e40`, named as
  * reviewed R_ARM_THM_CALL relocations (bitmap-client precedent).
  * The delay-service call targets 0x0041D246, which stays retained
- * under another work item and has no source symbol; the
- * relocatable object cannot name it, so the instruction is
- * spelled with its reviewed 32-bit encoding (`.inst.w`,
- * binary32-tail precedent). The probe below proves the reference
- * assembler emits the identical bytes for an identical `bl` at
- * the identical offset (-37362).
+ * under another work item and has no source symbol. It is named
+ * as a reviewed fixed-address R_ARM_THM_CALL relocation so the
+ * source carries the call semantics without a raw instruction
+ * transcript.
  *
  * This leaf covers 0x004263E0..0x0042644C (108 B, closing
  * with the 4-byte `pop.w` at 0x00426448) and stops where the
@@ -73,11 +71,10 @@ open_cfw_bl006_bt_u32 open_cfw_bootloader_mspi_blocking_rem_tail_4263e0(
     open_cfw_bl006_bt_u32 r7_in)
 {
 #if defined(__arm__) || defined(__thumb__)
-    /* Delay call at 0x00426434 targets retained 0x0041D246
-     * (PC 0x00426438, offset -37362, stock bytes
-     * f6 f7 07 ff). `.inst.w` takes the opcode halves in
-     * reading order (first halfword high), so the spelling is
-     * 0xF7F6FF07 for stock bytes f6 f7 07 ff. */
+    /* Delay call at 0x00426434 targets retained 0x0041D246.
+     * A reviewed fixed-address CALL relocation is attached to
+     * the canonical `bl .` placeholder; the in-place extractor
+     * materializes the stock `f6 f7 07 ff` branch-with-link. */
     __asm__ volatile(
         "adds r2, #4\n"
         "str.w lr, [r2]\n"
@@ -111,7 +108,8 @@ open_cfw_bl006_bt_u32 open_cfw_bootloader_mspi_blocking_rem_tail_4263e0(
         "movs r3, #2\n"
         "movs r2, #2\n"
         "adds.w r1, r5, r4, lsl #12\n"
-        ".inst.w 0xF7F6FF07\n"
+        ".reloc ., R_ARM_THM_CALL, open_cfw_bootloader_delay_service_41d246\n"
+        "bl .\n"
         "adds.w r1, r5, r4, lsl #12\n"
         "str.w r7, [r1, #0x208]\n"
         "adds.w r5, r5, r4, lsl #12\n"
@@ -146,7 +144,7 @@ open_cfw_bl006_bt_u32 open_cfw_bootloader_mspi_blocking_rem_tail_4263e0(
 
 #if defined(__arm__) || defined(__thumb__)
 /* Assembler probe: identical `bl` at the identical offset
- * (-37362) proves the reviewed `.inst.w` spelling. The section
+ * (-37362) proves the reviewed call encoding. The section
  * is discarded from the firmware image. */
 OPEN_CFW_BL006_BT_ATTR
 void open_cfw_bl006_bt_probe_bl_37362_back(void)

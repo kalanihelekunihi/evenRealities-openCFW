@@ -31,7 +31,7 @@ class TouchSourceImageAdmissionTests(unittest.TestCase):
         self.assertLessEqual(self.report["metrics"]["raw_flash_bytes"], 65536)
 
     def test_artifact_identity_and_source_inventory_are_pinned(self) -> None:
-        self.assertEqual(len(self.report["artifacts"]["source_inventory"]), 32)
+        self.assertEqual(len(self.report["artifacts"]["source_inventory"]), 33)
         self.assertTrue(all(len(row["sha256"]) == 64
                             for row in self.report["artifacts"]["source_inventory"]))
         self.assertTrue(all(len(self.report["artifacts"][key]) == 64 for key in (

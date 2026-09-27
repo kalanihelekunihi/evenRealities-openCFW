@@ -33,15 +33,8 @@
  * service `open_cfw_bootloader_mspi_cq_enable_423f8e`, named as
  * a reviewed R_ARM_THM_CALL relocation. All thirteen
  * out-of-span branches (two narrow conditionals, eleven wide)
- * are spelled with reviewed encodings (`.inst` / `.inst.w`,
- * binary32-tail precedent). The two narrow exits carry
- * in-source assembler probes proving the reference assembler
- * emits the identical bytes at the identical offsets; the
- * eleven wide exits are pinned instead by decoder verification
- * (the verifier disassembles each spelled site and checks the
- * branch target), because the reference assembler emits a
- * one-variant-bit different yet equally-correct `b.w` encoding
- * than the stock toolchain for these offsets. Internal
+ * are expressed as reviewed fixed-address JUMP8/JUMP24
+ * relocations on canonical branch placeholders. Internal
  * branches name local labels normally.
  *
  * The whole-image survey grades the span
@@ -81,34 +74,10 @@ open_cfw_bl006_cd_u32 open_cfw_bootloader_mspi_control_rem_tail_42612c(
     open_cfw_bl006_cd_u32 *exit_out)
 {
 #if defined(__arm__) || defined(__thumb__)
-    /* Out-of-span exits and their reviewed spellings (stock
-     * bytes in parentheses):
-     * 0x42613E bne 0x4260F4, off -78 (d9 d1): .inst 0xD1D9
-     * 0x42614A beq 0x4260F4, off -90 (d3 d0): .inst 0xD0D3
-     * 0x42614E b.w 0x4252E8, off -3946 (ff f7 cb b8):
-     *   .inst.w 0xF7FFB8CB
-     * 0x42615A b.w 0x4252E8, off -3952 (ff f7 c5 b8):
-     *   .inst.w 0xF7FFB8C5
-     * 0x42616C b.w 0x4252E8, off -3976 (ff f7 bc b8):
-     *   .inst.w 0xF7FFB8BC
-     * 0x42619E b.w 0x4252E6, off -4028 (ff f7 a2 b8):
-     *   .inst.w 0xF7FFB8A2
-     * 0x4261A8 b.w 0x4252E8, off -4036 (ff f7 9e b8):
-     *   .inst.w 0xF7FFB89E
-     * 0x4261E6 b.w 0x4252E6, off -4100 (ff f7 7e b8):
-     *   .inst.w 0xF7FFB87E
-     * 0x4261FC b.w 0x4252E6, off -4122 (ff f7 73 b8):
-     *   .inst.w 0xF7FFB873
-     * 0x426212 b.w 0x4252E6, off -4144 (ff f7 68 b8):
-     *   .inst.w 0xF7FFB868
-     * 0x42621C b.w 0x4252E8, off -4152 (ff f7 64 b8):
-     *   .inst.w 0xF7FFB864
-     * 0x4262D6 b.w 0x4252E6, off -4340 (ff f7 06 b8):
-     *   .inst.w 0xF7FFB806
-     * 0x4262DC b.w 0x4252E8, off -4344 (ff f7 04 b8):
-     *   .inst.w 0xF7FFB804
-     * (`.inst.w` takes opcode halves in reading order:
-     * first halfword high.) */
+    /* Out-of-span exits target replaced-head joins at 0x004260F4,
+     * 0x004252E6, and 0x004252E8. Reviewed branch relocations
+     * attached to canonical placeholders materialize the stock
+     * narrow and wide branches. */
     __asm__ volatile(
         "ldr.w r0, [r5, #0x85c]\n"
         "adds r0, r0, #1\n"
@@ -116,19 +85,23 @@ open_cfw_bl006_cd_u32 open_cfw_bootloader_mspi_control_rem_tail_42612c(
         "mov r0, sl\n"
         "msr primask, r0\n"
         "cmp r6, #0\n"
-        ".inst 0xD1D9\n"
+        ".reloc ., R_ARM_THM_JUMP8, open_cfw_bootloader_mspi_control_head_4260f4\n"
+        "bne.n .\n"
         "movs r0, r7\n"
         "bl open_cfw_bootloader_mspi_cq_enable_423f8e\n"
         "movs r4, r0\n"
         "cmp r4, #0\n"
-        ".inst 0xD0D3\n"
+        ".reloc ., R_ARM_THM_JUMP8, open_cfw_bootloader_mspi_control_head_4260f4\n"
+        "beq.n .\n"
         "movs r0, r4\n"
-        ".inst.w 0xF7FFB8CB\n"
+        ".reloc ., R_ARM_THM_JUMP24, open_cfw_bootloader_mspi_control_exit_e8_4252e8\n"
+        "b.w .\n"
         "movs r0, r2\n"
         "cmp r2, #0\n"
         "bne 0f\n"
         "movs r0, #6\n"
-        ".inst.w 0xF7FFB8C5\n"
+        ".reloc ., R_ARM_THM_JUMP24, open_cfw_bootloader_mspi_control_exit_e8_4252e8\n"
+        "b.w .\n"
         "0: ldrb r1, [r0]\n"
         "cmp r1, #4\n"
         "bge 1f\n"
@@ -136,7 +109,8 @@ open_cfw_bl006_cd_u32 open_cfw_bootloader_mspi_control_rem_tail_42612c(
         "cmp r1, #2\n"
         "blt 2f\n"
         "1: movs r0, #6\n"
-        ".inst.w 0xF7FFB8BC\n"
+        ".reloc ., R_ARM_THM_JUMP24, open_cfw_bootloader_mspi_control_exit_e8_4252e8\n"
+        "b.w .\n"
         "2: ldrb r2, [r0, #1]\n"
         "ands r2, r2, #1\n"
         "ldr.w r1, [pc, #0x68c]\n"
@@ -153,11 +127,13 @@ open_cfw_bl006_cd_u32 open_cfw_bootloader_mspi_control_rem_tail_42612c(
         "bfi r2, r0, #5, #2\n"
         "str r2, [r1]\n"
         "movs r4, #0\n"
-        ".inst.w 0xF7FFB8A2\n"
+        ".reloc ., R_ARM_THM_JUMP24, open_cfw_bootloader_mspi_control_exit_e6_4252e6\n"
+        "b.w .\n"
         "cmp r2, #0\n"
         "bne 3f\n"
         "movs r0, #6\n"
-        ".inst.w 0xF7FFB89E\n"
+        ".reloc ., R_ARM_THM_JUMP24, open_cfw_bootloader_mspi_control_exit_e8_4252e8\n"
+        "b.w .\n"
         "3: ldrb r1, [r2, #9]\n"
         "ands r1, r1, #0x3f\n"
         "ldr.w r0, [pc, #0x650]\n"
@@ -179,25 +155,29 @@ open_cfw_bl006_cd_u32 open_cfw_bootloader_mspi_control_rem_tail_42612c(
         "bfi r2, r1, #0xd, #1\n"
         "str r2, [r0]\n"
         "movs r4, #0\n"
-        ".inst.w 0xF7FFB87E\n"
+        ".reloc ., R_ARM_THM_JUMP24, open_cfw_bootloader_mspi_control_exit_e6_4252e6\n"
+        "b.w .\n"
         "ldr.w r0, [pc, #0x618]\n"
         "adds.w r0, r0, r6, lsl #12\n"
         "adds r0, #0x90\n"
         "ldr r1, [r0]\n"
         "bics r1, r1, #0x40\n"
         "str r1, [r0]\n"
-        ".inst.w 0xF7FFB873\n"
+        ".reloc ., R_ARM_THM_JUMP24, open_cfw_bootloader_mspi_control_exit_e6_4252e6\n"
+        "b.w .\n"
         "ldr.w r0, [pc, #0x600]\n"
         "adds.w r0, r0, r6, lsl #12\n"
         "adds r0, r0, #0x90\n"
         "ldr r1, [r0]\n"
         "orrs r1, r1, #0x40\n"
         "str r1, [r0]\n"
-        ".inst.w 0xF7FFB868\n"
+        ".reloc ., R_ARM_THM_JUMP24, open_cfw_bootloader_mspi_control_exit_e6_4252e6\n"
+        "b.w .\n"
         "cmp r2, #0\n"
         "bne 4f\n"
         "movs r0, #6\n"
-        ".inst.w 0xF7FFB864\n"
+        ".reloc ., R_ARM_THM_JUMP24, open_cfw_bootloader_mspi_control_exit_e8_4252e8\n"
+        "b.w .\n"
         "4: ldrb r0, [r2, #4]\n"
         "cmp r0, #0\n"
         "beq 5f\n"
@@ -265,9 +245,11 @@ open_cfw_bl006_cd_u32 open_cfw_bootloader_mspi_control_rem_tail_42612c(
         "lsrs r1, r1, #1\n"
         "lsls r1, r1, #1\n"
         "str r1, [r0]\n"
-        "6: .inst.w 0xF7FFB806\n"
+        "6: .reloc ., R_ARM_THM_JUMP24, open_cfw_bootloader_mspi_control_exit_e6_4252e6\n"
+        "b.w .\n"
         "movs r0, #6\n"
-        ".inst.w 0xF7FFB804\n");
+        ".reloc ., R_ARM_THM_JUMP24, open_cfw_bootloader_mspi_control_exit_e8_4252e8\n"
+        "b.w .\n");
 #else
     /* Host twin: entry selects the stock entry (0-7 for
      * A0-A7); exit_out reports the rejoined head address class

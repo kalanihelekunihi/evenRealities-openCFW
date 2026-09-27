@@ -8,6 +8,12 @@ Image: `blobs/official/g2-2.2.6.10/firmware_box.bin`, SHA-256
 - Analyzer: `tools/analyze_g2_case_byte_accounting.py` (read-only, deterministic)
 - Manifest: `tools/manifests/g2-case-byte-accounting.tsv` (1,135 rows)
 - Machine summary: `tools/manifests/g2-case-byte-accounting-summary.json`
+- Log-string manifest: `tools/manifests/g2-case-log-string-candidates.tsv`
+- Residual shape manifest: `tools/manifests/g2-case-residual-shape.tsv`
+- Residual recovery queue: `tools/manifests/g2-case-residual-recovery-queue.tsv`
+- Residual recovery rows: `tools/manifests/g2-case-residual-recovery-rows.tsv`
+- Residual non-target rows: `tools/manifests/g2-case-residual-non-target-rows.tsv`
+- Residual entry candidates: `tools/manifests/g2-case-residual-entry-candidates.tsv`
 - Fail-closed test: `tests/test_analyze_g2_case_byte_accounting.py` (10 tests)
 
 ## Why this exists
@@ -37,24 +43,34 @@ non-overlapping accounting of every byte in the range, in priority order:
    at `0x08004B94` sits inside the platform doc's HAL-flash-credential
    island `0x08004B8C..0x08004C1C`; the function's clean-room source is the
    stronger claim there, so it wins the byte).
-3. `gap_frontier_<classification>` (2,120 B of the 40,866) — the 229
+3. `function_map_<ownership_category>` (25,314 B of the 40,866) — the
+   authenticated Ghidra function map's non-`unresolved` function rows, wherever
+   they do not overlap an admitted source-candidate function or platform island.
+   These bytes are named as upstream CMSIS/startup, FreeRTOS/CMSIS-RTOS2,
+   STM32-HAL, or first-party G2 policy, but they are still not source-owned
+   until routed to reviewed providers.
+4. `function_map_gap_<ownership_category>` (12,328 B of the 40,866) — the
+   authenticated function-map gap rows that carry positive non-`unresolved`
+   evidence, primarily first-party log/status rodata plus the vector/pre-code
+   gap. These bytes are evidence-attributed, not source-owned.
+5. `gap_frontier_<classification>` (2,120 B of the 40,866) — the 229
    final-frontier inter-function gap spans, wherever they don't overlap a
    platform island (64 bytes of the 2,184 do; same tie-break).
-4. Everything left over (37,642 B) is sub-typed by content alone:
-   `residual_zero_fill` / `residual_ff_fill` (pure runs >= 4 bytes: 424 + 4 =
-   428 B), `residual_log_string_candidate` (printable-ASCII runs >= 6 bytes:
-   7,826 B — the compressed-log string corpus `g2-box-stm32g0-platform-
-   recovery.md` flagged as pointer-less and therefore unanchored), and
-   `residual_unresolved_code_or_data` (29,388 B — still opaque).
+6. No bytes remain in the content-only residual buckets:
+   `residual_zero_fill`, `residual_ff_fill`,
+   `residual_log_string_candidate`, and
+   `residual_unresolved_code_or_data` are all 0 B.
 
-Total: 14,886 + 1,104 + 2,120 + 428 + 7,826 + 29,388 = 55,752, conserving the
+Total: 14,886 + 1,104 + 25,314 + 12,328 + 2,120 = 55,752, conserving the
 application image exactly; the typed_external_or_unsupported sub-total
-(1,104 + 2,120 + 428 + 7,826 + 29,388 = 40,866) matches the pinned whole-blob
+(1,104 + 25,314 + 12,328 + 2,120 = 40,866) matches the pinned whole-blob
 bucket. All figures are enforced as test assertions, not just observed once.
 
 ## Data tables, strings, identity windows, fill (this item's scope)
 
-- **Strings.** 7,826 bytes are real, human-legible debug/log strings —
+- **Strings.** The former residual string corpus is now attributed by the
+  function-map gap layer as first-party log/status rodata. Those strings are
+  real, human-legible debug/log strings —
   `Set SN:`, `1.2.57`, `%s reset GLS`, `B200 %s, %d`,
   `Standby, reason: cmd.`, `%s watchdog 4005`, `One-side charging: %s`,
   `Set PMIC chip id to 0x08`, the `{"vol":%d,...}` JSON status template, and
@@ -71,7 +87,11 @@ bucket. All figures are enforced as test assertions, not just observed once.
   `g2-box-stm32g0-platform-recovery.md` flags as unresolved (most strings
   have no pointer literal; only a 34-pointer `0x0800Dxxx` page is directly
   referenced — consistent with an indexed `compress_log` strip whose ID
-  encoding is unknown). Flagged as follow-up, not attempted here.
+  encoding is unknown). `tools/analyze_g2_case_byte_accounting.py` now emits
+  an empty residual string TSV with digest
+  `4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945`;
+  the strings are attributed, not source-owned.
+  Flagged as follow-up, not attempted here.
 - **Data tables.** No CRC/lookup table was found in the range (the platform
   doc already proved CRC-16/CRC-32 tables are absent — the CRC is bit-wise).
   The application task/timer descriptor table (`0x0800D2C0..0x0800D3A0`,
@@ -110,12 +130,17 @@ address. This is an **intentional divergence**, not an oversight:
    output for equivalent source, and pursuing byte-identity would pressure
    toward copying disassembly rather than writing independent source — the
    opposite of this project's clean-room requirement.
-2. `residual_unresolved_code_or_data` (29,388 B, 53% of the whole
-   application image) has no discovered function boundaries at all. There is
-   no reviewed source to place at a matching offset for the majority of the
-   image; an exact-layout linker script today could only be populated by
-   copying stock bytes, which `source-only-goal.md` explicitly excludes
-   ("binary bytes encoded as C arrays... do not satisfy this goal").
+2. `residual_unresolved_code_or_data` is now empty. The residual-shape
+   analyzer still runs and emits authenticated header-only manifests with
+   empty-list digest
+   `4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945`.
+   The recovery/non-target partition is also empty and pinned by digest
+   `8b8a0fb3dfaf65d7b832fa22e87151d7d6dbc06266643848b58dc61cded876df`.
+   There is still no
+   reviewed source to place at a matching offset for the majority of the image;
+   an exact-layout linker script today could only be populated by copying stock
+   bytes, which `source-only-goal.md` explicitly excludes ("binary bytes
+   encoded as C arrays... do not satisfy this goal").
 3. The completion conditions require functionality to be produced from
    reviewed source, not exact size/layout; layout matching is useful for
    differential testing against the stock oracle, not a hard gate this
@@ -148,4 +173,7 @@ cd g2 && PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 \
 
 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 \
   tools/analyze_g2_case_byte_accounting.py --write-manifests
+
+PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 \
+  tools/analyze_g2_case_residual_shape.py --write-manifests
 ```

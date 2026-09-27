@@ -16,7 +16,7 @@ def verify():
     for pending,c0,c1,mutation,status in product((0,1,2,3,4,0x80000000,0xffffffff),(0,0x10004054),(0,0x10004034),(False,True),(0,1,0xffffffff)):
         args=(pending,(c0,c1),mutation,status)
         a=irq(standalone,0x10004c04,*args,helper_addresses={0x10004bc0:0x10203a98})
-        b=irq(combined,0x10004c04,*args,helper_addresses={0x10004bc0:0x10203a98})
+        b=irq(combined,0x10004c00,*args,helper_addresses={0x10004bc0:0x10203a98})
         assert a==b and b[0]==0 and b[1]==expected(pending,(c0,c1),mutation)
         counts['irq']+=1
     standalone=decode((ROOT/'build/gx8002-backup-dma-deallocate/deallocate.disassembly.txt').read_text())

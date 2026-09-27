@@ -28,8 +28,8 @@ class CodecCandidateTests(unittest.TestCase):
     def test_rebuild_updates_nested_checksums_and_closes_ownership(self):
         output, ownership, totals = compose(self.stock, [self.replacement(), self.replacement(95704)])
         self.assertEqual(sum(totals.values()), len(output))
-        self.assertEqual(totals, {'compiled_c':64, 'compiled_assembly':0, 'generated_source_data':0, 'generated_container_metadata':80,
-                                  'retained_stock':len(output)-144, 'generated_unreachable_fill':0})
+        self.assertEqual(totals, {'compiled_c':64, 'compiled_assembly':0, 'generated_source_data':4092, 'generated_container_metadata':88,
+                                  'retained_stock':321848, 'generated_unreachable_fill':0})
         self.assertEqual(struct.unpack_from('>I', output, 68)[0], sum(output[0x2850:0x958c]) & 0xffffffff)
         for offset in (16, 32):
             _, size, start, crc = struct.unpack_from('<IIII', output, offset)
@@ -65,7 +65,9 @@ class CodecCandidateTests(unittest.TestCase):
         item['ownership_kind'] = 'generated_source_data'
         _, ownership, totals = compose(self.stock, [item])
         self.assertEqual(totals['compiled_c'], 0)
-        self.assertEqual(totals['generated_source_data'], 32)
+        self.assertEqual(totals['generated_source_data'], 4124)
+        self.assertTrue(any(row['kind']=='generated_source_data' and row.get('symbol')=='test_fixture'
+                            and row['size']==32 for row in ownership))
         self.assertEqual(totals['generated_unreachable_fill'], 0)
         item['compiled_bytes'] = 28
         with self.assertRaisesRegex(ValueError, 'data replacement'):

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Supervise one persisted coding-agent session across provider usage limits."""
+"""Retired incremental G2 supervisor; helpers remain for historical tests.
+
+The CLI permits help and read-only checkpoint descriptions only. Current
+workflow: g2/workflow/README.md.
+"""
 import datetime as dt
 import fcntl
 import json
@@ -315,7 +319,15 @@ def describe(checkpoint):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 3 and sys.argv[1] == "--describe":
+    if len(sys.argv) == 1 or sys.argv[1] in ("--help", "-h", "help"):
+        print("The incremental G2 supervisor is retired. See g2/workflow/README.md.\n"
+              "Read-only usage: continue_analysis_session.py --describe CHECKPOINT\n"
+              "Session launch and resumption are disabled; there is no override.")
+    elif len(sys.argv) == 3 and sys.argv[1] == "--describe":
+        print("Historical command description only; execution is retired. "
+              "See g2/workflow/README.md.")
         describe(Path(sys.argv[2]))
     else:
-        raise SystemExit(run(Path(sys.argv[1])))
+        print("The incremental G2 supervisor is retired; launch and resumption "
+              "are disabled. See g2/workflow/README.md.", file=sys.stderr)
+        raise SystemExit(2)

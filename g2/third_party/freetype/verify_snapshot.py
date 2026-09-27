@@ -20,7 +20,7 @@ EXPECTED_SOURCE_RECORDS_SHA256 = (
 EXPECTED_SOURCE_FILE_COUNT = 297
 EXPECTED_COMMUNITY_SOURCE_ADMISSION = {
     ROOT / "manifests/g2-2.2.6.10-core-source.json":
-        "103920a8157e16227151672565b150350f7cc6c2f9a83d6b857d54a8e5abf834",
+        "35d0e79d48014d79077e9c198277242542687e721382af3de3f3211cf706d456",
     ROOT / "components/apollo_main/core_overlay/build_component.py":
         "ff1b3d78f4f2d071bb653374f8ce557a5a6d0f0a7a23b8525743a21b4068d066",
     ROOT / "components/apollo_main/liblc3_encoder/build_service_audio_atomic_component.py":

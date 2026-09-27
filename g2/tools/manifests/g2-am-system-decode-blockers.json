@@ -1,0 +1,532 @@
+{
+  "aggregate_system_counts": {
+    "bkpt": 8,
+    "cdp": 3,
+    "ldc2": 1,
+    "ldc2l": 51,
+    "mcrr2": 1,
+    "mrc": 4,
+    "stc2": 4,
+    "stc2l": 2,
+    "svc": 2,
+    "udf": 4
+  },
+  "blocker_bytes": 1874,
+  "blocker_count": 21,
+  "blockers": [
+    {
+      "byte_length": 10,
+      "function": "open_cfw_runtime_am157_0x005c7154",
+      "instruction_count": 4,
+      "longest_zero_halfword_run": 0,
+      "macro": "OPEN_CFW_AM157_0X005C7154_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am157_helpers.c",
+      "system_counts": {
+        "mcrr2": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "mcrr2 p7, #4, r0, r8, c9",
+          "offset": 2
+        }
+      ],
+      "system_instruction_count": 1,
+      "zero_halfword_count": 0
+    },
+    {
+      "byte_length": 10,
+      "function": "open_cfw_runtime_am157_0x005c71a4",
+      "instruction_count": 3,
+      "longest_zero_halfword_run": 0,
+      "macro": "OPEN_CFW_AM157_0X005C71A4_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am157_helpers.c",
+      "system_counts": {
+        "bkpt": 1,
+        "cdp": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "bkpt #0xfe",
+          "offset": 4
+        },
+        {
+          "instruction": "cdp p4, #0xe, c15, c9, c9, #7",
+          "offset": 6
+        }
+      ],
+      "system_instruction_count": 2,
+      "zero_halfword_count": 0
+    },
+    {
+      "byte_length": 10,
+      "function": "open_cfw_runtime_am160_0x005cb44e",
+      "instruction_count": 3,
+      "longest_zero_halfword_run": 0,
+      "macro": "OPEN_CFW_AM160_0X005CB44E_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am160_helpers.c",
+      "system_counts": {
+        "cdp": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "cdp p2, #0xe, c14, c9, c5, #7",
+          "offset": 2
+        }
+      ],
+      "system_instruction_count": 1,
+      "zero_halfword_count": 0
+    },
+    {
+      "byte_length": 292,
+      "function": "open_cfw_runtime_am179_0x005f4d8e",
+      "instruction_count": 115,
+      "longest_zero_halfword_run": 0,
+      "macro": "OPEN_CFW_AM179_0X005F4D8E_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am179_helpers.c",
+      "system_counts": {
+        "bkpt": 1,
+        "ldc2l": 31
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p13, c15, [sp, #0x3f4]!",
+          "offset": 0
+        },
+        {
+          "instruction": "ldc2l p13, c15, [sp, #0x3f4]!",
+          "offset": 4
+        },
+        {
+          "instruction": "ldc2l p13, c15, [sp, #0x3f4]!",
+          "offset": 8
+        },
+        {
+          "instruction": "ldc2l p13, c15, [sp, #0x3f4]!",
+          "offset": 12
+        }
+      ],
+      "system_instruction_count": 32,
+      "zero_halfword_count": 0
+    },
+    {
+      "byte_length": 20,
+      "function": "open_cfw_runtime_am180_0x005f4f80",
+      "instruction_count": 9,
+      "longest_zero_halfword_run": 8,
+      "macro": "OPEN_CFW_AM180_0X005F4F80_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am180_helpers.c",
+      "system_counts": {
+        "stc2": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "stc2 p0, c0, [lr, #-0x1fc]",
+          "offset": 0
+        }
+      ],
+      "system_instruction_count": 1,
+      "zero_halfword_count": 8
+    },
+    {
+      "byte_length": 38,
+      "function": "open_cfw_runtime_am180_0x005f50ea",
+      "instruction_count": 18,
+      "longest_zero_halfword_run": 11,
+      "macro": "OPEN_CFW_AM180_0X005F50EA_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am180_helpers.c",
+      "system_counts": {
+        "ldc2l": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p13, c15, [lr, #-0x7c]",
+          "offset": 10
+        }
+      ],
+      "system_instruction_count": 1,
+      "zero_halfword_count": 16
+    },
+    {
+      "byte_length": 34,
+      "function": "open_cfw_runtime_am180_0x005f5258",
+      "instruction_count": 16,
+      "longest_zero_halfword_run": 9,
+      "macro": "OPEN_CFW_AM180_0X005F5258_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am180_helpers.c",
+      "system_counts": {
+        "ldc2l": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p13, c15, [lr, #-0x7c]",
+          "offset": 18
+        }
+      ],
+      "system_instruction_count": 1,
+      "zero_halfword_count": 14
+    },
+    {
+      "byte_length": 118,
+      "function": "open_cfw_runtime_am180_0x005f53b8",
+      "instruction_count": 58,
+      "longest_zero_halfword_run": 36,
+      "macro": "OPEN_CFW_AM180_0X005F53B8_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am180_helpers.c",
+      "system_counts": {
+        "ldc2l": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p13, c15, [lr, #-0x7c]",
+          "offset": 40
+        }
+      ],
+      "system_instruction_count": 1,
+      "zero_halfword_count": 56
+    },
+    {
+      "byte_length": 94,
+      "function": "open_cfw_runtime_am180_0x005f577c",
+      "instruction_count": 42,
+      "longest_zero_halfword_run": 17,
+      "macro": "OPEN_CFW_AM180_0X005F577C_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am180_helpers.c",
+      "system_counts": {
+        "bkpt": 1,
+        "ldc2l": 3,
+        "stc2": 1,
+        "stc2l": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p0, c0, [sp, #0x2fc]!",
+          "offset": 52
+        },
+        {
+          "instruction": "stc2 p13, c15, [r0, #-0x3f4]",
+          "offset": 60
+        },
+        {
+          "instruction": "stc2l p14, c4, [lr, #0x3f4]!",
+          "offset": 70
+        },
+        {
+          "instruction": "ldc2l p0, c0, [sp, #0x3f4]!",
+          "offset": 76
+        }
+      ],
+      "system_instruction_count": 6,
+      "zero_halfword_count": 28
+    },
+    {
+      "byte_length": 62,
+      "function": "open_cfw_runtime_am180_0x005f5952",
+      "instruction_count": 29,
+      "longest_zero_halfword_run": 17,
+      "macro": "OPEN_CFW_AM180_0X005F5952_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am180_helpers.c",
+      "system_counts": {
+        "bkpt": 1,
+        "mrc": 1,
+        "stc2l": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "stc2l p15, c3, [lr, #0x3f4]!",
+          "offset": 2
+        },
+        {
+          "instruction": "mrc p14, #0, fp, c15, c14, #5",
+          "offset": 50
+        },
+        {
+          "instruction": "bkpt #0xbe",
+          "offset": 54
+        }
+      ],
+      "system_instruction_count": 3,
+      "zero_halfword_count": 20
+    },
+    {
+      "byte_length": 50,
+      "function": "open_cfw_runtime_am180_0x005f5990",
+      "instruction_count": 24,
+      "longest_zero_halfword_run": 4,
+      "macro": "OPEN_CFW_AM180_0X005F5990_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am180_helpers.c",
+      "system_counts": {
+        "bkpt": 2,
+        "ldc2l": 1,
+        "svc": 1,
+        "udf": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "svc #0x1f",
+          "offset": 24
+        },
+        {
+          "instruction": "bkpt #0xbe",
+          "offset": 26
+        },
+        {
+          "instruction": "bkpt #0xbe",
+          "offset": 28
+        },
+        {
+          "instruction": "udf #0xce",
+          "offset": 30
+        }
+      ],
+      "system_instruction_count": 5,
+      "zero_halfword_count": 6
+    },
+    {
+      "byte_length": 20,
+      "function": "open_cfw_runtime_am180_0x005f59e8",
+      "instruction_count": 7,
+      "longest_zero_halfword_run": 2,
+      "macro": "OPEN_CFW_AM180_0X005F59E8_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am180_helpers.c",
+      "system_counts": {
+        "ldc2l": 2,
+        "stc2": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p0, c0, [sp, #0x3f4]!",
+          "offset": 2
+        },
+        {
+          "instruction": "ldc2l p0, c0, [sp, #0x278]!",
+          "offset": 12
+        },
+        {
+          "instruction": "stc2 p13, c15, [r0, #-0x3f4]",
+          "offset": 16
+        }
+      ],
+      "system_instruction_count": 3,
+      "zero_halfword_count": 3
+    },
+    {
+      "byte_length": 14,
+      "function": "open_cfw_runtime_am180_0x005f5a52",
+      "instruction_count": 5,
+      "longest_zero_halfword_run": 0,
+      "macro": "OPEN_CFW_AM180_0X005F5A52_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am180_helpers.c",
+      "system_counts": {
+        "cdp": 1,
+        "mrc": 1,
+        "udf": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "udf #0xbe",
+          "offset": 0
+        },
+        {
+          "instruction": "mrc p14, #1, sp, c15, c14, #6",
+          "offset": 4
+        },
+        {
+          "instruction": "cdp p15, #0xd, c7, c14, c14, #7",
+          "offset": 8
+        }
+      ],
+      "system_instruction_count": 3,
+      "zero_halfword_count": 0
+    },
+    {
+      "byte_length": 8,
+      "function": "open_cfw_runtime_am181_0x005f5aa6",
+      "instruction_count": 3,
+      "longest_zero_halfword_run": 3,
+      "macro": "OPEN_CFW_AM181_0X005F5AA6_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am181_helpers.c",
+      "system_counts": {
+        "ldc2l": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p0, c0, [sp, #0]!",
+          "offset": 0
+        }
+      ],
+      "system_instruction_count": 1,
+      "zero_halfword_count": 3
+    },
+    {
+      "byte_length": 30,
+      "function": "open_cfw_runtime_am181_0x005f5b5c",
+      "instruction_count": 10,
+      "longest_zero_halfword_run": 2,
+      "macro": "OPEN_CFW_AM181_0X005F5B5C_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am181_helpers.c",
+      "system_counts": {
+        "ldc2l": 4,
+        "stc2": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p0, c0, [sp, #0x3f4]!",
+          "offset": 4
+        },
+        {
+          "instruction": "ldc2l p0, c0, [sp, #0x278]!",
+          "offset": 14
+        },
+        {
+          "instruction": "stc2 p13, c15, [r0, #-0x3f4]",
+          "offset": 18
+        },
+        {
+          "instruction": "ldc2l p13, c15, [sp, #0x3f4]!",
+          "offset": 22
+        }
+      ],
+      "system_instruction_count": 5,
+      "zero_halfword_count": 4
+    },
+    {
+      "byte_length": 84,
+      "function": "open_cfw_runtime_am181_0x005f5ba0",
+      "instruction_count": 38,
+      "longest_zero_halfword_run": 6,
+      "macro": "OPEN_CFW_AM181_0X005F5BA0_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am181_helpers.c",
+      "system_counts": {
+        "bkpt": 1,
+        "ldc2": 1,
+        "ldc2l": 2,
+        "mrc": 1,
+        "svc": 1,
+        "udf": 2
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p15, c1, [lr, #-0x2bc]",
+          "offset": 24
+        },
+        {
+          "instruction": "bkpt #0",
+          "offset": 32
+        },
+        {
+          "instruction": "ldc2 p15, c3, [lr, #0x3f4]!",
+          "offset": 38
+        },
+        {
+          "instruction": "ldc2l p15, c1, [sp, #0x2bc]!",
+          "offset": 44
+        }
+      ],
+      "system_instruction_count": 8,
+      "zero_halfword_count": 15
+    },
+    {
+      "byte_length": 122,
+      "function": "open_cfw_runtime_am181_0x005f6128",
+      "instruction_count": 60,
+      "longest_zero_halfword_run": 46,
+      "macro": "OPEN_CFW_AM181_0X005F6128_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am181_helpers.c",
+      "system_counts": {
+        "ldc2l": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p13, c15, [lr, #0x3f4]",
+          "offset": 110
+        }
+      ],
+      "system_instruction_count": 1,
+      "zero_halfword_count": 51
+    },
+    {
+      "byte_length": 70,
+      "function": "open_cfw_runtime_am182_0x005f7398",
+      "instruction_count": 34,
+      "longest_zero_halfword_run": 4,
+      "macro": "OPEN_CFW_AM182_0X005F7398_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am182_helpers.c",
+      "system_counts": {
+        "bkpt": 1,
+        "mrc": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "mrc p15, #0, r7, c15, c15, #3",
+          "offset": 56
+        },
+        {
+          "instruction": "bkpt #0x3f",
+          "offset": 64
+        }
+      ],
+      "system_instruction_count": 2,
+      "zero_halfword_count": 7
+    },
+    {
+      "byte_length": 338,
+      "function": "open_cfw_runtime_am182_0x005f74e8",
+      "instruction_count": 168,
+      "longest_zero_halfword_run": 90,
+      "macro": "OPEN_CFW_AM182_0X005F74E8_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am182_helpers.c",
+      "system_counts": {
+        "ldc2l": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p13, c15, [lr, #-0x7c]",
+          "offset": 146
+        }
+      ],
+      "system_instruction_count": 1,
+      "zero_halfword_count": 163
+    },
+    {
+      "byte_length": 262,
+      "function": "open_cfw_runtime_am182_0x005f763a",
+      "instruction_count": 130,
+      "longest_zero_halfword_run": 91,
+      "macro": "OPEN_CFW_AM182_0X005F763A_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am182_helpers.c",
+      "system_counts": {
+        "ldc2l": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p13, c15, [lr, #-0x7c]",
+          "offset": 182
+        }
+      ],
+      "system_instruction_count": 1,
+      "zero_halfword_count": 128
+    },
+    {
+      "byte_length": 188,
+      "function": "open_cfw_runtime_am182_0x005f77f2",
+      "instruction_count": 93,
+      "longest_zero_halfword_run": 58,
+      "macro": "OPEN_CFW_AM182_0X005F77F2_ONLY",
+      "source": "components/apollo_main/core_overlay/runtime_liblc3_am182_helpers.c",
+      "system_counts": {
+        "ldc2l": 1
+      },
+      "system_examples": [
+        {
+          "instruction": "ldc2l p13, c15, [lr, #-0x7c]",
+          "offset": 116
+        }
+      ],
+      "system_instruction_count": 1,
+      "zero_halfword_count": 91
+    }
+  ],
+  "schema_version": 1,
+  "system_instruction_count": 80,
+  "zero_halfword_count": 613
+}

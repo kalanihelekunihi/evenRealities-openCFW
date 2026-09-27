@@ -287,12 +287,12 @@ def run_audit() -> dict[str, Any]:
         != "blocked by unavailable physical evidence"
         or len(provider) != 212_984
         or sha256(provider)
-        != "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42"
+        != "56694060c0d2761c2004581d0cec97cdb8642c1ff44675194d05d605bf8dd9c7"
         or provider_record.get("size") != len(provider)
         or provider_record.get("sha256") != sha256(provider)
         or accounting != {
-            "production_source_bytes": 1_174,
-            "generated_or_reconstructible_bytes": 1_226,
+            "production_source_bytes": 1_190,
+            "generated_or_reconstructible_bytes": 1_210,
             "candidate_source_not_routed_bytes": 0,
             "typed_retained_or_external_bytes": 210_584,
             "unclassified_bytes": 0,

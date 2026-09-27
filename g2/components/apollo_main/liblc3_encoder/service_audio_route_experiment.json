@@ -70,47 +70,102 @@
     ],
     "ingress": {
       "service_audio_lc3_encoder_setup": [
-        [5567670, 5567666, 3],
-        [5830562, 5830560, 0],
-        [5830568, 5830566, 1],
-        [5830750, 5830748, 2]
+        [
+          5567670,
+          5567666,
+          3
+        ],
+        [
+          5830562,
+          5830560,
+          0
+        ],
+        [
+          5830568,
+          5830566,
+          1
+        ],
+        [
+          5830750,
+          5830748,
+          2
+        ]
       ],
       "SVC_Lc3EncodeMono": [
-        [5746340, 5746326, 3],
-        [5830018, 5830006, 0],
-        [5830050, 5830038, 1],
-        [5830238, 5830226, 1],
-        [5830264, 5830252, 2]
+        [
+          5746340,
+          5746326,
+          3
+        ],
+        [
+          5830018,
+          5830006,
+          0
+        ],
+        [
+          5830050,
+          5830038,
+          1
+        ],
+        [
+          5830238,
+          5830226,
+          1
+        ],
+        [
+          5830264,
+          5830252,
+          2
+        ]
       ]
     },
     "context_literal_cells": [
       {
         "address": 5830784,
         "context_index": 0,
-        "references": [5830006, 5830560]
+        "references": [
+          5830006,
+          5830560
+        ]
       },
       {
         "address": 5830788,
         "context_index": 1,
-        "references": [5830038, 5830226, 5830566]
+        "references": [
+          5830038,
+          5830226,
+          5830566
+        ]
       },
       {
         "address": 5830796,
         "context_index": 2,
-        "references": [5830252, 5830748]
+        "references": [
+          5830252,
+          5830748
+        ]
       },
       {
         "address": 5568928,
         "context_index": 3,
-        "references": [5567666]
+        "references": [
+          5567666
+        ]
       },
       {
         "address": 5747684,
         "context_index": 3,
-        "references": [5746326]
+        "references": [
+          5746326
+        ]
       }
     ],
-    "contexts": [537946748, 537949376, 537952004, 537954632],
+    "contexts": [
+      537946748,
+      537949376,
+      537952004,
+      537954632
+    ],
     "context_end_exclusive": 537957260,
     "slot_bytes": 2628,
     "stock_configuration_bytes": 24,
@@ -154,7 +209,7 @@
     "apple-clang": {
       "toolchain": {
         "compiler_version_prefix": "Apple clang version 21.0.0",
-        "linker_version_prefix": "Homebrew LLD 23.1.1",
+        "linker_version_prefix": "Homebrew LLD 23.1.2",
         "objcopy_version_prefix": "llvm-objcopy, compatible with GNU objcopy"
       },
       "expected": {

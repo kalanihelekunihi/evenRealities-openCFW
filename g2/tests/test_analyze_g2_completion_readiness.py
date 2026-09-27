@@ -131,11 +131,15 @@ class G2CompletionReadinessTests(unittest.TestCase):
         final = analyzer._read(analyzer.TOUCH_FINAL)
         receipt = analyzer._touch_generation_receipt(current, final)
         inputs = receipt["analysis_inputs"]
-        self.assertEqual(inputs["path_count"], 69)
-        self.assertEqual(len(inputs["path_sha256"]), 69)
+        self.assertEqual(inputs["path_count"], 70)
+        self.assertEqual(len(inputs["path_sha256"]), 70)
+        self.assertIn(
+            "components/touch/source_image/board_config.h",
+            inputs["path_sha256"],
+        )
         self.assertEqual(
             inputs["aggregate_sha256"],
-            "314622feca33964631d7f7ee69168cd6659b91e598bc9f554f05b995e8abc31a",
+            "31d129f9afb7966cf6da83b3aee7cc5bfbf810d2ad62877e94d0f55aca02270b",
         )
         self.assertEqual(receipt["logical_manifest_count"], 5)
         self.assertEqual(set(receipt["rendered_outputs"]), {
@@ -161,7 +165,7 @@ class G2CompletionReadinessTests(unittest.TestCase):
             analyzer._touch_generation_receipt(current, changed)
 
     def test_licensing_and_hardware_policy_remain_honest(self) -> None:
-        self.assertTrue(self.report["gates"]["source_metadata_clean"])
+        self.assertFalse(self.report["gates"]["source_metadata_clean"])
         unresolved = self.report["licensing"]["unresolved_binary_authority"]
         self.assertEqual(
             self.report["gates"]["binary_redistribution_authority_resolved"],
@@ -177,14 +181,20 @@ class G2CompletionReadinessTests(unittest.TestCase):
                          "blocked by unavailable physical evidence")
         self.assertEqual(self.report["gates"]["hardware_operations"], [])
 
-    def test_raw_instruction_transcription_source_ownership_gate_is_clean(self) -> None:
+    def test_raw_instruction_transcription_source_ownership_gate_fails_closed(self) -> None:
         quality = self.report["source_ownership_quality"]
-        self.assertTrue(self.report["gates"]["source_ownership_quality_clean"])
-        self.assertTrue(quality["clean"])
+        self.assertFalse(self.report["gates"]["source_ownership_quality_clean"])
+        self.assertFalse(quality["clean"])
         self.assertEqual(
             quality["source_owned_bytes_currently_overstated"], 0)
         self.assertEqual(quality["raw_instruction_transcription_bytes"], 0)
-        self.assertEqual(quality["semantic_literal_bytes"], 16)
+        self.assertEqual(quality["public_raw_executable_transcript_files"], 103)
+        self.assertEqual(
+            quality["public_unrouted_raw_instruction_transcript_files"], 103)
+        self.assertEqual(
+            quality["public_unrouted_raw_instruction_transcript_bytes"], 595020)
+        self.assertEqual(quality["untracked_overlay_source_inputs"], 181)
+        self.assertEqual(quality["semantic_literal_bytes"], 28)
 
     def test_project_owned_sources_pass_mit_policy_gate(self) -> None:
         policy = self.report["project_license_policy"]
@@ -195,21 +205,21 @@ class G2CompletionReadinessTests(unittest.TestCase):
         self.assertEqual(policy["project_owned_gpl_records_pending_mit"], 0)
         self.assertEqual(policy["overlay_records_pending_mit"], 0)
         self.assertEqual(
-            policy["distributed_project_mit_normalization_targets"], 919)
+            policy["distributed_project_mit_normalization_targets"], 1452)
         self.assertEqual(
-            policy["community_controller_and_adapter_source_files"], 112)
+            policy["community_controller_and_adapter_source_files"], 641)
         self.assertEqual(
-            policy["community_project_mit_compatible_source_files"], 109)
+            policy["community_project_mit_compatible_source_files"], 637)
         self.assertEqual(
             policy["community_touch_apache_source_files_preserved"], 3)
-        self.assertEqual(policy["touch_source_image_project_mit_files"], 9)
-        self.assertEqual(policy["touch_source_image_package_files"], 6)
+        self.assertEqual(policy["touch_source_image_project_mit_files"], 11)
+        self.assertEqual(policy["touch_source_image_package_files"], 8)
         self.assertEqual(policy["touch_source_image_support_files"], 3)
-        self.assertEqual(policy["case_source_image_project_mit_files"], 7)
-        self.assertEqual(policy["case_source_image_package_files"], 5)
+        self.assertEqual(policy["case_source_image_project_mit_files"], 8)
+        self.assertEqual(policy["case_source_image_package_files"], 6)
         self.assertEqual(policy["case_source_image_support_files"], 2)
-        self.assertEqual(policy["em9305_source_image_project_mit_files"], 19)
-        self.assertEqual(policy["em9305_source_image_package_files"], 11)
+        self.assertEqual(policy["em9305_source_image_project_mit_files"], 21)
+        self.assertEqual(policy["em9305_source_image_package_files"], 13)
         self.assertEqual(policy["em9305_source_image_support_files"], 8)
         self.assertEqual(policy["pt_protocol_project_mit_files"], 28)
         self.assertEqual(policy["upstream_gpl_records_preserved"], 1)
@@ -252,6 +262,89 @@ class G2CompletionReadinessTests(unittest.TestCase):
             case["details"]["candidate_admission_hardware_validation"],
             "blocked by unavailable physical evidence",
         )
+        contract = case["details"]["source_image_board_contract"]
+        self.assertEqual(contract["flash_base"], 0x08000000)
+        self.assertEqual(contract["bank2_base"], 0x08040000)
+        self.assertEqual(contract["confirmed_irq_slots"]["USART1"], 27)
+        self.assertEqual(
+            contract["blocked_contracts"],
+            [
+                "exact board interrupt ownership",
+                "GPIO/timer routing",
+                "dual-bank updater handoff",
+                "preserved identity copy-forward",
+            ],
+        )
+        accounting = case["details"]["byte_accounting_metrics"]
+        self.assertEqual(accounting["typed_external_or_unsupported_bytes"], 40_866)
+        self.assertEqual(accounting["platform_attributed_bytes"], 1_104)
+        self.assertEqual(accounting["function_map_attributed_bytes"], 37_642)
+        self.assertEqual(accounting["function_map_body_attributed_bytes"], 25_314)
+        self.assertEqual(accounting["function_map_gap_attributed_bytes"], 12_328)
+        self.assertEqual(accounting["residual_log_string_candidate_bytes"], 0)
+        self.assertEqual(accounting["residual_log_string_candidate_rows"], 0)
+        self.assertEqual(
+            accounting["residual_log_string_candidate_digest"],
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        )
+        self.assertEqual(
+            accounting["residual_unresolved_code_or_data_bytes"], 0)
+        self.assertEqual(
+            case["details"]["byte_accounting_identity_windows_in_range"]
+            ["count"],
+            0,
+        )
+        self.assertEqual(case["details"]["residual_shape_rows"], {})
+        self.assertEqual(case["details"]["residual_shape_bytes"], {})
+        self.assertEqual(
+            case["details"]["residual_shape_digest"],
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        )
+        self.assertEqual(
+            case["details"]["residual_shape_control_flow"],
+            {
+                "thumb_branch_count": 0,
+                "thumb_call_count": 0,
+                "thumb_in_app_target_count": 0,
+                "thumb_in_app_targets_digest":
+                    "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+                "thumb_in_app_target_refs_digest":
+                    "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+                "residual_recovery_target_count": 0,
+                "residual_recovery_queue_digest":
+                    "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+                "residual_recovery_row_count": 0,
+                "residual_recovery_row_bytes": 0,
+                "residual_recovery_class_rows": {},
+                "residual_recovery_class_bytes": {},
+                "residual_recovery_rows_digest":
+                    "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+                "residual_non_target_row_count": 0,
+                "residual_non_target_row_bytes": 0,
+                "residual_non_target_rows_digest":
+                    "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+                "residual_partition": {
+                    "target_bearing_rows": 0,
+                    "target_bearing_bytes": 0,
+                    "non_target_rows": 0,
+                    "non_target_bytes": 0,
+                    "total_rows": 0,
+                    "total_bytes": 0,
+                },
+                "residual_partition_digest":
+                    "8b8a0fb3dfaf65d7b832fa22e87151d7d6dbc06266643848b58dc61cded876df",
+                "residual_entry_candidate_count": 0,
+                "residual_entry_candidate_bytes": 0,
+                "residual_entry_candidates_digest":
+                    "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+                "residual_entry_candidate_class_rows": {},
+                "residual_entry_candidate_class_bytes": {},
+                "residual_non_target_class_rows": {},
+                "residual_non_target_class_bytes": {},
+                "thumb_in_app_target_bucket_counts": {},
+                "thumb_in_app_target_relation_counts": {},
+            },
+        )
         self.assertEqual(
             case["details"]["candidate_admission_hardware_operations"], [],
         )
@@ -274,10 +367,10 @@ class G2CompletionReadinessTests(unittest.TestCase):
         self.assertEqual(details["pt_protocol_target_loadable_bytes"], 22643)
         self.assertEqual(details["pt_protocol_target_bss_bytes"], 0)
         self.assertEqual(
-            details["pt_protocol_production_text_placement_free_bytes"], 72740)
+            details["pt_protocol_production_text_placement_free_bytes"], 96)
         self.assertEqual(
             details["pt_protocol_production_text_placement_shortfall_bytes"],
-            0,
+            22547,
         )
         self.assertEqual(
             details["pt_protocol_production_ram_binding_remaining_bytes"], 0)
@@ -294,26 +387,26 @@ class G2CompletionReadinessTests(unittest.TestCase):
             4,
         )
         self.assertEqual(
-            details["pt_protocol_retained_provider_bindings_remaining"], 13)
+            details["pt_protocol_retained_provider_bindings_remaining"], 12)
         self.assertFalse(details["pt_protocol_board_source_complete"])
         self.assertEqual(
             details["pt_protocol_second_order_callable_bindings"], 81)
         self.assertEqual(
             details["pt_protocol_second_order_source_overlay_callable_bindings"],
-            29,
+            30,
         )
         self.assertEqual(
             details["pt_protocol_second_order_source_local_callable_bindings"],
             39,
         )
         self.assertEqual(
-            details["pt_protocol_second_order_source_callable_bindings"], 68)
+            details["pt_protocol_second_order_source_callable_bindings"], 69)
         self.assertEqual(
-            details["pt_protocol_second_order_retained_callable_bindings"], 13)
+            details["pt_protocol_second_order_retained_callable_bindings"], 12)
         self.assertEqual(
             details[
                 "pt_protocol_second_order_retained_callable_unique_addresses"],
-            13,
+            12,
         )
         self.assertEqual(
             details["pt_protocol_second_order_data_bindings"], 97)
@@ -391,16 +484,16 @@ class G2CompletionReadinessTests(unittest.TestCase):
     def test_apollo_boundaries_are_disjoint_and_current(self) -> None:
         main = self.report["components"]["apollo_main"]
         details = main["details"]
-        self.assertEqual(main["release_blocking_bytes"], 3_046_598)
+        self.assertEqual(main["release_blocking_bytes"], 3_030_368)
         self.assertEqual(details["release_readiness_partition"], {
             "candidate_source_not_routed": 0,
-            "typed_retained_or_external": 3_046_598,
+            "typed_retained_or_external": 3_030_368,
         })
         self.assertEqual(details["unanchored_frontier_partition"], {
             "candidate_source_not_routed": 0,
-            "typed_retained_unanchored_without_candidate": 591_115,
+            "typed_retained_unanchored_without_candidate": 576_221,
         })
-        self.assertEqual(details["controlled_label_reconciliation_bytes"], 34_192)
+        self.assertEqual(details["controlled_label_reconciliation_bytes"], 0)
         self.assertFalse(details["controlled_label_reconciliation_additive"])
         self.assertEqual(details["overlapping_object_closure_evidence"], {
             "bytes": 885_418,
@@ -410,12 +503,18 @@ class G2CompletionReadinessTests(unittest.TestCase):
         boot = self.report["components"]["apollo_bootloader"]
         complement = boot["details"]["retained_complement"]
         self.assertEqual(complement["component_bytes"], 163_840)
-        self.assertEqual(complement["intervals"], 901)
-        self.assertEqual(complement["retained_official_bytes"], 87_981)
+        self.assertEqual(complement["intervals"], 990)
+        self.assertEqual(complement["retained_official_bytes"], 81_187)
         self.assertEqual(
             complement["bytes_by_address_status"]["source_compiled"],
-            59_013,
+            65_807,
         )
+        self.assertEqual(
+            boot["details"].get(
+                "raw_instruction_source_owned_bytes_reclassified", 0),
+            0,
+        )
+        self.assertNotIn("raw_instruction_reclassified_to", boot["details"])
         self.assertEqual(
             complement["retained_official_bytes"],
             boot["buckets"]["typed_retained_or_external"],
@@ -437,8 +536,8 @@ class G2CompletionReadinessTests(unittest.TestCase):
 
         em = self.report["components"]["ble_em9305"]
         self.assertEqual(em["size"], 212_984)
-        self.assertEqual(em["buckets"]["production_source"], 1_174)
-        self.assertEqual(em["buckets"]["generated_or_reconstructible"], 1_226)
+        self.assertEqual(em["buckets"]["production_source"], 1_190)
+        self.assertEqual(em["buckets"]["generated_or_reconstructible"], 1_210)
         self.assertEqual(em["buckets"]["candidate_source_not_routed"], 0)
         self.assertEqual(em["buckets"]["typed_retained_or_external"], 210_584)
         self.assertTrue(em["details"]["candidate_production_routed"])

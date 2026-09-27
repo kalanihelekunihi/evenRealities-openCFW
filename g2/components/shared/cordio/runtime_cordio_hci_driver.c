@@ -180,7 +180,12 @@ uint16_t hciDrvWrite(uint8_t type, uint16_t length, uint8_t *data)
         error_check(OPEN_CFW_HCI_DRIVER_QUEUE_FULL_ERROR);
         return length;
     }
-    if (length >= 0x103u || (length != 0u && data == (uint8_t *)0)) {
+    /* Each queue record reserves one byte for the packet type, leaving
+     * exactly 255 bytes for the HCI frame in data[256].  Keep the bound
+     * tied to that physical storage size: allowing 256..258 here writes
+     * past the record even though the historical threshold rejected 259. */
+    if (length > OPEN_CFW_HCI_DRIVER_DATA_BYTES - 1u ||
+        (length != 0u && data == (uint8_t *)0)) {
         error_check(OPEN_CFW_HCI_DRIVER_PACKET_TOO_LARGE_ERROR);
         return length;
     }

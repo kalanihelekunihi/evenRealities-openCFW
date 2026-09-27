@@ -94,8 +94,8 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         mapping = self.result["completion_bucket_mapping"]
         self.assertEqual(mapping["component_bytes"], 212_984)
         self.assertEqual(mapping["buckets"], {
-            "production_source": 1_174,
-            "generated_or_reconstructible": 1_226,
+            "production_source": 1_190,
+            "generated_or_reconstructible": 1_210,
             "candidate_source_not_routed": 0,
             "typed_retained_or_external": 210_584,
             "unclassified": 0,
@@ -181,8 +181,8 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         self.assertEqual(sum(summary["readiness_segment_counts"].values()), 175)
         self.assertEqual(sum(summary["readiness_bytes"].values()), 33_658)
         self.assertEqual(summary["completion_buckets"], {
-            "production_source": 1_174,
-            "generated_or_reconstructible": 1_226,
+            "production_source": 1_190,
+            "generated_or_reconstructible": 1_210,
             "candidate_source_not_routed": 0,
             "typed_retained_or_external": 210_584,
             "unclassified": 0,
@@ -238,7 +238,7 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         self.assertEqual(audit["provider_size"], 212_984)
         self.assertEqual(
             audit["provider_sha256"],
-            "1a4ccc61cae6e9b90d0eb3d694179d726c935171788167d28ea45060d7431c42",
+            "56694060c0d2761c2004581d0cec97cdb8642c1ff44675194d05d605bf8dd9c7",
         )
         self.assertEqual(audit["hardware_operations"], [])
         self.assertEqual(
@@ -297,7 +297,7 @@ class Em9305SourceReadinessTests(unittest.TestCase):
         self.assertEqual(qpc["arcv2_em_forbidden_runtime_imports"], [])
         self.assertEqual(
             qpc["arcv2_em_linked_object_sha256"],
-            "c1aa5370945e41afcb29750174fd4531def9a887d37a0f620461eeabad587ad9",
+            "018f26b81034f8fef8c96e77ad3d70d10b4cbe94128dd8f376c9e0ce1ee7fb67",
         )
         self.assertFalse(qpc["install_placement_resolved"])
         self.assertFalse(qpc["production_routed"])

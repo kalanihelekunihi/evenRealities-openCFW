@@ -1,7 +1,7 @@
 {
   "artifacts": {
     "elf_sha256": "c1524676651068f0f180368ecb3be57e06dd85b95ec3cdeaf8453f2c75847a8a",
-    "fwpk_sha256": "51d067df27e30bef96d0459a7dc30928c47e717c9b83e12a99083155d2f5654f",
+    "fwpk_sha256": "128e8e2e6321b5bf3515317fe1935927afd0ec1dcd3be0e1e70f38a6a70c74ac",
     "raw_sha256": "4ce7a78556708f941992286881c6b62d349bfedfe4238826f82a842d359b6dc1",
     "source_inventory": [
       {
@@ -131,8 +131,28 @@
       {
         "path": "components/touch/source_image/linker.ld",
         "sha256": "0e368ca2e18804d96c7722d91bf17ae84b5677e6c625b1ab0ee1255c26b13849"
+      },
+      {
+        "path": "components/touch/source_image/board_config.h",
+        "sha256": "64cd37dc9b21712e6442503dbdd4548f9cb5aae3f9433e5b4019407cb90fcfaa"
       }
     ]
+  },
+  "board_contract": {
+    "blocked_contracts": [
+      "SCB1_I2C_SHIFT_REGISTER_SERVICE",
+      "MSCLP_CAPSENSE_SCAN_RESULT_DRAIN",
+      "SPCIF_FLASH_SROM_ROW_PROGRAMMING",
+      "GPIO_PIN_AND_ATTENTION_LINE_ROUTING",
+      "RESIDENT_DFU_MAILBOX_RESET_HANDOFF"
+    ],
+    "flash_base": 0,
+    "flash_bytes": 65536,
+    "fwpk_magic": 1263556422,
+    "fwpk_payload_offset": 32,
+    "fwpk_record_type": 3,
+    "fwpk_version": 16777730,
+    "stack_top": 536879104
   },
   "component": "G2 Touch source image admission",
   "hardware_blocker": "blocked by unavailable physical evidence",

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "workflow": "g2-pseudocode-first",
+  "prepared_on": "2026-09-26",
+  "phase": "P1_EXECUTING",
+  "execution_started": true,
+  "worker_profile": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "target_path": "g2/workflow/target.json",
+  "target_lock_sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+  "campaign_id": "20260926T223240Z",
+  "gates": {
+    "G1_TARGET_AND_INVENTORY": {
+      "status": "in_progress",
+      "receipt": "g2/build/pseudocode-first/20260926T223240Z/inventory/status.json"
+    },
+    "G2_PSEUDOCODE_COMPLETE": {
+      "status": "not_run",
+      "receipt": null
+    },
+    "G3_CORPUS_FROZEN": {
+      "status": "not_run",
+      "receipt": null
+    },
+    "G4_IMPLEMENTATION_READY": {
+      "status": "not_run",
+      "receipt": null
+    },
+    "G5_SOURCE_COMPLETE": {
+      "status": "not_run",
+      "receipt": null
+    },
+    "G6_IDENTICAL_SOURCE_BUILD": {
+      "status": "not_run",
+      "receipt": null
+    }
+  },
+  "freeze_receipt": null,
+  "analysis_assignments": [],
+  "c_implementation_assignments": [],
+  "next_step": "Resolve the campaign blockers listed in inventory/status.json; P2 remains gated until G1 evidence and validation pass.",
+  "enforcement": "Coordinator validator checks identity, exact package/payload interval partitions, six-component architecture-plan pins, hash-audited reuse evidence, read-only component audits, and blocker registry. P2 dispatcher remains unimplemented; legacy launcher CLI execution is retired."
+}

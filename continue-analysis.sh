@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-# continue-analysis.sh - spawn a user-chosen number of parallel coding agents
+# RETIRED: historical incremental G2 runner; read-only diagnostics only.
+# Current process and phase gates: g2/workflow/README.md.
+# The original implementation below is retained for historical inspection.
+#
+# Historical description: spawn a user-chosen number of parallel coding agents
 # through claude-yolo, Codex Luna/Spark, Muse, Agy, or Grok. Each agent takes one open item
 # from remaining-work.md, reconstruct that segment of the G2 firmware as
 # reviewed, buildable source on this Mac, and report back.  The script is the
@@ -41,6 +45,38 @@
 
 set -uo pipefail
 
+usage() {
+    cat <<'HELP'
+The incremental G2 reconstruction runner is retired.
+Current process and phase gates: g2/workflow/README.md
+
+Read-only historical diagnostics:
+  ./continue-analysis.sh status
+  ./continue-analysis.sh list [--status STATUS] [--component COMPONENT]
+                              [--kind KIND] [--ids IDS] [--priority PRIORITY]
+  ./continue-analysis.sh show ID
+  ./continue-analysis.sh logs ID
+  ./continue-analysis.sh help
+
+All launch, resume, prompt-generation, dependency reconciliation, locking,
+queue mutation, and regeneration commands are disabled. There is no override.
+HELP
+}
+
+# Enforce retirement before looking up providers or creating any state. Keep
+# this allowlist small: even historical `dependencies` writes queue sidecars.
+case "${1:-help}" in
+    help|-h|--help) usage; exit 0 ;;
+    status|list|show|logs)
+        echo "continue-analysis: retired; historical read-only diagnostics. See g2/workflow/README.md" >&2 ;;
+    *)
+        echo "continue-analysis: retired; '${1}' is disabled. See g2/workflow/README.md" >&2
+        exit 2 ;;
+esac
+
+# Read-only diagnostics must not create __pycache__ in the repository either.
+export PYTHONDONTWRITEBYTECODE=1
+
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORK_MD="$ROOT/remaining-work.md"
 WORK_JSON="$ROOT/remaining-work.json"
@@ -60,7 +96,7 @@ STAGGER="${CA_STAGGER_SEC:-15}"
 TIMEOUT_MIN="${CA_TIMEOUT_MIN:-0}"
 PYTHON="${PYTHON:-python3}"
 
-mkdir -p "$STATE/logs" "$STATE/prompts" "$STATE/results" "$STATE/running" "$STATE/locks" "$STATE/paused" "$STATE/deferred" "$STATE/knowledge"
+# State directories are deliberately not created by this retired entrypoint.
 
 die() { echo "continue-analysis: $*" >&2; exit 2; }
 note() { echo "[continue-analysis] $*"; }
@@ -92,7 +128,7 @@ configure_cli() {
     esac
 }
 
-configure_cli
+# Provider configuration is historical; read-only diagnostics need no provider.
 
 [ -f "$WORK_MD" ] || die "missing $WORK_MD"
 [ -f "$WORK_JSON" ] || die "missing $WORK_JSON"
@@ -329,15 +365,13 @@ def cmd_status(args):
             print("  %s  %s" % (item_id, ", ".join(pending)))
 
     paused_dir = os.path.join(STATE, "paused")
-    for name in sorted(os.listdir(paused_dir)):
-        if not name.endswith(".json"):
-            continue
+    for path in sorted(glob.glob(os.path.join(paused_dir, "*.json"))):
         try:
-            with open(os.path.join(paused_dir, name)) as f:
+            with open(path) as f:
                 checkpoint = json.load(f)
             if checkpoint.get("resume_at"):
                 when = datetime.datetime.fromtimestamp(checkpoint["resume_at"]).astimezone().isoformat()
-                print("  saved session %s: resume due %s; use resume-paused if supervisor stopped" % (checkpoint["id"], when))
+                print("  saved legacy session %s: former resume time %s; resumption is retired" % (checkpoint["id"], when))
         except (OSError, ValueError, KeyError):
             pass
 
@@ -589,6 +623,7 @@ reproducible on macOS, add tests for new gates, and document the result in `g2/d
 
 
 def render_prompt(it, row):
+    """Historical renderer retained for inspection and regression tests only."""
     comp = it["component"]
     fn_lines = []
     for f in it.get("functions", []):
@@ -655,7 +690,7 @@ def render_prompt(it, row):
 
     """) % {"root": ROOT, "commit_rule": commit_rule, "id": it["id"]}
     body = []
-    policy_path = os.path.join(ROOT, "docs", "g2-reconstruction-driver-prompt.md")
+    policy_path = os.path.join(ROOT, "docs", "archive", "g2-incremental", "g2-reconstruction-driver-prompt.md")
     with open(policy_path, encoding="utf-8") as policy_file:
         policy = policy_file.read().split("\n---\n", 1)[1].strip()
     mode = "tooling" if it.get("kind") == "tooling" else "reconstruction"
@@ -1748,8 +1783,6 @@ PYGEN
     note "regenerated $WORK_MD and $WORK_JSON"
 }
 
-usage() { sed -n '2,30p' "$0" | sed 's/^# \{0,1\}//'; }
-
 cmd="${1:-help}"; shift || true
 case "$cmd" in
     run) cmd_run "$@" ;;
@@ -1767,7 +1800,7 @@ case "$cmd" in
     lock) cmd_lock "$@" ;;
     reset-stale) cmd_reset_stale "$@" ;;
     regenerate) cmd_regenerate "$@" ;;
-    logs) [ $# -ge 1 ] || die "logs ID"; ls -la "$STATE/logs/$1".* 2>/dev/null || note "no logs for $1"; for f in "$STATE/logs/$1".*.json; do [ -e "$f" ] && { echo "== $f"; "$PYTHON" -c 'import json,sys;d=json.load(open(sys.argv[1]));print(d.get("result") if isinstance(d,dict) and "result" in d else json.dumps(d,indent=1))' "$f" | tail -40; }; done ;;
+    logs) [ $# -ge 1 ] || die "logs ID"; ls -la "$STATE/logs/$1".* 2>/dev/null || note "no logs for $1"; for f in "$STATE/logs/$1".*.json; do [ -e "$f" ] && { echo "== $f"; "$PYTHON" -c 'import json,sys;d=json.load(open(sys.argv[1]));print(d.get("result") if isinstance(d,dict) and "result" in d else json.dumps(d,indent=1))' "$f" | tail -40; }; done; true ;;
     help|-h|--help) usage ;;
     *) die "unknown command $cmd (try help)" ;;
 esac

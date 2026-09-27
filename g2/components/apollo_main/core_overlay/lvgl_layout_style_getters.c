@@ -58,6 +58,7 @@ typedef unsigned int (*open_cfw_lvgl_layout_getter_core_fn)(
 enum {
     OPEN_CFW_LVGL_PROP_WIDTH = 0x01U,
     OPEN_CFW_LVGL_PROP_HEIGHT = 0x02U,
+    OPEN_CFW_LVGL_PROP_RECOVERED_0A = 0x0AU,
     OPEN_CFW_LVGL_PROP_PAD_TOP = 0x10U,
     OPEN_CFW_LVGL_PROP_PAD_LEFT = 0x12U,
     OPEN_CFW_LVGL_PROP_PAD_ROW = 0x14U,
@@ -71,6 +72,7 @@ enum {
     OPEN_CFW_LVGL_PROP_BORDER_SIDE = 0x34U,
     OPEN_CFW_LVGL_PROP_TRANSLATE_X = 0x6CU,
     OPEN_CFW_LVGL_PROP_TRANSLATE_Y = 0x6DU,
+    OPEN_CFW_LVGL_PROP_RECOVERED_6A = 0x6AU,
     OPEN_CFW_LVGL_PROP_GRID_COLUMN_ALIGN = 0x7FU,
     OPEN_CFW_LVGL_PROP_GRID_ROW_ALIGN = 0x80U,
     OPEN_CFW_LVGL_PROP_GRID_ROW_DSC_ARRAY = 0x81U,
@@ -102,6 +104,50 @@ unsigned int open_cfw_lvgl_get_style_height(
 {
     return OPEN_CFW_LVGL_LAYOUT_GETTER_CORE(
         obj, part, OPEN_CFW_LVGL_PROP_HEIGHT
+    );
+}
+
+__attribute__((used, noinline))
+unsigned int open_cfw_lvgl_get_style_width_am002(
+    open_cfw_lvgl_layout_getter_pointer obj,
+    unsigned int part
+)
+{
+    return OPEN_CFW_LVGL_LAYOUT_GETTER_CORE(
+        obj, part, OPEN_CFW_LVGL_PROP_WIDTH
+    );
+}
+
+__attribute__((used, noinline))
+unsigned int open_cfw_lvgl_get_style_height_am002(
+    open_cfw_lvgl_layout_getter_pointer obj,
+    unsigned int part
+)
+{
+    return OPEN_CFW_LVGL_LAYOUT_GETTER_CORE(
+        obj, part, OPEN_CFW_LVGL_PROP_HEIGHT
+    );
+}
+
+__attribute__((used, noinline))
+unsigned int open_cfw_lvgl_get_style_recovered_0a_am002(
+    open_cfw_lvgl_layout_getter_pointer obj,
+    unsigned int part
+)
+{
+    return (unsigned int)(unsigned char)OPEN_CFW_LVGL_LAYOUT_GETTER_CORE(
+        obj, part, OPEN_CFW_LVGL_PROP_RECOVERED_0A
+    );
+}
+
+__attribute__((used, noinline))
+unsigned int open_cfw_lvgl_get_style_recovered_6a_am002(
+    open_cfw_lvgl_layout_getter_pointer obj,
+    unsigned int part
+)
+{
+    return OPEN_CFW_LVGL_LAYOUT_GETTER_CORE(
+        obj, part, OPEN_CFW_LVGL_PROP_RECOVERED_6A
     );
 }
 

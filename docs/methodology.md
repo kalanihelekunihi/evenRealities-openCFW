@@ -8,25 +8,26 @@ rather than filled in with a plausible guess.
 The two targets apply that discipline differently, because they are solving
 different problems.
 
-## G2: byte-exactness as the invariant
+## G2: whole-artifact pseudocode before source reconstruction
 
-G2 works backwards from the official image. The build reconstructs the stock
-flash layout exactly, then replaces reconstructed regions with compiled source
-one closure at a time. The invariant is that the produced package stays
-byte-identical to the reviewed reference at every step.
+The [current procedure](../g2/workflow/PROCEDURE.md) supersedes incremental
+overlay reconstruction as the work plan. First authenticate and inventory the
+entire official artifact, recover all executable behavior as pseudocode,
+account for data and container bytes, and independently review and freeze the
+corpus. Only then define C chunks and shared contracts for parallel workers.
 
-That invariant is what makes incremental replacement safe. A region is only
-promoted to compiled source once the compiled output occupies the same bytes as
-the region it replaces, so a promotion cannot silently change behavior. The
-consequence is that the toolchain is part of the specification: overlays are
-pinned per reviewed compiler profile, and a compiler outside the reviewed
-release family is rejected rather than accommodated.
+The final goal is a clean build from source that exactly reproduces every
+payload and the original bundle. Keep three proofs separate: complete reviewed
+pseudocode, complete source ownership, and byte equality. A retained-byte build
+can establish equality without source completeness; compilable C can establish
+neither semantics nor equality. Compiler and linker behavior, source assets,
+layout and container serialization all matter. Exact reproduction is a result
+to demonstrate, not a promised consequence of decompilation.
 
-Progress is therefore measurable rather than impressionistic.
-[`../g2/docs/source-coverage.md`](../g2/docs/source-coverage.md) records exactly
-which functions are compiled from source, and
-[`../g2/docs/upstream-inventory.md`](../g2/docs/upstream-inventory.md) records
-the attribution queue.
+Historical [source coverage](../g2/docs/source-coverage.md) and
+[upstream inventories](../g2/docs/upstream-inventory.md) remain evidence to
+validate and reuse. They do not set the new coverage denominator or completion
+gate. The procedure defines that gate for all six payloads together.
 
 ## R1: contract equivalence as the invariant
 

@@ -1,5 +1,10 @@
 # G2 documentation
 
+**Current work starts at the [pseudocode-first workflow](../workflow/README.md).**
+It supersedes the incremental decompilation/reconstruction procedure. The
+documents indexed below remain historical build and recovery evidence; their
+preservation does not authorize C work before the whole-corpus freeze.
+
 Reference documents and per-closure audits. This file says which to read for
 what.
 

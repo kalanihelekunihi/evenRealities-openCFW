@@ -17,11 +17,11 @@ def build():
     e=Elf32((out/'pair.elf').read_bytes(),'pair');allocated=[s for s in e.sections if s['flags']&2 and s['size']];assert len(allocated)==2
     section=next(s for s in allocated if s['name']=='.text')
     pointer=next(s for s in allocated if s['name']=='.callback_pointer')
-    assert section['size']==184 and pointer['address']==0x10004c78 and pointer['size']==4
+    assert section['size']==180 and pointer['address']==0x10004c78 and pointer['size']==4
     assert e.contents(pointer)==(0x200174a8).to_bytes(4,'little')
     symbols={s['name']:s['value'] for s in e.symbols()}
     assert symbols['open_cfw_gx8002_backup_dma_deallocate']==0x10004bc0
-    assert symbols['open_cfw_gx8002_backup_dma_irq_handler']==0x10004c04
+    assert symbols['open_cfw_gx8002_backup_dma_irq_handler']==0x10004c00
     assert not any(e.relocations(s['index']) for s in e.sections)
     assert not any(s['name'] and s['section']==0 for s in e.symbols())
     (out/'pair.disassembly.txt').write_text(subprocess.check_output([pre+'objdump','-d',str(out/'pair.elf')],text=True))

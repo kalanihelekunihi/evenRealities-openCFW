@@ -26,7 +26,9 @@ class TailDataTests(unittest.TestCase):
         image,ownership,totals=compose(stock,rows)
         self.assertEqual(image[start:start+32],b'C'*16+b'D'*16)
         self.assertEqual(totals['compiled_c'],16)
-        self.assertEqual(totals['generated_source_data'],16)
+        self.assertEqual(totals['generated_source_data'],4108)
+        self.assertTrue(any(row['kind']=='generated_source_data' and row.get('symbol')=='table'
+                            and row['size']==16 for row in ownership))
         self.assertEqual(totals['generated_unreachable_fill'],0)
         self.assertEqual(sum(totals.values()),len(stock))
 

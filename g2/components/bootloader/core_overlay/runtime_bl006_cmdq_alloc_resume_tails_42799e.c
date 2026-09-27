@@ -48,14 +48,11 @@
  *
  * Out-of-span branches: the relocatable object assembles at
  * address 0, so the five narrow unconditional exits into the
- * replaced heads cannot name far-absolute mnemonic operands
- * ("branch target out of range"). Each is spelled with its
- * reviewed 16-bit encoding (`.inst.n`); the internal `bhs` names
- * a local label normally. The six assembler probes below prove
- * the reference assembler emits the identical bytes for an
- * identical branch at the identical offset (same precedent as
- * the binary32 remainder tail's `.inst.w`). The byte-exact
- * rebuild test pins every emission.
+ * replaced heads cannot name far-absolute mnemonic operands.
+ * Each is expressed as a reviewed fixed-address
+ * `R_ARM_THM_JUMP11` relocation on a canonical `b.n .`
+ * placeholder; the internal `bhs` names a local label normally.
+ * The byte-exact rebuild test pins every materialized branch.
  *
  * The whole-image survey grades both spans
  * corroborated_unreachable_control_flow and a whole-image `bl`
@@ -93,9 +90,11 @@ open_cfw_bl006_ax_u32 open_cfw_bootloader_cmdq_alloc_rem_tail_42799e(
     __asm__ volatile(
         "str r1, [r0, #4]\n"
         "ldr r0, [r7, #4]\n"
-        ".inst.n 0xE7E5\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_cmdq_alloc_success_427970\n"
+        "b.n .\n"
         "movs r0, #5\n"
-        ".inst.n 0xE7ED\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_cmdq_alloc_epilogue_427984\n"
+        "b.n .\n"
         "ldr r0, [r7, #0x10]\n"
         "adds r1, r6, #1\n"
         "adds.w r0, r0, r1, lsl #3\n"
@@ -103,9 +102,11 @@ open_cfw_bl006_ax_u32 open_cfw_bootloader_cmdq_alloc_rem_tail_42799e(
         "cmp r0, r1\n"
         "bhs 0f\n"
         "ldr r0, [r7, #0x10]\n"
-        ".inst.n 0xE7DA\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_cmdq_alloc_success_427970\n"
+        "b.n .\n"
         "0: movs r0, #5\n"
-        ".inst.n 0xE7E2\n");
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_cmdq_alloc_epilogue_427984\n"
+        "b.n .\n");
 #else
     /* Host twin: the entry selector names the stock entry (0 =
      * K1, 1 = K2, 2 = K3); exit_kind reports which replaced-head
@@ -148,7 +149,8 @@ open_cfw_bl006_ax_u32 open_cfw_bootloader_cmdq_errresume_rem_tail_427b90(
     /* L1 exit back into the replaced head scan: 0x427B76 sits 30
      * bytes below the branch PC (f1 e7). */
     __asm__ volatile(
-        ".inst.n 0xE7F1\n"
+        ".reloc ., R_ARM_THM_JUMP11, open_cfw_bootloader_cmdq_error_resume_scan_427b76\n"
+        "b.n .\n"
         "ldr r2, [r1, #0x24]\n"
         "ldr r2, [r2, #8]\n"
         "str r2, [r0]\n"

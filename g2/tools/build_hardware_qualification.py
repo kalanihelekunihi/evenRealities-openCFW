@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import subprocess
 import sys
 from pathlib import Path
@@ -17,7 +18,17 @@ def run(*args: str) -> None:
     subprocess.run(args, cwd=REPO_ROOT, check=True)
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--release",
+        action="store_true",
+        help=(
+            "also produce version-adjusted release wrappers; this requires the "
+            "project redistribution authority gate to pass"
+        ),
+    )
+    args = parser.parse_args(argv)
     rungs = (
         (
             "minimal-advertised-name-hook",
@@ -57,14 +68,15 @@ def main() -> int:
             "--output-dir",
             str(package_dir),
         )
-        run(
-            sys.executable,
-            str(G2_ROOT / "tools" / "release_cfw.py"),
-            str(package),
-            str(release),
-            "--report",
-            str(release_report),
-        )
+        if args.release:
+            run(
+                sys.executable,
+                str(G2_ROOT / "tools" / "release_cfw.py"),
+                str(package),
+                str(release),
+                "--report",
+                str(release_report),
+            )
     return 0
 
 

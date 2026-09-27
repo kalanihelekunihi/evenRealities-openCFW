@@ -46,6 +46,37 @@
       }
     ]
   },
+  "board_contract": {
+    "bank1_base": 134217728,
+    "bank1_identity_limit": 134475776,
+    "bank2_base": 134479872,
+    "blocked_contracts": [
+      "exact board interrupt ownership",
+      "GPIO/timer routing",
+      "dual-bank updater handoff",
+      "preserved identity copy-forward"
+    ],
+    "confirmed_irq_slots": {
+      "CEC": 30,
+      "PVD": 1,
+      "TIM2": 15,
+      "USART1": 27
+    },
+    "confirmed_usart_bases": {
+      "USART3": 1073760256,
+      "USART4": 1073761280
+    },
+    "flash_bank_bytes": 262144,
+    "flash_base": 134217728,
+    "sram_base": 536870912,
+    "sram_bytes": 147456,
+    "stack_top": 536882312,
+    "unconfirmed_defaults": {
+      "led_gpio_port": "GPIOB",
+      "link_uart": "USART1",
+      "pmic_gpio_ports": "GPIOB,GPIOC,GPIOD"
+    }
+  },
   "component": "G2 charging-case source image admission",
   "hardware_blocker": "blocked by unavailable physical evidence",
   "hardware_operations": [],

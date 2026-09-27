@@ -47,17 +47,21 @@ R_ARM_THM_MOVW_ABS_NC = 47
 R_ARM_THM_MOVT_ABS = 48
 R_ARM_THM_MOVW_PREL_NC = 49
 R_ARM_THM_MOVT_PREL = 50
+R_ARM_THM_JUMP19 = 51
 R_ARM_THM_JUMP11 = 102
+R_ARM_THM_JUMP8 = 103
 
 IN_PLACE_RELOCATION_TYPES = {
     "R_ARM_THM_CALL": R_ARM_THM_CALL,
     "R_ARM_THM_PC8": R_ARM_THM_PC8,
     "R_ARM_THM_JUMP24": R_ARM_THM_JUMP24,
+    "R_ARM_THM_JUMP19": R_ARM_THM_JUMP19,
     "R_ARM_THM_MOVW_ABS_NC": R_ARM_THM_MOVW_ABS_NC,
     "R_ARM_THM_MOVT_ABS": R_ARM_THM_MOVT_ABS,
     "R_ARM_THM_MOVW_PREL_NC": R_ARM_THM_MOVW_PREL_NC,
     "R_ARM_THM_MOVT_PREL": R_ARM_THM_MOVT_PREL,
     "R_ARM_THM_JUMP11": R_ARM_THM_JUMP11,
+    "R_ARM_THM_JUMP8": R_ARM_THM_JUMP8,
 }
 
 ABSOLUTE_MOVWT_TYPES = {
@@ -1447,9 +1451,16 @@ def compile_overlay(
         else set(expected_functions)
     )
     if set(functions) != reviewed_functions:
+        observed_functions = set(functions)
+        missing_functions = sorted(reviewed_functions - observed_functions)
+        unexpected_functions = sorted(observed_functions - reviewed_functions)
         raise BuildError(
-            f"function ABI changed: expected {sorted(reviewed_functions)}, "
-            f"observed {sorted(functions)}"
+            "function ABI changed: "
+            f"expected {len(reviewed_functions)} functions, "
+            f"observed {len(observed_functions)}; "
+            f"missing {len(missing_functions)} "
+            f"{missing_functions[:24]}, unexpected {len(unexpected_functions)} "
+            f"{unexpected_functions[:24]}"
         )
     return overlay, functions, version, link_report
 
@@ -2419,7 +2430,9 @@ def extract_in_place_function_section(
                 )
         else:
             instruction_size = (
-                2 if relocation_name == "R_ARM_THM_JUMP11" else 4
+                2
+                if relocation_name in {"R_ARM_THM_JUMP11", "R_ARM_THM_JUMP8"}
+                else 4
             )
             if offset + instruction_size > len(leaf):
                 raise BuildError(
@@ -2444,6 +2457,55 @@ def extract_in_place_function_section(
                 struct.pack_into(
                     "<H", leaf, offset, 0xE000 | ((displacement >> 1) & 0x7FF)
                 )
+                resolved_relocations.append(
+                    {
+                        **relocation,
+                        "runtime_address": site_address,
+                        "runtime_address_hex": f"0x{site_address:08X}",
+                        "target_address_hex": f"0x{target_address:08X}",
+                    }
+                )
+                continue
+            if relocation_name == "R_ARM_THM_JUMP8":
+                instruction = struct.unpack_from("<H", leaf, offset)[0]
+                condition = (instruction >> 8) & 0xF
+                canonical = encode_thumb_cond_branch_narrow(
+                    site_address, site_address, condition=condition)
+                if instruction != canonical:
+                    raise BuildError(
+                        f"in-place leaf {function_name} R_ARM_THM_JUMP8 at "
+                        f"+0x{offset:X} does not use the canonical "
+                        "conditional `b<cc>.n .` REL placeholder"
+                    )
+                struct.pack_into(
+                    "<H",
+                    leaf,
+                    offset,
+                    encode_thumb_cond_branch_narrow(
+                        site_address, target_address, condition=condition),
+                )
+                resolved_relocations.append(
+                    {
+                        **relocation,
+                        "runtime_address": site_address,
+                        "runtime_address_hex": f"0x{site_address:08X}",
+                        "target_address_hex": f"0x{target_address:08X}",
+                    }
+                )
+                continue
+            if relocation_name == "R_ARM_THM_JUMP19":
+                first, second = struct.unpack_from("<HH", leaf, offset)
+                condition = (first >> 6) & 0xF
+                canonical = encode_thumb_cond_branch(
+                    site_address, site_address, condition=condition)
+                if bytes(leaf[offset:offset + 4]) != canonical:
+                    raise BuildError(
+                        f"in-place leaf {function_name} R_ARM_THM_JUMP19 at "
+                        f"+0x{offset:X} does not use the canonical "
+                        "conditional `b<cc>.w .` REL placeholder"
+                    )
+                leaf[offset:offset + 4] = encode_thumb_cond_branch(
+                    site_address, target_address, condition=condition)
                 resolved_relocations.append(
                     {
                         **relocation,
@@ -4896,6 +4958,48 @@ def encode_thumb_bl(instruction_address: int, target_address: int) -> bytes:
 
 def encode_thumb_b_w(instruction_address: int, target_address: int) -> bytes:
     return encode_thumb_branch(instruction_address, target_address, link=False)
+
+
+def encode_thumb_cond_branch(
+    instruction_address: int,
+    target_address: int,
+    *,
+    condition: int,
+) -> bytes:
+    """Encode a Thumb-2 T3 conditional branch."""
+    if condition < 0 or condition > 0xD:
+        raise BuildError("Thumb conditional branch condition is invalid")
+    displacement = target_address - (instruction_address + 4)
+    if displacement & 1:
+        raise BuildError("Thumb conditional branch target is not halfword aligned")
+    if displacement < -(1 << 20) or displacement > (1 << 20) - 2:
+        raise BuildError("Thumb conditional branch target is out of range")
+    imm = (displacement >> 1) & ((1 << 20) - 1)
+    sign = (imm >> 19) & 1
+    j2 = (imm >> 18) & 1
+    j1 = (imm >> 17) & 1
+    imm6 = (imm >> 11) & 0x3F
+    imm11 = imm & 0x7FF
+    first = 0xF000 | (sign << 10) | (condition << 6) | imm6
+    second = 0x8000 | (j1 << 13) | (j2 << 11) | imm11
+    return struct.pack("<HH", first, second)
+
+
+def encode_thumb_cond_branch_narrow(
+    instruction_address: int,
+    target_address: int,
+    *,
+    condition: int,
+) -> int:
+    """Encode a 16-bit Thumb T1 conditional branch."""
+    if condition < 0 or condition > 0xD:
+        raise BuildError("Thumb narrow conditional branch condition is invalid")
+    displacement = target_address - (instruction_address + 4)
+    if displacement & 1:
+        raise BuildError("Thumb narrow conditional branch target is not halfword aligned")
+    if displacement < -256 or displacement > 254:
+        raise BuildError("Thumb narrow conditional branch target is out of range")
+    return 0xD000 | (condition << 8) | ((displacement >> 1) & 0xFF)
 
 
 def decode_thumb_branch(

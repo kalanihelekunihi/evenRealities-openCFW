@@ -51,6 +51,7 @@ import hashlib
 import importlib.util
 import json
 import re
+import string
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -59,6 +60,7 @@ MANIFEST_DIR = ROOT / "tools/manifests"
 BLOB = ROOT / "blobs/official/g2-2.2.6.10/firmware_box.bin"
 CORPUS = ROOT / "research/corpus/case/ghidra/final-frontier/functions.jsonl"
 GAP_FRONTIER = MANIFEST_DIR / "g2-case-final-gap-frontier.tsv"
+FUNCTION_MAP = MANIFEST_DIR / "g2-box-function-map.tsv"
 
 BLOB_SHA256 = "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
 APP_BASE = 0x08000000
@@ -130,6 +132,34 @@ def _load_gap_spans():
         start = int(row["start"], 16) - APP_BASE
         end = int(row["end_exclusive"], 16) - APP_BASE
         spans.append((start, end, row["classification"]))
+    return spans
+
+
+def _load_function_map_spans():
+    spans = []
+    for row in _read_tsv(FUNCTION_MAP):
+        if row["ownership_category"] == "unresolved":
+            continue
+        start = int(row["entry"], 16) - APP_BASE
+        end = start + int(row["size"])
+        spans.append((start, end, row["ownership_category"], row["name"],
+                      row["evidence"]))
+    return spans
+
+
+def _load_function_map_gap_spans():
+    summary = json.loads((MANIFEST_DIR / "g2-box-function-map-summary.json")
+                         .read_text(encoding="utf-8"))
+    spans = []
+    for row in summary["gap_rows"]:
+        if row["ownership_category"] == "unresolved":
+            continue
+        spans.append((
+            int(row["start"]) - APP_BASE,
+            int(row["end"]) - APP_BASE,
+            row["ownership_category"],
+            row["evidence"],
+        ))
     return spans
 
 
@@ -220,6 +250,28 @@ def _collapse(cover: list, app: bytes):
     return rows
 
 
+def _string_rows(rows: list[dict], app: bytes) -> list[dict]:
+    string_rows = []
+    for row in rows:
+        if row["category"] != "residual_log_string_candidate":
+            continue
+        start = row["start"] - APP_BASE
+        end = row["end"] - APP_BASE
+        body = app[start:end]
+        text = body.decode("ascii")
+        require(all(char in string.printable and char not in "\r\n\t\v\f"
+                    for char in text),
+                "case log-string candidate contains a non-printable byte")
+        string_rows.append({
+            "start": row["start"],
+            "end": row["end"],
+            "bytes": row["bytes"],
+            "content_sha256": row["content_sha256"],
+            "text": text,
+        })
+    return string_rows
+
+
 def analyze():
     platform = _load_platform_module()
     blob = BLOB.read_bytes()
@@ -240,6 +292,8 @@ def analyze():
             "gap-frontier baseline changed")
 
     islands = _load_platform_islands(platform, blob)
+    function_map_spans = _load_function_map_spans()
+    function_map_gap_spans = _load_function_map_gap_spans()
 
     # Priority order: admitted functions (Ghidra-authenticated bodies with
     # reviewed clean-room source, the strongest evidence) first, then the
@@ -261,6 +315,14 @@ def analyze():
         for index in range(start, end):
             if cover[index] is None:
                 cover[index] = f"platform_{category}"
+    for start, end, category, _name, _evidence in function_map_spans:
+        for index in range(start, end):
+            if cover[index] is None:
+                cover[index] = f"function_map_{category}"
+    for start, end, category, _evidence in function_map_gap_spans:
+        for index in range(start, end):
+            if cover[index] is None:
+                cover[index] = f"function_map_gap_{category}"
     for start, end, classification in gap_spans:
         for index in range(start, end):
             if cover[index] is None:
@@ -280,6 +342,10 @@ def analyze():
     rows = _collapse(cover, app)
     require(sum(r["bytes"] for r in rows) == APP_BYTES,
             "accounting does not conserve the application byte count")
+    string_rows = _string_rows(rows, app)
+    string_digest = sha256(json.dumps(
+        string_rows, sort_keys=True, separators=(",", ":")
+    ).encode())
 
     bucket_bytes = {}
     for row in rows:
@@ -288,14 +354,36 @@ def analyze():
     island_evidence: dict[str, list[str]] = {}
     for _, _, category, evidence in islands:
         island_evidence.setdefault(f"platform_{category}", []).append(evidence)
+    function_map_evidence: dict[str, list[dict]] = {}
+    for start, end, category, name, evidence in function_map_spans:
+        key = f"function_map_{category}"
+        function_map_evidence.setdefault(key, []).append({
+            "start": APP_BASE + start,
+            "end": APP_BASE + end,
+            "bytes": end - start,
+            "name": name,
+            "evidence": evidence,
+        })
+    function_map_gap_evidence: dict[str, list[dict]] = {}
+    for start, end, category, evidence in function_map_gap_spans:
+        key = f"function_map_gap_{category}"
+        function_map_gap_evidence.setdefault(key, []).append({
+            "start": APP_BASE + start,
+            "end": APP_BASE + end,
+            "bytes": end - start,
+            "evidence": evidence,
+        })
 
     return {
         "schema_version": 1,
         "component": "G2 charging-case typed_external_or_unsupported byte accounting",
         "app_base": APP_BASE, "app_bytes": APP_BYTES,
         "rows": rows,
+        "string_rows": string_rows,
         "bucket_bytes": bucket_bytes,
         "island_evidence": island_evidence,
+        "function_map_evidence": function_map_evidence,
+        "function_map_gap_evidence": function_map_gap_evidence,
         "metrics": {
             "admitted_function_source_candidate_bytes": admitted_bytes,
             "typed_external_or_unsupported_bytes": typed_external_bytes,
@@ -305,12 +393,24 @@ def analyze():
             "residual_ff_fill_bytes": bucket_bytes.get("residual_ff_fill", 0),
             "residual_log_string_candidate_bytes":
                 bucket_bytes.get("residual_log_string_candidate", 0),
+            "residual_log_string_candidate_rows": len(string_rows),
+            "residual_log_string_candidate_digest": string_digest,
             "residual_unresolved_code_or_data_bytes":
                 bucket_bytes.get("residual_unresolved_code_or_data", 0),
             "gap_frontier_bytes": sum(v for k, v in bucket_bytes.items()
                                        if k.startswith("gap_frontier_")),
             "platform_attributed_bytes": sum(v for k, v in bucket_bytes.items()
                                              if k.startswith("platform_")),
+            "function_map_attributed_bytes":
+                sum(v for k, v in bucket_bytes.items()
+                    if k.startswith("function_map_")),
+            "function_map_body_attributed_bytes":
+                sum(v for k, v in bucket_bytes.items()
+                    if k.startswith("function_map_") and
+                    not k.startswith("function_map_gap_")),
+            "function_map_gap_attributed_bytes":
+                sum(v for k, v in bucket_bytes.items()
+                    if k.startswith("function_map_gap_")),
             "row_count": len(rows),
         },
         "identity_windows_in_range": {
@@ -331,10 +431,10 @@ def analyze():
         "production_routed": False,
         "note": ("Naming a byte range here is a precondition for routing "
                  "reviewed source at those addresses, not source ownership "
-                 "itself. residual_unresolved_code_or_data remains opaque "
-                 "and needs a full Ghidra function map (recommended next "
-                 "action in g2-box-stm32g0-platform-recovery.md) before it "
-                 "can be reduced further."),
+                 "itself. function_map_* ranges are evidence-attributed by "
+                 "the authenticated Ghidra function map, but remain "
+                 "non-source-owned until routed to reviewed providers. "
+                 "residual_unresolved_code_or_data remains opaque."),
     }
 
 
@@ -348,10 +448,22 @@ def write_manifests(result):
             writer.writerow([f"0x{row['start']:08X}", f"0x{row['end']:08X}",
                              row["bytes"], row["category"], row["content_sha256"]])
     summary_path = MANIFEST_DIR / "g2-case-byte-accounting-summary.json"
-    slim = {k: v for k, v in result.items() if k != "rows"}
+    strings_path = MANIFEST_DIR / "g2-case-log-string-candidates.tsv"
+    with strings_path.open("w", newline="") as handle:
+        writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+        writer.writerow(["# SPDX-License-Identifier: MIT"])
+        writer.writerow(["start", "end_exclusive", "bytes", "content_sha256",
+                         "text"])
+        for row in result["string_rows"]:
+            writer.writerow([f"0x{row['start']:08X}", f"0x{row['end']:08X}",
+                             row["bytes"], row["content_sha256"],
+                             row["text"]])
+    slim = {k: v for k, v in result.items()
+            if k not in ("rows", "string_rows")}
     slim["row_count"] = len(result["rows"])
+    slim["string_row_count"] = len(result["string_rows"])
     summary_path.write_text(json.dumps(slim, indent=2, sort_keys=True) + "\n")
-    return [rows_path, summary_path]
+    return [rows_path, strings_path, summary_path]
 
 
 def main():

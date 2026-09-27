@@ -40,6 +40,13 @@ def require(value: bool, message: str) -> None:
         raise AuditError(message)
 
 
+def board_config_u32(builder, name: str) -> int:
+    try:
+        return builder.board_config_u32(name)
+    except Exception as error:
+        raise AuditError(f"Touch board contract missing {name}") from error
+
+
 def load_builder():
     spec = importlib.util.spec_from_file_location("g2_touch_source_builder", BUILDER)
     require(spec is not None and spec.loader is not None,
@@ -58,6 +65,14 @@ def analyze() -> dict:
         elf = output / build["elf"]["path"]
         raw = (output / build["raw"]["path"]).read_bytes()
         fwpk = (output / build["fwpk"]["path"]).read_bytes()
+        stack_top = board_config_u32(builder, "OPEN_CFW_TOUCH_STACK_TOP")
+        flash_base = board_config_u32(builder, "OPEN_CFW_TOUCH_FLASH_BASE")
+        flash_bytes = board_config_u32(builder, "OPEN_CFW_TOUCH_FLASH_BYTES")
+        fwpk_magic = board_config_u32(builder, "OPEN_CFW_TOUCH_FWPK_MAGIC")
+        fwpk_version = board_config_u32(builder, "OPEN_CFW_TOUCH_FWPK_VERSION")
+        record_type = board_config_u32(builder, "OPEN_CFW_TOUCH_FWPK_RECORD_TYPE")
+        payload_offset = board_config_u32(
+            builder, "OPEN_CFW_TOUCH_FWPK_PAYLOAD_OFFSET")
         nm_tool = str(NM) if NM.is_file() else "llvm-nm"
         lines = subprocess.run(
             [nm_tool, "-g", "--defined-only", str(elf)], check=True,
@@ -78,14 +93,16 @@ def analyze() -> dict:
         require(REQUIRED_SYMBOLS <= symbols,
                 f"Touch linked surface lost symbols: {sorted(REQUIRED_SYMBOLS-symbols)}")
         stack, reset = struct.unpack_from("<II", raw)
-        require(stack == 0x20002000 and reset & 1 == 1,
+        require(stack == stack_top and reset & 1 == 1,
                 "Touch vector table is not a valid Cortex-M0+ vector table")
-        require(reset < len(raw) and len(raw) <= 65536,
+        require(flash_base <= (reset & ~1) < flash_base + len(raw) and
+                len(raw) <= flash_bytes,
                 "Touch reset vector or flash extent is invalid")
-        require(fwpk[:4] == b"FWPK" and fwpk[4:8] == bytes.fromhex("01000202"),
+        require(struct.unpack_from("<I", fwpk)[0] == fwpk_magic and
+                struct.unpack_from("<I", fwpk, 4)[0] == fwpk_version,
                 "Touch FWPK identity changed")
         kind, size, offset, checksum = struct.unpack_from("<IIII", fwpk, 16)
-        require((kind, size, offset) == (3, len(raw), 0x20),
+        require((kind, size, offset) == (record_type, len(raw), payload_offset),
                 "Touch FWPK record layout changed")
         require(builder.crc32c(raw) == checksum,
                 "Touch FWPK record checksum mismatch")
@@ -112,6 +129,7 @@ def analyze() -> dict:
             },
             "software_link_complete": True,
             "software_package_complete": True,
+            "board_contract": build["board_contract"],
             "physical_board_services_routed": False,
             "production_routed": False,
             "hardware_validation": "blocked by unavailable physical evidence",

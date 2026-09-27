@@ -3,6 +3,12 @@
 Documentation is split the same way the code is: cross-target material lives
 here, and everything specific to a device lives with that device.
 
+For new G2 work, start with the [active pseudocode-first workflow](../g2/workflow/README.md).
+The former incremental driver and workflow review are preserved under
+[`archive/g2-incremental/`](archive/g2-incremental/). Existing G2 coverage and
+build documents below describe historical evidence and implementation; they do
+not override the new requirement to freeze the whole pseudocode corpus first.
+
 ## Cross-target (this directory)
 
 | Document | Read it when |
@@ -14,6 +20,8 @@ here, and everything specific to a device lives with that device.
 ## G2 — [`../g2/docs`](../g2/docs)
 
 Index: [`../g2/docs/README.md`](../g2/docs/README.md). Tools: [`../g2/tools/README.md`](../g2/tools/README.md).
+
+Active procedure and prompts: [`../g2/workflow/README.md`](../g2/workflow/README.md).
 
 | Document | Contents |
 | --- | --- |

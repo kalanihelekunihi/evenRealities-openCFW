@@ -13863,3 +13863,1110 @@ Verified on macOS through the Apollo core overlay builder. The leaves are byte-i
 Routed `0x0043A5B0..0x0043A5DC` as `open_cfw_runtime_am002_integer_float_helper` in `runtime_liblc3_am002_helpers.c`, and retargeted `open_cfw_runtime_am002_float_helper_wrapper` to call the source-owned helper instead of the retained placeholder address. The helper preserves the stock exponent extraction, mantissa mask, sign adjustment, and zero/negative-one handling path.
 
 Verified on macOS through the Apollo core overlay builder. The leaf is byte-identical to stock: 44 bytes / SHA-256 `ba53107c41d7b78d37fea9f4c52330599640f8dab9d4be1bc94e05c8c932d234`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 4 of 32 tracked functions source-owned in-place on macOS; 28 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 quadratic float interpolation helper source-routed
+
+Routed `0x0043A5DC..0x0043A690` as `open_cfw_runtime_am002_quadratic_float_interpolate` in `runtime_liblc3_am002_helpers.c`. The helper preserves the stock three-point float interpolation path, including the finite/classification guards, VFP divide/fused multiply-add sequence, and the PC-relative fallback literal load. The existing `open_cfw_runtime_liblc3_float_classify_wrapper` call into `0x0043A19C` was also retargeted from a retained placeholder to the AM-002 source-owned `open_cfw_runtime_am002_double_range_predicate`.
+
+Verified on macOS through the Apollo core overlay builder. The leaf is byte-identical to stock: 180 bytes / SHA-256 `e6c24e45d7b55e023a349aabc2de035c63a1e3b85670e37a7f80e1134b68bc4a`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 5 of 32 tracked functions source-owned in-place on macOS; 27 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 absolute-value copy helpers source-routed
+
+Routed `0x0043BA6C..0x0043BA96` as `open_cfw_runtime_am002_abs_pair_copy` and `0x0043BC58..0x0043BC82` as `open_cfw_runtime_am002_abs_single_copy` in `runtime_liblc3_am002_helpers.c`. Both helpers are call-free VFP loops that write a small descriptor and copy absolute float values into the output buffer.
+
+Verified on macOS through the Apollo core overlay builder. The leaves are byte-identical to stock: 42 bytes / SHA-256 `3790fd9ea5bf31db3c5a55e3c20204e524f621f721d8ce1d3d850079b4aad8a1` and 42 bytes / SHA-256 `74e0b8617973479d493caf7611d076365754f8f659189a86a0fba8bf82a61e27`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 7 of 32 tracked functions source-owned in-place on macOS; 25 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 tail lookup and mask helpers source-routed
+
+Routed the tail helper cluster `0x0043DCC0..0x0043DD52` from `runtime_liblc3_am002_helpers.c`: `open_cfw_runtime_am002_tail_copy16`, `open_cfw_runtime_am002_tail_sentinel_predicate`, `open_cfw_runtime_am002_tail_lookup`, `open_cfw_runtime_am002_uxth`, and `open_cfw_runtime_am002_high_byte_mask`. The lookup helper now calls the source-owned sentinel predicate instead of retaining that internal edge.
+
+Verified on macOS through the Apollo core overlay builder. The leaves are byte-identical to stock: 18 bytes / SHA-256 `f73e45d66d1de715a1cb3942d89782eb1b96f870340fc063782c50ee367fc9a6`, 14 bytes / SHA-256 `5f4d8578d1c93ca71614bc46df4d853223c3b8e389efde4fef5231c6cde6f999`, 104 bytes / SHA-256 `094798629ce86c61f6c7e0aee2be68676cb8e7629dba07c4d0a2959a63dabcce`, 4 bytes / SHA-256 `952beac4ed6fe10a2de94037d8295a333b4a796f6ce6ed3a09b86d74e60004ca`, and 6 bytes / SHA-256 `26608608b50879294947fe099bd26150ba22e5506599b739bc48bfdedcdd8416`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 12 of 32 tracked functions source-owned in-place on macOS; 20 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 compare and bounded string helpers source-routed
+
+Routed `0x0043BFAC..0x0043BFCE` as `open_cfw_runtime_am002_negative_bounded_strlen`, `0x0043C0B0..0x0043C0E4` as `open_cfw_runtime_am002_double_compare_flags`, and `0x0043BAF4..0x0043BB00` as `open_cfw_runtime_am002_double_compare_bool` in `runtime_liblc3_am002_helpers.c`. The boolean wrapper now calls the source-owned compare-flags helper instead of retaining that internal edge.
+
+Verified on macOS through the Apollo core overlay builder. The leaves are byte-identical to stock: 34 bytes / SHA-256 `d487d2db8bfc9cc251e1b19c01f67fdb31804395f30093ff939c938cfce5544f`, 52 bytes / SHA-256 `f477d157e5470add8ec143ce6102542cd5c77ef7e185f09bbd80f3113d6b813d`, and 12 bytes / SHA-256 `52ad55cec64f5c1e5b80cecc8ac256e5ee19428ba612eef4c0b8efcbc3c9a573`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 15 of 32 tracked functions source-owned in-place on macOS; 17 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 reverse memset and literal stubs source-routed
+
+Routed the reverse memset helper as a full fall-through envelope `0x0043C0E4..0x0043C14A` in `runtime_liblc3_am002_helpers.c`; this covers both the `0x0043C0E4` byte-pattern expansion entry and the `0x0043C0EC` fill body. Also routed `0x0043BB00..0x0043BB14` as `open_cfw_runtime_am002_reverse_memset_wrapper` and the three literal byte helpers at `0x0043D0C8`, `0x0043D0CE`, and `0x0043D0DA`.
+
+Verified on macOS through the Apollo core overlay builder. The full reverse memset envelope is byte-identical to stock: 102 bytes / SHA-256 `34da1a99d5cb56ca41cfaff98190ced2a7767f53cd95c53c504009566e9ca10a`; the wrapper is 20 bytes / SHA-256 `da7dc069a9d88cfb2b99c7911d06ce8c9732fa3e5905c0f575145a72094cc661`; the literal stubs are 6 bytes each / SHA-256 `c1dde85904f039c96abb8f881705535bd96c2836cd6e964f352d3ea74089361f`, `67a7f1251b188a6b8e0f3c03b6f0c6141f47f1eb600a68648867c25253c712d5`, and `bee046f4007cc91a50ab2d5daeb976dc9b8a54a22ee8360a6b8967fe3dc4053a`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 20 of 32 tracked functions source-owned in-place on macOS; 12 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 double atan core source-routed
+
+Routed `0x0043C260..0x0043C36E` as `open_cfw_runtime_am002_double_atan_core` in `runtime_liblc3_am002_helpers.c`. This first source route preserves the full 270-byte contiguous Thumb envelope, including the interior literal/data words between Ghidra's executable ranges; the span no longer needs retained binary pull-through in the macOS build.
+
+Verified on macOS through the Apollo core overlay builder. The envelope is byte-identical to stock: 270 bytes / SHA-256 `b69e1f84d2bade8702adfb2fd50ac4cb218a8d50af0fbc28a9c8f92d7692b558`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 21 of 32 tracked functions source-owned in-place on macOS; 11 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 interpolation windows source-routed
+
+Routed `0x0043BC84..0x0043BE14` as `open_cfw_runtime_am002_interpolate_window_a` and `0x0043BE18..0x0043BFA8` as `open_cfw_runtime_am002_interpolate_window_b` in `runtime_liblc3_am002_helpers.c`. These first source routes preserve the exact 400-byte Thumb envelopes for both related interpolation/selection windows; semantic cleanup into mnemonic assembly remains possible later.
+
+Verified on macOS through the Apollo core overlay builder. The envelopes are byte-identical to stock: 400 bytes / SHA-256 `d9aa27adda4dedb70d08720212d85bd8b79ae729fdf5954899d1bb9e1a8a36e0` and 400 bytes / SHA-256 `a69dca174bcbc6d333582dae100308ef46202d037ea362c7a693bb611a7145c0`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 23 of 32 tracked functions source-owned in-place on macOS; 9 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 selection normalizer source-routed
+
+Routed `0x0043BB14..0x0043BC54` as `open_cfw_runtime_am002_select_normalize` in `runtime_liblc3_am002_helpers.c`. This first source route preserves the exact 320-byte Thumb envelope for the local selection/normalization helper used by the larger AM-002 numerical path.
+
+Verified on macOS through the Apollo core overlay builder. The envelope is byte-identical to stock: 320 bytes / SHA-256 `1b0d4f5522467e1ca48b61051e88750acf15f899c5098653ae773d1f5c1823de`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 24 of 32 tracked functions source-owned in-place on macOS; 8 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 discontinuous exponent range helper source-routed
+
+Routed the discontinuous `0x0043BA98` tracked helper through three non-overlapping source leaves in `runtime_liblc3_am002_helpers.c`: `0x0043BA98..0x0043BAC4` as `open_cfw_runtime_am002_exp_range_prefix`, `0x0043BAC8..0x0043BAF2` as `open_cfw_runtime_am002_exp_range_mid`, and `0x0043BFD0..0x0043C08E` as `open_cfw_runtime_am002_exp_range_tail`. This avoids the misleading contiguous `0x0043BA98..0x0043C08E` envelope because that span overlaps adjacent AM-002 helpers that are already source-owned in-place.
+
+Verified on macOS through the Apollo core overlay builder. The subranges are byte-identical to stock: 44 bytes / SHA-256 `ef482288958c26d4df96aaab7b8690f72b53b4bb94d55aa1d26dbec85fec4f42`, 42 bytes / SHA-256 `624167ad01cb78d3b254573e190423db21dbeac52dc9589bf51893516e343318`, and 190 bytes / SHA-256 `6495ca87f6df3fd0f2237e861aace86e65cafedf971fdcee81b9acc10c6e8ffc`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 25 of 32 tracked functions source-owned in-place on macOS; 7 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 peripheral float gate source-routed
+
+Routed `0x0043A1B0..0x0043A59E` as `open_cfw_runtime_am002_peripheral_float_gate` in `runtime_liblc3_am002_helpers.c`. This first source route preserves the full 1006-byte contiguous Thumb envelope, including internal literal/data material across Ghidra's split ranges, and removes another retained binary pull-through span from the macOS build.
+
+Verified on macOS through the Apollo core overlay builder. The envelope is byte-identical to stock: 1006 bytes / SHA-256 `be48650bcbb672e088412256e2b430af510bea5252b236d3a10c4f7db103d896`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 26 of 32 tracked functions source-owned in-place on macOS; 6 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 main numeric envelope source-routed
+
+Routed `0x0043A698..0x0043BA6C` as `open_cfw_runtime_am002_numeric_main_envelope` in `runtime_liblc3_am002_helpers.c`. This first source route preserves the full 5076-byte contiguous Thumb envelope, including internal branch islands and literal material, and stops just before the already source-owned `open_cfw_runtime_am002_abs_pair_copy` leaf.
+
+Verified on macOS through the Apollo core overlay builder. The envelope is byte-identical to stock: 5076 bytes / SHA-256 `301ca2b8bbbe07bc5ceda41d9234c3b6b953372cc6b19367eb76a8e4610c7e11`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has 27 of 32 tracked functions source-owned in-place on macOS; 5 functions remain opaque or LVGL-associated.
+
+### 2026-09-16 - AM-002 LVGL style getter wrappers source-routed
+
+Routed the four AM-002 tail LVGL wrappers in `lvgl_layout_style_getters.c`: `0x0043DD52..0x0043DD5C` as `open_cfw_lvgl_get_style_width_am002`, `0x0043DD5C..0x0043DD66` as `open_cfw_lvgl_get_style_height_am002`, `0x0043DD66..0x0043DD72` as `open_cfw_lvgl_get_style_recovered_0a_am002`, and `0x0043DD72..0x0043DD7C` as `open_cfw_lvgl_get_style_recovered_6a_am002`. They are thin source wrappers around the retained LVGL style-property core at `0x0044BDEA`; the `0x0A` wrapper preserves the stock byte-narrowing result.
+
+Verified on macOS through the Apollo core overlay builder. The wrappers are byte-identical to stock: 10 bytes / SHA-256 `33856503bc279651797937018ee55e385fecca2fd45633a6487bc8aef1414da9`, 10 bytes / SHA-256 `b4199bc5e5784f9c819c809f22a8ba5e986281738b4a58011a6a0b4ee0e63a55`, 12 bytes / SHA-256 `d55ccfa4d65ff3a7abfde3c7b66be5b8d8837683596ffc56bd9765c828217854`, and 10 bytes / SHA-256 `d85dd757687bcfb60b9575cd885bdc89073991c5a15e09a30d839dbda90bef6c`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-002 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-003 exact island source-routed
+
+Routed all 32 tracked AM-003 rows `0x0043DD7C..0x0043E1FA` through `runtime_liblc3_am003_helpers.c`, with one guarded exact halfword source function per row. This closes the AM-003 LVGL/no-census tranche for the macOS G2 build without retaining a binary pull-through island.
+
+Verified on macOS through the Apollo core overlay builder. All AM-003 rows are byte-identical to stock; the generated source file is SHA-256 `6fc8212f344270c878d4c6f365d4755654b10ca9f1990e81ef168adb350d36dd`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-003 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-004 exact island source-routed
+
+Routed all 32 tracked AM-004 rows `0x0043E1FA..0x0043EF70` through `runtime_liblc3_am004_helpers.c`, with one guarded exact halfword source function per row. This closes the AM-004 LVGL/no-census tranche for the macOS G2 build without retaining a binary pull-through island.
+
+Verified on macOS through the Apollo core overlay builder. All AM-004 rows are byte-identical to stock; the generated source file is SHA-256 `8fae8a5d8a39d01bddc44b054d6ab134e9109ed62b1773695cbdd13405297edf`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-004 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-005 exact island source-routed
+
+Routed all 32 tracked AM-005 rows `0x0043EF70..0x0043FD8C` through `runtime_liblc3_am005_helpers.c`, with one guarded exact halfword source function per row. This closes the AM-005 LVGL/no-census tranche for the macOS G2 build while preserving the small untracked gaps between rows instead of folding them into a misleading broad envelope.
+
+Verified on macOS through the Apollo core overlay builder. All AM-005 rows are byte-identical to stock; the generated source file is SHA-256 `2fbd0a62a8a887865447bd54e3ec7655b220f71d9a41b9ba3a6b05ff09da5327`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-005 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-006 exact island source-routed
+
+Routed all 32 tracked AM-006 rows `0x0043FD9E..0x00441004` through `runtime_liblc3_am006_helpers.c`, with one guarded exact halfword source function per row. This closes the AM-006 mixed LVGL/no-census/investigation tranche for the macOS G2 build while preserving the untracked gaps between rows.
+
+Verified on macOS through the Apollo core overlay builder. All AM-006 rows are byte-identical to stock; the generated source file is SHA-256 `83e434700d597382af6d0b0b8e80b7f28f30d7c3ac3803614ed1a302c3ea9b6a`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-006 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-007 exact island source-routed
+
+Routed all 64 tracked AM-007 rows through `runtime_liblc3_am007_helpers.c`, with one guarded exact halfword source function per row. The tranche spans three retained stock artifacts (`main-opaque-0x0043dc88.bin`, `main-opaque-0x00441ec4.bin`, and `main-opaque-0x00442030.bin`), and the source routing keeps those gaps explicit instead of folding them into broad envelopes.
+
+Verified on macOS through the Apollo core overlay builder. All AM-007 rows are byte-identical to stock; the generated source file is SHA-256 `a63d734a9594b0bd467fa4f4f55475f29069aa1cabd95fff1a879ce954cb3d4f`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-007 now has all 64 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-008 bounded rows source-routed
+
+Routed 31 bounded AM-008 rows through `runtime_liblc3_am008_helpers.c`, with one guarded exact halfword source function per row. The anomalous `0x00442134..0x005FA132` row remains explicitly classified as `rejected-oversized-envelope` because the tracker span crosses the trust cap and overlaps neighboring AM-008 evidence if treated as a normal contiguous function.
+
+Verified on macOS through the Apollo core overlay builder. The 31 bounded rows are byte-identical to stock; the generated source file is SHA-256 `0d3c434fb0adf5672c1df2105aa841e1424486c18ab738182ae1d1f0b6c4d8fc`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-008 now has 31 of 32 tracked rows source-owned in-place on macOS; the remaining row is the rejected oversized-envelope anomaly.
+
+### 2026-09-16 - AM-008 split FreeRTOS SVC row resolved
+
+Resolved the remaining AM-008 `rejected-oversized-envelope` row as a discontinuous FreeRTOS SVC path rather than a contiguous `0x00442134..0x005FA132` body. The local `vPortSVCHandler_C` body `0x00442134..0x0044215A` is now routed through `runtime_liblc3_am008_helpers.c` as `open_cfw_runtime_am008_42134`; the paired `SVC_Handler` range `0x005FA120..0x005FA132` was already source-copied as FreeRTOS port code and remains documented in the FreeRTOS port audit.
+
+Verified on macOS through the Apollo core overlay builder. The local split body is byte-identical to stock: 38 bytes / SHA-256 `7afe568df362a8b1af03c36af654ed56bd68da6b7266ee1172eb556ae2276c19`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-008 now has all 32 tracked rows source-owned in-place on macOS.
+
+### 2026-09-16 - AM-009 exact island source-routed
+
+Routed all 32 tracked AM-009 rows `0x00448B96..0x0044AA68` through `runtime_liblc3_am009_helpers.c`, with one guarded exact halfword source function per row. This closes the mixed investigation/CMSIS-FreeRTOS/no-census tranche for the macOS G2 build while preserving the gaps between tracked rows.
+
+Verified on macOS through the Apollo core overlay builder. All AM-009 rows are byte-identical to stock; the generated source file is SHA-256 `ea0b8ce7b88b14a7fd340cc7f7b3df65e55c0caca134c9e005eaada40b526991`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-009 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-010 exact island source-routed
+
+Routed all 32 tracked AM-010 rows `0x0044AA98..0x0044B8AC` through `runtime_liblc3_am010_helpers.c`, with one guarded exact halfword source function per row. This closes the mixed investigation/IAR dlib/LVGL tranche for the macOS G2 build while preserving the gaps between tracked rows.
+
+Verified on macOS through the Apollo core overlay builder. All AM-010 rows are byte-identical to stock; the generated source file is SHA-256 `f0ae7708b45b94f0a4ab166f74025ef9c525419a6d58b843c0459964ee8fe8b0`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-010 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-011 exact island source-routed
+
+Routed all 32 tracked AM-011 rows `0x0044B8AC..0x0044CAD8` through `runtime_liblc3_am011_helpers.c`, with one guarded exact halfword source function per row. This closes the mixed LVGL/no-census/investigation tranche for the macOS G2 build while preserving the gaps between tracked rows.
+
+Verified on macOS through the Apollo core overlay builder. All AM-011 rows are byte-identical to stock; the generated source file is SHA-256 `fb0e33e201abb71a95b98369cde0ebcc6128fc4b77d863466b46122e5ab8dd79`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-011 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-012 exact island source-routed
+
+Routed all 32 tracked AM-012 rows `0x0044CC8C..0x0044DBC4` through `runtime_liblc3_am012_helpers.c`, with one guarded exact halfword source function per row. This closes the LVGL/no-census tranche for the macOS G2 build while preserving the gaps between tracked rows.
+
+Verified on macOS through the Apollo core overlay builder. All AM-012 rows are byte-identical to stock; the generated source file is SHA-256 `1d643d49c754908d2da84e257dbdbc065a0ccaa18b34cae7e9e565ea8426ff5f`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-012 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-013 exact island source-routed
+
+Routed all 32 tracked AM-013 rows `0x0044DBC4..0x0044E412` through `runtime_liblc3_am013_helpers.c`, with one guarded exact halfword source function per row. This closes the LVGL/no-census tranche for the macOS G2 build while preserving the gaps between tracked rows.
+
+Verified on macOS through the Apollo core overlay builder. All AM-013 rows are byte-identical to stock; the generated source file is SHA-256 `b02da43d6a3b6390e7c74c6846f056702af2a89d4b8a21d7cd2680de6cb779f9`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-013 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-014 exact island source-routed
+
+Routed all 32 tracked AM-014 rows `0x0044E412..0x0044FA5E` through `runtime_liblc3_am014_helpers.c`, with one guarded exact halfword source function per row. This closes the LVGL/no-census tranche for the macOS G2 build while preserving the gaps between tracked rows.
+
+Verified on macOS through the Apollo core overlay builder. All AM-014 rows are byte-identical to stock; the generated source file is SHA-256 `b1be6762282b59e83912b4a9bc99e7a97789f124625b09db7f0e0ad7948e8c1b`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-014 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-015 exact island source-routed
+
+Routed all 32 tracked AM-015 rows `0x0044FA5E..0x004501D2` through `runtime_liblc3_am015_helpers.c`, with one guarded exact halfword source function per row. This closes the LVGL/no-census tranche for the macOS G2 build while preserving the gaps between tracked rows.
+
+Verified on macOS through the Apollo core overlay builder. All AM-015 rows are byte-identical to stock; the generated source file is SHA-256 `fb28efc329094a29309267f2c583471ebfda2193223f36bc8e94f77c0fffd5fe`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-015 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-016 exact island source-routed
+
+Routed all 32 tracked AM-016 rows `0x004501D2..0x00450B80` through `runtime_liblc3_am016_helpers.c`, with one guarded exact halfword source function per row. This closes the LVGL/no-census tranche for the macOS G2 build while preserving the gaps between tracked rows.
+
+Verified on macOS through the Apollo core overlay builder. All AM-016 rows are byte-identical to stock; the generated source file is SHA-256 `2b0c3846fd03c26c26feeb2f7eb3f4e725f11e2547f54ff0fe9961d4ac2536aa`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-016 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-017 exact island source-routed
+
+Routed all 32 tracked AM-017 rows `0x00450B80..0x00451B34` through `runtime_liblc3_am017_helpers.c`, with one guarded exact halfword source function per row. This closes the LVGL/no-census tranche for the macOS G2 build while preserving the gaps between tracked rows.
+
+Verified on macOS through the Apollo core overlay builder. All AM-017 rows are byte-identical to stock; the generated source file is SHA-256 `dd6e5f7d250919c893eadf2825d0981c6c5ae2d191660bac2eec20ca69430a42`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-017 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-018 exact island source-routed
+
+Routed all 32 tracked AM-018 rows `0x00451B34..0x0045246E` through `runtime_liblc3_am018_helpers.c`, with one guarded exact halfword source function per row. This closes the LVGL/no-census tranche for the macOS G2 build while preserving the gaps between tracked rows.
+
+Verified on macOS through the Apollo core overlay builder. All AM-018 rows are byte-identical to stock; the generated source file is SHA-256 `e1fb3c566b0c0937f2728967dd7a3aa45398d3fe27efc48db732b5ece2cac91d`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-018 now has all 32 tracked functions source-owned in-place on macOS.
+
+### 2026-09-16 - AM-019 exact island source-routed
+
+Routed all 32 tracked AM-019 rows `0x0045246E..0x00452C66` through `runtime_liblc3_am019_helpers.c`, with one guarded exact halfword source function per row. This closes the LVGL tranche for the macOS G2 build while preserving the gaps between tracked rows.
+
+Verified on macOS through the Apollo core overlay builder. All AM-019 rows are byte-identical to stock; the generated source file is SHA-256 `c47e23cceb3e43b856979072611647ae3315b7493c6fff64c0b97f27cda4001b`. The Apollo overlay remains SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`; the component remains SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`. AM-019 now has all 32 tracked functions source-owned in-place on macOS.
+### AM-020 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am020_helpers.c` with 32 guarded exact helper leaves for `0x00452C66..0x0045316A`.
+- Registered the AM-020 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-020 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `0cff1635c5c2a2409762d220f81cf1c3ab4e794ddaa55d10c7d91c7875f95718`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-021 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am021_helpers.c` with 32 guarded exact helper leaves for `0x0045316A..0x004547AE`.
+- Registered the AM-021 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-021 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `538535b7c918a9fecbb16fdb65e995660d8be3b0333c61c19646972815deaf50`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-022 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am022_helpers.c` with 32 guarded exact helper leaves for `0x004547AE..0x00456606`.
+- Registered the AM-022 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-022 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `068f612960e6e92fa3fff96f77829d6357e9c7f61bf4d7d25d02f5e87434f34c`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-023 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am023_helpers.c` with 32 guarded exact helper leaves for `0x00456606..0x0045D536`.
+- Registered the AM-023 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-023 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `d2345a0828027697404ede84ae0842299f848f33756c6366cd65a166afc9c9dc`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-024 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am024_helpers.c` with 32 guarded exact helper leaves for `0x0045E664..0x0045FC5A`.
+- Registered the AM-024 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-024 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `56f93edf6d91ad7c6b8a91354984ac0e3a5b289302ddadb1df46e854e9f7bbb4`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-025 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am025_helpers.c` with 32 guarded exact helper leaves for `0x0045FC5A..0x00461026`.
+- Registered the AM-025 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-025 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `9903a7a38d56a4a242b3ce08cd4db3298f7ab552a94f597d0f1405997901fec8`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-026 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am026_helpers.c` with 15 guarded exact helper leaves for `0x00461044..0x004631AA`.
+- Registered the AM-026 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-026 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `bedc96db8ef7166db4be519e8db92978f7881ac0c67a08b67a81ab5b5f773e45`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-027 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am027_helpers.c` with 32 guarded exact helper leaves for `0x0046327E..0x00464C36`.
+- Registered the AM-027 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-027 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `2fa872efc1573eee686755da84425b3f1c80defa7acf66098646cac0ca375d5b`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-028 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am028_helpers.c` with 32 guarded exact helper leaves for `0x00464C36..0x0046919E`.
+- Registered the AM-028 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-028 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `2c64ffdc1be823d14d85e9112bc4a7fada3baa124ac826a4eb746cffd07f97e9`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-029 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am029_helpers.c` with 32 guarded exact helper leaves for `0x0046919E..0x0046CADE`.
+- Registered the AM-029 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-029 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `1b3be49b12f79fd199b6218d6edc1e1e460dbbdccda65f3fe707fb39e0544ab7`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-030 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am030_helpers.c` with 32 guarded exact helper leaves for `0x0046D8A0..0x0046F4C2`.
+- Registered the AM-030 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-030 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `9466f3d4ca0bd4fa23756d6bbe14a7cad41ffb573fb4a39d9eb81148c5ceab1d`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-031 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am031_helpers.c` with 32 guarded exact helper leaves for `0x0046F4C2..0x004709B2`.
+- Registered the AM-031 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-031 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `e76d8dd534b1a60cf417c750289b1c431fc0b2a66e8dcec99adafc2fabb7f111`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-032 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am032_helpers.c` with 32 guarded exact helper leaves for `0x004709C0..0x0048431E`.
+- Registered the AM-032 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-032 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `1e48239f11feb892295e0c4f91de5a09aa3649b012c5343a6a51b28eefbf504b`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-033 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am033_helpers.c` with 25 guarded exact helper leaves for `0x00484380..0x00484A96`.
+- Registered the AM-033 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-033 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `032856f776b496740b97bb07b4aa4c25e65d7b52f07f3c79be898672c10c5518`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-034 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am034_helpers.c` with 7 guarded exact helper leaves for `0x00484A98..0x0048834C`, preserving untracked gaps between rows.
+- Registered the AM-034 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-034 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `967e093d00e089b9cf440990204d5353234ebbdedcb808bb506838693264958f`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-035 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am035_helpers.c` with 31 guarded exact helper leaves for `0x0048834C..0x0048949A`.
+- Registered the AM-035 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-035 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `4f3abea1062e7db4b652317748eeedc55ad63c53a7f59b7cb8e6ce61edf76a92`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-036 source-owned bounded entry thunk
+- Resolved the AM-036 `rejected-oversized-envelope` row as a Ghidra/analyzer artifact, not a contiguous function body. The boundary audit pins the rejected `0x0048949C..0x004D558E` envelope as a mixed region containing accepted function code, tables, gaps, and candidate code.
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am036_helpers.c` with the non-overlapping 8-byte entry thunk `0x0048949C..0x004894A4`; the overlapping `0x004894A4` body remains reserved for AM-037.
+- Registered the AM-036 thunk in `components/apollo_main/core_overlay/overlay.json`; helper source SHA-256 `d5964345dc57d04de93f48923054e690698e036fdb7b4b1c1d64bd5f376a2e95`, stock thunk SHA-256 `950f48fe6b06ed8d464c2581fc72d4e3b65fffde14676b84e3890913f9902fac`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-037 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am037_helpers.c` with 32 guarded exact helper leaves for `0x004894A4..0x0048AA38`, immediately after the bounded AM-036 entry thunk.
+- Registered the AM-037 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-037 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `5323e542e366b1f39d71255e48a54e65f42dbb5f073d25dceee09cc90ebfa246`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-038 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am038_helpers.c` with 32 guarded exact helper leaves for `0x0048AA54..0x0048B928`.
+- Registered the AM-038 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-038 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `69f3d69da30f08c6099258d9d7d021e4480b334f4e44706d517a1dab3099d9cc`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-039 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am039_helpers.c` with 32 guarded exact helper leaves for `0x0048B928..0x0048C7B2`.
+- Registered the AM-039 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-039 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `be483251fdf8ac50588e5ddca8c5cc290cef701d231803258c84d7021b92a4b9`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-040 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am040_helpers.c` with 64 guarded exact helper leaves for `0x0048C7B4..0x0048D866`.
+- Registered the AM-040 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-040 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `4290a9cfba7b49446c8d2a5cf7dfe63c6acf4a6eb89565cc39e77b1612df97e8`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-041 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am041_helpers.c` with 32 guarded exact helper leaves for `0x0048D868..0x0048F324`.
+- Registered the AM-041 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-041 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `6ae2786838bcfd7bba1260ee707b2c4c64a81af81c7952d041ba79ee9ecb923c`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-042 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am042_helpers.c` with 32 guarded exact helper leaves for `0x00490120..0x00492F8C`.
+- Registered the AM-042 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-042 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `d8cbe65d4f50c944e98a843d9ffab0565d90df19d326bb2ef37168a158aa051b`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-043 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am043_helpers.c` with 32 guarded exact helper leaves for `0x00492FDC..0x00498654`.
+- Registered the AM-043 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-043 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `6afa247ca56e2efc39c06aea8e2a79aee055499175a050a9ad657c27ace8c74a`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-044 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am044_helpers.c` with 32 guarded exact helper leaves for `0x00498654..0x00499678`.
+- Registered the AM-044 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-044 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `19fdc2b8408a2c7de6eb3e2f52d3f6299b5f67b5c35f571e2025980acb7e66a8`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-045 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am045_helpers.c` with 32 guarded exact helper leaves for `0x00499678..0x0049EB96`.
+- Registered the AM-045 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-045 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `f841b7ccd8edcf3918d149991da1c100252778fbb9f7f14d33c841d4f085cf85`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+### AM-046 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am046_helpers.c` with 31 guarded exact helper leaves for `0x0049EB96..0x004A235E`.
+- Registered the AM-046 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-046 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `e4c63c1bb96f55e6fe5f5a0b91dd99ba8e5f6010e6202af8308484d4ffb5e023`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+
+### AM-047 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am047_helpers.c` with 32 guarded exact helper leaves for `0x004A23AC..0x004A625A`.
+- Registered the AM-047 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-047 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `71b79734d8da7165b206fe77b2d6632f454124cfc50d7d5fa60768d239cf755d`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-048 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am048_helpers.c` with 32 guarded exact helper leaves for `0x004A6270..0x004A9ED0`.
+- Registered the AM-048 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-048 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `329c13c8ee071e477500fcc14c9ef77a5f9b83911704c42d11ac62336417fabf`.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-049 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am049_helpers.c` with 32 guarded exact helper leaves for `0x004A9EDC..0x004B0D38`.
+- Registered the AM-049 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-049 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `9438d42b0010c36b1cd90856889f80a04a9a09a2db8c93a2eb99bfa051999fd8`. The prior mixed/LVGL/no-evidence labels are preserved per function as previous classification context; the macOS build path now owns these bytes through exact source leaves.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-050 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am050_helpers.c` with 32 guarded exact helper leaves for `0x004B0D38..0x004B201E`.
+- Registered the AM-050 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-050 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `0e3e66c87e38ca83fe373b9849ca551e6bd8f0e4a34c629a1c1b6d868e9d4421`. The prior LVGL/no-census/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-051 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am051_helpers.c` with 32 guarded exact helper leaves for `0x004B201E..0x004B3BD2`.
+- Registered the AM-051 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-051 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `3dc9f400556622ac8cc05be6ac92019649145853c8153d2d6c0433915d0d01ab`. Prior LVGL/Cordio/AmbiqSuite/no-evidence labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-052 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am052_helpers.c` with 32 guarded exact helper leaves for `0x004B3BD2..0x004B522E`.
+- Registered the AM-052 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-052 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `c4077f75bae8964d7757d9743ef14ce046ffc4244cd7589b7a910610b84199e6`. Prior Cordio/AmbiqSuite/IAR/no-evidence labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-053 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am053_helpers.c` with 32 guarded exact helper leaves for `0x004B7478..0x004BFD6E`.
+- Registered the AM-053 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-053 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `98ee6547922ccd8b466315f3bb75e2cf9787f7463c5187a0fcc5b6870f522e22`. Prior first-party/Cordio/no-evidence labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-054 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am054_helpers.c` with 19 guarded exact helper leaves for `0x004BFD6E..0x004C23DE`.
+- Registered the AM-054 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-054 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `68585b98a21670a12c882a65e5bd9e8f19032fd709101ff8aa227cc45d0a2722`. Prior no-evidence labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-055 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am055_helpers.c` with 32 guarded exact helper leaves for `0x004C240E..0x004C427E`.
+- Registered the AM-055 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-055 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `393b5a47e6d097c49887227f0846d17ba717c025fdeae5cadba17d31021056fb`. Prior no-evidence labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-056 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am056_helpers.c` with 32 guarded exact helper leaves for `0x004C427E..0x004C706E`.
+- Registered the AM-056 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-056 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `e23b938e9be511b94b8abc924500d8f355d5196ffc7f9ea66d9401f96fc2d4d9`. Prior no-evidence/first-party/no-census/LVGL labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-057 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am057_helpers.c` with 32 guarded exact helper leaves for `0x004C706E..0x004C91DE`.
+- Registered the AM-057 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-057 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `8003e7fa3a9a334d6980a299772456bf3a0879367445726e67b0a7d9b713cfab`. Prior no-census/LVGL/littlefs labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-058 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am058_helpers.c` with 32 guarded exact helper leaves for `0x004C91E0..0x004CA662`.
+- Registered the AM-058 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-058 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `38baceab8029474d91eb5ee251d5f71c7228fdf699fc866de81413e8c762393a`. Prior no-census/LVGL/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-059 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am059_helpers.c` with 32 guarded exact helper leaves for `0x004CA80A..0x004CAFBE`.
+- Registered the AM-059 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-059 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `cb2ef6465b1746db45f8ecda28e6c83c64168687f00fb08ef9c08db730047077`. Prior littlefs/no-census/first-party/no-evidence labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-060 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am060_helpers.c` with 32 guarded exact helper leaves for `0x004CAFBE..0x004CD550`.
+- Registered the AM-060 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-060 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `7e998d9ce18fd277cc001b6ad1d5790a889949ddb65fa55b665cbe464d054bbc`. Prior littlefs/no-census/mixed labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-061 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am061_helpers.c` with 32 guarded exact helper leaves for `0x004CD558..0x004CF554`.
+- Registered the AM-061 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-061 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `89f1856c7b385acead3494639a9f9d08c73bab852ae5bba0b2c0bee2f20da1bb`. Prior littlefs/no-census/first-party/mixed labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-062 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am062_helpers.c` with 32 guarded exact helper leaves for `0x004CF564..0x004CFD84`.
+- Registered the AM-062 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-062 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `2309d4a61ae612a985a475fda7dffd652594d72f0b3353111884c804cd7b92e9`. Prior littlefs/no-census/no-evidence labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-063 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am063_helpers.c` with 32 guarded exact helper leaves for `0x004CFD84..0x004D039E`.
+- Registered the AM-063 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-063 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `4ff2674e9a7d9b057aabf82b3838d27fdf5d9b1f91f85a26488ab22d55628c4e`. Prior TLSF/no-census/no-evidence labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-064 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am064_helpers.c` with 32 guarded exact helper leaves for `0x004D039E..0x004D3944`.
+- Registered the AM-064 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-064 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `a8be68c17732c4c2fe9809fabe2fddf56c7c7efd68234dd3bb153d69203508d9`. Prior TLSF/IAR/Cordio/no-evidence labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-065 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am065_helpers.c` with 32 guarded exact helper leaves for `0x004D3944..0x004D4354`.
+- Registered the AM-065 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-065 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `7c3a207ff6aa3c3ccf3f46621ec1fff011692d8ef64a3e47ec40d0aab88a9b32`. Prior no-evidence/IAR-dlib labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-066 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am066_helpers.c` with 32 guarded exact helper leaves for `0x004D4354..0x004D483E`.
+- Registered the AM-066 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-066 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `35c419f8ad6620572e61e7ae0adfc5fb9a1cddfeea5080ee4ab2ec30cc3b6f60`. Prior LVGL/no-census/no-evidence labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-067 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am067_helpers.c` with 64 guarded exact helper leaves for `0x004D483E..0x004D522C`.
+- Registered the AM-067 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-067 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `f21174ddbebec8186afbc113238e4fe2a3ece073b3960d3216d8ba28e6d82bea`. Prior LVGL/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-068 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am068_helpers.c` with 32 guarded exact helper leaves for `0x004D5278..0x004D9384`.
+- Registered the AM-068 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-068 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `2c242d6b294b2338ab604e76d0dc5894023e14d2daf36e7c63630ccb8eb74874`. Prior no-census/LVGL/no-evidence/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-069 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am069_helpers.c` with 21 guarded exact helper leaves for `0x004D94B8..0x004DCBA8`.
+- Registered the AM-069 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-069 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `793aed9f76dd6e43c0c1202a1d8667e288011a241bddc31eed4d936cfe2469d3`. Prior first-party/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-070 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am070_helpers.c` with 24 guarded exact helper leaves for `0x004DCC98..0x004E0286`.
+- Registered the AM-070 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-070 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `d80e0d6f437b1c4b0af274960c4122239c5967f2189eeb7bd5cc67a5b1112f2b`. Prior first-party/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-071 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am071_helpers.c` with 32 guarded exact helper leaves for `0x004E033C..0x004E8DA6`.
+- Registered the AM-071 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-071 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `94bd8dd21e81df0cb971d65a3a35063368ccbecaa65d610366eef2c5926773c9`. Prior no-census/first-party/CMSIS-FreeRTOS labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-072 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am072_helpers.c` with 22 guarded exact helper leaves for `0x004E92F4..0x004EC218`.
+- Registered the AM-072 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-072 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `19e98868b19328f9e7e563c424665284a4055ba2e7f73942994a625a278917a6`. Prior first-party/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-073 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am073_helpers.c` with 21 guarded exact helper leaves for `0x004EC2DC..0x004EEBDC`.
+- Registered the AM-073 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-073 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `1981b587d6c55bc91c9cde59f37fc5b8119c5147fa9f6b742f9e8618acc0e755`. Prior no-census/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-074 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am074_helpers.c` with 22 guarded exact helper leaves for `0x004EEBDC..0x004F153A`.
+- Registered the AM-074 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-074 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `ba7803f8c3781f445af077b8cad79710604906a17082624df3626a2145a40dda`. Prior no-census/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-075 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am075_helpers.c` with 23 guarded exact helper leaves for `0x004F1544..0x004F3F6E`.
+- Registered the AM-075 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-075 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `2f0a742d43e5e6d37396cd98af7af073c4a56ff0b278a6c0d8bc0d317c2fe287`. Prior no-census/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-076 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am076_helpers.c` with 32 guarded exact helper leaves for `0x004F4030..0x004F6864`.
+- Registered the AM-076 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-076 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `acc36f0206eae35291e1e8fbd165c4e1709e2333d4ac1fcf99a4560bc2abd8a0`. Prior no-census/LVGL/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-077 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am077_helpers.c` with 32 guarded exact helper leaves for `0x004F6880..0x004F81D4`.
+- Registered the AM-077 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-077 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `24949f6739b58bbeae7d13d0abfa1ccee77796cf526d0196c7596997eabba430`. Prior no-census/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-078 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am078_helpers.c` with 25 guarded exact helper leaves for `0x004F81F0..0x004FAC3A`.
+- Registered the AM-078 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-078 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `eed81eb0bccd79c3d725d6ebd8675c78ee90936d830d4b36a505c028243a6101`. Prior no-census/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-079 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am079_helpers.c` with 32 guarded exact helper leaves for `0x004FAC74..0x0050072C`.
+- Registered the AM-079 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-079 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `993b3c7b611fa262cccacc0240b9e8ea1be6680f30d0940d98ba61ec0132394d`. Prior no-census/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-080 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am080_helpers.c` with 32 guarded exact helper leaves for `0x0050072C..0x00503568`.
+- Registered the AM-080 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-080 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `6105b6485327352a15cb288249a89fbe093f9d74bd67682cda3fdbccdc8334f0`. Prior first-party/no-census/Cordio labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-081 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am081_helpers.c` with 32 guarded exact helper leaves for `0x00503568..0x00505692`.
+- Registered the AM-081 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-081 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `036c75de121d9709e997b04236a4c278a2524a489be387eb0ec706eeeb879d88`. Prior Cordio/first-party/no-census/mixed labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-082 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am082_helpers.c` with 32 guarded exact helper leaves for `0x00505692..0x00508ED2`.
+- Registered the AM-082 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-082 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `7247d58c99e30e51a232814ba5f0d4619525c8027e5d4c869f1bddf64b3e495c`. Prior first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-083 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am083_helpers.c` with 32 guarded exact helper leaves for `0x00508ED2..0x0050AC18`.
+- Registered the AM-083 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Clipped two stale envelope ends to `addr + size` during source generation: `0x005094C0` ended at `0x00509650` instead of recorded `0x00509690`, and `0x00509708` ended at `0x005097CA` instead of recorded `0x0055EA06`.
+- Reclassified AM-083 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `d977620b39d76cf2b6feb625cc670099ca72c44e64e0bfb81e6e1f11f30bcfa6`. Prior first-party/no-census/rejected-envelope labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-084 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am084_helpers.c` with 32 guarded exact helper leaves for `0x0050AC5C..0x0050CB30`.
+- Registered the AM-084 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-084 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `cc03d071ee9a4d5d9d48572bdf9649baf5c062b6c89ed4f0006171c9d837f71a`. Prior first-party/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-085 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am085_helpers.c` with 32 guarded exact helper leaves for `0x0050CB30..0x0050F88A`.
+- Registered the AM-085 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Clipped two stale envelope ends to `addr + size` during source generation: `0x0050CB30` ended at `0x0050D354` instead of recorded `0x0050D35A`, and `0x0050DCBC` ended at `0x0050E44A` instead of recorded `0x0050E44E`.
+- Reclassified AM-085 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `abbbe9891f17f51ea0a327faf710aeba4b9db1e064eb04d209c2a859bbd890df`. Prior no-census/first-party/LVGL/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-086 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am086_helpers.c` with 32 guarded exact helper leaves for `0x0050F8CC..0x00513070`.
+- Registered the AM-086 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-086 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `b956b78c4c31eb05a11e05e83b81105efff809fc8aaa867b29f2e4c1a7b8dcd8`. Prior no-census/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-087 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am087_helpers.c` with 18 guarded exact helper leaves for `0x00513070..0x00513E2E`.
+- Registered the AM-087 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-087 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `6614d827bf304fedb86c6c0ea66005ebf26c473db471d023bfb13be0b497fb14`. Prior first-party/no-census/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-088 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am088_helpers.c` with 1 guarded exact helper leaf for `0x00513E2E..0x00513E56`.
+- Registered the AM-088 leaf in `components/apollo_main/core_overlay/overlay.json` with stock hash and macOS Apple clang exact-source contract.
+- Clipped the stale oversized envelope to `addr + size`: `0x00513E2E` ended at `0x00513E56` instead of recorded `0x0052296A`.
+- Reclassified AM-088 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `76e8b5a86bb4afd82d2fee06188880313cc783adb38c600ffb9f03f98e2f4c9c`. Prior rejected-oversized-envelope label is preserved as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-089 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am089_helpers.c` with 32 guarded exact helper leaves for `0x00513E4C..0x00514846`.
+- Registered the AM-089 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Clipped one stale envelope end to `addr + size` during source generation: `0x00514384` ended at `0x005143D2` instead of recorded `0x005143D4`.
+- Reclassified AM-089 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `2b846d89e2415be1611dc415b1952f4e01ea0b8eb2d68913238e5573ab0a5763`. Prior investigation-required labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-090 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am090_helpers.c` with 10 guarded exact helper leaves for `0x00514846..0x00514F34`.
+- Registered the AM-090 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-090 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `5ec55afa9071450963a4e4cada38d68e9057cb8df1626377518a835f3dfdf4e4`. Prior investigation-required labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-091 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am091_helpers.c` with 1 guarded exact helper leaf for `0x00514F3C..0x00516BFC`.
+- Registered the AM-091 leaf in `components/apollo_main/core_overlay/overlay.json` with stock hash and macOS Apple clang exact-source contract.
+- Clipped the stale oversized envelope to `addr + size`: `0x00514F3C` ended at `0x00516BFC` instead of recorded `0x00563954`.
+- Reclassified AM-091 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `94b84cad3ae674690c6dbfed10b5a0146f7cffa20456674e07807b1d28708a35`. Prior rejected-oversized-envelope label is preserved as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-092 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am092_helpers.c` with 26 guarded exact helper leaves for `0x00514F60..0x0051777C`.
+- Registered the AM-092 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Clipped four stale envelope ends to `addr + size`: `0x00515148` -> `0x00515208` instead of `0x0051520C`; `0x005156B8` -> `0x00516AF2` instead of `0x00516B34`; `0x00516E0C` -> `0x005171E4` instead of `0x005171EA`; `0x005171F8` -> `0x0051777C` instead of `0x00517788`.
+- Reclassified AM-092 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `619283ae92eedba5b3bca923c5d6e376a85fcaa7327414811b808da8416faf5c`. Prior investigation-required/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-093 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am093_helpers.c` with 6 guarded exact helper leaves for `0x0051778C..0x0051924A`.
+- Registered the AM-093 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Clipped one stale envelope end to `addr + size` during source generation: `0x00517E18` ended at `0x0051924A` instead of recorded `0x00519280`.
+- Reclassified AM-093 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `2fdff8a4197ebb0d85cb2001e3d404b9e82e2d98952b948a5ab09b76533b6b46`. Prior investigation-required labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-094 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am094_helpers.c` with 5 guarded exact helper leaves for `0x00519290..0x0051B8E6`.
+- Registered the AM-094 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Clipped three stale envelope ends to `addr + size`: `0x00519290` -> `0x0051A616` instead of `0x0051A650`; `0x0051A8EC` -> `0x0051B10A` instead of `0x0051B116`; `0x0051B140` -> `0x0051B8E6` instead of `0x0051B8EA`.
+- Reclassified AM-094 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `d0e2b5d8ad6a0b4efcad17abdeace8c91af73ca567ae49a1af62369456db2cdc`. Prior investigation-required labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-095 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am095_helpers.c` with 1 guarded exact helper leaf for `0x0051D2E0..0x0051F74A`.
+- Registered the AM-095 leaf in `components/apollo_main/core_overlay/overlay.json` with stock hash and macOS Apple clang exact-source contract.
+- Clipped one stale envelope end to `addr + size`: `0x0051D2E0` ended at `0x0051F74A` instead of recorded `0x0051F78E`.
+- Reclassified AM-095 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `7c1086c25d351ac1a75b83745aadff0674a227503f77fe4c510b4278b55eed66`. Prior first-party label is preserved as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-096 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am096_helpers.c` with 1 guarded exact helper leaf for `0x0051F798..0x005202C0`.
+- Registered the AM-096 leaf in `components/apollo_main/core_overlay/overlay.json` with stock hash and macOS Apple clang exact-source contract.
+- Clipped one stale envelope end to `addr + size`: `0x0051F798` ended at `0x005202C0` instead of recorded `0x005202D0`.
+- Reclassified AM-096 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `ca9de573f3bced221f4a0bfea018e6d474e5a55a18dcadc7a200b95d3b1012ac`. Prior first-party label is preserved as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-097 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am097_helpers.c` with 24 guarded exact helper leaves for `0x005202EC..0x00522B30`.
+- Registered the AM-097 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Clipped one stale envelope end to `addr + size`: `0x005202EC` ended at `0x00522358` instead of recorded `0x005223A2`.
+- Reclassified AM-097 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `0a03e7c9897f383335cc889725642487bb591d8068f4de0c708c9fc8a8fcdf82`. Prior investigation-required labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-098 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am098_helpers.c` with 32 guarded exact helper leaves for `0x00522B30..0x00524588`.
+- Registered the AM-098 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Clipped one stale envelope end to `addr + size`: `0x00523674` ended at `0x00523A1E` instead of recorded `0x00523A20`.
+- Reclassified AM-098 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `bae2e292c15f18bb26f9612ac148daf25da9fb4c7c02297b8aeb66716b24543e`. Prior investigation-required labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-099 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am099_helpers.c` with 32 guarded exact helper leaves for `0x00524588..0x0052502A`.
+- Registered the AM-099 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-099 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `f54e6bfc2976d254c7f64f60e3817b781a117d58b877beea9f0b7945ac3a2261`. Prior investigation-required/LVGL labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-100 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am100_helpers.c` with 32 guarded exact helper leaves for `0x0052502A..0x005267EE`.
+- Registered the AM-100 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-100 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `70d13119ea5955b2cca74af5b5ce65438088c206292d500ae1d56a18f21d4fe3`. Prior investigation-required/FreeType labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-101 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am101_helpers.c` with 32 guarded exact helper leaves for `0x00526814..0x005274F6`.
+- Registered the AM-101 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-101 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `6491c5f443e837bbc6afa30611dd154248c4da6b39757fdb1359258f6a227ecf`. Prior FreeType/investigation-required labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-102 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am102_helpers.c` with 32 guarded exact helper leaves for `0x00527508..0x00528914`.
+- Registered the AM-102 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-102 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `2af299170130813a9b454731a8bb0d11eb0c43f42913706be2be6b1a6c0ee7fd`. Prior investigation-required/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-103 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am103_helpers.c` with 32 guarded exact helper leaves for `0x00528914..0x00529262`.
+- Registered the AM-103 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-103 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `d591e574f7c15622d054632cdd80b18a0c6954192855e055e50d15eb859d67ad`. Prior investigation-required labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-104 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am104_helpers.c` with 32 guarded exact helper leaves for `0x00529262..0x00529F62`.
+- Registered the AM-104 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-104 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `e7bdce05c41412e7983e329a06f5dd07d641bda9f0fa98099e92b86b9f9d73c8`. Prior investigation-required/LVGL/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-105 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am105_helpers.c` with 32 guarded exact helper leaves for `0x00529F8E..0x0052B5A2`.
+- Registered the AM-105 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-105 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `8a93a1a49418aaf5140751cc27a0ff18d8f91e715962cb49fc2f99bf89ffb144`. Prior no-census/LVGL/investigation/AmbiqSuite labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-106 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am106_helpers.c` with 32 guarded exact helper leaves for `0x0052B5A2..0x0052DF50`.
+- Registered the AM-106 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-106 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `44d3472b864f2b82b8fa2ccf76dd4821905de48ef14bdfcf7d16df021cc676ae`. Prior AmbiqSuite/no-census/Cordio/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-107 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am107_helpers.c` with 32 guarded exact helper leaves for `0x0052DF50..0x0052EFEC`.
+- Registered the AM-107 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-107 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `bc80ffa8fea620b852ff6871a206a78136b2b113d512234f4a079ba658996cb1`. Prior nanopb/investigation/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-108 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am108_helpers.c` with 32 guarded exact helper leaves for `0x0052EFEC..0x005369EA`.
+- Registered the AM-108 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-108 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `b13bed5da8abe842afcc13b7e2744ec7cfd572553c4844ec6f97858a7380ef7b`. Prior first-party/investigation/no-census/Cordio/AmbiqSuite labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-109 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am109_helpers.c` with 32 guarded exact helper leaves for `0x00536A00..0x0053935C`.
+- Registered the AM-109 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-109 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `8f3a638b145b371f6d283842b7bdf2b59c38ea8ac6cbe321b9139763b063ab90`. Prior investigation-required/first-party/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-110 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am110_helpers.c` with 32 guarded exact helper leaves for `0x0053935C..0x0053B076`.
+- Registered the AM-110 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-110 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `29b70f3bda5f5016ec24321dce3f9fbce9cb01374c1c043e92baf05bb0bc10ec`. Prior investigation-required/first-party labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-111 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am111_helpers.c` with 32 guarded exact helper leaves for `0x0053B076..0x0053DB3C`.
+- Registered the AM-111 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-111 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `679845016f24bc282dca20f687e26e16014a7420ccffc76435ccf048bbb0ed24`. Prior first-party/LVGL/no-census/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-112 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am112_helpers.c` with 16 guarded exact helper leaves for `0x0053DB3C..0x00540036`.
+- Registered the AM-112 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-112 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `b681f3c2844b67e3398ae1f3605ef93ef3e1265e9ffadd7cd25673477a66a21c`. Prior LVGL/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-113 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am113_helpers.c` with 32 guarded exact helper leaves for the bounded AM-113 rows across `0x00540036..0x00542A52`.
+- Split the rejected oversized `0x00541B74..0x00585130` analyzer envelope to a non-overlapping `0x00541B74..0x00541B7C` exact entry thunk; the suffix bytes beginning at `0x00541B7C` are covered by the next tracked AM-113 source leaf.
+- Registered the AM-113 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-113 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `457b5dff5a908d059584d19b848b10209d82ce14dc81d6de1e87e95519e00831`. Prior first-party/LVGL/CMSIS-FreeRTOS/no-census/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-114 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am114_helpers.c` with 32 guarded exact helper leaves for `0x00542A52..0x00544CD4`.
+- Registered the AM-114 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-114 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `042598d2dd64921657dcae598febfecf85594e2487778ac810c42448ab790a14`. Prior first-party/IAR-dlib/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-115 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am115_helpers.c` with 27 guarded exact helper leaves for `0x00544CEC..0x00547868`.
+- Registered the AM-115 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-115 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `87f6c734035cc28a9fad869009db81050dd950be1692f86a863de5e58c12bf32`. Prior first-party/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-116 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am116_helpers.c` with 17 guarded exact helper leaves for `0x0054787C..0x00549B6C`.
+- Registered the AM-116 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-116 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `d81b783021036ac082ca305573d01defde364d3179bcb0ea7f9c1f42bd8e5f34`. Prior first-party/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-117 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am117_helpers.c` with 5 guarded exact helper leaves for `0x00549C24..0x0054C3F2`.
+- Registered the AM-117 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-117 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `0089f0540f44417008f4d35fe8daf0469a5b7276130bef018b03924c5c485f52`. Prior no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-118 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am118_helpers.c` with 32 guarded exact helper leaves for `0x0054C3F2..0x0054EF06`.
+- Registered the AM-118 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-118 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `8cddc1545bf6b771ba18058a208f7b618381c48218bcd106fe4a0ebbf1c3bef1`. Prior first-party/LZ4/no-census/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-119 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am119_helpers.c` with 32 guarded exact helper leaves for `0x0054EF08..0x005511B4`.
+- Registered the AM-119 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-119 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `bd79c9fbf114f76ea0e5c150b424a56dc9b28460d4cf7c826b152dc5be548105`. Prior LZ4/first-party/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-120 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am120_helpers.c` with 32 guarded exact helper leaves for `0x005511BC..0x0055462E`.
+- Registered the AM-120 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-120 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `a5a190892f9b3653d0421e1d253a90009255c85011f8834e51d90d94e5965d3a`. Prior first-party/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-121 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am121_helpers.c` with 32 guarded exact helper leaves for `0x0055462E..0x0055819E`.
+- Registered the AM-121 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-121 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `de42c8502883c61029ae2adc2c8d2489b64c24ffc82f5d3b7fce81b9feec436b`. Prior LVGL/first-party/no-census/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-122 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am122_helpers.c` with 32 guarded exact helper leaves for `0x00558632..0x0055CC10`.
+- Registered the AM-122 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts; the mixed Cordio/AmbiqSuite row is a bounded exact leaf, not an oversized envelope.
+- Reclassified AM-122 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `99751f50b0762ea040cb21eed55f1fcc7ba71980ad44ac849b9c0a6c91517d08`. Prior Cordio/first-party/no-census/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-123 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am123_helpers.c` with 32 guarded exact helper leaves for `0x0055CC1C..0x0055E262`.
+- Registered the AM-123 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-123 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `99ce5a202d48164bdc6375b9bcae1e8bfafb804dabe2d8a860b365fa5fa1720d`. Prior nanopb/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-124 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am124_helpers.c` with 32 guarded exact helper leaves for `0x0055E288..0x0055EFE6`.
+- Registered the AM-124 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-124 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `6689a38e4a693c2ebd4ee46a2b1c1345a97781d80c16925c6d9ef931e873b9f8`. Prior nanopb/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-125 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am125_helpers.c` with 32 guarded exact helper leaves for the bounded AM-125 rows across `0x0055EFF0..0x0055FACE`.
+- Split the rejected oversized `0x0055F994..0x0058EAC2` analyzer envelope to the non-overlapping `0x0055F994..0x0055F9A0` exact leaf; bytes after that are covered by the next tracked AM-125 source leaf.
+- Registered the AM-125 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-125 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `af204a6c70d10e6228546c69ebda56bc81f6d146756903f0dab392dce5f8a956`. Prior investigation/rejected-envelope labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-126 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am126_helpers.c` with 24 guarded exact helper leaves for `0x0055FACE..0x005657D4`.
+- Registered the AM-126 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-126 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `82d956b507c6f3723ad2c9ee4b670d541a07e7f9adb097c470304a996691c39f`. Prior investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-127 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am127_helpers.c` with 32 guarded exact helper leaves for `0x005657D8..0x00568176`.
+- Registered the AM-127 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-127 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `aedaf132fc331ff76f845b892198b5de6ef136398809e59d4b635c6bc282b67e`. Prior first-party/no-census/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-128 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am128_helpers.c` with 32 guarded exact helper leaves for `0x00568176..0x00569954`.
+- Registered the AM-128 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-128 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `54cda8e1b324d606a8cd0595950ce3138e3f26fc37920e9589b69066ce4a46d0`. Prior investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-129 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am129_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x00569954..0x0057E220`, preserving large gaps between rows.
+- Registered the AM-129 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-129 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `0786059d7507c773cb1ab33034031a129e053d9c3e77f262ce8b7bd430fda8d2`. Prior first-party/no-census/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-130 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am130_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x0057E220..0x00582924`, preserving gaps between rows.
+- Registered the AM-130 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts; the mixed first-party/nanopb rows are bounded exact leaves.
+- Reclassified AM-130 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `87aefaa4d40771d82250fa6b3e3139abaeb0a380899f8cea0feeec133f2ce6e3`. Prior first-party/nanopb-mixed/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-131 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am131_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x00582924..0x00584EE4`, preserving gaps between rows.
+- Registered the AM-131 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts; mixed CMSIS-FreeRTOS/nanopb and first-party/nanopb rows are bounded exact leaves.
+- Reclassified AM-131 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `5c875feb87990ecc215459726714d27f3648f5b9edcd364f356ef3db1cb78cc1`. Prior CMSIS-FreeRTOS/first-party/mixed/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-132 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am132_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x00585134..0x00587238`, preserving gaps between rows.
+- Registered the AM-132 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-132 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `489e3c1aaa68c98d6fd16f76fbae68c398c057a6562bfb0670f5317ddadb3037`. Prior IAR-dlib/CMSIS-FreeRTOS/first-party/no-census/investigation labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-133 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am133_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x00587240..0x00589EB6`, preserving gaps between rows.
+- Registered the AM-133 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-133 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `63157a191a0b2a33228cb244d63b75d7955b517bc54d7b1f35b925c2e408f2f0`. Prior first-party/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-134 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am134_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x0058A130..0x0058C892`, preserving gaps between rows.
+- Registered the AM-134 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-134 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `c455997de216ff2111f67570f0945b88d7f4c5e26dbbca7d17bffe3b3f7de3c8`. Prior first-party/no-census labels are preserved per function as previous classification context.
+- Verified with `python3 components/apollo_main/core_overlay/build_component.py`: overlay SHA-256 `6a1f4cc493c73d75ccb5bb8c08c04f15c3d36ab09c6e62d367e664604853f8ff`, component SHA-256 `97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9`.
+
+### AM-135 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am135_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x0058C892..0x0058F8E4`, preserving gaps between rows.
+- Registered the AM-135 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-135 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `12a2562e55daabaee01e320f6e60bd27e845c68d67cae4b539178646f0491a0e`. Prior first-party/no-census labels are preserved per function as previous classification context.
+
+### AM-136 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am136_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x0058F8E4..0x00590F78`, preserving gaps between rows.
+- Registered the AM-136 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-136 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `a031a30f0d0a0bbf0cbf2e5237a6ef9cfdcaf41a09e3a4468464735be0f195aa`. Prior first-party/CMSIS-FreeRTOS/investigation/liblc3 labels are preserved per function as previous classification context.
+
+### AM-137 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am137_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x00590F78..0x0059364A`, preserving gaps between rows.
+- Registered the AM-137 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-137 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `106b98f99f57147aa763d36024d1133d012ae2164a2a7e855631e5fb7faa5578`. Prior liblc3/first-party/no-census labels are preserved per function as previous classification context.
+
+### AM-138 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am138_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x00593660..0x00596C98`, preserving gaps between rows.
+- Corrected the `0x00593E0C..0x005942AA` row size from 1176 to 1182 bytes after inspecting the six-byte live stock tail immediately before the next function; the previous size remains recorded in `remaining-work.json`.
+- Registered the AM-138 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-138 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `bf41f66d2ed3a25b60e1cac7643b377eb20ed337c401afa3b13c4b8c554b3131`. Prior first-party/no-census/IAR-DLIB labels are preserved per function as previous classification context.
+
+### AM-139 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am139_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x00596C98..0x0059758E`, preserving gaps between rows.
+- Registered the AM-139 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-139 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `51b053febc35003e5fca297626e534cb339bb9c913bb75724eb1873502d069e5`. Prior no-census/first-party labels are preserved per function as previous classification context.
+
+### AM-140 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am140_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x0059758E..0x0059898A`, preserving gaps between rows.
+- Corrected the `0x0059845C..0x0059898A` row size from 1308 to 1326 bytes after inspecting the 18-byte live stock tail; the previous size remains recorded in `remaining-work.json`.
+- Registered the AM-140 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-140 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `e41e0f18c957505f0e16a3ba675f7aec7cf5479ff3fa56ee4f714062cf423c2a`. Prior first-party/no-census/investigation/LVGL labels are preserved per function as previous classification context.
+
+### AM-141 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am141_helpers.c` with 16 guarded exact helper leaves for the tracked rows across `0x0059898C..0x0059AA84`, preserving gaps between rows.
+- Corrected the `0x00599714..0x0059A910` row size from 4534 to 4604 bytes after inspecting the 70-byte live stock tail; the previous size remains recorded in `remaining-work.json`.
+- Registered the AM-141 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-141 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `f5bc68cbbc02fe39a1a9ad5a1c8051e854f7e0832ef4a454cabc27e7b7c0543a`. Prior investigation/no-evidence labels are preserved per function as previous classification context.
+
+### AM-142 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am142_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x0059AA84..0x0059D9D4`, preserving gaps between rows.
+- Corrected four stale row sizes (`0x0059AA84`, `0x0059B76C`, `0x0059BAE4`, `0x0059C204`) after inspecting live stock tails; previous sizes remain recorded in `remaining-work.json`.
+- Registered the AM-142 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-142 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `4156d8cd603b6fe55b8b7655ff808c9d9c9da7ff32a41c7c55a12787beafd27e`. Prior first-party/investigation/no-census labels are preserved per function as previous classification context.
+
+### AM-143 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am143_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x0059D9D4..0x005A05E0`, preserving gaps between rows.
+- Registered the AM-143 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-143 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `16aafd083d14743c165c77739c8aeb958943f47e8607236415fef28bafabf97f`. Prior no-census/first-party labels are preserved per function as previous classification context.
+
+### AM-144 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am144_helpers.c` with 30 guarded exact helper leaves for the tracked rows across `0x005A05E0..0x005A3260`, preserving gaps between rows.
+- Registered the AM-144 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-144 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `cae556a25ec44856c649193e3bf5a33058fba0c4afa9ba85dc98069549f55841`. Prior first-party labels are preserved per function as previous classification context.
+
+### AM-145 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am145_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005A326C..0x005A710A`, preserving gaps between rows.
+- Registered the AM-145 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-145 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `4b724270cd800faf50eaf40797ea81cca8ba6664b2cbc755df518d767de08392`. Prior first-party/investigation labels are preserved per function as previous classification context.
+
+### AM-146 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am146_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005A710A..0x005A9628`, preserving gaps between rows.
+- Registered the AM-146 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-146 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `3a50aba4609658ebfded70f8ecb7597744938ac05199814e6e48aae7d205757a`. Prior investigation/no-evidence labels are preserved per function as previous classification context.
+
+### AM-147 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am147_helpers.c` with 31 guarded exact helper leaves for the tracked rows across `0x005A9628..0x005B0120`, preserving gaps between rows.
+- Registered the AM-147 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-147 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `bc0b48e29f92d40a68de7d6c604800e3e936d2f00532241d712ea70636bba3eb`. Prior investigation/no-census labels are preserved per function as previous classification context.
+
+### AM-148 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am148_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005B0120..0x005B4000`, preserving gaps between rows.
+- Registered the AM-148 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-148 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `0dc4edd188bd98d3d1ce5c409d0b59f6b4ed4d450b34d05b0c9a7293c7476f03`. Prior no-census/first-party labels are preserved per function as previous classification context.
+
+### AM-149 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am149_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005B4000..0x005B7966`, preserving gaps between rows.
+- Registered the AM-149 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-149 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `74ad0ca8b8edd18585573c6d49000f6cb4cc63fb1fddfaa4bfbab2443170b41a`. Prior no-census/first-party labels are preserved per function as previous classification context.
+
+### AM-150 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am150_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005B7966..0x005B9D1E`, preserving gaps between rows.
+- Registered the AM-150 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-150 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `84b9ef0aa24eea10eff99adac6ec3c49360194616dc8506c679296b71d4c2b09`. Prior no-census/first-party/mixed/LVGL labels are preserved per function as previous classification context.
+
+### AM-151 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am151_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005B9D1E..0x005BC690`, preserving gaps between rows.
+- Registered the AM-151 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-151 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `9c634e23900ed0c5a55becf7db04d7141bf87df1cdaf1868d56fcc4d7b6b2d14`. Prior no-census/first-party/LVGL labels are preserved per function as previous classification context.
+
+### AM-152 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am152_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005BC690..0x005BF092`, preserving gaps between rows.
+- Registered the AM-152 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-152 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `36d139e4e2022f10e83d132a88359b747bf5d67aae89304d43c94b378a5beeec`. Prior no-census/first-party labels are preserved per function as previous classification context.
+
+### AM-153 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am153_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005BF114..0x005C173E`, preserving gaps between rows.
+- Registered the AM-153 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-153 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `c25809218a231f1d5abfda3e66da393ba2a2c685747f3c580bb884b6fdc937b0`. Prior LVGL/first-party/no-census/investigation labels are preserved per function as previous classification context.
+
+### AM-154 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am154_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005C173E..0x005C2D30`, preserving gaps between rows.
+- Registered the AM-154 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-154 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `76da603ff47db1446b54cf9b1389dfdbb2909ba63c9848abf365e62fed13e954`. Prior LVGL/no-census labels are preserved per function as previous classification context.
+
+### AM-155 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am155_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005C2D30..0x005C45E2`, preserving gaps between rows.
+- Registered the AM-155 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-155 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `47b3bde2f2af09691250e3eb9b83f0dd7659d84e84db095cb683335a96cb7a2d`. Prior LVGL/no-census labels are preserved per function as previous classification context.
+
+### AM-156 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am156_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005C45E2..0x005C5ADC`, preserving gaps between rows.
+- Registered the AM-156 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-156 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `fce8d0043a943af755befa8f4d889cf693ca85e37c7264562f0568df835ebd27`. Prior LVGL/no-census labels are preserved per function as previous classification context.
+
+### AM-157 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am157_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005C5CF0..0x005C78DE`, preserving gaps between rows.
+- Registered the AM-157 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-157 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `41d41a86ff5632f5609168621a80b68f1f037038c047f5e09e6d78e4ac2d6d3b`. Prior LVGL/no-census labels are preserved per function as previous classification context.
+
+### AM-158 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am158_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005C78DE..0x005C8FB2`, preserving gaps between rows.
+- Registered the AM-158 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-158 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `64915bdf8d01f1b4168e17cd5714f3f88b93a2d7552d7a1c305cf9d0c7cdc65c`. Prior LVGL/no-census labels are preserved per function as previous classification context.
+
+### AM-159 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am159_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005C8FE8..0x005C9E68`, preserving gaps between rows.
+- Registered the AM-159 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-159 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `dd360eedc82fb47cefffab782083e9b6401a6c44814b077d67b82e3bbe7c3187`. Prior LVGL/no-census labels are preserved per function as previous classification context.
+
+### AM-160 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am160_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005C9E68..0x005CC70E`, preserving gaps between rows.
+- Registered the AM-160 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-160 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `8b6e77ff2430eeabce784f7180f8fd05a49580b1d28a87ae913308eae83071ec`. Prior LVGL labels are preserved per function as previous classification context.
+
+### AM-161 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am161_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005CC70E..0x005CD7AC`, preserving gaps between rows.
+- Registered the AM-161 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-161 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `a79cd130d60eba43ba42ca58b517dd50dfe705a2f043990b6e53e2a8ea5b8c00`. Prior LVGL/no-census labels are preserved per function as previous classification context.
+
+### AM-162 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am162_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005CD7AC..0x005D05E6`, preserving gaps between rows.
+- Registered the AM-162 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-162 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `2af999126e9aade8323c21f5ea649be77660a56ccb811398632cb00ee9e535d2`. Prior LVGL/no-census/investigation labels are preserved per function as previous classification context.
+
+### AM-163 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am163_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005D05E6..0x005D1848`, preserving gaps between rows.
+- Registered the AM-163 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-163 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `d3187fa956324232efbcd689d3959ded24f10772dde73ecb7fdca9e888843f4e`. Prior investigation/no-evidence labels are preserved per function as previous classification context.
+
+### AM-164 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am164_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005D185E..0x005D2A18`, preserving gaps between rows.
+- Registered the AM-164 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-164 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `d54172152217ccc4fb246090970e3c7e457c1109aecf77851c341810250b1f91`. Prior investigation/no-evidence labels are preserved per function as previous classification context.
+
+### AM-165 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am165_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005D2A18..0x005D350C`, preserving gaps between rows.
+- Registered the AM-165 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-165 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `cd280551cc81b41833210c3c098ab7e914e3b74147f680680bdbaa6d2c120855`. Prior investigation/no-evidence/no-census/Cordio labels are preserved per function as previous classification context.
+
+### AM-166 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am166_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005D350C..0x005D4B14`, preserving gaps between rows.
+- Registered the AM-166 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-166 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `ecbb931d568a67c204842413f77109813a1ddeb0bb75f9fa4c3316608344813d`. Prior investigation/no-evidence labels are preserved per function as previous classification context.
+
+### AM-167 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am167_helpers.c` with 31 guarded exact helper leaves for the tracked rows across `0x005D4B14..0x005D72A8`, preserving gaps between rows. Boundary correction: `FUN_005d4ed0` previous size `7854` now spans `7880` bytes through `0x005D6D98` after live tail inspection.
+- Registered the AM-167 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-167 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `1602157cf3dc32c61e81fceee7f0cb6d9e9c41ca8b260bcc8540028108a42fd9`. Prior investigation/no-evidence labels are preserved per function as previous classification context.
+
+### AM-168 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am168_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005D72A8..0x005D8BC0`, preserving gaps between rows.
+- Registered the AM-168 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-168 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `a87414beea788830945aed9ab90d7f9613667c35ec7a774246c687030bf97875`. Prior investigation/no-evidence labels are preserved per function as previous classification context.
+
+### AM-169 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am169_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005D8BC0..0x005D96F8`, preserving gaps between rows.
+- Registered the AM-169 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-169 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `6624fa8720f4287776854abd9f8968a017d1773c4799bb2a6051955b282156fa`. Prior investigation/no-evidence labels are preserved per function as previous classification context.
+
+### AM-170 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am170_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005D96F8..0x005DCE22`, preserving gaps between rows.
+- Registered the AM-170 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-170 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `5e8dcc7e64dd287c4ffd232c30e509c143ad5270fb17d20137525b1b175a1d1d`. Prior investigation/no-evidence labels are preserved per function as previous classification context.
+
+### AM-171 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am171_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005DCE22..0x005DF484`, preserving gaps between rows.
+- Registered the AM-171 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-171 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `dad63f971f6b4d493d4de33979356f87b9b3f39388ca0d665cd00fcd384f8ca4`. Prior investigation/no-evidence labels are preserved per function as previous classification context.
+
+### AM-172 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am172_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005DF484..0x005E1F44`, preserving gaps between rows.
+- Registered the AM-172 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-172 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `d2e630d810f9fdfedb6b9a3b0fdfc44f759649f5acf6b1625b7f91669c10b1d3`. Prior investigation/no-evidence labels are preserved per function as previous classification context.
+
+### AM-173 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am173_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005E1F44..0x005E818A`, preserving gaps between rows.
+- Registered the AM-173 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-173 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `a719671a162019590a4805388351a2279cca6005ce0714b954154f81c668975b`. Prior investigation/no-evidence/no-census/first-party terminal labels are preserved per function as previous classification context.
+
+### AM-174 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am174_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005E818A..0x005EA810`, preserving gaps between rows.
+- Registered the AM-174 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-174 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `19c0eb615ebb074988c4b740d2304b742174f6a70906f9a29abcd85b072c79ab`. Prior no-census/first-party/LVGL/mixed terminal labels are preserved per function as previous classification context.
+
+### AM-175 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am175_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005EA810..0x005ECA64`, preserving gaps between rows.
+- Registered the AM-175 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-175 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `79249756f15abd5dfad7d036302c7d324430e35a3452e582d95897db11dfb577`. Prior first-party/LVGL/mixed labels are preserved per function as previous classification context.
+
+### AM-176 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am176_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005ECA64..0x005EE1F8`, preserving gaps between rows.
+- Registered the AM-176 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-176 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `5b0c6c1473f8c0afca625e5649b8b464ac06e9d67d3c464fb149a77ef50cc5c8`. Prior first-party/LVGL/mixed/no-census tracepoint labels are preserved per function as previous classification context.
+
+### AM-177 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am177_helpers.c` with 28 guarded exact helper leaves for the tracked rows across `0x005EE1F8..0x005F1556`, preserving gaps between rows.
+- Registered the AM-177 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-177 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `f0dc9d7c63cdbfe28cdf4f056aff2d9b53c2d9dae7871b3dad06ba01a2becaf4`. Prior no-census tracepoint/first-party labels are preserved per function as previous classification context.
+
+### AM-178 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am178_helpers.c` with 21 guarded exact helper leaves for the tracked rows across `0x005F1564..0x005F3960`, preserving gaps between rows.
+- Registered the AM-178 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-178 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `8782448c4ad0285acc70552f8042dfa930c6bb60292155112dd97bd6ce2c44c1`. Prior first-party labels are preserved per function as previous classification context.
+
+### AM-179 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am179_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005F3960..0x005F4F2A`, preserving gaps between rows.
+- Registered the AM-179 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-179 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `c1b6d62421221bf288680b931b2b15f5580c166e3bccd643c3b702943342d5ef`. Prior first-party labels are preserved per function as previous classification context.
+
+### AM-180 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am180_helpers.c` with 64 guarded exact helper leaves for the tracked rows across `0x005F4F2A..0x005F5A80`, preserving gaps between rows.
+- Registered the AM-180 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-180 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `4d4d0d139a23dd75a963ca2e7281b2df053ac0d4f9b18cc76d827acdc9d98523`. Prior first-party labels are preserved per function as previous classification context.
+
+### AM-181 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am181_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005F5A80..0x005F63A2`, preserving gaps between rows.
+- Registered the AM-181 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-181 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `0c05301ec4ead7c5b5517e75c88f25f51d0de5c951a1e0a837f7e9d92ae6fe68`. Prior first-party labels are preserved per function as previous classification context.
+
+### AM-182 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am182_helpers.c` with 32 guarded exact helper leaves for the tracked rows across `0x005F63A2..0x005F881C`, preserving gaps between rows.
+- Registered the AM-182 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-182 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `3babea3dbd10c29e4d468d676cd210cfee5f66dc539dd1344e2c9874eb662ace`. Prior first-party labels are preserved per function as previous classification context.
+
+### AM-183 source-owned exact helper island
+- Added `components/apollo_main/core_overlay/runtime_liblc3_am183_helpers.c` with 25 guarded exact helper leaves for the tracked rows across `0x005F881C..0x005FA84A`, preserving gaps between rows. Boundary correction: `FUN_005fa238` previous size `1378` now spans `1416` bytes through `0x005FA7C0` after live tail inspection.
+- Registered the AM-183 leaves in `components/apollo_main/core_overlay/overlay.json` with per-row stock hashes and macOS Apple clang exact-source contracts.
+- Reclassified AM-183 in `remaining-work.json` to `source-owned-in-place` / `source-owned`; helper source SHA-256 `ea84dbd19fac1481887d0d30b01d8b39c74dfde7b5434c2c1a0d94af0a95d4a1`. Prior first-party/no-evidence labels are preserved per function as previous classification context.

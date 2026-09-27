@@ -3811,6 +3811,149 @@ def _transition_regions(regions: list[dict[str, Any]], base: bytes,
     return result
 
 
+def _source_owned_observation_intervals(
+    observation: dict[str, Any],
+    config: dict[str, Any],
+) -> list[dict[str, Any]]:
+    intervals: list[dict[str, Any]] = []
+    preamble = int(config["preamble_bytes"])
+    run_base = int(config["run_base"])
+
+    def add_interval(
+        runtime_address: Any,
+        size: Any,
+        *,
+        name: Any,
+        status: str,
+        function: Any,
+    ) -> None:
+        if type(runtime_address) is not int or type(size) is not int or size <= 0:
+            raise AdmissionError("source-owned observation interval is malformed")
+        if not isinstance(name, str) or not name:
+            raise AdmissionError("source-owned observation interval lacks a name")
+        if not isinstance(function, str) or not function:
+            raise AdmissionError("source-owned observation interval lacks a function")
+        offset = preamble + runtime_address - run_base
+        if offset < preamble:
+            raise AdmissionError("source-owned observation interval precedes payload")
+        intervals.append({
+            "start": offset,
+            "end": offset + size,
+            "runtime_address": runtime_address,
+            "name": name,
+            "status": status,
+            "function": function,
+        })
+
+    for site in observation.get("overlay", {}).get("patched_sites", []):
+        replacement_hex = site.get("replacement_hex")
+        if not isinstance(replacement_hex, str) or len(replacement_hex) % 2:
+            raise AdmissionError("patched-site replacement payload is malformed")
+        add_interval(
+            site.get("runtime_address"),
+            len(bytes.fromhex(replacement_hex)),
+            name=site.get("name"),
+            status="generated_source_entry_replacement",
+            function=site.get("target_function") or site.get("name"),
+        )
+
+    for leaf in observation.get("in_place_leaves", []):
+        placement = leaf.get("placement")
+        if not isinstance(placement, dict):
+            raise AdmissionError("in-place leaf placement is malformed")
+        add_interval(
+            placement.get("runtime_address"),
+            placement.get("size"),
+            name=placement.get("function") or leaf.get("function"),
+            status="source_compiled",
+            function=placement.get("function") or leaf.get("function"),
+        )
+
+    intervals.sort(key=lambda item: (item["start"], item["end"], item["name"]))
+    for previous, current in zip(intervals, intervals[1:]):
+        if previous["end"] > current["start"]:
+            raise AdmissionError("source-owned observation intervals overlap")
+    return intervals
+
+
+def _classify_source_owned_observation_regions(
+    regions: list[dict[str, Any]],
+    observation: dict[str, Any],
+    config: dict[str, Any],
+    component_size: int,
+) -> list[dict[str, Any]]:
+    """Split retained rows around authenticated source-owned observations."""
+    intervals = _source_owned_observation_intervals(observation, config)
+    if not intervals:
+        return regions
+    _partition(regions, component_size, "pre-source-owned Apollo region map")
+    boundaries = {0, component_size}
+    for row in regions:
+        boundaries.add(int(row["file_offset"]))
+        boundaries.add(int(row["file_offset"]) + int(row["size"]))
+    for interval in intervals:
+        if interval["end"] > component_size:
+            raise AdmissionError("source-owned observation interval exceeds component")
+        boundaries.add(interval["start"])
+        boundaries.add(interval["end"])
+
+    points = sorted(boundaries)
+    result: list[dict[str, Any]] = []
+    run_base = int(config["run_base"])
+    preamble = int(config["preamble_bytes"])
+    for left, right in zip(points, points[1:]):
+        if right <= left:
+            continue
+        source = next(
+            (
+                row for row in regions
+                if int(row["file_offset"]) <= left
+                and right <= int(row["file_offset"]) + int(row["size"])
+            ),
+            None,
+        )
+        if source is None:
+            raise AdmissionError("source-owned region split lost manifest coverage")
+        interval = next(
+            (
+                item for item in intervals
+                if item["start"] <= left and right <= item["end"]
+            ),
+            None,
+        )
+        row = copy.deepcopy(source)
+        row["file_offset"] = left
+        row["size"] = right - left
+        if "target_address" in row:
+            row["target_address"] = run_base + left - preamble
+        split = (
+            left != int(source["file_offset"])
+            or right != int(source["file_offset"]) + int(source["size"])
+        )
+        if interval is not None and row.get("address_status") == "official_blob":
+            runtime = int(interval["runtime_address"])
+            row["name"] = (
+                f"apollo_main_source_owned_{interval['name']}_"
+                f"{runtime:08x}_{right - left:04x}"
+            )
+            row["function"] = interval["function"]
+            row["address_status"] = interval["status"]
+            row["output"] = (
+                "apollo510b/source-owned-"
+                f"{runtime:08x}-{right - left:04x}.bin"
+            )
+            row["target"] = "apollo510b_internal_mram"
+        elif split:
+            row["name"] = f"{source['name']}_split_{left:08x}_{right:08x}"
+            row["output"] = (
+                "apollo510b/source-owned-retained-"
+                f"{left:08x}-{right:08x}.bin"
+            )
+        result.append(row)
+    _partition(result, component_size, "source-owned-classified Apollo region map")
+    return result
+
+
 def synchronize_apollo_regions(
     regions: list[dict[str, Any]],
     config: dict[str, Any],
@@ -3961,6 +4104,9 @@ def synchronize_apollo_regions(
         prefix="freetype_cff_host_scatter",
         function=("Compiled FreeType 2.9.1 CFF host-tail scatter closure and "
                   "guarded module-class routing"),
+    )
+    result = _classify_source_owned_observation_regions(
+        result, apple_observation, config, len(apple_component)
     )
     _partition(result, len(apple_component), "CFF-integrated Apollo region map")
     return result

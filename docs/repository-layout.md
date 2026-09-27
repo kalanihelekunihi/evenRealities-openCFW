@@ -1,5 +1,10 @@
 # Repository layout
 
+The current G2 workflow lives in [`../g2/workflow/`](../g2/workflow/README.md).
+Its [repository map](../g2/workflow/REPOSITORY.md) distinguishes active procedure,
+historical evidence and future campaign outputs. Former incremental workflow
+documents are archived under [`archive/g2-incremental/`](archive/g2-incremental/).
+
 The tree is organized around one rule: **each firmware target owns everything
 that is specific to it, and nothing that is not.** Two devices, two directories,
 one shared dependency registry, one build entry point.
@@ -26,10 +31,10 @@ tooling that produced it, and every claim is checkable with `make verify`.
 
 G2 and R1 share no code, and their reconstruction strategies are not comparable:
 
-- **G2** starts from the official image and works inward. Its build is a
-  *packaging* operation — reconstruct the flash layout byte-for-byte, then swap
-  reconstructed regions for compiled overlays and prove the result still matches
-  the reviewed layout. Correctness means *identical bytes*.
+- **G2** first recovers and freezes pseudocode for the complete official artifact.
+  Only then does it define C implementation units and rebuild the bundle from
+  source. Completion requires source ownership and *identical bytes*. Existing
+  overlay/packaging builds remain available as historical implementation evidence.
 - **R1** starts from recovered behavior and works outward. Its build is an
   ordinary C build. Correctness means *the observable contract holds*, verified
   by host tests and against function-level correlation records.
@@ -58,6 +63,7 @@ make -C g2 build
 | `tests/` | 746 modules gating every claim the build makes |
 | `third_party/` | vendored upstream snapshots — see [below](#third-party-shared-dependency-registry) |
 | `tools/` | image analyzers, evidence manifests, overlay builder, packager |
+| `workflow/` | active procedure, immutable intended target, preparation state, templates and dormant worker prompts |
 
 `g2/README.md` and `g2/docs/*.md` are **SHA-256 pinned** by the test suite
 (`tests/test_runtime_nanopb_decode_svarint_production.py` and

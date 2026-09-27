@@ -1,5 +1,9 @@
 # Building openCFW
 
+For the active G2 process, use [the pseudocode-first workflow](../g2/workflow/README.md).
+The recipes below operate the existing build system. They do not execute or
+satisfy the new full-corpus decompilation and source-rebuild gates.
+
 Both targets are driven from the repository root:
 
 ```sh

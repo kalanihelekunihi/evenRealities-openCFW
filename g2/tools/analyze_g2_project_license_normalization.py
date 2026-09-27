@@ -59,13 +59,13 @@ LZ4_WRAPPER = (
 )
 EXPECTED_SCOPE_PATH_COUNT = 749
 EXPECTED_ADDITIONAL_PATH_COUNT = 22
-EXPECTED_COMMUNITY_CONTROLLER_PROJECT_PATH_COUNT = 641
-EXPECTED_TOUCH_SOURCE_IMAGE_PROJECT_PATH_COUNT = 10
+EXPECTED_COMMUNITY_CONTROLLER_PROJECT_PATH_COUNT = 637
+EXPECTED_TOUCH_SOURCE_IMAGE_PROJECT_PATH_COUNT = 11
 EXPECTED_CASE_SOURCE_IMAGE_PROJECT_PATH_COUNT = 8
 EXPECTED_EM9305_SOURCE_IMAGE_PROJECT_PATH_COUNT = 21
 EXPECTED_PT_PROTOCOL_PROJECT_PATH_COUNT = 28
 EXPECTED_PT_PROTOCOL_TOTAL_PATH_COUNT = 29
-EXPECTED_DISTRIBUTED_TARGET_COUNT = 1455
+EXPECTED_DISTRIBUTED_TARGET_COUNT = 1452
 COMMUNITY_CONTROLLER_ROOTS = (
     ROOT / "components/shared/touch",
     ROOT / "components/shared/case",
@@ -85,6 +85,9 @@ COMMUNITY_TOUCH_APACHE_PATHS = {
     "g2/components/shared/touch/runtime_touch_cat2_adapters.c",
     "g2/components/shared/touch/runtime_touch_cat2_adapters.h",
     "g2/components/shared/touch/runtime_touch_critical_adapters.S",
+}
+COMMUNITY_SUN_PERMISSIVE_PATHS = {
+    "g2/components/shared/gx8002/runtime_gx8002_backup_exp.c",
 }
 TOUCH_SOURCE_IMAGE_PACKAGE_ROOT = ROOT / "components/touch/source_image"
 TOUCH_SOURCE_IMAGE_SUPPORT_PATHS = {
@@ -314,7 +317,8 @@ def analyze() -> dict:
             if path.is_file() and path.suffix in {".c", ".h", ".S", ".s", ".py"}
         )
     require(actual_community_paths ==
-            community_project_paths | COMMUNITY_TOUCH_APACHE_PATHS,
+            community_project_paths | COMMUNITY_TOUCH_APACHE_PATHS |
+            COMMUNITY_SUN_PERMISSIVE_PATHS,
             "community controller/build-adapter source census changed")
     for repo_relative in sorted(COMMUNITY_TOUCH_APACHE_PATHS):
         source = REPOSITORY_ROOT / repo_relative
@@ -323,6 +327,15 @@ def analyze() -> dict:
         require("SPDX-License-Identifier: Apache-2.0" in
                 source.read_text(errors="replace"),
                 f"Touch Apache adaptation license changed: {repo_relative}")
+    for repo_relative in sorted(COMMUNITY_SUN_PERMISSIVE_PATHS):
+        source = REPOSITORY_ROOT / repo_relative
+        text = source.read_text(errors="replace")
+        require(
+            "Copyright (C) 1993 by Sun Microsystems, Inc." in text
+            and "Permission to use, copy, modify, and distribute this" in text
+            and "Adapted from freemint/fdlibm e_exp.c" in text,
+            f"GX8002 fdlibm/Sun permissive notice changed: {repo_relative}",
+        )
     require(TOUCH_SOURCE_IMAGE_PACKAGE_ROOT.is_dir(),
             "Touch source-image package root missing")
     actual_touch_source_image_paths = {
@@ -572,6 +585,8 @@ def analyze() -> dict:
             community_project_paths),
         "community_touch_apache_source_files_preserved": len(
             COMMUNITY_TOUCH_APACHE_PATHS),
+        "community_sun_permissive_source_files_preserved": len(
+            COMMUNITY_SUN_PERMISSIVE_PATHS),
         "touch_source_image_project_mit_files": len(
             touch_source_image_paths),
         "touch_source_image_package_files": len(
@@ -624,6 +639,7 @@ def analyze() -> dict:
         "distributed_rows": distributed_rows,
         "community_project_paths": sorted(community_project_paths),
         "community_touch_apache_paths": sorted(COMMUNITY_TOUCH_APACHE_PATHS),
+        "community_sun_permissive_paths": sorted(COMMUNITY_SUN_PERMISSIVE_PATHS),
         "touch_source_image_paths": sorted(touch_source_image_paths),
         "case_source_image_paths": sorted(case_source_image_paths),
         "em9305_source_image_paths": sorted(em9305_source_image_paths),

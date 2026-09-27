@@ -32,6 +32,7 @@ class CaseByteAccountingTests(unittest.TestCase):
         metrics = self.result["metrics"]
         self.assertEqual(
             metrics["gap_frontier_bytes"] + metrics["platform_attributed_bytes"] +
+            metrics["function_map_attributed_bytes"] +
             metrics["residual_bytes"],
             metrics["typed_external_or_unsupported_bytes"])
         self.assertEqual(
@@ -65,18 +66,33 @@ class CaseByteAccountingTests(unittest.TestCase):
             self.assertTrue(category.startswith("platform_"))
             self.assertTrue(all(evidence_list))
 
-    def test_log_string_candidates_are_real_debug_strings(self):
-        blob = M.BLOB.read_bytes()
-        app = blob[M.WRAPPER:]
-        strings = [app[r["start"] - M.APP_BASE:r["end"] - M.APP_BASE]
-                   for r in self.result["rows"]
-                   if r["category"] == "residual_log_string_candidate"]
-        joined = b" ".join(strings)
-        for needle in (b"Set SN:", b"watchdog", b"1.2.57", b"reset GLS"):
-            self.assertIn(needle, joined)
-        for s in strings:
-            self.assertTrue(all(0x20 <= b < 0x7F for b in s))
-            self.assertGreaterEqual(len(s), M.STRING_RUN_MIN)
+    def test_function_map_attribution_carries_evidence(self):
+        metrics = self.result["metrics"]
+        self.assertEqual(metrics["function_map_attributed_bytes"], 37642)
+        self.assertGreater(len(self.result["function_map_evidence"]), 0)
+        for category, evidence_list in self.result["function_map_evidence"].items():
+            self.assertTrue(category.startswith("function_map_"))
+            self.assertTrue(all(row["evidence"] for row in evidence_list))
+        self.assertEqual(metrics["function_map_body_attributed_bytes"], 25314)
+        self.assertEqual(metrics["function_map_gap_attributed_bytes"], 12328)
+        self.assertGreater(len(self.result["function_map_gap_evidence"]), 0)
+        for category, evidence_list in self.result["function_map_gap_evidence"].items():
+            self.assertTrue(category.startswith("function_map_gap_"))
+            self.assertTrue(all(row["evidence"] for row in evidence_list))
+
+    def test_residual_is_empty_after_function_map_gap_attribution(self):
+        string_rows = self.result["string_rows"]
+        metrics = self.result["metrics"]
+        self.assertEqual(len(string_rows), 0)
+        self.assertEqual(metrics["residual_bytes"], 0)
+        self.assertEqual(metrics["residual_zero_fill_bytes"], 0)
+        self.assertEqual(metrics["residual_ff_fill_bytes"], 0)
+        self.assertEqual(metrics["residual_log_string_candidate_rows"], 0)
+        self.assertEqual(metrics["residual_log_string_candidate_bytes"], 0)
+        self.assertEqual(metrics["residual_unresolved_code_or_data_bytes"], 0)
+        self.assertEqual(
+            metrics["residual_log_string_candidate_digest"],
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945")
 
     def test_residual_fill_runs_are_pure(self):
         blob = M.BLOB.read_bytes()
@@ -102,15 +118,24 @@ class CaseByteAccountingTests(unittest.TestCase):
 
     def test_manifest_matches_a_fresh_analysis(self):
         rows_path = ROOT / "tools/manifests/g2-case-byte-accounting.tsv"
+        strings_path = ROOT / "tools/manifests/g2-case-log-string-candidates.tsv"
         summary_path = ROOT / "tools/manifests/g2-case-byte-accounting-summary.json"
         self.assertTrue(rows_path.exists(), "run --write-manifests first")
+        self.assertTrue(strings_path.exists(), "run --write-manifests first")
         self.assertTrue(summary_path.exists(), "run --write-manifests first")
         import csv
         with rows_path.open(newline="") as handle:
             written = list(csv.DictReader(
                 (line for line in handle if not line.startswith("#")),
                 delimiter="\t"))
+        with strings_path.open(newline="") as handle:
+            written_strings = list(csv.DictReader(
+                (line for line in handle if not line.startswith("#")),
+                delimiter="\t"))
         self.assertEqual(len(written), len(self.result["rows"]))
+        self.assertEqual(len(written_strings), len(self.result["string_rows"]))
+        self.assertEqual(sum(int(row["bytes"]) for row in written_strings),
+                         0)
         self.assertEqual(int(written[-1]["bytes"]),
                           self.result["rows"][-1]["bytes"])
 

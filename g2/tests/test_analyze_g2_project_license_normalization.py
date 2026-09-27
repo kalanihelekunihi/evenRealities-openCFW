@@ -128,12 +128,12 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
         self.assertEqual(metrics["project_owned_gpl_records_pending_mit"], 0)
         self.assertEqual(metrics["project_owned_gpl_only_pending"], 0)
         self.assertEqual(metrics["project_owned_gpl_or_later_pending"], 0)
-        self.assertEqual(metrics["expected_mit_records_after_normalization"], 687)
+        self.assertEqual(metrics["expected_mit_records_after_normalization"], 976)
         self.assertEqual(metrics["repository_only_project_mit_files"], 1)
         self.assertEqual(
             metrics["distributed_upstream_gpl_files_preserved"], 1)
         self.assertEqual(
-            metrics["distributed_project_mit_normalization_targets"], 1112)
+            metrics["distributed_project_mit_normalization_targets"], 1452)
         self.assertEqual(metrics["root_policy_project_mit_files"], 4)
         self.assertEqual(
             metrics["root_policy_project_mit_census_sha256"],
@@ -251,12 +251,14 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
 
     def test_community_controller_and_build_adapter_census_is_exact(self) -> None:
         metrics = self.result["metrics"]
-        self.assertEqual(metrics["community_controller_and_adapter_source_files"], 301)
-        self.assertEqual(metrics["community_project_mit_compatible_source_files"], 298)
+        self.assertEqual(metrics["community_controller_and_adapter_source_files"], 641)
+        self.assertEqual(metrics["community_project_mit_compatible_source_files"], 637)
         self.assertEqual(metrics["community_touch_apache_source_files_preserved"], 3)
+        self.assertEqual(metrics["community_sun_permissive_source_files_preserved"], 1)
 
         project_paths = set(self.result["community_project_paths"])
         apache_paths = set(self.result["community_touch_apache_paths"])
+        sun_paths = set(self.result["community_sun_permissive_paths"])
         self.assertEqual(
             apache_paths,
             {
@@ -264,6 +266,10 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
                 "g2/components/shared/touch/runtime_touch_cat2_adapters.h",
                 "g2/components/shared/touch/runtime_touch_critical_adapters.S",
             },
+        )
+        self.assertEqual(
+            sun_paths,
+            {"g2/components/shared/gx8002/runtime_gx8002_backup_exp.c"},
         )
         self.assertIn(
             "g2/components/apollo_main/core_overlay/build_component.py",
@@ -309,14 +315,15 @@ class ProjectLicenseNormalizationTests(unittest.TestCase):
 
     def test_touch_source_image_distribution_census_is_exact(self) -> None:
         metrics = self.result["metrics"]
-        self.assertEqual(metrics["touch_source_image_project_mit_files"], 10)
-        self.assertEqual(metrics["touch_source_image_package_files"], 7)
+        self.assertEqual(metrics["touch_source_image_project_mit_files"], 11)
+        self.assertEqual(metrics["touch_source_image_package_files"], 8)
         self.assertEqual(metrics["touch_source_image_support_files"], 3)
         paths = set(self.result["touch_source_image_paths"])
         self.assertEqual(
             paths,
             {
                 "g2/components/touch/source_image/README.md",
+                "g2/components/touch/source_image/board_config.h",
                 "g2/components/touch/source_image/build_image.py",
                 "g2/components/touch/source_image/firmware_image.c",
                 "g2/components/touch/source_image/firmware_image.h",

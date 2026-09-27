@@ -62,12 +62,31 @@ LEAVES: tuple[dict, ...] = (
         "address": 0x0042799E,
         "size": 32,
         "sha256": "dcf9d1eae1901c914dcc21e28cc1f8de507044dc67797f930c622068fd307b97",
+        "relocations": [
+            {"offset": 4, "type": "R_ARM_THM_JUMP11",
+             "symbol": "open_cfw_bootloader_cmdq_alloc_success_427970",
+             "symbol_type": "STT_NOTYPE", "target_address": 0x427970},
+            {"offset": 8, "type": "R_ARM_THM_JUMP11",
+             "symbol": "open_cfw_bootloader_cmdq_alloc_epilogue_427984",
+             "symbol_type": "STT_NOTYPE", "target_address": 0x427984},
+            {"offset": 26, "type": "R_ARM_THM_JUMP11",
+             "symbol": "open_cfw_bootloader_cmdq_alloc_success_427970",
+             "symbol_type": "STT_NOTYPE", "target_address": 0x427970},
+            {"offset": 30, "type": "R_ARM_THM_JUMP11",
+             "symbol": "open_cfw_bootloader_cmdq_alloc_epilogue_427984",
+             "symbol_type": "STT_NOTYPE", "target_address": 0x427984},
+        ],
     },
     {
         "function": "open_cfw_bootloader_cmdq_errresume_rem_tail_427b90",
         "address": 0x00427B90,
         "size": 26,
         "sha256": "083d6df438d62d8c22618063fe1a0756dd25ad4f4dda8eb7bb71f0ecc0c4a27f",
+        "relocations": [
+            {"offset": 0, "type": "R_ARM_THM_JUMP11",
+             "symbol": "open_cfw_bootloader_cmdq_error_resume_scan_427b76",
+             "symbol_type": "STT_NOTYPE", "target_address": 0x427B76},
+        ],
     },
 )
 
@@ -154,8 +173,16 @@ class Bl006AllocResumeTailLeavesTests(unittest.TestCase):
     def stock(self, address: int, size: int) -> bytes:
         return self.image[address - RUN_BASE:address - RUN_BASE + size]
 
-    def compile_function(self, function: str, size: int,
-                         sha256: str) -> tuple[bytes, dict]:
+    def compile_function(
+        self,
+        function: str,
+        size: int,
+        sha256: str,
+        *,
+        address: int = 0x00420000,
+        relocations: list[dict] | None = None,
+        strict_relocation_contract: bool = False,
+    ) -> tuple[bytes, dict]:
         source_bytes = (ROOT / SOURCE).read_bytes()
         build_root = ROOT / "build"
         build_root.mkdir(exist_ok=True)
@@ -165,7 +192,7 @@ class Bl006AllocResumeTailLeavesTests(unittest.TestCase):
                 clang=CLANG,
                 leaf_config={
                     "function": function,
-                    "runtime_address": 0x00420000,
+                    "runtime_address": address,
                     "source": {
                         "path": SOURCE,
                         "size": len(source_bytes),
@@ -173,10 +200,10 @@ class Bl006AllocResumeTailLeavesTests(unittest.TestCase):
                     },
                     "toolchain": {"target": "arm-none-eabi",
                                   "flags": FLAGS},
-                    "strict_relocation_contract": False,
+                    "strict_relocation_contract": strict_relocation_contract,
                     "expected": {"size": size, "sha256": sha256},
                     "stock": {"size": size, "sha256": sha256},
-                    "relocations": [],
+                    "relocations": [dict(row) for row in (relocations or [])],
                     "allow_discarded_alloc_sections": True,
                 },
                 object_path=Path(directory) / "leaf.o",
@@ -185,7 +212,11 @@ class Bl006AllocResumeTailLeavesTests(unittest.TestCase):
 
     def compile_leaf(self, leaf: dict) -> tuple[bytes, dict]:
         return self.compile_function(
-            leaf["function"], leaf["size"], leaf["sha256"])
+            leaf["function"], leaf["size"], leaf["sha256"],
+            address=leaf["address"],
+            relocations=leaf["relocations"],
+            strict_relocation_contract=True,
+        )
 
     def test_stock_spans_unchanged(self) -> None:
         for leaf in LEAVES:
@@ -201,8 +232,21 @@ class Bl006AllocResumeTailLeavesTests(unittest.TestCase):
                 self.assertEqual(
                     payload, self.stock(leaf["address"], leaf["size"]))
                 extraction = report["extraction"]
-                self.assertEqual(extraction["relocation_count"], 0)
-                self.assertEqual(extraction["relocations"], [])
+                self.assertEqual(
+                    extraction["relocation_count"], len(leaf["relocations"]))
+                self.assertEqual(
+                    [
+                        {
+                            key: row[key]
+                            for key in (
+                                "offset", "type", "symbol",
+                                "target_address", "symbol_type",
+                            )
+                        }
+                        for row in extraction["relocations"]
+                    ],
+                    leaf["relocations"],
+                )
                 self.assertEqual(extraction["function"], leaf["function"])
                 self.assertEqual(extraction["size"], leaf["size"])
                 self.assertEqual(extraction["sha256"], leaf["sha256"])
@@ -233,7 +277,7 @@ class Bl006AllocResumeTailLeavesTests(unittest.TestCase):
                 self.assertEqual(entry["expected"]["size"], leaf["size"])
                 self.assertEqual(entry["expected"]["sha256"], leaf["sha256"])
                 self.assertEqual(entry["stock"]["sha256"], leaf["sha256"])
-                self.assertEqual(entry["relocations"], [])
+                self.assertEqual(entry["relocations"], leaf["relocations"])
                 self.assertTrue(entry["strict_relocation_contract"])
                 self.assertEqual(entry["source"]["license"], "MIT")
                 self.assertEqual(entry["source"]["path"], SOURCE)
