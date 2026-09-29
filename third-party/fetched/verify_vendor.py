@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Verify pinned openR1 vendor source trees without modifying them."""
+"""Verify the pinned R1 vendor source trees without modifying them.
+
+FreeRTOS-Kernel, CMSIS-FreeRTOS, CMSIS_5 and CmBacktrace are checked in their
+Git submodules under third-party/upstream/. Initialise those first with
+`git submodule update --init` for each path. Everything else comes from the
+archive cache that fetch.sh populates.
+"""
 
 from __future__ import annotations
 
@@ -12,9 +18,11 @@ import subprocess
 
 HERE = Path(__file__).resolve().parent
 MANIFEST = json.loads((HERE / "manifest.json").read_text())
-CMSIS_FREERTOS = HERE.parents[1] / "g2" / "third_party" / "cmsis-freertos"
-CMBACKTRACE = HERE.parents[1] / "g2" / "third_party" / "cmbacktrace"
-FREERTOS_KERNEL = HERE.parents[1] / "g2" / "third_party" / "freertos-kernel"
+UPSTREAM = HERE.parent / "upstream"
+CMSIS_FREERTOS = UPSTREAM / "cmsis-freertos"
+CMSIS_5 = UPSTREAM / "cmsis-5-590"
+CMBACKTRACE = UPSTREAM / "cmbacktrace"
+FREERTOS_KERNEL = UPSTREAM / "freertos-kernel"
 
 
 def sha256(path: Path) -> str:
@@ -32,6 +40,20 @@ def component(identifier: str) -> dict[str, object]:
 def require_text(path: Path, marker: str) -> None:
     if not path.is_file() or marker not in path.read_text(errors="strict"):
         raise AssertionError(f"missing {marker!r} in {path}")
+
+
+def require_submodule(path: Path, commit: str) -> None:
+    """Fail unless the submodule at path is checked out at exactly commit."""
+    if not (path / ".git").exists():
+        raise AssertionError(
+            f"{path} is not initialized; run: git submodule update --init {path}"
+        )
+    head = subprocess.run(
+        ["git", "-C", str(path), "rev-parse", "HEAD"],
+        check=True, capture_output=True, text=True,
+    ).stdout.strip()
+    if head != commit:
+        raise AssertionError(f"{path} is at {head}, expected {commit}")
 
 
 def main() -> None:
@@ -60,9 +82,9 @@ def main() -> None:
     if sha256(softdevice_path) != softdevice["sha256"]:
         raise AssertionError("S140 7.2.0 image hash mismatch")
     require_text(sdk / "external/freertos/portable/GCC/nrf52/port.c", "FreeRTOS Kernel V10.0.0")
+    require_submodule(FREERTOS_KERNEL, str(component("freertos-kernel")["commit"]))
     require_text(FREERTOS_KERNEL / "timers.c", "FreeRTOS Kernel V10.5.1")
     require_text(FREERTOS_KERNEL / "timers.c", "static void prvReloadTimer")
-    subprocess.run(["python3", str(FREERTOS_KERNEL / "verify_snapshot.py")], check=True)
     require_text(sdk / "components/softdevice/s140/headers/nrf_soc.h", "SVCALL")
     require_text(sdk / "components/ble/nrf_ble_gatt/nrf_ble_gatt.c", "nrf_ble_gatt_init")
 
@@ -86,24 +108,23 @@ def main() -> None:
     wrapper = component("arm-cmsis-freertos")
     if wrapper["commit"] != "d213f261b5be6bb29a7cce8b84071706b72f4d53":
         raise AssertionError("CMSIS-FreeRTOS commit pin changed")
-    require_text(CMSIS_FREERTOS / "README.openCFW.md", "CMSIS-FreeRTOS v10.5.1")
-    wrapper_source = (
-        CMSIS_FREERTOS / "CMSIS-FreeRTOS/CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c"
-    )
+    require_submodule(CMSIS_FREERTOS, str(wrapper["commit"]))
+    wrapper_source = CMSIS_FREERTOS / "CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c"
     if sha256(wrapper_source) != wrapper["source_sha256"]:
         raise AssertionError("CMSIS-FreeRTOS wrapper source hash mismatch")
     require_text(wrapper_source, "xEventGroupGetBitsFromISR")
     require_text(wrapper_source, "rflags |= flags")
-    require_text(CMSIS_FREERTOS / "CMSIS_5/LICENSE.txt", "Apache License")
+    require_submodule(CMSIS_5, "2b7495b8535bdcb306dac29b9ded4cfb679d7e5c")
+    require_text(CMSIS_5 / "LICENSE.txt", "Apache License")
 
     cmbacktrace = component("cmbacktrace")
     if cmbacktrace["commit"] != "73714489f9d8af130aacb515586b397b604a5768":
         raise AssertionError("CmBacktrace compatibility snapshot pin changed")
+    require_submodule(CMBACKTRACE, str(cmbacktrace["commit"]))
     if sha256(CMBACKTRACE / "cm_backtrace/cm_backtrace.c") != \
             cmbacktrace["source_sha256"]:
         raise AssertionError("CmBacktrace source hash mismatch")
     require_text(CMBACKTRACE / "LICENSE", "Permission is hereby granted")
-    subprocess.run(["python3", str(CMBACKTRACE / "verify_snapshot.py")], check=True)
 
     flashdb_component = component("flashdb")
     if flashdb_component["commit"] != \

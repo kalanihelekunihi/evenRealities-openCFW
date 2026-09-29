@@ -22,7 +22,7 @@ THIRD_PARTY_DIR := third-party
         build test verify clean \
         g2 g2-build g2-test g2-verify g2-clean \
         r1 r1-test r1-verify r1-clean \
-        third-party third-party-vendored third-party-fetched tools
+        third-party third-party-submodules third-party-fetched tools
 
 all: build
 
@@ -33,7 +33,7 @@ help:
 	@echo '  build            G2 reference repack (the R1 rebuild oracle is r1-verify)'
 	@echo '  test             run both test suites (g2-test + r1-test)'
 	@echo '  verify           reference/oracle verification of both targets'
-	@echo '  third-party      verify every vendored upstream snapshot'
+	@echo '  third-party      check initialised submodules are at their pinned commits'
 	@echo '  clean            remove all build output from both targets'
 	@echo
 	@echo 'G2 (Apollo510 glasses firmware):'
@@ -92,14 +92,15 @@ r1-clean:
 
 # --- third-party -----------------------------------------------------------
 
-third-party: third-party-vendored
+third-party: third-party-submodules
 
-# Offline authentication of every vendored upstream snapshot. Consumed by both
-# targets; see third-party/README.md for why the snapshots sit under g2/.
-third-party-vendored:
-	$(MAKE) -C $(G2_DIR) vendor-snapshots
+# Fails if any initialised submodule is checked out away from its pinned
+# commit or has conflicts.  Uninitialised submodules are fine.
+third-party-submodules:
+	@git submodule status | awk '/^[+U]/ {bad=1; print "not at pinned commit: " $$2} END {exit bad}'
+	@echo "third-party: every initialised submodule is at its pinned commit"
 
-# Requires the fetched vendor roots. Pass them through, for example:
+# Authenticates the fetched R1 archives; pass the unpacked roots, for example:
 #   make third-party-fetched SDK_ROOT=... FLASHDB_ROOT=... BMA456_ROOT=...
 third-party-fetched:
 	$(MAKE) -C $(R1_DIR) vendor-audit

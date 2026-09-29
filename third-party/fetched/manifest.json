@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "policy": "Use attributable upstream or vendor source as the production provider; write clean-room code only for R1-specific behavior, configuration, ports, and glue.",
+  "policy": "Byte-identical rebuild of the stock R1 firmware: consume attributable upstream or vendor source at the exact pinned revision. Git-hosted upstreams are also pinned as submodules under third-party/upstream/; this manifest authenticates the non-Git nRF5 SDK archive and the archive forms of the sensor and crypto sources.",
   "components": [
     {
       "id": "nordic-nrf5-sdk",
@@ -58,8 +58,8 @@
       "tag": "V10.5.1",
       "commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
       "tree": "7496dfa815c3cea2f45a090c6e92d113f494b930",
-      "disposition": "authenticated_upstream_snapshot",
-      "path": "openCFW/third_party/freertos-kernel",
+      "disposition": "pinned_upstream_submodule",
+      "path": "third-party/upstream/freertos-kernel",
       "license": "MIT",
       "evidence": "The exact 0x85440 prvReloadTimer loop and status-byte timer layout exist in 10.5.1 but not Nordic's bundled 10.0.0 core; the recovered CMSIS wrapper independently has 10.5.1-specific ISR event-flag behavior",
       "production_role": "scheduler, queues, semaphores, task notifications, timers, event groups, stream buffers, list core, tasks, and heap_4"
@@ -80,8 +80,8 @@
       "provider": "Arm Limited",
       "version": "10.5.1 wrapper with CMSIS_5 5.9.0 headers",
       "commit": "d213f261b5be6bb29a7cce8b84071706b72f4d53",
-      "disposition": "pinned_upstream_snapshot",
-      "path": "openCFW/third_party/cmsis-freertos",
+      "disposition": "pinned_upstream_submodule",
+      "path": "third-party/upstream/cmsis-freertos",
       "license": "Apache-2.0",
       "source_sha256": "8a0d60b56ad30c4f7957f64fa581158017b6812ec94b832d974c773ae4f2bc36",
       "evidence": "CMSIS-RTOS2 wrapper signatures at 0x7d154-0x7d9ea, 56-priority validation, 0x100-word default stack, 1024 Hz tick, FreeRTOS StaticQueue_t field offsets, and the v10.5.1-specific ISR event-flag read/OR behavior",
@@ -127,8 +127,8 @@
       "compatible_ceiling_commit": "73714489f9d8af130aacb515586b397b604a5768",
       "first_incompatible_commit": "55e7b6990640c481e83ae8a3c0f3af2092b9f7a6",
       "exact_vendor_checkout_proven": false,
-      "disposition": "pinned_upstream_snapshot_adapter_required",
-      "path": "openCFW/third_party/cmbacktrace",
+      "disposition": "pinned_upstream_submodule",
+      "path": "third-party/upstream/cmbacktrace",
       "license": "MIT",
       "source_sha256": "6e444224af3ef223067849b88f61281ec0661e3f38425e84758bf12be057e01c",
       "evidence": "R1 dump_stack has the 16-word cap introduced at 4abadfa0, while cm_backtrace_fault lacks the stacked-xPSR alignment test first added at 55e7b699; exact core functions and recovered Cortex-M4/FreeRTOS configuration correlate within that interval",
@@ -170,20 +170,6 @@
       "source_sha256": "266efea581cb5c55726e2e06402ca0c657e14c4a5e684fa4880160f81ca2c5ba",
       "evidence": "The file carries an in-file MIT grant and Azoteq copyright notice and establishes the vendor-authored configuration-block schema. Its sample values are not substituted for the recovered R1 product profile.",
       "production_role": "licensed vendor settings schema and terminology reference; R1-specific values remain locally maintained recovered product data"
-    },
-    {
-      "id": "goodix-gh3x2x",
-      "provider": "Goodix",
-      "version": "gh3x2x-v2.23_7ecd2a",
-      "disposition": "clean_room_reimplementation_owner_authorized",
-      "evidence": "embedded version strings, byte-pinned demo/library topology, and Goodix primary-source Gh3x2xDemoInit/GH3X2X_RegisterSpiOperationFunc traces; 2026-08 re-examination matched the exact democode v1.6 / DrvLib v4.3.0.0 / Virtual_Reg v3.4 markers to the public Goodix-licensed SDK copy at coredevices/pebbleos-nonfree gh3x2x/",
-      "evidence_urls": [
-        "https://developers.goodix.com/zh/bbs/detail/c7d1af01d0e8467cac183bc66c74cdb9",
-        "https://developers.goodix.com/en/bbs/detail/4de13ec5986d4d989deee3887d43faf2",
-        "https://developers.goodix.com/zh/bbs/detail/875147b152034370a8d4d2037c71edbb",
-        "https://github.com/coredevices/pebbleos-nonfree/tree/main/gh3x2x"
-      ],
-      "production_role": "attribution evidence only; no Goodix binary is a production input. Under the owner-authorized source-admission policy, the complete algorithm and goodix_mem census compiles from independently reconstructed transparent C. The demo-kernel/driver stratum is re-attributable to the public Goodix 5-clause-licensed democode, which remains an audit reference rather than an opaque algorithm dependency"
     },
     {
       "id": "tiny-aes-c",
@@ -269,20 +255,12 @@
       "correlation_only": true,
       "correlation_repository": "https://github.com/stephenshizl/code-learning",
       "correlation_commit": "3903bd7d632c0aa6b101e623b1fd27c84184208e",
-      "correlation_source_path": "调试素材/3588-30s项目器件/传感器/参考/evb_pc/evb_pc/comm_demo/qma6100/qma6100.cpp",
+      "correlation_source_path": "\u8c03\u8bd5\u7d20\u6750/3588-30s\u9879\u76ee\u5668\u4ef6/\u4f20\u611f\u5668/\u53c2\u8003/evb_pc/evb_pc/comm_demo/qma6100/qma6100.cpp",
       "correlation_source_sha256": "2307dc7532425af63087b59a6b56e3905c6a9689098d9c7792c94f46ebda0c95",
       "correlation_header_sha256": "5540a3700afef37877ae882ac45fdd7f3030537cde8d03efc8466457277a8fec",
       "license": null,
       "evidence": "The public snapshot identifies author Yangzhiqiang@qst, version V1.0, and date 2020-05-27. Three recovered bodies and ten mixed adapters retain its function skeletons, retry counts, register sequences, FIFO limit, range scaling, and interrupt structure; the exact R1 checkout remains unresolved and the evidence snapshot has no license.",
       "production_role": "QMA6100 register/FIFO driver remains disabled until a lawfully obtained official provider is authenticated; openR1 must not reconstruct the driver body from disassembly"
-    },
-    {
-      "id": "r1-sleep-journal",
-      "provider": "Even Realities R1-specific behavior",
-      "version": "2.2.6.0009 contract",
-      "disposition": "clean_room_allowed",
-      "evidence": "recovered implementation is explicitly a ring-specific circular journal rather than FlashDB TSDB",
-      "production_role": "clean-room implementation of the observable sleep.db format and transaction order"
     },
     {
       "id": "goodix-gh3x2x-democode",
@@ -299,76 +277,6 @@
       "admitted_source_aggregate_sha256": "b0c421df96de26abd6c4af04de46023f7148c05bafb17da8aaa8de6a9830ec77",
       "evidence": "R1 firmware strings GH(M)3X2X_DEMO_v1.6_AC_v0.5, v4.3.0.0, Gh3x2x_Virtual_Reg_v3.4, and gh3x2x-v2.23_7ecd2a match this tree exactly; eight function-level matches proven in r1/docs/boundaries/goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md",
       "production_role": "source-only GH3X2X demo-kernel, register driver, soft-AGC/move/soft-ADT modules, and byte-matched HR, HRV, and SpO2 configuration inputs; every binary archive, PC-tool protocol body, and binary algorithm-call implementation is excluded, while uncomposed persistent algorithm state remains fail-closed"
-    },
-    {
-      "id": "zephyr-rtos",
-      "provider": "Zephyr Project",
-      "version": "3.7.2",
-      "commit": "bbbf8b30094dacd0d6830946ba206bcec8af6b0c",
-      "tree": "4c43ca60d6574f1532362c691f6130d7180c3bd8",
-      "disposition": "pinned_upstream_source_stack",
-      "repository": "https://github.com/zephyrproject-rtos/zephyr",
-      "license": "Apache-2.0",
-      "license_path": "LICENSE",
-      "license_sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
-      "evidence": "Zephyr 3.7.2 is the selected alternate runtime whose Bluetooth host/controller, kernel, nRF52 integration, and build system replace the S140 application ABI.",
-      "production_role": "source-built Bluetooth host, controller framework, kernel, startup integration, GATT/SMP services, and nRF52840 system support for the transparent full-flash target"
-    },
-    {
-      "id": "zephyr-hal-nordic",
-      "provider": "Nordic Semiconductor / Zephyr Project",
-      "version": "Zephyr module containing nrfx 3.5.0",
-      "commit": "ab5cb2e2faeb1edfad7a25286dcb513929ae55da",
-      "tree": "705157917c3e0f49c37b054d1538b5564cc42d00",
-      "disposition": "pinned_upstream_source_stack",
-      "repository": "https://github.com/zephyrproject-rtos/hal_nordic",
-      "license": "BSD-3-Clause plus component-specific licenses",
-      "license_path": "nrfx/README",
-      "license_provenance_sha256": "d3338d06cc8fdf7b30f6c4dfe30d31f37cef29aa75e8d30980961a13271aa910",
-      "evidence": "The module's nrfx/README pins imported nrfx v3.5.0 and its BSD-3-Clause origin; other included radio components retain their own in-tree licenses.",
-      "production_role": "source nRF52840 register HAL, MDK, radio controller HAL, clock, entropy, and peripheral integration used by the Zephyr target"
-    },
-    {
-      "id": "zephyr-cmsis",
-      "provider": "Arm Limited / Zephyr Project",
-      "version": "Zephyr 3.7.2 module revision",
-      "commit": "4b96cbb174678dcd3ca86e11e1f24bc5f8726da0",
-      "tree": "5d06438da29f90ae930b55426bb55e4f250861cc",
-      "disposition": "pinned_upstream_source_stack",
-      "repository": "https://github.com/zephyrproject-rtos/cmsis",
-      "license": "Apache-2.0",
-      "license_path": "LICENSE.txt",
-      "license_sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
-      "evidence": "The west manifest-selected CMSIS revision supplies the Cortex-M4 core definitions consumed by the Zephyr nRF52840 build.",
-      "production_role": "source Cortex-M architecture headers and core support for the transparent Zephyr target"
-    },
-    {
-      "id": "zephyr-tinycrypt",
-      "provider": "Intel Corporation / TinyCrypt contributors / Zephyr Project",
-      "version": "TinyCrypt 0.2.8 downstream",
-      "commit": "1012a3ebee18c15ede5efc8332ee2fc37817670f",
-      "tree": "8cd4b1950622b35a1a7b4b5d178d882eda05f9b6",
-      "disposition": "pinned_upstream_source_stack",
-      "repository": "https://github.com/zephyrproject-rtos/tinycrypt",
-      "license": "BSD-3-Clause",
-      "license_path": "README.zephyr",
-      "license_sha256": "ada970c9a00c9d6292d8230dc28b581030c4c23ce77f4e30f39f37fd68b4c746",
-      "evidence": "README.zephyr records the TinyCrypt 0.2.8 upstream revision and complete license; the target selects its source AES primitive and MCUboot ECDSA backend.",
-      "production_role": "source AES primitive for the recovered R1 chaining adapter and source ECDSA primitive for the MCUboot signature verifier"
-    },
-    {
-      "id": "mcuboot",
-      "provider": "MCUboot contributors / Linaro",
-      "version": "Zephyr 3.7.2 west-manifest revision",
-      "commit": "6127fc06a54d7a364626a96a33ae652703b505e4",
-      "tree": "dc3f69ddf8a670943e45c7ce002cab4474c5024b",
-      "disposition": "pinned_upstream_source_stack",
-      "repository": "https://github.com/mcu-tools/mcuboot",
-      "license": "Apache-2.0",
-      "license_path": "LICENSE",
-      "license_sha256": "86438164119907debf649e2f9f18a43ad506d75421c9d9675700066b0456205d",
-      "evidence": "The selected MCUboot revision builds together with the application as a single-slot, boot-time-validated ECDSA-P256 trust boundary.",
-      "production_role": "source-built reset vector, signed-image validation, and boot handoff for the transparent full-flash target"
     }
   ]
 }

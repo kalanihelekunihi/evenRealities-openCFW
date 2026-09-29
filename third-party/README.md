@@ -1,147 +1,72 @@
-# Shared third-party dependencies
+# Third-party dependencies
 
-This directory is the single registry for every upstream dependency used by
-either firmware target. It records what is depended on, at exactly which
-revision, under which license, and which target consumes it.
+This directory is the single registry of every upstream that either device
+links, or that the analysis relies on. The rule is to consume official
+upstream source at the exact revision the firmware used, never to
+re-implement it. Each pin can later move forward to test what an upstream fix
+changes.
 
-Dependencies reach the build in one of two ways:
-
-| Class | Where the source lives | How it is authenticated |
+| Class | Where | Authenticated by |
 | --- | --- | --- |
-| **Vendored snapshot** | [`../g2/third_party/<name>/`](../g2/third_party) | `verify_snapshot.py` per dependency, offline |
-| **Fetched at build time** | a local cache directory you choose | [`fetched/verify_vendor.py`](fetched/verify_vendor.py) against [`fetched/manifest.json`](fetched/manifest.json) |
+| Git submodules | [`upstream/`](upstream) (compiled), [`reference/`](reference) (comparison only), [`tools/`](tools) (analysis) | the gitlink commit in this repository |
+| Archive fetch | [`fetched/`](fetched): the nRF5 SDK (no public Git) plus archive forms of the R1 sensor and crypto sources | archive SHA-256 and per-file hashes in `fetched/manifest.json` |
+| Licensed or binary-only | not stored; documented in [`../docs/tooling.md`](../docs/tooling.md) and the device references | local fingerprint (`tools/bootstrap/bootstrap.py --licensed`) |
 
-Nothing here is fetched implicitly. Both classes fail closed: a hash, commit,
-tree, or file-set mismatch aborts the build rather than downgrading to a
-warning.
+Nothing is fetched implicitly. Initialise only what you need:
 
-## Why the vendored snapshots live under `g2/`
+```sh
+git submodule update --init --depth 1 third-party/upstream/freertos-kernel
+git submodule update --init --depth 1 --checkout third-party/reference/g2flash   # update=none entries
+```
 
-The vendored snapshots are physically stored at `g2/third_party/` rather than
-in this directory. That is deliberate, not an oversight.
+Every submodule is `shallow = true`. Large and comparison-only trees are
+`update = none`. `cmsis-5-590`/`cmsis-core`, `ambiqhal-apollo510`/`ambiqhal-nema`
+and `flashdb`/`flashdb-2.0.0` are distinct commits of the same repository, and
+each commit is needed.
 
-Each snapshot carries a self-referential integrity net that names its own
-repository-relative path:
+The G2 vendored snapshots that used to live in `g2/third_party/` were removed
+on 2026-09-29. Every one of them is covered by a submodule at the same commit.
+FreeRTOS-Kernel, CMSIS-FreeRTOS, CMSIS_5 and CmBacktrace were re-verified
+file by file against the old snapshot hashes. The G2-specific configuration
+and patches recovered alongside the snapshots are in
+[`../g2/config-recovered/`](../g2/config-recovered/README.md).
 
-- `g2/third_party/*/PROVENANCE.json` records `third_party/<name>/...` paths that
-  the verifiers resolve against the G2 tree root;
-- several verifiers implement a *production-exclusion gate* that scans the G2
-  `Makefile`, `manifests/`, and `components/` for the literal token
-  `third_party/<name>` and fails closed unless the only matches are an exact
-  allow-listed pair of lines (for example `NANOPB_DIR := third_party/nanopb`);
-- 62 test modules verify the verifiers, and several pin the verifier script's
-  exact byte size and SHA-256.
+## Pinned upstreams (original set)
 
-Relocating the directory would mean editing those paths and then re-pinning the
-hashes that exist precisely to detect such edits — which would quietly retire
-the byte-exactness guarantee that the G2 reconstruction rests on. The snapshots
-stay put; this directory is the shared index over them.
-
-The sharing is real rather than nominal: the R1 nRF52840 target already compiles
-three of the G2 snapshots directly, via `../g2/third_party/...` in
-[`../r1/platform/nrf52840/sdk/Makefile`](../r1/platform/nrf52840/sdk/Makefile).
-
-## Vendored snapshots
-
-Verified by `make third-party` from the repository root. All are pinned to an
-exact upstream commit and reconstructed offline from the Git object closure.
-
-| Dependency | Upstream pin | License | G2 | R1 |
+| Submodule | Upstream pin | Licence | G2 | R1 |
 | --- | --- | --- | :-: | :-: |
-| `ambiqsuite-amota-profile` | `de5c6ba3` | BSD-3-Clause (Ambiq per-file) | • | |
-| `ambiqsuite-ancc-profile` | `de5c6ba3` | BSD-3-Clause (Ambiq per-file) | • | |
-| `ambiqsuite-apollo510` | `5efc0228` | BSD-3-Clause | • | |
-| `ambiqsuite-cordio-app-framework` | `de5c6ba3` | Apache-2.0 | • | |
+| `ambiqsuite-sdk` (SparkFun mirror; AMOTA, ANCC, Cordio app framework) | `de5c6ba3` (v2.5.1) | BSD-3-Clause / Apache-2.0 | • | |
+| `ambiqhal-apollo510` | `5efc0228` (AmbiqSuite 5.1.0 HAL import) | BSD-3-Clause | • | |
 | `cmbacktrace` | `73714489` | MIT | • | • |
 | `cmsis-core` | `d23a6949` | Apache-2.0 | • | |
-| `cmsis-freertos` | v10.5.1 | Apache-2.0 | • | • |
-| `cordio` | `3656312d` (r20.05c) | Apache-2.0 | • | |
-| `cJSON` | `3c893567` (v1.7.12; proven interval v1.7.9–v1.7.12) | MIT | • | |
+| `cmsis-5-590` | `2b7495b8` (5.9.0) | Apache-2.0 | • | • |
+| `cmsis-freertos` | `d213f261` (v10.5.1) | Apache-2.0 | • | • |
+| `cordio` | `3656312d` (r20.05c; includes the Packetcraft GATT profiles) | Apache-2.0 | • | |
+| `cjson` | `3c893567` (v1.7.12; interval v1.7.9–v1.7.12) | MIT | • | |
 | `easylogger` | `a596b264` | MIT | • | |
 | `flashdb` | `714d6159` (2.1.1) | Apache-2.0 | • | |
 | `freertos-kernel` | `def7d2df` (V10.5.1) | MIT | • | • |
 | `freertos-plus-cli` | `43defa56` | MIT | • | |
-| `freetype` | 2.9.1 | FTL | • | |
-| `goodix-gr551x-app-error` | see `PROVENANCE.json` | BSD-3-Clause (Goodix per-file) | • | |
-| `liblc3` | `96a3af0b` | Apache-2.0 | • | |
+| `freetype` | `86bc8a95` (2.9.1) | FTL | • | |
+| `invensense-icm45608` | `b79ae575` (1.1.2) | TDK | • | |
+| `liblc3` | `96a3af0b` (v1.1.3) | Apache-2.0 | • | |
 | `littlefs` | `0494ce71` (v2.10.1) | BSD-3-Clause | • | |
 | `lvgl` | `344c7c31` (9.3-dev) | MIT | • | |
-| `lz4` | `ebb370ca` (1.10.0) | BSD-2-Clause | • | |
+| `lz4` | `ebb370ca` (v1.10.0) | BSD-2-Clause | • | |
 | `nanopb` | `98bf4db6` (0.4.9) | Zlib | • | |
 | `npmx` | `e1aaec53` | BSD-3-Clause | • | |
-| `packetcraft-gatt-profile` | `3656312d` | Apache-2.0 | • | |
-| `qpc` | `416dcec8` (6.5.1) | GPL-3.0-or-later (GPL option selected) | • | |
+| `qpc` | `416dcec8` (v6.5.1; EM9305) | GPL-3.0-or-later | • | |
 | `ring-buffer` | `190e30be` | MIT | • | |
 | `tinyframe` | `eb75483e` | MIT | • | |
-| `tlsf` | see `SNAPSHOT.sha256` | BSD-3-Clause | • | |
+| `tlsf` | `deff9ab5` (interval ceiling) | BSD-3-Clause | • | |
 
-A `•` in the R1 column means the R1 nRF52840 target compiles that snapshot
-directly out of `g2/third_party/` — currently CMSIS-FreeRTOS, FreeRTOS-Kernel,
-and CmBacktrace, which `verify_vendor.py` also re-authenticates during the R1
-vendor audit. Everything else is G2-only today. Note that R1 uses FlashDB too,
-but takes it from the fetched set rather than from this snapshot.
+Versions, evidence and recovered configuration for each library are in
+[`../g2/docs/reference/libraries.md`](../g2/docs/reference/libraries.md) and
+[`../r1/docs/toolchain-and-dependencies.md`](../r1/docs/toolchain-and-dependencies.md).
 
-Many snapshots are **production-excluded**: authenticated and retained as
-attribution evidence, but not linked into any shipped image. Each dependency's
-`README.openCFW.md` states its own status. Do not infer from this table that a
-dependency is compiled in.
+## Pins added on 2026-09-29
 
-## Fetched dependencies
-
-[`fetched`](fetched) covers upstreams that are not redistributable here —
-principally the Nordic nRF5 SDK and the sensor-vendor SensorAPIs. They are
-downloaded into a cache directory of your choosing, checked against pinned
-archive hashes, and then authenticated file-by-file.
-
-```sh
-third-party/fetched/fetch.sh /absolute/path/to/vendor-cache
-```
-
-The script refuses relative paths, verifies each archive's SHA-256 before
-unpacking, skips anything already present, and finishes by running
-`verify_vendor.py` over the whole set. See [`fetched/README.md`](fetched/README.md)
-for the per-dependency roots and the environment variables the R1 build expects.
-
-## Vendor firmware blobs
-
-The official Even Realities OTA payloads that the G2 reconstruction is verified
-against are vendor-proprietary and are **not** in this repository.
-[`../g2/blobs/official/g2-2.2.6.10/PROVENANCE.md`](../g2/blobs/official/g2-2.2.6.10/PROVENANCE.md)
-records their origin and SHA-256 digests so a local copy can be reproduced and
-checked. Place them at the path that file names before running any G2 target
-beyond `make reference`'s prerequisites.
-
-## Git submodules
-
-`.gitmodules` pins 51 upstreams, checked against the live remotes on
-2026-09-29. They fall into three groups:
-
-- [`upstream/`](upstream): code that a rebuild compiles. The original 24
-  match the vendored snapshots and the fetched manifest exactly.
-- [`reference/`](reference): comparison-only sources, with `update = none`.
-- [`tools/`](tools): analysis tools.
-
-No build consumes them yet. They are the long-term update path: a
-reconstruction that builds against `upstream/<name>` can move to a newer
-upstream commit and pick up its fixes. Every entry is `shallow = true`.
-Initialise only what you need:
-
-```sh
-git submodule update --init --depth 1 third-party/upstream/freertos-kernel
-```
-
-Entries marked `update = none` (large or reference-only) are skipped by a plain
-`git submodule update --init`. Name the path explicitly and add `--checkout`
-to fetch one. `cmsis-5-590` and `cmsis-core` are two different commits of the
-same CMSIS_5 repository, and both are needed. The same applies to
-`ambiqhal-apollo510` and `ambiqhal-nema`, and to `flashdb` (2.1.1, G2) and
-`flashdb-2.0.0` (R1).
-
-### Pins added on 2026-09-29
-
-Library identities and the evidence behind them are in
-[`g2/docs/reference/libraries.md`](../g2/docs/reference/libraries.md) and
-[`r1/docs/toolchain-and-dependencies.md`](../r1/docs/toolchain-and-dependencies.md).
+Each commit was checked against its upstream remote.
 
 | Name | Repository | Commit | Consumer | Confidence | Licence / note |
 | --- | --- | --- | --- | --- | --- |

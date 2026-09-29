@@ -41,7 +41,7 @@ goodix_democode_url=https://github.com/coredevices/pebbleos-nonfree/archive/2c00
 goodix_democode_sha=48564d724f1de0004dd19ed3d8b156841400b7e652714f46dcb64d0397c76d29
 
 mkdir -p "$vendor_dir"
-stage=$(mktemp -d "${TMPDIR:-/tmp}/openr1-vendor.XXXXXX")
+stage=$(mktemp -d "${TMPDIR:-/tmp}/opencfw-r1-vendor.XXXXXX")
 trap 'rm -rf "$stage"' EXIT HUP INT TERM
 
 if [ ! -d "$vendor_dir/$sdk_name" ]; then

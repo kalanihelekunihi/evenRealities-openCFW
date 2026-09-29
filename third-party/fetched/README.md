@@ -1,51 +1,47 @@
-# Fetched dependencies
+# Fetched dependencies (R1)
 
-Upstreams that cannot be redistributed from this repository. They are downloaded
-into a local cache directory, checked against pinned archive hashes, and then
-authenticated file-by-file before any build consumes them.
+These are R1 upstreams in archive form. They are downloaded into a local
+cache, checked against pinned archive hashes, and then authenticated file by
+file. The nRF5 SDK has no public Git repository, so this is its only pinned
+form. Every other entry here is also pinned as a Git submodule under
+[`../upstream/`](../upstream) (see [`../README.md`](../README.md)).
 
-- [`manifest.json`](manifest.json) — the pin: provider, version, archive URL,
-  archive SHA-256, license path, the recovered evidence that fixed the version,
-  and the production role each component is allowed to play.
-- [`verify_vendor.py`](verify_vendor.py) — offline authenticator. Reads the
-  manifest, hashes the fetched trees, and fails closed on any mismatch. It also
-  cross-checks the CMSIS-FreeRTOS, CmBacktrace, and FreeRTOS-Kernel snapshots
-  vendored at [`../../g2/third_party`](../../g2/third_party).
-- [`fetch.sh`](fetch.sh) — downloads and unpacks the fetchable subset, then runs
+- [`manifest.json`](manifest.json) records each pin: provider, version,
+  archive URL and SHA-256, licence, and the recovered evidence that fixed the
+  version.
+- [`verify_vendor.py`](verify_vendor.py) is the offline authenticator. It
+  hashes the fetched trees and checks the FreeRTOS-Kernel, CMSIS-FreeRTOS,
+  CMSIS_5 and CmBacktrace submodules at their pinned commits. It fails closed
+  on any mismatch.
+- [`fetch.sh`](fetch.sh) downloads and unpacks the fetchable set, then runs
   the authenticator.
 
 ## Fetching
 
 ```sh
+git submodule update --init --depth 1 third-party/upstream/freertos-kernel \
+  third-party/upstream/cmsis-freertos third-party/upstream/cmsis-5-590 \
+  third-party/upstream/cmbacktrace
 third-party/fetched/fetch.sh /absolute/path/to/vendor-cache
 ```
 
-The path must be absolute. Each archive's SHA-256 is checked before it is
-unpacked, anything already present is skipped, and the run ends by invoking
-`verify_vendor.py` across the full set. Nothing is written outside the cache
-directory you name.
+The cache path must be absolute. Each archive's SHA-256 is checked before it is
+unpacked, and anything already present is skipped. Nothing is written outside
+the cache directory.
 
-## Roots the R1 build expects
-
-The R1 targets take each dependency root as a variable rather than assuming a
-layout, so the cache can live anywhere:
+## Roots
 
 | Variable | Component | Notes |
 | --- | --- | --- |
-| `SDK_ROOT` | `nordic-nrf5-sdk` | nRF5 SDK 17.1.0; also supplies SEGGER RTT and the FreeRTOS nRF52 port |
-| `FLASHDB_ROOT` | `flashdb` + `fal` | `health.db` only; `kv.bin` is R1-owned |
-| `BMA456_ROOT` | `bosch-bma456-sensorapi` | one of the two resolved accelerometer variants |
-| `LIS2DW12_ROOT` | `st-lis2dw12-pid` | the other resolved accelerometer variant |
+| `SDK_ROOT` | `nordic-nrf5-sdk` | nRF5 SDK 17.1.0; also supplies S140 7.2.0, SEGGER RTT and the FreeRTOS nRF52 port |
+| `FLASHDB_ROOT` | `flashdb` + `fal` | FlashDB 2.0.0 with FAL 0.5.99 |
+| `BMA456_ROOT` | `bosch-bma456-sensorapi` | one of the three probed accelerometer variants |
+| `LIS2DW12_ROOT` | `st-lis2dw12-pid` | another probed accelerometer variant |
 | `ST25DVXXKC_ROOT` | `st-st25dvxxkc-bsp` | point at `.../Drivers/BSP/Components/st25dvxxkc` |
-| `TINY_AES_ROOT` | `tiny-aes-c` | AES-128 inverse core |
-| `IQS7211E_ROOT` | `flipperone-iqs7211e` | touch controller reference; audit only |
-| `AZOTEQ_SETTINGS_ROOT` | `azoteq-iqs7211e-settings` | touch settings reference; audit only |
-| `GOODIX_DEMOCODE_ROOT` | `goodix-gh3x2x-democode` | GH3X2X source-only demo/driver provider (point at `.../gh3x2x`); compiled by the R1 SDK/Zephyr targets after subset authentication |
-| `GNU_INSTALL_ROOT` | — | Arm GNU toolchain prefix, for `sdk-image` |
-| `ZEPHYR_WORKSPACE` | `zephyr-rtos`, `zephyr-hal-nordic`, `zephyr-cmsis`, `zephyr-tinycrypt`, `mcuboot` | west workspace at the manifest-pinned revisions, for the source-built full-flash target |
-| `ZEPHYR_TOOLCHAIN` | — | GNU Arm Embedded 9.3.1 installation root, for the Zephyr target |
-
-Example:
+| `TINY_AES_ROOT` | `tiny-aes-c` | AES-128 core (tiny-AES-c 1.0.0-compatible) |
+| `IQS7211E_ROOT` | `flipperone-iqs7211e` | touch controller reference; comparison only |
+| `AZOTEQ_SETTINGS_ROOT` | `azoteq-iqs7211e-settings` | touch settings reference; comparison only |
+| `GOODIX_DEMOCODE_ROOT` | `goodix-gh3x2x-democode` | GH3x2x demo/driver source (point at `.../gh3x2x`) |
 
 ```sh
 make -C r1 vendor-audit SDK_ROOT=$CACHE/nRF5_SDK_17.1.0_ddde560 \
@@ -57,29 +53,14 @@ make -C r1 vendor-audit SDK_ROOT=$CACHE/nRF5_SDK_17.1.0_ddde560 \
   AZOTEQ_SETTINGS_ROOT=$CACHE/zmk-driver-iqs7211e-436d3c4
 ```
 
-## Components with no fetch step
+## Entries with no fetch step
 
-Some manifest entries are pinned but deliberately not downloaded by `fetch.sh`:
-
-- `nordic-s140` is a vendor SoftDevice binary distributed with the SDK.
-- `goodix-gh3x2x` — the matching public tree still exposes its algorithm libraries only
-  as binaries, so those artifacts are attribution evidence and never production inputs.
-  Under the owner-authorized source-admission policy, openR1 instead compiles independently
-  reconstructed transparent C for the complete algorithm/allocator census. The public
-  demo-kernel/driver/AGC subset and exact SpO2 configuration table are authenticated and compiled
-  from source under Goodix's 5-clause license (democode v1.6 / DrvLib v4.3.0.0, exact
-  version-marker match). All vendor `.a` files, PC-tool protocol bodies, and neural weights remain
-  excluded. See
-  [`../../r1/docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md`](../../r1/docs/boundaries/GOODIX-PROVIDER-BOUNDARY.md)
-  and [`../../r1/docs/boundaries/goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md`](../../r1/docs/boundaries/goodix_gh3x2x_candidate-ATTRIBUTION-2026-08.md).
-- `qst-qma6100` remains an unfetched attribution reference; the complete provider/adapter
-  family now compiles from owner-authorized transparent C, while the unlicensed evidence
-  is excluded from production inputs.
-- `r1-sleep-journal` is not an upstream at all — it marks the R1-specific
-  behavior where clean-room implementation is permitted.
-- the five Zephyr/MCUboot stack entries are materialized by west rather than
-  `fetch.sh`. `r1/tools/package_zephyr_bundle.py` checks each repository's exact
-  commit and tree and rejects modified or untracked files before packaging.
-
-An absent optional provider makes the corresponding feature return
-`R1_ERROR_UNSUPPORTED`. It never causes fabricated data.
+- `nordic-s140` is the SoftDevice binary distributed inside the SDK archive.
+  Its hash is pinned.
+- `qst-qma6100` has no licensed public source. It remains an attribution
+  reference, and its behaviour is recorded as pseudocode in
+  [`../../r1/reconstructed/`](../../r1/reconstructed/README.md).
+- The GoMore algorithms and the Goodix algorithm libraries are binary-only.
+  The stock image links them as vendor objects, so a byte-identical build needs
+  the vendor's original objects or byte-matched decompiled C for those
+  functions. See [`../../docs/roadmap.md`](../../docs/roadmap.md).

@@ -83,7 +83,7 @@ is to reach identical bytes, one function at a time.
 | Device | Source |
 | --- | --- |
 | Apollo510 / Apollo510B | Keil CMSIS pack `AmbiqMicro::Apollo_DFP` 1.5.x (`cpackget add AmbiqMicro::Apollo_DFP@1.5.2`) |
-| PSoC 4000T | `devices/svd/psoc4000t.svd` in Infineon `mtb-pdl-cat2` (proposed submodule, see [`third-party/README.md`](../third-party/README.md)) |
+| PSoC 4000T | `devices/svd/psoc4000t.svd` in Infineon `mtb-pdl-cat2` (submodule `third-party/upstream/infineon-mtb-pdl-cat2`) |
 | STM32G0B1 | ST `STM32G0B1.svd` via the ST pack or `cmsis-svd-data` |
 | nRF52840 | `modules/nrfx/mdk/nrf52840.svd` in the nRF5 SDK 17.1.0 archive ([`third-party/fetched/`](../third-party/fetched)) |
 | EM9305, GX8002 | No public SVD. Label them from vendor SDK headers (EM9305 SDK, `lvp_kws`) |
@@ -131,6 +131,6 @@ These tools are documented only; they are not pinned.
 
 | Class | Items |
 | --- | --- |
-| Proposed Git submodules (`third-party/tools/`) | asm-differ, decomp-permuter, GhidraSVD, ghidra_csky_WinnerMicro, the Ghidra ARC module (after forking), and the G2 firmware emulator |
+| Git submodules (`third-party/tools/`) | asm-differ, decomp-permuter, GhidraSVD, ghidra_csky_WinnerMicro; still to add: the Ghidra ARC module (after forking) and the G2 firmware emulator |
 | `tools/bootstrap/` (pinned download and hash check) | Ghidra + JDK, rizin + rz-ghidra, Arm/ARC/C-SKY binutils and GCC, objdiff-cli, Renode, XuanTie QEMU, Python analysis environment (capstone, unicorn, lief, kaitaistruct, unblob, diffoscope), pyOCD, CMSIS packs |
 | Documented only (licensed or proprietary) | IAR EWARM, Synopsys MetaWare, Keil MDK / Arm Compiler 5, J-Link, IDA, Binary Ninja, nRF Sniffer, the full AmbiqSuite 5.1.0 SDK, the official EM9305 SDK v4.2 |
