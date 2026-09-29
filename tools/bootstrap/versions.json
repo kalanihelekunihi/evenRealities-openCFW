@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "note": "A sha256 of null means the artifact has not been hashed yet. Run `bootstrap.py --record <id>` once on a trusted network, review the result, and commit it. After that, installs fail closed on any mismatch. Download URLs follow each vendor's published naming pattern but have not all been fetched yet; confirm each URL when you record its hash. Entries with a null url are built from the pinned source commit.",
+  "tools": [
+    {
+      "id": "ghidra",
+      "group": "ghidra",
+      "version": "12.1.4",
+      "source_commit": "8b6bbb857accdfa20dc5b2f5dea471178c2e9fbc",
+      "url": "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.4_build/ghidra_12.1.4_PUBLIC_{date}.zip",
+      "url_note": "Replace {date} with the build date from the release page when recording.",
+      "sha256": null,
+      "license": "Apache-2.0",
+      "requires": ["jdk-21"]
+    },
+    {
+      "id": "jdk-21",
+      "group": "ghidra",
+      "version": "Temurin 21 LTS",
+      "url": "https://api.adoptium.net/v3/binary/latest/21/ga/linux/x64/jdk/hotspot/normal/eclipse",
+      "sha256": null,
+      "license": "GPL-2.0-with-classpath-exception"
+    },
+    {
+      "id": "arm-gnu-toolchain-13.3",
+      "group": "binutils",
+      "version": "13.3.Rel1",
+      "url": "https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz",
+      "sha256": null,
+      "license": "GPL-3.0 (tools)",
+      "purpose": "MVE-capable objdump oracle for Cortex-M55; experiments on the GCC-built Cortex-M0+ payloads"
+    },
+    {
+      "id": "arm-gnu-toolchain-9-2020-q2",
+      "group": "binutils",
+      "version": "9-2020-q2-update",
+      "url": "https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2",
+      "sha256": null,
+      "license": "GPL-3.0 (tools)",
+      "purpose": "Toolchain era matching nRF5 SDK 17.1.0 builds; reference for the R1 bootloader rebuild experiment"
+    },
+    {
+      "id": "arc-gnu-toolchain",
+      "group": "binutils",
+      "version": "arc-2026.03-release",
+      "url": "https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases/download/arc-2026.03-release/arc_gnu_2026.03_prebuilt_elf32_le_linux_install.tar.gz",
+      "sha256": null,
+      "license": "GPL-3.0 (tools)",
+      "purpose": "arc-elf32-objdump -M cpu=em oracle for the EM9305 (analysis only; stock used MetaWare)"
+    },
+    {
+      "id": "csky-toolchain-build",
+      "group": "binutils",
+      "version": "csky-script-3_2_0-release",
+      "source_repository": "https://github.com/c-sky/toolchain-build",
+      "source_commit": "96f037d8",
+      "url": null,
+      "sha256": null,
+      "license": "GPL-3.0 (tools)",
+      "purpose": "C-SKY CK804EF binutils/GCC for the GX8002; see g2/docs/toolchains.md for the required binutils fork"
+    },
+    {
+      "id": "rizin",
+      "group": "rizin",
+      "version": "0.9.1",
+      "source_repository": "https://github.com/rizinorg/rizin",
+      "source_commit": "c3a90e92",
+      "url": null,
+      "sha256": null,
+      "license": "LGPL-3.0"
+    },
+    {
+      "id": "rz-ghidra",
+      "group": "rizin",
+      "version": "0.9.0",
+      "source_repository": "https://github.com/rizinorg/rz-ghidra",
+      "source_commit": "999df7b8",
+      "url": null,
+      "sha256": null,
+      "license": "LGPL-3.0"
+    },
+    {
+      "id": "objdiff-cli",
+      "group": "matching",
+      "version": "3.8.1",
+      "source_commit": "fba10a617154f19b3fc25c8817dc81f81d8489b5",
+      "url": "https://github.com/encounter/objdiff/releases/download/v3.8.1/objdiff-cli-linux-x86_64",
+      "sha256": null,
+      "license": "MIT OR Apache-2.0"
+    },
+    {
+      "id": "renode",
+      "group": "emulation",
+      "version": "1.17.0",
+      "url": "https://github.com/renode/renode/releases/download/v1.17.0/renode-1.17.0.linux-portable.tar.gz",
+      "sha256": null,
+      "license": "MIT"
+    },
+    {
+      "id": "xuantie-qemu",
+      "group": "emulation",
+      "version": "xuantie-qemu-9.0",
+      "source_repository": "https://github.com/XUANTIE-RV/qemu",
+      "source_commit": "3287d345c7f5d60d5c8774d90752f5f710744f85",
+      "url": null,
+      "sha256": null,
+      "license": "GPL-2.0",
+      "purpose": "C-SKY semantics oracle for the GX8002"
+    },
+    {
+      "id": "apollo-dfp",
+      "group": "svd",
+      "version": "AmbiqMicro::Apollo_DFP 1.5.2",
+      "url": "https://www.keil.com/pack/AmbiqMicro.Apollo_DFP.1.5.2.pack",
+      "sha256": null,
+      "license": "Ambiq (see pack)",
+      "purpose": "Apollo510/Apollo510B SVD and flash algorithms"
+    }
+  ],
+  "python": {
+    "requirements": "requirements.txt"
+  },
+  "licensed": [
+    {"id": "iar-ewarm", "detect": ["iccarm", "--version"], "expected": "9.60.2 (candidate; floor 9.20)", "payloads": ["g2 apollo_main", "g2 bootloader"]},
+    {"id": "metaware", "detect": ["ccac", "-v"], "expected": "T-2022.09 build 004", "payloads": ["g2 ble_em9305"]},
+    {"id": "armcc5", "detect": ["armcc", "--vsn"], "expected": "Arm Compiler 5.06 (update unknown)", "payloads": ["r1 application", "r1 bootloader"]}
+  ]
+}
