@@ -27,7 +27,7 @@ this table sets the tool requirements. Evidence and open questions are in
 | G2 EM9305 BLE controller | EM Microelectronic EM9305, Synopsys ARCv2 EM | Synopsys MetaWare T-2022.09 build 004 (LLVM 14.0.6), `-Os`, EM9305 SDK v4.2 archives (proven from archive `.comment`) | commercial |
 | G2 GX8002 voice codec | NationalChip GX8002B, C-SKY CK804EF | C-SKY GCC lineage; exact release not established | GPL toolchain |
 | G2 touch controller | Infineon PSoC 4000T CY8C4046FNI, Cortex-M0+ | GCC indicated by the runtime (exact release open) | free |
-| G2 charging case | STM32G0B1-class, Cortex-M0+ | GCC with STM32CubeG0 HAL (family proven, release open) | free |
+| G2 charging case | STM32G0B1-class, Cortex-M0+ | Keil MDK: Arm Compiler 6 (armclang) + armlink, with STM32CubeG0 HAL (Strong; release open) | MDK v6 Community (free, non-commercial, Keil account) |
 | R1 application and bootloader | Nordic nRF52840, Cortex-M4F | Arm Compiler 5 (armcc/armlink), shown by the `__main` and `__scatterload` runtime | commercial (Keil MDK) |
 
 **Consequence.** Clang, which the old overlay work used, cannot reproduce IAR,

@@ -86,7 +86,8 @@ upstream is a function nobody has to decompile by hand.
   reproduces them byte for byte. This fixes the toolchain for phases 5–7.
   Open candidates:
   - IAR release and DLIB configuration for the Apollo payloads;
-  - GCC release for touch and case;
+  - GCC release for touch, and the Arm Compiler 6 (armclang) release for
+    the case, which is a Keil MDK build (`tools/matching/experiments.md`);
   - C-SKY GCC release for the codec;
   - armcc 5.06 update level for R1.
 - **Recover configuration.** Derive config headers from constant tables and
@@ -196,7 +197,7 @@ toolchain identification and the matching pipeline cheaply.
 | ---: | --- | --- |
 | 1 | R1 bootloader (24 KB) | nRF5 SDK 17.1.0 Secure DFU is public, 304 functions are already named, and the compiler family (armcc 5) is known |
 | 2 | G2 touch (34 KB) | PSoC 4000T PDL and CAPSENSE are public (pinned); small GCC build |
-| 3 | G2 case (55 KB) | STM32CubeG0 and FreeRTOS are public; this pins the Cube release |
+| 3 | G2 case (55 KB) | STM32CubeG0 and FreeRTOS are public; built with Keil MDK Arm Compiler 6, which is free for non-commercial use (`TC-ARMCLANG6`); this pins the Cube release |
 | 4 | G2 EM9305 (212 KB) | about 1,450 functions already matched exactly to the EM9305 SDK v4.2 archives; the compiler is known |
 | 5 | R1 application (646 KB) | nRF5 SDK and FreeRTOS are public; all 2,687 functions are already attributed to a provider |
 | 6 | G2 codec (326 KB) | NationalChip `lvp_kws` is public; needs the C-SKY compiler release |

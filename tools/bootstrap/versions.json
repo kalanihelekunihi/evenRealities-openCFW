@@ -36,9 +36,45 @@
       "group": "binutils",
       "version": "9-2020-q2-update",
       "url": "https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2",
-      "sha256": null,
+      "sha256": "5adc2ee03904571c2de79d5cfc0f7fe2a5c5f54f44da5b645c17ee57b217f11f",
       "license": "GPL-3.0 (tools)",
       "purpose": "Toolchain era matching nRF5 SDK 17.1.0 builds; reference for the R1 bootloader rebuild experiment"
+    },
+    {
+      "id": "arm-gnu-toolchain-10.3-2021.10",
+      "group": "binutils",
+      "version": "10.3-2021.10",
+      "url": "https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2",
+      "sha256": "97dbb4f019ad1650b732faffcc881689cedc14e2b7ee863d390e0a41ef16c9a3",
+      "license": "GPL-3.0 (tools)",
+      "purpose": "compiler-identification candidate for the GCC-built touch and case payloads"
+    },
+    {
+      "id": "arm-gnu-toolchain-6-2017-q2-update",
+      "group": "binutils",
+      "version": "6-2017-q2-update",
+      "url": "https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2",
+      "sha256": "e68e4b2fe348ecb567c27985355dff75b65319a0f6595d44a18a8c5e05887cc3",
+      "license": "GPL-3.0 (tools)",
+      "purpose": "compiler-identification candidate for the GCC-built touch and case payloads"
+    },
+    {
+      "id": "arm-gnu-toolchain-8-2019-q3-update",
+      "group": "binutils",
+      "version": "8-2019-q3-update",
+      "url": "https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/8-2019q3/RC1.1/gcc-arm-none-eabi-8-2019-q3-update-linux.tar.bz2",
+      "sha256": "b50b02b0a16e5aad8620e9d7c31110ef285c1dde28980b1a9448b764d77d8f92",
+      "license": "GPL-3.0 (tools)",
+      "purpose": "compiler-identification candidate for the GCC-built touch and case payloads"
+    },
+    {
+      "id": "arm-gnu-toolchain-7-2018-q2-update",
+      "group": "binutils",
+      "version": "7-2018-q2-update",
+      "url": "https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/7-2018q2/gcc-arm-none-eabi-7-2018-q2-update-linux.tar.bz2",
+      "sha256": "bb17109f0ee697254a5d4ae6e5e01440e3ea8f0277f2e8169bf95d07c7d5fe69",
+      "license": "GPL-3.0 (tools)",
+      "purpose": "compiler-identification candidate for the GCC-built touch and case payloads"
     },
     {
       "id": "arc-gnu-toolchain",
@@ -116,6 +152,24 @@
       "sha256": null,
       "license": "Ambiq (see pack)",
       "purpose": "Apollo510/Apollo510B SVD (SVD/apollo510.svd) and flash algorithms; anonymous download"
+    },
+    {
+      "id": "llvm-13.0.0",
+      "group": "matching",
+      "version": "13.0.0",
+      "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-13.0.0/clang+llvm-13.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz",
+      "sha256": "2c2fb857af97f41a5032e9ecadf7f78d3eff389a5cd3c9ec620d24f134ceb3c8",
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "purpose": "open LLVM proxy for armclang-built code (compiler-identification matrix)"
+    },
+    {
+      "id": "llvm-11.0.0",
+      "group": "matching",
+      "version": "11.0.0",
+      "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz",
+      "sha256": "829f5fb0ebda1d8716464394f97d5475d465ddc7bea2879c0601316b611ff6db",
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "purpose": "open LLVM proxy for armclang-built code (compiler-identification matrix)"
     }
   ],
   "python": {
@@ -159,6 +213,18 @@
         "r1 bootloader"
       ],
       "availability": "Arm account on the Product Download Hub; needs an MDK Professional node-locked licence (MDK v6 Community/Essential user licences do not cover Arm Compiler 5)"
+    },
+    {
+      "id": "armclang6",
+      "detect": [
+        "armclang",
+        "--version"
+      ],
+      "expected": "Arm Compiler 6.x from Keil MDK (release to identify)",
+      "payloads": [
+        "g2 case"
+      ],
+      "availability": "Keil MDK v6 Community edition: free for non-commercial use, Keil/Arm account required; Essential/Professional are paid"
     }
   ],
   "system_packages": {
@@ -166,7 +232,8 @@
     "apt": [
       "binutils-arc-linux-gnu (2.42): ARCv2 EM disassembly for the EM9305",
       "gcc-arc-linux-gnu (13.3): ARCv2 EM carrier object for g2/tools/disassemble_em9305_arcompact.py",
-      "openjdk-21-jdk: Ghidra runtime"
+      "openjdk-21-jdk: Ghidra runtime",
+      "clang-14 \u2026 clang-20 (Ubuntu 24.04): open LLVM matrix for armclang-built code"
     ],
     "ghidra_processors": [
       "C-SKY: copy third-party/tools/ghidra-csky/C-SKY/{data,Module.manifest} to <ghidra>/Ghidra/Processors/CSKY and run <ghidra>/support/sleigh on csky_v2.slaspec"

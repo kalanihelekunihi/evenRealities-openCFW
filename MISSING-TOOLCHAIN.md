@@ -30,6 +30,7 @@ Availability and access terms for each missing item are in
 | `TC-IAR` | IAR EWARM with DLIB. 9.60.2 is the candidate; the floor is 9.20 | licensed compiler | byte-matching C for the G2 Apollo main application and Even bootloader, including the upstream libraries IAR compiled into them (FreeRTOS, Cordio, LVGL, littlefs, nanopb, FreeType, liblc3, LZ4, ...) and the IAR DLIB runtime | full decompilation in Ghidra; review and freeze; upstream identification by strings, source paths and GCC/clang-built BSim; link-map recovery; recovering configuration from constants | IAR EWARM at the identified release is installed and fingerprinted (`tools/bootstrap/bootstrap.py --licensed`) |
 | `TC-METAWARE` | Synopsys MetaWare T-2022.09 build 004 | licensed compiler | byte-matching C for the G2 EM9305 controller | disassembly with `arc-elf32-objdump`; record-package and container work; function identity from SDK archive matching | MetaWare installed (from MIPS/Synopsys, or supplied by EM Microelectronic) |
 | `TC-ARMCC5` | Arm Compiler 5.06 (armcc/armlink) with an MDK Professional licence | licensed compiler | byte-matching C for the R1 application and bootloader | full decompilation in Ghidra; nRF5 SDK and FreeRTOS identification; scatter-layout recovery | Arm Compiler 5.06 installed and fingerprinted |
+| `TC-ARMCLANG6` | Arm Compiler 6 (armclang, armlink, Arm C library) from Keil MDK; release to identify | licensed compiler (MDK v6 Community is free for non-commercial use with a Keil account) | byte-matching C for the G2 charging case | full decompilation; open LLVM clang 11–20 as a near proxy (identical register allocation; one scheduling difference, see `tools/matching/experiments.md`) | armclang is installed and its release is identified by matching |
 | `TC-ARCV2-DECOMP` | a decompiler for ARCv2 EM (Ghidra has none; pull request 3006 is ARCompact only) | analysis tool | EM9305 *pseudocode* (disassembly-level review is still possible) | objdump-based disassembly review, control-flow recovery, SDK function matching | an ARCv2 SLEIGH module in a project-owned Ghidra fork, or IDA Pro with its ARC module |
 | `TC-CSKY-EMU` | an emulator for C-SKY CK804 | analysis tool (soft) | dynamic confirmation of GX8002 behaviour only | static decompilation with the C-SKY Ghidra module and `csky-elfabiv2` binutils; compiler identification with the open C-SKY GCC | a CK804-capable QEMU or Unicorn port is found or built |
 | `VO-NEMAGFX` | NemaGFX / NemaVG libraries built with the stock compiler | binary-only vendor object | the GPU library functions in the Apollo main application | decompilation and review; header types from the pinned `ambiqhal-nema` submodule | the IAR-built NemaGFX objects are obtained from Ambiq, or those functions are byte-matched after `TC-IAR` clears |
@@ -53,8 +54,8 @@ Not blockers:
   nRF5 SDK and is carried as Nordic ships it;
 - the GX8002 compiler, which is open-source C-SKY GCC whose exact release
   still has to be identified;
-- the touch and case compilers, which are open-source GCC with the release
-  still to be identified.
+- the touch compiler, which is open-source GCC (newlib init-array evidence)
+  with the release still to be identified.
 
 ## Component status
 
@@ -64,7 +65,7 @@ Not blockers:
 | --- | --- | ---: | --- | --- |
 | G2 | EVENOTA container | 4,301,227 B | done: byte-identical repack (`make g2-verify`) | — |
 | G2 | touch (PSoC 4000T, Cortex-M0+) | 34,464 B | **raw decompilation done** (308 functions); review; Infineon PDL/CAPSENSE identification; GCC release identification | — (fully open) |
-| G2 | case (STM32G0B1-class, Cortex-M0+) | 55,784 B | **raw decompilation done** (435 functions); review; STM32CubeG0 and FreeRTOS identification; GCC release identification | — (fully open) |
+| G2 | case (STM32G0B1-class, Cortex-M0+) | 55,784 B | **raw decompilation done** (435 functions); review; STM32CubeG0 and FreeRTOS identification with open clang as proxy | `TC-ARMCLANG6` (compiler identified as Keil MDK / Arm Compiler 6) |
 | G2 | codec (GX8002B, C-SKY CK804EF) | 326,092 B | **raw decompilation done** for all five code regions (929 functions); `lvp_kws` identification; C-SKY GCC release identification | `TC-CSKY-EMU` (dynamic checks only) |
 | G2 | EM9305 (ARCv2 EM) | 211,948 B | **full ARCv2 EM disassembly done** (open binutils); disassembly review; SDK archive matching | `TC-ARCV2-DECOMP`, `TC-METAWARE`, `VO-PACKETCRAFT-LL` |
 | G2 | Even bootloader (Apollo510B) | 148,599 B | **raw decompilation done** (903 functions, 849 decompiled); review, library identification | `TC-IAR` |

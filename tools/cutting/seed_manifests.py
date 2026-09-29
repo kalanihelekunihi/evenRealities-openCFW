@@ -93,8 +93,8 @@ def case():
         else:
             merged.append([start, end, category])
     for index, (start, end, category) in enumerate(merged):
-        regs.append(region(f"r{index:03d}_{category}", start, end, G2_OPEN))
-    return g2_manifest("case", "g2-case", "GCC + STM32CubeG0 (release to identify); open", regs,
+        regs.append(region(f"r{index:03d}_{category}", start, end, ["TC-ARMCLANG6"] + G2_OPEN))
+    return g2_manifest("case", "g2-case", "Keil MDK Arm Compiler 6 (armclang) + STM32CubeG0; licensed, missing", regs,
                        "STM32G0 image at 0x08000000 after the 32-byte EVEN wrapper; regions from the case byte accounting")
 
 
