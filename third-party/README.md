@@ -75,6 +75,7 @@ Each commit was checked against its upstream remote.
 | `upstream/ambiqhal-nema` | github.com/AmbiqMicro/ambiqhal_ambiq | `b853fded7e545f005727e13bf2ce83018c7e242d` | G2 Apollo (NemaGFX 1.4.12 / NemaVG 1.1.8 headers) | High | headers only; the NemaGFX implementation is binary-only |
 | `upstream/infineon-mtb-pdl-cat2` | github.com/Infineon/mtb-pdl-cat2 | `35f1714623cfea682d5e285af80d50416b4c7bbc` (release-v2.21.0) | G2 touch (PSoC 4000T PDL, `psoc4000t.svd`) | High | Apache-2.0 |
 | `upstream/infineon-capsense` | github.com/Infineon/capsense | `25fa1cd5abb4cc66981b04f8872d57d74e398976` (release-v3.0.1) | G2 touch | Medium | Infineon EULA. One analyzer cites release-v10.0.0 (`b68b744eb75fe976fc5ddd7b16e04e1a5a54bdd3`) instead; settle this before pinning |
+| `upstream/infineon-core-lib` | github.com/Infineon/core-lib | `ca57d1e519e08badec6891d1776c7b4f05e09561` (release-v1.8.0) | G2 touch (`cy_utils.h` needed by the PDL) | Medium (the PDL requires it; release is a candidate) | Apache-2.0 |
 | `upstream/infineon-emeeprom` | github.com/Infineon/emeeprom | `6bbde322b7193528674dbf7fcdc2e971d0cff4fa` (release-v2.70.1) | G2 touch | Medium | Infineon EULA |
 | `upstream/stm32g0xx-hal-driver` | github.com/STMicroelectronics/stm32g0xx-hal-driver | `a0cf8a8b96183fdcc2e3b1cf0bcf0825f27bd0c9` (v1.4.7) | G2 case | Low: family proven, release not | BSD-3-Clause; latest tag, a candidate only |
 | `upstream/cmsis-device-g0` | github.com/STMicroelectronics/cmsis-device-g0 | `f576c24e123edf3332988ecd49512c0f35f85186` (v1.4.5) | G2 case | Low | Apache-2.0; candidate |

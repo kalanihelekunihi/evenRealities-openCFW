@@ -26,7 +26,7 @@ Those images were nevertheless built with IAR.
 | Apollo bootloader | IAR (same project family) | unknown | IAR DLIB/CLIB C11 runtime pieces | Strong |
 | EM9305 | Synopsys MetaWare ARC (LLVM-based) | T-2022.09 build 004, LLVM 14.0.6, EM-Micro ARCv2 EM, `-Os` (SDK archives) | MetaWare runtime (SDK `MW_VERSION=2019.09` runtime directory) | Proven for SDK objects; the vendor's own objects are Inferred |
 | GX8002 | C-SKY GNU (`csky-abiv2-elf-`), `-mcpu=ck804ef`, hard float | unknown | SDK `utility/libc` (tinyprintf and others), newlib-lineage libm, libgcc | family Strong, release Unverified |
-| Touch (PSoC 4000T) | GNU Arm GCC plus newlib | unknown | newlib | Strong (idioms only) |
+| Touch (PSoC 4000T) | Arm GNU GCC ≥ 10.3 (10.3–13.3 all match), `-Og` (ModusToolbox Debug) | 10.3–13.3, to narrow | newlib; Infineon PDL (exact match of `Cy_SCB_ReadArrayNoCheck`, see `tools/matching/experiments.md`) | Proven (compiler family and flags) |
 | Case (STM32G0) | Keil MDK: Arm Compiler 6 (armclang) + armlink + Arm C library (superseding the earlier GCC attribution; see `tools/matching/experiments.md`) | unknown | Arm C library; STM32CubeG0 HAL; FreeRTOS with `configLIST_VOLATILE=volatile` | Strong |
 
 ## 1. Apollo main: IAR EWARM with DLIB

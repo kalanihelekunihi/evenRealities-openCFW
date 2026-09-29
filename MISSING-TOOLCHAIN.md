@@ -54,8 +54,8 @@ Not blockers:
   nRF5 SDK and is carried as Nordic ships it;
 - the GX8002 compiler, which is open-source C-SKY GCC whose exact release
   still has to be identified;
-- the touch compiler, which is open-source GCC (newlib init-array evidence)
-  with the release still to be identified.
+- the touch compiler: open-source Arm GNU GCC ≥ 10.3 at `-Og`, confirmed by
+  an exact byte match.
 
 ## Component status
 
@@ -64,7 +64,7 @@ Not blockers:
 | Device | Payload | Size | Open work now | Gated on |
 | --- | --- | ---: | --- | --- |
 | G2 | EVENOTA container | 4,301,227 B | done: byte-identical repack (`make g2-verify`) | — |
-| G2 | touch (PSoC 4000T, Cortex-M0+) | 34,464 B | **raw decompilation done** (308 functions); review; Infineon PDL/CAPSENSE identification; GCC release identification | — (fully open) |
+| G2 | touch (PSoC 4000T, Cortex-M0+) | 34,464 B | **raw decompilation done** (308 functions); **compiler identified**: open Arm GNU GCC ≥ 10.3 at `-Og`, with an exact byte match of official Infineon PDL code (`tools/matching/experiments.md`); next: match the remaining PDL, CAPSENSE and emEEPROM functions | — (fully open) |
 | G2 | case (STM32G0B1-class, Cortex-M0+) | 55,784 B | **raw decompilation done** (435 functions); review; STM32CubeG0 and FreeRTOS identification with open clang as proxy | `TC-ARMCLANG6` (compiler identified as Keil MDK / Arm Compiler 6) |
 | G2 | codec (GX8002B, C-SKY CK804EF) | 326,092 B | **raw decompilation done** for all five code regions (929 functions); `lvp_kws` identification; C-SKY GCC release identification | `TC-CSKY-EMU` (dynamic checks only) |
 | G2 | EM9305 (ARCv2 EM) | 211,948 B | **full ARCv2 EM disassembly done** (open binutils); disassembly review; SDK archive matching | `TC-ARCV2-DECOMP`, `TC-METAWARE`, `VO-PACKETCRAFT-LL` |

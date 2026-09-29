@@ -35,3 +35,26 @@ matching FreeRTOS tag) with a minimal `FreeRTOSConfig.h` and
 `-ffunction-sections`, then run `compare_function.py --image
 g2/blobs/official/g2-2.2.6.10/firmware_box.raw.bin --base 0x08000000
 --address 0x0800BF2C --size 38 --section .text.uxListRemove`.
+
+## 2026-09-29 — G2 touch: `Cy_SCB_ReadArrayNoCheck` (Infineon PDL `cy_scb_common.c`)
+
+**Target:** touch image (payload offset + `0x3300`) at flash `0x9218`, 56
+bytes.
+
+**Source:** `third-party/upstream/infineon-mtb-pdl-cat2` (release-v2.21.0),
+with `-DCY8C4046FNI_T412`, `third-party/upstream/infineon-core-lib`
+(release-v1.8.0), CMSIS Core, and a stub `system_cat2.h` that carries only
+declarations.
+
+| Matrix | Result |
+| --- | --- |
+| Arm GNU 6-2017-q2, 7-2018-q2, 8-2019-q3, 9-2020-q2 × `-O1/-Og/-Os/-O2/-O3` | no match |
+| Arm GNU 10.3-2021.10, 11.3.Rel1, 12.2.Rel1, 13.3.Rel1 × `-Og` | **exact byte match** |
+| the same releases × `-O1/-Os/-O2/-O3` | no match |
+
+**Conclusion (Proven for this function):** the touch firmware is built with
+open-source Arm GNU GCC, release 10.3 or later, at `-Og`. `-Og` is
+ModusToolbox's default Debug configuration. The official Infineon PDL
+source reproduces the stock bytes exactly. Matching more functions is
+needed to choose between the 10.3–13.3 releases. No licensed tool is
+involved, so the touch payload is fully unblocked.
