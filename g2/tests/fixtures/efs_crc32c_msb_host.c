@@ -1,7 +1,0 @@
-/*
- * SPDX-License-Identifier: MIT
- *
- * Native host oracle for the EFS non-reflected CRC-32C updater.
- */
-
-#include "../../components/apollo_main/core_overlay/efs_crc32c_msb.c"
