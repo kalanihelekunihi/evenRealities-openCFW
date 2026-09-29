@@ -11,6 +11,7 @@ applies to more than one device is in [`../../docs/hardware/`](../../docs/hardwa
 | [`reference/toolchains.md`](reference/toolchains.md) | original compiler and runtime per payload; open questions blocking byte equality |
 | [`reference/libraries.md`](reference/libraries.md) | identified upstream libraries, versions, commits, recovered configuration, submodule mapping |
 | [`reference/protocols.md`](reference/protocols.md) | phone transport, protobuf services, EFS/OTA, case UART, codec, touch, HCI, TinyFrame, ring link |
+| [`reference/decompilation-status.md`](reference/decompilation-status.md) | open-tool decompilation runs per payload, coverage and findings |
 | [`reference/capabilities.md`](reference/capabilities.md) | capability checklist with stock address ranges, used to check pseudocode review coverage |
 | [`reference/hardware-validation-notes.md`](reference/hardware-validation-notes.md) | on-device observations, flashing and recovery notes, safety cautions |
 | [`../symbols/README.md`](../symbols/README.md) | address-keyed naming seeds per payload |

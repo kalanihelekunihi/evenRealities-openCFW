@@ -78,7 +78,7 @@ def touch():
         blockers = ["CONTAINER"] if r["region"] == "trailing_crc" else G2_OPEN
         regs.append(region(r["region"], start, end, blockers, r["class"]))
     return g2_manifest("touch", "g2-touch", "GCC (release to identify); open", regs,
-                       "PSoC 4000T image, base 0x00000000 after the 32-byte FWPK header")
+                       "PSoC 4000T image linked at flash 0x3300 (payload offset + 0x3300) after the 32-byte FWPK header")
 
 
 def case():

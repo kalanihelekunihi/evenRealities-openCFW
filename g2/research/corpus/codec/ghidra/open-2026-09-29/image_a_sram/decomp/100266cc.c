@@ -1,0 +1,117 @@
+
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void flash_otp_descriptor(undefined4 param_1,undefined1 param_2)
+
+{
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  *puRam10026f0c = param_2;
+  stub();
+  stub();
+  stub();
+  stub();
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
+}
+

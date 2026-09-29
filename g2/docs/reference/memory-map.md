@@ -247,10 +247,18 @@ Sources: `g2/docs/memory-map.md:1888-1894`;
 
 The part has 64 KiB flash at `0x00000000` and 8 KiB SRAM at `0x20000000`.
 The initial SP is `0x20002000` (the top of SRAM) and reset is `0x00004675`.
-Confidence: Proven for the part. The vector base is Strong; it is labelled
-inferred until the updater write command is confirmed.
 
-Payload regions (flash offsets):
+**Link base `0x3300`** (Proven, 2026-09-29). The application payload is linked
+at flash `0x00003300`, above a resident region that holds the bootloader.
+Payload offset `+0x3300` is the flash address. Evidence:
+- The reset vector `0x4675` is the recovered reset entry at payload
+  `+0x1375`.
+- A Ghidra 12.1.4 export at base `0x3300` places 276 of the 291 named
+  function seeds exactly on discovered entries. Base 0 misplaces them.
+
+An earlier record assumed base 0; the offsets below are payload offsets.
+
+Payload regions (payload offsets; add `0x3300` for flash addresses):
 
 | Interval | Region |
 |---|---|

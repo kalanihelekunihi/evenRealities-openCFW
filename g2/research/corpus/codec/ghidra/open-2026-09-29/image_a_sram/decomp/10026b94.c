@@ -1,0 +1,110 @@
+
+/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void gx8002_aout_route(undefined4 param_1,undefined2 param_2,int param_3)
+
+{
+  *(undefined2 *)(param_3 + 0xc) = param_2;
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+  stub();
+                    /* WARNING: Bad instruction - Truncating control flow here */
+  halt_baddata();
+}
+

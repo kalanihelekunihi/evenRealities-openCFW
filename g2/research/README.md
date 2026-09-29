@@ -14,6 +14,8 @@ research/
     ├── apollo-main/ghidra/pt-protocol/ product-test protocol region decompilation
     ├── case/ghidra/final-frontier/     case function list, call graph and census
     ├── em9305/ghidra/round16-authoritative/, residual-round4/  ARCompact shard logs
+    ├── touch/, case/, apollo-bootloader/, codec/ghidra/open-2026-09-29/  open-tool Ghidra 12.1.4 exports
+    ├── em9305/objdump/open-2026-09-29/  ARCv2 EM disassembly with open GNU binutils
     ├── iar/                            IAR DLIB runtime identification evidence
     └── qpc/                            QP/C on EM9305 identification evidence
 ```

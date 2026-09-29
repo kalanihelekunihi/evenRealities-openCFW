@@ -160,5 +160,16 @@
       ],
       "availability": "Arm account on the Product Download Hub; needs an MDK Professional node-locked licence (MDK v6 Community/Essential user licences do not cover Arm Compiler 5)"
     }
-  ]
+  ],
+  "system_packages": {
+    "note": "Open toolchains installed from the distribution (Ubuntu 24.04) where no pinned upstream archive is used.",
+    "apt": [
+      "binutils-arc-linux-gnu (2.42): ARCv2 EM disassembly for the EM9305",
+      "gcc-arc-linux-gnu (13.3): ARCv2 EM carrier object for g2/tools/disassemble_em9305_arcompact.py",
+      "openjdk-21-jdk: Ghidra runtime"
+    ],
+    "ghidra_processors": [
+      "C-SKY: copy third-party/tools/ghidra-csky/C-SKY/{data,Module.manifest} to <ghidra>/Ghidra/Processors/CSKY and run <ghidra>/support/sleigh on csky_v2.slaspec"
+    ]
+  }
 }

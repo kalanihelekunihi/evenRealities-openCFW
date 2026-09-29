@@ -63,15 +63,18 @@ Not blockers:
 | Device | Payload | Size | Open work now | Gated on |
 | --- | --- | ---: | --- | --- |
 | G2 | EVENOTA container | 4,301,227 B | done: byte-identical repack (`make g2-verify`) | — |
-| G2 | touch (PSoC 4000T, Cortex-M0+) | 34,464 B | decompilation, review; Infineon PDL/CAPSENSE identification; GCC release identification | — (fully open) |
-| G2 | case (STM32G0B1-class, Cortex-M0+) | 55,784 B | decompilation, review; STM32CubeG0 and FreeRTOS identification; GCC release identification | — (fully open) |
-| G2 | codec (GX8002B, C-SKY CK804EF) | 326,092 B | decompilation with the C-SKY module; `lvp_kws` identification; C-SKY GCC release identification | `TC-CSKY-EMU` (dynamic checks only) |
-| G2 | EM9305 (ARCv2 EM) | 211,948 B | disassembly review; SDK archive matching | `TC-ARCV2-DECOMP`, `TC-METAWARE`, `VO-PACKETCRAFT-LL` |
-| G2 | Even bootloader (Apollo510B) | 148,599 B | decompilation, review, library identification | `TC-IAR` |
+| G2 | touch (PSoC 4000T, Cortex-M0+) | 34,464 B | **raw decompilation done** (308 functions); review; Infineon PDL/CAPSENSE identification; GCC release identification | — (fully open) |
+| G2 | case (STM32G0B1-class, Cortex-M0+) | 55,784 B | **raw decompilation done** (435 functions); review; STM32CubeG0 and FreeRTOS identification; GCC release identification | — (fully open) |
+| G2 | codec (GX8002B, C-SKY CK804EF) | 326,092 B | **raw decompilation done** for all five code regions (929 functions); `lvp_kws` identification; C-SKY GCC release identification | `TC-CSKY-EMU` (dynamic checks only) |
+| G2 | EM9305 (ARCv2 EM) | 211,948 B | **full ARCv2 EM disassembly done** (open binutils); disassembly review; SDK archive matching | `TC-ARCV2-DECOMP`, `TC-METAWARE`, `VO-PACKETCRAFT-LL` |
+| G2 | Even bootloader (Apollo510B) | 148,599 B | **raw decompilation done** (903 functions, 849 decompiled); review, library identification | `TC-IAR` |
 | G2 | Apollo main application | 3,523,396 B | decompilation (all 7,449 functions already exported), review, library identification | `TC-IAR`, `VO-NEMAGFX` |
 | R1 | application (nRF52840) | 646,408 B | decompilation (2,687 functions exported and attributed), review, nRF5 SDK matching | `TC-ARMCC5`, `VO-GOODIX`, `VO-GOMORE` |
 | R1 | bootloader | 24,576 B | SDK Secure DFU source identification | `IN-R1-CAPTURE`, `TC-ARMCC5` |
 | R1 | S140 SoftDevice | 159,744 B region | carried as Nordic's binary | — |
+
+Run details and findings are in
+[`g2/docs/reference/decompilation-status.md`](g2/docs/reference/decompilation-status.md).
 
 G2 C reconstruction additionally waits for the whole-artifact pseudocode
 freeze required by [`AGENTS.md`](AGENTS.md) and

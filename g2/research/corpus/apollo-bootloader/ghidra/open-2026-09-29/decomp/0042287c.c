@@ -1,0 +1,150 @@
+
+ulonglong FUN_0042287c(uint param_1,uint param_2,uint param_3,uint param_4)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  uint uVar5;
+  int iVar6;
+  uint uVar7;
+  uint uVar8;
+  uint uVar9;
+  uint uVar10;
+  uint uVar11;
+  uint uVar12;
+  bool bVar13;
+  
+  if (param_4 != 0) {
+    if (param_2 <= param_4 && (uint)(param_3 <= param_1) <= param_2 - param_4) {
+      return 0;
+    }
+    if (0xffff < param_4) {
+      uVar11 = param_2 / param_4;
+      param_2 = param_2 - param_4 * uVar11;
+      uVar4 = (uint)((ulonglong)param_3 * (ulonglong)uVar11 >> 0x20);
+      if (param_2 <= uVar4 &&
+          (uint)((uint)((ulonglong)param_3 * (ulonglong)uVar11) <= param_1) <= param_2 - uVar4) {
+        uVar11 = uVar11 - 1;
+      }
+      return (ulonglong)uVar11;
+    }
+    uVar4 = LZCOUNT(param_4) - 0xf;
+    uVar7 = LZCOUNT(param_4) - LZCOUNT(param_2);
+    uVar11 = param_3 << (uVar4 & 0xff);
+    uVar4 = 0x20 - uVar4 & 0x1f;
+    uVar4 = ((param_4 ^ param_3) >> uVar4 | (param_4 ^ param_3) << 0x20 - uVar4) ^ uVar11;
+    uVar10 = uVar7 - 0xf;
+    if (uVar7 < 0xf || uVar10 == 0) {
+LAB_00422920:
+      uVar7 = LZCOUNT(param_2) + -0xf + uVar7;
+      uVar10 = param_1 << (uVar7 & 0xff);
+      uVar7 = 0x20 - uVar7 & 0x1f;
+      uVar7 = ((param_2 ^ param_1) >> uVar7 | (param_2 ^ param_1) << 0x20 - uVar7) ^ uVar10;
+      uVar1 = uVar7 / uVar4;
+      uVar7 = uVar7 - uVar4 * uVar1;
+      uVar4 = (uint)((ulonglong)uVar11 * (ulonglong)uVar1 >> 0x20);
+      if (uVar7 <= uVar4 &&
+          (uint)((uint)((ulonglong)uVar11 * (ulonglong)uVar1) <= uVar10) <= uVar7 - uVar4) {
+        uVar1 = uVar1 - 1;
+      }
+      return (ulonglong)uVar1;
+    }
+LAB_004229ae:
+    uVar1 = param_1 << LZCOUNT(param_2);
+    uVar7 = 0x20U - LZCOUNT(param_2) & 0x1f;
+    uVar2 = ((param_2 ^ param_1) >> uVar7 | (param_2 ^ param_1) << 0x20 - uVar7) ^ uVar1;
+    uVar12 = uVar2 / uVar4;
+    uVar2 = uVar2 - uVar4 * uVar12;
+    uVar5 = (uint)((ulonglong)uVar11 * (ulonglong)uVar12);
+    uVar8 = (uint)((ulonglong)uVar11 * (ulonglong)uVar12 >> 0x20);
+    uVar7 = uVar1 - uVar5;
+    uVar3 = (uVar2 - uVar8) - (uint)(uVar5 > uVar1);
+    if (uVar2 <= uVar8 && (uint)(uVar5 <= uVar1) <= uVar2 - uVar8) {
+      uVar12 = uVar12 - 1;
+      bVar13 = CARRY4(uVar7,uVar11);
+      uVar7 = uVar7 + uVar11;
+      uVar3 = uVar3 + uVar4 + (uint)bVar13;
+    }
+    if (0xe < uVar10) {
+      uVar10 = uVar10 - 0xf;
+      uVar2 = uVar3 << 0xf | uVar7 >> 0x11;
+      uVar9 = uVar2 / uVar4;
+      uVar2 = uVar2 - uVar4 * uVar9;
+      uVar5 = (uint)((ulonglong)uVar11 * (ulonglong)uVar9);
+      uVar8 = (uint)((ulonglong)uVar11 * (ulonglong)uVar9 >> 0x20);
+      uVar1 = uVar7 * 0x8000;
+      uVar7 = uVar1 - uVar5;
+      uVar3 = (uVar2 - uVar8) - (uint)(uVar5 > uVar1);
+      if (uVar2 <= uVar8 && (uint)(uVar5 <= uVar1) <= uVar2 - uVar8) {
+        uVar9 = uVar9 - 1;
+        bVar13 = CARRY4(uVar7,uVar11);
+        uVar7 = uVar7 + uVar11;
+        uVar3 = uVar3 + uVar4 + (uint)bVar13;
+      }
+      uVar12 = uVar9 | uVar12 << 0xf;
+    }
+    if (uVar10 != 0) {
+      uVar2 = uVar7 << (uVar10 & 0xff);
+      uVar1 = 0x20 - uVar10 & 0x1f;
+      uVar7 = ((uVar3 ^ uVar7) >> uVar1 | (uVar3 ^ uVar7) << 0x20 - uVar1) ^ uVar2;
+      uVar1 = uVar7 / uVar4;
+      uVar7 = uVar7 - uVar4 * uVar1;
+      uVar4 = (uint)((ulonglong)uVar11 * (ulonglong)uVar1 >> 0x20);
+      if (uVar7 <= uVar4 &&
+          (uint)((uint)((ulonglong)uVar11 * (ulonglong)uVar1) <= uVar2) <= uVar7 - uVar4) {
+        uVar1 = uVar1 - 1;
+      }
+      return CONCAT44(uVar12 >> (0x20 - uVar10 & 0xff),uVar12 << (uVar10 & 0xff) | uVar1);
+    }
+    return (ulonglong)uVar12;
+  }
+  if (param_2 == 0) {
+    if (2 < param_3) {
+      return (ulonglong)(param_1 / param_3);
+    }
+  }
+  else {
+    if (0xffff < param_3) {
+      if (param_3 < 0x1000000) {
+        uVar11 = (param_2 - param_3 * (param_2 / param_3)) * 0x100 | param_1 >> 0x18;
+        uVar7 = uVar11 / param_3;
+        uVar4 = uVar7 | param_1 << 8;
+        uVar11 = (uVar11 - param_3 * uVar7) * 0x100 | uVar4 >> 0x18;
+        uVar7 = uVar11 / param_3;
+        uVar4 = uVar7 | uVar4 << 8;
+        uVar11 = (uVar11 - param_3 * uVar7) * 0x100 | uVar4 >> 0x18;
+        uVar7 = uVar11 / param_3;
+        uVar4 = uVar7 | uVar4 << 8;
+        return CONCAT44(param_2 / param_3,
+                        ((uVar11 - param_3 * uVar7) * 0x100 | uVar4 >> 0x18) / param_3 | uVar4 << 8)
+        ;
+      }
+      uVar11 = 0xf - LZCOUNT(param_3);
+      iVar6 = LZCOUNT(param_3) - LZCOUNT(param_2);
+      uVar4 = param_3 >> (uVar11 & 0xff);
+      uVar11 = uVar11 & 0x1f;
+      uVar7 = iVar6 + 0x20;
+      uVar11 = (param_3 >> uVar11 | param_3 << 0x20 - uVar11) ^ uVar4;
+      uVar10 = iVar6 + 0x11;
+      if (uVar7 < 0xf || uVar10 == 0) goto LAB_00422920;
+      goto LAB_004229ae;
+    }
+    if (2 < param_3) {
+      uVar4 = (param_2 - param_3 * (param_2 / param_3)) * 0x10000 | param_1 >> 0x10;
+      uVar11 = uVar4 / param_3;
+      return CONCAT44(param_2 / param_3,
+                      (param_1 & 0xffff | (uVar4 - param_3 * uVar11) * 0x10000) / param_3 |
+                      uVar11 << 0x10);
+    }
+  }
+  if (param_3 == 0) {
+    return CONCAT44(param_2,param_1);
+  }
+  if (param_3 == 2) {
+    return CONCAT44(param_2 >> 1,(uint)((param_2 & 1) != 0) << 0x1f | param_1 >> 1);
+  }
+  return CONCAT44(param_2,param_1);
+}
+

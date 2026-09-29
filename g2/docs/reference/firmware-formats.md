@@ -195,7 +195,7 @@ Sources:
 | `0x14` | record: size (`0x8680` = 34,432) |
 | `0x18` | record: offset `0x20` |
 | `0x1C` | record: **reflected** CRC-32C of the payload (official `0x48674BC7`) |
-| `0x20..` | flash-linear Cortex-M0+ image, base `0x00000000` |
+| `0x20..` | flash-linear Cortex-M0+ image, linked at `0x00003300` (see `memory-map.md` §6) |
 
 The CRC is CRC-32C with poly `0x82F63B78` reflected, init and xorout
 `0xFFFFFFFF` (`g2/tools/open_cfw.py:251-258`).

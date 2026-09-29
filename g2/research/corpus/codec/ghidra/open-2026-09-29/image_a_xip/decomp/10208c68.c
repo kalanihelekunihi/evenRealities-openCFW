@@ -1,0 +1,7 @@
+
+void LvpCTCModelGetSnpuFeatsBuffer(void)
+
+{
+  return;
+}
+
