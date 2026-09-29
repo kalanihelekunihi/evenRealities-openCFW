@@ -15,7 +15,7 @@ openCFW/
 │   └── fetched/                    archive pins with no Git upstream (nRF5 SDK, ...)
 ├── g2/
 │   ├── workflow/                   active procedure, target lock, gates, prompts, task records
-│   ├── blobs/official/             provenance for the untracked official payloads
+│   ├── blobs/official/             versioned MIT firmware mirrors and provenance
 │   ├── manifests/                  reference EVENOTA manifest
 │   ├── docs/reference/             formats, memory map, toolchains, libraries, protocols
 │   ├── symbols/                    naming seeds per payload
@@ -24,7 +24,7 @@ openCFW/
 │   ├── tools/, tests/              container tools, Ghidra pipeline, their tests
 │   └── components/em9305/source_image/record_package.py
 └── r1/
-    ├── blobs/official/             provenance for the untracked official images
+    ├── blobs/official/             versioned MIT firmware mirrors and provenance
     ├── docs/                       references plus correlation/, boundaries/, closures/, reference/
     ├── config-recovered/           SDK/RTOS/linker/bootloader configuration seeds
     ├── reconstructed/              reference pseudocode for binary-only vendor libraries
@@ -48,7 +48,8 @@ openCFW/
 
 The G2 and R1 devices share no firmware code, so each keeps its own tree. The
 dependencies they do share (FreeRTOS, CMSIS, CmBacktrace) are pinned once, in
-`third-party/`. Official firmware is never tracked; each device records only
-the identities of its official inputs. Directories removed in the
+`third-party/`. The versioned G2/R1 mirrors under `blobs/official/` are tracked
+with metadata and checksums. Other local captures remain ignored. See the root
+`LICENSE` and `NOTICE` for license terms. Directories removed in the
 2026-09-29 cleanup are in Git history at commit `832137ec`. The reference
 documents cite them there.

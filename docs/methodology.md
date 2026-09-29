@@ -66,8 +66,9 @@ evidence runs out.
 
 ## Evidence and verification
 
-- Official inputs are never tracked. Every tool checks their SHA-256 before
-  use.
+- Versioned G2/R1 firmware mirrors are tracked with checksums. Other
+  local-only inputs remain ignored; tools check required inputs by SHA-256
+  before use. See `LICENSE` and `NOTICE` for licensing terms.
 - Decompiler output is raw evidence until an independent reviewer accepts
   it. Accepted pseudocode is frozen with a manifest before any C work
   depends on it.

@@ -43,7 +43,7 @@ openCFW/
 │   │                     protocols, capability checklist
 │   ├── symbols/          address-keyed naming seeds per payload
 │   ├── config-recovered/ recovered upstream configuration and patches
-│   ├── blobs/official/   official payload provenance (payloads not tracked)
+│   ├── blobs/official/   versioned MIT firmware mirrors and provenance
 │   ├── manifests/        EVENOTA reference manifest (+ legacy profiles)
 │   ├── research/         Ghidra decompilation corpus and evidence
 │   └── tools/            EVENOTA/container tools, Ghidra pipeline, analyzers
@@ -71,11 +71,14 @@ openCFW/
 
 ## Official inputs
 
-Official Even Realities payloads are vendor-proprietary and are not tracked.
-Put locally authorized copies where
+The versioned G2 and R1 firmware mirrors under `g2/blobs/official/g2-*/` and
+`r1/blobs/official/r1-*/` are tracked with their metadata and SHA256SUMS files.
+Other local captures and reconstructed R1 images remain ignored. See
+[`LICENSE`](LICENSE) and [`NOTICE`](NOTICE) for licensing terms. Every tool
+checks its required inputs by SHA-256 before use.
 [`g2/blobs/official/g2-2.2.6.10/PROVENANCE.md`](g2/blobs/official/g2-2.2.6.10/PROVENANCE.md)
 and [`r1/research/decompilation/rebuild/PROVENANCE.md`](r1/research/decompilation/rebuild/PROVENANCE.md)
-say. Every tool checks their SHA-256 before use. `./make.sh g2-build`
+record the canonical build inputs. `./make.sh g2-build`
 repacks the six official G2 payloads into the byte-identical reference
 EVENOTA. That confirms the container format, not source reconstruction.
 
@@ -113,5 +116,6 @@ the pins and licences are listed in
 GPL-covered. A firmware binary that combines GPL code with MIT components
 must be distributed in compliance with the GPL.
 
-Official Even Realities firmware payloads and captured vendor artifacts are not
-covered by the MIT grant and are not tracked.
+Separate local captures and reconstructed R1 image inputs are excluded from
+Git by default. See [`LICENSE`](LICENSE) and [`NOTICE`](NOTICE) for the
+applicable license terms and boundaries.

@@ -24,7 +24,7 @@ from the validated extraction under
 | `ota_s200_bootloader.bin` | 148,599 | `f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5` |
 | `ota_s200_firmware_ota.bin` | 3,523,396 | `36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863` |
 
-The blobs are retained only as opaque compatibility inputs while equivalent
-source implementations are developed. They remain vendor-proprietary; this
-provenance record does not grant redistribution rights.
-
+The blobs are tracked in the versioned firmware mirror. The version metadata
+and `SHA256SUMS` record the source release and asset hashes. See the repository
+[`LICENSE`](../../../../LICENSE) and [`NOTICE`](../../../../NOTICE) for
+licensing terms and boundaries.

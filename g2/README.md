@@ -27,7 +27,7 @@ byte comparison. The cross-device plan and the list of shortcuts are in
 ```
 g2/
 ├── workflow/          active procedure, target lock, gates, prompt pack, task records
-├── blobs/official/    PROVENANCE.md for the untracked official payloads
+├── blobs/official/    versioned firmware mirrors, metadata, and provenance
 ├── manifests/         g2-2.2.6.10.json (reference EVENOTA layout);
 │                      g2-2.2.6.10-core-source.json (codec region map read by
 │                      the hash-pinned codec analyzer)

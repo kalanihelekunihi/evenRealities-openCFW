@@ -21,7 +21,8 @@ The phased plan is in [`../docs/roadmap.md`](../docs/roadmap.md).
 ```
 r1/
 ├── Makefile               test, verify, oracle, vendor-audit, Ghidra runs
-├── blobs/official/        where your authorized official images go (not tracked)
+├── blobs/official/        versioned firmware mirrors; local image captures
+│                          remain ignored
 ├── config-recovered/      sdk_config.h, FreeRTOSConfig.h, linker, FAL/FDB and
 │                          bootloader configuration seeds, stock-proven vs guessed
 ├── docs/                  memory map, protocol, storage formats, pinout,

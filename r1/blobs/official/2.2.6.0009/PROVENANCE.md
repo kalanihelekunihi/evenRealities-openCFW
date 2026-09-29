@@ -1,6 +1,9 @@
 # Official R1 2.2.6.0009 images
 
-Vendor-proprietary. They are not tracked; supply your own authorized copies here.
+These locally captured reconstruction-oracle images are not part of the
+versioned firmware mirrors and remain ignored by Git. Their identities are
+recorded here for local verification. See the repository `LICENSE` and `NOTICE`
+for licensing terms and boundaries.
 
 | File | Bytes | SHA-256 | Region |
 | --- | ---: | --- | --- |

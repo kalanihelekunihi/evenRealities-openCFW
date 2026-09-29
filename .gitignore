@@ -82,17 +82,19 @@ env/
 !/r1/research/**
 
 # ---------------------------------------------------------------------------
-# Vendor-proprietary inputs (not redistributable -- fetch locally)
+# Versioned firmware mirrors (tracked); local captures remain ignored
 # ---------------------------------------------------------------------------
-# Official OTA payloads under g2/blobs/official/ are vendor-proprietary; the
-# PROVENANCE.md alongside them records hashes and origin so a local copy can be
-# reproduced and verified. Track the provenance, not the bytes.
+# Versioned G2/R1 mirror directories include firmware assets. Metadata and
+# checksum files remain trackable in all official version directories; other
+# local archives stay ignored. See LICENSE and NOTICE for licensing terms.
 /g2/blobs/official/**
 !/g2/blobs/official/**/
 !/g2/blobs/official/**/PROVENANCE.md
+!/g2/blobs/official/g2-*/**
 /r1/blobs/official/**
 !/r1/blobs/official/**/
 !/r1/blobs/official/**/PROVENANCE.md
+!/r1/blobs/official/r1-*/**
 
 # The R1 reconstruction embeds the stock application, bootloader, UICR and
 # APPROTECT images verbatim as C byte arrays. Those are the vendor firmware in

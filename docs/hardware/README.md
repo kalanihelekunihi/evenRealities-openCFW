@@ -55,7 +55,7 @@ Rules:
   statement (for example "MSPI1 runs at 96 MHz") needs FW or a measurement.
 - Repository paths are relative to the repository root. Addresses inside the
   Apollo main image are run addresses (`run = file_offset + 0x00437FE0`).
-- The official firmware blobs are not in every checkout
+- Versioned firmware mirrors are in the checkout
   (`g2/blobs/official/g2-2.2.6.10/PROVENANCE.md`); FW facts here cite the
   analysis documents and analyzers that were run against the locked bytes.
 

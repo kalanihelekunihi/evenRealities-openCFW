@@ -19,12 +19,19 @@ hash, size or pin mismatch aborts the build.
 | The tools in [`../tools/bootstrap/`](../tools/bootstrap/README.md) | decompilation and byte matching; see [`tooling.md`](tooling.md) |
 | Licensed original compilers (IAR EWARM, Synopsys MetaWare, Arm Compiler 5) | byte-identical C builds; you install and fingerprint them yourself |
 
+## Versioned firmware mirrors
+
+The versioned G2 and R1 release mirrors are tracked under
+`g2/blobs/official/g2-<version>/` and `r1/blobs/official/r1-<version>/`.
+Each directory includes release metadata and `SHA256SUMS` alongside its
+firmware assets. See [`LICENSE`](../LICENSE) and [`NOTICE`](../NOTICE) for
+licensing terms and boundaries.
+
 ## Inputs that are not tracked
 
 | Input | Where it goes | Identity record |
 | --- | --- | --- |
-| G2 `s200_v2.2.6.10` payloads (six files) | `g2/blobs/official/g2-2.2.6.10/` | [`PROVENANCE.md`](../g2/blobs/official/g2-2.2.6.10/PROVENANCE.md), [`target.json`](../g2/workflow/target.json) |
-| R1 `2.2.6.0009` images | `r1/blobs/official/2.2.6.0009/` | [`PROVENANCE.md`](../r1/blobs/official/2.2.6.0009/PROVENANCE.md) |
+| Additional R1 captured reconstruction images (bootloader, UICR, APPROTECT) | `r1/blobs/official/2.2.6.0009/` | [`PROVENANCE.md`](../r1/blobs/official/2.2.6.0009/PROVENANCE.md) |
 | nRF5 SDK 17.1.0 and R1 archive sources | any absolute cache directory | [`../third-party/fetched/`](../third-party/fetched/README.md) |
 | Upstream libraries | `third-party/upstream/*` | `git submodule update --init --depth 1 <path>` |
 
