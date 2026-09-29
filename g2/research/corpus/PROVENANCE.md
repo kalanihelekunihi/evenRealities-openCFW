@@ -148,3 +148,22 @@ diagnostic evidence. Its authenticated presence is not a redistribution-license
 grant. The public community source archive excludes `research/` and `corpus/`;
 these materials require a separate provenance, privacy, and license review
 before any broader publication.
+
+## Pruning on 2026-09-29
+
+The following were removed from the working tree. They remain available
+in Git history at commit `832137ec`:
+- the balanced and unauthenticated 64-shard Apollo runs, which duplicate
+  `apollo-main/ghidra/decomp/`;
+- the superseded EM9305 Ghidra rounds;
+- the EM9305 SDK-comparison, size-delta, nop-aware and cluster-recovery
+  reports;
+- the WSF compiler matrices;
+- the source-lane transcripts;
+- the `readiness/`, `admission/` and `candidates/` trees.
+
+Function identities and names derived from them are consolidated in
+[`../../symbols/`](../../symbols/README.md), and library, compiler and
+layout facts in [`../../docs/reference/`](../../docs/reference). Entries in
+`SHA256SUMS.lane-bundle` whose files were pruned are counted, not treated
+as missing, by `tools/verify_research_corpus.py`.
