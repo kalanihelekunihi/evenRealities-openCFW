@@ -176,13 +176,16 @@ class ShippedCommandBlockOracleTests(unittest.TestCase):
     """Decode the authenticated shipped 9,164-byte command block and
     re-encode it; this qualifies the emitter's byte-exact fidelity to the
     real ISA. It does not admit the shipped graph or any of its bytes as
-    source -- see docs/research/gx8002-command-emitter-generator.md."""
+    source -- see g2/docs/reference/toolchains.md and firmware-formats.md."""
 
     @classmethod
     def setUpClass(cls):
-        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
-        from analyze_gx8002_upstream_objects import IMAGE, IMAGE_SHA, sha
-        image = IMAGE.read_bytes()
+        import hashlib
+        image_path = Path(__file__).resolve().parents[1] / 'blobs/official/g2-2.2.6.10/firmware_codec.bin'
+        image_sha = 'b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0'
+        sha = lambda data: hashlib.sha256(data).hexdigest()
+        image = image_path.read_bytes()
+        IMAGE_SHA = image_sha
         if sha(image) != IMAGE_SHA:
             raise AssertionError('firmware image authentication failed')
         cls.data = image[0x18d90:0x18d90 + 9164]
