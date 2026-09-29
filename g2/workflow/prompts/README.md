@@ -8,8 +8,8 @@ Set the actual worker model to **`gpt-6-luna`**, reasoning effort **`low`** in
 the execution tool. Writing the model name in a prompt does not configure it.
 Use fresh, bounded worker contexts and the concurrency available to the
 environment; do not resume old reconstruction conversations. There is no new
-launcher in this directory and the retired `continue-analysis.sh` must not be
-used to run these prompts.
+launcher in this directory. The retired `continue-analysis.sh` launcher has
+been removed and must not be restored to run these prompts.
 
 For each worker, send these items in this order:
 

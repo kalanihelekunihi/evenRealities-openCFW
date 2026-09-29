@@ -98,8 +98,6 @@ the overlay and component digests.
 Other useful G2 targets:
 
 ```sh
-./make.sh g2-community-source # official-payload-free deterministic source archive
-./make.sh g2-community-smoke  # hydrate/build in a fresh extracted archive
 make -C g2 vendor-snapshots   # authenticate every vendored upstream, offline
 make -C g2 upstream-audits    # read-only closure audits over the stock image
 make -C g2 verify             # build + upstream audits

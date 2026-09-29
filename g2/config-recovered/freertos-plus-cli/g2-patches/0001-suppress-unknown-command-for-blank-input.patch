@@ -1,0 +1,26 @@
+From: openCFW source-recovery project
+Subject: [PATCH] FreeRTOS+CLI: suppress unknown text for blank G2 input
+
+This is the only authenticated G2 delta from the selected official
+FreeRTOS+CLI source behavior.  The matching stock instruction interval is
+[0x005848CA,0x005848F4), 42 bytes, with SHA-256
+4ed35ac83ff6802181aee553929f5eadff5e6b6c797601145d1c688c88eae7c1.
+It does not contain or register any Even command descriptor or handler.
+
+--- a/FreeRTOS_CLI.c
++++ b/FreeRTOS_CLI.c
+@@ -209,6 +209,10 @@
+ 	else
+ 	{
+ 		/* pxCommand was NULL, the command was not found. */
+-		strncpy( pcWriteBuffer, "Command not recognised.  Enter 'help' to view a list of available commands.\r\n\r\n", xWriteBufferLen );
++		if( !( ( strlen( pcCommandInput ) == 1 ) && ( pcCommandInput[ 0 ] == '\r' ) ) &&
++		    !( ( strlen( pcCommandInput ) == 0 ) && ( pcCommandInput[ 0 ] == '\0' ) ) )
++		{
++			strncpy( pcWriteBuffer, "Command not recognised.  Enter 'help' to view a list of available commands.\r\n\r\n", xWriteBufferLen );
++		}
+ 		xReturn = pdFALSE;
+ 	}
+
+-- 
+2.39.5

@@ -7,12 +7,10 @@ process instructions separate from old evidence and generated work.
 | --- | --- |
 | `AGENTS.md` | current G2 stage ordering and preparation scope |
 | `g2/workflow/` | active procedure, target, preparation state, prompts and templates |
-| `docs/archive/g2-incremental/` | superseded driver prompt and September 12 review, preserved for history |
-| `docs/g2-reconstruction-driver-prompt.md` | redirect to the active procedure; no reconstruction assignment |
-| `remaining-work.md`, `remaining-work.json` | frozen historical incremental queue; not the new work breakdown |
-| `continue-analysis.sh` | retired execution path; read-only historical diagnostics |
-| `tools/continue_analysis_*.py` | historical runner internals; supervisor CLI retired |
-| `build/continue-analysis/` | old logs/checkpoints; never resume into the new campaign |
+| `docs/archive/g2-incremental/`, `remaining-work.*`, `continue-analysis.sh`, `tools/continue_analysis_*.py` | removed 2026-09-29; recoverable from Git history (last present in `832137ec`) |
+| `build/continue-analysis/` | old local logs/checkpoints, if present; never resume into the new campaign |
+| `g2/docs/reference/`, `g2/symbols/`, `g2/config-recovered/` | consolidated reference facts, naming seeds and recovered upstream configuration (added 2026-09-29) |
+| `docs/hardware/`, `docs/tooling.md`, `tools/bootstrap/` | cross-device hardware reference, tooling guide and pinned tool installer |
 | `g2/research/`, `g2/docs/research/` | historical evidence, reusable only after identity and scope validation |
 | `g2/components/`, `g2/manifests/`, `g2/tools/`, `g2/tests/` | preserved existing implementation/build system, not proof of new gates |
 | `g2/blobs/official/g2-2.2.6.10/` | existing extracted oracle payloads and provenance |

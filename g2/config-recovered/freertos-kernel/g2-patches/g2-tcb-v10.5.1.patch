@@ -1,0 +1,40 @@
+diff --git a/tasks.c b/tasks.c
+index d97085d..0000000 100644
+--- a/tasks.c
++++ b/tasks.c
+@@ -278,6 +278,12 @@ typedef struct tskTaskControlBlock       /* The old naming convention is used to
+     StackType_t * pxStack;                      /*< Points to the start of the stack. */
+     char pcTaskName[ configMAX_TASK_NAME_LEN ]; /*< Descriptive name given to the task when created.  Facilitates debugging only. */ /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
+ 
++    /*
++     * G2 compatibility extension recovered from the 2.2.6.10 image.
++     * The original vendor identifier is not observable in the binary.
++     */
++    uint32_t ulG2StackDepth;
++
+     #if ( ( portSTACK_GROWTH > 0 ) || ( configRECORD_STACK_HIGH_ADDRESS == 1 ) )
+         StackType_t * pxEndOfStack; /*< Points to the highest valid address for the stack. */
+     #endif
+@@ -882,6 +889,9 @@ static void prvInitialiseNewTask( TaskFunction_t pxTaskCode,
+     }
+     #endif /* portSTACK_GROWTH */
+ 
++    /* Preserve the creation depth for G2 diagnostics and stack reporting. */
++    pxNewTCB->ulG2StackDepth = ulStackDepth;
++
+     /* Store the task name in the TCB. */
+     if( pcName != NULL )
+     {
+diff --git a/include/FreeRTOS.h b/include/FreeRTOS.h
+index 4ac4332..0000000 100644
+--- a/include/FreeRTOS.h
++++ b/include/FreeRTOS.h
+@@ -1265,6 +1265,8 @@ typedef struct xSTATIC_TCB
+     UBaseType_t uxDummy5;
+     void * pxDummy6;
+     uint8_t ucDummy7[ configMAX_TASK_NAME_LEN ];
++    /* Mirrors the recovered G2 tasks.c extension; not an upstream field. */
++    uint32_t ulDummyG2StackDepth;
+     #if ( ( portSTACK_GROWTH > 0 ) || ( configRECORD_STACK_HIGH_ADDRESS == 1 ) )
+         void * pxDummy8;
+     #endif

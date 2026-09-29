@@ -4,10 +4,10 @@ Documentation is split the same way the code is: cross-target material lives
 here, and everything specific to a device lives with that device.
 
 For new G2 work, start with the [active pseudocode-first workflow](../g2/workflow/README.md).
-The former incremental driver and workflow review are preserved under
-[`archive/g2-incremental/`](archive/g2-incremental/). Existing G2 coverage and
-build documents below describe historical evidence and implementation; they do
-not override the new requirement to freeze the whole pseudocode corpus first.
+The consolidated reference documents listed below replace the scattered
+campaign records as the place to look up facts. The older G2 coverage and build
+documents describe historical hybrid-overlay evidence. They do not override the
+requirement to freeze the whole pseudocode corpus first.
 
 ## Cross-target (this directory)
 
@@ -16,12 +16,41 @@ not override the new requirement to freeze the whole pseudocode corpus first.
 | [`repository-layout.md`](repository-layout.md) | you need to find something, or decide where new work belongs |
 | [`build.md`](build.md) | you are building, or a build failed and you want to know which gate fired |
 | [`methodology.md`](methodology.md) | you want to know what "verified" means here, and what the project refuses to claim |
+| [`tooling.md`](tooling.md) | you are setting up decompilation, byte-matching, emulation or debug tools |
+| [`hardware/README.md`](hardware/README.md) | you need a part number, bus, pin, data rate, protocol, FCC record or datasheet |
+
+## Hardware — [`hardware/`](hardware)
+
+| Document | Contents |
+| --- | --- |
+| [`hardware/g2-glasses.md`](hardware/g2-glasses.md) | G2 system overview, IC table, buses and pads, inter-processor links, display/audio/power |
+| [`hardware/g2-case.md`](hardware/g2-case.md) | charging case MCU, power parts, UART framing, dual-bank update |
+| [`hardware/r1-ring.md`](hardware/r1-ring.md) | R1 pin and bus map, sensors, PMIC single-wire link, NFC charging |
+| [`hardware/regulatory.md`](hardware/regulatory.md) | FCC IDs (grantee 2BFKR), exhibits, RF test data, ISED/Japan numbers |
+| [`hardware/components/`](hardware/components) | one page per identified IC: datasheet links, key specs, SVD source |
+| [`hardware/sources.md`](hardware/sources.md) | bibliography of every external source |
 
 ## G2 — [`../g2/docs`](../g2/docs)
 
 Index: [`../g2/docs/README.md`](../g2/docs/README.md). Tools: [`../g2/tools/README.md`](../g2/tools/README.md).
 
 Active procedure and prompts: [`../g2/workflow/README.md`](../g2/workflow/README.md).
+
+Consolidated reference (start here for facts):
+
+| Document | Contents |
+| --- | --- |
+| [`../g2/docs/reference/firmware-formats.md`](../g2/docs/reference/firmware-formats.md) | EVENOTA, component headers, CRC variants, per-payload wrappers |
+| [`../g2/docs/reference/memory-map.md`](../g2/docs/reference/memory-map.md) | per-processor memory maps and load addresses |
+| [`../g2/docs/reference/toolchains.md`](../g2/docs/reference/toolchains.md) | original compilers and runtimes; open questions blocking byte equality |
+| [`../g2/docs/reference/libraries.md`](../g2/docs/reference/libraries.md) | identified upstream libraries, versions, recovered configuration |
+| [`../g2/docs/reference/protocols.md`](../g2/docs/reference/protocols.md) | phone, inter-processor, case, touch, codec and ring protocols |
+| [`../g2/docs/reference/capabilities.md`](../g2/docs/reference/capabilities.md) | capability checklist for pseudocode review coverage |
+| [`../g2/docs/reference/hardware-validation-notes.md`](../g2/docs/reference/hardware-validation-notes.md) | on-device observations and safety cautions |
+| [`../g2/symbols/README.md`](../g2/symbols/README.md) | naming seeds per payload |
+| [`../g2/config-recovered/README.md`](../g2/config-recovered/README.md) | recovered upstream configuration headers and patches |
+
+Historical campaign records:
 
 | Document | Contents |
 | --- | --- |
@@ -39,6 +68,21 @@ matching re-pin. One visible consequence: `../g2/README.md` still refers to the
 build directory as `openCFW`, which is now `g2`.
 
 ## R1 — [`../r1/docs`](../r1/docs)
+
+Consolidated reference (start here for facts):
+
+| Document | Contents |
+| --- | --- |
+| [`../r1/docs/memory-map.md`](../r1/docs/memory-map.md) | flash/RAM/UICR layout, partitions, image hashes, rebuild oracle |
+| [`../r1/docs/toolchain-and-dependencies.md`](../r1/docs/toolchain-and-dependencies.md) | stock SDK/library identities, Arm Compiler evidence, byte-equality blockers |
+| [`../r1/docs/protocol.md`](../r1/docs/protocol.md) | BLE services, framing, CRCs, command dispatch |
+| [`../r1/docs/storage-formats.md`](../r1/docs/storage-formats.md) | persistent record formats |
+| [`../r1/docs/hardware-pinout.md`](../r1/docs/hardware-pinout.md) | pins, buses, ADC channels, peripheral addresses |
+| [`../r1/docs/security-and-bootloader.md`](../r1/docs/security-and-bootloader.md) | DFU trust model and stock defects a faithful build must keep |
+| [`../r1/docs/hardware-observations.md`](../r1/docs/hardware-observations.md) | field versions and physical measurements |
+| [`../r1/config-recovered/README.md`](../r1/config-recovered/README.md) | configuration seeds, stock-proven vs. openR1 choices |
+
+Clean-room openR1 records (historical; not byte-identical):
 
 | Document | Contents |
 | --- | --- |

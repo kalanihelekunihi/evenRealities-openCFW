@@ -21,7 +21,6 @@ THIRD_PARTY_DIR := third-party
 .PHONY: all help \
         build test verify clean \
         g2 g2-build g2-test g2-verify g2-inspect g2-clean \
-        g2-community-source g2-community-smoke g2-community-preflight \
         g2-core-canonical-observation g2-core-canonical-admission \
         g2-core-canonical-apply g2-core-canonical-test \
         completion-readiness completion-classification-gate completion-source-gate \
@@ -29,7 +28,7 @@ THIRD_PARTY_DIR := third-party
         completion-assessment completion-assessment-check \
         dual-profile-ownership dual-profile-ownership-write \
         r1 r1-build r1-test r1-sanitize r1-verify r1-arm r1-sim r1-clean \
-        third-party third-party-vendored third-party-fetched
+        third-party third-party-vendored third-party-fetched tools
 
 all: build
 
@@ -48,9 +47,6 @@ help:
 	@echo '  g2-test          G2 unit tests'
 	@echo '  g2-verify        G2 build + upstream audits'
 	@echo '  g2-inspect       inspect the built source package'
-	@echo '  g2-community-source  deterministic official-payload-free source archive'
-	@echo '  g2-community-smoke   rebuild source profile from a fresh archive'
-	@echo '  g2-community-preflight verify local G2 software-build dependencies'
 	@echo '  g2-core-canonical-observation  record one isolated core observation'
 	@echo '  g2-core-canonical-admission    verify four observations without writes'
 	@echo '  g2-core-canonical-apply        transactionally admit a verified generation'
@@ -74,6 +70,9 @@ help:
 	@echo
 	@echo 'The R1 SDK image needs fetched vendor roots; see third-party/fetched/README.md.'
 	@echo 'G2 targets need the official OTA blobs; see g2/blobs/official/*/PROVENANCE.md.'
+	@echo
+	@echo 'Tooling:'
+	@echo '  tools            list the pinned analysis tools (tools/bootstrap)'
 
 # --- aggregates ------------------------------------------------------------
 
@@ -100,15 +99,6 @@ g2-verify:
 
 g2-inspect:
 	$(MAKE) -C $(G2_DIR) inspect
-
-g2-community-source:
-	$(MAKE) -C $(G2_DIR) community-source-bundle
-
-g2-community-smoke:
-	$(MAKE) -C $(G2_DIR) community-source-smoke
-
-g2-community-preflight:
-	$(MAKE) -C $(G2_DIR) community-local-preflight
 
 g2-core-canonical-observation:
 	$(MAKE) -C $(G2_DIR) core-canonical-observation
@@ -193,3 +183,10 @@ third-party-vendored:
 #   make third-party-fetched SDK_ROOT=... FLASHDB_ROOT=... BMA456_ROOT=...
 third-party-fetched:
 	$(MAKE) -C $(R1_DIR) vendor-audit
+
+# --- tooling ---------------------------------------------------------------
+
+# Pinned analysis tools; see docs/tooling.md. Install with
+#   tools/bootstrap/bootstrap.py --prefix /absolute/path
+tools:
+	$(PYTHON) tools/bootstrap/bootstrap.py --list

@@ -2,8 +2,16 @@
 
 The current G2 workflow lives in [`../g2/workflow/`](../g2/workflow/README.md).
 Its [repository map](../g2/workflow/REPOSITORY.md) distinguishes active procedure,
-historical evidence and future campaign outputs. Former incremental workflow
-documents are archived under [`archive/g2-incremental/`](archive/g2-incremental/).
+historical evidence and future campaign outputs. The former incremental
+workflow documents, the agent launcher and the `remaining-work.*` queue were
+removed on 2026-09-29 and remain available in Git history.
+
+Cross-target reference material lives in [`hardware/`](hardware/README.md)
+(hardware, regulatory and datasheet notes) and [`tooling.md`](tooling.md)
+(analysis tools, installed through [`../tools/bootstrap/`](../tools/bootstrap/README.md)).
+Each device keeps consolidated reference documents: `g2/docs/reference/`,
+`g2/symbols/` and `g2/config-recovered/` for G2, and `r1/docs/*.md` and
+`r1/config-recovered/` for R1.
 
 The tree is organized around one rule: **each firmware target owns everything
 that is specific to it, and nothing that is not.** Two devices, two directories,

@@ -15,7 +15,7 @@ that stage, not an early C implementation stage.
 For subsequent G2 work, complete and independently review pseudocode for the
 entire locked firmware artifact, then freeze the corpus. Only after that gate
 may C implementation chunks, shared interfaces, and their task dependency graph
-be defined. Do not recycle `remaining-work.*` as the new queue. Use GPT 6 Luna
+be defined. Do not recycle the removed `remaining-work.*` queue (Git history) as the new queue. Use GPT 6 Luna
 (`gpt-6-luna`) with reasoning effort `low` for the parallel workers.
 
 The final target is a complete build from source whose bundle is byte-identical
@@ -25,5 +25,8 @@ Keep pseudocode coverage, source completeness, and byte equality separate.
 
 Preserve existing staged and unstaged work. Do not reset, clean, re-pin, move
 authenticated evidence, or change firmware sources as part of preparation.
-The old launcher is retired; its read-only diagnostics and archived records
-are retained. See the procedure for output ownership, evidence, and gates.
+The old launcher and queue were removed on 2026-09-29 (recoverable from Git
+history). Look up facts in the consolidated references first:
+`docs/hardware/`, `docs/tooling.md`, `g2/docs/reference/`, `g2/symbols/`,
+`g2/config-recovered/`, `r1/docs/*.md`, and `r1/config-recovered/`. See the
+procedure for output ownership, evidence, and gates.

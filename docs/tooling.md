@@ -15,7 +15,7 @@ those pins.
 
 Byte identity depends on knowing the exact compiler that built each payload, so
 this table sets the tool requirements. Evidence and open questions are in
-[`g2/docs/toolchains.md`](../g2/docs/toolchains.md) and
+[`g2/docs/reference/toolchains.md`](../g2/docs/reference/toolchains.md) and
 [`r1/docs/toolchain-and-dependencies.md`](../r1/docs/toolchain-and-dependencies.md).
 
 | Payload | Core | Original compiler (evidence strength) | Licence of that compiler |
@@ -42,7 +42,7 @@ binary hash.
 | Ghidra ARCompact/ARCv2 module | Decompiles the EM9305 | Exists only as NSA pull-request 3006 (`refs/pull/3006/head` = `d3fbf109ada6d051750e973779170c1758622530` [V]). It mis-sizes some ARCv2 EM 6-byte long immediates. Fork it to a project-owned repository before pinning. | build from the fork |
 | `ghidra_csky_WinnerMicro` | C-SKY processor module for the GX8002 | Written for WinnerMicro W80x (CK804); DSP instructions are partial | `0daaa056e8c570ba514fc0d0226384ecf9f9df05` [V] |
 | GhidraSVD | Loads SVD register maps as typed peripheral blocks | — | tag `v0.6.6` = `893dfbe02d889dfb7c4cf69b7a395051a8307828` [V] |
-| GNU binutils `objdump` (arm-none-eabi ≥ 2.35, arc-elf32, csky-elfabiv2) | The reference instruction decoder wherever Ghidra is weak (MVE, ARCv2 EM, CK804EF) | The C-SKY GX8002 decode needs the official `c-sky/binutils-gdb` fork (see [`g2/docs/toolchains.md`](../g2/docs/toolchains.md)) | Arm GNU Toolchain 13.3.Rel1 and 9-2020-q2; Synopsys ARC GNU `arc-2026.03-release`; C-SKY `csky-script-3_2_0-release` = `96f037d8` [V] |
+| GNU binutils `objdump` (arm-none-eabi ≥ 2.35, arc-elf32, csky-elfabiv2) | The reference instruction decoder wherever Ghidra is weak (MVE, ARCv2 EM, CK804EF) | The C-SKY GX8002 decode needs the official `c-sky/binutils-gdb` fork (see [`g2/docs/reference/toolchains.md`](../g2/docs/reference/toolchains.md)) | Arm GNU Toolchain 13.3.Rel1 and 9-2020-q2; Synopsys ARC GNU `arc-2026.03-release`; C-SKY `csky-script-3_2_0-release` = `96f037d8` [V] |
 | rizin 0.9.1 + rz-ghidra 0.9.0 | Fast raw inspection and scripting | — | `c3a90e92` / `999df7b8` [V] |
 | IDA Pro 9 + Hex-Rays, Binary Ninja | Optional second opinions; IDA has an ARC module and FLIRT | Commercial; not reproducible in CI | document only |
 
@@ -103,7 +103,7 @@ is to reach identical bytes, one function at a time.
 
 - **Kaitai Struct** (compiler 0.11): write formal `.ksy` specifications for
   EVENOTA, FWPK, the EM9305 record package, the case `EVEN` wrapper and the
-  GX8002 BINH image, based on [`g2/docs/firmware-formats.md`](../g2/docs/firmware-formats.md).
+  GX8002 BINH image, based on [`g2/docs/reference/firmware-formats.md`](../g2/docs/reference/firmware-formats.md).
   These specifications make the "account for every non-code byte" gate
   testable.
 - **unblob / binwalk**: find nested assets.

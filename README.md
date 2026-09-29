@@ -2,175 +2,102 @@
 
 Open, source-controlled firmware for Even Realities hardware.
 
-**G2 workflow reset (2026-09-26):** start with the
-[pseudocode-first procedure](g2/workflow/README.md). Current work is preparation
-only. Complete and freeze pseudocode for the entire official firmware bundle
-before defining parallel C reconstruction tasks. The old agent launcher is
-retired; existing sources, queues, builds and evidence remain historical inputs.
-
-`openCFW` covers two independent devices, each with its own silicon, toolchain,
-and reconstruction strategy:
+**Goal:** for each device, decompile the official firmware image, recover
+reviewed pseudocode for all of it, and then rebuild C source that compiles and
+packages into an image **byte-identical** to the official one. Upstream code
+that the firmware links (RTOS, BLE stacks, graphics, codecs, vendor SDKs) is
+identified, pinned to exact commits, and consumed from those pins. Later
+updates can then pick up upstream fixes and keep the devices maintained.
 
 | | [`g2`](g2) | [`r1`](r1) |
 | --- | --- | --- |
-| Device | G2 smart glasses | R1 smart ring |
-| Application MCU | Ambiq Apollo510 (Cortex-M55) | Nordic nRF52840 (Cortex-M4F) |
-| Approach | full-firmware pseudocode and review, then C reconstruction targeting the exact official bundle | clean-room reimplementation of the observable firmware contract |
-| Reference version | `s200_v2.2.6.10` | `2.2.6.0009` |
-| Output | locally buildable hybrid `.evenota`; public stock-bearing binary release remains fail-closed, while hardware qualification is deferred by project direction | portable host build, freestanding Cortex-M4 objects, linked nRF52840 image |
+| Device | G2 smart glasses (and charging case) | R1 smart ring |
+| Application MCU | Ambiq Apollo510B (Cortex-M55), one per temple | Nordic nRF52840 (Cortex-M4F) |
+| Other programmable parts | EM9305 BLE controller (ARCv2 EM), GX8002 voice codec (C-SKY CK804EF), PSoC 4000T touch, STM32G0 case MCU | S140 7.2.0 SoftDevice, Secure DFU bootloader |
+| Locked reference | EVENOTA `s200_v2.2.6.10`, six payloads ([target lock](g2/workflow/target.json)) | application `2.2.6.0009` with its bootloader and UICR ([rebuild oracle](r1/research/decompilation/rebuild)) |
+| Original toolchains | IAR EWARM (Apollo), Synopsys MetaWare (EM9305), C-SKY GCC (GX8002), GCC (touch, case) | Arm Compiler 5 (armcc) |
+| Process | [pseudocode-first workflow](g2/workflow/README.md) | decompilation corpus and source correlation in [`r1/research`](r1/research) |
 
-They share a dependency registry, a verification philosophy, and a single build
-entry point. They do not share code.
-
-## What this is, and is not
-
-**G2** has an existing hybrid build and substantial recovery evidence. The new
-goal is a complete build from source identical to the official `s200_v2.2.6.10`
-artifact, not a changed hybrid output. The [target lock](g2/workflow/target.json)
-identifies the official bundle and all six payloads. Full pseudocode coverage,
-source completeness and byte equality are separate gates; none is claimed by
-this preparation. Historical source coverage remains available in
-[`g2/docs/source-coverage.md`](g2/docs/source-coverage.md).
-
-**R1** is a clean-room C implementation derived from recovered protocol,
-behavioral, memory, and security-audit evidence. It is not reconstructed vendor
-source and is not byte-identical to the stock image. Vendor-attributable
-functionality comes from pinned upstream sources; clean-room code is limited to
-R1-specific behavior, configuration, ports, and safety corrections.
-
-Neither target fabricates behavior it cannot attribute. Where a licensed
-provider is missing — Goodix biometrics, GoMore health algorithms, the YHM power
-path — the boundary returns an explicit "unsupported" rather than inventing
-plausible data.
+Pseudocode coverage, source completeness and byte equality are separate gates.
+None of them is complete for either device yet. Equivalent replacements,
+retained opcode arrays, stock-byte overlays and clean-room reimplementations
+do not satisfy the byte-identity goal. Some are still in the tree as
+historical evidence (see [Repository status](#repository-status)).
 
 ## Layout
 
 ```
 openCFW/
-├── Makefile              unified entry point; dispatches to each target
-├── make.sh               run the above from any directory
-├── docs/                 cross-target documentation
-│   ├── repository-layout.md
-│   ├── build.md
-│   └── methodology.md
-├── g2/                   G2 firmware: reconstruction + source overlays
-│   ├── Makefile          profiles, snapshot verifiers, closure audits
-│   ├── blobs/            official OTA provenance (payloads not redistributed)
-│   ├── components/       compiled overlay sources, per component
-│   ├── docs/             reference documents + per-closure audits
-│   ├── manifests/        region/flash layout pins per build profile
-│   ├── research/         evidence corpus: candidates, readiness, decompilation
-│   ├── tests/            regression modules gating the above
-│   ├── third_party/      vendored upstream snapshots (see third-party/README.md)
-│   ├── tools/            build/release entry points + analyzers
-│   └── workflow/         active pseudocode-first procedure and dormant prompts
-├── r1/                   R1 firmware: clean-room implementation
-│   ├── Makefile          host, sanitizer, freestanding, verify, SDK-image
-│   ├── docs/             correlation/ boundaries/ closures/ reference/
-│   ├── include/openr1/   public headers
-│   ├── src/              portable implementation
-│   ├── platform/         nRF52840 platform layer and Nordic SDK integration
-│   ├── port/             R1-owned FlashDB/FAL port and configuration
-│   ├── research/         decompilation corpus, image reconstruction, BSim runs
-│   ├── tests/            host, storage, and crypto tests
-│   └── tools/            verifiers + evidence/ probes/ ghidra_scripts/
-└── third-party/          shared dependency registry
-    ├── README.md         full inventory: pin, license, consuming target
-    └── fetched/          non-redistributable upstreams: manifest, fetch, verify
+├── AGENTS.md             current work instructions and stage gates
+├── Makefile, make.sh     unified entry point
+├── docs/
+│   ├── hardware/         hardware reference: ICs, buses, pins, protocols,
+│   │                     FCC/regulatory data, per-component datasheet notes
+│   ├── tooling.md        decompilation, byte-matching, emulation and debug tools
+│   ├── methodology.md    evidence and attribution rules
+│   └── build.md, repository-layout.md
+├── tools/bootstrap/      pinned, fail-closed installer for the analysis tools
+├── g2/
+│   ├── workflow/         active G2 procedure, target lock, gates, prompts
+│   ├── docs/reference/   formats, memory map, toolchains, libraries,
+│   │                     protocols, capability checklist
+│   ├── symbols/          address-keyed naming seeds per payload
+│   ├── config-recovered/ recovered upstream configuration and patches
+│   ├── blobs/official/   official payload provenance (payloads not tracked)
+│   ├── manifests/        EVENOTA reference manifest (+ legacy profiles)
+│   ├── research/         Ghidra decompilation corpus and evidence
+│   └── tools/            EVENOTA/container tools, Ghidra pipeline, analyzers
+├── r1/
+│   ├── docs/             memory map, protocol, storage formats, pinout,
+│   │                     toolchain/dependencies, security, correlation records
+│   ├── config-recovered/ SDK/RTOS/linker configuration seeds for a stock build
+│   ├── research/         application/bootloader decompilation, rebuild oracle,
+│   │                     source correlation, BSim runs
+│   └── tools/            Ghidra export and verification scripts
+└── third-party/          dependency registry: submodules, fetched archives,
+                          proposed pins, G2 emulator
 ```
 
-Every directory large enough to need one carries a `README.md` index —
-[`g2/tools/`](g2/tools/README.md), [`g2/docs/`](g2/docs/README.md),
-[`g2/research/`](g2/research/README.md), [`r1/docs/`](r1/docs/README.md),
-[`r1/tools/`](r1/tools/README.md), [`r1/research/`](r1/research/README.md),
-[`third-party/`](third-party/README.md).
+## Where to start
 
-The repository carries the source-audit evidence and tooling without depending
-on another project checkout. Inputs deliberately excluded for licensing remain
-external: stock-bearing G2 builds require locally authorized official payloads,
-and R1 SDK-image workflows require their separately fetched, pinned vendor roots.
-
-## Quick start
-
-For the new G2 work, read [g2/workflow/README.md](g2/workflow/README.md).
-The build commands below describe the existing implementation; they do not
-start or complete the new pseudocode-first campaign.
-
-```sh
-./make.sh help
-```
-
-The R1 portable target needs only a C11 compiler and builds immediately:
-
-```sh
-./make.sh r1-test
-./make.sh r1-sanitize
-```
-
-The G2 target additionally needs Python 3.9+, GNU `make`, and the reviewed
-Clang release family. Stock-bearing build, local hydration, and extracted-tree
-smoke targets also need the official OTA payloads, which are vendor-proprietary
-and excluded from the verified community source ZIP; source-bundle creation and
-other source-only audits do not.
-
-> **Release warning:** The verified official-payload-free ZIP is the
-> history-free public artifact. The existing Git history retains 52
-> `g2/.tmp-*` paths and descendants totaling 108,601,986 bytes, including
-> official-derived firmware variants. That set contains the now-deleted exact
-> official-payload copies `g2/.tmp-pt-working-base.bin` and
-> `g2/.tmp-pt-working-base-linux.bin` (SHA-256
-> `36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863`). Do
-> not publish or mirror that history as-is. Use the verified ZIP or a separately
-> audited clean-history export; rewriting the private history requires separate
-> authorization.
-
-Put locally authorized inputs where
-[`g2/blobs/official/g2-2.2.6.10/PROVENANCE.md`](g2/blobs/official/g2-2.2.6.10/PROVENANCE.md)
-says, then:
-
-```sh
-./make.sh g2-build
-```
-
-To create the public, official-payload-free G2 community source archive instead:
-
-```sh
-./make.sh g2-community-source
-```
-
-The archive contains source, build recipes, manifests, and applicable license
-texts, but no official firmware or raw stock patch guards. A recipient supplies
-their own authenticated `s200_v2.2.6.10` package locally; the preparation tool
-validates all six payload identities before the software-only build. Run
-`./make.sh g2-community-smoke` to repeat that workflow in a fresh extracted
-tree without signing, flashing, or hardware access. See the
-[community distribution guide](g2/docs/community-source-distribution.md) and
-[release licensing inventory](g2/docs/release-licensing-and-redistribution.md).
-Public distribution of a generated stock-bearing firmware binary remains
-fail-closed until redistribution authority for all six payloads is documented.
-
-Full details, including the R1 vendor SDK fetch, are in
-[`docs/build.md`](docs/build.md).
-
-## Documentation
-
-| Document | Covers |
+| You want to | Read |
 | --- | --- |
-| [`g2/workflow/README.md`](g2/workflow/README.md) | active G2 procedure, full-corpus gates and GPT 6 Luna Low prompt pack |
-| [`docs/repository-layout.md`](docs/repository-layout.md) | why the tree is shaped this way; where to add things |
-| [`docs/build.md`](docs/build.md) | prerequisites, every target, verification model |
-| [`docs/methodology.md`](docs/methodology.md) | evidence, attribution, and what "verified" means here |
-| [`third-party/README.md`](third-party/README.md) | dependency inventory and pinning policy |
-| [`g2/README.md`](g2/README.md) | G2 status, current source coverage, build profiles |
-| [`g2/docs/community-source-distribution.md`](g2/docs/community-source-distribution.md) | create, verify, hydrate, and smoke-test the official-payload-free G2 source archive |
-| [`g2/docs/release-licensing-and-redistribution.md`](g2/docs/release-licensing-and-redistribution.md) | live mixed-license source inventory and fail-closed binary authority boundary |
-| [`r1/README.md`](r1/README.md) | R1 status, implemented contract, open gaps |
-| [`r1/docs/README.md`](r1/docs/README.md) | R1 evidence provenance and remaining hardware work |
-| [`g2/tools/README.md`](g2/tools/README.md) | which G2 script to run, and how the G2 analyzers are organized |
-| [`g2/docs/README.md`](g2/docs/README.md) | which G2 document answers which question |
-| [`g2/research/README.md`](g2/research/README.md) | the G2 evidence corpus and how it is authenticated |
-| [`r1/tools/README.md`](r1/tools/README.md) | the R1 evidence toolchain and how to reproduce any claim |
-| [`r1/research/README.md`](r1/research/README.md) | the R1 decompilation corpus and image reconstruction |
+| understand the hardware | [`docs/hardware/README.md`](docs/hardware/README.md) |
+| set up analysis tools | [`docs/tooling.md`](docs/tooling.md), [`tools/bootstrap/README.md`](tools/bootstrap/README.md) |
+| work on G2 | [`g2/workflow/README.md`](g2/workflow/README.md), then [`g2/docs/reference/`](g2/docs/reference) |
+| work on R1 | [`r1/docs/memory-map.md`](r1/docs/memory-map.md), [`r1/docs/toolchain-and-dependencies.md`](r1/docs/toolchain-and-dependencies.md), [`r1/research/README.md`](r1/research/README.md) |
+| know which upstream is pinned where | [`third-party/README.md`](third-party/README.md) |
+| know what "verified" means here | [`docs/methodology.md`](docs/methodology.md) |
+
+## Official inputs
+
+Official Even Realities payloads are vendor-proprietary and are not tracked.
+Put locally authorized copies where
+[`g2/blobs/official/g2-2.2.6.10/PROVENANCE.md`](g2/blobs/official/g2-2.2.6.10/PROVENANCE.md)
+and [`r1/research/decompilation/rebuild/PROVENANCE.md`](r1/research/decompilation/rebuild/PROVENANCE.md)
+say. Every tool checks their SHA-256 before use. `./make.sh g2-build`
+repacks the six official G2 payloads into the byte-identical reference
+EVENOTA. That confirms the container format, not source reconstruction.
+
+> **History warning:** the Git history retains 52 `g2/.tmp-*` paths and
+> descendants (108,601,986 bytes), including official-derived firmware variants
+> and exact official-payload copies (SHA-256
+> `36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863`). Do not
+> publish or mirror this history as-is.
+
+## Repository status
+
+A cleanup on 2026-09-29 removed the retired agent launcher, the old
+`remaining-work.*` queue, the community ZIP dispatcher, the hybrid
+hardware-qualification manifests and the unrelated 2.2.6.12 patch release.
+It also consolidated durable knowledge into the reference documents above.
+
+Most of the earlier G2 hybrid-overlay campaign and the R1 clean-room
+implementation are still in the tree: `g2/components`, most of `g2/tools`,
+`g2/tests`, `g2/docs/research`, `g2/third_party`, and `r1/src`, `r1/platform`
+and `r1/tests`. None of it meets the byte-identity goal. It stays as evidence
+and is cited by the new reference documents. Its removal is a separate,
+reviewable step, and the Git history keeps everything either way.
 
 ## Community
 
