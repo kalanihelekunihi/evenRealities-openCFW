@@ -113,30 +113,35 @@ beyond `make reference`'s prerequisites.
 
 ## Git submodules
 
-`.gitmodules` pins 24 upstreams under [`upstream/`](upstream) at the same
-commits as the vendored snapshots and the fetched manifest. The pins were
-checked against the live remotes on 2026-09-29. No build consumes them yet.
-They are the long-term update path: a reconstruction that builds against
-`upstream/<name>` can move to a newer upstream commit and pick up its fixes.
+`.gitmodules` pins 51 upstreams, checked against the live remotes on
+2026-09-29. They fall into three groups:
+
+- [`upstream/`](upstream): code that a rebuild compiles. The original 24
+  match the vendored snapshots and the fetched manifest exactly.
+- [`reference/`](reference): comparison-only sources, with `update = none`.
+- [`tools/`](tools): analysis tools.
+
+No build consumes them yet. They are the long-term update path: a
+reconstruction that builds against `upstream/<name>` can move to a newer
+upstream commit and pick up its fixes. Every entry is `shallow = true`.
 Initialise only what you need:
 
 ```sh
 git submodule update --init --depth 1 third-party/upstream/freertos-kernel
 ```
 
-`cmsis-5-590` and `cmsis-core` are two different commits of the same CMSIS_5
-repository, and both are needed. `freertos-plus-cli` clones the whole
-FreeRTOS/FreeRTOS repository for two files, so initialise it shallowly.
+Entries marked `update = none` (large or reference-only) are skipped by a plain
+`git submodule update --init`. Name the path explicitly and add `--checkout`
+to fetch one. `cmsis-5-590` and `cmsis-core` are two different commits of the
+same CMSIS_5 repository, and both are needed. The same applies to
+`ambiqhal-apollo510` and `ambiqhal-nema`, and to `flashdb` (2.1.1, G2) and
+`flashdb-2.0.0` (R1).
 
-### Proposed additional pins
+### Pins added on 2026-09-29
 
-The upstreams below are identified by repository evidence but are not yet
-submodules. Each commit was checked against the upstream remote on
-2026-09-29. Suggested paths are `upstream/<name>` for code that a rebuild
-compiles, `reference/<name>` for comparison-only sources (`update = none`), and
-`tools/<name>` for analysis tools. Library identities and the evidence behind
-them are in [`g2/docs/reference/libraries.md`](../g2/docs/reference/libraries.md)
-and [`r1/docs/toolchain-and-dependencies.md`](../r1/docs/toolchain-and-dependencies.md).
+Library identities and the evidence behind them are in
+[`g2/docs/reference/libraries.md`](../g2/docs/reference/libraries.md) and
+[`r1/docs/toolchain-and-dependencies.md`](../r1/docs/toolchain-and-dependencies.md).
 
 | Name | Repository | Commit | Consumer | Confidence | Licence / note |
 | --- | --- | --- | --- | --- | --- |
@@ -168,7 +173,7 @@ and [`r1/docs/toolchain-and-dependencies.md`](../r1/docs/toolchain-and-dependenc
 | `tools/ghidra-svd` | github.com/antoniovazquezblanco/GhidraSVD | `893dfbe02d889dfb7c4cf69b7a395051a8307828` (v0.6.6) | Ghidra SVD import | — | Apache-2.0 |
 | `tools/ghidra-csky` | github.com/taligentx/ghidra_csky_WinnerMicro | `0daaa056e8c570ba514fc0d0226384ecf9f9df05` | GX8002 decompilation | — | licence unverified |
 
-Not proposed:
+Deliberately not pinned:
 
 - The EM9305 SDK v4.2 mirror (`C0R3YY2/em9305_original`) has no licence. Treat
   it as an external oracle.
