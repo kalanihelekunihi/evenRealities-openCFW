@@ -87,22 +87,18 @@ EVENOTA. That confirms the container format, not source reconstruction.
 
 ## Repository status
 
-A cleanup on 2026-09-29 removed the retired agent launcher, the old
-`remaining-work.*` queue, the community ZIP dispatcher, the hybrid
-hardware-qualification manifests and the unrelated 2.2.6.12 patch release.
-It also consolidated durable knowledge into the reference documents above.
-
-Most of the earlier G2 hybrid-overlay campaign and the R1 clean-room
-implementation are still in the tree: `g2/components`, most of `g2/tools`,
-`g2/tests`, `g2/docs/research`, `g2/third_party`, and `r1/src`, `r1/platform`
-and `r1/tests`. None of it meets the byte-identity goal. It stays as evidence
-and is cited by the new reference documents. Its removal is a separate,
-reviewable step, and the Git history keeps everything either way.
+On 2026-09-29 the earlier G2 hybrid-overlay campaign, the R1 clean-room
+reimplementation, the retired agent launcher and queue, and the duplicate
+vendored snapshots were removed. Their durable knowledge was first
+consolidated into the reference documents above. Nothing in the tree yet
+rebuilds a payload from source byte for byte. The plan is
+[`docs/roadmap.md`](docs/roadmap.md). The removed material is in Git history
+at commit `832137ec`.
 
 ## Community
 
-Contributions must preserve the clean-room, provenance, and mixed-license
-boundaries described in [CONTRIBUTING.md](CONTRIBUTING.md). Community behavior,
+Contributions must preserve the provenance, upstream-first and mixed-license
+rules described in [CONTRIBUTING.md](CONTRIBUTING.md). Community behavior,
 private vulnerability reporting, and support expectations are documented in
 [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), [SECURITY.md](SECURITY.md), and
 [SUPPORT.md](SUPPORT.md).
@@ -110,25 +106,12 @@ private vulnerability reporting, and support expectations are documented in
 ## Licensing
 
 openCFW-authored software and documentation without a more specific license are
-available under the [MIT License](LICENSE). The repository-wide
-[licensing boundary](NOTICE) also grants an MIT option for original
-openCFW-owned contributions that were previously marked GPL solely because they
-were aggregated with a GPL component. The current project-owned normalization
-census is complete; upstream-derived files retain their applicable terms.
+available under the [MIT License](LICENSE); see [NOTICE](NOTICE) for the
+licensing boundary. Upstream code in `third-party/` keeps its own licence;
+the pins and licences are listed in
+[`third-party/README.md`](third-party/README.md). QP/C and g2flash remain
+GPL-covered. A firmware binary that combines GPL code with MIT components
+must be distributed in compliance with the GPL.
 
-Vendored and adapted upstream code retains its upstream license; each dependency
-under `g2/third_party/` carries its applicable license text and a provenance
-record identifying its source. Files with an SPDX identifier or a component
-license remain under those stated terms. Per-component attribution for compiled
-overlays is in the `NOTICE.md` and `LICENSE-*` files under
-[`g2/components`](g2/components).
-
-Official Even Realities firmware payloads, retained proprietary compatibility
-bytes, and captured vendor artifacts are not covered by the root MIT grant.
-They are excluded from the verified community source ZIP; the existing private
-development history contains tracked donor/build artifacts and must not be
-published or mirrored as the community distribution.
-
-The g2flash-derived gesture and patch sources and the upstream QP/C sources
-remain GPL-covered. Firmware binaries combining them with MIT components must
-be distributed in compliance with the applicable GPL terms.
+Official Even Realities firmware payloads and captured vendor artifacts are not
+covered by the MIT grant and are not tracked.

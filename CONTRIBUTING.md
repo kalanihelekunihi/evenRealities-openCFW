@@ -4,7 +4,7 @@ Thanks for helping keep supported hardware useful. Contributions are welcome
 when their origin, license, and verification boundary can be reviewed by the
 community.
 
-## Clean-room and licensing rules
+## Evidence and licensing rules
 
 - Do not submit leaked or confidential source, signing keys, credentials,
   official firmware payloads, extracted vendor bytes, or material you are not
@@ -15,8 +15,12 @@ community.
 - New openCFW-authored code and documentation must be offered under the root
   MIT License. Adapted or vendored code keeps its upstream license and must
   include the applicable notice and license text.
+- Consume upstream code from its pinned submodule under `third-party/`; do
+  not re-implement or copy an upstream library. Record a new upstream as a
+  submodule at the exact commit the firmware used, with the evidence.
 - Never label a retained or inferred region as source-owned without evidence.
-  Unknown boundaries must remain explicit and fail closed.
+  Unknown boundaries must remain explicit and fail closed. Only source that
+  compiles to identical bytes counts toward reconstruction.
 
 By submitting an original contribution, you agree that it may be distributed
 under the repository's MIT License. This does not relicense third-party work.
@@ -28,8 +32,9 @@ under the repository's MIT License. This does not relicense third-party work.
 2. Update the relevant manifest, provenance, notice, and documentation records.
 3. Add positive, mutation, and failure-path tests where the change affects a
    build or release claim.
-4. Run the narrow target first, then the applicable verification gate described
-   in the [G2 community workflow](g2/docs/community-source-distribution.md).
+4. Run the narrow target first, then `./make.sh test` and the relevant gate in
+   [g2/workflow/PROCEDURE.md](g2/workflow/PROCEDURE.md) or
+   [docs/roadmap.md](docs/roadmap.md).
 5. Explain any test that could not be run and why.
 
 G2 software work must not require flashing or directed hardware testing during

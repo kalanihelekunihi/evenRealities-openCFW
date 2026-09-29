@@ -11,11 +11,11 @@ process instructions separate from old evidence and generated work.
 | `build/continue-analysis/` | old local logs/checkpoints, if present; never resume into the new campaign |
 | `g2/docs/reference/`, `g2/symbols/`, `g2/config-recovered/` | consolidated reference facts, naming seeds and recovered upstream configuration (added 2026-09-29) |
 | `docs/hardware/`, `docs/tooling.md`, `tools/bootstrap/` | cross-device hardware reference, tooling guide and pinned tool installer |
-| `g2/research/`, `g2/docs/research/` | historical evidence, reusable only after identity and scope validation |
-| `g2/components/`, `g2/manifests/`, `g2/tools/`, `g2/tests/` | preserved existing implementation/build system, not proof of new gates |
+| `g2/research/` | retained Ghidra corpus (Apollo main, case, EM9305, IAR, QP/C), reusable only after identity and scope validation |
+| `g2/manifests/`, `g2/tools/`, `g2/tests/` | reference manifest, container analyzers and Ghidra pipeline with their tests; the hybrid overlay tree was removed 2026-09-29 |
 | `g2/blobs/official/g2-2.2.6.10/` | existing extracted oracle payloads and provenance |
 | `g2/build/pseudocode-first/<campaign>/` | future local analysis attempts, projects and frozen campaign artifacts |
-| `r1/`, `third-party/`, `g2/third_party/` | existing R1 and dependency trees; unchanged by preparation |
+| `r1/`, `third-party/` | R1 decompilation corpus and references; submodule and archive dependency pins (the old `g2/third_party/` snapshots were replaced by submodules on 2026-09-29) |
 
 Suggested future campaign layout (not populated by this reset):
 
@@ -45,8 +45,9 @@ evidence into a dedicated versioned repository location only after explicitly
 updating the relevant evidence index; do not insert files into the existing
 hash-pinned `g2/research/` corpus casually.
 
-The existing source/research/third-party paths are kept in place because tooling
-and evidence checks refer to their exact paths and bytes. Moving them now would
+Paths that the workflow pins by hash (`g2/tools/open_cfw.py`, the analyzers, the
+case and EM9305 manifests and `research/corpus/case/ghidra/final-frontier/`) are
+kept in place because tooling and evidence checks refer to their exact paths and bytes. Moving them now would
 mix a workflow reset with a large re-pin and could damage unfinished work.
 Scratch/build directories may contain unique unfinished outputs; do not delete
 them based only on their names. Future cleanup should inventory usage and retain

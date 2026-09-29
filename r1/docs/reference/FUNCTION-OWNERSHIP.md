@@ -53,7 +53,7 @@ python3 tools/build_r1_source_ownership.py
   YHM2710 closure plus the 339 Goodix, 362 GoMore algorithm reductions, and seven
   owner-authorized R1 GoMore adapters (939 entries)
   reconstructed from decompilation evidence under the owner-authorized
-  full reduction (2026-08-14, [`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)). The
+  full reduction (2026-08-14, `../SOURCE-ADMISSION.md` (`r1/docs/SOURCE-ADMISSION.md`, commit `832137ec`)). The
   reconstruction is independently compiled C with per-function provenance; it is not vendor
   source, and on-target runtime adoption remains a separate gate.
 
@@ -373,7 +373,7 @@ Nordic Peer Manager provider routes; see
 [`NORDIC-GATT-CACHE-CLOSURE.md`](../closures/NORDIC-GATT-CACHE-CLOSURE.md).
 
 Under the owner-authorized full reduction (2026-08-14,
-[`../SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md)), the six Bravechip-attributed
+`../SOURCE-ADMISSION.md` (`r1/docs/SOURCE-ADMISSION.md`, commit `832137ec`)), the six Bravechip-attributed
 `unknown_*_candidate` families — 169 entries: generic device registry (43), GPIO-driven
 software-TWI engines (40), sensor-stream framework (32), shared quantized-neural runtime (28),
 time/calendar provider (16), and RTC-device layer (10) — are reconstructed from the recovered
@@ -491,5 +491,5 @@ the outputs and checks one-to-one coverage, so newly recovered functions cannot 
 source admission.
 
 This ledger does not authorize redistribution. Component licenses and version pins remain governed
-by [`SOURCE-ADMISSION.md`](../SOURCE-ADMISSION.md) and `third-party/fetched/manifest.json`. It also does not
+by `SOURCE-ADMISSION.md` (`r1/docs/SOURCE-ADMISSION.md`, commit `832137ec`) and `third-party/fetched/manifest.json`. It also does not
 authorize changing boot verification, signing, rollback, ACL, or protection behavior.

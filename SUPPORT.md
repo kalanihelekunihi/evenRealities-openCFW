@@ -9,9 +9,8 @@ the target documentation before filing a new one, then include:
 - whether official inputs were locally present, without attaching or quoting
   proprietary payloads.
 
-For G2, start with the [community source distribution guide](g2/docs/community-source-distribution.md),
-[licensing boundary](g2/docs/release-licensing-and-redistribution.md). The
-project can help diagnose source, tooling, and reproducibility problems. It
+Start with [docs/README.md](docs/README.md) and [docs/build.md](docs/build.md).
+The project can help diagnose source, tooling, and reproducibility problems. It
 cannot provide official firmware, signing keys, proprietary services,
 redistribution permission, warranties, or guaranteed hardware recovery.
 

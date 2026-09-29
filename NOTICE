@@ -9,22 +9,14 @@ Additional MIT license grant
 
 To the extent that copyright in a file is held by the openCFW contributors,
 the contributors offer that original contribution under the root MIT License.
-The completed G2 policy census records 894 of 894 project-authored
-normalization targets under MIT, including 460 content-addressed overlay
-targets and four exactly authenticated root community-policy documents. The
-source-bundle member ledger separately authenticates other root project
-documents and infrastructure, including `.gitignore`, under this MIT scope.
-The four existing `MIT OR GPL` declarations also continue to permit MIT use.
-Their GPL option is not removed by this grant.
+Files that declare `MIT OR GPL` also continue to permit MIT use; their GPL
+option is not removed by this grant.
 
 This additional grant does not apply to material derived from another GPL
-work, including:
-
-- `g2/components/apollo_main/ring_gesture/ring_gesture.c`;
-- `g2/components/apollo_main/evenai_thumb/g2flash-evenai-thumb.patch`;
-- `g2/components/apollo_main/canvas480/g2flash-canvas480.patch`; or
-- the upstream QP/C headers and sources under `g2/third_party/qpc/include/`
-  and `g2/third_party/qpc/src/`.
+work, including the upstream QP/C sources (submodule
+`third-party/upstream/qpc`) and the g2flash sources (submodule
+`third-party/reference/g2flash`). Earlier g2flash-derived overlay files were
+removed on 2026-09-29; they remain under GPL in the Git history.
 
 Those files remain under their stated upstream GPL terms. A combined firmware
 image containing GPL-covered code must satisfy the GPL terms applicable to the
@@ -35,7 +27,7 @@ It does not replace or override a license, copyright notice, provenance
 record, or redistribution restriction attached to an individual file,
 component, dependency, evidence artifact, or firmware payload. In particular:
 
-- Code under g2/third_party/ and other vendored dependency directories remains
+- Code in submodules under third-party/ and in fetched vendor archives remains
   under the upstream license shipped with that dependency.
 - Files with an SPDX-License-Identifier or an adjacent component license remain
   under that stated license, including Apache-2.0, BSD, GPL, MIT, and Zlib
@@ -43,14 +35,14 @@ component, dependency, evidence artifact, or firmware payload. In particular:
   contributions.
 - Official Even Realities firmware payloads, retained compatibility bytes,
   extracted binary data, and other vendor-proprietary inputs are not licensed
-  under the root MIT License. They are excluded from the verified community
-  source ZIP. The existing private development history contains tracked
-  donor/build artifacts and is not a public distribution boundary.
+  under the root MIT License and are not tracked. The existing development
+  history contains tracked donor/build artifacts and is not a public
+  distribution boundary.
 - Reverse-engineering evidence and captured vendor artifacts do not become
   MIT-licensed merely because they are stored beside project-authored tooling.
 
-Component-level NOTICE, LICENSE, README.openCFW.md, PROVENANCE.json, and
-PROVENANCE.md files identify the applicable upstream terms and source boundary.
+Component-level NOTICE, LICENSE and PROVENANCE files, and each
+submodule's own licence, identify the applicable upstream terms and source boundary.
 When a component-level statement conflicts with the repository default, the
 more specific component or file statement controls.
 

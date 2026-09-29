@@ -2,8 +2,7 @@
 
 ## Supported scope
 
-Security reports are accepted for the current `main` branch, the G2 community
-source workflow, and current R1 source. Historical research artifacts and
+Security reports are accepted for the current `main` branch and its tooling. Historical research artifacts and
 vendor firmware are retained as evidence but are not maintained upstream
 products.
 

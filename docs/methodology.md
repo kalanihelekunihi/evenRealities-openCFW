@@ -1,130 +1,80 @@
 # Methodology
 
-Both targets reconstruct firmware for hardware whose source is not published.
-The shared discipline is that **every claim is backed by an artifact a reader
-can re-derive**, and anything not backed that way is recorded as an open gap
-rather than filled in with a plausible guess.
+Both devices are reconstructed the same way. The rule is that every claim is
+backed by an artifact a reader can re-derive. A claim without such backing is
+recorded as an open question, not filled with a plausible guess.
 
-The two targets apply that discipline differently, because they are solving
-different problems.
+## The goal and its three separate proofs
 
-## G2: whole-artifact pseudocode before source reconstruction
+For each device, the goal is C source that the original toolchain compiles and
+links into images byte-identical to the locked official artifacts:
 
-The [current procedure](../g2/workflow/PROCEDURE.md) supersedes incremental
-overlay reconstruction as the work plan. First authenticate and inventory the
-entire official artifact, recover all executable behavior as pseudocode,
-account for data and container bytes, and independently review and freeze the
-corpus. Only then define C chunks and shared contracts for parallel workers.
+- G2: EVENOTA `s200_v2.2.6.10`, see [`../g2/workflow/target.json`](../g2/workflow/target.json).
+- R1: application `2.2.6.0009`, its bootloader and UICR, see
+  [`../r1/blobs/official/2.2.6.0009/PROVENANCE.md`](../r1/blobs/official/2.2.6.0009/PROVENANCE.md).
 
-The final goal is a clean build from source that exactly reproduces every
-payload and the original bundle. Keep three proofs separate: complete reviewed
-pseudocode, complete source ownership, and byte equality. A retained-byte build
-can establish equality without source completeness; compilable C can establish
-neither semantics nor equality. Compiler and linker behavior, source assets,
-layout and container serialization all matter. Exact reproduction is a result
-to demonstrate, not a promised consequence of decompilation.
+Three proofs are kept apart:
 
-Historical [source coverage](../g2/docs/source-coverage.md) and
-[upstream inventories](../g2/docs/upstream-inventory.md) remain evidence to
-validate and reuse. They do not set the new coverage denominator or completion
-gate. The procedure defines that gate for all six payloads together.
+1. **Pseudocode coverage.** Every executable byte of every payload has
+   reviewed pseudocode, and every non-code byte is accounted for.
+2. **Source completeness.** Every byte comes from C, assembly, or a data
+   source generated from a declared asset.
+3. **Byte equality.** The rebuilt images and container hash to the locked
+   identities.
 
-## R1: contract equivalence as the invariant
+None of the following counts toward proofs 2 or 3: a retained binary blob, an
+opcode array, a stock-byte overlay, a trap, or a "behaviourally equivalent"
+rewrite. A retained-byte repack (`make g2-build`) proves only the container
+format. Compilable C with different bytes proves neither semantics nor
+equality. The phases that lead to all three proofs are in
+[`roadmap.md`](roadmap.md). The G2 gates are in
+[`../g2/workflow/PROCEDURE.md`](../g2/workflow/PROCEDURE.md).
 
-R1 has no byte-exactness goal and makes no claim to one. It reimplements the
-*observable* firmware contract — the EUS transport, checksum schemes, command
-dispatch, storage layouts, notification queues, and health pipelines — from
-recovered evidence, and verifies that implementation against host tests.
+## Upstream first
 
-R1 deliberately diverges from the stock image where the recovered behavior is
-unsafe. Those divergences are documented as corrections rather than hidden; the
-`kv.bin` power-loss-safe commit/rollover correction in
-[`../r1/docs/correlation/KV-STORE-CORRELATION.md`](../r1/docs/correlation/KV-STORE-CORRELATION.md) is a
-representative example.
+No attributable upstream code is re-implemented. The order of preference:
 
-## Attribution: upstream first
+1. **Official upstream source at the exact revision.** It is pinned as a Git
+   submodule under `third-party/upstream/`, or as an archive in
+   `third-party/fetched/` when no Git repository exists. Identify the version
+   by evidence: embedded version strings, source paths, function-level
+   matching (FunctionID/BSim), and configuration constants. Record whether the
+   pin is exact or the best compatible choice within a proven interval.
+2. **Recovered configuration and patches** applied to that upstream (for
+   example `lv_conf.h`, `sdk_config.h`, and vendor deltas). These live in the
+   device's `config-recovered/`, each with its evidence.
+3. **Project-authored C,** only for code with no attributable upstream. It
+   must still compile to identical bytes.
 
-Neither target rewrites code that has an attributable upstream. The order of
-preference is:
+Pinning each upstream at its exact commit keeps it updatable. Once a
+byte-identical build exists, moving a submodule forward shows exactly what an
+upstream fix changes in the firmware.
 
-1. **Authenticated upstream source**, pinned to an exact commit and verified
-   offline against the reconstructed Git object closure.
-2. **A documented port or configuration adapter** around that upstream, owned by
-   this project and clearly separated from the upstream boundary.
-3. **Clean-room implementation**, only for device-specific behavior with no
-   attributable provider.
+## Binary-only vendor code
 
-Every vendored dependency carries a `README.openCFW.md` that states where the
-upstream boundary sits and what is project-authored glue — Ambiq and Even ports,
-generated schemas, commands, and assets are kept explicitly outside the upstream
-boundary. Where a compatible upstream version is selected without claiming it is
-the exact vendor version, the snapshot says so rather than asserting a false
-version match.
+Some vendor code has no public source: GoMore health algorithms, Goodix
+algorithm libraries, NemaGFX, Packetcraft/EM link layer, parts of AmbiqSuite.
+There are two ways to reach byte identity for it:
 
-## Provider boundaries: refusing to fabricate
+- link the vendor's original object archives, where they are legitimately
+  available (for example from an SDK download); or
+- produce byte-matched C through the same decompile-and-match loop as
+  project code.
 
-Some functionality depends on licensed third-party providers that cannot be
-included: Goodix biometric processing, GoMore health and sleep algorithms, the
-YHM power path, the QST accelerometer variant.
+Both are recorded explicitly per function. Nothing is fabricated where the
+evidence runs out.
 
-For each, the recovered R1-side adapter — power sequencing, lifecycle, register
-profile selection, bus arbitration — is implemented and retained, and the
-provider itself is an explicit, injectable seam. With no provider bound, the
-seam returns `R1_ERROR_UNSUPPORTED`. It does not synthesize heart-rate values,
-sleep stages, or battery readings.
+## Evidence and verification
 
-This is the single most important behavioral commitment in the project. A
-firmware that invents biometric data is worse than one that reports it cannot
-measure. The provider-boundary documents under
-[`../r1/docs`](../r1/docs) record, per provider, exactly what is implemented
-locally and what stays gated.
-
-## Production exclusion
-
-A dependency being present and authenticated does **not** mean it is compiled
-into a shipped image. Many vendored snapshots are retained purely as attribution
-evidence while their configuration, ABI semantics, or validation remain
-incomplete.
-
-This is enforced mechanically, not by convention. Several verifiers implement a
-production-exclusion gate that scans the G2 `Makefile`, `manifests/`, and
-`components/` for references to the snapshot and fails closed unless the only
-matches are an exact allow-listed pair of metadata lines. Promoting a dependency
-to production is a reviewed change to its verifier and its `README.openCFW.md`,
-not a build flag.
-
-Read each dependency's own status before assuming it ships.
-
-## Verification is self-referential on purpose
-
-The test suite does not only test the firmware; it tests the verifiers. 61 test
-modules check the snapshot verifiers themselves, and several pin a verifier's
-exact byte size and SHA-256. Two modules pin the SHA-256 of `g2/README.md` and
-the G2 `docs/*.md` evidence documents.
-
-This makes some ordinary-looking edits fail the suite, which is the intent: those
-files are part of the evidence record. It also means the layout of the tree is
-itself pinned — see the note in
-[`repository-layout.md`](repository-layout.md#third-party--shared-dependency-registry)
-about why the vendored snapshots are not relocatable without retiring the
-guarantee they exist to provide.
-
-## Evidence provenance
-
-Every claim in this repository is checkable from this repository. Both targets
-carry their own evidence and the tooling that produced it:
-
-| Target | Evidence | Tooling | Gate |
-| --- | --- | --- | --- |
-| G2 | `g2/research/` | `g2/tools/` | `make -C g2 verify` |
-| R1 | `r1/research/` | `r1/tools/` | `make -C r1 verify` |
-
-Each correlation document ends with the exact command that regenerates its
-numbers, and that command runs here.
-
-Two categories of input are deliberately not distributed, because they are
-vendor-proprietary rather than because they live elsewhere: the G2 OTA payloads
-and the R1 image byte arrays. Both record their digests and origin in a
-`PROVENANCE.md` beside where they belong, so a local copy can be supplied and
-checked. Everything else — decompilation corpora, compiler matrices, correlation
-runs, readiness artifacts — is tracked and hash-authenticated in place.
+- Official inputs are never tracked. Every tool checks their SHA-256 before
+  use.
+- Decompiler output is raw evidence until an independent reviewer accepts
+  it. Accepted pseudocode is frozen with a manifest before any C work
+  depends on it.
+- Similarity scores are candidate signals, not attribution. Attribution needs
+  distinctive constants, full semantics, source diagnostics, or corroborating
+  call topology.
+- Gates fail closed. A mismatch is investigated, never re-pinned away.
+- Facts are cited to repository paths or public sources, with a confidence
+  level. The consolidated references (`docs/hardware/`, `g2/docs/reference/`,
+  `r1/docs/`) carry these citations.
