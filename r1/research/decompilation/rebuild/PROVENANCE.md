@@ -47,11 +47,7 @@ image is not the pinned one.
 
 ## Without the payload arrays
 
-`make verify` and the ~145 analysis scripts that default to
-`rebuilt-application.bin` cannot run. Everything else in this repository is
-unaffected: the R1 firmware builds and its full test suite passes with no
-vendor payload present.
-
-```sh
-make -C r1 test sanitize arm-objects
-```
+`make verify` cannot run without the arrays. Place authorized copies of the
+application and bootloader images at the paths named in
+[`../../../blobs/official/2.2.6.0009/PROVENANCE.md`](../../../blobs/official/2.2.6.0009/PROVENANCE.md),
+then generate the arrays with `r1/tools/export_r1_decompilation.py`.

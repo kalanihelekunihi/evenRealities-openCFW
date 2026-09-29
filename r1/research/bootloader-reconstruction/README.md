@@ -28,7 +28,7 @@ Provider ownership is also complete for the bootloader: 218 Nordic SDK, 41 Crypt
 eligible for local clean-room implementation.
 
 The package also contains a complete repository-contained
-[`firmware-project`](firmware-project), a compile-tested C functional model, and the earlier nRF5
+`firmware-project` (removed; Git commit `832137ec`), a compile-tested C functional model, and the earlier nRF5
 SDK overlay. The firmware project compiles the identified upstream implementation plus recovered R1
 configuration and trust-anchor data into verified ELF/HEX/BIN outputs. These reproduce identified
 behavior, not the vendor's unavailable original source text or compiler output. The separate
@@ -48,8 +48,8 @@ whole-firmware byte oracle for the application, bootloader, UICR, and runtime sn
 | [`generated/vectors.csv`](generated/vectors.csv) | all 64 Cortex-M vector words and Thumb targets |
 | [`generated/defined-data.csv`](generated/defined-data.csv) | Ghidra-defined data objects |
 | [`generated/symbols.csv`](generated/symbols.csv) | all in-image symbols after naming |
-| [`firmware-project`](firmware-project) | complete hash-pinned nRF52840/S140 C/assembly build producing ELF/HEX/BIN |
-| [`functional-model`](functional-model) | compile-tested clean C model of security/update behavior |
+| `firmware-project` (removed; Git commit `832137ec`) | complete hash-pinned nRF52840/S140 C/assembly build producing ELF/HEX/BIN |
+| `functional-model` (removed; Git commit `832137ec`) | compile-tested clean C model of security/update behavior |
 | [`sdk-overlay`](sdk-overlay) | build-tested R1 public key, configuration deltas, and non-destructive GNU Make overlay |
 | [`SOURCE-CORRELATION.md`](SOURCE-CORRELATION.md) | reference build and naming method/results |
 | [`SECURITY-MODEL.md`](SECURITY-MODEL.md) | security-audit behavior incorporated into the reconstruction |
@@ -160,23 +160,22 @@ functions preserve uniqueness without claiming that the qualification was stored
 Requirements used here are Ghidra 12.1.2, Java 21, Python 3, and the pinned input.
 
 ```sh
-scripts/firmware/run_r1_bootloader_decompilation.sh
-make -C docs/r1-bootloader-reconstruction/functional-model test
-python3 scripts/firmware/verify_r1_bootloader_reconstruction.py
+r1/tools/run_r1_bootloader_decompilation.sh
 ```
 
-Build the source-constructed target with Arm GNU Toolchain 9.3.1:
-
-```sh
-make -C docs/r1-bootloader-reconstruction/firmware-project verify \
-  PROFILE=captured GNU_INSTALL_ROOT=/absolute/toolchain/bin/
-```
+The GCC 9.3.1 firmware project and the functional model were removed on
+2026-09-29 (Git history, commit `832137ec`). They produced `583bb6b5…`, not
+the stock `566cd2a5…`, because the stock bootloader was built with Arm
+Compiler 5. The recovered configuration, SDK overrides and DFU public key
+are in [`../../config-recovered/`](../../config-recovered/README.md). The
+byte-identical rebuild plan is in
+[`../../../docs/roadmap.md`](../../../docs/roadmap.md).
 
 For SDK correlation, first build the official reference described in
 [`SDK-SOURCE-MANIFEST.md`](SDK-SOURCE-MANIFEST.md), then run:
 
 ```sh
-scripts/firmware/run_r1_bootloader_source_correlation.sh /absolute/reference.elf
+r1/tools/run_r1_bootloader_source_correlation.sh /absolute/reference.elf
 ```
 
 ## Signing boundary

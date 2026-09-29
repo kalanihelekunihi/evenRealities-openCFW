@@ -7,11 +7,11 @@ set -eu
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 repo_root=$(CDPATH= cd -- "$script_dir/../.." && pwd)
 reference_elf=${1:?usage: run_r1_application_source_correlation.sh /path/reference.elf [output-dir] [reference-start] [reference-end]}
-output_dir=${2:-$repo_root/docs/r1-open-firmware/generated/application-source-correlation}
+output_dir=${2:-$repo_root/r1/research/source-correlation/application-source-correlation}
 reference_start=${3:-0x000f8000}
 reference_end=${4:-0x000fe000}
-input_image=$repo_root/firmware/analysis/r1-2.2.6.0009/application.bin
-function_inventory=$repo_root/research/decompilation/application/functions.csv
+input_image=${R1_APPLICATION_IMAGE:-$repo_root/r1/blobs/official/2.2.6.0009/application.bin}
+function_inventory=$repo_root/r1/research/decompilation/application/functions.csv
 
 mkdir -p "$output_dir"
 output_dir=$(CDPATH= cd -- "$output_dir" && pwd)
@@ -29,6 +29,8 @@ fi
 
 if [ -n "${R1_GHIDRA_HEADLESS:-}" ]; then
     ghidra_headless=$R1_GHIDRA_HEADLESS
+elif [ -n "${GHIDRA_INSTALL_DIR:-}" ] && [ -x "$GHIDRA_INSTALL_DIR/support/analyzeHeadless" ]; then
+    ghidra_headless=$GHIDRA_INSTALL_DIR/support/analyzeHeadless
 elif [ -x /opt/homebrew/opt/ghidra/libexec/support/analyzeHeadless ]; then
     ghidra_headless=/opt/homebrew/opt/ghidra/libexec/support/analyzeHeadless
 else

@@ -64,20 +64,20 @@ strings, model weights, padding, or currently undecoded data. No supplied byte i
 Regenerate the Ghidra corpus from the pinned local inputs:
 
 ```sh
-python3 scripts/firmware/export_r1_decompilation.py --overwrite-projects
+python3 r1/tools/export_r1_decompilation.py --overwrite-projects
 ```
 
 Compile and verify the exact-byte C emitter:
 
 ```sh
-make -C docs/r1-firmware-decompilation/rebuild verify
-make -C docs/r1-firmware-decompilation/rebuild clean
+make -C r1/research/decompilation/rebuild verify
+make -C r1/research/decompilation/rebuild clean
 ```
 
 Validate function/export/rebuild coverage:
 
 ```sh
-python3 scripts/firmware/verify_r1_decompilation.py
+python3 r1/tools/verify_r1_decompilation.py
 ```
 
 The exporter repeats auto-analysis until two consecutive passes agree on the function count. Ghidra

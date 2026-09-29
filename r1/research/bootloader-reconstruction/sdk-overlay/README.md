@@ -1,7 +1,7 @@
 # Nordic SDK on-device reconstruction overlay
 
 > This small overlay is retained as the original correlation method. For the complete
-> repository-contained build, use [`../firmware-project`](../firmware-project).
+> repository-contained build, use `../firmware-project` (removed; Git commit `832137ec`; configuration in `r1/config-recovered/`).
 
 The closest source-level on-device reconstruction is Nordic nRF5 SDK `17.1.0`'s
 `examples/dfu/secure_bootloader/pca10056_s140_ble/armgcc` target. Its supplied linker script already

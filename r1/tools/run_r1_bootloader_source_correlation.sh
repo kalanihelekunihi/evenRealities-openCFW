@@ -1,15 +1,15 @@
 #!/bin/sh
 # Compare the live R1 bootloader with a locally built, symbol-bearing Nordic
 # nRF5 SDK 17.1.0 secure-bootloader ELF. The SDK/toolchain are intentionally
-# external inputs; see Docs/r1-bootloader-reconstruction/SDK-SOURCE-MANIFEST.md.
+# external inputs; see r1/research/bootloader-reconstruction/SDK-SOURCE-MANIFEST.md.
 
 set -eu
 
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 repo_root=$(CDPATH= cd -- "$script_dir/../.." && pwd)
 reference_elf=${1:?usage: run_r1_bootloader_source_correlation.sh /path/reference.elf [output-dir]}
-output_dir=${2:-$repo_root/docs/r1-bootloader-reconstruction/generated}
-input_image=$repo_root/firmware/analysis/r1-live-2026-08-10/r1-bootloader-live.bin
+output_dir=${2:-$repo_root/r1/research/bootloader-reconstruction/generated}
+input_image=$repo_root/r1/blobs/official/2.2.6.0009/bootloader.bin
 
 expected_sha256=566cd2a50cd173680d314643e498202b364e4f8f8b6fd79b12ca71035e34ab8b
 actual_sha256=$(shasum -a 256 "$input_image" | awk '{print $1}')
@@ -24,6 +24,8 @@ fi
 
 if [ -n "${R1_GHIDRA_HEADLESS:-}" ]; then
     ghidra_headless=$R1_GHIDRA_HEADLESS
+elif [ -n "${GHIDRA_INSTALL_DIR:-}" ] && [ -x "$GHIDRA_INSTALL_DIR/support/analyzeHeadless" ]; then
+    ghidra_headless=$GHIDRA_INSTALL_DIR/support/analyzeHeadless
 elif [ -x /opt/homebrew/opt/ghidra/libexec/support/analyzeHeadless ]; then
     ghidra_headless=/opt/homebrew/opt/ghidra/libexec/support/analyzeHeadless
 else
@@ -49,7 +51,7 @@ trap cleanup EXIT HUP INT TERM
 mkdir -p "$output_dir"
 isolated_scripts=$project_dir/scripts
 mkdir -p "$isolated_scripts"
-cp "$repo_root/openCFW/tools/ghidra/SeedCortexMVectorTable.java" "$isolated_scripts/"
+cp "$repo_root/g2/tools/ghidra_scripts/SeedCortexMVectorTable.java" "$isolated_scripts/"
 cp "$script_dir/R1BootloaderSeedKnownFunctions.java" "$isolated_scripts/"
 cp "$script_dir/R1BootloaderApplyNames.java" "$isolated_scripts/"
 cp "$script_dir/R1BootloaderBSimCompare.java" "$isolated_scripts/"

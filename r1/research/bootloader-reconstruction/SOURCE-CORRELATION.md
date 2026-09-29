@@ -51,7 +51,7 @@ each decision is independently reviewable.
 Build the pinned official reference, then run:
 
 ```sh
-scripts/firmware/run_r1_bootloader_source_correlation.sh /absolute/nrf52840_xxaa_s140.out
+r1/tools/run_r1_bootloader_source_correlation.sh /absolute/nrf52840_xxaa_s140.out
 ```
 
 The script creates an isolated Ghidra project, imports the reference ELF and raw bootloader,

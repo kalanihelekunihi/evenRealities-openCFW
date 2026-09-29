@@ -21,7 +21,7 @@ THIRD_PARTY_DIR := third-party
 .PHONY: all help \
         build test verify clean \
         g2 g2-build g2-test g2-verify g2-clean \
-        r1 r1-build r1-test r1-sanitize r1-verify r1-arm r1-sim r1-clean \
+        r1 r1-test r1-verify r1-clean \
         third-party third-party-vendored third-party-fetched tools
 
 all: build
@@ -30,9 +30,9 @@ help:
 	@echo 'openCFW -- Even Realities G2 and R1 open firmware'
 	@echo
 	@echo 'Aggregate targets:'
-	@echo '  build            build both targets (g2-build + r1-build)'
+	@echo '  build            G2 reference repack (the R1 rebuild oracle is r1-verify)'
 	@echo '  test             run both test suites (g2-test + r1-test)'
-	@echo '  verify           full verification of both targets and all dependencies'
+	@echo '  verify           reference/oracle verification of both targets'
 	@echo '  third-party      verify every vendored upstream snapshot'
 	@echo '  clean            remove all build output from both targets'
 	@echo
@@ -42,13 +42,10 @@ help:
 	@echo '  g2-verify        reference build + manifest and research-corpus verification'
 	@echo
 	@echo 'R1 (nRF52840 ring firmware):'
-	@echo '  r1-test          portable host tests'
-	@echo '  r1-sanitize      host tests under ASan/UBSan'
-	@echo '  r1-arm           freestanding Cortex-M4 objects'
-	@echo '  r1-sim           host protocol/device simulator'
-	@echo '  r1-verify        full R1 evidence gate (needs reconstructed images)'
+	@echo '  r1-test          structural check of the tracked decompilation corpus'
+	@echo '  r1-verify        corpus + exact-byte image oracle (needs official images)'
 	@echo
-	@echo 'The R1 SDK image needs fetched vendor roots; see third-party/fetched/README.md.'
+	@echo 'R1 vendor archives: third-party/fetched/README.md; images: r1/blobs/official/*/PROVENANCE.md.'
 	@echo 'G2 targets need the official OTA blobs; see g2/blobs/official/*/PROVENANCE.md.'
 	@echo
 	@echo 'Tooling:'
@@ -56,11 +53,11 @@ help:
 
 # --- aggregates ------------------------------------------------------------
 
-build: g2-build r1-build
+build: g2-build
 
 test: g2-test r1-test
 
-verify: g2-verify third-party r1-test
+verify: g2-verify r1-verify
 
 clean: g2-clean r1-clean
 
@@ -82,28 +79,13 @@ g2-clean:
 
 # --- R1 --------------------------------------------------------------------
 
-r1: r1-build
-
-# The portable reference implementation is what "building R1" means without a
-# fetched Nordic SDK; the linked nRF52840 image is `make -C r1 sdk-image`.
-r1-build: r1-arm r1-sim
+r1: r1-test
 
 r1-test:
 	$(MAKE) -C $(R1_DIR) test
 
-r1-sanitize:
-	$(MAKE) -C $(R1_DIR) sanitize
-
-# Needs the reconstructed R1 images; see
-# r1/research/decompilation/rebuild/PROVENANCE.md.
 r1-verify:
 	$(MAKE) -C $(R1_DIR) verify
-
-r1-arm:
-	$(MAKE) -C $(R1_DIR) arm-objects
-
-r1-sim:
-	$(MAKE) -C $(R1_DIR) sim
 
 r1-clean:
 	$(MAKE) -C $(R1_DIR) clean

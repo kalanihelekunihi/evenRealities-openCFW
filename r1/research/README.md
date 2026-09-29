@@ -38,18 +38,19 @@ analysis output rather than vendor bytes, so they are tracked.
 
 ## `bootloader-reconstruction/`
 
-A rebuildable Nordic-SDK bootloader project correlated against the recovered
-image, plus its generated function tables, functional model, SDK overlay, and
-the memory-map, security-model, and rebuildability write-ups. The 108 MB build
-tree is not tracked; the project rebuilds it.
+The named bootloader decompilation (`generated/`), the SDK overlay (R1 DFU
+public key and SDK deltas), and the memory-map, SDK-manifest, source-correlation,
+security-model and rebuildability write-ups. The GCC firmware project and the
+functional model were removed on 2026-09-29; the project did not reach byte
+identity (see `REBUILDABILITY.md`). Its configuration is preserved in
+[`../config-recovered/`](../config-recovered/README.md).
 
 ## `source-correlation/`
 
 Raw Ghidra BSim comparison runs against symbol-bearing references — the
 correlation CSVs, run logs, and generated hash records. The reviewed conclusions
 are in [`../docs/reference/bsim/`](../docs/reference/bsim); these are the inputs
-behind them, kept because `verify_openr1.py` checks their digests and
-dimensions.
+behind them.
 
 ## Reading the evidence
 
@@ -60,8 +61,9 @@ constants, complete semantics, source diagnostics, or corroborating call
 topology.
 
 The claims themselves live in [`../docs/correlation/`](../docs/correlation) and
-[`../docs/boundaries/`](../docs/boundaries), and are gated by:
+[`../docs/boundaries/`](../docs/boundaries). Check the corpus with:
 
 ```sh
-make -C r1 verify
+make -C r1 test      # tracked corpus only
+make -C r1 verify    # plus the exact-byte image oracle (needs official images)
 ```

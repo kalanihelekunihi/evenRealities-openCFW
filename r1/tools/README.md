@@ -1,162 +1,17 @@
 # R1 tools
 
-The R1 evidence toolchain: the scripts that pin recovered behavior to the stock
-image, the models that check it, and the gates that keep the documentation
-honest.
-
-## Entry points
-
-| Script | What it does |
+| Tool | Purpose |
 | --- | --- |
-| [`verify_openr1.py`](verify_openr1.py) | **the gate** — capability ledger, source ownership, every subsystem summary, and the host/sanitizer/ARM builds. `make -C r1 verify` |
-| [`build_r1_source_ownership.py`](build_r1_source_ownership.py) | regenerate the function-ownership records; `--check` fails if they are stale |
-| [`verify_r1_decompilation.py`](verify_r1_decompilation.py) | authenticate the decompilation corpus |
-| [`verify_r1_bootloader_reconstruction.py`](verify_r1_bootloader_reconstruction.py) | authenticate the bootloader reconstruction |
-| [`verify_sdk_image.py`](verify_sdk_image.py) | check a built nRF52840 image against the recovered layout |
-| [`prepare_zephyr_deployment.py`](prepare_zephyr_deployment.py) | verify the source-built bundle against a required 1-MiB internal-flash recovery basis and complete 0x308-byte architected nRF52840 UICR backup, validate optional mixed-provenance evidence page-by-page, hash every preserved product partition, and emit separate canonical recovery HEX files, an exact expected post-install image, and a deployment plan; it never accesses or flashes hardware |
-| [`verify_zephyr_deployment.py`](verify_zephyr_deployment.py) | independently reconstruct the install result and require exact internal-flash and UICR readbacks after installation and optional recovery |
-| [`deploy_zephyr_swd.py`](deploy_zephyr_swd.py) | dry-run by default; on an explicitly selected pyOCD probe, connect under reset with auto-unlock and resume-on-disconnect disabled, confirm nRF52840 identity and exact preflash flash/UICR, execute either the two-range source install or an exact one-MiB retail rollback through transparent host-driven NVMC page/word operations, invoke the independent readback verifier, and withhold reset unless every comparison succeeds and release was explicitly requested |
-| [`assemble_r1_ace_recovery.py`](assemble_r1_ace_recovery.py) | assemble a one-MiB recovery basis from exact-version live ACE page reads at `0x27000..<0xFF000`, source-proven MBR words at `0xFF8..<0x1000`, a source-proven mirror of the ACL-protected primary settings page from the CRC-valid live backup, and the pinned official S140 7.2.0 image for the remaining retail memory-isolated extent; verify the live application and owner bootloader byte-for-byte and emit explicit mixed-provenance JSON |
-| [`r1_ble_probe_frames.c`](r1_ble_probe_frames.c) | generate the three fixed, non-destructive channel-2 frames plus the seven-byte command-invalid opcode-`0x89` channel-1 coexistence frame used by the macOS hardware probe |
-| [`probe_r1_ble.swift`](probe_r1_ble.swift) | macOS CoreBluetooth discovery and bounded owned-hardware validation for GATT layout, advertisement host-observation cadence, CCCD cycling, `pairAuth`, application-route silence without `pairAuth`, `deviceInfo`, sequential/burst status timing, intentional disconnect recovery, and non-mutating cross-characteristic receive contention; startup self-tests require byte identity with the C vectors |
-| [`analyze_r1_hci_capture.py`](analyze_r1_hci_capture.py) | strict privacy-preserving Apple PacketLogger `.pklg` parser and HCI/L2CAP/ATT evidence gate for connection intervals, ATT MTU, data length, PHY, encryption, controller completed-packet counts, channel-2 traffic, and Prepare/Execute Write rejection; malformed, truncated, note-only, incomplete-fragment, stale-hash, and missing-evidence captures fail closed |
-| [`upload_zephyr_recovery.py`](upload_zephyr_recovery.py) | verify a source-built bundle, refuse development trust by default, extract only its signed application to a mode-0600 temporary file, compile the bounded CoreBluetooth client, and upload/resume through `OPENR1-RECOVERY`; it cannot write the bootloader or product storage |
-| [`upload_openr1_recovery.swift`](upload_openr1_recovery.swift) | sequential offset-checked recovery transport used by the verified wrapper; reads the loader status to resume after disconnect and finishes only after all declared bytes are acknowledged |
-| [`r1_macos_ace_read.swift`](r1_macos_ace_read.swift) | exact-version, read-only macOS ACE client for one bounded prefix, one 4-KiB internal-flash page, or the complete architected 0x308-byte UICR extent on an owner-authorized R1; every mode is address-constrained and contains no NVMC write operation |
-| [`export_r1_decompilation.py`](export_r1_decompilation.py) | regenerate the decompilation corpus |
-| `run_r1_*.sh` | headless-Ghidra drivers for decompilation and BSim correlation |
-| [`openr1_sim.c`](openr1_sim.c) | the host protocol/device simulator (`make -C r1 sim`) |
+| `export_r1_decompilation.py` | headless Ghidra whole-image export of the application and bootloader into `research/decompilation/`, plus the `*.bytes.inc` arrays for the rebuild oracle |
+| `verify_r1_decompilation.py` | fail-closed structural check of the corpus (`--corpus-only`) and the exact-byte oracle |
+| `audit_r1_ghidra_explicit_entries.py` | census of explicitly seeded function entries (`docs/reference/GHIDRA-EXPLICIT-ENTRY-CENSUS.json`) |
+| `run_r1_bootloader_decompilation.sh` | reproduce the named bootloader export in `research/bootloader-reconstruction/generated/` |
+| `run_r1_bootloader_source_correlation.sh`, `run_r1_application_source_correlation.sh` | BSim correlation against symbol-bearing SDK reference builds |
+| `generate_r1_model_data.py` | regenerate the model-constant tables in `reconstructed/model_data/` from the official application |
+| `ghidra_scripts/` | Ghidra Java scripts used by the drivers above |
 
-## `evidence/` — 197 scripts
-
-Where a claim comes from. Each one reads the reconstructed image, proves
-something about one subsystem, and emits pinned JSON that a correlation document
-quotes.
-
-| Family | Count | Purpose |
-| --- | ---: | --- |
-| `summarize_r1_*` | ~150 | pin one subsystem: exact addresses, sizes, record layouts, provider edges |
-| `emulate_r1_*` | ~45 | executable models of recovered behavior, used as oracles |
-| `analyze_r1_*`, `build_r1_227_*` | 2 | cross-cutting analysis and probe construction |
-
-They import each other by bare module name, so they live in one directory. The
-entry points above put `evidence/` on `sys.path`; running a script directly
-works because Python adds its own directory.
-
-Every correlation document ends with the command that regenerates its numbers:
-
-```sh
-cd r1 && python3 tools/evidence/summarize_r1_bae8_event_router.py
-```
-
-## `probes/` — 21 assets
-
-On-device runtime probes: Cortex-M assembly (`r1_227_*.S`) that dumps
-bootloader, UICR, APPROTECT, NFCT, and ST25 state from a running device, plus
-one DFU decode audit in C. These are inputs to physical validation, not part of
-any build.
-
-## `ghidra_scripts/` — 53 scripts
-
-Ghidra headless scripts for the nRF52840 target: function seeding, boundary and
-callsite evidence, BSim comparison, and whole-image export.
-
-## Prerequisites
-
-Everything here needs the reconstructed images, built from byte arrays you
-supply locally:
-
-```sh
-make -C r1/research/decompilation/rebuild verify
-```
-
-See [`../research/decompilation/rebuild/PROVENANCE.md`](../research/decompilation/rebuild/PROVENANCE.md).
-The R1 firmware itself builds and passes its full test suite without them.
-
-The BLE probe is deliberately not a generic write console. Discovery is the
-default; its transmitting modes are the recovered ephemeral phone-role
-selector, fixed read-only device-info/status requests, and a separately
-bounded coexistence mode that interleaves at most twenty seven-byte
-opcode-`0x89` frames whose recovered command-valid byte is zero. That frame
-cannot select wear, touch, regulator, secondary-mode, or radio actions. The
-mode requires phone-role plus a status burst and cannot be combined with CCCD
-cycling or intentional disconnect. The probe redacts the
-manufacturer payload by default, validates both wire checksums on every model,
-and contains no DFU, power, advertising, storage, sensor-control, or raw-command
-operation. Advertisement callback gaps are labeled host observations because
-CoreBluetooth coalesces radio events. The disconnect option requires the
-fixed status-only burst and performs a normal central disconnect. Build and run
-it on macOS with:
-
-```sh
-xcrun swiftc -warnings-as-errors -framework CoreBluetooth -framework Foundation \
-  r1/tools/probe_r1_ble.swift -o /tmp/openr1_ble_probe
-/tmp/openr1_ble_probe --timeout 180 --pair-role-phone --device-info \
-  --status-count 20 --status-burst B56EE2
-/tmp/openr1_ble_probe --timeout 180 --pair-role-phone --status-count 20 \
-  --status-burst --channel1-probe-count 20 B56EE2
-```
-
-PacketLogger captures are independently parsed rather than trusted by filename
-or GUI appearance. The record envelope and packet-type constants are checked
-against Wireshark's upstream `wiretap/packetlogger.c`; peer addresses, keys,
-and ATT values are never emitted. A capture can be required to prove all raw
-BLE gates in one command:
-
-```sh
-python3 r1/tools/analyze_r1_hci_capture.py trace.pklg \
-  --expect-sha256 EXACT_CAPTURE_SHA256 \
-  --channel2-write-handle 0x15 --channel2-notify-handle 0x17 \
-  --require hci --require mtu --require data-length --require phy \
-  --require encryption --require completed-packets \
-  --require queued-write-rejection --require channel2-traffic \
-  --output trace-analysis.json
-```
-
-`make -C r1 hci-capture-test` exercises valid complete evidence, fragmented
-L2CAP/ATT, note-only input, malformed records, truncated reassembly, digest
-pinning, all requirement gates, and privacy redaction.
-
-## Scope
-
-This is a firmware repository. Scripts that audited the companion phone
-application — its decompiled Dart AOT and Swift protocol controllers — are not
-here: they analyze a different product and cannot run against this tree. The
-firmware-side evidence they cross-checked is covered by the correlation records
-under [`../docs/correlation/`](../docs/correlation).
-
-The read-only ACE evidence client is included here so physical recovery evidence
-does not depend on a separate checkout. Bootloader rekeying remains outside this
-firmware repository; it is unnecessary when the reviewed owner-optional
-bootloader is already installed.
-
-The initial SWD installer has a separate host-only dependency so normal builds
-do not need probe software. Create an isolated environment from
-`tools/requirements-swd.txt` (currently pyOCD 0.45.1), run the installer without
-`--execute`, and copy the printed bundle digest into the explicit execution
-command. The runner disables pyOCD auto-unlock and chip erase, bypasses target
-flash-algorithm blobs, and performs the nRF52840 NVMC `ERASEPAGE`/word sequence
-directly through SWD. It never writes `ERASEALL`, `ERASEUICR`, or any UICR byte.
-The `--recover` mode first requires the complete current flash to equal the
-verified source-installed image and UICR to remain byte-identical, then restores
-the exact original one-MiB backup using sector erases. UICR drift fails closed;
-normal rollback never erases or rewrites UICR.
-
-UICR disaster recovery is a distinct `--recover --restore-uicr` mode. Dry-run
-prints the exact backup SHA-256 that execution additionally requires through
-`--confirm-uicr-sha256`. Only that mode issues the pinned Nordic
-`NVMC.ERASEUICR=1` sequence, proves the complete 0x308-byte architected extent
-erased, restores only the backup's non-erased words, and verifies every byte
-before optional release. `ERASEALL` remains absent in every mode.
-
-Compile the ACE reader on macOS with `-parse-as-library` and always supply the
-reported firmware version plus the exact cached CoreBluetooth UUID:
-
-```sh
-xcrun swiftc -parse-as-library -warnings-as-errors \
-  -framework CoreBluetooth -framework Foundation \
-  r1/tools/r1_macos_ace_read.swift -o /tmp/r1-macos-ace-read
-/tmp/r1-macos-ace-read --identifier DEVICE-UUID \
-  --firmware-version 2.2.8.0002 --address 0x27000 --page \
-  --output /tmp/r1-27000.bin
-```
+The headless drivers find Ghidra through `GHIDRA_INSTALL_DIR` (or
+`R1_GHIDRA_HEADLESS`) and Java 21 through `R1_JAVA_RUNTIME`. Before doing
+anything, they check the input image's SHA-256 against
+[`../blobs/official/2.2.6.0009/PROVENANCE.md`](../blobs/official/2.2.6.0009/PROVENANCE.md).
+Install the tools with [`../../tools/bootstrap/`](../../tools/bootstrap/README.md).

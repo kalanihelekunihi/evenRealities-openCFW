@@ -137,8 +137,20 @@ def verify_rebuild() -> None:
 
 
 def main() -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--corpus-only",
+        action="store_true",
+        help="check the tracked corpus only; skip the exact-byte rebuild, which needs the official images",
+    )
+    args = parser.parse_args()
     for label, expectation in EXPECTED.items():
         verify_image(label, expectation)
+    if args.corpus_only:
+        print("R1 decompilation corpus verified: 2,972 functions (exact-byte rebuild skipped)")
+        return 0
     verify_rebuild()
     print("R1 decompilation corpus verified: 2,972 functions and four exact-byte artifacts")
     return 0
