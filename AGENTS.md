@@ -5,7 +5,9 @@
 The current G2 process is [g2/workflow/README.md](g2/workflow/README.md).
 It supersedes earlier decompilation, incremental overlay, source-only queue,
 and agent-continuation instructions. Historical evidence remains useful;
-historical instructions are not the current work plan. R1 work is unaffected.
+historical instructions are not the current work plan. The cross-device plan
+(including R1, which now also targets a byte-identical rebuild) is
+[docs/roadmap.md](docs/roadmap.md); for G2, the workflow procedure governs.
 
 The present assignment is preparation only. Do not start decompilation,
 firmware reconstruction, or agent jobs from the new prompt pack until the user
