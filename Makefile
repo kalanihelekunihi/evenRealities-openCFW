@@ -22,7 +22,8 @@ THIRD_PARTY_DIR := third-party
         build test verify clean \
         g2 g2-build g2-test g2-verify g2-clean \
         r1 r1-test r1-verify r1-clean \
-        third-party third-party-submodules third-party-fetched tools
+        third-party third-party-submodules third-party-fetched tools \
+        cut-verify blockers
 
 all: build
 
@@ -50,12 +51,15 @@ help:
 	@echo
 	@echo 'Tooling:'
 	@echo '  tools            list the pinned analysis tools (tools/bootstrap)'
+	@echo '  cut-verify       reassemble every payload from its region manifest, byte-identically'
+	@echo '  blockers         retained bytes per payload and per MISSING-TOOLCHAIN.md blocker'
 
 # --- aggregates ------------------------------------------------------------
 
 build: g2-build
 
 test: g2-test r1-test
+	$(PYTHON) -m unittest tools/cutting/test_firmware_cut.py
 
 verify: g2-verify r1-verify
 
@@ -111,3 +115,12 @@ third-party-fetched:
 #   tools/bootstrap/bootstrap.py --prefix /absolute/path
 tools:
 	$(PYTHON) tools/bootstrap/bootstrap.py --list
+
+# --- firmware cutting (MISSING-TOOLCHAIN.md) -------------------------------
+
+cut-verify:
+	$(PYTHON) tools/cutting/firmware_cut.py verify
+	$(PYTHON) -m unittest tools/cutting/test_firmware_cut.py
+
+blockers:
+	$(PYTHON) tools/cutting/firmware_cut.py report

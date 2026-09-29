@@ -1,0 +1,5952 @@
+{
+ "schema": 1,
+ "payload": "g2-case",
+ "device": "g2",
+ "official": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+ "size": 55784,
+ "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+ "toolchain": "GCC + STM32CubeG0 (release to identify); open",
+ "notes": "STM32G0 image at 0x08000000 after the 32-byte EVEN wrapper; regions from the case byte accounting",
+ "regions": [
+  {
+   "label": "even_header",
+   "start": "0x000000",
+   "end": "0x000020",
+   "state": "retained",
+   "blockers": [
+    "CONTAINER"
+   ],
+   "note": "EVEN wrapper: version, BE length, BE additive sum"
+  },
+  {
+   "label": "r000_platform_upstream_cmsis_startup",
+   "start": "0x000020",
+   "end": "0x0000D8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r001_function_map_gap_upstream_cmsis_startup",
+   "start": "0x0000D8",
+   "end": "0x0000E0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r002_function_map_upstream_cmsis_startup",
+   "start": "0x0000E0",
+   "end": "0x0000E4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r003_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0000E4",
+   "end": "0x0000EC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r004_function_map_upstream_freertos_kernel",
+   "start": "0x0000EC",
+   "end": "0x00010E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r005_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00010E",
+   "end": "0x000114",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r006_platform_upstream_freertos_kernel",
+   "start": "0x000114",
+   "end": "0x000164",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r007_platform_upstream_cmsis_startup",
+   "start": "0x000164",
+   "end": "0x000178",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r008_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x000178",
+   "end": "0x000180",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r009_function_map_upstream_cmsis_startup",
+   "start": "0x000180",
+   "end": "0x000290",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r010_admitted_function_source_candidate",
+   "start": "0x000290",
+   "end": "0x00043C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r011_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00043C",
+   "end": "0x000440",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r012_function_map_first_party_g2",
+   "start": "0x000440",
+   "end": "0x0004DA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r013_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0004DA",
+   "end": "0x0004E0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r014_admitted_function_source_candidate",
+   "start": "0x0004E0",
+   "end": "0x000588",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r015_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x000588",
+   "end": "0x00058C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r016_function_map_first_party_g2",
+   "start": "0x00058C",
+   "end": "0x00062A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r017_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00062A",
+   "end": "0x000630",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r018_admitted_function_source_candidate",
+   "start": "0x000630",
+   "end": "0x0006DE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r019_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0006DE",
+   "end": "0x0006E4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r020_admitted_function_source_candidate",
+   "start": "0x0006E4",
+   "end": "0x0006EE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r021_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0006EE",
+   "end": "0x0006F4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r022_admitted_function_source_candidate",
+   "start": "0x0006F4",
+   "end": "0x000750",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r023_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x000750",
+   "end": "0x000754",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r024_admitted_function_source_candidate",
+   "start": "0x000754",
+   "end": "0x0007C2",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r025_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0007C2",
+   "end": "0x0007C8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r026_admitted_function_source_candidate",
+   "start": "0x0007C8",
+   "end": "0x00086A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r027_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00086A",
+   "end": "0x00087C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r028_function_map_first_party_g2",
+   "start": "0x00087C",
+   "end": "0x00093C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r029_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00093C",
+   "end": "0x000948",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r030_function_map_first_party_g2",
+   "start": "0x000948",
+   "end": "0x000B28",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r031_function_map_gap_first_party_g2",
+   "start": "0x000B28",
+   "end": "0x000E3C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r032_function_map_first_party_g2",
+   "start": "0x000E3C",
+   "end": "0x00119C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r033_function_map_gap_first_party_g2",
+   "start": "0x00119C",
+   "end": "0x001304",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r034_function_map_first_party_g2",
+   "start": "0x001304",
+   "end": "0x001334",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r035_function_map_gap_first_party_g2",
+   "start": "0x001334",
+   "end": "0x001354",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r036_function_map_first_party_g2",
+   "start": "0x001354",
+   "end": "0x001398",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r037_function_map_gap_first_party_g2",
+   "start": "0x001398",
+   "end": "0x0013D8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r038_function_map_first_party_g2",
+   "start": "0x0013D8",
+   "end": "0x00140A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r039_function_map_gap_first_party_g2",
+   "start": "0x00140A",
+   "end": "0x001428",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r040_function_map_first_party_g2",
+   "start": "0x001428",
+   "end": "0x00152A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r041_function_map_gap_first_party_g2",
+   "start": "0x00152A",
+   "end": "0x001594",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r042_function_map_first_party_g2",
+   "start": "0x001594",
+   "end": "0x001790",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r043_function_map_gap_first_party_g2",
+   "start": "0x001790",
+   "end": "0x001904",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r044_function_map_first_party_g2",
+   "start": "0x001904",
+   "end": "0x001AF0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r045_function_map_gap_first_party_g2",
+   "start": "0x001AF0",
+   "end": "0x001C3C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r046_function_map_first_party_g2",
+   "start": "0x001C3C",
+   "end": "0x001D22",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r047_function_map_gap_first_party_g2",
+   "start": "0x001D22",
+   "end": "0x001D88",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r048_function_map_first_party_g2",
+   "start": "0x001D88",
+   "end": "0x001E38",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r049_function_map_gap_first_party_g2",
+   "start": "0x001E38",
+   "end": "0x001EB4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r050_function_map_first_party_g2",
+   "start": "0x001EB4",
+   "end": "0x002274",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r051_function_map_gap_first_party_g2",
+   "start": "0x002274",
+   "end": "0x002414",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r052_function_map_first_party_g2",
+   "start": "0x002414",
+   "end": "0x00247C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r053_function_map_gap_first_party_g2",
+   "start": "0x00247C",
+   "end": "0x0024E0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r054_function_map_first_party_g2",
+   "start": "0x0024E0",
+   "end": "0x002548",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r055_function_map_gap_first_party_g2",
+   "start": "0x002548",
+   "end": "0x0025AC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r056_function_map_first_party_g2",
+   "start": "0x0025AC",
+   "end": "0x0026DC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r057_function_map_gap_first_party_g2",
+   "start": "0x0026DC",
+   "end": "0x002764",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r058_function_map_first_party_g2",
+   "start": "0x002764",
+   "end": "0x00284C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r059_function_map_gap_first_party_g2",
+   "start": "0x00284C",
+   "end": "0x0028A8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r060_admitted_function_source_candidate",
+   "start": "0x0028A8",
+   "end": "0x0028D0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r061_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0028D0",
+   "end": "0x0028D4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r062_admitted_function_source_candidate",
+   "start": "0x0028D4",
+   "end": "0x002946",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r063_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x002946",
+   "end": "0x00294C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r064_admitted_function_source_candidate",
+   "start": "0x00294C",
+   "end": "0x0029BE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r065_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0029BE",
+   "end": "0x0029C4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r066_admitted_function_source_candidate",
+   "start": "0x0029C4",
+   "end": "0x002A1C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r067_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x002A1C",
+   "end": "0x002A20",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r068_admitted_function_source_candidate",
+   "start": "0x002A20",
+   "end": "0x002A78",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r069_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x002A78",
+   "end": "0x002A7C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r070_admitted_function_source_candidate",
+   "start": "0x002A7C",
+   "end": "0x002A82",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r071_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x002A82",
+   "end": "0x002A88",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r072_function_map_first_party_g2",
+   "start": "0x002A88",
+   "end": "0x002B14",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r073_function_map_gap_first_party_g2",
+   "start": "0x002B14",
+   "end": "0x002B60",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r074_admitted_function_source_candidate",
+   "start": "0x002B60",
+   "end": "0x002B6C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r075_function_map_first_party_g2",
+   "start": "0x002B6C",
+   "end": "0x002C22",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r076_function_map_gap_first_party_g2",
+   "start": "0x002C22",
+   "end": "0x002C24",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r077_platform_first_party_g2",
+   "start": "0x002C24",
+   "end": "0x002C2C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r078_function_map_gap_first_party_g2",
+   "start": "0x002C2C",
+   "end": "0x002C50",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r079_function_map_first_party_g2",
+   "start": "0x002C50",
+   "end": "0x002D30",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r080_function_map_gap_first_party_g2",
+   "start": "0x002D30",
+   "end": "0x002D68",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r081_function_map_first_party_g2",
+   "start": "0x002D68",
+   "end": "0x002DDA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r082_function_map_gap_first_party_g2",
+   "start": "0x002DDA",
+   "end": "0x002E24",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r083_function_map_first_party_g2",
+   "start": "0x002E24",
+   "end": "0x002ED0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r084_function_map_gap_first_party_g2",
+   "start": "0x002ED0",
+   "end": "0x002EFC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r085_admitted_function_source_candidate",
+   "start": "0x002EFC",
+   "end": "0x002F44",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r086_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x002F44",
+   "end": "0x002F48",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r087_admitted_function_source_candidate",
+   "start": "0x002F48",
+   "end": "0x002F80",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r088_function_map_first_party_g2",
+   "start": "0x002F80",
+   "end": "0x002FA2",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r089_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x002FA2",
+   "end": "0x002FA8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r090_function_map_first_party_g2",
+   "start": "0x002FA8",
+   "end": "0x002FE4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r091_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x002FE4",
+   "end": "0x002FE8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r092_function_map_first_party_g2",
+   "start": "0x002FE8",
+   "end": "0x003362",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r093_function_map_gap_first_party_g2",
+   "start": "0x003362",
+   "end": "0x0035D8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r094_admitted_function_source_candidate",
+   "start": "0x0035D8",
+   "end": "0x0035F0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r095_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0035F0",
+   "end": "0x0035F4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r096_function_map_first_party_g2",
+   "start": "0x0035F4",
+   "end": "0x00360C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r097_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00360C",
+   "end": "0x003610",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r098_admitted_function_source_candidate",
+   "start": "0x003610",
+   "end": "0x003682",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r099_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x003682",
+   "end": "0x003684",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r100_function_map_first_party_g2",
+   "start": "0x003684",
+   "end": "0x00371E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r101_function_map_gap_first_party_g2",
+   "start": "0x00371E",
+   "end": "0x00375C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r102_function_map_first_party_g2",
+   "start": "0x00375C",
+   "end": "0x00382A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r103_function_map_gap_first_party_g2",
+   "start": "0x00382A",
+   "end": "0x003868",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r104_function_map_first_party_g2",
+   "start": "0x003868",
+   "end": "0x0038BA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r105_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0038BA",
+   "end": "0x0038C0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r106_admitted_function_source_candidate",
+   "start": "0x0038C0",
+   "end": "0x0038FE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r107_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x0038FE",
+   "end": "0x003900",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r108_function_map_first_party_g2",
+   "start": "0x003900",
+   "end": "0x00397C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r109_function_map_gap_first_party_g2",
+   "start": "0x00397C",
+   "end": "0x0039E8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r110_function_map_first_party_g2",
+   "start": "0x0039E8",
+   "end": "0x003A00",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r111_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003A00",
+   "end": "0x003A04",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r112_function_map_first_party_g2",
+   "start": "0x003A04",
+   "end": "0x003A1C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r113_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003A1C",
+   "end": "0x003A20",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r114_function_map_first_party_g2",
+   "start": "0x003A20",
+   "end": "0x003A4C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r115_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003A4C",
+   "end": "0x003A50",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r116_admitted_function_source_candidate",
+   "start": "0x003A50",
+   "end": "0x003A5C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r117_function_map_first_party_g2",
+   "start": "0x003A5C",
+   "end": "0x003A7C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r118_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003A7C",
+   "end": "0x003A80",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r119_function_map_first_party_g2",
+   "start": "0x003A80",
+   "end": "0x003A9E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r120_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003A9E",
+   "end": "0x003AA4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r121_function_map_first_party_g2",
+   "start": "0x003AA4",
+   "end": "0x003B4E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r122_function_map_gap_first_party_g2",
+   "start": "0x003B4E",
+   "end": "0x003BB0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r123_function_map_first_party_g2",
+   "start": "0x003BB0",
+   "end": "0x003BC8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r124_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003BC8",
+   "end": "0x003BD0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r125_admitted_function_source_candidate",
+   "start": "0x003BD0",
+   "end": "0x003BE0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r126_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003BE0",
+   "end": "0x003BE8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r127_function_map_first_party_g2",
+   "start": "0x003BE8",
+   "end": "0x003C34",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r128_function_map_gap_first_party_g2",
+   "start": "0x003C34",
+   "end": "0x003C4C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r129_function_map_first_party_g2",
+   "start": "0x003C4C",
+   "end": "0x003CFC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r130_function_map_gap_first_party_g2",
+   "start": "0x003CFC",
+   "end": "0x003D44",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r131_function_map_first_party_g2",
+   "start": "0x003D44",
+   "end": "0x003E46",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r132_function_map_gap_first_party_g2",
+   "start": "0x003E46",
+   "end": "0x003EB0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r133_admitted_function_source_candidate",
+   "start": "0x003EB0",
+   "end": "0x003EC4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r134_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003EC4",
+   "end": "0x003EC8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r135_admitted_function_source_candidate",
+   "start": "0x003EC8",
+   "end": "0x003EDA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r136_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003EDA",
+   "end": "0x003EE0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r137_admitted_function_source_candidate",
+   "start": "0x003EE0",
+   "end": "0x003EEA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r138_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003EEA",
+   "end": "0x003EF4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r139_admitted_function_source_candidate",
+   "start": "0x003EF4",
+   "end": "0x003F08",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r140_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003F08",
+   "end": "0x003F0C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r141_admitted_function_source_candidate",
+   "start": "0x003F0C",
+   "end": "0x003F30",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r142_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003F30",
+   "end": "0x003F3C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r143_admitted_function_source_candidate",
+   "start": "0x003F3C",
+   "end": "0x003F52",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r144_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003F52",
+   "end": "0x003F58",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r145_admitted_function_source_candidate",
+   "start": "0x003F58",
+   "end": "0x003F88",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r146_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003F88",
+   "end": "0x003F8C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r147_admitted_function_source_candidate",
+   "start": "0x003F8C",
+   "end": "0x003FDE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r148_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x003FDE",
+   "end": "0x003FF0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r149_admitted_function_source_candidate",
+   "start": "0x003FF0",
+   "end": "0x00410A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r150_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00410A",
+   "end": "0x004118",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r151_admitted_function_source_candidate",
+   "start": "0x004118",
+   "end": "0x00432A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r152_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00432A",
+   "end": "0x004344",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r153_admitted_function_source_candidate",
+   "start": "0x004344",
+   "end": "0x00434E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r154_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00434E",
+   "end": "0x004350",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r155_function_map_first_party_g2",
+   "start": "0x004350",
+   "end": "0x00449A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r156_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00449A",
+   "end": "0x0044A0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r157_function_map_first_party_g2",
+   "start": "0x0044A0",
+   "end": "0x0046A2",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r158_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0046A2",
+   "end": "0x0046C0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r159_admitted_function_source_candidate",
+   "start": "0x0046C0",
+   "end": "0x0046C2",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r160_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x0046C2",
+   "end": "0x0046C4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r161_admitted_function_source_candidate",
+   "start": "0x0046C4",
+   "end": "0x004728",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r162_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004728",
+   "end": "0x004730",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r163_admitted_function_source_candidate",
+   "start": "0x004730",
+   "end": "0x0047F4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r164_function_map_first_party_g2",
+   "start": "0x0047F4",
+   "end": "0x004852",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r165_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004852",
+   "end": "0x00485C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r166_admitted_function_source_candidate",
+   "start": "0x00485C",
+   "end": "0x00489A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r167_function_map_upstream_stm32_hal",
+   "start": "0x00489A",
+   "end": "0x004976",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r168_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x004976",
+   "end": "0x004978",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r169_admitted_function_source_candidate",
+   "start": "0x004978",
+   "end": "0x004998",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r170_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004998",
+   "end": "0x00499C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r171_admitted_function_source_candidate",
+   "start": "0x00499C",
+   "end": "0x004A18",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r172_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004A18",
+   "end": "0x004A20",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r173_admitted_function_source_candidate",
+   "start": "0x004A20",
+   "end": "0x004A82",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r174_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004A82",
+   "end": "0x004A8C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r175_function_map_first_party_g2",
+   "start": "0x004A8C",
+   "end": "0x004B36",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r176_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004B36",
+   "end": "0x004B40",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r177_admitted_function_source_candidate",
+   "start": "0x004B40",
+   "end": "0x004B56",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r178_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004B56",
+   "end": "0x004B5C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r179_admitted_function_source_candidate",
+   "start": "0x004B5C",
+   "end": "0x004B6C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r180_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004B6C",
+   "end": "0x004B70",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r181_admitted_function_source_candidate",
+   "start": "0x004B70",
+   "end": "0x004B86",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r182_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004B86",
+   "end": "0x004B8C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r183_function_map_upstream_stm32_hal",
+   "start": "0x004B8C",
+   "end": "0x004BA8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r184_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004BA8",
+   "end": "0x004BAC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r185_platform_upstream_stm32_hal",
+   "start": "0x004BAC",
+   "end": "0x004BB4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r186_admitted_function_source_candidate",
+   "start": "0x004BB4",
+   "end": "0x004C0C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r187_platform_upstream_stm32_hal",
+   "start": "0x004C0C",
+   "end": "0x004C3C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r188_admitted_function_source_candidate",
+   "start": "0x004C3C",
+   "end": "0x004D0A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r189_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004D0A",
+   "end": "0x004D20",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r190_admitted_function_source_candidate",
+   "start": "0x004D20",
+   "end": "0x004D22",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r191_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x004D22",
+   "end": "0x004D24",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r192_admitted_function_source_candidate",
+   "start": "0x004D24",
+   "end": "0x004D48",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r193_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004D48",
+   "end": "0x004D4C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r194_admitted_function_source_candidate",
+   "start": "0x004D4C",
+   "end": "0x004D4E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r195_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x004D4E",
+   "end": "0x004D50",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r196_function_map_first_party_g2",
+   "start": "0x004D50",
+   "end": "0x004EA0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r197_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004EA0",
+   "end": "0x004EB4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r198_admitted_function_source_candidate",
+   "start": "0x004EB4",
+   "end": "0x004ECA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r199_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x004ECA",
+   "end": "0x004ECC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r200_admitted_function_source_candidate",
+   "start": "0x004ECC",
+   "end": "0x004ED2",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r201_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004ED2",
+   "end": "0x004ED8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r202_admitted_function_source_candidate",
+   "start": "0x004ED8",
+   "end": "0x004EDE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r203_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004EDE",
+   "end": "0x004EE4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r204_admitted_function_source_candidate",
+   "start": "0x004EE4",
+   "end": "0x004EEA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r205_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004EEA",
+   "end": "0x004EF0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r206_admitted_function_source_candidate",
+   "start": "0x004EF0",
+   "end": "0x004EF6",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r207_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004EF6",
+   "end": "0x004EFC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r208_admitted_function_source_candidate",
+   "start": "0x004EFC",
+   "end": "0x004F08",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r209_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004F08",
+   "end": "0x004F0C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r210_admitted_function_source_candidate",
+   "start": "0x004F0C",
+   "end": "0x004F30",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r211_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004F30",
+   "end": "0x004F34",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r212_admitted_function_source_candidate",
+   "start": "0x004F34",
+   "end": "0x004FB8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r213_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x004FB8",
+   "end": "0x004FD0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r214_admitted_function_source_candidate",
+   "start": "0x004FD0",
+   "end": "0x005008",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r215_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x005008",
+   "end": "0x00500C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r216_admitted_function_source_candidate",
+   "start": "0x00500C",
+   "end": "0x005026",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r217_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x005026",
+   "end": "0x00502C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r218_admitted_function_source_candidate",
+   "start": "0x00502C",
+   "end": "0x00503E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r219_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00503E",
+   "end": "0x005044",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r220_admitted_function_source_candidate",
+   "start": "0x005044",
+   "end": "0x00504C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r221_function_map_upstream_cmsis_startup",
+   "start": "0x00504C",
+   "end": "0x00505E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r222_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00505E",
+   "end": "0x005068",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r223_admitted_function_source_candidate",
+   "start": "0x005068",
+   "end": "0x0050A6",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r224_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0050A6",
+   "end": "0x0050B4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r225_function_map_upstream_stm32_hal",
+   "start": "0x0050B4",
+   "end": "0x0050C2",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r226_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0050C2",
+   "end": "0x0050C8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r227_function_map_upstream_stm32_hal",
+   "start": "0x0050C8",
+   "end": "0x0050E0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r228_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0050E0",
+   "end": "0x0050E4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r229_function_map_upstream_stm32_hal",
+   "start": "0x0050E4",
+   "end": "0x0050FE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r230_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0050FE",
+   "end": "0x005108",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r231_function_map_upstream_stm32_hal",
+   "start": "0x005108",
+   "end": "0x00513E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r232_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00513E",
+   "end": "0x005148",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r233_function_map_first_party_g2",
+   "start": "0x005148",
+   "end": "0x0052EE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r234_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0052EE",
+   "end": "0x005304",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r235_admitted_function_source_candidate",
+   "start": "0x005304",
+   "end": "0x005442",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r236_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x005442",
+   "end": "0x00545C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r237_admitted_function_source_candidate",
+   "start": "0x00545C",
+   "end": "0x00548C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r238_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00548C",
+   "end": "0x005494",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r239_admitted_function_source_candidate",
+   "start": "0x005494",
+   "end": "0x0054AE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r240_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0054AE",
+   "end": "0x0054BC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r241_admitted_function_source_candidate",
+   "start": "0x0054BC",
+   "end": "0x00553E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r242_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00553E",
+   "end": "0x005548",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r243_admitted_function_source_candidate",
+   "start": "0x005548",
+   "end": "0x00590A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r244_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00590A",
+   "end": "0x005930",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r245_admitted_function_source_candidate",
+   "start": "0x005930",
+   "end": "0x0059AA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r246_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x0059AA",
+   "end": "0x0059AC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r247_function_map_upstream_stm32_hal",
+   "start": "0x0059AC",
+   "end": "0x005A68",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r248_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x005A68",
+   "end": "0x005A70",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r249_admitted_function_source_candidate",
+   "start": "0x005A70",
+   "end": "0x005B40",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r250_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x005B40",
+   "end": "0x005B44",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r251_admitted_function_source_candidate",
+   "start": "0x005B44",
+   "end": "0x005BA4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r252_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x005BA4",
+   "end": "0x005BAC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r253_admitted_function_source_candidate",
+   "start": "0x005BAC",
+   "end": "0x005BE0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r254_function_map_first_party_g2",
+   "start": "0x005BE0",
+   "end": "0x005BF0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r255_function_map_gap_first_party_g2",
+   "start": "0x005BF0",
+   "end": "0x005BF4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r256_admitted_function_source_candidate",
+   "start": "0x005BF4",
+   "end": "0x005C98",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r257_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x005C98",
+   "end": "0x005CAC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r258_admitted_function_source_candidate",
+   "start": "0x005CAC",
+   "end": "0x005CAE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r259_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x005CAE",
+   "end": "0x005CB0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r260_function_map_first_party_g2",
+   "start": "0x005CB0",
+   "end": "0x005E2E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r261_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x005E2E",
+   "end": "0x005E34",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r262_admitted_function_source_candidate",
+   "start": "0x005E34",
+   "end": "0x005E48",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r263_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x005E48",
+   "end": "0x005E4C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r264_admitted_function_source_candidate",
+   "start": "0x005E4C",
+   "end": "0x005E8A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r265_function_map_upstream_stm32_hal",
+   "start": "0x005E8A",
+   "end": "0x005E8E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r266_admitted_function_source_candidate",
+   "start": "0x005E8E",
+   "end": "0x005F1C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r267_function_map_upstream_stm32_hal",
+   "start": "0x005F1C",
+   "end": "0x005F20",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r268_admitted_function_source_candidate",
+   "start": "0x005F20",
+   "end": "0x005F62",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r269_function_map_upstream_stm32_hal",
+   "start": "0x005F62",
+   "end": "0x005F64",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r270_admitted_function_source_candidate",
+   "start": "0x005F64",
+   "end": "0x005F70",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r271_platform_upstream_stm32_hal",
+   "start": "0x005F70",
+   "end": "0x005FB0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r272_function_map_upstream_stm32_hal",
+   "start": "0x005FB0",
+   "end": "0x00624C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r273_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00624C",
+   "end": "0x006260",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r274_admitted_function_source_candidate",
+   "start": "0x006260",
+   "end": "0x006316",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r275_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x006316",
+   "end": "0x006328",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r276_admitted_function_source_candidate",
+   "start": "0x006328",
+   "end": "0x0063FC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r277_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0063FC",
+   "end": "0x00640C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r278_admitted_function_source_candidate",
+   "start": "0x00640C",
+   "end": "0x006508",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r279_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x006508",
+   "end": "0x00650C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r280_admitted_function_source_candidate",
+   "start": "0x00650C",
+   "end": "0x0066B6",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r281_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0066B6",
+   "end": "0x0066CC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r282_admitted_function_source_candidate",
+   "start": "0x0066CC",
+   "end": "0x006798",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r283_function_map_upstream_cmsis_startup",
+   "start": "0x006798",
+   "end": "0x00679A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r284_admitted_function_source_candidate",
+   "start": "0x00679A",
+   "end": "0x0067E6",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r285_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x0067E6",
+   "end": "0x0067E8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r286_function_map_first_party_g2",
+   "start": "0x0067E8",
+   "end": "0x00681C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r287_function_map_gap_first_party_g2",
+   "start": "0x00681C",
+   "end": "0x00682C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r288_function_map_first_party_g2",
+   "start": "0x00682C",
+   "end": "0x0068D2",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r289_function_map_gap_first_party_g2",
+   "start": "0x0068D2",
+   "end": "0x0068F0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r290_function_map_first_party_g2",
+   "start": "0x0068F0",
+   "end": "0x006908",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r291_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x006908",
+   "end": "0x006910",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r292_admitted_function_source_candidate",
+   "start": "0x006910",
+   "end": "0x00697C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r293_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00697C",
+   "end": "0x006988",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r294_function_map_first_party_g2",
+   "start": "0x006988",
+   "end": "0x006A2E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r295_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x006A2E",
+   "end": "0x006A60",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r296_admitted_function_source_candidate",
+   "start": "0x006A60",
+   "end": "0x006B8A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r297_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x006B8A",
+   "end": "0x006BA0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r298_function_map_first_party_g2",
+   "start": "0x006BA0",
+   "end": "0x006BD0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r299_admitted_function_source_candidate",
+   "start": "0x006BD0",
+   "end": "0x006C18",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r300_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x006C18",
+   "end": "0x006C20",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r301_admitted_function_source_candidate",
+   "start": "0x006C20",
+   "end": "0x006C8E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r302_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x006C8E",
+   "end": "0x006CA0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r303_admitted_function_source_candidate",
+   "start": "0x006CA0",
+   "end": "0x006D0A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r304_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x006D0A",
+   "end": "0x006D18",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r305_admitted_function_source_candidate",
+   "start": "0x006D18",
+   "end": "0x006D82",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r306_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x006D82",
+   "end": "0x006D90",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r307_function_map_upstream_cmsis_startup",
+   "start": "0x006D90",
+   "end": "0x006D92",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r308_admitted_function_source_candidate",
+   "start": "0x006D92",
+   "end": "0x006DD6",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r309_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x006DD6",
+   "end": "0x006DD8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r310_admitted_function_source_candidate",
+   "start": "0x006DD8",
+   "end": "0x006E22",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r311_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x006E22",
+   "end": "0x006E28",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r312_admitted_function_source_candidate",
+   "start": "0x006E28",
+   "end": "0x006E32",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r313_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x006E32",
+   "end": "0x006E38",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r314_admitted_function_source_candidate",
+   "start": "0x006E38",
+   "end": "0x006E3A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r315_function_map_gap_first_party_g2",
+   "start": "0x006E3A",
+   "end": "0x007234",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r316_function_map_first_party_g2",
+   "start": "0x007234",
+   "end": "0x007AA8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r317_function_map_gap_first_party_g2",
+   "start": "0x007AA8",
+   "end": "0x008440",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r318_platform_upstream_freertos_kernel",
+   "start": "0x008440",
+   "end": "0x008458",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r319_admitted_function_source_candidate",
+   "start": "0x008458",
+   "end": "0x0084CE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r320_function_map_upstream_cmsis_startup",
+   "start": "0x0084CE",
+   "end": "0x0084D0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r321_admitted_function_source_candidate",
+   "start": "0x0084D0",
+   "end": "0x0084DA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r322_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0084DA",
+   "end": "0x0084E0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r323_admitted_function_source_candidate",
+   "start": "0x0084E0",
+   "end": "0x00855A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r324_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00855A",
+   "end": "0x00858C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r325_function_map_first_party_g2",
+   "start": "0x00858C",
+   "end": "0x0085CA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r326_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0085CA",
+   "end": "0x0085D0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r327_admitted_function_source_candidate",
+   "start": "0x0085D0",
+   "end": "0x00869A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r328_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00869A",
+   "end": "0x00869C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r329_admitted_function_source_candidate",
+   "start": "0x00869C",
+   "end": "0x0086FC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r330_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0086FC",
+   "end": "0x008700",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r331_admitted_function_source_candidate",
+   "start": "0x008700",
+   "end": "0x008774",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r332_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x008774",
+   "end": "0x008778",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r333_admitted_function_source_candidate",
+   "start": "0x008778",
+   "end": "0x008826",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r334_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x008826",
+   "end": "0x008828",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r335_admitted_function_source_candidate",
+   "start": "0x008828",
+   "end": "0x0089AE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r336_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0089AE",
+   "end": "0x0089B8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r337_admitted_function_source_candidate",
+   "start": "0x0089B8",
+   "end": "0x008A66",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r338_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x008A66",
+   "end": "0x008A68",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r339_admitted_function_source_candidate",
+   "start": "0x008A68",
+   "end": "0x008BEE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r340_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x008BEE",
+   "end": "0x008BF8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r341_function_map_first_party_g2",
+   "start": "0x008BF8",
+   "end": "0x008D86",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r342_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x008D86",
+   "end": "0x008DB8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r343_admitted_function_source_candidate",
+   "start": "0x008DB8",
+   "end": "0x008ED0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r344_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x008ED0",
+   "end": "0x008EE4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r345_admitted_function_source_candidate",
+   "start": "0x008EE4",
+   "end": "0x008FB6",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r346_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x008FB6",
+   "end": "0x008FB8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r347_admitted_function_source_candidate",
+   "start": "0x008FB8",
+   "end": "0x008FC2",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r348_platform_first_party_g2",
+   "start": "0x008FC2",
+   "end": "0x009058",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r349_function_map_first_party_g2",
+   "start": "0x009058",
+   "end": "0x00905A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r350_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00905A",
+   "end": "0x009060",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r351_function_map_first_party_g2",
+   "start": "0x009060",
+   "end": "0x0090C0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r352_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0090C0",
+   "end": "0x0090CC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r353_function_map_first_party_g2",
+   "start": "0x0090CC",
+   "end": "0x009120",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r354_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x009120",
+   "end": "0x009128",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r355_function_map_first_party_g2",
+   "start": "0x009128",
+   "end": "0x00917E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r356_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00917E",
+   "end": "0x009190",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r357_function_map_first_party_g2",
+   "start": "0x009190",
+   "end": "0x0091A8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r358_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x0091A8",
+   "end": "0x0091B0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r359_admitted_function_source_candidate",
+   "start": "0x0091B0",
+   "end": "0x0091CA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r360_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x0091CA",
+   "end": "0x0091CC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r361_admitted_function_source_candidate",
+   "start": "0x0091CC",
+   "end": "0x009208",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r362_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x009208",
+   "end": "0x009230",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r363_function_map_first_party_g2",
+   "start": "0x009230",
+   "end": "0x00962C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r364_function_map_gap_first_party_g2",
+   "start": "0x00962C",
+   "end": "0x009658",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r365_admitted_function_source_candidate",
+   "start": "0x009658",
+   "end": "0x0096A4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r366_function_map_first_party_g2",
+   "start": "0x0096A4",
+   "end": "0x009852",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r367_function_map_gap_first_party_g2",
+   "start": "0x009852",
+   "end": "0x009A08",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r368_admitted_function_source_candidate",
+   "start": "0x009A08",
+   "end": "0x009A2E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r369_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x009A2E",
+   "end": "0x009A34",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r370_function_map_first_party_g2",
+   "start": "0x009A34",
+   "end": "0x009AB2",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r371_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x009AB2",
+   "end": "0x009ABC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r372_function_map_first_party_g2",
+   "start": "0x009ABC",
+   "end": "0x009B52",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r373_function_map_gap_first_party_g2",
+   "start": "0x009B52",
+   "end": "0x009B90",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r374_admitted_function_source_candidate",
+   "start": "0x009B90",
+   "end": "0x009BDE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r375_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x009BDE",
+   "end": "0x009BE0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r376_function_map_first_party_g2",
+   "start": "0x009BE0",
+   "end": "0x009C62",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r377_function_map_gap_first_party_g2",
+   "start": "0x009C62",
+   "end": "0x009CE8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r378_function_map_first_party_g2",
+   "start": "0x009CE8",
+   "end": "0x009D48",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r379_function_map_gap_first_party_g2",
+   "start": "0x009D48",
+   "end": "0x009E14",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r380_function_map_first_party_g2",
+   "start": "0x009E14",
+   "end": "0x009E2A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r381_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x009E2A",
+   "end": "0x009E2C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r382_admitted_function_source_candidate",
+   "start": "0x009E2C",
+   "end": "0x009ED6",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r383_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x009ED6",
+   "end": "0x009EDC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r384_function_map_first_party_g2",
+   "start": "0x009EDC",
+   "end": "0x009F18",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r385_admitted_function_source_candidate",
+   "start": "0x009F18",
+   "end": "0x009F38",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r386_function_map_first_party_g2",
+   "start": "0x009F38",
+   "end": "0x009F92",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r387_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x009F92",
+   "end": "0x009FA0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r388_admitted_function_source_candidate",
+   "start": "0x009FA0",
+   "end": "0x00A00A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r389_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00A00A",
+   "end": "0x00A010",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r390_function_map_first_party_g2",
+   "start": "0x00A010",
+   "end": "0x00A066",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r391_admitted_function_source_candidate",
+   "start": "0x00A066",
+   "end": "0x00A166",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r392_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00A166",
+   "end": "0x00A168",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r393_admitted_function_source_candidate",
+   "start": "0x00A168",
+   "end": "0x00A180",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r394_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00A180",
+   "end": "0x00A184",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r395_admitted_function_source_candidate",
+   "start": "0x00A184",
+   "end": "0x00A376",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r396_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00A376",
+   "end": "0x00A378",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r397_admitted_function_source_candidate",
+   "start": "0x00A378",
+   "end": "0x00A396",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r398_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00A396",
+   "end": "0x00A3BC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r399_admitted_function_source_candidate",
+   "start": "0x00A3BC",
+   "end": "0x00A3C8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r400_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00A3C8",
+   "end": "0x00A3CC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r401_admitted_function_source_candidate",
+   "start": "0x00A3CC",
+   "end": "0x00A566",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r402_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00A566",
+   "end": "0x00A570",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r403_admitted_function_source_candidate",
+   "start": "0x00A570",
+   "end": "0x00A58C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r404_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00A58C",
+   "end": "0x00A594",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r405_admitted_function_source_candidate",
+   "start": "0x00A594",
+   "end": "0x00A5B0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r406_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00A5B0",
+   "end": "0x00A5B8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r407_function_map_first_party_g2",
+   "start": "0x00A5B8",
+   "end": "0x00A6F8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r408_function_map_gap_first_party_g2",
+   "start": "0x00A6F8",
+   "end": "0x00A7B4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r409_admitted_function_source_candidate",
+   "start": "0x00A7B4",
+   "end": "0x00A7D0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r410_function_map_upstream_freertos_kernel",
+   "start": "0x00A7D0",
+   "end": "0x00A8A6",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r411_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00A8A6",
+   "end": "0x00A8A8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r412_function_map_upstream_freertos_kernel",
+   "start": "0x00A8A8",
+   "end": "0x00A8F4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r413_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00A8F4",
+   "end": "0x00A8F8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r414_function_map_upstream_freertos_kernel",
+   "start": "0x00A8F8",
+   "end": "0x00A91C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r415_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00A91C",
+   "end": "0x00A920",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r416_function_map_upstream_freertos_kernel",
+   "start": "0x00A920",
+   "end": "0x00A954",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r417_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00A954",
+   "end": "0x00A95C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r418_function_map_upstream_freertos_kernel",
+   "start": "0x00A95C",
+   "end": "0x00AA20",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r419_admitted_function_source_candidate",
+   "start": "0x00AA20",
+   "end": "0x00AA44",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r420_function_map_upstream_freertos_kernel",
+   "start": "0x00AA44",
+   "end": "0x00AB0C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r421_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00AB0C",
+   "end": "0x00AB10",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r422_function_map_upstream_freertos_kernel",
+   "start": "0x00AB10",
+   "end": "0x00AB90",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r423_function_map_first_party_g2",
+   "start": "0x00AB90",
+   "end": "0x00ABC2",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r424_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00ABC2",
+   "end": "0x00ABD0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r425_function_map_upstream_freertos_kernel",
+   "start": "0x00ABD0",
+   "end": "0x00AC20",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r426_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00AC20",
+   "end": "0x00AC28",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r427_function_map_upstream_freertos_kernel",
+   "start": "0x00AC28",
+   "end": "0x00AC9A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r428_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00AC9A",
+   "end": "0x00ACA4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r429_function_map_upstream_freertos_kernel",
+   "start": "0x00ACA4",
+   "end": "0x00ACE8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r430_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00ACE8",
+   "end": "0x00AD04",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r431_function_map_upstream_freertos_kernel",
+   "start": "0x00AD04",
+   "end": "0x00AD3C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r432_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00AD3C",
+   "end": "0x00AD44",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r433_admitted_function_source_candidate",
+   "start": "0x00AD44",
+   "end": "0x00AD68",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r434_function_map_upstream_freertos_kernel",
+   "start": "0x00AD68",
+   "end": "0x00AE06",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r435_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00AE06",
+   "end": "0x00AE2C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r436_function_map_upstream_freertos_kernel",
+   "start": "0x00AE2C",
+   "end": "0x00AE6E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r437_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00AE6E",
+   "end": "0x00AE94",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r438_function_map_upstream_freertos_kernel",
+   "start": "0x00AE94",
+   "end": "0x00AFD0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r439_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00AFD0",
+   "end": "0x00AFEC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r440_function_map_upstream_freertos_kernel",
+   "start": "0x00AFEC",
+   "end": "0x00B03A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r441_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00B03A",
+   "end": "0x00B044",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r442_function_map_upstream_freertos_kernel",
+   "start": "0x00B044",
+   "end": "0x00B080",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r443_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00B080",
+   "end": "0x00B084",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r444_admitted_function_source_candidate",
+   "start": "0x00B084",
+   "end": "0x00B0A0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r445_function_map_upstream_freertos_kernel",
+   "start": "0x00B0A0",
+   "end": "0x00B0BE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r446_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00B0BE",
+   "end": "0x00B0C0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r447_function_map_upstream_freertos_kernel",
+   "start": "0x00B0C0",
+   "end": "0x00B118",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r448_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00B118",
+   "end": "0x00B11C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r449_function_map_upstream_freertos_kernel",
+   "start": "0x00B11C",
+   "end": "0x00B20E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r450_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00B20E",
+   "end": "0x00B280",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r451_function_map_upstream_freertos_kernel",
+   "start": "0x00B280",
+   "end": "0x00B29E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r452_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00B29E",
+   "end": "0x00B2A4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r453_function_map_upstream_freertos_kernel",
+   "start": "0x00B2A4",
+   "end": "0x00B2CA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r454_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00B2CA",
+   "end": "0x00B2D0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r455_function_map_upstream_freertos_kernel",
+   "start": "0x00B2D0",
+   "end": "0x00B338",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r456_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00B338",
+   "end": "0x00B350",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r457_function_map_upstream_freertos_kernel",
+   "start": "0x00B350",
+   "end": "0x00B376",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r458_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00B376",
+   "end": "0x00B394",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r459_function_map_upstream_freertos_kernel",
+   "start": "0x00B394",
+   "end": "0x00B4BA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r460_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00B4BA",
+   "end": "0x00B4C4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r461_admitted_function_source_candidate",
+   "start": "0x00B4C4",
+   "end": "0x00B4DE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r462_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00B4DE",
+   "end": "0x00B4E0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r463_function_map_upstream_freertos_kernel",
+   "start": "0x00B4E0",
+   "end": "0x00B4FA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r464_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00B4FA",
+   "end": "0x00B500",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r465_admitted_function_source_candidate",
+   "start": "0x00B500",
+   "end": "0x00B554",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r466_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00B554",
+   "end": "0x00B55C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r467_admitted_function_source_candidate",
+   "start": "0x00B55C",
+   "end": "0x00B5C4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r468_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00B5C4",
+   "end": "0x00B5CC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r469_admitted_function_source_candidate",
+   "start": "0x00B5CC",
+   "end": "0x00B620",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r470_function_map_first_party_g2",
+   "start": "0x00B620",
+   "end": "0x00B696",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r471_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00B696",
+   "end": "0x00B698",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r472_admitted_function_source_candidate",
+   "start": "0x00B698",
+   "end": "0x00B802",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r473_function_map_gap_first_party_g2",
+   "start": "0x00B802",
+   "end": "0x00BA64",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r474_admitted_function_source_candidate",
+   "start": "0x00BA64",
+   "end": "0x00BA7C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r475_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00BA7C",
+   "end": "0x00BA84",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r476_admitted_function_source_candidate",
+   "start": "0x00BA84",
+   "end": "0x00BA9E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r477_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00BA9E",
+   "end": "0x00BAA4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r478_admitted_function_source_candidate",
+   "start": "0x00BAA4",
+   "end": "0x00BABC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r479_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00BABC",
+   "end": "0x00BAC4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r480_admitted_function_source_candidate",
+   "start": "0x00BAC4",
+   "end": "0x00BADE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r481_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00BADE",
+   "end": "0x00BAE4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r482_admitted_function_source_candidate",
+   "start": "0x00BAE4",
+   "end": "0x00BAF2",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r483_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00BAF2",
+   "end": "0x00BAF8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r484_admitted_function_source_candidate",
+   "start": "0x00BAF8",
+   "end": "0x00BB16",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r485_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00BB16",
+   "end": "0x00BB1C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r486_admitted_function_source_candidate",
+   "start": "0x00BB1C",
+   "end": "0x00BB44",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r487_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00BB44",
+   "end": "0x00BB4C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r488_admitted_function_source_candidate",
+   "start": "0x00BB4C",
+   "end": "0x00BB66",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r489_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00BB66",
+   "end": "0x00BB6C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r490_function_map_first_party_g2",
+   "start": "0x00BB6C",
+   "end": "0x00BB8A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r491_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00BB8A",
+   "end": "0x00BB94",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r492_function_map_first_party_g2",
+   "start": "0x00BB94",
+   "end": "0x00BBAA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r493_function_map_gap_first_party_g2",
+   "start": "0x00BBAA",
+   "end": "0x00BE94",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r494_admitted_function_source_candidate",
+   "start": "0x00BE94",
+   "end": "0x00BEB0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r495_function_map_first_party_g2",
+   "start": "0x00BEB0",
+   "end": "0x00BEDA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r496_admitted_function_source_candidate",
+   "start": "0x00BEDA",
+   "end": "0x00BEFE",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r497_function_map_first_party_g2",
+   "start": "0x00BEFE",
+   "end": "0x00BF28",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r498_admitted_function_source_candidate",
+   "start": "0x00BF28",
+   "end": "0x00BF4C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r499_function_map_upstream_freertos_kernel",
+   "start": "0x00BF4C",
+   "end": "0x00BF72",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r500_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00BF72",
+   "end": "0x00BF74",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r501_function_map_upstream_freertos_kernel",
+   "start": "0x00BF74",
+   "end": "0x00BF82",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r502_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00BF82",
+   "end": "0x00BF8C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r503_function_map_upstream_freertos_kernel",
+   "start": "0x00BF8C",
+   "end": "0x00BF9C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r504_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00BF9C",
+   "end": "0x00BFB4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r505_function_map_upstream_freertos_kernel",
+   "start": "0x00BFB4",
+   "end": "0x00C01A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r506_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00C01A",
+   "end": "0x00C01C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r507_function_map_upstream_freertos_kernel",
+   "start": "0x00C01C",
+   "end": "0x00C030",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r508_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C030",
+   "end": "0x00C034",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r509_function_map_upstream_freertos_kernel",
+   "start": "0x00C034",
+   "end": "0x00C04C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r510_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C04C",
+   "end": "0x00C050",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r511_function_map_upstream_freertos_kernel",
+   "start": "0x00C050",
+   "end": "0x00C094",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r512_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C094",
+   "end": "0x00C098",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r513_function_map_upstream_freertos_kernel",
+   "start": "0x00C098",
+   "end": "0x00C0B8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r514_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C0B8",
+   "end": "0x00C0C0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r515_function_map_upstream_freertos_kernel",
+   "start": "0x00C0C0",
+   "end": "0x00C0D2",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r516_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C0D2",
+   "end": "0x00C0D8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r517_function_map_upstream_freertos_kernel",
+   "start": "0x00C0D8",
+   "end": "0x00C0FC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r518_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C0FC",
+   "end": "0x00C100",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r519_admitted_function_source_candidate",
+   "start": "0x00C100",
+   "end": "0x00C146",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r520_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00C146",
+   "end": "0x00C148",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r521_function_map_upstream_freertos_kernel",
+   "start": "0x00C148",
+   "end": "0x00C178",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r522_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C178",
+   "end": "0x00C17C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r523_function_map_upstream_freertos_kernel",
+   "start": "0x00C17C",
+   "end": "0x00C188",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r524_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C188",
+   "end": "0x00C18C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r525_function_map_upstream_freertos_kernel",
+   "start": "0x00C18C",
+   "end": "0x00C194",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r526_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C194",
+   "end": "0x00C198",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r527_function_map_upstream_freertos_kernel",
+   "start": "0x00C198",
+   "end": "0x00C1B8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r528_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C1B8",
+   "end": "0x00C1BC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r529_function_map_upstream_freertos_kernel",
+   "start": "0x00C1BC",
+   "end": "0x00C1E6",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r530_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C1E6",
+   "end": "0x00C1EC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r531_function_map_upstream_freertos_kernel",
+   "start": "0x00C1EC",
+   "end": "0x00C23E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r532_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C23E",
+   "end": "0x00C248",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r533_function_map_upstream_freertos_kernel",
+   "start": "0x00C248",
+   "end": "0x00C29C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r534_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C29C",
+   "end": "0x00C2A4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r535_function_map_upstream_freertos_kernel",
+   "start": "0x00C2A4",
+   "end": "0x00C306",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r536_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C306",
+   "end": "0x00C318",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r537_function_map_upstream_freertos_kernel",
+   "start": "0x00C318",
+   "end": "0x00C398",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r538_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C398",
+   "end": "0x00C3A0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r539_function_map_upstream_freertos_kernel",
+   "start": "0x00C3A0",
+   "end": "0x00C3AA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r540_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C3AA",
+   "end": "0x00C3B0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r541_function_map_upstream_freertos_kernel",
+   "start": "0x00C3B0",
+   "end": "0x00C40E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r542_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C40E",
+   "end": "0x00C418",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r543_admitted_function_source_candidate",
+   "start": "0x00C418",
+   "end": "0x00C496",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r544_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00C496",
+   "end": "0x00C498",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r545_admitted_function_source_candidate",
+   "start": "0x00C498",
+   "end": "0x00C4A8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r546_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C4A8",
+   "end": "0x00C4AC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r547_function_map_upstream_freertos_kernel",
+   "start": "0x00C4AC",
+   "end": "0x00C4EC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r548_admitted_function_source_candidate",
+   "start": "0x00C4EC",
+   "end": "0x00C598",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r549_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C598",
+   "end": "0x00C59C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r550_function_map_upstream_freertos_kernel",
+   "start": "0x00C59C",
+   "end": "0x00C5C4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r551_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C5C4",
+   "end": "0x00C5CC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r552_platform_upstream_freertos_kernel",
+   "start": "0x00C5CC",
+   "end": "0x00C5F0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r553_function_map_upstream_freertos_kernel",
+   "start": "0x00C5F0",
+   "end": "0x00C85A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r554_function_map_first_party_g2",
+   "start": "0x00C85A",
+   "end": "0x00C968",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r555_function_map_upstream_freertos_kernel",
+   "start": "0x00C968",
+   "end": "0x00C9C4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r556_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00C9C4",
+   "end": "0x00C9C8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r557_function_map_upstream_freertos_kernel",
+   "start": "0x00C9C8",
+   "end": "0x00CA6C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r558_platform_upstream_freertos_kernel",
+   "start": "0x00CA6C",
+   "end": "0x00CA86",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r559_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00CA86",
+   "end": "0x00CA8C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r560_function_map_upstream_freertos_kernel",
+   "start": "0x00CA8C",
+   "end": "0x00CA92",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r561_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00CA92",
+   "end": "0x00CA98",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r562_platform_upstream_freertos_kernel",
+   "start": "0x00CA98",
+   "end": "0x00CAE0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r563_function_map_upstream_freertos_kernel",
+   "start": "0x00CAE0",
+   "end": "0x00CB50",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r564_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00CB50",
+   "end": "0x00CB58",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r565_function_map_upstream_freertos_kernel",
+   "start": "0x00CB58",
+   "end": "0x00CBB8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r566_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00CBB8",
+   "end": "0x00CBC0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r567_function_map_upstream_freertos_kernel",
+   "start": "0x00CBC0",
+   "end": "0x00CC1E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r568_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00CC1E",
+   "end": "0x00CC2C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r569_function_map_upstream_freertos_kernel",
+   "start": "0x00CC2C",
+   "end": "0x00CCD4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r570_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00CCD4",
+   "end": "0x00CCE0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r571_function_map_upstream_freertos_kernel",
+   "start": "0x00CCE0",
+   "end": "0x00CD3E",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r572_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00CD3E",
+   "end": "0x00CD40",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r573_function_map_upstream_freertos_kernel",
+   "start": "0x00CD40",
+   "end": "0x00CD90",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r574_function_map_gap_first_party_g2",
+   "start": "0x00CD90",
+   "end": "0x00CDA0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r575_function_map_upstream_freertos_kernel",
+   "start": "0x00CDA0",
+   "end": "0x00CE00",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r576_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00CE00",
+   "end": "0x00CE04",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r577_admitted_function_source_candidate",
+   "start": "0x00CE04",
+   "end": "0x00CE2A",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r578_gap_frontier_typed_zero_alignment_or_data",
+   "start": "0x00CE2A",
+   "end": "0x00CE2C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r579_function_map_upstream_freertos_kernel",
+   "start": "0x00CE2C",
+   "end": "0x00CE50",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r580_gap_frontier_typed_unsupported_interfunction_code_or_data_boundary",
+   "start": "0x00CE50",
+   "end": "0x00CE54",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r581_function_map_first_party_g2",
+   "start": "0x00CE54",
+   "end": "0x00D10C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r582_function_map_gap_first_party_g2",
+   "start": "0x00D10C",
+   "end": "0x00D174",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r583_function_map_first_party_g2",
+   "start": "0x00D174",
+   "end": "0x00D1CA",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r584_function_map_gap_first_party_g2",
+   "start": "0x00D1CA",
+   "end": "0x00D238",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r585_function_map_first_party_g2",
+   "start": "0x00D238",
+   "end": "0x00D252",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r586_function_map_gap_first_party_g2",
+   "start": "0x00D252",
+   "end": "0x00D270",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r587_admitted_function_source_candidate",
+   "start": "0x00D270",
+   "end": "0x00D286",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r588_function_map_gap_first_party_g2",
+   "start": "0x00D286",
+   "end": "0x00D2C0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r589_platform_first_party_g2",
+   "start": "0x00D2C0",
+   "end": "0x00D3A0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r590_function_map_gap_first_party_g2",
+   "start": "0x00D3A0",
+   "end": "0x00D8B8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r591_platform_first_party_g2",
+   "start": "0x00D8B8",
+   "end": "0x00D958",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  },
+  {
+   "label": "r592_function_map_gap_first_party_g2",
+   "start": "0x00D958",
+   "end": "0x00D9E8",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ]
+  }
+ ]
+}

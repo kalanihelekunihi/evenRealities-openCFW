@@ -1,0 +1,23 @@
+{
+ "schema": 1,
+ "payload": "g2-apollo-bootloader",
+ "device": "g2",
+ "official": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+ "size": 148599,
+ "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+ "toolchain": "IAR EWARM (licensed; missing)",
+ "notes": "",
+ "regions": [
+  {
+   "label": "image",
+   "start": "0x000000",
+   "end": "0x024477",
+   "state": "retained",
+   "blockers": [
+    "TC-IAR",
+    "GATE-FREEZE"
+   ],
+   "note": "raw Cortex-M55 image linked at 0x00410000"
+  }
+ ]
+}

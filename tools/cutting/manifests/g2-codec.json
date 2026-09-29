@@ -1,0 +1,145 @@
+{
+ "schema": 1,
+ "payload": "g2-codec",
+ "device": "g2",
+ "official": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+ "size": 326092,
+ "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+ "toolchain": "C-SKY GCC for CK804EF (release to identify); open",
+ "notes": "FWPK with UART boot stages and dual BINH images; binh_a_extra_payload is the 129,964-byte gxNPU KWS model",
+ "regions": [
+  {
+   "label": "fwpk_header",
+   "start": "0x000000",
+   "end": "0x000010",
+   "state": "retained",
+   "blockers": [
+    "CONTAINER"
+   ],
+   "note": "FWPK container metadata"
+  },
+  {
+   "label": "fwpk_records",
+   "start": "0x000010",
+   "end": "0x000030",
+   "state": "retained",
+   "blockers": [
+    "CONTAINER"
+   ],
+   "note": "FWPK record table (type1=boot, type2=main)"
+  },
+  {
+   "label": "boot_header",
+   "start": "0x000030",
+   "end": "0x000050",
+   "state": "retained",
+   "blockers": [
+    "CONTAINER"
+   ],
+   "note": "read by Apollo DFU; four BE fields forwarded on wire"
+  },
+  {
+   "label": "boot_stage1",
+   "start": "0x000050",
+   "end": "0x002850",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE",
+    "TC-CSKY-EMU"
+   ],
+   "note": "codec MCU IRAM (GX8002 on-chip SRAM)"
+  },
+  {
+   "label": "boot_stage2",
+   "start": "0x002850",
+   "end": "0x00958C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE",
+    "TC-CSKY-EMU"
+   ],
+   "note": "codec MCU IRAM, immediately after stage1"
+  },
+  {
+   "label": "binh_a_stage1_block",
+   "start": "0x00958C",
+   "end": "0x00C58C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE",
+    "TC-CSKY-EMU"
+   ],
+   "note": "flash 0x00000000 -> codec MCU IRAM at power-on"
+  },
+  {
+   "label": "binh_a_stage2_xip_len",
+   "start": "0x00C58C",
+   "end": "0x00C590",
+   "state": "retained",
+   "blockers": [
+    "CONTAINER"
+   ],
+   "note": "stage2 XIP-text length word 0x00008E84"
+  },
+  {
+   "label": "binh_a_stage2",
+   "start": "0x00C590",
+   "end": "0x018D90",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE",
+    "TC-CSKY-EMU"
+   ],
+   "note": "flash 0x00003004; XIP text executes from flash (public XIP base 0x10200000); SRAM text/data -> codec IRAM/DRAM"
+  },
+  {
+   "label": "binh_a_extra_payload",
+   "start": "0x018D90",
+   "end": "0x03893C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ],
+   "note": "flash [0x0000F804, 0x0002F3B0); NPU/audio payload, identification-level only"
+  },
+  {
+   "label": "binh_b_stage1_block",
+   "start": "0x03893C",
+   "end": "0x03B93C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE",
+    "TC-CSKY-EMU"
+   ],
+   "note": "flash 0x0002F3B0 -> codec MCU IRAM (backup/dual-firmware boot path)"
+  },
+  {
+   "label": "binh_b_stage2_xip_len",
+   "start": "0x03B93C",
+   "end": "0x03B940",
+   "state": "retained",
+   "blockers": [
+    "CONTAINER"
+   ],
+   "note": "stage2 XIP-text length word 0x00000000 (image B runs fully from SRAM)"
+  },
+  {
+   "label": "binh_b_stage2",
+   "start": "0x03B940",
+   "end": "0x04F9CC",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE",
+    "TC-CSKY-EMU"
+   ],
+   "note": "flash 0x000323B4 -> codec SRAM; no XIP"
+  }
+ ]
+}

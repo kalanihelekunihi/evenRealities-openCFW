@@ -1,0 +1,131 @@
+{
+ "schema": 1,
+ "payload": "g2-touch",
+ "device": "g2",
+ "official": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+ "size": 34464,
+ "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+ "toolchain": "GCC (release to identify); open",
+ "notes": "PSoC 4000T image, base 0x00000000 after the 32-byte FWPK header",
+ "regions": [
+  {
+   "label": "fwpk_header",
+   "start": "0x000000",
+   "end": "0x000020",
+   "state": "retained",
+   "blockers": [
+    "CONTAINER"
+   ],
+   "note": "FWPK header with one type-3 record"
+  },
+  {
+   "label": "vectors",
+   "start": "0x000020",
+   "end": "0x0000E0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ],
+   "note": "vector-table"
+  },
+  {
+   "label": "code",
+   "start": "0x0000E0",
+   "end": "0x00777C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ],
+   "note": "code+pools"
+  },
+  {
+   "label": "strings",
+   "start": "0x00777C",
+   "end": "0x007DE4",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ],
+   "note": "const-strings"
+  },
+  {
+   "label": "const_tables_a",
+   "start": "0x007DE4",
+   "end": "0x008130",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ],
+   "note": "const-data"
+  },
+  {
+   "label": "zero_gap_1",
+   "start": "0x008130",
+   "end": "0x008140",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ],
+   "note": "fill-zero"
+  },
+  {
+   "label": "const_tables_b",
+   "start": "0x008140",
+   "end": "0x008450",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ],
+   "note": "const-data"
+  },
+  {
+   "label": "zero_gap_2",
+   "start": "0x008450",
+   "end": "0x0085F0",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ],
+   "note": "fill-zero"
+  },
+  {
+   "label": "config_block",
+   "start": "0x0085F0",
+   "end": "0x008670",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ],
+   "note": "const-config"
+  },
+  {
+   "label": "ff_pad",
+   "start": "0x008670",
+   "end": "0x00869C",
+   "state": "retained",
+   "blockers": [
+    "OPEN-PENDING",
+    "GATE-FREEZE"
+   ],
+   "note": "fill-ff"
+  },
+  {
+   "label": "trailing_crc",
+   "start": "0x00869C",
+   "end": "0x0086A0",
+   "state": "retained",
+   "blockers": [
+    "CONTAINER"
+   ],
+   "note": "checksum"
+  }
+ ]
+}

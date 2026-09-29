@@ -1,0 +1,24 @@
+{
+ "schema": 1,
+ "payload": "r1-application",
+ "device": "r1",
+ "official": "r1/blobs/official/r1-2.2.6.0009/application.bin",
+ "size": 646408,
+ "sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+ "toolchain": "Arm Compiler 5.06 (licensed; missing)",
+ "notes": "split by function (2,687 attributed functions) as matching begins",
+ "regions": [
+  {
+   "label": "image",
+   "start": "0x000000",
+   "end": "0x09DD08",
+   "state": "retained",
+   "blockers": [
+    "TC-ARMCC5",
+    "VO-GOODIX",
+    "VO-GOMORE"
+   ],
+   "note": "application at 0x00027000"
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "schema": 1,
+ "payload": "g2-apollo-main",
+ "device": "g2",
+ "official": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+ "size": 3523396,
+ "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+ "toolchain": "IAR EWARM + DLIB (licensed; missing)",
+ "notes": "split further by function once the pseudocode corpus is frozen",
+ "regions": [
+  {
+   "label": "ota_preamble",
+   "start": "0x000000",
+   "end": "0x000020",
+   "state": "retained",
+   "blockers": [
+    "CONTAINER"
+   ],
+   "note": "32-byte OTA staging preamble"
+  },
+  {
+   "label": "image",
+   "start": "0x000020",
+   "end": "0x35C344",
+   "state": "retained",
+   "blockers": [
+    "TC-IAR",
+    "VO-NEMAGFX",
+    "GATE-FREEZE"
+   ],
+   "note": "Cortex-M55 image linked at 0x00438000"
+  }
+ ]
+}

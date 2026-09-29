@@ -1,0 +1,74 @@
+{
+ "schema": 1,
+ "payload": "g2-em9305",
+ "device": "g2",
+ "official": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+ "size": 211948,
+ "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+ "toolchain": "Synopsys MetaWare T-2022.09 (licensed; missing)",
+ "notes": "byte-identical across all 17 mirrored G2 releases",
+ "regions": [
+  {
+   "label": "record_metadata",
+   "start": "0x000000",
+   "end": "0x00007C",
+   "state": "retained",
+   "blockers": [
+    "CONTAINER"
+   ],
+   "note": "header, record descriptors, erase-sector table"
+  },
+  {
+   "label": "record0_0x300000",
+   "start": "0x00007C",
+   "end": "0x00015C",
+   "state": "retained",
+   "blockers": [
+    "TC-METAWARE",
+    "TC-ARCV2-DECOMP",
+    "VO-PACKETCRAFT-LL",
+    "GATE-FREEZE"
+   ],
+   "note": "loads at 0x300000"
+  },
+  {
+   "label": "record1_0x300400",
+   "start": "0x00015C",
+   "end": "0x0003EC",
+   "state": "retained",
+   "blockers": [
+    "TC-METAWARE",
+    "TC-ARCV2-DECOMP",
+    "VO-PACKETCRAFT-LL",
+    "GATE-FREEZE"
+   ],
+   "note": "loads at 0x300400"
+  },
+  {
+   "label": "record2_0x302000",
+   "start": "0x0003EC",
+   "end": "0x000424",
+   "state": "retained",
+   "blockers": [
+    "TC-METAWARE",
+    "TC-ARCV2-DECOMP",
+    "VO-PACKETCRAFT-LL",
+    "GATE-FREEZE"
+   ],
+   "note": "loads at 0x302000"
+  },
+  {
+   "label": "record3_0x302400",
+   "start": "0x000424",
+   "end": "0x033BEC",
+   "state": "retained",
+   "blockers": [
+    "TC-METAWARE",
+    "TC-ARCV2-DECOMP",
+    "VO-PACKETCRAFT-LL",
+    "GATE-FREEZE"
+   ],
+   "note": "loads at 0x302400"
+  }
+ ]
+}
