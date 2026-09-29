@@ -1,5 +1,8 @@
 # R1 BLE protocol (stock 2.2.6.0009)
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 Tags: **Proven** means byte-pinned in the image or physically observed. **Strong** means several
 facts agree. **Inferred** is derived. **Unverified** has no evidence. Sources are repository-root
 paths with line numbers. Many sources live in files that are about to be removed (`r1/src`,

@@ -13,6 +13,10 @@ sys.path.insert(0, str(OPENCFW_ROOT / "tools"))
 
 import open_cfw  # noqa: E402
 
+from tests.official_payloads import require as _require_official
+
+_require_official('ota_s200_firmware_ota.bin', 'ota_s200_bootloader.bin', 'firmware_codec.bin', 'firmware_ble_em9305.bin', 'firmware_touch.bin', 'firmware_box.bin')
+
 
 MANIFEST_PATH = OPENCFW_ROOT / "manifests" / "g2-2.2.6.10.json"
 

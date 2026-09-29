@@ -1,5 +1,8 @@
 # Even Realities hardware reference
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 This directory records what is known about the hardware of the Even Realities
 G2 glasses, the G2 charging case and the R1 ring, and where each fact comes
 from. It is a reference for decompilation and reconstruction work: part

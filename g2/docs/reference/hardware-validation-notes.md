@@ -1,5 +1,8 @@
 # G2 on-device observations and safety notes
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 Condensed from `g2/docs/hardware-validation-2026-08-23.md`,
 `g2/docs/hardware-validation-2026-08-30.md` and
 `g2/docs/hardware-validation-policy.md`. Only device facts, procedures and

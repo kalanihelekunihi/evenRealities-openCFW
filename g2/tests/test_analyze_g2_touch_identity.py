@@ -14,6 +14,10 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 import analyze_g2_touch_identity as audit_mod  # noqa: E402
 
+from tests.official_payloads import require as _require_official
+
+_require_official('firmware_touch.bin')
+
 BLOB = ROOT / "blobs/official/g2-2.2.6.10/firmware_touch.bin"
 
 

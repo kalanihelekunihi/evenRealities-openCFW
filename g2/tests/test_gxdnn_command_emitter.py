@@ -23,6 +23,10 @@ from gxdnn_command_emitter import (
     encode_command, decode_command, emit_program, decode_program,
 )
 
+from tests.official_payloads import require as _require_official
+
+_require_official('firmware_codec.bin')
+
 
 def _random_address(rng):
     return (rng.randrange(16), rng.randrange(1 << 28))

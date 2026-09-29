@@ -1,5 +1,8 @@
 # R1 physical and field observations
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 These are observations from owned retail rings. They are compatibility evidence for stock
 behaviour. Some were taken on later application versions than the locked 2.2.6.0009 artifact.
 Sources are repository-root paths with line numbers. Tags: **Proven** (observed/measured),

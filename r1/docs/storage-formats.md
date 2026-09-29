@@ -1,5 +1,8 @@
 # R1 persistent storage formats (stock 2.2.6.0009)
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 All partitions live in the internal-flash `device_flash` FAL region at `0x000D4000`; the table is
 in `memory-map.md` section 3. Each partition has one owner:
 

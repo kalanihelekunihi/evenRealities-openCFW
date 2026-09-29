@@ -1,5 +1,8 @@
 # Even R1 smart ring: hardware
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 Tags follow the [confidence vocabulary](README.md#confidence-vocabulary).
 Firmware facts come from the analysed stock application **2.2.6.0009**
 (646,408 B) and bootloader documented under `r1/`. Pin and bus assignments

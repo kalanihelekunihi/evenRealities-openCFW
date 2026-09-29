@@ -1,5 +1,8 @@
 # G2 symbol seeds (s200_v2.2.6.10)
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 Address-sorted naming seeds for the six G2 payloads, consolidated from the
 legacy G2 function maps, census tables, research reports and analysis
 corpora before those were removed.

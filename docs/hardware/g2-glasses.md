@@ -1,5 +1,8 @@
 # Even G2 glasses: hardware
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 Tags follow the [confidence vocabulary](README.md#confidence-vocabulary):
 FW, REG, DS, PR, COM, INF, UNV. Repository paths are relative to the
 repository root. Run addresses in the Apollo main image are

@@ -1,5 +1,8 @@
 # G2 protocols (s200_v2.2.6.10)
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 Consolidated from the legacy G2 research record before its removal. Every
 fact cites the file it came from; paths are repository-relative and remain
 reachable through git history after deletion. Nothing here was observed on

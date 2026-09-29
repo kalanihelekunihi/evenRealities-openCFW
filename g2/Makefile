@@ -171,6 +171,33 @@ em9305-record-package:
 		tests.test_analyze_em9305_record_package \
 		tests.test_em9305_source_readiness
 
+# Tests for the tools that the pseudocode-first workflow keeps using: the
+# EVENOTA/container parsers, the EM9305 record package, the case, touch and
+# codec analyzers, the Ghidra export pipeline and the asset generators.  Each
+# module skips itself when the official payloads are not present locally.
+CORE_TESTS := test_open_cfw test_analyze_g2_codec_fwpk_segments \
+	test_analyze_g2_codec_stage2_sections test_analyze_g2_touch_identity \
+	test_analyze_em9305_record_package test_em9305_record_package \
+	test_analyze_g2_box_function_map test_extract_g2_case_final_decomp \
+	test_merge_case_backup test_thumb_branch_audit test_verify_research_corpus \
+	test_disassemble_em9305_arcompact test_analyze_apollo_embedded_source_paths \
+	test_recover_apollo_embedded_source_paths test_generate_apollo_ghidra_chunks \
+	test_run_ghidra_shard_batch test_assetgen_lvgl_font test_assetgen_lvgl_image \
+	test_assetgen_nanopb_descriptor test_assetgen_string_pool \
+	test_gxdnn_command_emitter test_gxdnn_quantize test_csky_macos_build
+
+.PHONY: core-test reference-verify
+
+# Byte-identical repack of the six official payloads, verified against the
+# reference manifest, plus authentication of the retained research corpus.
+reference-verify: reference research-corpus
+	$(PYTHON) tools/open_cfw.py verify --manifest "$(REFERENCE_MANIFEST)"
+
+core-test:
+	@set -e; for t in $(CORE_TESTS); do \
+		PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -t . -p "$$t.py"; \
+	done
+
 all: build
 
 toolchain:

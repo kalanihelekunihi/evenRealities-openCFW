@@ -1,5 +1,8 @@
 # R1 recovered configuration seeds
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 These are byte-for-byte copies of the configuration files that the deleted openR1 build and
 bootloader reconstruction used. They seed a stock-faithful rebuild of R1 2.2.6.0009. **They are
 not the stock configuration.** Each file mixes values proven from the stock image with openR1

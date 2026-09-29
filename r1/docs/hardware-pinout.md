@@ -1,5 +1,8 @@
 # R1 hardware pin, bus and peripheral map (stock 2.2.6.0009)
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 MCU: Nordic nRF52840 QIAA, Cortex-M4F at 64 MHz, 1 MiB flash, 256 KiB RAM
 (`r1/platform/nrf52840/zephyr/boards/openr1/openr1_nrf52840/openr1_nrf52840.dts:4`;
 `r1/docs/correlation/NORDIC-SDK-CORRELATION.md:587-589`). The board/module identity string is

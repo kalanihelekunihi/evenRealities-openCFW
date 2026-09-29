@@ -4,6 +4,10 @@ import importlib.util
 from pathlib import Path
 import unittest
 
+from tests.official_payloads import require as _require_official
+
+_require_official('ota_s200_firmware_ota.bin')
+
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULE_PATH = ROOT / "tools/generate_apollo_ghidra_chunks.py"

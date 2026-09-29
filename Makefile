@@ -20,13 +20,7 @@ THIRD_PARTY_DIR := third-party
 
 .PHONY: all help \
         build test verify clean \
-        g2 g2-build g2-test g2-verify g2-inspect g2-clean \
-        g2-core-canonical-observation g2-core-canonical-admission \
-        g2-core-canonical-apply g2-core-canonical-test \
-        completion-readiness completion-classification-gate completion-source-gate \
-        completion-source-ownership-gate completion-license-policy-gate \
-        completion-assessment completion-assessment-check \
-        dual-profile-ownership dual-profile-ownership-write \
+        g2 g2-build g2-test g2-verify g2-clean \
         r1 r1-build r1-test r1-sanitize r1-verify r1-arm r1-sim r1-clean \
         third-party third-party-vendored third-party-fetched tools
 
@@ -43,23 +37,9 @@ help:
 	@echo '  clean            remove all build output from both targets'
 	@echo
 	@echo 'G2 (Apollo510 glasses firmware):'
-	@echo '  g2-build         reference + ring-source + source profiles'
-	@echo '  g2-test          G2 unit tests'
-	@echo '  g2-verify        G2 build + upstream audits'
-	@echo '  g2-inspect       inspect the built source package'
-	@echo '  g2-core-canonical-observation  record one isolated core observation'
-	@echo '  g2-core-canonical-admission    verify four observations without writes'
-	@echo '  g2-core-canonical-apply        transactionally admit a verified generation'
-	@echo '  g2-core-canonical-test  canonical observation/admission contract tests'
-	@echo '  completion-readiness current six-component ownership/classification audit'
-	@echo '  completion-classification-gate  require every byte to be classified'
-	@echo '  completion-source-gate          require complete production source'
-	@echo '  completion-source-ownership-gate reject raw executable transcription as source'
-	@echo '  completion-license-policy-gate  require MIT for project-owned source records'
-	@echo '  completion-assessment           regenerate and test the public G2 assessment'
-	@echo '  completion-assessment-check     verify the public assessment is current'
-	@echo '  dual-profile-ownership          verify checked Apple/Linux ownership accounting'
-	@echo '  dual-profile-ownership-write    maintainer-only checked companion refresh'
+	@echo '  g2-build         byte-identical reference EVENOTA from the official payloads'
+	@echo '  g2-test          tests for the kept G2 format, analyzer and Ghidra tools'
+	@echo '  g2-verify        reference build + manifest and research-corpus verification'
 	@echo
 	@echo 'R1 (nRF52840 ring firmware):'
 	@echo '  r1-test          portable host tests'
@@ -89,55 +69,13 @@ clean: g2-clean r1-clean
 g2: g2-build
 
 g2-build:
-	$(MAKE) -C $(G2_DIR) build
+	$(MAKE) -C $(G2_DIR) reference
 
 g2-test:
-	$(MAKE) -C $(G2_DIR) test
+	$(MAKE) -C $(G2_DIR) core-test
 
 g2-verify:
-	$(MAKE) -C $(G2_DIR) verify
-
-g2-inspect:
-	$(MAKE) -C $(G2_DIR) inspect
-
-g2-core-canonical-observation:
-	$(MAKE) -C $(G2_DIR) core-canonical-observation
-
-g2-core-canonical-admission:
-	$(MAKE) -C $(G2_DIR) core-canonical-admission
-
-g2-core-canonical-apply:
-	$(MAKE) -C $(G2_DIR) core-canonical-apply
-
-g2-core-canonical-test:
-	$(MAKE) -C $(G2_DIR) core-canonical-test
-
-completion-readiness:
-	$(MAKE) -C $(G2_DIR) completion-readiness
-
-completion-classification-gate:
-	$(MAKE) -C $(G2_DIR) completion-classification-gate
-
-completion-source-gate:
-	$(MAKE) -C $(G2_DIR) completion-source-gate
-
-completion-source-ownership-gate:
-	$(MAKE) -C $(G2_DIR) completion-source-ownership-gate
-
-completion-license-policy-gate:
-	$(MAKE) -C $(G2_DIR) completion-license-policy-gate
-
-completion-assessment:
-	$(MAKE) -C $(G2_DIR) completion-assessment
-
-completion-assessment-check:
-	$(MAKE) -C $(G2_DIR) completion-assessment-check
-
-dual-profile-ownership:
-	$(MAKE) -C $(G2_DIR) dual-profile-ownership
-
-dual-profile-ownership-write:
-	$(MAKE) -C $(G2_DIR) dual-profile-ownership-write
+	$(MAKE) -C $(G2_DIR) reference-verify
 
 g2-clean:
 	$(MAKE) -C $(G2_DIR) clean

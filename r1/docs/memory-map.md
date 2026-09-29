@@ -1,5 +1,8 @@
 # R1 memory map (stock 2.2.6.0009, nRF52840)
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 Target: nRF52840 QIAA (1 MiB flash, 256 KiB RAM, Cortex-M4F), MBR + S140 7.2.0, application
 2.2.6.0009, nRF5 SDK 17.1.0 secure BLE bootloader.
 

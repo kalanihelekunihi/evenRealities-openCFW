@@ -10,6 +10,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from tests.official_payloads import require as _require_official
+
+_require_official('firmware_ble_em9305.bin')
+
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOL = ROOT / "tools/disassemble_em9305_arcompact.py"

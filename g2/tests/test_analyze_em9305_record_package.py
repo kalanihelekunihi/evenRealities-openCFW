@@ -9,6 +9,10 @@ from pathlib import Path
 import sys
 import unittest
 
+from tests.official_payloads import require as _require_official
+
+_require_official('firmware_ble_em9305.bin')
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "tools/analyze_em9305_record_package.py"

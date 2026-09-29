@@ -1,5 +1,8 @@
 # G2 firmware capability checklist (s200_v2.2.6.10)
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 Coverage aid for pseudocode review. Derived from the domain rows of the legacy
 `g2/docs/functional-capability-ledger.md` (status date 2026-09-04) with all
 status, ownership, build and acceptance-gate columns removed. A row means "the

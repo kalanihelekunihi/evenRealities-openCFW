@@ -10,6 +10,10 @@ import sys
 import unittest
 from pathlib import Path
 
+from tests.official_payloads import require as _require_official
+
+_require_official('ota_s200_firmware_ota.bin')
+
 
 ROOT = Path(__file__).resolve().parents[1]
 ANALYZER = ROOT / "tools" / "analyze_apollo_embedded_source_paths.py"

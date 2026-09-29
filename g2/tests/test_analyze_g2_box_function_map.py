@@ -3,6 +3,10 @@ import sys
 import unittest
 from pathlib import Path
 
+from tests.official_payloads import require as _require_official
+
+_require_official('firmware_box.bin')
+
 P = Path(__file__).resolve().parents[1] / "tools/analyze_g2_box_function_map.py"
 S = importlib.util.spec_from_file_location("g2_box_function_map", P)
 M = importlib.util.module_from_spec(S)

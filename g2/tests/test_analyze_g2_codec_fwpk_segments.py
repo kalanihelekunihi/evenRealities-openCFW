@@ -1,5 +1,9 @@
 import importlib.util,sys,unittest
 from pathlib import Path
+
+from tests.official_payloads import require as _require_official
+
+_require_official('firmware_codec.bin')
 ROOT=Path(__file__).resolve().parents[1]
 class CodecFwpkSegmentTests(unittest.TestCase):
  @classmethod

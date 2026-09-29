@@ -17,7 +17,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from PIL import Image
+try:
+    from PIL import Image
+except ImportError:  # Pillow is listed in tools/bootstrap/requirements.txt
+    raise unittest.SkipTest("Pillow is not installed")
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOL = ROOT / "tools/assetgen_lvgl_image.py"

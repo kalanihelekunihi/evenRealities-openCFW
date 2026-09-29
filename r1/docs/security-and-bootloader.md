@@ -1,5 +1,8 @@
 # R1 bootloader and DFU security model (stock)
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 The stock bootloader is the nRF5 SDK 17.1.0 secure BLE bootloader (`pca10056_s140_ble` family)
 at `0x000F8000`. Live-dump SHA-256 is
 `566cd2a50cd173680d314643e498202b364e4f8f8b6fd79b12ca71035e34ab8b`. It contains 304 named

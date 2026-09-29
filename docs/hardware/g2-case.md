@@ -1,5 +1,8 @@
 # Even G2 charging case ("B200"): hardware
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 Tags follow the [confidence vocabulary](README.md#confidence-vocabulary).
 Primary firmware source: the case payload `firmware/box.bin` (EVENOTA type 6,
 55,784 B, version 1.2.57) as analysed in

@@ -1,5 +1,8 @@
 # R1 toolchain and dependency identities (stock 2.2.6.0009)
 
+> **Citations.** Repository paths cited as `path` or `path:line` refer to the tree at commit `832137ec`. The 2026-09-29 cleanup retires many of those evidence files; after they are removed, `git show 832137ec:<path>` still shows them.
+
+
 Goal: a from-source build whose bundle is byte-identical to the locked official artifact. This
 file records what the stock image is built from, the evidence for each identity, and what still
 blocks byte equality.
