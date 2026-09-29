@@ -1,0 +1,7 @@
+
+void hciEvtParseLeScanTimeout(void)
+
+{
+  return;
+}
+

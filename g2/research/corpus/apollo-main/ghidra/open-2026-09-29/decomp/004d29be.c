@@ -1,0 +1,7 @@
+
+void dmEmptyReset(void)
+
+{
+  return;
+}
+

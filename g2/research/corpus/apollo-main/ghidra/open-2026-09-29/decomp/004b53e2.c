@@ -1,0 +1,7 @@
+
+void attcProcReadMultVarRsp(void)
+
+{
+  return;
+}
+

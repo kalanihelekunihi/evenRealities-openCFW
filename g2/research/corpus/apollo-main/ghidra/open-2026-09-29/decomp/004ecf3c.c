@@ -1,0 +1,25 @@
+
+undefined8 FUN_004ecf3c(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  double in_d0;
+  double in_d1;
+  
+  iVar1 = FUN_004ece5c(param_1,param_2);
+  if (iVar1 == 0) {
+    uVar2 = 0xffffffff;
+  }
+  else if (in_d0 == DAT_004ed120) {
+    uVar2 = FUN_004ecec4(param_1,param_2);
+  }
+  else if (in_d1 <= 0.0) {
+    uVar2 = FUN_0044b728(param_1,param_2,DAT_004ed710);
+  }
+  else {
+    uVar2 = FUN_0044b728(param_1,param_2,DAT_004ed70c);
+  }
+  return CONCAT44(param_4,uVar2);
+}
+

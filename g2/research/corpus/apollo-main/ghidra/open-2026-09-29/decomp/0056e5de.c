@@ -1,0 +1,7 @@
+
+void smpActNone(void)
+
+{
+  return;
+}
+

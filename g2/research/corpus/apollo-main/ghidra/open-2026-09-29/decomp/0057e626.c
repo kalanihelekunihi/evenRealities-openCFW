@@ -1,0 +1,19 @@
+
+undefined4 FUN_0057e626(void)
+
+{
+  undefined4 unaff_r7;
+  
+  FUN_005847ac(DAT_0057e6a4);
+  FUN_005847ac(DAT_0057e6a8);
+  FUN_005847ac(DAT_0057e6ac);
+  FUN_005847ac(DAT_0057e6b0);
+  FUN_005847ac(DAT_0057e6b4);
+  FUN_005847ac(DAT_0057e6b8);
+  FUN_005847ac(DAT_0057e6bc);
+  FUN_005847ac(DAT_0057e6c0);
+  FUN_005847ac(DAT_0057e6c4);
+  FUN_005847ac(DAT_0057e6c8);
+  return unaff_r7;
+}
+

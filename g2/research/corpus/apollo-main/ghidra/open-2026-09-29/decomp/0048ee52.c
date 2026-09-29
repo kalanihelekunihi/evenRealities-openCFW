@@ -1,0 +1,7 @@
+
+void threadBleMsgRxThreadInitHook(void)
+
+{
+  return;
+}
+

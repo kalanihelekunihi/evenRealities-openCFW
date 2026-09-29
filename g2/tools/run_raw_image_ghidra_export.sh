@@ -52,10 +52,12 @@ grep -h "ReportProgramCensus.java>\\|ApplySymbolSeeds.java>" "$out/analysis.log"
 repo=$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)
 image_dir=$(CDPATH= cd -- "$(dirname -- "$image")" && pwd)
 sed -i "s|$project|<project>|g; s|$GHIDRA_INSTALL_DIR|<ghidra>|g; s|$image_dir/|<image-dir>/|g; s|$repo/|<repo>/|g" "$out/analysis.log"
+seeds_name=
+if [ -n "${OPENCFW_SEEDS:-}" ]; then seeds_name=$(basename "$OPENCFW_SEEDS"); fi
 cat > "$out/RUN.json" <<EOF
 {"image_sha256": "$expected", "image_size": $size, "base": "$base", "language": "$language",
  "vector_words": $vectors, "ghidra": "$(basename "$GHIDRA_INSTALL_DIR")",
- "seeds": "${OPENCFW_SEEDS:+$(basename "$OPENCFW_SEEDS")}"}
+ "seeds": "$seeds_name"}
 EOF
 ( cd "$out" && find . -type f ! -name SHA256SUMS ! -name analysis.log | sed 's|^\./||' | LC_ALL=C sort | xargs sha256sum > SHA256SUMS )
 echo "exported $(ls "$out"/decomp | wc -l) functions to $out"

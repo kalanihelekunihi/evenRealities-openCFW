@@ -1,0 +1,7 @@
+
+void attcProcReadRsp(void)
+
+{
+  return;
+}
+

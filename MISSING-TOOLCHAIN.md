@@ -69,7 +69,7 @@ Not blockers:
 | G2 | codec (GX8002B, C-SKY CK804EF) | 326,092 B | **raw decompilation done** for all five code regions (929 functions); `lvp_kws` identification; C-SKY GCC release identification | `TC-CSKY-EMU` (dynamic checks only) |
 | G2 | EM9305 (ARCv2 EM) | 211,948 B | **full ARCv2 EM disassembly done** (open binutils); disassembly review; SDK archive matching | `TC-ARCV2-DECOMP`, `TC-METAWARE`, `VO-PACKETCRAFT-LL` |
 | G2 | Even bootloader (Apollo510B) | 148,599 B | **raw decompilation done** (903 functions, 849 decompiled); review, library identification | `TC-IAR` |
-| G2 | Apollo main application | 3,523,396 B | decompilation (all 7,449 functions already exported), review, library identification | `TC-IAR`, `VO-NEMAGFX` |
+| G2 | Apollo main application | 3,523,396 B | **raw decompilation re-exported** with seeds (8,853 functions, 8,475 decompiled, 3,805 named); review, library identification | `TC-IAR`, `VO-NEMAGFX` |
 | R1 | application (nRF52840) | 646,408 B | decompilation (2,687 functions exported and attributed), review, nRF5 SDK matching | `TC-ARMCC5`, `VO-GOODIX`, `VO-GOMORE` |
 | R1 | bootloader | 24,576 B | SDK Secure DFU source identification | `IN-R1-CAPTURE`, `TC-ARMCC5` |
 | R1 | S140 SoftDevice | 159,744 B region | carried as Nordic's binary | — |

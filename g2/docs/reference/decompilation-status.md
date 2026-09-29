@@ -20,7 +20,8 @@ what is still gated. The exports are in `g2/research/corpus/`, indexed by
 | codec image A SRAM text+data | same | `0x10023400` | 151 | 151 | 151 | `.../image_a_sram/` |
 | codec image B SRAM text+data | same | `0x10003000` | 288 | 288 | 62 | `.../image_b_sram/` |
 | EM9305 record 3 (controller) | GNU binutils 2.42 `arc-linux-gnu-objdump`, ARCv2 EM carrier from `arc-linux-gnu-gcc` 13.3 | `0x302400..0x335BC8` | disassembly only (71,924 lines) | — (`TC-ARCV2-DECOMP`) | — | `em9305/objdump/open-2026-09-29/` |
-| Apollo main | Ghidra 12.1.2 (2026-08-08 run) | `0x00438000` | 7,449 | 7,449 | — | `apollo-main/ghidra/decomp/` |
+| Apollo main | Ghidra 12.1.4 | `0x00438000`, `ARM:LE:32:v8-m` | 8,853 | 8,475 | 3,805 (1,477 functions created from seeds) | `apollo-main/ghidra/open-2026-09-29/` |
+| Apollo main (earlier run) | Ghidra 12.1.2 (2026-08-08) | `0x00438000` | 7,449 | 7,449 | — | `apollo-main/ghidra/decomp/` |
 
 Reproduce a run with `g2/tools/run_raw_image_ghidra_export.sh`. Set
 `GHIDRA_INSTALL_DIR`, and set `OPENCFW_SEEDS=g2/symbols/<payload>.tsv` to
@@ -47,6 +48,15 @@ with arc objcopy/objdump>`.
 - **The EM9305 controller disassembles cleanly as ARCv2 EM with open
   binutils.** Decompilation waits on `TC-ARCV2-DECOMP`.
 
+## Compiler identification
+
+See [`../../../tools/matching/experiments.md`](../../../tools/matching/experiments.md):
+
+- **touch:** open Arm GNU GCC ≥ 10.3 at `-Og`, from an exact byte match of
+  official Infineon PDL code;
+- **case:** Keil MDK Arm Compiler 6 (`TC-ARMCLANG6`). Open LLVM 11–20 differ
+  by one scheduling choice.
+
 ## Next steps (open tooling, no missing component)
 
 1. Review queue: touch → case → codec → bootloader. Review each function
@@ -56,5 +66,5 @@ with arc objcopy/objdump>`.
    with candidate GCC releases (Arm GNU 13.3 and 9-2020-q2; C-SKY GCC).
    Match the objects against the exports with BSim or FunctionID, and pin
    the matching releases.
-3. Apollo main: re-export at `0x00438000` with the seeds applied, using
-   Ghidra 12.1.4, for a named P2 raw corpus.
+3. Apollo main: triage the 378 functions that did not decompile. Check
+   them for MVE/Helium or data-in-code with `arm-none-eabi-objdump` 13.3.

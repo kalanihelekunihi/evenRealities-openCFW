@@ -1,0 +1,7 @@
+
+void attEmptyHandler(void)
+
+{
+  return;
+}
+

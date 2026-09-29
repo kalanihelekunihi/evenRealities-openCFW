@@ -1,0 +1,7 @@
+
+void dmConnSmActNone(void)
+
+{
+  return;
+}
+

@@ -1,0 +1,7 @@
+
+void threadBleMsgTxApplicationInit(void)
+
+{
+  return;
+}
+

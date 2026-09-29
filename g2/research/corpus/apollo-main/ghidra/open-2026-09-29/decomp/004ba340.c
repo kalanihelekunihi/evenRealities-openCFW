@@ -1,0 +1,7 @@
+
+void dmAdvActSetRandAddr(void)
+
+{
+  return;
+}
+
