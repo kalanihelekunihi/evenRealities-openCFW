@@ -15,7 +15,7 @@ this repository (the same treatment already given to the C compiler and to
   * `protoc`               - compiles the `.proto` into a `FileDescriptorSet`
   * the `nanopb` PyPI package - the reference nanopb generator, at the exact
                                  version already vendored as this repo's
-                                 nanopb runtime (`third_party/nanopb`, Zlib
+                                 nanopb runtime (`third-party/upstream/nanopb`, Zlib
                                  license, tag `nanopb-0.4.9`,
                                  commit `98bf4db69897b53434f3d0ba72e0a3ab1a902824`)
 
@@ -36,7 +36,7 @@ import tempfile
 from pathlib import Path
 
 REQUIRED_NANOPB_VERSION = "0.4.9"
-# Matches third_party/nanopb/PROVENANCE.json ("selected_tag"/"selected_commit").
+# Matches the third-party/upstream/nanopb submodule pin.
 REQUIRED_NANOPB_TAG = "nanopb-0.4.9"
 REQUIRED_NANOPB_COMMIT = "98bf4db69897b53434f3d0ba72e0a3ab1a902824"
 
@@ -59,7 +59,7 @@ def _require_nanopb_generator() -> Path:
         raise AssetGenError(
             f"the 'nanopb' Python package is not installed; run "
             f"'pip install nanopb=={REQUIRED_NANOPB_VERSION}' to match "
-            f"third_party/nanopb (tag {REQUIRED_NANOPB_TAG})"
+            f"third-party/upstream/nanopb (tag {REQUIRED_NANOPB_TAG})"
         ) from exc
     version = getattr(nanopb, "__version__", None)
     if version is None:
@@ -71,7 +71,7 @@ def _require_nanopb_generator() -> Path:
             raise AssetGenError("could not determine installed nanopb package version") from exc
     if version != REQUIRED_NANOPB_VERSION:
         raise AssetGenError(
-            f"installed nanopb generator is {version!r}, but third_party/nanopb "
+            f"installed nanopb generator is {version!r}, but third-party/upstream/nanopb "
             f"pins {REQUIRED_NANOPB_TAG}; install nanopb=={REQUIRED_NANOPB_VERSION}"
         )
     generator = Path(nanopb.__file__).resolve().parent / "generator" / "nanopb_generator.py"

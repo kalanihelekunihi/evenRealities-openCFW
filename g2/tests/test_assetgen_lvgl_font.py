@@ -19,7 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOL = ROOT / "tools/assetgen_lvgl_font.py"
-LVGL_SRC = ROOT / "third_party/lvgl/src"
+LVGL_SRC = ROOT.parent / "third-party/upstream/lvgl/src"
 
 CANDIDATE_FONTS = [
     Path("/System/Library/Fonts/Supplemental/Arial.ttf"),

@@ -15,10 +15,10 @@ any) is the AD-* item's job, using the stock image strictly as an oracle.
 Output format
 --------------
 The emitted `lv_image_dsc_t`/`lv_image_header_t` layout matches
-`third_party/lvgl/src/draw/lv_image_dsc.h` at the pinned openCFW LVGL
+`third-party/upstream/lvgl/src/draw/lv_image_dsc.h` at the pinned openCFW LVGL
 snapshot (commit 344c7c318047b7348e1be8572a9fd4260c251cfa, see
-`third_party/lvgl/README.openCFW.md`). Supported `lv_color_format_t` values
-mirror `third_party/lvgl/src/misc/lv_color.h`:
+`third-party/upstream/lvgl/README.openCFW.md`). Supported `lv_color_format_t` values
+mirror `third-party/upstream/lvgl/src/misc/lv_color.h`:
 
   L8        1 byte/px, grayscale (matches the recovered G2 LV_COLOR_DEPTH=8)
   A8        1 byte/px, alpha-only mask (no color channel)

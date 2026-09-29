@@ -2,7 +2,7 @@
 """End-to-end gate for assetgen_nanopb_descriptor.py.
 
 Requires the pinned `protoc` and `nanopb==0.4.9` external host tools (the
-same version as the vendored `third_party/nanopb` runtime); skips cleanly if
+same version as the pinned `third-party/upstream/nanopb` submodule); skips cleanly if
 either is absent rather than failing the whole suite, since this item's
 tooling deliberately treats them as external dependencies (see module
 docstring), not vendored inputs.
@@ -19,7 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOL = ROOT / "tools/assetgen_nanopb_descriptor.py"
-NANOPB_RUNTIME = ROOT / "third_party/nanopb"
+NANOPB_RUNTIME = ROOT.parent / "third-party/upstream/nanopb"
 
 PROTO = """\
 syntax = "proto3";
@@ -62,10 +62,13 @@ class AssetgenNanopbDescriptorTests(unittest.TestCase):
     def tearDownClass(cls):
         cls.tmp.cleanup()
 
-    def test_version_pin_matches_vendored_runtime(self):
-        provenance = (NANOPB_RUNTIME / "PROVENANCE.json").read_text()
-        self.assertIn(self.m.REQUIRED_NANOPB_TAG, provenance)
-        self.assertIn(self.m.REQUIRED_NANOPB_COMMIT, provenance)
+    def test_version_pin_matches_nanopb_submodule(self):
+        import subprocess
+        tree = subprocess.run(
+            ["git", "-C", str(ROOT.parent), "ls-tree", "HEAD", "third-party/upstream/nanopb"],
+            capture_output=True, text=True, check=True,
+        ).stdout.split()
+        self.assertEqual(tree[:3], ["160000", "commit", self.m.REQUIRED_NANOPB_COMMIT])
 
     def test_never_reads_stock_image(self):
         source_text = TOOL.read_text()

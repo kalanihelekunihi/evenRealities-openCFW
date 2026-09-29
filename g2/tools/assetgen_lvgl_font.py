@@ -10,7 +10,7 @@ opaque byte array. Hand-rolling a TrueType/OpenType shaper and rasterizer
 from scratch would itself be an unreviewable reimplementation risk; instead
 this wraps LVGL's own official converter (`lv_font_conv`, MIT license,
 https://github.com/lvgl/lv_font_conv), which already emits exactly the
-`lv_font_fmt_txt_dsc_t` layout vendored at `third_party/lvgl/src/font`.
+`lv_font_fmt_txt_dsc_t` layout vendored at `third-party/upstream/lvgl/src/font`.
 
 `lv_font_conv` is an *external* host build tool (Node.js/npm), deliberately
 not vendored into this repository -- vendoring its full npm dependency tree

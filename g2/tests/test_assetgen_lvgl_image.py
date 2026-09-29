@@ -24,8 +24,8 @@ except ImportError:  # Pillow is listed in tools/bootstrap/requirements.txt
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOL = ROOT / "tools/assetgen_lvgl_image.py"
-LVGL_SRC = ROOT / "third_party/lvgl/src"
-LVGL_DRAW = ROOT / "third_party/lvgl/src/draw"
+LVGL_SRC = ROOT.parent / "third-party/upstream/lvgl/src"
+LVGL_DRAW = ROOT.parent / "third-party/upstream/lvgl/src/draw"
 
 
 def load_tool():
