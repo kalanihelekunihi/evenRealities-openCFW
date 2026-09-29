@@ -7,6 +7,7 @@ that device.
 | --- | --- |
 | [`roadmap.md`](roadmap.md) | you want the phased plan from full decompilation to byte-identical C, and the list of shortcuts |
 | [`tooling.md`](tooling.md) | you are setting up decompilation, byte-matching, emulation or debug tools |
+| [`tooling-availability.md`](tooling-availability.md) | you need to know whether a compiler, SDK or tool is public, needs an account, or costs money |
 | [`hardware/README.md`](hardware/README.md) | you need a part number, bus, pin, data rate, protocol, FCC record or datasheet |
 | [`build.md`](build.md) | you are running a target or a gate failed |
 | [`methodology.md`](methodology.md) | you want to know what "verified" means here |

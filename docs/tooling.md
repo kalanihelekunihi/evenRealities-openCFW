@@ -1,5 +1,8 @@
 # Reverse-engineering and rebuild tooling
 
+For download terms, account requirements and cost of each item, see
+[`tooling-availability.md`](tooling-availability.md).
+
 This page lists the tools that the decompile-and-rebuild process relies on,
 why each one is needed for these particular CPUs, and how it is pinned. The
 aim is to rebuild every payload byte for byte. Tools that only show that code
@@ -39,7 +42,7 @@ binary hash.
 | Tool | What it provides here | Known gaps | Pin |
 | --- | --- | --- | --- |
 | Ghidra 12.1.x + JDK 21 | Headless analysis for Cortex-M55/M4F/M0+, FunctionID, BSim, Version Tracking, PyGhidra. The existing scripts are in [`g2/tools/ghidra_scripts/`](../g2/tools/ghidra_scripts) and [`r1/tools/ghidra_scripts/`](../r1/tools/ghidra_scripts). | 12.1.4 has no MVE/Helium or low-overhead-loop decode, and no ARC or C-SKY processor | release `Ghidra_12.1.4_build` = `8b6bbb857accdfa20dc5b2f5dea471178c2e9fbc` [V] |
-| Ghidra ARCompact/ARCv2 module | Decompiles the EM9305 | Exists only as NSA pull-request 3006 (`refs/pull/3006/head` = `d3fbf109ada6d051750e973779170c1758622530` [V]). It mis-sizes some ARCv2 EM 6-byte long immediates. Fork it to a project-owned repository before pinning. | build from the fork |
+| Ghidra ARC module | EM9305 | NSA pull request 3006 (`d3fbf109ada6d051750e973779170c1758622530` [V]) is still open and covers **ARCompact only**, not the ARCv2 EM core in the EM9305. No maintained public ARCv2 Ghidra module was found. Use IDA Pro's ARC module or `arc-elf32-objdump` for disassembly, or extend the SLEIGH to ARCv2 in a project-owned fork. | fork and extend |
 | `ghidra_csky_WinnerMicro` | C-SKY processor module for the GX8002 | Written for WinnerMicro W80x (CK804); DSP instructions are partial | `0daaa056e8c570ba514fc0d0226384ecf9f9df05` [V] |
 | GhidraSVD | Loads SVD register maps as typed peripheral blocks | — | tag `v0.6.6` = `893dfbe02d889dfb7c4cf69b7a395051a8307828` [V] |
 | GNU binutils `objdump` (arm-none-eabi ≥ 2.35, arc-elf32, csky-elfabiv2) | The reference instruction decoder wherever Ghidra is weak (MVE, ARCv2 EM, CK804EF) | The C-SKY GX8002 decode needs the official `c-sky/binutils-gdb` fork (see [`g2/docs/reference/toolchains.md`](../g2/docs/reference/toolchains.md)) | Arm GNU Toolchain 13.3.Rel1 and 9-2020-q2; Synopsys ARC GNU `arc-2026.03-release`; C-SKY `csky-script-3_2_0-release` = `96f037d8` [V] |
@@ -82,7 +85,7 @@ is to reach identical bytes, one function at a time.
 
 | Device | Source |
 | --- | --- |
-| Apollo510 / Apollo510B | Keil CMSIS pack `AmbiqMicro::Apollo_DFP` 1.5.x (`cpackget add AmbiqMicro::Apollo_DFP@1.5.2`) |
+| Apollo510 / Apollo510B | CMSIS pack `AmbiqMicro::Apollo_DFP` 1.6.0 (`SVD/apollo510.svd`; anonymous download from download.ambiq.com) |
 | PSoC 4000T | `devices/svd/psoc4000t.svd` in Infineon `mtb-pdl-cat2` (submodule `third-party/upstream/infineon-mtb-pdl-cat2`) |
 | STM32G0B1 | ST `STM32G0B1.svd` via the ST pack or `cmsis-svd-data` |
 | nRF52840 | `modules/nrfx/mdk/nrf52840.svd` in the nRF5 SDK 17.1.0 archive ([`third-party/fetched/`](../third-party/fetched)) |
@@ -95,7 +98,7 @@ is to reach identical bytes, one function at a time.
 | G2 firmware emulator (`PaulMcMillan/g2-firmware-emulator`) | The project's chosen G2 simulator/emulator for testing, debugging and validating rebuilt images before they go on a device. It is not publicly reachable from this environment, so it has not been added yet; see [`third-party/README.md`](../third-party/README.md#g2-firmware-emulator). |
 | Unicorn 2.1.4 | Differential execution of stock and rebuilt Thumb functions. No MVE, ARC or C-SKY. |
 | Renode 1.17.0 | Has an nRF52840 platform, which suits R1 application, bootloader and SoftDevice bring-up. Ambiq support covers only Apollo4 Blue, so an Apollo510 `.repl` would have to be written. |
-| XuanTie QEMU (`3287d345c7f5d60d5c8774d90752f5f710744f85` [V]) | C-SKY instruction semantics oracle for the GX8002 |
+| XuanTie QEMU (`3287d345c7f5d60d5c8774d90752f5f710744f85` [V]) | Candidate C-SKY semantics oracle for the GX8002. Current XuanTie QEMU builds target RISC-V, and CK804 support is unconfirmed. Otherwise rely on `csky-elfabiv2` binutils and manual trace review |
 | Synopsys ARC QEMU | ARCv2 EM semantics oracle for the EM9305 |
 | angr 10 | Optional symbolic equivalence checks on Thumb code |
 

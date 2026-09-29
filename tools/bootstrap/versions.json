@@ -11,7 +11,9 @@
       "url_note": "Replace {date} with the build date from the release page when recording.",
       "sha256": null,
       "license": "Apache-2.0",
-      "requires": ["jdk-21"]
+      "requires": [
+        "jdk-21"
+      ]
     },
     {
       "id": "jdk-21",
@@ -25,7 +27,7 @@
       "id": "arm-gnu-toolchain-13.3",
       "group": "binutils",
       "version": "13.3.Rel1",
-      "url": "https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz",
+      "url": "https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz",
       "sha256": null,
       "license": "GPL-3.0 (tools)",
       "purpose": "MVE-capable objdump oracle for Cortex-M55; experiments on the GCC-built Cortex-M0+ payloads"
@@ -34,7 +36,7 @@
       "id": "arm-gnu-toolchain-9-2020-q2",
       "group": "binutils",
       "version": "9-2020-q2-update",
-      "url": "https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2",
+      "url": "https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2",
       "sha256": null,
       "license": "GPL-3.0 (tools)",
       "purpose": "Toolchain era matching nRF5 SDK 17.1.0 builds; reference for the R1 bootloader rebuild experiment"
@@ -110,19 +112,54 @@
     {
       "id": "apollo-dfp",
       "group": "svd",
-      "version": "AmbiqMicro::Apollo_DFP 1.5.2",
-      "url": "https://www.keil.com/pack/AmbiqMicro.Apollo_DFP.1.5.2.pack",
+      "version": "AmbiqMicro::Apollo_DFP 1.6.0",
+      "url": "https://download.ambiq.com/packs/AmbiqMicro.Apollo_DFP.1.6.0.pack",
       "sha256": null,
       "license": "Ambiq (see pack)",
-      "purpose": "Apollo510/Apollo510B SVD and flash algorithms"
+      "purpose": "Apollo510/Apollo510B SVD (SVD/apollo510.svd) and flash algorithms; anonymous download"
     }
   ],
   "python": {
     "requirements": "requirements.txt"
   },
   "licensed": [
-    {"id": "iar-ewarm", "detect": ["iccarm", "--version"], "expected": "9.60.2 (candidate; floor 9.20)", "payloads": ["g2 apollo_main", "g2 bootloader"]},
-    {"id": "metaware", "detect": ["ccac", "-v"], "expected": "T-2022.09 build 004", "payloads": ["g2 ble_em9305"]},
-    {"id": "armcc5", "detect": ["armcc", "--vsn"], "expected": "Arm Compiler 5.06 (update unknown)", "payloads": ["r1 application", "r1 bootloader"]}
+    {
+      "id": "iar-ewarm",
+      "detect": [
+        "iccarm",
+        "--version"
+      ],
+      "expected": "9.60.2 (candidate; floor 9.20)",
+      "payloads": [
+        "g2 apollo_main",
+        "g2 bootloader"
+      ],
+      "availability": "paid subscription; 14-day Windows-only trial of the current release; 9.60.2 only via IAR MyPages (subscribers); Linux build tools on github.com/iarsystems/arm start at 9.60.4 and need a licence token"
+    },
+    {
+      "id": "metaware",
+      "detect": [
+        "ccac",
+        "-v"
+      ],
+      "expected": "T-2022.09 build 004",
+      "payloads": [
+        "g2 ble_em9305"
+      ],
+      "availability": "paid (now sold via MIPS/GlobalFoundries) or supplied to EM Microelectronic customers on request; no public T-2022.09 archive"
+    },
+    {
+      "id": "armcc5",
+      "detect": [
+        "armcc",
+        "--vsn"
+      ],
+      "expected": "Arm Compiler 5.06 (update unknown)",
+      "payloads": [
+        "r1 application",
+        "r1 bootloader"
+      ],
+      "availability": "Arm account on the Product Download Hub; needs an MDK Professional node-locked licence (MDK v6 Community/Essential user licences do not cover Arm Compiler 5)"
+    }
   ]
 }

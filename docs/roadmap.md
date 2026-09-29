@@ -232,9 +232,9 @@ G2 gate allows it. The order above is a recommendation for where to start.
 
 | Blocker | Affects | Next step |
 | --- | --- | --- |
-| Licensed original compilers not yet installed | G2 Apollo and bootloader, EM9305, R1 | obtain and fingerprint them (phase 0) |
+| Licensed original compilers not yet installed. IAR 9.60.2 comes only via IAR MyPages (subscription); MetaWare T-2022.09 from MIPS/Synopsys or through EM Microelectronic; Arm Compiler 5 needs an MDK Professional licence | G2 Apollo and bootloader, EM9305, R1 | obtain and fingerprint them (phase 0); see [`tooling-availability.md`](tooling-availability.md) |
 | G2 firmware emulator not reachable | dynamic testing | provide the repository URL or access; see [`../third-party/README.md`](../third-party/README.md#g2-firmware-emulator) |
-| Ghidra ARC module exists only as a pull request | EM9305 | fork it and pin the fork |
+| No public ARCv2 Ghidra module (PR 3006 is ARCompact only) | EM9305 | use IDA Pro's ARC module or `arc-elf32-objdump`, or extend the SLEIGH to ARCv2 in a project-owned fork |
 | Exact IAR, C-SKY GCC and Cube releases unproven | several | phase 2 compiler identification |
 | CAPSENSE release ambiguity (v3.0.1 vs v10.0.0) | touch | phase 2 function matching |
 | Hardware facts still unmeasured | documentation, testing | [`hardware/README.md`](hardware/README.md) open questions |
